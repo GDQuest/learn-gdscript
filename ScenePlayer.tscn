@@ -1,0 +1,120 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ScenePlayer.gd" type="Script" id=1]
+
+[node name="ScenePlayer" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 424.0
+margin_bottom = 600.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 414.0
+margin_bottom = 590.0
+
+[node name="ItemList" type="ItemList" parent="MarginContainer/HBoxContainer"]
+margin_right = 100.0
+margin_bottom = 580.0
+rect_min_size = Vector2( 100, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 104.0
+margin_right = 404.0
+margin_bottom = 580.0
+
+[node name="TextEdit" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 300.0
+margin_bottom = 556.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_vertical = 3
+text = "asadadaasddad"
+highlight_current_line = true
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+draw_spaces = true
+smooth_scrolling = true
+caret_block_mode = true
+caret_blink = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 560.0
+margin_right = 300.0
+margin_bottom = 580.0
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 41.0
+margin_bottom = 20.0
+text = "Save"
+
+[node name="Button2" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 45.0
+margin_right = 89.0
+margin_bottom = 20.0
+text = "undo"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 428.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 596.0
+margin_bottom = 22.0
+
+[node name="ToolButton" type="ToolButton" parent="VBoxContainer/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 22.0
+text = "Pause"
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+margin_top = 26.0
+margin_right = 596.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -10.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/Panel/MarginContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 581.0
+margin_bottom = 549.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="VBoxContainer/Panel/MarginContainer/ViewportContainer"]
+size = Vector2( 566, 534 )
+handle_input_locally = false
+render_target_update_mode = 3
