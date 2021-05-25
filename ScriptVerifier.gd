@@ -1,0 +1,37 @@
+const http_request_name = '___HTTP_REQUEST___'
+
+signal errors(errors)
+
+var _node: Node
+var _new_script_text: String
+
+func _init(attached_node: Node, new_script_text: String):
+	_node = attached_node
+	_new_script_text = new_script_text
+
+func append_http_request_node() -> HTTPRequest:
+	var http_request = HTTPRequest.new()
+	http_request.name = http_request_name
+	http_request.connect("request_completed", self, "_on_http_request_completed")
+	_node.add_child(http_request)
+	return http_request
+
+func remove_http_request_node() -> void:
+	var previous_http_request = _node.get_node_or_null(http_request_name)
+	if previous_http_request:
+		previous_http_request.queue_free()
+
+func _on_http_request_completed(_result: int, _response_code: int, _headers: PoolStringArray, body: PoolByteArray):
+	var response = parse_json(body.get_string_from_utf8())
+	remove_http_request_node()
+	emit_signal("errors", response)
+	
+func test():
+	remove_http_request_node()
+	var http_request := append_http_request_node()
+	var url = "http://localhost:3000"
+	var query = "file=%s"%[_new_script_text.percent_encode()]
+	var headers = PoolStringArray([
+		"Content-Type: application/x-www-form-urlencoded"
+	])
+	http_request.request(url, headers, false, HTTPClient.METHOD_POST, query)

@@ -8,7 +8,7 @@ var repository := {}
 func add_script(script:GDScript, node: Node) -> void:
 	var script_path := script.resource_path
 	if not (script_path in repository):
-		repository[script_path] = ScriptManager.new(script)
+		repository[script_path] = ScriptManager.new(script, node)
 		
 	repository[script_path].nodes.append(node)
 

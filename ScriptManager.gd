@@ -1,5 +1,10 @@
 # Manages one script. Maintains a list of nodes using that script, and can 
 # replace their script
+
+const ScriptVerifier := preload("./ScriptVerifier.gd")
+
+signal errors(errors)
+
 var nodes := []
 var original_script := ""
 var current_script := ""
@@ -7,9 +12,11 @@ var script_object: GDScript
 var file_path := ""
 var name := ""
 var cached_file := false
+var _node: Node
 
-func _init(initial_script: GDScript) -> void:
+func _init(initial_script: GDScript, node: Node) -> void:
 	script_object = initial_script
+	_node = node
 	name = script_object.resource_path.get_file().get_basename()
 	original_script = script_object.source_code
 	current_script = original_script
@@ -24,7 +31,7 @@ func _to_string():
 
 # Takes the provided string, compiles it as a new GDScript, saves it to the user's
 # data dir, and applies it to each node using the script
-func apply(new_script_text: String) -> void:
+func attempt_apply(new_script_text: String) -> void:
 	if new_script_text == current_script:
 			return
 	var new_script = GDScript.new()
@@ -32,17 +39,32 @@ func apply(new_script_text: String) -> void:
 	var suffix = ".b" if cached_file else ".a"
 	var current_file_name = file_path+suffix+".gd"
 	ResourceSaver.save(current_file_name, new_script)
-	if not test(current_file_name):
+	var verifier = ScriptVerifier.new(_node, new_script_text)
+	verifier.test()
+	var errors: Array = yield(verifier,"errors")
+	var severity = 100
+	if errors.size():
+		for i in range(errors.size() - 1, -1, -1):
+			var error = errors[i]
+			if error.code == 16: # unused return value
+				errors.remove(i)
+		for error in errors:
+			severity = min(severity, error.severity)
+	if severity < 2:
+		emit_signal("errors", errors)
 		return
 	for node in nodes:
 		node.script = load(current_file_name)
 	cached_file = not cached_file
 	current_script = new_script_text
+	emit_signal("errors", errors)
 
 # tests a script to verify it is valid (no syntax errors)
-static func test(current_file_name: String) -> bool:
-	var test_file = load(current_file_name)
+# In the editor, this stops the process
+func test(current_file_name: String) -> bool:
+	var test_file: Resource = load(current_file_name)
 	var test_instance = test_file.new()
 	if test_instance != null:
 		return true
 	return false
+

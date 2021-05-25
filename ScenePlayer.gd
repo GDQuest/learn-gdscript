@@ -19,6 +19,9 @@ onready var viewport: Viewport = get_node(viewport_node)
 export(NodePath) var pause_button_node := "VBoxContainer/HBoxContainer/ToolButton"
 onready var pause_button: Button = get_node(pause_button_node)
 
+export(NodePath) var errors_label_node := "MarginContainer/HBoxContainer/VBoxContainer/LabelErrors"
+onready var errors_label: Label = get_node(errors_label_node)
+
 export(PackedScene) var scene_file:PackedScene = preload("res://game/Game.tscn") setget set_scene_file
 
 var _scene_is_paused = false
@@ -53,7 +56,18 @@ func _on_save_pressed() -> void:
 	var file_index := file_list.get_selected_items()[0]
 	var current_script: ScriptManager = file_list.get_item_metadata(file_index)
 	var new_text = text_edit.text
-	current_script.apply(new_text)
+	current_script.attempt_apply(new_text)
+	errors_label.text = ""
+	var errors = yield(current_script, "errors")
+	if errors.size():
+		for error in errors:
+			#var code = error.code
+			var message = error.message
+			var range_start = error.range.start
+			#var range_end = error.range.end
+			#var severity = error.severity
+			var error_string = "ERROR: %s:%s:%s"%[message, range_start.line, range_start.character]
+			errors_label.text += error_string
 
 func _on_pause_pressed() -> void:
 	_scene_is_paused = not _scene_is_paused
