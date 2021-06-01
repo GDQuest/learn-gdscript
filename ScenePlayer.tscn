@@ -2,7 +2,7 @@
 
 [ext_resource path="res://ScenePlayer.gd" type="Script" id=1]
 [ext_resource path="res://godot_theme.tres" type="Theme" id=2]
-[ext_resource path="res://CodeEditor/CodeEditor.gd" type="Script" id=3]
+[ext_resource path="res://CodeEditor/CodeEditor.tscn" type="PackedScene" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 6.0
@@ -63,46 +63,30 @@ margin_right = 490.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
 
-[node name="CodeEditor" type="TextEdit" parent="Row/Margin/Row/Column"]
-margin_right = 366.0
-margin_bottom = 528.0
-rect_min_size = Vector2( 300, 0 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "func _process(delta):
-	pass"
-highlight_current_line = true
-syntax_highlighting = true
-show_line_numbers = true
-draw_tabs = true
-draw_spaces = true
-smooth_scrolling = true
-caret_block_mode = true
-caret_blink = true
-script = ExtResource( 3 )
-keyword_data_path = "res://CodeEditor/keywords.json"
+[node name="CodeEditor" parent="Row/Margin/Row/Column" instance=ExtResource( 3 )]
+margin_bottom = 514.0
 
 [node name="LabelErrors" type="Label" parent="Row/Margin/Row/Column"]
-margin_top = 532.0
+margin_top = 518.0
 margin_right = 366.0
-margin_bottom = 554.0
+margin_bottom = 547.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 
 [node name="Row" type="HBoxContainer" parent="Row/Margin/Row/Column"]
-margin_top = 558.0
+margin_top = 551.0
 margin_right = 366.0
 margin_bottom = 580.0
 
 [node name="SaveButton" type="Button" parent="Row/Margin/Row/Column/Row"]
-margin_right = 41.0
-margin_bottom = 22.0
+margin_right = 52.0
+margin_bottom = 29.0
 shortcut = SubResource( 3 )
 text = "Save"
 
 [node name="UndoButton" type="Button" parent="Row/Margin/Row/Column/Row"]
-margin_left = 45.0
-margin_right = 89.0
-margin_bottom = 22.0
+margin_left = 56.0
+margin_right = 108.0
+margin_bottom = 29.0
 text = "undo"
 
 [node name="GamePanel" type="Panel" parent="Row"]
@@ -160,10 +144,12 @@ __meta__ = {
 [node name="PauseButton" type="ToolButton" parent="Row/GamePanel/Margin/Margin"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 60.0
-margin_bottom = 32.0
+margin_right = 72.0
+margin_bottom = 39.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 toggle_mode = true
 text = "Pause"
 flat = false
+
+[connection signal="gui_input" from="Row/Margin/Row/Column/CodeEditor/ErrorOverlay" to="Row/Margin/Row/Column/CodeEditor/ErrorOverlay" method="_on_ErrorOverlay_gui_input"]

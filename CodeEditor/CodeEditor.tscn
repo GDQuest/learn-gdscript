@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://godot_theme.tres" type="Theme" id=1]
+[ext_resource path="res://CodeEditor/CodeEditor.gd" type="Script" id=2]
+
+[node name="CodeEditor" type="TextEdit"]
+margin_right = 366.0
+margin_bottom = 528.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+text = "func _process(delta):
+	pass"
+highlight_current_line = true
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+draw_spaces = true
+smooth_scrolling = true
+caret_block_mode = true
+caret_blink = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+keyword_data_path = "res://CodeEditor/keywords.json"
+
+[connection signal="gui_input" from="ErrorOverlay" to="ErrorOverlay" method="_on_ErrorOverlay_gui_input"]
