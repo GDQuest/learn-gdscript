@@ -10,9 +10,10 @@ var _scene_is_paused := false
 var _scene: Node
 
 onready var file_list: ItemList = find_node("FileList")
-onready var text_edit: TextEdit = find_node("TextEdit")
+onready var code_editor: TextEdit = find_node("CodeEditor")
 
 onready var viewport: Viewport = find_node("Viewport")
+onready var game_view: ViewportContainer = find_node("GameView")
 
 onready var save_button: Button = find_node("SaveButton")
 onready var undo_button: Button = find_node("UndoButton")
@@ -48,13 +49,13 @@ func unpack_scene_file() -> void:
 
 func _on_file_selected(file_index: int) -> void:
 	var script: ScriptManager = file_list.get_item_metadata(file_index)
-	text_edit.text = script.current_script
+	code_editor.text = script.current_script
 
 
 func _on_save_pressed() -> void:
 	var file_index := file_list.get_selected_items()[0]
 	var current_script: ScriptManager = file_list.get_item_metadata(file_index)
-	var new_text = text_edit.text
+	var new_text = code_editor.text
 	current_script.attempt_apply(new_text)
 	errors_label.text = ""
 	var errors = yield(current_script, "errors")
@@ -71,6 +72,8 @@ func _on_save_pressed() -> void:
 			)
 			errors_label.text += error_string
 	errors_label.visible = errors_label.text != ""
+	game_view.grab_focus()
+	code_editor.release_focus()
 
 
 func _on_pause_pressed() -> void:
