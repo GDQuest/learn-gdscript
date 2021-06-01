@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 const ScriptManager = preload("./ScriptManager.gd")
 const ScriptsRepository = preload("./ScriptsRepository.gd")
@@ -26,6 +26,7 @@ func _ready():
 	save_button.connect("pressed", self, "_on_save_pressed")
 	pause_button.connect("pressed", self, "_on_pause_pressed")
 	unpack_scene_file()
+	errors_label.visible = false
 
 
 func set_scene_file(new_scene: PackedScene) -> void:
@@ -69,6 +70,7 @@ func _on_save_pressed() -> void:
 				% [message, range_start.line, range_start.character]
 			)
 			errors_label.text += error_string
+	errors_label.visible = errors_label.text != ""
 
 
 func _on_pause_pressed() -> void:

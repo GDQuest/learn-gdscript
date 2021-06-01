@@ -1,43 +1,62 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ScenePlayer.gd" type="Script" id=1]
+[ext_resource path="res://godot_theme.tres" type="Theme" id=2]
 
-[node name="ScenePlayer" type="HBoxContainer"]
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 6.0
+content_margin_right = 6.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color( 0.12549, 0.141176, 0.192157, 1 )
+
+[node name="ScenePlayer" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 2 )
+custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
+
+[node name="Row" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 424.0
+[node name="Margin" type="MarginContainer" parent="Row"]
+margin_right = 510.0
 margin_bottom = 600.0
+size_flags_horizontal = 3
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="Row" type="HBoxContainer" parent="Row/Margin"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 414.0
+margin_right = 500.0
 margin_bottom = 590.0
+size_flags_horizontal = 3
 
-[node name="FileList" type="ItemList" parent="MarginContainer/HBoxContainer"]
-margin_right = 100.0
+[node name="FileList" type="ItemList" parent="Row/Margin/Row"]
+margin_right = 120.0
 margin_bottom = 580.0
-rect_min_size = Vector2( 100, 0 )
+rect_min_size = Vector2( 120, 0 )
+size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-margin_left = 104.0
-margin_right = 404.0
+[node name="Column" type="VBoxContainer" parent="Row/Margin/Row"]
+margin_left = 124.0
+margin_right = 490.0
 margin_bottom = 580.0
+size_flags_horizontal = 3
 
-[node name="TextEdit" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-margin_right = 300.0
-margin_bottom = 538.0
+[node name="TextEdit" type="TextEdit" parent="Row/Margin/Row/Column"]
+margin_right = 366.0
+margin_bottom = 528.0
 rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "asadadaasddad"
 highlight_current_line = true
@@ -49,70 +68,53 @@ smooth_scrolling = true
 caret_block_mode = true
 caret_blink = true
 
-[node name="LabelErrors" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-margin_top = 542.0
-margin_right = 300.0
-margin_bottom = 556.0
+[node name="LabelErrors" type="Label" parent="Row/Margin/Row/Column"]
+margin_top = 532.0
+margin_right = 366.0
+margin_bottom = 554.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-margin_top = 560.0
-margin_right = 300.0
+[node name="Row" type="HBoxContainer" parent="Row/Margin/Row/Column"]
+margin_top = 558.0
+margin_right = 366.0
 margin_bottom = 580.0
 
-[node name="SaveButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="SaveButton" type="Button" parent="Row/Margin/Row/Column/Row"]
 margin_right = 41.0
-margin_bottom = 20.0
+margin_bottom = 22.0
 text = "Save"
 
-[node name="UndoButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="UndoButton" type="Button" parent="Row/Margin/Row/Column/Row"]
 margin_left = 45.0
 margin_right = 89.0
-margin_bottom = 20.0
+margin_bottom = 22.0
 text = "undo"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 428.0
+[node name="GamePanel" type="Panel" parent="Row"]
+margin_left = 514.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 596.0
-margin_bottom = 22.0
-
-[node name="PauseButton" type="ToolButton" parent="VBoxContainer/HBoxContainer"]
-margin_right = 50.0
-margin_bottom = 22.0
-text = "Pause"
-
-[node name="Panel" type="Panel" parent="VBoxContainer"]
-margin_top = 26.0
-margin_right = 596.0
-margin_bottom = 600.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Panel"]
+[node name="Margin" type="MarginContainer" parent="Row/GamePanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -10.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/margin_right = 15
-custom_constants/margin_top = 15
-custom_constants/margin_left = 15
-custom_constants/margin_bottom = 15
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": false,
+"_editor_description_": ""
 }
 
-[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/Panel/MarginContainer"]
-margin_left = 15.0
-margin_top = 15.0
-margin_right = 581.0
-margin_bottom = 549.0
+[node name="GameView" type="ViewportContainer" parent="Row/GamePanel/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 500.0
+margin_bottom = 590.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
@@ -120,7 +122,33 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport" type="Viewport" parent="VBoxContainer/Panel/MarginContainer/ViewportContainer"]
-size = Vector2( 566, 534 )
+[node name="Viewport" type="Viewport" parent="Row/GamePanel/Margin/GameView"]
+size = Vector2( 490, 580 )
 handle_input_locally = false
 render_target_update_mode = 3
+
+[node name="Margin" type="MarginContainer" parent="Row/GamePanel/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 500.0
+margin_bottom = 590.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="PauseButton" type="ToolButton" parent="Row/GamePanel/Margin/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 60.0
+margin_bottom = 32.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+toggle_mode = true
+text = "Pause"
+flat = false
