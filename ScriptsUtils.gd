@@ -3,7 +3,7 @@ const ScriptsRepository = preload("./ScriptsRepository.gd")
 
 static func collect_scripts(node: Node, repository := ScriptsRepository.new(), limit := 1000) -> ScriptsRepository:
 	var maybe_script = node.get_script()
-	if(maybe_script != null):
+	if maybe_script != null:
 		var script: GDScript = maybe_script
 		repository.add_script(script, node)
 	if limit > 0:
