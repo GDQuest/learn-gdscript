@@ -12,13 +12,14 @@ export (String, FILE, "*.json") var keyword_data_path := "res://slide/widgets/te
 ## Stores errors
 var errors := [] setget set_errors
 
+var _hscrollbar: HScrollBar
 var _vscrollbar: VScrollBar
 ## Keeps track of overlays to free them without risking destroying other TextEdit child nodes.
 var _overlays := []
 
 var _font_size: float = get_theme().default_font.size
 var _line_spacing := 4.0
-var _row_height := _font_size + _line_spacing
+var _row_height := _font_size + _line_spacing * 2
 # The horizontal 30 px corresponds to the left gutter with line numbers. Found in the source code.
 var _stylebox: StyleBox = theme.get_stylebox("normal", "TextEdit")
 var _offset := Vector2(
@@ -28,23 +29,29 @@ var _offset := Vector2(
 
 
 func _ready() -> void:
+	if Engine.editor_hint:
+		return
+
 	_enhance_syntax_highlighting()
 	for child in get_children():
 		if child is VScrollBar:
 			_vscrollbar = child
-			break
-	_vscrollbar.connect("scrolling", self, "update_overlays")
+		elif child is HScrollBar:
+			_hscrollbar = child
+
+	_hscrollbar.connect("value_changed", self, "update_overlays")
+	_vscrollbar.connect("value_changed", self, "update_overlays")
 	set_errors(
 		[
 			{
 				message = "Wrong function",
-				range = {start = {character = 0, line = 4}, end = {character = 7, line = 4}}
+				range = {start = {character = 0, line = 10}, end = {character = 40, line = 10}}
 			}
 		]
 	)
 
 
-func update_overlays() -> void:
+func update_overlays(value) -> void:
 	for overlay in _overlays:
 		overlay.queue_free()
 	_overlays.clear()
@@ -59,24 +66,29 @@ func update_overlays() -> void:
 
 
 func calculate_error_region(error_range: Dictionary) -> Rect2:
+	var scroll_offset := Vector2(scroll_horizontal, scroll_vertical * (_row_height + 2))
 	var start := (
 		Vector2(
 			error_range.start.character * _font_size,
 			error_range.start.line * _row_height - _line_spacing
 		)
-		+ _offset
+		+ _offset - scroll_offset
 	)
+	start.x = max(_offset.x, start.x)
+	start.y = max(_offset.y, start.y)
+	
 	var size := (
 		Vector2(error_range.end.character * _font_size, (error_range.end.line + 1) * _row_height)
 		- start
-		+ _offset
+		+ _offset - scroll_offset
 	)
+	size.x = min(size.x, rect_size.x - _offset.x - _stylebox.content_margin_right)
 	return Rect2(start, size)
 
 
 func set_errors(value: Array) -> void:
 	errors = value
-	update_overlays()
+	update_overlays(0)
 
 
 func _enhance_syntax_highlighting() -> void:
