@@ -15,7 +15,7 @@ var errors := [] setget set_errors
 
 var _font_size: float = get_theme().default_font.size
 var _line_spacing := 4.0
-var _row_height := _font_size + _line_spacing
+var _row_height := _font_size + _line_spacing * 2
 # The horizontal 30 px corresponds to the left gutter with line numbers. Found in the source code.
 var _stylebox: StyleBox = theme.get_stylebox("normal", "TextEdit")
 var _offset := Vector2(
@@ -47,7 +47,7 @@ func _ready() -> void:
 		[
 			{
 				message = "Test error",
-				range = {start = {character = 0, line = 6}, end = {character = 40, line = 6}}
+				range = {start = {character = 0, line = 22}, end = {character = 40, line = 22}}
 			}
 		]
 	)
@@ -70,7 +70,7 @@ func update_overlays(value) -> void:
 
 
 func calculate_error_region(error_range: Dictionary) -> Rect2:
-	var scroll_offset := Vector2(scroll_horizontal, scroll_vertical * (_row_height + _line_spacing))
+	var scroll_offset := Vector2(scroll_horizontal, scroll_vertical * _row_height)
 	var start := (
 		Vector2(
 			error_range.start.character * _font_size,
