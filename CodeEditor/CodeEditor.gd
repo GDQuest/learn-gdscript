@@ -13,15 +13,14 @@ export (String, FILE, "*.json") var keyword_data_path := "res://slide/widgets/te
 var errors := [] setget set_errors
 
 
-var _font_size: float = get_theme().default_font.size
-var _line_spacing := 4.0
-var _row_height := _font_size + _line_spacing * 2
+var _character_width: float = theme.default_font.get_char_size(ord("0")).x
+var _line_spacing := theme.get_constant("line_spacing", "TextEdit")
+var _row_height := get_theme().default_font.get_height() + _line_spacing
 # The horizontal 30 px corresponds to the left gutter with line numbers. Found in the source code.
 var _stylebox: StyleBox = theme.get_stylebox("normal", "TextEdit")
-var _offset := Vector2(
-	30.0 + _stylebox.content_margin_left,
-	_stylebox.content_margin_top + _line_spacing
-)
+# We need to recalculate this when the line count changes, as the number of lines 
+# affects line count display in the gutter.
+var _offset: Vector2
 
 var _hscrollbar: HScrollBar
 var _vscrollbar: VScrollBar
@@ -33,7 +32,6 @@ onready var _overlays: Control = $Overlays
 func _ready() -> void:
 	if Engine.editor_hint:
 		return
-
 	_enhance_syntax_highlighting()
 	for child in get_children():
 		if child is VScrollBar:
@@ -43,6 +41,9 @@ func _ready() -> void:
 
 	_hscrollbar.connect("value_changed", self, "update_overlays")
 	_vscrollbar.connect("value_changed", self, "update_overlays")
+
+	_offset = _calculate_offset()
+
 	set_errors(
 		[
 			{
@@ -77,8 +78,8 @@ func calculate_error_region(error_range: Dictionary) -> Rect2:
 	var scroll_offset := Vector2(scroll_horizontal, scroll_vertical * _row_height)
 	var start := (
 		Vector2(
-			error_range.start.character * _font_size,
-			error_range.start.line * _row_height - _line_spacing
+			error_range.start.character * _character_width,
+			(error_range.start.line - 1) * _row_height
 		)
 		+ _offset - scroll_offset
 	)
@@ -87,7 +88,7 @@ func calculate_error_region(error_range: Dictionary) -> Rect2:
 	
 	var size := (
 		Vector2(
-			error_range.end.character * _font_size - start.x - scroll_offset.x,
+			error_range.end.character * _character_width - start.x - scroll_offset.x,
 			_row_height
 		)
 	)
@@ -115,3 +116,15 @@ func _enhance_syntax_highlighting() -> void:
 	file.close()
 	for k in keywords["list"]:
 		add_keyword_color(k, keyword_color)
+
+
+func _calculate_offset() -> Vector2:
+	var out: Vector2
+	var line_count := get_line_count()
+	var line_numbers_width := 0
+	while line_count != 0:
+		line_numbers_width += 1
+		line_count /= 10
+	out.x = _character_width * line_numbers_width + _stylebox.content_margin_left
+	out.y = _stylebox.content_margin_top
+	return out
