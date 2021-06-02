@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://CodeEditor/ViewModeToggle.gd" type="Script" id=1]
+
+[node name="ViewModeToggle" type="HBoxContainer"]
+margin_right = 194.0
+margin_bottom = 29.0
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="game" type="Button" parent="."]
+margin_right = 50.0
+margin_bottom = 29.0
+toggle_mode = true
+text = "Game"
+
+[node name="console" type="Button" parent="."]
+margin_left = 54.0
+margin_right = 117.0
+margin_bottom = 29.0
+toggle_mode = true
+text = "Console"
+
+[node name="both" type="Button" parent="."]
+margin_left = 121.0
+margin_right = 163.0
+margin_bottom = 29.0
+toggle_mode = true
+pressed = true
+text = "Both"

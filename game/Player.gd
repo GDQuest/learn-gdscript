@@ -10,10 +10,7 @@ var velocity = Vector2.ZERO
 
 
 func _physics_process(delta):
-	var direction = Vector2(
-		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
-		Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
-	).normalized()
+	var direction = Vector2(Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"), Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")).normalized()
 
 	if direction.x != 0:
 		velocity.x = lerp(velocity.x, direction.x * speed, acceleration)

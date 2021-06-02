@@ -5,21 +5,25 @@ const ScriptsRepository = preload("./ScriptsRepository.gd")
 const ScriptsUtils = preload("./ScriptsUtils.gd")
 
 export (PackedScene) var scene_file := preload("res://game/Game.tscn") setget set_scene_file
+export(String, "game", "console", "both") var view_mode := "both" setget set_view_mode
 
 var _scene_is_paused := false
 var _scene: Node
 
 onready var file_list: ItemList = find_node("FileList")
 onready var code_editor: TextEdit = find_node("CodeEditor")
+onready var console_container: MarginContainer = find_node("ConsoleContainer")
 
 onready var viewport: Viewport = find_node("Viewport")
 onready var game_view: ViewportContainer = find_node("GameView")
 onready var game_container: Control = find_node("GamePanel")
+onready var game_vsplit_container: VSplitContainer = find_node("GameVSplitContainer")
 
 onready var save_button: Button = find_node("SaveButton")
 onready var undo_button: Button = find_node("UndoButton")
 onready var pause_button: Button = find_node("PauseButton")
 onready var restart_button: Button = find_node("RestartButton")
+onready var view_mode_group: Container = find_node("ViewMode")
 
 onready var errors_label: Label = find_node("LabelErrors")
 
@@ -29,9 +33,10 @@ func _ready():
 	save_button.connect("pressed", self, "_on_save_pressed")
 	pause_button.connect("pressed", self, "_on_pause_pressed")
 	restart_button.connect("pressed", self, "_on_restart_pressed")
+	view_mode_group.connect("mode_changed", self, "_on_view_mode_changed")
+	game_vsplit_container.connect("dragged", self, "_on_vsplit_dragged")
 	unpack_scene_file()
 	errors_label.visible = false
-
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_file_list"):
@@ -44,6 +49,38 @@ func _input(event: InputEvent) -> void:
 func set_scene_file(new_scene: PackedScene) -> void:
 	scene_file = new_scene
 	unpack_scene_file()
+
+
+## Called when the split is dragged
+func _on_vsplit_dragged(_offset: int) -> void:
+	var separation := game_vsplit_container.get_constant("separation")
+	game_vsplit_container.clamp_split_offset() # DOES NOT WORK, Y GODOT YYYYYYYY
+	var offset = game_vsplit_container.get_split_offset() # This should be clamped, but isn't
+	var max_top := (game_vsplit_container.rect_size.y / - 2 ) + separation / 2.0 + 50
+	var max_down := (game_vsplit_container.rect_size.y - separation) / 2
+	if offset < 0 and offset < max_top:
+		set_view_mode("console")
+	elif offset > 0 and offset > max_down:
+		set_view_mode("game")
+	else:
+		set_view_mode("both")
+
+
+## Called when the user clicks a button, or internally through _on_vsplit_dragged
+func _on_view_mode_changed(new_mode: String, from_user_interaction: bool) -> void:
+	var separation := game_vsplit_container.get_constant("separation")
+	if new_mode == "game":
+		var max_down := (game_vsplit_container.rect_size.y - separation) / 2
+		game_view.modulate.a = 1
+		game_vsplit_container.split_offset = int(max_down)
+	elif new_mode == "console":
+		game_view.modulate.a = 0
+		var max_top := (game_vsplit_container.rect_size.y / - 2 ) + separation / 2.0 + 50
+		game_vsplit_container.split_offset = int(max_top)
+	else:
+		game_view.modulate.a = 1
+		if from_user_interaction:
+			game_vsplit_container.split_offset = 0
 
 
 ## Reads all the scripts and loads them in the editor.
@@ -86,6 +123,7 @@ func _on_save_pressed() -> void:
 	game_view.grab_focus()
 	code_editor.release_focus()
 
+
 func _on_restart_pressed() -> void:
 	_scene.queue_free()
 	var packed_scene = PackedScene.new()
@@ -101,3 +139,7 @@ func _on_pause_pressed() -> void:
 func _clear_file_list() -> void:
 	for item_idx in range(file_list.get_item_count() - 1, -1, -1):
 		file_list.remove_item(item_idx)
+
+
+func set_view_mode(new_view_mode: String) -> void:
+	view_mode_group.view_mode = new_view_mode

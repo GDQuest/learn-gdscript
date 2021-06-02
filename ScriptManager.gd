@@ -21,6 +21,7 @@ var _replacements = {
 	"\\bpush_warning\\((.*?)\\)": "EventBus.print_warning($1)",
 }
 
+
 func _init(initial_script: GDScript, node: Node) -> void:
 	script_object = initial_script
 	_node = node

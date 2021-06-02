@@ -12,7 +12,6 @@ export (String, FILE, "*.json") var keyword_data_path := "res://slide/widgets/te
 ## Stores errors
 var errors := [] setget set_errors
 
-
 var _character_width: float = theme.default_font.get_char_size(ord("0")).x
 var _line_spacing := theme.get_constant("line_spacing", "TextEdit")
 var _row_height := get_theme().default_font.get_height() + _line_spacing
@@ -28,6 +27,7 @@ var _vscrollbar: VScrollBar
 onready var _error_panel: Control = $ErrorFloatingPanel
 ## Keeps track of overlays to free them without risking destroying other TextEdit child nodes.
 onready var _overlays: Control = $Overlays
+
 
 func _ready() -> void:
 	if Engine.editor_hint:
@@ -69,7 +69,7 @@ func update_overlays(_value) -> void:
 		overlay.connect("mouse_entered", _error_panel, "display", [error.message])
 		overlay.connect("mouse_exited", _error_panel, "hide")
 		var region := calculate_error_region(error.range)
-		
+
 		overlay.rect_position = region.position
 		overlay.rect_size = region.size
 
@@ -81,16 +81,14 @@ func calculate_error_region(error_range: Dictionary) -> Rect2:
 			error_range.start.character * _character_width,
 			(error_range.start.line - 1) * _row_height
 		)
-		+ _offset - scroll_offset
+		+ _offset
+		- scroll_offset
 	)
 	start.x = max(_offset.x, start.x)
 	start.y = max(0, start.y)
-	
-	var size := (
-		Vector2(
-			error_range.end.character * _character_width - start.x - scroll_offset.x,
-			_row_height
-		)
+
+	var size := Vector2(
+		error_range.end.character * _character_width - start.x - scroll_offset.x, _row_height
 	)
 	size.x = min(size.x, rect_size.x - _offset.x - _stylebox.content_margin_right)
 	return Rect2(start, size)
