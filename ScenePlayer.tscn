@@ -28,15 +28,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Row" type="HBoxContainer" parent="."]
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Margin" type="MarginContainer" parent="Row"]
-margin_right = 510.0
+[node name="Margin" type="MarginContainer" parent="HSplitContainer"]
+margin_right = 508.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 10
@@ -44,59 +44,59 @@ custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
-[node name="Row" type="HBoxContainer" parent="Row/Margin"]
+[node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer/Margin"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 500.0
+margin_right = 498.0
 margin_bottom = 590.0
-size_flags_horizontal = 3
 
-[node name="FileList" type="ItemList" parent="Row/Margin/Row"]
+[node name="FileList" type="ItemList" parent="HSplitContainer/Margin/HSplitContainer"]
 margin_right = 120.0
 margin_bottom = 580.0
 rect_min_size = Vector2( 120, 0 )
 size_flags_vertical = 3
 
-[node name="Column" type="VBoxContainer" parent="Row/Margin/Row"]
-margin_left = 124.0
-margin_right = 490.0
+[node name="Column" type="VBoxContainer" parent="HSplitContainer/Margin/HSplitContainer"]
+margin_left = 128.0
+margin_right = 488.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
 
-[node name="CodeEditor" parent="Row/Margin/Row/Column" instance=ExtResource( 3 )]
+[node name="CodeEditor" parent="HSplitContainer/Margin/HSplitContainer/Column" instance=ExtResource( 3 )]
+margin_right = 360.0
 margin_bottom = 514.0
 
-[node name="LabelErrors" type="Label" parent="Row/Margin/Row/Column"]
+[node name="LabelErrors" type="Label" parent="HSplitContainer/Margin/HSplitContainer/Column"]
 margin_top = 518.0
-margin_right = 366.0
+margin_right = 360.0
 margin_bottom = 547.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 
-[node name="Row" type="HBoxContainer" parent="Row/Margin/Row/Column"]
+[node name="Row" type="HBoxContainer" parent="HSplitContainer/Margin/HSplitContainer/Column"]
 margin_top = 551.0
-margin_right = 366.0
+margin_right = 360.0
 margin_bottom = 580.0
 
-[node name="SaveButton" type="Button" parent="Row/Margin/Row/Column/Row"]
+[node name="SaveButton" type="Button" parent="HSplitContainer/Margin/HSplitContainer/Column/Row"]
 margin_right = 52.0
 margin_bottom = 29.0
 shortcut = SubResource( 3 )
 text = "Save"
 
-[node name="UndoButton" type="Button" parent="Row/Margin/Row/Column/Row"]
+[node name="UndoButton" type="Button" parent="HSplitContainer/Margin/HSplitContainer/Column/Row"]
 margin_left = 56.0
 margin_right = 108.0
 margin_bottom = 29.0
 text = "undo"
 
-[node name="GamePanel" type="Panel" parent="Row"]
-margin_left = 514.0
+[node name="GamePanel" type="Panel" parent="HSplitContainer"]
+margin_left = 516.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Margin" type="MarginContainer" parent="Row/GamePanel"]
+[node name="Margin" type="MarginContainer" parent="HSplitContainer/GamePanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -109,10 +109,10 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="GameView" type="ViewportContainer" parent="Row/GamePanel/Margin"]
+[node name="GameView" type="ViewportContainer" parent="HSplitContainer/GamePanel/Margin"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 500.0
+margin_right = 498.0
 margin_bottom = 590.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -121,15 +121,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport" type="Viewport" parent="Row/GamePanel/Margin/GameView"]
-size = Vector2( 490, 580 )
+[node name="Viewport" type="Viewport" parent="HSplitContainer/GamePanel/Margin/GameView"]
+size = Vector2( 488, 580 )
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="Margin" type="MarginContainer" parent="Row/GamePanel/Margin"]
+[node name="Margin" type="MarginContainer" parent="HSplitContainer/GamePanel/Margin"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 500.0
+margin_right = 498.0
 margin_bottom = 590.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 10
@@ -141,7 +141,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="PauseButton" type="ToolButton" parent="Row/GamePanel/Margin/Margin"]
+[node name="PauseButton" type="ToolButton" parent="HSplitContainer/GamePanel/Margin/Margin"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 72.0
@@ -152,4 +152,4 @@ toggle_mode = true
 text = "Pause"
 flat = false
 
-[connection signal="gui_input" from="Row/Margin/Row/Column/CodeEditor/ErrorOverlay" to="Row/Margin/Row/Column/CodeEditor/ErrorOverlay" method="_on_ErrorOverlay_gui_input"]
+[connection signal="gui_input" from="HSplitContainer/Margin/HSplitContainer/Column/CodeEditor/ErrorOverlay" to="HSplitContainer/Margin/HSplitContainer/Column/CodeEditor/ErrorOverlay" method="_on_ErrorOverlay_gui_input"]

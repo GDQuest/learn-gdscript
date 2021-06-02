@@ -14,6 +14,7 @@ onready var code_editor: TextEdit = find_node("CodeEditor")
 
 onready var viewport: Viewport = find_node("Viewport")
 onready var game_view: ViewportContainer = find_node("GameView")
+onready var game_container: Control = find_node("GamePanel")
 
 onready var save_button: Button = find_node("SaveButton")
 onready var undo_button: Button = find_node("UndoButton")
@@ -28,6 +29,14 @@ func _ready():
 	pause_button.connect("pressed", self, "_on_pause_pressed")
 	unpack_scene_file()
 	errors_label.visible = false
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("toggle_file_list"):
+		file_list.visible = not file_list.visible
+		accept_event()
+	elif event.is_action_pressed("toggle_distraction_free_mode"):
+		game_container.visible = not game_container.visible
 
 
 func set_scene_file(new_scene: PackedScene) -> void:
