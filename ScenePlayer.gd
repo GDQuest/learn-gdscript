@@ -5,7 +5,7 @@ const ScriptsRepository = preload("./ScriptsRepository.gd")
 const ScriptsUtils = preload("./ScriptsUtils.gd")
 
 export (PackedScene) var scene_file := preload("res://game/Game.tscn") setget set_scene_file
-export(String, "game", "console", "both") var view_mode := "both" setget set_view_mode
+export (String, "game", "console", "both") var view_mode := "both" setget set_view_mode
 
 var _scene_is_paused := false
 var _scene: Node
@@ -38,6 +38,7 @@ func _ready():
 	unpack_scene_file()
 	errors_label.visible = false
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_file_list"):
 		file_list.visible = not file_list.visible
@@ -54,9 +55,9 @@ func set_scene_file(new_scene: PackedScene) -> void:
 ## Called when the split is dragged
 func _on_vsplit_dragged(_offset: int) -> void:
 	var separation := game_vsplit_container.get_constant("separation")
-	game_vsplit_container.clamp_split_offset() # DOES NOT WORK, Y GODOT YYYYYYYY
-	var offset = game_vsplit_container.get_split_offset() # This should be clamped, but isn't
-	var max_top := (game_vsplit_container.rect_size.y / - 2 ) + separation / 2.0 + 50
+	game_vsplit_container.clamp_split_offset()  # DOES NOT WORK, Y GODOT YYYYYYYY
+	var offset = game_vsplit_container.get_split_offset()  # This should be clamped, but isn't
+	var max_top := -(game_vsplit_container.rect_size.y / 2) + separation / 2.0 + 50
 	var max_down := (game_vsplit_container.rect_size.y - separation) / 2
 	if offset < 0 and offset < max_top:
 		set_view_mode("console")
@@ -75,7 +76,7 @@ func _on_view_mode_changed(new_mode: String, from_user_interaction: bool) -> voi
 		game_vsplit_container.split_offset = int(max_down)
 	elif new_mode == "console":
 		game_view.modulate.a = 0
-		var max_top := (game_vsplit_container.rect_size.y / - 2 ) + separation / 2.0 + 50
+		var max_top := -(game_vsplit_container.rect_size.y / 2) + separation / 2.0 + 50
 		game_vsplit_container.split_offset = int(max_top)
 	else:
 		game_view.modulate.a = 1
@@ -130,6 +131,7 @@ func _on_restart_pressed() -> void:
 	packed_scene.pack(_scene)
 	#ResourceSaver.save("res://TempScene.tscn", packed_scene)
 	set_scene_file(packed_scene)
+
 
 func _on_pause_pressed() -> void:
 	_scene_is_paused = not _scene_is_paused
