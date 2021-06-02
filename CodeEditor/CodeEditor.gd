@@ -47,8 +47,12 @@ func _ready() -> void:
 		[
 			{
 				message = "Test error",
-				range = {start = {character = 0, line = 22}, end = {character = 40, line = 22}}
-			}
+				range = {start = {character = 0, line = 8}, end = {character = 40, line = 8}}
+			},
+			{
+				message = "Test error",
+				range = {start = {character = 0, line = 20}, end = {character = 40, line = 20}}
+			},
 		]
 	)
 
@@ -82,9 +86,10 @@ func calculate_error_region(error_range: Dictionary) -> Rect2:
 	start.y = max(0, start.y)
 	
 	var size := (
-		Vector2(error_range.end.character * _font_size, (error_range.end.line + 1) * _row_height)
-		- start
-		+ _offset - scroll_offset
+		Vector2(
+			error_range.end.character * _font_size - start.x - scroll_offset.x,
+			_row_height
+		)
 	)
 	size.x = min(size.x, rect_size.x - _offset.x - _stylebox.content_margin_right)
 	return Rect2(start, size)
