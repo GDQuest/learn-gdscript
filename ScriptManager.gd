@@ -14,7 +14,7 @@ var file_path := ""
 var name := ""
 var cached_file := false
 var _node: Node
-
+var _printRegex = RegEx.new()
 
 func _init(initial_script: GDScript, node: Node) -> void:
 	script_object = initial_script
@@ -27,6 +27,7 @@ func _init(initial_script: GDScript, node: Node) -> void:
 	directory.open("user://")
 	directory.make_dir_recursive(directory_path)
 	file_path = "user://".plus_file(directory_path.plus_file(name))
+	_printRegex.compile("\\bprint\\((.*?)\\)")
 
 
 func _to_string():
@@ -37,6 +38,7 @@ func _to_string():
 ## data dir, and applies it to each node using the script.
 ## Emits an array of errors if the script has compilation errors.
 func attempt_apply(new_script_text: String) -> void:
+	new_script_text = _printRegex.sub(new_script_text, "EventBus.print_log($1)", true)
 	if new_script_text == current_script:
 		return
 	var new_script := GDScript.new()
@@ -57,6 +59,7 @@ func attempt_apply(new_script_text: String) -> void:
 			if error.code == 16:
 				errors.remove(i)
 		for error in errors:
+			# warning-ignore:narrowing_conversion
 			severity = min(severity, error.severity)
 
 	if severity < 2:

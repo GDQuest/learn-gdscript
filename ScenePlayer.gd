@@ -19,6 +19,7 @@ onready var game_container: Control = find_node("GamePanel")
 onready var save_button: Button = find_node("SaveButton")
 onready var undo_button: Button = find_node("UndoButton")
 onready var pause_button: Button = find_node("PauseButton")
+onready var restart_button: Button = find_node("RestartButton")
 
 onready var errors_label: Label = find_node("LabelErrors")
 
@@ -27,6 +28,7 @@ func _ready():
 	file_list.connect("item_activated", self, "_on_file_selected")
 	save_button.connect("pressed", self, "_on_save_pressed")
 	pause_button.connect("pressed", self, "_on_pause_pressed")
+	restart_button.connect("pressed", self, "_on_restart_pressed")
 	unpack_scene_file()
 	errors_label.visible = false
 
@@ -84,6 +86,12 @@ func _on_save_pressed() -> void:
 	game_view.grab_focus()
 	code_editor.release_focus()
 
+func _on_restart_pressed() -> void:
+	_scene.queue_free()
+	var packed_scene = PackedScene.new()
+	packed_scene.pack(_scene)
+	#ResourceSaver.save("res://TempScene.tscn", packed_scene)
+	set_scene_file(packed_scene)
 
 func _on_pause_pressed() -> void:
 	_scene_is_paused = not _scene_is_paused
@@ -91,5 +99,5 @@ func _on_pause_pressed() -> void:
 
 
 func _clear_file_list() -> void:
-	for item_idx in file_list.get_item_count():
+	for item_idx in range(file_list.get_item_count() - 1, -1, -1):
 		file_list.remove_item(item_idx)

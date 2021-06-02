@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ScenePlayer.gd" type="Script" id=1]
 [ext_resource path="res://godot_theme.tres" type="Theme" id=2]
 [ext_resource path="res://CodeEditor/CodeEditor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://CodeEditor/Console.tscn" type="PackedScene" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 6.0
@@ -109,11 +110,18 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="GameView" type="ViewportContainer" parent="HSplitContainer/GamePanel/Margin"]
+[node name="VSplitContainer" type="VSplitContainer" parent="HSplitContainer/GamePanel/Margin"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 498.0
 margin_bottom = 590.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameView" type="ViewportContainer" parent="HSplitContainer/GamePanel/Margin/VSplitContainer"]
+margin_right = 488.0
+margin_bottom = 286.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
@@ -121,16 +129,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport" type="Viewport" parent="HSplitContainer/GamePanel/Margin/GameView"]
-size = Vector2( 488, 580 )
+[node name="Viewport" type="Viewport" parent="HSplitContainer/GamePanel/Margin/VSplitContainer/GameView"]
+size = Vector2( 488, 286 )
 handle_input_locally = false
 render_target_update_mode = 3
+
+[node name="Console" parent="HSplitContainer/GamePanel/Margin/VSplitContainer" instance=ExtResource( 4 )]
+margin_top = 294.0
+margin_bottom = 580.0
 
 [node name="Margin" type="MarginContainer" parent="HSplitContainer/GamePanel/Margin"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 498.0
 margin_bottom = 590.0
+mouse_filter = 2
 size_flags_horizontal = 3
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
@@ -141,13 +154,27 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="PauseButton" type="ToolButton" parent="HSplitContainer/GamePanel/Margin/Margin"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/GamePanel/Margin/Margin"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 72.0
-margin_bottom = 39.0
+margin_right = 478.0
+margin_bottom = 570.0
+
+[node name="PauseButton" type="ToolButton" parent="HSplitContainer/GamePanel/Margin/Margin/HBoxContainer"]
+margin_right = 62.0
+margin_bottom = 29.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 toggle_mode = true
 text = "Pause"
+flat = false
+
+[node name="RestartButton" type="ToolButton" parent="HSplitContainer/GamePanel/Margin/Margin/HBoxContainer"]
+margin_left = 66.0
+margin_right = 148.0
+margin_bottom = 29.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+toggle_mode = true
+text = "Restart"
 flat = false
