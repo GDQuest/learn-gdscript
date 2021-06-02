@@ -58,7 +58,7 @@ func _ready() -> void:
 	)
 
 
-func update_overlays(value) -> void:
+func update_overlays(_value) -> void:
 	for overlay in _overlays.get_children():
 		overlay.queue_free()
 
@@ -119,7 +119,7 @@ func _enhance_syntax_highlighting() -> void:
 
 
 func _calculate_offset() -> Vector2:
-	var out: Vector2
+	var out := Vector2()
 	var line_count := get_line_count()
 	var line_numbers_width := 0
 	while line_count != 0:
