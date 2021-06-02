@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://godot_theme.tres" type="Theme" id=1]
 [ext_resource path="res://CodeEditor/CodeEditor.gd" type="Script" id=2]
+[ext_resource path="res://CodeEditor/ErrorFloatingPanel.tscn" type="PackedScene" id=3]
 
 [node name="CodeEditor" type="TextEdit"]
 margin_right = 366.0
@@ -26,4 +27,9 @@ __meta__ = {
 }
 keyword_data_path = "res://CodeEditor/keywords.json"
 
-[connection signal="gui_input" from="ErrorOverlay" to="ErrorOverlay" method="_on_ErrorOverlay_gui_input"]
+[node name="Overlays" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+
+[node name="ErrorFloatingPanel" parent="." instance=ExtResource( 3 )]

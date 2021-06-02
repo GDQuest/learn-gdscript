@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends MarginContainer
+
+export var offset := Vector2(6.0, 6.0)
+
+onready var _label: Label = $Label
+
+
+func _ready() -> void:
+	hide()
+	connect(\"visibility_changed\", self, \"_on_visibility_changed\")
+
+
+func _process(delta: float) -> void:
+	rect_global_position = get_global_mouse_position() + offset
+
+
+func display(message: String) -> void:
+	_label.text = message
+	show()
+
+
+func _on_visibility_changed() -> void:
+	set_process(visible)
+"
+
+[node name="ErrorFloatingPanel" type="MarginContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+mouse_filter = 2
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="."]
+margin_top = 13.0
+margin_right = 40.0
+margin_bottom = 27.0
+custom_colors/font_color = Color( 0.992157, 0, 0, 1 )
+text = "Test"

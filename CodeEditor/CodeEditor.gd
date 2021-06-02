@@ -12,21 +12,23 @@ export (String, FILE, "*.json") var keyword_data_path := "res://slide/widgets/te
 ## Stores errors
 var errors := [] setget set_errors
 
-var _hscrollbar: HScrollBar
-var _vscrollbar: VScrollBar
-## Keeps track of overlays to free them without risking destroying other TextEdit child nodes.
-var _overlays := []
 
 var _font_size: float = get_theme().default_font.size
 var _line_spacing := 4.0
-var _row_height := _font_size + _line_spacing * 2
+var _row_height := _font_size + _line_spacing
 # The horizontal 30 px corresponds to the left gutter with line numbers. Found in the source code.
 var _stylebox: StyleBox = theme.get_stylebox("normal", "TextEdit")
 var _offset := Vector2(
 	30.0 + _stylebox.content_margin_left,
-	_stylebox.content_margin_bottom
+	_stylebox.content_margin_top + _line_spacing
 )
 
+var _hscrollbar: HScrollBar
+var _vscrollbar: VScrollBar
+
+onready var _error_panel: Control = $ErrorFloatingPanel
+## Keeps track of overlays to free them without risking destroying other TextEdit child nodes.
+onready var _overlays: Control = $Overlays
 
 func _ready() -> void:
 	if Engine.editor_hint:
@@ -44,29 +46,31 @@ func _ready() -> void:
 	set_errors(
 		[
 			{
-				message = "Wrong function",
-				range = {start = {character = 0, line = 10}, end = {character = 40, line = 10}}
+				message = "Test error",
+				range = {start = {character = 0, line = 6}, end = {character = 40, line = 6}}
 			}
 		]
 	)
 
 
 func update_overlays(value) -> void:
-	for overlay in _overlays:
+	for overlay in _overlays.get_children():
 		overlay.queue_free()
-	_overlays.clear()
 
 	for error in errors:
-		var overlay = ErrorOverlay.instance()
-		_overlays.append(overlay)
-		add_child(overlay)
+		var overlay: ColorRect = ErrorOverlay.instance()
+		_overlays.add_child(overlay)
 
+		overlay.connect("mouse_entered", _error_panel, "display", [error.message])
+		overlay.connect("mouse_exited", _error_panel, "hide")
 		var region := calculate_error_region(error.range)
-		overlay.setup(error.message, region)
+		
+		overlay.rect_position = region.position
+		overlay.rect_size = region.size
 
 
 func calculate_error_region(error_range: Dictionary) -> Rect2:
-	var scroll_offset := Vector2(scroll_horizontal, scroll_vertical * (_row_height + 2))
+	var scroll_offset := Vector2(scroll_horizontal, scroll_vertical * (_row_height + _line_spacing))
 	var start := (
 		Vector2(
 			error_range.start.character * _font_size,
@@ -75,7 +79,7 @@ func calculate_error_region(error_range: Dictionary) -> Rect2:
 		+ _offset - scroll_offset
 	)
 	start.x = max(_offset.x, start.x)
-	start.y = max(_offset.y, start.y)
+	start.y = max(0, start.y)
 	
 	var size := (
 		Vector2(error_range.end.character * _font_size, (error_range.end.line + 1) * _row_height)
