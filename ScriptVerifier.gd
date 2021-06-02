@@ -26,9 +26,9 @@ func remove_http_request_node() -> void:
 
 
 func _on_http_request_completed(
-	_result: int, _response_code: int, _headers: PoolStringArray, body: PoolByteArray
+	result: int, _response_code: int, _headers: PoolStringArray, body: PoolByteArray
 ) -> void:
-	var response = parse_json(body.get_string_from_utf8())
+	var response = parse_json(body.get_string_from_utf8()) if result == HTTPRequest.RESULT_SUCCESS else []
 	remove_http_request_node()
 	emit_signal("errors", response)
 
