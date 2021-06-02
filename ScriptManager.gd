@@ -14,7 +14,12 @@ var file_path := ""
 var name := ""
 var cached_file := false
 var _node: Node
-var _printRegex = RegEx.new()
+var _replacements = {
+	"\\bprints\\((.*?)\\)": "EventBus.print_log([$1])",
+	"\\bprint\\((.*?)\\)": "EventBus.print_log([$1])",
+	"\\bpush_error\\((.*?)\\)": "EventBus.print_error($1)",
+	"\\bpush_warning\\((.*?)\\)": "EventBus.print_warning($1)",
+}
 
 func _init(initial_script: GDScript, node: Node) -> void:
 	script_object = initial_script
@@ -27,7 +32,14 @@ func _init(initial_script: GDScript, node: Node) -> void:
 	directory.open("user://")
 	directory.make_dir_recursive(directory_path)
 	file_path = "user://".plus_file(directory_path.plus_file(name))
-	_printRegex.compile("\\bprint\\((.*?)\\)")
+	# TODO: Can we do this only once instead of once per instance?
+	var regexes = _replacements.keys()
+	for key in regexes:
+		var replacement = _replacements[key]
+		var regex = RegEx.new()
+		regex.compile(key)
+		_replacements.erase(key)
+		_replacements[regex] = replacement
 
 
 func _to_string():
@@ -38,7 +50,10 @@ func _to_string():
 ## data dir, and applies it to each node using the script.
 ## Emits an array of errors if the script has compilation errors.
 func attempt_apply(new_script_text: String) -> void:
-	new_script_text = _printRegex.sub(new_script_text, "EventBus.print_log($1)", true)
+	for regex in _replacements:
+		var replacement = _replacements[regex]
+		new_script_text = regex.sub(new_script_text, replacement, true)
+
 	if new_script_text == current_script:
 		return
 	var new_script := GDScript.new()

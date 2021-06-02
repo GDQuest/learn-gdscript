@@ -17,6 +17,10 @@ func _ready():
 	add_child(_timer)
 	_timer.connect("timeout", self, "random_action")
 	_timer.start(time_span)
+	print("a log thing")
+	push_error("an error")
+	push_warning("a warning")
+	prints("several", ["arguments"])
 
 
 func random_action():
