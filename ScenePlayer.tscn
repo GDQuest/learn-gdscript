@@ -67,29 +67,8 @@ size_flags_horizontal = 3
 [node name="CodeEditor" parent="HSplitContainer/Margin/HSplitContainer/Column" instance=ExtResource( 3 )]
 margin_right = 360.0
 margin_bottom = 514.0
-text = "
-
-func _physics_process(delta):
-	var direction = Vector2(
-		Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\"),
-		Input.get_action_strength(\"ui_up\") - Input.get_action_strength(\"ui_down\")
-	).normalized()
-
-	if direction.x != 0:
-		velocity.x = lerp(velocity.x, direction.x * speed, acceleration)
-	else:
-		velocity.x = lerp(velocity.x, 0, friction)
-
-	velocity.y += gravity * delta
-	velocity = move_and_slide(velocity, Vector2.UP)
-
-	if Input.is_action_just_pressed(\"ui_up\"):
-		if is_on_floor():
-			velocity.y = jump_speed
-
-"
-lines_offset = 3
-lines_limit = 5
+lines_from = 3
+lines_to = 5
 rows_offset = 7
 
 [node name="LabelErrors" type="Label" parent="HSplitContainer/Margin/HSplitContainer/Column"]

@@ -8,13 +8,16 @@ export var member_color := Color(0.6, 1.0, 0.6)
 export var keyword_color := Color(1.0, 0.6, 0.6)
 export var quotes_color := Color(1.0, 1.0, 0.6)
 
-export var lines_offset := 10
-export var lines_limit := 0
+export var disallow_line_returns := false
+
+export var lines_from := 1
+export var lines_to := 0
 export var rows_offset := 0
 
 var _text_before := ""
 var _text_after := ""
 var _text_middle := PoolStringArray()
+var _original_text := ""
 
 export (String, FILE, "*.json") var keyword_data_path := "res://slide/widgets/text_edit/keywords.json"
 
@@ -42,6 +45,7 @@ func _ready() -> void:
 	if Engine.editor_hint:
 		return
 	_enhance_syntax_highlighting()
+	connect("text_changed", self, "_on_text_changed")
 	for child in get_children():
 		if child is VScrollBar:
 			_vscrollbar = child
@@ -57,7 +61,7 @@ func _ready() -> void:
 		[
 			{
 				message = "Test error",
-				range = {start = {character = 0, line = 8}, end = {character = 40, line = 8}}
+				range = {start = {character = 0, line = 4}, end = {character = 40, line = 4}}
 			},
 			{
 				message = "Test error",
@@ -72,6 +76,11 @@ func update_overlays() -> void:
 		overlay.queue_free()
 
 	for error in errors:
+		if (
+			(lines_from > 0 and error.range.start.line < lines_from)
+			or (lines_to > 0 and error.range.start.line > lines_to)
+		):
+			continue
 		var overlay: ColorRect = ErrorOverlay.instance()
 		_overlays.add_child(overlay)
 
@@ -88,7 +97,7 @@ func calculate_error_region(error_range: Dictionary) -> Rect2:
 	var start := (
 		Vector2(
 			error_range.start.character * _character_width,
-			(error_range.start.line - 1) * _row_height
+			(error_range.start.line - lines_from - 1) * _row_height
 		)
 		+ _offset
 		- scroll_offset
@@ -136,6 +145,22 @@ func _calculate_offset() -> Vector2:
 	out.y = _stylebox.content_margin_top
 	return out
 
+
+func _on_text_changed() -> void:
+	if not disallow_line_returns:
+		return
+	var new_new_lines = text.count("\n")
+	var old_new_lines = _original_text.count("\n")
+	if new_new_lines != old_new_lines:
+		var column = cursor_get_column()
+		var line = cursor_get_line()
+		text = _original_text
+		cursor_set_column(column)
+		cursor_set_line(line)
+	else:
+		_original_text = text
+
+
 func _set(key: String, value) -> bool:
 	if not Engine.is_editor_hint() and key == 'text':
 		var _complete_text = value
@@ -143,11 +168,11 @@ func _set(key: String, value) -> bool:
 		_text_after = ""
 		_text_middle = PoolStringArray()
 		_complete_text = _complete_text.replace("\\r\\n", "\\n")
-		if lines_offset > 0 or rows_offset > 0:
+		if lines_from > 0 or rows_offset > 0:
 			var _lines := Array(_complete_text.split("\n"))
-			if lines_offset > 0:
-				var _start = lines_offset - 1
-				var _end = (lines_limit - 1 if lines_limit > 0 else _lines.size())
+			if lines_from > 0:
+				var _start = lines_from - 1
+				var _end = lines_to - 1 if lines_to > 0 else _lines.size()
 				_text_before = PoolStringArray(_lines.slice(0, _start - 1)).join("\n")
 				_text_after = PoolStringArray(_lines.slice(_end + 1, _lines.size())).join("\n")
 				_lines = _lines.slice(_start, _end)
@@ -160,18 +185,23 @@ func _set(key: String, value) -> bool:
 			text = PoolStringArray(_lines).join("\n")
 		else:
 			text = _complete_text
+		_original_text = text
 	return true
 
+
 func _get(key: String):
-	if not Engine.is_editor_hint() and key == 'text':
-		if lines_offset == 0 and rows_offset == 0:
-			return text.rstrip("\n").lstrip("\n")
-		var _complete_text = _text_before+"\n"
+	if key == 'text':
+		if Engine.is_editor_hint():
+			return text
+		text = text.rstrip("\n").lstrip("\n")
+		if lines_from == 0 and rows_offset == 0:
+			return text
+		var _complete_text = _text_before + "\n"
 		var _lines = text.split("\n")
 		for i in _lines.size():
 			if _text_middle.size() > i:
-				_complete_text+=_text_middle[i]
-			_complete_text+=_lines[i] + "\n"
-		_complete_text+= _text_after
+				_complete_text += _text_middle[i]
+			_complete_text += _lines[i] + "\n"
+		_complete_text += _text_after
 		print(_complete_text)
 		return _complete_text
