@@ -67,7 +67,7 @@ func _ready() -> void:
 	)
 
 
-func update_overlays(_value) -> void:
+func update_overlays() -> void:
 	for overlay in _overlays.get_children():
 		overlay.queue_free()
 
@@ -105,7 +105,7 @@ func calculate_error_region(error_range: Dictionary) -> Rect2:
 
 func set_errors(value: Array) -> void:
 	errors = value
-	update_overlays(0)
+	update_overlays()
 
 
 func _enhance_syntax_highlighting() -> void:
