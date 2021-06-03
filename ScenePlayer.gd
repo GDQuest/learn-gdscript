@@ -5,6 +5,7 @@ const ScriptsRepository = preload("./ScriptsRepository.gd")
 const ScriptsUtils = preload("./ScriptsUtils.gd")
 
 export (PackedScene) var scene_file := preload("res://game/Game.tscn") setget set_scene_file
+export var scripts_to_collect := PoolStringArray()
 export (String, "game", "console", "both") var view_mode := "both" setget set_view_mode
 
 var _scene_is_paused := false
@@ -89,7 +90,7 @@ func unpack_scene_file() -> void:
 	_scene = scene_file.instance()
 	viewport.add_child(_scene)
 	_clear_file_list()
-	for script in ScriptsUtils.collect_scripts(_scene):
+	for script in ScriptsUtils.collect_scripts(_scene, scripts_to_collect):
 		file_list.add_item(script.name, null, true)
 		file_list.set_item_metadata(file_list.get_item_count() - 1, script)
 	file_list.select(0)
