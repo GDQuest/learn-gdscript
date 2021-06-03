@@ -7,6 +7,15 @@ export var class_color := Color(0.6, 0.6, 1.0)
 export var member_color := Color(0.6, 1.0, 0.6)
 export var keyword_color := Color(1.0, 0.6, 0.6)
 export var quotes_color := Color(1.0, 1.0, 0.6)
+
+export var lines_offset := 10
+export var lines_limit := 0
+export var rows_offset := 0
+
+var _text_before := ""
+var _text_after := ""
+var _text_middle := PoolStringArray()
+
 export (String, FILE, "*.json") var keyword_data_path := "res://slide/widgets/text_edit/keywords.json"
 
 ## Stores errors
@@ -126,3 +135,43 @@ func _calculate_offset() -> Vector2:
 	out.x = _character_width * line_numbers_width + _stylebox.content_margin_left
 	out.y = _stylebox.content_margin_top
 	return out
+
+func _set(key: String, value) -> bool:
+	if not Engine.is_editor_hint() and key == 'text':
+		var _complete_text = value
+		_text_before = ""
+		_text_after = ""
+		_text_middle = PoolStringArray()
+		_complete_text = _complete_text.replace("\\r\\n", "\\n")
+		if lines_offset > 0 or rows_offset > 0:
+			var _lines := Array(_complete_text.split("\n"))
+			if lines_offset > 0:
+				var _start = lines_offset - 1
+				var _end = (lines_limit - 1 if lines_limit > 0 else _lines.size())
+				_text_before = PoolStringArray(_lines.slice(0, _start - 1)).join("\n")
+				_text_after = PoolStringArray(_lines.slice(_end + 1, _lines.size())).join("\n")
+				_lines = _lines.slice(_start, _end)
+			if rows_offset > 0:
+				for i in _lines.size():
+					var line: String = _lines[i]
+					var removed = line.substr(0, rows_offset)
+					_text_middle.append(removed)
+					_lines[i] = line.substr(rows_offset, -1)
+			text = PoolStringArray(_lines).join("\n")
+		else:
+			text = _complete_text
+	return true
+
+func _get(key: String):
+	if not Engine.is_editor_hint() and key == 'text':
+		if lines_offset == 0 and rows_offset == 0:
+			return text.rstrip("\n").lstrip("\n")
+		var _complete_text = _text_before+"\n"
+		var _lines = text.split("\n")
+		for i in _lines.size():
+			if _text_middle.size() > i:
+				_complete_text+=_text_middle[i]
+			_complete_text+=_lines[i] + "\n"
+		_complete_text+= _text_after
+		print(_complete_text)
+		return _complete_text
