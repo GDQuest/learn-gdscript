@@ -25,7 +25,9 @@ var _replacements = {
 func _init(initial_script: GDScript, node: Node) -> void:
 	script_object = initial_script
 	_node = node
-	name = script_object.resource_path.get_file().get_basename()
+	var suffixes_regex = RegEx.new()
+	suffixes_regex.compile("\\.version--[ab]$")
+	name = suffixes_regex.sub(script_object.resource_path.get_file().get_basename(),"")
 	original_script = script_object.source_code
 	current_script = original_script
 	var directory_path = script_object.resource_path.get_base_dir().replace("res://", "")
@@ -59,7 +61,7 @@ func attempt_apply(new_script_text: String) -> void:
 		return
 	var new_script := GDScript.new()
 	new_script.source_code = new_script_text
-	var suffix := ".b" if cached_file else ".a"
+	var suffix := ".version--b" if cached_file else ".version--a"
 	var current_file_name := file_path + suffix + ".gd"
 	ResourceSaver.save(current_file_name, new_script)
 
