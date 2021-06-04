@@ -3,10 +3,11 @@ extends TextEdit
 
 const ErrorOverlay := preload("ErrorOverlay.tscn")
 
-export var class_color := Color(0.6, 0.6, 1.0)
-export var member_color := Color(0.6, 1.0, 0.6)
-export var keyword_color := Color(1.0, 0.6, 0.6)
-export var quotes_color := Color(1.0, 1.0, 0.6)
+const COLOR_CLASS := Color(0.6, 0.6, 1.0)
+const COLOR_MEMBER := Color(0.6, 1.0, 0.6)
+const COLOR_KEYWORD := Color(1.0, 0.6, 0.6)
+const COLOR_QUOTES := Color(1.0, 1.0, 0.6)
+const COLOR_COMMENTS := Color("#80ccced3")
 
 export var disallow_line_returns := false
 
@@ -57,18 +58,19 @@ func _ready() -> void:
 
 	_offset = _calculate_offset()
 
-	set_errors(
-		[
-			{
-				message = "Test error",
-				range = {start = {character = 0, line = 4}, end = {character = 40, line = 4}}
-			},
-			{
-				message = "Test error",
-				range = {start = {character = 0, line = 20}, end = {character = 40, line = 20}}
-			},
-		]
-	)
+
+#	set_errors(
+#		[
+#			{
+#				message = "Test error",
+#				range = {start = {character = 0, line = 4}, end = {character = 40, line = 4}}
+#			},
+#			{
+#				message = "Test error",
+#				range = {start = {character = 0, line = 20}, end = {character = 40, line = 20}}
+#			},
+#		]
+#	)
 
 
 func update_overlays() -> void:
@@ -118,20 +120,21 @@ func set_errors(value: Array) -> void:
 
 
 func _enhance_syntax_highlighting() -> void:
-	add_color_region('"', '"', quotes_color)
-	add_color_region("'", "'", quotes_color)
+	add_color_region('"', '"', COLOR_QUOTES)
+	add_color_region("'", "'", COLOR_QUOTES)
+	add_color_region("#", "\n", COLOR_COMMENTS, true)
 	for c in ClassDB.get_class_list():
-		add_keyword_color(c, class_color)
+		add_keyword_color(c, COLOR_CLASS)
 		for m in ClassDB.class_get_property_list(c):
 			for key in m:
-				add_keyword_color(key, member_color)
+				add_keyword_color(key, COLOR_MEMBER)
 
 	var file := File.new()
 	file.open(keyword_data_path, file.READ)
 	var keywords: Dictionary = parse_json(file.get_as_text())
 	file.close()
 	for k in keywords["list"]:
-		add_keyword_color(k, keyword_color)
+		add_keyword_color(k, COLOR_KEYWORD)
 
 
 func _calculate_offset() -> Vector2:
