@@ -10,20 +10,12 @@ onready var _label: Label = $Label
 
 func _ready() -> void:
 	hide()
-	connect(\"visibility_changed\", self, \"_on_visibility_changed\")
 
 
-func _process(_delta: float) -> void:
-	rect_global_position = get_global_mouse_position() + offset
-
-
-func display(message: String) -> void:
+func display(message: String, position: Vector2) -> void:
 	_label.text = message
+	rect_global_position = position
 	show()
-
-
-func _on_visibility_changed() -> void:
-	set_process(visible)
 "
 
 [node name="ErrorFloatingPanel" type="MarginContainer"]

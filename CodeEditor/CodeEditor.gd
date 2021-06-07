@@ -78,20 +78,25 @@ func update_overlays() -> void:
 		overlay.queue_free()
 
 	for error in errors:
-		if (
+		var is_outside_lens: bool = (
 			(lines_from > 0 and error.range.start.line < lines_from)
 			or (lines_to > 0 and error.range.start.line > lines_to)
-		):
+		)
+		if is_outside_lens:
 			continue
-		var overlay: ColorRect = ErrorOverlay.instance()
-		_overlays.add_child(overlay)
 
-		overlay.connect("mouse_entered", _error_panel, "display", [error.message])
-		overlay.connect("mouse_exited", _error_panel, "hide")
+		var overlay: Control = ErrorOverlay.instance()
 		var region := calculate_error_region(error.range)
 
 		overlay.rect_position = region.position
 		overlay.rect_size = region.size
+
+		_overlays.add_child(overlay)
+		
+		var panel_position := region.position + Vector2(0, _row_height) + rect_global_position
+		overlay.connect("mouse_entered", _error_panel, "display", [error.message, panel_position])
+		overlay.connect("mouse_exited", _error_panel, "hide")
+
 
 
 func calculate_error_region(error_range: Dictionary) -> Rect2:

@@ -1,12 +1,51 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
 
-[node name="ErrorOverlay" type="ColorRect"]
+[ext_resource path="res://CodeEditor/ErrorOverlay.gd" type="Script" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Line2D
+
+const WAVE_WIDTH := 18.0
+const WAVE_HEIGHT := 4.0
+const LINE_THICKNESS := 2.0
+const VERTEX_COUNT := 16
+
+const COLOR_ERROR := Color(\"#d81946\")
+const COLOR_WARNING := Color(\"#ffe478\")
+
+var wave_width := 64.0 setget set_wave_width
+
+
+func update_drawing() -> void:
+	points.empty()
+	for i in VERTEX_COUNT * wave_width / WAVE_WIDTH:
+		add_point(Vector2(
+			WAVE_WIDTH * i / VERTEX_COUNT,
+			WAVE_HEIGHT / 2.0 * sin(TAU * i / VERTEX_COUNT)
+		))
+
+
+func set_wave_width(value: float) -> void:
+	wave_width = value
+	update_drawing()
+"
+
+[node name="ErrorOverlay" type="Control"]
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 1
-size_flags_horizontal = 0
-size_flags_vertical = 0
-color = Color( 0.819608, 0.0823529, 0.462745, 0.392157 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
+}
+
+[node name="SquigglyLine" type="Line2D" parent="."]
+position = Vector2( 0, 4 )
+width = 3
+default_color = Color( 0.847059, 0.0980392, 0.27451, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+script = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
 }
