@@ -53,8 +53,8 @@ func _ready() -> void:
 		elif child is HScrollBar:
 			_hscrollbar = child
 
-	_hscrollbar.connect("value_changed", self, "update_overlays")
-	_vscrollbar.connect("value_changed", self, "update_overlays")
+	_hscrollbar.connect("value_changed", self, "_on_scrollbar_changed")
+	_vscrollbar.connect("value_changed", self, "_on_scrollbar_changed")
 
 	_offset = _calculate_offset()
 
@@ -71,6 +71,10 @@ func _ready() -> void:
 #			},
 #		]
 #	)
+
+
+func _on_scrollbar_changed(_value):
+	update_overlays()
 
 
 func update_overlays() -> void:
@@ -92,11 +96,10 @@ func update_overlays() -> void:
 		overlay.rect_size = region.size
 
 		_overlays.add_child(overlay)
-		
+
 		var panel_position := region.position + Vector2(0, _row_height) + rect_global_position
 		overlay.connect("mouse_entered", _error_panel, "display", [error.message, panel_position])
 		overlay.connect("mouse_exited", _error_panel, "hide")
-
 
 
 func calculate_error_region(error_range: Dictionary) -> Rect2:
@@ -211,5 +214,4 @@ func _get(key: String):
 				_complete_text += _text_middle[i]
 			_complete_text += _lines[i] + "\n"
 		_complete_text += _text_after
-		print(_complete_text)
 		return _complete_text

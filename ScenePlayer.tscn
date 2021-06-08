@@ -67,32 +67,31 @@ size_flags_horizontal = 3
 
 [node name="CodeEditor" parent="HSplitContainer/Margin/HSplitContainer/Column" instance=ExtResource( 3 )]
 margin_right = 360.0
-margin_bottom = 514.0
-lines_from = 3
-lines_to = 5
-rows_offset = 7
+margin_bottom = 504.0
+lines_from = 12
+lines_to = 25
 
 [node name="LabelErrors" type="Label" parent="HSplitContainer/Margin/HSplitContainer/Column"]
-margin_top = 518.0
+margin_top = 508.0
 margin_right = 360.0
-margin_bottom = 547.0
+margin_bottom = 542.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 
 [node name="Row" type="HBoxContainer" parent="HSplitContainer/Margin/HSplitContainer/Column"]
-margin_top = 551.0
+margin_top = 546.0
 margin_right = 360.0
 margin_bottom = 580.0
 
 [node name="SaveButton" type="Button" parent="HSplitContainer/Margin/HSplitContainer/Column/Row"]
-margin_right = 52.0
-margin_bottom = 29.0
+margin_right = 48.0
+margin_bottom = 34.0
 shortcut = SubResource( 3 )
-text = "Save"
+text = "Run"
 
 [node name="UndoButton" type="Button" parent="HSplitContainer/Margin/HSplitContainer/Column/Row"]
-margin_left = 56.0
-margin_right = 108.0
-margin_bottom = 29.0
+margin_left = 52.0
+margin_right = 112.0
+margin_bottom = 34.0
 text = "undo"
 
 [node name="GamePanel" type="Panel" parent="HSplitContainer"]
@@ -171,13 +170,13 @@ __meta__ = {
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 478.0
-margin_bottom = 39.0
+margin_bottom = 44.0
 mouse_filter = 2
 size_flags_vertical = 0
 
 [node name="PauseButton" type="ToolButton" parent="HSplitContainer/GamePanel/Margin/Margin/GameControlsContainer"]
-margin_right = 62.0
-margin_bottom = 29.0
+margin_right = 72.0
+margin_bottom = 34.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 toggle_mode = true
@@ -185,9 +184,9 @@ text = "Pause"
 flat = false
 
 [node name="RestartButton" type="ToolButton" parent="HSplitContainer/GamePanel/Margin/Margin/GameControlsContainer"]
-margin_left = 66.0
-margin_right = 148.0
-margin_bottom = 29.0
+margin_left = 76.0
+margin_right = 172.0
+margin_bottom = 34.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 toggle_mode = true
@@ -195,5 +194,6 @@ text = "Restart"
 flat = false
 
 [node name="ViewMode" parent="HSplitContainer/GamePanel/Margin/Margin/GameControlsContainer" instance=ExtResource( 5 )]
-margin_left = 152.0
-margin_right = 346.0
+margin_left = 176.0
+margin_right = 400.0
+margin_bottom = 34.0

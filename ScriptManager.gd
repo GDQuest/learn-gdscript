@@ -27,7 +27,7 @@ func _init(initial_script: GDScript, node: Node) -> void:
 	_node = node
 	var suffixes_regex = RegEx.new()
 	suffixes_regex.compile("\\.version--[ab]$")
-	name = suffixes_regex.sub(script_object.resource_path.get_file().get_basename(),"")
+	name = suffixes_regex.sub(script_object.resource_path.get_file().get_basename(), "")
 	original_script = script_object.source_code
 	current_script = original_script
 	var directory_path = script_object.resource_path.get_base_dir().replace("res://", "")
@@ -58,6 +58,7 @@ func attempt_apply(new_script_text: String) -> void:
 		new_script_text = regex.sub(new_script_text, replacement, true)
 
 	if new_script_text == current_script:
+		emit_errors()
 		return
 	var new_script := GDScript.new()
 	new_script.source_code = new_script_text
@@ -81,7 +82,7 @@ func attempt_apply(new_script_text: String) -> void:
 			severity = min(severity, error.severity)
 
 	if severity < 2:
-		emit_signal("errors", errors)
+		emit_errors(errors)
 		return
 
 	for node in nodes:
@@ -89,6 +90,10 @@ func attempt_apply(new_script_text: String) -> void:
 
 	cached_file = not cached_file
 	current_script = new_script_text
+	emit_errors(errors)
+
+
+func emit_errors(errors: Array = []) -> void:
 	emit_signal("errors", errors)
 
 

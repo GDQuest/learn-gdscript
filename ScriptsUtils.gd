@@ -1,7 +1,9 @@
 const ScriptManager = preload("./ScriptManager.gd")
 const ScriptsRepository = preload("./ScriptsRepository.gd")
 
-static func collect_scripts(node: Node, scripts := Array(), repository := ScriptsRepository.new(), limit := 1000) -> ScriptsRepository:
+static func collect_scripts(
+	node: Node, scripts := Array(), repository := ScriptsRepository.new(), limit := 1000
+) -> ScriptsRepository:
 	var maybe_script: Reference = node.get_script()
 	if maybe_script != null:
 		var script: GDScript = maybe_script

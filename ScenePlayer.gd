@@ -1,5 +1,8 @@
 extends Control
 
+signal is_valid(script_text)
+signal is_invalid
+
 const ScriptManager = preload("./ScriptManager.gd")
 const ScriptsRepository = preload("./ScriptsRepository.gd")
 const ScriptsUtils = preload("./ScriptsUtils.gd")
@@ -106,8 +109,8 @@ func _on_save_pressed() -> void:
 	var file_index := file_list.get_selected_items()[0]
 	var current_script: ScriptManager = file_list.get_item_metadata(file_index)
 	var new_text = code_editor.text
-	current_script.attempt_apply(new_text)
 	errors_label.text = ""
+	current_script.attempt_apply(new_text)
 	var errors = yield(current_script, "errors")
 	if errors.size():
 		for error in errors:
@@ -121,6 +124,9 @@ func _on_save_pressed() -> void:
 				% [message, range_start.line, range_start.character]
 			)
 			errors_label.text += error_string
+		emit_signal("is_invalid")
+	else:
+		emit_signal("is_valid", new_text)
 	errors_label.visible = errors_label.text != ""
 	game_view.grab_focus()
 	code_editor.release_focus()
