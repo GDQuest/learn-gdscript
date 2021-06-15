@@ -11,8 +11,10 @@ const COLOR_COMMENTS := Color("#80ccced3")
 
 export var disallow_line_returns := false
 
-export var lines_from := 1
-export var lines_to := 0
+export var show_lines_from := 1
+export var show_lines_to := 0
+export var edit_lines_from := 1
+export var edit_lines_to := 0
 export var rows_offset := 0
 
 var _text_before := ""
@@ -83,8 +85,8 @@ func update_overlays() -> void:
 
 	for error in errors:
 		var is_outside_lens: bool = (
-			(lines_from > 0 and error.range.start.line < lines_from)
-			or (lines_to > 0 and error.range.start.line > lines_to)
+			(show_lines_from > 0 and error.range.start.line < show_lines_from)
+			or (show_lines_to > 0 and error.range.start.line > show_lines_to)
 		)
 		if is_outside_lens:
 			continue
@@ -107,7 +109,7 @@ func calculate_error_region(error_range: Dictionary) -> Rect2:
 	var start := (
 		Vector2(
 			error_range.start.character * _character_width,
-			(error_range.start.line - lines_from - 1) * _row_height
+			(error_range.start.line - show_lines_from - 1) * _row_height
 		)
 		+ _offset
 		- scroll_offset
@@ -157,19 +159,81 @@ func _calculate_offset() -> Vector2:
 	return out
 
 
+func is_editable_area_restricted() -> bool:
+	return (
+		edit_lines_from > 1
+		or (edit_lines_to > edit_lines_from and edit_lines_to < get_line_count())
+	)
+
+
+## Verifies the passed line number is within the range of editable lines
+func is_line_editable(line_number: int) -> bool:
+	print(line_number)
+	return line_number >= edit_lines_from and line_number <= edit_lines_to
+
+
+var _temporary_column_number := 0
+var _temporary_line_number := 0
+const TAB_WIDTH = 4
+
+
+func _store_current_cursor_position():
+	_temporary_line_number = cursor_get_line()
+	var line = get_line(_temporary_line_number)
+	# tabs are already counted once in the character count, so we multiply
+	# them by tabWidth - 1.
+	var tabs = line.count("\t") * (TAB_WIDTH - 1)
+	_temporary_column_number = cursor_get_column() + tabs
+
+
+func _restore_current_cursor_position():
+	prints(_temporary_line_number, ":", _temporary_column_number)
+	cursor_set_column(_temporary_column_number - 1)
+	cursor_set_line(_temporary_line_number)
+
+
+func _restore_previous_text_version():
+	_store_current_cursor_position()
+	text = _original_text
+	_restore_current_cursor_position()
+
+
 func _on_text_changed() -> void:
-	if not disallow_line_returns:
-		return
 	var new_new_lines = text.count("\n")
 	var old_new_lines = _original_text.count("\n")
 	if new_new_lines != old_new_lines:
-		var column = cursor_get_column()
-		var line = cursor_get_line()
-		text = _original_text
-		cursor_set_column(column)
-		cursor_set_line(line)
+		# New line entered
+		if disallow_line_returns:
+			# disable new line, and restore previous text and cursor position
+			_restore_previous_text_version()
+		else:
+			if is_editable_area_restricted():
+				# change the edit area to allow for the additional line
+				if new_new_lines > old_new_lines:
+					edit_lines_to += 1
+				else:
+					edit_lines_to -= 1
+			# update the text value
+			_original_text = text
 	else:
-		_original_text = text
+		# anything but a new line
+		if not is_editable_area_restricted():
+			# allow all changes
+			_original_text = text
+			return
+		var current_line = 1
+		for index in text.length():
+			var character: String = text[index]
+			var previous_character: String = _original_text[index]
+			if character == "\n":
+				current_line += 1
+			elif character != previous_character:
+				# found the change
+				if is_line_editable(current_line):
+					_original_text = text
+				else:
+					_restore_previous_text_version()
+				return
 
 
 func _set(key: String, value) -> bool:
@@ -179,11 +243,11 @@ func _set(key: String, value) -> bool:
 		_text_after = ""
 		_text_middle = PoolStringArray()
 		_complete_text = _complete_text.replace("\\r\\n", "\\n")
-		if lines_from > 0 or rows_offset > 0:
+		if show_lines_from > 0 or rows_offset > 0:
 			var _lines := Array(_complete_text.split("\n"))
-			if lines_from > 0:
-				var _start = lines_from - 1
-				var _end = lines_to - 1 if lines_to > 0 else _lines.size()
+			if show_lines_from > 0:
+				var _start = show_lines_from - 1
+				var _end = show_lines_to - 1 if show_lines_to > 0 else _lines.size()
 				_text_before = PoolStringArray(_lines.slice(0, _start - 1)).join("\n")
 				_text_after = PoolStringArray(_lines.slice(_end + 1, _lines.size())).join("\n")
 				_lines = _lines.slice(_start, _end)
@@ -205,7 +269,7 @@ func _get(key: String):
 		if Engine.is_editor_hint():
 			return text
 		text = text.rstrip("\n").lstrip("\n")
-		if lines_from == 0 and rows_offset == 0:
+		if show_lines_from == 0 and rows_offset == 0:
 			return text
 		var _complete_text = _text_before + "\n"
 		var _lines = text.split("\n")

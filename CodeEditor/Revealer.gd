@@ -9,6 +9,7 @@ onready var _container: Control = _button
 onready var _chevron: TextureRect = $Title/Chevron
 onready var _tween: Tween = $Title/Tween
 
+
 func _ready() -> void:
 	_button.pressed = not collapsed
 	_button.connect("toggled", self, "_on__button_toggled")
