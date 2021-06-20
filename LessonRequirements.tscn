@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
+[ext_resource path="res://JumpValidator.gd" type="Script" id=1]
 [ext_resource path="res://CodeEditor/Goal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://CodeEditor/Revealer.tscn" type="PackedScene" id=4]
 
@@ -24,12 +25,12 @@ size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1010.0
-margin_bottom = 297.0
+margin_bottom = 225.0
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
 margin_right = 1010.0
-margin_bottom = 297.0
+margin_bottom = 225.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -154,7 +155,7 @@ scroll_active = false
 [node name="Checks" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 4 )]
 margin_top = 169.0
 margin_right = 1010.0
-margin_bottom = 297.0
+margin_bottom = 225.0
 title = "Checks"
 
 [node name="Goal" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Checks" instance=ExtResource( 3 )]
@@ -164,16 +165,5 @@ margin_bottom = 56.0
 text = "React to the \"jump\" input"
 validation_script = "return \"is_action_just_pressed\" in script and '\"jump\"' in script"
 
-[node name="Goal2" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Checks" instance=ExtResource( 3 )]
-margin_top = 60.0
-margin_right = 1010.0
-margin_bottom = 92.0
-text = "But only if the player is on the floor"
-validation_script = "return \"is_on_floor()\" in script"
-
-[node name="Goal3" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Checks" instance=ExtResource( 3 )]
-margin_top = 96.0
-margin_right = 1010.0
-margin_bottom = 128.0
-text = "Change the player's velocity on the \"y\" axis"
-validation_script = "return \"velocity.y\" in script"
+[node name="Validator" type="Node" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Checks/Goal"]
+script = ExtResource( 1 )

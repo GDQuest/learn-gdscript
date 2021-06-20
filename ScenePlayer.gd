@@ -1,6 +1,6 @@
 extends Control
 
-signal is_valid(script_text)
+signal is_valid(scene, script_text)
 signal is_invalid
 
 const ScriptManager = preload("./ScriptManager.gd")
@@ -126,7 +126,7 @@ func _on_save_pressed() -> void:
 			errors_label.text += error_string
 		emit_signal("is_invalid")
 	else:
-		emit_signal("is_valid", new_text)
+		emit_signal("is_valid", _scene, new_text)
 	errors_label.visible = errors_label.text != ""
 	game_view.grab_focus()
 	code_editor.release_focus()

@@ -18,10 +18,10 @@ func _on_scene_player_invalid() -> void:
 	set_all_goals(STATUS.INVALID)
 
 
-func _on_scene_player_valid(script_text: String) -> void:
-	for goal in goals:
-		goal.script_to_check = script_text
-		goal.validate_and_set()
+func _on_scene_player_valid(scene: Node, script_text: String) -> void:
+	for index in goals.size():
+		var goal: Goal = goals[index]
+		goal.validate_and_set(scene, script_text)
 
 
 func set_all_goals(status: int) -> void:
