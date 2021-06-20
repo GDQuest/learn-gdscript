@@ -243,9 +243,9 @@ func _set(key: String, value) -> bool:
 		_text_after = ""
 		_text_middle = PoolStringArray()
 		_complete_text = _complete_text.replace("\\r\\n", "\\n")
-		if show_lines_from > 0 or rows_offset > 0:
+		if show_lines_from > 1 or rows_offset > 0:
 			var _lines := Array(_complete_text.split("\n"))
-			if show_lines_from > 0:
+			if show_lines_from > 1:
 				var _start = show_lines_from - 1
 				var _end = show_lines_to - 1 if show_lines_to > 0 else _lines.size()
 				_text_before = PoolStringArray(_lines.slice(0, _start - 1)).join("\n")
