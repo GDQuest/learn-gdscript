@@ -14,6 +14,7 @@ var _timer := Timer.new()
 
 
 func _ready():
+	# EXPORT slice
 	add_child(_timer)
 	_timer.connect("timeout", self, "random_action")
 	_timer.start(time_span)
@@ -21,7 +22,7 @@ func _ready():
 	#push_error("an error")
 	#push_warning("a warning")
 	#prints("several", ["arguments"])
-
+	# /EXPORT slice
 
 func random_action():
 	match randi() % 2:

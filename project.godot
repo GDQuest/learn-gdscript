@@ -27,10 +27,19 @@ config/icon="res://icon.png"
 [autoload]
 
 EventBus="*res://EventBus.gd"
+LiveEditorExporterUtils="*res://addons/exporter-for-live-editor/utils/LiveEditorExporterUtils.gd"
 
 [debug]
 
 gdscript/warnings/return_value_discarded=false
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/editor_icon_previewer/plugin.cfg", "res://addons/exporter-for-live-editor/plugin.cfg", "res://addons/godot-plugin-refresher/plugin.cfg" )
+
+[exporter-for-live-editor]
+
+scene="res://game/Game.tscn"
 
 [input]
 

@@ -1,3 +1,4 @@
+# EXPORT
 extends KinematicBody2D
 
 export var speed := 1200
