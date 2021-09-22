@@ -1,31 +1,31 @@
 extends Resource
 
-const SceneScript := preload("./SceneScript.gd")
+const ScriptHandler := preload("./ScriptHandler.gd")
 
-export var repository: Dictionary
+export var files: Dictionary
 var _scene: Node
 var _current_index := 0
 var _current_array := []
 
 
 func _init(scene: Node) -> void:
-	repository = {}
+	files = {}
 	_scene = scene
 
 
-## If the provided script is new, adds a script file to the repository.
+## If the provided script is new, adds a script file to the files.
 ## Otherwise, adds the provided node as a dependency of this script.
 func add_node(script: GDScript, node: Node) -> void:
 	var script_path := script.resource_path
-	if not (script_path in repository):
-		prints("new script:", script_path)
-		var scene_script := SceneScript.new(_scene, script)
-		repository[script_path] = scene_script
-	(repository[script_path] as SceneScript).append(node)
+	if not (script_path in files):
+		var scene_script := ScriptHandler.new(_scene, script)
+		files[script_path] = scene_script
+	var path := NodePath(String(node.get_path()).replace(_scene.get_path(), ""))
+	(files[script_path] as ScriptHandler).append(path)
 
 
 func _to_string():
-	return '(scripts: %s)' % [PoolStringArray(repository.values()).join(", ")]
+	return '(scripts: %s)' % [PoolStringArray(files.values()).join(", ")]
 
 
 func _iterator_is_valid() -> bool:
@@ -34,7 +34,7 @@ func _iterator_is_valid() -> bool:
 
 func _iter_init(_arg) -> bool:
 	_current_index = 0
-	_current_array = repository.values()
+	_current_array = files.values()
 	return _iterator_is_valid()
 
 
@@ -48,16 +48,16 @@ func _iter_get(_arg):
 
 
 func size() -> int:
-	return repository.size()
+	return files.size()
 
 
 func keys() -> Array:
-	return repository.keys()
+	return files.keys()
 
 
 func values() -> Array:
-	return repository.values()
+	return files.values()
 
 
-func current() -> SceneScript:
+func current() -> ScriptHandler:
 	return _current_array[_current_index]
