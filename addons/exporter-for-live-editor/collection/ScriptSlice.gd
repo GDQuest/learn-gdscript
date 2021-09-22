@@ -13,7 +13,12 @@ export var after := []
 export var text := []
 var main_text: Array setget set_main_text, get_main_text
 
-func _init(result: RegExMatch):
+func _init() -> void:
+	before = []
+	after = []
+	text = []
+
+func from_regex_match(result: RegExMatch):
 	leading_spaces = result.get_string("leading_spaces").length()
 	keyword = result.get_string("keyword")
 	closing = result.get_string("closing") != ""

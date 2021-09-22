@@ -54,7 +54,7 @@ func _collect_scripts(scene: Node, node: Node, repository: SceneFiles, limit: in
 	if maybe_script != null and maybe_script is GDScript:
 		var script: GDScript = maybe_script
 		if script_is_valid(script):
-			repository.add_node(script, node)
+			repository.add_node(scene, script, node)
 	if limit > 0:
 		limit -= 1
 		for child in node.get_children():
@@ -62,6 +62,6 @@ func _collect_scripts(scene: Node, node: Node, repository: SceneFiles, limit: in
 
 
 func collect_script(scene: Node, limit := 1000) -> SceneFiles:
-	var repository := SceneFiles.new(scene)
+	var repository := SceneFiles.new()
 	_collect_scripts(scene, scene, repository, limit)
 	return repository

@@ -12,7 +12,7 @@ export var file_path := ""
 export var original_script := ""
 export var name := ""
 var _current_index := 0
-var _scene: Node
+var _current_array := []
 export var slices := {}
 
 var sanitization_replacements := RegExp.collection({
@@ -22,9 +22,10 @@ var sanitization_replacements := RegExp.collection({
 var export_key_regex := RegExp.compile(EXPORT_KEY)
 var leading_spaces_regex := RegExp.compile("(?m)^(?:  )+")
 
-func _init(scene: Node, initial_script: GDScript) -> void:
+func _init() -> void:
 	nodes = []
-	_scene = scene
+
+func set_initial_script(initial_script: GDScript) -> void:
 	file_path = initial_script.resource_path
 	name = file_path.get_file().get_basename()
 	original_script = initial_script.source_code
@@ -36,11 +37,12 @@ func _to_string():
 
 
 func _iterator_is_valid() -> bool:
-	return _current_index < nodes.size()
+	return _current_index < _current_array.size()
 
 
 func _iter_init(_arg) -> bool:
 	_current_index = 0
+	_current_array = slices.keys()
 	return _iterator_is_valid()
 
 
@@ -50,22 +52,27 @@ func _iter_next(_arg) -> bool:
 
 
 func _iter_get(_arg):
-	return current()
+	return current_key()
 
 
 func size() -> int:
 	return nodes.size()
 
 
-func get_by_index(index: int) -> NodePath:
-	return nodes[index]
+func current_key() -> String:
+	var key = _current_array[_current_index]
+	return key
 
 
-func current() -> NodePath:
-	return get_by_index(_current_index)
+func current() -> ScriptSlice:
+	return get_slice(current_key())
 
 
-func append(path: NodePath) -> void:
+func get_slice(key: String) -> ScriptSlice:
+	return slices[key]
+
+
+func add_node(path: NodePath) -> void:
 	nodes.append(path)
 
 
@@ -84,7 +91,8 @@ func _get_script_slices(script: String):
 			line = replacement + line.substr(length)
 		var exportMatch := export_key_regex.search(line)
 		if exportMatch:
-			var slice = ScriptSlice.new(exportMatch)
+			var slice = ScriptSlice.new()
+			slice.from_regex_match(exportMatch)
 			slice.start = index
 			if slice.closing and slice.name:
 				if slice.name in waiting_slices:

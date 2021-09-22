@@ -3,25 +3,23 @@ extends Resource
 const ScriptHandler := preload("./ScriptHandler.gd")
 
 export var files: Dictionary
-var _scene: Node
 var _current_index := 0
 var _current_array := []
 
 
-func _init(scene: Node) -> void:
+func _init() -> void:
 	files = {}
-	_scene = scene
-
 
 ## If the provided script is new, adds a script file to the files.
 ## Otherwise, adds the provided node as a dependency of this script.
-func add_node(script: GDScript, node: Node) -> void:
+func add_node(root_scene: Node, script: GDScript, node: Node) -> void:
 	var script_path := script.resource_path
 	if not (script_path in files):
-		var scene_script := ScriptHandler.new(_scene, script)
+		var scene_script := ScriptHandler.new()
+		scene_script.set_initial_script(script)
 		files[script_path] = scene_script
-	var path := NodePath(String(node.get_path()).replace(_scene.get_path(), ""))
-	(files[script_path] as ScriptHandler).append(path)
+	var path := NodePath(String(node.get_path()).replace(root_scene.get_path(), ""))
+	(files[script_path] as ScriptHandler).add_node(path)
 
 
 func _to_string():
@@ -61,3 +59,7 @@ func values() -> Array:
 
 func current() -> ScriptHandler:
 	return _current_array[_current_index]
+
+
+func get_file(file_name: String) -> ScriptHandler:
+	return files[file_name]

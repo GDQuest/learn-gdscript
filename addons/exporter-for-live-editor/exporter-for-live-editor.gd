@@ -3,7 +3,7 @@ extends EditorPlugin
 
 const LiveEditorExporterUtilsPath = "res://addons/exporter-for-live-editor/utils/LiveEditorExporterUtils.gd"
 const LiveEditorExporterUtils := preload(LiveEditorExporterUtilsPath)
-var live_editor_exporter_utils = LiveEditorExporterUtils.new()
+var exporter_utils = LiveEditorExporterUtils.new()
 var file_dialog := preload("./ui/file_dialog.gd").new()
 var container := preload("./ui/container.gd").new()
 var config := preload("./utils/config.gd").new(self)
@@ -82,27 +82,26 @@ func _on_screen_changed(new_screen: String) -> void:
 		pass
 		#container.hide()
 
-
-func _on_run_button_pressed() -> void:
-	if not config.scene_path:
-		return
-	var packed_scene: PackedScene = load(config.scene_path)
-	var scene = packed_scene.instance()
-	scene.hide()
-	add_child(scene)
-	var collector: SceneFiles = live_editor_exporter_utils.collect_script(scene)
-	# Example of how to loop over the resource:
-	# const ScriptHandler := SceneFiles.ScriptHandler
-	#for _repo in collector:
-	#	var repo: ScriptHandler = collector.current()
-	#	for _nodePath in repo:
-	#		var nodePath: NodePath = repo.current()
+func _save(collector: SceneFiles) -> void:
 	var file_name = config.scene_path.get_basename() + ".live-editor.tres"
 	var success = ResourceSaver.save(file_name, collector)
 	if success == OK:
 		print("Wrote the configuration to %s"%[file_name])
 	else:
 		push_error("Could not write the configuration to %s"%[file_name])
+	
+func _on_run_button_pressed() -> void:
+	if not config.scene_path:
+		return
+	
+	var packed_scene: PackedScene = load(config.scene_path)
+	var scene = packed_scene.instance()
+	scene.hide()
+	add_child(scene)
+	
+	var collector: SceneFiles = exporter_utils.collect_script(scene)
+	_save(collector)
+	
 	remove_child(scene)
 	scene.queue_free()
 	#get_editor_interface().play_main_scene()
