@@ -1,4 +1,4 @@
-extends Resource 
+extends Resource
 
 const SceneScript := preload("./SceneScript.gd")
 
@@ -7,9 +7,11 @@ var _scene: Node
 var _current_index := 0
 var _current_array := []
 
+
 func _init(scene: Node) -> void:
 	repository = {}
 	_scene = scene
+
 
 ## If the provided script is new, adds a script file to the repository.
 ## Otherwise, adds the provided node as a dependency of this script.
@@ -55,6 +57,7 @@ func keys() -> Array:
 
 func values() -> Array:
 	return repository.values()
+
 
 func current() -> SceneScript:
 	return _current_array[_current_index]

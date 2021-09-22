@@ -3,10 +3,9 @@ extends Node
 const SceneScriptsRepository := preload("../collection/SceneScriptsRepository.gd")
 const SceneScript := SceneScriptsRepository.SceneScript
 
-
 const SETTINGS_KEY = preload("./config.gd").SETTINGS_KEY
 
-const REGEX_PRINTS = "\\bprints\\((.*?)\\)" 
+const REGEX_PRINTS = "\\bprints\\((.*?)\\)"
 const REGEX_PRINT = "\\bprint\\((.*?)\\)"
 const REGEX_PUSH_ERROR = "\\bpush_error\\((.*?)\\)"
 const REGEX_PUSH_WARNING = "\\bpush_warning\\((.*?)\\)"
@@ -21,6 +20,7 @@ var _replacements = {
 
 var export_key_regex = RegEx.new()
 
+
 func _init() -> void:
 	var regexes = _replacements.keys()
 	export_key_regex.compile(REGEX_EXPORT)
@@ -31,11 +31,12 @@ func _init() -> void:
 		_replacements.erase(key)
 		_replacements[regex] = replacement
 
+
 func replace_code(text: String) -> String:
 	for regex in _replacements:
 		var replacement = _replacements[regex]
 		text = regex.sub(text, replacement, true)
-	return text 
+	return text
 
 
 # Returns a string representing the current scene,
@@ -48,7 +49,7 @@ static func get_scene() -> String:
 
 # loads the selected scene. Accepts an optional `from`
 # argument which checks that the loaded scene isn't itself
-static func load_scene(from:Node = null) -> Node:
+static func load_scene(from: Node = null) -> Node:
 	var scene_path = get_scene()
 	if scene_path:
 		if from and from.filename == scene_path:
@@ -67,7 +68,7 @@ static func test(current_file_name: String) -> bool:
 
 
 func script_is_valid(script: GDScript) -> bool:
-	print("is "+script.resource_path+" valid?")
+	print("is " + script.resource_path + " valid?")
 	var result = export_key_regex.search(script.source_code)
 	if result:
 		print("it's valid")
@@ -87,7 +88,8 @@ func _collect_scripts(scene: Node, node: Node, repository: SceneScriptsRepositor
 		for child in node.get_children():
 			_collect_scripts(scene, child, repository, limit)
 
-func collect_script(scene: Node, limit:=1000) -> SceneScriptsRepository:
+
+func collect_script(scene: Node, limit := 1000) -> SceneScriptsRepository:
 	var repository := SceneScriptsRepository.new(scene)
 	_collect_scripts(scene, scene, repository, limit)
-	return repository 
+	return repository

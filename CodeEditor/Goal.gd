@@ -25,6 +25,7 @@ func _ready():
 		if _get_validators().size() == 0:
 			push_warning("Goal has no validators and will always return true (%s)" % get_path())
 
+
 func set_status(new_status: int) -> void:
 	status = new_status
 	if not is_inside_tree():
@@ -44,14 +45,16 @@ func set_text(new_text: String) -> void:
 		yield(self, "ready")
 	_text_node.bbcode_text = new_text
 
+
 func validate(scene: Node, script_text: String):
 	var validators := _get_validators()
 	var errors = []
 	for index in validators.size():
 		var validator: Validator = validators[index]
 		validator.validate(scene, script_text)
-		errors +=  yield(validator, "validation_completed")
+		errors += yield(validator, "validation_completed")
 	emit_signal("validation_completed", errors)
+
 
 func validate_and_set(scene: Node, script_text: String) -> void:
 	validate(scene, script_text)
@@ -61,11 +64,13 @@ func validate_and_set(scene: Node, script_text: String) -> void:
 	else:
 		set_status(STATUS.INVALID)
 
+
 func _get_configuration_warning():
 	for child in get_children():
 		if child is Validator:
-			return '';
+			return ''
 	return 'Goal requires at least one Validator'
+
 
 func _get_validators() -> Array:
 	var validators = []

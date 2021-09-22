@@ -2,10 +2,6 @@
 ## and can replace their script.
 extends Resource
 
-
-signal errors(errors)
-
-
 export var nodes: Array
 export var file_path := ""
 export var original_script := ""
@@ -14,7 +10,7 @@ var _current_index := 0
 var _scene: Node
 
 
-func _init(scene:Node, initial_script: GDScript) -> void:
+func _init(scene: Node, initial_script: GDScript) -> void:
 	nodes = []
 	_scene = scene
 	file_path = initial_script.resource_path
@@ -47,13 +43,16 @@ func _iter_get(_arg):
 func size() -> int:
 	return nodes.size()
 
+
 func get_by_index(index: int) -> NodePath:
 	return nodes[index]
+
 
 func current() -> NodePath:
 	return get_by_index(_current_index)
 
+
 func append(node: Node) -> void:
-	var path := String(node.get_path()).replace(_scene.get_path(),"")
-	prints("adding node %s to script %s"%[path, file_path])
+	var path := String(node.get_path()).replace(_scene.get_path(), "")
+	prints("adding node %s to script %s" % [path, file_path])
 	nodes.append(NodePath(path))

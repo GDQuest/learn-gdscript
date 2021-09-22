@@ -5,10 +5,12 @@ const _ERROR = "you should extend the Validator class and implement your own `va
 
 signal validation_completed(errors)
 
+
 func validate(_scene: Node, _script_text: String):
 	push_error(_ERROR)
-	yield(get_tree(),"idle_frame")
-	emit_signal("validation_completed",[])
+	yield(get_tree(), "idle_frame")
+	emit_signal("validation_completed", [])
+
 
 func verify(thing, message: String) -> bool:
 	if thing:
