@@ -40,7 +40,7 @@ func create_element(script: ScriptHandler, slice: ScriptSlice):
 	button.toggle_mode = true
 	button.group = _button_group
 	_buttons_index[button.text] = button
-	var signal_args = ["slice_selected", slice]
+	var signal_args = ["slice_selected", script, slice]
 	button.connect("pressed", self, "emit_signal", signal_args)
 	add_child(button)
 

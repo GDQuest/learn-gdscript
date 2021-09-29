@@ -2,6 +2,8 @@
 extends ViewportContainer
 
 const SceneFiles := preload("./collection/SceneFiles.gd")
+const ScriptHandler := preload("./collection/ScriptHandler.gd")
+const ScriptSlice := preload("./collection/ScriptSlice.gd")
 
 var _scene: Node
 var _scene_files: SceneFiles setget set_scene_files
@@ -40,6 +42,16 @@ func set_scene_files(new_scene_files: SceneFiles) -> void:
 	_viewport.size = _scene_files.scene_viewport_size
 	_viewport.add_child(_scene)
 
+
+func update_nodes(script_handler: ScriptHandler, script_slice: ScriptSlice) -> void:
+	var script_text = script_slice.current_full_text
+	var script = GDScript.new()
+	script.source_code = script_text
+	script.reload()
+	for node_path in script_handler.nodes:
+		var node = _scene.get_node(node_path)
+		node.set_script(script)
+		
 
 func pause_scene(pause := true, limit := 1000) -> void:
 	if not _scene:

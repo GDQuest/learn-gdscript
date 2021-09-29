@@ -42,9 +42,9 @@ func from_regex_match(result: RegExMatch):
 	global = name == ""
 
 
-func set_main_lines(lines: Array) -> void:
-	lines_before = lines.slice(0, start - 1)
-	lines_after = lines.slice(end + 1, lines.size())
+func set_main_lines(lines: Array, is_global := false) -> void:
+	lines_before = lines.slice(0, start - 1) if not is_global else []
+	lines_after = lines.slice(end + 1, lines.size()) if not is_global else []
 	lines_editable = lines.slice(start + 1, end - 1)
 	if leading_spaces:
 		for idx in lines_editable.size():
@@ -74,10 +74,12 @@ func get_full_text() -> String:
 
 
 func get_current_full_text() -> String:
+	if current_text == "":
+		return get_full_text()
 	var lines = current_text.split("\n")
-	var middle_text := Array(indent_text(leading_spaces, lines)) \
+	var middle_text := Array(indent_text(leading_spaces, lines) \
 		if leading_spaces \
-		else lines
+		else lines)
 	return PoolStringArray(lines_before + middle_text + lines_after).join("\n")
 
 

@@ -21,7 +21,8 @@ func add_node(root_scene: Node, script: GDScript, node: Node) -> void:
 		var scene_script := ScriptHandler.new()
 		scene_script.set_initial_script(script)
 		files[script_path] = scene_script
-	var path := NodePath(String(node.get_path()).replace(root_scene.get_path(), ""))
+	var root_path := String(root_scene.get_path()) + "/"
+	var path := NodePath(String(node.get_path()).replace(root_path, ""))
 	(files[script_path] as ScriptHandler).add_node(path)
 
 

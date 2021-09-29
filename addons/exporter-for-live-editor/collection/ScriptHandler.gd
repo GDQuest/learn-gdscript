@@ -104,7 +104,7 @@ func _get_script_slices(script: String):
 			elif slice.name:
 				waiting_slices[slice.name] = slice
 			elif slice.global:
-				slice.set_main_lines(lines)
+				slice.set_main_lines(lines, true)
 				slice.end = lines.size()
 				completed_slices['*'] = slice
 	return completed_slices
