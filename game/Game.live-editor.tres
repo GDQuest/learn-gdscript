@@ -1,60 +1,12 @@
-[gd_resource type="Resource" load_steps=8 format=2]
+[gd_resource type="Resource" load_steps=9 format=2]
 
-[ext_resource path="res://addons/exporter-for-live-editor/collection/ScriptHandler.gd" type="Script" id=1]
-[ext_resource path="res://addons/exporter-for-live-editor/collection/SceneFiles.gd" type="Script" id=2]
-[ext_resource path="res://addons/exporter-for-live-editor/collection/ScriptSlice.gd" type="Script" id=3]
+[ext_resource path="res://addons/exporter-for-live-editor/collection/ScriptSlice.gd" type="Script" id=1]
+[ext_resource path="res://addons/exporter-for-live-editor/collection/ScriptHandler.gd" type="Script" id=2]
+[ext_resource path="res://addons/exporter-for-live-editor/collection/SceneFiles.gd" type="Script" id=3]
+[ext_resource path="res://game/Game.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Resource" id=1]
-script = ExtResource( 3 )
-leading_spaces = 0
-keyword = "EXPORT"
-closing = false
-name = ""
-global = true
-start = 0
-end = 27
-before = [ "# EXPORT", "extends KinematicBody2D", "", "export var speed := 1200", "export var jump_speed := -1800", "export var gravity := 4000", "export (float, 0, 1.0) var friction := 0.1", "export (float, 0, 1.0) var acceleration := 0.25", "", "var velocity = Vector2.ZERO", "", "", "func _physics_process(delta):", "	var direction = Vector2(Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\"), Input.get_action_strength(\"ui_up\") - Input.get_action_strength(\"ui_down\")).normalized()", "", "	if direction.x != 0:", "		velocity.x = lerp(velocity.x, direction.x * speed, acceleration)", "	else:", "		velocity.x = lerp(velocity.x, 0, friction)", "", "	velocity.y += gravity * delta", "	velocity = move_and_slide(velocity, Vector2.UP)", "", "	if Input.is_action_just_pressed(\"jump\"):", "		if is_on_floor():", "			velocity.y = jump_speed", "" ]
-after = [ "extends KinematicBody2D", "", "export var speed := 1200", "export var jump_speed := -1800", "export var gravity := 4000", "export (float, 0, 1.0) var friction := 0.1", "export (float, 0, 1.0) var acceleration := 0.25", "", "var velocity = Vector2.ZERO", "", "", "func _physics_process(delta):", "	var direction = Vector2(Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\"), Input.get_action_strength(\"ui_up\") - Input.get_action_strength(\"ui_down\")).normalized()", "", "	if direction.x != 0:", "		velocity.x = lerp(velocity.x, direction.x * speed, acceleration)", "	else:", "		velocity.x = lerp(velocity.x, 0, friction)", "", "	velocity.y += gravity * delta", "	velocity = move_and_slide(velocity, Vector2.UP)", "", "	if Input.is_action_just_pressed(\"jump\"):", "		if is_on_floor():", "			velocity.y = jump_speed", "" ]
-text = [ "extends KinematicBody2D", "", "export var speed := 1200", "export var jump_speed := -1800", "export var gravity := 4000", "export (float, 0, 1.0) var friction := 0.1", "export (float, 0, 1.0) var acceleration := 0.25", "", "var velocity = Vector2.ZERO", "", "", "func _physics_process(delta):", "	var direction = Vector2(Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\"), Input.get_action_strength(\"ui_up\") - Input.get_action_strength(\"ui_down\")).normalized()", "", "	if direction.x != 0:", "		velocity.x = lerp(velocity.x, direction.x * speed, acceleration)", "	else:", "		velocity.x = lerp(velocity.x, 0, friction)", "", "	velocity.y += gravity * delta", "	velocity = move_and_slide(velocity, Vector2.UP)", "", "	if Input.is_action_just_pressed(\"jump\"):", "		if is_on_floor():", "			velocity.y = jump_speed", "" ]
-
-[sub_resource type="Resource" id=2]
 script = ExtResource( 1 )
-nodes = [ NodePath("/Player") ]
-file_path = "res://game/Player.gd"
-original_script = "# EXPORT
-extends KinematicBody2D
-
-export var speed := 1200
-export var jump_speed := -1800
-export var gravity := 4000
-export (float, 0, 1.0) var friction := 0.1
-export (float, 0, 1.0) var acceleration := 0.25
-
-var velocity = Vector2.ZERO
-
-
-func _physics_process(delta):
-	var direction = Vector2(Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\"), Input.get_action_strength(\"ui_up\") - Input.get_action_strength(\"ui_down\")).normalized()
-
-	if direction.x != 0:
-		velocity.x = lerp(velocity.x, direction.x * speed, acceleration)
-	else:
-		velocity.x = lerp(velocity.x, 0, friction)
-
-	velocity.y += gravity * delta
-	velocity = move_and_slide(velocity, Vector2.UP)
-
-	if Input.is_action_just_pressed(\"jump\"):
-		if is_on_floor():
-			velocity.y = jump_speed
-"
-name = "Player"
-slices = {
-"*": SubResource( 1 )
-}
-
-[sub_resource type="Resource" id=3]
-script = ExtResource( 3 )
 leading_spaces = 1
 keyword = "EXPORT"
 closing = false
@@ -62,12 +14,12 @@ name = "slice"
 global = false
 start = 16
 end = 24
-before = [ "extends KinematicBody2D", "", "export var speed := 1200", "export var jump_speed := -1800", "export var gravity := 4000", "export (float, 0, 1.0) var friction = 0.1", "export (float, 0, 1.0) var acceleration = 0.25", "export (float, 0, 1) var time_span := .5", "", "var velocity = Vector2.ZERO", "var direction = Vector2()", "", "var _timer := Timer.new()", "", "", "func _ready():" ]
-after = [ "", "", "func random_action():", "	match randi() % 2:", "		0:", "			direction.y = 1", "		_:", "			direction.y = 0", "	match randi() % 2 if direction.y != 0 else 5:", "		0:", "			direction.x = 1", "		1:", "			direction.x = -1", "		_:", "			direction.x = 0", "", "", "func _physics_process(delta):", "	if direction.x != 0:", "		velocity.x = lerp(velocity.x, direction.x * speed, acceleration)", "	else:", "		velocity.x = lerp(velocity.x, 0, friction)", "	velocity.y += gravity * delta", "	velocity = move_and_slide(velocity, Vector2.UP)", "	if direction.y > 0:", "		if is_on_floor():", "			velocity.y = jump_speed", "" ]
-text = [ "add_child(_timer)", "_timer.connect(\"timeout\", self, \"random_action\")", "_timer.start(time_span)", "#print(\"a log thing\")", "#push_error(\"an error\")", "#push_warning(\"a warning\")", "#prints(\"several\", [\"arguments\"])" ]
+lines_before = [ "extends KinematicBody2D", "", "export var speed := 1200", "export var jump_speed := -1800", "export var gravity := 4000", "export (float, 0, 1.0) var friction = 0.1", "export (float, 0, 1.0) var acceleration = 0.25", "export (float, 0, 1) var time_span := .5", "", "var velocity = Vector2.ZERO", "var direction = Vector2()", "", "var _timer := Timer.new()", "", "", "func _ready():" ]
+lines_after = [ "", "", "func random_action():", "	match randi() % 2:", "		0:", "			direction.y = 1", "		_:", "			direction.y = 0", "	match randi() % 2 if direction.y != 0 else 5:", "		0:", "			direction.x = 1", "		1:", "			direction.x = -1", "		_:", "			direction.x = 0", "", "", "func _physics_process(delta):", "	if direction.x != 0:", "		velocity.x = lerp(velocity.x, direction.x * speed, acceleration)", "	else:", "		velocity.x = lerp(velocity.x, 0, friction)", "	velocity.y += gravity * delta", "	velocity = move_and_slide(velocity, Vector2.UP)", "	if direction.y > 0:", "		if is_on_floor():", "			velocity.y = jump_speed", "" ]
+lines_editable = [ "add_child(_timer)", "_timer.connect(\"timeout\", self, \"random_action\")", "_timer.start(time_span)", "#print(\"a log thing\")", "#push_error(\"an error\")", "#push_warning(\"a warning\")", "#prints(\"several\", [\"arguments\"])" ]
 
-[sub_resource type="Resource" id=4]
-script = ExtResource( 1 )
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
 nodes = [ NodePath("/Enemy"), NodePath("/Enemy2"), NodePath("/Enemy3") ]
 file_path = "res://game/Enemy.gd"
 original_script = "extends KinematicBody2D
@@ -125,12 +77,63 @@ func _physics_process(delta):
 "
 name = "Enemy"
 slices = {
-"slice": SubResource( 3 )
+"slice": SubResource( 1 )
+}
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 1 )
+leading_spaces = 0
+keyword = "EXPORT"
+closing = false
+name = ""
+global = true
+start = 0
+end = 27
+lines_before = [ "# EXPORT", "extends KinematicBody2D", "", "export var speed := 1200", "export var jump_speed := -1800", "export var gravity := 4000", "export (float, 0, 1.0) var friction := 0.1", "export (float, 0, 1.0) var acceleration := 0.25", "", "var velocity = Vector2.ZERO", "", "", "func _physics_process(delta):", "	var direction = Vector2(Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\"), Input.get_action_strength(\"ui_up\") - Input.get_action_strength(\"ui_down\")).normalized()", "", "	if direction.x != 0:", "		velocity.x = lerp(velocity.x, direction.x * speed, acceleration)", "	else:", "		velocity.x = lerp(velocity.x, 0, friction)", "", "	velocity.y += gravity * delta", "	velocity = move_and_slide(velocity, Vector2.UP)", "", "	if Input.is_action_just_pressed(\"jump\"):", "		if is_on_floor():", "			velocity.y = jump_speed", "" ]
+lines_after = [ "extends KinematicBody2D", "", "export var speed := 1200", "export var jump_speed := -1800", "export var gravity := 4000", "export (float, 0, 1.0) var friction := 0.1", "export (float, 0, 1.0) var acceleration := 0.25", "", "var velocity = Vector2.ZERO", "", "", "func _physics_process(delta):", "	var direction = Vector2(Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\"), Input.get_action_strength(\"ui_up\") - Input.get_action_strength(\"ui_down\")).normalized()", "", "	if direction.x != 0:", "		velocity.x = lerp(velocity.x, direction.x * speed, acceleration)", "	else:", "		velocity.x = lerp(velocity.x, 0, friction)", "", "	velocity.y += gravity * delta", "	velocity = move_and_slide(velocity, Vector2.UP)", "", "	if Input.is_action_just_pressed(\"jump\"):", "		if is_on_floor():", "			velocity.y = jump_speed", "" ]
+lines_editable = [ "extends KinematicBody2D", "", "export var speed := 1200", "export var jump_speed := -1800", "export var gravity := 4000", "export (float, 0, 1.0) var friction := 0.1", "export (float, 0, 1.0) var acceleration := 0.25", "", "var velocity = Vector2.ZERO", "", "", "func _physics_process(delta):", "	var direction = Vector2(Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\"), Input.get_action_strength(\"ui_up\") - Input.get_action_strength(\"ui_down\")).normalized()", "", "	if direction.x != 0:", "		velocity.x = lerp(velocity.x, direction.x * speed, acceleration)", "	else:", "		velocity.x = lerp(velocity.x, 0, friction)", "", "	velocity.y += gravity * delta", "	velocity = move_and_slide(velocity, Vector2.UP)", "", "	if Input.is_action_just_pressed(\"jump\"):", "		if is_on_floor():", "			velocity.y = jump_speed", "" ]
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+nodes = [ NodePath("/Player") ]
+file_path = "res://game/Player.gd"
+original_script = "# EXPORT
+extends KinematicBody2D
+
+export var speed := 1200
+export var jump_speed := -1800
+export var gravity := 4000
+export (float, 0, 1.0) var friction := 0.1
+export (float, 0, 1.0) var acceleration := 0.25
+
+var velocity = Vector2.ZERO
+
+
+func _physics_process(delta):
+	var direction = Vector2(Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\"), Input.get_action_strength(\"ui_up\") - Input.get_action_strength(\"ui_down\")).normalized()
+
+	if direction.x != 0:
+		velocity.x = lerp(velocity.x, direction.x * speed, acceleration)
+	else:
+		velocity.x = lerp(velocity.x, 0, friction)
+
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity, Vector2.UP)
+
+	if Input.is_action_just_pressed(\"jump\"):
+		if is_on_floor():
+			velocity.y = jump_speed
+"
+name = "Player"
+slices = {
+"*": SubResource( 3 )
 }
 
 [resource]
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 files = {
-"res://game/Enemy.gd": SubResource( 4 ),
-"res://game/Player.gd": SubResource( 2 )
+"res://game/Enemy.gd": SubResource( 2 ),
+"res://game/Player.gd": SubResource( 4 )
 }
+scene = ExtResource( 4 )
+scene_viewport_size = Vector2( 1024, 600 )

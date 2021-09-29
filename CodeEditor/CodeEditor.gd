@@ -45,9 +45,11 @@ onready var _overlays: Control = $Overlays
 
 
 func _ready() -> void:
+	print(_character_width)
 	if Engine.editor_hint:
 		return
 	_enhance_syntax_highlighting()
+	# warning-ignore:return_value_discarded
 	connect("text_changed", self, "_on_text_changed")
 	for child in get_children():
 		if child is VScrollBar:
@@ -55,24 +57,12 @@ func _ready() -> void:
 		elif child is HScrollBar:
 			_hscrollbar = child
 
+	# warning-ignore:return_value_discarded
 	_hscrollbar.connect("value_changed", self, "_on_scrollbar_changed")
+	# warning-ignore:return_value_discarded
 	_vscrollbar.connect("value_changed", self, "_on_scrollbar_changed")
 
 	_offset = _calculate_offset()
-
-
-#	set_errors(
-#		[
-#			{
-#				message = "Test error",
-#				range = {start = {character = 0, line = 4}, end = {character = 40, line = 4}}
-#			},
-#			{
-#				message = "Test error",
-#				range = {start = {character = 0, line = 20}, end = {character = 40, line = 20}}
-#			},
-#		]
-#	)
 
 
 func _on_scrollbar_changed(_value):
@@ -100,7 +90,9 @@ func update_overlays() -> void:
 		_overlays.add_child(overlay)
 
 		var panel_position := region.position + Vector2(0, _row_height) + rect_global_position
+		# warning-ignore:return_value_discarded
 		overlay.connect("mouse_entered", _error_panel, "display", [error.message, panel_position])
+		# warning-ignore:return_value_discarded
 		overlay.connect("mouse_exited", _error_panel, "hide")
 
 
@@ -140,6 +132,7 @@ func _enhance_syntax_highlighting() -> void:
 				add_keyword_color(key, COLOR_MEMBER)
 
 	var file := File.new()
+	# warning-ignore:return_value_discarded
 	file.open(keyword_data_path, file.READ)
 	var keywords: Dictionary = parse_json(file.get_as_text())
 	file.close()
@@ -196,7 +189,6 @@ func _restore_previous_text_version():
 	_store_current_cursor_position()
 	text = _original_text
 	_restore_current_cursor_position()
-
 
 func _on_text_changed() -> void:
 	var new_new_lines = text.count("\n")

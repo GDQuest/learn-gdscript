@@ -1,24 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends MarginContainer
+[ext_resource path="res://addons/exporter-for-live-editor/SliceEditorErrorOverlayMessage.gd" type="Script" id=1]
 
-export var offset := Vector2(6.0, 6.0)
-
-onready var _label: Label = $Label
-
-
-func _ready() -> void:
-	hide()
-
-
-func display(message: String, position: Vector2) -> void:
-	_label.text = message
-	rect_global_position = position
-	show()
-"
-
-[node name="ErrorFloatingPanel" type="MarginContainer"]
+[node name="SliceEditorErrorOverlayMessage" type="MarginContainer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -28,7 +12,7 @@ margin_top = -20.0
 margin_right = 20.0
 margin_bottom = 20.0
 mouse_filter = 2
-script = SubResource( 1 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -61,7 +61,13 @@ func _collect_scripts(scene: Node, node: Node, repository: SceneFiles, limit: in
 			_collect_scripts(scene, child, repository, limit)
 
 
-func collect_script(scene: Node, limit := 1000) -> SceneFiles:
+func collect_script(packed_scene: PackedScene, scene: Node, limit := 1000) -> SceneFiles:
 	var repository := SceneFiles.new()
+	repository.scene = packed_scene
+	var viewport_size := Vector2(
+		float(ProjectSettings.get_setting("display/window/size/width")),
+		float(ProjectSettings.get_setting("display/window/size/height"))
+	)
+	repository.scene_viewport_size = viewport_size
 	_collect_scripts(scene, scene, repository, limit)
 	return repository

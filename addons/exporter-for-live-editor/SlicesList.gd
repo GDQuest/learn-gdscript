@@ -4,7 +4,7 @@ const SceneFiles := preload("./collection/SceneFiles.gd")
 const ScriptHandler := preload("./collection/ScriptHandler.gd")
 const ScriptSlice := preload("./collection/ScriptSlice.gd")
 
-signal slice_selected(slice)
+signal slice_selected(sript_slice)
 
 export(Resource) var exported_scene: Resource setget set_exported_scene, get_exported_scene
 

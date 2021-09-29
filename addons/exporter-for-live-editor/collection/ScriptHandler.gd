@@ -99,12 +99,12 @@ func _get_script_slices(script: String):
 					var previous_slice: ScriptSlice = waiting_slices[slice.name]
 					waiting_slices.erase(slice.name)
 					previous_slice.end = index
-					previous_slice.main_text = lines
+					previous_slice.set_main_lines(lines)
 					completed_slices[slice.name] = previous_slice
 			elif slice.name:
 				waiting_slices[slice.name] = slice
 			elif slice.global:
-				slice.main_text = lines
+				slice.set_main_lines(lines)
 				slice.end = lines.size()
 				completed_slices['*'] = slice
 	return completed_slices

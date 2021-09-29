@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://addons/exporter-for-live-editor/SliceEditor.gd" type="Script" id=1]
+[ext_resource path="res://addons/exporter-for-live-editor/SlicesList.gd" type="Script" id=2]
+[ext_resource path="res://addons/exporter-for-live-editor/KitchenSink.gd" type="Script" id=3]
+[ext_resource path="res://addons/exporter-for-live-editor/GameViewport.gd" type="Script" id=4]
+[ext_resource path="res://game/Game.live-editor.tres" type="Resource" id=5]
+[ext_resource path="res://addons/exporter-for-live-editor/GameConsole.gd" type="Script" id=6]
+
+[node name="KitchenSink" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SlicesList" type="VBoxContainer" parent="."]
+margin_right = 100.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 100, 0 )
+script = ExtResource( 2 )
+exported_scene = ExtResource( 5 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 104.0
+margin_right = 520.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 3
+
+[node name="SliceEditor" type="TextEdit" parent="VBoxContainer"]
+margin_right = 416.0
+margin_bottom = 472.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "extends KinematicBody2D
+
+export var speed := 1200
+export var jump_speed := -1800
+export var gravity := 4000
+export (float, 0, 1.0) var friction := 0.1
+export (float, 0, 1.0) var acceleration := 0.25
+
+var velocity = Vector2.ZERO
+
+
+func _physics_process(delta):
+	var direction = Vector2(
+		Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\"),
+		Input.get_action_strength(\"ui_up\") - Input.get_action_strength(\"ui_down\")
+	).normalized()
+
+	if direction.x != 0:
+		velocity.x = lerp(velocity.x, direction.x * speed, acceleration)
+	else:
+		velocity.x = lerp(velocity.x, 0, friction)
+
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity, Vector2.UP)
+
+	if Input.is_action_just_pressed(\"ui_up\"):
+		if is_on_floor():
+			velocity.y = jump_speed
+"
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+draw_spaces = true
+smooth_scrolling = true
+caret_block_mode = true
+caret_blink = true
+script = ExtResource( 1 )
+
+[node name="Console" type="RichTextLabel" parent="VBoxContainer"]
+margin_top = 476.0
+margin_right = 416.0
+margin_bottom = 576.0
+rect_min_size = Vector2( 0, 100 )
+bbcode_enabled = true
+scroll_following = true
+script = ExtResource( 6 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 580.0
+margin_right = 416.0
+margin_bottom = 600.0
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_right = 41.0
+margin_bottom = 20.0
+text = "Save"
+
+[node name="GameViewport" type="ViewportContainer" parent="."]
+margin_left = 524.0
+margin_right = 1024.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 500, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 4 )
+exported_scene = ExtResource( 5 )

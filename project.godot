@@ -27,11 +27,13 @@ config/icon="res://icon.png"
 [autoload]
 
 EventBus="*res://EventBus.gd"
-LiveEditorExporterUtils="*res://addons/exporter-for-live-editor/utils/LiveEditorExporterUtils.gd"
 
 [debug]
 
-gdscript/warnings/return_value_discarded=false
+gdscript/warnings/unsafe_property_access=true
+gdscript/warnings/unsafe_method_access=true
+gdscript/warnings/unsafe_cast=true
+gdscript/warnings/unsafe_call_argument=true
 
 [editor_plugins]
 
@@ -39,7 +41,7 @@ enabled=PoolStringArray( "res://addons/editor_icon_previewer/plugin.cfg", "res:/
 
 [exporter-for-live-editor]
 
-scene="res://game/Game.tscn"
+scene="res://ScenePlayer.tscn"
 
 [input]
 

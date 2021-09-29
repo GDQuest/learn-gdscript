@@ -3,6 +3,9 @@ extends Resource
 const ScriptHandler := preload("./ScriptHandler.gd")
 
 export var files: Dictionary
+export var scene: PackedScene
+export var scene_viewport_size: Vector2
+
 var _current_index := 0
 var _current_array := []
 

@@ -16,6 +16,7 @@ var _timer := Timer.new()
 func _ready():
 	# EXPORT slice
 	add_child(_timer)
+	# warning-ignore:return_value_discarded
 	_timer.connect("timeout", self, "random_action")
 	_timer.start(time_span)
 	#print("a log thing")
