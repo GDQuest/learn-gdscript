@@ -34,7 +34,6 @@ static func test(current_file_name: String) -> bool:
 	var test_instance = test_file.new()
 	return test_instance != null
 
-
 func script_is_valid(script: GDScript) -> bool:
 	var result = export_key_regex.search(script.source_code)
 	if result:

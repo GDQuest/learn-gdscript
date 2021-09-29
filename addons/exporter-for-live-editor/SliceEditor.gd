@@ -19,6 +19,7 @@ var errors_overlay := SliceEditorOverlay.new()
 var errors_overlay_message: SliceEditorErrorOverlayMessage = SliceEditorErrorOverlayMessageScene.instance()
 
 var script_slice: ScriptSlice setget set_script_slice, get_script_slice
+var errors := [] setget set_errors
 
 func _ready() -> void:
 	CodeEditorEnhancer.enhance(self)
@@ -50,9 +51,10 @@ func _get_configuration_warning() -> String:
 func _on_scrollbar_value_changed(value: float, direction: int) -> void:
 	var vec2 = Vector2(0, value) if direction == SCROLL_DIR.VERTICAL else Vector2(value, 0)
 	emit_signal("scroll_changed", vec2)
+	update_overlays()
 
 
-func update_overlays(errors: Array) -> void:
+func update_overlays() -> void:
 	errors_overlay.clean()
 
 	var show_lines_from = script_slice.start_offset
@@ -64,19 +66,23 @@ func update_overlays(errors: Array) -> void:
 		var error: LanguageServerError = errors[index]
 		
 		var is_outside_lens: bool = (
-			(show_lines_from > 0 and error.range.start.line < show_lines_from)
-			or (show_lines_to > 0 and error.range.start.line > show_lines_to)
+			(show_lines_from > 0 and error.error_range.start.line < show_lines_from)
+			or (show_lines_to > 0 and error.error_range.start.line > show_lines_to)
 		)
 		if is_outside_lens:
 			continue
 
-		var error_overlay := errors_overlay.add_error(error, offset, scroll_offset)
+		var squiggly := errors_overlay.add_error(error, offset, scroll_offset)
 
-		var panel_position := error_overlay.panel_position
+		var panel_position := squiggly.panel_position
 		
-		error_overlay.connect("mouse_entered", errors_overlay_message, "display", [error.message, panel_position])
-		error_overlay.connect("mouse_exited", errors_overlay_message, "hide")
+		squiggly.connect("mouse_entered", errors_overlay_message, "display", [error.message, panel_position])
+		squiggly.connect("mouse_exited", errors_overlay_message, "hide")
 
+
+func set_errors(new_errors: Array) -> void:
+	errors = new_errors
+	update_overlays()
 
 func set_script_slice(new_script_slice: ScriptSlice) -> void:
 	script_slice = new_script_slice

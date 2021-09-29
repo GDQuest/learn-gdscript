@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/SliceEditor.gd" type="Script" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/SlicesList.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://addons/exporter-for-live-editor/GameViewport.gd" type="Script" id=4]
 [ext_resource path="res://game/Game.live-editor.tres" type="Resource" id=5]
 [ext_resource path="res://addons/exporter-for-live-editor/GameConsole.gd" type="Script" id=6]
+[ext_resource path="res://godot_theme.tres" type="Theme" id=7]
 
 [node name="KitchenSink" type="HBoxContainer"]
 anchor_right = 1.0
@@ -34,6 +35,7 @@ margin_right = 416.0
 margin_bottom = 472.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 7 )
 text = "extends KinematicBody2D
 
 export var speed := 1200

@@ -6,6 +6,8 @@ const SlicesList := preload("./SlicesList.gd")
 const SliceEditor := preload("./SliceEditor.gd")
 const GameViewport := preload("./GameViewport.gd")
 const GameConsole := preload("./GameConsole.gd")
+const ScriptVerifier := preload("./ScriptVerifier.gd")
+const LanguageServerError := preload("./LanguageServerError.gd")
 
 onready var slices_list := $SlicesList as SlicesList
 onready var slice_editor := $VBoxContainer/SliceEditor as SliceEditor
@@ -33,6 +35,15 @@ func _on_slice_selected(script_handler: ScriptHandler, script_slice: ScriptSlice
 func _on_save_button_pressed() -> void:
 	var script_text := current_slice.current_full_text
 	var node_paths := current_script_handler.nodes
+	var verifier = ScriptVerifier.new(self, script_text)
+	verifier.test()
+	var errors: Array = yield(verifier, "errors")
+	if errors.size():
+		slice_editor.errors = errors
+		for index in errors.size():
+			var error: LanguageServerError = errors[index]
+			print(error)
+		return
 	script_text = LiveEditorMessageBus.replace_script(script_text)
 	game_viewport.update_nodes(script_text, node_paths)
 
