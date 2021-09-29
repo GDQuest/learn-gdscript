@@ -44,12 +44,7 @@ func set_scene_files(new_scene_files: SceneFiles) -> void:
 	_viewport.add_child(_scene)
 
 
-func update_nodes(script_text: String, node_paths: Array) -> void:
-	var script = GDScript.new()
-	script.source_code = script_text
-	var success = script.reload()
-	if success != OK:
-		return
+func update_nodes(script: GDScript, node_paths: Array) -> void:
 	for node_path in node_paths:
 		var node = _scene.get_node(node_path)
 		node.set_script(script)

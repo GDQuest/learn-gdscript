@@ -43,13 +43,19 @@ func _on_save_button_pressed() -> void:
 		for index in errors.size():
 			var error: LanguageServerError = errors[index]
 			LiveEditorMessageBus.print_error(
-			error.message, 
-			error.error_range.start.line, 
-			error.error_range.start.character
-		)
+				error.message, 
+				error.error_range.start.line, 
+				error.error_range.start.character
+			)
 		return
 	script_text = LiveEditorMessageBus.replace_script(script_text)
-	game_viewport.update_nodes(script_text, node_paths)
+	var script = GDScript.new()
+	script.source_code = script_text
+	var success = script.reload()
+	if success != OK:
+		LiveEditorMessageBus.print_error("The script has an error, but the language server didn't catch it. Are you connected?")
+		return
+	game_viewport.update_nodes(script, node_paths)
 
 
 func _on_pause_button_pressed() -> void:
