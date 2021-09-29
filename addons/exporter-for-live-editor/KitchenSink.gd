@@ -42,7 +42,11 @@ func _on_save_button_pressed() -> void:
 		slice_editor.errors = errors
 		for index in errors.size():
 			var error: LanguageServerError = errors[index]
-			print(error)
+			LiveEditorMessageBus.print_error(
+			error.message, 
+			error.error_range.start.line, 
+			error.error_range.start.character
+		)
 		return
 	script_text = LiveEditorMessageBus.replace_script(script_text)
 	game_viewport.update_nodes(script_text, node_paths)

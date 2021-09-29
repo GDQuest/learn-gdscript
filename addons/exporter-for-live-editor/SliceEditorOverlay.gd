@@ -23,7 +23,6 @@ func add_error(error: LanguageServerError, offset: Vector2, scroll_offset: Vecto
 	error_overlay.rect_size = region.size
 	error_overlay.panel_position = region.position + Vector2(0, _row_height) + rect_global_position
 	add_child(error_overlay)
-	print(error_overlay)
 	return error_overlay
 
 
