@@ -7,13 +7,6 @@ var export_key_regex := RegExp.compile(SceneFiles.ScriptHandler.EXPORT_KEY)
 
 const SETTINGS_KEY = preload("./config.gd").SETTINGS_KEY
 
-var script_replacements := RegExp.collection({
-	"\\bprints\\((.*?)\\)": "EventBus.print_log([$1])",
-	"\\bprint\\((.*?)\\)": "EventBus.print_log([$1])",
-	"\\bpush_error\\((.*?)\\)": "EventBus.print_error($1)",
-	"\\bpush_warning\\((.*?)\\)": "EventBus.print_warning($1)",
-})
-
 # Returns a string representing the current scene,
 # or an empty string
 static func get_scene() -> String:

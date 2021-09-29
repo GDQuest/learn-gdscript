@@ -8,6 +8,7 @@ const ScriptSlice := preload("./collection/ScriptSlice.gd")
 var _scene: Node
 var _scene_files: SceneFiles setget set_scene_files
 var _viewport := Viewport.new()
+var scene_paused := false setget set_scene_paused
 
 export(Resource) var exported_scene: Resource setget set_exported_scene, get_exported_scene
 
@@ -43,21 +44,30 @@ func set_scene_files(new_scene_files: SceneFiles) -> void:
 	_viewport.add_child(_scene)
 
 
-func update_nodes(script_handler: ScriptHandler, script_slice: ScriptSlice) -> void:
-	var script_text = script_slice.current_full_text
+func update_nodes(script_text: String, node_paths: Array) -> void:
 	var script = GDScript.new()
 	script.source_code = script_text
-	script.reload()
-	for node_path in script_handler.nodes:
+	var success = script.reload()
+	if success != OK:
+		return
+	for node_path in node_paths:
 		var node = _scene.get_node(node_path)
 		node.set_script(script)
-		
+
 
 func pause_scene(pause := true, limit := 1000) -> void:
 	if not _scene:
 		return
+	if scene_paused == pause:
+		return
+	scene_paused = pause
 	pause_node(_scene, pause, limit)
 
+func toggle_scene_pause() -> void:
+	pause_scene(not scene_paused)
+
+func set_scene_paused(is_it: bool) -> void:
+	pause_scene(is_it)
 
 func set_exported_scene(new_scene_files: Resource) -> void:
 	assert(new_scene_files != null, "no scene slices provided")

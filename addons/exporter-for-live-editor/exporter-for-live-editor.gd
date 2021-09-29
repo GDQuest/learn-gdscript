@@ -2,6 +2,7 @@ tool
 extends EditorPlugin
 
 const LiveEditorExporterUtils := preload("./utils/LiveEditorExporterUtils.gd")
+const LiveEditorMessageBus := preload("./LiveEditorMessageBus.gd")
 var exporter_utils := LiveEditorExporterUtils.new()
 var file_dialog := preload("./ui/file_dialog.gd").new()
 var container := preload("./ui/container.gd").new()
@@ -10,7 +11,7 @@ var config := preload("./utils/config.gd").new(self)
 const SceneFiles := preload("./collection/SceneFiles.gd")
 
 func _enter_tree() -> void:
-	#add_autoload_singleton("LiveEditorExporterUtils", LiveEditorExporterUtils.resource_path)
+	add_autoload_singleton("LiveEditorMessageBus", LiveEditorMessageBus.resource_path)
 
 	connect("scene_changed", self, "_on_scene_changed")
 	connect("main_screen_changed", self, "_on_screen_changed")
@@ -38,7 +39,7 @@ func _exit_tree() -> void:
 	remove_control_from_container(CONTAINER_TOOLBAR, container)
 	container.queue_free()
 	file_dialog.queue_free()
-	#remove_autoload_singleton("LiveEditorExporterUtils")
+	remove_autoload_singleton("LiveEditorMessageBus")
 
 
 func _on_file_dialog_file_selected(path: String) -> void:
