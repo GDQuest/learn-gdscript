@@ -1,11 +1,13 @@
 extends Node
 class_name Validator
 
-const _ERROR = "you should extend the Validator class and implement your own `validate` method"
-
 signal validation_completed(errors)
 
+const _ERROR = "You should extend the Validator class and implement your own `validate` method."
 
+
+# Virtual method.
+# Must emit the validation_completed signal to complete validation.
 func validate(_scene: Node, _script_text: String):
 	push_error(_ERROR)
 	yield(get_tree(), "idle_frame")

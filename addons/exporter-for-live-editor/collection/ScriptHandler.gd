@@ -1,11 +1,10 @@
-## Manages one script. Maintains a list of nodes using that script, 
+## Manages one script. Maintains a list of nodes using that script,
 ## and can replace their script.
 extends Resource
 
 const RegExp := preload("../utils/RegExp.gd")
 const ScriptSlice := preload("./ScriptSlice.gd")
 const EXPORT_KEY = "(?m)^(?<leading_spaces>\\t*)#\\s(?<closing>\\/)?(?<keyword>EXPORT)(?: +(?<name>[\\w\\d]+))?"
-
 
 export var nodes: Array
 export var file_path := ""
@@ -15,15 +14,19 @@ var _current_index := 0
 var _current_array := []
 export var slices := {}
 
-var sanitization_replacements := RegExp.collection({
-	"\\r\\n": "\\n",
-})
+var sanitization_replacements := RegExp.collection(
+	{
+		"\\r\\n": "\\n",
+	}
+)
 
 var export_key_regex := RegExp.compile(EXPORT_KEY)
 var leading_spaces_regex := RegExp.compile("(?m)^(?:  )+")
 
+
 func _init() -> void:
 	nodes = []
+
 
 func set_initial_script(initial_script: GDScript) -> void:
 	file_path = initial_script.resource_path
@@ -33,7 +36,7 @@ func set_initial_script(initial_script: GDScript) -> void:
 
 
 func _to_string():
-	return '`%s`' % [file_path]
+	return "`%s`" % [file_path]
 
 
 func _iterator_is_valid() -> bool:
@@ -87,7 +90,7 @@ func _get_script_slices(script: String):
 		if spacesMatch:
 			var spaces: String = spacesMatch.strings[0]
 			var length = spaces.length()
-			var replacement = "\\t".repeat(length/ 2)
+			var replacement = "\\t".repeat(length / 2)
 			line = replacement + line.substr(length)
 		var exportMatch := export_key_regex.search(line)
 		if exportMatch:
@@ -106,5 +109,5 @@ func _get_script_slices(script: String):
 			elif slice.global:
 				slice.set_main_lines(lines, true)
 				slice.end = lines.size()
-				completed_slices['*'] = slice
+				completed_slices["*"] = slice
 	return completed_slices

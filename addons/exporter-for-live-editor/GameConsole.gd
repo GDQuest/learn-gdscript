@@ -6,7 +6,7 @@ func _ready() -> void:
 
 
 func _on_print_request(type: int, thing_to_print: String, line_nb: int, character: int) -> void:
-	var prefix = "(%s:%s)"%[line_nb, character]
+	var prefix = "(%s:%s)" % [line_nb, character]
 	match type:
 		LiveEditorMessageBus.MESSAGE_TYPE.ASSERT:
 			prefix = " ASSERT: "

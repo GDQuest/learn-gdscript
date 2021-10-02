@@ -1,7 +1,6 @@
 extends Resource
 const RegExp := preload("../utils/RegExp.gd")
 
-
 export var leading_spaces := 0
 export var keyword := "EXPORT"
 export var closing := false
@@ -18,6 +17,7 @@ var current_text: String setget set_current_text, get_current_text
 var current_full_text: String setget _read_only, get_current_full_text
 var start_offset: int setget _read_only, get_start_offset
 var end_offset: int setget _read_only, get_end_offset
+
 
 func _init() -> void:
 	lines_before = []
@@ -54,9 +54,11 @@ func set_main_lines(lines: Array, is_global := false) -> void:
 
 
 func get_main_lines() -> Array:
-	var middle_text := Array(indent_text(leading_spaces, lines_editable)) \
-		if leading_spaces \
+	var middle_text := (
+		Array(indent_text(leading_spaces, lines_editable))
+		if leading_spaces
 		else lines_editable
+	)
 	return lines_before + middle_text + lines_after
 
 
@@ -77,9 +79,7 @@ func get_current_full_text() -> String:
 	if current_text == "":
 		return get_full_text()
 	var lines = current_text.split("\n")
-	var middle_text := Array(indent_text(leading_spaces, lines) \
-		if leading_spaces \
-		else lines)
+	var middle_text := Array(indent_text(leading_spaces, lines) if leading_spaces else lines)
 	return PoolStringArray(lines_before + middle_text + lines_after).join("\n")
 
 
@@ -104,13 +104,13 @@ func get_end_offset() -> int:
 func _to_json() -> Dictionary:
 	return {
 		"leading_spaces": leading_spaces,
-		"keyword" : keyword,
-		"closing" : closing,
-		"name" : name,
-		"global" : global,
-		"start" : start,
-		"end" : end,
-		"lines_editable" : lines_editable,
+		"keyword": keyword,
+		"closing": closing,
+		"name": name,
+		"global": global,
+		"start": start,
+		"end": end,
+		"lines_editable": lines_editable,
 		"lines_before": lines_before,
 		"lines_after": lines_after
 	}

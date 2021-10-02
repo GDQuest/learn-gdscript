@@ -1,10 +1,10 @@
 extends Reference
 
-const PLUGIN_NAME := 'exporter-for-live-editor'
+const PLUGIN_NAME := "exporter-for-live-editor"
 const SETTINGS_KEY := PLUGIN_NAME + "/scene"
 const DO_RUN_KEY := PLUGIN_NAME + "/run"
-const PLUGIN_CONFIG_DIR := 'addons'
-const PLUGIN_CONFIG := 'settings.cfg'
+const PLUGIN_CONFIG_DIR := "addons"
+const PLUGIN_CONFIG := "settings.cfg"
 
 var _plugin_config = ConfigFile.new()
 var _plugin: EditorPlugin

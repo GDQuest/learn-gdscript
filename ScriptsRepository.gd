@@ -20,7 +20,7 @@ func add_script(script: GDScript, node: Node) -> void:
 
 
 func _to_string():
-	return '(scripts: %s)' % [PoolStringArray(repository.values()).join(", ")]
+	return "(scripts: %s)" % [PoolStringArray(repository.values()).join(", ")]
 
 
 func _iterator_is_valid() -> bool:

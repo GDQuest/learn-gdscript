@@ -1,5 +1,5 @@
-## Manages one script. Maintains a list of nodes using that script, and can
-## replace their script.
+# Manages one script. Maintains a list of nodes using that script, and can
+# replace their script.
 extends Reference
 
 const ScriptVerifier := preload("./ScriptVerifier.gd")
@@ -46,7 +46,7 @@ func _init(initial_script: GDScript, node: Node) -> void:
 
 
 func _to_string():
-	return '`%s`' % [script_object.resource_path]
+	return "`%s`" % [script_object.resource_path]
 
 
 ## Takes the provided text, compiles it as a new GDScript, saves it to the user's

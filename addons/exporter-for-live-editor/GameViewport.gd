@@ -1,4 +1,3 @@
-
 extends ViewportContainer
 
 const SceneFiles := preload("./collection/SceneFiles.gd")
@@ -11,6 +10,7 @@ var _viewport := Viewport.new()
 var scene_paused := false setget set_scene_paused
 
 export(Resource) var exported_scene: Resource setget set_exported_scene, get_exported_scene
+
 
 func _init() -> void:
 	_viewport.name = "Viewport"
@@ -58,16 +58,22 @@ func pause_scene(pause := true, limit := 1000) -> void:
 	scene_paused = pause
 	pause_node(_scene, pause, limit)
 
+
 func toggle_scene_pause() -> void:
 	pause_scene(not scene_paused)
+
 
 func set_scene_paused(is_it: bool) -> void:
 	pause_scene(is_it)
 
+
 func set_exported_scene(new_scene_files: Resource) -> void:
 	assert(new_scene_files != null, "no scene slices provided")
 	var scene_files := new_scene_files as SceneFiles
-	assert(scene_files is SceneFiles, "file '%s' is not an instance of SceneFiles."%[new_scene_files.resource_path])
+	assert(
+		scene_files is SceneFiles,
+		"file '%s' is not an instance of SceneFiles." % [new_scene_files.resource_path]
+	)
 	set_scene_files(scene_files)
 
 

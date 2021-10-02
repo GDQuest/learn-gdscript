@@ -12,17 +12,22 @@ var selected_value setget set_selected_value, get_selected_value
 var _button_group := ButtonGroup.new()
 var _buttons_index := {}
 
+
 func set_exported_scene(new_scene_files: Resource) -> void:
 	exported_scene = new_scene_files
 	assert(new_scene_files != null, "no scene slices provided")
 	var scene_files := new_scene_files as SceneFiles
-	assert(scene_files is SceneFiles, "file '%s' is not an instance of SceneFiles."%[new_scene_files.resource_path])
+	assert(
+		scene_files is SceneFiles,
+		"file '%s' is not an instance of SceneFiles." % [new_scene_files.resource_path]
+	)
 	clean()
 	read_scene_files(scene_files)
 
 
 func get_exported_scene() -> SceneFiles:
 	return exported_scene as SceneFiles
+
 
 func read_scene_files(scene_files: SceneFiles) -> void:
 	for _script_handler in scene_files:
@@ -52,8 +57,10 @@ func clean() -> void:
 		remove_child(child)
 		child.queue_free()
 
+
 func get_selected_value() -> BaseButton:
 	return _button_group.get_pressed_button()
+
 
 func select_first() -> void:
 	var button: BaseButton = _button_group.get_buttons()[0]
@@ -61,6 +68,7 @@ func select_first() -> void:
 		button.pressed
 	else:
 		push_warning("select_first called, but there are no buttons")
+
 
 func set_selected_value(new_value) -> void:
 	if new_value in _buttons_index:

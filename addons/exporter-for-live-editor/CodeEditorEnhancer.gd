@@ -123,8 +123,8 @@ const KEYWORDS := [
 	"yield"
 ]
 
+
 static func enhance(text_edit: TextEdit) -> void:
-	
 	text_edit.syntax_highlighting = true
 	text_edit.show_line_numbers = true
 	text_edit.draw_tabs = true
@@ -132,7 +132,7 @@ static func enhance(text_edit: TextEdit) -> void:
 	text_edit.smooth_scrolling = true
 	text_edit.caret_block_mode = true
 	text_edit.caret_blink = true
-	
+
 	text_edit.add_color_region('"', '"', COLOR_QUOTES)
 	text_edit.add_color_region("'", "'", COLOR_QUOTES)
 	text_edit.add_color_region("#", "\n", COLOR_COMMENTS, true)

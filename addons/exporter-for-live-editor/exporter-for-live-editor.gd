@@ -10,6 +10,7 @@ var config := preload("./utils/config.gd").new(self)
 
 const SceneFiles := preload("./collection/SceneFiles.gd")
 
+
 func _enter_tree() -> void:
 	add_autoload_singleton("LiveEditorMessageBus", LiveEditorMessageBus.resource_path)
 
@@ -78,30 +79,28 @@ func _on_scene_changed(new_scene: Node):
 func _on_screen_changed(new_screen: String) -> void:
 	if new_screen == "2D" or new_screen == "3D":
 		container.show()
-	else:
-		pass
-		#container.hide()
+
 
 func _save(collector: SceneFiles) -> void:
 	var file_name = config.scene_path.get_basename() + ".live-editor.tres"
 	var success = ResourceSaver.save(file_name, collector)
 	if success == OK:
-		print("Wrote the configuration to %s"%[file_name])
+		print("Wrote the configuration to %s" % [file_name])
 	else:
-		push_error("Could not write the configuration to %s"%[file_name])
-	
+		push_error("Could not write the configuration to %s" % [file_name])
+
+
 func _on_run_button_pressed() -> void:
 	if not config.scene_path:
 		return
-	
+
 	var packed_scene: PackedScene = load(config.scene_path)
 	var scene = packed_scene.instance()
 	scene.hide()
 	add_child(scene)
-	
+
 	var collector: SceneFiles = exporter_utils.collect_script(packed_scene, scene)
 	_save(collector)
-	
+
 	remove_child(scene)
 	scene.queue_free()
-	#get_editor_interface().play_main_scene()

@@ -13,8 +13,9 @@ var _current_array := []
 func _init() -> void:
 	files = {}
 
-## If the provided script is new, adds a script file to the files.
-## Otherwise, adds the provided node as a dependency of this script.
+
+# If the provided script is new, adds a script file to the files.
+# Otherwise, adds the provided node as a dependency of this script.
 func add_node(root_scene: Node, script: GDScript, node: Node) -> void:
 	var script_path := script.resource_path
 	if not (script_path in files):
@@ -27,7 +28,7 @@ func add_node(root_scene: Node, script: GDScript, node: Node) -> void:
 
 
 func _to_string():
-	return '(scripts: %s)' % [PoolStringArray(files.values()).join(", ")]
+	return "(scripts: %s)" % [PoolStringArray(files.values()).join(", ")]
 
 
 func _iterator_is_valid() -> bool:

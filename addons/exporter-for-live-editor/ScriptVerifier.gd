@@ -1,14 +1,13 @@
 const LanguageServerError := preload("./LanguageServerError.gd")
-const http_request_name = '___HTTP_REQUEST___'
+const http_request_name = "___HTTP_REQUEST___"
 
 signal errors(errors)
 
 var _node: Node
 var _new_script_text: String
 var max_severity := 2
-var blacklist_codes := {
-	16: true # unused return value.
-}
+var blacklist_codes := {16: true}  # unused return value.
+
 
 func _init(attached_node: Node, new_script_text: String) -> void:
 	_node = attached_node
@@ -39,22 +38,19 @@ func _on_http_request_completed(
 	)
 	remove_http_request_node()
 	var errors = []
-	
+
 	if not response.size():
 		emit_signal("errors", errors)
-		
+
 	for index in response.size():
 		var dict: Dictionary = response[index]
 		# unused return value.
-		if \
-			dict.code in blacklist_codes \
-			or \
-			dict.severity > max_severity:
-				continue
+		if dict.code in blacklist_codes or dict.severity > max_severity:
+			continue
 		var error = LanguageServerError.new()
 		error.fromJSON(dict)
 		errors.append(error)
-	
+
 	emit_signal("errors", errors)
 
 

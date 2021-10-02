@@ -1,6 +1,7 @@
 const ScriptManager = preload("./ScriptManager.gd")
 const ScriptsRepository = preload("./ScriptsRepository.gd")
 
+
 static func collect_scripts(
 	node: Node, scripts := Array(), repository := ScriptsRepository.new(), limit := 1000
 ) -> ScriptsRepository:
@@ -15,5 +16,3 @@ static func collect_scripts(
 		for child in node.get_children():
 			collect_scripts(child, scripts, repository, limit)
 	return repository
-
-

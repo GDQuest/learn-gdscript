@@ -19,10 +19,11 @@ onready var game_console := $VBoxContainer/Console as GameConsole
 var current_slice: ScriptSlice
 var current_script_handler: ScriptHandler
 
+
 func _ready() -> void:
 	save_button.connect("pressed", self, "_on_save_button_pressed")
 	pause_button.connect("pressed", self, "_on_pause_button_pressed")
-	
+
 	slices_list.connect("slice_selected", self, "_on_slice_selected")
 
 
@@ -43,9 +44,7 @@ func _on_save_button_pressed() -> void:
 		for index in errors.size():
 			var error: LanguageServerError = errors[index]
 			LiveEditorMessageBus.print_error(
-				error.message, 
-				error.error_range.start.line, 
-				error.error_range.start.character
+				error.message, error.error_range.start.line, error.error_range.start.character
 			)
 		return
 	script_text = LiveEditorMessageBus.replace_script(script_text)
@@ -53,7 +52,9 @@ func _on_save_button_pressed() -> void:
 	script.source_code = script_text
 	var success = script.reload()
 	if success != OK:
-		LiveEditorMessageBus.print_error("The script has an error, but the language server didn't catch it. Are you connected?")
+		LiveEditorMessageBus.print_error(
+			"The script has an error, but the language server didn't catch it. Are you connected?"
+		)
 		return
 	game_viewport.update_nodes(script, node_paths)
 

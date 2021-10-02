@@ -2,7 +2,7 @@ tool
 extends VBoxContainer
 
 export var title := "Expand" setget set_title
-export var collapsed := false setget set_collapsed
+export var is_collapsed := false setget set_collapsed
 
 onready var _button: Button = $Title
 onready var _container: Control = _button
@@ -11,25 +11,17 @@ onready var _tween: Tween = $Title/Tween
 
 
 func _ready() -> void:
-	_button.pressed = not collapsed
-	_button.connect("toggled", self, "_on__button_toggled")
-	set_collapsed(collapsed)
-
-
-func _on__button_toggled(_toggled: bool) -> void:
-	toggle()
-
-
-func toggle() -> void:
-	set_collapsed(not collapsed)
+	_button.pressed = not is_collapsed
+	_button.connect("toggled", self, "set_collapsed")
+	set_collapsed(is_collapsed)
 
 
 func set_collapsed(new_collapsed: bool) -> void:
-	collapsed = new_collapsed
+	is_collapsed = new_collapsed
 	if not is_inside_tree():
 		yield(self, "ready")
 	_tween.stop_all()
-	if collapsed:
+	if is_collapsed:
 		_tween.interpolate_property(_chevron, "rect_rotation", _chevron.rect_rotation, 0, .2)
 		for child in get_children():
 			if child != _container:
