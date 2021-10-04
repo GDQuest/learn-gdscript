@@ -69,7 +69,7 @@ func validate_and_set(scene: Node, script_text: String) -> void:
 		set_status(STATUS.INVALID)
 
 
-func _get_configuration_warning() -> void:
+func _get_configuration_warning() -> String:
 	for child in get_children():
 		if child is Validator:
 			return ""

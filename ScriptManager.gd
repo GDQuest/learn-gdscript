@@ -2,7 +2,7 @@
 # replace their script.
 extends Reference
 
-const ScriptVerifier := preload("./ScriptVerifier.gd")
+const ScriptVerifier := preload("res://addons/exporter-for-live-editor/lsp/ScriptVerifier.gd")
 
 signal errors(errors)
 

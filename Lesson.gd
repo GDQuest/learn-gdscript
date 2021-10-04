@@ -1,12 +1,13 @@
 extends MarginContainer
 
 const Goal := preload("res://CodeEditor/Goal.gd")
+const ScenePlayer := preload("res://ScenePlayer.gd")
 
 const STATUS := Goal.STATUS
 
 var goals := []
 
-onready var _scene_player: ScenePlayer = $HSplitContainer/ScenePlayer
+onready var _scene_player := $HSplitContainer/ScenePlayer as ScenePlayer
 
 
 func _ready():

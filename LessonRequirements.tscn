@@ -25,23 +25,21 @@ size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1010.0
-margin_bottom = 225.0
+margin_bottom = 282.0
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
 margin_right = 1010.0
-margin_bottom = 225.0
+margin_bottom = 282.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Summary" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 4 )]
 margin_right = 1010.0
-margin_bottom = 20.0
+margin_bottom = 39.0
 title = "Summary"
-collapsed = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Summary"]
-visible = false
 margin_top = 24.0
 margin_right = 1010.0
 margin_bottom = 39.0
@@ -59,9 +57,9 @@ fit_content_height = true
 scroll_active = false
 
 [node name="Goals" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 4 )]
-margin_top = 24.0
+margin_top = 43.0
 margin_right = 1010.0
-margin_bottom = 93.0
+margin_bottom = 112.0
 title = "Goals"
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Goals"]
@@ -86,41 +84,39 @@ fit_content_height = true
 scroll_active = false
 
 [node name="Hints" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 4 )]
-margin_top = 97.0
+margin_top = 116.0
 margin_right = 1010.0
-margin_bottom = 165.0
+margin_bottom = 222.0
 title = "Hints"
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints"]
 margin_top = 24.0
 margin_right = 1010.0
-margin_bottom = 68.0
+margin_bottom = 106.0
 custom_constants/margin_right = 34
 custom_constants/margin_left = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints/MarginContainer"]
 margin_left = 10.0
 margin_right = 976.0
-margin_bottom = 44.0
+margin_bottom = 82.0
 
 [node name="Hint1" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints/MarginContainer/VBoxContainer" instance=ExtResource( 4 )]
 margin_right = 966.0
-margin_bottom = 20.0
+margin_bottom = 39.0
 title = "First Hint"
-collapsed = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints/MarginContainer/VBoxContainer/Hint1"]
-visible = false
-margin_top = 36.0
-margin_right = 456.0
-margin_bottom = 59.0
+margin_top = 24.0
+margin_right = 966.0
+margin_bottom = 39.0
 custom_constants/margin_right = 34
 custom_constants/margin_left = 10
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints/MarginContainer/VBoxContainer/Hint1/MarginContainer2"]
 margin_left = 10.0
-margin_right = 422.0
-margin_bottom = 23.0
+margin_right = 932.0
+margin_bottom = 15.0
 bbcode_enabled = true
 bbcode_text = "Use `Input.is_action_just_pressed`"
 text = "Use `Input.is_action_just_pressed`"
@@ -128,24 +124,22 @@ fit_content_height = true
 scroll_active = false
 
 [node name="Hint2" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints/MarginContainer/VBoxContainer" instance=ExtResource( 4 )]
-margin_top = 24.0
+margin_top = 43.0
 margin_right = 966.0
-margin_bottom = 44.0
+margin_bottom = 82.0
 title = "Second Hint"
-collapsed = true
 
 [node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints/MarginContainer/VBoxContainer/Hint2"]
-visible = false
-margin_top = 36.0
-margin_right = 456.0
-margin_bottom = 59.0
+margin_top = 24.0
+margin_right = 966.0
+margin_bottom = 39.0
 custom_constants/margin_right = 34
 custom_constants/margin_left = 10
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints/MarginContainer/VBoxContainer/Hint2/MarginContainer3"]
 margin_left = 10.0
-margin_right = 422.0
-margin_bottom = 23.0
+margin_right = 932.0
+margin_bottom = 15.0
 bbcode_enabled = true
 bbcode_text = "Use `Input.is_action_just_pressed`"
 text = "Use `Input.is_action_just_pressed`"
@@ -153,9 +147,9 @@ fit_content_height = true
 scroll_active = false
 
 [node name="Checks" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 4 )]
-margin_top = 169.0
+margin_top = 226.0
 margin_right = 1010.0
-margin_bottom = 225.0
+margin_bottom = 282.0
 title = "Checks"
 
 [node name="Goal" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Checks" instance=ExtResource( 3 )]
