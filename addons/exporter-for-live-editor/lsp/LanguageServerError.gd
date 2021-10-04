@@ -1,3 +1,13 @@
+## Represents a Language Server Protocol error.
+## Simply mirrors the JSON structure, with the notable exception of
+## `error_range` instead of `range` ("range" is a reserved word in 
+## GDScript).
+## 
+## Use it like so:
+## ```
+## var error = LanguageServerError.new()
+## error.from_JSON(json_error)
+## ```
 extends Reference
 
 var error_range := LanguageServerRange.new()
@@ -6,11 +16,11 @@ var severity := 0
 var code := 0
 
 
-func fromJSON(json: Dictionary) -> void:
+func from_JSON(json: Dictionary) -> void:
 	if "message" in json:
 		message = String(json.message)
 	if "range" in json:
-		error_range.fromJSON(json.range)
+		error_range.from_JSON(json.range)
 	if "severity" in json:
 		severity = int(json.severity)
 	if "code" in json:
@@ -25,11 +35,11 @@ class LanguageServerRange:
 	var start := LanguageServerPosition.new()
 	var end := LanguageServerPosition.new()
 
-	func fromJSON(json: Dictionary) -> void:
+	func from_JSON(json: Dictionary) -> void:
 		if "start" in json:
-			start.fromJSON(json.start)
+			start.from_JSON(json.start)
 		if "end" in json:
-			end.fromJSON(json.end)
+			end.from_JSON(json.end)
 
 	func _to_string() -> String:
 		return "[%s-%s]" % [start, end]
@@ -39,7 +49,7 @@ class LanguageServerPosition:
 	var character := 0
 	var line := 0
 
-	func fromJSON(json: Dictionary) -> void:
+	func from_JSON(json: Dictionary) -> void:
 		if "character" in json:
 			character = int(json.character)
 		if "line" in json:

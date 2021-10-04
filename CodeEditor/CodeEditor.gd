@@ -21,7 +21,7 @@ export var edit_lines_from := 1
 export var edit_lines_to := 0
 export var rows_offset := 0
 
-export(String, FILE, "*.json") var keyword_data_path := "res://slide/widgets/text_edit/keywords.json"
+export (String, FILE, "*.json") var keyword_data_path := "res://slide/widgets/text_edit/keywords.json"
 
 ## Stores errors
 var errors := [] setget set_errors

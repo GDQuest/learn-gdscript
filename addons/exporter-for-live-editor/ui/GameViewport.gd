@@ -1,15 +1,18 @@
+# Holds a scene, and offers some utilities to play it, pause it,
+# and replace scripts on running nodes
 extends ViewportContainer
 
-const SceneFiles := preload("./collection/SceneFiles.gd")
-const ScriptHandler := preload("./collection/ScriptHandler.gd")
-const ScriptSlice := preload("./collection/ScriptSlice.gd")
+const SceneFiles := preload("../collections/SceneFiles.gd")
+const ScriptHandler := preload("../collections/ScriptHandler.gd")
+const ScriptSlice := preload("../collections/ScriptSlice.gd")
 
 var _scene: Node
-var _scene_files: SceneFiles setget set_scene_files
+var _scene_files: SceneFiles setget _set_scene_files
 var _viewport := Viewport.new()
 var scene_paused := false setget set_scene_paused
 
-export(Resource) var exported_scene: Resource setget set_exported_scene, get_exported_scene
+# Must be a SceneFiles resource
+export (Resource) var exported_scene: Resource setget set_exported_scene, get_exported_scene
 
 
 func _init() -> void:
@@ -17,6 +20,7 @@ func _init() -> void:
 	add_child(_viewport)
 
 
+# Recursively pauses a node and its children
 static func pause_node(node: Node, pause := true, limit := 1000) -> void:
 	node.set_process(not pause)
 	node.set_physics_process(not pause)
@@ -30,7 +34,9 @@ static func pause_node(node: Node, pause := true, limit := 1000) -> void:
 			pause_node(child, pause, limit)
 
 
-func set_scene_files(new_scene_files: SceneFiles) -> void:
+# Reads a SceneFile resource, and sets the scene contained within as the
+# child of the viewport
+func _set_scene_files(new_scene_files: SceneFiles) -> void:
 	if _scene_files == new_scene_files or not new_scene_files:
 		return
 	if not is_inside_tree():
@@ -44,12 +50,17 @@ func set_scene_files(new_scene_files: SceneFiles) -> void:
 	_viewport.add_child(_scene)
 
 
+# Updates all nodes with the given script.
+# If a node path isn't valid, the node will be silently skipped
 func update_nodes(script: GDScript, node_paths: Array) -> void:
 	for node_path in node_paths:
-		var node = _scene.get_node(node_path)
-		node.set_script(script)
+		if node_path is NodePath or node_path is String:
+			var node = _scene.get_node_or_null(node_path)
+			if node:
+				node.set_script(script)
 
 
+# Pauses the current GameViewport scene
 func pause_scene(pause := true, limit := 1000) -> void:
 	if not _scene:
 		return
@@ -59,6 +70,7 @@ func pause_scene(pause := true, limit := 1000) -> void:
 	pause_node(_scene, pause, limit)
 
 
+# Toggles a scene's paused state on and off
 func toggle_scene_pause() -> void:
 	pause_scene(not scene_paused)
 
@@ -74,7 +86,7 @@ func set_exported_scene(new_scene_files: Resource) -> void:
 		scene_files is SceneFiles,
 		"file '%s' is not an instance of SceneFiles." % [new_scene_files.resource_path]
 	)
-	set_scene_files(scene_files)
+	_set_scene_files(scene_files)
 
 
 func get_exported_scene() -> SceneFiles:

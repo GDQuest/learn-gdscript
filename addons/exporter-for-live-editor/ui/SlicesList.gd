@@ -1,12 +1,20 @@
+## Creates a list of Buttons corresponding to `SceneFiles`' `ScriptSlice`s.
+## When pressed, those buttons dispatch a signal with the selected slice.
+## This can be used for as a starting point for listing all slices
+## in a SceneFiles resource.
+## 
+## It extends Node to be flexibly applied to any container, or even
+## a node that doesn't descend from Container.
 extends Node
 
-const SceneFiles := preload("./collection/SceneFiles.gd")
-const ScriptHandler := preload("./collection/ScriptHandler.gd")
-const ScriptSlice := preload("./collection/ScriptSlice.gd")
+const SceneFiles := preload("../collections/SceneFiles.gd")
+const ScriptHandler := preload("../collections/ScriptHandler.gd")
+const ScriptSlice := preload("../collections/ScriptSlice.gd")
 
 signal slice_selected(sript_slice)
 
-export(Resource) var exported_scene: Resource setget set_exported_scene, get_exported_scene
+# Expects the resource to be a SceneFiles resource instance
+export (Resource) var exported_scene: Resource setget set_exported_scene, get_exported_scene
 
 var selected_value setget set_selected_value, get_selected_value
 var _button_group := ButtonGroup.new()
@@ -21,25 +29,28 @@ func set_exported_scene(new_scene_files: Resource) -> void:
 		scene_files is SceneFiles,
 		"file '%s' is not an instance of SceneFiles." % [new_scene_files.resource_path]
 	)
-	clean()
-	read_scene_files(scene_files)
+	_clean()
+	_read_scene_files(scene_files)
 
 
 func get_exported_scene() -> SceneFiles:
 	return exported_scene as SceneFiles
 
 
-func read_scene_files(scene_files: SceneFiles) -> void:
+func _read_scene_files(scene_files: SceneFiles) -> void:
 	for _script_handler in scene_files:
-		# repetition for getting typing
+		# repetition for getting proper typing
 		var script_handler := scene_files.current()
 		for _slice_name in script_handler:
-			# repetition for getting typing
+			# repetition for getting proper typing
 			var current_slice := script_handler.current()
-			create_element(script_handler, current_slice)
+			_create_element(script_handler, current_slice)
 
 
-func create_element(script: ScriptHandler, slice: ScriptSlice):
+# This method is called internally for each slice.
+# by default, creates a button and appends it to children
+# Override it in inherited classes to change the behavior
+func _create_element(script: ScriptHandler, slice: ScriptSlice):
 	var button = Button.new()
 	button.text = script.name + ":" + slice.name
 	button.toggle_mode = true
@@ -50,7 +61,8 @@ func create_element(script: ScriptHandler, slice: ScriptSlice):
 	add_child(button)
 
 
-func clean() -> void:
+# Removes all children
+func _clean() -> void:
 	_button_group = ButtonGroup.new()
 	_buttons_index = {}
 	for child in get_children():

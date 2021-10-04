@@ -3,7 +3,6 @@ static func compile(pattern: String) -> RegEx:
 	regex.compile(pattern)
 	return regex
 
-
 static func collection(patterns: Dictionary) -> RegExCollection:
 	return RegExCollection.new(patterns)
 

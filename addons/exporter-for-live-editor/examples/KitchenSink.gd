@@ -1,13 +1,13 @@
 extends Control
 
-const ScriptHandler := preload("./collection/ScriptHandler.gd")
-const ScriptSlice := preload("./collection/ScriptSlice.gd")
-const SlicesList := preload("./SlicesList.gd")
-const SliceEditor := preload("./SliceEditor.gd")
-const GameViewport := preload("./GameViewport.gd")
-const GameConsole := preload("./GameConsole.gd")
-const ScriptVerifier := preload("./ScriptVerifier.gd")
-const LanguageServerError := preload("./LanguageServerError.gd")
+const ScriptHandler := preload("../collections/ScriptHandler.gd")
+const ScriptSlice := preload("../collections/ScriptSlice.gd")
+const SlicesList := preload("../ui/SlicesList.gd")
+const SliceEditor := preload("../ui/SliceEditor.gd")
+const GameViewport := preload("../ui/GameViewport.gd")
+const GameConsole := preload("../ui/GameConsole.gd")
+const ScriptVerifier := preload("../lsp/ScriptVerifier.gd")
+const LanguageServerError := preload("../lsp/LanguageServerError.gd")
 
 onready var slices_list := $SlicesList as SlicesList
 onready var slice_editor := $VBoxContainer/SliceEditor as SliceEditor
@@ -34,9 +34,10 @@ func _on_slice_selected(script_handler: ScriptHandler, script_slice: ScriptSlice
 
 
 func _on_save_button_pressed() -> void:
+	var script_path := current_script_handler.file_path
 	var script_text := current_slice.current_full_text
 	var node_paths := current_script_handler.nodes
-	var verifier = ScriptVerifier.new(self, script_text)
+	var verifier := ScriptVerifier.new(self, script_text)
 	verifier.test()
 	var errors: Array = yield(verifier, "errors")
 	if errors.size():
@@ -44,16 +45,20 @@ func _on_save_button_pressed() -> void:
 		for index in errors.size():
 			var error: LanguageServerError = errors[index]
 			LiveEditorMessageBus.print_error(
-				error.message, error.error_range.start.line, error.error_range.start.character
+				error.message,
+				script_path,
+				error.error_range.start.line,
+				error.error_range.start.character
 			)
 		return
-	script_text = LiveEditorMessageBus.replace_script(script_text)
+	script_text = LiveEditorMessageBus.replace_script(script_path, script_text)
 	var script = GDScript.new()
 	script.source_code = script_text
 	var success = script.reload()
 	if success != OK:
 		LiveEditorMessageBus.print_error(
-			"The script has an error, but the language server didn't catch it. Are you connected?"
+			"The script has an error, but the language server didn't catch it. Are you connected?",
+			script_path
 		)
 		return
 	game_viewport.update_nodes(script, node_paths)

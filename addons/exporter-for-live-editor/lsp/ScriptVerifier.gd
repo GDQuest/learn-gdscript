@@ -1,17 +1,41 @@
+## Verifies a GDScript file against an HTTP language server
+##
+## Usage:
+## ```
+## var verifier = ScriptVerifier.new(node, script_text)
+## verifier.test()
+## var errors: Array = yield(verifier, "errors") 
+## ```
+## Where `errors` is an array of LanguageServerErrors
+extends Reference
+
+# the URL of the HTTP Language Server
+const SERVER_URL := "http://localhost:3000"
+
 const LanguageServerError := preload("./LanguageServerError.gd")
 const http_request_name = "___HTTP_REQUEST___"
 
+# `errors` is an Array<LanguageServerError>
 signal errors(errors)
 
 var _node: Node
 var _new_script_text: String
+var _url: String
+
+# skip errors with a severity warning above this. The lower the number,
+# the more dire the error. Defaults to `2`, which includes errors and
+# warnings
 var max_severity := 2
+
+# A list of codes to skip. You probably only want to skip "unused
+# return value" (code 16),
 var blacklist_codes := {16: true}  # unused return value.
 
 
-func _init(attached_node: Node, new_script_text: String) -> void:
+func _init(attached_node: Node, new_script_text: String, url := SERVER_URL) -> void:
 	_node = attached_node
 	_new_script_text = new_script_text
+	_url = url
 
 
 func append_http_request_node() -> HTTPRequest:
@@ -37,6 +61,8 @@ func _on_http_request_completed(
 		else []
 	)
 	remove_http_request_node()
+
+	# @type Array<LanguageServerError>
 	var errors = []
 
 	if not response.size():
@@ -54,10 +80,20 @@ func _on_http_request_completed(
 	emit_signal("errors", errors)
 
 
+# This requests the LSP server for checking the provided file 
 func test() -> void:
 	remove_http_request_node()
 	var http_request := append_http_request_node()
-	var url = "http://localhost:3000"
 	var query = "file=%s" % [_new_script_text.percent_encode()]
 	var headers = PoolStringArray(["Content-Type: application/x-www-form-urlencoded"])
-	http_request.request(url, headers, false, HTTPClient.METHOD_POST, query)
+	http_request.request(_url, headers, false, HTTPClient.METHOD_POST, query)
+
+
+# Tests a script to ensure it has no errors.
+# Only works in exported projects. When running in the editor, 
+# this will stop the running application if there's an error
+# in the script
+static func test_file(current_file_name: String) -> bool:
+	var test_file: Resource = load(current_file_name)
+	var test_instance = test_file.new()
+	return test_instance != null

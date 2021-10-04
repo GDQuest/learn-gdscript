@@ -1,3 +1,8 @@
+## Sets options on a TextEdit for it to be more suitable as
+## a text editor.
+## Sets some colors, and adds keywords used GDScript to the 
+## highlight list, as well as strings and comments.
+## 
 extends Node
 
 const COLOR_CLASS := Color(0.6, 0.6, 1.0)
@@ -123,7 +128,7 @@ const KEYWORDS := [
 	"yield"
 ]
 
-
+# Enhances a TextEdit with some useful defaults
 static func enhance(text_edit: TextEdit) -> void:
 	text_edit.syntax_highlighting = true
 	text_edit.show_line_numbers = true

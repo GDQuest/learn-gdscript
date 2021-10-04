@@ -7,9 +7,9 @@ const ScriptManager = preload("./ScriptManager.gd")
 const ScriptsRepository = preload("./ScriptsRepository.gd")
 const ScriptsUtils = preload("./ScriptsUtils.gd")
 
-export(PackedScene) var scene_file := preload("res://game/Game.tscn") setget set_scene_file
+export (PackedScene) var scene_file := preload("res://game/Game.tscn") setget set_scene_file
 export var scripts_to_collect := PoolStringArray()
-export(String, "game", "console", "both") var view_mode := "both" setget set_view_mode
+export (String, "game", "console", "both") var view_mode := "both" setget set_view_mode
 
 var _scene_is_paused := false
 var _scene: Node

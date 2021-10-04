@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://CodeEditor/ViewModeToggle.gd" type="Script" id=1]
+
+[sub_resource type="ButtonGroup" id=1]
 
 [node name="ViewModeToggle" type="HBoxContainer"]
 margin_right = 194.0
@@ -17,6 +19,7 @@ __meta__ = {
 margin_right = 50.0
 margin_bottom = 29.0
 toggle_mode = true
+group = SubResource( 1 )
 text = "Game"
 
 [node name="console" type="Button" parent="."]
@@ -24,6 +27,7 @@ margin_left = 54.0
 margin_right = 117.0
 margin_bottom = 29.0
 toggle_mode = true
+group = SubResource( 1 )
 text = "Console"
 
 [node name="both" type="Button" parent="."]
@@ -32,4 +36,5 @@ margin_right = 163.0
 margin_bottom = 29.0
 toggle_mode = true
 pressed = true
+group = SubResource( 1 )
 text = "Both"

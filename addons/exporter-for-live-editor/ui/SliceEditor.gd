@@ -1,21 +1,40 @@
+## A code editor with a few conveniences:
+## 
+## 1. Can show errors in an overlay, when given an array of 
+##    LanguageServerErrors
+## 2. Dispatches a signal when scroll values change
+## 3. If given a ScriptSlice instance, will synchronize the text state and the
+##    ScriptSlice.current_text state
+##
+## NOTE: to position overlay errors correctly, the script relies on
+## theme values, which are _not set_ by default. For this script to 
+## work properly, you _need_ to:
+## 
+## 1. Set a theme
+## 2. Make sure this theme has a font set
+## 
+## The theme gets passed to the overlay at build time, so if you
+## change the theme at runtime, make sure you also change the overlay's
+## theme.
 tool
 extends TextEdit
 
-const ScriptSlice := preload("./collection/ScriptSlice.gd")
-const CodeEditorEnhancer := preload("./CodeEditorEnhancer.gd")
+const ScriptSlice := preload("../collections/ScriptSlice.gd")
+const CodeEditorEnhancer := preload("../utils/CodeEditorEnhancer.gd")
 const SliceEditorOverlay := preload("./SliceEditorOverlay.gd")
 const SliceEditorErrorOverlayMessageScene := preload("./SliceEditorErrorOverlayMessage.tscn")
 const SliceEditorErrorOverlayMessage := preload("./SliceEditorErrorOverlayMessage.gd")
-const LanguageServerError := preload("./LanguageServerError.gd")
+const LanguageServerError := preload("../lsp/LanguageServerError.gd")
 
 enum SCROLL_DIR { HORIZONTAL, VERTICAL }
 
-signal scroll_changed(vector)
+signal scroll_changed(vector2)
 
 var errors_overlay := SliceEditorOverlay.new()
 var errors_overlay_message: SliceEditorErrorOverlayMessage = SliceEditorErrorOverlayMessageScene.instance()
 
 var script_slice: ScriptSlice setget set_script_slice, get_script_slice
+# Array<LanguageServerError>
 var errors := [] setget set_errors
 
 
@@ -54,10 +73,15 @@ func _get_configuration_warning() -> String:
 func _on_scrollbar_value_changed(value: float, direction: int) -> void:
 	var vec2 = Vector2(0, value) if direction == SCROLL_DIR.VERTICAL else Vector2(value, 0)
 	emit_signal("scroll_changed", vec2)
-	update_overlays()
+	_update_overlays()
 
 
-func update_overlays() -> void:
+# Creates and positions error overlays at the right position.
+# Call after:
+#
+# 1. Changing errors 
+# 2. Scroll/Resize
+func _update_overlays() -> void:
 	errors_overlay.clean()
 
 	var show_lines_from = script_slice.start_offset
@@ -85,9 +109,13 @@ func update_overlays() -> void:
 		squiggly.connect("mouse_exited", errors_overlay_message, "hide")
 
 
+# Receives an array of `LanguageServerError`s
 func set_errors(new_errors: Array) -> void:
+	if OS.is_debug_build():
+		for err in errors:
+			assert(err is LanguageServerError, "Error %s isn't a valid LanguageServerError" % [err])
 	errors = new_errors
-	update_overlays()
+	_update_overlays()
 
 
 func set_script_slice(new_script_slice: ScriptSlice) -> void:
@@ -100,4 +128,5 @@ func get_script_slice() -> ScriptSlice:
 
 
 func _on_text_changed() -> void:
-	script_slice.current_text = text
+	if script_slice != null:
+		script_slice.current_text = text

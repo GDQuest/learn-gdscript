@@ -1,6 +1,14 @@
+## This overlay creates squiggly lines, and places them at the right
+## offset in a SliceEditor.
+## 
+## When the squiggly line is hovered, a pop up with details about the
+## related error appears.
+##
+## This overlay depends on having a custom theme set, with a custom
+## font. It will not work otherwise.
 extends Control
 
-const LanguageServerError := preload("./LanguageServerError.gd")
+const LanguageServerError := preload("../lsp/LanguageServerError.gd")
 const LanguageServerRange = LanguageServerError.LanguageServerRange
 
 onready var _character_width: float = (

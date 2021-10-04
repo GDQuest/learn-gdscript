@@ -1,3 +1,6 @@
+# Represents an overlay pop-up, which appears when
+# hovering a squiggly line.
+# Edit properties and appearances in the accompanying Scene
 extends MarginContainer
 
 export var offset := Vector2(6.0, 6.0)

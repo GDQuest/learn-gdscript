@@ -1,17 +1,17 @@
 [gd_resource type="Resource" load_steps=9 format=2]
 
-[ext_resource path="res://addons/exporter-for-live-editor/collection/ScriptSlice.gd" type="Script" id=1]
-[ext_resource path="res://addons/exporter-for-live-editor/collection/ScriptHandler.gd" type="Script" id=2]
-[ext_resource path="res://addons/exporter-for-live-editor/collection/SceneFiles.gd" type="Script" id=3]
+[ext_resource path="res://addons/exporter-for-live-editor/collections/SceneFiles.gd" type="Script" id=1]
+[ext_resource path="res://addons/exporter-for-live-editor/collections/ScriptHandler.gd" type="Script" id=2]
+[ext_resource path="res://addons/exporter-for-live-editor/collections/ScriptSlice.gd" type="Script" id=3]
 [ext_resource path="res://game/Game.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Resource" id=1]
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 leading_spaces = 1
 keyword = "EXPORT"
 closing = false
 name = "slice"
-global = false
+is_full_file = false
 start = 16
 end = 25
 lines_before = [ "extends KinematicBody2D", "", "export var speed := 1200", "export var jump_speed := -1800", "export var gravity := 4000", "export (float, 0, 1.0) var friction = 0.1", "export (float, 0, 1.0) var acceleration = 0.25", "export (float, 0, 1) var time_span := .5", "", "var velocity = Vector2.ZERO", "var direction = Vector2()", "", "var _timer := Timer.new()", "", "", "func _ready():" ]
@@ -22,6 +22,7 @@ lines_editable = [ "add_child(_timer)", "# warning-ignore:return_value_discarded
 script = ExtResource( 2 )
 nodes = [ NodePath("Enemy"), NodePath("Enemy2"), NodePath("Enemy3") ]
 file_path = "res://game/Enemy.gd"
+name = "Enemy"
 original_script = "extends KinematicBody2D
 
 export var speed := 1200
@@ -75,18 +76,17 @@ func _physics_process(delta):
 		if is_on_floor():
 			velocity.y = jump_speed
 "
-name = "Enemy"
 slices = {
 "slice": SubResource( 1 )
 }
 
 [sub_resource type="Resource" id=3]
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 leading_spaces = 0
 keyword = "EXPORT"
 closing = false
 name = ""
-global = true
+is_full_file = false
 start = 0
 end = 27
 lines_before = [  ]
@@ -97,6 +97,7 @@ lines_editable = [ "extends KinematicBody2D", "", "export var speed := 1200", "e
 script = ExtResource( 2 )
 nodes = [ NodePath("Player") ]
 file_path = "res://game/Player.gd"
+name = "Player"
 original_script = "# EXPORT
 extends KinematicBody2D
 
@@ -124,13 +125,12 @@ func _physics_process(delta):
 		if is_on_floor():
 			velocity.y = jump_speed
 "
-name = "Player"
 slices = {
 "*": SubResource( 3 )
 }
 
 [resource]
-script = ExtResource( 3 )
+script = ExtResource( 1 )
 files = {
 "res://game/Enemy.gd": SubResource( 2 ),
 "res://game/Player.gd": SubResource( 4 )

@@ -3,9 +3,9 @@ extends KinematicBody2D
 export var speed := 1200
 export var jump_speed := -1800
 export var gravity := 4000
-export(float, 0, 1.0) var friction = 0.1
-export(float, 0, 1.0) var acceleration = 0.25
-export(float, 0, 1) var time_span := .5
+export (float, 0, 1.0) var friction = 0.1
+export (float, 0, 1.0) var acceleration = 0.25
+export (float, 0, 1) var time_span := .5
 
 var velocity = Vector2.ZERO
 var direction = Vector2()

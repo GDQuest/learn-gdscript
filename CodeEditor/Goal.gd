@@ -6,11 +6,11 @@ signal validation_completed(errors)
 enum STATUS { NONE, INVALID, VALID }
 
 export var text := "Goal" setget set_text
-export(STATUS) var status := 0 setget set_status
+export (STATUS) var status := 0 setget set_status
 export var none_texture: Texture = preload("res://Resources/none.svg")
 export var valid_texture: Texture = preload("res://Resources/valid.svg")
 export var invalid_texture: Texture = preload("res://Resources/invalid.svg")
-export(String, MULTILINE) var validation_script := "return true"
+export (String, MULTILINE) var validation_script := "return true"
 export var script_to_check := ""
 
 onready var _text_node: RichTextLabel = $RichTextLabel
