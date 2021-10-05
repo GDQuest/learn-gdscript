@@ -11,14 +11,15 @@ const SceneFiles := preload("../collections/SceneFiles.gd")
 const ScriptHandler := preload("../collections/ScriptHandler.gd")
 const ScriptSlice := preload("../collections/ScriptSlice.gd")
 
-signal slice_selected(sript_slice)
+signal slice_selected(script_handler, script_slice)
 
 # Expects the resource to be a SceneFiles resource instance
 export (Resource) var exported_scene: Resource setget set_exported_scene, get_exported_scene
 
+
 var selected_value setget set_selected_value, get_selected_value
 var _button_group := ButtonGroup.new()
-var _buttons_index := {}
+var _signal_vars_index := {}
 
 
 func set_exported_scene(new_scene_files: Resource) -> void:
@@ -52,19 +53,19 @@ func _read_scene_files(scene_files: SceneFiles) -> void:
 # Override it in inherited classes to change the behavior
 func _create_element(script: ScriptHandler, slice: ScriptSlice):
 	var button = Button.new()
-	button.text = script.name + ":" + slice.name
+	button.text = script.name + (("/" + slice.name) if slice.name else "")
 	button.toggle_mode = true
 	button.group = _button_group
-	_buttons_index[button.text] = button
-	var signal_args = ["slice_selected", script, slice]
-	button.connect("pressed", self, "emit_signal", signal_args)
+	var signal_vars = SignalVars.new(button, script, slice)
+	_signal_vars_index[button.text] = signal_vars
+	button.connect("pressed", self, "dispatch_value", [signal_vars])
 	add_child(button)
 
 
 # Removes all children
 func _clean() -> void:
 	_button_group = ButtonGroup.new()
-	_buttons_index = {}
+	_signal_vars_index = {}
 	for child in get_children():
 		remove_child(child)
 		child.queue_free()
@@ -77,12 +78,31 @@ func get_selected_value() -> BaseButton:
 func select_first() -> void:
 	var button: BaseButton = _button_group.get_buttons()[0]
 	if button:
-		button.pressed
+		set_selected_value(button.text)
 	else:
 		push_warning("select_first called, but there are no buttons")
 
 
-func set_selected_value(new_value) -> void:
-	if new_value in _buttons_index:
-		var button := _buttons_index[new_value] as BaseButton
-		button.pressed = true
+func set_selected_value(new_value: String) -> void:
+	if new_value in _signal_vars_index:
+		var signal_vars := _signal_vars_index[new_value] as SignalVars
+		signal_vars.button.pressed = true
+		dispatch_value(signal_vars)
+
+
+func dispatch_value(slice: SignalVars) -> void:
+	emit_signal("slice_selected", slice.script_handler, slice.script_slice)
+
+
+class SignalVars extends Reference:
+	const ScriptHandler := preload("../collections/ScriptHandler.gd")
+	const ScriptSlice := preload("../collections/ScriptSlice.gd")
+	var button: Button
+	var script_handler: ScriptHandler
+	var script_slice: ScriptSlice
+	
+	func _init(b: Button, sh: ScriptHandler, sl: ScriptSlice) -> void:
+		button = b
+		script_handler = sh
+		script_slice = sl
+	

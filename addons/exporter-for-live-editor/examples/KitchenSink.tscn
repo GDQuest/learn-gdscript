@@ -1,41 +1,50 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://godot_theme.tres" type="Theme" id=1]
+[ext_resource path="res://addons/exporter-for-live-editor/examples/lesson_theme_dark.tres" type="Theme" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/SlicesList.gd" type="Script" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/GameConsole.gd" type="Script" id=3]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/GameViewport.gd" type="Script" id=4]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/SliceEditor.gd" type="Script" id=5]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/KitchenSink.gd" type="Script" id=6]
 [ext_resource path="res://game/Game.live-editor.tres" type="Resource" id=7]
+[ext_resource path="res://addons/exporter-for-live-editor/examples/LessonRequirements.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/exporter-for-live-editor/validation/ValidationManager.gd" type="Script" id=9]
 
 [node name="KitchenSink" type="HBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 1 )
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SlicesList" type="VBoxContainer" parent="."]
-margin_right = 100.0
+[node name="LessonRequirements" parent="." instance=ExtResource( 8 )]
+margin_right = 300.0
 margin_bottom = 600.0
-rect_min_size = Vector2( 100, 0 )
-script = ExtResource( 2 )
-exported_scene = ExtResource( 7 )
+rect_min_size = Vector2( 300, 200 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 104.0
-margin_right = 520.0
+margin_left = 304.0
+margin_right = 604.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 3
 
+[node name="SlicesList" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 300.0
+rect_min_size = Vector2( 100, 0 )
+script = ExtResource( 2 )
+exported_scene = ExtResource( 7 )
+
 [node name="SliceEditor" type="TextEdit" parent="VBoxContainer"]
-margin_right = 416.0
-margin_bottom = 472.0
+margin_top = 4.0
+margin_right = 300.0
+margin_bottom = 465.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 1 )
 text = "extends KinematicBody2D
 
 export var speed := 1200
@@ -75,36 +84,39 @@ caret_blink = true
 script = ExtResource( 5 )
 
 [node name="Console" type="RichTextLabel" parent="VBoxContainer"]
-margin_top = 476.0
-margin_right = 416.0
-margin_bottom = 576.0
+margin_top = 469.0
+margin_right = 300.0
+margin_bottom = 569.0
 rect_min_size = Vector2( 0, 100 )
 bbcode_enabled = true
 scroll_following = true
 script = ExtResource( 3 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 580.0
-margin_right = 416.0
+margin_top = 573.0
+margin_right = 300.0
 margin_bottom = 600.0
 
 [node name="SaveButton" type="Button" parent="VBoxContainer/HBoxContainer"]
-margin_right = 41.0
-margin_bottom = 20.0
+margin_right = 47.0
+margin_bottom = 27.0
 text = "Save"
 
 [node name="PauseButton" type="Button" parent="VBoxContainer/HBoxContainer"]
-margin_left = 45.0
-margin_right = 95.0
-margin_bottom = 20.0
+margin_left = 51.0
+margin_right = 106.0
+margin_bottom = 27.0
 text = "pause"
 
 [node name="GameViewport" type="ViewportContainer" parent="."]
-margin_left = 524.0
-margin_right = 1024.0
+margin_left = 608.0
+margin_right = 1108.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 500, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 4 )
 exported_scene = ExtResource( 7 )
+
+[node name="ValidationManager" type="Node" parent="."]
+script = ExtResource( 9 )
