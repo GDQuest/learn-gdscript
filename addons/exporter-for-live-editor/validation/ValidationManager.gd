@@ -77,7 +77,9 @@ func _get_validators(goal: Node) -> Array:
 # Validates a goal by validating in turn all its nested validators
 func validate(goal: Node) -> void:
 	if not scene or not script_slice:
-		push_error("Either the playing scene, or the script slice aren't set. Make sure you set them before validating")
+		push_error(
+			"Either the playing scene, or the script slice aren't set. Make sure you set them before validating"
+		)
 		return
 	var validators := _get_validators(goal)
 	var errors = []
@@ -85,7 +87,7 @@ func validate(goal: Node) -> void:
 		var validator: Validator = validators[index]
 		validator.validate(scene, script_slice)
 		errors += yield(validator, "validation_completed")
-	var status:int = STATUS.VALID if errors.size() == 0 else STATUS.INVALID
+	var status: int = STATUS.VALID if errors.size() == 0 else STATUS.INVALID
 	goal.set_status(status)
 	emit_signal("validation_completed", errors)
 

@@ -25,9 +25,10 @@ var current_script_handler: ScriptHandler
 func _ready() -> void:
 	save_button.connect("pressed", self, "_on_save_button_pressed")
 	pause_button.connect("pressed", self, "_on_pause_button_pressed")
-	
+
 	slices_list.connect("slice_selected", self, "_on_slice_selected")
 	slices_list.select_first()
+
 
 func _on_slice_selected(script_handler: ScriptHandler, script_slice: ScriptSlice) -> void:
 	current_slice = script_slice

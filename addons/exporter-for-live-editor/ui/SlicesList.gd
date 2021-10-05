@@ -16,7 +16,6 @@ signal slice_selected(script_handler, script_slice)
 # Expects the resource to be a SceneFiles resource instance
 export (Resource) var exported_scene: Resource setget set_exported_scene, get_exported_scene
 
-
 var selected_value setget set_selected_value, get_selected_value
 var _button_group := ButtonGroup.new()
 var _signal_vars_index := {}
@@ -94,15 +93,15 @@ func dispatch_value(slice: SignalVars) -> void:
 	emit_signal("slice_selected", slice.script_handler, slice.script_slice)
 
 
-class SignalVars extends Reference:
+class SignalVars:
+	extends Reference
 	const ScriptHandler := preload("../collections/ScriptHandler.gd")
 	const ScriptSlice := preload("../collections/ScriptSlice.gd")
 	var button: Button
 	var script_handler: ScriptHandler
 	var script_slice: ScriptSlice
-	
+
 	func _init(b: Button, sh: ScriptHandler, sl: ScriptSlice) -> void:
 		button = b
 		script_handler = sh
 		script_slice = sl
-	
