@@ -17,16 +17,6 @@ func _init(plugin: EditorPlugin) -> void:
 	_plugin = plugin
 
 
-# container.scene_path.text
-func _save_setting(key: String, value) -> void:
-	_plugin_config.set_value("general", key, value)
-	_plugin_config.save(get_config_path())
-
-
-func _load_setting(key: String, defaultValue):
-	return _plugin_config.get_value("general", key, defaultValue)
-
-
 func load_settings() -> void:
 	var path = get_config_path()
 	var fs = Directory.new()
@@ -67,3 +57,13 @@ func get_was_manually_set() -> bool:
 
 func get_icon(icon_name: String) -> Texture:
 	return _plugin.get_editor_interface().get_base_control().get_icon(icon_name, "EditorIcons")
+
+
+# container.scene_path.text
+func _save_setting(key: String, value) -> void:
+	_plugin_config.set_value("general", key, value)
+	_plugin_config.save(get_config_path())
+
+
+func _load_setting(key: String, defaultValue):
+	return _plugin_config.get_value("general", key, defaultValue)

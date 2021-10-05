@@ -7,7 +7,7 @@ const BOTH = "both"
 
 signal mode_changed(new_mode, from_user)
 
-export (String, "game", "console", "both") var view_mode := "both" setget set_view_mode
+export(String, "game", "console", "both") var view_mode := "both" setget set_view_mode
 
 var _do_send_signals := true
 
@@ -15,10 +15,12 @@ var _do_send_signals := true
 func _ready():
 	var group := ButtonGroup.new()
 	for child in get_children():
-		if child is BaseButton:
-			child.toggle_mode = true
-			child.group = group
-			child.connect("toggled", self, "_on_button_toggled", [child.name])
+		if not child is BaseButton:
+			continue
+
+		child.toggle_mode = true
+		child.group = group
+		child.connect("toggled", self, "_on_button_toggled", [child.name])
 
 
 func set_view_mode(new_mode: String) -> void:
@@ -31,7 +33,9 @@ func set_view_mode(new_mode: String) -> void:
 
 
 func _on_button_toggled(is_toggled: bool, new_mode: String):
-	if is_toggled:
-		view_mode = new_mode
-		if _do_send_signals:
-			emit_signal("mode_changed", view_mode, true)
+	if not is_toggled:
+		return
+
+	view_mode = new_mode
+	if _do_send_signals:
+		emit_signal("mode_changed", view_mode, true)

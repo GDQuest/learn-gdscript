@@ -1,20 +1,20 @@
-## A container for buttons that simplifies button groups.
-## 
-## This extends `Container` so you can use it with any container
-## type, instead of constricting it to a specific container.
-##
-## You can add other widgets to the container, only buttons will
-## be considered as valid options.
-##
-## options values:
-## 
-## If you supply an array of values, those values will be used when an
-## option is selected. Otherwise, the button's meta.value property 
-## (`button.set_meta("value", button_value)`) will be attempted.
-## Lastly, the button's text will be used
-## 
-## No value gets selected by default, so it is advised to set a 
-## value (or use `select_first()` to select the first value)
+# A container for buttons that simplifies button groups.
+#
+# This extends `Container` so you can use it with any container
+# type, instead of constricting it to a specific container.
+#
+# You can add other widgets to the container, only buttons will
+# be considered as valid options.
+#
+# options values:
+#
+# If you supply an array of values, those values will be used when an
+# option is selected. Otherwise, the button's meta.value property
+# (`button.set_meta("value", button_value)`) will be attempted.
+# Lastly, the button's text will be used
+#
+# No value gets selected by default, so it is advised to set a
+# value (or use `select_first()` to select the first value)
 extends Container
 
 # sent when an option is selected. The `value` type will depend
@@ -26,11 +26,11 @@ signal item_selected(value)
 # there are as many values as there are buttons
 export var values: Array = []
 
-# sets or retrieves the current value. 
+# sets or retrieves the current value.
 var selected_value setget set_selected_value, get_selected_value
 # if you want to set a value, but don't want to trigger signals,
 # set this to false before (and set it back to true after)
-# internally used by `select_first()`.  
+# internally used by `select_first()`.
 var send_signals_on_press := true
 
 # will be shared by all buttons in the container
@@ -71,7 +71,7 @@ func _get_button_value(button: BaseButton, value_index: int):
 		assert(
 			false,
 			(
-				"button %s in %s has no corresponding value, no text value, and no \"data\" meta property"
+				'button %s in %s has no corresponding value, no text value, and no "data" meta property'
 				% [value_index, get_path()]
 			)
 		)
@@ -86,7 +86,7 @@ func _on_button_pressed(button_value) -> void:
 	emit_signal("item_selected", button_value)
 
 
-# Retrieves an option value by ordinal index. 
+# Retrieves an option value by ordinal index.
 func get_value_by_index(index: int):
 	var values = _values_index.values()
 	var is_valid_index = index >= 0 and index < values.size()

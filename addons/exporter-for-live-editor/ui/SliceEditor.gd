@@ -1,21 +1,21 @@
-## A code editor with a few conveniences:
-## 
-## 1. Can show errors in an overlay, when given an array of 
-##    LanguageServerErrors
-## 2. Dispatches a signal when scroll values change
-## 3. If given a ScriptSlice instance, will synchronize the text state and the
-##    ScriptSlice.current_text state
-##
-## NOTE: to position overlay errors correctly, the script relies on
-## theme values, which are _not set_ by default. For this script to 
-## work properly, you _need_ to:
-## 
-## 1. Set a theme
-## 2. Make sure this theme has a font set
-## 
-## The theme gets passed to the overlay at build time, so if you
-## change the theme at runtime, make sure you also change the overlay's
-## theme.
+# A code editor with a few conveniences:
+#
+# 1. Can show errors in an overlay, when given an array of
+#    LanguageServerErrors
+# 2. Dispatches a signal when scroll values change
+# 3. If given a ScriptSlice instance, will synchronize the text state and the
+#    ScriptSlice.current_text state
+#
+# NOTE: to position overlay errors correctly, the script relies on
+# theme values, which are _not set_ by default. For this script to
+# work properly, you _need_ to:
+#
+# 1. Set a theme
+# 2. Make sure this theme has a font set
+#
+# The theme gets passed to the overlay at build time, so if you
+# change the theme at runtime, make sure you also change the overlay's
+# theme.
 tool
 extends TextEdit
 
@@ -79,7 +79,7 @@ func _on_scrollbar_value_changed(value: float, direction: int) -> void:
 # Creates and positions error overlays at the right position.
 # Call after:
 #
-# 1. Changing errors 
+# 1. Changing errors
 # 2. Scroll/Resize
 func _update_overlays() -> void:
 	errors_overlay.clean()

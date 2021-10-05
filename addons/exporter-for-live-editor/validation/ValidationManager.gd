@@ -1,13 +1,13 @@
-## A utility node that collects all goals in a scene, listens to
-## their `request_validation` signal.
-## when the validation request is dispatched, it collects all
-## child Validator instances, runs them, and sets the result 
-## ("valid" or "invalid", respectively 2 or 1) on the parent Goal.
-##
-## Note:
-## 
-## `scene` and `script_slice` property need to be set before any
-## validation occurs
+# A utility node that collects all goals in a scene, listens to
+# their `request_validation` signal.
+# when the validation request is dispatched, it collects all
+# child Validator instances, runs them, and sets the result
+# ("valid" or "invalid", respectively 2 or 1) on the parent Goal.
+#
+# Note:
+#
+# `scene` and `script_slice` property need to be set before any
+# validation occurs
 extends Node
 
 enum STATUS { NONE, INVALID, VALID }
@@ -31,7 +31,7 @@ func _ready() -> void:
 
 
 # Connects all goals in the goals group to this validation manager.
-# 
+#
 # This method is safe to run multiple times, because goals that have been
 # processed already will be skipped.
 func connect_goals() -> void:
@@ -92,7 +92,7 @@ func validate(goal: Node) -> void:
 	emit_signal("validation_completed", errors)
 
 
-# Validates all goals currently in the goals group 
+# Validates all goals currently in the goals group
 func validate_all() -> void:
 	var errors := []
 	for goal in _goals:

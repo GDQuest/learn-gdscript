@@ -1,13 +1,13 @@
-## Exemple of a Goal. A goal represents a separate validation for an exercise
-## 
-## A goal doesn't need to subclass a specific class. A goal:
-##
-## 1. adds itself to the group `"validator_goals"`
-## 2. has one or more validator children
-## 3. emits a signal called "request_validation" that takes no arguments
-## 4. has a method called set_status(status) which takes an int, 0 for no errors,
-##    1 for errors, 2 for valid
-##  
+# Exemple of a Goal. A goal represents a separate validation for an exercise
+#
+# A goal doesn't need to subclass a specific class. A goal:
+#
+# 1. adds itself to the group `"validator_goals"`
+# 2. has one or more validator children
+# 3. emits a signal called "request_validation" that takes no arguments
+# 4. has a method called set_status(status) which takes an int, 0 for no errors,
+#    1 for errors, 2 for valid
+#
 tool
 extends HBoxContainer
 
@@ -19,11 +19,11 @@ signal request_validation
 enum STATUS { NONE, INVALID, VALID }
 
 export var text := "Goal" setget set_text
-export (STATUS) var status := 0 setget set_status
+export(STATUS) var status := 0 setget set_status
 
 # adds or removes a goal from the goals group.
 # ValidationManager expects all goals to be in the group at `_ready()`, so if
-# you activate a goal later, you'll have to rerun the ValidationManager's 
+# you activate a goal later, you'll have to rerun the ValidationManager's
 # `connect_goals()`
 export var is_active := true setget set_active, get_active
 

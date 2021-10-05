@@ -1,11 +1,13 @@
-## Singleton that takes care of receiving messages from running
-## scripts and then re-dispatches them to anyone listening.
-## Requires running scripts to have been transformed so that `print`, 
-## `push_error`, `push_warning`, and such call the singleton.
-## A provided convenience function can do this for any provided script text.
-##
-## NOTE: `assert` statements expect the `assert(condition, message)` form.
-## `assert(condition)` will not work.
+# Singleton that takes care of receiving messages from running scripts and then
+# re-dispatches them to anyone listening.
+#
+# Requires running scripts to have been transformed so that `print`,
+# `push_error`, `push_warning`, and such call the singleton.
+#
+# A provided convenience function can do this for any provided script text.
+#
+# NOTE: `assert` statements expect the `assert(condition, message)` form.
+# `assert(condition)` will not work.
 extends Node
 
 const RegExp := preload("./RegExp.gd")
@@ -29,14 +31,14 @@ var script_replacements := RegExp.collection(
 	}
 )
 
-# if `true`, calls to this singleton will also print to the regular
-# Godot console. is true by default on debug builds, and false by
-# default everywhere else.
-export var local_print: bool = bool(OS.is_debug_build())
+# If `true`, calls to this singleton will also print to the regular Godot
+# console. We set this to true by default on debug builds, and false by default
+# everywhere else.
+export var print_to_output: bool = OS.is_debug_build()
 
 
-# Transforms a script's print statements (and similar) to calls
-# to this singleton. 
+# Transforms a script's print statements (and similar) to calls to this
+# singleton.
 func replace_script(script_file_name: String, script_text: String) -> String:
 	var lines = script_text.split("\n")
 	for line_nb in lines.size():
@@ -81,38 +83,37 @@ func replace_script(script_file_name: String, script_text: String) -> String:
 func print_log(thing_to_print: Array, file_name: String, line_nb: int = 0, character: int = 0) -> void:
 	var line = PoolStringArray(thing_to_print).join(" ")
 	print_request(MESSAGE_TYPE.PRINT, line, file_name, line_nb, character)
-	if local_print:
+	if print_to_output:
 		prints(thing_to_print)
 
 
 func print_error(thing_to_print, file_name: String, line_nb: int = 0, character: int = 0) -> void:
 	print_request(MESSAGE_TYPE.ERROR, String(thing_to_print), file_name, line_nb, character)
-	if local_print:
+	if print_to_output:
 		push_error(thing_to_print)
 
 
 func print_warning(thing_to_print, file_name: String, line_nb: int = 0, character: int = 0) -> void:
 	print_request(MESSAGE_TYPE.WARNING, String(thing_to_print), file_name, line_nb, character)
-	if local_print:
+	if print_to_output:
 		push_warning(thing_to_print)
 
 
 func print_assert(
 	assertion: bool, provided_message := "", file_name := "", line_nb: int = 0, character: int = 0
 ) -> void:
-	var message = (
-		""
-		if assertion
-		else "Assertion failed" if provided_message == "" else provided_message
-	)
+	var message = ""
+	if not assertion:
+		message = provided_message if provided_message != "" else "Assertion failed"
+
 	if not assertion:
 		print_request(MESSAGE_TYPE.ASSERT, message, file_name, line_nb, character)
-	if local_print:
+	if print_to_output:
 		push_error(message)
 
 
-# This is a proxy for emitting the signal, to work around Godot's
-# lack of signal typing.
+# This is a proxy for emitting the signal, to work around Godot's lack of signal
+# typing.
 func print_request(
 	message_type: int, message: String, file_name: String, line_nb: int, character: int
 ) -> void:

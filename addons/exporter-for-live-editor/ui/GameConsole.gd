@@ -1,4 +1,4 @@
-## This console displays messages. It adds new lines automatically
+# This console displays messages. It adds new lines automatically
 extends RichTextLabel
 
 signal reference_clicked(file_name, line_nb, character)

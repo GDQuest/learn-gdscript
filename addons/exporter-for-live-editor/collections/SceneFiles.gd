@@ -1,26 +1,27 @@
-## Holds a list of ScriptHandlers for one scene.
-## Each ScriptHandler corresponds to one GDScript file.
-## 
-## This resource implements the iterator pattern, so you can
-## loop through internal ScriptHandlers with a simple
-## ```
-## for script_handler in scene_files:
-##   ... do something with scene_handler
-## ```
-##
-## A `current()` method is supplied to get proper typing:
-## ```
-## for _ in scene_files:
-##   var script_handler := scene_files.current()
-## ```
+# Holds a list of ScriptHandlers for one scene.
+# Each ScriptHandler corresponds to one GDScript file.
+#
+# This resource implements the iterator pattern, so you can
+# loop through internal ScriptHandlers with a simple
+#
+# ```
+# for script_handler in scene_files:
+# ```
+#
+# Use the `current()` method to get proper typing:
+#
+# ```
+# for _ in scene_files:
+#   var script_handler := scene_files.current()
+# ```
 extends Resource
 
 const ScriptHandler := preload("./ScriptHandler.gd")
 const RegExp := preload("../utils/RegExp.gd")
 
-# holds references to ScriptHandlers
+# Holds references to ScriptHandlers
 export var files: Dictionary
-# specific scene this collection of files pertains to
+# Specific scene this collection of files pertains to
 export var scene: PackedScene
 export var scene_viewport_size: Vector2
 
@@ -28,8 +29,8 @@ var _current_index := 0
 var _current_array := []
 
 
-# if we don't re-initialize internal dicts and arrays,
-# they're shared by all resources
+# If we don't re-initialize internal dicts and arrays, they're shared by all
+# resources
 func _init() -> void:
 	files = {}
 
@@ -43,8 +44,8 @@ func collect_scripts(packed_scene: PackedScene, unpacked_scene: Node, limit := 1
 	_collect_scripts(unpacked_scene, unpacked_scene, self, limit)
 
 
-# If the provided script is new, adds a script file to the files.
-# Otherwise, adds the provided node as a dependency of this script.
+# If the provided script is new, adds a script file to the files. Otherwise,
+# adds the provided node as a dependency of this script.
 func add_node(root_scene: Node, script: GDScript, node: Node) -> void:
 	var script_path := script.resource_path
 	if not (script_path in files):
@@ -110,12 +111,14 @@ func values() -> Array:
 ################################################################################
 # Static helpers
 
+
 static func script_has_annotation(script: GDScript) -> bool:
 	var export_key_regex := RegExp.compile(ScriptHandler.EXPORT_ANNOTATION)
 	var result = export_key_regex.search(script.source_code)
 	if result:
 		return true
 	return false
+
 
 static func _collect_scripts(scene: Node, node: Node, repository, limit: int):
 	var maybe_script: Reference = node.get_script()

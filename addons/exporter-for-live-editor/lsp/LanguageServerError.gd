@@ -1,13 +1,12 @@
-## Represents a Language Server Protocol error.
-## Simply mirrors the JSON structure, with the notable exception of
-## `error_range` instead of `range` ("range" is a reserved word in 
-## GDScript).
-## 
-## Use it like so:
-## ```
-## var error = LanguageServerError.new()
-## error.from_JSON(json_error)
-## ```
+# Represents a Language Server Protocol error.
+#
+# Mirrors the JSON structure, with the notable exception of `error_range`
+# instead of `range` ("range" is a reserved word in GDScript).
+#
+# Use it like so:
+#
+# var error = LanguageServerError.new()
+# error.from_JSON(json_error)
 extends Reference
 
 var error_range := LanguageServerRange.new()
