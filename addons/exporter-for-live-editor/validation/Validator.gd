@@ -36,7 +36,7 @@ func _validation_error(errors: Array) -> void:
 
 # @abstract
 #
-# Use this method for small verifications along the way inside a validation This
+# Use this method for small verifications along the way inside a validation. This
 # is equivalent to an `assert`, but it dispatches `validation_completed` with
 # errors if wrong.
 #

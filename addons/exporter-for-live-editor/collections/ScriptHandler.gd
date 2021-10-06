@@ -33,7 +33,7 @@ export var name := ""
 # Full text of the script
 export var original_script := ""
 
-# @type Dictionary<String,ScriptSlice>
+# @type Dictionary[String,ScriptSlice]
 export var slices := {}
 
 # Regular expressions used to sanitize and split the srcripts
