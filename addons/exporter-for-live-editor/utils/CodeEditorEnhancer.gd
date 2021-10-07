@@ -125,7 +125,10 @@ const KEYWORDS := [
 	"weakref",
 	"wrapf",
 	"wrapi",
-	"yield"
+	"yield",
+	"int",
+	"float",
+	"bool"
 ]
 
 
