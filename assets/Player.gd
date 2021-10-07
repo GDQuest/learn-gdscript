@@ -1,4 +1,4 @@
-# EXPORT
+# Player
 extends KinematicBody2D
 
 export var jump_speed := 200
@@ -14,6 +14,7 @@ var _jump_starting_point := 0.0
 
 
 func _physics_process(delta: float) -> void:
+	# EXPORT jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		_jump_starting_point = position.y
 		_velocity_y -= jump_speed
@@ -28,8 +29,9 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("walk")
 	else:
 		animated_sprite.stop()
-
+	
 	_velocity_y += gravity * delta
 
 	var velocity := Vector2(0, _velocity_y)
 	_velocity_y = move_and_slide(velocity, Vector2.UP).y
+	# /EXPORT jump

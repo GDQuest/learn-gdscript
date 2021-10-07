@@ -24,8 +24,8 @@ const EXPORT_ANNOTATION_REGEX = "(?m)^(?<leading_spaces>\\t*)#\\s(?<closing>\\/)
 #
 # These are the nodes that get their script reloaded when this handler changes.
 #
-# See add_node() for more information.
-export var nodes: Array
+# See add_node_path() for more information.
+export var nodes_paths: Array
 # Path to the GDScript file
 export var file_path := ""
 # Basename of the GDScript file. Helps to display the name in the UI
@@ -51,7 +51,7 @@ var _current_array := []
 
 
 func _init() -> void:
-	nodes = []
+	nodes_paths = []
 
 
 # Each slice has a name decided based on a comment with the form `# EXPORT <name>`.
@@ -65,8 +65,8 @@ func get_slice(key: String) -> ScriptSlice:
 #
 # This is usually used only at authoring time, but you may want to use this in
 # case nodes using that script get created at runtime.
-func add_node(path: NodePath) -> void:
-	nodes.append(path)
+func add_node_path(path: NodePath) -> void:
+	nodes_paths.append(path)
 
 
 # Removes a node from the dependencies list. The removed node will not be
@@ -74,10 +74,10 @@ func add_node(path: NodePath) -> void:
 #
 # Note nodes that don't exist anymore get skipped automatically, like freed
 # nodes in the `nodes` array.
-func remove_node(path: NodePath) -> void:
-	var index := nodes.find(path)
+func remove_node_path(path: NodePath) -> void:
+	var index := nodes_paths.find(path)
 	if index > -1:
-		nodes.remove(index)
+		nodes_paths.remove(index)
 
 
 # Called by `SceneFiles` to assign a script to the handler.
@@ -138,7 +138,7 @@ func _get_script_slices(script: String) -> Dictionary:
 
 
 func _to_string():
-	return "`%s`" % [file_path]
+	return "[%s, %s]" % [name, nodes_paths]
 
 
 ################################################################################

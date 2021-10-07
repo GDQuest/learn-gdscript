@@ -1,3 +1,4 @@
+# Obstacle
 tool
 extends Area2D
 
@@ -14,11 +15,7 @@ func _ready() -> void:
 
 
 func _assign_random_texture() -> void:
-	var amount := images.size()
-	if not amount:
-		return
-	var index := randi() % images.size()
-	sprite.texture = images[index]
+	sprite.texture = images[randi() % images.size()]
 
 
 func set_destination(position_x: float, time := 4.0) -> void:

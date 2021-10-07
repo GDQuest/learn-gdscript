@@ -41,7 +41,7 @@ func _on_slice_selected(script_handler: ScriptHandler, script_slice: ScriptSlice
 func _on_save_button_pressed() -> void:
 	var script_path := current_script_handler.file_path
 	var script_text := current_slice.current_full_text
-	var node_paths := current_script_handler.nodes
+	var nodes_paths := current_script_handler.nodes_paths
 	var verifier := ScriptVerifier.new(self, script_text)
 	verifier.test()
 	var errors: Array = yield(verifier, "errors")
@@ -66,7 +66,7 @@ func _on_save_button_pressed() -> void:
 			script_path
 		)
 		return
-	game_viewport.update_nodes(script, node_paths)
+	game_viewport.update_nodes(script, nodes_paths)
 
 
 func _on_pause_button_pressed() -> void:

@@ -48,13 +48,21 @@ func collect_scripts(packed_scene: PackedScene, unpacked_scene: Node, limit := 1
 # adds the provided node as a dependency of this script.
 func add_node(root_scene: Node, script: GDScript, node: Node) -> void:
 	var script_path := script.resource_path
+	var script_handler :ScriptHandler
 	if not (script_path in files):
-		var scene_script := ScriptHandler.new()
-		scene_script.set_initial_script(script)
-		files[script_path] = scene_script
+		script_handler = ScriptHandler.new()
+		script_handler.set_initial_script(script)
+		files[script_path] = script_handler
+	else:
+		script_handler = files[script_path] as ScriptHandler
+	var path := get_node_relative_path(root_scene, node)
+	script_handler.add_node_path(path)
+
+
+static func get_node_relative_path(root_scene: Node, node: Node) -> NodePath:
 	var root_path := String(root_scene.get_path()) + "/"
 	var path := NodePath(String(node.get_path()).replace(root_path, ""))
-	(files[script_path] as ScriptHandler).add_node(path)
+	return path
 
 
 func get_file(file_name: String) -> ScriptHandler:
@@ -112,9 +120,9 @@ func values() -> Array:
 # Static helpers
 
 static func script_has_annotation(script: GDScript) -> bool:
-	var export_key_regex := RegExp.compile(ScriptHandler.EXPORT_ANNOTATION)
+	var export_key_regex := RegExp.compile(ScriptHandler.EXPORT_ANNOTATION_REGEX)
 	var result = export_key_regex.search(script.source_code)
-	if result:
+	if result != null:
 		return true
 	return false
 
@@ -123,6 +131,7 @@ static func _collect_scripts(scene: Node, node: Node, repository, limit: int):
 	if maybe_script != null and maybe_script is GDScript:
 		var script: GDScript = maybe_script
 		if script_has_annotation(script):
+			print("hello?")
 			repository.add_node(scene, script, node)
 	if limit > 0:
 		limit -= 1

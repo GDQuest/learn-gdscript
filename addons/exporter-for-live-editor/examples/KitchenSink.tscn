@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/examples/lesson_theme_dark.tres" type="Theme" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/SlicesList.gd" type="Script" id=2]
@@ -6,9 +6,17 @@
 [ext_resource path="res://addons/exporter-for-live-editor/ui/GameViewport.gd" type="Script" id=4]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/SliceEditor.gd" type="Script" id=5]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/KitchenSink.gd" type="Script" id=6]
-[ext_resource path="res://game/Game.live-editor.tres" type="Resource" id=7]
+[ext_resource path="res://addons/exporter-for-live-editor/collections/SceneFiles.gd" type="Script" id=7]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/LessonRequirements.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/exporter-for-live-editor/validation/ValidationManager.gd" type="Script" id=9]
+[ext_resource path="res://Game.tscn" type="PackedScene" id=10]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 7 )
+files = {
+}
+scene = ExtResource( 10 )
+scene_viewport_size = Vector2( 1024, 600 )
 
 [node name="KitchenSink" type="HBoxContainer"]
 anchor_right = 1.0
@@ -37,7 +45,7 @@ size_flags_horizontal = 3
 margin_right = 300.0
 rect_min_size = Vector2( 100, 0 )
 script = ExtResource( 2 )
-exported_scene = ExtResource( 7 )
+exported_scene = SubResource( 1 )
 
 [node name="SliceEditor" type="TextEdit" parent="VBoxContainer"]
 margin_top = 4.0
@@ -116,7 +124,7 @@ rect_min_size = Vector2( 500, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 4 )
-exported_scene = ExtResource( 7 )
+exported_scene = SubResource( 1 )
 
 [node name="ValidationManager" type="Node" parent="."]
 script = ExtResource( 9 )
