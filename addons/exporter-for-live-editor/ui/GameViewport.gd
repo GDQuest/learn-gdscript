@@ -57,7 +57,10 @@ func update_nodes(script: GDScript, node_paths: Array) -> void:
 		if node_path is NodePath or node_path is String:
 			var node = _scene.get_node_or_null(node_path)
 			if node:
+				#pause_node(node, true)
 				node.set_script(script)
+				node._ready()
+				#pause_node(node, false)
 
 
 # Pauses the current GameViewport scene
