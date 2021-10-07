@@ -48,7 +48,7 @@ func collect_scripts(packed_scene: PackedScene, unpacked_scene: Node, limit := 1
 # adds the provided node as a dependency of this script.
 func add_node(root_scene: Node, script: GDScript, node: Node) -> void:
 	var script_path := script.resource_path
-	var script_handler :ScriptHandler
+	var script_handler: ScriptHandler
 	if not (script_path in files):
 		script_handler = ScriptHandler.new()
 		script_handler.set_initial_script(script)
