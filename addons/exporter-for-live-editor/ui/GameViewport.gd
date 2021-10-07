@@ -12,7 +12,7 @@ var _viewport := Viewport.new()
 var scene_paused := false setget set_scene_paused
 
 # Must be a SceneFiles resource
-export(Resource) var exported_scene: Resource setget set_exported_scene, get_exported_scene
+export (Resource) var exported_scene: Resource setget set_exported_scene, get_exported_scene
 
 
 func _init() -> void:

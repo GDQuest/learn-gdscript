@@ -14,7 +14,7 @@ const ScriptSlice := preload("../collections/ScriptSlice.gd")
 signal slice_selected(script_handler, script_slice)
 
 # Expects the resource to be a SceneFiles resource instance
-export(Resource) var exported_scene: Resource setget set_exported_scene, get_exported_scene
+export (Resource) var exported_scene: Resource setget set_exported_scene, get_exported_scene
 
 var selected_value setget set_selected_value, get_selected_value
 var _button_group := ButtonGroup.new()

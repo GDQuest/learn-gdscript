@@ -7,14 +7,12 @@ var export_key_regex := RegExp.compile(SceneFiles.ScriptHandler.EXPORT_KEY)
 
 const SETTINGS_KEY = preload("./config.gd").SETTINGS_KEY
 
-
 # Returns a string representing the current scene or an empty string
 static func get_scene() -> String:
 	var path = ProjectSettings.get_setting(SETTINGS_KEY)
 	if path:
 		return path
 	return ""
-
 
 # Loads the selected scene. Accepts an optional `from` argument which checks
 # that the loaded scene isn't itself.

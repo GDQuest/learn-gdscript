@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/Background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 78.3356, 10 )
+
+[node name="RunnyRun" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Background" parent="." instance=ExtResource( 2 )]
+position = Vector2( 504.029, 470.049 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 114, 500 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 113.303, 535.049 )
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 962.171
+margin_top = 17.818
+margin_right = 1002.17
+margin_bottom = 31.818
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

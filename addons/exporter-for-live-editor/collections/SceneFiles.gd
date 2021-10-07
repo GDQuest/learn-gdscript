@@ -111,14 +111,12 @@ func values() -> Array:
 ################################################################################
 # Static helpers
 
-
 static func script_has_annotation(script: GDScript) -> bool:
 	var export_key_regex := RegExp.compile(ScriptHandler.EXPORT_ANNOTATION)
 	var result = export_key_regex.search(script.source_code)
 	if result:
 		return true
 	return false
-
 
 static func _collect_scripts(scene: Node, node: Node, repository, limit: int):
 	var maybe_script: Reference = node.get_script()

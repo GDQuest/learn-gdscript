@@ -2,12 +2,10 @@
 # replace text with multiple regular expressions.
 extends Reference
 
-
 static func compile(pattern: String) -> RegEx:
 	var regex := RegEx.new()
 	regex.compile(pattern)
 	return regex
-
 
 static func collection(patterns: Dictionary) -> RegExCollection:
 	return RegExCollection.new(patterns)

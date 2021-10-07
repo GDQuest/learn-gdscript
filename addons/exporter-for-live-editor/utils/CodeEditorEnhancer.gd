@@ -128,7 +128,6 @@ const KEYWORDS := [
 	"yield"
 ]
 
-
 # Enhances a TextEdit to better highlight GDScript code.
 static func enhance(text_edit: TextEdit) -> void:
 	text_edit.syntax_highlighting = true

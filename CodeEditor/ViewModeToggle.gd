@@ -7,7 +7,7 @@ const BOTH = "both"
 
 signal mode_changed(new_mode, from_user)
 
-export(String, "game", "console", "both") var view_mode := "both" setget set_view_mode
+export (String, "game", "console", "both") var view_mode := "both" setget set_view_mode
 
 var _do_send_signals := true
 

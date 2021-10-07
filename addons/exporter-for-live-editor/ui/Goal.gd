@@ -19,7 +19,7 @@ signal request_validation
 enum STATUS { NONE, INVALID, VALID }
 
 export var text := "Goal" setget set_text
-export(STATUS) var status := 0 setget set_status
+export (STATUS) var status := 0 setget set_status
 
 # adds or removes a goal from the goals group.
 # ValidationManager expects all goals to be in the group at `_ready()`, so if
