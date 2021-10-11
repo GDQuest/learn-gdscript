@@ -57,10 +57,7 @@ func update_nodes(script: GDScript, node_paths: Array) -> void:
 		if node_path is NodePath or node_path is String:
 			var node = _scene.get_node_or_null(node_path)
 			if node:
-				#pause_node(node, true)
-				node.set_script(script)
-				node._ready()
-				#pause_node(node, false)
+				try_validate_and_replace_script(node, script)
 
 
 # Pauses the current GameViewport scene
@@ -94,3 +91,23 @@ func set_exported_scene(new_scene_files: Resource) -> void:
 
 func get_exported_scene() -> SceneFiles:
 	return _scene_files
+
+
+static func try_validate_and_replace_script(node: Node, script: Script) -> void:
+	if not script.can_instance():
+		var error_code := script.reload()
+		if not script.can_instance():
+			print("Script errored out (code %s); skipping replacement" % [error_code])
+			return
+
+	var props := {}
+	for prop in node.get_property_list():
+		if prop.name == "script":
+			continue
+		props[prop.name] = node.get(prop.name)
+
+	node.set_script(script)
+
+	for prop in props:
+		if prop in node:  # In case a property is removed
+			node.set(prop, props[prop])
