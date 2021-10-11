@@ -1,5 +1,7 @@
 tool
 extends Container
+class_name Revealer, "./Revealer.svg"
+
 
 export var title := "Expand" setget set_title
 export var is_expanded := false setget set_is_expanded
