@@ -109,13 +109,20 @@ margin_right = 106.0
 margin_bottom = 27.0
 text = "pause"
 
-[node name="GameViewport" type="ViewportContainer" parent="."]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 margin_left = 685.0
 margin_right = 1024.0
 margin_bottom = 600.0
+size_flags_horizontal = 3
+
+[node name="GameViewport" type="ViewportContainer" parent="AspectRatioContainer"]
+margin_top = 130.5
+margin_right = 339.0
+margin_bottom = 469.5
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+stretch = true
 script = ExtResource( 4 )
 exported_scene = ExtResource( 7 )
 
