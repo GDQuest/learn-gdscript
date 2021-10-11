@@ -25,10 +25,11 @@ func set_highest_score(new_highest_score: int) -> void:
 
 # Sets a higher score if the passed integer is higher than the current
 # highest score
+# EXPORT set_score_if_highest
 func set_new_score_if_is_highest(maybe_highest_score: int) -> void:
 	if maybe_highest_score > _highest_score:
 		set_highest_score(maybe_highest_score)
-
+# /EXPORT set_score_if_highest
 
 func set_focus() -> void:
 	grab_focus()

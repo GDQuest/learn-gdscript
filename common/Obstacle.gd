@@ -15,8 +15,9 @@ func _ready() -> void:
 
 
 func _assign_random_texture() -> void:
+	# EXPORT assign_random_texture
 	sprite.texture = images[randi() % images.size()]
-
+	# /EXPORT assign_random_texture
 
 func set_destination(position_x: float, time := 4.0) -> void:
 	tween.interpolate_property(self, "position:x", position.x, position_x, time)
