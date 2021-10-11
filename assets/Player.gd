@@ -1,4 +1,3 @@
-# Player
 extends KinematicBody2D
 
 export var jump_speed := 200
@@ -11,6 +10,10 @@ onready var animated_sprite := $AnimatedSprite as AnimatedSprite
 
 var _velocity_y = 0.0
 var _jump_starting_point := 0.0
+
+
+func _ready() -> void:
+	add_to_group("Player")
 
 
 func _physics_process(delta: float) -> void:
