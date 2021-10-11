@@ -20,6 +20,11 @@ func _init() -> void:
 	add_child(_viewport)
 
 
+func _ready() -> void:
+	get_tree().connect("screen_resized", self, "_on_screen_resized")
+	get_tree().call_deferred("emit_signal", "screen_resized")
+
+
 # Recursively pauses a node and its children
 static func pause_node(node: Node, pause := true, limit := 1000) -> void:
 	node.set_process(not pause)
@@ -91,6 +96,10 @@ func set_exported_scene(new_scene_files: Resource) -> void:
 
 func get_exported_scene() -> SceneFiles:
 	return _scene_files
+
+
+func _on_screen_resized() -> void:
+	_viewport.size = rect_size
 
 
 static func try_validate_and_replace_script(node: Node, script: Script) -> void:

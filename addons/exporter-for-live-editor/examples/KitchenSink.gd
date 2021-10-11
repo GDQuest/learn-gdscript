@@ -12,7 +12,7 @@ const ValidationManager := preload("../validation/ValidationManager.gd")
 
 onready var slices_list := $VBoxContainer/SlicesList as SlicesList
 onready var slice_editor := $VBoxContainer/SliceEditor as SliceEditor
-onready var game_viewport := find_node("GameViewport") as GameViewport
+onready var game_viewport := $GameViewport as GameViewport
 onready var save_button := $VBoxContainer/HBoxContainer/SaveButton as Button
 onready var pause_button := $VBoxContainer/HBoxContainer/PauseButton as Button
 onready var game_console := $VBoxContainer/Console as GameConsole
