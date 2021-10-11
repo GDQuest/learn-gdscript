@@ -5,7 +5,7 @@ signal request_play
 
 onready var _play_button := $PlayButton as Button
 onready var _exit_button := $ExitButton as Button
-onready var __highest_score_label := $HBoxContainer/HighScoreLabel as Label
+onready var __highest_score_label := $HBoxContainer/HighScoreLabel as Label 
 
 var _highest_score := 0
 
