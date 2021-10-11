@@ -131,7 +131,6 @@ static func _collect_scripts(scene: Node, node: Node, repository, limit: int):
 	if maybe_script != null and maybe_script is GDScript:
 		var script: GDScript = maybe_script
 		if script_has_annotation(script):
-			print("hello?")
 			repository.add_node(scene, script, node)
 	if limit > 0:
 		limit -= 1
