@@ -94,14 +94,21 @@ func _on_run_button_pressed() -> void:
 
 	var packed_scene: PackedScene = load(config.scene_path)
 	var scene = packed_scene.instance()
-	scene.hide()
-	add_child(scene)
+
+	# Add the scene to a node so we can hide the node
+	# hiding the scene directly can fail if the scene
+	# doesn't extend CanvasItem
+	var node := Node2D.new()
+	add_child(node)
+	node.hide()
+	node.add_child(scene)
 
 	var collector: SceneFiles = SceneFiles.new()
 	collector.collect_scripts(packed_scene, scene)
 	_save(collector)
 
-	remove_child(scene)
+	remove_child(node)
+	node.remove_child(scene)
 	scene.queue_free()
 
 
