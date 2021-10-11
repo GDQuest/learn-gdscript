@@ -16,18 +16,18 @@ func _ready() -> void:
 	set_focus()
 
 
-func set__highest_score(new__highest_score: int) -> void:
-	_highest_score = new__highest_score
+func set_highest_score(new_highest_score: int) -> void:
+	_highest_score = new_highest_score
 	if not is_inside_tree():
 		yield(self, "ready")
-	_highest_score_label.text = String(new__highest_score).pad_zeros(5)
+	_highest_score_label.text = String(new_highest_score).pad_zeros(5)
 
 
 # Sets a higher score if the passed integer is higher than the current
 # highest score
-func set_new_score_if_is_highest(maybe__highest_score: int) -> void:
-	if maybe__highest_score > _highest_score:
-		set__highest_score(maybe__highest_score)
+func set_new_score_if_is_highest(maybe_highest_score: int) -> void:
+	if maybe_highest_score > _highest_score:
+		set_highest_score(maybe_highest_score)
 
 
 func set_focus() -> void:
