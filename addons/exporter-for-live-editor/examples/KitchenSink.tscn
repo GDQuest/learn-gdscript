@@ -20,32 +20,33 @@ __meta__ = {
 }
 
 [node name="LessonRequirements" parent="." instance=ExtResource( 8 )]
-margin_right = 300.0
+margin_right = 338.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 300, 200 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 304.0
-margin_right = 604.0
+margin_left = 342.0
+margin_right = 681.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 3
 
 [node name="SlicesList" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 300.0
+margin_right = 339.0
 rect_min_size = Vector2( 100, 0 )
 script = ExtResource( 2 )
 exported_scene = ExtResource( 7 )
 
 [node name="SliceEditor" type="TextEdit" parent="VBoxContainer"]
 margin_top = 4.0
-margin_right = 300.0
+margin_right = 339.0
 margin_bottom = 465.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "extends KinematicBody2D
+text = "###### EXAMPLE CONTENT
+extends KinematicBody2D
 
 export var speed := 1200
 export var jump_speed := -1800
@@ -85,7 +86,7 @@ script = ExtResource( 5 )
 
 [node name="Console" type="RichTextLabel" parent="VBoxContainer"]
 margin_top = 469.0
-margin_right = 300.0
+margin_right = 339.0
 margin_bottom = 569.0
 rect_min_size = Vector2( 0, 100 )
 bbcode_enabled = true
@@ -94,7 +95,7 @@ script = ExtResource( 3 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 573.0
-margin_right = 300.0
+margin_right = 339.0
 margin_bottom = 600.0
 
 [node name="SaveButton" type="Button" parent="VBoxContainer/HBoxContainer"]
@@ -109,10 +110,10 @@ margin_bottom = 27.0
 text = "pause"
 
 [node name="GameViewport" type="ViewportContainer" parent="."]
-margin_left = 608.0
-margin_right = 1108.0
+margin_left = 685.0
+margin_right = 1024.0
 margin_bottom = 600.0
-rect_min_size = Vector2( 500, 0 )
+rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 4 )

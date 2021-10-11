@@ -7,6 +7,65 @@
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 3 )
+leading_spaces = 0
+keyword = "EXPORT"
+closing = false
+name = "set_score_if_highest"
+is_full_file = false
+start = 27
+end = 31
+lines_before = [ "extends VBoxContainer", "", "# warning-ignore:unused_signal", "signal request_play", "", "onready var _play_button := $PlayButton as Button", "onready var _exit_button := $ExitButton as Button", "onready var _highest_score_label := $HBoxContainer/HighScoreLabel as Label", "", "var _highest_score := 0", "", "", "func _ready() -> void:", "	_play_button.connect(\"pressed\", self, \"emit_signal\", [\"request_play\"])", "	_exit_button.connect(\"pressed\", get_tree(), \"quit\")", "	set_focus()", "", "", "func set_highest_score(new_highest_score: int) -> void:", "	_highest_score = new_highest_score", "	if not is_inside_tree():", "		yield(self, \"ready\")", "	_highest_score_label.text = String(new_highest_score).pad_zeros(5)", "", "", "# Sets a higher score if the passed integer is higher than the current", "# highest score" ]
+lines_after = [ "", "func set_focus() -> void:", "	grab_focus()", "	_play_button.grab_focus()", "" ]
+lines_editable = [ "func set_new_score_if_is_highest(maybe_highest_score: int) -> void:", "	if maybe_highest_score > _highest_score:", "		set_highest_score(maybe_highest_score)" ]
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+nodes_paths = [ NodePath("Menu") ]
+file_path = "res://common/Menu.gd"
+name = "Menu"
+original_script = "extends VBoxContainer
+
+# warning-ignore:unused_signal
+signal request_play
+
+onready var _play_button := $PlayButton as Button
+onready var _exit_button := $ExitButton as Button
+onready var _highest_score_label := $HBoxContainer/HighScoreLabel as Label
+
+var _highest_score := 0
+
+
+func _ready() -> void:
+	_play_button.connect(\"pressed\", self, \"emit_signal\", [\"request_play\"])
+	_exit_button.connect(\"pressed\", get_tree(), \"quit\")
+	set_focus()
+
+
+func set_highest_score(new_highest_score: int) -> void:
+	_highest_score = new_highest_score
+	if not is_inside_tree():
+		yield(self, \"ready\")
+	_highest_score_label.text = String(new_highest_score).pad_zeros(5)
+
+
+# Sets a higher score if the passed integer is higher than the current
+# highest score
+# EXPORT set_score_if_highest
+func set_new_score_if_is_highest(maybe_highest_score: int) -> void:
+	if maybe_highest_score > _highest_score:
+		set_highest_score(maybe_highest_score)
+# /EXPORT set_score_if_highest
+
+func set_focus() -> void:
+	grab_focus()
+	_play_button.grab_focus()
+"
+slices = {
+"set_score_if_highest": SubResource( 1 )
+}
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 3 )
 leading_spaces = 2
 keyword = "EXPORT"
 closing = false
@@ -18,7 +77,7 @@ lines_before = [ "extends KinematicBody2D", "", "export var jump_speed := 200", 
 lines_after = [ "	", "	if Input.is_action_just_pressed(\"jump\"):", "		animated_sprite.play(\"jump\")", "	elif is_on_floor() and is_walking:", "		animated_sprite.play(\"walk\")", "", "	_velocity_y += gravity * delta", "", "	var velocity := Vector2(0, _velocity_y)", "	_velocity_y = move_and_slide(velocity, Vector2.UP).y", "" ]
 lines_editable = [ "if is_on_floor():", "	_jump_starting_point = position.y", "	_velocity_y -= jump_speed", "else:", "	var jump_height := _jump_starting_point - position.y", "	var is_going_up: bool = _velocity_y < 0", "	var is_under_apex: bool = jump_height < jump_max_height", "	if is_going_up and is_under_apex:", "		_velocity_y -= jump_speed" ]
 
-[sub_resource type="Resource" id=2]
+[sub_resource type="Resource" id=4]
 script = ExtResource( 2 )
 nodes_paths = [ NodePath("Level/Player") ]
 file_path = "res://common/Player.gd"
@@ -67,73 +126,14 @@ func _physics_process(delta: float) -> void:
 	_velocity_y = move_and_slide(velocity, Vector2.UP).y
 "
 slices = {
-"jump": SubResource( 1 )
-}
-
-[sub_resource type="Resource" id=3]
-script = ExtResource( 3 )
-leading_spaces = 0
-keyword = "EXPORT"
-closing = false
-name = "set_score_if_highest"
-is_full_file = false
-start = 27
-end = 31
-lines_before = [ "extends VBoxContainer", "", "# warning-ignore:unused_signal", "signal request_play", "", "onready var _play_button := $PlayButton as Button", "onready var _exit_button := $ExitButton as Button", "onready var _highest_score_label := $HBoxContainer/HighScoreLabel as Label", "", "var _highest_score := 0", "", "", "func _ready() -> void:", "	_play_button.connect(\"pressed\", self, \"emit_signal\", [\"request_play\"])", "	_exit_button.connect(\"pressed\", get_tree(), \"quit\")", "	set_focus()", "", "", "func set_highest_score(new_highest_score: int) -> void:", "	_highest_score = new_highest_score", "	if not is_inside_tree():", "		yield(self, \"ready\")", "	_highest_score_label.text = String(new_highest_score).pad_zeros(5)", "", "", "# Sets a higher score if the passed integer is higher than the current", "# highest score" ]
-lines_after = [ "", "func set_focus() -> void:", "	grab_focus()", "	_play_button.grab_focus()", "" ]
-lines_editable = [ "func set_new_score_if_is_highest(maybe_highest_score: int) -> void:", "	if maybe_highest_score > _highest_score:", "		set_highest_score(maybe_highest_score)" ]
-
-[sub_resource type="Resource" id=4]
-script = ExtResource( 2 )
-nodes_paths = [ NodePath("Menu") ]
-file_path = "res://common/Menu.gd"
-name = "Menu"
-original_script = "extends VBoxContainer
-
-# warning-ignore:unused_signal
-signal request_play
-
-onready var _play_button := $PlayButton as Button
-onready var _exit_button := $ExitButton as Button
-onready var _highest_score_label := $HBoxContainer/HighScoreLabel as Label
-
-var _highest_score := 0
-
-
-func _ready() -> void:
-	_play_button.connect(\"pressed\", self, \"emit_signal\", [\"request_play\"])
-	_exit_button.connect(\"pressed\", get_tree(), \"quit\")
-	set_focus()
-
-
-func set_highest_score(new_highest_score: int) -> void:
-	_highest_score = new_highest_score
-	if not is_inside_tree():
-		yield(self, \"ready\")
-	_highest_score_label.text = String(new_highest_score).pad_zeros(5)
-
-
-# Sets a higher score if the passed integer is higher than the current
-# highest score
-# EXPORT set_score_if_highest
-func set_new_score_if_is_highest(maybe_highest_score: int) -> void:
-	if maybe_highest_score > _highest_score:
-		set_highest_score(maybe_highest_score)
-# /EXPORT set_score_if_highest
-
-func set_focus() -> void:
-	grab_focus()
-	_play_button.grab_focus()
-"
-slices = {
-"set_score_if_highest": SubResource( 3 )
+"jump": SubResource( 3 )
 }
 
 [resource]
 script = ExtResource( 1 )
 files = {
-"res://common/Menu.gd": SubResource( 4 ),
-"res://common/Player.gd": SubResource( 2 )
+"res://common/Menu.gd": SubResource( 2 ),
+"res://common/Player.gd": SubResource( 4 )
 }
 scene = ExtResource( 4 )
 scene_viewport_size = Vector2( 1024, 600 )
