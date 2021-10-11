@@ -18,6 +18,7 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+scene_files = ExtResource( 7 )
 
 [node name="LessonRequirements" parent="." instance=ExtResource( 8 )]
 margin_right = 338.0
@@ -37,7 +38,6 @@ size_flags_horizontal = 3
 margin_right = 339.0
 rect_min_size = Vector2( 100, 0 )
 script = ExtResource( 2 )
-exported_scene = ExtResource( 7 )
 
 [node name="SliceEditor" type="TextEdit" parent="VBoxContainer"]
 margin_top = 4.0
@@ -118,7 +118,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 script = ExtResource( 4 )
-exported_scene = ExtResource( 7 )
 
 [node name="ValidationManager" type="Node" parent="."]
 script = ExtResource( 9 )

@@ -98,23 +98,20 @@ title = "Hints"
 is_expanded = true
 texture = ExtResource( 4 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints"]
+[node name="Hint1" type="Container" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints"]
 margin_left = 24.0
 margin_top = 25.0
 margin_right = 1010.0
-margin_bottom = 139.0
-
-[node name="Hint1" type="Container" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints/VBoxContainer"]
-margin_right = 986.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 986, 20 )
+margin_bottom = 115.0
+rect_min_size = Vector2( 986, 90 )
 rect_clip_content = true
 size_flags_horizontal = 3
 script = ExtResource( 2 )
 title = "First Hint"
+is_expanded = true
 texture = ExtResource( 4 )
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints/VBoxContainer/Hint1"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints/Hint1"]
 margin_left = 24.0
 margin_top = 25.0
 margin_right = 986.0
@@ -125,18 +122,19 @@ text = "Use `Input.is_action_just_pressed`"
 fit_content_height = true
 scroll_active = false
 
-[node name="Hint2" type="Container" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints/VBoxContainer"]
-margin_top = 24.0
-margin_right = 986.0
-margin_bottom = 44.0
-rect_min_size = Vector2( 986, 20 )
+[node name="Hint2" type="Container" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints"]
+margin_left = 24.0
+margin_top = 117.0
+margin_right = 1010.0
+margin_bottom = 137.0
+rect_min_size = Vector2( 986, 0 )
 rect_clip_content = true
 size_flags_horizontal = 3
 script = ExtResource( 2 )
 title = "Second Hint"
 texture = ExtResource( 4 )
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints/VBoxContainer/Hint2"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Hints/Hint2"]
 margin_left = 24.0
 margin_top = 25.0
 margin_right = 986.0

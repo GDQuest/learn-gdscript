@@ -14,15 +14,15 @@ const ScriptSlice := preload("../collections/ScriptSlice.gd")
 signal slice_selected(script_handler, script_slice)
 
 # Expects the resource to be a SceneFiles resource instance
-export (Resource) var exported_scene: Resource setget set_exported_scene, get_exported_scene
+export (Resource) var scene_files: Resource setget set_scene_files, get_scene_files
 
 var selected_value setget set_selected_value, get_selected_value
 var _button_group := ButtonGroup.new()
 var _signal_vars_index := {}
 
 
-func set_exported_scene(new_scene_files: Resource) -> void:
-	exported_scene = new_scene_files
+func set_scene_files(new_scene_files: Resource) -> void:
+	scene_files = new_scene_files
 	assert(new_scene_files != null, "no scene slices provided")
 	var scene_files := new_scene_files as SceneFiles
 	assert(
@@ -33,8 +33,8 @@ func set_exported_scene(new_scene_files: Resource) -> void:
 	_read_scene_files(scene_files)
 
 
-func get_exported_scene() -> SceneFiles:
-	return exported_scene as SceneFiles
+func get_scene_files() -> SceneFiles:
+	return scene_files as SceneFiles
 
 
 func _read_scene_files(scene_files: SceneFiles) -> void:

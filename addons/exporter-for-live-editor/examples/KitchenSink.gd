@@ -1,5 +1,6 @@
 extends Control
 
+const SceneFiles := preload("../collections/SceneFiles.gd")
 const ScriptHandler := preload("../collections/ScriptHandler.gd")
 const ScriptSlice := preload("../collections/ScriptSlice.gd")
 const SlicesList := preload("../ui/SlicesList.gd")
@@ -18,6 +19,8 @@ onready var pause_button := $VBoxContainer/HBoxContainer/PauseButton as Button
 onready var game_console := $VBoxContainer/Console as GameConsole
 onready var validation_manager := $ValidationManager as ValidationManager
 
+export var scene_files: Resource setget set_scene_files, get_scene_files
+
 var current_slice: ScriptSlice
 var current_script_handler: ScriptHandler
 
@@ -27,7 +30,6 @@ func _ready() -> void:
 	pause_button.connect("pressed", self, "_on_pause_button_pressed")
 
 	slices_list.connect("slice_selected", self, "_on_slice_selected")
-	slices_list.select_first()
 
 
 func _on_slice_selected(script_handler: ScriptHandler, script_slice: ScriptSlice) -> void:
@@ -71,3 +73,20 @@ func _on_save_button_pressed() -> void:
 
 func _on_pause_button_pressed() -> void:
 	game_viewport.toggle_scene_pause()
+
+
+func set_scene_files(new_scene_files: Resource) -> void:
+	if scene_files == new_scene_files or not new_scene_files:
+		return
+	if not (new_scene_files is SceneFiles):
+		push_error("scene_files %s is not a valid instance of SceneFiles"%[new_scene_files])
+		return
+	scene_files = new_scene_files
+	if not is_inside_tree():
+		yield(self, "ready")
+	game_viewport.scene_files = scene_files
+	slices_list.scene_files = scene_files
+	slices_list.select_first()
+
+func get_scene_files() -> SceneFiles:
+	return scene_files as SceneFiles

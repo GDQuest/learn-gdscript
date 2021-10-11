@@ -7,12 +7,11 @@ const ScriptHandler := preload("../collections/ScriptHandler.gd")
 const ScriptSlice := preload("../collections/ScriptSlice.gd")
 
 var _scene: Node
-var _scene_files: SceneFiles setget _set_scene_files
 var _viewport := Viewport.new()
 var scene_paused := false setget set_scene_paused
 
 # Must be a SceneFiles resource
-export (Resource) var exported_scene: Resource setget set_exported_scene, get_exported_scene
+export (Resource) var scene_files: Resource setget set_scene_files, get_scene_files
 
 
 func _init() -> void:
@@ -37,23 +36,6 @@ static func pause_node(node: Node, pause := true, limit := 1000) -> void:
 		limit -= 1
 		for child in node.get_children():
 			pause_node(child, pause, limit)
-
-
-# Reads a SceneFile resource, and sets the scene contained within as the
-# child of the viewport
-func _set_scene_files(new_scene_files: SceneFiles) -> void:
-	if _scene_files == new_scene_files or not new_scene_files:
-		return
-	if not is_inside_tree():
-		yield(self, "ready")
-	if _scene:
-		_viewport.remove_child(_scene)
-		_scene.queue_free()
-	_scene_files = new_scene_files
-	_scene = _scene_files.scene.instance()
-	_viewport.size = _scene_files.scene_viewport_size
-	_viewport.add_child(_scene)
-
 
 # Updates all nodes with the given script.
 # If a node path isn't valid, the node will be silently skipped
@@ -84,18 +66,31 @@ func set_scene_paused(is_it: bool) -> void:
 	pause_scene(is_it)
 
 
-func set_exported_scene(new_scene_files: Resource) -> void:
+func set_scene_files(new_scene_files: Resource) -> void:
 	assert(new_scene_files != null, "no scene slices provided")
-	var scene_files := new_scene_files as SceneFiles
 	assert(
-		scene_files is SceneFiles,
+		new_scene_files is SceneFiles,
 		"file '%s' is not an instance of SceneFiles." % [new_scene_files.resource_path]
 	)
-	_set_scene_files(scene_files)
+	# Reads a SceneFile resource, and sets the scene contained within as the
+	# child of the viewport
+	if scene_files == new_scene_files or not new_scene_files:
+		return
+	scene_files = new_scene_files
+	if not is_inside_tree():
+		yield(self, "ready")
+	if _scene:
+		_viewport.remove_child(_scene)
+		_scene.queue_free()
+	var _scene_files := scene_files as SceneFiles
+	_scene = _scene_files.scene.instance()
+	_viewport.size = _scene_files.scene_viewport_size
+	_viewport.add_child(_scene)
 
 
-func get_exported_scene() -> SceneFiles:
-	return _scene_files
+
+func get_scene_files() -> SceneFiles:
+	return scene_files as SceneFiles
 
 
 func _on_screen_resized() -> void:
