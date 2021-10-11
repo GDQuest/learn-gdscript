@@ -2,8 +2,8 @@ extends CanvasLayer
 
 var points := 0
 
-const Menu := preload("./common/Menu.gd")
-const Level := preload("./common/Level.gd")
+const Menu := preload("./Menu.gd")
+const Level := preload("./Level.gd")
 
 onready var _menu := $Menu as Menu
 onready var _level := $Level as Level
