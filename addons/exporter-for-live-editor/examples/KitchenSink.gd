@@ -18,7 +18,12 @@ onready var save_button := $VBoxContainer/HBoxContainer/SaveButton as Button
 onready var pause_button := $VBoxContainer/HBoxContainer/PauseButton as Button
 onready var game_console := $VSplitContainer/Console as GameConsole
 onready var validation_manager := $ValidationManager as ValidationManager
+onready var title_label := $LessonRequirements/Title as Label
+onready var progress_bar := $LessonRequirements/ProgressBar as ProgressBar
 
+
+export var title := "Title" setget set_title
+export var progress := 0.0 setget set_progress
 export var scene_files: Resource setget set_scene_files, get_scene_files
 
 var current_slice: ScriptSlice
@@ -90,3 +95,17 @@ func set_scene_files(new_scene_files: Resource) -> void:
 
 func get_scene_files() -> SceneFiles:
 	return scene_files as SceneFiles
+
+
+func set_title(new_title: String) -> void:
+	title = new_title
+	if not is_inside_tree():
+		yield(self, "ready")
+	title_label.title = title
+
+
+func set_progress(new_progress: float) -> void:
+	progress = new_progress
+	if not is_inside_tree():
+		yield(self, "ready")
+	progress_bar.value = progress
