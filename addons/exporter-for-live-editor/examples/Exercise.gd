@@ -20,13 +20,21 @@ onready var pause_button := $EditorContainer/VBoxContainer/HBoxContainer/PauseBu
 onready var game_console := $GameContainer/VSplitContainer/Console as GameConsole
 onready var title_label := $LessonContainer/LessonRequirements/Title as Label
 onready var progress_bar := $LessonContainer/LessonRequirements/ProgressBar as ProgressBar
-onready var goal_rich_text_label := $LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Goal as RichTextLabel
-onready var checks_container := $LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Checks as Revealer
+onready var goal_rich_text_label := (
+	$LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Goal
+	as RichTextLabel
+)
+onready var checks_container := (
+	$LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Checks
+	as Revealer
+)
 
 export var title := "Title" setget set_title
 export var goal := "Goal" setget set_goal
 export var progress := 0.0 setget set_progress
 export var scene_files: Resource setget set_scene_files, get_scene_files
+export (String, FILE, "*.gd") var exported_script_path: String setget set_exported_script_path
+export var slice_name: String setget set_slice_name
 
 var current_slice: ScriptSlice
 var current_script_handler: ScriptHandler
@@ -48,6 +56,7 @@ func _instantiate_checks():
 			remove_child(validator)
 			check.add_child(validator)
 			checks_container.add_child(check)
+
 
 func _on_slice_selected(script_handler: ScriptHandler, script_slice: ScriptSlice) -> void:
 	current_slice = script_slice
@@ -96,15 +105,59 @@ func set_scene_files(new_scene_files: Resource) -> void:
 	if scene_files == new_scene_files or not new_scene_files:
 		return
 	if not (new_scene_files is SceneFiles):
-		push_error("scene_files %s is not a valid instance of SceneFiles"%[new_scene_files])
+		push_error("scene_files %s is not a valid instance of SceneFiles" % [new_scene_files])
 		return
 	scene_files = new_scene_files
 	if not is_inside_tree():
 		yield(self, "ready")
 	game_viewport.scene_files = scene_files
 
+
 func get_scene_files() -> SceneFiles:
 	return scene_files as SceneFiles
+
+
+func get_script_handler() -> ScriptHandler:
+	var file := get_scene_files().get_file(exported_script_path)
+	return file
+
+
+func get_slice() -> ScriptSlice:
+	var script_handler := get_script_handler()
+	if script_handler:
+		var slice = script_handler.get_slice(slice_name)
+		return slice
+	return null
+
+
+func set_exported_script_path(path: String) -> void:
+	exported_script_path = path
+	if not scene_files:
+		push_error("no scene files is set")
+	var script_handler := get_script_handler()
+	if script_handler == null:
+		push_error(
+			"File %s is not included in the exported scene %s" % [exported_script_path, scene_files]
+		)
+
+
+func set_slice_name(new_slice_name: String) -> void:
+	if not scene_files:
+		push_error("no scene files is set")
+	if not exported_script_path:
+		push_error("setting a slice without a file path")
+	slice_name = new_slice_name
+	var slice := get_slice()
+	if slice == null:
+		push_error(
+			(
+				"Slice %s is not included in the exported script %s"
+				% [slice_name, get_script_handler()]
+			)
+		)
+	if not is_inside_tree():
+		yield(self, "ready")
+	slice_editor.script_slice = slice
 
 
 func set_title(new_title: String) -> void:

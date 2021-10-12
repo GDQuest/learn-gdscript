@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/resources/lesson_theme_dark.tres" type="Theme" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/GameConsole.gd" type="Script" id=3]
@@ -10,7 +10,6 @@
 [ext_resource path="res://addons/exporter-for-live-editor/ui/ViewModeToggle.gd" type="Script" id=10]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/Revealer.gd" type="Script" id=11]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/chevron.svg" type="Texture" id=12]
-[ext_resource path="res://addons/exporter-for-live-editor/examples/JumpValidator.gd" type="Script" id=13]
 
 [node name="Exercise" type="HBoxContainer"]
 anchor_right = 1.0
@@ -22,9 +21,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 scene_files = ExtResource( 7 )
+exported_script_path = "res://common/Menu.gd"
+slice_name = "set_score_if_highest"
 
 [node name="LessonContainer" type="PanelContainer" parent="."]
-margin_right = 51.0
+margin_right = 336.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -32,24 +33,24 @@ size_flags_vertical = 3
 [node name="LessonRequirements" type="VBoxContainer" parent="LessonContainer"]
 margin_left = 6.0
 margin_top = 4.0
-margin_right = 45.0
+margin_right = 330.0
 margin_bottom = 596.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ProgressBar" type="ProgressBar" parent="LessonContainer/LessonRequirements"]
-margin_right = 39.0
+margin_right = 324.0
 margin_bottom = 19.0
 
 [node name="Title" type="Label" parent="LessonContainer/LessonRequirements"]
 margin_top = 23.0
-margin_right = 39.0
+margin_right = 324.0
 margin_bottom = 50.0
 text = "Title"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="LessonContainer/LessonRequirements"]
 margin_top = 54.0
-margin_right = 39.0
+margin_right = 324.0
 margin_bottom = 592.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -140,8 +141,8 @@ is_expanded = true
 texture = ExtResource( 12 )
 
 [node name="EditorContainer" type="PanelContainer" parent="."]
-margin_left = 59.0
-margin_right = 2789.0
+margin_left = 344.0
+margin_right = 680.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -149,13 +150,13 @@ size_flags_vertical = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="EditorContainer"]
 margin_left = 6.0
 margin_top = 4.0
-margin_right = 2724.0
+margin_right = 330.0
 margin_bottom = 596.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 3
 
 [node name="SliceEditor" type="TextEdit" parent="EditorContainer/VBoxContainer"]
-margin_right = 2718.0
+margin_right = 324.0
 margin_bottom = 561.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -200,7 +201,7 @@ script = ExtResource( 5 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EditorContainer/VBoxContainer"]
 margin_top = 565.0
-margin_right = 2718.0
+margin_right = 324.0
 margin_bottom = 592.0
 
 [node name="SaveButton" type="Button" parent="EditorContainer/VBoxContainer/HBoxContainer"]
@@ -216,7 +217,7 @@ text = "pause"
 
 [node name="ViewModeToggle" type="HBoxContainer" parent="EditorContainer/VBoxContainer/HBoxContainer"]
 margin_left = 110.0
-margin_right = 2718.0
+margin_right = 273.0
 margin_bottom = 27.0
 custom_constants/separation = 0
 script = ExtResource( 10 )
@@ -224,8 +225,8 @@ values = [ "both", "game", "console" ]
 split_container_path = NodePath("../../../../GameContainer/VSplitContainer")
 
 [node name="GameContainer" type="PanelContainer" parent="."]
-margin_left = 2797.0
-margin_right = 2909.0
+margin_left = 688.0
+margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -233,13 +234,13 @@ size_flags_vertical = 3
 [node name="VSplitContainer" type="VSplitContainer" parent="GameContainer"]
 margin_left = 6.0
 margin_top = 4.0
-margin_right = 106.0
+margin_right = 330.0
 margin_bottom = 596.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GameViewport" type="ViewportContainer" parent="GameContainer/VSplitContainer"]
-margin_right = 100.0
+margin_right = 324.0
 margin_bottom = 292.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
@@ -249,7 +250,7 @@ script = ExtResource( 4 )
 
 [node name="Console" type="RichTextLabel" parent="GameContainer/VSplitContainer"]
 margin_top = 300.0
-margin_right = 100.0
+margin_right = 324.0
 margin_bottom = 592.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
@@ -260,10 +261,3 @@ script = ExtResource( 3 )
 
 [node name="ValidationManager" type="Node" parent="."]
 script = ExtResource( 9 )
-
-[node name="JumpValidator" type="Node" parent="."]
-script = ExtResource( 13 )
-__meta__ = {
-"_editor_description_": ""
-}
-title = "React to the \"jump\" input "

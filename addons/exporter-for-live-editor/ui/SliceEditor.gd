@@ -83,7 +83,7 @@ func _on_scrollbar_value_changed(value: float, direction: int) -> void:
 # 2. Scroll/Resize
 func _update_overlays() -> void:
 	errors_overlay.clean()
-	
+
 	if script_slice == null:
 		return
 

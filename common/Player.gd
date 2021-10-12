@@ -17,7 +17,6 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	
 	if Input.is_action_pressed("jump"):
 		# EXPORT jump
 		if is_on_floor():
@@ -30,7 +29,7 @@ func _physics_process(delta: float) -> void:
 			if is_going_up and is_under_apex:
 				_velocity_y -= jump_speed
 		# /EXPORT jump
-	
+
 	if Input.is_action_just_pressed("jump"):
 		animated_sprite.play("jump")
 	elif is_on_floor() and is_walking:

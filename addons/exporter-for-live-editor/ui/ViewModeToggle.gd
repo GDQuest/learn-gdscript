@@ -5,13 +5,14 @@ const BOTH = "both"
 const GAME = "game"
 const CONSOLE = "console"
 
-export(String, "both", "game", "console") var mode := BOTH setget set_mode, get_mode
+export (String, "both", "game", "console") var mode := BOTH setget set_mode, get_mode
 export var split_container_path: NodePath setget set_split_container_path
 
 var _split_container: SplitContainer
 
+
 func _init() -> void:
-	values = [ BOTH, GAME, CONSOLE ]
+	values = [BOTH, GAME, CONSOLE]
 	for button_name in values:
 		var button := Button.new()
 		button.text = button_name
@@ -49,7 +50,7 @@ func set_split_container_path(path: NodePath) -> void:
 		yield(self, "ready")
 	var node = get_node_or_null(path)
 	if not (node is SplitContainer):
-		push_error("nodepath %s does not yield a SplitContainer"%[path])
+		push_error("nodepath %s does not yield a SplitContainer" % [path])
 		return
 	_split_container = node
 	if not Engine.editor_hint:

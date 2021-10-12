@@ -37,6 +37,7 @@ static func pause_node(node: Node, pause := true, limit := 1000) -> void:
 		for child in node.get_children():
 			pause_node(child, pause, limit)
 
+
 # Updates all nodes with the given script.
 # If a node path isn't valid, the node will be silently skipped
 func update_nodes(script: GDScript, node_paths: Array) -> void:
@@ -86,7 +87,6 @@ func set_scene_files(new_scene_files: Resource) -> void:
 	_scene = _scene_files.scene.instance()
 	_viewport.size = _scene_files.scene_viewport_size
 	_viewport.add_child(_scene)
-
 
 
 func get_scene_files() -> SceneFiles:

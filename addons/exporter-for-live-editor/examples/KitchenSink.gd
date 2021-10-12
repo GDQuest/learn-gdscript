@@ -21,7 +21,6 @@ onready var validation_manager := $ValidationManager as ValidationManager
 onready var title_label := $LessonRequirements/Title as Label
 onready var progress_bar := $LessonRequirements/ProgressBar as ProgressBar
 
-
 export var title := "Title" setget set_title
 export var progress := 0.0 setget set_progress
 export var scene_files: Resource setget set_scene_files, get_scene_files
@@ -84,7 +83,7 @@ func set_scene_files(new_scene_files: Resource) -> void:
 	if scene_files == new_scene_files or not new_scene_files:
 		return
 	if not (new_scene_files is SceneFiles):
-		push_error("scene_files %s is not a valid instance of SceneFiles"%[new_scene_files])
+		push_error("scene_files %s is not a valid instance of SceneFiles" % [new_scene_files])
 		return
 	scene_files = new_scene_files
 	if not is_inside_tree():
@@ -92,6 +91,7 @@ func set_scene_files(new_scene_files: Resource) -> void:
 	game_viewport.scene_files = scene_files
 	slices_list.scene_files = scene_files
 	slices_list.select_first()
+
 
 func get_scene_files() -> SceneFiles:
 	return scene_files as SceneFiles

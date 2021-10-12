@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/exporter-for-live-editor/examples/Exercise.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/exporter-for-live-editor/validation/Validator.gd" type="Script" id=2]
+[ext_resource path="res://addons/exporter-for-live-editor/examples/JumpValidator.gd" type="Script" id=3]
+[ext_resource path="res://addons/exporter-for-live-editor/examples/Lesson.gd" type="Script" id=4]
+
+[node name="Lesson" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 2
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exercises" type="Panel" parent="."]
+margin_right = 1024.0
+margin_bottom = 562.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Exercise" parent="Exercises" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 4.0
+margin_right = 1024.0
+margin_bottom = 562.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Validator" type="Node" parent="Exercises/Exercise"]
+script = ExtResource( 3 )
+
+[node name="Exercise2" parent="Exercises" instance=ExtResource( 1 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 4.0
+margin_right = 1024.0
+margin_bottom = 562.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Validator" type="Node" parent="Exercises/Exercise2"]
+script = ExtResource( 2 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_top = 566.0
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 27.0
+alignment = 2
+
+[node name="NextButton" type="Button" parent="PanelContainer/HBoxContainer"]
+margin_left = 968.0
+margin_right = 1010.0
+margin_bottom = 20.0
+text = "Next"

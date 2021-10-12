@@ -56,7 +56,7 @@ func _ready() -> void:
 		_values_index[button_value] = button
 		button.set_meta("value", button_value)
 		button.connect("pressed", self, "_on_button_pressed", [button_value])
-	
+
 
 # Retrieves a value associated with a button; called on _ready when
 # looping over buttons. Override in subclasses for custom value
