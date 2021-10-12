@@ -3,11 +3,15 @@ extends Node
 class_name Validator
 
 const ScriptSlice := preload("../collections/ScriptSlice.gd")
+const _ERROR = "You should extend the Validator class and implement your own `validate` method."
 
-# @type Signal<LanguageError[]>
+# @type Signal[LanguageError[]]
 signal validation_completed(errors)
 
-const _ERROR = "You should extend the Validator class and implement your own `validate` method."
+# This is not used by the validator directly, but in some circumstances, the
+# validator may be used by other modules to create UI nodes. In that case, the
+# title attribute can be used to derive a check widget
+export var title := ""
 
 
 # @abstract

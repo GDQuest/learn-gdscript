@@ -83,7 +83,7 @@ func set_status(new_status: int) -> void:
 
 func set_text(new_text: String) -> void:
 	text = new_text
-	_text_node.text = new_text
+	_text_node.text = text
 
 
 func set_active(new_is_active: bool) -> void:
