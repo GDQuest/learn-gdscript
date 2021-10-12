@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/examples/lesson_theme_dark.tres" type="Theme" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/SlicesList.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://common/Game.live-editor.tres" type="Resource" id=7]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/LessonRequirements.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/exporter-for-live-editor/validation/ValidationManager.gd" type="Script" id=9]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/ViewModeToggle.gd" type="Script" id=10]
 
 [node name="KitchenSink" type="HBoxContainer"]
 anchor_right = 1.0
@@ -42,7 +43,7 @@ script = ExtResource( 2 )
 [node name="SliceEditor" type="TextEdit" parent="VBoxContainer"]
 margin_top = 4.0
 margin_right = 339.0
-margin_bottom = 465.0
+margin_bottom = 569.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "###### EXAMPLE CONTENT
@@ -84,15 +85,6 @@ caret_block_mode = true
 caret_blink = true
 script = ExtResource( 5 )
 
-[node name="Console" type="RichTextLabel" parent="VBoxContainer"]
-margin_top = 469.0
-margin_right = 339.0
-margin_bottom = 569.0
-rect_min_size = Vector2( 0, 100 )
-bbcode_enabled = true
-scroll_following = true
-script = ExtResource( 3 )
-
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 573.0
 margin_right = 339.0
@@ -109,15 +101,38 @@ margin_right = 106.0
 margin_bottom = 27.0
 text = "pause"
 
-[node name="GameViewport" type="ViewportContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 110.0
+margin_right = 273.0
+margin_bottom = 27.0
+custom_constants/separation = 0
+script = ExtResource( 10 )
+values = [ "both", "game", "console" ]
+
+[node name="ValidationManager" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[node name="VSplitContainer" type="VSplitContainer" parent="."]
 margin_left = 685.0
 margin_right = 1024.0
 margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GameViewport" type="ViewportContainer" parent="VSplitContainer"]
+margin_right = 339.0
+margin_bottom = 492.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 script = ExtResource( 4 )
 
-[node name="ValidationManager" type="Node" parent="."]
-script = ExtResource( 9 )
+[node name="Console" type="RichTextLabel" parent="VSplitContainer"]
+margin_top = 500.0
+margin_right = 339.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 0, 100 )
+bbcode_enabled = true
+scroll_following = true
+script = ExtResource( 3 )

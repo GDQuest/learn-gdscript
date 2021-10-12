@@ -1,3 +1,4 @@
+tool
 # A container for buttons that simplifies button groups.
 #
 # This extends `Container` so you can use it with any container
@@ -55,7 +56,7 @@ func _ready() -> void:
 		_values_index[button_value] = button
 		button.set_meta("value", button_value)
 		button.connect("pressed", self, "_on_button_pressed", [button_value])
-
+	
 
 # Retrieves a value associated with a button; called on _ready when
 # looping over buttons. Override in subclasses for custom value
@@ -88,11 +89,11 @@ func _on_button_pressed(button_value) -> void:
 
 # Retrieves an option value by ordinal index.
 func get_value_by_index(index: int):
-	var values = _values_index.values()
-	var is_valid_index = index >= 0 and index < values.size()
+	var keys = _values_index.keys()
+	var is_valid_index = index >= 0 and index < keys.size()
 	assert(is_valid_index, "index %s is not valid" % [index])
 	if is_valid_index:
-		return values[index]
+		return keys[index]
 
 
 # If you know your button order, using this can be safer than
@@ -106,18 +107,21 @@ func set_selected_value_by_index(index: int) -> void:
 # Selects the first button
 func select_first() -> void:
 	send_signals_on_press = false
-	set_selected_value(0)
+	set_selected_value_by_index(0)
 	send_signals_on_press = true
 
 
 # Selects the last button
 func select_last() -> void:
 	send_signals_on_press = false
-	set_selected_value(values.size() - 1)
+	set_selected_value_by_index(values.size() - 1)
 	send_signals_on_press = true
 
 
 func set_selected_value(new_value) -> void:
+	selected_value = new_value
+	if not is_inside_tree():
+		yield(self, "ready")
 	assert(
 		new_value in _values_index,
 		"value %s is not a valid value of the button group %s" % [new_value, get_path()]
@@ -127,5 +131,10 @@ func set_selected_value(new_value) -> void:
 		button.pressed = true
 
 
+
+func get_pressed_button() -> BaseButton:
+	return _button_group.get_pressed_button()
+
+
 func get_selected_value():
-	_button_group.get_pressed_button().get_meta("value")
+	return selected_value
