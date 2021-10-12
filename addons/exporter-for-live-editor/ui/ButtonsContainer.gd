@@ -122,14 +122,14 @@ func set_selected_value(new_value) -> void:
 	selected_value = new_value
 	if not is_inside_tree():
 		yield(self, "ready")
-	assert(
-		new_value in _values_index,
-		"value %s is not a valid value of the button group %s" % [new_value, get_path()]
-	)
+	if not Engine.editor_hint:
+		assert(
+			new_value in _values_index,
+			"value %s is not a valid value of the button group %s" % [new_value, get_path()]
+		)
 	if new_value in _values_index:
 		var button := _values_index[new_value] as BaseButton
 		button.pressed = true
-
 
 
 func get_pressed_button() -> BaseButton:
