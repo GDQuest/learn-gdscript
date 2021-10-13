@@ -1,5 +1,6 @@
 extends Validator
 
+
 func validate(scene: Node, _script: ScriptHandler, _slice: ScriptSlice):
 	yield(get_tree(), "idle_frame")
 	if not verify(InputMap.has_action("jump"), "no jump action"):

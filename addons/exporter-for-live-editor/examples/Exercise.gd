@@ -12,7 +12,6 @@ const ScriptVerifier := preload("../lsp/ScriptVerifier.gd")
 const LanguageServerError := preload("../lsp/LanguageServerError.gd")
 const ValidationManager := preload("../validation/ValidationManager.gd")
 
-
 signal exercise_validated(is_valid)
 
 onready var validation_manager := $ValidationManager as ValidationManager
@@ -77,6 +76,7 @@ func _instantiate_hints():
 		hints_container.add_child(hint)
 		hint.add_child(hint_label)
 
+
 func _on_save_button_pressed() -> void:
 	var script_path := get_script_handler().file_path
 	var script_text := get_slice().current_full_text
@@ -113,6 +113,7 @@ func _on_save_button_pressed() -> void:
 	var validation_success = validation_errors.size() == 0
 	_send_exercise_validated_signal(true)
 
+
 func _on_pause_button_pressed() -> void:
 	game_viewport.toggle_scene_pause()
 
@@ -120,6 +121,7 @@ func _on_pause_button_pressed() -> void:
 func _send_exercise_validated_signal(is_valid: bool) -> void:
 	yield(get_tree(), "idle_frame")
 	emit_signal("exercise_validated", is_valid)
+
 
 func set_scene_files(new_scene_files: Resource) -> void:
 	if scene_files == new_scene_files or not new_scene_files:
