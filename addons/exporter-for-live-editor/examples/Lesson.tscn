@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Exercise.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/exporter-for-live-editor/examples/JumpValidator.gd" type="Script" id=3]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/godot_theme.tres" type="Theme" id=2]
+[ext_resource path="res://addons/exporter-for-live-editor/examples/validator_jump.gd" type="Script" id=3]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Lesson.gd" type="Script" id=4]
 
 [node name="Lesson" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 2 )
 alignment = 2
 script = ExtResource( 4 )
 __meta__ = {
@@ -29,8 +31,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 hints = PoolStringArray( "Use comparison operators" )
 
-[node name="Validator" type="Node" parent="Exercises/Exercise"]
+[node name="validator_comparison" type="Node" parent="Exercises/Exercise"]
 script = ExtResource( 3 )
+title = "make sure high score is only replaced if it's bigger than the old high score"
 
 [node name="Exercise2" parent="Exercises" instance=ExtResource( 1 )]
 visible = false
@@ -45,8 +48,9 @@ exported_script_path = "res://common/Player.gd"
 slice_name = "jump"
 hints = PoolStringArray( "Blah Blah Blah" )
 
-[node name="JumpValidator" type="Node" parent="Exercises/Exercise2"]
+[node name="validator_jump" type="Node" parent="Exercises/Exercise2"]
 script = ExtResource( 3 )
+title = "The player jumps when pressing the \"jump\" button"
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 margin_top = 566.0
@@ -54,14 +58,14 @@ margin_right = 1024.0
 margin_bottom = 600.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1017.0
-margin_bottom = 27.0
+margin_left = 6.0
+margin_top = 4.0
+margin_right = 1018.0
+margin_bottom = 30.0
 alignment = 2
 
 [node name="NextButton" type="Button" parent="PanelContainer/HBoxContainer"]
 margin_left = 968.0
-margin_right = 1010.0
-margin_bottom = 20.0
+margin_right = 1012.0
+margin_bottom = 26.0
 text = "Next"
