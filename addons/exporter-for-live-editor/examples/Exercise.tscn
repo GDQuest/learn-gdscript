@@ -23,7 +23,7 @@ exported_script_path = "res://common/Menu.gd"
 slice_name = "set_score_if_highest"
 
 [node name="LessonContainer" type="PanelContainer" parent="."]
-margin_right = 336.0
+margin_right = 335.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -31,24 +31,24 @@ size_flags_vertical = 3
 [node name="LessonRequirements" type="VBoxContainer" parent="LessonContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 329.0
+margin_right = 328.0
 margin_bottom = 593.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ProgressBar" type="ProgressBar" parent="LessonContainer/LessonRequirements"]
-margin_right = 322.0
+margin_right = 321.0
 margin_bottom = 14.0
 
 [node name="Title" type="Label" parent="LessonContainer/LessonRequirements"]
 margin_top = 18.0
-margin_right = 322.0
+margin_right = 321.0
 margin_bottom = 32.0
 text = "Title"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="LessonContainer/LessonRequirements"]
 margin_top = 36.0
-margin_right = 322.0
+margin_right = 321.0
 margin_bottom = 586.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -91,7 +91,7 @@ is_expanded = true
 texture = ExtResource( 12 )
 
 [node name="EditorContainer" type="PanelContainer" parent="."]
-margin_left = 344.0
+margin_left = 343.0
 margin_right = 680.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
@@ -100,13 +100,13 @@ size_flags_vertical = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="EditorContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 329.0
+margin_right = 330.0
 margin_bottom = 593.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 3
 
 [node name="SliceEditor" type="TextEdit" parent="EditorContainer/VBoxContainer"]
-margin_right = 322.0
+margin_right = 323.0
 margin_bottom = 562.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -151,7 +151,7 @@ script = ExtResource( 5 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EditorContainer/VBoxContainer"]
 margin_top = 566.0
-margin_right = 322.0
+margin_right = 323.0
 margin_bottom = 586.0
 
 [node name="SaveButton" type="Button" parent="EditorContainer/VBoxContainer/HBoxContainer"]
@@ -165,9 +165,15 @@ margin_right = 95.0
 margin_bottom = 20.0
 text = "pause"
 
-[node name="ViewModeToggle" type="HBoxContainer" parent="EditorContainer/VBoxContainer/HBoxContainer"]
+[node name="SolutionButton" type="Button" parent="EditorContainer/VBoxContainer/HBoxContainer"]
 margin_left = 99.0
-margin_right = 249.0
+margin_right = 169.0
+margin_bottom = 20.0
+text = "show me"
+
+[node name="ViewModeToggle" type="HBoxContainer" parent="EditorContainer/VBoxContainer/HBoxContainer"]
+margin_left = 173.0
+margin_right = 323.0
 margin_bottom = 20.0
 custom_constants/separation = 0
 script = ExtResource( 10 )

@@ -19,6 +19,7 @@ onready var slice_editor := $EditorContainer/VBoxContainer/SliceEditor as SliceE
 onready var game_viewport := $GameContainer/VSplitContainer/GameViewport as GameViewport
 onready var save_button := $EditorContainer/VBoxContainer/HBoxContainer/SaveButton as Button
 onready var pause_button := $EditorContainer/VBoxContainer/HBoxContainer/PauseButton as Button
+onready var solution_button := $EditorContainer/VBoxContainer/HBoxContainer/SolutionButton as Button
 onready var game_console := $GameContainer/VSplitContainer/Console as GameConsole
 onready var title_label := $LessonContainer/LessonRequirements/Title as Label
 onready var progress_bar := $LessonContainer/LessonRequirements/ProgressBar as ProgressBar
@@ -41,6 +42,7 @@ func _ready() -> void:
 	_instantiate_hints()
 	save_button.connect("pressed", self, "_on_save_button_pressed")
 	pause_button.connect("pressed", self, "_on_pause_button_pressed")
+	solution_button.connect("pressed", slice_editor, "sync_text_with_slice")
 
 
 func _instantiate_checks():
