@@ -79,7 +79,8 @@ func _on_scrollbar_value_changed(value: float, direction: int) -> void:
 func sync_text_with_slice() -> void:
 	if not script_slice:
 		return
-	text = script_slice.current_text
+	text = script_slice.slice_text
+	_on_text_changed()
 
 # Creates and positions error overlays at the right position.
 # Call after:
@@ -129,6 +130,7 @@ func set_errors(new_errors: Array) -> void:
 func set_script_slice(new_script_slice: ScriptSlice) -> void:
 	script_slice = new_script_slice
 	text = ""
+	script_slice.current_text = ""
 
 
 func get_script_slice() -> ScriptSlice:

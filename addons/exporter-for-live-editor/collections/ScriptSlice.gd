@@ -43,7 +43,7 @@ var slice_text: String setget _read_only, get_slice_text
 var full_text: String setget _read_only, get_full_text
 
 # A cache for the modified slice
-var current_text: String setget set_current_text, get_current_text
+var current_text: String
 
 # Returns the full text, but the slice is replaced with the modified slice
 var current_full_text: String setget _read_only, get_current_full_text
@@ -119,23 +119,9 @@ func get_full_text() -> String:
 # Returns the full text, with proper indentation, with the current text
 # (temporary text buffer) instead of the slice
 func get_current_full_text() -> String:
-	if current_text == "":
-		return get_full_text()
-
 	var lines = current_text.split("\n")
 	var middle_text := Array(indent_text(leading_spaces, lines) if leading_spaces else lines)
 	return PoolStringArray(lines_before + middle_text + lines_after).join("\n")
-
-
-func set_current_text(new_current_text: String) -> void:
-	current_text = new_current_text
-
-
-func get_current_text() -> String:
-	if current_text == "":
-		return get_slice_text()
-	return current_text
-
 
 func get_start_offset() -> int:
 	return lines_before.size()
