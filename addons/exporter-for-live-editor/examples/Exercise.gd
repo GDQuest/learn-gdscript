@@ -22,6 +22,7 @@ onready var title_label := $LessonContainer/LessonRequirements/Title as Label
 onready var progress_bar := $LessonContainer/LessonRequirements/ProgressBar as ProgressBar
 onready var goal_rich_text_label := $LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Goal as RichTextLabel
 onready var checks_container := $LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Checks as Revealer
+onready var hints_container := $LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Hints as Revealer
 
 export var title := "Title" setget set_title
 export var goal := "Goal" setget set_goal
@@ -29,6 +30,7 @@ export var progress := 0.0 setget set_progress
 export var scene_files: Resource setget set_scene_files, get_scene_files
 export (String, FILE, "*.gd") var exported_script_path: String setget set_exported_script_path
 export var slice_name: String setget set_slice_name
+export var hints := PoolStringArray()
 
 var current_slice: ScriptSlice
 var current_script_handler: ScriptHandler
@@ -36,13 +38,16 @@ var current_script_handler: ScriptHandler
 
 func _ready() -> void:
 	_instantiate_checks()
+	_instantiate_hints()
 	save_button.connect("pressed", self, "_on_save_button_pressed")
 	pause_button.connect("pressed", self, "_on_pause_button_pressed")
 
 
 func _instantiate_checks():
+	var validators_number := 0
 	for child in get_children():
 		if child is Validator:
+			validators_number += 1
 			var validator := child as Validator
 			var check := Check.new()
 			check.text = validator.title
@@ -50,6 +55,27 @@ func _instantiate_checks():
 			remove_child(validator)
 			check.add_child(validator)
 			checks_container.add_child(check)
+
+	if validators_number == 0:
+		checks_container.hide()
+
+
+func _instantiate_hints():
+	if hints.size() == 0:
+		hints_container.hide()
+
+	for index in hints.size():
+		var hint_label := Label.new()
+		hint_label.text = hints[index]
+
+		var hint := Revealer.new()
+		var hint_title := "Hint " + String(index + 1).pad_zeros(1)
+		hint.title = hint_title
+		hint.name = hint_title
+		hint.is_expanded = false
+
+		hints_container.add_child(hint)
+		hint.add_child(hint_label)
 
 
 func _on_slice_selected(script_handler: ScriptHandler, script_slice: ScriptSlice) -> void:

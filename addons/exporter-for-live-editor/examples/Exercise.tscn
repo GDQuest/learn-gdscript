@@ -1,6 +1,5 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://addons/exporter-for-live-editor/resources/lesson_theme_dark.tres" type="Theme" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/GameConsole.gd" type="Script" id=3]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/GameViewport.gd" type="Script" id=4]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/SliceEditor.gd" type="Script" id=5]
@@ -14,7 +13,6 @@
 [node name="Exercise" type="HBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
 custom_constants/separation = 8
 script = ExtResource( 6 )
 __meta__ = {
@@ -31,33 +29,33 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LessonRequirements" type="VBoxContainer" parent="LessonContainer"]
-margin_left = 6.0
-margin_top = 4.0
-margin_right = 330.0
-margin_bottom = 596.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 329.0
+margin_bottom = 593.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ProgressBar" type="ProgressBar" parent="LessonContainer/LessonRequirements"]
-margin_right = 324.0
-margin_bottom = 19.0
+margin_right = 322.0
+margin_bottom = 14.0
 
 [node name="Title" type="Label" parent="LessonContainer/LessonRequirements"]
-margin_top = 23.0
-margin_right = 324.0
-margin_bottom = 50.0
+margin_top = 18.0
+margin_right = 322.0
+margin_bottom = 32.0
 text = "Title"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="LessonContainer/LessonRequirements"]
-margin_top = 54.0
-margin_right = 324.0
-margin_bottom = 592.0
+margin_top = 36.0
+margin_right = 322.0
+margin_bottom = 586.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LessonContainer/LessonRequirements/ScrollContainer"]
 margin_right = 1010.0
-margin_bottom = 526.0
+margin_bottom = 538.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -73,60 +71,12 @@ selection_enabled = true
 margin_top = 104.0
 margin_right = 1010.0
 margin_bottom = 194.0
-rect_min_size = Vector2( 1010, 90 )
+rect_min_size = Vector2( 1010, 0 )
 rect_clip_content = true
 size_flags_horizontal = 3
 script = ExtResource( 11 )
 title = "Hints"
-is_expanded = true
 texture = ExtResource( 12 )
-
-[node name="Hint1" type="Container" parent="LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Hints"]
-margin_left = 24.0
-margin_top = 32.0
-margin_right = 1010.0
-margin_bottom = 122.0
-rect_min_size = Vector2( 986, 90 )
-rect_clip_content = true
-size_flags_horizontal = 3
-script = ExtResource( 11 )
-title = "First Hint"
-is_expanded = true
-texture = ExtResource( 12 )
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Hints/Hint1"]
-margin_left = 24.0
-margin_top = 32.0
-margin_right = 986.0
-margin_bottom = 60.0
-bbcode_enabled = true
-bbcode_text = "Use `Input.is_action_just_pressed`"
-text = "Use `Input.is_action_just_pressed`"
-fit_content_height = true
-scroll_active = false
-
-[node name="Hint2" type="Container" parent="LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Hints"]
-margin_left = 24.0
-margin_top = 124.0
-margin_right = 1010.0
-margin_bottom = 151.0
-rect_min_size = Vector2( 986, 0 )
-rect_clip_content = true
-size_flags_horizontal = 3
-script = ExtResource( 11 )
-title = "Second Hint"
-texture = ExtResource( 12 )
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Hints/Hint2"]
-margin_left = 24.0
-margin_top = 32.0
-margin_right = 986.0
-margin_bottom = 60.0
-bbcode_enabled = true
-bbcode_text = "Use `Input.is_action_just_pressed`"
-text = "Use `Input.is_action_just_pressed`"
-fit_content_height = true
-scroll_active = false
 
 [node name="Checks" type="Container" parent="LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer"]
 margin_top = 198.0
@@ -148,16 +98,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EditorContainer"]
-margin_left = 6.0
-margin_top = 4.0
-margin_right = 330.0
-margin_bottom = 596.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 329.0
+margin_bottom = 593.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 3
 
 [node name="SliceEditor" type="TextEdit" parent="EditorContainer/VBoxContainer"]
-margin_right = 324.0
-margin_bottom = 561.0
+margin_right = 322.0
+margin_bottom = 562.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "###### EXAMPLE CONTENT
@@ -200,25 +150,25 @@ caret_blink = true
 script = ExtResource( 5 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EditorContainer/VBoxContainer"]
-margin_top = 565.0
-margin_right = 324.0
-margin_bottom = 592.0
+margin_top = 566.0
+margin_right = 322.0
+margin_bottom = 586.0
 
 [node name="SaveButton" type="Button" parent="EditorContainer/VBoxContainer/HBoxContainer"]
-margin_right = 47.0
-margin_bottom = 27.0
+margin_right = 41.0
+margin_bottom = 20.0
 text = "Save"
 
 [node name="PauseButton" type="Button" parent="EditorContainer/VBoxContainer/HBoxContainer"]
-margin_left = 51.0
-margin_right = 106.0
-margin_bottom = 27.0
+margin_left = 45.0
+margin_right = 95.0
+margin_bottom = 20.0
 text = "pause"
 
 [node name="ViewModeToggle" type="HBoxContainer" parent="EditorContainer/VBoxContainer/HBoxContainer"]
-margin_left = 110.0
-margin_right = 273.0
-margin_bottom = 27.0
+margin_left = 99.0
+margin_right = 249.0
+margin_bottom = 20.0
 custom_constants/separation = 0
 script = ExtResource( 10 )
 values = [ "both", "game", "console" ]
@@ -232,16 +182,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VSplitContainer" type="VSplitContainer" parent="GameContainer"]
-margin_left = 6.0
-margin_top = 4.0
-margin_right = 330.0
-margin_bottom = 596.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 329.0
+margin_bottom = 593.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GameViewport" type="ViewportContainer" parent="GameContainer/VSplitContainer"]
-margin_right = 324.0
-margin_bottom = 292.0
+margin_right = 322.0
+margin_bottom = 287.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -249,9 +199,9 @@ stretch = true
 script = ExtResource( 4 )
 
 [node name="Console" type="RichTextLabel" parent="GameContainer/VSplitContainer"]
-margin_top = 300.0
-margin_right = 324.0
-margin_bottom = 592.0
+margin_top = 299.0
+margin_right = 322.0
+margin_bottom = 586.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 size_flags_vertical = 3

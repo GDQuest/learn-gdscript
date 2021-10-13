@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Exercise.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/exporter-for-live-editor/validation/Validator.gd" type="Script" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/JumpValidator.gd" type="Script" id=3]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Lesson.gd" type="Script" id=4]
 
@@ -28,6 +27,7 @@ margin_right = 1024.0
 margin_bottom = 562.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+hints = PoolStringArray( "Use comparison operators" )
 
 [node name="Validator" type="Node" parent="Exercises/Exercise"]
 script = ExtResource( 3 )
@@ -41,9 +41,12 @@ margin_right = 1024.0
 margin_bottom = 562.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+exported_script_path = "res://common/Player.gd"
+slice_name = "jump"
+hints = PoolStringArray( "Blah Blah Blah" )
 
-[node name="Validator" type="Node" parent="Exercises/Exercise2"]
-script = ExtResource( 2 )
+[node name="JumpValidator" type="Node" parent="Exercises/Exercise2"]
+script = ExtResource( 3 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 margin_top = 566.0
