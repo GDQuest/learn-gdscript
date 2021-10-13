@@ -12,6 +12,9 @@ const ScriptVerifier := preload("../lsp/ScriptVerifier.gd")
 const LanguageServerError := preload("../lsp/LanguageServerError.gd")
 const ValidationManager := preload("../validation/ValidationManager.gd")
 
+
+signal exercise_validated(is_valid)
+
 onready var validation_manager := $ValidationManager as ValidationManager
 onready var slice_editor := $EditorContainer/VBoxContainer/SliceEditor as SliceEditor
 onready var game_viewport := $GameContainer/VSplitContainer/GameViewport as GameViewport
@@ -91,6 +94,7 @@ func _on_save_button_pressed() -> void:
 				error.error_range.start.line,
 				error.error_range.start.character
 			)
+		_send_exercise_validated_signal(false)
 		return
 	script_text = LiveEditorMessageBus.replace_script(script_path, script_text)
 	var script = GDScript.new()
@@ -101,16 +105,21 @@ func _on_save_button_pressed() -> void:
 			"The script has an error, but the language server didn't catch it. Are you connected?",
 			script_path
 		)
+		_send_exercise_validated_signal(false)
 		return
 	game_viewport.update_nodes(script, nodes_paths)
 	validation_manager.validate_all()
 	var validation_errors: Array = yield(validation_manager, "validation_completed_all")
 	var validation_success = validation_errors.size() == 0
-	prints("success:", validation_success)
+	_send_exercise_validated_signal(true)
 
 func _on_pause_button_pressed() -> void:
 	game_viewport.toggle_scene_pause()
 
+
+func _send_exercise_validated_signal(is_valid: bool) -> void:
+	yield(get_tree(), "idle_frame")
+	emit_signal("exercise_validated", is_valid)
 
 func set_scene_files(new_scene_files: Resource) -> void:
 	if scene_files == new_scene_files or not new_scene_files:

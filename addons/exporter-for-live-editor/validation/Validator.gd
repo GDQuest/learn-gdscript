@@ -26,16 +26,17 @@ export var title := ""
 # emitting the signal directly
 func validate(_scene: Node, _script_handler: ScriptHandler, _script_text: ScriptSlice) -> void:
 	push_error(_ERROR)
-	yield(get_tree(), "idle_frame")
 	_validation_success()
 
 
 func _validation_success() -> void:
+	yield(get_tree(), "idle_frame")
 	emit_signal("validation_completed", [])
 
 
 func _validation_error(errors: Array) -> void:
 	assert(errors.size() > 0, "validation error array should contain at least one element")
+	yield(get_tree(), "idle_frame")
 	emit_signal("validation_completed", errors)
 
 

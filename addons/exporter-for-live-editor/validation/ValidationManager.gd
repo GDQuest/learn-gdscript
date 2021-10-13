@@ -102,4 +102,5 @@ func validate_all() -> void:
 		if goal.is_in_group(GROUP_NAME):
 			validate(goal)
 			errors += yield(self, "validation_completed")
+	yield(get_tree(), "idle_frame")
 	emit_signal("validation_completed_all", errors)
