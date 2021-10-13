@@ -20,14 +20,8 @@ onready var pause_button := $EditorContainer/VBoxContainer/HBoxContainer/PauseBu
 onready var game_console := $GameContainer/VSplitContainer/Console as GameConsole
 onready var title_label := $LessonContainer/LessonRequirements/Title as Label
 onready var progress_bar := $LessonContainer/LessonRequirements/ProgressBar as ProgressBar
-onready var goal_rich_text_label := (
-	$LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Goal
-	as RichTextLabel
-)
-onready var checks_container := (
-	$LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Checks
-	as Revealer
-)
+onready var goal_rich_text_label := $LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Goal as RichTextLabel
+onready var checks_container := $LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Checks as Revealer
 
 export var title := "Title" setget set_title
 export var goal := "Goal" setget set_goal
