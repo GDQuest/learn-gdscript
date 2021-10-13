@@ -26,6 +26,7 @@ onready var goal_rich_text_label := $LessonContainer/LessonRequirements/ScrollCo
 onready var checks_container := $LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Checks as Revealer
 onready var hints_container := $LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Hints as Revealer
 
+
 export var title := "Title" setget set_title
 export var goal := "Goal" setget set_goal
 export var progress := 0.0 setget set_progress
@@ -109,14 +110,14 @@ func _on_save_button_pressed() -> void:
 		_send_exercise_validated_signal(false)
 		return
 	game_viewport.update_nodes(script, nodes_paths)
-	
+
 	validation_manager.scene = game_viewport._scene
 	validation_manager.script_handler = get_script_handler()
 	validation_manager.script_slice = get_slice()
 	validation_manager.validate_all()
 	var validation_errors: Array = yield(validation_manager, "validation_completed_all")
 	var validation_success = validation_errors.size() == 0
-	_send_exercise_validated_signal(true)
+	_send_exercise_validated_signal(validation_success)
 
 
 func _on_pause_button_pressed() -> void:
@@ -139,9 +140,10 @@ func set_scene_files(new_scene_files: Resource) -> void:
 		yield(self, "ready")
 	game_viewport.scene_files = scene_files
 
+
 func get_scene_files() -> SceneFiles:
 	return scene_files as SceneFiles
-	
+
 
 func get_script_handler() -> ScriptHandler:
 	var file := get_scene_files().get_file(exported_script_path)

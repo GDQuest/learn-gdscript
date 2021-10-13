@@ -10,6 +10,7 @@ onready var next_button := $PanelContainer/HBoxContainer/NextButton as Button
 var _exercises := []
 var _current_exercise := 0
 
+
 func _ready() -> void:
 	for child in exercises_container.get_children():
 		if child is Exercise:
@@ -17,13 +18,14 @@ func _ready() -> void:
 			var index := _exercises.size()
 			_exercises.append(exercise)
 			exercise.connect("exercise_validated", self, "_on_exercise_validated", [index])
-	
+
 	for index in _exercises.size():
 		var progress = (float(index + 1) / _exercises.size()) * 100
 		var exercise := _exercises[index] as Exercise
 		exercise.progress = progress
-	
+
 	next_button.connect("pressed", self, "_on_next_button_pressed")
+
 
 func _on_exercise_validated(is_valid: bool, exercise_index: int) -> void:
 	next_button.disabled = not is_valid

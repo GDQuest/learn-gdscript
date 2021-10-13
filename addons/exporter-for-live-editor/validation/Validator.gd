@@ -59,5 +59,6 @@ func _validation_error(errors: Array) -> void:
 func verify(thing: bool, message: String) -> bool:
 	if thing:
 		return true
+	prints("Validation error:", message)
 	_validation_error([message])
 	return false
