@@ -5,7 +5,7 @@ func validate(scene: Node, _script: ScriptHandler, _slice: ScriptSlice):
 	yield(get_tree(), "idle_frame")
 	if not verify(InputMap.has_action("jump"), "no jump action"):
 		return
-	var player = scene.get_node("Player")
+	var player = scene.get_node("Level/Player")
 	var position = player.position.y
 	Input.action_press("jump")
 	yield(get_tree(), "idle_frame")

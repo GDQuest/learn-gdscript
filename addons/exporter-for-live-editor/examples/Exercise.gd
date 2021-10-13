@@ -7,7 +7,7 @@ const SlicesList := preload("../ui/SlicesList.gd")
 const SliceEditor := preload("../ui/SliceEditor.gd")
 const GameViewport := preload("../ui/GameViewport.gd")
 const GameConsole := preload("../ui/GameConsole.gd")
-const Check := preload("../ui/Goal.gd")
+const Check := preload("../ui/Check.gd")
 const ScriptVerifier := preload("../lsp/ScriptVerifier.gd")
 const LanguageServerError := preload("../lsp/LanguageServerError.gd")
 const ValidationManager := preload("../validation/ValidationManager.gd")
@@ -54,6 +54,7 @@ func _instantiate_checks():
 			remove_child(validator)
 			check.add_child(validator)
 			checks_container.add_child(check)
+			validation_manager.add_check(check)
 
 	if validators_number == 0:
 		checks_container.hide()
@@ -108,6 +109,10 @@ func _on_save_button_pressed() -> void:
 		_send_exercise_validated_signal(false)
 		return
 	game_viewport.update_nodes(script, nodes_paths)
+	
+	validation_manager.scene = game_viewport._scene
+	validation_manager.script_handler = get_script_handler()
+	validation_manager.script_slice = get_slice()
 	validation_manager.validate_all()
 	var validation_errors: Array = yield(validation_manager, "validation_completed_all")
 	var validation_success = validation_errors.size() == 0
@@ -134,10 +139,9 @@ func set_scene_files(new_scene_files: Resource) -> void:
 		yield(self, "ready")
 	game_viewport.scene_files = scene_files
 
-
 func get_scene_files() -> SceneFiles:
 	return scene_files as SceneFiles
-
+	
 
 func get_script_handler() -> ScriptHandler:
 	var file := get_scene_files().get_file(exported_script_path)

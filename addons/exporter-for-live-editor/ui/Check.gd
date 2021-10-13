@@ -2,7 +2,7 @@
 #
 # A goal doesn't need to subclass a specific class. A goal:
 #
-# 1. adds itself to the group `"validator_goals"`
+# 1. adds itself to the group `"validator_checks"`
 # 2. has one or more validator children
 # 3. emits a signal called "request_validation" that takes no arguments
 # 4. has a method called set_status(status) which takes an int, 0 for no errors,
@@ -11,7 +11,7 @@
 tool
 extends HBoxContainer
 
-const GROUP_NAME = "validator_goals"
+const GROUP_NAME = "validator_checks"
 
 # Sends a request to the ValidationManager to run children validators
 signal request_validation
@@ -21,10 +21,10 @@ enum STATUS { NONE, INVALID, VALID }
 export var text := "Goal" setget set_text
 export (STATUS) var status := 0 setget set_status
 
-# adds or removes a goal from the goals group.
-# ValidationManager expects all goals to be in the group at `_ready()`, so if
+# adds or removes a goal from the checks group.
+# ValidationManager expects all checks to be in the group at `_ready()`, so if
 # you activate a goal later, you'll have to rerun the ValidationManager's
-# `connect_goals()`
+# `connect_checks()`
 export var is_active := true setget set_active, get_active
 
 # Texture used when the goal has not been checked yet
