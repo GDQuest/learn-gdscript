@@ -12,6 +12,7 @@ extends Node
 
 enum STATUS { NONE, INVALID, VALID }
 
+const ScriptHandler := preload("../collections/ScriptHandler.gd")
 const ScriptSlice := preload("../collections/ScriptSlice.gd")
 const GROUP_NAME = "validator_goals"
 const SIGNAL_NAME = "request_validation"
@@ -20,6 +21,7 @@ signal validation_completed(errors)
 signal validation_completed_all(errors)
 
 var scene: Node
+var script_handler: ScriptHandler
 var script_slice: ScriptSlice
 
 # keeps a cache of goals present in the project
@@ -76,7 +78,7 @@ func _get_validators(goal: Node) -> Array:
 
 # Validates a goal by validating in turn all its nested validators
 func validate(goal: Node) -> void:
-	if not scene or not script_slice:
+	if not scene or not script_slice or not script_handler:
 		push_error(
 			"Either the playing scene, or the script slice aren't set. Make sure you set them before validating"
 		)
@@ -85,7 +87,7 @@ func validate(goal: Node) -> void:
 	var errors = []
 	for index in validators.size():
 		var validator: Validator = validators[index]
-		validator.validate(scene, script_slice)
+		validator.validate(scene, script_handler, script_slice)
 		errors += yield(validator, "validation_completed")
 	var status: int = STATUS.VALID if errors.size() == 0 else STATUS.INVALID
 	goal.set_status(status)

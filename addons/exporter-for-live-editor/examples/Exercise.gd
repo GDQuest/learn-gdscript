@@ -32,9 +32,6 @@ export (String, FILE, "*.gd") var exported_script_path: String setget set_export
 export var slice_name: String setget set_slice_name
 export var hints := PoolStringArray()
 
-var current_slice: ScriptSlice
-var current_script_handler: ScriptHandler
-
 
 func _ready() -> void:
 	_instantiate_checks()
@@ -77,19 +74,10 @@ func _instantiate_hints():
 		hints_container.add_child(hint)
 		hint.add_child(hint_label)
 
-
-func _on_slice_selected(script_handler: ScriptHandler, script_slice: ScriptSlice) -> void:
-	current_slice = script_slice
-	current_script_handler = script_handler
-	slice_editor.script_slice = script_slice
-	validation_manager.script_slice = script_slice
-	validation_manager.scene = game_viewport._scene
-
-
 func _on_save_button_pressed() -> void:
-	var script_path := current_script_handler.file_path
-	var script_text := current_slice.current_full_text
-	var nodes_paths := current_script_handler.nodes_paths
+	var script_path := get_script_handler().file_path
+	var script_text := get_slice().current_full_text
+	var nodes_paths := get_script_handler().nodes_paths
 	var verifier := ScriptVerifier.new(self, script_text)
 	verifier.test()
 	var errors: Array = yield(verifier, "errors")
@@ -107,15 +95,18 @@ func _on_save_button_pressed() -> void:
 	script_text = LiveEditorMessageBus.replace_script(script_path, script_text)
 	var script = GDScript.new()
 	script.source_code = script_text
-	var success = script.reload()
-	if success != OK:
+	var script_is_valid = script.reload()
+	if script_is_valid != OK:
 		LiveEditorMessageBus.print_error(
 			"The script has an error, but the language server didn't catch it. Are you connected?",
 			script_path
 		)
 		return
 	game_viewport.update_nodes(script, nodes_paths)
-
+	validation_manager.validate_all()
+	var validation_errors: Array = yield(validation_manager, "validation_completed_all")
+	var validation_success = validation_errors.size() == 0
+	prints("success:", validation_success)
 
 func _on_pause_button_pressed() -> void:
 	game_viewport.toggle_scene_pause()
@@ -159,6 +150,9 @@ func set_exported_script_path(path: String) -> void:
 		push_error(
 			"File %s is not included in the exported scene %s" % [exported_script_path, scene_files]
 		)
+	if not is_inside_tree():
+		yield(self, "ready")
+	validation_manager.script_handler = script_handler
 
 
 func set_slice_name(new_slice_name: String) -> void:
@@ -178,6 +172,7 @@ func set_slice_name(new_slice_name: String) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 	slice_editor.script_slice = slice
+	validation_manager.script_slice = slice
 
 
 func set_title(new_title: String) -> void:

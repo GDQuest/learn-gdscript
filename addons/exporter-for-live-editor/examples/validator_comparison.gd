@@ -1,5 +1,4 @@
 extends Validator
 
-
-func validate(scene: Node, _script):
+func validate(scene: Node, _script: ScriptHandler, _slice: ScriptSlice):
 	_validation_success()

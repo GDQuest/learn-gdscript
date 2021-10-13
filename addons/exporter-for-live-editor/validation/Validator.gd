@@ -2,6 +2,7 @@
 extends Node
 class_name Validator
 
+const ScriptHandler := preload("../collections/ScriptHandler.gd")
 const ScriptSlice := preload("../collections/ScriptSlice.gd")
 const _ERROR = "You should extend the Validator class and implement your own `validate` method."
 
@@ -23,7 +24,7 @@ export var title := ""
 #
 # Use the `_validation_success()` and `_validation_error([])` methods instead of
 # emitting the signal directly
-func validate(_scene: Node, _script_text: ScriptSlice) -> void:
+func validate(_scene: Node, _script_handler: ScriptHandler, _script_text: ScriptSlice) -> void:
 	push_error(_ERROR)
 	yield(get_tree(), "idle_frame")
 	_validation_success()
