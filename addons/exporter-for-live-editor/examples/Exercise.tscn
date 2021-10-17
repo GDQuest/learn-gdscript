@@ -22,7 +22,7 @@ exported_script_path = "res://common/Menu.gd"
 slice_name = "set_score_if_highest"
 
 [node name="LessonContainer" type="PanelContainer" parent="."]
-margin_right = 383.0
+margin_right = 395.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -30,37 +30,37 @@ size_flags_vertical = 3
 [node name="LessonRequirements" type="VBoxContainer" parent="LessonContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 376.0
+margin_right = 388.0
 margin_bottom = 593.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ProgressBar" type="ProgressBar" parent="LessonContainer/LessonRequirements"]
-margin_right = 369.0
+margin_right = 381.0
 margin_bottom = 14.0
 
 [node name="Title" type="Label" parent="LessonContainer/LessonRequirements"]
 margin_top = 18.0
-margin_right = 369.0
+margin_right = 381.0
 margin_bottom = 32.0
 text = "Title"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="LessonContainer/LessonRequirements"]
 margin_top = 36.0
-margin_right = 369.0
+margin_right = 381.0
 margin_bottom = 586.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LessonContainer/LessonRequirements/ScrollContainer"]
-margin_right = 369.0
+margin_right = 381.0
 margin_bottom = 550.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Goal" type="RichTextLabel" parent="LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer"]
-margin_right = 369.0
+margin_right = 381.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 focus_mode = 2
@@ -69,19 +69,19 @@ selection_enabled = true
 
 [node name="Hints" parent="LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 104.0
-margin_right = 369.0
+margin_right = 381.0
 margin_bottom = 124.0
-rect_min_size = Vector2( 369, 20 )
+rect_min_size = Vector2( 381, 20 )
 
 [node name="Checks" parent="LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 128.0
-margin_right = 369.0
+margin_right = 381.0
 margin_bottom = 148.0
-rect_min_size = Vector2( 369, 20 )
+rect_min_size = Vector2( 381, 20 )
 
 [node name="EditorContainer" type="PanelContainer" parent="."]
-margin_left = 391.0
-margin_right = 728.0
+margin_left = 403.0
+margin_right = 740.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -170,7 +170,7 @@ values = [ "both", "game", "console" ]
 split_container_path = NodePath("../../../../GameContainer/VSplitContainer")
 
 [node name="GameContainer" type="PanelContainer" parent="."]
-margin_left = 736.0
+margin_left = 748.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
@@ -179,13 +179,13 @@ size_flags_vertical = 3
 [node name="VSplitContainer" type="VSplitContainer" parent="GameContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 281.0
+margin_right = 269.0
 margin_bottom = 593.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GameViewport" type="ViewportContainer" parent="GameContainer/VSplitContainer"]
-margin_right = 274.0
+margin_right = 262.0
 margin_bottom = 287.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
@@ -195,7 +195,7 @@ script = ExtResource( 4 )
 
 [node name="Console" type="RichTextLabel" parent="GameContainer/VSplitContainer"]
 margin_top = 299.0
-margin_right = 274.0
+margin_right = 262.0
 margin_bottom = 586.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3

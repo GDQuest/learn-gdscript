@@ -1,5 +1,7 @@
 extends Control
 
+signal exercise_validated(is_valid)
+
 const SceneFiles := preload("../collections/SceneFiles.gd")
 const ScriptHandler := preload("../collections/ScriptHandler.gd")
 const ScriptSlice := preload("../collections/ScriptSlice.gd")
@@ -13,22 +15,6 @@ const LanguageServerError := preload("../lsp/LanguageServerError.gd")
 const ValidationManager := preload("../validation/ValidationManager.gd")
 const RevealerScene := preload("../ui/components/Revealer.tscn")
 
-signal exercise_validated(is_valid)
-
-onready var validation_manager := $ValidationManager as ValidationManager
-onready var slice_editor := $EditorContainer/VBoxContainer/SliceEditor as SliceEditor
-onready var game_viewport := $GameContainer/VSplitContainer/GameViewport as GameViewport
-onready var save_button := $EditorContainer/VBoxContainer/HBoxContainer/SaveButton as Button
-onready var pause_button := $EditorContainer/VBoxContainer/HBoxContainer/PauseButton as Button
-onready var solution_button := $EditorContainer/VBoxContainer/HBoxContainer/SolutionButton as Button
-onready var game_console := $GameContainer/VSplitContainer/Console as GameConsole
-onready var title_label := $LessonContainer/LessonRequirements/Title as Label
-onready var progress_bar := $LessonContainer/LessonRequirements/ProgressBar as ProgressBar
-onready var goal_rich_text_label := $LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Goal as RichTextLabel
-onready var checks_container := $LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Checks as Revealer
-onready var hints_container := $LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer/Hints as Revealer
-
-
 export var title := "Title" setget set_title
 export var goal := "Goal" setget set_goal
 export var progress := 0.0 setget set_progress
@@ -36,6 +22,19 @@ export var scene_files: Resource setget set_scene_files, get_scene_files
 export (String, FILE, "*.gd") var exported_script_path: String setget set_exported_script_path
 export var slice_name: String setget set_slice_name
 export var hints := PoolStringArray()
+
+onready var validation_manager := $ValidationManager as ValidationManager
+onready var slice_editor := find_node("SliceEditor") as SliceEditor
+onready var game_viewport := find_node("GameViewport") as GameViewport
+onready var save_button := find_node("SaveButton") as Button
+onready var pause_button := find_node("PauseButton") as Button
+onready var solution_button := find_node("SolutionButton") as Button
+onready var game_console := find_node("Console") as GameConsole
+onready var title_label := find_node("Title") as Label
+onready var progress_bar := find_node("ProgressBar") as ProgressBar
+onready var goal_rich_text_label := find_node("Goal") as RichTextLabel
+onready var checks_container := find_node("Checks") as Revealer
+onready var hints_container := find_node("Hints") as Revealer
 
 
 func _ready() -> void:
@@ -54,7 +53,6 @@ func _instantiate_checks():
 			var validator := child as Validator
 			var check := Check.new()
 			check.text = validator.title
-			#check.size_flags_horizontal = SIZE_EXPAND_FILL
 			remove_child(validator)
 			check.add_child(validator)
 			checks_container.add_child(check)
@@ -76,7 +74,7 @@ func _instantiate_hints():
 		var hint_title := "Hint " + String(index + 1).pad_zeros(1)
 		hints_container.add_child(hint)
 		hint.add_child(hint_label)
-		hint.title = hint_title
+		print(hint.title)
 		hint.name = hint_title
 		hint.is_expanded = false
 
