@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "PanelContainer",
+"class": "CodeEditor",
+"language": "GDScript",
+"path": "res://addons/exporter-for-live-editor/ui/CodeEditor.gd"
+}, {
+"base": "PanelContainer",
+"class": "LessonPanel",
+"language": "GDScript",
+"path": "res://addons/exporter-for-live-editor/ui/LessonPanel.gd"
+}, {
 "base": "Container",
 "class": "Revealer",
 "language": "GDScript",
@@ -20,6 +30,8 @@ _global_script_classes=[ {
 "path": "res://addons/exporter-for-live-editor/validation/Validator.gd"
 } ]
 _global_script_class_icons={
+"CodeEditor": "",
+"LessonPanel": "",
 "Revealer": "res://addons/exporter-for-live-editor/ui/Revealer.svg",
 "Validator": ""
 }
@@ -54,7 +66,7 @@ enabled=PoolStringArray( "res://addons/exporter-for-live-editor/plugin.cfg" )
 
 [exporter-for-live-editor]
 
-scene="res://addons/exporter-for-live-editor/examples/Lesson.tscn"
+scene="res://addons/exporter-for-live-editor/ui/LessonPanel.tscn"
 
 [input]
 

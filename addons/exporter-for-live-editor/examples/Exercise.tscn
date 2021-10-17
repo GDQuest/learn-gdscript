@@ -1,17 +1,13 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://addons/exporter-for-live-editor/ui/components/Revealer.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/exporter-for-live-editor/resources/lesson_theme_dark.tres" type="Theme" id=2]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/LessonPanel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/new_theme.tres" type="Theme" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/GameConsole.gd" type="Script" id=3]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/GameViewport.gd" type="Script" id=4]
-[ext_resource path="res://addons/exporter-for-live-editor/ui/SliceEditor.gd" type="Script" id=5]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/CodeEditor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Exercise.gd" type="Script" id=6]
 [ext_resource path="res://common/Game.live-editor.tres" type="Resource" id=7]
-[ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_save.png" type="Texture" id=8]
 [ext_resource path="res://addons/exporter-for-live-editor/validation/ValidationManager.gd" type="Script" id=9]
-[ext_resource path="res://addons/exporter-for-live-editor/ui/ViewModeToggle.gd" type="Script" id=10]
-[ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_help.png" type="Texture" id=11]
-[ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_pause.png" type="Texture" id=12]
 
 [node name="Exercise" type="HBoxContainer"]
 anchor_right = 1.0
@@ -26,187 +22,41 @@ scene_files = ExtResource( 7 )
 exported_script_path = "res://common/Menu.gd"
 slice_name = "set_score_if_highest"
 
-[node name="LessonContainer" type="PanelContainer" parent="."]
-margin_right = 634.0
+[node name="Margin" type="MarginContainer" parent="."]
+margin_right = 805.0
 margin_bottom = 1080.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="LessonRequirements" type="VBoxContainer" parent="LessonContainer"]
-margin_left = 6.0
-margin_top = 4.0
-margin_right = 628.0
-margin_bottom = 1076.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="LessonPanel" parent="Margin" instance=ExtResource( 1 )]
+margin_right = 785.0
 
-[node name="ProgressBar" type="ProgressBar" parent="LessonContainer/LessonRequirements"]
-margin_right = 622.0
-margin_bottom = 19.0
+[node name="CodeEditor" parent="." instance=ExtResource( 5 )]
 
-[node name="Title" type="Label" parent="LessonContainer/LessonRequirements"]
-margin_top = 23.0
-margin_right = 622.0
-margin_bottom = 50.0
-text = "Title"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="LessonContainer/LessonRequirements"]
-margin_top = 54.0
-margin_right = 622.0
-margin_bottom = 1072.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-scroll_horizontal_enabled = false
-
-[node name="VBoxContainer" type="VBoxContainer" parent="LessonContainer/LessonRequirements/ScrollContainer"]
-margin_right = 622.0
-margin_bottom = 1018.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Goal" type="RichTextLabel" parent="LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer"]
-margin_right = 622.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 0, 100 )
-focus_mode = 2
-bbcode_enabled = true
-selection_enabled = true
-
-[node name="Hints" parent="LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
-margin_top = 104.0
-margin_right = 622.0
-margin_bottom = 131.0
-rect_min_size = Vector2( 622, 27 )
-title = "Hints"
-
-[node name="Checks" parent="LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
-margin_top = 135.0
-margin_right = 622.0
-margin_bottom = 162.0
-rect_min_size = Vector2( 622, 27 )
-title = "Checks"
-
-[node name="EditorContainer" type="PanelContainer" parent="."]
-margin_left = 642.0
-margin_right = 1277.0
-margin_bottom = 1080.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="EditorContainer"]
-margin_left = 6.0
-margin_top = 4.0
-margin_right = 629.0
-margin_bottom = 1076.0
-rect_min_size = Vector2( 300, 0 )
-size_flags_horizontal = 3
-
-[node name="SliceEditor" type="TextEdit" parent="EditorContainer/VBoxContainer"]
-margin_right = 623.0
-margin_bottom = 1014.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "###### EXAMPLE CONTENT
-extends KinematicBody2D
-
-export var speed := 1200
-export var jump_speed := -1800
-export var gravity := 4000
-export (float, 0, 1.0) var friction := 0.1
-export (float, 0, 1.0) var acceleration := 0.25
-
-var velocity = Vector2.ZERO
-
-
-func _physics_process(delta):
-	var direction = Vector2(
-		Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\"),
-		Input.get_action_strength(\"ui_up\") - Input.get_action_strength(\"ui_down\")
-	).normalized()
-
-	if direction.x != 0:
-		velocity.x = lerp(velocity.x, direction.x * speed, acceleration)
-	else:
-		velocity.x = lerp(velocity.x, 0, friction)
-
-	velocity.y += gravity * delta
-	velocity = move_and_slide(velocity, Vector2.UP)
-
-	if Input.is_action_just_pressed(\"ui_up\"):
-		if is_on_floor():
-			velocity.y = jump_speed
-"
-syntax_highlighting = true
-show_line_numbers = true
-draw_tabs = true
-draw_spaces = true
-smooth_scrolling = true
-caret_block_mode = true
-caret_blink = true
-script = ExtResource( 5 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="EditorContainer/VBoxContainer"]
-margin_top = 1018.0
-margin_right = 623.0
-margin_bottom = 1072.0
-
-[node name="SaveButton" type="Button" parent="EditorContainer/VBoxContainer/HBoxContainer"]
-margin_right = 95.0
-margin_bottom = 54.0
-text = "Save"
-icon = ExtResource( 8 )
-
-[node name="PauseButton" type="Button" parent="EditorContainer/VBoxContainer/HBoxContainer"]
-margin_left = 99.0
-margin_right = 202.0
-margin_bottom = 54.0
-text = "pause"
-icon = ExtResource( 12 )
-
-[node name="SolutionButton" type="Button" parent="EditorContainer/VBoxContainer/HBoxContainer"]
-margin_left = 206.0
-margin_right = 330.0
-margin_bottom = 54.0
-text = "show me"
-icon = ExtResource( 11 )
-
-[node name="ViewModeToggle" type="HBoxContainer" parent="EditorContainer/VBoxContainer/HBoxContainer"]
-margin_left = 334.0
-margin_right = 497.0
-margin_bottom = 54.0
-custom_constants/separation = 0
-script = ExtResource( 10 )
-values = [ "both", "game", "console" ]
-split_container_path = NodePath("../../../../GameContainer/VSplitContainer")
-
-[node name="GameContainer" type="PanelContainer" parent="."]
-margin_left = 1285.0
+[node name="Game" type="PanelContainer" parent="."]
+margin_left = 1513.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VSplitContainer" type="VSplitContainer" parent="GameContainer"]
-margin_left = 6.0
-margin_top = 4.0
-margin_right = 629.0
-margin_bottom = 1076.0
+[node name="VSplit" type="VSplitContainer" parent="Game"]
+margin_right = 407.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="GameViewport" type="ViewportContainer" parent="GameContainer/VSplitContainer"]
-margin_right = 623.0
-margin_bottom = 532.0
+[node name="GameViewport" type="ViewportContainer" parent="Game/VSplit"]
+margin_right = 407.0
+margin_bottom = 534.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 script = ExtResource( 4 )
 
-[node name="Console" type="RichTextLabel" parent="GameContainer/VSplitContainer"]
-margin_top = 540.0
-margin_right = 623.0
-margin_bottom = 1072.0
+[node name="Console" type="RichTextLabel" parent="Game/VSplit"]
+margin_top = 546.0
+margin_right = 407.0
+margin_bottom = 1080.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 size_flags_vertical = 3

@@ -1,14 +1,14 @@
 extends Container
 
-const Exercise := preload("./Exercise.gd")
-
 signal lesson_completed
 
-onready var exercises_container := $Exercises as Container
-onready var next_button := $PanelContainer/HBoxContainer/NextButton as Button
+const Exercise := preload("./Exercise.gd")
 
 var _exercises := []
 var _current_exercise := 0
+
+onready var exercises_container := $Exercises as Container
+onready var next_button := find_node("NextButton") as Button
 
 
 func _ready() -> void:

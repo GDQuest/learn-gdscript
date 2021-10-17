@@ -10,6 +10,7 @@ export var first_margin := 5.0
 export var children_margin := 2.0
 
 var _height := 0.0
+var _contents := []
 
 onready var _container: HBoxContainer = $HBoxContainer
 onready var _button: Button = $HBoxContainer/Button
@@ -22,6 +23,10 @@ func _ready() -> void:
 	_button.pressed = is_expanded
 	_button.connect("toggled", self, "set_is_expanded")
 	update_min_size()
+	for child in get_children():
+		if child == _container or not child is Control:
+			continue
+		_contents.append(child)
 
 
 func _notification(what: int) -> void:
@@ -37,6 +42,9 @@ func set_is_expanded(new_is_expanded: bool) -> void:
 		_rotate_chevron(0, _container.rect_size.y)
 	else:
 		_rotate_chevron(90, _height)
+
+	for node in _contents:
+		node.visible = is_expanded
 
 
 func set_title(new_title: String) -> void:

@@ -6,7 +6,6 @@ const SceneFiles := preload("../collections/SceneFiles.gd")
 const ScriptHandler := preload("../collections/ScriptHandler.gd")
 const ScriptSlice := preload("../collections/ScriptSlice.gd")
 const SlicesList := preload("../ui/SlicesList.gd")
-const SliceEditor := preload("../ui/SliceEditor.gd")
 const GameViewport := preload("../ui/GameViewport.gd")
 const GameConsole := preload("../ui/GameConsole.gd")
 const Check := preload("../ui/Check.gd")
@@ -24,25 +23,29 @@ export var slice_name: String setget set_slice_name
 export var hints := PoolStringArray()
 
 onready var validation_manager := $ValidationManager as ValidationManager
-onready var slice_editor := find_node("SliceEditor") as SliceEditor
 onready var game_viewport := find_node("GameViewport") as GameViewport
-onready var save_button := find_node("SaveButton") as Button
-onready var pause_button := find_node("PauseButton") as Button
-onready var solution_button := find_node("SolutionButton") as Button
 onready var game_console := find_node("Console") as GameConsole
-onready var title_label := find_node("Title") as Label
-onready var progress_bar := find_node("ProgressBar") as ProgressBar
-onready var goal_rich_text_label := find_node("Goal") as RichTextLabel
-onready var checks_container := find_node("Checks") as Revealer
-onready var hints_container := find_node("Hints") as Revealer
+
+onready var _lesson_panel := $Margin/LessonPanel as LessonPanel
+onready var _title_label := _lesson_panel.title_label
+onready var _progress_bar := _lesson_panel.progress_bar
+onready var _goal_rich_text_label := _lesson_panel.goal_rich_text_label
+onready var _checks_container := _lesson_panel.checks_container
+onready var _hints_container := _lesson_panel.hints_container
+
+onready var _code_editor := $CodeEditor as CodeEditor
+onready var _slice_editor := _code_editor.slice_editor
+onready var _save_button := _code_editor.save_button
+onready var _pause_button := _code_editor.pause_button
+onready var _solution_button := _code_editor.solution_button
 
 
 func _ready() -> void:
 	_instantiate_checks()
 	_instantiate_hints()
-	save_button.connect("pressed", self, "_on_save_button_pressed")
-	pause_button.connect("pressed", self, "_on_pause_button_pressed")
-	solution_button.connect("pressed", slice_editor, "sync_text_with_slice")
+	_save_button.connect("pressed", self, "_on_save_button_pressed")
+	_pause_button.connect("pressed", self, "_on_pause_button_pressed")
+	_solution_button.connect("pressed", _slice_editor, "sync_text_with_slice")
 
 
 func _instantiate_checks():
@@ -55,16 +58,16 @@ func _instantiate_checks():
 			check.text = validator.title
 			remove_child(validator)
 			check.add_child(validator)
-			checks_container.add_child(check)
+			_checks_container.add_child(check)
 			validation_manager.add_check(check)
 
 	if validators_number == 0:
-		checks_container.hide()
+		_checks_container.hide()
 
 
 func _instantiate_hints():
 	if hints.size() == 0:
-		hints_container.hide()
+		_hints_container.hide()
 
 	for index in hints.size():
 		var hint_label := Label.new()
@@ -72,10 +75,10 @@ func _instantiate_hints():
 
 		var hint: Revealer = RevealerScene.instance()
 		var hint_title := "Hint " + String(index + 1).pad_zeros(1)
-		hints_container.add_child(hint)
 		hint.add_child(hint_label)
 		hint.name = hint_title
 		hint.is_expanded = false
+		_hints_container.add_child(hint)
 
 
 func _on_save_button_pressed() -> void:
@@ -86,7 +89,7 @@ func _on_save_button_pressed() -> void:
 	verifier.test()
 	var errors: Array = yield(verifier, "errors")
 	if errors.size():
-		slice_editor.errors = errors
+		_slice_editor.errors = errors
 		for index in errors.size():
 			var error: LanguageServerError = errors[index]
 			LiveEditorMessageBus.print_error(
@@ -187,7 +190,7 @@ func set_slice_name(new_slice_name: String) -> void:
 		)
 	if not is_inside_tree():
 		yield(self, "ready")
-	slice_editor.script_slice = slice
+	_slice_editor.script_slice = slice
 	validation_manager.script_slice = slice
 
 
@@ -195,18 +198,18 @@ func set_title(new_title: String) -> void:
 	title = new_title
 	if not is_inside_tree():
 		yield(self, "ready")
-	title_label.title = title
+	_lesson_panel.title = new_title
 
 
 func set_goal(new_goal: String) -> void:
 	goal = new_goal
 	if not is_inside_tree():
 		yield(self, "ready")
-	goal_rich_text_label.bbcode_text = goal
+	_goal_rich_text_label.bbcode_text = goal
 
 
 func set_progress(new_progress: float) -> void:
 	progress = new_progress
 	if not is_inside_tree():
 		yield(self, "ready")
-	progress_bar.value = progress
+	_progress_bar.value = progress

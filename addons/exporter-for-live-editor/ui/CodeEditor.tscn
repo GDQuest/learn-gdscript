@@ -1,0 +1,108 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://addons/exporter-for-live-editor/ui/SliceEditor.gd" type="Script" id=1]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_pause.png" type="Texture" id=2]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_save.png" type="Texture" id=3]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_help.png" type="Texture" id=4]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/ViewModeToggle.gd" type="Script" id=5]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/CodeEditor.gd" type="Script" id=6]
+
+[node name="CodeEditor" type="PanelContainer"]
+margin_left = 813.0
+margin_right = 1505.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Column" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 685.0
+margin_bottom = 1073.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 3
+
+[node name="SliceEditor" type="TextEdit" parent="Column"]
+margin_right = 678.0
+margin_bottom = 1010.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "###### EXAMPLE CONTENT
+extends KinematicBody2D
+
+export var speed := 1200
+export var jump_speed := -1800
+export var gravity := 4000
+export (float, 0, 1.0) var friction := 0.1
+export (float, 0, 1.0) var acceleration := 0.25
+
+var velocity = Vector2.ZERO
+
+
+func _physics_process(delta):
+	var direction = Vector2(
+		Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\"),
+		Input.get_action_strength(\"ui_up\") - Input.get_action_strength(\"ui_down\")
+	).normalized()
+
+	if direction.x != 0:
+		velocity.x = lerp(velocity.x, direction.x * speed, acceleration)
+	else:
+		velocity.x = lerp(velocity.x, 0, friction)
+
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity, Vector2.UP)
+
+	if Input.is_action_just_pressed(\"ui_up\"):
+		if is_on_floor():
+			velocity.y = jump_speed
+"
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+draw_spaces = true
+smooth_scrolling = true
+caret_block_mode = true
+caret_blink = true
+script = ExtResource( 1 )
+
+[node name="Row" type="HBoxContainer" parent="Column"]
+margin_top = 1014.0
+margin_right = 678.0
+margin_bottom = 1066.0
+
+[node name="SaveButton" type="Button" parent="Column/Row"]
+margin_right = 120.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 120, 40 )
+text = "Save"
+icon = ExtResource( 3 )
+
+[node name="PauseButton" type="Button" parent="Column/Row"]
+margin_left = 124.0
+margin_right = 244.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 120, 40 )
+text = "pause"
+icon = ExtResource( 2 )
+
+[node name="SolutionButton" type="Button" parent="Column/Row"]
+margin_left = 248.0
+margin_right = 408.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 160, 40 )
+text = "show me"
+icon = ExtResource( 4 )
+
+[node name="ViewModeToggle" type="HBoxContainer" parent="Column/Row"]
+margin_left = 412.0
+margin_right = 562.0
+margin_bottom = 52.0
+custom_constants/separation = 0
+script = ExtResource( 5 )
+values = [ "both", "game", "console" ]
+split_container_path = NodePath("../../../../GameContainer/VSplit")

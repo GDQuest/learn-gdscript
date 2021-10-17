@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/exporter-for-live-editor/resources/font_title.tres" type="DynamicFont" id=1]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/components/Revealer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/new_theme.tres" type="Theme" id=3]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/panel_stylebox.tres" type="StyleBox" id=4]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/LessonPanel.gd" type="Script" id=5]
+
+[node name="LessonPanel" type="PanelContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 759.0
+margin_bottom = 1060.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="PanelContainer" parent="."]
+margin_right = 765.0
+margin_bottom = 1040.0
+custom_styles/panel = ExtResource( 4 )
+
+[node name="LessonRequirements" type="VBoxContainer" parent="Panel"]
+margin_right = 765.0
+margin_bottom = 1040.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel/LessonRequirements"]
+margin_right = 765.0
+margin_bottom = 14.0
+
+[node name="Margin" type="MarginContainer" parent="Panel/LessonRequirements"]
+margin_top = 18.0
+margin_right = 765.0
+margin_bottom = 1040.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Column" type="VBoxContainer" parent="Panel/LessonRequirements/Margin"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 745.0
+margin_bottom = 1002.0
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="Panel/LessonRequirements/Margin/Column"]
+margin_right = 725.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 1 )
+text = "Summary - %s"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/LessonRequirements/Margin/Column"]
+margin_top = 32.0
+margin_right = 725.0
+margin_bottom = 52.0
+custom_constants/separation = 20
+
+[node name="Scroll" type="ScrollContainer" parent="Panel/LessonRequirements/Margin/Column"]
+margin_top = 56.0
+margin_right = 725.0
+margin_bottom = 982.0
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="Column" type="VBoxContainer" parent="Panel/LessonRequirements/Margin/Column/Scroll"]
+margin_right = 725.0
+margin_bottom = 926.0
+size_flags_vertical = 3
+
+[node name="Goals" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
+margin_right = 725.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 725, 90 )
+title = "Goals"
+is_expanded = true
+
+[node name="Goal" type="RichTextLabel" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column/Goals"]
+margin_left = 24.0
+margin_top = 46.0
+margin_right = 725.0
+margin_bottom = 146.0
+rect_min_size = Vector2( 0, 100 )
+focus_mode = 2
+bbcode_enabled = true
+selection_enabled = true
+
+[node name="Hints" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
+margin_top = 94.0
+margin_right = 725.0
+margin_bottom = 138.0
+rect_min_size = Vector2( 725, 44 )
+title = "Hints"
+
+[node name="Checks" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
+margin_top = 142.0
+margin_right = 725.0
+margin_bottom = 186.0
+rect_min_size = Vector2( 725, 44 )
+title = "Checks"
