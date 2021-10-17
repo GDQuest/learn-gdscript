@@ -4,43 +4,24 @@ extends Container
 
 export var title := "Expand" setget set_title
 export var is_expanded := false setget set_is_expanded
-export var texture: Texture setget set_texture
 export var chevron_size := 16.0
 export var padding := 24.0
 export var first_margin := 5.0
 export var children_margin := 2.0
 
-var _container := HBoxContainer.new()
-var _button := Button.new()
-var _chevron := TextureRect.new()
-var _tween := Tween.new()
 var _height := 0.0
 
-
-func _init() -> void:
-	_button.align = Button.ALIGN_LEFT
-	_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_button.toggle_mode = true
-	_button.rect_min_size = Vector2(100, 20)
-
-	_chevron.expand = true
-	_chevron.anchor_left = 1
-	_chevron.anchor_right = 1
-	_chevron.rect_rotation = 90
-	_chevron.rect_pivot_offset = Vector2(8, 8)
-	set_chevron_size(chevron_size)
-
-	add_child(_container)
-	_container.add_child(_button)
-	_container.add_child(_chevron)
-	_container.add_child(_tween)
+onready var _container: HBoxContainer = $HBoxContainer
+onready var _button: Button = $HBoxContainer/Button
+onready var _chevron: TextureRect = $HBoxContainer/Chevron
+onready var _tween: Tween = $Tween
 
 
 func _ready() -> void:
 	set_is_expanded(is_expanded)
 	_button.pressed = is_expanded
 	_button.connect("toggled", self, "set_is_expanded")
-	calculate_min_size()
+	update_min_size()
 
 
 func _notification(what: int) -> void:
@@ -50,6 +31,8 @@ func _notification(what: int) -> void:
 
 func set_is_expanded(new_is_expanded: bool) -> void:
 	is_expanded = new_is_expanded
+	if not is_inside_tree():
+		yield(self, "ready")
 	if not is_expanded:
 		_rotate_chevron(0, _container.rect_size.y)
 	else:
@@ -61,24 +44,14 @@ func set_title(new_title: String) -> void:
 	_button.text = new_title
 
 
-func set_texture(new_texture: Texture) -> void:
-	texture = new_texture
-	_chevron.texture = texture
-
-
-func set_chevron_size(new_size: float) -> void:
-	chevron_size = new_size
-	_chevron.rect_min_size = Vector2(new_size, new_size)
-
-
-func calculate_min_size() -> void:
-	rect_min_size.x = max(_container.rect_min_size.x, rect_size.x)
+func update_min_size() -> void:
+	rect_min_size.x = max(_container.rect_size.x, rect_size.x)
 	rect_min_size.y = max(rect_min_size.y, _container.rect_size.y)
 
 
 func sort_children() -> void:
 	var top := 0.0
-	calculate_min_size()
+	update_min_size()
 	_height = _container.rect_size.y
 	for index in get_child_count():
 		var child: Node = get_child(index)

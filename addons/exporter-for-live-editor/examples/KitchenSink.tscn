@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/resources/lesson_theme_dark.tres" type="Theme" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/SlicesList.gd" type="Script" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://addons/exporter-for-live-editor/validation/ValidationManager.gd" type="Script" id=9]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/ViewModeToggle.gd" type="Script" id=10]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/Revealer.gd" type="Script" id=11]
-[ext_resource path="res://addons/exporter-for-live-editor/resources/chevron.svg" type="Texture" id=12]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/validator_jump.gd" type="Script" id=13]
 
 [node name="KitchenSink" type="HBoxContainer"]
@@ -66,7 +65,6 @@ rect_clip_content = true
 size_flags_horizontal = 3
 script = ExtResource( 11 )
 title = "Summary"
-texture = ExtResource( 12 )
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="LessonRequirements/ScrollContainer/MarginContainer/VBoxContainer/Summary"]
 margin_left = 24.0
@@ -89,7 +87,6 @@ size_flags_horizontal = 3
 script = ExtResource( 11 )
 title = "Goals"
 is_expanded = true
-texture = ExtResource( 12 )
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="LessonRequirements/ScrollContainer/MarginContainer/VBoxContainer/Goals"]
 margin_left = 24.0
@@ -116,7 +113,6 @@ size_flags_horizontal = 3
 script = ExtResource( 11 )
 title = "Hints"
 is_expanded = true
-texture = ExtResource( 12 )
 
 [node name="Hint1" type="Container" parent="LessonRequirements/ScrollContainer/MarginContainer/VBoxContainer/Hints"]
 margin_left = 24.0
@@ -129,7 +125,6 @@ size_flags_horizontal = 3
 script = ExtResource( 11 )
 title = "First Hint"
 is_expanded = true
-texture = ExtResource( 12 )
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="LessonRequirements/ScrollContainer/MarginContainer/VBoxContainer/Hints/Hint1"]
 margin_left = 24.0
@@ -152,7 +147,6 @@ rect_clip_content = true
 size_flags_horizontal = 3
 script = ExtResource( 11 )
 title = "Second Hint"
-texture = ExtResource( 12 )
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="LessonRequirements/ScrollContainer/MarginContainer/VBoxContainer/Hints/Hint2"]
 margin_left = 24.0
@@ -175,7 +169,6 @@ size_flags_horizontal = 3
 script = ExtResource( 11 )
 title = "Checks"
 is_expanded = true
-texture = ExtResource( 12 )
 
 [node name="Goal" type="HBoxContainer" parent="LessonRequirements/ScrollContainer/MarginContainer/VBoxContainer/Checks"]
 margin_left = 24.0

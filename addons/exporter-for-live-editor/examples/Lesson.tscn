@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Exercise.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/godot_theme.tres" type="Theme" id=2]
-[ext_resource path="res://addons/exporter-for-live-editor/examples/validator_jump.gd" type="Script" id=3]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Lesson.gd" type="Script" id=4]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/validator_comparison.gd" type="Script" id=5]
 
@@ -36,23 +35,6 @@ hints = PoolStringArray( "Use comparison operators" )
 [node name="validator_comparison" type="Node" parent="Exercises/Exercise"]
 script = ExtResource( 5 )
 title = "Using comparison"
-
-[node name="Exercise2" parent="Exercises" instance=ExtResource( 1 )]
-visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 4.0
-margin_right = 1024.0
-margin_bottom = 562.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-exported_script_path = "res://common/Player.gd"
-slice_name = "jump"
-hints = PoolStringArray( "Blah Blah Blah" )
-
-[node name="validator_jump" type="Node" parent="Exercises/Exercise2"]
-script = ExtResource( 3 )
-title = "The player jumps when pressing the \"jump\" button"
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 margin_top = 566.0

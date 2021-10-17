@@ -11,6 +11,7 @@ const Check := preload("../ui/Check.gd")
 const ScriptVerifier := preload("../lsp/ScriptVerifier.gd")
 const LanguageServerError := preload("../lsp/LanguageServerError.gd")
 const ValidationManager := preload("../validation/ValidationManager.gd")
+const RevealerScene := preload("../ui/components/Revealer.tscn")
 
 signal exercise_validated(is_valid)
 
@@ -71,14 +72,14 @@ func _instantiate_hints():
 		var hint_label := Label.new()
 		hint_label.text = hints[index]
 
-		var hint := Revealer.new()
+		var hint: Revealer = RevealerScene.instance()
 		var hint_title := "Hint " + String(index + 1).pad_zeros(1)
+		hints_container.add_child(hint)
+		hint.add_child(hint_label)
 		hint.title = hint_title
 		hint.name = hint_title
 		hint.is_expanded = false
 
-		hints_container.add_child(hint)
-		hint.add_child(hint_label)
 
 
 func _on_save_button_pressed() -> void:
