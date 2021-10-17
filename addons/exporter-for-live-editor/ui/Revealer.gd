@@ -1,6 +1,6 @@
 tool
-extends Container
 class_name Revealer, "./Revealer.svg"
+extends Container
 
 export var title := "Expand" setget set_title
 export var is_expanded := false setget set_is_expanded
@@ -43,28 +43,17 @@ func _ready() -> void:
 	calculate_min_size()
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_SORT_CHILDREN:
+		sort_children()
+
+
 func set_is_expanded(new_is_expanded: bool) -> void:
 	is_expanded = new_is_expanded
 	if not is_expanded:
 		_rotate_chevron(0, _container.rect_size.y)
-		#for child in get_children():
-		#	if child != _container:
-		#		child.hide()
 	else:
 		_rotate_chevron(90, _height)
-		#for child in get_children():
-		#	child.show()
-
-
-func _rotate_chevron(to: float, height: float, time := .2) -> void:
-	if not _tween.is_inside_tree():
-		_chevron.rect_rotation = to
-		rect_size.y = height
-		return
-	_tween.stop_all()
-	_tween.interpolate_property(_chevron, "rect_rotation", _chevron.rect_rotation, to, time)
-	_tween.interpolate_property(self, "rect_min_size:y", rect_min_size.y, to, time)
-	_tween.start()
 
 
 func set_title(new_title: String) -> void:
@@ -87,26 +76,29 @@ func calculate_min_size() -> void:
 	rect_min_size.y = max(rect_min_size.y, _container.rect_size.y)
 
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_SORT_CHILDREN:
-		sort_children()
-
-
 func sort_children() -> void:
 	var top := 0.0
 	calculate_min_size()
 	_height = _container.rect_size.y
 	for index in get_child_count():
 		var child: Node = get_child(index)
-		if not child is Control:
-			continue
-		var control = child as Control
-		if not control.visible:
+		if not child is Control or not child.visible:
 			continue
 		var node_padding := 0.0 if index == 0 else padding
 		var margin := 0.0 if index == 0 else first_margin if index == 1 else children_margin
-		top = _fit_child(control, top + margin, node_padding)
+		top = _fit_child(child, top + margin, node_padding)
 	_height = top
+
+
+func _rotate_chevron(to: float, height: float, time := .2) -> void:
+	if not _tween.is_inside_tree():
+		_chevron.rect_rotation = to
+		rect_size.y = height
+		return
+	_tween.stop_all()
+	_tween.interpolate_property(_chevron, "rect_rotation", _chevron.rect_rotation, to, time)
+	_tween.interpolate_property(self, "rect_min_size:y", rect_min_size.y, to, time)
+	_tween.start()
 
 
 func _fit_child(control: Control, top := 0.0, node_padding := 0.0) -> float:
