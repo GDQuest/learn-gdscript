@@ -78,7 +78,6 @@ func _instantiate_hints():
 		hint.is_expanded = false
 
 
-
 func _on_save_button_pressed() -> void:
 	var script_path := get_script_handler().file_path
 	var script_text := get_slice().current_full_text

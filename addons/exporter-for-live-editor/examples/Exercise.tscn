@@ -1,17 +1,22 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/ui/components/Revealer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/lesson_theme_dark.tres" type="Theme" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/GameConsole.gd" type="Script" id=3]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/GameViewport.gd" type="Script" id=4]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/SliceEditor.gd" type="Script" id=5]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Exercise.gd" type="Script" id=6]
 [ext_resource path="res://common/Game.live-editor.tres" type="Resource" id=7]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_save.png" type="Texture" id=8]
 [ext_resource path="res://addons/exporter-for-live-editor/validation/ValidationManager.gd" type="Script" id=9]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/ViewModeToggle.gd" type="Script" id=10]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_help.png" type="Texture" id=11]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_pause.png" type="Texture" id=12]
 
 [node name="Exercise" type="HBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 2 )
 custom_constants/separation = 8
 script = ExtResource( 6 )
 __meta__ = {
@@ -22,45 +27,45 @@ exported_script_path = "res://common/Menu.gd"
 slice_name = "set_score_if_highest"
 
 [node name="LessonContainer" type="PanelContainer" parent="."]
-margin_right = 407.0
-margin_bottom = 600.0
+margin_right = 634.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LessonRequirements" type="VBoxContainer" parent="LessonContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 400.0
-margin_bottom = 593.0
+margin_left = 6.0
+margin_top = 4.0
+margin_right = 628.0
+margin_bottom = 1076.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ProgressBar" type="ProgressBar" parent="LessonContainer/LessonRequirements"]
-margin_right = 393.0
-margin_bottom = 14.0
+margin_right = 622.0
+margin_bottom = 19.0
 
 [node name="Title" type="Label" parent="LessonContainer/LessonRequirements"]
-margin_top = 18.0
-margin_right = 393.0
-margin_bottom = 32.0
+margin_top = 23.0
+margin_right = 622.0
+margin_bottom = 50.0
 text = "Title"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="LessonContainer/LessonRequirements"]
-margin_top = 36.0
-margin_right = 393.0
-margin_bottom = 586.0
+margin_top = 54.0
+margin_right = 622.0
+margin_bottom = 1072.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LessonContainer/LessonRequirements/ScrollContainer"]
-margin_right = 393.0
-margin_bottom = 550.0
+margin_right = 622.0
+margin_bottom = 1018.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Goal" type="RichTextLabel" parent="LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer"]
-margin_right = 393.0
+margin_right = 622.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 focus_mode = 2
@@ -69,36 +74,36 @@ selection_enabled = true
 
 [node name="Hints" parent="LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 104.0
-margin_right = 393.0
-margin_bottom = 124.0
-rect_min_size = Vector2( 393, 20 )
+margin_right = 622.0
+margin_bottom = 131.0
+rect_min_size = Vector2( 622, 27 )
 title = "Hints"
 
 [node name="Checks" parent="LessonContainer/LessonRequirements/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
-margin_top = 128.0
-margin_right = 393.0
-margin_bottom = 148.0
-rect_min_size = Vector2( 393, 20 )
+margin_top = 135.0
+margin_right = 622.0
+margin_bottom = 162.0
+rect_min_size = Vector2( 622, 27 )
 title = "Checks"
 
 [node name="EditorContainer" type="PanelContainer" parent="."]
-margin_left = 415.0
-margin_right = 752.0
-margin_bottom = 600.0
+margin_left = 642.0
+margin_right = 1277.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EditorContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 330.0
-margin_bottom = 593.0
+margin_left = 6.0
+margin_top = 4.0
+margin_right = 629.0
+margin_bottom = 1076.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 3
 
 [node name="SliceEditor" type="TextEdit" parent="EditorContainer/VBoxContainer"]
-margin_right = 323.0
-margin_bottom = 562.0
+margin_right = 623.0
+margin_bottom = 1014.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "###### EXAMPLE CONTENT
@@ -141,54 +146,57 @@ caret_blink = true
 script = ExtResource( 5 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EditorContainer/VBoxContainer"]
-margin_top = 566.0
-margin_right = 323.0
-margin_bottom = 586.0
+margin_top = 1018.0
+margin_right = 623.0
+margin_bottom = 1072.0
 
 [node name="SaveButton" type="Button" parent="EditorContainer/VBoxContainer/HBoxContainer"]
-margin_right = 41.0
-margin_bottom = 20.0
+margin_right = 95.0
+margin_bottom = 54.0
 text = "Save"
+icon = ExtResource( 8 )
 
 [node name="PauseButton" type="Button" parent="EditorContainer/VBoxContainer/HBoxContainer"]
-margin_left = 45.0
-margin_right = 95.0
-margin_bottom = 20.0
+margin_left = 99.0
+margin_right = 202.0
+margin_bottom = 54.0
 text = "pause"
+icon = ExtResource( 12 )
 
 [node name="SolutionButton" type="Button" parent="EditorContainer/VBoxContainer/HBoxContainer"]
-margin_left = 99.0
-margin_right = 169.0
-margin_bottom = 20.0
+margin_left = 206.0
+margin_right = 330.0
+margin_bottom = 54.0
 text = "show me"
+icon = ExtResource( 11 )
 
 [node name="ViewModeToggle" type="HBoxContainer" parent="EditorContainer/VBoxContainer/HBoxContainer"]
-margin_left = 173.0
-margin_right = 323.0
-margin_bottom = 20.0
+margin_left = 334.0
+margin_right = 497.0
+margin_bottom = 54.0
 custom_constants/separation = 0
 script = ExtResource( 10 )
 values = [ "both", "game", "console" ]
 split_container_path = NodePath("../../../../GameContainer/VSplitContainer")
 
 [node name="GameContainer" type="PanelContainer" parent="."]
-margin_left = 760.0
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_left = 1285.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VSplitContainer" type="VSplitContainer" parent="GameContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 257.0
-margin_bottom = 593.0
+margin_left = 6.0
+margin_top = 4.0
+margin_right = 629.0
+margin_bottom = 1076.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GameViewport" type="ViewportContainer" parent="GameContainer/VSplitContainer"]
-margin_right = 250.0
-margin_bottom = 287.0
+margin_right = 623.0
+margin_bottom = 532.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -196,9 +204,9 @@ stretch = true
 script = ExtResource( 4 )
 
 [node name="Console" type="RichTextLabel" parent="GameContainer/VSplitContainer"]
-margin_top = 299.0
-margin_right = 250.0
-margin_bottom = 586.0
+margin_top = 540.0
+margin_right = 623.0
+margin_bottom = 1072.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
