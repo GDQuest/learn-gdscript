@@ -74,7 +74,6 @@ func _instantiate_hints():
 		var hint_title := "Hint " + String(index + 1).pad_zeros(1)
 		hints_container.add_child(hint)
 		hint.add_child(hint_label)
-		print(hint.title)
 		hint.name = hint_title
 		hint.is_expanded = false
 

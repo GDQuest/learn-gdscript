@@ -18,19 +18,20 @@ margin_top = 5.0
 margin_right = 144.0
 margin_bottom = 25.0
 
+[node name="Button" type="Button" parent="HBoxContainer"]
+margin_right = 100.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 100, 20 )
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Expand"
+align = 0
+
 [node name="Chevron" type="TextureRect" parent="HBoxContainer"]
-margin_right = 16.0
+margin_left = 104.0
+margin_right = 120.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 16, 16 )
 rect_pivot_offset = Vector2( 8, 8 )
 texture = ExtResource( 1 )
 expand = true
-
-[node name="Button" type="Button" parent="HBoxContainer"]
-margin_left = 20.0
-margin_right = 120.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 100, 20 )
-size_flags_horizontal = 3
-toggle_mode = true
-align = 0

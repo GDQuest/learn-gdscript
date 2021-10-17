@@ -41,6 +41,8 @@ func set_is_expanded(new_is_expanded: bool) -> void:
 
 func set_title(new_title: String) -> void:
 	title = new_title
+	if not is_inside_tree():
+		yield(self, "ready")
 	_button.text = new_title
 
 
