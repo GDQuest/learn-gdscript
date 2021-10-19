@@ -4,19 +4,20 @@
 [ext_resource path="res://addons/exporter-for-live-editor/ui/Revealer.gd" type="Script" id=2]
 
 [node name="Revealer" type="Container"]
-rect_min_size = Vector2( 120, 20 )
+margin_right = 124.0
+margin_bottom = 100.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_right = 120.0
-margin_bottom = 20.0
+margin_right = 124.0
+margin_bottom = 100.0
 
 [node name="Button" type="Button" parent="HBoxContainer"]
-margin_right = 100.0
-margin_bottom = 20.0
+margin_right = 104.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 100, 20 )
 size_flags_horizontal = 3
 toggle_mode = true
@@ -24,9 +25,9 @@ text = "Expand"
 align = 0
 
 [node name="Chevron" type="TextureRect" parent="HBoxContainer"]
-margin_left = 104.0
-margin_right = 120.0
-margin_bottom = 20.0
+margin_left = 108.0
+margin_right = 124.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 16, 16 )
 rect_pivot_offset = Vector2( 8, 8 )
 texture = ExtResource( 1 )

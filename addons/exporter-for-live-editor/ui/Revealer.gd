@@ -56,7 +56,11 @@ func set_title(new_title: String) -> void:
 
 func update_min_size() -> void:
 	rect_min_size.x = max(_container.rect_size.x, rect_size.x)
-	rect_min_size.y = max(rect_min_size.y, _container.rect_size.y)
+	rect_min_size.y = _container.rect_size.y
+	if is_expanded:
+		for node in _contents:
+			rect_min_size.y += node.rect_min_size.y
+
 
 
 func sort_children() -> void:
