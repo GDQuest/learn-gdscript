@@ -13,9 +13,8 @@ export var children_margin := 2.0
 var _height := 0.0
 var _contents := []
 
-onready var _container: HBoxContainer = $HBoxContainer
-onready var _button: Button = $HBoxContainer/Button
-onready var _chevron: TextureRect = $HBoxContainer/Chevron
+onready var _button: Button = $Button
+onready var _chevron: TextureRect = $Button/Chevron
 onready var _tween: Tween = $Tween
 
 
@@ -25,7 +24,7 @@ func _ready() -> void:
 	_button.connect("toggled", self, "set_is_expanded")
 	update_min_size()
 	for child in get_children():
-		if child == _container or not child is Control:
+		if child == _button or not child is Control:
 			continue
 		_contents.append(child)
 
@@ -40,7 +39,7 @@ func set_is_expanded(new_is_expanded: bool) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 	if not is_expanded:
-		_rotate_chevron(0, _container.rect_size.y)
+		_rotate_chevron(0, _button.rect_size.y)
 	else:
 		_rotate_chevron(90, _height)
 
@@ -60,13 +59,13 @@ func set_revealer_height(new_revealer_height: float) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 	rect_min_size.y = revealer_height
-	_container.rect_size.y = revealer_height
+	_button.rect_size.y = revealer_height
 
 
 func update_min_size() -> void:
-	rect_min_size.x = max(_container.rect_size.x, rect_size.x)
+	rect_min_size.x = max(_button.rect_size.x, rect_size.x)
 	rect_min_size.y = revealer_height
-	_container.rect_size.y = revealer_height
+	_button.rect_size.y = revealer_height
 	if is_expanded:
 		for node in _contents:
 			rect_min_size.y += node.rect_min_size.y
@@ -76,7 +75,7 @@ func update_min_size() -> void:
 func sort_children() -> void:
 	var top := 0.0
 	update_min_size()
-	_height = _container.rect_size.y
+	_height = _button.rect_size.y
 	for index in get_child_count():
 		var child: Node = get_child(index)
 		if not child is Control or not child.visible:

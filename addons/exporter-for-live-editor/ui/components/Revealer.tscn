@@ -12,12 +12,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Button" type="Button" parent="."]
 margin_right = 124.0
-margin_bottom = 32.0
-
-[node name="Button" type="Button" parent="HBoxContainer"]
-margin_right = 104.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 100, 20 )
 size_flags_horizontal = 3
@@ -26,13 +22,21 @@ text = "Expand"
 flat = true
 align = 0
 
-[node name="Chevron" type="TextureRect" parent="HBoxContainer"]
-margin_left = 108.0
-margin_right = 124.0
-margin_bottom = 32.0
+[node name="Chevron" type="TextureRect" parent="Button"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -21.0
+margin_top = -16.0
+margin_right = -5.0
+margin_bottom = 16.0
 rect_min_size = Vector2( 16, 16 )
 rect_pivot_offset = Vector2( 8, 8 )
 texture = ExtResource( 1 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tween" type="Tween" parent="."]
