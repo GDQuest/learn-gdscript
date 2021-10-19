@@ -1,54 +1,56 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/ui/NavigationButton.gd" type="Script" id=1]
 [ext_resource path="res://Navigator.gd" type="Script" id=2]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/gdscript_app_theme.tres" type="Theme" id=3]
 
 [node name="Navigator" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 3 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Panel" type="Panel" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1913.0
-margin_bottom = 1073.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Buttons" type="PanelContainer" parent="VBoxContainer"]
-margin_right = 1906.0
-margin_bottom = 34.0
+margin_right = 1920.0
+margin_bottom = 47.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Buttons"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1899.0
-margin_bottom = 27.0
+margin_right = 1920.0
+margin_bottom = 47.0
 
 [node name="BackButton" type="Button" parent="VBoxContainer/Buttons/HBoxContainer"]
-margin_right = 20.0
-margin_bottom = 20.0
+margin_right = 30.0
+margin_bottom = 47.0
 disabled = true
 text = "<"
 script = ExtResource( 1 )
 is_back_button = true
 
 [node name="LoadPage" type="Button" parent="VBoxContainer/Buttons/HBoxContainer"]
-margin_left = 24.0
-margin_right = 137.0
-margin_bottom = 20.0
+margin_left = 34.0
+margin_right = 252.0
+margin_bottom = 47.0
 text = "load some page"
 script = ExtResource( 1 )
 url = "/Course.tscn"
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
-margin_top = 38.0
-margin_right = 1906.0
-margin_bottom = 1066.0
+margin_top = 51.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/resources/fonts/font_title.tres" type="DynamicFont" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/components/Revealer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/gdscript_app_theme.tres" type="Theme" id=3]
-[ext_resource path="res://addons/exporter-for-live-editor/resources/panel_stylebox.tres" type="StyleBox" id=4]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/panel_normal.tres" type="StyleBox" id=4]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/LessonPanel.gd" type="Script" id=5]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/components/ScrollableTextBox.tscn" type="PackedScene" id=6]
 
 [node name="LessonPanel" type="PanelContainer"]
 margin_left = 20.0
@@ -53,18 +54,18 @@ size_flags_vertical = 3
 
 [node name="Title" type="Label" parent="Panel/LessonRequirements/Margin/Column"]
 margin_right = 725.0
-margin_bottom = 28.0
+margin_bottom = 31.0
 custom_fonts/font = ExtResource( 1 )
 text = "Summary - Lesson Name"
 
 [node name="HSeparator" type="HSeparator" parent="Panel/LessonRequirements/Margin/Column"]
-margin_top = 32.0
+margin_top = 35.0
 margin_right = 725.0
-margin_bottom = 52.0
+margin_bottom = 55.0
 custom_constants/separation = 20
 
 [node name="Scroll" type="ScrollContainer" parent="Panel/LessonRequirements/Margin/Column"]
-margin_top = 56.0
+margin_top = 59.0
 margin_right = 725.0
 margin_bottom = 973.0
 size_flags_vertical = 3
@@ -72,7 +73,7 @@ scroll_horizontal_enabled = false
 
 [node name="Column" type="VBoxContainer" parent="Panel/LessonRequirements/Margin/Column/Scroll"]
 margin_right = 725.0
-margin_bottom = 917.0
+margin_bottom = 914.0
 size_flags_vertical = 3
 
 [node name="Goals" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
@@ -81,21 +82,8 @@ margin_bottom = 38.0
 rect_min_size = Vector2( 725, 38 )
 title = "Goals"
 
-[node name="Goal" type="RichTextLabel" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column/Goals"]
-margin_left = 24.0
-margin_top = 46.0
-margin_right = 725.0
-margin_bottom = 146.0
-rect_min_size = Vector2( 0, 100 )
-focus_mode = 2
-bbcode_enabled = true
-bbcode_text = "The [i]right[/i] way to learn to code is to start with C.
-
-If you're using Godot and GDScript, you're [b]wrong[/b], period."
-text = "The right way to learn to code is to start with C.
-
-If you're using Godot and GDScript, you're wrong, period."
-selection_enabled = true
+[node name="Goal" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column/Goals" instance=ExtResource( 6 )]
+visible = false
 
 [node name="Hints" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
 margin_top = 42.0

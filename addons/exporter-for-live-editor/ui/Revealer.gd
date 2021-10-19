@@ -19,7 +19,6 @@ onready var _tween: Tween = $Tween
 
 
 func _ready() -> void:
-	set_is_expanded(is_expanded)
 	_button.pressed = is_expanded
 	_button.connect("toggled", self, "set_is_expanded")
 	update_min_size()
@@ -27,6 +26,8 @@ func _ready() -> void:
 		if child == _button or not child is Control:
 			continue
 		_contents.append(child)
+	# Through the constructor setter call, the _contents variable will be empty, so we need to call this again. 
+	set_is_expanded(is_expanded)
 
 
 func _notification(what: int) -> void:

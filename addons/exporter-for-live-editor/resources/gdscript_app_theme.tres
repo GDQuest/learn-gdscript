@@ -1,7 +1,7 @@
-[gd_resource type="Theme" load_steps=19 format=2]
+[gd_resource type="Theme" load_steps=23 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/resources/fonts/font_text.tres" type="DynamicFont" id=1]
-[ext_resource path="res://addons/exporter-for-live-editor/resources/panel_stylebox.tres" type="StyleBox" id=2]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/vscrollbar_grabber.tres" type="StyleBox" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/button_normal.tres" type="StyleBox" id=3]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/textedit_stylebox.tres" type="StyleBox" id=4]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/button_hover.tres" type="StyleBox" id=5]
@@ -14,25 +14,25 @@
 [ext_resource path="res://addons/exporter-for-live-editor/resources/fonts/font_text_bold_italics.tres" type="DynamicFont" id=12]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/fonts/font_code.tres" type="DynamicFont" id=13]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/fonts/font_text_italics.tres" type="DynamicFont" id=14]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/vscrollbar_grabber_pressed.tres" type="StyleBox" id=15]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/vscrollbar_grabber_highlight.tres" type="StyleBox" id=16]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/vscrollbar_scroll.tres" type="StyleBox" id=17]
 
 [sub_resource type="StyleBoxLine" id=4]
 color = Color( 0.290196, 0.294118, 0.388235, 1 )
 
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.0784314, 0.0823529, 0.164706, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
 [sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.239216, 1, 0.431373, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+[sub_resource type="StyleBoxEmpty" id=6]
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.290196, 0.294118, 0.388235, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+[sub_resource type="StyleBoxEmpty" id=7]
 
 [resource]
 default_font = ExtResource( 1 )
@@ -43,24 +43,36 @@ Button/fonts/font = ExtResource( 7 )
 Button/styles/focus = ExtResource( 6 )
 Button/styles/hover = ExtResource( 5 )
 Button/styles/normal = ExtResource( 3 )
+HSeparator/constants/separation = 8
 HSeparator/styles/separator = SubResource( 4 )
 MarginContainer/constants/margin_bottom = 20
 MarginContainer/constants/margin_left = 20
 MarginContainer/constants/margin_right = 20
 MarginContainer/constants/margin_top = 20
-Panel/styles/panel = ExtResource( 2 )
+Panel/styles/panel = SubResource( 5 )
 PanelContainer/styles/panel = SubResource( 1 )
 ProgressBar/colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
 ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
 ProgressBar/fonts/font = ExtResource( 8 )
 ProgressBar/styles/bg = ExtResource( 9 )
 ProgressBar/styles/fg = ExtResource( 10 )
-RichTextLabel/colors/default_color = Color( 1, 1, 1, 1 )
+RichTextLabel/colors/default_color = Color( 0.960784, 0.980392, 0.980392, 1 )
+RichTextLabel/colors/font_color_selected = Color( 0.49, 0.49, 0.49, 1 )
+RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+RichTextLabel/colors/selection_color = Color( 0.145098, 0.776471, 0.968627, 0.290196 )
+RichTextLabel/constants/line_separation = 1
+RichTextLabel/constants/shadow_as_outline = 0
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/table_hseparation = 3
+RichTextLabel/constants/table_vseparation = 3
 RichTextLabel/fonts/bold_font = ExtResource( 11 )
 RichTextLabel/fonts/bold_italics_font = ExtResource( 12 )
 RichTextLabel/fonts/italics_font = ExtResource( 14 )
 RichTextLabel/fonts/mono_font = ExtResource( 13 )
 RichTextLabel/fonts/normal_font = ExtResource( 1 )
+RichTextLabel/styles/focus = SubResource( 6 )
+RichTextLabel/styles/normal = null
 ScrollContainer/styles/bg = null
 TextEdit/colors/background_color = Color( 0, 0, 0, 0 )
 TextEdit/colors/bookmark_color = Color( 0.08, 0.49, 0.98, 1 )
@@ -107,8 +119,8 @@ VScrollBar/icons/decrement_pressed = null
 VScrollBar/icons/increment = null
 VScrollBar/icons/increment_highlight = null
 VScrollBar/icons/increment_pressed = null
-VScrollBar/styles/grabber = SubResource( 2 )
-VScrollBar/styles/grabber_highlight = null
-VScrollBar/styles/grabber_pressed = null
-VScrollBar/styles/scroll = SubResource( 3 )
-VScrollBar/styles/scroll_focus = null
+VScrollBar/styles/grabber = ExtResource( 2 )
+VScrollBar/styles/grabber_highlight = ExtResource( 16 )
+VScrollBar/styles/grabber_pressed = ExtResource( 15 )
+VScrollBar/styles/scroll = ExtResource( 17 )
+VScrollBar/styles/scroll_focus = SubResource( 7 )
