@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Course.gd" type="Script" id=1]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/NavigationButton.gd" type="Script" id=2]
+
+[node name="Course" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1913.0
+margin_bottom = 1073.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+margin_right = 1906.0
+margin_bottom = 15.0
+bbcode_enabled = true
+bbcode_text = "And here's the lesson [url=/addons/exporter-for-live-editor/examples/Lesson.tscn]place[/url] to start."
+text = "And here's the lesson place to start."
+fit_content_height = true
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_top = 19.0
+margin_right = 1906.0
+margin_bottom = 39.0
+text = "Go to Scene"
+script = ExtResource( 2 )
+url = "/addons/exporter-for-live-editor/examples/Lesson.tscn"
