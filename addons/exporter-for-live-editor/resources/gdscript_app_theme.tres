@@ -1,9 +1,14 @@
-[gd_resource type="Theme" load_steps=8 format=2]
+[gd_resource type="Theme" load_steps=11 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/resources/font_title.tres" type="DynamicFont" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/panel_stylebox.tres" type="StyleBox" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/button_normal.tres" type="StyleBox" id=3]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/textedit_stylebox.tres" type="StyleBox" id=4]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/button_hover.tres" type="StyleBox" id=5]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/button_empty.tres" type="StyleBox" id=6]
+
+[sub_resource type="StyleBoxLine" id=4]
+color = Color( 0.290196, 0.294118, 0.388235, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -22,8 +27,14 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [resource]
+Button/colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
+Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.2 )
+Button/colors/font_color_hover = Color( 1, 1, 1, 1 )
 Button/fonts/font = ExtResource( 1 )
+Button/styles/focus = ExtResource( 6 )
+Button/styles/hover = ExtResource( 5 )
 Button/styles/normal = ExtResource( 3 )
+HSeparator/styles/separator = SubResource( 4 )
 MarginContainer/constants/margin_bottom = 20
 MarginContainer/constants/margin_left = 20
 MarginContainer/constants/margin_right = 20

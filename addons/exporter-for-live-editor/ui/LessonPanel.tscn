@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/exporter-for-live-editor/resources/font_title.tres" type="DynamicFont" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/components/Revealer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/exporter-for-live-editor/resources/new_theme.tres" type="Theme" id=3]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/gdscript_app_theme.tres" type="Theme" id=3]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/panel_stylebox.tres" type="StyleBox" id=4]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/LessonPanel.gd" type="Script" id=5]
 
@@ -76,8 +76,8 @@ size_flags_vertical = 3
 
 [node name="Goals" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
 margin_right = 725.0
-margin_bottom = 132.0
-rect_min_size = Vector2( 725, 132 )
+margin_bottom = 38.0
+rect_min_size = Vector2( 725, 38 )
 title = "Goals"
 is_expanded = true
 
@@ -92,15 +92,15 @@ bbcode_enabled = true
 selection_enabled = true
 
 [node name="Hints" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
-margin_top = 136.0
+margin_top = 42.0
 margin_right = 725.0
-margin_bottom = 168.0
-rect_min_size = Vector2( 725, 32 )
+margin_bottom = 80.0
+rect_min_size = Vector2( 725, 38 )
 title = "Hints"
 
 [node name="Checks" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
-margin_top = 172.0
+margin_top = 84.0
 margin_right = 725.0
-margin_bottom = 204.0
-rect_min_size = Vector2( 725, 32 )
+margin_bottom = 122.0
+rect_min_size = Vector2( 725, 38 )
 title = "Checks"
