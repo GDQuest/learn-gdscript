@@ -21,7 +21,7 @@ var root_container: Node
 # switch this off to remove transitions
 var use_transitions := true
 
-var current_url := ScreenUrl.new(_is_path_regex, "/")
+var current_url := ScreenUrl.new(_is_path_regex, "res://")
 
 # Can contain shortcuts to scenes. Match a string with a scene
 # @type Dictionary[String, PackedScene Path]
@@ -52,9 +52,8 @@ func open_url(data: String) -> void:
 		return
 	var scene: PackedScene = load(url.href)
 	var screen: CanvasItem = scene.instance()
-	current_url = url
+	set_current_url(url)
 	_push_screen(screen)
-	_push_javascript_state(url.href)
 
 
 # Pushes a screen on top of the stack and transitions it in
@@ -120,15 +119,26 @@ func back() -> void:
 	var next_in_queue := _get_topmost_child()
 	if next_in_queue:
 		_add_child_to_root_container(next_in_queue)
-		current_url = ScreenUrl.new(_is_path_regex, next_in_queue.filename)
-	else:
-		current_url = ScreenUrl.new(_is_path_regex, "res://")
+	_set_current_url_from_scene(next_in_queue)
 
 	_transition(previous_node, false)
 	yield(self, "transition_out_completed")
 	remove_child_from_root_container(previous_node)
 	previous_node.queue_free()
 	
+
+func _set_current_url_from_scene(scene: Node = null, is_back := false) -> void:
+	var path = scene.filename if scene and scene.filename else "res://"
+	set_current_url(ScreenUrl.new(_is_path_regex, path))
+
+
+func set_current_url(url: ScreenUrl, is_back := false) -> void:
+	current_url = url
+	if is_back:
+		pass
+	else:
+		_push_javascript_state(url)
+
 
 # Returns the root container. If no root container is explicitely set, returns
 # the tree root
@@ -175,17 +185,28 @@ var _js_available := OS.has_feature('JavaScript')
 var _js_window := JavaScript.get_interface("window") if _js_available else null
 var _js_history := JavaScript.get_interface("history") if _js_available else null
 var _js_popstate_listener_ref := JavaScript.create_callback(self, "_js_popstate_listener") if _js_available else null
+var _temporary_disable_listener := false
 
 # Changes the browser's URL
-func _push_javascript_state(url: String) -> void:
+func _push_javascript_state(url: ScreenUrl) -> void:
 	if not _js_available:
 		return
-	_js_history.pushState(url, '', url)
+	_js_history.pushState(url.href, '', url.path)
 	#JavaScript.eval("history && 'pushState' in history && history.pushState(\"%s\", '', \"%s\")"%[url], true)
 
 
+func _pop_javascript_state() -> void:
+	if not _js_available:
+		return
+	_temporary_disable_listener = true
+	_js_history.back()
+	yield(get_tree(), "idle_frame")
+	_temporary_disable_listener = false
+
 # Handles user pressing back button in browser
 func _js_popstate_listener(args) -> void:
+	if _temporary_disable_listener:
+		return
 	var event = args[0]
 	var url = event.state
 	prints("js asks to go back to:", url)
@@ -225,9 +246,11 @@ class ScreenUrl:
 		path = regex_result.get_string("url")
 		if regex_result:
 			if protocol == "//" or protocol == "/":
-				protocol = "res://" 
+				protocol = "res://"
 		else:
 			is_valid = false
+		if not path:
+			path = "/" 
 	
 	func _to_string() -> String:
 		return protocol + path
