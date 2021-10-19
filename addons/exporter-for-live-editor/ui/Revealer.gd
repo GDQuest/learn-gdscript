@@ -36,12 +36,14 @@ func _notification(what: int) -> void:
 
 func set_is_expanded(new_is_expanded: bool) -> void:
 	is_expanded = new_is_expanded
+
 	if not is_inside_tree():
 		yield(self, "ready")
-	if not is_expanded:
-		_rotate_chevron(0, _button.rect_size.y)
-	else:
+
+	if is_expanded:
 		_rotate_chevron(90, _height)
+	else:
+		_rotate_chevron(0, _button.rect_size.y)
 
 	for node in _contents:
 		node.visible = is_expanded
