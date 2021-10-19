@@ -54,7 +54,7 @@ size_flags_vertical = 3
 margin_right = 725.0
 margin_bottom = 28.0
 custom_fonts/font = ExtResource( 1 )
-text = "Title"
+text = "Summary - Lesson Name"
 
 [node name="HSeparator" type="HSeparator" parent="Panel/LessonRequirements/Margin/Column"]
 margin_top = 32.0
@@ -76,31 +76,31 @@ size_flags_vertical = 3
 
 [node name="Goals" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
 margin_right = 725.0
-margin_bottom = 200.0
-rect_min_size = Vector2( 725, 200 )
+margin_bottom = 132.0
+rect_min_size = Vector2( 725, 132 )
 title = "Goals"
 is_expanded = true
 
 [node name="Goal" type="RichTextLabel" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column/Goals"]
 margin_left = 24.0
-margin_top = 102.0
+margin_top = 46.0
 margin_right = 725.0
-margin_bottom = 202.0
+margin_bottom = 146.0
 rect_min_size = Vector2( 0, 100 )
 focus_mode = 2
 bbcode_enabled = true
 selection_enabled = true
 
 [node name="Hints" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
-margin_top = 204.0
+margin_top = 136.0
 margin_right = 725.0
-margin_bottom = 304.0
-rect_min_size = Vector2( 725, 100 )
+margin_bottom = 168.0
+rect_min_size = Vector2( 725, 32 )
 title = "Hints"
 
 [node name="Checks" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
-margin_top = 308.0
+margin_top = 172.0
 margin_right = 725.0
-margin_bottom = 408.0
-rect_min_size = Vector2( 725, 100 )
+margin_bottom = 204.0
+rect_min_size = Vector2( 725, 32 )
 title = "Checks"

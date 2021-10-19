@@ -4,6 +4,7 @@ extends Container
 
 export var title := "Expand" setget set_title
 export var is_expanded := false setget set_is_expanded
+export var revealer_height := 32.0 setget set_revealer_height
 export var chevron_size := 16.0
 export var padding := 24.0
 export var first_margin := 5.0
@@ -54,9 +55,18 @@ func set_title(new_title: String) -> void:
 	_button.text = new_title
 
 
+func set_revealer_height(new_revealer_height: float) -> void:
+	revealer_height = new_revealer_height
+	if not is_inside_tree():
+		yield(self, "ready")
+	rect_min_size.y = revealer_height
+	_container.rect_size.y = revealer_height
+
+
 func update_min_size() -> void:
 	rect_min_size.x = max(_container.rect_size.x, rect_size.x)
-	rect_min_size.y = _container.rect_size.y
+	rect_min_size.y = revealer_height
+	_container.rect_size.y = revealer_height
 	if is_expanded:
 		for node in _contents:
 			rect_min_size.y += node.rect_min_size.y

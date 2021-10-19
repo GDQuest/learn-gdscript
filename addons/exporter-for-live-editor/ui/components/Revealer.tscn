@@ -5,8 +5,8 @@
 
 [node name="Revealer" type="Container"]
 margin_right = 124.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 124, 0 )
+margin_bottom = 32.0
+rect_min_size = Vector2( 124, 32 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -14,21 +14,22 @@ __meta__ = {
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_right = 124.0
-margin_bottom = 100.0
+margin_bottom = 32.0
 
 [node name="Button" type="Button" parent="HBoxContainer"]
 margin_right = 104.0
-margin_bottom = 100.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 100, 20 )
 size_flags_horizontal = 3
 toggle_mode = true
 text = "Expand"
+flat = true
 align = 0
 
 [node name="Chevron" type="TextureRect" parent="HBoxContainer"]
 margin_left = 108.0
 margin_right = 124.0
-margin_bottom = 100.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 16, 16 )
 rect_pivot_offset = Vector2( 8, 8 )
 texture = ExtResource( 1 )
