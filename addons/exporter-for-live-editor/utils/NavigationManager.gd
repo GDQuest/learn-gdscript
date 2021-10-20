@@ -16,9 +16,9 @@ var _screens_stack := []
 var _tween := Tween.new()
 
 var _is_mobile_platform := (
-	OS.get_name() == "Android" or \
-	OS.get_name() == "HTML5" or \
-	OS.get_name() == "iOS"
+	OS.get_name() == "Android"
+	or OS.get_name() == "HTML5"
+	or OS.get_name() == "iOS"
 )
 
 # Set this to load screens in a specific container. Defaults to tree root
@@ -88,8 +88,10 @@ func _transition(screen: CanvasItem, direction_in := true) -> void:
 		return
 	var start = get_viewport().size.x
 	var end = 0.0
-	var property = "position:x" if screen is Node2D else (
-		"rect_position:x" if screen is Control else ""
+	var property := (
+		"position:x"
+		if screen is Node2D
+		else ("rect_position:x" if screen is Control else "")
 	)
 	if not property:
 		return
@@ -120,9 +122,9 @@ func back() -> void:
 	if _screens_stack.size() < 1:
 		push_warning("No screen to pop")
 		return
-	
+
 	var previous_node: Node = _screens_stack.pop_front()
-	
+
 	var next_in_queue := _get_topmost_child()
 	if next_in_queue:
 		_add_child_to_root_container(next_in_queue)
@@ -132,7 +134,7 @@ func back() -> void:
 	yield(self, "transition_out_completed")
 	remove_child_from_root_container(previous_node)
 	previous_node.queue_free()
-	
+
 
 func _set_current_url_from_scene(scene: Node = null, is_back := false) -> void:
 	var path = scene.filename if scene and scene.filename else "res://"
@@ -165,7 +167,6 @@ func remove_child_from_root_container(child: Node) -> void:
 	get_root_container().call_deferred("remove_child", child)
 
 
-
 # Appends a new child to the root container in deferred mode
 func _get_topmost_child() -> Node:
 	if _screens_stack.size() > 0:
@@ -176,10 +177,12 @@ func _get_topmost_child() -> Node:
 # Handle back requests
 func _notification(what: int) -> void:
 	if (
-		what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST \
-		or \
-		what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST
-	) and _is_mobile_platform:
+		(
+			what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST
+			or what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST
+		)
+		and _is_mobile_platform
+	):
 		back_or_quit()
 
 
@@ -191,8 +194,13 @@ func _notification(what: int) -> void:
 var _js_available := OS.has_feature('JavaScript')
 var _js_window := JavaScript.get_interface("window") if _js_available else null
 var _js_history := JavaScript.get_interface("history") if _js_available else null
-var _js_popstate_listener_ref := JavaScript.create_callback(self, "_js_popstate_listener") if _js_available else null
+var _js_popstate_listener_ref := (
+	JavaScript.create_callback(self, "_js_popstate_listener")
+	if _js_available
+	else null
+)
 var _temporary_disable_listener := false
+
 
 # Changes the browser's URL
 func _push_javascript_state(url: ScreenUrl) -> void:
@@ -209,6 +217,7 @@ func _pop_javascript_state() -> void:
 	_js_history.back()
 	yield(get_tree(), "idle_frame")
 	_temporary_disable_listener = false
+
 
 # Handles user pressing back button in browser
 func _js_popstate_listener(args) -> void:
@@ -240,13 +249,11 @@ func _load_current_browser_url() -> void:
 
 
 class ScreenUrl:
-	
 	var path: String
 	var protocol: String
 	var href: String setget , _to_string
 	var is_valid := true
-	
-	
+
 	func _init(_is_path_regex: RegEx, data: String) -> void:
 		var regex_result := _is_path_regex.search(data)
 		protocol = regex_result.get_string("prefix")
@@ -257,7 +264,7 @@ class ScreenUrl:
 		else:
 			is_valid = false
 		if not path:
-			path = "/" 
-	
+			path = "/"
+
 	func _to_string() -> String:
 		return protocol + path

@@ -74,7 +74,6 @@ func update_min_size() -> void:
 			rect_min_size.y += node.rect_min_size.y
 
 
-
 func sort_children() -> void:
 	var top := 0.0
 	update_min_size()

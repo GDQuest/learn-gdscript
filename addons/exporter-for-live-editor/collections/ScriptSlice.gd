@@ -123,6 +123,7 @@ func get_current_full_text() -> String:
 	var middle_text := Array(indent_text(leading_spaces, lines) if leading_spaces else lines)
 	return PoolStringArray(lines_before + middle_text + lines_after).join("\n")
 
+
 func get_start_offset() -> int:
 	return lines_before.size()
 

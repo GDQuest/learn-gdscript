@@ -83,6 +83,7 @@ func sync_text_with_slice() -> void:
 	text = script_slice.slice_text
 	_on_text_changed()
 
+
 # Creates and positions error overlays at the right position.
 # Call after:
 #
