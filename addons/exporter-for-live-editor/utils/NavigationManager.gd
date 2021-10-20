@@ -15,6 +15,12 @@ var _screens_stack := []
 # or a shader
 var _tween := Tween.new()
 
+var _is_mobile_platform := (
+	OS.get_name() == "Android" or \
+	OS.get_name() == "HTML5" or \
+	OS.get_name() == "iOS"
+)
+
 # Set this to load screens in a specific container. Defaults to tree root
 var root_container: Node
 
@@ -29,8 +35,9 @@ export var matches := {}
 
 
 func _ready() -> void:
+	if _is_mobile_platform:
+		get_tree().set_auto_accept_quit(false)
 	add_child(_tween)
-	get_tree().set_auto_accept_quit(false)
 	_on_ready_listen_to_browser_changes()
 
 
@@ -168,11 +175,11 @@ func _get_topmost_child() -> Node:
 
 # Handle back requests
 func _notification(what: int) -> void:
-	if \
+	if (
 		what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST \
 		or \
-		what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST \
-	:
+		what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST
+	) and _is_mobile_platform:
 		back_or_quit()
 
 
