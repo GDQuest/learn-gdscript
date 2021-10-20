@@ -9,6 +9,7 @@ func _ready() -> void:
 	NavigationManager.root_container = root_container
 	NavigationManager.connect("transition_in_completed", self, "_on_navigation_transition")
 	NavigationManager.connect("transition_out_completed", self, "_on_navigation_transition")
+	NavigationManager.open_url("/Course.tscn")
 
 
 func _input(event: InputEvent) -> void:
