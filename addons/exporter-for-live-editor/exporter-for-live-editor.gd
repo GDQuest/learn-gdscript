@@ -3,6 +3,7 @@ extends EditorPlugin
 
 const LiveEditorMessageBus := preload("./utils/LiveEditorMessageBus.gd")
 const NavigationManager := preload("./utils/NavigationManager.gd")
+const UserProfiles := preload("./utils/UserProfiles.gd")
 var container := PluginButtons.new()
 var file_dialog := ScenesFileDialog.new()
 var config := preload("./utils/config.gd").new(self)
@@ -13,7 +14,8 @@ const SceneFiles := preload("./collections/SceneFiles.gd")
 func _enter_tree() -> void:
 	add_autoload_singleton("LiveEditorMessageBus", LiveEditorMessageBus.resource_path)
 	add_autoload_singleton("NavigationManager", NavigationManager.resource_path)
-
+	add_autoload_singleton("UserProfiles", UserProfiles.resource_path)
+	
 	connect("scene_changed", self, "_on_scene_changed")
 	connect("main_screen_changed", self, "_on_screen_changed")
 	config.load_settings()
@@ -42,6 +44,7 @@ func _exit_tree() -> void:
 	file_dialog.queue_free()
 	remove_autoload_singleton("LiveEditorMessageBus")
 	remove_autoload_singleton("NavigationManager")
+	remove_autoload_singleton("UserProfiles")
 
 
 func _on_file_dialog_file_selected(path: String) -> void:
