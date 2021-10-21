@@ -9,7 +9,7 @@ var _is_path_regex := RegExp.compile("^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/
 
 # Stack of screens. Screens are pushed to the head, so index 0 represents the
 # latest screen
-var _screens_stack := []
+var screens_stack := []
 
 # Used for transitions. We will probably replace this with an animation player
 # or a shader
@@ -28,6 +28,8 @@ var root_container: Node
 var use_transitions := true
 
 var current_url := ScreenUrl.new(_is_path_regex, "res://")
+
+var breadcrumbs: PoolStringArray setget _ready_only_setter, get_breadcrumbs
 
 # Can contain shortcuts to scenes. Match a string with a scene
 # @type Dictionary[String, PackedScene Path]
@@ -66,7 +68,7 @@ func open_url(data: String) -> void:
 # Pushes a screen on top of the stack and transitions it in
 func _push_screen(screen: Node) -> void:
 	var previous_node := _get_topmost_child()
-	_screens_stack.push_front(screen)
+	screens_stack.push_front(screen)
 	_add_child_to_root_container(screen)
 	_transition(screen)
 	if previous_node:
@@ -111,7 +113,7 @@ func _transition(screen: CanvasItem, direction_in := true) -> void:
 # otherwise, pops the last screen.
 # Intended to be used in mobile environments  
 func back_or_quit() -> void:
-	if _screens_stack.size() > 1:
+	if screens_stack.size() > 1:
 		back()
 	else:
 		get_tree().quit()
@@ -119,11 +121,11 @@ func back_or_quit() -> void:
 
 # Pops the last screen from the stack
 func back() -> void:
-	if _screens_stack.size() < 1:
+	if screens_stack.size() < 1:
 		push_warning("No screen to pop")
 		return
 
-	var previous_node: Node = _screens_stack.pop_front()
+	var previous_node: Node = screens_stack.pop_front()
 
 	var next_in_queue := _get_topmost_child()
 	if next_in_queue:
@@ -169,8 +171,8 @@ func remove_child_from_root_container(child: Node) -> void:
 
 # Appends a new child to the root container in deferred mode
 func _get_topmost_child() -> Node:
-	if _screens_stack.size() > 0:
-		return _screens_stack[0] as Node
+	if screens_stack.size() > 0:
+		return screens_stack[0] as Node
 	return null
 
 
@@ -184,6 +186,20 @@ func _notification(what: int) -> void:
 		and _is_mobile_platform
 	):
 		back_or_quit()
+
+
+func get_breadcrumbs() -> PoolStringArray:
+	var crumbs := PoolStringArray()
+	var length := screens_stack.size()
+	while length > 0:
+		length -= 1
+		var node: Node = screens_stack[length]
+		crumbs.push_back(node.name)
+	return crumbs
+
+
+func _ready_only_setter(_unused_variable) -> void:
+	push_error("this variable is read-only")
 
 
 ################################################################################
