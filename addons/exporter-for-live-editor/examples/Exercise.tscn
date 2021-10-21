@@ -30,22 +30,24 @@ margin_bottom = 1080.0
 margin_right = 785.0
 
 [node name="CodeEditor" parent="." instance=ExtResource( 5 )]
+margin_right = 1545.0
+split_container_path = NodePath("../Game/VSplit")
 
 [node name="Game" type="PanelContainer" parent="."]
-margin_left = 1513.0
+margin_left = 1553.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VSplit" type="VSplitContainer" parent="Game"]
-margin_right = 407.0
+margin_right = 367.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GameViewport" type="ViewportContainer" parent="Game/VSplit"]
-margin_right = 407.0
+margin_right = 367.0
 margin_bottom = 534.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
@@ -55,7 +57,7 @@ script = ExtResource( 4 )
 
 [node name="Console" type="RichTextLabel" parent="Game/VSplit"]
 margin_top = 546.0
-margin_right = 407.0
+margin_right = 367.0
 margin_bottom = 1080.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3

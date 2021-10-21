@@ -8,7 +8,7 @@ const CONSOLE = "console"
 export (String, "both", "game", "console") var mode := BOTH setget set_mode, get_mode
 export var split_container_path: NodePath setget set_split_container_path
 
-var _split_container: SplitContainer
+var split_container: SplitContainer setget set_split_container
 
 
 func _init() -> void:
@@ -29,15 +29,15 @@ func _ready() -> void:
 
 
 func _on_item_selected(new_value) -> void:
-	if _split_container:
+	if split_container:
 		var height := 0
 		if new_value == GAME:
 			height = 0
 		elif new_value == CONSOLE:
-			height = _split_container.rect_size.y
+			height = split_container.rect_size.y
 		else:
-			height = _split_container.rect_size.y / 2
-		_split_container.split_offset = height
+			height = split_container.rect_size.y / 2
+		split_container.split_offset = height
 
 
 func _on_split_container_dragged(offset: int) -> void:
@@ -52,9 +52,13 @@ func set_split_container_path(path: NodePath) -> void:
 	if not (node is SplitContainer):
 		push_error("nodepath %s does not yield a SplitContainer" % [path])
 		return
-	_split_container = node
+	set_split_container(node)
+
+
+func set_split_container(split_container: SplitContainer) -> void:
+	split_container = split_container
 	if not Engine.editor_hint:
-		_split_container.connect("dragged", self, "_on_split_container_dragged")
+		split_container.connect("dragged", self, "_on_split_container_dragged")
 
 
 func set_mode(new_mode: String) -> void:
