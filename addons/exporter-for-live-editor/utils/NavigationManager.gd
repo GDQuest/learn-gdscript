@@ -52,6 +52,7 @@ func connect_rich_text_links(rich_text: RichTextLabel) -> void:
 # the default group name is navigation_text. If you want to use this for other
 # groups, then you can use it manually.
 func connect_rich_texts_group(group_name := "navigation_text") -> void:
+	yield(get_tree(), "idle_frame")
 	for child in get_tree().get_nodes_in_group(group_name):
 		if child is RichTextLabel:
 			var text := child as RichTextLabel

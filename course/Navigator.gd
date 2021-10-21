@@ -4,12 +4,16 @@ onready var back_button := $VBoxContainer/Buttons/HBoxContainer/BackButton as Bu
 onready var title_label := $VBoxContainer/Buttons/HBoxContainer/BreadCrumbs as Label
 onready var root_container := $VBoxContainer/PanelContainer as Container
 
+export var scene_file: PackedScene
+
+onready var _scene_path := scene_file.resource_path
+
 
 func _ready() -> void:
 	NavigationManager.root_container = root_container
 	NavigationManager.connect("transition_in_completed", self, "_on_navigation_transition")
 	NavigationManager.connect("transition_out_completed", self, "_on_navigation_transition")
-	NavigationManager.open_url("/Course.tscn")
+	NavigationManager.open_url(_scene_path)
 
 
 func _input(event: InputEvent) -> void:
@@ -18,6 +22,6 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_navigation_transition():
-	var is_root_screen = NavigationManager.current_url.path == ""
+	var is_root_screen = NavigationManager.current_url.path == _scene_path
 	back_button.disabled = is_root_screen
 	title_label.text = NavigationManager.breadcrumbs.join("/")

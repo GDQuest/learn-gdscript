@@ -15,7 +15,7 @@ func _enter_tree() -> void:
 	add_autoload_singleton("LiveEditorMessageBus", LiveEditorMessageBus.resource_path)
 	add_autoload_singleton("NavigationManager", NavigationManager.resource_path)
 	add_autoload_singleton("UserProfiles", UserProfiles.resource_path)
-	
+
 	connect("scene_changed", self, "_on_scene_changed")
 	connect("main_screen_changed", self, "_on_screen_changed")
 	config.load_settings()

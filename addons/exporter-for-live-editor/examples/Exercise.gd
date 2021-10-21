@@ -8,7 +8,7 @@ const ScriptSlice := preload("../collections/ScriptSlice.gd")
 const SlicesList := preload("../ui/SlicesList.gd")
 const GameViewport := preload("../ui/GameViewport.gd")
 const GameConsole := preload("../ui/GameConsole.gd")
-const Check := preload("../ui/Check.gd")
+const ValidatorCheck := preload("../ui/ValidatorCheck.gd")
 const ScriptVerifier := preload("../lsp/ScriptVerifier.gd")
 const LanguageServerError := preload("../lsp/LanguageServerError.gd")
 const ValidationManager := preload("../validation/ValidationManager.gd")
@@ -54,7 +54,7 @@ func _instantiate_checks():
 		if child is Validator:
 			validators_number += 1
 			var validator := child as Validator
-			var check := Check.new()
+			var check := ValidatorCheck.new()
 			check.text = validator.title
 			remove_child(validator)
 			check.add_child(validator)
