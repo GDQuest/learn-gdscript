@@ -1,0 +1,115 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://course/Course.gd" type="Script" id=1]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/fonts/font_title.tres" type="DynamicFont" id=2]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/fonts/font_title_big.tres" type="DynamicFont" id=3]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/lesson_theme_dark.tres" type="Theme" id=4]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/valid.svg" type="Texture" id=5]
+
+[node name="Course" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 4 )
+custom_constants/margin_right = 560
+custom_constants/margin_top = 10
+custom_constants/margin_left = 560
+custom_constants/margin_bottom = 10
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "	"
+}
+maximum_width = 800.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 560.0
+margin_top = 10.0
+margin_right = 1360.0
+margin_bottom = 1070.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 800.0
+margin_bottom = 1060.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Title" type="RichTextLabel" parent="ScrollContainer/PanelContainer" groups=["navigation_text"]]
+margin_right = 800.0
+margin_bottom = 49.0
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "Title"
+text = "Title"
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SubTitle" type="RichTextLabel" parent="ScrollContainer/PanelContainer" groups=["navigation_text"]]
+margin_top = 53.0
+margin_right = 800.0
+margin_bottom = 93.0
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "Title"
+text = "Title"
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/PanelContainer"]
+margin_top = 97.0
+margin_right = 800.0
+margin_bottom = 217.0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/PanelContainer/HBoxContainer" groups=["navigation_text"]]
+margin_right = 670.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+bbcode_enabled = true
+bbcode_text = "Hello, this is the Course for thing thing thingo.
+You can go to [url=/SomePage.tscn]place[/url] to start."
+text = "Hello, this is the Course for thing thing thingo.
+You can go to place to start."
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PanelContainer/HBoxContainer"]
+margin_left = 680.0
+margin_right = 800.0
+margin_bottom = 120.0
+texture = ExtResource( 5 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ScrollContainer/PanelContainer"]
+margin_top = 221.0
+margin_right = 800.0
+margin_bottom = 341.0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PanelContainer/HBoxContainer2"]
+margin_right = 120.0
+margin_bottom = 120.0
+texture = ExtResource( 5 )
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/PanelContainer/HBoxContainer2" groups=["navigation_text"]]
+margin_left = 130.0
+margin_right = 800.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+bbcode_enabled = true
+bbcode_text = "Hello, this is the Course for thing thing thingo.
+You can go to [url=/SomePage.tscn]place[/url] to start."
+text = "Hello, this is the Course for thing thing thingo.
+You can go to place to start."
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

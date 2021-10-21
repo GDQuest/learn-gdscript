@@ -48,6 +48,17 @@ func connect_rich_text_links(rich_text: RichTextLabel) -> void:
 	rich_text.connect("meta_clicked", self, "open_url")
 
 
+# when a screen loads, this is called, to connect all rich text's meta's links.
+# the default group name is navigation_text. If you want to use this for other
+# groups, then you can use it manually.
+func connect_rich_texts_group(group_name := "navigation_text") -> void:
+	for child in get_tree().get_nodes_in_group(group_name):
+		if child is RichTextLabel:
+			var text := child as RichTextLabel
+			if text.bbcode_enabled:
+				connect_rich_text_links(text)
+
+
 # Loads a scene and adds it to the stack.
 # a url is of the form res://scene.tscn, user://scene.tscn, //scene.tscn,  or 
 # /scene.tscn ("res:" will be appended automatically)
@@ -74,6 +85,7 @@ func _push_screen(screen: Node) -> void:
 	if previous_node:
 		yield(self, "transition_in_completed")
 		remove_child_from_root_container(previous_node)
+	connect_rich_texts_group()
 
 
 # Transitions a screen in. This is there as a placeholder, we probably want 

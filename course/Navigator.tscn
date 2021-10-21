@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://addons/exporter-for-live-editor/ui/NavigationButton.gd" type="Script" id=1]
-[ext_resource path="res://Navigator.gd" type="Script" id=2]
+[ext_resource path="res://course/Navigator.gd" type="Script" id=1]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/NavigationButton.gd" type="Script" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/gdscript_app_theme.tres" type="Theme" id=3]
 
 [node name="Navigator" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 3 )
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -37,7 +37,7 @@ margin_right = 30.0
 margin_bottom = 47.0
 disabled = true
 text = "<"
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 is_back_button = true
 
 [node name="BreadCrumbs" type="Label" parent="VBoxContainer/Buttons/HBoxContainer"]
