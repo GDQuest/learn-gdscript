@@ -8,7 +8,10 @@
 extends Node
 
 const ROOT_DIR := "user://user_settings"
-const DEFAULT_PLAYER := "Player"
+
+var current_player := "Player"
+
+signal progress_changed(exercise_name, progress)
 
 
 func profile_exists(file_name: String) -> bool:
@@ -19,7 +22,10 @@ func profile_exists(file_name: String) -> bool:
 # Returns the profile designated by the provided name.
 # If the profile does not exist, it will be created on the fly, so if you do not
 # want that to happen, check with `profile_exists` first, or use `get_profile_or_die`
-func get_profile(file_name: String = DEFAULT_PLAYER) -> Profile:
+# loading a profile will set it as the current file name
+func get_profile(file_name: String = current_player) -> Profile:
+	if file_name != current_player:
+		current_player = file_name
 	var file_path := _get_file_path(file_name)
 	if not profile_exists(file_name):
 		var fs = Directory.new()
@@ -28,6 +34,7 @@ func get_profile(file_name: String = DEFAULT_PLAYER) -> Profile:
 		var user_profile := Profile.new()
 		user_profile.file_path = file_path
 		user_profile.player_name = file_name
+		user_profile.connect("progress_changed", self, "_on_exercise_progress_changed")
 		return user_profile
 	return load(file_path) as Profile
 
@@ -41,7 +48,7 @@ func list_profiles() -> PoolStringArray:
 	var dir := Directory.new()
 	var error = dir.open(ROOT_DIR)
 	if error != OK:
-		profiles.push_back(DEFAULT_PLAYER)
+		profiles.push_back(current_player)
 		return profiles
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
@@ -51,8 +58,13 @@ func list_profiles() -> PoolStringArray:
 	return profiles
 
 
+func _on_exercise_progress_changed(exercise_name, progress) -> void:
+	emit_signal("progress_changed", exercise_name, progress)
+
 class Profile:
 	extends Resource
+
+	signal progress_changed(exercise_name, progress)
 
 	var file_path = ""
 	export var player_name := ""
@@ -73,6 +85,7 @@ class Profile:
 
 	func set_exercise_progress(exercise_name: String, progress := 0, and_save := true) -> void:
 		_get_or_create_exercise(exercise_name).progress = progress
+		emit_signal("progress_changed", exercise_name, progress)
 		if and_save:
 			save()
 
