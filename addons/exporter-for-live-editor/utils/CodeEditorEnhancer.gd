@@ -5,11 +5,11 @@
 # highlight list, as well as strings and comments.
 extends Node
 
-const COLOR_CLASS := Color(0.6, 0.6, 1.0)
-const COLOR_MEMBER := Color(0.6, 1.0, 0.6)
-const COLOR_KEYWORD := Color(1.0, 0.6, 0.6)
-const COLOR_QUOTES := Color(1.0, 1.0, 0.6)
-const COLOR_COMMENTS := Color("#80ccced3")
+const COLOR_CLASS := Color(0.666667, 0, 0.729412)
+const COLOR_MEMBER := Color(0.14902, 0.776471, 0.968627)
+const COLOR_KEYWORD := Color(1, 0.094118, 0.321569)
+const COLOR_QUOTES := Color(1, 0.960784, 0.25098)
+const COLOR_COMMENTS := Color(0.290196, 0.294118, 0.388235)
 const KEYWORDS := [
 	"onready",
 	"var",
@@ -140,10 +140,12 @@ static func enhance(text_edit: TextEdit) -> void:
 	text_edit.smooth_scrolling = true
 	text_edit.caret_block_mode = true
 	text_edit.caret_blink = true
+	text_edit.wrap_enabled = true
 
 	text_edit.add_color_region('"', '"', COLOR_QUOTES)
 	text_edit.add_color_region("'", "'", COLOR_QUOTES)
 	text_edit.add_color_region("#", "\n", COLOR_COMMENTS, true)
+	
 	for classname in ClassDB.get_class_list():
 		text_edit.add_keyword_color(classname, COLOR_CLASS)
 		for member in ClassDB.class_get_property_list(classname):

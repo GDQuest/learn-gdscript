@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=23 format=2]
+[gd_resource type="Theme" load_steps=24 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/resources/fonts/font_text.tres" type="DynamicFont" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/vscrollbar_grabber.tres" type="StyleBox" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://addons/exporter-for-live-editor/resources/vscrollbar_grabber_pressed.tres" type="StyleBox" id=15]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/vscrollbar_grabber_highlight.tres" type="StyleBox" id=16]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/vscrollbar_scroll.tres" type="StyleBox" id=17]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/button_pressed.tres" type="StyleBox" id=18]
 
 [sub_resource type="StyleBoxLine" id=4]
 color = Color( 0.290196, 0.294118, 0.388235, 1 )
@@ -36,13 +37,20 @@ corner_radius_bottom_left = 12
 
 [resource]
 default_font = ExtResource( 1 )
-Button/colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
+Button/colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
 Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.2 )
 Button/colors/font_color_hover = Color( 1, 1, 1, 1 )
+Button/colors/font_color_pressed = Color( 0.14902, 0.776471, 0.968627, 1 )
+Button/colors/icon_color_hover = Color( 0.960784, 0.980392, 0.980392, 1 )
+Button/colors/icon_color_pressed = Color( 0.14902, 0.776471, 0.968627, 1 )
+Button/constants/hseparation = 12
 Button/fonts/font = ExtResource( 7 )
+Button/styles/disabled = null
 Button/styles/focus = ExtResource( 6 )
 Button/styles/hover = ExtResource( 5 )
 Button/styles/normal = ExtResource( 3 )
+Button/styles/pressed = ExtResource( 18 )
+HBoxContainer/constants/separation = 16
 HSeparator/constants/separation = 8
 HSeparator/styles/separator = SubResource( 4 )
 MarginContainer/constants/margin_bottom = 20
@@ -100,7 +108,7 @@ TextEdit/colors/safe_line_number_color = Color( 0.67, 0.78, 0.67, 0.6 )
 TextEdit/colors/selection_color = Color( 0.49, 0.49, 0.49, 1 )
 TextEdit/colors/symbol_color = Color( 0.94, 0.94, 0.94, 1 )
 TextEdit/colors/word_highlighted_color = Color( 0.8, 0.9, 0.9, 0.15 )
-TextEdit/constants/completion_lines = 7
+TextEdit/constants/completion_lines = 5
 TextEdit/constants/completion_max_width = 50
 TextEdit/constants/completion_scroll_width = 3
 TextEdit/constants/line_spacing = 4
