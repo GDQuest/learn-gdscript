@@ -14,12 +14,7 @@ var screens_stack := []
 # Used for transitions. We will probably replace this with an animation player
 # or a shader
 var _tween := Tween.new()
-
-var _is_mobile_platform := (
-	OS.get_name() == "Android"
-	or OS.get_name() == "HTML5"
-	or OS.get_name() == "iOS"
-)
+var _is_mobile_platform := OS.get_name() in ["Android", "HTML5", "iOS"]
 
 # Set this to load screens in a specific container. Defaults to tree root
 var root_container: Node
@@ -110,13 +105,14 @@ func _transition(screen: CanvasItem, direction_in := true) -> void:
 	)
 	if not property:
 		return
-	var trans := Tween.TRANS_ELASTIC
-	var eas := Tween.EASE_OUT
-	var duration := 0.5
+
+	var trans := Tween.TRANS_CUBIC
+	var easing := Tween.EASE_IN_OUT
+	var duration := 0.8
 	if direction_in:
-		_tween.interpolate_property(screen, property, start, end, duration, trans, eas)
+		_tween.interpolate_property(screen, property, start, end, duration, trans, easing)
 	else:
-		_tween.interpolate_property(screen, property, end, start, duration, trans, eas)
+		_tween.interpolate_property(screen, property, end, start, duration, trans, easing)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 	emit_signal(signal_name)
@@ -191,13 +187,10 @@ func _get_topmost_child() -> Node:
 
 # Handle back requests
 func _notification(what: int) -> void:
-	if (
-		(
-			what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST
-			or what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST
-		)
-		and _is_mobile_platform
-	):
+	if not _is_mobile_platform:
+		return
+
+	if what in [MainLoop.NOTIFICATION_WM_QUIT_REQUEST, MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST]:
 		back_or_quit()
 
 

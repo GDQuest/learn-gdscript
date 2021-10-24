@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://course/screenshot.png" type="Texture" id=1]
-[ext_resource path="res://TextBlockWithImage.gd" type="Script" id=2]
+[ext_resource path="res://course/TextBlockWithImage.gd" type="Script" id=1]
+[ext_resource path="res://course/screenshot.png" type="Texture" id=2]
 
 [node name="TextBlockWithImage" type="HBoxContainer"]
 margin_top = 131.0
@@ -9,7 +9,7 @@ margin_right = 800.0
 margin_bottom = 559.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -31,6 +31,6 @@ margin_left = 400.0
 margin_right = 800.0
 margin_bottom = 428.0
 rect_min_size = Vector2( 400, 0 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
