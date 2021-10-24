@@ -68,7 +68,7 @@ func set_revealer_height(new_revealer_height: float) -> void:
 
 
 func update_min_size() -> void:
-	rect_min_size.x = max(_button.rect_size.x, rect_size.x)
+	rect_size.x = max(_button.rect_size.x, rect_size.x)
 	_button.rect_size.x = rect_min_size.x
 	# rect_min_size.y = _height
 	if _tween.is_inside_tree():

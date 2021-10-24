@@ -22,32 +22,54 @@ scene_files = ExtResource( 7 )
 exported_script_path = "res://common/Menu.gd"
 slice_name = "set_score_if_highest"
 
-[node name="Margin" type="MarginContainer" parent="."]
-margin_right = 805.0
-margin_bottom = 1080.0
-
-[node name="LessonPanel" parent="Margin" instance=ExtResource( 1 )]
-margin_right = 785.0
-
-[node name="CodeEditor" parent="." instance=ExtResource( 5 )]
-margin_right = 1545.0
-split_container_path = NodePath("../Game/VSplit")
-
-[node name="Game" type="PanelContainer" parent="."]
-margin_left = 1553.0
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="VSplit" type="VSplitContainer" parent="Game"]
-margin_right = 367.0
+[node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer"]
+margin_right = 1508.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="GameViewport" type="ViewportContainer" parent="Game/VSplit"]
-margin_right = 367.0
+[node name="Margin" type="MarginContainer" parent="HSplitContainer/HSplitContainer"]
+margin_right = 651.0
+margin_bottom = 1080.0
+
+[node name="LessonPanel" parent="HSplitContainer/HSplitContainer/Margin" instance=ExtResource( 1 )]
+margin_right = 631.0
+
+[node name="Margin2" type="MarginContainer" parent="HSplitContainer/HSplitContainer"]
+margin_left = 663.0
+margin_right = 1508.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+
+[node name="CodeEditor" parent="HSplitContainer/HSplitContainer/Margin2" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 825.0
+margin_bottom = 1060.0
+split_container_path = NodePath("../../../Game/VSplit")
+
+[node name="Game" type="PanelContainer" parent="HSplitContainer"]
+margin_left = 1520.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 400, 0 )
+size_flags_vertical = 3
+
+[node name="VSplit" type="VSplitContainer" parent="HSplitContainer/Game"]
+margin_right = 400.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GameViewport" type="ViewportContainer" parent="HSplitContainer/Game/VSplit"]
+margin_right = 400.0
 margin_bottom = 534.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
@@ -55,9 +77,9 @@ size_flags_vertical = 3
 stretch = true
 script = ExtResource( 4 )
 
-[node name="Console" type="RichTextLabel" parent="Game/VSplit"]
+[node name="Console" type="RichTextLabel" parent="HSplitContainer/Game/VSplit"]
 margin_top = 546.0
-margin_right = 367.0
+margin_right = 400.0
 margin_bottom = 1080.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3

@@ -22,18 +22,19 @@ export (String, FILE, "*.gd") var exported_script_path: String setget set_export
 export var slice_name: String setget set_slice_name
 export var hints := PoolStringArray()
 
-onready var validation_manager := $ValidationManager as ValidationManager
-onready var game_viewport := find_node("GameViewport") as GameViewport
-onready var game_console := find_node("Console") as GameConsole
+onready var _validation_manager := $ValidationManager as ValidationManager
+onready var _game_container := find_node("Game") as PanelContainer
+onready var _game_viewport := _game_container.find_node("GameViewport") as GameViewport
+onready var _game_console := _game_container.find_node("Console") as GameConsole
 
-onready var _lesson_panel := $Margin/LessonPanel as LessonPanel
+onready var _lesson_panel := find_node("LessonPanel") as LessonPanel
 onready var _title_label := _lesson_panel.title_label
 onready var _progress_bar := _lesson_panel.progress_bar
 onready var _goal_rich_text_label := _lesson_panel.goal_rich_text_label
 onready var _checks_container := _lesson_panel.checks_container
 onready var _hints_container := _lesson_panel.hints_container
 
-onready var _code_editor := $CodeEditor as CodeEditor
+onready var _code_editor := find_node("CodeEditor") as CodeEditor
 onready var _slice_editor := _code_editor.slice_editor
 onready var _save_button := _code_editor.save_button
 onready var _pause_button := _code_editor.pause_button
@@ -48,6 +49,13 @@ func _ready() -> void:
 	_solution_button.connect("pressed", _slice_editor, "sync_text_with_slice")
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("toggle_distraction_free_mode"):
+		var is_distraction_free := not _lesson_panel.visible
+		_lesson_panel.visible = is_distraction_free
+		_game_container.visible = is_distraction_free
+		
+
 func _instantiate_checks():
 	var validators_number := 0
 	for child in get_children():
@@ -59,7 +67,7 @@ func _instantiate_checks():
 			remove_child(validator)
 			check.add_child(validator)
 			_checks_container.add_child(check)
-			validation_manager.add_check(check)
+			_validation_manager.add_check(check)
 
 	if validators_number == 0:
 		_checks_container.hide()
@@ -111,19 +119,19 @@ func _on_save_button_pressed() -> void:
 		)
 		_send_exercise_validated_signal(false)
 		return
-	game_viewport.update_nodes(script, nodes_paths)
+	_game_viewport.update_nodes(script, nodes_paths)
 
-	validation_manager.scene = game_viewport._scene
-	validation_manager.script_handler = get_script_handler()
-	validation_manager.script_slice = get_slice()
-	validation_manager.validate_all()
-	var validation_errors: Array = yield(validation_manager, "validation_completed_all")
+	_validation_manager.scene = _game_viewport._scene
+	_validation_manager.script_handler = get_script_handler()
+	_validation_manager.script_slice = get_slice()
+	_validation_manager.validate_all()
+	var validation_errors: Array = yield(_validation_manager, "validation_completed_all")
 	var validation_success = validation_errors.size() == 0
 	_send_exercise_validated_signal(validation_success)
 
 
 func _on_pause_button_pressed() -> void:
-	game_viewport.toggle_scene_pause()
+	_game_viewport.toggle_scene_pause()
 
 
 func _send_exercise_validated_signal(is_valid: bool) -> void:
@@ -140,7 +148,7 @@ func set_scene_files(new_scene_files: Resource) -> void:
 	scene_files = new_scene_files
 	if not is_inside_tree():
 		yield(self, "ready")
-	game_viewport.scene_files = scene_files
+	_game_viewport.scene_files = scene_files
 
 
 func get_scene_files() -> SceneFiles:
@@ -171,7 +179,7 @@ func set_exported_script_path(path: String) -> void:
 		)
 	if not is_inside_tree():
 		yield(self, "ready")
-	validation_manager.script_handler = script_handler
+	_validation_manager.script_handler = script_handler
 
 
 func set_slice_name(new_slice_name: String) -> void:
@@ -191,7 +199,7 @@ func set_slice_name(new_slice_name: String) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 	_slice_editor.script_slice = slice
-	validation_manager.script_slice = slice
+	_validation_manager.script_slice = slice
 
 
 func set_title(new_title: String) -> void:
