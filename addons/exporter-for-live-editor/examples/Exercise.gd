@@ -78,15 +78,18 @@ func _instantiate_hints():
 		_hints_container.hide()
 
 	for index in hints.size():
+		var hint: Revealer = RevealerScene.instance()
 		var hint_label := Label.new()
 		hint_label.text = hints[index]
+		hint.title = "Hint " + String(index + 1).pad_zeros(1)
 
-		var hint: Revealer = RevealerScene.instance()
-		var hint_title := "Hint " + String(index + 1).pad_zeros(1)
-		hint.add_child(hint_label)
-		hint.name = hint_title
-		hint.is_expanded = false
 		_hints_container.add_child(hint)
+		hint.add_child(hint_label)
+		hint.is_expanded = false
+
+		hint.rect_min_size.x = _hints_container.rect_size.x - _hints_container.padding
+		print(hint_label.rect_size)
+		print(hint_label.rect_min_size)
 
 
 func _on_save_button_pressed() -> void:

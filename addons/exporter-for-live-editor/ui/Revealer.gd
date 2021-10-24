@@ -38,6 +38,13 @@ func _notification(what: int) -> void:
 		sort_children()
 
 
+func add_child(node: Node, legible_unique_name := false) -> void:
+	.add_child(node)
+	_contents.append(node)
+	set_is_expanded(is_expanded)
+	update_min_size()
+
+
 func set_is_expanded(new_is_expanded: bool) -> void:
 	is_expanded = new_is_expanded
 
@@ -100,7 +107,7 @@ func _rotate_chevron(rotation_degrees: float, time := ANIM_DURATION) -> void:
 
 func _fit_child(control: Control, top := 0.0, node_padding := 0.0) -> float:
 	var position := Vector2(node_padding, top)
-	var height := control.rect_min_size.y
+	var height := control.rect_size.y
 	var size := Vector2(rect_size.x - node_padding, height)
 	var rect := Rect2(position, size)
 	fit_child_in_rect(control, rect)
