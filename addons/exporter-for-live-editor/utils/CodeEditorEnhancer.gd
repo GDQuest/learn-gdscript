@@ -144,10 +144,11 @@ static func enhance(text_edit: TextEdit) -> void:
 	text_edit.add_color_region('"', '"', COLOR_QUOTES)
 	text_edit.add_color_region("'", "'", COLOR_QUOTES)
 	text_edit.add_color_region("#", "\n", COLOR_COMMENTS, true)
-	for c in ClassDB.get_class_list():
-		text_edit.add_keyword_color(c, COLOR_CLASS)
-		for m in ClassDB.class_get_property_list(c):
-			for key in m:
+	for classname in ClassDB.get_class_list():
+		text_edit.add_keyword_color(classname, COLOR_CLASS)
+		for member in ClassDB.class_get_property_list(classname):
+			for key in member:
 				text_edit.add_keyword_color(key, COLOR_MEMBER)
-	for k in KEYWORDS:
-		text_edit.add_keyword_color(k, COLOR_KEYWORD)
+
+	for keyword in KEYWORDS:
+		text_edit.add_keyword_color(keyword, COLOR_KEYWORD)
