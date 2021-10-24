@@ -5,9 +5,10 @@
 [ext_resource path="res://addons/exporter-for-live-editor/resources/gdscript_app_theme.tres" type="Theme" id=3]
 
 [node name="Revealer" type="Container"]
-margin_right = 124.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 124, 38 )
+margin_right = 201.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 0, 47 )
+rect_clip_content = true
 theme = ExtResource( 3 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -16,15 +17,19 @@ __meta__ = {
 revealer_height = 38.0
 
 [node name="Button" type="Button" parent="."]
-margin_right = 124.0
+margin_right = 112.0
 margin_bottom = 47.0
 rect_min_size = Vector2( 100, 20 )
 size_flags_horizontal = 3
+size_flags_vertical = 0
 custom_colors/font_color_pressed = Color( 0.74902, 0.737255, 0.878431, 1 )
 toggle_mode = true
 text = "Expand"
 flat = true
 align = 0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Chevron" type="TextureRect" parent="Button"]
 modulate = Color( 0.290196, 0.294118, 0.388235, 1 )
