@@ -88,8 +88,6 @@ func _instantiate_hints():
 		hint.is_expanded = false
 
 		hint.rect_min_size.x = _hints_container.rect_size.x - _hints_container.padding
-		print(hint_label.rect_size)
-		print(hint_label.rect_min_size)
 
 
 func _on_save_button_pressed() -> void:
