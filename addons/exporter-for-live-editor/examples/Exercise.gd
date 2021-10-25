@@ -151,7 +151,7 @@ func set_scene_files(new_scene_files: Resource) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 	_game_viewport.scene_files = scene_files
-
+	_validation_manager.scene = _game_viewport._scene
 
 func get_scene_files() -> SceneFiles:
 	return scene_files as SceneFiles
