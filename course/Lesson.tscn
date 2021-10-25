@@ -42,6 +42,15 @@ margin_right = 1990.0
 margin_bottom = 1027.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+goal = "Compare two values, and then run a function only if a value is greater than the other.
+
+Use this piece of code:
+
+[code]
+func set_new_score_if_is_highest(maybe_highest_score: int) -> void:
+	if maybe_highest_score > _highest_score:
+		set_highest_score(maybe_highest_score)
+[/code]"
 hints = PoolStringArray( "Use comparison operators" )
 
 [node name="validator_comparison" type="Node" parent="Exercises/Exercise"]
@@ -56,6 +65,7 @@ margin_right = 2268.0
 margin_bottom = 1029.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+goal = "In "
 exported_script_path = "res://common/Player.gd"
 slice_name = "jump"
 hints = PoolStringArray( "Use comparison operators" )

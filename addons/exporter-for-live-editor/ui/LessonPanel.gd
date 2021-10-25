@@ -6,7 +6,7 @@ export var title := "Title" setget set_title
 
 onready var title_label := find_node("Title") as Label
 onready var progress_bar := find_node("ProgressBar") as ProgressBar
-onready var goal_rich_text_label := find_node("Goal") as RichTextLabel
+onready var goal_rich_text_label := find_node("Goal").find_node("TextBox") as RichTextLabel
 onready var checks_container := find_node("Checks") as Revealer
 onready var hints_container := find_node("Hints") as Revealer
 
