@@ -22,6 +22,9 @@ export (String, FILE, "*.gd") var exported_script_path: String setget set_export
 export var slice_name: String setget set_slice_name
 export var hints := PoolStringArray()
 
+# if the text is changed and not saved, this will be "true"
+var _code_editor_is_dirty := false
+
 onready var _validation_manager := $ValidationManager as ValidationManager
 onready var _game_container := find_node("Game") as PanelContainer
 onready var _game_viewport := _game_container.find_node("GameViewport") as GameViewport
@@ -47,6 +50,7 @@ func _ready() -> void:
 	_save_button.connect("pressed", self, "_on_save_button_pressed")
 	_pause_button.connect("pressed", self, "_on_pause_button_pressed")
 	_solution_button.connect("pressed", _slice_editor, "sync_text_with_slice")
+	_code_editor.connect("text_changed", self, "_on_code_editor_text_changed")
 
 
 func _input(event: InputEvent) -> void:
@@ -120,6 +124,7 @@ func _on_save_button_pressed() -> void:
 		)
 		_send_exercise_validated_signal(false)
 		return
+	_code_editor_is_dirty = false
 	_game_viewport.update_nodes(script, nodes_paths)
 	_validation_manager.scene = _game_viewport._scene
 	_validation_manager.script_handler = get_script_handler()
@@ -132,6 +137,10 @@ func _on_save_button_pressed() -> void:
 
 func _on_pause_button_pressed() -> void:
 	_game_viewport.toggle_scene_pause()
+
+
+func _on_code_editor_text_changed(_text: String) -> void:
+	_code_editor_is_dirty = true
 
 
 func _send_exercise_validated_signal(is_valid: bool) -> void:

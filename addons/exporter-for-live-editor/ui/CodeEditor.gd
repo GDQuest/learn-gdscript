@@ -13,6 +13,11 @@ onready var view_mode_toggle := find_node("ViewModeToggle") as ViewModeToggle
 
 export var split_container_path: NodePath setget set_split_container_path
 
+signal text_changed(text)
+
+func _ready() -> void:
+	slice_editor.connect("text_changed", self, "_on_text_changed")
+
 
 func set_split_container_path(path: NodePath) -> void:
 	split_container_path = path
@@ -23,3 +28,7 @@ func set_split_container_path(path: NodePath) -> void:
 		push_error("nodepath %s does not yield a SplitContainer" % [path])
 		return
 	view_mode_toggle.split_container = node
+
+
+func _on_text_changed(text: String) -> void:
+	emit_signal("text_changed", text)
