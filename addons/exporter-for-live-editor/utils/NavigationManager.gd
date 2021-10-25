@@ -247,7 +247,6 @@ func _js_popstate_listener(args) -> void:
 		return
 	var event = args[0]
 	var url = event.state
-	prints("js asks to go back to:", url)
 	back()
 
 

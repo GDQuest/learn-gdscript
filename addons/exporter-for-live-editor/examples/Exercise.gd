@@ -123,7 +123,6 @@ func _on_save_button_pressed() -> void:
 		_send_exercise_validated_signal(false)
 		return
 	_game_viewport.update_nodes(script, nodes_paths)
-
 	_validation_manager.scene = _game_viewport._scene
 	_validation_manager.script_handler = get_script_handler()
 	_validation_manager.script_slice = get_slice()

@@ -71,10 +71,10 @@ func _on_http_request_completed(
 	for index in response.size():
 		var dict: Dictionary = response[index]
 		# unused return value.
-		if dict.code in blacklist_codes or dict.severity > max_severity:
-			continue
 		var error = LanguageServerError.new()
 		error.from_JSON(dict)
+		if error.code in blacklist_codes or error.severity > max_severity:
+			continue
 		errors.append(error)
 
 	emit_signal("errors", errors)
