@@ -15,8 +15,8 @@ const ValidationManager := preload("../validation/ValidationManager.gd")
 const RevealerScene := preload("../ui/components/Revealer.tscn")
 
 export var title := "Title" setget set_title
-export var goal := "Goal" setget set_goal
-export var progress := 0.0 setget set_progress
+export (String, MULTILINE) var goal := "Goal" setget set_goal
+export (int, 0, 100) var progress := 0.0 setget set_progress
 export var scene_files: Resource setget set_scene_files, get_scene_files
 export (String, FILE, "*.gd") var exported_script_path: String setget set_exported_script_path
 export var slice_name: String setget set_slice_name
@@ -58,7 +58,7 @@ func _input(event: InputEvent) -> void:
 		var is_distraction_free := not _lesson_panel.visible
 		_lesson_panel.visible = is_distraction_free
 		_game_container.visible = is_distraction_free
-		
+
 
 func _instantiate_checks():
 	var validators_number := 0
@@ -159,6 +159,7 @@ func set_scene_files(new_scene_files: Resource) -> void:
 		yield(self, "ready")
 	_game_viewport.scene_files = scene_files
 	_validation_manager.scene = _game_viewport._scene
+
 
 func get_scene_files() -> SceneFiles:
 	return scene_files as SceneFiles

@@ -79,7 +79,9 @@ func update_min_size() -> void:
 	_button.rect_size.x = rect_min_size.x
 	if _tween.is_inside_tree():
 		_tween.stop(self, "rect_min_size:y")
-		_tween.interpolate_property(self, "rect_min_size:y", rect_min_size.y, _height, ANIM_DURATION)
+		_tween.interpolate_property(
+			self, "rect_min_size:y", rect_min_size.y, _height, ANIM_DURATION
+		)
 
 
 func sort_children() -> void:
@@ -100,7 +102,9 @@ func _rotate_chevron(rotation_degrees: float, time := ANIM_DURATION) -> void:
 		_chevron.rect_rotation = rotation_degrees
 		return
 	_tween.stop_all()
-	_tween.interpolate_property(_chevron, "rect_rotation", _chevron.rect_rotation, rotation_degrees, time)
+	_tween.interpolate_property(
+		_chevron, "rect_rotation", _chevron.rect_rotation, rotation_degrees, time
+	)
 	_tween.start()
 
 

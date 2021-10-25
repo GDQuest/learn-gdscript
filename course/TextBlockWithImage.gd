@@ -4,15 +4,13 @@ extends HBoxContainer
 onready var texture_rect := $TextureRect as TextureRect
 onready var text_label := $RichTextLabel as RichTextLabel
 
-enum ORDER{
-	TEXT_IMAGE
-	IMAGE_TEXT,
-}
+enum ORDER { TEXT_IMAGE, IMAGE_TEXT }
 
-export(String, MULTILINE) var text: String setget set_text
+export (String, MULTILINE) var text: String setget set_text
 export var texture: Texture setget set_texture
-export(ORDER) var order := ORDER.TEXT_IMAGE setget set_order
+export (ORDER) var order := ORDER.TEXT_IMAGE setget set_order
 export var min_width_to_show_image := 500.0
+
 
 func _ready() -> void:
 	connect("resized", self, "_on_resized")

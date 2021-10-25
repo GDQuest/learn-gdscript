@@ -61,6 +61,7 @@ func list_profiles() -> PoolStringArray:
 func _on_exercise_progress_changed(exercise_name, progress) -> void:
 	emit_signal("progress_changed", exercise_name, progress)
 
+
 class Profile:
 	extends Resource
 

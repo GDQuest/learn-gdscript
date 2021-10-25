@@ -59,6 +59,6 @@ func _validation_error(errors: Array) -> void:
 func verify(thing: bool, message: String) -> bool:
 	if thing:
 		return true
-	push_warning("Validation error: %s"%[ message ])
+	push_warning("Validation error: %s" % [message])
 	_validation_error([message])
 	return false

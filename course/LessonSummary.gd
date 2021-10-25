@@ -8,19 +8,19 @@ export var scene_file: PackedScene setget set_scene_file
 export var button_text := "Go to Lesson" setget set_button_text
 export var progress := 0 setget set_progress
 
+
 func _init() -> void:
-	
 	_progress_bar.size_flags_horizontal = SIZE_EXPAND_FILL
 	add_child(_progress_bar)
-	
+
 	# TODO: unhide once score saving works
 	_progress_bar.visible = false
-	
+
 	add_child(_button)
-	
+
 	if Engine.editor_hint:
 		return
-	
+
 	UserProfiles.connect("progress_changed", self, "_on_exercise_progress_changed")
 
 

@@ -1,11 +1,12 @@
 extends PanelContainer
 
-signal pressed()
+signal pressed
 
 onready var _button := $VBoxContainer/MarginContainer/VBoxContainer/Button as Button
 onready var _label := $VBoxContainer/MarginContainer/VBoxContainer/Label2 as Label
 
 export var text := "You've completed the lesson" setget set_text
+
 
 func _ready() -> void:
 	_button.connect("pressed", self, "_on_button_pressed")

@@ -15,6 +15,7 @@ export var split_container_path: NodePath setget set_split_container_path
 
 signal text_changed(text)
 
+
 func _ready() -> void:
 	slice_editor.connect("text_changed", self, "_on_text_changed")
 
