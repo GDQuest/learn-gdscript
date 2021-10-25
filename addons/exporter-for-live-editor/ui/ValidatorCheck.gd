@@ -16,7 +16,7 @@ export var is_active := true setget set_active, get_active
 func _init() -> void:
 	_button.text = "test"
 	add_child(_button)
-	# until we decide how to handle individual checks, hide this
+	# TODO: unhide once we decide how to handle individual checks
 	_button.visible = false
 	set_active(is_active)
 

@@ -13,6 +13,9 @@ func _init() -> void:
 	_progress_bar.size_flags_horizontal = SIZE_EXPAND_FILL
 	add_child(_progress_bar)
 	
+	# TODO: unhide once score saving works
+	_progress_bar.visible = false
+	
 	add_child(_button)
 	
 	if Engine.editor_hint:
