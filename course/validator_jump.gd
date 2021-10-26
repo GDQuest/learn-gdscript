@@ -18,7 +18,6 @@ func validate(scene: Node, _script: ScriptHandler, _slice: ScriptSlice):
 	Input.action_press("jump")
 	timer.start()
 	yield(timer, "timeout")
-	prints(position, player.position.y, _slice.current_full_text)
 	if not verify(player.position.y < position, "player's y didn't increase when pressing jump"):
 		return
 	_validation_success()
