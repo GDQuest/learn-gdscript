@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/exporter-for-live-editor/resources/stylebox_outline_blue.tres" type="StyleBox" id=1]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/components/OutlinePanel.gd" type="Script" id=2]
+
+[node name="OutlinePanel" type="Panel"]
+show_behind_parent = true
+margin_right = 175.0
+margin_bottom = 103.0
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
