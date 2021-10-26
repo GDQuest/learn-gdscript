@@ -128,7 +128,6 @@ func _on_save_button_pressed() -> void:
 		_send_exercise_validated_signal(false)
 		return
 	_code_editor_is_dirty = false
-	print(script, nodes_paths)
 	_game_viewport.update_nodes(script, nodes_paths)
 	_validation_manager.scene = _game_viewport._scene
 	_validation_manager.script_handler = get_script_handler()

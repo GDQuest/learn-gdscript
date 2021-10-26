@@ -23,8 +23,7 @@ extends TextEdit
 const ScriptSlice := preload("../collections/ScriptSlice.gd")
 const CodeEditorEnhancer := preload("../utils/CodeEditorEnhancer.gd")
 const SliceEditorOverlay := preload("./SliceEditorOverlay.gd")
-const SliceEditorErrorOverlayMessageScene := preload("./SliceEditorErrorOverlayMessage.tscn")
-const SliceEditorErrorOverlayMessage := preload("./SliceEditorErrorOverlayMessage.gd")
+const ErrorOverlayPopupScene := preload("./ErrorOverlayPopup.tscn")
 const LanguageServerError := preload("../lsp/LanguageServerError.gd")
 
 enum SCROLL_DIR { HORIZONTAL, VERTICAL }
@@ -32,7 +31,7 @@ enum SCROLL_DIR { HORIZONTAL, VERTICAL }
 signal scroll_changed(vector2)
 
 var errors_overlay := SliceEditorOverlay.new()
-var errors_overlay_message: SliceEditorErrorOverlayMessage = SliceEditorErrorOverlayMessageScene.instance()
+var errors_overlay_message: ErrorOverlayPopup = ErrorOverlayPopupScene.instance()
 
 var script_slice: ScriptSlice setget set_script_slice, get_script_slice
 # Array<LanguageServerError>
