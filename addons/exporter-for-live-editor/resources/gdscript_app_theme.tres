@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=25 format=2]
+[gd_resource type="Theme" load_steps=26 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/resources/fonts/font_text.tres" type="DynamicFont" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/vscrollbar_grabber.tres" type="StyleBox" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://addons/exporter-for-live-editor/resources/vscrollbar_scroll.tres" type="StyleBox" id=17]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/button_pressed.tres" type="StyleBox" id=18]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/stylebox_empty.tres" type="StyleBox" id=19]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/button_disabled.tres" type="StyleBox" id=20]
 
 [sub_resource type="StyleBoxLine" id=9]
 color = Color( 0.290196, 0.294118, 0.388235, 1 )
@@ -37,14 +38,14 @@ vertical = true
 [resource]
 default_font = ExtResource( 1 )
 Button/colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
-Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.2 )
+Button/colors/font_color_disabled = Color( 0.0901961, 0.0941176, 0.188235, 1 )
 Button/colors/font_color_hover = Color( 1, 1, 1, 1 )
 Button/colors/font_color_pressed = Color( 0.14902, 0.776471, 0.968627, 1 )
 Button/colors/icon_color_hover = Color( 0.960784, 0.980392, 0.980392, 1 )
 Button/colors/icon_color_pressed = Color( 0.14902, 0.776471, 0.968627, 1 )
 Button/constants/hseparation = 12
 Button/fonts/font = ExtResource( 7 )
-Button/styles/disabled = null
+Button/styles/disabled = ExtResource( 20 )
 Button/styles/focus = ExtResource( 6 )
 Button/styles/hover = ExtResource( 5 )
 Button/styles/normal = ExtResource( 3 )
