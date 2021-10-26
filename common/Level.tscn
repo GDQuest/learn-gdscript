@@ -1,11 +1,27 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://common/Level.gd" type="Script" id=1]
 [ext_resource path="res://common/Background.tscn" type="PackedScene" id=2]
 [ext_resource path="res://common/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/obstacle-big0001.png" type="Texture" id=4]
+[ext_resource path="res://assets/obstacle-small0001.png" type="Texture" id=5]
+[ext_resource path="res://assets/obstacle-small0000.png" type="Texture" id=6]
+[ext_resource path="res://assets/obstacle-big0000.png" type="Texture" id=7]
+[ext_resource path="res://assets/obstacle-big0002.png" type="Texture" id=8]
+[ext_resource path="res://assets/obstacle-small0002.png" type="Texture" id=9]
+[ext_resource path="res://common/Obstacle.tscn" type="PackedScene" id=10]
+[ext_resource path="res://common/ObstacleDispenser.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 78.3356, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 20 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 27.2197 )
+
+[sub_resource type="RectangleShape2D" id=2]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
@@ -28,7 +44,38 @@ __meta__ = {
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="Obstacles" type="Node2D" parent="."]
+[node name="ObstaclesDispenser" type="Node2D" parent="."]
+script = ExtResource( 11 )
+
+[node name="Obstacle" parent="ObstaclesDispenser" instance=ExtResource( 10 )]
+visible = false
+texture = ExtResource( 7 )
+shape = SubResource( 3 )
+
+[node name="Obstacle2" parent="ObstaclesDispenser" instance=ExtResource( 10 )]
+visible = false
+texture = ExtResource( 4 )
+shape = SubResource( 4 )
+
+[node name="Obstacle3" parent="ObstaclesDispenser" instance=ExtResource( 10 )]
+visible = false
+texture = ExtResource( 8 )
+shape = SubResource( 4 )
+
+[node name="Obstacle4" parent="ObstaclesDispenser" instance=ExtResource( 10 )]
+visible = false
+texture = ExtResource( 6 )
+shape = SubResource( 2 )
+
+[node name="Obstacle5" parent="ObstaclesDispenser" instance=ExtResource( 10 )]
+visible = false
+texture = ExtResource( 5 )
+shape = SubResource( 2 )
+
+[node name="Obstacle6" parent="ObstaclesDispenser" instance=ExtResource( 10 )]
+visible = false
+texture = ExtResource( 9 )
+shape = SubResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

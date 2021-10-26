@@ -1,8 +1,7 @@
 extends Node2D
 
 const Obstacle := preload("./Obstacle.gd")
-const ObstacleSmall := preload("./ObstacleSmall.tscn")
-const ObstacleBig := preload("./ObstacleBig.tscn")
+const ObstacleDispenser := preload("./ObstacleDispenser.gd")
 const Player := preload("./Player.gd")
 
 signal game_over
@@ -14,16 +13,14 @@ var _started := false
 onready var _player := $Player as Player
 onready var _background_player := $Background/AnimationPlayer as AnimationPlayer
 onready var _timer := $Timer as Timer
-onready var _obstacles := $Obstacles as Node2D
+onready var _obstacles := $ObstaclesDispenser as ObstacleDispenser
 
 
 func _add_obstacle() -> void:
-	var is_big = randi() % 2
-	var obstacle: Obstacle = ObstacleBig.instance() if is_big else ObstacleSmall.instance()
-	_obstacles.add_child(obstacle)
-	obstacle.position.y = 500
-	obstacle.position.x = get_viewport_rect().size.x
-	obstacle.tween.playback_speed = _speed
+	var obstacle: Obstacle = _obstacles.dispense()
+	obstacle.global_position.y = 500
+	obstacle.global_position.x = get_viewport_rect().size.x
+	obstacle.speed = _speed
 	obstacle.set_destination(0, 4.0)
 	obstacle.connect("body_entered", self, "_on_body_entered")
 	obstacle.connect("reached_destination", self, "_on_obstacle_reached_destination")
@@ -33,7 +30,7 @@ func set_speed(new_speed: float) -> void:
 	_speed = new_speed
 	_background_player.playback_speed = _speed
 	for obstacle in _obstacles.get_children():
-		obstacle.tween.playback_speed = _speed
+		obstacle.speed = _speed
 
 
 func _increase_speed() -> void:

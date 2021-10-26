@@ -109,7 +109,6 @@ static func try_validate_and_replace_script(node: Node, script: Script) -> void:
 		if prop.name == "script":
 			continue
 		props[prop.name] = node.get(prop.name)
-
 	node.set_script(script)
 
 	for prop in props:

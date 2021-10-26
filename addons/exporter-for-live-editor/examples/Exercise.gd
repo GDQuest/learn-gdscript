@@ -99,7 +99,7 @@ func _instantiate_hints():
 
 func _on_save_button_pressed() -> void:
 	var script_path := get_script_handler().file_path
-	var script_text := get_slice().current_full_text
+	var script_text := _code_editor.slice_editor.script_slice.current_full_text
 	var nodes_paths := get_script_handler().nodes_paths
 	var verifier := ScriptVerifier.new(self, script_text)
 	verifier.test()
@@ -128,6 +128,7 @@ func _on_save_button_pressed() -> void:
 		_send_exercise_validated_signal(false)
 		return
 	_code_editor_is_dirty = false
+	print(script, nodes_paths)
 	_game_viewport.update_nodes(script, nodes_paths)
 	_validation_manager.scene = _game_viewport._scene
 	_validation_manager.script_handler = get_script_handler()

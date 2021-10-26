@@ -1,11 +1,11 @@
-[gd_resource type="Resource" load_steps=9 format=2]
+[gd_resource type="Resource" load_steps=11 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/collections/SceneFiles.gd" type="Script" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/collections/ScriptHandler.gd" type="Script" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/collections/ScriptSlice.gd" type="Script" id=3]
 [ext_resource path="res://common/Game.tscn" type="PackedScene" id=4]
 
-[sub_resource type="Resource" id=1]
+[sub_resource type="Resource" id=5]
 script = ExtResource( 3 )
 leading_spaces = 0
 keyword = "EXPORT"
@@ -13,12 +13,12 @@ closing = false
 name = "set_score_if_highest"
 is_full_file = false
 start = 27
-end = 31
+end = 33
 lines_before = [ "extends VBoxContainer", "", "# warning-ignore:unused_signal", "signal request_play", "", "onready var _play_button := $PlayButton as Button", "onready var _exit_button := $ExitButton as Button", "onready var _highest_score_label := $HBoxContainer/HighScoreLabel as Label", "", "var _highest_score := 0", "", "", "func _ready() -> void:", "	_play_button.connect(\"pressed\", self, \"emit_signal\", [\"request_play\"])", "	_exit_button.connect(\"pressed\", get_tree(), \"quit\")", "	set_focus()", "", "", "func set_highest_score(new_highest_score: int) -> void:", "	_highest_score = new_highest_score", "	if not is_inside_tree():", "		yield(self, \"ready\")", "	_highest_score_label.text = String(new_highest_score).pad_zeros(5)", "", "", "# Sets a higher score if the passed integer is higher than the current", "# highest score" ]
-lines_after = [ "", "func set_focus() -> void:", "	grab_focus()", "	_play_button.grab_focus()", "" ]
-lines_editable = [ "func set_new_score_if_is_highest(maybe_highest_score: int) -> void:", "	if maybe_highest_score > _highest_score:", "		set_highest_score(maybe_highest_score)" ]
+lines_after = [ "", "", "func set_focus() -> void:", "	grab_focus()", "	_play_button.grab_focus()", "" ]
+lines_editable = [ "func set_new_score_if_is_highest(maybe_highest_score: int) -> void:", "	if maybe_highest_score > _highest_score:", "		set_highest_score(maybe_highest_score)", "", "" ]
 
-[sub_resource type="Resource" id=2]
+[sub_resource type="Resource" id=6]
 script = ExtResource( 2 )
 nodes_paths = [ NodePath("Menu") ]
 file_path = "res://common/Menu.gd"
@@ -54,30 +54,87 @@ func set_highest_score(new_highest_score: int) -> void:
 func set_new_score_if_is_highest(maybe_highest_score: int) -> void:
 	if maybe_highest_score > _highest_score:
 		set_highest_score(maybe_highest_score)
+
+
 # /EXPORT set_score_if_highest
+
 
 func set_focus() -> void:
 	grab_focus()
 	_play_button.grab_focus()
 "
 slices = {
-"set_score_if_highest": SubResource( 1 )
+"set_score_if_highest": SubResource( 5 )
 }
 
 [sub_resource type="Resource" id=3]
+script = ExtResource( 3 )
+leading_spaces = 0
+keyword = "EXPORT"
+closing = false
+name = "get_random"
+is_full_file = false
+start = 15
+end = 22
+lines_before = [ "extends Node2D", "", "const Obstacle = preload(\"./Obstacle.gd\")", "const ObstacleScene = preload(\"./Obstacle.tscn\")", "", "var _obstacles := []", "", "", "func _ready() -> void:", "	for child in get_children():", "		if child is Obstacle:", "			_obstacles.push_back(child)", "			remove_child(child)", "", "" ]
+lines_after = [ "", "func dispense() -> Obstacle:", "	var model := get_random_obstacle()", "	var obstacle := ObstacleScene.instance() as Obstacle", "	obstacle.texture = model.texture", "	obstacle.shape = model.shape", "	add_child(obstacle)", "	return obstacle", "" ]
+lines_editable = [ "func get_random_obstacle() -> Obstacle:", "	var size := _obstacles.size()", "	var index := randi() % size", "	# warning-ignore:unsafe_cast", "	var obstacle := _obstacles[index] as Obstacle", "	return obstacle" ]
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+nodes_paths = [ NodePath("Level/ObstaclesDispenser") ]
+file_path = "res://common/ObstacleDispenser.gd"
+name = "ObstacleDispenser"
+original_script = "extends Node2D
+
+const Obstacle = preload(\"./Obstacle.gd\")
+const ObstacleScene = preload(\"./Obstacle.tscn\")
+
+var _obstacles := []
+
+
+func _ready() -> void:
+	for child in get_children():
+		if child is Obstacle:
+			_obstacles.push_back(child)
+			remove_child(child)
+
+
+# EXPORT get_random
+func get_random_obstacle() -> Obstacle:
+	var size := _obstacles.size()
+	var index := randi() % size
+	# warning-ignore:unsafe_cast
+	var obstacle := _obstacles[index] as Obstacle
+	return obstacle
+# /EXPORT get_random
+
+func dispense() -> Obstacle:
+	var model := get_random_obstacle()
+	var obstacle := ObstacleScene.instance() as Obstacle
+	obstacle.texture = model.texture
+	obstacle.shape = model.shape
+	add_child(obstacle)
+	return obstacle
+"
+slices = {
+"get_random": SubResource( 3 )
+}
+
+[sub_resource type="Resource" id=1]
 script = ExtResource( 3 )
 leading_spaces = 2
 keyword = "EXPORT"
 closing = false
 name = "jump"
 is_full_file = false
-start = 21
-end = 31
-lines_before = [ "extends KinematicBody2D", "", "export var jump_speed := 200", "export var jump_max_height := 100.0", "export var gravity := 4000", "", "var is_walking := false", "", "onready var animated_sprite := $AnimatedSprite as AnimatedSprite", "", "var _velocity_y = 0.0", "var _jump_starting_point := 0.0", "", "", "func _ready() -> void:", "	add_to_group(\"Player\")", "", "", "func _physics_process(delta: float) -> void:", "	", "	if Input.is_action_pressed(\"jump\"):" ]
-lines_after = [ "	", "	if Input.is_action_just_pressed(\"jump\"):", "		animated_sprite.play(\"jump\")", "	elif is_on_floor() and is_walking:", "		animated_sprite.play(\"walk\")", "", "	_velocity_y += gravity * delta", "", "	var velocity := Vector2(0, _velocity_y)", "	_velocity_y = move_and_slide(velocity, Vector2.UP).y", "" ]
+start = 20
+end = 30
+lines_before = [ "extends KinematicBody2D", "", "export var jump_speed := 200", "export var jump_max_height := 100.0", "export var gravity := 4000", "", "var is_walking := false", "", "onready var animated_sprite := $AnimatedSprite as AnimatedSprite", "", "var _velocity_y = 0.0", "var _jump_starting_point := 0.0", "", "", "func _ready() -> void:", "	add_to_group(\"Player\")", "", "", "func _physics_process(delta: float) -> void:", "	if Input.is_action_pressed(\"jump\"):" ]
+lines_after = [ "", "	if Input.is_action_just_pressed(\"jump\"):", "		animated_sprite.play(\"jump\")", "	elif is_on_floor() and is_walking:", "		animated_sprite.play(\"walk\")", "", "	_velocity_y += gravity * delta", "", "	var velocity := Vector2(0, _velocity_y)", "	_velocity_y = move_and_slide(velocity, Vector2.UP).y", "" ]
 lines_editable = [ "if is_on_floor():", "	_jump_starting_point = position.y", "	_velocity_y -= jump_speed", "else:", "	var jump_height := _jump_starting_point - position.y", "	var is_going_up: bool = _velocity_y < 0", "	var is_under_apex: bool = jump_height < jump_max_height", "	if is_going_up and is_under_apex:", "		_velocity_y -= jump_speed" ]
 
-[sub_resource type="Resource" id=4]
+[sub_resource type="Resource" id=2]
 script = ExtResource( 2 )
 nodes_paths = [ NodePath("Level/Player") ]
 file_path = "res://common/Player.gd"
@@ -101,7 +158,6 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	
 	if Input.is_action_pressed(\"jump\"):
 		# EXPORT jump
 		if is_on_floor():
@@ -114,7 +170,7 @@ func _physics_process(delta: float) -> void:
 			if is_going_up and is_under_apex:
 				_velocity_y -= jump_speed
 		# /EXPORT jump
-	
+
 	if Input.is_action_just_pressed(\"jump\"):
 		animated_sprite.play(\"jump\")
 	elif is_on_floor() and is_walking:
@@ -126,14 +182,15 @@ func _physics_process(delta: float) -> void:
 	_velocity_y = move_and_slide(velocity, Vector2.UP).y
 "
 slices = {
-"jump": SubResource( 3 )
+"jump": SubResource( 1 )
 }
 
 [resource]
 script = ExtResource( 1 )
 files = {
-"res://common/Menu.gd": SubResource( 2 ),
-"res://common/Player.gd": SubResource( 4 )
+"res://common/Menu.gd": SubResource( 6 ),
+"res://common/ObstacleDispenser.gd": SubResource( 4 ),
+"res://common/Player.gd": SubResource( 2 )
 }
 scene = ExtResource( 4 )
-scene_viewport_size = Vector2( 1024, 600 )
+scene_viewport_size = Vector2( 1920, 1080 )

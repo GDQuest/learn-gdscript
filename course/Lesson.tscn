@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/resources/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Lesson.gd" type="Script" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Exercise.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/validator_comparison.gd" type="Script" id=4]
 [ext_resource path="res://course/validator_jump.gd" type="Script" id=5]
+[ext_resource path="res://common/Game.live-editor.tres" type="Resource" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.188235, 0.188235, 0.286275, 1 )
@@ -34,7 +35,7 @@ margin_right = 1990.0
 margin_bottom = 1015.0
 custom_styles/panel = SubResource( 1 )
 
-[node name="Exercise" parent="Exercises" instance=ExtResource( 3 )]
+[node name="ExerciseCompare" parent="Exercises" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 1990.0
@@ -44,27 +45,28 @@ size_flags_vertical = 3
 goal = "Compare two values, and then run a function only if a value is greater than the other.
 
 Place your cursor at the [code]◆[/code] and write the proper comparison"
+scene_files = ExtResource( 6 )
 hints = PoolStringArray( "Use comparison operators", "You want to compare \"maybe_highest_score\" and \"_highest_score\"", "The proper comparison is \">\"" )
 initial_editor_text = "func set_new_score_if_is_highest(maybe_highest_score: int) -> void:
 	if ◆ _highest_score:
 		set_highest_score(maybe_highest_score)"
 
-[node name="validator_lower" type="Node" parent="Exercises/Exercise"]
+[node name="validator_lower" type="Node" parent="Exercises/ExerciseCompare"]
 script = ExtResource( 4 )
 title = "Value does not pass if it is lower"
 test_type = 2
 
-[node name="validator_greater" type="Node" parent="Exercises/Exercise"]
+[node name="validator_greater" type="Node" parent="Exercises/ExerciseCompare"]
 script = ExtResource( 4 )
 title = "Value does pass if it is higher"
 test_type = 1
 
-[node name="validator_comparison" type="Node" parent="Exercises/Exercise"]
+[node name="validator_comparison" type="Node" parent="Exercises/ExerciseCompare"]
 script = ExtResource( 4 )
 title = "Uses comparison"
 test_type = 4
 
-[node name="Exercise2" parent="Exercises" instance=ExtResource( 3 )]
+[node name="ExerciseJump" parent="Exercises" instance=ExtResource( 3 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -77,13 +79,14 @@ goal = "The character's jump is controlled by a variable called \"_velocity_y\".
 A variable called \"jump_speed\" is available in the scope for you to use.
 
 Place your cursor at the [code]◆[/code] and write the increment"
+scene_files = ExtResource( 6 )
 exported_script_path = "res://common/Player.gd"
 slice_name = "jump"
 hints = PoolStringArray( "Change the variable [code]_velocity_y[/code]", "Remember to go up, you need to _lower_ y, not increase it", "If using \"jump_speed\" is too complex, you can just change the [code]_velocity_y[/code] number" )
 initial_editor_text = "if is_on_floor():
 	◆"
 
-[node name="validator_jump" type="Node" parent="Exercises/Exercise2"]
+[node name="validator_jump" type="Node" parent="Exercises/ExerciseJump"]
 script = ExtResource( 5 )
 title = "Make sure player can jump when pressing the \"jump\" key"
 
