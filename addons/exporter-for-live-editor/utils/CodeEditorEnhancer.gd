@@ -128,7 +128,8 @@ const KEYWORDS := [
 	"yield",
 	"int",
 	"float",
-	"bool"
+	"bool",
+	"and",
 ]
 
 # Enhances a TextEdit to better highlight GDScript code.
