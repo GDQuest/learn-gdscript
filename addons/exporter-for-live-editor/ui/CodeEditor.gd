@@ -11,6 +11,7 @@ onready var solution_button := find_node("SolutionButton") as Button
 onready var view_mode_toggle := find_node("ViewModeToggleButton") as ViewModeToggleButton
 
 export var split_container_path: NodePath setget set_split_container_path
+export var text := "" setget set_text, get_text
 
 signal text_changed(text)
 
@@ -20,6 +21,8 @@ func _ready() -> void:
 
 
 func set_split_container_path(path: NodePath) -> void:
+	if Engine.editor_hint:
+		return
 	split_container_path = path
 	if not is_inside_tree():
 		yield(self, "ready")
@@ -30,5 +33,18 @@ func set_split_container_path(path: NodePath) -> void:
 	view_mode_toggle.split_container = node
 
 
-func _on_text_changed(text: String) -> void:
-	emit_signal("text_changed", text)
+func _on_text_changed() -> void:
+	emit_signal("text_changed", slice_editor.text)
+
+
+func set_text(new_text: String) -> void:
+	text = new_text
+	if not is_inside_tree():
+		yield(self, "ready")
+	slice_editor.text = new_text
+
+
+func get_text() -> String:
+	if not is_inside_tree():
+		return text
+	return slice_editor.text

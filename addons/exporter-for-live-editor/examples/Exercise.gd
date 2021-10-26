@@ -1,3 +1,4 @@
+tool
 class_name CourseExercise
 extends Control
 
@@ -22,6 +23,7 @@ export var scene_files: Resource setget set_scene_files, get_scene_files
 export (String, FILE, "*.gd") var exported_script_path: String setget set_exported_script_path
 export var slice_name: String setget set_slice_name
 export var hints := PoolStringArray()
+export (String, MULTILINE) var initial_editor_text := "" setget set_initial_editor_text, get_initial_editor_text
 
 # if the text is changed and not saved, this will be "true"
 var _code_editor_is_dirty := false
@@ -46,6 +48,8 @@ onready var _solution_button := _code_editor.solution_button
 
 
 func _ready() -> void:
+	if Engine.editor_hint:
+		return
 	_instantiate_checks()
 	_instantiate_hints()
 	_save_button.connect("pressed", self, "_on_save_button_pressed")
@@ -156,6 +160,8 @@ func set_scene_files(new_scene_files: Resource) -> void:
 		push_error("scene_files %s is not a valid instance of SceneFiles" % [new_scene_files])
 		return
 	scene_files = new_scene_files
+	if Engine.editor_hint:
+		return
 	if not is_inside_tree():
 		yield(self, "ready")
 	_game_viewport.scene_files = scene_files
@@ -188,6 +194,8 @@ func set_exported_script_path(path: String) -> void:
 		push_error(
 			"File %s is not included in the exported scene %s" % [exported_script_path, scene_files]
 		)
+	if Engine.editor_hint:
+		return
 	if not is_inside_tree():
 		yield(self, "ready")
 	_validation_manager.script_handler = script_handler
@@ -207,6 +215,8 @@ func set_slice_name(new_slice_name: String) -> void:
 				% [slice_name, get_script_handler()]
 			)
 		)
+	if Engine.editor_hint:
+		return
 	if not is_inside_tree():
 		yield(self, "ready")
 	_slice_editor.script_slice = slice
@@ -232,3 +242,16 @@ func set_progress(new_progress: float) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 	_progress_bar.value = progress
+
+
+func set_initial_editor_text(new_text: String) -> void:
+	initial_editor_text = new_text
+	if not is_inside_tree():
+		yield(self, "ready")
+	_code_editor.text = initial_editor_text
+
+
+func get_initial_editor_text() -> String:
+	if not is_inside_tree():
+		return initial_editor_text
+	return _code_editor.text

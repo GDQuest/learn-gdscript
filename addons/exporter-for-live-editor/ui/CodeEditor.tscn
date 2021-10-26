@@ -18,17 +18,17 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+text = null
 
 [node name="Column" type="VBoxContainer" parent="."]
-margin_top = 0.5
 margin_right = 1920.0
-margin_bottom = 1079.5
+margin_bottom = 1080.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 3
 
 [node name="SliceEditor" type="TextEdit" parent="Column"]
 margin_right = 1920.0
-margin_bottom = 866.0
+margin_bottom = 868.0
 rect_min_size = Vector2( 500, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -131,23 +131,23 @@ caret_blink = true
 script = ExtResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Column"]
-margin_top = 882.0
+margin_top = 884.0
 margin_right = 1920.0
-margin_bottom = 1079.0
+margin_bottom = 1080.0
 
 [node name="Column" type="VBoxContainer" parent="Column/MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
-margin_bottom = 177.0
+margin_bottom = 176.0
 
 [node name="Row" type="HBoxContainer" parent="Column/MarginContainer/Column"]
 margin_right = 1880.0
-margin_bottom = 79.0
+margin_bottom = 78.0
 
 [node name="SaveButton" type="Button" parent="Column/MarginContainer/Column/Row"]
 margin_right = 160.0
-margin_bottom = 79.0
+margin_bottom = 78.0
 rect_min_size = Vector2( 160, 40 )
 text = "Save"
 icon = ExtResource( 3 )
@@ -155,20 +155,20 @@ icon = ExtResource( 3 )
 [node name="PauseButton" type="Button" parent="Column/MarginContainer/Column/Row"]
 margin_left = 176.0
 margin_right = 336.0
-margin_bottom = 79.0
+margin_bottom = 78.0
 rect_min_size = Vector2( 160, 40 )
 text = "Pause"
 icon = ExtResource( 2 )
 
 [node name="ViewModeToggleButton" parent="Column/MarginContainer/Column/Row" instance=ExtResource( 8 )]
 margin_left = 352.0
-margin_right = 729.0
-margin_bottom = 79.0
+margin_right = 716.0
+margin_bottom = 78.0
 
 [node name="SolutionButton" type="Button" parent="Column/MarginContainer/Column"]
-margin_top = 95.0
+margin_top = 94.0
 margin_right = 253.0
-margin_bottom = 157.0
+margin_bottom = 156.0
 rect_min_size = Vector2( 160, 40 )
 size_flags_horizontal = 0
 text = "Show solution"

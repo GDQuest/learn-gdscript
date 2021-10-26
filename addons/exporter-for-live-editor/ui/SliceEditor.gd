@@ -132,6 +132,8 @@ func set_errors(new_errors: Array) -> void:
 func set_script_slice(new_script_slice: ScriptSlice) -> void:
 	script_slice = new_script_slice
 	text = ""
+	if Engine.editor_hint:
+		return
 	script_slice.current_text = ""
 
 

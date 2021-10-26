@@ -43,31 +43,45 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 goal = "Compare two values, and then run a function only if a value is greater than the other.
 
-Use this piece of code:
+Place your cursor at the [code]◆[/code] and write the proper comparison"
+hints = PoolStringArray( "Use comparison operators", "You want to compare \"maybe_highest_score\" and \"_highest_score\"", "The proper comparison is \">\"" )
+initial_editor_text = "func set_new_score_if_is_highest(maybe_highest_score: int) -> void:
+	if ◆ _highest_score:
+		set_highest_score(maybe_highest_score)"
 
-[code]
-func set_new_score_if_is_highest(maybe_highest_score: int) -> void:
-	if maybe_highest_score > _highest_score:
-		set_highest_score(maybe_highest_score)
-[/code]"
-hints = PoolStringArray( "Use comparison operators" )
+[node name="validator_lower" type="Node" parent="Exercises/Exercise"]
+script = ExtResource( 4 )
+title = "Value does not pass if it is lower"
+test_type = 2
+
+[node name="validator_greater" type="Node" parent="Exercises/Exercise"]
+script = ExtResource( 4 )
+title = "Value does pass if it is higher"
+test_type = 1
 
 [node name="validator_comparison" type="Node" parent="Exercises/Exercise"]
 script = ExtResource( 4 )
-title = "Using comparison"
+title = "Uses comparison"
+test_type = 4
 
 [node name="Exercise2" parent="Exercises" instance=ExtResource( 3 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 2268.0
-margin_bottom = 1029.0
+margin_right = 1990.0
+margin_bottom = 1015.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-goal = "In "
+goal = "The character's jump is controlled by a variable called \"_velocity_y\". Make sure you change this variable to make the character jump.
+
+A variable called \"jump_speed\" is available in the scope for you to use.
+
+Place your cursor at the [code]◆[/code] and write the increment"
 exported_script_path = "res://common/Player.gd"
 slice_name = "jump"
-hints = PoolStringArray( "Use comparison operators" )
+hints = PoolStringArray( "Change the variable [code]_velocity_y[/code]", "Remember to go up, you need to _lower_ y, not increase it", "If using \"jump_speed\" is too complex, you can just change the [code]_velocity_y[/code] number" )
+initial_editor_text = "if is_on_floor():
+	◆"
 
 [node name="validator_jump" type="Node" parent="Exercises/Exercise2"]
 script = ExtResource( 5 )

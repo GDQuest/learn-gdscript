@@ -22,9 +22,34 @@ func _ready() -> void:
 	_container.rect_scale = Vector2.ZERO
 	_container.modulate = COLOR_WHITE_TRANSPARENT
 	self_modulate = COLOR_WHITE_TRANSPARENT
-	_tween.interpolate_property(self, "self_modulate", self_modulate, Color.white, BACKGROUND_FADE_DURATION, Tween.TRANS_LINEAR)
-	_tween.interpolate_property(_container, "modulate", _container.modulate, Color.white, 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT, BACKGROUND_FADE_DURATION)
-	_tween.interpolate_property(_container, "rect_scale", _container.rect_scale, Vector2.ONE, 0.5, Tween.TRANS_EXPO, Tween.EASE_OUT, BACKGROUND_FADE_DURATION)
+	_tween.interpolate_property(
+		self,
+		"self_modulate",
+		self_modulate,
+		Color.white,
+		BACKGROUND_FADE_DURATION,
+		Tween.TRANS_LINEAR
+	)
+	_tween.interpolate_property(
+		_container,
+		"modulate",
+		_container.modulate,
+		Color.white,
+		0.4,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_OUT,
+		BACKGROUND_FADE_DURATION
+	)
+	_tween.interpolate_property(
+		_container,
+		"rect_scale",
+		_container.rect_scale,
+		Vector2.ONE,
+		0.5,
+		Tween.TRANS_EXPO,
+		Tween.EASE_OUT,
+		BACKGROUND_FADE_DURATION
+	)
 	_tween.start()
 
 

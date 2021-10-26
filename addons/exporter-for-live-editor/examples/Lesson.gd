@@ -2,7 +2,9 @@ extends Container
 
 signal lesson_completed
 
-const LessonDonePopup := preload("res://addons/exporter-for-live-editor/ui/components/LessonDonePopup.tscn")
+const LessonDonePopup := preload(
+	"res://addons/exporter-for-live-editor/ui/components/LessonDonePopup.tscn"
+)
 
 var _exercises := []
 var _current_exercise := 0
@@ -30,17 +32,17 @@ func _ready() -> void:
 
 func _on_exercise_validated(is_valid: bool, exercise_index: int) -> void:
 	_current_exercise = exercise_index + 1
+	next_button.disabled = not is_valid
+
+
+func _on_next_button_pressed() -> void:
 	if _current_exercise >= _exercises.size():
 		emit_signal("lesson_completed")
 		var popup: LessonDonePopup = LessonDonePopup.instance()
 		add_child(popup)
 		popup.connect("pressed", NavigationManager, "back")
 	else:
-		next_button.disabled = not is_valid
-
-
-func _on_next_button_pressed() -> void:
-	for index in _exercises.size():
-		var exercise := _exercises[index] as CourseExercise
-		var show = index == _current_exercise
-		exercise.visible = show
+		for index in _exercises.size():
+			var exercise := _exercises[index] as CourseExercise
+			var show = index == _current_exercise
+			exercise.visible = show
