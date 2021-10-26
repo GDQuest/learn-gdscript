@@ -18,12 +18,12 @@
 [ext_resource path="res://addons/exporter-for-live-editor/resources/vscrollbar_grabber_highlight.tres" type="StyleBox" id=16]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/vscrollbar_scroll.tres" type="StyleBox" id=17]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/button_pressed.tres" type="StyleBox" id=18]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/stylebox_empty.tres" type="StyleBox" id=19]
 
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="StyleBoxLine" id=9]
+color = Color( 0.290196, 0.294118, 0.388235, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=5]
-
-[sub_resource type="StyleBoxEmpty" id=9]
 
 [sub_resource type="StyleBoxEmpty" id=6]
 
@@ -51,13 +51,13 @@ Button/styles/normal = ExtResource( 3 )
 Button/styles/pressed = ExtResource( 18 )
 HBoxContainer/constants/separation = 16
 HSeparator/constants/separation = 8
-HSeparator/styles/separator = SubResource( 4 )
+HSeparator/styles/separator = SubResource( 9 )
 MarginContainer/constants/margin_bottom = 20
 MarginContainer/constants/margin_left = 20
 MarginContainer/constants/margin_right = 20
 MarginContainer/constants/margin_top = 20
 Panel/styles/panel = SubResource( 5 )
-PanelContainer/styles/panel = SubResource( 9 )
+PanelContainer/styles/panel = ExtResource( 19 )
 ProgressBar/colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
 ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
 ProgressBar/fonts/font = ExtResource( 8 )

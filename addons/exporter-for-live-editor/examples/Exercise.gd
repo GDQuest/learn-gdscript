@@ -1,3 +1,4 @@
+class_name CourseExercise
 extends Control
 
 signal exercise_validated(is_valid)

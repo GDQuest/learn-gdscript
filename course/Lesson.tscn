@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/resources/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Lesson.gd" type="Script" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Exercise.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/validator_comparison.gd" type="Script" id=4]
 [ext_resource path="res://course/validator_jump.gd" type="Script" id=5]
-[ext_resource path="res://addons/exporter-for-live-editor/ui/components/LessonDonePopup.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.188235, 0.188235, 0.286275, 1 )
@@ -26,20 +25,20 @@ __meta__ = {
 
 [node name="Exercises" type="PanelContainer" parent="."]
 margin_right = 1990.0
-margin_bottom = 1027.0
+margin_bottom = 1015.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Panel" type="Panel" parent="Exercises"]
 margin_right = 1990.0
-margin_bottom = 1027.0
+margin_bottom = 1015.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="Exercise" parent="Exercises" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 1990.0
-margin_bottom = 1027.0
+margin_bottom = 1015.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 goal = "Compare two values, and then run a function only if a value is greater than the other.
@@ -92,7 +91,3 @@ margin_bottom = 47.0
 size_flags_horizontal = 3
 disabled = true
 text = "Next"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="LessonDonePopup" parent="CanvasLayer" instance=ExtResource( 6 )]
