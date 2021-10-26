@@ -5,9 +5,9 @@ enum STATUS { NONE, INVALID, VALID }
 
 export (STATUS) var status := 0 setget set_status
 
-export var none_texture: Texture = preload("../resources/none.svg")
-export var valid_texture: Texture = preload("../resources/valid.svg")
-export var invalid_texture: Texture = preload("../resources/invalid.svg")
+export var none_texture: Texture = preload("../ui/icons/none.svg")
+export var valid_texture: Texture = preload("../ui/icons/valid.svg")
+export var invalid_texture: Texture = preload("../ui/icons/invalid.svg")
 
 
 func _init() -> void:
