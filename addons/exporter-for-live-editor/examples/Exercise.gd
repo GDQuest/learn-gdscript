@@ -188,13 +188,13 @@ func set_exported_script_path(path: String) -> void:
 	exported_script_path = path
 	if not scene_files:
 		push_error("no scene files is set")
+	if Engine.editor_hint:
+		return
 	var script_handler := get_script_handler()
 	if script_handler == null:
 		push_error(
 			"File %s is not included in the exported scene %s" % [exported_script_path, scene_files]
 		)
-	if Engine.editor_hint:
-		return
 	if not is_inside_tree():
 		yield(self, "ready")
 	_validation_manager.script_handler = script_handler
@@ -206,6 +206,8 @@ func set_slice_name(new_slice_name: String) -> void:
 	if not exported_script_path:
 		push_error("setting a slice without a file path")
 	slice_name = new_slice_name
+	if Engine.editor_hint:
+		return
 	var slice := get_slice()
 	if slice == null:
 		push_error(
@@ -214,8 +216,6 @@ func set_slice_name(new_slice_name: String) -> void:
 				% [slice_name, get_script_handler()]
 			)
 		)
-	if Engine.editor_hint:
-		return
 	if not is_inside_tree():
 		yield(self, "ready")
 	_slice_editor.script_slice = slice
