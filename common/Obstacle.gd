@@ -13,6 +13,10 @@ export var texture: Texture setget set_texture, get_texture
 export var shape: Shape2D setget set_shape, get_shape
 
 
+func _init() -> void:
+	add_to_group("obstacles")
+
+
 func _ready() -> void:
 	add_child(_tween)
 	_tween.connect("tween_all_completed", self, "_on_Tween_tween_all_completed")

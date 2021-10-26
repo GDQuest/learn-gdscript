@@ -24,8 +24,8 @@ const http_request_name = "___HTTP_REQUEST___"
 var max_severity := 2
 
 # A list of language server codes to ignore. You probably only want to skip
-# "unused return value" (code 16),
-var blacklist_codes := {16: true}  # Ignore "unused return value" warning.
+# "unused return value" (code 16), and "unsafe property access" (code 26)
+var blacklist_codes := {16: true, 26: true}
 
 var _node: Node
 var _new_script_text: String

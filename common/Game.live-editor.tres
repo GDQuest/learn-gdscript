@@ -5,122 +5,6 @@
 [ext_resource path="res://addons/exporter-for-live-editor/collections/ScriptSlice.gd" type="Script" id=3]
 [ext_resource path="res://common/Game.tscn" type="PackedScene" id=4]
 
-[sub_resource type="Resource" id=5]
-script = ExtResource( 3 )
-leading_spaces = 0
-keyword = "EXPORT"
-closing = false
-name = "set_score_if_highest"
-is_full_file = false
-start = 27
-end = 33
-lines_before = [ "extends VBoxContainer", "", "# warning-ignore:unused_signal", "signal request_play", "", "onready var _play_button := $PlayButton as Button", "onready var _exit_button := $ExitButton as Button", "onready var _highest_score_label := $HBoxContainer/HighScoreLabel as Label", "", "var _highest_score := 0", "", "", "func _ready() -> void:", "	_play_button.connect(\"pressed\", self, \"emit_signal\", [\"request_play\"])", "	_exit_button.connect(\"pressed\", get_tree(), \"quit\")", "	set_focus()", "", "", "func set_highest_score(new_highest_score: int) -> void:", "	_highest_score = new_highest_score", "	if not is_inside_tree():", "		yield(self, \"ready\")", "	_highest_score_label.text = String(new_highest_score).pad_zeros(5)", "", "", "# Sets a higher score if the passed integer is higher than the current", "# highest score" ]
-lines_after = [ "", "", "func set_focus() -> void:", "	grab_focus()", "	_play_button.grab_focus()", "" ]
-lines_editable = [ "func set_new_score_if_is_highest(maybe_highest_score: int) -> void:", "	if maybe_highest_score > _highest_score:", "		set_highest_score(maybe_highest_score)", "", "" ]
-
-[sub_resource type="Resource" id=6]
-script = ExtResource( 2 )
-nodes_paths = [ NodePath("Menu") ]
-file_path = "res://common/Menu.gd"
-name = "Menu"
-original_script = "extends VBoxContainer
-
-# warning-ignore:unused_signal
-signal request_play
-
-onready var _play_button := $PlayButton as Button
-onready var _exit_button := $ExitButton as Button
-onready var _highest_score_label := $HBoxContainer/HighScoreLabel as Label
-
-var _highest_score := 0
-
-
-func _ready() -> void:
-	_play_button.connect(\"pressed\", self, \"emit_signal\", [\"request_play\"])
-	_exit_button.connect(\"pressed\", get_tree(), \"quit\")
-	set_focus()
-
-
-func set_highest_score(new_highest_score: int) -> void:
-	_highest_score = new_highest_score
-	if not is_inside_tree():
-		yield(self, \"ready\")
-	_highest_score_label.text = String(new_highest_score).pad_zeros(5)
-
-
-# Sets a higher score if the passed integer is higher than the current
-# highest score
-# EXPORT set_score_if_highest
-func set_new_score_if_is_highest(maybe_highest_score: int) -> void:
-	if maybe_highest_score > _highest_score:
-		set_highest_score(maybe_highest_score)
-
-
-# /EXPORT set_score_if_highest
-
-
-func set_focus() -> void:
-	grab_focus()
-	_play_button.grab_focus()
-"
-slices = {
-"set_score_if_highest": SubResource( 5 )
-}
-
-[sub_resource type="Resource" id=3]
-script = ExtResource( 3 )
-leading_spaces = 0
-keyword = "EXPORT"
-closing = false
-name = "get_random"
-is_full_file = false
-start = 15
-end = 22
-lines_before = [ "extends Node2D", "", "const Obstacle = preload(\"./Obstacle.gd\")", "const ObstacleScene = preload(\"./Obstacle.tscn\")", "", "var _obstacles := []", "", "", "func _ready() -> void:", "	for child in get_children():", "		if child is Obstacle:", "			_obstacles.push_back(child)", "			remove_child(child)", "", "" ]
-lines_after = [ "", "func dispense() -> Obstacle:", "	var model := get_random_obstacle()", "	var obstacle := ObstacleScene.instance() as Obstacle", "	obstacle.texture = model.texture", "	obstacle.shape = model.shape", "	add_child(obstacle)", "	return obstacle", "" ]
-lines_editable = [ "func get_random_obstacle() -> Obstacle:", "	var size := _obstacles.size()", "	var index := randi() % size", "	# warning-ignore:unsafe_cast", "	var obstacle := _obstacles[index] as Obstacle", "	return obstacle" ]
-
-[sub_resource type="Resource" id=4]
-script = ExtResource( 2 )
-nodes_paths = [ NodePath("Level/ObstaclesDispenser") ]
-file_path = "res://common/ObstacleDispenser.gd"
-name = "ObstacleDispenser"
-original_script = "extends Node2D
-
-const Obstacle = preload(\"./Obstacle.gd\")
-const ObstacleScene = preload(\"./Obstacle.tscn\")
-
-var _obstacles := []
-
-
-func _ready() -> void:
-	for child in get_children():
-		if child is Obstacle:
-			_obstacles.push_back(child)
-			remove_child(child)
-
-
-# EXPORT get_random
-func get_random_obstacle() -> Obstacle:
-	var size := _obstacles.size()
-	var index := randi() % size
-	# warning-ignore:unsafe_cast
-	var obstacle := _obstacles[index] as Obstacle
-	return obstacle
-# /EXPORT get_random
-
-func dispense() -> Obstacle:
-	var model := get_random_obstacle()
-	var obstacle := ObstacleScene.instance() as Obstacle
-	obstacle.texture = model.texture
-	obstacle.shape = model.shape
-	add_child(obstacle)
-	return obstacle
-"
-slices = {
-"get_random": SubResource( 3 )
-}
-
 [sub_resource type="Resource" id=1]
 script = ExtResource( 3 )
 leading_spaces = 2
@@ -183,6 +67,128 @@ func _physics_process(delta: float) -> void:
 "
 slices = {
 "jump": SubResource( 1 )
+}
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 3 )
+leading_spaces = 0
+keyword = "EXPORT"
+closing = false
+name = "get_random"
+is_full_file = false
+start = 12
+end = 21
+lines_before = [ "extends Node2D", "", "var _obstacles := []", "", "", "func _ready() -> void:", "	for child in get_children():", "		if child.is_in_group(\"obstacles\"):", "			_obstacles.push_back(child)", "			remove_child(child)", "", "" ]
+lines_after = [ "", "", "func dispense() -> Node:", "	var model := get_random_obstacle()", "	var obstacle: Node = model.duplicate(DUPLICATE_SCRIPTS | DUPLICATE_GROUPS)", "	# warning-ignore:unsafe_property_access", "	# warning-ignore:unsafe_property_access", "	obstacle.texture = model.texture", "	# warning-ignore:unsafe_property_access", "	# warning-ignore:unsafe_property_access", "	obstacle.shape = model.shape", "	# warning-ignore:unsafe_property_access", "	obstacle.visible = true", "	add_child(obstacle)", "	return obstacle", "" ]
+lines_editable = [ "func get_random_obstacle() -> Node:", "	var size := _obstacles.size()", "	var index := randi() % size", "	# warning-ignore:unsafe_cast", "	var obstacle = _obstacles[index]", "	return obstacle", "", "" ]
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+nodes_paths = [ NodePath("Level/ObstaclesDispenser") ]
+file_path = "res://common/ObstacleDispenser.gd"
+name = "ObstacleDispenser"
+original_script = "extends Node2D
+
+var _obstacles := []
+
+
+func _ready() -> void:
+	for child in get_children():
+		if child.is_in_group(\"obstacles\"):
+			_obstacles.push_back(child)
+			remove_child(child)
+
+
+# EXPORT get_random
+func get_random_obstacle() -> Node:
+	var size := _obstacles.size()
+	var index := randi() % size
+	# warning-ignore:unsafe_cast
+	var obstacle = _obstacles[index]
+	return obstacle
+
+
+# /EXPORT get_random
+
+
+func dispense() -> Node:
+	var model := get_random_obstacle()
+	var obstacle: Node = model.duplicate(DUPLICATE_SCRIPTS | DUPLICATE_GROUPS)
+	# warning-ignore:unsafe_property_access
+	# warning-ignore:unsafe_property_access
+	obstacle.texture = model.texture
+	# warning-ignore:unsafe_property_access
+	# warning-ignore:unsafe_property_access
+	obstacle.shape = model.shape
+	# warning-ignore:unsafe_property_access
+	obstacle.visible = true
+	add_child(obstacle)
+	return obstacle
+"
+slices = {
+"get_random": SubResource( 3 )
+}
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 3 )
+leading_spaces = 0
+keyword = "EXPORT"
+closing = false
+name = "set_score_if_highest"
+is_full_file = false
+start = 27
+end = 33
+lines_before = [ "extends VBoxContainer", "", "# warning-ignore:unused_signal", "signal request_play", "", "onready var _play_button := $PlayButton as Button", "onready var _exit_button := $ExitButton as Button", "onready var _highest_score_label := $HBoxContainer/HighScoreLabel as Label", "", "var _highest_score := 0", "", "", "func _ready() -> void:", "	_play_button.connect(\"pressed\", self, \"emit_signal\", [\"request_play\"])", "	_exit_button.connect(\"pressed\", get_tree(), \"quit\")", "	set_focus()", "", "", "func set_highest_score(new_highest_score: int) -> void:", "	_highest_score = new_highest_score", "	if not is_inside_tree():", "		yield(self, \"ready\")", "	_highest_score_label.text = String(new_highest_score).pad_zeros(5)", "", "", "# Sets a higher score if the passed integer is higher than the current", "# highest score" ]
+lines_after = [ "", "", "func set_focus() -> void:", "	grab_focus()", "	_play_button.grab_focus()", "" ]
+lines_editable = [ "func set_new_score_if_is_highest(maybe_highest_score: int) -> void:", "	if maybe_highest_score > _highest_score:", "		set_highest_score(maybe_highest_score)", "", "" ]
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+nodes_paths = [ NodePath("Menu") ]
+file_path = "res://common/Menu.gd"
+name = "Menu"
+original_script = "extends VBoxContainer
+
+# warning-ignore:unused_signal
+signal request_play
+
+onready var _play_button := $PlayButton as Button
+onready var _exit_button := $ExitButton as Button
+onready var _highest_score_label := $HBoxContainer/HighScoreLabel as Label
+
+var _highest_score := 0
+
+
+func _ready() -> void:
+	_play_button.connect(\"pressed\", self, \"emit_signal\", [\"request_play\"])
+	_exit_button.connect(\"pressed\", get_tree(), \"quit\")
+	set_focus()
+
+
+func set_highest_score(new_highest_score: int) -> void:
+	_highest_score = new_highest_score
+	if not is_inside_tree():
+		yield(self, \"ready\")
+	_highest_score_label.text = String(new_highest_score).pad_zeros(5)
+
+
+# Sets a higher score if the passed integer is higher than the current
+# highest score
+# EXPORT set_score_if_highest
+func set_new_score_if_is_highest(maybe_highest_score: int) -> void:
+	if maybe_highest_score > _highest_score:
+		set_highest_score(maybe_highest_score)
+
+
+# /EXPORT set_score_if_highest
+
+
+func set_focus() -> void:
+	grab_focus()
+	_play_button.grab_focus()
+"
+slices = {
+"set_score_if_highest": SubResource( 5 )
 }
 
 [resource]

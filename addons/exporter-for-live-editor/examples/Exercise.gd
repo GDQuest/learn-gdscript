@@ -47,6 +47,8 @@ onready var _pause_button := _code_editor.pause_button
 
 
 func _ready() -> void:
+	rand_seed(0)
+	randomize()
 	if Engine.editor_hint:
 		return
 	_instantiate_checks()
@@ -247,10 +249,11 @@ func set_initial_editor_text(new_text: String) -> void:
 	initial_editor_text = new_text
 	if not is_inside_tree():
 		yield(self, "ready")
-	_code_editor.text = initial_editor_text
+	if _code_editor:
+		_code_editor.text = initial_editor_text
 
 
 func get_initial_editor_text() -> String:
-	if not is_inside_tree():
+	if not is_inside_tree() or not _code_editor:
 		return initial_editor_text
 	return _code_editor.text
