@@ -20,85 +20,84 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="PanelContainer" parent="."]
-margin_top = 0.5
+[node name="Panel" type="Panel" parent="."]
 margin_right = 611.0
-margin_bottom = 1039.5
+margin_bottom = 1040.0
 custom_styles/panel = ExtResource( 4 )
 
-[node name="LessonRequirements" type="VBoxContainer" parent="Panel"]
+[node name="LessonRequirements" type="VBoxContainer" parent="."]
 margin_right = 611.0
-margin_bottom = 1039.0
+margin_bottom = 1040.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ProgressBar" type="ProgressBar" parent="Panel/LessonRequirements"]
+[node name="ProgressBar" type="ProgressBar" parent="LessonRequirements"]
 margin_right = 611.0
 margin_bottom = 23.0
 value = 33.0
 
-[node name="Margin" type="MarginContainer" parent="Panel/LessonRequirements"]
+[node name="Margin" type="MarginContainer" parent="LessonRequirements"]
 margin_top = 39.0
 margin_right = 611.0
-margin_bottom = 1039.0
+margin_bottom = 1040.0
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Column" type="VBoxContainer" parent="Panel/LessonRequirements/Margin"]
+[node name="Column" type="VBoxContainer" parent="LessonRequirements/Margin"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 591.0
-margin_bottom = 980.0
+margin_bottom = 981.0
 size_flags_vertical = 3
 
-[node name="Title" type="Label" parent="Panel/LessonRequirements/Margin/Column"]
+[node name="Title" type="Label" parent="LessonRequirements/Margin/Column"]
 margin_right = 571.0
 margin_bottom = 31.0
 custom_fonts/font = ExtResource( 1 )
 text = "Summary - Lesson Name"
 
-[node name="HSeparator" type="HSeparator" parent="Panel/LessonRequirements/Margin/Column"]
+[node name="HSeparator" type="HSeparator" parent="LessonRequirements/Margin/Column"]
 margin_top = 47.0
 margin_right = 571.0
 margin_bottom = 67.0
 custom_constants/separation = 20
 
-[node name="Scroll" type="ScrollContainer" parent="Panel/LessonRequirements/Margin/Column"]
+[node name="Scroll" type="ScrollContainer" parent="LessonRequirements/Margin/Column"]
 margin_top = 83.0
 margin_right = 571.0
-margin_bottom = 960.0
+margin_bottom = 961.0
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
-[node name="Column" type="VBoxContainer" parent="Panel/LessonRequirements/Margin/Column/Scroll"]
+[node name="Column" type="VBoxContainer" parent="LessonRequirements/Margin/Column/Scroll"]
 margin_right = 571.0
-margin_bottom = 877.0
+margin_bottom = 878.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Goals" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
+[node name="Goals" parent="LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
 margin_right = 571.0
 rect_min_size = Vector2( 571, 47 )
 size_flags_horizontal = 3
 title = "Goals"
 
-[node name="Goal" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column/Goals" instance=ExtResource( 6 )]
+[node name="Goal" parent="LessonRequirements/Margin/Column/Scroll/Column/Goals" instance=ExtResource( 6 )]
 visible = false
 margin_left = 24.0
 margin_top = 52.0
 margin_right = 539.0
 margin_bottom = 252.0
 
-[node name="Hints" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
+[node name="Hints" parent="LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
 margin_top = 63.0
 margin_right = 571.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 571, 47 )
 title = "Hints"
 
-[node name="Checks" parent="Panel/LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
+[node name="Checks" parent="LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
 margin_top = 126.0
 margin_right = 571.0
 margin_bottom = 173.0
