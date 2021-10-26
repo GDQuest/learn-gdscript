@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=24 format=2]
+[gd_resource type="Theme" load_steps=25 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/resources/fonts/font_text.tres" type="DynamicFont" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/vscrollbar_grabber.tres" type="StyleBox" id=2]
@@ -19,21 +19,21 @@
 [ext_resource path="res://addons/exporter-for-live-editor/resources/vscrollbar_scroll.tres" type="StyleBox" id=17]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/button_pressed.tres" type="StyleBox" id=18]
 
-[sub_resource type="StyleBoxLine" id=4]
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxLine" id=1]
 color = Color( 0.290196, 0.294118, 0.388235, 1 )
-
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.0784314, 0.0823529, 0.164706, 1 )
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxEmpty" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxLine" id=8]
+color = Color( 0.290196, 0.294118, 0.388235, 1 )
+thickness = 2
+vertical = true
 
 [resource]
 default_font = ExtResource( 1 )
@@ -121,6 +121,7 @@ TextEdit/styles/completion = null
 TextEdit/styles/focus = null
 TextEdit/styles/normal = ExtResource( 4 )
 TextEdit/styles/read_only = null
+VBoxContainer/constants/separation = 16
 VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/decrement_pressed = null
@@ -132,3 +133,5 @@ VScrollBar/styles/grabber_highlight = ExtResource( 16 )
 VScrollBar/styles/grabber_pressed = ExtResource( 15 )
 VScrollBar/styles/scroll = ExtResource( 17 )
 VScrollBar/styles/scroll_focus = SubResource( 7 )
+VSeparator/constants/separation = 8
+VSeparator/styles/separator = SubResource( 8 )

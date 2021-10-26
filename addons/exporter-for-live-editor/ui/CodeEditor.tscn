@@ -4,9 +4,9 @@
 [ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_pause.png" type="Texture" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_save.png" type="Texture" id=3]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_help.png" type="Texture" id=4]
-[ext_resource path="res://addons/exporter-for-live-editor/ui/ViewModeToggle.gd" type="Script" id=5]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/CodeEditor.gd" type="Script" id=6]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/gdscript_app_theme.tres" type="Theme" id=7]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/components/ViewModeToggleButton.tscn" type="PackedScene" id=8]
 
 [node name="CodeEditor" type="PanelContainer"]
 anchor_right = 1.0
@@ -20,14 +20,15 @@ __meta__ = {
 }
 
 [node name="Column" type="VBoxContainer" parent="."]
+margin_top = 0.5
 margin_right = 1920.0
-margin_bottom = 1080.0
+margin_bottom = 1079.5
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 3
 
 [node name="SliceEditor" type="TextEdit" parent="Column"]
 margin_right = 1920.0
-margin_bottom = 974.0
+margin_bottom = 866.0
 rect_min_size = Vector2( 500, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -130,43 +131,45 @@ caret_blink = true
 script = ExtResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Column"]
-margin_top = 978.0
+margin_top = 882.0
 margin_right = 1920.0
-margin_bottom = 1080.0
+margin_bottom = 1079.0
 
-[node name="Row" type="HBoxContainer" parent="Column/MarginContainer"]
+[node name="Column" type="VBoxContainer" parent="Column/MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
-margin_bottom = 82.0
+margin_bottom = 177.0
 
-[node name="SaveButton" type="Button" parent="Column/MarginContainer/Row"]
+[node name="Row" type="HBoxContainer" parent="Column/MarginContainer/Column"]
+margin_right = 1880.0
+margin_bottom = 79.0
+
+[node name="SaveButton" type="Button" parent="Column/MarginContainer/Column/Row"]
 margin_right = 160.0
-margin_bottom = 62.0
+margin_bottom = 79.0
 rect_min_size = Vector2( 160, 40 )
 text = "Save"
 icon = ExtResource( 3 )
 
-[node name="PauseButton" type="Button" parent="Column/MarginContainer/Row"]
+[node name="PauseButton" type="Button" parent="Column/MarginContainer/Column/Row"]
 margin_left = 176.0
 margin_right = 336.0
-margin_bottom = 62.0
+margin_bottom = 79.0
 rect_min_size = Vector2( 160, 40 )
-text = "pause"
+text = "Pause"
 icon = ExtResource( 2 )
 
-[node name="SolutionButton" type="Button" parent="Column/MarginContainer/Row"]
+[node name="ViewModeToggleButton" parent="Column/MarginContainer/Column/Row" instance=ExtResource( 8 )]
 margin_left = 352.0
-margin_right = 541.0
-margin_bottom = 62.0
-rect_min_size = Vector2( 160, 40 )
-text = "show me"
-icon = ExtResource( 4 )
+margin_right = 729.0
+margin_bottom = 79.0
 
-[node name="ViewModeToggle" type="HBoxContainer" parent="Column/MarginContainer/Row"]
-margin_left = 557.0
-margin_right = 835.0
-margin_bottom = 62.0
-custom_constants/separation = 0
-script = ExtResource( 5 )
-values = [ "both", "game", "console" ]
+[node name="SolutionButton" type="Button" parent="Column/MarginContainer/Column"]
+margin_top = 95.0
+margin_right = 253.0
+margin_bottom = 157.0
+rect_min_size = Vector2( 160, 40 )
+size_flags_horizontal = 0
+text = "Show solution"
+icon = ExtResource( 4 )

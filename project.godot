@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "Validator",
 "language": "GDScript",
 "path": "res://addons/exporter-for-live-editor/validation/Validator.gd"
+}, {
+"base": "PanelContainer",
+"class": "ViewModeToggleButton",
+"language": "GDScript",
+"path": "res://addons/exporter-for-live-editor/ui/components/ViewModeToggleButton.gd"
 } ]
 _global_script_class_icons={
 "CodeEditor": "",
 "LessonPanel": "",
 "Revealer": "res://addons/exporter-for-live-editor/ui/Revealer.svg",
 "SLiceEditor": "",
-"Validator": ""
+"Validator": "",
+"ViewModeToggleButton": ""
 }
 
 [application]
@@ -71,11 +77,11 @@ window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://addons/exporter-for-live-editor/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg" )
 
 [exporter-for-live-editor]
 
-scene="res://Navigator.tscn"
+scene="res://course/Navigator.tscn"
 
 [input]
 
