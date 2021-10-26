@@ -9,7 +9,6 @@ const ScriptHandler := preload("../collections/ScriptHandler.gd")
 const ScriptSlice := preload("../collections/ScriptSlice.gd")
 const SlicesList := preload("../ui/SlicesList.gd")
 const GameViewport := preload("../ui/GameViewport.gd")
-const GameConsole := preload("../ui/GameConsole.gd")
 const ValidatorCheck := preload("../ui/ValidatorCheck.gd")
 const ScriptVerifier := preload("../lsp/ScriptVerifier.gd")
 const LanguageServerError := preload("../lsp/LanguageServerError.gd")
@@ -29,9 +28,8 @@ export (String, MULTILINE) var initial_editor_text := "" setget set_initial_edit
 var _code_editor_is_dirty := false
 
 onready var _validation_manager := $ValidationManager as ValidationManager
-onready var _game_container := find_node("Game") as PanelContainer
+onready var _game_container := find_node("Output") as PanelContainer
 onready var _game_viewport := _game_container.find_node("GameViewport") as GameViewport
-onready var _game_console := _game_container.find_node("Console") as GameConsole
 
 onready var _lesson_panel := find_node("LessonPanel") as LessonPanel
 onready var _title_label := _lesson_panel.title_label

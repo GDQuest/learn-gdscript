@@ -1,9 +1,10 @@
 class_name ViewModeToggleButton
 extends PanelContainer
 
-export var hide_labels := false setget set_hide_labels
+signal game_button_toggled(is_pressed)
+signal console_button_toggled(is_pressed)
 
-var split_container: SplitContainer
+export var hide_labels := false setget set_hide_labels
 
 var _labels := {}
 var _buttons := []
@@ -16,7 +17,8 @@ func _ready() -> void:
 	_buttons = [_game_button, _console_button]
 	for button in _buttons:
 		_labels[button] = button.text
-		button.connect("pressed", self, "_update_split_container")
+	_game_button.connect("pressed", self, "_emit_toggled_signal", [_game_button])
+	_console_button.connect("pressed", self, "_emit_toggled_signal", [_console_button])
 
 
 func set_hide_labels(value: bool) -> void:
@@ -29,14 +31,8 @@ func set_hide_labels(value: bool) -> void:
 	rect_size.x = 0.0
 
 
-func _update_split_container() -> void:
-	if not split_container:
-		return
-
-	var split_height := 0
-	if _console_button.pressed:
-		if _game_button.pressed:
-			split_height = split_container.rect_size.y / 2
-		else:
-			split_height = split_container.rect_size.y
-	split_container.split_offset = split_height
+func _emit_toggled_signal(button: Button) -> void:
+	if button == _game_button:
+		emit_signal("game_button_toggled", button.pressed)
+	else:
+		emit_signal("console_button_toggled", button.pressed)

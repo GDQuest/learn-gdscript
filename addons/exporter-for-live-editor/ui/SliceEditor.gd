@@ -17,7 +17,7 @@
 # change the theme at runtime, make sure you also change the overlay's
 # theme.
 tool
-class_name SLiceEditor
+class_name SliceEditor
 extends TextEdit
 
 const ScriptSlice := preload("../collections/ScriptSlice.gd")

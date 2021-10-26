@@ -2,7 +2,14 @@ tool
 class_name CodeEditor
 extends PanelContainer
 
-const SliceEditor := preload("../ui/SliceEditor.gd")
+signal text_changed(text)
+
+export var split_container_path: NodePath setget set_split_container_path
+export (String, MULTILINE) var text := "" setget set_text, get_text
+
+var _initial_text := ""
+
+var _split_container: SplitContainer = null
 
 onready var slice_editor := find_node("SliceEditor") as SliceEditor
 onready var save_button := find_node("SaveButton") as Button
@@ -11,15 +18,9 @@ onready var solution_button := find_node("SolutionButton") as Button
 onready var restore_button := find_node("RestoreButton") as Button
 onready var view_mode_toggle := find_node("ViewModeToggleButton") as ViewModeToggleButton
 
-var _initial_text := ""
-
-export var split_container_path: NodePath setget set_split_container_path
-export (String, MULTILINE) var text := "" setget set_text, get_text
-
-signal text_changed(text)
-
 
 func _ready() -> void:
+	assert (view_mode_toggle)
 	restore_button.connect("pressed", self, "_on_restore_pressed")
 	restore_button.disabled = true
 	solution_button.connect("pressed", self, "_on_solution_pressed")
@@ -28,17 +29,13 @@ func _ready() -> void:
 	_initial_text = text
 
 
-func set_split_container_path(path: NodePath) -> void:
-	if Engine.editor_hint:
-		return
-	split_container_path = path
-	if not is_inside_tree():
-		yield(self, "ready")
-	var node = get_node_or_null(path)
-	if not (node is SplitContainer):
-		push_error("nodepath %s does not yield a SplitContainer" % [path])
-		return
-	view_mode_toggle.split_container = node
+func _get_configuration_warning() -> String:
+	if not split_container_path or not get_node(split_container_path) is SplitContainer:
+		return (
+			"The Split Container Path property should point to a SplitContainer node.\n" +
+			"The game and console toggle buttons won't work."
+		)
+	return ""
 
 
 func _on_text_changed() -> void:
@@ -67,3 +64,17 @@ func get_text() -> String:
 	if not is_inside_tree():
 		return text
 	return slice_editor.text
+
+
+func set_split_container_path(value: NodePath) -> void:
+	split_container_path = value
+	if not is_inside_tree():
+		yield(self, "ready")
+
+	_split_container = get_node(split_container_path)
+	if not _split_container:
+		printerr("Path %s should point to a SplitContainer node." % split_container_path)
+		return
+
+	view_mode_toggle.connect("game_button_toggled", _split_container, "toggle_game_view")
+	view_mode_toggle.connect("console_button_toggled", _split_container, "toggle_console_view")

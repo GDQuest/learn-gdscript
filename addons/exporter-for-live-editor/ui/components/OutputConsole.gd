@@ -1,15 +1,15 @@
 # This console displays messages. It adds new lines automatically
-extends RichTextLabel
+class_name OutputConsole
+extends PanelContainer
 
 signal reference_clicked(file_name, line_nb, character)
 
-
-func _init() -> void:
-	bbcode_enabled = true
-	connect("meta_clicked", self, "_on_meta_clicked")
+onready var _rich_text_label := $MarginContainer/RichTextLabel as RichTextLabel
 
 
 func _ready() -> void:
+	_rich_text_label.bbcode_enabled = true
+	_rich_text_label.connect("meta_clicked", self, "_on_meta_clicked")
 	LiveEditorMessageBus.connect("print_request", self, "record_message_for_line")
 
 
@@ -43,8 +43,8 @@ func record_warning(line: String, prefix := "") -> void:
 
 
 func record(line: String, prefix := "") -> void:
-	append_bbcode(prefix + line)
-	newline()
+	_rich_text_label.append_bbcode(prefix + line)
+	_rich_text_label.newline()
 
 
 func _on_meta_clicked(meta: String) -> void:

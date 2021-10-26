@@ -29,13 +29,23 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/exporter-for-live-editor/ui/LessonPanel.gd"
 }, {
+"base": "PanelContainer",
+"class": "OutputConsole",
+"language": "GDScript",
+"path": "res://addons/exporter-for-live-editor/ui/components/OutputConsole.gd"
+}, {
+"base": "VSplitContainer",
+"class": "OutputVSplitContainer",
+"language": "GDScript",
+"path": "res://addons/exporter-for-live-editor/examples/OutputVSplitContainer.gd"
+}, {
 "base": "Container",
 "class": "Revealer",
 "language": "GDScript",
 "path": "res://addons/exporter-for-live-editor/ui/Revealer.gd"
 }, {
 "base": "TextEdit",
-"class": "SLiceEditor",
+"class": "SliceEditor",
 "language": "GDScript",
 "path": "res://addons/exporter-for-live-editor/ui/SliceEditor.gd"
 }, {
@@ -54,8 +64,10 @@ _global_script_class_icons={
 "CourseExercise": "",
 "LessonDonePopup": "",
 "LessonPanel": "",
+"OutputConsole": "",
+"OutputVSplitContainer": "",
 "Revealer": "res://addons/exporter-for-live-editor/ui/Revealer.svg",
-"SLiceEditor": "",
+"SliceEditor": "",
 "Validator": "",
 "ViewModeToggleButton": ""
 }
@@ -89,7 +101,7 @@ window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://addons/exporter-for-live-editor/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg" )
 
 [exporter-for-live-editor]
 
