@@ -3,7 +3,7 @@
 [ext_resource path="res://course/Course.gd" type="Script" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/fonts/font_title.tres" type="DynamicFont" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/fonts/font_title_big.tres" type="DynamicFont" id=3]
-[ext_resource path="res://addons/exporter-for-live-editor/resources/lesson_theme_dark.tres" type="Theme" id=4]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/gdscript_app_theme.tres" type="Theme" id=4]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/valid.svg" type="Texture" id=5]
 [ext_resource path="res://course/LessonSummary.gd" type="Script" id=6]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/none.svg" type="Texture" id=7]
@@ -48,7 +48,7 @@ custom_constants/separation = 6
 
 [node name="Title" type="RichTextLabel" parent="ScrollContainer/PanelContainer" groups=["navigation_text"]]
 margin_right = 800.0
-margin_bottom = 49.0
+margin_bottom = 41.0
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 bbcode_text = "Title"
@@ -59,15 +59,15 @@ __meta__ = {
 }
 
 [node name="HSeparator2" type="HSeparator" parent="ScrollContainer/PanelContainer"]
-margin_top = 55.0
+margin_top = 47.0
 margin_right = 800.0
-margin_bottom = 85.0
+margin_bottom = 77.0
 custom_constants/separation = 30
 
 [node name="SubTitle" type="RichTextLabel" parent="ScrollContainer/PanelContainer" groups=["navigation_text"]]
-margin_top = 91.0
+margin_top = 83.0
 margin_right = 800.0
-margin_bottom = 131.0
+margin_bottom = 115.0
 custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
 bbcode_text = "subtitle"
@@ -78,36 +78,40 @@ __meta__ = {
 }
 
 [node name="TextBlockWithImage" parent="ScrollContainer/PanelContainer" instance=ExtResource( 11 )]
-margin_top = 137.0
-margin_bottom = 445.0
-text = "Eat all the power cords play time please stop looking at your phone and pet me milk the cow. Sugar, my siamese, stalks me (in a good way), day and night . Meowzer pose purrfectly to show my beauty. Naughty running cat. Meow all night the fat cat sat on the mat bat away with paws. Scoot butt on the rug knock dish off table head butt cant eat out of my own dish for pet me pet me pet me pet me, bite, scratch, why are you petting me leave hair everywhere i do no work yet get food, shelter, and lots of stuff just like man who lives with us. White cat sleeps on a black shirt jump off balcony, onto stranger's head. Lounge in doorway my left donut is missing, as is my right shake treat bag, yet jump launch to pounce upon little yarn mouse, bare fangs at toy run hide in litter box until treats are fed or spot something, big eyes, big eyes, crouch, shake butt, prepare to pounce. Only use one corner of the litter box. Play time. Hey! you there, with the hands meowing chowing and wowing lick sellotape stare at ceiling, for sit as close as possible to warm fire "
+margin_top = 121.0
+margin_bottom = 421.0
+rect_min_size = Vector2( 0, 300 )
+size_flags_vertical = 1
+text = "Eat all the power cords play time please stop looking at your phone and pet me milk the cow. Sugar, my siamese, stalks me (in a good way), day and night.
+
+Meowzer pose purrfectly to show my beauty. Naughty running cat.
+
+Meow all night the fat cat sat on the mat bat away with paws."
 texture = ExtResource( 10 )
 
 [node name="TextBlockWithImage3" parent="ScrollContainer/PanelContainer" instance=ExtResource( 11 )]
-margin_top = 451.0
-margin_bottom = 579.0
-text = "I show my fluffy belly but it's a trap! if you pet it i will tear up your hand. Lick the other cats. Scratch the postman wake up lick paw wake up owner meow meow sleep on keyboard. Push your water glass on the floor climb into cupboard and lick the salt off rice cakes yet milk the cow playing with balls of wool, for crash against wall but walk away like nothing happened. Cattt catt cattty "
+margin_top = 427.0
+margin_bottom = 727.0
+rect_min_size = Vector2( 0, 300 )
+size_flags_vertical = 1
+text = "I show my fluffy belly but it's a trap! If you pet it i will tear up your hand.
+
+Lick the other cats. Scratch the postman wake up lick paw wake up owner meow meow sleep on keyboard.
+
+Push your water glass on the floor climb into cupboard and lick the salt off rice cakes yet milk the cow playing with balls of wool..."
 texture = ExtResource( 10 )
 order = 1
 
-[node name="TextBlockWithImage4" parent="ScrollContainer/PanelContainer" instance=ExtResource( 11 )]
-margin_top = 585.0
-margin_bottom = 653.0
-text = "Hello, this is the lesson for thing thing thingo.
-Try to get all checkmarks like this one -->
-You can go [url=/course/SomePage.tscn]here[/url] to start."
-texture = ExtResource( 5 )
-
 [node name="HSeparator" type="HSeparator" parent="ScrollContainer/PanelContainer"]
-margin_top = 659.0
+margin_top = 733.0
 margin_right = 800.0
-margin_bottom = 689.0
+margin_bottom = 763.0
 custom_constants/separation = 30
 
 [node name="SubTitle2" type="RichTextLabel" parent="ScrollContainer/PanelContainer" groups=["navigation_text"]]
-margin_top = 695.0
+margin_top = 769.0
 margin_right = 800.0
-margin_bottom = 735.0
+margin_bottom = 801.0
 custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
 bbcode_text = "Lessons"
@@ -118,9 +122,9 @@ __meta__ = {
 }
 
 [node name="LessonSummary" type="HBoxContainer" parent="ScrollContainer/PanelContainer"]
-margin_top = 741.0
+margin_top = 807.0
 margin_right = 800.0
-margin_bottom = 780.0
+margin_bottom = 854.0
 theme = SubResource( 1 )
 script = ExtResource( 6 )
 text = "Lesson 1"
@@ -132,9 +136,9 @@ button_text = "Go to Lesson 1"
 progress = 23
 
 [node name="LessonSummary2" type="HBoxContainer" parent="ScrollContainer/PanelContainer"]
-margin_top = 786.0
+margin_top = 860.0
 margin_right = 800.0
-margin_bottom = 825.0
+margin_bottom = 907.0
 theme = SubResource( 1 )
 script = ExtResource( 6 )
 text = "Lesson 2"

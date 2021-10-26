@@ -8,10 +8,8 @@
 [ext_resource path="res://addons/exporter-for-live-editor/ui/components/ScrollableTextBox.tscn" type="PackedScene" id=6]
 
 [node name="LessonPanel" type="PanelContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 599.0
-margin_bottom = 1060.0
+margin_right = 611.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 3 )
@@ -22,12 +20,12 @@ __meta__ = {
 
 [node name="Panel" type="Panel" parent="."]
 margin_right = 611.0
-margin_bottom = 1040.0
+margin_bottom = 1080.0
 custom_styles/panel = ExtResource( 4 )
 
 [node name="LessonRequirements" type="VBoxContainer" parent="."]
 margin_right = 611.0
-margin_bottom = 1040.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -39,7 +37,7 @@ value = 33.0
 [node name="Margin" type="MarginContainer" parent="LessonRequirements"]
 margin_top = 39.0
 margin_right = 611.0
-margin_bottom = 1040.0
+margin_bottom = 1080.0
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -49,7 +47,7 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 591.0
-margin_bottom = 981.0
+margin_bottom = 1021.0
 size_flags_vertical = 3
 
 [node name="Title" type="Label" parent="LessonRequirements/Margin/Column"]
@@ -67,20 +65,20 @@ custom_constants/separation = 20
 [node name="Scroll" type="ScrollContainer" parent="LessonRequirements/Margin/Column"]
 margin_top = 83.0
 margin_right = 571.0
-margin_bottom = 961.0
+margin_bottom = 1001.0
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="Column" type="VBoxContainer" parent="LessonRequirements/Margin/Column/Scroll"]
 margin_right = 571.0
-margin_bottom = 878.0
+margin_bottom = 918.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Goals" parent="LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
 margin_right = 571.0
-margin_bottom = 251.644
-rect_min_size = Vector2( 571, 251.644 )
+margin_bottom = 252.0
+rect_min_size = Vector2( 571, 252 )
 size_flags_horizontal = 3
 title = "Goals"
 is_expanded = true
@@ -92,16 +90,16 @@ margin_right = 571.0
 margin_bottom = 252.0
 
 [node name="Hints" parent="LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
-margin_top = 267.0
+margin_top = 268.0
 margin_right = 571.0
-margin_bottom = 314.0
+margin_bottom = 315.0
 rect_min_size = Vector2( 571, 47 )
 title = "Hints"
 
 [node name="Checks" parent="LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
-margin_top = 330.0
+margin_top = 331.0
 margin_right = 571.0
-margin_bottom = 377.0
+margin_bottom = 378.0
 rect_min_size = Vector2( 571, 47 )
 title = "Checks"
 is_expanded = true

@@ -20,7 +20,7 @@ var _is_mobile_platform := OS.get_name() in ["Android", "HTML5", "iOS"]
 var root_container: Node
 
 # switch this off to remove transitions
-var use_transitions := true
+var use_transitions := false
 
 var current_url := ScreenUrl.new(_is_path_regex, "res://")
 
