@@ -44,7 +44,6 @@ onready var _code_editor := find_node("CodeEditor") as CodeEditor
 onready var _slice_editor := _code_editor.slice_editor
 onready var _save_button := _code_editor.save_button
 onready var _pause_button := _code_editor.pause_button
-onready var _solution_button := _code_editor.solution_button
 
 
 func _ready() -> void:
@@ -54,7 +53,6 @@ func _ready() -> void:
 	_instantiate_hints()
 	_save_button.connect("pressed", self, "_on_save_button_pressed")
 	_pause_button.connect("pressed", self, "_on_pause_button_pressed")
-	_solution_button.connect("pressed", _slice_editor, "sync_text_with_slice")
 	_code_editor.connect("text_changed", self, "_on_code_editor_text_changed")
 
 

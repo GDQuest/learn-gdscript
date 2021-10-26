@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/ui/SliceEditor.gd" type="Script" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_pause.png" type="Texture" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_save.png" type="Texture" id=3]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_help.png" type="Texture" id=4]
+[ext_resource path="res://addons/exporter-for-live-editor/ui/icons/icon_error.png" type="Texture" id=5]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/CodeEditor.gd" type="Script" id=6]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/gdscript_app_theme.tres" type="Theme" id=7]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/components/ViewModeToggleButton.tscn" type="PackedScene" id=8]
@@ -165,10 +166,23 @@ margin_left = 352.0
 margin_right = 716.0
 margin_bottom = 78.0
 
-[node name="SolutionButton" type="Button" parent="Column/MarginContainer/Column"]
+[node name="Row2" type="HBoxContainer" parent="Column/MarginContainer/Column"]
 margin_top = 94.0
-margin_right = 253.0
+margin_right = 1880.0
 margin_bottom = 156.0
+
+[node name="RestoreButton" type="Button" parent="Column/MarginContainer/Column/Row2"]
+margin_right = 160.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 160, 40 )
+size_flags_horizontal = 0
+text = "Reset"
+icon = ExtResource( 5 )
+
+[node name="SolutionButton" type="Button" parent="Column/MarginContainer/Column/Row2"]
+margin_left = 176.0
+margin_right = 429.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 160, 40 )
 size_flags_horizontal = 0
 text = "Show solution"
