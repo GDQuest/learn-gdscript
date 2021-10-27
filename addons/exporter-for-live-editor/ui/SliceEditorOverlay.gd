@@ -8,26 +8,21 @@
 # font. It will not work otherwise.
 extends Control
 
-onready var _character_width: float = (
-	theme.default_font.get_char_size(ord("0")).x
-	if theme and theme.default_font
-	else 1
-)
-onready var _line_spacing: int = (
-	theme.get_constant("line_spacing", "TextEdit")
-	if theme and theme.has_constant("line_spacing", "TextEdit")
-	else 1
-)
-onready var _row_height: int = (
-	(theme.default_font.get_height() if theme and theme.default_font else 1)
-	+ _line_spacing
-)
-# The horizontal 30 px corresponds to the left gutter with line numbers. Found in the source code.
-onready var _stylebox := (
-	theme.get_stylebox("normal", "TextEdit")
-	if theme and theme.has_stylebox("normal", "TextEdit")
-	else StyleBoxFlat.new()
-)
+var _code_font: Font
+var _character_width: float
+var _line_spacing: int
+var _row_height: int
+var _stylebox: StyleBox
+var _gutter_size := 30.0
+
+
+func _init() -> void:
+	theme = preload("res://addons/exporter-for-live-editor/resources/gdscript_app_theme.tres")
+	_code_font = theme.get_font("font", "TextEdit")
+	_character_width = _code_font.get_char_size(ord("0")).x
+	_line_spacing = theme.get_constant("line_spacing", "TextEdit")
+	_row_height = _code_font.get_height() + _line_spacing
+	_stylebox = theme.get_stylebox("normal", "TextEdit")
 
 
 func clean() -> void:
@@ -56,8 +51,8 @@ func calculate_error_region(
 		+ offset
 		- scroll_offset
 	)
-	start.x = max(offset.x, start.x)
 	start.y = max(0, start.y)
+	start.x = max(offset.x, start.x) + _gutter_size
 
 	var size := Vector2(
 		error_range.end.character * _character_width - start.x - scroll_offset.x, _row_height
@@ -70,7 +65,7 @@ func calculate_scroll_offset(text_edit: TextEdit) -> Vector2:
 	return Vector2(text_edit.scroll_horizontal, text_edit.scroll_vertical * _row_height)
 
 
-func calculate_offset(text_edit: TextEdit) -> Vector2:
+func calculate_offset(text_edit: TextEdit, start_line: int) -> Vector2:
 	var out := Vector2()
 	var line_count := text_edit.get_line_count()
 	var line_numbers_width := 0
@@ -78,7 +73,7 @@ func calculate_offset(text_edit: TextEdit) -> Vector2:
 		line_numbers_width += 1
 		line_count /= 10
 	out.x = _character_width * line_numbers_width + _stylebox.content_margin_left
-	out.y = _stylebox.content_margin_top
+	out.y = _stylebox.content_margin_top - start_line * _row_height
 	return out
 
 
@@ -112,6 +107,10 @@ class SquigglyLine:
 	const COLOR_WARNING := Color("#ffe478")
 
 	var wave_width := 64.0 setget set_wave_width
+
+	func _ready() -> void:
+		width = LINE_THICKNESS
+		default_color = Color(0.14902, 0.776471, 0.968627)
 
 	func update_drawing() -> void:
 		points.empty()

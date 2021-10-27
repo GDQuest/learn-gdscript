@@ -97,7 +97,7 @@ func _update_overlays() -> void:
 	var show_lines_from = script_slice.start_offset
 	var show_lines_to = script_slice.end_offset
 	var scroll_offset := errors_overlay.calculate_scroll_offset(self)
-	var offset = errors_overlay.calculate_offset(self)
+	var offset = errors_overlay.calculate_offset(self, show_lines_from)
 
 	for index in errors.size():
 		var error: LanguageServerError = errors[index]
