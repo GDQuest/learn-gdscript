@@ -19,6 +19,11 @@ var _border_style: StyleBoxFlat = get("custom_styles/panel")
 onready var _tween := $Tween as Tween
 
 
+func _ready() -> void:
+	set_border_width(0.0)
+	hide()
+
+
 func appear() -> void:
 	_tween.stop_all()
 	_tween.interpolate_method(
@@ -32,6 +37,7 @@ func appear() -> void:
 	)
 	_tween.start()
 	_tween.seek(0.0)
+	show()
 
 
 func disappear() -> void:
@@ -50,6 +56,7 @@ func disappear() -> void:
 
 
 func set_max_border_width(new_width: float) -> void:
+	max_border_width = new_width
 	_border_style.border_width_left = new_width
 	_border_style.border_width_top = new_width
 	_border_style.border_width_right = new_width
@@ -57,7 +64,13 @@ func set_max_border_width(new_width: float) -> void:
 
 
 func set_border_width(new_width: float) -> void:
+	border_width = new_width
 	_border_style.expand_margin_left = new_width
 	_border_style.expand_margin_top = new_width
 	_border_style.expand_margin_right = new_width
 	_border_style.expand_margin_bottom = new_width
+
+
+func _on_tween_completed(object: Node, key: String) -> void:
+	if key == "border_width" and border_width < 0.1:
+		hide()
