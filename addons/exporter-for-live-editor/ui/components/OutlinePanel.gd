@@ -14,7 +14,7 @@ const ANIMATION_DURATION := 0.6
 export var max_border_width := 8.0 setget set_max_border_width
 export var border_width := 0.0 setget set_border_width
 
-var _border_style: StyleBoxFlat = get("custom_styles/panel")
+onready var _border_style: StyleBoxFlat = get("custom_styles/panel")
 
 onready var _tween := $Tween as Tween
 
@@ -22,6 +22,7 @@ onready var _tween := $Tween as Tween
 func _ready() -> void:
 	set_border_width(0.0)
 	hide()
+	_tween.connect("tween_completed", self, "_on_tween_completed")
 
 
 func appear() -> void:
@@ -34,6 +35,13 @@ func appear() -> void:
 		ANIMATION_DURATION,
 		Tween.TRANS_CIRC,
 		Tween.EASE_OUT
+	)
+	_tween.interpolate_property(
+		self,
+		"self_modulate",
+		COLOR_TRANSPARENT,
+		Color.white,
+		ANIMATION_DURATION / 2
 	)
 	_tween.start()
 	_tween.seek(0.0)
@@ -49,7 +57,14 @@ func disappear() -> void:
 		0.0,
 		ANIMATION_DURATION,
 		Tween.TRANS_CIRC,
-		Tween.EASE_IN
+		Tween.EASE_OUT
+	)
+	_tween.interpolate_property(
+		self,
+		"self_modulate",
+		Color.white,
+		COLOR_TRANSPARENT,
+		ANIMATION_DURATION / 2
 	)
 	_tween.start()
 	_tween.seek(0.0)
@@ -72,5 +87,5 @@ func set_border_width(new_width: float) -> void:
 
 
 func _on_tween_completed(object: Node, key: String) -> void:
-	if key == "border_width" and border_width < 0.1:
+	if border_width < 0.1:
 		hide()
