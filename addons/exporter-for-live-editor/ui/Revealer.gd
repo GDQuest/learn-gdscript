@@ -105,6 +105,8 @@ func sort_children() -> void:
 
 func set_use_small_font(value: bool) -> void:
 	use_small_font = value
+	if not is_inside_tree():
+		yield(self, "ready")
 	_button.set("custom_fonts/font", FONTS.small if use_small_font else FONTS.normal)
 
 
