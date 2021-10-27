@@ -8,9 +8,6 @@
 # font. It will not work otherwise.
 extends Control
 
-const LanguageServerError := preload("../lsp/LanguageServerError.gd")
-const LanguageServerRange = LanguageServerError.LanguageServerRange
-
 onready var _character_width: float = (
 	theme.default_font.get_char_size(ord("0")).x
 	if theme and theme.default_font
@@ -50,7 +47,7 @@ func add_error(error: LanguageServerError, offset: Vector2, scroll_offset: Vecto
 
 
 func calculate_error_region(
-	error_range: LanguageServerRange, offset: Vector2, scroll_offset: Vector2
+	error_range: LanguageServerError.ErrorRange, offset: Vector2, scroll_offset: Vector2
 ) -> Rect2:
 	var start := (
 		Vector2(

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/ui/icons/chevron.svg" type="Texture" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/ui/Revealer.gd" type="Script" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/gdscript_app_theme.tres" type="Theme" id=3]
+[ext_resource path="res://addons/exporter-for-live-editor/resources/fonts/font_title.tres" type="DynamicFont" id=4]
 
 [node name="Revealer" type="Container"]
 margin_right = 201.0
@@ -17,12 +18,13 @@ __meta__ = {
 revealer_height = 38.0
 
 [node name="Button" type="Button" parent="."]
-margin_right = 112.0
+margin_right = 201.0
 margin_bottom = 47.0
 rect_min_size = Vector2( 100, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 0
 custom_colors/font_color_pressed = Color( 0.74902, 0.737255, 0.878431, 1 )
+custom_fonts/font = ExtResource( 4 )
 toggle_mode = true
 text = "Expand"
 flat = true
@@ -59,3 +61,4 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="."]
+playback/active = true

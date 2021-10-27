@@ -7,9 +7,10 @@
 #
 # var error = LanguageServerError.new()
 # error.from_JSON(json_error)
+class_name LanguageServerError
 extends Reference
 
-var error_range := LanguageServerRange.new()
+var error_range := ErrorRange.new()
 var message := ""
 var severity := 0
 var code := 0
@@ -30,9 +31,9 @@ func _to_string() -> String:
 	return "{ERR (%s:%s): %s}" % [code, error_range, message]
 
 
-class LanguageServerRange:
-	var start := LanguageServerPosition.new()
-	var end := LanguageServerPosition.new()
+class ErrorRange:
+	var start := ErrorPosition.new()
+	var end := ErrorPosition.new()
 
 	func from_JSON(json: Dictionary) -> void:
 		if "start" in json:
@@ -44,7 +45,7 @@ class LanguageServerRange:
 		return "[%s-%s]" % [start, end]
 
 
-class LanguageServerPosition:
+class ErrorPosition:
 	var character := 0
 	var line := 0
 

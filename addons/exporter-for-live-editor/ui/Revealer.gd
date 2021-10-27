@@ -5,6 +5,11 @@ extends Container
 # Duration of the tween animation in seconds.
 const ANIM_DURATION := 0.1
 
+const FONTS := {
+	normal = preload("../resources/fonts/font_title.tres"),
+	small = preload("../resources/fonts/font_title_small.tres"),
+}
+
 export var title := "Expand" setget set_title
 export var is_expanded := false setget set_is_expanded
 export var revealer_height := 32.0 setget set_revealer_height
@@ -12,9 +17,11 @@ export var chevron_size := 16.0
 export var padding := 24.0
 export var first_margin := 5.0
 export var children_margin := 2.0
+export var use_small_font := false setget set_use_small_font
 
 var _height := 0.0
 var _contents := []
+onready var _parent := get_parent() as Control
 
 onready var _button: Button = $Button
 onready var _chevron: TextureRect = $Button/Chevron
@@ -75,8 +82,7 @@ func set_revealer_height(new_revealer_height: float) -> void:
 
 
 func update_min_size() -> void:
-	rect_size.x = max(_button.rect_size.x, rect_size.x)
-	_button.rect_size.x = rect_min_size.x
+	_button.rect_size.x = min(rect_size.x, _parent.rect_size.x)
 	if _tween.is_inside_tree():
 		_tween.stop(self, "rect_min_size:y")
 		_tween.interpolate_property(
@@ -95,6 +101,11 @@ func sort_children() -> void:
 		index += 1
 	_height = top
 	update_min_size()
+
+
+func set_use_small_font(value: bool) -> void:
+	use_small_font = value
+	_button.set("custom_fonts/font", FONTS.small if use_small_font else FONTS.normal)
 
 
 func _rotate_chevron(rotation_degrees: float, time := ANIM_DURATION) -> void:
