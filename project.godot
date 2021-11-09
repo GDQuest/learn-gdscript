@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/exporter-for-live-editor/ui/Revealer.gd"
 }, {
+"base": "Resource",
+"class": "ScriptSegment",
+"language": "GDScript",
+"path": "res://addons/exporter-for-live-editor/collections/ScriptSliceProperties.gd"
+}, {
 "base": "TextEdit",
 "class": "SliceEditor",
 "language": "GDScript",
@@ -79,6 +84,7 @@ _global_script_class_icons={
 "OutputConsole": "",
 "OutputVSplitContainer": "",
 "Revealer": "res://addons/exporter-for-live-editor/ui/Revealer.svg",
+"ScriptSegment": "",
 "SliceEditor": "",
 "Validator": "",
 "ViewModeToggleButton": ""
@@ -113,7 +119,7 @@ window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://addons/editor_icon_previewer/plugin.cfg", "res://addons/exporter-for-live-editor/plugin.cfg" )
 
 [exporter-for-live-editor]
 

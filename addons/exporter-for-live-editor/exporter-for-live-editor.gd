@@ -4,12 +4,13 @@ extends EditorPlugin
 const LiveEditorMessageBus := preload("./utils/LiveEditorMessageBus.gd")
 const NavigationManager := preload("./utils/NavigationManager.gd")
 const UserProfiles := preload("./utils/UserProfiles.gd")
+
 var container := PluginButtons.new()
 var file_dialog := ScenesFileDialog.new()
 var config := preload("./utils/config.gd").new(self)
 
 const SceneFiles := preload("./collections/SceneFiles.gd")
-
+const ScriptSlicesGenerator := preload("./collections/ScriptSlicesGenerator.gd")
 
 func _enter_tree() -> void:
 	add_autoload_singleton("LiveEditorMessageBus", LiveEditorMessageBus.resource_path)
@@ -25,11 +26,13 @@ func _enter_tree() -> void:
 	container.run_button.icon = config.get_icon("Play")
 	container.remove_button.icon = config.get_icon("Close")
 	container.pin_button.icon = config.get_icon("Pin")
+	container.save_button.icon = config.get_icon("Save")
 	container.pin_button.pressed = config.was_manually_set
 
 	container.connect("scene_path_changed", self, "_on_scene_path_changed")
 	container.connect("file_browser_requested", file_dialog, "popup_centered_ratio")
 	container.connect("run_button_pressed", self, "_on_run_button_pressed")
+	container.connect("save_button_pressed", self, "_on_save_button_pressed")
 	container.connect("pin_button_toggled", config, "set_was_manually_set")
 
 	add_control_to_container(CONTAINER_TOOLBAR, container)
@@ -118,12 +121,23 @@ func _on_run_button_pressed() -> void:
 	scene.queue_free()
 
 
+func _on_save_button_pressed() -> void:
+	if not config.scene_path:
+		return
+
+	var packed_scene := load(config.scene_path) as PackedScene
+	var generator := ScriptSlicesGenerator.new()
+	
+	generator.export_scene_slices(packed_scene, self)
+
+
 class PluginButtons:
 	extends HBoxContainer
 
 	var scene_path_control := LineEdit.new()
 	var file_browser_button := ToolButton.new()
 	var run_button := ToolButton.new()
+	var save_button := ToolButton.new()
 	var remove_button := ToolButton.new()
 	var pin_button := ToolButton.new()
 	var scene_path: String setget set_scene_path, get_scene_path
@@ -132,7 +146,8 @@ class PluginButtons:
 	signal file_browser_requested
 	signal run_button_pressed
 	signal pin_button_toggled
-
+	signal save_button_pressed
+	
 	func _init() -> void:
 		scene_path_control.rect_min_size = Vector2(250, 20)
 		pin_button.toggle_mode = true
@@ -142,12 +157,14 @@ class PluginButtons:
 		add_child(remove_button)
 		add_child(pin_button)
 		add_child(run_button)
+		add_child(save_button)
 
 		scene_path_control.connect("text_changed", self, "_on_scene_path_text_changed")
 		file_browser_button.connect("pressed", self, "emit_signal", ["file_browser_requested"])
 		remove_button.connect("pressed", self, "_on_remove_button_pressed")
 		pin_button.connect("toggled", self, "_on_pin_button_toggled")
 		run_button.connect("pressed", self, "emit_signal", ["run_button_pressed"])
+		save_button.connect("pressed", self, "emit_signal", ["save_button_pressed"])
 
 	func _on_scene_path_text_changed(new_text: String):
 		emit_signal("scene_path_changed", new_text)
