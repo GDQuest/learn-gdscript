@@ -55,14 +55,29 @@ _global_script_classes=[ {
 "path": "res://addons/exporter-for-live-editor/ui/Revealer.gd"
 }, {
 "base": "Resource",
-"class": "ScriptSegment",
+"class": "SceneProperties",
 "language": "GDScript",
-"path": "res://addons/exporter-for-live-editor/collections/ScriptSliceProperties.gd"
+"path": "res://addons/exporter-for-live-editor/collections/SceneProperties.gd"
+}, {
+"base": "Resource",
+"class": "ScriptProperties",
+"language": "GDScript",
+"path": "res://addons/exporter-for-live-editor/collections/ScriptProperties.gd"
 }, {
 "base": "TextEdit",
 "class": "SliceEditor",
 "language": "GDScript",
 "path": "res://addons/exporter-for-live-editor/ui/SliceEditor.gd"
+}, {
+"base": "Resource",
+"class": "SliceProperties",
+"language": "GDScript",
+"path": "res://addons/exporter-for-live-editor/collections/SliceProperties.gd"
+}, {
+"base": "Reference",
+"class": "SlicesUtils",
+"language": "GDScript",
+"path": "res://addons/exporter-for-live-editor/collections/SlicesUtil.gd"
 }, {
 "base": "Node",
 "class": "Validator",
@@ -84,8 +99,11 @@ _global_script_class_icons={
 "OutputConsole": "",
 "OutputVSplitContainer": "",
 "Revealer": "res://addons/exporter-for-live-editor/ui/Revealer.svg",
-"ScriptSegment": "",
+"SceneProperties": "",
+"ScriptProperties": "",
 "SliceEditor": "",
+"SliceProperties": "",
+"SlicesUtils": "",
 "Validator": "",
 "ViewModeToggleButton": ""
 }
@@ -101,6 +119,7 @@ config/icon="res://icon.png"
 LiveEditorMessageBus="*res://addons/exporter-for-live-editor/utils/LiveEditorMessageBus.gd"
 NavigationManager="*res://addons/exporter-for-live-editor/utils/NavigationManager.gd"
 UserProfiles="*res://addons/exporter-for-live-editor/utils/UserProfiles.gd"
+LiveEditorState="*res://addons/exporter-for-live-editor/utils/LiveEditorState.gd"
 
 [debug]
 
