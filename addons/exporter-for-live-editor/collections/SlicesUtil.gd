@@ -5,10 +5,8 @@
 # 
 # There's only one interesting method: `export_scene_slices`. Refer to it for more information
 #
+class_name SlicesUtils
 const RegExp := preload("../utils/RegExp.gd")
-const SceneProperties = preload("./SceneProperties.gd")
-const ScriptProperties = preload("./ScriptProperties.gd")
-const ScriptSliceProperties := preload("./ScriptSliceProperties.gd")
 
 const RESOURCE_TYPES = {"SCENE": 'scene', "SCRIPT": 'scripts', "SLICE": 'slices'}
 
@@ -112,19 +110,19 @@ func _parse_new_script(script: GDScript) -> ScriptProperties:
 	script_properties.set_initial_script(script)
 	_save(RESOURCE_TYPES.SCRIPT, script_properties)
 
-	var blueprint_segment = ScriptSliceProperties.new()
+	var blueprint_segment = SliceProperties.new()
 	blueprint_segment.script_properties = script_properties
 	blueprint_segment.scene_properties = _scene_properties
 	var slices := _parse_script_slices(script.source_code, blueprint_segment)
 	for index in slices.size():
-		var slice := slices[index] as ScriptSliceProperties
+		var slice := slices[index] as SliceProperties
 		_save(RESOURCE_TYPES.SLICE, slice)
 	return script_properties
 
 
 # Splits a script in slices according to the EXPORT comments and returns them as
-# an Array[ScriptSliceProperties].
-func _parse_script_slices(script: String, blueprint_segment: ScriptSliceProperties) -> Array:
+# an Array[SliceProperties]
+func _parse_script_slices(script: String, blueprint_segment: SliceProperties) -> Array:
 	var sanitized_text := _sanitization_replacements.replace(script)
 	var lines := sanitized_text.split("\n")
 	var waiting_slices := {}
@@ -140,14 +138,14 @@ func _parse_script_slices(script: String, blueprint_segment: ScriptSliceProperti
 
 		var export_match := _export_annotation_regex.search(line)
 		if export_match:
-			var slice := ScriptSliceProperties.new()
+			var slice := SliceProperties.new()
 			slice.script_properties = blueprint_segment.script_properties
 			slice.scene_properties = blueprint_segment.scene_properties
 			slice.from_regex_match(export_match)
 			slice.start = index
 			if slice.closing and slice.name:
 				if slice.name in waiting_slices:
-					var previous_slice: ScriptSliceProperties = waiting_slices[slice.name]
+					var previous_slice: SliceProperties = waiting_slices[slice.name]
 					waiting_slices.erase(slice.name)
 					previous_slice.end = index
 					previous_slice.set_main_lines(lines)
@@ -189,3 +187,73 @@ func _save(type: String, resource: Resource) -> bool:
 		push_error("error saving %s to %s" % [resource, path])
 		return false
 	return true
+
+
+# Returns a list of files in a directory that match a regex pattern.
+# Does not recurse.
+# This is not, strictly, related to slices, but it's here for keeping indirection low. Might get
+# moved later
+# @param path          String Path to the root directory
+# @param regex_pattern String A pattern to match against (as a String, it will be parsed to regex)
+static func _list_files_in_dir(path: String, regex_pattern := ".*") -> PoolStringArray:
+	var dir = Directory.new()
+	var valid_regex := RegEx.new()
+	valid_regex.compile(regex_pattern)
+	if not (dir.open(path) == OK):
+		push_error("Cannot open directory %s" % [path])
+		return PoolStringArray()
+	dir.list_dir_begin()
+	var files := PoolStringArray()
+	var file_name = dir.get_next()
+	while file_name != "":
+		var is_valid = (not dir.current_is_dir()) and valid_regex.search(file_name) != null
+		if is_valid:
+			files.append(path.plus_file(file_name))
+		file_name = dir.get_next()
+	return files
+
+# Returns paths to all scripts properties files in a directory
+static func list_scripts_properties_in_dir(path: String) -> PoolStringArray:
+	var scripts_paths := path.plus_file(RESOURCE_TYPES.SCRIPT)
+	return _list_files_in_dir(scripts_paths, '\\.gd\\.tres$')
+
+# Returns paths to all slices properties files in a directory
+static func list_slices_properties_in_dir(path: String) -> PoolStringArray:
+	return _list_files_in_dir(path.plus_file(RESOURCE_TYPES.SLICE), '\\.slice\\.tres$')
+
+# Returns an exported scene properties from a given scene file
+# @param packed_scene PackedScene The scene. It must have been exported prior through the plugin 
+# @returns SceneProperties
+static func load_scene_properties_from_scene(packed_scene: PackedScene) -> SceneProperties:
+	var scene_properties := SceneProperties.new()
+	scene_properties.scene = packed_scene
+	var path := (
+		scene_properties.get_storage_path().plus_file(RESOURCE_TYPES.SCENE).plus_file(
+			scene_properties.get_save_name()
+		)
+		+ ".tres"
+	)
+	return load(path) as SceneProperties
+
+# Returns all scripts in use (and exported) from a scene.
+# @returns
+static func load_scripts_from_scene_properties(scene_properties: SceneProperties) -> Array:
+	var path = scene_properties.resource_path.get_base_dir().get_base_dir()
+	var files_paths := list_scripts_properties_in_dir(path)
+	var files := []
+	for file_path in files_paths:
+		var script_properties := load(file_path) as ScriptProperties
+		files.append(script_properties)
+	return files
+
+# Returns all slices associated with a script file
+# 
+static func load_slices_from_script_properties(script_properties: ScriptProperties) -> Array:
+	var path = script_properties.resource_path.get_base_dir().get_base_dir()
+	var files_paths := list_slices_properties_in_dir(path)
+	var files := []
+	for file_path in files_paths:
+		var slice_properties := load(file_path) as SliceProperties
+		if slice_properties.script_properties == script_properties:
+			files.append(slice_properties)
+	return files

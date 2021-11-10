@@ -1,7 +1,7 @@
 # Represents a slice from the script file.
 tool
 extends Resource
-class_name ScriptSegment
+class_name SliceProperties
 
 const SceneProperties = preload("./SceneProperties.gd")
 const ScriptProperties = preload("./ScriptProperties.gd")
@@ -161,7 +161,7 @@ func get_script_properties() -> ScriptProperties:
 
 func get_save_name() -> String:
 	if script_properties:
-		var extension := '.slice' + ('.' + name if name != '*' else 'ALL')
+		var extension := ('.' + name if name != '*' else 'ALL') + '.slice'
 		var file_name := get_script_properties().file_name + extension
 		return file_name
 	return ''
@@ -183,7 +183,7 @@ func as_json() -> Dictionary:
 
 
 func _to_string() -> String:
-	return JSON.print(as_json(), "\t")
+	return "(%s:%s)" % [script_properties.get_save_name(), name]
 
 
 func _read_only(new_text) -> void:

@@ -1,5 +1,6 @@
 tool
 extends Resource
+class_name SceneProperties
 
 export var scene: PackedScene
 
@@ -18,3 +19,7 @@ func get_save_name() -> String:
 		var file_name := scene.resource_path.get_file()
 		return file_name
 	return ''
+
+
+func _to_string() -> String:
+	return "(%s.tscn)" % [scene.resource_path.get_file().get_basename()]

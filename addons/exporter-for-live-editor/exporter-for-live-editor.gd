@@ -10,7 +10,6 @@ var file_dialog := ScenesFileDialog.new()
 var config := preload("./utils/config.gd").new(self)
 
 const SceneFiles := preload("./collections/SceneFiles.gd")
-const ScriptSlicesGenerator := preload("./collections/ScriptSlicesGenerator.gd")
 
 
 func _enter_tree() -> void:
@@ -123,13 +122,34 @@ func _on_run_button_pressed() -> void:
 
 
 func _on_save_button_pressed() -> void:
+	config.load_settings()  # Godot bug forces us to reload config
 	if not config.scene_path:
 		return
 
 	var packed_scene := load(config.scene_path) as PackedScene
-	var generator := ScriptSlicesGenerator.new()
+	var generator := SlicesUtils.new()
 
 	generator.export_scene_slices(packed_scene, self)
+	var path := generator._scene_properties.get_storage_path()
+
+	_show_feedback("Success!", "Scene exported to `%s`" % [path])
+
+	var scene_props := SlicesUtils.load_scene_properties_from_scene(packed_scene)
+	var scripts_props := SlicesUtils.load_scripts_from_scene_properties(scene_props)
+	prints("scene:", scene_props)
+	prints("scripts:", scripts_props)
+	for script_props in scripts_props:
+		var slices_props := SlicesUtils.load_slices_from_script_properties(script_props)
+		prints("slices:", slices_props)
+
+
+func _show_feedback(title: String, text: String):
+	var accept_dialog := AcceptDialog.new()
+	accept_dialog.connect("popup_hide", accept_dialog, "queue_free")
+	accept_dialog.window_title = title
+	accept_dialog.dialog_text = text
+	get_editor_interface().get_base_control().add_child(accept_dialog)
+	accept_dialog.popup_centered()
 
 
 class PluginButtons:

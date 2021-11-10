@@ -1,5 +1,6 @@
 extends Validator
 
+
 func validate(scene: Node, _script: ScriptHandler, _slice: ScriptSlice):
 	var dispenser := scene.get_node("Level").find_node("ObstaclesDispenser", false)
 	if not verify(

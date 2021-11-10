@@ -1,5 +1,6 @@
 tool
 extends Resource
+class_name ScriptProperties
 
 export var nodes_paths := []
 # Path to the GDScript file
@@ -22,3 +23,7 @@ func set_file_path(path: String) -> void:
 
 func get_save_name() -> String:
 	return file_path.get_file()
+
+
+func _to_string() -> String:
+	return "(%s.gd)" % [file_name]
