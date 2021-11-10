@@ -10,11 +10,7 @@ const SceneProperties = preload("./SceneProperties.gd")
 const ScriptProperties = preload("./ScriptProperties.gd")
 const ScriptSliceProperties := preload("./ScriptSliceProperties.gd")
 
-const RESOURCE_TYPES = {
-	"SCENE": 'scene',
-	"SCRIPT": 'scripts',
-	"SLICE": 'slices'
-}
+const RESOURCE_TYPES = {"SCENE": 'scene', "SCRIPT": 'scripts', "SLICE": 'slices'}
 
 # Regular expressions used in parsing the scripts
 
@@ -24,7 +20,9 @@ var _sanitization_replacements := RegExp.collection(
 	}
 )
 var _leading_spaces_regex := RegExp.compile("(?m)^(?:  )+")
-var _export_annotation_regex := RegExp.compile("(?m)^(?<_leading_spaces_regex>\\t*)#\\s(?<closing>\\/)?(?<keyword>EXPORT)(?: +(?<name>[\\w\\d]+))?")
+var _export_annotation_regex := RegExp.compile(
+	"(?m)^(?<_leading_spaces_regex>\\t*)#\\s(?<closing>\\/)?(?<keyword>EXPORT)(?: +(?<name>[\\w\\d]+))?"
+)
 
 # /Regular expressions
 
@@ -32,6 +30,7 @@ var _export_annotation_regex := RegExp.compile("(?m)^(?<_leading_spaces_regex>\\
 var _scene_properties: SceneProperties
 # Set to `true` as soon as at least one annotation is found
 var _found_one_annotation := false
+
 
 # Collects all the scripts in a scene, and parses slices that have an EXPORT annotation.
 # Running this will save:
@@ -48,10 +47,10 @@ var _found_one_annotation := false
 func export_scene_slices(packed_scene: PackedScene, node_in_tree: Node, limit := 1000) -> void:
 	if not node_in_tree.is_inside_tree():
 		yield(node_in_tree, "ready")
-	
+
 	_scene_properties = SceneProperties.new()
 	_scene_properties.scene = packed_scene
-	
+
 	var unpacked_scene = packed_scene.instance()
 	# Add the scene to a node so we can hide the node
 	# hiding the scene directly can fail if the scene
@@ -60,13 +59,14 @@ func export_scene_slices(packed_scene: PackedScene, node_in_tree: Node, limit :=
 	node_in_tree.add_child(container_node)
 	container_node.hide()
 	container_node.add_child(unpacked_scene)
-	
+
 	_collect_node_scripts(unpacked_scene, unpacked_scene, limit)
-	
+
 	container_node.remove_child(unpacked_scene)
 	node_in_tree.remove_child(container_node)
 	unpacked_scene.queue_free()
 	container_node.queue_free()
+
 
 # Loops all children. If a child has a script, verifies its script contains
 # the specified annotation EXPORT.
@@ -93,23 +93,25 @@ func _collect_node_scripts(scene: Node, node: Node, limit: int) -> void:
 func _add_node_path_to_script(root_scene: Node, script: GDScript, node: Node) -> void:
 	var root_node_path := String(root_scene.get_path()) + "/"
 	var node_path := NodePath(String(node.get_path()).replace(root_node_path, ""))
-	var script_properties_path := _generate_save_path(RESOURCE_TYPES.SCRIPT, script.resource_path.get_file())
+	var script_properties_path := _generate_save_path(
+		RESOURCE_TYPES.SCRIPT, script.resource_path.get_file()
+	)
 	var script_already_exists := File.new().file_exists(script_properties_path)
 	var script_properties := (
-		(load(script_properties_path) as ScriptProperties) 
+		(load(script_properties_path) as ScriptProperties)
 		if script_already_exists
 		else _parse_new_script(script)
 	)
 	script_properties.nodes_paths.append(node_path)
 	_save(RESOURCE_TYPES.SCRIPT, script_properties)
 
+
 # The provided script will be parsed, a properties file created, and saved to disk
 func _parse_new_script(script: GDScript) -> ScriptProperties:
-	
 	var script_properties := ScriptProperties.new()
 	script_properties.set_initial_script(script)
 	_save(RESOURCE_TYPES.SCRIPT, script_properties)
-		
+
 	var blueprint_segment = ScriptSliceProperties.new()
 	blueprint_segment.script_properties = script_properties
 	blueprint_segment.scene_properties = _scene_properties
@@ -158,8 +160,10 @@ func _parse_script_slices(script: String, blueprint_segment: ScriptSliceProperti
 				completed_slices["*"] = slice
 	return completed_slices.values()
 
+
 func _generate_save_directory(type: String) -> String:
 	return _scene_properties.get_storage_path().plus_file(type)
+
 
 func _generate_save_path(type: String, save_name: String) -> String:
 	var directory = _generate_save_directory(type)
@@ -172,17 +176,16 @@ func _save(type: String, resource: Resource) -> bool:
 	if not Directory.new().file_exists(directory):
 		var could_create_directories = Directory.new().make_dir_recursive(directory)
 		if could_create_directories != OK:
-			push_error("failed to create directory %s"%[directory])
+			push_error("failed to create directory %s" % [directory])
 			return false
 	var is_valid_resource = resource.has_method('get_save_name')
 	if not is_valid_resource:
-		assert(is_valid_resource, "Resource %s does not have a get_save_name method"%[resource])
+		assert(is_valid_resource, "Resource %s does not have a get_save_name method" % [resource])
 		return false
 	var path = _generate_save_path(type, resource.get_save_name())
 	resource.take_over_path(path)
 	var success = ResourceSaver.save(path, resource)
 	if success != OK:
-		push_error("error saving %s to %s"%[resource, path])
+		push_error("error saving %s to %s" % [resource, path])
 		return false
 	return true
-	

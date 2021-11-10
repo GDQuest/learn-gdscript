@@ -9,7 +9,6 @@ const ScriptProperties = preload("./ScriptProperties.gd")
 export var scene_properties: Resource setget set_scene_properties, get_scene_properties
 export var script_properties: Resource setget set_script_properties, get_script_properties
 
-
 # Amount of tabs before a slice annotation. We normalize scripts to use tabs for indentation.
 export var leading_spaces := 0
 
@@ -103,8 +102,6 @@ func set_main_lines(lines: Array, is_is_full_file := false) -> void:
 			lines_editable[index] = line
 
 
-
-
 # Returns all the lines as an Array[String], including the middle slice, with
 # proper indentation
 func get_main_lines() -> Array:
@@ -143,7 +140,7 @@ func get_end_offset() -> int:
 
 
 func set_scene_properties(new_scene_resource: Resource) -> void:
-	if new_scene_resource is SceneProperties: 
+	if new_scene_resource is SceneProperties:
 		scene_properties = new_scene_resource
 	assert(new_scene_resource is SceneProperties)
 

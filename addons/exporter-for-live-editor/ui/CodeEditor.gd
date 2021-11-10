@@ -20,7 +20,7 @@ onready var view_mode_toggle := find_node("ViewModeToggleButton") as ViewModeTog
 
 
 func _ready() -> void:
-	assert (view_mode_toggle)
+	assert(view_mode_toggle)
 	restore_button.connect("pressed", self, "_on_restore_pressed")
 	restore_button.disabled = true
 	solution_button.connect("pressed", self, "_on_solution_pressed")
@@ -32,8 +32,8 @@ func _ready() -> void:
 func _get_configuration_warning() -> String:
 	if not split_container_path or not get_node(split_container_path) is SplitContainer:
 		return (
-			"The Split Container Path property should point to a SplitContainer node.\n" +
-			"The game and console toggle buttons won't work."
+			"The Split Container Path property should point to a SplitContainer node.\n"
+			+ "The game and console toggle buttons won't work."
 		)
 	return ""
 

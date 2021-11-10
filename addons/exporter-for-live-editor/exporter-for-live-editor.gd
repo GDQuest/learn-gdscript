@@ -12,6 +12,7 @@ var config := preload("./utils/config.gd").new(self)
 const SceneFiles := preload("./collections/SceneFiles.gd")
 const ScriptSlicesGenerator := preload("./collections/ScriptSlicesGenerator.gd")
 
+
 func _enter_tree() -> void:
 	add_autoload_singleton("LiveEditorMessageBus", LiveEditorMessageBus.resource_path)
 	add_autoload_singleton("NavigationManager", NavigationManager.resource_path)
@@ -127,7 +128,7 @@ func _on_save_button_pressed() -> void:
 
 	var packed_scene := load(config.scene_path) as PackedScene
 	var generator := ScriptSlicesGenerator.new()
-	
+
 	generator.export_scene_slices(packed_scene, self)
 
 
@@ -147,7 +148,7 @@ class PluginButtons:
 	signal run_button_pressed
 	signal pin_button_toggled
 	signal save_button_pressed
-	
+
 	func _init() -> void:
 		scene_path_control.rect_min_size = Vector2(250, 20)
 		pin_button.toggle_mode = true

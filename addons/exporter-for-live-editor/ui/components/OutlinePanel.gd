@@ -37,11 +37,7 @@ func appear() -> void:
 		Tween.EASE_OUT
 	)
 	_tween.interpolate_property(
-		self,
-		"self_modulate",
-		COLOR_TRANSPARENT,
-		Color.white,
-		ANIMATION_DURATION / 2
+		self, "self_modulate", COLOR_TRANSPARENT, Color.white, ANIMATION_DURATION / 2
 	)
 	_tween.start()
 	_tween.seek(0.0)
@@ -60,11 +56,7 @@ func disappear() -> void:
 		Tween.EASE_OUT
 	)
 	_tween.interpolate_property(
-		self,
-		"self_modulate",
-		Color.white,
-		COLOR_TRANSPARENT,
-		ANIMATION_DURATION / 2
+		self, "self_modulate", Color.white, COLOR_TRANSPARENT, ANIMATION_DURATION / 2
 	)
 	_tween.start()
 	_tween.seek(0.0)

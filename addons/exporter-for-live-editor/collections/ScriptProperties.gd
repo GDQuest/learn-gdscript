@@ -19,5 +19,6 @@ func set_file_path(path: String) -> void:
 	file_path = path
 	file_name = file_path.get_file().get_basename()
 
+
 func get_save_name() -> String:
 	return file_path.get_file()
