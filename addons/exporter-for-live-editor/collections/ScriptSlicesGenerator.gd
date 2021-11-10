@@ -10,6 +10,12 @@ const SceneProperties = preload("./SceneProperties.gd")
 const ScriptProperties = preload("./ScriptProperties.gd")
 const ScriptSliceProperties := preload("./ScriptSliceProperties.gd")
 
+const RESOURCE_TYPES = {
+	"SCENE": 'scene',
+	"SCRIPT": 'scripts',
+	"SLICE": 'slices'
+}
+
 # Regular expressions used in parsing the scripts
 
 var _sanitization_replacements := RegExp.collection(
@@ -74,7 +80,7 @@ func _collect_node_scripts(scene: Node, node: Node, limit: int) -> void:
 			if not _found_one_annotation:
 				_found_one_annotation = true
 				# first annotation found:
-				_save(_scene_properties)
+				_save(RESOURCE_TYPES.SCENE, _scene_properties)
 			_add_node_path_to_script(scene, script, node)
 	if limit > 0:
 		limit -= 1
@@ -87,7 +93,7 @@ func _collect_node_scripts(scene: Node, node: Node, limit: int) -> void:
 func _add_node_path_to_script(root_scene: Node, script: GDScript, node: Node) -> void:
 	var root_node_path := String(root_scene.get_path()) + "/"
 	var node_path := NodePath(String(node.get_path()).replace(root_node_path, ""))
-	var script_properties_path := _generate_save_path(script.resource_path.get_file())
+	var script_properties_path := _generate_save_path(RESOURCE_TYPES.SCRIPT, script.resource_path.get_file())
 	var script_already_exists := File.new().file_exists(script_properties_path)
 	var script_properties := (
 		(load(script_properties_path) as ScriptProperties) 
@@ -95,14 +101,14 @@ func _add_node_path_to_script(root_scene: Node, script: GDScript, node: Node) ->
 		else _parse_new_script(script)
 	)
 	script_properties.nodes_paths.append(node_path)
-	_save(script_properties)
+	_save(RESOURCE_TYPES.SCRIPT, script_properties)
 
 # The provided script will be parsed, a properties file created, and saved to disk
 func _parse_new_script(script: GDScript) -> ScriptProperties:
 	
 	var script_properties := ScriptProperties.new()
 	script_properties.set_initial_script(script)
-	_save(script_properties)
+	_save(RESOURCE_TYPES.SCRIPT, script_properties)
 		
 	var blueprint_segment = ScriptSliceProperties.new()
 	blueprint_segment.script_properties = script_properties
@@ -110,7 +116,7 @@ func _parse_new_script(script: GDScript) -> ScriptProperties:
 	var slices := _parse_script_slices(script.source_code, blueprint_segment)
 	for index in slices.size():
 		var slice := slices[index] as ScriptSliceProperties
-		_save(slice)
+		_save(RESOURCE_TYPES.SLICE, slice)
 	return script_properties
 
 
@@ -152,13 +158,17 @@ func _parse_script_slices(script: String, blueprint_segment: ScriptSliceProperti
 				completed_slices["*"] = slice
 	return completed_slices.values()
 
-func _generate_save_path(save_name: String) -> String:
-	var directory = _scene_properties.get_storage_path()
-	var path = directory.plus_file(save_name) + ".live-editor.tres"
+func _generate_save_directory(type: String) -> String:
+	return _scene_properties.get_storage_path().plus_file(type)
+
+func _generate_save_path(type: String, save_name: String) -> String:
+	var directory = _generate_save_directory(type)
+	var path = directory.plus_file(save_name) + ".tres"
 	return path
 
-func _save(resource: Resource) -> bool:
-	var directory = _scene_properties.get_storage_path()
+
+func _save(type: String, resource: Resource) -> bool:
+	var directory = _generate_save_directory(type)
 	if not Directory.new().file_exists(directory):
 		var could_create_directories = Directory.new().make_dir_recursive(directory)
 		if could_create_directories != OK:
@@ -168,7 +178,8 @@ func _save(resource: Resource) -> bool:
 	if not is_valid_resource:
 		assert(is_valid_resource, "Resource %s does not have a get_save_name method"%[resource])
 		return false
-	var path = _generate_save_path(resource.get_save_name())
+	var path = _generate_save_path(type, resource.get_save_name())
+	resource.take_over_path(path)
 	var success = ResourceSaver.save(path, resource)
 	if success != OK:
 		push_error("error saving %s to %s"%[resource, path])

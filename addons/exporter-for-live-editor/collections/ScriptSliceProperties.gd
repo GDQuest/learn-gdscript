@@ -1,4 +1,5 @@
 # Represents a slice from the script file.
+tool
 extends Resource
 class_name ScriptSegment
 

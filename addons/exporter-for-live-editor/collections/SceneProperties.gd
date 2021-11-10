@@ -1,3 +1,4 @@
+tool
 extends Resource
 
 export var scene: PackedScene
@@ -8,7 +9,7 @@ export var viewport_size:Vector2 = Vector2(
 )
 
 func get_storage_path() -> String:
-	return scene.resource_path.get_base_dir().plus_file("live-editor")
+	return scene.resource_path.get_basename() + ".live-editor"
 
 
 func get_save_name() -> String:
