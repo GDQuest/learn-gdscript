@@ -4,10 +4,6 @@
 # child Validator instances, runs them, and sets the result
 # ("valid" or "invalid", respectively 2 or 1) on the parent check.
 #
-# Note:
-#
-# `scene` and `script_slice` property need to be set before any
-# validation occurs
 extends Node
 
 enum STATUS { NONE, INVALID, VALID }
@@ -21,12 +17,6 @@ const SIGNAL_NAME = "request_validation"
 
 signal validation_completed(errors)
 signal validation_completed_all(errors)
-
-var scene: Node
-# DEPRECATED
-var script_handler: ScriptHandler
-# DEPRECATED
-var script_slice: ScriptSlice
 
 var slice_properties: SliceProperties
 
@@ -83,19 +73,8 @@ func _get_validators(check: Node) -> Array:
 
 # Validates a check by validating in turn all its nested validators
 func validate(check: Node) -> void:
-	# DEPRECATED
-	assert(scene, "scene is not set")
-	# DEPRECATED
-	assert(script_slice, "script_slice is not set")
-	# DEPRECATED
-	assert(script_handler, "script_handler is not set")
-	# DEPRECATED
-	if not scene or not script_slice or not script_handler:
-		push_error(
-			"Either the playing scene, or the script slice aren't set. Make sure you set them before validating"
-		)
-		return
 	var slice := LiveEditorState.current_slice
+	var scene := LiveEditorState.current_scene
 	var validators := _get_validators(check)
 	var errors = []
 	for index in validators.size():

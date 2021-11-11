@@ -80,5 +80,6 @@ func set_split_container_path(value: NodePath) -> void:
 	view_mode_toggle.connect("game_button_toggled", _split_container, "toggle_game_view")
 	view_mode_toggle.connect("console_button_toggled", _split_container, "toggle_console_view")
 
+
 func _on_slice_changed() -> void:
 	_slice_editor.slice_properties = LiveEditorState.current_slice

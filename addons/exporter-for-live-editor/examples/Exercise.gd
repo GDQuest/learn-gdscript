@@ -19,9 +19,6 @@ export var slice_properties: Resource setget set_slice_properties, get_slice_pro
 export var title := "Title" setget set_title
 export (String, MULTILINE) var goal := "Goal" setget set_goal
 export (int, 0, 100) var progress := 0.0 setget set_progress
-export var scene_files: Resource
-export (String, FILE, "*.gd") var exported_script_path: String setget set_exported_script_path
-export var slice_name: String setget set_slice_name
 export var hints := PoolStringArray()
 export (String, MULTILINE) var initial_editor_text := "" setget set_initial_editor_text, get_initial_editor_text
 
@@ -60,14 +57,17 @@ func _ready() -> void:
 func take_over_slice() -> void:
 	if slice_properties:
 		LiveEditorState.current_slice = slice_properties
+		_game_viewport.use_scene()
 	else:
-		push_warning("No slice property set on Exercise %s"%[get_path()])
+		push_warning("No slice property set on Exercise %s" % [get_path()])
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_distraction_free_mode"):
 		var is_distraction_free := not _lesson_panel.visible
 		_lesson_panel.visible = is_distraction_free
 		_game_container.visible = is_distraction_free
+
 
 func _instantiate_checks():
 	var validators_number := 0
@@ -135,10 +135,7 @@ func _on_save_button_pressed() -> void:
 		_send_exercise_validated_signal(false)
 		return
 	_code_editor_is_dirty = false
-	_game_viewport.update_nodes(script, nodes_paths)
-	_validation_manager.scene = _game_viewport._scene
-	_validation_manager.script_handler = get_script_handler()
-	_validation_manager.script_slice = get_slice()
+	LiveEditorState.update_nodes(script, nodes_paths)
 	_validation_manager.validate_all()
 	var validation_errors: Array = yield(_validation_manager, "validation_completed_all")
 	var validation_success = validation_errors.size() == 0
@@ -157,76 +154,6 @@ func _send_exercise_validated_signal(is_valid: bool) -> void:
 	yield(get_tree(), "idle_frame")
 	emit_signal("exercise_validated", is_valid)
 
-# DEPRECATED
-func set_scene_files(new_scene_files: Resource) -> void:
-	if scene_files == new_scene_files or not new_scene_files:
-		return
-	if not (new_scene_files is SceneFiles):
-		push_error("scene_files %s is not a valid instance of SceneFiles" % [new_scene_files])
-		return
-	scene_files = new_scene_files
-	if Engine.editor_hint:
-		return
-	if not is_inside_tree():
-		yield(self, "ready")
-	_game_viewport.scene_files = scene_files
-	_validation_manager.scene = _game_viewport._scene
-
-# DEPRECATED
-func get_scene_files() -> SceneFiles:
-	return scene_files as SceneFiles
-
-# DEPRECATED
-func get_script_handler() -> ScriptHandler:
-	var file := get_scene_files().get_file(exported_script_path)
-	return file
-
-# DEPRECATED
-func get_slice() -> ScriptSlice:
-	var script_handler := get_script_handler()
-	if script_handler:
-		var slice = script_handler.get_slice(slice_name)
-		return slice
-	return null
-
-# DEPRECATED
-func set_exported_script_path(path: String) -> void:
-	exported_script_path = path
-	if not scene_files:
-		push_error("no scene files is set")
-	if Engine.editor_hint:
-		return
-	var script_handler := get_script_handler()
-	if script_handler == null:
-		push_error(
-			"File %s is not included in the exported scene %s" % [exported_script_path, scene_files]
-		)
-	if not is_inside_tree():
-		yield(self, "ready")
-	_validation_manager.script_handler = script_handler
-
-# DEPRECATED
-func set_slice_name(new_slice_name: String) -> void:
-	if not scene_files:
-		push_error("no scene files is set")
-	if not exported_script_path:
-		push_error("setting a slice without a file path")
-	slice_name = new_slice_name
-	if Engine.editor_hint:
-		return
-	var slice := get_slice()
-	if slice == null:
-		push_error(
-			(
-				"Slice %s is not included in the exported script %s"
-				% [slice_name, get_script_handler()]
-			)
-		)
-	if not is_inside_tree():
-		yield(self, "ready")
-	_slice_editor.script_slice = slice
-	_validation_manager.script_slice = slice
-
 
 func set_slice_properties(new_slice_properties: SliceProperties) -> void:
 	if not new_slice_properties is SliceProperties:
@@ -239,6 +166,7 @@ func set_slice_properties(new_slice_properties: SliceProperties) -> void:
 
 func get_slice_properties() -> SliceProperties:
 	return slice_properties as SliceProperties
+
 
 func set_title(new_title: String) -> void:
 	title = new_title

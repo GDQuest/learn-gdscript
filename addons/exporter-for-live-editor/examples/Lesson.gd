@@ -53,6 +53,7 @@ func _on_next_button_pressed() -> void:
 			else:
 				_activate_exercise(exercise, false)
 
+
 func _activate_exercise(exercise: CourseExercise, activate: bool) -> void:
 	if activate:
 		exercise.take_over_slice()

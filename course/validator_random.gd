@@ -1,5 +1,6 @@
 extends Validator
 
+
 # DEPRECATED
 func validate(scene: Node, _script: ScriptHandler, _slice: ScriptSlice):
 	var dispenser := scene.get_node("Level").find_node("ObstaclesDispenser", false)
@@ -27,6 +28,7 @@ func validate(scene: Node, _script: ScriptHandler, _slice: ScriptSlice):
 		if not verify(is_same, "method does not seem to be random"):
 			return
 	_validation_success()
+
 
 func validate_scene_and_script(scene: Node, _slice_properties: SliceProperties) -> void:
 	var dispenser := scene.get_node("Level").find_node("ObstaclesDispenser", false)

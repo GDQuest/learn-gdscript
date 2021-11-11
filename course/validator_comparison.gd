@@ -8,6 +8,7 @@ export (TEST_TYPE) var test_type := TEST_TYPE.TEST_NONE
 func restore(menu, initial_score) -> void:
 	menu.set_highest_score(initial_score)
 
+
 # DEPRECATED
 func validate(scene: Node, _script: ScriptHandler, _slice: ScriptSlice):
 	if test_type == TEST_TYPE.TEST_COMPARISON:
@@ -35,6 +36,7 @@ func validate(scene: Node, _script: ScriptHandler, _slice: ScriptSlice):
 			return
 	restore(menu, initial_score)
 	_validation_success()
+
 
 func validate_scene_and_script(scene: Node, slice_properties: SliceProperties) -> void:
 	if test_type == TEST_TYPE.TEST_COMPARISON:

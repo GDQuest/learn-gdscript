@@ -8,6 +8,7 @@ func _ready() -> void:
 	timer.wait_time = 0.2
 	timer.one_shot = true
 
+
 # DEPRECATED
 func validate(scene: Node, _script: ScriptHandler, _slice: ScriptSlice):
 	yield(get_tree(), "idle_frame")
@@ -21,6 +22,7 @@ func validate(scene: Node, _script: ScriptHandler, _slice: ScriptSlice):
 	if not verify(player.position.y < position, "player's y didn't increase when pressing jump"):
 		return
 	_validation_success()
+
 
 func validate_scene_and_script(scene: Node, _slice_properties: SliceProperties) -> void:
 	yield(get_tree(), "idle_frame")

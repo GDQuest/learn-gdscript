@@ -130,6 +130,7 @@ func set_errors(new_errors: Array) -> void:
 	errors = new_errors
 	_update_overlays()
 
+
 # DEPRECATED
 func set_script_slice(new_script_slice: ScriptSlice) -> void:
 	script_slice = new_script_slice
@@ -137,6 +138,7 @@ func set_script_slice(new_script_slice: ScriptSlice) -> void:
 	if Engine.editor_hint:
 		return
 	script_slice.current_text = ""
+
 
 # DEPRECATED
 func get_script_slice() -> ScriptSlice:
