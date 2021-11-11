@@ -10,9 +10,10 @@ var _scene: Node
 var _viewport := Viewport.new()
 var scene_paused := false setget set_scene_paused
 
+# DEPRECATED
 # Must be a SceneFiles resource
 export (Resource) var scene_files: Resource setget set_scene_files, get_scene_files
-
+export (Resource) var scene_properties: Resource setget set_scene_properties, get_scene_properties
 
 func _init() -> void:
 	_viewport.name = "Viewport"
@@ -22,6 +23,7 @@ func _init() -> void:
 func _ready() -> void:
 	get_tree().connect("screen_resized", self, "_on_screen_resized")
 	get_tree().call_deferred("emit_signal", "screen_resized")
+	LiveEditorState.connect("slice_changed", self, "_on_slice_changed")
 
 
 # Recursively pauses a node and its children
@@ -66,7 +68,7 @@ func toggle_scene_pause() -> void:
 func set_scene_paused(is_it: bool) -> void:
 	pause_scene(is_it)
 
-
+# DEPRECATED
 func set_scene_files(new_scene_files: Resource) -> void:
 	assert(new_scene_files != null, "no scene slices provided")
 	assert(
@@ -88,9 +90,29 @@ func set_scene_files(new_scene_files: Resource) -> void:
 	_viewport.size = _scene_files.scene_viewport_size
 	_viewport.add_child(_scene)
 
-
+# DEPRECATED
 func get_scene_files() -> SceneFiles:
 	return scene_files as SceneFiles
+
+func _on_slice_changed() -> void:
+	var slice := LiveEditorState.current_slice
+	set_scene_properties(slice.scene_properties)
+
+func set_scene_properties(new_scene_properties: SceneProperties) -> void:
+	if not (new_scene_properties is SceneProperties or new_scene_properties == null):
+		push_error("setting a scene that is invalid")
+		return
+	if scene_properties == new_scene_properties:
+		return
+	scene_properties = new_scene_properties
+	if not Engine.editor_hint and scene_properties != null:
+		scene_properties.scene.instance()
+		_viewport.size = scene_properties.viewport_size
+		_viewport.add_child(_scene)
+
+
+func get_scene_properties() -> SceneProperties:
+	return scene_properties as SceneProperties
 
 
 func _on_screen_resized() -> void:

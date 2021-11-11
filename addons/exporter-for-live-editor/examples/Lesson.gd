@@ -25,7 +25,10 @@ func _ready() -> void:
 		var progress = (float(index + 1) / _exercises.size()) * 100
 		var exercise := _exercises[index] as CourseExercise
 		exercise.progress = progress
-		exercise.visible = index == 0
+		if index == 0:
+			_activate_exercise(exercise, true)
+		else:
+			_activate_exercise(exercise, false)
 
 	next_button.connect("pressed", self, "_on_next_button_pressed")
 
@@ -45,4 +48,14 @@ func _on_next_button_pressed() -> void:
 		for index in _exercises.size():
 			var exercise := _exercises[index] as CourseExercise
 			var show = index == _current_exercise
-			exercise.visible = show
+			if show:
+				_activate_exercise(exercise, true)
+			else:
+				_activate_exercise(exercise, false)
+
+func _activate_exercise(exercise: CourseExercise, activate: bool) -> void:
+	if activate:
+		exercise.take_over_slice()
+		exercise.visible = true
+	else:
+		exercise.visible = false

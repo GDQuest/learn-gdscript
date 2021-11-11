@@ -20,6 +20,7 @@ tool
 class_name SliceEditor
 extends TextEdit
 
+# DEPRECATED
 const ScriptSlice := preload("../collections/ScriptSlice.gd")
 const CodeEditorEnhancer := preload("../utils/CodeEditorEnhancer.gd")
 const SliceEditorOverlay := preload("./SliceEditorOverlay.gd")
@@ -33,7 +34,9 @@ signal scroll_changed(vector2)
 var errors_overlay := SliceEditorOverlay.new()
 var errors_overlay_message: ErrorOverlayPopup = ErrorOverlayPopupScene.instance()
 
+# DEPRECATED
 var script_slice: ScriptSlice setget set_script_slice, get_script_slice
+var slice_properties: SliceProperties
 # Array<LanguageServerError>
 var errors := [] setget set_errors
 
@@ -127,7 +130,7 @@ func set_errors(new_errors: Array) -> void:
 	errors = new_errors
 	_update_overlays()
 
-
+# DEPRECATED
 func set_script_slice(new_script_slice: ScriptSlice) -> void:
 	script_slice = new_script_slice
 	text = ""
@@ -135,11 +138,14 @@ func set_script_slice(new_script_slice: ScriptSlice) -> void:
 		return
 	script_slice.current_text = ""
 
-
+# DEPRECATED
 func get_script_slice() -> ScriptSlice:
 	return script_slice
 
 
 func _on_text_changed() -> void:
+	# DEPRECATED
 	if script_slice != null:
 		script_slice.current_text = text
+	if slice_properties != null:
+		slice_properties.current_text = text

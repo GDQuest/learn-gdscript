@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://addons/exporter-for-live-editor/resources/gdscript_app_theme.tres" type="Theme" id=1]
+[ext_resource path="res://common/Game.live-editor/slices/Menu.set_score_if_highest.slice.tres" type="Resource" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Lesson.gd" type="Script" id=3]
-[ext_resource path="res://common/Game.live-editor.tres" type="Resource" id=4]
+[ext_resource path="res://common/Game.live-editor/slices/ObstacleDispenser.get_random.slice.tres" type="Resource" id=4]
 [ext_resource path="res://course/validator_comparison.gd" type="Script" id=5]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Exercise.tscn" type="PackedScene" id=6]
 [ext_resource path="res://course/validator_random.gd" type="Script" id=7]
@@ -42,6 +43,7 @@ margin_right = 1990.0
 margin_bottom = 1015.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+slice_properties = ExtResource( 4 )
 title = "Randomness"
 goal = "We need to spawn a random obstacle. 
 
@@ -49,9 +51,6 @@ There's an array of obstacles; Your objective:
 
 - make sure a random obstacle is selected every time
 - return it"
-scene_files = ExtResource( 4 )
-exported_script_path = "res://common/ObstacleDispenser.gd"
-slice_name = "get_random"
 hints = PoolStringArray( "You need to select a number between 0 and \"size\"", "use the `randi` function", "use the `%` operator", "randi % 4 returns a number between 0 and 3 (inclusive)" )
 
 [node name="validator_randomness" type="Node" parent="Exercises/ExerciseRandom"]
@@ -66,11 +65,11 @@ margin_right = 1990.0
 margin_bottom = 1015.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+slice_properties = ExtResource( 2 )
 title = "Comparisons"
 goal = "Compare two values, and then run a function only if a value is greater than the other.
 
 Place your cursor at the [code]◆[/code] and write the proper comparison"
-scene_files = ExtResource( 4 )
 hints = PoolStringArray( "Use comparison operators", "You want to compare \"maybe_highest_score\" and \"_highest_score\"", "The proper comparison is \">\"" )
 
 [node name="validator_lower" type="Node" parent="Exercises/ExerciseCompare"]

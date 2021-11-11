@@ -15,6 +15,7 @@ signal validation_completed(errors)
 export var title := ""
 
 
+# DEPRECATED
 # @abstract
 #
 # Must emit the `validation_completed` signal to complete validation.
@@ -28,6 +29,18 @@ func validate(_scene: Node, _script_handler: ScriptHandler, _script_text: Script
 	push_error(_ERROR)
 	_validation_success()
 
+# @abstract
+#
+# Must emit the `validation_completed` signal to complete validation.
+#
+# The signal is an array of errors. If the array is empty, the validation is
+# considered successful.
+#
+# Use the `_validation_success()` and `_validation_error([])` methods instead of
+# emitting the signal directly
+func validate_scene_and_script(_scene: Node, _slice_properties: SliceProperties) -> void:
+	push_error(_ERROR)
+	_validation_success()
 
 func _validation_success() -> void:
 	yield(get_tree(), "idle_frame")

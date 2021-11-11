@@ -12,7 +12,9 @@ extends Node
 
 enum STATUS { NONE, INVALID, VALID }
 
+# DEPRECATED
 const ScriptHandler := preload("../collections/ScriptHandler.gd")
+# DEPRECATED
 const ScriptSlice := preload("../collections/ScriptSlice.gd")
 const GROUP_NAME = "validator_checks"
 const SIGNAL_NAME = "request_validation"
@@ -21,8 +23,12 @@ signal validation_completed(errors)
 signal validation_completed_all(errors)
 
 var scene: Node
+# DEPRECATED
 var script_handler: ScriptHandler
+# DEPRECATED
 var script_slice: ScriptSlice
+
+var slice_properties: SliceProperties
 
 # keeps a cache of checks present in the project
 var _checks := {}
@@ -77,19 +83,25 @@ func _get_validators(check: Node) -> Array:
 
 # Validates a check by validating in turn all its nested validators
 func validate(check: Node) -> void:
+	# DEPRECATED
 	assert(scene, "scene is not set")
+	# DEPRECATED
 	assert(script_slice, "script_slice is not set")
+	# DEPRECATED
 	assert(script_handler, "script_handler is not set")
+	# DEPRECATED
 	if not scene or not script_slice or not script_handler:
 		push_error(
 			"Either the playing scene, or the script slice aren't set. Make sure you set them before validating"
 		)
 		return
+	var slice := LiveEditorState.current_slice
 	var validators := _get_validators(check)
 	var errors = []
 	for index in validators.size():
 		var validator: Validator = validators[index]
-		validator.validate(scene, script_handler, script_slice)
+		#validator.validate(scene, script_handler, script_slice)
+		validator.validate_scene_and_script(scene, slice)
 		errors += yield(validator, "validation_completed")
 	var status: int = STATUS.VALID if errors.size() == 0 else STATUS.INVALID
 	check.set_status(status)

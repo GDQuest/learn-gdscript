@@ -15,10 +15,11 @@ const LanguageServerError := preload("../lsp/LanguageServerError.gd")
 const ValidationManager := preload("../validation/ValidationManager.gd")
 const RevealerScene := preload("../ui/components/Revealer.tscn")
 
+export var slice_properties: Resource setget set_slice_properties, get_slice_properties
 export var title := "Title" setget set_title
 export (String, MULTILINE) var goal := "Goal" setget set_goal
 export (int, 0, 100) var progress := 0.0 setget set_progress
-export var scene_files: Resource setget set_scene_files, get_scene_files
+export var scene_files: Resource
 export (String, FILE, "*.gd") var exported_script_path: String setget set_exported_script_path
 export var slice_name: String setget set_slice_name
 export var hints := PoolStringArray()
@@ -39,7 +40,7 @@ onready var _checks_container := _lesson_panel.checks_container
 onready var _hints_container := _lesson_panel.hints_container
 
 onready var _code_editor := find_node("CodeEditor") as CodeEditor
-onready var _slice_editor := _code_editor.slice_editor
+onready var _slice_editor := _code_editor._slice_editor
 onready var _save_button := _code_editor.save_button
 onready var _pause_button := _code_editor.pause_button
 
@@ -56,12 +57,17 @@ func _ready() -> void:
 	_code_editor.connect("text_changed", self, "_on_code_editor_text_changed")
 
 
+func take_over_slice() -> void:
+	if slice_properties:
+		LiveEditorState.current_slice = slice_properties
+	else:
+		push_warning("No slice property set on Exercise %s"%[get_path()])
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_distraction_free_mode"):
 		var is_distraction_free := not _lesson_panel.visible
 		_lesson_panel.visible = is_distraction_free
 		_game_container.visible = is_distraction_free
-
 
 func _instantiate_checks():
 	var validators_number := 0
@@ -98,9 +104,10 @@ func _instantiate_hints():
 
 
 func _on_save_button_pressed() -> void:
-	var script_path := get_script_handler().file_path
-	var script_text := _code_editor.slice_editor.script_slice.current_full_text
-	var nodes_paths := get_script_handler().nodes_paths
+	var slice_properties := get_slice_properties()
+	var script_path := slice_properties.get_script_properties().file_path
+	var script_text := get_slice_properties().current_full_text
+	var nodes_paths := slice_properties.get_script_properties().nodes_paths
 	var verifier := ScriptVerifier.new(self, script_text)
 	verifier.test()
 	var errors: Array = yield(verifier, "errors")
@@ -150,7 +157,7 @@ func _send_exercise_validated_signal(is_valid: bool) -> void:
 	yield(get_tree(), "idle_frame")
 	emit_signal("exercise_validated", is_valid)
 
-
+# DEPRECATED
 func set_scene_files(new_scene_files: Resource) -> void:
 	if scene_files == new_scene_files or not new_scene_files:
 		return
@@ -165,16 +172,16 @@ func set_scene_files(new_scene_files: Resource) -> void:
 	_game_viewport.scene_files = scene_files
 	_validation_manager.scene = _game_viewport._scene
 
-
+# DEPRECATED
 func get_scene_files() -> SceneFiles:
 	return scene_files as SceneFiles
 
-
+# DEPRECATED
 func get_script_handler() -> ScriptHandler:
 	var file := get_scene_files().get_file(exported_script_path)
 	return file
 
-
+# DEPRECATED
 func get_slice() -> ScriptSlice:
 	var script_handler := get_script_handler()
 	if script_handler:
@@ -182,7 +189,7 @@ func get_slice() -> ScriptSlice:
 		return slice
 	return null
 
-
+# DEPRECATED
 func set_exported_script_path(path: String) -> void:
 	exported_script_path = path
 	if not scene_files:
@@ -198,7 +205,7 @@ func set_exported_script_path(path: String) -> void:
 		yield(self, "ready")
 	_validation_manager.script_handler = script_handler
 
-
+# DEPRECATED
 func set_slice_name(new_slice_name: String) -> void:
 	if not scene_files:
 		push_error("no scene files is set")
@@ -220,6 +227,18 @@ func set_slice_name(new_slice_name: String) -> void:
 	_slice_editor.script_slice = slice
 	_validation_manager.script_slice = slice
 
+
+func set_slice_properties(new_slice_properties: SliceProperties) -> void:
+	if not new_slice_properties is SliceProperties:
+		push_error("setting a scene that is invalid")
+		return
+	if slice_properties == new_slice_properties:
+		return
+	slice_properties = new_slice_properties
+
+
+func get_slice_properties() -> SliceProperties:
+	return slice_properties as SliceProperties
 
 func set_title(new_title: String) -> void:
 	title = new_title

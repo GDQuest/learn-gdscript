@@ -3,8 +3,8 @@
 [ext_resource path="res://addons/exporter-for-live-editor/resources/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Lesson.gd" type="Script" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/examples/Exercise.tscn" type="PackedScene" id=3]
+[ext_resource path="res://common/Game.live-editor/slices/Player.jump.slice.tres" type="Resource" id=4]
 [ext_resource path="res://course/validator_jump.gd" type="Script" id=5]
-[ext_resource path="res://common/Game.live-editor.tres" type="Resource" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.188235, 0.188235, 0.286275, 1 )
@@ -42,17 +42,13 @@ margin_right = 1990.0
 margin_bottom = 1015.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+slice_properties = ExtResource( 4 )
 title = "Jumping"
 goal = "The character's jump is controlled by a variable called \"_velocity_y\". Make sure you change this variable to make the character jump.
 
 A variable called \"jump_speed\" is available in the scope for you to use.
 
 Place your cursor at the [code]◆[/code] and write the increment"
-scene_files = ExtResource( 6 )
-exported_script_path = "res://common/Player.gd"
-slice_name = "jump"
-hints = PoolStringArray( "Change the variable [code]_velocity_y[/code]", "Remember to go up, you need to _lower_ y, not increase it", "If using \"jump_speed\" is too complex, you can just change the [code]_velocity_y[/code] number" )
-initial_editor_text = ""
 
 [node name="validator_jump" type="Node" parent="Exercises/ExerciseJump"]
 script = ExtResource( 5 )
