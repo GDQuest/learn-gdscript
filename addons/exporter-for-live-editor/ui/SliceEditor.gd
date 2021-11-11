@@ -80,9 +80,9 @@ func _on_scrollbar_value_changed(value: float, direction: int) -> void:
 
 
 func sync_text_with_slice() -> void:
-	if not script_slice:
+	if not slice_properties:
 		return
-	text = script_slice.slice_text
+	text = slice_properties.slice_text
 	_on_text_changed()
 
 

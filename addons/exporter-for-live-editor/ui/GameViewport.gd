@@ -45,6 +45,7 @@ static func pause_node(node: Node, pause := true, limit := 1000) -> void:
 func update_nodes(script: GDScript, node_paths: Array) -> void:
 	for node_path in node_paths:
 		if node_path is NodePath or node_path is String:
+			print(node_path)
 			var node = _scene.get_node_or_null(node_path)
 			if node:
 				try_validate_and_replace_script(node, script)
@@ -105,8 +106,9 @@ func set_scene_properties(new_scene_properties: SceneProperties) -> void:
 	if scene_properties == new_scene_properties:
 		return
 	scene_properties = new_scene_properties
-	if not Engine.editor_hint and scene_properties != null:
-		scene_properties.scene.instance()
+	
+	if (not Engine.editor_hint) and (scene_properties != null):
+		_scene = scene_properties.scene.instance()
 		_viewport.size = scene_properties.viewport_size
 		_viewport.add_child(_scene)
 
