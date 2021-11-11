@@ -2,10 +2,6 @@
 # and replace scripts on running nodes
 extends ViewportContainer
 
-const SceneFiles := preload("../collections/SceneFiles.gd")
-const ScriptHandler := preload("../collections/ScriptHandler.gd")
-const ScriptSlice := preload("../collections/ScriptSlice.gd")
-
 var _viewport := Viewport.new()
 var scene_paused := false setget set_scene_paused
 
@@ -56,4 +52,4 @@ func _on_screen_resized() -> void:
 func use_scene() -> void:
 	LiveEditorState.use_scene(_viewport)
 	_viewport.size = LiveEditorState.current_slice.get_scene_properties().viewport_size
-	# _on_screen_resized
+	# _on_screen_resized()

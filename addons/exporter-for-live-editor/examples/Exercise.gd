@@ -4,10 +4,6 @@ extends Control
 
 signal exercise_validated(is_valid)
 
-const SceneFiles := preload("../collections/SceneFiles.gd")
-const ScriptHandler := preload("../collections/ScriptHandler.gd")
-const ScriptSlice := preload("../collections/ScriptSlice.gd")
-const SlicesList := preload("../ui/SlicesList.gd")
 const GameViewport := preload("../ui/GameViewport.gd")
 const ValidatorCheck := preload("../ui/ValidatorCheck.gd")
 const ScriptVerifier := preload("../lsp/ScriptVerifier.gd")
@@ -37,9 +33,6 @@ onready var _checks_container := _lesson_panel.checks_container
 onready var _hints_container := _lesson_panel.hints_container
 
 onready var _code_editor := find_node("CodeEditor") as CodeEditor
-onready var _slice_editor := _code_editor._slice_editor
-onready var _save_button := _code_editor.save_button
-onready var _pause_button := _code_editor.pause_button
 
 
 func _ready() -> void:
@@ -49,9 +42,16 @@ func _ready() -> void:
 		return
 	_instantiate_checks()
 	_instantiate_hints()
-	_save_button.connect("pressed", self, "_on_save_button_pressed")
-	_pause_button.connect("pressed", self, "_on_pause_button_pressed")
+	_code_editor.connect("action", self, "_on_code_editor_button")
 	_code_editor.connect("text_changed", self, "_on_code_editor_text_changed")
+
+
+func _on_code_editor_button(which: String) -> void:
+	match which:
+		_code_editor.ACTIONS.SAVE:
+			_on_save_button_pressed()
+		_code_editor.ACTIONS.PAUSE:
+			_on_pause_button_pressed()
 
 
 func take_over_slice() -> void:
@@ -112,7 +112,7 @@ func _on_save_button_pressed() -> void:
 	verifier.test()
 	var errors: Array = yield(verifier, "errors")
 	if errors.size():
-		_slice_editor.errors = errors
+		_code_editor._slice_editor.errors = errors
 		for index in errors.size():
 			var error: LanguageServerError = errors[index]
 			LiveEditorMessageBus.print_error(

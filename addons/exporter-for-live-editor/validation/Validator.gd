@@ -2,8 +2,6 @@
 extends Node
 class_name Validator
 
-const ScriptHandler := preload("../collections/ScriptHandler.gd")
-const ScriptSlice := preload("../collections/ScriptSlice.gd")
 const _ERROR = "You should extend the Validator class and implement your own `validate` method."
 
 # @type Signal[LanguageError[]]
@@ -13,21 +11,6 @@ signal validation_completed(errors)
 # validator may be used by other modules to create UI nodes. In that case, the
 # title attribute can be used to derive a check widget
 export var title := ""
-
-
-# DEPRECATED
-# @abstract
-#
-# Must emit the `validation_completed` signal to complete validation.
-#
-# The signal is an array of errors. If the array is empty, the validation is
-# considered successful.
-#
-# Use the `_validation_success()` and `_validation_error([])` methods instead of
-# emitting the signal directly
-func validate(_scene: Node, _script_handler: ScriptHandler, _script_text: ScriptSlice) -> void:
-	push_error(_ERROR)
-	_validation_success()
 
 
 # @abstract

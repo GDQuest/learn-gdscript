@@ -10,8 +10,6 @@ var container := PluginButtons.new()
 var file_dialog := ScenesFileDialog.new()
 var config := preload("./utils/config.gd").new(self)
 
-const SceneFiles := preload("./collections/SceneFiles.gd")
-
 
 func _enter_tree() -> void:
 	add_autoload_singleton("LiveEditorMessageBus", LiveEditorMessageBus.resource_path)
@@ -25,7 +23,6 @@ func _enter_tree() -> void:
 
 	container.scene_path = config.scene_path
 	container.file_browser_button.icon = config.get_icon("File")
-	container.run_button.icon = config.get_icon("Play")
 	container.remove_button.icon = config.get_icon("Close")
 	container.pin_button.icon = config.get_icon("Pin")
 	container.save_button.icon = config.get_icon("Save")
@@ -33,7 +30,6 @@ func _enter_tree() -> void:
 
 	container.connect("scene_path_changed", self, "_on_scene_path_changed")
 	container.connect("file_browser_requested", file_dialog, "popup_centered_ratio")
-	container.connect("run_button_pressed", self, "_on_run_button_pressed")
 	container.connect("save_button_pressed", self, "_on_save_button_pressed")
 	container.connect("pin_button_toggled", config, "set_was_manually_set")
 
@@ -91,39 +87,6 @@ func _on_screen_changed(new_screen: String) -> void:
 		container.show()
 
 
-func _save(collector: SceneFiles) -> void:
-	var file_name = config.scene_path.get_basename() + ".live-editor.tres"
-	var success = ResourceSaver.save(file_name, collector)
-	if success == OK:
-		print("Wrote the configuration to %s" % [file_name])
-	else:
-		push_error("Could not write the configuration to %s" % [file_name])
-
-
-func _on_run_button_pressed() -> void:
-	if not config.scene_path:
-		return
-
-	var packed_scene: PackedScene = load(config.scene_path)
-	var scene = packed_scene.instance()
-
-	# Add the scene to a node so we can hide the node
-	# hiding the scene directly can fail if the scene
-	# doesn't extend CanvasItem
-	var node := Node2D.new()
-	add_child(node)
-	node.hide()
-	node.add_child(scene)
-
-	var collector: SceneFiles = SceneFiles.new()
-	collector.collect_scripts(packed_scene, scene)
-	_save(collector)
-
-	remove_child(node)
-	node.remove_child(scene)
-	scene.queue_free()
-
-
 func _on_save_button_pressed() -> void:
 	config.load_settings()  # Godot bug forces us to reload config
 	if not config.scene_path:
@@ -160,7 +123,6 @@ class PluginButtons:
 
 	var scene_path_control := LineEdit.new()
 	var file_browser_button := ToolButton.new()
-	var run_button := ToolButton.new()
 	var save_button := ToolButton.new()
 	var remove_button := ToolButton.new()
 	var pin_button := ToolButton.new()
@@ -168,7 +130,6 @@ class PluginButtons:
 
 	signal scene_path_changed(text)
 	signal file_browser_requested
-	signal run_button_pressed
 	signal pin_button_toggled
 	signal save_button_pressed
 
@@ -180,14 +141,12 @@ class PluginButtons:
 		add_child(file_browser_button)
 		add_child(remove_button)
 		add_child(pin_button)
-		add_child(run_button)
 		add_child(save_button)
 
 		scene_path_control.connect("text_changed", self, "_on_scene_path_text_changed")
 		file_browser_button.connect("pressed", self, "emit_signal", ["file_browser_requested"])
 		remove_button.connect("pressed", self, "_on_remove_button_pressed")
 		pin_button.connect("toggled", self, "_on_pin_button_toggled")
-		run_button.connect("pressed", self, "emit_signal", ["run_button_pressed"])
 		save_button.connect("pressed", self, "emit_signal", ["save_button_pressed"])
 
 	func _on_scene_path_text_changed(new_text: String):

@@ -8,10 +8,6 @@ extends Node
 
 enum STATUS { NONE, INVALID, VALID }
 
-# DEPRECATED
-const ScriptHandler := preload("../collections/ScriptHandler.gd")
-# DEPRECATED
-const ScriptSlice := preload("../collections/ScriptSlice.gd")
 const GROUP_NAME = "validator_checks"
 const SIGNAL_NAME = "request_validation"
 
