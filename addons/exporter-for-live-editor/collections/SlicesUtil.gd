@@ -94,13 +94,15 @@ func _add_node_path_to_script(root_scene: Node, script: GDScript, node: Node) ->
 	var script_properties_path := _generate_save_path(
 		RESOURCE_TYPES.SCRIPT, script.resource_path.get_file()
 	)
+	prints(node_path, script_properties_path)
 	var script_already_exists := File.new().file_exists(script_properties_path)
 	var script_properties := (
 		(load(script_properties_path) as ScriptProperties)
 		if script_already_exists
 		else _parse_new_script(script)
 	)
-	script_properties.nodes_paths.append(node_path)
+	if script_properties.nodes_paths.find(node_path) < 0:
+		script_properties.nodes_paths.append(node_path)
 	_save(RESOURCE_TYPES.SCRIPT, script_properties)
 
 
