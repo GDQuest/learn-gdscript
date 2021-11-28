@@ -1,20 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://course/Course.gd" type="Script" id=1]
-[ext_resource path="res://addons/exporter-for-live-editor/resources/fonts/font_title.tres" type="DynamicFont" id=2]
-[ext_resource path="res://addons/exporter-for-live-editor/resources/fonts/font_title_big.tres" type="DynamicFont" id=3]
+[ext_resource path="res://course/UILesson.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/exporter-for-live-editor/resources/gdscript_app_theme.tres" type="Theme" id=4]
-[ext_resource path="res://addons/exporter-for-live-editor/ui/icons/valid.svg" type="Texture" id=5]
-[ext_resource path="res://course/LessonSummary.gd" type="Script" id=6]
-[ext_resource path="res://addons/exporter-for-live-editor/ui/icons/none.svg" type="Texture" id=7]
-[ext_resource path="res://addons/exporter-for-live-editor/ui/icons/invalid.svg" type="Texture" id=8]
-[ext_resource path="res://course/Lesson1.tscn" type="PackedScene" id=9]
-[ext_resource path="res://course/screenshot.png" type="Texture" id=10]
-[ext_resource path="res://course/TextBlockWithImage.tscn" type="PackedScene" id=11]
-[ext_resource path="res://course/Lesson2.tscn" type="PackedScene" id=12]
-
-[sub_resource type="Theme" id=1]
-default_font = ExtResource( 2 )
 
 [node name="Course" type="MarginContainer"]
 anchor_right = 1.0
@@ -39,111 +27,4 @@ margin_bottom = 1070.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 800.0
-margin_bottom = 1060.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 6
-
-[node name="Title" type="RichTextLabel" parent="ScrollContainer/PanelContainer" groups=["navigation_text"]]
-margin_right = 800.0
-margin_bottom = 41.0
-custom_fonts/normal_font = ExtResource( 3 )
-bbcode_enabled = true
-bbcode_text = "Title"
-text = "Title"
-fit_content_height = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/PanelContainer"]
-margin_top = 47.0
-margin_right = 800.0
-margin_bottom = 77.0
-custom_constants/separation = 30
-
-[node name="SubTitle" type="RichTextLabel" parent="ScrollContainer/PanelContainer" groups=["navigation_text"]]
-margin_top = 83.0
-margin_right = 800.0
-margin_bottom = 115.0
-custom_fonts/normal_font = ExtResource( 2 )
-bbcode_enabled = true
-bbcode_text = "subtitle"
-text = "subtitle"
-fit_content_height = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextBlockWithImage" parent="ScrollContainer/PanelContainer" instance=ExtResource( 11 )]
-margin_top = 121.0
-margin_bottom = 421.0
-rect_min_size = Vector2( 0, 300 )
-size_flags_vertical = 1
-text = "Eat all the power cords play time please stop looking at your phone and pet me milk the cow. Sugar, my siamese, stalks me (in a good way), day and night.
-
-Meowzer pose purrfectly to show my beauty. Naughty running cat.
-
-Meow all night the fat cat sat on the mat bat away with paws."
-texture = ExtResource( 10 )
-
-[node name="TextBlockWithImage3" parent="ScrollContainer/PanelContainer" instance=ExtResource( 11 )]
-margin_top = 427.0
-margin_bottom = 727.0
-rect_min_size = Vector2( 0, 300 )
-size_flags_vertical = 1
-text = "I show my fluffy belly but it's a trap! If you pet it i will tear up your hand.
-
-Lick the other cats. Scratch the postman wake up lick paw wake up owner meow meow sleep on keyboard.
-
-Push your water glass on the floor climb into cupboard and lick the salt off rice cakes yet milk the cow playing with balls of wool..."
-texture = ExtResource( 10 )
-order = 1
-
-[node name="HSeparator" type="HSeparator" parent="ScrollContainer/PanelContainer"]
-margin_top = 733.0
-margin_right = 800.0
-margin_bottom = 763.0
-custom_constants/separation = 30
-
-[node name="SubTitle2" type="RichTextLabel" parent="ScrollContainer/PanelContainer" groups=["navigation_text"]]
-margin_top = 769.0
-margin_right = 800.0
-margin_bottom = 801.0
-custom_fonts/normal_font = ExtResource( 2 )
-bbcode_enabled = true
-bbcode_text = "Lessons"
-text = "Lessons"
-fit_content_height = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LessonSummary" type="HBoxContainer" parent="ScrollContainer/PanelContainer"]
-margin_top = 807.0
-margin_right = 800.0
-margin_bottom = 854.0
-theme = SubResource( 1 )
-script = ExtResource( 6 )
-text = "Lesson 1"
-none_texture = ExtResource( 7 )
-valid_texture = ExtResource( 5 )
-invalid_texture = ExtResource( 8 )
-scene_file = ExtResource( 9 )
-button_text = "Go to Lesson 1"
-progress = 23
-
-[node name="LessonSummary2" type="HBoxContainer" parent="ScrollContainer/PanelContainer"]
-margin_top = 860.0
-margin_right = 800.0
-margin_bottom = 907.0
-theme = SubResource( 1 )
-script = ExtResource( 6 )
-text = "Lesson 2"
-none_texture = ExtResource( 7 )
-valid_texture = ExtResource( 5 )
-invalid_texture = ExtResource( 8 )
-scene_file = ExtResource( 12 )
-button_text = "Go to Lesson 2"
+[node name="UILesson" parent="ScrollContainer" instance=ExtResource( 2 )]

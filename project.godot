@@ -104,6 +104,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/exporter-for-live-editor/collections/SlicesUtil.gd"
 }, {
+"base": "HBoxContainer",
+"class": "UIContentBlock",
+"language": "GDScript",
+"path": "res://course/UIContentBlock.gd"
+}, {
+"base": "Control",
+"class": "UILesson",
+"language": "GDScript",
+"path": "res://course/UILesson.gd"
+}, {
 "base": "Node",
 "class": "Validator",
 "language": "GDScript",
@@ -134,6 +144,8 @@ _global_script_class_icons={
 "SliceEditor": "",
 "SliceProperties": "",
 "SlicesUtils": "",
+"UIContentBlock": "",
+"UILesson": "",
 "Validator": "",
 "ViewModeToggleButton": ""
 }
@@ -172,7 +184,7 @@ enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://ad
 
 [exporter-for-live-editor]
 
-scene="res://course/Navigator.tscn"
+scene="res://course/UILesson.tscn"
 
 [input]
 

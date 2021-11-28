@@ -1,9 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://course/TextBlockWithImage.gd" type="Script" id=1]
-[ext_resource path="res://course/screenshot.png" type="Texture" id=2]
+[ext_resource path="res://course/UIContentBlock.gd" type="Script" id=1]
 
-[node name="TextBlockWithImage" type="HBoxContainer"]
+[node name="UIContentBlock" type="HBoxContainer"]
 margin_top = 131.0
 margin_right = 800.0
 margin_bottom = 451.0
@@ -16,7 +15,7 @@ __meta__ = {
 }
 
 [node name="Panel" type="PanelContainer" parent="."]
-margin_right = 390.0
+margin_right = 800.0
 margin_bottom = 320.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -24,7 +23,7 @@ size_flags_vertical = 3
 [node name="Panel" type="Panel" parent="Panel"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 383.0
+margin_right = 793.0
 margin_bottom = 313.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -39,7 +38,7 @@ __meta__ = {
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel/Panel/MarginContainer" groups=["navigation_text"]]
-margin_right = 376.0
+margin_right = 786.0
 margin_bottom = 306.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -50,12 +49,3 @@ fit_content_height = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_left = 400.0
-margin_right = 800.0
-margin_bottom = 320.0
-rect_min_size = Vector2( 400, 0 )
-texture = ExtResource( 2 )
-expand = true
-stretch_mode = 6
