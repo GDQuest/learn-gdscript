@@ -1,0 +1,91 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/course-builder-for-live-editor/ui/LessonPracticeHint.gd" type="Script" id=1]
+
+[node name="LessonPracticeHint" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundPanel" type="PanelContainer" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 1918.0
+margin_bottom = 1078.0
+mouse_filter = 1
+
+[node name="Layout" type="HBoxContainer" parent="BackgroundPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1909.0
+margin_bottom = 1069.0
+
+[node name="DragIcon" type="TextureRect" parent="BackgroundPanel/Layout"]
+visible = false
+margin_top = 531.0
+margin_bottom = 531.0
+mouse_default_cursor_shape = 13
+size_flags_vertical = 4
+
+[node name="SortButtons" type="VBoxContainer" parent="BackgroundPanel/Layout"]
+margin_right = 12.0
+margin_bottom = 1062.0
+alignment = 1
+
+[node name="SortUpButton" type="Button" parent="BackgroundPanel/Layout/SortButtons"]
+margin_top = 509.0
+margin_right = 12.0
+margin_bottom = 529.0
+hint_tooltip = "Move up by one position."
+flat = true
+
+[node name="SortDownButton" type="Button" parent="BackgroundPanel/Layout/SortButtons"]
+margin_top = 533.0
+margin_right = 12.0
+margin_bottom = 553.0
+hint_tooltip = "Move down by one position."
+flat = true
+
+[node name="IndexLabel" type="Label" parent="BackgroundPanel/Layout"]
+margin_left = 16.0
+margin_right = 28.0
+margin_bottom = 14.0
+size_flags_vertical = 0
+text = "1."
+
+[node name="TextEdit" type="TextEdit" parent="BackgroundPanel/Layout"]
+margin_left = 32.0
+margin_right = 1886.0
+margin_bottom = 1062.0
+rect_min_size = Vector2( 0, 60 )
+size_flags_horizontal = 3
+
+[node name="RemoveButton" type="Button" parent="BackgroundPanel/Layout"]
+margin_left = 1890.0
+margin_right = 1902.0
+margin_bottom = 1062.0
+flat = true
+
+[node name="DropTarget" type="Control" parent="."]
+visible = false
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 1918.0
+margin_bottom = 1078.0
+
+[node name="ConfirmDialog" type="ConfirmationDialog" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 1918.0
+margin_bottom = 1078.0
+rect_min_size = Vector2( 380, 80 )
+window_title = ""
+dialog_autowrap = true

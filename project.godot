@@ -14,6 +14,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/exporter-for-live-editor/ui/CodeEditor.gd"
 }, {
+"base": "Resource",
+"class": "ContentBlock",
+"language": "GDScript",
+"path": "res://resources/ContentBlock.gd"
+}, {
+"base": "Resource",
+"class": "Course",
+"language": "GDScript",
+"path": "res://resources/Course.gd"
+}, {
 "base": "Control",
 "class": "CourseExercise",
 "language": "GDScript",
@@ -28,6 +38,11 @@ _global_script_classes=[ {
 "class": "LanguageServerError",
 "language": "GDScript",
 "path": "res://addons/exporter-for-live-editor/lsp/LanguageServerError.gd"
+}, {
+"base": "Resource",
+"class": "Lesson",
+"language": "GDScript",
+"path": "res://resources/Lesson.gd"
 }, {
 "base": "ColorRect",
 "class": "LessonDonePopup",
@@ -49,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/exporter-for-live-editor/examples/OutputVSplitContainer.gd"
 }, {
+"base": "Resource",
+"class": "Practice",
+"language": "GDScript",
+"path": "res://resources/Practice.gd"
+}, {
 "base": "Container",
 "class": "Revealer",
 "language": "GDScript",
@@ -63,6 +83,11 @@ _global_script_classes=[ {
 "class": "ScriptProperties",
 "language": "GDScript",
 "path": "res://addons/exporter-for-live-editor/collections/ScriptProperties.gd"
+}, {
+"base": "Resource",
+"class": "ScriptSlice",
+"language": "GDScript",
+"path": "res://resources/ScriptSlice.gd"
 }, {
 "base": "TextEdit",
 "class": "SliceEditor",
@@ -91,16 +116,21 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "CodeEditor": "",
+"ContentBlock": "",
+"Course": "",
 "CourseExercise": "",
 "ErrorOverlayPopup": "",
 "LanguageServerError": "",
+"Lesson": "",
 "LessonDonePopup": "",
 "LessonPanel": "",
 "OutputConsole": "",
 "OutputVSplitContainer": "",
+"Practice": "",
 "Revealer": "res://addons/exporter-for-live-editor/ui/Revealer.svg",
 "SceneProperties": "",
 "ScriptProperties": "",
+"ScriptSlice": "",
 "SliceEditor": "",
 "SliceProperties": "",
 "SlicesUtils": "",
@@ -138,11 +168,11 @@ window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://addons/editor_icon_previewer/plugin.cfg", "res://addons/exporter-for-live-editor/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://addons/course-builder-for-live-editor/plugin.cfg", "res://addons/exporter-for-live-editor/plugin.cfg" )
 
 [exporter-for-live-editor]
 
-scene="res://addons/exporter-for-live-editor/ui/CodeEditor.tscn"
+scene="res://course/Navigator.tscn"
 
 [input]
 
