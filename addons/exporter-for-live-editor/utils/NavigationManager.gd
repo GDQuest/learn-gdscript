@@ -5,7 +5,7 @@ const RegExp = preload("./RegExp.gd")
 signal transition_in_completed
 signal transition_out_completed
 
-var _is_path_regex := RegExp.compile("^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)")
+var _path_regex := RegExp.compile("^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)")
 
 # Stack of screens. Screens are pushed to the head, so index 0 represents the
 # latest screen
@@ -22,7 +22,7 @@ var root_container: Node
 # switch this off to remove transitions
 var use_transitions := false
 
-var current_url := ScreenUrl.new(_is_path_regex, "res://")
+var current_url := ScreenUrl.new(_path_regex, "res://")
 
 var breadcrumbs: PoolStringArray setget _ready_only_setter, get_breadcrumbs
 
@@ -56,6 +56,7 @@ func connect_rich_texts_group(group_name := "navigation_text") -> void:
 
 
 # Loads a scene and adds it to the stack.
+#
 # a url is of the form res://scene.tscn, user://scene.tscn, //scene.tscn,  or 
 # /scene.tscn ("res:" will be appended automatically)
 func open_url(data: String) -> void:
@@ -63,7 +64,7 @@ func open_url(data: String) -> void:
 	if not data:
 		push_warning("no url provided")
 		return
-	var url = ScreenUrl.new(_is_path_regex, data)
+	var url = ScreenUrl.new(_path_regex, data)
 	if not url.is_valid:
 		return
 	var scene: PackedScene = load(url.href)
@@ -75,7 +76,7 @@ func open_url(data: String) -> void:
 # Pushes a screen on top of the stack and transitions it in
 func _push_screen(screen: Node) -> void:
 	var previous_node := _get_topmost_child()
-	screens_stack.push_front(screen)
+	screens_stack.push_back(screen)
 	_add_child_to_root_container(screen)
 	_transition(screen)
 	if previous_node:
@@ -86,8 +87,10 @@ func _push_screen(screen: Node) -> void:
 
 # Transitions a screen in. This is there as a placeholder, we probably want 
 # something prettier.
+#
 # Anything can go in there, as long as "transition_in_completed" or 
-# "transition_out_completed" are emitted at the end
+# "transition_out_completed" are emitted at the end.
+#
 # 'Screen' is assumed to be a CanvasItem, this method will have issues otherwise 
 # turn transitions off by setting `use_transitions` to false to skip transitions
 func _transition(screen: CanvasItem, direction_in := true) -> void:
@@ -134,7 +137,7 @@ func back() -> void:
 		push_warning("No screen to pop")
 		return
 
-	var previous_node: Node = screens_stack.pop_front()
+	var previous_node: Node = screens_stack.pop_back()
 
 	var next_in_queue := _get_topmost_child()
 	if next_in_queue:
@@ -149,7 +152,7 @@ func back() -> void:
 
 func _set_current_url_from_scene(scene: Node = null, is_back := false) -> void:
 	var path = scene.filename if scene and scene.filename else "res://"
-	set_current_url(ScreenUrl.new(_is_path_regex, path))
+	set_current_url(ScreenUrl.new(_path_regex, path))
 
 
 func set_current_url(url: ScreenUrl, is_back := false) -> void:
@@ -229,7 +232,6 @@ func _push_javascript_state(url: ScreenUrl) -> void:
 	if not _js_available:
 		return
 	_js_history.pushState(url.href, '', url.path)
-	#JavaScript.eval("history && 'pushState' in history && history.pushState(\"%s\", '', \"%s\")"%[url], true)
 
 
 func _pop_javascript_state() -> void:
@@ -275,12 +277,12 @@ class ScreenUrl:
 	var href: String setget , _to_string
 	var is_valid := true
 
-	func _init(_is_path_regex: RegEx, data: String) -> void:
-		var regex_result := _is_path_regex.search(data)
+	func _init(_path_regex: RegEx, data: String) -> void:
+		var regex_result := _path_regex.search(data)
 		protocol = regex_result.get_string("prefix")
 		path = regex_result.get_string("url")
 		if regex_result:
-			if protocol == "//" or protocol == "/":
+			if protocol in ["//", "/"]:
 				protocol = "res://"
 		else:
 			is_valid = false
