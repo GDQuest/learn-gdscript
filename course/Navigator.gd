@@ -1,16 +1,17 @@
 extends PanelContainer
 
-onready var back_button := $VBoxContainer/Buttons/HBoxContainer/BackButton as Button
-onready var title_label := $VBoxContainer/Buttons/HBoxContainer/BreadCrumbs as Label
-onready var root_container := $VBoxContainer/PanelContainer as Container
-
 export var scene_file: PackedScene
+
+onready var _back_button := $VBoxContainer/Buttons/HBoxContainer/BackButton as Button
+onready var _label := $VBoxContainer/Buttons/HBoxContainer/BreadCrumbs as Label
+onready var _root_container := $VBoxContainer/PanelContainer as Container
 
 onready var _scene_path := scene_file.resource_path
 
 
 func _ready() -> void:
-	NavigationManager.root_container = root_container
+	_back_button.connect("pressed", NavigationManager, "back")
+	NavigationManager.root_container = _root_container
 	NavigationManager.connect("transition_in_completed", self, "_on_navigation_transition")
 	NavigationManager.connect("transition_out_completed", self, "_on_navigation_transition")
 	NavigationManager.open_url(_scene_path)
@@ -23,5 +24,5 @@ func _input(event: InputEvent) -> void:
 
 func _on_navigation_transition():
 	var is_root_screen = NavigationManager.current_url.path == _scene_path
-	back_button.disabled = is_root_screen
-	title_label.text = NavigationManager.breadcrumbs.join("/")
+	_back_button.disabled = is_root_screen
+	_label.text = NavigationManager.breadcrumbs.join("/")
