@@ -43,7 +43,7 @@ func _on_next_button_pressed() -> void:
 		emit_signal("lesson_completed")
 		var popup: LessonDonePopup = LessonDonePopup.instance()
 		add_child(popup)
-		popup.connect("pressed", NavigationManager, "back")
+		popup.connect("pressed", Events, "emit_signal", ["lesson_end_popup_closed"])
 	else:
 		for index in _exercises.size():
 			var exercise := _exercises[index] as CourseExercise

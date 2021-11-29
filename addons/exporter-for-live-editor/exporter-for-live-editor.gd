@@ -2,7 +2,6 @@ tool
 extends EditorPlugin
 
 const LiveEditorMessageBus := preload("./utils/LiveEditorMessageBus.gd")
-const NavigationManager := preload("./utils/NavigationManager.gd")
 const UserProfiles := preload("./utils/UserProfiles.gd")
 const LiveEditorState := preload("./utils/LiveEditorState.gd")
 
@@ -13,7 +12,6 @@ var config := preload("./utils/config.gd").new(self)
 
 func _enter_tree() -> void:
 	add_autoload_singleton("LiveEditorMessageBus", LiveEditorMessageBus.resource_path)
-	add_autoload_singleton("NavigationManager", NavigationManager.resource_path)
 	add_autoload_singleton("UserProfiles", UserProfiles.resource_path)
 	add_autoload_singleton("LiveEditorState", LiveEditorState.resource_path)
 
@@ -44,7 +42,6 @@ func _exit_tree() -> void:
 	container.queue_free()
 	file_dialog.queue_free()
 	remove_autoload_singleton("LiveEditorMessageBus")
-	remove_autoload_singleton("NavigationManager")
 	remove_autoload_singleton("UserProfiles")
 	remove_autoload_singleton("LiveEditorState")
 

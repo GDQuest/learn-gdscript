@@ -41,10 +41,10 @@ func _get_scene_url() -> String:
 
 func set_scene_file(new_scene_file: PackedScene) -> void:
 	scene_file = new_scene_file
-	var _scene_url := scene_file.resource_path
-	if _button.is_connected("pressed", NavigationManager, "open_url"):
-		_button.disconnect("pressed", NavigationManager, "open_url")
-	_button.connect("pressed", NavigationManager, "open_url", [_scene_url])
+	var scene_url := scene_file.resource_path
+	if _button.is_connected("pressed", Events, "emit_signal"):
+		_button.disconnect("pressed", Events, "emit_signal")
+	_button.connect("pressed", Events, "emit_signal", ["lesson_start_requested", scene_url])
 
 
 func set_button_text(new_text: String) -> void:
