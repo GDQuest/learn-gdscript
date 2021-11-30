@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/ui/components/ViewModeToggleButton.gd" type="Script" id=1]
+[ext_resource path="res://addons/gdscript-slice-exporter/ui/icons/icon_gamepad.png" type="Texture" id=2]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/button_normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://addons/gdscript-slice-exporter/ui/icons/icon_console.png" type="Texture" id=5]
+
+[node name="ViewModeToggleButton" type="PanelContainer"]
+margin_right = 166.0
+margin_bottom = 82.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 252.0
+margin_bottom = 75.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 252.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 237.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+custom_constants/separation = 8
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameButton" type="Button" parent="MarginContainer/HBoxContainer"]
+margin_right = 98.0
+margin_bottom = 52.0
+toggle_mode = true
+pressed = true
+text = "Game"
+icon = ExtResource( 2 )
+flat = true
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer"]
+margin_left = 106.0
+margin_right = 110.0
+margin_bottom = 52.0
+
+[node name="ConsoleButton" type="Button" parent="MarginContainer/HBoxContainer"]
+margin_left = 118.0
+margin_right = 229.0
+margin_bottom = 52.0
+toggle_mode = true
+pressed = true
+text = "Console"
+icon = ExtResource( 5 )
+flat = true

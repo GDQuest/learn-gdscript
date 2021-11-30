@@ -1,0 +1,137 @@
+[gd_resource type="Theme" load_steps=26 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/fonts/font_text.tres" type="DynamicFont" id=1]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/vscrollbar_grabber.tres" type="StyleBox" id=2]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/button_normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/textedit_stylebox.tres" type="StyleBox" id=4]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/button_hover.tres" type="StyleBox" id=5]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/button_empty.tres" type="StyleBox" id=6]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/fonts/font_title.tres" type="DynamicFont" id=7]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/fonts/font_percent.tres" type="DynamicFont" id=8]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/progress_bar_background.tres" type="StyleBox" id=9]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/progress_bar_foreground.tres" type="StyleBox" id=10]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/fonts/font_text_bold.tres" type="DynamicFont" id=11]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/fonts/font_text_bold_italics.tres" type="DynamicFont" id=12]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/fonts/font_code.tres" type="DynamicFont" id=13]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/fonts/font_text_italics.tres" type="DynamicFont" id=14]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/vscrollbar_grabber_pressed.tres" type="StyleBox" id=15]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/vscrollbar_grabber_highlight.tres" type="StyleBox" id=16]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/vscrollbar_scroll.tres" type="StyleBox" id=17]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/button_pressed.tres" type="StyleBox" id=18]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/stylebox_empty.tres" type="StyleBox" id=19]
+[ext_resource path="res://addons/gdscript-slice-exporter/resources/button_disabled.tres" type="StyleBox" id=20]
+
+[sub_resource type="StyleBoxLine" id=1]
+color = Color( 0.290196, 0.294118, 0.388235, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxLine" id=5]
+color = Color( 0.290196, 0.294118, 0.388235, 1 )
+thickness = 2
+vertical = true
+
+[resource]
+default_font = ExtResource( 1 )
+Button/colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+Button/colors/font_color_disabled = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+Button/colors/font_color_hover = Color( 1, 1, 1, 1 )
+Button/colors/font_color_pressed = Color( 0.14902, 0.776471, 0.968627, 1 )
+Button/colors/icon_color_hover = Color( 0.960784, 0.980392, 0.980392, 1 )
+Button/colors/icon_color_pressed = Color( 0.14902, 0.776471, 0.968627, 1 )
+Button/constants/hseparation = 12
+Button/fonts/font = ExtResource( 7 )
+Button/styles/disabled = ExtResource( 20 )
+Button/styles/focus = ExtResource( 6 )
+Button/styles/hover = ExtResource( 5 )
+Button/styles/normal = ExtResource( 3 )
+Button/styles/pressed = ExtResource( 18 )
+HBoxContainer/constants/separation = 16
+HSeparator/constants/separation = 8
+HSeparator/styles/separator = SubResource( 1 )
+MarginContainer/constants/margin_bottom = 20
+MarginContainer/constants/margin_left = 20
+MarginContainer/constants/margin_right = 20
+MarginContainer/constants/margin_top = 20
+Panel/styles/panel = SubResource( 2 )
+PanelContainer/styles/panel = ExtResource( 19 )
+ProgressBar/colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
+ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+ProgressBar/fonts/font = ExtResource( 8 )
+ProgressBar/styles/bg = ExtResource( 9 )
+ProgressBar/styles/fg = ExtResource( 10 )
+RichTextLabel/colors/default_color = Color( 0.960784, 0.980392, 0.980392, 1 )
+RichTextLabel/colors/font_color_selected = Color( 0.49, 0.49, 0.49, 1 )
+RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+RichTextLabel/colors/selection_color = Color( 0.145098, 0.776471, 0.968627, 0.290196 )
+RichTextLabel/constants/line_separation = 1
+RichTextLabel/constants/shadow_as_outline = 0
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/table_hseparation = 3
+RichTextLabel/constants/table_vseparation = 3
+RichTextLabel/fonts/bold_font = ExtResource( 11 )
+RichTextLabel/fonts/bold_italics_font = ExtResource( 12 )
+RichTextLabel/fonts/italics_font = ExtResource( 14 )
+RichTextLabel/fonts/mono_font = ExtResource( 13 )
+RichTextLabel/fonts/normal_font = ExtResource( 1 )
+RichTextLabel/styles/focus = SubResource( 3 )
+RichTextLabel/styles/normal = null
+ScrollContainer/styles/bg = null
+TextEdit/colors/background_color = Color( 0, 0, 0, 0 )
+TextEdit/colors/bookmark_color = Color( 0.08, 0.49, 0.98, 1 )
+TextEdit/colors/brace_mismatch_color = Color( 1, 0.2, 0.2, 1 )
+TextEdit/colors/breakpoint_color = Color( 0.8, 0.8, 0.4, 0.2 )
+TextEdit/colors/caret_background_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/caret_color = Color( 0.88, 0.88, 0.88, 1 )
+TextEdit/colors/code_folding_color = Color( 0.8, 0.8, 0.8, 0.8 )
+TextEdit/colors/completion_background_color = Color( 0.17, 0.16, 0.2, 1 )
+TextEdit/colors/completion_existing_color = Color( 0.87, 0.87, 0.87, 0.13 )
+TextEdit/colors/completion_font_color = Color( 0.67, 0.67, 0.67, 1 )
+TextEdit/colors/completion_scroll_color = Color( 1, 1, 1, 1 )
+TextEdit/colors/completion_selected_color = Color( 0.26, 0.26, 0.27, 1 )
+TextEdit/colors/current_line_color = Color( 0.25, 0.25, 0.26, 0.8 )
+TextEdit/colors/executing_line_color = Color( 0.2, 0.8, 0.2, 0.4 )
+TextEdit/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+TextEdit/colors/font_color_readonly = Color( 0.88, 0.88, 0.88, 0.5 )
+TextEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
+TextEdit/colors/function_color = Color( 0.4, 0.64, 0.81, 1 )
+TextEdit/colors/line_number_color = Color( 0.67, 0.67, 0.67, 0.4 )
+TextEdit/colors/mark_color = Color( 1, 0.4, 0.4, 0.4 )
+TextEdit/colors/member_variable_color = Color( 0.9, 0.31, 0.35, 1 )
+TextEdit/colors/number_color = Color( 0.92, 0.58, 0.2, 1 )
+TextEdit/colors/safe_line_number_color = Color( 0.67, 0.78, 0.67, 0.6 )
+TextEdit/colors/selection_color = Color( 0.49, 0.49, 0.49, 1 )
+TextEdit/colors/symbol_color = Color( 0.94, 0.94, 0.94, 1 )
+TextEdit/colors/word_highlighted_color = Color( 0.8, 0.9, 0.9, 0.15 )
+TextEdit/constants/completion_lines = 5
+TextEdit/constants/completion_max_width = 50
+TextEdit/constants/completion_scroll_width = 3
+TextEdit/constants/line_spacing = 4
+TextEdit/fonts/font = ExtResource( 13 )
+TextEdit/icons/fold = null
+TextEdit/icons/folded = null
+TextEdit/icons/space = null
+TextEdit/icons/tab = null
+TextEdit/styles/completion = null
+TextEdit/styles/focus = null
+TextEdit/styles/normal = ExtResource( 4 )
+TextEdit/styles/read_only = null
+VBoxContainer/constants/separation = 16
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/decrement_pressed = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/icons/increment_pressed = null
+VScrollBar/styles/grabber = ExtResource( 2 )
+VScrollBar/styles/grabber_highlight = ExtResource( 16 )
+VScrollBar/styles/grabber_pressed = ExtResource( 15 )
+VScrollBar/styles/scroll = ExtResource( 17 )
+VScrollBar/styles/scroll_focus = SubResource( 4 )
+VSeparator/constants/separation = 8
+VSeparator/styles/separator = SubResource( 5 )

@@ -1,0 +1,189 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://addons/gdscript-course-builder/ui/LessonContentBlock.gd" type="Script" id=1]
+[ext_resource path="res://addons/gdscript-course-builder/ui/TextEditDialog.tscn" type="PackedScene" id=2]
+
+[sub_resource type="Image" id=8]
+data = {
+"data": PoolByteArray( 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42, 37, 37, 42 ),
+"format": "RGB8",
+"height": 8,
+"mipmaps": false,
+"width": 8
+}
+
+[sub_resource type="ImageTexture" id=2]
+flags = 4
+flags = 4
+image = SubResource( 8 )
+size = Vector2( 8, 8 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = SubResource( 2 )
+region_rect = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="Image" id=9]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"format": "LumAlpha8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id=5]
+flags = 4
+flags = 4
+image = SubResource( 9 )
+size = Vector2( 16, 16 )
+
+[node name="LessonContentBlock" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 4
+custom_constants/margin_top = 2
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundPanel" type="PanelContainer" parent="."]
+margin_left = 4.0
+margin_top = 2.0
+margin_right = 1916.0
+margin_bottom = 1078.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 7 )
+
+[node name="Layout" type="VBoxContainer" parent="BackgroundPanel"]
+margin_right = 1912.0
+margin_bottom = 1076.0
+
+[node name="HeaderBar" type="HBoxContainer" parent="BackgroundPanel/Layout"]
+margin_right = 1912.0
+margin_bottom = 22.0
+
+[node name="DragIcon" type="TextureRect" parent="BackgroundPanel/Layout/HeaderBar"]
+margin_top = 3.0
+margin_right = 16.0
+margin_bottom = 19.0
+mouse_default_cursor_shape = 13
+size_flags_vertical = 4
+texture = SubResource( 5 )
+
+[node name="ContentTitle" type="Label" parent="BackgroundPanel/Layout/HeaderBar"]
+margin_left = 20.0
+margin_top = 4.0
+margin_right = 32.0
+margin_bottom = 18.0
+text = "1."
+valign = 1
+
+[node name="Spacer" type="Control" parent="BackgroundPanel/Layout/HeaderBar"]
+margin_left = 36.0
+margin_right = 1826.0
+margin_bottom = 22.0
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="RemoveButton" type="Button" parent="BackgroundPanel/Layout/HeaderBar"]
+margin_left = 1830.0
+margin_right = 1912.0
+margin_bottom = 22.0
+text = "Remove"
+icon = SubResource( 5 )
+flat = true
+
+[node name="Padding" type="Control" parent="BackgroundPanel/Layout"]
+margin_top = 26.0
+margin_right = 1912.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 0, 8 )
+mouse_filter = 2
+
+[node name="VisualElement" type="HBoxContainer" parent="BackgroundPanel/Layout"]
+margin_top = 38.0
+margin_right = 1912.0
+margin_bottom = 62.0
+
+[node name="Label" type="Label" parent="BackgroundPanel/Layout/VisualElement"]
+margin_top = 5.0
+margin_right = 99.0
+margin_bottom = 19.0
+text = "Visual Element:"
+
+[node name="LineEdit" type="LineEdit" parent="BackgroundPanel/Layout/VisualElement"]
+margin_left = 103.0
+margin_right = 1770.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+custom_colors/font_color_uneditable = Color( 0, 0, 0, 1 )
+editable = false
+
+[node name="SelectFileButton" type="Button" parent="BackgroundPanel/Layout/VisualElement"]
+margin_left = 1774.0
+margin_right = 1864.0
+margin_bottom = 24.0
+hint_tooltip = "Select a file to add a visual element to the lesson step (an image, a scene, etc)."
+text = "Select File..."
+
+[node name="ClearFileButton" type="Button" parent="BackgroundPanel/Layout/VisualElement"]
+margin_left = 1868.0
+margin_right = 1912.0
+margin_bottom = 24.0
+hint_tooltip = "Remove the visual element from the lesson step."
+text = "Clear"
+
+[node name="TextContent" type="VBoxContainer" parent="BackgroundPanel/Layout"]
+margin_top = 66.0
+margin_right = 1912.0
+margin_bottom = 1076.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BackgroundPanel/Layout/TextContent"]
+margin_right = 1912.0
+margin_bottom = 14.0
+text = "Text:"
+
+[node name="Editor" type="HBoxContainer" parent="BackgroundPanel/Layout/TextContent"]
+margin_top = 18.0
+margin_right = 1912.0
+margin_bottom = 1010.0
+size_flags_vertical = 3
+
+[node name="TextEdit" type="TextEdit" parent="BackgroundPanel/Layout/TextContent/Editor"]
+margin_right = 1880.0
+margin_bottom = 992.0
+rect_min_size = Vector2( 0, 120 )
+size_flags_horizontal = 3
+wrap_enabled = true
+
+[node name="ExpandButton" type="Button" parent="BackgroundPanel/Layout/TextContent/Editor"]
+margin_left = 1884.0
+margin_right = 1912.0
+margin_bottom = 992.0
+icon = SubResource( 5 )
+
+[node name="DropTarget" type="Control" parent="."]
+visible = false
+margin_left = 4.0
+margin_top = 2.0
+margin_right = 1916.0
+margin_bottom = 1078.0
+mouse_filter = 1
+
+[node name="ConfirmDialog" type="ConfirmationDialog" parent="."]
+margin_left = 4.0
+margin_top = 2.0
+margin_right = 1916.0
+margin_bottom = 1078.0
+rect_min_size = Vector2( 380, 80 )
+window_title = ""
+dialog_autowrap = true
+
+[node name="TextEditDialog" parent="." instance=ExtResource( 2 )]
+margin_top = 2.0
+margin_bottom = 1078.0
