@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ui/icons/chevron.svg" type="Texture" id=1]
+[ext_resource path="res://ui/components/Revealer.gd" type="Script" id=2]
+[ext_resource path="res://ui/resources/gdscript_app_theme.tres" type="Theme" id=3]
+[ext_resource path="res://ui/resources/fonts/font_title.tres" type="DynamicFont" id=4]
+
+[node name="UIRevealer" type="Container"]
+margin_right = 201.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 200, 47 )
+rect_clip_content = true
+theme = ExtResource( 3 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+revealer_height = 38.0
+
+[node name="Button" type="Button" parent="."]
+margin_right = 201.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 100, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_colors/font_color_pressed = Color( 0.74902, 0.737255, 0.878431, 1 )
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = true
+text = "Expand"
+flat = true
+align = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Chevron" type="TextureRect" parent="Button"]
+modulate = Color( 0.290196, 0.294118, 0.388235, 1 )
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -21.0
+margin_top = -16.0
+margin_right = -5.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+rect_pivot_offset = Vector2( 10, 17 )
+texture = ExtResource( 1 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="Button"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]

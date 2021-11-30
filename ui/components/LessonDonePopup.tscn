@@ -1,0 +1,121 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://ui/resources/gdscript_app_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/resources/fonts/font_text_lesson_done.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/resources/fonts/font_title_lesson_done.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/resources/button_outlined_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/resources/button_outlined_hover.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/resources/button_outlined_pressed.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/components/LessonDonePopup.gd" type="Script" id=7]
+[ext_resource path="res://ui/resources/panel_normal.tres" type="StyleBox" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="LessonDonePopup" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0352941, 0.0392157, 0.129412, 0.313726 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -309.0
+margin_top = -177.0
+margin_right = 310.0
+margin_bottom = 163.0
+rect_min_size = Vector2( 600, 340 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="PanelContainer"]
+margin_right = 619.0
+margin_bottom = 340.0
+custom_styles/panel = ExtResource( 8 )
+
+[node name="Column" type="VBoxContainer" parent="PanelContainer"]
+margin_right = 619.0
+margin_bottom = 340.0
+custom_constants/separation = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Column"]
+margin_right = 619.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+value = 100.0
+percent_visible = false
+
+[node name="Margin" type="MarginContainer" parent="PanelContainer/Column"]
+margin_top = 16.0
+margin_right = 619.0
+margin_bottom = 334.0
+
+[node name="Column" type="VBoxContainer" parent="PanelContainer/Column/Margin"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 599.0
+margin_bottom = 298.0
+custom_constants/separation = 12
+
+[node name="Spacer" type="HSeparator" parent="PanelContainer/Column/Margin/Column"]
+margin_right = 579.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 400, 0 )
+custom_constants/separation = 20
+custom_styles/separator = SubResource( 1 )
+
+[node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column"]
+margin_top = 32.0
+margin_right = 579.0
+margin_bottom = 92.0
+custom_fonts/font = ExtResource( 3 )
+text = "Well done!"
+align = 1
+
+[node name="Spacer3" type="HSeparator" parent="PanelContainer/Column/Margin/Column"]
+margin_left = 89.0
+margin_top = 104.0
+margin_right = 489.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 400, 0 )
+size_flags_horizontal = 4
+
+[node name="Summary" type="Label" parent="PanelContainer/Column/Margin/Column"]
+margin_top = 124.0
+margin_right = 579.0
+margin_bottom = 166.0
+custom_fonts/font = ExtResource( 2 )
+text = "You completed all practices"
+align = 1
+
+[node name="Spacer2" type="HSeparator" parent="PanelContainer/Column/Margin/Column"]
+margin_top = 178.0
+margin_right = 579.0
+margin_bottom = 198.0
+rect_min_size = Vector2( 400, 0 )
+custom_constants/separation = 20
+custom_styles/separator = SubResource( 1 )
+
+[node name="Button" type="Button" parent="PanelContainer/Column/Margin/Column"]
+margin_left = 189.0
+margin_top = 210.0
+margin_right = 389.0
+margin_bottom = 278.0
+rect_min_size = Vector2( 200, 68 )
+size_flags_horizontal = 4
+custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
+custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/normal = ExtResource( 4 )
+text = "Got it!"
+
+[node name="Tween" type="Tween" parent="."]

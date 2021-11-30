@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/components/OutputConsole.gd" type="Script" id=1]
+[ext_resource path="res://ui/resources/gdscript_app_theme.tres" type="Theme" id=2]
+[ext_resource path="res://ui/resources/panel_normal.tres" type="StyleBox" id=3]
+
+[node name="OutputConsole" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 40.0
+margin_bottom = 140.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 140.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 20.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

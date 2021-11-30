@@ -42,7 +42,7 @@ func replace_script(script_file_name: String, script_text: String) -> String:
 	for line_nb in lines.size():
 		var line: String = lines[line_nb]
 		for _regex in script_replacements._regexes:
-			var regex := _regex as RegEx
+			var regex: RegEx = _regex as RegEx
 			var replacement: String = script_replacements._regexes[regex]
 			var start := 0
 			var end := line.length()
@@ -52,7 +52,7 @@ func replace_script(script_file_name: String, script_text: String) -> String:
 					start = end
 					break
 				else:
-					var m := maybe_match as RegExMatch
+					var m: RegExMatch = maybe_match as RegExMatch
 					var starting_char := m.get_start()
 					var ending_char := m.get_end()
 					var args = m.get_string("args")
