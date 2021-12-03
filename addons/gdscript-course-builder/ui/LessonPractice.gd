@@ -16,6 +16,7 @@ var _file_dialog_mode := -1
 var _text_content_mode := -1
 var _drag_preview_style: StyleBox
 var _file_dialog: EditorFileDialog
+var _file_tester := File.new()
 
 onready var _background_panel := $BackgroundPanel as PanelContainer
 onready var _header_bar := $BackgroundPanel/Layout/HeaderBar as Control
@@ -57,8 +58,11 @@ func _ready() -> void:
 
 	_select_script_slice_button.connect("pressed", self, "_on_select_script_slice_requested")
 	_clear_script_slice_button.connect("pressed", self, "_on_clear_script_slice_requested")
+	_script_slice_value.connect("text_changed", self, "_change_script_slice_script")
+
 	_select_validator_button.connect("pressed", self, "_on_select_validator_requested")
 	_clear_validator_button.connect("pressed", self, "_on_clear_validator_requested")
+	_validator_value.connect("text_changed", self, "_change_validator_script")
 
 	_goal_content_value.connect("text_changed", self, "_on_goal_content_changed")
 	_goal_content_expand_button.connect("pressed", self, "_on_goal_content_expand_pressed")
@@ -109,12 +113,6 @@ func _update_theme() -> void:
 
 	_drag_icon.texture = get_icon("Sort", "EditorIcons")
 	_remove_button.icon = get_icon("Remove", "EditorIcons")
-	_script_slice_value.add_color_override(
-		"font_color_uneditable", get_color("disabled_font_color", "Editor")
-	)
-	_validator_value.add_color_override(
-		"font_color_uneditable", get_color("disabled_font_color", "Editor")
-	)
 	_goal_content_expand_button.icon = get_icon("DistractionFree", "EditorIcons")
 	_starting_code_expand_button.icon = get_icon("DistractionFree", "EditorIcons")
 	_starting_code_value.add_font_override("font", get_font("source", "EditorFonts"))
@@ -256,8 +254,7 @@ func _on_select_script_slice_requested() -> void:
 
 func _on_select_script_slice_confirmed(file_path: String) -> void:
 	_edited_practice.script_slice_path = file_path
-	_script_slice_value.text = file_path
-	_edited_practice.emit_changed()
+	_change_script_slice_script(file_path)
 
 
 func _on_clear_script_slice_requested() -> void:
@@ -269,6 +266,18 @@ func _on_clear_script_slice_confirmed() -> void:
 	_edited_practice.script_slice_path = ""
 	_script_slice_value.text = ""
 	_edited_practice.emit_changed()
+
+
+func _change_script_slice_script(file_path: String) -> void:
+	if (
+		not file_path.empty()
+		and (file_path.get_extension() != "gd" or not _file_tester.file_exists(file_path))
+	):
+		_script_slice_value.modulate = Color.red
+	else:
+		_script_slice_value.modulate = Color.white
+		_script_slice_value.text = file_path
+		_edited_practice.emit_changed()
 
 
 # Validator script
@@ -283,9 +292,20 @@ func _on_select_validator_requested() -> void:
 
 
 func _on_select_validator_confirmed(file_path: String) -> void:
-	_edited_practice.validator_script_path = file_path
 	_validator_value.text = file_path
-	_edited_practice.emit_changed()
+	_change_validator_script(file_path)
+
+
+func _change_validator_script(file_path: String) -> void:
+	if (
+		not file_path.empty()
+		and (file_path.get_extension() != "gd" or not _file_tester.file_exists(file_path))
+	):
+		_validator_value.modulate = Color.red
+	else:
+		_validator_value.modulate = Color.white
+		_edited_practice.validator_script_path = file_path
+		_edited_practice.emit_changed()
 
 
 func _on_clear_validator_requested() -> void:
