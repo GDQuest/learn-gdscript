@@ -195,9 +195,9 @@ func _rebuild_hints() -> void:
 func _on_file_dialog_confirmed(file_path: String) -> void:
 	match _file_dialog_mode:
 		FileDialogMode.SELECT_SLICE_FILE:
-			_on_select_script_slice_confirmed(file_path)
+			_change_script_slice_script(file_path)
 		FileDialogMode.SELECT_VALIDATOR_FILE:
-			_on_select_validator_confirmed(file_path)
+			_change_validator_script(file_path)
 
 	_file_dialog_mode = -1
 
@@ -207,9 +207,9 @@ func _on_confirm_dialog_confirmed() -> void:
 		ConfirmMode.REMOVE_PRACTICE:
 			_on_remove_practice_confirmed()
 		ConfirmMode.CLEAR_SLICE_FILE:
-			_on_clear_script_slice_confirmed()
+			_change_script_slice_script("")
 		ConfirmMode.CLEAR_VALIDATOR_FILE:
-			_on_clear_validator_confirmed()
+			_change_validator_script("")
 
 	_confirm_dialog_mode = -1
 
@@ -252,23 +252,15 @@ func _on_select_script_slice_requested() -> void:
 	_file_dialog.popup_centered()
 
 
-func _on_select_script_slice_confirmed(file_path: String) -> void:
-	_edited_practice.script_slice_path = file_path
-	_change_script_slice_script(file_path)
-
-
 func _on_clear_script_slice_requested() -> void:
 	_confirm_dialog_mode = ConfirmMode.CLEAR_SLICE_FILE
 	_show_confirm("Are you sure you want to clear the script slice?")
 
 
-func _on_clear_script_slice_confirmed() -> void:
-	_edited_practice.script_slice_path = ""
-	_script_slice_value.text = ""
-	_edited_practice.emit_changed()
-
-
 func _change_script_slice_script(file_path: String) -> void:
+	if _script_slice_value.text != file_path:
+		_script_slice_value.text = file_path
+
 	if (
 		not file_path.empty()
 		and (file_path.get_extension() != "gd" or not _file_tester.file_exists(file_path))
@@ -277,6 +269,7 @@ func _change_script_slice_script(file_path: String) -> void:
 	else:
 		_script_slice_value.modulate = Color.white
 		_script_slice_value.text = file_path
+		_edited_practice.script_slice_path = file_path
 		_edited_practice.emit_changed()
 
 
@@ -291,12 +284,10 @@ func _on_select_validator_requested() -> void:
 	_file_dialog.popup_centered()
 
 
-func _on_select_validator_confirmed(file_path: String) -> void:
-	_validator_value.text = file_path
-	_change_validator_script(file_path)
-
-
 func _change_validator_script(file_path: String) -> void:
+	if not _validator_value.text == file_path:
+		_validator_value.text = file_path
+
 	if (
 		not file_path.empty()
 		and (file_path.get_extension() != "gd" or not _file_tester.file_exists(file_path))
@@ -311,12 +302,6 @@ func _change_validator_script(file_path: String) -> void:
 func _on_clear_validator_requested() -> void:
 	_confirm_dialog_mode = ConfirmMode.CLEAR_VALIDATOR_FILE
 	_show_confirm("Are you sure you want to clear the validator script?")
-
-
-func _on_clear_validator_confirmed() -> void:
-	_edited_practice.validator_script_path = ""
-	_validator_value.text = ""
-	_edited_practice.emit_changed()
 
 
 # Goal text
