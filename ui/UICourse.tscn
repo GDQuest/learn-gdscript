@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://ui/UICourse.gd" type="Script" id=1]
 [ext_resource path="res://ui/UILesson.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/resources/gdscript_app_theme.tres" type="Theme" id=4]
 
@@ -8,23 +7,21 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 4 )
-custom_constants/margin_right = 560
-custom_constants/margin_top = 10
-custom_constants/margin_left = 560
-custom_constants/margin_bottom = 10
-script = ExtResource( 1 )
+custom_constants/margin_right = 120
+custom_constants/margin_left = 120
 __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": "	"
 }
-maximum_width = 800.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-margin_left = 560.0
-margin_top = 10.0
-margin_right = 1360.0
-margin_bottom = 1070.0
-size_flags_horizontal = 3
+margin_left = 120.0
+margin_top = 20.0
+margin_right = 1800.0
+margin_bottom = 1060.0
+size_flags_horizontal = 7
 size_flags_vertical = 3
 
 [node name="UILesson" parent="ScrollContainer" instance=ExtResource( 2 )]
+margin_right = 1680.0
+margin_bottom = 1040.0

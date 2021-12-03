@@ -3,9 +3,8 @@
 [ext_resource path="res://ui/UIContentBlock.gd" type="Script" id=1]
 
 [node name="UIContentBlock" type="HBoxContainer"]
-margin_top = 131.0
 margin_right = 800.0
-margin_bottom = 451.0
+margin_bottom = 189.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
@@ -16,7 +15,7 @@ __meta__ = {
 
 [node name="Panel" type="PanelContainer" parent="."]
 margin_right = 800.0
-margin_bottom = 320.0
+margin_bottom = 189.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -24,22 +23,25 @@ size_flags_vertical = 3
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 793.0
-margin_bottom = 313.0
+margin_bottom = 182.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 793.0
+margin_bottom = 182.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Panel/MarginContainer" groups=["navigation_text"]]
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer" groups=["navigation_text"]]
 margin_right = 786.0
-margin_bottom = 306.0
+margin_bottom = 175.0
+rect_min_size = Vector2( 640, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
