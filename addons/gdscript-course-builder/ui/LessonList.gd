@@ -6,7 +6,7 @@ signal lesson_moved(lesson_index, new_index)
 signal lesson_removed(lesson_index)
 signal lesson_selected(lesson_index)
 
-const ListItemScene := preload("res://addons/course-builder-for-live-editor/ui/LessonListItem.tscn")
+const ListItemScene := preload("LessonListItem.tscn")
 
 var _base_path := ""
 var _drop_highlight: TreeItem

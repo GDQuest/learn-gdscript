@@ -7,7 +7,7 @@ enum ConfirmMode { REMOVE_PRACTICE, CLEAR_SLICE_FILE, CLEAR_VALIDATOR_FILE }
 enum FileDialogMode { SELECT_SLICE_FILE, SELECT_VALIDATOR_FILE }
 enum TextContentMode { GOAL_CONTENT, STARTING_CODE }
 
-const HintScene := preload("res://addons/course-builder-for-live-editor/ui/LessonPracticeHint.tscn")
+const HintScene := preload("LessonPracticeHint.tscn")
 
 var _edited_practice: Practice
 var _list_index := -1

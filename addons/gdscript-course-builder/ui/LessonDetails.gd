@@ -4,9 +4,9 @@ extends MarginContainer
 signal lesson_title_changed(title)
 signal lesson_slug_changed(slug)
 
-const ContentBlockScene := preload("res://addons/course-builder-for-live-editor/ui/LessonContentBlock.tscn")
-const PracticeScene := preload("res://addons/course-builder-for-live-editor/ui/LessonPractice.tscn")
-const FileUtils := preload("res://addons/course-builder-for-live-editor/utils/FileUtils.gd")
+const ContentBlockScene := preload("LessonContentBlock.tscn")
+const PracticeScene := preload("LessonPractice.tscn")
+const FileUtils := preload("../utils/FileUtils.gd")
 
 
 var _edited_lesson: Lesson

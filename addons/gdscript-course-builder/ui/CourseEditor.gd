@@ -22,9 +22,9 @@ var _recent_course_index := -1
 
 var _remove_on_save := []
 
-const _ResourceUtils := preload("res://addons/course-builder-for-live-editor/utils/ResourceUtils.gd")
-const _FileUtils := preload("res://addons/course-builder-for-live-editor/utils/FileUtils.gd")
-const _PluginUtils := preload("res://addons/course-builder-for-live-editor/utils/PluginUtils.gd")
+const _ResourceUtils := preload("../utils/ResourceUtils.gd")
+const _FileUtils := preload("../utils/FileUtils.gd")
+const _PluginUtils := preload("../utils/PluginUtils.gd")
 
 onready var _new_course_button := $Layout/ToolBar/CreateButton as Button
 onready var _open_course_button := $Layout/ToolBar/OpenButton as Button
