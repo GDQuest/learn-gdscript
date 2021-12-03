@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://resources/Course.gd"
 }, {
+"base": "Control",
+"class": "CourseExercise",
+"language": "GDScript",
+"path": "res://ui/UIPractice.gd"
+}, {
 "base": "MarginContainer",
 "class": "ErrorOverlayPopup",
 "language": "GDScript",
@@ -63,6 +68,11 @@ _global_script_classes=[ {
 "class": "OutputConsole",
 "language": "GDScript",
 "path": "res://ui/components/OutputConsole.gd"
+}, {
+"base": "VSplitContainer",
+"class": "OutputVSplitContainer",
+"language": "GDScript",
+"path": "res://ui/components/OutputVSplitContainer.gd"
 }, {
 "base": "Resource",
 "class": "Practice",
@@ -140,12 +150,14 @@ _global_script_class_icons={
 "CodeEditorEnhancer": "",
 "ContentBlock": "",
 "Course": "",
+"CourseExercise": "",
 "ErrorOverlayPopup": "",
 "LanguageServerError": "",
 "Lesson": "",
 "LessonDonePopup": "",
 "LessonPanel": "",
 "OutputConsole": "",
+"OutputVSplitContainer": "",
 "Practice": "",
 "RegExpGroup": "",
 "Revealer": "res://ui/components/Revealer.svg",
@@ -196,6 +208,10 @@ enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://ad
 [exporter-for-live-editor]
 
 scene="res://course/Navigator.tscn"
+
+[gdscript-slice-exporter]
+
+scene="res://ui/UINavigator.tscn"
 
 [input]
 
