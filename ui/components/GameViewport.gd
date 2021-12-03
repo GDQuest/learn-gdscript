@@ -1,5 +1,6 @@
-# Holds a scene, and offers some utilities to play it, pause it,
-# and replace scripts on running nodes
+# Holds a scene, and offers some utilities to play it, pause it, and replace
+# scripts on running nodes.
+class_name GameViewport
 extends ViewportContainer
 
 var _viewport := Viewport.new()
@@ -17,7 +18,7 @@ func _ready() -> void:
 
 
 # Recursively pauses a node and its children
-static func pause_node(node: Node, pause := true, limit := 1000) -> void:
+static func pause_node(node: Node, pause := true, limit := 100) -> void:
 	node.set_process(not pause)
 	node.set_physics_process(not pause)
 	node.set_process_input(not pause)
@@ -31,7 +32,7 @@ static func pause_node(node: Node, pause := true, limit := 1000) -> void:
 
 
 # Pauses the current GameViewport scene
-func pause_scene(pause := true, limit := 1000) -> void:
+func pause_scene(pause := true, limit := 100) -> void:
 	scene_paused = pause
 	pause_node(LiveEditorState.current_scene, pause, limit)
 
@@ -45,11 +46,10 @@ func set_scene_paused(is_it: bool) -> void:
 	pause_scene(is_it)
 
 
-func _on_screen_resized() -> void:
-	_viewport.size = rect_size
-
-
 func use_scene() -> void:
 	LiveEditorState.use_scene(_viewport)
 	_viewport.size = LiveEditorState.current_slice.get_scene_properties().viewport_size
-	# _on_screen_resized()
+
+
+func _on_screen_resized() -> void:
+	_viewport.size = rect_size

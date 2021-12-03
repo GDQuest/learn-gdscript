@@ -7,6 +7,7 @@
 # var errors: Array = yield(verifier, "errors")
 #
 # Where `errors` is an array of LanguageServerErrors
+class_name ScriptVerifier
 extends Reference
 
 # Emits error messages as an Array[LanguageServerError]

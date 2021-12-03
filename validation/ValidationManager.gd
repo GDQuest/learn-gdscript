@@ -4,6 +4,7 @@
 # child Validator instances, runs them, and sets the result
 # ("valid" or "invalid", respectively 2 or 1) on the parent check.
 #
+class_name ValidationManager
 extends Node
 
 enum STATUS { NONE, INVALID, VALID }

@@ -1,3 +1,4 @@
+class_name ValidatorCheck
 extends "./Check.gd"
 
 const GROUP_NAME = "validator_checks"

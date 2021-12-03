@@ -4,21 +4,16 @@ extends Control
 
 signal exercise_validated(is_valid)
 
-const GameViewport := preload("components/GameViewport.gd")
-const ValidatorCheck := preload("components/ValidatorCheck.gd")
-const ScriptVerifier := preload("../lsp/ScriptVerifier.gd")
-const LanguageServerError := preload("../lsp/LanguageServerError.gd")
-const ValidationManager := preload("../validation/ValidationManager.gd")
 const RevealerScene := preload("components/Revealer.tscn")
 
 export var slice_properties: Resource setget set_slice_properties, get_slice_properties
 export var title := "Title" setget set_title
-export (String, MULTILINE) var goal := "Goal" setget set_goal
-export (int, 0, 100) var progress := 0.0 setget set_progress
+export(String, MULTILINE) var goal := "Goal" setget set_goal
+export(int, 0, 100) var progress := 0.0 setget set_progress
 export var hints := PoolStringArray()
-export (String, MULTILINE) var initial_editor_text := "" setget set_initial_editor_text, get_initial_editor_text
+export(String, MULTILINE) var initial_editor_text := "" setget set_initial_editor_text, get_initial_editor_text
 
-# if the text is changed and not saved, this will be "true"
+# If `true`, the text changed but was not saved.
 var _code_editor_is_dirty := false
 
 onready var _validation_manager := $ValidationManager as ValidationManager

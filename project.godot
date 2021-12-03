@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/components/ErrorOverlayPopup.gd"
 }, {
+"base": "ViewportContainer",
+"class": "GameViewport",
+"language": "GDScript",
+"path": "res://ui/components/GameViewport.gd"
+}, {
 "base": "Reference",
 "class": "LanguageServerError",
 "language": "GDScript",
@@ -104,6 +109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://resources/ScriptSlice.gd"
 }, {
+"base": "Reference",
+"class": "ScriptVerifier",
+"language": "GDScript",
+"path": "res://lsp/ScriptVerifier.gd"
+}, {
 "base": "TextEdit",
 "class": "SliceEditor",
 "language": "GDScript",
@@ -135,9 +145,19 @@ _global_script_classes=[ {
 "path": "res://ui/UILesson.gd"
 }, {
 "base": "Node",
+"class": "ValidationManager",
+"language": "GDScript",
+"path": "res://validation/ValidationManager.gd"
+}, {
+"base": "Node",
 "class": "Validator",
 "language": "GDScript",
 "path": "res://validation/Validator.gd"
+}, {
+"base": "",
+"class": "ValidatorCheck",
+"language": "GDScript",
+"path": "res://ui/components/ValidatorCheck.gd"
 }, {
 "base": "Reference",
 "class": "ViewModeToggleButton",
@@ -152,6 +172,7 @@ _global_script_class_icons={
 "Course": "",
 "CourseExercise": "",
 "ErrorOverlayPopup": "",
+"GameViewport": "",
 "LanguageServerError": "",
 "Lesson": "",
 "LessonDonePopup": "",
@@ -164,13 +185,16 @@ _global_script_class_icons={
 "SceneProperties": "",
 "ScriptProperties": "",
 "ScriptSlice": "",
+"ScriptVerifier": "",
 "SliceEditor": "",
 "SliceEditorOverlay": "",
 "SliceProperties": "",
 "SlicesUtils": "",
 "UIContentBlock": "",
 "UILesson": "",
+"ValidationManager": "",
 "Validator": "",
+"ValidatorCheck": "",
 "ViewModeToggleButton": ""
 }
 
