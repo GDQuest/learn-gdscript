@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/components/CodeEditor.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "CodeEditorEnhancer",
 "language": "GDScript",
 "path": "res://ui/components/CodeEditorEnhancer.gd"
@@ -127,7 +127,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Validator",
 "language": "GDScript",
-"path": "res://addons/gdscript-slice-exporter/validation/Validator.gd"
+"path": "res://validation/Validator.gd"
 }, {
 "base": "Reference",
 "class": "ViewModeToggleButton",
@@ -180,7 +180,6 @@ Events="*res://autoload/Events.gd"
 gdscript/warnings/return_value_discarded=false
 gdscript/warnings/unsafe_property_access=true
 gdscript/warnings/unsafe_method_access=true
-gdscript/warnings/unsafe_cast=true
 gdscript/warnings/unsafe_call_argument=true
 
 [display]
@@ -192,7 +191,7 @@ window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://addons/gdscript-course-builder/plugin.cfg", "res://addons/gdscript-slice-exporter/plugin.cfg" )
 
 [exporter-for-live-editor]
 
