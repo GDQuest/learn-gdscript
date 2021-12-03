@@ -5,11 +5,14 @@ signal block_removed
 
 enum ConfirmMode { REMOVE_BLOCK, CLEAR_FILE }
 
+const VISUAL_ELEMENT_EXTENSIONS := ["png", "jpg", "svg", "gif", "tscn", "scn", "res"]
+
 var _edited_content_block: ContentBlock
 var _list_index := -1
 var _confirm_dialog_mode := -1
 var _drag_preview_style: StyleBox
 var _file_dialog: EditorFileDialog
+var _file_tester := File.new()
 
 onready var _background_panel := $BackgroundPanel as PanelContainer
 onready var _header_bar := $BackgroundPanel/Layout/HeaderBar as Control
@@ -36,8 +39,11 @@ func _ready() -> void:
 	_text_content_dialog.rect_size = _text_content_dialog.rect_min_size
 
 	_remove_button.connect("pressed", self, "_on_remove_block_requested")
+
 	_select_file_button.connect("pressed", self, "_on_select_file_requested")
 	_clear_file_button.connect("pressed", self, "_on_clear_file_requested")
+	_visual_element_value.connect("text_changed", self, "_update_visual_element_file")
+
 	_text_content_value.connect("text_changed", self, "_on_text_content_changed")
 	_text_content_expand_button.connect("pressed", self, "_on_text_content_expand_pressed")
 	_text_content_dialog.connect("confirmed", self, "_on_text_content_confirmed")
@@ -77,9 +83,6 @@ func _update_theme() -> void:
 
 	_drag_icon.texture = get_icon("Sort", "EditorIcons")
 	_remove_button.icon = get_icon("Remove", "EditorIcons")
-	_visual_element_value.add_color_override(
-		"font_color_uneditable", get_color("disabled_font_color", "Editor")
-	)
 	_text_content_expand_button.icon = get_icon("DistractionFree", "EditorIcons")
 
 
@@ -130,7 +133,7 @@ func _on_confirm_dialog_confirmed() -> void:
 		ConfirmMode.REMOVE_BLOCK:
 			_on_remove_block_confirmed()
 		ConfirmMode.CLEAR_FILE:
-			_on_clear_file_confirmed()
+			_update_visual_element_file("")
 
 	_confirm_dialog_mode = -1
 
@@ -151,7 +154,7 @@ func _on_select_file_requested() -> void:
 		_file_dialog.rect_min_size = Vector2(700, 480)
 		add_child(_file_dialog)
 
-		_file_dialog.connect("file_selected", self, "_on_select_file_confirmed")
+		_file_dialog.connect("file_selected", self, "_update_visual_element_file")
 
 	_file_dialog.mode = EditorFileDialog.MODE_OPEN_FILE
 	_file_dialog.clear_filters()
@@ -159,21 +162,24 @@ func _on_select_file_requested() -> void:
 	_file_dialog.popup_centered()
 
 
-func _on_select_file_confirmed(file_path: String) -> void:
-	_edited_content_block.visual_element_path = file_path
-	_visual_element_value.text = file_path
-	_edited_content_block.emit_changed()
-
-
 func _on_clear_file_requested() -> void:
 	_confirm_dialog_mode = ConfirmMode.CLEAR_FILE
 	_show_confirm("Are you sure you want to clear the visual element?")
 
 
-func _on_clear_file_confirmed() -> void:
-	_edited_content_block.visual_element_path = ""
-	_visual_element_value.text = ""
-	_edited_content_block.emit_changed()
+func _update_visual_element_file(file_path: String) -> void:
+	if _visual_element_value.text != file_path:
+		_visual_element_value.text = file_path
+
+	if (
+		not file_path.empty()
+		and (not file_path.get_extension() in VISUAL_ELEMENT_EXTENSIONS or not _file_tester.file_exists(file_path))
+	):
+		_visual_element_value.modulate = Color.red
+	else:
+		_visual_element_value.modulate = Color.white
+		_edited_content_block.visual_element_path = file_path
+		_edited_content_block.emit_changed()
 
 
 func _on_text_content_changed() -> void:
