@@ -5,3 +5,5 @@ extends Node
 
 signal lesson_end_popup_closed
 signal lesson_start_requested(scene_url)
+signal practice_start_requested(practice)
+signal practice_completed(practice)

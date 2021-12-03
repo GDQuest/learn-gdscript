@@ -11,4 +11,4 @@ func setup(practice: Resource) -> void:
 		yield(self, "ready")
 
 	_label.text = practice.title
-	_button.connect("pressed", self, "emit_signal", ["pressed"])
+	_button.connect("pressed", Events, "emit_signal", ["practice_start_requested", practice])

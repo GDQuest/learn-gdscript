@@ -30,6 +30,7 @@ onready var _scene_path := scene_file.resource_path
 func _ready() -> void:
 	Events.connect("lesson_end_popup_closed", self, "back")
 	Events.connect("lesson_start_requested", self, "open_url")
+	Events.connect("practice_start_requested", self, "_start_practice")
 
 	_back_button.connect("pressed", self, "back")
 
@@ -41,6 +42,10 @@ func _ready() -> void:
 		get_tree().set_auto_accept_quit(false)
 	add_child(_tween)
 	_on_ready_listen_to_browser_changes()
+
+
+func _start_practice(practice: Resource) -> void:
+	pass
 
 
 func _input(event: InputEvent) -> void:
