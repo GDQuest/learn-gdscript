@@ -1,6 +1,5 @@
 extends PanelContainer
 
-
 signal transition_in_completed
 signal transition_out_completed
 
