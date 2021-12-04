@@ -71,6 +71,7 @@ func _on_next_button_pressed() -> void:
 		add_child(popup)
 		popup.connect("pressed", Events, "emit_signal", ["lesson_end_popup_closed"])
 	else:
-		var practice = _practices.find(index) as CourseExercise
+		_current_practice_index = wrapi(_current_practice_index + 1, 0, _practices.size())
+		var practice = _practices[_current_practice_index] as CourseExercise
 		practice.show()
 		practice.take_over_slice()
