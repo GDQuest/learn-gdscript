@@ -47,7 +47,7 @@ func setup(practice: Resource) -> void:
 		yield(self, "ready")
 
 	_goal_rich_text_label.bbcode_text = practice.goal
-	_title_label.text = practice.title_label
+	_title_label.text = practice.title
 	_code_editor.text = practice.starting_code
 
 	_hints_container.visible = practice.hints.empty()
