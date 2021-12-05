@@ -45,7 +45,7 @@ func _notification(what: int) -> void:
 		sort_children()
 
 
-func add_child(node: Node, legible_unique_name := false) -> void:
+func add_child(node: Node, _legible_unique_name := false) -> void:
 	.add_child(node)
 	_contents.append(node)
 	set_is_expanded(is_expanded)

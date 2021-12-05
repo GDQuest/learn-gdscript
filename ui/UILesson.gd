@@ -21,6 +21,7 @@ onready var _next_button := find_node("NextButton") as Button
 
 func _ready() -> void:
 	setup(preload("res://course/lesson-66929/lesson.tres"))
+	return
 
 	# TODO: instantiate practices from resources, move code to `setup()`
 	for child in _exercises_container.get_children():

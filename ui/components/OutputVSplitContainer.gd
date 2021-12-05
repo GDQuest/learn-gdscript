@@ -2,8 +2,8 @@
 class_name OutputVSplitContainer
 extends VSplitContainer
 
-onready var game_viewport := $GameViewport
-onready var output_console := $Console
+onready var game_viewport := $GameViewport as ViewportContainer
+onready var output_console := $Console as Control
 
 
 func toggle_game_view(is_visible: bool) -> void:

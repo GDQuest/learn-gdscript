@@ -6,8 +6,8 @@ signal exercise_validated(is_valid)
 
 const RevealerScene := preload("components/Revealer.tscn")
 
-export var slice_properties: Resource
-export(int, 0, 100) var progress := 0.0 setget set_progress
+var slice_properties: SliceProperties
+var progress := 0.0 setget set_progress
 
 # If `true`, the text changed but was not saved.
 var _code_editor_is_dirty := false
@@ -33,6 +33,7 @@ func _ready() -> void:
 
 	_code_editor.connect("action", self, "_on_code_editor_button")
 	_code_editor.connect("text_changed", self, "_on_code_editor_text_changed")
+	setup(preload("res://course/lesson-66929/practice-85733.tres"))
 
 
 func _input(event: InputEvent) -> void:
@@ -42,7 +43,7 @@ func _input(event: InputEvent) -> void:
 		_game_container.visible = is_distraction_free
 
 
-func setup(practice: Resource) -> void:
+func setup(practice: Practice) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 
