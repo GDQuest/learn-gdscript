@@ -74,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://resources/Practice.gd"
 }, {
+"base": "PanelContainer",
+"class": "PracticeInfoPanel",
+"language": "GDScript",
+"path": "res://ui/components/PracticeInfoPanel.gd"
+}, {
 "base": "Reference",
 "class": "RegExpGroup",
 "language": "GDScript",
@@ -122,7 +127,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "SliceEditorOverlay",
 "language": "GDScript",
-"path": "res://ui/components/PracticeInfoPanel.gd"
+"path": "res://ui/components/SliceEditorOverlay.gd"
 }, {
 "base": "Resource",
 "class": "SliceProperties",
@@ -143,11 +148,6 @@ _global_script_classes=[ {
 "class": "UILesson",
 "language": "GDScript",
 "path": "res://ui/UILesson.gd"
-}, {
-"base": "PanelContainer",
-"class": "UILessonPanel",
-"language": "GDScript",
-"path": "res://ui/components/UILessonPanel.gd"
 }, {
 "base": "Control",
 "class": "UIPractice",
@@ -193,6 +193,7 @@ _global_script_class_icons={
 "OutputConsole": "",
 "OutputVSplitContainer": "",
 "Practice": "",
+"PracticeInfoPanel": "",
 "RegExpGroup": "",
 "Revealer": "res://ui/components/Revealer.svg",
 "SceneFiles": "",
@@ -207,7 +208,6 @@ _global_script_class_icons={
 "SlicesUtils": "",
 "UIContentBlock": "",
 "UILesson": "",
-"UILessonPanel": "",
 "UIPractice": "",
 "UIPracticeButton": "",
 "ValidationManager": "",
