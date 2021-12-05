@@ -16,7 +16,7 @@ onready var _validation_manager := $ValidationManager as ValidationManager
 onready var _game_container := find_node("Output") as PanelContainer
 onready var _game_viewport := _game_container.find_node("GameViewport") as GameViewport
 
-onready var _lesson_panel := find_node("LessonPanel") as LessonPanel
+onready var _lesson_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
 onready var _title_label := _lesson_panel.title_label
 onready var _progress_bar := _lesson_panel.progress_bar
 onready var _goal_rich_text_label := _lesson_panel.goal_rich_text_label

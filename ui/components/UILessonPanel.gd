@@ -1,5 +1,5 @@
 tool
-class_name LessonPanel
+class_name UILessonPanel
 extends PanelContainer
 
 export var title := "Title" setget set_title

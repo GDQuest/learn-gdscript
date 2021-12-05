@@ -59,11 +59,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/components/LessonDonePopup.gd"
 }, {
-"base": "PanelContainer",
-"class": "LessonPanel",
-"language": "GDScript",
-"path": "res://ui/components/UILessonPanel.gd"
-}, {
 "base": "Reference",
 "class": "OutputConsole",
 "language": "GDScript",
@@ -78,6 +73,11 @@ _global_script_classes=[ {
 "class": "Practice",
 "language": "GDScript",
 "path": "res://resources/Practice.gd"
+}, {
+"base": "PanelContainer",
+"class": "PracticeInfoPanel",
+"language": "GDScript",
+"path": "res://ui/components/UILessonPanel.gd"
 }, {
 "base": "Reference",
 "class": "RegExpGroup",
@@ -117,7 +117,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "SliceEditorOverlay",
 "language": "GDScript",
-"path": "res://ui/components/LessonPanel.gd"
+"path": "res://ui/components/PracticeInfoPanel.gd"
 }, {
 "base": "Resource",
 "class": "SliceProperties",
@@ -180,10 +180,10 @@ _global_script_class_icons={
 "LanguageServerError": "",
 "Lesson": "",
 "LessonDonePopup": "",
-"LessonPanel": "",
 "OutputConsole": "",
 "OutputVSplitContainer": "",
 "Practice": "",
+"PracticeInfoPanel": "",
 "RegExpGroup": "",
 "Revealer": "res://ui/components/Revealer.svg",
 "SceneProperties": "",
@@ -238,7 +238,7 @@ enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://ad
 
 [gdscript-slice-exporter]
 
-scene="res://ui/UINavigator.tscn"
+scene="res://ui/UIPractice.tscn"
 
 [input]
 
