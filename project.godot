@@ -145,6 +145,11 @@ _global_script_classes=[ {
 "path": "res://ui/UILesson.gd"
 }, {
 "base": "Node",
+"class": "UIPracticeButton",
+"language": "GDScript",
+"path": "res://ui/UIPracticeButton.gd"
+}, {
+"base": "Node",
 "class": "ValidationManager",
 "language": "GDScript",
 "path": "res://validation/ValidationManager.gd"
@@ -192,6 +197,7 @@ _global_script_class_icons={
 "SlicesUtils": "",
 "UIContentBlock": "",
 "UILesson": "",
+"UIPracticeButton": "",
 "ValidationManager": "",
 "Validator": "",
 "ValidatorCheck": "",
@@ -213,6 +219,7 @@ Events="*res://autoload/Events.gd"
 
 [debug]
 
+gdscript/warnings/unused_signal=false
 gdscript/warnings/return_value_discarded=false
 gdscript/warnings/unsafe_property_access=true
 gdscript/warnings/unsafe_method_access=true
@@ -229,13 +236,9 @@ window/stretch/aspect="keep_height"
 
 enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://addons/gdscript-course-builder/plugin.cfg", "res://addons/gdscript-slice-exporter/plugin.cfg" )
 
-[exporter-for-live-editor]
-
-scene="res://course/Navigator.tscn"
-
 [gdscript-slice-exporter]
 
-scene="res://ui/UINavigator.tscn"
+scene="res://ui/UIPracticeButton.tscn"
 
 [input]
 

@@ -1,3 +1,4 @@
+class_name UIPracticeButton
 extends Node
 
 signal pressed
