@@ -3,14 +3,13 @@ extends PanelContainer
 signal transition_in_completed
 signal transition_out_completed
 
-var screens_stack := []
-# Can contain shortcuts to scenes. Match a string with a scene
-# @type Dictionary[String, PackedScene Path]
-var matches := {}
-# Switch this off to remove transitions.
+# If `true`, play transition animations.
 var use_transitions := false
-var breadcrumbs: PoolStringArray setget _ready_only_setter
 
+var _screens_stack := []
+# Maps url strings to resource paths.
+var _matches := {}
+var _breadcrumbs: PoolStringArray
 # Used for transition animations.
 var _is_mobile_platform := OS.get_name() in ["Android", "HTML5", "iOS"]
 var _path_regex := RegExpGroup.compile("^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)")
@@ -28,9 +27,6 @@ func _ready() -> void:
 	Events.connect("practice_start_requested", self, "_start_practice")
 
 	_back_button.connect("pressed", self, "back")
-
-	connect("transition_in_completed", self, "_on_navigation_transition")
-	connect("transition_out_completed", self, "_on_navigation_transition")
 
 	if _is_mobile_platform:
 		get_tree().set_auto_accept_quit(false)
@@ -61,7 +57,7 @@ func _notification(what: int) -> void:
 # TODO: Make it work now we're loading resources (Practice etc.) and not scenes
 func open_url(url: String) -> void:
 	assert(url != "", "You must provide a valid url when calling open_url()")
-	var data: String = matches.get(url, "")
+	var data: String = _matches.get(url, "")
 	if not data:
 		push_warning("No match found for url %s" % url)
 		return
@@ -76,13 +72,13 @@ func open_url(url: String) -> void:
 
 # Pops the last screen from the stack
 func back() -> void:
-	if screens_stack.size() < 1:
+	if _screens_stack.size() < 1:
 		push_warning("No screen to pop")
 		return
 
-	var previous_node: Node = screens_stack.pop_back()
+	var previous_node: Node = _screens_stack.pop_back()
 
-	var next_in_queue: Control = screens_stack.pop_back()
+	var next_in_queue: Control = _screens_stack.pop_back()
 	if next_in_queue:
 		_screen_container.add_child(next_in_queue)
 
@@ -103,8 +99,8 @@ func set_current_url(url: ScreenUrl, is_back := false) -> void:
 
 # Pushes a screen on top of the stack and transitions it in
 func _push_screen(screen: Control) -> void:
-	var previous_node: Control = screens_stack.back()
-	screens_stack.push_back(screen)
+	var previous_node: Control = _screens_stack.back()
+	_screens_stack.push_back(screen)
 	_screen_container.add_child(screen)
 	_transition_to(screen)
 	if previous_node:
@@ -135,7 +131,7 @@ func _transition_to(screen: Control, direction_in := true) -> void:
 	var signal_name := "transition_in_completed" if direction_in else "transition_out_completed"
 
 	_back_button.disabled = _current_url.path == filename
-	_label.text = breadcrumbs.join("/")
+	_label.text = _breadcrumbs.join("/")
 
 	if not use_transitions:
 		yield(get_tree(), "idle_frame")
@@ -153,14 +149,32 @@ func _transition_to(screen: Control, direction_in := true) -> void:
 	emit_signal(signal_name)
 
 
-func _ready_only_setter(_unused_variable) -> void:
-	push_error("This variable is read-only")
-
-
 func _start_practice(practice: Resource) -> void:
 	var practice_ui: UIPractice = preload("UIPractice.tscn").instance()
 	practice_ui.setup(practice)
 	_screen_container.add_child(practice_ui)
+
+
+class ScreenUrl:
+	var path: String
+	var protocol: String
+	var href: String setget , _to_string
+	var is_valid := true
+
+	func _init(_path_regex: RegEx, data: String) -> void:
+		var regex_result := _path_regex.search(data)
+		protocol = regex_result.get_string("prefix")
+		path = regex_result.get_string("url")
+		if regex_result:
+			if protocol in ["//", "/"]:
+				protocol = "res://"
+		else:
+			is_valid = false
+		if not path:
+			path = "/"
+
+	func _to_string() -> String:
+		return protocol + path
 
 
 ################################################################################
@@ -214,25 +228,3 @@ func _load_current_browser_url() -> void:
 		open_url(url)
 	if _js_window.location.pathname:
 		open_url(_js_window.location.pathname)
-
-
-class ScreenUrl:
-	var path: String
-	var protocol: String
-	var href: String setget , _to_string
-	var is_valid := true
-
-	func _init(_path_regex: RegEx, data: String) -> void:
-		var regex_result := _path_regex.search(data)
-		protocol = regex_result.get_string("prefix")
-		path = regex_result.get_string("url")
-		if regex_result:
-			if protocol in ["//", "/"]:
-				protocol = "res://"
-		else:
-			is_valid = false
-		if not path:
-			path = "/"
-
-	func _to_string() -> String:
-		return protocol + path
