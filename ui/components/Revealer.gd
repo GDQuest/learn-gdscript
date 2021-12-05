@@ -6,8 +6,8 @@ extends Container
 const ANIM_DURATION := 0.1
 
 const FONTS := {
-	normal = preload("../resources/fonts/font_title.tres"),
-	small = preload("../resources/fonts/font_title_small.tres"),
+	normal = preload("../theme/fonts/font_title.tres"),
+	small = preload("../theme/fonts/font_title_small.tres"),
 }
 
 export var title := "Expand" setget set_title

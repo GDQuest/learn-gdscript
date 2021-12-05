@@ -16,7 +16,7 @@ regex_map = {
     regex_code: r"[code]\1[/code]",
     regex_url: r"[url=\2]\1[/url]",
     regex_strike: r"[s]\1[/s]",
-    regex_heading: r"[font=res://ui/resources/fonts/font_title.tres]\1[/font]"
+    regex_heading: r"[font=res://ui/theme/fonts/font_title.tres]\1[/font]"
 }
 
 
