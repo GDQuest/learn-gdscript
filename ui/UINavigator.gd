@@ -11,7 +11,7 @@ var screens_stack := []
 var matches := {}
 # Switch this off to remove transitions.
 var use_transitions := false
-var breadcrumbs: PoolStringArray setget _ready_only_setter, get_breadcrumbs
+var breadcrumbs: PoolStringArray setget _ready_only_setter
 
 # Used for transition animations.
 var _tween := Tween.new()
@@ -41,10 +41,6 @@ func _ready() -> void:
 		get_tree().set_auto_accept_quit(false)
 	add_child(_tween)
 	_on_ready_listen_to_browser_changes()
-
-
-func _start_practice(practice: Resource) -> void:
-	pass
 
 
 func _input(event: InputEvent) -> void:
@@ -95,16 +91,6 @@ func set_current_url(url: ScreenUrl, is_back := false) -> void:
 		pass
 	else:
 		_push_javascript_state(url)
-
-
-func get_breadcrumbs() -> PoolStringArray:
-	var crumbs := PoolStringArray()
-	var length := screens_stack.size()
-	while length > 0:
-		length -= 1
-		var node: Node = screens_stack[length]
-		crumbs.push_back(node.name)
-	return crumbs
 
 
 # when a screen loads, this is called, to connect all rich text's meta's links.
@@ -169,16 +155,6 @@ func _transition(screen: CanvasItem, direction_in := true) -> void:
 	emit_signal(signal_name)
 
 
-# If there are no more screens to pops, exits the application,
-# otherwise, pops the last screen.
-# Intended to be used in mobile environments
-func _go_back_or_quit() -> void:
-	if screens_stack.size() > 1:
-		back()
-	else:
-		get_tree().quit()
-
-
 func _set_current_url_from_scene(scene: Node = null, is_back := false) -> void:
 	var path = scene.filename if scene and scene.filename else "res://"
 	set_current_url(ScreenUrl.new(_path_regex, path))
@@ -202,11 +178,11 @@ func _notification(what: int) -> void:
 		return
 
 	if what in [MainLoop.NOTIFICATION_WM_QUIT_REQUEST, MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST]:
-		_go_back_or_quit()
+		back()
 
 
 func _ready_only_setter(_unused_variable) -> void:
-	push_error("this variable is read-only")
+	push_error("This variable is read-only")
 
 
 ################################################################################
@@ -273,6 +249,10 @@ func _on_navigation_transition():
 	var is_root_screen = _current_url.path == _scene_path
 	_back_button.disabled = is_root_screen
 	_label.text = breadcrumbs.join("/")
+
+
+func _start_practice(practice: Resource) -> void:
+	pass
 
 
 class ScreenUrl:
