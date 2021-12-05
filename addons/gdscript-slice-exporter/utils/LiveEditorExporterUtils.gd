@@ -1,7 +1,5 @@
 extends Node
 
-const SceneFiles := preload("../collections/SceneFiles.gd")
-
 var export_key_regex := RegExpGroup.compile(SceneFiles.ScriptHandler.EXPORT_KEY)
 
 const SETTINGS_KEY = preload("./config.gd").SETTINGS_KEY

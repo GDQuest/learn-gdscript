@@ -54,12 +54,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://resources/Lesson.gd"
 }, {
-"base": "Reference",
+"base": "ColorRect",
 "class": "LessonDonePopup",
 "language": "GDScript",
 "path": "res://ui/components/LessonDonePopup.gd"
 }, {
-"base": "Reference",
+"base": "PanelContainer",
 "class": "OutputConsole",
 "language": "GDScript",
 "path": "res://ui/components/OutputConsole.gd"
@@ -74,11 +74,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://resources/Practice.gd"
 }, {
-"base": "PanelContainer",
-"class": "PracticeInfoPanel",
-"language": "GDScript",
-"path": "res://ui/components/UILessonPanel.gd"
-}, {
 "base": "Reference",
 "class": "RegExpGroup",
 "language": "GDScript",
@@ -90,9 +85,19 @@ _global_script_classes=[ {
 "path": "res://ui/components/Revealer.gd"
 }, {
 "base": "Resource",
+"class": "SceneFiles",
+"language": "GDScript",
+"path": "res://addons/gdscript-slice-exporter/collections/SceneFiles.gd"
+}, {
+"base": "Resource",
 "class": "SceneProperties",
 "language": "GDScript",
 "path": "res://addons/gdscript-slice-exporter/collections/SceneProperties.gd"
+}, {
+"base": "Resource",
+"class": "ScriptHandler",
+"language": "GDScript",
+"path": "res://addons/gdscript-slice-exporter/collections/ScriptHandler.gd"
 }, {
 "base": "Resource",
 "class": "ScriptProperties",
@@ -139,6 +144,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/UILesson.gd"
 }, {
+"base": "PanelContainer",
+"class": "UILessonPanel",
+"language": "GDScript",
+"path": "res://ui/components/UILessonPanel.gd"
+}, {
 "base": "Control",
 "class": "UIPractice",
 "language": "GDScript",
@@ -164,7 +174,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/components/ValidatorCheck.gd"
 }, {
-"base": "Reference",
+"base": "PanelContainer",
 "class": "ViewModeToggleButton",
 "language": "GDScript",
 "path": "res://ui/components/ViewModeToggleButton.gd"
@@ -183,10 +193,11 @@ _global_script_class_icons={
 "OutputConsole": "",
 "OutputVSplitContainer": "",
 "Practice": "",
-"PracticeInfoPanel": "",
 "RegExpGroup": "",
 "Revealer": "res://ui/components/Revealer.svg",
+"SceneFiles": "",
 "SceneProperties": "",
+"ScriptHandler": "",
 "ScriptProperties": "",
 "ScriptSlice": "",
 "ScriptVerifier": "",
@@ -196,6 +207,7 @@ _global_script_class_icons={
 "SlicesUtils": "",
 "UIContentBlock": "",
 "UILesson": "",
+"UILessonPanel": "",
 "UIPractice": "",
 "UIPracticeButton": "",
 "ValidationManager": "",
@@ -238,7 +250,7 @@ enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://ad
 
 [gdscript-slice-exporter]
 
-scene="res://ui/UIPractice.tscn"
+scene="res://ui/UINavigator.tscn"
 
 [input]
 

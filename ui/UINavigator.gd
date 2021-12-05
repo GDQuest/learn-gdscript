@@ -61,9 +61,9 @@ func back() -> void:
 	if next_in_queue:
 		_screen_container.add_child(next_in_queue)
 
-	_current_url = url
-	if _js_available and not is_back:
-		_js_history.pushState(url.href, "", url.path)
+#	_current_url = url
+#	if _js_available and not is_back:
+#		_js_history.pushState(url.href, "", url.path)
 
 	_transition_to(previous_node, false)
 	yield(self, "transition_out_completed")
@@ -186,12 +186,13 @@ func _js_popstate_listener(args) -> void:
 
 
 # If a url is set on the page, uses that
-func _load_current_browser_url() -> void:
-	if not _js_available:
-		return
-	var state = _js_history.state
-	if state:
-		var url = state.url
-		open_url(url)
-	if _js_window.location.pathname:
-		open_url(_js_window.location.pathname)
+# TODO: we removed the open_url function, gotta restore it first if needed or delete this.
+#func _load_current_browser_url() -> void:
+#	if not _js_available:
+#		return
+#	var state = _js_history.state
+#	if state:
+#		var url = state.url
+#		open_url(url)
+#	if _js_window.location.pathname:
+#		open_url(_js_window.location.pathname)
