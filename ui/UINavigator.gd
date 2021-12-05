@@ -32,9 +32,8 @@ func _ready() -> void:
 		get_tree().set_auto_accept_quit(false)
 
 	# Registers the js listener
-	if not _js_available:
-		return
-	_js_window.addEventListener("popstate", _js_popstate_listener_ref)
+	if _js_available:
+		_js_window.addEventListener("popstate", _js_popstate_listener_ref)
 
 
 func _input(event: InputEvent) -> void:
@@ -50,26 +49,6 @@ func _notification(what: int) -> void:
 		back()
 
 
-# Loads a scene and adds it to the stack.
-#
-# a url is of the form res://scene.tscn, user://scene.tscn, //scene.tscn,  or
-# /scene.tscn ("res:" will be appended automatically)
-# TODO: Make it work now we're loading resources (Practice etc.) and not scenes
-func open_url(url: String) -> void:
-	assert(url != "", "You must provide a valid url when calling open_url()")
-	var data: String = _matches.get(url, "")
-	if not data:
-		push_warning("No match found for url %s" % url)
-		return
-	var screen_url = ScreenUrl.new(_path_regex, data)
-	if not screen_url.is_valid:
-		push_warning("URL %s is not valid" % url)
-		return
-	var screen: Control = load(screen_url.href).scene.instance()
-	set_current_url(screen_url)
-	_push_screen(screen)
-
-
 # Pops the last screen from the stack
 func back() -> void:
 	if _screens_stack.size() < 1:
@@ -82,19 +61,14 @@ func back() -> void:
 	if next_in_queue:
 		_screen_container.add_child(next_in_queue)
 
-	var path = next_in_queue.filename
-	set_current_url(ScreenUrl.new(_path_regex, path))
+	_current_url = url
+	if _js_available and not is_back:
+		_js_history.pushState(url.href, "", url.path)
 
 	_transition_to(previous_node, false)
 	yield(self, "transition_out_completed")
 	_screen_container.call_deferred("remove_child", previous_node)
 	previous_node.queue_free()
-
-
-func set_current_url(url: ScreenUrl, is_back := false) -> void:
-	_current_url = url
-	if not is_back:
-		_push_javascript_state(url)
 
 
 # Pushes a screen on top of the stack and transitions it in
@@ -191,13 +165,6 @@ var _js_popstate_listener_ref := (
 	else null
 )
 var _temporary_disable_listener := false
-
-
-# Changes the browser's URL
-func _push_javascript_state(url: ScreenUrl) -> void:
-	if not _js_available:
-		return
-	_js_history.pushState(url.href, "", url.path)
 
 
 func _pop_javascript_state() -> void:
