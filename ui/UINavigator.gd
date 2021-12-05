@@ -40,7 +40,11 @@ func _ready() -> void:
 	if _is_mobile_platform:
 		get_tree().set_auto_accept_quit(false)
 	add_child(_tween)
-	_on_ready_listen_to_browser_changes()
+
+	# Registers the js listener
+	if not _js_available:
+		return
+	_js_window.addEventListener("popstate", _js_popstate_listener_ref)
 
 
 func _input(event: InputEvent) -> void:
@@ -48,21 +52,31 @@ func _input(event: InputEvent) -> void:
 		back()
 
 
+# Handle back requests
+func _notification(what: int) -> void:
+	if not _is_mobile_platform:
+		return
+	if what in [MainLoop.NOTIFICATION_WM_QUIT_REQUEST, MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST]:
+		back()
+
+
 # Loads a scene and adds it to the stack.
 #
 # a url is of the form res://scene.tscn, user://scene.tscn, //scene.tscn,  or
 # /scene.tscn ("res:" will be appended automatically)
-func open_url(data: String) -> void:
-	data = matches[data] if (data and data in matches) else data
+# TODO: Make it work now we're loading resources (Practice etc.) and not scenes
+func open_url(url: String) -> void:
+	assert(url != "", "You must provide a valid url when calling open_url()")
+	var data := matches.get(url, "")
 	if not data:
-		push_warning("no url provided")
+		push_warning("No match found for url %s" % url)
 		return
-	var url = ScreenUrl.new(_path_regex, data)
-	if not url.is_valid:
+	var screen_url = ScreenUrl.new(_path_regex, data)
+	if not screen_url.is_valid:
+		push_warning("URL %s is not valid" % url)
 		return
-	var scene: PackedScene = load(url.href)
-	var screen: CanvasItem = scene.instance()
-	set_current_url(url)
+	var screen: Control = load(screen_url.href).scene.instance()
+	set_current_url(screen_url)
 	_push_screen(screen)
 
 
@@ -76,10 +90,12 @@ func back() -> void:
 
 	var next_in_queue := _get_topmost_child()
 	if next_in_queue:
-		_add_child_to_root_container(next_in_queue)
-	_set_current_url_from_scene(next_in_queue)
+		_root_container.call_deferred("add_child", child)
 
-	_transition(previous_node, false)
+	var path = scene.filename if scene and scene.filename else "res://"
+	set_current_url(ScreenUrl.new(_path_regex, path))
+
+	_transition_to(previous_node, false)
 	yield(self, "transition_out_completed")
 	_root_container.call_deferred("remove_child", previous_node)
 	previous_node.queue_free()
@@ -87,9 +103,7 @@ func back() -> void:
 
 func set_current_url(url: ScreenUrl, is_back := false) -> void:
 	_current_url = url
-	if is_back:
-		pass
-	else:
+	if not is_back:
 		_push_javascript_state(url)
 
 
@@ -110,8 +124,8 @@ func _connect_rich_texts_group(group_name := "navigation_text") -> void:
 func _push_screen(screen: Node) -> void:
 	var previous_node := _get_topmost_child()
 	screens_stack.push_back(screen)
-	_add_child_to_root_container(screen)
-	_transition(screen)
+	_root_container.call_deferred("add_child", child)
+	_transition_to(screen)
 	if previous_node:
 		yield(self, "transition_in_completed")
 
@@ -124,65 +138,36 @@ func _push_screen(screen: Node) -> void:
 #
 # Anything can go in there, as long as "transition_in_completed" or
 # "transition_out_completed" are emitted at the end.
-#
-# 'Screen' is assumed to be a CanvasItem, this method will have issues otherwise
-# turn transitions off by setting `use_transitions` to false to skip transitions
-func _transition(screen: CanvasItem, direction_in := true) -> void:
+func _transition_to(screen: Control, direction_in := true) -> void:
 	var signal_name := "transition_in_completed" if direction_in else "transition_out_completed"
 	if not use_transitions:
 		yield(get_tree(), "idle_frame")
 		emit_signal(signal_name)
 		return
-	var start = get_viewport().size.x
-	var end = 0.0
-	var property := (
-		"position:x"
-		if screen is Node2D
-		else ("rect_position:x" if screen is Control else "")
-	)
-	if not property:
-		return
 
-	var trans := Tween.TRANS_CUBIC
-	var easing := Tween.EASE_IN_OUT
-	var duration := 0.8
-	if direction_in:
-		_tween.interpolate_property(screen, property, start, end, duration, trans, easing)
-	else:
-		_tween.interpolate_property(screen, property, end, start, duration, trans, easing)
+	tween.stop_all()
+	var start := get_viewport().size.x if direction_in else 0.0
+	var end := 0.0 if direction_in else get_viewport().size.x
+	_tween.interpolate_property(
+		screen, property, start, end, 0.8, Tween, TRANS_CUBIC, Tween.EASE_OUT
+	)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 	emit_signal(signal_name)
 
 
-func _set_current_url_from_scene(scene: Node = null, is_back := false) -> void:
-	var path = scene.filename if scene and scene.filename else "res://"
-	set_current_url(ScreenUrl.new(_path_regex, path))
-
-
-# Appends a new child to the root container in deferred mode
-func _add_child_to_root_container(child: Node) -> void:
-	_root_container.call_deferred("add_child", child)
-
-
-# Appends a new child to the root container in deferred mode
 func _get_topmost_child() -> Node:
 	if screens_stack.size() > 0:
 		return screens_stack[0] as Node
 	return null
 
 
-# Handle back requests
-func _notification(what: int) -> void:
-	if not _is_mobile_platform:
-		return
-
-	if what in [MainLoop.NOTIFICATION_WM_QUIT_REQUEST, MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST]:
-		back()
-
-
 func _ready_only_setter(_unused_variable) -> void:
 	push_error("This variable is read-only")
+
+
+func _start_practice(practice: Resource) -> void:
+	pass
 
 
 ################################################################################
@@ -226,13 +211,6 @@ func _js_popstate_listener(args) -> void:
 	back()
 
 
-# Registers the js listener
-func _on_ready_listen_to_browser_changes() -> void:
-	if not _js_available:
-		return
-	_js_window.addEventListener("popstate", _js_popstate_listener_ref)
-
-
 # If a url is set on the page, uses that
 func _load_current_browser_url() -> void:
 	if not _js_available:
@@ -249,10 +227,6 @@ func _on_navigation_transition():
 	var is_root_screen = _current_url.path == _scene_path
 	_back_button.disabled = is_root_screen
 	_label.text = breadcrumbs.join("/")
-
-
-func _start_practice(practice: Resource) -> void:
-	pass
 
 
 class ScreenUrl:
