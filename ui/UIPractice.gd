@@ -1,5 +1,5 @@
 tool
-class_name CourseExercise
+class_name UIPractice
 extends Control
 
 signal exercise_validated(is_valid)

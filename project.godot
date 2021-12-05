@@ -34,11 +34,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://resources/Course.gd"
 }, {
-"base": "Control",
-"class": "CourseExercise",
-"language": "GDScript",
-"path": "res://ui/UIPractice.gd"
-}, {
 "base": "MarginContainer",
 "class": "ErrorOverlayPopup",
 "language": "GDScript",
@@ -144,6 +139,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/UILesson.gd"
 }, {
+"base": "Control",
+"class": "UIPractice",
+"language": "GDScript",
+"path": "res://ui/UIPractice.gd"
+}, {
 "base": "Node",
 "class": "UIPracticeButton",
 "language": "GDScript",
@@ -175,7 +175,6 @@ _global_script_class_icons={
 "CodeEditorEnhancer": "",
 "ContentBlock": "",
 "Course": "",
-"CourseExercise": "",
 "ErrorOverlayPopup": "",
 "GameViewport": "",
 "LanguageServerError": "",
@@ -197,6 +196,7 @@ _global_script_class_icons={
 "SlicesUtils": "",
 "UIContentBlock": "",
 "UILesson": "",
+"UIPractice": "",
 "UIPracticeButton": "",
 "ValidationManager": "",
 "Validator": "",
@@ -238,7 +238,7 @@ enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://ad
 
 [gdscript-slice-exporter]
 
-scene="res://ui/UIPracticeButton.tscn"
+scene="res://ui/UINavigator.tscn"
 
 [input]
 

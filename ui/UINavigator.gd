@@ -3,8 +3,6 @@ extends PanelContainer
 signal transition_in_completed
 signal transition_out_completed
 
-export var scene_file: PackedScene
-
 var screens_stack := []
 # Can contain shortcuts to scenes. Match a string with a scene
 # @type Dictionary[String, PackedScene Path]
@@ -14,16 +12,14 @@ var use_transitions := false
 var breadcrumbs: PoolStringArray setget _ready_only_setter
 
 # Used for transition animations.
-var _tween := Tween.new()
 var _is_mobile_platform := OS.get_name() in ["Android", "HTML5", "iOS"]
 var _path_regex := RegExpGroup.compile("^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)")
 var _current_url := ScreenUrl.new(_path_regex, "res://")
 
 onready var _back_button := $VBoxContainer/Buttons/HBoxContainer/BackButton as Button
 onready var _label := $VBoxContainer/Buttons/HBoxContainer/BreadCrumbs as Label
-onready var _root_container := $VBoxContainer/PanelContainer as Container
-
-onready var _scene_path := scene_file.resource_path
+onready var _screen_container := $VBoxContainer/PanelContainer as Container
+onready var _tween := $Tween as Tween
 
 
 func _ready() -> void:
@@ -36,10 +32,8 @@ func _ready() -> void:
 	connect("transition_in_completed", self, "_on_navigation_transition")
 	connect("transition_out_completed", self, "_on_navigation_transition")
 
-	open_url(_scene_path)
 	if _is_mobile_platform:
 		get_tree().set_auto_accept_quit(false)
-	add_child(_tween)
 
 	# Registers the js listener
 	if not _js_available:
@@ -67,7 +61,7 @@ func _notification(what: int) -> void:
 # TODO: Make it work now we're loading resources (Practice etc.) and not scenes
 func open_url(url: String) -> void:
 	assert(url != "", "You must provide a valid url when calling open_url()")
-	var data := matches.get(url, "")
+	var data: String = matches.get(url, "")
 	if not data:
 		push_warning("No match found for url %s" % url)
 		return
@@ -88,16 +82,16 @@ func back() -> void:
 
 	var previous_node: Node = screens_stack.pop_back()
 
-	var next_in_queue := _get_topmost_child()
+	var next_in_queue: Control = screens_stack.pop_back()
 	if next_in_queue:
-		_root_container.call_deferred("add_child", child)
+		_screen_container.add_child(next_in_queue)
 
-	var path = scene.filename if scene and scene.filename else "res://"
+	var path = next_in_queue.filename
 	set_current_url(ScreenUrl.new(_path_regex, path))
 
 	_transition_to(previous_node, false)
 	yield(self, "transition_out_completed")
-	_root_container.call_deferred("remove_child", previous_node)
+	_screen_container.call_deferred("remove_child", previous_node)
 	previous_node.queue_free()
 
 
@@ -105,6 +99,18 @@ func set_current_url(url: ScreenUrl, is_back := false) -> void:
 	_current_url = url
 	if not is_back:
 		_push_javascript_state(url)
+
+
+# Pushes a screen on top of the stack and transitions it in
+func _push_screen(screen: Control) -> void:
+	var previous_node: Control = screens_stack.back()
+	screens_stack.push_back(screen)
+	_screen_container.add_child(screen)
+	_transition_to(screen)
+	if previous_node:
+		yield(self, "transition_in_completed")
+		_screen_container.call_deferred("remove_child", previous_node)
+	_connect_rich_texts_group()
 
 
 # when a screen loads, this is called, to connect all rich text's meta's links.
@@ -120,19 +126,6 @@ func _connect_rich_texts_group(group_name := "navigation_text") -> void:
 				rich_text_label.connect("meta_clicked", self, "open_url")
 
 
-# Pushes a screen on top of the stack and transitions it in
-func _push_screen(screen: Node) -> void:
-	var previous_node := _get_topmost_child()
-	screens_stack.push_back(screen)
-	_root_container.call_deferred("add_child", child)
-	_transition_to(screen)
-	if previous_node:
-		yield(self, "transition_in_completed")
-
-		_root_container.call_deferred("remove_child", previous_node)
-	_connect_rich_texts_group()
-
-
 # Transitions a screen in. This is there as a placeholder, we probably want
 # something prettier.
 #
@@ -140,26 +133,24 @@ func _push_screen(screen: Node) -> void:
 # "transition_out_completed" are emitted at the end.
 func _transition_to(screen: Control, direction_in := true) -> void:
 	var signal_name := "transition_in_completed" if direction_in else "transition_out_completed"
+
+	_back_button.disabled = _current_url.path == filename
+	_label.text = breadcrumbs.join("/")
+
 	if not use_transitions:
 		yield(get_tree(), "idle_frame")
 		emit_signal(signal_name)
 		return
 
-	tween.stop_all()
+	_tween.stop_all()
 	var start := get_viewport().size.x if direction_in else 0.0
 	var end := 0.0 if direction_in else get_viewport().size.x
 	_tween.interpolate_property(
-		screen, property, start, end, 0.8, Tween, TRANS_CUBIC, Tween.EASE_OUT
+		screen, "rect_position:x", start, end, 0.8, Tween.TRANS_CUBIC, Tween.EASE_OUT
 	)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 	emit_signal(signal_name)
-
-
-func _get_topmost_child() -> Node:
-	if screens_stack.size() > 0:
-		return screens_stack[0] as Node
-	return null
 
 
 func _ready_only_setter(_unused_variable) -> void:
@@ -167,7 +158,9 @@ func _ready_only_setter(_unused_variable) -> void:
 
 
 func _start_practice(practice: Resource) -> void:
-	pass
+	var practice_ui: UIPractice = preload("UIPractice.tscn").instance()
+	practice_ui.setup(practice)
+	_screen_container.add_child(practice_ui)
 
 
 ################################################################################
@@ -221,12 +214,6 @@ func _load_current_browser_url() -> void:
 		open_url(url)
 	if _js_window.location.pathname:
 		open_url(_js_window.location.pathname)
-
-
-func _on_navigation_transition():
-	var is_root_screen = _current_url.path == _scene_path
-	_back_button.disabled = is_root_screen
-	_label.text = breadcrumbs.join("/")
 
 
 class ScreenUrl:
