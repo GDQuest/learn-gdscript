@@ -109,8 +109,9 @@ func _on_save_button_pressed() -> void:
 	_code_editor_is_dirty = false
 	LiveEditorState.update_nodes(script, nodes_paths)
 
-	var test_errors := []
-	emit_signal("exercise_validated", test_errors.empty())
+	var result := _tester.run_tests()
+	_practice_info_panel.update_tests_display(result)
+	emit_signal("exercise_validated", result.is_success())
 
 
 func _on_pause_button_pressed() -> void:
