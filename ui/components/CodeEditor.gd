@@ -14,7 +14,7 @@ var _initial_text := ""
 
 var _split_container: SplitContainer = null
 
-onready var _slice_editor := find_node("SliceEditor") as SliceEditor
+onready var slice_editor := find_node("SliceEditor") as SliceEditor
 onready var _save_button := find_node("SaveButton") as Button
 onready var _pause_button := find_node("PauseButton") as Button
 onready var _solution_button := find_node("SolutionButton") as Button
@@ -33,7 +33,7 @@ func _ready() -> void:
 	_solution_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.SOLUTION])
 	_restore_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.RESTORE])
 
-	_slice_editor.connect("text_changed", self, "_on_text_changed")
+	slice_editor.connect("text_changed", self, "_on_text_changed")
 	yield(get_tree(), "idle_frame")
 	_initial_text = text
 
@@ -49,7 +49,7 @@ func _get_configuration_warning() -> String:
 
 func _on_text_changed() -> void:
 	_restore_button.disabled = false
-	emit_signal("text_changed", _slice_editor.text)
+	emit_signal("text_changed", slice_editor.text)
 
 
 func _on_restore_pressed() -> void:
@@ -59,20 +59,20 @@ func _on_restore_pressed() -> void:
 
 func _on_solution_pressed() -> void:
 	_restore_button.disabled = false
-	_slice_editor.sync_text_with_slice()
+	slice_editor.sync_text_with_slice()
 
 
 func set_text(new_text: String) -> void:
 	text = new_text
 	if not is_inside_tree():
 		yield(self, "ready")
-	_slice_editor.text = new_text
+	slice_editor.text = new_text
 
 
 func get_text() -> String:
 	if not is_inside_tree():
 		return text
-	return _slice_editor.text
+	return slice_editor.text
 
 
 func set_split_container_path(value: NodePath) -> void:

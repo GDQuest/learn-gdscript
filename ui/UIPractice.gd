@@ -17,10 +17,6 @@ onready var _game_container := find_node("Output") as PanelContainer
 onready var _game_viewport := _game_container.find_node("GameViewport") as GameViewport
 
 onready var _lesson_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
-onready var _title_label := _lesson_panel.title_label
-onready var _progress_bar := _lesson_panel.progress_bar
-onready var _goal_rich_text_label := _lesson_panel.goal_rich_text_label
-onready var _checks_container := _lesson_panel.checks_container
 onready var _hints_container := _lesson_panel.hints_container
 
 onready var _code_editor := find_node("CodeEditor") as CodeEditor
@@ -46,8 +42,8 @@ func setup(practice: Practice) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 
-	_goal_rich_text_label.bbcode_text = practice.goal
-	_title_label.text = practice.title
+	_lesson_panel.goal_rich_text_label.bbcode_text = practice.goal
+	_lesson_panel.title_label.text = practice.title
 	_code_editor.text = practice.starting_code
 
 	_hints_container.visible = practice.hints.empty()
@@ -76,7 +72,7 @@ func setup(practice: Practice) -> void:
 	# 		check.text = validator.title
 	# 		remove_child(validator)
 	# 		check.add_child(validator)
-	# 		_checks_container.add_child(check)
+	# 		_lesson_panel.checks_container.add_child(check)
 	# 		_validation_manager.add_check(check)
 
 
@@ -92,7 +88,7 @@ func set_progress(new_progress: float) -> void:
 	progress = new_progress
 	if not is_inside_tree():
 		yield(self, "ready")
-	_progress_bar.value = progress
+	_lesson_panel.progress_bar.value = progress
 
 
 
@@ -104,7 +100,7 @@ func _on_save_button_pressed() -> void:
 	verifier.test()
 	var errors: Array = yield(verifier, "errors")
 	if errors.size():
-		_code_editor._slice_editor.errors = errors
+		_code_editor.slice_editor.errors = errors
 		for index in errors.size():
 			var error: LanguageServerError = errors[index]
 			LiveEditorMessageBus.print_error(
@@ -113,7 +109,7 @@ func _on_save_button_pressed() -> void:
 				error.error_range.start.line,
 				error.error_range.start.character
 			)
-		_send_exercise_validated_signal(false)
+		emit_signal("exercise_validated", false)
 		return
 	script_text = LiveEditorMessageBus.replace_script(script_path, script_text)
 	var script = GDScript.new()
@@ -124,14 +120,14 @@ func _on_save_button_pressed() -> void:
 			"The script has an error, but the language server didn't catch it. Are you connected?",
 			script_path
 		)
-		_send_exercise_validated_signal(false)
+		emit_signal("exercise_validated", false)
 		return
 	_code_editor_is_dirty = false
 	LiveEditorState.update_nodes(script, nodes_paths)
 	_validation_manager.validate_all()
 	var validation_errors: Array = yield(_validation_manager, "validation_completed_all")
-	var validation_success = validation_errors.size() == 0
-	_send_exercise_validated_signal(validation_success)
+
+	emit_signal("exercise_validated", validation_errors.size() == 0)
 
 
 func _on_pause_button_pressed() -> void:
@@ -140,11 +136,6 @@ func _on_pause_button_pressed() -> void:
 
 func _on_code_editor_text_changed(_text: String) -> void:
 	_code_editor_is_dirty = true
-
-
-func _send_exercise_validated_signal(is_valid: bool) -> void:
-	yield(get_tree(), "idle_frame")
-	emit_signal("exercise_validated", is_valid)
 
 
 func _on_code_editor_button(which: String) -> void:
