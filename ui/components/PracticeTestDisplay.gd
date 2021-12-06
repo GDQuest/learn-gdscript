@@ -13,6 +13,14 @@ onready var _icon := $Icon as TextureRect
 onready var _label := $Label as Label
 
 
+func mark_as_failed() -> void:
+	set_status(Status.FAILED)
+
+
+func mark_as_passed() -> void:
+	set_status(Status.PASSED)
+
+
 func set_title(new_title: String) -> void:
 	title = new_title
 	if not is_inside_tree():

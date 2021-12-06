@@ -20,6 +20,7 @@ export var children_margin := 2.0
 export var use_small_font := false setget set_use_small_font
 
 var _height := 0.0
+# List of nodes living in the revealer.
 var _contents := []
 onready var _parent := get_parent() as Control
 
@@ -56,6 +57,9 @@ func clear_contents() -> void:
 	for node in _contents:
 		node.queue_free()
 
+
+func get_contents() -> Array:
+	return _contents
 
 func set_is_expanded(new_is_expanded: bool) -> void:
 	is_expanded = new_is_expanded

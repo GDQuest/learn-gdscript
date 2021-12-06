@@ -11,15 +11,23 @@ onready var progress_bar := find_node("ProgressBar") as ProgressBar
 onready var goal_rich_text_label := find_node("Goal").find_node("TextBox") as RichTextLabel
 onready var hints_container := find_node("Hints") as Revealer
 
-onready var _checks_container := find_node("Checks") as Revealer
+onready var _checks := find_node("Checks") as Revealer
 
 
 func display_tests(info: Array) -> void:
-	_checks_container.clear_contents()
 	for test in info:
 		var instance: PracticeTestDisplay = TestDisplayScene.instance()
 		instance.title = test
-		_checks_container.add_child(instance)
+		_checks.add_child(instance)
+
+
+func update_tests_display(test_result: PracticeTester.TestResult) -> void:
+	for node in _checks.get_contents():
+		var checkmark := node as PracticeTestDisplay
+		if checkmark.title in test_result.passed_tests:
+			checkmark.mark_as_passed()
+		else:
+			checkmark.mark_as_failed()
 
 
 func set_title(new_title: String) -> void:
