@@ -14,10 +14,6 @@ onready var _content_blocks := $ContentBlocks as VBoxContainer
 onready var _practices_container := $Practices as VBoxContainer
 
 
-func _ready() -> void:
-	setup(preload("res://course/lesson-66929/lesson.tres"))
-
-
 func setup(lesson: Resource) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")

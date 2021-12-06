@@ -33,7 +33,6 @@ func _ready() -> void:
 
 	_code_editor.connect("action", self, "_on_code_editor_button")
 	_code_editor.connect("text_changed", self, "_on_code_editor_text_changed")
-	setup(preload("res://course/lesson-66929/practice-85733.tres"))
 
 
 func _input(event: InputEvent) -> void:

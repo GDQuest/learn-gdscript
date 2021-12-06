@@ -3,6 +3,8 @@ extends PanelContainer
 signal transition_in_completed
 signal transition_out_completed
 
+export (Resource) var course = preload("res://course/course-learn-gdscript.tres")
+
 # If `true`, play transition animations.
 var use_transitions := true
 
@@ -34,6 +36,7 @@ func _ready() -> void:
 	# Registers the js listener
 	if _js_available:
 		_js_window.addEventListener("popstate", _js_popstate_listener_ref)
+	_navigate_to(course.lessons[0])
 
 
 func _input(event: InputEvent) -> void:
@@ -51,8 +54,7 @@ func _notification(what: int) -> void:
 
 # Pops the last screen from the stack
 func _back() -> void:
-	if _screens_stack.size() < 1:
-		push_warning("No screen to pop")
+	if _screens_stack.size() < 2:
 		return
 
 	var previous_node: Node = _screens_stack.pop_back()
