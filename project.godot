@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "TextureRect",
-"class": "CheckmarkIcon",
-"language": "GDScript",
-"path": "res://ui/components/CheckmarkIcon.gd"
-}, {
 "base": "PanelContainer",
 "class": "CodeEditor",
 "language": "GDScript",
@@ -78,6 +73,11 @@ _global_script_classes=[ {
 "class": "PracticeInfoPanel",
 "language": "GDScript",
 "path": "res://ui/components/PracticeInfoPanel.gd"
+}, {
+"base": "Reference",
+"class": "PracticeTester",
+"language": "GDScript",
+"path": "res://validation/PracticeTester.gd"
 }, {
 "base": "Reference",
 "class": "RegExpGroup",
@@ -159,28 +159,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/UIPracticeButton.gd"
 }, {
-"base": "Node",
-"class": "ValidationManager",
-"language": "GDScript",
-"path": "res://validation/ValidationManager.gd"
-}, {
-"base": "Node",
-"class": "Validator",
-"language": "GDScript",
-"path": "res://validation/Validator.gd"
-}, {
-"base": "",
-"class": "ValidatorCheck",
-"language": "GDScript",
-"path": "res://ui/components/ValidatorCheck.gd"
-}, {
 "base": "PanelContainer",
 "class": "ViewModeToggleButton",
 "language": "GDScript",
 "path": "res://ui/components/ViewModeToggleButton.gd"
 } ]
 _global_script_class_icons={
-"CheckmarkIcon": "",
 "CodeEditor": "",
 "CodeEditorEnhancer": "",
 "ContentBlock": "",
@@ -194,6 +178,7 @@ _global_script_class_icons={
 "OutputVSplitContainer": "",
 "Practice": "",
 "PracticeInfoPanel": "",
+"PracticeTester": "",
 "RegExpGroup": "",
 "Revealer": "res://ui/components/Revealer.svg",
 "SceneFiles": "",
@@ -210,9 +195,6 @@ _global_script_class_icons={
 "UILesson": "",
 "UIPractice": "",
 "UIPracticeButton": "",
-"ValidationManager": "",
-"Validator": "",
-"ValidatorCheck": "",
 "ViewModeToggleButton": ""
 }
 
@@ -250,7 +232,7 @@ enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://ad
 
 [gdscript-slice-exporter]
 
-scene="res://ui/UINavigator.tscn"
+scene="res://ui/components/PracticeCheckDisplay.tscn"
 
 [input]
 

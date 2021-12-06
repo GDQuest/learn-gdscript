@@ -12,7 +12,6 @@ var progress := 0.0 setget set_progress
 # If `true`, the text changed but was not saved.
 var _code_editor_is_dirty := false
 
-onready var _validation_manager := $ValidationManager as ValidationManager
 onready var _game_container := find_node("Output") as PanelContainer
 onready var _game_viewport := _game_container.find_node("GameViewport") as GameViewport
 
@@ -62,18 +61,7 @@ func setup(practice: Practice) -> void:
 		revealer.rect_min_size.x = _hints_container.rect_size.x - _hints_container.padding
 
 	# TODO: re-add support for validators
-	#
-	# var validators_number := 0
-	# for child in get_children():
-	# 	if child is Validator:
-	# 		validators_number += 1
-	# 		var validator := child as Validator
-	# 		var check := ValidatorCheck.new()
-	# 		check.text = validator.title
-	# 		remove_child(validator)
-	# 		check.add_child(validator)
-	# 		_lesson_panel.checks_container.add_child(check)
-	# 		_validation_manager.add_check(check)
+
 
 
 func take_over_slice() -> void:
@@ -91,7 +79,6 @@ func set_progress(new_progress: float) -> void:
 	_lesson_panel.progress_bar.value = progress
 
 
-
 func _on_save_button_pressed() -> void:
 	var script_path: String = slice_properties.get_script_properties().file_path
 	var script_text: String = slice_properties.current_full_text
@@ -99,7 +86,7 @@ func _on_save_button_pressed() -> void:
 	var verifier := ScriptVerifier.new(self, script_text)
 	verifier.test()
 	var errors: Array = yield(verifier, "errors")
-	if errors.size():
+	if not errors.empty():
 		_code_editor.slice_editor.errors = errors
 		for index in errors.size():
 			var error: LanguageServerError = errors[index]
@@ -124,10 +111,9 @@ func _on_save_button_pressed() -> void:
 		return
 	_code_editor_is_dirty = false
 	LiveEditorState.update_nodes(script, nodes_paths)
-	_validation_manager.validate_all()
-	var validation_errors: Array = yield(_validation_manager, "validation_completed_all")
-
-	emit_signal("exercise_validated", validation_errors.size() == 0)
+	
+	var test_errors := []
+	emit_signal("exercise_validated", test_errors.empty())
 
 
 func _on_pause_button_pressed() -> void:
