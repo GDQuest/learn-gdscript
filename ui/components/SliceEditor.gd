@@ -51,9 +51,13 @@ func _ready() -> void:
 				"value_changed", self, "_on_scrollbar_value_changed", [SCROLL_DIR.HORIZONTAL]
 			)
 			found += 1
+			
+	errors_overlay.name = "ErrorsOverlay"
 	errors_overlay.theme = theme
 	add_child(errors_overlay)
+	errors_overlay.set_anchors_and_margins_preset(Control.PRESET_WIDE)
 	add_child(errors_overlay_message)
+	
 	connect("text_changed", self, "_on_text_changed")
 
 
@@ -104,14 +108,14 @@ func _update_overlays() -> void:
 		if is_outside_lens:
 			continue
 
-		var squiggly := errors_overlay.add_error(error, offset, scroll_offset)
-
-		var panel_position := squiggly.panel_position
+		var squiggly := errors_overlay.add_error(error)
+		if not squiggly:
+			continue
 
 		squiggly.connect(
-			"mouse_entered", errors_overlay_message, "display", [error.message, panel_position]
+			"region_entered", errors_overlay_message, "show_message", [error.message, squiggly]
 		)
-		squiggly.connect("mouse_exited", errors_overlay_message, "hide")
+		squiggly.connect("region_exited", errors_overlay_message, "hide_message", [squiggly])
 
 
 # Receives an array of `LanguageServerError`s

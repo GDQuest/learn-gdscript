@@ -7,6 +7,8 @@ export var offset := Vector2(6.0, 6.0)
 
 var error_message: String setget set_error_message
 
+var _current_message_source: Node
+
 onready var _error_label := $MarginContainer/Column/ErrorLabel as Label
 onready var _error_explanation := $MarginContainer/Column/ErrorLabel as RichTextLabel
 
@@ -15,10 +17,16 @@ func _ready() -> void:
 	hide()
 
 
-func display(message: String, position: Vector2) -> void:
+func show_message(position: Vector2, message: String, message_source: Node) -> void:
+	_current_message_source = message_source
 	set_error_message(message)
-	rect_global_position = position
+	#rect_global_position = position
 	show()
+
+
+func hide_message(message_source: Node) -> void:
+	if _current_message_source == message_source:
+		hide()
 
 
 func set_error_message(message: String) -> void:
