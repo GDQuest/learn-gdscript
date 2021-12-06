@@ -8,56 +8,41 @@ const ScriptProperties = preload("./ScriptProperties.gd")
 
 export var scene_properties: Resource setget set_scene_properties, get_scene_properties
 export var script_properties: Resource setget set_script_properties, get_script_properties
-
 # Amount of tabs before a slice annotation. We normalize scripts to use tabs for indentation.
 export var leading_spaces := 0
-
 # Annotation keyword. It's always `EXPORT` for the moment, but if more keywords
 # are added later, this could change
 export var keyword := "EXPORT"
-
 # True if the slice is a closing slice.
 #
 # Closing slices are only used to determine slice limits during slicing, and
 # thrown away later. You shouldn't ever see this being true
 export var closing := false
-
 # Name of the slice. Will be empty if is_full_file is true
 export var name := ""
-
 # True if the slice corresponds to a full script
 export var is_full_file := false
-
 # Start line of the slice, excluding the keyword comment
 export var start := 0
-
 # End of the slice, excluding the keyword comment
 export var end := 0
-
 # All the lines before the slice
 export var lines_before := []
-
 # All the lines after the slice
 export var lines_after := []
-
 # All the lines of the slice
 export var lines_editable := []
 
 # Returns the slice
 var slice_text: String setget _read_only, get_slice_text
-
 # Returns the recomposed file
 var full_text: String setget _read_only, get_full_text
-
 # A cache for the modified slice
 var current_text: String
-
 # Returns the full text, but the slice is replaced with the modified slice
 var current_full_text: String setget _read_only, get_current_full_text
-
 # Returns the amount of lines before the slice
 var start_offset: int setget _read_only, get_start_offset
-
 # Returns the amount of lines before the slice, plus the amount of lines in the
 # slice
 var end_offset: int setget _read_only, get_end_offset

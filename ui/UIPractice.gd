@@ -6,7 +6,7 @@ signal exercise_validated(is_valid)
 
 const RevealerScene := preload("components/Revealer.tscn")
 
-var script_slice: SliceProperties
+var _script_slice: SliceProperties
 var progress := 0.0 setget set_progress
 
 # If `true`, the text changed but was not saved.
@@ -60,9 +60,8 @@ func setup(practice: Practice) -> void:
 
 		revealer.rect_min_size.x = _hints_container.rect_size.x - _hints_container.padding
 
-	# TODO: re-add support for validators
-	script_slice = load(practice.script_slice_path)
-	LiveEditorState.current_slice = script_slice
+	_script_slice = load(practice.script_slice_path)
+	LiveEditorState.current_slice = _script_slice
 	_game_viewport.use_scene()
 
 
@@ -74,9 +73,9 @@ func set_progress(new_progress: float) -> void:
 
 
 func _on_save_button_pressed() -> void:
-	var script_path: String = script_slice.get_script_properties().file_path
-	var script_text: String = script_slice.current_full_text
-	var nodes_paths: Array = script_slice.get_script_properties().nodes_paths
+	var script_path: String = _script_slice.get_script_properties().file_path
+	var script_text: String = _script_slice.current_full_text
+	var nodes_paths: Array = _script_slice.get_script_properties().nodes_paths
 	var verifier := ScriptVerifier.new(self, script_text)
 	verifier.test()
 	var errors: Array = yield(verifier, "errors")
