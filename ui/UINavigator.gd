@@ -4,7 +4,7 @@ signal transition_in_completed
 signal transition_out_completed
 
 # If `true`, play transition animations.
-var use_transitions := false
+var use_transitions := true
 
 var _screens_stack := []
 # Maps url strings to resource paths.
@@ -56,10 +56,10 @@ func _back() -> void:
 		return
 
 	var previous_node: Node = _screens_stack.pop_back()
+	_breadcrumbs.remove(_breadcrumbs.size() - 1)
 
-	var next_in_queue: Control = _screens_stack.pop_back()
-	if next_in_queue:
-		_screen_container.add_child(next_in_queue)
+	if not _screens_stack.empty():
+		_screen_container.add_child(_screens_stack.back())
 
 #	_current_url = url
 #	if _js_available and not is_back:
@@ -82,21 +82,22 @@ func _navigate_to(target: Resource) -> void:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
 		return
 
-	assert(screen.has_method("setup"), "%s is missing the setup() method" % target.resource_path)
 	screen.setup(target)
 
-	var previous_node: Control = _screens_stack.back()
+	var has_previous_screen = not _screens_stack.empty()
 	_screens_stack.push_back(screen)
+	_breadcrumbs.push_back(target.title)
 	_screen_container.add_child(screen)
 	_transition_to(screen)
-	if previous_node:
+	if has_previous_screen:
+		var previous_screen: Control = _screens_stack[-2]
 		yield(self, "transition_in_completed")
-		_screen_container.call_deferred("remove_child", previous_node)
+		_screen_container.call_deferred("remove_child", previous_screen)
 
 	# Connect to RichTextLabel meta links to navigate to different scenes.
 	for node in get_tree().get_nodes_in_group("rich_text_label"):
 		assert(node is RichTextLabel)
-		if node.bbcode_enabled:
+		if node.bbcode_enabled and not node.is_connected("meta_clicked", self, "_on_RichTextLabel_meta_clicked"):
 			node.connect("meta_clicked", self, "_on_RichTextLabel_meta_clicked")
 
 
