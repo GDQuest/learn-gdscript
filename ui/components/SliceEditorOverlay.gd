@@ -16,7 +16,7 @@ func _gui_input(event: InputEvent) -> void:
 			overlay = overlay as ErrorOverlay
 			if not overlay or not is_instance_valid(overlay):
 				continue
-			
+
 			if overlay.try_consume_mouse(point):
 				return
 
@@ -26,18 +26,34 @@ func clean() -> void:
 		overlay.queue_free()
 
 
+func update_overlays() -> void:
+	var text_edit := get_parent() as TextEdit
+	if not text_edit:
+		return
+
+	for overlay in get_children():
+		overlay = overlay as ErrorOverlay
+		if not overlay or not is_instance_valid(overlay):
+			continue
+
+		overlay.regions = _get_error_range_regions(overlay.error_range, text_edit)
+
+
 func add_error(error: LanguageServerError) -> ErrorOverlay:
 	var text_edit := get_parent() as TextEdit
 	if not text_edit:
 		return null
 
 	var error_overlay := ErrorOverlay.new()
+	error_overlay.error_range = error.error_range
 	error_overlay.regions = _get_error_range_regions(error.error_range, text_edit)
 	add_child(error_overlay)
-	
+
 	return error_overlay
 
 
+# FIXME: This can be pretty slow with a debug engine build, need to check if it's still slow in release.
+# FIXME: There seem to be stange behavior around tabs, may be an engine bug with the new methods, need to check.
 func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextEdit) -> Array:
 	var regions := []
 
@@ -102,8 +118,8 @@ class ErrorOverlay extends Control:
 	signal region_entered(panel_position)
 	signal region_exited
 
+	var error_range#: LanguageServerRange
 	var regions := [] setget set_regions
-	var panel_position: Vector2
 
 	var _lines := []
 	var _hovered_region := -1

@@ -35,6 +35,8 @@ var errors := [] setget set_errors
 
 func _ready() -> void:
 	CodeEditorEnhancer.enhance(self)
+
+	var scroll_offsets := Vector2.ZERO
 	var found = 0
 	for child in get_children():
 		if found >= 2:
@@ -44,21 +46,28 @@ func _ready() -> void:
 			vscrollbar.connect(
 				"value_changed", self, "_on_scrollbar_value_changed", [SCROLL_DIR.VERTICAL]
 			)
+			scroll_offsets.x = vscrollbar.get_minimum_size().x
+
 			found += 1
 		elif child is HScrollBar:
 			var hscrollbar: HScrollBar = child
 			hscrollbar.connect(
 				"value_changed", self, "_on_scrollbar_value_changed", [SCROLL_DIR.HORIZONTAL]
 			)
+			scroll_offsets.y = hscrollbar.get_minimum_size().y
+
 			found += 1
-			
+
 	errors_overlay.name = "ErrorsOverlay"
 	errors_overlay.theme = theme
 	add_child(errors_overlay)
 	errors_overlay.set_anchors_and_margins_preset(Control.PRESET_WIDE)
+	errors_overlay.margin_right = -scroll_offsets.x
+	errors_overlay.margin_bottom = -scroll_offsets.y
 	add_child(errors_overlay_message)
-	
+
 	connect("text_changed", self, "_on_text_changed")
+	connect("draw", self, "_update_overlays")
 
 
 func _get_configuration_warning() -> String:
@@ -72,7 +81,6 @@ func _get_configuration_warning() -> String:
 func _on_scrollbar_value_changed(value: float, direction: int) -> void:
 	var vec2 = Vector2(0, value) if direction == SCROLL_DIR.VERTICAL else Vector2(value, 0)
 	emit_signal("scroll_changed", vec2)
-	_update_overlays()
 
 
 func sync_text_with_slice() -> void:
@@ -87,7 +95,7 @@ func sync_text_with_slice() -> void:
 #
 # 1. Changing errors
 # 2. Scroll/Resize
-func _update_overlays() -> void:
+func _reset_overlays() -> void:
 	errors_overlay.clean()
 	var slice_properties := LiveEditorState.current_slice
 	if slice_properties == null:
@@ -95,8 +103,6 @@ func _update_overlays() -> void:
 
 	var show_lines_from = slice_properties.start_offset
 	var show_lines_to = slice_properties.end_offset
-	var scroll_offset := errors_overlay.calculate_scroll_offset(self)
-	var offset = errors_overlay.calculate_offset(self)
 
 	for index in errors.size():
 		var error: LanguageServerError = errors[index]
@@ -118,13 +124,17 @@ func _update_overlays() -> void:
 		squiggly.connect("region_exited", errors_overlay_message, "hide_message", [squiggly])
 
 
+func _update_overlays() -> void:
+	errors_overlay.update_overlays()
+
+
 # Receives an array of `LanguageServerError`s
 func set_errors(new_errors: Array) -> void:
 	if OS.is_debug_build():
 		for err in errors:
 			assert(err is LanguageServerError, "Error %s isn't a valid LanguageServerError" % [err])
 	errors = new_errors
-	_update_overlays()
+	_reset_overlays()
 
 
 func _on_text_changed() -> void:

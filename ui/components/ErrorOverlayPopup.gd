@@ -20,6 +20,7 @@ func _ready() -> void:
 func show_message(position: Vector2, message: String, message_source: Node) -> void:
 	_current_message_source = message_source
 	set_error_message(message)
+	# TODO: The blob should likely be positioned next to the erring line based on the position argument.
 	#rect_global_position = position
 	show()
 
