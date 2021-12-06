@@ -6,17 +6,18 @@ signal exercise_validated(is_valid)
 
 const RevealerScene := preload("components/Revealer.tscn")
 
-var _script_slice: SliceProperties
 var progress := 0.0 setget set_progress
 
+var _script_slice: SliceProperties
+var _tester: PracticeTester
 # If `true`, the text changed but was not saved.
 var _code_editor_is_dirty := false
 
 onready var _game_container := find_node("Output") as PanelContainer
 onready var _game_viewport := _game_container.find_node("GameViewport") as GameViewport
 
-onready var _lesson_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
-onready var _hints_container := _lesson_panel.hints_container
+onready var _practice_info_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
+onready var _hints_container := _practice_info_panel.hints_container
 
 onready var _code_editor := find_node("CodeEditor") as CodeEditor
 
@@ -32,8 +33,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_distraction_free_mode"):
-		var is_distraction_free := not _lesson_panel.visible
-		_lesson_panel.visible = is_distraction_free
+		var is_distraction_free := not _practice_info_panel.visible
+		_practice_info_panel.visible = is_distraction_free
 		_game_container.visible = is_distraction_free
 
 
@@ -41,8 +42,8 @@ func setup(practice: Practice) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 
-	_lesson_panel.goal_rich_text_label.bbcode_text = practice.goal
-	_lesson_panel.title_label.text = practice.title
+	_practice_info_panel.goal_rich_text_label.bbcode_text = practice.goal
+	_practice_info_panel.title_label.text = practice.title
 	_code_editor.text = practice.starting_code
 
 	_hints_container.visible = practice.hints.empty()
@@ -64,12 +65,15 @@ func setup(practice: Practice) -> void:
 	LiveEditorState.current_slice = _script_slice
 	_game_viewport.use_scene()
 
+	_tester = load(practice.validator_script_path).new()
+	_practice_info_panel.display_tests(_tester.get_test_names())
+
 
 func set_progress(new_progress: float) -> void:
 	progress = new_progress
 	if not is_inside_tree():
 		yield(self, "ready")
-	_lesson_panel.progress_bar.value = progress
+	_practice_info_panel.progress_bar.value = progress
 
 
 func _on_save_button_pressed() -> void:
@@ -104,7 +108,7 @@ func _on_save_button_pressed() -> void:
 		return
 	_code_editor_is_dirty = false
 	LiveEditorState.update_nodes(script, nodes_paths)
-	
+
 	var test_errors := []
 	emit_signal("exercise_validated", test_errors.empty())
 

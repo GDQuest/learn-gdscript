@@ -32,8 +32,8 @@ func run_tests() -> void:
 func _find_test_method_names() -> Dictionary:
 	var output := {}
 	for method in get_method_list():
-		if method.begins_with("test_"):
-			output[method] = method.trim_prefix("test_").capitalize()
+		if method.name.begins_with("test_"):
+			output[method] = method.name.trim_prefix("test_").capitalize()
 	return output
 
 

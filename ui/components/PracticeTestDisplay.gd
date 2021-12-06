@@ -1,9 +1,10 @@
+class_name PracticeTestDisplay
 extends Control
 
 enum Status { IDLE, FAILED, PASSED }
 
-const COLOR_PASSED = Color("#26c6f7")
-const COLOR_FAILED = Color("#fff540")
+const COLOR_PASSED = Color(0.239216, 1, 0.431373)
+const COLOR_FAILED = Color(1, 0.094118, 0.321569)
 
 var status: int = Status.IDLE setget set_status
 var title := "" setget set_title

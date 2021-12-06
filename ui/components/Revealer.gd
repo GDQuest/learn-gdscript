@@ -52,6 +52,11 @@ func add_child(node: Node, _legible_unique_name := false) -> void:
 	update_min_size()
 
 
+func clear_contents() -> void:
+	for node in _contents:
+		node.queue_free()
+
+
 func set_is_expanded(new_is_expanded: bool) -> void:
 	is_expanded = new_is_expanded
 
