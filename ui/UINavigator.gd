@@ -22,11 +22,11 @@ onready var _tween := $Tween as Tween
 
 
 func _ready() -> void:
-	Events.connect("lesson_end_popup_closed", self, "back")
-	Events.connect("lesson_start_requested", self, "open_url")
-	Events.connect("practice_start_requested", self, "_start_practice")
+	Events.connect("lesson_end_popup_closed", self, "_back")
+	Events.connect("lesson_start_requested", self, "_navigate_to")
+	Events.connect("practice_start_requested", self, "_navigate_to")
 
-	_back_button.connect("pressed", self, "back")
+	_back_button.connect("pressed", self, "_back")
 
 	if _is_mobile_platform:
 		get_tree().set_auto_accept_quit(false)
@@ -38,7 +38,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("ui_back"):
-		back()
+		_back()
 
 
 # Handle back requests
@@ -46,11 +46,11 @@ func _notification(what: int) -> void:
 	if not _is_mobile_platform:
 		return
 	if what in [MainLoop.NOTIFICATION_WM_QUIT_REQUEST, MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST]:
-		back()
+		_back()
 
 
 # Pops the last screen from the stack
-func back() -> void:
+func _back() -> void:
 	if _screens_stack.size() < 1:
 		push_warning("No screen to pop")
 		return
@@ -71,8 +71,20 @@ func back() -> void:
 	previous_node.queue_free()
 
 
-# Pushes a screen on top of the stack and transitions it in
-func _push_screen(screen: Control) -> void:
+# Instantates a screen based on the `target` resource and transitions to it.
+func _navigate_to(target: Resource) -> void:
+	var screen: Control
+	if target is Practice:
+		screen = preload("UIPractice.tscn").instance()
+	elif target is Lesson:
+		screen = preload("UILesson.tscn").instance()
+	else:
+		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
+		return
+
+	assert(screen.has_method("setup"), "%s is missing the setup() method" % target.resource_path)
+	screen.setup(target)
+
 	var previous_node: Control = _screens_stack.back()
 	_screens_stack.push_back(screen)
 	_screen_container.add_child(screen)
@@ -80,20 +92,27 @@ func _push_screen(screen: Control) -> void:
 	if previous_node:
 		yield(self, "transition_in_completed")
 		_screen_container.call_deferred("remove_child", previous_node)
-	_connect_rich_texts_group()
+
+	# Connect to RichTextLabel meta links to navigate to different scenes.
+	for node in get_tree().get_nodes_in_group("rich_text_label"):
+		assert(node is RichTextLabel)
+		if node.bbcode_enabled:
+			node.connect("meta_clicked", self, "_on_RichTextLabel_meta_clicked")
 
 
-# when a screen loads, this is called, to connect all rich text's meta's links.
-# the default group name is navigation_text. If you want to use this for other
-# groups, then you can use it manually.
-func _connect_rich_texts_group(group_name := "navigation_text") -> void:
-	yield(get_tree(), "idle_frame")
-	for child in get_tree().get_nodes_in_group(group_name):
-		if child is RichTextLabel:
-			var rich_text_label := child as RichTextLabel
-			if rich_text_label.bbcode_enabled:
-				# Connects links in a rich text so they open scenes.
-				rich_text_label.connect("meta_clicked", self, "open_url")
+func _on_RichTextLabel_meta_clicked(metadata: String) -> void:
+	if (
+		metadata.begins_with("https://")
+		or metadata.begins_with("http://")
+		or metadata.begins_with("//")
+	):
+		OS.shell_open(metadata)
+	else:
+		var resource := load(metadata)
+		assert(
+			resource is Resource, "Attempting to load invalid resource from path '%s'" % metadata
+		)
+		_navigate_to(resource)
 
 
 # Transitions a screen in. This is there as a placeholder, we probably want
@@ -121,12 +140,6 @@ func _transition_to(screen: Control, direction_in := true) -> void:
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 	emit_signal(signal_name)
-
-
-func _start_practice(practice: Resource) -> void:
-	var practice_ui: UIPractice = preload("UIPractice.tscn").instance()
-	practice_ui.setup(practice)
-	_screen_container.add_child(practice_ui)
 
 
 class ScreenUrl:
@@ -182,8 +195,7 @@ func _js_popstate_listener(args) -> void:
 		return
 	var event = args[0]
 	var url = event.state
-	back()
-
+	_back()
 
 # If a url is set on the page, uses that
 # TODO: we removed the open_url function, gotta restore it first if needed or delete this.

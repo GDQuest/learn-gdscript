@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/theme/panel_breadcrumbs.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/UINavigator.gd" type="Script" id=4]
+[ext_resource path="res://ui/UILesson.tscn" type="PackedScene" id=5]
 
 [node name="UINavigator" type="PanelContainer"]
 anchor_right = 1.0
@@ -59,5 +60,9 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="UILesson" parent="VBoxContainer/PanelContainer" instance=ExtResource( 5 )]
+margin_right = 1920.0
+margin_bottom = 1033.0
 
 [node name="Tween" type="Tween" parent="."]
