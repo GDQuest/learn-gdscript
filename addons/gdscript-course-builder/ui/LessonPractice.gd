@@ -263,7 +263,7 @@ func _change_script_slice_script(file_path: String) -> void:
 
 	if (
 		not file_path.empty()
-		and (file_path.get_extension() != "gd" or not _file_tester.file_exists(file_path))
+		and (file_path.get_extension() != "tres" or not _file_tester.file_exists(file_path))
 	):
 		_script_slice_value.modulate = Color.red
 	else:
