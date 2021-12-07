@@ -45,6 +45,7 @@ func add_error(error: LanguageServerError) -> ErrorOverlay:
 		return null
 
 	var error_overlay := ErrorOverlay.new()
+	error_overlay.severity = error.severity
 	error_overlay.error_range = error.error_range
 	error_overlay.regions = _get_error_range_regions(error.error_range, text_edit)
 	add_child(error_overlay)
@@ -52,7 +53,6 @@ func add_error(error: LanguageServerError) -> ErrorOverlay:
 	return error_overlay
 
 
-# FIXME: This can be pretty slow with a debug engine build, need to check if it's still slow in release.
 # FIXME: There seem to be stange behavior around tabs, may be an engine bug with the new methods, need to check.
 func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextEdit) -> Array:
 	var regions := []
@@ -115,9 +115,16 @@ func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextE
 
 
 class ErrorOverlay extends Control:
+	enum Severity { ERROR, WARNING, NOTICE }
+
+	const COLOR_ERROR := Color("#E83482")
+	const COLOR_WARNING := Color("#D2C84F")
+	const COLOR_NOTICE := Color("#79F2D6")
+
 	signal region_entered(panel_position)
 	signal region_exited
 
+	var severity := -1
 	var error_range#: LanguageServerRange
 	var regions := [] setget set_regions
 
@@ -149,14 +156,14 @@ class ErrorOverlay extends Control:
 			return false
 
 		if _hovered_region == -1 and not region_has_point == -1:
-			var panel_position = _lines[i].position
+			var panel_position = _lines[i].rect_position
 			emit_signal("region_entered", panel_position)
 		elif not _hovered_region == -1 and region_has_point == -1:
 			emit_signal("region_exited")
 		else:
 			emit_signal("region_exited")
 
-			var panel_position = _lines[i].position
+			var panel_position = _lines[i].rect_position
 			emit_signal("region_entered", panel_position)
 
 		_hovered_region = region_has_point
@@ -164,47 +171,139 @@ class ErrorOverlay extends Control:
 
 
 	func set_regions(error_regions: Array) -> void:
-		for squiggly in _lines:
-			squiggly = squiggly as SquigglyLine
-			if not squiggly or not is_instance_valid(squiggly):
+		for underline in _lines:
+			underline = underline as ErrorUnderline
+			if not underline or not is_instance_valid(underline):
 				continue
-			remove_child(squiggly)
-			squiggly.queue_free()
+			remove_child(underline)
+			underline.queue_free()
 
 		_lines = []
 		regions = []
 
 		for error_region in error_regions:
-			var squiggly := SquigglyLine.new()
-			squiggly.position =	Vector2(error_region.position.x, error_region.end.y)
-			squiggly.wave_width = error_region.size.x
+			var underline := ErrorUnderline.new()
 
-			add_child(squiggly)
-			_lines.append(squiggly)
+			match severity:
+				Severity.ERROR:
+					underline.line_type = ErrorUnderline.LineType.JAGGED
+					underline.line_color = COLOR_ERROR
+				Severity.WARNING:
+					underline.line_type = ErrorUnderline.LineType.SQUIGGLY
+					underline.line_color = COLOR_WARNING
+				_:
+					underline.line_type = ErrorUnderline.LineType.DASHED
+					underline.line_color = COLOR_NOTICE
+
+			underline.rect_position = Vector2(error_region.position.x, error_region.end.y)
+			underline.line_length = error_region.size.x
+
+			add_child(underline)
+			_lines.append(underline)
 			regions.append(error_region)
 
 
-class SquigglyLine extends Line2D:
-	const WAVE_STEP_WIDTH := 18.0
-	const WAVE_HEIGHT := 4.0
+class ErrorUnderline extends Control:
+	enum LineType { SQUIGGLY, JAGGED, DASHED }
+
 	const LINE_THICKNESS := 2.0
-	const VERTEX_COUNT := 16
 
-	const COLOR_ERROR := Color("#d81946")
-	const COLOR_WARNING := Color("#ffe478")
+	const SQUIGGLY_HEIGHT := 3.0
+	const SQUIGGLY_STEP_WIDTH := 20.0
+	const SQUIGGLY_VERTEX_COUNT := 16
 
-	var wave_width := 64.0 setget set_wave_width
+	const JAGGED_HEIGHT := 5.0
+	const JAGGED_STEP_WIDTH := 12.0
+
+	const DASHED_STEP_WIDTH := 14.0
+	const DASHED_GAP := 8.0
+
+	var line_length := 64.0 setget set_line_length
+	var line_type := -1 setget set_line_type
+	var line_color := Color.white setget set_line_color
+
+	var _points: PoolVector2Array
 
 
-	func update_drawing() -> void:
-		points.empty()
-		for i in VERTEX_COUNT * wave_width / WAVE_STEP_WIDTH:
-			add_point(Vector2(
-				WAVE_STEP_WIDTH * i / VERTEX_COUNT,
-				WAVE_HEIGHT / 2.0 * sin(TAU * i / VERTEX_COUNT)
-			))
+	func _init() -> void:
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 
-	func set_wave_width(value: float) -> void:
-		wave_width = value
-		update_drawing()
+	func _draw() -> void:
+		if line_type == LineType.DASHED:
+			# draw_multiline doesn't support thickness, so we have to do this manually.
+			var i := 0
+			while i < _points.size() - 1:
+				draw_line(_points[i], _points[i + 1], line_color, LINE_THICKNESS, true)
+				i += 2
+		else:
+			draw_polyline(_points, line_color, LINE_THICKNESS, true)
+
+
+	func update_points() -> void:
+		_points = PoolVector2Array()
+
+		match line_type:
+			LineType.SQUIGGLY:
+				for i in SQUIGGLY_VERTEX_COUNT * line_length / SQUIGGLY_STEP_WIDTH:
+					_points.append(Vector2(
+						SQUIGGLY_STEP_WIDTH * i / SQUIGGLY_VERTEX_COUNT,
+						SQUIGGLY_HEIGHT / 2.0 * sin(TAU * i / SQUIGGLY_VERTEX_COUNT)
+					))
+
+			LineType.JAGGED:
+				for i in line_length / JAGGED_STEP_WIDTH:
+					_points.append(Vector2(
+						JAGGED_STEP_WIDTH * i,
+						0.0
+					))
+					_points.append(Vector2(
+						JAGGED_STEP_WIDTH * i + JAGGED_STEP_WIDTH / 4.0,
+						-JAGGED_HEIGHT / 2.0
+					))
+					_points.append(Vector2(
+						JAGGED_STEP_WIDTH * i + JAGGED_STEP_WIDTH * 3.0 / 4.0,
+						JAGGED_HEIGHT / 2.0
+					))
+
+			LineType.DASHED:
+				for i in line_length / (DASHED_STEP_WIDTH + DASHED_GAP):
+					_points.append(Vector2(
+						(DASHED_STEP_WIDTH + DASHED_GAP) * i,
+						0.0
+					))
+					
+					var end_x = (DASHED_STEP_WIDTH + DASHED_GAP) * (i + 1) - DASHED_GAP
+					if end_x > line_length:
+						end_x = line_length
+					_points.append(Vector2(
+						end_x,
+						0.0
+					))
+
+			_:
+				_points.append(Vector2(
+					0.0,
+					0.0
+				))
+				_points.append(Vector2(
+					line_length,
+					0.0
+				))
+
+
+	func set_line_length(value: float) -> void:
+		line_length = value
+		update_points()
+		update()
+
+
+	func set_line_type(value: int) -> void:
+		line_type = value
+		update_points()
+		update()
+
+
+	func set_line_color(value: Color) -> void:
+		line_color = value
+		update()
