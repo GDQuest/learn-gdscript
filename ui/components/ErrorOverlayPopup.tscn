@@ -8,37 +8,29 @@
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=6]
 
 [node name="ErrorOverlayPopup" type="MarginContainer"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -276.5
-margin_top = -181.0
-margin_right = 276.5
-margin_bottom = 181.0
-grow_horizontal = 2
-grow_vertical = 2
+margin_right = 553.0
+margin_bottom = 362.0
 rect_min_size = Vector2( 400, 0 )
 mouse_filter = 2
 theme = ExtResource( 1 )
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 533.0
-margin_bottom = 342.0
+margin_right = 553.0
+margin_bottom = 362.0
 mouse_filter = 2
 custom_styles/panel = ExtResource( 6 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 533.0
-margin_bottom = 342.0
+margin_right = 553.0
+margin_bottom = 362.0
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
@@ -47,12 +39,12 @@ custom_constants/margin_bottom = 8
 [node name="Column" type="VBoxContainer" parent="MarginContainer"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 505.0
-margin_bottom = 314.0
+margin_right = 545.0
+margin_bottom = 354.0
 custom_constants/separation = 8
 
 [node name="ErrorLabel" type="Label" parent="MarginContainer/Column"]
-margin_right = 497.0
+margin_right = 537.0
 margin_bottom = 55.0
 custom_colors/font_color = Color( 0.360784, 0.678431, 0.988235, 1 )
 text = "Error: Indented block expected after declaration of \"_ready\" function."
@@ -60,13 +52,13 @@ autowrap = true
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/Column"]
 margin_top = 63.0
-margin_right = 497.0
+margin_right = 537.0
 margin_bottom = 63.0
 custom_constants/separation = 0
 
 [node name="Revealer" parent="MarginContainer/Column" instance=ExtResource( 3 )]
 margin_top = 71.0
-margin_right = 497.0
+margin_right = 537.0
 margin_bottom = 118.0
 title = "Why this happens"
 padding = 8.0
@@ -100,7 +92,7 @@ expand_icon = true
 
 [node name="Revealer2" parent="MarginContainer/Column" instance=ExtResource( 3 )]
 margin_top = 126.0
-margin_right = 497.0
+margin_right = 537.0
 margin_bottom = 306.0
 rect_min_size = Vector2( 200, 180 )
 title = "How to fix this"
@@ -111,7 +103,7 @@ use_small_font = true
 [node name="ErrorExplanation" type="RichTextLabel" parent="MarginContainer/Column/Revealer2"]
 margin_left = 8.0
 margin_top = 52.0
-margin_right = 497.0
+margin_right = 537.0
 margin_bottom = 180.0
 bbcode_enabled = true
 bbcode_text = "Add a leading tab to this line of code."

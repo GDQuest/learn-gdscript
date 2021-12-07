@@ -121,7 +121,7 @@ class ErrorOverlay extends Control:
 	const COLOR_WARNING := Color("#D2C84F")
 	const COLOR_NOTICE := Color("#79F2D6")
 
-	signal region_entered(panel_position)
+	signal region_entered(reference_position)
 	signal region_exited
 
 	var severity := -1
@@ -156,15 +156,15 @@ class ErrorOverlay extends Control:
 			return false
 
 		if _hovered_region == -1 and not region_has_point == -1:
-			var panel_position = _lines[i].rect_position
-			emit_signal("region_entered", panel_position)
+			var reference_position = _lines[i].rect_global_position
+			emit_signal("region_entered", reference_position)
 		elif not _hovered_region == -1 and region_has_point == -1:
 			emit_signal("region_exited")
 		else:
 			emit_signal("region_exited")
 
-			var panel_position = _lines[i].rect_position
-			emit_signal("region_entered", panel_position)
+			var reference_position = _lines[i].rect_global_position
+			emit_signal("region_entered", reference_position)
 
 		_hovered_region = region_has_point
 		return true
