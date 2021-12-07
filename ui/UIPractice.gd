@@ -2,8 +2,6 @@ tool
 class_name UIPractice
 extends Control
 
-signal exercise_validated(is_valid)
-
 const RevealerScene := preload("components/Revealer.tscn")
 
 var progress := 0.0 setget set_progress
@@ -12,6 +10,7 @@ var _script_slice: SliceProperties
 var _tester: PracticeTester
 # If `true`, the text changed but was not saved.
 var _code_editor_is_dirty := false
+var _practice: Practice
 
 onready var _game_container := find_node("Output") as PanelContainer
 onready var _game_viewport := _game_container.find_node("GameViewport") as GameViewport
@@ -42,6 +41,7 @@ func setup(practice: Practice) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 
+	_practice = practice
 	_practice_info_panel.goal_rich_text_label.bbcode_text = practice.goal
 	_practice_info_panel.title_label.text = practice.title
 	_code_editor.text = practice.starting_code
@@ -93,7 +93,6 @@ func _on_save_button_pressed() -> void:
 				error.error_range.start.line,
 				error.error_range.start.character
 			)
-		emit_signal("exercise_validated", false)
 		return
 	script_text = LiveEditorMessageBus.replace_script(script_path, script_text)
 	var script = GDScript.new()
@@ -104,18 +103,14 @@ func _on_save_button_pressed() -> void:
 			"The script has an error, but the language server didn't catch it. Are you connected?",
 			script_path
 		)
-		emit_signal("exercise_validated", false)
 		return
 	_code_editor_is_dirty = false
 	LiveEditorState.update_nodes(script, nodes_paths)
 
 	var result := _tester.run_tests()
 	_practice_info_panel.update_tests_display(result)
-	emit_signal("exercise_validated", result.is_success())
-
-
-func _on_pause_button_pressed() -> void:
-	_game_viewport.toggle_scene_pause()
+	if result.is_success():
+		Events.emit_signal("practice_completed", _practice)
 
 
 func _on_code_editor_text_changed(_text: String) -> void:
@@ -127,4 +122,4 @@ func _on_code_editor_button(which: String) -> void:
 		_code_editor.ACTIONS.SAVE:
 			_on_save_button_pressed()
 		_code_editor.ACTIONS.PAUSE:
-			_on_pause_button_pressed()
+			_game_viewport.toggle_scene_pause()

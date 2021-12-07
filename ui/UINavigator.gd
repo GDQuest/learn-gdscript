@@ -3,7 +3,7 @@ extends PanelContainer
 signal transition_in_completed
 signal transition_out_completed
 
-export (Resource) var course = preload("res://course/course-learn-gdscript.tres")
+export(Resource) var course = preload("res://course/course-learn-gdscript.tres")
 
 # If `true`, play transition animations.
 var use_transitions := true
@@ -16,6 +16,8 @@ var _breadcrumbs: PoolStringArray
 var _is_mobile_platform := OS.get_name() in ["Android", "HTML5", "iOS"]
 var _path_regex := RegExpGroup.compile("^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)")
 var _current_url := ScreenUrl.new(_path_regex, "res://")
+var _lesson_index := 0 setget _set_lesson_index
+var _lesson_count: int = course.lessons.size()
 
 onready var _back_button := $VBoxContainer/Buttons/HBoxContainer/BackButton as Button
 onready var _label := $VBoxContainer/Buttons/HBoxContainer/BreadCrumbs as Label
@@ -27,6 +29,7 @@ func _ready() -> void:
 	Events.connect("lesson_end_popup_closed", self, "_back")
 	Events.connect("lesson_start_requested", self, "_navigate_to")
 	Events.connect("practice_start_requested", self, "_navigate_to")
+	Events.connect("practice_completed", self, "_on_Events_practice_completed")
 
 	_back_button.connect("pressed", self, "_back")
 
@@ -74,7 +77,7 @@ func _back() -> void:
 
 
 # Instantates a screen based on the `target` resource and transitions to it.
-func _navigate_to(target: Resource) -> void:
+func _navigate_to(target: Resource, clear_history := false) -> void:
 	var screen: Control
 	if target is Practice:
 		screen = preload("UIPractice.tscn").instance()
@@ -83,6 +86,10 @@ func _navigate_to(target: Resource) -> void:
 	else:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
 		return
+
+	if clear_history:
+		_screens_stack.clear()
+		_breadcrumbs = PoolStringArray()
 
 	screen.setup(target)
 
@@ -99,7 +106,10 @@ func _navigate_to(target: Resource) -> void:
 	# Connect to RichTextLabel meta links to navigate to different scenes.
 	for node in get_tree().get_nodes_in_group("rich_text_label"):
 		assert(node is RichTextLabel)
-		if node.bbcode_enabled and not node.is_connected("meta_clicked", self, "_on_RichTextLabel_meta_clicked"):
+		if (
+			node.bbcode_enabled
+			and not node.is_connected("meta_clicked", self, "_on_RichTextLabel_meta_clicked")
+		):
 			node.connect("meta_clicked", self, "_on_RichTextLabel_meta_clicked")
 
 
@@ -143,6 +153,25 @@ func _transition_to(screen: Control, direction_in := true) -> void:
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 	emit_signal(signal_name)
+
+
+func _on_Events_practice_completed(practice: Practice) -> void:
+	var practices: Array = course.lessons[_lesson_index].practices
+	var index := practices.find(practice)
+	var is_last_practice := practices.size() - 1 <= index
+	if is_last_practice:
+		_set_lesson_index(_lesson_index + 1)
+	else:
+		_navigate_to(practices[index + 1])
+
+
+func _set_lesson_index(index: int) -> void:
+	_lesson_index = index
+	if _lesson_index == _lesson_count:
+		# TODO: figure out some screen at the end of the course
+		print("You reached the end of the course!")
+	else:
+		_navigate_to(course.lessons[index], true)
 
 
 class ScreenUrl:
