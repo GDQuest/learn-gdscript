@@ -66,6 +66,7 @@ func setup(practice: Practice) -> void:
 	_game_viewport.use_scene()
 
 	_tester = load(practice.validator_script_path).new()
+	_tester.setup(_game_viewport, _script_slice)
 	_practice_info_panel.display_tests(_tester.get_test_names())
 
 

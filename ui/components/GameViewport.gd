@@ -51,5 +51,9 @@ func use_scene() -> void:
 	_viewport.size = LiveEditorState.current_slice.get_scene_properties().viewport_size
 
 
+func get_viewport() -> Viewport:
+	return _viewport
+
+
 func _on_screen_resized() -> void:
 	_viewport.size = rect_size
