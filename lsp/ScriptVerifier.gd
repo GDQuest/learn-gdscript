@@ -58,16 +58,20 @@ func _on_http_request_completed(
 ) -> void:
 	var response = (
 		parse_json(body.get_string_from_utf8())
-		if result == HTTPRequest.RESULT_SUCCESS
+		if result == HTTPRequest.RESULT_SUCCESS and _response_code == 200
 		else []
 	)
 	remove_http_request_node()
+
+	if result == HTTPRequest.RESULT_SUCCESS and not _response_code == 200:
+		printerr("Failed to verify the script using the language server: " + body.get_string_from_utf8())
 
 	# @type Array<LanguageServerError>
 	var errors = []
 
 	if not response.size():
 		emit_signal("errors", errors)
+		return
 
 	for index in response.size():
 		var dict: Dictionary = response[index]
