@@ -138,7 +138,6 @@ static func enhance(text_edit: TextEdit) -> void:
 	text_edit.syntax_highlighting = true
 	text_edit.show_line_numbers = true
 	text_edit.draw_tabs = true
-	text_edit.draw_spaces = true
 	text_edit.smooth_scrolling = true
 	text_edit.caret_block_mode = true
 	text_edit.caret_blink = true
