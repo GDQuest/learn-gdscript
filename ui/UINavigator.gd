@@ -137,18 +137,17 @@ func _transition_to(screen: Control, previous_screen: Control = null, direction_
 	screen.show()
 	previous_screen.show()
 	var viewport_width := get_viewport().size.x
-	var start := viewport_width if direction_in else 0.0
-	var end := 0.0 if direction_in else viewport_width
+	var direction := 1.0 if direction_in else -1.0
+	screen.rect_position.x = viewport_width * direction
 	_tween.interpolate_property(
-		screen, "rect_position:x", start, end, 1.2, Tween.TRANS_CUBIC, Tween.EASE_OUT
+		screen, "rect_position:x", screen.rect_position.x, 0.0, 1.2, Tween.TRANS_CUBIC, Tween.EASE_OUT
 	)
 	if previous_screen:
-		var direction := -1.0 if direction_in else 0.0
 		_tween.interpolate_property(
 			previous_screen,
 			"rect_position:x",
-			start + viewport_width * direction,
-			end + viewport_width * direction,
+			previous_screen.rect_position.x,
+			-viewport_width * direction,
 			1.2,
 			Tween.TRANS_CUBIC,
 			Tween.EASE_OUT
