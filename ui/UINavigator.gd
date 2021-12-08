@@ -80,6 +80,8 @@ func _navigate_to(target: Resource, clear_history := false) -> void:
 		return
 
 	if clear_history:
+		for child in _screen_container.get_children():
+			child.queue_free()
 		_screens_stack.clear()
 		_breadcrumbs = PoolStringArray()
 

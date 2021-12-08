@@ -3,6 +3,7 @@ class_name UIPractice
 extends Control
 
 const RevealerScene := preload("components/Revealer.tscn")
+const LessonDonePopupScene := preload("components/LessonDonePopup.tscn")
 
 var progress := 0.0 setget set_progress
 
@@ -111,7 +112,9 @@ func _on_save_button_pressed() -> void:
 	var result := _tester.run_tests()
 	_practice_info_panel.update_tests_display(result)
 	if result.is_success():
-		Events.emit_signal("practice_completed", _practice)
+		var popup := LessonDonePopupScene.instance()
+		add_child(popup)
+		popup.connect("pressed", Events, "emit_signal", ["practice_completed", _practice])
 
 
 func _on_code_editor_text_changed(_text: String) -> void:
