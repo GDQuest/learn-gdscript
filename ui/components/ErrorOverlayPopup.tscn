@@ -45,38 +45,36 @@ custom_constants/separation = 8
 
 [node name="ErrorLabel" type="Label" parent="MarginContainer/Column"]
 margin_right = 537.0
-margin_bottom = 55.0
+margin_bottom = 26.0
 custom_colors/font_color = Color( 0.360784, 0.678431, 0.988235, 1 )
-text = "Error: Indented block expected after declaration of \"_ready\" function."
+text = "Original error message"
 autowrap = true
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/Column"]
-margin_top = 63.0
+margin_top = 34.0
 margin_right = 537.0
-margin_bottom = 63.0
+margin_bottom = 34.0
 custom_constants/separation = 0
 
-[node name="Revealer" parent="MarginContainer/Column" instance=ExtResource( 3 )]
-margin_top = 71.0
+[node name="ErrorExplanation" parent="MarginContainer/Column" instance=ExtResource( 3 )]
+margin_top = 42.0
 margin_right = 537.0
-margin_bottom = 118.0
+margin_bottom = 89.0
 title = "Why this happens"
 padding = 8.0
 use_small_font = true
 
-[node name="ErrorExplanation" type="RichTextLabel" parent="MarginContainer/Column/Revealer"]
+[node name="Value" type="RichTextLabel" parent="MarginContainer/Column/ErrorExplanation"]
 visible = false
 margin_top = 52.0
 margin_right = 497.0
 margin_bottom = 180.0
 bbcode_enabled = true
-bbcode_text = "This error occurs when a line of code is missing a leading tab.
-GDScript uses [u]indentation[/u] to group lines of code together."
-text = "This error occurs when a line of code is missing a leading tab.
-GDScript uses indentation to group lines of code together."
+bbcode_text = "Our error explanation."
+text = "Our error explanation."
 fit_content_height = true
 
-[node name="Button2" type="Button" parent="MarginContainer/Column/Revealer"]
+[node name="MoreHelpButton" type="Button" parent="MarginContainer/Column/ErrorExplanation"]
 visible = false
 margin_top = 182.0
 margin_right = 497.0
@@ -90,22 +88,22 @@ icon = ExtResource( 5 )
 align = 0
 expand_icon = true
 
-[node name="Revealer2" parent="MarginContainer/Column" instance=ExtResource( 3 )]
-margin_top = 126.0
+[node name="ErrorSuggestion" parent="MarginContainer/Column" instance=ExtResource( 3 )]
+margin_top = 97.0
 margin_right = 537.0
-margin_bottom = 306.0
+margin_bottom = 277.0
 rect_min_size = Vector2( 200, 180 )
 title = "How to fix this"
 is_expanded = true
 padding = 8.0
 use_small_font = true
 
-[node name="ErrorExplanation" type="RichTextLabel" parent="MarginContainer/Column/Revealer2"]
+[node name="Value" type="RichTextLabel" parent="MarginContainer/Column/ErrorSuggestion"]
 margin_left = 8.0
 margin_top = 52.0
 margin_right = 537.0
 margin_bottom = 180.0
 bbcode_enabled = true
-bbcode_text = "Add a leading tab to this line of code."
-text = "Add a leading tab to this line of code."
+bbcode_text = "Our suggestion on how to fix it."
+text = "Our suggestion on how to fix it."
 fit_content_height = true

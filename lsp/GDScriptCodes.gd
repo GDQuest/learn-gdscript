@@ -1,0 +1,441 @@
+# This here is a database of GDScript parser and compiler error messages and warnings.
+# We use it to create a mapping between identifiable messages and some abstract codes which we
+# can refer to internally.
+#
+# Warnings are already provided by codes, so we can just use an enum exactly like it is defined
+# in the engine.
+#
+# Errors on the other hand are harder. There are two groups of errors, parser errors and compiler
+# errors. There is only a few compiler errors, but around 300 well defined parser errors, with
+# additional possibility for generic parser errors.
+#
+# Each error is received with a generic code (-1), and can only be identified by its message
+# contents. We store those messages (cleaned up for better maintainability) as is, but we don't
+# actually use the raw messages for anything. Instead, each noteworthy message is assigned a
+# number of text snippets which are unique to it. These snippets are then used to figure out
+# which message was received from the LSP. When we successfully identified the message, we give it
+# a code from the enum below. That code is then used to fetch our custom error explanation,
+# translation, etc. Multiple raw messages can share the same code.
+#
+class_name GDScriptCodes
+extends Reference
+
+# Codes start at 10000 to give some space for WarningCodes coming from the engine.
+enum ErrorCode {
+	CYCLIC_REFERENCE = 10000,
+	INVALID_SELF_USAGE,
+
+	MIXED_TABS_SPACES,
+}
+
+enum WarningCode {
+	UNASSIGNED_VARIABLE, # Variable used but never assigned.
+	UNASSIGNED_VARIABLE_OP_ASSIGN, # Variable never assigned but used in an assignment operation (+=, *=, etc).
+	UNUSED_VARIABLE, # Local variable is declared but never used.
+	SHADOWED_VARIABLE, # Variable name shadowed by other variable.
+	UNUSED_CLASS_VARIABLE, # Class variable is declared but never used in the file.
+	UNUSED_ARGUMENT, # Function argument is never used.
+	UNREACHABLE_CODE, # Code after a return statement.
+	STANDALONE_EXPRESSION, # Expression not assigned to a variable.
+	VOID_ASSIGNMENT, # Function returns void but it's assigned to a variable.
+	NARROWING_CONVERSION, # Float value into an integer slot, precision is lost.
+	FUNCTION_MAY_YIELD, # Typed assign of function call that yields (it may return a function state).
+	VARIABLE_CONFLICTS_FUNCTION, # Variable has the same name of a function.
+	FUNCTION_CONFLICTS_VARIABLE, # Function has the same name of a variable.
+	FUNCTION_CONFLICTS_CONSTANT, # Function has the same name of a constant.
+	INCOMPATIBLE_TERNARY, # Possible values of a ternary if are not mutually compatible.
+	UNUSED_SIGNAL, # Signal is defined but never emitted.
+	RETURN_VALUE_DISCARDED, # Function call returns something but the value isn't used.
+	PROPERTY_USED_AS_FUNCTION, # Function not found, but there's a property with the same name.
+	CONSTANT_USED_AS_FUNCTION, # Function not found, but there's a constant with the same name.
+	FUNCTION_USED_AS_PROPERTY, # Property not found, but there's a function with the same name.
+	INTEGER_DIVISION, # Integer divide by integer, decimal part is discarded.
+	UNSAFE_PROPERTY_ACCESS, # Property not found in the detected type (but can be in subtypes).
+	UNSAFE_METHOD_ACCESS, # Function not found in the detected type (but can be in subtypes).
+	UNSAFE_CAST, # Cast used in an unknown type.
+	UNSAFE_CALL_ARGUMENT, # Function call argument is of a supertype of the require argument.
+	DEPRECATED_KEYWORD, # The keyword is deprecated and should be replaced.
+	STANDALONE_TERNARY, # Return value of ternary expression is discarded.
+}
+
+# Valid records have the following structure:
+#{
+#	"patterns": [], # Array of Array of String
+#	"raw": [], # Array of String
+#	"code": -1, # ErrorCode
+#}
+const MESSAGE_DATABASE := [
+	# Compiler errors.
+	{
+		"_unused": [
+			"Identifier not found: %IDENTIFIER%",
+			"'self' not present in static function!",
+			"Invalid native class type '%NATIVE_TYPE%'.",
+			"Parser bug: unresolved data type.",
+			"Attempt to call a non-identifier.",
+			"'break'' not within loop",
+			"'continue' not within loop",
+			"Parser bug: invalid inheritance.",
+		],
+	},
+
+	{
+		"patterns": [
+			[ "Using own name in class file is not allowed (creates a cyclic reference)" ],
+			[ "Can't load global class", ", cyclic reference?" ],
+			[ "Cyclic class reference for" ],
+		],
+		"raw": [
+			"Using own name in class file is not allowed (creates a cyclic reference)",
+			"Can't load global class %IDENTIFIER%, cyclic reference?",
+			"Cyclic class reference for '%CLASS_NAME%'.",
+		],
+		"code": ErrorCode.CYCLIC_REFERENCE,
+	},
+	{
+		"patterns": [
+			[ "Must use", "instead of 'self." ],
+		],
+		"raw": [
+			"Must use '%IDENTIFIER%' instead of 'self.%IDENTIFIER%' in getter.",
+			"Must use '%IDENTIFIER%' instead of 'self.%IDENTIFIER%' in setter.",
+		],
+		"code": ErrorCode.INVALID_SELF_USAGE,
+	},
+	{
+		"patterns": [
+			[ "Signal", "redefined" ],
+		],
+		"raw": [
+			"Signal '%SIGNAL_NAME%' redefined (in current or parent class)",
+			"Signal '%SIGNAL_NAME%' redefined (original in native class '%CLASS_NAME%')",
+		],
+		"code": -1,
+	},
+
+	# Parser errors.
+	{
+		"_unused": [
+			"Expected end of statement (\"%STATEMENT_NAME%\"), got %TOKEN_NAME% (\"%IDENTIFIER%\") instead.",
+			"Expected end of statement (\"%STATEMENT_NAME%\"), got %TOKEN_NAME% instead.",
+			"':' expected at end of line.",
+			"Expression expected",
+			"Expected ',' or ')'",
+			"Expected ')' in expression",
+			"Expected string constant or identifier after '$' or '/'.",
+			"Path expected after $.",
+			"Expected '(' after 'preload'",
+			"expected string constant as 'preload' argument.",
+			"Can't preload itself (use 'get_script()').",
+			"Can't preload resource at path: %PATH%",
+			"Expected ')' after 'preload' path",
+			"Couldn't fully preload the script, possible cyclic reference or compilation error. Use \"load()\" instead if a cyclic reference is intended.",
+			"\"yield()\" can only be used inside function blocks.",
+			"Expected \"(\" after \"yield\".",
+			"Expected \",\" after the first argument of \"yield\".",
+			"Expected \")\" after the second argument of \"yield\".",
+			"\"self\" isn't allowed in a static function or constant expression.",
+			"Built-in type constant or static function expected after \".\".",
+			"Static constant  '%CONSTANT_NAME%' not present in built-in type %BUILTIN_TYPE%.",
+			"Using assignment with operation on a variable that was never assigned.",
+			"Misplaced 'not'.",
+			"Expected identifier before 'is' operator",
+			"Unterminated array",
+			"expression or ']' expected",
+			"',' or ']' expected",
+			"Unterminated dictionary",
+			"':' expected",
+			"value expected",
+			"key or '}' expected",
+			"',' or '}' expected",
+			"Duplicate key found in Dictionary literal",
+			"Expected '(' for parent function call.",
+			"Error parsing expression, misplaced: %TOKEN_NAME%",
+			"Expected identifier as member",
+			"Expected ']'",
+			"Unexpected 'as'.",
+			"Expected type after 'as'.",
+			"Unexpected assign.",
+			"GDScriptParser bug, invalid operator in expression: %EXPRESSION%",
+			"Unexpected operator",
+			"Yet another parser bug....",
+			"Unexpected end of expression...",
+			"Parser bug...",
+			"Expected else after ternary if.",
+			"Expected value after ternary else.",
+			"Unexpected two consecutive operators after ternary if.",
+			"Unexpected two consecutive operators after ternary else.",
+			"Unexpected two consecutive operators.",
+			"Invalid argument (#%ARGUMENT_NUMBER%) for '%TYPE_NAME%' constructor.",
+			"Too many arguments for '%TYPE_NAME%' constructor.",
+			"Too few arguments for '%TYPE_NAME%' constructor.",
+			"Invalid arguments for '%TYPE_NAME%' constructor.",
+			"Invalid argument (#%ARGUMENT_NUMBER%) for '%TYPE_NAME%' intrinsic function.",
+			"Too many arguments for '%TYPE_NAME%' intrinsic function.",
+			"Too few arguments for '%TYPE_NAME%' intrinsic function.",
+			"Invalid arguments for '%TYPE_NAME%' intrinsic function.",
+			"invalid index in constant expression",
+			"invalid index '%INDEX_NAME%' in constant expression",
+			"Can't assign to constant",
+			"Can't assign to self.",
+			"Can't assign to an expression",
+			"Invalid operand for unary operator",
+			"Invalid operands for operator",
+			"Invalid export type. Only built-in and native resource types can be exported.",
+			"'..' pattern only allowed at the end of an array pattern",
+			"Not a valid pattern",
+			"Expected identifier for binding variable name.",
+			"Binding name of '%BINDING_NAME%' is already declared in this scope.",
+			"'..' pattern only allowed at the end of a dictionary pattern",
+			"Not a valid key in pattern",
+			"Not a constant expression as key",
+			"Expected pattern in dictionary value",
+			"Not a valid pattern",
+			"Expect constant expression or variables in a pattern",
+			"Invalid operator in pattern. Only index (`A.B`) is allowed",
+			"Only constant expression or variables allowed in a pattern",
+			"Only constant expressions or variables allowed in a pattern",
+			"Cannot use bindings with multipattern.",
+			"Expected block in pattern branch",
+			"The pattern type (%PATTERN_TYPE%) isn't compatible with the type of the value to match (%MATCH_TYPE%).",
+			"Cannot match an array pattern with a non-array expression.",
+			"Cannot match an dictionary pattern with a non-dictionary expression.",
+			"Multipatterns can't contain bindings",
+			"Parser bug: missing pattern bind variable.",
+			"Mixed tabs and spaces in indentation.",
+			"Expected \";\" or a line break.",
+			"Expected an identifier for the local variable name.",
+			"Variable \"%VARIABLE_NAME%\" already defined in the scope (at line %LINE_NUMBER%).",
+			"Expected a type for the variable.",
+			"Expected an indented block after \"if\".",
+			"Invalid indentation.",
+			"Expected an indented block after \"elif\".",
+			"Invalid indentation.",
+			"Expected an indented block after \"else\".",
+			"Expected an indented block after \"while\".",
+			"Identifier expected after \"for\".",
+			"\"in\" expected after identifier.",
+			"Expected indented block after \"for\".",
+			"Unexpected keyword \"continue\" outside a loop.",
+			"Unexpected keyword \"break\" outside a loop.",
+			"Expected indented pattern matching block after \"match\".",
+			"Expected '(' after assert",
+			"Wrong number of arguments, expected 1 or 2",
+			"Unexpected ':=', use '=' instead. Expected end of statement after expression.",
+			"Expected end of statement after expression, got %TOKEN_NAME% instead.",
+			"Mixed tabs and spaces in indentation.",
+			"Unexpected indentation.",
+			"Invalid indentation. Bug?",
+			"Unindent does not match any outer indentation level.",
+			"Mixed tabs and spaces in indentation.",
+			"\"extends\" can only be present once per script.",
+			"\"extends\" must be used before anything else.",
+			"\"extends\" constant must be a string.",
+			"Invalid \"extends\" syntax, expected string constant (path) and/or identifier (parent class).",
+			"\"class_name\" is only valid for the main class namespace.",
+			"\"class_name\" isn't allowed in built-in scripts.",
+			"\"class_name\" syntax: \"class_name <UniqueName>\"",
+			"\"class_name\" can only be present once per script.",
+			"Unique global class \"%CLASS_NAME%\" already exists at path: %PATH%",
+			"The class \"%CLASS_NAME%\" shadows a native class.",
+			"The class \"%CLASS_NAME%\" conflicts with the AutoLoad singleton of the same name, and is therefore redundant. Remove the class_name declaration to fix this error.",
+			"No class icon found at: %PATH%",
+			"The optional parameter after \"class_name\" must be a string constant file path to an icon.",
+			"The class icon must be separated by a comma.",
+			"The \"tool\" keyword can only be present once per script.",
+			"\"class\" syntax: \"class <Name>:\" or \"class <Name> extends <BaseClass>:\"",
+			"The class \"%CLASS_NAME%\" shadows a native class.",
+			"Can't override name of the unique global class \"%CLASS_NAME%\". It already exists at: %PATH%",
+			"Another class named \"%CLASS_NAME%\" already exists in this scope (at line %LINE_NUMBER%).",
+			"A constant named \"%CONSTANT_NAME%\" already exists in the outer class scope (at line%LINE_NUMBER%).",
+			"A variable named \"%VARIABLE_NAME%\" already exists in the outer class scope (at line %LINE_NUMBER%).",
+			"Indented block expected.",
+			"Expected \"func\".",
+			"Expected an identifier after \"func\" (syntax: \"func <identifier>([arguments]):\").",
+			"The function \"%FUNCTION_NAME%\" already exists in this class (at line %LINE_NUMBER%).",
+			"The function \"%FUNCTION_NAME%\" already exists in this class (at line %LINE_NUMBER%).",
+			"Expected \"(\" after the identifier (syntax: \"func <identifier>([arguments]):\" ).",
+			"Expected an identifier for an argument.",
+			"The argument name \"%ARGUMENT_NAME%\" is defined multiple times.",
+			"Expected a type for an argument.",
+			"Default parameter expected.",
+			"default argument must be constant",
+			"Expected \",\" or \")\".",
+			"The constructor cannot be static.",
+			"Expected \"(\" for parent constructor arguments.",
+			"Expected \",\" or \")\".",
+			"Parent constructor call found for a class without inheritance.",
+			"Expected a return type for the function.",
+			"Indented block expected after declaration of \"%FUNCTION_NAME%\" function.",
+			"Expected an identifier after \"signal\".",
+			"The signal \"%SIGNAL_NAME%\" already exists in this class (at line: %LINE_NUMBER%).",
+			"Expected an identifier in a \"signal\" argument.",
+			"Expected \",\" or \")\" after a \"signal\" parameter identifier.",
+			"Can't export null type.",
+			"Can't export raw object type.",
+			"Expected \",\" in the bit flags hint.",
+			"Expected a string constant in the named bit flags hint.",
+			"Expected \")\" or \",\" in the named bit flags hint.",
+			"Expected \")\" in the layers 2D render hint.",
+			"Expected \")\" in the layers 2D physics hint.",
+			"Expected \")\" in the layers 3D render hint.",
+			"Expected \")\" in the layers 3D physics hint.",
+			"Expected a string constant in the enumeration hint.",
+			"Expected \")\" or \",\" in the enumeration hint.",
+			"Expected \")\" in the hint.",
+			"Expected \")\" or \",\" in the exponential range hint.",
+			"Expected a range in the numeric hint.",
+			"Expected \",\" or \")\" in the numeric range hint.",
+			"Expected a number as upper bound in the numeric range hint.",
+			"Expected \",\" or \")\" in the numeric range hint.",
+			"Expected a number as step in the numeric range hint.",
+			"Expected a string constant in the enumeration hint.",
+			"Expected \"GLOBAL\" after comma in the directory hint.",
+			"Global filesystem hints may only be used in tool scripts.",
+			"Expected \")\" or \",\" in the hint.",
+			"Expected string constant with filter.",
+			"Expected \"GLOBAL\" or string constant with filter.",
+			"Color type hint expects RGB or RGBA as hints.",
+			"Type \"%TYPE_NAME%\" can't take hints.",
+			"Expected a constant expression.",
+			"The export hint isn't a resource type.",
+			"Expected \"FLAGS\" after comma.",
+			"Expected type for export.",
+			"Expected \")\" or \",\" after the export hint.",
+			"Expected \"var\", \"onready\", \"remote\", \"master\", \"puppet\", \"sync\", \"remotesync\", \"mastersync\", \"puppetsync\".",
+			"Expected \"var\".",
+			"Expected \"var\" or \"func\".",
+			"Expected an identifier for the member variable name.",
+			"Constant \"%CONSTANT_NAME%\" already exists in this class (at line %LINE_NUMBER%).",
+			"A constant named \"%CONSTANT_NAME%\" already exists in this class (at line %LINE_NUMBER%).",
+			"A constant named \"%CONSTANT_NAME%\" already exists in this class (at line: %LINE_NUMBER%).",
+			"A variable named \"%VARIABLE_NAME%\" already exists in this class (at line %LINE_NUMBER%).",
+			"Variable \"%VARIABLE_NAME%\" already exists in this class (at line: %LINE_NUMBER%).",
+			"A class named \"%CLASS_NAME%\" already exists in this class (at line %LINE_NUMBER%).",
+			"Expected a type for the class variable.",
+			"Invalid export type. Only built-in and native resource types can be exported.",
+			"Use \"onready var %VARIABLE_NAME% = get_node(...)\" instead.",
+			"Type-less export needs a constant expression assigned to infer type.",
+			"Can't accept a null constant expression for inferring export type.",
+			"The exported constant isn't a type or resource.",
+			"Can't convert the provided value to the export type.",
+			"Type-less export needs a constant expression assigned to infer type.",
+			"Expected an identifier for the setter function after \"setget\".",
+			"Expected an identifier for the getter function after \",\".",
+			"Expected an identifier for the constant.",
+			"Expected a type for the class constant.",
+			"Constants must be assigned immediately.",
+			"Expected a constant expression.",
+			"Expected \"{\" in the enum declaration.",
+			"Unexpected end of file.",
+			"Unexpected %TOKEN_NAME%, expected an identifier.",
+			"Expected a constant expression.",
+			"Expected an integer value for \"enum\".",
+			"Unexpected identifier.",
+			"Unexpected constant of type: %TYPE_NAME%",
+			"Unexpected token: %TOKEN_NAME%:%IDENTIFIER%",
+			"Couldn't resolve relative path for the parent class: %PATH%",
+			"Couldn't load the base class: %PATH%",
+			"Script isn't fully loaded (cyclic preload?): %PATH%",
+			"Couldn't find the subclass: %SUBCLASS_NAME%",
+			"Parser bug: undecidable inheritance.",
+			"The class \"%CLASS_NAME%\" couldn't be fully loaded (script error or cyclic dependency).",
+			"Class '%CLASS_NAME%' could not be fully loaded (script error or cyclic inheritance).",
+			"Cyclic inheritance.",
+			"Couldn't resolve the constant \"%CONSTANT_NAME%\".",
+			"Constant isn't a class: %IDENTIFIER%",
+			"Couldn't find the subclass: %IDENTIFIER%",
+			"Invalid inheritance (unknown class + subclasses).",
+			"Unknown class: \"%CLASS_NAME%\"",
+			"Couldn't determine inheritance.",
+			"Unexpected \".\".",
+			"Unexpected identifier.",
+			"Expected a subclass identifier.",
+			"The class \"%CLASS_NAME%\" couldn't be fully loaded (script error or cyclic dependency).",
+			"The class \"%CLASS_NAME%\" was found in global scope, but its script couldn't be loaded.",
+			"Class '%CLASS_NAME%' could not be fully loaded (script error or cyclic inheritance).",
+			"Couldn't fully load singleton script '%SCRIPT_NAME%' (possible cyclic reference or parse error).",
+			"Parser bug: unresolved constant.",
+			"The identifier \"%IDENTIFIER%\" isn't a valid type (not a script or class), or couldn't be found on base \"%CLASS_NAME%\".",
+			"Invalid cast. Cannot convert from \"%TYPE_NAME%\" to \"%TYPE_NAME%\".",
+			"The first argument of \"yield()\" must be an object.",
+			"The second argument of \"yield()\" must be a string.",
+			"Parser bug: binary operation without 2 arguments.",
+			"Invalid \"is\" test: the right operand isn't a type (neither a native type nor a script).",
+			"A value of type \"%TYPE_NAME%\" will never be an instance of \"%TYPE_NAME%\".",
+			"A value of type \"%TYPE_NAME%\" will never be of type \"%TYPE_NAME%\".",
+			"Invalid operand type (\"%ARGUMENT_TYPE%\") to unary operator \"%OPERATOR_NAME%\".",
+			"Parser bug: binary operation without 2 arguments.",
+			"Invalid operand types (\"%ARGUMENT_TYPE%\" and \"%ARGUMENT_TYPE%\") to operator \"%OPERATOR_NAME%\".",
+			"Parser bug: ternary operation without 3 arguments.",
+			"Assignment inside an expression isn't allowed (parser bug?).",
+			"Parser bug: named index with invalid arguments.",
+			"Parser bug: named index without identifier argument.",
+			"Can't get index \"%INDEX_NAME%\" on base \"%TYPE_NAME%\".",
+			"Invalid index type (%TYPE_NAME%) for base \"%TYPE_NAME%\".",
+			"Only strings can be used as an index in the base type \"%TYPE_NAME%\".",
+			"Can't index on a value of type \"%TYPE_NAME%\".",
+			"Parser bug: unhandled operation.",
+			"Parser bug: function call without enough arguments.",
+			"No constructor of '%TYPE_NAME%' matches the signature '%TYPE_NAME%(%ARGUMENT_TYPE_LIST%)'.",
+			"Parser bug: self method call without enough arguments.",
+			"Parser bug: invalid function call argument.",
+			"The method \"%CALLEE_NAME%\" isn't declared on base \"%TYPE_NAME%\".",
+			"The method \"%CALLEE_NAME%\" isn't declared in the current class.",
+			"Can't call non-static function from a static function.",
+			"Non-static function \"%CALLEE_NAME%\" can only be called from an instance.",
+			"Too few arguments for \"%CALLEE_NAME%()\" call. Expected at least %ARGUMENT_COUNT%.",
+			"Too many arguments for \"%CALLEE_NAME%()\" call. Expected at most %ARGUMENT_COUNT%.",
+			"At \"%CALLEE_NAME%()\" call, argument %ARGUMENT_NUMBER%. The passed argument's type (%TYPE_NAME%) doesn't match the function's expected argument type (%TYPE_NAME%).",
+			"Can't access member variable (\"%VARIABLE_NAME%\") from a static function.",
+			"The class \"%CLASS_NAME%\" couldn't be fully loaded (script error or cyclic dependency).",
+			"The class \"%CLASS_NAME%\" was found in global scope, but its script couldn't be loaded.",
+			"Couldn't fully load the singleton script \"%IDENTIFIER%\" (possible cyclic reference or parse error).",
+			"The identifier \"%IDENTIFIER%\" isn't declared in the current scope.",
+			"The constant value type (%TYPE_NAME%) isn't compatible with declared type (%TYPE_NAME%).",
+			"The member \"%IDENTIFIER%\" already exists in a parent class.",
+			"The assigned expression's type (%TYPE_NAME%) doesn't match the variable's type (%TYPE_NAME%).",
+			"The assigned value doesn't have a set type; the variable type can't be inferred.",
+			"The variable type cannot be inferred because its value is \"null\".",
+			"The export hint's type (%TYPE_NAME%) doesn't match the variable's type (%TYPE_NAME%).",
+			"The setter function needs to receive exactly 1 argument. See \"%FUNCTION_NAME%()\" definition at line %LINE_NUMBER%.",
+			"The setter argument's type (%TYPE_NAME%) doesn't match the variable's type (%TYPE_NAME%). See \"%FUNCTION_NAME%()\" definition at line %LINE_NUMBER%.",
+			"The getter function can't receive arguments. See \"%FUNCTION_NAME%()\" definition at line %LINE_NUMBER%.",
+			"The getter return type (%TYPE_NAME%) doesn't match the variable's type (%TYPE_NAME%). See \"%FUNCTION_NAME%()\" definition at line %LINE_NUMBER%.",
+			"The setter can't be a static function. See \"%FUNCTION_NAME%()\" definition at line %LINE_NUMBER%.",
+			"The getter can't be a static function. See \"%FUNCTION_NAME%()\" definition at line %LINE_NUMBER%.",
+			"The setter function isn't defined.",
+			"The getter function isn't defined.",
+			"The signal \"%SIGNAL_NAME%\" already exists in a parent class.",
+			"Parser bug: invalid argument default value.",
+			"Parser bug: invalid argument default value operation.",
+			"Value type (%TYPE_NAME%) doesn't match the type of argument '%ARGUMENT_NAME%' (%TYPE_NAME%).",
+			"The function signature doesn't match the parent. Parent signature is: \"%FUNCTION_SIGNATURE%\".",
+			"The constructor can't return a value.",
+			"A non-void function must return a value in all possible paths.",
+			"The assigned value type (%TYPE_NAME%) doesn't match the variable's type (%TYPE_NAME%).",
+			"The assigned value doesn't have a set type; the variable type can't be inferred.",
+			"The variable type cannot be inferred because its value is \"null\".",
+			"Parser bug: operation without enough arguments.",
+			"Can't assign a new value to a constant.",
+			"Invalid operand types (\"%TYPE_NAME%\" and \"%TYPE_NAME%\") to assignment operator \"%OPERATOR_NAME%\".",
+			"The assigned value's type (%TYPE_NAME%) doesn't match the variable's type (%TYPE_NAME%).",
+			"A void function cannot return a value.",
+			"A non-void function must return a value.",
+			"The returned value type (%TYPE_NAME%) doesn't match the function return type (%TYPE_NAME%).",
+			# A generic parser error (invalid token?).
+			"Parse error: %ERROR_TOKEN%",
+			# Any warning can be reported as error with an editor setting.
+			"%WARNING_MESSAGE% (warning treated as error)",
+		],
+	},
+	{
+		"patterns": [
+			[ "Mixed tabs and spaces in indentation." ],
+		],
+		"raw": [
+			"Mixed tabs and spaces in indentation.",
+		],
+		"code": ErrorCode.MIXED_TABS_SPACES,
+	}
+]

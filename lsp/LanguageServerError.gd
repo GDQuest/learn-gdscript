@@ -24,7 +24,61 @@ func from_JSON(json: Dictionary) -> void:
 	if "severity" in json:
 		severity = int(json.severity)
 	if "code" in json:
-		code = int(json.code)
+		code = _improve_error_code(json.code, message)
+
+
+func _improve_error_code(raw_code: int, raw_message: String) -> int:
+	# If the code has a valid value, just use it.
+	if not raw_code == -1:
+		return raw_code
+
+	# But if it's -1, try to remap the message to a new code using the GDScript codes database.
+	var remapped_code := -1
+	# Iterate through every record to find the one that has a matching pattern.
+	for record in GDScriptCodes.MESSAGE_DATABASE:
+		# First check if the record has a valid structure, just in case.
+		if not typeof(record) == TYPE_DICTIONARY:
+			continue
+		if not record.has("patterns") or not record.has("code"):
+			continue
+		if not typeof(record.patterns) == TYPE_ARRAY or not typeof(record.code) == TYPE_INT:
+			continue
+
+		# Iterate through an array of match patterns to see if any of them matches our message
+		# completely.
+		var matched = false
+		for pattern in record.patterns:
+			# Pattern must be an array of strings.
+			if not typeof(pattern) == TYPE_ARRAY:
+				continue
+
+			# We'll be modifying the message here, so copy it.
+			var message = raw_message
+			# Pattern's substrings must match the target message in order.
+			for i in pattern.size():
+				# If the substring does not match, exit early, this is not our match.
+				var substring := pattern[i] as String
+				var found = message.find(substring)
+				if found == -1:
+					break
+
+				# Cut a part of the message that we have already matched to exclude it from
+				# further checks.
+				message = message.substr(found)
+				i += 1
+				# We reached the end of the pattern without errors, so this is our match.
+				if i >= pattern.size():
+					matched = true
+					break
+
+			if matched:
+				break
+
+		if matched:
+			remapped_code = record.code
+			break
+
+	return remapped_code
 
 
 func _to_string() -> String:

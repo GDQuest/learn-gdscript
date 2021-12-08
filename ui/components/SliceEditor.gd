@@ -101,7 +101,7 @@ func _reset_overlays() -> void:
 
 	var show_lines_from = slice_properties.start_offset
 	var show_lines_to = slice_properties.end_offset
-	
+
 	errors_overlay.lines_offset = slice_properties.start_offset
 
 	for index in errors.size():
@@ -114,14 +114,14 @@ func _reset_overlays() -> void:
 		if is_outside_lens:
 			continue
 
-		var squiggly := errors_overlay.add_error(error)
-		if not squiggly:
+		var error_node := errors_overlay.add_error(error)
+		if not error_node:
 			continue
 
-		squiggly.connect(
-			"region_entered", errors_overlay_message, "show_message", [error.message, squiggly]
+		error_node.connect(
+			"region_entered", errors_overlay_message, "show_message", [error.code, error.message, error_node]
 		)
-		squiggly.connect("region_exited", errors_overlay_message, "hide_message", [squiggly])
+		error_node.connect("region_exited", errors_overlay_message, "hide_message", [error_node])
 
 
 # Updates the position of existing overlays to align with the text edit after it updates.
@@ -144,6 +144,6 @@ func set_errors(new_errors: Array) -> void:
 func _on_text_changed() -> void:
 	if LiveEditorState.current_slice != null:
 		LiveEditorState.current_slice.current_text = text
-	
+
 	# The underlying text was changed, the old errors are no longer valid then.
 	errors_overlay.clean()
