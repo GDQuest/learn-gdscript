@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/components/PracticeHint.gd" type="Script" id=2]
+
+[node name="PracticeHint" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+revealer_height = 32.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." index="2"]
+margin_right = 40.0
+margin_bottom = 40.0
+bbcode_enabled = true

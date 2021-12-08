@@ -2,7 +2,7 @@ tool
 class_name UIPractice
 extends Control
 
-const RevealerScene := preload("components/Revealer.tscn")
+const PracticeHintScene := preload("components/PracticeHint.tscn")
 const LessonDonePopupScene := preload("components/LessonDonePopup.tscn")
 
 var progress := 0.0 setget set_progress
@@ -47,20 +47,15 @@ func setup(practice: Practice) -> void:
 	_practice_info_panel.title_label.text = practice.title
 	_code_editor.text = practice.starting_code
 
-	_hints_container.visible = practice.hints.empty()
+	_hints_container.visible = not practice.hints.empty()
 	var index := 0
+	var available_width := _hints_container.rect_size.x - _hints_container.padding
 	for hint in practice.hints:
-		var revealer: Revealer = RevealerScene.instance()
-		revealer.title = "Hint " + String(index + 1).pad_zeros(1)
-
-		_hints_container.add_child(revealer)
-
-		var label := Label.new()
-		label.text = hint
-		revealer.add_child(label)
-		revealer.is_expanded = false
-
-		revealer.rect_min_size.x = _hints_container.rect_size.x - _hints_container.padding
+		var practice_hint: PracticeHint = PracticeHintScene.instance()
+		practice_hint.title = "Hint " + String(index + 1).pad_zeros(1)
+		practice_hint.bbcode_text = hint
+		_hints_container.add_child(practice_hint)
+		practice_hint.rect_min_size.x = available_width
 
 	_script_slice = load(practice.script_slice_path)
 	LiveEditorState.current_slice = _script_slice
