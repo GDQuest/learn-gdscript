@@ -1,5 +1,7 @@
 extends Object
 
+const LETTERS_AND_DIGITS := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+const CHARACTER_COUNT := 62
 
 # Recursively saves the course content: lessons, their order, their content, and
 # their practices.
@@ -106,9 +108,14 @@ static func remove_obsolete(file_paths: Array) -> void:
 
 
 static func random_lesson_path(course: Course) -> String:
-	var base_path = course.resource_path.get_base_dir()
-	var lesson_slug = "lesson-%d" % [randi() % 100000 + 10000]
-	return base_path.plus_file(lesson_slug).plus_file("lesson.tres")
+	var _file_tester := Directory.new()
+	var base_path := course.resource_path.get_base_dir()
+	var lesson_directory := "lesson-" + generate_random_path_slug()
+	var dirpath := base_path.plus_file(lesson_directory)
+	while _file_tester.dir_exists(dirpath):
+		lesson_directory = "lesson-" + generate_random_path_slug()
+		dirpath = base_path.plus_file(lesson_directory)
+	return dirpath.plus_file("lesson.tres")
 
 
 static func slugged_lesson_path(course: Course, slug: String) -> String:
@@ -118,12 +125,29 @@ static func slugged_lesson_path(course: Course, slug: String) -> String:
 
 
 static func random_content_block_path(lesson: Lesson) -> String:
+	var _file_tester := Directory.new()
 	var base_path = lesson.resource_path.get_base_dir()
-	var block_file = "content-%d.tres" % [randi() % 100000 + 10000]
-	return base_path.plus_file(block_file)
+	var block_file = "content-%s.tres" % [generate_random_path_slug()]
+	var path = base_path.plus_file(block_file)
+	while _file_tester.file_exists(path):
+		block_file = "content-%s.tres" % [generate_random_path_slug()]
+		path = base_path.plus_file(block_file)
+	return path
 
 
 static func random_practice_path(lesson: Lesson) -> String:
+	var _file_tester := Directory.new()
 	var base_path = lesson.resource_path.get_base_dir()
-	var practice_file = "practice-%d.tres" % [randi() % 100000 + 10000]
-	return base_path.plus_file(practice_file)
+	var practice_file = "practice-%s.tres" % [generate_random_path_slug()]
+	var path = base_path.plus_file(practice_file)
+	while _file_tester.file_exists(path):
+		practice_file = "practice-%s.tres" % [generate_random_path_slug()]
+		path = base_path.plus_file(practice_file)
+	return path
+
+
+static func generate_random_path_slug(length := 8) -> String:
+	var text = ""
+	for i in length:
+		text += LETTERS_AND_DIGITS[randi() % CHARACTER_COUNT]
+	return text
