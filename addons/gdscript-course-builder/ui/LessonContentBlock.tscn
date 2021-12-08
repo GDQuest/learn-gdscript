@@ -142,28 +142,31 @@ margin_right = 1912.0
 margin_bottom = 1076.0
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="BackgroundPanel/Layout/TextContent"]
-margin_right = 1912.0
-margin_bottom = 14.0
-text = "Text:"
-
 [node name="Editor" type="HBoxContainer" parent="BackgroundPanel/Layout/TextContent"]
-margin_top = 18.0
 margin_right = 1912.0
 margin_bottom = 1010.0
 size_flags_vertical = 3
 
 [node name="TextEdit" type="TextEdit" parent="BackgroundPanel/Layout/TextContent/Editor"]
 margin_right = 1880.0
-margin_bottom = 992.0
+margin_bottom = 1010.0
 rect_min_size = Vector2( 0, 120 )
 size_flags_horizontal = 3
 wrap_enabled = true
 
+[node name="Label" type="Label" parent="BackgroundPanel/Layout/TextContent/Editor/TextEdit"]
+margin_right = 97.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 1, 1, 0.305882 )
+text = "Write content here"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ExpandButton" type="Button" parent="BackgroundPanel/Layout/TextContent/Editor"]
 margin_left = 1884.0
 margin_right = 1912.0
-margin_bottom = 992.0
+margin_bottom = 1010.0
 icon = SubResource( 5 )
 
 [node name="DropTarget" type="Control" parent="."]

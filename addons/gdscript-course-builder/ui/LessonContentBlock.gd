@@ -28,6 +28,7 @@ onready var _clear_file_button := $BackgroundPanel/Layout/VisualElement/ClearFil
 onready var _text_content_value := $BackgroundPanel/Layout/TextContent/Editor/TextEdit as TextEdit
 onready var _text_content_expand_button := $BackgroundPanel/Layout/TextContent/Editor/ExpandButton as Button
 onready var _text_content_dialog := $TextEditDialog as WindowDialog
+onready var _text_label := $BackgroundPanel/Layout/TextContent/Editor/TextEdit/Label as Label
 
 onready var _confirm_dialog := $ConfirmDialog as ConfirmationDialog
 
@@ -116,6 +117,8 @@ func set_list_index(index: int) -> void:
 func set_content_block(content_block: ContentBlock) -> void:
 	_edited_content_block = content_block
 
+	_text_label.visible = content_block.text.empty()
+
 	_visual_element_value.text = _edited_content_block.visual_element_path
 	_text_content_value.text = _edited_content_block.text
 
@@ -183,6 +186,8 @@ func _update_visual_element_file(file_path: String) -> void:
 
 
 func _on_text_content_changed() -> void:
+	_text_label.visible = _text_content_value.text.empty()
+
 	_edited_content_block.text = _text_content_value.text
 	_edited_content_block.emit_changed()
 
