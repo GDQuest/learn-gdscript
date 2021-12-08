@@ -4,7 +4,7 @@ import re
 
 regex_bold = re.compile(r"\*\*(.*?)\*\*")
 regex_italics = re.compile(r"[\*_](.*?)[\*_]")
-regex_code = re.compile(r"(?!`)`(.*?)`")
+regex_code = re.compile(r"(?!``)`(.+?)`")
 regex_url = re.compile(r"\[(.*?)\]\((.*?)\)")
 regex_strike = re.compile(r"~~(.*?)~~")
 regex_heading = re.compile(r"^#+\s+(.*)", re.MULTILINE)
