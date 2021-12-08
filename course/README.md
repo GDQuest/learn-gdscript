@@ -71,7 +71,7 @@ This section builds upon the principles above to outline the course.
 
 Introduce the student to the app, its state, and what they'll get from it.
 
-### Lesson: What code is like
+### Lesson 1: What code is like
 
 This first lesson motivates students by showing them the results they'll get by following the course.
 
@@ -120,7 +120,7 @@ In this interactive tutorial, we should ensure the user gets to read every part.
 
 For instance, by having a "Next" or "Got it" button, they have to click explicitly to move to the next prompt.
 
-### Lesson: your first error
+### Lesson 2: your first error
 
 Students are bound to run into errors early on. A key feature of the app is it tries to make errors friendly and gives troubleshooting steps.
 
@@ -151,7 +151,7 @@ Requirements:
 - Go through the tutorial prompts.
 - Make a simple edit to the code to remove the error (removing a comment `#` sign).
 
-### Lesson: We Stand on the Shoulders of Giants
+### Lesson 3: We Stand on the Shoulders of Giants
 
 Programmers always use a lot of code created by others. We introduce this idea from the 3rd lesson.
 
@@ -195,7 +195,7 @@ move_local_y(100)
 
 _Note: We should at some point find something repetitive so the user clearly sees how their first custom function and the parameter helps them reuse code. The turtle's exercise could be a good one for that as you have to walk 4 times to draw a square._
 
-### Lesson: Creating Your First Function
+### Lesson 4: Creating Your First Function
 
 To prepare for the following lesson, we introduce the notion of functions as, in GDScript, all your behavior lives inside of functions.
 
@@ -235,7 +235,7 @@ func show_and_move():
     move_local_y(100)
 ```
 
-### Lesson: Your First Value Identifier
+### Lesson 5: Your First Value Identifier
 
 Until now, the student had to type values directly.
 
@@ -267,7 +267,7 @@ Note: to make this work fully, the students should also call `do_things(100)`. T
 >
 > We'll later explain in detail how it works. Right now, we still need to explore more of GDScript to fully understand it as it relies on concepts we have yet to see.
 
-### Lesson: The Game Loop
+### Lesson 6: The Game Loop
 
 Following the previous lesson, we explain how games run in a loop.
 
@@ -297,7 +297,7 @@ func _process(delta):
     move_local_x(5)
 ```
 
-### Lesson: Variables
+### Lesson 7: Variables
 
 Covers:
 
@@ -305,7 +305,7 @@ Covers:
 - Defining a script-wide variable.
 - Using variables and constants allows you to name values that otherwise make your code hard to read.
 
-### Lesson: Adding and subtracting
+### Lesson 8: Adding and subtracting
 
 Your code is nothing without operations. Computers work exclusively with numbers, and all our code does is reading and writing numbers.
 
@@ -373,7 +373,7 @@ func heal(amount):
     health = health + amount
 ```
 
-### Lesson: Conditions
+### Lesson 9: Conditions
 
 Covers:
 
@@ -455,7 +455,7 @@ func take_damage(amount):
         health = 0
 ```
 
-### Lesson: multiplying
+### Lesson 10: multiplying
 
 #### Practice: multiplying
 
@@ -470,7 +470,7 @@ func level_up():
     attack = attack * 1.1
 ```
 
-### Lesson: modulo
+### Lesson 11: modulo
 
 The modulo operator calculates the remainder of the division. It only works on whole numbers, not decimal numbers.
 
@@ -494,7 +494,7 @@ making a number wrap
 
 Doing something every other cell on a row?
 
-### Lesson: introduction to loops
+### Lesson 12: introduction to loops
 
 To cover:
 
