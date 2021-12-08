@@ -261,16 +261,19 @@ func _change_script_slice_script(file_path: String) -> void:
 	if _script_slice_value.text != file_path:
 		_script_slice_value.text = file_path
 
-	if (
-		not file_path.empty()
-		and (file_path.get_extension() != "tres" or not _file_tester.file_exists(file_path))
-	):
-		_script_slice_value.modulate = Color.red
-	else:
+	var is_valid := file_path.empty() or file_path.get_extension() == "tres"
+	var test_path := file_path
+	if file_path.is_rel_path():
+		test_path = _edited_practice.resource_path.get_base_dir().plus_file(file_path)
+	is_valid = is_valid and _file_tester.file_exists(test_path)
+
+	if is_valid:
 		_script_slice_value.modulate = Color.white
 		_script_slice_value.text = file_path
 		_edited_practice.script_slice_path = file_path
 		_edited_practice.emit_changed()
+	else:
+		_script_slice_value.modulate = Color.red
 
 
 # Validator script
@@ -288,15 +291,18 @@ func _change_validator_script(file_path: String) -> void:
 	if not _validator_value.text == file_path:
 		_validator_value.text = file_path
 
-	if (
-		not file_path.empty()
-		and (file_path.get_extension() != "gd" or not _file_tester.file_exists(file_path))
-	):
-		_validator_value.modulate = Color.red
-	else:
+	var is_valid := file_path.empty() or file_path.get_extension() == "gd"
+	var test_path := file_path
+	if file_path.is_rel_path():
+		test_path = _edited_practice.resource_path.get_base_dir().plus_file(file_path)
+	is_valid = is_valid and _file_tester.file_exists(test_path)
+
+	if is_valid:
 		_validator_value.modulate = Color.white
 		_edited_practice.validator_script_path = file_path
 		_edited_practice.emit_changed()
+	else:
+		_validator_value.modulate = Color.red
 
 
 func _on_clear_validator_requested() -> void:

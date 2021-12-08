@@ -57,14 +57,21 @@ func setup(practice: Practice) -> void:
 		_hints_container.add_child(practice_hint)
 		practice_hint.rect_min_size.x = available_width
 
-	_script_slice = load(practice.script_slice_path)
+	var slice_path := practice.script_slice_path
+	var base_directory := practice.resource_path.get_base_dir()
+	if slice_path.is_rel_path():
+		slice_path = base_directory.plus_file(slice_path)
+	_script_slice = load(slice_path)
+
+	var validator_path := practice.validator_script_path
+	if validator_path.is_rel_path():
+		validator_path = base_directory.plus_file(validator_path)
+	_tester = load(validator_path).new()
+	_tester.setup(_game_viewport, _script_slice)
+
+	_practice_info_panel.display_tests(_tester.get_test_names())
 	LiveEditorState.current_slice = _script_slice
 	_game_viewport.use_scene()
-
-	_tester = load(practice.validator_script_path).new()
-	_tester.setup(_game_viewport, _script_slice)
-	_practice_info_panel.display_tests(_tester.get_test_names())
-
 
 func set_progress(new_progress: float) -> void:
 	progress = new_progress

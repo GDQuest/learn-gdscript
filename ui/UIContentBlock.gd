@@ -25,8 +25,8 @@ func setup(content_block: ContentBlock) -> void:
 		var path := content_block.visual_element_path
 		if path.is_rel_path():
 			path = content_block.resource_path.get_base_dir().plus_file(path)
-
 		var resource := load(path)
+
 		if resource is Texture:
 			var texture_rect := TextureRect.new()
 			texture_rect.texture = resource
