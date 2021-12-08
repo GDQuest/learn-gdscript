@@ -1,7 +1,6 @@
 extends PanelContainer
 
-signal transition_in_completed
-signal transition_out_completed
+signal transition_completed
 
 export(Resource) var course = preload("res://course/course-learn-gdscript.tres")
 
@@ -60,20 +59,13 @@ func _back() -> void:
 	if _screens_stack.size() < 2:
 		return
 
-	var previous_node: Node = _screens_stack.pop_back()
 	_breadcrumbs.remove(_breadcrumbs.size() - 1)
 
-	if not _screens_stack.empty():
-		_screen_container.add_child(_screens_stack.back())
-
-#	_current_url = url
-#	if _js_available and not is_back:
-#		_js_history.pushState(url.href, "", url.path)
-
-	_transition_to(previous_node, false)
-	yield(self, "transition_out_completed")
-	_screen_container.call_deferred("remove_child", previous_node)
-	previous_node.queue_free()
+	var current_screen: Control = _screens_stack.pop_back()
+	var next_screen: Control = _screens_stack.back()
+	_transition_to(next_screen, current_screen, false)
+	yield(self, "transition_completed")
+	current_screen.queue_free()
 
 
 # Instantates a screen based on the `target` resource and transitions to it.
@@ -97,11 +89,10 @@ func _navigate_to(target: Resource, clear_history := false) -> void:
 	_screens_stack.push_back(screen)
 	_breadcrumbs.push_back(target.title)
 	_screen_container.add_child(screen)
-	_transition_to(screen)
 	if has_previous_screen:
 		var previous_screen: Control = _screens_stack[-2]
-		yield(self, "transition_in_completed")
-		_screen_container.call_deferred("remove_child", previous_screen)
+		_transition_to(screen, previous_screen)
+		yield(self, "transition_completed")
 
 	# Connect to RichTextLabel meta links to navigate to different scenes.
 	for node in get_tree().get_nodes_in_group("rich_text_label"):
@@ -133,26 +124,38 @@ func _on_RichTextLabel_meta_clicked(metadata: String) -> void:
 #
 # Anything can go in there, as long as "transition_in_completed" or
 # "transition_out_completed" are emitted at the end.
-func _transition_to(screen: Control, direction_in := true) -> void:
-	var signal_name := "transition_in_completed" if direction_in else "transition_out_completed"
-
-	_back_button.disabled = _current_url.path == filename
+func _transition_to(screen: Control, previous_screen: Control = null, direction_in := true) -> void:
 	_label.text = _breadcrumbs.join("/")
 
 	if not use_transitions:
+		previous_screen.hide()
+		screen.show()
 		yield(get_tree(), "idle_frame")
-		emit_signal(signal_name)
+		emit_signal("transition_completed")
 		return
 
-	_tween.stop_all()
-	var start := get_viewport().size.x if direction_in else 0.0
-	var end := 0.0 if direction_in else get_viewport().size.x
+	screen.show()
+	previous_screen.show()
+	var viewport_width := get_viewport().size.x
+	var start := viewport_width if direction_in else 0.0
+	var end := 0.0 if direction_in else viewport_width
 	_tween.interpolate_property(
-		screen, "rect_position:x", start, end, 0.8, Tween.TRANS_CUBIC, Tween.EASE_OUT
+		screen, "rect_position:x", start, end, 1.2, Tween.TRANS_CUBIC, Tween.EASE_OUT
 	)
+	if previous_screen:
+		var direction := -1.0 if direction_in else 0.0
+		_tween.interpolate_property(
+			previous_screen,
+			"rect_position:x",
+			start + viewport_width * direction,
+			end + viewport_width * direction,
+			1.2,
+			Tween.TRANS_CUBIC,
+			Tween.EASE_OUT
+		)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
-	emit_signal(signal_name)
+	emit_signal("transition_completed")
 
 
 func _on_Events_practice_completed(practice: Practice) -> void:
