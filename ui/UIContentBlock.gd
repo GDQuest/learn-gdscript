@@ -5,7 +5,7 @@ var min_width_to_show_image := 500.0
 
 var _visual_element: Node
 
-onready var _panel := $Panel as Panel
+onready var _panel := $Panel as PanelContainer
 onready var _rich_text_label := $Panel/MarginContainer/RichTextLabel as RichTextLabel
 
 
@@ -18,6 +18,7 @@ func setup(content_block: ContentBlock) -> void:
 		yield(self, "ready")
 
 	_rich_text_label.bbcode_text = content_block.text
+	_panel.visible = not content_block.text.empty()
 
 	if content_block.visual_element_path != "":
 		var resource := load(content_block.visual_element_path)
