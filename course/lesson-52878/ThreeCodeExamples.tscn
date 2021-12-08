@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://course/common/GDScriptCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/lesson-52878/ThreeCodeExamples.gd" type="Script" id=2]
+
+[node name="ThreeCodeExamples" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GDScriptCodeExample" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 637.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 0, 220 )
+size_flags_horizontal = 3
+text = "# GDScript
+func take_damage(amount):
+    health -= amount
+    if health < 0:
+        die()
+"
+
+[node name="PythonCodeExample" type="TextEdit" parent="."]
+margin_left = 641.0
+margin_right = 1278.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+text = "# Python
+def take_damage(amount):
+    health -= amount
+    if health < 0:
+        die()"
+syntax_highlighting = true
+
+[node name="JavascriptCodeExample" type="TextEdit" parent="."]
+margin_left = 1282.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+text = "// JavaScript
+function take_damage(amount) {
+  health -= amount
+  if (health < 0) {
+    die()
+  }
+}"
+syntax_highlighting = true
