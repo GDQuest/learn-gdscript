@@ -90,11 +90,9 @@ func sync_text_with_slice() -> void:
 	_on_text_changed()
 
 
-# Creates and positions error overlays at the right position.
-# Call after:
-#
-# 1. Changing errors
-# 2. Scroll/Resize
+# Recreates the overlays at the correct position after the underlying data has
+# changed. Only call this when there is something new to display. Call
+# _update_overlays() if you only want to update the visuals of existing overlays.
 func _reset_overlays() -> void:
 	errors_overlay.clean()
 	var slice_properties := LiveEditorState.current_slice
@@ -103,6 +101,8 @@ func _reset_overlays() -> void:
 
 	var show_lines_from = slice_properties.start_offset
 	var show_lines_to = slice_properties.end_offset
+	
+	errors_overlay.lines_offset = slice_properties.start_offset
 
 	for index in errors.size():
 		var error: LanguageServerError = errors[index]
@@ -124,6 +124,10 @@ func _reset_overlays() -> void:
 		squiggly.connect("region_exited", errors_overlay_message, "hide_message", [squiggly])
 
 
+# Updates the position of existing overlays to align with the text edit after it updates.
+# As such, it is called on the `draw` signal. This method should be fast enough to do that.
+# But if it is not, more precise connections must be made to specific signals to update
+# less often.
 func _update_overlays() -> void:
 	errors_overlay.update_overlays()
 
@@ -140,3 +144,6 @@ func set_errors(new_errors: Array) -> void:
 func _on_text_changed() -> void:
 	if LiveEditorState.current_slice != null:
 		LiveEditorState.current_slice.current_text = text
+	
+	# The underlying text was changed, the old errors are no longer valid then.
+	errors_overlay.clean()

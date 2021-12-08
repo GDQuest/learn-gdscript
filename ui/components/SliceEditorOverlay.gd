@@ -3,6 +3,8 @@ extends Control
 
 const LanguageServerRange = LanguageServerError.ErrorRange
 
+var lines_offset := 0 setget set_lines_offset
+
 
 func _init() -> void:
 	mouse_filter = Control.MOUSE_FILTER_PASS
@@ -19,6 +21,11 @@ func _gui_input(event: InputEvent) -> void:
 
 			if overlay.try_consume_mouse(point):
 				return
+
+
+func set_lines_offset(value: int) -> void:
+	lines_offset = value
+	update_overlays()
 
 
 func clean() -> void:
@@ -56,11 +63,17 @@ func add_error(error: LanguageServerError) -> ErrorOverlay:
 # FIXME: There seem to be stange behavior around tabs, may be an engine bug with the new methods, need to check.
 func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextEdit) -> Array:
 	var regions := []
+	var line_count := text_edit.get_line_count()
 
 	# Iterate through the lines of the error range and find the regions for each character
 	# span in the line, accounting for line wrapping.
-	var line_index := error_range.start.line
-	while line_index <= error_range.end.line:
+	var line_index := error_range.start.line - lines_offset
+	var end_line = error_range.end.line - lines_offset
+	while line_index <= end_line:
+		if line_index < 0 or line_index >= line_count:
+			line_index += 1
+			continue
+		
 		var line = text_edit.get_line(line_index)
 		var region := Rect2(-1, -1, 0, 0)
 
@@ -75,7 +88,7 @@ func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextE
 		# Ending point of the last line is as reported by the LSP. For the preceding
 		# lines it's the last character in the line.
 		var char_end : int
-		if line_index == error_range.end.line:
+		if line_index == end_line:
 			char_end = error_range.end.character
 		else:
 			char_end = line.length()
@@ -115,16 +128,16 @@ func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextE
 
 
 class ErrorOverlay extends Control:
-	enum Severity { ERROR, WARNING, NOTICE }
+	enum Severity { ERROR = 1, WARNING, INFO, HINT }
 
 	const COLOR_ERROR := Color("#E83482")
 	const COLOR_WARNING := Color("#D2C84F")
-	const COLOR_NOTICE := Color("#79F2D6")
+	const COLOR_INFO := Color("#79F2D6")
 
 	signal region_entered(reference_position)
 	signal region_exited
 
-	var severity := -1
+	var severity := 0
 	var error_range#: LanguageServerRange
 	var regions := [] setget set_regions
 
@@ -193,7 +206,7 @@ class ErrorOverlay extends Control:
 					underline.line_color = COLOR_WARNING
 				_:
 					underline.line_type = ErrorUnderline.LineType.DASHED
-					underline.line_color = COLOR_NOTICE
+					underline.line_color = COLOR_INFO
 
 			underline.rect_position = Vector2(error_region.position.x, error_region.end.y)
 			underline.line_length = error_region.size.x
@@ -272,7 +285,7 @@ class ErrorUnderline extends Control:
 						(DASHED_STEP_WIDTH + DASHED_GAP) * i,
 						0.0
 					))
-					
+
 					var end_x = (DASHED_STEP_WIDTH + DASHED_GAP) * (i + 1) - DASHED_GAP
 					if end_x > line_length:
 						end_x = line_length
