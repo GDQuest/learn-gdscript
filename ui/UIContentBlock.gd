@@ -21,7 +21,12 @@ func setup(content_block: ContentBlock) -> void:
 	_panel.visible = not content_block.text.empty()
 
 	if content_block.visual_element_path != "":
-		var resource := load(content_block.visual_element_path)
+		# If the path isn't absolute, we try to load the file from the current directory
+		var path := content_block.visual_element_path
+		if path.is_rel_path():
+			path = content_block.resource_path.get_base_dir().plus_file(path)
+
+		var resource := load(path)
 		if resource is Texture:
 			var texture_rect := TextureRect.new()
 			texture_rect.texture = resource
@@ -34,7 +39,7 @@ func setup(content_block: ContentBlock) -> void:
 		else:
 			printerr(
 				(
-					"ContentBlock resource is not a Texture or a PackedScene. Loaded type: "
+					"ContentBlock visual element is not a Texture or a PackedScene. Loaded type: "
 					+ resource.get_class()
 				)
 			)

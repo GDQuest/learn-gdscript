@@ -174,15 +174,18 @@ func _update_visual_element_file(file_path: String) -> void:
 	if _visual_element_value.text != file_path:
 		_visual_element_value.text = file_path
 
-	if (
-		not file_path.empty()
-		and (not file_path.get_extension() in VISUAL_ELEMENT_EXTENSIONS or not _file_tester.file_exists(file_path))
-	):
-		_visual_element_value.modulate = Color.red
-	else:
+	var is_valid := file_path.empty() or file_path.get_extension() in VISUAL_ELEMENT_EXTENSIONS
+	var test_path := file_path
+	if file_path.is_rel_path():
+		test_path = _edited_content_block.resource_path.get_base_dir().plus_file(file_path)
+	is_valid = is_valid and _file_tester.file_exists(test_path)
+
+	if is_valid:
 		_visual_element_value.modulate = Color.white
 		_edited_content_block.visual_element_path = file_path
 		_edited_content_block.emit_changed()
+	else:
+		_visual_element_value.modulate = Color.red
 
 
 func _on_text_content_changed() -> void:
