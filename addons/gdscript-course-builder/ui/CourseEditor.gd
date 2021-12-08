@@ -22,9 +22,9 @@ var _recent_course_index := -1
 
 var _remove_on_save := []
 
-const _ResourceUtils := preload("../utils/ResourceUtils.gd")
-const _FileUtils := preload("../utils/FileUtils.gd")
-const _PluginUtils := preload("../utils/PluginUtils.gd")
+const ResourceUtils := preload("../utils/ResourceUtils.gd")
+const FileUtils := preload("../utils/FileUtils.gd")
+const PluginUtils := preload("../utils/PluginUtils.gd")
 
 onready var _new_course_button := $Layout/ToolBar/CreateButton as Button
 onready var _open_course_button := $Layout/ToolBar/OpenButton as Button
@@ -159,7 +159,7 @@ func _show_confirm(message: String, title: String = "Confirm") -> void:
 
 
 func _load_or_create_cache() -> void:
-	var cache_path = _PluginUtils.get_cache_file(self)
+	var cache_path = PluginUtils.get_cache_file(self)
 	if cache_path.empty():
 		printerr("Failed to get plugin cache data path, it's empty")
 		return
@@ -203,7 +203,7 @@ func _restore_recent_courses() -> void:
 func _add_recent_course(new_path: String) -> void:
 	if not _cache_file or new_path.empty():
 		return
-	var cache_path = _PluginUtils.get_cache_file(self)
+	var cache_path = PluginUtils.get_cache_file(self)
 	if cache_path.empty():
 		return
 
@@ -276,7 +276,7 @@ func _on_open_course_confirmed(file_path: String) -> void:
 		_show_warning("The path to the course is empty.", "Error")
 		return
 
-	var course_resource = _ResourceUtils.load_fresh(file_path)
+	var course_resource = ResourceUtils.load_fresh(file_path)
 	if not course_resource is Course:
 		_show_warning("Selected file is not a Course resource.", "Error")
 		return
@@ -323,11 +323,11 @@ func _on_save_course_confirmed(file_path: String) -> void:
 	if not _edited_course:
 		return
 
-	if _FileUtils.save_course(_edited_course, file_path):
+	if FileUtils.save_course(_edited_course, file_path):
 		_course_path_value.text = _edited_course.resource_path
 		_add_recent_course(_edited_course.resource_path)
 
-		_FileUtils.remove_obsolete(_remove_on_save)
+		FileUtils.remove_obsolete(_remove_on_save)
 		_remove_on_save = []
 
 		_dirty_status_label.hide()
@@ -361,7 +361,7 @@ func _on_lesson_added() -> void:
 		return
 
 	var lesson_data = Lesson.new()
-	var lesson_path = _FileUtils.random_lesson_path(_edited_course)
+	var lesson_path = FileUtils.random_lesson_path(_edited_course)
 	lesson_data.take_over_path(lesson_path)
 
 	var lesson_index = _edited_course.lessons.size()
@@ -429,9 +429,9 @@ func _on_lesson_slug_changed(lesson_slug: String) -> void:
 	var lesson_path
 
 	if lesson_slug.empty():
-		lesson_path = _FileUtils.random_lesson_path(_edited_course)
+		lesson_path = FileUtils.random_lesson_path(_edited_course)
 	else:
-		lesson_path = _FileUtils.slugged_lesson_path(_edited_course, lesson_slug)
+		lesson_path = FileUtils.slugged_lesson_path(_edited_course, lesson_slug)
 
 	var old_base_path = lesson_data.resource_path.get_base_dir()
 	var base_path = lesson_path.get_base_dir()
