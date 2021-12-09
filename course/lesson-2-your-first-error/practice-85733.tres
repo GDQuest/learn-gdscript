@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/Practice.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+title = "Other test practice"
+goal = "The code is incorrect and will cause an error when you run it.
+
+The code defines an empty function named [code]this_code_is_wrong[/code].
+
+To work, the function should use the [code]return[/code] keyword, but as it's inside a comment, the computer ignores the keyword.
+
+Remove the comment sign (#) to make the code valid.
+
+Be careful not to remove the spacing before [code]return[/code]! Otherwise, that'll cause another error.
+"
+starting_code = "func this_code_is_wrong():
+	#return"
+hints = PoolStringArray( "Remove the # sign.", "" )
+validator_script_path = "FixErrorTests.gd"
+script_slice_path = "first-error/ErrorScene.live-editor/slices/ErrorScene.wrong_code.slice.tres"
