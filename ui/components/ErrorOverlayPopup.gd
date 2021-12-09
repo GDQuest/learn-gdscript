@@ -42,9 +42,9 @@ func hide_message(message_source: Node) -> void:
 func set_error_code(value: int) -> void:
 	error_code = value
 
-	# TODO: Read from a suggestion database
-	_error_explanation = ""
-	_error_suggestion = ""
+	var message_details := LiveEditorState.error_database.get_message(error_code)
+	_error_explanation = message_details.explanation
+	_error_suggestion = message_details.suggestion
 
 	if is_inside_tree():
 		_error_explanation_value.bbcode_text = _error_explanation

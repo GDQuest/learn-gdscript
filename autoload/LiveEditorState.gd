@@ -1,8 +1,15 @@
 extends Node
 
+signal slice_changed
+
 var current_slice: SliceProperties setget set_current_slice
 var current_scene: Node
-signal slice_changed
+
+var error_database: GDScriptErrorDatabase
+
+
+func _init() -> void:
+	error_database = GDScriptErrorDatabase.new()
 
 
 func set_current_slice(new_slice: SliceProperties) -> void:
