@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui/UIContentBlock.gd" type="Script" id=1]
+[ext_resource path="res://ui/theme/fonts/font_text.tres" type="DynamicFont" id=2]
 
 [node name="UIContentBlock" type="HBoxContainer"]
 margin_right = 800.0
@@ -15,35 +16,19 @@ __meta__ = {
 
 [node name="Panel" type="PanelContainer" parent="."]
 margin_right = 800.0
-margin_bottom = 189.0
+margin_bottom = 391.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Panel" type="Panel" parent="Panel"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel" groups=["rich_text_label"]]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 793.0
-margin_bottom = 182.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 793.0
-margin_bottom = 182.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer" groups=["rich_text_label"]]
-margin_right = 786.0
-margin_bottom = 175.0
+margin_bottom = 384.0
 rect_min_size = Vector2( 640, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
 bbcode_text = "Eat all the power cords play time please stop looking at your phone and pet me milk the cow. Sugar, my siamese, stalks me (in a good way), day and night . Meowzer pose purrfectly to show my beauty. Naughty running cat. Meow all night the fat cat sat on the mat bat away with paws. Scoot butt on the rug knock dish off table head butt cant eat out of my own dish for pet me pet me pet me pet me, bite, scratch, why are you petting me leave hair everywhere i do no work yet get food, shelter, and lots of stuff just like man who lives with us. White cat sleeps on a black shirt jump off balcony, onto stranger's head. Lounge in doorway my left donut is missing, as is my right shake treat bag, yet jump launch to pounce upon little yarn mouse, bare fangs at toy run hide in litter box until treats are fed or spot something, big eyes, big eyes, crouch, shake butt, prepare to pounce. Only use one corner of the litter box. Play time. Hey! you there, with the hands meowing chowing and wowing lick sellotape stare at ceiling, for sit as close as possible to warm fire "
 text = "Eat all the power cords play time please stop looking at your phone and pet me milk the cow. Sugar, my siamese, stalks me (in a good way), day and night . Meowzer pose purrfectly to show my beauty. Naughty running cat. Meow all night the fat cat sat on the mat bat away with paws. Scoot butt on the rug knock dish off table head butt cant eat out of my own dish for pet me pet me pet me pet me, bite, scratch, why are you petting me leave hair everywhere i do no work yet get food, shelter, and lots of stuff just like man who lives with us. White cat sleeps on a black shirt jump off balcony, onto stranger's head. Lounge in doorway my left donut is missing, as is my right shake treat bag, yet jump launch to pounce upon little yarn mouse, bare fangs at toy run hide in litter box until treats are fed or spot something, big eyes, big eyes, crouch, shake butt, prepare to pounce. Only use one corner of the litter box. Play time. Hey! you there, with the hands meowing chowing and wowing lick sellotape stare at ceiling, for sit as close as possible to warm fire "

@@ -6,6 +6,7 @@
 [node name="ThreeCodeExamples" type="HBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 220 )
 size_flags_horizontal = 3
 script = ExtResource( 2 )
 __meta__ = {
@@ -37,6 +38,8 @@ def take_damage(amount):
     if health < 0:
         die()"
 syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
 
 [node name="JavascriptCodeExample" type="TextEdit" parent="."]
 margin_left = 1282.0
@@ -51,3 +54,5 @@ function take_damage(amount) {
   }
 }"
 syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true

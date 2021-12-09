@@ -9,9 +9,9 @@ extends Control
 const ContentBlockScene := preload("UIContentBlock.tscn")
 const PracticeButtonScene := preload("UIPracticeButton.tscn")
 
-onready var _title := $ScrollContainer/Column/Title as Label
-onready var _content_blocks := $ScrollContainer/Column/ContentBlocks as VBoxContainer
-onready var _practices_container := $ScrollContainer/Column/Practices as VBoxContainer
+onready var _title := $ScrollContainer/MarginContainer/Column/Title as Label
+onready var _content_blocks := $ScrollContainer/MarginContainer/Column/ContentBlocks as VBoxContainer
+onready var _practices_container := $ScrollContainer/MarginContainer/Column/Practices as VBoxContainer
 
 
 func setup(lesson: Resource) -> void:

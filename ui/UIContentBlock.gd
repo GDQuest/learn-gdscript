@@ -6,7 +6,7 @@ var min_width_to_show_image := 500.0
 var _visual_element: Node
 
 onready var _panel := $Panel as PanelContainer
-onready var _rich_text_label := $Panel/MarginContainer/RichTextLabel as RichTextLabel
+onready var _rich_text_label := $Panel/RichTextLabel as RichTextLabel
 
 
 func _ready() -> void:
