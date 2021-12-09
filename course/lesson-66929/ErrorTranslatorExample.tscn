@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/components/ErrorOverlayPopup.tscn" type="PackedScene" id=1]
+
+[node name="ErrorOverlayPopup" instance=ExtResource( 1 )]
+script = null
+
+[node name="ErrorLabel" parent="MarginContainer/Column" index="0"]
+margin_bottom = 59.0
+text = "The function \"move\" already exists in this class (at line 22)."
+
+[node name="HSeparator" parent="MarginContainer/Column" index="1"]
+margin_top = 67.0
+margin_bottom = 67.0
+
+[node name="ErrorExplanation" parent="MarginContainer/Column" index="2"]
+margin_top = 75.0
+margin_bottom = 122.0
+
+[node name="Value" parent="MarginContainer/Column/ErrorExplanation" index="2"]
+margin_left = 8.0
+margin_right = 537.0
+margin_bottom = 226.0
+bbcode_text = "You already defined a function with this name, and you're trying to create a new one with the same name.
+
+You can't do that in code: every function in a given script must have a unique name."
+text = "You already defined a function with this name, and you're trying to create a new one with the same name.
+
+You can't do that in code: every function in a given script must have a unique name."
+
+[node name="MoreHelpButton" parent="MarginContainer/Column/ErrorExplanation" index="3"]
+margin_left = 8.0
+margin_top = 228.0
+margin_right = 537.0
+margin_bottom = 272.0
+
+[node name="ErrorSuggestion" parent="MarginContainer/Column" index="3"]
+margin_top = 130.0
+margin_bottom = 177.0
+rect_min_size = Vector2( 200, 47 )
+is_expanded = false
+
+[node name="Value" parent="MarginContainer/Column/ErrorSuggestion" index="2"]
+visible = false
+bbcode_text = "Change the name of the function at the error line or consider removing it."
+text = "Change the name of the function at the error line or consider removing it."

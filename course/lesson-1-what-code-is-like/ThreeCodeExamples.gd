@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 const COLOR_KEYWORD := Color(1, 0.094118, 0.321569)
 const COLOR_QUOTES := Color(1, 0.960784, 0.25098)
