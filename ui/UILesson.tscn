@@ -8,9 +8,9 @@
 [node name="UILesson" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 0
+custom_constants/margin_right = 12
 custom_constants/margin_top = 20
-custom_constants/margin_left = 0
+custom_constants/margin_left = 12
 custom_constants/margin_bottom = 20
 script = ExtResource( 2 )
 __meta__ = {
@@ -18,8 +18,9 @@ __meta__ = {
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 12.0
 margin_top = 20.0
-margin_right = 1920.0
+margin_right = 1908.0
 margin_bottom = 1060.0
 rect_min_size = Vector2( 960, 0 )
 rect_clip_content = false
@@ -33,19 +34,18 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
-margin_right = 1920.0
+margin_right = 1896.0
 margin_bottom = 221.0
 size_flags_horizontal = 3
-custom_constants/margin_right = 400
+custom_constants/margin_right = 460
 custom_constants/margin_top = 40
-custom_constants/margin_left = 400
+custom_constants/margin_left = 460
 
 [node name="Column" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
-margin_left = 400.0
+margin_left = 460.0
 margin_top = 40.0
-margin_right = 1520.0
+margin_right = 1436.0
 margin_bottom = 201.0
-size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
 custom_constants/separation = 6
@@ -54,7 +54,7 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="ScrollContainer/MarginContainer/Column" groups=["navigation_text"]]
-margin_right = 1120.0
+margin_right = 976.0
 margin_bottom = 40.0
 custom_fonts/font = ExtResource( 4 )
 text = "Title"
@@ -62,24 +62,24 @@ align = 1
 
 [node name="HSeparator2" type="HSeparator" parent="ScrollContainer/MarginContainer/Column"]
 margin_top = 46.0
-margin_right = 1120.0
+margin_right = 976.0
 margin_bottom = 76.0
 custom_constants/separation = 30
 
 [node name="ContentBlocks" type="VBoxContainer" parent="ScrollContainer/MarginContainer/Column"]
 margin_top = 82.0
-margin_right = 1120.0
+margin_right = 976.0
 margin_bottom = 82.0
 
 [node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/Column"]
 margin_top = 88.0
-margin_right = 1120.0
+margin_right = 976.0
 margin_bottom = 118.0
 custom_constants/separation = 30
 
 [node name="PracticesTitle" type="Label" parent="ScrollContainer/MarginContainer/Column" groups=["navigation_text"]]
 margin_top = 124.0
-margin_right = 1120.0
+margin_right = 976.0
 margin_bottom = 155.0
 custom_fonts/font = ExtResource( 3 )
 text = "Practices"
@@ -87,5 +87,5 @@ align = 1
 
 [node name="Practices" type="VBoxContainer" parent="ScrollContainer/MarginContainer/Column"]
 margin_top = 161.0
-margin_right = 1120.0
+margin_right = 976.0
 margin_bottom = 161.0
