@@ -3,6 +3,9 @@ extends MarginContainer
 
 const UIPracticeScene := preload("res://ui/UIPractice.tscn")
 const UILessonScene := preload("res://ui/UILesson.tscn")
+const ResourceUtils := preload("../utils/ResourceUtils.gd")
+const FileUtils := preload("../utils/FileUtils.gd")
+const PluginUtils := preload("../utils/PluginUtils.gd")
 
 # Private properties
 var _current_lesson_index := -1
@@ -28,10 +31,6 @@ var _confirm_dialog_mode := -1
 var _recent_course_index := -1
 
 var _remove_on_save := []
-
-const ResourceUtils := preload("../utils/ResourceUtils.gd")
-const FileUtils := preload("../utils/FileUtils.gd")
-const PluginUtils := preload("../utils/PluginUtils.gd")
 
 onready var _new_course_button := $Layout/ToolBar/CreateButton as Button
 onready var _open_course_button := $Layout/ToolBar/OpenButton as Button
