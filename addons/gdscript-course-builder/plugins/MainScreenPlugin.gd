@@ -11,5 +11,9 @@ const ROOT_SCENE: PackedScene = preload("../ui/CourseEditor.tscn")
 func _init() -> void:
 	size_flags_vertical = SIZE_EXPAND_FILL
 
+
+func _ready() -> void:
 	var root := ROOT_SCENE.instance()
 	add_child(root)
+	root.editor_interface = plugin_instance.get_editor_interface()
+	print(plugin_instance.get_editor_interface())

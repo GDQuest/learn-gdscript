@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/UILesson.gd" type="Script" id=2]
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=3]
 [ext_resource path="res://ui/theme/fonts/font_title_big.tres" type="DynamicFont" id=4]
+[ext_resource path="res://course/lesson-1-what-code-is-like/lesson.tres" type="Resource" id=5]
 
 [node name="UILesson" type="MarginContainer"]
 anchor_right = 1.0
@@ -16,6 +17,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+test_lesson = ExtResource( 5 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 margin_left = 12.0
@@ -35,7 +37,7 @@ __meta__ = {
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
 margin_right = 1896.0
-margin_bottom = 241.0
+margin_bottom = 221.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 460
 custom_constants/margin_top = 40
@@ -45,7 +47,7 @@ custom_constants/margin_left = 460
 margin_left = 460.0
 margin_top = 40.0
 margin_right = 1436.0
-margin_bottom = 221.0
+margin_bottom = 201.0
 size_flags_vertical = 3
 theme = ExtResource( 1 )
 custom_constants/separation = 6
@@ -81,12 +83,12 @@ custom_constants/separation = 30
 [node name="PracticesTitle" type="Label" parent="ScrollContainer/MarginContainer/Column" groups=["navigation_text"]]
 margin_top = 124.0
 margin_right = 976.0
-margin_bottom = 175.0
+margin_bottom = 155.0
 custom_fonts/font = ExtResource( 3 )
 text = "Practices"
 align = 1
 
 [node name="Practices" type="VBoxContainer" parent="ScrollContainer/MarginContainer/Column"]
-margin_top = 181.0
+margin_top = 161.0
 margin_right = 976.0
-margin_bottom = 181.0
+margin_bottom = 161.0

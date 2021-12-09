@@ -5,6 +5,8 @@ extends Control
 const PracticeHintScene := preload("components/PracticeHint.tscn")
 const LessonDonePopupScene := preload("components/LessonDonePopup.tscn")
 
+export var test_practice: Resource
+
 var progress := 0.0 setget set_progress
 
 var _script_slice: SliceProperties
@@ -29,6 +31,9 @@ func _ready() -> void:
 
 	_code_editor.connect("action", self, "_on_code_editor_button")
 	_code_editor.connect("text_changed", self, "_on_code_editor_text_changed")
+
+	if test_practice and get_parent() == get_tree().root:
+		setup(test_practice)
 
 
 func _input(event: InputEvent) -> void:
@@ -72,6 +77,7 @@ func setup(practice: Practice) -> void:
 	_practice_info_panel.display_tests(_tester.get_test_names())
 	LiveEditorState.current_slice = _script_slice
 	_game_viewport.use_scene()
+
 
 func set_progress(new_progress: float) -> void:
 	progress = new_progress

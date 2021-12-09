@@ -3,11 +3,15 @@ extends MarginContainer
 
 signal lesson_title_changed(title)
 signal lesson_slug_changed(slug)
+signal lesson_tab_selected
+signal practice_tab_selected
 
 const ContentBlockScene := preload("LessonContentBlock.tscn")
 const PracticeScene := preload("LessonPractice.tscn")
 const FileUtils := preload("../utils/FileUtils.gd")
 
+const INDEX_LESSON_TAB := 0
+const INDEX_PRACTICE_TAB := 1
 
 var _edited_lesson: Lesson
 
@@ -32,6 +36,8 @@ func _ready() -> void:
 
 	_content_block.hide()
 	_no_content_block.show()
+
+	_lesson_tabs.connect("tab_changed", self, "_on_LessonContent_tab_changed")
 
 	_lesson_title_value.connect("text_changed", self, "_on_title_text_changed")
 	_add_content_block_button.connect("pressed", self, "_on_content_block_added")
@@ -260,3 +266,10 @@ func _on_practice_removed(item_index: int) -> void:
 	_edited_lesson.emit_changed()
 
 	_recreate_practices()
+
+
+func _on_LessonContent_tab_changed(index: int) -> void:
+	if index == INDEX_PRACTICE_TAB:
+		emit_signal("practice_tab_selected")
+	elif index == INDEX_LESSON_TAB:
+		emit_signal("lesson_tab_selected")

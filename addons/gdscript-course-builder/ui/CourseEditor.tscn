@@ -63,9 +63,17 @@ hint_tooltip = "Open a recently edited course."
 disabled = true
 icon = SubResource( 2 )
 
-[node name="SaveButton" type="Button" parent="Layout/ToolBar"]
+[node name="PlayCurrentButton" type="Button" parent="Layout/ToolBar"]
 margin_left = 139.0
-margin_right = 167.0
+margin_right = 228.0
+margin_bottom = 22.0
+hint_tooltip = "Open a course resource to edit."
+text = "Play Current"
+flat = true
+
+[node name="SaveButton" type="Button" parent="Layout/ToolBar"]
+margin_left = 232.0
+margin_right = 260.0
 margin_bottom = 22.0
 hint_tooltip = "Save the currently edited course."
 disabled = true
@@ -73,8 +81,8 @@ icon = SubResource( 2 )
 flat = true
 
 [node name="SaveAsButton" type="Button" parent="Layout/ToolBar"]
-margin_left = 171.0
-margin_right = 244.0
+margin_left = 264.0
+margin_right = 337.0
 margin_bottom = 22.0
 hint_tooltip = "Save the currently edited course."
 disabled = true
@@ -82,8 +90,8 @@ text = "Save As..."
 flat = true
 
 [node name="VSeparator" type="VSeparator" parent="Layout/ToolBar"]
-margin_left = 248.0
-margin_right = 252.0
+margin_left = 341.0
+margin_right = 345.0
 margin_bottom = 22.0
 
 [node name="DirtyStatusLabel" type="Label" parent="Layout/ToolBar"]

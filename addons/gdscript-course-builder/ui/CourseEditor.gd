@@ -1,7 +1,14 @@
 tool
 extends MarginContainer
 
+const UIPracticeScene := preload("res://ui/UIPractice.tscn")
+const UILessonScene := preload("res://ui/UILesson.tscn")
+
 # Private properties
+var _current_lesson_index := -1
+var _current_practice_index := -1
+var editor_interface: EditorInterface
+
 var _edited_course: Course
 var _cache_file: ConfigFile
 
@@ -29,6 +36,7 @@ const PluginUtils := preload("../utils/PluginUtils.gd")
 onready var _new_course_button := $Layout/ToolBar/CreateButton as Button
 onready var _open_course_button := $Layout/ToolBar/OpenButton as Button
 onready var _recent_courses_button := $Layout/ToolBar/RecentButton as MenuButton
+onready var _play_current_button := $Layout/ToolBar/PlayCurrentButton as Button
 onready var _save_course_button := $Layout/ToolBar/SaveButton as Button
 onready var _save_as_course_button := $Layout/ToolBar/SaveAsButton as Button
 onready var _dirty_status_label := $Layout/ToolBar/DirtyStatusLabel as Label
@@ -64,6 +72,7 @@ func _ready() -> void:
 
 	_new_course_button.connect("pressed", self, "_on_create_course_requested")
 	_open_course_button.connect("pressed", self, "_on_open_course_requested")
+	_play_current_button.connect("pressed", self, "_play_current")
 	_save_course_button.connect("pressed", self, "_on_save_course_requested", [true])
 	_save_as_course_button.connect("pressed", self, "_on_save_course_requested", [false])
 	_file_dialog.connect("file_selected", self, "_on_file_dialog_confirmed")
@@ -78,6 +87,8 @@ func _ready() -> void:
 
 	_lesson_details.connect("lesson_title_changed", self, "_on_lesson_title_changed")
 	_lesson_details.connect("lesson_slug_changed", self, "_on_lesson_slug_changed")
+	_lesson_details.connect("lesson_tab_selected", self, "_on_lesson_tab_selected")
+	_lesson_details.connect("practice_tab_selected", self, "_on_practice_tab_selected")
 
 	_confirm_dialog.connect("confirmed", self, "_on_confirm_dialog_confirmed")
 
@@ -394,6 +405,7 @@ func _on_lesson_selected(lesson_index: int) -> void:
 
 	var lesson_data = _edited_course.lessons[lesson_index]
 	_lesson_details.set_lesson(lesson_data)
+	_current_lesson_index = lesson_index
 
 
 func _on_lesson_moved(lesson_index: int, new_index: int) -> void:
@@ -456,3 +468,40 @@ func _on_lesson_slug_changed(lesson_slug: String) -> void:
 
 	# Mark as changed.
 	_on_course_resource_changed()
+
+
+func _play_current() -> void:
+	var play_scene: PackedScene
+	if _current_practice_index >= 0:
+		assert(
+			_current_lesson_index >= 0,
+			"Trying to play practice but lesson index was not properly set."
+		)
+		var practice = _edited_course.lessons[_current_lesson_index].practices[_current_practice_index]
+		var instance: UIPractice = UIPracticeScene.instance()
+		instance.test_practice = practice
+		var error := UIPracticeScene.pack(instance)
+		if error == OK:
+			var save_error := ResourceSaver.save(UIPracticeScene.resource_path, UIPracticeScene)
+			if save_error == OK:
+				play_scene = UIPracticeScene
+	elif _current_lesson_index >= 0:
+		var lesson = _edited_course.lessons[_current_lesson_index]
+		var instance: UILesson = UILessonScene.instance()
+		instance.test_lesson = lesson
+		var error := UILessonScene.pack(instance)
+		if error == OK:
+			var save_error := ResourceSaver.save(UILessonScene.resource_path, UILessonScene)
+			if save_error == OK:
+				play_scene = UILessonScene
+
+	if play_scene:
+		editor_interface.play_custom_scene(play_scene.resource_path)
+
+
+func _on_lesson_tab_selected() -> void:
+	_current_practice_index = -1
+
+
+func _on_practice_tab_selected() -> void:
+	_current_practice_index = 0
