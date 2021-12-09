@@ -87,6 +87,7 @@ func set_progress(new_progress: float) -> void:
 
 
 func _on_save_button_pressed() -> void:
+	_script_slice.current_text = _code_editor.get_text()
 	var script_path: String = _script_slice.get_script_properties().file_path
 	var script_text: String = _script_slice.current_full_text
 	var nodes_paths: Array = _script_slice.get_script_properties().nodes_paths
