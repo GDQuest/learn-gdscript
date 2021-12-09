@@ -5,7 +5,7 @@ const DATABASE_SOURCE := "res://lsp/error_database.csv"
 const TRANSLATED_SOURCE := "res://lsp/error_database.%s.csv"
 const DEFAULT_LOCALE := "en"
 
-const CSV_DELIMITER := ";"
+const CSV_DELIMITER := ","
 const CSV_IDENTIFIER_FIELD := "error_code"
 const CSV_EXPLANATION_FIELD := "error_explanation"
 const CSV_SUGGESTION_FIELD := "error_suggestion"
