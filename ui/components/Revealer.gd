@@ -18,6 +18,7 @@ export var padding := 24.0
 export var first_margin := 5.0
 export var children_margin := 2.0
 export var use_small_font := false setget set_use_small_font
+export var text_color: Color setget set_text_color
 
 var _height := 0.0
 # List of nodes living in the revealer.
@@ -60,6 +61,7 @@ func clear_contents() -> void:
 
 func get_contents() -> Array:
 	return _contents
+
 
 func set_is_expanded(new_is_expanded: bool) -> void:
 	is_expanded = new_is_expanded
@@ -117,6 +119,13 @@ func set_use_small_font(value: bool) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 	_button.set("custom_fonts/font", FONTS.small if use_small_font else FONTS.normal)
+
+
+func set_text_color(value: Color) -> void:
+	text_color = value
+	if not is_inside_tree():
+		yield(self, "ready")
+	_button.set("custom_colors/font_color", text_color)
 
 
 func _rotate_chevron(rotation_degrees: float, time := ANIM_DURATION) -> void:

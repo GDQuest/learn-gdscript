@@ -136,20 +136,45 @@ margin_bottom = 24.0
 hint_tooltip = "Remove the visual element from the lesson step."
 text = "Clear"
 
-[node name="TextContent" type="VBoxContainer" parent="BackgroundPanel/Layout"]
+[node name="Settings" type="HBoxContainer" parent="BackgroundPanel/Layout"]
 margin_top = 66.0
+margin_right = 1912.0
+margin_bottom = 90.0
+
+[node name="VisualsOnLeftCheckbox" type="CheckBox" parent="BackgroundPanel/Layout/Settings"]
+margin_right = 114.0
+margin_bottom = 24.0
+text = "Visual on Left"
+
+[node name="Label" type="Label" parent="BackgroundPanel/Layout/Settings"]
+margin_left = 118.0
+margin_top = 5.0
+margin_right = 189.0
+margin_bottom = 19.0
+text = "Block type:"
+
+[node name="BlockTypeOption" type="OptionButton" parent="BackgroundPanel/Layout/Settings"]
+margin_left = 193.0
+margin_right = 269.0
+margin_bottom = 24.0
+text = "Normal"
+items = [ "Normal", null, false, 0, null, "Spoiler", null, false, 1, null, "Note", null, false, 2, null ]
+selected = 0
+
+[node name="TextContent" type="VBoxContainer" parent="BackgroundPanel/Layout"]
+margin_top = 94.0
 margin_right = 1912.0
 margin_bottom = 1076.0
 size_flags_vertical = 3
 
 [node name="Editor" type="HBoxContainer" parent="BackgroundPanel/Layout/TextContent"]
 margin_right = 1912.0
-margin_bottom = 1010.0
+margin_bottom = 982.0
 size_flags_vertical = 3
 
 [node name="TextEdit" type="TextEdit" parent="BackgroundPanel/Layout/TextContent/Editor"]
 margin_right = 1880.0
-margin_bottom = 1010.0
+margin_bottom = 982.0
 rect_min_size = Vector2( 0, 240 )
 size_flags_horizontal = 3
 wrap_enabled = true
@@ -166,7 +191,7 @@ __meta__ = {
 [node name="ExpandButton" type="Button" parent="BackgroundPanel/Layout/TextContent/Editor"]
 margin_left = 1884.0
 margin_right = 1912.0
-margin_bottom = 1010.0
+margin_bottom = 982.0
 icon = SubResource( 5 )
 
 [node name="DropTarget" type="Control" parent="."]

@@ -1,12 +1,18 @@
+# Displays text and scenes or other visuals (optional) side-by-side.
+#
+# The block has a transparent background by default, except when inside a Revealer.
 class_name UIContentBlock
-extends HBoxContainer
+extends Control
+
+# Margin to apply to the panel in pixels when the block is inside a revealer.
+const MARGIN := 16.0
 
 var min_width_to_show_image := 500.0
 
 var _visual_element: Node
 
-onready var _panel := $Panel as PanelContainer
-onready var _rich_text_label := $Panel/RichTextLabel as RichTextLabel
+onready var _rich_text_label := $MarginContainer/Row/RichTextLabel as RichTextLabel
+onready var _margin := $MarginContainer as MarginContainer
 
 
 func _ready() -> void:
@@ -18,7 +24,7 @@ func setup(content_block: ContentBlock) -> void:
 		yield(self, "ready")
 
 	_rich_text_label.bbcode_text = content_block.text
-	_panel.visible = not content_block.text.empty()
+	_rich_text_label.visible = not content_block.text.empty()
 
 	if content_block.visual_element_path != "":
 		# If the path isn't absolute, we try to load the file from the current directory
@@ -47,7 +53,20 @@ func setup(content_block: ContentBlock) -> void:
 	# As this is a box container, we can reverse the order of elements by
 	# raising the panel.
 	if content_block.reverse_blocks:
-		_panel.raise()
+		_rich_text_label.raise()
+
+	set_draw_panel(get_parent() is Revealer)
+
+
+func set_draw_panel(do_draw_panel: bool) -> void:
+	if not is_inside_tree():
+		yield(self, "ready")
+	if do_draw_panel:
+		set("custom_styles/panel", preload("theme/panel_content_in_spoiler.tres"))
+		_margin.set("custom_constants/margin_right", MARGIN)
+		_margin.set("custom_constants/margin_left", MARGIN)
+		_margin.set("custom_constants/margin_top", MARGIN)
+		_margin.set("custom_constants/margin_bottom", MARGIN)
 
 
 func _on_resized() -> void:

@@ -30,6 +30,9 @@ onready var _text_content_expand_button := $BackgroundPanel/Layout/TextContent/E
 onready var _text_content_dialog := $TextEditDialog as WindowDialog
 onready var _text_label := $BackgroundPanel/Layout/TextContent/Editor/TextEdit/Label as Label
 
+onready var _checkbox_visuals_on_left := $BackgroundPanel/Layout/Settings/VisualsOnLeftCheckbox as CheckBox
+onready var _options_block_type := $BackgroundPanel/Layout/Settings/BlockTypeOption as OptionButton
+
 onready var _confirm_dialog := $ConfirmDialog as ConfirmationDialog
 
 
@@ -50,6 +53,9 @@ func _ready() -> void:
 	_text_content_dialog.connect("confirmed", self, "_on_text_content_confirmed")
 
 	_confirm_dialog.connect("confirmed", self, "_on_confirm_dialog_confirmed")
+
+	_checkbox_visuals_on_left.connect("toggled", self, "_on_checkbox_visuals_on_left_toggled")
+	_options_block_type.connect("item_selected", self, "_on_options_block_type_item_selected")
 
 
 func _update_theme() -> void:
@@ -203,4 +209,19 @@ func _on_text_content_expand_pressed() -> void:
 func _on_text_content_confirmed() -> void:
 	_edited_content_block.text = _text_content_dialog.text
 	_text_content_value.text = _text_content_dialog.text
+	_edited_content_block.emit_changed()
+
+
+func _on_checkbox_visuals_on_left_toggled(toggled: bool) -> void:
+	_edited_content_block.reverse_blocks = toggled
+	_edited_content_block.emit_changed()
+
+
+func _on_options_block_type_item_selected(index: int) -> void:
+	if index == 0:
+		_edited_content_block.type = ContentBlock.Type.PLAIN
+	elif index == 1:
+		_edited_content_block.type = ContentBlock.Type.SPOILER
+	elif index == 2:
+		_edited_content_block.type = ContentBlock.Type.NOTE
 	_edited_content_block.emit_changed()

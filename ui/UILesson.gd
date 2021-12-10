@@ -8,6 +8,9 @@ extends Control
 
 const ContentBlockScene := preload("UIContentBlock.tscn")
 const PracticeButtonScene := preload("UIPracticeButton.tscn")
+const RevealerScene = preload("components/Revealer.tscn")
+
+const COLOR_NOTE := Color(0.14902, 0.776471, 0.968627)
 
 export var test_lesson: Resource
 
@@ -30,7 +33,21 @@ func setup(lesson: Resource) -> void:
 	for block in lesson.content_blocks:
 		var instance: UIContentBlock = ContentBlockScene.instance()
 		instance.setup(block)
-		_content_blocks.add_child(instance)
+		if block.type == ContentBlock.Type.PLAIN:
+			_content_blocks.add_child(instance)
+		else:
+			var revealer := RevealerScene.instance()
+			if block.type == ContentBlock.Type.NOTE:
+				revealer.text_color = COLOR_NOTE
+				revealer.title = "Note"
+			else:
+				revealer.title = "Learn More"
+
+			revealer.padding = 0.0
+			revealer.first_margin = 0.0
+			revealer.children_margin = 0.0
+			_content_blocks.add_child(revealer)
+			revealer.add_child(instance)
 
 	for practice in lesson.practices:
 		var button: UIPracticeButton = PracticeButtonScene.instance()
