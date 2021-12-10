@@ -127,6 +127,8 @@ func set_content_block(content_block: ContentBlock) -> void:
 
 	_visual_element_value.text = _edited_content_block.visual_element_path
 	_text_content_value.text = _edited_content_block.text
+	_checkbox_visuals_on_left.pressed = _edited_content_block.reverse_blocks
+	_options_block_type.selected = _edited_content_block.type
 
 
 # Helpers

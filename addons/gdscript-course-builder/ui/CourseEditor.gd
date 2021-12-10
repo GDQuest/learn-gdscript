@@ -217,7 +217,6 @@ func _add_recent_course(new_path: String) -> void:
 	if cache_path.empty():
 		return
 
-	var last_course = _cache_file.get_value("recent", "last_open_course")
 	var recent_courses = _cache_file.get_value("recent", "courses", [])
 	if recent_courses.has(new_path):
 		recent_courses.erase(new_path)
