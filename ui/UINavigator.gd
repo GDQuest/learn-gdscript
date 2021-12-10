@@ -87,9 +87,11 @@ func _navigate_to(target: Resource, clear_history := false) -> void:
 
 	screen.setup(target)
 
+	_breadcrumbs.push_back(target.title)
+	_label.text = _breadcrumbs.join("/")
+
 	var has_previous_screen = not _screens_stack.empty()
 	_screens_stack.push_back(screen)
-	_breadcrumbs.push_back(target.title)
 	_screen_container.add_child(screen)
 	if has_previous_screen:
 		var previous_screen: Control = _screens_stack[-2]
@@ -127,8 +129,6 @@ func _on_RichTextLabel_meta_clicked(metadata: String) -> void:
 # Anything can go in there, as long as "transition_in_completed" or
 # "transition_out_completed" are emitted at the end.
 func _transition_to(screen: Control, previous_screen: Control = null, direction_in := true) -> void:
-	_label.text = _breadcrumbs.join("/")
-
 	if not use_transitions:
 		previous_screen.hide()
 		screen.show()
