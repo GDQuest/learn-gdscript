@@ -88,11 +88,8 @@ func _on_save_button_pressed() -> void:
 
 	var scene_props := SlicesUtils.load_scene_properties_from_scene(packed_scene)
 	var scripts_props := SlicesUtils.load_scripts_from_scene_properties(scene_props)
-	prints("scene:", scene_props)
-	prints("scripts:", scripts_props)
 	for script_props in scripts_props:
 		var slices_props := SlicesUtils.load_slices_from_script_properties(script_props)
-		prints("slices:", slices_props)
 
 
 func _show_feedback(title: String, text: String):

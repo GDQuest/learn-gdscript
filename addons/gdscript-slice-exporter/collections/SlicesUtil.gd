@@ -107,7 +107,6 @@ func _add_node_path_to_script(root_scene: Node, script: GDScript, node: Node) ->
 # The provided script will be parsed, a properties file created, and saved to disk
 func _parse_new_script(script: GDScript, script_properties_path: String) -> ScriptProperties:
 	var script_properties := ScriptProperties.new()
-	print("oh lalal")
 	script_properties.script_file = script
 	_save(RESOURCE_TYPES.SCRIPT, script_properties)
 

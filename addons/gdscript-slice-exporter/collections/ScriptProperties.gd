@@ -13,7 +13,6 @@ var file_name := "" setget , get_file_name
 
 
 func set_script_file(new_script_file: GDScript) -> void:
-	print("setting script file")
 	script_file = new_script_file
 	original_script = script_file.source_code
 
