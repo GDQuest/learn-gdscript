@@ -166,7 +166,7 @@ Covers:
 
 Explaining why it has an underscore and how blocks of code work are extra information the student doesn't need yet.
 
-#### Practice: calling predefined functions
+#### Practices: calling predefined functions
 
 Several short practices invite the students to call their first functions.
 
@@ -176,17 +176,25 @@ Then we move on to a function call with one argument, and perhaps with two argum
 
 Requirements:
 
-- Show a sprite.
-- Rotate a sprite.
-- Call `move_local_x()` and move_local_y() to move? If so, mention we will learn a better way moving forward.
+1. Show a sprite.
+2. Rotate a sprite.
+3. Call `move_local_x()` and `move_local_y()` to move? If so, mention we will learn a better way moving forward.
+
+Practice 1:
 
 ```gdscript
 show()
 ```
 
+Practice 2:
+
 ```gdscript
 rotate(1)
 ```
+
+Note: `rotate()` only works in radians, so we have to introduce that. An option would be to split this practice and introduce nested function calls with `rotate(deg2rad(90))` for example.
+
+Practice 3:
 
 ```gdscript
 move_local_x(100)
@@ -195,11 +203,69 @@ move_local_y(100)
 
 _Note: We should at some point find something repetitive so the user clearly sees how their first custom function and the parameter helps them reuse code. The turtle's exercise could be a good one for that as you have to walk 4 times to draw a square._
 
-### Lesson 4: Creating Your First Function
+### Lesson 4: Drawing a Rectangle
 
-To prepare for the following lesson, we introduce the notion of functions as, in GDScript, all your behavior lives inside of functions.
+This lesson and practice build upon the educational programming language Turtle. In this language, the user moves and rotates a turtle with simple but repetitive instructions.
 
-We need to explain that our app can hide functions to help with learning, and that we will slowly reveal all the details of how everything works.
+The student will do the same. We provide a "turtle," or marker the student can move in a straight line or rotate.
+
+For this assignment, we can use degrees as students should be more comfortable with them compared to radians.
+
+Here, we can introduce a new feature: a code reference embedded in the practice interface.
+
+```gdscript
+move_forward(100) # Moves 100 pixel forward
+turn_right(90) # Does a 90-degrees turn to the right
+turn_left(90) # Does a 90-degrees turn to the left
+```
+
+The lesson should explain how the "turtle" and each function works.
+
+It should also give examples of the turtle in action with the corresponding code. Lastly, the turtle should animate drawing for this first assignment. We should clarify it's our code that makes the turtle animate.
+
+The turtle should work like so for these first mini-challenges:
+
+- At the start, the user should see a dotted line representing the target shape and points representing the target vertices.
+- Internally, the turtle should store vertices based on the user's input. We can turn all inputs to ints to make coordinates precise.
+  - We record a vertex every time the turtle moves forward.
+  - This allows us to test the student drew the correct shape, by matching every vertex.
+  - We need to be careful as turning right or left are both valid approaches but will lead to different order of vertices.
+
+### Practice 1: Draw a Rectangle
+
+Using the turtle, the student draws a rectangle of length 200 and height 120.
+
+```gdscript
+move_forward(200)
+turn_right(90)
+move_forward(120)
+turn_right(90)
+move_forward(200)
+turn_right(90)
+move_forward(120)
+turn_right(90)
+```
+
+### Practice 2: Draw a Bigger Rectangle
+
+This time, the student has to draw a bigger rectangle. We give them the code listing from before to save some typing, but they have to go change the values. This time, the rectangle should be of length 220 and height 260.
+
+```gdscript
+move_forward(220)
+turn_right(90)
+move_forward(260)
+turn_right(90)
+move_forward(220)
+turn_right(90)
+move_forward(260)
+turn_right(90)
+```
+
+### Lesson 5: Coding Your First Function
+
+To prepare for the next lesson, we introduce the notion of functions as, in GDScript, all your behavior lives inside of functions.
+
+We explain how the code the user wrote so far, we wrapped into a function.
 
 Covers:
 
@@ -211,21 +277,23 @@ Mention that to use a function, someone needs to call it by its name like you di
 
 > The code inside a function doesn't run until you call it.
 >
-> In exercises like this one, the app will automatically call the function by name for you.
+> In exercises like this one, the app will automatically call the function for you.
 
-_Note: do we want a practice showing `call("function_name")` first? To show that functions are lists of instructions with a name and we can litterally call them using their name. Issue: we didn't introduce strings yet._
+---
 
-_We can then introduce the more common way to call functions:_
+Note: do we want a practice showing `call("function_name")` first? To show that functions are lists of instructions with a name and we can litterally call them using their name. Issue: we didn't introduce strings yet.
+
+We can then introduce the more common way to call functions:
 
 > ... but for ease of use, we have a shortcut notation that's simpler: function_name()
+
+Or we can do that by first calling functions, then showing the `call("function_name")` alternative.
 
 #### Practice: defining your first functions
 
 The student defines a function that combines everything they did so far: showing, rotating, and moving a sprite on the screen.
 
-_Note: consider the turtle's exercise: making the turtle move with functions like walk(10), turn(90). If so, we should explain we wrote these functions for the user._
-
-_Note: Should we have a predefined function that we can freeze in the editor to represent the app using the student's code?_
+_Note: Should we have a predefined function that we can freeze in the editor to represent the app using the student's code? E.g. `test()`, or `test_assignment()`, to demistify how we test the student's code._
 
 ```gdscript
 func show_and_move():
@@ -235,41 +303,77 @@ func show_and_move():
     move_local_y(100)
 ```
 
-### Lesson 5: Your First Value Identifier
+### Lesson 6: Your First Value Identifier
 
 Until now, the student had to type values directly.
 
-In preparation for the following lesson, they need to learn about named values, whether it's variables or arguments.
+In preparation for the following lesson, they need to learn about named values, whether variables or arguments.
 
 Covers:
 
 - Naming and reusing a value.
 - Replacing hardcoded values with a named value.
-- Both variables and function arguments? Or only function arguments?
+- Only function arguments.
 
-#### Practice: naming values
+#### Practice: Making a function to draw rectangles of any size
 
 Requirements:
 
-- Create an argument to name the value used to offset the sprite in the previous function
+- Make a function to draw rectangles of different sizes.
 
 ```gdscript
-func show_and_move(offset):
-    show()
-    rotate(1)
-    move_local_x(offset)
-    move_local_y(offset)
+# We should freeze this code if possible, so the student can't erase it.
+func test_assignment():
+    draw_rectangle(200, 120)
+    draw_rectangle(260, 200)
+
+
+# What the student needs to write (or fill/replace)
+func draw_rectangle(length, height):
+    move_forward(length)
+    turn_right(90)
+    move_forward(height)
+    turn_right(90)
+    move_forward(length)
+    turn_right(90)
+    move_forward(height)
+    turn_right(90)
 ```
 
-Note: to make this work fully, the students should also call `do_things(100)`. This involves showing the `_ready()` function to make things work. We could explain this special case in the
+### Lesson 7: variables
 
-> The \_ready() function is a special function definition Godot recognizes and that lets you run code when a game entity is ready to get work done.
->
-> We'll later explain in detail how it works. Right now, we still need to explore more of GDScript to fully understand it as it relies on concepts we have yet to see.
+We can draw rectangles but we can't control their position. Introduce a member variable of the turtle to change its position and draw rectangles in different places.
 
-### Lesson 6: The Game Loop
+Like we first used existing functions, before defining a custom property, we use one created by fellow developers: position.
 
-Following the previous lesson, we explain how games run in a loop.
+Covers:
+
+- Assigning a value to a property.
+- Changing the position of an entity (here, the turtle).
+- Coordinate system: X is positive right, and Y is positive down.
+- The position has two components: position.x and position.y.
+
+Should we explain the link between functions that move the object and changing the position?
+
+#### Practice: Drawing rectangles at any position
+
+The user reuses their draw_rectangle() function but changes the position before drawing.
+
+```gdscript
+func test_assignment():
+    position.x = 120
+    position.y = 100
+    draw_rectangle(200, 120)
+```
+
+Code reference:
+
+- Position.x and position.y
+- draw_rectangle(length, height)
+
+### Lesson 8: The Game Loop
+
+Following the previous lessons, we explain how games run in a loop.
 
 We don't introduce the keywords to write loops in GDScript yet. We only hint at the game loop, show the `_process()` function, and explain how it works.
 
@@ -278,7 +382,7 @@ Covers:
 - Defining a function with a special meaning for Godot.
 - Making something update many times every second.
 
-We need to stress that the_process function name is a convention.
+We need to stress that the `_process()` function name is a convention.
 
 There are many conventions like those in programming that allow programs and programmers to communicate with one another.
 
@@ -288,8 +392,9 @@ Also, other engines may provide a different name to connect to their update loop
 
 Requirements:
 
-- Make a sprite rotate continuously by calling the rotate function.
-- Make a sprite move continuously by calling the `move_local_x()` function.
+- Move the sprite in a circle by combining rotation and local movement.
+
+_Note: we should explain or remind that move_local means "move to the right, depending on where the sprite is facing."_
 
 ```gdscript
 func _process(delta):
@@ -297,15 +402,78 @@ func _process(delta):
     move_local_x(5)
 ```
 
-### Lesson 7: Variables
+### Lesson 9: Time delta
+
+The student learns about the `delta` argument and when they should use it.
+
+Covers:
+
+- Frame in video games take a varying amount of time to calculate.
+- Multiplication.
+- You need to multiply time-sensitive values by delta to make motion time-dependent rather than frame-dependent.
+- Thinking of the movement values we use as speed (radians per second, pixels per second).
+
+Important: `delta` is a small fraction of a second, so it's a very small value. That's why we need to use much larger values than in the previous exercise.
+
+#### Practice: Using the delta parameter
+
+Requirements:
+
+- Move in a circle, but using the time delta.
+
+```gdscript
+func _process(delta):
+    rotate(3 * delta)
+    move_local_x(500 * delta)
+```
+
+Note: we need to think of how to test and validate the assignment accurately. How to test that the code uses delta? String matching?
+
+### Lesson 10: Variables
 
 Covers:
 
 - A variable is a label for a value you can save, change, and read later.
 - Defining a script-wide variable.
 - Using variables and constants allows you to name values that otherwise make your code hard to read.
+- Variables defined outside functions are available to all functions.
 
-### Lesson 8: Adding and subtracting
+We introduce two ways in which we use variables: 
+
+- To name an otherwise unclear value and make the code easier to read: both for you now and in the future.
+- To group values that control how an entity behaves.
+
+Important: although it makes the code longer at this point, two things:
+
+1. It makes the function `_process()` easier to read and understand by itself.
+2. The benefits increase as your code becomes larger and more complex. We can give two examples side-by-side with more lines.
+
+``` gdscript
+# Find some good code example that is hard to read without clear names.
+func _process(delta):
+    rotate(4 * delta)
+    move_local_x(500 * delta)
+    move_local_y(200 * delta)
+    #...
+```
+
+#### Practice: Making movement clearer
+
+``` gdscript
+var angular_speed = 3
+var horizontal_speed = 500
+
+func _process(delta):
+    rotate(angular_speed * delta)
+    move_local_x(horizontal_speed * delta)
+```
+
+### Lesson 11: Adding and subtracting
+
+Covers:
+
+- Adding and subtracting.
+- Changing the value stored in a variable.
 
 Your code is nothing without operations. Computers work exclusively with numbers, and all our code does is reading and writing numbers.
 
@@ -373,7 +541,7 @@ func heal(amount):
     health = health + amount
 ```
 
-### Lesson 9: Conditions
+### Lesson 12: Conditions
 
 Covers:
 
@@ -455,7 +623,7 @@ func take_damage(amount):
         health = 0
 ```
 
-### Lesson 10: multiplying
+### Lesson 13: multiplying
 
 #### Practice: multiplying
 
@@ -470,7 +638,7 @@ func level_up():
     attack = attack * 1.1
 ```
 
-### Lesson 11: modulo
+### Lesson 14: modulo
 
 The modulo operator calculates the remainder of the division. It only works on whole numbers, not decimal numbers.
 
@@ -494,7 +662,7 @@ making a number wrap
 
 Doing something every other cell on a row?
 
-### Lesson 12: introduction to loops
+### Lesson 15: introduction to loops
 
 To cover:
 
