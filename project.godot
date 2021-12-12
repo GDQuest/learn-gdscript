@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "BaseQuizz",
+"language": "GDScript",
+"path": "res://resources/BaseQuizz.gd"
+}, {
 "base": "PanelContainer",
 "class": "CodeEditor",
 "language": "GDScript",
@@ -99,6 +104,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://validation/PracticeTester.gd"
 }, {
+"base": "BaseQuizz",
+"class": "QuizzChoice",
+"language": "GDScript",
+"path": "res://resources/QuizzChoice.gd"
+}, {
+"base": "BaseQuizz",
+"class": "QuizzInputField",
+"language": "GDScript",
+"path": "res://resources/QuizzInputField.gd"
+}, {
 "base": "Reference",
 "class": "RegExpGroup",
 "language": "GDScript",
@@ -170,11 +185,17 @@ _global_script_classes=[ {
 "path": "res://ui/UIPracticeButton.gd"
 }, {
 "base": "PanelContainer",
+"class": "UIQuizzChoice",
+"language": "GDScript",
+"path": "res://ui/components/UIQuizzChoice.gd"
+}, {
+"base": "PanelContainer",
 "class": "ViewModeToggleButton",
 "language": "GDScript",
 "path": "res://ui/components/ViewModeToggleButton.gd"
 } ]
 _global_script_class_icons={
+"BaseQuizz": "",
 "CodeEditor": "",
 "CodeEditorEnhancer": "",
 "ContentBlock": "",
@@ -193,6 +214,8 @@ _global_script_class_icons={
 "PracticeInfoPanel": "",
 "PracticeTestDisplay": "",
 "PracticeTester": "",
+"QuizzChoice": "",
+"QuizzInputField": "",
 "RegExpGroup": "",
 "Revealer": "res://ui/components/Revealer.svg",
 "SceneProperties": "",
@@ -207,6 +230,7 @@ _global_script_class_icons={
 "UILesson": "",
 "UIPractice": "",
 "UIPracticeButton": "",
+"UIQuizzChoice": "",
 "ViewModeToggleButton": ""
 }
 
