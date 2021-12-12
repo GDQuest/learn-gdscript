@@ -40,7 +40,6 @@ func get_config_path():
 
 func set_scene_path(new_path: String) -> void:
 	_save_setting("scene_path", new_path)
-	ProjectSettings.set_setting(SETTINGS_KEY, new_path)
 
 
 func get_scene_path() -> String:
