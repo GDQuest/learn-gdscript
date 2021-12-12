@@ -1,4 +1,5 @@
-class_name BaseQuizz
+# Base class for specific kinds of interactive quizzes.
+class_name Quizz
 extends Resource
 
 export var question := ""

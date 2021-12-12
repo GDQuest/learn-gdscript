@@ -1,6 +1,6 @@
 # Quizz based on a single or multiple choice form.
 class_name QuizzChoice
-extends BaseQuizz
+extends Quizz
 
 const ERROR_NO_VALID_ANSWERS := "No valid answers set for QuizzChoice resource, can't test answers."
 
@@ -10,7 +10,7 @@ export var is_multiple_choice := false
 export var do_shuffle_answers := true
 
 
-func test_answer(answers: Array) -> AnswerTestResult:
+func _test_answer(answers: Array) -> AnswerTestResult:
 	assert(not valid_answers.empty(), ERROR_NO_VALID_ANSWERS)
 	var result := AnswerTestResult.new()
 	result.is_correct = answers.size() == valid_answers.size()

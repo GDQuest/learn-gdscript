@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Resource",
-"class": "BaseQuizz",
-"language": "GDScript",
-"path": "res://resources/BaseQuizz.gd"
-}, {
 "base": "PanelContainer",
 "class": "CodeEditor",
 "language": "GDScript",
@@ -104,12 +99,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://validation/PracticeTester.gd"
 }, {
-"base": "BaseQuizz",
+"base": "Resource",
+"class": "Quizz",
+"language": "GDScript",
+"path": "res://resources/Quizz.gd"
+}, {
+"base": "Quizz",
 "class": "QuizzChoice",
 "language": "GDScript",
 "path": "res://resources/QuizzChoice.gd"
 }, {
-"base": "BaseQuizz",
+"base": "Quizz",
 "class": "QuizzInputField",
 "language": "GDScript",
 "path": "res://resources/QuizzInputField.gd"
@@ -200,7 +200,6 @@ _global_script_classes=[ {
 "path": "res://ui/components/ViewModeToggleButton.gd"
 } ]
 _global_script_class_icons={
-"BaseQuizz": "",
 "CodeEditor": "",
 "CodeEditorEnhancer": "",
 "ContentBlock": "",
@@ -219,6 +218,7 @@ _global_script_class_icons={
 "PracticeInfoPanel": "",
 "PracticeTestDisplay": "",
 "PracticeTester": "",
+"Quizz": "",
 "QuizzChoice": "",
 "QuizzInputField": "",
 "RegExpGroup": "",
@@ -271,6 +271,10 @@ window/stretch/aspect="keep_height"
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://addons/gdscript-course-builder/plugin.cfg", "res://addons/gdscript-slice-exporter/plugin.cfg" )
+
+[gdscript-slice-exporter]
+
+scene="res://addons/gdscript-course-builder/ui/CourseEditor.tscn"
 
 [input]
 

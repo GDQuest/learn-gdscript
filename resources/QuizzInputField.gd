@@ -1,6 +1,6 @@
 # Quizz based on an editable text field in which the user types a number or text.
 class_name QuizzInputField
-extends BaseQuizz
+extends Quizz
 
 # One of the TYPE_* constants.
 var type := -1
