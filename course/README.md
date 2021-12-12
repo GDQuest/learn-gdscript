@@ -163,6 +163,7 @@ Covers:
 - Calling functions.
 - Function arguments.
 - You will also build code others will use.
+- The computer reads instructions sequentially.
 
 Explaining why it has an underscore and how blocks of code work are extra information the student doesn't need yet.
 
@@ -206,6 +207,10 @@ _Note: We should at some point find something repetitive so the user clearly see
 ### Lesson 4: Drawing a Rectangle
 
 This lesson and practice build upon the educational programming language Turtle. In this language, the user moves and rotates a turtle with simple but repetitive instructions.
+
+Covers:
+
+- Using an existing function.
 
 The student will do the same. We provide a "turtle," or marker the student can move in a straight line or rotate.
 
@@ -340,7 +345,7 @@ func draw_rectangle(length, height):
     turn_right(90)
 ```
 
-### Lesson 7: variables
+### Lesson 7: Introduction to member variables
 
 We can draw rectangles but we can't control their position. Introduce a member variable of the turtle to change its position and draw rectangles in different places.
 
@@ -438,7 +443,7 @@ Covers:
 - Using variables and constants allows you to name values that otherwise make your code hard to read.
 - Variables defined outside functions are available to all functions.
 
-We introduce two ways in which we use variables: 
+We introduce two ways in which we use variables:
 
 - To name an otherwise unclear value and make the code easier to read: both for you now and in the future.
 - To group values that control how an entity behaves.
@@ -448,7 +453,7 @@ Important: although it makes the code longer at this point, two things:
 1. It makes the function `_process()` easier to read and understand by itself.
 2. The benefits increase as your code becomes larger and more complex. We can give two examples side-by-side with more lines.
 
-``` gdscript
+```gdscript
 # Find some good code example that is hard to read without clear names.
 func _process(delta):
     rotate(4 * delta)
@@ -459,7 +464,7 @@ func _process(delta):
 
 #### Practice: Making movement clearer
 
-``` gdscript
+```gdscript
 var angular_speed = 3
 var horizontal_speed = 500
 
@@ -479,7 +484,7 @@ Your code is nothing without operations. Computers work exclusively with numbers
 
 It's incredible how computers can do so many things out of just numbers and a few basic operations when you think of it.
 
-In languages like GDScript, Python, or JavaScript, we don't have to worry about how the computer works exactly. We say that we work at a higher level, with tools that greatly simplify our job (at the cost of some performance).
+In languages like GDScript, Python, or JavaScript, we don't have to worry about how the computer works exactly. We say that we work at a higher level, with tools that greatly simplify our job (at the cost of performance).
 
 Still, we need to make calculations often. Most of the time, you will use additions, subtractions, multiplications, and divisions. Simple arithmetic you learned in elementary school.
 
@@ -495,7 +500,7 @@ You can assign the result of a calculation to a variable any time with `=`. Unli
 var health = 9 + 9
 ```
 
-With the following code, the health variable will have a value of 18.
+After executing the line of code above, the health variable will have a value of 18.
 
 You can chain as many additions and subtractions as you want.
 
@@ -507,7 +512,7 @@ var health = 18 - 8 + 2
 
 As the variable names represent a value, you can use the variable name to add or subtract to the current health, for example.
 
-The following code adds 10 to the current health and then subtracts 20 to it, resulting in the health going down by 10 points.
+The following code adds 10 to the current health and then subtracts 20 to it, resulting in the health going down by 10 points: after calling the `change_health()` function once, the `health` variable holds a value of `90`.
 
 ```gdscript
 var health = 100
@@ -516,6 +521,44 @@ func change_health():
     health = health + 10
     health = health - 20
 ```
+
+There's a shorthand to add to a variable: `+=`. It saves having to write the name of the variable again. Those two lines of code are equivalent:
+
+```gdscript
+# Show side by side.
+health = health + 10
+health += 10
+```
+
+Same for subtractions.
+
+```gdscript
+# Show side by side.
+health = health - 10
+health -= 10
+```
+
+Quizz (multiple choice). Which code subtracts 5 to the `defense` variable?
+
+```gdscript
+defense = defense - 5
+defense = 5
+defense -= 5
+```
+
+Instead of hard-coded numbers, you'll want to use function parameters:
+
+```gdscript
+var strength = 10
+
+func test_level_up():
+    level_up(4)
+
+func level_up(extra_strength):
+    strength += extra_strength
+```
+
+Quizz: What will the `strength` be after calling `level_up(4)` once? What if, instead, we call `level_up(8)`?
 
 #### Practice: Taking damage
 
@@ -529,7 +572,7 @@ Its only instructions should be to subtract the `amount` to the predefined `heal
 var health = 100
 
 func take_damage(amount):
-    health = health - amount
+    health -= amount
 ```
 
 #### Practice: Healing up
@@ -538,7 +581,7 @@ func take_damage(amount):
 var health = 100
 
 func heal(amount):
-    health = health + amount
+    health += amount
 ```
 
 ### Lesson 12: Conditions
@@ -572,7 +615,7 @@ Thanks to that, the computer knows which instructions belong to the condition th
 
 ```gdscript
 func heal(amount):
-    health = health + amount
+    health += amount
     if health > 100:
         health = 100
 ```
@@ -625,20 +668,32 @@ func take_damage(amount):
 
 ### Lesson 13: multiplying
 
-#### Practice: multiplying
+Covers:
+
+- Multiplication.
+- Using `*=` as a shortcut to multiply.
+- Combining multiplications with conditions.
+
+#### Practice: Bonus stats
 
 Adding bonuses to character stats upon leveling up
 
 ```gdscript
+var level = 1
 var max_health = 100
-var attack = 10
 
 func level_up():
-    max_health = max_health * 1.1
-    attack = attack * 1.1
+    level += 1
+    max_health *= 1.1
 ```
 
 ### Lesson 14: modulo
+
+Covers:
+
+- Calculating the remainder of a division.
+- Using modulo to reset a number.
+- We count indices from 0 in code.
 
 The modulo operator calculates the remainder of the division. It only works on whole numbers, not decimal numbers.
 
@@ -652,15 +707,48 @@ The lights always cycle in the same way: first have the green light, then the or
 
 To represent that cycle, you can periodically add one to the number and use the modulo operator to wrap back to 0.
 
-Note that in computer code, we very often count from zero.
+Note that in computer code, we very often count from zero. This is because we don't want to waste any numbers on the computer and the counting system starts at 0.
 
-#### Practice: traffic lights
+Main uses of modulo:
 
-making a number wrap
+- Finding even and odd numbers.
+- Getting a random whole number up to a maximum.
+- Making a number wrap: if it goes above a maximum, reset it to 0.
 
-#### Practice: finding even numbers
+#### Practice: traffic lights?
 
-Doing something every other cell on a row?
+Requirements:
+
+- Write a function that increments the traffic light index by 1.
+- When the number reaches 3, reset it to 0.
+- Use the modulo operator.
+
+```gdscript
+var light_index = 0
+
+func advance_traffic_light():
+    light_index += 1
+    light_index = light_index % 3
+```
+
+#### Practice: Bonus health every other level
+
+Requirements:
+
+- A character levels up.
+- When leveling up, the character's max health goes up by 5.
+- When the new character level is even, we increase it by 10 instead of 5.
+
+```gdscript
+var level = 1
+var max_health = 100
+
+func level_up():
+    level += 1
+    max_health += 5
+    if level % 2 == 0:
+        max_health += 5
+```
 
 ### Lesson 15: introduction to loops
 
