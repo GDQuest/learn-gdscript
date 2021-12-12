@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/theme/panel_darker.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/components/UIQuizzChoice.gd" type="Script" id=4]
@@ -21,7 +20,6 @@ corner_radius_bottom_left = 12
 margin_right = 101.0
 margin_bottom = 94.0
 rect_min_size = Vector2( 400, 0 )
-theme = ExtResource( 1 )
 custom_styles/panel = ExtResource( 3 )
 script = ExtResource( 4 )
 __meta__ = {
@@ -31,30 +29,28 @@ __meta__ = {
 [node name="Outline" type="PanelContainer" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 margin_right = 400.0
-margin_bottom = 190.0
+margin_bottom = 94.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 400.0
-margin_bottom = 190.0
+margin_bottom = 94.0
 
 [node name="ChoiceView" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 380.0
-margin_bottom = 170.0
+margin_right = 400.0
+margin_bottom = 94.0
 
 [node name="Question" type="Label" parent="MarginContainer/ChoiceView"]
-margin_right = 360.0
+margin_right = 400.0
 margin_bottom = 26.0
 custom_colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "Question"
 
 [node name="Content" type="RichTextLabel" parent="MarginContainer/ChoiceView"]
-margin_top = 42.0
-margin_right = 360.0
-margin_bottom = 71.0
+margin_top = 30.0
+margin_right = 400.0
+margin_bottom = 66.0
 size_flags_vertical = 3
 bbcode_enabled = true
 bbcode_text = "Explanation"
@@ -62,25 +58,23 @@ text = "Explanation"
 fit_content_height = true
 
 [node name="Choices" type="VBoxContainer" parent="MarginContainer/ChoiceView"]
-margin_top = 87.0
-margin_right = 360.0
-margin_bottom = 87.0
+margin_top = 70.0
+margin_right = 400.0
+margin_bottom = 70.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SubmitButton" type="Button" parent="MarginContainer/ChoiceView"]
-margin_top = 103.0
-margin_right = 360.0
-margin_bottom = 150.0
+margin_top = 74.0
+margin_right = 400.0
+margin_bottom = 94.0
 text = "Submit"
 
 [node name="ResultView" type="VBoxContainer" parent="MarginContainer"]
 visible = false
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 380.0
-margin_bottom = 170.0
+margin_right = 400.0
+margin_bottom = 94.0
 
 [node name="Label" type="Label" parent="MarginContainer/ResultView"]
 margin_right = 360.0
