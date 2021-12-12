@@ -4,26 +4,29 @@ class_name ScriptProperties
 
 export var nodes_paths := []
 # Path to the GDScript file
-export var file_path := "" setget set_file_path
-# Basename of the GDScript file. Helps to display the name in the UI
-export var file_name := ""
+export var script_file: GDScript setget set_script_file
 # Full text of the script
 export var original_script := ""
 
-
-func set_initial_script(initial_script: GDScript) -> void:
-	set_file_path(initial_script.resource_path)
-	original_script = initial_script.source_code
+# Basename of the GDScript file. Helps to display the name in the UI
+var file_name := "" setget , get_file_name
 
 
-func set_file_path(path: String) -> void:
-	file_path = path
-	file_name = file_path.get_file().get_basename()
+func set_script_file(new_script_file: GDScript) -> void:
+	print("setting script file")
+	script_file = new_script_file
+	original_script = script_file.source_code
+
+
+func get_file_name() -> String:
+	return script_file.resource_path.get_file().get_basename() if script_file else ""
 
 
 func get_save_name() -> String:
-	return file_path.get_file()
-
+	assert(script_file != null, "no script file set")
+	if script_file:
+		return script_file.resource_path.get_file()
+	return ""
 
 func _to_string() -> String:
 	return "(%s.gd)" % [file_name]

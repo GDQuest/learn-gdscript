@@ -28,6 +28,9 @@ var _scene_properties: SceneProperties
 # Set to `true` as soon as at least one annotation is found
 var _found_one_annotation := false
 
+# Holds references to already encountered scripts
+# @type Dictionary[String, ScriptProperties]
+var _cached_script_properties := {}
 
 # Collects all the scripts in a scene, and parses slices that have an EXPORT annotation.
 # Running this will save:
@@ -93,22 +96,19 @@ func _add_node_path_to_script(root_scene: Node, script: GDScript, node: Node) ->
 	var script_properties_path := _generate_save_path(
 		RESOURCE_TYPES.SCRIPT, script.resource_path.get_file()
 	)
-	prints(node_path, script_properties_path)
-	var script_already_exists := File.new().file_exists(script_properties_path)
-	var script_properties := (
-		(load(script_properties_path) as ScriptProperties)
-		if script_already_exists
-		else _parse_new_script(script)
-	)
+	if not (script_properties_path in _cached_script_properties):
+		_parse_new_script(script, script_properties_path)
+	var script_properties := _cached_script_properties[script_properties_path] as ScriptProperties
 	if script_properties.nodes_paths.find(node_path) < 0:
 		script_properties.nodes_paths.append(node_path)
 	_save(RESOURCE_TYPES.SCRIPT, script_properties)
 
 
 # The provided script will be parsed, a properties file created, and saved to disk
-func _parse_new_script(script: GDScript) -> ScriptProperties:
+func _parse_new_script(script: GDScript, script_properties_path: String) -> ScriptProperties:
 	var script_properties := ScriptProperties.new()
-	script_properties.set_initial_script(script)
+	print("oh lalal")
+	script_properties.script_file = script
 	_save(RESOURCE_TYPES.SCRIPT, script_properties)
 
 	var blueprint_segment = SliceProperties.new()
@@ -118,6 +118,7 @@ func _parse_new_script(script: GDScript) -> ScriptProperties:
 	for index in slices.size():
 		var slice := slices[index] as SliceProperties
 		_save(RESOURCE_TYPES.SLICE, slice)
+	_cached_script_properties[script_properties_path] = script_properties
 	return script_properties
 
 
@@ -183,6 +184,7 @@ func _save(type: String, resource: Resource) -> bool:
 		return false
 	var path = _generate_save_path(type, resource.get_save_name())
 	resource.take_over_path(path)
+	print("replacing %s"%[path])
 	var success = ResourceSaver.save(path, resource)
 	if success != OK:
 		push_error("error saving %s to %s" % [resource, path])

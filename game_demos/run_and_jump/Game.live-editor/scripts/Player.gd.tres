@@ -1,11 +1,12 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://addons/gdscript-slice-exporter/collections/ScriptProperties.gd" type="Script" id=1]
+[ext_resource path="res://game_demos/run_and_jump/Player.gd" type="Script" id=2]
 
 [resource]
 script = ExtResource( 1 )
 nodes_paths = [ NodePath("Level/Player") ]
-file_path = "res://common/Player.gd"
+script_file = ExtResource( 2 )
 file_name = "Player"
 original_script = "extends KinematicBody2D
 

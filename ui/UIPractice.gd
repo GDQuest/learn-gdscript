@@ -88,7 +88,7 @@ func set_progress(new_progress: float) -> void:
 
 func _on_save_button_pressed() -> void:
 	_script_slice.current_text = _code_editor.get_text()
-	var script_path: String = _script_slice.get_script_properties().file_path
+	var script_file_name: String = _script_slice.get_script_properties().file_name
 	var script_text: String = _script_slice.current_full_text
 	var nodes_paths: Array = _script_slice.get_script_properties().nodes_paths
 	var verifier := ScriptVerifier.new(self, script_text)
@@ -100,19 +100,19 @@ func _on_save_button_pressed() -> void:
 			var error: LanguageServerError = errors[index]
 			LiveEditorMessageBus.print_error(
 				error.message,
-				script_path,
+				script_file_name,
 				error.error_range.start.line,
 				error.error_range.start.character
 			)
 		return
-	script_text = LiveEditorMessageBus.replace_script(script_path, script_text)
+	script_text = LiveEditorMessageBus.replace_script(script_file_name, script_text)
 	var script = GDScript.new()
 	script.source_code = script_text
 	var script_is_valid = script.reload()
 	if script_is_valid != OK:
 		LiveEditorMessageBus.print_error(
 			"The script has an error, but the language server didn't catch it. Are you connected?",
-			script_path
+			script_file_name
 		)
 		return
 	_code_editor_is_dirty = false
