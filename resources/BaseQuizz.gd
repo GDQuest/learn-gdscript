@@ -14,6 +14,6 @@ class AnswerTestResult:
 
 # Returns an error message
 # @tags: virtual
-func _test_answer(answer) -> AnswerTestResult:
+func test_answer(answer) -> AnswerTestResult:
 	printerr("You didn't override the _is_answer_correct() method on the Quizz resource.")
 	return AnswerTestResult.new()

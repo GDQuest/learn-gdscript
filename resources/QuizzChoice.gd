@@ -10,7 +10,7 @@ export var is_multiple_choice := false
 export var do_shuffle_answers := true
 
 
-func _test_answer(answers: Array) -> AnswerTestResult:
+func test_answer(answers: Array) -> AnswerTestResult:
 	assert(not valid_answers.empty(), ERROR_NO_VALID_ANSWERS)
 	var result := AnswerTestResult.new()
 	result.is_correct = answers.size() == valid_answers.size()

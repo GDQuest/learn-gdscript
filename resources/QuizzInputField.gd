@@ -2,27 +2,26 @@
 class_name QuizzInputField
 extends BaseQuizz
 
-enum Type { NUMBER_INT, NUMBER_FLOAT, STRING }
+# One of the TYPE_* constants.
+var type := -1
+var valid_answer setget set_valid_answer
 
-var type: int = Type.STRING
-var valid_answer
 
-
-func _is_answer_correct(answer: String) -> AnswerTestResult:
+func test_answer(answer: String) -> AnswerTestResult:
 	var result := AnswerTestResult.new()
 	answer = answer.strip_edges()
 	match type:
-		Type.NUMBER_INT:
+		TYPE_INT:
 			assert(valid_answer is int)
 			if not answer.is_valid_integer():
 				result.help_message = "You need to type a whole number for this answer. Example: 42"
 			result.is_correct = int(answer) == valid_answer
-		Type.NUMBER_FLOAT:
+		TYPE_REAL:
 			assert(valid_answer is float)
 			if not answer.is_valid_float():
 				result.help_message = 'You need to type a decimal for this answer. Use a "." to separate the decimal part. Example: 3.14'
 			result.is_correct = float(answer) == valid_answer
-		Type.STRING:
+		TYPE_STRING:
 			assert(valid_answer is String)
 			# We should test exact strings because some answers will be code and
 			# require exact capitalization.
@@ -30,3 +29,9 @@ func _is_answer_correct(answer: String) -> AnswerTestResult:
 		_:
 			printerr("Unsupported answer type.")
 	return result
+
+
+func set_valid_answer(value) -> void:
+	valid_answer = value
+	if type == -1:
+		type = typeof(value)

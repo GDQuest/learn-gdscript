@@ -1,28 +1,31 @@
-class_name UIQuizzChoice
+class_name UIQuizzInputField
 extends PanelContainer
 
 const COLOR_WHITE_TRANSPARENT := Color(1.0, 1.0, 1.0, 0.0)
 
 onready var _outline := $Outline as PanelContainer
 onready var _question := $MarginContainer/ChoiceView/Question as Label
-onready var _choices := $MarginContainer/ChoiceView/Choices as VBoxContainer
 onready var _explanation := $MarginContainer/ResultView/Explanation as RichTextLabel
 onready var _content := $MarginContainer/ChoiceView/Content as RichTextLabel
-onready var _submit_button := $MarginContainer/ChoiceView/SubmitButton as Button
+
+onready var _submit_button := $MarginContainer/ChoiceView/HBoxContainer/SubmitButton as Button
+onready var _line_edit := $MarginContainer/ChoiceView/HBoxContainer/LineEdit as LineEdit
 
 onready var _choice_view := $MarginContainer/ChoiceView as VBoxContainer
 onready var _result_view := $MarginContainer/ResultView as VBoxContainer
 
 onready var _tween := $Tween as Tween
+onready var _help_message := $MarginContainer/ChoiceView/HelpMessage as Label
 
-var _quizz: QuizzChoice
+var _quizz: QuizzInputField
 
 
 func _ready() -> void:
 	_submit_button.connect("pressed", self, "_test_answer")
+	_line_edit.connect("text_entered", self, "_test_answer")
 
 
-func setup(quizz: QuizzChoice) -> void:
+func setup(quizz: QuizzInputField) -> void:
 	_quizz = quizz
 	if not is_inside_tree():
 		yield(self, "ready")
@@ -35,27 +38,11 @@ func setup(quizz: QuizzChoice) -> void:
 	_explanation.visible = not _quizz.explanation_bbcode.empty()
 	_explanation.bbcode_text = _quizz.explanation_bbcode
 
-	var answer_options := _quizz.answer_options
-	if _quizz.do_shuffle_answers:
-		answer_options.shuffle()
-	if _quizz.is_multiple_choice:
-		for answer in answer_options:
-			var button := CheckBox.new()
-			button.text = answer
-			_choices.add_child(button)
-	else:
-		var group := ButtonGroup.new()
-		for answer in answer_options:
-			var button := Button.new()
-			button.toggle_mode = true
-			button.text = answer
-			button.group = group
-			_choices.add_child(button)
-
 
 func _test_answer() -> void:
-	var answers := _get_answers()
-	var result := _quizz.test_answer(answers)
+	var result := _quizz.test_answer(_line_edit.text)
+	_help_message.text = result.help_message
+	_help_message.visible = not result.help_message.empty()
 	if not result.is_correct:
 		_tween.stop_all()
 		_outline.modulate = Color.white
@@ -73,17 +60,3 @@ func _test_answer() -> void:
 	else:
 		_result_view.show()
 		_choice_view.hide()
-
-
-# Returns an array of indices of selected answers
-func _get_answers() -> Array:
-	var answer_buttons := _choices.get_children()
-	var first_button = answer_buttons[0]
-	var answers := []
-	if first_button is CheckBox:
-		for button in answer_buttons:
-			if button.pressed:
-				answers.append(button.text)
-	else:
-		answers = [first_button.group.get_pressed_button().text]
-	return answers
