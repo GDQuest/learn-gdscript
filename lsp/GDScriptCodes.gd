@@ -39,7 +39,7 @@ enum ErrorCode {
 	TYPE_MISMATCH,
 	TYPE_CANNOT_BE_INFERRED,
 	RETURN_VALUE_MISMATCH,
-	MISPLACED_STATIC_CALL,
+	MISPLACED_STATIC_CALL
 }
 
 enum WarningCode {
@@ -69,7 +69,7 @@ enum WarningCode {
 	UNSAFE_CAST, # Cast used in an unknown type.
 	UNSAFE_CALL_ARGUMENT, # Function call argument is of a supertype of the require argument.
 	DEPRECATED_KEYWORD, # The keyword is deprecated and should be replaced.
-	STANDALONE_TERNARY, # Return value of ternary expression is discarded.
+	STANDALONE_TERNARY # Return value of ternary expression is discarded.
 }
 
 # Valid records have the following structure:
@@ -548,5 +548,5 @@ const MESSAGE_DATABASE := [
 			"The getter can't be a static function. See \"%FUNCTION_NAME%()\" definition at line %LINE_NUMBER%.",
 		],
 		"code": ErrorCode.MISPLACED_STATIC_CALL,
-	},
+	}
 ]

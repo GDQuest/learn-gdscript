@@ -4,7 +4,7 @@ extends Resource
 
 export var title := ""
 # Array[Lesson]
-export var lessons : Array
+export var lessons: Array
 
 
 func _init() -> void:

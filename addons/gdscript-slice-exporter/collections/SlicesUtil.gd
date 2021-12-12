@@ -32,6 +32,7 @@ var _found_one_annotation := false
 # @type Dictionary[String, ScriptProperties]
 var _cached_script_properties := {}
 
+
 # Collects all the scripts in a scene, and parses slices that have an EXPORT annotation.
 # Running this will save:
 # - one resource file representing scene properties
@@ -183,7 +184,7 @@ func _save(type: String, resource: Resource) -> bool:
 		return false
 	var path = _generate_save_path(type, resource.get_save_name())
 	resource.take_over_path(path)
-	print("replacing %s"%[path])
+	print("replacing %s" % [path])
 	var success = ResourceSaver.save(path, resource)
 	if success != OK:
 		push_error("error saving %s to %s" % [resource, path])

@@ -13,6 +13,7 @@ const CSV_SUGGESTION_FIELD := "error_suggestion"
 var _main_table := {}
 var _translated_table := {}
 
+
 func _init():
 	_main_table = _load_csv_file(DATABASE_SOURCE)
 
@@ -58,12 +59,16 @@ func get_message(error_code: int) -> Dictionary:
 func _load_csv_file(file_path: String) -> Dictionary:
 	var database_file = File.new()
 	if file_path.empty() or not database_file.file_exists(file_path):
-		printerr("Failed to open the error database source at '%s': File does not exist." % [file_path])
+		printerr(
+			"Failed to open the error database source at '%s': File does not exist." % [file_path]
+		)
 		return {}
 
 	var error = database_file.open(file_path, File.READ)
 	if error != OK:
-		printerr("Failed to open the error database source at '%s': Error code %d" % [file_path, error])
+		printerr(
+			"Failed to open the error database source at '%s': Error code %d" % [file_path, error]
+		)
 		return {}
 
 	var table = _parse_csv_file(database_file)
@@ -104,7 +109,9 @@ func _parse_csv_file(file: File) -> Dictionary:
 
 		# It seems that the name of the error in the CSV file is invalid, reporting and skipping.
 		if error_value == -1:
-			printerr("Bad error database record '%s': No such error or warning code." % [error_code])
+			printerr(
+				"Bad error database record '%s': No such error or warning code." % [error_code]
+			)
 			continue
 
 		var record := DatabaseRecord.new()

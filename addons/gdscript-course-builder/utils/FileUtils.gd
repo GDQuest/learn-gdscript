@@ -90,7 +90,6 @@ static func save_course(course: Course, file_path: String) -> bool:
 
 	return not had_errors
 
-
 static func remove_obsolete(file_paths: Array) -> void:
 	if file_paths.empty():
 		return
@@ -106,7 +105,6 @@ static func remove_obsolete(file_paths: Array) -> void:
 					"Failed to remove an obsolete file at '%s', error code: %d" % [file_path, error]
 				)
 
-
 static func random_lesson_path(course: Course) -> String:
 	var _file_tester := Directory.new()
 	var base_path := course.resource_path.get_base_dir()
@@ -117,12 +115,10 @@ static func random_lesson_path(course: Course) -> String:
 		dirpath = base_path.plus_file(lesson_directory)
 	return dirpath.plus_file("lesson.tres")
 
-
 static func slugged_lesson_path(course: Course, slug: String) -> String:
 	var base_path = course.resource_path.get_base_dir()
 	var lesson_slug = "lesson-%s" % [slug]
 	return base_path.plus_file(lesson_slug).plus_file("lesson.tres")
-
 
 static func random_content_block_path(lesson: Lesson) -> String:
 	var _file_tester := Directory.new()
@@ -134,7 +130,6 @@ static func random_content_block_path(lesson: Lesson) -> String:
 		path = base_path.plus_file(block_file)
 	return path
 
-
 static func random_practice_path(lesson: Lesson) -> String:
 	var _file_tester := Directory.new()
 	var base_path = lesson.resource_path.get_base_dir()
@@ -144,7 +139,6 @@ static func random_practice_path(lesson: Lesson) -> String:
 		practice_file = "practice-%s.tres" % [generate_random_path_slug()]
 		path = base_path.plus_file(practice_file)
 	return path
-
 
 static func generate_random_path_slug(length := 8) -> String:
 	var text = ""

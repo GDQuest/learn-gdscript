@@ -1,6 +1,5 @@
 extends Object
 
-
 # ResourceLoader is unreliable when it comes to cache.
 # Sub-resources get cached regardless of the argument passed to load function.
 # This is a workaround that generates a new file on a fly,

@@ -119,7 +119,10 @@ func _reset_overlays() -> void:
 			continue
 
 		error_node.connect(
-			"region_entered", errors_overlay_message, "show_message", [error.code, error.message, error_node]
+			"region_entered",
+			errors_overlay_message,
+			"show_message",
+			[error.code, error.message, error_node]
 		)
 		error_node.connect("region_exited", errors_overlay_message, "hide_message", [error_node])
 

@@ -5,9 +5,9 @@ extends Resource
 
 export var title := ""
 # Array[ContentBlock]
-export var content_blocks : Array
+export var content_blocks: Array
 # Array[Practice]
-export var practices : Array
+export var practices: Array
 
 
 func _init() -> void:

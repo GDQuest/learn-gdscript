@@ -3,7 +3,7 @@ extends WindowDialog
 
 signal confirmed
 
-enum ContentType {TEXT, CODE}
+enum ContentType { TEXT, CODE }
 
 var text := "" setget set_text, get_text
 var content_type: int = ContentType.TEXT setget set_content_type

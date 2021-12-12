@@ -26,11 +26,17 @@ onready var _visual_element_value := $BackgroundPanel/Layout/VisualElement/LineE
 onready var _select_file_button := $BackgroundPanel/Layout/VisualElement/SelectFileButton as Button
 onready var _clear_file_button := $BackgroundPanel/Layout/VisualElement/ClearFileButton as Button
 onready var _text_content_value := $BackgroundPanel/Layout/TextContent/Editor/TextEdit as TextEdit
-onready var _text_content_expand_button := $BackgroundPanel/Layout/TextContent/Editor/ExpandButton as Button
+onready var _text_content_expand_button := (
+	$BackgroundPanel/Layout/TextContent/Editor/ExpandButton
+	as Button
+)
 onready var _text_content_dialog := $TextEditDialog as WindowDialog
 onready var _text_label := $BackgroundPanel/Layout/TextContent/Editor/TextEdit/Label as Label
 
-onready var _checkbox_visuals_on_left := $BackgroundPanel/Layout/Settings/VisualsOnLeftCheckbox as CheckBox
+onready var _checkbox_visuals_on_left := (
+	$BackgroundPanel/Layout/Settings/VisualsOnLeftCheckbox
+	as CheckBox
+)
 onready var _options_block_type := $BackgroundPanel/Layout/Settings/BlockTypeOption as OptionButton
 
 onready var _confirm_dialog := $ConfirmDialog as ConfirmationDialog

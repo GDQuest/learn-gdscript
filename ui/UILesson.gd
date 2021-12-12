@@ -15,8 +15,14 @@ const COLOR_NOTE := Color(0.14902, 0.776471, 0.968627)
 export var test_lesson: Resource
 
 onready var _title := $ScrollContainer/MarginContainer/Column/Title as Label
-onready var _content_blocks := $ScrollContainer/MarginContainer/Column/ContentBlocks as VBoxContainer
-onready var _practices_container := $ScrollContainer/MarginContainer/Column/Practices as VBoxContainer
+onready var _content_blocks := (
+	$ScrollContainer/MarginContainer/Column/ContentBlocks
+	as VBoxContainer
+)
+onready var _practices_container := (
+	$ScrollContainer/MarginContainer/Column/Practices
+	as VBoxContainer
+)
 
 
 func _ready() -> void:

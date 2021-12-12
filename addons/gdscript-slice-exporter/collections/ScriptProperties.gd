@@ -27,5 +27,6 @@ func get_save_name() -> String:
 		return script_file.resource_path.get_file()
 	return ""
 
+
 func _to_string() -> String:
 	return "(%s.gd)" % [file_name]

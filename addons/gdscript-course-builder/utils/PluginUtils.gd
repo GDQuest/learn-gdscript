@@ -4,7 +4,6 @@ const PLUGIN_DIR_NAME := "course-builder-for-live-editor"
 const SETTINGS_SUBPATH := "addons"
 const CACHE_FILE_NAME := "cache.cfg"
 
-
 static func find_plugin_instance(from_node: Node) -> EditorPlugin:
 	var node := from_node.get_parent()
 
@@ -16,7 +15,6 @@ static func find_plugin_instance(from_node: Node) -> EditorPlugin:
 
 	return null
 
-
 static func get_settings_directory(from_node: Node) -> String:
 	var plugin_instance := find_plugin_instance(from_node)
 	if not plugin_instance:
@@ -24,7 +22,6 @@ static func get_settings_directory(from_node: Node) -> String:
 
 	var settings_dir := plugin_instance.get_editor_interface().get_editor_settings().get_project_settings_dir()
 	return settings_dir.plus_file(SETTINGS_SUBPATH).plus_file(PLUGIN_DIR_NAME)
-
 
 static func get_cache_file(from_node: Node) -> String:
 	var settings_dir = get_settings_directory(from_node)

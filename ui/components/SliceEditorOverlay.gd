@@ -73,13 +73,13 @@ func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextE
 		if line_index < 0 or line_index >= line_count:
 			line_index += 1
 			continue
-		
+
 		var line = text_edit.get_line(line_index)
 		var region := Rect2(-1, -1, 0, 0)
 
 		# Starting point of the first line is as reported by the LSP. For the following
 		# lines it's the first character in the line.
-		var char_start : int
+		var char_start: int
 		if line_index == error_range.start.line:
 			char_start = error_range.start.character
 		else:
@@ -87,7 +87,7 @@ func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextE
 
 		# Ending point of the last line is as reported by the LSP. For the preceding
 		# lines it's the last character in the line.
-		var char_end : int
+		var char_end: int
 		if line_index == end_line:
 			char_end = error_range.end.character
 		else:
@@ -127,7 +127,8 @@ func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextE
 	return regions
 
 
-class ErrorOverlay extends Control:
+class ErrorOverlay:
+	extends Control
 	enum Severity { ERROR = 1, WARNING, INFO, HINT }
 
 	const COLOR_ERROR := Color("#E83482")
@@ -138,22 +139,19 @@ class ErrorOverlay extends Control:
 	signal region_exited
 
 	var severity := 0
-	var error_range#: LanguageServerRange
+	var error_range  #: LanguageServerRange
 	var regions := [] setget set_regions
 
 	var _lines := []
 	var _hovered_region := -1
-
 
 	func _init() -> void:
 		name = "ErrorOverlay"
 		rect_min_size = Vector2(0, 0)
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-
 	func _ready() -> void:
 		set_anchors_and_margins_preset(Control.PRESET_WIDE)
-
 
 	func try_consume_mouse(point: Vector2) -> bool:
 		var region_has_point := -1
@@ -181,7 +179,6 @@ class ErrorOverlay extends Control:
 
 		_hovered_region = region_has_point
 		return true
-
 
 	func set_regions(error_regions: Array) -> void:
 		for underline in _lines:
@@ -216,7 +213,8 @@ class ErrorOverlay extends Control:
 			regions.append(error_region)
 
 
-class ErrorUnderline extends Control:
+class ErrorUnderline:
+	extends Control
 	enum LineType { SQUIGGLY, JAGGED, DASHED }
 
 	const LINE_THICKNESS := 2.0
@@ -237,10 +235,8 @@ class ErrorUnderline extends Control:
 
 	var _points: PoolVector2Array
 
-
 	func _init() -> void:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
-
 
 	func _draw() -> void:
 		if line_type == LineType.DASHED:
@@ -252,70 +248,56 @@ class ErrorUnderline extends Control:
 		else:
 			draw_polyline(_points, line_color, LINE_THICKNESS, true)
 
-
 	func update_points() -> void:
 		_points = PoolVector2Array()
 
 		match line_type:
 			LineType.SQUIGGLY:
 				for i in SQUIGGLY_VERTEX_COUNT * line_length / SQUIGGLY_STEP_WIDTH:
-					_points.append(Vector2(
-						SQUIGGLY_STEP_WIDTH * i / SQUIGGLY_VERTEX_COUNT,
-						SQUIGGLY_HEIGHT / 2.0 * sin(TAU * i / SQUIGGLY_VERTEX_COUNT)
-					))
+					_points.append(
+						Vector2(
+							SQUIGGLY_STEP_WIDTH * i / SQUIGGLY_VERTEX_COUNT,
+							SQUIGGLY_HEIGHT / 2.0 * sin(TAU * i / SQUIGGLY_VERTEX_COUNT)
+						)
+					)
 
 			LineType.JAGGED:
 				for i in line_length / JAGGED_STEP_WIDTH:
-					_points.append(Vector2(
-						JAGGED_STEP_WIDTH * i,
-						0.0
-					))
-					_points.append(Vector2(
-						JAGGED_STEP_WIDTH * i + JAGGED_STEP_WIDTH / 4.0,
-						-JAGGED_HEIGHT / 2.0
-					))
-					_points.append(Vector2(
-						JAGGED_STEP_WIDTH * i + JAGGED_STEP_WIDTH * 3.0 / 4.0,
-						JAGGED_HEIGHT / 2.0
-					))
+					_points.append(Vector2(JAGGED_STEP_WIDTH * i, 0.0))
+					_points.append(
+						Vector2(
+							JAGGED_STEP_WIDTH * i + JAGGED_STEP_WIDTH / 4.0, -JAGGED_HEIGHT / 2.0
+						)
+					)
+					_points.append(
+						Vector2(
+							JAGGED_STEP_WIDTH * i + JAGGED_STEP_WIDTH * 3.0 / 4.0,
+							JAGGED_HEIGHT / 2.0
+						)
+					)
 
 			LineType.DASHED:
 				for i in line_length / (DASHED_STEP_WIDTH + DASHED_GAP):
-					_points.append(Vector2(
-						(DASHED_STEP_WIDTH + DASHED_GAP) * i,
-						0.0
-					))
+					_points.append(Vector2((DASHED_STEP_WIDTH + DASHED_GAP) * i, 0.0))
 
 					var end_x = (DASHED_STEP_WIDTH + DASHED_GAP) * (i + 1) - DASHED_GAP
 					if end_x > line_length:
 						end_x = line_length
-					_points.append(Vector2(
-						end_x,
-						0.0
-					))
+					_points.append(Vector2(end_x, 0.0))
 
 			_:
-				_points.append(Vector2(
-					0.0,
-					0.0
-				))
-				_points.append(Vector2(
-					line_length,
-					0.0
-				))
-
+				_points.append(Vector2(0.0, 0.0))
+				_points.append(Vector2(line_length, 0.0))
 
 	func set_line_length(value: float) -> void:
 		line_length = value
 		update_points()
 		update()
 
-
 	func set_line_type(value: int) -> void:
 		line_type = value
 		update_points()
 		update()
-
 
 	func set_line_color(value: Color) -> void:
 		line_color = value

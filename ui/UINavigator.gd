@@ -2,7 +2,7 @@ extends PanelContainer
 
 signal transition_completed
 
-export(Resource) var course = preload("res://course/course-learn-gdscript.tres")
+export (Resource) var course = preload("res://course/course-learn-gdscript.tres")
 
 # If `true`, play transition animations.
 var use_transitions := true
@@ -142,7 +142,13 @@ func _transition_to(screen: Control, previous_screen: Control = null, direction_
 	var direction := 1.0 if direction_in else -1.0
 	screen.rect_position.x = viewport_width * direction
 	_tween.interpolate_property(
-		screen, "rect_position:x", screen.rect_position.x, 0.0, 1.2, Tween.TRANS_CUBIC, Tween.EASE_OUT
+		screen,
+		"rect_position:x",
+		screen.rect_position.x,
+		0.0,
+		1.2,
+		Tween.TRANS_CUBIC,
+		Tween.EASE_OUT
 	)
 	if previous_screen:
 		_tween.interpolate_property(
