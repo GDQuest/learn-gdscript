@@ -35,7 +35,7 @@ func _update_quizz_answers() -> void:
 	_quizz.answer_options.clear()
 	_quizz.valid_answers.clear()
 	for child in get_children():
-		if not child is QuizzChoiceItem:
+		if not child is QuizzChoiceItem or child.is_queued_for_deletion():
 			continue
 
 		_quizz.answer_options.append(child.get_answer_text())
@@ -51,3 +51,4 @@ func _add_answer(answer := "") -> void:
 	instance.set_valid_answer(answer in _quizz.valid_answers)
 	instance.connect("index_changed", self, "_update_answer_labels")
 	instance.connect("choice_changed", self, "_update_quizz_answers")
+	instance.connect("removed", self, "_update_quizz_answers")

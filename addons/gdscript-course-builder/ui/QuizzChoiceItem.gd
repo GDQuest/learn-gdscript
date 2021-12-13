@@ -8,6 +8,7 @@ extends MarginContainer
 # TODO: save in quizz resource
 signal choice_changed
 signal index_changed
+signal removed
 
 var list_index := -1 setget set_list_index
 
@@ -33,7 +34,7 @@ func _ready() -> void:
 	_remove_choice_button.connect("pressed", self, "_on_remove_choice_requested")
 	_choice_line_edit.connect("text_changed", self, "_on_choice_text_changed")
 
-	_confirm_dialog.connect("confirmed", self, "queue_free")
+	_confirm_dialog.connect("confirmed", self, "_remove")
 
 	_valid_answer_checkbox.connect("pressed", self, "emit_signal", ["choice_changed"])
 	_index_label.text = "%d." % [get_index()]
@@ -66,8 +67,10 @@ func set_valid_answer(is_valid: bool) -> void:
 func get_answer_text() -> String:
 	return _choice_line_edit.text
 
+
 func is_valid_answer() -> bool:
 	return _valid_answer_checkbox.pressed
+
 
 func set_list_index(index: int) -> void:
 	_index_label.text = "%d." % [index]
@@ -90,3 +93,8 @@ func _change_position_in_parent(offset: int) -> void:
 		return
 	_parent.move_child(self, new_index)
 	emit_signal("index_changed")
+
+
+func _remove() -> void:
+	queue_free()
+	emit_signal("removed")
