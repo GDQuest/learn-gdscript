@@ -2,6 +2,7 @@ extends Object
 
 const LETTERS_AND_DIGITS := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 const CHARACTER_COUNT := 62
+const SUPPORTED_LESSON_RESOURCES := ["content", "practice", "quizz"]
 
 # Recursively saves the course content: lessons, their order, their content, and
 # their practices.
@@ -120,24 +121,15 @@ static func slugged_lesson_path(course: Course, slug: String) -> String:
 	var lesson_slug = "lesson-%s" % [slug]
 	return base_path.plus_file(lesson_slug).plus_file("lesson.tres")
 
-static func random_content_block_path(lesson: Lesson) -> String:
+static func generate_random_lesson_subresource_path(lesson: Lesson, kind := "content") -> String:
 	var _file_tester := Directory.new()
 	var base_path = lesson.resource_path.get_base_dir()
-	var block_file = "content-%s.tres" % [generate_random_path_slug()]
+	assert(kind in SUPPORTED_LESSON_RESOURCES, "Resource name must be one of %s" % [SUPPORTED_LESSON_RESOURCES])
+	var block_file = "%s-%s.tres" % [kind, generate_random_path_slug()]
 	var path = base_path.plus_file(block_file)
 	while _file_tester.file_exists(path):
-		block_file = "content-%s.tres" % [generate_random_path_slug()]
+		block_file = "%s-%s.tres" % [kind, generate_random_path_slug()]
 		path = base_path.plus_file(block_file)
-	return path
-
-static func random_practice_path(lesson: Lesson) -> String:
-	var _file_tester := Directory.new()
-	var base_path = lesson.resource_path.get_base_dir()
-	var practice_file = "practice-%s.tres" % [generate_random_path_slug()]
-	var path = base_path.plus_file(practice_file)
-	while _file_tester.file_exists(path):
-		practice_file = "practice-%s.tres" % [generate_random_path_slug()]
-		path = base_path.plus_file(practice_file)
 	return path
 
 static func generate_random_path_slug(length := 8) -> String:

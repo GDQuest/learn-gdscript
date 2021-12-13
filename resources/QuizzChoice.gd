@@ -6,7 +6,7 @@ const ERROR_NO_VALID_ANSWERS := "No valid answers set for QuizzChoice resource, 
 
 export var answer_options := []
 export var valid_answers := []
-export var is_multiple_choice := false
+export var is_multiple_choice := true
 export var do_shuffle_answers := true
 
 

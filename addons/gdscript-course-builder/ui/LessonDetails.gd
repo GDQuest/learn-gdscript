@@ -7,6 +7,7 @@ signal lesson_tab_selected
 signal practice_tab_selected
 
 const ContentBlockScene := preload("LessonContentBlock.tscn")
+const QuizzContentBlockScene := preload("QuizzContentBlock.tscn")
 const PracticeScene := preload("LessonPractice.tscn")
 const FileUtils := preload("../utils/FileUtils.gd")
 
@@ -26,6 +27,7 @@ onready var _edit_slug_dialog := $SlugDialog as WindowDialog
 onready var _lesson_tabs := $Content/LessonContent as TabContainer
 onready var _lesson_content_blocks := $Content/LessonContent/ContentBlocks/ItemList as Control
 onready var _add_content_block_button := $Content/LessonContent/ContentBlocks/ToolBar/AddBlockButton as Button
+onready var _add_quizz_button := $Content/LessonContent/ContentBlocks/ToolBar/AddQuizzButton as Button
 onready var _lesson_practices := $Content/LessonContent/Practices/ItemList as Control
 onready var _add_practice_button := $Content/LessonContent/Practices/ToolBar/AddPracticeButton as Button
 
@@ -41,6 +43,7 @@ func _ready() -> void:
 
 	_lesson_title_value.connect("text_changed", self, "_on_title_text_changed")
 	_add_content_block_button.connect("pressed", self, "_on_content_block_added")
+	_add_quizz_button.connect("pressed", self, "_on_quizz_added")
 	_lesson_content_blocks.connect("item_moved", self, "_on_content_block_moved")
 	_add_practice_button.connect("pressed", self, "_on_practice_added")
 	_lesson_practices.connect("item_moved", self, "_on_practice_moved")
@@ -57,6 +60,7 @@ func _update_theme() -> void:
 		"font_color_uneditable", get_color("disabled_font_color", "Editor")
 	)
 	_add_content_block_button.icon = get_icon("New", "EditorIcons")
+	_add_quizz_button.icon = _add_content_block_button.icon
 	_add_practice_button.icon = get_icon("New", "EditorIcons")
 
 	var tab_style = get_stylebox("panel", "TabContainer")
@@ -110,19 +114,16 @@ func _recreate_content_blocks() -> void:
 	if not _edited_lesson:
 		return
 
-	var i := 0
+	var index := 0
 	for content_block in _edited_lesson.content_blocks:
-		_create_content_block_item(content_block, i)
-		i += 1
+		var scene_type := QuizzContentBlockScene if content_block is Quizz else ContentBlockScene
+		var scene_instance = scene_type.instance()
+		_lesson_content_blocks.add_item(scene_instance)
+		scene_instance.connect("block_removed", self, "_on_content_block_removed", [index])
 
-
-func _create_content_block_item(content_block: ContentBlock, list_index: int) -> void:
-	var scene_instance = ContentBlockScene.instance()
-	_lesson_content_blocks.add_item(scene_instance)
-	scene_instance.connect("block_removed", self, "_on_content_block_removed", [list_index])
-
-	scene_instance.set_list_index(list_index)
-	scene_instance.set_content_block(content_block)
+		scene_instance.set_list_index(index)
+		scene_instance.setup(content_block)
+		index += 1
 
 
 func _recreate_practices() -> void:
@@ -136,12 +137,12 @@ func _recreate_practices() -> void:
 		i += 1
 
 
-func _create_practice_item(practice: Practice, list_index: int) -> void:
+func _create_practice_item(practice: Practice, i: int) -> void:
 	var scene_instance = PracticeScene.instance()
 	_lesson_practices.add_item(scene_instance)
-	scene_instance.connect("practice_removed", self, "_on_practice_removed", [list_index])
+	scene_instance.connect("practice_removed", self, "_on_practice_removed", [i])
 
-	scene_instance.set_list_index(list_index)
+	scene_instance.set_list_index(i)
 	scene_instance.set_practice(practice)
 
 
@@ -184,7 +185,22 @@ func _on_content_block_added() -> void:
 		return
 
 	var block_data = ContentBlock.new()
-	var block_path = FileUtils.random_content_block_path(_edited_lesson)
+	var block_path = FileUtils.generate_random_lesson_subresource_path(_edited_lesson)
+	block_data.take_over_path(block_path)
+
+	_edited_lesson.content_blocks.append(block_data)
+	_edited_lesson.emit_changed()
+
+	_recreate_content_blocks()
+	block_data.connect("changed", self, "_on_lesson_resource_changed")
+
+
+func _on_quizz_added() -> void:
+	if not _edited_lesson:
+		return
+
+	var block_data := QuizzChoice.new()
+	var block_path = FileUtils.generate_random_lesson_subresource_path(_edited_lesson, "quizz")
 	block_data.take_over_path(block_path)
 
 	_edited_lesson.content_blocks.append(block_data)
@@ -229,7 +245,7 @@ func _on_practice_added() -> void:
 		return
 
 	var practice_data = Practice.new()
-	var practice_path = FileUtils.random_practice_path(_edited_lesson)
+	var practice_path = FileUtils.generate_random_lesson_subresource_path(_edited_lesson, "practice")
 	practice_data.take_over_path(practice_path)
 
 	_edited_lesson.practices.append(practice_data)

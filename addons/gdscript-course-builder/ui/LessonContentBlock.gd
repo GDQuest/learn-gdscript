@@ -96,7 +96,6 @@ func _update_theme() -> void:
 func get_drag_target_rect() -> Rect2:
 	var target_rect = _drag_icon.get_global_rect()
 	target_rect.position -= rect_global_position
-
 	return target_rect
 
 
@@ -120,7 +119,7 @@ func set_list_index(index: int) -> void:
 	_title_label.text = "%d." % [_list_index + 1]
 
 
-func set_content_block(content_block: ContentBlock) -> void:
+func setup(content_block: ContentBlock) -> void:
 	_edited_content_block = content_block
 
 	_text_label.visible = content_block.text.empty()
