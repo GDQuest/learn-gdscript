@@ -2,7 +2,7 @@
 
 [ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/theme/panel_darker.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/components/UIQuizzInputField.gd" type="Script" id=4]
+[ext_resource path="res://ui/UIQuizzChoice.gd" type="Script" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 draw_center = false
@@ -16,7 +16,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[node name="UIQuizzInputField" type="PanelContainer"]
+[node name="UIQuizzChoice" type="PanelContainer"]
 margin_right = 101.0
 margin_bottom = 94.0
 rect_min_size = Vector2( 400, 0 )
@@ -57,31 +57,19 @@ bbcode_text = "Explanation"
 text = "Explanation"
 fit_content_height = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ChoiceView"]
+[node name="Choices" type="VBoxContainer" parent="MarginContainer/ChoiceView"]
 margin_top = 70.0
 margin_right = 400.0
-margin_bottom = 94.0
+margin_bottom = 70.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/ChoiceView/HBoxContainer"]
-margin_right = 339.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
-placeholder_text = "Answer"
-caret_blink = true
-
-[node name="SubmitButton" type="Button" parent="MarginContainer/ChoiceView/HBoxContainer"]
-margin_left = 343.0
+[node name="SubmitButton" type="Button" parent="MarginContainer/ChoiceView"]
+margin_top = 74.0
 margin_right = 400.0
-margin_bottom = 24.0
+margin_bottom = 94.0
 text = "Submit"
-
-[node name="HelpMessage" type="Label" parent="MarginContainer/ChoiceView"]
-visible = false
-margin_top = 150.0
-margin_right = 360.0
-margin_bottom = 178.0
-custom_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
-autowrap = true
 
 [node name="ResultView" type="VBoxContainer" parent="MarginContainer"]
 visible = false
@@ -98,7 +86,7 @@ text = "You're right!"
 [node name="Explanation" type="RichTextLabel" parent="MarginContainer/ResultView"]
 margin_top = 42.0
 margin_right = 360.0
-margin_bottom = 134.0
+margin_bottom = 71.0
 size_flags_vertical = 3
 bbcode_enabled = true
 bbcode_text = "Explanation"
