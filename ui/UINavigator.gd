@@ -236,7 +236,7 @@ func _js_popstate_listener(args) -> void:
 	if _temporary_disable_listener:
 		return
 	var event = args[0]
-	var url = event.state
+	var _url = event.state
 	_back()
 
 # If a url is set on the page, uses that
