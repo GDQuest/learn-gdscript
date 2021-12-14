@@ -2,11 +2,13 @@
 class_name QuizzChoice
 extends Quizz
 
+signal choice_type_changed(is_multiple_choice)
+
 const ERROR_NO_VALID_ANSWERS := "No valid answers set for QuizzChoice resource, can't test answers."
 
 export var answer_options := []
 export var valid_answers := []
-export var is_multiple_choice := true
+export var is_multiple_choice := true setget set_is_multiple_choice
 export var do_shuffle_answers := true
 
 
@@ -20,3 +22,8 @@ func test_answer(answers: Array) -> AnswerTestResult:
 				result.is_correct = false
 				break
 	return result
+
+
+func set_is_multiple_choice(value: bool) -> void:
+	is_multiple_choice = value
+	emit_signal("choice_type_changed", is_multiple_choice)

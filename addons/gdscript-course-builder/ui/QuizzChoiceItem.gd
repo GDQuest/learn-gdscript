@@ -11,6 +11,10 @@ signal index_changed
 signal removed
 
 var list_index := -1 setget set_list_index
+var is_radio := false setget set_is_radio
+
+var button_group: ButtonGroup
+
 
 onready var _background_panel := $BackgroundPanel as PanelContainer
 
@@ -25,6 +29,7 @@ onready var _remove_choice_button := $BackgroundPanel/Layout/RemoveButton as But
 onready var _confirm_dialog := $ConfirmationDialog as ConfirmationDialog
 
 onready var _parent := get_parent() as Container
+
 
 
 func _ready() -> void:
@@ -74,6 +79,14 @@ func is_valid_answer() -> bool:
 
 func set_list_index(index: int) -> void:
 	_index_label.text = "%d." % [index]
+
+
+func set_is_radio(value: bool) -> void:
+	is_radio = value
+	if not _valid_answer_checkbox:
+		yield(self, "ready")
+	_valid_answer_checkbox.group = button_group if is_radio else null
+	_valid_answer_checkbox.pressed = false
 
 
 func _on_remove_choice_requested() -> void:

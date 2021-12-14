@@ -220,7 +220,7 @@ func _on_text_content_confirmed() -> void:
 func _on_quizz_type_options_item_selected(index: int) -> void:
 	if index in [ITEM_MULTIPLE_CHOICE, ITEM_SINGLE_CHOICE]:
 		if _quizz is QuizzChoice:
-			_quizz.is_multiple_choice = index == ITEM_MULTIPLE_CHOICE
+			_quizz.set_is_multiple_choice(index == ITEM_MULTIPLE_CHOICE)
 		else:
 			_create_new_quizz_resource(QuizzInputField, _quizz)
 	elif index == ITEM_TEXT_INPUT:
