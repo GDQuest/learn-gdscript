@@ -2,8 +2,7 @@ tool
 extends MarginContainer
 
 signal block_removed
-# TODO: handle from parent
-signal quizz_resource_type_changed(quizz_resource)
+signal quizz_resource_changed(previous_quizz, new_quizz)
 
 # Matches the quizz type options indices the user can select using the quizz
 # type OptionButton.
@@ -13,11 +12,6 @@ enum ConfirmMode { REMOVE_BLOCK, CHANGE_QUIZZ_TYPE }
 
 const QuizzChoiceListScene := preload("QuizzChoiceList.tscn")
 const QuizzInputFieldScene := preload("QuizzInputField.tscn")
-
-# FIXME: Keep answers when changing between single and multiple choices
-# TODO:
-# - Build sub-widget depending on quizz type
-# - Confirm dialog when changing quizz type and it causes resource type change
 
 # Edited quizz resource. Can change between a QuizzChoice or a QuizzInputField.
 var _quizz: Quizz
@@ -70,8 +64,6 @@ func _ready() -> void:
 	_confirm_dialog.connect("confirmed", self, "_on_confirm_dialog_confirmed")
 
 	_quizz_type_options.connect("item_selected", self, "_on_quizz_type_options_item_selected")
-
-	connect("quizz_resource_type_changed", self, "_on_quizz_resource_type_changed")
 
 	# Update theme items
 	var panel_style = get_stylebox("panel", "Panel").duplicate()
@@ -198,7 +190,6 @@ func _on_body_text_edit_text_changed() -> void:
 	_quizz.emit_changed()
 
 
-# TODO:
 func _on_body_expand_button_pressed() -> void:
 	_text_content_dialog.text = _quizz.content_bbcode
 	_text_content_dialog.popup_centered()
@@ -222,24 +213,20 @@ func _on_quizz_type_options_item_selected(index: int) -> void:
 		if _quizz is QuizzChoice:
 			_quizz.set_is_multiple_choice(index == ITEM_MULTIPLE_CHOICE)
 		else:
-			_create_new_quizz_resource(QuizzInputField, _quizz)
+			_create_new_quizz_resource(QuizzChoice, _quizz)
 	elif index == ITEM_TEXT_INPUT:
-		_create_new_quizz_resource(QuizzChoice, _quizz)
-		_quizz.is_multiple_choice = index == ITEM_MULTIPLE_CHOICE
+		_create_new_quizz_resource(QuizzInputField, _quizz)
 	else:
 		printerr("Selected unsupported item type: %s" % [index])
 
 
-func _on_quizz_resource_type_changed(_quizz) -> void:
-	_rebuild_answers()
-
-
 func _create_new_quizz_resource(new_type, from: Quizz) -> void:
-	var quizz = new_type.new()
-	quizz.content_bbcode = from.content_bbcode
-	quizz.question = from.question
-	quizz.hint = from.hint
-	quizz.explanation_bbcode = from.explanation_bbcode
-	quizz.take_over_path(_quizz.resource_path)
-	_quizz = quizz
-	emit_signal("quizz_resource_type_changed", quizz)
+	var previous_quizz = _quizz
+	_quizz = new_type.new()
+	_quizz.content_bbcode = from.content_bbcode
+	_quizz.question = from.question
+	_quizz.hint = from.hint
+	_quizz.explanation_bbcode = from.explanation_bbcode
+	_quizz.take_over_path(previous_quizz.resource_path)
+	emit_signal("quizz_resource_changed", previous_quizz, _quizz)
+	_rebuild_answers()

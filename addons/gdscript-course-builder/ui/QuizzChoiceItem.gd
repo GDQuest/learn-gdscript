@@ -5,7 +5,6 @@ tool
 class_name QuizzChoiceItem
 extends MarginContainer
 
-# TODO: save in quizz resource
 signal choice_changed
 signal index_changed
 signal removed

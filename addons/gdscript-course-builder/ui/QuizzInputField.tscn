@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/gdscript-course-builder/ui/QuizzInputField.gd" type="Script" id=1]
 
-[node name="QuizzInputField" type="VBoxContainer"]
+[node name="QuizzInputField" type="MarginContainer"]
 margin_right = 40.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
@@ -10,3 +10,19 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 163.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_top = 13.0
+margin_right = 101.0
+margin_bottom = 27.0
+text = "Correct Answer:"
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
+margin_left = 105.0
+margin_right = 163.0
+margin_bottom = 40.0
+caret_blink = true

@@ -121,6 +121,9 @@ func _recreate_content_blocks() -> void:
 		_lesson_content_blocks.add_item(scene_instance)
 		scene_instance.connect("block_removed", self, "_on_content_block_removed", [index])
 
+		if scene_type == QuizzContentBlockScene:
+			scene_instance.connect("quizz_resource_changed", self, "_on_quizz_resource_changed")
+
 		scene_instance.set_list_index(index)
 		scene_instance.setup(content_block)
 		index += 1
@@ -245,7 +248,9 @@ func _on_practice_added() -> void:
 		return
 
 	var practice_data = Practice.new()
-	var practice_path = FileUtils.generate_random_lesson_subresource_path(_edited_lesson, "practice")
+	var practice_path = FileUtils.generate_random_lesson_subresource_path(
+		_edited_lesson, "practice"
+	)
 	practice_data.take_over_path(practice_path)
 
 	_edited_lesson.practices.append(practice_data)
@@ -289,3 +294,9 @@ func _on_LessonContent_tab_changed(index: int) -> void:
 		emit_signal("practice_tab_selected")
 	elif index == INDEX_LESSON_TAB:
 		emit_signal("lesson_tab_selected")
+
+
+func _on_quizz_resource_changed(previous_quizz: Quizz, new_quizz: Quizz) -> void:
+	var index := _edited_lesson.content_blocks.find(previous_quizz)
+	_edited_lesson.content_blocks[index] = new_quizz
+	_recreate_content_blocks()

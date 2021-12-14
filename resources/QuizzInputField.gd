@@ -2,15 +2,15 @@
 class_name QuizzInputField
 extends Quizz
 
-# One of the TYPE_* constants.
-var type := -1
 var valid_answer setget set_valid_answer
+# One of the TYPE_* constants. Set automatically by changing the valid_answer.
+var _type := -1
 
 
 func test_answer(answer: String) -> AnswerTestResult:
 	var result := AnswerTestResult.new()
 	answer = answer.strip_edges()
-	match type:
+	match _type:
 		TYPE_INT:
 			assert(valid_answer is int)
 			if not answer.is_valid_integer():
@@ -32,6 +32,15 @@ func test_answer(answer: String) -> AnswerTestResult:
 
 
 func set_valid_answer(value) -> void:
-	valid_answer = value
-	if type == -1:
-		type = typeof(value)
+	if value is int or value is float:
+		valid_answer = value
+	elif value is String:
+		value = value.strip_edges()
+		if value.is_valid_float():
+			valid_answer = float(value)
+		elif value.is_valid_integer():
+			valid_answer = int(value)
+		else:
+			valid_answer = value
+
+	_type = typeof(valid_answer)
