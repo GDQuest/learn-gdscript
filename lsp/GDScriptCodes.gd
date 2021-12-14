@@ -90,22 +90,16 @@ enum WarningCode {
 #	"raw": [], # Array of String
 #	"code": -1, # ErrorCode
 #}
+#
+# You can test validity of this database by running res://tests/TestGDScriptCodes.gd
+#
 const MESSAGE_DATABASE := [
 	# Compiler errors.
 	{
 		"_unused": [
-			"Identifier not found: %IDENTIFIER%",
 			"'self' not present in static function!",
-			"Invalid native class type '%NATIVE_TYPE%'.",
-			"Parser bug: unresolved data type.",
-			"Attempt to call a non-identifier.",
-			"'break'' not within loop",
-			"'continue' not within loop",
-			"Parser bug: invalid inheritance.",
 			"Must use '%IDENTIFIER%' instead of 'self.%IDENTIFIER%' in getter.",
 			"Must use '%IDENTIFIER%' instead of 'self.%IDENTIFIER%' in setter.",
-			"Signal '%SIGNAL_NAME%' redefined (in current or parent class)",
-			"Signal '%SIGNAL_NAME%' redefined (original in native class '%CLASS_NAME%')",
 		],
 	},
 
@@ -121,6 +115,43 @@ const MESSAGE_DATABASE := [
 			"Cyclic class reference for '%CLASS_NAME%'.",
 		],
 		"code": ErrorCode.CYCLIC_REFERENCE,
+	},
+	{
+		"patterns": [
+			[ "Identifier not found" ],
+			[ "Invalid native class type" ],
+			[ "Parser bug: unresolved data type." ],
+			[ "Attempt to call a non-identifier." ],
+			[ "Parser bug: invalid inheritance." ],
+		],
+		"raw": [
+			"Identifier not found: %IDENTIFIER%",
+			"Invalid native class type '%NATIVE_TYPE%'.",
+			"Parser bug: unresolved data type.",
+			"Attempt to call a non-identifier.",
+			"Parser bug: invalid inheritance.",
+		],
+		"code": ErrorCode.NONEXISTENT_IDENTIFIER,
+	},
+	{
+		"patterns": [
+			[ "not within loop" ]
+		],
+		"raw": [
+			"'break'' not within loop",
+			"'continue' not within loop",
+		],
+		"code": ErrorCode.MISPLACED_KEYWORD,
+	},
+	{
+		"patterns": [
+			[ "Signal", "redefined" ]
+		],
+		"raw": [
+			"Signal '%SIGNAL_NAME%' redefined (in current or parent class)",
+			"Signal '%SIGNAL_NAME%' redefined (original in native class '%CLASS_NAME%')",
+		],
+		"code": ErrorCode.DUPLICATE_DECLARATION,
 	},
 
 	# Parser errors.
