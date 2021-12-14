@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/ScriptProperties.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/make-visible/MakeCharacterVisible.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 1 )
+nodes_paths = [ NodePath("/root/EditorNode/EditorPlugin3/Node2D/MakeCharacterVisible") ]
+script_file = ExtResource( 2 )
+original_script = "extends Node2D
+
+
+func _ready():
+	hide()
+# EXPORT show
+	show()
+# /EXPORT show
+"
