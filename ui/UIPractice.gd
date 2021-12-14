@@ -72,7 +72,7 @@ func setup(practice: Practice) -> void:
 	if validator_path.is_rel_path():
 		validator_path = base_directory.plus_file(validator_path)
 	_tester = load(validator_path).new()
-	_tester.setup(_game_viewport, _script_slice)
+	_tester.setup(_game_viewport.get_child(0), _script_slice)
 
 	_practice_info_panel.display_tests(_tester.get_test_names())
 	LiveEditorState.current_slice = _script_slice

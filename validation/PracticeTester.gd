@@ -13,7 +13,7 @@ class_name PracticeTester
 extends Reference
 
 # Reference to the tested scene. Use it to test the state of nodes in the scene.
-var _scene_root: Node
+var _scene_root_viewport: Node
 # Reference to the edited script slice. Use it to look at the user's code.
 var _slice: SliceProperties
 var _test_methods := _find_test_method_names()
@@ -22,7 +22,7 @@ var _test_methods := _find_test_method_names()
 # We're not using _init() because it doesn't work unless you define it and call the parent's constructor in child classes. It would add boilerplate to every PracticeTester script.
 func setup(scene_root: Node, slice: SliceProperties) -> void:
 	_slice = slice
-	_scene_root = scene_root
+	_scene_root_viewport = scene_root
 
 
 func get_test_names() -> Array:
