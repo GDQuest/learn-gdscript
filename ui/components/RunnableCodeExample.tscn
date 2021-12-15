@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/components/RunnableCodeExample.gd" type="Script" id=2]
+
+[node name="RunnableCodeExample" type="HBoxContainer"]
+margin_right = 1030.0
+margin_bottom = 278.0
+size_flags_horizontal = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="Control" parent="."]
+margin_right = 426.0
+margin_bottom = 278.0
+rect_min_size = Vector2( 240, 220 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunButton" type="Button" parent="Frame"]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -113.0
+margin_top = -56.0
+margin_right = -13.0
+margin_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 100, 40 )
+text = "Run"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GDScriptCode" type="TextEdit" parent="."]
+margin_left = 430.0
+margin_right = 1030.0
+margin_bottom = 278.0
+rect_min_size = Vector2( 600, 260 )
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+context_menu_enabled = false
+shortcut_keys_enabled = false
+smooth_scrolling = true
+wrap_enabled = true
+caret_block_mode = true
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
