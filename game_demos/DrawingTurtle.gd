@@ -22,7 +22,7 @@ onready var _sprite = $Sprite as Sprite
 
 
 func _draw() -> void:
-	draw_polyline_colors(_points_to_draw, _colors, LINE_THICKNESS, true)
+	draw_polyline_colors(_points_to_draw, _colors, LINE_THICKNESS)
 
 
 func move_forward(distance: float) -> void:
@@ -64,15 +64,13 @@ func play_draw_animation() -> void:
 
 
 func _animate_drawing(progress: float) -> void:
-	_points_to_draw = PoolVector2Array()
-	_points_to_draw.append(Vector2.ZERO)
+	_points_to_draw = PoolVector2Array([Vector2.ZERO])
 
 	var target_distance := progress * _total_distance
 	var distance := 0.0
 	var previous_point := Vector2.ZERO
 	for point in _points:
 		var segment_length := previous_point.distance_to(point)
-		previous_point = point
 		if distance + segment_length >= target_distance:
 			# Find final point
 			var distance_ratio := (target_distance - distance) / segment_length
@@ -85,4 +83,6 @@ func _animate_drawing(progress: float) -> void:
 		else:
 			distance += segment_length
 			_points_to_draw.append(point)
+			previous_point = point
+			
 	update()
