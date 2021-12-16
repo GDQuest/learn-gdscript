@@ -65,6 +65,7 @@ func play_draw_animation() -> void:
 
 func _animate_drawing(progress: float) -> void:
 	_points_to_draw = PoolVector2Array()
+	_points_to_draw.append(Vector2.ZERO)
 
 	var target_distance := progress * _total_distance
 	var distance := 0.0
