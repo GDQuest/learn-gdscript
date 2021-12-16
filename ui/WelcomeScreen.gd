@@ -8,21 +8,11 @@ onready var _report_button := $Layout/TopBar/MarginContainer/ToolBarLayout/Repor
 
 
 func _ready() -> void:
-	_settings_button.connect("pressed", self, "_on_settings_requested")
+	_settings_button.connect("pressed", Events, "emit_signal", ["settings_requested"])
 	_start_button.connect("pressed", self, "_on_start_requested")
 	
-	_report_button.connect("pressed", self, "_on_report_form_requested")
-
-
-func _on_settings_requested() -> void:
-	# TODO: Do a global call to open a settings window.
-	pass
+	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
 
 
 func _on_start_requested() -> void:
 	emit_signal("course_requested")
-
-
-func _on_report_form_requested() -> void:
-	# TODO: Do a global call to open a global issue reporter.
-	pass

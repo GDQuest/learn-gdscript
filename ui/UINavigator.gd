@@ -20,6 +20,13 @@ var _lesson_count: int = course.lessons.size()
 
 onready var _back_button := $VBoxContainer/Buttons/MarginContainer/HBoxContainer/BackButton as Button
 onready var _label := $VBoxContainer/Buttons/MarginContainer/HBoxContainer/BreadCrumbs as Label
+onready var _settings_button := (
+	$VBoxContainer/Buttons/MarginContainer/HBoxContainer/SettingsButton as Button
+)
+onready var _report_button := (
+	$VBoxContainer/Buttons/MarginContainer/HBoxContainer/ReportButton as Button
+)
+
 onready var _screen_container := $VBoxContainer/PanelContainer as Container
 onready var _tween := $Tween as Tween
 
@@ -31,6 +38,8 @@ func _ready() -> void:
 	Events.connect("practice_completed", self, "_on_Events_practice_completed")
 
 	_back_button.connect("pressed", self, "_back")
+	_settings_button.connect("pressed", Events, "emit_signal", ["settings_requested"])
+	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
 
 	if _is_mobile_platform:
 		get_tree().set_auto_accept_quit(false)

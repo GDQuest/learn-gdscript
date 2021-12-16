@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/theme/panel_breadcrumbs.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/UINavigator.gd" type="Script" id=4]
+[ext_resource path="res://ui/icons/icon_settings.png" type="Texture" id=5]
+[ext_resource path="res://ui/icons/icon_report.png" type="Texture" id=6]
 
 [node name="UINavigator" type="PanelContainer"]
 anchor_right = 1.0
@@ -23,14 +25,14 @@ custom_constants/separation = 0
 
 [node name="Buttons" type="PanelContainer" parent="VBoxContainer"]
 margin_right = 1920.0
-margin_bottom = 47.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Buttons"]
 margin_right = 1920.0
-margin_bottom = 47.0
+margin_bottom = 48.0
 custom_constants/margin_right = 12
 custom_constants/margin_top = 0
 custom_constants/margin_left = 12
@@ -39,38 +41,47 @@ custom_constants/margin_bottom = 0
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Buttons/MarginContainer"]
 margin_left = 12.0
 margin_right = 1908.0
-margin_bottom = 47.0
+margin_bottom = 48.0
 
 [node name="BackButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
 margin_right = 30.0
-margin_bottom = 47.0
+margin_bottom = 48.0
 text = "<"
 flat = true
 
 [node name="BreadCrumbs" type="Label" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
 margin_left = 46.0
-margin_top = 9.0
+margin_top = 10.0
 margin_right = 46.0
-margin_bottom = 37.0
+margin_bottom = 38.0
 custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
 custom_fonts/font = ExtResource( 2 )
 
 [node name="Spacer" type="Control" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
 margin_left = 62.0
-margin_right = 1668.0
-margin_bottom = 47.0
+margin_right = 1768.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="ReportButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
-margin_left = 1684.0
+margin_left = 1784.0
+margin_right = 1832.0
+margin_bottom = 48.0
+hint_tooltip = "Report an issue"
+icon = ExtResource( 6 )
+flat = true
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
+margin_left = 1848.0
 margin_right = 1896.0
-margin_bottom = 47.0
-text = "Report an issue"
+margin_bottom = 48.0
+hint_tooltip = "Configure the app"
+icon = ExtResource( 5 )
 flat = true
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 show_behind_parent = true
-margin_top = 47.0
+margin_top = 48.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3

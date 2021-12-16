@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=28 format=2]
+[gd_resource type="Theme" load_steps=29 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_text.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/vscrollbar_grabber.tres" type="StyleBox" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://ui/theme/stylebox_empty.tres" type="StyleBox" id=19]
 [ext_resource path="res://ui/theme/button_disabled.tres" type="StyleBox" id=20]
 [ext_resource path="res://ui/theme/panel_lineedit.tres" type="StyleBox" id=21]
+[ext_resource path="res://ui/theme/panel_tooltip.tres" type="StyleBox" id=22]
 
 [sub_resource type="StyleBoxLine" id=1]
 color = Color( 0.290196, 0.294118, 0.388235, 1 )
@@ -142,6 +143,9 @@ TextEdit/styles/completion = null
 TextEdit/styles/focus = null
 TextEdit/styles/normal = ExtResource( 4 )
 TextEdit/styles/read_only = null
+TooltipLabel/colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
+TooltipLabel/fonts/font = ExtResource( 1 )
+TooltipPanel/styles/panel = ExtResource( 22 )
 VBoxContainer/constants/separation = 16
 VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
