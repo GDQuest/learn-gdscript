@@ -85,8 +85,11 @@ func _navigate_to(target: Resource, clear_history := false) -> void:
 		_screens_stack.clear()
 		_breadcrumbs = PoolStringArray()
 
+	# warning-ignore:unsafe_method_access
 	screen.setup(target)
 
+	# warning-ignore:unsafe_property_access
+	# warning-ignore:unsafe_property_access
 	_breadcrumbs.push_back(target.title)
 	_label.text = _breadcrumbs.join("/")
 
@@ -212,8 +215,8 @@ class ScreenUrl:
 #
 
 var _js_available := OS.has_feature("JavaScript")
-var _js_window := JavaScript.get_interface("window") if _js_available else null
-var _js_history := JavaScript.get_interface("history") if _js_available else null
+var _js_window: JavascriptWindow = JavaScript.get_interface("window") if _js_available else null
+var _js_history: JavascriptHistory = JavaScript.get_interface("history") if _js_available else null
 var _js_popstate_listener_ref := (
 	JavaScript.create_callback(self, "_js_popstate_listener")
 	if _js_available
@@ -238,6 +241,21 @@ func _js_popstate_listener(args) -> void:
 	var event = args[0]
 	var _url = event.state
 	_back()
+
+
+class JavascriptHistory:
+	extends JavaScriptObject
+
+	func back():
+		pass
+
+
+class JavascriptWindow:
+	extends JavaScriptObject
+	var location := {"pathname": ""}
+
+	func addEventListener(_event: String, _ref: JavaScriptObject) -> void:
+		pass
 
 # If a url is set on the page, uses that
 # TODO: we removed the open_url function, gotta restore it first if needed or delete this.

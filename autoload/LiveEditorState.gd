@@ -31,6 +31,7 @@ func use_scene(parent: Node) -> void:
 func _on_scene_parent_removed() -> void:
 	current_scene.get_parent().remove_child(current_scene)
 
+
 # Updates all nodes with the given script.
 # If a node path isn't valid, the node will be silently skipped
 func update_nodes(script: GDScript, node_paths: Array) -> void:

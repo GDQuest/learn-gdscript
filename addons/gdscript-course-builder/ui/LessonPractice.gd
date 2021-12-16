@@ -28,16 +28,34 @@ onready var _title_value := $BackgroundPanel/Layout/HeaderBar/ContentTitle/LineE
 onready var _remove_button := $BackgroundPanel/Layout/HeaderBar/RemoveButton as Button
 
 onready var _script_slice_value := $BackgroundPanel/Layout/ScriptSlice/LineEdit as LineEdit
-onready var _select_script_slice_button := $BackgroundPanel/Layout/ScriptSlice/SelectFileButton as Button
-onready var _clear_script_slice_button := $BackgroundPanel/Layout/ScriptSlice/ClearFileButton as Button
+onready var _select_script_slice_button := (
+	$BackgroundPanel/Layout/ScriptSlice/SelectFileButton
+	as Button
+)
+onready var _clear_script_slice_button := (
+	$BackgroundPanel/Layout/ScriptSlice/ClearFileButton
+	as Button
+)
 onready var _validator_value := $BackgroundPanel/Layout/Validator/LineEdit as LineEdit
 onready var _select_validator_button := $BackgroundPanel/Layout/Validator/SelectFileButton as Button
 onready var _clear_validator_button := $BackgroundPanel/Layout/Validator/ClearFileButton as Button
 
-onready var _goal_content_value := $BackgroundPanel/Layout/MainSplit/Texts/GoalContent/Editor/TextEdit as TextEdit
-onready var _goal_content_expand_button := $BackgroundPanel/Layout/MainSplit/Texts/GoalContent/Editor/ExpandButton as Button
-onready var _starting_code_value := $BackgroundPanel/Layout/MainSplit/Texts/StartingCode/Editor/TextEdit as TextEdit
-onready var _starting_code_expand_button := $BackgroundPanel/Layout/MainSplit/Texts/StartingCode/Editor/ExpandButton as Button
+onready var _goal_content_value := (
+	$BackgroundPanel/Layout/MainSplit/Texts/GoalContent/Editor/TextEdit
+	as TextEdit
+)
+onready var _goal_content_expand_button := (
+	$BackgroundPanel/Layout/MainSplit/Texts/GoalContent/Editor/ExpandButton
+	as Button
+)
+onready var _starting_code_value := (
+	$BackgroundPanel/Layout/MainSplit/Texts/StartingCode/Editor/TextEdit
+	as TextEdit
+)
+onready var _starting_code_expand_button := (
+	$BackgroundPanel/Layout/MainSplit/Texts/StartingCode/Editor/ExpandButton
+	as Button
+)
 onready var _text_content_dialog := $TextEditDialog as WindowDialog
 
 onready var _add_hint_button := $BackgroundPanel/Layout/MainSplit/Hints/Header/AddButton as Button

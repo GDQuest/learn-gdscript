@@ -89,6 +89,8 @@ func set_revealer_height(new_revealer_height: float) -> void:
 	revealer_height = new_revealer_height
 	if not is_inside_tree():
 		yield(self, "ready")
+		if not is_instance_valid(self):
+			return
 	update_min_size()
 
 

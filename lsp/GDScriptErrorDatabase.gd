@@ -24,7 +24,6 @@ func _init():
 	var current_locale = locale_parts[0]
 
 	if current_locale != DEFAULT_LOCALE:
-		var translated_database_file = File.new()
 		var translated_path = TRANSLATED_SOURCE % [current_locale]
 		_translated_table = _load_csv_file(translated_path)
 

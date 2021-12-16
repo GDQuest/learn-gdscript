@@ -7,7 +7,7 @@ onready var _label := $Row/Label as Label
 onready var _button := $Row/Button as Button
 
 
-func setup(practice: Resource) -> void:
+func setup(practice: Practice) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 

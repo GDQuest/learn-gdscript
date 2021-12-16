@@ -124,7 +124,10 @@ static func slugged_lesson_path(course: Course, slug: String) -> String:
 static func generate_random_lesson_subresource_path(lesson: Lesson, kind := "content") -> String:
 	var _file_tester := Directory.new()
 	var base_path = lesson.resource_path.get_base_dir()
-	assert(kind in SUPPORTED_LESSON_RESOURCES, "Resource name must be one of %s" % [SUPPORTED_LESSON_RESOURCES])
+	assert(
+		kind in SUPPORTED_LESSON_RESOURCES,
+		"Resource name must be one of %s" % [SUPPORTED_LESSON_RESOURCES]
+	)
 	var block_file = "%s-%s.tres" % [kind, generate_random_path_slug()]
 	var path = base_path.plus_file(block_file)
 	while _file_tester.file_exists(path):

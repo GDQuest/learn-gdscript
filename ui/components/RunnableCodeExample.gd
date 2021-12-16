@@ -6,7 +6,7 @@ extends HBoxContainer
 const ERROR_NO_RUN_FUNCTION := "Scene %s doesn't have a run() function. The Run button won't work."
 
 export var scene: PackedScene setget set_scene
-export(String, MULTILINE) var gdscript_code := "" setget set_code
+export (String, MULTILINE) var gdscript_code := "" setget set_code
 export var center_in_frame := true setget set_center_in_frame
 
 var _scene_instance: Node

@@ -53,18 +53,18 @@ func _improve_error_code(raw_code: int, raw_message: String) -> int:
 				continue
 
 			# We'll be modifying the message here, so copy it.
-			var message = raw_message
+			var curr_message = raw_message
 			# Pattern's substrings must match the target message in order.
 			for i in pattern.size():
 				# If the substring does not match, exit early, this is not our match.
 				var substring := pattern[i] as String
-				var found = message.find(substring)
+				var found = curr_message.find(substring)
 				if found == -1:
 					break
 
 				# Cut a part of the message that we have already matched to exclude it from
 				# further checks.
-				message = message.substr(found)
+				curr_message = curr_message.substr(found)
 				i += 1
 				# We reached the end of the pattern without errors, so this is our match.
 				if i >= pattern.size():

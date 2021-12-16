@@ -11,9 +11,15 @@ var _error_explanation: String
 var _error_suggestion: String
 
 onready var _error_label := $MarginContainer/Column/ErrorLabel as Label
-onready var _error_explanation_value := $MarginContainer/Column/ErrorExplanation/Value as RichTextLabel
+onready var _error_explanation_value := (
+	$MarginContainer/Column/ErrorExplanation/Value
+	as RichTextLabel
+)
 onready var _more_help_button := $MarginContainer/Column/ErrorExplanation/MoreHelpButton as Button
-onready var _error_suggestion_value := $MarginContainer/Column/ErrorSuggestion/Value as RichTextLabel
+onready var _error_suggestion_value := (
+	$MarginContainer/Column/ErrorSuggestion/Value
+	as RichTextLabel
+)
 
 
 func _ready() -> void:

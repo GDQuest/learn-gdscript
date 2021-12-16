@@ -72,7 +72,7 @@ func replace_script(script_file_name: String, script_text: String) -> String:
 					var slice_beginning := line.left(starting_char)
 					var slice_end := line.right(ending_char)
 					var replaced_line := slice_beginning + slice_middle + slice_end
-					var diff: int = abs(replaced_line.length() - line.length())
+					var diff := int(abs(replaced_line.length() - line.length()))
 					start = ending_char + diff
 					lines[line_nb] = replaced_line
 	return lines.join("\n")

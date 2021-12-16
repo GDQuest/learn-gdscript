@@ -139,7 +139,7 @@ class ErrorOverlay:
 	signal region_exited
 
 	var severity := 0
-	var error_range  #: LanguageServerRange
+	var error_range := LanguageServerRange.new()
 	var regions := [] setget set_regions
 
 	var _lines := []

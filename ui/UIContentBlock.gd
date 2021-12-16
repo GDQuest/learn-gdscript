@@ -9,7 +9,7 @@ const MARGIN := 16.0
 
 var min_width_to_show_image := 500.0
 
-var _visual_element: Node
+var _visual_element: CanvasItem
 
 onready var _rich_text_label := $MarginContainer/Row/RichTextLabel as RichTextLabel
 onready var _margin := $MarginContainer as MarginContainer
@@ -39,7 +39,7 @@ func setup(content_block: ContentBlock) -> void:
 			add_child(texture_rect)
 			_visual_element = texture_rect
 		elif resource is PackedScene:
-			var instance = resource.instance()
+			var instance = (resource as PackedScene).instance()
 			add_child(instance)
 			_visual_element = instance
 		else:

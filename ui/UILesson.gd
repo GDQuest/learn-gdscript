@@ -10,15 +10,21 @@ const ContentBlockScene := preload("UIContentBlock.tscn")
 const QuizzInputFieldScene := preload("UIQuizzInputField.tscn")
 const QuizzChoiceScene := preload("UIQuizzChoice.tscn")
 const PracticeButtonScene := preload("UIPracticeButton.tscn")
-const RevealerScene = preload("components/Revealer.tscn")
+const RevealerScene := preload("components/Revealer.tscn")
 
 const COLOR_NOTE := Color(0.14902, 0.776471, 0.968627)
 
 export var test_lesson: Resource
 
 onready var _title := $ScrollContainer/MarginContainer/Column/Title as Label
-onready var _content_blocks := $ScrollContainer/MarginContainer/Column/ContentBlocks as VBoxContainer
-onready var _practices_container := $ScrollContainer/MarginContainer/Column/Practices as VBoxContainer
+onready var _content_blocks := (
+	$ScrollContainer/MarginContainer/Column/ContentBlocks
+	as VBoxContainer
+)
+onready var _practices_container := (
+	$ScrollContainer/MarginContainer/Column/Practices
+	as VBoxContainer
+)
 
 
 func _ready() -> void:
@@ -26,7 +32,7 @@ func _ready() -> void:
 		setup(test_lesson)
 
 
-func setup(lesson: Resource) -> void:
+func setup(lesson: Lesson) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 
@@ -39,7 +45,7 @@ func setup(lesson: Resource) -> void:
 			if block.type == ContentBlock.Type.PLAIN:
 				_content_blocks.add_child(instance)
 			else:
-				var revealer := RevealerScene.instance()
+				var revealer := RevealerScene.instance() as Revealer
 				if block.type == ContentBlock.Type.NOTE:
 					revealer.text_color = COLOR_NOTE
 					revealer.title = "Note"
@@ -56,7 +62,6 @@ func setup(lesson: Resource) -> void:
 			var instance = scene.instance()
 			instance.setup(block)
 			_content_blocks.add_child(instance)
-
 
 	for practice in lesson.practices:
 		var button: UIPracticeButton = PracticeButtonScene.instance()

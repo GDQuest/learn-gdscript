@@ -14,7 +14,6 @@ var is_radio := false setget set_is_radio
 
 var button_group: ButtonGroup
 
-
 onready var _background_panel := $BackgroundPanel as PanelContainer
 
 onready var _sort_up_button := $BackgroundPanel/Layout/SortButtons/SortUpButton as Button
@@ -28,7 +27,6 @@ onready var _remove_choice_button := $BackgroundPanel/Layout/RemoveButton as But
 onready var _confirm_dialog := $ConfirmationDialog as ConfirmationDialog
 
 onready var _parent := get_parent() as Container
-
 
 
 func _ready() -> void:

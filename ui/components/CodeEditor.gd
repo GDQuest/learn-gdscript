@@ -76,6 +76,8 @@ func get_text() -> String:
 
 
 func set_split_container_path(value: NodePath) -> void:
+	if value == split_container_path:
+		return
 	split_container_path = value
 	if not is_inside_tree():
 		yield(self, "ready")
