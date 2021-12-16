@@ -88,10 +88,10 @@ func set_title(new_title: String) -> void:
 func set_revealer_height(new_revealer_height: float) -> void:
 	revealer_height = new_revealer_height
 	if not is_inside_tree():
-		yield(self, "ready")
-		if not is_instance_valid(self):
-			return
-	update_min_size()
+		if not is_connected("ready", self, "update_min_size"):
+			connect("ready", self, "update_min_size")
+	else:
+		update_min_size()
 
 
 func update_min_size() -> void:
