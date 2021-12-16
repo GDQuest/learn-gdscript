@@ -1,10 +1,11 @@
 extends Control
 
+const LoadingScreen = preload("./LoadingScreen.gd")
 
 var _unloading_target: Control
 var _loading_target: Control
 
-onready var _loading_screen := $Pages/LoadingScreen as Control
+onready var _loading_screen := $Pages/LoadingScreen as LoadingScreen
 onready var _welcome_screen := $Pages/WelcomeScreen as Control
 onready var _settings_screen := $Pages/SettingsScreen as Control
 onready var _course_screen := $Pages/CourseScreen as Control
@@ -39,7 +40,7 @@ func _on_course_requested() -> void:
 	yield(get_tree(), "idle_frame")
 	
 	# FIXME: Use interactive loader instead?
-	var course_navigator_scene := load("res://ui/UINavigator.tscn")
+	var course_navigator_scene := load("res://ui/UINavigator.tscn") as PackedScene
 	var course_navigator = course_navigator_scene.instance()
 	_course_screen.add_child(course_navigator)
 	

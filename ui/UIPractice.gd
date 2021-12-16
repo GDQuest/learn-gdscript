@@ -71,8 +71,7 @@ func setup(practice: Practice) -> void:
 	var validator_path := practice.validator_script_path
 	if validator_path.is_rel_path():
 		validator_path = base_directory.plus_file(validator_path)
-	# warning-ignore:unsafe_method_access
-	_tester = load(validator_path).new()
+	_tester = (load(validator_path) as GDScript).new()
 	_tester.setup(_game_viewport.get_child(0), _script_slice)
 
 	_practice_info_panel.display_tests(_tester.get_test_names())
