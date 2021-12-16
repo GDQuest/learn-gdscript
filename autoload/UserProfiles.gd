@@ -67,7 +67,7 @@ class Profile:
 
 	signal progress_changed(exercise_name, progress)
 
-	var file_path = ""
+	var file_path := ""
 	export var player_name := ""
 	export var exercises := {} setget _read_only
 
