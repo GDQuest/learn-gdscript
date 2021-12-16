@@ -1,28 +1,123 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/theme/panel_darker_with_shadow.tres" type="StyleBox" id=2]
+[ext_resource path="res://ui/theme/fonts/font_title_big.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/theme/panel_breadcrumbs.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/theme/button_big_green_normal.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/theme/button_big_green_pressed.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/theme/button_big_green_hover.tres" type="StyleBox" id=8]
+[ext_resource path="res://ui/WelcomeScreen.gd" type="Script" id=9]
 
 [node name="WelcomeScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 2495, 16 )
 theme = ExtResource( 1 )
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -456.0
-margin_top = -297.0
-margin_right = 456.0
-margin_bottom = 297.0
+[node name="Layout" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+
+[node name="TopBar" type="PanelContainer" parent="Layout"]
+margin_right = 1920.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = ExtResource( 5 )
+
+[node name="MarginContainer" type="MarginContainer" parent="Layout/TopBar"]
+margin_right = 1920.0
+margin_bottom = 47.0
+custom_constants/margin_right = 12
+custom_constants/margin_top = 0
+custom_constants/margin_left = 12
+custom_constants/margin_bottom = 0
+
+[node name="ToolBarLayout" type="HBoxContainer" parent="Layout/TopBar/MarginContainer"]
+margin_left = 12.0
+margin_right = 1908.0
+margin_bottom = 47.0
+alignment = 2
+
+[node name="ReportButton" type="Button" parent="Layout/TopBar/MarginContainer/ToolBarLayout"]
+margin_left = 1684.0
+margin_right = 1896.0
+margin_bottom = 47.0
+text = "Report an issue"
+
+[node name="MarginContainer" type="MarginContainer" parent="Layout"]
+margin_left = 334.0
+margin_top = 63.0
+margin_right = 1586.0
+margin_bottom = 1080.0
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="ColumnLayout" type="HBoxContainer" parent="Layout/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1232.0
+margin_bottom = 997.0
+alignment = 1
+
+[node name="MainColumn" type="VBoxContainer" parent="Layout/MarginContainer/ColumnLayout"]
+margin_right = 840.0
+margin_bottom = 977.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="WelcomeTitle" type="PanelContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn"]
+margin_right = 840.0
+margin_bottom = 80.0
+custom_styles/panel = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/WelcomeTitle"]
+margin_right = 840.0
+margin_bottom = 80.0
+
+[node name="TitleLabel" type="Label" parent="Layout/MarginContainer/ColumnLayout/MainColumn/WelcomeTitle/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 820.0
+margin_bottom = 60.0
+custom_fonts/font = ExtResource( 3 )
+text = "Welcome to GDScript Learn!"
+align = 1
+valign = 1
+
+[node name="MainContent" type="PanelContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn"]
+margin_top = 96.0
+margin_right = 840.0
+margin_bottom = 977.0
+size_flags_vertical = 3
+custom_styles/panel = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent"]
+margin_right = 840.0
+margin_bottom = 881.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 820.0
+margin_bottom = 861.0
+scroll_horizontal_enabled = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer"]
+margin_right = 800.0
+margin_bottom = 464.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 800, 100 )
+size_flags_horizontal = 6
 bbcode_enabled = true
-bbcode_text = "Welcome to GDScript Learn.
-
-GDScript Learn is a Free and Open-Source app and series to help you learn to code, [b]from zero[/b], with Godot's GDScript programming language.
+bbcode_text = "GDScript Learn is a Free and Open-Source app and series to help you learn to code, [b]from zero[/b], with Godot's GDScript programming language.
 
 Whether you want to learn game development or just code with exciting interactive projects, this app is for you.
 
@@ -32,17 +127,8 @@ As a result, we could make everything in here free for everyone.
 
 We're making a complete course to get up to speed with the GDScript programming language.
 
-It complements the free course you will find in the Godot documentation (we contributed to it too).
-
-Disclaimer: The app is in a beta state. You may encounter bugs, typos, and more.
-
-Please use the button in the top menu to report the issue when this happens.
-
-It is crucial: we'll use your reports to fix issues for you and everyone else.
-"
-text = "Welcome to GDScript Learn.
-
-GDScript Learn is a Free and Open-Source app and series to help you learn to code, from zero, with Godot's GDScript programming language.
+It complements the free course you will find in the Godot documentation (we contributed to it too)."
+text = "GDScript Learn is a Free and Open-Source app and series to help you learn to code, from zero, with Godot's GDScript programming language.
 
 Whether you want to learn game development or just code with exciting interactive projects, this app is for you.
 
@@ -52,12 +138,75 @@ As a result, we could make everything in here free for everyone.
 
 We're making a complete course to get up to speed with the GDScript programming language.
 
-It complements the free course you will find in the Godot documentation (we contributed to it too).
-
-Disclaimer: The app is in a beta state. You may encounter bugs, typos, and more.
-
-Please use the button in the top menu to report the issue when this happens.
-
-It is crucial: we'll use your reports to fix issues for you and everyone else.
-"
+It complements the free course you will find in the Godot documentation (we contributed to it too)."
 fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SideColumn" type="VBoxContainer" parent="Layout/MarginContainer/ColumnLayout"]
+margin_left = 856.0
+margin_right = 1212.0
+margin_bottom = 977.0
+size_flags_horizontal = 3
+
+[node name="Disclaimer" type="PanelContainer" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
+margin_right = 356.0
+margin_bottom = 375.0
+custom_styles/panel = ExtResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="Layout/MarginContainer/ColumnLayout/SideColumn/Disclaimer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 348.0
+margin_bottom = 367.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/SideColumn/Disclaimer/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 320.0
+margin_bottom = 339.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 300, 160 )
+size_flags_horizontal = 6
+bbcode_enabled = true
+bbcode_text = "[b]Disclaimer:[/b] The app is in a beta state. You may encounter bugs, typos, and more.
+
+Please use the button in the top menu to report the issue when this happens.
+
+It is crucial: we'll use your reports to fix issues for you and everyone else."
+text = "Disclaimer: The app is in a beta state. You may encounter bugs, typos, and more.
+
+Please use the button in the top menu to report the issue when this happens.
+
+It is crucial: we'll use your reports to fix issues for you and everyone else."
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer" type="Control" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
+margin_top = 391.0
+margin_right = 356.0
+margin_bottom = 835.0
+size_flags_vertical = 3
+
+[node name="SettingsButton" type="Button" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
+margin_top = 851.0
+margin_right = 356.0
+margin_bottom = 898.0
+text = "Configure the App"
+
+[node name="StartButton" type="Button" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
+margin_top = 914.0
+margin_right = 356.0
+margin_bottom = 977.0
+custom_colors/font_color_focus = Color( 0.188235, 0.188235, 0.286275, 1 )
+custom_colors/font_color = Color( 0.188235, 0.188235, 0.286275, 1 )
+custom_colors/font_color_hover = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+custom_colors/font_color_pressed = Color( 0.188235, 0.188235, 0.286275, 1 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/normal = ExtResource( 6 )
+text = "Start the Course >"

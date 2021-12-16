@@ -18,8 +18,8 @@ var _current_url := ScreenUrl.new(_path_regex, "res://")
 var _lesson_index := 0 setget _set_lesson_index
 var _lesson_count: int = course.lessons.size()
 
-onready var _back_button := $VBoxContainer/Buttons/HBoxContainer/BackButton as Button
-onready var _label := $VBoxContainer/Buttons/HBoxContainer/BreadCrumbs as Label
+onready var _back_button := $VBoxContainer/Buttons/MarginContainer/HBoxContainer/BackButton as Button
+onready var _label := $VBoxContainer/Buttons/MarginContainer/HBoxContainer/BreadCrumbs as Label
 onready var _screen_container := $VBoxContainer/PanelContainer as Container
 onready var _tween := $Tween as Tween
 

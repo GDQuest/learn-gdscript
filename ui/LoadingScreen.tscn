@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ui/theme/panel_darker_with_shadow.tres" type="StyleBox" id=1]
+[ext_resource path="res://ui/icons/loading_splash.png" type="Texture" id=2]
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=3]
+[ext_resource path="res://ui/theme/progress_simple_background.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/theme/progress_simple_foreground.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/LoadingScreen.gd" type="Script" id=6]
+
+[node name="LoadingScreen" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundPanel" type="Panel" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 1060.0
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SplashTexture" type="TextureRect" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 1060.0
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 1060.0
+
+[node name="ProgressBar" type="ProgressBar" parent="Control"]
+anchor_left = 0.25
+anchor_top = 0.85
+anchor_right = 0.75
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 0, 24 )
+custom_styles/fg = ExtResource( 5 )
+custom_styles/bg = ExtResource( 4 )
+max_value = 1.0
+value = 0.5
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
