@@ -45,6 +45,7 @@ func turn_left(angle_degrees: float) -> void:
 
 
 func reset() -> void:
+	rotation_degrees = 0
 	_points = PoolVector2Array()
 	_colors = PoolColorArray()
 	draw_color = DEFAULT_COLOR
@@ -56,6 +57,7 @@ func set_draw_color(new_color: Color) -> void:
 
 
 func play_draw_animation() -> void:
+	rotation_degrees = 0
 	_tween.stop_all()
 	_tween.interpolate_method(self, "_animate_drawing", 0.0, 1.0, 2.0)
 	_tween.start()
