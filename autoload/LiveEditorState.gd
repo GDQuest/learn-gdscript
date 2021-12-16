@@ -25,7 +25,11 @@ func use_scene(parent: Node) -> void:
 	if previous_parent != null:
 		current_scene.get_parent().remove_child(current_scene)
 	parent.add_child(current_scene)
+	parent.connect("tree_exited", self, "_on_scene_parent_removed")
 
+
+func _on_scene_parent_removed() -> void:
+	current_scene.get_parent().remove_child(current_scene)
 
 # Updates all nodes with the given script.
 # If a node path isn't valid, the node will be silently skipped
