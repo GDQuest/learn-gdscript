@@ -35,16 +35,13 @@ onready var _body_expand_button := $BackgroundPanel/Layout/Body/Editor/ExpandBut
 onready var _body_info_label := $BackgroundPanel/Layout/Body/Editor/TextEdit/Label as Label
 
 onready var _explanation_text_edit := (
-	$BackgroundPanel/Layout/Explanation/Editor/TextEdit
-	as TextEdit
+	$BackgroundPanel/Layout/Explanation/Editor/TextEdit as TextEdit
 )
 onready var _explanation_expand_button := (
-	$BackgroundPanel/Layout/Explanation/Editor/ExpandButton
-	as Button
+	$BackgroundPanel/Layout/Explanation/Editor/ExpandButton as Button
 )
 onready var _explanation_info_label := (
-	$BackgroundPanel/Layout/Explanation/Editor/TextEdit/Label
-	as Label
+	$BackgroundPanel/Layout/Explanation/Editor/TextEdit/Label as Label
 )
 
 onready var _answers_container := $BackgroundPanel/Layout/Answers as PanelContainer

@@ -27,17 +27,14 @@ onready var _edit_slug_dialog := $SlugDialog as WindowDialog
 onready var _lesson_tabs := $Content/LessonContent as TabContainer
 onready var _lesson_content_blocks := $Content/LessonContent/ContentBlocks/ItemList as Control
 onready var _add_content_block_button := (
-	$Content/LessonContent/ContentBlocks/ToolBar/AddBlockButton
-	as Button
+	$Content/LessonContent/ContentBlocks/ToolBar/AddBlockButton as Button
 )
 onready var _add_quizz_button := (
-	$Content/LessonContent/ContentBlocks/ToolBar/AddQuizzButton
-	as Button
+	$Content/LessonContent/ContentBlocks/ToolBar/AddQuizzButton as Button
 )
 onready var _lesson_practices := $Content/LessonContent/Practices/ItemList as Control
 onready var _add_practice_button := (
-	$Content/LessonContent/Practices/ToolBar/AddPracticeButton
-	as Button
+	$Content/LessonContent/Practices/ToolBar/AddPracticeButton as Button
 )
 
 
