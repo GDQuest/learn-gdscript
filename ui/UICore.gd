@@ -2,6 +2,7 @@ extends Control
 
 const LoadingScreen = preload("./LoadingScreen.gd")
 const ReportFormPopup = preload("./components/ReportFormPopup.gd")
+const SettingsPopup = preload("./components/SettingsPopup.gd")
 
 var _unloading_target: Control
 var _loading_target: Control
@@ -11,10 +12,12 @@ onready var _welcome_screen := $Pages/WelcomeScreen as Control
 onready var _settings_screen := $Pages/SettingsScreen as Control
 onready var _course_screen := $Pages/CourseScreen as Control
 
+onready var _settings_popup := $SettingsPopup as SettingsPopup
 onready var _report_form_popup := $ReportFormPopup as ReportFormPopup
 
 
 func _ready():
+	_settings_popup.hide()
 	_report_form_popup.hide()
 	
 	_loading_screen.connect("faded_in", self, "_on_loading_faded_in")
@@ -22,6 +25,7 @@ func _ready():
 	_welcome_screen.connect("course_requested", self, "_on_course_requested")
 	
 	Events.connect("report_form_requested", _report_form_popup, "show")
+	Events.connect("settings_requested", _settings_popup, "show")
 	
 	load_immediately(_welcome_screen)
 

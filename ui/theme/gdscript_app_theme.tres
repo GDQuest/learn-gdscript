@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=29 format=2]
+[gd_resource type="Theme" load_steps=35 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_text.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/vscrollbar_grabber.tres" type="StyleBox" id=2]
@@ -22,6 +22,12 @@
 [ext_resource path="res://ui/theme/button_disabled.tres" type="StyleBox" id=20]
 [ext_resource path="res://ui/theme/panel_lineedit.tres" type="StyleBox" id=21]
 [ext_resource path="res://ui/theme/panel_tooltip.tres" type="StyleBox" id=22]
+[ext_resource path="res://ui/theme/hslider_grabber.tres" type="StyleBox" id=23]
+[ext_resource path="res://ui/theme/hslider_slider.tres" type="StyleBox" id=24]
+[ext_resource path="res://ui/theme/hslider_grabber_highlight.tres" type="StyleBox" id=25]
+[ext_resource path="res://ui/icons/icon_slider_grabber.png" type="Texture" id=26]
+[ext_resource path="res://ui/icons/icon_hslider_tick.png" type="Texture" id=27]
+[ext_resource path="res://ui/icons/icon_slider_grabber_hl.png" type="Texture" id=28]
 
 [sub_resource type="StyleBoxLine" id=1]
 color = Color( 0.290196, 0.294118, 0.388235, 1 )
@@ -71,6 +77,13 @@ Button/styles/pressed = ExtResource( 18 )
 HBoxContainer/constants/separation = 16
 HSeparator/constants/separation = 8
 HSeparator/styles/separator = SubResource( 1 )
+HSlider/icons/grabber = ExtResource( 26 )
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = ExtResource( 28 )
+HSlider/icons/tick = ExtResource( 27 )
+HSlider/styles/grabber_area = ExtResource( 23 )
+HSlider/styles/grabber_area_highlight = ExtResource( 25 )
+HSlider/styles/slider = ExtResource( 24 )
 LineEdit/fonts/font = ExtResource( 13 )
 LineEdit/styles/focus = SubResource( 6 )
 LineEdit/styles/normal = ExtResource( 21 )

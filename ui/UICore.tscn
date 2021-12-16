@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/WelcomeScreen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
 [ext_resource path="res://ui/LoadingScreen.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/UICore.gd" type="Script" id=4]
 [ext_resource path="res://ui/components/ReportFormPopup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/components/SettingsPopup.tscn" type="PackedScene" id=6]
 
 [node name="UICore" type="Control"]
 anchor_right = 1.0
@@ -35,4 +36,7 @@ anchor_bottom = 1.0
 [node name="LoadingScreen" parent="Pages" instance=ExtResource( 3 )]
 
 [node name="ReportFormPopup" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="SettingsPopup" parent="." instance=ExtResource( 6 )]
 visible = false
