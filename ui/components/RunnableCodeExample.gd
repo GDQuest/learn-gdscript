@@ -44,6 +44,9 @@ func set_code(new_gdscript_code: String) -> void:
 
 func set_scene(new_scene: PackedScene) -> void:
 	scene = new_scene
+	if not is_inside_tree():
+		yield(self, "ready")
+
 	if _scene_instance and is_instance_valid(_scene_instance):
 		_scene_instance.queue_free()
 
