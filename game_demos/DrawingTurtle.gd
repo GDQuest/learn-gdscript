@@ -28,7 +28,8 @@ onready var _sprite = $Sprite as Sprite
 
 
 func _draw() -> void:
-	draw_polyline_colors(_points_to_draw, _colors, LINE_THICKNESS)
+	if not _points_to_draw.empty():
+		draw_polyline_colors(_points_to_draw, _colors, LINE_THICKNESS)
 
 
 func move_forward(distance: float) -> void:
