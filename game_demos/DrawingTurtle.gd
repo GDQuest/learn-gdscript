@@ -9,13 +9,19 @@ extends Node2D
 const LINE_THICKNESS := 4.0
 const DEFAULT_COLOR := Color.white
 
+# Current color to draw with. Every segment registered by the turtle (when
+# calling move_forward()) will use this color.
 var draw_color := DEFAULT_COLOR setget set_draw_color
+# Speed at which the turtle draws the line in pixels per second.
+var draw_speed := 400.0
 
 var _points := PoolVector2Array()
 var _colors := PoolColorArray()
 
 var _total_distance := 0.0
 var _points_to_draw := PoolVector2Array()
+# Last registered angle stored by calling turn_right and turn_left.
+var _current_angle := 0.0
 
 onready var _tween := $Tween as Tween
 onready var _sprite = $Sprite as Sprite
@@ -59,7 +65,7 @@ func set_draw_color(new_color: Color) -> void:
 func play_draw_animation() -> void:
 	rotation_degrees = 0
 	_tween.stop_all()
-	_tween.interpolate_method(self, "_animate_drawing", 0.0, 1.0, 2.0)
+	_tween.interpolate_method(self, "_animate_drawing", 0.0, 1.0, _total_distance / draw_speed)
 	_tween.start()
 
 
