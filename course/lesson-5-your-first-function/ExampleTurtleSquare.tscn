@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://game_demos/DrawingTurtle.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+onready var _turtle: DrawingTurtle = $DrawingTurtle
+
+func _ready() -> void:
+	_turtle.position = -Vector2.ONE * 100
+
+func run():
+	_turtle.reset()
+	_turtle.move_forward(200)
+	_turtle.turn_right(90)
+	_turtle.move_forward(200)
+	_turtle.turn_right(90)
+	_turtle.move_forward(200)
+	_turtle.turn_right(90)
+	_turtle.move_forward(200)
+	_turtle.turn_right(90)
+	_turtle.play_draw_animation()
+"
+
+[node name="ExampleTurtleSquare" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="DrawingTurtle" parent="." instance=ExtResource( 1 )]

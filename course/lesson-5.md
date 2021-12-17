@@ -8,7 +8,6 @@ Functions are just _sequences of instructions_ we give a name.
 
 Using the name, we can get the computer to execute all these instructions as many times as we need. This is what a function call does.
 
-
 > Note: Identifiers
 >
 > In computer programming, we talk about _identifiers_ rather than "names".
@@ -51,20 +50,15 @@ Let's break down how you define a function.
 
 A function definition starts with the `func` keyword followed by the function's name, parentheses, and a colon.
 
-<!-- TODO: illustration of syntax like english grammar. Use a regular scene? -->
-
 The instructions inside the function must start with a leading tab character. You can insert that tab character by pressing the **Tab** key.
 
 We call those leading tabs _indents_ and they're very important: the computer uses them to know which instructions are part of a code block, like the body of a function.
-
-<!-- TODO: illustration of function body and indent -->
 
 ## Names in code cannot contain spaces
 
 Your function names cannot contain spaces. In general, names in programming languages cannot contain spaces.
 
 This is because the computer uses spaces to detect the separation between different keywords and names.
-
 
 Instead of spaces, in GDScript, we write underscores ("_").
 
