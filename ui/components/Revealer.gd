@@ -127,7 +127,7 @@ func set_text_color(value: Color) -> void:
 	text_color = value
 	if not is_inside_tree():
 		yield(self, "ready")
-	_button.set("custom_colors/font_color", text_color)
+	_button.add_color_override("font_color", text_color)
 
 
 func _rotate_chevron(rotation_degrees: float, time := ANIM_DURATION) -> void:
