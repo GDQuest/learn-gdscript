@@ -22,28 +22,28 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -360.0
-margin_top = -240.0
-margin_right = 360.0
-margin_bottom = 240.0
-rect_min_size = Vector2( 720, 540 )
+margin_left = -430.0
+margin_top = -370.0
+margin_right = 430.0
+margin_bottom = 370.0
+rect_min_size = Vector2( 860, 740 )
 theme = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="Panel" parent="PanelContainer"]
-margin_right = 720.0
-margin_bottom = 540.0
+margin_right = 860.0
+margin_bottom = 740.0
 custom_styles/panel = ExtResource( 5 )
 
 [node name="Column" type="VBoxContainer" parent="PanelContainer"]
-margin_right = 720.0
-margin_bottom = 540.0
+margin_right = 860.0
+margin_bottom = 740.0
 custom_constants/separation = 0
 
 [node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Column"]
-margin_right = 720.0
+margin_right = 860.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 value = 100.0
@@ -51,64 +51,68 @@ percent_visible = false
 
 [node name="Margin" type="MarginContainer" parent="PanelContainer/Column"]
 margin_top = 16.0
-margin_right = 720.0
-margin_bottom = 540.0
+margin_right = 860.0
+margin_bottom = 740.0
 size_flags_vertical = 3
 
 [node name="Column" type="VBoxContainer" parent="PanelContainer/Column/Margin"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 700.0
-margin_bottom = 504.0
+margin_right = 840.0
+margin_bottom = 704.0
 custom_constants/separation = 12
 
 [node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column"]
-margin_right = 680.0
+margin_right = 820.0
 margin_bottom = 31.0
 custom_fonts/font = ExtResource( 2 )
 text = "Report an issue"
 align = 1
 
 [node name="Separator" type="HSeparator" parent="PanelContainer/Column/Margin/Column"]
-margin_left = 140.0
+margin_left = 210.0
 margin_top = 43.0
-margin_right = 540.0
+margin_right = 610.0
 margin_bottom = 51.0
 rect_min_size = Vector2( 400, 0 )
 size_flags_horizontal = 4
 
 [node name="Summary" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column"]
 margin_top = 63.0
-margin_right = 680.0
-margin_bottom = 372.0
+margin_right = 820.0
+margin_bottom = 572.0
 size_flags_vertical = 3
 bbcode_enabled = true
-bbcode_text = "If you have encountered an issue in the application, whether it is with its functionality or with the content of a course, please don't hesitate to report it to us at
+bbcode_text = "If you have encountered an issue in the application, whether it is with its functionality or with the content of the course, please don't hesitate to report it on GitHub:
 
-[center][b]email@example.com[/b][/center]
+[center][b][url=https://github.com/GDQuest/gdscript-live-editor/issues]GitHub.com > GDQuest > gdscript-live-editor > Issues[/url][/b][/center]
 
-For problems related to the app functionality specifically you are welcome to open an issue on GitHub
+[b]GitHub[/b] is an online platform built to host and manage open source projects, projects like this app or, indeed, [b]Godot[/b] game engine. You can use it to study the source code of various open projects, report bugs and issues so that project maintainers can fix them, as well as contribute fixes yourself.
 
-[center][b]https://github.com/our-project[/b][/center]"
-text = "If you have encountered an issue in the application, whether it is with its functionality or with the content of a course, please don't hesitate to report it to us at
+Please use the link above to get to the [b]Issues[/b] page, then click on the [b]New issue[/b] button and fill out the form describing the problem that you've experienced. It would be very helpful if you could add as much relevant information as possible, such as the kind of device you're using to access the app, and maybe attach a capture of your screen that showcases the issue.
 
-[center][b]email@example.com[/b][/center]
+[center]Thank you for contributing to open source![/center]"
+text = "If you have encountered an issue in the application, whether it is with its functionality or with the content of the course, please don't hesitate to report it on GitHub:
 
-For problems related to the app functionality specifically you are welcome to open an issue on GitHub
+GitHub.com > GDQuest > gdscript-live-editor > Issues
 
-[center][b]https://github.com/our-project[/b][/center]"
+GitHub is an online platform built to host and manage open source projects, projects like this app or, indeed, Godot game engine. You can use it to study the source code of various open projects, report bugs and issues so that project maintainers can fix them, as well as contribute fixes yourself.
+
+Please use the link above to get to the Issues page, then click on the New issue button and fill out the form describing the problem that you've experienced. It would be very helpful if you could add as much relevant information as possible, such as the kind of device you're using to access the app, and maybe attach a capture of your screen that showcases the issue.
+
+Thank you for contributing to open source!"
 
 [node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column"]
-margin_top = 384.0
-margin_right = 680.0
-margin_bottom = 404.0
+margin_top = 584.0
+margin_right = 820.0
+margin_bottom = 604.0
 rect_min_size = Vector2( 400, 20 )
 
 [node name="ConfirmButton" type="Button" parent="PanelContainer/Column/Margin/Column"]
-margin_left = 240.0
-margin_top = 416.0
-margin_right = 440.0
-margin_bottom = 484.0
+margin_left = 310.0
+margin_top = 616.0
+margin_right = 510.0
+margin_bottom = 684.0
 rect_min_size = Vector2( 200, 68 )
 size_flags_horizontal = 4
 custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
