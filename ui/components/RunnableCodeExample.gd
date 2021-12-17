@@ -33,6 +33,8 @@ func _get_configuration_warning() -> String:
 
 func run() -> void:
 	_scene_instance.run()
+	if _scene_instance.has_method("wrap_inside_frame"):
+		_scene_instance.wrap_inside_frame(_frame.get_rect())
 
 
 func set_code(new_gdscript_code: String) -> void:
@@ -52,6 +54,7 @@ func set_scene(new_scene: PackedScene) -> void:
 
 	if scene:
 		_scene_instance = scene.instance()
+		_scene_instance.show_behind_parent = true
 		_frame.add_child(_scene_instance)
 		_center_scene_instance()
 		if _scene_instance.has_method("run"):
