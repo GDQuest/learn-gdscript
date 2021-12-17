@@ -11,7 +11,7 @@ var min_width_to_show_image := 500.0
 
 var _visual_element: CanvasItem
 
-onready var _rich_text_label := $MarginContainer/Row/RichTextLabel as RichTextLabel
+onready var _rich_text_label := $MarginContainer/RichTextLabel as RichTextLabel
 onready var _margin := $MarginContainer as MarginContainer
 
 
@@ -24,7 +24,7 @@ func setup(content_block: ContentBlock) -> void:
 		yield(self, "ready")
 
 	_rich_text_label.bbcode_text = content_block.text
-	_rich_text_label.visible = not content_block.text.empty()
+	_margin.visible = not content_block.text.empty()
 
 	if content_block.visual_element_path != "":
 		# If the path isn't absolute, we try to load the file from the current directory
