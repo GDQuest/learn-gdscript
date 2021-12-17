@@ -110,7 +110,7 @@ text = "English"
 [node name="FontSizeSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/Settings"]
 margin_top = 79.0
 margin_right = 680.0
-margin_bottom = 139.0
+margin_bottom = 155.0
 
 [node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/Settings/FontSizeSetting"]
 margin_right = 332.0
@@ -122,9 +122,9 @@ text = "Text Size"
 [node name="ValueContainer" type="VBoxContainer" parent="PanelContainer/Column/Margin/Column/Settings/FontSizeSetting"]
 margin_left = 348.0
 margin_right = 680.0
-margin_bottom = 60.0
+margin_bottom = 76.0
 size_flags_horizontal = 3
-custom_constants/separation = 8
+custom_constants/separation = 12
 
 [node name="Value" type="HSlider" parent="PanelContainer/Column/Margin/Column/Settings/FontSizeSetting/ValueContainer"]
 margin_right = 332.0
@@ -138,11 +138,13 @@ tick_count = 3
 ticks_on_borders = true
 
 [node name="SampleText" type="Label" parent="PanelContainer/Column/Margin/Column/Settings/FontSizeSetting/ValueContainer"]
-margin_top = 32.0
+margin_top = 36.0
 margin_right = 332.0
-margin_bottom = 60.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 0, 40 )
 size_flags_horizontal = 3
 text = "Sample text"
+align = 1
 
 [node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column"]
 margin_top = 384.0
@@ -182,4 +184,4 @@ custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
-text = "Cancel"
+text = "Close"
