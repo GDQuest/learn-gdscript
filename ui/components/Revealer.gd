@@ -95,7 +95,10 @@ func set_revealer_height(new_revealer_height: float) -> void:
 
 
 func update_min_size() -> void:
-	_button.rect_size.x = min(rect_size.x, _parent.rect_size.x)
+	if not is_instance_valid(_parent) or _parent == null:
+		return
+	var rect_size_x := min(rect_size.x, _parent.rect_size.x)
+	_button.rect_size.x = rect_size_x
 	if _tween.is_inside_tree():
 		_tween.stop(self, "rect_min_size:y")
 		_tween.interpolate_property(
@@ -126,8 +129,10 @@ func set_use_small_font(value: bool) -> void:
 func set_text_color(value: Color) -> void:
 	text_color = value
 	if not is_inside_tree():
-		yield(self, "ready")
-	_button.add_color_override("font_color", text_color)
+		if not is_connected("ready", self, "update_min_size"):
+			connect("ready", _button, "add_color_override", ["font_color", text_color])
+	else:
+		_button.add_color_override("font_color", text_color)
 
 
 func _rotate_chevron(rotation_degrees: float, time := ANIM_DURATION) -> void:
