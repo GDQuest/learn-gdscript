@@ -1,6 +1,11 @@
-# Entity that can move in a straight line and turn, drawing lines along its way.
+# Draws geometric shapes by moving forward and turning. Inspired by the LOGO
+# language.
 #
-# Uses tween animation to animate the motion of the turtle and drawing.
+# Most function calls record vertices and update the turtle's state but don't
+# draw directly.
+#
+# To draw the shapes, see [play_draw_animation]. Uses tween animation to animate
+# the motion of the turtle and drawing.
 #
 # Snaps drawing coordinates to the nearest pixel.
 class_name DrawingTurtle
@@ -21,18 +26,28 @@ var _polygons := []
 var _polygons_to_draw := []
 # Last registered angle stored by calling turn_right and turn_left.
 var _current_angle := 0.0
+var _current_offset := Vector2.ZERO
 
 onready var _tween := $Tween as Tween
 onready var _sprite = $Sprite as Sprite
 
 
+# An arbitrary polygon for the turtle to draw.
 class Polygon:
 	var points: Array
 	var color: Color
+	var position: Vector2
 
-	func _init(p_points: Array, p_color: Color) -> void:
+	func _init(p_points: Array, p_color: Color, p_position: Vector2) -> void:
 		points = p_points
 		color = p_color
+		position = p_position
+
+	func get_drawing_points() -> PoolVector2Array:
+		var out := PoolVector2Array()
+		for p in points:
+			out.append(p + position)
+		return out
 
 
 func _draw() -> void:
@@ -40,9 +55,10 @@ func _draw() -> void:
 		return
 
 	for p in _polygons_to_draw:
-		draw_polyline(PoolVector2Array(p.points), p.color, LINE_THICKNESS)
+		draw_polyline(p.get_drawing_points(), p.color, LINE_THICKNESS)
 
 
+# Virtually moves the turtle and records a new vertex.
 func move_forward(distance: float) -> void:
 	var previous_point := Vector2.ZERO
 	if _points.empty():
@@ -70,9 +86,12 @@ func jump(x: float, y: float) -> void:
 	if not _points.empty():
 		last_point = _points[-1]
 	_close_polygon()
-	_points.append(last_point + Vector2(x, y))
+	_points.append(Vector2.ZERO)
+	_current_offset += Vector2(x, y) + last_point
 
 
+# Resets the turtle's state. Use it when testing a student's assignments to
+# reset the object between runs.
 func reset() -> void:
 	rotation_degrees = 0
 	_points.clear()
@@ -81,6 +100,7 @@ func reset() -> void:
 	_total_distance = 0.0
 
 
+# Starts the animation drawing every polygon inside the _polygons array.
 func play_draw_animation() -> void:
 	if not _points.empty():
 		_close_polygon()
@@ -91,10 +111,16 @@ func play_draw_animation() -> void:
 	_tween.start()
 
 
+# Returns a copy of the polygons the turtle will draw.
+func get_polygons() -> Array:
+	return _polygons.duplicate()
+
+
 func _close_polygon() -> void:
 	if _points.empty():
 		return
-	var polygon := Polygon.new(_points.duplicate(), draw_color)
+
+	var polygon := Polygon.new(_points.duplicate(), draw_color, _current_offset)
 	_polygons.append(polygon)
 	_points.clear()
 
@@ -114,10 +140,8 @@ func _animate_drawing(progress: float) -> void:
 			reached_target_distance = distance + segment_length >= target_distance
 			if reached_target_distance:
 				var distance_ratio := (target_distance - distance) / segment_length
-				var final_point: Vector2 = lerp(previous_point, point, distance_ratio).snapped(
-					Vector2.ONE
-				)
-				_sprite.position = final_point
+				var final_point: Vector2 = lerp(previous_point, point, distance_ratio)
+				_sprite.position = final_point.snapped(Vector2.ONE) + p.position
 				points.append(final_point)
 				break
 			else:
@@ -125,7 +149,7 @@ func _animate_drawing(progress: float) -> void:
 				points.append(point)
 				previous_point = point
 
-		_polygons_to_draw.append(Polygon.new(points, draw_color))
+		_polygons_to_draw.append(Polygon.new(points, draw_color, p.position))
 		if reached_target_distance:
 			break
 
