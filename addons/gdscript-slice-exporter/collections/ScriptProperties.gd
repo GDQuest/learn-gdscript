@@ -11,6 +11,8 @@ export var original_script := ""
 # Basename of the GDScript file. Helps to display the name in the UI
 var file_name := "" setget , get_file_name
 
+func _init() -> void:
+	nodes_paths = []
 
 func set_script_file(new_script_file: GDScript) -> void:
 	script_file = new_script_file
