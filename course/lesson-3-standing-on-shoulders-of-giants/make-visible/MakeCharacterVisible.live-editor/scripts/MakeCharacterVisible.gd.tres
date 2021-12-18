@@ -5,14 +5,13 @@
 
 [resource]
 script = ExtResource( 1 )
-nodes_paths = [ NodePath("/root/EditorNode/EditorPlugin3/Node2D/MakeCharacterVisible") ]
+nodes_paths = [ NodePath("") ]
 script_file = ExtResource( 2 )
 original_script = "extends Node2D
 
 
-func _ready():
-	hide()
-# EXPORT show
+func _run():
+	# EXPORT show
 	show()
-# /EXPORT show
+	# /EXPORT show
 "
