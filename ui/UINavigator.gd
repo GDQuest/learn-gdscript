@@ -174,6 +174,7 @@ func _transition_to(screen: Control, previous_screen: Control = null, direction_
 		)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
+	previous_screen.hide()
 	emit_signal("transition_completed")
 
 
