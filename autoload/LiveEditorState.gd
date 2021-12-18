@@ -45,7 +45,7 @@ func _on_scene_parent_removed() -> void:
 func update_nodes(script: GDScript, node_paths: Array) -> void:
 	for node_path in node_paths:
 		if node_path is NodePath or node_path is String:
-			var node = current_scene.get_node_or_null(node_path)
+			var node = current_scene.get_node_or_null(node_path) if node_path != "" else current_scene
 			if node:
 				try_validate_and_replace_script(node, script)
 
@@ -67,3 +67,7 @@ static func try_validate_and_replace_script(node: Node, script: Script) -> void:
 	for prop in props:
 		if prop in node:  # In case a property is removed
 			node.set(prop, props[prop])
+
+	if node.has_method("_run"):
+		# warning-ignore:unsafe_method_access
+		node._run()

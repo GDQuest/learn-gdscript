@@ -18,7 +18,7 @@ var _sanitization_replacements := RegExpGroup.collection(
 )
 var _leading_spaces_regex := RegExpGroup.compile("(?m)^(?:  )+")
 var _export_annotation_regex := RegExpGroup.compile(
-	"(?m)^(?<_leading_spaces_regex>\\t*)#\\s(?<closing>\\/)?(?<keyword>EXPORT)(?: +(?<name>[\\w\\d]+))?"
+	"(?m)^(?<leading_spaces>\\t*)#\\s(?<closing>\\/)?(?<keyword>EXPORT)(?: +(?<name>[\\w\\d]+))?"
 )
 
 # /Regular expressions
@@ -92,8 +92,11 @@ func _collect_node_scripts(scene: Node, node: Node, limit: int) -> void:
 # If the provided script is new, adds a script file to the _script_paths. Otherwise,
 # adds the provided node as a dependency of this script.
 func _add_node_path_to_script(root_scene: Node, script: GDScript, node: Node) -> void:
-	var root_node_path := String(root_scene.get_path()) + "/"
-	var node_path := NodePath(String(node.get_path()).replace(root_node_path, ""))
+	var root_node_path := String(root_scene.get_path())
+	var node_path_str := String(node.get_path()).replace(root_node_path, "")
+	if node_path_str.begins_with("/"):
+		node_path_str = node_path_str.substr(1)
+	var node_path := NodePath(node_path_str)
 	var script_properties_path := _generate_save_path(
 		RESOURCE_TYPES.SCRIPT, script.resource_path.get_file()
 	)
@@ -144,6 +147,7 @@ func _parse_script_slices(script: String, blueprint_segment: SliceProperties) ->
 			slice.script_properties = blueprint_segment.script_properties
 			slice.scene_properties = blueprint_segment.scene_properties
 			slice.from_regex_match(export_match)
+			#prints("slice:", slice, ", line:", "|"+line+"|")
 			slice.start = index
 			if slice.closing and slice.name:
 				if slice.name in waiting_slices:
@@ -184,7 +188,6 @@ func _save(type: String, resource: Resource) -> bool:
 		return false
 	var path = _generate_save_path(type, resource.get_save_name())
 	resource.take_over_path(path)
-	print("replacing %s" % [path])
 	var success = ResourceSaver.save(path, resource)
 	if success != OK:
 		push_error("error saving %s to %s" % [resource, path])

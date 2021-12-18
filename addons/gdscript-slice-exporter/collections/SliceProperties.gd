@@ -67,11 +67,13 @@ static func _indent_text(indent_amount: int, lines: PoolStringArray) -> PoolStri
 # Sets the slice's properties from a regex match. The regex needs to have the
 # specific named groups used in the function
 func from_regex_match(result: RegExMatch) -> void:
+	#prints("result:", result, "|" + result.get_string("leading_spaces") + "|", result.get_string("leading_spaces").length(), result.names)
 	leading_spaces = result.get_string("leading_spaces").length()
 	keyword = result.get_string("keyword")
 	closing = result.get_string("closing") != ""
 	name = result.get_string("name")
 	is_full_file = name == ""
+	#prints("leading spaces", leading_spaces)
 
 
 # Splits lines in three parts: before, after, and editable. requires `start` and
@@ -168,6 +170,7 @@ func as_json() -> Dictionary:
 
 
 func _to_string() -> String:
+	#return JSON.print(as_json(), "  ")
 	return "(%s:%s)" % [script_properties.get_save_name(), name]
 
 

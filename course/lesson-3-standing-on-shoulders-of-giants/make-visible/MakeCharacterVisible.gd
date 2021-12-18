@@ -1,8 +1,7 @@
 extends Node2D
 
 
-func _ready():
-	hide()
-# EXPORT show
+func _run():
+	# EXPORT show
 	show()
-# /EXPORT show
+	# /EXPORT show
