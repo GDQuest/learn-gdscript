@@ -9,3 +9,4 @@ export (String, MULTILINE) var starting_code := ""
 export var hints := PoolStringArray()
 export (String, FILE) var validator_script_path := ""
 export (String, FILE) var script_slice_path := ""
+export var documentation_references := PoolStringArray()
