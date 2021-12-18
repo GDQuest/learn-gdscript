@@ -64,6 +64,8 @@ func _on_scene_path_changed(new_text: String) -> void:
 func _on_scene_changed(new_scene: Node):
 	if config.was_manually_set:
 		return
+	if new_scene == null:
+		return
 	container.scene_path = new_scene.filename
 	config.scene_path = new_scene.filename
 
