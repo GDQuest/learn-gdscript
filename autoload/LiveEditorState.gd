@@ -24,7 +24,15 @@ func use_scene(parent: Node) -> void:
 	var previous_parent := current_scene.get_parent()
 	if previous_parent != null:
 		current_scene.get_parent().remove_child(current_scene)
+
+	var is_canvas_item := current_scene is CanvasItem
+	var starting_visibility := (current_scene as CanvasItem).visible if is_canvas_item else false
+	
 	parent.add_child(current_scene)
+	
+	if is_canvas_item:
+		(current_scene as CanvasItem).visible = starting_visibility
+	
 	parent.connect("tree_exited", self, "_on_scene_parent_removed")
 
 
