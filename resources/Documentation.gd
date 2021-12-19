@@ -6,7 +6,13 @@ var references := {}
 
 
 func get_references(names: PoolStringArray) -> Array:
-	load_documentation_if_not_loaded()
+	# Load CSV docstrings if necessary.
+	if references.empty():
+		assert(
+			documentation_file != "", "documentation file for `%s` not specified" % [resource_path]
+		)
+		references = parse_documentation_file(documentation_file)
+
 	var selected_references := []
 	for func_name in names:
 		if func_name in references:
@@ -26,23 +32,18 @@ func get_references_as_bbcode(names: PoolStringArray) -> String:
 	return as_str.join("\n\n")
 
 
-func load_documentation_if_not_loaded() -> void:
-	assert(documentation_file != "", "documentation file for `%s` not specified"%[resource_path])
-	if references.size() == 0:
-		references = parse_documentation_file(documentation_file)
-
-
 static func parse_documentation_file(path: String) -> Dictionary:
 	var all_references := {}
 	var file := File.new()
 	file.open(path, file.READ)
 	var _header := Array(file.get_csv_line())
-	
+
 	while !file.eof_reached():
 		var csv_line := file.get_csv_line()
 		var method_spec := MethodSpecification.new()
 		method_spec.name = csv_line[0]
-		method_spec.return_type = _parse_return_type(csv_line[1])
+		var return_type: String = csv_line[1].strip_edges()
+		method_spec.return_type = return_type if return_type else "void"
 		method_spec.parameters = _parse_parameters(csv_line[2])
 		method_spec.explanation = csv_line[3]
 		all_references[method_spec.name] = method_spec
@@ -50,14 +51,9 @@ static func parse_documentation_file(path: String) -> Dictionary:
 	return all_references
 
 
-static func _parse_return_type(return_type: String) -> String:
-	return_type = return_type.strip_edges()
-	return return_type if return_type else "void"  
-
-
-static func _parse_parameters(parameters_list_string: String) -> MethodList:
+static func _parse_parameters(parameters_list_string: String) -> MethodParameterList:
 	parameters_list_string = parameters_list_string.strip_edges()
-	var parameters := MethodList.new()
+	var parameters := MethodParameterList.new()
 	if parameters_list_string == "":
 		return parameters
 	var parameters_list := parameters_list_string.split(",")
@@ -80,24 +76,24 @@ class MethodParameter:
 	var required := true
 	var type := "Variant"
 	var default := ""
-	
+
 	func _to_string() -> String:
 		if required:
-			return "%s: %s"%[name, type]
-		return "%s: %s = %s"%[name, type, default]
+			return "%s: %s" % [name, type]
+		return "%s: %s = %s" % [name, type, default]
 
 	func to_bbcode() -> String:
 		if required:
-			return "%s: [i]%s[/i]"%[name, type]
-		return "%s: [i]%s[/i] = %s"%[name, type, default]
+			return "%s: [i]%s[/i]" % [name, type]
+		return "%s: [i]%s[/i] = %s" % [name, type, default]
 
 
-class MethodList:
+class MethodParameterList:
 	var list := []
-	
+
 	func _to_string() -> String:
 		return PoolStringArray(list).join(", ")
-	
+
 	func to_bbcode() -> String:
 		var _list := PoolStringArray()
 		for param in list:
@@ -109,11 +105,11 @@ class MethodList:
 class MethodSpecification:
 	var name := ""
 	var return_type := "void"
-	var parameters := MethodList.new()
+	var parameters := MethodParameterList.new()
 	var explanation := ""
-	
+
 	func _to_string() -> String:
-		return "%s %s(%s)"%[return_type, name, parameters]
+		return "%s %s(%s)" % [return_type, name, parameters]
 
 	func to_bbcode() -> String:
-		return "[i]%s[/i] %s(%s)\n\n%s"%[return_type, name, parameters.to_bbcode(), explanation]
+		return "[i]%s[/i] %s(%s)\n\n%s" % [return_type, name, parameters.to_bbcode(), explanation]
