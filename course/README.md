@@ -376,7 +376,53 @@ Code reference:
 - Position.x and position.y
 - draw_rectangle(length, height)
 
-### Lesson 8: The Game Loop
+### Lesson 8: Defining your own variables
+
+Covers:
+
+- Defining a variable.
+- Initializing its value.
+
+#### Practice: a variable to store health
+
+Define a variable named `health` with an initial value of `100`.
+
+``` gdscript
+var health = 100
+```
+
+### Lesson 9: Adding and subtracting
+
+Covers:
+
+- Adding and subtracting.
+- Changing the value stored in a variable.
+
+#### Practice: Taking damage
+
+Goal: In our game, the main character has a certain amount of `health`. When it gets hit, the health should go down by a varying `amount` of damage.
+
+Write a function named take_damage that takes a varying `amount` as its only parameter.
+
+Its only instructions should be to subtract the `amount` to the predefined `health` variable.
+
+```gdscript
+var health = 100
+
+func take_damage(amount):
+    health -= amount
+```
+
+#### Practice: Healing up
+
+```gdscript
+var health = 100
+
+func heal(amount):
+    health += amount
+```
+
+### Lesson 10: The Game Loop
 
 Following the previous lessons, we explain how games run in a loop.
 
@@ -407,7 +453,7 @@ func _process(delta):
     move_local_x(5)
 ```
 
-### Lesson 9: Time delta
+### Lesson 11: Time delta
 
 The student learns about the `delta` argument and when they should use it.
 
@@ -434,7 +480,7 @@ func _process(delta):
 
 Note: we need to think of how to test and validate the assignment accurately. How to test that the code uses delta? String matching?
 
-### Lesson 10: Variables
+### Lesson 12: Using variables to make code easier to read
 
 Covers:
 
@@ -473,118 +519,7 @@ func _process(delta):
     move_local_x(horizontal_speed * delta)
 ```
 
-### Lesson 11: Adding and subtracting
-
-Covers:
-
-- Adding and subtracting.
-- Changing the value stored in a variable.
-
-Your code is nothing without operations. Computers work exclusively with numbers, and all our code does is reading and writing numbers.
-
-It's incredible how computers can do so many things out of just numbers and a few basic operations when you think of it.
-
-In languages like GDScript, Python, or JavaScript, we don't have to worry about how the computer works exactly. We say that we work at a higher level, with tools that greatly simplify our job (at the cost of performance).
-
-Still, we need to make calculations often. Most of the time, you will use additions, subtractions, multiplications, and divisions. Simple arithmetic you learned in elementary school.
-
-To add and remove numbers, you write a plus or a minus sign between them. When the computer reads the 2 numbers and the +, it will calculate the result for you.
-
-```
-9 + 9
-```
-
-You can assign the result of a calculation to a variable any time with `=`. Unlike in your maths class, on the computer, a single = stands for "assign the results of the part on the right to the variable on the left."
-
-```
-var health = 9 + 9
-```
-
-After executing the line of code above, the health variable will have a value of 18.
-
-You can chain as many additions and subtractions as you want.
-
-With the following code, the health variable will have a value of 12.
-
-```
-var health = 18 - 8 + 2
-```
-
-As the variable names represent a value, you can use the variable name to add or subtract to the current health, for example.
-
-The following code adds 10 to the current health and then subtracts 20 to it, resulting in the health going down by 10 points: after calling the `change_health()` function once, the `health` variable holds a value of `90`.
-
-```gdscript
-var health = 100
-
-func change_health():
-    health = health + 10
-    health = health - 20
-```
-
-There's a shorthand to add to a variable: `+=`. It saves having to write the name of the variable again. Those two lines of code are equivalent:
-
-```gdscript
-# Show side by side.
-health = health + 10
-health += 10
-```
-
-Same for subtractions.
-
-```gdscript
-# Show side by side.
-health = health - 10
-health -= 10
-```
-
-Quizz (multiple choice). Which code subtracts 5 to the `defense` variable?
-
-```gdscript
-defense = defense - 5
-defense = 5
-defense -= 5
-```
-
-Instead of hard-coded numbers, you'll want to use function parameters:
-
-```gdscript
-var strength = 10
-
-func test_level_up():
-    level_up(4)
-
-func level_up(extra_strength):
-    strength += extra_strength
-```
-
-Quizz: What will the `strength` be after calling `level_up(4)` once? What if, instead, we call `level_up(8)`?
-
-#### Practice: Taking damage
-
-Goal: In our game, the main character has a certain amount of `health`. When it gets hit, the health should go down by a varying `amount` of damage.
-
-Write a function named take_damage that takes a varying `amount` as its only parameter.
-
-Its only instructions should be to subtract the `amount` to the predefined `health` variable.
-
-```gdscript
-var health = 100
-
-func take_damage(amount):
-    health -= amount
-```
-
-#### Practice: Healing up
-
-```gdscript
-var health = 100
-
-func heal(amount):
-    health += amount
-```
-
-### Lesson 12: Conditions
+### Lesson 13: Conditions
 
 Covers:
 
@@ -666,7 +601,7 @@ func take_damage(amount):
         health = 0
 ```
 
-### Lesson 13: multiplying
+### Lesson 14: multiplying
 
 Covers:
 
@@ -687,7 +622,7 @@ func level_up():
     max_health *= 1.1
 ```
 
-### Lesson 14: modulo
+### Lesson 15: modulo
 
 Covers:
 
@@ -750,7 +685,7 @@ func level_up():
         max_health += 5
 ```
 
-### Lesson 15: introduction to loops
+### Lesson 16: introduction to loops
 
 To cover:
 
