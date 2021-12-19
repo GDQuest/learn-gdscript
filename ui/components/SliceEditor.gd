@@ -32,6 +32,9 @@ var errors_overlay_message: ErrorOverlayPopup = ErrorOverlayPopupScene.instance(
 # Array<LanguageServerError>
 var errors := [] setget set_errors
 
+# Used to know when to add an indent level.
+var _current_line := cursor_get_line()
+
 
 func _ready() -> void:
 	CodeEditorEnhancer.enhance(self)
@@ -150,3 +153,12 @@ func _on_text_changed() -> void:
 
 	# The underlying text was changed, the old errors are no longer valid then.
 	errors_overlay.clean()
+
+	# Insert extra indents when entering new code block
+	var previous_line := _current_line
+	_current_line = cursor_get_line()
+	if _current_line > previous_line and text.rstrip("\t").ends_with(":\n"):
+		var column := cursor_get_column()
+		text += "\t"
+		cursor_set_line(_current_line)
+		cursor_set_column(column + 1)
