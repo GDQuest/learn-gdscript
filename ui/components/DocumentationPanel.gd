@@ -1,19 +1,23 @@
 extends RichTextLabel
+class_name DocumentationPanel
+
 
 const documentation_file := "res://documentation.csv"
-var documentation_references := PoolStringArray(["func_a", "func_b"])
+var documentation_references := PoolStringArray()
 
-func _ready() -> void:
+func setup() -> void:
 	var all_references := parse_reference_file(documentation_file)
 	var selected_references := []
 	for func_name in documentation_references:
 		if func_name in all_references:
-			selected_references.push_back(all_references[func_name])
+			var doc_ref = all_references[func_name]
+			selected_references.push_back(doc_ref)
 	var as_str = PoolStringArray()
 	for method_spec in selected_references:
 		method_spec = method_spec as MethodSpecification
 		as_str.push_back(method_spec.to_bbcode())
 	bbcode_text = as_str.join("\n\n")
+
 
 static func parse_reference_file(path: String) -> Dictionary:
 	var all_references := {}

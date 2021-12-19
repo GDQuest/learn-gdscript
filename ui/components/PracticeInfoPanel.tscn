@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=4]
 [ext_resource path="res://ui/components/PracticeInfoPanel.gd" type="Script" id=5]
 [ext_resource path="res://ui/components/ScrollableTextBox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/components/DocumentationPanel.tscn" type="PackedScene" id=7]
 
 [node name="PracticeInfoPanel" type="PanelContainer"]
 margin_right = 611.0
@@ -77,29 +78,47 @@ size_flags_vertical = 3
 
 [node name="Goals" parent="LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
 margin_right = 571.0
-margin_bottom = 272.0
-rect_min_size = Vector2( 571, 272 )
+margin_bottom = 252.0
+rect_min_size = Vector2( 571, 252 )
 size_flags_horizontal = 3
 title = "Goals"
 is_expanded = true
 
 [node name="Goal" parent="LessonRequirements/Margin/Column/Scroll/Column/Goals" instance=ExtResource( 6 )]
 margin_left = 24.0
-margin_top = 72.0
+margin_top = 52.0
 margin_right = 571.0
-margin_bottom = 272.0
+margin_bottom = 252.0
 
 [node name="Hints" parent="LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
-margin_top = 288.0
+margin_top = 268.0
 margin_right = 571.0
-margin_bottom = 355.0
-rect_min_size = Vector2( 571, 67 )
+margin_bottom = 315.0
+rect_min_size = Vector2( 571, 47 )
 title = "Hints"
 
 [node name="Checks" parent="LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
-margin_top = 371.0
+margin_top = 331.0
 margin_right = 571.0
-margin_bottom = 438.0
-rect_min_size = Vector2( 571, 67 )
+margin_bottom = 378.0
+rect_min_size = Vector2( 571, 47 )
 title = "Checks"
 is_expanded = true
+
+[node name="Documentation" parent="LessonRequirements/Margin/Column/Scroll/Column" instance=ExtResource( 2 )]
+margin_top = 394.0
+margin_right = 571.0
+margin_bottom = 918.0
+rect_min_size = Vector2( 571, 99 )
+size_flags_vertical = 3
+title = "Documentation"
+is_expanded = true
+
+[node name="DocumentationPanel" parent="LessonRequirements/Margin/Column/Scroll/Column/Documentation" instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 24.0
+margin_top = 52.0
+margin_right = 571.0
+margin_bottom = 99.0
+fit_content_height = true
