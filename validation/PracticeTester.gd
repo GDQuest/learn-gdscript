@@ -35,6 +35,7 @@ func run_tests() -> TestResult:
 		var error_message: String = call(method)
 		if error_message != "":
 			result.error = error_message
+			print_debug(error_message)
 			break
 		else:
 			# We pass the test name to display it in the interface.
