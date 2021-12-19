@@ -49,6 +49,23 @@ class Polygon:
 			out.append(p + position)
 		return out
 
+	# Returns the local bounds of the polygon. That is to say, it only takes the
+	# point into account in local space, but not the polygon's `position`.
+	func get_rect() -> Rect2:
+		var top_left := Vector2.ZERO
+		var bottom_right := Vector2.ZERO
+		for p in points:
+			if p.x > bottom_right.x:
+				bottom_right.x = p.x
+			elif p.x < top_left.x:
+				top_left.x = p.x
+
+			if p.y > bottom_right.y:
+				bottom_right.y = p.y
+			elif p.y < top_left.y:
+				top_left.y = p.y
+		return Rect2(top_left, bottom_right - top_left)
+
 
 func _draw() -> void:
 	if _polygons_to_draw.empty():
