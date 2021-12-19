@@ -72,8 +72,8 @@ func _ready() -> void:
 	_new_course_button.connect("pressed", self, "_on_create_course_requested")
 	_open_course_button.connect("pressed", self, "_on_open_course_requested")
 	_play_current_button.connect("pressed", self, "_play_current")
-	_save_course_button.connect("pressed", self, "_on_save_course_requested", [true])
-	_save_as_course_button.connect("pressed", self, "_on_save_course_requested", [false])
+	_save_course_button.connect("pressed", self, "_save_course", [true])
+	_save_as_course_button.connect("pressed", self, "_save_course", [false])
 	_file_dialog.connect("file_selected", self, "_on_file_dialog_confirmed")
 	var recent_courses_popup := _recent_courses_button.get_popup()
 	recent_courses_popup.connect("index_pressed", self, "_on_recent_course_requested")
@@ -312,11 +312,11 @@ func _on_recent_course_confirmed() -> void:
 	_on_open_course_confirmed(item_text)
 
 
-func _on_save_course_requested(override: bool = false) -> void:
+func _save_course(overwrite_existing := false) -> void:
 	if not _edited_course:
 		return
 
-	if override and not _edited_course.resource_path.empty():
+	if overwrite_existing and not _edited_course.resource_path.empty():
 		_on_save_course_confirmed(_edited_course.resource_path)
 		return
 
@@ -470,6 +470,10 @@ func _on_lesson_slug_changed(lesson_slug: String) -> void:
 
 
 func _play_current() -> void:
+	# Like Godot, we want to save changes before playing the scene.
+	if _dirty_status_label.visible:
+		_save_course(true)
+
 	var play_scene: PackedScene
 	if _current_practice_index >= 0:
 		assert(
