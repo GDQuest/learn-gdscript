@@ -17,6 +17,8 @@ func get_references(names: PoolStringArray) -> Array:
 
 func get_references_as_bbcode(names: PoolStringArray) -> String:
 	var selected_references := get_references(names)
+	if selected_references.size() == 0:
+		return ""
 	var as_str = PoolStringArray()
 	for method_spec in selected_references:
 		method_spec = method_spec as MethodSpecification

@@ -9,7 +9,7 @@ export var hints := PoolStringArray()
 export (String, FILE) var validator_script_path := ""
 export (String, FILE) var script_slice_path := ""
 export var documentation_references := PoolStringArray()
-export var documentation_resource: Resource setget set_documentation_resource
+export var documentation_resource: Resource = preload("res://course/Documentation.tres") setget set_documentation_resource
 
 
 func set_documentation_resource(new_documentation_resource: Resource) -> void:
