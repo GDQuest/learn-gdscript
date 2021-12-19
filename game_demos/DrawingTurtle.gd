@@ -93,6 +93,7 @@ func jump(x: float, y: float) -> void:
 # Resets the turtle's state. Use it when testing a student's assignments to
 # reset the object between runs.
 func reset() -> void:
+	_tween.stop_all()
 	rotation_degrees = 0
 	_points.clear()
 	_polygons.clear()
