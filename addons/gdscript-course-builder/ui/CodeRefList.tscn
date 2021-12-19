@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/gdscript-course-builder/ui/CodeRefList.gd" type="Script" id=1]
+
+[node name="CodeRefList" type="VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="HBoxContainer" parent="."]
+margin_right = 134.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="Header"]
+margin_top = 3.0
+margin_right = 57.0
+margin_bottom = 17.0
+text = "Code ref:"
+
+[node name="Spacer" type="Control" parent="Header"]
+margin_left = 61.0
+margin_right = 61.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="AddButton" type="Button" parent="Header"]
+margin_left = 65.0
+margin_right = 134.0
+margin_bottom = 20.0
+text = "Add field"
