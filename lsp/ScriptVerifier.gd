@@ -14,7 +14,7 @@ extends Reference
 signal errors(errors)
 
 # The URL of the HTTP Language Server
-const SERVER_URL := "http://localhost:3000"
+const SERVER_URL := "http://139.162.135.251"
 
 const LanguageServerError := preload("./LanguageServerError.gd")
 const http_request_name = "___HTTP_REQUEST___"
