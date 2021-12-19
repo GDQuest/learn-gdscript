@@ -1,7 +1,10 @@
 # Displays a scene with a GDScript code example. If the scene's root has a
 # `run()` function, pressing the run button will call the function.
 tool
+class_name RunnableCodeExample
 extends HBoxContainer
+
+signal scene_instance_set
 
 const ERROR_NO_RUN_FUNCTION := "Scene %s doesn't have a run() function. The Run button won't work."
 
@@ -14,6 +17,7 @@ var _scene_instance: Node
 onready var _gdscript_text_edit := $GDScriptCode as TextEdit
 onready var _run_button := $Frame/RunButton as Button
 onready var _frame := $Frame as Control
+onready var _sliders := $Frame/Sliders as VBoxContainer
 
 
 func _ready() -> void:
@@ -54,6 +58,7 @@ func set_scene(new_scene: PackedScene) -> void:
 
 	if scene:
 		_scene_instance = scene.instance()
+		emit_signal("scene_instance_set")
 		_scene_instance.show_behind_parent = true
 		_frame.add_child(_scene_instance)
 		_center_scene_instance()
@@ -67,6 +72,31 @@ func set_scene(new_scene: PackedScene) -> void:
 func set_center_in_frame(value: bool) -> void:
 	center_in_frame = value
 	_center_scene_instance()
+
+
+func create_slider_for(property_name, min_value := 0.0, max_value := 100.0, step := 1.0) -> void:
+	if not _scene_instance:
+		yield(self, "scene_instance_set")
+	var box := HBoxContainer.new()
+	var label := Label.new()
+	var slider := HSlider.new()
+
+	_sliders.add_child(box)
+	box.add_child(label)
+	box.add_child(slider)
+
+	label.text = property_name.capitalize()
+	slider.min_value = min_value
+	slider.max_value = max_value
+	slider.step = step
+	slider.rect_min_size.x = 100.0
+	slider.connect("value_changed", self, "_set_instance_value", [property_name])
+
+
+# Using this proxy function is required as the value emitted by the signal
+# will always be the first argument.
+func _set_instance_value(value: float, property_name: String) -> void:
+	_scene_instance.set(property_name, value)
 
 
 func _center_scene_instance() -> void:
