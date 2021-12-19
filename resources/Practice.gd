@@ -5,8 +5,25 @@ extends Resource
 export var title := ""
 export (String, MULTILINE) var goal := ""
 export (String, MULTILINE) var starting_code := ""
-# Array[String]
 export var hints := PoolStringArray()
 export (String, FILE) var validator_script_path := ""
 export (String, FILE) var script_slice_path := ""
 export var documentation_references := PoolStringArray()
+export var documentation_resource: Resource setget set_documentation_resource
+
+
+func set_documentation_resource(new_documentation_resource: Resource) -> void:
+	assert((new_documentation_resource == null) or (new_documentation_resource is Documentation), "resource `%s` is not a Documentation resource"%[new_documentation_resource.resource_path])
+	documentation_resource = new_documentation_resource
+
+
+func get_documentation_resource() -> Documentation:
+	return documentation_resource as Documentation
+
+
+func get_documentation_as_bbcode() -> String:
+	if documentation_resource == null:
+		if documentation_references.size() > 0:
+			push_error("Documentation References were selected, but no documentation resource was set")
+		return ""
+	return get_documentation_resource().get_references_as_bbcode(documentation_references)

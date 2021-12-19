@@ -1,25 +1,36 @@
-extends RichTextLabel
-class_name DocumentationPanel
+extends Resource
+class_name Documentation
+
+export(String, FILE, "*.csv") var documentation_file := ""
+var references := {}
 
 
-const documentation_file := "res://documentation.csv"
-var documentation_references := PoolStringArray()
-
-func setup() -> void:
-	var all_references := parse_reference_file(documentation_file)
+func get_references(names: PoolStringArray) -> Array:
+	load_documentation_if_not_loaded()
 	var selected_references := []
-	for func_name in documentation_references:
-		if func_name in all_references:
-			var doc_ref = all_references[func_name]
+	for func_name in names:
+		if func_name in references:
+			var doc_ref := references[func_name] as MethodSpecification
 			selected_references.push_back(doc_ref)
+	return selected_references
+
+
+func get_references_as_bbcode(names: PoolStringArray) -> String:
+	var selected_references := get_references(names)
 	var as_str = PoolStringArray()
 	for method_spec in selected_references:
 		method_spec = method_spec as MethodSpecification
 		as_str.push_back(method_spec.to_bbcode())
-	bbcode_text = as_str.join("\n\n")
+	return as_str.join("\n\n")
 
 
-static func parse_reference_file(path: String) -> Dictionary:
+func load_documentation_if_not_loaded() -> void:
+	assert(documentation_file != "", "documentation file for `%s` not specified"%[resource_path])
+	if references.size() == 0:
+		references = parse_documentation_file(documentation_file)
+
+
+static func parse_documentation_file(path: String) -> Dictionary:
 	var all_references := {}
 	var file := File.new()
 	file.open(path, file.READ)
@@ -61,6 +72,7 @@ static func _parse_parameters(parameters_list_string: String) -> MethodList:
 		parameters.list.push_back(param)
 	return parameters
 
+
 class MethodParameter:
 	var name := ""
 	var required := true
@@ -77,6 +89,7 @@ class MethodParameter:
 			return "%s: [i]%s[/i]"%[name, type]
 		return "%s: [i]%s[/i] = %s"%[name, type, default]
 
+
 class MethodList:
 	var list := []
 	
@@ -89,6 +102,7 @@ class MethodList:
 			param = param as MethodParameter
 			_list.push_back(param.to_bbcode())
 		return _list.join(", ")
+
 
 class MethodSpecification:
 	var name := ""

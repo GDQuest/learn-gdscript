@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=4]
 [ext_resource path="res://ui/components/PracticeInfoPanel.gd" type="Script" id=5]
 [ext_resource path="res://ui/components/ScrollableTextBox.tscn" type="PackedScene" id=6]
-[ext_resource path="res://ui/components/DocumentationPanel.tscn" type="PackedScene" id=7]
 
 [node name="PracticeInfoPanel" type="PanelContainer"]
 margin_right = 611.0
@@ -114,11 +113,13 @@ size_flags_vertical = 3
 title = "Documentation"
 is_expanded = true
 
-[node name="DocumentationPanel" parent="LessonRequirements/Margin/Column/Scroll/Column/Documentation" instance=ExtResource( 7 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="DocumentationPanel" type="RichTextLabel" parent="LessonRequirements/Margin/Column/Scroll/Column/Documentation"]
 margin_left = 24.0
 margin_top = 52.0
 margin_right = 571.0
 margin_bottom = 99.0
+bbcode_enabled = true
 fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
