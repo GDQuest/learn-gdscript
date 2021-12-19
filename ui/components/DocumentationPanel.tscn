@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends RichTextLabel
+class_name DocumentationPanel
+
+
+export var documentation_resource: Resource setget set_documentation_resource
+var documentation_references := PoolStringArray()
+
+func setup() -> void:
+	bbcode_text = get_documentation_resource().get_references_as_bbcode(documentation_references)
+
+
+func set_documentation_resource(new_documentation_resource: Resource) -> void:
+	assert((new_documentation_resource == null) or (new_documentation_resource is Documentation), \"resource `%s` is not a Documentation resource\"%[new_documentation_resource.resource_path])
+	documentation_resource = new_documentation_resource
+
+func get_documentation_resource() -> Documentation:
+	return documentation_resource as Documentation
+"
+
+[node name="DocumentationPanel" type="RichTextLabel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+bbcode_enabled = true
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

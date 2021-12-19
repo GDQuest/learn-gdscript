@@ -52,9 +52,11 @@ onready var _starting_code_expand_button := (
 )
 onready var _text_content_dialog := $TextEditDialog as WindowDialog
 
-onready var _add_hint_button := $BackgroundPanel/Layout/MainSplit/Hints/Header/AddButton as Button
-onready var _hints_panel := $BackgroundPanel/Layout/MainSplit/Hints/HintsPanel as PanelContainer
-onready var _hint_list := $BackgroundPanel/Layout/MainSplit/Hints/HintsPanel/ItemList as Control
+onready var _add_hint_button := $BackgroundPanel/Layout/MainSplit/Column/Hints/Header/AddButton as Button
+onready var _hints_panel := $BackgroundPanel/Layout/MainSplit/Column/Hints/HintsPanel as PanelContainer
+onready var _hint_list := $BackgroundPanel/Layout/MainSplit/Column/Hints/HintsPanel/ItemList as Control
+
+onready var _code_ref_list := $BackgroundPanel/Layout/MainSplit/Column/CodeRefList as CodeRefList
 
 onready var _confirm_dialog := $ConfirmDialog as ConfirmationDialog
 
@@ -167,6 +169,7 @@ func set_practice(practice: Practice) -> void:
 	_starting_code_value.text = _edited_practice.starting_code
 
 	_rebuild_hints()
+	_code_ref_list.setup(practice)
 
 
 # Helpers

@@ -19,6 +19,7 @@ onready var _game_container := find_node("Output") as PanelContainer
 onready var _game_viewport := _game_container.find_node("GameViewport") as GameViewport
 
 onready var _practice_info_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
+onready var _documentation_panel := find_node("DocumentationPanel") as RichTextLabel
 onready var _hints_container := _practice_info_panel.hints_container
 
 onready var _code_editor := find_node("CodeEditor") as CodeEditor
@@ -73,6 +74,14 @@ func setup(practice: Practice) -> void:
 		validator_path = base_directory.plus_file(validator_path)
 	_tester = (load(validator_path) as GDScript).new()
 	_tester.setup(_game_viewport.get_child(0), _script_slice)
+
+	var documentation_bbcode := _practice.get_documentation_as_bbcode()
+	if documentation_bbcode == "":
+		# We assume the panel is a direct child of a Revealer
+		var _documentation_panel_revealer = _documentation_panel.get_parent() as Revealer
+		_documentation_panel_revealer.hide()
+	else:
+		_documentation_panel.bbcode_text = documentation_bbcode
 
 	_practice_info_panel.display_tests(_tester.get_test_names())
 	LiveEditorState.current_slice = _script_slice
