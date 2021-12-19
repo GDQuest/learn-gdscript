@@ -31,7 +31,7 @@ static func parse_reference_file(path: String) -> Dictionary:
 		method_spec.name = csv_line[0]
 		method_spec.return_type = _parse_return_type(csv_line[1])
 		method_spec.parameters = _parse_parameters(csv_line[2])
-		method_spec.body = csv_line[3]
+		method_spec.explanation = csv_line[3]
 		all_references[method_spec.name] = method_spec
 	file.close()
 	return all_references
@@ -94,10 +94,10 @@ class MethodSpecification:
 	var name := ""
 	var return_type := "void"
 	var parameters := MethodList.new()
-	var body := ""
+	var explanation := ""
 	
 	func _to_string() -> String:
 		return "%s %s(%s)"%[return_type, name, parameters]
 
 	func to_bbcode() -> String:
-		return "[i]%s[/i] %s(%s)\n\n%s"%[return_type, name, parameters.to_bbcode(), body]
+		return "[i]%s[/i] %s(%s)\n\n%s"%[return_type, name, parameters.to_bbcode(), explanation]
