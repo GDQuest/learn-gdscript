@@ -5,8 +5,8 @@
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=3]
 
 [node name="OutputConsole" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_vertical = 3
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
@@ -15,19 +15,19 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 40.0
-margin_bottom = 140.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 custom_styles/panel = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 40.0
-margin_bottom = 140.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 20.0
-margin_bottom = 120.0
+margin_right = 1900.0
+margin_bottom = 1060.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 size_flags_vertical = 3

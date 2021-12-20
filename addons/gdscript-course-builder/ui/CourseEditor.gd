@@ -71,7 +71,7 @@ func _ready() -> void:
 
 	_new_course_button.connect("pressed", self, "_on_create_course_requested")
 	_open_course_button.connect("pressed", self, "_on_open_course_requested")
-	_play_current_button.connect("pressed", self, "_play_current")
+	_play_current_button.connect("pressed", self, "_on_play_current_requested")
 	_save_course_button.connect("pressed", self, "_save_course", [true])
 	_save_as_course_button.connect("pressed", self, "_save_course", [false])
 	_file_dialog.connect("file_selected", self, "_on_file_dialog_confirmed")
@@ -405,6 +405,8 @@ func _on_lesson_selected(lesson_index: int) -> void:
 	var lesson_data = _edited_course.lessons[lesson_index]
 	_lesson_details.set_lesson(lesson_data)
 	_current_lesson_index = lesson_index
+	
+	_play_current_button.disabled = false
 
 
 func _on_lesson_moved(lesson_index: int, new_index: int) -> void:
@@ -469,7 +471,21 @@ func _on_lesson_slug_changed(lesson_slug: String) -> void:
 	_on_course_resource_changed()
 
 
-func _play_current() -> void:
+func _on_play_current_requested() -> void:
+	# No course, no lesson, and no practice is selected, so nothing to run.
+	if not _edited_course or _current_lesson_index < 0:
+		print("No lesson or practice is selected, nothing to play.")
+		return
+
+	# Get a temp folder for running files.
+	var temp_path = PluginUtils.get_temp_play_path(self)
+	if temp_path.empty():
+		printerr("Cannot play the scene because the temporary folder cannot be created.")
+		return
+	var fs := Directory.new()
+	if not fs.file_exists(temp_path):
+		fs.make_dir_recursive(temp_path)
+	
 	# Like Godot, we want to save changes before playing the scene.
 	if _dirty_status_label.visible:
 		_save_course(true)
@@ -477,54 +493,32 @@ func _play_current() -> void:
 	var play_scene: PackedScene
 	var error
 	
-	# If practice is selected, play it.
+	var lesson_data := _edited_course.lessons[_current_lesson_index] as Lesson
+	# If there is a practice selected, play it.
 	if _current_practice_index >= 0:
-		assert(
-			_current_lesson_index >= 0,
-			"Trying to play practice but lesson index was not properly set."
-		)
-		
-		var practice = _edited_course.lessons[_current_lesson_index].practices[_current_practice_index]
+		var practice_data = lesson_data.practices[_current_practice_index]
+
 		var instance: UIPractice = UIPracticeScene.instance()
-		instance.test_practice = practice
-		
-		error = UIPracticeScene.pack(instance)
-		if error != OK:
-			printerr("Failed to pack the practice scene from the instance '%s': Error code %d" % [instance, error])
+		instance.test_practice = practice_data
+		var packed_instance := FileUtils.pack_playable_scene(instance, temp_path, "practice")
+		if not packed_instance:
 			return
 		
-		error = ResourceSaver.save(UIPracticeScene.resource_path, UIPracticeScene)
-		if error != OK:
-			printerr("Failed to save the practice scene at '%s': Error code %d" % [UIPracticeScene.resource_path, error])
-			return
-		
-		UIPracticeScene.emit_changed()
-		play_scene = UIPracticeScene
+		play_scene = packed_instance
 	
-	# Otherwise, play the selected lesson.
+	# Otherwise, play the selected lesson itself.
 	elif _current_lesson_index >= 0:
-		var lesson = _edited_course.lessons[_current_lesson_index]
 		var instance: UILesson = UILessonScene.instance()
-		instance.test_lesson = lesson
-		
-		error = UILessonScene.pack(instance)
-		if error != OK:
-			printerr("Failed to pack the lesson scene from the instance '%s': Error code %d" % [instance, error])
+		instance.test_lesson = lesson_data
+		var packed_instance := FileUtils.pack_playable_scene(instance, temp_path, "lesson")
+		if not packed_instance:
 			return
 		
-		error = ResourceSaver.save(UILessonScene.resource_path, UILessonScene)
-		if error != OK:
-			printerr("Failed to save the lesson scene at '%s': Error code %d" % [UILessonScene.resource_path, error])
-			return
-		
-		UILessonScene.emit_changed()
-		play_scene = UILessonScene
+		play_scene = packed_instance
 
 	if play_scene:
 		print("Starting the scene at '%s'..." % [play_scene.resource_path])
 		editor_interface.play_custom_scene(play_scene.resource_path)
-	else:
-		print("No lesson or practice is selected, nothing to play.")
 
 
 func _on_lesson_tab_selected() -> void:

@@ -140,3 +140,19 @@ static func generate_random_path_slug(length := 8) -> String:
 	for i in length:
 		text += LETTERS_AND_DIGITS[randi() % CHARACTER_COUNT]
 	return text
+
+static func pack_playable_scene(instance: Node, base_path: String, keyword: String) -> PackedScene:
+	var packed_instance := PackedScene.new()
+	var error = packed_instance.pack(instance)
+	if error != OK:
+		printerr("Failed to pack the %s scene from the instance '%s': Error code %d" % [keyword, instance, error])
+		return null
+	
+	var practice_path = base_path.plus_file("test-%s.tscn" % [keyword])
+	error = ResourceSaver.save(practice_path, packed_instance)
+	if error != OK:
+		printerr("Failed to save the %s scene at '%s': Error code %d" % [keyword, practice_path, error])
+		return null
+	
+	packed_instance.take_over_path(practice_path)
+	return packed_instance
