@@ -24,9 +24,15 @@ const http_request_name = "___HTTP_REQUEST___"
 # warnings
 var max_severity := 2
 
-# A list of language server codes to ignore. You probably only want to skip
-# "unused return value" (code 16), and "unsafe property access" (code 26)
-var blacklist_codes := {16: true, 26: true}
+
+# A list of language server codes to ignore. The value part of the dictionary
+# is completely unused, but the error explanation can be referenced there for
+# easier referencing.
+var blacklist_codes := {
+	16: "unused return value",
+	26: "unsafe property access",
+	10008: "unknown class"
+}
 
 var _node: Node
 var _new_script_text: String
@@ -84,6 +90,7 @@ func _on_http_request_completed(
 			continue
 		errors.append(error)
 
+	prints(errors)
 	emit_signal("errors", errors)
 
 
