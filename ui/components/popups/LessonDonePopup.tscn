@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/theme/fonts/font_text_lesson_done.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/components/popups/LessonDonePopup.gd" type="Script" id=2]
 [ext_resource path="res://ui/theme/fonts/font_title_lesson_done.tres" type="DynamicFont" id=3]
-[ext_resource path="res://ui/theme/button_outlined_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/theme/fonts/font_text_lesson_done.tres" type="DynamicFont" id=4]
 [ext_resource path="res://ui/theme/button_outlined_hover.tres" type="StyleBox" id=5]
 [ext_resource path="res://ui/theme/button_outlined_pressed.tres" type="StyleBox" id=6]
-[ext_resource path="res://ui/components/LessonDonePopup.gd" type="Script" id=7]
-[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=8]
+[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/theme/button_outlined_normal.tres" type="StyleBox" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -15,7 +15,7 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.0352941, 0.0392157, 0.129412, 0.313726 )
-script = ExtResource( 7 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -38,7 +38,7 @@ __meta__ = {
 [node name="Panel" type="Panel" parent="PanelContainer"]
 margin_right = 619.0
 margin_bottom = 340.0
-custom_styles/panel = ExtResource( 8 )
+custom_styles/panel = ExtResource( 7 )
 
 [node name="Column" type="VBoxContainer" parent="PanelContainer"]
 margin_right = 619.0
@@ -91,7 +91,7 @@ size_flags_horizontal = 4
 margin_top = 124.0
 margin_right = 579.0
 margin_bottom = 166.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
 text = "You completed the lesson"
 align = 1
 
@@ -115,7 +115,7 @@ custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
 custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
-custom_styles/normal = ExtResource( 4 )
+custom_styles/normal = ExtResource( 8 )
 text = "Got it!"
 
 [node name="Tween" type="Tween" parent="."]

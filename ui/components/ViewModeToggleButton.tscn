@@ -1,41 +1,38 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/components/ViewModeToggleButton.gd" type="Script" id=1]
 [ext_resource path="res://ui/icons/icon_gamepad.png" type="Texture" id=2]
 [ext_resource path="res://ui/theme/button_normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=4]
 [ext_resource path="res://ui/icons/icon_console.png" type="Texture" id=5]
+[ext_resource path="res://ui/theme/separator_pivoted.tres" type="StyleBox" id=6]
 
 [node name="ViewModeToggleButton" type="PanelContainer"]
-margin_right = 166.0
-margin_bottom = 82.0
+margin_right = 348.0
+margin_bottom = 62.0
+theme = ExtResource( 4 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 252.0
-margin_bottom = 75.0
+margin_right = 348.0
+margin_bottom = 62.0
 custom_styles/panel = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 252.0
-margin_bottom = 75.0
+margin_right = 348.0
+margin_bottom = 62.0
 size_flags_horizontal = 3
-custom_constants/margin_right = 8
-custom_constants/margin_top = 8
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 8
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 237.0
-margin_bottom = 60.0
+margin_right = 348.0
+margin_bottom = 62.0
 size_flags_horizontal = 3
 custom_constants/separation = 8
 alignment = 1
@@ -44,23 +41,42 @@ __meta__ = {
 }
 
 [node name="GameButton" type="Button" parent="MarginContainer/HBoxContainer"]
-margin_right = 98.0
-margin_bottom = 52.0
+margin_left = 4.0
+margin_right = 152.0
+margin_bottom = 62.0
 toggle_mode = true
 pressed = true
 text = "Game"
 icon = ExtResource( 2 )
 flat = true
 
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer"]
-margin_left = 106.0
-margin_right = 110.0
-margin_bottom = 52.0
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer"]
+margin_left = 160.0
+margin_right = 160.0
+margin_bottom = 62.0
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer/Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -4.0
+margin_top = -18.0
+margin_right = 4.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 0, 36 )
+rect_rotation = 20.0
+rect_pivot_offset = Vector2( 4, 18 )
+size_flags_vertical = 4
+custom_styles/separator = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ConsoleButton" type="Button" parent="MarginContainer/HBoxContainer"]
-margin_left = 118.0
-margin_right = 229.0
-margin_bottom = 52.0
+margin_left = 168.0
+margin_right = 344.0
+margin_bottom = 62.0
 toggle_mode = true
 pressed = true
 text = "Console"

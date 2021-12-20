@@ -4,52 +4,51 @@ extends PanelContainer
 
 signal reference_clicked(file_name, line_nb, character)
 
-onready var _rich_text_label := $MarginContainer/RichTextLabel as RichTextLabel
+const OutputConsoleMessage := preload("res://ui/components/OutputConsoleMessage.tscn")
+
+onready var _scroll_container := $MarginContainer/ScrollContainer as ScrollContainer
+onready var _message_list := $MarginContainer/ScrollContainer/MarginContainer/MessageList as Control
+onready var _external_error_popup := $ExternalErrorPopup as Control
 
 
 func _ready() -> void:
-	_rich_text_label.bbcode_enabled = true
-	_rich_text_label.connect("meta_clicked", self, "_on_meta_clicked")
+	_external_error_popup.set_as_toplevel(true)
+	
 	LiveEditorMessageBus.connect("print_request", self, "record_message_for_line")
 
 
 # Adds a message related to a specific line in a specific file
 func record_message_for_line(
-	type: int, line: String, file_name: String, line_nb: int, character: int
+	type: int, text: String, file_name: String, line: int, character: int
 ) -> void:
-	var url = "(%s:%s:%s) " % [file_name, line_nb, character]
-	var prefix = "[url=%s]%s[/url]" % [url, url]
-	match type:
-		LiveEditorMessageBus.MESSAGE_TYPE.ASSERT:
-			record_assert(line, prefix)
-		LiveEditorMessageBus.MESSAGE_TYPE.ERROR:
-			record_error(line, prefix)
-		LiveEditorMessageBus.MESSAGE_TYPE.WARNING:
-			record_warning(line, prefix)
-		_:
-			record(line, prefix)
+	# We need to adjust the reported range to show the lines as the student sees them
+	# in the slice editor.
+	var slice_properties := LiveEditorState.current_slice
+	var show_lines_from = slice_properties.start_offset
+	var show_lines_to = slice_properties.end_offset
+
+	var message_node := OutputConsoleMessage.instance()
+	message_node.message_severity = type
+	message_node.message_text = text
+	
+	if line >= show_lines_from and line <= show_lines_to:
+		message_node.origin_file = file_name
+		message_node.origin_line = line - show_lines_from + 1
+		message_node.origin_char = character
+	else:
+		message_node.external_error = true
+	
+	_message_list.add_child(message_node)
+	message_node.connect("external_explain_requested", self, "_on_external_requested")
+	message_node.connect("show_code_requested", self, "_on_code_requested")
+	
+	yield(get_tree(), "idle_frame")
+	_scroll_container.ensure_control_visible(message_node)
 
 
-func record_error(line: String, prefix := "") -> void:
-	record("[color=red]%sERROR: " % [prefix] + line + "[/color]")
+func _on_external_requested() -> void:
+	_external_error_popup.show()
 
 
-func record_assert(line: String, prefix := "") -> void:
-	record("[color=red]%sASSERT: " % [prefix] + line + "[/color]")
-
-
-func record_warning(line: String, prefix := "") -> void:
-	record("[color=orange]%sWARNING: " % [prefix] + line + "[/color]")
-
-
-func record(line: String, prefix := "") -> void:
-	_rich_text_label.append_bbcode(prefix + line)
-	_rich_text_label.newline()
-
-
-func _on_meta_clicked(meta: String) -> void:
-	var meta_array := meta.split(":")
-	var file_name := String(meta_array[0])
-	var line_nb := int(meta_array[1])
-	var character := int(meta_array[2])
-	emit_signal("reference_clicked", file_name, line_nb, character)
+func _on_code_requested(file_name: String, line: int, character: int) -> void:
+	emit_signal("reference_clicked", file_name, line, character)

@@ -1,8 +1,8 @@
 extends Control
 
 const LoadingScreen = preload("./LoadingScreen.gd")
-const ReportFormPopup = preload("./components/ReportFormPopup.gd")
-const SettingsPopup = preload("./components/SettingsPopup.gd")
+const ReportFormPopup = preload("./components/popups/ReportFormPopup.gd")
+const SettingsPopup = preload("./components/popups/SettingsPopup.gd")
 
 var _unloading_target: Control
 var _loading_target: Control

@@ -1,0 +1,101 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/components/OutputConsoleMessage.gd" type="Script" id=2]
+[ext_resource path="res://ui/theme/panel_error_log.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui/theme/fonts/font_button_small.tres" type="DynamicFont" id=4]
+
+[node name="OutputConsoleMessage" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+custom_styles/panel = ExtResource( 3 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Layout" type="HBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 1904.0
+margin_bottom = 1072.0
+
+[node name="Content" type="VBoxContainer" parent="Layout"]
+margin_right = 1788.0
+margin_bottom = 1064.0
+size_flags_horizontal = 3
+custom_constants/separation = 2
+
+[node name="MessageRow" type="HBoxContainer" parent="Layout/Content"]
+margin_right = 1788.0
+margin_bottom = 28.0
+custom_constants/separation = 8
+
+[node name="MessageSeverity" type="Label" parent="Layout/Content/MessageRow"]
+margin_right = 68.0
+margin_bottom = 28.0
+size_flags_vertical = 0
+text = "ERROR:"
+
+[node name="MessageValue" type="Label" parent="Layout/Content/MessageRow"]
+margin_left = 76.0
+margin_right = 1788.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "There has been a horrible accident!"
+autowrap = true
+
+[node name="LocationRow" type="HBoxContainer" parent="Layout/Content"]
+margin_top = 30.0
+margin_right = 1788.0
+margin_bottom = 58.0
+mouse_default_cursor_shape = 2
+custom_constants/separation = 8
+
+[node name="Label" type="Label" parent="Layout/Content/LocationRow"]
+margin_right = 17.0
+margin_bottom = 28.0
+custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+text = "in"
+
+[node name="FileName" type="Label" parent="Layout/Content/LocationRow"]
+margin_left = 25.0
+margin_right = 112.0
+margin_bottom = 28.0
+text = "FileName"
+
+[node name="Label2" type="Label" parent="Layout/Content/LocationRow"]
+margin_left = 120.0
+margin_right = 138.0
+margin_bottom = 28.0
+custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+text = "at"
+
+[node name="CodeLocation" type="Label" parent="Layout/Content/LocationRow"]
+margin_left = 146.0
+margin_right = 1788.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "0:0"
+
+[node name="ExternalError" type="Label" parent="Layout/Content"]
+margin_top = 60.0
+margin_right = 1788.0
+margin_bottom = 88.0
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+text = "Sometimes errors are reported outside of your code. Why does that happen?"
+autowrap = true
+
+[node name="ExplainButton" type="Button" parent="Layout"]
+margin_left = 1804.0
+margin_right = 1888.0
+margin_bottom = 39.0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+text = "Explain"
+
+[node name="Tween" type="Tween" parent="."]

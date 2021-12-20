@@ -3,7 +3,7 @@ class_name UIPractice
 extends Control
 
 const PracticeHintScene := preload("components/PracticeHint.tscn")
-const LessonDonePopupScene := preload("components/LessonDonePopup.tscn")
+const LessonDonePopupScene := preload("components/popups/LessonDonePopup.tscn")
 
 export var test_practice: Resource
 
@@ -42,6 +42,12 @@ func _input(event: InputEvent) -> void:
 		var is_distraction_free := not _practice_info_panel.visible
 		_practice_info_panel.visible = is_distraction_free
 		_game_container.visible = is_distraction_free
+
+
+func _gui_input(event: InputEvent) -> void:
+	var mb := event as InputEventMouseButton
+	if mb and mb.button_index == BUTTON_LEFT and mb.pressed and get_focus_owner():
+		get_focus_owner().release_focus()
 
 
 func setup(practice: Practice) -> void:

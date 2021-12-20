@@ -21,6 +21,7 @@ __meta__ = {
 [node name="Margin" type="MarginContainer" parent="."]
 margin_right = 1920.0
 margin_bottom = 1080.0
+mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="HSplitContainer" type="HSplitContainer" parent="Margin"]
@@ -28,40 +29,45 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
 margin_bottom = 1060.0
+mouse_filter = 1
 size_flags_horizontal = 3
 
 [node name="HSplitContainer" type="HSplitContainer" parent="Margin/HSplitContainer"]
-margin_right = 1468.0
+margin_right = 1355.0
 margin_bottom = 1040.0
+mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PracticeInfoPanel" parent="Margin/HSplitContainer/HSplitContainer" instance=ExtResource( 3 )]
-margin_right = 700.0
 margin_bottom = 1040.0
 
 [node name="CodeEditor" parent="Margin/HSplitContainer/HSplitContainer" instance=ExtResource( 1 )]
-margin_left = 712.0
-margin_right = 1468.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 623.0
+margin_right = 1355.0
 margin_bottom = 1040.0
 split_container_path = NodePath("../../Output/VSplit")
 
 [node name="Output" type="PanelContainer" parent="Margin/HSplitContainer"]
-margin_left = 1480.0
+margin_left = 1367.0
 margin_right = 1880.0
 margin_bottom = 1040.0
 rect_min_size = Vector2( 400, 0 )
+size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VSplit" type="VSplitContainer" parent="Margin/HSplitContainer/Output"]
-margin_right = 400.0
+margin_right = 513.0
 margin_bottom = 1040.0
+mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 7 )
 
 [node name="GameViewport" type="ViewportContainer" parent="Margin/HSplitContainer/Output/VSplit"]
-margin_right = 400.0
+margin_right = 513.0
 margin_bottom = 514.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
@@ -73,5 +79,5 @@ script = ExtResource( 4 )
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 526.0
-margin_right = 400.0
+margin_right = 513.0
 margin_bottom = 1040.0

@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/components/ErrorOverlayPopup.gd" type="Script" id=2]
-[ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/components/popups/ErrorOverlayPopup.gd" type="Script" id=2]
+[ext_resource path="res://ui/icons/icon_help.png" type="Texture" id=3]
 [ext_resource path="res://ui/theme/fonts/font_button_small.tres" type="DynamicFont" id=4]
-[ext_resource path="res://ui/icons/icon_help.png" type="Texture" id=5]
+[ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=6]
 
 [node name="ErrorOverlayPopup" type="MarginContainer"]
@@ -56,7 +56,7 @@ margin_right = 537.0
 margin_bottom = 34.0
 custom_constants/separation = 0
 
-[node name="ErrorExplanation" parent="MarginContainer/Column" instance=ExtResource( 3 )]
+[node name="ErrorExplanation" parent="MarginContainer/Column" instance=ExtResource( 5 )]
 margin_top = 42.0
 margin_right = 537.0
 margin_bottom = 89.0
@@ -84,11 +84,11 @@ size_flags_horizontal = 0
 custom_constants/hseparation = 8
 custom_fonts/font = ExtResource( 4 )
 text = "More information"
-icon = ExtResource( 5 )
+icon = ExtResource( 3 )
 align = 0
 expand_icon = true
 
-[node name="ErrorSuggestion" parent="MarginContainer/Column" instance=ExtResource( 3 )]
+[node name="ErrorSuggestion" parent="MarginContainer/Column" instance=ExtResource( 5 )]
 margin_top = 97.0
 margin_right = 537.0
 margin_bottom = 277.0

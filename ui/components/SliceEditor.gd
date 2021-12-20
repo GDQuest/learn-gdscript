@@ -20,7 +20,7 @@ tool
 class_name SliceEditor
 extends TextEdit
 
-const ErrorOverlayPopupScene := preload("ErrorOverlayPopup.tscn")
+const ErrorOverlayPopupScene := preload("./popups/ErrorOverlayPopup.tscn")
 
 enum SCROLL_DIR { HORIZONTAL, VERTICAL }
 
@@ -62,11 +62,14 @@ func _ready() -> void:
 			found += 1
 
 	errors_overlay.name = "ErrorsOverlay"
-	add_child(errors_overlay)
 	errors_overlay.set_anchors_and_margins_preset(Control.PRESET_WIDE)
 	errors_overlay.margin_right = -scroll_offsets.x
 	errors_overlay.margin_bottom = -scroll_offsets.y
+	add_child(errors_overlay)
+	
 	add_child(errors_overlay_message)
+	errors_overlay_message.set_as_toplevel(true)
+	errors_overlay_message.hide()
 
 	connect("text_changed", self, "_on_text_changed")
 	connect("draw", self, "_update_overlays")
