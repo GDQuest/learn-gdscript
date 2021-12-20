@@ -26,15 +26,11 @@ onready var _visual_element_value := $BackgroundPanel/Layout/VisualElement/LineE
 onready var _select_file_button := $BackgroundPanel/Layout/VisualElement/SelectFileButton as Button
 onready var _clear_file_button := $BackgroundPanel/Layout/VisualElement/ClearFileButton as Button
 onready var _text_content_value := $BackgroundPanel/Layout/TextContent/Editor/TextEdit as TextEdit
-onready var _text_content_expand_button := (
-	$BackgroundPanel/Layout/TextContent/Editor/ExpandButton as Button
-)
+onready var _text_content_expand_button := $BackgroundPanel/Layout/TextContent/Editor/ExpandButton as Button
 onready var _text_content_dialog := $TextEditDialog as WindowDialog
 onready var _text_label := $BackgroundPanel/Layout/TextContent/Editor/TextEdit/Label as Label
 
-onready var _checkbox_visuals_on_left := (
-	$BackgroundPanel/Layout/Settings/VisualsOnLeftCheckbox as CheckBox
-)
+onready var _checkbox_visuals_on_left := $BackgroundPanel/Layout/Settings/VisualsOnLeftCheckbox as CheckBox
 onready var _options_block_type := $BackgroundPanel/Layout/Settings/BlockTypeOption as OptionButton
 
 onready var _confirm_dialog := $ConfirmDialog as ConfirmationDialog
@@ -53,7 +49,8 @@ func _ready() -> void:
 	_visual_element_value.connect("text_changed", self, "_update_visual_element_file")
 
 	_text_content_value.connect("text_changed", self, "_on_text_content_changed")
-	_text_content_expand_button.connect("pressed", self, "_on_text_content_expand_pressed")
+	_text_content_value.connect("gui_input", self, "_on_text_content_value_gui_input")
+	_text_content_expand_button.connect("pressed", self, "_open_expanded_text_box")
 	_text_content_dialog.connect("confirmed", self, "_on_text_content_confirmed")
 
 	_confirm_dialog.connect("confirmed", self, "_on_confirm_dialog_confirmed")
@@ -206,8 +203,11 @@ func _on_text_content_changed() -> void:
 	_edited_content_block.emit_changed()
 
 
-func _on_text_content_expand_pressed() -> void:
+func _open_expanded_text_box() -> void:
 	_text_content_dialog.text = _edited_content_block.text
+	_text_content_dialog.set_line_column(
+		_text_content_value.cursor_get_line(), _text_content_value.cursor_get_column()
+	)
 	_text_content_dialog.popup_centered()
 
 
@@ -215,6 +215,8 @@ func _on_text_content_confirmed() -> void:
 	_edited_content_block.text = _text_content_dialog.text
 	_text_content_value.text = _text_content_dialog.text
 	_edited_content_block.emit_changed()
+	_text_content_value.cursor_set_line(_text_content_dialog.get_line())
+	_text_content_value.cursor_set_column(_text_content_dialog.get_column())
 
 
 func _on_checkbox_visuals_on_left_toggled(toggled: bool) -> void:
@@ -230,3 +232,11 @@ func _on_options_block_type_item_selected(index: int) -> void:
 	elif index == 2:
 		_edited_content_block.type = ContentBlock.Type.NOTE
 	_edited_content_block.emit_changed()
+
+
+func _on_text_content_value_gui_input(event: InputEvent) -> void:
+	if not event is InputEventKey:
+		return
+	# Open the expanded text editor when pressing Ctrl Enter.
+	if event.control and event.pressed and event.scancode == KEY_ENTER:
+		_open_expanded_text_box()

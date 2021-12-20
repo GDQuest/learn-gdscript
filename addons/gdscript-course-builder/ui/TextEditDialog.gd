@@ -52,6 +52,24 @@ func set_content_type(value: int) -> void:
 	_update_editor_properties()
 
 
+func popup_centered(size := Vector2.ZERO) -> void:
+	.popup_centered(size)
+	_text_value.grab_focus()
+
+
+func set_line_column(line: int, column: int) -> void:
+	_text_value.cursor_set_line(line)
+	_text_value.cursor_set_column(column)
+
+
+func get_line() -> int:
+	return _text_value.cursor_get_line()
+
+
+func get_column() -> int:
+	return _text_value.cursor_get_column()
+
+
 # Helpers
 func _update_editor_properties() -> void:
 	if not is_inside_tree():
