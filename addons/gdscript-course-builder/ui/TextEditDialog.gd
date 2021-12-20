@@ -18,8 +18,18 @@ func _ready() -> void:
 	_update_editor_properties()
 
 	_text_value.connect("text_changed", self, "_on_text_changed")
-	_confirm_button.connect("pressed", self, "_on_confirm_pressed")
+	_confirm_button.connect("pressed", self, "_confirm")
 	_cancel_button.connect("pressed", self, "_on_cancel_pressed")
+
+	_text_value.connect("gui_input", self, "_gui_input")
+
+
+func _gui_input(event: InputEvent) -> void:
+	if not event is InputEventKey:
+		return
+
+	if event.control and event.pressed and event.scancode == KEY_ENTER:
+		_confirm()
 
 
 # Properties
@@ -64,7 +74,7 @@ func _on_text_changed() -> void:
 	text = _text_value.text
 
 
-func _on_confirm_pressed() -> void:
+func _confirm() -> void:
 	emit_signal("confirmed")
 	hide()
 
