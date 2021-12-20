@@ -21,59 +21,12 @@ var draw_color := DEFAULT_COLOR
 var draw_speed := 400.0
 
 var _points := []
-var _total_distance := 0.0
 var _polygons := []
-var _polygons_to_draw := []
-# Last registered angle stored by calling turn_right and turn_left.
-var _current_angle := 0.0
+var _current_polygon_index := 0
 var _current_offset := Vector2.ZERO
 
-onready var _tween := $Tween as Tween
 onready var _sprite = $Sprite as Sprite
-
-
-# An arbitrary polygon for the turtle to draw.
-class Polygon:
-	var points: Array
-	var color: Color
-	var position: Vector2
-
-	func _init(p_points: Array, p_color: Color, p_position: Vector2) -> void:
-		points = p_points
-		color = p_color
-		position = p_position
-
-	func get_drawing_points() -> PoolVector2Array:
-		var out := PoolVector2Array()
-		for p in points:
-			out.append(p + position)
-		return out
-
-	# Returns the local bounds of the polygon. That is to say, it only takes the
-	# point into account in local space, but not the polygon's `position`.
-	func get_rect() -> Rect2:
-		var top_left := Vector2.ZERO
-		var bottom_right := Vector2.ZERO
-		for p in points:
-			if p.x > bottom_right.x:
-				bottom_right.x = p.x
-			elif p.x < top_left.x:
-				top_left.x = p.x
-
-			if p.y > bottom_right.y:
-				bottom_right.y = p.y
-			elif p.y < top_left.y:
-				top_left.y = p.y
-		return Rect2(top_left, bottom_right - top_left)
-
-
-func _draw() -> void:
-	if _polygons_to_draw.empty():
-		return
-
-	for p in _polygons_to_draw:
-		draw_polyline(p.get_drawing_points(), p.color, LINE_THICKNESS)
-
+onready var _canvas = $Canvas as Node2D
 
 # Virtually moves the turtle and records a new vertex.
 func move_forward(distance: float) -> void:
@@ -84,8 +37,6 @@ func move_forward(distance: float) -> void:
 		previous_point = _points[-1]
 	var new_point := previous_point + Vector2.RIGHT.rotated(rotation) * distance
 	_points.append(new_point.snapped(Vector2.ONE))
-
-	_total_distance += previous_point.distance_to(new_point)
 
 
 func turn_right(angle_degrees: float) -> void:
@@ -110,24 +61,39 @@ func jump(x: float, y: float) -> void:
 # Resets the turtle's state. Use it when testing a student's assignments to
 # reset the object between runs.
 func reset() -> void:
-	_tween.stop_all()
 	rotation_degrees = 0
 	_points.clear()
 	_polygons.clear()
 	draw_color = DEFAULT_COLOR
-	_total_distance = 0.0
+	_current_offset = Vector2.ZERO
 
 
 # Starts the animation drawing every polygon inside the _polygons array.
 func play_draw_animation() -> void:
+	
 	if not _points.empty():
 		_close_polygon()
+	
+	if _current_polygon_index >= _polygons.size():
+		return
+	
+	var polygon := _polygons[_current_polygon_index] as Polygon
+	
+	if polygon != null:
+		_current_polygon_index += 1
+		rotation_degrees = 0
+		polygon.connect("animation_finished", self, "_polygon_finished")
+		polygon.connect("current_point", self, "_polygon_updated")
+		_canvas.add_child(polygon)
+		polygon.start()
 
-	rotation_degrees = 0
-	_tween.stop_all()
-	_tween.interpolate_method(self, "_animate_drawing", 0.0, 1.0, _total_distance / draw_speed)
-	_tween.start()
 
+func _polygon_updated(point: Vector2) -> void:
+	_sprite.position = point
+
+
+func _polygon_finished() -> void:
+	play_draw_animation()
 
 # Returns a copy of the polygons the turtle will draw.
 func get_polygons() -> Array:
@@ -138,37 +104,95 @@ func _close_polygon() -> void:
 	if _points.empty():
 		return
 
-	var polygon := Polygon.new(_points.duplicate(), draw_color, _current_offset)
+	var polygon := Polygon.new()
+	polygon.position = _current_offset
+	polygon._segment.width = LINE_THICKNESS
+	polygon._segment.default_color = DEFAULT_COLOR
+	polygon.points = PoolVector2Array(_points)
 	_polygons.append(polygon)
 	_points.clear()
 
+class Polygon extends Node2D:
+	
+	const LabelScene := preload("res://game_demos/DrawingTurtleLabel.tscn")
+	var points := []
+	var time := 3.0
+	var _tween := Tween.new()
+	var _segment := Line2D.new()
+	var _gradient := Gradient.new()
+	var _current_points := []
+	var _current_point_index := 0
+	var _total_distance := 0.0
+	
+	
+	signal animation_finished()
+	signal current_point(point)
+	
+	func _init() -> void:
+		add_child(_tween)
+		add_child(_segment)
+		_tween.connect("tween_all_completed", self, "next")
+	
+	
+	func start() -> void:
+		var previous_point := points[0] as Vector2
+		for index in range(1, points.size()):
+			var p := points[index] as Vector2
+			var distance = previous_point.distance_to(p)
+			previous_point = p
+			_total_distance += distance
+		_tween.stop_all()
+		next()
+	
+	
+	func next() -> void:
+		if points.size() - _current_point_index < 2:
+			_animation_finished()
+			return
+		
+		var starting_point := points[_current_point_index] as Vector2
+		var destination := points[_current_point_index+1] as Vector2
+		_current_point_index += 1
 
-func _animate_drawing(progress: float) -> void:
-	var target_distance := progress * _total_distance
-	_polygons_to_draw.clear()
+		var distance := starting_point.distance_to(destination)
+		var factor := distance / _total_distance
+		var timespan := time * factor
+		
+		var label := LabelScene.instance() as PanelContainer
+		var label_text := label.get_node("Label") as Label
+		label_text.text = String(_current_point_index)
+		label.rect_position = starting_point - label.rect_size / 2
+		add_child(label)
+		
+		_current_points.append(starting_point)
+		_segment.points = _current_points
+		_tween.interpolate_method(self, "_animate_last_point", starting_point, destination, timespan)
+		_tween.start()
+	
+	
+	func _animate_last_point(last_point: Vector2) -> void:
+		var new_points := _current_points.duplicate()
+		new_points.push_back(last_point)
+		_segment.points = new_points
+		emit_signal("current_point", last_point)
+	
+	func _animation_finished() -> void:
+		emit_signal("animation_finished")
+	
+	
+	# Returns the local bounds of the polygon. That is to say, it only takes the
+	# point into account in local space, but not the polygon's `position`.
+	func get_rect() -> Rect2:
+		var top_left := Vector2.ZERO
+		var bottom_right := Vector2.ZERO
+		for p in points:
+			if p.x > bottom_right.x:
+				bottom_right.x = p.x
+			elif p.x < top_left.x:
+				top_left.x = p.x
 
-	var distance := 0.0
-	var reached_target_distance := false
-	for p in _polygons:
-		var points := [p.points[0]]
-		var previous_point: Vector2 = p.points[0]
-		# We skip the first point as we extracted it above.
-		for point in p.points.slice(1, -1):
-			var segment_length := previous_point.distance_to(point)
-			reached_target_distance = distance + segment_length >= target_distance
-			if reached_target_distance:
-				var distance_ratio := (target_distance - distance) / segment_length
-				var final_point: Vector2 = lerp(previous_point, point, distance_ratio)
-				_sprite.position = final_point.snapped(Vector2.ONE) + p.position
-				points.append(final_point)
-				break
-			else:
-				distance += segment_length
-				points.append(point)
-				previous_point = point
-
-		_polygons_to_draw.append(Polygon.new(points, draw_color, p.position))
-		if reached_target_distance:
-			break
-
-	update()
+			if p.y > bottom_right.y:
+				bottom_right.y = p.y
+			elif p.y < top_left.y:
+				top_left.y = p.y
+		return Rect2(top_left, bottom_right - top_left)

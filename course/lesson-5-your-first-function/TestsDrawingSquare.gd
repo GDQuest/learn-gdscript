@@ -14,8 +14,9 @@ func test_draw_square_of_200_pixels() -> String:
 		return "Nothing drawn. Did you not call move_forward()?"
 
 	var square: DrawingTurtle.Polygon = polygons[0]
-	square.points.sort()
-	if square.points != target_polygon:
+	var points := square.points.duplicate()
+	points.sort()
+	if points != target_polygon:
 		return "The drawn shape is not a square of length 200 pixels."
 
 	return ""
