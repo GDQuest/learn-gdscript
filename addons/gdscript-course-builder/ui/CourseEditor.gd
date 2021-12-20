@@ -475,31 +475,56 @@ func _play_current() -> void:
 		_save_course(true)
 
 	var play_scene: PackedScene
+	var error
+	
+	# If practice is selected, play it.
 	if _current_practice_index >= 0:
 		assert(
 			_current_lesson_index >= 0,
 			"Trying to play practice but lesson index was not properly set."
 		)
+		
 		var practice = _edited_course.lessons[_current_lesson_index].practices[_current_practice_index]
 		var instance: UIPractice = UIPracticeScene.instance()
 		instance.test_practice = practice
-		var error := UIPracticeScene.pack(instance)
-		if error == OK:
-			var save_error := ResourceSaver.save(UIPracticeScene.resource_path, UIPracticeScene)
-			if save_error == OK:
-				play_scene = UIPracticeScene
+		
+		error = UIPracticeScene.pack(instance)
+		if error != OK:
+			printerr("Failed to pack the practice scene from the instance '%s': Error code %d" % [instance, error])
+			return
+		
+		error = ResourceSaver.save(UIPracticeScene.resource_path, UIPracticeScene)
+		if error != OK:
+			printerr("Failed to save the practice scene at '%s': Error code %d" % [UIPracticeScene.resource_path, error])
+			return
+		
+		UIPracticeScene.emit_changed()
+		play_scene = UIPracticeScene
+	
+	# Otherwise, play the selected lesson.
 	elif _current_lesson_index >= 0:
 		var lesson = _edited_course.lessons[_current_lesson_index]
 		var instance: UILesson = UILessonScene.instance()
 		instance.test_lesson = lesson
-		var error := UILessonScene.pack(instance)
-		if error == OK:
-			var save_error := ResourceSaver.save(UILessonScene.resource_path, UILessonScene)
-			if save_error == OK:
-				play_scene = UILessonScene
+		
+		error = UILessonScene.pack(instance)
+		if error != OK:
+			printerr("Failed to pack the lesson scene from the instance '%s': Error code %d" % [instance, error])
+			return
+		
+		error = ResourceSaver.save(UILessonScene.resource_path, UILessonScene)
+		if error != OK:
+			printerr("Failed to save the lesson scene at '%s': Error code %d" % [UILessonScene.resource_path, error])
+			return
+		
+		UILessonScene.emit_changed()
+		play_scene = UILessonScene
 
 	if play_scene:
+		print("Starting the scene at '%s'..." % [play_scene.resource_path])
 		editor_interface.play_custom_scene(play_scene.resource_path)
+	else:
+		print("No lesson or practice is selected, nothing to play.")
 
 
 func _on_lesson_tab_selected() -> void:
