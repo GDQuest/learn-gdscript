@@ -34,20 +34,13 @@ onready var _body_text_edit := $BackgroundPanel/Layout/Body/Editor/TextEdit as T
 onready var _body_expand_button := $BackgroundPanel/Layout/Body/Editor/ExpandButton as Button
 onready var _body_info_label := $BackgroundPanel/Layout/Body/Editor/TextEdit/Label as Label
 
-onready var _explanation_text_edit := (
-	$BackgroundPanel/Layout/Explanation/Editor/TextEdit as TextEdit
-)
-onready var _explanation_expand_button := (
-	$BackgroundPanel/Layout/Explanation/Editor/ExpandButton as Button
-)
-onready var _explanation_info_label := (
-	$BackgroundPanel/Layout/Explanation/Editor/TextEdit/Label as Label
-)
+onready var _explanation_text_edit := $BackgroundPanel/Layout/Explanation/Editor/TextEdit as TextEdit
+onready var _explanation_expand_button := $BackgroundPanel/Layout/Explanation/Editor/ExpandButton as Button
+onready var _explanation_info_label := $BackgroundPanel/Layout/Explanation/Editor/TextEdit/Label as Label
 
 onready var _answers_container := $BackgroundPanel/Layout/Answers as PanelContainer
 
-# TODO: make this popup panel work with text body and explanation fields
-onready var _text_content_dialog := $TextEditDialog as WindowDialog
+onready var _text_edit_dialog := $TextEditDialog as WindowDialog
 # Poup dialog used to confirm deleting items.
 onready var _confirm_dialog := $ConfirmDialog as ConfirmationDialog
 
@@ -55,15 +48,20 @@ onready var _confirm_dialog := $ConfirmDialog as ConfirmationDialog
 func _ready() -> void:
 	_drag_icon.set_drag_forwarding(self)
 
-	_text_content_dialog.rect_size = _text_content_dialog.rect_min_size
+	_text_edit_dialog.rect_size = _text_edit_dialog.rect_min_size
 
 	_remove_button.connect("pressed", self, "_on_remove_block_requested")
 
 	_body_text_edit.connect("text_changed", self, "_on_body_text_edit_text_changed")
-	_body_expand_button.connect("pressed", self, "_on_body_expand_button_pressed")
-	_text_content_dialog.connect("confirmed", self, "_on_text_content_confirmed")
+	_body_expand_button.connect("pressed", self, "_open_text_edit_dialog", [_body_text_edit])
 
 	_explanation_text_edit.connect("text_changed", self, "_on_explanation_text_edit_text_changed")
+	_explanation_expand_button.connect(
+		"pressed", self, "_open_text_edit_dialog", [_explanation_text_edit]
+	)
+
+	_body_text_edit.connect("gui_input", self, "_text_edit_gui_input", [_body_text_edit])
+	_explanation_text_edit.connect("gui_input", self, "_text_edit_gui_input", [_explanation_text_edit])
 
 	_question_line_edit.connect("text_changed", self, "_on_question_line_edit_text_changed")
 
@@ -196,20 +194,9 @@ func _on_body_text_edit_text_changed() -> void:
 	_quizz.emit_changed()
 
 
-func _on_body_expand_button_pressed() -> void:
-	_text_content_dialog.text = _quizz.content_bbcode
-	_text_content_dialog.popup_centered()
-
-
 func _on_explanation_text_edit_text_changed() -> void:
 	_explanation_info_label.visible = _explanation_text_edit.text.empty()
 	_quizz.explanation_bbcode = _explanation_text_edit.text
-	_quizz.emit_changed()
-
-
-func _on_text_content_confirmed() -> void:
-	_quizz.content_bbcode = _text_content_dialog.text
-	_body_text_edit.text = _text_content_dialog.text
 	_quizz.emit_changed()
 
 
@@ -236,3 +223,34 @@ func _create_new_quizz_resource(new_type, from: Quizz) -> void:
 	_quizz.take_over_path(previous_quizz.resource_path)
 	emit_signal("quizz_resource_changed", previous_quizz, _quizz)
 	_rebuild_answers()
+
+
+# Both TextEdit nodes in the scene forward their inputs to this function to
+# handle keyboard shortcuts.
+func _text_edit_gui_input(event: InputEvent, source: TextEdit) -> void:
+	if not event is InputEventKey:
+		return
+	if event.control and event.pressed and event.scancode == KEY_SPACE:
+		_open_text_edit_dialog(source)
+
+
+func _open_text_edit_dialog(source: TextEdit) -> void:
+	if _text_edit_dialog.is_connected("confirmed", self, "_transfer_text_edit_dialog_text"):
+		_text_edit_dialog.disconnect("confirmed", self, "_transfer_text_edit_dialog_text")
+
+	_text_edit_dialog.popup_centered()
+	_text_edit_dialog.text = source.text
+	_text_edit_dialog.set_line_column(source.cursor_get_line(), source.cursor_get_column())
+	_text_edit_dialog.popup_centered()
+	_text_edit_dialog.connect(
+		"confirmed", self, "_transfer_text_edit_dialog_text", [source], CONNECT_ONESHOT
+	)
+
+
+func _transfer_text_edit_dialog_text(target: TextEdit) -> void:
+	target.set_text(_text_edit_dialog.text)
+	target.emit_signal("text_changed")
+	_quizz.emit_changed()
+	target.cursor_set_line(_text_edit_dialog.get_line())
+	target.cursor_set_column(_text_edit_dialog.get_column())
+	target.grab_focus()

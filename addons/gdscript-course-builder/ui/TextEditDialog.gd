@@ -28,7 +28,7 @@ func _gui_input(event: InputEvent) -> void:
 	if not event is InputEventKey:
 		return
 
-	if event.control and event.pressed and event.scancode == KEY_ENTER:
+	if event.control and event.pressed and event.scancode == KEY_SPACE:
 		_confirm()
 
 
@@ -100,4 +100,5 @@ func _confirm() -> void:
 func _on_cancel_pressed() -> void:
 	text = ""
 	_text_value.text = ""
+	emit_signal("canceled")
 	hide()
