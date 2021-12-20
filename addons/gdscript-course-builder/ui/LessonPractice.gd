@@ -2,6 +2,7 @@ tool
 extends MarginContainer
 
 signal practice_removed
+signal got_edit_focus
 
 enum ConfirmMode { REMOVE_PRACTICE, CLEAR_SLICE_FILE, CLEAR_VALIDATOR_FILE }
 enum FileDialogMode { SELECT_SLICE_FILE, SELECT_VALIDATOR_FILE }
@@ -9,8 +10,9 @@ enum TextContentMode { GOAL_CONTENT, STARTING_CODE }
 
 const HintScene := preload("LessonPracticeHint.tscn")
 
+var list_index := -1
+
 var _edited_practice: Practice
-var _list_index := -1
 var _confirm_dialog_mode := -1
 var _file_dialog_mode := -1
 var _text_content_mode := -1
@@ -89,6 +91,9 @@ func _ready() -> void:
 	_text_content_dialog.connect("confirmed", self, "_on_text_content_confirmed")
 	_confirm_dialog.connect("confirmed", self, "_on_confirm_dialog_confirmed")
 
+	for control in [_script_slice_value, _validator_value, _goal_content_value, _starting_code_value]:
+		control.connect("focus_entered", self, "_on_text_field_focus_entered")
+
 
 func _update_theme() -> void:
 	if not is_inside_tree():
@@ -141,7 +146,7 @@ func get_drag_target_rect() -> Rect2:
 
 func get_drag_preview() -> Control:
 	var drag_preview := Label.new()
-	drag_preview.text = "Lesson practice #%d" % [_list_index + 1]
+	drag_preview.text = "Lesson practice #%d" % [list_index + 1]
 	drag_preview.add_stylebox_override("normal", _drag_preview_style)
 	return drag_preview
 
@@ -155,8 +160,8 @@ func disable_drop_target() -> void:
 
 
 func set_list_index(index: int) -> void:
-	_list_index = index
-	_title_label.text = "%d." % [_list_index + 1]
+	list_index = index
+	_title_label.text = "%d." % [list_index + 1]
 
 
 func set_practice(practice: Practice) -> void:
@@ -428,3 +433,7 @@ func _on_practice_hint_removed(item_index: int) -> void:
 	_edited_practice.emit_changed()
 
 	_rebuild_hints()
+
+
+func _on_text_field_focus_entered() -> void:
+	emit_signal("got_edit_focus")

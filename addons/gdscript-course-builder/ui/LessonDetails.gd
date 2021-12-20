@@ -5,6 +5,9 @@ signal lesson_title_changed(title)
 signal lesson_slug_changed(slug)
 signal lesson_tab_selected
 signal practice_tab_selected
+signal practice_got_edit_focus(index)
+
+const LessonPractice := preload("LessonPractice.gd")
 
 const ContentBlockScene := preload("LessonContentBlock.tscn")
 const QuizzContentBlockScene := preload("QuizzContentBlock.tscn")
@@ -147,12 +150,13 @@ func _recreate_practices() -> void:
 
 
 func _create_practice_item(practice: Practice, i: int) -> void:
-	var scene_instance = PracticeScene.instance()
-	_lesson_practices.add_item(scene_instance)
-	scene_instance.connect("practice_removed", self, "_on_practice_removed", [i])
+	var instance: LessonPractice = PracticeScene.instance()
+	_lesson_practices.add_item(instance)
+	instance.connect("practice_removed", self, "_on_practice_removed", [i])
+	instance.connect("got_edit_focus", self, "_on_practice_got_edit_focus", [instance])
 
-	scene_instance.set_list_index(i)
-	scene_instance.set_practice(practice)
+	instance.set_list_index(i)
+	instance.set_practice(practice)
 
 
 # Handlers
@@ -306,3 +310,7 @@ func _on_quizz_resource_changed(previous_quizz: Quizz, new_quizz: Quizz) -> void
 	var index := _edited_lesson.content_blocks.find(previous_quizz)
 	_edited_lesson.content_blocks[index] = new_quizz
 	_recreate_content_blocks()
+
+
+func _on_practice_got_edit_focus(lesson_practice: LessonPractice) -> void:
+	emit_signal("practice_got_edit_focus", lesson_practice.list_index)

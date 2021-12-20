@@ -43,10 +43,17 @@ func set_base_path(base_path: String) -> void:
 func set_lessons(lessons: Array) -> void:
 	_lesson_items.clear_items()
 
-	var i := 0
+	var item_index := 0
 	for lesson in lessons:
-		_create_lesson_item(lesson, i)
-		i += 1
+		var instance = ListItemScene.instance()
+		_lesson_items.add_item(instance)
+		instance.connect("item_select_requested", self, "_on_lesson_selected", [item_index])
+		instance.connect("item_removed", self, "_on_lesson_removed", [item_index])
+
+		instance.set_list_index(item_index)
+		instance.set_base_path(_base_path)
+		instance.set_lesson(lesson)
+		item_index += 1
 
 
 func set_selected_lesson(lesson_index: int) -> void:
@@ -74,18 +81,6 @@ func clear_selected_lesson() -> void:
 		selected_node.set_selected(false)
 
 	_selected_lesson = -1
-
-
-# Helpers
-func _create_lesson_item(lesson: Lesson, item_index: int) -> void:
-	var scene_instance = ListItemScene.instance()
-	_lesson_items.add_item(scene_instance)
-	scene_instance.connect("item_select_requested", self, "_on_lesson_selected", [item_index])
-	scene_instance.connect("item_removed", self, "_on_lesson_removed", [item_index])
-
-	scene_instance.set_list_index(item_index)
-	scene_instance.set_base_path(_base_path)
-	scene_instance.set_lesson(lesson)
 
 
 # Handlers

@@ -89,6 +89,8 @@ func _ready() -> void:
 	_lesson_details.connect("lesson_tab_selected", self, "_on_lesson_tab_selected")
 	_lesson_details.connect("practice_tab_selected", self, "_on_practice_tab_selected")
 
+	_lesson_details.connect("practice_got_edit_focus", self, "_on_practice_got_edit_focus")
+
 	_confirm_dialog.connect("confirmed", self, "_on_confirm_dialog_confirmed")
 
 
@@ -527,3 +529,7 @@ func _on_lesson_tab_selected() -> void:
 
 func _on_practice_tab_selected() -> void:
 	_current_practice_index = 0
+
+
+func _on_practice_got_edit_focus(index: int) -> void:
+	_current_practice_index = index
