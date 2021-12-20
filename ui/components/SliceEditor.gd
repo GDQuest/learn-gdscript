@@ -62,7 +62,6 @@ func _ready() -> void:
 			found += 1
 
 	errors_overlay.name = "ErrorsOverlay"
-	errors_overlay.theme = theme
 	add_child(errors_overlay)
 	errors_overlay.set_anchors_and_margins_preset(Control.PRESET_WIDE)
 	errors_overlay.margin_right = -scroll_offsets.x
@@ -73,12 +72,9 @@ func _ready() -> void:
 	connect("draw", self, "_update_overlays")
 
 
-func _get_configuration_warning() -> String:
-	if not theme:
-		return "Without a theme set, slice editor will misbehave"
-	if not theme.default_font:
-		return "Theme is required to have a default font set"
-	return ""
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and get_focus_owner() == self:
+		get_tree().set_input_as_handled()
 
 
 func _on_scrollbar_value_changed(value: float, direction: int) -> void:

@@ -10,8 +10,8 @@
 [ext_resource path="res://ui/components/ViewModeToggleButton.tscn" type="PackedScene" id=8]
 
 [node name="CodeEditor" type="PanelContainer"]
-margin_right = 756.0
-margin_bottom = 1080.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 7 )
@@ -21,13 +21,13 @@ __meta__ = {
 }
 
 [node name="Column" type="VBoxContainer" parent="."]
-margin_right = 756.0
+margin_right = 1920.0
 margin_bottom = 1080.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 3
 
 [node name="SliceEditor" type="TextEdit" parent="Column"]
-margin_right = 756.0
+margin_right = 1920.0
 margin_bottom = 868.0
 rect_min_size = Vector2( 500, 0 )
 size_flags_horizontal = 3
@@ -44,17 +44,17 @@ script = ExtResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Column"]
 margin_top = 884.0
-margin_right = 756.0
+margin_right = 1920.0
 margin_bottom = 1080.0
 
 [node name="Column" type="VBoxContainer" parent="Column/MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 736.0
+margin_right = 1900.0
 margin_bottom = 176.0
 
 [node name="Row" type="HBoxContainer" parent="Column/MarginContainer/Column"]
-margin_right = 716.0
+margin_right = 1880.0
 margin_bottom = 78.0
 
 [node name="SaveButton" type="Button" parent="Column/MarginContainer/Column/Row"]
@@ -80,7 +80,7 @@ hide_labels = true
 
 [node name="Row2" type="HBoxContainer" parent="Column/MarginContainer/Column"]
 margin_top = 94.0
-margin_right = 716.0
+margin_right = 1880.0
 margin_bottom = 156.0
 
 [node name="RestoreButton" type="Button" parent="Column/MarginContainer/Column/Row2"]

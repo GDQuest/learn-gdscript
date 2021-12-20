@@ -50,7 +50,7 @@ func _ready() -> void:
 	_navigate_to(course.lessons[0])
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("ui_back"):
 		_back()
 
