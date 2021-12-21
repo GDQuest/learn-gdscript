@@ -206,3 +206,6 @@ class Polygon:
 			elif p.y < top_left.y:
 				top_left.y = p.y
 		return Rect2(top_left, bottom_right - top_left)
+
+	func get_points() -> Array:
+		return points.duplicate()
