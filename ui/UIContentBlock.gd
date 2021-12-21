@@ -61,12 +61,13 @@ func setup(content_block: ContentBlock) -> void:
 func set_draw_panel(do_draw_panel: bool) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
+	
 	if do_draw_panel:
-		set("custom_styles/panel", preload("theme/panel_content_in_spoiler.tres"))
-		_margin.set("custom_constants/margin_right", MARGIN)
-		_margin.set("custom_constants/margin_left", MARGIN)
-		_margin.set("custom_constants/margin_top", MARGIN)
-		_margin.set("custom_constants/margin_bottom", MARGIN)
+		add_stylebox_override("panel", preload("theme/panel_content_in_spoiler.tres"))
+		_margin.add_constant_override("margin_left", MARGIN)
+		_margin.add_constant_override("margin_right", MARGIN)
+		_margin.add_constant_override("margin_top", MARGIN)
+		_margin.add_constant_override("margin_bottom", MARGIN)
 
 
 func _on_resized() -> void:

@@ -123,7 +123,7 @@ func set_use_small_font(value: bool) -> void:
 	use_small_font = value
 	if not is_inside_tree():
 		yield(self, "ready")
-	_button.set("custom_fonts/font", FONTS.small if use_small_font else FONTS.normal)
+	_button.add_font_override("font", FONTS.small if use_small_font else FONTS.normal)
 
 
 func set_text_color(value: Color) -> void:
