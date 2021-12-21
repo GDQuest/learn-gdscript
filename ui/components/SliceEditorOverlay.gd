@@ -60,15 +60,16 @@ func add_error(error: LanguageServerError) -> ErrorOverlay:
 	return error_overlay
 
 
-# FIXME: There seem to be stange behavior around tabs, may be an engine bug with the new methods, need to check.
 func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextEdit) -> Array:
 	var regions := []
 	var line_count := text_edit.get_line_count()
 
 	# Iterate through the lines of the error range and find the regions for each character
 	# span in the line, accounting for line wrapping.
-	var line_index := error_range.start.line - lines_offset
+	var start_line := error_range.start.line - lines_offset
 	var end_line = error_range.end.line - lines_offset
+	
+	var line_index = start_line
 	while line_index <= end_line:
 		if line_index < 0 or line_index >= line_count:
 			line_index += 1
@@ -80,7 +81,7 @@ func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextE
 		# Starting point of the first line is as reported by the LSP. For the following
 		# lines it's the first character in the line.
 		var char_start: int
-		if line_index == error_range.start.line:
+		if line_index == start_line:
 			char_start = error_range.start.character
 		else:
 			char_start = 0
