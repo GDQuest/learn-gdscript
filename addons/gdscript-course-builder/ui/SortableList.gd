@@ -54,7 +54,7 @@ func _ready() -> void:
 		_drag_source_tag = str(randi() % 100000 + 10000)
 
 	_item_list.connect("minimum_size_changed", self, "_on_item_list_size_changed")
-	get_tree().connect("screen_resized", self, "_on_item_list_size_changed")
+	connect("resized", self, "_on_item_list_size_changed")
 	_overlay_layer.connect("draw", self, "_draw_overlay")
 	
 	_update_hot_areas()
@@ -384,6 +384,9 @@ func get_item(item_index: int) -> Control:
 
 # Handlers
 func _on_item_list_size_changed() -> void:
+	if not is_inside_tree():
+		return
+	
 	yield(get_tree(), "idle_frame")
 	_overlay_layer.rect_min_size = Vector2(0, _item_list.rect_size.y)
 	_overlay_layer.rect_size = _overlay_layer.rect_min_size

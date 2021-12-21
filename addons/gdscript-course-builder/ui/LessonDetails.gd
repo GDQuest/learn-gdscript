@@ -58,6 +58,7 @@ func _ready() -> void:
 	_lesson_content_blocks.connect("item_requested_at_index", self, "_on_content_block_requested")
 	_add_practice_button.connect("pressed", self, "_on_practice_added")
 	_lesson_practices.connect("item_moved", self, "_on_practice_moved")
+	_lesson_practices.connect("item_requested_at_index", self, "_on_practice_added")
 
 	_edit_slug_button.connect("pressed", self, "_on_edit_slug_pressed")
 	_edit_slug_dialog.connect("confirmed", self, "_on_edit_slug_confirmed")
@@ -272,7 +273,7 @@ func _on_content_block_removed(item_index: int) -> void:
 
 
 ## Practices
-func _on_practice_added() -> void:
+func _on_practice_added(at_index: int = -1) -> void:
 	if not _edited_lesson:
 		return
 
@@ -282,7 +283,10 @@ func _on_practice_added() -> void:
 	)
 	practice_data.take_over_path(practice_path)
 
-	_edited_lesson.practices.append(practice_data)
+	if at_index >= 0 and at_index < _edited_lesson.practices.size():
+		_edited_lesson.practices.insert(at_index, practice_data)
+	else:
+		_edited_lesson.practices.append(practice_data)
 	_edited_lesson.emit_changed()
 
 	_recreate_practices()
