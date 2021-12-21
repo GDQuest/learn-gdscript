@@ -2,18 +2,18 @@ import argparse
 import os
 import re
 
-regex_bold = re.compile(r"\*\*(.*?)\*\*")
-regex_italics = re.compile(r"[\*_](.*?)[\*_]")
-regex_code = re.compile(r"(?!``)`(.+?)`")
+regex_bold = re.compile(r" \*\*(.*?)\*\*")
+regex_italics = re.compile(r" [\*_](.*?)[\*_]")
+regex_code = re.compile(r" (?!``)`(.+?)`")
 regex_url = re.compile(r"\[(.*?)\]\((.*?)\)")
 regex_strike = re.compile(r"~~(.*?)~~")
 regex_heading = re.compile(r"^#+\s+(.*)", re.MULTILINE)
 regex_html_comments = re.compile(r"\n?<!--.*?-->\n?", re.DOTALL)
 
 regex_map = {
-    regex_bold: r"[b]\1[/b]",
-    regex_italics: r"[i]\1[/i]",
-    regex_code: r"[code]\1[/code]",
+    regex_bold: r" [b]\1[/b]",
+    regex_italics: r" [i]\1[/i]",
+    regex_code: r" [code]\1[/code]",
     regex_url: r"[url=\2]\1[/url]",
     regex_strike: r"[s]\1[/s]",
     regex_heading: r"[font=res://ui/theme/fonts/font_title.tres]\1[/font]"
