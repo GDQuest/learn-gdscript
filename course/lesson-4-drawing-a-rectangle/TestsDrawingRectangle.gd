@@ -1,6 +1,6 @@
 extends PracticeTester
 
-var target_polygon := [Vector2(0, 0), Vector2(200, 0), Vector2(200, 120), Vector2(0, 200)]
+var target_polygon := [Vector2(0, 0), Vector2(200, 0), Vector2(200, 120), Vector2(0, 120), Vector2(0, 0)]
 
 
 func _init() -> void:

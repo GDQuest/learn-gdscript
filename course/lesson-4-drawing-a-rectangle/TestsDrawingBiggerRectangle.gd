@@ -13,9 +13,10 @@ func test_bigger_rectangle() -> String:
 	if polygons.empty():
 		return "Nothing drawn. Did you call move_forward()?"
 
-	var square: DrawingTurtle.Polygon = polygons[0]
-	square.points.sort()
-	if square.points != target_polygon:
+	var rectangle: DrawingTurtle.Polygon = polygons[0]
+	var points := rectangle.get_points()
+	points.sort()
+	if points != target_polygon:
 		return "The drawn shape is not a rectangle with a width of 220 and a length of 260."
 
 	return ""
