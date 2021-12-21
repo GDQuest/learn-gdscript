@@ -1,11 +1,17 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://course/lesson-1-what-code-is-like/first_practice/hand_ice.png" type="Texture" id=1]
-[ext_resource path="res://course/lesson-7-member-variables/SetSpriteScale.gd" type="Script" id=2]
 [ext_resource path="res://course/lesson-1-what-code-is-like/first_practice/godot_bottom.png" type="Texture" id=3]
 
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+func run():
+	scale = Vector2.ONE * 2
+"
+
 [node name="Node2D" type="Node2D"]
-script = ExtResource( 2 )
+script = SubResource( 1 )
 
 [node name="GodotBottom" type="Sprite" parent="."]
 position = Vector2( 0, -17 )

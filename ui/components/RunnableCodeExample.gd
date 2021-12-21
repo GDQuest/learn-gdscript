@@ -9,10 +9,10 @@ signal scene_instance_set
 const ERROR_NO_RUN_FUNCTION := "Scene %s doesn't have a run() function. The Run button won't work."
 
 export var scene: PackedScene setget set_scene
-export (String, MULTILINE) var gdscript_code := "" setget set_code
+export(String, MULTILINE) var gdscript_code := "" setget set_code
 export var center_in_frame := true setget set_center_in_frame
 
-var _scene_instance: Node
+var _scene_instance: Node setget _set_scene_instance
 
 onready var _gdscript_text_edit := $GDScriptCode as TextEdit
 onready var _run_button := $Frame/RunButton as Button
@@ -25,6 +25,16 @@ func _ready() -> void:
 	_frame.connect("resized", self, "_center_scene_instance")
 
 	CodeEditorEnhancer.enhance(_gdscript_text_edit)
+
+	# If there's no scene but there's an instance as a child of
+	# RunnableCodeExample, we use this as the scene instance.
+	#
+	# This simplifies the process of creating code examples.
+	if not Engine.editor_hint and not scene and get_child_count() > 2:
+		var last_child = get_child(get_child_count() - 1)
+		assert(last_child != _gdscript_text_edit and last_child != _frame)
+		remove_child(last_child)
+		_set_scene_instance(last_child)
 
 
 func _get_configuration_warning() -> String:
@@ -57,16 +67,7 @@ func set_scene(new_scene: PackedScene) -> void:
 		_scene_instance.queue_free()
 
 	if scene:
-		_scene_instance = scene.instance()
-		emit_signal("scene_instance_set")
-		_scene_instance.show_behind_parent = true
-		_frame.add_child(_scene_instance)
-		_center_scene_instance()
-		if _scene_instance.has_method("run"):
-			_run_button.show()
-		else:
-			_run_button.hide()
-			printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.filename])
+		_set_scene_instance(scene.instance())
 
 
 func set_center_in_frame(value: bool) -> void:
@@ -103,3 +104,16 @@ func _center_scene_instance() -> void:
 	if not center_in_frame or not _scene_instance:
 		return
 	_scene_instance.position = _frame.rect_size / 2
+
+
+func _set_scene_instance(new_scene_instance: Node) -> void:
+	_scene_instance = new_scene_instance
+	emit_signal("scene_instance_set")
+	_scene_instance.show_behind_parent = true
+	_frame.add_child(_scene_instance)
+	_center_scene_instance()
+	if _scene_instance.has_method("run"):
+		_run_button.show()
+	else:
+		_run_button.hide()
+		printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.filename])
