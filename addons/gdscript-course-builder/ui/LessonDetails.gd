@@ -35,6 +35,7 @@ onready var _add_content_block_button := (
 onready var _add_quizz_button := (
 	$Content/LessonContent/ContentBlocks/ToolBar/AddQuizzButton as Button
 )
+onready var _insert_content_block_dialog := $InsertContentBlockDialog as WindowDialog
 onready var _lesson_practices := $Content/LessonContent/Practices/ItemList as Control
 onready var _add_practice_button := (
 	$Content/LessonContent/Practices/ToolBar/AddPracticeButton as Button
@@ -54,11 +55,15 @@ func _ready() -> void:
 	_add_content_block_button.connect("pressed", self, "_on_content_block_added")
 	_add_quizz_button.connect("pressed", self, "_on_quizz_added")
 	_lesson_content_blocks.connect("item_moved", self, "_on_content_block_moved")
+	_lesson_content_blocks.connect("item_requested_at_index", self, "_on_content_block_requested")
 	_add_practice_button.connect("pressed", self, "_on_practice_added")
 	_lesson_practices.connect("item_moved", self, "_on_practice_moved")
 
 	_edit_slug_button.connect("pressed", self, "_on_edit_slug_pressed")
 	_edit_slug_dialog.connect("confirmed", self, "_on_edit_slug_confirmed")
+	
+	_insert_content_block_dialog.connect("block_selected", self, "_on_content_block_added")
+	_insert_content_block_dialog.connect("quiz_selected", self, "_on_quizz_added")
 
 
 func _update_theme() -> void:
@@ -193,7 +198,7 @@ func _on_edit_slug_confirmed() -> void:
 
 
 ## Content blocks
-func _on_content_block_added() -> void:
+func _on_content_block_added(at_index: int = -1) -> void:
 	if not _edited_lesson:
 		return
 
@@ -201,22 +206,28 @@ func _on_content_block_added() -> void:
 	var block_path = FileUtils.generate_random_lesson_subresource_path(_edited_lesson)
 	block_data.take_over_path(block_path)
 
-	_edited_lesson.content_blocks.append(block_data)
+	if at_index >= 0 and at_index < _edited_lesson.content_blocks.size():
+		_edited_lesson.content_blocks.insert(at_index, block_data)
+	else:
+		_edited_lesson.content_blocks.append(block_data)
 	_edited_lesson.emit_changed()
 
 	_recreate_content_blocks()
 	block_data.connect("changed", self, "_on_lesson_resource_changed")
 
 
-func _on_quizz_added() -> void:
+func _on_quizz_added(at_index: int = -1) -> void:
 	if not _edited_lesson:
 		return
 
 	var block_data := QuizzChoice.new()
 	var block_path = FileUtils.generate_random_lesson_subresource_path(_edited_lesson, "quizz")
 	block_data.take_over_path(block_path)
-
-	_edited_lesson.content_blocks.append(block_data)
+	
+	if at_index >= 0 and at_index < _edited_lesson.content_blocks.size():
+		_edited_lesson.content_blocks.insert(at_index, block_data)
+	else:
+		_edited_lesson.content_blocks.append(block_data)
 	_edited_lesson.emit_changed()
 
 	_recreate_content_blocks()
@@ -239,6 +250,14 @@ func _on_content_block_moved(item_index: int, new_index: int) -> void:
 	_edited_lesson.emit_changed()
 
 	_recreate_content_blocks()
+
+
+func _on_content_block_requested(at_index: int) -> void:
+	if not _edited_lesson or _edited_lesson.content_blocks.size() <= at_index:
+		return
+
+	_insert_content_block_dialog.insert_at_index = at_index
+	_insert_content_block_dialog.popup_centered(_insert_content_block_dialog.rect_min_size)
 
 
 func _on_content_block_removed(item_index: int) -> void:
