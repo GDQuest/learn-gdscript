@@ -101,7 +101,7 @@ func set_progress(new_progress: float) -> void:
 	_practice_info_panel.progress_bar.value = progress
 
 
-func _on_save_button_pressed() -> void:
+func _on_run_button_pressed() -> void:
 	_script_slice.current_text = _code_editor.get_text()
 	var script_file_name: String = _script_slice.get_script_properties().file_name
 	var script_text: String = _script_slice.current_full_text
@@ -147,7 +147,7 @@ func _on_code_editor_text_changed(_text: String) -> void:
 
 func _on_code_editor_button(which: String) -> void:
 	match which:
-		_code_editor.ACTIONS.SAVE:
-			_on_save_button_pressed()
+		_code_editor.ACTIONS.RUN:
+			_on_run_button_pressed()
 		_code_editor.ACTIONS.PAUSE:
 			_game_viewport.toggle_scene_pause()

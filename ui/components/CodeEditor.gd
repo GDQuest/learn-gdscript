@@ -5,7 +5,7 @@ extends PanelContainer
 signal text_changed(text)
 signal action(action)
 
-const ACTIONS := {"SAVE": "save", "PAUSE": "pause", "SOLUTION": "solution", "RESTORE": "restore"}
+const ACTIONS := {"RUN": "run", "PAUSE": "pause", "SOLUTION": "solution", "RESTORE": "restore"}
 
 export var split_container_path: NodePath setget set_split_container_path
 export (String, MULTILINE) var text := "" setget set_text, get_text
@@ -15,7 +15,7 @@ var _initial_text := ""
 var _split_container: SplitContainer = null
 
 onready var slice_editor := find_node("SliceEditor") as SliceEditor
-onready var _save_button := find_node("SaveButton") as Button
+onready var _run_button := find_node("RunButton") as Button
 onready var _pause_button := find_node("PauseButton") as Button
 onready var _solution_button := find_node("SolutionButton") as Button
 onready var _restore_button := find_node("RestoreButton") as Button
@@ -28,7 +28,7 @@ func _ready() -> void:
 	_restore_button.disabled = true
 	_solution_button.connect("pressed", self, "_on_solution_pressed")
 
-	_save_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.SAVE])
+	_run_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.RUN])
 	_pause_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.PAUSE])
 	_solution_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.SOLUTION])
 	_restore_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.RESTORE])
