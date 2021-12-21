@@ -40,7 +40,7 @@ func print_bus_message(
 	
 	if line >= show_lines_from and line <= show_lines_to:
 		message_node.origin_file = file_name
-		message_node.origin_line = line - show_lines_from + 1
+		message_node.origin_line = line - show_lines_from
 		message_node.origin_char = character
 	else:
 		message_node.external_error = true

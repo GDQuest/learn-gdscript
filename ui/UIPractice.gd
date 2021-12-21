@@ -33,6 +33,7 @@ func _ready() -> void:
 
 	_code_editor.connect("action", self, "_on_code_editor_button")
 	_code_editor.connect("text_changed", self, "_on_code_editor_text_changed")
+	_output_console.connect("reference_clicked", self, "_on_code_reference_clicked")
 
 	if test_practice and get_parent() == get_tree().root:
 		setup(test_practice)
@@ -160,3 +161,7 @@ func _on_code_editor_button(which: String) -> void:
 			_on_run_button_pressed()
 		_code_editor.ACTIONS.PAUSE:
 			_game_viewport.toggle_scene_pause()
+
+
+func _on_code_reference_clicked(_file_name: String, line: int, character: int) -> void:
+	_code_editor.slice_editor.highlight_line(line, character)

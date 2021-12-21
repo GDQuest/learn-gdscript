@@ -15,11 +15,8 @@ func _gui_input(event: InputEvent) -> void:
 	if mm:
 		var point = get_local_mouse_position()
 		for overlay in get_children():
-			overlay = overlay as ErrorOverlay
-			if not overlay or not is_instance_valid(overlay):
-				continue
-
-			if overlay.try_consume_mouse(point):
+			var error_overlay = overlay as ErrorOverlay
+			if is_instance_valid(error_overlay) and error_overlay.try_consume_mouse(point):
 				return
 
 
@@ -39,11 +36,13 @@ func update_overlays() -> void:
 		return
 
 	for overlay in get_children():
-		overlay = overlay as ErrorOverlay
-		if not overlay or not is_instance_valid(overlay):
-			continue
-
-		overlay.regions = _get_error_range_regions(overlay.error_range, text_edit)
+		var error_overlay = overlay as ErrorOverlay
+		if is_instance_valid(error_overlay):
+			error_overlay.regions = _get_error_range_regions(error_overlay.error_range, text_edit)
+		
+		var highlight_overlay = overlay as HighlightOverlay
+		if is_instance_valid(highlight_overlay):
+			highlight_overlay.regions = _get_line_regions(highlight_overlay.line_index, text_edit)
 
 
 func add_error(error: LanguageServerError) -> ErrorOverlay:
@@ -61,14 +60,38 @@ func add_error(error: LanguageServerError) -> ErrorOverlay:
 
 
 func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextEdit) -> Array:
+	var start_line := error_range.start.line - lines_offset
+	var end_line = error_range.end.line - lines_offset
+	
+	return _get_text_range_regions(start_line, error_range.start.character, end_line, error_range.end.character, text_edit)
+
+
+func add_line_highlight(line_index: int) -> void:
+	var text_edit := get_parent() as TextEdit
+	if not text_edit:
+		return
+
+	var highlight_overlay := HighlightOverlay.new()
+	highlight_overlay.line_index = line_index
+	highlight_overlay.regions = _get_line_regions(line_index, text_edit)
+	add_child(highlight_overlay)
+
+
+func _get_line_regions(line_index: int, text_edit: TextEdit) -> Array:
+	var line = text_edit.get_line(line_index)
+	var end_character = line.length() - 1 
+	
+	return _get_text_range_regions(line_index, 0, line_index, end_character, text_edit)
+
+
+func _get_text_range_regions(
+	start_line: int, start_char: int, end_line: int, end_char: int, text_edit: TextEdit
+) -> Array:
 	var regions := []
 	var line_count := text_edit.get_line_count()
 
 	# Iterate through the lines of the error range and find the regions for each character
 	# span in the line, accounting for line wrapping.
-	var start_line := error_range.start.line - lines_offset
-	var end_line = error_range.end.line - lines_offset
-	
 	var line_index = start_line
 	while line_index <= end_line:
 		if line_index < 0 or line_index >= line_count:
@@ -80,25 +103,25 @@ func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextE
 
 		# Starting point of the first line is as reported by the LSP. For the following
 		# lines it's the first character in the line.
-		var char_start: int
+		var first_char: int
 		if line_index == start_line:
-			char_start = error_range.start.character
+			first_char = start_char
 		else:
-			char_start = 0
+			first_char = 0
 
 		# Ending point of the last line is as reported by the LSP. For the preceding
 		# lines it's the last character in the line.
-		var char_end: int
+		var last_char: int
 		if line_index == end_line:
-			char_end = error_range.end.character
+			last_char = end_char
 		else:
-			char_end = line.length()
+			last_char = line.length()
 
 		# Iterate through the characters to find those which are visible in the TextEdit.
 		# This also handles wrapping, as characters report different vertical offset when
 		# that happens.
-		var char_index := char_start
-		while char_index <= char_end:
+		var char_index := first_char
+		while char_index <= last_char:
 			var char_rect = text_edit.get_rect_at_line_column(line_index, char_index)
 			if char_rect.position.x == -1 or char_rect.position.y == -1:
 				char_index += 1
@@ -116,7 +139,10 @@ func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextE
 			# If nothing else, just extend the region horizontal with the size of the next
 			# character.
 			else:
-				region.size.x += char_rect.size.x
+				# We could've just accumulated the size, but not all the characters report their
+				# correct sizes, namely tabs. This works for every case except when such character
+				# is the last one in the line. But that's not a big deal, since it's just whitespace.
+				region.size.x = (char_rect.position.x - region.position.x) + char_rect.size.x
 
 			char_index += 1
 
@@ -302,4 +328,49 @@ class ErrorUnderline:
 
 	func set_line_color(value: Color) -> void:
 		line_color = value
+		update()
+
+
+class HighlightOverlay:
+	extends Control
+	
+	const DEFAULT_ALPHA := 0.16
+	const DISSOLVE_DURATION := 1.5
+	
+	var line_index := -1
+	var regions := [] setget set_regions
+
+	var _current_alpha := 0.0
+	var _tweener: Tween
+
+	func _init() -> void:
+		name = "HighlightOverlay"
+		rect_min_size = Vector2(0, 0)
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		
+		_current_alpha = DEFAULT_ALPHA
+		_tweener = Tween.new()
+		add_child(_tweener)
+
+	func _ready() -> void:
+		set_anchors_and_margins_preset(Control.PRESET_WIDE)
+		
+		_tweener.connect("tween_all_completed", self, "queue_free")
+		
+		_tweener.interpolate_method(self, "_dissolve_step", DEFAULT_ALPHA, 0.0, DISSOLVE_DURATION)
+		_tweener.start()
+	
+	
+	func _draw() -> void:
+		for region in regions:
+			draw_rect(region, Color(1, 1, 1, _current_alpha), true)
+	
+	
+	func _dissolve_step(value: float) -> void:
+		_current_alpha = value
+		update()
+	
+	
+	func set_regions(hl_regions: Array) -> void:
+		regions = hl_regions
 		update()

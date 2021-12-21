@@ -97,6 +97,8 @@ func sync_text_with_slice() -> void:
 # _update_overlays() if you only want to update the visuals of existing overlays.
 func _reset_overlays() -> void:
 	errors_overlay.clean()
+	errors_overlay_message.hide()
+	
 	var slice_properties := LiveEditorState.current_slice
 	if slice_properties == null:
 		return
@@ -144,6 +146,19 @@ func set_errors(new_errors: Array) -> void:
 			assert(err is LanguageServerError, "Error %s isn't a valid LanguageServerError" % [err])
 	errors = new_errors
 	_reset_overlays()
+
+
+func highlight_line(line_index: int, at_char: int = 0) -> void:
+	if line_index < 0 or line_index >= get_line_count():
+		return
+	if at_char < 0:
+		at_char = 0
+	
+	cursor_set_line(line_index, false)
+	cursor_set_column(at_char)
+	center_viewport_to_cursor()
+	
+	errors_overlay.add_line_highlight(line_index)
 
 
 func _on_text_changed() -> void:

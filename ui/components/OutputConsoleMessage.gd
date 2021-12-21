@@ -47,7 +47,7 @@ func _update_visuals() -> void:
 	else:
 		_external_label.hide()
 		_file_name_label.text = origin_file
-		_location_label.text = "%d:%d" % [origin_line, origin_char]
+		_location_label.text = "%d:%d" % [origin_line + 1, origin_char]
 		_location_row.show()
 	
 	match message_severity:
