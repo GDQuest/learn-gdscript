@@ -16,5 +16,4 @@ func draw_rectangle():
 	move_forward(200)
 	turn_right(90)
 	move_forward(120)
-	turn_right(90)
 # /EXPORT draw_rectangle

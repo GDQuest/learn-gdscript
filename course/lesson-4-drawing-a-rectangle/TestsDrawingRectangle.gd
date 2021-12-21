@@ -1,6 +1,6 @@
 extends PracticeTester
 
-var target_polygon := [Vector2(0, 0), Vector2(200, 0), Vector2(200, 120), Vector2(0, 200), Vector2(0, 0)]
+var target_polygon := [Vector2(0, 0), Vector2(200, 0), Vector2(200, 120), Vector2(0, 200)]
 
 
 func _init() -> void:
@@ -13,9 +13,10 @@ func test_rectangle() -> String:
 	if polygons.empty():
 		return "Nothing drawn. Did you call move_forward()?"
 
-	var square: DrawingTurtle.Polygon = polygons[0]
-	square.points.sort()
-	if square.points != target_polygon:
+	var rectangle: DrawingTurtle.Polygon = polygons[0]
+	var points := rectangle.get_points()
+	points.sort()
+	if points != target_polygon:
 		return "The drawn shape is not a rectangle with a width of 200 and a length of 120."
 
 	return ""
