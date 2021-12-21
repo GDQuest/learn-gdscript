@@ -5,7 +5,7 @@ class_name UIContentBlock
 extends Control
 
 # Margin to apply to the panel in pixels when the block is inside a revealer.
-const MARGIN := 16.0
+const MARGIN := 16
 
 var min_width_to_show_image := 500.0
 

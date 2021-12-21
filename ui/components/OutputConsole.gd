@@ -4,7 +4,8 @@ extends PanelContainer
 
 signal reference_clicked(file_name, line_nb, character)
 
-const OutputConsoleMessage := preload("res://ui/components/OutputConsoleMessage.tscn")
+const OutputConsoleMessage := preload("res://ui/components/OutputConsoleMessage.gd")
+const OutputConsoleMessageScene := preload("res://ui/components/OutputConsoleMessage.tscn")
 
 onready var _scroll_container := $MarginContainer/ScrollContainer as ScrollContainer
 onready var _message_list := $MarginContainer/ScrollContainer/MarginContainer/MessageList as Control
@@ -27,7 +28,7 @@ func record_message_for_line(
 	var show_lines_from = slice_properties.start_offset
 	var show_lines_to = slice_properties.end_offset
 
-	var message_node := OutputConsoleMessage.instance()
+	var message_node := OutputConsoleMessageScene.instance() as OutputConsoleMessage
 	message_node.message_severity = type
 	message_node.message_text = text
 	
