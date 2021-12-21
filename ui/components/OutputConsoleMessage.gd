@@ -1,10 +1,12 @@
 extends PanelContainer
 
 signal show_code_requested(file_name, line, character)
+signal explain_error_requested(error_code, error_message)
 signal external_explain_requested
 
 var message_severity := -1 setget set_message_severity
 var message_text := "" setget set_message_text
+var message_code := -1
 
 var external_error := false setget set_external_error
 var origin_file := "" setget set_origin_file
@@ -110,4 +112,4 @@ func set_origin_char(value: int) -> void:
 
 
 func _on_explain_pressed() -> void:
-	pass
+	emit_signal("explain_error_requested", message_code, message_text)

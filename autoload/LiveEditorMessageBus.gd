@@ -12,7 +12,7 @@ extends Node
 
 enum MESSAGE_TYPE { PRINT, PRINTS, ERROR, WARNING, ASSERT }
 
-signal print_request(type, thing_to_print, file_name, line_nb, character)
+signal print_request(type, thing_to_print, file_name, line_nb, character, message_code)
 
 var script_replacements := RegExpGroup.collection(
 	{
@@ -85,14 +85,18 @@ func print_log(thing_to_print: Array, file_name: String, line_nb: int = 0, chara
 		prints(thing_to_print)
 
 
-func print_error(thing_to_print, file_name: String, line_nb: int = 0, character: int = 0) -> void:
-	print_request(MESSAGE_TYPE.ERROR, String(thing_to_print), file_name, line_nb, character)
+func print_error(
+	thing_to_print, file_name: String, line_nb: int = 0, character: int = 0, error_code: int = -1
+) -> void:
+	print_request(MESSAGE_TYPE.ERROR, String(thing_to_print), file_name, line_nb, character, error_code)
 	if print_to_output:
 		push_error(thing_to_print)
 
 
-func print_warning(thing_to_print, file_name: String, line_nb: int = 0, character: int = 0) -> void:
-	print_request(MESSAGE_TYPE.WARNING, String(thing_to_print), file_name, line_nb, character)
+func print_warning(
+	thing_to_print, file_name: String, line_nb: int = 0, character: int = 0, warning_code: int = -1
+) -> void:
+	print_request(MESSAGE_TYPE.WARNING, String(thing_to_print), file_name, line_nb, character, warning_code)
 	if print_to_output:
 		push_warning(thing_to_print)
 
@@ -113,6 +117,6 @@ func print_assert(
 # This is a proxy for emitting the signal, to work around Godot's lack of signal
 # typing.
 func print_request(
-	message_type: int, message: String, file_name: String, line_nb: int, character: int
+	message_type: int, message: String, file_name: String, line_nb: int, character: int, message_code: int = -1
 ) -> void:
-	emit_signal("print_request", message_type, message, file_name, line_nb, character)
+	emit_signal("print_request", message_type, message, file_name, line_nb, character, message_code)

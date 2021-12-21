@@ -17,6 +17,7 @@ var _practice: Practice
 
 onready var _game_container := find_node("Output") as PanelContainer
 onready var _game_viewport := _game_container.find_node("GameViewport") as GameViewport
+onready var _output_console := _game_container.find_node("Console") as OutputConsole
 
 onready var _practice_info_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
 onready var _documentation_panel := find_node("DocumentationPanel") as RichTextLabel
@@ -102,12 +103,16 @@ func set_progress(new_progress: float) -> void:
 
 
 func _on_run_button_pressed() -> void:
+	_output_console.clear_messages()
+
 	_script_slice.current_text = _code_editor.get_text()
 	var script_file_name: String = _script_slice.get_script_properties().file_name
 	var script_text: String = _script_slice.current_full_text
 	var nodes_paths: Array = _script_slice.get_script_properties().nodes_paths
+
 	var verifier := ScriptVerifier.new(self, script_text)
 	verifier.test()
+
 	var errors: Array = yield(verifier, "errors")
 	if not errors.empty():
 		_code_editor.slice_editor.errors = errors
@@ -117,12 +122,15 @@ func _on_run_button_pressed() -> void:
 				error.message,
 				script_file_name,
 				error.error_range.start.line,
-				error.error_range.start.character
+				error.error_range.start.character,
+				error.code
 			)
 		return
+
 	script_text = LiveEditorMessageBus.replace_script(script_file_name, script_text)
 	var script = GDScript.new()
 	script.source_code = script_text
+
 	var script_is_valid = script.reload()
 	if script_is_valid != OK:
 		LiveEditorMessageBus.print_error(
@@ -130,6 +138,7 @@ func _on_run_button_pressed() -> void:
 			script_file_name
 		)
 		return
+
 	_code_editor_is_dirty = false
 	LiveEditorState.update_nodes(script, nodes_paths)
 
