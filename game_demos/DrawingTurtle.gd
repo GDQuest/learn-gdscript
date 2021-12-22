@@ -62,6 +62,9 @@ func reset() -> void:
 	rotation_degrees = 0
 	_points.clear()
 	_polygons.clear()
+	for child in _canvas.get_children():
+		if child is Polygon:
+			_canvas.remove_child(child)
 	_current_offset = Vector2.ZERO
 
 
