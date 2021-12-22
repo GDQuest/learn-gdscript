@@ -45,13 +45,6 @@ func back() -> void:
 
 
 func navigate_to(metadata: String) -> void:
-	if (
-		metadata.begins_with("https://")
-		or metadata.begins_with("http://")
-		or metadata.begins_with("//")
-	):
-		OS.shell_open(metadata)
-		return
 
 	var regex_result := _url_normalization_regex.search(metadata)
 	if not regex_result:
@@ -84,12 +77,23 @@ func _notification(what: int) -> void:
 		back()
 
 
+func _open_rich_text_node_meta(metadata: String) -> void:
+	if (
+		metadata.begins_with("https://")
+		or metadata.begins_with("http://")
+		or metadata.begins_with("//")
+	):
+		OS.shell_open(metadata)
+		return
+	navigate_to(metadata)
+
+
 func connect_rich_text_node(rich_text_node: RichTextLabel) -> void:
 	if not rich_text_node.bbcode_enabled:
 		return
-	if rich_text_node.is_connected("meta_clicked", self, "navigate_to"):
+	if rich_text_node.is_connected("meta_clicked", self, "_open_rich_text_node_meta"):
 		return
-	rich_text_node.connect("meta_clicked", self, "navigate_to")
+	rich_text_node.connect("meta_clicked", self, "_open_rich_text_node_meta")
 
 
 func set_current_url(_new_url: String) -> void:
