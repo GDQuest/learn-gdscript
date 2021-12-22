@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://resources/Practice.gd" type="Script" id=1]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+
+[resource]
+script = ExtResource( 1 )
+title = "Draw a rectangle at a precise position"
+goal = "Draw a rectangle of 200 by 120 pixels at the X position of 120 pixels and Y position of 100 pixels.
+
+You need to replace the numbers in the code editor to draw the correct rectangle."
+starting_code = "position.x = 0
+position.y = 0
+draw_rectangle(0, 0)"
+hints = PoolStringArray(  )
+validator_script_path = "draw_rectangle_at_position/TestsDrawingRectangles.gd"
+script_slice_path = "draw_rectangle_at_position/DrawingRectangleAtPosition.live-editor/slices/DrawingRectangles.test_assignment.slice.tres"
+documentation_references = PoolStringArray( "position.x", "position.y", "draw_rectangle" )
+documentation_resource = ExtResource( 2 )
