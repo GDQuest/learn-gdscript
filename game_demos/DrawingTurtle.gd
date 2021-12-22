@@ -85,6 +85,7 @@ func play_draw_animation() -> void:
 	if not _points.empty():
 		_close_polygon()
 
+	position = Vector2.ZERO
 	for polygon in _polygons:
 		if not _is_playing:
 			break
@@ -116,7 +117,6 @@ func _close_polygon() -> void:
 	# position property. It works differently from jump() which offsets the
 	# turtle from its position.
 	polygon.position = position + _current_offset
-	position = Vector2.ZERO
 
 	polygon.line_2d.width = LINE_THICKNESS
 	polygon.line_2d.default_color = DEFAULT_COLOR
