@@ -31,6 +31,7 @@ func get_test_names() -> Array:
 
 func run_tests() -> TestResult:
 	var result := TestResult.new()
+	_prepare()
 	for method in _test_methods:
 		var error_message: String = call(method)
 		if error_message != "":
@@ -38,6 +39,7 @@ func run_tests() -> TestResult:
 		else:
 			# We pass the test name to display it in the interface.
 			result.passed_tests.push_back(_test_methods[method])
+	_clean_up()
 	return result
 
 
@@ -51,6 +53,18 @@ func _find_test_method_names() -> Dictionary:
 	for method in methods:
 		output[method] = method.trim_prefix("test_").capitalize()
 	return output
+
+
+# Virtual method.
+# Called before running tests.
+func _prepare() -> void:
+	pass
+
+
+# Virtual method.
+# Called after running tests.
+func _clean_up() -> void:
+	pass
 
 
 class TestResult:
