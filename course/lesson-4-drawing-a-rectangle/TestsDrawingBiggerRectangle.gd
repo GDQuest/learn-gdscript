@@ -7,7 +7,7 @@ func _init() -> void:
 	target_polygon.sort()
 
 
-func test_bigger_rectangle() -> String:
+func test_draw_rectangle_of_220_by_260() -> String:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	var polygons := turtle.get_polygons()
 	if polygons.empty():

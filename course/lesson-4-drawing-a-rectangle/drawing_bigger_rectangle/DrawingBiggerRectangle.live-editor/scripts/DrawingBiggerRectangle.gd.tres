@@ -1,12 +1,12 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/DrawingBiggerRectangle.gd" type="Script" id=1]
-[ext_resource path="res://addons/gdscript-slice-exporter/collections/ScriptProperties.gd" type="Script" id=2]
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/ScriptProperties.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/DrawingBiggerRectangle.gd" type="Script" id=2]
 
 [resource]
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 nodes_paths = [ NodePath("") ]
-script_file = ExtResource( 1 )
+script_file = ExtResource( 2 )
 original_script = "extends DrawingTurtle
 
 
@@ -17,7 +17,7 @@ func _run():
 
 
 func draw_rectangle():
-# EXPORT draw_rectangle
+	# EXPORT draw_rectangle
 	move_forward(220)
 	turn_right(90)
 	move_forward(260)
@@ -25,5 +25,5 @@ func draw_rectangle():
 	move_forward(220)
 	turn_right(90)
 	move_forward(260)
-# /EXPORT draw_rectangle
+	# /EXPORT draw_rectangle
 "

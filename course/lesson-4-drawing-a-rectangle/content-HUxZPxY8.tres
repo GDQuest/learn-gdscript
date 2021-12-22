@@ -4,13 +4,23 @@
 
 [resource]
 script = ExtResource( 1 )
-text = "Each instruction is represented by a function. Much like the [code]show()[/code] function we saw before, these instructions tell the turtle to do something.
+text = "The turtle is a little machine that moves forward, turns, and draws lines along its path.
 
-For example, the [code]move_forward[/code] function moves the turtle in the direction it's facing. It takes the distance to travel in pixels as its paramater.
+To make it draw, you give it a list of instructions: on each code line, you call one specific function.
 
-If we use 200 as a parameter in the [code]move_forward[/code] function, the turtle travels 200 pixels straight ahead.
+We prepared several functions for you:
 
-The turtle draws a white line where it has travelled.
+- The [code]move_forward()[/code] makes the turtle move forward over a given distance in pixels. 
+- The [code]turn_right()[/code] function makes the turtle turn to the right by a precise amount of degrees.
+- The [code]turn_left()[/code] function works the same as [code]turn_right()[/code] except the turtle turns to the left.
+
+Calling [code]move_forward()[/code] is similar to the [code]rotate()[/code] function you saw before.
+
+You need to specify the distance in pixels the turtle should move as the function's parameter, inside parentheses.
+
+For example, to move the turtle 200 pixels straight ahead, you'll write [code]move_forward(200)[/code].
+
+The turtle draws a white line as it moves.
 
 We'll use this line to draw shapes."
 visual_element_path = ""
