@@ -99,7 +99,7 @@ func play_draw_animation() -> void:
 			continue
 
 		rotation_degrees = 0.0
-		polygon.connect("line_end_moved", _sprite, "_change_sprite_position")
+		polygon.connect("line_end_moved", self, "_change_sprite_position")
 		_canvas.add_child(polygon)
 		polygon.start_draw_animation()
 		yield(polygon, "animation_finished")
