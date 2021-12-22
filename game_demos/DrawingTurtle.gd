@@ -14,12 +14,6 @@ extends Node2D
 const LINE_THICKNESS := 4.0
 const DEFAULT_COLOR := Color.white
 
-# Current color to draw with. Every segment registered by the turtle (when
-# calling move_forward()) will use this color.
-var draw_color := DEFAULT_COLOR
-# Speed at which the turtle draws the line in pixels per second.
-var draw_speed := 400.0
-
 var _points := []
 var _polygons := []
 var _current_offset := Vector2.ZERO
@@ -68,7 +62,6 @@ func reset() -> void:
 	rotation_degrees = 0
 	_points.clear()
 	_polygons.clear()
-	draw_color = DEFAULT_COLOR
 	_current_offset = Vector2.ZERO
 
 
@@ -130,7 +123,7 @@ class Polygon:
 
 	const LabelScene := preload("DrawingTurtleLabel.tscn")
 	var points := []
-	var time := 3.0
+	var draw_speed := 400.0
 	var line_2d := Line2D.new()
 	var _tween := Tween.new()
 	var _current_points := []
@@ -165,8 +158,7 @@ class Polygon:
 		_current_point_index += 1
 
 		var distance := starting_point.distance_to(destination)
-		var factor := distance / _total_distance
-		var timespan := time * factor
+		var animation_duration := distance / draw_speed
 
 		var label := LabelScene.instance() as PanelContainer
 		var label_text := label.get_node("Label") as Label
@@ -177,7 +169,7 @@ class Polygon:
 		_current_points.append(starting_point)
 		line_2d.points = _current_points
 		_tween.interpolate_method(
-			self, "_animate_point_position", starting_point, destination, timespan
+			self, "_animate_point_position", starting_point, destination, animation_duration
 		)
 		_tween.start()
 
