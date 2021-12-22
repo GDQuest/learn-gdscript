@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/components/SliceEditor.gd" type="Script" id=1]
 [ext_resource path="res://ui/icons/icon_pause.png" type="Texture" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://ui/icons/icon_error.png" type="Texture" id=5]
 [ext_resource path="res://ui/components/CodeEditor.gd" type="Script" id=6]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=7]
-[ext_resource path="res://ui/components/ViewModeToggleButton.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ui/icons/icon_console.png" type="Texture" id=9]
 
 [node name="CodeEditor" type="PanelContainer"]
@@ -21,6 +20,7 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+text = null
 
 [node name="Column" type="VBoxContainer" parent="."]
 margin_right = 1920.0
@@ -88,13 +88,6 @@ toggle_mode = true
 pressed = true
 text = "Console"
 icon = ExtResource( 9 )
-
-[node name="ViewModeToggleButton" parent="Column/MarginContainer/Column/Row" instance=ExtResource( 8 )]
-visible = false
-margin_left = 352.0
-margin_right = 692.0
-margin_bottom = 63.0
-hide_labels = true
 
 [node name="Row2" type="HBoxContainer" parent="Column/MarginContainer/Column"]
 margin_top = 79.0
