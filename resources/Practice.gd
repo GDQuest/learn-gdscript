@@ -13,7 +13,10 @@ export var documentation_resource: Resource = preload("res://course/Documentatio
 
 
 func set_documentation_resource(new_documentation_resource: Resource) -> void:
-	assert((new_documentation_resource == null) or (new_documentation_resource is Documentation), "resource `%s` is not a Documentation resource"%[new_documentation_resource.resource_path])
+	assert(
+		(new_documentation_resource == null) or (new_documentation_resource is Documentation),
+		"resource `%s` is not a Documentation resource" % [new_documentation_resource.resource_path]
+	)
 	documentation_resource = new_documentation_resource
 
 
@@ -27,3 +30,11 @@ func get_documentation_as_bbcode() -> String:
 			push_error("Documentation References were selected, but no documentation resource was set")
 		return ""
 	return get_documentation_resource().get_references_as_bbcode(documentation_references)
+
+
+func get_documentation_raw() -> Array:
+	if documentation_resource == null:
+		if documentation_references.size() > 0:
+			push_error("Documentation References were selected, but no documentation resource was set")
+		return []
+	return get_documentation_resource().get_references(documentation_references)

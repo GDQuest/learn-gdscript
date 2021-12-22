@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=36 format=2]
+[gd_resource type="Theme" load_steps=39 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_text.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/vscrollbar_grabber.tres" type="StyleBox" id=2]
@@ -29,6 +29,9 @@
 [ext_resource path="res://ui/icons/icon_hslider_tick.png" type="Texture" id=27]
 [ext_resource path="res://ui/icons/icon_slider_grabber_hl.png" type="Texture" id=28]
 [ext_resource path="res://ui/icons/icon_option_button_arrow.png" type="Texture" id=29]
+[ext_resource path="res://ui/theme/textedit_stylebox_readonly.tres" type="StyleBox" id=30]
+[ext_resource path="res://ui/theme/popupmenu_panel.tres" type="StyleBox" id=31]
+[ext_resource path="res://ui/theme/popupmenu_item_hover.tres" type="StyleBox" id=32]
 
 [sub_resource type="StyleBoxLine" id=1]
 color = Color( 0.290196, 0.294118, 0.388235, 1 )
@@ -97,6 +100,9 @@ OptionButton/constants/arrow_margin = 12
 OptionButton/icons/arrow = ExtResource( 29 )
 Panel/styles/panel = SubResource( 2 )
 PanelContainer/styles/panel = ExtResource( 19 )
+PopupMenu/colors/font_color_disabled = Color( 0.290196, 0.294118, 0.388235, 1 )
+PopupMenu/styles/hover = ExtResource( 32 )
+PopupMenu/styles/panel = ExtResource( 31 )
 ProgressBar/colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
 ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
 ProgressBar/fonts/font = ExtResource( 8 )
@@ -134,8 +140,8 @@ TextEdit/colors/completion_scroll_color = Color( 1, 1, 1, 1 )
 TextEdit/colors/completion_selected_color = Color( 0.26, 0.26, 0.27, 1 )
 TextEdit/colors/current_line_color = Color( 0.25, 0.25, 0.26, 0.8 )
 TextEdit/colors/executing_line_color = Color( 0.2, 0.8, 0.2, 0.4 )
-TextEdit/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
-TextEdit/colors/font_color_readonly = Color( 0.88, 0.88, 0.88, 0.5 )
+TextEdit/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+TextEdit/colors/font_color_readonly = Color( 0.878431, 0.878431, 0.878431, 1 )
 TextEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
 TextEdit/colors/function_color = Color( 0.4, 0.64, 0.81, 1 )
 TextEdit/colors/line_number_color = Color( 0.67, 0.67, 0.67, 0.4 )
@@ -143,7 +149,7 @@ TextEdit/colors/mark_color = Color( 1, 0.4, 0.4, 0.4 )
 TextEdit/colors/member_variable_color = Color( 0.9, 0.31, 0.35, 1 )
 TextEdit/colors/number_color = Color( 0.92, 0.58, 0.2, 1 )
 TextEdit/colors/safe_line_number_color = Color( 0.67, 0.78, 0.67, 0.6 )
-TextEdit/colors/selection_color = Color( 0.49, 0.49, 0.49, 1 )
+TextEdit/colors/selection_color = Color( 0.188235, 0.188235, 0.286275, 1 )
 TextEdit/colors/symbol_color = Color( 0.94, 0.94, 0.94, 1 )
 TextEdit/colors/word_highlighted_color = Color( 0.8, 0.9, 0.9, 0.15 )
 TextEdit/constants/completion_lines = 5
@@ -158,7 +164,7 @@ TextEdit/icons/tab = null
 TextEdit/styles/completion = null
 TextEdit/styles/focus = null
 TextEdit/styles/normal = ExtResource( 4 )
-TextEdit/styles/read_only = null
+TextEdit/styles/read_only = ExtResource( 30 )
 TooltipLabel/colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
 TooltipLabel/fonts/font = ExtResource( 1 )
 TooltipPanel/styles/panel = ExtResource( 22 )

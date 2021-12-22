@@ -86,13 +86,11 @@ func setup(practice: Practice) -> void:
 	_tester = (load(validator_path) as GDScript).new()
 	_tester.setup(_game_viewport.get_child(0), _script_slice)
 
-	var documentation_bbcode := _practice.get_documentation_as_bbcode()
-	if documentation_bbcode == "":
-		# We assume the panel is a direct child of a Revealer
-		var _documentation_panel_revealer = _documentation_panel.get_parent() as Revealer
-		_documentation_panel_revealer.hide()
+	var documentation_reference := _practice.get_documentation_raw()
+	if documentation_reference.size() == 0:
+		_practice_info_panel.clear_documentation()
 	else:
-		_documentation_panel.bbcode_text = documentation_bbcode
+		_practice_info_panel.set_documentation(documentation_reference)
 
 	_practice_info_panel.display_tests(_tester.get_test_names())
 	LiveEditorState.current_slice = _script_slice

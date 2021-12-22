@@ -1,6 +1,11 @@
 extends Resource
 class_name Documentation
 
+const COLOR_TYPE := Color(0.84511, 0.83905, 0.921875)
+const COLOR_MEMBER := Color(0.960784, 0.980392, 0.980392)
+const COLOR_PARAMETER := Color(0.84511, 0.83905, 0.921875)
+const COLOR_VALUE := Color(0.369263, 0.373399, 0.472656)
+
 export(String, FILE, "*.csv") var documentation_file := ""
 var references := {}
 
@@ -56,6 +61,7 @@ static func _parse_parameters(parameters_list_string: String) -> MethodParameter
 	var parameters := MethodParameterList.new()
 	if parameters_list_string == "":
 		return parameters
+	
 	var parameters_list := parameters_list_string.split(",")
 	for tuple_str in parameters_list:
 		var tuple: PoolStringArray = tuple_str.split(":")
@@ -83,9 +89,13 @@ class MethodParameter:
 		return "%s: %s = %s" % [name, type, default]
 
 	func to_bbcode() -> String:
+		var name_string := "[b][color=#%s]%s[/color][/b]" % [COLOR_PARAMETER.to_html(), name]
+		var type_string := "[color=#%s]%s[/color]" % [COLOR_TYPE.to_html(), type]
+		var value_string := "[b][color=#%s]%s[/color][/b]" % [COLOR_VALUE.to_html(), default]
+		
 		if required:
-			return "%s: [i]%s[/i]" % [name, type]
-		return "%s: [i]%s[/i] = %s" % [name, type, default]
+			return "%s: %s" % [name_string, type_string]
+		return "%s: %s = %s" % [name_string, type_string, value_string]
 
 
 class MethodParameterList:
@@ -112,4 +122,7 @@ class MethodSpecification:
 		return "%s %s(%s)" % [return_type, name, parameters]
 
 	func to_bbcode() -> String:
-		return "[i]%s[/i] %s(%s)\n\n%s" % [return_type, name, parameters.to_bbcode(), explanation]
+		var type_string := "[color=#%s]%s[/color]" % [COLOR_TYPE.to_html(), return_type]
+		var name_string := "[b][color=#%s]%s[/color][/b]" % [COLOR_MEMBER.to_html(), name]
+		
+		return "%s %s(%s)" % [type_string, name_string, parameters.to_bbcode()]
