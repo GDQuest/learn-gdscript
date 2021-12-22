@@ -15,7 +15,7 @@ var _tester: PracticeTester
 var _code_editor_is_dirty := false
 var _practice: Practice
 
-onready var _game_container := find_node("Output") as PanelContainer
+onready var _game_container := find_node("Output") as Control
 onready var _game_viewport := _game_container.find_node("GameViewport") as GameViewport
 onready var _output_console := _game_container.find_node("Console") as OutputConsole
 
@@ -33,6 +33,7 @@ func _ready() -> void:
 
 	_code_editor.connect("action", self, "_on_code_editor_button")
 	_code_editor.connect("text_changed", self, "_on_code_editor_text_changed")
+	_code_editor.connect("console_toggled", self, "_on_console_toggled")
 	_output_console.connect("reference_clicked", self, "_on_code_reference_clicked")
 
 	if test_practice and get_parent() == get_tree().root:
@@ -49,6 +50,8 @@ func _input(event: InputEvent) -> void:
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
 	if mb and mb.button_index == BUTTON_LEFT and mb.pressed and get_focus_owner():
+		# Makes clicks on the empty area to remove focus from various controls, specifically
+		# the code editor.
 		get_focus_owner().release_focus()
 
 
@@ -161,6 +164,10 @@ func _on_code_editor_button(which: String) -> void:
 			_on_run_button_pressed()
 		_code_editor.ACTIONS.PAUSE:
 			_game_viewport.toggle_scene_pause()
+
+
+func _on_console_toggled() -> void:
+	_output_console.visible = not _output_console.visible
 
 
 func _on_code_reference_clicked(_file_name: String, line: int, character: int) -> void:

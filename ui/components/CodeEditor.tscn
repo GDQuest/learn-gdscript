@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/components/SliceEditor.gd" type="Script" id=1]
 [ext_resource path="res://ui/icons/icon_pause.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://ui/components/CodeEditor.gd" type="Script" id=6]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=7]
 [ext_resource path="res://ui/components/ViewModeToggleButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://ui/icons/icon_console.png" type="Texture" id=9]
 
 [node name="CodeEditor" type="PanelContainer"]
 anchor_right = 1.0
@@ -61,23 +62,35 @@ mouse_filter = 2
 margin_right = 1880.0
 margin_bottom = 63.0
 mouse_filter = 2
+alignment = 1
 
 [node name="RunButton" type="Button" parent="Column/MarginContainer/Column/Row"]
-margin_right = 160.0
+margin_left = 676.0
+margin_right = 836.0
 margin_bottom = 63.0
 rect_min_size = Vector2( 160, 40 )
 text = "Run"
 icon = ExtResource( 3 )
 
 [node name="PauseButton" type="Button" parent="Column/MarginContainer/Column/Row"]
-margin_left = 176.0
-margin_right = 336.0
+margin_left = 852.0
+margin_right = 1012.0
 margin_bottom = 63.0
 rect_min_size = Vector2( 160, 40 )
 text = "Pause"
 icon = ExtResource( 2 )
 
+[node name="ConsoleButton" type="Button" parent="Column/MarginContainer/Column/Row"]
+margin_left = 1028.0
+margin_right = 1204.0
+margin_bottom = 63.0
+toggle_mode = true
+pressed = true
+text = "Console"
+icon = ExtResource( 9 )
+
 [node name="ViewModeToggleButton" parent="Column/MarginContainer/Column/Row" instance=ExtResource( 8 )]
+visible = false
 margin_left = 352.0
 margin_right = 692.0
 margin_bottom = 63.0
@@ -88,9 +101,11 @@ margin_top = 79.0
 margin_right = 1880.0
 margin_bottom = 141.0
 mouse_filter = 2
+alignment = 1
 
 [node name="RestoreButton" type="Button" parent="Column/MarginContainer/Column/Row2"]
-margin_right = 160.0
+margin_left = 725.0
+margin_right = 885.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 160, 40 )
 size_flags_horizontal = 0
@@ -99,8 +114,8 @@ text = "Reset"
 icon = ExtResource( 5 )
 
 [node name="SolutionButton" type="Button" parent="Column/MarginContainer/Column/Row2"]
-margin_left = 176.0
-margin_right = 429.0
+margin_left = 901.0
+margin_right = 1154.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 160, 40 )
 size_flags_horizontal = 0
