@@ -34,9 +34,7 @@ func run_tests() -> TestResult:
 	for method in _test_methods:
 		var error_message: String = call(method)
 		if error_message != "":
-			result.error = error_message
-			print_debug(error_message)
-			break
+			result.errors.append(error_message)
 		else:
 			# We pass the test name to display it in the interface.
 			result.passed_tests.push_back(_test_methods[method])
@@ -58,7 +56,7 @@ func _find_test_method_names() -> Dictionary:
 class TestResult:
 	# List of tests passed successfully in the test suite.
 	var passed_tests := []
-	var error := ""
+	var errors := []
 
 	func is_success() -> bool:
-		return error == ""
+		return errors.empty()
