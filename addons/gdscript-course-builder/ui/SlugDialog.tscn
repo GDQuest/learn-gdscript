@@ -3,10 +3,9 @@
 [ext_resource path="res://addons/gdscript-course-builder/ui/SlugDialog.gd" type="Script" id=1]
 
 [node name="SlugDialog" type="WindowDialog"]
-visible = true
 margin_right = 1920.0
 margin_bottom = 1080.0
-rect_min_size = Vector2( 320, 100 )
+rect_min_size = Vector2( 400, 160 )
 window_title = "Edit Slug"
 script = ExtResource( 1 )
 
@@ -44,6 +43,7 @@ margin_bottom = 42.0
 margin_top = 5.0
 margin_right = 47.0
 margin_bottom = 19.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "lesson-"
 
 [node name="LineEdit" type="LineEdit" parent="Margin/Layout/SlugText"]
