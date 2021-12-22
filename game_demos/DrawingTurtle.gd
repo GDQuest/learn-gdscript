@@ -112,7 +112,12 @@ func _close_polygon() -> void:
 		return
 
 	var polygon := Polygon.new()
-	polygon.position = _current_offset
+	# We want to test shapes being drawn at the correct position using the
+	# position property. It works differently from jump() which offsets the
+	# turtle from its position.
+	polygon.position = position + _current_offset
+	position = Vector2.ZERO
+
 	polygon.line_2d.width = LINE_THICKNESS
 	polygon.line_2d.default_color = DEFAULT_COLOR
 	polygon.points = PoolVector2Array(_points)
@@ -183,7 +188,7 @@ class Polygon:
 		var new_points := _current_points.duplicate()
 		new_points.push_back(point)
 		line_2d.points = new_points
-		emit_signal("line_end_moved", point)
+		emit_signal("line_end_moved", point + position)
 
 	# Returns the local bounds of the polygon. That is to say, it only takes the
 	# point into account in local space, but not the polygon's `position`.
