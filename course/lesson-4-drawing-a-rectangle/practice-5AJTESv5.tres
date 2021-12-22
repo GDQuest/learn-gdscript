@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+title = "Drawing a rectangle"
+goal = "Add the correct parameters to the functions [code]move_forward()[/code] and [code]turn_right()[/code] to draw a rectangle with a width of 200 pixels, and a height of 120 pixels.
+
+We wrote the first parameter for you.
+
+In the next practice, you'll use the same functions to draw a bigger rectangle."
+starting_code = "move_forward(200)
+turn_right()
+move_forward()
+turn_right()
+move_forward()
+turn_right()
+move_forward()"
+hints = PoolStringArray( "The [code]turn_right[/code] function takes how many degress to rotate as a parameter.", "The [code]move_forward[/code] function takes how many pixels to move as a parameter." )
+validator_script_path = "TestsDrawingRectangle.gd"
+script_slice_path = "drawing_rectangle/DrawingRectangle.live-editor/slices/DrawingRectangle.draw_rectangle.slice.tres"
+documentation_references = PoolStringArray( "move_forward", "turn_right" )
+documentation_resource = ExtResource( 1 )

@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/lesson-4-drawing-a-rectangle/visuals/DemoDrawingRectangle.tscn" type="PackedScene" id=2]
+
+[node name="ExampleRectangle" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 851.0
+margin_bottom = 267.0
+scene = ExtResource( 2 )
+gdscript_code = "move_forward(200)
+turn_right(90)
+move_forward(120)
+turn_right(90)
+move_forward(200)
+turn_right(90)
+move_forward(120)"
