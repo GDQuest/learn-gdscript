@@ -33,10 +33,14 @@ onready var _tween: Tween = $Tween
 func _ready() -> void:
 	_button.pressed = is_expanded
 	_button.connect("toggled", self, "set_is_expanded")
+	
+	_tween.connect("tween_completed", self, "_on_tween_completed")
+	
 	for child in get_children():
 		if child == _button or not child is Control:
 			continue
-		_contents.append(child)
+		_add_content_child(child)
+	
 	# Through the constructor setter call, the _contents variable will be empty,
 	# so we need to call this again.
 	set_is_expanded(is_expanded)
@@ -49,14 +53,18 @@ func _notification(what: int) -> void:
 
 func add_child(node: Node, _legible_unique_name := false) -> void:
 	.add_child(node)
-	_contents.append(node)
+	if node is Control:
+		_add_content_child(node)
+	
 	set_is_expanded(is_expanded)
 	update_min_size()
 
 
 func clear_contents() -> void:
 	for node in _contents:
-		node.queue_free()
+		_remove_content_child(node)
+	
+	_contents = []
 
 
 func get_contents() -> Array:
@@ -97,6 +105,7 @@ func set_revealer_height(new_revealer_height: float) -> void:
 func update_min_size() -> void:
 	if not is_instance_valid(_parent) or _parent == null:
 		return
+	
 	var rect_size_x := min(rect_size.x, _parent.rect_size.x)
 	_button.rect_size.x = rect_size_x
 	if _tween.is_inside_tree():
@@ -139,11 +148,25 @@ func _rotate_chevron(rotation_degrees: float, time := ANIM_DURATION) -> void:
 	if not _tween.is_inside_tree():
 		_chevron.rect_rotation = rotation_degrees
 		return
+	
 	_tween.stop_all()
 	_tween.interpolate_property(
 		_chevron, "rect_rotation", _chevron.rect_rotation, rotation_degrees, time
 	)
 	_tween.start()
+
+
+func _add_content_child(node: Control) -> void:
+	_contents.append(node)
+	node.connect("resized", self, "sort_children")
+	pass
+
+
+func _remove_content_child(node: Control) -> void:
+	node.disconnect("resized", self, "sort_children")
+	
+	remove_child(node)
+	node.queue_free()
 
 
 func _fit_child(control: Control, top := 0.0, node_padding := 0.0) -> float:
@@ -154,3 +177,10 @@ func _fit_child(control: Control, top := 0.0, node_padding := 0.0) -> float:
 	fit_child_in_rect(control, rect)
 	control.rect_size.x = size.x
 	return top + height
+
+
+func _on_tween_completed(object: Object, key: NodePath) -> void:
+	if object != self or key != ":rect_min_size:y":
+		return
+	
+	rect_size.y = rect_min_size.y
