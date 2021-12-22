@@ -33,7 +33,5 @@ func test_draw_rectangles_of_varying_sizes() -> String:
 		if p.points == swapped_rects[index]:
 			return "The length and height are inverted. Did you swap the length and height function arguments?"
 		elif p.points != expected_rects[index]:
-			print(p.points)
-			print(expected_rects[index])
 			return "The drawn shapes don't have the expected length and height. Did you forget to use the length and height parameter?"
 	return ""
