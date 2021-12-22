@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://resources/Practice.gd" type="Script" id=1]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+
+[resource]
+script = ExtResource( 1 )
+title = "Draw rectangles at different positions"
+goal = "Draw three squares of size 100 by 100 that are 100 pixels apart on the horizontal axis. In other words, there should be a 100-pixel gap between two squares.
+
+You should draw the squares starting at the position (100, 100). This means you should position the first square at 100 on the X axis and 100 on the Y axis."
+starting_code = ""
+hints = PoolStringArray( "As each square is 100 pixels wide, to separate them by 100 pixels, you need to move the turtle by 200 pixels in total.", "You need to change the turtle\'s X position before drawing each square." )
+validator_script_path = "draw_rectangles_at_positions/TestsDrawingRectangles.gd"
+script_slice_path = "draw_rectangles_at_positions/DrawingMultipleRectangles.live-editor/slices/DrawingMultipleRectangles.test_assignment.slice.tres"
+documentation_references = PoolStringArray( "draw_rectangle", "position.x", "position.y" )
+documentation_resource = ExtResource( 2 )
