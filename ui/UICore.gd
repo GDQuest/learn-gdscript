@@ -16,7 +16,7 @@ onready var _settings_popup := $SettingsPopup as SettingsPopup
 onready var _report_form_popup := $ReportFormPopup as ReportFormPopup
 
 
-func _ready():
+func _ready() -> void:
 	_settings_popup.hide()
 	_report_form_popup.hide()
 	
@@ -26,6 +26,10 @@ func _ready():
 	
 	Events.connect("report_form_requested", _report_form_popup, "show")
 	Events.connect("settings_requested", _settings_popup, "show")
+	
+	if NavigationManager.current_url != "":
+		_on_course_requested()
+		return
 	
 	load_immediately(_welcome_screen)
 

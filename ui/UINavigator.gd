@@ -12,9 +12,7 @@ var _screens_stack := []
 var _matches := {}
 var _breadcrumbs: PoolStringArray
 # Used for transition animations.
-var _is_mobile_platform := OS.get_name() in ["Android", "HTML5", "iOS"]
-var _path_regex := RegExpGroup.compile("^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)")
-var _current_url := ScreenUrl.new(_path_regex, "res://")
+
 var _lesson_index := 0 setget _set_lesson_index
 var _lesson_count: int = course.lessons.size()
 
@@ -32,40 +30,33 @@ onready var _tween := $Tween as Tween
 
 
 func _ready() -> void:
-	Events.connect("lesson_end_popup_closed", self, "_back")
-	Events.connect("lesson_start_requested", self, "_navigate_to")
-	Events.connect("practice_start_requested", self, "_navigate_to")
+	NavigationManager.connect("back_navigation_requested", self, "_back")
+	NavigationManager.connect("navigation_requested", self, "_navigate_to")
+	
+	#Events.connect("lesson_end_popup_closed", Navigation, "back")
+	#Events.connect("lesson_start_requested", Navigation, "_navigate_to")
+	#Events.connect("practice_start_requested", self, "_navigate_to")
 	Events.connect("practice_completed", self, "_on_Events_practice_completed")
 
-	_back_button.connect("pressed", self, "_back")
+	_back_button.connect("pressed", NavigationManager, "back")
 	_settings_button.connect("pressed", Events, "emit_signal", ["settings_requested"])
 	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
 
-	if _is_mobile_platform:
-		get_tree().set_auto_accept_quit(false)
-
-	# Registers the js listener
-	if _js_available:
-		_js_window.addEventListener("popstate", _js_popstate_listener_ref)
-	_navigate_to(course.lessons[0])
+	if NavigationManager.current_url == "":
+		NavigationManager.navigate_to(course.lessons[0].resource_path)
+	else:
+		_navigate_to()
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("ui_back"):
-		_back()
-
-
-# Handle back requests
-func _notification(what: int) -> void:
-	if not _is_mobile_platform:
-		return
-	if what in [MainLoop.NOTIFICATION_WM_QUIT_REQUEST, MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST]:
-		_back()
+		NavigationManager.back()
 
 
 # Pops the last screen from the stack
 func _back() -> void:
 	if _screens_stack.size() < 2:
+		print("TODO: return to main screen?")
 		return
 
 	_breadcrumbs.remove(_breadcrumbs.size() - 1)
@@ -76,9 +67,9 @@ func _back() -> void:
 	yield(self, "transition_completed")
 	current_screen.queue_free()
 
-
-# Instantates a screen based on the `target` resource and transitions to it.
-func _navigate_to(target: Resource, clear_history := false) -> void:
+func _navigate_to() -> void:
+	var current_resource_path = NavigationManager.current_url
+	var target: Resource = load(current_resource_path)
 	var screen: Control
 	if target is Practice:
 		screen = preload("UIPractice.tscn").instance()
@@ -87,12 +78,6 @@ func _navigate_to(target: Resource, clear_history := false) -> void:
 	else:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
 		return
-
-	if clear_history:
-		for child in _screen_container.get_children():
-			child.queue_free()
-		_screens_stack.clear()
-		_breadcrumbs = PoolStringArray()
 
 	# warning-ignore:unsafe_method_access
 	screen.setup(target)
@@ -118,21 +103,6 @@ func _navigate_to(target: Resource, clear_history := false) -> void:
 			and not node.is_connected("meta_clicked", self, "_on_RichTextLabel_meta_clicked")
 		):
 			node.connect("meta_clicked", self, "_on_RichTextLabel_meta_clicked")
-
-
-func _on_RichTextLabel_meta_clicked(metadata: String) -> void:
-	if (
-		metadata.begins_with("https://")
-		or metadata.begins_with("http://")
-		or metadata.begins_with("//")
-	):
-		OS.shell_open(metadata)
-	else:
-		var resource := load(metadata)
-		assert(
-			resource is Resource, "Attempting to load invalid resource from path '%s'" % metadata
-		)
-		_navigate_to(resource)
 
 
 # Transitions a screen in. This is there as a placeholder, we probably want
@@ -185,7 +155,7 @@ func _on_Events_practice_completed(practice: Practice) -> void:
 	if is_last_practice:
 		_set_lesson_index(_lesson_index + 1)
 	else:
-		_navigate_to(practices[index + 1])
+		NavigationManager.navigate_to(practices[index + 1].resource_path)
 
 
 func _set_lesson_index(index: int) -> void:
@@ -194,87 +164,12 @@ func _set_lesson_index(index: int) -> void:
 		# TODO: figure out some screen at the end of the course
 		print("You reached the end of the course!")
 	else:
-		_navigate_to(course.lessons[index], true)
+		_clear_history_stack()
+		NavigationManager.navigate_to(course.lessons[index].resource_path)
 
-
-class ScreenUrl:
-	var path: String
-	var protocol: String
-	var href: String setget , _to_string
-	var is_valid := true
-
-	func _init(_path_regex: RegEx, data: String) -> void:
-		var regex_result := _path_regex.search(data)
-		protocol = regex_result.get_string("prefix")
-		path = regex_result.get_string("url")
-		if regex_result:
-			if protocol in ["//", "/"]:
-				protocol = "res://"
-		else:
-			is_valid = false
-		if not path:
-			path = "/"
-
-	func _to_string() -> String:
-		return protocol + path
-
-
-################################################################################
-#
-# UNTESTED, EXPERIMENTAL JS SUPPORT
-#
-
-var _js_available := OS.has_feature("JavaScript")
-var _js_window: JavascriptWindow = JavaScript.get_interface("window") if _js_available else null
-var _js_history: JavascriptHistory = JavaScript.get_interface("history") if _js_available else null
-var _js_popstate_listener_ref := (
-	JavaScript.create_callback(self, "_js_popstate_listener")
-	if _js_available
-	else null
-)
-var _temporary_disable_listener := false
-
-
-func _pop_javascript_state() -> void:
-	if not _js_available:
-		return
-	_temporary_disable_listener = true
-	_js_history.back()
-	yield(get_tree(), "idle_frame")
-	_temporary_disable_listener = false
-
-
-# Handles user pressing back button in browser
-func _js_popstate_listener(args) -> void:
-	if _temporary_disable_listener:
-		return
-	var event = args[0]
-	var _url = event.state
-	_back()
-
-
-class JavascriptHistory:
-	extends JavaScriptObject
-
-	func back():
-		pass
-
-
-class JavascriptWindow:
-	extends JavaScriptObject
-	var location := {"pathname": ""}
-
-	func addEventListener(_event: String, _ref: JavaScriptObject) -> void:
-		pass
-
-# If a url is set on the page, uses that
-# TODO: we removed the open_url function, gotta restore it first if needed or delete this.
-#func _load_current_browser_url() -> void:
-#	if not _js_available:
-#		return
-#	var state = _js_history.state
-#	if state:
-#		var url = state.url
-#		open_url(url)
-#	if _js_window.location.pathname:
-#		open_url(_js_window.location.pathname)
+		
+func _clear_history_stack() -> void:
+	for child in _screen_container.get_children():
+			child.queue_free()
+	_screens_stack.clear()
+	_breadcrumbs = PoolStringArray()

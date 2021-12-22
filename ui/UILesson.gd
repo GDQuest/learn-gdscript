@@ -65,4 +65,3 @@ func setup(lesson: Lesson) -> void:
 		var button: UIPracticeButton = PracticeButtonScene.instance()
 		button.setup(practice)
 		_practices_container.add_child(button)
-		button.connect("pressed", Events, "emit_signal", ["practice_start_requested", practice])
