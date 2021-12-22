@@ -125,7 +125,7 @@ class Polygon:
 	extends Node2D
 
 	const LabelScene := preload("DrawingTurtleLabel.tscn")
-	var points := []
+	var points := [] setget , get_points
 	var draw_speed := 400.0
 	var line_2d := Line2D.new()
 	var _tween := Tween.new()
