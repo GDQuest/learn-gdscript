@@ -17,6 +17,9 @@ var _lesson_index := 0 setget _set_lesson_index
 var _lesson_count: int = course.lessons.size()
 
 onready var _back_button := $VBoxContainer/Buttons/MarginContainer/HBoxContainer/BackButton as Button
+onready var _outliner_button := (
+	$VBoxContainer/Buttons/MarginContainer/HBoxContainer/OutlinerButton as Button
+)
 onready var _label := $VBoxContainer/Buttons/MarginContainer/HBoxContainer/BreadCrumbs as Label
 onready var _settings_button := (
 	$VBoxContainer/Buttons/MarginContainer/HBoxContainer/SettingsButton as Button
@@ -25,20 +28,26 @@ onready var _report_button := (
 	$VBoxContainer/Buttons/MarginContainer/HBoxContainer/ReportButton as Button
 )
 
-onready var _screen_container := $VBoxContainer/PanelContainer as Container
+onready var _screen_container := $VBoxContainer/ScreenContainer as Container
+onready var _course_outliner := $VBoxContainer/CourseOutliner as Container
 onready var _tween := $Tween as Tween
 
 
 func _ready() -> void:
-	NavigationManager.connect("back_navigation_requested", self, "_back")
+	_course_outliner.course = course
+	
 	NavigationManager.connect("navigation_requested", self, "_navigate_to")
+	NavigationManager.connect("back_navigation_requested", self, "_navigate_back")
+	NavigationManager.connect("outliner_navigation_requested", self, "_navigate_to_outliner")
 	
 	#Events.connect("lesson_end_popup_closed", Navigation, "back")
 	#Events.connect("lesson_start_requested", Navigation, "_navigate_to")
 	#Events.connect("practice_start_requested", self, "_navigate_to")
 	Events.connect("practice_completed", self, "_on_Events_practice_completed")
 
-	_back_button.connect("pressed", NavigationManager, "back")
+	_outliner_button.connect("pressed", NavigationManager, "navigate_to_outliner")
+	_back_button.connect("pressed", NavigationManager, "navigate_back")
+	
 	_settings_button.connect("pressed", Events, "emit_signal", ["settings_requested"])
 	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
 
@@ -54,9 +63,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 # Pops the last screen from the stack
-func _back() -> void:
+func _navigate_back() -> void:
+	# Nothing to go back to, open the outliner.
 	if _screens_stack.size() < 2:
-		print("TODO: return to main screen?")
+		_navigate_to_outliner()
 		return
 
 	_breadcrumbs.remove(_breadcrumbs.size() - 1)
@@ -66,6 +76,12 @@ func _back() -> void:
 	_transition_to(next_screen, current_screen, false)
 	yield(self, "transition_completed")
 	current_screen.queue_free()
+
+
+func _navigate_to_outliner() -> void:
+	_screen_container.hide()
+	_course_outliner.show()
+
 
 func _navigate_to() -> void:
 	var current_resource_path = NavigationManager.current_url
@@ -78,6 +94,9 @@ func _navigate_to() -> void:
 	else:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
 		return
+
+	_course_outliner.hide()
+	_screen_container.show()
 
 	# warning-ignore:unsafe_method_access
 	screen.setup(target)

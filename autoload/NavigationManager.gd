@@ -1,13 +1,14 @@
 extends Node
 
+signal navigation_requested()
+signal back_navigation_requested()
+signal outliner_navigation_requested()
+
 var _url_normalization_regex := RegExpGroup.compile("^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)\\.(?<extension>t?res)")
 var history := PoolStringArray()
 var current_url := "" setget set_current_url, get_current_url
 var is_mobile_platform := OS.get_name() in ["Android", "HTML5", "iOS"]
 var arguments := {}
-
-signal back_navigation_requested()
-signal navigation_requested()
 
 
 func _init() -> void:
@@ -34,8 +35,13 @@ func get_history(n := 1) -> String:
 	return history[history.size() - n]
 
 
-func back() -> void:
+func navigate_back() -> void:
+	# Nothing to go back to, open the outliner.
 	if history.size() < 2:
+		history.resize(0)
+		_js_to_outliner()
+		
+		emit_signal("outliner_navigation_requested")
 		return
 
 	history.remove(history.size() - 1)
@@ -44,8 +50,14 @@ func back() -> void:
 	emit_signal("back_navigation_requested")
 
 
-func navigate_to(metadata: String) -> void:
+func navigate_to_outliner() -> void:
+	history.resize(0)
+	_js_to_outliner()
+	
+	emit_signal("outliner_navigation_requested")
 
+
+func navigate_to(metadata: String) -> void:
 	var regex_result := _url_normalization_regex.search(metadata)
 	if not regex_result:
 		push_error("`%s` is not a valid resource path"%[metadata])
@@ -74,7 +86,7 @@ func _notification(what: int) -> void:
 	if not is_mobile_platform:
 		return
 	if what in [MainLoop.NOTIFICATION_WM_QUIT_REQUEST, MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST]:
-		back()
+		navigate_back()
 
 
 func _open_rich_text_node_meta(metadata: String) -> void:
@@ -148,7 +160,7 @@ func _on_js_popstate(_args: Array) -> void:
 		_temporary_disable_back_listener = false
 		return
 	# var event = args[0]
-	back()
+	navigate_back()
 
 
 # Call this from GDScript to synchronize the browser. Safe to call in all environments, will no-op
@@ -164,11 +176,23 @@ func _js_back() -> void:
 
 # Call this from GDScript to synchronize the browser. Safe to call in all environments, will no-op
 # when JS is not available.
+func _js_to_outliner() -> void:
+	if not _js_available:
+		return
+	# if we don't set this, `_on_js_popstate` is called
+	_temporary_disable_back_listener = true
+	# warning-ignore:unsafe_method_access
+	_js_history.go(-_js_history.length)
+
+
+# Call this from GDScript to synchronize the browser. Safe to call in all environments, will no-op
+# when JS is not available.
 func _push_javascript_state(url: String) -> void:
 	if not _js_available:
 		return
 	# warning-ignore:unsafe_method_access
 	_js_history.pushState(url, '', url)
+
 
 class NormalizedUrl:
 	var protocol := ""

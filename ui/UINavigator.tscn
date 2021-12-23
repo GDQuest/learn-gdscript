@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://ui/UINavigator.gd" type="Script" id=4]
 [ext_resource path="res://ui/icons/icon_settings.png" type="Texture" id=5]
 [ext_resource path="res://ui/icons/icon_report.png" type="Texture" id=6]
+[ext_resource path="res://ui/components/CourseOutliner.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ui/icons/navigation_back.png" type="Texture" id=8]
+[ext_resource path="res://ui/icons/navigation_outliner.png" type="Texture" id=9]
 
 [node name="UINavigator" type="PanelContainer"]
 anchor_right = 1.0
@@ -43,22 +46,33 @@ margin_left = 12.0
 margin_right = 1908.0
 margin_bottom = 48.0
 
-[node name="BackButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
-margin_right = 30.0
+[node name="OutlinerButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
+modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
+margin_right = 32.0
 margin_bottom = 48.0
-text = "<"
+hint_tooltip = "Open the course index"
+icon = ExtResource( 9 )
+flat = true
+
+[node name="BackButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
+modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
+margin_left = 48.0
+margin_right = 80.0
+margin_bottom = 48.0
+hint_tooltip = "Go to the previous page"
+icon = ExtResource( 8 )
 flat = true
 
 [node name="BreadCrumbs" type="Label" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
-margin_left = 46.0
+margin_left = 96.0
 margin_top = 10.0
-margin_right = 46.0
+margin_right = 96.0
 margin_bottom = 38.0
 custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
 custom_fonts/font = ExtResource( 2 )
 
 [node name="Spacer" type="Control" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
-margin_left = 62.0
+margin_left = 112.0
 margin_right = 1768.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
@@ -79,12 +93,15 @@ hint_tooltip = "Configure the app"
 icon = ExtResource( 5 )
 flat = true
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="ScreenContainer" type="PanelContainer" parent="VBoxContainer"]
 show_behind_parent = true
 margin_top = 48.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="CourseOutliner" parent="VBoxContainer" instance=ExtResource( 7 )]
+visible = false
 
 [node name="Tween" type="Tween" parent="."]

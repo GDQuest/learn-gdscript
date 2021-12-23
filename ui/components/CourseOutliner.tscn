@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ui/components/CourseOutliner.gd" type="Script" id=1]
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
+[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/components/CourseLessonList.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/theme/fonts/font_title_slim.tres" type="DynamicFont" id=5]
+[ext_resource path="res://ui/components/CourseLessonDetails.tscn" type="PackedScene" id=6]
+
+[node name="CourseOutliner" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+
+[node name="Layout" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 1060.0
+
+[node name="TitleBox" type="HBoxContainer" parent="MarginContainer/Layout"]
+margin_right = 1880.0
+margin_bottom = 31.0
+custom_constants/separation = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/Layout/TitleBox"]
+margin_left = 708.0
+margin_right = 887.0
+margin_bottom = 31.0
+custom_fonts/font = ExtResource( 5 )
+text = "Course Index - "
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/Layout/TitleBox"]
+margin_left = 887.0
+margin_right = 1172.0
+margin_bottom = 31.0
+custom_fonts/font = ExtResource( 3 )
+text = "Course Title Goes Here"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Layout"]
+margin_top = 47.0
+margin_right = 1880.0
+margin_bottom = 1040.0
+size_flags_vertical = 3
+alignment = 1
+
+[node name="LessonList" parent="MarginContainer/Layout/HBoxContainer" instance=ExtResource( 4 )]
+margin_left = 402.0
+margin_right = 1042.0
+
+[node name="LessonDetails" parent="MarginContainer/Layout/HBoxContainer" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1058.0
+margin_right = 1478.0
+margin_bottom = 993.0
