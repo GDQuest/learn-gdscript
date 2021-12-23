@@ -25,6 +25,7 @@ func _ready() -> void:
 	_frame_container.connect("resized", self, "_center_scene_instance")
 
 	CodeEditorEnhancer.enhance(_gdscript_text_edit)
+	_gdscript_text_edit.add_color_region("[=", "]", CodeEditorEnhancer.COLOR_COMMENTS)
 
 	# If there's no scene but there's an instance as a child of
 	# RunnableCodeExample, we use this as the scene instance.
@@ -80,24 +81,27 @@ func create_slider_for(property_name, min_value := 0.0, max_value := 100.0, step
 		yield(self, "scene_instance_set")
 	var box := HBoxContainer.new()
 	var label := Label.new()
+	var value_label := Label.new()
 	var slider := HSlider.new()
 
 	_sliders.add_child(box)
 	box.add_child(label)
 	box.add_child(slider)
+	box.add_child(value_label)
 
 	label.text = property_name.capitalize()
 	slider.min_value = min_value
 	slider.max_value = max_value
 	slider.step = step
 	slider.rect_min_size.x = 100.0
-	slider.connect("value_changed", self, "_set_instance_value", [property_name])
-
+	slider.connect("value_changed", self, "_set_instance_value", [property_name, value_label])
+	_set_instance_value(_scene_instance.get(property_name), property_name, value_label)
 
 # Using this proxy function is required as the value emitted by the signal
 # will always be the first argument.
-func _set_instance_value(value: float, property_name: String) -> void:
+func _set_instance_value(value: float, property_name: String, value_label: Label) -> void:
 	_scene_instance.set(property_name, value)
+	value_label.text = String(value)
 
 
 func _center_scene_instance() -> void:

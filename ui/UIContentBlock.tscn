@@ -3,7 +3,7 @@
 [ext_resource path="res://ui/UIContentBlock.gd" type="Script" id=1]
 [ext_resource path="res://ui/theme/fonts/font_text.tres" type="DynamicFont" id=2]
 
-[node name="UIContentBlock" type="HBoxContainer"]
+[node name="UIContentBlock" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -11,18 +11,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 1920.0
-margin_bottom = 1080.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1913.0
+margin_bottom = 1073.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+margin_right = 1906.0
+margin_bottom = 1066.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 0
 custom_constants/margin_top = 0
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" groups=["rich_text_label"]]
-margin_right = 1920.0
-margin_bottom = 1080.0
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/MarginContainer" groups=["rich_text_label"]]
+margin_right = 1906.0
+margin_bottom = 1066.0
 rect_min_size = Vector2( 320, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3

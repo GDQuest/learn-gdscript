@@ -10,19 +10,15 @@ To make it draw, you give it a list of instructions: on each code line, you call
 
 We prepared several functions for you:
 
-- The [code]move_forward()[/code] makes the turtle move forward over a given distance in pixels. 
-- The [code]turn_right()[/code] function makes the turtle turn to the right by a precise amount of degrees.
-- The [code]turn_left()[/code] function works the same as [code]turn_right()[/code] except the turtle turns to the left.
+- [code]move_forward(pixels)[/code] makes the turtle move forward over a given distance in [i]pixels[/i].  
+- [code]turn_right(degrees)[/code] makes the turtle turn to the right by a precise amount of [i]degrees[/i].
+- [code]turn_left(degrees)[/code] works the same as [code]turn_right(degrees)[/code], except the turtle turns to the left.
 
-Calling [code]move_forward()[/code] is similar to the [code]rotate()[/code] function you saw before.
+You will use these functions the same way you used [code]rotate()[/code] before.
 
-You need to specify the distance in pixels the turtle should move as the function's parameter, inside parentheses.
+The turtle draws a white line as it moves. We'll use this line to draw shapes.
 
-For example, to move the turtle 200 pixels straight ahead, you'll write [code]move_forward(200)[/code].
-
-The turtle draws a white line as it moves.
-
-We'll use this line to draw shapes."
+For example, to move the turtle 200 pixels, you would write [code]move_forward(200)[/code]."
 visual_element_path = ""
 reverse_blocks = false
 type = 0

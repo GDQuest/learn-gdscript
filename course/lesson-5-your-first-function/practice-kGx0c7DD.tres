@@ -8,9 +8,9 @@ script = ExtResource( 1 )
 title = "Drawing multiple squares"
 goal = "You have a function to draw one square: [code]draw_square()[/code]. Use it to draw three squares.
 
-Create a function named [code]draw_three_squares[/code] that calls [code]draw_square()[/code] three times.
+We already created [code]draw_square()[/code] for you. Create a function named [code]draw_three_squares[/code] that calls [code]draw_square()[/code] three times.
 
-If you just call the function, all three squares will overlap. To draw them in diagonal, call [code]jump(300, 300)[/code] between two calls to [code]draw_square()[/code]."
+If you just call the function, all three squares will overlap. To stack them diagonally, call [code]jump(300, 300)[/code] between two calls to [code]draw_square()[/code]."
 starting_code = "func draw_square():
 	move_forward(200)
 	turn_right(90)
@@ -20,7 +20,7 @@ starting_code = "func draw_square():
 	turn_right(90)
 	move_forward(200)
 	turn_right(90)"
-hints = PoolStringArray( "You need to define a new function below draw_square() named draw_three_squares().", "Your new function should call draw_square() three times, on three different lines." )
+hints = PoolStringArray( "You need to define a new function below draw_square() named [code]draw_three_squares().[/code]", "Your new function should call [code]draw_square()[/code] three times, on three different lines.", "Between each call to [code]draw_square[/code], there should be a call to [code]jump(300,300)[/code]" )
 validator_script_path = "TestsDrawingThreeSquares.gd"
 script_slice_path = "drawing_multiple_squares/DrawingMultipleSquares.live-editor/slices/DrawingMultipleSquares.draw_three_squares.slice.tres"
 documentation_references = PoolStringArray(  )

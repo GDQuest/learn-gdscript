@@ -55,6 +55,7 @@ func setup(lesson: Lesson) -> void:
 				revealer.children_margin = 0.0
 				_content_blocks.add_child(revealer)
 				revealer.add_child(instance)
+				instance.set_draw_panel(true)
 		elif block is Quizz:
 			var scene = QuizzInputFieldScene if block is QuizzInputField else QuizzChoiceScene
 			var instance = scene.instance()
