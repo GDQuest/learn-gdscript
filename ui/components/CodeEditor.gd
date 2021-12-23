@@ -20,8 +20,6 @@ onready var _solution_button := find_node("SolutionButton") as Button
 onready var _restore_button := find_node("RestoreButton") as Button
 onready var _console_button := find_node("ConsoleButton") as Button
 
-#onready var _view_mode_toggle := find_node("ViewModeToggleButton") as ViewModeToggleButton
-
 
 func _ready() -> void:
 	_restore_button.connect("pressed", self, "_on_restore_pressed")

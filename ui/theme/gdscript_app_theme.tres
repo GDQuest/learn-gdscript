@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=39 format=2]
+[gd_resource type="Theme" load_steps=49 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_text.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/vscrollbar_grabber.tres" type="StyleBox" id=2]
@@ -20,7 +20,7 @@
 [ext_resource path="res://ui/theme/button_pressed.tres" type="StyleBox" id=18]
 [ext_resource path="res://ui/theme/stylebox_empty.tres" type="StyleBox" id=19]
 [ext_resource path="res://ui/theme/button_disabled.tres" type="StyleBox" id=20]
-[ext_resource path="res://ui/theme/panel_lineedit.tres" type="StyleBox" id=21]
+[ext_resource path="res://ui/theme/lineedit_stylebox_normal.tres" type="StyleBox" id=21]
 [ext_resource path="res://ui/theme/panel_tooltip.tres" type="StyleBox" id=22]
 [ext_resource path="res://ui/theme/hslider_grabber.tres" type="StyleBox" id=23]
 [ext_resource path="res://ui/theme/hslider_slider.tres" type="StyleBox" id=24]
@@ -32,29 +32,26 @@
 [ext_resource path="res://ui/theme/textedit_stylebox_readonly.tres" type="StyleBox" id=30]
 [ext_resource path="res://ui/theme/popupmenu_panel.tres" type="StyleBox" id=31]
 [ext_resource path="res://ui/theme/popupmenu_item_hover.tres" type="StyleBox" id=32]
+[ext_resource path="res://ui/theme/lineedit_stylebox_focus.tres" type="StyleBox" id=33]
+[ext_resource path="res://ui/theme/lineedit_stylebox_readonly.tres" type="StyleBox" id=34]
+[ext_resource path="res://ui/theme/hscrollbar_scroll.tres" type="StyleBox" id=35]
+[ext_resource path="res://ui/theme/hscrollbar_grabber.tres" type="StyleBox" id=36]
+[ext_resource path="res://ui/theme/hscrollbar_grabber_pressed.tres" type="StyleBox" id=37]
+[ext_resource path="res://ui/theme/hscrollbar_grabber_highlight.tres" type="StyleBox" id=38]
+[ext_resource path="res://ui/theme/vslider_grabber_highlight.tres" type="StyleBox" id=39]
+[ext_resource path="res://ui/theme/vslider_grabber.tres" type="StyleBox" id=40]
+[ext_resource path="res://ui/theme/vslider_slider.tres" type="StyleBox" id=41]
+
+[sub_resource type="StyleBoxEmpty" id=6]
 
 [sub_resource type="StyleBoxLine" id=1]
 color = Color( 0.290196, 0.294118, 0.388235, 1 )
 
-[sub_resource type="StyleBoxFlat" id=6]
-content_margin_left = 8.0
-content_margin_right = 8.0
-content_margin_top = 8.0
-content_margin_bottom = 8.0
-bg_color = Color( 0.0784314, 0.0823529, 0.164706, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.290196, 0.294118, 0.388235, 1 )
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
@@ -79,6 +76,11 @@ Button/styles/hover = ExtResource( 5 )
 Button/styles/normal = ExtResource( 3 )
 Button/styles/pressed = ExtResource( 18 )
 HBoxContainer/constants/separation = 16
+HScrollBar/styles/grabber = ExtResource( 36 )
+HScrollBar/styles/grabber_highlight = ExtResource( 38 )
+HScrollBar/styles/grabber_pressed = ExtResource( 37 )
+HScrollBar/styles/scroll = ExtResource( 35 )
+HScrollBar/styles/scroll_focus = SubResource( 6 )
 HSeparator/constants/separation = 8
 HSeparator/styles/separator = SubResource( 1 )
 HSlider/icons/grabber = ExtResource( 26 )
@@ -89,9 +91,9 @@ HSlider/styles/grabber_area = ExtResource( 23 )
 HSlider/styles/grabber_area_highlight = ExtResource( 25 )
 HSlider/styles/slider = ExtResource( 24 )
 LineEdit/fonts/font = ExtResource( 13 )
-LineEdit/styles/focus = SubResource( 6 )
+LineEdit/styles/focus = ExtResource( 33 )
 LineEdit/styles/normal = ExtResource( 21 )
-LineEdit/styles/read_only = null
+LineEdit/styles/read_only = ExtResource( 34 )
 MarginContainer/constants/margin_bottom = 20
 MarginContainer/constants/margin_left = 20
 MarginContainer/constants/margin_right = 20
@@ -162,7 +164,7 @@ TextEdit/icons/folded = null
 TextEdit/icons/space = null
 TextEdit/icons/tab = null
 TextEdit/styles/completion = null
-TextEdit/styles/focus = null
+TextEdit/styles/focus = SubResource( 7 )
 TextEdit/styles/normal = ExtResource( 4 )
 TextEdit/styles/read_only = ExtResource( 30 )
 TooltipLabel/colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
@@ -182,3 +184,8 @@ VScrollBar/styles/scroll = ExtResource( 17 )
 VScrollBar/styles/scroll_focus = SubResource( 4 )
 VSeparator/constants/separation = 8
 VSeparator/styles/separator = SubResource( 5 )
+VSlider/icons/grabber = ExtResource( 26 )
+VSlider/icons/grabber_highlight = ExtResource( 28 )
+VSlider/styles/grabber_area = ExtResource( 40 )
+VSlider/styles/grabber_area_highlight = ExtResource( 39 )
+VSlider/styles/slider = ExtResource( 41 )

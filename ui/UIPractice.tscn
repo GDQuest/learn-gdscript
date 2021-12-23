@@ -33,26 +33,26 @@ margin_right = 1900.0
 margin_bottom = 1060.0
 
 [node name="PracticeInfoPanel" parent="Margin/Layout" instance=ExtResource( 3 )]
-margin_right = 640.0
+margin_right = 646.0
 margin_bottom = 1040.0
 size_flags_stretch_ratio = 2.0
 
 [node name="CodeEditor" parent="Margin/Layout" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 656.0
-margin_right = 1224.0
+margin_left = 662.0
+margin_right = 1217.0
 margin_bottom = 1040.0
 
 [node name="Output" type="VBoxContainer" parent="Margin/Layout"]
-margin_left = 1240.0
+margin_left = 1233.0
 margin_right = 1880.0
 margin_bottom = 1040.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="GameFrame" type="PanelContainer" parent="Margin/Layout/Output"]
-margin_right = 640.0
+margin_right = 647.0
 margin_bottom = 682.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
@@ -61,7 +61,7 @@ custom_styles/panel = ExtResource( 7 )
 [node name="MarginContainer" type="MarginContainer" parent="Margin/Layout/Output/GameFrame"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 632.0
+margin_right = 639.0
 margin_bottom = 674.0
 custom_constants/margin_right = 12
 custom_constants/margin_top = 12
@@ -71,14 +71,14 @@ custom_constants/margin_bottom = 60
 [node name="GameScreen" type="PanelContainer" parent="Margin/Layout/Output/GameFrame/MarginContainer"]
 margin_left = 12.0
 margin_top = 12.0
-margin_right = 612.0
+margin_right = 619.0
 margin_bottom = 606.0
 custom_styles/panel = ExtResource( 6 )
 
 [node name="GameViewport" type="ViewportContainer" parent="Margin/Layout/Output/GameFrame/MarginContainer/GameScreen"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 592.0
+margin_right = 599.0
 margin_bottom = 586.0
 rect_min_size = Vector2( 100, 0 )
 stretch = true
@@ -87,7 +87,7 @@ script = ExtResource( 4 )
 [node name="Label" type="Label" parent="Margin/Layout/Output/GameFrame"]
 margin_left = 8.0
 margin_top = 626.0
-margin_right = 632.0
+margin_right = 639.0
 margin_bottom = 674.0
 rect_min_size = Vector2( 0, 48 )
 size_flags_vertical = 8
@@ -100,5 +100,5 @@ align = 1
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 698.0
-margin_right = 640.0
+margin_right = 647.0
 margin_bottom = 1040.0
