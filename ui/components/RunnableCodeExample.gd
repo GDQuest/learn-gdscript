@@ -25,6 +25,7 @@ func _ready() -> void:
 	_frame.connect("resized", self, "_center_scene_instance")
 
 	CodeEditorEnhancer.enhance(_gdscript_text_edit)
+	_gdscript_text_edit.add_color_region("[=", "]", CodeEditorEnhancer.COLOR_COMMENTS)
 
 	# If there's no scene but there's an instance as a child of
 	# RunnableCodeExample, we use this as the scene instance.
