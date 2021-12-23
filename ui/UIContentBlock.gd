@@ -11,8 +11,8 @@ var min_width_to_show_image := 500.0
 
 var _visual_element: CanvasItem
 
-onready var _rich_text_label := $MarginContainer/RichTextLabel as RichTextLabel
-onready var _margin := $MarginContainer as MarginContainer
+onready var _rich_text_label := $HBoxContainer/MarginContainer/RichTextLabel as RichTextLabel
+onready var _margin := $HBoxContainer/MarginContainer as MarginContainer
 
 
 func _ready() -> void:
@@ -54,8 +54,6 @@ func setup(content_block: ContentBlock) -> void:
 	# raising the panel.
 	if content_block.reverse_blocks:
 		_rich_text_label.raise()
-
-	set_draw_panel(get_parent() is Revealer)
 
 
 func set_draw_panel(do_draw_panel: bool) -> void:
