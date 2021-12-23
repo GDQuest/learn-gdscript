@@ -158,13 +158,9 @@ func _rotate_chevron(rotation_degrees: float, time := ANIM_DURATION) -> void:
 
 func _add_content_child(node: Control) -> void:
 	_contents.append(node)
-	node.connect("resized", self, "sort_children")
-	pass
 
 
 func _remove_content_child(node: Control) -> void:
-	node.disconnect("resized", self, "sort_children")
-	
 	remove_child(node)
 	node.queue_free()
 
