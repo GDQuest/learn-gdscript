@@ -47,7 +47,7 @@ func load_immediately(target: Control) -> void:
 	_loading_screen.progress_value = 1.0
 
 
-func _on_course_requested() -> void:
+func _on_course_requested(force_outliner: bool = false) -> void:
 	_unloading_target = _welcome_screen
 	start_loading(_course_screen)
 	
@@ -57,6 +57,7 @@ func _on_course_requested() -> void:
 	# FIXME: Use interactive loader instead?
 	var course_navigator_scene := load("res://ui/UINavigator.tscn") as PackedScene
 	var course_navigator = course_navigator_scene.instance()
+	course_navigator.load_into_outliner = force_outliner
 	_course_screen.add_child(course_navigator)
 	
 	_loading_screen.progress_value = 1.0

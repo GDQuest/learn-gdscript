@@ -93,15 +93,24 @@ hint_tooltip = "Configure the app"
 icon = ExtResource( 5 )
 flat = true
 
-[node name="ScreenContainer" type="PanelContainer" parent="VBoxContainer"]
-show_behind_parent = true
+[node name="Content" type="Panel" parent="VBoxContainer"]
 margin_top = 48.0
 margin_right = 1920.0
 margin_bottom = 1080.0
-size_flags_horizontal = 3
+rect_clip_content = true
 size_flags_vertical = 3
 
-[node name="CourseOutliner" parent="VBoxContainer" instance=ExtResource( 7 )]
+[node name="ScreenContainer" type="PanelContainer" parent="VBoxContainer/Content"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CourseOutliner" parent="VBoxContainer/Content" instance=ExtResource( 7 )]
 visible = false
 
 [node name="Tween" type="Tween" parent="."]

@@ -6,6 +6,8 @@ export (Resource) var course = preload("res://course/course-learn-gdscript.tres"
 
 # If `true`, play transition animations.
 var use_transitions := true
+# If `true`, the initial load is forced to go to the outliner (provided default URL).
+var load_into_outliner := false
 
 var _screens_stack := []
 # Maps url strings to resource paths.
@@ -28,8 +30,8 @@ onready var _report_button := (
 	$VBoxContainer/Buttons/MarginContainer/HBoxContainer/ReportButton as Button
 )
 
-onready var _screen_container := $VBoxContainer/ScreenContainer as Container
-onready var _course_outliner := $VBoxContainer/CourseOutliner as Container
+onready var _screen_container := $VBoxContainer/Content/ScreenContainer as Container
+onready var _course_outliner := $VBoxContainer/Content/CourseOutliner as Container
 onready var _tween := $Tween as Tween
 
 
@@ -52,7 +54,10 @@ func _ready() -> void:
 	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
 
 	if NavigationManager.current_url == "":
-		NavigationManager.navigate_to(course.lessons[0].resource_path)
+		if load_into_outliner:
+			NavigationManager.navigate_to_outliner()
+		else:
+			NavigationManager.navigate_to(course.lessons[0].resource_path)
 	else:
 		_navigate_to()
 
@@ -73,14 +78,28 @@ func _navigate_back() -> void:
 
 	var current_screen: Control = _screens_stack.pop_back()
 	var next_screen: Control = _screens_stack.back()
+	_back_button.visible = _screens_stack.size() >= 2
+
 	_transition_to(next_screen, current_screen, false)
 	yield(self, "transition_completed")
 	current_screen.queue_free()
 
 
 func _navigate_to_outliner() -> void:
-	_screen_container.hide()
+	_outliner_button.hide()
+	_back_button.hide()
+	_clear_history_stack()
+	_label.text = ""
+	
+	_course_outliner.modulate.a = 0.0
 	_course_outliner.show()
+	
+	_tween.stop_all()
+	_tween.interpolate_property(_course_outliner, "modulate:a", 0.0, 1.0, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	_tween.start()
+	yield(_tween, "tween_all_completed")
+	
+	_screen_container.hide()
 
 
 func _navigate_to() -> void:
@@ -95,9 +114,8 @@ func _navigate_to() -> void:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
 		return
 
-	_course_outliner.hide()
+	_outliner_button.show()
 	_screen_container.show()
-
 	# warning-ignore:unsafe_method_access
 	screen.setup(target)
 
@@ -108,6 +126,8 @@ func _navigate_to() -> void:
 
 	var has_previous_screen = not _screens_stack.empty()
 	_screens_stack.push_back(screen)
+	_back_button.visible = _screens_stack.size() >= 2
+
 	_screen_container.add_child(screen)
 	if has_previous_screen:
 		var previous_screen: Control = _screens_stack[-2]
@@ -122,6 +142,14 @@ func _navigate_to() -> void:
 			and not node.is_connected("meta_clicked", self, "_on_RichTextLabel_meta_clicked")
 		):
 			node.connect("meta_clicked", self, "_on_RichTextLabel_meta_clicked")
+	
+	if _course_outliner.visible:
+		_tween.stop_all()
+		_tween.interpolate_property(_course_outliner, "modulate:a", 1.0, 0.0, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		_tween.start()
+		yield(_tween, "tween_all_completed")
+
+	_course_outliner.hide()
 
 
 # Transitions a screen in. This is there as a placeholder, we probably want
