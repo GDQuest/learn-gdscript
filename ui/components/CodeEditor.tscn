@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/components/SliceEditor.gd" type="Script" id=1]
 [ext_resource path="res://ui/icons/icon_pause.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=7]
 [ext_resource path="res://ui/theme/panel_sliceeditor.tres" type="StyleBox" id=8]
 [ext_resource path="res://ui/icons/icon_console.png" type="Texture" id=9]
+[ext_resource path="res://ui/icons/expand.png" type="Texture" id=10]
 
 [node name="CodeEditor" type="PanelContainer"]
 anchor_right = 1.0
@@ -21,6 +22,7 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+text = null
 
 [node name="Column" type="VBoxContainer" parent="."]
 margin_right = 1920.0
@@ -48,6 +50,17 @@ wrap_enabled = true
 caret_block_mode = true
 caret_blink = true
 script = ExtResource( 1 )
+
+[node name="DFMButton" type="Button" parent="Column/PanelContainer"]
+modulate = Color( 1, 1, 1, 0.12549 )
+margin_left = 1872.0
+margin_top = 836.0
+margin_right = 1912.0
+margin_bottom = 883.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+icon = ExtResource( 10 )
+flat = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Column"]
 margin_top = 899.0

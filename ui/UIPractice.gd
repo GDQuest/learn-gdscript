@@ -42,9 +42,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_distraction_free_mode"):
-		var is_distraction_free := not _practice_info_panel.visible
-		_practice_info_panel.visible = is_distraction_free
-		_game_container.visible = is_distraction_free
+		_toggle_distraction_free_mode()
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -152,6 +150,14 @@ func _on_run_button_pressed() -> void:
 		popup.connect("pressed", Events, "emit_signal", ["practice_completed", _practice])
 
 
+func _toggle_distraction_free_mode() -> void:
+	var is_distraction_free := _practice_info_panel.visible
+	
+	_practice_info_panel.visible = not is_distraction_free
+	_game_container.visible = not is_distraction_free
+	_code_editor.set_distraction_free_state(is_distraction_free)
+
+
 func _on_code_editor_text_changed(_text: String) -> void:
 	_code_editor_is_dirty = true
 
@@ -162,6 +168,8 @@ func _on_code_editor_button(which: String) -> void:
 			_on_run_button_pressed()
 		_code_editor.ACTIONS.PAUSE:
 			_game_viewport.toggle_scene_pause()
+		_code_editor.ACTIONS.DFMODE:
+			_toggle_distraction_free_mode()
 
 
 func _on_console_toggled() -> void:
