@@ -4,7 +4,11 @@
 
 [resource]
 script = ExtResource( 1 )
-text = "Hopefully, you can see that a function is a bunch of code that you can reuse."
+text = "Every time [code]move_and_rotate()[/code] is called, the two functions [code]move_forward(200)[/code] and [code]turn_right(90)[/code] are in turn called sequentially.
+
+In this case, we don't gain a lot time, but a function could contain a lot more code. For example, we can now use [code]draw_square()[/code] multiple times to create multiple squares.
+
+A function is a bunch of code that you can reuse."
 visual_element_path = ""
 reverse_blocks = false
 type = 0
