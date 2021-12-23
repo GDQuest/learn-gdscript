@@ -9,6 +9,7 @@ func _ready() -> void:
 	context_menu_enabled = false
 	shortcut_keys_enabled = false
 	CodeEditorEnhancer.enhance(self)
+	set("custom_styles/readonly", preload("res://ui/theme/textedit_stylebox.tres"))
 
 
 func set_min_size(size: Vector2) -> void:
