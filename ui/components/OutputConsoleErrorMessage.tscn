@@ -1,16 +1,16 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/components/OutputConsoleMessage.gd" type="Script" id=2]
+[ext_resource path="res://ui/theme/fonts/font_button_small.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/theme/panel_error_log.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/theme/fonts/font_button_small.tres" type="DynamicFont" id=4]
+[ext_resource path="res://ui/components/OutputConsoleErrorMessage.gd" type="Script" id=4]
 
-[node name="OutputConsoleMessage" type="PanelContainer"]
+[node name="OutputConsoleErrorMessage" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 custom_styles/panel = ExtResource( 3 )
-script = ExtResource( 2 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -97,7 +97,7 @@ margin_left = 1804.0
 margin_right = 1888.0
 margin_bottom = 39.0
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
 text = "Explain"
 
 [node name="Tween" type="Tween" parent="."]

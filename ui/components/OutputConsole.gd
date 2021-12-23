@@ -4,8 +4,9 @@ extends PanelContainer
 
 signal reference_clicked(file_name, line_nb, character)
 
-const OutputConsoleMessage := preload("res://ui/components/OutputConsoleMessage.gd")
-const OutputConsoleMessageScene := preload("res://ui/components/OutputConsoleMessage.tscn")
+const OutputConsoleErrorMessage := preload("res://ui/components/OutputConsoleErrorMessage.gd")
+const OutputConsoleErrorMessageScene := preload("res://ui/components/OutputConsoleErrorMessage.tscn")
+const OutputConsolePrintMessageScene := preload("res://ui/components/OutputConsolePrintMessage.tscn")
 
 onready var _scroll_container := $MarginContainer/ScrollContainer as ScrollContainer
 onready var _message_list := $MarginContainer/ScrollContainer/MarginContainer/MessageList as Control
@@ -33,7 +34,7 @@ func print_bus_message(
 	var show_lines_from = slice_properties.start_offset
 	var show_lines_to = slice_properties.end_offset
 
-	var message_node := OutputConsoleMessageScene.instance() as OutputConsoleMessage
+	var message_node := OutputConsoleErrorMessageScene.instance() as OutputConsoleErrorMessage
 	message_node.message_severity = type
 	message_node.message_text = text
 	message_node.message_code = code
@@ -54,14 +55,24 @@ func print_bus_message(
 	_scroll_container.ensure_control_visible(message_node)
 
 
+# Removes all children
 func clear_messages() -> void:
 	for message_node in _message_list.get_children():
-		message_node.disconnect("external_explain_requested", self, "_on_external_requested")
-		message_node.disconnect("show_code_requested", self, "_on_code_requested")
-		message_node.disconnect("explain_error_requested", self, "_on_explain_requested")
+		if message_node is OutputConsoleErrorMessage:
+			message_node.disconnect("external_explain_requested", self, "_on_external_requested")
+			message_node.disconnect("show_code_requested", self, "_on_code_requested")
+			message_node.disconnect("explain_error_requested", self, "_on_explain_requested")
 
 		_message_list.remove_child(message_node)
 		message_node.queue_free()
+
+
+# Prints plain text output. Use this when you want to display the output of a
+# print statement.
+func print_output(values: Array) -> void:
+	var message_node = OutputConsolePrintMessageScene.instance()
+	message_node.values = values
+	_message_list.add_child(message_node)
 
 
 func _on_external_requested() -> void:
