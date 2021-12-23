@@ -16,13 +16,13 @@ var _scene_instance: Node setget _set_scene_instance
 
 onready var _gdscript_text_edit := $GDScriptCode as TextEdit
 onready var _run_button := $Frame/RunButton as Button
-onready var _frame := $Frame as Control
+onready var _frame_container := $Frame/PanelContainer as Control
 onready var _sliders := $Frame/Sliders as VBoxContainer
 
 
 func _ready() -> void:
 	_run_button.connect("pressed", self, "run")
-	_frame.connect("resized", self, "_center_scene_instance")
+	_frame_container.connect("resized", self, "_center_scene_instance")
 
 	CodeEditorEnhancer.enhance(_gdscript_text_edit)
 
@@ -32,7 +32,7 @@ func _ready() -> void:
 	# This simplifies the process of creating code examples.
 	if not Engine.editor_hint and not scene and get_child_count() > 2:
 		var last_child = get_child(get_child_count() - 1)
-		assert(last_child != _gdscript_text_edit and last_child != _frame)
+		assert(last_child != _gdscript_text_edit and last_child != _frame_container)
 		remove_child(last_child)
 		_set_scene_instance(last_child)
 
@@ -48,7 +48,7 @@ func _get_configuration_warning() -> String:
 func run() -> void:
 	_scene_instance.run()
 	if _scene_instance.has_method("wrap_inside_frame"):
-		_scene_instance.wrap_inside_frame(_frame.get_rect())
+		_scene_instance.wrap_inside_frame(_frame_container.get_rect())
 
 
 func set_code(new_gdscript_code: String) -> void:
@@ -103,14 +103,15 @@ func _set_instance_value(value: float, property_name: String) -> void:
 func _center_scene_instance() -> void:
 	if not center_in_frame or not _scene_instance:
 		return
-	_scene_instance.position = _frame.rect_size / 2
+	if _scene_instance is Node2D:
+		_scene_instance.position = _frame_container.rect_size / 2
 
 
 func _set_scene_instance(new_scene_instance: Node) -> void:
 	_scene_instance = new_scene_instance
 	emit_signal("scene_instance_set")
 	_scene_instance.show_behind_parent = true
-	_frame.add_child(_scene_instance)
+	_frame_container.add_child(_scene_instance)
 	_center_scene_instance()
 	if _scene_instance.has_method("run"):
 		_run_button.show()
