@@ -12,6 +12,16 @@ export var is_multiple_choice := true setget set_is_multiple_choice
 export var do_shuffle_answers := true
 
 
+# We use the constructor to reset arrays and avoid a bug where creating a new
+# QuizzChoice references the answer_options and valid_answers of the previously
+# created resource.
+func _init() -> void:
+	answer_options = []
+	valid_answers = []
+	is_multiple_choice = true
+	do_shuffle_answers = true
+
+
 func test_answer(answers: Array) -> AnswerTestResult:
 	assert(not valid_answers.empty(), ERROR_NO_VALID_ANSWERS)
 	var result := AnswerTestResult.new()
