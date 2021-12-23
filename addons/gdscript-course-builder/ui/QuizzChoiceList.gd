@@ -48,8 +48,8 @@ func _update_quizz_answers() -> void:
 func _add_answer(answer := "") -> void:
 	var instance = QuizzChoiceScene.instance()
 	add_child(instance)
-	instance.is_radio = not _quizz.is_multiple_choice
 	instance.button_group = _button_group
+	instance.is_radio = not _quizz.is_multiple_choice
 	instance.set_answer_text(answer)
 	instance.set_valid_answer(answer in _quizz.valid_answers)
 	instance.connect("index_changed", self, "_update_answer_labels")
