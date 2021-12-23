@@ -26,19 +26,66 @@ UNSAFE_CAST,,
 UNSAFE_CALL_ARGUMENT,,
 DEPRECATED_KEYWORD,,
 STANDALONE_TERNARY,,
-CYCLIC_REFERENCE,,
-INVALID_INDENTATION,,
-UNEXPECTED_CHARACTER,,
-UNEXPECTED_CHARACTER_IN_KEYWORD,,
-UNEXPECTED_CHARACTER_IN_EXPORT_HINT,,
+CYCLIC_REFERENCE,"A cyclic reference is when a class references itself, directly or indirectly.
+
+It has two possible causes:
+
+1. You used the class name in the class itself.
+2. Your code refers to another class that refers to this class, causing an endless reference cycle.
+
+Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime.","Erase the type hint in the error line, and the problem should disappear. 
+
+At GDQuest, when we face this error, we remove the type hints on lines causing cyclic references. It solves the problem in the vast majority of cases."
+INVALID_INDENTATION,"The indentation of your code (the number of tab characters at the start of the line) is incorrect.
+
+You are missing one or more tabs, or you inserted too many.
+
+The computer uses those leading tab characters on code lines to know which lines of code are part of a code block, like a function.","If the line of code with the error is right after a line ending with a colon, like a function definition, you need one extra indent level compared to the previous line.
+
+In other words, your line should have one more leading tab character than the function definition."
+UNEXPECTED_CHARACTER,"You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or the previous lines of code.
+
+You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character.","The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing.
+
+If the error says ""expected,"" then you're likely missing something in the [b]previous[/b] code line, like a punctuation mark, a parenthesis, or something else.
+
+If it says ""unterminated,"" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
+UNEXPECTED_CHARACTER_IN_KEYWORD,"This error tells you that you are missing a parenthesis (or sometimes a comma or a path).
+
+Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code].","To address the error, you want to add the missing opening parenthesis, the closing parenthesis, or the comma."
+UNEXPECTED_CHARACTER_IN_EXPORT_HINT,"This error tells you you are missing some parenthesis, a comma, or some value in your export hint.",You need to read the error message and add the missing character or value it requests.
 INVALID_OPERATOR_USAGE,,
-MISPLACED_IDENTIFIER,,
-MISPLACED_TYPE_IDENTIFIER,,
-NONEXISTENT_IDENTIFIER,,
-MISPLACED_KEYWORD,,
+MISPLACED_IDENTIFIER,"This error happens when you write an identifier (variable or function name) in the wrong place. Or maybe you wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name.","If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. You can address the error by adding the missing name.
+
+If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc.
+
+Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
+MISPLACED_TYPE_IDENTIFIER,"This error tells you that you are missing a type somewhere. A type can be [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], and many identifiers representing a data structure.
+
+Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name.
+
+It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name.","To solve this, you need to write the name of the type after the colon, arrow (in the case of function return types), inside parentheses (for export types), or after the [code]as[/code] keyword."
+NONEXISTENT_IDENTIFIER,"The variable, function name, or class name you are trying to use does not exist.
+
+You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot.
+
+The other cause for this error is that you didn't define the variable, function, or class you're trying to access.","To solve this error, triple-check that there is no typo in the line.
+
+If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error.
+
+If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
+MISPLACED_KEYWORD,"You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid.
+
+The [code]continue[/code] keyword means ""jump to the next iteration of the loop."" And the [code]break[/code] keyword means ""end the loop right now and jump to the first line of code after the loop block.","If you wrote one of these keywords outside a loop, you need to remove it.
+
+If you are trying to use it inside a loop, your indentation is most likely at fault. You may need to insert one or more leading tab characters to the keyword."
 EXPECTED_CONSTANT_EXPRESSION,,
 INVALID_CLASS_DECLARATION,,
-DUPLICATE_DECLARATION,,
+DUPLICATE_DECLARATION,"You are trying to define a signal that already exists; You can't do that.
+
+Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends.","In the app, your code extends some built-in Godot code that's not visible to you. 
+
+When that happens, you need to either rename your signal to one that will not collide with an existing one or remove this line of code."
 SIGNATURE_MISMATCH,,
 INVALID_ARGUMENTS,,
 TYPE_MISMATCH,,
