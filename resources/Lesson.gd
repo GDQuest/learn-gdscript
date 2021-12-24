@@ -15,3 +15,12 @@ export var practices: Array
 func _init() -> void:
 	content_blocks = []
 	practices = []
+
+
+func get_total_quizzes() -> int:
+	var total_quizzes := 0
+	for content_item in content_blocks:
+		if content_item is Quiz:
+			total_quizzes += 1
+
+	return total_quizzes

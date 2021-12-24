@@ -1,13 +1,9 @@
-# 
 # Singleton for saving and loading user profiles
-# Use it like so:
-# 
-# var profile = UserProfiles.get_profile("MyPlayer")
-# profile.set_exercise_progress("exercise_name", 5)
-# 
+#
+# Can implicitly create profiles on access, so it is safe to use without checks.
+# The returned profile can be used to change user settings or access course progression.
+#
 extends Node
-
-signal progress_changed(exercise_name, progress)
 
 const ROOT_DIR := "user://user_settings"
 
@@ -20,8 +16,9 @@ func profile_exists(profile_name: String) -> bool:
 
 
 # Returns the profile designated by the provided name.
-# If the profile does not exist, it will be created on the fly, so if you do not
-# want that to happen, check with `profile_exists` first, or use `get_profile_or_die`.
+# If the profile does not exist, it will be created on the fly. If you do not
+# want that to happen, check with `profile_exists` first.
+#
 # Loading a profile will set it as the current file name.
 func get_profile(profile_name: String = current_player) -> Profile:
 	if profile_name == current_player and _loaded_profile:
@@ -38,7 +35,6 @@ func get_profile(profile_name: String = current_player) -> Profile:
 		var user_profile := Profile.new()
 		user_profile.resource_path = file_path
 		user_profile.player_name = profile_name
-		user_profile.connect("progress_changed", self, "_on_exercise_progress_changed")
 		
 		_loaded_profile = user_profile
 		return user_profile
@@ -74,7 +70,3 @@ func list_profiles() -> PoolStringArray:
 		file_name = fs.get_next()
 
 	return profiles
-
-
-func _on_exercise_progress_changed(exercise_name, progress) -> void:
-	emit_signal("progress_changed", exercise_name, progress)

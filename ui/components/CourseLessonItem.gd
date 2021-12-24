@@ -68,6 +68,7 @@ func _update_visuals() -> void:
 	_prefix_label.text = "Lesson %d" % [lesson_index + 1]
 	_title_label.text = lesson_title
 	_progress_bar.value = completion
+	hint_tooltip = lesson_title
 
 
 func _on_mouse_entered() -> void:

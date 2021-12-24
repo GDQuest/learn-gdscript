@@ -45,9 +45,6 @@ func _ready() -> void:
 	NavigationManager.connect("back_navigation_requested", self, "_navigate_back")
 	NavigationManager.connect("outliner_navigation_requested", self, "_navigate_to_outliner")
 	
-	#Events.connect("lesson_end_popup_closed", Navigation, "back")
-	#Events.connect("lesson_start_requested", Navigation, "_navigate_to")
-	#Events.connect("practice_start_requested", self, "_navigate_to")
 	Events.connect("practice_completed", self, "_on_practice_completed")
 
 	_outliner_button.connect("pressed", NavigationManager, "navigate_to_outliner")
@@ -60,6 +57,8 @@ func _ready() -> void:
 		if load_into_outliner:
 			NavigationManager.navigate_to_outliner()
 		else:
+			if _lesson_index < 0 or _lesson_index >= course.lessons.size():
+				_lesson_index = 0
 			NavigationManager.navigate_to(course.lessons[_lesson_index].resource_path)
 	else:
 		_navigate_to()
@@ -109,11 +108,13 @@ func _navigate_to_outliner() -> void:
 func _navigate_to() -> void:
 	var current_resource_path = NavigationManager.current_url
 	var target: Resource = load(current_resource_path)
+	
 	var screen: Control
 	if target is Practice:
 		screen = preload("UIPractice.tscn").instance()
 	elif target is Lesson:
 		screen = preload("UILesson.tscn").instance()
+		_lesson_index = course.lessons.find(target) # Make sure the index is synced after navigation.
 	else:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
 		return
@@ -154,16 +155,45 @@ func _navigate_to() -> void:
 		yield(_tween, "tween_all_completed")
 
 	_course_outliner.hide()
+	
+	if target is Practice:
+		Events.emit_signal("practice_started", target)
+	elif target is Lesson:
+		Events.emit_signal("lesson_started", target)
 
 
 func _on_practice_completed(practice: Practice) -> void:
-	var practices: Array = course.lessons[_lesson_index].practices
+	var lesson_data := course.lessons[_lesson_index] as Lesson
+	var practices: Array = lesson_data.practices
+	
 	var index := practices.find(practice)
-	var is_last_practice := practices.size() - 1 <= index
-	if is_last_practice:
-		_set_lesson_index(_lesson_index + 1)
+	# This is the last practice in the set, move to the next lesson.
+	if index >= practices.size() - 1:
+		yield(get_tree(), "idle_frame") # Allow the rest of practice handlers to sync up.
+		_on_lesson_completed(lesson_data)
 	else:
+		# Otherwise, go to the next practice in the set.
 		NavigationManager.navigate_to(practices[index + 1].resource_path)
+
+
+func _on_lesson_completed(lesson: Lesson) -> void:
+	Events.emit_signal("lesson_completed", lesson)
+	
+	_lesson_index += 1
+	if _lesson_index >= _lesson_count:
+		_on_course_completed()
+		return
+	
+	_clear_history_stack()
+	NavigationManager.navigate_to(course.lessons[_lesson_index].resource_path)
+
+
+func _on_course_completed() -> void:
+	Events.emit_signal("course_completed", course)
+
+	# TODO: Add a special screen at the end of the course.
+	# For now it should also probably be a "thank you for participating in beta" screen.
+	print("You reached the end of the course!")
 
 
 # Transitions a screen in.
@@ -218,17 +248,6 @@ func _animate_outliner(fade_in: bool) -> void:
 		Tween.TRANS_LINEAR,
 		Tween.EASE_IN_OUT
 	)
-
-
-func _set_lesson_index(index: int) -> void:
-	_lesson_index = index
-	if _lesson_index >= _lesson_count:
-		# TODO: figure out some screen at the end of the course
-		print("You reached the end of the course!")
-		return
-	
-	_clear_history_stack()
-	NavigationManager.navigate_to(course.lessons[index].resource_path)
 
 
 func _clear_history_stack() -> void:
