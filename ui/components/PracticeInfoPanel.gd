@@ -47,6 +47,10 @@ func set_documentation(documentation: Documentation.QueryResult) -> void:
 	var template_label := RichTextLabel.new()
 	template_label.fit_content_height = true
 	template_label.bbcode_enabled = true
+	template_label.add_font_override("normal_font", preload("res://ui/theme/fonts/font_documentation_normal.tres"))
+	template_label.add_font_override("bold_font", preload("res://ui/theme/fonts/font_documentation_bold.tres"))
+	template_label.add_font_override("italics_font", preload("res://ui/theme/fonts/font_documentation_italics.tres"))
+	template_label.add_font_override("mono_font", preload("res://ui/theme/fonts/font_documentation_mono.tres"))
 
 	if documentation.methods:
 		var methods_header := template_label.duplicate()
@@ -56,12 +60,15 @@ func set_documentation(documentation: Documentation.QueryResult) -> void:
 		for doc_spec in documentation.methods:
 			var docs_item := template_label.duplicate()
 			docs_item.bbcode_text = (
-				"• [code]%s[/code]\n\n%s"
+				"• [code]%s[/code]\n  %s"
 				% [doc_spec.to_bbcode(), doc_spec.explanation]
 			)
 			_docs_item_list.add_child(docs_item)
 
 	if documentation.properties:
+		if documentation.methods:
+			_docs_item_list.add_child(HSeparator.new())
+
 		var properties_header := template_label.duplicate()
 		properties_header.bbcode_text += "[b]Property descriptions[/b]"
 		_docs_item_list.add_child(properties_header)
@@ -69,7 +76,7 @@ func set_documentation(documentation: Documentation.QueryResult) -> void:
 		for doc_spec in documentation.properties:
 			var docs_item := template_label.duplicate()
 			docs_item.bbcode_text = (
-				"• [code]%s[/code]\n\n%s"
+				"• [code]%s[/code]\n  %s"
 				% [doc_spec.to_bbcode(), doc_spec.explanation]
 			)
 			_docs_item_list.add_child(docs_item)

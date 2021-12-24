@@ -24,14 +24,6 @@ func get_documentation_resource() -> Documentation:
 	return documentation_resource as Documentation
 
 
-func get_documentation_as_bbcode() -> String:
-	if documentation_resource == null:
-		if not documentation_references.empty():
-			push_error("Documentation References were selected, but no documentation resource was set")
-		return ""
-	return get_documentation_resource().get_references_as_bbcode(documentation_references)
-
-
 func get_documentation_raw() -> Documentation.QueryResult:
 	if documentation_resource == null:
 		if not documentation_references.empty():
