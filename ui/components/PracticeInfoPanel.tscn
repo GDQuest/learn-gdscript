@@ -91,6 +91,7 @@ rect_min_size = Vector2( 571, 252 )
 size_flags_horizontal = 3
 title = "Goals"
 is_expanded = true
+padding = 8.0
 
 [node name="Goal" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Goals" instance=ExtResource( 6 )]
 margin_left = 24.0
@@ -112,6 +113,7 @@ margin_bottom = 378.0
 rect_min_size = Vector2( 571, 47 )
 title = "Checks"
 is_expanded = true
+padding = 8.0
 
 [node name="Documentation" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column" instance=ExtResource( 2 )]
 margin_top = 394.0
@@ -121,10 +123,12 @@ rect_min_size = Vector2( 571, 292 )
 size_flags_vertical = 3
 title = "Documentation"
 is_expanded = true
+padding = 8.0
+first_margin = 16.0
 
 [node name="DocumentationItems" type="VBoxContainer" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Documentation"]
 margin_left = 24.0
 margin_top = 52.0
 margin_right = 1868.0
 margin_bottom = 292.0
-custom_constants/separation = 36
+custom_constants/separation = 16
