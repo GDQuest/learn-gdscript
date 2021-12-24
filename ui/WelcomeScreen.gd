@@ -16,6 +16,10 @@ func _ready() -> void:
 	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
 
 
+func set_button_continue() -> void:
+	_start_button.text = "Continue the Course"
+
+
 func _on_outliner_pressed() -> void:
 	emit_signal("course_requested", true)
 

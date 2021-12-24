@@ -5,7 +5,7 @@ signal transition_completed
 const SCREEN_TRANSITION_DURATION := 0.75
 const OUTLINER_TRANSITION_DURATION := 0.5
 
-export (Resource) var course = preload("res://course/course-learn-gdscript.tres")
+var course: Course
 
 # If `true`, play transition animations.
 var use_transitions := true
@@ -19,7 +19,7 @@ var _breadcrumbs: PoolStringArray
 # Used for transition animations.
 
 var _lesson_index := 0
-var _lesson_count: int = course.lessons.size()
+var _lesson_count: int = 0
 
 onready var _back_button := $VBoxContainer/Buttons/MarginContainer/HBoxContainer/BackButton as Button
 onready var _outliner_button := (
@@ -39,6 +39,7 @@ onready var _tween := $Tween as Tween
 
 
 func _ready() -> void:
+	_lesson_count = course.lessons.size()
 	_course_outliner.course = course
 	
 	NavigationManager.connect("navigation_requested", self, "_navigate_to")
@@ -67,6 +68,19 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("ui_back"):
 		NavigationManager.back()
+
+
+func set_start_from_lesson(lesson_id: String) -> void:
+	if not course:
+		return
+	
+	var matched_index := 0
+	for lesson in course.lessons:
+		if lesson.resource_path == lesson_id:
+			_lesson_index = matched_index
+			break
+		
+		matched_index += 1
 
 
 # Pops the last screen from the stack.

@@ -4,6 +4,8 @@ const LoadingScreen = preload("./LoadingScreen.gd")
 const ReportFormPopup = preload("./components/popups/ReportFormPopup.gd")
 const SettingsPopup = preload("./components/popups/SettingsPopup.gd")
 
+export var default_course := "res://course/course-learn-gdscript.tres"
+
 var _unloading_target: Control
 var _loading_target: Control
 
@@ -19,6 +21,12 @@ onready var _report_form_popup := $ReportFormPopup as ReportFormPopup
 func _ready() -> void:
 	_settings_popup.hide()
 	_report_form_popup.hide()
+	
+	if not default_course.empty():
+		var user_profile = UserProfiles.get_profile()
+		var lesson_id = user_profile.get_last_started_lesson(default_course)
+		if not lesson_id.empty():
+			_welcome_screen.set_button_continue()
 	
 	_loading_screen.connect("faded_in", self, "_on_loading_faded_in")
 	_loading_screen.connect("loading_finished", self, "_on_loading_finished")
@@ -54,9 +62,23 @@ func _on_course_requested(force_outliner: bool = false) -> void:
 	_loading_screen.progress_value = 0.5
 	yield(get_tree(), "idle_frame")
 	
+	if default_course.empty():
+		# We completely failed, chief!
+		printerr("Missing the default course path, make sure to set it in the UICore scene.")
+		return
+	
+	# We don't preload this scene, nor the course resource, so that the initial load into the app
+	# is faster.
 	# FIXME: Use interactive loader instead?
 	var course_navigator_scene := load("res://ui/UINavigator.tscn") as PackedScene
 	var course_navigator = course_navigator_scene.instance()
+	course_navigator.course = load(default_course) as Course
+	
+	var user_profile = UserProfiles.get_profile()
+	var lesson_id = user_profile.get_last_started_lesson(default_course)
+	if not lesson_id.empty():
+		course_navigator.set_start_from_lesson(lesson_id)
+	
 	course_navigator.load_into_outliner = force_outliner
 	_course_screen.add_child(course_navigator)
 	
