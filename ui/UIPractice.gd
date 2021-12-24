@@ -71,6 +71,7 @@ func setup(practice: Practice) -> void:
 		practice_hint.bbcode_text = hint
 		_hints_container.add_child(practice_hint)
 		practice_hint.rect_min_size.x = available_width
+		index += 1
 
 	var slice_path := practice.script_slice_path
 	var base_directory := practice.resource_path.get_base_dir()
