@@ -1,10 +1,10 @@
-# Quizz based on a single or multiple choice form.
-class_name QuizzChoice
-extends Quizz
+# Quiz based on a single or multiple choice form.
+class_name QuizChoice
+extends Quiz
 
 signal choice_type_changed(is_multiple_choice)
 
-const ERROR_NO_VALID_ANSWERS := "No valid answers set for QuizzChoice resource, can't test answers."
+const ERROR_NO_VALID_ANSWERS := "No valid answers set for QuizChoice resource, can't test answers."
 
 export var answer_options := []
 export var valid_answers := []
@@ -13,7 +13,7 @@ export var do_shuffle_answers := true
 
 
 # We use the constructor to reset arrays and avoid a bug where creating a new
-# QuizzChoice references the answer_options and valid_answers of the previously
+# QuizChoice references the answer_options and valid_answers of the previously
 # created resource.
 func _init() -> void:
 	answer_options = []

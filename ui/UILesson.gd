@@ -7,8 +7,8 @@ class_name UILesson
 extends Control
 
 const ContentBlockScene := preload("UIContentBlock.tscn")
-const QuizzInputFieldScene := preload("UIQuizzInputField.tscn")
-const QuizzChoiceScene := preload("UIQuizzChoice.tscn")
+const QuizInputFieldScene := preload("UIQuizInputField.tscn")
+const QuizChoiceScene := preload("UIQuizChoice.tscn")
 const PracticeButtonScene := preload("UIPracticeButton.tscn")
 const RevealerScene := preload("components/Revealer.tscn")
 
@@ -56,8 +56,8 @@ func setup(lesson: Lesson) -> void:
 				_content_blocks.add_child(revealer)
 				revealer.add_child(instance)
 				instance.set_draw_panel(true)
-		elif block is Quizz:
-			var scene = QuizzInputFieldScene if block is QuizzInputField else QuizzChoiceScene
+		elif block is Quiz:
+			var scene = QuizInputFieldScene if block is QuizInputField else QuizChoiceScene
 			var instance = scene.instance()
 			instance.setup(block)
 			_content_blocks.add_child(instance)

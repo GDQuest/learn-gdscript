@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/gdscript-course-builder/ui/TextEditDialog.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/gdscript-course-builder/ui/QuizzContentBlock.gd" type="Script" id=2]
+[ext_resource path="res://addons/gdscript-course-builder/ui/QuizContentBlock.gd" type="Script" id=2]
 
 [sub_resource type="Image" id=6]
 data = {
@@ -37,7 +37,7 @@ flags = 4
 image = SubResource( 8 )
 size = Vector2( 16, 16 )
 
-[node name="QuizzContentBlock" type="MarginContainer"]
+[node name="QuizContentBlock" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -131,9 +131,9 @@ margin_bottom = 86.0
 margin_top = 3.0
 margin_right = 73.0
 margin_bottom = 17.0
-text = "Quizz type:"
+text = "Quiz type:"
 
-[node name="QuizzTypeOption" type="OptionButton" parent="BackgroundPanel/Layout/Settings"]
+[node name="QuizTypeOption" type="OptionButton" parent="BackgroundPanel/Layout/Settings"]
 margin_left = 77.0
 margin_right = 205.0
 margin_bottom = 20.0

@@ -1,4 +1,4 @@
-class_name UIQuizzChoice
+class_name UIQuizChoice
 extends PanelContainer
 
 const COLOR_WHITE_TRANSPARENT := Color(1.0, 1.0, 1.0, 0.0)
@@ -15,30 +15,30 @@ onready var _result_view := $MarginContainer/ResultView as VBoxContainer
 
 onready var _tween := $Tween as Tween
 
-var _quizz: QuizzChoice
+var _quiz: QuizChoice
 
 
 func _ready() -> void:
 	_submit_button.connect("pressed", self, "_test_answer")
 
 
-func setup(quizz: QuizzChoice) -> void:
-	_quizz = quizz
+func setup(quiz: QuizChoice) -> void:
+	_quiz = quiz
 	if not is_inside_tree():
 		yield(self, "ready")
 
-	_question.text = _quizz.question
+	_question.text = _quiz.question
 
-	_content.visible = not _quizz.content_bbcode.empty()
-	_content.bbcode_text = _quizz.content_bbcode
+	_content.visible = not _quiz.content_bbcode.empty()
+	_content.bbcode_text = TextUtils.bbcode_add_code_color(_quiz.content_bbcode)
 
-	_explanation.visible = not _quizz.explanation_bbcode.empty()
-	_explanation.bbcode_text = _quizz.explanation_bbcode
+	_explanation.visible = not _quiz.explanation_bbcode.empty()
+	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(_quiz.explanation_bbcode)
 
-	var answer_options := _quizz.answer_options
-	if _quizz.do_shuffle_answers:
+	var answer_options := _quiz.answer_options
+	if _quiz.do_shuffle_answers:
 		answer_options.shuffle()
-	if _quizz.is_multiple_choice:
+	if _quiz.is_multiple_choice:
 		for answer in answer_options:
 			var button := CheckBox.new()
 			button.text = answer
@@ -55,7 +55,7 @@ func setup(quizz: QuizzChoice) -> void:
 
 func _test_answer() -> void:
 	var answers := _get_answers()
-	var result := _quizz.test_answer(answers)
+	var result := _quiz.test_answer(answers)
 	if not result.is_correct:
 		_tween.stop_all()
 		_outline.modulate = Color.white

@@ -10,7 +10,7 @@ signal practice_got_edit_focus(index)
 const LessonPractice := preload("LessonPractice.gd")
 
 const ContentBlockScene := preload("LessonContentBlock.tscn")
-const QuizzContentBlockScene := preload("QuizzContentBlock.tscn")
+const QuizContentBlockScene := preload("QuizContentBlock.tscn")
 const PracticeScene := preload("LessonPractice.tscn")
 const FileUtils := preload("../utils/FileUtils.gd")
 
@@ -32,8 +32,8 @@ onready var _lesson_content_blocks := $Content/LessonContent/ContentBlocks/ItemL
 onready var _add_content_block_button := (
 	$Content/LessonContent/ContentBlocks/ToolBar/AddBlockButton as Button
 )
-onready var _add_quizz_button := (
-	$Content/LessonContent/ContentBlocks/ToolBar/AddQuizzButton as Button
+onready var _add_quiz_button := (
+	$Content/LessonContent/ContentBlocks/ToolBar/AddQuizButton as Button
 )
 onready var _insert_content_block_dialog := $InsertContentBlockDialog as WindowDialog
 onready var _lesson_practices := $Content/LessonContent/Practices/ItemList as Control
@@ -53,7 +53,7 @@ func _ready() -> void:
 
 	_lesson_title_value.connect("text_changed", self, "_on_title_text_changed")
 	_add_content_block_button.connect("pressed", self, "_on_content_block_added")
-	_add_quizz_button.connect("pressed", self, "_on_quizz_added")
+	_add_quiz_button.connect("pressed", self, "_on_quiz_added")
 	_lesson_content_blocks.connect("item_moved", self, "_on_content_block_moved")
 	_lesson_content_blocks.connect("item_requested_at_index", self, "_on_content_block_requested")
 	_add_practice_button.connect("pressed", self, "_on_practice_added")
@@ -64,7 +64,7 @@ func _ready() -> void:
 	_edit_slug_dialog.connect("confirmed", self, "_on_edit_slug_confirmed")
 	
 	_insert_content_block_dialog.connect("block_selected", self, "_on_content_block_added")
-	_insert_content_block_dialog.connect("quiz_selected", self, "_on_quizz_added")
+	_insert_content_block_dialog.connect("quiz_selected", self, "_on_quiz_added")
 
 
 func _update_theme() -> void:
@@ -75,7 +75,7 @@ func _update_theme() -> void:
 		"font_color_uneditable", get_color("disabled_font_color", "Editor")
 	)
 	_add_content_block_button.icon = get_icon("New", "EditorIcons")
-	_add_quizz_button.icon = _add_content_block_button.icon
+	_add_quiz_button.icon = _add_content_block_button.icon
 	_add_practice_button.icon = get_icon("New", "EditorIcons")
 
 	var tab_style = get_stylebox("panel", "TabContainer")
@@ -131,13 +131,13 @@ func _recreate_content_blocks() -> void:
 
 	var index := 0
 	for content_block in _edited_lesson.content_blocks:
-		var scene_type := QuizzContentBlockScene if content_block is Quizz else ContentBlockScene
+		var scene_type := QuizContentBlockScene if content_block is Quiz else ContentBlockScene
 		var scene_instance = scene_type.instance()
 		_lesson_content_blocks.add_item(scene_instance)
 		scene_instance.connect("block_removed", self, "_on_content_block_removed", [index])
 
-		if scene_type == QuizzContentBlockScene:
-			scene_instance.connect("quizz_resource_changed", self, "_on_quizz_resource_changed")
+		if scene_type == QuizContentBlockScene:
+			scene_instance.connect("quiz_resource_changed", self, "_on_quiz_resource_changed")
 
 		scene_instance.set_list_index(index)
 		scene_instance.setup(content_block)
@@ -217,12 +217,12 @@ func _on_content_block_added(at_index: int = -1) -> void:
 	block_data.connect("changed", self, "_on_lesson_resource_changed")
 
 
-func _on_quizz_added(at_index: int = -1) -> void:
+func _on_quiz_added(at_index: int = -1) -> void:
 	if not _edited_lesson:
 		return
 
-	var block_data := QuizzChoice.new()
-	var block_path = FileUtils.generate_random_lesson_subresource_path(_edited_lesson, "quizz")
+	var block_data := QuizChoice.new()
+	var block_path = FileUtils.generate_random_lesson_subresource_path(_edited_lesson, "quiz")
 	block_data.take_over_path(block_path)
 	
 	if at_index >= 0 and at_index < _edited_lesson.content_blocks.size():
@@ -329,9 +329,9 @@ func _on_LessonContent_tab_changed(index: int) -> void:
 		emit_signal("lesson_tab_selected")
 
 
-func _on_quizz_resource_changed(previous_quizz: Quizz, new_quizz: Quizz) -> void:
-	var index := _edited_lesson.content_blocks.find(previous_quizz)
-	_edited_lesson.content_blocks[index] = new_quizz
+func _on_quiz_resource_changed(previous_quiz: Quiz, new_quiz: Quiz) -> void:
+	var index := _edited_lesson.content_blocks.find(previous_quiz)
+	_edited_lesson.content_blocks[index] = new_quiz
 	_recreate_content_blocks()
 
 

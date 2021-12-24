@@ -2,7 +2,7 @@ extends Object
 
 const LETTERS_AND_DIGITS := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 const CHARACTER_COUNT := 62
-const SUPPORTED_LESSON_RESOURCES := ["content", "practice", "quizz"]
+const SUPPORTED_LESSON_RESOURCES := ["content", "practice", "quiz"]
 
 # Recursively saves the course content: lessons, their order, their content, and
 # their practices.

@@ -1,6 +1,6 @@
-# Quizz based on an editable text field in which the user types a number or text.
-class_name QuizzInputField
-extends Quizz
+# Quiz based on an editable text field in which the user types a number or text.
+class_name QuizInputField
+extends Quiz
 
 var valid_answer setget set_valid_answer
 # One of the TYPE_* constants. Set automatically by changing the valid_answer.

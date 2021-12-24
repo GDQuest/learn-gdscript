@@ -1,4 +1,4 @@
-class_name UIQuizzInputField
+class_name UIQuizInputField
 extends PanelContainer
 
 const COLOR_WHITE_TRANSPARENT := Color(1.0, 1.0, 1.0, 0.0)
@@ -17,7 +17,7 @@ onready var _result_view := $MarginContainer/ResultView as VBoxContainer
 onready var _tween := $Tween as Tween
 onready var _help_message := $MarginContainer/ChoiceView/HelpMessage as Label
 
-var _quizz: QuizzInputField
+var _quiz: QuizInputField
 
 
 func _ready() -> void:
@@ -25,22 +25,22 @@ func _ready() -> void:
 	_line_edit.connect("text_entered", self, "_test_answer")
 
 
-func setup(quizz: QuizzInputField) -> void:
-	_quizz = quizz
+func setup(quiz: QuizInputField) -> void:
+	_quiz = quiz
 	if not is_inside_tree():
 		yield(self, "ready")
 
-	_question.text = _quizz.question
+	_question.text = _quiz.question
 
-	_content.visible = not _quizz.content_bbcode.empty()
-	_content.bbcode_text = _quizz.content_bbcode
+	_content.visible = not _quiz.content_bbcode.empty()
+	_content.bbcode_text = TextUtils.bbcode_add_code_color(_quiz.content_bbcode)
 
-	_explanation.visible = not _quizz.explanation_bbcode.empty()
-	_explanation.bbcode_text = _quizz.explanation_bbcode
+	_explanation.visible = not _quiz.explanation_bbcode.empty()
+	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(_quiz.explanation_bbcode)
 
 
 func _test_answer() -> void:
-	var result := _quizz.test_answer(_line_edit.text)
+	var result := _quiz.test_answer(_line_edit.text)
 	_help_message.text = result.help_message
 	_help_message.visible = not result.help_message.empty()
 	if not result.is_correct:

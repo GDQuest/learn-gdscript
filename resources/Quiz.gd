@@ -1,5 +1,5 @@
 # Base class for specific kinds of interactive quizzes.
-class_name Quizz
+class_name Quiz
 extends Resource
 
 export var question := ""
@@ -16,5 +16,5 @@ class AnswerTestResult:
 # Returns an error message
 # @tags: virtual
 func test_answer(_answer) -> AnswerTestResult:
-	printerr("You didn't override the _is_answer_correct() method on the Quizz resource.")
+	printerr("You didn't override the _is_answer_correct() method on the Quiz resource.")
 	return AnswerTestResult.new()

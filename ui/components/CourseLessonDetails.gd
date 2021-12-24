@@ -35,7 +35,7 @@ func _update_visuals() -> void:
 
 		var total_quizzes := 0
 		for content_item in lesson.content_blocks:
-			if content_item is Quizz:
+			if content_item is Quiz:
 				total_quizzes += 1
 		
 		var completed_quizzes := 0

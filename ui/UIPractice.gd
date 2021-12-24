@@ -58,7 +58,7 @@ func setup(practice: Practice) -> void:
 		yield(self, "ready")
 
 	_practice = practice
-	_practice_info_panel.goal_rich_text_label.bbcode_text = practice.goal
+	_practice_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(practice.goal)
 	_practice_info_panel.title_label.text = practice.title
 	_code_editor.text = practice.starting_code
 

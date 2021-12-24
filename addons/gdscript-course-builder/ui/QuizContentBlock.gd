@@ -2,19 +2,19 @@ tool
 extends MarginContainer
 
 signal block_removed
-signal quizz_resource_changed(previous_quizz, new_quizz)
+signal quiz_resource_changed(previous_quiz, new_quiz)
 
-# Matches the quizz type options indices the user can select using the quizz
+# Matches the quiz type options indices the user can select using the quiz
 # type OptionButton.
 enum { ITEM_MULTIPLE_CHOICE, ITEM_SINGLE_CHOICE, ITEM_TEXT_INPUT }
 
-enum ConfirmMode { REMOVE_BLOCK, CHANGE_QUIZZ_TYPE }
+enum ConfirmMode { REMOVE_BLOCK, CHANGE_QUIZ_TYPE }
 
-const QuizzChoiceListScene := preload("QuizzChoiceList.tscn")
-const QuizzInputFieldScene := preload("QuizzInputField.tscn")
+const QuizChoiceListScene := preload("QuizChoiceList.tscn")
+const QuizInputFieldScene := preload("QuizInputField.tscn")
 
-# Edited quizz resource. Can change between a QuizzChoice or a QuizzInputField.
-var _quizz: Quizz
+# Edited quiz resource. Can change between a QuizChoice or a QuizInputField.
+var _quiz: Quiz
 var _list_index := -1
 var _confirm_dialog_mode := -1
 var _drag_preview_style: StyleBox
@@ -28,7 +28,7 @@ onready var _title_label := $BackgroundPanel/Layout/HeaderBar/ContentTitle as La
 onready var _remove_button := $BackgroundPanel/Layout/HeaderBar/RemoveButton as Button
 
 onready var _question_line_edit := $BackgroundPanel/Layout/Question/LineEdit as LineEdit
-onready var _quizz_type_options := $BackgroundPanel/Layout/Settings/QuizzTypeOption as OptionButton
+onready var _quiz_type_options := $BackgroundPanel/Layout/Settings/QuizTypeOption as OptionButton
 
 onready var _body_text_edit := $BackgroundPanel/Layout/Body/Editor/TextEdit as TextEdit
 onready var _body_expand_button := $BackgroundPanel/Layout/Body/Editor/ExpandButton as Button
@@ -67,7 +67,7 @@ func _ready() -> void:
 
 	_confirm_dialog.connect("confirmed", self, "_on_confirm_dialog_confirmed")
 
-	_quizz_type_options.connect("item_selected", self, "_on_quizz_type_options_item_selected")
+	_quiz_type_options.connect("item_selected", self, "_on_quiz_type_options_item_selected")
 
 	# Update theme items
 	var panel_style = get_stylebox("panel", "Panel").duplicate()
@@ -130,24 +130,24 @@ func set_list_index(index: int) -> void:
 
 # Set by the LessonDetails resource when loading a course.
 #
-# Updates the interface based on the passed quizz resource.
-func setup(quizz_block: Quizz) -> void:
-	_quizz = quizz_block
+# Updates the interface based on the passed quiz resource.
+func setup(quiz_block: Quiz) -> void:
+	_quiz = quiz_block
 
-	_question_line_edit.text = _quizz.question
+	_question_line_edit.text = _quiz.question
 
-	_body_text_edit.text = _quizz.content_bbcode
-	_body_info_label.visible = _quizz.content_bbcode.empty()
+	_body_text_edit.text = _quiz.content_bbcode
+	_body_info_label.visible = _quiz.content_bbcode.empty()
 
-	_explanation_text_edit.text = _quizz.explanation_bbcode
-	_explanation_info_label.visible = _quizz.explanation_bbcode.empty()
+	_explanation_text_edit.text = _quiz.explanation_bbcode
+	_explanation_info_label.visible = _quiz.explanation_bbcode.empty()
 
-	if _quizz is QuizzInputField:
-		_quizz_type_options.selected = 2
-	elif _quizz is QuizzChoice:
-		_quizz_type_options.selected = 0 if _quizz.is_multiple_choice else 1
+	if _quiz is QuizInputField:
+		_quiz_type_options.selected = 2
+	elif _quiz is QuizChoice:
+		_quiz_type_options.selected = 0 if _quiz.is_multiple_choice else 1
 	else:
-		printerr("Trying to load unsupported quizz type: %s" % [_quizz.get_class()])
+		printerr("Trying to load unsupported quiz type: %s" % [_quiz.get_class()])
 
 	_rebuild_answers()
 
@@ -156,10 +156,10 @@ func _rebuild_answers() -> void:
 	for child in _answers_container.get_children():
 		child.queue_free()
 
-	var scene = QuizzChoiceListScene if _quizz is QuizzChoice else QuizzInputFieldScene
+	var scene = QuizChoiceListScene if _quiz is QuizChoice else QuizInputFieldScene
 	var instance = scene.instance()
 	_answers_container.add_child(instance)
-	instance.setup(_quizz)
+	instance.setup(_quiz)
 
 
 # Helpers
@@ -184,44 +184,44 @@ func _on_remove_block_requested() -> void:
 
 
 func _on_question_line_edit_text_changed(new_text: String) -> void:
-	_quizz.question = new_text
-	_quizz.emit_changed()
+	_quiz.question = new_text
+	_quiz.emit_changed()
 
 
 func _on_body_text_edit_text_changed() -> void:
 	_body_info_label.visible = _body_text_edit.text.empty()
-	_quizz.content_bbcode = _body_text_edit.text
-	_quizz.emit_changed()
+	_quiz.content_bbcode = _body_text_edit.text
+	_quiz.emit_changed()
 
 
 func _on_explanation_text_edit_text_changed() -> void:
 	_explanation_info_label.visible = _explanation_text_edit.text.empty()
-	_quizz.explanation_bbcode = _explanation_text_edit.text
-	_quizz.emit_changed()
+	_quiz.explanation_bbcode = _explanation_text_edit.text
+	_quiz.emit_changed()
 
 
 # TODO: Confirm with confirmation dialog first
-func _on_quizz_type_options_item_selected(index: int) -> void:
+func _on_quiz_type_options_item_selected(index: int) -> void:
 	if index in [ITEM_MULTIPLE_CHOICE, ITEM_SINGLE_CHOICE]:
-		if _quizz is QuizzChoice:
-			_quizz.set_is_multiple_choice(index == ITEM_MULTIPLE_CHOICE)
+		if _quiz is QuizChoice:
+			_quiz.set_is_multiple_choice(index == ITEM_MULTIPLE_CHOICE)
 		else:
-			_create_new_quizz_resource(QuizzChoice, _quizz)
+			_create_new_quiz_resource(QuizChoice, _quiz)
 	elif index == ITEM_TEXT_INPUT:
-		_create_new_quizz_resource(QuizzInputField, _quizz)
+		_create_new_quiz_resource(QuizInputField, _quiz)
 	else:
 		printerr("Selected unsupported item type: %s" % [index])
 
 
-func _create_new_quizz_resource(new_type, from: Quizz) -> void:
-	var previous_quizz = _quizz
-	_quizz = new_type.new()
-	_quizz.content_bbcode = from.content_bbcode
-	_quizz.question = from.question
-	_quizz.hint = from.hint
-	_quizz.explanation_bbcode = from.explanation_bbcode
-	_quizz.take_over_path(previous_quizz.resource_path)
-	emit_signal("quizz_resource_changed", previous_quizz, _quizz)
+func _create_new_quiz_resource(new_type, from: Quiz) -> void:
+	var previous_quiz = _quiz
+	_quiz = new_type.new()
+	_quiz.content_bbcode = from.content_bbcode
+	_quiz.question = from.question
+	_quiz.hint = from.hint
+	_quiz.explanation_bbcode = from.explanation_bbcode
+	_quiz.take_over_path(previous_quiz.resource_path)
+	emit_signal("quiz_resource_changed", previous_quiz, _quiz)
 	_rebuild_answers()
 
 
@@ -250,7 +250,7 @@ func _open_text_edit_dialog(source: TextEdit) -> void:
 func _transfer_text_edit_dialog_text(target: TextEdit) -> void:
 	target.set_text(_text_edit_dialog.text)
 	target.emit_signal("text_changed")
-	_quizz.emit_changed()
+	_quiz.emit_changed()
 	target.cursor_set_line(_text_edit_dialog.get_line())
 	target.cursor_set_column(_text_edit_dialog.get_column())
 	target.grab_focus()

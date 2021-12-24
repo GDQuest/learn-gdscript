@@ -23,7 +23,7 @@ func setup(content_block: ContentBlock) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 
-	_rich_text_label.bbcode_text = content_block.text
+	_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(content_block.text)
 	_margin.visible = not content_block.text.empty()
 
 	if content_block.visual_element_path != "":

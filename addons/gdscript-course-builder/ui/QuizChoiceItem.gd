@@ -1,8 +1,8 @@
-# Single choice field for a multiple or single option quizz.
+# Single choice field for a multiple or single option quiz.
 #
 # Displays buttons to sort and remove the field.
 tool
-class_name QuizzChoiceItem
+class_name QuizChoiceItem
 extends MarginContainer
 
 signal choice_changed

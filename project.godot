@@ -125,24 +125,24 @@ _global_script_classes=[ {
 "path": "res://resources/Profile.gd"
 }, {
 "base": "Resource",
-"class": "Quizz",
+"class": "Quiz",
 "language": "GDScript",
-"path": "res://resources/Quizz.gd"
+"path": "res://resources/Quiz.gd"
 }, {
-"base": "Quizz",
-"class": "QuizzChoice",
+"base": "Quiz",
+"class": "QuizChoice",
 "language": "GDScript",
-"path": "res://resources/QuizzChoice.gd"
+"path": "res://resources/QuizChoice.gd"
 }, {
 "base": "MarginContainer",
-"class": "QuizzChoiceItem",
+"class": "QuizChoiceItem",
 "language": "GDScript",
-"path": "res://addons/gdscript-course-builder/ui/QuizzChoiceItem.gd"
+"path": "res://addons/gdscript-course-builder/ui/QuizChoiceItem.gd"
 }, {
-"base": "Quizz",
-"class": "QuizzInputField",
+"base": "Quiz",
+"class": "QuizInputField",
 "language": "GDScript",
-"path": "res://resources/QuizzInputField.gd"
+"path": "res://resources/QuizInputField.gd"
 }, {
 "base": "Reference",
 "class": "RegExpGroup",
@@ -220,14 +220,14 @@ _global_script_classes=[ {
 "path": "res://ui/UIPracticeButton.gd"
 }, {
 "base": "PanelContainer",
-"class": "UIQuizzChoice",
+"class": "UIQuizChoice",
 "language": "GDScript",
-"path": "res://ui/UIQuizzChoice.gd"
+"path": "res://ui/UIQuizChoice.gd"
 }, {
 "base": "PanelContainer",
-"class": "UIQuizzInputField",
+"class": "UIQuizInputField",
 "language": "GDScript",
-"path": "res://ui/UIQuizzInputField.gd"
+"path": "res://ui/UIQuizInputField.gd"
 }, {
 "base": "Node2D",
 "class": "WrappingNode2D",
@@ -258,10 +258,10 @@ _global_script_class_icons={
 "PracticeTestDisplay": "",
 "PracticeTester": "",
 "Profile": "",
-"Quizz": "",
-"QuizzChoice": "",
-"QuizzChoiceItem": "",
-"QuizzInputField": "",
+"Quiz": "",
+"QuizChoice": "",
+"QuizChoiceItem": "",
+"QuizInputField": "",
 "RegExpGroup": "",
 "Revealer": "res://ui/components/Revealer.svg",
 "RunnableCodeExample": "",
@@ -277,8 +277,8 @@ _global_script_class_icons={
 "UILesson": "",
 "UIPractice": "",
 "UIPracticeButton": "",
-"UIQuizzChoice": "",
-"UIQuizzInputField": "",
+"UIQuizChoice": "",
+"UIQuizInputField": "",
 "WrappingNode2D": ""
 }
 
@@ -296,6 +296,7 @@ LiveEditorState="*res://autoload/LiveEditorState.gd"
 ThemeManager="*res://autoload/ThemeManager.gd"
 Events="*res://autoload/Events.gd"
 NavigationManager="*res://autoload/NavigationManager.gd"
+TextUtils="*res://autoload/TextUtils.gd"
 
 [debug]
 
