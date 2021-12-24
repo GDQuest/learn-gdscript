@@ -1,21 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/theme/panel_darker.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/UIQuizChoice.gd" type="Script" id=4]
-
-[sub_resource type="StyleBoxFlat" id=1]
-draw_center = false
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 1, 0.0941176, 0.321569, 1 )
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
 
 [node name="UIQuizChoice" type="PanelContainer"]
 margin_right = 101.0
@@ -32,7 +20,6 @@ __meta__ = {
 modulate = Color( 1, 1, 1, 0 )
 margin_right = 400.0
 margin_bottom = 190.0
-custom_styles/panel = SubResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 400.0

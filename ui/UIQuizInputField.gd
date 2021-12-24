@@ -4,6 +4,11 @@ extends PanelContainer
 signal quiz_passed
 signal quiz_skipped
 
+const ERROR_OUTLINE := preload("res://ui/theme/quiz_outline_error.tres")
+const PASSED_OUTLINE := preload("res://ui/theme/quiz_outline_passed.tres")
+
+const OUTLINE_FLASH_DURATION := 0.8
+const OUTLINE_FLASH_DELAY := 0.75
 const COLOR_WHITE_TRANSPARENT := Color(1.0, 1.0, 1.0, 0.0)
 
 onready var _outline := $Outline as PanelContainer
@@ -49,18 +54,23 @@ func _test_answer() -> void:
 	if not result.is_correct:
 		_tween.stop_all()
 		_outline.modulate = Color.white
+		_outline.add_stylebox_override("panel", ERROR_OUTLINE)
+		
 		_tween.interpolate_property(
 			_outline,
 			"modulate",
 			_outline.modulate,
 			COLOR_WHITE_TRANSPARENT,
-			0.8,
+			OUTLINE_FLASH_DURATION,
 			Tween.TRANS_LINEAR,
 			Tween.EASE_IN,
-			0.75
+			OUTLINE_FLASH_DELAY
 		)
 		_tween.start()
 	else:
+		_outline.modulate = Color.white
+		_outline.add_stylebox_override("panel", PASSED_OUTLINE)
+		
 		_result_view.show()
 		_choice_view.hide()
 		emit_signal("quiz_passed")
