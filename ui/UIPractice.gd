@@ -15,15 +15,21 @@ var _tester: PracticeTester
 var _code_editor_is_dirty := false
 var _practice: Practice
 
+var _is_left_panel_open := true
+var _info_panel_start_width := -1.0
+
 onready var _game_container := find_node("Output") as Control
 onready var _game_viewport := _game_container.find_node("GameViewport") as GameViewport
 onready var _output_console := _game_container.find_node("Console") as OutputConsole
 
-onready var _practice_info_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
+onready var _info_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
 onready var _documentation_panel := find_node("DocumentationPanel") as RichTextLabel
-onready var _hints_container := _practice_info_panel.hints_container
+onready var _hints_container := _info_panel.hints_container
 
 onready var _code_editor := find_node("CodeEditor") as CodeEditor
+
+onready var _info_panel_control := $Margin/Layout/Control as Control
+onready var _tween := $Tween as Tween
 
 
 func _ready() -> void:
@@ -38,6 +44,8 @@ func _ready() -> void:
 
 	if test_practice and get_parent() == get_tree().root:
 		setup(test_practice)
+
+	_info_panel_start_width = _info_panel.rect_size.x
 
 
 func _input(event: InputEvent) -> void:
@@ -58,8 +66,8 @@ func setup(practice: Practice) -> void:
 		yield(self, "ready")
 
 	_practice = practice
-	_practice_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(practice.goal)
-	_practice_info_panel.title_label.text = practice.title
+	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(practice.goal)
+	_info_panel.title_label.text = practice.title
 	_code_editor.text = practice.starting_code
 
 	_hints_container.visible = not practice.hints.empty()
@@ -87,11 +95,11 @@ func setup(practice: Practice) -> void:
 
 	var documentation_reference := _practice.get_documentation_raw()
 	if documentation_reference.is_empty():
-		_practice_info_panel.clear_documentation()
+		_info_panel.clear_documentation()
 	else:
-		_practice_info_panel.set_documentation(documentation_reference)
+		_info_panel.set_documentation(documentation_reference)
 
-	_practice_info_panel.display_tests(_tester.get_test_names())
+	_info_panel.display_tests(_tester.get_test_names())
 	LiveEditorState.current_slice = _script_slice
 	_game_viewport.use_scene()
 
@@ -100,7 +108,7 @@ func set_progress(new_progress: float) -> void:
 	progress = new_progress
 	if not is_inside_tree():
 		yield(self, "ready")
-	_practice_info_panel.progress_bar.value = progress
+	_info_panel.progress_bar.value = progress
 
 
 func _on_run_button_pressed() -> void:
@@ -144,7 +152,7 @@ func _on_run_button_pressed() -> void:
 	LiveEditorState.update_nodes(script, nodes_paths)
 
 	var result := _tester.run_tests()
-	_practice_info_panel.update_tests_display(result)
+	_info_panel.update_tests_display(result)
 	if result.is_success():
 		var popup := LessonDonePopupScene.instance()
 		add_child(popup)
@@ -152,11 +160,18 @@ func _on_run_button_pressed() -> void:
 
 
 func _toggle_distraction_free_mode() -> void:
-	var is_distraction_free := _practice_info_panel.visible
-	
-	_practice_info_panel.visible = not is_distraction_free
-	_game_container.visible = not is_distraction_free
-	_code_editor.set_distraction_free_state(is_distraction_free)
+	_is_left_panel_open = not _is_left_panel_open
+	_tween.stop_all()
+	var duration := 0.3
+	if _is_left_panel_open:
+		_tween.interpolate_property(_info_panel_control, "rect_min_size:x", _info_panel_control.rect_min_size.x, _info_panel_start_width, duration)
+		_tween.interpolate_property(_info_panel_control, "modulate:a", _info_panel_control.modulate.a, 1.0, duration)
+	else:
+		_tween.interpolate_property(_info_panel_control, "rect_min_size:x", _info_panel_control.rect_min_size.x, 0.0, duration)
+		_tween.interpolate_property(_info_panel_control, "modulate:a", _info_panel_control.modulate.a, 0.0, duration)
+	_tween.start()
+
+	_code_editor.set_distraction_free_state(not _is_left_panel_open)
 
 
 func _on_code_editor_text_changed(_text: String) -> void:
