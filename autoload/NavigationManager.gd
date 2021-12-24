@@ -124,6 +124,7 @@ func get_current_url():
 var _js_available := OS.has_feature("JavaScript")
 var _js_history: JavaScriptObject
 var _js_popstate_listener_ref: JavaScriptObject
+var _js_window: JavaScriptObject
 # We do not want to capture the JS state change when we control it ourselves
 # We use this to stop listening on one frame
 var _temporary_disable_back_listener := false
@@ -137,18 +138,15 @@ func _on_init_setup_js() -> void:
 	# if the reference doesn't survive the method call, the callback will be dereferenced
 	_js_popstate_listener_ref = JavaScript.create_callback(self, "_on_js_popstate")
 	
-	var _js_window := JavaScript.get_interface("window")
+	_js_window = JavaScript.get_interface("window")
 	# warning-ignore:unsafe_method_access
 	_js_window.addEventListener("popstate", _js_popstate_listener_ref)
 
 	# warning-ignore:unsafe_property_access
 	var url: String = (
 		# warning-ignore:unsafe_property_access
-		_js_history.state if _js_history.state else (
-			# warning-ignore:unsafe_property_access
-			# warning-ignore:unsafe_property_access
-			_js_window.location.pathname.trim_prefix("/") if _js_window.location.pathname else ""
-		)
+		# warning-ignore:unsafe_property_access
+		_js_window.location.hash.trim_prefix("#") if _js_window.location.hash else ""
 	)
 	if url:
 		navigate_to("res://%s"%[url])
@@ -191,8 +189,8 @@ func _push_javascript_state(url: String) -> void:
 	if not _js_available:
 		return
 	# warning-ignore:unsafe_method_access
-	_js_history.pushState(url, '', url)
-
+	# warning-ignore:unsafe_method_access
+	_js_window.location.hash = url
 
 class NormalizedUrl:
 	var protocol := ""
