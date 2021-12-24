@@ -18,7 +18,6 @@ onready var _error_explanation_block := $MarginContainer/Column/Content/ErrorExp
 onready var _error_explanation_value := (
 	$MarginContainer/Column/Content/ErrorExplanation/Value as RichTextLabel
 )
-onready var _more_help_button := $MarginContainer/Column/Content/ErrorExplanation/MoreHelpButton as Button
 onready var _error_suggestion_block := $MarginContainer/Column/Content/ErrorSuggestion as Revealer
 onready var _error_suggestion_value := (
 	$MarginContainer/Column/Content/ErrorSuggestion/Value as RichTextLabel
@@ -34,33 +33,10 @@ func _ready() -> void:
 	_update_explanation()
 	_exclusive_buttons.visible = exclusive
 
+	_error_explanation_block.connect("opened", self, "_on_revealer_opened", [_error_explanation_block])
+	_error_suggestion_block.connect("opened", self, "_on_revealer_opened", [_error_suggestion_block])
 	_close_button.connect("pressed", self, "hide")
 	hide()
-
-
-func _update_explanation() -> void:
-	if not is_inside_tree():
-		return
-	
-	if _error_explanation.empty() and _error_suggestion.empty():
-		_error_explanation_block.hide()
-		_error_suggestion_block.hide()
-		_content_block.hide()
-		_no_content_label.show()
-	else:
-		_no_content_label.hide()
-		_error_explanation_block.hide()
-		_error_suggestion_block.hide()
-		
-		if not _error_explanation.empty():
-			_error_explanation_value.bbcode_text = _error_explanation
-			_error_explanation_block.show()
-		
-		if not _error_suggestion.empty():
-			_error_suggestion_value.bbcode_text = _error_suggestion
-			_error_suggestion_block.show()
-		
-		_content_block.show()
 
 
 func show_message(position: Vector2, code: int, message: String, message_source: Node) -> void:
@@ -100,3 +76,35 @@ func set_error_message(value: String) -> void:
 
 	if is_inside_tree():
 		_error_label.text = error_message
+
+
+func _update_explanation() -> void:
+	if not is_inside_tree():
+		return
+	
+	if _error_explanation.empty() and _error_suggestion.empty():
+		_error_explanation_block.hide()
+		_error_suggestion_block.hide()
+		_content_block.hide()
+		_no_content_label.show()
+	else:
+		_no_content_label.hide()
+		_error_explanation_block.hide()
+		_error_suggestion_block.hide()
+		
+		if not _error_explanation.empty():
+			_error_explanation_value.bbcode_text = _error_explanation
+			_error_explanation_block.show()
+		
+		if not _error_suggestion.empty():
+			_error_suggestion_value.bbcode_text = _error_suggestion
+			_error_suggestion_block.show()
+		
+		_content_block.show()
+
+
+func _on_revealer_opened(which: Revealer) -> void:
+	if which == _error_explanation_block and _error_suggestion_block.is_expanded:
+		_error_suggestion_block.is_expanded = false
+	elif which == _error_suggestion_block and _error_explanation_block.is_expanded:
+		_error_explanation_block.is_expanded = false

@@ -1,9 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/popups/ErrorOverlayPopup.gd" type="Script" id=2]
-[ext_resource path="res://ui/icons/icon_help.png" type="Texture" id=3]
-[ext_resource path="res://ui/theme/fonts/font_button_small.tres" type="DynamicFont" id=4]
 [ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=7]
@@ -69,38 +67,27 @@ size_flags_vertical = 3
 
 [node name="ErrorExplanation" parent="MarginContainer/Column/Content" instance=ExtResource( 5 )]
 margin_right = 564.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 200, 96 )
 title = "Why this happens"
 padding = 8.0
 use_small_font = true
 
 [node name="Value" type="RichTextLabel" parent="MarginContainer/Column/Content/ErrorExplanation"]
 visible = false
+margin_left = 8.0
 margin_top = 52.0
-margin_right = 497.0
+margin_right = 564.0
 margin_bottom = 180.0
 bbcode_enabled = true
 bbcode_text = "Our error explanation."
 text = "Our error explanation."
 fit_content_height = true
 
-[node name="MoreHelpButton" type="Button" parent="MarginContainer/Column/Content/ErrorExplanation"]
-visible = false
-margin_top = 182.0
-margin_right = 497.0
-margin_bottom = 226.0
-rect_min_size = Vector2( 220, 0 )
-size_flags_horizontal = 0
-custom_constants/hseparation = 8
-custom_fonts/font = ExtResource( 4 )
-text = "More information"
-icon = ExtResource( 3 )
-align = 0
-expand_icon = true
-
 [node name="ErrorSuggestion" parent="MarginContainer/Column/Content" instance=ExtResource( 5 )]
-margin_top = 63.0
+margin_top = 112.0
 margin_right = 564.0
-margin_bottom = 243.0
+margin_bottom = 292.0
 rect_min_size = Vector2( 200, 180 )
 title = "How to fix this"
 is_expanded = true

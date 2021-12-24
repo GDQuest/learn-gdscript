@@ -2,6 +2,8 @@ tool
 class_name Revealer, "./Revealer.svg"
 extends Container
 
+signal opened
+
 # Duration of the tween animation in seconds.
 const ANIM_DURATION := 0.1
 
@@ -71,14 +73,19 @@ func get_contents() -> Array:
 	return _contents
 
 
-func set_is_expanded(new_is_expanded: bool) -> void:
-	is_expanded = new_is_expanded
+func set_is_expanded(value: bool) -> void:
+	is_expanded = value
 
 	if not is_inside_tree():
 		yield(self, "ready")
 
+	# We need to synchronize the button in case another object called this method.
+	if _button.pressed != value:
+		_button.pressed = value
+
 	if is_expanded:
 		_rotate_chevron(90.0)
+		emit_signal("opened")
 	else:
 		_rotate_chevron(0.0)
 
