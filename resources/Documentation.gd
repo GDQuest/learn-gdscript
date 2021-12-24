@@ -45,6 +45,8 @@ static func parse_documentation_file(path: String) -> Dictionary:
 
 	while !file.eof_reached():
 		var csv_line := file.get_csv_line()
+		if csv_line[0] == "":
+			break
 		var method_spec := MethodSpecification.new()
 		method_spec.name = csv_line[0]
 		var return_type: String = csv_line[1].strip_edges()
