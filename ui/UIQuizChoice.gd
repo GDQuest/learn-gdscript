@@ -1,6 +1,9 @@
 class_name UIQuizChoice
 extends PanelContainer
 
+signal quiz_passed
+signal quiz_skipped
+
 const COLOR_WHITE_TRANSPARENT := Color(1.0, 1.0, 1.0, 0.0)
 
 onready var _outline := $Outline as PanelContainer
@@ -77,6 +80,7 @@ func _test_answer() -> void:
 	else:
 		_result_view.show()
 		_choice_view.hide()
+		emit_signal("quiz_passed")
 
 
 # Returns an array of indices of selected answers

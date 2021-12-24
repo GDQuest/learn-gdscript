@@ -36,6 +36,8 @@ func setup(lesson: Lesson) -> void:
 
 	_title.text = lesson.title
 
+	var quiz_index := 0
+
 	for block in lesson.content_blocks:
 		if block is ContentBlock:
 			var instance: UIContentBlock = ContentBlockScene.instance()
@@ -56,11 +58,15 @@ func setup(lesson: Lesson) -> void:
 				_content_blocks.add_child(revealer)
 				revealer.add_child(instance)
 				instance.set_draw_panel(true)
+		
 		elif block is Quiz:
 			var scene = QuizInputFieldScene if block is QuizInputField else QuizChoiceScene
 			var instance = scene.instance()
 			instance.setup(block)
 			_content_blocks.add_child(instance)
+			instance.connect("quiz_passed", Events, "emit_signal", ["quiz_completed", quiz_index])
+			
+			quiz_index += 1
 
 	for practice in lesson.practices:
 		var button: UIPracticeButton = PracticeButtonScene.instance()
