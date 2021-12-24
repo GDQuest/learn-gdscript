@@ -39,23 +39,40 @@ func set_title(new_title: String) -> void:
 	title_label.text = title
 
 
-func set_documentation(doc_array: Array) -> void:
+func set_documentation(documentation: Documentation.QueryResult) -> void:
 	for child_node in _docs_item_list.get_children():
 		_docs_item_list.remove_child(child_node)
 		child_node.queue_free()
-	
-	var methods_header := RichTextLabel.new()
-	methods_header.fit_content_height = true
-	methods_header.bbcode_enabled = true
-	methods_header.bbcode_text = "[b]Method descriptions[/b]"
-	_docs_item_list.add_child(methods_header)
-	
-	for doc_spec in doc_array:
-		var docs_item := RichTextLabel.new()
-		docs_item.fit_content_height = true
-		docs_item.bbcode_enabled = true
-		docs_item.bbcode_text = "• [code]%s[/code]\n\n%s" % [doc_spec.to_bbcode(), doc_spec.explanation.strip_edges()]
-		_docs_item_list.add_child(docs_item)
+
+	var template_label := RichTextLabel.new()
+	template_label.fit_content_height = true
+	template_label.bbcode_enabled = true
+
+	if documentation.methods:
+		var methods_header := template_label.duplicate()
+		methods_header.bbcode_text = "[b]Method descriptions[/b]"
+		_docs_item_list.add_child(methods_header)
+
+		for doc_spec in documentation.methods:
+			var docs_item := template_label.duplicate()
+			docs_item.bbcode_text = (
+				"• [code]%s[/code]\n\n%s"
+				% [doc_spec.to_bbcode(), doc_spec.explanation]
+			)
+			_docs_item_list.add_child(docs_item)
+
+	if documentation.properties:
+		var properties_header := template_label.duplicate()
+		properties_header.bbcode_text += "[b]Property descriptions[/b]"
+		_docs_item_list.add_child(properties_header)
+
+		for doc_spec in documentation.properties:
+			var docs_item := template_label.duplicate()
+			docs_item.bbcode_text = (
+				"• [code]%s[/code]\n\n%s"
+				% [doc_spec.to_bbcode(), doc_spec.explanation]
+			)
+			_docs_item_list.add_child(docs_item)
 
 	docs_container.show()
 	yield(get_tree(), "idle_frame")

@@ -85,7 +85,7 @@ func setup(practice: Practice) -> void:
 	_tester.setup(_game_viewport.get_child(0), _script_slice)
 
 	var documentation_reference := _practice.get_documentation_raw()
-	if documentation_reference.size() == 0:
+	if documentation_reference.is_empty():
 		_practice_info_panel.clear_documentation()
 	else:
 		_practice_info_panel.set_documentation(documentation_reference)
