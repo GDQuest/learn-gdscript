@@ -59,11 +59,11 @@ text = "Summary - Lesson Name"
 [node name="HSeparator" type="HSeparator" parent="LessonRequirements/Margin/Column"]
 margin_top = 47.0
 margin_right = 1880.0
-margin_bottom = 67.0
-custom_constants/separation = 20
+margin_bottom = 63.0
+custom_constants/separation = 16
 
 [node name="Scroll" type="ScrollContainer" parent="LessonRequirements/Margin/Column"]
-margin_top = 83.0
+margin_top = 79.0
 margin_right = 1880.0
 margin_bottom = 1001.0
 size_flags_vertical = 3
@@ -71,7 +71,7 @@ scroll_horizontal_enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="LessonRequirements/Margin/Column/Scroll"]
 margin_right = 1880.0
-margin_bottom = 686.0
+margin_bottom = 697.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 12
 custom_constants/margin_top = 0
@@ -80,7 +80,7 @@ custom_constants/margin_bottom = 0
 
 [node name="Column" type="VBoxContainer" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer"]
 margin_right = 1868.0
-margin_bottom = 686.0
+margin_bottom = 697.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -94,7 +94,7 @@ is_expanded = true
 padding = 8.0
 
 [node name="Goal" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Goals" instance=ExtResource( 6 )]
-margin_left = 24.0
+margin_left = 8.0
 margin_top = 52.0
 margin_right = 1868.0
 margin_bottom = 252.0
@@ -118,8 +118,8 @@ padding = 8.0
 [node name="Documentation" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column" instance=ExtResource( 2 )]
 margin_top = 394.0
 margin_right = 1868.0
-margin_bottom = 686.0
-rect_min_size = Vector2( 571, 292 )
+margin_bottom = 697.0
+rect_min_size = Vector2( 571, 303 )
 size_flags_vertical = 3
 title = "Documentation"
 is_expanded = true
@@ -127,8 +127,8 @@ padding = 8.0
 first_margin = 16.0
 
 [node name="DocumentationItems" type="VBoxContainer" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Documentation"]
-margin_left = 24.0
-margin_top = 52.0
+margin_left = 8.0
+margin_top = 63.0
 margin_right = 1868.0
-margin_bottom = 292.0
+margin_bottom = 303.0
 custom_constants/separation = 16

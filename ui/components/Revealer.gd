@@ -7,11 +7,6 @@ signal opened
 # Duration of the tween animation in seconds.
 const ANIM_DURATION := 0.1
 
-const FONTS := {
-	normal = preload("../theme/fonts/font_title.tres"),
-	small = preload("../theme/fonts/font_title_small.tres"),
-}
-
 export var title := "Expand" setget set_title
 export var is_expanded := false setget set_is_expanded
 export var revealer_height := 32.0 setget set_revealer_height
@@ -19,7 +14,6 @@ export var chevron_size := 16.0
 export var padding := 24.0
 export var first_margin := 5.0
 export var children_margin := 2.0
-export var use_small_font := false setget set_use_small_font
 export var text_color: Color setget set_text_color
 
 var _height := 0.0
@@ -133,13 +127,6 @@ func sort_children() -> void:
 		index += 1
 	_height = top
 	update_min_size()
-
-
-func set_use_small_font(value: bool) -> void:
-	use_small_font = value
-	if not is_inside_tree():
-		yield(self, "ready")
-	_button.add_font_override("font", FONTS.small if use_small_font else FONTS.normal)
 
 
 func set_text_color(value: Color) -> void:
