@@ -38,10 +38,13 @@ func setup(quiz: QuizChoice) -> void:
 	var answer_options := _quiz.answer_options
 	if _quiz.do_shuffle_answers:
 		answer_options.shuffle()
+
+	var button_font := get_font("default_font")
 	if _quiz.is_multiple_choice:
 		for answer in answer_options:
 			var button := CheckBox.new()
 			button.text = answer
+			button.add_font_override("font", button_font)
 			_choices.add_child(button)
 	else:
 		var group := ButtonGroup.new()
@@ -50,6 +53,7 @@ func setup(quiz: QuizChoice) -> void:
 			button.toggle_mode = true
 			button.text = answer
 			button.group = group
+			button.add_font_override("font", button_font)
 			_choices.add_child(button)
 
 
