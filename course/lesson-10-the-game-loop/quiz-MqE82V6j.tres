@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+question = "How often does the [code]_process[/code] function run?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "How many times [code]_process()[/code] runs depends on how fast your computer is.
+
+Godot will try and run it as many times as it can so any movement or animations are smooth."
+answer_options = [ "Once a second.", "Multiple times a second." ]
+valid_answers = [ "Multiple times a second." ]
+is_multiple_choice = false
+do_shuffle_answers = true
