@@ -162,13 +162,13 @@ func _on_run_button_pressed() -> void:
 func _toggle_distraction_free_mode() -> void:
 	_is_left_panel_open = not _is_left_panel_open
 	_tween.stop_all()
-	var duration := 0.3
+	var duration := 0.5
 	if _is_left_panel_open:
-		_tween.interpolate_property(_info_panel_control, "rect_min_size:x", _info_panel_control.rect_min_size.x, _info_panel_start_width, duration)
+		_tween.interpolate_property(_info_panel_control, "rect_min_size:x", _info_panel_control.rect_min_size.x, _info_panel_start_width, duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		_tween.interpolate_property(_info_panel_control, "modulate:a", _info_panel_control.modulate.a, 1.0, duration)
 	else:
-		_tween.interpolate_property(_info_panel_control, "rect_min_size:x", _info_panel_control.rect_min_size.x, 0.0, duration)
-		_tween.interpolate_property(_info_panel_control, "modulate:a", _info_panel_control.modulate.a, 0.0, duration)
+		_tween.interpolate_property(_info_panel_control, "rect_min_size:x", _info_panel_control.rect_min_size.x, 0.0, duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		_tween.interpolate_property(_info_panel_control, "modulate:a", _info_panel_control.modulate.a, 0.0, duration - 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN, 0.15)
 	_tween.start()
 
 	_code_editor.set_distraction_free_state(not _is_left_panel_open)
