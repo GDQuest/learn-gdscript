@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+question = "Which is the correct syntax for a function definition?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "To define a function, you need to start with the [code]func[/code] keyword followed by a space, the [code]function_name[/code], and optional parameters inside parentheses.
+
+You must end the line with a colon, which defines a new code block. We'll see moving forward keywords other than [code]func[/code] require a colon at the end of the line."
+answer_options = [ "func function_name(parameter_name):", "func (function_name): parameter_name", "func function_name(parameter_name)", "function_name(parameter_name):" ]
+valid_answers = [ "func function_name(parameter_name):" ]
+is_multiple_choice = false
+do_shuffle_answers = true

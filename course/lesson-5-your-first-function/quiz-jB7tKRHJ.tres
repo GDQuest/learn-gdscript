@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+question = "Which of the following names are valid function names?"
+content_bbcode = "Note that it's fine to use capital letters."
+hint = ""
+explanation_bbcode = "The only invalid name is \"move forward\" because it contains a space.
+
+Then, you can't use \"45_degree_turn\" because it starts with a number."
+answer_options = [ "move forward", "explode", "make3NewCharacters", "move_forward", "45_degree_turn" ]
+valid_answers = [ "explode", "make3NewCharacters", "move_forward" ]
+is_multiple_choice = true
+do_shuffle_answers = true
