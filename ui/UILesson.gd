@@ -22,6 +22,8 @@ onready var _practices_container := $ScrollContainer/MarginContainer/Column/Colu
 onready var _practices_visibility_container := $ScrollContainer/MarginContainer/Column/Column as VBoxContainer
 
 var _visible_index := -1
+var _quizzes_done := 0
+var _quizz_count := 0
 
 
 func _ready() -> void:
@@ -71,6 +73,7 @@ func setup(lesson: Lesson) -> void:
 			instance.connect("quiz_skipped", self, "_reveal_up_to_next_quiz")
 
 			quiz_index += 1
+	_quizz_count = quiz_index + 1
 
 	for practice in lesson.practices:
 		var button: UIPracticeButton = PracticeButtonScene.instance()
@@ -81,6 +84,7 @@ func setup(lesson: Lesson) -> void:
 
 
 func _reveal_up_to_next_quiz() -> void:
+	_quizzes_done += 1
 	var child_count := _content_blocks.get_child_count()
 	while _visible_index < child_count - 1:
 		_visible_index += 1
@@ -89,5 +93,5 @@ func _reveal_up_to_next_quiz() -> void:
 		if child is UIQuizChoice or child is UIQuizInputField:
 			break
 
-	if _visible_index >= child_count - 1:
+	if _visible_index == child_count - 1 and _quizzes_done == _quizz_count:
 		_practices_visibility_container.show()
