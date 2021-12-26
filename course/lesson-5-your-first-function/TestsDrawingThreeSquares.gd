@@ -25,8 +25,9 @@ func test_draw_square_of_200_pixels() -> String:
 
 	var index := 1
 	for p in polygons:
-		p.sort()
-		if square.points != target_polygon:
+		var points = p.get_points()
+		points.sort()
+		if points != target_polygon:
 			return (
 				"Shape number %s is not a square of length 200 pixels. Did you change the draw_square() function?"
 				% index
