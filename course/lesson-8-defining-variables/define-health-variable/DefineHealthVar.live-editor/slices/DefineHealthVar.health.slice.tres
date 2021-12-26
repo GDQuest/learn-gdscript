@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/SliceProperties.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-8-defining-variables/define-health-variable/DefineHealthVar.live-editor/scripts/DefineHealthVar.gd.tres" type="Resource" id=2]
+[ext_resource path="res://course/lesson-8-defining-variables/define-health-variable/DefineHealthVar.live-editor/scene/DefineHealthVar.tscn.tres" type="Resource" id=3]
+
+[resource]
+script = ExtResource( 1 )
+scene_properties = ExtResource( 3 )
+script_properties = ExtResource( 2 )
+leading_spaces = 0
+keyword = "EXPORT"
+closing = false
+name = "health"
+is_full_file = false
+start = 2
+end = 4
+lines_before = [ "extends Control", "" ]
+lines_after = [ "", "func _run():", "	test_assignment()", "", "func test_assignment():", "	for property in get_property_list():", "		if property.name == \"health\":", "			$Label.bbcode_text = \"Variable [code]health[/code] has a value of %s\" % get(\"health\")", "			return", "	$Label.bbcode_text = \"Variable [code]health[/code] is not defined.\"", "" ]
+lines_editable = [ "var health = 100" ]
