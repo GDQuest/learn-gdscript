@@ -15,13 +15,15 @@ export var center_in_frame := true setget set_center_in_frame
 var _scene_instance: CanvasItem setget _set_scene_instance
 
 onready var _gdscript_text_edit := $GDScriptCode as TextEdit
-onready var _run_button := $Frame/RunButton as Button
+onready var _run_button := $Frame/HBoxContainer/RunButton as Button
+onready var _reset_button := $Frame/HBoxContainer/ResetButton as Button
 onready var _frame_container := $Frame/PanelContainer as Control
 onready var _sliders := $Frame/Sliders as VBoxContainer
 
 
 func _ready() -> void:
 	_run_button.connect("pressed", self, "run")
+	_reset_button.connect("pressed", self, "reset")
 	_frame_container.connect("resized", self, "_center_scene_instance")
 
 	CodeEditorEnhancer.enhance(_gdscript_text_edit)
@@ -47,15 +49,17 @@ func _get_configuration_warning() -> String:
 
 
 func run() -> void:
-	assert(_scene_instance.has_method("run"), "Node %s does not have a run method"%[get_path()])
+	assert(_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()])
 	# warning-ignore:unsafe_method_access
-	if _scene_instance.has_method("reset"):
-		# warning-ignore:unsafe_method_access
-		_scene_instance.reset()
 	_scene_instance.run()
 	if _scene_instance.has_method("wrap_inside_frame"):
 		# warning-ignore:unsafe_method_access
 		_scene_instance.wrap_inside_frame(_frame_container.get_rect())
+
+
+func reset() -> void:
+	if _scene_instance.has_method("reset"):
+		_scene_instance.reset()
 
 
 func set_code(new_gdscript_code: String) -> void:
@@ -103,6 +107,7 @@ func create_slider_for(property_name, min_value := 0.0, max_value := 100.0, step
 	slider.connect("value_changed", self, "_set_instance_value", [property_name, value_label])
 	_set_instance_value(_scene_instance.get(property_name), property_name, value_label)
 
+
 # Using this proxy function is required as the value emitted by the signal
 # will always be the first argument.
 func _set_instance_value(value: float, property_name: String, value_label: Label) -> void:
@@ -124,6 +129,8 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	_scene_instance.show_behind_parent = true
 	_frame_container.add_child(_scene_instance)
 	_center_scene_instance()
+
+	_reset_button.visible = _scene_instance.has_method("reset")
 	if _scene_instance.has_method("run"):
 		_run_button.show()
 	else:

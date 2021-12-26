@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/RunnableCodeExample.gd" type="Script" id=2]
 [ext_resource path="res://ui/theme/textedit_stylebox.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui/theme/fonts/font_button_small.tres" type="DynamicFont" id=4]
+[ext_resource path="res://ui/theme/outline_runnable_example.tres" type="StyleBox" id=5]
 
 [node name="RunnableCodeExample" type="HBoxContainer"]
 margin_right = 1030.0
@@ -25,23 +27,7 @@ __meta__ = {
 [node name="PanelContainer" type="PanelContainer" parent="Frame"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RunButton" type="Button" parent="Frame"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -113.0
-margin_top = -56.0
-margin_right = -13.0
-margin_bottom = -16.0
-grow_horizontal = 0
-grow_vertical = 0
-rect_min_size = Vector2( 100, 40 )
-text = "Run"
+custom_styles/panel = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -49,6 +35,52 @@ __meta__ = {
 [node name="Sliders" type="VBoxContainer" parent="Frame"]
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Frame"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -178.0
+margin_top = -52.0
+margin_right = -10.0
+margin_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 100, 40 )
+focus_mode = 2
+mouse_filter = 0
+custom_constants/separation = 8
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="ResetButton" type="Button" parent="Frame/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 80, 40 )
+custom_fonts/font = ExtResource( 4 )
+text = "Reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunButton" type="Button" parent="Frame/HBoxContainer"]
+margin_left = 88.0
+margin_right = 168.0
+margin_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 80, 40 )
+custom_fonts/font = ExtResource( 4 )
+text = "Run"
 __meta__ = {
 "_edit_use_anchors_": false
 }
