@@ -44,3 +44,7 @@ func set_valid_answer(value) -> void:
 			valid_answer = value
 
 	_type = typeof(valid_answer)
+
+
+func get_correct_answer_string() -> String:
+	return valid_answer

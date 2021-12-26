@@ -37,3 +37,26 @@ func test_answer(answers: Array) -> AnswerTestResult:
 func set_is_multiple_choice(value: bool) -> void:
 	is_multiple_choice = value
 	emit_signal("choice_type_changed", is_multiple_choice)
+
+
+func get_correct_answer_string() -> String:
+	var answer_count := valid_answers.size()
+	var string := ""
+	if answer_count == 1:
+		string = valid_answers.back()
+	else:
+		# We want a string with the form "a, b, and c"
+		var index := 0
+		var separator := ", "
+		for answer in valid_answers:
+			string += answer
+			if index < answer_count - 1:
+				string += separator
+			if index == answer_count - 2:
+				string += " and "
+			index += 1
+	return string
+
+
+func get_answer_count() -> int:
+	return valid_answers.size()
