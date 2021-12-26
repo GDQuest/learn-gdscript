@@ -60,6 +60,7 @@ func run() -> void:
 func reset() -> void:
 	if _scene_instance.has_method("reset"):
 		_scene_instance.reset()
+	_center_scene_instance()
 
 
 func set_code(new_gdscript_code: String) -> void:

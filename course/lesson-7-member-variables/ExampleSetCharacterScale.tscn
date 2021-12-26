@@ -8,8 +8,10 @@
 script/source = "extends Node2D
 
 func run():
-	scale = Vector2.ONE * 2
-"
+	scale = Vector2.ONE * 1.5
+
+func reset():
+	scale = Vector2.ONE"
 
 [node name="PanelContainer" type="PanelContainer"]
 margin_right = 1047.0
@@ -24,8 +26,8 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 1040.0
 margin_bottom = 291.0
-gdscript_code = "scale.x = 2
-scale.y = 2"
+gdscript_code = "scale.x = 1.5
+scale.y = 1.5"
 
 [node name="Node2D" type="Node2D" parent="RunnableCodeExample"]
 script = SubResource( 1 )
