@@ -101,16 +101,18 @@ text = "You're right!"
 [node name="CorrectAnswer" type="Label" parent="MarginContainer/ResultView"]
 visible = false
 margin_top = 42.0
-margin_right = 360.0
+margin_right = 600.0
 margin_bottom = 70.0
+rect_min_size = Vector2( 600, 0 )
 custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
 custom_fonts/font = ExtResource( 5 )
 text = "Answers here"
+autowrap = true
 
 [node name="Explanation" type="RichTextLabel" parent="MarginContainer/ResultView"]
 margin_top = 42.0
 margin_right = 360.0
-margin_bottom = 150.0
+margin_bottom = 71.0
 size_flags_vertical = 3
 bbcode_enabled = true
 bbcode_text = "Explanation"
