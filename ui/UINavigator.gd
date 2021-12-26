@@ -2,6 +2,7 @@ extends PanelContainer
 
 signal transition_completed
 
+const CourseOutliner := preload("./components/CourseOutliner.gd")
 const SCREEN_TRANSITION_DURATION := 0.75
 const OUTLINER_TRANSITION_DURATION := 0.5
 
@@ -34,7 +35,7 @@ onready var _report_button := (
 )
 
 onready var _screen_container := $VBoxContainer/Content/ScreenContainer as Container
-onready var _course_outliner := $VBoxContainer/Content/CourseOutliner as Container
+onready var _course_outliner := $VBoxContainer/Content/CourseOutliner as CourseOutliner
 onready var _tween := $Tween as Tween
 
 
@@ -67,7 +68,7 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("ui_back"):
-		NavigationManager.back()
+		NavigationManager.navigate_back()
 
 
 func set_start_from_lesson(lesson_id: String) -> void:

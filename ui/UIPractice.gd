@@ -7,8 +7,6 @@ const LessonDonePopupScene := preload("components/popups/LessonDonePopup.tscn")
 
 export var test_practice: Resource
 
-var progress := 0.0 setget set_progress
-
 var _script_slice: SliceProperties
 var _tester: PracticeTester
 # If `true`, the text changed but was not saved.
@@ -102,13 +100,6 @@ func setup(practice: Practice) -> void:
 	_info_panel.display_tests(_tester.get_test_names())
 	LiveEditorState.current_slice = _script_slice
 	_game_viewport.use_scene()
-
-
-func set_progress(new_progress: float) -> void:
-	progress = new_progress
-	if not is_inside_tree():
-		yield(self, "ready")
-	_info_panel.progress_bar.value = progress
 
 
 func _on_run_button_pressed() -> void:

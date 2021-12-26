@@ -101,8 +101,8 @@ func is_lesson_practice_completed(course_id: String, lesson_id: String, practice
 
 func set_last_started_lesson(course_id: String, lesson_id: String) -> void:
 	# Ensure we have some data for the course and the lesson, if we didn't have it before.
-	var course_progress := get_or_create_course(course_id)
-	var lesson_progress := get_or_create_lesson(course_id, lesson_id)
+	var _course_progress := get_or_create_course(course_id)
+	var _lesson_progress := get_or_create_lesson(course_id, lesson_id)
 	# Store the last started lesson.
 	last_started_lesson[course_id] = lesson_id
 	
@@ -111,7 +111,7 @@ func set_last_started_lesson(course_id: String, lesson_id: String) -> void:
 
 func get_last_started_lesson(course_id: String) -> String:
 	# Ensure we have some data for the course, if we didn't have it before.
-	var course_progress := get_or_create_course(course_id)
+	var _course_progress := get_or_create_course(course_id)
 	var lesson_id := ""
 	if last_started_lesson.has(course_id):
 		lesson_id = last_started_lesson[course_id]
@@ -120,5 +120,5 @@ func get_last_started_lesson(course_id: String) -> String:
 		return ""
 	
 	# Ensure we have some data for the lesson, if we didn't have it before.
-	var lesson_progress := get_or_create_lesson(course_id, lesson_id)
+	var _lesson_progress := get_or_create_lesson(course_id, lesson_id)
 	return lesson_id

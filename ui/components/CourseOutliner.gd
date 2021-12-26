@@ -1,6 +1,8 @@
 extends PanelContainer
 
 const CourseLessonList := preload("res://ui/components/CourseLessonList.gd")
+const LessonDetails := preload("./CourseLessonDetails.gd")
+
 
 var course: Course setget set_course
 var _current_lesson: Lesson
@@ -8,7 +10,7 @@ var _current_practice: Practice
 
 onready var _title_label := $MarginContainer/Layout/TitleBox/TitleLabel as Label
 onready var _lesson_list := $MarginContainer/Layout/HBoxContainer/LessonList as CourseLessonList
-onready var _lesson_details := $MarginContainer/Layout/HBoxContainer/LessonDetails as Control
+onready var _lesson_details := $MarginContainer/Layout/HBoxContainer/LessonDetails as LessonDetails
 
 
 func _ready() -> void:
@@ -121,11 +123,11 @@ func _on_practice_completed(practice_data: Practice) -> void:
 	_current_practice = null
 
 
-func _on_lesson_completed(lesson_data: Lesson) -> void:
+func _on_lesson_completed(_lesson_data: Lesson) -> void:
 	_current_lesson = null
 	_update_outliner_index()
 
 
-func _on_course_completed(course_data: Course) -> void:
+func _on_course_completed(_course_data: Course) -> void:
 	_update_outliner_index()
 

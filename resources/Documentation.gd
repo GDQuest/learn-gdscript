@@ -156,7 +156,7 @@ class MethodSpecification:
 
 
 class PropertySpecification:
-	var name = ""
+	var name := ""
 	var type := "int"
 	var default_value := ""
 	var explanation := ""
@@ -174,7 +174,7 @@ class PropertySpecification:
 				"[color=#%s][default: %s][/color]"
 				% [COLOR_VALUE.to_html(), default_value]
 			)
-			return "%s %s %s" % [type_string, name_string, default_value]
+			return "%s %s %s" % [type_string, name_string, value_string]
 		return "%s %s" % [type_string, name_string]
 
 

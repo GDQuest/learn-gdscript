@@ -180,6 +180,8 @@ func _js_to_outliner() -> void:
 	# if we don't set this, `_on_js_popstate` is called
 	_temporary_disable_back_listener = true
 	# warning-ignore:unsafe_method_access
+	# warning-ignore:unsafe_method_access
+	# warning-ignore:unsafe_property_access
 	_js_history.go(-_js_history.length)
 
 
@@ -190,6 +192,7 @@ func _push_javascript_state(url: String) -> void:
 		return
 	# warning-ignore:unsafe_method_access
 	# warning-ignore:unsafe_method_access
+	# warning-ignore:unsafe_property_access
 	_js_window.location.hash = url
 
 class NormalizedUrl:

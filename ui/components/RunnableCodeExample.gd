@@ -12,7 +12,7 @@ export var scene: PackedScene setget set_scene
 export(String, MULTILINE) var gdscript_code := "" setget set_code
 export var center_in_frame := true setget set_center_in_frame
 
-var _scene_instance: Node setget _set_scene_instance
+var _scene_instance: CanvasItem setget _set_scene_instance
 
 onready var _gdscript_text_edit := $GDScriptCode as TextEdit
 onready var _run_button := $Frame/RunButton as Button
@@ -47,8 +47,11 @@ func _get_configuration_warning() -> String:
 
 
 func run() -> void:
+	assert(_scene_instance.has_method("run"), "Node %s does not have a run method"%[get_path()])
+	# warning-ignore:unsafe_method_access
 	_scene_instance.run()
 	if _scene_instance.has_method("wrap_inside_frame"):
+		# warning-ignore:unsafe_method_access
 		_scene_instance.wrap_inside_frame(_frame_container.get_rect())
 
 
@@ -108,10 +111,11 @@ func _center_scene_instance() -> void:
 	if not center_in_frame or not _scene_instance:
 		return
 	if _scene_instance is Node2D:
+		# warning-ignore:unsafe_property_access
 		_scene_instance.position = _frame_container.rect_size / 2
 
 
-func _set_scene_instance(new_scene_instance: Node) -> void:
+func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	_scene_instance = new_scene_instance
 	emit_signal("scene_instance_set")
 	_scene_instance.show_behind_parent = true

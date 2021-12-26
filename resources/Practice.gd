@@ -2,6 +2,8 @@
 class_name Practice
 extends Resource
 
+const QueryResult := Documentation.QueryResult
+
 export var title := ""
 export (String, MULTILINE) var goal := ""
 export (String, MULTILINE) var starting_code := ""
@@ -24,7 +26,7 @@ func get_documentation_resource() -> Documentation:
 	return documentation_resource as Documentation
 
 
-func get_documentation_raw() -> Documentation.QueryResult:
+func get_documentation_raw() -> QueryResult:
 	if documentation_resource == null:
 		if not documentation_references.empty():
 			push_error("Documentation References were selected, but no documentation resource was set")

@@ -1,5 +1,6 @@
 extends Control
 
+const WelcomeScreen = preload("./WelcomeScreen.gd")
 const LoadingScreen = preload("./LoadingScreen.gd")
 const ReportFormPopup = preload("./components/popups/ReportFormPopup.gd")
 const SettingsPopup = preload("./components/popups/SettingsPopup.gd")
@@ -10,7 +11,7 @@ var _unloading_target: Control
 var _loading_target: Control
 
 onready var _loading_screen := $Pages/LoadingScreen as LoadingScreen
-onready var _welcome_screen := $Pages/WelcomeScreen as Control
+onready var _welcome_screen := $Pages/WelcomeScreen as WelcomeScreen
 onready var _settings_screen := $Pages/SettingsScreen as Control
 onready var _course_screen := $Pages/CourseScreen as Control
 
