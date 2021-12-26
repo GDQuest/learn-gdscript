@@ -157,11 +157,7 @@ func _navigate_to() -> void:
 	# Connect to RichTextLabel meta links to navigate to different scenes.
 	for node in get_tree().get_nodes_in_group("rich_text_label"):
 		assert(node is RichTextLabel)
-		if (
-			node.bbcode_enabled
-			and not node.is_connected("meta_clicked", self, "_on_RichTextLabel_meta_clicked")
-		):
-			node.connect("meta_clicked", self, "_on_RichTextLabel_meta_clicked")
+		NavigationManager.connect_rich_text_node(node)
 	
 	if _course_outliner.visible:
 		_tween.stop_all()
