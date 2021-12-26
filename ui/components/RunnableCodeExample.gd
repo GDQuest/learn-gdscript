@@ -49,6 +49,9 @@ func _get_configuration_warning() -> String:
 func run() -> void:
 	assert(_scene_instance.has_method("run"), "Node %s does not have a run method"%[get_path()])
 	# warning-ignore:unsafe_method_access
+	if _scene_instance.has_method("reset"):
+		# warning-ignore:unsafe_method_access
+		_scene_instance.reset()
 	_scene_instance.run()
 	if _scene_instance.has_method("wrap_inside_frame"):
 		# warning-ignore:unsafe_method_access
