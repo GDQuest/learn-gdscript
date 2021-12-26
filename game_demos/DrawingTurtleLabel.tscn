@@ -1,4 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://game_demos/panel_turtle_label.tres" type="StyleBox" id=1]
+[ext_resource path="res://game_demos/font_turtle_label.tres" type="DynamicFont" id=2]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -59,24 +62,26 @@ tracks/1/keys = {
 }
 
 [node name="DrawingTurtleLabel" type="PanelContainer"]
-margin_left = -15.0
-margin_top = -15.0
-margin_right = 15.0
-margin_bottom = 15.0
-rect_pivot_offset = Vector2( 15, 15 )
+margin_left = -20.0
+margin_top = -23.0
+margin_right = 20.0
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( 20, 23 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
+custom_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 23.0
-margin_bottom = 23.0
+margin_left = 16.0
+margin_top = 10.0
+margin_right = 24.0
+margin_bottom = 33.0
 size_flags_horizontal = 5
 size_flags_vertical = 5
+custom_fonts/font = ExtResource( 2 )
 text = "1"
 align = 1
 valign = 1

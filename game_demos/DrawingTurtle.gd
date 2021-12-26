@@ -104,6 +104,17 @@ func play_draw_animation() -> void:
 	_current_polygon = null
 
 
+# Returns the total bounding rectangle enclosing all the turtle's drawn
+# polygons.
+func get_rect() -> Rect2:
+	var bounds := Rect2()
+	for polygon in _polygons:
+		var rect: Rect2 = polygon.get_rect()
+		rect.position += polygon.position
+		bounds = bounds.merge(rect)
+	return bounds
+
+
 func _change_sprite_position(new_position: Vector2) -> void:
 	_sprite.position = new_position
 
@@ -161,8 +172,8 @@ class Polygon:
 			emit_signal("animation_finished")
 			return
 
-		var starting_point := points[_current_point_index] as Vector2
-		var destination := points[_current_point_index + 1] as Vector2
+		var starting_point: Vector2 = points[_current_point_index]
+		var destination: Vector2 = points[_current_point_index + 1]
 		_current_point_index += 1
 
 		var distance := starting_point.distance_to(destination)
