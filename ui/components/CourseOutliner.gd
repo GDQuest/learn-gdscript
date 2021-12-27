@@ -59,7 +59,7 @@ func _update_outliner_index() -> void:
 
 func _calculate_lesson_completion(lesson_data: Lesson, lesson_progress: LessonProgress) -> int:
 	var completion := 0
-	var max_completion := 1 + lesson_data.practices.size() + lesson_data.get_quzzes_count()
+	var max_completion := 1 + lesson_data.practices.size() + lesson_data.get_quizzes_count()
 	
 	if lesson_progress.completed_reading:
 		completion += 1

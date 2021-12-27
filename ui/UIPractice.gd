@@ -41,7 +41,7 @@ func _ready() -> void:
 	_output_console.connect("reference_clicked", self, "_on_code_reference_clicked")
 
 	if test_practice and get_parent() == get_tree().root:
-		setup(test_practice)
+		setup(test_practice, null)
 
 	_info_panel_start_width = _info_panel.rect_size.x
 
@@ -59,7 +59,7 @@ func _gui_input(event: InputEvent) -> void:
 		get_focus_owner().release_focus()
 
 
-func setup(practice: Practice) -> void:
+func setup(practice: Practice, _course: Course) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 

@@ -13,10 +13,15 @@ const OUTLINE_FLASH_DELAY := 0.75
 
 export var test_quiz: Resource
 
+var completed_before := false setget set_completed_before
+
 onready var _outline := $Outline as PanelContainer
-onready var _question := $MarginContainer/ChoiceView/Question as Label
+onready var _question := $MarginContainer/ChoiceView/QuizHeader/Question as Label
 onready var _explanation := $MarginContainer/ResultView/Explanation as RichTextLabel
 onready var _content := $MarginContainer/ChoiceView/Content as RichTextLabel
+onready var _completed_before_icon := (
+	$MarginContainer/ChoiceView/QuizHeader/CompletedBeforeIcon as TextureRect
+)
 
 onready var _choice_view := $MarginContainer/ChoiceView as VBoxContainer
 onready var _result_view := $MarginContainer/ResultView as VBoxContainer
@@ -34,6 +39,8 @@ var _quiz: Quiz
 
 
 func _ready() -> void:
+	_completed_before_icon.visible = completed_before
+	
 	_submit_button.connect("pressed", self, "_test_answer")
 	_skip_button.connect("pressed", self, "_show_answer", [false])
 
@@ -51,6 +58,13 @@ func setup(quiz: Quiz) -> void:
 
 	_explanation.visible = not _quiz.explanation_bbcode.empty()
 	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(_quiz.explanation_bbcode)
+
+
+func set_completed_before(value: bool) -> void:
+	completed_before = value
+
+	if is_inside_tree():
+		_completed_before_icon.visible = completed_before
 
 
 # Virtual

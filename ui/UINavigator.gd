@@ -137,7 +137,7 @@ func _navigate_to() -> void:
 	_outliner_button.show()
 	_screen_container.show()
 	# warning-ignore:unsafe_method_access
-	screen.setup(target)
+	screen.setup(target, course)
 
 	# warning-ignore:unsafe_property_access
 	# warning-ignore:unsafe_property_access

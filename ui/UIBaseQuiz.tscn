@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/theme/panel_darker.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
 [ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=3]
 [ext_resource path="res://ui/UIBaseQuiz.gd" type="Script" id=4]
 [ext_resource path="res://ui/theme/fonts/font_text_bold_italics.tres" type="DynamicFont" id=5]
+[ext_resource path="res://ui/icons/checkmark_valid.svg" type="Texture" id=6]
 
 [node name="UIBaseQuiz" type="PanelContainer"]
 margin_right = 101.0
@@ -32,12 +33,33 @@ margin_top = 20.0
 margin_right = 380.0
 margin_bottom = 170.0
 
-[node name="Question" type="Label" parent="MarginContainer/ChoiceView"]
+[node name="QuizHeader" type="HBoxContainer" parent="MarginContainer/ChoiceView"]
 margin_right = 360.0
 margin_bottom = 26.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Question" type="Label" parent="MarginContainer/ChoiceView/QuizHeader"]
+margin_right = 320.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
 custom_colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "Question"
+autowrap = true
+
+[node name="CompletedBeforeIcon" type="TextureRect" parent="MarginContainer/ChoiceView/QuizHeader"]
+modulate = Color( 1, 1, 1, 0.235294 )
+margin_left = 336.0
+margin_right = 360.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "You've already answered that quiz correctly before.
+Feel free to try it again to refresh your memory!"
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
 
 [node name="Content" type="RichTextLabel" parent="MarginContainer/ChoiceView"]
 margin_top = 42.0
