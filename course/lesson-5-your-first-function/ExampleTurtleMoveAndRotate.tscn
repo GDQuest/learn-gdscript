@@ -5,11 +5,9 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-func _ready() -> void:
-	$DrawingTurtle.position.x = -100
-
 func run():
 	$DrawingTurtle.reset()
+	$DrawingTurtle.position.x = -100
 	$DrawingTurtle.move_forward(200)
 	$DrawingTurtle.turn_right(90)
 	$DrawingTurtle.play_draw_animation()
