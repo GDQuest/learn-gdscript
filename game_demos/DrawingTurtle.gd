@@ -21,8 +21,14 @@ var _current_polygon: Polygon
 # If false, stop playing an active animation.
 var _is_playing := false
 
-onready var _sprite = $Sprite as Sprite
-onready var _canvas = $Canvas as Node2D
+onready var _sprite := $Sprite as Sprite
+onready var _canvas := $Canvas as Node2D
+onready var _camera := $Camera2D as Camera2D
+
+
+func _ready() -> void:
+	if get_parent() is Viewport:
+		_camera.make_current()
 
 
 # Virtually moves the turtle and records a new vertex.
@@ -86,6 +92,7 @@ func play_draw_animation() -> void:
 		_close_polygon()
 
 	position = Vector2.ZERO
+
 	for polygon in _polygons:
 		if not _is_playing:
 			break
@@ -95,6 +102,7 @@ func play_draw_animation() -> void:
 		if not polygon:
 			continue
 
+		_camera.position = polygon.get_center()
 		rotation_degrees = 0.0
 		polygon.connect("line_end_moved", self, "_change_sprite_position")
 		_canvas.add_child(polygon)
@@ -217,6 +225,10 @@ class Polygon:
 			elif p.y < top_left.y:
 				top_left.y = p.y
 		return Rect2(top_left, bottom_right - top_left)
+
+	func get_center() -> Vector2:
+		var rect := get_rect()
+		return (rect.position + rect.end) / 2.0 + position
 
 	func get_points() -> Array:
 		return points.duplicate()
