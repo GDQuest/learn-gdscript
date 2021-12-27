@@ -1,6 +1,9 @@
 class_name UIQuizChoice
 extends UIBaseQuiz
 
+const OPTION_FONT := preload("res://ui/theme/fonts/font_text.tres")
+const OPTION_SELECTED_FONT := preload("res://ui/theme/fonts/font_text_bold.tres")
+
 onready var _choices := $MarginContainer/ChoiceView/Answers as VBoxContainer
 
 
@@ -16,13 +19,13 @@ func setup(quiz: Quiz) -> void:
 	if _quiz.do_shuffle_answers:
 		answer_options.shuffle()
 
-	var button_font := get_font("default_font")
 	if _quiz.is_multiple_choice:
 		for answer in answer_options:
 			var button := CheckBox.new()
 			button.text = answer
-			button.add_font_override("font", button_font)
+			button.add_font_override("font", OPTION_FONT)
 			_choices.add_child(button)
+			button.connect("toggled", self, "_on_option_button_toggled", [button])
 	else:
 		var group := ButtonGroup.new()
 		for answer in answer_options:
@@ -30,8 +33,9 @@ func setup(quiz: Quiz) -> void:
 			button.toggle_mode = true
 			button.text = answer
 			button.group = group
-			button.add_font_override("font", button_font)
+			button.add_font_override("font", OPTION_FONT)
 			_choices.add_child(button)
+			button.connect("toggled", self, "_on_option_button_toggled", [button])
 
 
 # Returns an array of indices of selected answers
@@ -48,3 +52,7 @@ func _get_answers() -> Array:
 		if pressed_button:
 			answers = [first_button.text]
 	return answers
+
+
+func _on_option_button_toggled(pressed: bool, button: Button) -> void:
+	button.add_font_override("font", OPTION_SELECTED_FONT if pressed else OPTION_FONT)
