@@ -200,7 +200,7 @@ func _on_lesson_completed(lesson: Lesson) -> void:
 
 
 func _on_course_completed() -> void:
-	Events.emit_signal("course_completed")
+	Events.emit_signal("course_completed", course)
 	queue_free()
 
 

@@ -101,7 +101,7 @@ func _on_loading_finished() -> void:
 		_loading_target = null
 
 
-func _show_end_screen() -> void:
+func _show_end_screen(_course: Course) -> void:
 	for page in _pages.get_children():
 		page.hide()
 	_end_screen.show()
