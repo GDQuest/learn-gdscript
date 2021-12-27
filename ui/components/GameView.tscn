@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ui/theme/panel_game_screen.tres" type="StyleBox" id=1]
+[ext_resource path="res://ui/icons/icon_pause.png" type="Texture" id=2]
+[ext_resource path="res://ui/components/GameView.gd" type="Script" id=3]
+[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=4]
+
+[node name="GameView" type="PanelContainer"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 585.0
+margin_bottom = 606.0
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+pause_mode = 1
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 565.0
+margin_bottom = 586.0
+rect_min_size = Vector2( 100, 0 )
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseRect" type="ColorRect" parent="."]
+visible = false
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 565.0
+margin_bottom = 586.0
+color = Color( 0.0352941, 0.0392157, 0.129412, 0.309804 )
+
+[node name="PauseLabel" type="HBoxContainer" parent="PauseRect"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -48.0
+margin_top = -62.0
+margin_right = 48.0
+margin_bottom = -16.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+custom_constants/separation = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="PauseRect/PauseLabel"]
+margin_top = 11.0
+margin_right = 24.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PauseRect/PauseLabel"]
+margin_left = 32.0
+margin_top = 9.0
+margin_right = 105.0
+margin_bottom = 37.0
+custom_fonts/font = ExtResource( 4 )
+text = "Paused"

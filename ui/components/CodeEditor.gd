@@ -79,3 +79,6 @@ func set_distraction_free_state(enabled: bool) -> void:
 		_df_mode_button.icon = EDITOR_COLLAPSE_ICON
 	else:
 		_df_mode_button.icon = EDITOR_EXPAND_ICON
+
+func set_pause_button_pressed(is_pressed: bool) -> void:
+	_pause_button.pressed = is_pressed

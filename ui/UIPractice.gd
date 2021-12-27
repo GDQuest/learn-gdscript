@@ -20,7 +20,7 @@ var _current_scene: Node
 
 onready var _output_container := find_node("Output") as Control
 onready var _game_container := find_node("GameContainer") as Container
-onready var _game_viewport := _output_container.find_node("GameViewport") as GameViewport
+onready var _game_view := _output_container.find_node("GameView") as GameView
 onready var _output_console := _output_container.find_node("Console") as OutputConsole
 
 onready var _info_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
@@ -92,7 +92,7 @@ func setup(practice: Practice, _course: Course) -> void:
 	if validator_path.is_rel_path():
 		validator_path = base_directory.plus_file(validator_path)
 	_tester = (load(validator_path) as GDScript).new()
-	_tester.setup(_game_viewport.get_child(0), _script_slice)
+	_tester.setup(_game_view.get_viewport(), _script_slice)
 
 	var documentation_reference := _practice.get_documentation_raw()
 	if documentation_reference.is_empty():
@@ -102,10 +102,12 @@ func setup(practice: Practice, _course: Course) -> void:
 
 	_info_panel.display_tests(_tester.get_test_names())
 	LiveEditorState.current_slice = _script_slice
-	_game_viewport.use_scene(_current_scene, _script_slice.get_scene_properties().viewport_size)
+	_game_view.use_scene(_current_scene, _script_slice.get_scene_properties().viewport_size)
 
 
 func _on_run_button_pressed() -> void:
+	_game_view.paused = false
+	_code_editor.set_pause_button_pressed(false)
 	_output_console.clear_messages()
 
 	_script_slice.current_text = _code_editor.get_text()
@@ -205,7 +207,7 @@ func _on_code_editor_button(which: String) -> void:
 		_code_editor.ACTIONS.RUN:
 			_on_run_button_pressed()
 		_code_editor.ACTIONS.PAUSE:
-			_game_viewport.toggle_scene_pause()
+			_game_view.toggle_paused()
 		_code_editor.ACTIONS.DFMODE:
 			_toggle_distraction_free_mode()
 
@@ -242,7 +244,6 @@ func _set_script_slice(new_slice: SliceProperties) -> void:
 	_script_slice = new_slice
 	_current_scene = _script_slice.get_scene_properties().scene.instance()
 	_output_console.setup(_script_slice)
-	emit_signal("slice_changed")
 
 
 static func try_validate_and_replace_script(node: Node, script: Script) -> void:
