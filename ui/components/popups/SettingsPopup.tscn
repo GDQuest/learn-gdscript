@@ -8,7 +8,6 @@
 [ext_resource path="res://ui/theme/button_outlined_hover.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=7]
 
-
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxEmpty" id=2]
@@ -104,6 +103,7 @@ text = "Language"
 margin_left = 348.0
 margin_right = 680.0
 margin_bottom = 47.0
+hint_tooltip = "Change the course's language. We plan to add other languages, but only English is available for now."
 size_flags_horizontal = 3
 disabled = true
 text = "English"
@@ -130,6 +130,7 @@ custom_constants/separation = 12
 [node name="Value" type="HSlider" parent="PanelContainer/Column/Margin/Column/Settings/FontSizeSetting/ValueContainer"]
 margin_right = 332.0
 margin_bottom = 24.0
+hint_tooltip = "Increase or lower the size of all text in the app."
 size_flags_horizontal = 3
 custom_styles/grabber_area_highlight = SubResource( 1 )
 custom_styles/grabber_area = SubResource( 2 )
