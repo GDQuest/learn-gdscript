@@ -146,7 +146,7 @@ func _on_run_button_pressed() -> void:
 	var result := _tester.run_tests()
 	_info_panel.update_tests_display(result)
 	if result.is_success():
-		var popup := LessonDonePopupScene.instance()
+		var popup := LessonDonePopupScene.instance() as LessonDonePopup
 		add_child(popup)
 		popup.fade_in(_game_container)
 		popup.connect("accepted", self, "_on_practice_popup_accepted")

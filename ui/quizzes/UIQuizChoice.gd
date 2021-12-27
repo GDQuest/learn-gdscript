@@ -14,12 +14,15 @@ func _ready() -> void:
 
 func setup(quiz: Quiz) -> void:
 	.setup(quiz)
+	var quiz_choice = (_quiz as QuizChoice)
+	if not quiz_choice:
+		return
 
-	var answer_options: Array = _quiz.answer_options.duplicate()
-	if _quiz.do_shuffle_answers:
+	var answer_options: Array = quiz_choice.answer_options.duplicate()
+	if quiz_choice.do_shuffle_answers:
 		answer_options.shuffle()
 
-	if _quiz.is_multiple_choice:
+	if quiz_choice.is_multiple_choice:
 		for answer in answer_options:
 			var button := CheckBox.new()
 			button.text = answer
@@ -41,8 +44,11 @@ func setup(quiz: Quiz) -> void:
 # Returns an array of indices of selected answers
 func _get_answers() -> Array:
 	var answers := []
+	var quiz_choice = (_quiz as QuizChoice)
+	if not quiz_choice:
+		return answers
 	
-	if _quiz.is_multiple_choice:
+	if quiz_choice.is_multiple_choice:
 		for button in _choices.get_children():
 			if button.pressed:
 				answers.append(button.text)

@@ -59,7 +59,7 @@ func run() -> void:
 
 func reset() -> void:
 	if _scene_instance.has_method("reset"):
-		_scene_instance.reset()
+		_scene_instance.call("reset")
 	_center_scene_instance()
 
 
