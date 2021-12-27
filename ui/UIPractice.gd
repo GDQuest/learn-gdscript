@@ -16,9 +16,10 @@ var _practice: Practice
 var _is_left_panel_open := true
 var _info_panel_start_width := -1.0
 
-onready var _game_container := find_node("Output") as Control
-onready var _game_viewport := _game_container.find_node("GameViewport") as GameViewport
-onready var _output_console := _game_container.find_node("Console") as OutputConsole
+onready var _output_container := find_node("Output") as Control
+onready var _game_container := find_node("GameContainer") as Container
+onready var _game_viewport := _output_container.find_node("GameViewport") as GameViewport
+onready var _output_console := _output_container.find_node("Console") as OutputConsole
 
 onready var _info_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
 onready var _documentation_panel := find_node("DocumentationPanel") as RichTextLabel
@@ -147,7 +148,8 @@ func _on_run_button_pressed() -> void:
 	if result.is_success():
 		var popup := LessonDonePopupScene.instance()
 		add_child(popup)
-		popup.connect("pressed", Events, "emit_signal", ["practice_completed", _practice])
+		popup.fade_in(_game_container)
+		popup.connect("accepted", self, "_on_practice_popup_accepted")
 
 
 func _toggle_distraction_free_mode() -> void:
@@ -185,3 +187,7 @@ func _on_console_toggled() -> void:
 
 func _on_code_reference_clicked(_file_name: String, line: int, character: int) -> void:
 	_code_editor.slice_editor.highlight_line(line, character)
+
+
+func _on_practice_popup_accepted() -> void:
+	Events.emit_signal("practice_completed", _practice)
