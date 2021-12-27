@@ -107,6 +107,7 @@ func _reset_overlays() -> void:
 	var show_lines_to = slice_properties.end_offset
 
 	errors_overlay.lines_offset = slice_properties.start_offset
+	errors_overlay.character_offset = slice_properties.leading_spaces
 
 	for index in errors.size():
 		var error: LanguageServerError = errors[index]

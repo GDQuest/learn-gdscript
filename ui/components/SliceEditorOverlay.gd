@@ -4,6 +4,7 @@ extends Control
 const LanguageServerRange = LanguageServerError.ErrorRange
 
 var lines_offset := 0 setget set_lines_offset
+var character_offset := 0 setget set_character_offset
 
 
 func _init() -> void:
@@ -22,6 +23,11 @@ func _gui_input(event: InputEvent) -> void:
 
 func set_lines_offset(value: int) -> void:
 	lines_offset = value
+	update_overlays()
+
+
+func set_character_offset(value: int) -> void:
+	character_offset = value
 	update_overlays()
 
 
@@ -62,8 +68,10 @@ func add_error(error: LanguageServerError) -> ErrorOverlay:
 func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextEdit) -> Array:
 	var start_line := error_range.start.line - lines_offset
 	var end_line = error_range.end.line - lines_offset
+	var start_char = error_range.start.character - character_offset
+	var end_char = error_range.end.character - character_offset
 	
-	return _get_text_range_regions(start_line, error_range.start.character, end_line, error_range.end.character, text_edit)
+	return _get_text_range_regions(start_line, start_char, end_line, end_char, text_edit)
 
 
 func add_line_highlight(line_index: int) -> void:
