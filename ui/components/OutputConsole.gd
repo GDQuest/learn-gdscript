@@ -8,6 +8,8 @@ const OutputConsoleErrorMessage := preload("res://ui/components/OutputConsoleErr
 const OutputConsoleErrorMessageScene := preload("res://ui/components/OutputConsoleErrorMessage.tscn")
 const OutputConsolePrintMessageScene := preload("res://ui/components/OutputConsolePrintMessage.tscn")
 
+var _slice_properties: SliceProperties
+
 onready var _scroll_container := $MarginContainer/ScrollContainer as ScrollContainer
 onready var _message_list := $MarginContainer/ScrollContainer/MarginContainer/MessageList as Control
 
@@ -22,6 +24,10 @@ func _ready() -> void:
 	_error_overlay_popup.connect("hide", _error_popup, "hide")
 	
 	LiveEditorMessageBus.connect("print_request", self, "print_bus_message")
+
+
+func setup(slice_properties: SliceProperties) -> void:
+	_slice_properties = slice_properties
 
 
 # Adds a message related to a specific line in a specific file
@@ -77,10 +83,9 @@ func print_error(type: int, text: String, file_name: String, line: int, characte
 
 	# We need to adjust the reported range to show the lines as the student sees them
 	# in the slice editor.
-	var slice_properties := LiveEditorState.current_slice
-	var show_lines_from := slice_properties.start_offset
-	var show_lines_to := slice_properties.end_offset
-	var character_offset := slice_properties.leading_spaces
+	var show_lines_from := _slice_properties.start_offset
+	var show_lines_to := _slice_properties.end_offset
+	var character_offset := _slice_properties.leading_spaces
 
 	var message_node := OutputConsoleErrorMessageScene.instance() as OutputConsoleErrorMessage
 	message_node.message_severity = type
