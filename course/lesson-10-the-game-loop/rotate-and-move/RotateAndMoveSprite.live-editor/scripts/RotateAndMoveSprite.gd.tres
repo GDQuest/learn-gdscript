@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://course/lesson-10-the-game-loop/rotate-and-move/RotateAndMoveSprite.gd" type="Script" id=1]
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/ScriptProperties.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+nodes_paths = [ NodePath("") ]
+script_file = ExtResource( 1 )
+original_script = "extends WrappingNode2D
+
+
+func _ready() -> void:
+	_sprites = [$GodotBottom, $HandIce, $HandIce2]
+	_bounds = calculate_bounding_rect(_sprites)
+
+# EXPORT move_and_rotate
+func _process(delta):
+	rotate(0.05)
+	move_local_y(1)
+# /EXPORT move_and_rotate
+"
