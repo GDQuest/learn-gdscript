@@ -242,7 +242,6 @@ func _set_script_slice(new_slice: SliceProperties) -> void:
 	_script_slice = new_slice
 	_current_scene = _script_slice.get_scene_properties().scene.instance()
 	_output_console.setup(_script_slice)
-	LiveEditorState.current_scene = _current_scene
 	emit_signal("slice_changed")
 
 
