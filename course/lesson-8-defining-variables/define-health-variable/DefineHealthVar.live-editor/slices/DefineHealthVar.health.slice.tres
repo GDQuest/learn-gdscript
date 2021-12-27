@@ -16,5 +16,5 @@ is_full_file = false
 start = 2
 end = 4
 lines_before = [ "extends Control", "" ]
-lines_after = [ "", "func _run():", "	test_assignment()", "", "func test_assignment():", "	for property in get_property_list():", "		if property.name == \"health\":", "			$Label.bbcode_text = \"Variable [code]health[/code] has a value of %s\" % get(\"health\")", "			return", "	$Label.bbcode_text = \"Variable [code]health[/code] is not defined.\"", "" ]
+lines_after = [ "", "func _run():", "	test_assignment()", "", "func test_assignment():", "	for property in get_property_list():", "		if property.name == \"health\":", "			print(\"Health has a value of %s\" % health)", "			return", "	print(\"Health property does not exist.\")", "" ]
 lines_editable = [ "var health = 100" ]

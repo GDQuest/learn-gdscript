@@ -19,7 +19,7 @@ func _run():
 func test_assignment():
 	for property in get_property_list():
 		if property.name == \"health\":
-			$Label.bbcode_text = \"Variable [code]health[/code] has a value of %s\" % get(\"health\")
+			print(\"Health has a value of %s\" % health)
 			return
-	$Label.bbcode_text = \"Variable [code]health[/code] is not defined.\"
+	print(\"Health property does not exist.\")
 "
