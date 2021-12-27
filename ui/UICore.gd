@@ -1,6 +1,6 @@
 extends Control
 
-const WelcomeScreen = preload("./WelcomeScreen.gd")
+const WelcomeScreen = preload("./welcome_screen/WelcomeScreen.gd")
 const LoadingScreen = preload("./LoadingScreen.gd")
 const ReportFormPopup = preload("./components/popups/ReportFormPopup.gd")
 const SettingsPopup = preload("./components/popups/SettingsPopup.gd")

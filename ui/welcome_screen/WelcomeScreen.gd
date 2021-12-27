@@ -6,6 +6,7 @@ onready var _settings_button := $Layout/MarginContainer/ColumnLayout/SideColumn/
 onready var _outliner_button := $Layout/MarginContainer/ColumnLayout/SideColumn/OutlinerButton as Button
 onready var _start_button := $Layout/MarginContainer/ColumnLayout/SideColumn/StartButton as Button
 onready var _report_button := $Layout/TopBar/MarginContainer/ToolBarLayout/ReportButton as Button
+onready var _content_list := $Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/VBoxContainer
 
 
 func _ready() -> void:
@@ -14,6 +15,9 @@ func _ready() -> void:
 	_start_button.connect("pressed", self, "_on_start_requested")
 	
 	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
+	for child in _content_list.get_children():
+		if child is RichTextLabel:
+			child.connect("meta_clicked", OS, "shell_open")
 
 
 func set_button_continue() -> void:

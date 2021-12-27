@@ -11,6 +11,8 @@ const NEUTRAL_OUTLINE := preload("res://ui/theme/quiz_outline_neutral.tres")
 const OUTLINE_FLASH_DURATION := 0.8
 const OUTLINE_FLASH_DELAY := 0.75
 
+export var test_quiz: Resource
+
 onready var _outline := $Outline as PanelContainer
 onready var _question := $MarginContainer/ChoiceView/Question as Label
 onready var _explanation := $MarginContainer/ResultView/Explanation as RichTextLabel

@@ -65,9 +65,9 @@ func setup(lesson: Lesson) -> void:
 		elif block is Quiz:
 			var scene = QuizInputFieldScene if block is QuizInputField else QuizChoiceScene
 			var instance = scene.instance()
+			_content_blocks.add_child(instance)
 			instance.setup(block)
 			instance.hide()
-			_content_blocks.add_child(instance)
 			instance.connect("quiz_passed", Events, "emit_signal", ["quiz_completed", quiz_index])
 			instance.connect("quiz_passed", self, "_reveal_up_to_next_quiz")
 			instance.connect("quiz_skipped", self, "_reveal_up_to_next_quiz")

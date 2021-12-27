@@ -4,8 +4,13 @@ extends UIBaseQuiz
 onready var _choices := $MarginContainer/ChoiceView/Answers as VBoxContainer
 
 
+func _ready() -> void:
+	if test_quiz and test_quiz is Quiz:
+		setup(test_quiz)
+
+
 func setup(quiz: Quiz) -> void:
-	yield(.setup(quiz), "completed")
+	.setup(quiz)
 
 	var answer_options: Array = _quiz.answer_options.duplicate()
 	if _quiz.do_shuffle_answers:
