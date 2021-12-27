@@ -17,15 +17,15 @@ signal print_request(type, thing_to_print, file_name, line_nb, character, messag
 var script_replacements := RegExpGroup.collection(
 	{
 		"\\b(?<command>prints)\\((?<args>.*?)\\)":
-		"LiveEditorMessageBus.print_log([{args}], \"{file}\", {line}, {char})",
+		"MessageBus.print_log([{args}], \"{file}\", {line}, {char})",
 		"\\b(?<command>print)\\((?<args>.*?)\\)":
-		"LiveEditorMessageBus.print_log([{args}], \"{file}\", {line}, {char})",
+		"MessageBus.print_log([{args}], \"{file}\", {line}, {char})",
 		"\\b(?<command>push_error)\\((?<args>.*?)\\)":
-		"LiveEditorMessageBus.print_error({args}, \"{file}\", {line}, {char})",
+		"MessageBus.print_error({args}, \"{file}\", {line}, {char})",
 		"\\b(?<command>push_warning)\\((?<args>.*?)\\)":
-		"LiveEditorMessageBus.print_warning({args}, \"{file}\", {line}, {char})",
+		"MessageBus.print_warning({args}, \"{file}\", {line}, {char})",
 		"\\b(?<command>assert)\\((?<args>.*?)\\)":
-		"LiveEditorMessageBus.print_assert({args}, \"{file}\", {line}, {char})",
+		"MessageBus.print_assert({args}, \"{file}\", {line}, {char})",
 	}
 )
 

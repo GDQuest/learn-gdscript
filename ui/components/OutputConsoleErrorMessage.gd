@@ -51,15 +51,15 @@ func _update_visuals() -> void:
 		_location_row.show()
 	
 	match message_severity:
-		LiveEditorMessageBus.MESSAGE_TYPE.ASSERT:
+		MessageBus.MESSAGE_TYPE.ASSERT:
 			_severity_label.text = "ASSERT"
 			_message_label.add_color_override("font_color", Color(1, 0.094118, 0.321569))
 			_severity_label.add_color_override("font_color", Color(1, 0.094118, 0.321569))
-		LiveEditorMessageBus.MESSAGE_TYPE.ERROR:
+		MessageBus.MESSAGE_TYPE.ERROR:
 			_severity_label.text = "ERROR"
 			_message_label.add_color_override("font_color", Color(1, 0.094118, 0.321569))
 			_severity_label.add_color_override("font_color", Color(1, 0.094118, 0.321569))
-		LiveEditorMessageBus.MESSAGE_TYPE.WARNING:
+		MessageBus.MESSAGE_TYPE.WARNING:
 			_severity_label.text = "WARNING"
 			_message_label.add_color_override("font_color", Color(1, 0.960784, 0.25098))
 			_severity_label.add_color_override("font_color", Color(1, 0.960784, 0.25098))

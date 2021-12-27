@@ -23,7 +23,7 @@ func _ready() -> void:
 	_error_popup.set_as_toplevel(true)
 	_error_overlay_popup.connect("hide", _error_popup, "hide")
 	
-	LiveEditorMessageBus.connect("print_request", self, "print_bus_message")
+	MessageBus.connect("print_request", self, "print_bus_message")
 
 
 func setup(slice_properties: SliceProperties) -> void:
@@ -38,9 +38,9 @@ func print_bus_message(
 		return
 	
 	if type in [
-		LiveEditorMessageBus.MESSAGE_TYPE.ASSERT,
-		LiveEditorMessageBus.MESSAGE_TYPE.ERROR,
-		LiveEditorMessageBus.MESSAGE_TYPE.WARNING
+		MessageBus.MESSAGE_TYPE.ASSERT,
+		MessageBus.MESSAGE_TYPE.ERROR,
+		MessageBus.MESSAGE_TYPE.WARNING
 	]:
 		print_error(type, text, file_name, line, character, code)
 		return

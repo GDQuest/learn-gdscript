@@ -123,7 +123,7 @@ func _on_run_button_pressed() -> void:
 		_code_editor.slice_editor.errors = errors
 		for index in errors.size():
 			var error: LanguageServerError = errors[index]
-			LiveEditorMessageBus.print_error(
+			MessageBus.print_error(
 				error.message,
 				script_file_name,
 				error.error_range.start.line,
@@ -132,13 +132,13 @@ func _on_run_button_pressed() -> void:
 			)
 		return
 
-	script_text = LiveEditorMessageBus.replace_script(script_file_name, script_text)
+	script_text = MessageBus.replace_script(script_file_name, script_text)
 	var script = GDScript.new()
 	script.source_code = script_text
 
 	var script_is_valid = script.reload()
 	if script_is_valid != OK:
-		LiveEditorMessageBus.print_error(
+		MessageBus.print_error(
 			"The script has an error, but the language server didn't catch it. Are you connected?",
 			script_file_name
 		)
