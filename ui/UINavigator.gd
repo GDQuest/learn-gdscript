@@ -208,31 +208,41 @@ func _on_course_completed() -> void:
 
 
 # Transitions a screen in.
-func _transition_to(screen: Control, previous_screen: Control = null, direction_in := true) -> void:
+func _transition_to(screen: Control, from_screen: Control = null, direction_in := true) -> void:
 	if not use_transitions:
-		if previous_screen:
-			previous_screen.hide()
+		if from_screen:
+			from_screen.hide()
+			_screen_container.remove_child(from_screen)
+		
+		if screen.get_parent() == null:
+			_screen_container.add_child(screen)
 		screen.show()
+		
+		
 		
 		yield(get_tree(), "idle_frame")
 		emit_signal("transition_completed")
 		return
 
+	if screen.get_parent() == null:
+		_screen_container.add_child(screen)
 	screen.show()
-	if previous_screen:
-		previous_screen.show()
+	
+	if from_screen:
+		from_screen.show()
 
 	var viewport_width := get_viewport().size.x
 	var direction := 1.0 if direction_in else -1.0
 	screen.rect_position.x = viewport_width * direction
 	_animate_screen(screen, 0.0)
-	if previous_screen:
-		_animate_screen(previous_screen, -viewport_width * direction)
+	if from_screen:
+		_animate_screen(from_screen, -viewport_width * direction)
 
 	_tween.start()
 	yield(_tween, "tween_all_completed")
-	if previous_screen:
-		previous_screen.hide()
+	if from_screen:
+		from_screen.hide()
+		_screen_container.remove_child(from_screen)
 	emit_signal("transition_completed")
 
 
@@ -261,7 +271,13 @@ func _animate_outliner(fade_in: bool) -> void:
 
 
 func _clear_history_stack() -> void:
-	for child in _screen_container.get_children():
-			child.queue_free()
+	# Remove all screen nodes from the screen container.
+	for child_node in _screen_container.get_children():
+		_screen_container.remove_child(child_node)
+		child_node.queue_free()
+	# Screens may be unloaded, so queue them for deletion from the stack as well.
+	for screen in _screens_stack:
+		screen.queue_free()
 	_screens_stack.clear()
+	
 	_breadcrumbs = PoolStringArray()

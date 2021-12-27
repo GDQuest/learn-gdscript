@@ -28,6 +28,9 @@ func _ready() -> void:
 func print_bus_message(
 	type: int, text: String, file_name: String, line: int, character: int, code: int
 ) -> void:
+	if not is_inside_tree():
+		return
+	
 	if type in [
 		LiveEditorMessageBus.MESSAGE_TYPE.ASSERT,
 		LiveEditorMessageBus.MESSAGE_TYPE.ERROR,
@@ -41,6 +44,9 @@ func print_bus_message(
 
 # Removes all children
 func clear_messages() -> void:
+	if not is_inside_tree():
+		return
+
 	for message_node in _message_list.get_children():
 		if message_node is OutputConsoleErrorMessage:
 			message_node.disconnect("external_explain_requested", self, "_on_external_requested")
@@ -54,6 +60,9 @@ func clear_messages() -> void:
 # Prints plain text output. Use this when you want to display the output of a
 # print statement.
 func print_output(values: Array) -> void:
+	if not is_inside_tree():
+		return
+
 	var message_node = OutputConsolePrintMessageScene.instance()
 	message_node.values = values
 	_message_list.add_child(message_node)
@@ -63,6 +72,9 @@ func print_output(values: Array) -> void:
 
 
 func print_error(type: int, text: String, file_name: String, line: int, character: int, code: int) -> void:
+	if not is_inside_tree():
+		return
+
 	# We need to adjust the reported range to show the lines as the student sees them
 	# in the slice editor.
 	var slice_properties := LiveEditorState.current_slice
