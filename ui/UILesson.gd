@@ -79,6 +79,7 @@ func setup(lesson: Lesson, course: Course) -> void:
 	for practice in lesson.practices:
 		var button: UIPracticeButton = PracticeButtonScene.instance()
 		button.setup(practice)
+		button.completed_before = user_profile.is_lesson_practice_completed(course.resource_path, lesson.resource_path, practice.resource_path)
 		_practices_container.add_child(button)
 	_practices_visibility_container.hide()
 	

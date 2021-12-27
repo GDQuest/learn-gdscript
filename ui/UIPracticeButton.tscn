@@ -1,32 +1,52 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/UIPracticeButton.gd" type="Script" id=1]
 [ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=3]
+[ext_resource path="res://ui/icons/checkmark_valid.svg" type="Texture" id=4]
 
 [node name="UIPracticeButton" type="MarginContainer"]
 margin_right = 800.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
+theme = ExtResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Row" type="HBoxContainer" parent="."]
-margin_right = 800.0
-margin_bottom = 100.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 780.0
+margin_bottom = 80.0
 
 [node name="Label" type="Label" parent="Row"]
-margin_top = 37.0
-margin_right = 616.0
-margin_bottom = 63.0
+margin_top = 17.0
+margin_right = 524.0
+margin_bottom = 43.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 text = "Practice title"
 
+[node name="CompletedBeforeIcon" type="TextureRect" parent="Row"]
+modulate = Color( 1, 1, 1, 0.235294 )
+margin_left = 540.0
+margin_right = 564.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "You've already completed this practice before.
+You can give it another go if you want to test your skills!"
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Button" type="Button" parent="Row"]
-margin_left = 620.0
-margin_right = 800.0
-margin_bottom = 100.0
+margin_left = 580.0
+margin_right = 760.0
+margin_bottom = 60.0
 rect_min_size = Vector2( 180, 60 )
 text = "Practice"
