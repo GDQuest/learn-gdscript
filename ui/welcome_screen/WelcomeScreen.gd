@@ -6,7 +6,11 @@ onready var _settings_button := $Layout/MarginContainer/ColumnLayout/SideColumn/
 onready var _outliner_button := $Layout/MarginContainer/ColumnLayout/SideColumn/OutlinerButton as Button
 onready var _start_button := $Layout/MarginContainer/ColumnLayout/SideColumn/StartButton as Button
 onready var _report_button := $Layout/TopBar/MarginContainer/ToolBarLayout/ReportButton as Button
-onready var _content_list := $Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/VBoxContainer
+
+onready var _main_content_block := $Layout/MarginContainer/ColumnLayout/MainColumn/MainContent as Container
+onready var _content_list := (
+	_main_content_block.get_node("MarginContainer/ScrollContainer/MarginContainer/VBoxContainer") as Container
+)
 
 
 func _ready() -> void:
