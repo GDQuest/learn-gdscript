@@ -40,17 +40,18 @@ func setup(quiz: Quiz) -> void:
 
 # Returns an array of indices of selected answers
 func _get_answers() -> Array:
-	var answer_buttons := _choices.get_children()
-	var first_button = answer_buttons[0]
 	var answers := []
-	if first_button is CheckBox:
-		for button in answer_buttons:
+	
+	if _quiz.is_multiple_choice:
+		for button in _choices.get_children():
 			if button.pressed:
 				answers.append(button.text)
 	else:
-		var pressed_button: Button = first_button.group.get_pressed_button()
-		if pressed_button:
-			answers = [first_button.text]
+		for button in _choices.get_children():
+			if button.pressed:
+				answers.append(button.text)
+				break
+	
 	return answers
 
 
