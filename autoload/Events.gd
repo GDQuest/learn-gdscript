@@ -8,7 +8,7 @@ signal lesson_completed(lesson)
 signal quiz_completed(quiz)
 signal practice_started(practice)
 signal practice_completed(practice)
-signal course_completed(course)
+signal course_completed
 
 signal settings_requested
 signal report_form_requested

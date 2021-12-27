@@ -200,11 +200,8 @@ func _on_lesson_completed(lesson: Lesson) -> void:
 
 
 func _on_course_completed() -> void:
-	Events.emit_signal("course_completed", course)
-
-	# TODO: Add a special screen at the end of the course.
-	# For now it should also probably be a "thank you for participating in beta" screen.
-	print("You reached the end of the course!")
+	Events.emit_signal("course_completed")
+	queue_free()
 
 
 # Transitions a screen in.
