@@ -39,5 +39,7 @@ func _get_answers() -> Array:
 			if button.pressed:
 				answers.append(button.text)
 	else:
-		answers = [first_button.group.get_pressed_button().text]
+		var pressed_button: Button = first_button.group.get_pressed_button()
+		if pressed_button:
+			answers = [first_button.text]
 	return answers
