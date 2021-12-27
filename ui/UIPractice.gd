@@ -87,6 +87,7 @@ func setup(practice: Practice, _course: Course) -> void:
 	if slice_path.is_rel_path():
 		slice_path = base_directory.plus_file(slice_path)
 	_set_script_slice(load(slice_path))
+	_code_editor.slice_editor.setup(_script_slice)
 
 	var validator_path := practice.validator_script_path
 	if validator_path.is_rel_path():
@@ -101,7 +102,6 @@ func setup(practice: Practice, _course: Course) -> void:
 		_info_panel.set_documentation(documentation_reference)
 
 	_info_panel.display_tests(_tester.get_test_names())
-	LiveEditorState.current_slice = _script_slice
 	_game_view.use_scene(_current_scene, _script_slice.get_scene_properties().viewport_size)
 
 

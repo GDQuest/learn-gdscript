@@ -1,5 +1,4 @@
-class_name GDScriptErrorDatabase
-extends Reference
+extends Node
 
 const DATABASE_SOURCE := "res://lsp/error_database.csv"
 const TRANSLATED_SOURCE := "res://lsp/error_database.%s.csv"

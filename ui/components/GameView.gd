@@ -16,7 +16,7 @@ func _ready() -> void:
 	_viewport.name = "Viewport"
 	_viewport_container.add_child(_viewport)
 	_scene_tree.connect("screen_resized", self, "_on_screen_resized")
-	call_deferred("screen_resized")
+	call_deferred("_on_screen_resized")
 
 
 func toggle_paused() -> void:

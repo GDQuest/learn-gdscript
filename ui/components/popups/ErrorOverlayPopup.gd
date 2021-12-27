@@ -64,7 +64,7 @@ func set_exclusive(value: bool) -> void:
 func set_error_code(value: int) -> void:
 	error_code = value
 
-	var message_details := LiveEditorState.error_database.get_message(error_code)
+	var message_details := GDScriptErrorDatabase.get_message(error_code)
 	_error_explanation = message_details.explanation
 	_error_suggestion = message_details.suggestion
 

@@ -32,6 +32,7 @@ var errors_overlay_message: ErrorOverlayPopup = ErrorOverlayPopupScene.instance(
 # Array<LanguageServerError>
 var errors := [] setget set_errors
 
+var _slice_properties: SliceProperties
 # Used to know when to add an indent level.
 var _current_line := cursor_get_line()
 
@@ -66,7 +67,7 @@ func _ready() -> void:
 	errors_overlay.margin_right = -scroll_offsets.x
 	errors_overlay.margin_bottom = -scroll_offsets.y
 	add_child(errors_overlay)
-	
+
 	add_child(errors_overlay_message)
 	errors_overlay_message.set_as_toplevel(true)
 	errors_overlay_message.hide()
@@ -80,16 +81,60 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().set_input_as_handled()
 
 
-func _on_scrollbar_value_changed(value: float, direction: int) -> void:
-	var vec2 = Vector2(0, value) if direction == SCROLL_DIR.VERTICAL else Vector2(value, 0)
-	emit_signal("scroll_changed", vec2)
+func setup(slice_properties: SliceProperties) -> void:
+	_slice_properties = slice_properties
 
 
 func sync_text_with_slice() -> void:
-	if not LiveEditorState.current_slice:
+	if not _slice_properties:
 		return
-	text = LiveEditorState.current_slice.slice_text
+	text = _slice_properties.slice_text
 	_on_text_changed()
+
+
+# Receives an array of `LanguageServerError`s
+func set_errors(new_errors: Array) -> void:
+	if OS.is_debug_build():
+		for err in errors:
+			assert(err is LanguageServerError, "Error %s isn't a valid LanguageServerError" % [err])
+	errors = new_errors
+	_reset_overlays()
+
+
+func highlight_line(line_index: int, at_char: int = 0) -> void:
+	if line_index < 0 or line_index >= get_line_count():
+		return
+	if at_char < 0:
+		at_char = 0
+
+	cursor_set_line(line_index, false)
+	cursor_set_column(at_char)
+	center_viewport_to_cursor()
+
+	errors_overlay.add_line_highlight(line_index)
+
+
+func _on_text_changed() -> void:
+	if _slice_properties != null:
+		_slice_properties.current_text = text
+
+	# The underlying text was changed, the old errors are no longer valid then.
+	errors_overlay.clean()
+	errors_overlay_message.hide()
+
+	# Insert extra indents when entering new code block
+	var previous_line := _current_line
+	_current_line = cursor_get_line()
+	if _current_line > previous_line and text.rstrip("\t").ends_with(":\n"):
+		var column := cursor_get_column()
+		text += "\t"
+		cursor_set_line(_current_line)
+		cursor_set_column(column + 1)
+
+
+func _on_scrollbar_value_changed(value: float, direction: int) -> void:
+	var vec2 = Vector2(0, value) if direction == SCROLL_DIR.VERTICAL else Vector2(value, 0)
+	emit_signal("scroll_changed", vec2)
 
 
 # Recreates the overlays at the correct position after the underlying data has
@@ -98,8 +143,8 @@ func sync_text_with_slice() -> void:
 func _reset_overlays() -> void:
 	errors_overlay.clean()
 	errors_overlay_message.hide()
-	
-	var slice_properties := LiveEditorState.current_slice
+
+	var slice_properties := _slice_properties
 	if slice_properties == null:
 		return
 
@@ -138,43 +183,3 @@ func _reset_overlays() -> void:
 # less often.
 func _update_overlays() -> void:
 	errors_overlay.update_overlays()
-
-
-# Receives an array of `LanguageServerError`s
-func set_errors(new_errors: Array) -> void:
-	if OS.is_debug_build():
-		for err in errors:
-			assert(err is LanguageServerError, "Error %s isn't a valid LanguageServerError" % [err])
-	errors = new_errors
-	_reset_overlays()
-
-
-func highlight_line(line_index: int, at_char: int = 0) -> void:
-	if line_index < 0 or line_index >= get_line_count():
-		return
-	if at_char < 0:
-		at_char = 0
-	
-	cursor_set_line(line_index, false)
-	cursor_set_column(at_char)
-	center_viewport_to_cursor()
-	
-	errors_overlay.add_line_highlight(line_index)
-
-
-func _on_text_changed() -> void:
-	if LiveEditorState.current_slice != null:
-		LiveEditorState.current_slice.current_text = text
-
-	# The underlying text was changed, the old errors are no longer valid then.
-	errors_overlay.clean()
-	errors_overlay_message.hide()
-
-	# Insert extra indents when entering new code block
-	var previous_line := _current_line
-	_current_line = cursor_get_line()
-	if _current_line > previous_line and text.rstrip("\t").ends_with(":\n"):
-		var column := cursor_get_column()
-		text += "\t"
-		cursor_set_line(_current_line)
-		cursor_set_column(column + 1)
