@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=49 format=2]
+[gd_resource type="Theme" load_steps=53 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_text.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/vscrollbar_grabber.tres" type="StyleBox" id=2]
@@ -41,6 +41,10 @@
 [ext_resource path="res://ui/theme/vslider_grabber_highlight.tres" type="StyleBox" id=39]
 [ext_resource path="res://ui/theme/vslider_grabber.tres" type="StyleBox" id=40]
 [ext_resource path="res://ui/theme/vslider_slider.tres" type="StyleBox" id=41]
+[ext_resource path="res://ui/icons/checkbox_checked.png" type="Texture" id=42]
+[ext_resource path="res://ui/icons/checkbox_disabled_empty.png" type="Texture" id=43]
+[ext_resource path="res://ui/icons/checkbox_empty.png" type="Texture" id=44]
+[ext_resource path="res://ui/icons/checkbox_disabled_checked.png" type="Texture" id=45]
 
 [sub_resource type="StyleBoxEmpty" id=6]
 
@@ -75,6 +79,10 @@ Button/styles/focus = ExtResource( 6 )
 Button/styles/hover = ExtResource( 5 )
 Button/styles/normal = ExtResource( 3 )
 Button/styles/pressed = ExtResource( 18 )
+CheckBox/icons/checked = ExtResource( 42 )
+CheckBox/icons/checked_disabled = ExtResource( 45 )
+CheckBox/icons/unchecked = ExtResource( 44 )
+CheckBox/icons/unchecked_disabled = ExtResource( 43 )
 HBoxContainer/constants/separation = 16
 HScrollBar/styles/grabber = ExtResource( 36 )
 HScrollBar/styles/grabber_highlight = ExtResource( 38 )
