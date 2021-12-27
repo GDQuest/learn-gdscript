@@ -18,20 +18,19 @@ const SERVER_URL := "http://139.162.135.251"
 
 const LanguageServerError := preload("./LanguageServerError.gd")
 const http_request_name = "___HTTP_REQUEST___"
-
+const WarningCode := GDScriptCodes.WarningCode
+const ErrorCode := GDScriptCodes.ErrorCode
 # Skip errors with a severity warning above this. The lower the number,
 # the more dire the error. Defaults to `2`, which includes errors and
 # warnings
 var max_severity := 2
 
 
-# A list of language server codes to ignore. The value part of the dictionary
-# is completely unused, but the error explanation can be referenced there for
-# easier referencing.
+# A list of language server codes to ignore. All warnings are added automatically
+# (see _ready). This is similar to setting _max_severity to 1, but left here in
+# case we want more granularity
 var blacklist_codes := {
-	16: "unused return value",
-	26: "unsafe property access",
-	10008: "unknown class"
+	ErrorCode.INVALID_CLASS_DECLARATION: true
 }
 
 var _node: Node
@@ -40,6 +39,10 @@ var _url: String
 
 
 func _init(attached_node: Node, new_script_text: String, url := SERVER_URL) -> void:
+	
+	for warning in WarningCode:
+		blacklist_codes[warning] = true
+
 	_node = attached_node
 	_new_script_text = new_script_text
 	_url = url
