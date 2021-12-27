@@ -8,3 +8,7 @@ export var lessons := [] # Array of LessonProgress
 
 func _init() -> void:
 	lessons = []
+
+
+func reset() -> void:
+	lessons = []

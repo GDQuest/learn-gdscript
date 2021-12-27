@@ -122,3 +122,13 @@ func get_last_started_lesson(course_id: String) -> String:
 	# Ensure we have some data for the lesson, if we didn't have it before.
 	var _lesson_progress := get_or_create_lesson(course_id, lesson_id)
 	return lesson_id
+
+
+func reset_course_progress(course_id: String) -> void:
+	var course_progress := get_or_create_course(course_id)
+	course_progress.reset()
+	
+	if last_started_lesson.has(course_id):
+		last_started_lesson.erase(course_id)
+	
+	save()
