@@ -5,8 +5,8 @@ extends Resource
 export var lesson_id := ""
 # Set when the user got to the bottom of the lesson and clicked on any practice.
 export var completed_reading := false
-# Indices of completed quizzes (following the order quizzes appear in the lesson).
-export var completed_quizzes := [] # Array of int
+# Identifiers of completed quiz resources.
+export var completed_quizzes := [] # Array of String
 # Identifiers of completed practice resources.
 export var completed_practices := [] # Array of String
 
@@ -15,19 +15,27 @@ func _init() -> void:
 	completed_practices = []
 
 
-func get_completed_quizzes_count(quizzes_count: int) -> int:
+func get_completed_quizzes_count(quizzes: Array) -> int:
 	var completed := 0
 	
-	# We will use this array to track the indices we have already handled and ensure
-	# only unique entries are counted.
-	var accounted_quizzes := []
-	var max_quiz_index := quizzes_count - 1
+	# We collect them beforehand so that we can clear the list as we go and ensure only
+	# unique entries are counted.
+	var available_quizzes := []
+	for quiz_data in quizzes:
+		available_quizzes.append(quiz_data.resource_path)
 	
-	for quiz_index in completed_quizzes:
-		if quiz_index >= 0 and quiz_index <= max_quiz_index and not accounted_quizzes.has(quiz_index):
+	for quiz_id in completed_quizzes:
+		var matched_id := ""
+		
+		for quiz_path in available_quizzes:
+			if quiz_path == String(quiz_id): # Can be an int from old pre-beta versions.
+				matched_id = quiz_path
+				break
+		
+		if not matched_id.empty():
+			available_quizzes.erase(matched_id)
 			completed += 1
-			accounted_quizzes.append(quiz_index)
-
+	
 	return completed
 
 

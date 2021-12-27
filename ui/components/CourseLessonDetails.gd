@@ -58,11 +58,11 @@ func _update_visuals() -> void:
 			completed_practices = lesson_progress.get_completed_practices_count(lesson.practices)
 		_practice_stats_value.text = "%d / %d" % [completed_practices, total_practices]
 
-		var total_quizzes := lesson.get_total_quizzes()
+		var total_quizzes := lesson.get_quzzes_count()
 		if total_quizzes > 0:
 			var completed_quizzes := 0
 			if lesson_progress:
-				completed_quizzes = lesson_progress.get_completed_quizzes_count(total_quizzes)
+				completed_quizzes = lesson_progress.get_completed_quizzes_count(lesson.get_quizzes())
 			_quiz_stats_value.text = "%d / %d" % [completed_quizzes, total_quizzes]
 			_quiz_stats_block.show()
 		else:

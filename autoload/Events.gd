@@ -5,7 +5,7 @@ extends Node
 
 signal lesson_started(lesson)
 signal lesson_completed(lesson)
-signal quiz_completed(quiz_index)
+signal quiz_completed(quiz)
 signal practice_started(practice)
 signal practice_completed(practice)
 signal course_completed(course)

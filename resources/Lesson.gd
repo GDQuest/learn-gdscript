@@ -17,7 +17,17 @@ func _init() -> void:
 	practices = []
 
 
-func get_total_quizzes() -> int:
+func get_quizzes() -> Array:
+	var quizzes := []
+	
+	for content_item in content_blocks:
+		if content_item is Quiz:
+			quizzes.append(content_item)
+	
+	return quizzes
+
+
+func get_quzzes_count() -> int:
 	var total_quizzes := 0
 	for content_item in content_blocks:
 		if content_item is Quiz:

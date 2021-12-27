@@ -59,12 +59,12 @@ func _update_outliner_index() -> void:
 
 func _calculate_lesson_completion(lesson_data: Lesson, lesson_progress: LessonProgress) -> int:
 	var completion := 0
-	var max_completion := 1 + lesson_data.practices.size() + lesson_data.get_total_quizzes()
+	var max_completion := 1 + lesson_data.practices.size() + lesson_data.get_quzzes_count()
 	
 	if lesson_progress.completed_reading:
 		completion += 1
 	
-	completion += lesson_progress.get_completed_quizzes_count(lesson_data.get_total_quizzes())
+	completion += lesson_progress.get_completed_quizzes_count(lesson_data.get_quizzes())
 	completion += lesson_progress.get_completed_practices_count(lesson_data.practices)
 	
 	return int(clamp(float(completion) / float(max_completion) * 100, 0, 100))
@@ -94,12 +94,12 @@ func _on_lesson_started(lesson_data: Lesson) -> void:
 	_update_outliner_index()
 
 
-func _on_quiz_completed(quiz_index: int) -> void:
+func _on_quiz_completed(quiz_data: Quiz) -> void:
 	if not _current_lesson:
 		return
 	
 	var user_profile = UserProfiles.get_profile()
-	user_profile.set_lesson_quiz_completed(course.resource_path, _current_lesson.resource_path, quiz_index, true)
+	user_profile.set_lesson_quiz_completed(course.resource_path, _current_lesson.resource_path, quiz_data.resource_path, true)
 	_update_outliner_index()
 
 

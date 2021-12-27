@@ -65,21 +65,21 @@ func is_lesson_reading_completed(course_id: String, lesson_id: String) -> bool:
 	return lesson_progress.completed_reading
 
 
-func set_lesson_quiz_completed(course_id: String, lesson_id: String, quiz_index: int, completed: bool) -> void:
+func set_lesson_quiz_completed(course_id: String, lesson_id: String, quiz_id: String, completed: bool) -> void:
 	var lesson_progress := get_or_create_lesson(course_id, lesson_id)
 	
-	var quiz_listed := lesson_progress.completed_quizzes.has(quiz_index)
+	var quiz_listed := lesson_progress.completed_quizzes.has(quiz_id)
 	if completed and not quiz_listed:
-		lesson_progress.completed_quizzes.append(quiz_index)
+		lesson_progress.completed_quizzes.append(quiz_id)
 	elif not completed and quiz_listed:
-		lesson_progress.completed_quizzes.erase(quiz_index)
+		lesson_progress.completed_quizzes.erase(quiz_id)
 	
 	save()
 
 
-func is_lesson_quiz_completed(course_id: String, lesson_id: String, quiz_index: int) -> bool:
+func is_lesson_quiz_completed(course_id: String, lesson_id: String, quiz_id: String) -> bool:
 	var lesson_progress := get_or_create_lesson(course_id, lesson_id)
-	return lesson_progress.completed_quizzes.has(quiz_index)
+	return lesson_progress.completed_quizzes.has(quiz_id)
 
 
 func set_lesson_practice_completed(course_id: String, lesson_id: String, practice_id: String, completed: bool) -> void:
