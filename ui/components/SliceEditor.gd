@@ -168,6 +168,7 @@ func _on_text_changed() -> void:
 
 	# The underlying text was changed, the old errors are no longer valid then.
 	errors_overlay.clean()
+	errors_overlay_message.hide()
 
 	# Insert extra indents when entering new code block
 	var previous_line := _current_line
