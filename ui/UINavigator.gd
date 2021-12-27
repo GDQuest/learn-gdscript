@@ -208,7 +208,6 @@ func _on_course_completed() -> void:
 
 
 # Transitions a screen in.
-# FIXME: This is there as a placeholder, we probably want something prettier.
 func _transition_to(screen: Control, previous_screen: Control = null, direction_in := true) -> void:
 	if not use_transitions:
 		if previous_screen:
