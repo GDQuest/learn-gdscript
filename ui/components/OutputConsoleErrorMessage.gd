@@ -67,6 +67,9 @@ func _update_visuals() -> void:
 			_severity_label.text = "INFO"
 			_message_label.add_color_override("font_color", Color(0.572549, 0.560784, 0.721569))
 			_severity_label.add_color_override("font_color", Color(0.572549, 0.560784, 0.721569))
+			
+			_external_label.hide()
+			_message_explain_button.hide()
 
 
 func _location_row_gui_input(event: InputEvent) -> void:

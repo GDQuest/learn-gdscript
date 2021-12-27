@@ -28,6 +28,41 @@ func _ready() -> void:
 func print_bus_message(
 	type: int, text: String, file_name: String, line: int, character: int, code: int
 ) -> void:
+	if type in [
+		LiveEditorMessageBus.MESSAGE_TYPE.ASSERT,
+		LiveEditorMessageBus.MESSAGE_TYPE.ERROR,
+		LiveEditorMessageBus.MESSAGE_TYPE.WARNING
+	]:
+		print_error(type, text, file_name, line, character, code)
+		return
+	
+	print_output([ text ])
+
+
+# Removes all children
+func clear_messages() -> void:
+	for message_node in _message_list.get_children():
+		if message_node is OutputConsoleErrorMessage:
+			message_node.disconnect("external_explain_requested", self, "_on_external_requested")
+			message_node.disconnect("show_code_requested", self, "_on_code_requested")
+			message_node.disconnect("explain_error_requested", self, "_on_explain_requested")
+
+		_message_list.remove_child(message_node)
+		message_node.queue_free()
+
+
+# Prints plain text output. Use this when you want to display the output of a
+# print statement.
+func print_output(values: Array) -> void:
+	var message_node = OutputConsolePrintMessageScene.instance()
+	message_node.values = values
+	_message_list.add_child(message_node)
+	
+	yield(get_tree(), "idle_frame")
+	_scroll_container.ensure_control_visible(message_node)
+
+
+func print_error(type: int, text: String, file_name: String, line: int, character: int, code: int) -> void:
 	# We need to adjust the reported range to show the lines as the student sees them
 	# in the slice editor.
 	var slice_properties := LiveEditorState.current_slice
@@ -53,26 +88,6 @@ func print_bus_message(
 	
 	yield(get_tree(), "idle_frame")
 	_scroll_container.ensure_control_visible(message_node)
-
-
-# Removes all children
-func clear_messages() -> void:
-	for message_node in _message_list.get_children():
-		if message_node is OutputConsoleErrorMessage:
-			message_node.disconnect("external_explain_requested", self, "_on_external_requested")
-			message_node.disconnect("show_code_requested", self, "_on_code_requested")
-			message_node.disconnect("explain_error_requested", self, "_on_explain_requested")
-
-		_message_list.remove_child(message_node)
-		message_node.queue_free()
-
-
-# Prints plain text output. Use this when you want to display the output of a
-# print statement.
-func print_output(values: Array) -> void:
-	var message_node = OutputConsolePrintMessageScene.instance()
-	message_node.values = values
-	_message_list.add_child(message_node)
 
 
 func _on_external_requested() -> void:
