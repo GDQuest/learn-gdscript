@@ -29,24 +29,19 @@ func _parse_arguments() -> void:
 			var value: String = arg_tuple[1]
 			arguments[key] = value
 
-
 func get_history(n := 1) -> String:
-	# prints("history item requested:", n, ", history is:", history)
 	if n > history.size():
 		return ""
 	return history[history.size() - n]
 
 
-
 func navigate_back() -> void:
-	# prints("request to go back")
 	# Nothing to go back to, open the outliner.
 	if history.size() < 2:
 		navigate_to_outliner()
 		return
 
 	history.remove(history.size() - 1)
-	# prints("navigated back, history is:", history)
 	_js_back()
 	
 	emit_signal("back_navigation_requested")
@@ -61,8 +56,6 @@ func navigate_to_outliner() -> void:
 
 
 func navigate_to(metadata: String) -> void:
-	# prints("requesting navigation to", metadata)
-	
 	var regex_result := _url_normalization_regex.search(metadata)
 	if not regex_result:
 		push_error("`%s` is not a valid resource path"%[metadata])
@@ -81,7 +74,6 @@ func navigate_to(metadata: String) -> void:
 		return
 	
 	history.push_back(file_path)
-	# prints("history is", history)
 	_push_javascript_state(normalized.get_web_url())
 
 	emit_signal("navigation_requested")
@@ -92,7 +84,6 @@ func _notification(what: int) -> void:
 	if not is_mobile_platform:
 		return
 	if what in [MainLoop.NOTIFICATION_WM_QUIT_REQUEST, MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST]:
-		print("OS request to go quit, will go back instead")
 		navigate_back()
 
 
@@ -130,7 +121,7 @@ func get_current_url():
 
 var _js_available := OS.has_feature("JavaScript")
 var _js_history: JavaScriptObject
-var _js_hashchange_listener_ref: JavaScriptObject
+var _js_popstate_listener_ref: JavaScriptObject
 var _js_window: JavaScriptObject
 # We do not want to capture the JS state change when we control it ourselves
 # We use this to stop listening on one frame
@@ -143,31 +134,29 @@ func _on_init_setup_js() -> void:
 	_js_history = JavaScript.get_interface("history")
 	
 	# if the reference doesn't survive the method call, the callback will be dereferenced
-	_js_hashchange_listener_ref = JavaScript.create_callback(self, "_on_js_hashchange")
+	_js_popstate_listener_ref = JavaScript.create_callback(self, "_on_js_popstate")
 	
 	_js_window = JavaScript.get_interface("window")
 	# warning-ignore:unsafe_method_access
-	_js_window.addEventListener("hashchange", _js_hashchange_listener_ref)
+	_js_window.addEventListener("popstate", _js_popstate_listener_ref)
 
 	# warning-ignore:unsafe_property_access
 	var url: String = (
 		# warning-ignore:unsafe_property_access
 		# warning-ignore:unsafe_property_access
-		_js_window.location.hash.trim_prefix("#") if _js_window.location.hash else ""
+		_js_window.location.hash.trim_prefix("#").trim_prefix("/") if _js_window.location.hash else ""
 	)
 	if url:
-		# prints("found a browser url:", url)
 		navigate_to("res://%s"%[url])
 
 
 # Handles user changing the url manually or pressing back
-func _on_js_hashchange(_args: Array) -> void:
+func _on_js_popstate(_args: Array) -> void:
 	# we have set this to `false` either in _js_to_outliner or _js_back, we can set it back to true now
 	if _temporary_disable_back_listener:
 		return
 	# var event = args[0]
-	# TODO: What to do when hash is changed?
-
+	navigate_back()
 
 # Call this from GDScript to synchronize the browser. Safe to call in all environments, will no-op
 # when JS is not available.
@@ -184,7 +173,6 @@ func _js_back() -> void:
 # Call this from GDScript to synchronize the browser. Safe to call in all environments, will no-op
 # when JS is not available.
 func _js_to_outliner() -> void:
-	print("js_outliner")
 	if not _js_available:
 		return
 	_disable_popstate_listener()
@@ -196,12 +184,11 @@ func _js_to_outliner() -> void:
 
 
 func _disable_popstate_listener() -> void:
-	# prints("disabling popstate listener")
 	_temporary_disable_back_listener = true
+
 
 func _restore_popstate_listener() -> void:
 	yield(get_tree().create_timer(0.3), "timeout")
-	# prints("restoring popstate listener")
 	_temporary_disable_back_listener = false
 
 # Call this from GDScript to synchronize the browser. Safe to call in all environments, will no-op
@@ -210,9 +197,7 @@ func _push_javascript_state(url: String) -> void:
 	if not _js_available:
 		return
 	# warning-ignore:unsafe_method_access
-	# warning-ignore:unsafe_method_access
-	# warning-ignore:unsafe_property_access
-	_js_window.location.hash = url
+	_js_history.pushState(url, '', '#'+url)
 
 class NormalizedUrl:
 	var protocol := ""
