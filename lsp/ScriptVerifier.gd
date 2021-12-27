@@ -14,7 +14,7 @@ extends Reference
 signal errors(errors)
 
 # The URL of the HTTP Language Server
-const SERVER_URL := "http://139.162.135.251"
+const SERVER_URL := "https://lsp.gdquest.com"
 
 const LanguageServerError := preload("./LanguageServerError.gd")
 const http_request_name = "___HTTP_REQUEST___"
@@ -93,7 +93,6 @@ func _on_http_request_completed(
 			continue
 		errors.append(error)
 
-	prints(errors)
 	emit_signal("errors", errors)
 
 
@@ -103,8 +102,14 @@ func test() -> void:
 	var http_request := append_http_request_node()
 	var query = "file=%s" % [_new_script_text.percent_encode()]
 	var headers = PoolStringArray(["Content-Type: application/x-www-form-urlencoded"])
-	http_request.request(_url, headers, false, HTTPClient.METHOD_POST, query)
-
+	var success := http_request.request(_url, headers, false, HTTPClient.METHOD_POST, query)
+	if success != OK:
+		remove_http_request_node()
+		var error := LanguageServerError.new()
+		error.message = "Could not initiate an http connection"
+		error.code = -1
+		var errors := [error]
+		emit_signal("errors", errors)
 
 # Tests a script to ensure it has no errors.
 # Only works in exported projects. When running in the editor,
