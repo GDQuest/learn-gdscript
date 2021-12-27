@@ -46,8 +46,8 @@ func set_scene_paused(is_it: bool) -> void:
 	pause_scene(is_it)
 
 
-func use_scene() -> void:
-	LiveEditorState.use_scene(_viewport)
+func use_scene(node: Node, viewport_size: Vector2) -> void:
+	_viewport.add_child(node)
 	_viewport.size = LiveEditorState.current_slice.get_scene_properties().viewport_size
 
 
