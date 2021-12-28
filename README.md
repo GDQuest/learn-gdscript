@@ -20,7 +20,7 @@ While we're doing our best to make everything work, you should expect issues. Pl
 
 To do so:
 
-- Head to the [Issues](issues) tab.
+- Head to the [Issues](https://github.com/GDQuest/learn-gdscript/issues) tab.
 - Search for a report matching your issue.
 - If you can't find any, click the _New issue_ button in the top-right corner.
 - Follow the instructions on the screen.
@@ -57,7 +57,7 @@ We value feedback and bug reports. We will also consider feature requests, espec
 
 When participating in any discussion around here, please respect our [Kind Communication Guidelines](https://www.gdquest.com/docs/guidelines/best-practices/communication/).
 
-In the [Discussions] (discussions) tab, you can suggest and upvote ideas for new features or **ask other community members for help**.
+In the [Discussions](https://github.com/GDQuest/learn-gdscript/discussions) tab, you can suggest and upvote ideas for new features or **ask other community members for help**.
 
 **To report bugs, typos,** and discuss existing tasks, please head to the [Issues](issues) tab instead.
 
@@ -67,7 +67,7 @@ Contributions are welcome if you feel like giving a hand.
 
 To contribute, you need to follow a couple of guidelines.
 
-First, we ultimately decide on the app's design and features or changes that go in. Before you make a change, please ensure there's an existing [Issues](issues) for it and please let us know you're working on it. 
+First, we ultimately decide on the app's design and features or changes that go in. Before you make a change, please ensure there's an existing [Issues](https://github.com/GDQuest/learn-gdscript/issues) for it and please let us know you're working on it. 
 
 Here's our GDScript code style guide: [GDQuest GDScript style guide](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/).
 
