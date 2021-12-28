@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://ui/components/CourseOutliner.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/icons/navigation_back.png" type="Texture" id=8]
 [ext_resource path="res://ui/icons/navigation_outliner.png" type="Texture" id=9]
+[ext_resource path="res://ui/icons/icon_godot_head.svg" type="Texture" id=10]
 
 [node name="UINavigator" type="PanelContainer"]
 anchor_right = 1.0
@@ -52,6 +53,16 @@ margin_right = 32.0
 margin_bottom = 48.0
 hint_tooltip = "Open the course index"
 icon = ExtResource( 9 )
+flat = true
+
+[node name="HomeButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
+visible = false
+modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
+margin_left = 48.0
+margin_right = 92.0
+margin_bottom = 48.0
+hint_tooltip = "Open the course index"
+icon = ExtResource( 10 )
 flat = true
 
 [node name="BackButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]

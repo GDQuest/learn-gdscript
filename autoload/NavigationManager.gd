@@ -3,6 +3,7 @@ extends Node
 signal navigation_requested()
 signal back_navigation_requested()
 signal outliner_navigation_requested()
+signal welcome_screen_navigation_requested()
 
 var _url_normalization_regex := RegExpGroup.compile("^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)\\.(?<extension>t?res)")
 var history := PoolStringArray()
@@ -28,6 +29,7 @@ func _parse_arguments() -> void:
 			var key: String = arg_tuple[0].lstrip("--").to_lower()
 			var value: String = arg_tuple[1]
 			arguments[key] = value
+
 
 func get_history(n := 1) -> String:
 	if n > history.size():
@@ -55,6 +57,10 @@ func navigate_to_outliner() -> void:
 	emit_signal("outliner_navigation_requested")
 
 
+func navigate_to_welcome_screen() -> void:
+	emit_signal("welcome_screen_navigation_requested")
+
+
 func navigate_to(metadata: String) -> void:
 	var regex_result := _url_normalization_regex.search(metadata)
 	if not regex_result:
@@ -77,6 +83,7 @@ func navigate_to(metadata: String) -> void:
 	_push_javascript_state(normalized.get_web_url())
 
 	emit_signal("navigation_requested")
+
 
 
 # Handle back requests

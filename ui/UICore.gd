@@ -9,6 +9,7 @@ export var default_course := "res://course/course-learn-gdscript.tres"
 
 var _unloading_target: Control
 var _loading_target: Control
+var _course_navigator: UINavigator
 
 onready var _pages := $Pages as Control
 onready var _loading_screen := $Pages/LoadingScreen as LoadingScreen
@@ -39,6 +40,8 @@ func _ready() -> void:
 	Events.connect("settings_requested", _settings_popup, "show")
 	Events.connect("course_completed", self, "_show_end_screen")
 
+	NavigationManager.connect("welcome_screen_navigation_requested", self, "_go_to_welcome_screen")
+
 	if NavigationManager.current_url != "":
 		_on_course_requested()
 		return
@@ -46,12 +49,19 @@ func _ready() -> void:
 	load_immediately(_welcome_screen)
 
 
+# Use this function to manually display the loading screen and control its
+# progress. To increase the loading progress, set
+# _loading_screen.progress_value. When the value reaches 1.0, the loading screen
+# disappears automatically.
 func start_loading(target: Control) -> void:
 	_loading_target = target
 	_loading_screen.reset_progress_value()
 	_loading_screen.fade_in()
 
 
+# Immediately displays the loaded target after playing the loading screen
+# animation. If the loading screen is transparent, this function doesn't fade it
+# in.
 func load_immediately(target: Control) -> void:
 	_loading_target = target
 	_loading_screen.reset_progress_value()
@@ -75,16 +85,16 @@ func _on_course_requested(force_outliner: bool = false) -> void:
 	# is faster.
 	# FIXME: Use interactive loader instead?
 	var course_navigator_scene := load("res://ui/UINavigator.tscn") as PackedScene
-	var course_navigator = course_navigator_scene.instance()
-	course_navigator.course = load(default_course) as Course
+	_course_navigator = course_navigator_scene.instance()
+	_course_navigator.course = load(default_course) as Course
 
 	var user_profile = UserProfiles.get_profile()
 	var lesson_id = user_profile.get_last_started_lesson(default_course)
 	if not lesson_id.empty():
-		course_navigator.set_start_from_lesson(lesson_id)
+		_course_navigator.set_start_from_lesson(lesson_id)
 
-	course_navigator.load_into_outliner = force_outliner
-	_course_screen.add_child(course_navigator)
+	_course_navigator.load_into_outliner = force_outliner
+	_course_screen.add_child(_course_navigator)
 
 	_loading_screen.progress_value = 1.0
 
@@ -105,3 +115,11 @@ func _show_end_screen(_course: Course) -> void:
 	for page in _pages.get_children():
 		page.hide()
 	_end_screen.show()
+
+
+func _go_to_welcome_screen() -> void:
+	_course_screen.hide()
+	_course_navigator.queue_free()
+	start_loading(_welcome_screen)
+	_loading_screen.progress_value = 1.0
+

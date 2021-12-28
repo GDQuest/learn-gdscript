@@ -1,6 +1,8 @@
+class_name UINavigator
 extends PanelContainer
 
 signal transition_completed
+signal return_to_welcome_screen_requested
 
 const CourseOutliner := preload("./components/CourseOutliner.gd")
 const SCREEN_TRANSITION_DURATION := 0.75
@@ -23,6 +25,7 @@ var _lesson_index := 0
 var _lesson_count: int = 0
 
 onready var _back_button := $VBoxContainer/Buttons/MarginContainer/HBoxContainer/BackButton as Button
+onready var _home_button := $VBoxContainer/Buttons/MarginContainer/HBoxContainer/HomeButton as Button
 onready var _outliner_button := (
 	$VBoxContainer/Buttons/MarginContainer/HBoxContainer/OutlinerButton as Button
 )
@@ -51,6 +54,7 @@ func _ready() -> void:
 
 	_outliner_button.connect("pressed", NavigationManager, "navigate_to_outliner")
 	_back_button.connect("pressed", NavigationManager, "navigate_back")
+	_home_button.connect("pressed", NavigationManager, "navigate_to_welcome_screen")
 	
 	_settings_button.connect("pressed", Events, "emit_signal", ["settings_requested"])
 	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
@@ -115,6 +119,8 @@ func _navigate_to_outliner() -> void:
 	_screen_container.hide()
 	_outliner_button.hide()
 	_back_button.hide()
+	_home_button.show()
+	
 	_clear_history_stack()
 	_label.text = ""
 
@@ -166,6 +172,7 @@ func _navigate_to() -> void:
 		yield(_tween, "tween_all_completed")
 
 	_course_outliner.hide()
+	_home_button.hide()
 	
 	if target is Practice:
 		Events.emit_signal("practice_started", target)
