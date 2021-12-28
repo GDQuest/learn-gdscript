@@ -71,7 +71,7 @@
    */
   const load = () => {
     setStatusMode(StatusMode.INDETERMINATE);
-    GODOT_CONFIG.canvasResizePolicy = 1;
+    GODOT_CONFIG.canvasResizePolicy = 0;
     const engine = new Engine(GODOT_CONFIG);
     engine
       .startGame({ onProgress })
