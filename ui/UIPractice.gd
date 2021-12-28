@@ -103,7 +103,7 @@ func setup(practice: Practice, _course: Course) -> void:
 	_game_view.use_scene(_current_scene, _script_slice.get_scene_properties().viewport_size)
 
 
-func _on_run_button_pressed() -> void:
+func _test_student_code() -> void:
 	_game_view.paused = false
 	_code_editor.set_pause_button_pressed(false)
 	_output_console.clear_messages()
@@ -128,6 +128,7 @@ func _on_run_button_pressed() -> void:
 				error.error_range.start.character,
 				error.code
 			)
+		_code_editor.enable_buttons()
 		return
 
 	script_text = MessageBus.replace_script(script_file_name, script_text)
@@ -140,6 +141,7 @@ func _on_run_button_pressed() -> void:
 			"The script has an error, but the language server didn't catch it. Are you connected?",
 			script_file_name
 		)
+		_code_editor.enable_buttons()
 		return
 
 	_code_editor_is_dirty = false
@@ -154,6 +156,8 @@ func _on_run_button_pressed() -> void:
 		add_child(popup)
 		popup.fade_in(_game_container)
 		popup.connect("accepted", self, "_on_practice_popup_accepted")
+	else:
+		_code_editor.enable_buttons()
 
 
 func _toggle_distraction_free_mode() -> void:
@@ -205,7 +209,7 @@ func _on_code_editor_text_changed(_text: String) -> void:
 func _on_code_editor_button(which: String) -> void:
 	match which:
 		_code_editor.ACTIONS.RUN:
-			_on_run_button_pressed()
+			_test_student_code()
 		_code_editor.ACTIONS.PAUSE:
 			_game_view.toggle_paused()
 		_code_editor.ACTIONS.DFMODE:
