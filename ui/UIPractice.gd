@@ -73,13 +73,11 @@ func setup(practice: Practice, _course: Course) -> void:
 
 	_hints_container.visible = not practice.hints.empty()
 	var index := 0
-	var available_width := _hints_container.rect_size.x - _hints_container.padding
 	for hint in practice.hints:
 		var practice_hint: PracticeHint = PracticeHintScene.instance()
 		practice_hint.title = "Hint " + String(index + 1).pad_zeros(1)
 		practice_hint.bbcode_text = hint
 		_hints_container.add_child(practice_hint)
-		practice_hint.rect_min_size.x = available_width
 		index += 1
 
 	var slice_path := practice.script_slice_path

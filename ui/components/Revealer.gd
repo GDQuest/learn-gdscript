@@ -16,6 +16,8 @@ export var first_margin := 5.0
 export var children_margin := 2.0
 export var text_color: Color setget set_text_color
 
+var use_animations := true
+
 var _height := 0.0
 # List of nodes living in the revealer.
 var _contents := []
@@ -109,11 +111,13 @@ func update_min_size() -> void:
 	
 	var rect_size_x := min(rect_size.x, _parent.rect_size.x)
 	_button.rect_size.x = rect_size_x
-	if _tween.is_inside_tree():
+	if use_animations and _tween.is_inside_tree():
 		_tween.stop(self, "rect_min_size:y")
 		_tween.interpolate_property(
 			self, "rect_min_size:y", rect_min_size.y, _height, ANIM_DURATION
 		)
+	else:
+		rect_min_size.y = _height
 
 
 func sort_children() -> void:
@@ -139,7 +143,7 @@ func set_text_color(value: Color) -> void:
 
 
 func _rotate_chevron(rotation_degrees: float, time := ANIM_DURATION) -> void:
-	if not _tween.is_inside_tree():
+	if not use_animations or not _tween.is_inside_tree():
 		_chevron.rect_rotation = rotation_degrees
 		return
 	

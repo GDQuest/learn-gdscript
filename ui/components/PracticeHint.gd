@@ -1,7 +1,7 @@
 class_name PracticeHint
 extends Revealer
 
-export var bbcode_text := "" setget set_bbcode_text
+export var bbcode_text: String setget set_bbcode_text
 
 onready var _rich_text_label := $RichTextLabel as RichTextLabel
 
