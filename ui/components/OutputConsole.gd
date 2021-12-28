@@ -10,8 +10,8 @@ const OutputConsolePrintMessageScene := preload("res://ui/components/OutputConso
 
 var _slice_properties: SliceProperties
 
-onready var _scroll_container := $MarginContainer/ScrollContainer as ScrollContainer
-onready var _message_list := $MarginContainer/ScrollContainer/MarginContainer/MessageList as Control
+onready var _scroll_container := $MarginContainer/VBoxContainer/ScrollContainer as ScrollContainer
+onready var _message_list := $MarginContainer/VBoxContainer/ScrollContainer/MessageList as Control
 
 onready var _error_popup := $ErrorPopup as Control
 onready var _error_overlay_popup := $ErrorPopup/ErrorOverlayPopup as ErrorOverlayPopup
