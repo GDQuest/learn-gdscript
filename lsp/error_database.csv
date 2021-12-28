@@ -43,11 +43,13 @@ You are missing one or more tabs, or you inserted too many.
 The computer uses those leading tab characters on code lines to know which lines of code are part of a code block, like a function.","If the line of code with the error is right after a line ending with a colon, like a function definition, you need one extra indent level compared to the previous line.
 
 In other words, your line should have one more leading tab character than the function definition."
-UNEXPECTED_CHARACTER,"You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or the previous lines of code.
+UNEXPECTED_CHARACTER,"You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code.
 
-You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character.","The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing.
+You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character.
 
-If the error says ""expected,"" then you're likely missing something in the [b]previous[/b] code line, like a punctuation mark, a parenthesis, or something else.
+Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code.","The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing.
+
+If the error says ""expected,"" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else.
 
 If it says ""unterminated,"" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
 UNEXPECTED_CHARACTER_IN_KEYWORD,"This error tells you that you are missing a parenthesis (or sometimes a comma or a path).
