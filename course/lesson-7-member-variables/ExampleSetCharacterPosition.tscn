@@ -10,7 +10,7 @@ script/source = "extends Node2D
 onready var start_position = position
 
 func run():
-	position = Vector2(200, 100)
+	position = Vector2(180, 120)
 
 func reset():
 	position = start_position
@@ -29,10 +29,12 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 1040.0
 margin_bottom = 291.0
-gdscript_code = "position.x = 200
-position.y = 100"
+gdscript_code = "position.x = 180
+position.y = 120"
+center_in_frame = false
 
 [node name="SetSpritePosition" type="Node2D" parent="RunnableCodeExample"]
+position = Vector2( 88, 85 )
 script = SubResource( 1 )
 
 [node name="GodotBottom" type="Sprite" parent="RunnableCodeExample/SetSpritePosition"]
