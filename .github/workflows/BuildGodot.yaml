@@ -34,7 +34,7 @@ jobs:
       - name: Add Git Hash to build
         run: |
           cd build/web
-          sed -i "0,/<script/{s/<script/<div style='position:absolute;bottom:5px;right:5px;z-index:2;font-size:.8em;font-family:monospace;color:#737373;'>$GITHUB_REF:$GITHUB_SHA<\/div><script/}" index.html && \
+          sed -i "0,/<script/{s@<script@<div style='position:absolute;bottom:5px;right:5px;z-index:2;font-size:.8em;font-family:monospace;color:#737373;'>$GITHUB_REF:$GITHUB_SHA</div><script@}" index.html && \
           echo "added commit hash to index.html" || echo "failed to add the commit hash"
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
