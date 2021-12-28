@@ -1,0 +1,169 @@
+/* --- BASE --- */
+
+:root {
+  --background-color: #303049;
+  --game-background-color: #090a20;
+  --bar-height: 14px;
+  --bar-width: 300px;
+  --bar-corner-radius: calc(var(--bar-height) / 2);
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  touch-action: none;
+  margin: 0;
+  border: 0 none;
+  padding: 0;
+  text-align: center;
+  background-color: var(--background-color);
+}
+
+.layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- /BASE --- */
+
+/* --- CANVAS CONTAINER --- */
+
+@supports (--custom: property) {
+  [style*="--aspect-ratio"] {
+    position: relative;
+    overflow: hidden;
+  }
+  [style*="--aspect-ratio"]::before {
+    content: "";
+    display: block;
+    padding-bottom: calc(100% / (var(--aspect-ratio)));
+  }
+  [style*="--aspect-ratio"] > :first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+#canvas-container {
+  max-width: 1920px;
+  min-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* --- /CANVAS CONTAINER --- */
+
+/* --- GAME CANVAS --- */
+#canvas {
+  display: block;
+  margin: 0;
+  border: none;
+  background-color: var(--game-background-color);
+}
+
+#canvas:focus {
+  outline: none;
+}
+
+/* --- /GAME CANVAS --- */
+
+/*-- ICON --*/
+
+.icon {
+  width: 150px;
+  height: 150px;
+  margin: 20px;
+}
+
+/*-- /ICON --*/
+
+/*-- LOADER --*/
+
+.loader {
+  --progress: 100%;
+  display: block;
+  height: var(--bar-height);
+  position: relative;
+  width: var(--bar-width);
+  display: block;
+  background-color: #303049;
+  border-radius: var(--bar-corner-radius);
+  overflow: hidden;
+}
+
+.loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  height: 100%;
+  left: 0;
+  border-radius: var(--bar-corner-radius);
+  background-color: #3dff6e;
+}
+
+@keyframes loader {
+  0% {
+    left: 0;
+    right: var(--bar-width);
+  }
+
+  44% {
+    left: 0;
+    right: 0;
+  }
+
+  100% {
+    left: var(--bar-width);
+    right: 0;
+  }
+}
+
+/*-- /LOADER --*/
+
+/*-- NOTICES --*/
+.notices {
+  font-family: "Noto Sans", "Droid Sans", Arial, sans-serif;
+  color: #e0e0e0;
+  background-color: #3b3943;
+  background-image: linear-gradient(to bottom, #403e48, #35333c);
+  border: 1px solid #45434e;
+  box-shadow: 0 0 1px 1px #2f2d35;
+}
+/*-- /NOTICES --*/
+
+/*-- STATES --*/
+
+#status,
+#notices {
+  visibility: hidden;
+}
+
+.mode-notice #notices,
+.mode-indeterminate #status,
+.mode-progress #status {
+  visibility: visible;
+}
+
+.mode-indeterminate #loader::before {
+  right: var(--bar-width);
+  animation: loader 0.8s cubic-bezier(0, 0, 0.03, 0.9) infinite;
+}
+
+.mode-progress #loader::before {
+  transition: width 0.2s ease-out;
+  width: var(--progress);
+}
