@@ -71,6 +71,10 @@ func _update_visuals() -> void:
 			_external_label.hide()
 			_message_explain_button.hide()
 
+	if message_code == -1:
+		_external_label.hide()
+		_message_explain_button.hide()
+
 
 func _location_row_gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton

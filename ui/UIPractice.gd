@@ -148,6 +148,8 @@ func _on_run_button_pressed() -> void:
 	_update_nodes(script, nodes_paths)
 
 	var result := _tester.run_tests()
+	for error in result.errors:
+		MessageBus.print_error(error, script_file_name)
 	_info_panel.update_tests_display(result)
 	if result.is_success():
 		var popup := LessonDonePopupScene.instance() as LessonDonePopup
@@ -220,9 +222,9 @@ func _on_code_reference_clicked(_file_name: String, line: int, character: int) -
 	_code_editor.slice_editor.highlight_line(line, character)
 
 
-
 func _on_practice_popup_accepted() -> void:
 	Events.emit_signal("practice_completed", _practice)
+
 
 # Updates all nodes with the given script. If a node path isn't valid, the node
 # will be silently skipped.
