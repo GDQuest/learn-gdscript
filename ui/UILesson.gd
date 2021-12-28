@@ -62,9 +62,11 @@ func setup(lesson: Lesson, course: Course) -> void:
 				instance.set_draw_panel(true)
 
 		elif block is Quiz:
-			var completed_before := user_profile.is_lesson_quiz_completed(course.resource_path, lesson.resource_path, block.resource_path)
-			if completed_before:
-				_quizzes_done += 1
+			var completed_before := false
+			if course:
+				completed_before = user_profile.is_lesson_quiz_completed(course.resource_path, lesson.resource_path, block.resource_path)
+				if completed_before:
+					_quizzes_done += 1
 			
 			var scene = QuizInputFieldScene if block is QuizInputField else QuizChoiceScene
 			var instance = scene.instance()
@@ -79,7 +81,8 @@ func setup(lesson: Lesson, course: Course) -> void:
 	for practice in lesson.practices:
 		var button: UIPracticeButton = PracticeButtonScene.instance()
 		button.setup(practice)
-		button.completed_before = user_profile.is_lesson_practice_completed(course.resource_path, lesson.resource_path, practice.resource_path)
+		if course:
+			button.completed_before = user_profile.is_lesson_practice_completed(course.resource_path, lesson.resource_path, practice.resource_path)
 		_practices_container.add_child(button)
 	_practices_visibility_container.hide()
 	
