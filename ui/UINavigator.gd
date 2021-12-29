@@ -96,6 +96,7 @@ func _navigate_back() -> void:
 		return
 
 	_breadcrumbs.remove(_breadcrumbs.size() - 1)
+	_label.text = _breadcrumbs.join("/")
 
 	var current_screen: Control = _screens_stack.pop_back()
 	var next_screen: Control = _screens_stack.back()
@@ -133,9 +134,11 @@ func _navigate_to() -> void:
 	var screen: Control
 	if target is Practice:
 		screen = preload("UIPractice.tscn").instance()
+		_breadcrumbs.push_back(target.title)
 	elif target is Lesson:
 		screen = preload("UILesson.tscn").instance()
 		_lesson_index = course.lessons.find(target) # Make sure the index is synced after navigation.
+		_breadcrumbs.push_back("%s. %s" % [_lesson_index, target.title])
 	else:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
 		return
@@ -145,9 +148,6 @@ func _navigate_to() -> void:
 	# warning-ignore:unsafe_method_access
 	screen.setup(target, course)
 
-	# warning-ignore:unsafe_property_access
-	# warning-ignore:unsafe_property_access
-	_breadcrumbs.push_back(target.title)
 	_label.text = _breadcrumbs.join("/")
 
 	var has_previous_screen = not _screens_stack.empty()
