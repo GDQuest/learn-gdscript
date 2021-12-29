@@ -151,11 +151,11 @@ class Polygon:
 	extends Node2D
 
 	const LabelScene := preload("DrawingTurtleLabel.tscn")
-	var points := [] setget , get_points
+	var points := PoolVector2Array() setget , get_points
 	var draw_speed := 400.0
 	var line_2d := Line2D.new()
 	var _tween := Tween.new()
-	var _current_points := []
+	var _current_points := PoolVector2Array()
 	var _current_point_index := 0
 	var _total_distance := 0.0
 
@@ -207,7 +207,7 @@ class Polygon:
 		_tween.stop_all()
 
 	func _animate_point_position(point: Vector2) -> void:
-		var new_points := _current_points.duplicate()
+		var new_points := _current_points
 		new_points.push_back(point)
 		line_2d.points = new_points
 		emit_signal("line_end_moved", point + position)
@@ -233,8 +233,9 @@ class Polygon:
 		var rect := get_rect()
 		return (rect.position + rect.end) / 2.0 + position
 
-	func get_points() -> Array:
+	func get_points() -> PoolVector2Array:
+		return points;
 		var copy := []
 		for point in points:
 			copy.push_back(point)
-		return copy
+		return PoolVector2Array(copy)

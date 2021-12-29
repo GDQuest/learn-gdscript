@@ -25,7 +25,7 @@ func test_draw_square_of_200_pixels() -> String:
 
 	var index := 1
 	for p in polygons:
-		var points = p.get_points()
+		var points = Array(p.get_points())
 		points.sort()
 		if points != target_polygon:
 			return (

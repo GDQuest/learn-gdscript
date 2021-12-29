@@ -14,7 +14,7 @@ func test_draw_rectangle_of_200_by_120() -> String:
 		return "Nothing drawn. Did you call move_forward()?"
 
 	var rectangle: DrawingTurtle.Polygon = polygons[0]
-	var points := rectangle.get_points()
+	var points := Array(rectangle.get_points())
 	points.sort()
 	if points != target_polygon:
 		return "The drawn shape is not a rectangle with a width of 200 and a length of 120."

@@ -23,7 +23,7 @@ func test_draw_rectangles_of_varying_sizes() -> String:
 	var polygons := turtle.get_polygons()
 	for index in polygons.size():
 		var p = polygons[index]
-		var points = p.get_points()
+		var points = Array(p.get_points())
 		points.sort()
 		var points_count = points.size()
 		if points_count > 5:
