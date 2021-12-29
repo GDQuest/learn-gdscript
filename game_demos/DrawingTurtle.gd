@@ -234,4 +234,7 @@ class Polygon:
 		return (rect.position + rect.end) / 2.0 + position
 
 	func get_points() -> Array:
-		return points.duplicate()
+		var copy := []
+		for point in points:
+			copy.push_back(point)
+		return copy
