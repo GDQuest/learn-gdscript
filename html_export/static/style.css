@@ -148,6 +148,7 @@ body {
   background-image: linear-gradient(to bottom, #403e48, #35333c);
   border: 1px solid #45434e;
   box-shadow: 0 0 1px 1px #2f2d35;
+  max-width: 640px;
 }
 /*-- /NOTICES --*/
 
@@ -173,3 +174,31 @@ body {
   transition: width 0.2s ease-out;
   width: var(--progress);
 }
+
+/*-- /STATES --*/
+
+/*-- MOBILE HANDLING --*/
+
+.mobile-only {
+  display: none;
+}
+
+@media (orientation: portrait), (max-aspect-ratio: 4/3), (max-width: 750px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: flex;
+  }
+
+  .force-mobile .desktop-only {
+    display: flex;
+  }
+
+  .force-mobile .mobile-only {
+    display: none;
+  }
+}
+
+/*-- /MOBILE HANDLING --*/

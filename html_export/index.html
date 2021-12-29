@@ -8,7 +8,7 @@
     $GODOT_HEAD_INCLUDE
   </head>
   <body>
-    <div class="layer" id="game">
+    <div class="layer desktop-only" id="game">
       <div id="canvas-container" style="--aspect-ratio: 192/108">
         <canvas id="canvas" width="1920" height="1080">
           HTML5 canvas appears to be unsupported in the current browser.<br />
@@ -16,7 +16,7 @@
         </canvas>
       </div>
     </div>
-    <div class="layer" id="status">
+    <div class="layer desktop-only" id="status">
       <img
         class="icon"
         src="icon.svg"
@@ -27,11 +27,19 @@
         Errors happened while loading:<br />
       </div>
     </div>
-    <script type="text/javascript" src="$GODOT_URL"></script>
-    <script type="text/javascript">
-      const GODOT_CONFIG = $GODOT_CONFIG;
-      var engine = new Engine(GODOT_CONFIG);
-    </script>
-    <script type="text/javascript" src="bootstrap.js"></script>
+    <div class="layer mobile-only" id="mobile-warning">
+      <p class="notices">
+        You appear to be using a mobile browser. This application is not
+        suitable for small screens and portrait orientation. If you want to
+        continue, it's at your own risk!
+      </p>
+      <button id="mobile-warning-dismiss-button">I understand</button>
+    </div>
   </body>
+  <script type="text/javascript" src="$GODOT_URL"></script>
+  <script type="text/javascript">
+    const GODOT_CONFIG = $GODOT_CONFIG;
+    var engine = new Engine(GODOT_CONFIG);
+  </script>
+  <script type="text/javascript" src="bootstrap.js"></script>
 </html>

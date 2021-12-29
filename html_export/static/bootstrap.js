@@ -21,7 +21,7 @@
     if (currentStatusMode === mode || !is_initializing) {
       return;
     }
-    document.body.className = "";
+    document.body.classList.remove(...allModes);
     if (allModes.includes(mode)) {
       document.body.classList.add(mode);
       currentStatusMode = mode;
@@ -91,6 +91,26 @@
       load();
     }
   };
+
+  mobileHandling: {
+    console.log("hey!");
+    const KEY = "force-mobile";
+
+    const forceAppOnMobile = () => {
+      document.body.classList.add(KEY);
+      localStorage.setItem(KEY, "true");
+    };
+
+    document
+      .getElementById("mobile-warning-dismiss-button")
+      .addEventListener("click", forceAppOnMobile);
+
+    const currentValue = JSON.parse(localStorage.getItem(KEY) || "false");
+
+    if (currentValue === true) {
+      forceAppOnMobile();
+    }
+  }
 
   start();
 })();
