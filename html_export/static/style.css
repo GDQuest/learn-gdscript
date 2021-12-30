@@ -7,6 +7,10 @@
   --bar-height: 14px;
   --bar-width: 300px;
   --bar-corner-radius: calc(var(--bar-height) / 2);
+
+  --render-width: 1920px;
+  --render-height: 1080px;
+  --render-aspect-ration: calc(var(--render-width) / var(--render-height));
 }
 
 body,
@@ -21,7 +25,7 @@ body {
   border: 0 none;
   padding: 0;
   text-align: center;
-  background-color: black;
+  background-color: var(--game-background-color);
 }
 
 .layer {
@@ -42,33 +46,19 @@ body {
 
 /* --- CANVAS CONTAINER --- */
 
-[style*="--aspect-ratio"] {
-  position: relative;
-  overflow: hidden;
-  display: block;
-  width: 90%;
-  margin: 0 auto;
-  height: 0;
-  padding-bottom: calc(90% / (var(--aspect-ratio)));
-}
-
-[style*="--aspect-ratio"] > :first-child {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+#canvas-container {
+  background-color: var(--game-background-color);
+  max-width: var(--render-width);
+  max-height: var(--render-height);
+  width: calc(100% / var(--render-aspect-ration));
   height: 100%;
 }
 
-@media all and (display-mode: fullscreen) {
-  [style*="--aspect-ratio"] {
+@media (max-aspect-ratio: 16/9) {
+  #canvas-container {
     width: 100%;
-    padding-bottom: calc(100% / (var(--aspect-ratio)));
+    height: calc(100% / var(--render-aspect-ration));
   }
-}
-
-#canvas-container {
-  background-color: var(--game-background-color);
 }
 
 /* --- /CANVAS CONTAINER --- */
@@ -79,6 +69,8 @@ body {
   margin: 0;
   border: none;
   background-color: var(--game-background-color);
+  width: 100%;
+  height: 100%;
 }
 
 #canvas:focus {
@@ -228,7 +220,7 @@ body {
   padding: 0;
   border: none;
   outline: none;
-  boxshadow: none;
+  box-shadow: none;
   background: transparent;
 }
 
