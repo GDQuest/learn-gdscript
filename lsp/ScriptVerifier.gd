@@ -16,6 +16,23 @@ signal errors(errors)
 # The URL of the HTTP Language Server
 const SERVER_URL := "https://lsp.gdquest.com"
 
+# https://docs.godotengine.org/en/stable/classes/class_httprequest.html#enumerations
+const HTTP_RESULT_ERRORS := {
+	0: "RESULT_SUCCESS",
+	1: "RESULT_CHUNKED_BODY_SIZE_MISMATCH",
+	2: "RESULT_CANT_CONNECT",
+	3: "RESULT_CANT_RESOLVE",
+	4: "RESULT_CONNECTION_ERROR",
+	5: "RESULT_SSL_HANDSHAKE_ERROR",
+	6: "RESULT_NO_RESPONSE",
+	7: "RESULT_BODY_SIZE_LIMIT_EXCEEDED",
+	8: "RESULT_REQUEST_FAILED",
+	9: "RESULT_DOWNLOAD_FILE_CANT_OPEN",
+	10: "RESULT_DOWNLOAD_FILE_WRITE_ERROR0",
+	11: "RESULT_REDIRECT_LIMIT_REACHED1",
+	12: "RESULT_TIMEOUT",
+}
+
 const LanguageServerError := preload("./LanguageServerError.gd")
 const http_request_name = "___HTTP_REQUEST___"
 const WarningCode := GDScriptCodes.WarningCode
@@ -51,6 +68,7 @@ func _init(attached_node: Node, new_script_text: String, url := SERVER_URL) -> v
 func append_http_request_node() -> HTTPRequest:
 	var http_request = HTTPRequest.new()
 	http_request.name = http_request_name
+	http_request.timeout = 10
 	http_request.connect("request_completed", self, "_on_http_request_completed")
 	_node.add_child(http_request)
 	return http_request
@@ -65,14 +83,22 @@ func remove_http_request_node() -> void:
 func _on_http_request_completed(
 	result: int, _response_code: int, _headers: PoolStringArray, body: PoolByteArray
 ) -> void:
+	prints("sdfdsfdsf?", result, ":::", _response_code)
+
+	if result != HTTPRequest.RESULT_SUCCESS:
+		var error_name: String = HTTP_RESULT_ERRORS[result]
+		printerr("http error connecting to %s: [%s]"%[_url, error_name])
+		emit_signal("errors", [])
+		return
+		
 	var response = (
 		parse_json(body.get_string_from_utf8())
-		if result == HTTPRequest.RESULT_SUCCESS and _response_code == 200
+		if _response_code == 200
 		else []
 	)
 	remove_http_request_node()
 
-	if result == HTTPRequest.RESULT_SUCCESS and not _response_code == 200:
+	if not _response_code == 200:
 		printerr(
 			"Failed to verify the script using the language server: " + body.get_string_from_utf8()
 		)
@@ -104,6 +130,7 @@ func test() -> void:
 	var headers = PoolStringArray(["Content-Type: application/x-www-form-urlencoded"])
 	var success := http_request.request(_url, headers, false, HTTPClient.METHOD_POST, query)
 	if success != OK:
+		push_error("could not connect")
 		remove_http_request_node()
 		var error := LanguageServerError.new()
 		error.message = "Could not initiate an http connection"
