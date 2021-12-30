@@ -113,33 +113,6 @@
       forceAppOnMobile();
     }
   }
-
-  clipboard: {
-    const copyTextToClipboard = (text) => {
-      const textArea = document.createElement("textarea");
-      textArea.className = "copy-text";
-      textArea.value = text;
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-
-      try {
-        var isSuccessful = document.execCommand("copy");
-        console.log("Copying text command was successful?", isSuccessful);
-      } catch (err) {
-        console.log("unable to copy");
-      }
-      document.body.removeChild(textArea);
-    };
-
-    window.addEventListener("paste", (event) => {
-      const paste = (event.clipboardData || window.clipboardData).getData(
-        "text"
-      );
-      console.log("paste action initiated", paste);
-    });
-    LIB.copyTextToClipboard = copyTextToClipboard;
-  }
 })((window.GDQUEST = {}));
 
 GDQUEST.startLoading();
