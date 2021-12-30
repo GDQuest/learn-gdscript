@@ -31,6 +31,10 @@ jobs:
           mkdir -v -p build/web && \
           godot -v --export "HTML5" build/web/index.html || true && \
           echo "built godot"
+      - name: Copy static files
+        run: |
+          cp -r html_export/static/* build/web && \
+          echo "copied files"
       - name: Add Git Hash to build
         run: |
           cd build/web
