@@ -19,7 +19,7 @@
      * @returns
      */
     const setStatusMode = (mode = StatusMode.INDETERMINATE) => {
-      if (currentStatusMode === mode || !is_initializing) {
+      if (currentStatusMode === mode) {
         return;
       }
       document.body.classList.remove(...allModes);
@@ -39,7 +39,8 @@
       var msg = err.message || err;
       console.error(msg);
       setStatusMode(StatusMode.NOTICE);
-      text.split("\n").forEach((line) => {
+      const statusNotice = document.getElementById("notices");
+      msg.split("\n").forEach((line) => {
         statusNotice.appendChild(document.createTextNode(line));
         statusNotice.appendChild(document.createElement("br"));
       });
@@ -93,6 +94,7 @@
       }
     };
     LIB.startLoading = start;
+    LIB.displayFailureNotice = displayFailureNotice;
   }
 
   mobileHandling: {

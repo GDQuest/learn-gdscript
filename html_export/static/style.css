@@ -10,7 +10,7 @@
 
   --render-width: 1920px;
   --render-height: 1080px;
-  --render-aspect-ration: calc(var(--render-width) / var(--render-height));
+  --render-aspect-ratio: calc(var(--render-width) / var(--render-height));
 }
 
 body,
@@ -50,14 +50,14 @@ body {
   background-color: var(--game-background-color);
   max-width: var(--render-width);
   max-height: var(--render-height);
-  width: calc(100% / var(--render-aspect-ration));
+  width: calc(100% / var(--render-aspect-ratio));
   height: 100%;
 }
 
 @media (max-aspect-ratio: 16/9) {
   #canvas-container {
     width: 100%;
-    height: calc(100% / var(--render-aspect-ration));
+    height: calc(100% / var(--render-aspect-ratio));
   }
 }
 
@@ -135,12 +135,11 @@ body {
 /*-- NOTICES --*/
 .notices {
   font-family: "Noto Sans", "Droid Sans", Arial, sans-serif;
-  color: #e0e0e0;
-  background-color: #3b3943;
-  background-image: linear-gradient(to bottom, #403e48, #35333c);
-  border: 1px solid #45434e;
-  box-shadow: 0 0 1px 1px #2f2d35;
-  max-width: 640px;
+  color: #3b3943;
+  width: 640px;
+  padding: 3em;
+  background: #fdfdfd;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 /*-- /NOTICES --*/
 
@@ -171,15 +170,15 @@ body {
 
 /*-- MOBILE HANDLING --*/
 
+#mobile-warning {
+  background: #30304982;
+}
+
 .mobile-only {
   display: none;
 }
 
 @media (orientation: portrait), (max-aspect-ratio: 4/3), (max-width: 750px) {
-  .desktop-only {
-    display: none;
-  }
-
   .mobile-only {
     display: flex;
   }
