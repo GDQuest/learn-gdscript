@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://resources/Practice.gd" type="Script" id=1]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+
+[resource]
+script = ExtResource( 1 )
+title = "Turning a Corner"
+goal = "In this practice, we'll tell the turtle to draw a corner.
+
+The corner is made up of two lines that are [code]200[/code] pixels long. The lines are connected at each end by [code]90[/code] degrees, or right-angle.
+
+The [code]move_forward()[/code] and [code]turn_right()[/code] functions to the right draw a corner, but they're missing some parameters.
+
+Add the missing parameters so the turtle moves forward [code]200[/code] pixels, turns right [code]90[/code] degrees, then moves forward again [code]200[/code] pixels.
+
+We added the first parameter for you so the turtle moves forward [code]200[/code] pixels.
+
+In the following practices, we'll draw multiple corners to create rectangles.
+
+"
+starting_code = "move_forward(200)
+turn_right()
+move_forward()"
+hints = PoolStringArray( "You need to add two parameters to the [code]turn_right()[/code] and [code]move_forward()[/code] functions: [code]90[/code] and [code]200[/code]." )
+validator_script_path = "TestsTurningRight.gd"
+script_slice_path = "turning_right/TurningRight.live-editor/slices/TurningRight.draw_rectangle.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 2 )
