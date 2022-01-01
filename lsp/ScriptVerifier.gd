@@ -83,7 +83,6 @@ func remove_http_request_node() -> void:
 func _on_http_request_completed(
 	result: int, _response_code: int, _headers: PoolStringArray, body: PoolByteArray
 ) -> void:
-	prints("sdfdsfdsf?", result, ":::", _response_code)
 
 	if result != HTTPRequest.RESULT_SUCCESS:
 		var error_name: String = HTTP_RESULT_ERRORS[result]
