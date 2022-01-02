@@ -18,7 +18,7 @@ margin_right = 545.0
 [node name="ErrorLabel" parent="MarginContainer/Column" index="0"]
 margin_right = 537.0
 margin_bottom = 59.0
-text = "The function \"move\" already exists in this class (at line 22)."
+text = "The identifier \"horizontal_movement\" isn't declared in the current scope (at line 6)."
 
 [node name="HSeparator" parent="MarginContainer/Column" index="1"]
 margin_top = 67.0
@@ -34,6 +34,12 @@ margin_right = 537.0
 
 [node name="Value" parent="MarginContainer/Column/Content/ErrorExplanation" index="2"]
 margin_right = 537.0
+bbcode_text = "The [code]move_left()[/code] function can't use the [code]horizontal_movement[/code] variable because it isn't script-wide. It also isn't in the [code]move_left()[/code] function."
+text = "The move_left() function can't use the horizontal_movement variable because it isn't script-wide. It also isn't in the move_left() function."
 
 [node name="ErrorSuggestion" parent="MarginContainer/Column/Content" index="1"]
 margin_right = 537.0
+
+[node name="Value" parent="MarginContainer/Column/Content/ErrorSuggestion" index="2"]
+bbcode_text = "Make sure you define the [code]horizontal_movement[/code] variable in the [code]move_left()[/code] function, or define it outside of functions so it's script-wide."
+text = "Make sure you define the horizontal_movement variable in the move_left() function, or define it outside of functions so it's script-wide."
