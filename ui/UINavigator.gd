@@ -138,7 +138,7 @@ func _navigate_to() -> void:
 	elif target is Lesson:
 		screen = preload("UILesson.tscn").instance()
 		_lesson_index = course.lessons.find(target) # Make sure the index is synced after navigation.
-		_breadcrumbs.push_back("%s. %s" % [_lesson_index, target.title])
+		_breadcrumbs.push_back("%s. %s" % [_lesson_index + 1, target.title])
 	else:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
 		return
