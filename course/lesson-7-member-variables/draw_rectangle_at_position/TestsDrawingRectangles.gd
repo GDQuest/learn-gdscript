@@ -19,7 +19,7 @@ func test_rectangle_starts_at_120_by_100() -> String:
 func test_rectangle_size_is_200_by_120() -> String:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	var polygons := turtle.get_polygons()
-	var points = polygons[0].points
+	var points = Array(polygons[0].points)
 	points.sort()
 	if points != expected_rect:
 		return "The drawn shapes don't have the expected length and height. Did you forget to use the length and height parameter?"
