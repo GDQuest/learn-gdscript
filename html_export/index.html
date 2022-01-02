@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title>$GODOT_PROJECT_NAME</title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <meta
+      property="og:image"
+      content="https://gdquest.github.io/learn-gdscript/learn-gdscript.png"
+    />
+    <meta
+      name="twitter:image"
+      content="https://gdquest.github.io/learn-gdscript/learn-gdscript.png"
+    />
+    <meta property="og:title" content="$GODOT_PROJECT_NAME" />
+    <meta name="twitter:title" content="$GODOT_PROJECT_NAME" />
+    <meta
+      property="og:description"
+      content="Make your family and friends proud. Learn skills in high demand by creating fun toys and games. Finally become a game developer!"
+    />
+    <meta
+      name="twitter:description"
+      content="Make your family and friends proud. Learn skills in high demand by creating fun toys and games. Finally become a game developer!"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://gdquest.github.io/learn-gdscript/"
+    />
+    $GODOT_HEAD_INCLUDE
+  </head>
+  <body>
+    <div class="layer desktop-only" id="game">
+      <div id="canvas-container">
+        <canvas id="canvas" width="1920" height="1080">
+          HTML5 canvas appears to be unsupported in the current browser.<br />
+          Please try updating or use a different browser.
+        </canvas>
+      </div>
+    </div>
+    <div class="layer desktop-only" id="status">
+      <img
+        class="icon"
+        src="icon.svg"
+        alt="Godot Logo wearing an academic hat"
+      />
+      <div id="loader" class="loader loader-no-status"></div>
+      <div id="notices" class="notices">
+        Errors happened while loading:<br />
+      </div>
+    </div>
+    <div class="layer mobile-only" id="mobile-warning">
+      <div class="mobile-warning-modal notices">
+        <p>
+          You appear to be using a mobile browser. This application is not
+          suitable for small screens and portrait orientation. If you want to
+          continue, it's at your own risk!
+        </p>
+        <button id="mobile-warning-dismiss-button">I understand</button>
+      </div>
+    </div>
+    <div id="version">branch and commit hash</div>
+  </body>
+  <script type="text/javascript" src="$GODOT_URL"></script>
+  <script type="text/javascript">
+    const GODOT_CONFIG = $GODOT_CONFIG;
+    var engine = new Engine(GODOT_CONFIG);
+  </script>
+  <script type="text/javascript" src="bootstrap.js"></script>
+</html>
