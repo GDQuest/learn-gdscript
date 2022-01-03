@@ -8,6 +8,7 @@ func _ready() -> void:
 # EXPORT move_and_rotate
 func _process(delta):
 	rotate(2 * delta)
+	move_local_x(100 * delta)
 # /EXPORT move_and_rotate
 
 

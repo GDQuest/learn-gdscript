@@ -10,11 +10,11 @@ goal = "At the minute, the rotation of the robot is frame-dependent.
 
 Add [code]delta[/code] to make the rotational speed time-dependent.
 
-The robot should rotate 2 radians per second."
+The robot should rotate [code]2[/code] radians per second."
 starting_code = "func _process(delta):
 	rotate(2)"
-hints = PoolStringArray( "Multiple the radians by [code]delta[/code]." )
+hints = PoolStringArray( "Multiply the radians by [code]delta[/code]" )
 validator_script_path = "rotating-using-delta/TestsRotatingDelta.gd"
 script_slice_path = "rotating-using-delta/RotatingSpriteDelta.live-editor/slices/RotatingSpriteDelta.move_and_rotate.slice.tres"
-documentation_references = PoolStringArray(  )
+documentation_references = PoolStringArray( "rotate" )
 documentation_resource = ExtResource( 2 )

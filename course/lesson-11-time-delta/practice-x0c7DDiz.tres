@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://resources/Practice.gd" type="Script" id=1]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+
+[resource]
+script = ExtResource( 1 )
+title = "Moving in a Circle Using Delta"
+goal = "In this practice, make the robot move in a smooth circle using delta.
+
+To get this movement, the robot should rotate [code]5[/code] radians per second and move [code]100[/code] pixels per second in the x direction."
+starting_code = "func _process(delta):
+	pass"
+hints = PoolStringArray( "Replace [code]pass[/code] with the [code]rotate()[/code] and [code]move_local_x()[/code] functions", "Make sure to multiply each parameter by [code]delta[/code]" )
+validator_script_path = "rotating-and-moving-delta/TestsRotatingMovingDelta.gd"
+script_slice_path = "rotating-and-moving-delta/RotatingMovingSpriteDelta.live-editor/slices/RotatingMovingSpriteDelta.move_and_rotate.slice.tres"
+documentation_references = PoolStringArray( "rotate", "move_local_x" )
+documentation_resource = ExtResource( 2 )
