@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/components/SliceEditor.gd" type="Script" id=1]
 [ext_resource path="res://ui/icons/icon_pause.png" type="Texture" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://ui/theme/panel_sliceeditor.tres" type="StyleBox" id=8]
 [ext_resource path="res://ui/icons/icon_console.png" type="Texture" id=9]
 [ext_resource path="res://ui/icons/expand.png" type="Texture" id=10]
+[ext_resource path="res://ui/theme/button_practice_pressed.tres" type="StyleBox" id=11]
+[ext_resource path="res://ui/theme/button_practice_normal.tres" type="StyleBox" id=12]
+[ext_resource path="res://ui/theme/button_practice_hover.tres" type="StyleBox" id=13]
 
 [node name="CodeEditor" type="PanelContainer"]
 anchor_right = 1.0
@@ -22,7 +25,6 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-text = null
 
 [node name="Column" type="VBoxContainer" parent="."]
 margin_right = 1920.0
@@ -33,13 +35,13 @@ size_flags_horizontal = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="Column"]
 margin_right = 1920.0
-margin_bottom = 883.0
+margin_bottom = 867.0
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 8 )
 
 [node name="SliceEditor" type="TextEdit" parent="Column/PanelContainer"]
 margin_right = 1912.0
-margin_bottom = 883.0
+margin_bottom = 867.0
 rect_min_size = Vector2( 500, 0 )
 syntax_highlighting = true
 show_line_numbers = true
@@ -52,17 +54,17 @@ script = ExtResource( 1 )
 
 [node name="DFMButton" type="Button" parent="Column/PanelContainer"]
 modulate = Color( 1, 1, 1, 0.12549 )
-margin_left = 1872.0
-margin_top = 836.0
+margin_left = 1868.0
+margin_top = 812.0
 margin_right = 1912.0
-margin_bottom = 883.0
+margin_bottom = 867.0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 icon = ExtResource( 10 )
 flat = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Column"]
-margin_top = 899.0
+margin_top = 883.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 mouse_filter = 2
@@ -71,63 +73,78 @@ mouse_filter = 2
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
-margin_bottom = 161.0
+margin_bottom = 177.0
 mouse_filter = 2
 
 [node name="Row" type="HBoxContainer" parent="Column/MarginContainer/Column"]
 margin_right = 1880.0
-margin_bottom = 63.0
+margin_bottom = 71.0
 mouse_filter = 2
 alignment = 1
 
 [node name="RunButton" type="Button" parent="Column/MarginContainer/Column/Row"]
-margin_left = 682.0
-margin_right = 842.0
-margin_bottom = 63.0
+margin_left = 680.0
+margin_right = 840.0
+margin_bottom = 71.0
 rect_min_size = Vector2( 160, 40 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/normal = ExtResource( 12 )
 text = "Run"
 icon = ExtResource( 3 )
 
 [node name="PauseButton" type="Button" parent="Column/MarginContainer/Column/Row"]
-margin_left = 858.0
-margin_right = 1018.0
-margin_bottom = 63.0
+margin_left = 856.0
+margin_right = 1016.0
+margin_bottom = 71.0
 rect_min_size = Vector2( 160, 40 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/normal = ExtResource( 12 )
 toggle_mode = true
 text = "Pause"
 icon = ExtResource( 2 )
 
 [node name="ConsoleButton" type="Button" parent="Column/MarginContainer/Column/Row"]
-margin_left = 1034.0
-margin_right = 1197.0
-margin_bottom = 63.0
+margin_left = 1032.0
+margin_right = 1199.0
+margin_bottom = 71.0
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/normal = ExtResource( 12 )
 toggle_mode = true
 pressed = true
 text = "Output"
 icon = ExtResource( 9 )
 
 [node name="Row2" type="HBoxContainer" parent="Column/MarginContainer/Column"]
-margin_top = 79.0
+margin_top = 87.0
 margin_right = 1880.0
-margin_bottom = 141.0
+margin_bottom = 157.0
 mouse_filter = 2
 alignment = 1
 
 [node name="RestoreButton" type="Button" parent="Column/MarginContainer/Column/Row2"]
-margin_left = 725.0
-margin_right = 885.0
-margin_bottom = 62.0
+margin_left = 723.0
+margin_right = 883.0
+margin_bottom = 70.0
 rect_min_size = Vector2( 160, 40 )
 size_flags_horizontal = 0
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/normal = ExtResource( 12 )
 disabled = true
 text = "Reset"
 icon = ExtResource( 5 )
 
 [node name="SolutionButton" type="Button" parent="Column/MarginContainer/Column/Row2"]
-margin_left = 901.0
-margin_right = 1154.0
-margin_bottom = 62.0
+margin_left = 899.0
+margin_right = 1156.0
+margin_bottom = 70.0
 rect_min_size = Vector2( 160, 40 )
 size_flags_horizontal = 0
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/normal = ExtResource( 12 )
 text = "Show solution"
 icon = ExtResource( 4 )

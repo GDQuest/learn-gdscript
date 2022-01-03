@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/UIPracticeButton.gd" type="Script" id=1]
 [ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=3]
 [ext_resource path="res://ui/icons/checkmark_valid.svg" type="Texture" id=4]
+[ext_resource path="res://ui/theme/button_outlined_pressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/theme/button_outlined_hover.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/theme/button_outlined_normal.tres" type="StyleBox" id=7]
 
 [node name="UIPracticeButton" type="MarginContainer"]
 margin_right = 800.0
@@ -49,4 +52,7 @@ margin_left = 580.0
 margin_right = 760.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 180, 60 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 7 )
 text = "Practice"

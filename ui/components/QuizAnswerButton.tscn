@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/components/QuizAnswerButton.gd" type="Script" id=1]
 [ext_resource path="res://ui/theme/fonts/font_text.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=3]
+[ext_resource path="res://ui/theme/quiz_answer_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/theme/quiz_answer_pressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/theme/quiz_answer_hover.tres" type="StyleBox" id=6]
 
 [node name="QuizAnswerButton" type="PanelContainer"]
 margin_right = 14.0
@@ -16,6 +19,9 @@ __meta__ = {
 [node name="CheckBox" type="CheckBox" parent="."]
 margin_right = 600.0
 margin_bottom = 68.0
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 600.0

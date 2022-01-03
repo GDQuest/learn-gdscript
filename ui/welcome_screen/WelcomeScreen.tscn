@@ -37,13 +37,13 @@ __meta__ = {
 
 [node name="TopBar" type="PanelContainer" parent="Layout"]
 margin_right = 1920.0
-margin_bottom = 48.0
+margin_bottom = 56.0
 rect_min_size = Vector2( 0, 40 )
 custom_styles/panel = ExtResource( 10 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Layout/TopBar"]
 margin_right = 1920.0
-margin_bottom = 48.0
+margin_bottom = 56.0
 custom_constants/margin_right = 12
 custom_constants/margin_top = 0
 custom_constants/margin_left = 12
@@ -52,19 +52,19 @@ custom_constants/margin_bottom = 0
 [node name="ToolBarLayout" type="HBoxContainer" parent="Layout/TopBar/MarginContainer"]
 margin_left = 12.0
 margin_right = 1908.0
-margin_bottom = 48.0
+margin_bottom = 56.0
 alignment = 2
 
 [node name="ReportButton" type="Button" parent="Layout/TopBar/MarginContainer/ToolBarLayout"]
-margin_left = 1640.0
+margin_left = 1636.0
 margin_right = 1896.0
-margin_bottom = 48.0
+margin_bottom = 56.0
 text = "Report an issue"
 icon = ExtResource( 6 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Layout"]
 margin_left = 312.0
-margin_top = 64.0
+margin_top = 72.0
 margin_right = 1608.0
 margin_bottom = 1080.0
 size_flags_horizontal = 6
@@ -74,12 +74,12 @@ size_flags_vertical = 3
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1276.0
-margin_bottom = 996.0
+margin_bottom = 988.0
 alignment = 1
 
 [node name="MainColumn" type="VBoxContainer" parent="Layout/MarginContainer/ColumnLayout"]
 margin_right = 884.0
-margin_bottom = 976.0
+margin_bottom = 968.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 
@@ -117,7 +117,7 @@ valign = 1
 [node name="MainContent" type="PanelContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn"]
 margin_top = 152.0
 margin_right = 884.0
-margin_bottom = 976.0
+margin_bottom = 968.0
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 3 )
 
@@ -125,25 +125,25 @@ custom_styles/panel = ExtResource( 3 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 876.0
-margin_bottom = 816.0
+margin_bottom = 808.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 848.0
-margin_bottom = 788.0
+margin_bottom = 780.0
 scroll_horizontal_enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer"]
 margin_right = 820.0
-margin_bottom = 2193.0
+margin_bottom = 2201.0
 custom_constants/margin_top = 0
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer"]
 margin_right = 800.0
-margin_bottom = 2193.0
+margin_bottom = 2201.0
 custom_constants/separation = 32
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
@@ -163,13 +163,13 @@ Whether you want to learn game development or just learn to code with exciting i
 Programming is a skill, so to get good at it, you need to [i]practice[/i]. You need to see the code in action and to [i]experiment[/i].
 
 That's why we created this app: it makes it easy for you to learn, with interactive demos."
-text = "GDScript Learn is a Free and Open-Source app and series to help you learn to code, [b]from zero[/b], with Godot's GDScript programming language.
+text = "GDScript Learn is a Free and Open-Source app and series to help you learn to code, from zero, with Godot's GDScript programming language.
 
 Whether you want to learn game development or just learn to code with exciting interactive projects, this app is for you.
 
-[font=res://ui/theme/fonts/font_title.tres]Programming is a skill[/font]
+Programming is a skill
 
-Programming is a skill, so to get good at it, you need to [i]practice[/i]. You need to see the code in action and to [i]experiment[/i].
+Programming is a skill, so to get good at it, you need to practice. You need to see the code in action and to experiment.
 
 That's why we created this app: it makes it easy for you to learn, with interactive demos."
 fit_content_height = true
@@ -202,13 +202,13 @@ __meta__ = {
 [node name="UIQuizChoice" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 845.0
 margin_right = 800.0
-margin_bottom = 1035.0
+margin_bottom = 1043.0
 test_quiz = ExtResource( 14 )
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 1067.0
+margin_top = 1075.0
 margin_right = 800.0
-margin_bottom = 2061.0
+margin_bottom = 2069.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 800, 100 )
@@ -231,32 +231,32 @@ This free app is the complete course to get you up to speed with Godot's GDScrip
 It complements the [url=https://docs.godotengine.org/en/3.4/getting_started/introduction/index.html]free course[/url] you will find in the Godot documentation (we worked a lot on it too).
 
 If you then want to go further and support our work, you can buy (or gift) one of our [url=https://gdquest.mavenseed.com/courses]Godot courses[/url]."
-text = "[b]Every lesson[/b] ends with one or more [i]practices[/i].
+text = "Every lesson ends with one or more practices.
 
 You'll discover the practice screen at the end of the first lesson.
 
-[img=800]res://ui/welcome_screen/ui-screen.png[/img]
 
-[font=res://ui/theme/fonts/font_title.tres]There are no hidden fees[/font]
 
-1600 backers who pre-ordered our course [url=https://kickstarter.com/projects/gdquest/learn-to-code-from-zero-with-godot-the-free-game-engine/]on Kickstarter[/url] funded this app.
+There are no hidden fees
 
-As a result, we could make everything in here [b]free for everyone[/b].
+1600 backers who pre-ordered our course on Kickstarter funded this app.
+
+As a result, we could make everything in here free for everyone.
 
 This free app is the complete course to get you up to speed with Godot's GDScript programming language.
 
-It complements the [url=https://docs.godotengine.org/en/3.4/getting_started/introduction/index.html]free course[/url] you will find in the Godot documentation (we worked a lot on it too).
+It complements the free course you will find in the Godot documentation (we worked a lot on it too).
 
-If you then want to go further and support our work, you can buy (or gift) one of our [url=https://gdquest.mavenseed.com/courses]Godot courses[/url]."
+If you then want to go further and support our work, you can buy (or gift) one of our Godot courses."
 fit_content_height = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 2093.0
+margin_top = 2101.0
 margin_right = 800.0
-margin_bottom = 2193.0
+margin_bottom = 2201.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 800, 100 )
@@ -265,9 +265,9 @@ bbcode_enabled = true
 bbcode_text = "[font=res://ui/theme/fonts/font_title.tres]Get started now[/font]
 
 To get started, click the [i]Start Course[/i] button to the right."
-text = "[font=res://ui/theme/fonts/font_title.tres]Get started now[/font]
+text = "Get started now
 
-To get started, click the [i]Start Course[/i] button to the right."
+To get started, click the Start Course button to the right."
 fit_content_height = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -276,7 +276,7 @@ __meta__ = {
 [node name="SideColumn" type="VBoxContainer" parent="Layout/MarginContainer/ColumnLayout"]
 margin_left = 900.0
 margin_right = 1256.0
-margin_bottom = 976.0
+margin_bottom = 968.0
 size_flags_horizontal = 3
 
 [node name="Disclaimer" type="PanelContainer" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
@@ -330,13 +330,13 @@ You may encounter bugs and typos. We have many improvements and lessons planned.
 If you face any problem, please use the button in the top-right to report it to us.
 
 [b]It is crucial[/b]: we'll use your reports and feedback to improve the app, both your you and everyone else."
-text = "The app is in [b]beta[/b].
+text = "The app is in beta.
 
 You may encounter bugs and typos. We have many improvements and lessons planned.
 
 If you face any problem, please use the button in the top-right to report it to us.
 
-[b]It is crucial[/b]: we'll use your reports and feedback to improve the app, both your you and everyone else."
+It is crucial: we'll use your reports and feedback to improve the app, both your you and everyone else."
 fit_content_height = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -345,25 +345,25 @@ __meta__ = {
 [node name="Spacer" type="Control" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
 margin_top = 555.0
 margin_right = 356.0
-margin_bottom = 771.0
+margin_bottom = 747.0
 size_flags_vertical = 3
 
 [node name="SettingsButton" type="Button" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
-margin_top = 787.0
+margin_top = 763.0
 margin_right = 356.0
-margin_bottom = 834.0
+margin_bottom = 818.0
 text = "Configure the App"
 
 [node name="OutlinerButton" type="Button" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
-margin_top = 850.0
+margin_top = 834.0
 margin_right = 356.0
-margin_bottom = 897.0
+margin_bottom = 889.0
 text = "Open Course Index"
 
 [node name="StartButton" type="Button" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
-margin_top = 913.0
+margin_top = 905.0
 margin_right = 356.0
-margin_bottom = 976.0
+margin_bottom = 968.0
 custom_colors/font_color_focus = Color( 0.188235, 0.188235, 0.286275, 1 )
 custom_colors/font_color = Color( 0.188235, 0.188235, 0.286275, 1 )
 custom_colors/font_color_hover = Color( 0.0901961, 0.0941176, 0.188235, 1 )
