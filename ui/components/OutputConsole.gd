@@ -22,7 +22,8 @@ func _ready() -> void:
 	_external_error_popup.set_as_toplevel(true)
 	_error_popup.set_as_toplevel(true)
 	_error_overlay_popup.connect("hide", _error_popup, "hide")
-	
+	connect("resized", self, "_on_resized")
+
 	MessageBus.connect("print_request", self, "print_bus_message")
 
 
@@ -121,3 +122,7 @@ func _on_explain_requested(error_code: int, error_message: String) -> void:
 	_error_overlay_popup.error_message = error_message
 	_error_overlay_popup.show()
 	_error_popup.show()
+
+
+func _on_resized() -> void:
+	_error_popup.set_margins_preset(Control.PRESET_WIDE)
