@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/gdscript-course-builder/ui/SearchBar.gd" type="Script" id=1]
+
+[node name="SearcnBar" type="HBoxContainer"]
+margin_right = 317.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="."]
+margin_right = 200.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 200, 0 )
+placeholder_text = "Search"
+caret_blink = true
+
+[node name="PreviousButton" type="Button" parent="."]
+margin_left = 204.0
+margin_right = 271.0
+margin_bottom = 24.0
+text = "Previous"
+
+[node name="NextButton" type="Button" parent="."]
+margin_left = 275.0
+margin_right = 317.0
+margin_bottom = 24.0
+text = "Next"

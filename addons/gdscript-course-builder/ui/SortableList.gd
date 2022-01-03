@@ -18,6 +18,7 @@
 #  set_drag_source_tag() - Useful to set a custom tag for drag payload, random sequence is used otherwise.
 
 tool
+class_name SortableList
 extends ScrollContainer
 
 signal item_moved(item_index, new_index)
