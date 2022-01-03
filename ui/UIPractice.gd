@@ -49,11 +49,6 @@ func _ready() -> void:
 	_info_panel_start_width = _info_panel.rect_size.x
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("toggle_distraction_free_mode"):
-		_toggle_distraction_free_mode()
-
-
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
 	if mb and mb.button_index == BUTTON_LEFT and mb.pressed and get_focus_owner():

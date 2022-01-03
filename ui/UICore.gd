@@ -49,9 +49,11 @@ func _ready() -> void:
 	load_immediately(_welcome_screen)
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("toggle_full_screen"):
+func _unhandled_input(event: InputEvent) -> void:
+	# We need to check the distraction free mode to avoid conflicts with the button in UIPractice.
+	if event.is_action_pressed("toggle_full_screen") and not event.is_action_pressed("toggle_distraction_free_mode"):
 		OS.window_fullscreen = not OS.window_fullscreen
+		accept_event()
 
 
 # Use this function to manually display the loading screen and control its
