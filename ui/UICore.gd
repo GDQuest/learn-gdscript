@@ -49,6 +49,11 @@ func _ready() -> void:
 	load_immediately(_welcome_screen)
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("toggle_full_screen"):
+		OS.window_fullscreen = not OS.window_fullscreen
+
+
 # Use this function to manually display the loading screen and control its
 # progress. To increase the loading progress, set
 # _loading_screen.progress_value. When the value reaches 1.0, the loading screen
@@ -122,4 +127,3 @@ func _go_to_welcome_screen() -> void:
 	_course_navigator.queue_free()
 	start_loading(_welcome_screen)
 	_loading_screen.progress_value = 1.0
-
