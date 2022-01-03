@@ -234,8 +234,4 @@ class Polygon:
 		return (rect.position + rect.end) / 2.0 + position
 
 	func get_points() -> PoolVector2Array:
-		return points;
-		var copy := []
-		for point in points:
-			copy.push_back(point)
-		return PoolVector2Array(copy)
+		return points
