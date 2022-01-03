@@ -37,13 +37,13 @@ __meta__ = {
 
 [node name="TopBar" type="PanelContainer" parent="Layout"]
 margin_right = 1920.0
-margin_bottom = 56.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 0, 40 )
 custom_styles/panel = ExtResource( 10 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Layout/TopBar"]
 margin_right = 1920.0
-margin_bottom = 56.0
+margin_bottom = 48.0
 custom_constants/margin_right = 12
 custom_constants/margin_top = 0
 custom_constants/margin_left = 12
@@ -52,19 +52,19 @@ custom_constants/margin_bottom = 0
 [node name="ToolBarLayout" type="HBoxContainer" parent="Layout/TopBar/MarginContainer"]
 margin_left = 12.0
 margin_right = 1908.0
-margin_bottom = 56.0
+margin_bottom = 48.0
 alignment = 2
 
 [node name="ReportButton" type="Button" parent="Layout/TopBar/MarginContainer/ToolBarLayout"]
-margin_left = 1636.0
+margin_left = 1640.0
 margin_right = 1896.0
-margin_bottom = 56.0
+margin_bottom = 48.0
 text = "Report an issue"
 icon = ExtResource( 6 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Layout"]
 margin_left = 312.0
-margin_top = 72.0
+margin_top = 64.0
 margin_right = 1608.0
 margin_bottom = 1080.0
 size_flags_horizontal = 6
@@ -74,18 +74,19 @@ size_flags_vertical = 3
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1276.0
-margin_bottom = 988.0
+margin_bottom = 996.0
 alignment = 1
 
 [node name="MainColumn" type="VBoxContainer" parent="Layout/MarginContainer/ColumnLayout"]
 margin_right = 884.0
-margin_bottom = 968.0
+margin_bottom = 976.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 
 [node name="WelcomeTitle" type="PanelContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn"]
 margin_right = 884.0
 margin_bottom = 136.0
+mouse_filter = 2
 custom_styles/panel = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/WelcomeTitle"]
@@ -117,7 +118,8 @@ valign = 1
 [node name="MainContent" type="PanelContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn"]
 margin_top = 152.0
 margin_right = 884.0
-margin_bottom = 968.0
+margin_bottom = 976.0
+mouse_filter = 2
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 3 )
 
@@ -125,18 +127,24 @@ custom_styles/panel = ExtResource( 3 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 876.0
-margin_bottom = 808.0
+margin_bottom = 816.0
+mouse_filter = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 848.0
-margin_bottom = 780.0
+margin_bottom = 788.0
+focus_neighbour_top = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_mode = 1
+mouse_filter = 1
 scroll_horizontal_enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer"]
 margin_right = 820.0
 margin_bottom = 2201.0
+mouse_filter = 2
 custom_constants/margin_top = 0
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
@@ -152,6 +160,7 @@ margin_bottom = 380.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 800, 100 )
+mouse_filter = 2
 size_flags_horizontal = 6
 bbcode_enabled = true
 bbcode_text = "GDScript Learn is a Free and Open-Source app and series to help you learn to code, [b]from zero[/b], with Godot's GDScript programming language.
@@ -182,6 +191,7 @@ margin_top = 412.0
 margin_right = 800.0
 margin_bottom = 752.0
 rect_min_size = Vector2( 0, 340 )
+mouse_filter = 2
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
 margin_top = 784.0
@@ -190,6 +200,7 @@ margin_bottom = 813.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 800, 0 )
+mouse_filter = 2
 size_flags_horizontal = 6
 bbcode_enabled = true
 bbcode_text = "Mini quizzes in the lessons will help you test and remember what you learned."
@@ -203,6 +214,7 @@ __meta__ = {
 margin_top = 845.0
 margin_right = 800.0
 margin_bottom = 1043.0
+mouse_filter = 2
 test_quiz = ExtResource( 14 )
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
@@ -212,6 +224,7 @@ margin_bottom = 2069.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 800, 100 )
+mouse_filter = 2
 size_flags_horizontal = 6
 bbcode_enabled = true
 bbcode_text = "[b]Every lesson[/b] ends with one or more [i]practices[/i].
@@ -260,6 +273,7 @@ margin_bottom = 2201.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 800, 100 )
+mouse_filter = 2
 size_flags_horizontal = 6
 bbcode_enabled = true
 bbcode_text = "[font=res://ui/theme/fonts/font_title.tres]Get started now[/font]
@@ -276,7 +290,7 @@ __meta__ = {
 [node name="SideColumn" type="VBoxContainer" parent="Layout/MarginContainer/ColumnLayout"]
 margin_left = 900.0
 margin_right = 1256.0
-margin_bottom = 968.0
+margin_bottom = 976.0
 size_flags_horizontal = 3
 
 [node name="Disclaimer" type="PanelContainer" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
@@ -345,25 +359,25 @@ __meta__ = {
 [node name="Spacer" type="Control" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
 margin_top = 555.0
 margin_right = 356.0
-margin_bottom = 747.0
+margin_bottom = 771.0
 size_flags_vertical = 3
 
 [node name="SettingsButton" type="Button" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
-margin_top = 763.0
+margin_top = 787.0
 margin_right = 356.0
-margin_bottom = 818.0
+margin_bottom = 834.0
 text = "Configure the App"
 
 [node name="OutlinerButton" type="Button" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
-margin_top = 834.0
+margin_top = 850.0
 margin_right = 356.0
-margin_bottom = 889.0
+margin_bottom = 897.0
 text = "Open Course Index"
 
 [node name="StartButton" type="Button" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
-margin_top = 905.0
+margin_top = 913.0
 margin_right = 356.0
-margin_bottom = 968.0
+margin_bottom = 976.0
 custom_colors/font_color_focus = Color( 0.188235, 0.188235, 0.286275, 1 )
 custom_colors/font_color = Color( 0.188235, 0.188235, 0.286275, 1 )
 custom_colors/font_color_hover = Color( 0.0901961, 0.0941176, 0.188235, 1 )
