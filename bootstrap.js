@@ -1,6 +1,10 @@
-((LIB = {}) => {
+//@ts-check
+/// <reference path="./bootstrap.d.ts"/>
+"use strict";
+
+window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
   loadingControl: {
-    let is_initializing = true;
+    let is_done = false;
 
     // these class names get added to document.body
     // css controls what is visible through that mechanism
@@ -10,16 +14,19 @@
       INDETERMINATE: "mode-indeterminate",
       NOTICE: "mode-notice",
     };
+
     const allModes = Object.values(StatusMode);
+
     let currentStatusMode;
 
     /**
-     * Sets a status mode (class name) on the body element
+     * Sets a status mode (class name) on the body element.
+     * if `is_done` is `true`, the function no-ops
      * @param {string} mode one of the `StatusMode`s
      * @returns
      */
     const setStatusMode = (mode = StatusMode.INDETERMINATE) => {
-      if (currentStatusMode === mode) {
+      if (currentStatusMode === mode || is_done) {
         return;
       }
       document.body.classList.remove(...allModes);
@@ -36,7 +43,7 @@
      * @param {Error|string} err
      */
     const displayFailureNotice = (err) => {
-      var msg = err.message || err;
+      var msg = err instanceof Error ? err.message : err;
       console.error(msg);
       setStatusMode(StatusMode.NOTICE);
       const statusNotice = document.getElementById("notices");
@@ -44,8 +51,18 @@
         statusNotice.appendChild(document.createTextNode(line));
         statusNotice.appendChild(document.createElement("br"));
       });
-      is_initializing = false;
+      is_done = true;
     };
+
+    /**
+     * Grows the visual loading bar
+     * @param {number} percentage
+     * @returns
+     */
+    const displayPercentage = (percentage = 0) =>
+      document
+        .getElementById("loader")
+        .style.setProperty("--progress", percentage * 100 + "%");
 
     /**
      * Callback used during the loading of the engine and packages
@@ -54,18 +71,28 @@
      */
     const onProgress = (current, total) => {
       if (total > 0) {
+        console.info("loading...", total);
         setStatusMode(StatusMode.PROGRESS);
-        document
-          .getElementById("loader")
-          .style.setProperty("--progress", (current / total) * 100 + "%");
+        displayPercentage(current / total);
+        if (current === total) {
+          onPackageLoaded();
+        }
       } else {
         setStatusMode(StatusMode.INDETERMINATE);
       }
     };
 
+    /**
+     * Called once Godot loaded everything.
+     * All of the operations no-op if `onPackageLoaded` has already been called,
+     * so it's safe to call several times.
+     */
     const onPackageLoaded = () => {
-      setStatusMode(StatusMode.DONE);
-      is_initializing = false;
+      displayPercentage(1);
+      setTimeout(() => {
+        setStatusMode(StatusMode.DONE);
+        is_done = true;
+      }, 200);
     };
 
     /**
@@ -84,7 +111,7 @@
     /**
      * Entry point, this is run once the page loads
      */
-    const start = () => {
+    const startLoading = () => {
       setStatusMode(StatusMode.INDETERMINATE);
 
       if (!Engine.isWebGLAvailable()) {
@@ -93,8 +120,9 @@
         load();
       }
     };
-    LIB.startLoading = start;
-    LIB.displayFailureNotice = displayFailureNotice;
+
+    GDQUEST.startLoading = startLoading;
+    GDQUEST.displayFailureNotice = displayFailureNotice;
   }
 
   mobileHandling: {
@@ -115,6 +143,9 @@
       forceAppOnMobile();
     }
   }
-})((window.GDQUEST = {}));
 
-GDQUEST.startLoading();
+  return GDQUEST;
+  // @ts-ignore
+})(window.GDQUEST || {});
+
+window.GDQUEST.startLoading();
