@@ -8,6 +8,7 @@ on:
 jobs:
   build-staging:
     name: build and push to gh-pages
-    uses: Xananax/godot-ci-test/.github/workflows/BuildGodot.yaml@github-actions-v1
+    uses: Xananax/godot-ci-test/.github/workflows/BuildGodot.yaml@github-actions-v1.1
     with:
       sub_build_path: /staging
+      watermark: $GITHUB_REPOSITORY:staging:$GITHUB_REF_NAME:$GITHUB_SHA

@@ -8,6 +8,7 @@ on:
 jobs:
   build-release:
     name: build and push to gh-pages
-    uses: Xananax/godot-ci-test/.github/workflows/BuildGodot.yaml@github-actions-v1
+    uses: Xananax/godot-ci-test/.github/workflows/BuildGodot.yaml@github-actions-v1.1
     with:
       sub_build_path: ''
+      watermark: $GITHUB_REPOSITORY:release:$GITHUB_REF_NAME:$GITHUB_SHA
