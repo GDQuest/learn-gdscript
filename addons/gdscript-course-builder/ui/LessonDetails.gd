@@ -126,14 +126,13 @@ func search(query: String) -> void:
 	var start_index := _last_search_result.block_index if _last_search_result else 0
 	var block_count := _lesson_content_blocks.get_item_count()
 	for index in range(start_index, block_count):
-		var block := _lesson_content_blocks.get_item(index) as LessonContentBlock
-		#FIXME: add support for quiz blocks
-		if not block:
+		var block = _lesson_content_blocks.get_item(index)
+		if not block.has_method("search"):
 			continue
 
 		var start_line := _last_search_result.start_line if _last_search_result else 0
 		var start_column := _last_search_result.end_column if _last_search_result else 0
-		var text_edit_search_result := block.search(query, start_line, start_column)
+		var text_edit_search_result: PoolIntArray = block.search(query, start_line, start_column)
 		if not text_edit_search_result.empty():
 			var line := text_edit_search_result[TextEdit.SEARCH_RESULT_LINE]
 			var column := text_edit_search_result[TextEdit.SEARCH_RESULT_COLUMN]
