@@ -1,0 +1,13 @@
+name: "[ Staging ] → gh-pages"
+
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+
+jobs:
+  build-staging:
+    name: build and push to gh-pages
+    uses: Xananax/godot-ci-test/.github/workflows/BuildGodot.yaml@github-actions-v1
+    with:
+      sub_build_path: /staging

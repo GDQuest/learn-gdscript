@@ -1,9 +1,12 @@
-name: "Godot->GHPages"
+name: "[ BuildGodot ] → gh-pages"
 
 on:
-  push:
-    branches: [release]
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      sub_build_path:
+        required: false
+        type: string
+        default: ""
 
 env:
   GODOT_VERSION: 3.4.1
@@ -28,16 +31,16 @@ jobs:
           apt-get update && apt-get install -y --no-install-recommends sed 
       - name: Web Build
         run: |
-          mkdir -v -p build/web && \
-          godot -v --export "HTML5" build/web/index.html || true && \
+          mkdir -v -p build/web${{inputs.sub_build_path}}/web && \
+          godot -v --export "HTML5" build/web${{inputs.sub_build_path}}/index.html || true && \
           echo "built godot"
       - name: Copy static files
         run: |
-          cp -r html_export/static/* build/web && \
+          cp -r html_export/static/* build/web${{inputs.sub_build_path}} && \
           echo "copied files"
       - name: Add Git Hash to build
         run: |
-          cd build/web
+          cd build/web${{inputs.sub_build_path}}
           sed -i "s@>branch and commit hash<@>$GITHUB_REF:$GITHUB_SHA<@" index.html && \
           echo "added commit hash to index.html" || echo "failed to add the commit hash"
       - name: Upload Artifact
@@ -45,7 +48,6 @@ jobs:
         with:
           name: web
           path: build/web
-      # Installing rsync is needed in order to deploy to GitHub Pages. Without it, the build will fail.
       - name: Install rsync 📚
         run: |
           apt-get update && apt-get install -y rsync
@@ -53,5 +55,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: build/web # The folder the action should deploy.
+          BRANCH: gh-pages
+          FOLDER: build/web
+          clean: false

@@ -1,0 +1,13 @@
+name: "[ Release ] → gh-pages"
+
+on:
+  push:
+    branches: [release]
+  workflow_dispatch:
+
+jobs:
+  build-release:
+    name: build and push to gh-pages
+    uses: Xananax/godot-ci-test/.github/workflows/BuildGodot.yaml@github-actions-v1
+    with:
+      sub_build_path: ''
