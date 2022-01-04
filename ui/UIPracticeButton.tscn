@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/UIPracticeButton.gd" type="Script" id=1]
 [ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=2]
@@ -7,36 +7,59 @@
 [ext_resource path="res://ui/theme/button_outlined_pressed.tres" type="StyleBox" id=5]
 [ext_resource path="res://ui/theme/button_outlined_hover.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/button_outlined_normal.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/theme/panel_darker.tres" type="StyleBox" id=8]
 
-[node name="UIPracticeButton" type="MarginContainer"]
-margin_right = 800.0
-margin_bottom = 100.0
-size_flags_horizontal = 3
-theme = ExtResource( 3 )
+[node name="UIPracticeButton" type="PanelContainer"]
+margin_right = 760.0
+margin_bottom = 114.0
+custom_styles/panel = ExtResource( 8 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Row" type="HBoxContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="."]
+margin_right = 760.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+theme = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Row" type="HBoxContainer" parent="Margin"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 780.0
-margin_bottom = 80.0
+margin_right = 740.0
+margin_bottom = 94.0
 
-[node name="Label" type="Label" parent="Row"]
-margin_top = 17.0
-margin_right = 524.0
-margin_bottom = 43.0
+[node name="Column" type="VBoxContainer" parent="Margin/Row"]
+margin_right = 484.0
+margin_bottom = 74.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Title" type="Label" parent="Margin/Row/Column"]
+margin_top = 2.0
+margin_right = 484.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 text = "Practice title"
 
-[node name="CompletedBeforeIcon" type="TextureRect" parent="Row"]
+[node name="Description" type="Label" parent="Margin/Row/Column"]
+margin_top = 44.0
+margin_right = 484.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+text = "Description"
+autowrap = true
+
+[node name="CompletedBeforeIcon" type="TextureRect" parent="Margin/Row"]
 modulate = Color( 1, 1, 1, 0.235294 )
-margin_left = 540.0
-margin_right = 564.0
-margin_bottom = 60.0
+margin_left = 500.0
+margin_right = 524.0
+margin_bottom = 74.0
 rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "You've already completed this practice before.
 You can give it another go if you want to test your skills!"
@@ -47,11 +70,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="Row"]
-margin_left = 580.0
-margin_right = 760.0
-margin_bottom = 60.0
+[node name="Button" type="Button" parent="Margin/Row"]
+margin_left = 540.0
+margin_top = 7.0
+margin_right = 720.0
+margin_bottom = 67.0
 rect_min_size = Vector2( 180, 60 )
+size_flags_vertical = 4
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/normal = ExtResource( 7 )

@@ -78,11 +78,15 @@ func setup(lesson: Lesson, course: Course) -> void:
 			instance.connect("quiz_passed", self, "_reveal_up_to_next_quiz")
 			instance.connect("quiz_skipped", self, "_reveal_up_to_next_quiz")
 
+	var highlighted_next := false
 	for practice in lesson.practices:
 		var button: UIPracticeButton = PracticeButtonScene.instance()
 		button.setup(practice)
 		if course:
 			button.completed_before = user_profile.is_lesson_practice_completed(course.resource_path, lesson.resource_path, practice.resource_path)
+			if not highlighted_next and not button.completed_before:
+				highlighted_next = true
+				button.is_highlighted = true
 		_practices_container.add_child(button)
 	_practices_visibility_container.hide()
 	
