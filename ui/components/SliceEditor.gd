@@ -35,6 +35,7 @@ var errors := [] setget set_errors
 var _slice_properties: SliceProperties
 # Used to know when to add an indent level.
 var _current_line := cursor_get_line()
+var _remove_last_character := false
 
 
 func _ready() -> void:
@@ -76,9 +77,9 @@ func _ready() -> void:
 	connect("draw", self, "_update_overlays")
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and get_focus_owner() == self:
-		get_tree().set_input_as_handled()
+func _gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("run_code"):
+		_remove_last_character = true
 
 
 func setup(slice_properties: SliceProperties) -> void:
@@ -115,6 +116,13 @@ func highlight_line(line_index: int, at_char: int = 0) -> void:
 
 
 func _on_text_changed() -> void:
+	if _remove_last_character:
+		var column := cursor_get_column()
+		undo()
+		_remove_last_character = false
+		cursor_set_column(column)
+		return
+
 	if _slice_properties != null:
 		_slice_properties.current_text = text
 

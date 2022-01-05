@@ -61,6 +61,7 @@ func _ready() -> void:
 	_console_button.connect("pressed", self, "emit_signal", ["console_toggled"])
 
 	slice_editor.connect("text_changed", self, "_on_text_changed")
+	slice_editor.connect("gui_input", self, "_gui_input")
 	yield(get_tree(), "idle_frame")
 	_initial_text = text
 
@@ -71,6 +72,12 @@ func _ready() -> void:
 		)
 		var action_name: String = button.shortcut.shortcut.action
 		button.hint_tooltip += "\n" + TextUtils.convert_input_action_to_tooltip(action_name)
+
+
+func _gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("run_code") and not _run_button.disabled:
+		_on_run_button_pressed()
+		accept_event()
 
 
 func set_text(new_text: String) -> void:
