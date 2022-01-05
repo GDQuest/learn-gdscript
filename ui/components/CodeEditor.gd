@@ -51,7 +51,6 @@ func _ready() -> void:
 	_restore_button.disabled = true
 	_solution_button.connect("pressed", self, "_on_solution_pressed")
 
-	_run_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.RUN])
 	_run_button.connect("pressed", self, "_on_run_button_pressed")
 	_pause_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.PAUSE])
 	_solution_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.SOLUTION])
