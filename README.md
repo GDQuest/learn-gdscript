@@ -29,7 +29,7 @@ To do so:
 
 In this section, you'll find a summary of our roadmap for the app.
 
-For more details regarding the planned improvements for each milestone, please head to the [Milestones page](milestones).
+For more details regarding the planned improvements for each milestone, please head to the [Milestones page](https://github.com/GDQuest/learn-gdscript/milestones).
 
 ### Milestone 0.2
 
