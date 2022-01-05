@@ -17,14 +17,14 @@ anchor_bottom = 0.0
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 707.0
-margin_bottom = 257.0
-rect_min_size = Vector2( 700, 250 )
-text = "var horizontal_movement = 100 # Script-wide variable
+margin_bottom = 287.0
+rect_min_size = Vector2( 700, 280 )
+text = "var angular_speed = 4 # This variable is defined outside of functions.
 
-func move_right():
-	move_local_x(horizontal_movement)
+func _process(delta):
+	rotate(angular_speed * delta)
 
-func move_left():
-	move_local_x(-horizontal_movement)"
+func set_angular_speed(new_angular_speed):
+	angular_speed = new_angular_speed"
 draw_spaces = true
-min_size = Vector2( 700, 250 )
+min_size = Vector2( 700, 280 )
