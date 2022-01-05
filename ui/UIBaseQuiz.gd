@@ -10,6 +10,8 @@ const NEUTRAL_OUTLINE := preload("res://ui/theme/quiz_outline_neutral.tres")
 
 const OUTLINE_FLASH_DURATION := 0.8
 const OUTLINE_FLASH_DELAY := 0.75
+const ERROR_SHAKE_TIME := 0.5
+const ERROR_SHAKE_SIZE := 20
 
 export var test_quiz: Resource
 
@@ -36,13 +38,15 @@ onready var _tween := $Tween as Tween
 onready var _help_message := $MarginContainer/ChoiceView/HelpMessage as Label
 
 var _quiz: Quiz
+var _shake_pos: float = 0
 
 
 func _ready() -> void:
 	_completed_before_icon.visible = completed_before
-	
+
 	_submit_button.connect("pressed", self, "_test_answer")
 	_skip_button.connect("pressed", self, "_show_answer", [false])
+	connect("item_rect_changed", self, "_on_item_rect_changed")
 
 
 func setup(quiz: Quiz) -> void:
@@ -87,6 +91,16 @@ func _test_answer() -> void:
 		_outline.modulate.a = 1.0
 		_outline.add_stylebox_override("panel", ERROR_OUTLINE)
 
+		rect_position.y = _shake_pos
+		_tween.interpolate_property(
+			self,
+			"rect_position:y",
+			_shake_pos + ERROR_SHAKE_SIZE,
+			_shake_pos,
+			ERROR_SHAKE_TIME,
+			Tween.TRANS_ELASTIC,
+			Tween.EASE_OUT
+		)
 		_tween.interpolate_property(
 			_outline,
 			"modulate:a",
@@ -119,3 +133,8 @@ func _show_answer(gave_correct_answer := true) -> void:
 		_correct_answer_label.show()
 		_correct_answer_label.text = _quiz.get_correct_answer_string()
 		emit_signal("quiz_skipped")
+
+
+func _on_item_rect_changed() -> void:
+	if not _tween.is_active() or _tween.tell() > ERROR_SHAKE_TIME:
+		_shake_pos = rect_position.y

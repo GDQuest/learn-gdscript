@@ -131,6 +131,18 @@ func setup(content_block: ContentBlock) -> void:
 	_options_block_type.selected = _edited_content_block.type
 
 
+func search(search_text: String, from_line := 0, from_column := 0) -> PoolIntArray:
+	var result := _text_content_value.search(
+		search_text, TextEdit.SEARCH_MATCH_CASE, from_line, from_column
+	)
+	if not result.empty():
+		var line := result[TextEdit.SEARCH_RESULT_LINE]
+		var column := result[TextEdit.SEARCH_RESULT_COLUMN]
+		_text_content_value.grab_focus()
+		_text_content_value.select(line, column, line, column + search_text.length())
+	return result
+
+
 # Helpers
 func _show_confirm(message: String, title: String = "Confirm") -> void:
 	_confirm_dialog.window_title = title

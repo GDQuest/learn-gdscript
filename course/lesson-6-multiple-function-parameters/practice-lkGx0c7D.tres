@@ -6,14 +6,15 @@
 [resource]
 script = ExtResource( 1 )
 title = "Drawing rectangles of any size"
-goal = "We want a function to draw rectangles of any size.
+goal = "Let's make our square drawing function more flexible to include rectangles of varying sizes.
 
-We could use those rectangles as outlines when selecting units in a tactical game, as a frame for items in an inventory, and more.
+Your job is to code a function named [code]draw_rectangle()[/code] that takes two parameters: the [code]length[/code] and the [code]height[/code] of the rectangle.
 
-Your job is to code a function named [code]draw_rectangle[/code] that takes two arguments: the [code]length[/code] and the [code]height[/code] of the rectangle."
+Note that we could still draw a square with [code]draw_rectangle()[/code] by having the [code]length[/code] and [code]height[/code] equal the same value."
 starting_code = ""
 hints = PoolStringArray( "You need to specify the two parameters in the function definition", "Use [code]func draw_rectangle(length, height):[/code]", "When calling move_forward, you need to alternate between using the length and the height arguments when calling move_forward." )
 validator_script_path = "drawing_rectangles/TestsDrawingRectangles.gd"
 script_slice_path = "drawing_rectangles/DrawingRectangles.live-editor/slices/DrawingRectangles.draw_square.slice.tres"
 documentation_references = PoolStringArray( "move_forward", "turn_right" )
 documentation_resource = ExtResource( 2 )
+description = "With one parameter, you can make squares of any size. With two, you can draw any rectangle! You'll do so in this practice."

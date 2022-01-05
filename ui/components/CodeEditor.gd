@@ -32,7 +32,16 @@ onready var _console_button := $Column/MarginContainer/Column/Row/ConsoleButton 
 onready var _distraction_free_mode_button := $Column/PanelContainer/DFMButton as Button
 
 # Buttons to toggle disabled when running the code, until the server responds.
-onready var _buttons_to_disable = [_run_button, _pause_button, _solution_button, _restore_button]
+onready var _buttons_to_disable := [_run_button, _pause_button, _solution_button, _restore_button]
+# We generate a shortcut tooltip for each of those buttons.
+onready var _buttons_with_shortcuts := [
+	_run_button,
+	_restore_button,
+	_solution_button,
+	_console_button,
+	_pause_button,
+	_distraction_free_mode_button
+]
 
 
 func _ready() -> void:
@@ -42,7 +51,6 @@ func _ready() -> void:
 	_restore_button.disabled = true
 	_solution_button.connect("pressed", self, "_on_solution_pressed")
 
-	_run_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.RUN])
 	_run_button.connect("pressed", self, "_on_run_button_pressed")
 	_pause_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.PAUSE])
 	_solution_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.SOLUTION])
@@ -53,8 +61,23 @@ func _ready() -> void:
 	_console_button.connect("pressed", self, "emit_signal", ["console_toggled"])
 
 	slice_editor.connect("text_changed", self, "_on_text_changed")
+	slice_editor.connect("gui_input", self, "_gui_input")
 	yield(get_tree(), "idle_frame")
 	_initial_text = text
+
+	for button in _buttons_with_shortcuts:
+		assert(
+			button.shortcut.shortcut is InputEventAction,
+			"Buttons must use an action as a shortcut to generate a shortcut tooltip for them."
+		)
+		var action_name: String = button.shortcut.shortcut.action
+		button.hint_tooltip += "\n" + TextUtils.convert_input_action_to_tooltip(action_name)
+
+
+func _gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("run_code") and not _run_button.disabled:
+		_on_run_button_pressed()
+		accept_event()
 
 
 func set_text(new_text: String) -> void:

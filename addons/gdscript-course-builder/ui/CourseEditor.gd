@@ -52,6 +52,8 @@ var _file_dialog: EditorFileDialog
 onready var _accept_dialog := $AcceptDialog as AcceptDialog
 onready var _confirm_dialog := $ConfirmDialog as ConfirmationDialog
 
+onready var _search_bar := $Layout/ToolBar/SearcnBar as HBoxContainer
+
 
 func _init() -> void:
 	_file_dialog = EditorFileDialog.new()
@@ -92,6 +94,8 @@ func _ready() -> void:
 	_lesson_details.connect("practice_got_edit_focus", self, "_on_practice_got_edit_focus")
 
 	_confirm_dialog.connect("confirmed", self, "_on_confirm_dialog_confirmed")
+
+	_search_bar.connect("next_match_requested", _lesson_details, "search")
 
 
 func _update_theme() -> void:
@@ -409,6 +413,7 @@ func _on_lesson_selected(lesson_index: int) -> void:
 	_current_lesson_index = lesson_index
 	
 	_play_current_button.disabled = false
+	_search_bar.is_active = true
 
 
 func _on_lesson_moved(lesson_index: int, new_index: int) -> void:

@@ -1,0 +1,35 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/ScriptProperties.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-6-multiple-function-parameters/drawing_corners/DrawingCorners.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 1 )
+nodes_paths = [ NodePath("") ]
+script_file = ExtResource( 2 )
+original_script = "extends DrawingTurtle
+
+var _length := 240
+var _offset := 80
+
+func _run():
+	reset()
+	draw_corner(_length)
+	jump(-_length, -_length + _offset)
+	_length /= 2
+	rotation_degrees = 0
+	draw_corner(_length)
+	jump(-_length, -_length + _offset)
+	_length /= 2
+	rotation_degrees = 0
+	draw_corner(_length)
+	play_draw_animation()
+
+
+# EXPORT draw_corner
+func draw_corner(length):
+	move_forward(length)
+	turn_right(90)
+	move_forward(length)
+# /EXPORT draw_corner
+"

@@ -5,11 +5,11 @@ signal toggled(is_pressed)
 const OPTION_FONT := preload("res://ui/theme/fonts/font_text.tres")
 const OPTION_SELECTED_FONT := preload("res://ui/theme/fonts/font_text_bold.tres")
 
-var _button = null
 
 onready var _margin_container := $MarginContainer as MarginContainer
 onready var _label := $MarginContainer/Label as Label
 onready var _group: ButtonGroup = preload("QuizAnswerButtonGroup.tres")
+onready var _button := $CheckBox as CheckBox
 
 
 func setup(text: String, is_multiple_choice: bool) -> void:
@@ -18,13 +18,10 @@ func setup(text: String, is_multiple_choice: bool) -> void:
 
 	_label.text = text
 	_label.add_font_override("font", OPTION_FONT)
-	_button =  CheckBox.new()
 	_button.toggle_mode = true
 	_button.connect("toggled", self, "_on_toggled")
 	if not is_multiple_choice:
 		_button.group = _group
-	add_child(_button)
-	_margin_container.raise()
 
 
 func get_answer() -> String:

@@ -61,7 +61,9 @@ func _ready() -> void:
 	)
 
 	_body_text_edit.connect("gui_input", self, "_text_edit_gui_input", [_body_text_edit])
-	_explanation_text_edit.connect("gui_input", self, "_text_edit_gui_input", [_explanation_text_edit])
+	_explanation_text_edit.connect(
+		"gui_input", self, "_text_edit_gui_input", [_explanation_text_edit]
+	)
 
 	_question_line_edit.connect("text_changed", self, "_on_question_line_edit_text_changed")
 
@@ -150,6 +152,19 @@ func setup(quiz_block: Quiz) -> void:
 		printerr("Trying to load unsupported quiz type: %s" % [_quiz.get_class()])
 
 	_rebuild_answers()
+
+
+func search(search_text: String, from_line := 0, from_column := 0) -> PoolIntArray:
+	var result := PoolIntArray()
+	for text_edit in [_body_text_edit, _explanation_text_edit]:
+		result = text_edit.search(search_text, TextEdit.SEARCH_MATCH_CASE, from_line, from_column)
+		if not result.empty():
+			var line := result[TextEdit.SEARCH_RESULT_LINE]
+			var column := result[TextEdit.SEARCH_RESULT_COLUMN]
+			text_edit.grab_focus()
+			text_edit.select(line, column, line, column + search_text.length())
+			break
+	return result
 
 
 func _rebuild_answers() -> void:

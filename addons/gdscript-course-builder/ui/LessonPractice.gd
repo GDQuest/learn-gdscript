@@ -26,27 +26,29 @@ onready var _drag_icon := $BackgroundPanel/Layout/HeaderBar/DragIcon as TextureR
 onready var _drop_target := $DropTarget as Control
 
 onready var _title_label := $BackgroundPanel/Layout/HeaderBar/ContentTitle/Label as Label
-onready var _title_value := $BackgroundPanel/Layout/HeaderBar/ContentTitle/LineEdit as LineEdit
+onready var _title := $BackgroundPanel/Layout/HeaderBar/ContentTitle/LineEdit as LineEdit
 onready var _remove_button := $BackgroundPanel/Layout/HeaderBar/RemoveButton as Button
 
-onready var _script_slice_value := $BackgroundPanel/Layout/ScriptSlice/LineEdit as LineEdit
+onready var _description := $BackgroundPanel/Layout/Description/LineEdit as LineEdit
+
+onready var _script_slice := $BackgroundPanel/Layout/ScriptSlice/LineEdit as LineEdit
 onready var _select_script_slice_button := (
 	$BackgroundPanel/Layout/ScriptSlice/SelectFileButton as Button
 )
 onready var _clear_script_slice_button := (
 	$BackgroundPanel/Layout/ScriptSlice/ClearFileButton as Button
 )
-onready var _validator_value := $BackgroundPanel/Layout/Validator/LineEdit as LineEdit
+onready var _validator := $BackgroundPanel/Layout/Validator/LineEdit as LineEdit
 onready var _select_validator_button := $BackgroundPanel/Layout/Validator/SelectFileButton as Button
 onready var _clear_validator_button := $BackgroundPanel/Layout/Validator/ClearFileButton as Button
 
-onready var _goal_content_value := (
+onready var _goal_content := (
 	$BackgroundPanel/Layout/MainSplit/Texts/GoalContent/Editor/TextEdit as TextEdit
 )
 onready var _goal_content_expand_button := (
 	$BackgroundPanel/Layout/MainSplit/Texts/GoalContent/Editor/ExpandButton as Button
 )
-onready var _starting_code_value := (
+onready var _starting_code := (
 	$BackgroundPanel/Layout/MainSplit/Texts/StartingCode/Editor/TextEdit as TextEdit
 )
 onready var _starting_code_expand_button := (
@@ -70,19 +72,20 @@ func _ready() -> void:
 	_text_content_dialog.rect_size = _text_content_dialog.rect_min_size
 
 	_remove_button.connect("pressed", self, "_on_remove_practice_requested")
-	_title_value.connect("text_changed", self, "_on_title_text_changed")
+	_title.connect("text_changed", self, "_on_title_text_changed")
+	_description.connect("text_changed", self, "_on_description_text_changed")
 
 	_select_script_slice_button.connect("pressed", self, "_on_select_script_slice_requested")
 	_clear_script_slice_button.connect("pressed", self, "_on_clear_script_slice_requested")
-	_script_slice_value.connect("text_changed", self, "_change_script_slice_script")
+	_script_slice.connect("text_changed", self, "_change_script_slice_script")
 
 	_select_validator_button.connect("pressed", self, "_on_select_validator_requested")
 	_clear_validator_button.connect("pressed", self, "_on_clear_validator_requested")
-	_validator_value.connect("text_changed", self, "_change_validator_script")
+	_validator.connect("text_changed", self, "_change_validator_script")
 
-	_goal_content_value.connect("text_changed", self, "_on_goal_content_changed")
+	_goal_content.connect("text_changed", self, "_on_goal_content_changed")
 	_goal_content_expand_button.connect("pressed", self, "_on_goal_content_expand_pressed")
-	_starting_code_value.connect("text_changed", self, "_on_starting_code_changed")
+	_starting_code.connect("text_changed", self, "_on_starting_code_changed")
 	_starting_code_expand_button.connect("pressed", self, "_on_starting_code_expand_pressed")
 
 	_add_hint_button.connect("pressed", self, "_on_practice_hint_added")
@@ -91,7 +94,7 @@ func _ready() -> void:
 	_text_content_dialog.connect("confirmed", self, "_on_text_content_confirmed")
 	_confirm_dialog.connect("confirmed", self, "_on_confirm_dialog_confirmed")
 
-	for control in [_script_slice_value, _validator_value, _goal_content_value, _starting_code_value]:
+	for control in [_script_slice, _validator, _goal_content, _starting_code]:
 		control.connect("focus_entered", self, "_on_text_field_focus_entered")
 
 
@@ -134,7 +137,7 @@ func _update_theme() -> void:
 	_remove_button.icon = get_icon("Remove", "EditorIcons")
 	_goal_content_expand_button.icon = get_icon("DistractionFree", "EditorIcons")
 	_starting_code_expand_button.icon = get_icon("DistractionFree", "EditorIcons")
-	_starting_code_value.add_font_override("font", get_font("source", "EditorFonts"))
+	_starting_code.add_font_override("font", get_font("source", "EditorFonts"))
 
 
 func get_drag_target_rect() -> Rect2:
@@ -167,11 +170,12 @@ func set_list_index(index: int) -> void:
 func set_practice(practice: Practice) -> void:
 	_edited_practice = practice
 
-	_title_value.text = _edited_practice.title
-	_script_slice_value.text = _edited_practice.script_slice_path
-	_validator_value.text = _edited_practice.validator_script_path
-	_goal_content_value.text = _edited_practice.goal
-	_starting_code_value.text = _edited_practice.starting_code
+	_title.text = _edited_practice.title
+	_description.text = _edited_practice.description
+	_script_slice.text = _edited_practice.script_slice_path
+	_validator.text = _edited_practice.validator_script_path
+	_goal_content.text = _edited_practice.goal
+	_starting_code.text = _edited_practice.starting_code
 
 	_rebuild_hints()
 	_code_ref_list.setup(practice)
@@ -245,11 +249,19 @@ func _on_text_content_confirmed() -> void:
 
 
 # Practice
-func _on_title_text_changed(value: String) -> void:
+func _on_title_text_changed(new_text: String) -> void:
 	if not _edited_practice:
 		return
 
-	_edited_practice.title = value
+	_edited_practice.title = new_text
+	_edited_practice.emit_changed()
+
+
+func _on_description_text_changed(new_text: String) -> void:
+	if not _edited_practice:
+		return
+
+	_edited_practice.description = new_text
 	_edited_practice.emit_changed()
 
 
@@ -278,8 +290,8 @@ func _on_clear_script_slice_requested() -> void:
 
 
 func _change_script_slice_script(file_path: String) -> void:
-	if _script_slice_value.text != file_path:
-		_script_slice_value.text = file_path
+	if _script_slice.text != file_path:
+		_script_slice.text = file_path
 
 	var is_valid := file_path.empty() or file_path.get_extension() == "tres"
 	var test_path := file_path
@@ -288,12 +300,12 @@ func _change_script_slice_script(file_path: String) -> void:
 		is_valid = is_valid and _file_tester.file_exists(test_path)
 
 	if is_valid:
-		_script_slice_value.modulate = Color.white
-		_script_slice_value.text = file_path
+		_script_slice.modulate = Color.white
+		_script_slice.text = file_path
 		_edited_practice.script_slice_path = file_path
 		_edited_practice.emit_changed()
 	else:
-		_script_slice_value.modulate = Color.red
+		_script_slice.modulate = Color.red
 
 
 # Validator script
@@ -308,8 +320,8 @@ func _on_select_validator_requested() -> void:
 
 
 func _change_validator_script(file_path: String) -> void:
-	if not _validator_value.text == file_path:
-		_validator_value.text = file_path
+	if not _validator.text == file_path:
+		_validator.text = file_path
 
 	var is_valid := file_path.empty() or file_path.get_extension() == "gd"
 	var test_path := file_path
@@ -318,11 +330,11 @@ func _change_validator_script(file_path: String) -> void:
 		is_valid = is_valid and _file_tester.file_exists(test_path)
 
 	if is_valid:
-		_validator_value.modulate = Color.white
+		_validator.modulate = Color.white
 		_edited_practice.validator_script_path = file_path
 		_edited_practice.emit_changed()
 	else:
-		_validator_value.modulate = Color.red
+		_validator.modulate = Color.red
 
 
 func _on_clear_validator_requested() -> void:
@@ -332,7 +344,7 @@ func _on_clear_validator_requested() -> void:
 
 # Goal text
 func _on_goal_content_changed() -> void:
-	_edited_practice.goal = _goal_content_value.text
+	_edited_practice.goal = _goal_content.text
 	_edited_practice.emit_changed()
 
 
@@ -346,13 +358,13 @@ func _on_goal_content_expand_pressed() -> void:
 
 func _on_goal_content_confirmed(text: String) -> void:
 	_edited_practice.goal = text
-	_goal_content_value.text = text
+	_goal_content.text = text
 	_edited_practice.emit_changed()
 
 
 # Starting code
 func _on_starting_code_changed() -> void:
-	_edited_practice.starting_code = _starting_code_value.text
+	_edited_practice.starting_code = _starting_code.text
 	_edited_practice.emit_changed()
 
 
@@ -366,7 +378,7 @@ func _on_starting_code_expand_pressed() -> void:
 
 func _on_starting_code_confirmed(text: String) -> void:
 	_edited_practice.starting_code = text
-	_starting_code_value.text = text
+	_starting_code.text = text
 	_edited_practice.emit_changed()
 
 

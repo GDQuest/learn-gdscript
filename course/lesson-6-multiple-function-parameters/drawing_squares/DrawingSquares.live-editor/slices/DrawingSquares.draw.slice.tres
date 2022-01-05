@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/SliceProperties.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-6-multiple-function-parameters/drawing_squares/DrawingSquares.live-editor/scripts/DrawingSquares.gd.tres" type="Resource" id=2]
+[ext_resource path="res://course/lesson-6-multiple-function-parameters/drawing_squares/DrawingSquares.live-editor/scene/DrawingSquares.tscn.tres" type="Resource" id=3]
+
+[resource]
+script = ExtResource( 1 )
+scene_properties = ExtResource( 3 )
+script_properties = ExtResource( 2 )
+leading_spaces = 0
+keyword = "EXPORT"
+closing = false
+name = "draw"
+is_full_file = false
+start = 11
+end = 21
+lines_before = [ "extends DrawingTurtle", "", "", "func _run():", "	reset()", "	draw_square(200)", "	jump(50.0, 50.0)", "	draw_square(100.0)", "	play_draw_animation()", "", "" ]
+lines_after = [ "" ]
+lines_editable = [ "func draw_square(length):", "	move_forward(length)", "	turn_right(90)", "	move_forward(length)", "	turn_right(90)", "	move_forward(length)", "	turn_right(90)", "	move_forward(length)", "	turn_right(90)" ]

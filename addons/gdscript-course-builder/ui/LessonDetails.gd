@@ -10,6 +10,7 @@ signal practice_got_edit_focus(index)
 const LessonPractice := preload("LessonPractice.gd")
 
 const ContentBlockScene := preload("LessonContentBlock.tscn")
+const LessonContentBlock := preload("LessonContentBlock.gd")
 const QuizContentBlockScene := preload("QuizContentBlock.tscn")
 const PracticeScene := preload("LessonPractice.tscn")
 const FileUtils := preload("../utils/FileUtils.gd")
@@ -18,6 +19,7 @@ const INDEX_LESSON_TAB := 0
 const INDEX_PRACTICE_TAB := 1
 
 var _edited_lesson: Lesson
+var _last_search_result: SearchResult
 
 onready var _no_content_block := $NoContent as Control
 onready var _content_block := $Content as Control
@@ -28,18 +30,12 @@ onready var _edit_slug_button := $Content/LessonPath/SlugButton as Button
 onready var _edit_slug_dialog := $SlugDialog as WindowDialog
 
 onready var _lesson_tabs := $Content/LessonContent as TabContainer
-onready var _lesson_content_blocks := $Content/LessonContent/ContentBlocks/ItemList as Control
-onready var _add_content_block_button := (
-	$Content/LessonContent/ContentBlocks/ToolBar/AddBlockButton as Button
-)
-onready var _add_quiz_button := (
-	$Content/LessonContent/ContentBlocks/ToolBar/AddQuizButton as Button
-)
+onready var _lesson_content_blocks := $Content/LessonContent/ContentBlocks/ItemList as SortableList
+onready var _add_content_block_button := $Content/LessonContent/ContentBlocks/ToolBar/AddBlockButton as Button
+onready var _add_quiz_button := $Content/LessonContent/ContentBlocks/ToolBar/AddQuizButton as Button
 onready var _insert_content_block_dialog := $InsertContentBlockDialog as WindowDialog
 onready var _lesson_practices := $Content/LessonContent/Practices/ItemList as Control
-onready var _add_practice_button := (
-	$Content/LessonContent/Practices/ToolBar/AddPracticeButton as Button
-)
+onready var _add_practice_button := $Content/LessonContent/Practices/ToolBar/AddPracticeButton as Button
 
 
 func _ready() -> void:
@@ -62,7 +58,7 @@ func _ready() -> void:
 
 	_edit_slug_button.connect("pressed", self, "_on_edit_slug_pressed")
 	_edit_slug_dialog.connect("confirmed", self, "_on_edit_slug_confirmed")
-	
+
 	_insert_content_block_dialog.connect("block_selected", self, "_on_content_block_added")
 	_insert_content_block_dialog.connect("quiz_selected", self, "_on_quiz_added")
 
@@ -122,6 +118,28 @@ func set_lesson(lesson: Lesson) -> void:
 		block_data.connect("changed", self, "_on_lesson_resource_changed")
 	for practice_data in _edited_lesson.practices:
 		practice_data.connect("changed", self, "_on_lesson_resource_changed")
+
+
+# Searches the lesson's content blocks for a matching string and scrolls to a matching UI element.
+func search(query: String) -> void:
+	var result: SearchResult = null
+	var start_index := _last_search_result.block_index if _last_search_result else 0
+	var block_count := _lesson_content_blocks.get_item_count()
+	for index in range(start_index, block_count):
+		var block = _lesson_content_blocks.get_item(index)
+		if not block.has_method("search"):
+			continue
+
+		var start_line := _last_search_result.start_line if _last_search_result else 0
+		var start_column := _last_search_result.end_column if _last_search_result else 0
+		var text_edit_search_result: PoolIntArray = block.search(query, start_line, start_column)
+		if not text_edit_search_result.empty():
+			var line := text_edit_search_result[TextEdit.SEARCH_RESULT_LINE]
+			var column := text_edit_search_result[TextEdit.SEARCH_RESULT_COLUMN]
+			result = SearchResult.new(index, line, column, column + query.length(), "text")
+			break
+
+	_last_search_result = result
 
 
 func _recreate_content_blocks() -> void:
@@ -224,7 +242,7 @@ func _on_quiz_added(at_index: int = -1) -> void:
 	var block_data := QuizChoice.new()
 	var block_path = FileUtils.generate_random_lesson_subresource_path(_edited_lesson, "quiz")
 	block_data.take_over_path(block_path)
-	
+
 	if at_index >= 0 and at_index < _edited_lesson.content_blocks.size():
 		_edited_lesson.content_blocks.insert(at_index, block_data)
 	else:
@@ -337,3 +355,24 @@ func _on_quiz_resource_changed(previous_quiz: Quiz, new_quiz: Quiz) -> void:
 
 func _on_practice_got_edit_focus(lesson_practice: LessonPractice) -> void:
 	emit_signal("practice_got_edit_focus", lesson_practice.list_index)
+
+
+class SearchResult:
+	var block_index := 0
+	var start_line := 0
+	var start_column := 0
+	var end_column := 0
+	var property := ""
+
+	func _init(
+		p_block_index: int,
+		p_start_line: int,
+		p_start_column: int,
+		p_end_column: int,
+		p_property: String
+	) -> void:
+		block_index = p_block_index
+		property = p_property
+		start_line = p_start_line
+		start_column = p_start_column
+		end_column = p_end_column

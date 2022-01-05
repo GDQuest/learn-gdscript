@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/gdscript-course-builder/ui/CourseEditor.gd" type="Script" id=1]
 [ext_resource path="res://addons/gdscript-course-builder/ui/LessonDetails.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/gdscript-course-builder/ui/SearchBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/gdscript-course-builder/ui/LessonList.tscn" type="PackedScene" id=4]
 
-[sub_resource type="Image" id=3]
+[sub_resource type="Image" id=1]
 data = {
 "data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
 "format": "LumAlpha8",
@@ -16,7 +17,7 @@ data = {
 [sub_resource type="ImageTexture" id=2]
 flags = 4
 flags = 4
-image = SubResource( 3 )
+image = SubResource( 1 )
 size = Vector2( 16, 16 )
 
 [node name="CourseEditor" type="MarginContainer"]
@@ -38,11 +39,11 @@ margin_bottom = 1076.0
 
 [node name="ToolBar" type="HBoxContainer" parent="Layout"]
 margin_right = 1912.0
-margin_bottom = 22.0
+margin_bottom = 24.0
 
 [node name="CreateButton" type="Button" parent="Layout/ToolBar"]
 margin_right = 40.0
-margin_bottom = 22.0
+margin_bottom = 24.0
 hint_tooltip = "Create a new course."
 text = "New"
 flat = true
@@ -50,7 +51,7 @@ flat = true
 [node name="OpenButton" type="Button" parent="Layout/ToolBar"]
 margin_left = 44.0
 margin_right = 103.0
-margin_bottom = 22.0
+margin_bottom = 24.0
 hint_tooltip = "Open a course resource to edit."
 text = "Open..."
 flat = true
@@ -58,7 +59,7 @@ flat = true
 [node name="RecentButton" type="MenuButton" parent="Layout/ToolBar"]
 margin_left = 107.0
 margin_right = 135.0
-margin_bottom = 22.0
+margin_bottom = 24.0
 hint_tooltip = "Open a recently edited course."
 disabled = true
 icon = SubResource( 2 )
@@ -66,7 +67,7 @@ icon = SubResource( 2 )
 [node name="SaveButton" type="Button" parent="Layout/ToolBar"]
 margin_left = 139.0
 margin_right = 167.0
-margin_bottom = 22.0
+margin_bottom = 24.0
 hint_tooltip = "Save the currently edited course."
 disabled = true
 icon = SubResource( 2 )
@@ -75,7 +76,7 @@ flat = true
 [node name="SaveAsButton" type="Button" parent="Layout/ToolBar"]
 margin_left = 171.0
 margin_right = 244.0
-margin_bottom = 22.0
+margin_bottom = 24.0
 hint_tooltip = "Save the currently edited course."
 disabled = true
 text = "Save As..."
@@ -84,12 +85,12 @@ flat = true
 [node name="VSeparator" type="VSeparator" parent="Layout/ToolBar"]
 margin_left = 248.0
 margin_right = 252.0
-margin_bottom = 22.0
+margin_bottom = 24.0
 
 [node name="PlayCurrentButton" type="Button" parent="Layout/ToolBar"]
 margin_left = 256.0
 margin_right = 345.0
-margin_bottom = 22.0
+margin_bottom = 24.0
 hint_tooltip = "Play the currently selected lesson or practice with the app."
 disabled = true
 text = "Play Current"
@@ -98,21 +99,25 @@ flat = true
 [node name="VSeparator2" type="VSeparator" parent="Layout/ToolBar"]
 margin_left = 349.0
 margin_right = 353.0
-margin_bottom = 22.0
+margin_bottom = 24.0
+
+[node name="SearcnBar" parent="Layout/ToolBar" instance=ExtResource( 3 )]
+margin_left = 357.0
+margin_right = 1912.0
 
 [node name="DirtyStatusLabel" type="Label" parent="Layout/ToolBar"]
 visible = false
-margin_left = 179.0
-margin_top = 4.0
-margin_right = 352.0
-margin_bottom = 18.0
+margin_left = 1739.0
+margin_top = 5.0
+margin_right = 1912.0
+margin_bottom = 19.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "There are unsaved changes"
 
 [node name="HSeparator" type="HSeparator" parent="Layout"]
-margin_top = 26.0
+margin_top = 28.0
 margin_right = 1912.0
-margin_bottom = 30.0
+margin_bottom = 32.0
 
 [node name="Content" type="VBoxContainer" parent="Layout"]
 visible = false
@@ -176,16 +181,16 @@ margin_right = 1912.0
 margin_bottom = 968.0
 
 [node name="NoContent" type="CenterContainer" parent="Layout"]
-margin_top = 34.0
+margin_top = 36.0
 margin_right = 1912.0
 margin_bottom = 1076.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Layout/NoContent"]
 margin_left = 789.0
-margin_top = 514.0
+margin_top = 513.0
 margin_right = 1122.0
-margin_bottom = 528.0
+margin_bottom = 527.0
 text = "Create a new course or open an existing one to edit."
 
 [node name="AcceptDialog" type="AcceptDialog" parent="."]

@@ -4,6 +4,8 @@ extends PracticeTester
 var expected_rect := [Vector2(0, 0), Vector2(100, 0), Vector2(100, 100), Vector2(0, 100), Vector2(0, 0)]
 
 var _polygons := []
+var _points := []
+
 
 # We sort vertices for accurate comparison
 func _init() -> void:
@@ -14,11 +16,13 @@ func _prepare() -> void:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	_polygons = turtle.get_polygons()
 	for p in _polygons:
-		p.points.sort()
-		
+		var square_points := Array(p.points)
+		square_points.sort()
+		_points.append(square_points)
 
 
 func _clean_up() -> void:
+	_points.clear()
 	_polygons.clear()
 
 
@@ -31,9 +35,9 @@ func test_draw_three_squares() -> String:
 
 func test_squares_are_all_100_by_100() -> String:
 	var index := 1
-	for p in _polygons:
-		if p.points != expected_rect:
-			return "Shape number %s is not a square of size 100 by 100."
+	for p in _points:
+		if p != expected_rect:
+			return "Shape number %s is not a square of size 100 by 100." % index
 		index += 1
 	return ""
 

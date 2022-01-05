@@ -19,8 +19,9 @@ Then, remove the comment sign (#) to make the code valid.
 Be careful not to remove the spacing before [code]return[/code]! Otherwise, that'll cause another error. You may try that too, if you feel like it."
 starting_code = "func this_code_is_wrong():
 	#return"
-hints = PoolStringArray( "Remove the # sign.", "" )
+hints = PoolStringArray( "Remove the # sign." )
 validator_script_path = "FixErrorTests.gd"
 script_slice_path = "first-error/ErrorScene.live-editor/slices/ErrorScene.wrong_code.slice.tres"
 documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 2 )
+description = "There's an error in this code. We need you to fix it!"
