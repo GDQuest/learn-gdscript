@@ -31,13 +31,12 @@ onready var _tween: Tween = $Tween
 func _ready() -> void:
 	_button.pressed = is_expanded
 	_button.connect("toggled", self, "set_is_expanded")
-	
-	
+
 	for child in get_children():
 		if child == _button or not child is Control:
 			continue
 		_add_content_child(child)
-	
+
 	# Through the constructor setter call, the _contents variable will be empty,
 	# so we need to call this again.
 	set_is_expanded(is_expanded)
@@ -52,7 +51,7 @@ func add_child(node: Node, _legible_unique_name := false) -> void:
 	.add_child(node)
 	if node is Control:
 		_add_content_child(node)
-	
+
 	set_is_expanded(is_expanded)
 	update_min_size()
 
@@ -60,7 +59,7 @@ func add_child(node: Node, _legible_unique_name := false) -> void:
 func clear_contents() -> void:
 	for node in _contents:
 		_remove_content_child(node)
-	
+
 	_contents = []
 
 
@@ -107,13 +106,15 @@ func set_revealer_height(new_revealer_height: float) -> void:
 func update_min_size() -> void:
 	if not is_instance_valid(_parent) or _parent == null:
 		return
-	
+
 	var rect_size_x := min(rect_size.x, _parent.rect_size.x)
 	_button.rect_size.x = rect_size_x
 	if use_animations and _tween.is_inside_tree():
 		_tween.stop(self)
-		_animate_height("rect_min_size:y", rect_min_size.y)
-		_animate_height("rect_size:y", rect_size.y)
+		_tween.interpolate_property(
+			self, "rect_min_size:y", rect_min_size.y, _height, ANIM_DURATION
+		)
+		_tween.interpolate_property(self, "rect_size:y", rect_size.y, _height, ANIM_DURATION)
 	else:
 		rect_min_size.y = _height
 		rect_size.y = _height
@@ -141,15 +142,11 @@ func set_text_color(value: Color) -> void:
 		_button.add_color_override("font_color", text_color)
 
 
-func _animate_height(property: String, from: float) -> void:
-	_tween.interpolate_property(self, property, from, _height, ANIM_DURATION)
-
-
 func _rotate_chevron(rotation_degrees: float, time := ANIM_DURATION) -> void:
 	if not use_animations or not _tween.is_inside_tree():
 		_chevron.rect_rotation = rotation_degrees
 		return
-	
+
 	_tween.stop_all()
 	_tween.interpolate_property(
 		_chevron, "rect_rotation", _chevron.rect_rotation, rotation_degrees, time
