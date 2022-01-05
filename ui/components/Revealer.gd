@@ -31,14 +31,12 @@ onready var _tween: Tween = $Tween
 func _ready() -> void:
 	_button.pressed = is_expanded
 	_button.connect("toggled", self, "set_is_expanded")
-	
-	_tween.connect("tween_completed", self, "_on_tween_completed")
-	
+
 	for child in get_children():
 		if child == _button or not child is Control:
 			continue
 		_add_content_child(child)
-	
+
 	# Through the constructor setter call, the _contents variable will be empty,
 	# so we need to call this again.
 	set_is_expanded(is_expanded)
@@ -53,7 +51,7 @@ func add_child(node: Node, _legible_unique_name := false) -> void:
 	.add_child(node)
 	if node is Control:
 		_add_content_child(node)
-	
+
 	set_is_expanded(is_expanded)
 	update_min_size()
 
@@ -61,7 +59,7 @@ func add_child(node: Node, _legible_unique_name := false) -> void:
 func clear_contents() -> void:
 	for node in _contents:
 		_remove_content_child(node)
-	
+
 	_contents = []
 
 
@@ -108,16 +106,18 @@ func set_revealer_height(new_revealer_height: float) -> void:
 func update_min_size() -> void:
 	if not is_instance_valid(_parent) or _parent == null:
 		return
-	
+
 	var rect_size_x := min(rect_size.x, _parent.rect_size.x)
 	_button.rect_size.x = rect_size_x
 	if use_animations and _tween.is_inside_tree():
-		_tween.stop(self, "rect_min_size:y")
+		_tween.stop(self)
 		_tween.interpolate_property(
 			self, "rect_min_size:y", rect_min_size.y, _height, ANIM_DURATION
 		)
+		_tween.interpolate_property(self, "rect_size:y", rect_size.y, _height, ANIM_DURATION)
 	else:
 		rect_min_size.y = _height
+		rect_size.y = _height
 
 
 func sort_children() -> void:
@@ -146,7 +146,7 @@ func _rotate_chevron(rotation_degrees: float, time := ANIM_DURATION) -> void:
 	if not use_animations or not _tween.is_inside_tree():
 		_chevron.rect_rotation = rotation_degrees
 		return
-	
+
 	_tween.stop_all()
 	_tween.interpolate_property(
 		_chevron, "rect_rotation", _chevron.rect_rotation, rotation_degrees, time
@@ -171,10 +171,3 @@ func _fit_child(control: Control, top := 0.0, node_padding := 0.0) -> float:
 	fit_child_in_rect(control, rect)
 	control.rect_size.x = size.x
 	return top + height
-
-
-func _on_tween_completed(object: Object, key: NodePath) -> void:
-	if object != self or key != ":rect_min_size:y":
-		return
-	
-	rect_size.y = rect_min_size.y
