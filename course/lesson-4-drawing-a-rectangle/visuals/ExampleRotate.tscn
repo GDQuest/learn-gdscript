@@ -13,19 +13,19 @@ onready var _turtle: DrawingTurtle = $DrawingTurtle
 
 func _ready() -> void:
 	_turtle.line_draw_speed = 200.0
+	reset()
+
+func reset():
+	_turtle.position = -Vector2(217, 57) / 2
 
 func run() -> void:
 	_turtle.reset()
-	_turtle.position = Vector2.ZERO
 	_turtle.move_forward(length)
 	_turtle.turn_right(turn)
 	_turtle.move_forward(length)
 	_turtle.turn_left(turn)
 	_turtle.move_forward(length)
 	_turtle.play_draw_animation()
-
-	var rect := _turtle.get_rect()
-	_turtle.position = -rect.size / 2.0
 "
 
 [node name="ExampleRotate" type="PanelContainer"]
