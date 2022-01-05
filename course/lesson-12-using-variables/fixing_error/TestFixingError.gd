@@ -35,3 +35,12 @@ func test_angular_speed_is_used_in_process_function() -> String:
 	if not result:
 		return "The rotate() function doesn't seem to use the angular_speed variable."
 	return ""
+
+
+func test_angular_speed_is_used_in_setter_function() -> String:
+	var regex = RegEx.new()
+	regex.compile("\\)\\:\\s*angular_speed")
+	var result = regex.search(_slice.current_text)
+	if not result:
+		return "The set_angular_speed() function doesn't seem to use the angular_speed variable."
+	return ""
