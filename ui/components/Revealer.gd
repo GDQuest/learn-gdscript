@@ -32,7 +32,6 @@ func _ready() -> void:
 	_button.pressed = is_expanded
 	_button.connect("toggled", self, "set_is_expanded")
 	
-	_tween.connect("tween_completed", self, "_on_tween_completed")
 	
 	for child in get_children():
 		if child == _button or not child is Control:
@@ -112,12 +111,12 @@ func update_min_size() -> void:
 	var rect_size_x := min(rect_size.x, _parent.rect_size.x)
 	_button.rect_size.x = rect_size_x
 	if use_animations and _tween.is_inside_tree():
-		_tween.stop(self, "rect_min_size:y")
-		_tween.interpolate_property(
-			self, "rect_min_size:y", rect_min_size.y, _height, ANIM_DURATION
-		)
+		_tween.stop(self)
+		_animate_height("rect_min_size:y", rect_min_size.y)
+		_animate_height("rect_size:y", rect_size.y)
 	else:
 		rect_min_size.y = _height
+		rect_size.y = _height
 
 
 func sort_children() -> void:
@@ -140,6 +139,10 @@ func set_text_color(value: Color) -> void:
 			connect("ready", _button, "add_color_override", ["font_color", text_color])
 	else:
 		_button.add_color_override("font_color", text_color)
+
+
+func _animate_height(property: String, from: float) -> void:
+	_tween.interpolate_property(self, property, from, _height, ANIM_DURATION)
 
 
 func _rotate_chevron(rotation_degrees: float, time := ANIM_DURATION) -> void:
@@ -171,10 +174,3 @@ func _fit_child(control: Control, top := 0.0, node_padding := 0.0) -> float:
 	fit_child_in_rect(control, rect)
 	control.rect_size.x = size.x
 	return top + height
-
-
-func _on_tween_completed(object: Object, key: NodePath) -> void:
-	if object != self or key != ":rect_min_size:y":
-		return
-	
-	rect_size.y = rect_min_size.y
