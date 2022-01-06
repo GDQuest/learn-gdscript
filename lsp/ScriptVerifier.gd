@@ -15,6 +15,7 @@ signal errors(errors)
 
 # The URL of the HTTP Language Server
 const SERVER_URL := "https://lsp.gdquest.com"
+#const SERVER_URL := "http://localhost:3000"
 
 # https://docs.godotengine.org/en/stable/classes/class_httprequest.html#enumerations
 const HTTP_RESULT_ERRORS := {
@@ -53,15 +54,17 @@ var blacklist_codes := {
 var _node: Node
 var _new_script_text: String
 var _url: String
+var _new_script_filename: String
+var uuid := UUID.v4()
 
-
-func _init(attached_node: Node, new_script_text: String, url := SERVER_URL) -> void:
+func _init(attached_node: Node, new_script_filename: String, new_script_text: String, url := SERVER_URL) -> void:
 	
 	for warning in WarningCode:
 		blacklist_codes[warning] = true
 
 	_node = attached_node
 	_new_script_text = new_script_text
+	_new_script_filename = new_script_filename
 	_url = url
 
 
@@ -125,9 +128,15 @@ func _on_http_request_completed(
 func test() -> void:
 	remove_http_request_node()
 	var http_request := append_http_request_node()
-	var query = "file=%s" % [_new_script_text.percent_encode()]
-	var headers = PoolStringArray(["Content-Type: application/x-www-form-urlencoded"])
-	var success := http_request.request(_url, headers, false, HTTPClient.METHOD_POST, query)
+	var request_props := {
+		"file": _new_script_text,
+		"filename": _new_script_filename,
+		"id": uuid
+	}
+	var query := HTTPClient.new().query_string_from_dict(request_props)
+	var headers := PoolStringArray(["Content-Type: application/x-www-form-urlencoded"])
+	var validate := _url.begins_with("https")
+	var success := http_request.request(_url, headers, validate, HTTPClient.METHOD_POST, query)
 	if success != OK:
 		push_error("could not connect")
 		remove_http_request_node()

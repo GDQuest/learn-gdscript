@@ -104,11 +104,12 @@ func _test_student_code() -> void:
 	_output_console.clear_messages()
 
 	_script_slice.current_text = _code_editor.get_text()
-	var script_file_name: String = _script_slice.get_script_properties().file_name
-	var script_text: String = _script_slice.current_full_text
-	var nodes_paths: Array = _script_slice.get_script_properties().nodes_paths
-
-	var verifier := ScriptVerifier.new(self, script_text)
+	var script_file_name := _script_slice.get_script_properties().file_name
+	var script_text := _script_slice.current_full_text
+	var nodes_paths := _script_slice.get_script_properties().nodes_paths
+	var script_file_path := _script_slice.get_script_properties().file_path.lstrip("res://")
+	
+	var verifier := ScriptVerifier.new(self, script_file_path, script_text)
 	verifier.test()
 
 	var errors: Array = yield(verifier, "errors")
