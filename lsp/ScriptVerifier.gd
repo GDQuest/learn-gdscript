@@ -15,7 +15,7 @@ signal errors(errors)
 
 # The URL of the HTTP Language Server
 const SERVER_URL := "https://lsp.gdquest.com"
-#const SERVER_URL := "http://localhost:3000"
+# const SERVER_URL := "http://localhost:3000"
 
 # https://docs.godotengine.org/en/stable/classes/class_httprequest.html#enumerations
 const HTTP_RESULT_ERRORS := {
@@ -55,7 +55,7 @@ var _node: Node
 var _new_script_text: String
 var _url: String
 var _new_script_filename: String
-var uuid := UUID.v4()
+var _start_time := OS.get_unix_time()
 
 func _init(attached_node: Node, new_script_filename: String, new_script_text: String, url := SERVER_URL) -> void:
 	
@@ -84,9 +84,21 @@ func remove_http_request_node() -> void:
 
 
 func _on_http_request_completed(
-	result: int, _response_code: int, _headers: PoolStringArray, body: PoolByteArray
+	result: int, response_code: int, _headers: PoolStringArray, body: PoolByteArray
 ) -> void:
 
+	var end := OS.get_unix_time()
+	var elapsed := end - _start_time
+	
+	Log.info({
+		"end": end,
+		"elapsed": elapsed,
+		"id": UserProfiles.uuid,
+		"filename": _new_script_filename,
+		"response": response_code,
+		"result": result,
+	}, "finished request")
+	
 	if result != HTTPRequest.RESULT_SUCCESS:
 		var error_name: String = HTTP_RESULT_ERRORS[result]
 		printerr("http error connecting to %s: [%s]"%[_url, error_name])
@@ -95,12 +107,12 @@ func _on_http_request_completed(
 		
 	var response = (
 		parse_json(body.get_string_from_utf8())
-		if _response_code == 200
+		if response_code == 200
 		else []
 	)
 	remove_http_request_node()
 
-	if not _response_code == 200:
+	if not response_code == 200:
 		printerr(
 			"Failed to verify the script using the language server: " + body.get_string_from_utf8()
 		)
@@ -131,11 +143,17 @@ func test() -> void:
 	var request_props := {
 		"file": _new_script_text,
 		"filename": _new_script_filename,
-		"id": uuid
+		"id": UserProfiles.uuid
 	}
 	var query := HTTPClient.new().query_string_from_dict(request_props)
 	var headers := PoolStringArray(["Content-Type: application/x-www-form-urlencoded"])
 	var validate := _url.begins_with("https")
+	Log.info({
+		"start": _start_time,
+		"id": UserProfiles.uuid,
+		"filename": _new_script_filename,
+		"elapsed": 0,
+	}, "initiated request")
 	var success := http_request.request(_url, headers, validate, HTTPClient.METHOD_POST, query)
 	if success != OK:
 		push_error("could not connect")
