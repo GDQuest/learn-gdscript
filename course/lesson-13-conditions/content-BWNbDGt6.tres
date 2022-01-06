@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+text = "[code block]
+func heal(amount):
+    health += amount
+    if health > 100: # If health is greater than 100
+        health = 100 # Leading tab means this instruction belongs to the condition"
+visual_element_path = ""
+reverse_blocks = false
+type = 0

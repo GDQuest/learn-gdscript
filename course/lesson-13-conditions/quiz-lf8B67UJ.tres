@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+question = "What is the value of health?"
+content_bbcode = "Suppose our character has 100 health.
+
+What would the value of health be if we called damage(25) five times?"
+hint = ""
+explanation_bbcode = "Calling damage(25) five times would subtract a total of 125 from 100.
+
+100
+75
+50
+25
+0
+-25"
+answer_options = [ "-25", "25", "0" ]
+valid_answers = [ "-25" ]
+is_multiple_choice = false
+do_shuffle_answers = true
