@@ -144,6 +144,81 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     }
   }
 
+  logging: {
+    const KEY = "log";
+    const LEVELS = {
+      TRACE: 10,
+      DEBUG: 20,
+      INFO: 30,
+      WARN: 40,
+      ERROR: 50,
+      FATAL: 60,
+    };
+    const log_lines = [];
+
+    const makeLogFunction =
+      (level = LEVELS.INFO) =>
+      /** @type {LogFunction} */
+      (anything, msg = "") => {
+        if (typeof anything === "string" || typeof anything === "number") {
+          msg = String(anything);
+          anything = null;
+        }
+
+        const time = Date.now();
+        /** @type {LogLine} */
+        const log_line = { time, level, msg, ...(anything || {}) };
+        log_lines.push(log_line);
+        localStorage.setItem(KEY, JSON.stringify(log_lines));
+
+        if (level < 30) {
+          if (anything) {
+            console.log(msg, anything);
+          } else {
+            console.log(msg);
+          }
+        }
+        if (level < 40) {
+          if (anything) {
+            console.info(msg, anything);
+          } else {
+            console.info(msg);
+          }
+        } else if (level < 50) {
+          if (anything) {
+            console.warn(msg, anything);
+          } else {
+            console.warn(msg);
+          }
+        } else {
+          if (anything) {
+            console.error(msg, anything);
+          } else {
+            console.error(msg);
+          }
+        }
+      };
+
+    /** @type { Log['get'] } */
+    const get = () => JSON.parse(localStorage.getItem(KEY) || "[]");
+
+    /** @type { Log['display'] } */
+    const display = () => console.table(get());
+
+    const clear = () => {
+      localStorage.removeItem(KEY);
+      console.info("log cleared");
+    };
+
+    /** @type { Log } */
+    // @ts-ignore
+    const log = { display, clear, get };
+    Object.keys(LEVELS).forEach(
+      (key) => (log[key.toLowerCase()] = makeLogFunction(LEVELS[key]))
+    );
+    GDQUEST.log = log;
+  }
+
   return GDQUEST;
   // @ts-ignore
 })(window.GDQUEST || {});
