@@ -1,0 +1,42 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+title = "Using Comparisons"
+goal = "For each if statement, change the comparisons so each comparison represents the instruction below it.
+
+Keep the values and statements as they are.
+
+The comparisons are:
+[code]
+> greater than
+< less than
+== equal to
+!= not equal to
+[/code]
+
+The line [code]health < 5:[/code] means \"health is less than 5\". 
+
+Because [code]health = 100[/code], this is false so [code]print(\"health is greater than five.\")[/code] won't run."
+starting_code = "var health = 100
+
+if health < 5:
+	print(\"health is greater than five.\")
+
+if 1 > health:
+	print(\"One is less than health.\")
+
+if health < health:
+	print(\"health is equal to health\")
+
+if health < 7:
+	print(\"health is not equal to seven.\")"
+hints = PoolStringArray(  )
+validator_script_path = "using_conditions/TestUsingConditions.gd"
+script_slice_path = "using_conditions/UsingConditions.live-editor/slices/UsingConditions.conditions.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 1 )
+description = ""
