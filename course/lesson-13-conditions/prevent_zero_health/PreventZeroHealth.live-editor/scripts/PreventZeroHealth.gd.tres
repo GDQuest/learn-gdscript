@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://course/lesson-13-conditions/limiting_health/LimitingHealth.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-13-conditions/prevent_zero_health/PreventZeroHealth.gd" type="Script" id=1]
 [ext_resource path="res://addons/gdscript-slice-exporter/collections/ScriptProperties.gd" type="Script" id=2]
 
 [resource]
@@ -10,14 +10,14 @@ script_file = ExtResource( 1 )
 original_script = "extends Control
 
 func _run():
-	heal(100)
+	take_damage(100)
 
 var health = 20
 
 # EXPORT heal
-func heal(amount):
-	health = health + amount
-	if health > 80:
-		health = 80
+func take_damage(amount):
+	health = health - amount
+	if health < 0:
+		health = 0
 # /EXPORT heal
 "

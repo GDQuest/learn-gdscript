@@ -1,22 +1,11 @@
 extends PracticeTester
 
 var first_node: Control
-var has_health_prop := false
 var health := 0
 
 func _prepare():
 	first_node = _scene_root_viewport.get_child(0)
-	has_health_prop = false
-	for property in first_node.get_property_list():
-		if property.name == "health":
-			has_health_prop = true
-			health = first_node.health
-			break
-
-func test_has_health_variable() -> String:
-	if not has_health_prop:
-		return "The health variable doesn't exist. Did you define it with the var keyword?"
-	return ""
+	health = first_node.health
 
 func test_health_does_not_go_above_80() -> String:
 	if health > 80:

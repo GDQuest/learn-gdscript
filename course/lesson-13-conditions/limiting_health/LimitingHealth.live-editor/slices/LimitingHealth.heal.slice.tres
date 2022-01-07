@@ -13,8 +13,8 @@ keyword = "EXPORT"
 closing = false
 name = "heal"
 is_full_file = false
-start = 5
+start = 7
 end = 12
-lines_before = [ "extends Control", "", "func _run():", "	heal(100)", "" ]
+lines_before = [ "extends Control", "", "func _run():", "	heal(100)", "", "var health = 20", "" ]
 lines_after = [ "" ]
-lines_editable = [ "var health = 20", "", "func heal(amount):", "	health = health + amount", "	if health > 80:", "		health = 80" ]
+lines_editable = [ "func heal(amount):", "	health = health + amount", "	if health > 80:", "		health = 80" ]
