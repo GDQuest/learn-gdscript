@@ -8,16 +8,21 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-var health := 100
+var health := 0
 var health_gained := 25
 
 onready var health_bar := $HealthBar/HealthBarCurrent
 onready var label := $HealthBar/Label
 
 
+func _ready():
+	reset()
 
 func run():
 	health += 25
+	
+	if health > 100:
+		health = 100
 	
 	health_bar.rect_size.x = health * 2
 	label.text = \"health = %s\" % [health_bar.rect_size.x/2]
@@ -44,7 +49,7 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 1040.0
 margin_bottom = 291.0
-gdscript_code = "heal(25)"
+gdscript_code = "heal(25) # New heal function"
 
 [node name="HideSprite" type="Node2D" parent="RunnableCodeExample"]
 script = SubResource( 1 )
@@ -105,6 +110,3 @@ rect_min_size = Vector2( 200, 0 )
 theme = ExtResource( 4 )
 text = "health = 100"
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
