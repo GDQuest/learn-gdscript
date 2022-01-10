@@ -4,17 +4,17 @@
 
 [resource]
 script = ExtResource( 1 )
-text = "In mathematics, delta is often used to describe a very small change in something. 
+text = "[font=res://ui/theme/fonts/font_title.tres]Frames Time Variance[/font]
 
-We know that Godot runs all the [code]_process()[/code] functions as fast as it can.
+Your computer controls the speed at which each software runs. Depending on how busy the computer is, this can vary.
 
-The parameter [code]delta[/code] is how fast in seconds Godot took to complete the [b]previous frame[/b].
+For that reason, no game engine can guarantee a constant framerate. There will always be milliseconds variations from frame to frame.
 
-Because lots of different things happen at different times in games, Godot might take more or less time to complete one frame.
+That is why the [code]_process()[/code] function receives a [code]delta[/code] parameter.
 
-For example, the player might fire lots of bullets at once, and now Godot has all of these bullets to process!
+In mathematics, the word \"delta\" is often used to describe a very small change between two numbers.
 
-This means that [code]delta[/code] also varies."
+The [code]delta[/code] parameter tells us how fast Godot took to complete the [b]previous frame[/b]. We can use that to ensure that the variations between frames have no visible effect."
 visual_element_path = ""
 reverse_blocks = false
 type = 0

@@ -4,9 +4,15 @@
 
 [resource]
 script = ExtResource( 1 )
-text = "What would happen if our computer slows down or has irregular frame times?
+text = "[font=res://ui/theme/fonts/font_title.tres]Why Does Frame Variance Matter?[/font]
 
-Without [code]delta[/code], we'd get an irregular animation because the movement is dependent on frames."
+What would happen if our computer slows down or has irregular frame times?
+
+In the examples below, we artificially made the frames last different times. Some last 0.1 seconds, some 0.2 seconds.
+
+In the first example, we use the [b]same rotation[/b] every frame.
+
+But since the frames are unequal, we get a [b]varying rotation[/b] per second. Because of that, the character seems to jump."
 visual_element_path = ""
 reverse_blocks = false
 type = 0

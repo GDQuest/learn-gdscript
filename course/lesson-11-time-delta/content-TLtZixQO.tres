@@ -4,15 +4,9 @@
 
 [resource]
 script = ExtResource( 1 )
-text = "Rather than jumping the full amount every frame, we rotate the character by part of the value based on the [code]delta[/code].
+text = "If the frame is fast (0.1s), we only rotate a little. When the frame is slow (0.2s), we rotate more to compensate.
 
-These values are bigger because [code]delta[/code] is so small.
-
-By multiplying 1 radians by [code]delta[/code], we rotate the character by 1 radian per second.
-
-We've slowed the above down to see the difference easier.
-
-When we multiply time sensitive values like this, we make them [b]time-dependent[/b] rather than [b]frame-dependent[/b]."
+Multiplying time sensitive values by delta makes them [b]time-dependent[/b] rather than [b]frame-dependent[/b]."
 visual_element_path = ""
 reverse_blocks = false
 type = 0
