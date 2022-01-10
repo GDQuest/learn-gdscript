@@ -60,7 +60,7 @@ var _start_time := OS.get_unix_time()
 func _init(attached_node: Node, new_script_filename: String, new_script_text: String, url := SERVER_URL) -> void:
 	
 	for warning in WarningCode:
-		blacklist_codes[warning] = true
+		blacklist_codes[WarningCode[warning]] = true
 
 	_node = attached_node
 	_new_script_text = new_script_text
