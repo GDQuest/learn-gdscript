@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://course/lesson-11-time-delta/visuals/DemoRotatingTime.gd" type="Script" id=1]
 [ext_resource path="res://course/lesson-1-what-code-is-like/first_practice/godot_bottom.png" type="Texture" id=2]
 [ext_resource path="res://course/lesson-1-what-code-is-like/first_practice/hand_ice.png" type="Texture" id=3]
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=4]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -25,7 +26,27 @@ texture = ExtResource( 3 )
 flip_h = true
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
-autostart = true
+
+[node name="LabelRotation" type="Label" parent="."]
+margin_left = -135.0
+margin_top = -94.0
+margin_right = 47.0
+margin_bottom = -66.0
+theme = ExtResource( 4 )
+text = "rotation: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelFrame" type="Label" parent="."]
+margin_left = -135.0
+margin_top = -118.0
+margin_right = 47.0
+margin_bottom = -90.0
+theme = ExtResource( 4 )
+text = "frame speed: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
