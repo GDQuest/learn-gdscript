@@ -9,12 +9,28 @@ enum LEVEL {
   FATAL = 60,
 };
 
+var also_print_to_godot := false;
 var _js_available := OS.has_feature("JavaScript")
 var GDQUEST: JavaScriptObject
 
 func write(level: int, properties: Dictionary, message: String) -> void:
+	if also_print_to_godot:
+		var level_index := LEVEL.values().find(level)
+		var props := {
+			"lvl": LEVEL.keys()[level_index] if level_index > -1 else "UNKNOWN",
+			"msg": message,
+			"prp": properties,
+			"sep": "------------"
+		}
+		var object := "[%lvl]\n%msg\n%prp\n%sep".format(props, "%_")
+		match(level):
+			LEVEL.FATAL,LEVEL.ERROR:
+				push_error(object);
+			LEVEL.WARN:
+				push_warning(object)
+			_:
+				print(object)
 	if not _js_available:
-		prints({ "properties": properties, "message": message })
 		return
 	var props = JavaScript.create_object("Object", {})
 	for key in properties:
