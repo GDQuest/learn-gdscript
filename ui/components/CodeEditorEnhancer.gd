@@ -58,6 +58,8 @@ const KEYWORDS := [
 	"bool",
 	"int",
 	"float",
+	"null",
+	"true", "false",
 	
 	# Global GDScript namespace.
 	"Color8",
@@ -141,9 +143,8 @@ const KEYWORDS := [
 	"wrapi",
 	"yield",
 	
-	# Ignored so far
-	# "PI", "TAU", "INF", "NAN",
-	# "null", "true", "false",
+	"PI", "TAU", "INF", "NAN",
+	
 ]
 
 # Enhances a TextEdit to better highlight GDScript code.
