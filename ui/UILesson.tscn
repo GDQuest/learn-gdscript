@@ -1,14 +1,28 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/UILesson.gd" type="Script" id=2]
+[ext_resource path="res://ui/theme/vscrollbar_large_scroll.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/theme/fonts/font_title_big.tres" type="DynamicFont" id=4]
 [ext_resource path="res://course/lesson-4-drawing-a-rectangle/lesson.tres" type="Resource" id=5]
+[ext_resource path="res://ui/theme/vscrollbar_large_grabber.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/theme/vscrollbar_large_grabber_highlight.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/theme/vscrollbar_large_grabber_pressed.tres" type="StyleBox" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="Theme" id=2]
+VScrollBar/styles/grabber = ExtResource( 6 )
+VScrollBar/styles/grabber_highlight = ExtResource( 7 )
+VScrollBar/styles/grabber_pressed = ExtResource( 8 )
+VScrollBar/styles/scroll = ExtResource( 3 )
+VScrollBar/styles/scroll_focus = SubResource( 1 )
 
 [node name="UILesson" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 12
+theme = ExtResource( 1 )
+custom_constants/margin_right = 0
 custom_constants/margin_top = 20
 custom_constants/margin_left = 12
 custom_constants/margin_bottom = 20
@@ -21,7 +35,7 @@ test_lesson = ExtResource( 5 )
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 margin_left = 12.0
 margin_top = 20.0
-margin_right = 1908.0
+margin_right = 1920.0
 margin_bottom = 1060.0
 rect_min_size = Vector2( 960, 0 )
 rect_clip_content = false
@@ -30,7 +44,7 @@ focus_neighbour_bottom = NodePath(".")
 focus_mode = 1
 mouse_filter = 1
 size_flags_vertical = 3
-theme = ExtResource( 1 )
+theme = SubResource( 2 )
 follow_focus = true
 scroll_horizontal_enabled = false
 __meta__ = {
@@ -38,16 +52,16 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
-margin_right = 1896.0
+margin_right = 1908.0
 margin_bottom = 282.0
 mouse_filter = 1
 size_flags_horizontal = 3
 custom_constants/margin_top = 40
 
 [node name="Column" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
-margin_left = 568.0
+margin_left = 574.0
 margin_top = 40.0
-margin_right = 1328.0
+margin_right = 1334.0
 margin_bottom = 262.0
 rect_min_size = Vector2( 760, 0 )
 size_flags_horizontal = 4
