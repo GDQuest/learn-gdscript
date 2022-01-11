@@ -14,7 +14,7 @@ var _js_available := OS.has_feature("JavaScript")
 var GDQUEST: JavaScriptObject
 
 func write(level: int, properties: Dictionary, message: String) -> void:
-	if also_print_to_godot:
+	if also_print_to_godot and OS.is_debug_build():
 		var level_index := LEVEL.values().find(level)
 		var props := {
 			"lvl": LEVEL.keys()[level_index] if level_index > -1 else "UNKNOWN",
