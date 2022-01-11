@@ -189,22 +189,12 @@ func _emit_read_content() -> void:
 		if not control_node:
 			continue
 		
-		control_node.modulate.a = 0.25
-	
-	var last_control: Control
-	
-	for child_node in _content_blocks.get_children():
-		var control_node := child_node as Control
-		if not control_node:
-			continue
-		
 		# We reached the end of visible blocks.
 		if not control_node.visible:
 			break
 		
 		if content_index < _lesson.content_blocks.size():
 			content_blocks.append(_lesson.content_blocks[content_index])
-		last_control = control_node
 		
 		var content_offset := control_node.rect_position.y
 		if content_offset > scroll_distance:
@@ -212,9 +202,6 @@ func _emit_read_content() -> void:
 		content_index += 1
 	
 	if content_blocks.size() > 0:
-		if last_control:
-			last_control.modulate.a = 1.0
-		
 		var last_block = content_blocks.pop_back()
 		Events.emit_signal("lesson_reading_block", last_block, content_blocks)
 
