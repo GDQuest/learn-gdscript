@@ -22,6 +22,8 @@ interface Log {
   fatal: LogFunction;
   display: () => void;
   clear: () => void;
+  download: () => void;
+  trimIfOverLimit: (maxKiloBytes?: number) => void;
   get: () => LogLine[];
 }
 interface GodotEngineInstanceStartGameOptions {

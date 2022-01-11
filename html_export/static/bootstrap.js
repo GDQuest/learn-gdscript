@@ -154,7 +154,44 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       ERROR: 50,
       FATAL: 60,
     };
-    const log_lines = [];
+
+    const generateDownloadableFile = (filename = "", text = "") => {
+      var element = document.createElement("a");
+      element.setAttribute(
+        "href",
+        "data:text/plain;charset=utf-8," + encodeURIComponent(text)
+      );
+      element.setAttribute("download", filename);
+
+      element.style.display = "none";
+      document.body.appendChild(element);
+
+      element.click();
+
+      document.body.removeChild(element);
+    };
+
+    /** @type { Log['get'] } */
+    const get = () => JSON.parse(localStorage.getItem(KEY) || "[]");
+
+    const log_lines = get();
+
+    /**
+     * Gets the size of a localstorage slot.
+     * @param {string} key
+     * @returns the size of the data in kilobytes
+     */
+    const getLocalStorageSizeOf = (key) => () =>
+      (((localStorage.getItem(key) || "").length + key.length) * 2) / 1024;
+
+    const getLocalStorageSize = getLocalStorageSizeOf(KEY);
+
+    /** @type { Log['download'] } */
+    const download = () =>
+      generateDownloadableFile(
+        `gdquest-${Date.now()}.log`,
+        localStorage.getItem(KEY)
+      );
 
     const makeLogFunction =
       (level = LEVELS.INFO) =>
@@ -199,23 +236,30 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
         }
       };
 
-    /** @type { Log['get'] } */
-    const get = () => JSON.parse(localStorage.getItem(KEY) || "[]");
-
     /** @type { Log['display'] } */
     const display = () => console.table(get());
 
+    /** @type { Log['clear'] } */
     const clear = () => {
       localStorage.removeItem(KEY);
       console.info("log cleared");
     };
 
+    /** @type { Log['trimIfOverLimit'] } */
+    const trimIfOverLimit = (maxKiloBytes = 1000) => {
+      while (getLocalStorageSize() > maxKiloBytes) {
+        log_lines.shift();
+        localStorage.setItem(KEY, JSON.stringify(log_lines));
+      }
+    };
+
     /** @type { Log } */
     // @ts-ignore
-    const log = { display, clear, get };
+    const log = { display, clear, get, trimIfOverLimit, download };
     Object.keys(LEVELS).forEach(
       (key) => (log[key.toLowerCase()] = makeLogFunction(LEVELS[key]))
     );
+
     GDQUEST.log = log;
   }
 

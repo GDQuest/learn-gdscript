@@ -13,6 +13,7 @@ var also_print_to_godot := false;
 var _js_available := OS.has_feature("JavaScript")
 var GDQUEST: JavaScriptObject
 
+
 func write(level: int, properties: Dictionary, message: String) -> void:
 	if also_print_to_godot and OS.is_debug_build():
 		var level_index := LEVEL.values().find(level)
@@ -60,22 +61,49 @@ func _init() -> void:
 	if not _js_available:
 		return
 	GDQUEST = JavaScript.get_interface("GDQUEST")
+	if not GDQUEST:
+		_js_available = false
+		return
+	trim_if_over_limit()
 
 
 func trace(properties: Dictionary, message: String) -> void:
 	write(LEVEL.TRACE, properties, message)
 
+
 func debug(properties: Dictionary, message: String) -> void:
 	write(LEVEL.DEBUG, properties, message)
+
 
 func info(properties: Dictionary, message: String) -> void:
 	write(LEVEL.INFO, properties, message)
 
+
 func warn(properties: Dictionary, message: String) -> void:
 	write(LEVEL.WARN, properties, message)
+
 
 func error(properties: Dictionary, message: String) -> void:
 	write(LEVEL.ERROR, properties, message)
 
+
 func fatal(properties: Dictionary, message: String) -> void:
 	write(LEVEL.FATAL, properties, message)
+
+
+# Prompts a file download to the user in a web environment. Safe to call in all
+# environments, will no-op when JS is not available.
+func download() -> void:
+	if not _js_available:
+		return
+	# warning-ignore:unsafe_property_access
+	GDQUEST.log.download()
+
+
+# Makes sure the log doesn't fill user's localStorage. Safe to call in all 
+# environments, will no-op when JS is not available.
+func trim_if_over_limit(max_kilo_bytes := 1000) -> void:
+	if not _js_available:
+		return
+	# warning-ignore:unsafe_property_access
+	GDQUEST.log.trimIfOverLimit(max_kilo_bytes)
