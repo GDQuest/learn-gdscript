@@ -133,9 +133,13 @@ func _test_student_code() -> void:
 
 	var script_is_valid = script.reload()
 	if script_is_valid != OK:
+		var error := error_lsp_silent()
 		MessageBus.print_error(
-			"The script has an error, but the language server didn't catch it. Are you connected?",
-			script_file_name
+			error.message,
+			script_file_name,
+			error.error_range.start.line,
+			error.error_range.start.character,
+			error.code
 		)
 		_code_editor.enable_buttons()
 		return
@@ -267,3 +271,11 @@ static func try_validate_and_replace_script(node: Node, script: Script) -> void:
 	if node.has_method("_run"):
 		# warning-ignore:unsafe_method_access
 		node._run()
+
+
+static func error_lsp_silent() -> LanguageServerError:
+		var err = LanguageServerError.new()
+		err.message = "Oh no! The script has an error, but the Script Verifier Server did not catch it"
+		err.severity = 1
+		err.code = GDQuestCodes.ErrorCode.LSP_UNDETECTED_ERROR
+		return err

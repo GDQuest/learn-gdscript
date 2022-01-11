@@ -104,7 +104,9 @@ func _parse_csv_file(file: File) -> Dictionary:
 			error_value = GDScriptCodes.WarningCode[error_code]
 		elif GDScriptCodes.ErrorCode.has(error_code):
 			error_value = GDScriptCodes.ErrorCode[error_code]
-
+		elif GDQuestCodes.ErrorCode.has(error_code):
+			error_value = GDQuestCodes.ErrorCode[error_code]
+		
 		# It seems that the name of the error in the CSV file is invalid, reporting and skipping.
 		if error_value == -1:
 			printerr(

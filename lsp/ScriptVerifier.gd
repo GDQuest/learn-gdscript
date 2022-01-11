@@ -38,6 +38,7 @@ const LanguageServerError := preload("./LanguageServerError.gd")
 const http_request_name = "___HTTP_REQUEST___"
 const WarningCode := GDScriptCodes.WarningCode
 const ErrorCode := GDScriptCodes.ErrorCode
+const GDQuestErrorCode := GDQuestCodes.ErrorCode
 # Skip errors with a severity warning above this. The lower the number,
 # the more dire the error. Defaults to `2`, which includes errors and
 # warnings
@@ -101,9 +102,13 @@ func _on_http_request_completed(
 	}, "finished request")
 	
 	if result != HTTPRequest.RESULT_SUCCESS:
-		var error_name: String = HTTP_RESULT_ERRORS[result]
-		printerr("http error connecting to %s: [%s]"%[_url, error_name])
-		emit_signal("errors", [])
+		var error: LanguageServerError
+		if result == HTTPRequest.RESULT_TIMEOUT:
+			error = error_connection_timed_out()
+		else:
+			var error_name: String = HTTP_RESULT_ERRORS[result]
+			error = error_cannot_connect(_url, error_name)
+		emit_errors([error])
 		return
 		
 	var response = (
@@ -122,7 +127,7 @@ func _on_http_request_completed(
 	var errors = []
 
 	if not response.size():
-		emit_signal("errors", errors)
+		emit_errors()
 		return
 
 	for index in response.size():
@@ -134,7 +139,7 @@ func _on_http_request_completed(
 			continue
 		errors.append(error)
 
-	emit_signal("errors", errors)
+	emit_errors(errors)
 
 
 # This requests the LSP server for checking the provided file
@@ -159,11 +164,13 @@ func test() -> void:
 	if success != OK:
 		push_error("could not connect")
 		remove_http_request_node()
-		var error := LanguageServerError.new()
-		error.message = "Could not initiate an http connection"
-		error.code = -1
-		var errors := [error]
-		emit_signal("errors", errors)
+		var error := error_no_connection()
+		emit_errors([error])
+		return
+
+
+func emit_errors(errors := []) -> void:
+	emit_signal("errors", errors)
 
 # Tests a script to ensure it has no errors.
 # Only works in exported projects. When running in the editor,
@@ -173,3 +180,27 @@ static func test_file(current_file_name: String) -> bool:
 	var test_file := load(current_file_name) as GDScript
 	var test_instance = test_file.new()
 	return test_instance != null
+
+
+static func error_cannot_connect(url: String, error_name: String) -> LanguageServerError:
+	var err = LanguageServerError.new()
+	err.message = "Cannot connect to '%s' (%s). Are you sure you are connected?"%[url, error_name]
+	err.severity = 1
+	err.code = GDQuestErrorCode.CANNOT_CONNECT_TO_LSP
+	return err
+
+
+static func error_no_connection() -> LanguageServerError:
+	var err = LanguageServerError.new()
+	err.message = "Failed to initiate a connection"
+	err.severity = 1
+	err.code = GDQuestErrorCode.CANNOT_INITIATE_CONNECTION
+	return err
+
+
+static func error_connection_timed_out() -> LanguageServerError:
+	var err = LanguageServerError.new()
+	err.message = "Connection timed out"
+	err.severity = 1
+	err.code = GDQuestErrorCode.LSP_TIMED_OUT
+	return err
