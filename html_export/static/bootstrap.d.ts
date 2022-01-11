@@ -23,7 +23,8 @@ interface Log {
   display: () => void;
   clear: () => void;
   download: () => void;
-  trimIfOverLimit: (maxKiloBytes?: number) => void;
+  trimIfOverLimit: (maxKiloBytes?: number) => boolean;
+  logSystemInfoIfLogIsEmpty: (additionalData?: Record<string, any>) => void;
   get: () => LogLine[];
 }
 interface GodotEngineInstanceStartGameOptions {

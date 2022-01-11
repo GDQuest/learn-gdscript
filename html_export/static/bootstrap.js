@@ -71,7 +71,6 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
      */
     const onProgress = (current, total) => {
       if (total > 0) {
-        console.info("loading...", total);
         setStatusMode(StatusMode.PROGRESS);
         displayPercentage(current / total);
         if (current === total) {
@@ -214,8 +213,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
           } else {
             console.log(msg);
           }
-        }
-        if (level < 40) {
+        } else if (level < 40) {
           if (anything) {
             console.info(msg, anything);
           } else {
@@ -247,15 +245,43 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
 
     /** @type { Log['trimIfOverLimit'] } */
     const trimIfOverLimit = (maxKiloBytes = 1000) => {
+      let response = false;
       while (getLocalStorageSize() > maxKiloBytes) {
         log_lines.shift();
         localStorage.setItem(KEY, JSON.stringify(log_lines));
+        response = true;
+      }
+      return response;
+    };
+
+    const logSystemInfoIfLogIsEmpty = (additionalData = {}) => {
+      if (log_lines.length == 0) {
+        const { userAgent, vendor } = navigator;
+        const { width, height } = screen;
+        const { innerHeight, innerWidth } = window;
+        const data = {
+          userAgent,
+          vendor,
+          width,
+          height,
+          innerHeight,
+          innerWidth,
+          ...additionalData,
+        };
+        makeLogFunction(LEVELS.TRACE)(data, `INIT`);
       }
     };
 
     /** @type { Log } */
     // @ts-ignore
-    const log = { display, clear, get, trimIfOverLimit, download };
+    const log = {
+      display,
+      clear,
+      get,
+      trimIfOverLimit,
+      download,
+      logSystemInfoIfLogIsEmpty,
+    };
     Object.keys(LEVELS).forEach(
       (key) => (log[key.toLowerCase()] = makeLogFunction(LEVELS[key]))
     );
