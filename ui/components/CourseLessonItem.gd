@@ -69,6 +69,11 @@ func _update_visuals() -> void:
 	_title_label.text = lesson_title
 	_progress_bar.value = completion
 	hint_tooltip = lesson_title
+	
+	if completion == 0:
+		_title_label.modulate.a = 0.65
+	else:
+		_title_label.modulate.a = 1.0
 
 
 func _on_mouse_entered() -> void:

@@ -144,6 +144,7 @@ func _navigate_to() -> void:
 		return
 
 	_outliner_button.show()
+	_home_button.hide()
 	_screen_container.show()
 	# warning-ignore:unsafe_method_access
 	screen.setup(target, course)
@@ -172,7 +173,6 @@ func _navigate_to() -> void:
 		yield(_tween, "tween_all_completed")
 
 	_course_outliner.hide()
-	_home_button.hide()
 	
 	if target is Practice:
 		Events.emit_signal("practice_started", target)

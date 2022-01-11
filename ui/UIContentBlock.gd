@@ -2,7 +2,7 @@
 #
 # The block has a transparent background by default, except when inside a Revealer.
 class_name UIContentBlock
-extends Control
+extends PanelContainer
 
 # Margin to apply to the panel in pixels when the block is inside a revealer.
 const MARGIN := 16

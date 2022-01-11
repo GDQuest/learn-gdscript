@@ -24,6 +24,7 @@ func _ready() -> void:
 	_update_outliner_index()
 	
 	Events.connect("lesson_started", self, "_on_lesson_started")
+	Events.connect("lesson_reading_block", self, "_on_lesson_reading_block")
 	Events.connect("quiz_completed", self, "_on_quiz_completed")
 	Events.connect("practice_started", self, "_on_practice_started")
 	Events.connect("practice_completed", self, "_on_practice_completed")
@@ -77,10 +78,12 @@ func _update_outliner_index() -> void:
 
 func _calculate_lesson_completion(lesson_data: Lesson, lesson_progress: LessonProgress) -> int:
 	var completion := 0
-	var max_completion := 1 + lesson_data.practices.size() + lesson_data.get_quizzes_count()
+	var max_completion := lesson_data.content_blocks.size() + lesson_data.practices.size() + lesson_data.get_quizzes_count()
 	
 	if lesson_progress.completed_reading:
-		completion += 1
+		completion += lesson_data.content_blocks.size()
+	else:
+		completion += lesson_progress.get_completed_blocks_count(lesson_data.content_blocks)
 	
 	completion += lesson_progress.get_completed_quizzes_count(lesson_data.get_quizzes())
 	completion += lesson_progress.get_completed_practices_count(lesson_data.practices)
@@ -100,6 +103,8 @@ func _on_lesson_selected(lesson_index: int) -> void:
 		user_profile.get_or_create_lesson(course.resource_path, lesson_data.resource_path) as LessonProgress
 	)
 	_lesson_details.lesson_progress = lesson_progress
+	
+	_lesson_details.has_started = _calculate_lesson_completion(lesson_data, lesson_progress) > 0
 	_lesson_details.show()
 
 	_last_selected_lesson = lesson_data.resource_path
@@ -113,6 +118,19 @@ func _on_lesson_started(lesson_data: Lesson) -> void:
 	
 	var user_profile = UserProfiles.get_profile()
 	user_profile.set_last_started_lesson(course.resource_path, _current_lesson.resource_path)
+	_update_outliner_index()
+
+
+func _on_lesson_reading_block(block_data: Resource, previous_blocks: Array = []) -> void:
+	if not _current_lesson:
+		return
+	
+	var user_profile = UserProfiles.get_profile()
+	# Ensure that all previous blocks are also considered as read.
+	for prev_block_data in previous_blocks:
+		user_profile.set_lesson_reading_block(course.resource_path, _current_lesson.resource_path, prev_block_data.resource_path)
+	# Then set the last block.
+	user_profile.set_lesson_reading_block(course.resource_path, _current_lesson.resource_path, block_data.resource_path)
 	_update_outliner_index()
 
 
