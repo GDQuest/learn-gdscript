@@ -56,6 +56,7 @@ var _new_script_text: String
 var _url: String
 var _new_script_filename: String
 var _start_time := OS.get_unix_time()
+var _start_time_ms := OS.get_ticks_msec()
 
 func _init(attached_node: Node, new_script_filename: String, new_script_text: String, url := SERVER_URL) -> void:
 	
@@ -87,8 +88,8 @@ func _on_http_request_completed(
 	result: int, response_code: int, _headers: PoolStringArray, body: PoolByteArray
 ) -> void:
 
-	var end := OS.get_unix_time()
-	var elapsed := end - _start_time
+	var elapsed := OS.get_ticks_msec() - _start_time_ms
+	var end := _start_time * 1000 + elapsed
 	
 	Log.info({
 		"end": end,
