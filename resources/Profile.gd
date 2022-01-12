@@ -167,6 +167,9 @@ func reset_course_progress(course_id: String) -> void:
 	var course_progress := get_or_create_course(course_id)
 	course_progress.reset()
 	
+	if last_visible_lesson_block.has(course_id):
+		last_visible_lesson_block.erase(course_id)
+	
 	if last_started_lesson.has(course_id):
 		last_started_lesson.erase(course_id)
 	
