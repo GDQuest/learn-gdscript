@@ -142,7 +142,7 @@ func _test_student_code() -> void:
 
 	var script_is_valid = script.reload()
 	if script_is_valid != OK:
-		var error := error_lsp_silent()
+		var error := make_error_lsp_silent()
 		MessageBus.print_error(
 			error.message,
 			script_file_name,
@@ -259,30 +259,75 @@ func _set_script_slice(new_slice: SliceProperties) -> void:
 	_output_console.setup(_script_slice)
 
 
-static func try_validate_and_replace_script(node: Node, script: Script) -> void:
+# If a script is valid, sets in the node. Optionally restores variables and 
+# optionally calls _run()
+# @param node         Node                  any valid node
+# @param script       GDScript              A GDScript instance
+# @param props_backup Dictionary[string, *] An optional dictionary of properties
+#                                           to restore before calling `_run()`
+static func try_validate_and_replace_script(node: Node, script: GDScript, props_backup := {}) -> void:
 	if not script.can_instance():
 		var error_code := script.reload()
 		if not script.can_instance():
 			print("Script errored out (code %s); skipping replacement" % [error_code])
 			return
-
-	var props := {}
-	for prop in node.get_property_list():
-		if prop.name == "script":
-			continue
-		props[prop.name] = node.get(prop.name)
+	
+	var parent = node.get_parent()
+	parent.remove_child(node)
+	node.request_ready()
+	
 	node.set_script(script)
-
-	for prop in props:
-		if prop in node:  # In case a property is removed
-			node.set(prop, props[prop])
-
+	
+	parent.add_child(node)
+	
+	# props_backup = backup_node_properties(node)
+	
+	if props_backup.size() > 0:
+		set_node_properties(node, props_backup)
+	
 	if node.has_method("_run"):
 		# warning-ignore:unsafe_method_access
 		node._run()
 
 
-static func error_lsp_silent() -> LanguageServerError:
+# Saves all the node's properties in a dictionary. Useful in case you want to
+# change back properties of a node after setting a script
+# You can optionally pass an array of property names you want (any property you
+# do not specify will be left out)
+# @param node              Node            any valid node
+# @param select_properties PoolStringArray an array of property names. Leave it 
+#                                          out (or pass an empty array) to select
+#                                          all properties
+static func backup_node_properties(node: Node, select_properties := PoolStringArray()) -> Dictionary:
+	var props_backup := {}
+	var node_original_props := node.get_property_list()
+	var select_all := select_properties.size() == 0
+	var select_cache := {}
+	for prop_name in select_properties:
+		select_cache[prop_name] = true
+	for prop in node_original_props:
+		var prop_name: String = prop.name
+		if prop_name == "script":
+			continue
+		if select_all or (prop_name in select_cache):
+			props_backup[prop_name] = node.get(prop_name)
+	return props_backup
+
+
+# Sets a node's properties from a dictionary. Intended to be used after having 
+# saved them prior to changing the script
+static func set_node_properties(node: Node, props_backup: Dictionary) -> void:
+	for prop_name in props_backup:
+		if not (prop_name in node):  # In case a property is removed
+			continue
+		var current_value = node.get(prop_name)
+		var backed_up_value = props_backup[prop_name]
+		if current_value == backed_up_value:
+			continue
+		node.set(prop_name, backed_up_value)
+
+
+static func make_error_lsp_silent() -> LanguageServerError:
 		var err = LanguageServerError.new()
 		err.message = "Oh no! The script has an error, but the Script Verifier Server did not catch it"
 		err.severity = 1
