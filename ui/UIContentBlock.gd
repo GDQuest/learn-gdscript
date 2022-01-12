@@ -6,6 +6,7 @@ extends MarginContainer
 
 # Margin to apply to the panel in pixels when the block is inside a revealer.
 const REVEALER_MARGIN := 16
+const CONSTANT_BOTTOM_MARGIN := 10
 # Minimum width of the block before the visual content is hidden (doesn't apply to standalone visuals).
 const VISUAL_VISIBLE_MIN_WIDTH := 500.0
 
@@ -38,6 +39,8 @@ func setup(content_block: ContentBlock) -> void:
 	if _content_block.type == ContentBlock.Type.PLAIN:
 		_content_header.visible = not _content_block.title.empty()
 		_content_header.text = _content_block.title
+		
+		_content_margin.add_constant_override("margin_bottom", CONSTANT_BOTTOM_MARGIN)
 	else:
 		_content_header.visible = false
 		_make_revealer()
@@ -75,7 +78,7 @@ func _make_revealer() -> void:
 	_content_margin.add_constant_override("margin_left", REVEALER_MARGIN)
 	_content_margin.add_constant_override("margin_right", REVEALER_MARGIN)
 	_content_margin.add_constant_override("margin_top", REVEALER_MARGIN)
-	_content_margin.add_constant_override("margin_bottom", REVEALER_MARGIN)
+	_content_margin.add_constant_override("margin_bottom", REVEALER_MARGIN + CONSTANT_BOTTOM_MARGIN)
 
 
 func _make_visual_element() -> void:
