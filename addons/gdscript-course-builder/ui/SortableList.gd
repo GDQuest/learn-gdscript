@@ -29,7 +29,7 @@ const DRAG_POSITION_SIZE := 8.0
 const INSERT_AREA_SIZE := 24.0
 const INSERT_AREA_WIDTH := 12.0
 const INSERT_AREA_BULB := 12.0
-const INSERT_AREA_TIME := 0.75
+const INSERT_AREA_TIME := 0.5
 
 const INSERT_AREA_ICON := preload("res://addons/gdscript-course-builder/icons/insert-content-block.png")
 
