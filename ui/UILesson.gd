@@ -10,9 +10,7 @@ const ContentBlockScene := preload("UIContentBlock.tscn")
 const QuizInputFieldScene := preload("quizzes/UIQuizInputField.tscn")
 const QuizChoiceScene := preload("quizzes/UIQuizChoice.tscn")
 const PracticeButtonScene := preload("UIPracticeButton.tscn")
-const RevealerScene := preload("components/Revealer.tscn")
 
-const COLOR_NOTE := Color(0.14902, 0.776471, 0.968627)
 const AUTOSCROLL_PADDING := 20
 
 export var test_lesson: Resource
@@ -83,45 +81,26 @@ func setup(lesson: Lesson, course: Course) -> void:
 	for block in lesson.content_blocks:
 		if block is ContentBlock:
 			var instance: UIContentBlock = ContentBlockScene.instance()
+			_content_blocks.add_child(instance)
 			instance.setup(block)
-			if block.type == ContentBlock.Type.PLAIN:
-				_content_blocks.add_child(instance)
-				instance.hide()
-				
-				if restore_id == block.resource_path:
-					restore_node = instance
-			else:
-				var revealer := RevealerScene.instance() as Revealer
-				revealer.hide()
-				if block.type == ContentBlock.Type.NOTE:
-					revealer.text_color = COLOR_NOTE
-					revealer.title = "Note"
-				else:
-					revealer.title = "Learn More"
-
-				revealer.padding = 0.0
-				revealer.first_margin = 0.0
-				revealer.children_margin = 0.0
-				_content_blocks.add_child(revealer)
-				revealer.add_child(instance)
-				instance.set_draw_panel(true)
-				
-				if restore_id == block.resource_path:
-					restore_node = revealer
+			instance.hide()
+			
+			if restore_id == block.resource_path:
+				restore_node = instance
 
 		elif block is Quiz:
+			var scene = QuizInputFieldScene if block is QuizInputField else QuizChoiceScene
+			var instance = scene.instance()
+			_content_blocks.add_child(instance)
+			instance.setup(block)
+			instance.hide()
+
 			var completed_before := false
 			if course:
 				completed_before = user_profile.is_lesson_quiz_completed(course.resource_path, lesson.resource_path, block.resource_path)
 				if completed_before:
 					_quizzes_done += 1
-			
-			var scene = QuizInputFieldScene if block is QuizInputField else QuizChoiceScene
-			var instance = scene.instance()
-			_content_blocks.add_child(instance)
-			instance.setup(block)
 			instance.completed_before = completed_before
-			instance.hide()
 			
 			instance.connect("quiz_passed", Events, "emit_signal", ["quiz_completed", block])
 			instance.connect("quiz_passed", self, "_reveal_up_to_next_quiz")
