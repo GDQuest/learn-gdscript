@@ -3,6 +3,32 @@
 "use strict";
 
 window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
+  events: {
+    const makeSignal = () => {
+      const listeners = new Set();
+      /**
+       * @param {(...args) => void } fn
+       * @returns
+       */
+      const disconnect = (fn) => listeners.delete(fn);
+      /**
+       * @param {(...args) => void } fn
+       */
+      const connect = (fn) => {
+        listeners.add(fn);
+        return () => disconnect(fn);
+      };
+      const emit = (...args) => listeners.forEach((fn) => fn(...args));
+      /** @type { Signal } */
+      const signal = { disconnect, connect, emit };
+      return signal;
+    };
+
+    GDQUEST.events = {
+      onError: makeSignal(),
+    };
+  }
+
   loadingControl: {
     let is_done = false;
 
@@ -94,12 +120,28 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       }, 200);
     };
 
+    const onPrintError = (/** @type {any[]} */ ...args) => {
+      if (args[0] instanceof Error) {
+        const { message } = args[0];
+        if (/Maximum call stack size exceeded/.test(message)) {
+          GDQUEST.events.onError.emit("RECURSIVE");
+        }
+      } else if (typeof args[0] === "string") {
+        if (/Maximum call stack size exceeded/.test(args[0])) {
+          GDQUEST.events.onError.emit("RECURSIVE");
+        }
+      } else {
+        console.error(...args);
+      }
+    };
+
     /**
      * Instanciates the engine, starts the package
      */
     const load = () => {
       setStatusMode(StatusMode.INDETERMINATE);
       GODOT_CONFIG.canvasResizePolicy = 0;
+      GODOT_CONFIG.onPrintError = onPrintError;
       const engine = new Engine(GODOT_CONFIG);
       engine
         .startGame({ onProgress })

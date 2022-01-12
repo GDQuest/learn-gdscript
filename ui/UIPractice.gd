@@ -32,6 +32,8 @@ onready var _code_editor := find_node("CodeEditor") as CodeEditor
 onready var _info_panel_control := $Margin/Layout/Control as Control
 onready var _tween := $Tween as Tween
 
+func _init():
+	_on_init_set_javascript()
 
 func _ready() -> void:
 	randomize()
@@ -286,3 +288,28 @@ static func error_lsp_silent() -> LanguageServerError:
 		err.severity = 1
 		err.code = GDQuestCodes.ErrorCode.LSP_UNDETECTED_ERROR
 		return err
+
+
+###############################################################################
+#
+# JS INTERFACE
+# the below intends to listen to the `RECURSIVE` error event dispatched back 
+# from JS and react to it
+# 
+
+# JS error event listener
+var _on_js_error_feedback_ref = JavaScript.create_callback(self, "_on_js_error_feedback")
+
+
+# This will be called from Javascript
+func _on_js_error_feedback(args):
+	var code = args[0]
+	if code is String and code == 'RECURSIVE':
+		print("recursive code")
+
+
+# Set the event listener
+func _on_init_set_javascript() -> void:
+	if OS.has_feature('JavaScript'):
+		var GDQUEST = JavaScript.get_interface("GDQUEST")
+		GDQUEST.events.onError.connect(_on_js_error_feedback_ref)

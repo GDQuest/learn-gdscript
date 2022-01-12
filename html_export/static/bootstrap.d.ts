@@ -2,6 +2,15 @@ interface GDQuestLib {
   startLoading: () => void;
   displayFailureNotice: (err: Error | string) => void;
   log: Log;
+  events: {
+    onError: Signal;
+  };
+}
+
+interface Signal {
+  disconnect: (fn: (...args: any[]) => void) => boolean;
+  connect: (fn: (...args: any[]) => void) => () => boolean;
+  emit: (...args: any[]) => void;
 }
 
 interface LogFunction {
@@ -13,6 +22,7 @@ interface LogLine extends Record<string, any> {
   level: number;
   msg: string;
 }
+
 interface Log {
   trace: LogFunction;
   debug: LogFunction;
@@ -37,6 +47,17 @@ declare class GodotEngineInstance {
 
 declare const GODOT_CONFIG: {
   canvasResizePolicy: number;
+  unloadAfterInit: bool;
+  canvas: HTMLCanvasElement;
+  executable: string;
+  mainPack: string;
+  locale: string;
+  args: string[];
+  onExecute: (path: string, args: string[]) => void;
+  onExit: (status_code: number) => void;
+  onProgress: (current: number, total: number) => void;
+  onPrint: (...args: any[]) => void;
+  onPrintError: (...args: any[]) => void;
 };
 
 declare const Engine: {
