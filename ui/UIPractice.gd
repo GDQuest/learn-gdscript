@@ -124,8 +124,15 @@ func _test_student_code() -> void:
 				error.error_range.start.character,
 				error.code
 			)
-		_code_editor.enable_buttons()
-		return
+		# if the user could not connect to the server, still try to
+		# run their code
+		var is_connection_error: bool = (
+			errors.size() == 1 and \
+			ScriptVerifier.check_error_is_connection_error(errors[0])
+		)
+		if not is_connection_error:
+			_code_editor.enable_buttons()
+			return
 
 	script_text = MessageBus.replace_script(script_file_name, script_text)
 	var script = GDScript.new()

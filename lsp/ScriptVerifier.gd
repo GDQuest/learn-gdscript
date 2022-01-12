@@ -104,10 +104,10 @@ func _on_http_request_completed(
 	if result != HTTPRequest.RESULT_SUCCESS:
 		var error: LanguageServerError
 		if result == HTTPRequest.RESULT_TIMEOUT:
-			error = error_connection_timed_out()
+			error = make_error_connection_timed_out()
 		else:
 			var error_name: String = HTTP_RESULT_ERRORS[result]
-			error = error_cannot_connect(_url, error_name)
+			error = make_error_cannot_connect(_url, error_name)
 		emit_errors([error])
 		return
 		
@@ -164,7 +164,7 @@ func test() -> void:
 	if success != OK:
 		push_error("could not connect")
 		remove_http_request_node()
-		var error := error_no_connection()
+		var error := make_error_no_connection()
 		emit_errors([error])
 		return
 
@@ -182,7 +182,7 @@ static func test_file(current_file_name: String) -> bool:
 	return test_instance != null
 
 
-static func error_cannot_connect(url: String, error_name: String) -> LanguageServerError:
+static func make_error_cannot_connect(url: String, error_name: String) -> LanguageServerError:
 	var err = LanguageServerError.new()
 	err.message = "Cannot connect to '%s' (%s). Are you sure you are connected?"%[url, error_name]
 	err.severity = 1
@@ -190,7 +190,7 @@ static func error_cannot_connect(url: String, error_name: String) -> LanguageSer
 	return err
 
 
-static func error_no_connection() -> LanguageServerError:
+static func make_error_no_connection() -> LanguageServerError:
 	var err = LanguageServerError.new()
 	err.message = "Failed to initiate a connection"
 	err.severity = 1
@@ -198,9 +198,17 @@ static func error_no_connection() -> LanguageServerError:
 	return err
 
 
-static func error_connection_timed_out() -> LanguageServerError:
+static func make_error_connection_timed_out() -> LanguageServerError:
 	var err = LanguageServerError.new()
 	err.message = "Connection timed out"
 	err.severity = 1
 	err.code = GDQuestErrorCode.LSP_TIMED_OUT
 	return err
+
+
+static func check_error_is_connection_error(error: LanguageServerError) -> bool:
+	return (
+		error.code == GDQuestCodes.ErrorCode.CANNOT_CONNECT_TO_LSP or \
+		error.code == GDQuestCodes.ErrorCode.CANNOT_INITIATE_CONNECTION or \
+		error.code == GDQuestCodes.ErrorCode.LSP_TIMED_OUT
+	)
