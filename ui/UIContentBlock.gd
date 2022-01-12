@@ -4,9 +4,6 @@
 class_name UIContentBlock
 extends MarginContainer
 
-# Margin to apply to the panel in pixels when the block is inside a revealer.
-const REVEALER_MARGIN := 16
-const CONSTANT_BOTTOM_MARGIN := 10
 # Minimum width of the block before the visual content is hidden (doesn't apply to standalone visuals).
 const VISUAL_VISIBLE_MIN_WIDTH := 500.0
 
@@ -39,8 +36,6 @@ func setup(content_block: ContentBlock) -> void:
 	if _content_block.type == ContentBlock.Type.PLAIN:
 		_content_header.visible = not _content_block.title.empty()
 		_content_header.text = _content_block.title
-		
-		_content_margin.add_constant_override("margin_bottom", CONSTANT_BOTTOM_MARGIN)
 	else:
 		_content_header.visible = false
 		_make_revealer()
@@ -50,41 +45,32 @@ func setup(content_block: ContentBlock) -> void:
 
 	if _content_block.visual_element_path != "":
 		_make_visual_element()
-	
+
 	_content_separator.visible = _content_block.has_separator
 
 
 func _make_revealer() -> void:
 	if _content_block.type == ContentBlock.Type.PLAIN:
 		return
-	
+
 	var revealer := RevealerScene.instance() as Revealer
-	revealer.padding = 0.0
-	revealer.first_margin = 0.0
-	revealer.children_margin = 0.0
-	
+	revealer.title_panel = preload("theme/revealer_notes_title.tres")
+	revealer.title_panel_expanded = preload("theme/revealer_notes_title_expanded.tres")
+	revealer.content_panel = preload("theme/revealer_notes_panel.tres")
+
 	if _content_block.type == ContentBlock.Type.NOTE:
-		revealer.text_color = COLOR_NOTE
-		revealer.title = "Note" if _content_block.title.empty() else _content_block.title
-	else:
-		revealer.title = "Learn More" if _content_block.title.empty() else _content_block.title
+		revealer.title_font_color = COLOR_NOTE
+	revealer.title = "Learn More" if _content_block.title.empty() else _content_block.title
 
 	remove_child(_content_root)
 	add_child(revealer)
 	revealer.add_child(_content_root)
-	
-	_content_root.set_anchors_and_margins_preset(Control.PRESET_WIDE, Control.PRESET_MODE_MINSIZE)
-	_content_root.add_stylebox_override("panel", preload("theme/panel_content_in_spoiler.tres"))
-	_content_margin.add_constant_override("margin_left", REVEALER_MARGIN)
-	_content_margin.add_constant_override("margin_right", REVEALER_MARGIN)
-	_content_margin.add_constant_override("margin_top", REVEALER_MARGIN)
-	_content_margin.add_constant_override("margin_bottom", REVEALER_MARGIN + CONSTANT_BOTTOM_MARGIN)
 
 
 func _make_visual_element() -> void:
 	if _content_block.visual_element_path.empty():
 		return
-	
+
 	# If the path isn't absolute, we try to load the file from the current directory
 	var path := _content_block.visual_element_path
 	if path.is_rel_path():
@@ -108,7 +94,7 @@ func _make_visual_element() -> void:
 			)
 		)
 		return
-	
+
 	# As this is a box container, we can reverse the order of elements by
 	# raising the panel.
 	if _content_block.reverse_blocks and is_instance_valid(_visual_element):
