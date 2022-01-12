@@ -111,6 +111,14 @@ func _test_student_code() -> void:
 	var nodes_paths := _script_slice.get_script_properties().nodes_paths
 	var script_file_path := _script_slice.get_script_properties().file_path.lstrip("res://")
 	
+	var recursive_function := MiniGDScriptTokenizer.new(script_text).are_there_a_recursive_function()
+	
+	if recursive_function != "":
+		var error = make_error_recursive_function(recursive_function)
+		MessageBus.print_lsp_error(error, script_file_name)
+		_code_editor.enable_buttons()
+		return
+	
 	var verifier := ScriptVerifier.new(self, script_file_path, script_text)
 	verifier.test()
 
@@ -119,13 +127,7 @@ func _test_student_code() -> void:
 		_code_editor.slice_editor.errors = errors
 		for index in errors.size():
 			var error: LanguageServerError = errors[index]
-			MessageBus.print_error(
-				error.message,
-				script_file_name,
-				error.error_range.start.line,
-				error.error_range.start.character,
-				error.code
-			)
+			MessageBus.print_lsp_error(error, script_file_name)
 		# if the user could not connect to the server, still try to
 		# run their code
 		var is_connection_error: bool = (
@@ -143,13 +145,7 @@ func _test_student_code() -> void:
 	var script_is_valid = script.reload()
 	if script_is_valid != OK:
 		var error := make_error_lsp_silent()
-		MessageBus.print_error(
-			error.message,
-			script_file_name,
-			error.error_range.start.line,
-			error.error_range.start.character,
-			error.code
-		)
+		MessageBus.print_lsp_error(error, script_file_name)
 		_code_editor.enable_buttons()
 		return
 
@@ -333,6 +329,14 @@ static func make_error_lsp_silent() -> LanguageServerError:
 		err.severity = 1
 		err.code = GDQuestCodes.ErrorCode.LSP_UNDETECTED_ERROR
 		return err
+
+
+static func make_error_recursive_function(func_name: String) -> LanguageServerError:
+	var err = LanguageServerError.new()
+	err.message = "The function `%s` calls itself, this creates an infinite loop"%[func_name]
+	err.severity = 1
+	err.code = GDQuestCodes.ErrorCode.RECURSIVE_FUNCTION
+	return err
 
 
 ###############################################################################
