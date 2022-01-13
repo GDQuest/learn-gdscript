@@ -111,6 +111,14 @@ func _test_student_code() -> void:
 	var nodes_paths := _script_slice.get_script_properties().nodes_paths
 	var script_file_path := _script_slice.get_script_properties().file_path.lstrip("res://")
 	
+	var recursive_function := MiniGDScriptTokenizer.new(script_text).are_there_a_recursive_function()
+	
+	if recursive_function != "":
+		var error = make_error_recursive_function(recursive_function)
+		MessageBus.print_lsp_error(error, script_file_name)
+		_code_editor.enable_buttons()
+		return
+	
 	var verifier := ScriptVerifier.new(self, script_file_path, script_text)
 	verifier.test()
 
@@ -119,13 +127,7 @@ func _test_student_code() -> void:
 		_code_editor.slice_editor.errors = errors
 		for index in errors.size():
 			var error: LanguageServerError = errors[index]
-			MessageBus.print_error(
-				error.message,
-				script_file_name,
-				error.error_range.start.line,
-				error.error_range.start.character,
-				error.code
-			)
+			MessageBus.print_lsp_error(error, script_file_name)
 		# if the user could not connect to the server, still try to
 		# run their code
 		var is_connection_error: bool = (
@@ -142,14 +144,8 @@ func _test_student_code() -> void:
 
 	var script_is_valid = script.reload()
 	if script_is_valid != OK:
-		var error := error_lsp_silent()
-		MessageBus.print_error(
-			error.message,
-			script_file_name,
-			error.error_range.start.line,
-			error.error_range.start.character,
-			error.code
-		)
+		var error := make_error_lsp_silent()
+		MessageBus.print_lsp_error(error, script_file_name)
 		_code_editor.enable_buttons()
 		return
 
@@ -259,35 +255,88 @@ func _set_script_slice(new_slice: SliceProperties) -> void:
 	_output_console.setup(_script_slice)
 
 
-static func try_validate_and_replace_script(node: Node, script: Script) -> void:
+# If a script is valid, sets in the node. Optionally restores variables and 
+# optionally calls _run()
+# @param node         Node                  any valid node
+# @param script       GDScript              A GDScript instance
+# @param props_backup Dictionary[string, *] An optional dictionary of properties
+#                                           to restore before calling `_run()`
+static func try_validate_and_replace_script(node: Node, script: GDScript, props_backup := {}) -> void:
 	if not script.can_instance():
 		var error_code := script.reload()
 		if not script.can_instance():
 			print("Script errored out (code %s); skipping replacement" % [error_code])
 			return
-
-	var props := {}
-	for prop in node.get_property_list():
-		if prop.name == "script":
-			continue
-		props[prop.name] = node.get(prop.name)
+	
+	var parent = node.get_parent()
+	parent.remove_child(node)
+	node.request_ready()
+	
 	node.set_script(script)
-
-	for prop in props:
-		if prop in node:  # In case a property is removed
-			node.set(prop, props[prop])
-
+	
+	parent.add_child(node)
+	
+	# props_backup = backup_node_properties(node)
+	
+	if props_backup.size() > 0:
+		set_node_properties(node, props_backup)
+	
 	if node.has_method("_run"):
 		# warning-ignore:unsafe_method_access
 		node._run()
 
 
-static func error_lsp_silent() -> LanguageServerError:
+# Saves all the node's properties in a dictionary. Useful in case you want to
+# change back properties of a node after setting a script
+# You can optionally pass an array of property names you want (any property you
+# do not specify will be left out)
+# @param node              Node            any valid node
+# @param select_properties PoolStringArray an array of property names. Leave it 
+#                                          out (or pass an empty array) to select
+#                                          all properties
+static func backup_node_properties(node: Node, select_properties := PoolStringArray()) -> Dictionary:
+	var props_backup := {}
+	var node_original_props := node.get_property_list()
+	var select_all := select_properties.size() == 0
+	var select_cache := {}
+	for prop_name in select_properties:
+		select_cache[prop_name] = true
+	for prop in node_original_props:
+		var prop_name: String = prop.name
+		if prop_name == "script":
+			continue
+		if select_all or (prop_name in select_cache):
+			props_backup[prop_name] = node.get(prop_name)
+	return props_backup
+
+
+# Sets a node's properties from a dictionary. Intended to be used after having 
+# saved them prior to changing the script
+static func set_node_properties(node: Node, props_backup: Dictionary) -> void:
+	for prop_name in props_backup:
+		if not (prop_name in node):  # In case a property is removed
+			continue
+		var current_value = node.get(prop_name)
+		var backed_up_value = props_backup[prop_name]
+		if current_value == backed_up_value:
+			continue
+		node.set(prop_name, backed_up_value)
+
+
+static func make_error_lsp_silent() -> LanguageServerError:
 		var err = LanguageServerError.new()
 		err.message = "Oh no! The script has an error, but the Script Verifier Server did not catch it"
 		err.severity = 1
 		err.code = GDQuestCodes.ErrorCode.LSP_UNDETECTED_ERROR
 		return err
+
+
+static func make_error_recursive_function(func_name: String) -> LanguageServerError:
+	var err = LanguageServerError.new()
+	err.message = "The function `%s` calls itself, this creates an infinite loop"%[func_name]
+	err.severity = 1
+	err.code = GDQuestCodes.ErrorCode.RECURSIVE_FUNCTION
+	return err
 
 
 ###############################################################################

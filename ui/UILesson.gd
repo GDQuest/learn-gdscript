@@ -81,6 +81,7 @@ func setup(lesson: Lesson, course: Course) -> void:
 	for block in lesson.content_blocks:
 		if block is ContentBlock:
 			var instance: UIContentBlock = ContentBlockScene.instance()
+			instance.name = block.resource_path.get_file().get_basename()
 			_content_blocks.add_child(instance)
 			instance.setup(block)
 			instance.hide()
@@ -91,6 +92,7 @@ func setup(lesson: Lesson, course: Course) -> void:
 		elif block is Quiz:
 			var scene = QuizInputFieldScene if block is QuizInputField else QuizChoiceScene
 			var instance = scene.instance()
+			instance.name = block.resource_path.get_file().get_basename()
 			_content_blocks.add_child(instance)
 			instance.setup(block)
 			instance.hide()
