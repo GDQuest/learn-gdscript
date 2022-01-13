@@ -1,25 +1,17 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
-[ext_resource path="res://LevelUpRobot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://course/lesson-14-multiplying/visuals/LevelUpRobot.tscn" type="PackedScene" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
+onready var _animation_player := $AnimationPlayer
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func run():
-	$AnimationPlayer.play(\"level\")
+func run() -> void:
+	_animation_player.play(\"level\")
 "
 
 [node name="PanelContainer" type="PanelContainer"]
@@ -53,7 +45,6 @@ margin_right = 644.0
 margin_bottom = 260.0
 
 [node name="LevelUp" parent="RunnableCodeExample" instance=ExtResource( 2 )]
-position = Vector2( 0, 0 )
 script = SubResource( 1 )
 
 [editable path="RunnableCodeExample"]
