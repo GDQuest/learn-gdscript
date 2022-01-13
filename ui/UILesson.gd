@@ -154,7 +154,7 @@ func _reveal_up_to_next_quiz() -> void:
 		_practices_visibility_container.show()
 
 
-func _on_content_scrolled(value: float) -> void:
+func _on_content_scrolled(_value: float) -> void:
 	_debounce_timer.start()
 
 

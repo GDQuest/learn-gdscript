@@ -180,9 +180,9 @@ func _resort() -> void:
 		fit_child_in_rect(_toggle_bar, Rect2(bar_position, bar_size))
 		_update_icon_anchor()
 
-		content_offset = _toggle_bar.rect_size.y
+		content_offset = int(_toggle_bar.rect_size.y)
 		if _title_style:
-			content_offset += _title_style.get_margin(MARGIN_TOP) + _title_style.get_margin(MARGIN_BOTTOM)
+			content_offset += int(_title_style.get_margin(MARGIN_TOP) + _title_style.get_margin(MARGIN_BOTTOM))
 
 	var first := true
 	for child_node in get_children():
@@ -203,13 +203,13 @@ func _resort() -> void:
 		if first:
 			first = false
 			if content_panel:
-				content_offset += content_panel.get_margin(MARGIN_TOP)
+				content_offset += int(content_panel.get_margin(MARGIN_TOP))
 		else:
 			content_offset += content_separation
 		position.y = content_offset
 
 		fit_child_in_rect(control_node, Rect2(position, size))
-		content_offset += control_node.rect_size.y
+		content_offset += int(control_node.rect_size.y)
 
 
 func set_title(value: String) -> void:
