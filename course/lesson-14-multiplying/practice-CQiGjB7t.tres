@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://resources/Practice.gd" type="Script" id=1]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+
+[resource]
+script = ExtResource( 1 )
+title = "Reducing damage at higher levels"
+goal = "When our robot's [code]level[/code] is [code]3[/code] or more, we want it to take a lot less damage.
+
+Add to the [code]take_damage()[/code] function so the following happens:
+
+> [code]if[/code] the robot's [code]level[/code] is greater than [code]2[/code], reduce the damage [code]amount[/code] by 50%
+
+The robot is level 3. An enemy is going to attack for 10 damage. This damage should reduce to 5."
+starting_code = "func take_damage(amount):
+	health -= amount
+
+	if health > max_health:
+		health = max_health
+
+	if health < 0:
+		health = 0"
+hints = PoolStringArray( "You need to use an [code]if[/code] statement at the top of the function to check if the robot\'s [code]level[/code] is greater than [code]2[/code]", "To reduce the [code]amount[/code], multiply it by a value less than [code]1[/code]", "Multiplying any value by [code]0.5[/code] reduces it by 50%" )
+validator_script_path = "reducing_damage/TestReducingDamage.gd"
+script_slice_path = "reducing_damage/ReducingDamage.live-editor/slices/ReducingDamage.health.slice.tres"
+documentation_references = PoolStringArray( "take_damage" )
+documentation_resource = ExtResource( 2 )
+description = ""
