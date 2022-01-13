@@ -1,16 +1,18 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://course/common/GDScriptCodeExample.gd" type="Script" id=2]
+[ext_resource path="res://course/common/GDScriptCodeExample.gd" type="Script" id=1]
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
 
-[node name="GDScriptCodeExample" type="TextEdit"]
+[node name="CodeLevelUpBasic" type="TextEdit"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1264.0
 margin_bottom = -954.0
-rect_min_size = Vector2( 600, 200 )
-theme = ExtResource( 1 )
-readonly = true
+rect_min_size = Vector2( 600, 120 )
+theme = ExtResource( 2 )
+text = "func level_up():
+	level += 1
+	max_health += 5"
 syntax_highlighting = true
 show_line_numbers = true
 draw_tabs = true
@@ -21,7 +23,8 @@ smooth_scrolling = true
 wrap_enabled = true
 caret_block_mode = true
 caret_blink = true
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+min_size = Vector2( 600, 120 )

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+question = ""
+content_bbcode = "```
+var level = 5
+var power = 3
+
+func calculate_damage():
+	var damage = power * level
+	damge *= 2
+```"
+hint = ""
+explanation_bbcode = ""
+answer_options = [ "30" ]
+valid_answers = [ "30" ]
+is_multiple_choice = true
+do_shuffle_answers = true

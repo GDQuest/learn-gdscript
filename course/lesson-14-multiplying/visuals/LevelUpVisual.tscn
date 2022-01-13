@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource path="res://LevelUpRobot.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func run():
+	$AnimationPlayer.play(\"level\")
+"
+
+[node name="PanelContainer" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 247.0
+margin_bottom = 227.0
+
+[node name="Frame" parent="RunnableCodeExample" index="0"]
+margin_right = 240.0
+margin_bottom = 220.0
+
+[node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="0"]
+visible = false
+
+[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
+margin_left = 71.0
+text = "Level Up!"
+
+[node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
+visible = false
+margin_left = 244.0
+margin_right = 644.0
+margin_bottom = 260.0
+
+[node name="LevelUp" parent="RunnableCodeExample" instance=ExtResource( 2 )]
+position = Vector2( 0, 0 )
+script = SubResource( 1 )
+
+[editable path="RunnableCodeExample"]
