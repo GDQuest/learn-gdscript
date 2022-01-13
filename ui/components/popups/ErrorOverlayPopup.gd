@@ -33,8 +33,8 @@ func _ready() -> void:
 	_update_explanation()
 	_exclusive_buttons.visible = exclusive
 
-	#_error_explanation_block.connect("opened", self, "_on_revealer_opened", [_error_explanation_block])
-	#_error_suggestion_block.connect("opened", self, "_on_revealer_opened", [_error_suggestion_block])
+	_error_explanation_block.connect("expanded", self, "_on_revealer_opened", [_error_explanation_block])
+	_error_suggestion_block.connect("expanded", self, "_on_revealer_opened", [_error_suggestion_block])
 	_close_button.connect("pressed", self, "hide")
 	hide()
 

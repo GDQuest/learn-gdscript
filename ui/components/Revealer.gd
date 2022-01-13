@@ -8,6 +8,8 @@ const ANIMATION_REVEAL_DURATION := 0.24
 const TOGGLE_OPACITY := 0.65
 const TOGGLE_OPACITY_HOVER := 1.0
 
+signal expanded
+
 export var title := "Expand" setget set_title
 export var is_expanded := false setget set_is_expanded
 
@@ -219,7 +221,13 @@ func set_title(value: String) -> void:
 
 
 func set_is_expanded(value: bool) -> void:
+	if is_expanded == value:
+		return
+	
 	is_expanded = value
+	if is_expanded:
+		emit_signal("expanded")
+	
 	if is_inside_tree():
 		_toggle_button.pressed = is_expanded
 		_toggle_content(is_expanded)
@@ -364,8 +372,7 @@ func _on_toggle_exited() -> void:
 
 
 func _on_toggle_pressed(pressed: bool) -> void:
-	is_expanded = pressed
-	_toggle_content(pressed)
+	set_is_expanded(pressed)
 
 
 func _on_tweener_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
