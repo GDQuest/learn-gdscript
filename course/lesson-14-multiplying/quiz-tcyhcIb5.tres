@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-question = "Question"
+question = "What is the value of damage?"
 content_bbcode = "[code]
 var level = 5
 var power = 3
@@ -13,8 +13,8 @@ func calculate_damage():
 	var damage = power * level
 [/code]"
 hint = ""
-explanation_bbcode = ""
-answer_options = [ "q" ]
-valid_answers = [ "q" ]
-is_multiple_choice = true
+explanation_bbcode = "We multiply [code]power[/code] by [code]level[/code] using [code]*[/code] to get the result of [code]15[/code]."
+answer_options = [ "15", "9", "10" ]
+valid_answers = [ "15" ]
+is_multiple_choice = false
 do_shuffle_answers = true
