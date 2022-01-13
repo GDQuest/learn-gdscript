@@ -7,15 +7,16 @@
 # var errors: Array = yield(verifier, "errors")
 #
 # Where `errors` is an array of LanguageServerErrors
+# The url of the LSP server is taken from project settings.
+# if you want to override it in a config.cfg file, use 
+# `lsp_url` for the debug url and
+# `lsp_url.release` for the release url
+# 
 class_name ScriptVerifier
 extends Reference
 
 # Emits error messages as an Array[LanguageServerError]
 signal errors(errors)
-
-# The URL of the HTTP Language Server
-const SERVER_URL := "https://lsp.gdquest.com"
-# const SERVER_URL := "http://localhost:3000"
 
 # https://docs.godotengine.org/en/stable/classes/class_httprequest.html#enumerations
 const HTTP_RESULT_ERRORS := {
@@ -59,8 +60,11 @@ var _new_script_filename: String
 var _start_time := OS.get_unix_time()
 var _start_time_ms := OS.get_ticks_msec()
 
-func _init(attached_node: Node, new_script_filename: String, new_script_text: String, url := SERVER_URL) -> void:
-	
+func _init(attached_node: Node, new_script_filename: String, new_script_text: String, url := "") -> void:
+
+	if url == "":
+		url = ProjectSettings.get("global/lsp_url")
+
 	for warning in WarningCode:
 		blacklist_codes[WarningCode[warning]] = true
 
