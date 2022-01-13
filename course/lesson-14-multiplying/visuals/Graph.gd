@@ -1,56 +1,49 @@
 tool
 extends Path2D
 
-const _grey := Color("928fb8")
+const COLOR_GREY := Color("928fb8")
 
 export var graph_size := Vector2.ONE * 250
-export var axis_x_text := "x-axis"
-export var axis_y_text := "y-axis"
+export var text_x := "x-axis"
+export var text_y := "y-axis"
 export var axis_increments := 50
 export var show_speed := 400
 
 var _line
 var _points := []
-var _index := 0
 var _last_point := Vector2.ZERO
+# Need a draw offset as the scene is centered in lessons
 var _draw_offset := Vector2(-graph_size.x / 2, graph_size.y/2)
 
+onready var _label_x := $LabelX as Label
+onready var _label_y := $LabelY as Label
 
-onready var _label_x := $LabelX
-onready var _label_y := $LabelY
 
-
-func _ready():
+func _ready() -> void:
 	update()
-	
+
 	if Engine.editor_hint:
 		return
+
 	_label_x.rect_position += _draw_offset
 	_label_x.rect_size.x = graph_size.x
-	_label_x.text = axis_x_text
+	_label_x.text = text_x
 	_label_y.rect_position += _draw_offset
 	_label_y.rect_size.x = graph_size.y
-	_label_y.text = axis_y_text
+	_label_y.text = text_y
 
 	_points = curve.tessellate(5, 4)
-	_last_point = _points[0] + _draw_offset
-	
 	_line = Polygon.new(show_speed)
 	_line.position = _draw_offset
 	_line.line_2d.width = 3
 	_line.line_2d.default_color = Color.white
 	_line.connect("line_end_moved", self, "_change_sprite_position")
 	add_child(_line)
-
-
-func _process(delta):
-	if Engine.editor_hint:
-		return
 	
-	update()
+	_last_point = _points[0] + _draw_offset
 
 
-func run():
+func run() -> void:
 	if _line.is_drawing():
 		return
 
@@ -59,16 +52,23 @@ func run():
 	_line.start_draw_animation()
 
 
+func _process(_delta: float) -> void:
+	if Engine.editor_hint:
+		return
+	
+	update()
+
+
 func _change_sprite_position(new_position: Vector2) -> void:
 	_last_point = new_position
 
 
-func _draw():
-	
+func _draw() -> void:
+	# Don't offset the graph in the editor as drawing curves won't line up
 	var draw_offset = Vector2.ZERO if Engine.editor_hint else _draw_offset
 
-	draw_line(Vector2.ZERO + draw_offset, Vector2(graph_size.x, 0) + draw_offset, _grey, 4, true)
-	draw_line(Vector2.ZERO + draw_offset, Vector2(0, -graph_size.y) + draw_offset, _grey, 4, true)
+	draw_line(Vector2.ZERO + draw_offset, Vector2(graph_size.x, 0) + draw_offset, COLOR_GREY, 4, true)
+	draw_line(Vector2.ZERO + draw_offset, Vector2(0, -graph_size.y) + draw_offset, COLOR_GREY, 4, true)
 	
 	for i in range(graph_size.x / axis_increments):
 		draw_circle(Vector2(axis_increments + i * axis_increments, 0) + draw_offset, 4, Color.white)
@@ -137,8 +137,7 @@ class Polygon:
 	func stop_animation() -> void:
 		_tween.stop_all()
 
-	
-	func is_drawing():
+	func is_drawing() -> bool:
 		return _tween.is_active()
 
 	func _animate_point_position(point: Vector2) -> void:
