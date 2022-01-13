@@ -38,7 +38,6 @@ func _init(text: String) -> void:
 		_available_tokens[token_type] = regex
 	_current_scope = tokens
 	tokenize()
-	print(JSON.print(tokens, "  "))
 
 
 func _process_function_declaration(token: Dictionary):
