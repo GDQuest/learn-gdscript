@@ -161,8 +161,7 @@ func _test_student_code() -> void:
 		add_child(popup)
 		popup.fade_in(_game_container)
 		popup.connect("accepted", self, "_on_practice_popup_accepted")
-	else:
-		_code_editor.enable_buttons()
+	_code_editor.enable_buttons()
 
 
 func _toggle_distraction_free_mode() -> void:
