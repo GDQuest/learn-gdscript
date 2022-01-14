@@ -2,6 +2,8 @@ tool
 class_name UIPractice
 extends Control
 
+const RUN_AUTOTIMER_DURATION := 5.0
+
 const PracticeHintScene := preload("screens/practice/PracticeHint.tscn")
 const LessonDonePopupScene := preload("components/popups/LessonDonePopup.tscn")
 
@@ -12,6 +14,12 @@ var _tester: PracticeTester
 # If `true`, the text changed but was not saved.
 var _code_editor_is_dirty := false
 var _practice: Practice
+
+# Set to true when running the test scene, then to false the moment Events.practice_run_completed emits.
+var _run_tests_requested := false
+# Auto-timer forces Events.practice_run_completed after a fixed duration to fallback
+# if practice code doesn't emit on its own
+var _run_autotimer: Timer
 
 var _is_left_panel_open := true
 var _info_panel_start_width := -1.0
@@ -33,6 +41,13 @@ onready var _info_panel_control := $Margin/Layout/Control as Control
 onready var _tween := $Tween as Tween
 
 func _init():
+	_run_autotimer = Timer.new()
+	_run_autotimer.one_shot = true
+	_run_autotimer.wait_time = RUN_AUTOTIMER_DURATION
+	add_child(_run_autotimer)
+	
+	_run_autotimer.connect("timeout", self, "_on_autotimer_timeout")
+	
 	_on_init_set_javascript()
 
 func _ready() -> void:
@@ -44,6 +59,8 @@ func _ready() -> void:
 	_code_editor.connect("text_changed", self, "_on_code_editor_text_changed")
 	_code_editor.connect("console_toggled", self, "_on_console_toggled")
 	_output_console.connect("reference_clicked", self, "_on_code_reference_clicked")
+	
+	Events.connect("practice_run_completed", self, "_test_student_code")
 
 	if test_practice and get_parent() == get_tree().root:
 		setup(test_practice, null)
@@ -100,44 +117,69 @@ func setup(practice: Practice, _course: Course) -> void:
 	_game_view.use_scene(_current_scene, _script_slice.get_scene_properties().viewport_size)
 
 
-func _test_student_code() -> void:
+func _set_script_slice(new_slice: SliceProperties) -> void:
+	if new_slice == _script_slice:
+		return
+	_script_slice = new_slice
+	_current_scene = _script_slice.get_scene_properties().scene.instance()
+	_output_console.setup(_script_slice)
+
+
+func _validate_and_run_student_code() -> void:
+	# Prepare everything for testing user code.
 	_game_view.paused = false
+	_code_editor.lock_editor()
 	_code_editor.set_pause_button_pressed(false)
+	_code_editor.set_locked_message("Validating Your Code...")
 	_output_console.clear_messages()
 
+	# Complete the script from the slice and the base script.
 	_script_slice.current_text = _code_editor.get_text()
-	var script_file_name := _script_slice.get_script_properties().file_name
 	var script_text := _script_slice.current_full_text
-	var nodes_paths := _script_slice.get_script_properties().nodes_paths
+	var script_file_name := _script_slice.get_script_properties().file_name
 	var script_file_path := _script_slice.get_script_properties().file_path.lstrip("res://")
 
-	var recursive_function := MiniGDScriptTokenizer.new(script_text).are_there_a_recursive_function()
-
+	# Do local sanity checks for the script.
+	var recursive_function := MiniGDScriptTokenizer.new(script_text).find_any_recursive_function()
 	if recursive_function != "":
 		var error = make_error_recursive_function(recursive_function)
 		MessageBus.print_lsp_error(error, script_file_name)
-		_code_editor.enable_buttons()
+		_code_editor.unlock_editor()
 		return
 
+	# Check the script against the remote language server.
 	var verifier := ScriptVerifier.new(self, script_file_path, script_text)
 	verifier.test()
 
 	var errors: Array = yield(verifier, "errors")
 	if not errors.empty():
 		_code_editor.slice_editor.errors = errors
+		
 		for index in errors.size():
 			var error: LanguageServerError = errors[index]
 			MessageBus.print_lsp_error(error, script_file_name)
-		# if the user could not connect to the server, still try to
-		# run their code
+		
+		# If the user could not connect to the server, still try to run their code.
 		var is_connection_error: bool = (
 			errors.size() == 1 and \
 			ScriptVerifier.check_error_is_connection_error(errors[0])
 		)
 		if not is_connection_error:
-			_code_editor.enable_buttons()
+			_code_editor.unlock_editor()
 			return
+	
+	_run_student_code()
 
+
+func _run_student_code() -> void:
+	var script_text := _script_slice.current_full_text
+	var script_file_name := _script_slice.get_script_properties().file_name
+	var nodes_paths := _script_slice.get_script_properties().nodes_paths
+
+	# Generate a runnable script, check for uncaught errors.
+	_code_editor.set_locked_message("Running Your Code...")
+	yield(get_tree(), "idle_frame")
+	
 	script_text = MessageBus.replace_script(script_file_name, script_text)
 	var script = GDScript.new()
 	script.source_code = script_text
@@ -146,22 +188,44 @@ func _test_student_code() -> void:
 	if script_is_valid != OK:
 		var error := make_error_lsp_silent()
 		MessageBus.print_lsp_error(error, script_file_name)
-		_code_editor.enable_buttons()
+		_code_editor.unlock_editor()
 		return
-
+	
 	_code_editor_is_dirty = false
+
+	# Start the auto-timer used to perform tests in case the scene doesn't emit the required signal.
+	_run_tests_requested = true
+	_run_autotimer.start()
+	# Reset and run the test scene.
 	_update_nodes(script, nodes_paths)
+
+
+func _test_student_code() -> void:
+	if not _run_tests_requested:
+		return
+	_run_tests_requested = false
+	
+	var script_file_name := _script_slice.get_script_properties().file_name
+	
+	# Run tests on the scene.
+	_code_editor.set_locked_message("Running Tests...")
 
 	var result := _tester.run_tests()
 	for error in result.errors:
 		MessageBus.print_error(error, script_file_name)
 	_info_panel.update_tests_display(result)
+	
+	# Show the end of practice popup.
 	if result.is_success():
+		Events.emit_signal("practice_completed", _practice)
+		
 		var popup := LessonDonePopupScene.instance() as LessonDonePopup
 		add_child(popup)
 		popup.fade_in(_game_container)
-		popup.connect("accepted", self, "_on_practice_popup_accepted")
-	_code_editor.enable_buttons()
+		popup.connect("accepted", Events, "emit_signal", [ "practice_navigated_next", _practice ])
+	
+	# Clean-up.
+	_code_editor.unlock_editor()
 
 
 func _toggle_distraction_free_mode() -> void:
@@ -213,7 +277,7 @@ func _on_code_editor_text_changed(_text: String) -> void:
 func _on_code_editor_button(which: String) -> void:
 	match which:
 		_code_editor.ACTIONS.RUN:
-			_test_student_code()
+			_validate_and_run_student_code()
 		_code_editor.ACTIONS.PAUSE:
 			_game_view.toggle_paused()
 		_code_editor.ACTIONS.DFMODE:
@@ -228,8 +292,9 @@ func _on_code_reference_clicked(_file_name: String, line: int, character: int) -
 	_code_editor.slice_editor.highlight_line(line, character)
 
 
-func _on_practice_popup_accepted() -> void:
-	Events.emit_signal("practice_completed", _practice)
+func _on_autotimer_timeout() -> void:
+	if _run_tests_requested:
+		Events.emit_signal("practice_run_completed")
 
 
 # Updates all nodes with the given script. If a node path isn't valid, the node
@@ -244,14 +309,6 @@ func _update_nodes(script: GDScript, node_paths: Array) -> void:
 			)
 			if node:
 				try_validate_and_replace_script(node, script)
-
-
-func _set_script_slice(new_slice: SliceProperties) -> void:
-	if new_slice == _script_slice:
-		return
-	_script_slice = new_slice
-	_current_scene = _script_slice.get_scene_properties().scene.instance()
-	_output_console.setup(_script_slice)
 
 
 # If a script is valid, sets in the node. Optionally restores variables and

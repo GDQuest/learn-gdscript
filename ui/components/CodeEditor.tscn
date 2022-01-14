@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://ui/components/SliceEditor.gd" type="Script" id=1]
 [ext_resource path="res://ui/icons/icon_pause.png" type="Texture" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://ui/theme/button_practice_pressed.tres" type="StyleBox" id=11]
 [ext_resource path="res://ui/theme/button_practice_normal.tres" type="StyleBox" id=12]
 [ext_resource path="res://ui/theme/button_practice_hover.tres" type="StyleBox" id=13]
+[ext_resource path="res://ui/icons/robot_tutor.svg" type="Texture" id=14]
+[ext_resource path="res://ui/theme/codeeditor_locked_panel.tres" type="StyleBox" id=15]
+[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=16]
 
 [sub_resource type="InputEventAction" id=11]
 action = "toggle_distraction_free_mode"
@@ -69,6 +72,7 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+text = null
 
 [node name="Column" type="VBoxContainer" parent="."]
 margin_right = 1920.0
@@ -80,6 +84,7 @@ size_flags_horizontal = 3
 [node name="PanelContainer" type="PanelContainer" parent="Column"]
 margin_right = 1920.0
 margin_bottom = 867.0
+rect_clip_content = true
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 8 )
 
@@ -109,6 +114,42 @@ shortcut_in_tooltip = false
 shortcut = SubResource( 12 )
 icon = ExtResource( 10 )
 flat = true
+
+[node name="LockedOverlay" type="Panel" parent="Column/PanelContainer"]
+margin_right = 1912.0
+margin_bottom = 867.0
+custom_styles/panel = ExtResource( 15 )
+
+[node name="Layout" type="VBoxContainer" parent="Column/PanelContainer/LockedOverlay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 32
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Column/PanelContainer/LockedOverlay/Layout"]
+modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
+margin_left = 828.0
+margin_top = 274.0
+margin_right = 1084.0
+margin_bottom = 530.0
+rect_min_size = Vector2( 128, 128 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 14 )
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Column/PanelContainer/LockedOverlay/Layout"]
+margin_left = 956.0
+margin_top = 562.0
+margin_right = 956.0
+margin_bottom = 593.0
+size_flags_horizontal = 4
+custom_colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
+custom_fonts/font = ExtResource( 16 )
+align = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Column"]
 margin_top = 883.0
@@ -156,7 +197,6 @@ custom_styles/normal = ExtResource( 12 )
 toggle_mode = true
 shortcut_in_tooltip = false
 shortcut = SubResource( 4 )
-group = SubResource( 13 )
 text = "Pause"
 icon = ExtResource( 2 )
 
@@ -172,7 +212,6 @@ toggle_mode = true
 shortcut_in_tooltip = false
 pressed = true
 shortcut = SubResource( 6 )
-group = SubResource( 13 )
 text = "Output"
 icon = ExtResource( 9 )
 

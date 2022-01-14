@@ -50,7 +50,7 @@ func _ready() -> void:
 	NavigationManager.connect("back_navigation_requested", self, "_navigate_back")
 	NavigationManager.connect("outliner_navigation_requested", self, "_navigate_to_outliner")
 
-	Events.connect("practice_completed", self, "_on_practice_completed")
+	Events.connect("practice_navigated_next", self, "_on_practice_navigated_next")
 
 	_outliner_button.connect("pressed", NavigationManager, "navigate_to_outliner")
 	_back_button.connect("pressed", NavigationManager, "navigate_back")
@@ -180,7 +180,7 @@ func _navigate_to() -> void:
 		Events.emit_signal("lesson_started", target)
 
 
-func _on_practice_completed(practice: Practice) -> void:
+func _on_practice_navigated_next(practice: Practice) -> void:
 	var lesson_data := course.lessons[_lesson_index] as Lesson
 	var practices: Array = lesson_data.practices
 

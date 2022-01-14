@@ -29,7 +29,11 @@ onready var _pause_button := $Column/MarginContainer/Column/Row/PauseButton as B
 onready var _solution_button := $Column/MarginContainer/Column/Row2/SolutionButton as Button
 onready var _restore_button := $Column/MarginContainer/Column/Row2/RestoreButton as Button
 onready var _console_button := $Column/MarginContainer/Column/Row/ConsoleButton as Button
+
 onready var _distraction_free_mode_button := $Column/PanelContainer/DFMButton as Button
+
+onready var _locked_overlay := $Column/PanelContainer/LockedOverlay as Control
+onready var _locked_overlay_label := $Column/PanelContainer/LockedOverlay/Layout/Label as Label
 
 # Buttons to toggle disabled when running the code, until the server responds.
 onready var _buttons_to_disable := [_run_button, _pause_button, _solution_button, _restore_button]
@@ -46,6 +50,7 @@ onready var _buttons_with_shortcuts := [
 
 func _ready() -> void:
 	_distraction_free_mode_button.icon = EDITOR_EXPAND_ICON
+	_locked_overlay.hide()
 
 	_restore_button.connect("pressed", self, "_on_restore_pressed")
 	_restore_button.disabled = true
@@ -104,11 +109,26 @@ func set_pause_button_pressed(is_pressed: bool) -> void:
 	_pause_button.pressed = is_pressed
 
 
+func lock_editor() -> void:
+	for button in _buttons_to_disable:
+		_buttons_previous_disabled_state[button] = button.disabled
+		button.disabled = true
+	
+	_locked_overlay.show()
+
+
 # Restores the disabled state of the disabled buttons.
-func enable_buttons() -> void:
+func unlock_editor() -> void:
 	for button in _buttons_previous_disabled_state:
 		button.disabled = _buttons_previous_disabled_state[button]
 	_run_button.disabled = false
+	
+	_locked_overlay.hide()
+	set_locked_message("")
+
+
+func set_locked_message(message: String) -> void:
+	_locked_overlay_label.text = message
 
 
 func _on_text_changed() -> void:
@@ -119,7 +139,7 @@ func _on_text_changed() -> void:
 func _on_restore_pressed() -> void:
 	_restore_button.disabled = true
 	set_text(_initial_text)
-	enable_buttons()
+	unlock_editor()
 
 
 func _on_solution_pressed() -> void:
@@ -128,7 +148,4 @@ func _on_solution_pressed() -> void:
 
 
 func _on_run_button_pressed() -> void:
-	for button in _buttons_to_disable:
-		_buttons_previous_disabled_state[button] = button.disabled
-		button.disabled = true
 	emit_signal("action", ACTIONS.RUN)

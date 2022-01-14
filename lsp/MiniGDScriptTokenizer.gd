@@ -120,7 +120,7 @@ func tokenize():
 #
 
 # If there is one recursive function, this function returns its name
-func are_there_a_recursive_function() -> String:
+func find_any_recursive_function() -> String:
 	for token in tokens:
 		if token.type == TOKEN_FUNC_DECLARATION:
 			for sub_token in token.body:
