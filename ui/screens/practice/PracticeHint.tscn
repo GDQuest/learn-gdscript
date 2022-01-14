@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/components/PracticeHint.gd" type="Script" id=2]
+[ext_resource path="res://ui/screens/practice/PracticeHint.gd" type="Script" id=1]
+[ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=2]
 
-[node name="PracticeHint" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[node name="PracticeHint" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
 title = "Show Hint"
 title_font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
 

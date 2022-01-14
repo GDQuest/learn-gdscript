@@ -2,7 +2,7 @@ tool
 class_name UIPractice
 extends Control
 
-const PracticeHintScene := preload("components/PracticeHint.tscn")
+const PracticeHintScene := preload("screens/practice/PracticeHint.tscn")
 const LessonDonePopupScene := preload("components/popups/LessonDonePopup.tscn")
 
 export var test_practice: Resource
@@ -110,15 +110,15 @@ func _test_student_code() -> void:
 	var script_text := _script_slice.current_full_text
 	var nodes_paths := _script_slice.get_script_properties().nodes_paths
 	var script_file_path := _script_slice.get_script_properties().file_path.lstrip("res://")
-	
+
 	var recursive_function := MiniGDScriptTokenizer.new(script_text).are_there_a_recursive_function()
-	
+
 	if recursive_function != "":
 		var error = make_error_recursive_function(recursive_function)
 		MessageBus.print_lsp_error(error, script_file_name)
 		_code_editor.enable_buttons()
 		return
-	
+
 	var verifier := ScriptVerifier.new(self, script_file_path, script_text)
 	verifier.test()
 
@@ -254,7 +254,7 @@ func _set_script_slice(new_slice: SliceProperties) -> void:
 	_output_console.setup(_script_slice)
 
 
-# If a script is valid, sets in the node. Optionally restores variables and 
+# If a script is valid, sets in the node. Optionally restores variables and
 # optionally calls _run()
 # @param node         Node                  any valid node
 # @param script       GDScript              A GDScript instance
@@ -266,20 +266,20 @@ static func try_validate_and_replace_script(node: Node, script: GDScript, props_
 		if not script.can_instance():
 			print("Script errored out (code %s); skipping replacement" % [error_code])
 			return
-	
+
 	var parent = node.get_parent()
 	parent.remove_child(node)
 	node.request_ready()
-	
+
 	node.set_script(script)
-	
+
 	parent.add_child(node)
-	
+
 	# props_backup = backup_node_properties(node)
-	
+
 	if props_backup.size() > 0:
 		set_node_properties(node, props_backup)
-	
+
 	if node.has_method("_run"):
 		# warning-ignore:unsafe_method_access
 		node._run()
@@ -290,7 +290,7 @@ static func try_validate_and_replace_script(node: Node, script: GDScript, props_
 # You can optionally pass an array of property names you want (any property you
 # do not specify will be left out)
 # @param node              Node            any valid node
-# @param select_properties PoolStringArray an array of property names. Leave it 
+# @param select_properties PoolStringArray an array of property names. Leave it
 #                                          out (or pass an empty array) to select
 #                                          all properties
 static func backup_node_properties(node: Node, select_properties := PoolStringArray()) -> Dictionary:
@@ -309,7 +309,7 @@ static func backup_node_properties(node: Node, select_properties := PoolStringAr
 	return props_backup
 
 
-# Sets a node's properties from a dictionary. Intended to be used after having 
+# Sets a node's properties from a dictionary. Intended to be used after having
 # saved them prior to changing the script
 static func set_node_properties(node: Node, props_backup: Dictionary) -> void:
 	for prop_name in props_backup:
@@ -341,9 +341,9 @@ static func make_error_recursive_function(func_name: String) -> LanguageServerEr
 ###############################################################################
 #
 # JS INTERFACE
-# the below intends to listen to the `RECURSIVE` error event dispatched back 
+# the below intends to listen to the `RECURSIVE` error event dispatched back
 # from JS and react to it
-# 
+#
 
 # JS error event listener
 var _on_js_error_feedback_ref = JavaScript.create_callback(self, "_on_js_error_feedback")

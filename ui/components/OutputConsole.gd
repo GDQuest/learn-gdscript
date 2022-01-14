@@ -4,9 +4,9 @@ extends PanelContainer
 
 signal reference_clicked(file_name, line_nb, character)
 
-const OutputConsoleErrorMessage := preload("res://ui/components/OutputConsoleErrorMessage.gd")
-const OutputConsoleErrorMessageScene := preload("res://ui/components/OutputConsoleErrorMessage.tscn")
-const OutputConsolePrintMessageScene := preload("res://ui/components/OutputConsolePrintMessage.tscn")
+const OutputConsoleErrorMessage := preload("./OutputConsoleErrorMessage.gd")
+const OutputConsoleErrorMessageScene := preload("./OutputConsoleErrorMessage.tscn")
+const OutputConsolePrintMessageScene := preload("./OutputConsolePrintMessage.tscn")
 
 var _slice_properties: SliceProperties
 
@@ -37,7 +37,7 @@ func print_bus_message(
 ) -> void:
 	if not is_inside_tree():
 		return
-	
+
 	if type in [
 		MessageBus.MESSAGE_TYPE.ASSERT,
 		MessageBus.MESSAGE_TYPE.ERROR,
@@ -45,7 +45,7 @@ func print_bus_message(
 	]:
 		print_error(type, text, file_name, line, character, code)
 		return
-	
+
 	print_output([ text ])
 
 
@@ -73,7 +73,7 @@ func print_output(values: Array) -> void:
 	var message_node = OutputConsolePrintMessageScene.instance()
 	message_node.values = values
 	_message_list.add_child(message_node)
-	
+
 	yield(get_tree(), "idle_frame")
 	_scroll_container.ensure_control_visible(message_node)
 
@@ -92,19 +92,19 @@ func print_error(type: int, text: String, file_name: String, line: int, characte
 	message_node.message_severity = type
 	message_node.message_text = text
 	message_node.message_code = code
-	
+
 	if line >= show_lines_from and line <= show_lines_to:
 		message_node.origin_file = file_name
 		message_node.origin_line = line - show_lines_from
 		message_node.origin_char = character - character_offset
 	else:
 		message_node.external_error = true
-	
+
 	_message_list.add_child(message_node)
 	message_node.connect("external_explain_requested", self, "_on_external_requested")
 	message_node.connect("show_code_requested", self, "_on_code_requested")
 	message_node.connect("explain_error_requested", self, "_on_explain_requested")
-	
+
 	yield(get_tree(), "idle_frame")
 	_scroll_container.ensure_control_visible(message_node)
 

@@ -1,6 +1,6 @@
 extends Control
 
-const WelcomeScreen := preload("./welcome_screen/WelcomeScreen.gd")
+const WelcomeScreen := preload("./screens/welcome_screen/WelcomeScreen.gd")
 const LoadingScreen := preload("./LoadingScreen.gd")
 const ReportFormPopup := preload("./components/popups/ReportFormPopup.gd")
 const SettingsPopup := preload("./components/popups/SettingsPopup.gd")
@@ -143,7 +143,7 @@ func _show_end_screen(_course: Course) -> void:
 func _go_to_welcome_screen() -> void:
 	_course_screen.hide()
 	_course_navigator.queue_free()
-	
+
 	_update_welcome_button()
 	start_loading(_welcome_screen)
 	_loading_screen.progress_value = 1.0
@@ -152,7 +152,7 @@ func _go_to_welcome_screen() -> void:
 func _update_welcome_button() -> void:
 	if default_course.empty():
 		return
-	
+
 	var user_profile = UserProfiles.get_profile()
 	var lesson_id = user_profile.get_last_started_lesson(default_course)
 	_welcome_screen.set_button_continue(not lesson_id.empty())

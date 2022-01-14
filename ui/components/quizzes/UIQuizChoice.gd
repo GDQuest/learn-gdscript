@@ -1,7 +1,7 @@
 class_name UIQuizChoice
 extends UIBaseQuiz
 
-const QuizAnswerButtonScene := preload("res://ui/components/QuizAnswerButton.tscn")
+const QuizAnswerButtonScene := preload("res://ui/components/quizzes/QuizAnswerButton.tscn")
 
 
 onready var _choices := $MarginContainer/ChoiceView/Answers as VBoxContainer
@@ -34,12 +34,12 @@ func _get_answers() -> Array:
 	var quiz_choice = (_quiz as QuizChoice)
 	if not quiz_choice:
 		return answers
-	
+
 	for button in _choices.get_children():
 		var answer = button.get_answer()
 		if answer:
 			answers.append(answer)
 			if not quiz_choice.is_multiple_choice:
 				break
-	
+
 	return answers

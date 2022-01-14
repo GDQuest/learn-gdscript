@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
-[ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=3]
-[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=4]
-[ext_resource path="res://ui/components/PracticeInfoPanel.gd" type="Script" id=5]
-[ext_resource path="res://ui/components/ScrollableTextBox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/screens/practice/PracticeInfoPanel.gd" type="Script" id=2]
+[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/components/ScrollableTextBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/revealer_hints_panel.tres" type="StyleBox" id=7]
 
 [node name="PracticeInfoPanel" type="PanelContainer"]
@@ -13,8 +13,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 3 )
-script = ExtResource( 5 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -22,7 +22,7 @@ __meta__ = {
 [node name="Panel" type="Panel" parent="."]
 margin_right = 1920.0
 margin_bottom = 1080.0
-custom_styles/panel = ExtResource( 4 )
+custom_styles/panel = ExtResource( 6 )
 
 [node name="LessonRequirements" type="VBoxContainer" parent="."]
 margin_right = 1920.0
@@ -48,7 +48,7 @@ size_flags_vertical = 3
 [node name="Title" type="Label" parent="LessonRequirements/Margin/Column"]
 margin_right = 1880.0
 margin_bottom = 31.0
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 3 )
 text = "Summary - Lesson Name"
 
 [node name="HSeparator" type="HSeparator" parent="LessonRequirements/Margin/Column"]
@@ -77,7 +77,7 @@ custom_constants/margin_bottom = 0
 margin_right = 1868.0
 margin_bottom = 744.0
 
-[node name="Goals" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column" instance=ExtResource( 2 )]
+[node name="Goals" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column" instance=ExtResource( 5 )]
 margin_right = 1868.0
 margin_bottom = 270.0
 rect_min_size = Vector2( 571, 0 )
@@ -85,13 +85,13 @@ size_flags_horizontal = 3
 title = "Goals"
 is_expanded = true
 
-[node name="Goal" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Goals" instance=ExtResource( 6 )]
+[node name="Goal" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Goals" instance=ExtResource( 4 )]
 margin_left = 8.0
 margin_top = 58.0
 margin_right = 1860.0
 margin_bottom = 258.0
 
-[node name="Hints" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column" instance=ExtResource( 2 )]
+[node name="Hints" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column" instance=ExtResource( 5 )]
 margin_top = 286.0
 margin_right = 1868.0
 margin_bottom = 332.0
@@ -99,7 +99,7 @@ rect_min_size = Vector2( 571, 0 )
 title = "Hints"
 content_panel = ExtResource( 7 )
 
-[node name="Checks" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column" instance=ExtResource( 2 )]
+[node name="Checks" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column" instance=ExtResource( 5 )]
 margin_top = 348.0
 margin_right = 1868.0
 margin_bottom = 418.0
@@ -107,7 +107,7 @@ rect_min_size = Vector2( 571, 0 )
 title = "Checks"
 is_expanded = true
 
-[node name="Documentation" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column" instance=ExtResource( 2 )]
+[node name="Documentation" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column" instance=ExtResource( 5 )]
 margin_top = 434.0
 margin_right = 1868.0
 margin_bottom = 744.0
