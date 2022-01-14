@@ -1,9 +1,31 @@
 extends Control
 
-func _run():
-	heal(100)
-
 var health = 20
+var _health_gained = 100
+var _max_health = 80
+
+onready var _robot := $HealSprite
+
+
+func _ready():
+	_robot.health_gained = _health_gained
+	_robot.health = health
+	_robot.max_health = _max_health
+	_robot._update_health_bar()
+
+
+func _run():
+	heal(_health_gained)
+	_update_robot()
+
+
+func _update_robot():
+	_robot._animation_player.play("heal")
+	_robot.health_gained = _health_gained
+	_robot.health = health
+	_robot.max_health = _max_health
+	_robot._update_health_bar()
+	
 
 # EXPORT heal
 func heal(amount):

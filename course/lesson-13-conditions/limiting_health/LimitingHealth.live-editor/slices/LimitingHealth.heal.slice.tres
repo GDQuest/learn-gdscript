@@ -13,8 +13,8 @@ keyword = "EXPORT"
 closing = false
 name = "heal"
 is_full_file = false
-start = 7
-end = 12
-lines_before = [ "extends Control", "", "func _run():", "	heal(100)", "", "var health = 20", "" ]
+start = 29
+end = 34
+lines_before = [ "extends Control", "", "var health = 20", "var _health_gained = 100", "var _max_health = 80", "", "onready var _robot := $HealSprite", "", "", "func _ready():", "	_robot.health_gained = _health_gained", "	_robot.health = health", "	_robot.max_health = _max_health", "	_robot._update_health_bar()", "", "", "func _run():", "	heal(_health_gained)", "	_update_robot()", "", "", "func _update_robot():", "	_robot._animation_player.play(\"heal\")", "	_robot.health_gained = _health_gained", "	_robot.health = health", "	_robot.max_health = _max_health", "	_robot._update_health_bar()", "	", "" ]
 lines_after = [ "" ]
 lines_editable = [ "func heal(amount):", "	health = health + amount", "	if health > 80:", "		health = 80" ]
