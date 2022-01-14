@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/screens/practice/PracticeHint.gd" type="Script" id=1]
+[ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=2]
+
+[node name="PracticeHint" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+title = "Show Hint"
+title_font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+
+[node name="ToggleBar" parent="." index="1"]
+modulate = Color( 1, 1, 1, 0.65 )
+margin_right = 156.0
+
+[node name="ToggleCapturer" parent="ToggleBar" index="0"]
+margin_right = 148.0
+
+[node name="BarLayout" parent="ToggleBar" index="1"]
+margin_right = 148.0
+
+[node name="Label" parent="ToggleBar/BarLayout" index="0"]
+margin_right = 110.0
+custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+text = "Show Hint"
+
+[node name="ToggleIcon" parent="ToggleBar/BarLayout" index="1"]
+margin_left = 126.0
+margin_right = 148.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." index="2"]
+visible = false
+margin_left = 8.0
+margin_top = 58.0
+margin_right = 208.0
+margin_bottom = 87.0
+rect_min_size = Vector2( 200, 0 )
+bbcode_enabled = true
+fit_content_height = true
+scroll_active = false

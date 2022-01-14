@@ -85,7 +85,7 @@ EXPECTED_CONSTANT_EXPRESSION,,
 INVALID_CLASS_DECLARATION,,
 DUPLICATE_DECLARATION,"You are trying to define a signal that already exists; You can't do that.
 
-Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends.","In the app, your code extends some built-in Godot code that's not visible to you. 
+Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends.","In the app, your code extends some built-in Godot code that's not visible to you.
 
 When that happens, you need to either rename your signal to one that will not collide with an existing one or remove this line of code."
 SIGNATURE_MISMATCH,,
@@ -94,3 +94,7 @@ TYPE_MISMATCH,,
 TYPE_CANNOT_BE_INFERRED,,
 RETURN_VALUE_MISMATCH,,
 MISPLACED_STATIC_CALL,,
+CANNOT_CONNECT_TO_LSP, "You're probably not connected, or your adblocker/script blocker is preventing us from communicating with the server", "Please make sure you're connected, and that your adblocker/NoScript allows us to access the server" 
+LSP_UNDETECTED_ERROR, "Godot was unable to load your script, yet the language checker server found nothing wrong. It's possible you are not online", "If you're offline, this error is expected. Otherwise, please click on the ""report"" button at the top and please let us know"
+LSP_TIMED_OUT, "Either your connection is very slow, or the Language Verifier server is under load", "Please try again, and if it happens again, warn us with the ""report"" button at the top. Thank you!"
+RECURSIVE_FUNCTION, "You called a function inside itself. This will loop forever.", "There are valid reasons for using recursive functions, but none of them are part of this course, so this cannot be a valid solution."

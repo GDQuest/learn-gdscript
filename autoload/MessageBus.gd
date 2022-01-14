@@ -78,6 +78,16 @@ func replace_script(script_file_name: String, script_text: String) -> String:
 	return lines.join("\n")
 
 
+func print_lsp_error(error: LanguageServerError, script_file_name := "") -> void:
+	MessageBus.print_error(
+		error.message,
+		script_file_name,
+		error.error_range.start.line,
+		error.error_range.start.character,
+		error.code
+	)
+
+
 func print_log(thing_to_print: Array, file_name: String, line_nb: int = 0, character: int = 0) -> void:
 	var line = PoolStringArray(thing_to_print).join(" ")
 	print_request(MESSAGE_TYPE.PRINT, line, file_name, line_nb, character)

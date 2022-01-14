@@ -6,11 +6,12 @@
 script/source = "extends Node2D
 
 func run():
-	$DrawingTurtle.reset()
-	$DrawingTurtle.position.x = -100
-	$DrawingTurtle.move_forward(200)
-	$DrawingTurtle.turn_right(90)
-	$DrawingTurtle.play_draw_animation()
+	var drawing_turtle = $DrawingTurtle as DrawingTurtle
+	drawing_turtle.reset()
+	drawing_turtle.position.x = -100
+	drawing_turtle.move_forward(200)
+	drawing_turtle.turn_right(90)
+	drawing_turtle.play_draw_animation()
 	
 "
 

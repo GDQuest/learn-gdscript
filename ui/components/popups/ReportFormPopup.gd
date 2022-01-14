@@ -10,5 +10,8 @@ func _ready():
 
 
 func _on_meta_clicked(data) -> void:
-	if typeof(data) == TYPE_STRING and data.begins_with("https://"):
-		OS.shell_open(data)
+	if typeof(data) == TYPE_STRING:
+		if data.begins_with("https://"):
+			OS.shell_open(data)
+		elif data == "download":
+			Log.download()

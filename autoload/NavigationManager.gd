@@ -168,7 +168,6 @@ func _on_js_popstate(_args: Array) -> void:
 # Call this from GDScript to synchronize the browser. Safe to call in all environments, will no-op
 # when JS is not available.
 func _js_back() -> void:
-	print("js_back")
 	if not _js_available:
 		return
 	_disable_popstate_listener()

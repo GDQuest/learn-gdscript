@@ -3,6 +3,8 @@ extends Resource
 
 # Lesson resource identifier.
 export var lesson_id := ""
+# Identifiers of reached content blocks.
+export var completed_blocks := [] # Array of String
 # Set when the user got to the bottom of the lesson and clicked on any practice.
 export var completed_reading := false
 # Identifiers of completed quiz resources.
@@ -11,8 +13,33 @@ export var completed_quizzes := [] # Array of String
 export var completed_practices := [] # Array of String
 
 func _init() -> void:
+	completed_blocks = []
 	completed_quizzes = []
 	completed_practices = []
+
+
+func get_completed_blocks_count(blocks: Array) -> int:
+	var completed := 0
+	
+	# We collect them beforehand so that we can clear the list as we go and ensure only
+	# unique entries are counted.
+	var available_blocks := []
+	for block_data in blocks:
+		available_blocks.append(block_data.resource_path)
+	
+	for block_id in completed_blocks:
+		var matched_id := ""
+		
+		for block_path in available_blocks:
+			if block_path == block_id:
+				matched_id = block_path
+				break
+		
+		if not matched_id.empty():
+			available_blocks.erase(matched_id)
+			completed += 1
+	
+	return completed
 
 
 func get_completed_quizzes_count(quizzes: Array) -> int:
