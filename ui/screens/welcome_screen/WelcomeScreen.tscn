@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
@@ -8,11 +8,9 @@
 [ext_resource path="res://ui/icons/icon_report.png" type="Texture" id=6]
 [ext_resource path="res://ui/screens/welcome_screen/RunDrawSquareIntro.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/screens/welcome_screen/WelcomeScreen.gd" type="Script" id=8]
-[ext_resource path="res://ui/theme/button_big_green_normal.tres" type="StyleBox" id=9]
+[ext_resource path="res://ui/components/BigGreenButton.tscn" type="PackedScene" id=9]
 [ext_resource path="res://ui/theme/panel_breadcrumbs.tres" type="StyleBox" id=10]
-[ext_resource path="res://ui/theme/button_big_green_pressed.tres" type="StyleBox" id=11]
 [ext_resource path="res://icon.png" type="Texture" id=12]
-[ext_resource path="res://ui/theme/button_big_green_hover.tres" type="StyleBox" id=13]
 [ext_resource path="res://ui/screens/welcome_screen/test_quiz.tres" type="Resource" id=14]
 [ext_resource path="res://ui/components/GDQuestLogo.tscn" type="PackedScene" id=15]
 
@@ -374,17 +372,7 @@ margin_right = 356.0
 margin_bottom = 897.0
 text = "Open Course Index"
 
-[node name="StartButton" type="Button" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
-margin_top = 913.0
-margin_right = 356.0
-margin_bottom = 976.0
-custom_colors/font_color_focus = Color( 0.188235, 0.188235, 0.286275, 1 )
-custom_colors/font_color = Color( 0.188235, 0.188235, 0.286275, 1 )
-custom_colors/font_color_hover = Color( 0.0901961, 0.0941176, 0.188235, 1 )
-custom_colors/font_color_pressed = Color( 0.188235, 0.188235, 0.286275, 1 )
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 11 )
-custom_styles/normal = ExtResource( 9 )
+[node name="StartButton" parent="Layout/MarginContainer/ColumnLayout/SideColumn" instance=ExtResource( 9 )]
 text = "Start Course"
 
 [node name="GDQuestLogo" parent="." instance=ExtResource( 15 )]
