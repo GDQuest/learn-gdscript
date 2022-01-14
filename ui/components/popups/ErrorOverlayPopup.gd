@@ -33,8 +33,8 @@ func _ready() -> void:
 	_update_explanation()
 	_exclusive_buttons.visible = exclusive
 
-	_error_explanation_block.connect("opened", self, "_on_revealer_opened", [_error_explanation_block])
-	_error_suggestion_block.connect("opened", self, "_on_revealer_opened", [_error_suggestion_block])
+	_error_explanation_block.connect("expanded", self, "_on_revealer_opened", [_error_explanation_block])
+	_error_suggestion_block.connect("expanded", self, "_on_revealer_opened", [_error_suggestion_block])
 	_close_button.connect("pressed", self, "hide")
 	hide()
 
@@ -56,7 +56,7 @@ func hide_message(message_source: Node) -> void:
 
 func set_exclusive(value: bool) -> void:
 	exclusive = value
-	
+
 	if is_inside_tree():
 		_exclusive_buttons.visible = exclusive
 
@@ -81,7 +81,7 @@ func set_error_message(value: String) -> void:
 func _update_explanation() -> void:
 	if not is_inside_tree():
 		return
-	
+
 	if _error_explanation.empty() and _error_suggestion.empty():
 		_error_explanation_block.hide()
 		_error_suggestion_block.hide()
@@ -91,15 +91,15 @@ func _update_explanation() -> void:
 		_no_content_label.hide()
 		_error_explanation_block.hide()
 		_error_suggestion_block.hide()
-		
+
 		if not _error_explanation.empty():
 			_error_explanation_value.bbcode_text = _error_explanation
 			_error_explanation_block.show()
-		
+
 		if not _error_suggestion.empty():
 			_error_suggestion_value.bbcode_text = _error_suggestion
 			_error_suggestion_block.show()
-		
+
 		_content_block.show()
 
 

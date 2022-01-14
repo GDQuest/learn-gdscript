@@ -119,6 +119,7 @@ func _on_text_changed() -> void:
 func _on_restore_pressed() -> void:
 	_restore_button.disabled = true
 	set_text(_initial_text)
+	enable_buttons()
 
 
 func _on_solution_pressed() -> void:

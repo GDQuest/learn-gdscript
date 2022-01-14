@@ -12,12 +12,26 @@ const COLOR_KEYWORD := Color(1, 0.094118, 0.321569)
 const COLOR_QUOTES := Color(1, 0.960784, 0.25098)
 const COLOR_COMMENTS := Color(0.290196, 0.294118, 0.388235)
 const KEYWORDS := [
-	"onready",
+	
+	# Basic keywords.
 	"var",
-	"export",
+	"const",
+	"func",
+	"signal",
+	"enum",
+	"class",
+	"static",
+	"extends",
+	"self",
+	
+	# Control flow keywords.
 	"if",
 	"elif",
 	"else",
+	"not",
+	"and",
+	"or",
+	"in",
 	"for",
 	"do",
 	"while",
@@ -28,25 +42,26 @@ const KEYWORDS := [
 	"continue",
 	"pass",
 	"return",
-	"class",
-	"extends",
 	"is",
-	"self",
+	
+	# Godot-specific keywords.
+	"onready",
+	"export",
 	"tool",
-	"signal",
-	"func",
-	"static",
-	"const",
-	"enum",
 	"setget",
 	"breakpoint",
-	"preload",
-	"yield",
-	"assert",
-	"remote",
-	"master",
-	"slave",
-	"sync",
+	"remote", "sync",
+	"master", "puppet", "slave",
+	"remotesync", "mastersync", "puppetsync",
+	
+	# Primitive data types.
+	"bool",
+	"int",
+	"float",
+	"null",
+	"true", "false",
+	
+	# Global GDScript namespace.
 	"Color8",
 	"ColorN",
 	"abs",
@@ -66,7 +81,7 @@ const KEYWORDS := [
 	"db2linear",
 	"decials",
 	"dectime",
-	"def2rad",
+	"deg2rad",
 	"dict2inst",
 	"ease",
 	"expo",
@@ -98,7 +113,7 @@ const KEYWORDS := [
 	"printraw",
 	"prints",
 	"printt",
-	"rad2def",
+	"rad2deg",
 	"rand_range",
 	"rand_seed",
 	"randf",
@@ -127,10 +142,9 @@ const KEYWORDS := [
 	"wrapf",
 	"wrapi",
 	"yield",
-	"int",
-	"float",
-	"bool",
-	"and",
+	
+	"PI", "TAU", "INF", "NAN",
+	
 ]
 
 # Enhances a TextEdit to better highlight GDScript code.

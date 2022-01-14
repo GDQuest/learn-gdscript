@@ -1,37 +1,58 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/UIContentBlock.gd" type="Script" id=1]
 [ext_resource path="res://ui/theme/fonts/font_text.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=3]
+[ext_resource path="res://ui/theme/fonts/font_lesson_heading.tres" type="DynamicFont" id=4]
+[ext_resource path="res://ui/theme/hseparator_lesson_content.tres" type="StyleBox" id=5]
 
-[node name="UIContentBlock" type="PanelContainer"]
+[node name="UIContentBlock" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 3 )
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1913.0
-margin_bottom = 1073.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Panel" type="PanelContainer" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
-margin_right = 1906.0
-margin_bottom = 1066.0
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+margin_right = 1920.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 0
 custom_constants/margin_top = 0
 custom_constants/margin_left = 0
-custom_constants/margin_bottom = 0
+custom_constants/margin_bottom = 10
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/MarginContainer" groups=["rich_text_label"]]
-margin_right = 1906.0
-margin_bottom = 1066.0
+[node name="Layout" type="VBoxContainer" parent="Panel/MarginContainer"]
+margin_right = 1920.0
+margin_bottom = 1070.0
+
+[node name="ContentHeader" type="Label" parent="Panel/MarginContainer/Layout"]
+margin_right = 1920.0
+margin_bottom = 44.0
+custom_fonts/font = ExtResource( 4 )
+text = "Optional Heading"
+
+[node name="ContentLayout" type="HBoxContainer" parent="Panel/MarginContainer/Layout"]
+margin_top = 60.0
+margin_right = 1920.0
+margin_bottom = 234.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextContent" type="RichTextLabel" parent="Panel/MarginContainer/Layout/ContentLayout" groups=["rich_text_label"]]
+margin_right = 1920.0
+margin_bottom = 174.0
 rect_min_size = Vector2( 320, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -43,3 +64,12 @@ fit_content_height = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ContentSeparator" type="HSeparator" parent="Panel/MarginContainer/Layout"]
+margin_left = 860.0
+margin_top = 250.0
+margin_right = 1060.0
+margin_bottom = 258.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_horizontal = 4
+custom_styles/separator = ExtResource( 5 )

@@ -7,15 +7,16 @@
 # var errors: Array = yield(verifier, "errors")
 #
 # Where `errors` is an array of LanguageServerErrors
+# The url of the LSP server is taken from project settings.
+# if you want to override it in a config.cfg file, use 
+# `lsp_url` for the debug url and
+# `lsp_url.release` for the release url
+# 
 class_name ScriptVerifier
 extends Reference
 
 # Emits error messages as an Array[LanguageServerError]
 signal errors(errors)
-
-# The URL of the HTTP Language Server
-const SERVER_URL := "https://lsp.gdquest.com"
-# const SERVER_URL := "http://localhost:3000"
 
 # https://docs.godotengine.org/en/stable/classes/class_httprequest.html#enumerations
 const HTTP_RESULT_ERRORS := {
@@ -38,6 +39,7 @@ const LanguageServerError := preload("./LanguageServerError.gd")
 const http_request_name = "___HTTP_REQUEST___"
 const WarningCode := GDScriptCodes.WarningCode
 const ErrorCode := GDScriptCodes.ErrorCode
+const GDQuestErrorCode := GDQuestCodes.ErrorCode
 # Skip errors with a severity warning above this. The lower the number,
 # the more dire the error. Defaults to `2`, which includes errors and
 # warnings
@@ -56,11 +58,15 @@ var _new_script_text: String
 var _url: String
 var _new_script_filename: String
 var _start_time := OS.get_unix_time()
+var _start_time_ms := OS.get_ticks_msec()
 
-func _init(attached_node: Node, new_script_filename: String, new_script_text: String, url := SERVER_URL) -> void:
-	
+func _init(attached_node: Node, new_script_filename: String, new_script_text: String, url := "") -> void:
+
+	if url == "":
+		url = ProjectSettings.get("global/lsp_url")
+
 	for warning in WarningCode:
-		blacklist_codes[warning] = true
+		blacklist_codes[WarningCode[warning]] = true
 
 	_node = attached_node
 	_new_script_text = new_script_text
@@ -87,8 +93,8 @@ func _on_http_request_completed(
 	result: int, response_code: int, _headers: PoolStringArray, body: PoolByteArray
 ) -> void:
 
-	var end := OS.get_unix_time()
-	var elapsed := end - _start_time
+	var elapsed := OS.get_ticks_msec() - _start_time_ms
+	var end := _start_time * 1000 + elapsed
 	
 	Log.info({
 		"end": end,
@@ -100,9 +106,13 @@ func _on_http_request_completed(
 	}, "finished request")
 	
 	if result != HTTPRequest.RESULT_SUCCESS:
-		var error_name: String = HTTP_RESULT_ERRORS[result]
-		printerr("http error connecting to %s: [%s]"%[_url, error_name])
-		emit_signal("errors", [])
+		var error: LanguageServerError
+		if result == HTTPRequest.RESULT_TIMEOUT:
+			error = make_error_connection_timed_out()
+		else:
+			var error_name: String = HTTP_RESULT_ERRORS[result]
+			error = make_error_cannot_connect(_url, error_name)
+		emit_errors([error])
 		return
 		
 	var response = (
@@ -121,7 +131,7 @@ func _on_http_request_completed(
 	var errors = []
 
 	if not response.size():
-		emit_signal("errors", errors)
+		emit_errors()
 		return
 
 	for index in response.size():
@@ -133,7 +143,7 @@ func _on_http_request_completed(
 			continue
 		errors.append(error)
 
-	emit_signal("errors", errors)
+	emit_errors(errors)
 
 
 # This requests the LSP server for checking the provided file
@@ -158,11 +168,13 @@ func test() -> void:
 	if success != OK:
 		push_error("could not connect")
 		remove_http_request_node()
-		var error := LanguageServerError.new()
-		error.message = "Could not initiate an http connection"
-		error.code = -1
-		var errors := [error]
-		emit_signal("errors", errors)
+		var error := make_error_no_connection()
+		emit_errors([error])
+		return
+
+
+func emit_errors(errors := []) -> void:
+	emit_signal("errors", errors)
 
 # Tests a script to ensure it has no errors.
 # Only works in exported projects. When running in the editor,
@@ -172,3 +184,35 @@ static func test_file(current_file_name: String) -> bool:
 	var test_file := load(current_file_name) as GDScript
 	var test_instance = test_file.new()
 	return test_instance != null
+
+
+static func make_error_cannot_connect(url: String, error_name: String) -> LanguageServerError:
+	var err = LanguageServerError.new()
+	err.message = "Cannot connect to '%s' (%s). Are you sure you are connected?"%[url, error_name]
+	err.severity = 1
+	err.code = GDQuestErrorCode.CANNOT_CONNECT_TO_LSP
+	return err
+
+
+static func make_error_no_connection() -> LanguageServerError:
+	var err = LanguageServerError.new()
+	err.message = "Failed to initiate a connection"
+	err.severity = 1
+	err.code = GDQuestErrorCode.CANNOT_INITIATE_CONNECTION
+	return err
+
+
+static func make_error_connection_timed_out() -> LanguageServerError:
+	var err = LanguageServerError.new()
+	err.message = "Connection timed out"
+	err.severity = 1
+	err.code = GDQuestErrorCode.LSP_TIMED_OUT
+	return err
+
+
+static func check_error_is_connection_error(error: LanguageServerError) -> bool:
+	return (
+		error.code == GDQuestCodes.ErrorCode.CANNOT_CONNECT_TO_LSP or \
+		error.code == GDQuestCodes.ErrorCode.CANNOT_INITIATE_CONNECTION or \
+		error.code == GDQuestCodes.ErrorCode.LSP_TIMED_OUT
+	)

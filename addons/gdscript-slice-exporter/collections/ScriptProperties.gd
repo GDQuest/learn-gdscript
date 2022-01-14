@@ -6,7 +6,7 @@ export var nodes_paths := []
 # Path to the GDScript file
 export var script_file: GDScript setget set_script_file
 # Full text of the script
-export var original_script := ""
+export(String, MULTILINE) var original_script := ""
 
 # Basename of the GDScript file. Helps to display the name in the UI
 var file_name := "" setget , get_file_name

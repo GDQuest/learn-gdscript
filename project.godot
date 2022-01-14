@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/components/popups/ErrorOverlayPopup.gd"
 }, {
+"base": "Reference",
+"class": "GDQuestCodes",
+"language": "GDScript",
+"path": "res://lsp/GDQuestCodes.gd"
+}, {
 "base": "TextEdit",
 "class": "GDScriptCodeExample",
 "language": "GDScript",
@@ -98,6 +103,11 @@ _global_script_classes=[ {
 "class": "LessonProgress",
 "language": "GDScript",
 "path": "res://resources/LessonProgress.gd"
+}, {
+"base": "Reference",
+"class": "MiniGDScriptTokenizer",
+"language": "GDScript",
+"path": "res://lsp/MiniGDScriptTokenizer.gd"
 }, {
 "base": "PanelContainer",
 "class": "OutputConsole",
@@ -219,7 +229,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/UIBaseQuiz.gd"
 }, {
-"base": "Control",
+"base": "MarginContainer",
 "class": "UIContentBlock",
 "language": "GDScript",
 "path": "res://ui/UIContentBlock.gd"
@@ -249,7 +259,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/quizzes/UIQuizChoice.gd"
 }, {
-"base": "Reference",
+"base": "UIBaseQuiz",
 "class": "UIQuizInputField",
 "language": "GDScript",
 "path": "res://ui/quizzes/UIQuizInputField.gd"
@@ -276,6 +286,7 @@ _global_script_class_icons={
 "Documentation": "",
 "DrawingTurtle": "",
 "ErrorOverlayPopup": "",
+"GDQuestCodes": "",
 "GDScriptCodeExample": "",
 "GDScriptCodes": "",
 "GameView": "",
@@ -283,6 +294,7 @@ _global_script_class_icons={
 "Lesson": "",
 "LessonDonePopup": "",
 "LessonProgress": "",
+"MiniGDScriptTokenizer": "",
 "OutputConsole": "",
 "Practice": "",
 "PracticeHint": "",
@@ -358,6 +370,11 @@ enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://ad
 [gdscript-slice-exporter]
 
 scene="res://addons/gdscript-course-builder/ui/CourseEditor.tscn"
+
+[global]
+
+lsp_url="https://lsp.gdquest.com"
+lsp_url.release="https://lsp.gdquest.com"
 
 [input]
 

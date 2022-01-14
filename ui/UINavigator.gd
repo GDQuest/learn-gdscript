@@ -134,16 +134,17 @@ func _navigate_to() -> void:
 	var screen: Control
 	if target is Practice:
 		screen = preload("UIPractice.tscn").instance()
-		_breadcrumbs.push_back(target.title)
+		_breadcrumbs.push_back((target as Practice).title)
 	elif target is Lesson:
 		screen = preload("UILesson.tscn").instance()
 		_lesson_index = course.lessons.find(target) # Make sure the index is synced after navigation.
-		_breadcrumbs.push_back("%s. %s" % [_lesson_index + 1, target.title])
+		_breadcrumbs.push_back("%s. %s" % [_lesson_index + 1, (target as Lesson).title])
 	else:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
 		return
 
 	_outliner_button.show()
+	_home_button.hide()
 	_screen_container.show()
 	# warning-ignore:unsafe_method_access
 	screen.setup(target, course)
@@ -172,7 +173,6 @@ func _navigate_to() -> void:
 		yield(_tween, "tween_all_completed")
 
 	_course_outliner.hide()
-	_home_button.hide()
 	
 	if target is Practice:
 		Events.emit_signal("practice_started", target)

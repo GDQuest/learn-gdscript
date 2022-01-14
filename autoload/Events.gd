@@ -5,6 +5,7 @@ extends Node
 
 signal lesson_started(lesson)
 signal lesson_completed(lesson)
+signal lesson_reading_block(block, previous_blocks)
 signal quiz_completed(quiz)
 signal practice_started(practice)
 signal practice_completed(practice)

@@ -24,8 +24,11 @@ func _ready() -> void:
 			child.connect("meta_clicked", OS, "shell_open")
 
 
-func set_button_continue() -> void:
-	_start_button.text = "Continue the Course"
+func set_button_continue(enable: bool = true) -> void:
+	if enable:
+		_start_button.text = "Continue Course"
+	else:
+		_start_button.text = "Start Course"
 
 
 func _on_outliner_pressed() -> void:
