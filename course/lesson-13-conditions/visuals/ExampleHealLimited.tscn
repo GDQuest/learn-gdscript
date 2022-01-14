@@ -26,9 +26,32 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 1040.0
 margin_bottom = 291.0
-gdscript_code = "heal(25) # New heal function"
+gdscript_code = "func heal(amount):
+	health += amount
+	if health > 100:
+		health = 100"
+
+[node name="Frame" parent="RunnableCodeExample" index="0"]
+margin_right = 514.0
+margin_bottom = 284.0
+
+[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
+margin_right = 174.0
+text = "heal(50)"
+
+[node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
+margin_left = 518.0
+margin_right = 1033.0
+margin_bottom = 284.0
+text = "func heal(amount):
+	health += amount
+	if health > 100:
+		health = 100"
+draw_spaces = true
 
 [node name="HealSprite" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 script = SubResource( 1 )
 health = 75
 health_gained = 50
+
+[editable path="RunnableCodeExample"]
