@@ -27,8 +27,7 @@ func run() -> void:
 
 func reset() -> void:
 	health = 1
-	_health_bar.rect_size.x = health
-	_label.text = "health = %s" % [health]
+	_update_health_bar()
 
 
 func _update_health_bar() -> void:
