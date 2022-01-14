@@ -37,6 +37,15 @@ func test_angular_speed_is_used_in_process_function() -> String:
 	return ""
 
 
+func test_each_function_uses_the_same_variable() -> String:
+	var regex = RegEx.new()
+	regex.compile("\\bangular_speed\\b")
+	var result = regex.search_all(_slice.current_text)
+	if result.size() > 3:
+		return "It looks like there are too many instances of angular_speed. Did you create too many?"
+	return ""
+
+
 func test_angular_speed_is_used_in_setter_function() -> String:
 	var regex = RegEx.new()
 	regex.compile("\\)\\:\\s*angular_speed")
