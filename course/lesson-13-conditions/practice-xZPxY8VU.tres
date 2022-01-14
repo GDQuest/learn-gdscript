@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 2 )
 title = "Preventing Health from Going Below Zero"
-goal = "When the character takes damage, their health can take negative values.
+goal = "When the robot takes damage, its health can be negative.
 
 We might want to want to display the health number on screen, like in Japanese RPGs.
 
@@ -19,7 +19,7 @@ starting_code = "func take_damage(amount):
 	pass"
 hints = PoolStringArray( "You can use a condition to check if the health goes below zero", "You need to increase health by the received amount", "You need to reset the health to [code]0[/code] when the health value goes below [code]0[/code]" )
 validator_script_path = "prevent_zero_health/TestPreventZeroHealth.gd"
-script_slice_path = "prevent_zero_health/PreventZeroHealth.live-editor/slices/PreventZeroHealth.heal.slice.tres"
+script_slice_path = "res://course/lesson-13-conditions/prevent_zero_health/PreventZeroHealth.live-editor/slices/PreventZeroHealth.damage.slice.tres"
 documentation_references = PoolStringArray( "take_damage" )
 documentation_resource = ExtResource( 1 )
 description = ""
