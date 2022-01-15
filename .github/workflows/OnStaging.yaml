@@ -8,7 +8,7 @@ on:
 jobs:
   build-staging:
     name: build and push to gh-pages
-    uses: GDQuest/learn-gdscript/.github/workflows/BuildGodot.yaml@github-actions-v1.1
+    uses: GDQuest/learn-gdscript/.github/workflows/BuildGodot.yaml@4bbcc833142281063654ff3a44312f4a0332587e
     with:
       sub_build_path: /staging
       watermark: $GITHUB_REPOSITORY:staging:$GITHUB_REF_NAME:$GITHUB_SHA
