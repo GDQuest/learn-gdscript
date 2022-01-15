@@ -11,6 +11,10 @@ on:
         required: false
         type: string
         default: $GITHUB_REPOSITORY:$GITHUB_WORKFLOW:$GITHUB_REF_NAME:$GITHUB_SHA
+      override_file:
+        required: false
+        type: string
+        default: ""
 
 env:
   GODOT_VERSION: 3.4.1
@@ -33,6 +37,9 @@ jobs:
       - name: Install Necessary Software
         run: |
           apt-get update && apt-get install -y --no-install-recommends sed 
+      - name: Override Configuration
+        run: |
+          cp ${{override_file}} override.cfg || echo "no config override to copy"
       - name: Web Build
         run: |
           mkdir -v -p build/web${{inputs.sub_build_path}}/web && \
