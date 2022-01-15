@@ -7,15 +7,15 @@ interface GDQuestLib {
   };
 }
 
-interface GDQUEST_ENVIRONMENT {
-  github_repository: string;
-  github_workflow: string;
-  github_ref_name: string;
-  github_sha: string;
-  override_file: string;
-  sub_build_path: string;
-  watermark: string;
-}
+declare const GDQUEST_ENVIRONMENT = {
+  github_repository: string,
+  github_workflow: string,
+  github_ref_name: string,
+  github_sha: string,
+  override_file: string,
+  sub_build_path: string,
+  watermark: string,
+};
 
 interface Signal {
   disconnect: (fn: (...args: any[]) => void) => boolean;
@@ -77,5 +77,4 @@ declare const Engine: {
 
 interface Window {
   GDQUEST: GDQuestLib;
-  GDQUEST_ENVIRONMENT: GDQUEST_ENVIRONMENT;
 }
