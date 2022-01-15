@@ -7,6 +7,16 @@ interface GDQuestLib {
   };
 }
 
+interface GDQUEST_ENVIRONMENT {
+  github_repository: string;
+  github_workflow: string;
+  github_ref_name: string;
+  github_sha: string;
+  override_file: string;
+  sub_build_path: string;
+  watermark: string;
+}
+
 interface Signal {
   disconnect: (fn: (...args: any[]) => void) => boolean;
   connect: (fn: (...args: any[]) => void) => () => boolean;
@@ -47,7 +57,7 @@ declare class GodotEngineInstance {
 
 declare const GODOT_CONFIG: {
   canvasResizePolicy: number;
-  unloadAfterInit: bool;
+  unloadAfterInit: boolean;
   canvas: HTMLCanvasElement;
   executable: string;
   mainPack: string;
@@ -67,4 +77,5 @@ declare const Engine: {
 
 interface Window {
   GDQUEST: GDQuestLib;
+  GDQUEST_ENVIRONMENT: GDQUEST_ENVIRONMENT;
 }

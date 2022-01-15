@@ -52,7 +52,8 @@ jobs:
       - name: Add Git Hash to build
         run: |
           cd build/web${{inputs.sub_build_path}}
-          sed -i "s@>branch and commit hash<@>${{ inputs.watermark }}<@" index.html && \
+          sed -i "s@>branch and commit hash@>${{ inputs.watermark }}<@" index.html && \
+          sed -i "s@GDQUEST_ENVIRONMENT = {}@GDQUEST_ENVIRONMENT = {github_repository: '$GITHUB_REPOSITORY',github_workflow: '$GITHUB_WORKFLOW',github_ref_name: '$GITHUB_REF_NAME',github_sha: '$GITHUB_SHA',override_file: '${{ override_file }}',sub_build_path: '${{ sub_build_path }}',watermark: '${{ watermark }}'}@" index.html && \
           echo "added commit hash to index.html" || echo "failed to add the commit hash"
       - name: Upload Artifact
         uses: actions/upload-artifact@v1

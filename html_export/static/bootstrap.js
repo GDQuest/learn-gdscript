@@ -114,6 +114,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
      */
     const onPackageLoaded = () => {
       displayPercentage(1);
+      console.log("package loaded");
       setTimeout(() => {
         setStatusMode(StatusMode.DONE);
         is_done = true;
@@ -301,6 +302,15 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
         const { userAgent, vendor } = navigator;
         const { width, height } = screen;
         const { innerHeight, innerWidth } = window;
+        const {
+          github_repository = "",
+          github_workflow = "",
+          github_ref_name = "",
+          github_sha = "",
+          override_file = "",
+          sub_build_path = "",
+          watermark = "",
+        } = window.GDQUEST_ENVIRONMENT || {};
         const data = {
           userAgent,
           vendor,
@@ -308,6 +318,13 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
           height,
           innerHeight,
           innerWidth,
+          github_repository,
+          github_workflow,
+          github_ref_name,
+          github_sha,
+          override_file,
+          sub_build_path,
+          watermark,
           ...additionalData,
         };
         makeLogFunction(LEVELS.TRACE)(data, `INIT`);
