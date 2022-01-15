@@ -7,14 +7,14 @@ interface GDQuestLib {
   };
 }
 
-declare const GDQUEST_ENVIRONMENT = {
-  github_repository: string,
-  github_workflow: string,
-  github_ref_name: string,
-  github_sha: string,
-  override_file: string,
-  sub_build_path: string,
-  watermark: string,
+declare const GDQUEST_ENVIRONMENT: {
+  github_repository: string;
+  github_workflow: string;
+  github_ref_name: string;
+  github_sha: string;
+  override_file: string;
+  sub_build_path: string;
+  watermark: string;
 };
 
 interface Signal {
