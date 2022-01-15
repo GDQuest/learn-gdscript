@@ -303,14 +303,14 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
         const { width, height } = screen;
         const { innerHeight, innerWidth } = window;
         const {
-          github_repository = "",
-          github_workflow = "",
-          github_ref_name = "",
-          github_sha = "",
-          override_file = "",
-          sub_build_path = "",
-          watermark = "",
-        } = window.GDQUEST_ENVIRONMENT || {};
+          github_repository,
+          github_workflow,
+          github_ref_name,
+          github_sha,
+          override_file,
+          sub_build_path,
+          watermark,
+        } = GDQUEST_ENVIRONMENT || {};
         const data = {
           userAgent,
           vendor,
