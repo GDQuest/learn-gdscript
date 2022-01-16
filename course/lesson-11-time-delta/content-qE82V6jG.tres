@@ -8,9 +8,11 @@ title = "Why Does Frame Variance Matter?"
 type = 0
 text = "What would happen if our computer slows down or has irregular frame times?
 
-In the examples below, we artificially made the frames last different times. Some last 0.1 seconds, some 0.2 seconds.
+In the examples below, we artificially made the frames last different times. Some last 0.1 seconds, some as much as 0.7 seconds.
 
-In the first example, we use the [b]same rotation[/b] every frame.
+When we use `delta`, the robot takes into account the varying frames so aligns with the desired path; it gets the end of the line at the correct time.
+
+
 
 But since the frames are unequal, we get a [b]varying rotation[/b] per second. Because of that, the character seems to jump."
 visual_element_path = ""

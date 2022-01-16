@@ -6,18 +6,22 @@
 [sub_resource type="GDScript" id=2]
 script/source = "extends \"res://course/lesson-11-time-delta/visuals/RunningRobot.gd\"
 
+signal animation_complete
 
-func _ready():
+
+func _ready() -> void:
 	set_process(false)
 	update()
 
-func _process(delta):
+
+func _process(delta) -> void:
 	_sprite.position.x += speed * delta * computer_speed
 	
 	if _sprite.position.x > distance/2:
-		reset()
+		set_process(false)
 
-func _draw():
+
+func _draw() -> void:
 	draw_line(Vector2(distance/2, 0), Vector2(distance/2, distance), Color.white * 0.5, 4, true)
 	
 	draw_line(Vector2(-distance/2, 0), Vector2(distance/2, 0), Color.white, 4, true)
@@ -25,88 +29,39 @@ func _draw():
 	draw_circle(Vector2(distance/2, 0), 6, Color.white)
 
 
-func run():
+func run() -> void:
 	reset()
 	set_process(true)
 
 
-func reset():
+func reset() -> void:
 	_sprite.position.x = -distance/2
 	set_process(false)
+	emit_signal(\"animation_complete\")
 "
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends \"res://course/lesson-11-time-delta/visuals/RunningRobot.gd\"
 
-const _deltas := [0.1, 0.3, 0.5, 0.1, 0.2, 0.2, 0.6, 0.1, 0.1, 0.1, 0.7]
 
-var _index := 0
-
-onready var _timer := $Timer
-
-func _ready():
-	_timer.connect(\"timeout\", self, \"_on_Timer_timeout\")
-
-
-func run():
-	reset()
-	_on_Timer_timeout()
-
-
-func reset():
-	_timer.stop()
-	_index = 0
+func reset() -> void:
 	_sprite.position.x = -distance/2
-
-
-func _on_Timer_timeout():
-	if _index > _deltas.size() - 1:
-		_index = 0
-		_sprite.position.x = -distance/2
-		return
-	
-	var time = _deltas[_index]
-	_sprite.position.x += speed * time
-	
-	_timer.start(_deltas[_index] / computer_speed)
-	_index += 1
 "
 
 [sub_resource type="GDScript" id=3]
 script/source = "extends \"res://course/lesson-11-time-delta/visuals/RunningRobot.gd\"
 
-const _deltas := [0.1, 0.3, 0.5, 0.1, 0.2, 0.2, 0.6, 0.1, 0.1, 0.1, 0.7]
 
-var _index := 0
-
-onready var _timer := $Timer
-
-func _ready():
+func _ready() -> void:
 	speed /= 3
-	_timer.connect(\"timeout\", self, \"_on_Timer_timeout\")
 
 
-func run():
-	reset()
-
-	_on_Timer_timeout()
-
-func reset():
-	_timer.stop()
-	_index = 0
+func reset() -> void:
 	_sprite.position.x = -distance/2
 
-func _on_Timer_timeout():
-	if _index > _deltas.size() - 1:
-		_index = 0
-		_sprite.position.x = -distance/2
-		return
-	
-	var time = _deltas[_index]
-	_sprite.position.x += speed
-	
-	_timer.start(_deltas[_index] / computer_speed)
-	_index += 1
+
+func move(vector: Vector2) -> void:
+	_sprite.position += vector
 "
 
 [node name="RobotRace" type="Node2D"]
@@ -129,14 +84,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RunningRobotFrame" parent="Robots" instance=ExtResource( 1 )]
+[node name="RunningRobotFrameDelta" parent="Robots" instance=ExtResource( 1 )]
 position = Vector2( 0, 70 )
 script = SubResource( 1 )
 
-[node name="Timer" type="Timer" parent="Robots/RunningRobotFrame"]
-one_shot = true
-
-[node name="Label2" type="Label" parent="Robots/RunningRobotFrame"]
+[node name="Label" type="Label" parent="Robots/RunningRobotFrameDelta"]
 margin_left = -264.0
 margin_top = 8.0
 margin_right = -124.0
@@ -147,14 +99,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RunningRobotFrame2" parent="Robots" instance=ExtResource( 1 )]
+[node name="RunningRobotFrame" parent="Robots" instance=ExtResource( 1 )]
 position = Vector2( 0, 220 )
 script = SubResource( 3 )
 
-[node name="Timer" type="Timer" parent="Robots/RunningRobotFrame2"]
-one_shot = true
-
-[node name="Label3" type="Label" parent="Robots/RunningRobotFrame2"]
+[node name="Label" type="Label" parent="Robots/RunningRobotFrame"]
 margin_left = -264.0
 margin_top = 8.0
 margin_right = -124.0
@@ -164,3 +113,8 @@ text = "Constant Distance"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
