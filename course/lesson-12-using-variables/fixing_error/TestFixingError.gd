@@ -42,7 +42,7 @@ func test_each_function_uses_the_same_variable() -> String:
 	regex.compile("var\\s*angular_speed")
 	var result = regex.search_all(_slice.current_text)
 	if result.size() > 1:
-		return "It looks like there are too many instances of angular_speed. Did you create too many?"
+		return "It looks like you declared angular_speed more than once. It should only be defined once."
 	return ""
 
 
