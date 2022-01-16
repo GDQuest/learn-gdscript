@@ -1,0 +1,166 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://course/lesson-11-time-delta/visuals/RunningRobot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/lesson-11-time-delta/visuals/RobotRace.gd" type="Script" id=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends \"res://course/lesson-11-time-delta/visuals/RunningRobot.gd\"
+
+
+func _ready():
+	set_process(false)
+	update()
+
+func _process(delta):
+	_sprite.position.x += speed * delta * computer_speed
+	
+	if _sprite.position.x > distance/2:
+		reset()
+
+func _draw():
+	draw_line(Vector2(distance/2, 0), Vector2(distance/2, distance), Color.white * 0.5, 4, true)
+	
+	draw_line(Vector2(-distance/2, 0), Vector2(distance/2, 0), Color.white, 4, true)
+	draw_circle(Vector2(-distance/2, 0), 6, Color.white)
+	draw_circle(Vector2(distance/2, 0), 6, Color.white)
+
+
+func run():
+	reset()
+	set_process(true)
+
+
+func reset():
+	_sprite.position.x = -distance/2
+	set_process(false)
+"
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://course/lesson-11-time-delta/visuals/RunningRobot.gd\"
+
+const _deltas := [0.1, 0.3, 0.5, 0.1, 0.2, 0.2, 0.6, 0.1, 0.1, 0.1, 0.7]
+
+var _index := 0
+
+onready var _timer := $Timer
+
+func _ready():
+	_timer.connect(\"timeout\", self, \"_on_Timer_timeout\")
+
+
+func run():
+	reset()
+	_on_Timer_timeout()
+
+
+func reset():
+	_timer.stop()
+	_index = 0
+	_sprite.position.x = -distance/2
+
+
+func _on_Timer_timeout():
+	if _index > _deltas.size() - 1:
+		_index = 0
+		_sprite.position.x = -distance/2
+		return
+	
+	var time = _deltas[_index]
+	_sprite.position.x += speed * time
+	
+	_timer.start(_deltas[_index] / computer_speed)
+	_index += 1
+"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends \"res://course/lesson-11-time-delta/visuals/RunningRobot.gd\"
+
+const _deltas := [0.1, 0.3, 0.5, 0.1, 0.2, 0.2, 0.6, 0.1, 0.1, 0.1, 0.7]
+
+var _index := 0
+
+onready var _timer := $Timer
+
+func _ready():
+	speed /= 3
+	_timer.connect(\"timeout\", self, \"_on_Timer_timeout\")
+
+
+func run():
+	reset()
+
+	_on_Timer_timeout()
+
+func reset():
+	_timer.stop()
+	_index = 0
+	_sprite.position.x = -distance/2
+
+func _on_Timer_timeout():
+	if _index > _deltas.size() - 1:
+		_index = 0
+		_sprite.position.x = -distance/2
+		return
+	
+	var time = _deltas[_index]
+	_sprite.position.x += speed
+	
+	_timer.start(_deltas[_index] / computer_speed)
+	_index += 1
+"
+
+[node name="RobotRace" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Robots" type="Node2D" parent="."]
+
+[node name="RunningRobotNormal" parent="Robots" instance=ExtResource( 1 )]
+position = Vector2( 0, -120 )
+script = SubResource( 2 )
+
+[node name="Label" type="Label" parent="Robots/RunningRobotNormal"]
+margin_left = -264.0
+margin_top = 8.0
+margin_right = -124.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 140, 0 )
+text = "Desired Path"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunningRobotFrame" parent="Robots" instance=ExtResource( 1 )]
+position = Vector2( 0, 70 )
+script = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="Robots/RunningRobotFrame"]
+one_shot = true
+
+[node name="Label2" type="Label" parent="Robots/RunningRobotFrame"]
+margin_left = -264.0
+margin_top = 8.0
+margin_right = -124.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 140, 0 )
+text = "Using Delta"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunningRobotFrame2" parent="Robots" instance=ExtResource( 1 )]
+position = Vector2( 0, 220 )
+script = SubResource( 3 )
+
+[node name="Timer" type="Timer" parent="Robots/RunningRobotFrame2"]
+one_shot = true
+
+[node name="Label3" type="Label" parent="Robots/RunningRobotFrame2"]
+margin_left = -264.0
+margin_top = 8.0
+margin_right = -124.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 140, 0 )
+text = "Constant Distance"
+__meta__ = {
+"_edit_use_anchors_": false
+}
