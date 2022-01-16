@@ -14,7 +14,7 @@ const STATEMENTS = [
 	"health is not equal to seven."
 ]
 
-func test_first_if_statement_is_true() -> String:
+func test_statement_1_is_true() -> String:
 	var regex = RegEx.new()
 	regex.compile(ANSWERS[0] + "\\s*\\:\\s*.*" + STATEMENTS[0])
 	var result = regex.search(_slice.current_text)
@@ -23,7 +23,7 @@ func test_first_if_statement_is_true() -> String:
 	return ""
 
 
-func test_second_if_statement_is_true() -> String:
+func test_statement_2_is_true() -> String:
 	var regex = RegEx.new()
 	regex.compile(ANSWERS[1] + "\\s*\\:\\s*.*" + STATEMENTS[1])
 	var result = regex.search(_slice.current_text)
@@ -32,7 +32,7 @@ func test_second_if_statement_is_true() -> String:
 	return ""
 
 
-func test_third_if_statement_is_true() -> String:
+func test_statement_3_is_true() -> String:
 	var regex = RegEx.new()
 	regex.compile(ANSWERS[2] + "\\s*\\:\\s*.*" + STATEMENTS[2])
 	var result = regex.search(_slice.current_text)
@@ -41,7 +41,7 @@ func test_third_if_statement_is_true() -> String:
 	return ""
 
 
-func test_fourth_if_statement_is_true() -> String:
+func test_statement_4_is_true() -> String:
 	var regex = RegEx.new()
 	regex.compile(ANSWERS[3] + "\\s*\\:\\s*.*" + STATEMENTS[3])
 	var result = regex.search(_slice.current_text)
