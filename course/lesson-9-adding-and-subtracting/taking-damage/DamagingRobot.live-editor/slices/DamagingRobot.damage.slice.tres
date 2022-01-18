@@ -15,6 +15,6 @@ name = "damage"
 is_full_file = false
 start = 29
 end = 32
-lines_before = [ "extends Control", "", "var health = 20", "var _health_gained = -50", "var _max_health = 100", "", "onready var _robot := $HealSprite", "", "", "func _ready() -> void:", "	_robot.health_gained = _health_gained", "	_robot.health = health", "	_robot.max_health = _max_health", "	_robot._update_health_bar()", "", "", "func _run() -> void:", "	take_damage(_health_gained)", "	_update_robot()", "", "", "func _update_robot() -> void:", "	_robot._animation_player.play(\"damage\")", "	_robot.health_gained = _health_gained", "	_robot.health = health", "	_robot.max_health = _max_health", "	_robot._update_health_bar()", "", "" ]
+lines_before = [ "extends Control", "", "var health = 100", "var _damage = 50", "var _max_health = 100", "", "onready var _robot := $RobotCharacter", "", "", "func _ready() -> void:", "	_robot.health = health", "	_robot.max_health = _max_health", "	_robot._update_health_bar()", "", "", "func _run() -> void:", "	take_damage(_damage)", "	_update_robot()", "	yield(get_tree().create_timer(1), \"timeout\")", "	Events.emit_signal(\"practice_run_completed\")", "", "", "func _update_robot() -> void:", "	_robot._animation_player.play(\"damage\")", "	_robot.health = health", "	_robot.max_health = _max_health", "	_robot._update_health_bar()", "", "" ]
 lines_after = [ "" ]
 lines_editable = [ "func take_damage(amount):", "	health -= amount" ]

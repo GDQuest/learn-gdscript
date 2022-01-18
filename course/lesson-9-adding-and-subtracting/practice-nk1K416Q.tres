@@ -6,11 +6,14 @@
 [resource]
 script = ExtResource( 2 )
 title = ""
-goal = ""
-starting_code = ""
-hints = PoolStringArray(  )
-validator_script_path = "res://course/lesson-9-adding-and-subtracting/taking-damage/TestLimitingHealth.gd"
+goal = "In our game, the main character has a certain amount of [code]health[/code]. When it gets hit, the health should go down by a varying [code]amount[/code] of damage.
+
+Add to the [code]take_damage()[/code] function so it subtracts the [code]amount[/code] to the predefined [code]health[/code] variable."
+starting_code = "func take_damage(amount):
+	pass"
+hints = PoolStringArray( "Replaces [code]pass[/code] with an instruction to subtract [code]amount[/code] from [code]health[/code]." )
+validator_script_path = "taking-damage/TestDamagingRobot.gd"
 script_slice_path = "taking-damage/DamagingRobot.live-editor/slices/DamagingRobot.damage.slice.tres"
-documentation_references = PoolStringArray(  )
+documentation_references = PoolStringArray( "take_damage" )
 documentation_resource = ExtResource( 1 )
 description = "Damaging the Robot"
