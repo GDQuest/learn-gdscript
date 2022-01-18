@@ -12,7 +12,7 @@ func test_robot_takes_the_right_amount_of_damage() -> String:
 		return "The health goes above 100 when we damage the robot. Did you subract amount from health?"
 	
 	if not health == 50:
-		return "The robot didn't take as much damage as expected. It should have 50 health after taking damage."
+		return "The robot didn't take as much damage as expected. It has %s health, but it should have 50 health after taking damage." % [health]
 	
 	return ""
 
