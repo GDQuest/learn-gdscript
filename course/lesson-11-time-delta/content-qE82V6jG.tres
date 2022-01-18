@@ -10,11 +10,13 @@ text = "What would happen if our computer slows down or has irregular frame time
 
 In the examples below, we artificially made the frames last different times. Some last 0.1 seconds, some as much as 0.7 seconds.
 
-When we use `delta`, the robot takes into account the varying frames so aligns with the desired path; it gets the end of the line at the correct time.
+When we use [code]delta[/code], the robot takes into account the varying frames so aligns with the desired path; it gets the end of the line at the correct time.
 
+By using [code]delta[/code], we move a [b]different amount[/b] every frame, adjusting the character's position based on [code]delta[/code].
 
+Thanks to that, we get [b]constant movement[/b] per second. The character seems to move at a regular speed.
 
-But since the frames are unequal, we get a [b]varying rotation[/b] per second. Because of that, the character seems to jump."
+Using a constant distance each frame instead, we get [b]varying movement[/b] per second. Because of that, the character seems to jump and overshoots the target."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
