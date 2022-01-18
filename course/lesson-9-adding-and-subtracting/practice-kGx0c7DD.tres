@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+title = "Healing the Robot"
+goal = "It's time to heal the robot up to full health!
+
+Write a function called [code]heal()[/code] that takes [code]amount[/code] as a parameter.
+
+The function should add [/code]amount[/code] to [/code]health[/code].
+
+The robot starts with 50 health and will heal 50 to get it up to 100."
+starting_code = ""
+hints = PoolStringArray( "Define the [code]heal()[/code] function using [code]func[/code]", "The first line is [code]func heal(amount):[/code]" )
+validator_script_path = "healing/TestHealingRobot.gd"
+script_slice_path = "healing/HealingRobot.live-editor/slices/HealingRobot.heal.slice.tres"
+documentation_references = PoolStringArray( "heal" )
+documentation_resource = ExtResource( 1 )
+description = ""
