@@ -20,11 +20,25 @@ var port = 8124
 
 func _init() -> void:
 	if ProjectSettings.has_setting("global/lsp_url"):
-		var url: String = ProjectSettings.get_setting("global/lsp_url")
-		var urlRegex = RegEx.new()
-		urlRegex.compile("(?<protocol>https?:\/\/)(?<host>.*?)(?<path>\/.*?)?(?<port>:\\d+)?$")
-		host = urlRegex.search(url).get_string("host")
+		var url: String = ProjectSettings.get_setting("global/lsp_socket_url_and_port")
+		set_hostname(url)
+	# TODO: remove this to control when the node connects
 	connect_to_host()
+
+
+# Sets `host` and `port` from a string
+func set_hostname(url: String) -> void:
+	var urlRegex := RegEx.new()
+	urlRegex.compile("(?<protocol>https?:\/\/)(?<host>.*?)(?<path>\/.*?)?(?<port>:\\d+)?$")
+	var result := urlRegex.search(url)
+	if result == null:
+		return
+	var _host = result.get_string("host")
+	var _port = result.get_string("port")
+	if _host != "":
+		host = _host
+	if _port != "":
+		port = int(_port)
 
 
 func _process(_delta: float) -> void:
