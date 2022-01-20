@@ -1,15 +1,14 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/lesson-15-modulo/visuals/Modulo.tscn" type="PackedScene" id=2]
+[ext_resource path="res://course/lesson-15-modulo/visuals/DiceShower.tscn" type="PackedScene" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "tool
 extends RunnableCodeExample
 
 func _ready():
-	create_slider_for(\"number\", 1, 7, 1)
-	create_slider_for(\"modulo\", 1, 7, 1)
+	create_slider_for(\"max_number\", 1, 20, 1)
 
 func _set_instance_value(value: float, property_name: String, value_label: Label) -> void:
 	._set_instance_value(value, property_name, value_label)
@@ -19,6 +18,7 @@ func _set_instance_value(value: float, property_name: String, value_label: Label
 [node name="ExampleModulo" type="PanelContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
+rect_min_size = Vector2( 400, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -26,27 +26,31 @@ __meta__ = {
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 307.0
+margin_right = 393.0
 margin_bottom = 387.0
 script = SubResource( 1 )
 scene = ExtResource( 2 )
+gdscript_code = "func roll(max_number):
+	var result = randi() % max_number + 1"
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 300.0
+margin_right = 386.0
 margin_bottom = 380.0
-rect_min_size = Vector2( 300, 380 )
+rect_min_size = Vector2( 320, 380 )
 
 [node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="0"]
 visible = false
 
 [node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-visible = false
+text = "Roll"
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
 visible = false
-margin_left = 244.0
-margin_right = 644.0
-margin_bottom = 260.0
+margin_left = 324.0
+margin_right = 724.0
+margin_bottom = 380.0
+text = "func roll(max_number):
+	var result = randi() % max_number + 1"
 draw_spaces = true
 
 [editable path="RunnableCodeExample"]
