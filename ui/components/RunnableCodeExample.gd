@@ -94,6 +94,7 @@ func create_slider_for(property_name, min_value := 0.0, max_value := 100.0, step
 	var label := Label.new()
 	var value_label := Label.new()
 	var slider := HSlider.new()
+	var property_value = _scene_instance.get(property_name)
 
 	_sliders.add_child(box)
 	box.add_child(label)
@@ -103,10 +104,11 @@ func create_slider_for(property_name, min_value := 0.0, max_value := 100.0, step
 	label.text = property_name.capitalize()
 	slider.min_value = min_value
 	slider.max_value = max_value
+	slider.value = property_value
 	slider.step = step
 	slider.rect_min_size.x = 100.0
 	slider.connect("value_changed", self, "_set_instance_value", [property_name, value_label])
-	_set_instance_value(_scene_instance.get(property_name), property_name, value_label)
+	_set_instance_value(property_value, property_name, value_label)
 
 
 # Using this proxy function is required as the value emitted by the signal
