@@ -11,6 +11,8 @@
 class_name DrawingTurtle
 extends Node2D
 
+signal turtle_finished
+
 const LINE_THICKNESS := 4.0
 const DEFAULT_COLOR := Color.white
 
@@ -112,6 +114,7 @@ func play_draw_animation() -> void:
 		yield(polygon, "animation_finished")
 
 	_current_polygon = null
+	emit_signal("turtle_finished")
 
 
 # Returns the total bounding rectangle enclosing all the turtle's drawn
