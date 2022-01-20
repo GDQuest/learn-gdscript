@@ -78,8 +78,14 @@ func _ready() -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
+	# Shortcut uses Enter by default which adds a new line in TextEdit without any means to stop it.
+	# So we remove it.
 	if event.is_action_pressed("run_code"):
 		_remove_last_character = true
+	
+	# Capture keyboard events if we are the focus owner, otherwise left arrow causes navigation events.
+	if event is InputEventKey and get_focus_owner() == self:
+		get_tree().set_input_as_handled()
 
 
 func setup(slice_properties: SliceProperties) -> void:

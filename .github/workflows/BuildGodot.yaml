@@ -11,6 +11,10 @@ on:
         required: false
         type: string
         default: $GITHUB_REPOSITORY:$GITHUB_WORKFLOW:$GITHUB_REF_NAME:$GITHUB_SHA
+      override_file:
+        required: false
+        type: string
+        default: ""
 
 env:
   GODOT_VERSION: 3.4.1
@@ -33,6 +37,13 @@ jobs:
       - name: Install Necessary Software
         run: |
           apt-get update && apt-get install -y --no-install-recommends sed 
+      - name: Override Configuration
+        run: |
+          cp ${{inputs.override_file}} override.cfg && echo "copied override file" || echo "no config override to copy"
+      - name: Verifying Files' Presence
+        run: |
+          echo "Current Files"
+          ls -la .
       - name: Web Build
         run: |
           mkdir -v -p build/web${{inputs.sub_build_path}}/web && \
@@ -45,7 +56,16 @@ jobs:
       - name: Add Git Hash to build
         run: |
           cd build/web${{inputs.sub_build_path}}
-          sed -i "s@>branch and commit hash<@>${{ inputs.watermark }}<@" index.html && \
+          sed -i "s@>branch and commit hash@>${{ inputs.watermark }}<@" index.html && \
+          sed -i "s@GDQUEST_ENVIRONMENT = {}@GDQUEST_ENVIRONMENT = { \
+            github_repository: '$GITHUB_REPOSITORY',\
+            github_workflow: '$GITHUB_WORKFLOW',\
+            github_ref_name: '$GITHUB_REF_NAME',\
+            github_sha: '$GITHUB_SHA',\
+            override_file: '${{ inputs.override_file }}',\
+            sub_build_path: '${{ inputs.sub_build_path }}',\
+            watermark: '${{ inputs.watermark }}'\
+            }@" index.html && \
           echo "added commit hash to index.html" || echo "failed to add the commit hash"
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
