@@ -6,7 +6,7 @@ const color_red := Color("928fb8")
 
 export var _offset := Vector2.ZERO
 export (int, 1, 7) var number := 5 setget _set_number, get_number
-export (int, 1, 7) var divisor := 3 setget _set_divisor, get_divisor
+export (int, 1, 7) var modulo := 3 setget _set_modulo, get_modulo
 
 onready var _blocks := $Blocks
 onready var _string := $String
@@ -24,31 +24,31 @@ func _align_blocks() -> void:
 	
 	var row := 0
 	var column := 0
-	for i in range(max(number, divisor)):
+	for i in range(max(number, modulo)):
 		_blocks.get_child(i).position = Vector2(40 * column, row * 40) + _offset
 		row += 1
-		if row % divisor == 0 and divisor < number:
+		if row % modulo == 0 and modulo < number:
 			column += 1
 			row = 0
 
 
 func _update_visual() -> void:
-	if number >= divisor:
+	if number >= modulo:
 		for i in range(number):
 			_blocks.get_child(i).modulate.a = 0
-			if i < number - (number % divisor):
+			if i < number - (number % modulo):
 				_blocks.get_child(i).modulate = color_red
 			else:
 				_blocks.get_child(i).modulate = color_green
 	else:
-		for i in range(divisor):
+		for i in range(modulo):
 			_blocks.get_child(i).modulate = color_green
 			
 			if i >= number:
 				_blocks.get_child(i).modulate = color_red
 	
-	_string.text = "%s %% %s" % [number, divisor]
-	_remainder.text = "Remainder: %s" % [number % divisor]
+	_string.text = "%s %% %s" % [number, modulo]
+	_remainder.text = "Remainder: %s" % [number % modulo]
 
 
 func _set_number(value: int) -> void:
@@ -59,8 +59,8 @@ func _set_number(value: int) -> void:
 	_update_visual()
 
 
-func _set_divisor(value: int) -> void:
-	divisor = value
+func _set_modulo(value: int) -> void:
+	modulo = value
 	if not _blocks:
 		return
 	_align_blocks()
@@ -71,5 +71,5 @@ func get_number() -> int:
 	return number
 
 
-func get_divisor() -> int:
-	return divisor
+func get_modulo() -> int:
+	return modulo
