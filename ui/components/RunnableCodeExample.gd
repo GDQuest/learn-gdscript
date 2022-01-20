@@ -105,10 +105,8 @@ func create_slider_for(property_name, min_value := 0.0, max_value := 100.0, step
 	slider.max_value = max_value
 	slider.step = step
 	slider.rect_min_size.x = 100.0
-	var value = _scene_instance.get(property_name)
-	slider.value = value
 	slider.connect("value_changed", self, "_set_instance_value", [property_name, value_label])
-	_set_instance_value(value, property_name, value_label)
+	_set_instance_value(_scene_instance.get(property_name), property_name, value_label)
 
 
 # Using this proxy function is required as the value emitted by the signal
