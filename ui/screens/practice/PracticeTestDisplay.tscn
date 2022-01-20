@@ -11,10 +11,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="TextureRect" parent="."]
+[node name="IconAnchors" type="Control" parent="."]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+
+[node name="Icon" type="TextureRect" parent="IconAnchors"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 32, 32 )
+rect_pivot_offset = Vector2( 8, 16 )
 texture = ExtResource( 2 )
 expand = true
 __meta__ = {
@@ -28,3 +40,5 @@ margin_right = 136.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 100, 0 )
 text = "Test text"
+
+[node name="Tween" type="Tween" parent="."]

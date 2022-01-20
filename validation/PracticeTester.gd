@@ -31,27 +31,37 @@ func get_test_names() -> Array:
 
 func run_tests() -> TestResult:
 	var result := TestResult.new()
+	
 	_prepare()
+	
 	for method in _test_methods:
+		var test_name = _test_methods[method]
+		
 		var error_message: String = call(method)
 		if error_message != "":
-			result.errors.append(error_message)
+			result.errors[test_name] = error_message
 		else:
 			# We pass the test name to display it in the interface.
 			result.passed_tests.push_back(_test_methods[method])
+	
 	_clean_up()
+	
 	return result
 
 
 func _find_test_method_names() -> Dictionary:
 	var output := {}
+	
 	var methods := []
 	for method in get_method_list():
 		if method.name.begins_with("test_"):
 			methods.append(method.name)
+	
 	methods.sort()
+	
 	for method in methods:
 		output[method] = method.trim_prefix("test_").capitalize()
+	
 	return output
 
 
@@ -70,7 +80,7 @@ func _clean_up() -> void:
 class TestResult:
 	# List of tests passed successfully in the test suite.
 	var passed_tests := []
-	var errors := []
+	var errors := {}
 
 	func is_success() -> bool:
 		return errors.empty()

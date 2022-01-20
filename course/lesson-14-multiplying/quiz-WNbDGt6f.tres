@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+question = "What is the value of damage now?"
+content_bbcode = "[code]
+var level = 5
+var power = 3
+
+func calculate_damage():
+	var damage = power * level
+	damage *= 2
+[/code]"
+hint = ""
+explanation_bbcode = "The value of [code]damage[/code] starts as [code]15[/code].
+
+Then, [code]damage *= 2[/code] multiplies it by [code]2[/code] to get [code]30[/code]."
+answer_options = [ "30", "13", "25" ]
+valid_answers = [ "30" ]
+is_multiple_choice = false
+do_shuffle_answers = true

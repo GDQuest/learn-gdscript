@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+title = "Limiting Healing"
+goal = "We have a heal function that adds an amount to the character's health.
+
+Add to the function so the character's health is never greater than [code]80[/code]."
+starting_code = "func heal(amount):
+	health += amount"
+hints = PoolStringArray( " You can use a condition to check if the health is above 80", "You need to reset the health to 80 when the health value goes above 80", "Use the line [code]if health > 80:[/code] to do this" )
+validator_script_path = "limiting_health/TestLimitingHealth.gd"
+script_slice_path = "limiting_health/LimitingHealth.live-editor/slices/LimitingHealth.heal.slice.tres"
+documentation_references = PoolStringArray( "heal" )
+documentation_resource = ExtResource( 1 )
+description = ""
