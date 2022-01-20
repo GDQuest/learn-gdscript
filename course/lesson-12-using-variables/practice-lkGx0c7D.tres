@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+title = "Clarifying Code Using Variables"
+goal = "Clarify the code by replacing [code]4[/code] with the [code]angular_speed[/code] variable.
+
+[code]angular_speed[/code] should be script-wide and have a value of [code]4[/code]."
+starting_code = "func _process(delta):
+	rotate(4 * delta)"
+hints = PoolStringArray( "Define the [code]angular_speed[/code] variable at the top of the script to make it script-wide", "Don\'t forget to use it in the [code]rotate()[/code] function", "To define the variable, use [code]var angular_speed = 4[/code]" )
+validator_script_path = "clarify/TestClarifyCode.gd"
+script_slice_path = "clarify/ClarifyCode.live-editor/slices/ClarifyCode.clarify.slice.tres"
+documentation_references = PoolStringArray( "rotate", "_process" )
+documentation_resource = ExtResource( 1 )
+description = ""

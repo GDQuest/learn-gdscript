@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+title = "Fixing an Out of Scope Error"
+goal = "There's something wrong with the code here. Can you see what it is?
+
+Run the code and read the error.
+
+Correct the code so it works as intended."
+starting_code = "func _process(delta):
+	var angular_speed = 4
+	rotate(angular_speed * delta)
+
+func set_angular_speed(new_angular_speed):
+	angular_speed = new_angular_speed"
+hints = PoolStringArray( "You need to make [code]angular_speed[/code] script-wide so it\'s available to all functions", "Define [code]angular_speed[/code] at the top of the script instead" )
+validator_script_path = "fixing_error/TestFixingError.gd"
+script_slice_path = "fixing_error/FixingError.live-editor/slices/FixingError.clarify.slice.tres"
+documentation_references = PoolStringArray( "rotate", "_process" )
+documentation_resource = ExtResource( 1 )
+description = ""
