@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+question = "Which of these would increase the health of the robot?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "Both of these lines increase the [code]health[/code] of the robot by [code]amount[/code].
+[code]
+health += amount
+health = health + amount
+[/code]"
+answer_options = [ "health -= amount", "health += amount", "health = health + amount", "health = health - amount" ]
+valid_answers = [ "health += amount", "health = health + amount" ]
+is_multiple_choice = true
+do_shuffle_answers = true

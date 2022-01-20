@@ -7,8 +7,8 @@ class_name UILesson
 extends Control
 
 const ContentBlockScene := preload("UIContentBlock.tscn")
-const QuizInputFieldScene := preload("quizzes/UIQuizInputField.tscn")
-const QuizChoiceScene := preload("quizzes/UIQuizChoice.tscn")
+const QuizInputFieldScene := preload("./components/quizzes/UIQuizInputField.tscn")
+const QuizChoiceScene := preload("./components/quizzes/UIQuizChoice.tscn")
 const PracticeButtonScene := preload("UIPracticeButton.tscn")
 
 const AUTOSCROLL_PADDING := 20
@@ -33,7 +33,7 @@ var _quizz_count := 0
 func _ready() -> void:
 	_scroll_container.get_v_scrollbar().connect("value_changed", self, "_on_content_scrolled")
 	_debounce_timer.connect("timeout", self, "_emit_read_content")
-	
+
 	if test_lesson and get_parent() == get_tree().root:
 		setup(test_lesson, null)
 
@@ -64,17 +64,17 @@ func setup(lesson: Lesson, course: Course) -> void:
 		# the top.
 		#  - We are opening a lesson that we were in the middle of, but not the last one; we must set
 		# the position to the first unread block.
-		
+
 		if is_returning:
 			restore_id = user_profile.get_last_visited_lesson_block(course.resource_path, lesson.resource_path)
-		
+
 		var reading_done := user_profile.is_lesson_reading_completed(course.resource_path, lesson.resource_path)
 		var reading_started := user_profile.has_lesson_blocks_read(course.resource_path, lesson.resource_path)
 		if restore_id.empty() and not reading_done and reading_started:
 			for block in lesson.content_blocks:
 				if user_profile.is_lesson_block_read(course.resource_path, lesson.resource_path, block.resource_path):
 					continue
-				
+
 				restore_id = block.resource_path
 				break
 
@@ -85,7 +85,7 @@ func setup(lesson: Lesson, course: Course) -> void:
 			_content_blocks.add_child(instance)
 			instance.setup(block)
 			instance.hide()
-			
+
 			if restore_id == block.resource_path:
 				restore_node = instance
 
@@ -103,11 +103,11 @@ func setup(lesson: Lesson, course: Course) -> void:
 				if completed_before:
 					_quizzes_done += 1
 			instance.completed_before = completed_before
-			
+
 			instance.connect("quiz_passed", Events, "emit_signal", ["quiz_completed", block])
 			instance.connect("quiz_passed", self, "_reveal_up_to_next_quiz")
 			instance.connect("quiz_skipped", self, "_reveal_up_to_next_quiz")
-			
+
 			if restore_id == block.resource_path:
 				restore_node = instance
 
@@ -122,31 +122,31 @@ func setup(lesson: Lesson, course: Course) -> void:
 				button.is_highlighted = true
 		_practices_container.add_child(button)
 	_practices_visibility_container.hide()
-	
+
 	_quizz_count = lesson.get_quizzes_count()
 	_reveal_up_to_next_quiz()
-	
+
 	# Wait until the lesson is considered loaded by the system, and then update the size of
 	# the scroll container and its content.
 	yield(Events, "lesson_started")
 	if restore_node and restore_node.is_visible_in_tree():
 		var scroll_offset = abs(_scroll_content.rect_global_position.y - _content_blocks.rect_global_position.y)
 		_scroll_container.scroll_vertical = restore_node.rect_position.y + scroll_offset - AUTOSCROLL_PADDING
-	
+
 	# Call this immediately to update for the blocks that are already visible.
 	_emit_read_content()
 
 
 func _reveal_up_to_next_quiz() -> void:
 	_quizzes_done += 1
-	
+
 	var child_count := _content_blocks.get_child_count()
 	while _visible_index < child_count - 1:
 		_visible_index += 1
-		
+
 		var child = _content_blocks.get_child(_visible_index)
 		child.show()
-		
+
 		if child is UIBaseQuiz and not child.completed_before:
 			break
 
@@ -161,27 +161,27 @@ func _on_content_scrolled(_value: float) -> void:
 func _emit_read_content() -> void:
 	var scroll_offset = abs(_scroll_content.rect_global_position.y - _content_blocks.rect_global_position.y)
 	var scroll_distance = _scroll_container.scroll_vertical - scroll_offset - AUTOSCROLL_PADDING
-	
+
 	var content_index := 0
 	var content_blocks := []
-	
+
 	for child_node in _content_blocks.get_children():
 		var control_node := child_node as Control
 		if not control_node:
 			continue
-		
+
 		# We reached the end of visible blocks.
 		if not control_node.visible:
 			break
-		
+
 		if content_index < _lesson.content_blocks.size():
 			content_blocks.append(_lesson.content_blocks[content_index])
-		
+
 		var content_offset := control_node.rect_position.y
 		if content_offset > scroll_distance:
 			break
 		content_index += 1
-	
+
 	if content_blocks.size() > 0:
 		var last_block = content_blocks.pop_back()
 		Events.emit_signal("lesson_reading_block", last_block, content_blocks)

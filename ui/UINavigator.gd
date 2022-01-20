@@ -4,7 +4,7 @@ extends PanelContainer
 signal transition_completed
 signal return_to_welcome_screen_requested
 
-const CourseOutliner := preload("./components/CourseOutliner.gd")
+const CourseOutliner := preload("./screens/course_outliner/CourseOutliner.gd")
 const SCREEN_TRANSITION_DURATION := 0.75
 const OUTLINER_TRANSITION_DURATION := 0.5
 
@@ -45,17 +45,17 @@ onready var _tween := $Tween as Tween
 func _ready() -> void:
 	_lesson_count = course.lessons.size()
 	_course_outliner.course = course
-	
+
 	NavigationManager.connect("navigation_requested", self, "_navigate_to")
 	NavigationManager.connect("back_navigation_requested", self, "_navigate_back")
 	NavigationManager.connect("outliner_navigation_requested", self, "_navigate_to_outliner")
-	
-	Events.connect("practice_completed", self, "_on_practice_completed")
+
+	Events.connect("practice_navigated_next", self, "_on_practice_navigated_next")
 
 	_outliner_button.connect("pressed", NavigationManager, "navigate_to_outliner")
 	_back_button.connect("pressed", NavigationManager, "navigate_back")
 	_home_button.connect("pressed", NavigationManager, "navigate_to_welcome_screen")
-	
+
 	_settings_button.connect("pressed", Events, "emit_signal", ["settings_requested"])
 	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
 
@@ -78,13 +78,13 @@ func _unhandled_input(event: InputEvent) -> void:
 func set_start_from_lesson(lesson_id: String) -> void:
 	if not course:
 		return
-	
+
 	var matched_index := 0
 	for lesson in course.lessons:
 		if lesson.resource_path == lesson_id:
 			_lesson_index = matched_index
 			break
-		
+
 		matched_index += 1
 
 
@@ -111,17 +111,17 @@ func _navigate_back() -> void:
 func _navigate_to_outliner() -> void:
 	_course_outliner.modulate.a = 0.0
 	_course_outliner.show()
-	
+
 	_tween.stop_all()
 	_animate_outliner(true)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
-	
+
 	_screen_container.hide()
 	_outliner_button.hide()
 	_back_button.hide()
 	_home_button.show()
-	
+
 	_clear_history_stack()
 	_label.text = ""
 
@@ -130,15 +130,17 @@ func _navigate_to_outliner() -> void:
 func _navigate_to() -> void:
 	var current_resource_path = NavigationManager.current_url
 	var target: Resource = load(current_resource_path)
-	
+
 	var screen: Control
 	if target is Practice:
+		var practice := target as Practice
 		screen = preload("UIPractice.tscn").instance()
-		_breadcrumbs.push_back((target as Practice).title)
+		_breadcrumbs.push_back(practice.title)
 	elif target is Lesson:
+		var lesson := target as Lesson
 		screen = preload("UILesson.tscn").instance()
-		_lesson_index = course.lessons.find(target) # Make sure the index is synced after navigation.
-		_breadcrumbs.push_back("%s. %s" % [_lesson_index + 1, (target as Lesson).title])
+		_lesson_index = course.lessons.find(lesson) # Make sure the index is synced after navigation.
+		_breadcrumbs.push_back("%s. %s" % [_lesson_index + 1, lesson.title])
 	else:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
 		return
@@ -165,7 +167,7 @@ func _navigate_to() -> void:
 	for node in get_tree().get_nodes_in_group("rich_text_label"):
 		assert(node is RichTextLabel)
 		NavigationManager.connect_rich_text_node(node)
-	
+
 	if _course_outliner.visible:
 		_tween.stop_all()
 		_animate_outliner(false)
@@ -173,17 +175,17 @@ func _navigate_to() -> void:
 		yield(_tween, "tween_all_completed")
 
 	_course_outliner.hide()
-	
+
 	if target is Practice:
 		Events.emit_signal("practice_started", target)
 	elif target is Lesson:
 		Events.emit_signal("lesson_started", target)
 
 
-func _on_practice_completed(practice: Practice) -> void:
+func _on_practice_navigated_next(practice: Practice) -> void:
 	var lesson_data := course.lessons[_lesson_index] as Lesson
 	var practices: Array = lesson_data.practices
-	
+
 	var index := practices.find(practice)
 	# This is the last practice in the set, move to the next lesson.
 	if index >= practices.size() - 1:
@@ -196,12 +198,12 @@ func _on_practice_completed(practice: Practice) -> void:
 
 func _on_lesson_completed(lesson: Lesson) -> void:
 	Events.emit_signal("lesson_completed", lesson)
-	
+
 	_lesson_index += 1
 	if _lesson_index >= _lesson_count:
 		_on_course_completed()
 		return
-	
+
 	_clear_history_stack()
 	NavigationManager.navigate_to(course.lessons[_lesson_index].resource_path)
 
@@ -217,13 +219,13 @@ func _transition_to(screen: Control, from_screen: Control = null, direction_in :
 		if from_screen:
 			from_screen.hide()
 			_screen_container.remove_child(from_screen)
-		
+
 		if screen.get_parent() == null:
 			_screen_container.add_child(screen)
 		screen.show()
-		
-		
-		
+
+
+
 		yield(get_tree(), "idle_frame")
 		emit_signal("transition_completed")
 		return
@@ -231,7 +233,7 @@ func _transition_to(screen: Control, from_screen: Control = null, direction_in :
 	if screen.get_parent() == null:
 		_screen_container.add_child(screen)
 	screen.show()
-	
+
 	if from_screen:
 		from_screen.show()
 
@@ -283,5 +285,5 @@ func _clear_history_stack() -> void:
 	for screen in _screens_stack:
 		screen.queue_free()
 	_screens_stack.clear()
-	
+
 	_breadcrumbs = PoolStringArray()

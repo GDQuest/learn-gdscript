@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/theme/outliner_background.tres" type="StyleBox" id=1]
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
+[ext_resource path="res://ui/screens/course_outliner/CourseLessonList.gd" type="Script" id=3]
+
+
+[node name="CourseLessonList" type="PanelContainer"]
+margin_right = 696.0
+margin_bottom = 993.0
+rect_min_size = Vector2( 640, 0 )
+theme = ExtResource( 2 )
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 688.0
+margin_bottom = 985.0
+scroll_horizontal_enabled = false
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+margin_right = 680.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="Items" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 660.0
+margin_bottom = 8.0
