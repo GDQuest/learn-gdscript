@@ -16,10 +16,10 @@ func test_robot_takes_the_right_amount_of_damage() -> String:
 	
 	return ""
 
-func test_damage_function_uses_subtraction() -> String:
+func test_subtract_amount_from_health() -> String:
 	var regex = RegEx.new()
-	regex.compile("health\\s*-")
+	regex.compile("health\\s*-.*amount")
 	var result = regex.search(_slice.current_text)
 	if not result:
-		return "It doesn't look like you're subtracting anything from health."
+		return "It doesn't look like you're subtracting amount from health."
 	return ""
