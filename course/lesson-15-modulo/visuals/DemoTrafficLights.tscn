@@ -4,8 +4,8 @@
 [ext_resource path="res://course/lesson-15-modulo/visuals/TrafficLights.tscn" type="PackedScene" id=2]
 
 [node name="Panel" type="PanelContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 728.0
+margin_bottom = 274.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -23,7 +23,7 @@ gdscript_code = "func advance_traffic_light():
 	turn_on_light(light_index)"
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 240.0
+margin_right = 310.0
 margin_bottom = 260.0
 
 [node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="0"]
@@ -34,13 +34,12 @@ margin_left = 74.0
 text = "Advance"
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
-margin_left = 244.0
+margin_left = 314.0
 margin_right = 714.0
 margin_bottom = 260.0
-rect_min_size = Vector2( 470, 260 )
 text = "func advance_traffic_light():
 	light_index += 1
-	light_index = light_index % 3
+	light_index %= 3
 	
 	turn_on_light(light_index)"
 draw_spaces = true
