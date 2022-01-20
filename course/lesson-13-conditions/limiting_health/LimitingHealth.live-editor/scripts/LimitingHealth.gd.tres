@@ -1,0 +1,45 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/ScriptProperties.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-13-conditions/limiting_health/LimitingHealth.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 1 )
+nodes_paths = [ NodePath("") ]
+script_file = ExtResource( 2 )
+original_script = "extends Control
+
+var health = 20
+var _health_gained = 100
+var _max_health = 80
+
+onready var _robot := $HealSprite
+
+
+func _ready() -> void:
+	_robot.health_gained = _health_gained
+	_robot.health = health
+	_robot.max_health = _max_health
+	_robot._update_health_bar()
+
+
+func _run() -> void:
+	heal(_health_gained)
+	_update_robot()
+
+
+func _update_robot() -> void:
+	_robot._animation_player.play(\"heal\")
+	_robot.health_gained = _health_gained
+	_robot.health = health
+	_robot.max_health = _max_health
+	_robot._update_health_bar()
+
+
+# EXPORT heal
+func heal(amount):
+	health += amount
+	if health > 80:
+		health = 80
+# /EXPORT heal
+"

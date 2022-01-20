@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/SliceProperties.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-13-conditions/using_conditions/UsingConditions.live-editor/scripts/UsingConditions.gd.tres" type="Resource" id=2]
+[ext_resource path="res://course/lesson-13-conditions/using_conditions/UsingConditions.live-editor/scene/UsingConditions.tscn.tres" type="Resource" id=3]
+
+[resource]
+script = ExtResource( 1 )
+scene_properties = ExtResource( 3 )
+script_properties = ExtResource( 2 )
+leading_spaces = 1
+keyword = "EXPORT"
+closing = false
+name = "conditions"
+is_full_file = false
+start = 3
+end = 17
+lines_before = [ "extends Control", "", "func _run():" ]
+lines_after = [ "" ]
+lines_editable = [ "var health = 100", "", "if health > 5:", "	print(\"health is greater than five.\")", "", "if 1 < health:", "	print(\"One is less than health.\")", "", "if health == health:", "	print(\"health is equal to health\")", "", "if health != 7:", "	print(\"health is not equal to seven.\")" ]

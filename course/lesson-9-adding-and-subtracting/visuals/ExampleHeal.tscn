@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://course/lesson-9-adding-and-subtracting/visuals/RobotCharacter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://course/lesson-9-adding-and-subtracting/visuals/RobotCharacter.gd\"
+
+
+func _run():
+	health += 25
+	
+	if health > max_health:
+		health = max_health
+	
+	_animation_player.stop(true)
+	_animation_player.play(\"heal\")
+"
+
+[node name="ExampleHeal" type="PanelContainer"]
+margin_right = 1047.0
+margin_bottom = 298.0
+rect_min_size = Vector2( 0, 340 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1040.0
+margin_bottom = 333.0
+gdscript_code = "func heal(amount):
+	health += amount"
+
+[node name="Frame" parent="RunnableCodeExample" index="0"]
+margin_right = 1033.0
+margin_bottom = 326.0
+
+[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
+margin_right = 173.0
+text = "heal(25)"
+
+[node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
+visible = false
+margin_left = 518.0
+margin_right = 1033.0
+margin_bottom = 284.0
+text = "func heal(amount):
+	health += amount"
+draw_spaces = true
+
+[node name="RobotCharacter" parent="RunnableCodeExample" instance=ExtResource( 1 )]
+script = SubResource( 1 )
+health = 25
+
+[editable path="RunnableCodeExample"]

@@ -2,47 +2,53 @@
 
 [ext_resource path="res://ui/components/popups/ErrorOverlayPopup.tscn" type="PackedScene" id=1]
 
-
 [node name="ErrorOverlayPopup" instance=ExtResource( 1 )]
 rect_min_size = Vector2( 540, 0 )
 script = null
 
+[node name="Panel" parent="." index="0"]
+margin_right = 553.0
+margin_bottom = 368.0
+
+[node name="MarginContainer" parent="." index="1"]
+margin_right = 553.0
+margin_bottom = 368.0
+
+[node name="Column" parent="MarginContainer" index="0"]
+margin_right = 545.0
+margin_bottom = 360.0
+
 [node name="ErrorLabel" parent="MarginContainer/Column" index="0"]
+margin_right = 537.0
 margin_bottom = 59.0
 text = "The function \"move\" already exists in this class (at line 22)."
 
 [node name="HSeparator" parent="MarginContainer/Column" index="1"]
 margin_top = 67.0
+margin_right = 537.0
 margin_bottom = 67.0
 
-[node name="ErrorExplanation" parent="MarginContainer/Column" index="2"]
+[node name="Content" parent="MarginContainer/Column" index="2"]
 margin_top = 75.0
-margin_bottom = 122.0
-
-[node name="Value" parent="MarginContainer/Column/ErrorExplanation" index="2"]
-margin_left = 8.0
 margin_right = 537.0
-margin_bottom = 226.0
-bbcode_text = "You already defined a function with this name, and you're trying to create a new one with the same name.
+margin_bottom = 352.0
 
-You can't do that in code: every function in a given script must have a unique name."
+[node name="ErrorExplanation" parent="MarginContainer/Column/Content" index="0"]
+margin_right = 537.0
+margin_bottom = 215.0
+
+[node name="Value" parent="MarginContainer/Column/Content/ErrorExplanation" index="2"]
+margin_top = 58.0
+margin_right = 529.0
+margin_bottom = 203.0
 text = "You already defined a function with this name, and you're trying to create a new one with the same name.
 
-You can't do that in code: every function in a given script must have a unique name."
+You can't do that in code: every function in a given script must have a unique name"
 
-[node name="MoreHelpButton" parent="MarginContainer/Column/ErrorExplanation" index="3"]
-margin_left = 8.0
-margin_top = 228.0
+[node name="ErrorSuggestion" parent="MarginContainer/Column/Content" index="1"]
+margin_top = 231.0
 margin_right = 537.0
-margin_bottom = 272.0
+margin_bottom = 277.0
 
-[node name="ErrorSuggestion" parent="MarginContainer/Column" index="3"]
-margin_top = 130.0
-margin_bottom = 177.0
-rect_min_size = Vector2( 200, 47 )
-is_expanded = false
-
-[node name="Value" parent="MarginContainer/Column/ErrorSuggestion" index="2"]
-visible = false
-bbcode_text = "Change the name of the function at the error line or consider removing it."
+[node name="Value" parent="MarginContainer/Column/Content/ErrorSuggestion" index="2"]
 text = "Change the name of the function at the error line or consider removing it."

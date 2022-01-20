@@ -4,7 +4,7 @@
 class_name ContentBlock
 extends Resource
 
-enum Type { PLAIN, SPOILER, NOTE }
+enum Type { PLAIN, NOTE }
 
 export var title := ""
 export var type: int = Type.PLAIN

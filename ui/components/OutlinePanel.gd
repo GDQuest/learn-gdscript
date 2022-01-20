@@ -64,10 +64,10 @@ func disappear() -> void:
 
 func set_max_border_width(new_width: float) -> void:
 	max_border_width = new_width
-	_border_style.border_width_left = new_width
-	_border_style.border_width_top = new_width
-	_border_style.border_width_right = new_width
-	_border_style.border_width_bottom = new_width
+	_border_style.border_width_left = int(new_width)
+	_border_style.border_width_top = int(new_width)
+	_border_style.border_width_right = int(new_width)
+	_border_style.border_width_bottom = int(new_width)
 
 
 func set_border_width(new_width: float) -> void:
@@ -78,6 +78,6 @@ func set_border_width(new_width: float) -> void:
 	_border_style.expand_margin_bottom = new_width
 
 
-func _on_tween_completed(object: Node, key: String) -> void:
+func _on_tween_completed(_object: Node, _key: String) -> void:
 	if border_width < 0.1:
 		hide()

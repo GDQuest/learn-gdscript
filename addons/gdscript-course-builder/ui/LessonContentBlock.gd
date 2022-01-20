@@ -174,7 +174,7 @@ func _on_confirm_dialog_confirmed() -> void:
 
 func _on_title_text_changed(new_text: String) -> void:
 	_title_placeholder.visible = new_text.empty()
-	
+
 	_edited_content_block.title = new_text
 	_edited_content_block.emit_changed()
 
@@ -258,8 +258,6 @@ func _on_options_block_type_item_selected(index: int) -> void:
 	if index == 0:
 		_edited_content_block.type = ContentBlock.Type.PLAIN
 	elif index == 1:
-		_edited_content_block.type = ContentBlock.Type.SPOILER
-	elif index == 2:
 		_edited_content_block.type = ContentBlock.Type.NOTE
 	_edited_content_block.emit_changed()
 

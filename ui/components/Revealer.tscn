@@ -1,64 +1,99 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/icons/chevron.png" type="Texture" id=1]
 [ext_resource path="res://ui/components/Revealer.gd" type="Script" id=2]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=3]
-[ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=4]
+[ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/theme/revealer_content_panel.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/theme/revealer_title_panel.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=6]
+[ext_resource path="res://ui/theme/fonts/font_button_small.tres" type="DynamicFont" id=7]
 
-[node name="UIRevealer" type="Container"]
-margin_right = 201.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 200, 47 )
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[node name="Revealer" type="Container"]
+margin_right = 136.0
+margin_bottom = 46.0
 rect_clip_content = true
-theme = ExtResource( 3 )
+theme = ExtResource( 6 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-revealer_height = 38.0
-text_color = Color( 0.572549, 0.560784, 0.721569, 1 )
-
-[node name="Button" type="Button" parent="."]
-margin_right = 201.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 100, 20 )
-size_flags_horizontal = 3
-size_flags_vertical = 0
-custom_colors/font_color_pressed = Color( 0.74902, 0.737255, 0.878431, 1 )
-custom_fonts/font = ExtResource( 4 )
-toggle_mode = true
-text = "Expand"
-flat = true
-align = 0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Chevron" type="TextureRect" parent="Button"]
-modulate = Color( 0.290196, 0.294118, 0.388235, 1 )
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -24.0
-margin_top = -16.0
-margin_right = -5.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 24, 22 )
-rect_pivot_offset = Vector2( 10, 17 )
-texture = ExtResource( 1 )
-stretch_mode = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HSeparator" type="HSeparator" parent="Button"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -4.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+title_font = ExtResource( 3 )
+title_panel = ExtResource( 5 )
+content_panel = ExtResource( 4 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="ToggleBar" type="PanelContainer" parent="."]
+modulate = Color( 1, 1, 1, 0.65 )
+margin_left = 8.0
+margin_top = 10.0
+margin_right = 128.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="ToggleCapturer" type="Button" parent="ToggleBar"]
+margin_right = 120.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 7 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+toggle_mode = true
+flat = true
+align = 0
+
+[node name="BarLayout" type="HBoxContainer" parent="ToggleBar"]
+margin_right = 120.0
+margin_bottom = 26.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="ToggleBar/BarLayout"]
+margin_right = 82.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Expand"
+valign = 1
+
+[node name="ToggleIcon" type="Control" parent="ToggleBar/BarLayout"]
+margin_left = 98.0
+margin_top = 1.0
+margin_right = 120.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 22, 24 )
+mouse_filter = 2
+size_flags_vertical = 4
+
+[node name="Texture" type="TextureRect" parent="ToggleBar/BarLayout/ToggleIcon"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -22.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_pivot_offset = Vector2( 11, 12 )
+mouse_filter = 2
+size_flags_horizontal = 8
+texture = ExtResource( 1 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -38,7 +38,6 @@ func _init(text: String) -> void:
 		_available_tokens[token_type] = regex
 	_current_scope = tokens
 	tokenize()
-	print(JSON.print(tokens, "  "))
 
 
 func _process_function_declaration(token: Dictionary):
@@ -121,7 +120,7 @@ func tokenize():
 #
 
 # If there is one recursive function, this function returns its name
-func are_there_a_recursive_function() -> String:
+func find_any_recursive_function() -> String:
 	for token in tokens:
 		if token.type == TOKEN_FUNC_DECLARATION:
 			for sub_token in token.body:

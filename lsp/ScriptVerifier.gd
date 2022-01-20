@@ -7,15 +7,16 @@
 # var errors: Array = yield(verifier, "errors")
 #
 # Where `errors` is an array of LanguageServerErrors
+# The url of the LSP server is taken from project settings.
+# if you want to override it in a config.cfg file, use 
+# `lsp_url` for the debug url and
+# `lsp_url.release` for the release url
+# 
 class_name ScriptVerifier
 extends Reference
 
 # Emits error messages as an Array[LanguageServerError]
 signal errors(errors)
-
-# The URL of the HTTP Language Server
-const SERVER_URL := "https://lsp.gdquest.com"
-# const SERVER_URL := "http://localhost:3000"
 
 # https://docs.godotengine.org/en/stable/classes/class_httprequest.html#enumerations
 const HTTP_RESULT_ERRORS := {
@@ -59,7 +60,14 @@ var _new_script_filename: String
 var _start_time := OS.get_unix_time()
 var _start_time_ms := OS.get_ticks_msec()
 
-func _init(attached_node: Node, new_script_filename: String, new_script_text: String, url := SERVER_URL) -> void:
+func _init(attached_node: Node, new_script_filename: String, new_script_text: String, url := "") -> void:
+
+	if url == "":
+		url = ProjectSettings.get_setting("global/lsp_url")
+
+	if url == "" or url == null:
+		push_error("url is not set, no LSP server can be queried")
+		return
 	
 	for warning in WarningCode:
 		blacklist_codes[WarningCode[warning]] = true
@@ -151,6 +159,10 @@ func test() -> void:
 		"filename": _new_script_filename,
 		"id": UserProfiles.uuid
 	}
+	if _url == "":
+		var error := make_error_no_lsp_url()
+		emit_errors([error])
+		return
 	var query := HTTPClient.new().query_string_from_dict(request_props)
 	var headers := PoolStringArray(["Content-Type: application/x-www-form-urlencoded"])
 	var validate := _url.begins_with("https")
@@ -206,9 +218,18 @@ static func make_error_connection_timed_out() -> LanguageServerError:
 	return err
 
 
+static func make_error_no_lsp_url() -> LanguageServerError:
+	var err = LanguageServerError.new()
+	err.message = "No LSP URL set. There will be no error checking possible"
+	err.severity = 1
+	err.code = GDQuestErrorCode.LSP_NO_URL
+	return err
+
+
 static func check_error_is_connection_error(error: LanguageServerError) -> bool:
 	return (
 		error.code == GDQuestCodes.ErrorCode.CANNOT_CONNECT_TO_LSP or \
 		error.code == GDQuestCodes.ErrorCode.CANNOT_INITIATE_CONNECTION or \
-		error.code == GDQuestCodes.ErrorCode.LSP_TIMED_OUT
+		error.code == GDQuestCodes.ErrorCode.LSP_TIMED_OUT or \
+		error.code == GDQuestCodes.ErrorCode.LSP_NO_URL
 	)
