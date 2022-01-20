@@ -2,6 +2,8 @@ tool
 class_name PracticeInfoPanel
 extends PanelContainer
 
+signal tests_updated
+
 const QueryResult := Documentation.QueryResult
 const TestDisplayScene = preload("PracticeTestDisplay.tscn")
 
@@ -23,13 +25,56 @@ func display_tests(info: Array) -> void:
 		_checks.add_child(instance)
 
 
-func update_tests_display(test_result: PracticeTester.TestResult) -> void:
-	for node in _checks.get_contents():
+func reset_tests_status() -> void:
+	var check_nodes := _checks.get_contents()
+	for node in check_nodes:
 		var checkmark := node as PracticeTestDisplay
-		if checkmark.title in test_result.passed_tests:
-			checkmark.mark_as_passed()
-		else:
+		if not checkmark:
+			continue
+		
+		checkmark.unmark(true)
+
+
+func set_tests_pending() -> void:
+	var check_nodes := _checks.get_contents()
+	for node in check_nodes:
+		var checkmark := node as PracticeTestDisplay
+		if not checkmark:
+			continue
+		
+		checkmark.mark_as_pending(true)
+
+
+func set_tests_status(test_result: PracticeTester.TestResult, script_file_name: String) -> void:
+	var check_nodes := _checks.get_contents()
+	if check_nodes.size() == 0:
+		# Ensure asynchrosity even in invalid state.
+		yield(get_tree(), "idle_frame")
+		emit_signal("tests_updated")
+		return
+	
+	# Update tests one by one with animation.
+	for node in check_nodes:
+		var checkmark := node as PracticeTestDisplay
+		if not checkmark:
+			continue
+		
+		if checkmark.title in test_result.errors:
+			var error = test_result.errors[checkmark.title]
+			MessageBus.print_error(error, script_file_name)
+			
 			checkmark.mark_as_failed()
+			yield(checkmark, "marking_finished")
+			
+		elif checkmark.title in test_result.passed_tests:
+			checkmark.mark_as_passed()
+			yield(checkmark, "marking_finished")
+		
+		else:
+			checkmark.unmark(true)
+			yield(checkmark, "marking_finished")
+	
+	emit_signal("tests_updated")
 
 
 func set_title(new_title: String) -> void:

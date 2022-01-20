@@ -132,6 +132,7 @@ func _validate_and_run_student_code() -> void:
 	_code_editor.set_pause_button_pressed(false)
 	_code_editor.set_locked_message("Validating Your Code...")
 	_output_console.clear_messages()
+	_info_panel.reset_tests_status()
 
 	# Complete the script from the slice and the base script.
 	_script_slice.current_text = _code_editor.get_text()
@@ -209,11 +210,11 @@ func _test_student_code() -> void:
 	
 	# Run tests on the scene.
 	_code_editor.set_locked_message("Running Tests...")
+	_info_panel.set_tests_pending()
 
 	var result := _tester.run_tests()
-	for error in result.errors:
-		MessageBus.print_error(error, script_file_name)
-	_info_panel.update_tests_display(result)
+	_info_panel.set_tests_status(result, script_file_name)
+	yield(_info_panel, "tests_updated")
 	
 	# Show the end of practice popup.
 	if result.is_success():
