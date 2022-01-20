@@ -136,6 +136,6 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	_reset_button.visible = _scene_instance.has_method("reset")
 	if _scene_instance.has_method("run"):
 		_run_button.show()
-	else:
+	elif _run_button.visible:
 		_run_button.hide()
 		printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.filename])
