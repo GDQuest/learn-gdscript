@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://resources/Practice.gd" type="Script" id=1]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+
+[resource]
+script = ExtResource( 1 )
+title = "Increasing maximum health exponentially"
+goal = "Let's make the robot stronger when it levels up.
+
+Add to the [code]level_up()[/code] function so it does the following:
+
+- Increases [code]level[/code] by one.
+- Increases [code]max_health[/code] by 10%."
+starting_code = "func level_up():
+	pass"
+hints = PoolStringArray( "To increase a number by 10%, multiply it by [code]1.1[/code]" )
+validator_script_path = "increase_max_health/TestHealthIncreased.gd"
+script_slice_path = "increase_max_health/IncreaseMaxHealth.live-editor/slices/IncreaseMaxHealth.health.slice.tres"
+documentation_references = PoolStringArray( "level_up" )
+documentation_resource = ExtResource( 2 )
+description = ""

@@ -3,14 +3,19 @@
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://course/common/GDScriptCodeExample.gd" type="Script" id=2]
 
-[node name="GDScriptCodeExample" type="TextEdit"]
+[node name="CodeLevelUpExp" type="TextEdit"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1264.0
 margin_bottom = -954.0
-rect_min_size = Vector2( 600, 200 )
+rect_min_size = Vector2( 600, 220 )
 theme = ExtResource( 1 )
-readonly = true
+text = "var level = 1
+var max_health = 100
+
+func level_up():
+	level += 1
+	max_health *= 1.1"
 syntax_highlighting = true
 show_line_numbers = true
 draw_tabs = true
@@ -25,3 +30,4 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+min_size = Vector2( 600, 220 )

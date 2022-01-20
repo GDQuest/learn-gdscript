@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/ScriptProperties.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-14-multiplying/increase_max_health/IncreaseMaxHealth.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 1 )
+nodes_paths = [ NodePath("") ]
+script_file = ExtResource( 2 )
+original_script = "extends Node2D
+
+onready var _animation_player := $AnimationPlayer
+
+
+var level = 1
+var max_health = 100
+
+# EXPORT level
+func level_up():
+	level += 1
+	max_health *= 1.1
+# /EXPORT level
+
+func _run():
+	level_up()
+	level_up()
+	_animation_player.play(\"level\")
+"
