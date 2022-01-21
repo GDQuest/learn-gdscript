@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://course/lesson-14-multiplying/visuals/LevelUpRobot.gd" type="Script" id=1]
 [ext_resource path="res://course/lesson-1-what-code-is-like/first_practice/godot_bottom.png" type="Texture" id=2]
@@ -84,38 +84,11 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Gradient" id=3]
-colors = PoolColorArray( 1, 0.960784, 0.25098, 1, 1, 1, 1, 1 )
-
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
-
 [sub_resource type="Curve" id=5]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.1, 0.394318 ), 0.25, 0.25, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
-
-[sub_resource type="ParticlesMaterial" id=2]
-emission_shape = 1
-emission_sphere_radius = 16.0
-flag_disable_z = true
-direction = Vector3( 0, -1, 0 )
-spread = 0.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 83.34
-angular_velocity = 188.57
-angular_velocity_random = 0.71
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = 54.76
-linear_accel_random = 0.37
-radial_accel = 19.05
-radial_accel_random = 0.4
-damping = 100.0
-damping_random = 0.18
-scale_curve = SubResource( 6 )
-color_ramp = SubResource( 4 )
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1, 0.960784, 0.25098, 1, 1, 1, 1, 1 )
 
 [node name="LevelUpRobot" type="Node2D"]
 script = ExtResource( 1 )
@@ -144,12 +117,27 @@ root_node = NodePath("../Character")
 anims/RESET = SubResource( 7 )
 anims/level = SubResource( 1 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="Particles2D" type="CPUParticles2D" parent="."]
 position = Vector2( 0, 17 )
 emitting = false
 amount = 16
 lifetime = 2.0
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 2 )
 texture = ExtResource( 3 )
+emission_shape = 1
+emission_sphere_radius = 16.0
+direction = Vector2( 0, -1 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 83.34
+angular_velocity = 188.57
+angular_velocity_random = 0.71
+linear_accel = 54.76
+linear_accel_random = 0.37
+radial_accel = 19.05
+radial_accel_random = 0.4
+damping = 100.0
+damping_random = 0.18
+scale_amount_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
