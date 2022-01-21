@@ -1,6 +1,11 @@
 extends DrawingTurtle
 
 
+func _ready() -> void:
+	if not is_connected("turtle_finished", self, "_complete_run"):
+		connect("turtle_finished", self, "_complete_run")
+
+
 func _run():
 	reset()
 	draw_three_squares()
@@ -28,3 +33,6 @@ func draw_three_squares():
 # /EXPORT draw_three_squares
 
 
+func _complete_run() -> void:
+	yield(get_tree().create_timer(0.5), "timeout")
+	Events.emit_signal("practice_run_completed")
