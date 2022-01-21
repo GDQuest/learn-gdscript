@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://course/lesson-1-what-code-is-like/first_practice/godot_bottom.png" type="Texture" id=1]
 [ext_resource path="res://course/lesson-1-what-code-is-like/first_practice/hand_ice.png" type="Texture" id=2]
@@ -128,20 +128,6 @@ tracks/2/keys = {
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0.0111111, 0.0284091 ), 0.0, 4.13397, 0, 0, Vector2( 0.611111, 0.519318 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -10.9432, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
-
-[sub_resource type="ParticlesMaterial" id=5]
-emission_shape = 1
-emission_sphere_radius = 64.0
-flag_disable_z = true
-gravity = Vector3( 0, -98, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 8.0
-scale_curve = SubResource( 4 )
-color = Color( 0.239216, 1, 0.431373, 1 )
-
 [node name="HealSprite" type="Node2D"]
 script = ExtResource( 4 )
 
@@ -212,9 +198,14 @@ anims/RESET = SubResource( 2 )
 anims/damage = SubResource( 6 )
 anims/heal = SubResource( 1 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="Particles2D" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 16
 lifetime = 0.8
 explosiveness = 0.46
-process_material = SubResource( 5 )
+emission_shape = 1
+emission_sphere_radius = 64.0
+gravity = Vector2( 0, -98 )
+scale_amount = 8.0
+scale_amount_curve = SubResource( 3 )
+color = Color( 0.239216, 1, 0.431373, 1 )
