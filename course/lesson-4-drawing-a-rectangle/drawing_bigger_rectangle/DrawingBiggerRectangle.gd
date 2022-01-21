@@ -2,7 +2,8 @@ extends DrawingTurtle
 
 
 func _ready() -> void:
-	connect("turtle_finished", self, "_complete_run")
+	if not is_connected("turtle_finished", self, "_complete_run"):
+		connect("turtle_finished", self, "_complete_run")
 
 
 func _run():
