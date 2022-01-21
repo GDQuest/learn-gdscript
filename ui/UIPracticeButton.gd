@@ -22,7 +22,7 @@ func setup(practice: Practice) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 
-	_title_label.text = practice.title
+	_title_label.text = practice.title.capitalize()
 	_description_label.text = practice.description
 	_description_label.visible = not practice.description.empty()
 	_button.connect("pressed", NavigationManager, "navigate_to", [practice.resource_path])

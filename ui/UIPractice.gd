@@ -82,7 +82,7 @@ func setup(practice: Practice, _course: Course) -> void:
 
 	_practice = practice
 	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(practice.goal)
-	_info_panel.title_label.text = practice.title
+	_info_panel.title_label.text = practice.title.capitalize()
 	_code_editor.text = practice.starting_code
 
 	_hints_container.visible = not practice.hints.empty()
