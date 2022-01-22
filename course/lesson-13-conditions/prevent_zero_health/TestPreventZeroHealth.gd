@@ -7,7 +7,7 @@ func _prepare():
 	first_node = _scene_root_viewport.get_child(0)
 	health = first_node.health
 
-func test_health_can_go_above_zero() -> String:
+func test_health_reaches_zero() -> String:
 	if health > 0:
 		return "The health stays above 0 when we damage the character a lot. Did you set the health to 0 when that happens?"
 	

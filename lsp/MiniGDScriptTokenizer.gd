@@ -22,8 +22,9 @@ var tokens := []
 var _current_scope := []
 var indent_regex := RegEx.new()
 
+
 var _available_tokens := {
-	TOKEN_FUNC_DECLARATION: "^func\\s+(?<func_name>.*?)\\(\\s*(?:(?<args>[^)]+)[,)])*|\\):",
+	TOKEN_FUNC_DECLARATION: "^func\\s+(?<func_name>[a-zA-Z_].*?)(?:\\(\\s*(?:(?<args>[^)]+)[,)])*|\\):)",
 	TOKEN_FUNC_CALL: "\\t.*?\\s?(?<func_name>[a-zA-Z_][a-zA-Z0-9_]+)\\(\\s*(?<params>.*?)\\s*\\)"
 }
 
@@ -70,7 +71,7 @@ func _process_function_declaration(token: Dictionary):
 
 func _test_regex(type: String, regex: RegEx, line: String) -> bool:
 	var m := regex.search(line)
-	if m == null:
+	if m == null or m.names.size() == 0:
 		return false
 	var token := {
 		"type": type
