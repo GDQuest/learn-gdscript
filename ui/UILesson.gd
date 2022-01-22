@@ -12,17 +12,23 @@ const QuizChoiceScene := preload("./components/quizzes/UIQuizChoice.tscn")
 const PracticeButtonScene := preload("UIPracticeButton.tscn")
 
 const AUTOSCROLL_PADDING := 20
+const AUTOSCROLL_DURATION := 0.24
 
 export var test_lesson: Resource
 
-onready var _scroll_container := $ScrollContainer as ScrollContainer
-onready var _scroll_content := $ScrollContainer/MarginContainer as Control
-onready var _title := $ScrollContainer/MarginContainer/Column/Title as Label
-onready var _content_blocks := $ScrollContainer/MarginContainer/Column/ContentBlocks as VBoxContainer
-onready var _practices_container := $ScrollContainer/MarginContainer/Column/Column/Practices as VBoxContainer
-onready var _practices_visibility_container := $ScrollContainer/MarginContainer/Column/Column as VBoxContainer
+onready var _scroll_container := $OuterMargin/ScrollContainer as ScrollContainer
+onready var _scroll_content := $OuterMargin/ScrollContainer/InnerMargin as Control
+onready var _title := $OuterMargin/ScrollContainer/InnerMargin/Content/Title as Label
+onready var _content_blocks := $OuterMargin/ScrollContainer/InnerMargin/Content/ContentBlocks as VBoxContainer
+onready var _practices_visibility_container := (
+	$OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer as VBoxContainer
+)
+onready var _practices_container := (
+	$OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer/Practices as VBoxContainer
+)
 
 onready var _debounce_timer := $DebounceTimer as Timer
+onready var _tweener := $Tween as Tween
 
 var _lesson: Lesson
 var _visible_index := -1
@@ -131,10 +137,25 @@ func setup(lesson: Lesson, course: Course) -> void:
 	yield(Events, "lesson_started")
 	if restore_node and restore_node.is_visible_in_tree():
 		var scroll_offset = abs(_scroll_content.rect_global_position.y - _content_blocks.rect_global_position.y)
-		_scroll_container.scroll_vertical = restore_node.rect_position.y + scroll_offset - AUTOSCROLL_PADDING
+		var scroll_target = restore_node.rect_position.y + scroll_offset - AUTOSCROLL_PADDING
+		_tweener.stop_all()
+		_tweener.interpolate_property(
+			_scroll_container,
+			"scroll_vertical",
+			_scroll_container.scroll_vertical,
+			scroll_target,
+			AUTOSCROLL_DURATION,
+			Tween.TRANS_QUAD,
+			Tween.EASE_IN_OUT
+		)
+		_tweener.start()
 
 	# Call this immediately to update for the blocks that are already visible.
 	_emit_read_content()
+
+
+func get_screen_resource() -> Lesson:
+	return _lesson
 
 
 func _reveal_up_to_next_quiz() -> void:

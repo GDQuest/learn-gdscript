@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/components/CodeEditor.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
+[ext_resource path="res://ui/theme/panel_course_page.tres" type="StyleBox" id=2]
 [ext_resource path="res://ui/screens/practice/PracticeInfoPanel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/components/GameView.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/components/OutputConsole.tscn" type="PackedScene" id=5]
@@ -9,12 +9,10 @@
 [ext_resource path="res://ui/UIPractice.gd" type="Script" id=8]
 [ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=9]
 
-[node name="UIPractice" type="HBoxContainer"]
-pause_mode = 2
+[node name="UIPractice" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 2 )
-custom_constants/separation = 8
+custom_styles/panel = ExtResource( 2 )
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -27,14 +25,13 @@ mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="Layout" type="HBoxContainer" parent="Margin"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1900.0
-margin_bottom = 1060.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+custom_constants/separation = 12
 
 [node name="Control" type="Control" parent="Margin/Layout"]
 margin_right = 623.0
-margin_bottom = 1040.0
+margin_bottom = 1080.0
 rect_min_size = Vector2( 623, 0 )
 
 [node name="PracticeInfoPanel" parent="Margin/Layout/Control" instance=ExtResource( 3 )]
@@ -45,19 +42,19 @@ size_flags_stretch_ratio = 2.0
 [node name="CodeEditor" parent="Margin/Layout" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 639.0
-margin_right = 1251.0
-margin_bottom = 1040.0
+margin_left = 635.0
+margin_right = 1271.0
+margin_bottom = 1080.0
 
 [node name="Output" type="VBoxContainer" parent="Margin/Layout"]
-margin_left = 1267.0
-margin_right = 1880.0
-margin_bottom = 1040.0
+margin_left = 1283.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 
 [node name="GameAnchors" type="Control" parent="Margin/Layout/Output"]
-margin_right = 613.0
-margin_bottom = 682.0
+margin_right = 637.0
+margin_bottom = 717.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
@@ -72,20 +69,22 @@ __meta__ = {
 [node name="MarginContainer" type="MarginContainer" parent="Margin/Layout/Output/GameAnchors/GameContainer"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 605.0
-margin_bottom = 674.0
+margin_right = 629.0
+margin_bottom = 709.0
 custom_constants/margin_right = 12
 custom_constants/margin_top = 12
 custom_constants/margin_left = 12
 custom_constants/margin_bottom = 60
 
 [node name="GameView" parent="Margin/Layout/Output/GameAnchors/GameContainer/MarginContainer" instance=ExtResource( 4 )]
+margin_right = 609.0
+margin_bottom = 641.0
 
 [node name="Label" type="Label" parent="Margin/Layout/Output/GameAnchors/GameContainer"]
 margin_left = 8.0
-margin_top = 626.0
-margin_right = 605.0
-margin_bottom = 674.0
+margin_top = 661.0
+margin_right = 629.0
+margin_bottom = 709.0
 rect_min_size = Vector2( 0, 48 )
 size_flags_vertical = 8
 custom_colors/font_color = Color( 0.188235, 0.188235, 0.286275, 1 )
@@ -96,8 +95,8 @@ align = 1
 [node name="Console" parent="Margin/Layout/Output" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 698.0
-margin_right = 613.0
-margin_bottom = 1040.0
+margin_top = 721.0
+margin_right = 637.0
+margin_bottom = 1080.0
 
 [node name="Tween" type="Tween" parent="."]

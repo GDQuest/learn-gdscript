@@ -117,6 +117,10 @@ func setup(practice: Practice, _course: Course) -> void:
 	_game_view.use_scene(_current_scene, _script_slice.get_scene_properties().viewport_size)
 
 
+func get_screen_resource() -> Practice:
+	return _practice
+
+
 func _set_script_slice(new_slice: SliceProperties) -> void:
 	if new_slice == _script_slice:
 		return

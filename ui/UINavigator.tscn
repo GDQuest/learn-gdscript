@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/components/BreadCrumbs.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/theme/panel_breadcrumbs.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/UINavigator.gd" type="Script" id=4]
 [ext_resource path="res://ui/icons/icon_settings.png" type="Texture" id=5]
@@ -10,7 +10,6 @@
 [ext_resource path="res://ui/icons/navigation_back.png" type="Texture" id=8]
 [ext_resource path="res://ui/icons/navigation_outliner.png" type="Texture" id=9]
 [ext_resource path="res://ui/icons/icon_godot_head.svg" type="Texture" id=10]
-
 
 [node name="UINavigator" type="PanelContainer"]
 anchor_right = 1.0
@@ -21,21 +20,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Layout" type="VBoxContainer" parent="."]
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="Buttons" type="PanelContainer" parent="VBoxContainer"]
+[node name="Header" type="PanelContainer" parent="Layout"]
 margin_right = 1920.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 3 )
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Buttons"]
+[node name="MarginContainer" type="MarginContainer" parent="Layout/Header"]
 margin_right = 1920.0
 margin_bottom = 48.0
 custom_constants/margin_right = 12
@@ -43,20 +42,12 @@ custom_constants/margin_top = 0
 custom_constants/margin_left = 12
 custom_constants/margin_bottom = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Buttons/MarginContainer"]
+[node name="HeaderContent" type="HBoxContainer" parent="Layout/Header/MarginContainer"]
 margin_left = 12.0
 margin_right = 1908.0
 margin_bottom = 48.0
 
-[node name="OutlinerButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
-modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
-margin_right = 32.0
-margin_bottom = 48.0
-hint_tooltip = "Open the course index"
-icon = ExtResource( 9 )
-flat = true
-
-[node name="HomeButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
+[node name="HomeButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
 visible = false
 modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
 margin_left = 48.0
@@ -66,7 +57,15 @@ hint_tooltip = "Go back to the main menu"
 icon = ExtResource( 10 )
 flat = true
 
-[node name="BackButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
+[node name="OutlinerButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
+modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
+margin_right = 32.0
+margin_bottom = 48.0
+hint_tooltip = "Open the course index"
+icon = ExtResource( 9 )
+flat = true
+
+[node name="BackButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
 modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
 margin_left = 48.0
 margin_right = 80.0
@@ -75,21 +74,17 @@ hint_tooltip = "Go to the previous page"
 icon = ExtResource( 8 )
 flat = true
 
-[node name="BreadCrumbs" type="Label" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
+[node name="BreadCrumbs" parent="Layout/Header/MarginContainer/HeaderContent" instance=ExtResource( 2 )]
 margin_left = 96.0
-margin_top = 10.0
 margin_right = 96.0
-margin_bottom = 38.0
-custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
-custom_fonts/font = ExtResource( 2 )
 
-[node name="Spacer" type="Control" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="Layout/Header/MarginContainer/HeaderContent"]
 margin_left = 112.0
 margin_right = 1768.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 
-[node name="ReportButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
+[node name="ReportButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
 margin_left = 1784.0
 margin_right = 1832.0
 margin_bottom = 48.0
@@ -97,7 +92,7 @@ hint_tooltip = "Report an issue"
 icon = ExtResource( 6 )
 flat = true
 
-[node name="SettingsButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer/HBoxContainer"]
+[node name="SettingsButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
 margin_left = 1848.0
 margin_right = 1896.0
 margin_bottom = 48.0
@@ -105,14 +100,14 @@ hint_tooltip = "Configure the app"
 icon = ExtResource( 5 )
 flat = true
 
-[node name="Content" type="Panel" parent="VBoxContainer"]
+[node name="Content" type="Panel" parent="Layout"]
 margin_top = 48.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 rect_clip_content = true
 size_flags_vertical = 3
 
-[node name="ScreenContainer" type="PanelContainer" parent="VBoxContainer/Content"]
+[node name="ScreenContainer" type="PanelContainer" parent="Layout/Content"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -122,7 +117,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CourseOutliner" parent="VBoxContainer/Content" instance=ExtResource( 7 )]
+[node name="CourseOutliner" parent="Layout/Content" instance=ExtResource( 7 )]
 visible = false
 
 [node name="Tween" type="Tween" parent="."]
