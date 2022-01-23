@@ -15,6 +15,10 @@ func test_draw_corner_of_200_by_200() -> String:
 
 	var rectangle: DrawingTurtle.Polygon = polygons[0]
 	var points := Array(rectangle.get_points())
+	# We make all points absolute in case the user turns counter-clockwise when
+	# making the shape.
+	for i in points.size():
+		points[i] = points[i].abs()
 	points.sort()
 	if points != target_polygon:
 		return "The drawn shape is not a corner connected by two lines of length 200."

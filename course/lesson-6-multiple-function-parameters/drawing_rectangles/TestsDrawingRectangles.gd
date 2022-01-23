@@ -24,6 +24,10 @@ func test_draw_rectangles_of_varying_sizes() -> String:
 	for index in polygons.size():
 		var p = polygons[index]
 		var points = Array(p.get_points())
+		# We make all points absolute in case the user turns counter-clockwise when
+		# making the shape.
+		for i in points.size():
+			points[i] = points[i].abs()
 		points.sort()
 		var points_count = points.size()
 		if points_count > 5:

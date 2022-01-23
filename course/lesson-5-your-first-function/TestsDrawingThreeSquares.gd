@@ -26,6 +26,10 @@ func test_draw_square_of_200_pixels() -> String:
 	var index := 1
 	for p in polygons:
 		var points = Array(p.get_points())
+		# We make all points absolute in case the user turns counter-clockwise when
+		# making the shape.
+		for i in points.size():
+			points[i] = points[i].abs()
 		points.sort()
 		if points != target_polygon:
 			return (

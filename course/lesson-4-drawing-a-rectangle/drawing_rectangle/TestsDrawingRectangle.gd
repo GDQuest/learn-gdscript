@@ -15,6 +15,10 @@ func test_draw_rectangle_of_200_by_120() -> String:
 
 	var rectangle: DrawingTurtle.Polygon = polygons[0]
 	var points := Array(rectangle.get_points())
+	# We make all points absolute in case the user turns counter-clockwise when
+	# making the shape.
+	for i in points.size():
+		points[i] = points[i].abs()
 	points.sort()
 	if points != target_polygon:
 		return "The drawn shape is not a rectangle with a width of 200 and a length of 120."
