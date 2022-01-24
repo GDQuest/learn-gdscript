@@ -33,9 +33,19 @@ For more details regarding the planned improvements for each milestone, please h
 
 ### Milestone 0.2
 
-_Planned release: by February 7, 2022_
+_Planned release: by February 1, 2022_
 
-For the next milestone, we'll add three major features:
+We got a lot of feedback on many aspects of the app that needed improvements and there's a lot of work on that front.
+
+For the second beta release, we decided to delay larger features to refine the interface and address many quality of life issues in priority.
+
+We also plan to improve server connection, logging, and detect loss of connection.
+
+### Milestone 0.3
+
+_Planned release: by March 1, 2022_
+
+For the next milestone, we're looking to add three major features:
 
 1. Interactive tutorials.
 1. A glossary.
@@ -45,7 +55,7 @@ We'll also work on many improvements and bug fixes based on people's feedback. A
 
 ### Milestone 1.0
 
-_Planned release: by March 7, 2022_
+_Planned release: by March 15, 2022_
 
 This milestone will mark the first complete release of the app and GDScript course. It should contain over 30 lessons and practices.
 
