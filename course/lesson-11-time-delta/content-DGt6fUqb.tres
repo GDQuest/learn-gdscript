@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+title = ""
+type = 0
+text = "[font=res://ui/theme/fonts/font_title.tres]Frames Time Variance[/font]
+
+Your computer controls the speed at which each software runs. Depending on how busy the computer is, this can vary.
+
+For that reason, no game engine can guarantee a constant framerate. There will always be milliseconds variations from frame to frame.
+
+That is why the [code]_process()[/code] function receives a [code]delta[/code] parameter.
+
+In mathematics, the word \"delta\" is often used to describe a very small change between two numbers.
+
+The [code]delta[/code] parameter tells us how fast Godot took to complete the [b]previous frame[/b]. We can use that to ensure that the variations between frames have no visible effect."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false

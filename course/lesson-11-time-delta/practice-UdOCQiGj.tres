@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://resources/Practice.gd" type="Script" id=1]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+
+[resource]
+script = ExtResource( 1 )
+title = "Rotating Using Delta"
+goal = "At the minute, the rotation of the robot is frame-dependent.
+
+Add [code]delta[/code] to make the rotational speed time-dependent.
+
+The robot should rotate [code]2[/code] radians per second."
+starting_code = "func _process(delta):
+	rotate(2)"
+hints = PoolStringArray( "Multiply the radians by [code]delta[/code]" )
+validator_script_path = "rotating-using-delta/TestsRotatingDelta.gd"
+script_slice_path = "rotating-using-delta/RotatingSpriteDelta.live-editor/slices/RotatingSpriteDelta.move_and_rotate.slice.tres"
+documentation_references = PoolStringArray( "rotate" )
+documentation_resource = ExtResource( 2 )
+description = ""

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+question = "How many parameters does this function take?"
+content_bbcode = "[code]
+func _process(delta):
+[/code]"
+hint = ""
+explanation_bbcode = "The [code]_process()[/code] function takes one parameter: [code]delta[/code].
+
+We'll look at what [code]delta[/code] is in the next lesson, as well as how to use it."
+answer_options = [ "1", "2" ]
+valid_answers = [ "1" ]
+is_multiple_choice = false
+do_shuffle_answers = true

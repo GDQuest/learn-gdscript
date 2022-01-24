@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+question = "What parameter does the _process() function take?"
+content_bbcode = "[code]
+func _process(delta):
+	rotate(0.05)
+[/code]"
+hint = ""
+explanation_bbcode = "The [code]_process()[/code] function has one parameter named [code]delta[/code]."
+answer_options = [ "rotate", "0.05", "delta" ]
+valid_answers = [ "delta" ]
+is_multiple_choice = false
+do_shuffle_answers = true
