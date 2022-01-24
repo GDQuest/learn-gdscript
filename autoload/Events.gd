@@ -15,3 +15,4 @@ signal course_completed(course)
 
 signal settings_requested
 signal report_form_requested
+signal fullscreen_toggled
