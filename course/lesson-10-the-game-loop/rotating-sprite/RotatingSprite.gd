@@ -13,8 +13,9 @@ func _process(_delta):
 
 func _run() -> void:
 	reset()
-	_process(0.0)
 	set_process(true)
+	yield(get_tree().create_timer(1.0), "timeout")
+	Events.emit_signal("practice_run_completed")
 
 
 func reset() -> void:
