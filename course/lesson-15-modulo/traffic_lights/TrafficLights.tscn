@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://course/lesson-15-modulo/visuals/TrafficLights.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/lesson-15-modulo/traffic_lights/TrafficLights.gd" type="Script" id=2]
+
+[node name="TrafficLights" instance=ExtResource( 1 )]
+position = Vector2( 320, 240 )
+script = ExtResource( 2 )
+
+[node name="Back" parent="." index="0"]
+position = Vector2( -0.600037, 5.60001 )
+
+[node name="Red" parent="." index="1"]
+position = Vector2( -0.600037, -62.4 )
+
+[node name="Orange" parent="." index="2"]
+modulate = Color( 1, 0.960784, 0.25098, 0 )
+position = Vector2( -0.600037, -2.39999 )
+
+[node name="Green" parent="." index="3"]
+modulate = Color( 0.239216, 1, 0.431373, 0 )
+position = Vector2( -0.600037, 57.6 )
+
+[node name="Index" parent="." index="4"]
+margin_left = 87.0
+margin_top = 40.0
+margin_right = 127.0
+margin_bottom = 80.0
