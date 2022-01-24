@@ -5,6 +5,8 @@ signal transition_completed
 signal return_to_welcome_screen_requested
 
 const CourseOutliner := preload("./screens/course_outliner/CourseOutliner.gd")
+const BreadCrumbs := preload("./components/BreadCrumbs.gd")
+
 const SCREEN_TRANSITION_DURATION := 0.75
 const OUTLINER_TRANSITION_DURATION := 0.5
 
@@ -18,27 +20,19 @@ var load_into_outliner := false
 var _screens_stack := []
 # Maps url strings to resource paths.
 var _matches := {}
-var _breadcrumbs: PoolStringArray
-# Used for transition animations.
 
 var _lesson_index := 0
 var _lesson_count: int = 0
 
-onready var _back_button := $VBoxContainer/Buttons/MarginContainer/HBoxContainer/BackButton as Button
-onready var _home_button := $VBoxContainer/Buttons/MarginContainer/HBoxContainer/HomeButton as Button
-onready var _outliner_button := (
-	$VBoxContainer/Buttons/MarginContainer/HBoxContainer/OutlinerButton as Button
-)
-onready var _label := $VBoxContainer/Buttons/MarginContainer/HBoxContainer/BreadCrumbs as Label
-onready var _settings_button := (
-	$VBoxContainer/Buttons/MarginContainer/HBoxContainer/SettingsButton as Button
-)
-onready var _report_button := (
-	$VBoxContainer/Buttons/MarginContainer/HBoxContainer/ReportButton as Button
-)
+onready var _home_button := $Layout/Header/MarginContainer/HeaderContent/HomeButton as Button
+onready var _outliner_button := $Layout/Header/MarginContainer/HeaderContent/OutlinerButton as Button
+onready var _back_button := $Layout/Header/MarginContainer/HeaderContent/BackButton as Button
+onready var _breadcrumbs := $Layout/Header/MarginContainer/HeaderContent/BreadCrumbs as BreadCrumbs
+onready var _settings_button := $Layout/Header/MarginContainer/HeaderContent/SettingsButton as Button
+onready var _report_button := $Layout/Header/MarginContainer/HeaderContent/ReportButton as Button
 
-onready var _screen_container := $VBoxContainer/Content/ScreenContainer as Container
-onready var _course_outliner := $VBoxContainer/Content/CourseOutliner as CourseOutliner
+onready var _screen_container := $Layout/Content/ScreenContainer as Container
+onready var _course_outliner := $Layout/Content/CourseOutliner as CourseOutliner
 onready var _tween := $Tween as Tween
 
 
@@ -95,12 +89,12 @@ func _navigate_back() -> void:
 		_navigate_to_outliner()
 		return
 
-	_breadcrumbs.remove(_breadcrumbs.size() - 1)
-	_label.text = _breadcrumbs.join("/")
-
 	var current_screen: Control = _screens_stack.pop_back()
 	var next_screen: Control = _screens_stack.back()
-	_back_button.visible = _screens_stack.size() >= 2
+	_back_button.disabled = _screens_stack.size() < 2
+
+	var target = next_screen.get_screen_resource()
+	_breadcrumbs.update_breadcrumbs(course, target)
 
 	_transition_to(next_screen, current_screen, false)
 	yield(self, "transition_completed")
@@ -112,18 +106,18 @@ func _navigate_to_outliner() -> void:
 	_course_outliner.modulate.a = 0.0
 	_course_outliner.show()
 
+	_outliner_button.hide()
+	_back_button.hide()
+	_back_button.disabled = true
+	_home_button.show()
+	_clear_history_stack()
+
 	_tween.stop_all()
 	_animate_outliner(true)
 	_tween.start()
 	yield(_tween, "tween_all_completed")
 
 	_screen_container.hide()
-	_outliner_button.hide()
-	_back_button.hide()
-	_home_button.show()
-
-	_clear_history_stack()
-	_label.text = ""
 
 
 # Navigates forward to the next screen and adds it to the stack.
@@ -135,12 +129,11 @@ func _navigate_to() -> void:
 	if target is Practice:
 		var practice := target as Practice
 		screen = preload("UIPractice.tscn").instance()
-		_breadcrumbs.push_back(practice.title)
 	elif target is Lesson:
 		var lesson := target as Lesson
 		screen = preload("UILesson.tscn").instance()
+		
 		_lesson_index = course.lessons.find(lesson) # Make sure the index is synced after navigation.
-		_breadcrumbs.push_back("%s. %s" % [_lesson_index + 1, lesson.title])
 	else:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
 		return
@@ -150,12 +143,12 @@ func _navigate_to() -> void:
 	_screen_container.show()
 	# warning-ignore:unsafe_method_access
 	screen.setup(target, course)
-
-	_label.text = _breadcrumbs.join("/")
-
+	_breadcrumbs.update_breadcrumbs(course, target)
+	
 	var has_previous_screen = not _screens_stack.empty()
 	_screens_stack.push_back(screen)
-	_back_button.visible = _screens_stack.size() >= 2
+	_back_button.show()
+	_back_button.disabled = _screens_stack.size() < 2
 
 	_screen_container.add_child(screen)
 	if has_previous_screen:
@@ -237,18 +230,21 @@ func _transition_to(screen: Control, from_screen: Control = null, direction_in :
 	if from_screen:
 		from_screen.show()
 
-	var viewport_width := get_viewport().size.x
+	var viewport_width := _screen_container.rect_size.x
 	var direction := 1.0 if direction_in else -1.0
 	screen.rect_position.x = viewport_width * direction
+
 	_animate_screen(screen, 0.0)
 	if from_screen:
 		_animate_screen(from_screen, -viewport_width * direction)
 
 	_tween.start()
 	yield(_tween, "tween_all_completed")
+
 	if from_screen:
 		from_screen.hide()
 		_screen_container.remove_child(from_screen)
+
 	emit_signal("transition_completed")
 
 
@@ -260,7 +256,7 @@ func _animate_screen(screen: Control, to_position: float) -> void:
 		to_position,
 		SCREEN_TRANSITION_DURATION,
 		Tween.TRANS_CUBIC,
-		Tween.EASE_OUT
+		Tween.EASE_IN_OUT
 	)
 
 
@@ -286,4 +282,4 @@ func _clear_history_stack() -> void:
 		screen.queue_free()
 	_screens_stack.clear()
 
-	_breadcrumbs = PoolStringArray()
+	_breadcrumbs.update_breadcrumbs(course, null)

@@ -16,5 +16,5 @@ is_full_file = false
 start = 11
 end = 21
 lines_before = [ "extends DrawingTurtle", "", "", "func _run():", "	reset()", "	draw_rectangle(260.0, 180.0)", "	jump(0.0, 220.0)", "	draw_rectangle(160.0, 210.0)", "	play_draw_animation()", "", "" ]
-lines_after = [ "" ]
+lines_after = [ "", "", "func _ready() -> void:", "	if not is_connected(\"turtle_finished\", self, \"_complete_run\"):", "		connect(\"turtle_finished\", self, \"_complete_run\")", "", "", "func _complete_run() -> void:", "	yield(get_tree().create_timer(0.5), \"timeout\")", "	Events.emit_signal(\"practice_run_completed\")", "" ]
 lines_editable = [ "func draw_rectangle(length, height):", "	move_forward(length)", "	turn_right(90)", "	move_forward(height)", "	turn_right(90)", "	move_forward(length)", "	turn_right(90)", "	move_forward(height)", "	turn_right(90)" ]

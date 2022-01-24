@@ -82,7 +82,7 @@ func setup(practice: Practice, _course: Course) -> void:
 
 	_practice = practice
 	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(practice.goal)
-	_info_panel.title_label.text = practice.title
+	_info_panel.title_label.text = practice.title.capitalize()
 	_code_editor.text = practice.starting_code
 
 	_hints_container.visible = not practice.hints.empty()
@@ -115,6 +115,10 @@ func setup(practice: Practice, _course: Course) -> void:
 
 	_info_panel.display_tests(_tester.get_test_names())
 	_game_view.use_scene(_current_scene, _script_slice.get_scene_properties().viewport_size)
+
+
+func get_screen_resource() -> Practice:
+	return _practice
 
 
 func _set_script_slice(new_slice: SliceProperties) -> void:

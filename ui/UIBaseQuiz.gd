@@ -18,7 +18,7 @@ export var test_quiz: Resource
 var completed_before := false setget set_completed_before
 
 onready var _outline := $Outline as PanelContainer
-onready var _question := $MarginContainer/ChoiceView/QuizHeader/Question as Label
+onready var _question := $MarginContainer/ChoiceView/QuizHeader/Question as RichTextLabel
 onready var _explanation := $MarginContainer/ResultView/Explanation as RichTextLabel
 onready var _content := $MarginContainer/ChoiceView/Content as RichTextLabel
 onready var _completed_before_icon := (
@@ -55,7 +55,7 @@ func setup(quiz: Quiz) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 
-	_question.text = _quiz.question
+	_question.bbcode_text = "[b]" + quiz.question + "[/b]"
 
 	_content.visible = not _quiz.content_bbcode.empty()
 	_content.bbcode_text = TextUtils.bbcode_add_code_color(_quiz.content_bbcode)

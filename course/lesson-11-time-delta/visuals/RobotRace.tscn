@@ -1,0 +1,120 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://course/lesson-11-time-delta/visuals/RunningRobot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/lesson-11-time-delta/visuals/RobotRace.gd" type="Script" id=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends \"res://course/lesson-11-time-delta/visuals/RunningRobot.gd\"
+
+signal animation_complete
+
+
+func _ready() -> void:
+	set_process(false)
+	update()
+
+
+func _process(delta) -> void:
+	_sprite.position.x += speed * delta * computer_speed
+	
+	if _sprite.position.x > distance/2:
+		set_process(false)
+
+
+func _draw() -> void:
+	draw_line(Vector2(distance/2, 0), Vector2(distance/2, distance), Color.white * 0.5, 4, true)
+	
+	draw_line(Vector2(-distance/2, 0), Vector2(distance/2, 0), Color.white, 4, true)
+	draw_circle(Vector2(-distance/2, 0), 6, Color.white)
+	draw_circle(Vector2(distance/2, 0), 6, Color.white)
+
+
+func run() -> void:
+	reset()
+	set_process(true)
+
+
+func reset() -> void:
+	_sprite.position.x = -distance/2
+	set_process(false)
+	emit_signal(\"animation_complete\")
+"
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://course/lesson-11-time-delta/visuals/RunningRobot.gd\"
+
+
+func reset() -> void:
+	_sprite.position.x = -distance/2
+"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends \"res://course/lesson-11-time-delta/visuals/RunningRobot.gd\"
+
+
+func _ready() -> void:
+	speed /= 3
+
+
+func reset() -> void:
+	_sprite.position.x = -distance/2
+
+
+func move(vector: Vector2) -> void:
+	_sprite.position += vector
+"
+
+[node name="RobotRace" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Robots" type="Node2D" parent="."]
+
+[node name="RunningRobotNormal" parent="Robots" instance=ExtResource( 1 )]
+position = Vector2( 0, -120 )
+script = SubResource( 2 )
+
+[node name="Label" type="Label" parent="Robots/RunningRobotNormal"]
+margin_left = -264.0
+margin_top = 8.0
+margin_right = -124.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 140, 0 )
+text = "Desired Path"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunningRobotFrameDelta" parent="Robots" instance=ExtResource( 1 )]
+position = Vector2( 0, 70 )
+script = SubResource( 1 )
+
+[node name="Label" type="Label" parent="Robots/RunningRobotFrameDelta"]
+margin_left = -264.0
+margin_top = 8.0
+margin_right = -124.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 140, 0 )
+text = "Using Delta"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunningRobotFrame" parent="Robots" instance=ExtResource( 1 )]
+position = Vector2( 0, 220 )
+script = SubResource( 3 )
+
+[node name="Label" type="Label" parent="Robots/RunningRobotFrame"]
+margin_left = -264.0
+margin_top = 8.0
+margin_right = -124.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 140, 0 )
+text = "Constant Distance"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

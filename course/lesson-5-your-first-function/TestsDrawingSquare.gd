@@ -15,6 +15,10 @@ func test_draw_square_of_200_pixels() -> String:
 
 	var square: DrawingTurtle.Polygon = polygons[0]
 	var points := Array(square.get_points())
+	# We make all points absolute in case the user turns counter-clockwise when
+	# making the shape.
+	for i in points.size():
+		points[i] = points[i].abs()
 	points.sort()
 	if points != target_polygon:
 		return "The drawn shape is not a square of length 200 pixels."

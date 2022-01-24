@@ -20,3 +20,13 @@ func draw_rectangle(length, height):
 	move_forward(height)
 	turn_right(90)
 # /EXPORT draw
+
+
+func _ready() -> void:
+	if not is_connected("turtle_finished", self, "_complete_run"):
+		connect("turtle_finished", self, "_complete_run")
+
+
+func _complete_run() -> void:
+	yield(get_tree().create_timer(0.5), "timeout")
+	Events.emit_signal("practice_run_completed")
