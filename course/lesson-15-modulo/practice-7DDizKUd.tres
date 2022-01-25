@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+title = "Bonus Health Every Other Level"
+goal = "Change the [code]level_up()[/code] function so it does the following:
+
+1) Increment [code]level[/code] by [code]1[/code]
+2) Increase [code]max_health[/code] by [code]5[/code]
+3) If [code]level[/code] is [b]even[/b], increase [code]max_health[/code] by an additional [code]5[/code]
+
+The robot starts with [code]100[/code] maximum health. It will gain three levels when you run the code. At level 4, the robot should have [code]125[/code] maximum health."
+starting_code = "func level_up():
+	pass"
+hints = PoolStringArray( "The modulo operation [code]%[/code] returns the remainder of division. For example, [code]5 % 2[/code] gives [code]1[/code] ", "Even numbers have a remainder of [code]0[/code] when divided by [code]2[/code]", "Use [code]if level % 2 == 0:[/code] to check if the level is even" )
+validator_script_path = "even_levels/TestEvenLevels.gd"
+script_slice_path = "even_levels/EvenLevels.live-editor/slices/EvenLevels.even_level.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 1 )
+description = "There are other ways to increase maximum health. You could use modulo to give a bonus every evening level. Learn how here!"

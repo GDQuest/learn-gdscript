@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
+[ext_resource path="res://course/lesson-14-multiplying/visuals/LevelUpRobot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://course/lesson-15-modulo/even_levels/EvenLevels.gd" type="Script" id=3]
+
+[node name="EvenLevels" instance=ExtResource( 2 )]
+position = Vector2( 360, 320 )
+script = ExtResource( 3 )
+
+[node name="HealthBar" type="ColorRect" parent="." index="3"]
+margin_left = -99.0
+margin_top = -103.0
+margin_right = 101.0
+margin_bottom = -83.0
+rect_min_size = Vector2( 200, 20 )
+color = Color( 0.0352941, 0.0392157, 0.12549, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBarEmpty" type="ColorRect" parent="HealthBar" index="0"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 195.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 180, 10 )
+color = Color( 0.572549, 0.560784, 0.721569, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBarCurrent" type="ColorRect" parent="HealthBar" index="1"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 195.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 0, 10 )
+color = Color( 0.239216, 1, 0.431373, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HealthBar" index="2"]
+margin_top = -24.0
+margin_right = 200.0
+margin_bottom = 4.0
+rect_min_size = Vector2( 200, 0 )
+theme = ExtResource( 1 )
+text = "100/100"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="." index="4"]
+
+[node name="LabelLevel" type="Label" parent="." index="5"]
+margin_left = -99.0
+margin_top = -160.0
+margin_right = 101.0
+margin_bottom = -132.0
+rect_min_size = Vector2( 200, 0 )
+theme = ExtResource( 1 )
+text = "Level 1"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
