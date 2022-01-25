@@ -42,6 +42,9 @@ func _ready() -> void:
 
 	if test_lesson and get_parent() == get_tree().root:
 		setup(test_lesson, null)
+		for child in _content_blocks.get_children():
+			child.show()
+		_practices_container.show()
 
 
 func setup(lesson: Lesson, course: Course) -> void:
