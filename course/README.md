@@ -685,10 +685,127 @@ func level_up():
         max_health += 5
 ```
 
-### Lesson 16: introduction to loops
+
+### Lesson 16: 2D vectors
+
+Solves: Storing position or scale, many useful calculations in 2D videogames.
+
+Vectors are not common in all computer programming, but they are prevalent in video games.
+
+This is why we look at them early on here. The user already got a glimpse of them when working with positions. Then, we can use them in the following lessons, for example, to move a character on a board using a loop. We can use them in arrays of coordinates to draw a shape. And so on.
+
+In Godot, vectors are a call kind of value, just like numbers. Precisely, they are the Association of 2 decimal numbers: one for the X coordinate and one for the Y coordinate.
+
+Whenever you access the position or scale of a character, you are dealing with a Vector2.
+
+----
+
+If the student is too young or forgot what they learned about vectors at school, we should link to a good video lesson to get a refresher on what they are and how they work.
+
+Cover:
+
+- Syntax to create vectors: `Vector2(x, y)`
+- adding vectors: `position += Vector2(100, 100)`
+- subtracting vectors: `position -= Vector2(100, 100)`
+
+### Lesson 17: Introduction to while loops
+
+Solves: repeating instructions any number of times, especially when that number is not known in advance.
+
+While loops make the computer repeat a block of code until you meet a specific condition or decide to break from the loop.
+
+We use while loops every time we need to loop an unknown number of times.
+
+For example, games run in a loop that typically generates 60 images per second until the user closes the game. This is possible thanks to while loops.
+
+The computer also reads the code you write using a while loop because it doesn't know the length of your code in advance.
+
+Concrete examples: drawing a shape many times or making a character walk on a grid many times.
+
+```
+var number = 0
+while number < 5:
+    draw_square()
+    position.x += 100
+    number += 1
+```
+
+Disclaimer: if you're not careful, your while loop can run infinitely. In that case, the application will freeze.
+
+In the next lesson, you will see a much safer kind of loop that does not have this limitation.
+
+### Lesson 18: Introduction to for loops
+
+Solves: doing things a fixed number of times or processing every element of a list.
+
+In this introductory lesson, we only show how to repeat code a fixed number of times using the `range()` function. We can present the range function as producing a list of numbers.
+
+It allows us to first introduce the concept of for loops and later build upon it with lessons dedicated to arrays.
+
+Unlike while loops, for loops do not run infinitely, so it is much less likely that you will get bugs in your game. Because of that, we recommend favoring for loops over while loops.
 
 To cover:
 
-- Looping over each element in an array
 - Looping a fixed number of times (range)
-- Looping until a specific condition becomes invalid
+
+### Lesson 19: Creating arrays
+
+Solves: storing a list of related items, like a list of coordinates, items in the player's inventory, characters in the player's party, and more.
+
+This first lesson focuses on creating an array to store some important data. For example, items in a player's inventory.
+
+The range function we saw in the previous lesson created an array of numbers. For example, calling `range(3)` produces the value `[0, 1, 2]`. It's an array of three numbers starting from zero.
+
+The for loop takes this array and loops over the numbers sequentially.
+
+Arrays are a core data type in computer programs just like numbers. An array is a list of things. Those things can be whole numbers, decimal numbers, 2D vectors, or anything else.
+
+### Lesson 20: Looping over arrays
+
+### Lesson 21: Adding, removing, and accessing elements in arrays
+
+### Lesson 22: Strings
+
+We need strings to give nice examples for dictionaries.
+
+### Lesson 23: Creating dictionaries
+
+Creating an inventory mapping item names to whole numbers.
+
+Dictionaries are also called associative arrays: they map elements from one array to the elements of another array.
+
+Take a phone numbers list. Having just the phone numbers is not very useful. Instead, you want to associate names with phone numbers. Dictionary can do that for you.
+
+In games, a typical use for dictionaries is player inventories. You can use a dictionary to store the number of each item you own.
+
+Say you want an inventory with five health potions and ten arrows.
+
+Each entry in the dictionary maps the item's name to the quantity contained in the player's inventory.
+
+### Lesson 24: Looping over dictionaries
+
+We can loop over the keys and values of a dictionary with for loops.
+
+## Remaining topics:
+
+General topics:
+
+- [X] while loops
+- [X] for loops
+- [X] Arrays
+- [X] Strings
+- [X] Dictionaries
+- [X] Vector2
+- [ ] Types and type hints
+- [ ] Duck typing
+
+Specific techniques:
+
+- [ ] Breaking from a loop.
+- [ ] Looping over the keys and values of a dictionary.
+- [ ] Creating nested dictionaries (e.g. grid inventory mapping cells to {name: amount}).
+- [ ] Using arrays inside dictionaries (e.g. `{square = [Vector2(0, 0), Vector2(100, 0), ...]}`).
+
+We don't plan to teach objects and object-oriented programming using the app.
+
+We think it'd be better first to teach nodes etc. inside of Godot and later build upon the students' intuitive understanding of game entities to teach the more abstract classes, objects, and so on.
