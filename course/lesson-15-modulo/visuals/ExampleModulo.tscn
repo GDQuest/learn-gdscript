@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/lesson-15-modulo/visuals/Modulo.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "tool
+extends RunnableCodeExample
+
+func _ready():
+	yield(self, \"ready\")
+	var number_slider = create_slider_for(\"number\", 1, 7, 1)
+	var modulo_slider = create_slider_for(\"modulo\", 1, 7, 1)
+	_scene_instance.connect(\"number_changed\", self, \"_on_number_changed\", [number_slider])
+	_scene_instance.connect(\"modulo_changed\", self, \"_on_modulo_changed\", [modulo_slider])
+
+
+func _set_instance_value(value: float, property_name: String, value_label: Label) -> void:
+	._set_instance_value(value, property_name, value_label)
+	_gdscript_text_edit.text = gdscript_code.replace(property_name, \"%s [=%s]\"%[property_name, value])
+
+
+func _on_number_changed(number: int, slider: HSlider) -> void:
+	if slider.value != number:
+		slider.value = number
+
+
+func _on_modulo_changed(modulo: int, slider: HSlider) -> void:
+	if slider.value != modulo:
+		slider.value = modulo
+"
+
+[node name="ExampleModulo" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 307.0
+margin_bottom = 387.0
+script = SubResource( 1 )
+scene = ExtResource( 2 )
+
+[node name="Frame" parent="RunnableCodeExample" index="0"]
+margin_right = 300.0
+margin_bottom = 380.0
+rect_min_size = Vector2( 300, 380 )
+
+[node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="0"]
+visible = false
+
+[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
+visible = false
+
+[node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
+visible = false
+margin_left = 244.0
+margin_right = 644.0
+margin_bottom = 260.0
+
+[editable path="RunnableCodeExample"]

@@ -1,0 +1,177 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://course/lesson-15-modulo/visuals/square.png" type="Texture" id=2]
+[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "tool
+extends Node2D
+
+const color_green := Color(\"3dff6e\")
+const color_red := Color(\"928fb8\")
+const results := [\"Even\", \"Odd\"]
+
+export var _offset := Vector2.ZERO
+export (int, 1, 7) var number := 5 setget _set_number, get_number
+export (int, 1, 7) var modulo := 2
+
+onready var _blocks := $Blocks
+onready var _string := $String
+onready var _remainder := $Remainder
+
+
+func _ready() -> void:
+	_align_blocks()
+	_update_visual()
+
+
+func _align_blocks() -> void:
+	for c in _blocks.get_children():
+		c.modulate.a = 0.0
+	
+	var row := 0
+	var column := 0
+	for i in range(max(number, modulo)):
+		_blocks.get_child(i).position = Vector2(40 * column, row * 40) + _offset
+		row += 1
+		if row % modulo == 0 and modulo < number:
+			column += 1
+			row = 0
+
+
+func _update_visual() -> void:
+	if number >= modulo:
+		for i in range(number):
+			_blocks.get_child(i).modulate.a = 0
+			if i < number - (number % modulo):
+				_blocks.get_child(i).modulate = color_red
+			else:
+				_blocks.get_child(i).modulate = color_green
+	else:
+		for i in range(modulo):
+			_blocks.get_child(i).modulate = color_green
+			
+			if i >= number:
+				_blocks.get_child(i).modulate = color_red
+	
+	_string.text = \"%s\" % [results[number % modulo]]
+	_remainder.text = \"Remainder: %s\" % [number % modulo]
+
+
+func _set_number(value: int) -> void:
+	number = value
+	if not _blocks:
+		return
+	_align_blocks()
+	_update_visual()
+
+
+func get_number() -> int:
+	return number
+"
+
+[node name="OddEven" type="Node2D"]
+script = SubResource( 1 )
+_offset = Vector2( -120, -90 )
+
+[node name="Blocks" type="Node2D" parent="."]
+
+[node name="Block" type="Sprite" parent="Blocks"]
+modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
+position = Vector2( -120, -90 )
+texture = ExtResource( 2 )
+
+[node name="Shadow" type="Sprite" parent="Blocks/Block"]
+modulate = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+show_behind_parent = true
+position = Vector2( 0, 4 )
+texture = ExtResource( 2 )
+
+[node name="Block2" type="Sprite" parent="Blocks"]
+modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
+position = Vector2( -120, -50 )
+texture = ExtResource( 2 )
+
+[node name="Shadow" type="Sprite" parent="Blocks/Block2"]
+modulate = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+show_behind_parent = true
+position = Vector2( 0, 4 )
+texture = ExtResource( 2 )
+
+[node name="Block3" type="Sprite" parent="Blocks"]
+modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
+position = Vector2( -120, -10 )
+texture = ExtResource( 2 )
+
+[node name="Shadow" type="Sprite" parent="Blocks/Block3"]
+modulate = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+show_behind_parent = true
+position = Vector2( 0, 4 )
+texture = ExtResource( 2 )
+
+[node name="Block4" type="Sprite" parent="Blocks"]
+modulate = Color( 0.239216, 1, 0.431373, 1 )
+position = Vector2( -80, -90 )
+texture = ExtResource( 2 )
+
+[node name="Shadow" type="Sprite" parent="Blocks/Block4"]
+modulate = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+show_behind_parent = true
+position = Vector2( 0, 4 )
+texture = ExtResource( 2 )
+
+[node name="Block5" type="Sprite" parent="Blocks"]
+modulate = Color( 0.239216, 1, 0.431373, 1 )
+position = Vector2( -80, -50 )
+texture = ExtResource( 2 )
+
+[node name="Shadow" type="Sprite" parent="Blocks/Block5"]
+modulate = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+show_behind_parent = true
+position = Vector2( 0, 4 )
+texture = ExtResource( 2 )
+
+[node name="Block6" type="Sprite" parent="Blocks"]
+modulate = Color( 1, 0, 0, 0 )
+position = Vector2( 40, 40 )
+texture = ExtResource( 2 )
+
+[node name="Shadow" type="Sprite" parent="Blocks/Block6"]
+modulate = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+show_behind_parent = true
+position = Vector2( 0, 4 )
+texture = ExtResource( 2 )
+
+[node name="Block7" type="Sprite" parent="Blocks"]
+modulate = Color( 1, 0, 0, 0 )
+position = Vector2( 40, 80 )
+texture = ExtResource( 2 )
+
+[node name="Shadow" type="Sprite" parent="Blocks/Block7"]
+modulate = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+show_behind_parent = true
+position = Vector2( 0, 4 )
+texture = ExtResource( 2 )
+
+[node name="String" type="Label" parent="."]
+margin_left = -39.0
+margin_top = 68.0
+margin_right = 129.0
+margin_bottom = 99.0
+custom_fonts/font = ExtResource( 3 )
+text = "5 % 3"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Remainder" type="Label" parent="."]
+margin_left = -39.0
+margin_top = 102.0
+margin_right = 129.0
+margin_bottom = 133.0
+custom_fonts/font = ExtResource( 3 )
+text = "Remainder: 2"
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -87,7 +87,7 @@ func set_center_in_frame(value: bool) -> void:
 	_center_scene_instance()
 
 
-func create_slider_for(property_name, min_value := 0.0, max_value := 100.0, step := 1.0) -> void:
+func create_slider_for(property_name, min_value := 0.0, max_value := 100.0, step := 1.0) -> HSlider:
 	if not _scene_instance:
 		yield(self, "scene_instance_set")
 	var box := HBoxContainer.new()
@@ -109,6 +109,7 @@ func create_slider_for(property_name, min_value := 0.0, max_value := 100.0, step
 	slider.rect_min_size.x = 100.0
 	slider.connect("value_changed", self, "_set_instance_value", [property_name, value_label])
 	_set_instance_value(property_value, property_name, value_label)
+	return slider
 
 
 # Using this proxy function is required as the value emitted by the signal
