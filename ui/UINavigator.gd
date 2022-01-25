@@ -52,7 +52,7 @@ func _ready() -> void:
 
 	_settings_button.connect("pressed", Events, "emit_signal", ["settings_requested"])
 	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
-
+	
 	if NavigationManager.current_url == "":
 		if load_into_outliner:
 			NavigationManager.navigate_to_outliner()

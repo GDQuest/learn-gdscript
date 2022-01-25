@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/BreadCrumbs.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://ui/icons/navigation_back.png" type="Texture" id=8]
 [ext_resource path="res://ui/icons/navigation_outliner.png" type="Texture" id=9]
 [ext_resource path="res://ui/icons/icon_godot_head.svg" type="Texture" id=10]
+[ext_resource path="res://ui/components/FullScreenButton.tscn" type="PackedScene" id=11]
 
 [node name="UINavigator" type="PanelContainer"]
 anchor_right = 1.0
@@ -80,9 +81,12 @@ margin_right = 96.0
 
 [node name="Spacer" type="Control" parent="Layout/Header/MarginContainer/HeaderContent"]
 margin_left = 112.0
-margin_right = 1768.0
+margin_right = 1712.0
 margin_bottom = 48.0
+rect_pivot_offset = Vector2( -514, 99 )
 size_flags_horizontal = 3
+
+[node name="FullScreenButton" parent="Layout/Header/MarginContainer/HeaderContent" instance=ExtResource( 11 )]
 
 [node name="ReportButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
 margin_left = 1784.0

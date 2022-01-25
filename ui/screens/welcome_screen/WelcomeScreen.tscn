@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://ui/screens/welcome_screen/WelcomeScreen.gd" type="Script" id=8]
 [ext_resource path="res://ui/components/BigGreenButton.tscn" type="PackedScene" id=9]
 [ext_resource path="res://ui/theme/panel_breadcrumbs.tres" type="StyleBox" id=10]
+[ext_resource path="res://ui/components/FullScreenButton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://icon.png" type="Texture" id=12]
 [ext_resource path="res://ui/screens/welcome_screen/test_quiz.tres" type="Resource" id=14]
 [ext_resource path="res://ui/components/GDQuestLogo.tscn" type="PackedScene" id=15]
@@ -52,6 +53,10 @@ margin_left = 12.0
 margin_right = 1908.0
 margin_bottom = 48.0
 alignment = 2
+
+[node name="FullScreenButton" parent="Layout/TopBar/MarginContainer/ToolBarLayout" instance=ExtResource( 11 )]
+margin_left = 1584.0
+margin_right = 1624.0
 
 [node name="ReportButton" type="Button" parent="Layout/TopBar/MarginContainer/ToolBarLayout"]
 margin_left = 1640.0
@@ -141,7 +146,7 @@ scroll_horizontal_enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer"]
 margin_right = 820.0
-margin_bottom = 2230.0
+margin_bottom = 2205.0
 mouse_filter = 2
 custom_constants/margin_top = 0
 custom_constants/margin_left = 0
@@ -149,7 +154,7 @@ custom_constants/margin_bottom = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer"]
 margin_right = 800.0
-margin_bottom = 2230.0
+margin_bottom = 2205.0
 custom_constants/separation = 32
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
@@ -211,14 +216,14 @@ __meta__ = {
 [node name="UIQuizChoice" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 845.0
 margin_right = 800.0
-margin_bottom = 1043.0
+margin_bottom = 1047.0
 mouse_filter = 2
 test_quiz = ExtResource( 14 )
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 1075.0
+margin_top = 1079.0
 margin_right = 800.0
-margin_bottom = 2098.0
+margin_bottom = 2073.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 800, 100 )
@@ -265,9 +270,9 @@ __meta__ = {
 }
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 2130.0
+margin_top = 2105.0
 margin_right = 800.0
-margin_bottom = 2230.0
+margin_bottom = 2205.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 800, 100 )

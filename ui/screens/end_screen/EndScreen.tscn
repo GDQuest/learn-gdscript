@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/components/GDQuestLogo.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
@@ -6,9 +6,9 @@
 [ext_resource path="res://ui/theme/fonts/font_title_big.tres" type="DynamicFont" id=4]
 [ext_resource path="res://ui/icons/icon_report.png" type="Texture" id=5]
 [ext_resource path="res://ui/screens/end_screen/EndScreen.gd" type="Script" id=6]
+[ext_resource path="res://ui/components/FullScreenButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/theme/panel_breadcrumbs.tres" type="StyleBox" id=8]
 [ext_resource path="res://icon.png" type="Texture" id=10]
-
 
 [node name="EndScreen" type="Control"]
 anchor_right = 1.0
@@ -47,6 +47,10 @@ margin_left = 12.0
 margin_right = 1908.0
 margin_bottom = 48.0
 alignment = 2
+
+[node name="FullScreenButton" parent="Layout/TopBar/MarginContainer/ToolBarLayout" instance=ExtResource( 7 )]
+margin_left = 1584.0
+margin_right = 1624.0
 
 [node name="ReportButton" type="Button" parent="Layout/TopBar/MarginContainer/ToolBarLayout"]
 margin_left = 1640.0
