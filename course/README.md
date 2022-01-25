@@ -801,6 +801,7 @@ General topics:
 
 Specific techniques:
 
+- [ ] Functions that return values.
 - [ ] Breaking from a loop.
 - [ ] Looping over the keys and values of a dictionary.
 - [ ] Creating nested dictionaries (e.g. grid inventory mapping cells to {name: amount}).
