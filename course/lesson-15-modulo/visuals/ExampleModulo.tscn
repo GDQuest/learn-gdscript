@@ -8,12 +8,26 @@ script/source = "tool
 extends RunnableCodeExample
 
 func _ready():
-	create_slider_for(\"number\", 1, 7, 1)
-	create_slider_for(\"modulo\", 1, 7, 1)
+	yield(self, \"ready\")
+	var number_slider = create_slider_for(\"number\", 1, 7, 1)
+	var modulo_slider = create_slider_for(\"modulo\", 1, 7, 1)
+	_scene_instance.connect(\"number_changed\", self, \"_on_number_changed\", [number_slider])
+	_scene_instance.connect(\"modulo_changed\", self, \"_on_modulo_changed\", [modulo_slider])
+
 
 func _set_instance_value(value: float, property_name: String, value_label: Label) -> void:
 	._set_instance_value(value, property_name, value_label)
 	_gdscript_text_edit.text = gdscript_code.replace(property_name, \"%s [=%s]\"%[property_name, value])
+
+
+func _on_number_changed(number: int, slider: HSlider) -> void:
+	if slider.value != number:
+		slider.value = number
+
+
+func _on_modulo_changed(modulo: int, slider: HSlider) -> void:
+	if slider.value != modulo:
+		slider.value = modulo
 "
 
 [node name="ExampleModulo" type="PanelContainer"]
@@ -47,6 +61,5 @@ visible = false
 margin_left = 244.0
 margin_right = 644.0
 margin_bottom = 260.0
-draw_spaces = true
 
 [editable path="RunnableCodeExample"]

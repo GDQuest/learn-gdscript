@@ -1,6 +1,6 @@
 extends Node2D
 
-var max_number := 10
+var max_number := 6
 var _result := 0
 
 onready var _result_label := $Sprite/Label as Label
