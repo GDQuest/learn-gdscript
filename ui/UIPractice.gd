@@ -126,14 +126,16 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	_info_panel.display_tests(_tester.get_test_names())
 	_game_view.use_scene(_current_scene, _script_slice.get_scene_properties().viewport_size)
 
-	var practice_index := lesson.practices.find(_practice)
-	var practice_max := lesson.practices.size() - 1
-	_practice_progress.set_previous_enabled(practice_index > 0)
-	_practice_progress.set_next_enabled(practice_index < practice_max)
+	# In case we directly test a practice from the editor, we don't have access to the lesson.
+	if lesson:
+		var practice_index := lesson.practices.find(_practice)
+		var practice_max := lesson.practices.size() - 1
+		_practice_progress.set_previous_enabled(practice_index > 0)
+		_practice_progress.set_next_enabled(practice_index < practice_max)
 	
-	_practice_list.clear_items()
-	for practice_data in lesson.practices:
-		_practice_list.add_item(practice_data, lesson, course, practice_data == practice)
+		_practice_list.clear_items()
+		for practice_data in lesson.practices:
+			_practice_list.add_item(practice_data, lesson, course, practice_data == practice)
 
 
 func get_screen_resource() -> Practice:
