@@ -10,7 +10,9 @@ signal quiz_completed(quiz)
 signal practice_started(practice)
 signal practice_run_completed()
 signal practice_completed(practice)
-signal practice_navigated_next(practice)
+signal practice_next_requested(practice)
+signal practice_previous_requested(practice)
+signal practice_requested(practice)
 signal course_completed(course)
 
 signal settings_requested

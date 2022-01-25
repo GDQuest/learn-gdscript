@@ -1,7 +1,7 @@
 class_name UIQuizChoice
 extends UIBaseQuiz
 
-const QuizAnswerButtonScene := preload("res://ui/components/quizzes/QuizAnswerButton.tscn")
+const QuizAnswerButtonScene := preload("res://ui/screens/lesson/quizzes/QuizAnswerButton.tscn")
 
 
 onready var _choices := $MarginContainer/ChoiceView/Answers as VBoxContainer

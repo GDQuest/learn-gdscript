@@ -1,17 +1,17 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/components/quizzes/QuizAnswerButton.gd" type="Script" id=2]
-[ext_resource path="res://ui/theme/quiz_answer_hover.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui/theme/fonts/font_text.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
+[ext_resource path="res://ui/screens/lesson/quizzes/QuizAnswerButton.gd" type="Script" id=3]
 [ext_resource path="res://ui/theme/quiz_answer_normal.tres" type="StyleBox" id=4]
-[ext_resource path="res://ui/theme/quiz_answer_pressed.tres" type="StyleBox" id=5]
-[ext_resource path="res://ui/theme/fonts/font_text.tres" type="DynamicFont" id=6]
+[ext_resource path="res://ui/theme/quiz_answer_hover.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/theme/quiz_answer_pressed.tres" type="StyleBox" id=6]
 
 [node name="QuizAnswerButton" type="PanelContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
+theme = ExtResource( 2 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -19,8 +19,8 @@ __meta__ = {
 [node name="CheckBox" type="CheckBox" parent="."]
 margin_right = 608.0
 margin_bottom = 68.0
-custom_styles/hover = ExtResource( 3 )
-custom_styles/pressed = ExtResource( 5 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 6 )
 custom_styles/normal = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -35,7 +35,7 @@ margin_top = 20.0
 margin_right = 588.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 540, 0 )
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 1 )
 text = "Answer label"
 valign = 1
 autowrap = true

@@ -1,0 +1,115 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://ui/components/popups/PracticeListPopup.gd" type="Script" id=1]
+[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=7]
+
+[node name="PracticeListPopup" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0352941, 0.0392157, 0.129412, 0.470588 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -430.0
+margin_top = -310.0
+margin_right = 430.0
+margin_bottom = 310.0
+rect_min_size = Vector2( 860, 620 )
+theme = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="PanelContainer"]
+margin_right = 860.0
+margin_bottom = 620.0
+custom_styles/panel = ExtResource( 5 )
+
+[node name="Column" type="VBoxContainer" parent="PanelContainer"]
+margin_right = 860.0
+margin_bottom = 620.0
+custom_constants/separation = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Column"]
+margin_right = 860.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+value = 100.0
+percent_visible = false
+
+[node name="Margin" type="MarginContainer" parent="PanelContainer/Column"]
+margin_top = 16.0
+margin_right = 860.0
+margin_bottom = 620.0
+size_flags_vertical = 3
+
+[node name="Column" type="VBoxContainer" parent="PanelContainer/Column/Margin"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 840.0
+margin_bottom = 584.0
+custom_constants/separation = 12
+
+[node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column"]
+margin_right = 820.0
+margin_bottom = 31.0
+custom_fonts/font = ExtResource( 2 )
+text = "Practice List"
+align = 1
+
+[node name="Separator" type="HSeparator" parent="PanelContainer/Column/Margin/Column"]
+margin_left = 210.0
+margin_top = 43.0
+margin_right = 610.0
+margin_bottom = 51.0
+rect_min_size = Vector2( 400, 0 )
+size_flags_horizontal = 4
+
+[node name="PracticeList" type="ScrollContainer" parent="PanelContainer/Column/Margin/Column"]
+margin_top = 63.0
+margin_right = 820.0
+margin_bottom = 452.0
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="Items" type="VBoxContainer" parent="PanelContainer/Column/Margin/Column/PracticeList"]
+margin_right = 820.0
+size_flags_horizontal = 3
+
+[node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column"]
+margin_top = 464.0
+margin_right = 820.0
+margin_bottom = 484.0
+rect_min_size = Vector2( 400, 20 )
+
+[node name="Buttons" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column"]
+margin_top = 496.0
+margin_right = 820.0
+margin_bottom = 564.0
+alignment = 1
+
+[node name="CancelButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons"]
+margin_left = 310.0
+margin_right = 510.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 200, 68 )
+size_flags_horizontal = 4
+custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
+custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
+text = "Close"

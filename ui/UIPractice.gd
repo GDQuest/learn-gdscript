@@ -6,6 +6,8 @@ const RUN_AUTOTIMER_DURATION := 5.0
 
 const PracticeHintScene := preload("screens/practice/PracticeHint.tscn")
 const LessonDonePopupScene := preload("components/popups/LessonDonePopup.tscn")
+const PracticeProgress := preload("screens/practice/PracticeProgress.gd")
+const PracticeListPopup := preload("components/popups/PracticeListPopup.gd")
 
 export var test_practice: Resource
 
@@ -33,7 +35,9 @@ onready var _output_console := _output_container.find_node("Console") as OutputC
 
 onready var _info_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
 onready var _documentation_panel := find_node("DocumentationPanel") as RichTextLabel
-onready var _hints_container := _info_panel.hints_container
+onready var _hints_container := _info_panel.hints_container as Revealer
+onready var _practice_progress := _info_panel.progress_bar as PracticeProgress
+onready var _practice_list := find_node("PracticeListPopup") as PracticeListPopup
 
 onready var _code_editor := find_node("CodeEditor") as CodeEditor
 
@@ -50,6 +54,7 @@ func _init():
 	
 	_on_init_set_javascript()
 
+
 func _ready() -> void:
 	randomize()
 	if Engine.editor_hint:
@@ -60,10 +65,14 @@ func _ready() -> void:
 	_code_editor.connect("console_toggled", self, "_on_console_toggled")
 	_output_console.connect("reference_clicked", self, "_on_code_reference_clicked")
 	
+	_practice_progress.connect("previous_requested", self, "_on_previous_requested")
+	_practice_progress.connect("next_requested", self, "_on_next_requested")
+	_practice_progress.connect("list_requested", self, "_on_list_requested")
+	
 	Events.connect("practice_run_completed", self, "_test_student_code")
 
 	if test_practice and get_parent() == get_tree().root:
-		setup(test_practice, null)
+		setup(test_practice, null, null)
 
 	_info_panel_start_width = _info_panel.rect_size.x
 
@@ -76,11 +85,12 @@ func _gui_input(event: InputEvent) -> void:
 		get_focus_owner().release_focus()
 
 
-func setup(practice: Practice, _course: Course) -> void:
+func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 
 	_practice = practice
+
 	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(practice.goal)
 	_info_panel.title_label.text = practice.title.capitalize()
 	_code_editor.text = practice.starting_code
@@ -115,6 +125,15 @@ func setup(practice: Practice, _course: Course) -> void:
 
 	_info_panel.display_tests(_tester.get_test_names())
 	_game_view.use_scene(_current_scene, _script_slice.get_scene_properties().viewport_size)
+
+	var practice_index := lesson.practices.find(_practice)
+	var practice_max := lesson.practices.size() - 1
+	_practice_progress.set_previous_enabled(practice_index > 0)
+	_practice_progress.set_next_enabled(practice_index < practice_max)
+	
+	_practice_list.clear_items()
+	for practice_data in lesson.practices:
+		_practice_list.add_item(practice_data, lesson, course, practice_data == practice)
 
 
 func get_screen_resource() -> Practice:
@@ -227,7 +246,7 @@ func _test_student_code() -> void:
 		var popup := LessonDonePopupScene.instance() as LessonDonePopup
 		add_child(popup)
 		popup.fade_in(_game_container)
-		popup.connect("accepted", Events, "emit_signal", [ "practice_navigated_next", _practice ])
+		popup.connect("accepted", Events, "emit_signal", [ "practice_next_requested", _practice ])
 	
 	# Clean-up.
 	_code_editor.unlock_editor()
@@ -295,6 +314,24 @@ func _on_console_toggled() -> void:
 
 func _on_code_reference_clicked(_file_name: String, line: int, character: int) -> void:
 	_code_editor.slice_editor.highlight_line(line, character)
+
+
+func _on_previous_requested() -> void:
+	if not _practice:
+		return
+	
+	Events.emit_signal("practice_previous_requested", _practice)
+
+
+func _on_next_requested() -> void:
+	if not _practice:
+		return
+	
+	Events.emit_signal("practice_next_requested", _practice)
+
+
+func _on_list_requested() -> void:
+	_practice_list.show()
 
 
 func _on_autotimer_timeout() -> void:

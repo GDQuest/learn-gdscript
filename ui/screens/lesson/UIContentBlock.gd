@@ -9,7 +9,7 @@ const VISUAL_VISIBLE_MIN_WIDTH := 500.0
 
 const COLOR_NOTE := Color(0.14902, 0.776471, 0.968627)
 
-const RevealerScene := preload("components/Revealer.tscn")
+const RevealerScene := preload("res://ui/components/Revealer.tscn")
 
 
 var _content_block: ContentBlock
@@ -54,9 +54,9 @@ func _make_revealer() -> void:
 		return
 
 	var revealer := RevealerScene.instance() as Revealer
-	revealer.title_panel = preload("theme/revealer_notes_title.tres")
-	revealer.title_panel_expanded = preload("theme/revealer_notes_title_expanded.tres")
-	revealer.content_panel = preload("theme/revealer_notes_panel.tres")
+	revealer.title_panel = preload("res://ui/theme/revealer_notes_title.tres")
+	revealer.title_panel_expanded = preload("res://ui/theme/revealer_notes_title_expanded.tres")
+	revealer.content_panel = preload("res://ui/theme/revealer_notes_panel.tres")
 
 	if _content_block.type == ContentBlock.Type.NOTE:
 		revealer.title_font_color = COLOR_NOTE

@@ -6,10 +6,10 @@
 class_name UILesson
 extends Control
 
-const ContentBlockScene := preload("UIContentBlock.tscn")
-const QuizInputFieldScene := preload("./components/quizzes/UIQuizInputField.tscn")
-const QuizChoiceScene := preload("./components/quizzes/UIQuizChoice.tscn")
-const PracticeButtonScene := preload("UIPracticeButton.tscn")
+const ContentBlockScene := preload("screens/lesson/UIContentBlock.tscn")
+const QuizInputFieldScene := preload("screens/lesson/quizzes/UIQuizInputField.tscn")
+const QuizChoiceScene := preload("screens/lesson/quizzes/UIQuizChoice.tscn")
+const PracticeButtonScene := preload("screens/lesson/UIPracticeButton.tscn")
 
 const AUTOSCROLL_PADDING := 20
 const AUTOSCROLL_DURATION := 0.24

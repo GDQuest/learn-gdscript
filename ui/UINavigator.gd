@@ -44,7 +44,9 @@ func _ready() -> void:
 	NavigationManager.connect("back_navigation_requested", self, "_navigate_back")
 	NavigationManager.connect("outliner_navigation_requested", self, "_navigate_to_outliner")
 
-	Events.connect("practice_navigated_next", self, "_on_practice_navigated_next")
+	Events.connect("practice_next_requested", self, "_on_practice_next_requested")
+	Events.connect("practice_previous_requested", self, "_on_practice_previous_requested")
+	Events.connect("practice_requested", self, "_on_practice_requested")
 
 	_outliner_button.connect("pressed", NavigationManager, "navigate_to_outliner")
 	_back_button.connect("pressed", NavigationManager, "navigate_back")
@@ -127,11 +129,15 @@ func _navigate_to() -> void:
 
 	var screen: Control
 	if target is Practice:
+		var lesson = course.lessons[_lesson_index]
+		
 		var practice := target as Practice
 		screen = preload("UIPractice.tscn").instance()
+		screen.setup(target, lesson, course)
 	elif target is Lesson:
 		var lesson := target as Lesson
 		screen = preload("UILesson.tscn").instance()
+		screen.setup(target, course)
 		
 		_lesson_index = course.lessons.find(lesson) # Make sure the index is synced after navigation.
 	else:
@@ -141,8 +147,6 @@ func _navigate_to() -> void:
 	_outliner_button.show()
 	_home_button.hide()
 	_screen_container.show()
-	# warning-ignore:unsafe_method_access
-	screen.setup(target, course)
 	_breadcrumbs.update_breadcrumbs(course, target)
 	
 	var has_previous_screen = not _screens_stack.empty()
@@ -175,11 +179,15 @@ func _navigate_to() -> void:
 		Events.emit_signal("lesson_started", target)
 
 
-func _on_practice_navigated_next(practice: Practice) -> void:
+func _on_practice_next_requested(practice: Practice) -> void:
 	var lesson_data := course.lessons[_lesson_index] as Lesson
 	var practices: Array = lesson_data.practices
 
 	var index := practices.find(practice)
+	# This practice is not in the current lesson, return early.
+	if index < 0:
+		return
+	
 	# This is the last practice in the set, move to the next lesson.
 	if index >= practices.size() - 1:
 		yield(get_tree(), "idle_frame") # Allow the rest of practice handlers to sync up.
@@ -187,6 +195,35 @@ func _on_practice_navigated_next(practice: Practice) -> void:
 	else:
 		# Otherwise, go to the next practice in the set.
 		NavigationManager.navigate_to(practices[index + 1].resource_path)
+
+
+func _on_practice_previous_requested(practice: Practice) -> void:
+	var lesson_data := course.lessons[_lesson_index] as Lesson
+	var practices: Array = lesson_data.practices
+
+	var index := practices.find(practice)
+	# This practice is not in the current lesson, return early.
+	if index < 0:
+		return
+
+	# This is the first practice in the set, there is no valid path, should be blocked by UI.
+	if index == 0:
+		return
+	else:
+		# Otherwise, go to the previous practice in the set.
+		NavigationManager.navigate_to(practices[index - 1].resource_path)
+
+
+func _on_practice_requested(practice: Practice) -> void:
+	var lesson_data := course.lessons[_lesson_index] as Lesson
+	var practices: Array = lesson_data.practices
+
+	var index := practices.find(practice)
+	# This practice is not in the current lesson, return early.
+	if index < 0:
+		return
+	
+	NavigationManager.navigate_to(practice.resource_path)
 
 
 func _on_lesson_completed(lesson: Lesson) -> void:

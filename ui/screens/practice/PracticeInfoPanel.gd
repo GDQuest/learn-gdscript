@@ -14,6 +14,7 @@ onready var goal_rich_text_label := find_node("Goal").find_node("TextBox") as Ri
 onready var hints_container := find_node("Hints") as Revealer
 onready var docs_container := find_node("Documentation") as Revealer
 onready var _docs_item_list := docs_container.find_node("DocumentationItems") as Control
+onready var progress_bar := find_node("PracticeProgress") as Control
 
 onready var _checks := find_node("Checks") as Revealer
 

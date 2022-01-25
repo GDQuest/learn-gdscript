@@ -1,20 +1,20 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://ui/UIContentBlock.gd" type="Script" id=1]
+[ext_resource path="res://ui/theme/fonts/font_lesson_heading.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/fonts/font_text.tres" type="DynamicFont" id=2]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=3]
-[ext_resource path="res://ui/theme/fonts/font_lesson_heading.tres" type="DynamicFont" id=4]
-[ext_resource path="res://ui/theme/hseparator_lesson_content.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/theme/hseparator_lesson_content.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=4]
+[ext_resource path="res://ui/screens/lesson/UIContentBlock.gd" type="Script" id=5]
 
 [node name="UIContentBlock" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 3 )
+theme = ExtResource( 4 )
 custom_constants/margin_right = 0
 custom_constants/margin_top = 0
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
-script = ExtResource( 1 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -39,7 +39,7 @@ margin_bottom = 1070.0
 [node name="ContentHeader" type="Label" parent="Panel/MarginContainer/Layout"]
 margin_right = 1920.0
 margin_bottom = 44.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 1 )
 text = "Optional Heading"
 
 [node name="ContentLayout" type="HBoxContainer" parent="Panel/MarginContainer/Layout"]
@@ -72,4 +72,4 @@ margin_right = 1060.0
 margin_bottom = 258.0
 rect_min_size = Vector2( 200, 0 )
 size_flags_horizontal = 4
-custom_styles/separator = ExtResource( 5 )
+custom_styles/separator = ExtResource( 3 )

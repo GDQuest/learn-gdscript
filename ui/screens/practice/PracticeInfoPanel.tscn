@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/screens/practice/PracticeInfoPanel.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/revealer_hints_panel.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/screens/practice/PracticeProgress.tscn" type="PackedScene" id=8]
 
 [node name="PracticeInfoPanel" type="PanelContainer"]
 anchor_right = 1.0
@@ -32,7 +33,7 @@ size_flags_vertical = 3
 
 [node name="Margin" type="MarginContainer" parent="LessonRequirements"]
 margin_right = 1920.0
-margin_bottom = 1080.0
+margin_bottom = 1021.0
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -42,7 +43,7 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
-margin_bottom = 1060.0
+margin_bottom = 1001.0
 size_flags_vertical = 3
 
 [node name="Title" type="Label" parent="LessonRequirements/Margin/Column"]
@@ -60,13 +61,13 @@ custom_constants/separation = 16
 [node name="Scroll" type="ScrollContainer" parent="LessonRequirements/Margin/Column"]
 margin_top = 79.0
 margin_right = 1880.0
-margin_bottom = 1040.0
+margin_bottom = 981.0
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="LessonRequirements/Margin/Column/Scroll"]
 margin_right = 1880.0
-margin_bottom = 744.0
+margin_bottom = 504.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 12
 custom_constants/margin_top = 0
@@ -75,7 +76,7 @@ custom_constants/margin_bottom = 0
 
 [node name="Column" type="VBoxContainer" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer"]
 margin_right = 1868.0
-margin_bottom = 744.0
+margin_bottom = 504.0
 
 [node name="Goals" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column" instance=ExtResource( 5 )]
 margin_right = 1868.0
@@ -107,7 +108,7 @@ is_expanded = true
 [node name="Documentation" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column" instance=ExtResource( 5 )]
 margin_top = 434.0
 margin_right = 1868.0
-margin_bottom = 744.0
+margin_bottom = 504.0
 size_flags_vertical = 3
 title = "Documentation"
 is_expanded = true
@@ -116,6 +117,11 @@ is_expanded = true
 margin_left = 8.0
 margin_top = 58.0
 margin_right = 1860.0
-margin_bottom = 298.0
-rect_min_size = Vector2( 0, 240 )
+margin_bottom = 58.0
 custom_constants/separation = 16
+
+[node name="PracticeProgress" parent="LessonRequirements" instance=ExtResource( 8 )]
+anchor_right = 0.0
+margin_top = 1037.0
+margin_right = 1920.0
+margin_bottom = 1080.0

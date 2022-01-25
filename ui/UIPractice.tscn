@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/components/CodeEditor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/theme/panel_course_page.tres" type="StyleBox" id=2]
 [ext_resource path="res://ui/screens/practice/PracticeInfoPanel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/components/GameView.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/components/OutputConsole.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/components/popups/PracticeListPopup.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/theme/panel_game.tres" type="StyleBox" id=7]
 [ext_resource path="res://ui/UIPractice.gd" type="Script" id=8]
 [ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=9]
@@ -97,6 +98,13 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 721.0
 margin_right = 637.0
+margin_bottom = 1080.0
+
+[node name="PracticeListPopup" parent="." instance=ExtResource( 6 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1920.0
 margin_bottom = 1080.0
 
 [node name="Tween" type="Tween" parent="."]

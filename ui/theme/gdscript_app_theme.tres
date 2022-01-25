@@ -48,11 +48,10 @@
 [ext_resource path="res://ui/icons/code_tab.svg" type="Texture" id=46]
 [ext_resource path="res://ui/icons/radiomark_checked.svg" type="Texture" id=47]
 [ext_resource path="res://ui/icons/radiomark_empty.svg" type="Texture" id=48]
+[ext_resource path="res://ui/theme/vseparator_stylebox.tres" type="StyleBox" id=49]
+[ext_resource path="res://ui/theme/hseparator_stylebox.tres" type="StyleBox" id=50]
 
 [sub_resource type="StyleBoxEmpty" id=6]
-
-[sub_resource type="StyleBoxLine" id=1]
-color = Color( 0.290196, 0.294118, 0.388235, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -61,11 +60,6 @@ color = Color( 0.290196, 0.294118, 0.388235, 1 )
 [sub_resource type="StyleBoxEmpty" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=4]
-
-[sub_resource type="StyleBoxLine" id=5]
-color = Color( 0.290196, 0.294118, 0.388235, 1 )
-thickness = 2
-vertical = true
 
 [resource]
 default_font = ExtResource( 1 )
@@ -96,7 +90,7 @@ HScrollBar/styles/grabber_pressed = ExtResource( 37 )
 HScrollBar/styles/scroll = ExtResource( 35 )
 HScrollBar/styles/scroll_focus = SubResource( 6 )
 HSeparator/constants/separation = 8
-HSeparator/styles/separator = SubResource( 1 )
+HSeparator/styles/separator = ExtResource( 50 )
 HSlider/icons/grabber = ExtResource( 26 )
 HSlider/icons/grabber_disabled = null
 HSlider/icons/grabber_highlight = ExtResource( 28 )
@@ -199,7 +193,7 @@ VScrollBar/styles/grabber_pressed = ExtResource( 15 )
 VScrollBar/styles/scroll = ExtResource( 17 )
 VScrollBar/styles/scroll_focus = SubResource( 4 )
 VSeparator/constants/separation = 8
-VSeparator/styles/separator = SubResource( 5 )
+VSeparator/styles/separator = ExtResource( 49 )
 VSlider/icons/grabber = ExtResource( 26 )
 VSlider/icons/grabber_highlight = ExtResource( 28 )
 VSlider/styles/grabber_area = ExtResource( 40 )
