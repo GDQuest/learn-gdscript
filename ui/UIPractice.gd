@@ -252,6 +252,15 @@ func _test_student_code() -> void:
 	_code_editor.unlock_editor()
 
 
+func _reset_practice() -> void:
+	# Code it already reset by the slice editor.
+	
+	_info_panel.reset_tests_status()
+	
+	if _current_scene.has_method("reset"):
+		_current_scene.call("reset")
+
+
 func _toggle_distraction_free_mode() -> void:
 	_is_left_panel_open = not _is_left_panel_open
 	_tween.stop_all()
@@ -306,6 +315,8 @@ func _on_code_editor_button(which: String) -> void:
 			_game_view.toggle_paused()
 		_code_editor.ACTIONS.DFMODE:
 			_toggle_distraction_free_mode()
+		_code_editor.ACTIONS.RESTORE:
+			_reset_practice()
 
 
 func _on_console_toggled() -> void:

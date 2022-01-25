@@ -140,6 +140,7 @@ func _on_restore_pressed() -> void:
 	_restore_button.disabled = true
 	set_text(_initial_text)
 	unlock_editor()
+	emit_signal("action", ACTIONS.RESTORE)
 
 
 func _on_solution_pressed() -> void:
