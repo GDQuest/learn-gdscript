@@ -1,8 +1,10 @@
 extends Control
 
 var health = 20
-var _health_gained = 100
+var _health_gained = 40
 var _max_health = 80
+
+var _produced_health_values = []
 
 onready var _robot := $HealSprite
 
@@ -15,7 +17,11 @@ func _ready() -> void:
 
 
 func _run() -> void:
+	_produced_health_values.clear()
 	heal(_health_gained)
+	_produced_health_values.append(health)
+	heal(_health_gained)
+	_produced_health_values.append(health)
 	_update_robot()
 	yield(get_tree().create_timer(1.0), "timeout")
 	Events.emit_signal("practice_run_completed")
@@ -35,3 +41,6 @@ func heal(amount):
 	if health > 80:
 		health = 80
 # /EXPORT heal
+
+func get_produced_health_values() -> Array:
+	return _produced_health_values
