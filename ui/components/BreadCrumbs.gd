@@ -87,6 +87,7 @@ func _create_navigation_node(text: String, path: String = "", current: bool = fa
 		navigation_node.add_stylebox_override("pressed", BUTTON_PRESSED)
 		navigation_node.add_stylebox_override("hover", BUTTON_HOVER)
 		navigation_node.add_stylebox_override("disabled", BUTTON_DISABLED)
+		navigation_node.mouse_default_cursor_shape = CURSOR_POINTING_HAND
 		add_child(navigation_node)
 		navigation_node.connect("pressed", self, "_on_navigation_pressed", [ path ])
 

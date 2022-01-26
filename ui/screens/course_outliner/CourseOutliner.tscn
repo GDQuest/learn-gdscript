@@ -8,7 +8,6 @@
 [ext_resource path="res://ui/screens/course_outliner/CourseLessonDetails.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/components/popups/ConfirmPopup.tscn" type="PackedScene" id=7]
 
-
 [node name="CourseOutliner" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -83,6 +82,7 @@ margin_bottom = 47.0
 [node name="ResetButton" type="Button" parent="MarginContainer/Layout/HBoxContainer/LeftColumn/PanelContainer/Buttons"]
 margin_right = 206.0
 margin_bottom = 47.0
+mouse_default_cursor_shape = 2
 text = "Reset Progress"
 
 [node name="LessonDetails" parent="MarginContainer/Layout/HBoxContainer" instance=ExtResource( 6 )]
