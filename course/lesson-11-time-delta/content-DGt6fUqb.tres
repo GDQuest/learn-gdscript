@@ -4,19 +4,19 @@
 
 [resource]
 script = ExtResource( 1 )
-title = ""
+title = "Frames take varying amounts of time to calculate"
 type = 0
-text = "[font=res://ui/theme/fonts/font_title.tres]Frames Time Variance[/font]
+text = "Depending on the game, the computer, and what the game engine needs to calculate, frames take more or less time to display.
 
-Your computer controls the speed at which each software runs. Depending on how busy the computer is, this can vary.
-
-For that reason, no game engine can guarantee a constant framerate. There will always be milliseconds variations from frame to frame.
+There will always be milliseconds variations from frame to frame.
 
 That is why the [code]_process()[/code] function receives a [code]delta[/code] parameter.
 
-In mathematics, the word \"delta\" is often used to describe a very small change between two numbers.
+The word \"delta\" represents a time difference. It's the time passed since the previous frame, in seconds.
 
-The [code]delta[/code] parameter tells us how fast Godot took to complete the [b]previous frame[/b]. We can use that to ensure that the variations between frames have no visible effect."
+The [code]delta[/code] parameter tells us how fast Godot took to complete the [b]previous frame[/b].
+
+We can use it to ensure that the variations between frames doesn't make the game's simulation unreliable."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false

@@ -6,17 +6,15 @@
 script = ExtResource( 1 )
 title = ""
 type = 0
-text = "But it's not just our character that has a [code]_process()[/code] function; almost everything in the game has a [code]_process()[/code] function!
+text = "But it's not just our character that has a [code]_process()[/code] function; Almost everything in the game has a [code]_process()[/code] function!
 
-Godot runs each [code]_process()[/code] function as fast as it can.
+Dozens of times per second, Godot runs every [code]_process()[/code] function in the game to update the game world.
 
-When Godot has run every [code]_process()[/code] function in the game, it has completed one game loop, or [b]frame[/b].
+After that, it displays an image of the game world on the screen. We call that image a [b]frame[/b].
 
-Godot then moves on to the next frame. This runs very fast, giving us the illusion of movement. This is similar to how movies or animations work, which is why we use the word [b]frame[/b].
+Godot then moves on to calculating the next frame.
 
-And this happens many, many times a second!
-
-This is how we get fluid motion in games. "
+As this happens dozens of times per second, you get the illusion of movement. This is similar to how traditional animation works."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false

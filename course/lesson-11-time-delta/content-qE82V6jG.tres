@@ -4,19 +4,13 @@
 
 [resource]
 script = ExtResource( 1 )
-title = "Why Does Frame Variance Matter?"
+title = "The time between frames matters"
 type = 0
-text = "What would happen if our computer slows down or has irregular frame times?
+text = "The time it takes to display a new frame varies. If you don't take that time into account in your code, your game will have gameplay issues and bugs. Godot provides that time to the [code]_process()[/code] function through the [code]delta[/code] parameter.
 
-In the examples below, we artificially made the frames last different times. Some last 0.1 seconds, some as much as 0.7 seconds.
+In the example below, the top robot moves using [code]delta[/code]. As a result, it moves at a fixed speed.
 
-When we use [code]delta[/code], the robot takes into account the varying frames so aligns with the desired path; it gets the end of the line at the correct time.
-
-By using [code]delta[/code], we move a [b]different amount[/b] every frame, adjusting the character's position based on [code]delta[/code].
-
-Thanks to that, we get [b]constant movement[/b] per second. The character seems to move at a regular speed.
-
-Using a constant distance each frame instead, we get [b]varying movement[/b] per second. Because of that, the character seems to jump and overshoots the target."
+The bottom robot moves over a constant distance every frame. It will move faster or slower than the top robot on [i]your[/i] computer. The result will be different for everyone."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
