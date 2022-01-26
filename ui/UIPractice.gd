@@ -138,7 +138,7 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	_game_view.use_scene(_current_scene, _script_slice.get_scene_properties().viewport_size)
 
 	# In case we directly test a practice from the editor, we don't have access to the lesson.
-	if lesson:
+	if lesson and course:
 		var practice_index := lesson.practices.find(_practice)
 		var practice_max := lesson.practices.size() - 1
 		_practice_progress.set_previous_enabled(practice_index > 0)
@@ -147,6 +147,11 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 		_practice_list.clear_items()
 		for practice_data in lesson.practices:
 			_practice_list.add_item(practice_data, lesson, course, practice_data == practice)
+		
+		var user_profile := UserProfiles.get_profile()
+		var completed_before = user_profile.is_lesson_practice_completed(course.resource_path, lesson.resource_path, practice.resource_path)
+		if completed_before:
+			_info_panel.set_status_icon(_info_panel.Status.COMPLETED_BEFORE)
 
 
 func get_screen_resource() -> Practice:
@@ -363,6 +368,7 @@ func _on_code_editor_button(which: String) -> void:
 			_reset_practice()
 		_code_editor.ACTIONS.SOLUTION:
 			_practice_solution_used = true
+			_info_panel.set_status_icon(_info_panel.Status.SOLUTION_USED)
 		_code_editor.ACTIONS.CONTINUE:
 			_on_next_requested()
 

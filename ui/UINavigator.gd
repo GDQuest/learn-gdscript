@@ -190,6 +190,10 @@ func _on_practice_next_requested(practice: Practice) -> void:
 	
 	# This is the last practice in the set, move to the next lesson.
 	if index >= practices.size() - 1:
+		# Checking that it's the last practice is not enough.
+		# TODO: Check if all practices are completed before moving to the next lesson.
+		# TODO: Show a popup with information, but allow to move forward regardless.
+		
 		yield(get_tree(), "idle_frame") # Allow the rest of practice handlers to sync up.
 		_on_lesson_completed(lesson_data)
 	else:

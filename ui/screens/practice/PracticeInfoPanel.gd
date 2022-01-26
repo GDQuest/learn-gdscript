@@ -4,12 +4,20 @@ extends PanelContainer
 
 signal tests_updated
 
+enum Status { NONE, COMPLETED_BEFORE, SOLUTION_USED }
+
+const STATUS_ICON_COMPLETED_BEFORE := preload("res://ui/icons/checkmark_valid.svg")
+const STATUS_ICON_SOLUTION_USED := preload("res://ui/icons/checkmark_invalid.svg")
+
 const QueryResult := Documentation.QueryResult
 const TestDisplayScene = preload("PracticeTestDisplay.tscn")
 
 export var title := "Title" setget set_title
 
+var _current_status: int = Status.NONE
+
 onready var title_label := find_node("Title") as Label
+onready var _status_icon := find_node("StatusIcon") as TextureRect
 onready var goal_rich_text_label := find_node("Goal").find_node("TextBox") as RichTextLabel
 onready var hints_container := find_node("Hints") as Revealer
 onready var docs_container := find_node("Documentation") as Revealer
@@ -134,3 +142,25 @@ func set_documentation(documentation: QueryResult) -> void:
 
 func clear_documentation() -> void:
 	docs_container.hide()
+
+
+func set_status_icon(status: int) -> void:
+	if not _current_status == Status.NONE:
+		return
+	_current_status = status
+	
+	match status:
+		Status.NONE:
+			_status_icon.texture = null
+			_status_icon.hint_tooltip = ""
+			_status_icon.hide()
+
+		Status.COMPLETED_BEFORE:
+			_status_icon.texture = STATUS_ICON_COMPLETED_BEFORE
+			_status_icon.hint_tooltip = "You've completed this practice before."
+			_status_icon.show()
+
+		Status.SOLUTION_USED:
+			_status_icon.texture = STATUS_ICON_SOLUTION_USED
+			_status_icon.hint_tooltip = "You've used the provided solution.\nThis practice will not count towards your course progress."
+			_status_icon.show()

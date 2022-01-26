@@ -46,20 +46,34 @@ margin_right = 1900.0
 margin_bottom = 1001.0
 size_flags_vertical = 3
 
-[node name="Title" type="Label" parent="LessonRequirements/Margin/Column"]
+[node name="TitleBox" type="HBoxContainer" parent="LessonRequirements/Margin/Column"]
 margin_right = 1880.0
+margin_bottom = 32.0
+
+[node name="Title" type="Label" parent="LessonRequirements/Margin/Column/TitleBox"]
+margin_right = 1832.0
 margin_bottom = 31.0
+size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 3 )
 text = "Summary - Lesson Name"
 
-[node name="HSeparator" type="HSeparator" parent="LessonRequirements/Margin/Column"]
-margin_top = 47.0
+[node name="StatusIcon" type="TextureRect" parent="LessonRequirements/Margin/Column/TitleBox"]
+modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
+margin_left = 1848.0
 margin_right = 1880.0
-margin_bottom = 63.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+stretch_mode = 6
+
+[node name="HSeparator" type="HSeparator" parent="LessonRequirements/Margin/Column"]
+margin_top = 48.0
+margin_right = 1880.0
+margin_bottom = 64.0
 custom_constants/separation = 16
 
 [node name="Scroll" type="ScrollContainer" parent="LessonRequirements/Margin/Column"]
-margin_top = 79.0
+margin_top = 80.0
 margin_right = 1880.0
 margin_bottom = 981.0
 size_flags_vertical = 3
