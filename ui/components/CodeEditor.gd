@@ -83,13 +83,14 @@ func _ready() -> void:
 	yield(get_tree(), "idle_frame")
 	_initial_text = text
 
-	for button in _buttons_with_shortcuts:
-		assert(
-			button.shortcut.shortcut is InputEventAction,
-			"Buttons must use an action as a shortcut to generate a shortcut tooltip for them."
-		)
-		var action_name: String = button.shortcut.shortcut.action
-		button.hint_tooltip += "\n" + TextUtils.convert_input_action_to_tooltip(action_name)
+	if not Engine.editor_hint:
+		for button in _buttons_with_shortcuts:
+			assert(
+				button.shortcut.shortcut is InputEventAction,
+				"Buttons must use an action as a shortcut to generate a shortcut tooltip for them."
+			)
+			var action_name: String = button.shortcut.shortcut.action
+			button.hint_tooltip += "\n" + TextUtils.convert_input_action_to_tooltip(action_name)
 
 
 func _gui_input(event: InputEvent) -> void:
