@@ -42,16 +42,6 @@ In this section, you'll find a summary of our roadmap for the app.
 
 For more details regarding the planned improvements for each milestone, please head to the [Milestones page](https://github.com/GDQuest/learn-gdscript/milestones).
 
-### Milestone 0.2
-
-_Planned release: by February 1, 2022_
-
-We got a lot of feedback on many aspects of the app that needed improvements and there's a lot of work on that front.
-
-For the second beta release, we decided to delay larger features to refine the interface and address many quality of life issues in priority.
-
-We also plan to improve server connection, logging, and detect loss of connection.
-
 ### Milestone 0.3
 
 _Planned release: by March 1, 2022_
