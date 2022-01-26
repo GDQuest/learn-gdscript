@@ -25,6 +25,17 @@ To do so:
 - If you can't find any, click the _New issue_ button in the top-right corner.
 - Follow the instructions on the screen.
 
+## How to run the app
+
+You can test the app online here:
+
+- Latest stable release: https://gdquest.github.io/learn-gdscript/
+- Bleeding edge version: https://gdquest.github.io/learn-gdscript/staging/ (we update this version periodically as we make improvements)
+
+We only recommend importing the app in Godot to study its source code or [contribute](#how-to-contribute). If you want to do so, you will need Godot 3.4.2 or a more recent stable version of Godot 3. The app requires features we added to Godot 3.4.2 to work.
+
+Note that if you run the app in Godot, practice errors will trigger the debugger and pause execution, unlike when using the online version.
+
 ## Roadmap
 
 In this section, you'll find a summary of our roadmap for the app.
