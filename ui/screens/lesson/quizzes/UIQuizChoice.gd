@@ -24,7 +24,6 @@ func setup(quiz: Quiz) -> void:
 
 	if quiz_choice.is_multiple_choice:
 		_question.bbcode_text += " [i]" + tr("(select all that apply)") + "[/i]"
-		_question.text = _question.bbcode_text
 
 	for answer in answer_options:
 		var button = QuizAnswerButtonScene.instance()
