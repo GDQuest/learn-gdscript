@@ -29,6 +29,8 @@ func _ready() -> void:
 	CodeEditorEnhancer.enhance(_gdscript_text_edit)
 	_gdscript_text_edit.add_color_region("[=", "]", CodeEditorEnhancer.COLOR_COMMENTS)
 
+	_gdscript_text_edit.visible = not gdscript_code.empty()
+
 	# If there's no scene but there's an instance as a child of
 	# RunnableCodeExample, we use this as the scene instance.
 	#
