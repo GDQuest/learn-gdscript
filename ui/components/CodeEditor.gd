@@ -7,7 +7,12 @@ signal action(action)
 signal console_toggled
 
 const ACTIONS := {
-	"RUN": "run", "PAUSE": "pause", "SOLUTION": "solution", "RESTORE": "restore", "DFMODE": "dfmode"
+	"RUN": "run",
+	"PAUSE": "pause",
+	"SOLUTION": "solution",
+	"RESTORE": "restore",
+	"CONTINUE": "continue",
+	"DFMODE": "dfmode",
 }
 
 const EDITOR_EXPAND_ICON := preload("res://ui/icons/expand.png")
@@ -26,9 +31,10 @@ onready var slice_editor := $Column/PanelContainer/SliceEditor as SliceEditor
 
 onready var _run_button := $Column/MarginContainer/Column/Row/RunButton as Button
 onready var _pause_button := $Column/MarginContainer/Column/Row/PauseButton as Button
+onready var _restore_button := $Column/MarginContainer/Column/Row/RestoreButton as Button
 onready var _solution_button := $Column/MarginContainer/Column/Row2/SolutionButton as Button
-onready var _restore_button := $Column/MarginContainer/Column/Row2/RestoreButton as Button
-onready var _console_button := $Column/MarginContainer/Column/Row/ConsoleButton as Button
+onready var _console_button := $Column/MarginContainer/Column/Row2/ConsoleButton as Button
+onready var _continue_button := $Column/MarginContainer/Column/Row2/ContinueButton as Button
 
 onready var _distraction_free_mode_button := $Column/PanelContainer/DFMButton as Button
 
@@ -36,7 +42,13 @@ onready var _locked_overlay := $Column/PanelContainer/LockedOverlay as Control
 onready var _locked_overlay_label := $Column/PanelContainer/LockedOverlay/Layout/Label as Label
 
 # Buttons to toggle disabled when running the code, until the server responds.
-onready var _buttons_to_disable := [_run_button, _pause_button, _solution_button, _restore_button]
+onready var _buttons_to_disable := [
+	_run_button,
+	_pause_button,
+	_solution_button,
+	_restore_button,
+	_continue_button,
+]
 # We generate a shortcut tooltip for each of those buttons.
 onready var _buttons_with_shortcuts := [
 	_run_button,
@@ -44,7 +56,7 @@ onready var _buttons_with_shortcuts := [
 	_solution_button,
 	_console_button,
 	_pause_button,
-	_distraction_free_mode_button
+	_distraction_free_mode_button,
 ]
 
 
@@ -60,6 +72,7 @@ func _ready() -> void:
 	_pause_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.PAUSE])
 	_solution_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.SOLUTION])
 	_restore_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.RESTORE])
+	_continue_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.CONTINUE])
 	_distraction_free_mode_button.connect(
 		"pressed", self, "emit_signal", ["action", ACTIONS.DFMODE]
 	)
@@ -107,6 +120,10 @@ func set_distraction_free_state(enabled: bool) -> void:
 
 func set_pause_button_pressed(is_pressed: bool) -> void:
 	_pause_button.pressed = is_pressed
+
+
+func set_continue_allowed(allowed: bool) -> void:
+	_continue_button.disabled = not allowed
 
 
 func lock_editor() -> void:

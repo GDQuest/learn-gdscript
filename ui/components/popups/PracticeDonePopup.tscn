@@ -1,9 +1,9 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/components/popups/LessonDonePopup.gd" type="Script" id=2]
-[ext_resource path="res://ui/theme/fonts/font_title_lesson_done.tres" type="DynamicFont" id=3]
-[ext_resource path="res://ui/theme/fonts/font_text_lesson_done.tres" type="DynamicFont" id=4]
+[ext_resource path="res://ui/components/popups/PracticeDonePopup.gd" type="Script" id=2]
+[ext_resource path="res://ui/theme/fonts/font_well_done_title.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/theme/fonts/font_well_done_normal.tres" type="DynamicFont" id=4]
 [ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=5]
 [ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=7]
@@ -11,10 +11,10 @@
 [ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=9]
 [ext_resource path="res://ui/theme/panel_game_screen.tres" type="StyleBox" id=10]
 [ext_resource path="res://ui/theme/panel_game.tres" type="StyleBox" id=11]
+[ext_resource path="res://ui/theme/fonts/font_well_done_bold.tres" type="DynamicFont" id=12]
+[ext_resource path="res://ui/theme/button_outline_large_accented.tres" type="StyleBox" id=13]
 
-[sub_resource type="StyleBoxEmpty" id=1]
-
-[node name="LessonDonePopup" type="ColorRect"]
+[node name="PracticeDonePopup" type="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.0352941, 0.0392157, 0.129412, 0.627451 )
@@ -40,14 +40,14 @@ __meta__ = {
 
 [node name="WellDoneAnchors" type="Control" parent="Layout"]
 margin_right = 600.0
-margin_bottom = 340.0
-rect_min_size = Vector2( 600, 340 )
+margin_bottom = 405.0
+rect_min_size = Vector2( 600, 405 )
 size_flags_vertical = 4
 
 [node name="PanelContainer" type="PanelContainer" parent="Layout/WellDoneAnchors"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 600, 340 )
+rect_min_size = Vector2( 600, 405 )
 theme = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -55,77 +55,86 @@ __meta__ = {
 
 [node name="Panel" type="Panel" parent="Layout/WellDoneAnchors/PanelContainer"]
 margin_right = 600.0
-margin_bottom = 340.0
+margin_bottom = 405.0
 custom_styles/panel = ExtResource( 7 )
 
-[node name="Column" type="VBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer"]
+[node name="Layout" type="VBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer"]
 margin_right = 600.0
-margin_bottom = 340.0
+margin_bottom = 405.0
 custom_constants/separation = 0
 
-[node name="ProgressBar" type="ProgressBar" parent="Layout/WellDoneAnchors/PanelContainer/Column"]
+[node name="ProgressBar" type="ProgressBar" parent="Layout/WellDoneAnchors/PanelContainer/Layout"]
 margin_right = 600.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 value = 100.0
 percent_visible = false
 
-[node name="Margin" type="MarginContainer" parent="Layout/WellDoneAnchors/PanelContainer/Column"]
+[node name="Margin" type="MarginContainer" parent="Layout/WellDoneAnchors/PanelContainer/Layout"]
 margin_top = 16.0
 margin_right = 600.0
-margin_bottom = 334.0
+margin_bottom = 402.0
 
-[node name="Column" type="VBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer/Column/Margin"]
+[node name="Column" type="VBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 580.0
-margin_bottom = 298.0
-custom_constants/separation = 12
-
-[node name="Spacer" type="HSeparator" parent="Layout/WellDoneAnchors/PanelContainer/Column/Margin/Column"]
-margin_right = 560.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 400, 0 )
+margin_bottom = 366.0
 custom_constants/separation = 20
-custom_styles/separator = SubResource( 1 )
 
-[node name="Title" type="Label" parent="Layout/WellDoneAnchors/PanelContainer/Column/Margin/Column"]
-margin_top = 32.0
+[node name="Spacer" type="Control" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column"]
 margin_right = 560.0
-margin_bottom = 92.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 400, 8 )
+
+[node name="Title" type="Label" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column"]
+margin_top = 28.0
+margin_right = 560.0
+margin_bottom = 80.0
 custom_fonts/font = ExtResource( 3 )
 text = "Well done!"
 align = 1
 
-[node name="Spacer3" type="HSeparator" parent="Layout/WellDoneAnchors/PanelContainer/Column/Margin/Column"]
-margin_left = 80.0
-margin_top = 104.0
-margin_right = 480.0
-margin_bottom = 112.0
-rect_min_size = Vector2( 400, 0 )
-size_flags_horizontal = 4
-
-[node name="Summary" type="Label" parent="Layout/WellDoneAnchors/PanelContainer/Column/Margin/Column"]
-margin_top = 124.0
+[node name="Summary" type="Label" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column"]
+margin_top = 100.0
 margin_right = 560.0
-margin_bottom = 166.0
+margin_bottom = 136.0
+size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
 text = "You completed the practice."
 align = 1
+autowrap = true
 
-[node name="Spacer2" type="HSeparator" parent="Layout/WellDoneAnchors/PanelContainer/Column/Margin/Column"]
-margin_top = 178.0
+[node name="Summary2" type="RichTextLabel" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column"]
+margin_top = 156.0
 margin_right = 560.0
-margin_bottom = 198.0
-rect_min_size = Vector2( 400, 0 )
-custom_constants/separation = 20
-custom_styles/separator = SubResource( 1 )
+margin_bottom = 230.0
+size_flags_vertical = 0
+custom_fonts/bold_font = ExtResource( 12 )
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[center][b]Stay[/b] and play around,
+or [b]continue[/b] the course.[/center]"
+text = "Stay and play around,
+or continue the course."
+fit_content_height = true
 
-[node name="Button" type="Button" parent="Layout/WellDoneAnchors/PanelContainer/Column/Margin/Column"]
-margin_left = 180.0
-margin_top = 210.0
-margin_right = 380.0
-margin_bottom = 278.0
+[node name="Spacer2" type="Control" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column"]
+margin_top = 250.0
+margin_right = 560.0
+margin_bottom = 258.0
+rect_min_size = Vector2( 400, 8 )
+
+[node name="Buttons" type="HBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column"]
+margin_top = 278.0
+margin_right = 560.0
+margin_bottom = 346.0
+alignment = 1
+
+[node name="StayButton" type="Button" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column/Buttons"]
+margin_left = 72.0
+margin_right = 272.0
+margin_bottom = 68.0
 rect_min_size = Vector2( 200, 68 )
 size_flags_horizontal = 4
 custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
@@ -134,12 +143,26 @@ custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
 custom_styles/normal = ExtResource( 8 )
-text = "Got it!"
+text = "Stay"
+
+[node name="MoveOnButton" type="Button" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column/Buttons"]
+margin_left = 288.0
+margin_right = 488.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 200, 68 )
+size_flags_horizontal = 4
+custom_colors/font_color = Color( 0.239216, 1, 0.431373, 1 )
+custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
+custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/normal = ExtResource( 13 )
+text = "Continue"
 
 [node name="GameAnchors" type="Control" parent="Layout"]
 margin_left = 620.0
 margin_right = 620.0
-margin_bottom = 340.0
+margin_bottom = 405.0
 
 [node name="GameContainer" type="PanelContainer" parent="Layout/GameAnchors"]
 anchor_right = 1.0
@@ -154,7 +177,7 @@ __meta__ = {
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 133.0
-margin_bottom = 332.0
+margin_bottom = 397.0
 custom_constants/margin_right = 12
 custom_constants/margin_top = 12
 custom_constants/margin_left = 12
@@ -164,14 +187,14 @@ custom_constants/margin_bottom = 60
 margin_left = 12.0
 margin_top = 12.0
 margin_right = 113.0
-margin_bottom = 264.0
+margin_bottom = 329.0
 custom_styles/panel = ExtResource( 10 )
 
 [node name="TextureRect" type="TextureRect" parent="Layout/GameAnchors/GameContainer/MarginContainer/GameScreen"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 93.0
-margin_bottom = 244.0
+margin_bottom = 309.0
 flip_v = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -179,9 +202,9 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="Layout/GameAnchors/GameContainer"]
 margin_left = 8.0
-margin_top = 284.0
+margin_top = 349.0
 margin_right = 133.0
-margin_bottom = 332.0
+margin_bottom = 397.0
 rect_min_size = Vector2( 0, 48 )
 size_flags_vertical = 8
 custom_colors/font_color = Color( 0.188235, 0.188235, 0.286275, 1 )

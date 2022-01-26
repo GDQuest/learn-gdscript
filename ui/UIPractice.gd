@@ -3,19 +3,23 @@ class_name UIPractice
 extends Control
 
 const RUN_AUTOTIMER_DURATION := 5.0
+const DFM_TRANSITION_DURATION := 0.5
 
 const PracticeHintScene := preload("screens/practice/PracticeHint.tscn")
-const LessonDonePopupScene := preload("components/popups/LessonDonePopup.tscn")
 const PracticeProgress := preload("screens/practice/PracticeProgress.gd")
 const PracticeListPopup := preload("components/popups/PracticeListPopup.gd")
+const PracticeDonePopup := preload("components/popups/PracticeDonePopup.gd")
 
 export var test_practice: Resource
+
+var _practice: Practice
+var _practice_completed := false
+var _practice_solution_used := false
 
 var _script_slice: SliceProperties setget _set_script_slice
 var _tester: PracticeTester
 # If `true`, the text changed but was not saved.
 var _code_editor_is_dirty := false
-var _practice: Practice
 
 # Set to true when running the test scene, then to false the moment Events.practice_run_completed emits.
 var _run_tests_requested := false
@@ -24,7 +28,6 @@ var _run_tests_requested := false
 var _run_autotimer: Timer
 
 var _is_left_panel_open := true
-var _info_panel_start_width := -1.0
 
 var _current_scene: Node
 
@@ -33,15 +36,17 @@ onready var _game_container := find_node("GameContainer") as Container
 onready var _game_view := _output_container.find_node("GameView") as GameView
 onready var _output_console := _output_container.find_node("Console") as OutputConsole
 
+onready var _info_panel_anchors := $Margin/Layout/InfoPanelAnchors as Control
 onready var _info_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
 onready var _documentation_panel := find_node("DocumentationPanel") as RichTextLabel
 onready var _hints_container := _info_panel.hints_container as Revealer
 onready var _practice_progress := _info_panel.progress_bar as PracticeProgress
+
 onready var _practice_list := find_node("PracticeListPopup") as PracticeListPopup
+onready var _practice_done_popup := find_node("PracticeDonePopup") as PracticeDonePopup
 
 onready var _code_editor := find_node("CodeEditor") as CodeEditor
 
-onready var _info_panel_control := $Margin/Layout/Control as Control
 onready var _tween := $Tween as Tween
 
 func _init():
@@ -69,12 +74,15 @@ func _ready() -> void:
 	_practice_progress.connect("next_requested", self, "_on_next_requested")
 	_practice_progress.connect("list_requested", self, "_on_list_requested")
 	
+	_practice_done_popup.connect("accepted", self, "_on_next_requested")
+	
 	Events.connect("practice_run_completed", self, "_test_student_code")
+
+	_update_info_panel()
+	connect("resized", self, "_update_info_panel")
 
 	if test_practice and get_parent() == get_tree().root:
 		setup(test_practice, null, null)
-
-	_info_panel_start_width = _info_panel.rect_size.x
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -90,6 +98,8 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 		yield(self, "ready")
 
 	_practice = practice
+	_practice_completed = false
+	_practice_solution_used = false
 
 	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(practice.goal)
 	_info_panel.title_label.text = practice.title.capitalize()
@@ -110,6 +120,7 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 		slice_path = base_directory.plus_file(slice_path)
 	_set_script_slice(load(slice_path))
 	_code_editor.slice_editor.setup(_script_slice)
+	_code_editor.set_continue_allowed(false)
 
 	var validator_path := practice.validator_script_path
 	if validator_path.is_rel_path():
@@ -242,20 +253,23 @@ func _test_student_code() -> void:
 	yield(_info_panel, "tests_updated")
 	
 	# Show the end of practice popup.
-	if result.is_success():
-		Events.emit_signal("practice_completed", _practice)
+	if not _practice_completed and result.is_success():
+		_practice_completed = true
 		
-		var popup := LessonDonePopupScene.instance() as LessonDonePopup
-		add_child(popup)
-		popup.fade_in(_game_container)
-		popup.connect("accepted", Events, "emit_signal", [ "practice_next_requested", _practice ])
+		if not _practice_solution_used:
+			Events.emit_signal("practice_completed", _practice)
+		
+		_practice_done_popup.show()
+		_practice_done_popup.fade_in(_game_container)
 	
 	# Clean-up.
 	_code_editor.unlock_editor()
+	if _practice_completed:
+		_code_editor.set_continue_allowed(true)
 
 
 func _reset_practice() -> void:
-	# Code it already reset by the slice editor.
+	# Code is already reset by the slice editor.
 	
 	_info_panel.reset_tests_status()
 	
@@ -263,39 +277,67 @@ func _reset_practice() -> void:
 		_current_scene.call("reset")
 
 
+func _update_info_panel() -> void:
+	_info_panel.rect_min_size = Vector2(_info_panel_anchors.rect_size.x, 0)
+
+
 func _toggle_distraction_free_mode() -> void:
 	_is_left_panel_open = not _is_left_panel_open
 	_tween.stop_all()
-	var duration := 0.5
+	
+	# Open the panel.
 	if _is_left_panel_open:
 		_tween.interpolate_property(
-			_info_panel_control,
-			"rect_min_size:x",
-			_info_panel_control.rect_min_size.x,
-			_info_panel_start_width,
-			duration,
+			_info_panel_anchors,
+			"size_flags_stretch_ratio",
+			_info_panel_anchors.size_flags_stretch_ratio,
+			1.0,
+			DFM_TRANSITION_DURATION,
 			Tween.TRANS_SINE,
 			Tween.EASE_IN_OUT
 		)
 		_tween.interpolate_property(
-			_info_panel_control, "modulate:a", _info_panel_control.modulate.a, 1.0, duration
+			_code_editor,
+			"size_flags_stretch_ratio",
+			_code_editor.size_flags_stretch_ratio,
+			1.0,
+			DFM_TRANSITION_DURATION,
+			Tween.TRANS_SINE,
+			Tween.EASE_IN_OUT
 		)
+		_tween.interpolate_property(
+			_info_panel_anchors,
+			"modulate:a",
+			_info_panel_anchors.modulate.a,
+			1.0,
+			DFM_TRANSITION_DURATION
+		)
+	# Close the panel.
 	else:
 		_tween.interpolate_property(
-			_info_panel_control,
-			"rect_min_size:x",
-			_info_panel_control.rect_min_size.x,
+			_info_panel_anchors,
+			"size_flags_stretch_ratio",
+			_info_panel_anchors.size_flags_stretch_ratio,
 			0.0,
-			duration,
+			DFM_TRANSITION_DURATION,
 			Tween.TRANS_SINE,
 			Tween.EASE_IN_OUT
 		)
 		_tween.interpolate_property(
-			_info_panel_control,
+			_code_editor,
+			"size_flags_stretch_ratio",
+			_code_editor.size_flags_stretch_ratio,
+			2.0,
+			DFM_TRANSITION_DURATION,
+			Tween.TRANS_SINE,
+			Tween.EASE_IN_OUT
+		)
+		_tween.interpolate_property(
+			_info_panel_anchors,
 			"modulate:a",
-			_info_panel_control.modulate.a,
+			_info_panel_anchors.modulate.a,
 			0.0,
-			duration - 0.25,
+			DFM_TRANSITION_DURATION - 0.25,
 			Tween.TRANS_LINEAR,
 			Tween.EASE_IN,
 			0.15
@@ -319,6 +361,10 @@ func _on_code_editor_button(which: String) -> void:
 			_toggle_distraction_free_mode()
 		_code_editor.ACTIONS.RESTORE:
 			_reset_practice()
+		_code_editor.ACTIONS.SOLUTION:
+			_practice_solution_used = true
+		_code_editor.ACTIONS.CONTINUE:
+			_on_next_requested()
 
 
 func _on_console_toggled() -> void:

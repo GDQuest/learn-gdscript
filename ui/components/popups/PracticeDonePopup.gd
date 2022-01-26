@@ -1,12 +1,9 @@
-class_name LessonDonePopup
 extends ColorRect
 
 signal accepted
 
 const BACKGROUND_FADE_DURATION := 0.3
 const CLASH_IN_DURATION := 0.2
-
-export var text := "You've completed the lesson" setget set_text
 
 onready var _layout_container := $Layout as Container
 onready var _game_anchors := $Layout/GameAnchors as Control
@@ -17,8 +14,13 @@ onready var _game_texture := (
 onready var _message_anchors := $Layout/WellDoneAnchors as Control
 onready var _message_container := $Layout/WellDoneAnchors/PanelContainer as PanelContainer
 
-onready var _accept_button := $Layout/WellDoneAnchors/PanelContainer/Column/Margin/Column/Button as Button
-onready var _label := $Layout/WellDoneAnchors/PanelContainer/Column/Margin/Column/Summary as Label
+onready var _move_on_button := (
+	$Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column/Buttons/MoveOnButton as Button
+)
+onready var _stay_button := (
+	$Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column/Buttons/StayButton as Button
+)
+
 onready var _tween := $Tween as Tween
 
 
@@ -31,14 +33,8 @@ func _ready() -> void:
 	_message_container.margin_left = offscreen_offset
 	_message_container.margin_right = offscreen_offset
 
-	_accept_button.connect("pressed", self, "_on_button_pressed")
-
-
-func set_text(new_text: String) -> void:
-	text = new_text
-	if not is_inside_tree():
-		yield(self, "ready")
-	_label.text = text
+	_move_on_button.connect("pressed", self, "_on_button_pressed")
+	_stay_button.connect("pressed", self, "hide")
 
 
 func fade_in(game_container: Control) -> void:

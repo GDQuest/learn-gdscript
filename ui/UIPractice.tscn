@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/components/CodeEditor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/theme/panel_course_page.tres" type="StyleBox" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://ui/theme/panel_game.tres" type="StyleBox" id=7]
 [ext_resource path="res://ui/UIPractice.gd" type="Script" id=8]
 [ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=9]
+[ext_resource path="res://ui/components/popups/PracticeDonePopup.tscn" type="PackedScene" id=10]
 
 [node name="UIPractice" type="PanelContainer"]
 anchor_right = 1.0
@@ -30,31 +31,31 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 custom_constants/separation = 12
 
-[node name="Control" type="Control" parent="Margin/Layout"]
-margin_right = 623.0
+[node name="InfoPanelAnchors" type="Control" parent="Margin/Layout"]
+margin_right = 632.0
 margin_bottom = 1080.0
-rect_min_size = Vector2( 623, 0 )
+size_flags_horizontal = 3
 
-[node name="PracticeInfoPanel" parent="Margin/Layout/Control" instance=ExtResource( 3 )]
-anchor_left = 1.0
-margin_left = -623.0
+[node name="PracticeInfoPanel" parent="Margin/Layout/InfoPanelAnchors" instance=ExtResource( 3 )]
+grow_horizontal = 0
+grow_vertical = 2
 size_flags_stretch_ratio = 2.0
 
 [node name="CodeEditor" parent="Margin/Layout" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 635.0
-margin_right = 1271.0
+margin_left = 644.0
+margin_right = 1276.0
 margin_bottom = 1080.0
 
 [node name="Output" type="VBoxContainer" parent="Margin/Layout"]
-margin_left = 1283.0
+margin_left = 1288.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
 
 [node name="GameAnchors" type="Control" parent="Margin/Layout/Output"]
-margin_right = 637.0
+margin_right = 632.0
 margin_bottom = 717.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
@@ -70,7 +71,7 @@ __meta__ = {
 [node name="MarginContainer" type="MarginContainer" parent="Margin/Layout/Output/GameAnchors/GameContainer"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 629.0
+margin_right = 624.0
 margin_bottom = 709.0
 custom_constants/margin_right = 12
 custom_constants/margin_top = 12
@@ -78,13 +79,13 @@ custom_constants/margin_left = 12
 custom_constants/margin_bottom = 60
 
 [node name="GameView" parent="Margin/Layout/Output/GameAnchors/GameContainer/MarginContainer" instance=ExtResource( 4 )]
-margin_right = 609.0
+margin_right = 604.0
 margin_bottom = 641.0
 
 [node name="Label" type="Label" parent="Margin/Layout/Output/GameAnchors/GameContainer"]
 margin_left = 8.0
 margin_top = 661.0
-margin_right = 629.0
+margin_right = 624.0
 margin_bottom = 709.0
 rect_min_size = Vector2( 0, 48 )
 size_flags_vertical = 8
@@ -97,10 +98,17 @@ align = 1
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 721.0
-margin_right = 637.0
+margin_right = 632.0
 margin_bottom = 1080.0
 
 [node name="PracticeListPopup" parent="." instance=ExtResource( 6 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+
+[node name="PracticeDonePopup" parent="." instance=ExtResource( 10 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0

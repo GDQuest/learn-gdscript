@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://ui/components/SliceEditor.gd" type="Script" id=1]
 [ext_resource path="res://ui/icons/icon_pause.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://ui/icons/robot_tutor.svg" type="Texture" id=14]
 [ext_resource path="res://ui/theme/codeeditor_locked_panel.tres" type="StyleBox" id=15]
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=16]
+[ext_resource path="res://ui/icons/icon_continue.png" type="Texture" id=17]
 
 [sub_resource type="InputEventAction" id=11]
 action = "toggle_distraction_free_mode"
@@ -40,13 +41,6 @@ pressed = true
 [sub_resource type="ShortCut" id=4]
 shortcut = SubResource( 3 )
 
-[sub_resource type="InputEventAction" id=5]
-action = "toggle_output"
-pressed = true
-
-[sub_resource type="ShortCut" id=6]
-shortcut = SubResource( 5 )
-
 [sub_resource type="InputEventAction" id=7]
 action = "reset_code"
 pressed = true
@@ -61,6 +55,13 @@ pressed = true
 [sub_resource type="ShortCut" id=10]
 shortcut = SubResource( 9 )
 
+[sub_resource type="InputEventAction" id=5]
+action = "toggle_output"
+pressed = true
+
+[sub_resource type="ShortCut" id=6]
+shortcut = SubResource( 5 )
+
 [node name="CodeEditor" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -72,6 +73,7 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+text = null
 
 [node name="Column" type="VBoxContainer" parent="."]
 margin_right = 1920.0
@@ -106,7 +108,8 @@ margin_left = 1872.0
 margin_top = 820.0
 margin_right = 1912.0
 margin_bottom = 867.0
-hint_tooltip = "Toggle the code editor expanded."
+hint_tooltip = "Toggle the code editor expanded.
+Shortcut:"
 size_flags_horizontal = 8
 size_flags_vertical = 8
 shortcut_in_tooltip = false
@@ -171,11 +174,12 @@ mouse_filter = 2
 alignment = 1
 
 [node name="RunButton" type="Button" parent="Column/MarginContainer/Column/Row"]
-margin_left = 680.0
-margin_right = 840.0
+margin_left = 684.0
+margin_right = 844.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 160, 40 )
-hint_tooltip = "Run your code."
+hint_tooltip = "Run your code.
+Shortcut:"
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 11 )
 custom_styles/normal = ExtResource( 12 )
@@ -186,11 +190,12 @@ text = "Run"
 icon = ExtResource( 3 )
 
 [node name="PauseButton" type="Button" parent="Column/MarginContainer/Column/Row"]
-margin_left = 856.0
-margin_right = 1016.0
+margin_left = 860.0
+margin_right = 1020.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 160, 40 )
-hint_tooltip = "Toggle the game viewport paused."
+hint_tooltip = "Toggle the game viewport paused.
+Shortcut:"
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 11 )
 custom_styles/normal = ExtResource( 12 )
@@ -200,34 +205,13 @@ shortcut = SubResource( 4 )
 text = "Pause"
 icon = ExtResource( 2 )
 
-[node name="ConsoleButton" type="Button" parent="Column/MarginContainer/Column/Row"]
-margin_left = 1032.0
-margin_right = 1199.0
+[node name="RestoreButton" type="Button" parent="Column/MarginContainer/Column/Row"]
+margin_left = 1036.0
+margin_right = 1196.0
 margin_bottom = 71.0
-hint_tooltip = "Toggle the output console's visibility."
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 11 )
-custom_styles/normal = ExtResource( 12 )
-toggle_mode = true
-shortcut_in_tooltip = false
-pressed = true
-shortcut = SubResource( 6 )
-text = "Output"
-icon = ExtResource( 9 )
-
-[node name="Row2" type="HBoxContainer" parent="Column/MarginContainer/Column"]
-margin_top = 87.0
-margin_right = 1880.0
-margin_bottom = 157.0
-mouse_filter = 2
-alignment = 1
-
-[node name="RestoreButton" type="Button" parent="Column/MarginContainer/Column/Row2"]
-margin_left = 723.0
-margin_right = 883.0
-margin_bottom = 70.0
 rect_min_size = Vector2( 160, 40 )
-hint_tooltip = "Reset your code to the starting point."
+hint_tooltip = "Reset your code to the starting point.
+Shortcut:"
 size_flags_horizontal = 0
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 11 )
@@ -239,12 +223,20 @@ group = SubResource( 13 )
 text = "Reset"
 icon = ExtResource( 5 )
 
+[node name="Row2" type="HBoxContainer" parent="Column/MarginContainer/Column"]
+margin_top = 87.0
+margin_right = 1880.0
+margin_bottom = 157.0
+mouse_filter = 2
+alignment = 1
+
 [node name="SolutionButton" type="Button" parent="Column/MarginContainer/Column/Row2"]
-margin_left = 899.0
-margin_right = 1156.0
+margin_left = 652.0
+margin_right = 834.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 160, 40 )
-hint_tooltip = "Show this practice's solution code."
+hint_tooltip = "Show this practice's solution code.
+Shortcut:"
 size_flags_horizontal = 0
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 11 )
@@ -252,5 +244,41 @@ custom_styles/normal = ExtResource( 12 )
 shortcut_in_tooltip = false
 shortcut = SubResource( 10 )
 group = SubResource( 13 )
-text = "Show solution"
+text = "Solution"
 icon = ExtResource( 4 )
+
+[node name="ConsoleButton" type="Button" parent="Column/MarginContainer/Column/Row2"]
+margin_left = 850.0
+margin_right = 1017.0
+margin_bottom = 70.0
+hint_tooltip = "Toggle the output console's visibility.
+Shortcut:"
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/normal = ExtResource( 12 )
+toggle_mode = true
+shortcut_in_tooltip = false
+pressed = true
+shortcut = SubResource( 6 )
+text = "Output"
+icon = ExtResource( 9 )
+
+[node name="ContinueButton" type="Button" parent="Column/MarginContainer/Column/Row2"]
+margin_left = 1033.0
+margin_right = 1227.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 160, 40 )
+hint_tooltip = "Continue the course."
+size_flags_horizontal = 0
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/normal = ExtResource( 12 )
+disabled = true
+shortcut_in_tooltip = false
+shortcut = SubResource( 10 )
+group = SubResource( 13 )
+text = "Continue"
+icon = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
