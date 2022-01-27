@@ -24,6 +24,9 @@ func _enter_tree() -> void:
 	container.connect("pin_button_toggled", config, "set_was_manually_set")
 
 	add_control_to_container(CONTAINER_TOOLBAR, container)
+	# We are 100% sure that there are 2 items to the left of us that we need to shift over.
+	# 100% sure, I tell you.
+	container.get_parent().move_child(container, container.get_index() - 2)
 
 	file_dialog.connect("file_selected", self, "_on_file_dialog_file_selected")
 	get_editor_interface().get_base_control().add_child(file_dialog)
@@ -127,6 +130,7 @@ class PluginButtons:
 		add_child(remove_button)
 		add_child(pin_button)
 		add_child(save_button)
+		add_child(VSeparator.new())
 
 		scene_path_control.connect("text_changed", self, "_on_scene_path_text_changed")
 		file_browser_button.connect("pressed", self, "emit_signal", ["file_browser_requested"])
