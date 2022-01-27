@@ -81,5 +81,5 @@ func _animate_margin(control: Control, margin_name: String, to_value: float, dur
 
 
 func _on_button_pressed() -> void:
+	hide()
 	emit_signal("accepted")
-	queue_free()

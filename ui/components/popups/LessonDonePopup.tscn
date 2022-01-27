@@ -1,0 +1,147 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/components/popups/LessonDonePopup.gd" type="Script" id=2]
+[ext_resource path="res://ui/theme/fonts/font_well_done_title.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/theme/fonts/font_well_done_normal.tres" type="DynamicFont" id=4]
+[ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=8]
+[ext_resource path="res://ui/theme/fonts/font_well_done_bold.tres" type="DynamicFont" id=12]
+[ext_resource path="res://ui/theme/button_outline_large_accented.tres" type="StyleBox" id=13]
+
+[node name="LessonDonePopup" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0352941, 0.0392157, 0.129412, 0.627451 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -220.5
+margin_right = 320.0
+margin_bottom = 220.5
+rect_min_size = Vector2( 640, 0 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="PanelContainer"]
+margin_right = 640.0
+margin_bottom = 441.0
+custom_styles/panel = ExtResource( 7 )
+
+[node name="Layout" type="VBoxContainer" parent="PanelContainer"]
+margin_right = 640.0
+margin_bottom = 441.0
+custom_constants/separation = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Layout"]
+margin_right = 640.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+value = 100.0
+percent_visible = false
+
+[node name="Margin" type="MarginContainer" parent="PanelContainer/Layout"]
+margin_top = 16.0
+margin_right = 640.0
+margin_bottom = 441.0
+
+[node name="Column" type="VBoxContainer" parent="PanelContainer/Layout/Margin"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 620.0
+margin_bottom = 405.0
+custom_constants/separation = 20
+
+[node name="Spacer" type="Control" parent="PanelContainer/Layout/Margin/Column"]
+margin_right = 600.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 400, 8 )
+
+[node name="Title" type="Label" parent="PanelContainer/Layout/Margin/Column"]
+margin_top = 28.0
+margin_right = 600.0
+margin_bottom = 80.0
+custom_fonts/font = ExtResource( 3 )
+text = "Lesson complete!"
+align = 1
+
+[node name="IncompleteSummary" type="Label" parent="PanelContainer/Layout/Margin/Column"]
+margin_top = 100.0
+margin_right = 600.0
+margin_bottom = 175.0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+text = "But there are still some practices
+that you've skipped."
+align = 1
+autowrap = true
+
+[node name="Summary" type="RichTextLabel" parent="PanelContainer/Layout/Margin/Column"]
+margin_top = 195.0
+margin_right = 600.0
+margin_bottom = 269.0
+size_flags_vertical = 0
+custom_fonts/bold_font = ExtResource( 12 )
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[center][b]Stay[/b] and revisit the study material,
+or [b]continue[/b] the course.[/center]"
+text = "Stay and revisit the study material,
+or continue the course."
+fit_content_height = true
+
+[node name="Spacer2" type="Control" parent="PanelContainer/Layout/Margin/Column"]
+margin_top = 289.0
+margin_right = 600.0
+margin_bottom = 297.0
+rect_min_size = Vector2( 400, 8 )
+
+[node name="Buttons" type="HBoxContainer" parent="PanelContainer/Layout/Margin/Column"]
+margin_top = 317.0
+margin_right = 600.0
+margin_bottom = 385.0
+alignment = 1
+
+[node name="StayButton" type="Button" parent="PanelContainer/Layout/Margin/Column/Buttons"]
+margin_left = 92.0
+margin_right = 292.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 200, 68 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
+custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/normal = ExtResource( 8 )
+text = "Stay"
+
+[node name="MoveOnButton" type="Button" parent="PanelContainer/Layout/Margin/Column/Buttons"]
+margin_left = 308.0
+margin_right = 508.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 200, 68 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+custom_colors/font_color = Color( 0.239216, 1, 0.431373, 1 )
+custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
+custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/normal = ExtResource( 13 )
+text = "Continue"
+
+[node name="Tween" type="Tween" parent="."]

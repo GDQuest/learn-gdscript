@@ -6,6 +6,7 @@ signal return_to_welcome_screen_requested
 
 const CourseOutliner := preload("./screens/course_outliner/CourseOutliner.gd")
 const BreadCrumbs := preload("./components/BreadCrumbs.gd")
+const LessonDonePopup := preload("./components/popups/LessonDonePopup.gd")
 
 const SCREEN_TRANSITION_DURATION := 0.75
 const OUTLINER_TRANSITION_DURATION := 0.5
@@ -33,6 +34,9 @@ onready var _report_button := $Layout/Header/MarginContainer/HeaderContent/Repor
 
 onready var _screen_container := $Layout/Content/ScreenContainer as Container
 onready var _course_outliner := $Layout/Content/CourseOutliner as CourseOutliner
+
+onready var _lesson_done_popup := $LessonDonePopup as LessonDonePopup
+
 onready var _tween := $Tween as Tween
 
 
@@ -47,6 +51,8 @@ func _ready() -> void:
 	Events.connect("practice_next_requested", self, "_on_practice_next_requested")
 	Events.connect("practice_previous_requested", self, "_on_practice_previous_requested")
 	Events.connect("practice_requested", self, "_on_practice_requested")
+	
+	_lesson_done_popup.connect("accepted", self, "_on_lesson_completed")
 
 	_outliner_button.connect("pressed", NavigationManager, "navigate_to_outliner")
 	_back_button.connect("pressed", NavigationManager, "navigate_back")
@@ -188,14 +194,18 @@ func _on_practice_next_requested(practice: Practice) -> void:
 	if index < 0:
 		return
 	
-	# This is the last practice in the set, move to the next lesson.
+	# This is the last practice in the set, try to move to the next lesson.
 	if index >= practices.size() - 1:
 		# Checking that it's the last practice is not enough.
-		# TODO: Check if all practices are completed before moving to the next lesson.
-		# TODO: Show a popup with information, but allow to move forward regardless.
+		# Check if all practices are completed before moving to the next lesson.
+		var user_profile = UserProfiles.get_profile()
+		var lesson_progress = user_profile.get_or_create_lesson(course.resource_path, lesson_data.resource_path)
+		var total_practices := practices.size()
+		var completed_practices = lesson_progress.get_completed_practices_count(practices)
 		
-		yield(get_tree(), "idle_frame") # Allow the rest of practice handlers to sync up.
-		_on_lesson_completed(lesson_data)
+		# Show a confirmation popup and optionally tell the user that the lesson is incomplete.
+		_lesson_done_popup.set_incomplete(completed_practices < total_practices)
+		_lesson_done_popup.popup_centered()
 	else:
 		# Otherwise, go to the next practice in the set.
 		NavigationManager.navigate_to(practices[index + 1].resource_path)
@@ -230,7 +240,8 @@ func _on_practice_requested(practice: Practice) -> void:
 	NavigationManager.navigate_to(practice.resource_path)
 
 
-func _on_lesson_completed(lesson: Lesson) -> void:
+func _on_lesson_completed() -> void:
+	var lesson := course.lessons[_lesson_index] as Lesson
 	Events.emit_signal("lesson_completed", lesson)
 
 	_lesson_index += 1
