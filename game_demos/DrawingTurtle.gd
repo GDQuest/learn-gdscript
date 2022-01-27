@@ -102,13 +102,11 @@ func play_draw_animation() -> void:
 			break
 
 		_current_polygon = polygon
-		polygon = polygon as Polygon
 		if not polygon:
 			continue
 
 		_camera.position = polygon.get_center()
 		rotation_degrees = 0.0
-		polygon.connect("line_end_moved", self, "_change_sprite_position")
 		_canvas.add_child(polygon)
 		polygon.start_draw_animation()
 		yield(polygon, "animation_finished")
@@ -128,15 +126,11 @@ func get_rect() -> Rect2:
 	return bounds
 
 
-func _change_sprite_position(new_position: Vector2) -> void:
-	_sprite.position = new_position
-
-
 func _close_polygon() -> void:
 	if _points.empty():
 		return
 
-	var polygon := Polygon.new(line_draw_speed)
+	var polygon := Polygon.new(line_draw_speed, _sprite)
 	# We want to test shapes being drawn at the correct position using the
 	# position property. It works differently from jump() which offsets the
 	# turtle from its position.
@@ -161,14 +155,16 @@ class Polygon:
 	var _current_points := PoolVector2Array()
 	var _current_point_index := 0
 	var _total_distance := 0.0
+	var _turtle_sprite: Sprite
 
 	signal animation_finished
 	signal line_end_moved(new_coordinates)
 
-	func _init(line_draw_speed := 400.0) -> void:
+	func _init(line_draw_speed := 400.0, turtle: Sprite = null) -> void:
 		add_child(_tween)
 		add_child(line_2d)
 		_tween.connect("tween_all_completed", self, "next")
+		_turtle_sprite = turtle
 		draw_speed = line_draw_speed
 
 	func start_draw_animation() -> void:
@@ -213,7 +209,9 @@ class Polygon:
 		var new_points := _current_points
 		new_points.push_back(point)
 		line_2d.points = new_points
-		emit_signal("line_end_moved", point + position)
+		_turtle_sprite.position = point + position
+		if point.is_equal_approx(_current_destination):
+			emit_signal("segment_end_reached")
 
 	# Returns the local bounds of the polygon. That is to say, it only takes the
 	# point into account in local space, but not the polygon's `position`.
