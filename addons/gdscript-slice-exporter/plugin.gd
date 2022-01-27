@@ -125,11 +125,11 @@ class PluginButtons:
 		scene_path_control.rect_min_size = Vector2(250, 20)
 		pin_button.toggle_mode = true
 
-		add_child(scene_path_control)
 		add_child(file_browser_button)
 		add_child(remove_button)
 		add_child(pin_button)
 		add_child(save_button)
+		add_child(scene_path_control)
 		add_child(VSeparator.new())
 
 		scene_path_control.connect("text_changed", self, "_on_scene_path_text_changed")
