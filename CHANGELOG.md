@@ -1,3 +1,33 @@
+# Changelog
+
+This document lists changes between releases.
+
+## Learn GDScript From Zero release 0.2.1
+
+_Released on January 27, 2022_
+
+### Improvements
+
+- Let students to stay in the lesson and experiment upon completion
+- Show an indicator when practice was completed before and solution was used
+- Make cursor pointing hand on all buttons
+- Adjust the slice plugin toolbar for better visual clarity
+
+### Content changes
+
+- Update error log text and link in issue report form
+- Added missing apostrophe in lesson 6
+- Explain jump function in lesson 5 practice
+
+### Bug fixes
+
+- Fix "shortcut" appearing multiple times in practice button tooltips
+- Fix bbcode formatting appearing as plain text in multiple choice quizzes
+- Ensure health takes different values in lesson 13 practices
+- Make the slice plugin UI conflict with editor UI less
+- Unify hover behavior for buttons with icons
+- Hide code in jump visual in lesson 13
+
 ## Learn GDScript From Zero 0.2.0
 
 _Released on January 26, 2022_
