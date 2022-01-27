@@ -1,10 +1,6 @@
 tool
 extends Node2D
 
-# Used to constrain and update sliders in lesson 
-signal number_changed(new_value)
-signal modulo_changed(new_value)
-
 const color_green := Color("3dff6e")
 const color_red := Color("928fb8")
 
@@ -57,8 +53,6 @@ func _update_visual() -> void:
 
 func _set_number(value: int) -> void:
 	number = value
-	if modulo > number:
-		_set_modulo(value)
 	emit_signal("number_changed", value)
 	if not _blocks:
 		return
@@ -68,8 +62,6 @@ func _set_number(value: int) -> void:
 
 func _set_modulo(value: int) -> void:
 	modulo = value
-	if modulo > number:
-		_set_number(modulo)
 	emit_signal("modulo_changed", value)
 	if not _blocks:
 		return
