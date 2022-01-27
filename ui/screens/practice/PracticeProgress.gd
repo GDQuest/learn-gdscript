@@ -10,6 +10,9 @@ onready var _list_button := $Layout/ListButton as Button
 
 
 func _ready() -> void:
+	_prev_button.add_color_override("icon_color_disabled", get_color("font_color_disabled"))
+	_next_button.add_color_override("icon_color_disabled", get_color("font_color_disabled"))
+	
 	_prev_button.connect("pressed", self, "emit_signal", [ "previous_requested" ])
 	_next_button.connect("pressed", self, "emit_signal", [ "next_requested" ])
 	_list_button.connect("pressed", self, "emit_signal", [ "list_requested" ])
