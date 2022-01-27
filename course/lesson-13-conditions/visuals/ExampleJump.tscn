@@ -194,10 +194,9 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 1040.0
 margin_bottom = 291.0
-gdscript_code = "heal(25)"
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 1033.0
+margin_right = 514.0
 margin_bottom = 284.0
 
 [node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="0"]
@@ -207,19 +206,16 @@ visible = false
 text = "Jump"
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
-visible = false
+visible = true
 margin_left = 518.0
 margin_right = 1033.0
 margin_bottom = 284.0
-text = "heal(25)"
-draw_spaces = true
 
 [node name="Node2D" type="Node2D" parent="RunnableCodeExample"]
 position = Vector2( -7, -7 )
 script = SubResource( 4 )
 
 [node name="HideSprite" type="Node2D" parent="RunnableCodeExample/Node2D"]
-position = Vector2( 7, 7 )
 
 [node name="GodotBottom" type="Sprite" parent="RunnableCodeExample/Node2D/HideSprite"]
 position = Vector2( 0, -17 )
