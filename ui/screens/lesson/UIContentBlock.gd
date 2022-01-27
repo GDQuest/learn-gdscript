@@ -76,6 +76,15 @@ func _make_visual_element() -> void:
 	if path.is_rel_path():
 		path = _content_block.resource_path.get_base_dir().plus_file(path)
 	var resource := load(path)
+	if not resource:
+		printerr(
+			(
+				"ContentBlock visual element is not a valid resource. From path: "
+				+ path
+			)
+		)
+		return
+		
 
 	if resource is Texture:
 		var texture_rect := TextureRect.new()
@@ -90,7 +99,8 @@ func _make_visual_element() -> void:
 		printerr(
 			(
 				"ContentBlock visual element is not a Texture or a PackedScene. Loaded type: "
-				+ resource.get_class()
+				+ resource.get_class() + " From path: "
+				+ path
 			)
 		)
 		return

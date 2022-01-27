@@ -66,7 +66,6 @@ func _ready() -> void:
 
 	_restore_button.connect("pressed", self, "_on_restore_pressed")
 	_restore_button.disabled = true
-	_solution_button.connect("pressed", self, "_on_solution_pressed")
 
 	_run_button.connect("pressed", self, "_on_run_button_pressed")
 	_pause_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.PAUSE])
@@ -123,6 +122,14 @@ func set_pause_button_pressed(is_pressed: bool) -> void:
 	_pause_button.pressed = is_pressed
 
 
+func set_solution_button_pressed(is_pressed: bool) -> void:
+	_solution_button.pressed = is_pressed
+
+
+func set_restore_allowed(allowed: bool) -> void:
+	_restore_button.disabled = not allowed
+
+
 func set_continue_allowed(allowed: bool) -> void:
 	_continue_button.disabled = not allowed
 
@@ -155,15 +162,10 @@ func _on_text_changed() -> void:
 
 
 func _on_restore_pressed() -> void:
-	_restore_button.disabled = true
 	set_text(_initial_text)
 	unlock_editor()
 	emit_signal("action", ACTIONS.RESTORE)
-
-
-func _on_solution_pressed() -> void:
-	_restore_button.disabled = false
-	slice_editor.sync_text_with_slice()
+	_restore_button.disabled = true
 
 
 func _on_run_button_pressed() -> void:

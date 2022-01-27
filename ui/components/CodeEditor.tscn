@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://ui/components/SliceEditor.gd" type="Script" id=1]
 [ext_resource path="res://ui/icons/icon_pause.png" type="Texture" id=2]
@@ -18,12 +18,12 @@
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=16]
 [ext_resource path="res://ui/icons/icon_continue.png" type="Texture" id=17]
 
-[sub_resource type="InputEventAction" id=11]
+[sub_resource type="InputEventAction" id=14]
 action = "toggle_distraction_free_mode"
 pressed = true
 
 [sub_resource type="ShortCut" id=12]
-shortcut = SubResource( 11 )
+shortcut = SubResource( 14 )
 
 [sub_resource type="InputEventAction" id=1]
 action = "run_code"
@@ -31,8 +31,6 @@ pressed = true
 
 [sub_resource type="ShortCut" id=2]
 shortcut = SubResource( 1 )
-
-[sub_resource type="ButtonGroup" id=13]
 
 [sub_resource type="InputEventAction" id=3]
 action = "toggle_pause"
@@ -184,7 +182,6 @@ custom_styles/pressed = ExtResource( 11 )
 custom_styles/normal = ExtResource( 12 )
 shortcut_in_tooltip = false
 shortcut = SubResource( 2 )
-group = SubResource( 13 )
 text = "Run"
 icon = ExtResource( 3 )
 
@@ -218,7 +215,6 @@ custom_styles/normal = ExtResource( 12 )
 disabled = true
 shortcut_in_tooltip = false
 shortcut = SubResource( 8 )
-group = SubResource( 13 )
 text = "Reset"
 icon = ExtResource( 5 )
 
@@ -240,9 +236,9 @@ size_flags_horizontal = 0
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 11 )
 custom_styles/normal = ExtResource( 12 )
+toggle_mode = true
 shortcut_in_tooltip = false
 shortcut = SubResource( 10 )
-group = SubResource( 13 )
 text = "Solution"
 icon = ExtResource( 4 )
 
@@ -276,7 +272,6 @@ custom_styles/normal = ExtResource( 12 )
 disabled = true
 shortcut_in_tooltip = false
 shortcut = SubResource( 10 )
-group = SubResource( 13 )
 text = "Continue"
 icon = ExtResource( 17 )
 __meta__ = {

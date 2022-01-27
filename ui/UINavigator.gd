@@ -101,6 +101,7 @@ func _navigate_back() -> void:
 	var next_screen: Control = _screens_stack.back()
 	_back_button.disabled = _screens_stack.size() < 2
 
+	# warning-ignore:unsafe_method_access
 	var target = next_screen.get_screen_resource()
 	_breadcrumbs.update_breadcrumbs(course, target)
 
@@ -137,12 +138,13 @@ func _navigate_to() -> void:
 	if target is Practice:
 		var lesson = course.lessons[_lesson_index]
 		
-		var practice := target as Practice
 		screen = preload("UIPractice.tscn").instance()
+		# warning-ignore:unsafe_method_access
 		screen.setup(target, lesson, course)
 	elif target is Lesson:
 		var lesson := target as Lesson
 		screen = preload("UILesson.tscn").instance()
+		# warning-ignore:unsafe_method_access
 		screen.setup(target, course)
 		
 		_lesson_index = course.lessons.find(lesson) # Make sure the index is synced after navigation.
