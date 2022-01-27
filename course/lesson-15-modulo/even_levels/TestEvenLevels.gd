@@ -22,9 +22,9 @@ func test_correct_maximum_health_at_level_four() -> String:
 	var max_health = first_node.get("max_health")
 	
 	if max_health < 125:
-		return "The robot only has %s. It should have 125 after gaining three levels."
+		return "The robot only has %s max health. It should have 125 after gaining three levels." % max_health
 	
 	if max_health > 125:
-		return "The robot has %s which is too much. It should have 125 after gaining three levels."
+		return "The robot has %s max health which is too much. It should have 125 after gaining three levels." % max_health
 
 	return ""
