@@ -31,6 +31,8 @@ var _is_left_panel_open := true
 
 var _current_scene: Node
 
+onready var _layout_container := $Margin/Layout as Control
+
 onready var _output_container := find_node("Output") as Control
 onready var _game_container := find_node("GameContainer") as Container
 onready var _game_view := _output_container.find_node("GameView") as GameView
@@ -79,7 +81,7 @@ func _ready() -> void:
 	Events.connect("practice_run_completed", self, "_test_student_code")
 
 	_update_info_panel()
-	connect("resized", self, "_update_info_panel")
+	_layout_container.connect("resized", self, "_update_info_panel")
 
 	if test_practice and get_parent() == get_tree().root:
 		setup(test_practice, null, null)
@@ -283,7 +285,10 @@ func _reset_practice() -> void:
 
 
 func _update_info_panel() -> void:
+	# Wait a frame to make sure the new size has been applied.
+	yield(get_tree(), "idle_frame")
 	_info_panel.rect_min_size = Vector2(_info_panel_anchors.rect_size.x, 0)
+	_info_panel.set_anchors_and_margins_preset(Control.PRESET_WIDE, Control.PRESET_MODE_MINSIZE)
 
 
 func _toggle_distraction_free_mode() -> void:
