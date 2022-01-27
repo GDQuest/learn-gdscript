@@ -210,8 +210,6 @@ class Polygon:
 		new_points.push_back(point)
 		line_2d.points = new_points
 		_turtle_sprite.position = point + position
-		if point.is_equal_approx(_current_destination):
-			emit_signal("segment_end_reached")
 
 	# Returns the local bounds of the polygon. That is to say, it only takes the
 	# point into account in local space, but not the polygon's `position`.
