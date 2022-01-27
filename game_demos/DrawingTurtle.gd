@@ -76,6 +76,7 @@ func reset() -> void:
 		if child is Polygon:
 			_canvas.remove_child(child)
 	_current_offset = Vector2.ZERO
+	_sprite.position = Vector2.ZERO
 
 
 # Returns a copy of the polygons the turtle will draw.
