@@ -33,7 +33,7 @@ func _ready() -> void:
 	_message_container.margin_left = offscreen_offset
 	_message_container.margin_right = offscreen_offset
 
-	_move_on_button.connect("pressed", self, "_on_button_pressed")
+	_move_on_button.connect("pressed", self, "fade_out")
 	_stay_button.connect("pressed", self, "hide")
 
 
@@ -67,6 +67,35 @@ func fade_in(game_container: Control) -> void:
 	_tween.start()
 
 
+func fade_out() -> void:
+	_tween.stop_all()
+
+	# The order is opposite to fade in. First "un-clash" the message and the game view.
+	var message_offscreen_offset := -get_viewport_rect().size.x
+	_animate_margin(_message_container, "margin_left", message_offscreen_offset, CLASH_IN_DURATION)
+	_animate_margin(_message_container, "margin_right", message_offscreen_offset, CLASH_IN_DURATION)
+
+	var game_offscreen_offset := get_viewport_rect().size.x
+	_animate_margin(_game_container, "margin_left", game_offscreen_offset, CLASH_IN_DURATION)
+	_animate_margin(_game_container, "margin_right", game_offscreen_offset, CLASH_IN_DURATION)
+	_tween.start()
+
+	# Then fade out the background.
+	_tween.interpolate_property(
+		self,
+		"self_modulate:a",
+		0.0,
+		1.0,
+		BACKGROUND_FADE_DURATION,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT,
+		CLASH_IN_DURATION
+	)
+	
+	_tween.interpolate_callback(self, CLASH_IN_DURATION + BACKGROUND_FADE_DURATION, "_on_fade_out_completed")
+	_tween.start()
+
+
 func _animate_margin(control: Control, margin_name: String, to_value: float, duration: float, delay: float = 0.0) -> void:
 	_tween.interpolate_property(
 		control,
@@ -80,6 +109,6 @@ func _animate_margin(control: Control, margin_name: String, to_value: float, dur
 	)
 
 
-func _on_button_pressed() -> void:
+func _on_fade_out_completed() -> void:
 	hide()
 	emit_signal("accepted")
