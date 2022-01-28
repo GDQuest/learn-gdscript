@@ -13,15 +13,15 @@ func _prepare():
 			break
 
 
-func test_has_angular_speed_variable() -> String:
+func test_angular_speed_variable_is_script_wide() -> String:
 	if not has_angular_speed_prop:
-		return "The angular_speed variable doesn't exist. Did you define it with the var keyword?"
+		return "The angular_speed isn't script-wide. Did you define it outside of the function?"
 	return ""
 
 
 func test_angular_speed_has_value_of_4() -> String:
 	if not has_angular_speed_prop:
-		return "The angular speed variable doesn't exist, can't test if it has a value of 4."
+		return "The angular speed variable doesn't exist or isn't script-wide. Make it script-wide first."
 	var angular_speed_value = robot.get("angular_speed")
 	if angular_speed_value == 4:
 		return ""
