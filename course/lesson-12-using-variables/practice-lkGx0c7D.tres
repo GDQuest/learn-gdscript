@@ -6,9 +6,11 @@
 [resource]
 script = ExtResource( 2 )
 title = "Clarifying Code Using Variables"
-goal = "Clarify the code by replacing [code]4[/code] with the [code]angular_speed[/code] variable.
+goal = "Let's give the [code]4[/code] here a label so we know what it does.
 
-[code]angular_speed[/code] should be script-wide and have a value of [code]4[/code]."
+Create a variable called [code]angular_speed[/code] outside of the [code]_process()[/code] function to make it script-wide. This allows us to use it in other functions too.
+
+Then, replace the [code]4[/code] with [code]angular_speed[/code]."
 starting_code = "func _process(delta):
 	rotate(4 * delta)"
 hints = PoolStringArray( "Define the [code]angular_speed[/code] variable at the top of the script to make it script-wide", "Don\'t forget to use it in the [code]rotate()[/code] function", "To define the variable, use [code]var angular_speed = 4[/code]" )

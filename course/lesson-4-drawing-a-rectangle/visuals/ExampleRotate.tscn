@@ -16,10 +16,11 @@ func _ready() -> void:
 	reset()
 
 func reset():
+	_turtle.reset()
 	_turtle.position = -Vector2(217, 57) / 2
 
 func run() -> void:
-	_turtle.reset()
+	reset()
 	_turtle.move_forward(length)
 	_turtle.turn_right(turn)
 	_turtle.move_forward(length)

@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game_demos/DrawingTurtle.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+func run():
+	var drawing_turtle = $DrawingTurtle as DrawingTurtle
+	drawing_turtle.reset()
+	drawing_turtle.position = Vector2(-50, -100)
+	drawing_turtle.move_forward(100)
+	drawing_turtle.jump(-100, 50)
+	drawing_turtle.move_forward(100)
+	drawing_turtle.jump(-100, 50)
+	drawing_turtle.move_forward(100)
+	drawing_turtle.play_draw_animation()
+"
+
+[node name="ExampleJumpingTurtle" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 651.0
+margin_bottom = 327.0
+rect_min_size = Vector2( 0, 320 )
+gdscript_code = "func draw_three_lines():
+	move_forward(100)
+	jump(-100, 50)
+	move_forward(100)
+	jump(-100, 50)
+	move_forward(100)
+"
+
+[node name="JumpingTurtle" type="Node2D" parent="RunnableCodeExample"]
+script = SubResource( 1 )
+
+[node name="DrawingTurtle" parent="RunnableCodeExample/JumpingTurtle" instance=ExtResource( 2 )]

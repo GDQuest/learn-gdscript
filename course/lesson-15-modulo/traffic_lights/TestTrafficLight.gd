@@ -10,7 +10,7 @@ func _prepare() -> void:
 
 func test_modulo_wraps_index_to_zero() -> String:
 	var regex = RegEx.new()
-	regex.compile("light_index\\s*\\%|\\%\\s*light_index")
+	regex.compile("light_index\\s*\\%|\\%\\s*light_index|\\%\\s*\\d")
 	var result = regex.search(_slice.current_text)
 	if not result:
 		return "It looks like modulo isn't used in the script. Did you use the modulo (%) symbol?"

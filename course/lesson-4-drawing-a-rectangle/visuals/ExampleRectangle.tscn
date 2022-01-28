@@ -15,11 +15,11 @@ func _ready() -> void:
 	reset()
 
 func reset():
+	_turtle.reset()
 	_turtle.position = -size / 2
 
-
 func run() -> void:
-	_turtle.reset()
+	reset()
 	_turtle.move_forward(size.x)
 	_turtle.turn_right(turn)
 	_turtle.move_forward(size.y)

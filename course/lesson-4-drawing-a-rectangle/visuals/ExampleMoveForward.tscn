@@ -14,11 +14,12 @@ func _ready() -> void:
 	reset()
 
 func reset():
+	_turtle.reset()
 	_turtle.position.x = -length / 2.0
 	
 
 func run() -> void:
-	_turtle.reset()
+	reset()
 	_turtle.move_forward(length)
 	_turtle.play_draw_animation()
 "

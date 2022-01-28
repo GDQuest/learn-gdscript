@@ -3,7 +3,7 @@ class_name UIPractice
 extends Control
 
 const RUN_AUTOTIMER_DURATION := 5.0
-const DFM_TRANSITION_DURATION := 0.5
+const SLIDE_TRANSITION_DURATION := 0.5
 
 const PracticeHintScene := preload("screens/practice/PracticeHint.tscn")
 const PracticeProgress := preload("screens/practice/PracticeProgress.gd")
@@ -27,14 +27,22 @@ var _run_tests_requested := false
 # if practice code doesn't emit on its own
 var _run_autotimer: Timer
 
-var _is_left_panel_open := true
+var _is_info_panel_open := true
+var _is_solution_panel_open := false
 
 var _current_scene: Node
+
+onready var _layout_container := $Margin/Layout as Control
 
 onready var _output_container := find_node("Output") as Control
 onready var _game_container := find_node("GameContainer") as Container
 onready var _game_view := _output_container.find_node("GameView") as GameView
 onready var _output_console := _output_container.find_node("Console") as OutputConsole
+
+onready var _output_anchors := $Margin/Layout/OutputAnchors as Control
+onready var _solution_panel := find_node("SolutionContainer") as Control
+onready var _solution_editor := _solution_panel.find_node("SliceEditor") as SliceEditor
+onready var _use_solution_button := _solution_panel.find_node("UseSolutionButton") as Button
 
 onready var _info_panel_anchors := $Margin/Layout/InfoPanelAnchors as Control
 onready var _info_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
@@ -69,6 +77,7 @@ func _ready() -> void:
 	_code_editor.connect("text_changed", self, "_on_code_editor_text_changed")
 	_code_editor.connect("console_toggled", self, "_on_console_toggled")
 	_output_console.connect("reference_clicked", self, "_on_code_reference_clicked")
+	_use_solution_button.connect("pressed", self, "_on_use_solution_pressed")
 	
 	_practice_progress.connect("previous_requested", self, "_on_previous_requested")
 	_practice_progress.connect("next_requested", self, "_on_next_requested")
@@ -78,8 +87,11 @@ func _ready() -> void:
 	
 	Events.connect("practice_run_completed", self, "_test_student_code")
 
-	_update_info_panel()
-	connect("resized", self, "_update_info_panel")
+	_update_slidable_panels()
+	_layout_container.connect("resized", self, "_update_slidable_panels")
+	
+	_solution_panel.modulate.a = 0.0
+	_solution_panel.margin_left = _output_anchors.rect_size.x
 
 	if test_practice and get_parent() == get_tree().root:
 		setup(test_practice, null, null)
@@ -121,6 +133,8 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	_set_script_slice(load(slice_path))
 	_code_editor.slice_editor.setup(_script_slice)
 	_code_editor.set_continue_allowed(false)
+
+	_solution_editor.text = _script_slice.slice_text
 
 	var validator_path := practice.validator_script_path
 	if validator_path.is_rel_path():
@@ -169,11 +183,17 @@ func _set_script_slice(new_slice: SliceProperties) -> void:
 func _validate_and_run_student_code() -> void:
 	# Prepare everything for testing user code.
 	_game_view.paused = false
+	
 	_code_editor.lock_editor()
 	_code_editor.set_pause_button_pressed(false)
 	_code_editor.set_locked_message("Validating Your Code...")
+	_hide_solution_panel()
+	_code_editor.set_solution_button_pressed(false)
+	
 	_output_console.clear_messages()
 	_info_panel.reset_tests_status()
+	
+	_disable_distraction_free_mode()
 
 	# Complete the script from the slice and the base script.
 	_script_slice.current_text = _code_editor.get_text()
@@ -277,79 +297,190 @@ func _reset_practice() -> void:
 	# Code is already reset by the slice editor.
 	
 	_info_panel.reset_tests_status()
+	_code_editor.slice_editor.errors = []
+	_output_console.clear_messages()
 	
 	if _current_scene.has_method("reset"):
 		_current_scene.call("reset")
 
 
-func _update_info_panel() -> void:
-	_info_panel.rect_min_size = Vector2(_info_panel_anchors.rect_size.x, 0)
+func _update_slidable_panels() -> void:
+	# Wait a frame to make sure the new size has been applied.
+	yield(get_tree(), "idle_frame")
+	
+	# We use _output_anchors for reference because it never leaves the screen, so we can rely on it
+	# to always report the target size for one third of the hbox.
+	
+	# Update info panel.
+	_info_panel.rect_min_size = Vector2(_output_anchors.rect_size.x, 0)
+	_info_panel.set_anchors_and_margins_preset(Control.PRESET_WIDE, Control.PRESET_MODE_MINSIZE)
+		
+	# Update solution panel.
+	_solution_panel.rect_min_size = Vector2(_output_anchors.rect_size.x, 0)
+	_solution_panel.set_anchors_and_margins_preset(Control.PRESET_WIDE, Control.PRESET_MODE_MINSIZE)
+	if not _is_solution_panel_open:
+		_solution_panel.margin_left = _output_anchors.rect_size.x
 
 
 func _toggle_distraction_free_mode() -> void:
-	_is_left_panel_open = not _is_left_panel_open
+	if _is_info_panel_open:
+		_enable_distraction_free_mode()
+	else:
+		_disable_distraction_free_mode()
+
+
+func _disable_distraction_free_mode() -> void:
+	_update_slidable_panels()
+	
+	_is_info_panel_open = true
 	_tween.stop_all()
 	
-	# Open the panel.
-	if _is_left_panel_open:
-		_tween.interpolate_property(
-			_info_panel_anchors,
-			"size_flags_stretch_ratio",
-			_info_panel_anchors.size_flags_stretch_ratio,
-			1.0,
-			DFM_TRANSITION_DURATION,
-			Tween.TRANS_SINE,
-			Tween.EASE_IN_OUT
-		)
-		_tween.interpolate_property(
-			_code_editor,
-			"size_flags_stretch_ratio",
-			_code_editor.size_flags_stretch_ratio,
-			1.0,
-			DFM_TRANSITION_DURATION,
-			Tween.TRANS_SINE,
-			Tween.EASE_IN_OUT
-		)
-		_tween.interpolate_property(
-			_info_panel_anchors,
-			"modulate:a",
-			_info_panel_anchors.modulate.a,
-			1.0,
-			DFM_TRANSITION_DURATION
-		)
-	# Close the panel.
+	_tween.interpolate_property(
+		_info_panel_anchors,
+		"size_flags_stretch_ratio",
+		_info_panel_anchors.size_flags_stretch_ratio,
+		1.0,
+		SLIDE_TRANSITION_DURATION,
+		Tween.TRANS_SINE,
+		Tween.EASE_IN_OUT
+	)
+	_tween.interpolate_property(
+		_code_editor,
+		"size_flags_stretch_ratio",
+		_code_editor.size_flags_stretch_ratio,
+		1.0,
+		SLIDE_TRANSITION_DURATION,
+		Tween.TRANS_SINE,
+		Tween.EASE_IN_OUT
+	)
+	_tween.interpolate_property(
+		_info_panel_anchors,
+		"modulate:a",
+		_info_panel_anchors.modulate.a,
+		1.0,
+		SLIDE_TRANSITION_DURATION,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN
+	)
+	
+	_tween.start()
+	_code_editor.set_distraction_free_state(not _is_info_panel_open)
+
+
+func _enable_distraction_free_mode() -> void:
+	_update_slidable_panels()
+	
+	_is_info_panel_open = false
+	_tween.stop_all()
+	
+	_tween.interpolate_property(
+		_info_panel_anchors,
+		"size_flags_stretch_ratio",
+		_info_panel_anchors.size_flags_stretch_ratio,
+		0.0,
+		SLIDE_TRANSITION_DURATION,
+		Tween.TRANS_SINE,
+		Tween.EASE_IN_OUT
+	)
+	_tween.interpolate_property(
+		_code_editor,
+		"size_flags_stretch_ratio",
+		_code_editor.size_flags_stretch_ratio,
+		2.0,
+		SLIDE_TRANSITION_DURATION,
+		Tween.TRANS_SINE,
+		Tween.EASE_IN_OUT
+	)
+	_tween.interpolate_property(
+		_info_panel_anchors,
+		"modulate:a",
+		_info_panel_anchors.modulate.a,
+		0.0,
+		SLIDE_TRANSITION_DURATION - 0.25,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN,
+		0.15
+	)
+	
+	_tween.start()
+	_code_editor.set_distraction_free_state(not _is_info_panel_open)
+
+
+func _toggle_solution_panel() -> void:
+	if _is_solution_panel_open:
+		_hide_solution_panel()
 	else:
-		_tween.interpolate_property(
-			_info_panel_anchors,
-			"size_flags_stretch_ratio",
-			_info_panel_anchors.size_flags_stretch_ratio,
-			0.0,
-			DFM_TRANSITION_DURATION,
-			Tween.TRANS_SINE,
-			Tween.EASE_IN_OUT
-		)
-		_tween.interpolate_property(
-			_code_editor,
-			"size_flags_stretch_ratio",
-			_code_editor.size_flags_stretch_ratio,
-			2.0,
-			DFM_TRANSITION_DURATION,
-			Tween.TRANS_SINE,
-			Tween.EASE_IN_OUT
-		)
-		_tween.interpolate_property(
-			_info_panel_anchors,
-			"modulate:a",
-			_info_panel_anchors.modulate.a,
-			0.0,
-			DFM_TRANSITION_DURATION - 0.25,
-			Tween.TRANS_LINEAR,
-			Tween.EASE_IN,
-			0.15
-		)
+		_show_solution_panel()
+
+
+func _show_solution_panel() -> void:
+	_update_slidable_panels()
+	
+	_is_solution_panel_open = true
+	_tween.stop_all()
+
+	_tween.interpolate_property(
+		_solution_panel,
+		"margin_left",
+		_solution_panel.margin_left,
+		0.0,
+		SLIDE_TRANSITION_DURATION,
+		Tween.TRANS_SINE,
+		Tween.EASE_IN_OUT
+	)
+	
+	_tween.interpolate_property(
+		_solution_panel,
+		"modulate:a",
+		_solution_panel.modulate.a,
+		1.0,
+		SLIDE_TRANSITION_DURATION,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN
+	)
+	
 	_tween.start()
 
-	_code_editor.set_distraction_free_state(not _is_left_panel_open)
+
+func _hide_solution_panel() -> void:
+	_update_slidable_panels()
+	
+	_is_solution_panel_open = false
+	_tween.stop_all()
+	
+	_tween.interpolate_property(
+		_solution_panel,
+		"margin_left",
+		_solution_panel.margin_left,
+		_output_anchors.rect_size.x,
+		SLIDE_TRANSITION_DURATION,
+		Tween.TRANS_SINE,
+		Tween.EASE_IN_OUT
+	)
+	
+	_tween.interpolate_property(
+		_solution_panel,
+		"modulate:a",
+		_solution_panel.modulate.a,
+		0.0,
+		SLIDE_TRANSITION_DURATION - 0.25,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN,
+		0.15
+	)
+	
+	_tween.start()
+
+
+func _on_use_solution_pressed() -> void:
+	_code_editor.slice_editor.sync_text_with_slice()
+	
+	_practice_solution_used = true
+	_info_panel.set_status_icon(_info_panel.Status.SOLUTION_USED)
+	
+	_hide_solution_panel()
+	_code_editor.set_solution_button_pressed(false)
+	_code_editor.set_restore_allowed(true)
 
 
 func _on_code_editor_text_changed(_text: String) -> void:
@@ -367,8 +498,7 @@ func _on_code_editor_button(which: String) -> void:
 		_code_editor.ACTIONS.RESTORE:
 			_reset_practice()
 		_code_editor.ACTIONS.SOLUTION:
-			_practice_solution_used = true
-			_info_panel.set_status_icon(_info_panel.Status.SOLUTION_USED)
+			_toggle_solution_panel()
 		_code_editor.ACTIONS.CONTINUE:
 			_on_next_requested()
 
