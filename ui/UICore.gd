@@ -49,9 +49,9 @@ func _input(event: InputEvent) -> void:
 	if not scroll_container:
 		return
 	if event.is_action_pressed("scroll_up_one_page"):
-		scroll_container.scroll_vertical(-8)
+		scroll_container.scroll_page_up()
 	elif event.is_action_pressed("scroll_down_one_page"):
-		scroll_container.scroll_vertical(8)
+		scroll_container.scroll_page_down()
 	elif event.is_action_pressed("scroll_to_top"):
 		scroll_container.scroll_to_top()
 	elif event.is_action_pressed("scroll_to_bottom"):

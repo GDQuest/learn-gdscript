@@ -95,10 +95,21 @@ func _on_VScrollBar_scrolling() -> void:
 	scrolling = true
 
 
+# Scrolls up a page
+func scroll_page_up() -> void:
+	velocity.y += self.rect_size.y / 10
+
+
+# Scrolls down a page
+func scroll_page_down() -> void:
+	velocity.y -= self.rect_size.y / 10
+
+
 # Adds velocity to the vertical scroll
 func scroll_vertical(amount: float) -> void:
 	velocity.y -= amount
 
+# Scrolls to top
 func scroll_to_top() -> void:
 	# Reset velocity
 	velocity.y = 0
@@ -108,6 +119,8 @@ func scroll_to_top() -> void:
 	# Update vertical scroll bar
 	set_v_scroll(-pos.y)
 
+
+# Scrolls to bottom
 func scroll_to_bottom() -> void:
 	# Reset velocity
 	velocity.y = 0
