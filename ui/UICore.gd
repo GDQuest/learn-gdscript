@@ -49,17 +49,13 @@ func _input(event: InputEvent) -> void:
 	if not scroll_container:
 		return
 	if event.is_action_pressed("scroll_up_one_page"):
-		scroll_container.scroll_vertical -= 800
+		scroll_container.scroll_vertical(-8)
 	elif event.is_action_pressed("scroll_down_one_page"):
-		scroll_container.scroll_vertical += 800
-	elif event.is_action("scroll_up") and (event as InputEventMouseButton).pressed:
-		scroll_container.scroll_vertical -= 80
-	elif event.is_action("scroll_down") and (event as InputEventMouseButton).pressed:
-		scroll_container.scroll_vertical += 80
+		scroll_container.scroll_vertical(8)
 	elif event.is_action_pressed("scroll_to_top"):
-		scroll_container.scroll_vertical = 0
+		scroll_container.scroll_to_top()
 	elif event.is_action_pressed("scroll_to_bottom"):
-		scroll_container.scroll_vertical = 1000000
+		scroll_container.scroll_to_bottom()
 
 
 func _unhandled_input(event: InputEvent) -> void:

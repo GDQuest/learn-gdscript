@@ -81,7 +81,7 @@ func _process(delta: float) -> void:
 	set_v_scroll(-pos.y)
 
 
-func _gui_input(event):
+func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if not event.pressed:
 			scrolling = false
@@ -91,5 +91,28 @@ func _gui_input(event):
 			BUTTON_WHEEL_UP:    velocity.y += speed
 
 
-func _on_VScrollBar_scrolling():
+func _on_VScrollBar_scrolling() -> void:
 	scrolling = true
+
+
+# Adds velocity to the vertical scroll
+func scroll_vertical(amount: float) -> void:
+	velocity.y -= amount
+
+func scroll_to_top() -> void:
+	# Reset velocity
+	velocity.y = 0
+	# Move content node to top
+	pos.y = 0
+	content_node.rect_position = pos
+	# Update vertical scroll bar
+	set_v_scroll(-pos.y)
+
+func scroll_to_bottom() -> void:
+	# Reset velocity
+	velocity.y = 0
+	# Move content node to bottom
+	pos.y = -content_node.rect_size.y + self.rect_size.y
+	content_node.rect_position = pos
+	# Update vertical scroll bar
+	set_v_scroll(-pos.y)
