@@ -13,7 +13,7 @@ Use [code]randi()[/code] to generate a random number and the modulo operation [c
 The random number is stored in [code]result[/code] before we display it on the dice."
 starting_code = "func roll_dice(sides):
 	return sides"
-hints = PoolStringArray( "The result of the modulo operation is always less than the divisor. For example, [code]randi % 9()[/code] returns a random number between [code]0[/code] and [code]8[/code]", "Make sure to increase the range [code]result[/code] can be" )
+hints = PoolStringArray( "The result of the modulo operation is always less than the divisor. For example, [code]randi() % 9[/code] returns a random number between [code]0[/code] and [code]8[/code]", "Make sure to increase the range [code]result[/code] can be" )
 validator_script_path = "rolling_dice/TestRollingDice.gd"
 script_slice_path = "rolling_dice/RollingDice.live-editor/slices/RollingDice.rolling.slice.tres"
 documentation_references = PoolStringArray(  )
