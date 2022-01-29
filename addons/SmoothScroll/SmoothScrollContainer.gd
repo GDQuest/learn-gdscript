@@ -27,10 +27,16 @@ var _dragging_scroll_bar := false
 
 # Control node to move when scrolling.
 onready var _content: Control = get_child(get_child_count() - 1)
+onready var _scroll_sensitivity := 1.0
 
 
 func _ready() -> void:
 	get_v_scrollbar().connect("scrolling", self, "_on_VScrollBar_scrolling")
+	var user_profile := UserProfiles.get_profile()
+	_scroll_sensitivity = user_profile.scroll_sensitivity
+	user_profile.connect(
+		"scroll_sensitivity_changed", self, "_on_UserProfile_scroll_sensitivity_changed"
+	)
 
 
 func _process(delta: float) -> void:
@@ -42,11 +48,7 @@ func _process(delta: float) -> void:
 		return
 
 	# Detecting scrolling past the top or bottom of the scroll area.
-	var distance_to_bottom := (
-		_content.rect_position.y
-		+ _content.rect_size.y
-		- rect_size.y
-	)
+	var distance_to_bottom := _content.rect_position.y + _content.rect_size.y - rect_size.y
 	if distance_to_bottom < 0.0:
 		_over_drag_multiplicator_bottom = 1.0 / abs(distance_to_bottom) * 10.0
 	else:
@@ -68,7 +70,7 @@ func _process(delta: float) -> void:
 	if distance_to_top > 0.0:
 		_velocity.y = lerp(_velocity.y, -distance_to_top / 8.0, damping)
 
-	_content_position += _velocity
+	_content_position += _velocity * _scroll_sensitivity
 	_content.rect_position = _content_position
 	set_v_scroll(-_content_position.y)
 
@@ -116,3 +118,7 @@ func scroll_to_bottom() -> void:
 	_content_position.y = -_content.rect_size.y + rect_size.y
 	_content.rect_position = _content_position
 	set_v_scroll(-_content_position.y)
+
+
+func _on_UserProfile_scroll_sensitivity_changed(new_value: float) -> void:
+	_scroll_sensitivity = new_value
