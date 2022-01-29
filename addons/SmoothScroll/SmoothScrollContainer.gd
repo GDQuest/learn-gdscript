@@ -1,131 +1,118 @@
-## Smooth scroll functionality for ScrollContainer
-##
-## Applies velocity based momentum and "overdrag"
-## functionality to a ScrollContainer
+# Adds smooth scrolling support to vertical ScrollContainer nodes.
+#
+# This works by moving a direct child of the container. See `_content`.
+class_name SmoothScrollContainer
 extends ScrollContainer
 
-# Drag impact for one scroll input
-export(float, 10, 1) var speed = 2
-# Softness of damping when "overdragging"
-export(float, 0, 1) var damping = 0.1
+# When the velocity gets below this value, we set it to zero.
+var STOP_VELOCITY_THRESHOLD := 0.01
 
-# Current velocity of the `content_node`
-var velocity := Vector2(0,0)
-# Below this value, velocity is set to `0`
-var just_stop_under := 0.01
-# Current counterforce for "overdragging" on the top
-var over_drag_multiplicator_top := 1
-# Current counterforce for "overdragging" on the bottom
-var over_drag_multiplicator_bottom := 1
-# Control node to move when scrolling
-var content_node : Control
-# Current position of `content_node`
-var pos := Vector2(0, 0)
-# When true, `content_node`'s position is only set by dragging the scroll bar
-var scrolling := false
+# Controls the added speed when receiving one scroll event.
+export(float, 10, 1) var speed := 2.0
+# Controls the damping of movement when _dragging_scroll_bar past the container's limits.
+export(float, 0, 1) var damping := 0.1
+
+# Current velocity of the content node.
+var _velocity := Vector2(0, 0)
+# Current counterforce for "overdragging" on the top side.
+var _over_drag_multiplicator_top := 1.0
+# Current counterforce for "overdragging" on the bottom side.
+var _over_drag_multiplicator_bottom := 1.0
+# Current position of content node. We use this to track and force the child
+# node's position as directly updating the node's position conflicts with the
+# ScrollContainer's native behavior.
+var _content_position := Vector2(0, 0)
+# If true, the content node's position is controled by dragging the scroll bar.
+var _dragging_scroll_bar := false
+
+# Control node to move when scrolling.
+onready var _content: Control = get_child(get_child_count() - 1)
 
 
 func _ready() -> void:
 	get_v_scrollbar().connect("scrolling", self, "_on_VScrollBar_scrolling")
-	for c in get_children():
-		content_node = c
 
 
 func _process(delta: float) -> void:
-	# If no scroll needed, don't apply forces
-	if content_node.rect_size.y - self.rect_size.y < 1:
+	# If no scroll needed, we skip calculations.
+	if _content.rect_size.y - rect_size.y < 1.0:
 		return
-	
-	var d := delta
-	# Distance between content_node's bottom and bottom of the scroll box 
-	var bottom_distance:= content_node.rect_position.y + content_node.rect_size.y - self.rect_size.y
-	# Distance between content_node and top of the scroll box
-	var top_distance:= content_node.rect_position.y
-	
-	# If overdragged on bottom:
-	if bottom_distance< 0 :
-		over_drag_multiplicator_bottom = 1/abs(bottom_distance)*10
+	elif _dragging_scroll_bar:
+		_content_position = _content.rect_position
+		return
+
+	# Detecting scrolling past the top or bottom of the scroll area.
+	var distance_to_bottom := (
+		_content.rect_position.y
+		+ _content.rect_size.y
+		- rect_size.y
+	)
+	if distance_to_bottom < 0.0:
+		_over_drag_multiplicator_bottom = 1.0 / abs(distance_to_bottom) * 10.0
 	else:
-		over_drag_multiplicator_bottom = 1
-	
-	# If overdragged on top:
-	if top_distance> 0:
-		over_drag_multiplicator_top = 1/abs(top_distance)*10
+		_over_drag_multiplicator_bottom = 1.0
+
+	var distance_to_top := _content.rect_position.y
+	if distance_to_top > 0.0:
+		_over_drag_multiplicator_top = 1.0 / abs(distance_to_top) * 10.0
 	else:
-		over_drag_multiplicator_top = 1
-	
-	# Simulate friction
-	velocity *= 0.9
-	
-	# If velocity is too low, just set it to 0
-	if velocity.length() <= just_stop_under:
-		velocity = Vector2(0,0)
-	
+		_over_drag_multiplicator_top = 1.0
+
+	_velocity.y *= 0.9
+	if abs(_velocity.y) <= STOP_VELOCITY_THRESHOLD:
+		_velocity.y = 0.0
+
 	# Applies counterforces when overdragging
-	if bottom_distance< 0 :
-		velocity.y = lerp(velocity.y, -bottom_distance/8, damping)
-	if top_distance> 0:
-		velocity.y = lerp(velocity.y, -top_distance/8, damping)
-	
-	# If using scroll bar dragging, set the content_node's
-	# position by using the scrollbar position
-	if scrolling:
-		pos = content_node.rect_position
-		return
-	
-	# Move content node by applying velocity
-	pos += velocity
-	content_node.rect_position = pos
-	
-	# Update vertical scroll bar
-	set_v_scroll(-pos.y)
+	if distance_to_bottom < 0.0:
+		_velocity.y = lerp(_velocity.y, -distance_to_bottom / 8.0, damping)
+	if distance_to_top > 0.0:
+		_velocity.y = lerp(_velocity.y, -distance_to_top / 8.0, damping)
+
+	_content_position += _velocity
+	_content.rect_position = _content_position
+	set_v_scroll(-_content_position.y)
 
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if not event.pressed:
-			scrolling = false
-		
+			_dragging_scroll_bar = false
+
 		match event.button_index:
-			BUTTON_WHEEL_DOWN:  velocity.y -= speed
-			BUTTON_WHEEL_UP:    velocity.y += speed
+			BUTTON_WHEEL_DOWN:
+				_velocity.y -= speed
+			BUTTON_WHEEL_UP:
+				_velocity.y += speed
 
 
 func _on_VScrollBar_scrolling() -> void:
-	scrolling = true
+	_dragging_scroll_bar = true
 
 
 # Scrolls up a page
 func scroll_page_up() -> void:
-	velocity.y += self.rect_size.y / 10
+	_velocity.y += rect_size.y / 10
 
 
 # Scrolls down a page
 func scroll_page_down() -> void:
-	velocity.y -= self.rect_size.y / 10
+	_velocity.y -= rect_size.y / 10
 
 
-# Adds velocity to the vertical scroll
+# Adds _velocity to the vertical scroll
 func scroll_vertical(amount: float) -> void:
-	velocity.y -= amount
+	_velocity.y -= amount
 
-# Scrolls to top
+
 func scroll_to_top() -> void:
-	# Reset velocity
-	velocity.y = 0
-	# Move content node to top
-	pos.y = 0
-	content_node.rect_position = pos
-	# Update vertical scroll bar
-	set_v_scroll(-pos.y)
+	_velocity.y = 0.0
+	_content_position.y = 0.0
+	_content.rect_position = _content_position
+	set_v_scroll(-_content_position.y)
 
 
-# Scrolls to bottom
 func scroll_to_bottom() -> void:
-	# Reset velocity
-	velocity.y = 0
-	# Move content node to bottom
-	pos.y = -content_node.rect_size.y + self.rect_size.y
-	content_node.rect_position = pos
-	# Update vertical scroll bar
-	set_v_scroll(-pos.y)
+	_velocity.y = 0.0
+	_content_position.y = -_content.rect_size.y + rect_size.y
+	_content.rect_position = _content_position
+	set_v_scroll(-_content_position.y)

@@ -45,7 +45,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	var scroll_container := get_focus_owner() as ScrollContainer
+	var scroll_container := get_focus_owner() as SmoothScrollContainer
 	if not scroll_container:
 		return
 	if event.is_action_pressed("scroll_up_one_page"):
