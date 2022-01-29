@@ -56,6 +56,10 @@ func _input(event: InputEvent) -> void:
 		scroll_container.scroll_to_top()
 	elif event.is_action_pressed("scroll_to_bottom"):
 		scroll_container.scroll_to_bottom()
+	elif event.is_action("scroll_up") and event.pressed:
+		scroll_container.scroll_up()
+	elif event.is_action("scroll_down") and event.pressed:
+		scroll_container.scroll_down()
 
 
 func _unhandled_input(event: InputEvent) -> void:

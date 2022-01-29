@@ -7,11 +7,13 @@ extends ScrollContainer
 # Amount of pixels to offset the scroll target when scrolling with the mouse
 # wheel or the touchpad.
 const MOUSE_SCROLL_STEP := 50.0
+# Height of a page in pixels.
 const PAGE_HEIGHT := 800.0
 # When the velocity's squared length gets below this value, we set it to zero.
 const ARRIVE_THRESHOLD := 12.0
 const ARRIVE_DISTANCE := 200.0
 
+# Maximum scroll speed in pixels per second.
 var max_speed := 3000.0
 
 # Current velocity of the content node.
@@ -61,17 +63,17 @@ func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		match event.button_index:
 			BUTTON_WHEEL_DOWN:
-				scroll_down(MOUSE_SCROLL_STEP)
+				scroll_down()
 			BUTTON_WHEEL_UP:
-				scroll_up(MOUSE_SCROLL_STEP)
+				scroll_up()
 
 
-func scroll_up(amount: float) -> void:
-	_set_target_position(_target_position + Vector2.UP * amount * _scroll_sensitivity)
+func scroll_up() -> void:
+	_set_target_position(_target_position + Vector2.UP * MOUSE_SCROLL_STEP * _scroll_sensitivity)
 
 
-func scroll_down(amount: float) -> void:
-	_set_target_position(_target_position + Vector2.DOWN * amount * _scroll_sensitivity)
+func scroll_down() -> void:
+	_set_target_position(_target_position + Vector2.DOWN * MOUSE_SCROLL_STEP * _scroll_sensitivity)
 
 
 func scroll_page_up() -> void:
