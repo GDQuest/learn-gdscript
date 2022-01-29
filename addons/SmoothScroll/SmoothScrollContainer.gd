@@ -8,7 +8,7 @@ extends ScrollContainer
 # wheel or the touchpad.
 const MOUSE_SCROLL_STEP := 50.0
 # When the velocity's squared length gets below this value, we set it to zero.
-const ARRIVE_THRESHOLD := 12.0
+const ARRIVE_THRESHOLD := 1.0
 const ARRIVE_DISTANCE := 200.0
 
 # Maximum scroll speed in pixels per second.
@@ -16,10 +16,10 @@ var max_speed := 3000.0
 
 # Current velocity of the content node.
 var _velocity := Vector2(0, 0)
-# Current position of content node. We use this to track and force the child
-# node's position as directly updating the node's position conflicts with the
-# ScrollContainer's native behavior.
-var _content_position := Vector2.ZERO
+# Current scroll coordinated. We use this to track and force the scrollbars to
+# specific scrolling as directly updating the scroll properties conflicts with
+# the ScrollContainer's native behavior.
+var _current_scroll := Vector2.ZERO
 var _target_position := Vector2.ZERO setget _set_target_position
 var _max_position_y := 0.0
 
@@ -44,31 +44,36 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	var direction := _content_position.direction_to(_target_position)
+	var distance_to_target = _current_scroll.distance_to(_target_position)
+	if distance_to_target <= ARRIVE_THRESHOLD:
+		set_process(false)
+		return
+
+	var direction := _current_scroll.direction_to(_target_position)
 	var desired_velocity := direction * max_speed
-	var distance_to_target = _content_position.distance_to(_target_position)
 	if distance_to_target < ARRIVE_DISTANCE:
 		desired_velocity *= distance_to_target / ARRIVE_DISTANCE
 
 	var steering := desired_velocity - _velocity
 	_velocity += steering / 3.5
 
-	_content_position += _velocity * delta
-	scroll_vertical = _content_position.y
-
-	if distance_to_target <= ARRIVE_THRESHOLD:
-		set_process(false)
+	_current_scroll += _velocity * delta
+	scroll_vertical = _current_scroll.y
 
 
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed:
-		match event.button_index:
-			BUTTON_WHEEL_DOWN:
-				scroll_down()
-			BUTTON_WHEEL_UP:
-				scroll_up()
-
-
+	if event.is_action("scroll_up") and event.pressed:
+		scroll_up()
+	elif event.is_action("scroll_down") and event.pressed:
+		scroll_down()
+	elif event.is_action_pressed("scroll_up_one_page"):
+		scroll_page_up()
+	elif event.is_action_pressed("scroll_down_one_page"):
+		scroll_page_down()
+	elif event.is_action_pressed("scroll_to_top"):
+		scroll_to_top()
+	elif event.is_action_pressed("scroll_to_bottom"):
+		scroll_to_bottom()
 
 
 func scroll_up() -> void:
@@ -101,10 +106,6 @@ func _set_target_position(new_position: Vector2) -> void:
 	set_process(true)
 
 
-func _on_UserProfile_scroll_sensitivity_changed(new_value: float) -> void:
-	_scroll_sensitivity = new_value
-
-
 func _update_max_position_y() -> void:
 	_max_position_y = _content.rect_size.y - rect_size.y
 
@@ -112,5 +113,9 @@ func _update_max_position_y() -> void:
 func _on_VScrollBar_scrolling() -> void:
 	if is_processing():
 		set_process(false)
-	_content_position.y = scroll_vertical
+	_current_scroll.y = scroll_vertical
 	_target_position.y = scroll_vertical
+
+
+func _on_UserProfile_scroll_sensitivity_changed(new_value: float) -> void:
+	_scroll_sensitivity = new_value
