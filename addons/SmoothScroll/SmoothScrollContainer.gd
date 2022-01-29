@@ -4,34 +4,34 @@
 class_name SmoothScrollContainer
 extends ScrollContainer
 
-# When the velocity gets below this value, we set it to zero.
-var STOP_VELOCITY_THRESHOLD := 0.01
+# Amount of pixels to offset the scroll target when scrolling with the mouse
+# wheel or the touchpad.
+const MOUSE_SCROLL_STEP := 50.0
+const PAGE_HEIGHT := 800.0
+# When the velocity's squared length gets below this value, we set it to zero.
+const ARRIVE_THRESHOLD := 12.0
+const ARRIVE_DISTANCE := 200.0
 
-# Controls the added speed when receiving one scroll event.
-export(float, 10, 1) var speed := 2.0
-# Controls the damping of movement when _dragging_scroll_bar past the container's limits.
-export(float, 0, 1) var damping := 0.1
+var max_speed := 3000.0
 
 # Current velocity of the content node.
 var _velocity := Vector2(0, 0)
-# Current counterforce for "overdragging" on the top side.
-var _over_drag_multiplicator_top := 1.0
-# Current counterforce for "overdragging" on the bottom side.
-var _over_drag_multiplicator_bottom := 1.0
 # Current position of content node. We use this to track and force the child
 # node's position as directly updating the node's position conflicts with the
 # ScrollContainer's native behavior.
 var _content_position := Vector2.ZERO
-# If true, the content node's position is controled by dragging the scroll bar.
-var _dragging_scroll_bar := false
+var _target_position := Vector2.ZERO setget _set_target_position
 
 # Control node to move when scrolling.
 onready var _content: Control = get_child(get_child_count() - 1)
 onready var _scroll_sensitivity := 1.0
 
+onready var _max_position_y := _content.rect_size.y - rect_size.y / 2.0
+
 
 func _ready() -> void:
-	get_v_scrollbar().connect("scrolling", self, "_on_VScrollBar_scrolling")
+	set_process(false)
+	get_v_scrollbar().connect("scrolling", self, "set_process", [false])
 
 	var user_profile := UserProfiles.get_profile()
 	_scroll_sensitivity = user_profile.scroll_sensitivity
@@ -41,84 +41,59 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	# If no scroll needed, we skip calculations.
-	if _content.rect_size.y - rect_size.y < 1.0:
-		return
-	elif _dragging_scroll_bar:
-		_content_position = _content.rect_position
-		return
+	var direction := _content_position.direction_to(_target_position)
+	var desired_velocity := direction * max_speed
+	var distance_to_target = _content_position.distance_to(_target_position)
+	if distance_to_target < ARRIVE_DISTANCE:
+		desired_velocity *= distance_to_target / ARRIVE_DISTANCE
 
-	# Detecting scrolling past the top or bottom of the scroll area.
-	var distance_to_bottom := _content.rect_position.y + _content.rect_size.y - rect_size.y
-	if distance_to_bottom < 0.0:
-		_over_drag_multiplicator_bottom = 1.0 / abs(distance_to_bottom) * 10.0
-	else:
-		_over_drag_multiplicator_bottom = 1.0
+	var steering := desired_velocity - _velocity
+	_velocity += steering / 3.5
 
-	var distance_to_top := _content.rect_position.y
-	if distance_to_top > 0.0:
-		_over_drag_multiplicator_top = 1.0 / abs(distance_to_top) * 10.0
-	else:
-		_over_drag_multiplicator_top = 1.0
+	_content_position += _velocity * delta
+	scroll_vertical = _content_position.y
 
-	_velocity.y *= 0.9
-	if abs(_velocity.y) <= STOP_VELOCITY_THRESHOLD:
-		_velocity.y = 0.0
-
-	# Applies counterforces when overdragging
-	if distance_to_bottom < 0.0:
-		_velocity.y = lerp(_velocity.y, -distance_to_bottom / 8.0, damping)
-	if distance_to_top > 0.0:
-		_velocity.y = lerp(_velocity.y, -distance_to_top / 8.0, damping)
-
-	_content_position += _velocity * _scroll_sensitivity
-	_content.rect_position = _content_position
-	set_v_scroll(-_content_position.y)
+	if distance_to_target <= ARRIVE_THRESHOLD:
+		set_process(false)
 
 
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if not event.pressed:
-			_dragging_scroll_bar = false
-
+	if event is InputEventMouseButton and event.pressed:
 		match event.button_index:
 			BUTTON_WHEEL_DOWN:
-				_velocity.y -= speed
+				scroll_down(MOUSE_SCROLL_STEP)
 			BUTTON_WHEEL_UP:
-				_velocity.y += speed
+				scroll_up(MOUSE_SCROLL_STEP)
 
 
-func _on_VScrollBar_scrolling() -> void:
-	_dragging_scroll_bar = true
+func scroll_up(amount: float) -> void:
+	_set_target_position(_target_position + Vector2.UP * amount * _scroll_sensitivity)
 
 
-# Scrolls up a page
+func scroll_down(amount: float) -> void:
+	_set_target_position(_target_position + Vector2.DOWN * amount * _scroll_sensitivity)
+
+
 func scroll_page_up() -> void:
-	_velocity.y += rect_size.y / 10 / _scroll_sensitivity
+	_set_target_position(_target_position + Vector2.UP * PAGE_HEIGHT)
 
 
-# Scrolls down a page
 func scroll_page_down() -> void:
-	_velocity.y -= rect_size.y / 10 / _scroll_sensitivity
-
-
-# Adds _velocity to the vertical scroll
-func scroll_vertical(amount: float) -> void:
-	_velocity.y -= amount
+	_set_target_position(_target_position + Vector2.DOWN * PAGE_HEIGHT)
 
 
 func scroll_to_top() -> void:
-	_velocity.y = 0.0
-	_content_position.y = 0.0
-	_content.rect_position = _content_position
-	set_v_scroll(-_content_position.y)
+	_set_target_position(Vector2.ZERO)
 
 
 func scroll_to_bottom() -> void:
-	_velocity.y = 0.0
-	_content_position.y = -_content.rect_size.y + rect_size.y
-	_content.rect_position = _content_position
-	set_v_scroll(-_content_position.y)
+	_set_target_position(Vector2.DOWN * _max_position_y)
+
+
+func _set_target_position(new_position: Vector2) -> void:
+	_target_position = new_position
+	_target_position.y = clamp(_target_position.y, 0.0, _max_position_y)
+	set_process(true)
 
 
 func _on_UserProfile_scroll_sensitivity_changed(new_value: float) -> void:
