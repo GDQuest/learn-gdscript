@@ -7,8 +7,6 @@ extends ScrollContainer
 # Amount of pixels to offset the scroll target when scrolling with the mouse
 # wheel or the touchpad.
 const MOUSE_SCROLL_STEP := 50.0
-# Height of a page in pixels.
-const PAGE_HEIGHT := 800.0
 # When the velocity's squared length gets below this value, we set it to zero.
 const ARRIVE_THRESHOLD := 12.0
 const ARRIVE_DISTANCE := 200.0
@@ -36,7 +34,7 @@ func _ready() -> void:
 	_update_max_position_y()
 	_content.connect("resized", self, "_update_max_position_y")
 
-	get_v_scrollbar().connect("scrolling", self, "set_process", [false])
+	get_v_scrollbar().connect("scrolling", self, "_on_VScrollBar_scrolling")
 
 	var user_profile := UserProfiles.get_profile()
 	_scroll_sensitivity = user_profile.scroll_sensitivity
@@ -71,6 +69,8 @@ func _gui_input(event: InputEvent) -> void:
 				scroll_up()
 
 
+
+
 func scroll_up() -> void:
 	_set_target_position(_target_position + Vector2.UP * MOUSE_SCROLL_STEP * _scroll_sensitivity)
 
@@ -80,11 +80,11 @@ func scroll_down() -> void:
 
 
 func scroll_page_up() -> void:
-	_set_target_position(_target_position + Vector2.UP * PAGE_HEIGHT)
+	_set_target_position(_target_position + Vector2.UP * rect_size.y)
 
 
 func scroll_page_down() -> void:
-	_set_target_position(_target_position + Vector2.DOWN * PAGE_HEIGHT)
+	_set_target_position(_target_position + Vector2.DOWN * rect_size.y)
 
 
 func scroll_to_top() -> void:
@@ -106,4 +106,11 @@ func _on_UserProfile_scroll_sensitivity_changed(new_value: float) -> void:
 
 
 func _update_max_position_y() -> void:
-	_max_position_y = _content.rect_size.y - rect_size.y / 2.0
+	_max_position_y = _content.rect_size.y - rect_size.y
+
+
+func _on_VScrollBar_scrolling() -> void:
+	if is_processing():
+		set_process(false)
+	_content_position.y = scroll_vertical
+	_target_position.y = scroll_vertical
