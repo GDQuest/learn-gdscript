@@ -21,7 +21,7 @@ var _over_drag_multiplicator_bottom := 1.0
 # Current position of content node. We use this to track and force the child
 # node's position as directly updating the node's position conflicts with the
 # ScrollContainer's native behavior.
-var _content_position := Vector2(0, 0)
+var _content_position := Vector2.ZERO
 # If true, the content node's position is controled by dragging the scroll bar.
 var _dragging_scroll_bar := false
 
@@ -32,6 +32,7 @@ onready var _scroll_sensitivity := 1.0
 
 func _ready() -> void:
 	get_v_scrollbar().connect("scrolling", self, "_on_VScrollBar_scrolling")
+
 	var user_profile := UserProfiles.get_profile()
 	_scroll_sensitivity = user_profile.scroll_sensitivity
 	user_profile.connect(
@@ -93,12 +94,12 @@ func _on_VScrollBar_scrolling() -> void:
 
 # Scrolls up a page
 func scroll_page_up() -> void:
-	_velocity.y += rect_size.y / 10
+	_velocity.y += rect_size.y / 10 / _scroll_sensitivity
 
 
 # Scrolls down a page
 func scroll_page_down() -> void:
-	_velocity.y -= rect_size.y / 10
+	_velocity.y -= rect_size.y / 10 / _scroll_sensitivity
 
 
 # Adds _velocity to the vertical scroll
