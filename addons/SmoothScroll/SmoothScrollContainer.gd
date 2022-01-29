@@ -23,16 +23,19 @@ var _velocity := Vector2(0, 0)
 # ScrollContainer's native behavior.
 var _content_position := Vector2.ZERO
 var _target_position := Vector2.ZERO setget _set_target_position
+var _max_position_y := 0.0
 
 # Control node to move when scrolling.
-onready var _content: Control = get_child(get_child_count() - 1)
+onready var _content: Control = get_child(get_child_count() - 1) as Control
 onready var _scroll_sensitivity := 1.0
-
-onready var _max_position_y := _content.rect_size.y - rect_size.y / 2.0
 
 
 func _ready() -> void:
 	set_process(false)
+
+	_update_max_position_y()
+	_content.connect("resized", self, "_update_max_position_y")
+
 	get_v_scrollbar().connect("scrolling", self, "set_process", [false])
 
 	var user_profile := UserProfiles.get_profile()
@@ -100,3 +103,7 @@ func _set_target_position(new_position: Vector2) -> void:
 
 func _on_UserProfile_scroll_sensitivity_changed(new_value: float) -> void:
 	_scroll_sensitivity = new_value
+
+
+func _update_max_position_y() -> void:
+	_max_position_y = _content.rect_size.y - rect_size.y / 2.0
