@@ -6,13 +6,17 @@ extends ScrollContainer
 
 # Amount of pixels to offset the scroll target when scrolling with the mouse
 # wheel or the touchpad.
-const MOUSE_SCROLL_STEP := 50.0
+const MOUSE_SCROLL_STEP := 80.0
 # When the velocity's squared length gets below this value, we set it to zero.
 const ARRIVE_THRESHOLD := 1.0
-const ARRIVE_DISTANCE := 200.0
+const ARRIVE_DISTANCE_BASE := 200.0
+const ARRIVE_DISTANCE_FAST := 1200.0
+const SPEED_BASE := 4000.0
+const SPEED_FAST := 16000.0
 
 # Maximum scroll speed in pixels per second.
-var max_speed := 3000.0
+var max_speed := SPEED_BASE
+var arrive_distance := ARRIVE_DISTANCE_BASE
 
 # Current velocity of the content node.
 var _velocity := Vector2(0, 0)
@@ -45,17 +49,19 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var distance_to_target = _current_scroll.distance_to(_target_position)
-	if distance_to_target <= ARRIVE_THRESHOLD:
+	if distance_to_target <= ARRIVE_THRESHOLD * max_speed / SPEED_BASE:
 		set_process(false)
+		max_speed = SPEED_BASE
+		arrive_distance = ARRIVE_DISTANCE_BASE
 		return
 
 	var direction := _current_scroll.direction_to(_target_position)
 	var desired_velocity := direction * max_speed
-	if distance_to_target < ARRIVE_DISTANCE:
-		desired_velocity *= distance_to_target / ARRIVE_DISTANCE
+	if distance_to_target < arrive_distance:
+		desired_velocity *= distance_to_target / arrive_distance
 
 	var steering := desired_velocity - _velocity
-	_velocity += steering / 3.5
+	_velocity += steering / 2.0
 
 	_current_scroll += _velocity * delta
 	scroll_vertical = _current_scroll.y
@@ -94,10 +100,14 @@ func scroll_page_down() -> void:
 
 func scroll_to_top() -> void:
 	_set_target_position(Vector2.ZERO)
+	max_speed = SPEED_FAST
+	arrive_distance = ARRIVE_DISTANCE_FAST
 
 
 func scroll_to_bottom() -> void:
 	_set_target_position(Vector2.DOWN * _max_position_y)
+	max_speed = SPEED_FAST
+	arrive_distance = ARRIVE_DISTANCE_FAST
 
 
 func _set_target_position(new_position: Vector2) -> void:
