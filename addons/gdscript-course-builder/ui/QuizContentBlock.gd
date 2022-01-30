@@ -70,7 +70,8 @@ func _ready() -> void:
 	_question_line_edit.connect("text_changed", self, "_on_question_line_edit_text_changed")
 
 	_confirm_dialog.connect("confirmed", self, "_on_confirm_dialog_confirmed")
-
+	_confirm_dialog.get_cancel().connect("pressed", self, "_on_confirm_dialog_cancelled")
+	
 	_quiz_type_options.connect("item_selected", self, "_on_quiz_type_options_item_selected")
 
 	# Update theme items
@@ -194,6 +195,19 @@ func _on_confirm_dialog_confirmed() -> void:
 		ConfirmMode.CHANGE_QUIZ_TYPE:
 			_change_quiz_type()
 
+	_confirm_dialog_mode = -1
+
+func _on_confirm_dialog_cancelled() -> void:
+	if _confirm_dialog_mode == ConfirmMode.CHANGE_QUIZ_TYPE:
+		if _quiz is QuizInputField:
+			_quiz_type_options.selected = 2
+		elif _quiz is QuizChoice:
+			_quiz_type_options.selected = 0 if _quiz.is_multiple_choice else 1
+		else:
+			printerr("Trying to load unsupported quiz type: %s" % [_quiz.get_class()])
+		
+		_change_quiz_type_target = -1
+	
 	_confirm_dialog_mode = -1
 
 
