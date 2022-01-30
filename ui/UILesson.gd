@@ -16,27 +16,33 @@ const AUTOSCROLL_DURATION := 0.24
 
 export var test_lesson: Resource
 
+var _lesson: Lesson
+var _visible_index := -1
+var _quizzes_done := -1 # Start with -1 because we will always autoincrement at least once.
+var _quizz_count := 0
+
+var _base_text_font_size := preload("res://ui/theme/fonts/font_text.tres").size
+
 onready var _scroll_container := $OuterMargin/ScrollContainer as ScrollContainer
 onready var _scroll_content := $OuterMargin/ScrollContainer/InnerMargin as Control
 onready var _title := $OuterMargin/ScrollContainer/InnerMargin/Content/Title as Label
 onready var _content_blocks := $OuterMargin/ScrollContainer/InnerMargin/Content/ContentBlocks as VBoxContainer
+onready var _content_container := $OuterMargin/ScrollContainer/InnerMargin/Content as VBoxContainer
 onready var _practices_visibility_container := (
 	$OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer as VBoxContainer
 )
 onready var _practices_container := (
 	$OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer/Practices as VBoxContainer
 )
-
 onready var _debounce_timer := $DebounceTimer as Timer
 onready var _tweener := $Tween as Tween
 
-var _lesson: Lesson
-var _visible_index := -1
-var _quizzes_done := -1 # Start with -1 because we will always autoincrement at least once.
-var _quizz_count := 0
+onready var _start_content_width := _content_container.rect_size.x
 
 
 func _ready() -> void:
+	Events.connect("font_size_scale_changed", self, "_update_content_container_width")
+	_update_content_container_width(UserProfiles.get_profile().font_size_scale)
 	_scroll_container.get_v_scrollbar().connect("value_changed", self, "_on_content_scrolled")
 	_debounce_timer.connect("timeout", self, "_emit_read_content")
 
@@ -210,3 +216,7 @@ func _emit_read_content() -> void:
 		var last_block = content_blocks.pop_back()
 		Events.emit_signal("lesson_reading_block", last_block, content_blocks)
 
+
+func _update_content_container_width(new_font_scale: int) -> void:
+	var font_size_multiplier := float(_base_text_font_size + new_font_scale * 2) / _base_text_font_size
+	_content_container.rect_min_size.x = _start_content_width * font_size_multiplier
