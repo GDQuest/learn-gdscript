@@ -82,6 +82,8 @@ func _ready() -> void:
 	yield(get_tree(), "idle_frame")
 	_initial_text = text
 
+	slice_editor.grab_focus()
+
 	if not Engine.editor_hint:
 		for button in _buttons_with_shortcuts:
 			assert(

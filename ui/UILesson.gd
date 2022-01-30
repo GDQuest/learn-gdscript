@@ -52,6 +52,8 @@ func _ready() -> void:
 			child.show()
 		_practices_container.show()
 
+	_scroll_container.grab_focus()
+
 
 func setup(lesson: Lesson, course: Course) -> void:
 	if not is_inside_tree():
