@@ -6,6 +6,7 @@ onready var _settings_button := $Layout/MarginContainer/ColumnLayout/SideColumn/
 onready var _outliner_button := $Layout/MarginContainer/ColumnLayout/SideColumn/OutlinerButton as Button
 onready var _start_button := $Layout/MarginContainer/ColumnLayout/SideColumn/StartButton as Button
 onready var _report_button := $Layout/TopBar/MarginContainer/ToolBarLayout/ReportButton as Button
+onready var _scroll_container := $Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer as ScrollContainer
 
 onready var _main_content_block := $Layout/MarginContainer/ColumnLayout/MainColumn/MainContent as Container
 onready var _content_list := (
@@ -22,6 +23,8 @@ func _ready() -> void:
 	for child in _content_list.get_children():
 		if child is RichTextLabel:
 			child.connect("meta_clicked", OS, "shell_open")
+
+	_scroll_container.grab_focus()
 
 
 func set_button_continue(enable: bool = true) -> void:

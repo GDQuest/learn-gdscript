@@ -1,11 +1,10 @@
 extends PracticeTester
 
 var expected_corners := [
-	[Vector2(0, 0), Vector2(240, 0), Vector2(70, 170)],
+	[Vector2(0, 0), Vector2(240, 0), Vector2(410, 170)],
 	[Vector2(0, 0), Vector2(120, 0), Vector2(120, 120)],
-	[Vector2(0, 0), Vector2(60, 0), Vector2(102, 42)],
+	[Vector2(0, 0), Vector2(35, 85), Vector2(120, 0)],
 ]
-
 
 # We sort vertices for accurate comparison
 func _init() -> void:
@@ -25,5 +24,8 @@ func test_draw_corners_of_varying_sizes_and_angles() -> String:
 			return "The drawn shape has too many points. Did you call move_forward() more than 2 times?"
 		elif points_count < 3:
 			return "The drawn shape has too few points. Did you call move_forward() less than 2 times?"
+
+		if points != expected_corners[index]:
+			return "The drawn corner doesn't match the expected corner. Are you not using the angle parameter in your code?"
 
 	return ""

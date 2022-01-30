@@ -56,3 +56,4 @@ func scale_all_font_sizes(size_scale: int, and_save: bool = true) -> void:
 		var current_profile := UserProfiles.get_profile()
 		current_profile.font_size_scale = size_scale
 		current_profile.save()
+		Events.emit_signal("font_size_scale_changed", size_scale)
