@@ -17,6 +17,8 @@ const QuizInputFieldScene := preload("QuizInputField.tscn")
 var _quiz: Quiz
 var _list_index := -1
 var _confirm_dialog_mode := -1
+# If cange of quiz type is confirmed, set quiz type to target quiz type option.
+var _change_quiz_type_target := -1
 var _drag_preview_style: StyleBox
 
 onready var _background_panel := $BackgroundPanel as PanelContainer
@@ -189,6 +191,8 @@ func _on_confirm_dialog_confirmed() -> void:
 	match _confirm_dialog_mode:
 		ConfirmMode.REMOVE_BLOCK:
 			emit_signal("block_removed")
+		ConfirmMode.CHANGE_QUIZ_TYPE:
+			_change_quiz_type()
 
 	_confirm_dialog_mode = -1
 
@@ -215,17 +219,21 @@ func _on_explanation_text_edit_text_changed() -> void:
 	_quiz.emit_changed()
 
 
-# TODO: Confirm with confirmation dialog first
 func _on_quiz_type_options_item_selected(index: int) -> void:
-	if index in [ITEM_MULTIPLE_CHOICE, ITEM_SINGLE_CHOICE]:
+	_change_quiz_type_target = index
+	_confirm_dialog_mode = ConfirmMode.CHANGE_QUIZ_TYPE
+	_show_confirm("Are you sure you want to change the quiz type? This may lose all answer data.")
+
+func _change_quiz_type(target: int = _change_quiz_type_target) -> void:
+	if target in [ITEM_MULTIPLE_CHOICE, ITEM_SINGLE_CHOICE]:
 		if _quiz is QuizChoice:
-			_quiz.set_is_multiple_choice(index == ITEM_MULTIPLE_CHOICE)
+			_quiz.set_is_multiple_choice(target == ITEM_MULTIPLE_CHOICE)
 		else:
 			_create_new_quiz_resource(QuizChoice, _quiz)
-	elif index == ITEM_TEXT_INPUT:
+	elif target == ITEM_TEXT_INPUT:
 		_create_new_quiz_resource(QuizInputField, _quiz)
 	else:
-		printerr("Selected unsupported item type: %s" % [index])
+		printerr("Selected unsupported item type: %s" % [target])
 
 
 func _create_new_quiz_resource(new_type, from: Quiz) -> void:
