@@ -2,15 +2,10 @@ extends ColorRect
 
 var _sample_default_font: DynamicFont
 
-onready var _language_value := (
-	$PanelContainer/Column/Margin/Column/Settings/LanguageSetting/Value as OptionButton
-)
-onready var _font_size_value := (
-	$PanelContainer/Column/Margin/Column/Settings/FontSizeSetting/ValueContainer/Value as HSlider
-)
-onready var _font_size_sample := (
-	$PanelContainer/Column/Margin/Column/Settings/FontSizeSetting/ValueContainer/SampleText as Label
-)
+onready var _language_value := $PanelContainer/Column/Margin/Column/Settings/LanguageSetting/Value as OptionButton
+onready var _font_size_value := $PanelContainer/Column/Margin/Column/Settings/FontSizeSetting/ValueContainer/Value as HSlider
+onready var _font_size_sample := $PanelContainer/Column/Margin/Column/Settings/FontSizeSetting/ValueContainer/SampleText as Label
+onready var _scroll_sensitivity_slider := $PanelContainer/Column/Margin/Column/Settings/ScrollSensitivitySetting/Value as HSlider
 
 onready var _apply_button := $PanelContainer/Column/Margin/Column/Buttons/ApplyButton as Button
 onready var _cancel_button := $PanelContainer/Column/Margin/Column/Buttons/CancelButton as Button
@@ -23,10 +18,14 @@ func _init() -> void:
 
 func _ready() -> void:
 	var current_profile = UserProfiles.get_profile()
-	_font_size_value.value = clamp(int(current_profile.font_size_scale), _font_size_value.min_value, _font_size_value.max_value)
-	
+	_font_size_value.value = clamp(
+		int(current_profile.font_size_scale), _font_size_value.min_value, _font_size_value.max_value
+	)
+	_scroll_sensitivity_slider.value = current_profile.scroll_sensitivity
+
 	_font_size_value.connect("value_changed", self, "_on_font_size_changed")
-	
+	_scroll_sensitivity_slider.connect("value_changed", self, "_on_scroll_sensitivity_slider_value_changed")
+
 	_apply_button.connect("pressed", self, "_on_apply_settings")
 	_cancel_button.connect("pressed", self, "hide")
 
@@ -40,3 +39,7 @@ func _on_font_size_changed(value: int) -> void:
 func _on_apply_settings() -> void:
 	var size_scale := int(_font_size_value.value)
 	ThemeManager.scale_all_font_sizes(size_scale)
+
+
+func _on_scroll_sensitivity_slider_value_changed(value: float) -> void:
+	UserProfiles.get_profile().set_scroll_sensitivity(value)

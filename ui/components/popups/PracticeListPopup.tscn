@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/components/popups/PracticeListPopup.gd" type="Script" id=1]
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=5]
 [ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=7]
+[ext_resource path="res://addons/SmoothScroll/SmoothScrollContainer.gd" type="Script" id=8]
 
 [node name="PracticeListPopup" type="ColorRect"]
 anchor_right = 1.0
@@ -83,6 +84,7 @@ margin_right = 820.0
 margin_bottom = 452.0
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
+script = ExtResource( 8 )
 
 [node name="Items" type="VBoxContainer" parent="PanelContainer/Column/Margin/Column/PracticeList"]
 margin_right = 820.0

@@ -148,6 +148,32 @@ size_flags_horizontal = 3
 text = "Sample text"
 align = 1
 
+[node name="ScrollSensitivitySetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/Settings"]
+margin_top = 187.0
+margin_right = 680.0
+margin_bottom = 215.0
+
+[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/Settings/ScrollSensitivitySetting"]
+margin_right = 332.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Scroll sensitivity"
+
+[node name="Value" type="HSlider" parent="PanelContainer/Column/Margin/Column/Settings/ScrollSensitivitySetting"]
+margin_left = 348.0
+margin_right = 680.0
+margin_bottom = 24.0
+hint_tooltip = "Increase or lower the scrolling speed with the mouse wheel or the touchpad."
+size_flags_horizontal = 3
+custom_styles/grabber_area_highlight = SubResource( 1 )
+custom_styles/grabber_area = SubResource( 2 )
+max_value = 2.0
+step = 0.1
+value = 1.0
+tick_count = 2
+ticks_on_borders = true
+
 [node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column"]
 margin_top = 384.0
 margin_right = 680.0
