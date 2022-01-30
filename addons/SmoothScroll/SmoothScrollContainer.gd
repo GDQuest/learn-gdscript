@@ -23,9 +23,6 @@ const SPEED_DISTANCE_DIVISOR := 200.0
 # Scroll speed in pixels per second.
 var scroll_speed := SPEED_BASE
 var arrive_distance := ARRIVE_DISTANCE_BASE
-# Multiplier that decreases when scroll events are close in time. Helps to
-# make the touchpad and mouse wheel scroll similar.
-var damping_factor := 1.0 setget set_damping_factor
 
 # Current velocity of the content node.
 var _velocity := Vector2(0, 0)
@@ -62,9 +59,7 @@ func _process(delta: float) -> void:
 		set_process(false)
 		return
 
-	var speed_multiplier := max(
-		(distance_to_target - ACCELERATE_DISTANCE_THRESHOLD) / SPEED_DISTANCE_DIVISOR, 1.0
-	)
+	var speed_multiplier := max((distance_to_target - ACCELERATE_DISTANCE_THRESHOLD) / SPEED_DISTANCE_DIVISOR, 1.0)
 	scroll_speed = SPEED_BASE * speed_multiplier
 	arrive_distance = ARRIVE_DISTANCE_BASE * speed_multiplier
 
@@ -78,8 +73,6 @@ func _process(delta: float) -> void:
 
 	_current_scroll += _velocity * delta
 	scroll_vertical = _current_scroll.y
-
-	set_damping_factor(damping_factor + 2.0 * delta)
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -98,13 +91,11 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func scroll_up() -> void:
-	_set_target_position(_target_position + Vector2.UP * MOUSE_SCROLL_STEP * _scroll_sensitivity * damping_factor)
-	set_damping_factor(damping_factor - 0.1)
+	_set_target_position(_target_position + Vector2.UP * MOUSE_SCROLL_STEP * _scroll_sensitivity)
 
 
 func scroll_down() -> void:
-	_set_target_position(_target_position + Vector2.DOWN * MOUSE_SCROLL_STEP * _scroll_sensitivity * damping_factor)
-	set_damping_factor(damping_factor - 0.1)
+	_set_target_position(_target_position + Vector2.DOWN * MOUSE_SCROLL_STEP * _scroll_sensitivity)
 
 
 func scroll_page_up() -> void:
@@ -121,10 +112,6 @@ func scroll_to_top() -> void:
 
 func scroll_to_bottom() -> void:
 	_set_target_position(Vector2.DOWN * _max_position_y)
-
-
-func set_damping_factor(new_value: float) -> void:
-	damping_factor = clamp(new_value, 0.4, 1.0)
 
 
 func _set_target_position(new_position: Vector2) -> void:
