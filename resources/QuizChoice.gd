@@ -1,6 +1,6 @@
-#Fixes a bug where the Course Builder would not react to the command "set_is_multiple_choice"
-tool
 # Quiz based on a single or multiple choice form.
+# The class is set to tool mode to use it in the Course Builder plugin.
+tool
 class_name QuizChoice
 extends Quiz
 

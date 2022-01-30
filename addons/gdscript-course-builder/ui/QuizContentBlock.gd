@@ -6,7 +6,7 @@ signal quiz_resource_changed(previous_quiz, new_quiz)
 
 # Matches the quiz type options indices the user can select using the quiz
 # type OptionButton.
-enum { ITEM_MULTIPLE_CHOICE, ITEM_SINGLE_CHOICE, ITEM_TEXT_INPUT }
+enum { QUIZ_TYPE_MULTIPLE_CHOICE, QUIZ_TYPE_SINGLE_CHOICE, QUIZ_TYPE_TEXT_INPUT }
 
 enum ConfirmMode { REMOVE_BLOCK, CHANGE_QUIZ_TYPE }
 
@@ -17,7 +17,7 @@ const QuizInputFieldScene := preload("QuizInputField.tscn")
 var _quiz: Quiz
 var _list_index := -1
 var _confirm_dialog_mode := -1
-# If cange of quiz type is confirmed, set quiz type to target quiz type option.
+# When the user confirms changing the quiz type, set quiz type to this type option.
 var _change_quiz_type_target := -1
 var _drag_preview_style: StyleBox
 
@@ -71,7 +71,7 @@ func _ready() -> void:
 
 	_confirm_dialog.connect("confirmed", self, "_on_confirm_dialog_confirmed")
 	_confirm_dialog.get_cancel().connect("pressed", self, "_on_confirm_dialog_cancelled")
-	
+
 	_quiz_type_options.connect("item_selected", self, "_on_quiz_type_options_item_selected")
 
 	# Update theme items
@@ -193,21 +193,25 @@ func _on_confirm_dialog_confirmed() -> void:
 		ConfirmMode.REMOVE_BLOCK:
 			emit_signal("block_removed")
 		ConfirmMode.CHANGE_QUIZ_TYPE:
-			_change_quiz_type()
+			_change_quiz_type(_change_quiz_type_target)
 
 	_confirm_dialog_mode = -1
+
 
 func _on_confirm_dialog_cancelled() -> void:
 	if _confirm_dialog_mode == ConfirmMode.CHANGE_QUIZ_TYPE:
 		if _quiz is QuizInputField:
-			_quiz_type_options.selected = 2
+			_quiz_type_options.selected = QUIZ_TYPE_TEXT_INPUT
 		elif _quiz is QuizChoice:
-			_quiz_type_options.selected = 0 if _quiz.is_multiple_choice else 1
+			_quiz_type_options.selected = (
+				QUIZ_TYPE_MULTIPLE_CHOICE
+				if _quiz.is_multiple_choice
+				else QUIZ_TYPE_SINGLE_CHOICE
+			)
 		else:
 			printerr("Trying to load unsupported quiz type: %s" % [_quiz.get_class()])
-		
 		_change_quiz_type_target = -1
-	
+
 	_confirm_dialog_mode = -1
 
 
@@ -236,18 +240,19 @@ func _on_explanation_text_edit_text_changed() -> void:
 func _on_quiz_type_options_item_selected(index: int) -> void:
 	_change_quiz_type_target = index
 	_confirm_dialog_mode = ConfirmMode.CHANGE_QUIZ_TYPE
-	_show_confirm("Are you sure you want to change the quiz type? This may lose all answer data.")
+	_show_confirm("Are you sure you want to change the quiz type? You may lose all answer data.")
 
-func _change_quiz_type(target: int = _change_quiz_type_target) -> void:
-	if target in [ITEM_MULTIPLE_CHOICE, ITEM_SINGLE_CHOICE]:
+
+func _change_quiz_type(target := -1) -> void:
+	if target in [QUIZ_TYPE_MULTIPLE_CHOICE, QUIZ_TYPE_SINGLE_CHOICE]:
 		if _quiz is QuizChoice:
-			_quiz.set_is_multiple_choice(target == ITEM_MULTIPLE_CHOICE)
+			_quiz.set_is_multiple_choice(target == QUIZ_TYPE_MULTIPLE_CHOICE)
 		else:
 			_create_new_quiz_resource(QuizChoice, _quiz)
-	elif target == ITEM_TEXT_INPUT:
+	elif target == QUIZ_TYPE_TEXT_INPUT:
 		_create_new_quiz_resource(QuizInputField, _quiz)
 	else:
-		printerr("Selected unsupported item type: %s" % [target])
+		printerr("Selected unsupported quiz type: %s" % [target])
 
 
 func _create_new_quiz_resource(new_type, from: Quiz) -> void:
