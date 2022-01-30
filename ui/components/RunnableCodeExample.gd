@@ -157,3 +157,6 @@ func _update_gdscript_text_edit_width(new_font_scale: int) -> void:
 		/ _base_text_font_size
 	)
 	_gdscript_text_edit.rect_min_size.y = _start_code_example_height * font_size_multiplier
+	# Forces the text wrapping to update. Without this, the code can overflow
+	# the container when changing the font size.
+	_gdscript_text_edit.rect_size = _gdscript_text_edit.rect_size
