@@ -1,3 +1,5 @@
+#Fixes a bug where the Course Builder would not react to the command "set_is_multiple_choice"
+tool
 # Quiz based on a single or multiple choice form.
 class_name QuizChoice
 extends Quiz
