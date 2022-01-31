@@ -4,6 +4,9 @@ extends Resource
 
 const QueryResult := Documentation.QueryResult
 
+# Uniquely identifies the practice resource.
+export var practice_id := ""
+
 export var title := ""
 export(String, MULTILINE) var goal := ""
 export(String, MULTILINE) var starting_code := ""

@@ -1,28 +1,292 @@
-[gd_resource type="Resource" load_steps=21 format=2]
+[gd_resource type="Resource" load_steps=25 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
-[ext_resource path="res://course/lesson-13-conditions/content-otxF5HUx.tres" type="Resource" id=2]
-[ext_resource path="res://course/lesson-13-conditions/content-DizKUdOC.tres" type="Resource" id=3]
-[ext_resource path="res://course/lesson-13-conditions/content-TRhZN4rS.tres" type="Resource" id=4]
-[ext_resource path="res://course/lesson-13-conditions/content-wQMqAYVj.tres" type="Resource" id=5]
-[ext_resource path="res://course/lesson-13-conditions/content-0c7DDizK.tres" type="Resource" id=6]
-[ext_resource path="res://course/lesson-13-conditions/content-5AJTESv5.tres" type="Resource" id=7]
-[ext_resource path="res://course/lesson-13-conditions/content-dOCQiGjB.tres" type="Resource" id=8]
-[ext_resource path="res://course/lesson-13-conditions/practice-KRHJMQ2X.tres" type="Resource" id=9]
-[ext_resource path="res://course/lesson-13-conditions/content-qdYOexRj.tres" type="Resource" id=10]
-[ext_resource path="res://course/lesson-13-conditions/quiz-j47MqE82.tres" type="Resource" id=11]
-[ext_resource path="res://course/lesson-13-conditions/content-fUqbTxYe.tres" type="Resource" id=12]
-[ext_resource path="res://course/lesson-13-conditions/content-V6jGvGm2.tres" type="Resource" id=13]
-[ext_resource path="res://course/lesson-13-conditions/content-TtcyhcIb.tres" type="Resource" id=14]
-[ext_resource path="res://course/lesson-13-conditions/practice-MqAYVjot.tres" type="Resource" id=15]
-[ext_resource path="res://course/lesson-13-conditions/content-RHJMQ2XN.tres" type="Resource" id=16]
-[ext_resource path="res://course/lesson-13-conditions/content-QiGjB7tK.tres" type="Resource" id=17]
-[ext_resource path="res://course/lesson-13-conditions/content-pPwQDwfy.tres" type="Resource" id=18]
-[ext_resource path="res://course/lesson-13-conditions/quiz-lf8B67UJ.tres" type="Resource" id=19]
-[ext_resource path="res://course/lesson-13-conditions/practice-xZPxY8VU.tres" type="Resource" id=20]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=3]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=4]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-DizKUdOC.tres"
+title = ""
+type = 0
+text = "In previous lessons, we lowered and increased a character's health, but there was no limit to how much health they could have."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-QiGjB7tK.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleHealthFunctions.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-RHJMQ2XN.tres"
+title = ""
+type = 0
+text = "As a result, the player could increase their character's health indefinitely, which we do not want."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-wQMqAYVj.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleHeal.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-13-conditions/quiz-lf8B67UJ.tres"
+question = "What happens to health when we damage our character?"
+content_bbcode = "Suppose our character has [code]100[/code] health.
+
+What would the value of health be if we called [code]take_damage(25)[/code] [b]five times[/b]?"
+hint = ""
+explanation_bbcode = "Calling [code]take_damage(25)[/code] five times would subtract a total of [code]125[/code] from [code]100[/code].
+
+100
+75
+50
+25
+0
+-25"
+answer_options = [ "-25", "25", "0" ]
+valid_answers = [ "-25" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-otxF5HUx.tres"
+title = ""
+type = 0
+text = "We can use conditions to run actions [b]selectively[/b].
+
+Conditions make your code branch into two paths: if the condition is met, the computer will run the corresponding instructions. Otherwise, those instructions do not run at all."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-pPwQDwfy.tres"
+title = ""
+type = 0
+text = "Video games and other computer programs are full of conditions. For example, game input largely relies on conditions: [i]if[/i] the player presses the button on a gamepad, the character jumps."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-qdYOexRj.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleJump.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-TRhZN4rS.tres"
+title = ""
+type = 0
+text = "When the computer checks a condition, this is called [b]to evaluate[/b] a condition. All conditions [b]evaluate[/b] to either [code]true[/code] or [code]false[/code].
+
+Either the player is pressing the button, or not. Either the character is touching an enemy, or not. 
+
+In our case, [i]if[/i] the health goes over a maximum, we want to reset it to the maximum.
+
+To define a condition, we use the [code]if[/code] keyword. We write a line starting with [code]if[/code], type the condition to evaluate, and end the line with a colon."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-TtcyhcIb.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleHealthLimitUpper.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-0c7DDizK.tres"
+title = ""
+type = 0
+text = "Notice the [code]>[/code] comparison sign. We read this symbol as \"greater than\". 
+
+We've seen how function definitions use a colon at the end of the first line and nest content inside.
+
+In GDScript, this syntax is a recurring pattern for all code blocks.
+
+The computer knows which instructions belong to the condition because they are indented."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-5AJTESv5.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleHealLimited.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-fUqbTxYe.tres"
+title = "Comparisons"
+type = 0
+text = "In the above example, we used the [code]>[/code] syntax to mean \"greater than\".
+
+We can compare numbers in other ways too.
+
+[code]>[/code] means \"greater than\"
+[code]<[/code] means \"less than\"
+[code]==[/code] means \"equal to\"
+[code]!=[/code] means \"not equal to\"
+
+Here's how we might use these in [code]if[/code] statements.
+"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-dOCQiGjB.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleComparisons.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-13-conditions/quiz-j47MqE82.tres"
+question = "Which of these statements are true?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "The comparison [code]3 > 1[/code] means \"three is greater than one\" which is [b]true[/b].
+The comparison [code]2 < 3[/code] means \"two is less than three\" which is [b]true[/b].
+The comparison [code]1 != 3[/code] means \"one is not equal to three\" which is [b]true[/b].
+
+The comparison [code]2 == 1[/code] means \"two is equal to one\" which is [b]false[/b].
+The comparison [code]3 < 1[/code] means \"three is less than one\" which is [b]false[/b]."
+answer_options = [ "3 > 1", "2 == 1", "2 < 3", "1 != 3", "3 < 1" ]
+valid_answers = [ "3 > 1", "2 < 3", "1 != 3" ]
+is_multiple_choice = true
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-V6jGvGm2.tres"
+title = ""
+type = 0
+text = "In the following practices, we'll use conditions and improve the way our character's health changes so it has limits."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-13-conditions/practice-KRHJMQ2X.tres"
+title = "Using Comparisons"
+goal = "This series of [code]if[/code] statements is all wrong. Change the comparisons so each comparison matches the instruction below it.
+
+Keep the values and statements as they are; only change the comparison signs.
+
+As a reminder, the comparison signs are:
+[code]
+> greater than
+< less than
+== equal to
+!= not equal to
+[/code]
+
+The line [code]health < 5:[/code] means \"health is less than 5\". 
+
+Because [code]health = 100[/code], this is false so [code]print(\"health is greater than five.\")[/code] won't run."
+starting_code = "var health = 100
+
+if health < 5:
+	print(\"health is greater than five.\")
+
+if 1 > health:
+	print(\"One is less than health.\")
+
+if health < health:
+	print(\"health is equal to health\")
+
+if health < 7:
+	print(\"health is not equal to seven.\")"
+hints = PoolStringArray( "Only alter the [code] > < == != [/code] symbols", "The messages will only show if the comparisons are true" )
+validator_script_path = "using_conditions/TestUsingConditions.gd"
+script_slice_path = "using_conditions/UsingConditions.live-editor/slices/UsingConditions.conditions.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 2 )
+description = "Comparing values allows us to make decisions in code. But there's something wrong with these statements.."
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-13-conditions/practice-MqAYVjot.tres"
+title = "Limiting Healing"
+goal = "We have a heal function that adds an amount to the character's health.
+
+Add to the function so the character's health is never greater than [code]80[/code]."
+starting_code = "func heal(amount):
+	health += amount"
+hints = PoolStringArray( " You can use a condition to check if the health is above 80", "You need to reset the health to 80 when the health value goes above 80", "Use the line [code]if health > 80:[/code] to do this" )
+validator_script_path = "limiting_health/TestLimitingHealth.gd"
+script_slice_path = "limiting_health/LimitingHealth.live-editor/slices/LimitingHealth.heal.slice.tres"
+documentation_references = PoolStringArray( "heal" )
+documentation_resource = ExtResource( 2 )
+description = "As much as we might like, we don't want our robot to have too much health. Limit how much healing the robot can take."
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-13-conditions/practice-xZPxY8VU.tres"
+title = "Preventing Health from Going Below Zero"
+goal = "When the robot takes damage, its health can be negative.
+
+We might want to want to display the health number on screen, like in Japanese RPGs.
+
+We don't want negative numbers: we want instead to stop at zero.
+
+Replace [code]pass[/code] with code that reduces [code]health[/code] by [code]amount[/code].
+
+If [code]health[/code] goes below [code]0[/code], set it to [code]0[/code] again."
+starting_code = "func take_damage(amount):
+	pass"
+hints = PoolStringArray( "You can use a condition to check if the health goes below zero", "You need to decrease health by the received amount", "You need to reset the health to [code]0[/code] when the health value goes below [code]0[/code]" )
+validator_script_path = "prevent_zero_health/TestPreventZeroHealth.gd"
+script_slice_path = "prevent_zero_health/PreventZeroHealth.live-editor/slices/PreventZeroHealth.damage.slice.tres"
+documentation_references = PoolStringArray( "take_damage" )
+documentation_resource = ExtResource( 2 )
+description = "Having a negative health value doesn't make a lot of sense. Make sure the robot's health can't go below zero."
 
 [resource]
 script = ExtResource( 1 )
 title = "Conditions"
-content_blocks = [ ExtResource( 3 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 5 ), ExtResource( 19 ), ExtResource( 2 ), ExtResource( 18 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 14 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 13 ) ]
-practices = [ ExtResource( 9 ), ExtResource( 15 ), ExtResource( 20 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ]
+practices = [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ]

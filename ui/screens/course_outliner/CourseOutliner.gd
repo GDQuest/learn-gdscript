@@ -128,9 +128,19 @@ func _on_lesson_reading_block(block_data: Resource, previous_blocks: Array = [])
 	var user_profile = UserProfiles.get_profile()
 	# Ensure that all previous blocks are also considered as read.
 	for prev_block_data in previous_blocks:
-		user_profile.set_lesson_reading_block(course.resource_path, _current_lesson.resource_path, prev_block_data.resource_path)
+		var block_id := ""
+		if prev_block_data is Quiz:
+			block_id = prev_block_data.quiz_id
+		else:
+			block_id = prev_block_data.content_id
+		user_profile.set_lesson_reading_block(course.resource_path, _current_lesson.resource_path, block_id)
 	# Then set the last block.
-	user_profile.set_lesson_reading_block(course.resource_path, _current_lesson.resource_path, block_data.resource_path)
+	var block_id := ""
+	if block_data is Quiz:
+		block_id = (block_data as Quiz).quiz_id
+	else:
+		block_id = (block_data as ContentBlock).content_id
+	user_profile.set_lesson_reading_block(course.resource_path, _current_lesson.resource_path, block_id)
 	_update_outliner_index()
 
 
@@ -139,7 +149,7 @@ func _on_quiz_completed(quiz_data: Quiz) -> void:
 		return
 
 	var user_profile = UserProfiles.get_profile()
-	user_profile.set_lesson_quiz_completed(course.resource_path, _current_lesson.resource_path, quiz_data.resource_path, true)
+	user_profile.set_lesson_quiz_completed(course.resource_path, _current_lesson.resource_path, quiz_data.quiz_id, true)
 	_update_outliner_index()
 
 
@@ -158,7 +168,7 @@ func _on_practice_completed(practice_data: Practice) -> void:
 		return
 
 	var user_profile = UserProfiles.get_profile()
-	user_profile.set_lesson_practice_completed(course.resource_path, _current_lesson.resource_path, practice_data.resource_path, true)
+	user_profile.set_lesson_practice_completed(course.resource_path, _current_lesson.resource_path, practice_data.practice_id, true)
 	_update_outliner_index()
 	_current_practice = null
 

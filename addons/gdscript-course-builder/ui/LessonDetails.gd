@@ -222,8 +222,7 @@ func _on_content_block_added(at_index: int = -1) -> void:
 		return
 
 	var block_data = ContentBlock.new()
-	var block_path = FileUtils.generate_random_lesson_subresource_path(_edited_lesson)
-	block_data.take_over_path(block_path)
+	block_data.content_id = FileUtils.generate_random_lesson_subresource_path(_edited_lesson, "content")
 
 	if at_index >= 0 and at_index < _edited_lesson.content_blocks.size():
 		_edited_lesson.content_blocks.insert(at_index, block_data)
@@ -240,8 +239,7 @@ func _on_quiz_added(at_index: int = -1) -> void:
 		return
 
 	var block_data := QuizChoice.new()
-	var block_path = FileUtils.generate_random_lesson_subresource_path(_edited_lesson, "quiz")
-	block_data.take_over_path(block_path)
+	block_data.quiz_id = FileUtils.generate_random_lesson_subresource_path(_edited_lesson, "quiz")
 
 	if at_index >= 0 and at_index < _edited_lesson.content_blocks.size():
 		_edited_lesson.content_blocks.insert(at_index, block_data)
@@ -296,10 +294,9 @@ func _on_practice_added(at_index: int = -1) -> void:
 		return
 
 	var practice_data = Practice.new()
-	var practice_path = FileUtils.generate_random_lesson_subresource_path(
+	practice_data.practice_id = FileUtils.generate_random_lesson_subresource_path(
 		_edited_lesson, "practice"
 	)
-	practice_data.take_over_path(practice_path)
 
 	if at_index >= 0 and at_index < _edited_lesson.practices.size():
 		_edited_lesson.practices.insert(at_index, practice_data)

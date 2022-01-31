@@ -62,9 +62,9 @@ func _init():
 	_run_autotimer.one_shot = true
 	_run_autotimer.wait_time = RUN_AUTOTIMER_DURATION
 	add_child(_run_autotimer)
-	
+
 	_run_autotimer.connect("timeout", self, "_on_autotimer_timeout")
-	
+
 	_on_init_set_javascript()
 
 
@@ -78,18 +78,18 @@ func _ready() -> void:
 	_code_editor.connect("console_toggled", self, "_on_console_toggled")
 	_output_console.connect("reference_clicked", self, "_on_code_reference_clicked")
 	_use_solution_button.connect("pressed", self, "_on_use_solution_pressed")
-	
+
 	_practice_progress.connect("previous_requested", self, "_on_previous_requested")
 	_practice_progress.connect("next_requested", self, "_on_next_requested")
 	_practice_progress.connect("list_requested", self, "_on_list_requested")
-	
+
 	_practice_done_popup.connect("accepted", self, "_on_next_requested")
-	
+
 	Events.connect("practice_run_completed", self, "_test_student_code")
 
 	_update_slidable_panels()
 	_layout_container.connect("resized", self, "_update_slidable_panels")
-	
+
 	_solution_panel.modulate.a = 0.0
 	_solution_panel.margin_left = _output_anchors.rect_size.x
 
@@ -126,8 +126,10 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 		_hints_container.add_child(practice_hint)
 		index += 1
 
+	# TODO: Should probably avoid relying on content ID for getting paths.
+	var base_directory := practice.practice_id.get_base_dir()
+
 	var slice_path := practice.script_slice_path
-	var base_directory := practice.resource_path.get_base_dir()
 	if slice_path.is_rel_path():
 		slice_path = base_directory.plus_file(slice_path)
 	_set_script_slice(load(slice_path))
@@ -157,13 +159,13 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 		var practice_max := lesson.practices.size() - 1
 		_practice_progress.set_previous_enabled(practice_index > 0)
 		_practice_progress.set_next_enabled(practice_index < practice_max)
-	
+
 		_practice_list.clear_items()
 		for practice_data in lesson.practices:
 			_practice_list.add_item(practice_data, lesson, course, practice_data == practice)
-		
+
 		var user_profile := UserProfiles.get_profile()
-		var completed_before = user_profile.is_lesson_practice_completed(course.resource_path, lesson.resource_path, practice.resource_path)
+		var completed_before = user_profile.is_lesson_practice_completed(course.resource_path, lesson.resource_path, practice.practice_id)
 		if completed_before:
 			_info_panel.set_status_icon(_info_panel.Status.COMPLETED_BEFORE)
 
@@ -183,16 +185,16 @@ func _set_script_slice(new_slice: SliceProperties) -> void:
 func _validate_and_run_student_code() -> void:
 	# Prepare everything for testing user code.
 	_game_view.paused = false
-	
+
 	_code_editor.lock_editor()
 	_code_editor.set_pause_button_pressed(false)
 	_code_editor.set_locked_message("Validating Your Code...")
 	_hide_solution_panel()
 	_code_editor.set_solution_button_pressed(false)
-	
+
 	_output_console.clear_messages()
 	_info_panel.reset_tests_status()
-	
+
 	_disable_distraction_free_mode()
 
 	# Complete the script from the slice and the base script.
@@ -216,11 +218,11 @@ func _validate_and_run_student_code() -> void:
 	var errors: Array = yield(verifier, "errors")
 	if not errors.empty():
 		_code_editor.slice_editor.errors = errors
-		
+
 		for index in errors.size():
 			var error: LanguageServerError = errors[index]
 			MessageBus.print_lsp_error(error, script_file_name)
-		
+
 		# If the user could not connect to the server, still try to run their code.
 		var is_connection_error: bool = (
 			errors.size() == 1 and \
@@ -229,7 +231,7 @@ func _validate_and_run_student_code() -> void:
 		if not is_connection_error:
 			_code_editor.unlock_editor()
 			return
-	
+
 	_run_student_code()
 
 
@@ -241,7 +243,7 @@ func _run_student_code() -> void:
 	# Generate a runnable script, check for uncaught errors.
 	_code_editor.set_locked_message("Running Your Code...")
 	yield(get_tree(), "idle_frame")
-	
+
 	script_text = MessageBus.replace_script(script_file_name, script_text)
 	var script = GDScript.new()
 	script.source_code = script_text
@@ -252,7 +254,7 @@ func _run_student_code() -> void:
 		MessageBus.print_lsp_error(error, script_file_name)
 		_code_editor.unlock_editor()
 		return
-	
+
 	_code_editor_is_dirty = false
 
 	# Start the auto-timer used to perform tests in case the scene doesn't emit the required signal.
@@ -266,9 +268,9 @@ func _test_student_code() -> void:
 	if not _run_tests_requested:
 		return
 	_run_tests_requested = false
-	
+
 	var script_file_name := _script_slice.get_script_properties().file_name
-	
+
 	# Run tests on the scene.
 	_code_editor.set_locked_message("Running Tests...")
 	_info_panel.set_tests_pending()
@@ -276,17 +278,17 @@ func _test_student_code() -> void:
 	var result := _tester.run_tests()
 	_info_panel.set_tests_status(result, script_file_name)
 	yield(_info_panel, "tests_updated")
-	
+
 	# Show the end of practice popup.
 	if not _practice_completed and result.is_success():
 		_practice_completed = true
-		
+
 		if not _practice_solution_used:
 			Events.emit_signal("practice_completed", _practice)
-		
+
 		_practice_done_popup.show()
 		_practice_done_popup.fade_in(_game_container)
-	
+
 	# Clean-up.
 	_code_editor.unlock_editor()
 	if _practice_completed:
@@ -295,11 +297,11 @@ func _test_student_code() -> void:
 
 func _reset_practice() -> void:
 	# Code is already reset by the slice editor.
-	
+
 	_info_panel.reset_tests_status()
 	_code_editor.slice_editor.errors = []
 	_output_console.clear_messages()
-	
+
 	if _current_scene.has_method("reset"):
 		_current_scene.call("reset")
 
@@ -307,14 +309,14 @@ func _reset_practice() -> void:
 func _update_slidable_panels() -> void:
 	# Wait a frame to make sure the new size has been applied.
 	yield(get_tree(), "idle_frame")
-	
+
 	# We use _output_anchors for reference because it never leaves the screen, so we can rely on it
 	# to always report the target size for one third of the hbox.
-	
+
 	# Update info panel.
 	_info_panel.rect_min_size = Vector2(_output_anchors.rect_size.x, 0)
 	_info_panel.set_anchors_and_margins_preset(Control.PRESET_WIDE, Control.PRESET_MODE_MINSIZE)
-		
+
 	# Update solution panel.
 	_solution_panel.rect_min_size = Vector2(_output_anchors.rect_size.x, 0)
 	_solution_panel.set_anchors_and_margins_preset(Control.PRESET_WIDE, Control.PRESET_MODE_MINSIZE)
@@ -331,10 +333,10 @@ func _toggle_distraction_free_mode() -> void:
 
 func _disable_distraction_free_mode() -> void:
 	_update_slidable_panels()
-	
+
 	_is_info_panel_open = true
 	_tween.stop_all()
-	
+
 	_tween.interpolate_property(
 		_info_panel_anchors,
 		"size_flags_stretch_ratio",
@@ -362,17 +364,17 @@ func _disable_distraction_free_mode() -> void:
 		Tween.TRANS_LINEAR,
 		Tween.EASE_IN
 	)
-	
+
 	_tween.start()
 	_code_editor.set_distraction_free_state(not _is_info_panel_open)
 
 
 func _enable_distraction_free_mode() -> void:
 	_update_slidable_panels()
-	
+
 	_is_info_panel_open = false
 	_tween.stop_all()
-	
+
 	_tween.interpolate_property(
 		_info_panel_anchors,
 		"size_flags_stretch_ratio",
@@ -401,7 +403,7 @@ func _enable_distraction_free_mode() -> void:
 		Tween.EASE_IN,
 		0.15
 	)
-	
+
 	_tween.start()
 	_code_editor.set_distraction_free_state(not _is_info_panel_open)
 
@@ -415,7 +417,7 @@ func _toggle_solution_panel() -> void:
 
 func _show_solution_panel() -> void:
 	_update_slidable_panels()
-	
+
 	_is_solution_panel_open = true
 	_tween.stop_all()
 
@@ -428,7 +430,7 @@ func _show_solution_panel() -> void:
 		Tween.TRANS_SINE,
 		Tween.EASE_IN_OUT
 	)
-	
+
 	_tween.interpolate_property(
 		_solution_panel,
 		"modulate:a",
@@ -438,16 +440,16 @@ func _show_solution_panel() -> void:
 		Tween.TRANS_LINEAR,
 		Tween.EASE_IN
 	)
-	
+
 	_tween.start()
 
 
 func _hide_solution_panel() -> void:
 	_update_slidable_panels()
-	
+
 	_is_solution_panel_open = false
 	_tween.stop_all()
-	
+
 	_tween.interpolate_property(
 		_solution_panel,
 		"margin_left",
@@ -457,7 +459,7 @@ func _hide_solution_panel() -> void:
 		Tween.TRANS_SINE,
 		Tween.EASE_IN_OUT
 	)
-	
+
 	_tween.interpolate_property(
 		_solution_panel,
 		"modulate:a",
@@ -468,16 +470,16 @@ func _hide_solution_panel() -> void:
 		Tween.EASE_IN,
 		0.15
 	)
-	
+
 	_tween.start()
 
 
 func _on_use_solution_pressed() -> void:
 	_code_editor.slice_editor.sync_text_with_slice()
-	
+
 	_practice_solution_used = true
 	_info_panel.set_status_icon(_info_panel.Status.SOLUTION_USED)
-	
+
 	_hide_solution_panel()
 	_code_editor.set_solution_button_pressed(false)
 	_code_editor.set_restore_allowed(true)
@@ -514,14 +516,14 @@ func _on_code_reference_clicked(_file_name: String, line: int, character: int) -
 func _on_previous_requested() -> void:
 	if not _practice:
 		return
-	
+
 	Events.emit_signal("practice_previous_requested", _practice)
 
 
 func _on_next_requested() -> void:
 	if not _practice:
 		return
-	
+
 	Events.emit_signal("practice_next_requested", _practice)
 
 

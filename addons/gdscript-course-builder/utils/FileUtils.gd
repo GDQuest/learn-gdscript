@@ -23,20 +23,22 @@ static func save_course(course: Course, file_path: String) -> bool:
 			lesson_data.take_over_path(resource_path)
 
 		for block_data in lesson_data.content_blocks:
-			if block_data.resource_path.begins_with("lesson-"):
-				var resource_path = base_path.plus_file(block_data.resource_path)
-				block_data.take_over_path(resource_path)
-			if moved_path:
-				var resource_path = block_data.resource_path.replace(old_base_path, base_path)
-				block_data.take_over_path(resource_path)
+			if block_data is Quiz:
+				if block_data.quiz_id.begins_with("lesson-"):
+					block_data.quiz_id = base_path.plus_file(block_data.quiz_id)
+				if moved_path:
+					block_data.quiz_id = block_data.quiz_id.replace(old_base_path, base_path)
+			else:
+				if block_data.content_id.begins_with("lesson-"):
+					block_data.content_id = base_path.plus_file(block_data.content_id)
+				if moved_path:
+					block_data.content_id = block_data.content_id.replace(old_base_path, base_path)
 
 		for practice_data in lesson_data.practices:
-			if practice_data.resource_path.begins_with("lesson-"):
-				var resource_path = base_path.plus_file(practice_data.resource_path)
-				practice_data.take_over_path(resource_path)
+			if practice_data.practice_id.begins_with("lesson-"):
+				practice_data.practice_id = base_path.plus_file(practice_data.practice_id)
 			if moved_path:
-				var resource_path = practice_data.resource_path.replace(old_base_path, base_path)
-				practice_data.take_over_path(resource_path)
+				practice_data.practice_id = practice_data.practice_id.replace(old_base_path, base_path)
 
 	# Start saving resources, top to bottom.
 	var error = ResourceSaver.save(file_path, course)
@@ -64,30 +66,6 @@ static func save_course(course: Course, file_path: String) -> bool:
 			)
 			had_errors = true
 			continue
-
-		for block_data in lesson_data.content_blocks:
-			error = ResourceSaver.save(block_data.resource_path, block_data)
-			if not error == OK:
-				printerr(
-					(
-						"Failed to save the ContentBlock resource at '%s', error code: %d"
-						% [block_data.resource_path, error]
-					)
-				)
-				had_errors = true
-				continue
-
-		for practice_data in lesson_data.practices:
-			error = ResourceSaver.save(practice_data.resource_path, practice_data)
-			if not error == OK:
-				printerr(
-					(
-						"Failed to save the Practice resource at '%s', error code: %d"
-						% [practice_data.resource_path, error]
-					)
-				)
-				had_errors = true
-				continue
 
 	return not had_errors
 
@@ -121,7 +99,7 @@ static func slugged_lesson_path(course: Course, slug: String) -> String:
 	var lesson_slug = "lesson-%s" % [slug]
 	return base_path.plus_file(lesson_slug).plus_file("lesson.tres")
 
-static func generate_random_lesson_subresource_path(lesson: Lesson, kind := "content") -> String:
+static func generate_random_lesson_subresource_path(lesson: Lesson, kind: String) -> String:
 	var _file_tester := Directory.new()
 	var base_path = lesson.resource_path.get_base_dir()
 	assert(
@@ -147,12 +125,12 @@ static func pack_playable_scene(instance: Node, base_path: String, keyword: Stri
 	if error != OK:
 		printerr("Failed to pack the %s scene from the instance '%s': Error code %d" % [keyword, instance, error])
 		return null
-	
+
 	var practice_path = base_path.plus_file("test-%s.tscn" % [keyword])
 	error = ResourceSaver.save(practice_path, packed_instance)
 	if error != OK:
 		printerr("Failed to save the %s scene at '%s': Error code %d" % [keyword, practice_path, error])
 		return null
-	
+
 	packed_instance.take_over_path(practice_path)
 	return packed_instance

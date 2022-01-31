@@ -262,7 +262,6 @@ func _create_new_quiz_resource(new_type, from: Quiz) -> void:
 	_quiz.question = from.question
 	_quiz.hint = from.hint
 	_quiz.explanation_bbcode = from.explanation_bbcode
-	_quiz.take_over_path(previous_quiz.resource_path)
 	emit_signal("quiz_resource_changed", previous_quiz, _quiz)
 	_rebuild_answers()
 

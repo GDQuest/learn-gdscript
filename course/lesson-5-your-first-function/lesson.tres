@@ -1,28 +1,273 @@
-[gd_resource type="Resource" load_steps=21 format=2]
+[gd_resource type="Resource" load_steps=25 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
-[ext_resource path="res://course/lesson-5-your-first-function/content-5AJTESv5.tres" type="Resource" id=2]
-[ext_resource path="res://course/lesson-5-your-first-function/content-RHJMQ2XN.tres" type="Resource" id=3]
-[ext_resource path="res://course/lesson-5-your-first-function/content-QiGjB7tK.tres" type="Resource" id=4]
-[ext_resource path="res://course/lesson-5-your-first-function/content-pPwQDwfy.tres" type="Resource" id=5]
-[ext_resource path="res://course/lesson-5-your-first-function/content-wQMqAYVj.tres" type="Resource" id=6]
-[ext_resource path="res://course/lesson-5-your-first-function/content-qdYOexRj.tres" type="Resource" id=7]
-[ext_resource path="res://course/lesson-5-your-first-function/content-ZPxY8VUD.tres" type="Resource" id=8]
-[ext_resource path="res://course/lesson-5-your-first-function/content-TRhZN4rS.tres" type="Resource" id=9]
-[ext_resource path="res://course/lesson-5-your-first-function/content-otxF5HUx.tres" type="Resource" id=10]
-[ext_resource path="res://course/lesson-5-your-first-function/content-TtcyhcIb.tres" type="Resource" id=11]
-[ext_resource path="res://course/lesson-5-your-first-function/content-tT6n1Txl.tres" type="Resource" id=12]
-[ext_resource path="res://course/lesson-5-your-first-function/content-BWNbDGt6.tres" type="Resource" id=14]
-[ext_resource path="res://course/lesson-5-your-first-function/content-DizKUdOC.tres" type="Resource" id=15]
-[ext_resource path="res://course/lesson-5-your-first-function/practice-QiGjB7tK.tres" type="Resource" id=16]
-[ext_resource path="res://course/lesson-5-your-first-function/practice-kGx0c7DD.tres" type="Resource" id=17]
-[ext_resource path="res://course/lesson-5-your-first-function/quiz-ww4P4Yb0.tres" type="Resource" id=18]
-[ext_resource path="res://course/lesson-5-your-first-function/quiz-jB7tKRHJ.tres" type="Resource" id=19]
-[ext_resource path="res://course/lesson-5-your-first-function/content-Gx0c7DDi.tres" type="Resource" id=20]
-[ext_resource path="res://course/lesson-5-your-first-function/content-fUqbTxYe.tres" type="Resource" id=21]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=3]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=4]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-5-your-first-function/content-DizKUdOC.tres"
+title = ""
+type = 0
+text = "So far, we called existing functions that other developers wrote.
+
+In this lesson, we'll talk more about what functions are and see some examples. Then, you will learn to define your own."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-5-your-first-function/content-TtcyhcIb.tres"
+title = "Functions are named sequences of instructions"
+type = 0
+text = "Functions are [i]sequences of instructions[/i] we give a name. We call that name an [i]identifier[/i].
+
+Using the identifier, we can get the computer to execute all the instructions inside the function as many times as we need. This is what a [i]function call[/i] does."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-5-your-first-function/content-QiGjB7tK.tres"
+title = ""
+type = 1
+text = "In computer programming, we talk about [i]identifiers[/i] rather than \"names\".
+
+It is because a function name is a label the computer uses to precisely [i]identify[/i] and refer to a function or other code elements.
+
+Identifiers are unique: you cannot reuse the same name in a given [i]space[/i] in your code.
+
+If you try to name two functions the same, the computer will raise an error."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-5-your-first-function/content-RHJMQ2XN.tres"
+title = ""
+type = 0
+text = "If there is any code that you need to run multiple times, you can put it inside a function and give it a name.
+
+The instructions inside a function can be any code you want, and they will all run every time you call the function.
+
+Here's the example of a [code]move_and_rotate()[/code] function that moves the turtle forward and then turns it 90°."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-5-your-first-function/content-wQMqAYVj.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ExampleMoveAndRotate.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-5-your-first-function/content-otxF5HUx.tres"
+title = ""
+type = 0
+text = "The [code]move_and_rotate()[/code] function consists of two instructions, each on a separate line. Both of those instructions call another familiar function.
+
+You could write another function that calls [code]move_and_rotate()[/code] four times to draw a square of length 200 pixels."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-5-your-first-function/content-ZPxY8VUD.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ExampleDrawSquare.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-5-your-first-function/content-pPwQDwfy.tres"
+title = ""
+type = 0
+text = "Every time we call [code]move_and_rotate()[/code], the two functions [code]move_forward(200)[/code] and [code]turn_right(90)[/code] are in turn called sequentially.
+
+In this simple example, it may not feel super useful. Here's a more useful and realistic one: a function to draw any rectangle.
+
+The following function uses [i]parameters[/i], which we will explore in the next lesson.
+
+[i]Drag the slider to change the square's size.[/i]"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-5-your-first-function/content-Gx0c7DDi.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "../lesson-6-multiple-function-parameters/visuals/ExampleDrawAnySquare.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-5-your-first-function/content-qdYOexRj.tres"
+title = "How to define your own functions"
+type = 0
+text = "Let's break down how you define a function.
+
+A function definition starts with the [code]func[/code] keyword followed by a space, the function's name, parentheses, and a colon."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-5-your-first-function/content-TRhZN4rS.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "VisualFunctionDefinition.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-5-your-first-function/content-5AJTESv5.tres"
+title = ""
+type = 0
+text = "The instructions inside the function [b]must[/b] all start with a leading tab character. You can insert that tab character by pressing the [b]Tab[/b] key.
+
+We call those leading tabs [i]indents[/i]. They're important: the computer uses them to know which instructions are part of the same code block."
+visual_element_path = "ExampleFunctionBody.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-5-your-first-function/quiz-ww4P4Yb0.tres"
+question = "Why do we use functions?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "Functions are groups of instructions we reuse every time we call the function.
+
+Because we give functions a name, they also allow us to name a set of instructions, which is handy!"
+answer_options = [ "To reuse code multiple times. ", "To run multiple instructions at once.", "To put a name on multiple lines of code." ]
+valid_answers = [ "To reuse code multiple times. ", "To run multiple instructions at once.", "To put a name on multiple lines of code." ]
+is_multiple_choice = true
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-5-your-first-function/content-tT6n1Txl.tres"
+title = "Names in code have rules"
+type = 0
+text = "Function identifiers cannot contain spaces. In general, names in programming languages cannot contain spaces.
+
+This is because the computer uses spaces to detect the separation between different keywords and identifiers.
+
+Instead of spaces, in GDScript, we use underscores (\"_\"). You saw this already with functions like [code]move_forward()[/code] or [code]move_local_x()[/code].
+
+Identifiers also have to start with a letter or an underscore; You [i]can't[/i] start with a number, but you can use numbers after the first character."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-5-your-first-function/quiz-jB7tKRHJ.tres"
+question = "Which of the following names are valid function names?"
+content_bbcode = "Note that it's fine to use capital letters."
+hint = ""
+explanation_bbcode = "You can't name a function [code]move forward[/code] because it contains a space. Names in code cannot contain spaces.
+
+They can't start with numbers either, which is why [code]45_degree_turn[/code] is also invalid. 
+
+However, having numbers elsewhere in a function name is fine. That's why [code]make3NewCharacters[/code] works."
+answer_options = [ "move forward", "jump", "make3NewCharacters", "move_forward", "45_degree_turn" ]
+valid_answers = [ "jump", "make3NewCharacters", "move_forward" ]
+is_multiple_choice = true
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-5-your-first-function/content-BWNbDGt6.tres"
+title = "Instantly moving the turtle to a different position"
+type = 0
+text = "In order to draw multiple squares in different positions, we introduce a new function for our turtle to use.
+
+The [code]jump()[/code] function picks up the turtle and places it relative to where it is.
+
+So calling [code]jump(-100, 50)[/code] moves the turtle by 100 pixels to the [b]left[/b] and 50 pixels [b]down[/b] without drawing any lines."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-5-your-first-function/content-fUqbTxYe.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ExampleJumpingTurtle.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-5-your-first-function/practice-QiGjB7tK.tres"
+title = "A function to draw squares"
+goal = "Code a function named [code]draw_square()[/code] to draw one square of length 200 pixels. The function should take no parameters.
+
+Use the [code]move_forward()[/code] and [code]turn_right()[/code] functions to instruct the turtle.
+
+In the following practice, you'll use the [code]draw_square()[/code] function to draw multiple squares by calling your own function."
+starting_code = ""
+hints = PoolStringArray( "The function body will be very similar to what you did in the previous practice.", "Don\'t forget to add a leading Tab character to every line inside the function.", "The function definition (the first line) should be [code]func draw_square():[/code]" )
+validator_script_path = "TestsDrawingSquare.gd"
+script_slice_path = "drawing_squares/DrawingSquares.live-editor/slices/DrawingSquares.draw_square.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 2 )
+description = "Until now, you've had to write code by hand, and it's boring. It's time to code a reusable function. You'll use it to draw multiple squares."
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-5-your-first-function/practice-kGx0c7DD.tres"
+title = "Drawing multiple squares"
+goal = "You have a function to draw one square: [code]draw_square()[/code]. Use it to draw three squares.
+
+We already created [code]draw_square()[/code] for you. Create a function named [code]draw_three_squares[/code] that calls [code]draw_square()[/code] three times.
+
+If you just call the function, all three squares will overlap. To stack them diagonally, call [code]jump(300, 300)[/code] between two calls to [code]draw_square()[/code].
+
+Calling [code]jump(300, 300)[/code] makes the turtle jump by 300 pixels to the right and 300 pixels down without drawing any lines."
+starting_code = "func draw_square():
+	move_forward(200)
+	turn_right(90)
+	move_forward(200)
+	turn_right(90)
+	move_forward(200)
+	turn_right(90)
+	move_forward(200)
+	turn_right(90)"
+hints = PoolStringArray( "You need to define a new function below draw_square() named [code]draw_three_squares().[/code]", "Your new function should call [code]draw_square()[/code] three times, on three different lines.", "Between each call to [code]draw_square[/code], there should be a call to [code]jump(300,300)[/code]" )
+validator_script_path = "TestsDrawingThreeSquares.gd"
+script_slice_path = "drawing_multiple_squares/DrawingMultipleSquares.live-editor/slices/DrawingMultipleSquares.draw_three_squares.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 2 )
+description = "Now you created a function to draw squares, you can reuse it by calling it multiple times."
 
 [resource]
 script = ExtResource( 1 )
 title = "Coding Your First Function"
-content_blocks = [ ExtResource( 15 ), ExtResource( 11 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 20 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 2 ), ExtResource( 18 ), ExtResource( 12 ), ExtResource( 19 ), ExtResource( 14 ), ExtResource( 21 ) ]
-practices = [ ExtResource( 16 ), ExtResource( 17 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ]
+practices = [ SubResource( 18 ), SubResource( 19 ) ]

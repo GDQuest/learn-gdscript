@@ -1,32 +1,295 @@
-[gd_resource type="Resource" load_steps=25 format=2]
+[gd_resource type="Resource" load_steps=29 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
-[ext_resource path="res://course/lesson-12-using-variables/content-KUdOCQiG.tres" type="Resource" id=2]
-[ext_resource path="res://course/lesson-12-using-variables/content-jB7tKRHJ.tres" type="Resource" id=3]
-[ext_resource path="res://course/lesson-12-using-variables/quiz-MQ2XNwQM.tres" type="Resource" id=4]
-[ext_resource path="res://course/lesson-12-using-variables/content-qAYVjotx.tres" type="Resource" id=5]
-[ext_resource path="res://course/lesson-12-using-variables/content-F5HUxZPx.tres" type="Resource" id=6]
-[ext_resource path="res://course/lesson-12-using-variables/content-Y8VUDpPw.tres" type="Resource" id=7]
-[ext_resource path="res://course/lesson-12-using-variables/content-QDwfyqdY.tres" type="Resource" id=8]
-[ext_resource path="res://course/lesson-12-using-variables/content-ZN4rS5AJ.tres" type="Resource" id=9]
-[ext_resource path="res://course/lesson-12-using-variables/content-OexRjTRh.tres" type="Resource" id=10]
-[ext_resource path="res://course/lesson-12-using-variables/content-yhcIb5Bn.tres" type="Resource" id=11]
-[ext_resource path="res://course/lesson-12-using-variables/quiz-n1TxlTtc.tres" type="Resource" id=12]
-[ext_resource path="res://course/lesson-12-using-variables/content-VHARbBWN.tres" type="Resource" id=13]
-[ext_resource path="res://course/lesson-12-using-variables/content-MqE82V6j.tres" type="Resource" id=14]
-[ext_resource path="res://course/lesson-12-using-variables/content-bDGt6fUq.tres" type="Resource" id=15]
-[ext_resource path="res://course/lesson-12-using-variables/content-bTxYej47.tres" type="Resource" id=16]
-[ext_resource path="res://course/lesson-12-using-variables/content-lf8B67UJ.tres" type="Resource" id=17]
-[ext_resource path="res://course/lesson-12-using-variables/quiz-QEn91c9l.tres" type="Resource" id=18]
-[ext_resource path="res://course/lesson-12-using-variables/content-GvGm22rt.tres" type="Resource" id=19]
-[ext_resource path="res://course/lesson-12-using-variables/content-Rw9clsFc.tres" type="Resource" id=20]
-[ext_resource path="res://course/lesson-12-using-variables/content-s7CAcYuv.tres" type="Resource" id=21]
-[ext_resource path="res://course/lesson-12-using-variables/content-SrGQgrVc.tres" type="Resource" id=22]
-[ext_resource path="res://course/lesson-12-using-variables/practice-lkGx0c7D.tres" type="Resource" id=23]
-[ext_resource path="res://course/lesson-12-using-variables/practice-KUdOCQiG.tres" type="Resource" id=24]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=3]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=4]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-KUdOCQiG.tres"
+title = ""
+type = 0
+text = "In this lesson, we'll make our code easier to follow and understand at a glance.
+
+Take a look at this example."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-jB7tKRHJ.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleUnclear.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-12-using-variables/quiz-MQ2XNwQM.tres"
+question = "In the above example, what does the number 4 mean?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "The code above rotates the character [code]4[/code] radians per second."
+answer_options = [ "It's how fast the character rotates.", "It's how far the character moves in pixels.", "It's how long the rotation takes." ]
+valid_answers = [ "It's how fast the character rotates." ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-qAYVjotx.tres"
+title = ""
+type = 0
+text = "We can guess what a number represents by looking at the function names, but it's harder to recall what this number does by quickly looking at the code.
+
+We've seen how different functions have their own names. Using these names communicates to developers what the functions do."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-F5HUxZPx.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleFunctions.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-Y8VUDpPw.tres"
+title = ""
+type = 0
+text = "As we learned in lesson 8, we can also assign labels to numbers to help us remember what they do.
+
+We call these labels [i]variables[/i].
+
+[b]A variable is a label for a value we can save, change, and read later.[/b]
+
+Let's recap how to define a variable."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-QDwfyqdY.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/VariableDefinition.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-OexRjTRh.tres"
+title = ""
+type = 0
+text = "We improve the first example to make it clear what the number [code]4[/code] does."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-ZN4rS5AJ.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleUnclearImproved.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-Rw9clsFc.tres"
+title = ""
+type = 0
+text = "Labeling a value makes the code easier for us to read now [i]and[/i] in the future."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-12-using-variables/quiz-n1TxlTtc.tres"
+question = "In the above example, which line defines the angular speed variable?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "We create the [code]angular_speed[/code] variable, then assign it the value of [code]4[/code]."
+answer_options = [ "var angular_speed = 4", "func _process(delta):", "rotate(angular_speed * delta)" ]
+valid_answers = [ "var angular_speed = 4" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-yhcIb5Bn.tres"
+title = ""
+type = 0
+text = "If we define variables outside of functions, we can re-use them in different functions.
+
+Because any function can use variables we define outside of them, we call these variables [b]script-wide[/b].
+
+Here we use the [code]angular_speed[/code] script-wide variable in both the [code]_process()[/code] function and the [code]set_angular_speed()[/code] function."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-VHARbBWN.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleScriptWide.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-bDGt6fUq.tres"
+title = ""
+type = 0
+text = "We can also define variables inside of functions.
+
+We align the variable assignment using tab to make it part of the function body. Make sure to create the variable before using it!
+
+If we define a variable inside of a function, only that function can use it."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-bTxYej47.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleInFunction.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-MqE82V6j.tres"
+title = ""
+type = 0
+text = "The [code]angular_speed[/code] variable only exists inside [code]_process()[/code], because we defined it there. The [code]set_angular_speed()[/code] function can't use it.
+
+Trying to use it there will result in an error.
+
+Here's what this error might look like."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-GvGm22rt.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ErrorAccess.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-12-using-variables/quiz-QEn91c9l.tres"
+question = "Where can we define variables?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "Functions can use any variables defined outside of functions. These variables are [b]script-wide[/b].
+
+If we define a variable inside of a function, only that function can use it."
+answer_options = [ "Outside of functions.", "Inside of functions." ]
+valid_answers = [ "Outside of functions.", "Inside of functions." ]
+is_multiple_choice = true
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-SrGQgrVc.tres"
+title = ""
+type = 0
+text = "Variables are also great at grouping values that control how a character behaves.
+
+Grouping them in this way allows us to easily change them."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-s7CAcYuv.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleVariableGrouping.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-12-using-variables/content-lf8B67UJ.tres"
+title = ""
+type = 0
+text = "In the following practices, we'll define variables and use them with some familiar functions to make our code more readable."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-12-using-variables/practice-lkGx0c7D.tres"
+title = "Clarifying Code Using Variables"
+goal = "Let's give the [code]4[/code] here a label so we know what it does.
+
+Create a variable called [code]angular_speed[/code] outside of the [code]_process()[/code] function to make it script-wide. This allows us to use it in other functions too.
+
+Then, replace the [code]4[/code] with [code]angular_speed[/code]."
+starting_code = "func _process(delta):
+	rotate(4 * delta)"
+hints = PoolStringArray( "Define the [code]angular_speed[/code] variable at the top of the script to make it script-wide", "Don\'t forget to use it in the [code]rotate()[/code] function", "To define the variable, use [code]var angular_speed = 4[/code]" )
+validator_script_path = "clarify/TestClarifyCode.gd"
+script_slice_path = "clarify/ClarifyCode.live-editor/slices/ClarifyCode.clarify.slice.tres"
+documentation_references = PoolStringArray( "rotate", "_process" )
+documentation_resource = ExtResource( 2 )
+description = "Using variables to store number values makes code easier to read. Tidy up this function by storing a value in a variable."
+
+[sub_resource type="Resource" id=23]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-12-using-variables/practice-KUdOCQiG.tres"
+title = "Fixing an Out of Scope Error"
+goal = "There's something wrong with the code here. Can you see what it is?
+
+Run the code and read the error.
+
+Correct the code so it works as intended."
+starting_code = "func _process(delta):
+	var angular_speed = 4
+	rotate(angular_speed * delta)
+
+func set_angular_speed(new_angular_speed):
+	angular_speed = new_angular_speed"
+hints = PoolStringArray( "You need to make [code]angular_speed[/code] script-wide so it\'s available to all functions", "Define [code]angular_speed[/code] at the top of the script instead" )
+validator_script_path = "fixing_error/TestFixingError.gd"
+script_slice_path = "fixing_error/FixingError.live-editor/slices/FixingError.clarify.slice.tres"
+documentation_references = PoolStringArray( "rotate", "_process" )
+documentation_resource = ExtResource( 2 )
+description = "Uh oh! There's something wrong here. Can you fix it?"
 
 [resource]
 script = ExtResource( 1 )
 title = "Using Variables to Make Code Easier to Read"
-content_blocks = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 14 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 22 ), ExtResource( 21 ), ExtResource( 17 ) ]
-practices = [ ExtResource( 23 ), ExtResource( 24 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ]
+practices = [ SubResource( 22 ), SubResource( 23 ) ]

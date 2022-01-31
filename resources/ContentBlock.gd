@@ -6,6 +6,9 @@ extends Resource
 
 enum Type { PLAIN, NOTE }
 
+# Uniquely identifies the content block resource.
+export var content_id := ""
+
 export var title := ""
 export var type: int = Type.PLAIN
 export (String, MULTILINE) var text := ""

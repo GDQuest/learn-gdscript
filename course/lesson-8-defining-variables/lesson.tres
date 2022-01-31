@@ -1,30 +1,268 @@
-[gd_resource type="Resource" load_steps=23 format=2]
+[gd_resource type="Resource" load_steps=26 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
-[ext_resource path="res://course/lesson-8-defining-variables/content-tKRHJMQ2.tres" type="Resource" id=2]
-[ext_resource path="res://course/lesson-8-defining-variables/content-OCQiGjB7.tres" type="Resource" id=3]
-[ext_resource path="res://course/lesson-8-defining-variables/content-XNwQMqAY.tres" type="Resource" id=4]
-[ext_resource path="res://course/lesson-8-defining-variables/content-VjotxF5H.tres" type="Resource" id=5]
-[ext_resource path="res://course/lesson-8-defining-variables/content-BnVHARbB.tres" type="Resource" id=6]
-[ext_resource path="res://course/lesson-8-defining-variables/content-fyqdYOex.tres" type="Resource" id=7]
-[ext_resource path="res://course/lesson-8-defining-variables/content-RjTRhZN4.tres" type="Resource" id=8]
-[ext_resource path="res://course/lesson-8-defining-variables/content-47MqE82V.tres" type="Resource" id=9]
-[ext_resource path="res://course/lesson-8-defining-variables/content-MqAYVjot.tres" type="Resource" id=10]
-[ext_resource path="res://course/lesson-8-defining-variables/content-UDpPwQDw.tres" type="Resource" id=11]
-[ext_resource path="res://course/lesson-8-defining-variables/content-6jGvGm22.tres" type="Resource" id=12]
-[ext_resource path="res://course/lesson-8-defining-variables/content-rS5AJTES.tres" type="Resource" id=13]
-[ext_resource path="res://course/lesson-8-defining-variables/content-v5tT6n1T.tres" type="Resource" id=14]
-[ext_resource path="res://course/lesson-8-defining-variables/content-WNbDGt6f.tres" type="Resource" id=15]
-[ext_resource path="res://course/lesson-8-defining-variables/content-UqbTxYej.tres" type="Resource" id=16]
-[ext_resource path="res://course/lesson-8-defining-variables/content-UxZPxY8V.tres" type="Resource" id=17]
-[ext_resource path="res://course/lesson-8-defining-variables/content-JMQ2XNwQ.tres" type="Resource" id=18]
-[ext_resource path="res://course/lesson-8-defining-variables/content-lkGx0c7D.tres" type="Resource" id=19]
-[ext_resource path="res://course/lesson-8-defining-variables/content-QiGjB7tK.tres" type="Resource" id=20]
-[ext_resource path="res://course/lesson-8-defining-variables/content-RHJMQ2XN.tres" type="Resource" id=21]
-[ext_resource path="res://course/lesson-8-defining-variables/practice-lkGx0c7D.tres" type="Resource" id=22]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=3]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=4]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-OCQiGjB7.tres"
+title = ""
+type = 0
+text = "In the previous lesson, you used a predefined member variable named [code]position[/code].
+
+In your projects, you will need to define your own.
+
+Imagine that you need to track the player's health in your game.
+
+They may start with [code]5[/code] health points. When taking a hit, the health should go down to [code]4[/code]. After another hit, it should be [code]3[/code]. And so on.
+
+To keep track of that, you can create a variable named [code]health[/code] to which you add and subtract points.
+
+[i]The example below introduces the [code]print()[/code] function, which outputs its parameter to the output box on the left.[/i]"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-VjotxF5H.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "RunPrintVarHealth.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-tKRHJMQ2.tres"
+title = ""
+type = 0
+text = "After executing the first two lines of code, you will have a health variable storing a value of [code]4[/code].
+
+Below, we'll break down how you define new variables and explain the [code]print()[/code] function."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-XNwQMqAY.tres"
+title = "Defining a variable"
+type = 0
+text = "To use a variable, you must first define it so the computer registers its name.
+
+To do so, you start a line of code with the [code]var[/code] keyword followed by your desired variable name. Like [code]func[/code] stands for [i]function[/i], [code]var[/code] stands for [i]variable[/i].
+
+The following line defines a [code]health[/code] variable pointing to no value. You can think of it as creating a product label you have yet to stick onto something."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-UxZPxY8V.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ExampleVarHealth.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-UDpPwQDw.tres"
+title = ""
+type = 0
+text = "Like with functions, a member variable's name must be unique inside a given code file. Creating two variables next to each other with the same name will cause an error.
+
+To use a variable, you want to assign it a starting value. You can do so using the equal sign (=).
+
+This code assigns the value [code]100[/code] to a new variable named [code]health[/code]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-fyqdYOex.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ExampleHealthAssign.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-RjTRhZN4.tres"
+title = ""
+type = 0
+text = "After defining your variable, you can access its value by writing the variable's name."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-JMQ2XNwQ.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "RunPrintVarHealth2.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-rS5AJTES.tres"
+title = ""
+type = 0
+text = "The code above will display the number [code]100[/code] to some output window.
+
+Notice we don't use the [code]var[/code] keyword anymore as we only need it to [i]define[/i] a variable.
+
+Also, once you defined a variable, you can change its value anytime with the equal sign."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-MqAYVjot.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "RunSetVarHealth.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-v5tT6n1T.tres"
+title = "About the print function"
+type = 0
+text = "The [code]print()[/code] function is generally the first you learn in academic programming courses.
+
+It sends (\"prints\") the message or value you give it to some output window, often a black window with plain white text."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-lkGx0c7D.tres"
+title = ""
+type = 0
+text = "Programmers often use [code]print()[/code] to quickly check the value of their variables when their game runs.
+
+In the app, we made a special output window that captures calls to [code]print()[/code] and displays a card to make it friendlier for you."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-QiGjB7tK.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "RunPrintMessage.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-RHJMQ2XN.tres"
+title = ""
+type = 0
+text = "Here, the verb [i]print[/i] means \"to send information to display on the screen.\"
+
+The function \"prints\" things on your computer display; It does not relate to printers."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-BnVHARbB.tres"
+title = "Variables are like labels"
+type = 0
+text = "As we hinted above, in GDScript, variables work a bit like labels.
+
+Assigning a value to a variable is like taking your label (the variable) and sticking it onto some item (the value)."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-47MqE82V.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-WNbDGt6f.tres"
+title = ""
+type = 0
+text = "Like a supermarket has a database of product labels, the computer keeps a list of all variables in your code.
+
+Given the variable name, the computer can look up the attached value.
+
+It has an important consequence. In GDScript, you can stick that label to any other value."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-6jGvGm22.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "RunPrintVarString.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-8-defining-variables/content-UqbTxYej.tres"
+title = ""
+type = 0
+text = "The above code is like taking a label from the appropriate item and sticking it to the wrong thing:
+
+- At line 1, the [code]health[/code] variable holds a number.
+- From line 2, [code]health[/code] holds text.
+
+The computer will let you do that! The code's syntax and \"grammar\" are correct, but it's not good.
+
+Later on, we'll see how to avoid this issue with [i]variable types[/i]. For now, let's practice creating variables!"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-8-defining-variables/practice-lkGx0c7D.tres"
+title = "Define a health variable"
+goal = "Define a variable named [code]health[/code] with a starting value of [code]100[/code]."
+starting_code = ""
+hints = PoolStringArray( "To define a variable, you write the keyword var, a space, and the variable name", "You can assign a value to a variable by writing = followed by the value" )
+validator_script_path = "define-health-variable/TestHasHealthVar.gd"
+script_slice_path = "define-health-variable/DefineHealthVar.live-editor/slices/DefineHealthVar.health.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 2 )
+description = "In this practice, you'll define your first variable and give it a specific starting value."
 
 [resource]
 script = ExtResource( 1 )
 title = "Defining Your Own Variables"
-content_blocks = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 17 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 18 ), ExtResource( 13 ), ExtResource( 10 ), ExtResource( 14 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 15 ), ExtResource( 12 ), ExtResource( 16 ) ]
-practices = [ ExtResource( 22 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ]
+practices = [ SubResource( 21 ) ]

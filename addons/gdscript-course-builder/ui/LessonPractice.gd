@@ -296,7 +296,8 @@ func _change_script_slice_script(file_path: String) -> void:
 	var is_valid := file_path.empty() or file_path.get_extension() == "tres"
 	var test_path := file_path
 	if not test_path.empty() and test_path.is_rel_path():
-		test_path = _edited_practice.resource_path.get_base_dir().plus_file(test_path)
+		# TODO: Probably shouldn't rely on ID to get the path, but so far it matches the expected path.
+		test_path = _edited_practice.practice_id.get_base_dir().plus_file(test_path)
 		is_valid = is_valid and _file_tester.file_exists(test_path)
 
 	if is_valid:
@@ -326,7 +327,8 @@ func _change_validator_script(file_path: String) -> void:
 	var is_valid := file_path.empty() or file_path.get_extension() == "gd"
 	var test_path := file_path
 	if not test_path.empty() and test_path.is_rel_path():
-		test_path = _edited_practice.resource_path.get_base_dir().plus_file(test_path)
+		# TODO: Probably shouldn't rely on ID to get the path, but so far it matches the expected path.
+		test_path = _edited_practice.practice_id.get_base_dir().plus_file(test_path)
 		is_valid = is_valid and _file_tester.file_exists(test_path)
 
 	if is_valid:

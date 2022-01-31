@@ -1,23 +1,195 @@
-[gd_resource type="Resource" load_steps=16 format=2]
+[gd_resource type="Resource" load_steps=20 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
-[ext_resource path="res://course/lesson-10-the-game-loop/practice-QiGjB7tK.tres" type="Resource" id=2]
-[ext_resource path="res://course/lesson-10-the-game-loop/content-pPwQDwfy.tres" type="Resource" id=3]
-[ext_resource path="res://course/lesson-10-the-game-loop/content-TRhZN4rS.tres" type="Resource" id=4]
-[ext_resource path="res://course/lesson-10-the-game-loop/content-RHJMQ2XN.tres" type="Resource" id=5]
-[ext_resource path="res://course/lesson-10-the-game-loop/content-5AJTESv5.tres" type="Resource" id=6]
-[ext_resource path="res://course/lesson-10-the-game-loop/content-otxF5HUx.tres" type="Resource" id=7]
-[ext_resource path="res://course/lesson-10-the-game-loop/content-ZPxY8VUD.tres" type="Resource" id=8]
-[ext_resource path="res://course/lesson-10-the-game-loop/content-DizKUdOC.tres" type="Resource" id=9]
-[ext_resource path="res://course/lesson-10-the-game-loop/content-tT6n1Txl.tres" type="Resource" id=10]
-[ext_resource path="res://course/lesson-10-the-game-loop/quiz-MqE82V6j.tres" type="Resource" id=11]
-[ext_resource path="res://course/lesson-10-the-game-loop/content-QiGjB7tK.tres" type="Resource" id=12]
-[ext_resource path="res://course/lesson-10-the-game-loop/quiz-BnVHARbB.tres" type="Resource" id=13]
-[ext_resource path="res://course/lesson-10-the-game-loop/content-bTxYej47.tres" type="Resource" id=14]
-[ext_resource path="res://course/lesson-10-the-game-loop/practice-tKRHJMQ2.tres" type="Resource" id=15]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=3]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=4]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-10-the-game-loop/content-DizKUdOC.tres"
+title = ""
+type = 0
+text = "As we've seen, Godot has functions that do certain actions. For example, the [code]show()[/code] and [code]hide()[/code] functions change the visibility of things.
+
+We can also create our own functions to make custom effects like adding or removing health to a character.
+
+Godot also has special functions we can customise or add to.
+
+Take the [code]_process()[/code] function."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-10-the-game-loop/content-QiGjB7tK.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleProcessFunction.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-10-the-game-loop/content-RHJMQ2XN.tres"
+title = ""
+type = 0
+text = "The [code]_process()[/code] function gets its name because it does calculations or continuous actions.
+
+It's like a juice factory that [b]processes[/b] juice bottles; the bottles are always moving along a conveyor belt, while different machines operate on them."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-10-the-game-loop/content-otxF5HUx.tres"
+title = ""
+type = 0
+text = "It's similar in Godot, but this function can run [b]hundreds of times a second[/b]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-10-the-game-loop/quiz-BnVHARbB.tres"
+question = "How many parameters does this function take?"
+content_bbcode = "[code]
+func _process(delta):
+[/code]"
+hint = ""
+explanation_bbcode = "The [code]_process()[/code] function takes one parameter: [code]delta[/code].
+
+We'll look at what [code]delta[/code] is in the next lesson, as well as how to use it."
+answer_options = [ "1", "2" ]
+valid_answers = [ "1" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-10-the-game-loop/content-pPwQDwfy.tres"
+title = ""
+type = 0
+text = "The [code]_process()[/code] function won't do anything until we add something to it.
+
+You might notice the underscore [code]_[/code] in front of the function name. This is a convention. It means the function is already defined by Godot.
+
+If the function exists, and is called exactly [code]_process[/code], then Godot will automatically run it every frame. "
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-10-the-game-loop/content-ZPxY8VUD.tres"
+title = ""
+type = 2
+text = "Other game engines might use different names like [code]_update()[/code]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-10-the-game-loop/content-TRhZN4rS.tres"
+title = ""
+type = 0
+text = "[font=res://ui/theme/fonts/font_title.tres]Why is [code]_process()[/code] useful?[/font]
+
+It's perhaps better to see the [code]_process()[/code] function in action. 
+
+Take the following example."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-10-the-game-loop/content-5AJTESv5.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleRotatingSprite.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-10-the-game-loop/content-tT6n1Txl.tres"
+title = ""
+type = 0
+text = "Every frame, Godot runs the [code]_process()[/code] function.
+
+Since we wrote a [code]rotate()[/code] instruction, Godot is rotating the character by [code]0.05[/code] radians [b]many[/b] times a second."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-10-the-game-loop/quiz-MqE82V6j.tres"
+question = "How often does the _process() function run?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "The faster your computer, the more times [code]_process()[/code] will run.
+
+Godot will try and run [code]_process()[/code] as quickly as it can. This makes sure any movement or animations look smooth and fluid."
+answer_options = [ "Once a second.", "Multiple times a second." ]
+valid_answers = [ "Multiple times a second." ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-10-the-game-loop/content-bTxYej47.tres"
+title = ""
+type = 0
+text = "In the practice, you'll learn how to use the process function to rotate and move a character yourself."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-10-the-game-loop/practice-tKRHJMQ2.tres"
+title = "Rotating a Character Continuously"
+goal = "Make the robot rotate slowly by adding to the [code]_process()[/code] function.
+
+A rotation speed of about [code]0.05[/code] each frame should do."
+starting_code = "func _process(_delta):
+	pass"
+hints = PoolStringArray( "Replace [code]pass[/code] with the [code]rotate()[/code] function", "The [code]rotate()[/code] function takes one parameter" )
+validator_script_path = "rotating-sprite/TestsRotating.gd"
+script_slice_path = "rotating-sprite/RotatingSprite.live-editor/slices/RotatingSprite.move_and_rotate.slice.tres"
+documentation_references = PoolStringArray( "rotate" )
+documentation_resource = ExtResource( 2 )
+description = ""
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-10-the-game-loop/practice-QiGjB7tK.tres"
+title = "Creating Circular Movement"
+goal = "Make the robot move in a large circle slowly by rotating it and simultaneously moving it along its x direction.
+
+To do this, add the [code]rotate()[/code] and [code]move_local_x()[/code] functions to [code]_process()[/code].
+
+Use a rotation speed of [code]0.05[/code] radians per frame, and move the robot [code]5[/code] pixels per frame."
+starting_code = "func _process(_delta):
+	pass"
+hints = PoolStringArray( "Replace [code]pass[/code] with the [code]rotate()[/code] and [code]move_local_x()[/code] functions" )
+validator_script_path = "rotating-and-moving/TestsRotatingAndMoving.gd"
+script_slice_path = "rotating-and-moving/RotateAndMoveSprite.live-editor/slices/RotateAndMoveSprite.move_and_rotate.slice.tres"
+documentation_references = PoolStringArray( "rotate", "move_local_x" )
+documentation_resource = ExtResource( 2 )
+description = ""
 
 [resource]
 script = ExtResource( 1 )
 title = "The Game Loop"
-content_blocks = [ ExtResource( 9 ), ExtResource( 12 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 13 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 14 ) ]
-practices = [ ExtResource( 15 ), ExtResource( 2 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ]
+practices = [ SubResource( 13 ), SubResource( 14 ) ]
