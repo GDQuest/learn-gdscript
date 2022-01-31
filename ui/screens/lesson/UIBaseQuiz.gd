@@ -12,9 +12,9 @@ const OUTLINE_FLASH_DURATION := 0.8
 const OUTLINE_FLASH_DELAY := 0.75
 const ERROR_SHAKE_TIME := 0.5
 const ERROR_SHAKE_SIZE := 20
-const FADE_OUT_TIME := 0.15
-const FADE_IN_TIME := 0.15
-const INTERPOLATION_TIME := 0.3
+const FADE_OUT_TIME := 0.2
+const FADE_IN_TIME := 0.2
+const INTERPOLATION_TIME := 0.5
 
 export var test_quiz: Resource
 
@@ -28,7 +28,6 @@ onready var _completed_before_icon := (
 	$MarginContainer/BoundaryControl/ChoiceView/QuizHeader/CompletedBeforeIcon as TextureRect
 )
 
-onready var _margin_container := $MarginContainer as MarginContainer
 onready var _boundary_control := $MarginContainer/BoundaryControl as Control
 onready var _choice_view := $MarginContainer/BoundaryControl/ChoiceView as VBoxContainer
 onready var _result_view := $MarginContainer/BoundaryControl/ResultView as VBoxContainer
@@ -60,7 +59,6 @@ func _ready() -> void:
 	_choice_view.connect("minimum_size_changed", self, "_on_choice_view_minimum_size_changed")
 	
 	_tween.connect("tween_step", self, "_on_tween_step")
-	_tween.connect("tween_completed", self, "_on_tween_completed")
 
 
 func setup(quiz: Quiz) -> void:
@@ -77,7 +75,7 @@ func setup(quiz: Quiz) -> void:
 	_explanation.visible = not _quiz.explanation_bbcode.empty()
 	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(_quiz.explanation_bbcode)
 	
-	rect_min_size = _get_min_size_needed(_choice_view)
+	rect_min_size = _get_min_rect_size_needed_to_fit(_choice_view)
 
 
 func set_completed_before(value: bool) -> void:
@@ -131,27 +129,24 @@ func _test_answer() -> void:
 	else:
 		_show_answer()
 
-func _get_min_size_needed(view: Control) -> Vector2:
-	# Adds the minimum size from the view and adds the margins from margincontainer
-	# and a little more for visual integrity (Buttons clip bottom of boundary without)
-	return view.get_combined_minimum_size() + rect_size - _boundary_control.rect_size + Vector2(0, 10)
-
 func _show_answer(gave_correct_answer := true) -> void:
 	_tween.stop_all()
+	
 	_outline.add_stylebox_override("panel", PASSED_OUTLINE if gave_correct_answer else NEUTRAL_OUTLINE)
 	_outline.modulate.a = 1.0
 	
 	
 	_result_view.show()
 	
-	_change_rect_size(_get_min_size_needed(_result_view))
-	
 	_tween.interpolate_property(
 		_choice_view,
 		"modulate:a",
 		_choice_view.modulate.a,
 		0,
-		FADE_OUT_TIME
+		FADE_OUT_TIME,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_OUT,
+		0
 	)
 	
 	_tween.interpolate_property(
@@ -161,7 +156,7 @@ func _show_answer(gave_correct_answer := true) -> void:
 		1,
 		FADE_IN_TIME,
 		Tween.TRANS_LINEAR,
-		Tween.EASE_IN,
+		Tween.EASE_OUT,
 		FADE_OUT_TIME
 	)
 	
@@ -177,6 +172,13 @@ func _show_answer(gave_correct_answer := true) -> void:
 		_correct_answer_label.show()
 		_correct_answer_label.text = _quiz.get_correct_answer_string()
 		emit_signal("quiz_skipped")
+	
+	# Needs to come after to fit result label.
+	_change_rect_size(_get_min_rect_size_needed_to_fit(_result_view))
+
+func _get_min_rect_size_needed_to_fit(view: Control) -> Vector2:
+	var buffer_space = Vector2.DOWN
+	return view.get_combined_minimum_size() + rect_size - _boundary_control.rect_size + buffer_space
 
 func _change_rect_size(target: Vector2) -> void:
 	_tween.stop_all()
@@ -197,13 +199,16 @@ func _change_rect_size(target: Vector2) -> void:
 	
 	_tween.start()
 
+# Needed for updating post-initialization.
+# Will also animate expanding the container to fit a hint upon hint.show()
 func _on_choice_view_minimum_size_changed() -> void:
-	_change_rect_size(_get_min_size_needed(_choice_view))
+	_change_rect_size(_get_min_rect_size_needed_to_fit(_choice_view))
 
 
 func _on_item_rect_changed() -> void:
 	if not _tween.is_active() or _tween.tell() > ERROR_SHAKE_TIME:
 		_shake_pos = rect_position.y
+	# Required because BoundaryControl does not make it's children fit to it's own edges.
 	_choice_view.rect_size.x = _boundary_control.rect_size.x
 	_result_view.rect_size.x = _boundary_control.rect_size.x
 
@@ -213,9 +218,3 @@ func _on_tween_step(object: Object, _key: NodePath, _elapsed: float, _value: Obj
 		var difference := _next_rect_size - _current_rect_size
 		new_size += difference * _percent_transformed
 		rect_min_size = new_size
-
-func _on_tween_completed(_object: Object, key: NodePath) -> void:
-	if key == "_percent_transformed":
-		_current_rect_size = _next_rect_size
-		_next_rect_size = Vector2.ZERO
-		_percent_transformed = 0
