@@ -20,4 +20,5 @@ func set_min_size(size: Vector2) -> void:
 func _update_size() -> void:
 	# Forces the text wrapping to update. Without this, the code can overflow
 	# the container when changing the font size.
-	rect_size = rect_size
+	# TODO: There is some computation error in the TextEdit, it seems. Need to investigate it further.
+	pass

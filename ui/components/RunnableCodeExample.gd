@@ -27,7 +27,8 @@ onready var _start_code_example_height := _gdscript_text_edit.rect_size.y
 
 func _ready() -> void:
 	Events.connect("font_size_scale_changed", self, "_update_gdscript_text_edit_width")
-	_update_gdscript_text_edit_width(UserProfiles.get_profile().font_size_scale)
+	if not Engine.editor_hint:
+		_update_gdscript_text_edit_width(UserProfiles.get_profile().font_size_scale)
 
 	_run_button.connect("pressed", self, "run")
 	_reset_button.connect("pressed", self, "reset")
@@ -159,4 +160,5 @@ func _update_gdscript_text_edit_width(new_font_scale: int) -> void:
 	_gdscript_text_edit.rect_min_size.y = _start_code_example_height * font_size_multiplier
 	# Forces the text wrapping to update. Without this, the code can overflow
 	# the container when changing the font size.
-	_gdscript_text_edit.rect_size = _gdscript_text_edit.rect_size
+	# TODO: There is some computation error in the TextEdit, it seems. Need to investigate it further.
+	pass
