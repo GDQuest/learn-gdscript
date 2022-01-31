@@ -130,7 +130,10 @@ func _test_answer() -> void:
 		_show_answer()
 
 func _show_answer(gave_correct_answer := true) -> void:
+	# Reset any error animations
 	_tween.stop_all()
+	_tween.reset_all()
+	_tween.remove_all()
 	
 	_outline.add_stylebox_override("panel", PASSED_OUTLINE if gave_correct_answer else NEUTRAL_OUTLINE)
 	_outline.modulate.a = 1.0
@@ -182,6 +185,7 @@ func _get_min_rect_size_needed_to_fit(view: Control) -> Vector2:
 
 func _change_rect_size(target: Vector2) -> void:
 	_tween.stop_all()
+	_tween.remove(self, "_percent_transformed")
 	
 	_current_rect_size = rect_min_size
 	_next_rect_size = target
