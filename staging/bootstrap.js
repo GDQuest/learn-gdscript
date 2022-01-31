@@ -3,6 +3,32 @@
 "use strict";
 
 window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
+  events: {
+    const makeSignal = () => {
+      const listeners = new Set();
+      /**
+       * @param {(...args) => void } fn
+       * @returns
+       */
+      const disconnect = (fn) => listeners.delete(fn);
+      /**
+       * @param {(...args) => void } fn
+       */
+      const connect = (fn) => {
+        listeners.add(fn);
+        return () => disconnect(fn);
+      };
+      const emit = (...args) => listeners.forEach((fn) => fn(...args));
+      /** @type { Signal } */
+      const signal = { disconnect, connect, emit };
+      return signal;
+    };
+
+    GDQUEST.events = {
+      onError: makeSignal(),
+    };
+  }
+
   loadingControl: {
     let is_done = false;
 
@@ -71,7 +97,6 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
      */
     const onProgress = (current, total) => {
       if (total > 0) {
-        console.info("loading...", total);
         setStatusMode(StatusMode.PROGRESS);
         displayPercentage(current / total);
         if (current === total) {
@@ -89,10 +114,26 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
      */
     const onPackageLoaded = () => {
       displayPercentage(1);
+      console.log("package loaded");
       setTimeout(() => {
         setStatusMode(StatusMode.DONE);
         is_done = true;
       }, 200);
+    };
+
+    const onPrintError = (/** @type {any[]} */ ...args) => {
+      if (args[0] instanceof Error) {
+        const { message } = args[0];
+        if (/Maximum call stack size exceeded/.test(message)) {
+          GDQUEST.events.onError.emit("RECURSIVE");
+        }
+      } else if (typeof args[0] === "string") {
+        if (/Maximum call stack size exceeded/.test(args[0])) {
+          GDQUEST.events.onError.emit("RECURSIVE");
+        }
+      } else {
+        console.error(...args);
+      }
     };
 
     /**
@@ -101,6 +142,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     const load = () => {
       setStatusMode(StatusMode.INDETERMINATE);
       GODOT_CONFIG.canvasResizePolicy = 0;
+      GODOT_CONFIG.onPrintError = onPrintError;
       const engine = new Engine(GODOT_CONFIG);
       engine
         .startGame({ onProgress })
@@ -142,6 +184,168 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     if (currentValue === true) {
       forceAppOnMobile();
     }
+  }
+
+  logging: {
+    const KEY = "log";
+    const LEVELS = {
+      TRACE: 10,
+      DEBUG: 20,
+      INFO: 30,
+      WARN: 40,
+      ERROR: 50,
+      FATAL: 60,
+    };
+
+    const generateDownloadableFile = (filename = "", text = "") => {
+      var element = document.createElement("a");
+      element.setAttribute(
+        "href",
+        "data:text/plain;charset=utf-8," + encodeURIComponent(text)
+      );
+      element.setAttribute("download", filename);
+
+      element.style.display = "none";
+      document.body.appendChild(element);
+
+      element.click();
+
+      document.body.removeChild(element);
+    };
+
+    /** @type { Log['get'] } */
+    const get = () => JSON.parse(localStorage.getItem(KEY) || "[]");
+
+    const log_lines = get();
+
+    /**
+     * Gets the size of a localstorage slot.
+     * @param {string} key
+     * @returns the size of the data in kilobytes
+     */
+    const getLocalStorageSizeOf = (key) => () =>
+      (((localStorage.getItem(key) || "").length + key.length) * 2) / 1024;
+
+    const getLocalStorageSize = getLocalStorageSizeOf(KEY);
+
+    /** @type { Log['download'] } */
+    const download = () =>
+      generateDownloadableFile(
+        `gdquest-${Date.now()}.log`,
+        localStorage.getItem(KEY)
+      );
+
+    const makeLogFunction =
+      (level = LEVELS.INFO) =>
+      /** @type {LogFunction} */
+      (anything, msg = "") => {
+        if (typeof anything === "string" || typeof anything === "number") {
+          msg = String(anything);
+          anything = null;
+        }
+
+        const time = Date.now();
+        /** @type {LogLine} */
+        const log_line = { time, level, msg, ...(anything || {}) };
+        log_lines.push(log_line);
+        localStorage.setItem(KEY, JSON.stringify(log_lines));
+
+        if (level < 30) {
+          if (anything) {
+            console.log(msg, anything);
+          } else {
+            console.log(msg);
+          }
+        } else if (level < 40) {
+          if (anything) {
+            console.info(msg, anything);
+          } else {
+            console.info(msg);
+          }
+        } else if (level < 50) {
+          if (anything) {
+            console.warn(msg, anything);
+          } else {
+            console.warn(msg);
+          }
+        } else {
+          if (anything) {
+            console.error(msg, anything);
+          } else {
+            console.error(msg);
+          }
+        }
+      };
+
+    /** @type { Log['display'] } */
+    const display = () => console.table(get());
+
+    /** @type { Log['clear'] } */
+    const clear = () => {
+      localStorage.removeItem(KEY);
+      console.info("log cleared");
+    };
+
+    /** @type { Log['trimIfOverLimit'] } */
+    const trimIfOverLimit = (maxKiloBytes = 1000) => {
+      let response = false;
+      while (getLocalStorageSize() > maxKiloBytes) {
+        log_lines.shift();
+        localStorage.setItem(KEY, JSON.stringify(log_lines));
+        response = true;
+      }
+      return response;
+    };
+
+    const logSystemInfoIfLogIsEmpty = (additionalData = {}) => {
+      if (log_lines.length == 0) {
+        const { userAgent, vendor } = navigator;
+        const { width, height } = screen;
+        const { innerHeight, innerWidth } = window;
+        const {
+          github_repository,
+          github_workflow,
+          github_ref_name,
+          github_sha,
+          override_file,
+          sub_build_path,
+          watermark,
+        } = GDQUEST_ENVIRONMENT || {};
+        const data = {
+          userAgent,
+          vendor,
+          width,
+          height,
+          innerHeight,
+          innerWidth,
+          github_repository,
+          github_workflow,
+          github_ref_name,
+          github_sha,
+          override_file,
+          sub_build_path,
+          watermark,
+          ...additionalData,
+        };
+        makeLogFunction(LEVELS.TRACE)(data, `INIT`);
+      }
+    };
+
+    /** @type { Log } */
+    // @ts-ignore
+    const log = {
+      display,
+      clear,
+      get,
+      trimIfOverLimit,
+      download,
+      logSystemInfoIfLogIsEmpty,
+    };
+    Object.keys(LEVELS).forEach(
+      (key) => (log[key.toLowerCase()] = makeLogFunction(LEVELS[key]))
+    );
+
+    GDQUEST.log = log;
   }
 
   return GDQUEST;
