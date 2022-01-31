@@ -156,9 +156,9 @@ func setup(lesson: Lesson, course: Course) -> void:
 		var scroll_offset = abs(_scroll_content.rect_global_position.y - _content_blocks.rect_global_position.y)
 		var scroll_target = restore_node.rect_position.y + scroll_offset - AUTOSCROLL_PADDING
 		_tweener.stop_all()
-		_tweener.interpolate_property(
+		_tweener.interpolate_method(
 			_scroll_container,
-			"scroll_vertical",
+			"set_v_scroll", # So it plays nice with our smooth scroller
 			_scroll_container.scroll_vertical,
 			scroll_target,
 			AUTOSCROLL_DURATION,

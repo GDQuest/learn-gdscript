@@ -114,6 +114,16 @@ func scroll_to_bottom() -> void:
 	_set_target_position(Vector2.DOWN * _max_position_y)
 
 
+# Override default implementation to keep local properties in sync.
+func set_v_scroll(value: int) -> void:
+	.set_v_scroll(value)
+
+	if is_processing():
+		set_process(false)
+	_current_scroll.y = scroll_vertical
+	_target_position.y = scroll_vertical
+
+
 func _set_target_position(new_position: Vector2) -> void:
 	_target_position = new_position
 	_target_position.y = clamp(_target_position.y, 0.0, _max_position_y)
