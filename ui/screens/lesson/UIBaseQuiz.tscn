@@ -11,9 +11,9 @@
 [ext_resource path="res://ui/theme/button_outlined_normal.tres" type="StyleBox" id=9]
 
 [node name="UIBaseQuiz" type="PanelContainer"]
-margin_right = 101.0
-margin_bottom = 94.0
-rect_min_size = Vector2( 400, 0 )
+margin_right = 400.0
+margin_bottom = 202.0
+rect_min_size = Vector2( 400, 1 )
 theme = ExtResource( 4 )
 custom_styles/panel = ExtResource( 3 )
 script = ExtResource( 6 )
@@ -29,21 +29,32 @@ margin_bottom = 202.0
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 400.0
 margin_bottom = 202.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="ChoiceView" type="VBoxContainer" parent="MarginContainer"]
+[node name="BoundaryControl" type="Control" parent="MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 380.0
 margin_bottom = 182.0
+rect_clip_content = true
 
-[node name="QuizHeader" type="HBoxContainer" parent="MarginContainer/ChoiceView"]
+[node name="ChoiceView" type="VBoxContainer" parent="MarginContainer/BoundaryControl"]
+margin_right = 360.0
+margin_bottom = 162.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuizHeader" type="HBoxContainer" parent="MarginContainer/BoundaryControl/ChoiceView"]
 margin_right = 360.0
 margin_bottom = 30.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Question" type="RichTextLabel" parent="MarginContainer/ChoiceView/QuizHeader"]
+[node name="Question" type="RichTextLabel" parent="MarginContainer/BoundaryControl/ChoiceView/QuizHeader"]
 margin_right = 320.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
@@ -55,7 +66,7 @@ text = "Question"
 fit_content_height = true
 scroll_active = false
 
-[node name="CompletedBeforeIcon" type="TextureRect" parent="MarginContainer/ChoiceView/QuizHeader"]
+[node name="CompletedBeforeIcon" type="TextureRect" parent="MarginContainer/BoundaryControl/ChoiceView/QuizHeader"]
 modulate = Color( 1, 1, 1, 0.235294 )
 margin_left = 336.0
 margin_right = 360.0
@@ -67,7 +78,7 @@ texture = ExtResource( 5 )
 expand = true
 stretch_mode = 6
 
-[node name="Content" type="RichTextLabel" parent="MarginContainer/ChoiceView"]
+[node name="Content" type="RichTextLabel" parent="MarginContainer/BoundaryControl/ChoiceView"]
 margin_top = 46.0
 margin_right = 360.0
 margin_bottom = 75.0
@@ -77,18 +88,18 @@ bbcode_text = "Explanation"
 text = "Explanation"
 fit_content_height = true
 
-[node name="Answers" type="VBoxContainer" parent="MarginContainer/ChoiceView"]
+[node name="Answers" type="VBoxContainer" parent="MarginContainer/BoundaryControl/ChoiceView"]
 margin_top = 91.0
 margin_right = 360.0
 margin_bottom = 91.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ChoiceView"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/BoundaryControl/ChoiceView"]
 margin_top = 107.0
 margin_right = 360.0
 margin_bottom = 162.0
 alignment = 1
 
-[node name="SubmitButton" type="Button" parent="MarginContainer/ChoiceView/HBoxContainer"]
+[node name="SubmitButton" type="Button" parent="MarginContainer/BoundaryControl/ChoiceView/HBoxContainer"]
 margin_left = 52.0
 margin_right = 172.0
 margin_bottom = 55.0
@@ -99,7 +110,7 @@ custom_styles/pressed = ExtResource( 8 )
 custom_styles/normal = ExtResource( 9 )
 text = "Submit"
 
-[node name="SkipButton" type="Button" parent="MarginContainer/ChoiceView/HBoxContainer"]
+[node name="SkipButton" type="Button" parent="MarginContainer/BoundaryControl/ChoiceView/HBoxContainer"]
 margin_left = 188.0
 margin_right = 308.0
 margin_bottom = 55.0
@@ -112,30 +123,33 @@ custom_styles/normal = ExtResource( 9 )
 disabled = true
 text = "Skip"
 
-[node name="HelpMessage" type="Label" parent="MarginContainer/ChoiceView"]
+[node name="HelpMessage" type="Label" parent="MarginContainer/BoundaryControl/ChoiceView"]
 visible = false
-margin_top = 208.0
+margin_top = 178.0
 margin_right = 360.0
-margin_bottom = 236.0
+margin_bottom = 206.0
 custom_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
 autowrap = true
 
-[node name="ResultView" type="VBoxContainer" parent="MarginContainer"]
+[node name="ResultView" type="VBoxContainer" parent="MarginContainer/BoundaryControl"]
 visible = false
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 380.0
-margin_bottom = 182.0
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 360.0
+margin_bottom = 162.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="MarginContainer/ResultView"]
+[node name="Label" type="Label" parent="MarginContainer/BoundaryControl/ResultView"]
 margin_right = 360.0
 margin_bottom = 26.0
 custom_colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "You're right!"
 
-[node name="CorrectAnswer" type="Label" parent="MarginContainer/ResultView"]
+[node name="CorrectAnswer" type="Label" parent="MarginContainer/BoundaryControl/ResultView"]
 visible = false
+modulate = Color( 1, 1, 1, 0 )
 margin_top = 42.0
 margin_right = 600.0
 margin_bottom = 70.0
@@ -145,10 +159,10 @@ custom_fonts/font = ExtResource( 2 )
 text = "Answers here"
 autowrap = true
 
-[node name="Explanation" type="RichTextLabel" parent="MarginContainer/ResultView"]
+[node name="Explanation" type="RichTextLabel" parent="MarginContainer/BoundaryControl/ResultView"]
 margin_top = 42.0
 margin_right = 360.0
-margin_bottom = 71.0
+margin_bottom = 162.0
 size_flags_vertical = 3
 bbcode_enabled = true
 bbcode_text = "Explanation"
