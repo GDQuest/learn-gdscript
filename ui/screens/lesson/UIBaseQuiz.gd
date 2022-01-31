@@ -204,13 +204,15 @@ func _on_choice_view_minimum_size_changed() -> void:
 func _on_item_rect_changed() -> void:
 	if not _tween.is_active() or _tween.tell() > ERROR_SHAKE_TIME:
 		_shake_pos = rect_position.y
+	_choice_view.rect_size.x = _boundary_control.rect_size.x
+	_result_view.rect_size.x = _boundary_control.rect_size.x
 
 func _on_tween_step(object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
 	if object == self and _next_rect_size != Vector2.ZERO:
-		var final_size := _current_rect_size
+		var new_size := _current_rect_size
 		var difference := _next_rect_size - _current_rect_size
-		final_size += difference * _percent_transformed
-		rect_min_size = final_size
+		new_size += difference * _percent_transformed
+		rect_min_size = new_size
 
 func _on_tween_completed(_object: Object, key: NodePath) -> void:
 	if key == "_percent_transformed":
