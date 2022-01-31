@@ -75,6 +75,7 @@ margin_left = 310.0
 margin_top = 64.0
 margin_right = 1610.0
 margin_bottom = 1080.0
+mouse_filter = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 
@@ -83,11 +84,13 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = 1280.0
 margin_bottom = 996.0
+mouse_filter = 2
 alignment = 1
 
 [node name="MainColumn" type="VBoxContainer" parent="Layout/MarginContainer/ColumnLayout"]
 margin_right = 888.0
 margin_bottom = 976.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 
@@ -102,6 +105,7 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 880.0
 margin_bottom = 128.0
+mouse_filter = 2
 
 [node name="Icon" type="TextureRect" parent="Layout/MarginContainer/ColumnLayout/MainColumn/WelcomeTitle/MarginContainer"]
 margin_left = 20.0
@@ -109,6 +113,7 @@ margin_top = 20.0
 margin_right = 852.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 80, 80 )
+mouse_filter = 2
 texture = ExtResource( 12 )
 expand = true
 stretch_mode = 5
@@ -152,7 +157,7 @@ script = ExtResource( 13 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer"]
 margin_right = 820.0
-margin_bottom = 2234.0
+margin_bottom = 2225.0
 mouse_filter = 2
 custom_constants/margin_top = 0
 custom_constants/margin_left = 0
@@ -160,7 +165,7 @@ custom_constants/margin_bottom = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer"]
 margin_right = 800.0
-margin_bottom = 2234.0
+margin_bottom = 2225.0
 custom_constants/separation = 32
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
@@ -169,7 +174,7 @@ margin_bottom = 380.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 800, 100 )
-mouse_filter = 2
+mouse_filter = 1
 size_flags_horizontal = 6
 bbcode_enabled = true
 bbcode_text = "GDScript Learn is a Free and Open-Source app and series to help you learn to code, [b]from zero[/b], with Godot's GDScript programming language.
@@ -198,18 +203,18 @@ __meta__ = {
 [node name="ExampleMoveAndRotate" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 7 )]
 margin_top = 412.0
 margin_right = 800.0
-margin_bottom = 752.0
+margin_bottom = 772.0
 rect_min_size = Vector2( 0, 340 )
-mouse_filter = 2
+mouse_filter = 1
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 784.0
+margin_top = 804.0
 margin_right = 800.0
-margin_bottom = 813.0
+margin_bottom = 833.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 800, 0 )
-mouse_filter = 2
+mouse_filter = 1
 size_flags_horizontal = 6
 bbcode_enabled = true
 bbcode_text = "Mini quizzes in the lessons will help you test and remember what you learned."
@@ -220,20 +225,20 @@ __meta__ = {
 }
 
 [node name="UIQuizChoice" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_top = 845.0
+margin_top = 865.0
 margin_right = 800.0
-margin_bottom = 1047.0
-mouse_filter = 2
+margin_bottom = 1067.0
+mouse_filter = 1
 test_quiz = ExtResource( 14 )
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 1079.0
+margin_top = 1099.0
 margin_right = 800.0
-margin_bottom = 2102.0
+margin_bottom = 2093.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 800, 100 )
-mouse_filter = 2
+mouse_filter = 1
 size_flags_horizontal = 6
 bbcode_enabled = true
 bbcode_text = "[b]Every lesson[/b] ends with one or more [i]practices[/i].
@@ -276,13 +281,13 @@ __meta__ = {
 }
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 2134.0
+margin_top = 2125.0
 margin_right = 800.0
-margin_bottom = 2234.0
+margin_bottom = 2225.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 800, 100 )
-mouse_filter = 2
+mouse_filter = 1
 size_flags_horizontal = 6
 bbcode_enabled = true
 bbcode_text = "[font=res://ui/theme/fonts/font_title.tres]Get started now[/font]
