@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/screens/practice/PracticeInfoPanel.gd" type="Script" id=2]
@@ -7,8 +7,11 @@
 [ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/revealer_hints_panel.tres" type="StyleBox" id=7]
-[ext_resource path="res://ui/screens/practice/PracticeProgress.tscn" type="PackedScene" id=8]
+[ext_resource path="res://ui/theme/fonts/font_practice_progress.tres" type="DynamicFont" id=8]
 [ext_resource path="res://addons/SmoothScroll/SmoothScrollContainer.gd" type="Script" id=9]
+[ext_resource path="res://ui/theme/practice_list_button.tres" type="StyleBox" id=10]
+[ext_resource path="res://ui/icons/practice_list.png" type="Texture" id=11]
+[ext_resource path="res://ui/theme/practice_info_separator.tres" type="StyleBox" id=12]
 
 [node name="PracticeInfoPanel" type="PanelContainer"]
 anchor_right = 1.0
@@ -31,10 +34,11 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 0
 
 [node name="Margin" type="MarginContainer" parent="LessonRequirements"]
 margin_right = 1920.0
-margin_bottom = 1021.0
+margin_bottom = 1013.0
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -44,7 +48,7 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
-margin_bottom = 1001.0
+margin_bottom = 993.0
 size_flags_vertical = 3
 
 [node name="TitleBox" type="HBoxContainer" parent="LessonRequirements/Margin/Column"]
@@ -76,7 +80,7 @@ custom_constants/separation = 16
 [node name="Scroll" type="ScrollContainer" parent="LessonRequirements/Margin/Column"]
 margin_top = 80.0
 margin_right = 1880.0
-margin_bottom = 981.0
+margin_bottom = 973.0
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 script = ExtResource( 9 )
@@ -136,8 +140,38 @@ margin_right = 1860.0
 margin_bottom = 58.0
 custom_constants/separation = 16
 
-[node name="PracticeProgress" parent="LessonRequirements" instance=ExtResource( 8 )]
-anchor_right = 0.0
-margin_top = 1037.0
+[node name="HSeparator" type="HSeparator" parent="LessonRequirements"]
+margin_top = 1013.0
+margin_right = 1920.0
+margin_bottom = 1021.0
+custom_styles/separator = ExtResource( 12 )
+
+[node name="Footer" type="MarginContainer" parent="LessonRequirements"]
+margin_top = 1021.0
 margin_right = 1920.0
 margin_bottom = 1080.0
+theme = ExtResource( 1 )
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="ListButton" type="Button" parent="LessonRequirements/Footer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 1912.0
+margin_bottom = 51.0
+hint_tooltip = "Open the list of practices for this lesson."
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+custom_colors/font_color_disabled = Color( 0.188235, 0.188235, 0.286275, 1 )
+custom_fonts/font = ExtResource( 8 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 10 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Open Practice List"
+icon = ExtResource( 11 )
+flat = true
+align = 0

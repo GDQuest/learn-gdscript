@@ -3,6 +3,7 @@ class_name PracticeInfoPanel
 extends PanelContainer
 
 signal tests_updated
+signal list_requested
 
 enum Status { NONE, COMPLETED_BEFORE, SOLUTION_USED }
 
@@ -18,13 +19,18 @@ var _current_status: int = Status.NONE
 
 onready var title_label := find_node("Title") as Label
 onready var _status_icon := find_node("StatusIcon") as TextureRect
+
 onready var goal_rich_text_label := find_node("Goal").find_node("TextBox") as RichTextLabel
 onready var hints_container := find_node("Hints") as Revealer
+onready var _checks := find_node("Checks") as Revealer
 onready var docs_container := find_node("Documentation") as Revealer
 onready var _docs_item_list := docs_container.find_node("DocumentationItems") as Control
-onready var progress_bar := find_node("PracticeProgress") as Control
 
-onready var _checks := find_node("Checks") as Revealer
+onready var _list_button := find_node("ListButton") as Button
+
+
+func _ready() -> void:
+	_list_button.connect("pressed", self, "emit_signal", [ "list_requested" ])
 
 
 func display_tests(info: Array) -> void:
