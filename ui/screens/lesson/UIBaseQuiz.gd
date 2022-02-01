@@ -47,7 +47,6 @@ var _shake_pos: float = 0
 # For animating changing the size of the container
 var _current_rect_size := rect_size
 var _next_rect_size := Vector2.ZERO
-var _next_view: Control
 var _percent_transformed: float = 0
 
 
@@ -59,6 +58,7 @@ func _ready() -> void:
 	connect("item_rect_changed", self, "_on_item_rect_changed")
 	
 	_choice_view.connect("resized", self, "_on_choice_view_resized")
+	_result_view.connect("resized", self, "_on_result_view_resized")
 	
 	_size_tween.connect("tween_step", self, "_on_size_tween_step")
 	_size_tween.connect("tween_completed", self, "_on_size_tween_completed")
@@ -77,8 +77,6 @@ func setup(quiz: Quiz) -> void:
 
 	_explanation.visible = not _quiz.explanation_bbcode.empty()
 	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(_quiz.explanation_bbcode)
-	
-	rect_min_size = _get_minimum_rect_size_needed_to_fit(_choice_view)
 
 
 func set_completed_before(value: bool) -> void:
@@ -176,22 +174,20 @@ func _show_answer(gave_correct_answer := true) -> void:
 		_correct_answer_label.text = _quiz.get_correct_answer_string()
 		emit_signal("quiz_skipped")
 	
-	# Needs to come after to fit result label.
-	_change_rect_size(_get_minimum_rect_size_needed_to_fit(_result_view), _result_view)
+	_change_rect_size_to_fit(_result_view)
+	
 
-func _get_minimum_rect_size_needed_to_fit(view: Control) -> Vector2:
+func _change_rect_size_to_fit(view: Control) -> void:
 	var buffer_space = Vector2.DOWN
 	var margins = rect_size - _boundary_control.rect_size
-	return view.rect_size + margins + buffer_space
-
-func _change_rect_size(target: Vector2, view: Control) -> void:
-	_next_view = view
+	
+	var size_to_fit_view = view.rect_size + margins + buffer_space
 	
 	_size_tween.stop_all()
 	_size_tween.remove(self, "_percent_transformed")
 	
 	_current_rect_size = rect_min_size
-	_next_rect_size = target
+	_next_rect_size = size_to_fit_view
 	_percent_transformed = 0
 	
 	_size_tween.interpolate_property(
@@ -210,7 +206,11 @@ func _change_rect_size(target: Vector2, view: Control) -> void:
 # Will also animate expanding the container to fit a hint upon hint.show()
 func _on_choice_view_resized() -> void:
 	if _choice_view.visible:
-		_change_rect_size(_get_minimum_rect_size_needed_to_fit(_choice_view), _choice_view)
+		_change_rect_size_to_fit(_choice_view)
+
+func _on_result_view_resized() -> void:
+	if _result_view.visible:
+		_change_rect_size_to_fit(_result_view)
 
 func _on_item_rect_changed() -> void:
 	if not _error_tween.is_active() or _error_tween.tell() > ERROR_SHAKE_TIME:
@@ -223,7 +223,6 @@ func _on_item_rect_changed() -> void:
 
 func _on_size_tween_step(object: Object, key: NodePath, _elapsed: float, _value: Object) -> void:
 	if object == self and key == ":_percent_transformed":
-		_next_rect_size = _get_minimum_rect_size_needed_to_fit(_next_view)
 		var new_size := _current_rect_size
 		var difference := _next_rect_size - _current_rect_size
 		new_size += difference * _percent_transformed
