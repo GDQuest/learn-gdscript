@@ -46,6 +46,7 @@ var _shake_pos: float = 0
 # For animating changing the size of the container
 var _current_rect_size := rect_size
 var _next_rect_size := Vector2.ZERO
+var _next_view: Control
 var _percent_transformed: float = 0
 
 
@@ -56,7 +57,7 @@ func _ready() -> void:
 	_skip_button.connect("pressed", self, "_show_answer", [false])
 	connect("item_rect_changed", self, "_on_item_rect_changed")
 	
-	_choice_view.connect("minimum_size_changed", self, "_on_choice_view_minimum_size_changed")
+	_choice_view.connect("resized", self, "_on_choice_view_minimum_size_changed")
 	
 	_tween.connect("tween_step", self, "_on_tween_step")
 
@@ -177,13 +178,16 @@ func _show_answer(gave_correct_answer := true) -> void:
 		emit_signal("quiz_skipped")
 	
 	# Needs to come after to fit result label.
-	_change_rect_size(_get_min_rect_size_needed_to_fit(_result_view))
+	_change_rect_size(_get_min_rect_size_needed_to_fit(_result_view), _result_view)
 
 func _get_min_rect_size_needed_to_fit(view: Control) -> Vector2:
 	var buffer_space = Vector2.DOWN
-	return view.get_combined_minimum_size() + rect_size - _boundary_control.rect_size + buffer_space
+	var margins = rect_size - _boundary_control.rect_size
+	return view.rect_size + margins + buffer_space
 
-func _change_rect_size(target: Vector2) -> void:
+func _change_rect_size(target: Vector2, view: Control) -> void:
+	_next_view = view
+	
 	_tween.stop_all()
 	_tween.remove(self, "_percent_transformed")
 	
@@ -206,18 +210,20 @@ func _change_rect_size(target: Vector2) -> void:
 # Needed for updating post-initialization.
 # Will also animate expanding the container to fit a hint upon hint.show()
 func _on_choice_view_minimum_size_changed() -> void:
-	_change_rect_size(_get_min_rect_size_needed_to_fit(_choice_view))
-
+	_change_rect_size(_get_min_rect_size_needed_to_fit(_choice_view), _choice_view)
 
 func _on_item_rect_changed() -> void:
 	if not _tween.is_active() or _tween.tell() > ERROR_SHAKE_TIME:
 		_shake_pos = rect_position.y
-	# Required because BoundaryControl does not make it's children fit to it's own edges.
-	_choice_view.rect_size.x = _boundary_control.rect_size.x
-	_result_view.rect_size.x = _boundary_control.rect_size.x
+	
+	if _choice_view.rect_size.x != _boundary_control.rect_size.x:
+		_choice_view.rect_size.x = _boundary_control.rect_size.x
+	elif _result_view.rect_size.x != _boundary_control.rect_size.x:
+		_result_view.rect_size.x = _boundary_control.rect_size.x
 
 func _on_tween_step(object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
 	if object == self and _next_rect_size != Vector2.ZERO:
+		_next_rect_size = _get_min_rect_size_needed_to_fit(_next_view)
 		var new_size := _current_rect_size
 		var difference := _next_rect_size - _current_rect_size
 		new_size += difference * _percent_transformed
