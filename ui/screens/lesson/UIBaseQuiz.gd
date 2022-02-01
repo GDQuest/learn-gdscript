@@ -38,7 +38,8 @@ onready var _skip_button := $MarginContainer/BoundaryControl/ChoiceView/HBoxCont
 onready var _result_label := $MarginContainer/BoundaryControl/ResultView/Label as Label
 onready var _correct_answer_label := $MarginContainer/BoundaryControl/ResultView/CorrectAnswer as Label
 
-onready var _tween := $Tween as Tween
+onready var _error_tween := $ErrorTween as Tween
+onready var _size_tween := $SizeTween as Tween
 onready var _help_message := $MarginContainer/BoundaryControl/ChoiceView/HelpMessage as Label
 
 var _quiz: Quiz
@@ -59,8 +60,8 @@ func _ready() -> void:
 	
 	_choice_view.connect("resized", self, "_on_choice_view_resized")
 	
-	_tween.connect("tween_step", self, "_on_tween_step")
-	_tween.connect("tween_completed", self, "_on_tween_completed")
+	_size_tween.connect("tween_step", self, "_on_size_tween_step")
+	_size_tween.connect("tween_completed", self, "_on_size_tween_completed")
 
 
 func setup(quiz: Quiz) -> void:
@@ -102,13 +103,13 @@ func _test_answer() -> void:
 		result = _quiz.test_answer(_get_answers().back())
 	_help_message.text = result.help_message
 	_help_message.visible = not result.help_message.empty()
-	_tween.stop_all()
+	_error_tween.stop_all()
 	if not result.is_correct:
 		_outline.modulate.a = 1.0
 		_outline.add_stylebox_override("panel", ERROR_OUTLINE)
 
 		rect_position.y = _shake_pos
-		_tween.interpolate_property(
+		_error_tween.interpolate_property(
 			self,
 			"rect_position:y",
 			_shake_pos + ERROR_SHAKE_SIZE,
@@ -117,7 +118,7 @@ func _test_answer() -> void:
 			Tween.TRANS_ELASTIC,
 			Tween.EASE_OUT
 		)
-		_tween.interpolate_property(
+		_error_tween.interpolate_property(
 			_outline,
 			"modulate:a",
 			_outline.modulate.a,
@@ -127,15 +128,12 @@ func _test_answer() -> void:
 			Tween.EASE_IN,
 			OUTLINE_FLASH_DELAY
 		)
-		_tween.start()
+		_error_tween.start()
 	else:
 		_show_answer()
 
 func _show_answer(gave_correct_answer := true) -> void:
-	# Reset any error animations
-	_tween.stop_all()
-	_tween.reset_all()
-	_tween.remove_all()
+	_error_tween.stop_all()
 	
 	_outline.add_stylebox_override("panel", PASSED_OUTLINE if gave_correct_answer else NEUTRAL_OUTLINE)
 	_outline.modulate.a = 1.0
@@ -143,7 +141,7 @@ func _show_answer(gave_correct_answer := true) -> void:
 	
 	_result_view.show()
 	
-	_tween.interpolate_property(
+	_size_tween.interpolate_property(
 		_choice_view,
 		"modulate:a",
 		_choice_view.modulate.a,
@@ -154,7 +152,7 @@ func _show_answer(gave_correct_answer := true) -> void:
 		0
 	)
 	
-	_tween.interpolate_property(
+	_size_tween.interpolate_property(
 		_result_view,
 		"modulate:a",
 		0,
@@ -165,7 +163,7 @@ func _show_answer(gave_correct_answer := true) -> void:
 		FADE_OUT_TIME
 	)
 	
-	_tween.start()
+	_size_tween.start()
 	
 	if gave_correct_answer:
 		emit_signal("quiz_passed")
@@ -189,14 +187,14 @@ func _get_minimum_rect_size_needed_to_fit(view: Control) -> Vector2:
 func _change_rect_size(target: Vector2, view: Control) -> void:
 	_next_view = view
 	
-	_tween.stop_all()
-	_tween.remove(self, "_percent_transformed")
+	_size_tween.stop_all()
+	_size_tween.remove(self, "_percent_transformed")
 	
 	_current_rect_size = rect_min_size
 	_next_rect_size = target
 	_percent_transformed = 0
 	
-	_tween.interpolate_property(
+	_size_tween.interpolate_property(
 		self, 
 		"_percent_transformed", 
 		0.0, 
@@ -206,7 +204,7 @@ func _change_rect_size(target: Vector2, view: Control) -> void:
 		Tween.EASE_IN_OUT
 	)
 	
-	_tween.start()
+	_size_tween.start()
 
 # Needed for updating post-initialization.
 # Will also animate expanding the container to fit a hint upon hint.show()
@@ -215,7 +213,7 @@ func _on_choice_view_resized() -> void:
 		_change_rect_size(_get_minimum_rect_size_needed_to_fit(_choice_view), _choice_view)
 
 func _on_item_rect_changed() -> void:
-	if not _tween.is_active() or _tween.tell() > ERROR_SHAKE_TIME:
+	if not _error_tween.is_active() or _error_tween.tell() > ERROR_SHAKE_TIME:
 		_shake_pos = rect_position.y
 	
 	if _choice_view.rect_size.x != _boundary_control.rect_size.x:
@@ -223,15 +221,17 @@ func _on_item_rect_changed() -> void:
 	elif _result_view.rect_size.x != _boundary_control.rect_size.x:
 		_result_view.rect_size.x = _boundary_control.rect_size.x
 
-func _on_tween_step(object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
-	if object == self and _next_rect_size != Vector2.ZERO:
-		_next_rect_size = _get_minimum_rect_size_needed_to_fit(_next_view)
+func _on_size_tween_step(object: Object, key: NodePath, _elapsed: float, _value: Object) -> void:
+	if object == self and key == ":_percent_transformed":
+		#_next_rect_size = _get_minimum_rect_size_needed_to_fit(_next_view)
 		var new_size := _current_rect_size
 		var difference := _next_rect_size - _current_rect_size
 		new_size += difference * _percent_transformed
 		rect_min_size = new_size
 
 # Remove the ability to click buttons on choice view after they have disappeared.
-func _on_tween_completed(object: Object, _key: NodePath) -> void:
-	if object == _choice_view:
+func _on_size_tween_completed(object: Object, key: NodePath) -> void:
+	if object == self and key == ":_percent_transformed":
+		_next_rect_size = rect_min_size
+	if object == _choice_view and key == ":modulate:a":
 		_choice_view.hide()
