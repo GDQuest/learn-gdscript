@@ -205,6 +205,7 @@ func _change_rect_size_to_fit(view: Control) -> void:
 # Needed for updating post-initialization.
 # Will also animate expanding the container to fit a hint upon _help_message.show()
 func _on_choice_view_resized() -> void:
+	_choice_view.rect_size.y = 0 # Wacky workaround for size errors with rich text labels.
 	if _choice_view.visible:
 		_change_rect_size_to_fit(_choice_view)
 
