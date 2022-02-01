@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/OutputConsole.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://ui/components/popups/ExternalErrorPopup.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/components/popups/ErrorOverlayPopup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=6]
+[ext_resource path="res://addons/SmoothScroll/SmoothScrollContainer.gd" type="Script" id=7]
 
 [node name="OutputConsole" type="PanelContainer"]
 anchor_right = 1.0
@@ -51,6 +52,7 @@ margin_bottom = 1048.0
 rect_clip_content = false
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
+script = ExtResource( 7 )
 
 [node name="MessageList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
 margin_right = 1888.0

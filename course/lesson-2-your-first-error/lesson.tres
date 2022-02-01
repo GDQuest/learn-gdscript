@@ -1,18 +1,135 @@
-[gd_resource type="Resource" load_steps=11 format=2]
+[gd_resource type="Resource" load_steps=15 format=2]
 
-[ext_resource path="res://course/lesson-2-your-first-error/content-UdOCQiGj.tres" type="Resource" id=1]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=2]
-[ext_resource path="res://course/lesson-2-your-first-error/content-96942.tres" type="Resource" id=3]
-[ext_resource path="res://course/lesson-2-your-first-error/practice-85733.tres" type="Resource" id=4]
-[ext_resource path="res://course/lesson-2-your-first-error/content-0c7DDizK.tres" type="Resource" id=5]
-[ext_resource path="res://course/lesson-2-your-first-error/content-kGx0c7DD.tres" type="Resource" id=6]
-[ext_resource path="res://course/lesson-2-your-first-error/content-KUdOCQiG.tres" type="Resource" id=7]
-[ext_resource path="res://course/lesson-2-your-first-error/content-62278.tres" type="Resource" id=8]
-[ext_resource path="res://course/lesson-2-your-first-error/quiz-4WI79pWI.tres" type="Resource" id=9]
-[ext_resource path="res://course/lesson-2-your-first-error/content-nfCDjEPe.tres" type="Resource" id=10]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=3]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=4]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-2-your-first-error/content-96942.tres"
+title = ""
+type = 0
+text = "When you program, you are bound to run into errors. Tons of them.
+
+But you shouldn't worry! On the computer, [b]errors are a good thing[/b].
+
+You will encounter errors, and [i]that's okay[/i]: every programmer does. Especially professionals.
+
+At school, maybe you learned that mistakes are a bad thing. When you code something, it's not the case: [b]errors help you write correct programs[/b].
+
+It's just the computer telling you it doesn't understand something or some code you wrote has a specific issue you can fix."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-2-your-first-error/content-62278.tres"
+title = ""
+type = 0
+text = "A code error looks like this. It's a message that tells you some bit of your code doesn't work."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-2-your-first-error/content-kGx0c7DD.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ErrorExample.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-2-your-first-error/content-0c7DDizK.tres"
+title = "Making errors friendlier"
+type = 0
+text = "Error messages can look a bit cryptic. It's because they're designed by fellow programmers, for trained programmers.
+
+We added an error translator in this app that will help you get started.
+
+It shows you why an error happens and what the message means. It also gives you some tips on how to fix it."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-2-your-first-error/content-KUdOCQiG.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ErrorTranslatorExample.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-2-your-first-error/content-UdOCQiGj.tres"
+title = ""
+type = 0
+text = "Errors are messages designed on purpose by fellow programmers who came before you. They anticipated you might have specific issues.
+
+You shouldn't think of errors as failures. They are like mentors helping you from the past. Importantly, errors won't break your computer. At least not with GDScript because it's a pretty safe language."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-2-your-first-error/quiz-4WI79pWI.tres"
+question = "Are errors a good or a bad thing in code?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "Yes, errors are here to help you!
+
+Pay attention to them, do your best to read and understand them. With experience, you'll learn to make your code work more reliably thanks to error messages."
+answer_options = [ "They're bad: errors are always bad.", "They're good: they're here to help." ]
+valid_answers = [ "They're good: they're here to help." ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-2-your-first-error/content-nfCDjEPe.tres"
+title = ""
+type = 0
+text = "Okay, let's see an error in action. Once again, click the [i]Practice[/i] button below to face your first real error."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-2-your-first-error/practice-85733.tres"
+title = "Fix Your First Error"
+goal = "This code is incorrect and will cause an error when you run it.
+
+The code defines an empty function named [code]this_code_is_wrong[/code].
+
+To work, the function should use the [code]return[/code] keyword. But this keyword is currently inside a comment, which the computer ignores.
+
+Test the current code by pressing the [i]Run[/i] button.
+
+Then, remove the comment sign (#) to make the code valid.
+
+Be careful not to remove the spacing before [code]return[/code]! Otherwise, that'll cause another error. You may try that too, if you feel like it."
+starting_code = "func this_code_is_wrong():
+	#return"
+hints = PoolStringArray( "Remove the # sign." )
+validator_script_path = "first-error/TestsFixError.gd"
+script_slice_path = "first-error/ErrorScene.live-editor/slices/ErrorScene.wrong_code.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 1 )
+description = "There's an error in this code. We need you to fix it!"
 
 [resource]
 script = ExtResource( 2 )
 title = "Your First Error"
-content_blocks = [ ExtResource( 3 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 1 ), ExtResource( 9 ), ExtResource( 10 ) ]
-practices = [ ExtResource( 4 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ]
+practices = [ SubResource( 9 ) ]

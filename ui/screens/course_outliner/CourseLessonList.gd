@@ -6,6 +6,11 @@ const CourseLessonItem := preload("res://ui/screens/course_outliner/CourseLesson
 const CourseLessonItemScene := preload("res://ui/screens/course_outliner/CourseLessonItem.tscn")
 
 onready var _lesson_items := $ScrollContainer/MarginContainer/Items as Control
+onready var _scroll_container := $ScrollContainer as ScrollContainer
+
+
+func _ready() -> void:
+	_scroll_container.grab_focus()
 
 
 func add_item(lesson_index: int, lesson_title: String, completion: int) -> void:

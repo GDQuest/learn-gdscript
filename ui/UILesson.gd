@@ -16,27 +16,33 @@ const AUTOSCROLL_DURATION := 0.24
 
 export var test_lesson: Resource
 
+var _lesson: Lesson
+var _visible_index := -1
+var _quizzes_done := -1 # Start with -1 because we will always autoincrement at least once.
+var _quizz_count := 0
+
+var _base_text_font_size := preload("res://ui/theme/fonts/font_text.tres").size
+
 onready var _scroll_container := $OuterMargin/ScrollContainer as ScrollContainer
 onready var _scroll_content := $OuterMargin/ScrollContainer/InnerMargin as Control
 onready var _title := $OuterMargin/ScrollContainer/InnerMargin/Content/Title as Label
 onready var _content_blocks := $OuterMargin/ScrollContainer/InnerMargin/Content/ContentBlocks as VBoxContainer
+onready var _content_container := $OuterMargin/ScrollContainer/InnerMargin/Content as VBoxContainer
 onready var _practices_visibility_container := (
 	$OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer as VBoxContainer
 )
 onready var _practices_container := (
 	$OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer/Practices as VBoxContainer
 )
-
 onready var _debounce_timer := $DebounceTimer as Timer
 onready var _tweener := $Tween as Tween
 
-var _lesson: Lesson
-var _visible_index := -1
-var _quizzes_done := -1 # Start with -1 because we will always autoincrement at least once.
-var _quizz_count := 0
+onready var _start_content_width := _content_container.rect_size.x
 
 
 func _ready() -> void:
+	Events.connect("font_size_scale_changed", self, "_update_content_container_width")
+	_update_content_container_width(UserProfiles.get_profile().font_size_scale)
 	_scroll_container.get_v_scrollbar().connect("value_changed", self, "_on_content_scrolled")
 	_debounce_timer.connect("timeout", self, "_emit_read_content")
 
@@ -45,6 +51,8 @@ func _ready() -> void:
 		for child in _content_blocks.get_children():
 			child.show()
 		_practices_container.show()
+
+	_scroll_container.grab_focus()
 
 
 func setup(lesson: Lesson, course: Course) -> void:
@@ -81,34 +89,40 @@ func setup(lesson: Lesson, course: Course) -> void:
 		var reading_started := user_profile.has_lesson_blocks_read(course.resource_path, lesson.resource_path)
 		if restore_id.empty() and not reading_done and reading_started:
 			for block in lesson.content_blocks:
-				if user_profile.is_lesson_block_read(course.resource_path, lesson.resource_path, block.resource_path):
+				var block_id := ""
+				if block is Quiz:
+					block_id = block.quiz_id
+				else:
+					block_id = block.content_id
+
+				if user_profile.is_lesson_block_read(course.resource_path, lesson.resource_path, block_id):
 					continue
 
-				restore_id = block.resource_path
+				restore_id = block_id
 				break
 
 	for block in lesson.content_blocks:
 		if block is ContentBlock:
 			var instance: UIContentBlock = ContentBlockScene.instance()
-			instance.name = block.resource_path.get_file().get_basename()
+			instance.name = block.content_id.get_file().get_basename()
 			_content_blocks.add_child(instance)
 			instance.setup(block)
 			instance.hide()
 
-			if restore_id == block.resource_path:
+			if restore_id == block.content_id:
 				restore_node = instance
 
 		elif block is Quiz:
 			var scene = QuizInputFieldScene if block is QuizInputField else QuizChoiceScene
 			var instance = scene.instance()
-			instance.name = block.resource_path.get_file().get_basename()
+			instance.name = block.quiz_id.get_file().get_basename()
 			_content_blocks.add_child(instance)
 			instance.setup(block)
 			instance.hide()
 
 			var completed_before := false
 			if course:
-				completed_before = user_profile.is_lesson_quiz_completed(course.resource_path, lesson.resource_path, block.resource_path)
+				completed_before = user_profile.is_lesson_quiz_completed(course.resource_path, lesson.resource_path, block.quiz_id)
 				if completed_before:
 					_quizzes_done += 1
 			instance.completed_before = completed_before
@@ -117,7 +131,7 @@ func setup(lesson: Lesson, course: Course) -> void:
 			instance.connect("quiz_passed", self, "_reveal_up_to_next_quiz")
 			instance.connect("quiz_skipped", self, "_reveal_up_to_next_quiz")
 
-			if restore_id == block.resource_path:
+			if restore_id == block.quiz_id:
 				restore_node = instance
 
 	var highlighted_next := false
@@ -125,7 +139,7 @@ func setup(lesson: Lesson, course: Course) -> void:
 		var button: UIPracticeButton = PracticeButtonScene.instance()
 		button.setup(practice)
 		if course:
-			button.completed_before = user_profile.is_lesson_practice_completed(course.resource_path, lesson.resource_path, practice.resource_path)
+			button.completed_before = user_profile.is_lesson_practice_completed(course.resource_path, lesson.resource_path, practice.practice_id)
 			if not highlighted_next and not button.completed_before:
 				highlighted_next = true
 				button.is_highlighted = true
@@ -142,9 +156,9 @@ func setup(lesson: Lesson, course: Course) -> void:
 		var scroll_offset = abs(_scroll_content.rect_global_position.y - _content_blocks.rect_global_position.y)
 		var scroll_target = restore_node.rect_position.y + scroll_offset - AUTOSCROLL_PADDING
 		_tweener.stop_all()
-		_tweener.interpolate_property(
+		_tweener.interpolate_method(
 			_scroll_container,
-			"scroll_vertical",
+			"set_v_scroll", # So it plays nice with our smooth scroller
 			_scroll_container.scroll_vertical,
 			scroll_target,
 			AUTOSCROLL_DURATION,
@@ -210,3 +224,7 @@ func _emit_read_content() -> void:
 		var last_block = content_blocks.pop_back()
 		Events.emit_signal("lesson_reading_block", last_block, content_blocks)
 
+
+func _update_content_container_width(new_font_scale: int) -> void:
+	var font_size_multiplier := float(_base_text_font_size + new_font_scale * 2) / _base_text_font_size
+	_content_container.rect_min_size.x = _start_content_width * font_size_multiplier

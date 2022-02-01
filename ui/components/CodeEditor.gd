@@ -82,6 +82,8 @@ func _ready() -> void:
 	yield(get_tree(), "idle_frame")
 	_initial_text = text
 
+	slice_editor.grab_focus()
+
 	if not Engine.editor_hint:
 		for button in _buttons_with_shortcuts:
 			assert(
@@ -118,8 +120,16 @@ func set_distraction_free_state(enabled: bool) -> void:
 		_distraction_free_mode_button.icon = EDITOR_EXPAND_ICON
 
 
+func is_pause_button_pressed() -> bool:
+	return _pause_button.pressed
+
+
 func set_pause_button_pressed(is_pressed: bool) -> void:
 	_pause_button.pressed = is_pressed
+
+
+func is_solution_button_pressed() -> bool:
+	return _solution_button.pressed
 
 
 func set_solution_button_pressed(is_pressed: bool) -> void:

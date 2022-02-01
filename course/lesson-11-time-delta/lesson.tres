@@ -1,24 +1,222 @@
-[gd_resource type="Resource" load_steps=17 format=2]
+[gd_resource type="Resource" load_steps=21 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
-[ext_resource path="res://course/lesson-11-time-delta/quiz-HARbBWNb.tres" type="Resource" id=2]
-[ext_resource path="res://course/lesson-11-time-delta/content-hcIb5BnV.tres" type="Resource" id=3]
-[ext_resource path="res://course/lesson-11-time-delta/content-N4rS5AJT.tres" type="Resource" id=4]
-[ext_resource path="res://course/lesson-11-time-delta/practice-UdOCQiGj.tres" type="Resource" id=5]
-[ext_resource path="res://course/lesson-11-time-delta/content-DwfyqdYO.tres" type="Resource" id=6]
-[ext_resource path="res://course/lesson-11-time-delta/content-exRjTRhZ.tres" type="Resource" id=7]
-[ext_resource path="res://course/lesson-11-time-delta/content-1TxlTtcy.tres" type="Resource" id=8]
-[ext_resource path="res://course/lesson-11-time-delta/quiz-TxYej47M.tres" type="Resource" id=10]
-[ext_resource path="res://course/lesson-11-time-delta/content-DGt6fUqb.tres" type="Resource" id=12]
-[ext_resource path="res://course/lesson-11-time-delta/content-qE82V6jG.tres" type="Resource" id=13]
-[ext_resource path="res://course/lesson-11-time-delta/content-TLtZixQO.tres" type="Resource" id=14]
-[ext_resource path="res://course/lesson-11-time-delta/content-Gx0c7DDi.tres" type="Resource" id=15]
-[ext_resource path="res://course/lesson-11-time-delta/content-cSrGQgrV.tres" type="Resource" id=16]
-[ext_resource path="res://course/lesson-11-time-delta/quiz-PRw9clsF.tres" type="Resource" id=17]
-[ext_resource path="res://course/lesson-11-time-delta/practice-x0c7DDiz.tres" type="Resource" id=18]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=3]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=4]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-11-time-delta/content-DwfyqdYO.tres"
+title = ""
+type = 0
+text = "We've seen how we can use our character's [code]_process()[/code] function to make it move continuously."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-11-time-delta/content-exRjTRhZ.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "res://course/lesson-10-the-game-loop/visuals/ExampleRotatingSprite.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-11-time-delta/content-N4rS5AJT.tres"
+title = ""
+type = 0
+text = "But it's not just our character that has a [code]_process()[/code] function; Almost everything in the game has a [code]_process()[/code] function!
+
+Dozens of times per second, Godot runs every [code]_process()[/code] function in the game to update the game world.
+
+After that, it displays an image of the game world on the screen. We call that image a [b]frame[/b].
+
+Godot then moves on to calculating the next frame.
+
+As this happens dozens of times per second, you get the illusion of movement. This is similar to how traditional animation works."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-11-time-delta/content-1TxlTtcy.tres"
+title = ""
+type = 2
+text = "You may have heard of frames per second or FPS. Games often run at 60 frames per second. 
+
+It means that everything in the game updates 60 times each second.
+
+The number varies while playing, depending on the game and the device it runs on.
+
+On powerful computers, you may get frame rates in the hundreds or thousands of frames per second."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-11-time-delta/content-hcIb5BnV.tres"
+title = ""
+type = 0
+text = "Let's look at the [code]_process()[/code] function in more detail."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-11-time-delta/quiz-HARbBWNb.tres"
+question = "What parameter does the _process() function take?"
+content_bbcode = "[code]
+func _process(delta):
+	rotate(0.05)
+[/code]"
+hint = ""
+explanation_bbcode = "The [code]_process()[/code] function has one parameter named [code]delta[/code]."
+answer_options = [ "rotate", "0.05", "delta" ]
+valid_answers = [ "delta" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-11-time-delta/content-DGt6fUqb.tres"
+title = "Frames take varying amounts of time to calculate"
+type = 0
+text = "Depending on the game, the computer, and what the game engine needs to calculate, frames take more or less time to display.
+
+There will always be milliseconds variations from frame to frame.
+
+That is why the [code]_process()[/code] function receives a [code]delta[/code] parameter.
+
+The word \"delta\" represents a time difference. It's the time passed since the previous frame, in seconds.
+
+The [code]delta[/code] parameter tells us how fast Godot took to complete the [b]previous frame[/b].
+
+We can use it to ensure that the variations between frames doesn't make the game's simulation unreliable."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-11-time-delta/quiz-TxYej47M.tres"
+question = "What do we know about delta?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "[code]delta[/code] is the time it takes Godot to complete the previous frame in seconds.
+
+It's very small because frames happen many times a second.
+
+It varies each frame because Godot needs to process more or less each frame."
+answer_options = [ "It's a value in seconds.", "It varies each frame.", "It's the time it takes Godot to complete the previous frame." ]
+valid_answers = [ "It's a value in seconds.", "It varies each frame.", "It's the time it takes Godot to complete the previous frame." ]
+is_multiple_choice = true
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-11-time-delta/content-qE82V6jG.tres"
+title = "The time between frames matters"
+type = 0
+text = "The time it takes to display a new frame varies. If you don't take that time into account in your code, your game will have gameplay issues and bugs. Godot provides that time to the [code]_process()[/code] function through the [code]delta[/code] parameter.
+
+In the example below, the top robot moves using [code]delta[/code]. As a result, it moves at a fixed speed.
+
+The bottom robot moves over a constant distance every frame. It will move faster or slower than the top robot on [i]your[/i] computer. The result will be different for everyone."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-11-time-delta/content-Gx0c7DDi.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/DemoRobotRace.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-11-time-delta/content-TLtZixQO.tres"
+title = ""
+type = 0
+text = "Multiplying time-sensitive values by [code]delta[/code] makes them [b]time-dependent[/b] rather than [b]frame-dependent[/b].
+
+Thanks to that, we get reliable movement over time.
+
+Without [code]delta[/code], frame times vary from computer to computer and during gameplay. Because of that, the movement will differ for every player, making the game inconsistent and messy."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-11-time-delta/quiz-PRw9clsF.tres"
+question = "What does this mean?"
+content_bbcode = "[code]rotation_speed * delta[/code]"
+hint = ""
+explanation_bbcode = "The [code]*[/code] symbol means we're multiplying [code]rotation_speed[/code] by [code]delta[/code] time."
+answer_options = [ "We're multiplying rotation_speed by delta.", "We're dividing delta by rotation_speed.", "We're adding rotation_speed to delta.", "We're subtracting delta from rotation_speed." ]
+valid_answers = [ "We're multiplying rotation_speed by delta." ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-11-time-delta/content-cSrGQgrV.tres"
+title = ""
+type = 0
+text = "In the next practice, we'll use delta to make rotating time-dependant."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-11-time-delta/practice-UdOCQiGj.tres"
+title = "Rotating Using Delta"
+goal = "At the moment, the rotation of the robot is frame-dependent.
+
+Add [code]delta[/code] to make the rotational speed time-dependent.
+
+The robot should rotate [code]2[/code] radians per second."
+starting_code = "func _process(delta):
+	rotate(2)"
+hints = PoolStringArray( "Multiply the radians by [code]delta[/code]" )
+validator_script_path = "rotating-using-delta/TestsRotatingDelta.gd"
+script_slice_path = "rotating-using-delta/RotatingSpriteDelta.live-editor/slices/RotatingSpriteDelta.move_and_rotate.slice.tres"
+documentation_references = PoolStringArray( "rotate" )
+documentation_resource = ExtResource( 2 )
+description = ""
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-11-time-delta/practice-x0c7DDiz.tres"
+title = "Moving in a Circle Using Delta"
+goal = "In this practice, make the robot move in a smooth circle using delta.
+
+To get this movement, the robot should rotate [code]2[/code] radians per second and move [code]100[/code] pixels per second towards its left hand."
+starting_code = "func _process(delta):
+	pass"
+hints = PoolStringArray( "Replace [code]pass[/code] with the [code]rotate()[/code] and [code]move_local_x()[/code] functions", "Make sure to multiply each parameter by [code]delta[/code]" )
+validator_script_path = "rotating-and-moving-delta/TestsRotatingMovingDelta.gd"
+script_slice_path = "rotating-and-moving-delta/RotatingMovingSpriteDelta.live-editor/slices/RotatingMovingSpriteDelta.move_and_rotate.slice.tres"
+documentation_references = PoolStringArray( "rotate", "move_local_x" )
+documentation_resource = ExtResource( 2 )
+description = ""
 
 [resource]
 script = ExtResource( 1 )
 title = "Time Delta"
-content_blocks = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 17 ), ExtResource( 16 ) ]
-practices = [ ExtResource( 5 ), ExtResource( 18 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]
+practices = [ SubResource( 14 ), SubResource( 15 ) ]

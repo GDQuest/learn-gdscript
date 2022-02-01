@@ -14,14 +14,22 @@ export var center_in_frame := true setget set_center_in_frame
 
 var _scene_instance: CanvasItem setget _set_scene_instance
 
+var _base_text_font_size := preload("res://ui/theme/fonts/font_text.tres").size
+
 onready var _gdscript_text_edit := $GDScriptCode as TextEdit
 onready var _run_button := $Frame/HBoxContainer/RunButton as Button
 onready var _reset_button := $Frame/HBoxContainer/ResetButton as Button
 onready var _frame_container := $Frame/PanelContainer as Control
 onready var _sliders := $Frame/Sliders as VBoxContainer
 
+onready var _start_code_example_height := _gdscript_text_edit.rect_size.y
+
 
 func _ready() -> void:
+	Events.connect("font_size_scale_changed", self, "_update_gdscript_text_edit_width")
+	if not Engine.editor_hint:
+		_update_gdscript_text_edit_width(UserProfiles.get_profile().font_size_scale)
+
 	_run_button.connect("pressed", self, "run")
 	_reset_button.connect("pressed", self, "reset")
 	_frame_container.connect("resized", self, "_center_scene_instance")
@@ -142,3 +150,15 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	elif _run_button.visible:
 		_run_button.hide()
 		printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.filename])
+
+
+func _update_gdscript_text_edit_width(new_font_scale: int) -> void:
+	var font_size_multiplier := (
+		float(_base_text_font_size + new_font_scale * 2)
+		/ _base_text_font_size
+	)
+	_gdscript_text_edit.rect_min_size.y = _start_code_example_height * font_size_multiplier
+	# Forces the text wrapping to update. Without this, the code can overflow
+	# the container when changing the font size.
+	# TODO: There is some computation error in the TextEdit, it seems. Need to investigate it further.
+	pass

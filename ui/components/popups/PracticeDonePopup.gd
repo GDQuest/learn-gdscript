@@ -45,6 +45,7 @@ func fade_in(game_container: Control) -> void:
 	var offscreen_offset := get_viewport_rect().size.x
 	_game_container.margin_left = offscreen_offset
 	_game_container.margin_right = offscreen_offset
+	set_anchors_and_margins_preset(Control.PRESET_WIDE)
 	_layout_container.set_anchors_and_margins_preset(Control.PRESET_CENTER, Control.PRESET_MODE_KEEP_SIZE)
 	# Set the texture for the output replication.
 	_game_texture.texture = game_container.find_node("GameView").get_viewport().get_texture()

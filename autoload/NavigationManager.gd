@@ -74,7 +74,7 @@ func navigate_to(metadata: String) -> void:
 	
 	var file_path := normalized.get_file_path()
 	
-	var resource := load(file_path)
+	var resource := get_navigation_resource(file_path)
 	if not (resource is Resource):
 		push_error("`%s` is not a resource" % file_path)
 		return
@@ -84,6 +84,22 @@ func navigate_to(metadata: String) -> void:
 
 	emit_signal("navigation_requested")
 
+
+func get_navigation_resource(resource_id : String) -> Resource:
+	var is_lesson := resource_id.ends_with("lesson.tres")
+	
+	if is_lesson:
+		return load(resource_id) as Resource
+	
+	var lesson_path := resource_id.get_base_dir().plus_file("lesson.tres")
+	var lesson_data := load(lesson_path) as Lesson
+	
+	# If it's not a lesson, it's a practice. May support some other types in future.
+	for practice_res in lesson_data.practices:
+		if practice_res.practice_id == resource_id:
+			return practice_res
+	
+	return null
 
 
 # Handle back requests

@@ -1,26 +1,265 @@
-[gd_resource type="Resource" load_steps=19 format=2]
+[gd_resource type="Resource" load_steps=25 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
-[ext_resource path="res://course/lesson-15-modulo/content-DizKUdOC.tres" type="Resource" id=2]
-[ext_resource path="res://course/lesson-15-modulo/content-iGjB7tKR.tres" type="Resource" id=3]
-[ext_resource path="res://course/lesson-15-modulo/quiz-lkGx0c7D.tres" type="Resource" id=4]
-[ext_resource path="res://course/lesson-15-modulo/content-QiGjB7tK.tres" type="Resource" id=5]
-[ext_resource path="res://course/lesson-15-modulo/content-RHJMQ2XN.tres" type="Resource" id=6]
-[ext_resource path="res://course/lesson-15-modulo/content-wQMqAYVj.tres" type="Resource" id=7]
-[ext_resource path="res://course/lesson-15-modulo/content-TRhZN4rS.tres" type="Resource" id=8]
-[ext_resource path="res://course/lesson-15-modulo/content-qdYOexRj.tres" type="Resource" id=9]
-[ext_resource path="res://course/lesson-15-modulo/content-5AJTESv5.tres" type="Resource" id=10]
-[ext_resource path="res://course/lesson-15-modulo/content-lkGx0c7D.tres" type="Resource" id=11]
-[ext_resource path="res://course/lesson-15-modulo/content-otxF5HUx.tres" type="Resource" id=12]
-[ext_resource path="res://course/lesson-15-modulo/practice-izKUdOCQ.tres" type="Resource" id=14]
-[ext_resource path="res://course/lesson-15-modulo/practice-GjB7tKRH.tres" type="Resource" id=15]
-[ext_resource path="res://course/lesson-15-modulo/practice-7DDizKUd.tres" type="Resource" id=16]
-[ext_resource path="res://course/lesson-15-modulo/content-x0c7DDiz.tres" type="Resource" id=17]
-[ext_resource path="res://course/lesson-15-modulo/content-jB7tKRHJ.tres" type="Resource" id=18]
-[ext_resource path="res://course/lesson-15-modulo/content-KUdOCQiG.tres" type="Resource" id=19]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=3]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=4]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-15-modulo/content-iGjB7tKR.tres"
+title = ""
+type = 0
+text = "The modulo operation ([code]%[/code]) calculates the remainder of a whole number division.
+
+For example, the modulo of [code]5[/code] by [code]3[/code] ([code]5 % 3[/code]) is [code]2[/code].
+
+We typically use this operation to tell if a number is odd or even or to produce a random number within a particular range (like a dice roll).
+
+Play around with the modulo widget on the right to see how modulo works visually."
+visual_element_path = "visuals/ExampleModulo.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-15-modulo/quiz-lkGx0c7D.tres"
+question = "What's the result of this modulo operation?"
+content_bbcode = "[code]11 % 4[/code]"
+hint = ""
+explanation_bbcode = "[code]11[/code] divided by [code]4[/code] is [code]2[/code], and the [b]remainder[/b] of the division is [code]3[/code].
+
+So [code]11% 4[/code] is [code]3[/code]."
+answer_options = [ "3", "2", "7" ]
+valid_answers = [ "3" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-15-modulo/content-QiGjB7tK.tres"
+title = ""
+type = 0
+text = "The modulo operation only works on [b]whole numbers[/b]; Not decimal numbers.
+
+Also, just like in regular divisions, the divisor can't be zero.
+
+All three examples below will cause an error in your code."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-15-modulo/content-otxF5HUx.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeWholeNumbers.tscn"
+reverse_blocks = false
+has_separator = true
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-15-modulo/content-RHJMQ2XN.tres"
+title = "Three ways we use the modulo operation"
+type = 0
+text = "The modulo operation has important uses in programming, like making a number cycle.
+
+Take a traffic light, for example."
+visual_element_path = ""
+reverse_blocks = true
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-15-modulo/content-DizKUdOC.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/DemoTrafficLights.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-15-modulo/content-wQMqAYVj.tres"
+title = ""
+type = 0
+text = "We use the number [code]light_index[/code] to represent the traffic light's current state.
+
+The lights always cycle in the same way: first, we have the green light, then the orange, then the red.
+
+To represent that cycle, you can periodically add one to the number and use the modulo operator to wrap back to [code]0[/code].
+
+Instead, you could use a condition; In this case, we use the modulo as a shortcut."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-15-modulo/content-jB7tKRHJ.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleTrafficLightsCondition.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-15-modulo/content-x0c7DDiz.tres"
+title = ""
+type = 1
+text = "In computer code, we very often count from [code]0[/code].
+
+Every number translates to a precise combination of bits in the machine, starting from [code]0[/code].
+
+We don't want to waste any number, and as the first number the computer knows about is [code]0[/code], we start counting from [code]0[/code]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-15-modulo/content-KUdOCQiG.tres"
+title = "Using modulo to find even and odd numbers"
+type = 0
+text = "We can also use a modulo to check if a number is even or odd. If we divide a number by [code]2[/code] and there's no remainder, then the number is [b]even[/b]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-15-modulo/content-lkGx0c7D.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleOddEven.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-15-modulo/content-c7DDizKU.tres"
+title = ""
+type = 0
+text = "Notice how the modulo can be larger than the number it affects. For example, [code]1% 2[/code] gives you [code]1[/code]. That's because [code]1[/code] divided by [code]2[/code] equals [code]0[/code], and the remainder is [code]1[/code].
+
+Like with divisions, the only case you can't use modulo is with a divisor of [code]0[/code]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-15-modulo/content-dOCQiGjB.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeModuloError.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-15-modulo/content-qdYOexRj.tres"
+title = "Calculating a random number within a range"
+type = 0
+text = "We can use the modulo to simulate dice rolls. To do so, we generate a large random number and use the modulo operator to limit the number's range.
+
+To generate a random whole number, you can call the [code]randi()[/code] function. The name stands for random integer.
+
+The number the function generates can be huge: roughly up to 2 billion on an Android device and around 10^18 on a 64-bit computer.
+
+You can use the modulo operation to limit the random number's range."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-15-modulo/content-TRhZN4rS.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleDice.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-15-modulo/content-5AJTESv5.tres"
+title = ""
+type = 0
+text = "The result is also random because we use the modulo operation on a random number.
+
+In the following practices, you'll use a modulo to advance traffic lights, add maximum health to the robot on every odd level, and learn how to code dice rolls."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-15-modulo/practice-izKUdOCQ.tres"
+title = "Advancing Traffic Lights"
+goal = "Add to the [code]advance_traffic_light()[/code] function so the [code]light_index[/code] variable increments by one, then wraps back to [code]0[/code] if it gets too high.
+
+Use the modulo operator [code]%[/code] to make sure the value of [code]light_index[/code] wraps back to [code]0[/code].
+
+The value of [code]light_index[/code] should only ever be [code]0[/code], [code]1[/code], or [code]2[/code]."
+starting_code = "func advance_traffic_light():
+	pass"
+hints = PoolStringArray( "First, increment [code]light_index[/code] by adding [code]1[/code] to it", "There are three lights, so use the modulo operation with [code]3[/code]", "Use [code]light_index = light_index % 3[/code] or [code]light_index %= 3[/code] to wrap [code]light_index[/code] back to [code]0[/code]" )
+validator_script_path = "traffic_lights/TestTrafficLight.gd"
+script_slice_path = "traffic_lights/TrafficLights.live-editor/slices/TrafficLights.traffic_light.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 2 )
+description = "Learn how to use modulo to wrap a number back to zero using traffic lights."
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-15-modulo/practice-GjB7tKRH.tres"
+title = "Rolling Dice"
+goal = "Our dice rolling function doesn't work! Right now, it always gives the result of how many sides the dice has: 20.
+
+Use [code]randi()[/code] to generate a random number and the modulo operation [code]%[/code]. Set [code]result[/code] to a random number between [code]1[/code] and [code]sides[/code].
+
+The random number is stored in [code]result[/code] before we display it on the dice."
+starting_code = "func roll_dice(sides):
+	return sides"
+hints = PoolStringArray( "The result of the modulo operation is always less than the divisor. For example, [code]randi() % 9[/code] returns a random number between [code]0[/code] and [code]8[/code]", "Make sure to increase the range [code]result[/code] can be" )
+validator_script_path = "rolling_dice/TestRollingDice.gd"
+script_slice_path = "rolling_dice/RollingDice.live-editor/slices/RollingDice.rolling.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 2 )
+description = "Whether in a board game or video game, getting a random number is always useful. Here, we create a function that simulates a dice roll."
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-15-modulo/practice-7DDizKUd.tres"
+title = "Bonus Health Every Other Level"
+goal = "Change the [code]level_up()[/code] function so it does the following:
+
+1) Increment [code]level[/code] by [code]1[/code]
+2) Increase [code]max_health[/code] by [code]5[/code]
+3) If [code]level[/code] is [b]even[/b], increase [code]max_health[/code] by an additional [code]5[/code]
+
+The robot starts with [code]100[/code] maximum health. It will gain three levels when you run the code. At level 4, the robot should have [code]125[/code] maximum health."
+starting_code = "func level_up():
+	pass"
+hints = PoolStringArray( "The modulo operation [code]%[/code] returns the remainder of division. For example, [code]5 % 2[/code] gives [code]1[/code] ", "Even numbers have a remainder of [code]0[/code] when divided by [code]2[/code]", "Use [code]if level % 2 == 0:[/code] to check if the level is even" )
+validator_script_path = "even_levels/TestEvenLevels.gd"
+script_slice_path = "even_levels/EvenLevels.live-editor/slices/EvenLevels.even_level.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 2 )
+description = "There are other ways to increase maximum health. You could use a modulo to give a bonus every evening level. Learn how here!"
 
 [resource]
 script = ExtResource( 1 )
 title = "Modulo"
-content_blocks = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 12 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 18 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 10 ) ]
-practices = [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ]
+practices = [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ]

@@ -74,7 +74,8 @@ func _make_visual_element() -> void:
 	# If the path isn't absolute, we try to load the file from the current directory
 	var path := _content_block.visual_element_path
 	if path.is_rel_path():
-		path = _content_block.resource_path.get_base_dir().plus_file(path)
+		# TODO: Should probably avoid relying on content ID for getting paths.
+		path = _content_block.content_id.get_base_dir().plus_file(path)
 	var resource := load(path)
 	if not resource:
 		printerr(
@@ -84,7 +85,7 @@ func _make_visual_element() -> void:
 			)
 		)
 		return
-		
+
 
 	if resource is Texture:
 		var texture_rect := TextureRect.new()

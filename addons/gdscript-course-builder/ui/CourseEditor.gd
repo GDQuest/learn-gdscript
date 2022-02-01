@@ -119,7 +119,9 @@ func _set_edited_course(course: Course) -> void:
 		for lesson_data in _edited_course.lessons:
 			lesson_data.disconnect("changed", self, "_on_course_resource_changed")
 
-	_edited_course = course
+	# Normalize the resource while assigning it.
+	# In case of future data changes, apply compatibility updates.
+	_edited_course = _normalize_course_resource(course)
 
 	if not _edited_course:
 		_save_course_button.disabled = true
@@ -159,6 +161,35 @@ func _set_edited_course(course: Course) -> void:
 	_edited_course.connect("changed", self, "_on_course_resource_changed")
 	for lesson_data in _edited_course.lessons:
 		lesson_data.connect("changed", self, "_on_course_resource_changed")
+
+
+func _normalize_course_resource(course: Course) -> Course:
+	if not course:
+		return course
+
+	# We used to store content blocks and practices outside in individual files.
+	# Now lessons are self-contained, so we should update sub-resources to use
+	# their id properties instead of paths. And also we should remove the old files.
+	for lesson_data in course.lessons:
+		for block_data in lesson_data.content_blocks:
+			if not block_data.resource_path.empty():
+				if block_data is Quiz and block_data.quiz_id.empty():
+					block_data.quiz_id = block_data.resource_path
+				elif block_data is ContentBlock and block_data.content_id.empty():
+					block_data.content_id = block_data.resource_path
+
+				_remove_on_save.append(block_data.resource_path)
+				block_data.resource_path = ""
+
+		for practice_data in lesson_data.practices:
+			if not practice_data.resource_path.empty():
+				if practice_data.practice_id.empty():
+					practice_data.practice_id = practice_data.resource_path
+
+				_remove_on_save.append(practice_data.resource_path)
+				practice_data.resource_path = ""
+
+	return course
 
 
 # Helpers
@@ -411,7 +442,7 @@ func _on_lesson_selected(lesson_index: int) -> void:
 	var lesson_data = _edited_course.lessons[lesson_index]
 	_lesson_details.set_lesson(lesson_data)
 	_current_lesson_index = lesson_index
-	
+
 	_play_current_button.disabled = false
 	_search_bar.is_active = true
 
@@ -460,14 +491,13 @@ func _on_lesson_slug_changed(lesson_slug: String) -> void:
 	lesson_data.take_over_path(lesson_path)
 
 	for block_data in lesson_data.content_blocks:
-		_remove_on_save.append(block_data.resource_path)
-		var resource_path = block_data.resource_path.replace(old_base_path, base_path)
-		block_data.take_over_path(resource_path)
+		if block_data is Quiz:
+			block_data.quiz_id = block_data.quiz_id.replace(old_base_path, base_path)
+		else:
+			block_data.content_id = block_data.content_id.replace(old_base_path, base_path)
 
 	for practice_data in lesson_data.practices:
-		_remove_on_save.append(practice_data.resource_path)
-		var resource_path = practice_data.resource_path.replace(old_base_path, base_path)
-		practice_data.take_over_path(resource_path)
+		practice_data.practice_id = practice_data.practice_id.replace(old_base_path, base_path)
 
 	# Rebuild the list.
 	_lesson_list.set_lessons(_edited_course.lessons)
@@ -492,14 +522,14 @@ func _on_play_current_requested() -> void:
 	var fs := Directory.new()
 	if not fs.file_exists(temp_path):
 		fs.make_dir_recursive(temp_path)
-	
+
 	# Like Godot, we want to save changes before playing the scene.
 	if _dirty_status_label.visible:
 		_save_course(true)
 
 	var play_scene: PackedScene
 	var error
-	
+
 	var lesson_data := _edited_course.lessons[_current_lesson_index] as Lesson
 	# If there is a practice selected, play it.
 	if _current_practice_index >= 0:
@@ -510,9 +540,9 @@ func _on_play_current_requested() -> void:
 		var packed_instance := FileUtils.pack_playable_scene(instance, temp_path, "practice")
 		if not packed_instance:
 			return
-		
+
 		play_scene = packed_instance
-	
+
 	# Otherwise, play the selected lesson itself.
 	elif _current_lesson_index >= 0:
 		var instance: UILesson = UILessonScene.instance()
@@ -520,7 +550,7 @@ func _on_play_current_requested() -> void:
 		var packed_instance := FileUtils.pack_playable_scene(instance, temp_path, "lesson")
 		if not packed_instance:
 			return
-		
+
 		play_scene = packed_instance
 
 	if play_scene:

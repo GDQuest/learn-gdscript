@@ -1,29 +1,283 @@
-[gd_resource type="Resource" load_steps=22 format=2]
+[gd_resource type="Resource" load_steps=26 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
-[ext_resource path="res://course/lesson-7-member-variables/content-5tT6n1Tx.tres" type="Resource" id=2]
-[ext_resource path="res://course/lesson-7-member-variables/content-UxZPxY8V.tres" type="Resource" id=3]
-[ext_resource path="res://course/lesson-7-member-variables/content-OCQiGjB7.tres" type="Resource" id=4]
-[ext_resource path="res://course/lesson-7-member-variables/content-VjotxF5H.tres" type="Resource" id=5]
-[ext_resource path="res://course/lesson-7-member-variables/content-ej47MqE8.tres" type="Resource" id=6]
-[ext_resource path="res://course/lesson-7-member-variables/content-lTtcyhcI.tres" type="Resource" id=7]
-[ext_resource path="res://course/lesson-7-member-variables/content-XNwQMqAY.tres" type="Resource" id=8]
-[ext_resource path="res://course/lesson-7-member-variables/content-UDpPwQDw.tres" type="Resource" id=9]
-[ext_resource path="res://course/lesson-7-member-variables/content-RjTRhZN4.tres" type="Resource" id=10]
-[ext_resource path="res://course/lesson-7-member-variables/content-6fUqbTxY.tres" type="Resource" id=11]
-[ext_resource path="res://course/lesson-7-member-variables/content-fyqdYOex.tres" type="Resource" id=12]
-[ext_resource path="res://course/lesson-7-member-variables/content-S5AJTESv.tres" type="Resource" id=13]
-[ext_resource path="res://course/lesson-7-member-variables/content-tKRHJMQ2.tres" type="Resource" id=14]
-[ext_resource path="res://course/lesson-7-member-variables/content-b5BnVHAR.tres" type="Resource" id=15]
-[ext_resource path="res://course/lesson-7-member-variables/content-bBWNbDGt.tres" type="Resource" id=16]
-[ext_resource path="res://course/lesson-7-member-variables/practice-Gx0c7DDi.tres" type="Resource" id=17]
-[ext_resource path="res://course/lesson-7-member-variables/practice-x0c7DDiz.tres" type="Resource" id=18]
-[ext_resource path="res://course/lesson-7-member-variables/quiz-qBNnPf6G.tres" type="Resource" id=19]
-[ext_resource path="res://course/lesson-7-member-variables/quiz-XIWMg1oR.tres" type="Resource" id=20]
-[ext_resource path="res://course/lesson-7-member-variables/content-iGjB7tKR.tres" type="Resource" id=21]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=3]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=4]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-OCQiGjB7.tres"
+title = ""
+type = 0
+text = "In this lesson, we take a first look at variables.
+
+In games, you need to keep track of many values that change over time:
+
+- The player score.
+- Every character or enemy's health.
+- The last checkpoint.
+
+And so much more. You need to store, retrieve, and update those values.
+
+We call those values [i]variables[/i]. Variables are labels you use to keep track of values that vary over time. Here's an example of a variable tracking a character or monster's health."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-tKRHJMQ2.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ExampleHealthVariableDefinition.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-XNwQMqAY.tres"
+title = ""
+type = 0
+text = "The line above defines a new variable named [code]health[/code] and assigns it a starting value of [code]100[/code] (that's what the equal sign does, more on that below).
+
+Function parameters, which you saw in the previous lesson, are another example of variables."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-VjotxF5H.tres"
+title = ""
+type = 0
+text = "In this lesson, we start using variables built into Godot. They're a particular kind called [i]member variables[/i].
+
+Member variables are values attached to a game entity. They're useful properties like the [code]position[/code], [code]rotation[/code], and [code]scale[/code] of a character.
+
+In a previous lesson, we saw how we could use the [code]rotate()[/code] function to rotate our character."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-UxZPxY8V.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "res://course/lesson-3-standing-on-shoulders-of-giants/ExampleRotateSprite.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-UDpPwQDw.tres"
+title = ""
+type = 0
+text = "This function increases or decreases the entity's [code]rotation[/code] member variable.
+
+Say we want to reset the rotation to [code]0[/code] and make the character upright. Using the [code]rotate()[/code] function can prove difficult: you need to know the character's exact current angle to cancel it out.
+
+It's much easier to use the member variable rather than the function.
+
+The following code assigns the value [code]0[/code] to the character's rotation, resetting its angle and making it upright."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-fyqdYOex.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "RunResetCharacterRotation.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-7-member-variables/quiz-XIWMg1oR.tres"
+question = "What's a variable?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "Variables are labels you use to access values that change over time.
+
+You can also use them to put a name on a value you want to reuse throughout your code. It makes your code easier to read and to change."
+answer_options = [ "A label you use to keep track of a value that can change.", "A function that varies over time.", "A decimal number." ]
+valid_answers = [ "A label you use to keep track of a value that can change." ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-RjTRhZN4.tres"
+title = "Accessing sub-variables with the dot"
+type = 0
+text = "In video games, you will see many member variables that have sub-values.
+
+For example, the [code]position[/code] we mentioned has two coordinates: [code]x[/code] and [code]y[/code].
+
+It's the same for the [code]scale[/code]: it has [code]x[/code] and [code]y[/code] sub-variables. They respectively control the horizontal and vertical size of the game entity.
+
+To access those X and Y sub-components, you add a dot (\".\") after the variable name.
+
+The code below places the entity at [code]180[/code] pixels on the x-axis and [code]120[/code] pixels on the y-axis."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-S5AJTESv.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ExampleSetCharacterPosition.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-5tT6n1Tx.tres"
+title = ""
+type = 0
+text = "Notice how we use the equal sign (\"=\") to assign the numbers on the right to the sub-variables on the left.
+
+Unlike in maths, in computer programming, the equal sign (\"=\") does not mean \"is equal to.\"
+
+Instead, it means \"assign the result of the expression on the right to the variable on the left\". We assign values so often in code that we prefer to reserve the equal sign for that."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-iGjB7tKR.tres"
+title = "In games, the Y-axis is positive going down"
+type = 0
+text = "Note that in games, assuming your character's position starts at (0, 0), the code above moves the entity [code]180[/code] pixels to the right and [code]120[/code] pixels down.
+
+In math, the y-axis is generally positive going up by convention.
+
+The convention is the [i]opposite[/i] in video games and many computer applications: the y-axis is positive going down."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-lTtcyhcI.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "VisualXAndYAxis.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-b5BnVHAR.tres"
+title = ""
+type = 1
+text = "This may be confusing if you only saw the y-axis pointing up in math classes. However, in math, axes go in any direction. They don't even have to be perpendicular.
+
+On the computer, the position (0, 0) happens to correspond to the top-left of your computer screen. It then makes sense for coordinates to be positive when going towards the bottom-right corner.
+
+This leads to another question: why is position zero the top left of the screen? This is due to computer and TV displays history: they would calculate and display pixels starting from the top left corner and moving towards the bottom right corner."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-bBWNbDGt.tres"
+title = ""
+type = 0
+text = "Let's look at one last example before moving on to the practice. The following code makes the character 1.5 times its starting size."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-6fUqbTxY.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ExampleSetCharacterScale.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-7-member-variables/quiz-qBNnPf6G.tres"
+question = "How do you access sub-variables?"
+content_bbcode = "Variables often hold sub-values, like the [code]position[/code] has two sub-variables: [code]x[/code] and [code]y[/code]. How would you access the [code]x[/code], for example?"
+hint = ""
+explanation_bbcode = "To access a sub-variable, you need to write a dot between the parent variable name and the sub-variable name.
+
+For example, to access the [code]x[/code] sub-variable of the [code]position[/code] variable, you'll write [code]position.x[/code]."
+answer_options = [ "You write a dot (\".\") between the variable and the sub-variable name.", "You write an arrow (\"->\") between the variable and the sub-variable name.", "You write a slash (\"/\") between the variable and the sub-variable name." ]
+valid_answers = [ "You write a dot (\".\") between the variable and the sub-variable name." ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-ej47MqE8.tres"
+title = ""
+type = 0
+text = "In a future lesson, we'll explain why and how those variables have sub-variables.
+
+For now, just know you can use the dot to access them.
+
+We'll tell you which variables have sub-components and what their names are.
+
+In the next lessons, you'll create your own variables and do operations on them to add or remove [code]score[/code], [code]health[/code], you name it.
+
+For now, let's practice accessing variables."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-7-member-variables/practice-Gx0c7DDi.tres"
+title = "Draw a rectangle at a precise position"
+goal = "Draw a rectangle of 200 by 120 pixels at the X position of 120 pixels and Y position of 100 pixels.
+
+You need to replace the numbers in the code editor to draw the correct rectangle."
+starting_code = "position.x = 0
+position.y = 0
+draw_rectangle(0, 0)"
+hints = PoolStringArray( "You should set the X position to 120, and the Y position to 100.", "You need to pass the numbers 200 and 120 respectively to draw_rectangle()." )
+validator_script_path = "draw_rectangle_at_position/TestsDrawingRectangles.gd"
+script_slice_path = "draw_rectangle_at_position/DrawingRectangleAtPosition.live-editor/slices/DrawingRectangleAtPosition.test_assignment.slice.tres"
+documentation_references = PoolStringArray( "position.x", "position.y", "draw_rectangle" )
+documentation_resource = ExtResource( 2 )
+description = "Use the position member variable and its sub-variables to change the rectangle's position."
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-7-member-variables/practice-x0c7DDiz.tres"
+title = "Draw rectangles at different positions"
+goal = "Draw three squares of size 100 by 100 that are 100 pixels apart from each other on the horizontal axis. In other words, there should be a 100-pixel gap between two squares.
+
+You should draw the squares starting at the position (100, 100). This means you should position the first square at 100 on the X axis and 100 on the Y axis."
+starting_code = ""
+hints = PoolStringArray( "As each square is 100 pixels wide, to separate them by 100 pixels, you need to move the turtle by 200 pixels in total.", "You need to change the turtle\'s X position before drawing each square." )
+validator_script_path = "draw_rectangles_at_positions/TestsDrawingRectangles.gd"
+script_slice_path = "draw_rectangles_at_positions/DrawingMultipleRectangles.live-editor/slices/DrawingMultipleRectangles.test_assignment.slice.tres"
+documentation_references = PoolStringArray( "draw_rectangle", "position.x", "position.y" )
+documentation_resource = ExtResource( 2 )
+description = "Now you can place and draw one rectangle, how about placing several? To really get the hang of properties."
 
 [resource]
 script = ExtResource( 1 )
 title = "Introduction to Member Variables"
-content_blocks = [ ExtResource( 4 ), ExtResource( 14 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 20 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 2 ), ExtResource( 21 ), ExtResource( 7 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 11 ), ExtResource( 19 ), ExtResource( 6 ) ]
-practices = [ ExtResource( 17 ), ExtResource( 18 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ]
+practices = [ SubResource( 19 ), SubResource( 20 ) ]

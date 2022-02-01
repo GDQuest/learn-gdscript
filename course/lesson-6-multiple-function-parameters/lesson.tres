@@ -1,36 +1,387 @@
-[gd_resource type="Resource" load_steps=29 format=2]
+[gd_resource type="Resource" load_steps=34 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-jB7tKRHJ.tres" type="Resource" id=2]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-qAYVjotx.tres" type="Resource" id=3]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-MQ2XNwQM.tres" type="Resource" id=4]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-F5HUxZPx.tres" type="Resource" id=5]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-GvGm22rt.tres" type="Resource" id=6]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-Y8VUDpPw.tres" type="Resource" id=7]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-bDGt6fUq.tres" type="Resource" id=8]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-DizKUdOC.tres" type="Resource" id=9]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-QEn91c9l.tres" type="Resource" id=10]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-QDwfyqdY.tres" type="Resource" id=11]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-OexRjTRh.tres" type="Resource" id=12]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-MqE82V6j.tres" type="Resource" id=13]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-QiGjB7tK.tres" type="Resource" id=14]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-yhcIb5Bn.tres" type="Resource" id=15]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-ZN4rS5AJ.tres" type="Resource" id=16]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-n1TxlTtc.tres" type="Resource" id=17]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-8B67UJ8T.tres" type="Resource" id=18]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-bTxYej47.tres" type="Resource" id=19]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/content-lkGx0c7D.tres" type="Resource" id=20]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/practice-lkGx0c7D.tres" type="Resource" id=21]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/quiz-DXXb7kug.tres" type="Resource" id=22]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/quiz-eTgEl7Nk.tres" type="Resource" id=23]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/quiz-qjnRwLav.tres" type="Resource" id=24]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/quiz-05z4dCL2.tres" type="Resource" id=25]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/practice-qAYVjotx.tres" type="Resource" id=26]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/practice-DwfyqdYO.tres" type="Resource" id=27]
-[ext_resource path="res://course/lesson-6-multiple-function-parameters/practice-v5tT6n1T.tres" type="Resource" id=28]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=3]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=4]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-jB7tKRHJ.tres"
+title = ""
+type = 0
+text = "In the previous part, you created a function to draw a square of a fixed size.
+
+It's a bit limiting. Instead, it would be much better if we had a function to draw a square of any size. Or better: any kind of rectangle (a square is a specific kind of rectangle).
+
+In previous lessons, you used the [code]rotate()[/code] function and gave it a [i]parameter[/i]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-MQ2XNwQM.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleRotate.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-qAYVjotx.tres"
+title = ""
+type = 0
+text = "Under the hood, the [code]rotate()[/code] function looks like the following:"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-F5HUxZPx.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleRotateFunction.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-Y8VUDpPw.tres"
+title = ""
+type = 0
+text = "It adds the new [code]radians[/code] to the current rotation, and then sets this new rotation.
+
+Just like [code]rotate()[/code], we can also give our function [i]parameters[/i]. Parameters are labels you give to values passed to the function."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-QDwfyqdY.tres"
+title = ""
+type = 1
+text = "The [code]radians[/code] can be a positive or negative number, which allows you to rotate both clockwise and counter-clockwise."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-OexRjTRh.tres"
+title = ""
+type = 0
+text = "For now, please focus on the first line: [code]func rotate(radians)[/code].
+
+When you call [code]rotate(0.5)[/code], the computer binds the value [code]0.5[/code] to the label [code]radians[/code].
+
+Wherever the computer sees the identifier [code]radians[/code] inside the function, it replaces it with the [code]0.5[/code] value.
+
+The parameter name is always a label you use to refer to a [i]value[/i]. The value in question can be a number, text, or anything else.
+
+For now, we'll stick to numbers as we have yet to see other value types."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-6-multiple-function-parameters/quiz-DXXb7kug.tres"
+question = "What is a function parameter?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "A parameter is a label that represents a value.
+
+The value in question can change: it depends on what you put in parentheses when calling a function."
+answer_options = [ "A label you give to a value the function receives.", "A number you use to make calculations.", "The name of a function." ]
+valid_answers = [ "A label you give to a value the function receives." ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-ZN4rS5AJ.tres"
+title = "How to create functions with parameters"
+type = 0
+text = "You can give your function parameters when writing its [i]definition[/i] (the line starting with the [code]func[/code] keyword).
+
+To do so, you add a name inside of the parentheses."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-8B67UJ8T.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleDrawSquareDefinition1.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-yhcIb5Bn.tres"
+title = ""
+type = 0
+text = "You can give parameters any name. How you name functions and parameters is up to you. 
+
+Just remember that names cannot contain spaces. To write parameter names with multiple words, you need to use underscores.
+
+The following function definition is exactly equivalent to the previous one."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-n1TxlTtc.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleDrawSquareDefinition2.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-bDGt6fUq.tres"
+title = ""
+type = 0
+text = "Parameters make your code easier to reuse.
+
+Here's an example with a function to draw any square. Use the slider to change the value passed to the function and draw squares of different sizes."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-bTxYej47.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleDrawAnySquare.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-6-multiple-function-parameters/quiz-eTgEl7Nk.tres"
+question = "Which is the correct syntax for a function definition?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "To define a function, you need to start with the [code]func[/code] keyword followed by a space, the [code]function_name[/code], and optional parameters inside parentheses.
+
+You must end the line with a colon, which defines a new code block. We'll see moving forward keywords other than [code]func[/code] require a colon at the end of the line."
+answer_options = [ "func function_name(parameter_name):", "func (function_name): parameter_name", "func function_name(parameter_name)", "function_name(parameter_name):" ]
+valid_answers = [ "func function_name(parameter_name):" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-MqE82V6j.tres"
+title = "Functions can have multiple parameters"
+type = 0
+text = "You can use multiple parameters in a function. In fact, you can use as many as you [i]need[/i].
+
+To separate the function parameters, you need to write a comma between them."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-lkGx0c7D.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/FunctionDefinitionWithParams.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-0c7DDizK.tres"
+title = "Must I write  spaces between function parameters?"
+type = 1
+text = "In a function definition, you must have a space between the [code]func[/code] keyword and the function name.
+
+However, because we use the comma to separate parameters, it doesn't matter if you use spaces between parameters. As long as you have the comma, either syntax is correct.
+
+We often use spaces after the comma for readability."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-DizKUdOC.tres"
+title = ""
+type = 0
+text = "The following example defines a function that uses two parameters to move an entity on both the X and Y axes."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-QiGjB7tK.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleFunctionWithTwoParameters.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-GvGm22rt.tres"
+title = "How should I name my functions and parameters?"
+type = 1
+text = "The names of functions, parameters, or other things in your code are entirely up to you.
+
+They are written by us programmers for other programmers. You want to use the names that make the most sense to you and fellow programmers.
+
+You could absolutely write single-letter names like in maths classes: [code]a[/code], [code]b[/code], [code]f[/code].
+
+You can also write abbreviated names like [code]pos[/code] for position, [code]bg[/code] for background, and so on.
+
+Many programmers do either or both of the above.
+
+At GDQuest, we favor complete and explicit names.
+
+We generally try to write code that is explicit and relatively easy to read.
+
+Right now, you have to type every letter when you code, so long names may feel inconvenient.
+
+However, this is good for learning: it trains your fingers to type precisely.
+
+Then, after you finish this course, you will see that the computer assists you a lot when you code real games with a feature called auto-completion.
+
+Based on a few characters you type, it will offer you to complete long names."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-6-multiple-function-parameters/quiz-qjnRwLav.tres"
+question = "When defining a function, parameters are..."
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "You can define functions with or without parameters, depending on your needs."
+answer_options = [ "Optional", "Mandatory" ]
+valid_answers = [ "Optional" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=23]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-6-multiple-function-parameters/quiz-05z4dCL2.tres"
+question = "What's the correct syntax to define a function with multiple parameters?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "You always write the function parameters inside of the parentheses. To define multiple parameters, you separate them with a comma."
+answer_options = [ "func function_name(parameter_1, parameter_2, ...):", "func function_name(parameter_1 parameter_2 ...):", "func function_name(): parameter_1, parameter_2, ..." ]
+valid_answers = [ "func function_name(parameter_1, parameter_2, ...):" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=24]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-6-multiple-function-parameters/content-QEn91c9l.tres"
+title = ""
+type = 0
+text = "Now it's your turn to create a function with multiple parameters: a function to draw rectangles of any size."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=25]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-6-multiple-function-parameters/practice-qAYVjotx.tres"
+title = "Drawing corners of different sizes"
+goal = "Before we create a rectangle of any size, let's first see how we can use parameters to draw simpler shapes.
+
+Here we have an incomplete function that will draw corners with lines of any length, but it's missing its [code]length[/code] parameter.
+
+The function will move the turtle forward an amount defined by the parameter [code]length[/code], turn [code]90[/code] degrees, then move forward [code]length[/code] pixels.
+
+Complete the [code]draw_corner()[/code] function so it uses the [code]length[/code] parameter to draw corners."
+starting_code = "func draw_corner():
+	move_forward()
+	turn_right(90)
+	move_forward()"
+hints = PoolStringArray( "You need to add the parameter [code]length[/code] three times in this practice" )
+validator_script_path = "drawing_corners/TestsDrawingCorners.gd"
+script_slice_path = "drawing_corners/DrawingCorners.live-editor/slices/DrawingCorners.draw_corner.slice.tres"
+documentation_references = PoolStringArray( "move_forward", "turn_right" )
+documentation_resource = ExtResource( 2 )
+description = "Using function parameters, code a function you can reuse to draw corners of varying sizes."
+
+[sub_resource type="Resource" id=26]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-6-multiple-function-parameters/practice-DwfyqdYO.tres"
+title = "Using multiple parameters"
+goal = "In this practice, we'll improve our [code]draw_corner()[/code] function so the angle can also vary.
+
+Add the [code]angle[/code] parameter to the [code]draw_corner()[/code] function and use it to draw corners of varying angles."
+starting_code = "func draw_corner(length):
+	move_forward(length)
+	turn_right()
+	move_forward(length)"
+hints = PoolStringArray( "Parameters in functions are separated by commas", "You need to add the parameter [code]angle[/code] two times in this practice", "Use [code]func draw_corner(length, angle):[/code]" )
+validator_script_path = "drawing_corners_advanced/TestsDrawingCornersAdvanced.gd"
+script_slice_path = "drawing_corners_advanced/DrawingCornersAdvanced.live-editor/slices/DrawingCornersAdvanced.draw_corner.slice.tres"
+documentation_references = PoolStringArray( "move_forward", "turn_right" )
+documentation_resource = ExtResource( 2 )
+description = "With two parameters, code a function to draw corners with any angle."
+
+[sub_resource type="Resource" id=27]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-6-multiple-function-parameters/practice-v5tT6n1T.tres"
+title = "Drawing squares of any size"
+goal = "We want a function to draw squares of any size.
+
+We could use these squares as outlines when selecting units in a tactical game, as a frame for items in an inventory, and more.
+
+Create a function named [code]draw_square()[/code] that takes one parameter: the [code]length[/code] of the square's sides."
+starting_code = ""
+hints = PoolStringArray( "You need to specify one parameter in the function definition", "Use [code]func draw_square(length):[/code]", "Call [code]move_forward()[/code] four times for each side of the square", "Make sure to [code]turn_right(90)[/code] after moving forward to create each corner" )
+validator_script_path = "drawing_squares/TestsDrawingSquares.gd"
+script_slice_path = "drawing_squares/DrawingSquares.live-editor/slices/DrawingSquares.draw.slice.tres"
+documentation_references = PoolStringArray( "move_forward", "turn_right" )
+documentation_resource = ExtResource( 2 )
+description = "In the previous lesson, your function would draw squares of a fixed size. Using a parameter, code a function to draw squares of any size."
+
+[sub_resource type="Resource" id=28]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-6-multiple-function-parameters/practice-lkGx0c7D.tres"
+title = "Drawing rectangles of any size"
+goal = "Let's make our square drawing function more flexible to include rectangles of varying sizes.
+
+Your job is to code a function named [code]draw_rectangle()[/code] that takes two parameters: the [code]length[/code] and the [code]height[/code] of the rectangle.
+
+Note that we could still draw a square with [code]draw_rectangle()[/code] by having the [code]length[/code] and [code]height[/code] equal the same value."
+starting_code = ""
+hints = PoolStringArray( "You need to specify the two parameters in the function definition", "Use [code]func draw_rectangle(length, height):[/code]", "When calling move_forward, you need to alternate between using the length and the height arguments when calling move_forward." )
+validator_script_path = "drawing_rectangles/TestsDrawingRectangles.gd"
+script_slice_path = "drawing_rectangles/DrawingRectangles.live-editor/slices/DrawingRectangles.draw.slice.tres"
+documentation_references = PoolStringArray( "move_forward", "turn_right" )
+documentation_resource = ExtResource( 2 )
+description = "With one parameter, you can make squares of any size. With two, you can draw any rectangle! You'll do so in this practice."
 
 [resource]
 script = ExtResource( 1 )
 title = "Your First Function Parameter"
-content_blocks = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 22 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 15 ), ExtResource( 17 ), ExtResource( 8 ), ExtResource( 19 ), ExtResource( 23 ), ExtResource( 13 ), ExtResource( 20 ), ExtResource( 9 ), ExtResource( 14 ), ExtResource( 6 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 10 ) ]
-practices = [ ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 21 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ]
+practices = [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ]

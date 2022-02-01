@@ -51,7 +51,7 @@ func _ready() -> void:
 	Events.connect("practice_next_requested", self, "_on_practice_next_requested")
 	Events.connect("practice_previous_requested", self, "_on_practice_previous_requested")
 	Events.connect("practice_requested", self, "_on_practice_requested")
-	
+
 	_lesson_done_popup.connect("accepted", self, "_on_lesson_completed")
 
 	_outliner_button.connect("pressed", NavigationManager, "navigate_to_outliner")
@@ -60,7 +60,7 @@ func _ready() -> void:
 
 	_settings_button.connect("pressed", Events, "emit_signal", ["settings_requested"])
 	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
-	
+
 	if NavigationManager.current_url == "":
 		if load_into_outliner:
 			NavigationManager.navigate_to_outliner()
@@ -131,13 +131,11 @@ func _navigate_to_outliner() -> void:
 
 # Navigates forward to the next screen and adds it to the stack.
 func _navigate_to() -> void:
-	var current_resource_path = NavigationManager.current_url
-	var target: Resource = load(current_resource_path)
-
+	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
 	var screen: Control
 	if target is Practice:
 		var lesson = course.lessons[_lesson_index]
-		
+
 		screen = preload("UIPractice.tscn").instance()
 		# warning-ignore:unsafe_method_access
 		screen.setup(target, lesson, course)
@@ -146,7 +144,7 @@ func _navigate_to() -> void:
 		screen = preload("UILesson.tscn").instance()
 		# warning-ignore:unsafe_method_access
 		screen.setup(target, course)
-		
+
 		_lesson_index = course.lessons.find(lesson) # Make sure the index is synced after navigation.
 	else:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
@@ -156,7 +154,7 @@ func _navigate_to() -> void:
 	_home_button.hide()
 	_screen_container.show()
 	_breadcrumbs.update_breadcrumbs(course, target)
-	
+
 	var has_previous_screen = not _screens_stack.empty()
 	_screens_stack.push_back(screen)
 	_back_button.show()
@@ -195,7 +193,7 @@ func _on_practice_next_requested(practice: Practice) -> void:
 	# This practice is not in the current lesson, return early.
 	if index < 0:
 		return
-	
+
 	# This is the last practice in the set, try to move to the next lesson.
 	if index >= practices.size() - 1:
 		# Checking that it's the last practice is not enough.
@@ -204,13 +202,13 @@ func _on_practice_next_requested(practice: Practice) -> void:
 		var lesson_progress = user_profile.get_or_create_lesson(course.resource_path, lesson_data.resource_path)
 		var total_practices := practices.size()
 		var completed_practices = lesson_progress.get_completed_practices_count(practices)
-		
+
 		# Show a confirmation popup and optionally tell the user that the lesson is incomplete.
 		_lesson_done_popup.set_incomplete(completed_practices < total_practices)
 		_lesson_done_popup.popup_centered()
 	else:
 		# Otherwise, go to the next practice in the set.
-		NavigationManager.navigate_to(practices[index + 1].resource_path)
+		NavigationManager.navigate_to(practices[index + 1].practice_id)
 
 
 func _on_practice_previous_requested(practice: Practice) -> void:
@@ -227,7 +225,7 @@ func _on_practice_previous_requested(practice: Practice) -> void:
 		return
 	else:
 		# Otherwise, go to the previous practice in the set.
-		NavigationManager.navigate_to(practices[index - 1].resource_path)
+		NavigationManager.navigate_to(practices[index - 1].practice_id)
 
 
 func _on_practice_requested(practice: Practice) -> void:
@@ -238,8 +236,8 @@ func _on_practice_requested(practice: Practice) -> void:
 	# This practice is not in the current lesson, return early.
 	if index < 0:
 		return
-	
-	NavigationManager.navigate_to(practice.resource_path)
+
+	NavigationManager.navigate_to(practice.practice_id)
 
 
 func _on_lesson_completed() -> void:

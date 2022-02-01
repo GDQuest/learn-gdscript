@@ -1,25 +1,241 @@
-[gd_resource type="Resource" load_steps=18 format=2]
+[gd_resource type="Resource" load_steps=22 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/content-AYVjotxF.tres" type="Resource" id=2]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/content-8VUDpPwQ.tres" type="Resource" id=3]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/content-5HUxZPxY.tres" type="Resource" id=4]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/content-DwfyqdYO.tres" type="Resource" id=5]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/content-exRjTRhZ.tres" type="Resource" id=6]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/content-Q2XNwQMq.tres" type="Resource" id=7]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/quiz-S3aJeQ0w.tres" type="Resource" id=8]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/content-kGx0c7DD.tres" type="Resource" id=9]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/content-DizKUdOC.tres" type="Resource" id=10]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/content-lkGx0c7D.tres" type="Resource" id=11]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/practice-QiGjB7tK.tres" type="Resource" id=12]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/content-izKUdOCQ.tres" type="Resource" id=13]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/practice-HJMQ2XNw.tres" type="Resource" id=14]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/content-5bmEXrTC.tres" type="Resource" id=15]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/quiz-LchoN4g2.tres" type="Resource" id=16]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/content-Gx0c7DDi.tres" type="Resource" id=17]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=3]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=4]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-Q2XNwQMq.tres"
+title = ""
+type = 0
+text = "As programmers, we rely on a lot of code created by others before us.
+
+When you use any programming language, it comes with a wealth of features created by other programmers to save you time.
+
+We call a bundle of code created by fellow developers a [i]library[/i].
+
+It's a bunch of code sitting there, waiting for you to use it.
+
+Game engines like Godot go a step further by bringing many libraries together. They provide a massive toolset aimed at solving the problems a game developer might face.
+
+It's a goldmine of time-saving code, especially when getting started."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-AYVjotxF.tres"
+title = "You'll always use a lot of existing code"
+type = 0
+text = "When coding, you're never quite on your own. Programming languages themselves build upon programs created by previous developers.
+
+Throughout this course, you will use a lot of code created by the Godot developers.
+
+The first code you'll write will [i]call functions[/i] created by other programmers.
+
+A function is a list of instructions for the computer with an exact name. By using that name, we tell the computer to execute all the instructions in sequence."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-Gx0c7DDi.tres"
+title = "Calling functions"
+type = 0
+text = "When you tell the computer to execute a function, we say you [i]call[/i] the function.
+
+To [i]call[/i] a function, you write its exact name followed by an open and closed parenthesis. To call the function named \"show\", you would write [code]show()[/code].
+
+The code listing below contains two lines of code calling the [code]show()[/code] and [code]hide()[/code] functions."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-5HUxZPxY.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "CallingShowFunction.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-8VUDpPwQ.tres"
+title = ""
+type = 0
+text = "In Godot, calling [code]show()[/code] makes something visible, like a character or item. The complementary [code]hide()[/code] function hides the entity.
+
+Once an entity is visible, calling [code]show()[/code] again doesn't have any effect.
+
+Similarly, once you hide something, calling [code]hide()[/code] again doesn't change anything.
+
+[i]Click the Run button on any example below to execute the code listing.[/i]"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-izKUdOCQ.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ExampleShow.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-DwfyqdYO.tres"
+title = "Function parameters"
+type = 0
+text = "We use parentheses to call functions. The reason is you can give the function [i]parameters[/i] inside the parentheses.
+
+Here's a [i]sprite[/i] standing straight. If we call the [code]rotate(0.3)[/code] function, the character [i]sprite[/i] turns by 0.3 units."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-kGx0c7DD.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ExampleRotateSprite.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-5bmEXrTC.tres"
+title = ""
+type = 0
+text = "The [code]0.3[/code] part between the parentheses is the function's [i]parameter[/i].
+
+Parameters are values (numbers, bits of text, and more) that change how the function behaves. We also call them [i]arguments[/i] (you'll see moving forward there are many synonyms in computer programming). 
+
+Parameters let you fine-tune the effect of the function call. Parameters are rarely optional.
+
+For example, calling [code]rotate()[/code] without any parameter would result in an error. Godot wouldn't know by [i]how much[/i] you intend to rotate the [i]sprite[/i]. 
+
+Don't worry about learning what parameters each function requires or accepts! As a programmer, the documentation will always be close by for you to refer to.
+
+Finally, notice how we use a dot in the number [code]0.3[/code] above: you need to use a dot like this to represent decimal numbers. You can't use commas as they have a different purpose in code."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-exRjTRhZ.tres"
+title = "What are radians?"
+type = 1
+text = "The value of [code]0.3[/code] is an angle in [i]radians[/i]. In daily life, we're used to measuring angles in degrees. The radian is another scale commonly used in video games and math.
+
+You can convert radians into degrees by multiplying them by 180 and dividing them by PI:
+
+[code]degrees = radians * 180 / PI[/code]
+
+An angle of [code]PI[/code] radians corresponds to [code]180[/code] degrees. And [code]2 * PI[/code] is a full turn: [code]360[/code] degrees.
+
+[b]How do radians work exactly?[/b]
+
+Radians are a way to measure angles based on the radius of a circle.
+
+To get the angle in radians, you take the circle's radius and wrap it around the circle. That angle is [code]1[/code] radian because you are wrapping the radius [code]1[/code] time around the circle.
+
+Because the perimeter of a circle is [code]2 * PI * radius[/code], a full turn (360°) corresponds to [code]2 * PI[/code] radians: you need to wrap the radius of a circle [code]2 * PI[/code] times around the circle to make a full circle."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-3-standing-on-shoulders-of-giants/quiz-LchoN4g2.tres"
+question = "What does the code below do?"
+content_bbcode = "[code]show()[/code]"
+hint = ""
+explanation_bbcode = "Both answers were right! Technically, the code calls the [code]show()[/code] function. And doing so makes the game entity visible."
+answer_options = [ "It calls the function named \"show.\"", "It makes the entity (like a game character or a sprite) visible." ]
+valid_answers = [ "It calls the function named \"show.\"", "It makes the entity (like a game character or a sprite) visible." ]
+is_multiple_choice = true
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-lkGx0c7D.tres"
+title = ""
+type = 0
+text = "Another example: With the [code]move_local_x()[/code] function, you can move the character to its left and right. The function takes one parameter: a number of pixels to offset the entity.
+
+The complementary function [code]move_local_y()[/code] makes the [i]sprite[/i] move up and down.
+
+This is one way to move a character in a game, although we'll see more powerful alternatives later."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-DizKUdOC.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ExampleMoveSprite.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-3-standing-on-shoulders-of-giants/quiz-S3aJeQ0w.tres"
+question = "How do you call a function?"
+content_bbcode = "What is the syntax you use to call a function in general?"
+hint = ""
+explanation_bbcode = "To call a function, you need to write its exact name followed by an opening and a closing parenthesis.
+
+If the function requires one or more [i]parameters[/i], you add them inside the parentheses. But whether you need to do that or not depends on the function."
+answer_options = [ "You write its name followed by an opening and a closing parenthesis.", "You write its name followed by a colon.", "You write a value, like a number, followed by an opening and a closing parenthesis." ]
+valid_answers = [ "You write its name followed by an opening and a closing parenthesis." ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-3-standing-on-shoulders-of-giants/practice-QiGjB7tK.tres"
+title = "Make The Character Visible"
+goal = "Our robot character's invisible! Call the [code]show()[/code] function to make it appear."
+starting_code = ""
+hints = PoolStringArray( "Your code should just be calling show()." )
+validator_script_path = "make-visible/TestsMakeCharacterVisible.gd"
+script_slice_path = "make-visible/MakeCharacterVisible.live-editor/slices/MakeCharacterVisible.show.slice.tres"
+documentation_references = PoolStringArray( "show" )
+documentation_resource = ExtResource( 2 )
+description = "The robot's invisible! Call a function to bring it back."
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-3-standing-on-shoulders-of-giants/practice-HJMQ2XNw.tres"
+title = "Make the Robot Upright"
+goal = "The robot was turned by [code]-0.5[/code] radians. You need to make it upright by calling the [code]rotate()[/code] function."
+starting_code = ""
+hints = PoolStringArray( "You need to use the rotate() function, and give the proper parameters", "Call rotate(0.5) to turn the character 0.5 radians clockwise." )
+validator_script_path = "make-upright/TestsMakeRobotUpright.gd"
+script_slice_path = "make-upright/MakeRobotUpright.live-editor/slices/MakeRobotUpright.rotate.slice.tres"
+documentation_references = PoolStringArray( "rotate" )
+documentation_resource = ExtResource( 2 )
+description = "The robot is turned sideways. Help it straighten up with a function call."
 
 [resource]
 script = ExtResource( 1 )
 title = "We Stand on the Shoulders of Giants"
-content_blocks = [ ExtResource( 7 ), ExtResource( 2 ), ExtResource( 17 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 13 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 15 ), ExtResource( 6 ), ExtResource( 16 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 8 ) ]
-practices = [ ExtResource( 12 ), ExtResource( 14 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ]
+practices = [ SubResource( 15 ), SubResource( 16 ) ]

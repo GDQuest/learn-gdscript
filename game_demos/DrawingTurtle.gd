@@ -235,3 +235,6 @@ class Polygon:
 
 	func get_points() -> PoolVector2Array:
 		return points
+
+	func is_empty():
+		return points.empty() or points == PoolVector2Array([Vector2.ZERO])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/UILesson.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://ui/theme/vscrollbar_large_grabber.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/vscrollbar_large_grabber_highlight.tres" type="StyleBox" id=7]
 [ext_resource path="res://ui/theme/vscrollbar_large_grabber_pressed.tres" type="StyleBox" id=8]
+[ext_resource path="res://addons/SmoothScroll/SmoothScrollContainer.gd" type="Script" id=9]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -55,6 +56,7 @@ size_flags_vertical = 3
 theme = SubResource( 2 )
 follow_focus = true
 scroll_horizontal_enabled = false
+script = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""
 }

@@ -1,31 +1,297 @@
-[gd_resource type="Resource" load_steps=24 format=2]
+[gd_resource type="Resource" load_steps=28 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
-[ext_resource path="res://course/lesson-14-multiplying/content-DizKUdOC.tres" type="Resource" id=2]
-[ext_resource path="res://course/lesson-14-multiplying/content-QiGjB7tK.tres" type="Resource" id=3]
-[ext_resource path="res://course/lesson-14-multiplying/content-txF5HUxZ.tres" type="Resource" id=4]
-[ext_resource path="res://course/lesson-14-multiplying/content-QMqAYVjo.tres" type="Resource" id=5]
-[ext_resource path="res://course/lesson-14-multiplying/content-PxY8VUDp.tres" type="Resource" id=6]
-[ext_resource path="res://course/lesson-14-multiplying/content-dYOexRjT.tres" type="Resource" id=7]
-[ext_resource path="res://course/lesson-14-multiplying/content-BnVHARbB.tres" type="Resource" id=8]
-[ext_resource path="res://course/lesson-14-multiplying/content-RhZN4rS5.tres" type="Resource" id=9]
-[ext_resource path="res://course/lesson-14-multiplying/content-UqbTxYej.tres" type="Resource" id=10]
-[ext_resource path="res://course/lesson-14-multiplying/content-PwQDwfyq.tres" type="Resource" id=11]
-[ext_resource path="res://course/lesson-14-multiplying/quiz-WNbDGt6f.tres" type="Resource" id=12]
-[ext_resource path="res://course/lesson-14-multiplying/content-47MqE82V.tres" type="Resource" id=13]
-[ext_resource path="res://course/lesson-14-multiplying/content-AJTESv5t.tres" type="Resource" id=14]
-[ext_resource path="res://course/lesson-14-multiplying/quiz-tcyhcIb5.tres" type="Resource" id=15]
-[ext_resource path="res://course/lesson-14-multiplying/content-wQMqAYVj.tres" type="Resource" id=16]
-[ext_resource path="res://course/lesson-14-multiplying/content-FcSrGQgr.tres" type="Resource" id=17]
-[ext_resource path="res://course/lesson-14-multiplying/content-uvjbGhMY.tres" type="Resource" id=18]
-[ext_resource path="res://course/lesson-14-multiplying/content-VcyZFxD9.tres" type="Resource" id=19]
-[ext_resource path="res://course/lesson-14-multiplying/content-O3s7CAcY.tres" type="Resource" id=20]
-[ext_resource path="res://course/lesson-14-multiplying/content-lkGx0c7D.tres" type="Resource" id=21]
-[ext_resource path="res://course/lesson-14-multiplying/practice-0c7DDizK.tres" type="Resource" id=22]
-[ext_resource path="res://course/lesson-14-multiplying/practice-CQiGjB7t.tres" type="Resource" id=23]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=3]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=4]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-DizKUdOC.tres"
+title = ""
+type = 0
+text = "Our robot's health is always between [code]0[/code] and [code]100[/code].
+
+But as our robot fights, we want to increase its strength and toughness.
+
+When a character levels up, it might deal more damage to enemies, gain new abilities or, in our case, gain more health."
+visual_element_path = "visuals/LevelUpVisual.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-QiGjB7tK.tres"
+title = ""
+type = 0
+text = "We define a [code]level[/code] variable to keep track of the level of the robot. It starts at level one.
+
+When the robot has defeated enough enemies, we call the [code]level_up()[/code] function to increment the robot's level."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-QMqAYVjo.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeLevelUpBasic.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-txF5HUxZ.tres"
+title = ""
+type = 0
+text = "As we briefly saw in the last lesson, our robot could have a range of variables that could increase when it levels up."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-FcSrGQgr.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeStats.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-PxY8VUDp.tres"
+title = ""
+type = 0
+text = "In this lesson, we'll just focus on increasing the robot's [code]max_health[/code].
+
+The variable [code]max_health[/code] is the maximum amount the robot's [code]health[/code] can be. We change our [code]take_damage()[/code] function to use this variable."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-VcyZFxD9.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeMaxHealth.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-PwQDwfyq.tres"
+title = ""
+type = 0
+text = "We could add [code]5[/code] to the [code]max_health[/code] every time the robot levels up."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-O3s7CAcY.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeMaxHealthLinear.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-dYOexRjT.tres"
+title = ""
+type = 0
+text = "This would increase [code]max_health[/code] the same amount every time.
+
+If we graphed [code]max_health[/code], it'd look something like this."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-uvjbGhMY.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/GraphLinear.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-RhZN4rS5.tres"
+title = ""
+type = 0
+text = "This growth is [b]linear[/b].
+
+In our case, we want a feeling of more and more power as the robot levels up.
+
+We want a graph like this."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-lkGx0c7D.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/GraphExp.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-AJTESv5t.tres"
+title = ""
+type = 0
+text = "This growth is [b]exponential[/b].
+
+With each level, more [code]max_health[/code] is added than the previous level up.
+
+To get the exponential growth, we multiply the [code]max_health[/code] by an amount greater than [code]1[/code] each time the robot levels up.
+
+To multiple values together, we use [code]*[/code]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-14-multiplying/quiz-tcyhcIb5.tres"
+question = "What is the value of damage?"
+content_bbcode = "[code]
+var level = 5
+var power = 3
+
+func calculate_damage():
+	var damage = power * level
+[/code]"
+hint = ""
+explanation_bbcode = "We multiply [code]power[/code] by [code]level[/code] using [code]*[/code] to get the result of [code]15[/code]."
+answer_options = [ "15", "9", "10" ]
+valid_answers = [ "15" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-BnVHARbB.tres"
+title = ""
+type = 0
+text = "We can use [code]*=[/code] in the same way as [code]-=[/code] and [code]+=[/code]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 4 )
+quiz_id = "res://course/lesson-14-multiplying/quiz-WNbDGt6f.tres"
+question = "What is the value of damage now?"
+content_bbcode = "[code]
+var level = 5
+var power = 3
+
+func calculate_damage():
+	var damage = power * level
+	damage *= 2
+[/code]"
+hint = ""
+explanation_bbcode = "The value of [code]damage[/code] starts as [code]15[/code].
+
+Then, [code]damage *= 2[/code] multiplies it by [code]2[/code] to get [code]30[/code]."
+answer_options = [ "30", "13", "25" ]
+valid_answers = [ "30" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-UqbTxYej.tres"
+title = ""
+type = 0
+text = "Let's level up our robot and add exponential growth to [code]max_health[/code]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-wQMqAYVj.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeLevelUpExp.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-14-multiplying/content-47MqE82V.tres"
+title = ""
+type = 0
+text = "In the practices, you'll increase the robot's [code]max_health[/code] and add a special ability to our robot to make it extra tough at high levels."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-14-multiplying/practice-0c7DDizK.tres"
+title = "Increasing maximum health exponentially"
+goal = "Let's make the robot stronger when it levels up.
+
+Add to the [code]level_up()[/code] function so it does the following:
+
+- Increases [code]level[/code] by one.
+- Increases [code]max_health[/code] by 10%."
+starting_code = "func level_up():
+	pass"
+hints = PoolStringArray( "To increase a number by 10%, multiply it by [code]1.1[/code]" )
+validator_script_path = "increase_max_health/TestHealthIncreased.gd"
+script_slice_path = "increase_max_health/IncreaseMaxHealth.live-editor/slices/IncreaseMaxHealth.level.slice.tres"
+documentation_references = PoolStringArray( "level_up" )
+documentation_resource = ExtResource( 2 )
+description = "We want our robot to increase in strength as it levels up. Let's increase its health exponentially!"
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-14-multiplying/practice-CQiGjB7t.tres"
+title = "Reducing damage at higher levels"
+goal = "When our robot's [code]level[/code] is [code]3[/code] or more, we want it to take a lot less damage.
+
+Add to the [code]take_damage()[/code] function so the following happens:
+
+- [code]if[/code] the robot's [code]level[/code] is greater than [code]2[/code], reduce the damage [code]amount[/code] by 50%
+
+The robot is level 3. An enemy is going to attack for 10 damage. This damage should reduce to 5."
+starting_code = "func take_damage(amount):
+	health -= amount
+
+	if health > max_health:
+		health = max_health
+
+	if health < 0:
+		health = 0"
+hints = PoolStringArray( "You need to use an [code]if[/code] statement at the top of the function to check if the robot\'s [code]level[/code] is greater than [code]2[/code]", "To reduce the [code]amount[/code], multiply it by a value less than [code]1[/code]", "Multiplying any value by [code]0.5[/code] reduces it by 50%" )
+validator_script_path = "reducing_damage/TestReducingDamage.gd"
+script_slice_path = "reducing_damage/ReducingDamage.live-editor/slices/ReducingDamage.damage.slice.tres"
+documentation_references = PoolStringArray( "take_damage" )
+documentation_resource = ExtResource( 2 )
+description = "At higher levels, we want our robot to be super tough and take even less damage!"
 
 [resource]
 script = ExtResource( 1 )
 title = "Multiplying"
-content_blocks = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 17 ), ExtResource( 6 ), ExtResource( 19 ), ExtResource( 11 ), ExtResource( 20 ), ExtResource( 7 ), ExtResource( 18 ), ExtResource( 9 ), ExtResource( 21 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 16 ), ExtResource( 13 ) ]
-practices = [ ExtResource( 22 ), ExtResource( 23 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ]
+practices = [ SubResource( 21 ), SubResource( 22 ) ]

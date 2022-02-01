@@ -21,7 +21,8 @@ func test_draw_square_of_200_pixels() -> String:
 	elif count < 3:
 		return "You need to draw three squares."
 	elif count > 3:
-		return "You drew more than three squares. You need to draw only three!"
+		if polygons.size() == 4 and not polygons.back().is_empty():
+			return "You drew more than three squares. You need to draw only three!"
 
 	var index := 1
 	for p in polygons:
@@ -37,4 +38,6 @@ func test_draw_square_of_200_pixels() -> String:
 				% index
 			)
 		index += 1
+		if index == 4:
+			break
 	return ""

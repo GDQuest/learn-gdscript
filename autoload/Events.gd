@@ -18,3 +18,4 @@ signal course_completed(course)
 signal settings_requested
 signal report_form_requested
 signal fullscreen_toggled
+signal font_size_scale_changed(new_font_size)
