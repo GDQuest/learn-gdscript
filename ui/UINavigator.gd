@@ -225,7 +225,7 @@ func _on_practice_previous_requested(practice: Practice) -> void:
 		return
 	else:
 		# Otherwise, go to the previous practice in the set.
-		NavigationManager.navigate_to(practices[index - 1].practice_id)
+		NavigationManager.navigate_back()
 
 
 func _on_practice_requested(practice: Practice) -> void:
