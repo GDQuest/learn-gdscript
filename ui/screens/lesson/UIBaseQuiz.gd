@@ -48,7 +48,7 @@ var _shake_pos: float = 0
 # For animating changing the size of the container
 var _previous_rect_size := rect_size
 var _next_rect_size := Vector2.ZERO
-var _percent_transformed: float = 0
+var _percent_transformed := 0.0
 
 
 func _ready() -> void:
