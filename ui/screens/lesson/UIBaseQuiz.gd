@@ -223,7 +223,7 @@ func _on_item_rect_changed() -> void:
 
 func _on_size_tween_step(object: Object, key: NodePath, _elapsed: float, _value: Object) -> void:
 	if object == self and key == ":_percent_transformed":
-		#_next_rect_size = _get_minimum_rect_size_needed_to_fit(_next_view)
+		_next_rect_size = _get_minimum_rect_size_needed_to_fit(_next_view)
 		var new_size := _current_rect_size
 		var difference := _next_rect_size - _current_rect_size
 		new_size += difference * _percent_transformed
