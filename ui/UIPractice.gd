@@ -483,6 +483,11 @@ func _on_use_solution_pressed() -> void:
 	_hide_solution_panel()
 	_code_editor.set_solution_button_pressed(false)
 	_code_editor.set_restore_allowed(true)
+	_update_game_paused()
+
+
+func _update_game_paused() -> void:
+	_game_view.paused = _code_editor.is_pause_button_pressed() || _code_editor.is_solution_button_pressed()
 
 
 func _on_code_editor_text_changed(_text: String) -> void:
@@ -494,12 +499,13 @@ func _on_code_editor_button(which: String) -> void:
 		_code_editor.ACTIONS.RUN:
 			_validate_and_run_student_code()
 		_code_editor.ACTIONS.PAUSE:
-			_game_view.toggle_paused()
+			_update_game_paused()
 		_code_editor.ACTIONS.DFMODE:
 			_toggle_distraction_free_mode()
 		_code_editor.ACTIONS.RESTORE:
 			_reset_practice()
 		_code_editor.ACTIONS.SOLUTION:
+			_update_game_paused()
 			_toggle_solution_panel()
 		_code_editor.ACTIONS.CONTINUE:
 			_on_next_requested()
