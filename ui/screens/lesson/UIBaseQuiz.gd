@@ -8,6 +8,7 @@ const ERROR_OUTLINE := preload("res://ui/theme/quiz_outline_error.tres")
 const PASSED_OUTLINE := preload("res://ui/theme/quiz_outline_passed.tres")
 const NEUTRAL_OUTLINE := preload("res://ui/theme/quiz_outline_neutral.tres")
 
+# Tween timers
 const OUTLINE_FLASH_DURATION := 0.8
 const OUTLINE_FLASH_DELAY := 0.75
 const ERROR_SHAKE_TIME := 0.5
@@ -45,7 +46,7 @@ onready var _help_message := $MarginContainer/BoundaryControl/ChoiceView/HelpMes
 var _quiz: Quiz
 var _shake_pos: float = 0
 # For animating changing the size of the container
-var _current_rect_size := rect_size
+var _previous_rect_size := rect_size
 var _next_rect_size := Vector2.ZERO
 var _percent_transformed: float = 0
 
@@ -138,6 +139,7 @@ func _show_answer(gave_correct_answer := true) -> void:
 	
 	
 	_result_view.show()
+	_change_rect_size_to_fit(_result_view)
 	
 	_size_tween.interpolate_property(
 		_choice_view,
@@ -174,8 +176,6 @@ func _show_answer(gave_correct_answer := true) -> void:
 		_correct_answer_label.text = _quiz.get_correct_answer_string()
 		emit_signal("quiz_skipped")
 	
-	_change_rect_size_to_fit(_result_view)
-	
 
 func _change_rect_size_to_fit(view: Control) -> void:
 	var buffer_space = Vector2.DOWN
@@ -186,7 +186,7 @@ func _change_rect_size_to_fit(view: Control) -> void:
 	_size_tween.stop_all()
 	_size_tween.remove(self, "_percent_transformed")
 	
-	_current_rect_size = rect_min_size
+	_previous_rect_size = rect_min_size
 	_next_rect_size = size_to_fit_view
 	_percent_transformed = 0
 	
@@ -203,7 +203,7 @@ func _change_rect_size_to_fit(view: Control) -> void:
 	_size_tween.start()
 
 # Needed for updating post-initialization.
-# Will also animate expanding the container to fit a hint upon hint.show()
+# Will also animate expanding the container to fit a hint upon _help_message.show()
 func _on_choice_view_resized() -> void:
 	if _choice_view.visible:
 		_change_rect_size_to_fit(_choice_view)
@@ -216,21 +216,23 @@ func _on_item_rect_changed() -> void:
 	if not _error_tween.is_active() or _error_tween.tell() > ERROR_SHAKE_TIME:
 		_shake_pos = rect_position.y
 	
+	# Has to update in if statements due to this triggering resized on the views.
 	if _choice_view.rect_size.x != _boundary_control.rect_size.x:
 		_choice_view.rect_size.x = _boundary_control.rect_size.x
-	elif _result_view.rect_size.x != _boundary_control.rect_size.x:
+	if _result_view.rect_size.x != _boundary_control.rect_size.x:
 		_result_view.rect_size.x = _boundary_control.rect_size.x
 
 func _on_size_tween_step(object: Object, key: NodePath, _elapsed: float, _value: Object) -> void:
-	if object == self and key == ":_percent_transformed":
-		var new_size := _current_rect_size
-		var difference := _next_rect_size - _current_rect_size
+	if object == self and key == ":_percent_transformed" and _next_rect_size != Vector2.ZERO:
+		var new_size := _previous_rect_size
+		var difference := _next_rect_size - _previous_rect_size
 		new_size += difference * _percent_transformed
 		rect_min_size = new_size
 
-# Remove the ability to click buttons on choice view after they have disappeared.
+
 func _on_size_tween_completed(object: Object, key: NodePath) -> void:
 	if object == self and key == ":_percent_transformed":
-		_next_rect_size = rect_min_size
+		_next_rect_size = Vector2.ZERO
+	# Remove the ability to click buttons on choice view after they have disappeared.
 	if object == _choice_view and key == ":modulate:a":
 		_choice_view.hide()
