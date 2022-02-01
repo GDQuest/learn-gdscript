@@ -1,0 +1,122 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=1]
+[ext_resource path="res://course/lesson-16-2d-vectors/visuals/triangle.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "tool
+extends Area2D
+
+export var size := Vector2(300, 300)
+var touch_down := Vector2.ZERO
+var vector :=- Vector2.ZERO
+
+onready var _label := find_node(\"Label\")
+onready var _collision_shape := find_node(\"CollisionShape2D\")
+onready var _color_rect := find_node(\"ColorRect\")
+
+
+func _ready():
+	connect(\"input_event\", self, \"_on_input_event\")
+	_collision_shape.shape.extents = size/2
+	_color_rect.rect_size = size
+	_color_rect.rect_position = -size/2
+	update()
+
+
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
+	
+	if event is InputEventMouseMotion:
+		vector = event.position - position
+		_label.text = str(vector.round())
+		update()
+
+
+func _draw_vector(relative_position: Vector2):
+	print(relative_position)
+
+
+func _draw():
+	draw_line(Vector2(0, -size.y/2), Vector2(0, size.y/2), Color.white, 2, true)
+	draw_line(Vector2(-size.x/2, 0), Vector2(size.x/2, 0), Color.white, 2, true)
+	draw_line(Vector2.ZERO, vector, Color.white, 2, true)
+	
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 150, 150 )
+
+[node name="VectorVisual" type="Area2D"]
+position = Vector2( 632, 408 )
+script = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.584314 )
+margin_left = -150.0
+margin_top = -150.0
+margin_right = 150.0
+margin_bottom = 150.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_top = -150.0
+margin_right = 150.0
+margin_bottom = -122.0
+rect_min_size = Vector2( 150, 0 )
+custom_fonts/font = ExtResource( 1 )
+text = "(100, 100)"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelX" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 154.0
+margin_top = -14.0
+margin_right = 204.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 1 )
+text = "X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelY" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -25.0
+margin_top = 150.0
+margin_right = 25.0
+margin_bottom = 178.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 1 )
+text = "Y"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Triangle" type="Sprite" parent="."]
+position = Vector2( 145, 0 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="Triangle2" type="Sprite" parent="."]
+position = Vector2( 0, 148 )
+rotation = 1.5708
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
