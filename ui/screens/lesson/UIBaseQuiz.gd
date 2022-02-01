@@ -57,9 +57,10 @@ func _ready() -> void:
 	_skip_button.connect("pressed", self, "_show_answer", [false])
 	connect("item_rect_changed", self, "_on_item_rect_changed")
 	
-	_choice_view.connect("resized", self, "_on_choice_view_minimum_size_changed")
+	_choice_view.connect("resized", self, "_on_choice_view_resized")
 	
 	_tween.connect("tween_step", self, "_on_tween_step")
+	_tween.connect("tween_completed", self, "_on_tween_completed")
 
 
 func setup(quiz: Quiz) -> void:
@@ -76,7 +77,7 @@ func setup(quiz: Quiz) -> void:
 	_explanation.visible = not _quiz.explanation_bbcode.empty()
 	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(_quiz.explanation_bbcode)
 	
-	rect_min_size = _get_min_rect_size_needed_to_fit(_choice_view)
+	rect_min_size = _get_minimum_rect_size_needed_to_fit(_choice_view)
 
 
 func set_completed_before(value: bool) -> void:
@@ -178,9 +179,9 @@ func _show_answer(gave_correct_answer := true) -> void:
 		emit_signal("quiz_skipped")
 	
 	# Needs to come after to fit result label.
-	_change_rect_size(_get_min_rect_size_needed_to_fit(_result_view), _result_view)
+	_change_rect_size(_get_minimum_rect_size_needed_to_fit(_result_view), _result_view)
 
-func _get_min_rect_size_needed_to_fit(view: Control) -> Vector2:
+func _get_minimum_rect_size_needed_to_fit(view: Control) -> Vector2:
 	var buffer_space = Vector2.DOWN
 	var margins = rect_size - _boundary_control.rect_size
 	return view.rect_size + margins + buffer_space
@@ -209,8 +210,9 @@ func _change_rect_size(target: Vector2, view: Control) -> void:
 
 # Needed for updating post-initialization.
 # Will also animate expanding the container to fit a hint upon hint.show()
-func _on_choice_view_minimum_size_changed() -> void:
-	_change_rect_size(_get_min_rect_size_needed_to_fit(_choice_view), _choice_view)
+func _on_choice_view_resized() -> void:
+	if _choice_view.visible:
+		_change_rect_size(_get_minimum_rect_size_needed_to_fit(_choice_view), _choice_view)
 
 func _on_item_rect_changed() -> void:
 	if not _tween.is_active() or _tween.tell() > ERROR_SHAKE_TIME:
@@ -223,8 +225,13 @@ func _on_item_rect_changed() -> void:
 
 func _on_tween_step(object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
 	if object == self and _next_rect_size != Vector2.ZERO:
-		_next_rect_size = _get_min_rect_size_needed_to_fit(_next_view)
+		_next_rect_size = _get_minimum_rect_size_needed_to_fit(_next_view)
 		var new_size := _current_rect_size
 		var difference := _next_rect_size - _current_rect_size
 		new_size += difference * _percent_transformed
 		rect_min_size = new_size
+
+# Remove the ability to click buttons on choice view after they have disappeared.
+func _on_tween_completed(object: Object, _key: NodePath) -> void:
+	if object == _choice_view:
+		_choice_view.hide()
