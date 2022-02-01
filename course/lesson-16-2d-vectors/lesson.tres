@@ -1,11 +1,32 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=5 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
-[ext_resource path="res://course/lesson-16-2d-vectors/content-DizKUdOC.tres" type="Resource" id=2]
-[ext_resource path="res://course/lesson-16-2d-vectors/content-QiGjB7tK.tres" type="Resource" id=3]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-16-2d-vectors/content-DizKUdOC.tres"
+title = ""
+type = 0
+text = "Supose we want to increase the size of the robot every time it levels up.
+
+You may recall we do this by using the following code."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-16-2d-vectors/content-QiGjB7tK.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleIncreaseCharacterScale.tscn"
+reverse_blocks = false
+has_separator = false
 
 [resource]
 script = ExtResource( 1 )
 title = "2D Vectors"
-content_blocks = [ ExtResource( 2 ), ExtResource( 3 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ) ]
 practices = [  ]
