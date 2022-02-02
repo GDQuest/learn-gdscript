@@ -12,8 +12,8 @@ const OUTLINE_FLASH_DURATION := 0.8
 const OUTLINE_FLASH_DELAY := 0.75
 const ERROR_SHAKE_TIME := 0.5
 const ERROR_SHAKE_SIZE := 20
-const FADE_IN_TIME := 0.2
-const FADE_OUT_TIME := 0.2
+const FADE_IN_TIME := 0.3
+const FADE_OUT_TIME := 0.3
 const SIZE_CHANGE_TIME := 0.5
 
 export var test_quiz: Resource
@@ -138,7 +138,7 @@ func _show_answer(gave_correct_answer := true) -> void:
 
 	_result_view.show()
 	
-	#Hiding choice view upon completion of following tween
+	#Hiding choice view upon completion of the following tween
 	_size_tween.interpolate_property(
 		_choice_view,
 		"modulate:a",
@@ -198,17 +198,17 @@ func _on_item_rect_changed() -> void:
 		_margin_container.rect_size.x = rect_size.x
 
 func _on_margin_container_minimum_size_changed() -> void:
-	# Force margin container into it's minimum size.
 	if _margin_container.rect_size.y > _margin_container.get_combined_minimum_size().y:
-		_margin_container.rect_size.y = 0
+		_margin_container.rect_size.y = _margin_container.get_combined_minimum_size().y
 	
-	if not _size_tween.is_active() or _size_tween.tell() > SIZE_CHANGE_TIME * 0.8:
+	# The if statement is to avoid any pausing effects in resizing to result view
+	# It will, however, jump if any element is rapidly changing size inside the margin container. 
+	if not _size_tween.is_active() or _size_tween.tell() > SIZE_CHANGE_TIME:
 		_change_rect_size_to_fit(_margin_container.rect_size)
 	else:
-		# Avoid jittering if this happens due to choice view being hidden
 		_next_rect_size = _margin_container.rect_size
 
-# This is here to update after being visible.
+# This is here to update container size after result view becomes visible.
 func _on_result_view_minimum_size_changed() -> void:
 	if _result_view.visible:
 		var margins := _margin_container.rect_size - _result_view.rect_size
@@ -224,6 +224,7 @@ func _on_size_tween_step(object: Object, key: NodePath, _elapsed: float, _value:
 func _on_size_tween_completed(object: Object, key: NodePath) -> void:
 	if object == self and key == ":_percent_transformed":
 		_next_rect_size = Vector2.ZERO
+	
 	# To avoid the buttons being clickable after choice view is gone.
 	if object == _choice_view and key == ":modulate:a":
 		_choice_view.hide()
