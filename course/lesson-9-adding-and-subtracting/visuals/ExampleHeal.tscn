@@ -10,9 +10,6 @@ script/source = "extends \"res://course/lesson-9-adding-and-subtracting/visuals/
 func _run():
 	health += 25
 	
-	if health > max_health:
-		health = max_health
-	
 	_animation_player.stop(true)
 	_animation_player.play(\"heal\")
 "
@@ -35,7 +32,7 @@ gdscript_code = "func heal(amount):
 	health += amount"
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 1033.0
+margin_right = 514.0
 margin_bottom = 326.0
 
 [node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
@@ -43,13 +40,12 @@ margin_right = 173.0
 text = "heal(25)"
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
-visible = false
+visible = true
 margin_left = 518.0
 margin_right = 1033.0
-margin_bottom = 284.0
+margin_bottom = 326.0
 text = "func heal(amount):
 	health += amount"
-draw_spaces = true
 
 [node name="RobotCharacter" parent="RunnableCodeExample" instance=ExtResource( 1 )]
 script = SubResource( 1 )

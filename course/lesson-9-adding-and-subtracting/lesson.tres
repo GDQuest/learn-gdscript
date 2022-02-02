@@ -41,7 +41,7 @@ text = "We pass the amount of damage the robot should take as a parameter.
 
 Line 2 subtracts [code]amount[/code] from [code]health[/code]. Note the [code]-=[/code] syntax which achieves this.
 
-You may notice that the health of the robot can go below [code]0[/code]. We'll see how to manage this in a future lesson."
+You may notice that the health of the robot can go below [code]0[/code]. We'll see how to manage this in a future lesson using [i]conditions[/i]."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -65,7 +65,9 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-9-adding-and-subtracting/content-otxF5HUx.tres"
 title = ""
 type = 0
-text = "The robot's health could increase instead if the player picks up an item that heals them, or they use an item."
+text = "The robot's health could increase instead if the player picks up an item that heals them, or they use an item.
+
+Here again, the health can go beyond [code]100[/code]."
 visual_element_path = "res://course/lesson-9-adding-and-subtracting/visuals/ExampleHeal.tscn"
 reverse_blocks = false
 has_separator = false
