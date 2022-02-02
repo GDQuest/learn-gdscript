@@ -12,6 +12,7 @@ const OUTLINE_FLASH_DURATION := 0.8
 const OUTLINE_FLASH_DELAY := 0.75
 const ERROR_SHAKE_TIME := 0.5
 const ERROR_SHAKE_SIZE := 20
+const SIZE_CHANGE_TIME := 0.5
 
 export var test_quiz: Resource
 
@@ -35,11 +36,16 @@ onready var _skip_button := $ClipContentBoundary/MarginContainer/ChoiceView/HBox
 onready var _result_label := $ClipContentBoundary/MarginContainer/ResultView/Label as Label
 onready var _correct_answer_label := $ClipContentBoundary/MarginContainer/ResultView/CorrectAnswer as Label
 
-onready var _tween := $Tween as Tween
+onready var _error_tween := $ErrorTween as Tween
+onready var _size_tween := $SizeTween as Tween
 onready var _help_message := $ClipContentBoundary/MarginContainer/ChoiceView/HelpMessage as Label
 
 var _quiz: Quiz
 var _shake_pos: float = 0
+# Used for animating size changes
+var _previous_rect_size := rect_size
+var _next_rect_size := Vector2.ZERO
+var _percent_transformed := 0.0
 
 
 func _ready() -> void:
@@ -51,7 +57,7 @@ func _ready() -> void:
 	
 	#_margin_container.connect("resized", self, "_on_margin_container_resized")
 	_margin_container.connect("minimum_size_changed", self, "_on_margin_container_minimum_size_changed")
-
+	_size_tween.connect("tween_step", self, "_on_size_tween_step")
 
 func setup(quiz: Quiz) -> void:
 	_quiz = quiz
@@ -90,13 +96,13 @@ func _test_answer() -> void:
 		result = _quiz.test_answer(_get_answers().back())
 	_help_message.text = result.help_message
 	_help_message.visible = not result.help_message.empty()
-	_tween.stop_all()
+	_error_tween.stop_all()
 	if not result.is_correct:
 		_outline.modulate.a = 1.0
 		_outline.add_stylebox_override("panel", ERROR_OUTLINE)
 
 		rect_position.y = _shake_pos
-		_tween.interpolate_property(
+		_error_tween.interpolate_property(
 			self,
 			"rect_position:y",
 			_shake_pos + ERROR_SHAKE_SIZE,
@@ -105,7 +111,7 @@ func _test_answer() -> void:
 			Tween.TRANS_ELASTIC,
 			Tween.EASE_OUT
 		)
-		_tween.interpolate_property(
+		_error_tween.interpolate_property(
 			_outline,
 			"modulate:a",
 			_outline.modulate.a,
@@ -115,18 +121,19 @@ func _test_answer() -> void:
 			Tween.EASE_IN,
 			OUTLINE_FLASH_DELAY
 		)
-		_tween.start()
+		_error_tween.start()
 	else:
 		_show_answer()
 
 
 func _show_answer(gave_correct_answer := true) -> void:
-	_tween.stop_all()
+	_error_tween.stop_all()
 	_outline.add_stylebox_override("panel", PASSED_OUTLINE if gave_correct_answer else NEUTRAL_OUTLINE)
 	_outline.modulate.a = 1.0
 
 	_result_view.show()
 	_choice_view.hide()
+	
 	if gave_correct_answer:
 		emit_signal("quiz_passed")
 	else:
@@ -139,17 +146,45 @@ func _show_answer(gave_correct_answer := true) -> void:
 		emit_signal("quiz_skipped")
 
 func _change_rect_size_to_fit(view: Control):
-	rect_min_size = view.rect_size
+	#rect_min_size = view.rect_size
+	_size_tween.stop_all()
+	
+	_previous_rect_size = rect_min_size
+	_next_rect_size = view.rect_size
+	_percent_transformed = 0.0
+	
+	_size_tween.interpolate_property(
+		self,
+		"_percent_transformed",
+		0.0,
+		1.0,
+		SIZE_CHANGE_TIME,
+		Tween.TRANS_SINE,
+		Tween.EASE_IN_OUT
+	)
+	
+	_size_tween.start()
 
 func _on_item_rect_changed() -> void:
-	if not _tween.is_active() or _tween.tell() > ERROR_SHAKE_TIME:
+	if not _error_tween.is_active() or _error_tween.tell() > ERROR_SHAKE_TIME:
 		_shake_pos = rect_position.y
+
 	if _margin_container.rect_size.x < rect_size.x:
 		_margin_container.rect_size.x = rect_size.x
-	if _margin_container.rect_size.y > _margin_container.get_combined_minimum_size().y:
-		_margin_container.rect_size.y = 0
 		
 func _on_margin_container_minimum_size_changed():
+	# Force margin container into it's minimum size.
 	if _margin_container.rect_size.y > _margin_container.get_combined_minimum_size().y:
 		_margin_container.rect_size.y = 0
 	_change_rect_size_to_fit(_margin_container)
+
+func _on_size_tween_step(object: Object, key: NodePath, _elapsed: float, _value: Object) -> void:
+	if object == self and key == ":_percent_transformed" and _next_rect_size != Vector2.ZERO:
+		var new_size := _previous_rect_size
+		var difference := _next_rect_size - _previous_rect_size
+		new_size += difference * _percent_transformed
+		rect_min_size = new_size
+
+func _on_size_tween_completed(object: Object, key: NodePath):
+	if object == self and key == ":_percent_transformed":
+		_next_rect_size = Vector2.ZERO
