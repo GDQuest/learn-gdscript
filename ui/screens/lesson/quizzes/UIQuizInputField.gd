@@ -1,7 +1,7 @@
 class_name UIQuizInputField
 extends UIBaseQuiz
 
-onready var _line_edit := $MarginContainer/ChoiceView/Answers/LineEdit as LineEdit
+onready var _line_edit := $ClipContentBoundary/MarginContainer/ChoiceView/Answers/LineEdit as LineEdit
 
 
 func _ready() -> void:

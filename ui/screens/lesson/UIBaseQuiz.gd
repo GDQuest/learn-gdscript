@@ -18,24 +18,25 @@ export var test_quiz: Resource
 var completed_before := false setget set_completed_before
 
 onready var _outline := $Outline as PanelContainer
-onready var _question := $MarginContainer/ChoiceView/QuizHeader/Question as RichTextLabel
-onready var _explanation := $MarginContainer/ResultView/Explanation as RichTextLabel
-onready var _content := $MarginContainer/ChoiceView/Content as RichTextLabel
+onready var _question := $ClipContentBoundary/MarginContainer/ChoiceView/QuizHeader/Question as RichTextLabel
+onready var _explanation := $ClipContentBoundary/MarginContainer/ResultView/Explanation as RichTextLabel
+onready var _content := $ClipContentBoundary/MarginContainer/ChoiceView/Content as RichTextLabel
 onready var _completed_before_icon := (
-	$MarginContainer/ChoiceView/QuizHeader/CompletedBeforeIcon as TextureRect
+	$ClipContentBoundary/MarginContainer/ChoiceView/QuizHeader/CompletedBeforeIcon as TextureRect
 )
 
-onready var _choice_view := $MarginContainer/ChoiceView as VBoxContainer
-onready var _result_view := $MarginContainer/ResultView as VBoxContainer
+onready var _margin_container := $ClipContentBoundary/MarginContainer as MarginContainer
+onready var _choice_view := $ClipContentBoundary/MarginContainer/ChoiceView as VBoxContainer
+onready var _result_view := $ClipContentBoundary/MarginContainer/ResultView as VBoxContainer
 
-onready var _submit_button := $MarginContainer/ChoiceView/HBoxContainer/SubmitButton as Button
-onready var _skip_button := $MarginContainer/ChoiceView/HBoxContainer/SkipButton as Button
+onready var _submit_button := $ClipContentBoundary/MarginContainer/ChoiceView/HBoxContainer/SubmitButton as Button
+onready var _skip_button := $ClipContentBoundary/MarginContainer/ChoiceView/HBoxContainer/SkipButton as Button
 
-onready var _result_label := $MarginContainer/ResultView/Label as Label
-onready var _correct_answer_label := $MarginContainer/ResultView/CorrectAnswer as Label
+onready var _result_label := $ClipContentBoundary/MarginContainer/ResultView/Label as Label
+onready var _correct_answer_label := $ClipContentBoundary/MarginContainer/ResultView/CorrectAnswer as Label
 
 onready var _tween := $Tween as Tween
-onready var _help_message := $MarginContainer/ChoiceView/HelpMessage as Label
+onready var _help_message := $ClipContentBoundary/MarginContainer/ChoiceView/HelpMessage as Label
 
 var _quiz: Quiz
 var _shake_pos: float = 0
@@ -47,6 +48,9 @@ func _ready() -> void:
 	_submit_button.connect("pressed", self, "_test_answer")
 	_skip_button.connect("pressed", self, "_show_answer", [false])
 	connect("item_rect_changed", self, "_on_item_rect_changed")
+	
+	#_margin_container.connect("resized", self, "_on_margin_container_resized")
+	_margin_container.connect("minimum_size_changed", self, "_on_margin_container_minimum_size_changed")
 
 
 func setup(quiz: Quiz) -> void:
@@ -134,7 +138,18 @@ func _show_answer(gave_correct_answer := true) -> void:
 		_correct_answer_label.text = _quiz.get_correct_answer_string()
 		emit_signal("quiz_skipped")
 
+func _change_rect_size_to_fit(view: Control):
+	rect_min_size = view.rect_size
 
 func _on_item_rect_changed() -> void:
 	if not _tween.is_active() or _tween.tell() > ERROR_SHAKE_TIME:
 		_shake_pos = rect_position.y
+	if _margin_container.rect_size.x < rect_size.x:
+		_margin_container.rect_size.x = rect_size.x
+	if _margin_container.rect_size.y > _margin_container.get_combined_minimum_size().y:
+		_margin_container.rect_size.y = 0
+		
+func _on_margin_container_minimum_size_changed():
+	if _margin_container.rect_size.y > _margin_container.get_combined_minimum_size().y:
+		_margin_container.rect_size.y = 0
+	_change_rect_size_to_fit(_margin_container)

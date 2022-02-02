@@ -4,7 +4,7 @@ extends UIBaseQuiz
 const QuizAnswerButtonScene := preload("res://ui/screens/lesson/quizzes/QuizAnswerButton.tscn")
 
 
-onready var _choices := $MarginContainer/ChoiceView/Answers as VBoxContainer
+onready var _choices := $ClipContentBoundary/MarginContainer/ChoiceView/Answers as VBoxContainer
 
 
 func _ready() -> void:
