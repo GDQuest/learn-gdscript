@@ -12,6 +12,8 @@ const OUTLINE_FLASH_DURATION := 0.8
 const OUTLINE_FLASH_DELAY := 0.75
 const ERROR_SHAKE_TIME := 0.5
 const ERROR_SHAKE_SIZE := 20
+const FADE_IN_TIME := 0.2
+const FADE_OUT_TIME := 0.2
 const SIZE_CHANGE_TIME := 0.5
 
 export var test_quiz: Resource
@@ -57,7 +59,9 @@ func _ready() -> void:
 	
 	#_margin_container.connect("resized", self, "_on_margin_container_resized")
 	_margin_container.connect("minimum_size_changed", self, "_on_margin_container_minimum_size_changed")
+	_result_view.connect("minimum_size_changed", self, "_on_result_view_minimum_size_changed")
 	_size_tween.connect("tween_step", self, "_on_size_tween_step")
+	_size_tween.connect("tween_completed", self, "_on_size_tween_completed")
 
 func setup(quiz: Quiz) -> void:
 	_quiz = quiz
@@ -131,8 +135,30 @@ func _show_answer(gave_correct_answer := true) -> void:
 	_outline.add_stylebox_override("panel", PASSED_OUTLINE if gave_correct_answer else NEUTRAL_OUTLINE)
 	_outline.modulate.a = 1.0
 
+
 	_result_view.show()
-	_choice_view.hide()
+	
+	#Hiding choice view upon completion of following tween
+	_size_tween.interpolate_property(
+		_choice_view,
+		"modulate:a",
+		1,
+		0,
+		FADE_OUT_TIME
+	)
+	
+	_size_tween.interpolate_property(
+		_result_view,
+		"modulate:a",
+		0,
+		1,
+		FADE_IN_TIME,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT,
+		FADE_OUT_TIME
+	)
+	
+	_size_tween.start()
 	
 	if gave_correct_answer:
 		emit_signal("quiz_passed")
@@ -145,12 +171,11 @@ func _show_answer(gave_correct_answer := true) -> void:
 		_correct_answer_label.text = _quiz.get_correct_answer_string()
 		emit_signal("quiz_skipped")
 
-func _change_rect_size_to_fit(view: Control):
-	#rect_min_size = view.rect_size
+func _change_rect_size_to_fit(size: Vector2):
 	_size_tween.stop_all()
 	
 	_previous_rect_size = rect_min_size
-	_next_rect_size = view.rect_size
+	_next_rect_size = size
 	_percent_transformed = 0.0
 	
 	_size_tween.interpolate_property(
@@ -171,12 +196,23 @@ func _on_item_rect_changed() -> void:
 
 	if _margin_container.rect_size.x < rect_size.x:
 		_margin_container.rect_size.x = rect_size.x
-		
+
 func _on_margin_container_minimum_size_changed():
 	# Force margin container into it's minimum size.
 	if _margin_container.rect_size.y > _margin_container.get_combined_minimum_size().y:
 		_margin_container.rect_size.y = 0
-	_change_rect_size_to_fit(_margin_container)
+	
+	if not _size_tween.is_active() or _size_tween.tell() > SIZE_CHANGE_TIME * 0.8:
+		_change_rect_size_to_fit(_margin_container.rect_size)
+	else:
+		# Avoid jittering if this happens due to choice view being hidden
+		_next_rect_size = _margin_container.rect_size
+
+# This is here to update after being visible.
+func _on_result_view_minimum_size_changed():
+	if _result_view.visible:
+		var margins := _margin_container.rect_size - _result_view.rect_size
+		_change_rect_size_to_fit(_result_view.get_combined_minimum_size() + margins)
 
 func _on_size_tween_step(object: Object, key: NodePath, _elapsed: float, _value: Object) -> void:
 	if object == self and key == ":_percent_transformed" and _next_rect_size != Vector2.ZERO:
@@ -188,3 +224,6 @@ func _on_size_tween_step(object: Object, key: NodePath, _elapsed: float, _value:
 func _on_size_tween_completed(object: Object, key: NodePath):
 	if object == self and key == ":_percent_transformed":
 		_next_rect_size = Vector2.ZERO
+	# To avoid the buttons being clickable after choice view is gone.
+	if object == _choice_view and key == ":modulate:a":
+		_choice_view.hide()
