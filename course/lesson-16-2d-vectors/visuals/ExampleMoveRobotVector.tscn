@@ -5,17 +5,24 @@
 [ext_resource path="res://course/lesson-1-what-code-is-like/first_practice/hand_ice.png" type="Texture" id=3]
 
 [sub_resource type="GDScript" id=1]
-script/source = "extends Node2D
+script/source = "extends WrappingNode2D
+
+onready var start_position = position
+
+func _ready() -> void:
+	_sprites = [$GodotBottom, $HandIce, $HandIce2]
+	_bounds = calculate_bounding_rect(_sprites)
 
 func run():
-	scale = Vector2(1.5, 1.5)
-
+	position += Vector2(50, 0)
+	_bounds.position += Vector2(50, 0)
 
 func reset():
-	scale = Vector2.ONE
+	position = start_position
+	#_bounds = calculate_bounding_rect(_sprites)
 "
 
-[node name="PanelContainer" type="PanelContainer"]
+[node name="ExampleMoveRobotVector" type="PanelContainer"]
 margin_right = 1047.0
 margin_bottom = 298.0
 size_flags_horizontal = 3
@@ -28,9 +35,23 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 1040.0
 margin_bottom = 291.0
-gdscript_code = "func level_up():
-	scale.x = 1.5
-	scale.y = 1.5"
+gdscript_code = "func move():
+	position += Vector2(50, 0)"
+
+[node name="Frame" parent="RunnableCodeExample" index="0"]
+margin_right = 514.0
+margin_bottom = 284.0
+
+[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
+text = "move()"
+
+[node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
+visible = true
+margin_left = 518.0
+margin_right = 1033.0
+margin_bottom = 284.0
+text = "func move():
+	position += Vector2(50, 0)"
 
 [node name="Node2D" type="Node2D" parent="RunnableCodeExample"]
 script = SubResource( 1 )
@@ -49,3 +70,5 @@ position = Vector2( -65, 19 )
 rotation = -0.483649
 texture = ExtResource( 3 )
 flip_h = true
+
+[editable path="RunnableCodeExample"]

@@ -12,8 +12,13 @@ var touch_down := Vector2.ZERO
 var vector :=- Vector2.ZERO
 
 onready var _label := find_node(\"Label\")
+onready var _label_x := find_node(\"LabelX\")
+onready var _label_y := find_node(\"LabelY\")
+onready var _triangle_x := find_node(\"TriangleX\")
+onready var _triangle_y := find_node(\"TriangleY\")
 onready var _collision_shape := find_node(\"CollisionShape2D\")
 onready var _color_rect := find_node(\"ColorRect\")
+onready var _triangle_mouse := find_node(\"TriangleMouse\")
 
 
 func _ready():
@@ -21,33 +26,34 @@ func _ready():
 	_collision_shape.shape.extents = size/2
 	_color_rect.rect_size = size
 	_color_rect.rect_position = -size/2
+	_label_y.rect_position.y = size.y/2
+	_label_x.rect_position.x = size.x/2 + 10
+	_triangle_x.position = Vector2(size.x/2, 0)
+	_triangle_y.position = Vector2(0, size.y/2)
 	update()
 
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 	
 	if event is InputEventMouseMotion:
-		vector = event.position - position
-		_label.text = str(vector.round())
+		vector = to_local(event.position)
+		_triangle_mouse.position = vector
+		_triangle_mouse.rotation = Vector2.RIGHT.angle_to(vector)
+		_label.text = \"Vector2%s\" % [vector.round()]
 		update()
 
 
-func _draw_vector(relative_position: Vector2):
-	print(relative_position)
-
-
 func _draw():
-	draw_line(Vector2(0, -size.y/2), Vector2(0, size.y/2), Color.white, 2, true)
-	draw_line(Vector2(-size.x/2, 0), Vector2(size.x/2, 0), Color.white, 2, true)
+	draw_line(Vector2(0, -size.y/2), Vector2(0, size.y/2), Color.gray, 2, true)
+	draw_line(Vector2(-size.x/2, 0), Vector2(size.x/2, 0), Color.gray, 2, true)
 	draw_line(Vector2.ZERO, vector, Color.white, 2, true)
 	
 "
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 150, 150 )
+extents = Vector2( 300, 150 )
 
 [node name="VectorVisual" type="Area2D"]
-position = Vector2( 632, 408 )
 script = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -66,13 +72,13 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_top = -150.0
-margin_right = 150.0
-margin_bottom = -122.0
+margin_left = 12.0
+margin_top = -149.0
+margin_right = 179.0
+margin_bottom = -121.0
 rect_min_size = Vector2( 150, 0 )
 custom_fonts/font = ExtResource( 1 )
-text = "(100, 100)"
-align = 1
+text = "Vector2(100, 100)"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -82,9 +88,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 154.0
+margin_left = 160.0
 margin_top = -14.0
-margin_right = 204.0
+margin_right = 210.0
 margin_bottom = 14.0
 rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 1 )
@@ -110,13 +116,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Triangle" type="Sprite" parent="."]
-position = Vector2( 145, 0 )
+[node name="TriangleX" type="Sprite" parent="."]
+position = Vector2( 150, 0 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
-[node name="Triangle2" type="Sprite" parent="."]
-position = Vector2( 0, 148 )
+[node name="TriangleY" type="Sprite" parent="."]
+position = Vector2( 0, 150 )
+rotation = 1.5708
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="TriangleMouse" type="Sprite" parent="."]
+position = Vector2( 54, 111 )
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )

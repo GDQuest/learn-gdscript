@@ -1,7 +1,8 @@
-[gd_resource type="Resource" load_steps=5 format=2]
+[gd_resource type="Resource" load_steps=14 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=3]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -25,8 +26,99 @@ visual_element_path = "visuals/ExampleIncreaseCharacterScale.tscn"
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=3]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-16-2d-vectors/content-DDizKUdO.tres"
+title = ""
+type = 0
+text = "As we talked about in lesson 7, the scale variable has two sub-variables to it: x and y.
+
+This is because `scale` is a [b]vector[/b].
+
+Vectors in two dimensions have two sub-variables.
+
+In Godot, vectors are a call kind of value, just like numbers. Precisely, they are the association of 2 decimal numbers: one for the X coordinate and one for the Y coordinate."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 3 )
+quiz_id = "res://course/lesson-16-2d-vectors/quiz-KRHJMQ2X.tres"
+question = "So far, you've come across two variables which are vectors, which are they?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "Both scale and position have x and y components so using a vector to store their values makes sense."
+answer_options = [ "scale", "position", "health", "speed" ]
+valid_answers = [ "scale", "position" ]
+is_multiple_choice = true
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-16-2d-vectors/content-NwQMqAYV.tres"
+title = ""
+type = 0
+text = "We define a vector in Godot like this."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-16-2d-vectors/content-jotxF5HU.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleIncreaseCharacterScaleVector.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-16-2d-vectors/content-xZPxY8VU.tres"
+title = ""
+type = 0
+text = "Notice how we use `Vector2` instead of `Vector`. This makes it clear we're working in two dimensions. We use Vector3 when we work in three dimensions.
+
+We can use vecotrs with position too. If we wanted to move our turtle to a new relative position, we can add a Vector2 to its position.
+"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-16-2d-vectors/content-PwQDwfyq.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleMoveSpriteVector.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-16-2d-vectors/content-RhZN4rS5.tres"
+title = ""
+type = 0
+text = "hghgfhgfhf"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-16-2d-vectors/content-dYOexRjT.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/VectorVisual.tscn"
+reverse_blocks = false
+has_separator = false
+
 [resource]
 script = ExtResource( 1 )
 title = "2D Vectors"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 10 ), SubResource( 9 ) ]
 practices = [  ]
