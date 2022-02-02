@@ -57,9 +57,9 @@ func _ready() -> void:
 	_skip_button.connect("pressed", self, "_show_answer", [false])
 	connect("item_rect_changed", self, "_on_item_rect_changed")
 	
-	#_margin_container.connect("resized", self, "_on_margin_container_resized")
 	_margin_container.connect("minimum_size_changed", self, "_on_margin_container_minimum_size_changed")
 	_result_view.connect("minimum_size_changed", self, "_on_result_view_minimum_size_changed")
+	
 	_size_tween.connect("tween_step", self, "_on_size_tween_step")
 	_size_tween.connect("tween_completed", self, "_on_size_tween_completed")
 
@@ -171,7 +171,7 @@ func _show_answer(gave_correct_answer := true) -> void:
 		_correct_answer_label.text = _quiz.get_correct_answer_string()
 		emit_signal("quiz_skipped")
 
-func _change_rect_size_to_fit(size: Vector2):
+func _change_rect_size_to_fit(size: Vector2) -> void:
 	_size_tween.stop_all()
 	
 	_previous_rect_size = rect_min_size
@@ -197,7 +197,7 @@ func _on_item_rect_changed() -> void:
 	if _margin_container.rect_size.x < rect_size.x:
 		_margin_container.rect_size.x = rect_size.x
 
-func _on_margin_container_minimum_size_changed():
+func _on_margin_container_minimum_size_changed() -> void:
 	# Force margin container into it's minimum size.
 	if _margin_container.rect_size.y > _margin_container.get_combined_minimum_size().y:
 		_margin_container.rect_size.y = 0
@@ -209,7 +209,7 @@ func _on_margin_container_minimum_size_changed():
 		_next_rect_size = _margin_container.rect_size
 
 # This is here to update after being visible.
-func _on_result_view_minimum_size_changed():
+func _on_result_view_minimum_size_changed() -> void:
 	if _result_view.visible:
 		var margins := _margin_container.rect_size - _result_view.rect_size
 		_change_rect_size_to_fit(_result_view.get_combined_minimum_size() + margins)
@@ -221,7 +221,7 @@ func _on_size_tween_step(object: Object, key: NodePath, _elapsed: float, _value:
 		new_size += difference * _percent_transformed
 		rect_min_size = new_size
 
-func _on_size_tween_completed(object: Object, key: NodePath):
+func _on_size_tween_completed(object: Object, key: NodePath) -> void:
 	if object == self and key == ":_percent_transformed":
 		_next_rect_size = Vector2.ZERO
 	# To avoid the buttons being clickable after choice view is gone.
