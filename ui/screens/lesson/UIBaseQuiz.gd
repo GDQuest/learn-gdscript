@@ -21,26 +21,25 @@ export var test_quiz: Resource
 var completed_before := false setget set_completed_before
 
 onready var _outline := $Outline as PanelContainer
-onready var _question := $ClipContentBoundary/MarginContainer/ChoiceView/QuizHeader/Question as RichTextLabel
-onready var _explanation := $ClipContentBoundary/MarginContainer/ResultView/Explanation as RichTextLabel
-onready var _content := $ClipContentBoundary/MarginContainer/ChoiceView/Content as RichTextLabel
+onready var _question := $ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader/Question as RichTextLabel
+onready var _explanation := $ClipContentBoundary/ResultContainer/ResultView/Explanation as RichTextLabel
+onready var _content := $ClipContentBoundary/ChoiceContainer/ChoiceView/Content as RichTextLabel
 onready var _completed_before_icon := (
-	$ClipContentBoundary/MarginContainer/ChoiceView/QuizHeader/CompletedBeforeIcon as TextureRect
+	$ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader/CompletedBeforeIcon as TextureRect
 )
 
-onready var _margin_container := $ClipContentBoundary/MarginContainer as MarginContainer
-onready var _choice_view := $ClipContentBoundary/MarginContainer/ChoiceView as VBoxContainer
-onready var _result_view := $ClipContentBoundary/MarginContainer/ResultView as VBoxContainer
+onready var _choice_container := $ClipContentBoundary/ChoiceContainer as MarginContainer
+onready var _result_container := $ClipContentBoundary/ResultContainer as MarginContainer
 
-onready var _submit_button := $ClipContentBoundary/MarginContainer/ChoiceView/HBoxContainer/SubmitButton as Button
-onready var _skip_button := $ClipContentBoundary/MarginContainer/ChoiceView/HBoxContainer/SkipButton as Button
+onready var _submit_button := $ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer/SubmitButton as Button
+onready var _skip_button := $ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer/SkipButton as Button
 
-onready var _result_label := $ClipContentBoundary/MarginContainer/ResultView/Label as Label
-onready var _correct_answer_label := $ClipContentBoundary/MarginContainer/ResultView/CorrectAnswer as Label
+onready var _result_label := $ClipContentBoundary/ResultContainer/ResultView/Label as Label
+onready var _correct_answer_label := $ClipContentBoundary/ResultContainer/ResultView/CorrectAnswer as Label
 
 onready var _error_tween := $ErrorTween as Tween
 onready var _size_tween := $SizeTween as Tween
-onready var _help_message := $ClipContentBoundary/MarginContainer/ChoiceView/HelpMessage as Label
+onready var _help_message := $ClipContentBoundary/ChoiceContainer/ChoiceView/HelpMessage as Label
 
 var _quiz: Quiz
 var _shake_pos: float = 0
@@ -57,8 +56,8 @@ func _ready() -> void:
 	_skip_button.connect("pressed", self, "_show_answer", [false])
 	connect("item_rect_changed", self, "_on_item_rect_changed")
 	
-	_margin_container.connect("minimum_size_changed", self, "_on_margin_container_minimum_size_changed")
-	_result_view.connect("minimum_size_changed", self, "_on_result_view_minimum_size_changed")
+	_choice_container.connect("minimum_size_changed", self, "_on_choice_container_minimum_size_changed")
+	_result_container.connect("minimum_size_changed", self, "_on_result_container_minimum_size_changed")
 	
 	_size_tween.connect("tween_step", self, "_on_size_tween_step")
 	_size_tween.connect("tween_completed", self, "_on_size_tween_completed")
@@ -136,11 +135,12 @@ func _show_answer(gave_correct_answer := true) -> void:
 	_outline.modulate.a = 1.0
 
 
-	_result_view.show()
+	_result_container.show()
+	_change_rect_size_to_fit(_result_container.rect_size)
 	
 	#Hiding choice view upon completion of the following tween
 	_size_tween.interpolate_property(
-		_choice_view,
+		_choice_container,
 		"modulate:a",
 		1,
 		0,
@@ -148,7 +148,7 @@ func _show_answer(gave_correct_answer := true) -> void:
 	)
 	
 	_size_tween.interpolate_property(
-		_result_view,
+		_result_container,
 		"modulate:a",
 		0,
 		1,
@@ -194,25 +194,24 @@ func _on_item_rect_changed() -> void:
 	if not _error_tween.is_active() or _error_tween.tell() > ERROR_SHAKE_TIME:
 		_shake_pos = rect_position.y
 
-	if _margin_container.rect_size.x < rect_size.x:
-		_margin_container.rect_size.x = rect_size.x
+	if _choice_container.rect_size.x < rect_size.x:
+		_choice_container.rect_size.x = rect_size.x
+	if _result_container.rect_size.x < rect_size.x:
+		_result_container.rect_size.x = rect_size.x
 
-func _on_margin_container_minimum_size_changed() -> void:
-	if _margin_container.rect_size.y > _margin_container.get_combined_minimum_size().y:
-		_margin_container.rect_size.y = _margin_container.get_combined_minimum_size().y
+func _on_choice_container_minimum_size_changed() -> void:
+	if _choice_container.rect_size.y > _choice_container.get_combined_minimum_size().y:
+		_choice_container.rect_size.y = _choice_container.get_combined_minimum_size().y
 	
-	# The if statement is to avoid any pausing effects in resizing to result view
-	# It will, however, jump if any element is rapidly changing size inside the margin container. 
-	if not _size_tween.is_active() or _size_tween.tell() > SIZE_CHANGE_TIME:
-		_change_rect_size_to_fit(_margin_container.rect_size)
-	else:
-		_next_rect_size = _margin_container.rect_size
+	if not _result_container.visible:
+		_change_rect_size_to_fit(_choice_container.rect_size)
 
-# This is here to update container size after result view becomes visible.
-func _on_result_view_minimum_size_changed() -> void:
-	if _result_view.visible:
-		var margins := _margin_container.rect_size - _result_view.rect_size
-		_change_rect_size_to_fit(_result_view.get_combined_minimum_size() + margins)
+func _on_result_container_minimum_size_changed() -> void:
+	if _result_container.rect_size.y > _result_container.get_combined_minimum_size().y:
+		_result_container.rect_size.y = _result_container.get_combined_minimum_size().y
+	
+	if _result_container.visible:
+		_change_rect_size_to_fit(_result_container.rect_size)
 
 func _on_size_tween_step(object: Object, key: NodePath, _elapsed: float, _value: Object) -> void:
 	if object == self and key == ":_percent_transformed" and _next_rect_size != Vector2.ZERO:
@@ -226,5 +225,5 @@ func _on_size_tween_completed(object: Object, key: NodePath) -> void:
 		_next_rect_size = Vector2.ZERO
 	
 	# To avoid the buttons being clickable after choice view is gone.
-	if object == _choice_view and key == ":modulate:a":
-		_choice_view.hide()
+	if object == _choice_container and key == ":modulate:a":
+		_choice_container.hide()
