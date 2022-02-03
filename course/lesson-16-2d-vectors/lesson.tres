@@ -1,8 +1,10 @@
-[gd_resource type="Resource" load_steps=15 format=2]
+[gd_resource type="Resource" load_steps=18 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
 [ext_resource path="res://resources/QuizChoice.gd" type="Script" id=3]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=4]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=5]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -99,13 +101,13 @@ has_separator = false
 [sub_resource type="Resource" id=9]
 script = ExtResource( 3 )
 quiz_id = "res://course/lesson-16-2d-vectors/quiz-lkGx0c7D.tres"
-question = "How would you move the robot 50 to the left pixels?"
-content_bbcode = "How would you reduce [code]position.x[/code] by [code]50[/code]?"
+question = "How would you move the robot 50 pixels to the left?"
+content_bbcode = "To move the robot to the left by 50 pixels, you'd need to reduce [code]position.x[/code] by [code]50[/code]."
 hint = ""
 explanation_bbcode = "[code]position += Vector2(-50, 0)[/code] adds [code]-50[/code] to the sub-variable [code]x[/code].
 [code]position -= Vector2(50, 0)[/code] subtracts [code]50[/code] to the sub-variable [code]x[/code].
 
-[code]position.x -= Vector(50, 0)[/code] tries to subtract a vector to the sub-variable [code]x[/code], which isn't a vector."
+[code]position.x -= Vector(50, 0)[/code] tries to subtract a vector to the sub-variable [code]x[/code], which isn't a vector. If you tried to do this, you'd get an error."
 answer_options = [ "position += Vector2(-50, 0)", "position -= Vector2(50, 0)", "position.x -= Vector(50, 0)" ]
 valid_answers = [ "position += Vector2(-50, 0)", "position -= Vector2(50, 0)" ]
 is_multiple_choice = true
@@ -131,8 +133,21 @@ visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=12]
+script = ExtResource( 5 )
+practice_id = "res://course/lesson-16-2d-vectors/practice-RHJMQ2XN.tres"
+title = ""
+goal = ""
+starting_code = ""
+hints = PoolStringArray(  )
+validator_script_path = "res://course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd"
+script_slice_path = "res://course/lesson-16-2d-vectors/increase_scale/IncreaseScale.live-editor/slices/IncreaseScale.level_scale.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 4 )
+description = ""
+
 [resource]
 script = ExtResource( 1 )
 title = "2D Vectors"
 content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 11 ), SubResource( 9 ), SubResource( 8 ), SubResource( 10 ) ]
-practices = [  ]
+practices = [ SubResource( 12 ) ]
