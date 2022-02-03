@@ -36,6 +36,8 @@ func _ready() -> void:
 	Events.connect("course_completed", self, "_show_end_screen")
 
 	NavigationManager.connect("welcome_screen_navigation_requested", self, "_go_to_welcome_screen")
+	# Needed to navigate back from the end screen to the outliner.
+	NavigationManager.connect("outliner_navigation_requested", _course_screen, "show")
 
 	if NavigationManager.current_url != "":
 		_on_course_requested()

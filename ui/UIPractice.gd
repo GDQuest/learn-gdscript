@@ -6,7 +6,6 @@ const RUN_AUTOTIMER_DURATION := 5.0
 const SLIDE_TRANSITION_DURATION := 0.5
 
 const PracticeHintScene := preload("screens/practice/PracticeHint.tscn")
-const PracticeProgress := preload("screens/practice/PracticeProgress.gd")
 const PracticeListPopup := preload("components/popups/PracticeListPopup.gd")
 const PracticeDonePopup := preload("components/popups/PracticeDonePopup.gd")
 
@@ -48,7 +47,6 @@ onready var _info_panel_anchors := $Margin/Layout/InfoPanelAnchors as Control
 onready var _info_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
 onready var _documentation_panel := find_node("DocumentationPanel") as RichTextLabel
 onready var _hints_container := _info_panel.hints_container as Revealer
-onready var _practice_progress := _info_panel.progress_bar as PracticeProgress
 
 onready var _practice_list := find_node("PracticeListPopup") as PracticeListPopup
 onready var _practice_done_popup := find_node("PracticeDonePopup") as PracticeDonePopup
@@ -79,9 +77,7 @@ func _ready() -> void:
 	_output_console.connect("reference_clicked", self, "_on_code_reference_clicked")
 	_use_solution_button.connect("pressed", self, "_on_use_solution_pressed")
 
-	_practice_progress.connect("previous_requested", self, "_on_previous_requested")
-	_practice_progress.connect("next_requested", self, "_on_next_requested")
-	_practice_progress.connect("list_requested", self, "_on_list_requested")
+	_info_panel.connect("list_requested", self, "_on_list_requested")
 
 	_practice_done_popup.connect("accepted", self, "_on_next_requested")
 
@@ -155,11 +151,6 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 
 	# In case we directly test a practice from the editor, we don't have access to the lesson.
 	if lesson and course:
-		var practice_index := lesson.practices.find(_practice)
-		var practice_max := lesson.practices.size() - 1
-		_practice_progress.set_previous_enabled(practice_index > 0)
-		_practice_progress.set_next_enabled(practice_index < practice_max)
-
 		_practice_list.clear_items()
 		for practice_data in lesson.practices:
 			_practice_list.add_item(practice_data, lesson, course, practice_data == practice)

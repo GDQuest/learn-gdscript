@@ -112,6 +112,7 @@ func _navigate_back() -> void:
 
 # Opens the course outliner and flushes the screen stack.
 func _navigate_to_outliner() -> void:
+	show()
 	_course_outliner.modulate.a = 0.0
 	_course_outliner.show()
 
@@ -255,7 +256,7 @@ func _on_lesson_completed() -> void:
 
 func _on_course_completed() -> void:
 	Events.emit_signal("course_completed", course)
-	queue_free()
+	hide()
 
 
 # Transitions a screen in.

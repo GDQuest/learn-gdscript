@@ -35,16 +35,16 @@ margin_right = 514.0
 margin_bottom = 284.0
 
 [node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-margin_right = 211.0
-text = "damage(25)"
+margin_right = 262.0
+text = "take_damage(25)"
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
+visible = true
 margin_left = 518.0
 margin_right = 1033.0
 margin_bottom = 284.0
 text = "func take_damage(amount):
 	health -= amount"
-draw_spaces = true
 
 [node name="HealSprite" parent="RunnableCodeExample" instance=ExtResource( 1 )]
 script = SubResource( 1 )

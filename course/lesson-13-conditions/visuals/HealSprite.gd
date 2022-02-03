@@ -9,6 +9,7 @@ onready var _label := $HealthBar/Label as Label
 onready var _tween := $Tween as Tween
 onready var _animation_player := $AnimationPlayer as AnimationPlayer
 
+onready var start_health = health
 
 func _ready() -> void:
 	_health_bar.rect_size.x = health * 2
@@ -26,7 +27,7 @@ func run() -> void:
 
 
 func reset() -> void:
-	health = 1
+	health = start_health
 	_update_health_bar()
 
 

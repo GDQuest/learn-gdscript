@@ -19,6 +19,7 @@ const ACCELERATE_DISTANCE_THRESHOLD := 120.0
 # Used to multiply the scroll speed as the target scroll gets farther away than
 # ACCELERATE_DISTANCE_THRESHOLD.
 const SPEED_DISTANCE_DIVISOR := 200.0
+const TIME_MSEC_BETWEEN_SCROLL_EVENTS := 15
 
 # Scroll speed in pixels per second.
 var scroll_speed := SPEED_BASE
@@ -32,6 +33,9 @@ var _velocity := Vector2(0, 0)
 var _current_scroll := Vector2.ZERO
 var _target_position := Vector2.ZERO setget _set_target_position
 var _max_position_y := 0.0
+
+# Used to throttle touchpad scroll events.
+var _last_accepted_scroll_event_time := 0
 
 # Control node to move when scrolling.
 onready var _content: Control = get_child(get_child_count() - 1) as Control
@@ -76,10 +80,11 @@ func _process(delta: float) -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
-	if event.is_action("scroll_up") and event.pressed:
-		scroll_up()
-	elif event.is_action("scroll_down") and event.pressed:
-		scroll_down()
+	if OS.get_ticks_msec() > _last_accepted_scroll_event_time+ TIME_MSEC_BETWEEN_SCROLL_EVENTS :
+		if event.is_action("scroll_up") and event.pressed:
+			scroll_up()
+		elif event.is_action("scroll_down") and event.pressed:
+			scroll_down()
 	elif event.is_action_pressed("scroll_up_one_page"):
 		scroll_page_up()
 	elif event.is_action_pressed("scroll_down_one_page"):
@@ -92,10 +97,12 @@ func _gui_input(event: InputEvent) -> void:
 
 func scroll_up() -> void:
 	_set_target_position(_target_position + Vector2.UP * MOUSE_SCROLL_STEP * _scroll_sensitivity)
+	_last_accepted_scroll_event_time = OS.get_ticks_msec()
 
 
 func scroll_down() -> void:
 	_set_target_position(_target_position + Vector2.DOWN * MOUSE_SCROLL_STEP * _scroll_sensitivity)
+	_last_accepted_scroll_event_time = OS.get_ticks_msec()
 
 
 func scroll_page_up() -> void:
