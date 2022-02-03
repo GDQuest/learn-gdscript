@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=18 format=2]
+[gd_resource type="Resource" load_steps=17 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
@@ -123,31 +123,25 @@ visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
-[sub_resource type="Resource" id=10]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-16-2d-vectors/content-DizKUdOC.tres"
-title = ""
-type = 0
-text = ""
-visual_element_path = ""
-reverse_blocks = false
-has_separator = false
-
 [sub_resource type="Resource" id=12]
 script = ExtResource( 5 )
 practice_id = "res://course/lesson-16-2d-vectors/practice-RHJMQ2XN.tres"
-title = ""
-goal = ""
-starting_code = ""
-hints = PoolStringArray(  )
-validator_script_path = "res://course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd"
-script_slice_path = "res://course/lesson-16-2d-vectors/increase_scale/IncreaseScale.live-editor/slices/IncreaseScale.level_scale.slice.tres"
+title = "Increasing scale using vectors"
+goal = "Add to the [code]level_up()[/code] function to increase the [code]scale[/code] of the robot by [code]0.2[/code] every time it levels up.
+
+Make sure to use a vector when dealing with scale for this practice."
+starting_code = "func level_up():
+	level += 1
+	max_health *= 1.1"
+hints = PoolStringArray( "You can add a line to increase the [code]scale[/code] anywhere in the [code]level_up()[/code] function", "Avoid using [code]scale.x += 0.2[/code] for this practice" )
+validator_script_path = "increase_scale/TestScaleIncreased.gd"
+script_slice_path = "increase_scale/IncreaseScale.live-editor/slices/IncreaseScale.level_scale.slice.tres"
 documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 4 )
-description = ""
+description = "To visually show our robot has gained in strength, let's increase its size every time it levels up. Nothing could go wrong!"
 
 [resource]
 script = ExtResource( 1 )
 title = "2D Vectors"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 11 ), SubResource( 9 ), SubResource( 8 ), SubResource( 10 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 11 ), SubResource( 9 ), SubResource( 8 ) ]
 practices = [ SubResource( 12 ) ]
