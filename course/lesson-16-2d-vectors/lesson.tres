@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=17 format=2]
+[gd_resource type="Resource" load_steps=18 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
@@ -140,8 +140,31 @@ documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 4 )
 description = "To visually show our robot has gained in strength, let's increase its size every time it levels up. Nothing could go wrong!"
 
+[sub_resource type="Resource" id=13]
+script = ExtResource( 5 )
+practice_id = "res://course/lesson-16-2d-vectors/practice-kGx0c7DD.tres"
+title = "Resetting size and position using vectors"
+goal = "The robot's level has increased a lot, and so has its size!
+
+Let's fix this by resetting the robot's [code]scale[/code] and [code]position[/code] values.
+
+Create a function called [code]reset()[/code] that sets the [code]scale[/code] and [code]position[/code] of the robot.
+
+The [code]x[/code] and [code]y[/code] sub-variables of the robot's [code]scale[/code] need to be [code]1.0[/code].
+
+The robot's [code]position[/code] needs to be [code](0, 0)[/code].
+
+As in the previous practice, make sure to use vectors when dealing with scale and position."
+starting_code = ""
+hints = PoolStringArray( "To define the function, we use the [code]func[/code] keyword", "The first line is [code]func reset():[/code]" )
+validator_script_path = "resetting_robot/TestRobotReset.gd"
+script_slice_path = "resetting_robot/RobotReset.live-editor/slices/RobotReset.reset.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 4 )
+description = "Perhaps increasing the scale every level was a bad idea! Let's restore the robot to the correct size."
+
 [resource]
 script = ExtResource( 1 )
 title = "2D Vectors"
 content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 11 ), SubResource( 9 ), SubResource( 8 ) ]
-practices = [ SubResource( 12 ) ]
+practices = [ SubResource( 12 ), SubResource( 13 ) ]
