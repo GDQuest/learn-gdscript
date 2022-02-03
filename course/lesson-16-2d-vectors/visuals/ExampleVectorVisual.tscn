@@ -19,6 +19,7 @@ margin_top = 7.0
 margin_right = 793.0
 margin_bottom = 393.0
 mouse_filter = 2
+scene = ExtResource( 2 )
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
 margin_right = 786.0
@@ -26,6 +27,12 @@ margin_bottom = 386.0
 mouse_filter = 2
 
 [node name="PanelContainer" parent="RunnableCodeExample/Frame" index="0"]
+mouse_filter = 2
+
+[node name="Sliders" parent="RunnableCodeExample/Frame" index="1"]
+mouse_filter = 2
+
+[node name="HBoxContainer" parent="RunnableCodeExample/Frame" index="2"]
 mouse_filter = 2
 
 [node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="0"]
@@ -38,10 +45,5 @@ visible = false
 margin_left = 518.0
 margin_right = 1033.0
 margin_bottom = 284.0
-
-[node name="Node2D" type="Node2D" parent="RunnableCodeExample"]
-
-[node name="VectorVisual" parent="RunnableCodeExample/Node2D" instance=ExtResource( 2 )]
-size = Vector2( 600, 300 )
 
 [editable path="RunnableCodeExample"]

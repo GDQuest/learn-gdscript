@@ -51,15 +51,17 @@ func _draw():
 "
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 300, 150 )
+extents = Vector2( 150, 150 )
 
-[node name="VectorVisual" type="Area2D"]
+[node name="VectorVisual" type="Node2D"]
+
+[node name="VectorVisual" type="Area2D" parent="."]
 script = SubResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VectorVisual"]
 shape = SubResource( 2 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="VectorVisual"]
 visible = false
 modulate = Color( 1, 1, 1, 0.584314 )
 margin_left = -150.0
@@ -71,7 +73,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="VectorVisual"]
 margin_left = 12.0
 margin_top = -149.0
 margin_right = 179.0
@@ -83,7 +85,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LabelX" type="Label" parent="."]
+[node name="LabelX" type="Label" parent="VectorVisual"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -99,7 +101,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LabelY" type="Label" parent="."]
+[node name="LabelY" type="Label" parent="VectorVisual"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -116,18 +118,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TriangleX" type="Sprite" parent="."]
+[node name="TriangleX" type="Sprite" parent="VectorVisual"]
 position = Vector2( 150, 0 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
-[node name="TriangleY" type="Sprite" parent="."]
+[node name="TriangleY" type="Sprite" parent="VectorVisual"]
 position = Vector2( 0, 150 )
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
-[node name="TriangleMouse" type="Sprite" parent="."]
+[node name="TriangleMouse" type="Sprite" parent="VectorVisual"]
 position = Vector2( 54, 111 )
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )

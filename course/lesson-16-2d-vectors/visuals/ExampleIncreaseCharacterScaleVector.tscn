@@ -29,7 +29,25 @@ margin_top = 7.0
 margin_right = 1040.0
 margin_bottom = 291.0
 gdscript_code = "func level_up():
-	scale = Vector2(1.5, 1.5)"
+	scale = Vector2(1.5, 1.5)
+	# ..."
+
+[node name="Frame" parent="RunnableCodeExample" index="0"]
+margin_right = 514.0
+margin_bottom = 284.0
+
+[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
+margin_right = 188.0
+text = "level_up()"
+
+[node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
+visible = true
+margin_left = 518.0
+margin_right = 1033.0
+margin_bottom = 284.0
+text = "func level_up():
+	scale = Vector2(1.5, 1.5)
+	# ..."
 
 [node name="Node2D" type="Node2D" parent="RunnableCodeExample"]
 script = SubResource( 1 )
@@ -48,3 +66,5 @@ position = Vector2( -65, 19 )
 rotation = -0.483649
 texture = ExtResource( 3 )
 flip_h = true
+
+[editable path="RunnableCodeExample"]
