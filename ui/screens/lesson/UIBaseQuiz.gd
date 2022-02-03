@@ -47,6 +47,7 @@ var _shake_pos: float = 0
 var _previous_rect_size := rect_size
 var _next_rect_size := Vector2.ZERO
 var _percent_transformed := 0.0
+var _animating_hint := false
 
 
 func _ready() -> void:
@@ -56,6 +57,7 @@ func _ready() -> void:
 	_skip_button.connect("pressed", self, "_show_answer", [false])
 	connect("item_rect_changed", self, "_on_item_rect_changed")
 	
+	_help_message.connect("visibility_changed", self, "_on_help_message_visibility_changed")
 	_choice_container.connect("minimum_size_changed", self, "_on_choice_container_minimum_size_changed")
 	_result_container.connect("minimum_size_changed", self, "_on_result_container_minimum_size_changed")
 	
@@ -136,7 +138,7 @@ func _show_answer(gave_correct_answer := true) -> void:
 
 
 	_result_container.show()
-	_change_rect_size_to_fit(_result_container.rect_size)
+	_change_rect_size_to(_result_container.rect_size)
 	
 	#Hiding choice view upon completion of the following tween
 	_size_tween.interpolate_property(
@@ -171,8 +173,12 @@ func _show_answer(gave_correct_answer := true) -> void:
 		_correct_answer_label.text = _quiz.get_correct_answer_string()
 		emit_signal("quiz_skipped")
 
-func _change_rect_size_to_fit(size: Vector2) -> void:
+func _change_rect_size_to(size: Vector2, instant := false) -> void:
 	_size_tween.stop_all()
+	
+	if instant:
+		rect_min_size = size
+		return
 	
 	_previous_rect_size = rect_min_size
 	_next_rect_size = size
@@ -199,19 +205,23 @@ func _on_item_rect_changed() -> void:
 	if _result_container.rect_size.x < rect_size.x:
 		_result_container.rect_size.x = rect_size.x
 
+func _on_help_label_visibility_changed() -> void:
+	_animating_hint = true
+
 func _on_choice_container_minimum_size_changed() -> void:
 	if _choice_container.rect_size.y > _choice_container.get_combined_minimum_size().y:
 		_choice_container.rect_size.y = _choice_container.get_combined_minimum_size().y
 	
 	if not _result_container.visible:
-		_change_rect_size_to_fit(_choice_container.rect_size)
+		# If not animating the hint, just resize normally.
+		_change_rect_size_to(_choice_container.rect_size, !_animating_hint)
 
 func _on_result_container_minimum_size_changed() -> void:
 	if _result_container.rect_size.y > _result_container.get_combined_minimum_size().y:
 		_result_container.rect_size.y = _result_container.get_combined_minimum_size().y
 	
 	if _result_container.visible:
-		_change_rect_size_to_fit(_result_container.rect_size)
+		_change_rect_size_to(_result_container.rect_size)
 
 func _on_size_tween_step(object: Object, key: NodePath, _elapsed: float, _value: Object) -> void:
 	if object == self and key == ":_percent_transformed" and _next_rect_size != Vector2.ZERO:
@@ -223,6 +233,7 @@ func _on_size_tween_step(object: Object, key: NodePath, _elapsed: float, _value:
 func _on_size_tween_completed(object: Object, key: NodePath) -> void:
 	if object == self and key == ":_percent_transformed":
 		_next_rect_size = Vector2.ZERO
+		_animating_hint = false
 	
 	# To avoid the buttons being clickable after choice view is gone.
 	if object == _choice_container and key == ":modulate:a":
