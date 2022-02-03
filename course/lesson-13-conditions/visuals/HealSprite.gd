@@ -4,6 +4,7 @@ export var health := 100
 export var max_health := 100
 export var health_gained := 25
 
+onready var _empty_health_bar := $HealthBar/HealthBarEmpty as ColorRect
 onready var _health_bar := $HealthBar/HealthBarCurrent as ColorRect
 onready var _label := $HealthBar/Label as Label
 onready var _tween := $Tween as Tween
@@ -11,7 +12,7 @@ onready var _animation_player := $AnimationPlayer as AnimationPlayer
 
 
 func _ready() -> void:
-	_health_bar.rect_size.x = health * 2
+	_health_bar.rect_size.x = _empty_health_bar.rect_size.x
 	_update_health_bar()
 
 
@@ -32,7 +33,7 @@ func reset() -> void:
 
 func _update_health_bar() -> void:
 	var size_current = _health_bar.rect_size.x
-	var size_to = 190.0 * health / max_health
+	var size_to = _empty_health_bar.rect_size.x
 	
 	_label.text = "health = %s" % [health]
 	
