@@ -27,6 +27,18 @@ func test_draw_square_of_200_pixels() -> String:
 	var index := 1
 	for p in polygons:
 		var points = Array(p.get_points())
+		
+		if points.size() < target_polygon.size():
+			return(
+				"Shape number %s has too few corners! Did you change the draw_square() function?"
+				% index
+			)
+		elif points.size() > target_polygon.size():
+			return(
+				"Shape number %s has too many corners! Did you change the draw_square() function?"
+				% index
+			)
+		
 		# We make all points absolute in case the user turns counter-clockwise when
 		# making the shape.
 		for i in points.size():
