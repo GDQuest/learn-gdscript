@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
-[ext_resource path="res://course/common/hand_ice.png" type="Texture" id=3]
-[ext_resource path="res://course/common/robot_body.png" type="Texture" id=4]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -11,7 +10,8 @@ func run():
 	scale = Vector2.ONE * 1.5
 
 func reset():
-	scale = Vector2.ONE"
+	scale = Vector2.ONE
+"
 
 [node name="PanelContainer" type="PanelContainer"]
 margin_right = 1047.0
@@ -29,20 +29,5 @@ margin_bottom = 291.0
 gdscript_code = "scale.x = 1.5
 scale.y = 1.5"
 
-[node name="Node2D" type="Node2D" parent="RunnableCodeExample"]
+[node name="SetSpriteScale" parent="RunnableCodeExample" instance=ExtResource( 1 )]
 script = SubResource( 1 )
-
-[node name="GodotBottom" type="Sprite" parent="RunnableCodeExample/Node2D"]
-position = Vector2( 0, -17 )
-texture = ExtResource( 4 )
-
-[node name="HandIce" type="Sprite" parent="RunnableCodeExample/Node2D"]
-position = Vector2( 66, 14 )
-rotation = 0.36894
-texture = ExtResource( 3 )
-
-[node name="HandIce2" type="Sprite" parent="RunnableCodeExample/Node2D"]
-position = Vector2( -65, 19 )
-rotation = -0.483649
-texture = ExtResource( 3 )
-flip_h = true
