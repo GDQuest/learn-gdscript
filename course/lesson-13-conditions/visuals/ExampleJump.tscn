@@ -1,185 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/common/robot_body.png" type="Texture" id=2]
-[ext_resource path="res://course/common/hand_ice.png" type="Texture" id=3]
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-onready var animation_player := $HideSprite/AnimationPlayer
+onready var _animation_player := $AnimationPlayer
 
 
 func run():
-	animation_player.play(\"jump\")
+	_animation_player.play(\"jump\")
 "
-
-[sub_resource type="Animation" id=3]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("HandIce:position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 66, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("HandIce:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( 14, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("HandIce:rotation_degrees")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/5/type = "bezier"
-tracks/5/path = NodePath("HandIce2:position:x")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"points": PoolRealArray( -65, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/6/type = "bezier"
-tracks/6/path = NodePath("HandIce2:position:y")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"points": PoolRealArray( 19, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/7/type = "bezier"
-tracks/7/path = NodePath("HandIce2:rotation_degrees")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-
-[sub_resource type="Animation" id=2]
-resource_name = "jump"
-length = 1.1
-tracks/0/type = "bezier"
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 1 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.3, 0.736615, -80, -0.25, 0, 0.25, 0, 0, -0.3, 1.57779, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 1 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("HandIce:position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 53, -0.25, 0, 0.25, 0, 53, -0.25, 0, 0.25, 0, 53, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.7, 1.1 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("HandIce:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( 21, -0.25, 0, 0.25, 0, -73.4377, -0.25, 0, 0.25, 0, 21, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.7, 1.1 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("HandIce:rotation_degrees")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"points": PoolRealArray( 38.587, -0.25, 0, 0.25, 0, -60.3331, -0.25, 0, 0.25, 0, 38.587, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.7, 1.1 )
-}
-tracks/5/type = "bezier"
-tracks/5/path = NodePath("HandIce2:position:x")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"points": PoolRealArray( -54, -0.25, 0, 0.25, 0, -46, -0.25, 0, 0.25, 0, -54, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.7, 1.1 )
-}
-tracks/6/type = "bezier"
-tracks/6/path = NodePath("HandIce2:position:y")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"points": PoolRealArray( 25, -0.25, 0, 0.25, 0, -76.4377, -0.25, 0, 0.25, 0, 25, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.7, 1.1 )
-}
-tracks/7/type = "bezier"
-tracks/7/path = NodePath("HandIce2:rotation_degrees")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"points": PoolRealArray( -52.1877, -0.25, 0, 0.25, 0, 80.3829, -0.25, 0, 0.25, 0, -52.1877, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.7, 1.1 )
-}
 
 [node name="ExampleShow" type="PanelContainer"]
 margin_right = 1047.0
@@ -196,7 +28,7 @@ margin_right = 1040.0
 margin_bottom = 291.0
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 514.0
+margin_right = 1033.0
 margin_bottom = 284.0
 
 [node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="0"]
@@ -206,33 +38,11 @@ visible = false
 text = "Jump"
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
-visible = true
 margin_left = 518.0
 margin_right = 1033.0
 margin_bottom = 284.0
 
-[node name="Node2D" type="Node2D" parent="RunnableCodeExample"]
-position = Vector2( -7, -7 )
-script = SubResource( 4 )
-
-[node name="HideSprite" type="Node2D" parent="RunnableCodeExample/Node2D"]
-
-[node name="GodotBottom" type="Sprite" parent="RunnableCodeExample/Node2D/HideSprite"]
-position = Vector2( 0, -17 )
-texture = ExtResource( 2 )
-
-[node name="HandIce" type="Sprite" parent="RunnableCodeExample/Node2D/HideSprite"]
-position = Vector2( 66, 14 )
-texture = ExtResource( 3 )
-
-[node name="HandIce2" type="Sprite" parent="RunnableCodeExample/Node2D/HideSprite"]
-position = Vector2( -65, 19 )
-texture = ExtResource( 3 )
-flip_h = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="RunnableCodeExample/Node2D/HideSprite"]
-playback_speed = 2.0
-anims/RESET = SubResource( 3 )
-anims/jump = SubResource( 2 )
+[node name="RobotJump" parent="RunnableCodeExample" instance=ExtResource( 2 )]
+script = SubResource( 1 )
 
 [editable path="RunnableCodeExample"]

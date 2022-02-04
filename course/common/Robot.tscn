@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://course/common/robot_body.png" type="Texture" id=1]
 [ext_resource path="res://course/common/hand_ice.png" type="Texture" id=2]
 [ext_resource path="res://course/common/hand_ice_open.png" type="Texture" id=3]
+[ext_resource path="res://course/common/sparkle_sprite.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -90,6 +91,133 @@ tracks/6/keys = {
 "update": 0,
 "values": [ ExtResource( 2 ) ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("ParticlesHeal:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "heal"
+length = 2.0
+step = 0.033
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/HandIceLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.198, 0.528, 1.089, 1.287, 1.518, 1.749 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 49, 25 ), Vector2( 50, 27 ), Vector2( 62, 0.158 ), Vector2( 54, -25 ), Vector2( 61, -11 ), Vector2( 63, -3 ), Vector2( 49, 25 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/HandIceLeft:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.198, 0.66, 0.825, 1.089, 1.287, 1.518, 1.749 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 42.2378, 33.4388, 16.762, -56.5764, -78.6199, -6.41918, -0.239521, 42.2378 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Pivot/HandIceRight:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.099, 0.759, 1.03333, 2 ),
+"transitions": PoolRealArray( 1, -2, -2, 1, -2 ),
+"update": 0,
+"values": [ Vector2( -45, 30.2603 ), Vector2( -45, 30 ), Vector2( -45, 37 ), Vector2( -45, 36.3159 ), Vector2( -45, 30.26 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Pivot/HandIceRight:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.03333, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -52.63, -56.5333, -52.63 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pivot/RobotBody:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.264, 1.914 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -12 ), Vector2( 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Pivot/RobotBody:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Pivot/HandIceLeft:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.693, 1.551 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 2 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("ParticlesHeal:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.924 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/8/type = "method"
+tracks/8/path = NodePath("AnimationPlayer")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "idle", -1, 1.0, false ],
+"method": "play"
+} ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "idle"
@@ -127,10 +255,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.132, 1.419 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.132, 1.419 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -45, 30.26 ), Vector2( -46, 35.999 ) ]
+"values": [ Vector2( -45, 30.26 ), Vector2( -45, 30.26 ), Vector2( -46, 35.999 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Pivot/HandIceRight:rotation_degrees")
@@ -139,10 +267,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.132, 1.419 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.132, 1.419 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ -52.63, -49.7366 ]
+"values": [ -52.6, -52.63, -49.7366 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Pivot/HandIceLeft:position")
@@ -151,10 +279,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.264, 1.485 ),
-"transitions": PoolRealArray( 1, -2 ),
+"times": PoolRealArray( 0, 0.264, 1.485 ),
+"transitions": PoolRealArray( 1, 1, -2 ),
 "update": 0,
-"values": [ Vector2( 49, 25 ), Vector2( 49, 31 ) ]
+"values": [ Vector2( 49, 25 ), Vector2( 49, 25 ), Vector2( 49, 31 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Pivot/HandIceLeft:rotation_degrees")
@@ -163,10 +291,110 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0.264, 1.485 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.264, 1.485 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 42.2378, 38.8828 ]
+"values": [ 42.2, 42.2378, 38.8828 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "jump"
+length = 1.2
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Pivot:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -32, -0.25, 0, 0.3, 0.736615, -80, -0.25, 0, 0.25, 0, -32, -0.3, 1.57779, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Pivot/HandIceLeft:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 49, -0.25, 0, 0.25, 0, 53, -0.25, 0, 0.25, 0, 49, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Pivot/HandIceLeft:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 25, -0.25, 0, 0.25, 0, -73.4377, -0.25, 0, 0.25, 0, 25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Pivot/HandIceLeft:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 42.2, -0.25, 0, 0.25, 0, -60.3331, -0.25, 0, 0.25, 0, 42.2, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Pivot/HandIceRight:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( -45, -0.25, 0, 0.25, 0, -46, -0.25, 0, 0.25, 0, -45, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.1 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Pivot/HandIceRight:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 30.26, -0.25, 0, 0.25, 0, -76.4377, -0.25, 0, 0.25, 0, 30.26, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.1 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Pivot/HandIceRight:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( -52.6, -0.25, 0, 0.25, 0, 80.3829, -0.25, 0, 0.25, 0, -52.6, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.1 )
+}
+tracks/7/type = "method"
+tracks/7/path = NodePath("AnimationPlayer")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 1.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "idle", -1, 1.0, false ],
+"method": "play"
+} ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Pivot/RobotBody:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -205,10 +433,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.2, 1.73333 ),
-"transitions": PoolRealArray( -2, -2 ),
+"times": PoolRealArray( 0, 0.2, 1.73333 ),
+"transitions": PoolRealArray( 1, -2, -2 ),
 "update": 0,
-"values": [ Vector2( -45, 30 ), Vector2( -45, 37 ) ]
+"values": [ Vector2( -45, 30.2603 ), Vector2( -45, 30 ), Vector2( -45, 37 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Pivot/HandIceRight:rotation_degrees")
@@ -259,12 +487,21 @@ tracks/6/keys = {
 "values": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 2 ) ]
 }
 
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0 ), 0.0, 0.220533, 0, 0, Vector2( 1, 0.0090909 ), -6.09091, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0.134868, 0.595395, 0.960526 )
+colors = PoolColorArray( 0.239216, 1, 0.431373, 1, 0.239216, 1, 0.431373, 1, 0.609375, 1, 0.708038, 1 )
+
 [node name="Robot" type="Node2D"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 anims/RESET = SubResource( 1 )
+anims/heal = SubResource( 5 )
 anims/idle = SubResource( 3 )
+anims/jump = SubResource( 7 )
 anims/saying_hi = SubResource( 2 )
 
 [node name="Pivot" type="Position2D" parent="."]
@@ -285,3 +522,19 @@ position = Vector2( 49, 25 )
 rotation = 0.737189
 texture = ExtResource( 2 )
 offset = Vector2( 24.1958, 2.15936 )
+
+[node name="ParticlesHeal" type="CPUParticles2D" parent="."]
+position = Vector2( 0, -19 )
+emitting = false
+amount = 12
+lifetime = 0.8
+explosiveness = 0.26
+texture = ExtResource( 4 )
+emission_shape = 1
+emission_sphere_radius = 64.0
+gravity = Vector2( 0, -98 )
+angular_velocity = 37.4
+angular_velocity_random = 1.0
+scale_amount = 0.5
+scale_amount_curve = SubResource( 4 )
+color_ramp = SubResource( 6 )

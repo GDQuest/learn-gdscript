@@ -1,4 +1,4 @@
-extends Control
+extends CenterContainer
 
 var health = 20
 var _health_gained = 40
@@ -6,14 +6,14 @@ var _max_health = 80
 
 var _produced_health_values = []
 
-onready var _robot := $HealSprite
+onready var _robot := find_node("Robot")
+onready var _animation_player := find_node("AnimationPlayer")
+onready var _health_bar := find_node("CustomHealthBar")
 
 
 func _ready() -> void:
-	_robot.health_gained = _health_gained
-	_robot.health = health
-	_robot.max_health = _max_health
-	_robot._update_health_bar()
+	_health_bar.max_health = _max_health
+	_health_bar.set_health(health)
 
 
 func _run() -> void:
@@ -28,11 +28,8 @@ func _run() -> void:
 
 
 func _update_robot() -> void:
-	_robot._animation_player.play("heal")
-	_robot.health_gained = _health_gained
-	_robot.health = health
-	_robot.max_health = _max_health
-	_robot._update_health_bar()
+	_animation_player.play("heal")
+	_health_bar.set_health(health)
 
 
 # EXPORT heal
