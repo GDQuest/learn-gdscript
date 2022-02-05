@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var _animation_player := $AnimationPlayer as AnimationPlayer
-onready var _health_bar := $CustomHealthBar
+onready var _animation_tree := find_node("AnimationTree") as AnimationTree
+onready var _health_bar := find_node("CustomHealthBar")
 
 
 var level = 1
@@ -17,6 +17,6 @@ func level_up():
 func _run():
 	for i in range(2):
 		level_up()
-		_animation_player.play("level")
-		yield(_animation_player, "animation_finished")
+		_animation_tree.travel("level")
+		yield(_animation_tree, "animation_finished")
 	Events.emit_signal("practice_run_completed")

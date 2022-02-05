@@ -5,18 +5,17 @@ export var max_health := 100
 
 var level := 1
 
-onready var _health_bar := $CustomHealthBar as ColorRect
-onready var _label_level := $LevelLabel as Label
-onready var _animation_tree := $AnimationTree as AnimationTree
-onready var _state_machine = _animation_tree["parameters/playback"]
+onready var _health_bar := find_node("CustomHealthBar") as ColorRect
+onready var _label_level := find_node("LevelLabel") as Label
+onready var _animation_tree := find_node("AnimationTree") as AnimationTree
 
 func _run():
 	
 	for i in range(3):
 		level_up()
-		_health_bar.set_health(health)
+		_health_bar.set_max_health(max_health)
 		_label_level.text = "Level %s" % level
-		_animation_tree.play("level")
+		_animation_tree.travel("level")
 		yield(_animation_tree, "animation_finished")
 	
 	Events.emit_signal("practice_run_completed")

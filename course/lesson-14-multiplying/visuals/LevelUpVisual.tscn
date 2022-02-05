@@ -7,11 +7,11 @@
 script/source = "extends Node2D
 
 
-onready var _animation_player := $AnimationPlayer
+onready var _animation_tree := find_node(\"AnimationTree\")
 
 
 func run() -> void:
-	_animation_player.play(\"level\")
+	_animation_tree.travel(\"level\")
 "
 
 [node name="PanelContainer" type="PanelContainer"]

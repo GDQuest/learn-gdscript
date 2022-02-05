@@ -14,8 +14,8 @@ var level = 3
 var health = 100
 var max_health = 100
 
-onready var _animation_player := $AnimationPlayer
-onready var _health_bar := $CustomHealthBar as ColorRect
+onready var _animation_tree := find_node(\"AnimationTree\")
+onready var _health_bar := find_node(\"CustomHealthBar\") as ColorRect
 
 # EXPORT damage
 func take_damage(amount):
@@ -34,7 +34,7 @@ func take_damage(amount):
 func _run():
 	take_damage(10)
 	_health_bar.set_health(health)
-	_animation_player.play(\"damage\")
+	_animation_tree.travel(\"damage\")
 	yield(get_tree().create_timer(0.5), \"timeout\")
 	Events.emit_signal(\"practice_run_completed\")
 "

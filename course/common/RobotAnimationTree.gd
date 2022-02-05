@@ -1,4 +1,4 @@
-# Helper script to make the AnimationTree work like an AnimationPlayer.
+# Helper script to simplify using the AnimationTree.
 # We use an AnimationTree to easily move to and from different states.
 # Several practices rely on waiting for the animation_finished signal, and this
 # became problematic when using a method track to go back to the idle animation.
@@ -14,7 +14,7 @@ func _ready() -> void:
 	_animation_player.connect("animation_finished", self, "_on_animation_finished")
 
 
-func play(animation_name: String) -> void:
+func travel(animation_name: String) -> void:
 	_state_machine.travel(animation_name)
 
 

@@ -15,6 +15,6 @@ name = "damage"
 is_full_file = false
 start = 10
 end = 22
-lines_before = [ "extends Node2D", "", "", "var level = 3", "var health = 100", "var max_health = 100", "", "onready var _animation_player := $AnimationPlayer", "onready var _health_bar := $CustomHealthBar as ColorRect", "" ]
-lines_after = [ "", "func _run():", "	take_damage(10)", "	_health_bar.set_health(health)", "	_animation_player.play(\"damage\")", "	yield(get_tree().create_timer(0.5), \"timeout\")", "	Events.emit_signal(\"practice_run_completed\")", "" ]
+lines_before = [ "extends Node2D", "", "", "var level = 3", "var health = 100", "var max_health = 100", "", "onready var _animation_tree := find_node(\"AnimationTree\")", "onready var _health_bar := find_node(\"CustomHealthBar\") as ColorRect", "" ]
+lines_after = [ "", "func _run():", "	take_damage(10)", "	_health_bar.set_health(health)", "	_animation_tree.travel(\"damage\")", "	yield(get_tree().create_timer(0.5), \"timeout\")", "	Events.emit_signal(\"practice_run_completed\")", "" ]
 lines_editable = [ "func take_damage(amount):", "	if level > 2:", "		amount *= 0.5", "	", "	health -= amount", "", "	if health > max_health:", "		health = max_health", "", "	if health < 0:", "		health = 0" ]
