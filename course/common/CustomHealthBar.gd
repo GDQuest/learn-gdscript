@@ -13,8 +13,17 @@ func _ready() -> void:
 	rect_size.x = _empty_health_bar.rect_size.x * health / max_health
 
 
-func set_health(new_health) -> void:
+func set_health(new_health: int) -> void:
 	health = new_health
+	_update_bars()
+
+
+func set_max_health(new_max_health: int) -> void:
+	max_health = new_max_health
+	_update_bars()
+
+
+func _update_bars() -> void:
 	var size_current = _health_bar.rect_size.x
 	var size_to = _empty_health_bar.rect_size.x * health / max_health
 	
