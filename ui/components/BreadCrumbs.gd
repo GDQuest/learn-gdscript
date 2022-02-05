@@ -97,4 +97,5 @@ func _on_navigation_pressed(path: String) -> void:
 	if path.empty():
 		return
 
-	NavigationManager.navigate_to(path)
+	#NavigationManager.navigate_to(path)
+	Events.emit_signal("breadcrumbs_navigation_requested", path)

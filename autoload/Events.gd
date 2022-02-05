@@ -13,6 +13,7 @@ signal practice_completed(practice)
 signal practice_next_requested(practice)
 signal practice_previous_requested(practice)
 signal practice_requested(practice)
+signal breadcrumbs_navigation_requested(path)
 signal course_completed(course)
 
 signal settings_requested

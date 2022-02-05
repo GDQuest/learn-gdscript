@@ -4,9 +4,12 @@ extends PanelContainer
 signal transition_completed
 signal return_to_welcome_screen_requested
 
+enum NAVIGATION_REQUEST_TYPE {BACK, OUTLINER, HOME, BREADCRUMBS, NEXT_PRACTICE, PREVIOUS_PRACTICE, TO_PRACTICE}
+
 const CourseOutliner := preload("./screens/course_outliner/CourseOutliner.gd")
 const BreadCrumbs := preload("./components/BreadCrumbs.gd")
 const LessonDonePopup := preload("./components/popups/LessonDonePopup.gd")
+const LeaveUnsavedPracticePopup := preload("./components/popups/LeaveUnsavedPracticePopup.gd")
 
 const SCREEN_TRANSITION_DURATION := 0.75
 const OUTLINER_TRANSITION_DURATION := 0.5
@@ -35,6 +38,7 @@ onready var _report_button := $Layout/Header/MarginContainer/HeaderContent/Repor
 onready var _screen_container := $Layout/Content/ScreenContainer as Container
 onready var _course_outliner := $Layout/Content/CourseOutliner as CourseOutliner
 
+onready var _leave_unsaved_practice_popup := $LeaveUnsavedPracticePopup as LeaveUnsavedPracticePopup
 onready var _lesson_done_popup := $LessonDonePopup as LessonDonePopup
 
 onready var _tween := $Tween as Tween
@@ -49,14 +53,16 @@ func _ready() -> void:
 	NavigationManager.connect("outliner_navigation_requested", self, "_navigate_to_outliner")
 
 	Events.connect("practice_next_requested", self, "_on_practice_next_requested")
-	Events.connect("practice_previous_requested", self, "_on_practice_previous_requested")
+	Events.connect("practice_previous_requested", self, "_on_user_navigation_request")
 	Events.connect("practice_requested", self, "_on_practice_requested")
+	Events.connect("breadcrumbs_navigation_requested", self, "_on_breadcrumbs_navigation_requested")
 
+	_leave_unsaved_practice_popup.connect("confirmed", self, "_on_leave_practice_unsaved_confirmed")
 	_lesson_done_popup.connect("accepted", self, "_on_lesson_completed")
 
-	_outliner_button.connect("pressed", NavigationManager, "navigate_to_outliner")
-	_back_button.connect("pressed", NavigationManager, "navigate_back")
-	_home_button.connect("pressed", NavigationManager, "navigate_to_welcome_screen")
+	_outliner_button.connect("pressed", self, "_on_user_navigation_request", [NAVIGATION_REQUEST_TYPE.OUTLINER])
+	_back_button.connect("pressed", self, "_on_user_navigation_request", [NAVIGATION_REQUEST_TYPE.BACK])
+	_home_button.connect("pressed", self, "_on_user_navigation_request", [NAVIGATION_REQUEST_TYPE.HOME])
 
 	_settings_button.connect("pressed", Events, "emit_signal", ["settings_requested"])
 	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
@@ -74,7 +80,7 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("ui_back"):
-		NavigationManager.navigate_back()
+		_on_user_navigation_request(NAVIGATION_REQUEST_TYPE.BACK)
 
 
 func set_start_from_lesson(lesson_id: String) -> void:
@@ -89,6 +95,24 @@ func set_start_from_lesson(lesson_id: String) -> void:
 
 		matched_index += 1
 
+func _perform_user_navigation_request(type: int, payload: Array):
+	match type:
+		NAVIGATION_REQUEST_TYPE.BACK:
+			NavigationManager.navigate_back()
+		NAVIGATION_REQUEST_TYPE.OUTLINER:
+			NavigationManager.navigate_to_outliner()
+		NAVIGATION_REQUEST_TYPE.HOME:
+			NavigationManager.navigate_to_welcome_screen()
+		NAVIGATION_REQUEST_TYPE.NEXT_PRACTICE:
+			_navigate_to_practice_next(payload.pop_back())
+		NAVIGATION_REQUEST_TYPE.PREVIOUS_PRACTICE:
+			_navigate_to_practice_previous(payload.pop_back())
+		NAVIGATION_REQUEST_TYPE.TO_PRACTICE:
+			_navigate_to_practice(payload.pop_back())
+		NAVIGATION_REQUEST_TYPE.BREADCRUMBS:
+			NavigationManager.navigate_to(payload.pop_back())
+		_:
+			printerr("Unsupported navigation request with request id %s!" % type)
 
 # Pops the last screen from the stack.
 func _navigate_back() -> void:
@@ -186,7 +210,7 @@ func _navigate_to() -> void:
 		Events.emit_signal("lesson_started", target)
 
 
-func _on_practice_next_requested(practice: Practice) -> void:
+func _navigate_to_practice_next(practice: Practice) -> void:
 	var lesson_data := course.lessons[_lesson_index] as Lesson
 	var practices: Array = lesson_data.practices
 
@@ -212,7 +236,7 @@ func _on_practice_next_requested(practice: Practice) -> void:
 		NavigationManager.navigate_to(practices[index + 1].practice_id)
 
 
-func _on_practice_previous_requested(practice: Practice) -> void:
+func _navigate_to_practice_previous(practice: Practice) -> void:
 	var lesson_data := course.lessons[_lesson_index] as Lesson
 	var practices: Array = lesson_data.practices
 
@@ -229,7 +253,7 @@ func _on_practice_previous_requested(practice: Practice) -> void:
 		NavigationManager.navigate_to(practices[index - 1].practice_id)
 
 
-func _on_practice_requested(practice: Practice) -> void:
+func _navigate_to_practice(practice: Practice) -> void:
 	var lesson_data := course.lessons[_lesson_index] as Lesson
 	var practices: Array = lesson_data.practices
 
@@ -240,6 +264,34 @@ func _on_practice_requested(practice: Practice) -> void:
 
 	NavigationManager.navigate_to(practice.practice_id)
 
+func _on_practice_next_requested(practice: Practice) -> void:
+	_on_user_navigation_request(NAVIGATION_REQUEST_TYPE.NEXT_PRACTICE, [practice])
+
+func _on_practice_previous_requested(practice: Practice) -> void:
+	_on_user_navigation_request(NAVIGATION_REQUEST_TYPE.PREVIOUS_PRACTICE, [practice])
+
+func _on_practice_requested(practice: Practice) -> void:
+	_on_user_navigation_request(NAVIGATION_REQUEST_TYPE.TO_PRACTICE, [practice])
+
+func _on_breadcrumbs_navigation_requested(path: String) -> void:
+	_on_user_navigation_request(NAVIGATION_REQUEST_TYPE.BREADCRUMBS, [path])
+
+func _on_leave_practice_unsaved_confirmed() -> void:
+	_leave_unsaved_practice_popup.hide()
+	var type = _leave_unsaved_practice_popup.get_navigation_type()
+	var payload = _leave_unsaved_practice_popup.get_payload()
+	_perform_user_navigation_request(type, payload)
+
+func _on_user_navigation_request(type: int, payload := []) -> void:
+	var screen = _screens_stack.back()
+	
+	# If user is in unfinished practice that has begun, prompt user to confirm navigation
+	if screen is UIPractice and screen._code_editor_is_dirty:
+		_leave_unsaved_practice_popup.set_navigation_data(type, payload)
+		_leave_unsaved_practice_popup.popup()
+	else:
+		#if not, just perform the navigation
+		_perform_user_navigation_request(type, payload)
 
 func _on_lesson_completed() -> void:
 	var lesson := course.lessons[_lesson_index] as Lesson

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/BreadCrumbs.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://ui/icons/icon_godot_head.svg" type="Texture" id=10]
 [ext_resource path="res://ui/components/FullScreenButton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://ui/components/popups/LessonDonePopup.tscn" type="PackedScene" id=12]
+[ext_resource path="res://ui/components/popups/LeaveUnsavedPracticePopup.tscn" type="PackedScene" id=13]
 
 [node name="UINavigator" type="PanelContainer"]
 anchor_right = 1.0
@@ -131,6 +132,12 @@ __meta__ = {
 
 [node name="CourseOutliner" parent="Layout/Content" instance=ExtResource( 7 )]
 visible = false
+
+[node name="LeaveUnsavedPracticePopup" parent="." instance=ExtResource( 13 )]
+visible = false
+title = "Leave unfinished practice?"
+text_content = "You will lose your progress on this practice!"
+strict = true
 
 [node name="LessonDonePopup" parent="." instance=ExtResource( 12 )]
 visible = false
