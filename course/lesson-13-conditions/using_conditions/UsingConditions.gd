@@ -1,7 +1,5 @@
 extends Node2D
 
-onready var _animation_player := $AnimationPlayer
-
 
 func _run():
 	# EXPORT conditions

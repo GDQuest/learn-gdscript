@@ -12,8 +12,8 @@ export var max_health := 100
 export var health_gained = 50
 var health := start_health
 
-onready var _health_bar := $HealthBar
-onready var _animation_player := $AnimationPlayer
+onready var _health_bar := find_node(\"HealthBar\")
+onready var _animation_tree := find_node(\"AnimationTree\")
 
 
 func _ready() -> void:
@@ -28,7 +28,7 @@ func reset() -> void:
 
 func run() -> void:
 	health += health_gained
-	_animation_player.play(\"heal\")
+	_animation_tree.travel(\"heal\")
 	_health_bar.set_health(health)
 "
 
