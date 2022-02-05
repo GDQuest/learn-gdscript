@@ -17,7 +17,6 @@ var level := 1
 onready var _health_bar := $CustomHealthBar as ColorRect
 onready var _label_level := $LevelLabel as Label
 onready var _animation_tree := $AnimationTree as AnimationTree
-onready var _animation_player := $AnimationPlayer as AnimationPlayer
 onready var _state_machine = _animation_tree[\"parameters/playback\"]
 
 func _run():
@@ -26,8 +25,8 @@ func _run():
 		level_up()
 		_health_bar.set_health(health)
 		_label_level.text = \"Level %s\" % level
-		_state_machine.travel(\"level\")
-		yield(_animation_player, \"animation_finished\")
+		_animation_tree.play(\"level\")
+		yield(_animation_tree, \"animation_finished\")
 	
 	Events.emit_signal(\"practice_run_completed\")
 	
