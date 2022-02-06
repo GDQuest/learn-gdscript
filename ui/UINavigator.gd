@@ -101,7 +101,7 @@ func _navigate_back() -> void:
 
 	var current_screen: Control = _screens_stack.pop_back()
 	var next_screen: Control = _screens_stack.back()
-	_back_button.disabled = _screens_stack.size() < 2
+	_update_back_button(_screens_stack.size() < 2)
 
 	# warning-ignore:unsafe_method_access
 	var target = next_screen.get_screen_resource()
@@ -120,7 +120,7 @@ func _navigate_to_outliner() -> void:
 
 	_outliner_button.hide()
 	_back_button.hide()
-	_back_button.disabled = true
+	_update_back_button(true)
 	_home_button.show()
 	_clear_history_stack()
 
@@ -161,7 +161,7 @@ func _navigate_to() -> void:
 	var has_previous_screen = not _screens_stack.empty()
 	_screens_stack.push_back(screen)
 	_back_button.show()
-	_back_button.disabled = _screens_stack.size() < 2
+	_update_back_button(_screens_stack.size() < 2)
 
 	_screen_container.add_child(screen)
 	if has_previous_screen:
@@ -338,3 +338,14 @@ func _clear_history_stack() -> void:
 	_screens_stack.clear()
 
 	_breadcrumbs.update_breadcrumbs(course, null)
+
+
+func _update_back_button(is_disabled: bool) -> void:
+	_back_button.disabled = is_disabled
+	var tooltip := tr("Go back in your navigation history")
+	if is_disabled:
+		_back_button.mouse_default_cursor_shape = CURSOR_ARROW
+		tooltip += " " + tr("(no previous history)")
+	else:
+		_back_button.mouse_default_cursor_shape = CURSOR_POINTING_HAND
+	_back_button.hint_tooltip = tooltip
