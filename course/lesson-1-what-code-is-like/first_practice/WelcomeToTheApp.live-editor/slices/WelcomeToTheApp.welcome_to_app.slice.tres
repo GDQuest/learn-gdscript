@@ -15,6 +15,6 @@ name = "welcome_to_app"
 is_full_file = false
 start = 4
 end = 7
-lines_before = [ "extends Node2D", "", "onready var _animation_player := $AnimationPlayer", "" ]
-lines_after = [ "	yield(get_tree().create_timer(1.0), \"timeout\")", "	Events.emit_signal(\"practice_run_completed\")", "", "func _run():", "	_animation_player.play(\"saying_hi\")", "" ]
+lines_before = [ "extends Node2D", "", "onready var _animation_tree := find_node(\"AnimationTree\")", "" ]
+lines_after = [ "	yield(get_tree().create_timer(1.0), \"timeout\")", "	Events.emit_signal(\"practice_run_completed\")", "", "func _run():", "	_animation_tree.travel(\"saying_hi\")", "" ]
 lines_editable = [ "func _ready() -> void:", "	print(\"Welcome!\")" ]

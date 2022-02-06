@@ -1,6 +1,6 @@
 extends PracticeTester
 
-var first_node: Control
+var first_node: Node2D
 var health := 0
 
 func _prepare():

@@ -15,6 +15,6 @@ name = "wrong_code"
 is_full_file = false
 start = 8
 end = 11
-lines_before = [ "extends Node2D", "", "onready var _animation_player := $AnimationPlayer", "", "func _ready():", "	yield(get_tree().create_timer(1.0), \"timeout\")", "	Events.emit_signal(\"practice_run_completed\")", "" ]
-lines_after = [ "", "func _run():", "	_animation_player.play(\"saying_hi\")", "" ]
+lines_before = [ "extends Node2D", "", "onready var _animation_tree := find_node(\"AnimationTree\")", "", "func _ready():", "	yield(get_tree().create_timer(1.0), \"timeout\")", "	Events.emit_signal(\"practice_run_completed\")", "" ]
+lines_after = [ "", "func _run():", "	_animation_tree.travel(\"saying_hi\")", "" ]
 lines_editable = [ "func this_code_is_wrong():", "	return" ]

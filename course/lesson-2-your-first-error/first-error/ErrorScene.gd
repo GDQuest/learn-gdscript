@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var _animation_player := $AnimationPlayer
+onready var _animation_tree := find_node("AnimationTree")
 
 func _ready():
 	yield(get_tree().create_timer(1.0), "timeout")
@@ -12,4 +12,4 @@ func this_code_is_wrong():
 # /EXPORT wrong_code
 
 func _run():
-	_animation_player.play("saying_hi")
+	_animation_tree.travel("saying_hi")

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/make-visible/MakeCharacterVisible.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [node name="MakeCharacterVisible" instance=ExtResource( 1 )]
 visible = false
@@ -12,3 +14,6 @@ autoplay = "saying_hi"
 
 [node name="Camera2D" type="Camera2D" parent="." index="2"]
 current = true
+
+[node name="AnimationTree" parent="." index="4"]
+parameters/playback = SubResource( 1 )
