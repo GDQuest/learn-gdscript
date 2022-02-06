@@ -19,5 +19,5 @@ func _run() -> void:
 
 func reset() -> void:
 	rotation = 0.0
-	position = Vector2(300, 200)
+	position = Vector2(0, 0)
 	set_process(false)
