@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=22 format=2]
+[gd_resource type="Resource" load_steps=23 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
@@ -194,6 +194,20 @@ visual_element_path = "ExampleMoveSprite.tscn"
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=17]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-Gx0c7DDi.tres"
+title = "Why move_local_y(20) moves the character down"
+type = 1
+text = "With positive values ([code]20[/code]), the code above moves the robot to the right and down.
+
+This is probably different than what you studied at school: in math classes, the horizontal axis points to the right, like here, but the vertical axis points up.
+
+In video games, and generally in 2D computer graphics, the vertical axis points down instead. So whenever you move something on the Y-axis with a positive value, it'll move [i]down[/i]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
 [sub_resource type="Resource" id=14]
 script = ExtResource( 4 )
 quiz_id = "res://course/lesson-3-standing-on-shoulders-of-giants/quiz-S3aJeQ0w.tres"
@@ -237,5 +251,5 @@ description = "The robot is turned sideways. Help it straighten up with a functi
 [resource]
 script = ExtResource( 1 )
 title = "We Stand on the Shoulders of Giants"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 17 ), SubResource( 14 ) ]
 practices = [ SubResource( 15 ), SubResource( 16 ) ]
