@@ -67,6 +67,8 @@ func fade_in(game_container: Control) -> void:
 	_animate_margin(_game_container, "margin_right", 0.0, CLASH_IN_DURATION, BACKGROUND_FADE_DURATION)
 	_tween.start()
 
+	_move_on_button.grab_focus()
+
 
 func fade_out() -> void:
 	_tween.stop_all()

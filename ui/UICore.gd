@@ -47,13 +47,15 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	# We need to check the distraction free mode to avoid conflicts with the button in UIPractice.
+	# We need to check the distraction free mode to avoid conflicts with the
+	# button in UIPractice.
 	if (
 		event.is_action_pressed("toggle_full_screen")
 		and not event.is_action_pressed("toggle_distraction_free_mode")
 	):
-		OS.window_fullscreen = not OS.window_fullscreen
-		Events.emit_signal("fullscreen_toggled")
+		# Work around an issue in browsers where OS.window_fullscreen doesn't
+		# update as expected.
+		Globals.is_fullscreen = not Globals.is_fullscreen
 		accept_event()
 
 
