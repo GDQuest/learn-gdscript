@@ -57,7 +57,11 @@ UNEXPECTED_CHARACTER_IN_KEYWORD,"This error tells you that you are missing a par
 Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code].","To address the error, you want to add the missing opening parenthesis, the closing parenthesis, or the comma."
 UNEXPECTED_CHARACTER_IN_EXPORT_HINT,"This error tells you you are missing some parenthesis, a comma, or some value in your export hint.",You need to read the error message and add the missing character or value it requests.
 INVALID_OPERATOR_USAGE,,
-MISPLACED_IDENTIFIER,"This error happens when you write an identifier (variable or function name) in the wrong place. Or maybe you wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name.","If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. You can address the error by adding the missing name.
+MISPLACED_IDENTIFIER,"This error happens in several cases:
+
+1. You wrote an identifier (variable or function name) in the wrong place.
+2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name.
+3. You wrote a function definition but forgot the parentheses before the colon.","If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses.
 
 If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc.
 

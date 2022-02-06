@@ -5,10 +5,8 @@ var level = 3
 var health = 100
 var max_health = 100
 
-onready var _animation_player := $AnimationPlayer
-onready var _health_bar := $HealthBar/HealthBarCurrent as ColorRect
-onready var _label := $HealthBar/Label as Label
-onready var _tween := $Tween as Tween
+onready var _animation_tree := find_node("AnimationTree")
+onready var _health_bar := find_node("CustomHealthBar") as ColorRect
 
 # EXPORT damage
 func take_damage(amount):
@@ -26,17 +24,7 @@ func take_damage(amount):
 
 func _run():
 	take_damage(10)
-	_update_health_bar()
-	_animation_player.play("damage")
+	_health_bar.set_health(health)
+	_animation_tree.travel("damage")
 	yield(get_tree().create_timer(0.5), "timeout")
 	Events.emit_signal("practice_run_completed")
-
-
-func _update_health_bar() -> void:
-	var size_current = _health_bar.rect_size.x
-	var size_to = 190.0 * health / max_health
-	
-	_label.text = "health = %s" % [health]
-	
-	_tween.interpolate_property(_health_bar, "rect_size:x", size_current, size_to, 0.2, Tween.TRANS_EXPO, Tween.EASE_OUT)
-	_tween.start()

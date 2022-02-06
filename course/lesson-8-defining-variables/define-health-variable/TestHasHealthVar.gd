@@ -21,6 +21,11 @@ func test_health_has_value_of_100() -> String:
 	if not has_health_prop:
 		return "Health variable doesn't exist, can't test if it has a value of 100."
 	var health_value = first_node.get("health")
+	if not health_value is int:
+		if health_value is String:
+			return "Health's value is a text string. It should be a number. You need to remove quotes around the value."
+		else:
+			return "Health's value should be a whole number. Instead it's a %s." % TextUtils.convert_type_index_to_text(typeof(health_value))
 	if health_value == 100:
 		return ""
 	return "Health variable's value is %s; It should be 100." % health_value

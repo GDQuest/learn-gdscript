@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=15 format=2]
+[gd_resource type="Resource" load_steps=16 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
@@ -39,36 +39,49 @@ title = ""
 type = 0
 text = "We pass the amount of damage the robot should take as a parameter.
 
-Line 2 subtracts [code]amount[/code] from [code]health[/code]. Note the [code]-=[/code] syntax which achieves this.
+Line 2 subtracts [code]amount[/code] from [code]health[/code].
+
+Note the [code]-=[/code] syntax which achieves this. It's a shorthand we often use.
+
+You can also use a longer form. Both of these lines have the same effect: they subtract the value of [code]amount[/code] to the [code]health[/code] variable:
+
+[code]health -= amount[/code]
+[code]health = health - amount[/code]
 
 You may notice that the health of the robot can go below [code]0[/code]. We'll see how to manage this in a future lesson using [i]conditions[/i]."
 visual_element_path = ""
 reverse_blocks = false
-has_separator = false
-
-[sub_resource type="Resource" id=4]
-script = ExtResource( 5 )
-content_id = "res://course/lesson-9-adding-and-subtracting/content-wQMqAYVj.tres"
-title = ""
-type = 1
-text = "Both of these lines [b]decrease[/b] [code]health[/code] by [code]amount[/code].
-[code]
-health -= amount 
-health = health - amount
-[/code]"
-visual_element_path = ""
-reverse_blocks = false
-has_separator = false
+has_separator = true
 
 [sub_resource type="Resource" id=5]
 script = ExtResource( 5 )
 content_id = "res://course/lesson-9-adding-and-subtracting/content-otxF5HUx.tres"
 title = ""
 type = 0
-text = "The robot's health could increase instead if the player picks up an item that heals them, or they use an item.
+text = "The robot's health could increase instead if the player picks up an item that heals them, or they use an item."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
 
-Here again, the health can go beyond [code]100[/code]."
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-9-adding-and-subtracting/content-x0c7DDiz.tres"
+title = ""
+type = 0
+text = ""
 visual_element_path = "res://course/lesson-9-adding-and-subtracting/visuals/ExampleHeal.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-9-adding-and-subtracting/content-KUdOCQiG.tres"
+title = ""
+type = 0
+text = "Here again, the health can go beyond [code]100[/code].
+
+Also, once more, the short line [code]health += amount[/code] is equivalent to the longer form [code]health = health + amount[/code]."
+visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
@@ -138,5 +151,5 @@ description = "Our robot needs healing after that practice! Create a function to
 [resource]
 script = ExtResource( 1 )
 title = "Adding and Subtracting"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 5 ), SubResource( 10 ), SubResource( 11 ), SubResource( 6 ), SubResource( 7 ) ]
 practices = [ SubResource( 8 ), SubResource( 9 ) ]

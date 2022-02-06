@@ -638,7 +638,7 @@ Take for example a traffic light. We decide to use a number to represent the lig
 
 <!-- Demo: lights and their state. -->
 
-The lights always cycle in the same way: first have the green light, then the orange, then the red.
+The lights always cycle in the same way: first have the green light, then the yellow, then the red.
 
 To represent that cycle, you can periodically add one to the number and use the modulo operator to wrap back to 0.
 

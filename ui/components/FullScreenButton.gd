@@ -10,9 +10,10 @@ func _ready() -> void:
 
 
 func _on_pressed() -> void:
-	OS.window_fullscreen = not OS.window_fullscreen
-	Events.emit_signal("fullscreen_toggled")
+	# Work around an issue in browsers where OS.window_fullscreen doesn't update
+	# as expected.
+	Globals.is_fullscreen = not Globals.is_fullscreen
 
 
 func _update_icon() -> void:
-	icon = EDITOR_COLLAPSE_ICON if OS.window_fullscreen else EDITOR_EXPAND_ICON
+	icon = EDITOR_COLLAPSE_ICON if Globals.is_fullscreen else EDITOR_EXPAND_ICON

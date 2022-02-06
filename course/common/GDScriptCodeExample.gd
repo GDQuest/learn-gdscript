@@ -9,6 +9,7 @@ func _ready() -> void:
 	Events.connect("font_size_scale_changed", self, "_update_size")
 	context_menu_enabled = false
 	shortcut_keys_enabled = false
+	readonly = true
 	CodeEditorEnhancer.enhance(self)
 
 

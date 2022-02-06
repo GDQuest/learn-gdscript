@@ -16,5 +16,5 @@ is_full_file = false
 start = 7
 end = 11
 lines_before = [ "extends Node2D", "", "", "func _ready() -> void:", "	set_process(false)", "", "" ]
-lines_after = [ "", "", "func _run() -> void:", "	reset()", "	_process(0.0)", "	set_process(true)", "", "", "func reset() -> void:", "	rotation = 0.0", "	position = Vector2(300, 200)", "	set_process(false)", "" ]
+lines_after = [ "", "", "func _run() -> void:", "	reset()", "	_process(0.0)", "	set_process(true)", "", "", "func reset() -> void:", "	rotation = 0.0", "	position = Vector2(0, 0)", "	set_process(false)", "" ]
 lines_editable = [ "func _process(delta):", "	rotate(2 * delta)", "	move_local_x(100 * delta)" ]

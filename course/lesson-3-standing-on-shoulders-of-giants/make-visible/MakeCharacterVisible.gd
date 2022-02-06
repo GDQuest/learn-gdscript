@@ -1,5 +1,9 @@
 extends Node2D
 
+onready var _animation_tree := find_node("AnimationTree")
+
+func _ready():
+	_animation_tree.travel("saying_hi")
 
 func _run():
 	# EXPORT show
