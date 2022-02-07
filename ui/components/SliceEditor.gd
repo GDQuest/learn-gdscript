@@ -139,7 +139,7 @@ func _on_text_changed() -> void:
 	# Insert extra indents when entering new code block
 	var previous_line := _current_line
 	_current_line = cursor_get_line()
-	if _current_line > previous_line and text.rstrip("\t").ends_with(":\n"):
+	if _current_line > previous_line and not text.ends_with("\t") and text.rstrip("\t").ends_with(":\n"):
 		var column := cursor_get_column()
 		text += "\t"
 		cursor_set_line(_current_line)

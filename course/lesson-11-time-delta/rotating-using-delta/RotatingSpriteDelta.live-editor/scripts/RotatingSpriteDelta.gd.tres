@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource( 1 )
-nodes_paths = [ NodePath("RotatingSprite") ]
+nodes_paths = [ NodePath("Robot") ]
 script_file = ExtResource( 2 )
 original_script = "extends Node2D
 
@@ -28,6 +28,6 @@ func _run() -> void:
 
 func reset() -> void:
 	rotation = 0.0
-	position = Vector2(300, 200)
+	position = Vector2(0, 0)
 	set_process(false)
 "

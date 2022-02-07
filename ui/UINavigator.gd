@@ -73,7 +73,9 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_released("ui_back"):
+	# Workaround for a bug where pressing Left triggers ui_back in a popup even
+	# though the event is set to Ctrl+Alt+Left.
+	if event.is_action_released("ui_back") and event.alt:
 		NavigationManager.navigate_back()
 
 
@@ -99,7 +101,7 @@ func _navigate_back() -> void:
 
 	var current_screen: UIResourceView = _screens_stack.pop_back()
 	var next_screen: UIResourceView = _screens_stack.back()
-	_back_button.disabled = _screens_stack.size() < 2
+	_update_back_button(_screens_stack.size() < 2)
 
 	# warning-ignore:unsafe_method_access
 	var target = next_screen.get_screen_resource()
@@ -120,7 +122,7 @@ func _navigate_to_outliner() -> void:
 
 	_outliner_button.hide()
 	_back_button.hide()
-	_back_button.disabled = true
+	_update_back_button(true)
 	_home_button.show()
 	_clear_history_stack()
 
@@ -162,7 +164,7 @@ func _navigate_to() -> void:
 	_screens_stack.push_back(screen)
 	screen.set_is_current_screen(true)
 	_back_button.show()
-	_back_button.disabled = _screens_stack.size() < 2
+	_update_back_button(_screens_stack.size() < 2)
 
 	_screen_container.add_child(screen)
 	if has_previous_screen:
@@ -340,3 +342,14 @@ func _clear_history_stack() -> void:
 	_screens_stack.clear()
 
 	_breadcrumbs.update_breadcrumbs(course, null)
+
+
+func _update_back_button(is_disabled: bool) -> void:
+	_back_button.disabled = is_disabled
+	var tooltip := tr("Go back in your navigation history")
+	if is_disabled:
+		_back_button.mouse_default_cursor_shape = CURSOR_ARROW
+		tooltip += " " + tr("(no previous history)")
+	else:
+		_back_button.mouse_default_cursor_shape = CURSOR_POINTING_HAND
+	_back_button.hint_tooltip = tooltip

@@ -18,6 +18,7 @@
 [ext_resource path="res://ui/components/popups/PracticeLeaveUnfinishedPopup.tscn" type="PackedScene" id=16]
 
 [node name="UIPractice" type="PanelContainer"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 15 )
@@ -174,6 +175,7 @@ hint_tooltip = "Use the suggested solution.
 
 Warning: Using the suggested solution will leave this practice unfinished.
 You can come back and try to solve it yourself later."
+mouse_default_cursor_shape = 2
 text = "Use Solution"
 
 [node name="PracticeListPopup" parent="." instance=ExtResource( 6 )]

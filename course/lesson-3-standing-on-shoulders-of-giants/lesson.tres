@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=22 format=2]
+[gd_resource type="Resource" load_steps=23 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
@@ -95,9 +95,9 @@ has_separator = false
 [sub_resource type="Resource" id=7]
 script = ExtResource( 5 )
 content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-DwfyqdYO.tres"
-title = "Function parameters"
+title = "Function arguments"
 type = 0
-text = "We use parentheses to call functions. The reason is you can give the function [i]parameters[/i] inside the parentheses.
+text = "We use parentheses to call functions. The reason is you can give the function [i]arguments[/i] inside the parentheses when calling it.
 
 Here's a [i]sprite[/i] standing straight. If we call the [code]rotate(0.3)[/code] function, the character [i]sprite[/i] turns by 0.3 units."
 visual_element_path = ""
@@ -119,15 +119,15 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-5bmEXrTC.tres"
 title = ""
 type = 0
-text = "The [code]0.3[/code] part between the parentheses is the function's [i]parameter[/i].
+text = "The [code]0.3[/code] part between the parentheses is the function's [i]argument[/i].
 
-Parameters are values (numbers, bits of text, and more) that change how the function behaves. We also call them [i]arguments[/i] (you'll see moving forward there are many synonyms in computer programming). 
+Arguments are values (numbers, bits of text, and more) that change how the function behaves.
 
-Parameters let you fine-tune the effect of the function call. Parameters are rarely optional.
+Arguments let you fine-tune the effect of the function call. They can be optional at times, but functions often have required arguments.
 
-For example, calling [code]rotate()[/code] without any parameter would result in an error. Godot wouldn't know by [i]how much[/i] you intend to rotate the [i]sprite[/i]. 
+For example, calling [code]rotate()[/code] without any argument would result in an error. Godot wouldn't know by [i]how much[/i] you intend to rotate the [i]sprite[/i].
 
-Don't worry about learning what parameters each function requires or accepts! As a programmer, the documentation will always be close by for you to refer to.
+Don't worry about learning what arguments each function requires or accepts! As a programmer, the documentation will always be close by for you to refer to.
 
 Finally, notice how we use a dot in the number [code]0.3[/code] above: you need to use a dot like this to represent decimal numbers. You can't use commas as they have a different purpose in code."
 visual_element_path = ""
@@ -175,7 +175,7 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-lkGx0c7D.tres"
 title = ""
 type = 0
-text = "Another example: With the [code]move_local_x()[/code] function, you can move the character to its left and right. The function takes one parameter: a number of pixels to offset the entity.
+text = "Another example: With the [code]move_local_x()[/code] function, you can move the character to its left and right. The function takes one argument: a number of pixels to offset the entity.
 
 The complementary function [code]move_local_y()[/code] makes the [i]sprite[/i] move up and down.
 
@@ -194,6 +194,20 @@ visual_element_path = "ExampleMoveSprite.tscn"
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=17]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-3-standing-on-shoulders-of-giants/content-Gx0c7DDi.tres"
+title = "Why move_local_y(20) moves the character down"
+type = 1
+text = "With positive values ([code]20[/code]), the code above moves the robot to the right and down.
+
+This is probably different than what you studied at school: in math classes, the horizontal axis points to the right, like here, but the vertical axis points up.
+
+In video games, and generally in 2D computer graphics, the vertical axis points down instead. So whenever you move something on the Y-axis with a positive value, it'll move [i]down[/i]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
 [sub_resource type="Resource" id=14]
 script = ExtResource( 4 )
 quiz_id = "res://course/lesson-3-standing-on-shoulders-of-giants/quiz-S3aJeQ0w.tres"
@@ -202,7 +216,7 @@ content_bbcode = "What is the syntax you use to call a function in general?"
 hint = ""
 explanation_bbcode = "To call a function, you need to write its exact name followed by an opening and a closing parenthesis.
 
-If the function requires one or more [i]parameters[/i], you add them inside the parentheses. But whether you need to do that or not depends on the function."
+If the function requires one or more [i]arguments[/i], you add them inside the parentheses. But whether you need to do that or not depends on the function."
 answer_options = [ "You write its name followed by an opening and a closing parenthesis.", "You write its name followed by a colon.", "You write a value, like a number, followed by an opening and a closing parenthesis." ]
 valid_answers = [ "You write its name followed by an opening and a closing parenthesis." ]
 is_multiple_choice = false
@@ -227,7 +241,7 @@ practice_id = "res://course/lesson-3-standing-on-shoulders-of-giants/practice-HJ
 title = "Make the Robot Upright"
 goal = "The robot was turned by [code]-0.5[/code] radians. You need to make it upright by calling the [code]rotate()[/code] function."
 starting_code = ""
-hints = PoolStringArray( "You need to use the rotate() function, and give the proper parameters", "Call rotate(0.5) to turn the character 0.5 radians clockwise." )
+hints = PoolStringArray( "You need to use the rotate() function, and give the proper arguments", "Call rotate(0.5) to turn the character 0.5 radians clockwise." )
 validator_script_path = "make-upright/TestsMakeRobotUpright.gd"
 script_slice_path = "make-upright/MakeRobotUpright.live-editor/slices/MakeRobotUpright.rotate.slice.tres"
 documentation_references = PoolStringArray( "rotate" )
@@ -237,5 +251,5 @@ description = "The robot is turned sideways. Help it straighten up with a functi
 [resource]
 script = ExtResource( 1 )
 title = "We Stand on the Shoulders of Giants"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 17 ), SubResource( 14 ) ]
 practices = [ SubResource( 15 ), SubResource( 16 ) ]

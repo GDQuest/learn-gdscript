@@ -5,7 +5,7 @@ var has_angular_speed_prop := false
 
 
 func _prepare():
-	robot = _scene_root_viewport.get_child(0).get_child(0)
+	robot = _scene_root_viewport.get_child(0)
 	has_angular_speed_prop = false
 	for property in robot.get_property_list():
 		if property.name == "angular_speed":

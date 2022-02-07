@@ -1,20 +1,20 @@
 [gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://addons/gdscript-slice-exporter/collections/SliceProperties.gd" type="Script" id=1]
-[ext_resource path="res://course/lesson-14-multiplying/reducing_damage/ReducingDamage.live-editor/scene/ReducingDamage.tscn.tres" type="Resource" id=2]
-[ext_resource path="res://course/lesson-14-multiplying/reducing_damage/ReducingDamage.live-editor/scripts/ReducingDamage.gd.tres" type="Resource" id=3]
+[ext_resource path="res://course/lesson-14-multiplying/reducing_damage/ReducingDamage.live-editor/scripts/ReducingDamage.gd.tres" type="Resource" id=2]
+[ext_resource path="res://course/lesson-14-multiplying/reducing_damage/ReducingDamage.live-editor/scene/ReducingDamage.tscn.tres" type="Resource" id=3]
 
 [resource]
 script = ExtResource( 1 )
-scene_properties = ExtResource( 2 )
-script_properties = ExtResource( 3 )
+scene_properties = ExtResource( 3 )
+script_properties = ExtResource( 2 )
 leading_spaces = 0
 keyword = "EXPORT"
 closing = false
 name = "damage"
 is_full_file = false
-start = 12
-end = 24
-lines_before = [ "extends Node2D", "", "", "var level = 3", "var health = 100", "var max_health = 100", "", "onready var _animation_player := $AnimationPlayer", "onready var _health_bar := $HealthBar/HealthBarCurrent as ColorRect", "onready var _label := $HealthBar/Label as Label", "onready var _tween := $Tween as Tween", "" ]
-lines_after = [ "", "func _run():", "	take_damage(10)", "	_update_health_bar()", "	_animation_player.play(\"damage\")", "	yield(get_tree().create_timer(0.5), \"timeout\")", "	Events.emit_signal(\"practice_run_completed\")", "", "", "func _update_health_bar() -> void:", "	var size_current = _health_bar.rect_size.x", "	var size_to = 190.0 * health / max_health", "	", "	_label.text = \"health = %s\" % [health]", "	", "	_tween.interpolate_property(_health_bar, \"rect_size:x\", size_current, size_to, 0.2, Tween.TRANS_EXPO, Tween.EASE_OUT)", "	_tween.start()", "" ]
+start = 10
+end = 22
+lines_before = [ "extends Node2D", "", "", "var level = 3", "var health = 100", "var max_health = 100", "", "onready var _animation_tree := find_node(\"AnimationTree\")", "onready var _health_bar := find_node(\"CustomHealthBar\") as ColorRect", "" ]
+lines_after = [ "", "func _run():", "	take_damage(10)", "	_health_bar.set_health(health)", "	_animation_tree.travel(\"damage\")", "	yield(get_tree().create_timer(0.5), \"timeout\")", "	Events.emit_signal(\"practice_run_completed\")", "" ]
 lines_editable = [ "func take_damage(amount):", "	if level > 2:", "		amount *= 0.5", "	", "	health -= amount", "", "	if health > max_health:", "		health = max_health", "", "	if health < 0:", "		health = 0" ]

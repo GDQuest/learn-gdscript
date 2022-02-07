@@ -1,4 +1,5 @@
-extends Control
+extends Node2D
+
 
 func _run():
 	# EXPORT conditions
@@ -16,5 +17,4 @@ func _run():
 	if health != 7:
 		print("health is not equal to seven.")
 	# /EXPORT conditions
-
 	Events.emit_signal("practice_run_completed")
