@@ -3,31 +3,38 @@
 "use strict";
 
 window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
-  events: {
-    const makeSignal = () => {
-      const listeners = new Set();
-      /**
-       * @param {(...args) => void } fn
-       * @returns
-       */
-      const disconnect = (fn) => listeners.delete(fn);
-      /**
-       * @param {(...args) => void } fn
-       */
-      const connect = (fn) => {
-        listeners.add(fn);
-        return () => disconnect(fn);
+  const makeSignal = () => {
+    const listeners = new Set();
+    /**
+     * @param {(...args) => void } fn
+     * @returns
+     */
+    const disconnect = (fn) => listeners.delete(fn);
+    /**
+     * @param {(...args) => void } fn
+     */
+    const connect = (fn) => {
+      listeners.add(fn);
+      return () => disconnect(fn);
+    };
+    const once = (fn) => {
+      const wrapped = (...args) => {
+        disconnect(wrapped);
+        fn(...args);
       };
-      const emit = (...args) => listeners.forEach((fn) => fn(...args));
-      /** @type { Signal } */
-      const signal = { disconnect, connect, emit };
-      return signal;
+      return connect(wrapped);
     };
+    const emit = (...args) => listeners.forEach((fn) => fn(...args));
+    /** @type { Signal } */
+    const signal = { disconnect, connect, emit, once };
+    return signal;
+  };
 
-    GDQUEST.events = {
-      onError: makeSignal(),
-    };
-  }
+  GDQUEST.events = {
+    onError: makeSignal(),
+    onGodotLoaded: makeSignal(),
+    onFullScreen: makeSignal(),
+  };
 
   loadingControl: {
     let is_done = false;
@@ -118,6 +125,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       setTimeout(() => {
         setStatusMode(StatusMode.DONE);
         is_done = true;
+        GDQUEST.events.onGodotLoaded.emit();
       }, 200);
     };
 
@@ -346,6 +354,118 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     );
 
     GDQUEST.log = log;
+  }
+
+  fullscreen: {
+    /**
+     * Browsers make it exceedingly hard to get that information reliably, so
+     * we have to rely on a bunch of different strategies
+     */
+    const isIt = (() => {
+      /**
+       * This is an invisible element which changes position when the browser
+       * is full screen. We do this through the media query:
+       * ```css
+       * @media all and (display-mode: fullscreen) {
+       *    #fullscreen-detector {
+       *      top: 1px;
+       *    }
+       *  }
+       * ```
+       */
+      const fullScreenPoller = (() => {
+        const el = document.createElement("div");
+        el.id = "fullscreen-detector";
+        document.body.appendChild(el);
+        return el;
+      })();
+
+      /** check is the element has moved */
+      const cssQuerySaysWeFullScreen = () => {
+        return fullScreenPoller.getBoundingClientRect().top > 0;
+      };
+
+      /** check if browser has borders. Take zoom into account */
+      const browserHasNoBorders = () => {
+        const zoom = window.outerWidth / window.innerWidth;
+        return Math.abs(window.innerWidth * zoom - screen.width) < 2;
+      };
+
+      /** check if some element has been set fullscreen through the JS API */
+      const someDocumentIsFullScreen = () =>
+        document.fullscreenElement !== null;
+
+      /** compile all methods with fallbacks */
+      return () =>
+        someDocumentIsFullScreen() ||
+        cssQuerySaysWeFullScreen() ||
+        browserHasNoBorders();
+    })();
+
+    /** use the JS API to call fullscreen */
+    const toggle = () => {
+      isIt()
+        ? document.exitFullscreen()
+        : document.documentElement.requestFullscreen();
+    };
+
+    /**
+     * Create a button with the proper classes; change class when
+     * fullscreen event happens
+     */
+    const button = (() => {
+      const normalClassName = "button-fullscreen";
+      const isFullScreenClassName = "is-fullscreen";
+
+      const button = document.createElement("button");
+      button.classList.add(normalClassName);
+      button.addEventListener("click", toggle);
+
+      const label = document.createElement("span");
+      label.textContent = "set Fullscreen";
+      button.appendChild(label);
+      GDQUEST.events.onFullScreen.connect((isIt) => {
+        label.textContent = isIt ? "exit fullscreen" : "set Fullscreen";
+        if (isIt) {
+          button.classList.add(isFullScreenClassName);
+        } else {
+          button.classList.remove(isFullScreenClassName);
+        }
+      });
+      return button;
+    })();
+
+    /**
+     * Only add the button if Godot has loaded
+     */
+    GDQUEST.events.onGodotLoaded.once(() => {
+      document.body.appendChild(button);
+    });
+
+    let wasFullScreen = false;
+    const onFullScreenChange = () => {
+      const isFullScreen = isIt();
+      if (isFullScreen != wasFullScreen) {
+        wasFullScreen = isFullScreen;
+        GDQUEST.events.onFullScreen.emit(isFullScreen);
+      }
+    };
+
+    /**
+     * This is for when using the JS API
+     */
+    document.documentElement.addEventListener(
+      "fullscreenchange",
+      onFullScreenChange
+    );
+    /**
+     * This is for buttons, shortcuts, and other methods for setting fullscreen.
+     * We could also potentially poll for size after keypresses, but this seems
+     * to work well enough
+     */
+    window.addEventListener("resize", onFullScreenChange);
+
+    GDQUEST.fullScreen = { isIt, toggle };
   }
 
   return GDQUEST;

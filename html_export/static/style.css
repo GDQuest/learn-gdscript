@@ -208,3 +208,50 @@ body {
 }
 
 /*-- /LITTLE VERSION NUMBER --*/
+
+/*-- FULLSCREEN ELEMENTS --*/
+
+.button-fullscreen {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-image: url("fullscreen_on.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: transparent;
+  background-size: 24px;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.button-fullscreen:hover,
+.button-fullscreen:active {
+  opacity: 1;
+}
+
+.button-fullscreen span {
+  display: none;
+}
+
+.button-fullscreen.is-fullscreen {
+  background-image: url("fullscreen_off.png");
+}
+
+/* This is an unfortunate hack to detect fullscreen */
+#fullscreen-detector {
+  position: fixed;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+}
+
+@media all and (display-mode: fullscreen) {
+  #fullscreen-detector {
+    top: 1px;
+  }
+}
+
+/*-- /FULLSCREEN ELEMENTS --*/
