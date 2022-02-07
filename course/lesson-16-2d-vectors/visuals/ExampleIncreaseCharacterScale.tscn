@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/lesson-1-what-code-is-like/first_practice/godot_bottom.png" type="Texture" id=2]
-[ext_resource path="res://course/lesson-1-what-code-is-like/first_practice/hand_ice.png" type="Texture" id=3]
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
+onready var _animation_tree := find_node(\"AnimationTree\")
+
+
 func run():
-	scale = Vector2(1.5, 1.5)
+	scale += Vector2(0.2, 0.2)
+	_animation_tree.travel(\"level\")
 
 
 func reset():
@@ -29,8 +32,8 @@ margin_top = 7.0
 margin_right = 1040.0
 margin_bottom = 291.0
 gdscript_code = "func level_up():
-	scale.x = 1.5
-	scale.y = 1.5
+	scale.x += 0.2
+	scale.y += 0.2
 	# ..."
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
@@ -47,26 +50,11 @@ margin_left = 518.0
 margin_right = 1033.0
 margin_bottom = 284.0
 text = "func level_up():
-	scale.x = 1.5
-	scale.y = 1.5
+	scale.x += 0.2
+	scale.y += 0.2
 	# ..."
 
-[node name="Node2D" type="Node2D" parent="RunnableCodeExample"]
+[node name="Robot" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 script = SubResource( 1 )
-
-[node name="GodotBottom" type="Sprite" parent="RunnableCodeExample/Node2D"]
-position = Vector2( 0, -17 )
-texture = ExtResource( 2 )
-
-[node name="HandIce" type="Sprite" parent="RunnableCodeExample/Node2D"]
-position = Vector2( 66, 14 )
-rotation = 0.36894
-texture = ExtResource( 3 )
-
-[node name="HandIce2" type="Sprite" parent="RunnableCodeExample/Node2D"]
-position = Vector2( -65, 19 )
-rotation = -0.483649
-texture = ExtResource( 3 )
-flip_h = true
 
 [editable path="RunnableCodeExample"]
