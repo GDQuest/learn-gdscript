@@ -97,13 +97,15 @@ func _navigate_back() -> void:
 		_navigate_to_outliner()
 		return
 
-	var current_screen: Control = _screens_stack.pop_back()
-	var next_screen: Control = _screens_stack.back()
+	var current_screen: UIResourceView = _screens_stack.pop_back()
+	var next_screen: UIResourceView = _screens_stack.back()
 	_back_button.disabled = _screens_stack.size() < 2
 
 	# warning-ignore:unsafe_method_access
 	var target = next_screen.get_screen_resource()
 	_breadcrumbs.update_breadcrumbs(course, target)
+
+	next_screen.set_is_current_screen(true)
 
 	_transition_to(next_screen, current_screen, false)
 	yield(self, "transition_completed")
@@ -133,7 +135,7 @@ func _navigate_to_outliner() -> void:
 # Navigates forward to the next screen and adds it to the stack.
 func _navigate_to() -> void:
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
-	var screen: Control
+	var screen: UIResourceView
 	if target is Practice:
 		var lesson = course.lessons[_lesson_index]
 
@@ -158,12 +160,14 @@ func _navigate_to() -> void:
 
 	var has_previous_screen = not _screens_stack.empty()
 	_screens_stack.push_back(screen)
+	screen.set_is_current_screen(true)
 	_back_button.show()
 	_back_button.disabled = _screens_stack.size() < 2
 
 	_screen_container.add_child(screen)
 	if has_previous_screen:
-		var previous_screen: Control = _screens_stack[-2]
+		var previous_screen: UIResourceView = _screens_stack[-2]
+		previous_screen.set_is_current_screen(false)
 		_transition_to(screen, previous_screen)
 		yield(self, "transition_completed")
 

@@ -4,6 +4,10 @@ signal navigation_requested()
 signal back_navigation_requested()
 signal outliner_navigation_requested()
 signal welcome_screen_navigation_requested()
+signal confirmation_of_last_screen_unload_needed()
+signal confirmation_of_all_screens_unload_needed()
+
+enum UNLOAD_TYPE {BACK, OUTLINER}
 
 var _url_normalization_regex := RegExpGroup.compile("^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)\\.(?<extension>t?res)")
 var history := PoolStringArray()
@@ -11,6 +15,7 @@ var current_url := "" setget set_current_url, get_current_url
 var is_mobile_platform := OS.get_name() in ["Android", "HTML5", "iOS"]
 var arguments := {}
 
+var _current_unload_type := -1
 
 func _init() -> void:
 	_parse_arguments()
@@ -31,13 +36,64 @@ func _parse_arguments() -> void:
 			arguments[key] = value
 
 
+# Checks if any resource with active user data is about to be closed
+# If the current screen is a Practice it might have code edited.
+# If the current screen is a Lesson it might be shadowing a Practice.
+func _is_unload_confirmation_required() -> bool:
+	# Home screen and outliner returns "", which isn't a resource.
+	# Technically, there isn't any other resource, but the checks are still in place
+	if get_current_url():
+		var resource = get_navigation_resource(get_current_url())
+		return resource is Practice or resource is Lesson
+
+	return false
+
+
 func get_history(n := 1) -> String:
 	if n > history.size():
 		return ""
 	return history[history.size() - n]
 
 
+# Called by any screen that is to be unloaded (but it is not safe/user denied)
+func deny_unload() -> void:
+	_current_unload_type = -1
+
+
+# Called by any screen that is to be unloaded
+# TODO: Make this work with multiple screens requesting user confirmation
+func confirm_unload() -> void:
+	match _current_unload_type:
+		UNLOAD_TYPE.BACK:
+			_navigate_back()
+		UNLOAD_TYPE.OUTLINER:
+			_navigate_to_outliner()
+		_:
+			printerr(
+				"Unsupported unload type in NavigationManager! Unload type: %s" 
+				% _current_unload_type
+			)
+	
+	_current_unload_type = -1
+
+
 func navigate_back() -> void:
+	if _is_unload_confirmation_required():
+		_current_unload_type = UNLOAD_TYPE.BACK
+		emit_signal("confirmation_of_last_screen_unload_needed")
+		return
+
+	_navigate_back()
+
+func navigate_to_outliner() -> void:
+	if _is_unload_confirmation_required():
+		_current_unload_type = UNLOAD_TYPE.OUTLINER
+		emit_signal("confirmation_of_all_screens_unload_needed")
+		return
+
+	_navigate_to_outliner()
+
+func _navigate_back() -> void:
 	# Nothing to go back to, open the outliner.
 	if history.size() < 2:
 		navigate_to_outliner()
@@ -49,7 +105,7 @@ func navigate_back() -> void:
 	emit_signal("back_navigation_requested")
 
 
-func navigate_to_outliner() -> void:
+func _navigate_to_outliner() -> void:
 	# prints("emptying history")
 	history.resize(0)
 	_js_to_outliner()

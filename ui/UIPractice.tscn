@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://ui/components/CodeEditor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/theme/panel_course_page.tres" type="StyleBox" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=13]
 [ext_resource path="res://ui/theme/panel_sliceeditor_title.tres" type="StyleBox" id=14]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=15]
+[ext_resource path="res://ui/components/popups/PracticeLeaveUnfinishedPopup.tscn" type="PackedScene" id=16]
 
 [node name="UIPractice" type="PanelContainer"]
 anchor_right = 1.0
@@ -188,5 +189,10 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 1920.0
 margin_bottom = 1080.0
+
+[node name="PracticeLeaveUnfinishedPopup" parent="." instance=ExtResource( 16 )]
+visible = false
+title = "Leave unfinished practice?"
+text_content = "You will lose your progress on this practice!"
 
 [node name="Tween" type="Tween" parent="."]
