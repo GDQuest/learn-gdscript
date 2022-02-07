@@ -8,6 +8,7 @@ script/source = "extends Node2D
 
 onready var _animation_tree := find_node(\"AnimationTree\")
 
+
 func run():
 	scale += Vector2(0.2, 0.2)
 	_animation_tree.travel(\"level\")

@@ -26,7 +26,7 @@ func test_robot_scale_is_reset() -> String:
 
 func test_robot_position_is_reset() -> String:
 	var position = first_node.get("position") as Vector2
-	if position.is_equal_approx(Vector2(320, 240)):
+	if position.is_equal_approx(Vector2.ZERO):
 		return ""
 
-	return "scale's value is %s; It should be (0, 0) after levelling up 5 times." % [position - Vector2(320, 240)]
+	return "scale's value is %s; It should be (0, 0) after levelling up 5 times." % [position]

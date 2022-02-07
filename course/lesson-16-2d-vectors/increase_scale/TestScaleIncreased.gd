@@ -16,9 +16,9 @@ func test_use_a_vector_to_increase_scale() -> String:
 	return ""
 
 
-func test_correct_scale_after_5_levels() -> String:
+func test_correct_scale_after_2_levels() -> String:
 	var scale = first_node.get("scale") as Vector2
-	if scale.is_equal_approx(Vector2(2.0, 2.0)):
+	if scale.is_equal_approx(Vector2(1.4, 1.4)):
 		return ""
 
-	return "scale's value is %s; It should be (2.0, 2.0) after levelling up 5 times." % scale
+	return "scale's value is %s; It should be (1.4, 1.4) after levelling up 2 times." % scale
