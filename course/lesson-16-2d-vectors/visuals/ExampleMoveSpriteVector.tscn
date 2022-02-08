@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends WrappingNode2D
+
+onready var start_position = position
+
+
+func _ready() -> void:
+	_sprites = [$Pivot/RobotBody, $Pivot/HandIceLeft, $Pivot/HandIceRight]
+	_bounds = calculate_bounding_rect(_sprites)
+
+
+func run():
+	move_local_x(20)
+	move_local_y(20)
+	_bounds.position += Vector2.ONE * 20
+
+
+func reset():
+	position = start_position
+	_bounds = calculate_bounding_rect(_sprites)
+"
+
+[node name="ExampleMoveSpriteVector" type="PanelContainer"]
+margin_right = 1047.0
+margin_bottom = 298.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1040.0
+margin_bottom = 291.0
+gdscript_code = "func move():
+	position += Vector2(20, 20)"
+
+[node name="Frame" parent="RunnableCodeExample" index="0"]
+margin_right = 514.0
+margin_bottom = 284.0
+
+[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
+text = "move()"
+
+[node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
+visible = true
+margin_left = 518.0
+margin_right = 1033.0
+margin_bottom = 284.0
+text = "func move():
+	position += Vector2(20, 20)"
+
+[node name="Robot" parent="RunnableCodeExample" instance=ExtResource( 2 )]
+script = SubResource( 2 )
+
+[editable path="RunnableCodeExample"]

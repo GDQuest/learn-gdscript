@@ -1,0 +1,136 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=1]
+[ext_resource path="res://course/lesson-16-2d-vectors/visuals/triangle.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "tool
+extends Area2D
+
+export var size := Vector2(300, 300)
+var touch_down := Vector2.ZERO
+var vector :=- Vector2.ZERO
+
+onready var _label := find_node(\"Label\")
+onready var _label_x := find_node(\"LabelX\")
+onready var _label_y := find_node(\"LabelY\")
+onready var _triangle_x := find_node(\"TriangleX\")
+onready var _triangle_y := find_node(\"TriangleY\")
+onready var _collision_shape := find_node(\"CollisionShape2D\")
+onready var _color_rect := find_node(\"ColorRect\")
+onready var _triangle_mouse := find_node(\"TriangleMouse\")
+
+
+func _ready():
+	connect(\"input_event\", self, \"_on_input_event\")
+	_collision_shape.shape.extents = size/2
+	_color_rect.rect_size = size
+	_color_rect.rect_position = -size/2
+	_label_y.rect_position.y = size.y/2
+	_label_x.rect_position.x = size.x/2 + 10
+	_triangle_x.position = Vector2(size.x/2, 0)
+	_triangle_y.position = Vector2(0, size.y/2)
+	update()
+
+
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
+	
+	if event is InputEventMouseMotion:
+		vector = to_local(event.position)
+		_triangle_mouse.position = vector
+		_triangle_mouse.rotation = Vector2.RIGHT.angle_to(vector)
+		_label.text = \"Vector2%s\" % [vector.round()]
+		update()
+
+
+func _draw():
+	draw_line(Vector2(0, -size.y/2), Vector2(0, size.y/2), Color.gray, 2, true)
+	draw_line(Vector2(-size.x/2, 0), Vector2(size.x/2, 0), Color.gray, 2, true)
+	draw_line(Vector2.ZERO, vector, Color.white, 2, true)
+	
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 150, 150 )
+
+[node name="VectorVisual" type="Node2D"]
+
+[node name="VectorVisual" type="Area2D" parent="."]
+script = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VectorVisual"]
+shape = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="VectorVisual"]
+visible = false
+modulate = Color( 1, 1, 1, 0.584314 )
+margin_left = -150.0
+margin_top = -150.0
+margin_right = 150.0
+margin_bottom = 150.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VectorVisual"]
+margin_left = 12.0
+margin_top = -149.0
+margin_right = 179.0
+margin_bottom = -121.0
+rect_min_size = Vector2( 150, 0 )
+custom_fonts/font = ExtResource( 1 )
+text = "Vector2(100, 100)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelX" type="Label" parent="VectorVisual"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 160.0
+margin_top = -14.0
+margin_right = 210.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 1 )
+text = "X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelY" type="Label" parent="VectorVisual"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -25.0
+margin_top = 150.0
+margin_right = 25.0
+margin_bottom = 178.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 1 )
+text = "Y"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TriangleX" type="Sprite" parent="VectorVisual"]
+position = Vector2( 150, 0 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="TriangleY" type="Sprite" parent="VectorVisual"]
+position = Vector2( 0, 150 )
+rotation = 1.5708
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="TriangleMouse" type="Sprite" parent="VectorVisual"]
+position = Vector2( 54, 111 )
+rotation = 1.5708
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
