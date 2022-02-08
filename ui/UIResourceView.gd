@@ -6,7 +6,7 @@ extends Control
 
 var _is_current_screen := false
 
-func _ready():
+func _ready() -> void:
 	NavigationManager.connect("confirmation_of_all_screens_unload_needed", self, "_on_all_screens_unload_requested")
 
 
@@ -22,11 +22,11 @@ func set_is_current_screen(value: bool) -> void:
 		NavigationManager.disconnect("confirmation_of_last_screen_unload_needed", self, "_on_current_screen_unload_requested")
 
 
-func _accept_unload():
+func _accept_unload() -> void:
 	NavigationManager.confirm_unload()
 
 
-func _deny_unload():
+func _deny_unload() -> void:
 	NavigationManager.deny_unload()
 
 
@@ -34,7 +34,7 @@ func _deny_unload():
 func _on_current_screen_unload_requested() -> void:
 	_accept_unload()
 
-
+# To be overridden if unload requires waiting
 # TODO: Add support for checking unloading all screens
 func _on_all_screens_unload_requested() -> void:
 	if _is_current_screen:
