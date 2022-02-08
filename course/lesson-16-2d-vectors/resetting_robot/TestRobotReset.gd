@@ -7,7 +7,7 @@ func _prepare() -> void:
 	first_node = _scene_root_viewport.get_child(0)
 
 
-func test_use_vectors_to_reset_robot() -> String:
+func test_use_vector2_to_reset_robot() -> String:
 	var regex = RegEx.new()
 	regex.compile("scale.*Vector2.*\\s*position.*Vector2|position.*Vector2.*\\s*scale.*Vector2")
 	var result = regex.search(_slice.current_text)
