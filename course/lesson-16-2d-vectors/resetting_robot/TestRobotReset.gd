@@ -1,10 +1,10 @@
 extends PracticeTester
 
-var first_node: Node2D
+var robot: Node2D
 
 
 func _prepare() -> void:
-	first_node = _scene_root_viewport.get_child(0)
+	robot = _scene_root_viewport.get_child(0).get_child(1)
 
 
 func test_use_vector2_to_reset_robot() -> String:
@@ -17,7 +17,7 @@ func test_use_vector2_to_reset_robot() -> String:
 
 
 func test_robot_scale_is_reset() -> String:
-	var scale = first_node.get("scale") as Vector2
+	var scale = robot.get("scale") as Vector2
 	if scale.is_equal_approx(Vector2(1.0, 1.0)):
 		return ""
 
@@ -25,7 +25,7 @@ func test_robot_scale_is_reset() -> String:
 
 
 func test_robot_position_is_reset() -> String:
-	var position = first_node.get("position") as Vector2
+	var position = robot.get("position") as Vector2
 	if position.is_equal_approx(Vector2.ZERO):
 		return ""
 
