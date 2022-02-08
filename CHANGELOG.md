@@ -2,6 +2,101 @@
 
 This document lists changes between releases.
 
+## Learn GDScript From Zero release 0.3.0
+
+_Released on February 8, 2022_
+
+### New features
+
+- Smooth scrolling (#201)
+- Warn user before losing progress on an unfinished practice (#277)
+
+### Content changes
+
+- Add lesson 16 about creating 2D vectors
+- Clarify lesson 12, practice 1
+- Add turtle jump() explanation in lesson 5
+- Add explanation about modulos with a larger divisor than dividend in lesson 15
+- Add radian conversion formula to lesson 3, complete radian explanation
+- Add space symbols in function syntax example in lesson 6, improve explanation
+- Clarify the robot should turn clockwise in lesson 11 practice 2
+- Don't limit health at 100 in lesson 9 healing example
+- Change traffic light color names to match US standard
+- Update dice practice description in lesson 15 to match solution
+- In lesson 3, talk about function arguments instead of parameters
+- Explain the syntaxes for adding and subtracting in lesson 9
+- Add explanation about camelCase name convention
+- Add extra info box about the Y axis pointing down in lesson 3
+- Improve MISPLACED_IDENTIFIER error with function definition case
+
+### Improvements
+
+- Add a post-lesson popup and inform the user if there are incomplete practices
+- Add more transition animations for post-practice/post-lesson dialogs
+- Add particles to the post-lesson dialog
+- Add a solution panel to let students compare their approach with the suggested one
+- Add temporary turtle sprite for the turtle practices
+- Increase the content column width when increasing font size
+- Make code examples increase height when the font size increases
+- Allow controlling scroll bars with the keyboard without clicking first
+- Confirm quiz type change in course builder (#214)
+- Allow navigating back to outliner from end screen
+- Animate quiz resizing (#247)
+- Add extra error messages to lesson 5 practice 2 (#262)
+- Add a function to report type errors in variable assignment
+- Dynamically update tooltip and cursor on back button
+- Have a single Robot scene for visuals and practices (#276)
+
+### Code changes
+
+- Make lesson files self-contained
+
+### Bug fixes
+
+- Ensure squares have the expected coordinates in lesson 6 practice
+- Account for more valid solutions in lesson 15 practice 1
+- Add max health value to error message in lesson 15 practice 3
+- Ensure the turtle sprite resets position in runnable examples
+- Correctly handle slidable panels on resize/fullscreen
+- Allow modulos larger than number in lesson 15
+- Typo in lesson 15, practice 1 hint
+- Check corner coordinates in lesson 6 practice 2
+- Allow using a loop in lesson 5 practice 2
+- Correct two typos in lessons 13 and 15
+- Fix error when trying to scroll with arrow keys
+- Force text wrapping to update when changing font size
+- Always correctly position post-practice popup
+- Restore ability to click on links in welcome screen
+- Respect restored lesson position in smooth scroll container
+- Fix typo in lesson 9 practice hint
+- Enter pause mode when showing suggested solution
+- Correct typo in lesson 11 (#231)
+- Incorrect button label in lesson 9
+- Remove empty line in lesson 8
+- Make health value reset to starting value in lesson 13
+- Remove confusing navigation options from the practice screen
+- Correct typo "want to want to" (#238)
+- Add missing space between a number and modulo sign (#240)
+- Prevent visual scroll bars in lessons 14 and 15
+- Traffic light colors, match example and text (#241)
+- Throttle scroll events (#218)
+- Lesson 9 and 13 health bars now show proper values on ready (#248)
+- Make practice screen ignore global pause
+- Correct typo in lesson 11: "dependant" -> "dependent"
+- Correct typo  in lesson 14: "multiple" -> "multiply" (#267)
+- Correct typo  in lesson 15: "evening" -> "even" (#269)
+- Make code examples read-only
+- Force the full screen toggle button to update on click in browser
+- Prevent pressing left from triggering a back event in well done popup
+- Don't increase indent level when removing pass after a function definition
+- Make practices pass in lesson 11 when pressing Ctrl+Enter
+- Prevent code examples in lesson 13 from getting a scrollbar
+- Fix lesson 16 practice 2 tests
+- Correct typo in lesson 16 practice 2 tests
+- Use versioned lsp url
+- Restore ability to scroll with the keyboard
+- Ensure long practice titles don't push the UI outside the page
+
 ## Learn GDScript From Zero release 0.2.1
 
 _Released on January 27, 2022_
