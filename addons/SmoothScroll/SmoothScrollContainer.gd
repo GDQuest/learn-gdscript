@@ -80,12 +80,10 @@ func _process(delta: float) -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
-	if OS.get_ticks_msec() > _last_accepted_scroll_event_time+ TIME_MSEC_BETWEEN_SCROLL_EVENTS :
-		if event.is_action("scroll_up") and event.pressed:
-			scroll_up()
-		elif event.is_action("scroll_down") and event.pressed:
-			scroll_down()
-	elif event.is_action_pressed("scroll_up_one_page"):
+	# Used to throttle scroll events that are too fast, which happens with some
+	# touchpads.
+	var can_mouse_scroll := OS.get_ticks_msec() > _last_accepted_scroll_event_time + TIME_MSEC_BETWEEN_SCROLL_EVENTS
+	if event.is_action_pressed("scroll_up_one_page"):
 		scroll_page_up()
 	elif event.is_action_pressed("scroll_down_one_page"):
 		scroll_page_down()
@@ -93,6 +91,11 @@ func _gui_input(event: InputEvent) -> void:
 		scroll_to_top()
 	elif event.is_action_pressed("scroll_to_bottom"):
 		scroll_to_bottom()
+	elif can_mouse_scroll:
+		if event.is_action("scroll_up") and event.pressed:
+			scroll_up()
+		elif event.is_action("scroll_down") and event.pressed:
+			scroll_down()
 
 
 func scroll_up() -> void:
