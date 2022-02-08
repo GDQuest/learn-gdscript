@@ -1,13 +1,19 @@
 # UIResourceView
-# Defines required overridable functions for interaction with NavigationManager.gd
+#
+# Defines required overridable functions for interaction with
+# NavigationManager.gd.
+#
 # Defaults to always accept being unlaoded unless overriden.
 class_name UIResourceView
 extends Control
 
 var _is_current_screen := false
 
+
 func _ready() -> void:
-	NavigationManager.connect("confirmation_of_all_screens_unload_needed", self, "_on_all_screens_unload_requested")
+	NavigationManager.connect(
+		"all_screens_unload_requested", self, "_on_all_screens_unload_requested"
+	)
 
 
 func set_is_current_screen(value: bool) -> void:
@@ -17,9 +23,13 @@ func set_is_current_screen(value: bool) -> void:
 	_is_current_screen = value
 
 	if _is_current_screen:
-		NavigationManager.connect("confirmation_of_last_screen_unload_needed", self, "_on_current_screen_unload_requested")
+		NavigationManager.connect(
+			"last_screen_unload_requested", self, "_on_current_screen_unload_requested"
+		)
 	else:
-		NavigationManager.disconnect("confirmation_of_last_screen_unload_needed", self, "_on_current_screen_unload_requested")
+		NavigationManager.disconnect(
+			"last_screen_unload_requested", self, "_on_current_screen_unload_requested"
+		)
 
 
 func _accept_unload() -> void:
@@ -30,12 +40,12 @@ func _deny_unload() -> void:
 	NavigationManager.deny_unload()
 
 
-# To be overridden if unload requires waiting
+# Overridde if unload requires waiting
 func _on_current_screen_unload_requested() -> void:
 	_accept_unload()
 
-# To be overridden if unload requires waiting
-# TODO: Add support for checking unloading all screens
+
+# Overridde if unload requires waiting
 func _on_all_screens_unload_requested() -> void:
 	if _is_current_screen:
 		_on_current_screen_unload_requested()
