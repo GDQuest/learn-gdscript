@@ -1,6 +1,6 @@
 tool
 class_name UIPractice
-extends Control
+extends UINavigatablePage
 
 const RUN_AUTOTIMER_DURATION := 5.0
 const SLIDE_TRANSITION_DURATION := 0.5
@@ -8,6 +8,7 @@ const SLIDE_TRANSITION_DURATION := 0.5
 const PracticeHintScene := preload("screens/practice/PracticeHint.tscn")
 const PracticeListPopup := preload("components/popups/PracticeListPopup.gd")
 const PracticeDonePopup := preload("components/popups/PracticeDonePopup.gd")
+const PracticeLeaveUnfinishedPopup := preload("components/popups/PracticeLeaveUnfinishedPopup.gd")
 
 export var test_practice: Resource
 
@@ -50,6 +51,7 @@ onready var _hints_container := _info_panel.hints_container as Revealer
 
 onready var _practice_list := find_node("PracticeListPopup") as PracticeListPopup
 onready var _practice_done_popup := find_node("PracticeDonePopup") as PracticeDonePopup
+onready var _practice_leave_unfinished_popup := find_node("PracticeLeaveUnfinishedPopup") as PracticeLeaveUnfinishedPopup
 
 onready var _code_editor := find_node("CodeEditor") as CodeEditor
 
@@ -80,6 +82,9 @@ func _ready() -> void:
 	_info_panel.connect("list_requested", self, "_on_list_requested")
 
 	_practice_done_popup.connect("accepted", self, "_on_next_requested")
+
+	_practice_leave_unfinished_popup.connect("confirmed", self, "_accept_unload")
+	_practice_leave_unfinished_popup.connect("denied", self, "_deny_unload")
 
 	Events.connect("practice_run_completed", self, "_test_student_code")
 
@@ -531,6 +536,14 @@ func _on_list_requested() -> void:
 func _on_autotimer_timeout() -> void:
 	if _run_tests_requested:
 		Events.emit_signal("practice_run_completed")
+
+
+func _on_current_screen_unload_requested() -> void:
+	if not _code_editor_is_dirty:
+		_accept_unload()
+		return
+
+	_practice_leave_unfinished_popup.popup()
 
 
 # Updates all nodes with the given script. If a node path isn't valid, the node

@@ -4,7 +4,7 @@
 # When pressing a practice button, emits an event so the navigation can
 # transition to the practice screen.
 class_name UILesson
-extends Control
+extends UINavigatablePage
 
 const ContentBlockScene := preload("screens/lesson/UIContentBlock.tscn")
 const QuizInputFieldScene := preload("screens/lesson/quizzes/UIQuizInputField.tscn")
