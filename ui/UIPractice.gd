@@ -1,6 +1,6 @@
 tool
 class_name UIPractice
-extends UIResourceView
+extends UINavigatablePage
 
 const RUN_AUTOTIMER_DURATION := 5.0
 const SLIDE_TRANSITION_DURATION := 0.5

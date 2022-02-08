@@ -1,10 +1,11 @@
-# UIResourceView
+# Base class for lesson and practice pages. Provides an interface for navigation
+# in relation with NavigationManager.
 #
 # Defines required overridable functions for interaction with
 # NavigationManager.gd.
 #
 # Defaults to always accept being unlaoded unless overriden.
-class_name UIResourceView
+class_name UINavigatablePage
 extends Control
 
 var _is_current_screen := false
