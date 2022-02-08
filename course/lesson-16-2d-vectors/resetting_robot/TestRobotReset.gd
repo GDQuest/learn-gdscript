@@ -21,7 +21,7 @@ func test_robot_scale_is_reset() -> String:
 	if scale.is_equal_approx(Vector2(1.0, 1.0)):
 		return ""
 
-	return "scale's value is %s; It should be (1.0, 1.0) after resetting." % scale
+	return "scale's value is %s; It should be (1.0, 1.0) after resetting." % [scale]
 
 
 func test_robot_position_is_reset() -> String:
@@ -29,4 +29,4 @@ func test_robot_position_is_reset() -> String:
 	if position.is_equal_approx(Vector2.ZERO):
 		return ""
 
-	return "scale's value is %s; It should be (0, 0) after levelling up 5 times." % [position]
+	return "positions's value is %s; It should be (0.0, 0.0) after resetting." % [position]
