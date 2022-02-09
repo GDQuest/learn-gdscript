@@ -17,6 +17,7 @@ const LINE_THICKNESS := 4.0
 const DEFAULT_COLOR := Color.white
 
 var line_draw_speed := 400.0
+var draw_labels := true
 
 var _points := []
 var _polygons := []
@@ -131,7 +132,7 @@ func _close_polygon() -> void:
 	if _points.empty():
 		return
 
-	var polygon := Polygon.new(line_draw_speed, _sprite)
+	var polygon := Polygon.new(line_draw_speed, _sprite, draw_labels)
 	# We want to test shapes being drawn at the correct position using the
 	# position property. It works differently from jump() which offsets the
 	# turtle from its position.
@@ -157,15 +158,17 @@ class Polygon:
 	var _current_point_index := 0
 	var _total_distance := 0.0
 	var _turtle_sprite: Sprite
-
+	var _draw_labels := true
+	
 	signal animation_finished
 	signal line_end_moved(new_coordinates)
 
-	func _init(line_draw_speed := 400.0, turtle: Sprite = null) -> void:
+	func _init(line_draw_speed := 400.0, turtle: Sprite = null, draw_labels := true) -> void:
 		add_child(_tween)
 		add_child(line_2d)
 		_tween.connect("tween_all_completed", self, "next")
 		_turtle_sprite = turtle
+		_draw_labels = draw_labels
 		draw_speed = line_draw_speed
 
 	func start_draw_animation() -> void:
@@ -189,12 +192,13 @@ class Polygon:
 
 		var distance := starting_point.distance_to(destination)
 		var animation_duration := distance / draw_speed
-
-		var label := LabelScene.instance() as PanelContainer
-		var label_text := label.get_node("Label") as Label
-		label_text.text = String(_current_point_index)
-		label.rect_position = starting_point - label.rect_size / 2
-		add_child(label)
+		
+		if _draw_labels:
+			var label := LabelScene.instance() as PanelContainer
+			var label_text := label.get_node("Label") as Label
+			label_text.text = String(_current_point_index)
+			label.rect_position = starting_point - label.rect_size / 2
+			add_child(label)
 
 		_current_points.append(starting_point)
 		line_2d.points = _current_points
