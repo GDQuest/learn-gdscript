@@ -11,7 +11,7 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-13-conditions/content-DizKUdOC.tres"
 title = ""
 type = 0
-text = "In previous lessons, we lowered and increased a character's health, but there was no limit to how much health they could have."
+text = "In previous lessons, we decreased and increased a character's health, but there was no limit to how much health they could have."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -74,7 +74,7 @@ title = ""
 type = 0
 text = "We can use conditions to run actions [b]selectively[/b].
 
-Conditions make your code branch into two paths: if the condition is met, the computer will run the corresponding instructions. Otherwise, those instructions do not run at all."
+Conditions make your code branch into two paths: if the condition is met, the computer will run the corresponding instructions. Otherwise, those instructions will not run at all."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -108,7 +108,7 @@ text = "When the computer checks a condition, this is called [b]to evaluate[/b] 
 
 Either the player is pressing the button, or not. Either the character is touching an enemy, or not. 
 
-In our case, [i]if[/i] the health goes over a maximum, we want to reset it to the maximum.
+In our case, [i]if[/i] the health goes over a maximum value, we want to reset it to the maximum.
 
 To define a condition, we use the [code]if[/code] keyword. We write a line starting with [code]if[/code], type the condition to evaluate, and end the line with a colon."
 visual_element_path = ""
@@ -271,7 +271,7 @@ goal = "When the robot takes damage, its health can be negative.
 
 We might want to display the health number on screen, like in Japanese RPGs.
 
-We don't want negative numbers: we want instead to stop at zero.
+We don't want negative numbers. We want to stop at zero instead.
 
 Replace [code]pass[/code] with code that reduces [code]health[/code] by [code]amount[/code].
 
