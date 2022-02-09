@@ -46,6 +46,8 @@ func popup_centered() -> void:
 		Tween.TRANS_CUBIC
 	)
 	_tween.start()
+	
+	_move_on_button.grab_focus()
 
 
 func _on_button_pressed() -> void:

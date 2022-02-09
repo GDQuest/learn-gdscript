@@ -57,3 +57,4 @@ func popup() -> void:
 	show()
 	_root_container.rect_size = _root_container.rect_min_size
 	_root_container.set_anchors_and_margins_preset(Control.PRESET_CENTER, Control.PRESET_MODE_KEEP_SIZE)
+	_cancel_button.grab_focus()

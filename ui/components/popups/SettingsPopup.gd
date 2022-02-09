@@ -28,6 +28,7 @@ func _ready() -> void:
 
 	_apply_button.connect("pressed", self, "_on_apply_settings")
 	_cancel_button.connect("pressed", self, "hide")
+	connect("visibility_changed", self, "_on_visibility_changed")
 
 
 func _on_font_size_changed(value: int) -> void:
@@ -43,3 +44,8 @@ func _on_apply_settings() -> void:
 
 func _on_scroll_sensitivity_slider_value_changed(value: float) -> void:
 	UserProfiles.get_profile().set_scroll_sensitivity(value)
+
+
+func _on_visibility_changed() -> void:
+	if visible:
+		_font_size_value.grab_focus()
