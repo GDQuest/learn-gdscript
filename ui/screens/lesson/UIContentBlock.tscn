@@ -9,6 +9,7 @@
 [node name="UIContentBlock" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 theme = ExtResource( 4 )
 custom_constants/margin_right = 0
 custom_constants/margin_top = 0
@@ -22,10 +23,12 @@ __meta__ = {
 [node name="Panel" type="PanelContainer" parent="."]
 margin_right = 1920.0
 margin_bottom = 1080.0
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 margin_right = 1920.0
 margin_bottom = 1080.0
+mouse_filter = 2
 size_flags_horizontal = 3
 custom_constants/margin_right = 0
 custom_constants/margin_top = 0
@@ -35,6 +38,7 @@ custom_constants/margin_bottom = 10
 [node name="Layout" type="VBoxContainer" parent="Panel/MarginContainer"]
 margin_right = 1920.0
 margin_bottom = 1070.0
+mouse_filter = 2
 
 [node name="ContentHeader" type="Label" parent="Panel/MarginContainer/Layout"]
 margin_right = 1920.0
@@ -46,6 +50,7 @@ text = "Optional Heading"
 margin_top = 60.0
 margin_right = 1920.0
 margin_bottom = 234.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -54,6 +59,7 @@ __meta__ = {
 margin_right = 1920.0
 margin_bottom = 174.0
 rect_min_size = Vector2( 320, 0 )
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = ExtResource( 2 )
@@ -71,5 +77,6 @@ margin_top = 250.0
 margin_right = 1060.0
 margin_bottom = 258.0
 rect_min_size = Vector2( 200, 0 )
+mouse_filter = 2
 size_flags_horizontal = 4
 custom_styles/separator = ExtResource( 3 )

@@ -16,6 +16,7 @@
 [node name="UINavigator" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 theme = ExtResource( 1 )
 script = ExtResource( 4 )
 __meta__ = {
@@ -25,6 +26,7 @@ __meta__ = {
 [node name="Layout" type="VBoxContainer" parent="."]
 margin_right = 1920.0
 margin_bottom = 1080.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -117,12 +119,14 @@ margin_top = 48.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 rect_clip_content = true
+mouse_filter = 2
 size_flags_vertical = 3
 
 [node name="ScreenContainer" type="PanelContainer" parent="Layout/Content"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {

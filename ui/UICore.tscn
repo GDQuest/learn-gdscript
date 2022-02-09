@@ -12,6 +12,7 @@
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 theme = ExtResource( 2 )
 script = ExtResource( 4 )
 __meta__ = {
@@ -21,28 +22,35 @@ __meta__ = {
 [node name="Pages" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="WelcomeScreen" parent="Pages" instance=ExtResource( 1 )]
 visible = false
+mouse_filter = 2
 
 [node name="SettingsScreen" type="MarginContainer" parent="Pages"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="CourseScreen" type="Control" parent="Pages"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="EndScreen" parent="Pages" instance=ExtResource( 7 )]
 visible = false
+mouse_filter = 2
 
 [node name="LoadingScreen" parent="Pages" instance=ExtResource( 3 )]
+mouse_filter = 2
 
 [node name="ReportFormPopup" parent="." instance=ExtResource( 5 )]
 visible = false
+mouse_filter = 2
 
 [node name="SettingsPopup" parent="." instance=ExtResource( 6 )]
 visible = false
+mouse_filter = 2

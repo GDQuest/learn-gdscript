@@ -22,6 +22,7 @@ VScrollBar/styles/scroll_focus = SubResource( 1 )
 [node name="UILesson" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 custom_styles/panel = ExtResource( 5 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -32,6 +33,7 @@ test_lesson = ExtResource( 5 )
 [node name="OuterMargin" type="MarginContainer" parent="."]
 margin_right = 1920.0
 margin_bottom = 1080.0
+mouse_filter = 2
 theme = ExtResource( 1 )
 custom_constants/margin_right = 0
 custom_constants/margin_top = 20
@@ -51,7 +53,7 @@ rect_clip_content = false
 focus_neighbour_top = NodePath(".")
 focus_neighbour_bottom = NodePath(".")
 focus_mode = 1
-mouse_filter = 1
+mouse_filter = 2
 size_flags_vertical = 3
 theme = SubResource( 2 )
 follow_focus = true
@@ -64,7 +66,7 @@ __meta__ = {
 [node name="InnerMargin" type="MarginContainer" parent="OuterMargin/ScrollContainer"]
 margin_right = 1908.0
 margin_bottom = 282.0
-mouse_filter = 1
+mouse_filter = 2
 size_flags_horizontal = 3
 custom_constants/margin_top = 40
 
@@ -74,6 +76,7 @@ margin_top = 40.0
 margin_right = 1334.0
 margin_bottom = 262.0
 rect_min_size = Vector2( 760, 0 )
+mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 theme = ExtResource( 1 )
@@ -93,23 +96,27 @@ align = 1
 margin_top = 46.0
 margin_right = 760.0
 margin_bottom = 76.0
+mouse_filter = 2
 custom_constants/separation = 30
 
 [node name="ContentBlocks" type="VBoxContainer" parent="OuterMargin/ScrollContainer/InnerMargin/Content"]
 margin_top = 82.0
 margin_right = 760.0
 margin_bottom = 82.0
+mouse_filter = 2
 custom_constants/separation = 28
 
 [node name="PracticesContainer" type="VBoxContainer" parent="OuterMargin/ScrollContainer/InnerMargin/Content"]
 margin_top = 88.0
 margin_right = 760.0
 margin_bottom = 222.0
+mouse_filter = 2
 custom_constants/separation = 32
 
 [node name="HSeparator" type="HSeparator" parent="OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer"]
 margin_right = 760.0
 margin_bottom = 30.0
+mouse_filter = 2
 custom_constants/separation = 30
 
 [node name="PracticesTitle" type="Label" parent="OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer" groups=["navigation_text"]]
@@ -124,6 +131,7 @@ align = 1
 margin_top = 134.0
 margin_right = 760.0
 margin_bottom = 134.0
+mouse_filter = 2
 
 [node name="DebounceTimer" type="Timer" parent="."]
 wait_time = 0.5
