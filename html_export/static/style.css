@@ -236,10 +236,6 @@ body {
   display: none;
 }
 
-.button-fullscreen.is-fullscreen {
-  background-image: url("fullscreen_off.png");
-}
-
 /* This is an unfortunate hack to detect fullscreen */
 #fullscreen-detector {
   position: fixed;
@@ -248,9 +244,19 @@ body {
   left: 0;
 }
 
+.debug #fullscreen-detector {
+  width: 25px;
+  height: 25px;
+  background: red;
+  visibility: visible;
+}
+
 @media all and (display-mode: fullscreen) {
   #fullscreen-detector {
-    top: 1px;
+    top: 10px;
+  }
+  .button-fullscreen {
+    background-image: url("fullscreen_off.png");
   }
 }
 
