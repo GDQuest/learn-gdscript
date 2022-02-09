@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/components/popups/ConfirmPopup.gd" type="Script" id=1]
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=5]
 [ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=7]
+[ext_resource path="res://ui/theme/button_outline_large_focus.tres" type="StyleBox" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.239216, 1, 0.431373, 1 )
@@ -124,6 +125,7 @@ custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
 custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 8 )
 custom_styles/normal = SubResource( 2 )
 text = "Confirm"
 
@@ -139,5 +141,6 @@ custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
 custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 8 )
 custom_styles/normal = ExtResource( 4 )
 text = "Cancel"

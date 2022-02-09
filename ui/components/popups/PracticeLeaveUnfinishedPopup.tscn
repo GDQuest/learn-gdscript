@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/components/popups/PracticeLeaveUnfinishedPopup.gd" type="Script" id=1]
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=5]
 [ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=7]
+[ext_resource path="res://ui/theme/button_outline_large_focus.tres" type="StyleBox" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 0.0941176, 0.321569, 1 )
@@ -43,9 +44,10 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -228.0
-margin_top = -115.5
+margin_top = -130.0
 margin_right = 228.0
-margin_bottom = 115.5
+margin_bottom = 130.0
+rect_min_size = Vector2( 200, 120 )
 theme = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -127,6 +129,7 @@ custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
 custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 8 )
 custom_styles/normal = SubResource( 2 )
 text = "Confirm"
 
@@ -142,5 +145,6 @@ custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
 custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 8 )
 custom_styles/normal = ExtResource( 4 )
 text = "Cancel"

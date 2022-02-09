@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/popups/PracticeDonePopup.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://ui/theme/panel_game.tres" type="StyleBox" id=11]
 [ext_resource path="res://ui/theme/fonts/font_well_done_bold.tres" type="DynamicFont" id=12]
 [ext_resource path="res://ui/theme/button_outline_large_accented.tres" type="StyleBox" id=13]
+[ext_resource path="res://ui/theme/button_outline_large_focus.tres" type="StyleBox" id=14]
 
 [node name="PracticeDonePopup" type="ColorRect"]
 anchor_right = 1.0
@@ -149,6 +150,7 @@ custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
 custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 14 )
 custom_styles/normal = ExtResource( 8 )
 text = "Stay"
 
@@ -170,6 +172,7 @@ custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
 custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 14 )
 custom_styles/normal = ExtResource( 13 )
 text = "Continue"
 

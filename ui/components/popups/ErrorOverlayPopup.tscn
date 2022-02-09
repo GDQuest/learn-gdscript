@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/popups/ErrorOverlayPopup.gd" type="Script" id=2]
+[ext_resource path="res://ui/theme/button_outline_large_focus.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=7]
@@ -131,5 +132,6 @@ margin_bottom = 47.0
 rect_min_size = Vector2( 120, 0 )
 custom_styles/hover = ExtResource( 9 )
 custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 3 )
 custom_styles/normal = ExtResource( 8 )
 text = "Hide"
