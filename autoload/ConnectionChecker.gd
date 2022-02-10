@@ -41,7 +41,7 @@ func _process(_delta: float) -> void:
 		_poll_server()
 
 
-func is_connected() -> bool:
+func is_connected_to_server() -> bool:
 	return _is_connected
 
 
