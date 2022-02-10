@@ -89,11 +89,11 @@ func _update_visuals() -> void:
 		_quiz_stats_block.hide()
 	
 	if has_done_reading:
-		_goto_lesson_button.text = "Open the Lesson"
+		_goto_lesson_button.text = tr("Open Lesson")
 	elif has_started:
-		_goto_lesson_button.text = "Continue the Lesson"
+		_goto_lesson_button.text = tr("Continue Lesson")
 	else:
-		_goto_lesson_button.text = "Start the Lesson"
+		_goto_lesson_button.text = tr("Start Lesson")
 
 
 func _on_goto_lesson_pressed() -> void:
