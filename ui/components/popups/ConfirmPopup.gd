@@ -81,6 +81,4 @@ func _update_top_bar() -> void:
 	var button_style := _confirm_button.get_stylebox("normal").duplicate()
 	if button_style is StyleBoxFlat:
 		var button_style_box := button_style as StyleBoxFlat
-		button_style_box.bg_color = highlight_color
-		button_style_box.set_border_width_all(0)
 	_confirm_button.add_stylebox_override("normal", button_style)

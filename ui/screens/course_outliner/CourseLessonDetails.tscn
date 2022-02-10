@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://ui/icons/icon_run.png" type="Texture" id=1]
 [ext_resource path="res://ui/components/BigGreenButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=3]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=4]
@@ -115,24 +114,19 @@ align = 2
 [node name="Spacer" type="Control" parent="MarginContainer/Layout"]
 margin_top = 228.0
 margin_right = 1864.0
-margin_bottom = 929.0
+margin_bottom = 928.0
 size_flags_vertical = 3
 
 [node name="Buttons" type="HBoxContainer" parent="MarginContainer/Layout"]
-margin_top = 945.0
+margin_top = 944.0
 margin_right = 1864.0
 margin_bottom = 1024.0
-alignment = 2
+alignment = 1
 
 [node name="GoToButton" parent="MarginContainer/Layout/Buttons" instance=ExtResource( 2 )]
-margin_left = 1516.0
+margin_left = 758.0
 margin_top = 0.0
-margin_right = 1864.0
-margin_bottom = 79.0
-rect_min_size = Vector2( 348, 0 )
-mouse_default_cursor_shape = 2
-custom_colors/font_color_focus = Color( 0.0901961, 0.0941176, 0.188235, 1 )
-custom_colors/font_color = Color( 0.0901961, 0.0941176, 0.188235, 1 )
-custom_colors/font_color_hover = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+margin_right = 1106.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 348, 80 )
 text = "Start Lesson"
-icon = ExtResource( 1 )

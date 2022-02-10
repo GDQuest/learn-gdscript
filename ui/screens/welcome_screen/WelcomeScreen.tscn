@@ -157,7 +157,7 @@ script = ExtResource( 13 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer"]
 margin_right = 820.0
-margin_bottom = 2225.0
+margin_bottom = 2023.0
 mouse_filter = 2
 custom_constants/margin_top = 0
 custom_constants/margin_left = 0
@@ -165,7 +165,7 @@ custom_constants/margin_bottom = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer"]
 margin_right = 800.0
-margin_bottom = 2225.0
+margin_bottom = 2023.0
 custom_constants/separation = 32
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
@@ -227,14 +227,14 @@ __meta__ = {
 [node name="UIQuizChoice" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 865.0
 margin_right = 800.0
-margin_bottom = 1067.0
+margin_bottom = 865.0
 mouse_filter = 1
 test_quiz = ExtResource( 14 )
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 1099.0
+margin_top = 897.0
 margin_right = 800.0
-margin_bottom = 2093.0
+margin_bottom = 1891.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 800, 100 )
@@ -281,9 +281,9 @@ __meta__ = {
 }
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 2125.0
+margin_top = 1923.0
 margin_right = 800.0
-margin_bottom = 2225.0
+margin_bottom = 2023.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 800, 100 )
@@ -373,28 +373,24 @@ __meta__ = {
 [node name="Spacer" type="Control" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
 margin_top = 555.0
 margin_right = 356.0
-margin_bottom = 771.0
+margin_bottom = 754.0
 size_flags_vertical = 3
 
 [node name="SettingsButton" type="Button" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
-margin_top = 787.0
+margin_top = 770.0
 margin_right = 356.0
-margin_bottom = 834.0
+margin_bottom = 817.0
 mouse_default_cursor_shape = 2
 text = "Configure the App"
 
 [node name="OutlinerButton" type="Button" parent="Layout/MarginContainer/ColumnLayout/SideColumn"]
-margin_top = 850.0
+margin_top = 833.0
 margin_right = 356.0
-margin_bottom = 897.0
+margin_bottom = 880.0
 mouse_default_cursor_shape = 2
 text = "Open Course Index"
 
 [node name="StartButton" parent="Layout/MarginContainer/ColumnLayout/SideColumn" instance=ExtResource( 9 )]
-mouse_default_cursor_shape = 2
-custom_colors/font_color_focus = Color( 0.0901961, 0.0941176, 0.188235, 1 )
-custom_colors/font_color = Color( 0.0901961, 0.0941176, 0.188235, 1 )
-custom_colors/font_color_hover = Color( 0.0901961, 0.0941176, 0.188235, 1 )
 text = "Start Course"
 
 [node name="GDQuestLogo" parent="." instance=ExtResource( 15 )]
