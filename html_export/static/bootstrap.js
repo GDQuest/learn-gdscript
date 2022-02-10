@@ -550,6 +550,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       if (event.code == `F11`) {
         debug.log("stopped F11");
         event.preventDefault();
+        button.focus();
       }
     });
 
