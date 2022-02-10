@@ -6,7 +6,8 @@ const EDITOR_COLLAPSE_ICON := preload("res://ui/icons/fullscreen_off.png")
 func _ready() -> void:
 	if OS.has_feature("JavaScript"):
 		# full screen does not work in the browser, this button shouldn't be used
-		hide()
+		icon = null
+		rect_min_size = Vector2(rect_min_size.x * 3, rect_min_size.y)
 		return
 	connect("pressed", self, "_on_pressed")
 	Events.connect("fullscreen_toggled", self, "_update_icon")
