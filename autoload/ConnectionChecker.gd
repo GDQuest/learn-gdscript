@@ -1,5 +1,5 @@
 # Autoload that allows us to check if the client is connected to the server
-# using sockets.
+# using websockets.
 #
 # Use signals and is_connected_to_server() to check for an active connection.
 extends Node
@@ -68,16 +68,18 @@ func _closed(was_clean := false) -> void:
 	emit_signal("has_disconnected")
 	_retry_connect()
 
+
 func _retry_connect() -> void:
 	if timer.is_stopped():
 		is_connected_to_server = false
 		_is_connecting = false
 		push_error("Unable to connect, will try again in %ss seconds" % [reconnect_delay_seconds])
-		timer.start(reconnect_delay_seconds)	
+		timer.start(reconnect_delay_seconds)
+
 
 func _connected(protocol := "") -> void:
 	_print_debug("connected with protocol", protocol)
-	var message = "ping from %s"%[UserProfiles.uuid]
+	var message = "ping from %s" % [UserProfiles.uuid]
 	_client.get_peer(1).put_packet(message.to_utf8())
 	emit_signal("has_connected")
 
@@ -112,11 +114,11 @@ func get_hostname_from_url(url: String, tls := true) -> String:
 	if result == null:
 		return ""
 	var props := {
-		"host" : result.get_string("server_url"),
-		"port" : result.get_string("port"),
-		"path" : '/socket',#result.get_string("path"),
-		"protocol" : "wss" if tls else "ws"
+		"host": result.get_string("server_url"),
+		"port": result.get_string("port"),
+		"path": "/socket",  #result.get_string("path"),
+		"protocol": "wss" if tls else "ws"
 	}
 	if props.port:
-		props.port = ":"+props.port
+		props.port = ":" + props.port
 	return "{protocol}://{host}{path}{port}".format(props)
