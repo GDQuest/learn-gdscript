@@ -184,7 +184,7 @@ func _validate_and_run_student_code() -> void:
 
 	_code_editor.lock_editor()
 	_code_editor.set_pause_button_pressed(false)
-	_code_editor.set_locked_message("Validating Your Code...")
+	_code_editor.set_locked_message(tr("Validating Your Code..."))
 	_hide_solution_panel()
 	_code_editor.set_solution_button_pressed(false)
 
@@ -237,7 +237,7 @@ func _run_student_code() -> void:
 	var nodes_paths := _script_slice.get_script_properties().nodes_paths
 
 	# Generate a runnable script, check for uncaught errors.
-	_code_editor.set_locked_message("Running Your Code...")
+	_code_editor.set_locked_message(tr("Running Your Code..."))
 	yield(get_tree(), "idle_frame")
 
 	script_text = MessageBus.replace_script(script_file_name, script_text)
@@ -268,7 +268,7 @@ func _test_student_code() -> void:
 	var script_file_name := _script_slice.get_script_properties().file_name
 
 	# Run tests on the scene.
-	_code_editor.set_locked_message("Running Tests...")
+	_code_editor.set_locked_message(tr("Running Tests..."))
 	_info_panel.set_tests_pending()
 
 	var result := _tester.run_tests()
