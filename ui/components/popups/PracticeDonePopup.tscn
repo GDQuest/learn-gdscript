@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/popups/PracticeDonePopup.gd" type="Script" id=2]
@@ -8,9 +8,8 @@
 [ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=7]
 [ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=8]
-[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=9]
-[ext_resource path="res://ui/theme/panel_game_screen.tres" type="StyleBox" id=10]
-[ext_resource path="res://ui/theme/panel_game.tres" type="StyleBox" id=11]
+[ext_resource path="res://ui/screens/practice/gdquestboy_logo.png" type="Texture" id=9]
+[ext_resource path="res://ui/screens/practice/gdquestboy_frame.tres" type="StyleBox" id=11]
 [ext_resource path="res://ui/theme/fonts/font_well_done_bold.tres" type="DynamicFont" id=12]
 [ext_resource path="res://ui/theme/button_outline_large_accented.tres" type="StyleBox" id=13]
 [ext_resource path="res://ui/theme/button_outline_large_focus.tres" type="StyleBox" id=14]
@@ -180,53 +179,52 @@ text = "Continue"
 margin_left = 620.0
 margin_right = 620.0
 margin_bottom = 405.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="GameContainer" type="PanelContainer" parent="Layout/GameAnchors"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 141.0
 custom_styles/panel = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="Layout/GameAnchors/GameContainer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 133.0
-margin_bottom = 397.0
-custom_constants/margin_right = 12
-custom_constants/margin_top = 12
-custom_constants/margin_left = 12
+margin_left = 38.0
+margin_top = 84.0
+margin_right = 249.0
+margin_bottom = 353.544
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
 custom_constants/margin_bottom = 60
+__meta__ = {
+"_editor_description_": ""
+}
 
-[node name="GameScreen" type="PanelContainer" parent="Layout/GameAnchors/GameContainer/MarginContainer"]
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 113.0
-margin_bottom = 329.0
-custom_styles/panel = ExtResource( 10 )
-
-[node name="TextureRect" type="TextureRect" parent="Layout/GameAnchors/GameContainer/MarginContainer/GameScreen"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 93.0
-margin_bottom = 309.0
+[node name="TextureRect" type="TextureRect" parent="Layout/GameAnchors/GameContainer/MarginContainer"]
+margin_right = 211.0
+margin_bottom = 209.0
 flip_v = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Layout/GameAnchors/GameContainer"]
-margin_left = 8.0
-margin_top = 349.0
-margin_right = 133.0
-margin_bottom = 397.0
+[node name="Label" type="TextureRect" parent="Layout/GameAnchors/GameContainer"]
+margin_left = 38.0
+margin_top = 305.544
+margin_right = 249.0
+margin_bottom = 353.544
 rect_min_size = Vector2( 0, 48 )
 size_flags_vertical = 8
-custom_colors/font_color = Color( 0.188235, 0.188235, 0.286275, 1 )
-custom_fonts/font = ExtResource( 9 )
-text = "GDQuestBoy"
-align = 1
+texture = ExtResource( 9 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tween" type="Tween" parent="."]

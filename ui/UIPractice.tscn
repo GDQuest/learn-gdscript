@@ -6,9 +6,9 @@
 [ext_resource path="res://ui/components/GameView.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/components/OutputConsole.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/components/popups/PracticeListPopup.tscn" type="PackedScene" id=6]
-[ext_resource path="res://ui/theme/panel_game.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/screens/practice/gdquestboy_frame.tres" type="StyleBox" id=7]
 [ext_resource path="res://ui/UIPractice.gd" type="Script" id=8]
-[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=9]
+[ext_resource path="res://ui/screens/practice/gdquestboy_logo.png" type="Texture" id=9]
 [ext_resource path="res://ui/components/popups/PracticeDonePopup.tscn" type="PackedScene" id=10]
 [ext_resource path="res://ui/theme/panel_sliceeditor.tres" type="StyleBox" id=11]
 [ext_resource path="res://ui/components/SliceEditor.gd" type="Script" id=12]
@@ -86,29 +86,33 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="Margin/Layout/OutputAnchors/Output/GameAnchors/GameContainer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 611.0
-margin_bottom = 674.0
-custom_constants/margin_right = 12
-custom_constants/margin_top = 12
-custom_constants/margin_left = 12
+margin_left = 38.0
+margin_top = 84.0
+margin_right = 581.0
+margin_bottom = 630.545
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
 custom_constants/margin_bottom = 60
 
 [node name="GameView" parent="Margin/Layout/OutputAnchors/Output/GameAnchors/GameContainer/MarginContainer" instance=ExtResource( 4 )]
-margin_right = 591.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 543.0
+margin_bottom = 486.0
 
-[node name="Label" type="Label" parent="Margin/Layout/OutputAnchors/Output/GameAnchors/GameContainer"]
-margin_left = 8.0
-margin_top = 626.0
-margin_right = 611.0
-margin_bottom = 674.0
+[node name="Label" type="TextureRect" parent="Margin/Layout/OutputAnchors/Output/GameAnchors/GameContainer"]
+margin_left = 38.0
+margin_top = 582.545
+margin_right = 581.0
+margin_bottom = 630.545
 rect_min_size = Vector2( 0, 48 )
 size_flags_vertical = 8
-custom_colors/font_color = Color( 0.188235, 0.188235, 0.286275, 1 )
-custom_fonts/font = ExtResource( 9 )
-text = "GDQuestBoy"
-align = 1
+texture = ExtResource( 9 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Console" parent="Margin/Layout/OutputAnchors/Output" instance=ExtResource( 5 )]
 anchor_right = 0.0

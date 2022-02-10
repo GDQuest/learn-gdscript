@@ -9,7 +9,7 @@ onready var _layout_container := $Layout as Container
 onready var _game_anchors := $Layout/GameAnchors as Control
 onready var _game_container := $Layout/GameAnchors/GameContainer as Control
 onready var _game_texture := (
-	$Layout/GameAnchors/GameContainer/MarginContainer/GameScreen/TextureRect as TextureRect
+	$Layout/GameAnchors/GameContainer/MarginContainer/TextureRect as TextureRect
 )
 onready var _message_anchors := $Layout/WellDoneAnchors as Control
 onready var _message_container := $Layout/WellDoneAnchors/PanelContainer as PanelContainer
