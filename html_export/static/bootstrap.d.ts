@@ -2,8 +2,14 @@ interface GDQuestLib {
   startLoading: () => void;
   displayFailureNotice: (err: Error | string) => void;
   log: Log;
+  makeLogger: (title: string) => Console;
   fullScreen: {
-    isIt: () => boolean;
+    isIt: {
+      chekFullScreenElement: () => boolean;
+      checkCSSMediaQuery: () => boolean;
+      checkWindowMargins: () => boolean;
+      checkAll: () => boolean;
+    };
     toggle: () => void;
   };
   events: {

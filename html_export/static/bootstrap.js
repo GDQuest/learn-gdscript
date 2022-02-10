@@ -3,6 +3,65 @@
 "use strict";
 
 window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
+  const noOp = () => {};
+
+  /**
+   * Returns a proxied console that can be turned off and on by appending
+   * `?debug` to the URL. Specific modules can be turned on and off by using
+   * `?debug=modulea,moduleb`.
+   * This is not to be mistaken with the other log module below, which logs
+   * _user traces_ from the app to localStorage.
+   */
+  const makeLogger = (() => {
+    const consoleMethods = [
+      "log",
+      "error",
+      "info",
+      "warn",
+      "assert",
+      "trace",
+      "table",
+    ];
+
+    const fakeLogger = /** @type {Console} */ ({});
+    consoleMethods.forEach((k) => (fakeLogger[k] = noOp));
+
+    const params = new URLSearchParams(window.location.search);
+    const isDebugMode = params.has("debug");
+
+    if (isDebugMode) {
+      document.body.classList.add("debug");
+    }
+
+    const modules = (() => {
+      const modules = /**@type {Record<string, true>} */ ({});
+      if (!isDebugMode) {
+        return { app: true };
+      }
+      const modulesList = params.get("debug").split(",").filter(Boolean);
+      if (modulesList.length == 0) {
+        return { "*": true };
+      }
+      modulesList.map((k) => (modules[k] = true));
+      return modules;
+    })();
+
+    return (/**@type {string} **/ title) => {
+      const prepared = [`%c[${title}]`, `color:#5b5bdf;`];
+      const logger = /** @type {Console} */ ({});
+      if (modules["*"] || modules[title]) {
+        consoleMethods.forEach(
+          (k) => (logger[k] = (...args) => console[k](...prepared, ...args))
+        );
+      } else {
+        return fakeLogger;
+      }
+      return logger;
+    };
+  })();
+
+  GDQUEST.makeLogger = makeLogger;
+
   const makeSignal = () => {
     const listeners = new Set();
     /**
@@ -37,6 +96,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
   };
 
   loadingControl: {
+    const debug = makeLogger("loader");
     let is_done = false;
 
     // these class names get added to document.body
@@ -121,7 +181,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
      */
     const onPackageLoaded = () => {
       displayPercentage(1);
-      console.log("package loaded");
+      debug.info("package loaded");
       setTimeout(() => {
         setStatusMode(StatusMode.DONE);
         is_done = true;
@@ -140,7 +200,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
           GDQUEST.events.onError.emit("RECURSIVE");
         }
       } else {
-        console.error(...args);
+        debug.error(...args);
       }
     };
 
@@ -195,6 +255,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
   }
 
   logging: {
+    const debug = makeLogger("app");
     const KEY = "log";
     const LEVELS = {
       TRACE: 10,
@@ -260,27 +321,27 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
 
         if (level < 30) {
           if (anything) {
-            console.log(msg, anything);
+            debug.log(msg, anything);
           } else {
-            console.log(msg);
+            debug.log(msg);
           }
         } else if (level < 40) {
           if (anything) {
-            console.info(msg, anything);
+            debug.info(msg, anything);
           } else {
-            console.info(msg);
+            debug.info(msg);
           }
         } else if (level < 50) {
           if (anything) {
-            console.warn(msg, anything);
+            debug.warn(msg, anything);
           } else {
-            console.warn(msg);
+            debug.warn(msg);
           }
         } else {
           if (anything) {
-            console.error(msg, anything);
+            debug.error(msg, anything);
           } else {
-            console.error(msg);
+            debug.error(msg);
           }
         }
       };
@@ -357,6 +418,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
   }
 
   fullscreen: {
+    const debug = makeLogger("fullscreen");
     /**
      * Browsers make it exceedingly hard to get that information reliably, so
      * we have to rely on a bunch of different strategies
@@ -381,32 +443,55 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       })();
 
       /** check is the element has moved */
-      const cssQuerySaysWeFullScreen = () => {
-        return fullScreenPoller.getBoundingClientRect().top > 0;
+      const checkCSSMediaQuery = () => {
+        const top = fullScreenPoller.getBoundingClientRect().top > 0;
+        return top;
       };
 
       /** check if browser has borders. Take zoom into account */
-      const browserHasNoBorders = () => {
+      const checkWindowMargins = () => {
         const zoom = window.outerWidth / window.innerWidth;
-        return Math.abs(window.innerWidth * zoom - screen.width) < 2;
+        const hasMargin = Math.abs(window.innerWidth * zoom - screen.width) < 2;
+        return hasMargin;
       };
 
       /** check if some element has been set fullscreen through the JS API */
-      const someDocumentIsFullScreen = () =>
-        document.fullscreenElement !== null;
+      const chekFullScreenElement = () => {
+        const hasSomeFullScreenElement = document.fullscreenElement !== null;
+        return hasSomeFullScreenElement;
+      };
 
       /** compile all methods with fallbacks */
-      return () =>
-        someDocumentIsFullScreen() ||
-        cssQuerySaysWeFullScreen() ||
-        browserHasNoBorders();
+      const checkAll = () => {
+        const isFullScreen =
+          chekFullScreenElement() ||
+          checkCSSMediaQuery() ||
+          checkWindowMargins();
+        return isFullScreen;
+      };
+      return {
+        chekFullScreenElement,
+        checkCSSMediaQuery,
+        checkWindowMargins,
+        checkAll,
+      };
     })();
+
+    let isFullScreen = false;
+    let wasFullScreen = false;
 
     /** use the JS API to call fullscreen */
     const toggle = () => {
-      isIt()
+      //debug.info(`will`, isFullScreen ? "exit" : "enter", "fullscreen mode");
+      const isItActuallyFullScreen = isIt.checkCSSMediaQuery();
+      if (isItActuallyFullScreen !== isFullScreen) {
+        debug.error("FullScreen mismatch, argh!");
+        return;
+      }
+      isFullScreen
         ? document.exitFullscreen()
         : document.documentElement.requestFullscreen();
+      isFullScreen = !isFullScreen;
     };
 
     /**
@@ -415,23 +500,14 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
      */
     const button = (() => {
       const normalClassName = "button-fullscreen";
-      const isFullScreenClassName = "is-fullscreen";
 
       const button = document.createElement("button");
       button.classList.add(normalClassName);
       button.addEventListener("click", toggle);
 
       const label = document.createElement("span");
-      label.textContent = "set Fullscreen";
+      label.textContent = "toggle Fullscreen";
       button.appendChild(label);
-      GDQUEST.events.onFullScreen.connect((isIt) => {
-        label.textContent = isIt ? "exit fullscreen" : "set Fullscreen";
-        if (isIt) {
-          button.classList.add(isFullScreenClassName);
-        } else {
-          button.classList.remove(isFullScreenClassName);
-        }
-      });
       return button;
     })();
 
@@ -442,22 +518,45 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       document.body.appendChild(button);
     });
 
-    let wasFullScreen = false;
-    const onFullScreenChange = () => {
-      const isFullScreen = isIt();
-      if (isFullScreen != wasFullScreen) {
-        wasFullScreen = isFullScreen;
-        GDQUEST.events.onFullScreen.emit(isFullScreen);
+    const wasItOurFullScreen = (isItActuallyFullScreen) => {
+      if (isItActuallyFullScreen) {
+        if (isIt.chekFullScreenElement()) {
+          debug.log("full screen changed through our button");
+        } else {
+          // that means fullscreen was set _not_ through our button
+          debug.warn("full screen changed through shortcut, bailing out");
+          document.body.classList.add("native-fullscreen");
+        }
+      } else {
+        isFullScreen = false;
+        document.body.classList.remove("native-fullscreen");
       }
     };
 
     /**
+     * @param {Event} evt
+     */
+    const onFullScreenChange = (evt) => {
+      const isItActuallyFullScreen = isIt.checkAll();
+      if (isItActuallyFullScreen != wasFullScreen) {
+        wasFullScreen = isItActuallyFullScreen;
+        debug.info(`[ ${evt.type} ]`, `full screen state changed`);
+        const wasIt = wasItOurFullScreen(isItActuallyFullScreen);
+        GDQUEST.events.onFullScreen.emit(isItActuallyFullScreen, wasIt);
+      }
+    };
+
+    document.addEventListener("keydown", (event) => {
+      if (event.code == `F11`) {
+        debug.log("stopped F11");
+        event.preventDefault();
+      }
+    });
+
+    /**
      * This is for when using the JS API
      */
-    document.documentElement.addEventListener(
-      "fullscreenchange",
-      onFullScreenChange
-    );
+    document.addEventListener("fullscreenchange", onFullScreenChange);
     /**
      * This is for buttons, shortcuts, and other methods for setting fullscreen.
      * We could also potentially poll for size after keypresses, but this seems
