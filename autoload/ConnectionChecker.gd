@@ -1,118 +1,122 @@
 # Autoload that allows us to check if the client is connected to the server
 # using sockets.
 #
-# Use signals and is_connected() to check for an active connection.
+# Use signals and is_connected_to_server() to check for an active connection.
 extends Node
 
-signal cant_connect
 signal has_connected
 signal has_disconnected
-signal packet_error(message)
-signal packet_received(message)
+signal cant_connect
+signal connected
 
-var _client := StreamPeerTCP.new()
-var _packet_peer_stream := PacketPeerStream.new()
-var _is_connected := false setget _set_read_only
-var _will_connect := false setget _set_read_only
-var _print_debug_strings := true
+var _client := WebSocketClient.new()
+var _is_connecting := false
 
-var allow_object_decoding := false
-var host = "localhost"
-var port = 8124
+var is_connected_to_server := false setget _set_read_only
+var print_debug_strings := true
+
+var server_url := "ws://localhost:3000"
+var reconnect_delay_seconds := 3
+var timer := Timer.new()
 
 
 func _init() -> void:
+	add_child(timer)
+	timer.connect("timeout", self, "_connect_to_server")
+
 	if ProjectSettings.has_setting("global/lsp_url"):
-		var url: String = ProjectSettings.get_setting("global/lsp_socket_url_and_port")
-		_set_hostname(url)
-	# TODO: remove this to control when the node connects
-	_connect_to_host()
+		var url: String = ProjectSettings.get_setting("global/lsp_url")
+		if url != "":
+			server_url = get_hostname_from_url(url)
+
+	_client.connect("connection_closed", self, "_closed")
+	_client.connect("connection_error", self, "_closed")
+	_client.connect("connection_established", self, "_connected")
+	_client.connect("data_received", self, "_on_data")
+	_connect_to_server()
 
 
-func _process(_delta: float) -> void:
-	if _will_connect and not _is_connected:
+# This method is intended to be called with a yield:
+# ```gdscript
+# var is_connected: bool = yield(ConnectionChecker.connect_to_server(), "connected")
+# ```
+func connect_to_server() -> bool:
+	if not is_connected_to_server:
+		_connect_to_server()
+		yield(self, "has_connected")
+	if is_connected_to_server:
+		emit_signal("connected")
+		return true
+	return false
+
+
+func _connect_to_server() -> void:
+	if _is_connecting:
+		_print_debug("request to connect, but already connecting")
 		return
-	if _is_connected and not _client.is_connected_to_host():
-		_is_connected = false
-		emit_signal("has_disconnected")
-		_print_debug("emit:has_disconnected")
-		return
-	if _client.is_connected_to_host():
-		_poll_server()
-
-
-func is_connected_to_server() -> bool:
-	return _is_connected
-
-
-# Initiates a connection. Make sure you set `host` and `port` prior
-func _connect_to_host() -> void:
-	_will_connect = true
-	var error := _client.connect_to_host(host, port)
-	if error != OK:
-		push_error("could not connect to host `%s:%s`" % [host, port])
+	_is_connecting = true
+	timer.stop()
+	_print_debug("attempting to connect to", server_url)
+	var err := _client.connect_to_url(server_url)
+	if err != OK:
 		emit_signal("cant_connect")
-		return
-	if _client.is_connected_to_host():
-		_is_connected = true
-		_will_connect = false
-		_packet_peer_stream.set_stream_peer(_client)
-		emit_signal("has_connected")
-		_put_var(UserProfiles.uuid)
-		_print_debug("emit:has_connected")
+		_retry_connect()
 
 
-# Sends a packet to the server
-func _put_var(variant, full_objects := false) -> bool:
-	if not _client.is_connected_to_host():
-		push_error("client is not connected")
-	_packet_peer_stream.put_var(variant, full_objects)
-	var error = _packet_peer_stream.get_packet_error()
-	if error != OK:
-		push_error("could not send packet")
-		return false
-	return true
+func _closed(was_clean := false) -> void:
+	_print_debug("Connection closed, clean:", was_clean)
+	emit_signal("has_disconnected")
+	_retry_connect()
+
+func _retry_connect() -> void:
+	if timer.is_stopped():
+		is_connected_to_server = false
+		_is_connecting = false
+		push_error("Unable to connect, will try again in %ss seconds" % [reconnect_delay_seconds])
+		timer.start(reconnect_delay_seconds)	
+
+func _connected(protocol := "") -> void:
+	_print_debug("connected with protocol", protocol)
+	var message = "ping from %s"%[UserProfiles.uuid]
+	_client.get_peer(1).put_packet(message.to_utf8())
+	emit_signal("has_connected")
 
 
-# Disconnects from the server
-func _disconnect_from_host() -> void:
-	_client.disconnect_from_host()
+func _on_data() -> void:
+	# You MUST always use get_peer(1).get_packet to receive data from server, and
+	# not get_packet directly when not using the MultiplayerAPI.
+	_print_debug("Got data from server: ", _client.get_peer(1).get_packet().get_string_from_utf8())
 
 
+# Data transfer and signals emission will only happen when calling this function.
+func _process(_delta: float) -> void:
+	_client.poll()
+
+
+# Poor man's read only property
 func _set_read_only(_bogus_var) -> void:
 	pass
 
 
-# Runs on each process tick to check if any new data is available
-func _poll_server() -> void:
-	while _packet_peer_stream.get_available_packet_count() > 0:
-		var variant = _packet_peer_stream.get_var(allow_object_decoding)
-		var error := _packet_peer_stream.get_packet_error()
-		if error != OK:
-			emit_signal("packet_error", variant)
-		if variant == null:
-			_print_debug("empty message")
-			continue
-		emit_signal("packet_received", variant)
-		_print_debug("message", variant)
-
-
 # Used internally to track socket client state
 func _print_debug(message: String, object = "") -> void:
-	if _print_debug_strings:
+	if print_debug_strings:
 		prints(message, object)
 
 
-# Sets `host` and `port` from a string
-func _set_hostname(url: String) -> void:
+# Extracts server url ad port from a string
+func get_hostname_from_url(url: String, tls := true) -> String:
 	var urlRegex := RegEx.new()
-	urlRegex.compile("(?<protocol>https?:\/\/)(?<host>.*?)(?<path>\/.*?)?(?<port>:\\d+)?$")
+	urlRegex.compile("(?<protocol>https?:\/\/)(?<server_url>.*?)(?<path>\/.*?)?(?<port>:\\d+)?$")
 	var result := urlRegex.search(url)
 	if result == null:
-		return
-	var _host = result.get_string("host")
-	var _port = result.get_string("port")
-	if _host != "":
-		host = _host
-	if _port != "":
-		port = int(_port)
+		return ""
+	var props := {
+		"host" : result.get_string("server_url"),
+		"port" : result.get_string("port"),
+		"path" : '/socket',#result.get_string("path"),
+		"protocol" : "wss" if tls else "ws"
+	}
+	if props.port:
+		props.port = ":"+props.port
+	return "{protocol}://{host}{path}{port}".format(props)

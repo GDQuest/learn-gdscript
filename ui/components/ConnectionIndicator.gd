@@ -8,7 +8,7 @@ const TEXTURE_CONNECTED := preload("connectionIndicator_ON.png")
 func _ready() -> void:
 	ConnectionChecker.connect("has_connected", self, "_set_is_connected", [true])
 	ConnectionChecker.connect("has_disconnected", self, "_set_is_connected", [false])
-	_set_is_connected(ConnectionChecker.is_connected_to_server())
+	_set_is_connected(ConnectionChecker.is_connected_to_server)
 
 
 func _set_is_connected(connected: bool) -> void:

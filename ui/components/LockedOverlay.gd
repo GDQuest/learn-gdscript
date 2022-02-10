@@ -24,4 +24,4 @@ func _set_is_connected(connected: bool) -> void:
 
 func _on_visibility_changed() -> void:
 	if visible:
-		_set_is_connected(ConnectionChecker.is_connected_to_server())
+		_set_is_connected(ConnectionChecker.is_connected_to_server)
