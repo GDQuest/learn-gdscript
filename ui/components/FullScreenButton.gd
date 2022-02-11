@@ -7,6 +7,9 @@ func _ready() -> void:
 	if OS.has_feature("JavaScript"):
 		# full screen does not work in the browser, this button shouldn't be used
 		icon = null
+		hint_tooltip = ""
+		disabled = true
+		mouse_default_cursor_shape = CURSOR_ARROW
 		rect_min_size = Vector2(rect_min_size.x * 3, rect_min_size.y)
 		return
 	connect("pressed", self, "_on_pressed")
