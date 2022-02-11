@@ -456,7 +456,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       };
 
       /** check if some element has been set fullscreen through the JS API */
-      const chekFullScreenElement = () => {
+      const checkFullScreenElement = () => {
         const hasSomeFullScreenElement = document.fullscreenElement !== null;
         return hasSomeFullScreenElement;
       };
@@ -464,13 +464,13 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       /** compile all methods with fallbacks */
       const checkAll = () => {
         const isFullScreen =
-          chekFullScreenElement() ||
+          checkFullScreenElement() ||
           checkCSSMediaQuery() ||
           checkWindowMargins();
         return isFullScreen;
       };
       return {
-        chekFullScreenElement,
+        checkFullScreenElement,
         checkCSSMediaQuery,
         checkWindowMargins,
         checkAll,
@@ -485,8 +485,18 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       //debug.info(`will`, isFullScreen ? "exit" : "enter", "fullscreen mode");
       const isItActuallyFullScreen = isIt.checkCSSMediaQuery();
       if (isItActuallyFullScreen !== isFullScreen) {
-        debug.error("FullScreen mismatch, argh!");
-        return;
+        debug.error(
+          `Mismatch! Expected fullscreen to be ${isFullScreen}, but it is ${isItActuallyFullScreen}.`
+        );
+        if (isItActuallyFullScreen) {
+          debug.error(
+            `Cannot exit a fullscreen mode set natively. Bailing out!`
+          );
+          return;
+        } else {
+          debug.warn(`Will set our fullscreen now`);
+          isFullScreen = false;
+        }
       }
       isFullScreen
         ? document.exitFullscreen()
@@ -518,16 +528,23 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       document.body.appendChild(button);
     });
 
+    /**
+     * Checks if the actual fullscreen state was set through an API
+     * If we're _exiting_ fullscreen, then we can't check, but we
+     * set `isFullScreen` to `false`.
+     * @param {boolean} isItActuallyFullScreen
+     */
     const wasItOurFullScreen = (isItActuallyFullScreen) => {
       if (isItActuallyFullScreen) {
-        if (isIt.chekFullScreenElement()) {
+        if (isIt.checkFullScreenElement()) {
           debug.log("full screen changed through our button");
         } else {
           // that means fullscreen was set _not_ through our button
-          debug.warn("full screen changed through shortcut, bailing out");
+          debug.warn("full screen changed through shortcut, hiding the button");
           document.body.classList.add("native-fullscreen");
         }
       } else {
+        debug.log("exiting fullscreen");
         isFullScreen = false;
         document.body.classList.remove("native-fullscreen");
       }
@@ -548,9 +565,9 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
 
     document.addEventListener("keydown", (event) => {
       if (event.code == `F11`) {
-        debug.log("stopped F11");
         event.preventDefault();
         button.focus();
+        debug.log("Stopped F11");
       }
     });
 

@@ -5,7 +5,7 @@ interface GDQuestLib {
   makeLogger: (title: string) => Console;
   fullScreen: {
     isIt: {
-      chekFullScreenElement: () => boolean;
+      checkFullScreenElement: () => boolean;
       checkCSSMediaQuery: () => boolean;
       checkWindowMargins: () => boolean;
       checkAll: () => boolean;
