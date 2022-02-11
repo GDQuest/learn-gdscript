@@ -227,19 +227,20 @@ As a reminder, the comparison signs are:
 The line [code]health < 5:[/code] means \"health is less than 5\". 
 
 Because [code]health = 100[/code], this is false so [code]print(\"health is greater than five.\")[/code] won't run."
-starting_code = "var health = 100
+starting_code = "func run():
+	var health = 100
 
-if health < 5:
-	print(\"health is greater than five.\")
+	if health < 5:
+		print(\"health is greater than five.\")
 
-if 1 > health:
-	print(\"One is less than health.\")
+	if 1 > health:
+		print(\"One is less than health.\")
 
-if health < health:
-	print(\"health is equal to health\")
+	if health < health:
+		print(\"health is equal to health\")
 
-if health < 7:
-	print(\"health is not equal to seven.\")"
+	if health < 7:
+		print(\"health is not equal to seven.\")"
 hints = PoolStringArray( "Only alter the [code] > < == != [/code] symbols", "The messages will only show if the comparisons are true" )
 validator_script_path = "using_conditions/TestUsingConditions.gd"
 script_slice_path = "using_conditions/UsingConditions.live-editor/slices/UsingConditions.conditions.slice.tres"

@@ -2,7 +2,11 @@ extends Node2D
 
 
 func _run():
-	# EXPORT conditions
+	run()
+
+
+# EXPORT conditions
+func run():
 	var health = 100
 	
 	if health > 5:
@@ -16,5 +20,5 @@ func _run():
 	
 	if health != 7:
 		print("health is not equal to seven.")
-	# /EXPORT conditions
+# /EXPORT conditions
 	Events.emit_signal("practice_run_completed")

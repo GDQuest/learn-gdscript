@@ -17,7 +17,8 @@ margin_top = 7.0
 margin_right = 721.0
 margin_bottom = 267.0
 scene = ExtResource( 2 )
-gdscript_code = "func advance_traffic_light():
+gdscript_code = "func advance_light():
 	light_index += 1
 	if light_index == 3:
 		light_index = 0"
+run_button_label = "advance_light()"

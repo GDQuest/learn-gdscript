@@ -27,9 +27,11 @@ __meta__ = {
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 393.0
+margin_right = 651.0
 margin_bottom = 393.0
 script = SubResource( 1 )
 scene = ExtResource( 2 )
-gdscript_code = "var dice_value = randi() % max_number + 1
-display_value(dice_value)"
+gdscript_code = "func roll_dice():
+	var dice_value = randi() % max_number + 1
+	display_value(dice_value)"
+run_button_label = "roll_dice()"
