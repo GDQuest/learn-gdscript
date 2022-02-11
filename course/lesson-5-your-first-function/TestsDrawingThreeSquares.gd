@@ -9,7 +9,7 @@ func _init() -> void:
 	target_polygon.sort()
 
 
-func test_draw_square_of_200_pixels() -> String:
+func test_draw_three_squares_of_200_pixels() -> String:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	var polygons := turtle.get_polygons()
 	if polygons.empty():
