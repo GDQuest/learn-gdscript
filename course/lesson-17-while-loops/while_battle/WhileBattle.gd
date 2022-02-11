@@ -13,7 +13,7 @@ func _ready():
 
 
 # EXPORT battle
-func battle():
+func simulate_battle():
 	while health > 0:
 		health -= turtle_power
 # /EXPORT battle
@@ -22,5 +22,5 @@ func battle():
 		_health_bar.set_health(health)
 
 func _run():
-	battle()
+	simulate_battle()
 	Events.emit_signal("practice_run_completed")

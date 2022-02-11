@@ -152,16 +152,20 @@ has_separator = false
 [sub_resource type="Resource" id=12]
 script = ExtResource( 5 )
 practice_id = "res://course/lesson-17-while-loops/practice-lkGx0c7D.tres"
-title = ""
-goal = ""
-starting_code = "func battle():
+title = "Simulating a battle using a while loop"
+goal = "It's time to fight!
+
+Add to the [code]simulate_battle()[/code] function to gradually lower the health of the robot. 
+
+While [code]health[/code] is greater than [code]0[/code], subtract [code]turtle_power[/code] from [code]health[/code]."
+starting_code = "func simulate_battle():
 	pass"
 hints = PoolStringArray(  )
 validator_script_path = "while_battle/TestWhileBattle.gd"
 script_slice_path = "while_battle/WhileBattle.live-editor/slices/WhileBattle.battle.slice.tres"
 documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 4 )
-description = ""
+description = "We use a while loop to have our turtle attack the robot for as long as it has more than zero health."
 
 [resource]
 script = ExtResource( 1 )
