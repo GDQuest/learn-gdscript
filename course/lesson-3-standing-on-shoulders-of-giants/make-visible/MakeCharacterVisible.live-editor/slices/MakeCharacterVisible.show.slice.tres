@@ -8,13 +8,13 @@
 script = ExtResource( 1 )
 scene_properties = ExtResource( 2 )
 script_properties = ExtResource( 3 )
-leading_spaces = 1
+leading_spaces = 0
 keyword = "EXPORT"
 closing = false
 name = "show"
 is_full_file = false
-start = 8
-end = 10
-lines_before = [ "extends Node2D", "", "onready var _animation_tree := find_node(\"AnimationTree\")", "", "func _ready():", "	_animation_tree.travel(\"saying_hi\")", "", "func _run():" ]
-lines_after = [ "	yield(get_tree().create_timer(1.0), \"timeout\")", "	Events.emit_signal(\"practice_run_completed\")", "" ]
-lines_editable = [ "show()" ]
+start = 12
+end = 15
+lines_before = [ "extends Node2D", "", "onready var _animation_tree := find_node(\"AnimationTree\")", "", "func _ready():", "	_animation_tree.travel(\"saying_hi\")", "", "func _run():", "	run()", "	yield(get_tree().create_timer(1.0), \"timeout\")", "	Events.emit_signal(\"practice_run_completed\")", "" ]
+lines_after = [ "" ]
+lines_editable = [ "func run():", "	show()" ]

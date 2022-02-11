@@ -254,9 +254,12 @@ do_shuffle_answers = true
 script = ExtResource( 3 )
 practice_id = "res://course/lesson-3-standing-on-shoulders-of-giants/practice-QiGjB7tK.tres"
 title = "Make The Character Visible"
-goal = "Our robot character's invisible! Call the [code]show()[/code] function to make it appear."
-starting_code = ""
-hints = PoolStringArray( "Your code should just be calling show()." )
+goal = "Our robot character's invisible! Call the [code]show()[/code] function to make it appear.
+
+Please call [code]show()[/code] inside the [code]run()[/code] function, on line [code]2[/code], and keep the [code]Tab[/code] character at the start of the line. The computer needs that to understand your code."
+starting_code = "func run():
+	"
+hints = PoolStringArray( "Your code should call show() inside the run() function." )
 validator_script_path = "make-visible/TestsMakeCharacterVisible.gd"
 script_slice_path = "make-visible/MakeCharacterVisible.live-editor/slices/MakeCharacterVisible.show.slice.tres"
 documentation_references = PoolStringArray( "show" )
@@ -267,9 +270,12 @@ description = "The robot's invisible! Call a function to bring it back."
 script = ExtResource( 3 )
 practice_id = "res://course/lesson-3-standing-on-shoulders-of-giants/practice-HJMQ2XNw.tres"
 title = "Make the Robot Upright"
-goal = "The robot was turned by [code]-0.5[/code] radians. You need to make it upright by calling the [code]rotate()[/code] function."
-starting_code = ""
-hints = PoolStringArray( "You need to use the rotate() function, and give the proper arguments", "Call rotate(0.5) to turn the character 0.5 radians clockwise." )
+goal = "The robot was turned by [code]-0.5[/code] radians. You need to make it upright by calling the [code]rotate()[/code] function.
+
+Please call [code]rotate()[/code] inside the [code]run()[/code] function, on line [code]2[/code], and keep the [code]Tab[/code] character at the start of the line. The computer needs that to understand your code."
+starting_code = "func run():
+	"
+hints = PoolStringArray( "You need to use the rotate() function, and give the proper arguments.", "Call rotate(0.5) to turn the character 0.5 radians clockwise.", "You need to call the rotate() function inside the run() function." )
 validator_script_path = "make-upright/TestsMakeRobotUpright.gd"
 script_slice_path = "make-upright/MakeRobotUpright.live-editor/slices/MakeRobotUpright.rotate.slice.tres"
 documentation_references = PoolStringArray( "rotate" )

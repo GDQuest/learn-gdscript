@@ -42,11 +42,12 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 651.0
 margin_bottom = 267.0
-gdscript_code = "move_forward(80)
-turn_right(45)
-move_forward(80)
-turn_left(45)
-move_forward(80)"
+gdscript_code = "func run():
+	move_forward(80)
+	turn_right(45)
+	move_forward(80)
+	turn_left(45)
+	move_forward(80)"
 
 [node name="DemoDrawingRotate" type="Node2D" parent="RunnableCodeExample"]
 script = SubResource( 1 )

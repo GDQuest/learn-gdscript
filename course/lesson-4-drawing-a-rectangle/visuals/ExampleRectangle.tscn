@@ -42,15 +42,18 @@ __meta__ = {
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 651.0
-margin_bottom = 267.0
-gdscript_code = "move_forward(200)
-turn_right(90)
-move_forward(120)
-turn_right(90)
-move_forward(200)
-turn_right(90)
-move_forward(120)"
+margin_right = 707.0
+margin_bottom = 387.0
+rect_min_size = Vector2( 700, 380 )
+gdscript_code = "func run():
+	move_forward(200)
+	turn_right(90)
+	move_forward(120)
+	turn_right(90)
+	move_forward(200)
+	turn_right(90)
+	move_forward(120)
+	turn_right(90)"
 
 [node name="DemoDrawingRectangle" type="Node2D" parent="RunnableCodeExample"]
 script = SubResource( 1 )

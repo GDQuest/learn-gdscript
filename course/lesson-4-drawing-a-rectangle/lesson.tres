@@ -149,9 +149,10 @@ We added the first parameter for you so the turtle moves forward [code]200[/code
 In the following practices, we'll draw multiple corners to create rectangles.
 
 "
-starting_code = "move_forward(200)
-turn_right()
-move_forward()"
+starting_code = "func draw_corner():
+	move_forward(200)
+	turn_right()
+	move_forward()"
 hints = PoolStringArray( "You need to add two parameters to the [code]turn_right()[/code] and [code]move_forward()[/code] functions: [code]90[/code] and [code]200[/code]." )
 validator_script_path = "turning_right/TestsTurningRight.gd"
 script_slice_path = "turning_right/TurningRight.live-editor/slices/TurningRight.draw_corner.slice.tres"
@@ -168,13 +169,14 @@ goal = "Add the correct parameters to the functions [code]move_forward()[/code] 
 We wrote the first parameter for you.
 
 In the next practice, you'll use the same functions to draw a bigger rectangle."
-starting_code = "move_forward(200)
-turn_right()
-move_forward()
-turn_right()
-move_forward()
-turn_right()
-move_forward()"
+starting_code = "func draw_rectangle():
+	move_forward(200)
+	turn_right()
+	move_forward()
+	turn_right()
+	move_forward()
+	turn_right()
+	move_forward()"
 hints = PoolStringArray( "Both [code]move_forward()[/code] and [code]turn_right()[/code] take a numerical parameter between the parenthesis", "[code]turn_right[/code]\'s numerical parameter indicates how many [i]degrees[/i] the turtle should turn.", "[code]move_forward[/code]\'s numerical parameters indicates how many pixels the turtle should move." )
 validator_script_path = "drawing_rectangle/TestsDrawingRectangle.gd"
 script_slice_path = "drawing_rectangle/DrawingRectangle.live-editor/slices/DrawingRectangle.draw_rectangle.slice.tres"
@@ -186,9 +188,17 @@ description = "Based on your rectangle corner, you now need to draw a complete r
 script = ExtResource( 3 )
 practice_id = "res://course/lesson-4-drawing-a-rectangle/practice-kGx0c7DD.tres"
 title = "Drawing a Bigger Rectangle"
-goal = "Write out calls to the functions [code]move_forward()[/code] and [code]turn_right()[/code] to draw a rectangle with a width of 220 pixels, and a height of 260 pixels."
-starting_code = ""
-hints = PoolStringArray( "Start by moving forward to create the width of the rectangle.", "[code]move_forward[/code]\'s numerical parameters indicates how many pixels the turtle should move.", "[code]turn_right[/code]\'s numerical parameter indicates how many [i]degrees[/i] the turtle should turn." )
+goal = "Write out calls to the functions [code]move_forward()[/code] and [code]turn_right()[/code] to draw a rectangle with a width of 220 pixels, and a height of 260 pixels.
+
+We wrote the first two lines for you.
+
+Be sure to write each instruction on a separate line.
+
+Every line should start with one [code]Tab[/code] character so the computer understands it's part of the [code]draw_rectangle()[/code] function."
+starting_code = "func draw_rectangle():
+	move_forward(220)
+	turn_right(90)"
+hints = PoolStringArray( "Start by moving forward to create the height of the rectangle.", "[code]move_forward[/code]\'s numerical parameters indicates how many pixels the turtle should move.", "[code]turn_right[/code]\'s numerical parameter indicates how many [i]degrees[/i] the turtle should turn." )
 validator_script_path = "drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd"
 script_slice_path = "drawing_bigger_rectangle/DrawingBiggerRectangle.live-editor/slices/DrawingBiggerRectangle.draw_rectangle.slice.tres"
 documentation_references = PoolStringArray( "move_forward", "turn_right" )

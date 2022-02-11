@@ -8,16 +8,16 @@ func _ready() -> void:
 
 func _run():
 	reset()
-	draw_rectangle()
+	draw_corner()
 	play_draw_animation()
 
 
-func draw_rectangle():
-	# EXPORT draw_corner
+# EXPORT draw_corner
+func draw_corner():
 	move_forward(200)
 	turn_right(90)
 	move_forward(200)
-	# /EXPORT draw_corner
+# /EXPORT draw_corner
 
 
 func _complete_run() -> void:
