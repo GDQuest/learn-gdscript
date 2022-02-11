@@ -101,7 +101,7 @@ func set_center_in_frame(value: bool) -> void:
 func set_run_button_label(new_text: String) -> void:
 	run_button_label = new_text
 	if not is_inside_tree():
-		yield(_run_button, "ready")
+		yield(self, "ready")
 
 	if not run_button_label.empty():
 		_run_button.text = run_button_label
