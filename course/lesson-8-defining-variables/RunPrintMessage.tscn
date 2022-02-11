@@ -23,15 +23,16 @@ __meta__ = {
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 711.0
+margin_right = 764.0
 margin_bottom = 267.0
-gdscript_code = "print(\"Hey there!\")"
+gdscript_code = "func run():
+	print(\"Hey there!\")"
 
 [node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 648.0
-margin_right = 704.0
+margin_right = 757.0
 margin_bottom = 260.0
 size_flags_horizontal = 3
 script = SubResource( 1 )

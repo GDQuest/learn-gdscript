@@ -27,9 +27,10 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 764.0
 margin_bottom = 267.0
-gdscript_code = "var health = 100
-health = \"This is some text\"
-print(health)"
+gdscript_code = "func run():
+	var health = 100
+	health = \"This is some text\"
+	print(health)"
 
 [node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 anchor_right = 0.0

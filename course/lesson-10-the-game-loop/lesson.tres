@@ -123,7 +123,9 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-10-the-game-loop/content-tT6n1Txl.tres"
 title = ""
 type = 0
-text = "Every frame, Godot runs the [code]_process()[/code] function.
+text = "When you click the button [code]set_process(true)[/code], you activate processing on the robot.
+
+From there, every frame, Godot runs the [code]_process()[/code] function.
 
 Since we wrote a [code]rotate()[/code] instruction, Godot is rotating the character by [code]0.05[/code] radians [b]many[/b] times a second."
 visual_element_path = ""
@@ -162,7 +164,7 @@ goal = "Make the robot rotate slowly by adding to the [code]_process()[/code] fu
 
 A rotation speed of about [code]0.05[/code] each frame should do."
 starting_code = "func _process(_delta):
-	pass"
+	"
 hints = PoolStringArray( "Replace [code]pass[/code] with the [code]rotate()[/code] function", "The [code]rotate()[/code] function takes one parameter" )
 validator_script_path = "rotating-sprite/TestsRotating.gd"
 script_slice_path = "rotating-sprite/RotatingSprite.live-editor/slices/RotatingSprite.move_and_rotate.slice.tres"
@@ -180,7 +182,7 @@ To do this, add the [code]rotate()[/code] and [code]move_local_x()[/code] functi
 
 Use a rotation speed of [code]0.05[/code] radians per frame, and move the robot [code]5[/code] pixels per frame."
 starting_code = "func _process(_delta):
-	pass"
+	"
 hints = PoolStringArray( "Replace [code]pass[/code] with the [code]rotate()[/code] and [code]move_local_x()[/code] functions" )
 validator_script_path = "rotating-and-moving/TestsRotatingAndMoving.gd"
 script_slice_path = "rotating-and-moving/RotateAndMoveSprite.live-editor/slices/RotateAndMoveSprite.move_and_rotate.slice.tres"
