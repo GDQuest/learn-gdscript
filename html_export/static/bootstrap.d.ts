@@ -2,8 +2,20 @@ interface GDQuestLib {
   startLoading: () => void;
   displayFailureNotice: (err: Error | string) => void;
   log: Log;
+  makeLogger: (title: string) => Console;
+  fullScreen: {
+    isIt: {
+      checkFullScreenElement: () => boolean;
+      checkCSSMediaQuery: () => boolean;
+      checkWindowMargins: () => boolean;
+      checkAll: () => boolean;
+    };
+    toggle: () => void;
+  };
   events: {
     onError: Signal;
+    onFullScreen: Signal;
+    onGodotLoaded: Signal;
   };
 }
 
@@ -20,6 +32,7 @@ declare const GDQUEST_ENVIRONMENT: {
 interface Signal {
   disconnect: (fn: (...args: any[]) => void) => boolean;
   connect: (fn: (...args: any[]) => void) => () => boolean;
+  once: (fn: (...args: any[]) => void) => () => boolean;
   emit: (...args: any[]) => void;
 }
 
