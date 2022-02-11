@@ -1,8 +1,10 @@
-[gd_resource type="Resource" load_steps=15 format=2]
+[gd_resource type="Resource" load_steps=18 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
 [ext_resource path="res://resources/QuizChoice.gd" type="Script" id=3]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=4]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=5]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -127,7 +129,7 @@ quiz_id = "res://course/lesson-17-while-loops/quiz-v5tT6n1T.tres"
 question = "What would happen if the computer tried to run the code above?"
 content_bbcode = ""
 hint = ""
-explanation_bbcode = "Because [code]number[/code] isn't incremented, it can't go above [code]100[/code].
+explanation_bbcode = "Because [code]number[/code] isn't incremented within the while loop, it can't go above [code]100[/code].
 
 Since there's no way to exit the while loop, the computer will attempt to draw squares for as long as the program is running, often resulting in a crash."
 answer_options = [ "It would draw squares infinitely until the program is terminated", "It would draw 100 squares", "It would draw 20 squares" ]
@@ -147,8 +149,22 @@ visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=12]
+script = ExtResource( 5 )
+practice_id = "res://course/lesson-17-while-loops/practice-lkGx0c7D.tres"
+title = ""
+goal = ""
+starting_code = "func battle():
+	pass"
+hints = PoolStringArray(  )
+validator_script_path = "while_battle/TestWhileBattle.gd"
+script_slice_path = "while_battle/WhileBattle.live-editor/slices/WhileBattle.battle.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 4 )
+description = ""
+
 [resource]
 script = ExtResource( 1 )
 title = "Introduction to While Loops"
 content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ]
-practices = [  ]
+practices = [ SubResource( 12 ) ]
