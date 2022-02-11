@@ -23,7 +23,7 @@ func _ready() -> void:
 
 
 func _run() -> void:
-	health = 100
+	reset()
 	take_damage(_damage)
 	_update_robot()
 	yield(get_tree().create_timer(1.0), \"timeout\")
@@ -39,4 +39,9 @@ func _update_robot() -> void:
 func take_damage(amount):
 	health -= amount
 # /EXPORT damage
+
+
+func reset():
+	health = 100
+	_health_bar.set_health(health)
 "

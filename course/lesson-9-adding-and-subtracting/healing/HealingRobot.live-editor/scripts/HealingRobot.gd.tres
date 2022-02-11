@@ -23,7 +23,7 @@ func _ready() -> void:
 
 
 func _run() -> void:
-	health = 50
+	reset()
 	heal(_healing)
 	_update_robot()
 	yield(get_tree().create_timer(1.0), \"timeout\")
@@ -39,4 +39,9 @@ func _update_robot() -> void:
 func heal(amount):
 	health += amount
 # /EXPORT heal
+
+
+func reset():
+	health = 50
+	_health_bar.set_health(health)
 "

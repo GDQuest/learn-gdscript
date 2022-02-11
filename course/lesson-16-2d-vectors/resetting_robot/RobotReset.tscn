@@ -1,9 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://course/lesson-16-2d-vectors/resetting_robot/RobotReset.gd" type="Script" id=1]
 [ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
 
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+
+onready var _scene := $Robot
+
+# We create a reset() method here because UIPractice checks root node for
+# reset function.
+func reset():
+	_scene.reset()
+"
+
 [node name="RobotReset" type="Node2D"]
+script = SubResource( 1 )
 
 [node name="Robot" parent="." instance=ExtResource( 2 )]
 position = Vector2( 280, 480 )

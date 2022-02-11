@@ -1,7 +1,9 @@
 extends Node2D
 
+
 func _ready():
 	rotation = -0.5
+
 
 func _run():
 	run()
@@ -13,3 +15,7 @@ func _run():
 func run():
 	rotate(0.5)
 # /EXPORT rotate
+
+
+func reset():
+	rotation = -0.5

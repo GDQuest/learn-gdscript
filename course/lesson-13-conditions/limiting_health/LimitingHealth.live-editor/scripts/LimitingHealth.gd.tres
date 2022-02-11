@@ -26,7 +26,7 @@ func _ready() -> void:
 
 
 func _run() -> void:
-	_produced_health_values.clear()
+	reset()
 	heal(_health_gained)
 	_produced_health_values.append(health)
 	heal(_health_gained)
@@ -50,4 +50,10 @@ func heal(amount):
 
 func get_produced_health_values() -> Array:
 	return _produced_health_values
+
+
+func reset():
+	health = 20
+	_health_bar.set_health(health)
+	_produced_health_values.clear()
 "

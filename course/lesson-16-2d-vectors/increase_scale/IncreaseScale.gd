@@ -8,9 +8,8 @@ var max_health = 100
 
 
 func _ready():
-	scale = Vector2.ONE
-	max_health = 100
-	level = 1
+	reset()
+
 
 # EXPORT level_scale
 func level_up():
@@ -20,8 +19,14 @@ func level_up():
 # /EXPORT level_scale
 
 func _run():
+	reset()
 	for i in range(2):
 		level_up()
 		_animation_tree.travel("level")
 		yield(_animation_tree, "animation_finished")
 	Events.emit_signal("practice_run_completed")
+
+func reset():
+	scale = Vector2.ONE
+	max_health = 100
+	level = 1

@@ -10,7 +10,7 @@ onready var _label_level := find_node("LevelLabel") as Label
 onready var _animation_tree := find_node("AnimationTree") as AnimationTree
 
 func _run():
-	
+	reset()
 	for i in range(3):
 		level_up()
 		_health_bar.set_max_health(max_health)
@@ -27,3 +27,8 @@ func level_up():
 	if level % 2 == 0:
 		max_health += 5
 # /EXPORT even_level
+
+func reset():
+	level = 1
+	max_health = 100
+	_health_bar.set_max_health(max_health)
