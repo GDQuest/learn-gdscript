@@ -7,6 +7,7 @@ extends Node
 signal has_connected
 signal has_disconnected
 signal cant_connect
+signal pong
 signal connected
 
 var _client := WebSocketClient.new()
@@ -17,23 +18,31 @@ var print_debug_strings := true
 
 var server_url := "ws://localhost:3000"
 var reconnect_delay_seconds := 3
-var timer := Timer.new()
+var _reconnect_timer := Timer.new()
+var ping_delay_seconds := 5
+var _ping_timer := Timer.new()
+var _ping_message: String
+var _pong_was_received := false
 
 
-func _init() -> void:
-	add_child(timer)
-	timer.connect("timeout", self, "_connect_to_server")
+func _ready() -> void:
+	add_child(_reconnect_timer)
+	_reconnect_timer.connect("timeout", self, "_connect_to_server")
+	add_child(_ping_timer)
+	_ping_timer.connect("timeout", self, "_ping")
 
 	if ProjectSettings.has_setting("global/lsp_url"):
 		var url: String = ProjectSettings.get_setting("global/lsp_url")
 		if url != "":
 			server_url = get_hostname_from_url(url)
+	#server_url = "ws://localhost:3000/socket"
 
 	_client.connect("connection_closed", self, "_closed")
 	_client.connect("connection_error", self, "_closed")
+	_client.connect("server_disconnected", self, "_closed")
 	_client.connect("connection_established", self, "_connected")
 	_client.connect("data_received", self, "_on_data")
-	_connect_to_server()
+	_retry_connect(true)
 
 
 # This method is intended to be called with a yield:
@@ -42,7 +51,7 @@ func _init() -> void:
 # ```
 func connect_to_server() -> bool:
 	if not is_connected_to_server:
-		_connect_to_server()
+		_retry_connect(true)
 		yield(self, "has_connected")
 	if is_connected_to_server:
 		emit_signal("connected")
@@ -51,11 +60,7 @@ func connect_to_server() -> bool:
 
 
 func _connect_to_server() -> void:
-	if _is_connecting:
-		_print_debug("request to connect, but already connecting")
-		return
 	_is_connecting = true
-	timer.stop()
 	_print_debug("attempting to connect to", server_url)
 	var err := _client.connect_to_url(server_url)
 	if err != OK:
@@ -69,25 +74,60 @@ func _closed(was_clean := false) -> void:
 	_retry_connect()
 
 
-func _retry_connect() -> void:
-	if timer.is_stopped():
+func _retry_connect(immediately := false) -> void:
+	if _reconnect_timer.is_stopped():
 		is_connected_to_server = false
 		_is_connecting = false
-		push_error("Unable to connect, will try again in %ss seconds" % [reconnect_delay_seconds])
-		timer.start(reconnect_delay_seconds)
+		_pong_was_received = false
+		if immediately:
+			_connect_to_server()
+		else:
+			_print_debug(
+				"Unable to connect, will try again in %ss seconds" % [reconnect_delay_seconds]
+			)
+		_reconnect_timer.start(reconnect_delay_seconds)
 
 
 func _connected(protocol := "") -> void:
 	_print_debug("connected with protocol", protocol)
-	var message = "ping from %s" % [UserProfiles.uuid]
-	_client.get_peer(1).put_packet(message.to_utf8())
+	_ping_message = "ping from %s" % [UserProfiles.uuid]
+	is_connected_to_server = true
+	_pong_was_received = true
+	_reconnect_timer.stop()
+	_ping()
 	emit_signal("has_connected")
+
+
+var _is_probably_offline := false
+
+
+func _ping():
+	_print_debug("Sending: ping")
+	if not _pong_was_received:
+		is_connected_to_server = false
+		_is_probably_offline = true
+		_print_debug("we're probably offline")
+		emit_signal("has_disconnected")
+	elif _is_probably_offline:
+		# this means we were virtually disconnected
+		_is_probably_offline = false
+		is_connected_to_server = true
+		_print_debug("we're back online!")
+		emit_signal("has_connected")
+	if is_connected_to_server:
+		_pong_was_received = false
+		_client.get_peer(1).put_packet(_ping_message.to_utf8())
+		_ping_timer.start(ping_delay_seconds)
 
 
 func _on_data() -> void:
 	# You MUST always use get_peer(1).get_packet to receive data from server, and
 	# not get_packet directly when not using the MultiplayerAPI.
-	_print_debug("Got data from server: ", _client.get_peer(1).get_packet().get_string_from_utf8())
+	var data := _client.get_peer(1).get_packet().get_string_from_utf8()
+	_print_debug("Received:", data)
+	if data == "pong":
+		_pong_was_received = true
+		emit_signal("pong")
 
 
 # Data transfer and signals emission will only happen when calling this function.
@@ -97,7 +137,7 @@ func _process(_delta: float) -> void:
 
 # Poor man's read only property
 func _set_read_only(_bogus_var) -> void:
-	pass
+	push_error("setting a read only property")
 
 
 # Used internally to track socket client state
