@@ -73,7 +73,7 @@ func _ready() -> void:
 	if Engine.editor_hint:
 		return
 
-	_code_editor.connect("action", self, "_on_code_editor_button")
+	_code_editor.connect("action_taken", self, "_on_code_editor_action_taken")
 	_code_editor.connect("text_changed", self, "_on_code_editor_text_changed")
 	_code_editor.connect("console_toggled", self, "_on_console_toggled")
 	_output_console.connect("reference_clicked", self, "_on_code_reference_clicked")
@@ -490,7 +490,7 @@ func _on_code_editor_text_changed(_text: String) -> void:
 	_code_editor_is_dirty = true
 
 
-func _on_code_editor_button(which: String) -> void:
+func _on_code_editor_action_taken(which: String) -> void:
 	match which:
 		_code_editor.ACTIONS.RUN:
 			_validate_and_run_student_code()

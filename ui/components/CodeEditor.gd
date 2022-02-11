@@ -3,7 +3,7 @@ class_name CodeEditor
 extends PanelContainer
 
 signal text_changed(text)
-signal action(action)
+signal action_taken(action)
 signal console_toggled
 
 const ACTIONS := {
@@ -64,16 +64,14 @@ func _ready() -> void:
 	_distraction_free_mode_button.icon = EDITOR_EXPAND_ICON
 	_locked_overlay.hide()
 
-	_restore_button.connect("pressed", self, "_on_restore_pressed")
 	_restore_button.disabled = true
-
+	_restore_button.connect("pressed", self, "_on_restore_button_pressed")
 	_run_button.connect("pressed", self, "_on_run_button_pressed")
-	_pause_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.PAUSE])
-	_solution_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.SOLUTION])
-	_restore_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.RESTORE])
-	_continue_button.connect("pressed", self, "emit_signal", ["action", ACTIONS.CONTINUE])
+	_pause_button.connect("pressed", self, "emit_signal", ["action_taken", ACTIONS.PAUSE])
+	_solution_button.connect("pressed", self, "emit_signal", ["action_taken", ACTIONS.SOLUTION])
+	_continue_button.connect("pressed", self, "emit_signal", ["action_taken", ACTIONS.CONTINUE])
 	_distraction_free_mode_button.connect(
-		"pressed", self, "emit_signal", ["action", ACTIONS.DFMODE]
+		"pressed", self, "emit_signal", ["action_taken", ACTIONS.DFMODE]
 	)
 	_console_button.connect("pressed", self, "emit_signal", ["console_toggled"])
 
@@ -171,12 +169,12 @@ func _on_text_changed() -> void:
 	emit_signal("text_changed", slice_editor.text)
 
 
-func _on_restore_pressed() -> void:
+func _on_restore_button_pressed() -> void:
 	set_text(_initial_text)
 	unlock_editor()
-	emit_signal("action", ACTIONS.RESTORE)
+	emit_signal("action_taken", ACTIONS.RESTORE)
 	_restore_button.disabled = true
 
 
 func _on_run_button_pressed() -> void:
-	emit_signal("action", ACTIONS.RUN)
+	emit_signal("action_taken", ACTIONS.RUN)
