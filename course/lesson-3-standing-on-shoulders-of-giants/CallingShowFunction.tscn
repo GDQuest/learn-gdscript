@@ -4,10 +4,12 @@
 
 [node name="CallingShowFunction" type="TextEdit"]
 anchor_right = 1.0
-rect_min_size = Vector2( 200, 120 )
+rect_min_size = Vector2( 600, 160 )
 size_flags_horizontal = 3
-text = "show() # Makes an entity visible
-hide() # Makes an entity invisible"
+text = "func run():
+	show() # Makes an entity visible
+	hide() # Makes an entity invisible"
+readonly = true
 syntax_highlighting = true
 show_line_numbers = true
 draw_tabs = true
@@ -22,3 +24,4 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+min_size = Vector2( 600, 160 )
