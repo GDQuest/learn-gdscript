@@ -15,21 +15,18 @@ signal turtle_finished
 
 var draw_speed := 400.0
 var turn_speed_degrees := 220.0
-var draw_labels := true
 
 var _points := []
 var _polygons := []
 var _current_offset := Vector2.ZERO
-var _current_polygon: Polygon
 
 # Keeps a list of commands the user registered. This allows us to animate the
 # turtle afterwards.
 var _command_stack := []
 
 var _tween := Tween.new()
-# Used to draw lines one by one
-var _current_line: Line2D
-var _current_line_start: Vector2
+
+onready var _turn_degrees = rotation_degrees
 
 onready var _sprite := $Sprite as Sprite
 onready var _canvas := $Canvas as Node2D
@@ -51,7 +48,7 @@ func move_forward(distance: float) -> void:
 		_points.append(previous_point)
 	else:
 		previous_point = _points[-1]
-	var new_point := previous_point + Vector2.RIGHT.rotated(rotation) * distance
+	var new_point := previous_point + Vector2.RIGHT.rotated(deg2rad(_turn_degrees)) * distance
 	new_point = new_point.snapped(Vector2.ONE)
 	_points.append(new_point)
 
@@ -59,14 +56,13 @@ func move_forward(distance: float) -> void:
 
 
 func turn_right(angle_degrees: float) -> void:
-	rotation_degrees = round(rotation_degrees + angle_degrees)
+	_turn_degrees = round(_turn_degrees + angle_degrees)
 	_command_stack.append({command = "turn", angle = round(angle_degrees)})
 
 
 func turn_left(angle_degrees: float) -> void:
-	rotation_degrees = round(rotation_degrees - angle_degrees)
+	_turn_degrees = round(_turn_degrees - angle_degrees)
 	_command_stack.append({command = "turn", angle = round(-angle_degrees)})
-	print(_command_stack.back())
 
 
 # Completes the current polygon's drawing and virtually jumps the turtle to a
@@ -88,8 +84,9 @@ func reset() -> void:
 	_command_stack.clear()
 	stop_animation()
 
-	rotation_degrees = 0
-	_sprite.rotation_degrees = 0
+	rotation_degrees = 0.0
+	_turn_degrees = 0.0
+	_sprite.rotation_degrees = 0.0
 	_sprite.position = Vector2.ZERO
 	_points.clear()
 	_polygons.clear()
