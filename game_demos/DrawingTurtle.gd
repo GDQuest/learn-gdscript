@@ -86,15 +86,15 @@ func jump(x: float, y: float) -> void:
 # reset the object between runs.
 func reset() -> void:
 	_command_stack.clear()
+	stop_animation()
 
 	rotation_degrees = 0
 	_sprite.rotation_degrees = 0
 	_sprite.position = Vector2.ZERO
 	_points.clear()
 	_polygons.clear()
-	# Remove all drawn lines and labels
 	for child in _canvas.get_children():
-		_canvas.remove_child(child)
+		child.queue_free()
 	_current_offset = Vector2.ZERO
 	_sprite.position = Vector2.ZERO
 
