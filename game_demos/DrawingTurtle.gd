@@ -23,6 +23,9 @@ var _current_offset := Vector2.ZERO
 # Keeps a list of commands the user registered. This allows us to animate the
 # turtle afterwards.
 var _command_stack := []
+# Stores commands until closing a polygon, to insert commands to move the
+# camera.
+var _temp_command_stack = []
 
 var _tween := Tween.new()
 
@@ -52,17 +55,19 @@ func move_forward(distance: float) -> void:
 	new_point = new_point.snapped(Vector2.ONE)
 	_points.append(new_point)
 
-	_command_stack.append({command = "move_to", target = new_point + position + _current_offset})
+	_temp_command_stack.append(
+		{command = "move_to", target = new_point + position + _current_offset}
+	)
 
 
 func turn_right(angle_degrees: float) -> void:
 	_turn_degrees = round(_turn_degrees + angle_degrees)
-	_command_stack.append({command = "turn", angle = round(angle_degrees)})
+	_temp_command_stack.append({command = "turn", angle = round(angle_degrees)})
 
 
 func turn_left(angle_degrees: float) -> void:
 	_turn_degrees = round(_turn_degrees - angle_degrees)
-	_command_stack.append({command = "turn", angle = round(-angle_degrees)})
+	_temp_command_stack.append({command = "turn", angle = round(-angle_degrees)})
 
 
 # Completes the current polygon's drawing and virtually jumps the turtle to a
@@ -88,6 +93,7 @@ func reset() -> void:
 	_turn_degrees = 0.0
 	_sprite.rotation_degrees = 0.0
 	_sprite.position = Vector2.ZERO
+	_camera.position = Vector2.ZERO
 	_points.clear()
 	_polygons.clear()
 	for child in _canvas.get_children():
@@ -110,8 +116,7 @@ func stop_animation() -> void:
 # Queues all tweens required to animate the turtle drawing all the shapes and
 # starts the tween animation.
 func play_draw_animation() -> void:
-	if not _points.empty():
-		_close_polygon()
+	_close_polygon()
 
 	# We queue all tweens at once, based on commands: moving the turtle, turning
 	# it, drawing lines...
@@ -121,6 +126,12 @@ func play_draw_animation() -> void:
 	for command in _command_stack:
 		var duration := 1.0
 		match command.command:
+			"move_camera":
+				# The callback never gets called if it has a delay of 0 seconds.
+				if is_equal_approx(tween_start_time, 0.0):
+					_move_camera(command.target)
+				else:
+					_tween.interpolate_callback(self, tween_start_time, "_move_camera", command.target)
 			"move_to":
 				duration = turtle_position.distance_to(command.target) / draw_speed
 				_tween.interpolate_property(
@@ -134,7 +145,10 @@ func play_draw_animation() -> void:
 					tween_start_time
 				)
 				var line := DrawingLine2D.new(
-					turtle_position - position, command.target - position, duration, tween_start_time
+					turtle_position - position,
+					command.target - position,
+					duration,
+					tween_start_time
 				)
 				_canvas.add_child(line)
 				turtle_position = command.target
@@ -194,10 +208,21 @@ func _close_polygon() -> void:
 	# position property. It works differently from jump() which offsets the
 	# turtle from its position.
 	polygon.position = position + _current_offset
-
 	polygon.points = PoolVector2Array(_points)
 	_polygons.append(polygon)
 	_points.clear()
+
+	# We can't know exactly when and where to move the camera until completing a
+	# shape, as we want to center the camera on the shape.
+	_command_stack.append({command = "move_camera", target = polygon.get_center()})
+	for command in _temp_command_stack:
+		_command_stack.append(command)
+	_temp_command_stack.clear()
+
+
+func _move_camera(_target_position: Vector2) -> void:
+	_camera.position = _target_position
+	print(_camera.position)
 
 
 # Polygon that can animate drawing its line.
