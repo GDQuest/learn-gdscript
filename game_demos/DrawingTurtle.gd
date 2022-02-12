@@ -14,7 +14,7 @@ extends Node2D
 signal turtle_finished
 
 var draw_speed := 400.0
-var turn_speed_degrees := 220.0
+var turn_speed_degrees := 260.0
 
 var _points := []
 var _polygons := []
@@ -169,20 +169,18 @@ func play_draw_animation() -> void:
 				turtle_rotation_degrees = target_angle
 				tween_start_time += duration
 			"jump":
-				#TODO: make the turtle jump, using interpolate method?
-				duration = command.offset.length() / draw_speed
 				_tween.interpolate_property(
 					_sprite,
 					"position",
 					turtle_position,
 					turtle_position + command.offset,
-					duration,
-					Tween.TRANS_LINEAR,
-					Tween.EASE_IN,
+					0.4,
+					Tween.TRANS_QUINT,
+					Tween.EASE_IN_OUT,
 					tween_start_time
 				)
 				turtle_position += command.offset
-				tween_start_time += duration
+				tween_start_time += 0.4
 	_tween.start()
 	for line in _canvas.get_children():
 		line.start()
