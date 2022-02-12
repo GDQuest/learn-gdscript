@@ -22,6 +22,12 @@ onready var _settings_popup := $SettingsPopup as SettingsPopup
 onready var _report_form_popup := $ReportFormPopup as ReportFormPopup
 
 
+func _init() -> void:
+	Engine.target_fps = 60
+	OS.low_processor_usage_mode = true
+	OS.low_processor_usage_mode_sleep_usec = 20000
+
+
 func _ready() -> void:
 	_settings_popup.hide()
 	_report_form_popup.hide()
