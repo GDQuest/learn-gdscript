@@ -3,7 +3,6 @@ extends PracticeTester
 var expected_corners := [
 	[Vector2(0, 0), Vector2(240, 0), Vector2(410, 170)],
 	[Vector2(0, 0), Vector2(120, 0), Vector2(120, 120)],
-	[Vector2(0, 0), Vector2(35, 85), Vector2(120, 0)],
 ]
 
 # We sort vertices for accurate comparison

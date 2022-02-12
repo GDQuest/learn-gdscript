@@ -1,19 +1,11 @@
 extends DrawingTurtle
 
-var _length := 240
-var _offset := 80
-
 func _run():
 	reset()
-	draw_corner(_length)
-	jump(-_length, -_length + _offset)
-	_length /= 2
-	rotation_degrees = 0
-	draw_corner(_length)
-	jump(-_length, -_length + _offset)
-	_length /= 2
-	rotation_degrees = 0
-	draw_corner(_length)
+	draw_corner(240)
+	turn_left(90)
+	jump(-240, -140)
+	draw_corner(120)
 	play_draw_animation()
 
 
