@@ -116,14 +116,11 @@ func play_draw_animation() -> void:
 	if not _points.empty():
 		_close_polygon()
 
-	position = Vector2.ZERO
-
 	# We queue all tweens at once, based on commands: moving the turtle, turning
 	# it, drawing lines...
 	var tween_start_time := 0.0
-	var turtle_position := Vector2.ZERO
-	print(turtle_position)
-	var turtle_rotation_degrees := _sprite.rotation_degrees
+	var turtle_position := position + _sprite.position
+	var turtle_rotation_degrees := rotation_degrees
 	for command in _command_stack:
 		var duration := 1.0
 		match command.command:
@@ -280,6 +277,5 @@ class DrawingLine2D:
 
 	func _spawn_label() -> void:
 		var label := LabelScene.instance() as PanelContainer
-		# label_text.text = String(_current_point_index)
 		label.rect_position = points[0] - label.rect_size / 2
 		add_child(label)

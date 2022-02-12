@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://game_demos/panel_turtle_label.tres" type="StyleBox" id=1]
-[ext_resource path="res://game_demos/font_turtle_label.tres" type="DynamicFont" id=2]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -40,6 +39,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "pop"
+length = 0.4
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:rect_scale:x")
 tracks/0/interp = 1
@@ -47,8 +47,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 1e-05, -0.25, 0, 0.5, 4.32375, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.3 )
+"points": PoolRealArray( 1e-05, -0.25, 0, 0.19528, 1.99369, 0.99637, -0.0634901, 0.0207652, 0.2, 0.0492506 ),
+"times": PoolRealArray( 0, 0.398256 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath(".:rect_scale:y")
@@ -57,34 +57,22 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 1e-05, -0.25, 0, 0.3, 6.73298, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.3 )
+"points": PoolRealArray( 1e-05, -0.25, 0, 0.097159, 2.83044, 0.993921, -0.161476, 0.170011, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.396332 )
 }
 
 [node name="DrawingTurtleLabel" type="PanelContainer"]
-margin_left = -20.0
-margin_top = -23.0
-margin_right = 20.0
-margin_bottom = 22.0
-rect_pivot_offset = Vector2( 20, 23 )
+margin_left = -19.0
+margin_top = -19.0
+margin_right = 19.0
+margin_bottom = 19.0
+rect_pivot_offset = Vector2( 19, 19 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Label" type="Label" parent="."]
-margin_left = 16.0
-margin_top = 10.0
-margin_right = 24.0
-margin_bottom = 33.0
-size_flags_horizontal = 5
-size_flags_vertical = 5
-custom_fonts/font = ExtResource( 2 )
-text = "1"
-align = 1
-valign = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "pop"
