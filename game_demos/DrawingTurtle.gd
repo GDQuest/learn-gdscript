@@ -206,65 +206,12 @@ func _close_polygon() -> void:
 	_points.clear()
 
 
+
 # Polygon that can animate drawing its line.
 class Polygon:
 	extends Node2D
 
-	const LabelScene := preload("DrawingTurtleLabel.tscn")
 	var points := PoolVector2Array() setget , get_points
-	var line_2d := Line2D.new()
-	var _tween := Tween.new()
-	var _current_points := PoolVector2Array()
-	var _current_point_index := 0
-	var _total_distance := 0.0
-
-	signal animation_finished
-
-	func _init() -> void:
-		add_child(_tween)
-		add_child(line_2d)
-		_tween.connect("tween_all_completed", self, "next")
-
-	func start_draw_animation() -> void:
-		var previous_point := points[0] as Vector2
-		for index in range(1, points.size()):
-			var p := points[index] as Vector2
-			var distance = previous_point.distance_to(p)
-			previous_point = p
-			_total_distance += distance
-		_tween.stop_all()
-		next()
-
-	func next() -> void:
-		if points.size() - _current_point_index < 2:
-			emit_signal("animation_finished")
-			return
-
-		var starting_point: Vector2 = points[_current_point_index]
-		var destination: Vector2 = points[_current_point_index + 1]
-		_current_point_index += 1
-
-		var distance := starting_point.distance_to(destination)
-
-		#draw label
-		var label := LabelScene.instance() as PanelContainer
-		var label_text := label.get_node("Label") as Label
-		label_text.text = String(_current_point_index)
-		label.rect_position = starting_point - label.rect_size / 2
-		add_child(label)
-
-		_current_points.append(starting_point)
-		line_2d.points = _current_points
-		_tween.interpolate_method(self, "_animate_point_position", starting_point, destination, 1.0)
-		_tween.start()
-
-	func stop_animation() -> void:
-		_tween.stop_all()
-
-	func _animate_point_position(point: Vector2) -> void:
-		var new_points := _current_points
-		new_points.push_back(point)
-		line_2d.points = new_points
 
 	# Returns the local bounds of the polygon. That is to say, it only takes the
 	# point into account in local space, but not the polygon's `position`.
@@ -297,6 +244,7 @@ class Polygon:
 class DrawingLine2D:
 	extends Line2D
 
+	const LabelScene := preload("DrawingTurtleLabel.tscn")
 	const LINE_THICKNESS := 4.0
 	const DEFAULT_COLOR := Color.white
 
@@ -309,6 +257,7 @@ class DrawingLine2D:
 		default_color = DEFAULT_COLOR
 		points = PoolVector2Array([start, start])
 
+		_tween.interpolate_callback(self, start_time, "_spawn_label")
 		_tween.interpolate_method(
 			self,
 			"_animate_drawing",
@@ -328,3 +277,9 @@ class DrawingLine2D:
 
 	func _animate_drawing(point: Vector2) -> void:
 		points[-1] = point
+
+	func _spawn_label() -> void:
+		var label := LabelScene.instance() as PanelContainer
+		# label_text.text = String(_current_point_index)
+		label.rect_position = points[0] - label.rect_size / 2
+		add_child(label)
