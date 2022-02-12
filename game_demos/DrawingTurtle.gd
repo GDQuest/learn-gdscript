@@ -119,7 +119,7 @@ func play_draw_animation() -> void:
 	# We queue all tweens at once, based on commands: moving the turtle, turning
 	# it, drawing lines...
 	var tween_start_time := 0.0
-	var turtle_position := position + _sprite.position
+	var turtle_position := position
 	var turtle_rotation_degrees := rotation_degrees
 	for command in _command_stack:
 		var duration := 1.0
@@ -129,15 +129,15 @@ func play_draw_animation() -> void:
 				_tween.interpolate_property(
 					_sprite,
 					"position",
-					turtle_position,
-					command.target,
+					turtle_position - position,
+					command.target - position,
 					duration,
 					Tween.TRANS_LINEAR,
 					Tween.EASE_IN,
 					tween_start_time
 				)
 				var line := DrawingLine2D.new(
-					turtle_position, command.target, duration, tween_start_time
+					turtle_position - position, command.target - position, duration, tween_start_time
 				)
 				_canvas.add_child(line)
 				turtle_position = command.target
@@ -201,7 +201,6 @@ func _close_polygon() -> void:
 	polygon.points = PoolVector2Array(_points)
 	_polygons.append(polygon)
 	_points.clear()
-
 
 
 # Polygon that can animate drawing its line.
