@@ -31,7 +31,9 @@ var _tween := Tween.new()
 
 onready var _turn_degrees = rotation_degrees
 
-onready var _sprite := $Sprite as Sprite
+onready var _pivot := $Pivot as Node2D
+onready var _sprite := $Pivot/Sprite as Sprite
+onready var _shadow := $Pivot/Shadow as Sprite
 onready var _canvas := $Canvas as Node2D
 onready var _camera := $Camera2D as Camera2D
 
@@ -91,15 +93,15 @@ func reset() -> void:
 
 	rotation_degrees = 0.0
 	_turn_degrees = 0.0
-	_sprite.rotation_degrees = 0.0
-	_sprite.position = Vector2.ZERO
+	_pivot.rotation_degrees = 0.0
+	_pivot.position = Vector2.ZERO
 	_camera.position = Vector2.ZERO
 	_points.clear()
 	_polygons.clear()
 	for child in _canvas.get_children():
 		child.queue_free()
 	_current_offset = Vector2.ZERO
-	_sprite.position = Vector2.ZERO
+	_pivot.position = Vector2.ZERO
 
 
 # Returns a copy of the polygons the turtle will draw.
@@ -131,11 +133,13 @@ func play_draw_animation() -> void:
 				if is_equal_approx(tween_start_time, 0.0):
 					_move_camera(command.target)
 				else:
-					_tween.interpolate_callback(self, tween_start_time, "_move_camera", command.target)
+					_tween.interpolate_callback(
+						self, tween_start_time, "_move_camera", command.target
+					)
 			"move_to":
 				duration = turtle_position.distance_to(command.target) / draw_speed
 				_tween.interpolate_property(
-					_sprite,
+					_pivot,
 					"position",
 					turtle_position - position,
 					command.target - position,
@@ -157,7 +161,7 @@ func play_draw_animation() -> void:
 				duration = abs(command.angle) / turn_speed_degrees
 				var target_angle: float = round(turtle_rotation_degrees + command.angle)
 				_tween.interpolate_property(
-					_sprite,
+					_pivot,
 					"rotation_degrees",
 					turtle_rotation_degrees,
 					target_angle,
@@ -169,21 +173,41 @@ func play_draw_animation() -> void:
 				turtle_rotation_degrees = target_angle
 				tween_start_time += duration
 			"jump":
+				duration = 0.5
 				_tween.interpolate_property(
-					_sprite,
+					_pivot,
 					"position",
 					turtle_position,
 					turtle_position + command.offset,
-					0.4,
-					Tween.TRANS_QUINT,
-					Tween.EASE_IN_OUT,
+					duration,
+					Tween.TRANS_LINEAR,
+					Tween.EASE_IN,
+					tween_start_time
+				)
+				_tween.interpolate_method(
+					self,
+					"_animate_jump",
+					0.0,
+					1.0,
+					duration,
+					Tween.TRANS_LINEAR,
+					Tween.EASE_IN,
 					tween_start_time
 				)
 				turtle_position += command.offset
-				tween_start_time += 0.4
+				tween_start_time += duration
 	_tween.start()
 	for line in _canvas.get_children():
 		line.start()
+
+
+# Animates the turtle's height and shadow scale when jumping. Tween the progress
+# value from 0 to 1.
+func _animate_jump(progress: float) -> void:
+	var parabola := -pow(2.0 * progress - 1.0, 2.0) + 1.0
+	_sprite.position.y = -parabola * 100.0
+	var shadow_scale := (1.0 - parabola + 1.0) / 2.0
+	_shadow.scale = shadow_scale * Vector2.ONE
 
 
 # Returns the total bounding rectangle enclosing all the turtle's drawn
@@ -220,7 +244,6 @@ func _close_polygon() -> void:
 
 func _move_camera(_target_position: Vector2) -> void:
 	_camera.position = _target_position
-	print(_camera.position)
 
 
 # Polygon that can animate drawing its line.
