@@ -32,8 +32,8 @@ func set_is_fullscreen(value: bool) -> void:
 
 
 func get_is_fullscreen() -> bool:
-	#if not OS.has_feature('JavaScript'): 
-	#	return is_fullscreen
+	if not OS.has_feature('JavaScript'):
+		return is_fullscreen
 	var GDQUEST := JavaScript.get_interface("GDQUEST")
 	# warning-ignore:unsafe_property_access
 	return GDQUEST.fullScreen.isIt()
