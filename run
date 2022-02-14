@@ -3,6 +3,8 @@
 
 APP_NAME="learn_to_code"
 
+######################################## HELP
+
 help(){
   echo "Builder Script for Learn To Code With Godot"
   echo "please use one of the following commands:"
@@ -14,10 +16,13 @@ help(){
 }
 
 
+######################################## CLEAN
+
 clean_web(){
   rm -rf build/web
   echo "✓ Removed web files"
 }
+
 
 clean(){
   rm -rf build
@@ -26,6 +31,7 @@ clean(){
   echo "✓ Removed all builds"
 }
 
+######################################## WEB DEV HELPERS
 
 web_python_server(){
   python -m http.server 8000 --directory build/web
@@ -72,6 +78,8 @@ web(){
   web_watch
 }
 
+######################################## EXPORTS
+
 export_any(){
   export_name=$1
   output=$2
@@ -81,19 +89,23 @@ export_any(){
   echo "✓ Exported \`$export_name\` build to \`$dir\`"
 }
 
+
 export_web(){
   export_any "HTML5" "build/web/index.html"
   cp -r html_export/static/* "build/web"
   echo "✓ Copied web files to $dir"
 }
 
+
 export_osx(){
   export_any "Mac OSX" "build/osx/$APP_NAME.zip"
 }
 
+
 export_windows(){
   export_any "Windows Desktop" "build/windows/$APP_NAME.exe"
 }
+
 
 export_linux(){
   export_any "Linux/X11" "build/linux/$APP_NAME.x86_64"
@@ -106,6 +118,57 @@ export(){
   export_osx
   export_linux
 }
+
+######################################## PUSHING TO ITCH
+
+push(){
+  tag=$1
+  if [ -z "$tag" ]; then
+    echo "You need to specify a build to push, or \`all\`"
+    echo "available builds:"
+    for d in build/*/ ; do
+      build_name=$(basename $d)
+      echo "  - $build_name"
+    done
+    echo "  - all"
+    exit 1
+  fi
+  dir="build/$tag"
+  error=0
+  if [ ! -d "$dir" ] && [ "$tag" != "all" ]; then
+    echo "\`$dir\` does not seem to exist. Did you type the name correctly?"
+    error=1
+  fi
+  if [ -z "$BUTLER_API_KEY" ]; then
+    echo "\$BUTLER_API_KEY is a mandatory variable to push to itch"
+    error=1
+  fi
+  if [ -z "$ITCHIO_USERNAME" ]; then
+    echo "\$ITCHIO_USERNAME is a mandatory variable to push to itch"
+    error=1
+  fi
+  if [ -z "$ITCHIO_GAME" ]; then
+    echo "\$ITCHIO_GAME is a mandatory variable to push to itch"
+    error=1
+  fi
+  if ! command -v butler &> /dev/null; then
+    echo "\`butler\` is not installed or not available on \$PATH"
+    error=1
+  fi
+  if [ "$error" -eq "1" ]; then
+    exit 1
+  fi
+  if [ "$tag" == "all" ]; then
+    for d in build/*/ ; do
+      build_name=$(basename $d)
+      butler push "$d" "$ITCHIO_USERNAME/$ITCHIO_GAME":"$build_name"
+    done
+  else
+    butler push "$dir" "$ITCHIO_USERNAME/$ITCHIO_GAME":"$tag"
+  fi
+}
+
+######################################## BOOTSTRAP
 
 funcs=(`declare -F | awk '{print $NF}' | sort | egrep -v "^_"`)
 command=${1/:/_}
