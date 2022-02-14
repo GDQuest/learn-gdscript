@@ -13,7 +13,7 @@ env:
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
   ITCHIO_USERNAME: ${{ secrets.ITCHIO_USERNAME }}
   ITCHIO_GAME: ${{ secrets.ITCHIO_GAME }}
-  git_branch: ${{ GITHUB_REF_NAME }}
+  git_branch: ${{ env.GITHUB_REF_NAME }}
 
 jobs:
 
