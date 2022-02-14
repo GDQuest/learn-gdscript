@@ -261,12 +261,15 @@ prepare_ci_copytemplates(){
     echo "You should not run this on your local computer"
     exit 0
   fi
-  if [ -z "$GODOT_VERSION" ]; then
+  if [ -z "$GODOT_VERSION" ] || [ "$GODOT_VERSION" == "" ]; then
     echo "\$GODOT_VERSION environment variable is not set"
     exit 1
   fi
+  echo "Will use templates for ${GODOT_VERSION}"
   mkdir -v -p ~/.local/share/godot/templates
+  echo "✓ created local template directory"
   mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+  echo "✓ copied templates"
 }
 
 prepare_ci_software(){
@@ -277,6 +280,7 @@ prepare_ci_software(){
   fi
   apt-get update
   apt-get install -y --no-install-recommends sed
+  echo "✓ installed software"
 }
 
 prepare_ci(){
@@ -287,6 +291,7 @@ prepare_ci(){
   fi
   prepare_ci_copytemplates
   prepare_ci_software
+  echo "✓ CI prepared"
 }
 
 ######################################## BOOTSTRAP
