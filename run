@@ -16,12 +16,14 @@ help(){
 
 clean_web(){
   rm -rf build/web
+  echo "✓ Removed web files"
 }
 
 clean(){
   rm -rf build
   mkdir -p build
   touch build/.gdignore
+  echo "✓ Removed all builds"
 }
 
 
@@ -55,7 +57,7 @@ web_watch(){
       else
         echo "something happened on path $base_dir $FILE"
         if (($now - $last_time_compiled >= $throttle_compile)); then
-          godot -v --export "HTML5" build/web/index.html
+          export_any "HTML5" "build/web/index.html"
         fi 
         last_time_compiled=$(date +%s)
       fi

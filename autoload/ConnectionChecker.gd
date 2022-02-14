@@ -14,7 +14,7 @@ var _client := WebSocketClient.new()
 var _is_connecting := false
 
 var is_connected_to_server := false setget _set_read_only
-var print_debug_strings := true
+var print_debug_strings := false
 
 var server_url := "ws://localhost:3000"
 var reconnect_delay_seconds := 3
