@@ -55,7 +55,7 @@ web_watch(){
         fi
         last_time_copied=$(date +%s)
       else
-        echo "something happened on path $base_dir $FILE"
+        echo "Changes detected in $FILE, will recompile"
         if (($now - $last_time_compiled >= $throttle_compile)); then
           export_any "HTML5" "build/web/index.html"
         fi 
