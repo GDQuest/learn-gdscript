@@ -11,7 +11,6 @@ help(){
     echo "  - ${command/_/:}"
   done
   echo ""
-  exit 0
 }
 
 
@@ -37,7 +36,8 @@ web_watch(){
   last_time_copied=0
   throttle_copy=1
   dir=${1:-.}
-  echo "will watch $dir"
+  full_path=$(readlink -f $dir)
+  echo "will watch $full_path"
   inotifywait --monitor --recursive --quiet --event modify,move,create,delete --format '%w%f' --includei "\.(js|css|html|gd)" "$dir" | while read FILE
   do
     changed_dir=$(dirname "$FILE")
