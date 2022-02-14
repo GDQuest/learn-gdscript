@@ -133,6 +133,8 @@ export_web(){
     echo "Exports the Web build and copies over static files"
     exit 0
   fi
+  url=$1
+  prepare_htmltemplate $url
   export_any "HTML5" "build/web/index.html"
   cp -r html_export/static/* "build/web"
   echo "✓ Copied web files to $dir"
@@ -294,7 +296,61 @@ prepare_ci(){
   echo "✓ CI prepared"
 }
 
+_prepare_build_vars(){
+  url=${1:-"https://gdquest.github.io/learn-gdscript"}
+  build_date=$(date '+%Y, %m, %d, %H, %M, %S')
+  build_date_iso=$(date "+%Y/%m/%d %H:%M:%S")
+  build_date_unix=$(date '+%s')
+  git_branch=$(git branch --show-current)
+  git_commit=$(git rev-parse HEAD)
+  version=$(git describe --tags --abbrev=0 --match "*.*.*")
+  watermark="$build_date_iso | $git_branch:$version:$git_commit"
+}
+
+prepare_versionfile(){
+  if [ "$1" == "help" ]; then
+    echo "Creates and fills the version file"
+    exit 0
+  fi
+  _prepare_build_vars $1
+  FILE="utils/version.gd"
+  echo "# AUTO GENERATED FILE, YOUR CHANGES WILL NOT REMAIN" > $FILE
+  echo "class_name AppVersion" >> $FILE
+  echo "" >> $FILE
+  echo "const version := \"$version\";" >> $FILE
+  echo "const git_commit := \"$git_commit\";" >> $FILE
+  echo "const git_branch := \"$git_branch\";" >> $FILE
+  echo "const build_date := [$build_date];" >> $FILE
+  echo "const build_date_unix := $build_date_unix;" >> $FILE
+  echo "const build_date_iso := \"$build_date_iso;\"" >> $FILE
+
+  echo "✓ created version file"
+}
+
+
+prepare_htmltemplate(){
+  if [ "$1" == "help" ]; then
+    echo "Creates the HTML template. This is a mandatory step"
+    echo "before exporting to web"
+    exit 0
+  fi
+  _prepare_build_vars $1
+  sed "s@>branch and commit hash@>${watermark}<@" html_export/index_template.html > html_export/index.html
+  sed -i "s@GDQUEST_ENVIRONMENT = {}@GDQUEST_ENVIRONMENT = {\n \
+     build_date: \"$build_date\",\n \
+     build_date_iso: \"$build_date_iso\",\n \
+     build_date_unix: $build_date_unix,\n \
+     git_branch: \"$git_branch\",\n \
+     git_commit: \"$git_commit\",\n \
+     version: \"$version\",\n \
+     url: \"$url\",\n \
+   }@" html_export/index.html
+  sed -i "s@%url%@$url@" html_export/index.html
+  echo "✓ generated html template"
+}
+
 ######################################## BOOTSTRAP
+
 
 funcs=(`declare -F | awk '{print $NF}' | sort | egrep -v "^_"`)
 command=${1//:/_}

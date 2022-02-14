@@ -20,13 +20,12 @@ interface GDQuestLib {
 }
 
 declare const GDQUEST_ENVIRONMENT: {
-  github_repository: string;
-  github_workflow: string;
-  github_ref_name: string;
-  github_sha: string;
-  override_file: string;
-  sub_build_path: string;
-  watermark: string;
+  build_date: string;
+  build_date_iso: string;
+  build_date_unix: number;
+  git_branch: string;
+  git_commit: string;
+  version: string;
 };
 
 interface Signal {
