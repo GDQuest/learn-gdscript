@@ -1,17 +1,19 @@
-name: "[ ExportGodot ]"
+name: "Export Godot"
 
 on:
   workflow_call:
   workflow_dispatch:
   push:
-    branches: [release]
+    branches: 
+      - release
+      - staging
 
 env:
   GODOT_VERSION: 3.4.1
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
   ITCHIO_USERNAME: ${{ secrets.ITCHIO_USERNAME }}
   ITCHIO_GAME: ${{ secrets.ITCHIO_GAME }}
-  git_branch: ${{ GITHUB_BASE_REF }}
+  git_branch: ${{ GITHUB_REF_NAME }}
 
 jobs:
 
