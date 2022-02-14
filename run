@@ -6,12 +6,17 @@ APP_NAME="learn_to_code"
 ######################################## HELP
 
 help(){
+  if [ "$1" == "help" ]; then
+    echo "Shows a short and helpful help text"
+    exit 0
+  fi
   echo "Builder Script for Learn To Code With Godot"
   echo "please use one of the following commands:"
   for i in ${!funcs[@]}; do
     command=${funcs[i]}
     echo "  - ${command/_/:}"
   done
+  echo "you can get more info about commands by writing ./run <command> help"
   echo ""
 }
 
@@ -19,12 +24,20 @@ help(){
 ######################################## CLEAN
 
 clean_web(){
+  if [ "$1" == "help" ]; then
+    echo "Removes web build"
+    exit 0
+  fi
   rm -rf build/web
   echo "✓ Removed web files"
 }
 
 
 clean(){
+  if [ "$1" == "help" ]; then
+    echo "Removes all build directories"
+    exit 0
+  fi
   rm -rf build
   mkdir -p build
   touch build/.gdignore
@@ -34,11 +47,20 @@ clean(){
 ######################################## WEB DEV HELPERS
 
 web_python_server(){
+  if [ "$1" == "help" ]; then
+    echo "Runs a python webserver in build/web"
+    exit 0
+  fi
   python -m http.server 8000 --directory build/web
 }
 
 
 web_watch(){
+  if [ "$1" == "help" ]; then
+    echo "Watches a directory for changes. Recompiles Godot when a \.gd file changes;"
+    echo "Overwrites JS and CSS files in the static directory when they change"
+    exit 0
+  fi
   last_time_compiled=0
   throttle_compile=10
   last_time_copied=0
@@ -72,6 +94,12 @@ web_watch(){
 }
 
 web(){
+  if [ "$1" == "help" ]; then
+    echo "Exports the web build, starts a python webserver, and watches"
+    echo "the directory for changes. Require Python 3 and inotifywait to"
+    echo "be in your \$PATH"
+    exit 0
+  fi
   clean_web
   export_web
   web_python_server &
@@ -81,6 +109,16 @@ web(){
 ######################################## EXPORTS
 
 export_any(){
+  if [ "$1" == "help" ]; then
+    echo "Exports a Godot build"
+    echo "Usage:"
+    echo "./run export:any <name> <output_path>"
+    echo ""
+    echo "for example: ./run export:any \"HTML5\" \"build/web/index.html\""
+    echo ""
+    echo "<name> needs to be a valid export specified in \`export_presets.cfg\`"
+    exit 0
+  fi
   export_name=$1
   output=$2
   dir=$(dirname "$output")
@@ -91,6 +129,10 @@ export_any(){
 
 
 export_web(){
+  if [ "$1" == "help" ]; then
+    echo "Exports the Web build and copies over static files"
+    exit 0
+  fi
   export_any "HTML5" "build/web/index.html"
   cp -r html_export/static/* "build/web"
   echo "✓ Copied web files to $dir"
@@ -98,21 +140,37 @@ export_web(){
 
 
 export_osx(){
+  if [ "$1" == "help" ]; then
+    echo "Exports the OSX build"
+    exit 0
+  fi
   export_any "Mac OSX" "build/osx/$APP_NAME.zip"
 }
 
 
 export_windows(){
+  if [ "$1" == "help" ]; then
+    echo "Exports the Windows build"
+    exit 0
+  fi
   export_any "Windows Desktop" "build/windows/$APP_NAME.exe"
 }
 
 
 export_linux(){
+  if [ "$1" == "help" ]; then
+    echo "Exports the Linux build"
+    exit 0
+  fi
   export_any "Linux/X11" "build/linux/$APP_NAME.x86_64"
 }
 
 
 export(){
+  if [ "$1" == "help" ]; then
+    echo "exports all builds"
+    exit 0
+  fi
   export_web
   export_windows
   export_osx
@@ -123,6 +181,17 @@ export(){
 
 push(){
   tag=$1
+  if [ "$1" == "help" ]; then
+    echo "Usage:"
+    echo "push <build> [...<tags>]"
+    echo "you can use \`all\` instead of a build name"
+    echo "the build needs to exist in the build/ directory"
+    echo ""
+    echo "example:"
+    echo "run push linux staging"
+    echo "run push all"
+    exit 0
+  fi
   if [ -z "$tag" ]; then
     echo "You need to specify a build to push, or \`all\`"
     echo "available builds:"
@@ -159,12 +228,28 @@ push(){
     exit 1
   fi
   if [ "$tag" == "all" ]; then
+    shift
+    old="$IFS"
+    IFS='-'
+    all_tags="$*"
+    IFS=$old
     for d in build/*/ ; do
       build_name=$(basename $d)
-      butler push "$d" "$ITCHIO_USERNAME/$ITCHIO_GAME":"$build_name"
+      if [ "$all_tags" != "" ]; then
+        tag=$(echo "$build_name" "$all_tags" | sed "s/ /-/g")
+      else
+        tag="$build_name"
+      fi
+      echo "butler push $d $ITCHIO_USERNAME/$ITCHIO_GAME:$tag"
+      butler push "$d" "$ITCHIO_USERNAME/$ITCHIO_GAME":"$tag"
     done
   else
-    butler push "$dir" "$ITCHIO_USERNAME/$ITCHIO_GAME":"$tag"
+    old="$IFS"
+    IFS='-'
+    all_tags="$*"
+    IFS=$old
+    echo "butler push $dir $ITCHIO_USERNAME/$ITCHIO_GAME:$all_tags"
+    butler push "$dir" "$ITCHIO_USERNAME/$ITCHIO_GAME":"$all_tags"
   fi
 }
 
