@@ -2,6 +2,9 @@ name: "[ ExportGodot ]"
 
 on:
   workflow_call:
+  workflow_dispatch:
+  push:
+    branches: [release]
 
 env:
   GODOT_VERSION: 3.4.1
