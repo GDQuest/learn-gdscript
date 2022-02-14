@@ -14,7 +14,7 @@ help(){
   echo "please use one of the following commands:"
   for i in ${!funcs[@]}; do
     command=${funcs[i]}
-    echo "  - ${command/_/:}"
+    echo "  - ${command//_/:}"
   done
   echo "you can get more info about commands by writing ./run <command> help"
   echo ""
@@ -253,10 +253,46 @@ push(){
   fi
 }
 
+######################################## CI/CD
+
+prepare_ci_copytemplates(){
+  if [ "$1" == "help" ]; then
+    echo "This prepares the CI by copying the template from the docker"
+    echo "You should not run this on your local computer"
+    exit 0
+  fi
+  if [ -z "$GODOT_VERSION" ]; then
+    echo "\$GODOT_VERSION environment variable is not set"
+    exit 1
+  fi
+  mkdir -v -p ~/.local/share/godot/templates
+  mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+}
+
+prepare_ci_software(){
+  if [ "$1" == "help" ]; then
+    echo "This prepares the CI by installing the necessary software"
+    echo "You should not run this on your local computer"
+    exit 0
+  fi
+  apt-get update
+  apt-get install -y --no-install-recommends sed
+}
+
+prepare_ci(){
+  if [ "$1" == "help" ]; then
+    echo "This prepares the CI"
+    echo "You should not run this on your local computer"
+    exit 0
+  fi
+  prepare_ci_copytemplates
+  prepare_ci_software
+}
+
 ######################################## BOOTSTRAP
 
 funcs=(`declare -F | awk '{print $NF}' | sort | egrep -v "^_"`)
-command=${1/:/_}
+command=${1//:/_}
 
 if [[ " ${funcs[*]} " =~ " ${command} " ]]; then
   shift

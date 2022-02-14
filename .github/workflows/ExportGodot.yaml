@@ -1,0 +1,28 @@
+name: "[ ExportGodot ]"
+
+on:
+  workflow_call:
+
+env:
+  GODOT_VERSION: 3.4.1
+
+jobs:
+  export-linux:
+    name: Linux Export
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:3.3.4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Setup
+        run: ./run prepare:ci
+      - name: Build
+        run: ./run export:linux
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: linux
+          path: build/linux
