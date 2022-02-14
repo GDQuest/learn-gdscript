@@ -8,25 +8,24 @@ on:
 
 env:
   GODOT_VERSION: 3.4.1
+  BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+  ITCHIO_USERNAME: ${{ secrets.ITCHIO_USERNAME }}
+  ITCHIO_GAME: ${{ secrets.ITCHIO_GAME }}
 
 jobs:
 
   export-linux:
     name: Linux Export
     runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:3.4.1
+    container: barichello/godot-ci:3.4.1
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           lfs: true
-      - name: Setup
-        run: ./run prepare:ci
-      - name: Build
-        run: ./run export:linux
-      - name: Itch
-        run: ./run push linux
+      - run: ./run prepare:ci
+      - run: ./run export:linux
+      - run: ./run push linux
       - name: Artifact
         uses: actions/upload-artifact@v1
         with:
@@ -44,19 +43,15 @@ jobs:
   export-win:
     name: Windows Export
     runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:3.4.1
+    container: barichello/godot-ci:3.4.1
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           lfs: true
-      - name: Setup
-        run: ./run prepare:ci
-      - name: Build
-        run: ./run export:windows
-      - name: Itch
-        run: ./run push linux
+      - run: ./run prepare:ci
+      - run: ./run export:windows
+      - run: ./run push linux
       - name: Artifact
         uses: actions/upload-artifact@v1
         with:
@@ -70,3 +65,63 @@ jobs:
           tag: windows
           file_glob: true
           overwrite: true
+
+  export-osx:
+    name: OSX Export
+    runs-on: ubuntu-latest
+    container: barichello/godot-ci:3.4.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - run: ./run prepare:ci
+      - run: ./run export:osx
+      - run: ./run push osx
+      - name: Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: osx
+          path: build/osx
+      - name: Releases
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/osx/*
+          tag: osx
+          file_glob: true
+          overwrite: true
+  
+
+  export-web:
+    name: Web Export
+    runs-on: ubuntu-latest
+    container: barichello/godot-ci:3.4.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - run: ./run prepare:ci
+      - run: ./run export:web
+      - run: ./run push web
+      - name: Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: web
+          path: build/web
+      - name: Releases
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/web/*
+          tag: web
+          file_glob: true
+          overwrite: true
+      #- name: Deploy to GitHub Pages 🚀
+      #  uses: JamesIves/github-pages-deploy-action@releases/v3
+      #  with:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #    BRANCH: gh-pages
+      #    FOLDER: build/web
+      #    clean: false

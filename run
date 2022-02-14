@@ -240,27 +240,22 @@ push(){
   if [ "$error" -eq "1" ]; then
     exit 1
   fi
+  _prepare_build_vars
   if [ "$tag" == "all" ]; then
     shift
-    old="$IFS"
-    IFS='-'
-    all_tags="$*"
-    IFS=$old
+  fi
+  old="$IFS"
+  IFS='-'
+  all_tags="$*-$git_branch"
+  IFS=$old
+  if [ "$tag" == "all" ]; then
     for d in build/*/ ; do
       build_name=$(basename $d)
-      if [ "$all_tags" != "" ]; then
-        tag=$(echo "$build_name" "$all_tags" | sed "s/ /-/g")
-      else
-        tag="$build_name"
-      fi
+      tag=$(echo "$build_name" "$all_tags" | sed "s/ /-/g" | sed "s/-\+/-/g")
       echo "butler push $d $ITCHIO_USERNAME/$ITCHIO_GAME:$tag"
       butler push "$d" "$ITCHIO_USERNAME/$ITCHIO_GAME":"$tag"
     done
   else
-    old="$IFS"
-    IFS='-'
-    all_tags="$*"
-    IFS=$old
     echo "butler push $dir $ITCHIO_USERNAME/$ITCHIO_GAME:$all_tags"
     butler push "$dir" "$ITCHIO_USERNAME/$ITCHIO_GAME":"$all_tags"
   fi
@@ -272,7 +267,7 @@ push(){
 
 prepare_ci_copytemplates(){
   if [ "$1" == "help" ]; then
-    echo "This prepares the CI by copying the template from the docker"
+    echo "Prepares the CI by copying the template from the docker"
     echo "You should not run this on your local computer"
     exit 0
   fi
@@ -290,24 +285,46 @@ prepare_ci_copytemplates(){
 
 prepare_ci_software(){
   if [ "$1" == "help" ]; then
-    echo "This prepares the CI by installing the necessary software"
+    echo "Prepares the CI by installing the necessary software"
     echo "You should not run this on your local computer"
     exit 0
   fi
   apt-get update
-  apt-get install -y --no-install-recommends sed
+  apt-get install -y --no-install-recommends sed rsync
   echo "✓ installed software"
+}
+
+
+prepare_override_file(){
+    if [ "$1" == "help" ]; then
+    echo "Copies the override file if it exists"
+    echo "You should not run this on your local computer"
+    exit 0
+  fi
+  override_file=$1
+  if [ ! -z "$override_file" ]; then
+    if [ -f "$override_file" ]; then
+      cp ${{override_file}} override.cfg
+      echo "✓ copied override file"
+    else
+      echo "override \`$override_file\` was specified, but not found"
+      exit 1
+    fi
+  else
+    echo "✓ no config override to copy"
+  fi
 }
 
 
 prepare_ci(){
   if [ "$1" == "help" ]; then
-    echo "This prepares the CI"
+    echo "Prepares the CI"
     echo "You should not run this on your local computer"
     exit 0
   fi
   prepare_ci_copytemplates
   prepare_ci_software
+  prepare_override_file $@
   echo "✓ CI prepared"
 }
 
