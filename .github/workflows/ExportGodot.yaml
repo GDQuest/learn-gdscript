@@ -25,6 +25,8 @@ jobs:
         run: ./run prepare:ci
       - name: Build
         run: ./run export:linux
+      - name: Itch
+        run: ./run push linux
       - name: Artifact
         uses: actions/upload-artifact@v1
         with:
@@ -53,6 +55,8 @@ jobs:
         run: ./run prepare:ci
       - name: Build
         run: ./run export:windows
+      - name: Itch
+        run: ./run push linux
       - name: Artifact
         uses: actions/upload-artifact@v1
         with:
