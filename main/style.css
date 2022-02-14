@@ -1,0 +1,265 @@
+/* --- BASE --- */
+
+:root {
+  --max-width: 1920px;
+  /*--background-color: #303049;*/
+  --game-background-color: #090a20;
+  --bar-height: 14px;
+  --bar-width: 300px;
+  --bar-corner-radius: calc(var(--bar-height) / 2);
+
+  --render-width: 1920px;
+  --render-height: 1080px;
+  --render-aspect-ratio: calc(var(--render-width) / var(--render-height));
+
+  --scale: 1;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  touch-action: none;
+  margin: 0;
+  border: 0 none;
+  padding: 0;
+  text-align: center;
+  background-color: var(--game-background-color);
+}
+
+.layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* --- /BASE --- */
+
+/* --- CANVAS CONTAINER --- */
+
+#canvas-container {
+  background-color: var(--game-background-color);
+  max-width: var(--render-width);
+  max-height: var(--render-height);
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- /CANVAS CONTAINER --- */
+
+/* --- GAME CANVAS --- */
+#canvas {
+  display: block;
+  margin: 0;
+  border: none;
+  background-color: var(--game-background-color);
+}
+
+#canvas:focus {
+  outline: none;
+}
+
+/* --- /GAME CANVAS --- */
+
+/*-- ICON --*/
+
+.icon {
+  width: 150px;
+  height: 150px;
+  margin: 20px;
+}
+
+/*-- /ICON --*/
+
+/*-- LOADER --*/
+
+.loader {
+  --progress: 100%;
+  display: block;
+  height: var(--bar-height);
+  position: relative;
+  width: var(--bar-width);
+  display: block;
+  background-color: #303049;
+  border-radius: var(--bar-corner-radius);
+  overflow: hidden;
+}
+
+.loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  height: 100%;
+  left: 0;
+  border-radius: var(--bar-corner-radius);
+  background-color: #3dff6e;
+}
+
+@keyframes loader {
+  0% {
+    left: 0;
+    right: var(--bar-width);
+  }
+
+  44% {
+    left: 0;
+    right: 0;
+  }
+
+  100% {
+    left: var(--bar-width);
+    right: 0;
+  }
+}
+
+/*-- /LOADER --*/
+
+/*-- NOTICES --*/
+.notices {
+  font-family: "Noto Sans", "Droid Sans", Arial, sans-serif;
+  color: #3b3943;
+  width: 640px;
+  padding: 3em;
+  background: #fdfdfd;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+/*-- /NOTICES --*/
+
+/*-- STATES --*/
+
+#status,
+#notices {
+  visibility: hidden;
+}
+
+.mode-notice #notices,
+.mode-indeterminate #status,
+.mode-progress #status {
+  visibility: visible;
+}
+
+.mode-indeterminate #loader::before {
+  right: var(--bar-width);
+  animation: loader 0.8s cubic-bezier(0, 0, 0.03, 0.9) infinite;
+}
+
+.mode-progress #loader::before {
+  transition: width 0.2s ease-out;
+  width: var(--progress);
+}
+
+/*-- /STATES --*/
+
+/*-- MOBILE HANDLING --*/
+
+#mobile-warning {
+  background: #30304982;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (orientation: portrait), (max-aspect-ratio: 4/3), (max-width: 750px) {
+  .mobile-only {
+    display: flex;
+  }
+
+  .force-mobile .desktop-only {
+    display: flex;
+  }
+
+  .force-mobile .mobile-only {
+    display: none;
+  }
+}
+
+/*-- /MOBILE HANDLING --*/
+
+/*-- LITTLE VERSION NUMBER --*/
+
+#version {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  z-index: 2;
+  font-size: 0.8em;
+  font-family: monospace;
+  color: #737373;
+}
+
+/*-- /LITTLE VERSION NUMBER --*/
+
+/*-- FULLSCREEN ELEMENTS --*/
+
+.button-fullscreen {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  background-image: url("fullscreen_on.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: transparent;
+  background-size: 24px;
+  opacity: 0.5;
+  cursor: pointer;
+  transform-origin: top right;
+  transform: scale(var(--scale));
+}
+
+.button-fullscreen:hover,
+.button-fullscreen:active {
+  opacity: 1;
+}
+
+.button-fullscreen span {
+  display: none;
+}
+
+/* This is an unfortunate hack to detect fullscreen */
+#fullscreen-detector {
+  position: fixed;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+}
+
+.debug #fullscreen-detector {
+  width: 25px;
+  height: 25px;
+  background: red;
+  visibility: visible;
+}
+
+@media all and (display-mode: fullscreen) {
+  #fullscreen-detector {
+    top: 10px;
+  }
+  .button-fullscreen {
+    background-image: url("fullscreen_off.png");
+  }
+}
+
+.native-fullscreen .button-fullscreen {
+  display: none;
+}
+
+/*-- /FULLSCREEN ELEMENTS --*/
