@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+# vi:syntax=sh
+
+APP_NAME="learn_to_code"
+
+help(){
+  echo "Builder Script for Learn To Code With Godot"
+  echo "please use one of the following commands:"
+  for i in ${!funcs[@]}; do
+    command=${funcs[i]}
+    echo "  - ${command/_/:}"
+  done
+  echo ""
+  exit 0
+}
+
+
+clean_web(){
+  rm -rf build/web
+}
+
+clean(){
+  rm -rf build
+  mkdir -p build
+  touch build/.gdignore
+}
+
+
+web_python_server(){
+  python -m http.server 8000 --directory build/web
+}
+
+
+web_watch(){
+  last_time_compiled=0
+  throttle_compile=10
+  last_time_copied=0
+  throttle_copy=1
+  dir=${1:-.}
+  echo "will watch $dir"
+  inotifywait --monitor --recursive --quiet --event modify,move,create,delete --format '%w%f' --includei "\.(js|css|html|gd)" "$dir" | while read FILE
+  do
+    changed_dir=$(dirname "$FILE")
+    base_dir=$(echo "$changed_dir" | cut -d "/" -f2)
+    if [ "$base_dir" != "build" ]; then
+      now=$(date +%s)
+      filename=$(basename "$FILE")
+      ext=${FILE##*.}
+      if [ "$base_dir" = "html_export" ]; then
+        if (($now - $last_time_copied >= $throttle_copy)); then
+          echo "will copy $FILE"
+          cp "$FILE" "build/web/$filename"
+        fi
+        last_time_copied=$(date +%s)
+      else
+        echo "something happened on path $base_dir $FILE"
+        if (($now - $last_time_compiled >= $throttle_compile)); then
+          godot -v --export "HTML5" build/web/index.html
+        fi 
+        last_time_compiled=$(date +%s)
+      fi
+    fi
+  done
+}
+
+web(){
+  clean_web
+  export_web
+  web_python_server &
+  web_watch
+}
+
+export_any(){
+  export_name=$1
+  output=$2
+  dir=$(dirname "$output")
+  mkdir -p "$dir"
+  godot --quiet --no-window --export "$export_name" "$output"
+  echo "✓ Exported \`$export_name\` build to \`$dir\`"
+}
+
+export_web(){
+  export_any "HTML5" "build/web/index.html"
+  cp -r html_export/static/* "build/web"
+  echo "✓ Copied web files to $dir"
+}
+
+export_osx(){
+  export_any "Mac OSX" "build/osx/$APP_NAME.zip"
+}
+
+export_windows(){
+  export_any "Windows Desktop" "build/windows/$APP_NAME.exe"
+}
+
+export_linux(){
+  export_any "Linux/X11" "build/linux/$APP_NAME.x86_64"
+}
+
+
+export(){
+  export_web
+  export_windows
+  export_osx
+  export_linux
+}
+
+funcs=(`declare -F | awk '{print $NF}' | sort | egrep -v "^_"`)
+command=${1/:/_}
+
+if [[ " ${funcs[*]} " =~ " ${command} " ]]; then
+  shift
+  $command $@
+  exit 0
+else
+  if [[ $command ]]; then
+    echo ""
+    echo "\`${command}\` isn't a recognized command"
+    echo ""
+  fi
+  help
+  exit 1
+fi
