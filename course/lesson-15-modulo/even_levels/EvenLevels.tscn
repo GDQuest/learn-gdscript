@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
 [ext_resource path="res://course/lesson-15-modulo/even_levels/EvenLevels.gd" type="Script" id=3]
 [ext_resource path="res://course/common/CustomHealthBar.tscn" type="PackedScene" id=4]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [node name="EvenLevels" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
@@ -25,3 +27,6 @@ __meta__ = {
 
 [node name="Camera2D" type="Camera2D" parent="." index="5"]
 current = true
+
+[node name="AnimationTree" parent="." index="6"]
+parameters/playback = SubResource( 1 )

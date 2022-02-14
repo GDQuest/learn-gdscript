@@ -6,16 +6,6 @@
 [sub_resource type="GDScript" id=1]
 script/source = "tool
 extends RunnableCodeExample
-
-func _ready():
-	yield(self, \"ready\")
-	var number_slider = create_slider_for(\"number\", 1, 7, 1)
-	var modulo_slider = create_slider_for(\"modulo\", 1, 7, 1)
-
-
-func _set_instance_value(value: float, property_name: String, value_label: Label) -> void:
-	._set_instance_value(value, property_name, value_label)
-	_gdscript_text_edit.text = gdscript_code.replace(property_name, \"%s [=%s]\"%[property_name, value])
 "
 
 [node name="ExampleModulo" type="PanelContainer"]
@@ -31,22 +21,5 @@ margin_top = 7.0
 margin_right = 307.0
 margin_bottom = 387.0
 script = SubResource( 1 )
-scene = ExtResource( 2 )
 
-[node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 300.0
-margin_bottom = 380.0
-rect_min_size = Vector2( 300, 380 )
-
-[node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="0"]
-visible = false
-
-[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-visible = false
-
-[node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
-margin_left = 244.0
-margin_right = 644.0
-margin_bottom = 260.0
-
-[editable path="RunnableCodeExample"]
+[node name="Modulo" parent="RunnableCodeExample" instance=ExtResource( 2 )]

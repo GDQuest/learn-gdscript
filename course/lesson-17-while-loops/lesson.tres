@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=18 format=2]
+[gd_resource type="Resource" load_steps=20 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
@@ -11,11 +11,9 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-17-while-loops/content-DizKUdOC.tres"
 title = ""
 type = 0
-text = "Our robot is too strong right now, so we've summoned turtle to help contain it.
+text = "Our new knowledge of vectors can help move the robot move in a grid.
 
-We know the turtle can draw squares. We'll use the squares as obstacles for the robot, but we're going to need more than one.
-
-We can create a function called [code]draw_wall()[/code] which draws three squares in a line."
+We can define a grid size using a vector."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -35,13 +33,7 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-17-while-loops/content-Q2XNwQMq.tres"
 title = ""
 type = 0
-text = "This code works, but it's repetitive.
-
-For code that repeats, we use [i]loops[/i].
-
-While loops make the computer repeat a block of code until you meet a specific condition or decide to break from the loop.
-
-Instead of the above, we can use a while loop."
+text = "We can set the cell of the robot also using a vector."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -61,18 +53,7 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-17-while-loops/content-UxZPxY8V.tres"
 title = ""
 type = 0
-text = "First we define [code]number[/code] and set it to [code]0[/code].
-
-For each loop we;
-- draw a square
-- move turtle
-- add [code]1[/code] to [code]number[/code].
-
-For as long as [code]number[/code] is less than [code]3[/code], we run the code in the while loop.
-
-When [code]number[/code] reaches [code]3[/code], the computer exits the while loop and moves on to the next line.
-
-Rather than copy and paste the same lines of code, we can simply alter the while loop."
+text = "Programmatically, we can move the robot to the end of the grid like so"
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -90,6 +71,36 @@ has_separator = false
 [sub_resource type="Resource" id=7]
 script = ExtResource( 2 )
 content_id = "res://course/lesson-17-while-loops/content-fyqdYOex.tres"
+title = ""
+type = 0
+text = "For visual clarity, we animate the robot as it travels from cell to cell.
+
+This works for a pre-defined grid, but this function wouldn't work if we change the size of the grid. The robot would either stop before the end, or go too far.
+
+The robot needs to move to the right until it gets to the end.
+
+For code that repeats, we use [i]loops[/i].
+
+While loops make the computer repeat a block of code until you meet a specific condition or decide to break from the loop.
+
+Instead of the above, we can use a while loop."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-17-while-loops/content-c7DDizKU.tres"
+title = ""
+type = 0
+text = "[Visual]"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-17-while-loops/content-dOCQiGjB.tres"
 title = ""
 type = 0
 text = "We use while loops every time we need to loop an unknown number of times.
@@ -170,5 +181,5 @@ description = "We use a while loop to have our turtle attack the robot for as lo
 [resource]
 script = ExtResource( 1 )
 title = "Introduction to While Loops"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 13 ), SubResource( 14 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ]
 practices = [ SubResource( 12 ) ]

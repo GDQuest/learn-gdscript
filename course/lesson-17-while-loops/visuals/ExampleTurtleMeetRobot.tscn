@@ -15,7 +15,6 @@ onready var _robot_animation_tree := find_node(\"AnimationTree\")
 
 func run():
 	_turtle.reset()
-	_turtle.draw_labels = false
 	_turtle.position = Vector2(0, 110)
 	draw_square()
 	_turtle.jump(110, 0)
