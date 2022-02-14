@@ -335,17 +335,28 @@ prepare_ci(){
 
 
 _prepare_build_vars(){
-  url=${1:-"https://gdquest.github.io/learn-gdscript"}
   build_date=$(date '+%Y, %m, %d, %H, %M, %S')
   build_date_iso=$(date "+%Y/%m/%d %H:%M:%S")
   build_date_unix=$(date '+%s')
-  git_branch=$(git branch --show-current)
   git_commit=$(git rev-parse HEAD)
-  version=$(git describe --tags --abbrev=0 --match "*.*.*")
+  if [ -z "$git_branch" ]; then
+    git_branch=$(git branch --show-current)
+  fi
+  if [ -z "$version" ]; then
+    version=$(git describe --tags --abbrev=0 --match "*.*.*")
+  fi
   watermark="$build_date_iso | $git_branch:$version:$git_commit"
-  web_dir="build/web/$git_branch"
-  if [ "$git_branch" == "release" ]; then
+  if [ -z "$url" ]; then
+    url=${1:-"https://gdquest.github.io/learn-gdscript"}
+    if [ "$git_branch" != "release" ]; then
+      url="$url/$git_branch"
+    fi
+  fi
+  if [ -z "$web_dir" ]; then
     web_dir="build/web"
+    if [ "$git_branch" != "release" ]; then
+      web_dir="$web_dir/$git_branch"
+    fi
   fi
 }
 

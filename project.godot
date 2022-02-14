@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "AppVersion",
+"language": "GDScript",
+"path": "res://utils/version.gd"
+}, {
 "base": "PanelContainer",
 "class": "CodeEditor",
 "language": "GDScript",
@@ -239,7 +244,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/screens/lesson/UIContentBlock.gd"
 }, {
-"base": "Control",
+"base": "UINavigatablePage",
 "class": "UILesson",
 "language": "GDScript",
 "path": "res://ui/UILesson.gd"
@@ -254,7 +259,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/UINavigator.gd"
 }, {
-"base": "Control",
+"base": "UINavigatablePage",
 "class": "UIPractice",
 "language": "GDScript",
 "path": "res://ui/UIPractice.gd"
@@ -285,6 +290,7 @@ _global_script_classes=[ {
 "path": "res://game_demos/WrappingNode2D.gd"
 } ]
 _global_script_class_icons={
+"AppVersion": "",
 "CodeEditor": "",
 "CodeEditorEnhancer": "",
 "CodeRefItem": "",

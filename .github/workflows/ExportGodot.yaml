@@ -106,7 +106,8 @@ jobs:
         with:
           lfs: true
       - run: ./run prepare:ci
-      - run: ./run export:web
+      - if: github.ref == "refs/heads/release"
+        run: ./run export:web
       - run: ./run push web
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
