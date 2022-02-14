@@ -36,6 +36,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/linux/*
           tag: ${{ github.ref }}
+          file_glob: true
           overwrite: true
 
   export-win:
@@ -63,4 +64,5 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/windows/*
           tag: ${{ github.ref }}
+          file_glob: true
           overwrite: true
