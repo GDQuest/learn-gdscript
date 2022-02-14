@@ -17,8 +17,8 @@ func _init() -> void:
 
 
 func _on_js_fullscreen(_args: Array) -> void:
-	var is_it: bool = _args[0]; # full screen state
-	var was_it_ours: bool = _args[1]; #triggered through button or F11
+	var _is_it: bool = _args[0]; # full screen state
+	var _was_it_ours: bool = _args[1]; #triggered through button or F11
 	Events.emit_signal("fullscreen_toggled")
 
 

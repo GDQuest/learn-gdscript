@@ -75,6 +75,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	# Workaround for a bug where pressing Left triggers ui_back in a popup even
 	# though the event is set to Ctrl+Alt+Left.
+	# warning-ignore:unsafe_property_access
 	if event.is_action_released("ui_back") and event.alt:
 		NavigationManager.navigate_back()
 
