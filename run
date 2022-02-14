@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 # vi:syntax=sh
 
+
 APP_NAME="learn_to_code"
 
+
 ######################################## HELP
+
 
 help(){
   if [ "$1" == "help" ]; then
@@ -22,6 +25,7 @@ help(){
 
 
 ######################################## CLEAN
+
 
 clean_web(){
   if [ "$1" == "help" ]; then
@@ -44,9 +48,11 @@ clean(){
   echo "✓ Removed all builds"
 }
 
+
 ######################################## WEB DEV HELPERS
 
-web_python_server(){
+
+web_server(){
   if [ "$1" == "help" ]; then
     echo "Runs a python webserver in build/web"
     exit 0
@@ -93,6 +99,7 @@ web_watch(){
   done
 }
 
+
 web(){
   if [ "$1" == "help" ]; then
     echo "Exports the web build, starts a python webserver, and watches"
@@ -102,11 +109,13 @@ web(){
   fi
   clean_web
   export_web
-  web_python_server &
+  web_server &
   web_watch
 }
 
+
 ######################################## EXPORTS
+
 
 export_any(){
   if [ "$1" == "help" ]; then
@@ -179,7 +188,9 @@ export(){
   export_linux
 }
 
+
 ######################################## PUSHING TO ITCH
+
 
 push(){
   tag=$1
@@ -255,7 +266,9 @@ push(){
   fi
 }
 
+
 ######################################## CI/CD
+
 
 prepare_ci_copytemplates(){
   if [ "$1" == "help" ]; then
@@ -274,6 +287,7 @@ prepare_ci_copytemplates(){
   echo "✓ copied templates"
 }
 
+
 prepare_ci_software(){
   if [ "$1" == "help" ]; then
     echo "This prepares the CI by installing the necessary software"
@@ -284,6 +298,7 @@ prepare_ci_software(){
   apt-get install -y --no-install-recommends sed
   echo "✓ installed software"
 }
+
 
 prepare_ci(){
   if [ "$1" == "help" ]; then
@@ -296,6 +311,7 @@ prepare_ci(){
   echo "✓ CI prepared"
 }
 
+
 _prepare_build_vars(){
   url=${1:-"https://gdquest.github.io/learn-gdscript"}
   build_date=$(date '+%Y, %m, %d, %H, %M, %S')
@@ -306,6 +322,7 @@ _prepare_build_vars(){
   version=$(git describe --tags --abbrev=0 --match "*.*.*")
   watermark="$build_date_iso | $git_branch:$version:$git_commit"
 }
+
 
 prepare_versionfile(){
   if [ "$1" == "help" ]; then
@@ -349,22 +366,27 @@ prepare_htmltemplate(){
   echo "✓ generated html template"
 }
 
+
 ######################################## BOOTSTRAP
 
 
-funcs=(`declare -F | awk '{print $NF}' | sort | egrep -v "^_"`)
-command=${1//:/_}
+_bootstrap(){
+  funcs=(`declare -F | awk '{print $NF}' | sort | egrep -v "^_"`)
+  command=${1//:/_}
 
-if [[ " ${funcs[*]} " =~ " ${command} " ]]; then
-  shift
-  $command $@
-  exit 0
-else
-  if [[ $command ]]; then
-    echo ""
-    echo "\`${command}\` isn't a recognized command"
-    echo ""
+  if [[ " ${funcs[*]} " =~ " ${command} " ]]; then
+    shift
+    $command $@
+    exit 0
+  else
+    if [[ $command ]]; then
+      echo ""
+      echo "\`${command}\` isn't a recognized command"
+      echo ""
+    fi
+    help
+    exit 1
   fi
-  help
-  exit 1
-fi
+}
+
+_bootstrap $@
