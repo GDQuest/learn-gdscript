@@ -85,13 +85,13 @@ web_watch(){
       if [ "$base_dir" = "html_export" ]; then
         if (($now - $last_time_copied >= $throttle_copy)); then
           echo "will copy $FILE"
-          cp "$FILE" "build/web/$filename"
+          cp "$FILE" "$web_dir/$filename"
         fi
         last_time_copied=$(date +%s)
       else
         echo "Changes detected in $FILE, will recompile"
         if (($now - $last_time_compiled >= $throttle_compile)); then
-          export_any "HTML5" "build/web/index.html"
+          export_any "HTML5" "$web_dir/index.html"
         fi 
         last_time_compiled=$(date +%s)
       fi
@@ -136,17 +136,20 @@ export_any(){
   echo "✓ Exported \`$export_name\` build to \`$dir\`"
 }
 
-
 export_web(){
   if [ "$1" == "help" ]; then
     echo "Exports the Web build and copies over static files"
+    echo "You can specify the following environment variables:"
+    echo " - \`\$url\` for the html template"
+    echo " - \`\$git_branch\` for deploying to a subfolder (the" 
+    echo "   \`release\` branch will be blanked, and deployed to"
+    echo "   the root subfolder)"
     exit 0
   fi
-  url=$1
   prepare_htmltemplate $url
-  export_any "HTML5" "build/web/index.html"
-  cp -r html_export/static/* "build/web"
-  echo "✓ Copied web files to $dir"
+  export_any "HTML5" "$web_dir/index.html"
+  cp -r html_export/static/* "$web_dir"
+  echo "✓ Copied web files to $web_dir"
 }
 
 
@@ -240,7 +243,9 @@ push(){
   if [ "$error" -eq "1" ]; then
     exit 1
   fi
-  _prepare_build_vars
+  if [ -z "$git_branch" ]; then
+    _prepare_build_vars
+  fi
   if [ "$tag" == "all" ]; then
     shift
   fi
@@ -338,6 +343,10 @@ _prepare_build_vars(){
   git_commit=$(git rev-parse HEAD)
   version=$(git describe --tags --abbrev=0 --match "*.*.*")
   watermark="$build_date_iso | $git_branch:$version:$git_commit"
+  web_dir="build/web/$git_branch"
+  if [ "$git_branch" == "release" ]; then
+    web_dir="build/web"
+  fi
 }
 
 
