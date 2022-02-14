@@ -3,7 +3,35 @@
 "use strict";
 
 window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
+  const canvas = /** @type {HTMLCanvasElement} */ (
+    document.getElementById("canvas")
+  );
+  const canvasContainer = /** @type {HTMLDivElement} */ (
+    document.getElementById("canvas-container")
+  );
+
   const noOp = () => {};
+
+  const throttle = (callback, limit = 50) => {
+    let waiting = false;
+    const resetWaiting = () => (waiting = false);
+    return (...args) => {
+      if (!waiting) {
+        callback(...args);
+        waiting = true;
+        setTimeout(resetWaiting, limit);
+      }
+    };
+  };
+
+  const aspectRatio =
+    (maxW = 0, maxH = 0) =>
+    (width = window.innerWidth, height = window.innerHeight) => {
+      const ratioW = width / maxW;
+      const ratioH = height / maxH;
+      var ratio = Math.min(ratioW, ratioH);
+      return { width: maxW * ratio, height: maxH * ratio, ratio };
+    };
 
   /**
    * Returns a proxied console that can be turned off and on by appending
@@ -93,7 +121,21 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     onError: makeSignal(),
     onGodotLoaded: makeSignal(),
     onFullScreen: makeSignal(),
+    onResize: makeSignal(),
   };
+
+  resize: {
+    const onResize = () => {
+      const { width, height, ratio } = aspectRatioCanvas();
+      canvas.width = width;
+      canvas.height = height;
+      document.documentElement.style.setProperty("--scale", `${ratio}`);
+    };
+    const aspectRatioCanvas = aspectRatio(1920, 1080);
+    window.addEventListener("resize", throttle(GDQUEST.events.onResize.emit));
+    GDQUEST.events.onResize.connect(onResize);
+    onResize();
+  }
 
   loadingControl: {
     const debug = makeLogger("loader");
@@ -451,7 +493,8 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       /** check if browser has borders. Take zoom into account */
       const checkWindowMargins = () => {
         const zoom = window.outerWidth / window.innerWidth;
-        const hasMargin = Math.abs(window.innerWidth * zoom - screen.width) < 2;
+        const hasMargin =
+          Math.abs(window.innerWidth * zoom - screen.width) < 10;
         return hasMargin;
       };
 
@@ -461,19 +504,10 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
         return hasSomeFullScreenElement;
       };
 
-      /** compile all methods with fallbacks */
-      const checkAll = () => {
-        const isFullScreen =
-          checkFullScreenElement() ||
-          checkCSSMediaQuery() ||
-          checkWindowMargins();
-        return isFullScreen;
-      };
       return {
         checkFullScreenElement,
         checkCSSMediaQuery,
         checkWindowMargins,
-        checkAll,
       };
     })();
 
@@ -521,11 +555,22 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       return button;
     })();
 
+    const placeButton = () => {
+      const canvasRect = canvas.getBoundingClientRect();
+      const right = window.innerWidth - (canvasRect.left + canvasRect.width); // - buttonRect.width;
+      const top = canvasRect.top;
+      button.style.setProperty("right", `${right}px`);
+      button.style.setProperty("top", `${top}px`);
+    };
+
+    GDQUEST.events.onResize.connect(placeButton);
+
     /**
      * Only add the button if Godot has loaded
      */
     GDQUEST.events.onGodotLoaded.once(() => {
-      document.body.appendChild(button);
+      canvasContainer.appendChild(button);
+      placeButton();
     });
 
     /**
@@ -554,7 +599,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
      * @param {Event} evt
      */
     const onFullScreenChange = (evt) => {
-      const isItActuallyFullScreen = isIt.checkAll();
+      const isItActuallyFullScreen = isIt.checkFullScreenElement();
       if (isItActuallyFullScreen != wasFullScreen) {
         wasFullScreen = isItActuallyFullScreen;
         debug.info(`[ ${evt.type} ]`, `full screen state changed`);
@@ -580,7 +625,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
      * We could also potentially poll for size after keypresses, but this seems
      * to work well enough
      */
-    window.addEventListener("resize", onFullScreenChange);
+    GDQUEST.events.onResize.connect(onFullScreenChange);
 
     GDQUEST.fullScreen = { isIt, toggle };
   }

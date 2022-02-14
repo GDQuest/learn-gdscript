@@ -8,7 +8,6 @@ interface GDQuestLib {
       checkFullScreenElement: () => boolean;
       checkCSSMediaQuery: () => boolean;
       checkWindowMargins: () => boolean;
-      checkAll: () => boolean;
     };
     toggle: () => void;
   };
@@ -16,6 +15,7 @@ interface GDQuestLib {
     onError: Signal;
     onFullScreen: Signal;
     onGodotLoaded: Signal;
+    onResize: Signal;
   };
 }
 
