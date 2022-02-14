@@ -10,6 +10,7 @@ env:
   GODOT_VERSION: 3.4.1
 
 jobs:
+
   export-linux:
     name: Linux Export
     runs-on: ubuntu-latest
@@ -24,8 +25,42 @@ jobs:
         run: ./run prepare:ci
       - name: Build
         run: ./run export:linux
-      - name: Upload Artifact
+      - name: Artifact
         uses: actions/upload-artifact@v1
         with:
           name: linux
           path: build/linux
+      - name: Releases
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/linux/*
+          tag: ${{ github.ref }}
+          overwrite: true
+
+  export-win:
+    name: Windows Export
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:3.4.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Setup
+        run: ./run prepare:ci
+      - name: Build
+        run: ./run export:windows
+      - name: Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: windows
+          path: build/windows
+      - name: Releases
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/windows/*
+          tag: ${{ github.ref }}
+          overwrite: true
