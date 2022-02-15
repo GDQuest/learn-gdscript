@@ -135,7 +135,7 @@ text = "Let's apply this to our [code]move_to_end()[/code] function.
 
 This time, we compare the number of loops to the width of the board. We keep looping through until we reach the width of the board.
 
-Note we only have to move one less than the board width because the robot is already on the first cell."
+Note we move one less than the board width because the robot is already on the first cell."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -211,20 +211,22 @@ has_separator = false
 [sub_resource type="Resource" id=12]
 script = ExtResource( 5 )
 practice_id = "res://course/lesson-17-while-loops/practice-lkGx0c7D.tres"
-title = "Simulating a battle using a while loop"
-goal = "It's time to fight!
+title = "Moving to the end of a board"
+goal = "Our robot has decided to stand at the top of the board.
 
-Add to the [code]simulate_battle()[/code] function to gradually lower the health of the robot. 
+Complete the [code]move_to_bottom()[/code] function so the robot moves to the bottom of the board.
 
-While [code]health[/code] is greater than [code]0[/code], subtract [code]turtle_power[/code] from [code]health[/code]."
-starting_code = "func simulate_battle():
+The board size is determined by the [code]Vector2[/code] [code]board_size[/code], and the robot's current cell is [code]Vector2(2, 0)[/code]. 
+
+Make sure to use a while loop so the function works for any board size."
+starting_code = "func move_to_bottom():
 	pass"
-hints = PoolStringArray(  )
-validator_script_path = "while_battle/TestWhileBattle.gd"
-script_slice_path = "while_battle/WhileBattle.live-editor/slices/WhileBattle.battle.slice.tres"
+hints = PoolStringArray( "You\'ll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards", "To move the robot down, [code]cell.y[/code] needs to increase", "Use [code]while cell.y < board_size.y - 1:[/code]" )
+validator_script_path = "while_move/TestGridWhilePractice.gd"
+script_slice_path = "while_move/GridWhilePractice.live-editor/slices/GridWhilePractice.move_to_end.slice.tres"
 documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 4 )
-description = "We use a while loop to have our turtle attack the robot for as long as it has more than zero health."
+description = "Use a while loop to have our robot move from the top of the board to the bottom."
 
 [resource]
 script = ExtResource( 1 )
