@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://course/lesson-17-while-loops/while_move/GridWhilePractice.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-17-while-loops/while_move/PracticeBoardWhile.gd" type="Script" id=1]
 [ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
 
 [sub_resource type="GDScript" id=1]
@@ -33,6 +33,7 @@ scale = Vector2( 0.75, 0.75 )
 script = SubResource( 1 )
 
 [node name="Label" type="Label" parent="."]
+visible = false
 margin_left = 48.0
 margin_top = -54.0
 margin_right = 201.0
@@ -41,3 +42,8 @@ text = "cell = Vector2(0, 1)"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( -132, -96 )
+anchor_mode = 0
+current = true

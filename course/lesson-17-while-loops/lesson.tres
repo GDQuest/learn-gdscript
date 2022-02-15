@@ -26,7 +26,7 @@ content_id = "res://course/lesson-17-while-loops/content-GjB7tKRH.tres"
 title = ""
 type = 0
 text = ""
-visual_element_path = "visuals/ExampleGrid.tscn"
+visual_element_path = "visuals/ExampleBoard.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -52,7 +52,7 @@ content_id = "res://course/lesson-17-while-loops/content-AYVjotxF.tres"
 title = ""
 type = 0
 text = ""
-visual_element_path = "visuals/ExampleRobotMoveGrid.tscn"
+visual_element_path = "visuals/ExampleRobotMoveBoard.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -156,7 +156,7 @@ content_id = "res://course/lesson-17-while-loops/content-HJMQ2XNw.tres"
 title = ""
 type = 0
 text = ""
-visual_element_path = "visuals/ExampleGridWhile.tscn"
+visual_element_path = "visuals/ExampleBoardWhile.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -216,14 +216,16 @@ goal = "Our robot has decided to stand at the top of the board.
 
 Complete the [code]move_to_bottom()[/code] function so the robot moves to the bottom of the board.
 
-The board size is determined by the [code]Vector2[/code] [code]board_size[/code], and the robot's current cell is [code]Vector2(2, 0)[/code]. 
+The board size is determined by the [code]Vector2[/code] [code]board_size[/code].
+
+The robot's current cell is [code]Vector2(2, 0)[/code]. 
 
 Make sure to use a while loop so the function works for any board size."
 starting_code = "func move_to_bottom():
 	pass"
 hints = PoolStringArray( "You\'ll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards", "To move the robot down, [code]cell.y[/code] needs to increase", "Use [code]while cell.y < board_size.y - 1:[/code]" )
-validator_script_path = "while_move/TestGridWhilePractice.gd"
-script_slice_path = "while_move/GridWhilePractice.live-editor/slices/GridWhilePractice.move_to_end.slice.tres"
+validator_script_path = "while_move/TestPracticeBoardWhile.gd"
+script_slice_path = "while_move/PracticeBoardWhile.live-editor/slices/PracticeBoardWhile.move_to_end.slice.tres"
 documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 4 )
 description = "Use a while loop to have our robot move from the top of the board to the bottom."
