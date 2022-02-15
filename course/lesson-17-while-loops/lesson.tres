@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=20 format=2]
+[gd_resource type="Resource" load_steps=23 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
@@ -13,7 +13,9 @@ title = ""
 type = 0
 text = "Our new knowledge of vectors can help move the robot move in a grid.
 
-We can define a grid size using a vector."
+We can define the size of a board using a [code]Vector2[/code].
+
+Each square is a [i]cell[/i]."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -24,7 +26,7 @@ content_id = "res://course/lesson-17-while-loops/content-GjB7tKRH.tres"
 title = ""
 type = 0
 text = ""
-visual_element_path = "visuals/ExampleTurtleMeetRobot.tscn"
+visual_element_path = "visuals/ExampleGrid.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -33,7 +35,13 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-17-while-loops/content-Q2XNwQMq.tres"
 title = ""
 type = 0
-text = "We can set the cell of the robot also using a vector."
+text = "Let's add our robot onto the grid.
+
+We can change the cell of the robot by adding a [code]Vector2[/code].
+
+In the following example, we order the robot to move to the right so it stops at the end of the board.
+
+To show how the robot moves, we animate the robot so you can see each instruction. Otherwise, the robot would teleport instantly."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -44,27 +52,7 @@ content_id = "res://course/lesson-17-while-loops/content-AYVjotxF.tres"
 title = ""
 type = 0
 text = ""
-visual_element_path = "visuals/ExampleTurtleMeetRobotWhile.tscn"
-reverse_blocks = false
-has_separator = false
-
-[sub_resource type="Resource" id=5]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-17-while-loops/content-UxZPxY8V.tres"
-title = ""
-type = 0
-text = "Programmatically, we can move the robot to the end of the grid like so"
-visual_element_path = ""
-reverse_blocks = false
-has_separator = false
-
-[sub_resource type="Resource" id=6]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-17-while-loops/content-UDpPwQDw.tres"
-title = ""
-type = 0
-text = ""
-visual_element_path = "visuals/CodeWhileLoop.tscn"
+visual_element_path = "visuals/ExampleRobotMoveGrid.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -73,17 +61,17 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-17-while-loops/content-fyqdYOex.tres"
 title = ""
 type = 0
-text = "For visual clarity, we animate the robot as it travels from cell to cell.
+text = "The above code works for a pre-defined board with a width of [code]4[/code], but the [code]move_to_end()[/code] function wouldn't work if the size of the board was different. 
 
-This works for a pre-defined grid, but this function wouldn't work if we change the size of the grid. The robot would either stop before the end, or go too far.
+The robot would either stop before the end, or go too far.
 
-The robot needs to move to the right until it gets to the end.
+To implement a general solution for all board sizes, the robot needs to repeat its movement until it gets to the end.
 
 For code that repeats, we use [i]loops[/i].
 
 While loops make the computer repeat a block of code until you meet a specific condition or decide to break from the loop.
 
-Instead of the above, we can use a while loop."
+Here's how we use a while loop."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -93,8 +81,8 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-17-while-loops/content-c7DDizKU.tres"
 title = ""
 type = 0
-text = "[Visual]"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/CodeWhileLoop.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -103,12 +91,72 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-17-while-loops/content-dOCQiGjB.tres"
 title = ""
 type = 0
+text = "We use the variable [code]number[/code] to keep track of how many loops the while loop completes.
+
+Each time we go through the while loop, we add [code]1[/code] to [code]number[/code].
+
+The while loop keeps running for as long as [code]number[/code] is less than [code]10[/code].
+
+You can see the following code is executed four times in the console."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-17-while-loops/content-izKUdOCQ.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/PrintWhileLoop.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-17-while-loops/content-kGx0c7DD.tres"
+title = ""
+type = 1
 text = "We use while loops every time we need to loop an unknown number of times.
 
 For example, games run in a loop that typically generates 60 images per second until the user closes the game. This is possible thanks to while loops.
 
 The computer also reads the code you write using a while loop because it doesn't know the length of your code in advance."
 visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-17-while-loops/content-iGjB7tKR.tres"
+title = ""
+type = 0
+text = "Let's apply this to our [code]move_to_end()[/code] function.
+
+This time, we compare the number of loops to the width of the board. We keep looping through until we reach the width of the board.
+
+Note we only have to move one less than the board width because the robot is already on the first cell."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-17-while-loops/content-QMqAYVjo.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeWhileRobot.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-17-while-loops/content-HJMQ2XNw.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleGridWhile.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -181,5 +229,5 @@ description = "We use a while loop to have our turtle attack the robot for as lo
 [resource]
 script = ExtResource( 1 )
 title = "Introduction to While Loops"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 13 ), SubResource( 14 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 7 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 19 ), SubResource( 18 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ]
 practices = [ SubResource( 12 ) ]

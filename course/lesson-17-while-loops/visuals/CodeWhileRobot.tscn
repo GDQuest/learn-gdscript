@@ -2,17 +2,15 @@
 
 [ext_resource path="res://course/common/GDScriptCodeExample.gd" type="Script" id=1]
 
-[node name="CodeWhileLoop" type="TextEdit"]
+[node name="CodeWhileRobot" type="TextEdit"]
 anchor_right = 1.0
 margin_right = -1620.0
 margin_bottom = 60.0
-rect_min_size = Vector2( 300, 190 )
+rect_min_size = Vector2( 300, 140 )
 size_flags_horizontal = 3
-text = "# Do something 10 times
-var number = 0
-while number < 10:
-	# something
-	number += 1"
+text = "func move_to_end():
+	while cell.x < board_size.x - 1: 
+		cell.x += 1"
 readonly = true
 syntax_highlighting = true
 show_line_numbers = true
@@ -28,4 +26,4 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-min_size = Vector2( 300, 190 )
+min_size = Vector2( 300, 140 )
