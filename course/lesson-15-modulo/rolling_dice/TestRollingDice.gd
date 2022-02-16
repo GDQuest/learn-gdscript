@@ -18,7 +18,7 @@ func test_randi_function_used_with_sides() -> String:
 	return ""
 
 
-func test_function_simulates_rolling_die() -> String:
+func test_function_simulates_rolling_dice() -> String:
 	var results = first_node.get("results")
 	
 	if results.min() < 7:
