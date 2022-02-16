@@ -43,6 +43,8 @@ func _ready() -> void:
 	# Allows to have a camera follow the turtle when using it in practices,
 	# inside the GDQuestBoy.
 	if get_parent() is Viewport:
+		_camera.set_as_toplevel(true)
+		_camera.position = global_position
 		_camera.make_current()
 
 
@@ -128,6 +130,9 @@ func play_draw_animation() -> void:
 	for command in _command_stack:
 		var duration := 1.0
 		match command.command:
+			"set_position":
+				turtle_position = command.target
+				_pivot.position = command.target
 			"move_camera":
 				# The callback never gets called if it has a delay of 0 seconds.
 				if is_equal_approx(tween_start_time, 0.0):
@@ -234,6 +239,8 @@ func _close_polygon() -> void:
 	_polygons.append(polygon)
 	_points.clear()
 
+	if not position.is_equal_approx(Vector2.ZERO):
+		_command_stack.append({command = "set_position", target = position})
 	# We can't know exactly when and where to move the camera until completing a
 	# shape, as we want to center the camera on the shape.
 	_command_stack.append({command = "move_camera", target = polygon.get_center()})
@@ -242,8 +249,8 @@ func _close_polygon() -> void:
 	_temp_command_stack.clear()
 
 
-func _move_camera(_target_position: Vector2) -> void:
-	_camera.position = _target_position
+func _move_camera(target_global_position: Vector2) -> void:
+	_camera.position = target_global_position
 
 
 # Polygon that can animate drawing its line.
@@ -272,6 +279,10 @@ class Polygon:
 	func get_center() -> Vector2:
 		var rect := get_rect()
 		return (rect.position + rect.end) / 2.0 + position
+
+	func get_global_center() -> Vector2:
+		var rect := get_rect()
+		return (rect.position + rect.end) / 2.0 + global_position
 
 	func get_points() -> PoolVector2Array:
 		return points
