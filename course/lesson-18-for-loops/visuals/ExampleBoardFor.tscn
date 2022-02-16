@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://course/lesson-18-for-loops/visuals/BoardVisualFor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
 
 [sub_resource type="GDScript" id=1]
@@ -13,6 +13,88 @@ func _ready():
 func _set_instance_value(value: float, property_name: String, value_label: Label) -> void:
 	._set_instance_value(value, property_name, value_label)
 	_gdscript_text_edit.text = gdscript_code.replace(property_name, \"%s [=%s]\"%[property_name, value])
+"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Node2D
+
+export var board_width := 3 setget set_grid_width
+export var board_height := 3 setget set_grid_height
+export var cell_size := 64
+export var line_width := 4
+
+var grid_size := Vector2(board_width, board_height)
+var _board_width := 0
+
+onready var _label := $Label
+onready var _robot := $Robot
+
+
+func _ready() -> void:
+	_robot.cell_size = cell_size
+	_robot.cell = Vector2(0, 1)
+	update()
+
+
+func _draw() -> void:
+	for x in range(grid_size.x):
+		for y in range(grid_size.y):
+			draw_rect(Rect2(Vector2(x * cell_size, y * cell_size), Vector2.ONE * cell_size), Color.white, false, line_width)
+
+
+func set_grid_width(width) -> void:
+	grid_size.x = width
+	_update_label()
+	update()
+
+
+func set_grid_height(height) -> void:
+	grid_size.y = height
+	_update_label()
+	update()
+
+
+func _update_label() -> void:
+	if not _label:
+		yield(self, \"ready\")
+	
+	_label.text = \"cell = Vector2%s\" % [_robot.cell]
+
+
+func run() -> void:
+	reset()
+	_board_width = grid_size.x
+	
+	for i in range(_board_width - 1):
+		yield(get_tree().create_timer(0.5), \"timeout\")
+		_robot.cell += Vector2(1, 0)
+		_update_label()
+
+
+func reset() -> void:
+	_robot.cell = Vector2(0, 1)
+	_update_label()
+"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Node2D
+
+
+var cell := Vector2(0, 0) setget set_cell, get_cell
+var cell_size := 96
+
+
+func set_cell(new_cell: Vector2) -> void:
+	cell = new_cell
+	_animate_movement(cell, new_cell)
+
+
+func get_cell() -> Vector2:
+	return cell
+
+
+func _animate_movement(old_cell, new_cell) -> void:
+	position = new_cell * cell_size + Vector2(cell_size/2, 12)
 "
 
 [node name="ExampleBoardFor" type="PanelContainer"]
@@ -30,6 +112,22 @@ margin_right = 651.0
 margin_bottom = 377.0
 rect_min_size = Vector2( 0, 370 )
 script = SubResource( 1 )
-scene = ExtResource( 1 )
 center_in_frame = false
 run_button_label = "move_to_end()"
+
+[node name="BoardForLoop" type="Node2D" parent="RunnableCodeExample"]
+position = Vector2( 50, 100 )
+script = SubResource( 2 )
+
+[node name="Robot" parent="RunnableCodeExample/BoardForLoop" instance=ExtResource( 1 )]
+script = SubResource( 3 )
+
+[node name="Label" type="Label" parent="RunnableCodeExample/BoardForLoop"]
+margin_left = 48.0
+margin_top = -54.0
+margin_right = 201.0
+margin_bottom = -40.0
+text = "cell = Vector2(0, 1)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
