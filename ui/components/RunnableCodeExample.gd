@@ -83,6 +83,11 @@ func set_code(new_gdscript_code: String) -> void:
 
 func set_scene(new_scene: PackedScene) -> void:
 	scene = new_scene
+	# Work around an issue where Godot considers the property got overriden in a
+	# scene and calls the setter, freeing the _scene_instance.
+	if not scene:
+		return
+
 	if not is_inside_tree():
 		yield(self, "ready")
 
