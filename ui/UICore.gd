@@ -23,7 +23,9 @@ onready var _report_form_popup := $ReportFormPopup as ReportFormPopup
 
 
 func _init() -> void:
-	Engine.target_fps = 60
+	var user_profile := UserProfiles.get_profile()
+	Engine.target_fps = user_profile.framerate_limit
+	user_profile.connect("framerate_limit_changed", Engine, "set_target_fps")
 	OS.low_processor_usage_mode = true
 	OS.low_processor_usage_mode_sleep_usec = 20000
 

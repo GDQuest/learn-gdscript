@@ -1,11 +1,21 @@
 extends ColorRect
 
+enum Framerates { SIXTY_FPS, THIRTY_FPS, NO_LIMIT }
+
+# Maps framerate options selected in the UI to actual framerate values.
+const FRAMERATE_MAP := {
+	Framerates.SIXTY_FPS: 60,
+	Framerates.THIRTY_FPS: 30,
+	Framerates.NO_LIMIT: 0,
+}
+
 var _sample_default_font: DynamicFont
 
 onready var _language_value := $PanelContainer/Column/Margin/Column/Settings/LanguageSetting/Value as OptionButton
 onready var _font_size_value := $PanelContainer/Column/Margin/Column/Settings/FontSizeSetting/ValueContainer/Value as HSlider
 onready var _font_size_sample := $PanelContainer/Column/Margin/Column/Settings/FontSizeSetting/ValueContainer/SampleText as Label
 onready var _scroll_sensitivity_slider := $PanelContainer/Column/Margin/Column/Settings/ScrollSensitivitySetting/Value as HSlider
+onready var _framerate_option := $PanelContainer/Column/Margin/Column/Settings/FramerateSetting/Value as OptionButton
 
 onready var _apply_button := $PanelContainer/Column/Margin/Column/Buttons/ApplyButton as Button
 onready var _cancel_button := $PanelContainer/Column/Margin/Column/Buttons/CancelButton as Button
@@ -22,9 +32,13 @@ func _ready() -> void:
 		int(current_profile.font_size_scale), _font_size_value.min_value, _font_size_value.max_value
 	)
 	_scroll_sensitivity_slider.value = current_profile.scroll_sensitivity
+	_framerate_option.selected = FRAMERATE_MAP.values().find(current_profile.framerate_limit)
 
 	_font_size_value.connect("value_changed", self, "_on_font_size_changed")
-	_scroll_sensitivity_slider.connect("value_changed", self, "_on_scroll_sensitivity_slider_value_changed")
+	_scroll_sensitivity_slider.connect(
+		"value_changed", self, "_on_scroll_sensitivity_slider_value_changed"
+	)
+	_framerate_option.connect("item_selected", self, "_on_framerate_option_item_selected")
 
 	_apply_button.connect("pressed", self, "_on_apply_settings")
 	_cancel_button.connect("pressed", self, "hide")
@@ -44,6 +58,10 @@ func _on_apply_settings() -> void:
 
 func _on_scroll_sensitivity_slider_value_changed(value: float) -> void:
 	UserProfiles.get_profile().set_scroll_sensitivity(value)
+
+
+func _on_framerate_option_item_selected(index: int) -> void:
+	UserProfiles.get_profile().set_framerate_limit(FRAMERATE_MAP[index])
 
 
 func _on_visibility_changed() -> void:

@@ -175,6 +175,28 @@ value = 1.0
 tick_count = 2
 ticks_on_borders = true
 
+[node name="FramerateSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/Settings"]
+margin_top = 247.0
+margin_right = 680.0
+margin_bottom = 294.0
+
+[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/Settings/FramerateSetting"]
+margin_right = 332.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Framerate cap"
+
+[node name="Value" type="OptionButton" parent="PanelContainer/Column/Margin/Column/Settings/FramerateSetting"]
+margin_left = 348.0
+margin_right = 680.0
+margin_bottom = 47.0
+hint_tooltip = "Limit the app's framerate. Lower values make the app use less resources, especially when running in the browser, but may feel less fluid."
+size_flags_horizontal = 3
+text = "60 FPS"
+items = [ "60 FPS", null, false, 0, false, "30 FPS", null, false, 0, false, "No limit", null, false, 0, false ]
+selected = 0
+
 [node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column"]
 margin_top = 384.0
 margin_right = 680.0

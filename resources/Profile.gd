@@ -3,6 +3,9 @@ extends Resource
 
 signal progress_changed(exercise_name, progress)
 signal scroll_sensitivity_changed(new_value)
+signal framerate_limit_changed(new_value)
+
+const VALID_FRAMERATE_LIMITS := [0, 30, 60]
 
 # General profile details
 export var player_name := ""
@@ -14,6 +17,7 @@ export var last_visible_lesson_block := {}
 export var font_size_scale := 0
 # Sensitivity when scrolling with the mouse wheel or touchpad.
 export var scroll_sensitivity := 1.0 setget set_scroll_sensitivity
+export var framerate_limit := 60 setget set_framerate_limit
 
 
 func _init() -> void:
@@ -186,3 +190,12 @@ func reset_course_progress(course_id: String) -> void:
 func set_scroll_sensitivity(amount: float) -> void:
 	scroll_sensitivity = max(amount, 0.1)
 	emit_signal("scroll_sensitivity_changed", scroll_sensitivity)
+
+
+func set_framerate_limit(limit: int) -> void:
+	assert(
+		limit in VALID_FRAMERATE_LIMITS,
+		"The framerate limit must be one of: " + str(VALID_FRAMERATE_LIMITS)
+	)
+	framerate_limit = limit
+	emit_signal("framerate_limit_changed", framerate_limit)
