@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=19 format=2]
+[gd_resource type="Resource" load_steps=23 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
@@ -35,12 +35,34 @@ title = ""
 type = 0
 text = "As we talked about in lesson 7, the scale variable has two sub-variables to it: [code]x[/code] and [code]y[/code].
 
-This is because [code]scale[/code] is a [code]Vector2[/code], which stands for two-dimensional vector. A [code]Vector2[/code] represents 2D coordinates.
-
-In Godot, vectors are a common value type, just like whole or decimal numbers. Precisely, they store two decimal numbers: one for the X coordinate and one for the Y coordinate.
-
-Vectors are essential in video games. They allow you to represent a character's movement speed and direction, calculate the distance to a target, and more, with little code."
+This is because [code]scale[/code] is a [code]Vector2[/code], which stands for two-dimensional vector. A [code]Vector2[/code] represents 2D coordinates."
 visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-16-2d-vectors/content-c7DDizKU.tres"
+title = "What are vectors?"
+type = 0
+text = "A vector, in physics, is a quantity with a magnitude and a direction. For example, a force applied to some object, the velocity (speed and directoin) of a character, and so on.
+
+We often represent it with an arrow.
+
+In Godot, 2D vectors are a common value type named [code]Vector2[/code],
+
+Unlike plain numbers, they store [i]two[/i] decimal numbers: one for the X coordinate and one for the Y coordinate."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-16-2d-vectors/content-7tKRHJMQ.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleVectorVisual.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -55,6 +77,34 @@ answer_options = [ "scale", "position", "health", "speed" ]
 valid_answers = [ "scale", "position" ]
 is_multiple_choice = true
 do_shuffle_answers = true
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-16-2d-vectors/content-dOCQiGjB.tres"
+title = "Vectors are great for games"
+type = 0
+text = "Vectors are [i]essential[/i] in video games.
+
+They allow you to represent a character's movement speed and direction, calculate the distance to a target, and more, with little code.
+
+Take this turtle AI below. You've probably seen games where enemies move like this.
+
+It's seven lines of pure vector calculation code.
+
+The code is a bit too difficult for now, so we'll spare you the details, but this turtle gives you a glimpse of what 2D vectors can do for you and your game projects."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-16-2d-vectors/content-2XNwQMqA.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleTurtleSteering.tscn"
+reverse_blocks = false
+has_separator = false
 
 [sub_resource type="Resource" id=5]
 script = ExtResource( 2 )
@@ -175,5 +225,5 @@ description = "Perhaps increasing the scale every level was a bad idea! Let's re
 [resource]
 script = ExtResource( 1 )
 title = "2D Vectors"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 14 ), SubResource( 11 ), SubResource( 9 ), SubResource( 8 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 15 ), SubResource( 16 ), SubResource( 4 ), SubResource( 17 ), SubResource( 18 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 14 ), SubResource( 11 ), SubResource( 9 ), SubResource( 8 ) ]
 practices = [ SubResource( 12 ), SubResource( 13 ) ]

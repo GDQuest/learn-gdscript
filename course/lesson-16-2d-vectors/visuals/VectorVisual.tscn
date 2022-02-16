@@ -1,11 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=1]
 [ext_resource path="res://course/lesson-16-2d-vectors/visuals/triangle.png" type="Texture" id=2]
 
 [sub_resource type="GDScript" id=1]
-script/source = "tool
-extends Area2D
+script/source = "extends Node2D
 
 export var size := Vector2(300, 300)
 var touch_down := Vector2.ZERO
@@ -16,14 +15,11 @@ onready var _label_x := find_node(\"LabelX\")
 onready var _label_y := find_node(\"LabelY\")
 onready var _triangle_x := find_node(\"TriangleX\")
 onready var _triangle_y := find_node(\"TriangleY\")
-onready var _collision_shape := find_node(\"CollisionShape2D\")
 onready var _color_rect := find_node(\"ColorRect\")
 onready var _triangle_mouse := find_node(\"TriangleMouse\")
 
 
 func _ready():
-	connect(\"input_event\", self, \"_on_input_event\")
-	_collision_shape.shape.extents = size/2
 	_color_rect.rect_size = size
 	_color_rect.rect_position = -size/2
 	_label_y.rect_position.y = size.y/2
@@ -33,14 +29,12 @@ func _ready():
 	update()
 
 
-func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
-	
-	if event is InputEventMouseMotion:
-		vector = to_local(event.position)
-		_triangle_mouse.position = vector
-		_triangle_mouse.rotation = Vector2.RIGHT.angle_to(vector)
-		_label.text = \"Vector2%s\" % [vector.round()]
-		update()
+func _process(delta: float) -> void:
+	vector = get_local_mouse_position().clamped(160)
+	_triangle_mouse.position = vector
+	_triangle_mouse.rotation = Vector2.RIGHT.angle_to(vector)
+	_label.text = \"Vector2%s\" % [vector.round()]
+	update()
 
 
 func _draw():
@@ -50,16 +44,10 @@ func _draw():
 	
 "
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 150, 150 )
-
 [node name="VectorVisual" type="Node2D"]
 
-[node name="VectorVisual" type="Area2D" parent="."]
+[node name="VectorVisual" type="Node2D" parent="."]
 script = SubResource( 1 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VectorVisual"]
-shape = SubResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="VectorVisual"]
 visible = false
