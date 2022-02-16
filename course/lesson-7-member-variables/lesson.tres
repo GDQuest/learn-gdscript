@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=26 format=2]
+[gd_resource type="Resource" load_steps=27 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
@@ -95,6 +95,16 @@ title = ""
 type = 0
 text = ""
 visual_element_path = "RunResetCharacterRotation.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-7-member-variables/content-Gx0c7DDi.tres"
+title = ""
+type = 0
+text = "Notice how we use the equal sign ([code]=[/code]) to change the value of a variable."
+visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
@@ -266,14 +276,16 @@ description = "Use the position member variable and its sub-variables to change 
 script = ExtResource( 3 )
 practice_id = "res://course/lesson-7-member-variables/practice-x0c7DDiz.tres"
 title = "Draw rectangles at different positions"
-goal = "Draw three squares of size 100 by 100 that are 100 pixels apart from each other on the horizontal axis. In other words, there should be a 100-pixel gap between two squares.
+goal = "Draw three squares of size 100 by 100 that are 100 pixels apart on the horizontal axis. In other words, there should be a 100-pixel gap between two squares.
 
 You should draw the squares starting at the position (100, 100). This means you should position the first square at 100 on the X axis and 100 on the Y axis.
+
+Remember you need to use the equal sign ([code]=[/code]) to change the value of a variable, like the turtle's position.
 
 Write your code inside the [code]run()[/code] function so the computer can recognize it."
 starting_code = "func run():
 	"
-hints = PoolStringArray( "As each square is 100 pixels wide, to separate them by 100 pixels, you need to move the turtle by 200 pixels in total.", "You need to change the turtle\'s X position before drawing each square." )
+hints = PoolStringArray( "As each square is 100 pixels wide, to separate them by 100 pixels, you need to move the turtle by 200 pixels in total.", "You need to change the turtle\'s X position before drawing each square.", "To change the turtle\'s position to 100 pixels on the X axis, write [code]position.x = 100[/code]. You can write [code]position.y = 100[/code] to move the turtle to 100 pixels on the Y axis." )
 validator_script_path = "draw_rectangles_at_positions/TestsDrawingRectangles.gd"
 script_slice_path = "draw_rectangles_at_positions/DrawingMultipleRectangles.live-editor/slices/DrawingMultipleRectangles.run.slice.tres"
 documentation_references = PoolStringArray( "draw_rectangle", "position.x", "position.y" )
@@ -283,5 +295,5 @@ description = "Now you can place and draw one rectangle, how about placing sever
 [resource]
 script = ExtResource( 1 )
 title = "Introduction to Member Variables"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 21 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ]
 practices = [ SubResource( 19 ), SubResource( 20 ) ]
