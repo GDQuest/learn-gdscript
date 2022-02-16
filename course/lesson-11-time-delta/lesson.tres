@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=21 format=2]
+[gd_resource type="Resource" load_steps=25 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
@@ -121,16 +121,76 @@ valid_answers = [ "It's a value in seconds.", "It varies each frame.", "It's the
 is_multiple_choice = true
 do_shuffle_answers = true
 
+[sub_resource type="Resource" id=16]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-11-time-delta/content-Gx0c7DDi.tres"
+title = "Multiplying by delta"
+type = 0
+text = "The [code]delta[/code] you get in [code]_process()[/code] is a time difference in seconds. It will generally be a tiny decimal number.
+
+To apply [code]delta[/code], you need to [i]multiply[/i] your speed values by it."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-11-time-delta/content-GjB7tKRH.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleRotatingWithDelta.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-11-time-delta/content-zKUdOCQi.tres"
+title = ""
+type = 0
+text = "When multiplying by [code]delta[/code], you make motion [i]time-dependent[/i] rather than [i]frame-dependent[/i].
+
+That's essential to make your game consistent and fair."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-11-time-delta/content-JMQ2XNwQ.tres"
+title = "Why do we use the number 3.0 in this example?"
+type = 1
+text = "At the top of the lesson, we made the robot rotate a fixed amount every frame: [code]0.05[/code] radians.
+
+In the example above, we now [i]multiply[/i] the argument by the very small [code]delta[/code] value, a value way below [code]1.0[/code]. It makes the robot turn at a constant speed over time.
+
+However, multiplying by a number below [code]1.0[/code] like [code]delta[/code] makes the result smaller.
+
+To compensate for that and make the robot turn fast enough, we use a larger number than before, [code]3.0[/code] instead of [code]0.05[/code].
+
+Those numbers have two different [i]units[/i]: [code]0.05[/code] is an [i]angle[/i] in radians, while [code]3.0[/code] is an [i]angular speed[/i] in radians per second.
+
+When you multiply a speed by a time delta, it gives you an angle.
+
+Don't worry if it's a little confusing for now. It'll eventually click as you deal with speed, acceleration, and motion in your game projects."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
 [sub_resource type="Resource" id=9]
 script = ExtResource( 5 )
 content_id = "res://course/lesson-11-time-delta/content-qE82V6jG.tres"
-title = "The time between frames matters"
+title = "Why the time between frames matters"
 type = 0
-text = "The time it takes to display a new frame varies. If you don't take that time into account in your code, your game will have gameplay issues and bugs. Godot provides that time to the [code]_process()[/code] function through the [code]delta[/code] parameter.
+text = "The time it takes to display a new frame varies.
+
+If you don't take that time into account in your code, your game will have gameplay issues and bugs. Godot provides that time to the [code]_process()[/code] function through the [code]delta[/code] parameter.
 
 In the example below, the top robot moves using [code]delta[/code]. As a result, it moves at a fixed speed.
 
-The bottom robot moves over a constant distance every frame. It will move faster or slower than the top robot on [i]your[/i] computer. The result will be different for everyone."
+The bottom robot moves over a constant distance every frame, [i]without[/i] taking [code]delta[/code] into account. It will move faster or slower than the top robot on [i]your[/i] computer.
+
+The bottom robot will move [i]differently for everyone[/i]!"
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -218,5 +278,5 @@ description = ""
 [resource]
 script = ExtResource( 1 )
 title = "Time Delta"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 16 ), SubResource( 18 ), SubResource( 17 ), SubResource( 19 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]
 practices = [ SubResource( 14 ), SubResource( 15 ) ]

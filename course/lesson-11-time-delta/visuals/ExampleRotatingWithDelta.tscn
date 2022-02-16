@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+
+func _ready() -> void:
+	set_process(false)
+	
+
+func _process(delta: float) -> void:
+	rotate(3.0 * delta)
+
+func reset():
+	set_process(false)
+	
+
+func run():
+	set_process(true)
+"
+
+[node name="ExampleRotatingSpriteFrame" type="PanelContainer"]
+margin_right = 1047.0
+margin_bottom = 298.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1040.0
+margin_bottom = 291.0
+gdscript_code = "func _process(delta):
+	rotate(3.0 * delta)"
+run_button_label = "set_process(true)"
+
+[node name="RotatingExample" type="Node2D" parent="RunnableCodeExample"]
+script = SubResource( 1 )
+
+[node name="Robot" parent="RunnableCodeExample/RotatingExample" instance=ExtResource( 3 )]
+
+[node name="Timer" type="Timer" parent="."]
