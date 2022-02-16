@@ -103,6 +103,8 @@ func set_text(new_text: String) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 	slice_editor.text = new_text
+	slice_editor.cursor_set_line(1000000)
+	slice_editor.cursor_set_column(1000000)
 
 
 func get_text() -> String:
