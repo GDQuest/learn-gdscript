@@ -196,7 +196,7 @@ static func test_file(current_file_name: String) -> bool:
 
 static func make_error_cannot_connect(url: String, error_name: String) -> LanguageServerError:
 	var err = LanguageServerError.new()
-	err.message = "Cannot connect to '%s' (%s). Are you sure you are connected?"%[url, error_name]
+	err.message = "Cannot connect to the server (%s)." % [error_name]
 	err.severity = 1
 	err.code = GDQuestErrorCode.CANNOT_CONNECT_TO_LSP
 	return err
