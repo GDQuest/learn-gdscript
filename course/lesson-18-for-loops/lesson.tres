@@ -1,0 +1,165 @@
+[gd_resource type="Resource" load_steps=18 format=2]
+
+[ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=2]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-zKUdOCQi.tres"
+title = ""
+type = 0
+text = "In the last lesson, we looked at while loops. We found they were useful if we don't know how many times we should repeat code. However, they could result in infinite loops if we're not careful."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-GjB7tKRH.tres"
+title = ""
+type = 0
+text = "[Generic while loop]"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-JMQ2XNwQ.tres"
+title = ""
+type = 0
+text = "In this lesson, we'll change our code to use a for loop instead. Unlike while loops, for loops don't run infinitely, so it's much less likely that you'll get bugs in your game. Because of that, we recommend favoring for loops over while loops.
+
+We change the above to use a for loop instead."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-MqAYVjot.tres"
+title = ""
+type = 0
+text = "[Generic for loop]"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-xF5HUxZP.tres"
+title = ""
+type = 0
+text = "Let's explain what's going on here.
+
+Godot has the helper function `range(x)` which returns a list of numbers from 0 to x - 1. 
+
+So range(3) returns [0, 1, 2], and range(5) returns [0, 1, 2, 3, 4]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+quiz_id = "res://course/lesson-18-for-loops/quiz-xY8VUDpP.tres"
+question = "What would range(6) return?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = ""
+answer_options = [ "[0, 1, 2, 3, 4, 5]", "[1, 2, 3, 4, 5, 6]", "[0, 1, 2, 3, 4, 5, 6]" ]
+valid_answers = [ "[0, 1, 2, 3, 4, 5]" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-wQDwfyqd.tres"
+title = ""
+type = 0
+text = "With a for loop, Godot cycles through the list of numbers from range(), executing the code in the for loop as it goes."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-YOexRjTR.tres"
+title = ""
+type = 0
+text = "[Print for loop]"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-hZN4rS5A.tres"
+title = ""
+type = 0
+text = "For each item in the list [0, 1, 2], we set the number to the item, then execute the code in the for loop. 
+
+In the above case, that's simply printing what the value of number is as we move through the list.
+
+Here's our old function which used a while loop."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-JTESv5tT.tres"
+title = ""
+type = 0
+text = "[Old board move function]"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-nVHARbBW.tres"
+title = ""
+type = 0
+text = "Let's alter our `move_to_end()` function to use a for loop instead."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-NbDGt6fU.tres"
+title = ""
+type = 0
+text = "[For visual board move]"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-qbTxYej4.tres"
+title = ""
+type = 0
+text = "[Interactive baord move to reinforce]"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-7MqE82V6.tres"
+title = ""
+type = 0
+text = "Rather than constantly checking if the robot has reached the end of the board, we instead take the width of the board beforehand, then move the robot a set number of times.
+
+In the practices, we'll use for loops in different ways to get you used to using them."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[resource]
+script = ExtResource( 1 )
+title = "Introduction to For Loops"
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ]
+practices = [  ]
