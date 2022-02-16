@@ -15,7 +15,7 @@ const ARRIVE_DISTANCE_BASE := 200.0
 const SPEED_BASE := 3000.0
 # If the target scroll is farther than this distance, we increase the scrolling
 # speed proportionally.
-const ACCELERATE_DISTANCE_THRESHOLD := 120.0
+const ACCELERATE_DISTANCE_THRESHOLD := 240.0
 # Used to multiply the scroll speed as the target scroll gets farther away than
 # ACCELERATE_DISTANCE_THRESHOLD.
 const SPEED_DISTANCE_DIVISOR := 200.0
@@ -70,10 +70,13 @@ func _process(delta: float) -> void:
 	var direction := _current_scroll.direction_to(_target_position)
 	var desired_velocity := direction * scroll_speed
 	if distance_to_target < arrive_distance:
-		desired_velocity *= distance_to_target / arrive_distance
+		desired_velocity = desired_velocity.linear_interpolate(Vector2.ZERO, 1.0 - distance_to_target / arrive_distance)
 
 	var steering := desired_velocity - _velocity
 	_velocity += steering / 2.0
+	# Prevents scrolling from overshooting when the framerate goes down.
+	if _velocity.length() * delta > distance_to_target:
+		_velocity = _velocity.normalized() * distance_to_target / delta
 
 	_current_scroll += _velocity * delta
 	scroll_vertical = _current_scroll.y
