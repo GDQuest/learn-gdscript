@@ -15,11 +15,9 @@ var _board_width := 0
 
 onready var _label := $Label
 onready var _robot := $Robot
-onready var _timer := $Timer
 
 
 func _ready() -> void:
-	_timer.connect(\"timeout\", self, \"_on_timer_timeout\")
 	_robot.cell_size = cell_size
 	_robot.cell = Vector2(0, 1)
 	update()
@@ -42,6 +40,7 @@ func set_grid_height(height) -> void:
 	_update_label()
 	update()
 
+
 func _update_label() -> void:
 	if not _label:
 		yield(self, \"ready\")
@@ -49,22 +48,17 @@ func _update_label() -> void:
 	_label.text = \"cell = Vector2%s\" % [_robot.cell]
 
 
-func _on_timer_timeout() -> void:
-	if not _robot.cell.x < _board_width - 1:
-		_timer.stop()
-		return
-	_robot.cell += Vector2(1, 0)
-	_update_label()
-
-
 func run() -> void:
-	_board_width = grid_size.x
 	reset()
-	_timer.start(0.5)
+	_board_width = grid_size.x
+	
+	for i in range(_board_width - 1):
+		yield(get_tree().create_timer(0.5), \"timeout\")
+		_robot.cell += Vector2(1, 0)
+		_update_label()
 
 
 func reset() -> void:
-	_timer.stop()
 	_robot.cell = Vector2(0, 1)
 	_update_label()
 "
@@ -107,6 +101,3 @@ text = "cell = Vector2(0, 1)"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
