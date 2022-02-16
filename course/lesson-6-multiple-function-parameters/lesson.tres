@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=34 format=2]
+[gd_resource type="Resource" load_steps=32 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
@@ -13,7 +13,7 @@ title = ""
 type = 0
 text = "In the previous part, you created a function to draw a square of a fixed size.
 
-This function is a bit limiting. Instead, it would be much better if we had a function to draw a square of any size. Or better: any kind of rectangle (a square is a specific kind of rectangle).
+This function is a bit limiting. Instead, it would be much better if we had a function to draw a square of [i]any[/i] size. Or better: any kind of rectangle (a square is a specific kind of rectangle).
 
 In previous lessons, you used the [code]rotate()[/code] function and gave it a [i]parameter[/i]."
 visual_element_path = ""
@@ -30,34 +30,12 @@ visual_element_path = "visuals/ExampleRotate.tscn"
 reverse_blocks = false
 has_separator = false
 
-[sub_resource type="Resource" id=3]
-script = ExtResource( 5 )
-content_id = "res://course/lesson-6-multiple-function-parameters/content-qAYVjotx.tres"
-title = ""
-type = 0
-text = "Under the hood, the [code]rotate()[/code] function looks like the following:"
-visual_element_path = ""
-reverse_blocks = false
-has_separator = false
-
-[sub_resource type="Resource" id=4]
-script = ExtResource( 5 )
-content_id = "res://course/lesson-6-multiple-function-parameters/content-F5HUxZPx.tres"
-title = ""
-type = 0
-text = ""
-visual_element_path = "visuals/ExampleRotateFunction.tscn"
-reverse_blocks = false
-has_separator = false
-
 [sub_resource type="Resource" id=5]
 script = ExtResource( 5 )
 content_id = "res://course/lesson-6-multiple-function-parameters/content-Y8VUDpPw.tres"
 title = ""
 type = 0
-text = "It adds the new [code]radians[/code] to the current rotation, and then sets this new rotation.
-
-Just like [code]rotate()[/code], we can also give our function [i]parameters[/i]. Parameters are labels you give to values passed to the function."
+text = "Just like [code]rotate()[/code], we can also give our function [i]parameters[/i]. Parameters are labels you give to values passed to the function."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -383,5 +361,5 @@ description = "With one parameter, you can make squares of any size. With two, y
 [resource]
 script = ExtResource( 1 )
 title = "Your First Function Parameter"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ]
 practices = [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ]
