@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://course/lesson-18-for-loops/visuals/BoardVisualFor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "tool
+extends RunnableCodeExample
+
+func _ready():
+	create_slider_for(\"board_width\", 1.0, 9.0, 1.0)
+
+func _set_instance_value(value: float, property_name: String, value_label: Label) -> void:
+	._set_instance_value(value, property_name, value_label)
+	_gdscript_text_edit.text = gdscript_code.replace(property_name, \"%s [=%s]\"%[property_name, value])
+"
+
+[node name="ExampleBoardFor" type="PanelContainer"]
+margin_right = 658.0
+margin_bottom = 384.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 651.0
+margin_bottom = 377.0
+rect_min_size = Vector2( 0, 370 )
+script = SubResource( 1 )
+scene = ExtResource( 1 )
+center_in_frame = false
+run_button_label = "move_to_end()"

@@ -1,0 +1,112 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Node2D
+
+export var board_width := 3 setget set_grid_width
+export var board_height := 3 setget set_grid_height
+export var cell_size := 64
+export var line_width := 4
+
+var grid_size := Vector2(board_width, board_height)
+var _board_width := 0
+
+onready var _label := $Label
+onready var _robot := $Robot
+onready var _timer := $Timer
+
+
+func _ready() -> void:
+	_timer.connect(\"timeout\", self, \"_on_timer_timeout\")
+	_robot.cell_size = cell_size
+	_robot.cell = Vector2(0, 1)
+	update()
+
+
+func _draw() -> void:
+	for x in range(grid_size.x):
+		for y in range(grid_size.y):
+			draw_rect(Rect2(Vector2(x * cell_size, y * cell_size), Vector2.ONE * cell_size), Color.white, false, line_width)
+
+
+func set_grid_width(width) -> void:
+	grid_size.x = width
+	_update_label()
+	update()
+
+
+func set_grid_height(height) -> void:
+	grid_size.y = height
+	_update_label()
+	update()
+
+func _update_label() -> void:
+	if not _label:
+		yield(self, \"ready\")
+	
+	_label.text = \"cell = Vector2%s\" % [_robot.cell]
+
+
+func _on_timer_timeout() -> void:
+	if not _robot.cell.x < _board_width - 1:
+		_timer.stop()
+		return
+	_robot.cell += Vector2(1, 0)
+	_update_label()
+
+
+func run() -> void:
+	_board_width = grid_size.x
+	reset()
+	_timer.start(0.5)
+
+
+func reset() -> void:
+	_timer.stop()
+	_robot.cell = Vector2(0, 1)
+	_update_label()
+"
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+
+var cell := Vector2(0, 0) setget set_cell, get_cell
+var cell_size := 96
+
+
+func set_cell(new_cell: Vector2) -> void:
+	cell = new_cell
+	_animate_movement(cell, new_cell)
+
+
+func get_cell() -> Vector2:
+	return cell
+
+
+func _animate_movement(old_cell, new_cell) -> void:
+	position = new_cell * cell_size + Vector2(cell_size/2, 12)
+"
+
+[node name="GridVisualFor" type="Node2D"]
+position = Vector2( 50, 100 )
+script = SubResource( 2 )
+
+[node name="Robot" parent="." instance=ExtResource( 2 )]
+scale = Vector2( 0.75, 0.75 )
+script = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 48.0
+margin_top = -54.0
+margin_right = 201.0
+margin_bottom = -40.0
+text = "cell = Vector2(0, 1)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
