@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=25 format=2]
+[gd_resource type="Resource" load_steps=28 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
@@ -198,6 +198,38 @@ valid_answers = [ "3 > 1", "2 < 3", "1 != 3" ]
 is_multiple_choice = true
 do_shuffle_answers = true
 
+[sub_resource type="Resource" id=20]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-otxF5HUx.tres"
+title = "Or else..."
+type = 0
+text = "The [code]if[/code] keyword comes with a complementary [code]else[/code] keyword.
+
+You can write an [code]else[/code] block after an [code]if[/code] block, like so."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-ZPxY8VUD.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleElse.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-pPwQDwfy.tres"
+title = ""
+type = 0
+text = "The [code]else[/code] block will run whenever the condition above it isn't met."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = true
+
 [sub_resource type="Resource" id=16]
 script = ExtResource( 5 )
 content_id = "res://course/lesson-13-conditions/content-V6jGvGm2.tres"
@@ -289,5 +321,5 @@ description = "Having a negative health value doesn't make a lot of sense. Make 
 [resource]
 script = ExtResource( 1 )
 title = "Conditions"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 16 ) ]
 practices = [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ]
