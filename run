@@ -32,7 +32,7 @@ clean_web(){
     echo "Removes web build"
     exit 0
   fi
-  rm -rf build/web
+  rm -rf "${dirs[web]}"
   echo "✓ Removed web files"
 }
 
@@ -57,7 +57,11 @@ web_server(){
     echo "Runs a python webserver in build/web"
     exit 0
   fi
-  python -m http.server 8000 --directory build/web
+  if ! command -v python &> /dev/null; then
+      echo "Python 3 isn't available. It is required to run the server"
+      exit 1
+  fi
+  python -m http.server 8000 --directory "${dirs[web]}"
 }
 
 
@@ -71,27 +75,27 @@ web_watch(){
   throttle_compile=10
   last_time_copied=0
   throttle_copy=1
-  dir=${1:-.}
-  full_path=$(readlink -f $dir)
+  source_dir=${1:-.}
+  full_path=$(readlink -f $source_dir)
   echo "will watch $full_path"
-  inotifywait --monitor --recursive --quiet --event modify,move,create,delete --format '%w%f' --includei "\.(js|css|html|gd)" "$dir" | while read FILE
+  inotifywait --monitor --recursive --quiet --event modify,move,create,delete --format '%w%f' --includei "\.(js|css|html|gd)" "$source_dir" | while read changed_file
   do
-    changed_dir=$(dirname "$FILE")
+    changed_dir=$(dirname "$changed_file")
     base_dir=$(echo "$changed_dir" | cut -d "/" -f2)
     if [ "$base_dir" != "build" ]; then
       now=$(date +%s)
-      filename=$(basename "$FILE")
-      ext=${FILE##*.}
+      filename=$(basename "$changed_file")
+      ext=${changed_file##*.}
       if [ "$base_dir" = "html_export" ]; then
         if (($now - $last_time_copied >= $throttle_copy)); then
-          echo "will copy $FILE"
-          cp "$FILE" "$web_dir/$filename"
+          echo "will copy $changed_file"
+          cp "$changed_file" "${dirs[web]}/$filename"
         fi
         last_time_copied=$(date +%s)
       else
-        echo "Changes detected in $FILE, will recompile"
+        echo "Changes detected in $changed_file, will recompile"
         if (($now - $last_time_compiled >= $throttle_compile)); then
-          export_any "HTML5" "$web_dir/index.html"
+          export_custom "${presets[web]}" "${dirs[web]/index.html}"
         fi 
         last_time_compiled=$(date +%s)
       fi
@@ -100,7 +104,7 @@ web_watch(){
 }
 
 
-web(){
+web_debug(){
   if [ "$1" == "help" ]; then
     echo "Exports the web build, starts a python webserver, and watches"
     echo "the directory for changes. Require Python 3 and inotifywait to"
@@ -117,7 +121,7 @@ web(){
 ######################################## EXPORTS
 
 
-export_any(){
+export_custom(){
   if [ "$1" == "help" ]; then
     echo "Exports a Godot build"
     echo "Usage:"
@@ -126,13 +130,20 @@ export_any(){
     echo "for example: ./run export:any \"HTML5\" \"build/web/index.html\""
     echo ""
     echo "<name> needs to be a valid export specified in \`export_presets.cfg\`"
+    echo "set the environment variable \$debug to export a debug build"
     exit 0
   fi
   export_name=$1
   output=$2
   dir=$(dirname "$output")
   mkdir -p "$dir"
-  godot --quiet --no-window --export "$export_name" "$output"
+  if [ -z "$debug" ]; then
+    echo "godot --quiet --no-window --export \"$export_name\" \"$output\""
+    test "$dry" || godot --quiet --no-window --export "$export_name" "$output"
+  else
+    echo "godot --verbose --no-window --export-debug \"$export_name\" \"$output\""
+    test "$dry" || godot --verbose --no-window --export-debug "$export_name" "$output"
+  fi
   echo "✓ Exported \`$export_name\` build to \`$dir\`"
 }
 
@@ -146,10 +157,14 @@ export_web(){
     echo "   the root subfolder)"
     exit 0
   fi
-  prepare_htmltemplate $url
-  export_any "HTML5" "$web_dir/index.html"
-  cp -r html_export/static/* "$web_dir"
-  echo "✓ Copied web files to $web_dir"
+  prepare_htmltemplate
+  
+  export_custom "${presets[web]}" "${dirs[web]}/index.html"
+  
+  echo "cp -r html_export/static/* \"${dirs[web]}\""
+  test "$dry" || cp -r html_export/static/* "${dirs[web]}"
+
+  echo "✓ Copied web files to ${dirs[web]}"
 }
 
 
@@ -158,7 +173,7 @@ export_osx(){
     echo "Exports the OSX build"
     exit 0
   fi
-  export_any "Mac OSX" "build/osx/$APP_NAME.zip"
+  export_custom "${presets[osx]}" "${dirs[osx]}/$APP_NAME.zip"
 }
 
 
@@ -167,7 +182,7 @@ export_windows(){
     echo "Exports the Windows build"
     exit 0
   fi
-  export_any "Windows Desktop" "build/windows/$APP_NAME.exe"
+  export_custom "${presets[windows]}" "${dirs[windows]}/$APP_NAME.exe"
 }
 
 
@@ -176,94 +191,116 @@ export_linux(){
     echo "Exports the Linux build"
     exit 0
   fi
-  export_any "Linux/X11" "build/linux/$APP_NAME.x86_64"
+  export_custom "${presets[linux]}" "${dirs[linux]}/$APP_NAME.x86_64"
 }
 
 
-export(){
+export_all(){
   if [ "$1" == "help" ]; then
     echo "exports all builds"
     exit 0
   fi
-  export_web
+  export_linux
   export_windows
   export_osx
-  export_linux
+  export_web
 }
 
 
 ######################################## PUSHING TO ITCH
 
 
-push(){
-  tag=$1
+push_custom(){
   if [ "$1" == "help" ]; then
     echo "Usage:"
     echo "push <build> [...<tags>]"
-    echo "you can use \`all\` instead of a build name"
     echo "the build needs to exist in the build/ directory"
+    echo "the release will automatically be tagged with the branch name"
     echo ""
     echo "example:"
-    echo "run push linux staging"
-    echo "run push all"
+    echo "run push linux mytag"
+    echo "available builds:"
+    for build in "${builds[@]}" ; do
+      if [ ! -d "$dir" ]; then
+        echo "  - $build: UNAVAILABLE (export it first)"
+      else
+        echo "  - $build"
+      fi
+    done
     exit 0
   fi
-  if [ -z "$tag" ]; then
-    echo "You need to specify a build to push, or \`all\`"
-    echo "available builds:"
-    for d in build/*/ ; do
-      build_name=$(basename $d)
-      echo "  - $build_name"
-    done
-    echo "  - all"
+  
+  current_build="$1"
+  dir="${dirs[$current_build]}"
+  if [ -z "$current_build" ]; then
+    echo "You need to specify a build to push"
     exit 1
   fi
-  dir="build/$tag"
-  error=0
-  if [ ! -d "$dir" ] && [ "$tag" != "all" ]; then
-    echo "\`$dir\` does not seem to exist. Did you type the name correctly?"
-    error=1
-  fi
-  if [ -z "$BUTLER_API_KEY" ]; then
-    echo "\$BUTLER_API_KEY is a mandatory variable to push to itch"
-    error=1
-  fi
-  if [ -z "$ITCHIO_USERNAME" ]; then
-    echo "\$ITCHIO_USERNAME is a mandatory variable to push to itch"
-    error=1
-  fi
-  if [ -z "$ITCHIO_GAME" ]; then
-    echo "\$ITCHIO_GAME is a mandatory variable to push to itch"
-    error=1
-  fi
-  if ! command -v butler &> /dev/null; then
-    echo "\`butler\` is not installed or not available on \$PATH"
-    error=1
-  fi
-  if [ "$error" -eq "1" ]; then
+  if [ ! -d "$dir" ]; then
+    echo "$dir does not exist. Maybe you forgot to export first?"
     exit 1
   fi
-  if [ -z "$git_branch" ]; then
-    _prepare_build_vars
-  fi
-  if [ "$tag" == "all" ]; then
-    shift
-  fi
+  test "$dry" || _verify_itch_variables_or_die
   old="$IFS"
   IFS='-'
   all_tags="$*-$git_branch"
   IFS=$old
-  if [ "$tag" == "all" ]; then
-    for d in build/*/ ; do
-      build_name=$(basename $d)
-      tag=$(echo "$build_name" "$all_tags" | sed "s/ /-/g" | sed "s/-\+/-/g")
-      echo "butler push $d $ITCHIO_USERNAME/$ITCHIO_GAME:$tag"
-      butler push "$d" "$ITCHIO_USERNAME/$ITCHIO_GAME":"$tag"
-    done
-  else
-    echo "butler push $dir $ITCHIO_USERNAME/$ITCHIO_GAME:$all_tags"
-    butler push "$dir" "$ITCHIO_USERNAME/$ITCHIO_GAME":"$all_tags"
+  
+  if [ ! -z "$dry" ] && [ -z "$ITCHIO_USERNAME" ]; then
+    ITCHIO_USERNAME="user"
+    ITCHIO_GAME="game"
   fi
+
+  echo "butler push \"$dir\" \"$ITCHIO_USERNAME/$ITCHIO_GAME:$all_tags\""
+  test "$dry" || butler push "$dir" "$ITCHIO_USERNAME/$ITCHIO_GAME:$all_tags"
+}
+
+
+push_web(){
+  if [ "$1" == "help" ]; then
+    echo "Pushes the Web build"
+    exit 0
+  fi
+  push_custom "web"
+}
+
+
+push_osx(){
+  if [ "$1" == "help" ]; then
+    echo "Pushes the OSX build"
+    exit 0
+  fi
+  push_custom "osx"
+}
+
+
+push_windows(){
+  if [ "$1" == "help" ]; then
+    echo "Pushes the Windows build"
+    exit 0
+  fi
+  push_custom "windows"
+}
+
+
+push_linux(){
+  if [ "$1" == "help" ]; then
+    echo "Pushes the Linux build"
+    exit 0
+  fi
+  push_custom "linux"
+}
+
+
+push_all(){
+  if [ "$1" == "help" ]; then
+    echo "Pushes all builds to Itch"
+    exit 0
+  fi
+  push_linux
+  push_windows
+  push_osx
+  push_web
 }
 
 
@@ -300,7 +337,7 @@ prepare_ci_software(){
 }
 
 
-prepare_override_file(){
+prepare_overridefile(){
     if [ "$1" == "help" ]; then
     echo "Copies the override file if it exists"
     echo "You should not run this on your local computer"
@@ -329,35 +366,8 @@ prepare_ci(){
   fi
   prepare_ci_copytemplates
   prepare_ci_software
-  prepare_override_file $@
+  prepare_overridefile $@
   echo "✓ CI prepared"
-}
-
-
-_prepare_build_vars(){
-  build_date=$(date '+%Y, %m, %d, %H, %M, %S')
-  build_date_iso=$(date "+%Y/%m/%d %H:%M:%S")
-  build_date_unix=$(date '+%s')
-  git_commit=$(git rev-parse HEAD)
-  if [ -z "$git_branch" ]; then
-    git_branch=$(git branch --show-current)
-  fi
-  if [ -z "$version" ]; then
-    version=$(git describe --tags --abbrev=0 --match "*.*.*")
-  fi
-  watermark="$build_date_iso | $git_branch:$version:$git_commit"
-  if [ -z "$url" ]; then
-    url=${1:-"https://gdquest.github.io/learn-gdscript"}
-    if [ "$git_branch" != "release" ]; then
-      url="$url/$git_branch"
-    fi
-  fi
-  if [ -z "$web_dir" ]; then
-    web_dir="build/web"
-    if [ "$git_branch" != "release" ]; then
-      web_dir="$web_dir/$git_branch"
-    fi
-  fi
 }
 
 
@@ -366,17 +376,16 @@ prepare_versionfile(){
     echo "Creates and fills the version file"
     exit 0
   fi
-  _prepare_build_vars $1
-  FILE="utils/version.gd"
-  echo "# AUTO GENERATED FILE, YOUR CHANGES WILL NOT REMAIN" > $FILE
-  echo "class_name AppVersion" >> $FILE
-  echo "" >> $FILE
-  echo "const version := \"$version\";" >> $FILE
-  echo "const git_commit := \"$git_commit\";" >> $FILE
-  echo "const git_branch := \"$git_branch\";" >> $FILE
-  echo "const build_date := [$build_date];" >> $FILE
-  echo "const build_date_unix := $build_date_unix;" >> $FILE
-  echo "const build_date_iso := \"$build_date_iso;\"" >> $FILE
+  changed_file="utils/version.gd"
+  echo "# AUTO GENERATED changed_file, YOUR CHANGES WILL NOT REMAIN" > $changed_file
+  echo "class_name AppVersion" >> $changed_file
+  echo "" >> $changed_file
+  echo "const version := \"$version\";" >> $changed_file
+  echo "const git_commit := \"$git_commit\";" >> $changed_file
+  echo "const git_branch := \"$git_branch\";" >> $changed_file
+  echo "const build_date := [$build_date];" >> $changed_file
+  echo "const build_date_unix := $build_date_unix;" >> $changed_file
+  echo "const build_date_iso := \"$build_date_iso;\"" >> $changed_file
 
   echo "✓ created version file"
 }
@@ -388,7 +397,6 @@ prepare_htmltemplate(){
     echo "before exporting to web"
     exit 0
   fi
-  _prepare_build_vars $1
   sed "s@>branch and commit hash@>${watermark}<@" html_export/index_template.html > html_export/index.html
   sed -i "s@GDQUEST_ENVIRONMENT = {}@GDQUEST_ENVIRONMENT = {\n \
      build_date: \"$build_date\",\n \
@@ -407,12 +415,96 @@ prepare_htmltemplate(){
 ######################################## BOOTSTRAP
 
 
+_verify_itch_variables_or_die(){
+  error=0
+  if [ ! -d "$dir" ] && [ "$tag" != "all" ]; then
+    echo "\`$dir\` does not seem to exist. Did you type the name correctly?"
+    error=1
+  fi
+  if [ -z "$BUTLER_API_KEY" ]; then
+    echo "\$BUTLER_API_KEY is a mandatory variable to push to itch"
+    error=1
+  fi
+  if [ -z "$ITCHIO_USERNAME" ]; then
+    echo "\$ITCHIO_USERNAME is a mandatory variable to push to itch"
+    error=1
+  fi
+  if [ -z "$ITCHIO_GAME" ]; then
+    echo "\$ITCHIO_GAME is a mandatory variable to push to itch"
+    error=1
+  fi
+  if ! command -v butler &> /dev/null; then
+    echo "\`butler\` is not installed or not available on \$PATH"
+    error=1
+  fi
+  if [ "$error" -eq "1" ]; then
+    exit 1
+  fi
+}
+
+
+_prepare_build_vars(){
+  builds=("linux" "windows" "osx" "web")
+  build_date=$(date '+%Y, %m, %d, %H, %M, %S')
+  build_date_iso=$(date "+%Y/%m/%d %H:%M:%S")
+  build_date_unix=$(date '+%s')
+  git_commit=$(git rev-parse HEAD)
+  if [ -z "$git_branch" ]; then
+    git_branch=$(git branch --show-current)
+  fi
+
+  should_use_branch=true; [ "$git_branch" == "release" ] && should_use_branch=false
+
+  if [ -z "$version" ]; then
+    version=$(git describe --tags --abbrev=0 --match "*.*.*")
+  fi
+  watermark="$build_date_iso | $git_branch:$version:$git_commit"
+  if [ -z "$url" ]; then
+    url=${1:-"https://gdquest.github.io/learn-gdscript"}
+    if [ "$should_use_branch" = true ]; then
+      url="$url/$git_branch"
+    fi
+  fi
+
+  presets_file="export_presets.cfg"
+  if [ ! -f "$presets_file" ]; then
+    echo "\`$presets_file\` not found"
+    exit 1
+  fi
+
+  declare -g -A presets
+  presets[linux]="Linux/X11"
+  presets[windows]="Windows Desktop"
+  presets[web]="HTML5"
+  presets[osx]="Mac OSX"
+
+  for preset in "${presets[@]}" ; do
+      if ! grep -q "name=\"$preset\"" "$presets_file"; then
+        echo "Preset \`$preset\` not found in $presets_file"
+        exit 1
+      fi
+  done
+
+  declare -g -A dirs
+  dirs[linux]="build/linux"
+  dirs[windows]="build/windows"
+  dirs[osx]="build/osx"
+  dirs[web]="build/web"
+  
+  if [ "$should_use_branch" = true ]; then
+    dirs[web]="${dirs[web]}/$git_branch"
+  fi
+
+  echo "✓ created all build variables"
+}
+
 _bootstrap(){
   funcs=(`declare -F | awk '{print $NF}' | sort | egrep -v "^_"`)
   command=${1//:/_}
 
   if [[ " ${funcs[*]} " =~ " ${command} " ]]; then
     shift
+    _prepare_build_vars
     $command $@
     exit 0
   else
