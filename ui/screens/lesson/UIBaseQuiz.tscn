@@ -97,20 +97,9 @@ margin_right = 360.0
 margin_bottom = 162.0
 alignment = 1
 
-[node name="SubmitButton" type="Button" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer"]
+[node name="SkipButton" type="Button" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer"]
 margin_left = 52.0
 margin_right = 172.0
-margin_bottom = 55.0
-rect_min_size = Vector2( 120, 0 )
-mouse_default_cursor_shape = 2
-custom_styles/hover = ExtResource( 7 )
-custom_styles/pressed = ExtResource( 8 )
-custom_styles/normal = ExtResource( 9 )
-text = "Submit"
-
-[node name="SkipButton" type="Button" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer"]
-margin_left = 188.0
-margin_right = 308.0
 margin_bottom = 55.0
 rect_min_size = Vector2( 120, 0 )
 hint_tooltip = "You need to try to answer once before you can skip a quiz."
@@ -120,6 +109,17 @@ custom_styles/pressed = ExtResource( 8 )
 custom_styles/normal = ExtResource( 9 )
 disabled = true
 text = "Skip"
+
+[node name="SubmitButton" type="Button" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer"]
+margin_left = 188.0
+margin_right = 308.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 120, 0 )
+mouse_default_cursor_shape = 2
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/normal = ExtResource( 9 )
+text = "Submit"
 
 [node name="HelpMessage" type="Label" parent="ClipContentBoundary/ChoiceContainer/ChoiceView"]
 visible = false
