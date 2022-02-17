@@ -801,11 +801,13 @@ General topics:
 
 Specific techniques:
 
+- [ ] The `elif` keyword.
 - [ ] Functions that return values.
-- [ ] Breaking from a loop.
+- [ ] Breaking from a loop with the `break` keyword.
 - [ ] Looping over the keys and values of a dictionary.
 - [ ] Creating nested dictionaries (e.g. grid inventory mapping cells to {name: amount}).
 - [ ] Using arrays inside dictionaries (e.g. `{square = [Vector2(0, 0), Vector2(100, 0), ...]}`).
+- [ ] Constants
 
 We don't plan to teach objects and object-oriented programming using the app.
 
