@@ -11,6 +11,8 @@
   --render-width: 1920px;
   --render-height: 1080px;
   --render-aspect-ratio: calc(var(--render-width) / var(--render-height));
+
+  --scale: 1;
 }
 
 body,
@@ -50,15 +52,12 @@ body {
   background-color: var(--game-background-color);
   max-width: var(--render-width);
   max-height: var(--render-height);
-  width: calc(100% / var(--render-aspect-ratio));
+  width: 100%;
   height: 100%;
-}
-
-@media (max-aspect-ratio: 16/9) {
-  #canvas-container {
-    width: 100%;
-    height: calc(100% / var(--render-aspect-ratio));
-  }
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* --- /CANVAS CONTAINER --- */
@@ -69,8 +68,6 @@ body {
   margin: 0;
   border: none;
   background-color: var(--game-background-color);
-  width: 100%;
-  height: 100%;
 }
 
 #canvas:focus {
@@ -207,3 +204,62 @@ body {
 }
 
 /*-- /LITTLE VERSION NUMBER --*/
+
+/*-- FULLSCREEN ELEMENTS --*/
+
+.button-fullscreen {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  background-image: url("fullscreen_on.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: transparent;
+  background-size: 24px;
+  opacity: 0.5;
+  cursor: pointer;
+  transform-origin: top right;
+  transform: scale(var(--scale));
+}
+
+.button-fullscreen:hover,
+.button-fullscreen:active {
+  opacity: 1;
+}
+
+.button-fullscreen span {
+  display: none;
+}
+
+/* This is an unfortunate hack to detect fullscreen */
+#fullscreen-detector {
+  position: fixed;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+}
+
+.debug #fullscreen-detector {
+  width: 25px;
+  height: 25px;
+  background: red;
+  visibility: visible;
+}
+
+@media all and (display-mode: fullscreen) {
+  #fullscreen-detector {
+    top: 10px;
+  }
+  .button-fullscreen {
+    background-image: url("fullscreen_off.png");
+  }
+}
+
+.native-fullscreen .button-fullscreen {
+  display: none;
+}
+
+/*-- /FULLSCREEN ELEMENTS --*/
