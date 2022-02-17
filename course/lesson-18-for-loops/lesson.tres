@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=18 format=2]
+[gd_resource type="Resource" load_steps=20 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/QuizChoice.gd" type="Script" id=2]
@@ -31,7 +31,7 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-JMQ2XNwQ.tres"
 title = ""
 type = 0
-text = "In this lesson, we'll change our code to use a [i]for loop[/i] instead.
+text = "In this lesson, we look at how to use [i]for loops[/i] instead.
 
 Unlike while loops, for loops don't run infinitely, so it's much less likely that you'll get bugs in your game. [b]We recommend favoring for loops over while loops because of this[/b].
 
@@ -50,16 +50,24 @@ visual_element_path = "visuals/CodeForLoop.tscn"
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=15]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-kGx0c7DD.tres"
+title = ""
+type = 0
+text = "Let's explain what's going on here."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
 [sub_resource type="Resource" id=5]
 script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-xF5HUxZP.tres"
-title = ""
+title = "The range() function"
 type = 0
-text = "Let's explain what's going on here.
+text = "Godot has the helper function [code]range(x)[/code] which creates a list of numbers from [code]0[/code] to [code]x-1[/code]. 
 
-Godot has the helper function [code]range(x)[/code] which returns a list of numbers from [code]0[/code] to [code]x - 1[/code]. 
-
-So [code]range(3)[/code] returns [code][0, 1, 2][/code], and [code]range(5)[/code] returns [code][0, 1, 2, 3, 4][/code]."
+So [code]range(3)[/code] creates [code][0, 1, 2][/code], and [code]range(5)[/code] creates [code][0, 1, 2, 3, 4][/code]."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -67,7 +75,7 @@ has_separator = false
 [sub_resource type="Resource" id=6]
 script = ExtResource( 2 )
 quiz_id = "res://course/lesson-18-for-loops/quiz-xY8VUDpP.tres"
-question = "What would range(6) return?"
+question = "What list of numbers would range(6) create?"
 content_bbcode = "What would [code]print(range(6))[/code] print to the console?"
 hint = ""
 explanation_bbcode = "The function [code]range(x)[/code] creates a list of numbers from [code]0[/code] to [code]x-1[/code].
@@ -81,9 +89,9 @@ do_shuffle_answers = true
 [sub_resource type="Resource" id=7]
 script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-wQDwfyqd.tres"
-title = ""
+title = "How for loops work"
 type = 0
-text = "With a for loop, Godot cycles through the list of numbers from [code]range()[/code], and executes the code in the for loop as it goes."
+text = "In a for loop, Godot takes each number created from [code]range()[/code] and executes the code in the for loop."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -103,11 +111,19 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-hZN4rS5A.tres"
 title = ""
 type = 0
-text = "For each item in the list [code][0, 1, 2][/code], we set [code]number[/code] to the item, then execute the code in the for loop.
+text = "In the above example, for each item in the list [code][0, 1, 2][/code], we set [code]number[/code] to the item, then execute the code in the for loop.
 
-In the above case, that's simply printing what the value of [code]number[/code] is as we move through the list.
+In this example, that's simply printing what the value of [code]number[/code] is as Godot moves through the for loop."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
 
-Here's our old [code]move_to_end()[/code] function which used a while loop."
+[sub_resource type="Resource" id=16]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-izKUdOCQ.tres"
+title = "Using a for loop instead of while loops"
+type = 0
+text = "Here's our old [code]move_to_end()[/code] function which used a while loop."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -167,5 +183,5 @@ has_separator = false
 [resource]
 script = ExtResource( 1 )
 title = "Introduction to For Loops"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 15 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 16 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ]
 practices = [  ]

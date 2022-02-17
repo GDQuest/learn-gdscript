@@ -16,42 +16,10 @@ func _set_instance_value(value: float, property_name: String, value_label: Label
 "
 
 [sub_resource type="GDScript" id=2]
-script/source = "extends Node2D
+script/source = "extends \"res://course/lesson-17-while-loops/visuals/Board.gd\"
 
-export var board_width := 3 setget set_grid_width
-export var board_height := 3 setget set_grid_height
-export var cell_size := 64
-export var line_width := 4
-
-var grid_size := Vector2(board_width, board_height)
 var _board_width := 0
-
-onready var _label := $Label
-onready var _robot := $Robot
-
-
-func _ready() -> void:
-	_robot.cell_size = cell_size
-	_robot.cell = Vector2(0, 1)
-	update()
-
-
-func _draw() -> void:
-	for x in range(grid_size.x):
-		for y in range(grid_size.y):
-			draw_rect(Rect2(Vector2(x * cell_size, y * cell_size), Vector2.ONE * cell_size), Color.white, false, line_width)
-
-
-func set_grid_width(width) -> void:
-	grid_size.x = width
-	_update_label()
-	update()
-
-
-func set_grid_height(height) -> void:
-	grid_size.y = height
-	_update_label()
-	update()
+var _loops := 0
 
 
 func _update_label() -> void:
@@ -62,18 +30,26 @@ func _update_label() -> void:
 
 
 func run() -> void:
-	reset()
 	_board_width = grid_size.x
-	
-	for i in range(_board_width - 1):
-		yield(get_tree().create_timer(0.5), \"timeout\")
-		_robot.cell += Vector2(1, 0)
-		_update_label()
+	reset()
+	_timer.start(0.5)
 
 
 func reset() -> void:
+	_loops = 0
+	_timer.stop()
 	_robot.cell = Vector2(0, 1)
 	_update_label()
+
+
+func _on_timer_timeout() -> void:
+	_loops += 1
+	_robot.cell += Vector2(1, 0)
+	_update_label()
+	
+	if _loops >= _board_width - 1:
+		_timer.stop()
+		return
 "
 
 [sub_resource type="GDScript" id=3]
@@ -82,19 +58,20 @@ script/source = "extends Node2D
 
 var cell := Vector2(0, 0) setget set_cell, get_cell
 var cell_size := 96
+var grid_size_px := Vector2.ZERO setget set_grid_size_px
 
 
 func set_cell(new_cell: Vector2) -> void:
 	cell = new_cell
-	_animate_movement(cell, new_cell)
+	position = new_cell * cell_size + Vector2(cell_size/2, 12) - grid_size_px / 2.0
 
 
 func get_cell() -> Vector2:
 	return cell
 
-
-func _animate_movement(old_cell, new_cell) -> void:
-	position = new_cell * cell_size + Vector2(cell_size/2, 12)
+func set_grid_size_px(value: Vector2):
+	grid_size_px = value
+	set_cell(cell)
 "
 
 [node name="ExampleBoardFor" type="PanelContainer"]
@@ -112,7 +89,6 @@ margin_right = 651.0
 margin_bottom = 377.0
 rect_min_size = Vector2( 0, 370 )
 script = SubResource( 1 )
-center_in_frame = false
 run_button_label = "move_to_end()"
 
 [node name="BoardForLoop" type="Node2D" parent="RunnableCodeExample"]
@@ -131,3 +107,5 @@ text = "cell = Vector2(0, 1)"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Timer" type="Timer" parent="RunnableCodeExample/BoardForLoop"]
