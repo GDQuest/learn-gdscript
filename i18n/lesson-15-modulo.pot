@@ -1,0 +1,236 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero  \n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-02-18 14:11+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: course/lesson-15-modulo/lesson.tres:14
+msgid ""
+"The modulo operation ([code]%[/code]) calculates the remainder of a whole"
+" number division.\r\n"
+"\r\n"
+"For example, the modulo of [code]5[/code] by [code]3[/code] ([code]5 % "
+"3[/code]) is [code]2[/code].\r\n"
+"\r\n"
+"We typically use this operation to tell if a number is odd or even or to "
+"produce a random number within a particular range (like a dice roll).\r\n"
+"\r\n"
+"Play around with the modulo widget on the right to see how modulo works "
+"visually."
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:28
+msgid "What's the result of this modulo operation?"
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:29
+msgid "[code]11 % 4[/code]"
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:31
+msgid ""
+"[code]11[/code] divided by [code]4[/code] is [code]2[/code], and the "
+"[b]remainder[/b] of the division is [code]3[/code].\r\n"
+"\r\n"
+"So [code]11 % 4[/code] is [code]3[/code]."
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:34
+#: course/lesson-15-modulo/lesson.tres:35
+msgid "3"
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:34
+msgid "2"
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:34
+msgid "7"
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:44
+msgid ""
+"The modulo operation only works on [b]whole numbers[/b]; Not decimal "
+"numbers.\r\n"
+"\r\n"
+"Also, just like in regular divisions, the divisor can't be zero.\r\n"
+"\r\n"
+"All three examples below will cause an error in your code."
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:66
+msgid "Three ways we use the modulo operation"
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:68
+msgid ""
+"The modulo operation has important uses in programming, like making a "
+"number cycle.\r\n"
+"\r\n"
+"Take a traffic light, for example."
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:90
+msgid ""
+"We use the number [code]light_index[/code] to represent the traffic "
+"light's current state.\r\n"
+"\r\n"
+"The lights always cycle in the same way: first, we have the red light, "
+"then the yellow, then the green.\r\n"
+"\r\n"
+"To represent that cycle, you can periodically add one to the number and "
+"use the modulo operator to wrap back to [code]0[/code].\r\n"
+"\r\n"
+"Instead, you could use a condition; In this case, we use the modulo as a "
+"shortcut."
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:116
+msgid ""
+"In computer code, we very often count from [code]0[/code].\r\n"
+"\r\n"
+"Every number translates to a precise combination of bits in the machine, "
+"starting from [code]0[/code].\r\n"
+"\r\n"
+"We don't want to waste any number, and as the first number the computer "
+"knows about is [code]0[/code], we start counting from [code]0[/code]."
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:128
+msgid "Using modulo to find even and odd numbers"
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:130
+msgid ""
+"We can also use a modulo to check if a number is even or odd. If we "
+"divide a number by [code]2[/code] and there's no remainder, then the "
+"number is [b]even[/b]."
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:150
+msgid ""
+"Notice how the modulo can be larger than the number it affects. For "
+"example, [code]1 % 2[/code] gives you [code]1[/code]. That's because "
+"[code]1[/code] divided by [code]2[/code] equals [code]0[/code], and the "
+"remainder is [code]1[/code].\r\n"
+"\r\n"
+"Like with divisions, the only case you can't use modulo is with a divisor"
+" of [code]0[/code]."
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:170
+msgid "Calculating a random number within a range"
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:172
+msgid ""
+"We can use the modulo to simulate dice rolls. To do so, we generate a "
+"large random number and use the modulo operator to limit the number's "
+"range.\r\n"
+"\r\n"
+"To generate a random whole number, you can call the [code]randi()[/code] "
+"function. The name stands for random integer.\r\n"
+"\r\n"
+"The number the function generates can be huge: roughly up to 2 billion on"
+" an Android device and around 10^18 on a 64-bit computer.\r\n"
+"\r\n"
+"You can use the modulo operation to limit the random number's range."
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:198
+msgid ""
+"The result is also random because we use the modulo operation on a random"
+" number.\r\n"
+"\r\n"
+"In the following practices, you'll use a modulo to advance traffic "
+"lights, add maximum health to the robot on every odd level, and learn how"
+" to code dice rolls."
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:208
+msgid "Advancing Traffic Lights"
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:209
+msgid ""
+"Add to the [code]advance_traffic_light()[/code] function so the "
+"[code]light_index[/code] variable increments by one, then wraps back to "
+"[code]0[/code] if it gets too high.\r\n"
+"\r\n"
+"Use the modulo operator [code]%[/code] to make sure the value of "
+"[code]light_index[/code] wraps back to [code]0[/code].\r\n"
+"\r\n"
+"The value of [code]light_index[/code] should only ever be [code]0[/code],"
+" [code]1[/code], or [code]2[/code]."
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:221
+msgid ""
+"Learn how to use modulo to wrap a number back to zero using traffic "
+"lights."
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:226
+msgid "Rolling Dice"
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:227
+msgid ""
+"Our dice rolling function doesn't work! Right now, it always gives the "
+"result of how many sides the dice has: 20.\r\n"
+"\r\n"
+"Use [code]randi()[/code] to generate a random number and the modulo "
+"operation [code]%[/code]. \r\n"
+"\r\n"
+"Using the [code]return[/code] keyword inside the function, return a "
+"random number between [code]1[/code] and [code]sides[/code]."
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:239
+msgid ""
+"Whether in a board game or video game, getting a random number is always "
+"useful. Here, we create a function that simulates a dice roll."
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:244
+msgid "Bonus Health Every Other Level"
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:245
+msgid ""
+"Change the [code]level_up()[/code] function so it does the following:\r\n"
+"\r\n"
+"1) Increment [code]level[/code] by [code]1[/code]\r\n"
+"2) Increase [code]max_health[/code] by [code]5[/code]\r\n"
+"3) If [code]level[/code] is [b]even[/b], increase [code]max_health[/code]"
+" by an additional [code]5[/code]\r\n"
+"\r\n"
+"The robot starts with [code]100[/code] maximum health. It will gain three"
+" levels when you run the code. At level 4, the robot should have "
+"[code]125[/code] maximum health."
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:259
+msgid ""
+"There are other ways to increase maximum health. You could use a modulo "
+"to give a bonus every even level. Learn how here!"
+msgstr ""
+
+#: course/lesson-15-modulo/lesson.tres:263
+msgid "Modulo"
+msgstr ""
+
