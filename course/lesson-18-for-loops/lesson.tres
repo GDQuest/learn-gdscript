@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=24 format=2]
+[gd_resource type="Resource" load_steps=25 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/QuizChoice.gd" type="Script" id=2]
@@ -13,7 +13,9 @@ title = ""
 type = 0
 text = "In the last lesson, we looked at while loops. We found they were useful if we don't know how many times we should repeat code. 
 
-However, they could result in infinite loops if we're not careful."
+However, they could result in infinite loops if we're not careful.
+
+The loop below never ends because we never increment [code]number[/code]"
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -33,11 +35,15 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-JMQ2XNwQ.tres"
 title = ""
 type = 0
-text = "In this lesson, we look at how to use [i]for loops[/i] instead.
+text = "There's a safer and often easier kind of loop: the [code]for[/code] loop.
 
-Unlike while loops, for loops don't run infinitely, so it's much less likely that you'll get bugs in your game. [b]We recommend favoring for loops over while loops because of this[/b].
+We'll look at it in this lesson.
 
-Let's change the above to use a for loop instead."
+Unlike [code]while[/code] loops, [code]for[/code] loops don't run infinitely, so it's much less likely that you'll get bugs in your game. [b]We recommend favoring for loops over while loops because of this[/b].
+
+Let's change the code above to use a [code]for[/code] loop instead.
+
+The loop below will change the [code]cell[/code] three times."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -67,9 +73,9 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-xF5HUxZP.tres"
 title = "The range() function"
 type = 0
-text = "Godot has the helper function [code]range(x)[/code] which creates a list of numbers from [code]0[/code] to [code]x-1[/code]. 
+text = "Godot has the helper function [code]range()[/code]. Calling [code]range(n)[/code] creates a list of numbers from [code]0[/code] to [code]n - 1[/code]. 
 
-So [code]range(3)[/code] creates [code][0, 1, 2][/code], and [code]range(5)[/code] creates [code][0, 1, 2, 3, 4][/code]."
+So calling [code]range(3)[/code] outputs the list of number [code][0, 1, 2][/code], and [code]range(5)[/code] outputs [code][0, 1, 2, 3, 4][/code]."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -80,9 +86,10 @@ quiz_id = "res://course/lesson-18-for-loops/quiz-xY8VUDpP.tres"
 question = "What list of numbers would range(6) create?"
 content_bbcode = "What would [code]print(range(6))[/code] print to the console?"
 hint = ""
-explanation_bbcode = "The function [code]range(x)[/code] creates a list of numbers from [code]0[/code] to [code]x-1[/code].
+explanation_bbcode = "The function [code]range(n)[/code] creates a list of numbers from [code]0[/code] to [code]n - 1[/code]. The output list will start with [code]0[/code] and end with [code]5[/code].
 
-So [code]range(6)[/code] creates a list of six numbers which are [code][0, 1, 2, 3, 4, 5][/code]."
+So calling [code]range(6)[/code] will output a list of six numbers which are [code][0, 1, 2, 3, 4, 5][/code].
+"
 answer_options = [ "[0, 1, 2, 3, 4, 5]", "[1, 2, 3, 4, 5, 6]", "[0, 1, 2, 3, 4, 5, 6]" ]
 valid_answers = [ "[0, 1, 2, 3, 4, 5]" ]
 is_multiple_choice = false
@@ -93,7 +100,7 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-wQDwfyqd.tres"
 title = "How for loops work"
 type = 0
-text = "In a for loop, Godot takes each number created from [code]range()[/code] and executes the code in the for loop."
+text = "In a [code]for[/code] loop, the computer takes each value inside a list, stores it in a temporary variable, and executes the code in the loop once per value."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -113,11 +120,11 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-hZN4rS5A.tres"
 title = ""
 type = 0
-text = "In the above example, for each item in the list [code][0, 1, 2][/code], Godot sets [code]number[/code] to the item, then execute the code in the for loop.
+text = "In the above example, for each item in the list [code][0, 1, 2][/code], Godot sets [code]number[/code] to the item, then executes the code in the [code]for[/code] loop.
 
-In this example, that's simply printing what the value of [code]number[/code] is as Godot moves through the for loop.
+In this example, we're printing the value of [code]number[/code] as Godot moves through the loop.
 
-We can put whatever code we like in the for loop, including other methods like [code]draw_rectangle()[/code]."
+We can put whatever code we like in the loop's code block, including other function calls like [code]draw_rectangle()[/code]."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -127,7 +134,7 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-izKUdOCQ.tres"
 title = "Using a for loop instead of while loops"
 type = 0
-text = "Here's our old [code]move_to_end()[/code] function which used a while loop."
+text = "Here's our old [code]move_to_end()[/code] function which used in a [code]while[/code] loop."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -147,7 +154,7 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-nVHARbBW.tres"
 title = ""
 type = 0
-text = "Let's alter our [code]move_to_end()[/code] function to use a for loop instead."
+text = "If we use a [code]for[/code] loop instead, the code becomes a little simpler."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -159,6 +166,18 @@ title = ""
 type = 0
 text = ""
 visual_element_path = "visuals/CodeForMove.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-Gx0c7DDi.tres"
+title = ""
+type = 0
+text = "Rather than constantly checking if the robot reached the end of the board, with the [code]for[/code] loop, we take the board's width beforehand, then move the robot a set amount of times.
+
+The function still works the same. You can execute it below."
+visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
@@ -177,9 +196,7 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-7MqE82V6.tres"
 title = ""
 type = 0
-text = "Rather than constantly checking if the robot has reached the end of the board, we instead take the width of the board beforehand, then move the robot a set amount of times.
-
-In the practices, we'll use for loops in different ways to get you used to using them."
+text = "In the practices, we'll use for loops in different ways to get you used to using them."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -192,12 +209,12 @@ goal = "Once again, the robot has decided to stand at the top of the board.
 
 This time, use a for loop in the [code]move_to_bottom()[/code] function to have it move to the bottom of the board.
 
-The board size is determined by the [code]Vector2[/code] [code]board_size[/code].
+The board size is determined by the [code]Vector2[/code] variable [code]board_size[/code].
 
-The robot's current cell is [code]Vector2(2, 0)[/code]. "
+The robot's starting cell is [code]Vector2(2, 0)[/code]."
 starting_code = "func move_to_bottom():
 	"
-hints = PoolStringArray( "You\'ll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards", "The [code]range(x)[/code] function gets a list of numbers from [code]0[/code] to [code]x-1[/code]", "Use [code]for number in range(board_size.y - 1):[/code]" )
+hints = PoolStringArray( "You\'ll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards", "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]", "Use [code]for number in range(board_size.y - 1):[/code] to loop enough times." )
 validator_script_path = "for_move/TestPracticeBoardFor.gd"
 script_slice_path = "for_move/PracticeBoardFor.live-editor/slices/PracticeBoardFor.move_to_end.slice.tres"
 documentation_references = PoolStringArray( "board_size", "cell", "range" )
@@ -210,9 +227,11 @@ practice_id = "res://course/lesson-18-for-loops/practice-UDpPwQDw.tres"
 title = "Improving code with a for loop"
 goal = "Use a for loop to remove the duplicate code in the [code]run()[/code] function.
 
-In this practice, we revisit the turtle and drawing rectangles. With our new knowledge of for loops, we can condense this code so it takes up less space and is easier to modify.
+In this practice, we revisit the turtle and drawing rectangles.
 
-The turtle should draw three squares in a line. Each one should be 100 pixels apart."
+With our new knowledge of for loops, we can condense this code to take up less space and make it easier to modify.
+
+The turtle should draw three squares in a horizontal line. The squares should be 100 pixels apart."
 starting_code = "func run():
 	jump(200, 0)
 	draw_rectangle(100, 100)
@@ -232,5 +251,5 @@ description = "In the past we had to copy and paste code to draw multiple rectan
 [resource]
 script = ExtResource( 1 )
 title = "Introduction to For Loops"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 15 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 16 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 15 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 16 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 19 ), SubResource( 13 ), SubResource( 14 ) ]
 practices = [ SubResource( 17 ), SubResource( 18 ) ]
