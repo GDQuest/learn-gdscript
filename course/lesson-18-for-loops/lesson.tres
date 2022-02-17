@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=23 format=2]
+[gd_resource type="Resource" load_steps=24 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/QuizChoice.gd" type="Script" id=2]
@@ -113,9 +113,13 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-hZN4rS5A.tres"
 title = ""
 type = 0
-text = "In the above example, for each item in the list [code][0, 1, 2][/code], we set [code]number[/code] to the item, then execute the code in the for loop.
+text = "In the above example, for each item in the list [code][0, 1, 2][/code], Godot sets [code]number[/code] to the item, then execute the code in the for loop.
 
-In this example, that's simply printing what the value of [code]number[/code] is as Godot moves through the for loop."
+In this example, that's simply printing what the value of [code]number[/code] is as Godot moves through the for loop.
+
+We can put whatever code we like in the for loop, including other methods like [code]draw_rectangle()[/code].
+
+"
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -186,7 +190,7 @@ has_separator = false
 script = ExtResource( 5 )
 practice_id = "res://course/lesson-18-for-loops/practice-7tKRHJMQ.tres"
 title = "Using a for loop to move to the end of the board"
-goal = "Once again, the robot has decided to standed at the top of the board.
+goal = "Once again, the robot has decided to stand at the top of the board.
 
 This time, use a for loop in the [code]move_to_bottom()[/code] function to have it move to the bottom of the board.
 
@@ -202,8 +206,33 @@ documentation_references = PoolStringArray( "board_size", "cell", "range" )
 documentation_resource = ExtResource( 4 )
 description = "Use a for loop to have our robot move from the top of the board to the bottom."
 
+[sub_resource type="Resource" id=18]
+script = ExtResource( 5 )
+practice_id = "res://course/lesson-18-for-loops/practice-UDpPwQDw.tres"
+title = "Improving code with a for loop"
+goal = "Use a for loop to remove the duplicate code in the [code]run()[/code] function.
+
+In this practice, we revisit the turtle and drawing rectangles. With our new knowledge of for loops, we can condense this code so it takes up less space and is easier to modify.
+
+The turtle should draw three squares in a line. Each one should be 100 pixels apart."
+starting_code = "func run():
+	jump(200, 0)
+	draw_rectangle(100, 100)
+	
+	jump(200, 0)
+	draw_rectangle(100, 100)
+
+	jump(200, 0)
+	draw_rectangle(100, 100)"
+hints = PoolStringArray( "Use the line [code]for number in range(3):[/code]" )
+validator_script_path = "for_rectangles/ForTestsDrawingRectangles.gd"
+script_slice_path = "for_rectangles/ForDrawingMultipleRectangles.live-editor/slices/ForDrawingMultipleRectangles.run.slice.tres"
+documentation_references = PoolStringArray( "jump", "draw_rectangle", "range" )
+documentation_resource = ExtResource( 4 )
+description = "In the past we had to copy and paste code to draw multiple rectangles. Let's revisit previous code and improve it with a for loop."
+
 [resource]
 script = ExtResource( 1 )
 title = "Introduction to For Loops"
 content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 15 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 16 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ]
-practices = [ SubResource( 17 ) ]
+practices = [ SubResource( 17 ), SubResource( 18 ) ]
