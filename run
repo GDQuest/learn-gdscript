@@ -13,6 +13,7 @@ help(){
     echo "Shows a short and helpful help text"
     exit 0
   fi
+  echo ""
   echo "Builder Script for Learn To Code With Godot"
   echo "please use one of the following commands:"
   for i in ${!funcs[@]}; do
@@ -20,6 +21,7 @@ help(){
     echo "  - ${command//_/:}"
   done
   echo "you can get more info about commands by writing ./run <command> help"
+  echo "you dry run most (but not all) commands by setting the \$dry env variable"
   echo ""
 }
 
@@ -32,7 +34,9 @@ clean_web(){
     echo "Removes web build"
     exit 0
   fi
-  rm -rf "${dirs[web]}"
+
+  echo "rm -rf \"${dirs[web]}\""
+  test "$dry" || rm -rf "${dirs[web]}"
   echo "✓ Removed web files"
 }
 
@@ -42,9 +46,13 @@ clean(){
     echo "Removes all build directories"
     exit 0
   fi
-  rm -rf build
-  mkdir -p build
-  touch build/.gdignore
+  
+  echo "rm -rf build"
+  test "$dry" || rm -rf build
+  echo "mkdir -p build"
+  test "$dry" || mkdir -p build
+  ech "touch build/.gdignore"
+  test "$dry" || touch build/.gdignore
   echo "✓ Removed all builds"
 }
 
@@ -61,7 +69,8 @@ web_server(){
       echo "Python 3 isn't available. It is required to run the server"
       exit 1
   fi
-  python -m http.server 8000 --directory "${dirs[web]}"
+  echo "python -m http.server 8000 --directory \"${dirs[web]}\""
+  test "$dry" || python -m http.server 8000 --directory "${dirs[web]}"
 }
 
 
@@ -111,6 +120,7 @@ web_debug(){
     echo "be in your \$PATH"
     exit 0
   fi
+  debug=true
   clean_web
   export_web
   web_server &
@@ -141,8 +151,8 @@ export_custom(){
     echo "godot --quiet --no-window --export \"$export_name\" \"$output\""
     test "$dry" || godot --quiet --no-window --export "$export_name" "$output"
   else
-    echo "godot --verbose --no-window --export-debug \"$export_name\" \"$output\""
-    test "$dry" || godot --verbose --no-window --export-debug "$export_name" "$output"
+    echo "godot --quiet --no-window --export-debug \"$export_name\" \"$output\""
+    test "$dry" || godot --quiet --no-window --export-debug "$export_name" "$output"
   fi
   echo "✓ Exported \`$export_name\` build to \`$dir\`"
 }
@@ -311,6 +321,7 @@ prepare_ci_copytemplates(){
   if [ "$1" == "help" ]; then
     echo "Prepares the CI by copying the template from the docker"
     echo "You should not run this on your local computer"
+    echo "cannot run in dry mode"
     exit 0
   fi
   if [ -z "$GODOT_VERSION" ] || [ "$GODOT_VERSION" == "" ]; then
@@ -318,8 +329,10 @@ prepare_ci_copytemplates(){
     exit 1
   fi
   echo "Will use templates for ${GODOT_VERSION}"
+  echo "mkdir -v -p ~/.local/share/godot/templates"
   mkdir -v -p ~/.local/share/godot/templates
   echo "✓ created local template directory"
+  echo "mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable"
   mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
   echo "✓ copied templates"
 }
@@ -329,9 +342,12 @@ prepare_ci_software(){
   if [ "$1" == "help" ]; then
     echo "Prepares the CI by installing the necessary software"
     echo "You should not run this on your local computer"
+    echo "cannot run in dry mode"
     exit 0
   fi
+  echo "apt-get update"
   apt-get update
+  echo "apt-get install -y --no-install-recommends sed rsync"
   apt-get install -y --no-install-recommends sed rsync
   echo "✓ installed software"
 }
@@ -346,7 +362,8 @@ prepare_overridefile(){
   override_file=$1
   if [ ! -z "$override_file" ]; then
     if [ -f "$override_file" ]; then
-      cp ${{override_file}} override.cfg
+      echo "cp ${{override_file}} override.cfg"
+      test "$dry" || cp ${{override_file}} override.cfg
       echo "✓ copied override file"
     else
       echo "override \`$override_file\` was specified, but not found"
@@ -362,6 +379,7 @@ prepare_ci(){
   if [ "$1" == "help" ]; then
     echo "Prepares the CI"
     echo "You should not run this on your local computer"
+    echo "cannot run in dry mode"
     exit 0
   fi
   prepare_ci_copytemplates
@@ -374,6 +392,7 @@ prepare_ci(){
 prepare_versionfile(){
   if [ "$1" == "help" ]; then
     echo "Creates and fills the version file"
+    echo "cannot run in dry mode"
     exit 0
   fi
   changed_file="utils/version.gd"
@@ -395,6 +414,7 @@ prepare_htmltemplate(){
   if [ "$1" == "help" ]; then
     echo "Creates the HTML template. This is a mandatory step"
     echo "before exporting to web"
+    echo "cannot run in dry mode"
     exit 0
   fi
   sed "s@>branch and commit hash@>${watermark}<@" html_export/index_template.html > html_export/index.html
@@ -504,7 +524,9 @@ _bootstrap(){
 
   if [[ " ${funcs[*]} " =~ " ${command} " ]]; then
     shift
-    _prepare_build_vars
+    if [ "$command" != "help" ]; then
+      _prepare_build_vars
+    fi
     $command $@
     exit 0
   else
