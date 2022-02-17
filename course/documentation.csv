@@ -10,3 +10,5 @@ draw_rectangle,,"length: float, height: float",Makes the turtle draw a rectangle
 position.x,float,,The position of the entity on the horizontal axis.,property,0.0
 position.y,float,,The position of the entity on the vertical axis.,property,0.0
 move_local_x,void,"delta: float, scaled:bool=false", "Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false, normalizes the movement.",method,
+board_size,Vector2,,"Stores how many cells make up the width ([code]board_size.x[/code]) and height ([code]board_size.y[/code]) of the board.",property,"Vector2(1, 1)",
+cell,Vector2,,"The cell position of the robot on the board. [code]Vector2(0, 0)[/code] is the square cell in the top left of the board.",property,"Vector2(0, 0)",
