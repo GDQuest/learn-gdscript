@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends \"res://course/lesson-17-while-loops/visuals/Board.gd\"
+
+var _board_width := 1
+
+func _update_label() -> void:
+	if not _label:
+		yield(self, \"ready\")
+	
+	_label.text = \"cell = Vector2%s\" % [_robot.cell]
+
+
+func run() -> void:
+	reset()
+	_board_width = grid_size.x
+	
+	for i in range(_board_width - 1):
+		yield(get_tree().create_timer(0.5), \"timeout\")
+		_robot.cell += Vector2(1, 0)
+		_update_label()
+
+
+func reset() -> void:
+	_robot.cell = Vector2(0, 1)
+	_update_label()
+"
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+
+var cell := Vector2(0, 0) setget set_cell, get_cell
+var cell_size := 96
+
+
+func set_cell(new_cell: Vector2) -> void:
+	cell = new_cell
+	_animate_movement(cell, new_cell)
+
+
+func get_cell() -> Vector2:
+	return cell
+
+
+func _animate_movement(old_cell, new_cell) -> void:
+	position = new_cell * cell_size + Vector2(cell_size/2, 12)
+"
+
+[node name="GridVisualFor" type="Node2D"]
+position = Vector2( 50, 100 )
+script = SubResource( 2 )
+
+[node name="Robot" parent="." instance=ExtResource( 2 )]
+scale = Vector2( 0.75, 0.75 )
+script = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 48.0
+margin_top = -54.0
+margin_right = 201.0
+margin_bottom = -40.0
+text = "cell = Vector2(0, 1)"
+__meta__ = {
+"_edit_use_anchors_": false
+}

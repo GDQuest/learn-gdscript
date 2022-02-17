@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://course/lesson-18-for-loops/for_move/PracticeBoardFor.live-editor/scripts/PracticeBoardFor.gd.tres" type="Resource" id=1]
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/SliceProperties.gd" type="Script" id=2]
+[ext_resource path="res://course/lesson-18-for-loops/for_move/PracticeBoardFor.live-editor/scene/PracticeBoardFor.tscn.tres" type="Resource" id=3]
+
+[resource]
+script = ExtResource( 2 )
+scene_properties = ExtResource( 3 )
+script_properties = ExtResource( 1 )
+leading_spaces = 0
+keyword = "EXPORT"
+closing = false
+name = "move_to_end"
+is_full_file = false
+start = 26
+end = 30
+lines_before = [ "extends Node2D", "", "export var board_size := Vector2(5, 5)", "export var cell_size := 64", "export var line_width := 4", "", "var cell := Vector2(2, 0)", "", "onready var _label := $Label", "onready var _robot := $Robot", "", "", "func _ready() -> void:", "	_robot.cell_size = cell_size", "	_robot.cell = cell", "	update()", "", "", "func _run() -> void:", "	move_to_bottom()", "	_robot.cell = cell", "	_update_label()", "	yield(get_tree().create_timer(0.5), \"timeout\")", "	Events.emit_signal(\"practice_run_completed\")", "", "" ]
+lines_after = [ "", "", "func reset() -> void:", "	_robot.cell = Vector2(0, 1)", "	_update_label()", "	", "", "func _draw() -> void:", "	for x in range(board_size.x):", "		for y in range(board_size.y):", "			draw_rect(Rect2(Vector2(x * cell_size, y * cell_size), Vector2.ONE * cell_size), Color.white, false, line_width)", "", "", "func _update_label() -> void:", "	if not _label:", "		yield(self, \"ready\")", "	", "	_label.text = \"cell = Vector2%s\" % [_robot.cell]", "" ]
+lines_editable = [ "func move_to_bottom():", "	for number in range(board_size.y - 1):", "		cell += Vector2(0, 1)" ]
