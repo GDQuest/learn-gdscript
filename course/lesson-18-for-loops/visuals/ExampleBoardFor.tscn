@@ -44,12 +44,13 @@ func reset() -> void:
 
 func _on_timer_timeout() -> void:
 	_loops += 1
-	_robot.cell += Vector2(1, 0)
-	_update_label()
 	
-	if _loops >= _board_width - 1:
+	if _loops > _board_width - 1:
 		_timer.stop()
 		return
+	
+	_robot.cell += Vector2(1, 0)
+	_update_label()
 "
 
 [sub_resource type="GDScript" id=3]
