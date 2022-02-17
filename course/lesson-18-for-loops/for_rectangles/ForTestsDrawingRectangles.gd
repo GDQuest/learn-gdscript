@@ -1,7 +1,9 @@
 # Test that the user draws 3 squares of 100x100 at 200 pixel intervals on the X axis starting at position (100, 100)
 extends PracticeTester
 
-var expected_rect := [Vector2(0, 0), Vector2(100, 0), Vector2(100, 100), Vector2(0, 100), Vector2(0, 0)]
+var expected_rect := [
+	Vector2(0, 0), Vector2(100, 0), Vector2(100, 100), Vector2(0, 100), Vector2(0, 0)
+]
 
 var _polygons := []
 var _points := []
@@ -27,7 +29,7 @@ func _clean_up() -> void:
 
 
 func test_use_for_loop() -> String:
-	if not  "for" in _slice.current_text:
+	if not "for" in _slice.current_text:
 		return "Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!"
 	return ""
 
@@ -42,6 +44,14 @@ func test_draw_three_squares() -> String:
 func test_squares_are_all_100_by_100() -> String:
 	var index := 1
 	for p in _points:
+		var jumped_after_drawing_rects = (
+			index == 4
+			and _points.size() == 4
+			and _points.back().size() == 1
+		)
+		if jumped_after_drawing_rects:
+			break
+
 		if p != expected_rect:
 			return "Shape number %s is not a square of size 100 by 100." % index
 		index += 1
