@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game_demos/turtle.png" type="Texture" id=2]
+[ext_resource path="res://course/lesson-17-while-loops/while_battle/WhileBattle.gd" type="Script" id=3]
+[ext_resource path="res://course/common/CustomHealthBar.tscn" type="PackedScene" id=4]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Turtle:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -100, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Turtle:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fight"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Turtle:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.25, 0.4 ),
+"transitions": PoolRealArray( 0.143587, 0.15932, 0.15932, 1 ),
+"update": 0,
+"values": [ Vector2( -100, 0 ), Vector2( 50, 0 ), Vector2( 50, 0 ), Vector2( -100, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Turtle:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("Robot/AnimationTree")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "damage" ],
+"method": "travel"
+} ]
+}
+
+[node name="WhileBattle" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Robot" parent="." instance=ExtResource( 1 )]
+position = Vector2( 100, 0 )
+
+[node name="AnimationTree" parent="Robot" index="3"]
+parameters/playback = SubResource( 1 )
+
+[node name="CustomHealthBar" parent="Robot" instance=ExtResource( 4 )]
+
+[node name="Turtle" type="Sprite" parent="."]
+position = Vector2( -100, 0 )
+texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/fight = SubResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[editable path="Robot"]

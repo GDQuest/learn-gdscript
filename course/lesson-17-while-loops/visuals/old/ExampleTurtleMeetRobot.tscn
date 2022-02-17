@@ -1,0 +1,97 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game_demos/DrawingTurtle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+var size := 40.0
+
+onready var _turtle: DrawingTurtle = $DrawingTurtle
+onready var _robot := $Robot
+onready var _robot_animation_tree := find_node(\"AnimationTree\")
+
+func run():
+	_turtle.reset()
+	_turtle.position = Vector2(0, 110)
+	draw_square()
+	_turtle.jump(110, 0)
+	draw_square()
+	_turtle.jump(110, 0)
+	draw_square()
+
+	_turtle.play_draw_animation()
+	var rect: Rect2 = _turtle.get_rect()
+	_turtle.position = - rect.size / 2.0
+	
+	yield(_turtle, \"turtle_finished\")
+	_robot_animation_tree.travel(\"damage\")
+	yield(_robot_animation_tree, \"animation_finished\")
+	_robot_animation_tree.travel(\"idle\")
+
+
+func draw_square():
+	_turtle.move_forward(100)
+	_turtle.turn_right(90)
+	_turtle.move_forward(100)
+	_turtle.turn_right(90)
+	_turtle.move_forward(100)
+	_turtle.turn_right(90)
+	_turtle.move_forward(100)
+	_turtle.turn_right(90)
+"
+
+[node name="ExampleTurtleMeetRobot" type="PanelContainer"]
+margin_right = 658.0
+margin_bottom = 384.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 3 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 651.0
+margin_bottom = 377.0
+rect_min_size = Vector2( 0, 370 )
+gdscript_code = "func draw_wall():
+	draw_square()
+	jump(110, 0)
+	draw_square()
+	jump(110, 0)
+	draw_square()"
+
+[node name="Frame" parent="RunnableCodeExample" index="0"]
+margin_right = 240.0
+margin_bottom = 370.0
+
+[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
+margin_right = 207.0
+text = "draw_wall()"
+
+[node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
+visible = true
+margin_left = 244.0
+margin_right = 644.0
+margin_bottom = 370.0
+text = "func draw_wall():
+	draw_square()
+	jump(110, 0)
+	draw_square()
+	jump(110, 0)
+	draw_square()"
+
+[node name="Meeting" type="Node2D" parent="RunnableCodeExample"]
+script = SubResource( 1 )
+
+[node name="Robot" parent="RunnableCodeExample/Meeting" instance=ExtResource( 1 )]
+position = Vector2( 0, -60 )
+scale = Vector2( 1.2, 1.2 )
+
+[node name="DrawingTurtle" parent="RunnableCodeExample/Meeting" instance=ExtResource( 2 )]
+position = Vector2( 0, 25 )
+
+[editable path="RunnableCodeExample"]

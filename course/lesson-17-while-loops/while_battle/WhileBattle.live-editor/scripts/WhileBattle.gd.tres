@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/ScriptProperties.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-17-while-loops/while_battle/WhileBattle.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 1 )
+nodes_paths = [ NodePath("") ]
+script_file = ExtResource( 2 )
+original_script = "extends Node2D
+
+var health := 100
+var turtle_power = 20
+
+onready var _health_bar := find_node(\"CustomHealthBar\")
+onready var _animation_player := $AnimationPlayer
+
+
+func _ready():
+	health = 100
+	_health_bar.set_health(health)
+
+
+# EXPORT battle
+func simulate_battle():
+	while health > 0:
+		health -= turtle_power
+# /EXPORT battle
+		_animation_player.play(\"fight\")
+		yield(_animation_player, \"animation_finished\")
+		_health_bar.set_health(health)
+
+func _run():
+	simulate_battle()
+	Events.emit_signal(\"practice_run_completed\")
+"

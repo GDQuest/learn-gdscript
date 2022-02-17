@@ -744,6 +744,20 @@ tracks/6/keys = {
 "update": 1,
 "values": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 2 ) ]
 }
+tracks/7/type = "method"
+tracks/7/path = NodePath("AnimationPlayer")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 3.003 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "animation_finished" ],
+"method": "emit_signal"
+} ]
+}
 
 [sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 0 ), 0.0, 0.220533, 0, 0, Vector2( 1, 0.0090909 ), -6.09091, 0.0, 0, 0 ]
@@ -847,19 +861,18 @@ anims/saying_hi = SubResource( 2 )
 position = Vector2( 0, -32 )
 
 [node name="RobotBody" type="Sprite" parent="Pivot"]
-position = Vector2( 0, 8.85411 )
 texture = ExtResource( 1 )
 
 [node name="HandIceRight" type="Sprite" parent="Pivot"]
-position = Vector2( -45.5517, 33.4265 )
-rotation = -0.890704
+position = Vector2( -45, 30 )
+rotation = -0.918567
 texture = ExtResource( 2 )
 offset = Vector2( -21, -3 )
 flip_h = true
 
 [node name="HandIceLeft" type="Sprite" parent="Pivot"]
-position = Vector2( 49, 27.8408 )
-rotation = 0.709465
+position = Vector2( 49, 25 )
+rotation = 0.737189
 texture = ExtResource( 2 )
 offset = Vector2( 24.1958, 2.15936 )
 
