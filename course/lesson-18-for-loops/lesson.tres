@@ -1,8 +1,10 @@
-[gd_resource type="Resource" load_steps=20 format=2]
+[gd_resource type="Resource" load_steps=23 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/QuizChoice.gd" type="Script" id=2]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=3]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=4]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=5]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 3 )
@@ -180,8 +182,28 @@ visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=17]
+script = ExtResource( 5 )
+practice_id = "res://course/lesson-18-for-loops/practice-7tKRHJMQ.tres"
+title = "Using a for loop to move to the end of the board"
+goal = "Once again, the robot has decided to standed at the top of the board.
+
+This time, use a for loop in the [code]move_to_bottom()[/code] function to have it move to the bottom of the board.
+
+The board size is determined by the [code]Vector2[/code] [code]board_size[/code].
+
+The robot's current cell is [code]Vector2(2, 0)[/code]. "
+starting_code = "func move_to_bottom():
+	"
+hints = PoolStringArray( "You\'ll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards", "The [code]range(x)[/code] function gets a list of numbers from [code]0[/code] to [code]x-1[/code]", "Use [code]for number in range(board_size.y - 1):[/code]" )
+validator_script_path = "for_move/TestPracticeBoardFor.gd"
+script_slice_path = "for_move/PracticeBoardFor.live-editor/slices/PracticeBoardFor.move_to_end.slice.tres"
+documentation_references = PoolStringArray( "board_size", "cell", "range" )
+documentation_resource = ExtResource( 4 )
+description = "Use a for loop to have our robot move from the top of the board to the bottom."
+
 [resource]
 script = ExtResource( 1 )
 title = "Introduction to For Loops"
 content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 15 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 16 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ]
-practices = [  ]
+practices = [ SubResource( 17 ) ]
