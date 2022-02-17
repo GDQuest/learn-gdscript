@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=23 format=2]
+[gd_resource type="Resource" load_steps=25 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
@@ -11,11 +11,13 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-17-while-loops/content-DizKUdOC.tres"
 title = ""
 type = 0
-text = "Our new knowledge of vectors can help move the robot move in a grid.
+text = "You've seen that you can use functions to [i]reuse[/i] code. In this lesson, you'll learn about [b]loops[/b]. Loops help you to [i]repeat[/i] code.
 
-We can define the size of a board using a [code]Vector2[/code].
+To illustrate how loops work, let's take a game board split into a grid.
 
-Each square is a [i]cell[/i]."
+Our robot can move to neighboring cells by changing a [code]Vector2[/code] variable named [code]cell[/code] variable.
+
+When we increase [code]cell.x[/code], the robot moves to the right."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -65,11 +67,19 @@ text = "The above code works for a pre-defined board with a width of [code]4[/co
 
 The robot would either stop before the end, or go too far.
 
-To implement a general solution for all board sizes, the robot needs to repeat its movement until it gets to the end.
+To implement a general solution for all board sizes, we can repeat the robot's movement until it gets to the end.
 
-For code that repeats, we use [i]loops[/i].
+For code that repeats, we use [i]loops[/i]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
 
-While loops make the computer repeat a block of code until you meet a specific condition or decide to break from the loop.
+[sub_resource type="Resource" id=20]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-17-while-loops/content-kGx0c7DD.tres"
+title = "Using while loops to repeat code"
+type = 0
+text = "While loops make the computer repeat a block of code until you meet a specific condition or decide to break from the loop.
 
 Here's how we use a while loop."
 visual_element_path = ""
@@ -196,14 +206,35 @@ valid_answers = [ "It would draw squares infinitely until the program is termina
 is_multiple_choice = false
 do_shuffle_answers = true
 
+[sub_resource type="Resource" id=21]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-17-while-loops/content-izKUdOCQ.tres"
+title = "When to use while loops"
+type = 0
+text = "At first, you will not need [code]while[/code] loops often. Even the code we show here has more efficient alternatives.
+
+Also, there's a safer kind of loop, [code]for[/code] loops, which we'll look at in the next lesson.
+
+Yet, [code]while[/code] loops have important intermediate to advanced-level uses, so you at least need to know they exist and how to use them.
+
+We mostly use [code]while[/code] loops for calculations that don't have a fixed end:
+
+- Reading and processing a file, like a text file, line by line.
+- Processing a constant stream of data, like someone recording audio with a microphone.
+- Reading code and converting it into instructions the computer understands.
+- Various intermediate to advanced-level algorithms like finding paths around a map for AI."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = true
+
 [sub_resource type="Resource" id=11]
 script = ExtResource( 2 )
 content_id = "res://course/lesson-17-while-loops/content-Ib5BnVHA.tres"
 title = ""
 type = 0
-text = "In the next lesson, you will see a much safer kind of loop that does not have this limitation.
+text = "Let's practice while loops real quick as they're useful to know. It's also a good opportunity to practice 2D vectors.
 
-In the practices you'll learn how to use while loops because they're still useful to know."
+Then, we'll move on to the safer [code]for[/code] loops in the following lesson."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -233,5 +264,5 @@ description = "Use a while loop to have our robot move from the top of the board
 [resource]
 script = ExtResource( 1 )
 title = "Introduction to While Loops"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 7 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 19 ), SubResource( 18 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 7 ), SubResource( 20 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 19 ), SubResource( 18 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 21 ), SubResource( 11 ) ]
 practices = [ SubResource( 12 ) ]

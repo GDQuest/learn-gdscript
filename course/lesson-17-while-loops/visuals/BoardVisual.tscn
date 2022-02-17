@@ -24,7 +24,7 @@ func reset() -> void:
 	_update_label()
 "
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=3]
 script/source = "extends Node2D
 
 
@@ -52,7 +52,7 @@ board_width = 4
 
 [node name="Robot" parent="." instance=ExtResource( 1 )]
 scale = Vector2( 0.75, 0.75 )
-script = SubResource( 1 )
+script = SubResource( 3 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = 48.0
