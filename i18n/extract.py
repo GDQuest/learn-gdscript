@@ -120,8 +120,11 @@ def extract_and_write(
 
 	# (filename, lineno, message, comments, context)
 	for message in extractor:
+		message_id = message[2]
+		message_id = message_id.replace("\r\n", "\n")
+
 		cat.add(
-			id=message[2],
+			id=message_id,
 			string="",
 			locations=[(message[0], message[1])],
 			auto_comments=message[3],
