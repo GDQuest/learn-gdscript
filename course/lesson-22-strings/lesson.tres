@@ -1,0 +1,153 @@
+[gd_resource type="Resource" load_steps=17 format=2]
+
+[ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=2]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-22-strings/content-jotxF5HU.tres"
+title = ""
+type = 0
+text = "Throughout this course, we've mostly stored numbers in variables. But what if we wanted to store a player's name? Using only numbers for names isn't very user-friendly at all."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-22-strings/content-xZPxY8VU.tres"
+title = ""
+type = 0
+text = "[Visual Robot name 70801]"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-22-strings/content-DpPwQDwf.tres"
+title = "What are strings"
+type = 0
+text = "A string is a variable type which holds text. When we use strings, we use quotation marks (\"\") to differentiate them from other variable types, or method names for example."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+quiz_id = "res://course/lesson-22-strings/quiz-yqdYOexR.tres"
+question = "Which of these are strings?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = ""
+answer_options = [ "1", "\"1\"", "\"name\"" ]
+valid_answers = [  ]
+is_multiple_choice = true
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-22-strings/content-jTRhZN4r.tres"
+title = ""
+type = 0
+text = "You may remember we've used strings before in previous lessons."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-22-strings/content-S5AJTESv.tres"
+title = ""
+type = 0
+text = "[assign string visual]
+
+func run():
+	var my_name = \"Robot\" 
+	print(my_name)"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-22-strings/content-5tT6n1Tx.tres"
+title = ""
+type = 0
+text = "Strings are like an array of characters. In fact, we can even loop through the characters of a string in the same way."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-22-strings/content-lTtcyhcI.tres"
+title = ""
+type = 0
+text = "[loop through and print characters]"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-22-strings/content-b5BnVHAR.tres"
+title = "Why we use strings"
+type = 0
+text = "Strings are very useful in games and applications. We can display information such as the description of a spell, or the name of a character."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-22-strings/content-bBWNbDGt.tres"
+title = ""
+type = 0
+text = "[tooltip or spell description visual]"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-22-strings/content-6fUqbTxY.tres"
+title = ""
+type = 0
+text = "Every piece of text you see in this app is a string that Godot is displaying for us.
+
+Much like how Vector2 variables make calculations easier, string variables come with lots of helper methods and tricks we can use.
+
+These are beyond the scope of this lesson, but we use these tricks when we make sure you've written key phrases in your practice code.
+
+We can use arrays to store strings too. This is useful for creating attack combos."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-22-strings/content-2V6jGvGm.tres"
+title = ""
+type = 0
+text = "[attack combo visual]"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-22-strings/content-ej47MqE8.tres"
+title = ""
+type = 0
+text = "In the next few practices, we'll practice using strings in different problems."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[resource]
+script = ExtResource( 1 )
+title = "Strings"
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]
+practices = [  ]
