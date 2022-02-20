@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/lesson-22-strings/string_error/StringError.gd" type="Script" id=2]
+[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=3]
+
+[node name="StringError" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="RobotBody" parent="Pivot" index="0"]
+position = Vector2( 0, 11.496 )
+
+[node name="HandIceRight" parent="Pivot" index="1"]
+position = Vector2( -45.7745, 34.7046 )
+rotation = -0.879457
+
+[node name="HandIceLeft" parent="Pivot" index="2"]
+position = Vector2( 49, 29.2492 )
+rotation = 0.695719
+
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
+current = true
+
+[node name="Label" type="Label" parent="." index="5"]
+margin_left = -250.0
+margin_top = -127.0
+margin_right = 250.0
+margin_bottom = -99.0
+rect_clip_content = true
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 3 )
+text = "70801"
+align = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

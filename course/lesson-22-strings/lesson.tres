@@ -1,8 +1,10 @@
-[gd_resource type="Resource" load_steps=17 format=2]
+[gd_resource type="Resource" load_steps=20 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/QuizChoice.gd" type="Script" id=2]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=3]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=4]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=5]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 3 )
@@ -123,7 +125,7 @@ Much like how [code]Vector2[/code] variables make calculations easier, string va
 
 These are beyond the scope of this lesson, but we use these tricks when we make sure you've written key phrases in your practice code.
 
-We can use arrays to store strings too. This is useful for chaining animations for example."
+We can use arrays to store strings too. This is useful for chaining animations. In this example, the [code]play_animation()[/code] plays a specific animation"
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -148,8 +150,25 @@ visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=15]
+script = ExtResource( 5 )
+practice_id = "res://course/lesson-22-strings/practice-iGjB7tKR.tres"
+title = "Creating string variables"
+goal = "Currently, the robot has a number for a name. 
+
+Change the [code]robot_name[/code] variable so that it's a string instead. Using a string allows you to use other characters such as [code]a-z[/code] to make up the name."
+starting_code = "func run():
+	robot_name = 70801
+	print(robot_name)"
+hints = PoolStringArray( "Make sure to use quotes when defining strings to differentiate them from other variable types." )
+validator_script_path = "string_error/TestsStringError.gd"
+script_slice_path = "string_error/StringError.live-editor/slices/StringError.print_string.slice.tres"
+documentation_references = PoolStringArray( "print" )
+documentation_resource = ExtResource( 4 )
+description = "Creating strings just the same as other variables, but they have specific syntax. Give the robot a readable name using a string."
+
 [resource]
 script = ExtResource( 1 )
 title = "Strings"
 content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 14 ), SubResource( 3 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 4 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]
-practices = [  ]
+practices = [ SubResource( 15 ) ]
