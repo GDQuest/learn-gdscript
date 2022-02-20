@@ -9,7 +9,7 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-22-strings/content-jotxF5HU.tres"
 title = ""
 type = 0
-text = "Throughout this course, we've mostly stored numbers in variables. But what if we wanted to store a player's name? Using only numbers for names isn't very user-friendly at all."
+text = "Throughout this course, we've mostly stored numbers in variables. But what if we wanted to store a player's name? Using only numbers for names isn't very user-friendly at all, as 70801 here will tell you."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -19,7 +19,17 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-22-strings/content-xZPxY8VU.tres"
 title = ""
 type = 0
-text = "[Visual Robot name 70801]"
+text = ""
+visual_element_path = "visuals/RobotWithNumberName.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-22-strings/content-kGx0c7DD.tres"
+title = ""
+type = 0
+text = "This is where strings help us."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -29,29 +39,9 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-22-strings/content-DpPwQDwf.tres"
 title = "What are strings"
 type = 0
-text = "A string is a variable type which holds text. When we use strings, we use quotation marks (\"\") to differentiate them from other variable types, or method names for example."
-visual_element_path = ""
-reverse_blocks = false
-has_separator = false
+text = "A string is a variable type which holds text instead of numbers. When we use strings, we use quotation marks (\"\") to differentiate them from other variable types, or method names for example.
 
-[sub_resource type="Resource" id=4]
-script = ExtResource( 2 )
-quiz_id = "res://course/lesson-22-strings/quiz-yqdYOexR.tres"
-question = "Which of these are strings?"
-content_bbcode = ""
-hint = ""
-explanation_bbcode = ""
-answer_options = [ "1", "\"1\"", "\"name\"" ]
-valid_answers = [  ]
-is_multiple_choice = true
-do_shuffle_answers = true
-
-[sub_resource type="Resource" id=5]
-script = ExtResource( 3 )
-content_id = "res://course/lesson-22-strings/content-jTRhZN4r.tres"
-title = ""
-type = 0
-text = "You may remember we've used strings before in previous lessons."
+You may remember we've used strings before in previous lessons."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -61,12 +51,8 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-22-strings/content-S5AJTESv.tres"
 title = ""
 type = 0
-text = "[assign string visual]
-
-func run():
-	var my_name = \"Robot\" 
-	print(my_name)"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/PrintString.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -85,10 +71,26 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-22-strings/content-lTtcyhcI.tres"
 title = ""
 type = 0
-text = "[loop through and print characters]"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/PrintCharactersInName.tscn"
 reverse_blocks = false
 has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+quiz_id = "res://course/lesson-22-strings/quiz-yqdYOexR.tres"
+question = "Which of these are strings?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "[code]\"1\"[/code] and [code]\"name\"[/code] are strings.
+
+[code]\"1\"[/code] only contains a character and [i]doesn't[/i] represent the number [code]1[/code].
+
+[code]\"name\"[/code] is made up of four different characters."
+answer_options = [ "1", "\"1\"", "\"name\"" ]
+valid_answers = [ "\"1\"", "\"name\"" ]
+is_multiple_choice = true
+do_shuffle_answers = true
 
 [sub_resource type="Resource" id=9]
 script = ExtResource( 3 )
@@ -105,8 +107,8 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-22-strings/content-bBWNbDGt.tres"
 title = ""
 type = 0
-text = "[tooltip or spell description visual]"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/RobotWithRegularName.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -117,11 +119,11 @@ title = ""
 type = 0
 text = "Every piece of text you see in this app is a string that Godot is displaying for us.
 
-Much like how Vector2 variables make calculations easier, string variables come with lots of helper methods and tricks we can use.
+Much like how [code]Vector2[/code] variables make calculations easier, string variables come with lots of helper methods and tricks we can use.
 
 These are beyond the scope of this lesson, but we use these tricks when we make sure you've written key phrases in your practice code.
 
-We can use arrays to store strings too. This is useful for creating attack combos."
+We can use arrays to store strings too. This is useful for chaining animations for example."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -131,8 +133,8 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-22-strings/content-2V6jGvGm.tres"
 title = ""
 type = 0
-text = "[attack combo visual]"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/ExampleCombo.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -141,7 +143,7 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-22-strings/content-ej47MqE8.tres"
 title = ""
 type = 0
-text = "In the next few practices, we'll practice using strings in different problems."
+text = "In the next few practices, we'll use strings in combination with different concepts from earlier lessons."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -149,5 +151,5 @@ has_separator = false
 [resource]
 script = ExtResource( 1 )
 title = "Strings"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 14 ), SubResource( 3 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 4 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]
 practices = [  ]
