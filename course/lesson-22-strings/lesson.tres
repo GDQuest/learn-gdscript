@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=20 format=2]
+[gd_resource type="Resource" load_steps=21 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/QuizChoice.gd" type="Script" id=2]
@@ -167,8 +167,32 @@ documentation_references = PoolStringArray( "print" )
 documentation_resource = ExtResource( 4 )
 description = "Creating strings just the same as other variables, but they have specific syntax. Give the robot a readable name using a string."
 
+[sub_resource type="Resource" id=16]
+script = ExtResource( 5 )
+practice_id = "res://course/lesson-22-strings/practice-NwQMqAYV.tres"
+title = "Using an array of strings to play a combo"
+goal = "In this practice, we'll chain together animations using an array of strings. You might find such combinations in fighting games.
+
+The robot has the following animation names:
+- [code]jump[/code] (makes the robot jump)
+- [code]damage[/code] (the robot takes damage)
+- [code]level[/code] (the robot levels up)
+
+Populate the combo array with animation names. Then, for each action in the array, call the [code]play_animation()[/code] function to play them.
+
+The robot should do the following actions in order: 
+- [code]jump, jump, damage, damage, level[/code]"
+starting_code = "func run():
+	combo = []"
+hints = PoolStringArray( "Make sure to use (\"\") for each animation name when you add them to the combo array", "Use a for loop and the [code]play_animation()[/code] method for each animation name" )
+validator_script_path = "string_array/TestsStringArray.gd"
+script_slice_path = "string_array/StringArray.live-editor/slices/StringArray.combo.slice.tres"
+documentation_references = PoolStringArray( "play_animation" )
+documentation_resource = ExtResource( 4 )
+description = "You can store an array of strings and loop through them to play animations. Let's get our robot moving!"
+
 [resource]
 script = ExtResource( 1 )
 title = "Strings"
 content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 14 ), SubResource( 3 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 4 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]
-practices = [ SubResource( 15 ) ]
+practices = [ SubResource( 15 ), SubResource( 16 ) ]

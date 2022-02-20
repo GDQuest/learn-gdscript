@@ -24,3 +24,7 @@ func _on_animation_finished() -> void:
 
 func get_current_animation() -> String:
 	return _state_machine.get_current_node()
+
+
+func has_animation(animation_name: String) -> bool:
+	return _animation_player.has_animation(animation_name)
