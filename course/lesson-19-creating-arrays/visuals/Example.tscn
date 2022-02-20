@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://game_demos/turtle.png" type="Texture" id=1]
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=3]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Node2D
+
+export var board_size := Vector2(6, 4) setget set_board_size
+export var cell_size := Vector2(64, 64)
+export var line_width := 4
+export var robot_start_position := Vector2(0, 1)
+
+var board_size_px := cell_size * board_size
+
+# Maps nodes to grid positions
+onready var units := {
+	$Turtle: Vector2(0, 0),
+	$Robot: Vector2(5, 2)
+}
+
+
+var _path := []
+
+func _ready() -> void:
+	var cell: Vector2 = units[$Turtle]
+	_path = [cell]
+	for direction in [Vector2.RIGHT, Vector2.RIGHT, Vector2.DOWN, Vector2.DOWN, Vector2.RIGHT, Vector2.RIGHT, Vector2.RIGHT]:
+		cell += direction
+		_path.append(cell)
+
+	update()
+	update_unit_positions()
+
+
+# Draws a board grid centered on the node
+func _draw() -> void:
+	for x in range(board_size.x):
+		for y in range(board_size.y):
+			draw_rect(Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, Vector2.ONE * cell_size), Color.white, false, line_width)
+	draw_path(_path)
+
+
+func draw_path(cells: Array):
+	var points = PoolVector2Array()
+	for cell in cells:
+		points.append(calculate_cell_position(cell))
+
+	draw_polyline(points, Color(\"fff540\"), 4.0)
+
+
+func update_unit_positions():
+	for unit in units:
+		var cell: Vector2 = units[unit]
+		unit.position = calculate_cell_position(cell)
+
+
+func calculate_cell_position(cell: Vector2):
+	return cell * cell_size - board_size_px / 2.0 + cell_size / 2.0
+
+
+func set_board_size(new_size: Vector2):
+	board_size = new_size
+"
+
+[node name="Panel" type="PanelContainer"]
+margin_right = 658.0
+margin_bottom = 384.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 651.0
+margin_bottom = 377.0
+rect_min_size = Vector2( 0, 370 )
+
+[node name="GameBoard" type="Node2D" parent="RunnableCodeExample"]
+script = SubResource( 2 )
+
+[node name="Turtle" type="Sprite" parent="RunnableCodeExample/GameBoard"]
+position = Vector2( 285, 199 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 1 )
+
+[node name="Robot" parent="RunnableCodeExample/GameBoard" instance=ExtResource( 3 )]
+scale = Vector2( 0.8, 0.8 )

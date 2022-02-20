@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/components/OutputConsole.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends OutputConsole
+
+func run() -> void:
+	clear_messages()
+	for number in range(3):
+		print_output([number])
+"
+
+[node name="PrintForLoop" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 764.0
+margin_bottom = 267.0
+gdscript_code = "func run():
+	for number in [0, 1, 2]:
+		print(number)"
+
+[node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 648.0
+margin_right = 757.0
+margin_bottom = 260.0
+size_flags_horizontal = 3
+script = SubResource( 1 )

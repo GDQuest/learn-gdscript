@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://game_demos/turtle.png" type="Texture" id=1]
+[ext_resource path="res://course/lesson-19-creating-arrays/visuals/rocks_gems.png" type="Texture" id=2]
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://course/lesson-19-creating-arrays/visuals/rocks_shield.png" type="Texture" id=4]
+[ext_resource path="res://course/lesson-19-creating-arrays/moving-turtle/MovingTurtle.gd" type="Script" id=5]
+[ext_resource path="res://ui/theme/fonts/SourceCodePro-Regular.otf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 6 )
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Sprite
+
+signal goal_reached
+
+onready var tween := $Tween as Tween
+
+func move(path: Array):
+	for point in path:
+		tween.interpolate_property(self, \"position\", position, point, 0.2)
+		tween.start()
+		yield(tween, \"tween_all_completed\")
+		yield(get_tree().create_timer(0.2), \"timeout\")
+	emit_signal(\"goal_reached\")
+"
+
+[node name="MovingTurtle" type="Node2D"]
+script = ExtResource( 5 )
+draw_cell_coordinates = true
+label_font = SubResource( 1 )
+
+[node name="Turtle" type="Sprite" parent="."]
+position = Vector2( 20, 283 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 1 )
+script = SubResource( 2 )
+
+[node name="Tween" type="Tween" parent="Turtle"]
+
+[node name="RocksGems" type="Sprite" parent="."]
+position = Vector2( 17, 100 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -17.1429 )
+
+[node name="RocksGems2" type="Sprite" parent="."]
+position = Vector2( 17, 100 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -17.1429 )
+
+[node name="RocksShield" type="Sprite" parent="."]
+position = Vector2( 18, 197 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 4 )
+offset = Vector2( 1.42853, -18.5714 )
+
+[node name="RocksShield2" type="Sprite" parent="."]
+position = Vector2( 18, 197 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 4 )
+offset = Vector2( 1.42853, -18.5714 )
+
+[node name="Robot" parent="." instance=ExtResource( 3 )]
+scale = Vector2( 0.8, 0.8 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true

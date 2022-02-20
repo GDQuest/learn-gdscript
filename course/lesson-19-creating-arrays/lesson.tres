@@ -1,0 +1,290 @@
+[gd_resource type="Resource" load_steps=28 format=2]
+
+[ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=3]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=4]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-lkGx0c7D.tres"
+title = ""
+type = 0
+text = "The [code]range()[/code] function we saw in the previous lesson outputs a list of numbers. For example, calling [code]range(3)[/code] produces the list of numbers [code][0, 1, 2][/code]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-DizKUdOC.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleForRange.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-DizKUdOC.tres"
+title = ""
+type = 0
+text = "A list of values, numbers or otherwise, has a precise name in code: we call them [i]arrays[/i]. So we can say calling the [code]range()[/code] function produces an [i]array[/i] of numbers.
+
+We could directly write and use that array inside our [code]for[/code] loop instead of the [code]range()[/code] function."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-lkGx0c7D.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleForArray.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-QiGjB7tK.tres"
+title = ""
+type = 0
+text = "As you can see, the code still works the same."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-RHJMQ2XN.tres"
+title = "The syntax of arrays"
+type = 0
+text = "We write arrays this way in GDScript."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=24]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-ZixQOPRw.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ArrayDefinitionSyntax.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-otxF5HUx.tres"
+title = ""
+type = 0
+text = "You start with an opening angular bracket. Then, you write comma-separated values that compose the array. Finally, you need a closing angular bracket to complete the array.
+
+Here are a couple of valid arrays. Notice how you can mix values, and they don't need to follow one another."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-QiGjB7tK.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeArrays.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-ZPxY8VUD.tres"
+title = ""
+type = 0
+text = "Because arrays themselves are a value type, just like numbers or [code]Vector2[/code], we can assign arrays to variables to reaccess them later.
+
+That'll come in handy in the next lesson, where we'll use those variables in loops."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-pPwQDwfy.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeArraysInVar.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-qdYOexRj.tres"
+title = ""
+type = 0
+text = "But first, let's see [i]when[/i] you'd use an array."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-TRhZN4rS.tres"
+title = "When you use arrays"
+type = 0
+text = "In computer programming, we use arrays [i]all the time[/i].
+
+Precisely, you'll use them whenever you need to store a [i]list of things[/i].
+
+You always need lists of things in games:
+
+- The player's party in an RPG.
+- The items in the player's inventory.
+- The high scores in an arcade game.
+- The objects in the game world.
+
+All of those and many more rely on arrays."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-5AJTESv5.tres"
+title = "Using arrays to follow a path"
+type = 0
+text = "Let's look at a widespread use of arrays in games: finding and following a path.
+
+In games, you need allies or monsters to find their way to their target, whether it's the player or some point of interest.
+
+To achieve that, we use [i]pathfinding algorithms[/i]. As a name suggests, those algorithms find the path between two points and allow AIs to traverse the game."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-tT6n1Txl.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExamplePathfinding.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-TtcyhcIb.tres"
+title = ""
+type = 0
+text = "Many of those algorithms use arrays of [code]Vector2[/code] coordinates to represent the path.
+
+Take this turtle pet. It wants to follow the robot, but there are rocks in the way.
+
+How can we tell it where to walk to reach the robot? With an array!"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-5BnVHARb.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleTurtleRobot.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-fUqbTxYe.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodePathArray.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-RHJMQ2XN.tres"
+title = ""
+type = 0
+text = "Every value in the array is a [code]Vector2[/code] and represents the cell the turtle needs to walk.
+
+Together, all the values in the array represent a path we can draw."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-wQMqAYVj.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleTurtleRobotPath.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-j47MqE82.tres"
+title = ""
+type = 0
+text = "In upcoming lessons, you will see how we can use arrays to store player inventories or design attack combos.
+
+For now, let's practice creating arrays."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 4 )
+practice_id = "res://course/lesson-19-creating-arrays/practice-otxF5HUx.tres"
+title = "Walking to the robot"
+goal = "The turtle wants to meet the robot! But it cannot find it on its own.
+
+Fill the [code]turtle_path[/code] array with [code]Vector2[/code] coordinates indicating where the turtle should move to avoid the obstacles and arrive safely to the robot.
+
+The turtle can move up, down, left, or right. It cannot move diagonally.
+
+We recommend copying and pasting to fill the array with comma-separated [code]Vector2[/code] values quickly."
+starting_code = "var turtle_path = []"
+hints = PoolStringArray( "Any path that doesn\'t touch rocks is valid. The turtle could first move down or to the right. So the first value could either be [code]Vector2(1, 0)[/code] or [code]Vector2(0, 1)[/code].", "Every [code]Vector2[/code] in the array should be one unit away from the previous one. That means there should only be a difference of 1 on the X-axis or the Y-axis between two [code]Vector2[/code] in the array." )
+validator_script_path = "moving-turtle/TestMovingTurtle.gd"
+script_slice_path = "moving-turtle/MovingTurtle.live-editor/slices/MovingTurtle.path.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 3 )
+description = "Help the turtle find its way to the robot! Give it a path to follow to reach the robot."
+
+[sub_resource type="Resource" id=23]
+script = ExtResource( 4 )
+practice_id = "res://course/lesson-19-creating-arrays/practice-PxY8VUDp.tres"
+title = "Selecting units"
+goal = "In this tactical game, the player and computer can select multiple units at once. You need to call the [code]select_units()[/code] function and pass it an array of [code]Vector2[/code] coordinates to know which units to select.
+
+Each [code]Vector2[/code] in the array represents a cell with a unit.
+
+You can pass arrays in function calls as arguments. As an array is a value type the computer recognizes, you can pass the whole array as a single function argument.
+
+Select all units on the board by passing the correct array to the [code]select_units()[/code] function."
+starting_code = "func run():
+	select_units([])"
+hints = PoolStringArray( "You can write [code]Vector2[/code] values inside the brackets in the function call: [code]select_units([Vector2(1, 1), Vector2(3, 2), Vector2(3, 5)])[/code]." )
+validator_script_path = "selecting-units/TestSelectingUnits.gd"
+script_slice_path = "selecting-units/SelectingUnits.live-editor/slices/SelectingUnits.run.slice.tres"
+documentation_references = PoolStringArray( "select_units" )
+documentation_resource = ExtResource( 3 )
+description = "Write an array to select all units on the board in this strategy game."
+
+[resource]
+script = ExtResource( 1 )
+title = "Creating arrays"
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 18 ), SubResource( 17 ), SubResource( 3 ), SubResource( 4 ), SubResource( 24 ), SubResource( 5 ), SubResource( 19 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 15 ), SubResource( 20 ), SubResource( 21 ), SubResource( 16 ) ]
+practices = [ SubResource( 22 ), SubResource( 23 ) ]
