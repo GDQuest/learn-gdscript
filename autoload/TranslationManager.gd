@@ -50,6 +50,7 @@ func set_language(language_code: String) -> void:
 	if current_language == DEFAULT_LOCALE:
 		TranslationServer.set_locale(current_language)
 		current_profile.language = current_language
+		current_profile.save()
 		return
 	
 	# Load order shouldn't be important, so we'll just load everything from the folder.
@@ -103,6 +104,7 @@ func set_language(language_code: String) -> void:
 	# Set the language to update the app.
 	TranslationServer.set_locale(current_language)
 	current_profile.language = current_language
+	current_profile.save()
 
 
 func _reset_language() -> void:
@@ -111,3 +113,4 @@ func _reset_language() -> void:
 	
 	var current_profile := UserProfiles.get_profile()
 	current_profile.language = current_language
+	current_profile.save()
