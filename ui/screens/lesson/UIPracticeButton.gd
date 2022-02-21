@@ -5,6 +5,8 @@ var completed_before := false setget set_completed_before
 var is_highlighted := false setget set_is_highlighted
 var navigation_disabled := false setget set_navigation_disabled
 
+var _practice: Practice
+
 onready var _title_label := $Margin/Row/Column/Row/Title as Label
 onready var _next_pill_label := $Margin/Row/Column/Row/NextPill as Label
 onready var _description_label := $Margin/Row/Column/Description as Label
@@ -17,14 +19,29 @@ func _ready() -> void:
 	_completed_before_icon.visible = completed_before
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		_update_labels()
+
+
 func setup(practice: Practice) -> void:
+	_practice = practice
+	
 	if not is_inside_tree():
 		yield(self, "ready")
 
-	_title_label.text = practice.title.capitalize()
-	_description_label.text = practice.description
-	_description_label.visible = not practice.description.empty()
-	_navigate_button.connect("pressed", Events, "emit_signal", ["practice_requested", practice])
+	_title_label.text = tr(_practice.title).capitalize()
+	_description_label.text = tr(_practice.description)
+	_description_label.visible = not _practice.description.empty()
+	_navigate_button.connect("pressed", Events, "emit_signal", ["practice_requested", _practice])
+
+
+func _update_labels() -> void:
+	if not _practice:
+		return
+	
+	_title_label.text = tr(_practice.title).capitalize()
+	_description_label.text = tr(_practice.description)
 
 
 func set_completed_before(value: bool) -> void:

@@ -9,31 +9,50 @@ const BUTTON_PRESSED := preload("res://ui/theme/button_navigation_pressed.tres")
 const BUTTON_HOVER := preload("res://ui/theme/button_navigation_hover.tres")
 const BUTTON_DISABLED := preload("res://ui/theme/button_navigation_disabled.tres")
 
+var _last_course: Course
+var _last_target: Resource
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		yield(get_tree(), "idle_frame")
+		_rebuild_breadcrumbs()
+
 
 func update_breadcrumbs(course: Course, target: Resource) -> void:
+	_last_course = course
+	_last_target = target
+	
+	_rebuild_breadcrumbs()
+
+
+func _rebuild_breadcrumbs() -> void:
+	if not _last_course or not _last_target:
+		return
+	
 	_clear_navigation_nodes()
 
-	if target is Lesson:
-		var lesson = target as Lesson
+	if _last_target is Lesson:
+		var lesson = _last_target as Lesson
 		var lesson_index := -1
 
 		var i := 0
-		for lesson_data in course.lessons:
+		for lesson_data in _last_course.lessons:
 			if lesson_data == lesson:
 				lesson_index = i
 				break
 
 			i += 1
 
-		var node_text: String = lesson.title
+		var node_text: String = tr(lesson.title)
 		if lesson_index >= 0:
-			node_text = "%s. %s" % [lesson_index + 1, lesson.title]
+			node_text = "%s. %s" % [lesson_index + 1, tr(lesson.title)]
 
 		_create_navigation_node(node_text, "", true)
 		return
 
-	if target is Practice:
-		var practice = target as Practice
+	if _last_target is Practice:
+		var practice = _last_target as Practice
 		# TODO: Should probably avoid relying on content ID for getting paths.
 		var lesson_path = practice.practice_id.get_base_dir().plus_file("lesson.tres")
 
@@ -41,7 +60,7 @@ func update_breadcrumbs(course: Course, target: Resource) -> void:
 		var lesson_index := -1
 
 		var i := 0
-		for lesson_data in course.lessons:
+		for lesson_data in _last_course.lessons:
 			if lesson_data.resource_path == lesson_path:
 				lesson = lesson_data
 				lesson_index = i
@@ -50,10 +69,10 @@ func update_breadcrumbs(course: Course, target: Resource) -> void:
 			i += 1
 
 		if lesson and lesson_index >= 0:
-			var lesson_text := "%s. %s" % [lesson_index + 1, lesson.title]
+			var lesson_text := "%s. %s" % [lesson_index + 1, tr(lesson.title)]
 			_create_navigation_node(lesson_text, lesson.resource_path)
 
-		var node_text: String = practice.title
+		var node_text: String = tr(practice.title)
 		_create_navigation_node(node_text, "", true)
 		return
 
