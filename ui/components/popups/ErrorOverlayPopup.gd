@@ -39,6 +39,11 @@ func _ready() -> void:
 	hide()
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		_update_explanation()
+
+
 func show_message(position: Vector2, code: int, message: String, message_source: Node) -> void:
 	_current_message_source = message_source
 
@@ -93,11 +98,11 @@ func _update_explanation() -> void:
 		_error_suggestion_block.hide()
 
 		if not _error_explanation.empty():
-			_error_explanation_value.bbcode_text = _error_explanation
+			_error_explanation_value.bbcode_text = tr(_error_explanation)
 			_error_explanation_block.show()
 
 		if not _error_suggestion.empty():
-			_error_suggestion_value.bbcode_text = _error_suggestion
+			_error_suggestion_value.bbcode_text = tr(_error_suggestion)
 			_error_suggestion_block.show()
 
 		_content_block.show()

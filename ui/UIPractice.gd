@@ -98,6 +98,11 @@ func _ready() -> void:
 		setup(test_practice, null, null)
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		_update_slidable_panels()
+
+
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
 	if mb and mb.button_index == BUTTON_LEFT and mb.pressed and get_focus_owner():
@@ -122,7 +127,7 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	var index := 0
 	for hint in practice.hints:
 		var practice_hint: PracticeHint = PracticeHintScene.instance()
-		practice_hint.title = "Hint " + String(index + 1).pad_zeros(1)
+		practice_hint.title = tr("Hint %s") % [ String(index + 1).pad_zeros(1) ]
 		practice_hint.bbcode_text = hint
 		_hints_container.add_child(practice_hint)
 		index += 1

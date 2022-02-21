@@ -1,8 +1,6 @@
 extends Node
 
 const DATABASE_SOURCE := "res://lsp/error_database.csv"
-const TRANSLATED_SOURCE := "res://lsp/error_database.%s.csv"
-const DEFAULT_LOCALE := "en"
 
 const CSV_DELIMITER := ","
 const CSV_IDENTIFIER_FIELD := "error_code"
@@ -16,16 +14,6 @@ var _translated_table := {}
 func _init():
 	_main_table = _load_csv_file(DATABASE_SOURCE)
 
-	# OS.get_locale() is also available, if we want to guess the language based on the OS setting.
-	var server_locale := TranslationServer.get_locale()
-	# We are only using the language code part of the locale for now.
-	var locale_parts = server_locale.split("_")
-	var current_locale = locale_parts[0]
-
-	if current_locale != DEFAULT_LOCALE:
-		var translated_path = TRANSLATED_SOURCE % [current_locale]
-		_translated_table = _load_csv_file(translated_path)
-
 
 func get_message(error_code: int) -> Dictionary:
 	var message := {
@@ -36,19 +24,10 @@ func get_message(error_code: int) -> Dictionary:
 	if error_code == -1:
 		return message
 
-	# First check if there is translated data.
-	if not _translated_table.empty() and _translated_table.has(error_code):
-		var record = _translated_table[error_code] as DatabaseRecord
-		if record:
-			message.explanation = record.explanation
-			message.suggestion = record.suggestion
-
-	# Fallback to default data for missing fields.
 	if not _main_table.empty() and _main_table.has(error_code):
 		var record = _main_table[error_code] as DatabaseRecord
-		if record and message.explanation.empty():
+		if record:
 			message.explanation = record.explanation
-		if record and message.suggestion.empty():
 			message.suggestion = record.suggestion
 
 	return message

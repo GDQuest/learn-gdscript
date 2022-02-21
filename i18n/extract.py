@@ -34,6 +34,7 @@ def extract_application_messages() -> None:
 		"Button/text": None,
 		"RichTextLabel/bbcode_text": None,
 		"LineEdit/placeholder_text": None,
+		"title": None,
 
 		# Code-based translated strings
 		"tr": None,

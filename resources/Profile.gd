@@ -13,10 +13,14 @@ export var player_name := ""
 export var study_progression := []
 export var last_started_lesson := {}
 export var last_visible_lesson_block := {}
+
 # User settings
+export var language := "en"
+# Relative size adjustment of all fonts, in integer numbers.
 export var font_size_scale := 0
 # Sensitivity when scrolling with the mouse wheel or touchpad.
 export var scroll_sensitivity := 1.0 setget set_scroll_sensitivity
+# Target framerate for the application, to reduce update intensity on lower end devices.
 export var framerate_limit := 60 setget set_framerate_limit
 
 

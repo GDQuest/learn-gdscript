@@ -16,6 +16,7 @@ const TestDisplayScene = preload("PracticeTestDisplay.tscn")
 export var title := "Title" setget set_title
 
 var _current_status: int = Status.NONE
+var _documentation_results: QueryResult
 
 onready var title_label := find_node("Title") as Label
 onready var _status_icon := find_node("StatusIcon") as TextureRect
@@ -31,6 +32,11 @@ onready var _list_button := find_node("ListButton") as Button
 
 func _ready() -> void:
 	_list_button.connect("pressed", self, "emit_signal", [ "list_requested" ])
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		_update_documentation()
 
 
 func display_tests(info: Array) -> void:
@@ -100,10 +106,24 @@ func set_title(new_title: String) -> void:
 
 
 func set_documentation(documentation: QueryResult) -> void:
+	_documentation_results = documentation
+	_update_documentation()
+
+
+func clear_documentation() -> void:
+	_documentation_results = null
+	_update_documentation()
+
+
+func _update_documentation() -> void:
 	for child_node in _docs_item_list.get_children():
 		_docs_item_list.remove_child(child_node)
 		child_node.queue_free()
-
+	
+	if not _documentation_results:
+		docs_container.hide()
+		return
+	
 	var template_label := RichTextLabel.new()
 	template_label.fit_content_height = true
 	template_label.bbcode_enabled = true
@@ -112,42 +132,38 @@ func set_documentation(documentation: QueryResult) -> void:
 	template_label.add_font_override("italics_font", preload("res://ui/theme/fonts/font_documentation_italics.tres"))
 	template_label.add_font_override("mono_font", preload("res://ui/theme/fonts/font_documentation_mono.tres"))
 
-	if documentation.methods:
+	if _documentation_results.methods:
 		var methods_header := template_label.duplicate() as RichTextLabel
-		methods_header.bbcode_text = "[b]Method descriptions[/b]"
+		methods_header.bbcode_text = "[b]" + tr("Method descriptions") + "[/b]"
 		_docs_item_list.add_child(methods_header)
 
-		for doc_spec in documentation.methods:
+		for doc_spec in _documentation_results.methods:
 			var docs_item := template_label.duplicate() as RichTextLabel
 			docs_item.bbcode_text = (
 				"• [code]%s[/code]\n  %s"
-				% [doc_spec.to_bbcode(), doc_spec.explanation]
+				% [doc_spec.to_bbcode(), tr(doc_spec.explanation)]
 			)
 			_docs_item_list.add_child(docs_item)
 
-	if documentation.properties:
-		if documentation.methods:
+	if _documentation_results.properties:
+		if _documentation_results.methods:
 			_docs_item_list.add_child(HSeparator.new())
 
 		var properties_header := template_label.duplicate() as RichTextLabel
-		properties_header.bbcode_text += "[b]Property descriptions[/b]"
+		properties_header.bbcode_text += "[b]" + tr("Property descriptions") + "[/b]"
 		_docs_item_list.add_child(properties_header)
 
-		for doc_spec in documentation.properties:
+		for doc_spec in _documentation_results.properties:
 			var docs_item := template_label.duplicate() as RichTextLabel
 			docs_item.bbcode_text = (
 				"• [code]%s[/code]\n  %s"
-				% [doc_spec.to_bbcode(), doc_spec.explanation]
+				% [doc_spec.to_bbcode(), tr(doc_spec.explanation)]
 			)
 			_docs_item_list.add_child(docs_item)
-
+	
 	docs_container.show()
 	yield(get_tree(), "idle_frame")
 	_docs_item_list.rect_size.y = 0
-
-
-func clear_documentation() -> void:
-	docs_container.hide()
 
 
 func set_status_icon(status: int) -> void:
