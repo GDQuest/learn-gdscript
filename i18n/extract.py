@@ -16,10 +16,14 @@ def extract_application_messages() -> None:
 	print("Reading application messages...")
 
 	globs_map = [
+		('resources/**/**.gd', 'python'),
 		('ui/**/**.gd', 'python'),
 		('ui/**/**.tscn', 'godot_scene'),
 	]
 	options_map = {
+		'resources/**/**.gd': {
+			'encoding': 'utf-8'
+		},
 		'ui/**/**.gd': {
 			'encoding': 'utf-8'
 		},

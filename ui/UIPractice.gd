@@ -101,6 +101,7 @@ func _ready() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
 		_update_slidable_panels()
+		_update_labels()
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -119,8 +120,9 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	_practice_completed = false
 	_practice_solution_used = false
 
-	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(practice.goal)
-	_info_panel.title_label.text = practice.title.capitalize()
+	_info_panel.title_label.text = tr(practice.title).capitalize()
+	# FIXME: Some weird Windows issue, replace before translating so matching works.
+	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(tr(practice.goal.replace("\r\n", "\n")))
 	_code_editor.text = practice.starting_code
 
 	_hints_container.visible = not practice.hints.empty()
@@ -128,7 +130,7 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	for hint in practice.hints:
 		var practice_hint: PracticeHint = PracticeHintScene.instance()
 		practice_hint.title = tr("Hint %s") % [ String(index + 1).pad_zeros(1) ]
-		practice_hint.bbcode_text = hint
+		practice_hint.bbcode_text = tr(hint)
 		_hints_container.add_child(practice_hint)
 		index += 1
 
@@ -169,6 +171,27 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 		var completed_before = user_profile.is_lesson_practice_completed(course.resource_path, lesson.resource_path, practice.practice_id)
 		if completed_before:
 			_info_panel.set_status_icon(_info_panel.Status.COMPLETED_BEFORE)
+
+
+func _update_labels() -> void:
+	if not _practice:
+		return
+	
+	_info_panel.title_label.text = tr(_practice.title).capitalize()
+	# FIXME: Some weird Windows issue, replace before translating so matching works.
+	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(tr(_practice.goal.replace("\r\n", "\n")))
+	
+	var index := 0
+	for child_node in _hints_container.get_children():
+		var practice_hint = child_node as PracticeHint
+		if not practice_hint:
+			continue
+		
+		practice_hint.title = tr("Hint %s") % [ String(index + 1).pad_zeros(1) ]
+		practice_hint.bbcode_text = tr(_practice.hints[index])
+		index += 1
+	
+	_info_panel.display_tests(_tester.get_test_names())
 
 
 func get_screen_resource() -> Practice:

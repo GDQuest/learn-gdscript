@@ -14,6 +14,7 @@ const RevealerScene := preload("res://ui/components/Revealer.tscn")
 
 var _content_block: ContentBlock
 var _visual_element: CanvasItem
+var _revealer_block: Revealer
 
 onready var _content_root := $Panel as PanelContainer
 onready var _content_margin := $Panel/MarginContainer as MarginContainer
@@ -28,6 +29,11 @@ func _ready() -> void:
 	connect("resized", self, "_on_resized")
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		_update_labels()
+
+
 func setup(content_block: ContentBlock) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
@@ -35,12 +41,13 @@ func setup(content_block: ContentBlock) -> void:
 	_content_block = content_block
 	if _content_block.type == ContentBlock.Type.PLAIN:
 		_content_header.visible = not _content_block.title.empty()
-		_content_header.text = _content_block.title
+		_content_header.text = tr(_content_block.title)
 	else:
 		_content_header.visible = false
 		_make_revealer()
 
-	_text_content.bbcode_text = TextUtils.bbcode_add_code_color(_content_block.text)
+	# FIXME: Some weird Windows issue, replace before translating so matching works.
+	_text_content.bbcode_text = TextUtils.bbcode_add_code_color(tr(_content_block.text.replace("\r\n", "\n")))
 	_text_content.visible = not _content_block.text.empty()
 
 	if _content_block.visual_element_path != "":
@@ -60,11 +67,12 @@ func _make_revealer() -> void:
 
 	if _content_block.type == ContentBlock.Type.NOTE:
 		revealer.title_font_color = COLOR_NOTE
-	revealer.title = "Learn More" if _content_block.title.empty() else _content_block.title
+	revealer.title = tr("Learn More") if _content_block.title.empty() else tr(_content_block.title)
 
 	remove_child(_content_root)
 	add_child(revealer)
 	revealer.add_child(_content_root)
+	_revealer_block = revealer
 
 
 func _make_visual_element() -> void:
@@ -110,6 +118,20 @@ func _make_visual_element() -> void:
 	# raising the panel.
 	if _content_block.reverse_blocks and is_instance_valid(_visual_element):
 		_visual_element.raise()
+
+
+func _update_labels() -> void:
+	if not _content_block:
+		return
+	
+	if _content_block.type == ContentBlock.Type.PLAIN:
+		_content_header.text = tr(_content_block.title)
+	
+	# FIXME: Some weird Windows issue, replace before translating so matching works.
+	_text_content.bbcode_text = TextUtils.bbcode_add_code_color(tr(_content_block.text.replace("\r\n", "\n")))
+	
+	if _revealer_block:
+		_revealer_block.title = tr("Learn More") if _content_block.title.empty() else tr(_content_block.title)
 
 
 func _on_resized() -> void:

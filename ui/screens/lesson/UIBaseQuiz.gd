@@ -64,19 +64,27 @@ func _ready() -> void:
 	_size_tween.connect("tween_step", self, "_on_size_tween_step")
 	_size_tween.connect("tween_completed", self, "_on_size_tween_completed")
 
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		_update_labels()
+
+
 func setup(quiz: Quiz) -> void:
 	_quiz = quiz
 
 	if not is_inside_tree():
 		yield(self, "ready")
 
-	_question.bbcode_text = "[b]" + quiz.question + "[/b]"
+	_question.bbcode_text = "[b]" + tr(_quiz.question) + "[/b]"
 
 	_content.visible = not _quiz.content_bbcode.empty()
-	_content.bbcode_text = TextUtils.bbcode_add_code_color(_quiz.content_bbcode)
+	# FIXME: Some weird Windows issue, replace before translating so matching works.
+	_content.bbcode_text = TextUtils.bbcode_add_code_color(tr(_quiz.content_bbcode.replace("\r\n", "\n")))
 
 	_explanation.visible = not _quiz.explanation_bbcode.empty()
-	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(_quiz.explanation_bbcode)
+	# FIXME: Some weird Windows issue, replace before translating so matching works.
+	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(tr(_quiz.explanation_bbcode.replace("\r\n", "\n")))
 
 
 func set_completed_before(value: bool) -> void:
@@ -84,6 +92,18 @@ func set_completed_before(value: bool) -> void:
 
 	if is_inside_tree():
 		_completed_before_icon.visible = completed_before
+
+
+func _update_labels() -> void:
+	if not _quiz:
+		return
+	
+	_question.bbcode_text = "[b]" + tr(_quiz.question) + "[/b]"
+	
+	# FIXME: Some weird Windows issue, replace before translating so matching works.
+	_content.bbcode_text = TextUtils.bbcode_add_code_color(tr(_quiz.content_bbcode.replace("\r\n", "\n")))
+	# FIXME: Some weird Windows issue, replace before translating so matching works.
+	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(tr(_quiz.explanation_bbcode.replace("\r\n", "\n")))
 
 
 # Virtual

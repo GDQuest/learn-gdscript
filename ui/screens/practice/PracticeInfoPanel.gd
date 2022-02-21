@@ -40,9 +40,13 @@ func _notification(what: int) -> void:
 
 
 func display_tests(info: Array) -> void:
+	for child_node in _checks.get_contents():
+		_checks.remove_child(child_node)
+		child_node.queue_free()
+	
 	for test in info:
 		var instance: PracticeTestDisplay = TestDisplayScene.instance()
-		instance.title = test
+		instance.title = tr(test)
 		_checks.add_child(instance)
 
 
