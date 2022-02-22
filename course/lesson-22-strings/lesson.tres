@@ -41,7 +41,9 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-22-strings/content-DpPwQDwf.tres"
 title = "What are strings"
 type = 0
-text = "A string is a variable type which holds text instead of numbers. When we use strings, we use quotation marks (\"\") to differentiate them from other variable types, or method names for example.
+text = "A [code]String[/code] is a value type which holds text. To create a [code]String[/code], you write text wrapped in quotation marks ([code]\"\"[/code]). For example: [code]\"This is a text string.\"[/code]
+
+The quotation marks differentiate strings from other value types and method names.
 
 You may remember we've used strings before in previous lessons."
 visual_element_path = ""
@@ -63,7 +65,7 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-22-strings/content-5tT6n1Tx.tres"
 title = ""
 type = 0
-text = "Strings are like an array of characters. In fact, we can even loop through the characters of a string in the same way."
+text = "Under the hood, strings are arrays of characters. In fact, we can loop through the characters of a [code]String[/code] in the same way as arrays, using a [code]for[/code] loop."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -99,7 +101,7 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-22-strings/content-b5BnVHAR.tres"
 title = "Why we use strings"
 type = 0
-text = "Strings are very useful in games and applications. We can display information such as the description of a spell, or the name of a character."
+text = "Strings are instrumental in games and applications. We use them to display information such as the description of a spell or the name of a character."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -121,9 +123,7 @@ title = ""
 type = 0
 text = "Every piece of text you see in this app is a string that Godot is displaying for us.
 
-Much like how [code]Vector2[/code] variables make calculations easier, string variables come with lots of helper methods and tricks we can use.
-
-These are beyond the scope of this lesson, but we use these tricks when we make sure you've written key phrases in your practice code.
+Much like how [code]Vector2[/code] variables make calculations easier, string variables come with many helper methods and tricks we can use.
 
 We can use arrays to store strings too. This is useful for chaining animations. In this example, the [code]play_animation()[/code] plays a specific animation"
 visual_element_path = ""
