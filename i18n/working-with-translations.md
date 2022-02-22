@@ -29,6 +29,8 @@ There are several free and open-source translation programs you can use to trans
 
 Among other features, it allows you to mark translations you're unsure of as "needing work" so another translator can check it before publishing it.
 
+_Note: we hired a professional translator to fully translate the app to Spanish, so we currently don't need contributions in Spanish._
+
 ### Testing your translations in Godot
 
 You'll want to check your translations in Godot when translating the app.
