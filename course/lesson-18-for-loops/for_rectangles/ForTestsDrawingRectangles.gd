@@ -30,14 +30,14 @@ func _clean_up() -> void:
 
 func test_use_for_loop() -> String:
 	if not "for" in _slice.current_text:
-		return "Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!"
+		return tr("Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!")
 	return ""
 
 
 func test_draw_three_squares() -> String:
 	var count := _polygons.size()
 	if count < 3:
-		return "You drew %s squares but you need to draw 3." % count
+		return tr("You drew %s squares but you need to draw 3.") % count
 	return ""
 
 
@@ -53,7 +53,7 @@ func test_squares_are_all_100_by_100() -> String:
 			break
 
 		if p != expected_rect:
-			return "Shape number %s is not a square of size 100 by 100." % index
+			return tr("Shape number %s is not a square of size 100 by 100.") % index
 		index += 1
 	return ""
 
@@ -63,9 +63,9 @@ func test_shapes_are_100_pixels_apart() -> String:
 	var second_square = _polygons.pop_back()
 	var first_square = _polygons.pop_back()
 	if not third_square or not second_square or not first_square:
-		return "There are fewer than 3 shapes, we can't test if shapes are 100 pixels apart."
+		return tr("There are fewer than 3 shapes, we can't test if shapes are 100 pixels apart.")
 	var first_to_second = abs(second_square.position.x - first_square.position.x)
 	var second_to_third = abs(third_square.position.x - second_square.position.x)
 	if not is_equal_approx(first_to_second, 200.0) or not is_equal_approx(second_to_third, 200.0):
-		return "Shapes are not separated by 100 pixels on the X axis."
+		return tr("Shapes are not separated by 100 pixels on the X axis.")
 	return ""

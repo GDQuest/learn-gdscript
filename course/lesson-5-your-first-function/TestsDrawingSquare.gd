@@ -11,7 +11,7 @@ func test_draw_square_of_200_pixels() -> String:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	var polygons := turtle.get_polygons()
 	if polygons.empty():
-		return "Nothing drawn. Did you not call move_forward()?"
+		return tr("Nothing drawn. Did you not call move_forward()?")
 
 	var square: DrawingTurtle.Polygon = polygons[0]
 	var points := Array(square.get_points())
@@ -21,6 +21,6 @@ func test_draw_square_of_200_pixels() -> String:
 		points[i] = points[i].abs()
 	points.sort()
 	if points != target_polygon:
-		return "The drawn shape is not a square of length 200 pixels."
+		return tr("The drawn shape is not a square of length 200 pixels.")
 
 	return ""

@@ -9,10 +9,10 @@ func _prepare():
 
 func test_robot_takes_the_right_amount_of_damage() -> String:
 	if health > 100:
-		return "The health goes above 100 when we damage the robot. Did you subract amount from health?"
+		return tr("The health goes above 100 when we damage the robot. Did you subract amount from health?")
 	
 	if not health == 50:
-		return "The robot didn't take as much damage as expected. It has %s health, but it should have 50 health after taking damage." % [health]
+		return tr("The robot didn't take as much damage as expected. It has %s health, but it should have 50 health after taking damage.") % [health]
 	
 	return ""
 
@@ -21,5 +21,5 @@ func test_subtract_amount_from_health() -> String:
 	regex.compile("health\\s*-.*amount")
 	var result = regex.search(_slice.current_text)
 	if not result:
-		return "It doesn't look like you're subtracting amount from health."
+		return tr("It doesn't look like you're subtracting amount from health.")
 	return ""

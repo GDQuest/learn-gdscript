@@ -15,17 +15,17 @@ func _prepare():
 
 func test_angular_speed_variable_is_script_wide() -> String:
 	if not has_angular_speed_prop:
-		return "The angular_speed isn't script-wide. Did you define it outside of the function?"
+		return tr("The angular_speed isn't script-wide. Did you define it outside of the function?")
 	return ""
 
 
 func test_angular_speed_has_value_of_4() -> String:
 	if not has_angular_speed_prop:
-		return "The angular speed variable doesn't exist or isn't script-wide. Make it script-wide first."
+		return tr("The angular speed variable doesn't exist or isn't script-wide. Make it script-wide first.")
 	var angular_speed_value = robot.get("angular_speed")
 	if angular_speed_value == 4:
 		return ""
-	return "Angular speed variable's value is %s; It should be 4." % angular_speed_value
+	return tr("Angular speed variable's value is %s; It should be 4.") % angular_speed_value
 
 
 func test_angular_speed_is_used_in_process_function() -> String:
@@ -33,5 +33,5 @@ func test_angular_speed_is_used_in_process_function() -> String:
 	regex.compile("rotate\\(\\s*angular_speed")
 	var result = regex.search(_slice.current_text)
 	if not result:
-		return "The rotate() function doesn't seem to use the angular_speed variable."
+		return tr("The rotate() function doesn't seem to use the angular_speed variable.")
 	return ""

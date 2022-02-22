@@ -21,10 +21,10 @@ func test_draw_corners_of_varying_lengths() -> String:
 		points.sort()
 		var points_count = points.size()
 		if points_count > 3:
-			return "The drawn shape has too many points. Did you call move_forward() more than 2 times?"
+			return tr("The drawn shape has too many points. Did you call move_forward() more than 2 times?")
 		elif points_count < 3:
-			return "The drawn shape has too few points. Did you call move_forward() less than 2 times?"
+			return tr("The drawn shape has too few points. Did you call move_forward() less than 2 times?")
 		elif not expected_corners[index] == points:
-			return "The drawn shape doesn't have the expected size. Did you use the length parameter?"
+			return tr("The drawn shape doesn't have the expected size. Did you use the length parameter?")
 
 	return ""

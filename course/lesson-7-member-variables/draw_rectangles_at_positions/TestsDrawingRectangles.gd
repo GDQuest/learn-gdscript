@@ -29,7 +29,7 @@ func _clean_up() -> void:
 func test_draw_three_squares() -> String:
 	var count := _polygons.size()
 	if count < 3:
-		return "You drew %s squares but you need to draw 3." % count
+		return tr("You drew %s squares but you need to draw 3.") % count
 	return ""
 
 
@@ -37,7 +37,7 @@ func test_squares_are_all_100_by_100() -> String:
 	var index := 1
 	for p in _points:
 		if p != expected_rect:
-			return "Shape number %s is not a square of size 100 by 100." % index
+			return tr("Shape number %s is not a square of size 100 by 100.") % index
 		index += 1
 	return ""
 
@@ -45,10 +45,10 @@ func test_squares_are_all_100_by_100() -> String:
 func test_first_shape_is_at_100_by_100() -> String:
 	var first_square = _polygons.front()
 	if not first_square:
-		return "No shape drawn. Did you forget to call draw_rectangle()?"
+		return tr("No shape drawn. Did you forget to call draw_rectangle()?")
 
 	if not Vector2(100, 100).is_equal_approx(first_square.position):
-		return "The first square should be drawn at (100, 100). Instead, you drew it at %s." % [first_square.position]
+		return tr("The first square should be drawn at (100, 100). Instead, you drew it at %s.") % [first_square.position]
 
 	return ""
 
@@ -57,9 +57,9 @@ func test_shapes_are_100_pixels_apart() -> String:
 	var second_square = _polygons.pop_back()
 	var first_square = _polygons.pop_back()
 	if not third_square or not second_square or not first_square:
-		return "There are fewer than 3 shapes, we can't test if shapes are 100 pixels apart."
+		return tr("There are fewer than 3 shapes, we can't test if shapes are 100 pixels apart.")
 	var first_to_second = abs(second_square.position.x - first_square.position.x)
 	var second_to_third = abs(third_square.position.x - second_square.position.x)
 	if not is_equal_approx(first_to_second, 200.0) or not is_equal_approx(second_to_third, 200.0):
-		return "Shapes are not separated by 100 pixels on the X axis."
+		return tr("Shapes are not separated by 100 pixels on the X axis.")
 	return ""

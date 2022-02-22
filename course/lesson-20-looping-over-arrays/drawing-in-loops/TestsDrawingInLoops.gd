@@ -46,6 +46,6 @@ func test_rectangles_do_not_overlap() -> String:
 	while index < count - 1:
 		index += 1
 		if last_polygon.get_positioned_rect().intersects(polygons[index].get_positioned_rect()):
-			return tr("At least two drawn shape intersect. Did you pass arguments big enough to ")
+			return tr("At least two drawn shape intersect. Did you pass arguments big enough to the jump() function?")
 		last_polygon = polygons[index]
 	return ""
