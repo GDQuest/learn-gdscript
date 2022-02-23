@@ -1,6 +1,6 @@
 extends PracticeTester
 
-var desired_combo = ["jump", "jump", "damage", "damage", "level"]
+var desired_combo = ["jab", "jab", "flip", "uppercut"]
 var robot: Node2D
 
 func _prepare() -> void:

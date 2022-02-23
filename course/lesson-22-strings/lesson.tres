@@ -174,14 +174,14 @@ title = "Using an array of strings to play a combo"
 goal = "In this practice, we'll chain together animations using an array of strings. You might find such combinations in fighting games.
 
 The robot has the following animation names:
-- [code]jump[/code] (makes the robot jump)
-- [code]damage[/code] (the robot takes damage)
-- [code]level[/code] (the robot levels up)
+- [code]jab[/code] (makes the perform a quick punch)
+- [code]flip[/code] (the robot flips, kicking the dummy)
+- [code]uppercut[/code] (the robot uses a powerful jumping punch)
 
 Populate the combo array with animation names. Then, for each action in the array, call the [code]play_animation()[/code] function to play them.
 
 The robot should do the following actions in order: 
-- [code]jump, jump, damage, damage, level[/code]"
+- [code]jab, jab, flip, uppercut[/code]"
 starting_code = "func run():
 	combo = []"
 hints = PoolStringArray( "Make sure to use (\"\") for each animation name when you add them to the combo array", "Use a for loop and the [code]play_animation()[/code] method for each animation name" )
