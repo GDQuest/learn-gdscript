@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero  \n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2022-02-18 15:02+0300\n"
+"POT-Creation-Date: 2022-02-21 23:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
+
+#: resources/QuizInputField.gd:17
+msgid "You need to type a whole number for this answer. Example: 42"
+msgstr ""
+
+#: resources/QuizInputField.gd:22
+msgid ""
+"You need to type a decimal for this answer. Use a \".\" to separate the "
+"decimal part. Example: 3.14"
+msgstr ""
 
 #: ui/UILesson.tscn:92
 msgid "Title"
@@ -34,15 +44,20 @@ msgstr ""
 msgid "(no previous history)"
 msgstr ""
 
-#: ui/UIPractice.gd:187
+#: ui/UIPractice.gd:132 ui/UIPractice.gd:190
+#, python-format
+msgid "Hint %s"
+msgstr ""
+
+#: ui/UIPractice.gd:215
 msgid "Validating Your Code..."
 msgstr ""
 
-#: ui/UIPractice.gd:240
+#: ui/UIPractice.gd:268
 msgid "Running Your Code..."
 msgstr ""
 
-#: ui/UIPractice.gd:271
+#: ui/UIPractice.gd:299
 msgid "Running Tests..."
 msgstr ""
 
@@ -52,6 +67,10 @@ msgstr ""
 
 #: ui/UIPractice.tscn:183
 msgid "Use Solution"
+msgstr ""
+
+#: ui/UIPractice.tscn:201
+msgid "Leave unfinished practice?"
 msgstr ""
 
 #: ui/components/BigGreenButton.tscn:25
@@ -169,8 +188,16 @@ msgstr ""
 msgid "Original error message"
 msgstr ""
 
+#: ui/components/popups/ErrorOverlayPopup.tscn:73
+msgid "Why this happens"
+msgstr ""
+
 #: ui/components/popups/ErrorOverlayPopup.tscn:82
 msgid "Our error explanation."
+msgstr ""
+
+#: ui/components/popups/ErrorOverlayPopup.tscn:90
+msgid "How to fix this"
 msgstr ""
 
 #: ui/components/popups/ErrorOverlayPopup.tscn:99
@@ -257,7 +284,7 @@ msgid "Practice List"
 msgstr ""
 
 #: ui/components/popups/PracticeListPopup.tscn:120
-#: ui/components/popups/SettingsPopup.tscn:226
+#: ui/components/popups/SettingsPopup.tscn:225
 msgid "Close"
 msgstr ""
 
@@ -322,23 +349,23 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: ui/components/popups/SettingsPopup.tscn:122
+#: ui/components/popups/SettingsPopup.tscn:121
 msgid "Text Size"
 msgstr ""
 
-#: ui/components/popups/SettingsPopup.tscn:149
+#: ui/components/popups/SettingsPopup.tscn:148
 msgid "Sample text"
 msgstr ""
 
-#: ui/components/popups/SettingsPopup.tscn:162
+#: ui/components/popups/SettingsPopup.tscn:161
 msgid "Scroll sensitivity"
 msgstr ""
 
-#: ui/components/popups/SettingsPopup.tscn:188
+#: ui/components/popups/SettingsPopup.tscn:187
 msgid "Framerate cap"
 msgstr ""
 
-#: ui/components/popups/SettingsPopup.tscn:242
+#: ui/components/popups/SettingsPopup.tscn:241
 msgid "Apply"
 msgstr ""
 
@@ -399,6 +426,10 @@ msgstr ""
 msgid "Reset Progress"
 msgstr ""
 
+#: ui/screens/course_outliner/CourseOutliner.tscn:101
+msgid "Confirm Resetting Progress"
+msgstr ""
+
 #: ui/screens/end_screen/EndScreen.tscn:128
 msgid "That's it... for now!"
 msgstr ""
@@ -450,11 +481,16 @@ msgstr ""
 msgid "Answers here"
 msgstr ""
 
+#: ui/screens/lesson/UIContentBlock.gd:70
+#: ui/screens/lesson/UIContentBlock.gd:134
+msgid "Learn More"
+msgstr ""
+
 #: ui/screens/lesson/UIContentBlock.tscn:47
 msgid "Optional Heading"
 msgstr ""
 
-#: ui/screens/lesson/UIContentBlock.tscn:67
+#: ui/screens/lesson/UIContentBlock.tscn:68
 msgid ""
 "Eat all the power cords play time please stop looking at your phone and "
 "pet me milk the cow. Sugar, my siamese, stalks me (in a good way), day "
@@ -501,8 +537,36 @@ msgstr ""
 msgid "(select all that apply)"
 msgstr ""
 
+#: ui/screens/practice/PracticeHint.tscn:8
+msgid "Show Hint"
+msgstr ""
+
+#: ui/screens/practice/PracticeInfoPanel.gd:141
+msgid "Method descriptions"
+msgstr ""
+
+#: ui/screens/practice/PracticeInfoPanel.gd:157
+msgid "Property descriptions"
+msgstr ""
+
 #: ui/screens/practice/PracticeInfoPanel.tscn:63
 msgid "Summary - Lesson Name"
+msgstr ""
+
+#: ui/screens/practice/PracticeInfoPanel.tscn:106
+msgid "Goals"
+msgstr ""
+
+#: ui/screens/practice/PracticeInfoPanel.tscn:119
+msgid "Hints"
+msgstr ""
+
+#: ui/screens/practice/PracticeInfoPanel.tscn:126
+msgid "Checks"
+msgstr ""
+
+#: ui/screens/practice/PracticeInfoPanel.tscn:134
+msgid "Documentation"
 msgstr ""
 
 #: ui/screens/practice/PracticeInfoPanel.tscn:175

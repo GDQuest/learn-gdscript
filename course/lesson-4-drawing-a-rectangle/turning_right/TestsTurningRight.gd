@@ -11,7 +11,7 @@ func test_draw_corner_of_200_by_200() -> String:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	var polygons := turtle.get_polygons()
 	if polygons.empty():
-		return "Nothing drawn. Did you call move_forward()?"
+		return tr("Nothing drawn. Did you call move_forward()?")
 
 	var rectangle: DrawingTurtle.Polygon = polygons[0]
 	var points := Array(rectangle.get_points())
@@ -21,6 +21,6 @@ func test_draw_corner_of_200_by_200() -> String:
 		points[i] = points[i].abs()
 	points.sort()
 	if points != target_polygon:
-		return "The drawn shape is not a corner connected by two lines of length 200."
+		return tr("The drawn shape is not a corner connected by two lines of length 200.")
 
 	return ""

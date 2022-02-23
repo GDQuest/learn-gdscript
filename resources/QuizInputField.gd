@@ -14,12 +14,12 @@ func test_answer(answer: String) -> AnswerTestResult:
 		TYPE_INT:
 			assert(valid_answer is int)
 			if not answer.is_valid_integer():
-				result.help_message = "You need to type a whole number for this answer. Example: 42"
+				result.help_message = tr("You need to type a whole number for this answer. Example: 42")
 			result.is_correct = int(answer) == valid_answer
 		TYPE_REAL:
 			assert(valid_answer is float)
 			if not answer.is_valid_float():
-				result.help_message = 'You need to type a decimal for this answer. Use a "." to separate the decimal part. Example: 3.14'
+				result.help_message = tr('You need to type a decimal for this answer. Use a "." to separate the decimal part. Example: 3.14')
 			result.is_correct = float(answer) == valid_answer
 		TYPE_STRING:
 			assert(valid_answer is String)

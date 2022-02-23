@@ -15,6 +15,8 @@ signal turtle_finished
 
 var draw_speed := 400.0
 var turn_speed_degrees := 260.0
+# Increases the animation playback speed.
+var speed_multiplier := 1.0
 
 var _points := []
 var _polygons := []
@@ -142,7 +144,7 @@ func play_draw_animation() -> void:
 						self, tween_start_time, "_move_camera", command.target
 					)
 			"move_to":
-				duration = turtle_position.distance_to(command.target) / draw_speed
+				duration = turtle_position.distance_to(command.target) / draw_speed / speed_multiplier
 				_tween.interpolate_property(
 					_pivot,
 					"position",
@@ -163,7 +165,7 @@ func play_draw_animation() -> void:
 				turtle_position = command.target
 				tween_start_time += duration
 			"turn":
-				duration = abs(command.angle) / turn_speed_degrees
+				duration = abs(command.angle) / turn_speed_degrees / speed_multiplier
 				var target_angle: float = round(turtle_rotation_degrees + command.angle)
 				_tween.interpolate_property(
 					_pivot,
@@ -178,7 +180,7 @@ func play_draw_animation() -> void:
 				turtle_rotation_degrees = target_angle
 				tween_start_time += duration
 			"jump":
-				duration = 0.5
+				duration = 0.5 / speed_multiplier
 				_tween.interpolate_property(
 					_pivot,
 					"position",
@@ -275,6 +277,11 @@ class Polygon:
 			elif p.y < top_left.y:
 				top_left.y = p.y
 		return Rect2(top_left, bottom_right - top_left)
+
+	func get_positioned_rect() -> Rect2:
+		var rect := get_rect()
+		rect.position += position
+		return rect
 
 	func get_center() -> Vector2:
 		var rect := get_rect()

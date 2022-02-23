@@ -13,7 +13,7 @@ func test_rectangle_starts_at_120_by_100() -> String:
 	var polygons := turtle.get_polygons()
 	var p = polygons[0]
 	if not Vector2(120, 100).is_equal_approx(p.position):
-		return "The rectangle doesn't start at position (120, 100). Did you not set the position right?"
+		return tr("The rectangle doesn't start at position (120, 100). Did you not set the position right?")
 	return ""
 
 func test_rectangle_size_is_200_by_120() -> String:
@@ -22,6 +22,6 @@ func test_rectangle_size_is_200_by_120() -> String:
 	var points = Array(polygons[0].points)
 	points.sort()
 	if points != expected_rect:
-		return "The drawn shapes don't have the expected length and height. Did you forget to use the length and height parameter?"
+		return tr("The drawn shapes don't have the expected length and height. Did you forget to use the length and height parameter?")
 	return ""
 

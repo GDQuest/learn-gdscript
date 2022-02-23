@@ -55,12 +55,17 @@ func _ready() -> void:
 	_scroll_container.grab_focus()
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		_update_labels()
+
+
 func setup(lesson: Lesson, course: Course) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 
 	_lesson = lesson
-	_title.text = lesson.title
+	_title.text = tr(_lesson.title)
 	var user_profile := UserProfiles.get_profile()
 
 	# If this was the last lesson the student interacted with before, we will try to restore
@@ -169,6 +174,13 @@ func setup(lesson: Lesson, course: Course) -> void:
 
 	# Call this immediately to update for the blocks that are already visible.
 	_emit_read_content()
+
+
+func _update_labels() -> void:
+	if not _lesson:
+		return
+	
+	_title.text = tr(_lesson.title)
 
 
 func get_screen_resource() -> Lesson:

@@ -11,17 +11,17 @@ func _prepare():
 
 func test_health_does_not_go_above_80() -> String:
 	if health > 80:
-		return "The health goes above 80 when we heal the character a lot. Did you set the health to 80 when that happens?"
+		return tr("The health goes above 80 when we heal the character a lot. Did you set the health to 80 when that happens?")
 	
 	return ""
 
 func test_health_limit_is_not_too_low() -> String:
 	if health < 80:
-		return "The health limit is too low when we heal the character. Did you set the correct limit?"
+		return tr("The health limit is too low when we heal the character. Did you set the correct limit?")
 	
 	return ""
 
 func test_health_takes_different_values() -> String:
 	if first_node.get_produced_health_values() != _expected_health_values:
-		return "When healing the character twice by 40 points, the health should go up to 60, then 80. Instead, we got %s.\nAre you using the amount parameter?" % [first_node.get_produced_health_values()]
+		return tr("When healing the character twice by 40 points, the health should go up to 60, then 80. Instead, we got %s.\nAre you using the amount parameter?") % [first_node.get_produced_health_values()]
 	return ""

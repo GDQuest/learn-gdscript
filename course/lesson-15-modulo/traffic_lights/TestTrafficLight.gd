@@ -13,7 +13,7 @@ func test_modulo_wraps_index_to_zero() -> String:
 	regex.compile("light_index\\s*\\%|\\%\\s*light_index|\\%\\s*\\d")
 	var result = regex.search(_slice.current_text)
 	if not result:
-		return "It looks like modulo isn't used in the script. Did you use the modulo (%) symbol?"
+		return tr("It looks like modulo isn't used in the script. Did you use the modulo (%) symbol?")
 	return ""
 
 
@@ -21,5 +21,5 @@ func test_correct_light_sequence() -> String:
 	var light_sequence = first_node.get("lights_switched_on")
 	
 	if not light_sequence.hash() == EXPECTED_LIGHT_SEQUENCE.hash():
-		return "The light sequence varies from standard traffic lights. Did you increment the light_index by 1?"
+		return tr("The light sequence varies from standard traffic lights. Did you increment the light_index by 1?")
 	return ""

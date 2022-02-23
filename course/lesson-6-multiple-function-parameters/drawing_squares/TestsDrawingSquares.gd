@@ -21,9 +21,9 @@ func test_draw_squares_of_varying_sizes() -> String:
 		points.sort()
 		var points_count = points.size()
 		if points_count > 5:
-			return "The drawn shape has too many points. Did you call move_forward() more than 4 times?"
+			return tr("The drawn shape has too many points. Did you call move_forward() more than 4 times?")
 		elif points_count < 5:
-			return "The drawn shape has too few points. Did you call move_forward() less than 4 times?"
+			return tr("The drawn shape has too few points. Did you call move_forward() less than 4 times?")
 		if points != expected_rects[index]:
-			return "The shape is not a square. Did you use 90 degree angles when calling turn_right()?"
+			return tr("The shape is not a square. Did you use 90 degree angles when calling turn_right()?")
 	return ""

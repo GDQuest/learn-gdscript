@@ -9,13 +9,13 @@ func test_moving_in_a_circle_is_time_dependent() -> String:
 	var ends_width_parenthesis := _slice.current_text.strip_edges().rfind(")")
 
 	if not has_delta:
-		return "Did you use delta to make the rotation time-dependent?"
+		return tr("Did you use delta to make the rotation time-dependent?")
 	elif not has_two:
-		return "Is the rotation speed correct?"
+		return tr("Is the rotation speed correct?")
 	elif not has_hundred:
-		return "Is the movement speed correct?"
+		return tr("Is the movement speed correct?")
 	elif not has_multiplication_sign:
-		return "Did you use spaces between *?"
+		return tr("Did you use spaces between *?")
 	elif not ends_width_parenthesis:
-		return "Did you not multiply by delta inside the function call? You need to multiply inside the parentheses for delta to take effect."
+		return tr("Did you not multiply by delta inside the function call? You need to multiply inside the parentheses for delta to take effect.")
 	return ""

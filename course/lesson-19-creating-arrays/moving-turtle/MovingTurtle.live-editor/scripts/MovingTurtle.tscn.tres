@@ -1,0 +1,54 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/ScriptProperties.gd" type="Script" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://course/lesson-19-creating-arrays/visuals/GameBoard.gd\"
+
+# EXPORT path
+var turtle_path = [Vector2(1, 0), Vector2(1, 1), Vector2(2, 1), Vector2(3, 1), Vector2(4, 1), Vector2(5, 1), Vector2(5, 2), Vector2(5, 3)]
+# /EXPORT path
+
+func _ready() -> void:
+	set_units({
+		$Turtle: Vector2(0, 0),
+		$Robot: Vector2(5, 3),
+		$RocksGems: Vector2(2, 0),
+		$RocksShield: Vector2(4, 2),
+		$RocksGems2: Vector2(4, 3),
+		$RocksShield2: Vector2(1, 3)
+	})
+	
+
+func run():
+	update()
+	yield(get_tree().create_timer(0.5), \"timeout\")
+	Events.emit_signal(\"practice_run_completed\")
+"
+
+[resource]
+script = ExtResource( 1 )
+nodes_paths = [ NodePath("") ]
+script_file = SubResource( 1 )
+original_script = "extends \"res://course/lesson-19-creating-arrays/visuals/GameBoard.gd\"
+
+# EXPORT path
+var turtle_path = [Vector2(1, 0), Vector2(1, 1), Vector2(2, 1), Vector2(3, 1), Vector2(4, 1), Vector2(5, 1), Vector2(5, 2), Vector2(5, 3)]
+# /EXPORT path
+
+func _ready() -> void:
+	set_units({
+		$Turtle: Vector2(0, 0),
+		$Robot: Vector2(5, 3),
+		$RocksGems: Vector2(2, 0),
+		$RocksShield: Vector2(4, 2),
+		$RocksGems2: Vector2(4, 3),
+		$RocksShield2: Vector2(1, 3)
+	})
+	
+
+func run():
+	update()
+	yield(get_tree().create_timer(0.5), \"timeout\")
+	Events.emit_signal(\"practice_run_completed\")
+"

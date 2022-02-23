@@ -1,0 +1,263 @@
+[gd_resource type="Resource" load_steps=25 format=2]
+
+[ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=3]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=4]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-jB7tKRHJ.tres"
+title = ""
+type = 0
+text = "We used the [code]range()[/code] function in combination with [code]for[/code] loops."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-MQ2XNwQM.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "res://course/lesson-19-creating-arrays/visuals/ExamplePrint.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-qAYVjotx.tres"
+title = ""
+type = 0
+text = "The [code]range()[/code] function produced an array that the [code]for[/code] keyword could loop over.
+
+We can give for loops [i]any[/i] array, and they will loop over them just the same.
+
+Instead of using the [code]range()[/code] function, we could manually write the numbers and get the same result."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-F5HUxZPx.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExamplePrintArray.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-Y8VUDpPw.tres"
+title = ""
+type = 0
+text = "For each element inside the array, the [code]for[/code] loop extracts it, stores it in the temporary variable named [code]number[/code], and executes the loop's code once.
+
+Inside the loop, you can access the [code]number[/code] variable, which changes on each [i]iteration[/i].
+
+The code works regardless of the array or where you store it. Often, you will store arrays in variables for easy access."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-QDwfyqdY.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeStoreArrayInVar.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 3 )
+quiz_id = "res://course/lesson-20-looping-over-arrays/quiz-n1TxlTtc.tres"
+question = "What will this code print?"
+content_bbcode = "[code]var numbers = [0, 1, 2]
+for number in numbers:
+    print(number)
+[/code]"
+hint = ""
+explanation_bbcode = "Compared to previous examples, we store the array in the [code]numbers[/code] variable. Using the [code]numbers[/code] variable in our for loop allows the computer to access the array of numbers like before.
+
+We have three numbers in the array: [code]0[/code], [code]1[/code], and [code]2[/code].
+
+The loop extracts each of them sequentially and assigns it to the [code]number[/code] temporary variable. As, inside the loop, we print the number, the output will print [code]0[/code], then [code]1[/code], then [code]2[/code], each on a separate line."
+answer_options = [ "0, 1, and 2", "1, 2, and 3", "0, 0, and 0" ]
+valid_answers = [ "0, 1, and 2" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-OexRjTRh.tres"
+title = "Making the turtle walk, with a loop"
+type = 0
+text = "In the previous lesson, you made a turtle walk along a path by writing [code]Vector2[/code] coordinates in an array."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-ZN4rS5AJ.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "res://course/lesson-19-creating-arrays/visuals/ExampleTurtleRobotPath.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-DGt6fUqb.tres"
+title = ""
+type = 0
+text = "It's a [code]for[/code] loop that makes the turtle walk along the path.
+
+The loop works like this: for each coordinate in the array, it moves the turtle once to that cell."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-TxYej47M.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeTurtleMove.tscn"
+reverse_blocks = false
+has_separator = true
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-TESv5tT6.tres"
+title = ""
+type = 0
+text = "It's the same principle with unit selection."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-vGm22rtQ.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleSelectUnits.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-qE82V6jG.tres"
+title = ""
+type = 0
+text = "For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it. 
+
+In that case, we use an array, a loop, and a condition together."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-hcIb5BnV.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeSelectUnits.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-En91c9ll.tres"
+title = ""
+type = 0
+text = "The code above uses several features you didn't learn yet:
+
+- In a condition, the [code]in[/code] keyword allows you to check if a value exists [i]in[/i] an array.
+- The array's [code]append()[/code] function appends a new value at the end of the array.
+
+Notice the use of a period after the [code]selected_units[/code] variable, to call the [code]append()[/code] function. It's because this function exists only on arrays.
+
+When functions exist only on a specific value type, you write a dot after the value to call the function on it.
+
+We'll revisit those two features again in the following lessons."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = true
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-20-looping-over-arrays/content-HARbBWNb.tres"
+title = ""
+type = 0
+text = "The beauty of loops is that they work regardless of the size of your arrays. 
+
+The code just works whether you have one or 10,000 units to select. And that with only a couple lines of code.
+
+That's the power of computer programming.
+
+In the following practices, you will use arrays combined with [code]for[/code] loops to achieve similar results."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 5 )
+practice_id = "res://course/lesson-20-looping-over-arrays/practice-f8B67UJ8.tres"
+title = "Move the robot along the path"
+goal = "Our AI pathfinding algorithm provided a path for the robot to move to the right edge of the grid. Your task is to use a [code]for[/code] loop to make the robot move.
+
+To move the robot, call [i]its[/i] [code]move_to()[/code] function, like so: [code]robot.move_to()[/code].
+
+The [code]move_to()[/code] function only exists on the robot, which is why you need to access it this way."
+starting_code = "var robot_path = [Vector2(1, 0), Vector2(1, 1), Vector2(1, 2), Vector2(2, 2), Vector2(3, 2), Vector2(4, 2), Vector2(5, 2)]
+
+func run():
+	"
+hints = PoolStringArray( "You should start with a for loop that iterates over every cell in [code]robot_path[/code].", "You need to pass the cell position to the robot\'s [code]move_to()[/code] function in the loop." )
+validator_script_path = "robot-path/TestRobotPath.gd"
+script_slice_path = "robot-path/RobotPath.live-editor/slices/RobotPath.run.slice.tres"
+documentation_references = PoolStringArray( "robot.move_to" )
+documentation_resource = ExtResource( 4 )
+description = "Our AI pathfinding algorithm is giving us a path to move the robot. Now, you need to make the turtle move along the path."
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 5 )
+practice_id = "res://course/lesson-20-looping-over-arrays/practice-clsFcSrG.tres"
+title = "Back to the drawing board"
+goal = "We want to draw many rectangles, something surprisingly common in games.
+
+When writing the code by hand, it gets tedious. Instead, you'll often store the size of your shapes in arrays and use a loop to draw them all in batches.
+
+That's what you'll do in this practice.
+
+Use a [code]for[/code] loop to draw every rectangle in the [code]rectangle_sizes[/code] array with the [code]draw_rectangle()[/code] function.
+
+The rectangles shouldn't overlap or cross each other. To avoid that, you'll need to call the [code]jump()[/code] function."
+starting_code = "var rectangle_sizes = [Vector2(200, 120), Vector2(140, 80), Vector2(80, 140)]
+
+func run():
+	"
+hints = PoolStringArray( "Each value in the [code]rectangle_sizes[/code] array is a [code]Vector2[/code]. You\'ll need to access its [code]x[/code] and [code]y[/code] sub-components to draw rectangles.", "In the loop, you first need to call [code]draw_rectangle()[/code], and then [code]jump()[/code]. Otherwise, at least two rectangles will overlap.", "The arguments when calling [code]jump()[/code] can just be large enough to space out the rectangles. For example, [code]jump(300, 0)[/code]" )
+validator_script_path = "drawing-in-loops/TestsDrawingInLoops.gd"
+script_slice_path = "drawing-in-loops/DrawingInLoops.live-editor/slices/DrawingInLoops.draw.slice.tres"
+documentation_references = PoolStringArray( "draw_rectangle", "jump" )
+documentation_resource = ExtResource( 4 )
+description = "The drawing turtle makes its comeback. Fear not! Armed with loops, you'll make it draw faster than ever before."
+
+[resource]
+script = ExtResource( 1 )
+title = "Looping over arrays"
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 13 ), SubResource( 14 ), SubResource( 10 ), SubResource( 15 ), SubResource( 16 ), SubResource( 11 ), SubResource( 17 ), SubResource( 12 ) ]
+practices = [ SubResource( 18 ), SubResource( 19 ) ]

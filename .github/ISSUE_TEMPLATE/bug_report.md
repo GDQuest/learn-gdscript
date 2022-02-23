@@ -13,8 +13,8 @@ A clear and concise description of what the bug is.
 **To Reproduce**
 Steps to reproduce the bug:
 1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
+2. Click on '...'
+3. Scroll down to '...'
 4. See error
 
 **Expected behavior**
@@ -25,7 +25,7 @@ If applicable, drag and drop screenshots here to help explain your problem.
 
 **Information about your device (please complete the following information):**
  - Operating System: [e.g. iOS, Windows]
- - Browser [e.g. chrome, safari]
+ - Browser: [e.g. Chrome, Safari]
 
 **Additional context**
 Add any other context about the problem here.

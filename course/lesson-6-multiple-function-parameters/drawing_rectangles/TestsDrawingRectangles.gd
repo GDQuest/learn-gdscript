@@ -31,12 +31,12 @@ func test_draw_rectangles_of_varying_sizes() -> String:
 		points.sort()
 		var points_count = points.size()
 		if points_count > 5:
-			return "The drawn shape has too many points. Did you call move_forward() more than 4 times?"
+			return tr("The drawn shape has too many points. Did you call move_forward() more than 4 times?")
 		elif points_count < 5:
-			return "The drawn shape has too few points. Did you call move_forward() less than 4 times?"
+			return tr("The drawn shape has too few points. Did you call move_forward() less than 4 times?")
 
 		if points == swapped_rects[index]:
-			return "The length and height are inverted. Did you swap the length and height function arguments?"
+			return tr("The length and height are inverted. Did you swap the length and height function arguments?")
 		elif points != expected_rects[index]:
-			return "The drawn shapes don't have the expected length and height. Did you forget to use the length and height parameter?"
+			return tr("The drawn shapes don't have the expected length and height. Did you forget to use the length and height parameter?")
 	return ""

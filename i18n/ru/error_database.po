@@ -1,0 +1,480 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-02-18 17:25+0300\n"
+"PO-Revision-Date: 2022-02-21 23:55+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. Reference: CYCLIC_REFERENCE
+#: lsp/error_database.csv:38
+msgid ""
+"A cyclic reference is when a class references itself, directly or "
+"indirectly.\n"
+"\n"
+"It has two possible causes:\n"
+"\n"
+"1. You used the class name in the class itself.\n"
+"2. Your code refers to another class that refers to this class, causing an "
+"endless reference cycle.\n"
+"\n"
+"Either way, due to how GDScript works in Godot 3, unfortunately,you cannot "
+"do this. Godot 4 should solve this problem, but you need to work around it "
+"in the meantime."
+msgstr ""
+
+#. Reference: CYCLIC_REFERENCE
+#: lsp/error_database.csv:38
+msgid ""
+"Erase the type hint in the error line, and the problem should disappear. \n"
+"\n"
+"At GDQuest, when we face this error, we remove the type hints on lines "
+"causing cyclic references. It solves the problem in the vast majority of "
+"cases."
+msgstr ""
+
+#. Reference: INVALID_INDENTATION
+#: lsp/error_database.csv:45
+msgid ""
+"The indentation of your code (the number of tab characters at the start of "
+"the line) is incorrect.\n"
+"\n"
+"You are missing one or more tabs, or you inserted too many.\n"
+"\n"
+"The computer uses those leading tab characters on code lines to know which "
+"lines of code are part of a code block, like a function."
+msgstr ""
+"Величина отступа в вашем код (число символов табуляции в начале строки) "
+"неверно.\n"
+"\n"
+"Либо вам не хватает одного или нескольких символов, либо вы их добавили "
+"слишком много.\n"
+"\n"
+"Компьютер использует эти символы табуляции на строчках с кодом, чтобы "
+"определить принадлежность кода к единому блоку, например, к функции."
+
+#. Reference: INVALID_INDENTATION
+#: lsp/error_database.csv:45
+msgid ""
+"If the line of code with the error is right after a line ending with a "
+"colon, like a function definition, you need one extra indent level compared "
+"to the previous line.\n"
+"\n"
+"In other words, your line should have one more leading tab character than "
+"the function definition."
+msgstr ""
+
+#. Reference: UNEXPECTED_CHARACTER
+#: lsp/error_database.csv:54
+msgid ""
+"You get this error when you wrote something that is syntactically invalid, "
+"or you are missing something to complete this line or previous lines of "
+"code.\n"
+"\n"
+"You need to be extremely precise when you write code for the computer. This "
+"kind of error is easy to get as all it takes is one wrong character.\n"
+"\n"
+"Note that this error can appear [b]after[/b] the line causing it due to how "
+"the computer reads and analyzes your code."
+msgstr ""
+"Эта ошибка возникает, если вы допустили синтаксическую ошибку в коде, либо "
+"вы не закончили писать эту или одну из предыдущих строк кода.\n"
+"\n"
+"При общении с компьютером требуется абсолютная точность. И такую ошибку "
+"очень легко получить, потому что достаточно ошибиться всего одним символом.\n"
+"\n"
+"Следует отметить, что эта ошибка может возникнуть [b]после[/b] строки, "
+"которая на самом деле её вызывает. Это связано с тем, как компьютер читает и "
+"анализирует ваш код."
+
+#. Reference: UNEXPECTED_CHARACTER
+#: lsp/error_database.csv:54
+msgid ""
+"The way to solve this kind of error is highly contextual. The error message "
+"should tell you which character or element it's missing.\n"
+"\n"
+"If the error says \"expected,\" then you're likely missing something in one "
+"of the [b]previous[/b] code lines. It could be a punctuation mark, a "
+"parenthesis, or something else.\n"
+"\n"
+"If it says \"unterminated,\" you are missing some character at the end of an "
+"expression, like a closing bracket. In this case, it most likely comes from "
+"the line with the error."
+msgstr ""
+
+#. Reference: UNEXPECTED_CHARACTER_IN_KEYWORD
+#: lsp/error_database.csv:57
+msgid ""
+"This error tells you that you are missing a parenthesis (or sometimes a "
+"comma or a path).\n"
+"\n"
+"Three keywords in GDScript work like function calls and require parentheses: "
+"[code]yield()[/code], [code]preload()[/code], and [code]assert()[/code]."
+msgstr ""
+
+#. Reference: UNEXPECTED_CHARACTER_IN_KEYWORD
+#: lsp/error_database.csv:57
+msgid ""
+"To address the error, you want to add the missing opening parenthesis, the "
+"closing parenthesis, or the comma."
+msgstr ""
+
+#. Reference: UNEXPECTED_CHARACTER_IN_EXPORT_HINT
+#: lsp/error_database.csv:58
+msgid ""
+"This error tells you you are missing some parenthesis, a comma, or some "
+"value in your export hint."
+msgstr ""
+
+#. Reference: UNEXPECTED_CHARACTER_IN_EXPORT_HINT
+#: lsp/error_database.csv:58
+msgid ""
+"You need to read the error message and add the missing character or value it "
+"requests."
+msgstr ""
+
+#. Reference: MISPLACED_IDENTIFIER
+#: lsp/error_database.csv:68
+msgid ""
+"This error happens in several cases:\n"
+"\n"
+"1. You wrote an identifier (variable or function name) in the wrong place.\n"
+"2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/"
+"code], or [code]signal[/code], and you did not follow it by a name.\n"
+"3. You wrote a function definition but forgot the parentheses before the "
+"colon."
+msgstr ""
+
+#. Reference: MISPLACED_IDENTIFIER
+#: lsp/error_database.csv:68
+msgid ""
+"If the error tells you it expected something, you likely forgot to write a "
+"name after a keyword like [code]var[/code], [code]func[/code], [code]for[/"
+"code], or [code]signal[/code], making your code invalid. Or you forgot "
+"parentheses in a function definition. You can address the error by adding "
+"the missing name or parentheses.\n"
+"\n"
+"If the error says you have something unexpected, you are likely missing a "
+"keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc.\n"
+"\n"
+"Another possibility is that you need to write a colon at the end of a "
+"function definition, [code]for[/code] loop, or a line starting with "
+"[code]if[/code], [code]elif[/code], or [code]else[/code]."
+msgstr ""
+
+#. Reference: MISPLACED_TYPE_IDENTIFIER
+#: lsp/error_database.csv:73
+msgid ""
+"This error tells you that you are missing a type somewhere. A type can be "
+"[code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/"
+"code], [code]Vector2[/code], and many identifiers representing a data "
+"structure.\n"
+"\n"
+"Most of the time, this error occurs when you wrote a colon after a variable "
+"name but did not follow it with a type name.\n"
+"\n"
+"It also occurs when you write an arrow ([code]->[/code]) after the "
+"parentheses of a function definition but do not follow it with a type name."
+msgstr ""
+
+#. Reference: MISPLACED_TYPE_IDENTIFIER
+#: lsp/error_database.csv:73
+msgid ""
+"To solve this, you need to write the name of the type after the colon, arrow "
+"(in the case of function return types), inside parentheses (for export "
+"types), or after the [code]as[/code] keyword."
+msgstr ""
+
+#. Reference: NONEXISTENT_IDENTIFIER
+#: lsp/error_database.csv:82
+msgid ""
+"The variable, function name, or class name you are trying to use does not "
+"exist.\n"
+"\n"
+"You most often get this error when you make typos. Maybe you swapped two "
+"letters, forgot a letter... sometimes, it's hard to spot.\n"
+"\n"
+"The other cause for this error is that you didn't define the variable, "
+"function, or class you're trying to access."
+msgstr ""
+
+#. Reference: NONEXISTENT_IDENTIFIER
+#: lsp/error_database.csv:82
+msgid ""
+"To solve this error, triple-check that there is no typo in the line.\n"
+"\n"
+"If you can, try to go to the variable or function definition, double-click "
+"the name, copy it, and paste it where you see the error.\n"
+"\n"
+"If you don't see any typo, then you need to ensure that you defined the "
+"variable, function, or class you are referring to."
+msgstr ""
+
+#. Reference: MISPLACED_KEYWORD
+#: lsp/error_database.csv:87
+msgid ""
+"You can only use keywords like [code]break[/code] or [code]continue[/code] "
+"in a loop. Outside a loop, they are invalid.\n"
+"\n"
+"The [code]continue[/code] keyword means \"jump to the next iteration of the "
+"loop.\" And the [code]break[/code] keyword means \"end the loop right now "
+"and jump to the first line of code after the loop block."
+msgstr ""
+
+#. Reference: MISPLACED_KEYWORD
+#: lsp/error_database.csv:87
+msgid ""
+"If you wrote one of these keywords outside a loop, you need to remove it.\n"
+"\n"
+"If you are trying to use it inside a loop, your indentation is most likely "
+"at fault. You may need to insert one or more leading tab characters to the "
+"keyword."
+msgstr ""
+
+#. Reference: EXPECTED_CONSTANT_EXPRESSION
+#: lsp/error_database.csv:92
+msgid ""
+"When the computer talks about a constant expression, it expects a fixed "
+"value, a fixed calculation, or the name of an existing constant.\n"
+"\n"
+"In other words, it wants something that can never change. This is why the "
+"computer will reject function calls and variables where it needs a constant "
+"expression."
+msgstr ""
+
+#. Reference: EXPECTED_CONSTANT_EXPRESSION
+#: lsp/error_database.csv:92
+msgid ""
+"You need to replace function calls or variables with a constant value like a "
+"whole number, decimal number, string, vector, a predefined array, etc.\n"
+"\n"
+"You can also use arithmetic operators like multiplications (*), additions "
+"(+), and so on."
+msgstr ""
+
+#. Reference: INVALID_CLASS_DECLARATION
+#: lsp/error_database.csv:97
+msgid ""
+"When defining a new class, you need to follow a specific pattern. You must "
+"write the name in plain text, starting with a letter.\n"
+"\n"
+"We typically write class names in PascalCase: with a capital letter at the "
+"start of every word that composes the class name."
+msgstr ""
+
+#. Reference: INVALID_CLASS_DECLARATION
+#: lsp/error_database.csv:97
+msgid ""
+"To fix this error, replace whatever you put after the 'extends' or "
+"'class_name' keyword by a name without spaces and starting with a capital "
+"letter.\n"
+"\n"
+"You can optionally use numbers in the name, but not in the first position."
+msgstr ""
+
+#. Reference: DUPLICATE_DECLARATION
+#: lsp/error_database.csv:102
+msgid ""
+"You are trying to define a signal that already exists; You can't do that.\n"
+"\n"
+"Perhaps the signal already exists in the current code file, but it may also "
+"be in a parent class that this GDScript code extends."
+msgstr ""
+
+#. Reference: DUPLICATE_DECLARATION
+#: lsp/error_database.csv:102
+msgid ""
+"In the app, your code extends some built-in Godot code that's not visible to "
+"you.\n"
+"\n"
+"When that happens, you need to either rename your signal to one that will "
+"not collide with an existing one or remove this line of code."
+msgstr ""
+
+#. Reference: SIGNATURE_MISMATCH
+#: lsp/error_database.csv:107
+msgid ""
+"The function you're trying to define exists in a parent class, so your "
+"definition overrides the parent class's function.\n"
+"\n"
+"When you override a parent class's function, the new function must match the "
+"parent. The new function should have the same number and type of parameters "
+"as the parent class.\n"
+"\n"
+"For example, if the parent has two arguments, you need your new function "
+"also to have two arguments. If you use type hints in your function "
+"definitions, the argument types must match the parent class."
+msgstr ""
+
+#. Reference: SIGNATURE_MISMATCH
+#: lsp/error_database.csv:107
+msgid ""
+"You need to check the parent class's function and its definition in the code "
+"reference. Then, you need to edit your function definition to have the same "
+"number and type of parameters as the parent class."
+msgstr ""
+
+#. Reference: INVALID_ARGUMENTS
+#: lsp/error_database.csv:108
+msgid ""
+"This whole class of errors has to do with calling functions with either the "
+"wrong number of arguments or the wrong kind of argument. You will need to "
+"use the error message to see what is going wrong."
+msgstr ""
+
+#. Reference: INVALID_ARGUMENTS
+#: lsp/error_database.csv:108
+msgid ""
+"You need to either remove, add, or change the values you're trying to pass "
+"to the function to solve this issue. To know exactly how many arguments you "
+"need, you need to check the code reference. It will show you the function "
+"definition and the mandatory arguments."
+msgstr ""
+
+#. Reference: TYPE_MISMATCH
+#: lsp/error_database.csv:119
+msgid ""
+"All the values in your code have a specific type. That type can be a whole "
+"number (int), a decimal number (float), text (String), and so on. There are "
+"tons of possible types, and you can even define your own!\n"
+"\n"
+"When you make any operation, the computer compares the types you are using.\n"
+"\n"
+"Some types are compatible, and some are not. For example, you cannot "
+"directly add a whole number to a text string. You first need to convert the "
+"number into text.\n"
+"\n"
+"You'll need to read the error message to see what is not matching because "
+"there are many possible cases."
+msgstr ""
+
+#. Reference: TYPE_MISMATCH
+#: lsp/error_database.csv:119
+msgid ""
+"If the error mentions the assigned value type not matching the variable, the "
+"problem is on the right side of the equal sign (=).\n"
+"\n"
+"If the error talks about the return type not matching the function, then it "
+"is the value after the return keyword that is problematic.\n"
+"\n"
+"If the computer talks about an invalid operand, then the issue is that the "
+"operation does not exist for the type you're trying to use. For example, "
+"while you can add two 2D vectors, you can't add a whole number or text to a "
+"2D vector."
+msgstr ""
+
+#. Reference: TYPE_CANNOT_BE_INFERRED
+#: lsp/error_database.csv:124
+msgid ""
+"GDScript supports type inference. The computer will automatically recognize "
+"the type of value you are working with. In some cases, though, it can't "
+"figure it out.\n"
+"\n"
+"When that happens, you need to specify the type yourself or remove type "
+"inference altogether for this variable."
+msgstr ""
+
+#. Reference: TYPE_CANNOT_BE_INFERRED
+#: lsp/error_database.csv:124
+msgid ""
+"The simplest way to solve this error is to remove types for this variable or "
+"this function's arguments. Otherwise, you can manually specify the value "
+"type after the colon.\n"
+"\n"
+"We recommend specifying the type whenever possible to reap the typing "
+"system's benefits."
+msgstr ""
+
+#. Reference: RETURN_VALUE_MISMATCH
+#: lsp/error_database.csv:130
+msgid ""
+"There is an issue with the return value of your function. There are two main "
+"cases here:\n"
+"\n"
+"1. Your function is a void function, thus it should not return a value. This "
+"includes functions with the '-> void' syntax and class constructors "
+"('_init()').\n"
+"2. You specified a return type for your function, but you are not returning "
+"a value in all possible branches (if, elif, and else blocks) or at the end."
+msgstr ""
+
+#. Reference: RETURN_VALUE_MISMATCH
+#: lsp/error_database.csv:130
+msgid ""
+"When your function is 'void', you should never return a value. You can use "
+"the 'return' keyword to end the function early, but you should never write "
+"anything after that.\n"
+"\n"
+"When you use a return type, you must always return something at the end of "
+"the function or in every branch (if, elif, and else block) of the function."
+msgstr ""
+
+#. Reference: CANNOT_CONNECT_TO_LSP
+#: lsp/error_database.csv:132
+msgid ""
+"The server or your computer may currently be disconnected. Also, an app or "
+"browser add-on may be blocking the connection. If you use an ad blocker or "
+"script blocker, please disable it for this website."
+msgstr ""
+
+#. Reference: CANNOT_CONNECT_TO_LSP
+#: lsp/error_database.csv:132
+msgid ""
+"Please make sure you're connected to the internet. If you use an ad blocker "
+"or script blocker, please ensure it is turned off on this page."
+msgstr ""
+
+#. Reference: LSP_UNDETECTED_ERROR
+#: lsp/error_database.csv:133
+msgid ""
+"Godot was unable to load your script, yet the language checker server found "
+"nothing wrong. It's possible you are not online"
+msgstr ""
+
+#. Reference: LSP_UNDETECTED_ERROR
+#: lsp/error_database.csv:133
+msgid ""
+"If you're offline, this error is expected. Otherwise, please click on the "
+"\"report\" button at the top and please let us know"
+msgstr ""
+
+#. Reference: LSP_TIMED_OUT
+#: lsp/error_database.csv:134
+msgid ""
+"Either your connection is very slow, or the Language Verifier server is "
+"under load"
+msgstr ""
+
+#. Reference: LSP_TIMED_OUT
+#: lsp/error_database.csv:134
+msgid ""
+"Please try again, and if it happens again, warn us with the \"report\" "
+"button at the top. Thank you!"
+msgstr ""
+
+#. Reference: RECURSIVE_FUNCTION
+#: lsp/error_database.csv:135
+msgid "You called a function inside itself. This will loop forever."
+msgstr ""
+
+#. Reference: RECURSIVE_FUNCTION
+#: lsp/error_database.csv:135
+msgid ""
+"There are valid reasons for using recursive functions, but none of them are "
+"part of this course, so this cannot be a valid solution."
+msgstr ""

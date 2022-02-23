@@ -760,15 +760,31 @@ The for loop takes this array and loops over the numbers sequentially.
 
 Arrays are a core data type in computer programs just like numbers. An array is a list of things. Those things can be whole numbers, decimal numbers, 2D vectors, or anything else.
 
-### Lesson 20: Looping over arrays
+### Lesson 20: Looping over arrays with for loops
 
-### Lesson 21: Adding, removing, and accessing elements in arrays
+Solves: reading and processing the data inside an array.
 
-### Lesson 22: Strings
+### Lesson 21: Strings
 
-We need strings to give nice examples for dictionaries.
+We need to introduce strings to give nice examples for arrays and dictionaries.
 
-### Lesson 23: Creating dictionaries
+### Lesson 22: Appending and popping values from arrays
+
+The user knows how to create hardcoded arrays, but arrays are really only useful if you can add and remove values whenever needed.
+
+This lesson focuses on just that: adding values at the end of the array and popping values.
+
+This lesson should come after strings to be useful. With only 2D vectors and numbers, can be a bit difficult to should show good uses of those functions.
+
+### Lesson 23: Accessing values in arrays
+
+This lesson can come right before dictionaries because while you can find an index in an array, dictionary lookups can be easier and there will often be more efficient, especially when arrays get large.
+
+While those performance details won't matter too much to students at this point, the dictionary is really much easier to understand and use than arrays for accessing specify keys than arrays.
+
+The examples here could build upon the previous lesson and have us directly access the 3rd order, the for folder, et cetera in the queue without having to use a for loop or some other approach.
+
+### Lesson 24: Creating dictionaries
 
 Creating an inventory mapping item names to whole numbers.
 
@@ -782,29 +798,55 @@ Say you want an inventory with five health potions and ten arrows.
 
 Each entry in the dictionary maps the item's name to the quantity contained in the player's inventory.
 
-### Lesson 24: Looping over dictionaries
+### Lesson 25: Looping over dictionaries
 
 We can loop over the keys and values of a dictionary with for loops.
 
+### Lesson 26: Value types
+
+We already talked about value types in the course up to this point, but users have only been writing dynamic code.
+
+This lesson should just focus on value types. It should highlight the problems you will face if you do not master the types and don't understand them.
+
+For example, when trying to add a number to a string directly, you will get an error. You need to convert the number into a string using the `str()` function.
+
+### Lesson 27: type hints
+
+After discovering value types and seeing that we need to be careful with them, we introduce type hints.
+
+Type hints are most useful when getting frequent compilation and linting in Godot so the scope of this lesson is a bit limited. Yet, writing types is a good learning practice: too many self-taught programmers rely on dynamic code and get stuck when a type-related error occurs.
+
+This lesson should show how to specify the expected type of a variable or function argument. We haven't talked about functions that return values yet so we'll introduce the `->` syntax for return types in the corresponding lesson.
+
+We could also introduce type inference here as a shortcut.
+
+Finally, we should make the advantages of using strong typing or dynamic code clear:
+
+It is good for learning as you will get lots of type warnings that will help you improve your understanding of what the code is doing.
+Inside Godot, it will also improve auto completion: the computer will better understand your code and will be able to suggest code completions for you more efficiently.
+
+### Lesson 28: Functions that return a value
+
+We haven't covered making pure functions or functions that return values at this stage because the student had too few techniques in their toolbelt.
+
+At this stage, we can make them write useful pure functions, for example, to filter arrays, or to convert vector coordinates from grid to screen coordinates and vice versa.
+
+This lesson should also talk about specifying the return type of a function with the `->` syntax as we didn't get to cover it in the type hints lesson.
+
+There are 3 advantages of functions that only calculate and return values:
+
+1. They make your code easier to read.
+2. You can test them in isolation.
+3. As a result, they are easy to debug.
+
 ## Remaining topics:
 
-General topics:
-
-- [X] while loops
-- [X] for loops
-- [X] Arrays
-- [X] Strings
-- [X] Dictionaries
-- [X] Vector2
-- [ ] Types and type hints
-- [ ] Duck typing
+We need to review the techniques below before deciding which we should cover or not.
 
 Specific techniques:
 
 - [ ] The `elif` keyword.
-- [ ] Functions that return values.
 - [ ] Breaking from a loop with the `break` keyword.
-- [ ] Looping over the keys and values of a dictionary.
 - [ ] Creating nested dictionaries (e.g. grid inventory mapping cells to {name: amount}).
 - [ ] Using arrays inside dictionaries (e.g. `{square = [Vector2(0, 0), Vector2(100, 0), ...]}`).
 - [ ] Constants

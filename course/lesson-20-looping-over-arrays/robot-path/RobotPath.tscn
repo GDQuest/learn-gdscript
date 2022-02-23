@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://course/lesson-20-looping-over-arrays/robot-path/RobotPath.gd" type="Script" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+signal goal_reached
+
+onready var tween := $Tween as Tween
+
+var move_queue := []
+var points := []
+
+
+func move_to(cell: Vector2):
+	move_queue.append(cell)
+	points.append(cell)
+	if not tween.is_active():
+		_play_move_animation()
+
+
+func _play_move_animation():
+	var target_cell = move_queue.pop_front()
+	if not target_cell:
+		emit_signal(\"goal_reached\")
+		return
+
+	while target_cell:
+		tween.interpolate_property(self, \"position\", position, get_parent().cell_to_position(target_cell), 0.2)
+		tween.start()
+		yield(tween, \"tween_all_completed\")
+		yield(get_tree().create_timer(0.2), \"timeout\")
+		target_cell = move_queue.pop_front()
+	emit_signal(\"goal_reached\")
+"
+
+[node name="RobotPath" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Robot" parent="." instance=ExtResource( 2 )]
+scale = Vector2( 0.8, 0.8 )
+script = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="Robot"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
