@@ -51,7 +51,7 @@ clean(){
   test "$dry" || rm -rf build
   echo "mkdir -p build"
   test "$dry" || mkdir -p build
-  ech "touch build/.gdignore"
+  echo "touch build/.gdignore"
   test "$dry" || touch build/.gdignore
   echo "✓ Removed all builds"
 }
