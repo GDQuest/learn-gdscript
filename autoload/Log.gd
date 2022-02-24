@@ -14,19 +14,18 @@ var _js_available := OS.has_feature("JavaScript")
 var is_joypad = false
 var joypad_index = -1
 var GDQUEST: JavaScriptObject
-
+var _log_lines := []
 
 func _init() -> void:
 	var _err = Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")
+	trim_if_over_limit()
+	log_system_info_if_log_is_empty(get_info())
 	if not _js_available:
 		return
 	GDQUEST = JavaScript.get_interface("GDQUEST")
 	if not GDQUEST:
 		_js_available = false
 		return
-	trim_if_over_limit()
-	log_system_info_if_log_is_empty(get_info())
-
 
 func write(level: int, properties: Dictionary, message: String) -> void:
 	if also_print_to_godot and OS.is_debug_build():
@@ -46,6 +45,10 @@ func write(level: int, properties: Dictionary, message: String) -> void:
 			_:
 				print(object)
 	if not _js_available:
+		var line := { "time":"", "level": level, "msg": message }
+		for propName in properties:
+			line[propName] = properties[propName]
+		_log_lines.append(line)
 		return
 	var props = godot_dict_to_js_obj(properties)
 	match(level):
@@ -94,9 +97,25 @@ func fatal(properties: Dictionary, message: String) -> void:
 
 
 # Prompts a file download to the user in a web environment. Safe to call in all
-# environments, will no-op when JS is not available.
+# environments
 func download() -> void:
 	if not _js_available:
+		var json_string := ""
+		for line in _log_lines:
+			json_string += JSON.print(line) + "\n"
+		var file := File.new()
+		var dir := Directory.new()
+		var time  := OS.get_datetime();
+		var dir_name := "error_logs"
+		var file_name := "%d-%02d-%02d-%02d-%02d" % [time.year, time.month, time.day, time.hour, time.minute];
+		var ok := dir.make_dir_recursive("user://%s/"%[dir_name])
+		if ok != OK:
+			push_error("could not create %s"%[dir_name])
+		file.open("user://%s/%s.log"%[dir_name, file_name], File.WRITE)
+		file.store_string(json_string)
+		file.close()
+		var dir_absolute_path := OS.get_user_data_dir().plus_file("error_logs")+"/"
+		OS.shell_open(dir_absolute_path)
 		return
 	# warning-ignore:unsafe_property_access
 	GDQUEST.log.download()
@@ -111,12 +130,12 @@ func trim_if_over_limit(max_kilo_bytes := 1000) -> bool:
 	return GDQUEST.log.trimIfOverLimit(max_kilo_bytes)
 
 
-# Logs system info if the log is empty. Safe to call in all environments, will
-# no-op when JS is not available.
+# Logs system info if the log is empty. Safe to call in all environments
 func log_system_info_if_log_is_empty(additional_data := {}) -> void:
 	if not _js_available:
-		return
-	if additional_data.size() > 0:
+		if additional_data.size() > 0:
+			trace(additional_data, 'INIT');
+	elif additional_data.size() > 0:
 		var props = godot_dict_to_js_obj(additional_data)
 		# warning-ignore:unsafe_property_access
 		GDQUEST.log.logSystemInfoIfLogIsEmpty(props)
