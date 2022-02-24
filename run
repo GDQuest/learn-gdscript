@@ -97,6 +97,11 @@ web_watch(){
       ext=${changed_file##*.}
       if [ "$base_dir" = "html_export" ]; then
         if (($now - $last_time_copied >= $throttle_copy)); then
+          if [[ "$filename" == "index_template.html" ]]; then
+            prepare_htmltemplate
+            changed_file="./html_export/index.html"
+            filename="index.html"
+          fi
           echo "will copy $changed_file"
           cp "$changed_file" "${dirs[web]}/$filename"
         fi
