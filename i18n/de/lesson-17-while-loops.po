@@ -1,0 +1,345 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-02-18 15:02+0300\n"
+"PO-Revision-Date: 2022-02-24 18:04+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: course/lesson-17-while-loops/lesson.tres:14
+#, fuzzy
+msgid ""
+"You've seen that you can use functions to [i]reuse[/i] code. In this lesson, "
+"you'll learn about [b]loops[/b]. Loops help you [i]repeat[/i] code.\n"
+"\n"
+"To illustrate how loops work, let's take a game board split into a grid.\n"
+"\n"
+"Our robot can move to neighboring cells by changing a [code]Vector2[/code] "
+"variable named [code]cell[/code] variable.\n"
+"\n"
+"When we increase [code]cell.x[/code], the robot moves to the right.\n"
+"\n"
+"Note that we delay the robot's movement in the app to help you visualize how "
+"it moves. The following code would normally move the robot instantly."
+msgstr ""
+"Sie haben gesehen, dass Sie Funktionen verwenden können, um [i] Code "
+"wiederzuverwenden[/i]. In dieser Lektion lernen Sie [b]loops[/b] kennen. "
+"Schleifen helfen Ihnen, [i]code zu wiederholen[/i].\n"
+"\n"
+"Um zu veranschaulichen, wie Schleifen funktionieren, nehmen wir ein "
+"Spielbrett, das in ein Raster aufgeteilt ist.\n"
+"\n"
+"Unser Roboter kann sich in benachbarte Zellen bewegen, indem er eine "
+"[code]Vector2[/code]-Variable mit dem Namen [code]cell[/code] ändert.\n"
+"\n"
+"Wenn wir [code]cell.x[/code] erhöhen, bewegt sich der Roboter nach rechts.\n"
+"\n"
+"Beachten Sie, dass wir die Bewegung des Roboters in der App verzögern, um "
+"Ihnen zu helfen, zu visualisieren, wie er sich bewegt. Der folgende Code "
+"würde den Roboter normalerweise sofort bewegen."
+
+#: course/lesson-17-while-loops/lesson.tres:42
+#, fuzzy
+msgid ""
+"We can move diagonally by adding adding a [code]Vector2[/code] directly."
+msgstr ""
+"Wir können uns diagonal bewegen, indem wir direkt einen [code]Vector2[/code] "
+"hinzufügen."
+
+#: course/lesson-17-while-loops/lesson.tres:62
+#, fuzzy
+msgid ""
+"The above code works for a pre-defined board with a size of [code]Vector2(3, "
+"3)[/code], but the [code]move_to_end()[/code] function wouldn't work if the "
+"size of the board was different. \n"
+"\n"
+"The robot would either stop before the end or go too far.\n"
+"\n"
+"To implement a general solution for all board sizes, we can repeat the "
+"robot's movement until it gets to the end.\n"
+"\n"
+"For code that repeats, we can use [i]loops[/i]."
+msgstr ""
+"Der obige Code funktioniert für ein vordefiniertes Board mit einer Größe von "
+"[code]Vector2(3, 3)[/code], aber die Funktion [code]move_to_end()[/code] "
+"würde nicht funktionieren, wenn die Größe des Boards unterschiedlich wäre. \n"
+"\n"
+"Der Roboter würde entweder vor dem Ende anhalten oder zu weit gehen.\n"
+"\n"
+"Um eine allgemeine Lösung für alle Platinengrößen zu implementieren, können "
+"wir die Bewegung des Roboters wiederholen, bis sie zum Ende kommt.\n"
+"\n"
+"Für Code, der sich wiederholt, können wir [i]loops[/i] verwenden."
+
+#: course/lesson-17-while-loops/lesson.tres:76
+#, fuzzy
+msgid "Using while loops to repeat code"
+msgstr "Verwenden von while-Schleifen zum Wiederholen von Code"
+
+#: course/lesson-17-while-loops/lesson.tres:78
+#, fuzzy
+msgid ""
+"While loops make the computer repeat a block of code until you meet a "
+"specific condition or decide to break from the loop.\n"
+"\n"
+"Here's how we use a while loop."
+msgstr ""
+"Während Schleifen den Computer dazu bringen, einen Codeblock zu wiederholen, "
+"bis Sie eine bestimmte Bedingung erfüllen oder sich entscheiden, aus der "
+"Schleife auszubrechen.\n"
+"\n"
+"Hier ist, wie wir eine While-Schleife verwenden."
+
+#: course/lesson-17-while-loops/lesson.tres:100
+#, fuzzy
+msgid ""
+"We use the variable [code]number[/code] to keep track of how many loops the "
+"while loop completes.\n"
+"\n"
+"Each time we go through the while loop, we add [code]1[/code] to "
+"[code]number[/code].\n"
+"\n"
+"The while loop keeps running for as long as the condition is true. In this "
+"case, it keeps running while [code]number[/code] is less than [code]4[/"
+"code].\n"
+"\n"
+"You can see the following code is executed four times in the console."
+msgstr ""
+"Wir verwenden die Variable [code]number[/code], um zu verfolgen, wie viele "
+"Schleifen die while-Schleife abschließt.\n"
+"\n"
+"Jedes Mal, wenn wir die while-Schleife durchlaufen, fügen wir [code]1[/code] "
+"zu [code]number[/code] hinzu.\n"
+"\n"
+"Die while-Schleife läuft so lange, wie die Bedingung wahr ist. In diesem "
+"Fall wird es weiter ausgeführt, während [code]number[/code] kleiner als "
+"[code]4[/code] ist.\n"
+"\n"
+"Sie können sehen, dass der folgende Code viermal in der Konsole ausgeführt "
+"wird."
+
+#: course/lesson-17-while-loops/lesson.tres:126
+#, fuzzy
+msgid ""
+"Let's apply this to our [code]move_to_end()[/code] function.\n"
+"\n"
+"This time, we compare the number of loops to the board's width. We keep "
+"looping through until we reach the width of the board.\n"
+"\n"
+"Note we move one less than the board width because the robot is already on "
+"the first cell."
+msgstr ""
+"Wenden wir dies auf unsere [code]move_to_end()[/code]-Funktion an.\n"
+"\n"
+"Diesmal vergleichen wir die Anzahl der Schleifen mit der Breite des Boards. "
+"Wir schleifen weiter durch, bis wir die Breite des Boards erreicht haben.\n"
+"\n"
+"Beachten Sie, dass wir eine weniger als die Platinenbreite bewegen, da sich "
+"der Roboter bereits in der ersten Zelle befindet."
+
+#: course/lesson-17-while-loops/lesson.tres:158
+#, fuzzy
+msgid "While loops can cause issues"
+msgstr "Während Schleifen Probleme verursachen können"
+
+#: course/lesson-17-while-loops/lesson.tres:160
+#, fuzzy
+msgid ""
+"If you're not careful, your while loop can run infinitely. In that case, the "
+"application will freeze.\n"
+"\n"
+"Take a look at this code example."
+msgstr ""
+"Wenn Sie nicht vorsichtig sind, kann Ihre While-Schleife unendlich laufen. "
+"In diesem Fall friert die Anwendung ein.\n"
+"\n"
+"Sehen Sie sich dieses Codebeispiel an."
+
+#: course/lesson-17-while-loops/lesson.tres:180
+#, fuzzy
+msgid "What would happen if the computer tried to run the code above?"
+msgstr ""
+"Was würde passieren, wenn der Computer versuchen würde, den obigen Code "
+"auszuführen?"
+
+#: course/lesson-17-while-loops/lesson.tres:183
+#, fuzzy
+msgid ""
+"Because we don't increment [code]number[/code] within the while loop, it "
+"always stays at [code]0[/code].\n"
+"\n"
+"As a result, the number is always lower than [code]10[/code], so we never "
+"break out of the loop.\n"
+"\n"
+"Since there's no way to exit the [code]while[/code] loop, the computer will "
+"attempt to draw squares infinitely, which will freeze the program.\n"
+"\n"
+"When programs stop responding on your computer, it's often due to an "
+"infinite loop!"
+msgstr ""
+"Da wir [code]number[/code] nicht innerhalb der while-Schleife "
+"inkrementieren, bleibt es immer bei [code]0[/code].\n"
+"\n"
+"Infolgedessen ist die Zahl immer niedriger als [code]10[/code], so dass wir "
+"nie aus der Schleife ausbrechen.\n"
+"\n"
+"Da es keine Möglichkeit gibt, die [code]while[/code]-Schleife zu beenden, "
+"wird der Computer versuchen, Quadrate unendlich zu zeichnen, wodurch das "
+"Programm eingefroren wird.\n"
+"\n"
+"Wenn Programme auf Ihrem Computer nicht mehr reagieren, liegt das oft an "
+"einer Endlosschleife!"
+
+#: course/lesson-17-while-loops/lesson.tres:190
+#: course/lesson-17-while-loops/lesson.tres:191
+#, fuzzy
+msgid "It would draw squares infinitely until the program is terminated"
+msgstr "Es würde Quadrate unendlich zeichnen, bis das Programm beendet ist"
+
+#: course/lesson-17-while-loops/lesson.tres:190
+#, fuzzy
+msgid "It would draw 10 squares"
+msgstr "Es würde 10 Felder zeichnen"
+
+#: course/lesson-17-while-loops/lesson.tres:190
+#, fuzzy
+msgid "It would draw 20 squares"
+msgstr "Es würde 20 Felder zeichnen"
+
+#: course/lesson-17-while-loops/lesson.tres:198
+#, fuzzy
+msgid "When to use while loops"
+msgstr "Wann ist while loops zu verwenden?"
+
+#: course/lesson-17-while-loops/lesson.tres:200
+#, fuzzy
+msgid ""
+"At first, you will not need [code]while[/code] loops often. Even the code we "
+"show here has more efficient alternatives.\n"
+"\n"
+"Also, there's a safer kind of loop, [code]for[/code] loops, which we'll look "
+"at in the next lesson.\n"
+"\n"
+"Yet, [code]while[/code] loops have important intermediate to advanced-level "
+"uses, so you at least need to know they exist and how to use them.\n"
+"\n"
+"We use [code]while[/code] loops every time we need to loop an unknown number "
+"of times.\n"
+"\n"
+"For example, games run in a loop that typically generates 60 images per "
+"second until the user closes the game. This is possible thanks to while "
+"loops.\n"
+"\n"
+"There are other good uses for it:\n"
+"\n"
+"- Reading and processing a file, like a text file, line by line.\n"
+"- Processing a constant stream of data, like someone recording audio with a "
+"microphone.\n"
+"- Reading code and converting it into instructions the computer "
+"understands.\n"
+"- Various intermediate to advanced-level algorithms like finding paths "
+"around a map for AI."
+msgstr ""
+"Zuerst benötigen Sie [code]while[/code] nicht oft. Sogar der Code, den wir "
+"hier zeigen, hat effizientere Alternativen.\n"
+"\n"
+"Außerdem gibt es eine sicherere Art von Schleife, [code]for[/code] "
+"Schleifen, die wir uns in der nächsten Lektion ansehen werden.\n"
+"\n"
+"[code]while[/code]-Schleifen haben jedoch wichtige Zwischen- bis "
+"Fortgeschrittene-Anwendungen, so dass Sie zumindest wissen müssen, dass sie "
+"existieren und wie sie verwendet werden.\n"
+"\n"
+"Wir verwenden [code]while[/code] Schleifen jedes Mal, wenn wir eine "
+"unbekannte Anzahl von Malen wiederholen müssen.\n"
+"\n"
+"Beispielsweise werden Spiele in einer Schleife ausgeführt, die in der Regel "
+"60 Bilder pro Sekunde generiert, bis der Benutzer das Spiel schließt. Dies "
+"ist dank While-Loops möglich.\n"
+"\n"
+"Es gibt andere gute Anwendungen dafür:\n"
+"\n"
+"- Lesen und Bearbeiten einer Datei, wie einer Textdatei, Zeile für Zeile.\n"
+"- Verarbeitung eines konstanten Datenstroms, wie jemand, der Audio mit einem "
+"Mikrofon aufnimmt.\n"
+"- Lesen von Code und Konvertieren in Anweisungen, die der Computer "
+"versteht.\n"
+"- Verschiedene fortgeschrittene bis fortgeschrittene Algorithmen wie das "
+"Finden von Pfaden um eine Karte für KI."
+
+#: course/lesson-17-while-loops/lesson.tres:225
+#, fuzzy
+msgid ""
+"Let's practice while loops real quick as they're useful to know. It's also "
+"an excellent opportunity to practice 2D vectors.\n"
+"\n"
+"Then, we'll move on to the safer [code]for[/code] loops in the following "
+"lesson."
+msgstr ""
+"Lassen Sie uns üben, während Schleifen wirklich schnell sind, wie sie "
+"nützlich sind zu wissen. Es ist auch eine ausgezeichnete Gelegenheit, 2D-"
+"Vektoren zu üben.\n"
+"\n"
+"Dann gehen wir in der folgenden Lektion zu den sichereren [code]for[/code]-"
+"Schleifen über."
+
+#: course/lesson-17-while-loops/lesson.tres:235
+#, fuzzy
+msgid "Moving to the end of a board"
+msgstr "Verschieben an das Ende eines Boards"
+
+#: course/lesson-17-while-loops/lesson.tres:236
+#, fuzzy
+msgid ""
+"Our robot has decided to stand at the top of the board.\n"
+"\n"
+"Complete the [code]move_to_bottom()[/code] function so the robot moves to "
+"the bottom of the board.\n"
+"\n"
+"The board size is determined by the [code]Vector2[/code] [code]board_size[/"
+"code].\n"
+"\n"
+"The robot's current cell is [code]Vector2(2, 0)[/code]. \n"
+"\n"
+"Make sure to use a while loop so the function works for any board size."
+msgstr ""
+"Unser Roboter hat sich entschieden, oben auf dem Brett zu stehen.\n"
+"\n"
+"Schließen Sie die Funktion [code]move_to_bottom()[/code] ab, damit sich der "
+"Roboter an die Unterseite der Platine bewegt.\n"
+"\n"
+"Die Boardgröße wird durch den [code]Vector2[/code] [code]board_size[/code] "
+"bestimmt.\n"
+"\n"
+"Die aktuelle Zelle des Roboters ist [code]Vector2(2, 0)[/code]. \n"
+"\n"
+"Stellen Sie sicher, dass Sie eine While-Schleife verwenden, damit die "
+"Funktion für jede Platinengröße funktioniert."
+
+#: course/lesson-17-while-loops/lesson.tres:252
+#, fuzzy
+msgid ""
+"Use a while loop to have our robot move from the top of the board to the "
+"bottom."
+msgstr ""
+"Verwenden Sie eine While-Schleife, damit sich unser Roboter von der "
+"Oberseite des Boards nach unten bewegt."
+
+#: course/lesson-17-while-loops/lesson.tres:256
+#, fuzzy
+msgid "Introduction to While Loops"
+msgstr "Einführung in While Loops"

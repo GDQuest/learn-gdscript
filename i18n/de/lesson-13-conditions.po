@@ -1,0 +1,453 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-02-18 15:02+0300\n"
+"PO-Revision-Date: 2022-02-24 18:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: course/lesson-13-conditions/lesson.tres:14
+#, fuzzy
+msgid ""
+"In previous lessons, we decreased and increased a character's health, but "
+"there was no limit to how much health they could have."
+msgstr ""
+"In früheren Lektionen haben wir die Gesundheit eines Charakters verringert "
+"und erhöht, aber es gab keine Begrenzung, wie viel Gesundheit er haben "
+"konnte."
+
+#: course/lesson-13-conditions/lesson.tres:34
+#, fuzzy
+msgid ""
+"As a result, the player could increase their character's health "
+"indefinitely, which we do not want."
+msgstr ""
+"Infolgedessen könnte der Spieler die Gesundheit seines Charakters auf "
+"unbestimmte Zeit erhöhen, was wir nicht wollen."
+
+#: course/lesson-13-conditions/lesson.tres:52
+#, fuzzy
+msgid "What happens to health when we damage our character?"
+msgstr "Was passiert mit der Gesundheit, wenn wir unseren Charakter schädigen?"
+
+#: course/lesson-13-conditions/lesson.tres:53
+#, fuzzy
+msgid ""
+"Suppose our character has [code]100[/code] health.\n"
+"\n"
+"What would the value of health be if we called [code]take_damage(25)[/code] "
+"[b]five times[/b]?"
+msgstr ""
+"Angenommen, unser Zeichen hat die Integrität [code]100[/code].\n"
+"\n"
+"Was wäre der Wert der Gesundheit, wenn wir [code]take_damage(25)[/code] "
+"[b]fünfmal[/b] nennen würden?"
+
+#: course/lesson-13-conditions/lesson.tres:57
+#, fuzzy
+msgid ""
+"Calling [code]take_damage(25)[/code] five times would subtract a total of "
+"[code]125[/code] from [code]100[/code].\n"
+"\n"
+"100\n"
+"75\n"
+"50\n"
+"25\n"
+"0\n"
+"-25"
+msgstr ""
+"Ein fünfmaliger Aufruf von [code]take_damage(25)[/code] würde insgesamt "
+"[code]125[/code] von [code]100[/code] subtrahieren.\n"
+"\n"
+"100\n"
+"75\n"
+"50\n"
+"25\n"
+"0\n"
+"-25"
+
+#: course/lesson-13-conditions/lesson.tres:65
+#: course/lesson-13-conditions/lesson.tres:66
+#, fuzzy
+msgid "-25"
+msgstr "-25"
+
+#: course/lesson-13-conditions/lesson.tres:65
+msgid "25"
+msgstr "25"
+
+#: course/lesson-13-conditions/lesson.tres:65
+msgid "0"
+msgstr "0"
+
+#: course/lesson-13-conditions/lesson.tres:75
+#, fuzzy
+msgid ""
+"We can use conditions to run actions [b]selectively[/b].\n"
+"\n"
+"Conditions make your code branch into two paths: if the condition is met, "
+"the computer will run the corresponding instructions. Otherwise, those "
+"instructions will not run at all."
+msgstr ""
+"Wir können Bedingungen verwenden, um Aktionen [b]selektiv[/b] auszuführen.\n"
+"\n"
+"Durch Bedingungen verzweigt sich Ihr Code in zwei Pfade: Wenn die Bedingung "
+"erfüllt ist, führt der Computer die entsprechenden Anweisungen aus. "
+"Andernfalls werden diese Anweisungen überhaupt nicht ausgeführt."
+
+#: course/lesson-13-conditions/lesson.tres:87
+#, fuzzy
+msgid ""
+"Video games and other computer programs are full of conditions. For example, "
+"game input largely relies on conditions: [i]if[/i] the player presses the "
+"button on a gamepad, the character jumps."
+msgstr ""
+"Videospiele und andere Computerprogramme sind voller Bedingungen. Zum "
+"Beispiel hängt die Spieleingabe weitgehend von Bedingungen ab: [i]wenn[/i] "
+"der Spieler die Taste auf einem Gamepad drückt, springt der Charakter."
+
+#: course/lesson-13-conditions/lesson.tres:107
+#, fuzzy
+msgid ""
+"When the computer checks a condition, this is called [b]to evaluate[/b] a "
+"condition. All conditions [b]evaluate[/b] to either [code]true[/code] or "
+"[code]false[/code].\n"
+"\n"
+"Either the player is pressing the button, or not. Either the character is "
+"touching an enemy, or not. \n"
+"\n"
+"In our case, [i]if[/i] the health goes over a maximum value, we want to "
+"reset it to the maximum.\n"
+"\n"
+"To define a condition, we use the [code]if[/code] keyword. We write a line "
+"starting with [code]if[/code], type the condition to evaluate, and end the "
+"line with a colon."
+msgstr ""
+"Wenn der Computer eine Bedingung überprüft, wird dies als [b] bezeichnet, um "
+"eine Bedingung auszuwerten. Alle Bedingungen [b]evaluate[/b] zu [code]true[/"
+"code] oder [code]false[/code].\n"
+"\n"
+"Entweder der Spieler drückt die Taste oder nicht. Entweder berührt der "
+"Charakter einen Feind oder nicht. \n"
+"\n"
+"In unserem Fall, [i]wenn[/i] die Gesundheit einen Maximalwert überschreitet, "
+"wollen wir sie auf das Maximum zurücksetzen.\n"
+"\n"
+"Um eine Bedingung zu definieren, verwenden wir das Schlüsselwort [code]if[/"
+"code]. Wir schreiben eine Zeile, die mit [code]if[/code] beginnt, geben die "
+"auszuwertende Bedingung ein und beenden die Zeile mit einem Doppelpunkt."
+
+#: course/lesson-13-conditions/lesson.tres:133
+#, fuzzy
+msgid ""
+"Notice the [code]>[/code] comparison sign. We read this symbol as \"greater "
+"than\". \n"
+"\n"
+"We've seen how function definitions use a colon at the end of the first line "
+"and nest content inside.\n"
+"\n"
+"In GDScript, this syntax is a recurring pattern for all code blocks.\n"
+"\n"
+"The computer knows which instructions belong to the condition because they "
+"are indented."
+msgstr ""
+"Beachten Sie das [code]>[/code]-Vergleichszeichen. Wir lesen dieses Symbol "
+"als \"größer als\". \n"
+"\n"
+"Wir haben gesehen, wie Funktionsdefinitionen einen Doppelpunkt am Ende der "
+"ersten Zeile verwenden und inhalte darin verschachteln.\n"
+"\n"
+"In GDScript ist diese Syntax ein wiederkehrendes Muster für alle "
+"Codeblöcke.\n"
+"\n"
+"Der Computer weiß, welche Anweisungen zu der Bedingung gehören, da sie "
+"eingerückt sind."
+
+#: course/lesson-13-conditions/lesson.tres:157
+#, fuzzy
+msgid "Comparisons"
+msgstr "Vergleiche"
+
+#: course/lesson-13-conditions/lesson.tres:159
+#, fuzzy
+msgid ""
+"In the above example, we used the [code]>[/code] syntax to mean \"greater "
+"than\".\n"
+"\n"
+"We can compare numbers in other ways too.\n"
+"\n"
+"[code]>[/code] means \"greater than\"\n"
+"[code]<[/code] means \"less than\"\n"
+"[code]==[/code] means \"equal to\"\n"
+"[code]!=[/code] means \"not equal to\"\n"
+"\n"
+"Here's how we might use these in [code]if[/code] statements.\n"
+msgstr ""
+"Im obigen Beispiel haben wir die Syntax [code]>[/code] verwendet, um "
+"\"größer als\" zu bedeuten.\n"
+"\n"
+"Wir können Zahlen auch auf andere Weise vergleichen.\n"
+"\n"
+"[code]>[/code] bedeutet \"größer als\"\n"
+"[code]<[/code] bedeutet \"kleiner als\"\n"
+"[code]==[/code] bedeutet \"gleich\"\n"
+"[code]!=[/code] bedeutet \"nicht gleich\"\n"
+"\n"
+"Hier ist, wie wir diese in [code] if [/ code] -Anweisungen verwenden "
+"können.\n"
+
+#: course/lesson-13-conditions/lesson.tres:187
+#, fuzzy
+msgid "Which of these statements are true?"
+msgstr "Welche dieser Aussagen sind wahr?"
+
+#: course/lesson-13-conditions/lesson.tres:190
+#, fuzzy
+msgid ""
+"The comparison [code]3 > 1[/code] means \"three is greater than one\" which "
+"is [b]true[/b].\n"
+"The comparison [code]2 < 3[/code] means \"two is less than three\" which is "
+"[b]true[/b].\n"
+"The comparison [code]1 != 3[/code] means \"one is not equal to three\" which "
+"is [b]true[/b].\n"
+"\n"
+"The comparison [code]2 == 1[/code] means \"two is equal to one\" which is "
+"[b]false[/b].\n"
+"The comparison [code]3 < 1[/code] means \"three is less than one\" which is "
+"[b]false[/b]."
+msgstr ""
+"Der Vergleich [code]3 > 1[/code] bedeutet \"drei ist größer als eins\", was "
+"[b]true[/b] ist.\n"
+"Der Vergleich [code]2 < 3[/code] bedeutet \"zwei ist kleiner als drei\", was "
+"[b]true[/b] ist.\n"
+"Der Vergleich [code]1 != 3[/code] bedeutet \"eins ist nicht gleich drei\", "
+"was [b]true[/b] ist.\n"
+"\n"
+"Der Vergleich [code]2 == 1[/code] bedeutet \"zwei ist gleich eins\", was "
+"[b]false[/b] ist.\n"
+"Der Vergleich [code]3 < 1[/code] bedeutet \"drei ist kleiner als eins\", was "
+"[b]false[/b] ist."
+
+#: course/lesson-13-conditions/lesson.tres:196
+#: course/lesson-13-conditions/lesson.tres:197
+#, fuzzy
+msgid "3 > 1"
+msgstr "3. > 1"
+
+#: course/lesson-13-conditions/lesson.tres:196
+#, fuzzy
+msgid "2 == 1"
+msgstr "== 2 == 1"
+
+#: course/lesson-13-conditions/lesson.tres:196
+#: course/lesson-13-conditions/lesson.tres:197
+#, fuzzy
+msgid "2 < 3"
+msgstr "2 < 3"
+
+#: course/lesson-13-conditions/lesson.tres:196
+#: course/lesson-13-conditions/lesson.tres:197
+#, fuzzy
+msgid "1 != 3"
+msgstr "1 != 3"
+
+#: course/lesson-13-conditions/lesson.tres:196
+#, fuzzy
+msgid "3 < 1"
+msgstr "3 < 1"
+
+#: course/lesson-13-conditions/lesson.tres:204
+#, fuzzy
+msgid "Or else..."
+msgstr ""
+"Der Weg, diese Art von Fehler zu lösen, ist sehr kontextabhängig. Die "
+"Fehlermeldung sollte Dir sagen, welches Zeichen oder Element fehlt.\n"
+"\n"
+"Wenn der Fehler \"expected\" enthält , hast du wahrscheinlich etwas in einer "
+"der [b]vorherigen[/b]-Codezeilen vergessen. Es könnte ein Satzzeichen, eine "
+"Klammer oder etwas anderes sein.\n"
+"\n"
+"Wenn der Fehler \"unterminated\" enthält, fehlt am Ende eines Ausdrucks ein "
+"Zeichen, z. B. eine schließende Klammer. In diesem Fall kommt es "
+"höchstwahrscheinlich von der Zeile mit dem Fehler."
+
+#: course/lesson-13-conditions/lesson.tres:206
+#, fuzzy
+msgid ""
+"The [code]if[/code] keyword comes with a complementary [code]else[/code] "
+"keyword.\n"
+"\n"
+"You can write an [code]else[/code] block after an [code]if[/code] block, "
+"like so."
+msgstr ""
+"Das Schlüsselwort [code]if[/code] wird mit einem ergänzenden Schlüsselwort "
+"[code]else[/code] geliefert.\n"
+"\n"
+"Sie können einen [code]else[/code]-Block nach einem [code]if[/code]-Block "
+"wie folgt schreiben."
+
+#: course/lesson-13-conditions/lesson.tres:228
+#, fuzzy
+msgid ""
+"The [code]else[/code] block will run whenever the condition above it isn't "
+"met."
+msgstr ""
+"Der Block [code]else[/code] wird immer dann ausgeführt, wenn die obige "
+"Bedingung nicht erfüllt ist."
+
+#: course/lesson-13-conditions/lesson.tres:238
+#, fuzzy
+msgid ""
+"In the following practices, we'll use conditions and improve the way our "
+"character's health changes so it has limits."
+msgstr ""
+"In den folgenden Übungen verwenden wir Bedingungen und verbessern die Art "
+"und Weise, wie sich die Gesundheit unseres Charakters verändert, so dass sie "
+"Grenzen hat."
+
+#: course/lesson-13-conditions/lesson.tres:246
+#, fuzzy
+msgid "Using Comparisons"
+msgstr "Verwenden von Vergleichen"
+
+#: course/lesson-13-conditions/lesson.tres:247
+#, fuzzy
+msgid ""
+"This series of [code]if[/code] statements is all wrong. Change the "
+"comparisons so each comparison matches the instruction below it.\n"
+"\n"
+"Keep the values and statements as they are; only change the comparison "
+"signs.\n"
+"\n"
+"As a reminder, the comparison signs are:\n"
+"[code]\n"
+"> greater than\n"
+"< less than\n"
+"== equal to\n"
+"!= not equal to\n"
+"[/code]\n"
+"\n"
+"The line [code]health < 5:[/code] means \"health is less than 5\". \n"
+"\n"
+"Because [code]health = 100[/code], this is false so [code]print(\"health is "
+"greater than five.\")[/code] won't run."
+msgstr ""
+"Diese Reihe von [code]if[/code]-Anweisungen ist falsch. Ändern Sie die "
+"Vergleiche so, dass jeder Vergleich mit der Anweisung darunter "
+"übereinstimmt.\n"
+"\n"
+"Behalten Sie die Werte und Aussagen so bei, wie sie sind. ändern Sie nur die "
+"Vergleichszeichen.\n"
+"\n"
+"Zur Erinnerung: Die Vergleichszeichen sind:\n"
+"[Code]\n"
+"> größer als\n"
+"< kleiner als\n"
+"== gleich\n"
+"!= ungleich\n"
+"[/code]\n"
+"\n"
+"Die Zeile [code]health < 5:[/code] bedeutet \"Gesundheit ist kleiner als "
+"5\". \n"
+"\n"
+"Da [code]health = 100[/code] ist, ist dies false, also [code]print(\"health "
+"is greater than five.\") [/code] wird nicht ausgeführt."
+
+#: course/lesson-13-conditions/lesson.tres:281
+#, fuzzy
+msgid ""
+"Comparing values allows us to make decisions in code. But there's something "
+"wrong with these statements.."
+msgstr ""
+"Der Vergleich von Werten ermöglicht es uns, Entscheidungen im Code zu "
+"treffen. Aber mit diesen Aussagen stimmt etwas nicht."
+
+#: course/lesson-13-conditions/lesson.tres:286
+#, fuzzy
+msgid "Limiting Healing"
+msgstr "Heilung einschränken"
+
+#: course/lesson-13-conditions/lesson.tres:287
+#, fuzzy
+msgid ""
+"We have a heal function that adds an amount to the character's health.\n"
+"\n"
+"Add to the function so the character's health is never greater than "
+"[code]80[/code]."
+msgstr ""
+"Wir haben eine Heilungsfunktion, die der Gesundheit des Charakters einen "
+"Betrag hinzufügt.\n"
+"\n"
+"Fügen Sie der Funktion hinzu, damit die Integrität des Zeichens niemals "
+"größer als [code]80[/code] ist."
+
+#: course/lesson-13-conditions/lesson.tres:297
+#, fuzzy
+msgid ""
+"As much as we might like, we don't want our robot to have too much health. "
+"Limit how much healing the robot can take."
+msgstr ""
+"So sehr wir auch möchten, dass unser Roboter nicht zu viel Gesundheit hat. "
+"Begrenzen Sie, wie viel Heilung der Roboter nehmen kann."
+
+#: course/lesson-13-conditions/lesson.tres:302
+#, fuzzy
+msgid "Preventing Health from Going Below Zero"
+msgstr "Verhindern, dass die Gesundheit unter Null fällt"
+
+#: course/lesson-13-conditions/lesson.tres:303
+#, fuzzy
+msgid ""
+"When the robot takes damage, its health can be negative.\n"
+"\n"
+"We might want to display the health number on screen, like in Japanese "
+"RPGs.\n"
+"\n"
+"We don't want negative numbers. We want to stop at zero instead.\n"
+"\n"
+"Replace [code]pass[/code] with code that reduces [code]health[/code] by "
+"[code]amount[/code].\n"
+"\n"
+"If [code]health[/code] goes below [code]0[/code], set it to [code]0[/code] "
+"again."
+msgstr ""
+"Wenn der Roboter Schaden nimmt, kann seine Gesundheit negativ sein.\n"
+"\n"
+"Vielleicht möchten wir die Gesundheitsnummer auf dem Bildschirm anzeigen, "
+"wie in japanischen RPGs.\n"
+"\n"
+"Wir wollen keine negativen Zahlen. Wir wollen stattdessen bei Null "
+"aufhören.\n"
+"\n"
+"Ersetzen Sie [code]pass[/code] durch Code, der [code]health[/code] um "
+"[code]amount[/code] reduziert.\n"
+"\n"
+"Wenn [code]health[/code] unter [code]0[/code] steht, setzen Sie es erneut "
+"auf [code]0[/code]."
+
+#: course/lesson-13-conditions/lesson.tres:319
+#, fuzzy
+msgid ""
+"Having a negative health value doesn't make a lot of sense. Make sure the "
+"robot's health can't go below zero."
+msgstr ""
+"Einen negativen Gesundheitswert zu haben, macht nicht viel Sinn. Stellen Sie "
+"sicher, dass die Gesundheit des Roboters nicht unter Null gehen kann."
+
+#: course/lesson-13-conditions/lesson.tres:323
+msgid "Conditions"
+msgstr "Bedingungen"
