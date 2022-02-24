@@ -414,13 +414,12 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
         const { width, height } = screen;
         const { innerHeight, innerWidth } = window;
         const {
-          github_repository,
-          github_workflow,
-          github_ref_name,
-          github_sha,
-          override_file,
-          sub_build_path,
-          watermark,
+          build_date,
+          build_date_iso,
+          build_date_unix,
+          git_branch,
+          git_commit,
+          version,
         } = GDQUEST_ENVIRONMENT || {};
         const data = {
           userAgent,
@@ -429,13 +428,12 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
           height,
           innerHeight,
           innerWidth,
-          github_repository,
-          github_workflow,
-          github_ref_name,
-          github_sha,
-          override_file,
-          sub_build_path,
-          watermark,
+          build_date,
+          build_date_iso,
+          build_date_unix,
+          git_branch,
+          git_commit,
+          version,
           ...additionalData,
         };
         makeLogFunction(LEVELS.TRACE)(data, `INIT`);
