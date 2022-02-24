@@ -18,14 +18,16 @@ var _log_lines := []
 
 func _init() -> void:
 	var _err = Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")
-	trim_if_over_limit()
-	log_system_info_if_log_is_empty(get_info())
 	if not _js_available:
-		return
+		log_system_info_if_log_is_empty(get_info())
+	
 	GDQUEST = JavaScript.get_interface("GDQUEST")
 	if not GDQUEST:
 		_js_available = false
 		return
+	trim_if_over_limit()
+	log_system_info_if_log_is_empty(get_info())
+
 
 func write(level: int, properties: Dictionary, message: String) -> void:
 	if also_print_to_godot and OS.is_debug_build():
