@@ -1,0 +1,265 @@
+[gd_resource type="Resource" load_steps=25 format=2]
+
+[ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-zKUdOCQi.tres"
+title = ""
+type = 0
+text = "In your code, values have a particular [i]type[/i]. You already learned about several: whole numbers, decimal numbers, strings, 2D vectors, arrays, and dictionaries.
+
+The computer uses the type of a value to know which operations and functions you can use with them.
+
+As a result, it's essential to understand types: they are not fully compatible with one another, and misusing them will cause errors."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-GjB7tKRH.tres"
+title = "A prime example"
+type = 0
+text = "You want to display the player's health in the interface. Your code tracks health as a whole number, a value of type [code]int[/code] (short for integer)."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-JMQ2XNwQ.tres"
+title = ""
+type = 0
+text = "var health = 100"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-MqAYVjot.tres"
+title = ""
+type = 0
+text = "However, to display it on the player's screen, the computer wants text: it needs a value of type [code]String[/code].
+
+You can concatenate two strings with the [code]+[/code] operator."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-xF5HUxZP.tres"
+title = ""
+type = 0
+text = "func run():
+    print(\"Hello \" + \"there\")"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-xY8VUDpP.tres"
+title = ""
+type = 0
+text = "So the following code looks like it could work at first glance."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-wQDwfyqd.tres"
+title = ""
+type = 0
+text = "display(\"Health: \" + health)"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-YOexRjTR.tres"
+title = ""
+type = 0
+text = "But when running the code, we get this strange error."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-hZN4rS5A.tres"
+title = ""
+type = 0
+text = "Invalid operands 'String' and 'int' in operator '+'."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-JTESv5tT.tres"
+title = ""
+type = 0
+text = "It tells you you can't add values of type [code]String[/code] and [code]int[/code]: they're incompatible.
+
+In that case, you need to convert the [code]health[/code] number into a [code]String[/code]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-6n1TxlTt.tres"
+title = "Converting values into strings"
+type = 0
+text = "You can get the text representation of a value by calling the [code]str()[/code] function (short for \"string\"). The function returns its argument as a new [code]String[/code].
+
+You can use this function whenever you want to turn some number or vector into text."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-cyhcIb5B.tres"
+title = ""
+type = 0
+text = "var health = 100
+
+func run():
+    display(\"Health: \" + str(health))"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-nVHARbBW.tres"
+title = ""
+type = 0
+text = "In this case, it turns the number [code]100[/code] into the string [code]\"100\"[/code]. Or whatever number [code]health[/code] is currently."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-NbDGt6fU.tres"
+title = "Some types are partially compatible"
+type = 0
+text = "Most types are incompatible. For example, you can't directly add or multiply an array with a number.
+
+However, some types are [i]partially[/i] compatible. For example, you can multiply or divide a vector by a number. "
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-qbTxYej4.tres"
+title = ""
+type = 0
+text = "func run():
+    print(Vector2(1, 1) * 10)"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-7MqE82V6.tres"
+title = ""
+type = 0
+text = "It is possible because other developers defined that operation for you under the hood.
+
+However, you cannot directly add or subtract a number to a vector. You'll get an error. That's why, in earlier lessons, you had to access the sub-variables of [code]position[/code] to add numbers to them."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-jGvGm22r.tres"
+title = "A surprising result"
+type = 0
+text = "Take the following division: [code]3/2[/code]. What result would you expect to get? [code]1.5[/code]?"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-tQEn91c9.tres"
+title = ""
+type = 0
+text = "func run():
+    print(3 / 2)"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-llf8B67U.tres"
+title = ""
+type = 0
+text = "Well, for the computer, the result of [code]3/2[/code] is [code]1[/code].
+
+Wait, what?!
+
+That's because, for the computer, the division of two whole numbers should always result in a whole number.
+
+When you divide decimal numbers instead, you will get a decimal number as a result."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-J8TLtZix.tres"
+title = ""
+type = 0
+text = "func run():
+    print(3.0 / 2.0)"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-QOPRw9cl.tres"
+title = ""
+type = 0
+text = "Even if it's just a [code]0[/code], adding a decimal place tells the computer we want decimal numbers.
+
+This shows you how mindful you need to be with types. Otherwise, you will get unexpected results. It can get pretty serious: number errors can lead to bugs like controls not working as intended or charging the wrong price to players. "
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-Gx0c7DDi/content-sFcSrGQg.tres"
+title = "Understanding and mastering types is a key skill for developers"
+type = 0
+text = "Programming beginners often struggle due to the lack of understanding of types.
+
+Languages like GDScript hide the types from you by default. As a result, if you don't understand that some are incompatible, you can get stuck when facing type-related errors.
+
+You'll want to keep that in mind in your learning journey. When writing code, you will need to understand everything that's happening.
+
+That said, let's practice some type conversions."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[resource]
+script = ExtResource( 1 )
+title = "Value types"
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ]
+practices = [  ]
