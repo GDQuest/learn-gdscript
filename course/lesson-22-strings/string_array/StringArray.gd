@@ -24,7 +24,7 @@ var combo = []
 
 # EXPORT combo
 func run():
-	combo = ["jab", "jab", "flip", "uppercut"]
+	combo = ["jab", "jab", "uppercut"]
 	for animation_name in combo:
 		play_animation(animation_name)
 # /EXPORT combo

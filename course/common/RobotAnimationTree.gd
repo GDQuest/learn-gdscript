@@ -11,6 +11,7 @@ onready var _animation_player = get_node(anim_player) as AnimationPlayer
 
 
 func _ready() -> void:
+	active = true
 	_animation_player.connect("animation_finished", self, "_on_animation_finished")
 
 
