@@ -29,3 +29,13 @@ python ./i18n/extract.py
 ```
 
 You then need to copy the POT files over to the [learn-gdscript-translations](https://github.com/GDQuest/learn-gdscript-translations) repository where we translate the content.
+
+### Adding a new language to the app
+
+To add a new language to the app, you need to:
+
+1. Create a new subdirectory of the `i18n/` directory with the two-letter code of your language. For example, `es/` for Spanish, `ru/` for Russian, or `zh/` for Chinese.
+2. For each POT file in `i18n/`, create a derived PO translation file in your new subdirectory. You can use the program [Poedit](https://poedit.net/) to do so.
+3. Open the TranslationManager.gd script and add your new language code to its `SUPPORTED_LOCALES` constant. The order of languages in `SUPPORTED_LOCALES` defines the order they'll appear in the settings menu.
+
+The app may not support your language's characters. If that is the case, please [open an issue](https://github.com/GDQuest/learn-gdscript/issues) on the repository to add the missing font files and font switching code.
