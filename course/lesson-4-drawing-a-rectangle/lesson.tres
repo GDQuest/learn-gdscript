@@ -153,6 +153,8 @@ starting_code = "func draw_corner():
 	move_forward(200)
 	turn_right()
 	move_forward()"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "You need to add two parameters to the [code]turn_right()[/code] and [code]move_forward()[/code] functions: [code]90[/code] and [code]200[/code]." )
 validator_script_path = "turning_right/TestsTurningRight.gd"
 script_slice_path = "turning_right/TurningRight.live-editor/slices/TurningRight.draw_corner.slice.tres"
@@ -177,6 +179,8 @@ starting_code = "func draw_rectangle():
 	move_forward()
 	turn_right()
 	move_forward()"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Both [code]move_forward()[/code] and [code]turn_right()[/code] take a numerical parameter between the parenthesis", "[code]turn_right[/code]\'s numerical parameter indicates how many [i]degrees[/i] the turtle should turn.", "[code]move_forward[/code]\'s numerical parameters indicates how many pixels the turtle should move." )
 validator_script_path = "drawing_rectangle/TestsDrawingRectangle.gd"
 script_slice_path = "drawing_rectangle/DrawingRectangle.live-editor/slices/DrawingRectangle.draw_rectangle.slice.tres"
@@ -198,6 +202,8 @@ Every line should start with one [code]Tab[/code] character so the computer unde
 starting_code = "func draw_rectangle():
 	move_forward(220)
 	turn_right(90)"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Start by moving forward to create the height of the rectangle.", "[code]move_forward[/code]\'s numerical parameters indicates how many pixels the turtle should move.", "[code]turn_right[/code]\'s numerical parameter indicates how many [i]degrees[/i] the turtle should turn." )
 validator_script_path = "drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd"
 script_slice_path = "drawing_bigger_rectangle/DrawingBiggerRectangle.live-editor/slices/DrawingBiggerRectangle.draw_rectangle.slice.tres"

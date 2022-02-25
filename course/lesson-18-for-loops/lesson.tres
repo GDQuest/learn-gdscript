@@ -214,6 +214,8 @@ The board size is determined by the [code]Vector2[/code] variable [code]board_si
 The robot's starting cell is [code]Vector2(2, 0)[/code]."
 starting_code = "func move_to_bottom():
 	"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "You\'ll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards", "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]", "Use [code]for number in range(board_size.y - 1):[/code] to loop enough times." )
 validator_script_path = "for_move/TestPracticeBoardFor.gd"
 script_slice_path = "for_move/PracticeBoardFor.live-editor/slices/PracticeBoardFor.move_to_end.slice.tres"
@@ -241,6 +243,8 @@ starting_code = "func run():
 
 	jump(200, 0)
 	draw_rectangle(100, 100)"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Use the line [code]for number in range(3):[/code]" )
 validator_script_path = "for_rectangles/ForTestsDrawingRectangles.gd"
 script_slice_path = "for_rectangles/ForDrawingMultipleRectangles.live-editor/slices/ForDrawingMultipleRectangles.run.slice.tres"

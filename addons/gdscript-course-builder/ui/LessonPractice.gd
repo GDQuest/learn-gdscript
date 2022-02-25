@@ -1,6 +1,7 @@
 tool
 extends MarginContainer
 
+
 signal practice_removed
 signal got_edit_focus
 
@@ -62,6 +63,12 @@ onready var _hint_list := $BackgroundPanel/Layout/MainSplit/Column/Hints/HintsPa
 
 onready var _code_ref_list := $BackgroundPanel/Layout/MainSplit/Column/CodeRefList as CodeRefList
 
+onready var _get_cursor_position_button := (
+	$BackgroundPanel/Layout/CursorPosition/GetCursorPositionButton as Button
+)
+onready var _column_spinbox := $BackgroundPanel/Layout/CursorPosition/ColumnSpinBox as SpinBox
+onready var _line_spinbox := $BackgroundPanel/Layout/CursorPosition/LineSpinBox as SpinBox
+
 onready var _confirm_dialog := $ConfirmDialog as ConfirmationDialog
 
 
@@ -93,6 +100,10 @@ func _ready() -> void:
 
 	_text_content_dialog.connect("confirmed", self, "_on_text_content_confirmed")
 	_confirm_dialog.connect("confirmed", self, "_on_confirm_dialog_confirmed")
+	
+	_get_cursor_position_button.connect("pressed", self, "_on_get_cursor_position_button")
+	_line_spinbox.connect("value_changed", self, "_on_line_spinbox_value_changed")
+	_column_spinbox.connect("value_changed", self, "_on_column_spinbox_value_changed")
 
 	for control in [_script_slice, _validator, _goal_content, _starting_code]:
 		control.connect("focus_entered", self, "_on_text_field_focus_entered")
@@ -176,6 +187,8 @@ func set_practice(practice: Practice) -> void:
 	_validator.text = _edited_practice.validator_script_path
 	_goal_content.text = _edited_practice.goal
 	_starting_code.text = _edited_practice.starting_code
+	_line_spinbox.value = _edited_practice.cursor_line
+	_column_spinbox.value = _edited_practice.cursor_column
 
 	_rebuild_hints()
 	_code_ref_list.setup(practice)
@@ -451,3 +464,16 @@ func _on_practice_hint_removed(item_index: int) -> void:
 
 func _on_text_field_focus_entered() -> void:
 	emit_signal("got_edit_focus")
+
+
+func _on_get_cursor_position_button() -> void:
+	_line_spinbox.value = _starting_code.cursor_get_line() + 1
+	_column_spinbox.value = _starting_code.cursor_get_column() + 1
+
+
+func _on_line_spinbox_value_changed(value: int) -> void:
+	_edited_practice.cursor_line = value
+
+
+func _on_column_spinbox_value_changed(value: int) -> void:
+	_edited_practice.cursor_column = value

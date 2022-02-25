@@ -122,6 +122,8 @@ Add to the [code]take_damage()[/code] function so it subtracts the [code]amount[
 The robot starts with 100 health and will take 50 damage."
 starting_code = "func take_damage(amount):
 	"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Replace [code]pass[/code] with an instruction to subtract [code]amount[/code] from [code]health[/code]." )
 validator_script_path = "taking-damage/TestDamagingRobot.gd"
 script_slice_path = "taking-damage/DamagingRobot.live-editor/slices/DamagingRobot.damage.slice.tres"
@@ -141,6 +143,8 @@ The function should add [code]amount[/code] to [code]health[/code].
 
 The robot starts with 50 health and will heal 50 to get it up to 100."
 starting_code = ""
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Define the [code]heal()[/code] function using [code]func[/code]", "The first line is [code]func heal(amount):[/code]" )
 validator_script_path = "healing/TestHealingRobot.gd"
 script_slice_path = "healing/HealingRobot.live-editor/slices/HealingRobot.heal.slice.tres"

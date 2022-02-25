@@ -252,6 +252,8 @@ Add [code]delta[/code] to make the rotational speed time-dependent.
 The robot should rotate [code]2[/code] radians per second."
 starting_code = "func _process(delta):
 	rotate(2)"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Multiply the radians by [code]delta[/code]" )
 validator_script_path = "rotating-using-delta/TestsRotatingDelta.gd"
 script_slice_path = "rotating-using-delta/RotatingSpriteDelta.live-editor/slices/RotatingSpriteDelta.move_and_rotate.slice.tres"
@@ -268,6 +270,8 @@ goal = "In this practice, make the robot move in a smooth circle using delta.
 To get this movement, the robot should rotate [code]2[/code] radians per second and move [code]100[/code] pixels per second towards clockwise."
 starting_code = "func _process(delta):
 	pass"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Replace [code]pass[/code] with the [code]rotate()[/code] and [code]move_local_x()[/code] functions", "Make sure to multiply each parameter by [code]delta[/code]" )
 validator_script_path = "rotating-and-moving-delta/TestsRotatingMovingDelta.gd"
 script_slice_path = "rotating-and-moving-delta/RotatingMovingSpriteDelta.live-editor/slices/RotatingMovingSpriteDelta.move_and_rotate.slice.tres"

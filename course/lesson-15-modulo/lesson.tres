@@ -213,6 +213,8 @@ Use the modulo operator [code]%[/code] to make sure the value of [code]light_ind
 The value of [code]light_index[/code] should only ever be [code]0[/code], [code]1[/code], or [code]2[/code]."
 starting_code = "func advance_traffic_light():
 	pass"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "First, increment [code]light_index[/code] by adding [code]1[/code] to it", "There are three lights, so use the modulo operation with [code]3[/code]", "Use [code]light_index = light_index % 3[/code] or [code]light_index %= 3[/code] to wrap [code]light_index[/code] back to [code]0[/code]" )
 validator_script_path = "traffic_lights/TestTrafficLight.gd"
 script_slice_path = "traffic_lights/TrafficLights.live-editor/slices/TrafficLights.traffic_light.slice.tres"
@@ -231,6 +233,8 @@ Use [code]randi()[/code] to generate a random number and the modulo operation [c
 Using the [code]return[/code] keyword inside the function, return a random number between [code]1[/code] and [code]sides[/code]."
 starting_code = "func roll_dice(sides):
 	return sides"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "The result of the modulo operation is always less than the divisor. For example, [code]randi() % 9[/code] produces a random number between [code]0[/code] and [code]8[/code]", "Make sure to increase the range the returned number can be" )
 validator_script_path = "rolling_dice/TestRollingDice.gd"
 script_slice_path = "rolling_dice/RollingDice.live-editor/slices/RollingDice.rolling.slice.tres"
@@ -251,6 +255,8 @@ goal = "Change the [code]level_up()[/code] function so it does the following:
 The robot starts with [code]100[/code] maximum health. It will gain three levels when you run the code. At level 4, the robot should have [code]125[/code] maximum health."
 starting_code = "func level_up():
 	pass"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "The modulo operation [code]%[/code] returns the remainder of division. For example, [code]5 % 2[/code] gives [code]1[/code] ", "Even numbers have a remainder of [code]0[/code] when divided by [code]2[/code]", "Use [code]if level % 2 == 0:[/code] to check if the level is even" )
 validator_script_path = "even_levels/TestEvenLevels.gd"
 script_slice_path = "even_levels/EvenLevels.live-editor/slices/EvenLevels.even_level.slice.tres"
