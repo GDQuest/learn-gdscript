@@ -24,10 +24,12 @@
   <body>
     <div class="layer desktop-only" id="game">
       <div id="canvas-container">
-        <canvas id="canvas" width="1920" height="1080">
-          HTML5 canvas appears to be unsupported in the current browser.<br />
-          Please try updating or use a different browser.
-        </canvas>
+        <div id="canvas-frame">
+          <canvas id="canvas" width="1920" height="1080">
+            HTML5 canvas appears to be unsupported in the current browser.<br />
+            Please try updating or use a different browser.
+          </canvas>
+        </div>
       </div>
     </div>
     <div class="layer desktop-only" id="status">
@@ -52,11 +54,11 @@
       </div>
     </div>
     <div id="version">branch and commit hash</div>
+    <script type="text/javascript" src="$GODOT_URL"></script>
+    <script type="text/javascript">
+      const GODOT_CONFIG = $GODOT_CONFIG;
+      const GDQUEST_ENVIRONMENT = {};
+    </script>
+    <script type="text/javascript" src="bootstrap.js"></script>
   </body>
-  <script type="text/javascript" src="$GODOT_URL"></script>
-  <script type="text/javascript">
-    const GODOT_CONFIG = $GODOT_CONFIG;
-    const GDQUEST_ENVIRONMENT = {};
-  </script>
-  <script type="text/javascript" src="bootstrap.js"></script>
 </html>
