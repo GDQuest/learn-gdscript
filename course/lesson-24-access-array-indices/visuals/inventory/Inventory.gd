@@ -1,6 +1,5 @@
 extends Control
 
-onready var tween := $Tween as Tween
 
 func _ready() -> void:
 	var index := 1

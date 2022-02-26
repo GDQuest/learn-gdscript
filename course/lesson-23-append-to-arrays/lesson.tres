@@ -198,7 +198,7 @@ title = "Using arrays as stacks"
 type = 0
 text = "Another common use of arrays is [i]stacks[/i] of data.
 
-Take a factory management game where you need to retrieve materials from stacks of crates. They arrive at the factory piled up vertically, and your crane needs to take them from top to bottom."
+Take a factory management game where you need to retrieve materials from stacks of crates. They arrive at the factory piled up vertically, and you need to take them from top to bottom."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -208,8 +208,8 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-23-append-to-arrays/content-tT6n1Txl.tres"
 title = ""
 type = 0
-text = "EXAMPLE_CRATES_FACTORY"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/ExampleCrateStack.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -218,9 +218,9 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-23-append-to-arrays/content-TtcyhcIb.tres"
 title = ""
 type = 0
-text = "When the crane takes the crate from the array, this time, we use the [code]pop_back()[/code] array function.
+text = "To take a crate from the back of the array, this time, we use the [code]pop_back()[/code] array function.
 
-This function removes (pops) the last value from the array and gives it back to you."
+This function removes (pops) the last value from the array and returns it to you."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -230,8 +230,8 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-23-append-to-arrays/content-5BnVHARb.tres"
 title = ""
 type = 0
-text = "CODE_POP_FACTORY_CRATES"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/ExamplePrintArrayPop.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -240,11 +240,11 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-23-append-to-arrays/content-BWNbDGt6.tres"
 title = ""
 type = 0
-text = "Like [code]pop_back()[/code] the function returns the value removed from the array. You can store that value in a variable.
+text = "Like [code]pop_front()[/code], the function returns the value removed from the array. You will often store that value in a variable.
 
-The value in question could be the crate's content, which you can then process to give resources to the player or consume them.
+The value in question could be the crate's content, which you can then use to give resources to the player.
 
-In the following practices, you will use the [code]append()[/code], [code]pop_from()[/code], and [code]pop_back()[/code] array functions."
+In the following practices, you will use the [code]append()[/code], [code]pop_front()[/code], and [code]pop_back()[/code] array functions."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
