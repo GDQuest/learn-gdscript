@@ -20,11 +20,8 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-28-specifying-types/content-otxF5HUx.tres"
 title = ""
 type = 0
-text = "func run():
-    var health = 100
-    health = \"Some text\"
-    print(health)"
-visual_element_path = ""
+text = ""
+visual_element_path = "ExamplePrintHealth2.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -59,9 +56,8 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-28-specifying-types/content-qdYOexRj.tres"
 title = ""
 type = 0
-text = "var cell_size = 50.0
-var cell_size = Vector2(50.0, 50.0)"
-visual_element_path = ""
+text = ""
+visual_element_path = "CodeCellSize.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -80,11 +76,8 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-28-specifying-types/content-5AJTESv5.tres"
 title = ""
 type = 0
-text = "var cell_size = Vector2(50.0, 50.0)
-
-func grid_to_world(cell):
-    return cell [i] cell[/i]size + cell_size / 2"
-visual_element_path = ""
+text = ""
+visual_element_path = "CodeGridToWorld.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -105,14 +98,8 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-28-specifying-types/content-TtcyhcIb.tres"
 title = ""
 type = 0
-text = "var cell_size = 50.0
-
-func grid_to_world(cell):
-    return cell [i] cell[/i]size + cell_size / 2
-    
-func run():
-    grid_to_world(Vector2(1.0, 1.0))"
-visual_element_path = ""
+text = ""
+visual_element_path = "CodeGridToWorldFloatError.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -121,8 +108,8 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-28-specifying-types/content-5BnVHARb.tres"
 title = ""
 type = 0
-text = "Invalid operands 'Vector2' and 'float' in operator '+'."
-visual_element_path = ""
+text = ""
+visual_element_path = "ErrorInvalidOperands2.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -131,7 +118,7 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-28-specifying-types/content-BWNbDGt6.tres"
 title = ""
 type = 0
-text = "Worse: due to dynamic typing, we won't get an error [i]right away[/i]. We will only get the error when calling [code]grid_to_world(Vector2(1.0, 1.0))[/code].
+text = "Worse: due to dynamic typing, we won't get an error [i]right away[/i]. We will only get the error when calling [code]grid_to_world(Vector2(1, 1))[/code].
 
 And that's a big problem."
 visual_element_path = ""
@@ -169,8 +156,8 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-28-specifying-types/content-V6jGvGm2.tres"
 title = ""
 type = 0
-text = "TODO: EXAMPLE TYPE HINT SYNTAX"
-visual_element_path = ""
+text = ""
+visual_element_path = "SyntaxTypeHints.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -189,8 +176,8 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-28-specifying-types/content-2rtQEn91.tres"
 title = ""
 type = 0
-text = "var cell_size: Vector2 = Vector2(50.0, 50.0)"
-visual_element_path = ""
+text = ""
+visual_element_path = "CodeCellSizeWithType.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -209,8 +196,8 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-28-specifying-types/content-7UJ8TLtZ.tres"
 title = ""
 type = 0
-text = "cell_size = 50.0"
-visual_element_path = ""
+text = ""
+visual_element_path = "CodeTryReplaceCellSize.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -219,8 +206,8 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-28-specifying-types/content-clsFcSrG.tres"
 title = ""
 type = 0
-text = "Parser Error: The assigned value's type (float) doesn't match the variable's type (Vector2)."
-visual_element_path = ""
+text = ""
+visual_element_path = "ErrorInvalidType.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -241,8 +228,8 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-28-specifying-types/content-xD9O3s7C.tres"
 title = ""
 type = 0
-text = "var cell_size := Vector2(50.0, 50.0)"
-visual_element_path = ""
+text = ""
+visual_element_path = "CodeCellSizeInferType.tscn"
 reverse_blocks = false
 has_separator = false
 
