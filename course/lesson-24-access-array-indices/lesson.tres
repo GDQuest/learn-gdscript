@@ -1,14 +1,14 @@
 [gd_resource type="Resource" load_steps=27 format=2]
 
-[ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
-[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
-[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=3]
-[ext_resource path="res://course/Documentation.tres" type="Resource" id=4]
-[ext_resource path="res://resources/Practice.gd" type="Script" id=5]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
+[ext_resource path="res://resources/Lesson.gd" type="Script" id=2]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=3]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=4]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=5]
 
 [sub_resource type="Resource" id=1]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-3s7CAcYu.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-3s7CAcYu.tres"
 title = ""
 type = 0
 text = "You learned to loop over all the values in an array using the [code]for[/code] keyword."
@@ -17,18 +17,18 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=2]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-vjbGhMYC.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-vjbGhMYC.tres"
 title = ""
 type = 0
-text = "TODO: ARRAY FOR LOOP EXAMPLE"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/CodeForLoop.tscn"
 reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=3]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-e6KHzm4j.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-e6KHzm4j.tres"
 title = ""
 type = 0
 text = "But what if you need to access the third item in the player's inventory? The tenth item?
@@ -41,18 +41,18 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=4]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-wrXKq6Ew.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-wrXKq6Ew.tres"
 title = ""
 type = 0
-text = "TODO: SYNTAX EXAMPLE"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/SyntaxAccessIndex.tscn"
 reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=5]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-p0jEfcot.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-p0jEfcot.tres"
 title = ""
 type = 0
 text = "Index zero is the [i]first[/i] element in the array."
@@ -61,19 +61,18 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=6]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-xUHuVoRx.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-xUHuVoRx.tres"
 title = ""
 type = 0
-text = "func run():
-	use_item(inventory[0])"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/ExampleUseFirstItem.tscn"
 reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=7]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-vHMa19hc.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-vHMa19hc.tres"
 title = ""
 type = 0
 text = "Index one is the [i]second[/i] element in the array, and so on.
@@ -84,19 +83,18 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=8]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-PK34PGsS.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-PK34PGsS.tres"
 title = ""
 type = 0
-text = "func run():
-	use_item(inventory[4])"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/ExampleUseFourthItem.tscn"
 reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=15]
-script = ExtResource( 3 )
-quiz_id = "res://course/lesson-cyZFxD9O/quiz-ZG3sVzWj.tres"
+script = ExtResource( 5 )
+quiz_id = "res://course/lesson-24-access-array-indices/quiz-ZG3sVzWj.tres"
 question = "How would you access the [i]third[/i] item in the [code]inventory[/code] array?"
 content_bbcode = ""
 hint = ""
@@ -107,8 +105,8 @@ is_multiple_choice = false
 do_shuffle_answers = true
 
 [sub_resource type="Resource" id=9]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-Dpz6XRuQ.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-Dpz6XRuQ.tres"
 title = "Accessing the last values with negative indices"
 type = 0
 text = "What if you want to access the last or second-before-last item in the [code]inventory[/code]?
@@ -119,19 +117,18 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=16]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-lEtSpGcw.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-lEtSpGcw.tres"
 title = ""
 type = 0
-text = "func run():
-	use_item(inventory[-2])"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/ExampleUseSecondToLastItem.tscn"
 reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=17]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-sz1nFYDO.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-sz1nFYDO.tres"
 title = ""
 type = 0
 text = "That's very convenient when you need to quickly access elements from the end of the list."
@@ -140,8 +137,8 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=18]
-script = ExtResource( 3 )
-quiz_id = "res://course/lesson-cyZFxD9O/quiz-mfMmeRR3.tres"
+script = ExtResource( 5 )
+quiz_id = "res://course/lesson-24-access-array-indices/quiz-mfMmeRR3.tres"
 question = "How would you access the third-to-last item in the inventory array?"
 content_bbcode = ""
 hint = ""
@@ -154,8 +151,8 @@ is_multiple_choice = false
 do_shuffle_answers = true
 
 [sub_resource type="Resource" id=10]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-E15b0TjG.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-E15b0TjG.tres"
 title = "You can't access non-existent indices"
 type = 0
 text = "There's a catch with this syntax: if you try to access an index that does not exist, you will get an error. You have to be careful always to access existing elements in the array.
@@ -166,8 +163,8 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=11]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-rSCXh1e4.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-rSCXh1e4.tres"
 title = ""
 type = 0
 text = "[b]Checking the size of the array[/b]
@@ -178,19 +175,18 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=12]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-bJSkChZQ.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-bJSkChZQ.tres"
 title = ""
 type = 0
-text = "func run():
-    print(inventory.size())"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/ExamplePrintSize.tscn"
 reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=13]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-PNBSEyYz.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-PNBSEyYz.tres"
 title = ""
 type = 0
 text = "The maximum index you can access in an array is [code]array.size() - 1[/code]: it's the last item in the array."
@@ -199,19 +195,18 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=14]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-Qk7svswt.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-Qk7svswt.tres"
 title = ""
 type = 0
-text = "func run():
-    use_item(inventory[inventory.size() - 1])"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/ExampleUseLastItem.tscn"
 reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=19]
-script = ExtResource( 2 )
-content_id = "res://course/lesson-cyZFxD9O/content-kAEnHbnw.tres"
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-kAEnHbnw.tres"
 title = ""
 type = 0
 text = "In the following practices, you will use array indices to realign train tracks and grab the correct item in an inventory."
@@ -220,8 +215,8 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=20]
-script = ExtResource( 5 )
-practice_id = "res://course/lesson-cyZFxD9O/practice-ErO9L4MW.tres"
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-24-access-array-indices/practice-ErO9L4MW.tres"
 title = "Using the right crystals"
 goal = "In our game, the player has an inventory that works as an array under the hood.
 
@@ -235,12 +230,12 @@ hints = PoolStringArray(  )
 validator_script_path = ""
 script_slice_path = ""
 documentation_references = PoolStringArray(  )
-documentation_resource = ExtResource( 4 )
+documentation_resource = ExtResource( 1 )
 description = "Find the right crystals to use in the player's inventory."
 
 [sub_resource type="Resource" id=21]
-script = ExtResource( 5 )
-practice_id = "res://course/lesson-cyZFxD9O/practice-wfi7YGry.tres"
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-24-access-array-indices/practice-wfi7YGry.tres"
 title = "Realigning the train tracks"
 goal = "We have train tracks broken down into little chunks in our game. We use them to make modular tracks and draw circuits of all shapes and sizes.
 
@@ -254,11 +249,11 @@ hints = PoolStringArray( "The syntax to access an item by index in an array uses
 validator_script_path = ""
 script_slice_path = ""
 documentation_references = PoolStringArray(  )
-documentation_resource = ExtResource( 4 )
+documentation_resource = ExtResource( 1 )
 description = "Some chunks of our train tracks are misaligned, and the train can't pass. Find the faulty pieces and realign them."
 
 [resource]
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 title = "Accessing values in arrays"
 content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 15 ), SubResource( 9 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 19 ) ]
 practices = [ SubResource( 20 ), SubResource( 21 ) ]

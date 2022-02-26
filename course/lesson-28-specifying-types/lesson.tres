@@ -5,7 +5,7 @@
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-wQMqAYVj.tres"
+content_id = "res://course/lesson-28-specifying-types/content-wQMqAYVj.tres"
 title = ""
 type = 0
 text = "By default, GDScript is what we call a dynamically-typed language. That means that you can just write variables, assign them a value with a number, and assign them another value with a different type.
@@ -17,7 +17,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-otxF5HUx.tres"
+content_id = "res://course/lesson-28-specifying-types/content-otxF5HUx.tres"
 title = ""
 type = 0
 text = "func run():
@@ -30,7 +30,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=3]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-ZPxY8VUD.tres"
+content_id = "res://course/lesson-28-specifying-types/content-ZPxY8VUD.tres"
 title = ""
 type = 0
 text = "But this feature often causes problems down the line. Let's take one example."
@@ -40,7 +40,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=4]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-pPwQDwfy.tres"
+content_id = "res://course/lesson-28-specifying-types/content-pPwQDwfy.tres"
 title = "Cell size: decimal number, or 2D vector?"
 type = 0
 text = "Games use grids all the time, be it for grid-based gameplay or to make algorithms faster.
@@ -56,7 +56,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=5]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-qdYOexRj.tres"
+content_id = "res://course/lesson-28-specifying-types/content-qdYOexRj.tres"
 title = ""
 type = 0
 text = "var cell_size = 50.0
@@ -67,7 +67,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=6]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-TRhZN4rS.tres"
+content_id = "res://course/lesson-28-specifying-types/content-TRhZN4rS.tres"
 title = ""
 type = 0
 text = "Using a [code]Vector2[/code] could simplify some calculations. For example, when converting grid coordinates to game world coordinates."
@@ -77,7 +77,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=7]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-5AJTESv5.tres"
+content_id = "res://course/lesson-28-specifying-types/content-5AJTESv5.tres"
 title = ""
 type = 0
 text = "var cell_size = Vector2(50.0, 50.0)
@@ -90,7 +90,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=8]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-tT6n1Txl.tres"
+content_id = "res://course/lesson-28-specifying-types/content-tT6n1Txl.tres"
 title = ""
 type = 0
 text = "In this example, because both [code]cell[/code] and [code]cell_size[/code] are [code]Vector2[/code] values, we can add them.
@@ -102,7 +102,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=9]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-TtcyhcIb.tres"
+content_id = "res://course/lesson-28-specifying-types/content-TtcyhcIb.tres"
 title = ""
 type = 0
 text = "var cell_size = 50.0
@@ -118,7 +118,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=10]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-5BnVHARb.tres"
+content_id = "res://course/lesson-28-specifying-types/content-5BnVHARb.tres"
 title = ""
 type = 0
 text = "Invalid operands 'Vector2' and 'float' in operator '+'."
@@ -128,7 +128,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=11]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-BWNbDGt6.tres"
+content_id = "res://course/lesson-28-specifying-types/content-BWNbDGt6.tres"
 title = ""
 type = 0
 text = "Worse: due to dynamic typing, we won't get an error [i]right away[/i]. We will only get the error when calling [code]grid_to_world(Vector2(1.0, 1.0))[/code].
@@ -140,7 +140,7 @@ has_separator = true
 
 [sub_resource type="Resource" id=12]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-fUqbTxYe.tres"
+content_id = "res://course/lesson-28-specifying-types/content-fUqbTxYe.tres"
 title = ""
 type = 0
 text = "Because we're learning, we only have small code examples in this course. But your games' code will get long and split into many files. When coding, you often forget about the code you wrote several weeks ago.
@@ -152,7 +152,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=13]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-j47MqE82.tres"
+content_id = "res://course/lesson-28-specifying-types/content-j47MqE82.tres"
 title = "Using type hints"
 type = 0
 text = "Fortunately, since recent versions, GDScript got optional [i]type hints[/i].
@@ -166,7 +166,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=14]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-V6jGvGm2.tres"
+content_id = "res://course/lesson-28-specifying-types/content-V6jGvGm2.tres"
 title = ""
 type = 0
 text = "TODO: EXAMPLE TYPE HINT SYNTAX"
@@ -176,7 +176,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=15]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-ixQOPRw9.tres"
+content_id = "res://course/lesson-28-specifying-types/content-ixQOPRw9.tres"
 title = ""
 type = 0
 text = "You could tell the computer you want [code]cell_size[/code] only to accept [code]Vector2[/code] values like so."
@@ -186,7 +186,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=16]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-2rtQEn91.tres"
+content_id = "res://course/lesson-28-specifying-types/content-2rtQEn91.tres"
 title = ""
 type = 0
 text = "var cell_size: Vector2 = Vector2(50.0, 50.0)"
@@ -196,7 +196,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=17]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-c9llf8B6.tres"
+content_id = "res://course/lesson-28-specifying-types/content-c9llf8B6.tres"
 title = ""
 type = 0
 text = "If you try to replace the [code]cell_size[/code] with a value of another type later, the computer will not let you."
@@ -206,7 +206,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=18]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-7UJ8TLtZ.tres"
+content_id = "res://course/lesson-28-specifying-types/content-7UJ8TLtZ.tres"
 title = ""
 type = 0
 text = "cell_size = 50.0"
@@ -216,7 +216,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=19]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-clsFcSrG.tres"
+content_id = "res://course/lesson-28-specifying-types/content-clsFcSrG.tres"
 title = ""
 type = 0
 text = "Parser Error: The assigned value's type (float) doesn't match the variable's type (Vector2)."
@@ -226,7 +226,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=20]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-QgrVcyZF.tres"
+content_id = "res://course/lesson-28-specifying-types/content-QgrVcyZF.tres"
 title = "Letting the computer figure it out"
 type = 0
 text = "GDScript comes with a feature called type inference. In many cases, but not all, the computer can figure out the type of a variable for you.
@@ -238,7 +238,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=21]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-xD9O3s7C.tres"
+content_id = "res://course/lesson-28-specifying-types/content-xD9O3s7C.tres"
 title = ""
 type = 0
 text = "var cell_size := Vector2(50.0, 50.0)"
@@ -248,7 +248,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=22]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-AcYuvjbG.tres"
+content_id = "res://course/lesson-28-specifying-types/content-AcYuvjbG.tres"
 title = ""
 type = 0
 text = "This takes little typing, yet you get the benefits of using type hints, like the computer reporting errors better and faster."
@@ -258,7 +258,7 @@ has_separator = false
 
 [sub_resource type="Resource" id=23]
 script = ExtResource( 2 )
-content_id = "res://course/lesson-RHJMQ2XN/content-hMYCe6KH.tres"
+content_id = "res://course/lesson-28-specifying-types/content-hMYCe6KH.tres"
 title = "Why bother to add hints?"
 type = 0
 text = "When you give the language hints like that, it will [i]prevent[/i] major type errors. When you work in Godot, you will see that the computer can report issues as you write the code. It makes the benefit even greater.
