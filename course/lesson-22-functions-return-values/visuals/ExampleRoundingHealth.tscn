@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=2]
+script/source = "
+tool
+extends RunnableCodeExample
+
+func _ready():
+	create_slider_for(\"health\", 0.0, 100.0, 0.1)
+"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends PanelContainer
+
+var health := 100.0 setget set_health
+
+onready var label := $Label as Label
+
+
+func set_health(new_value: float):
+	health = new_value
+	if not label:
+		yield(self, \"ready\")
+	label.text = \"Health: %s\" % round(health)
+"
+
+[node name="Example" type="PanelContainer"]
+margin_right = 771.0
+margin_bottom = 414.0
+size_flags_horizontal = 3
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 855.0
+margin_bottom = 407.0
+rect_min_size = Vector2( 600, 200 )
+script = SubResource( 2 )
+gdscript_code = "set_text(round(health))"
+
+[node name="PanelContainer" type="PanelContainer" parent="RunnableCodeExample"]
+margin_left = 648.0
+margin_right = 848.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 200, 100 )
+script = SubResource( 3 )
+
+[node name="Label" type="Label" parent="RunnableCodeExample/PanelContainer"]
+margin_left = 7.0
+margin_top = 193.0
+margin_right = 193.0
+margin_bottom = 207.0
+text = "Health: "
+align = 1
+valign = 1

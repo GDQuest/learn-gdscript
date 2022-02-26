@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=23 format=2]
+[gd_resource type="Resource" load_steps=24 format=2]
 
 [ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=2]
@@ -36,8 +36,8 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-22-functions-return-values/content-otxF5HUx.tres"
 title = ""
 type = 0
-text = "TODO: EXAMPLE OF ROUNDING A NUMBER AND PRINTING OUTPUT"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/ExamplePrintRound.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -58,8 +58,8 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-22-functions-return-values/content-pPwQDwfy.tres"
 title = ""
 type = 0
-text = "TODO: EXAMPLE OF ROUNDING HEALTH"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/ExampleRoundingHealth.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -89,13 +89,23 @@ visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=19]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-hcPK34PG.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeLerpTurtlePosition.tscn"
+reverse_blocks = false
+has_separator = false
+
 [sub_resource type="Resource" id=8]
 script = ExtResource( 4 )
 content_id = "res://course/lesson-22-functions-return-values/content-5AJTESv5.tres"
 title = ""
 type = 0
-text = "TODO: EXAMPLE OF LERP POSITION"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/ExampleTurtleLerp.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -134,8 +144,8 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-22-functions-return-values/content-5BnVHARb.tres"
 title = ""
 type = 0
-text = "TODO: EXAMPLE OF GRID TO SCREEN MAPPING"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/ExampleGridPosition.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -154,8 +164,8 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-22-functions-return-values/content-fUqbTxYe.tres"
 title = ""
 type = 0
-text = "TODO: CELL_TO_SCREEN FUNCTION"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/CodeCellToWorld.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -174,8 +184,8 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-22-functions-return-values/content-V6jGvGm2.tres"
 title = ""
 type = 0
-text = "TODO: CALLING FUNCTION"
-visual_element_path = ""
+text = ""
+visual_element_path = "visuals/ExamplePrintWorldCoordinates.tscn"
 reverse_blocks = false
 has_separator = true
 
@@ -236,5 +246,5 @@ description = "We want to display a list of character names as a pretty comma-se
 [resource]
 script = ExtResource( 2 )
 title = "Functions that return a value"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 19 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ]
 practices = [ SubResource( 17 ), SubResource( 18 ) ]
