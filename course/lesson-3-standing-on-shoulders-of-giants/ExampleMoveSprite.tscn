@@ -18,6 +18,7 @@ func run():
 	move_local_y(20)
 	_bounds.position += Vector2.ONE * 20
 
+
 func reset():
 	position = start_position
 	_bounds = calculate_bounding_rect(_sprites)
@@ -45,17 +46,6 @@ run_button_label = "run()"
 
 [node name="MovableSprite" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 script = SubResource( 1 )
-
-[node name="RobotBody" parent="RunnableCodeExample/MovableSprite/Pivot" index="0"]
-position = Vector2( 0, 0 )
-
-[node name="HandIceRight" parent="RunnableCodeExample/MovableSprite/Pivot" index="1"]
-position = Vector2( -45, 30 )
-rotation = -0.918567
-
-[node name="HandIceLeft" parent="RunnableCodeExample/MovableSprite/Pivot" index="2"]
-position = Vector2( 49, 25 )
-rotation = 0.737189
 
 [node name="AnimationTree" parent="RunnableCodeExample/MovableSprite" index="3"]
 parameters/playback = SubResource( 2 )
