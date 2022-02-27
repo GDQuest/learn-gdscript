@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=24 format=2]
+[gd_resource type="Resource" load_steps=23 format=2]
 
 [ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=2]
@@ -214,37 +214,19 @@ The function takes a [code]Vector2[/code] cell coordinates as an argument. It sh
 Every cell is a square of size [code]cell_size[/code]. You can multiply the [code]cell[/code] by this value to calculate the top-left of a cell in screen coordinates.
 
 To get the center of a cell, you need to add half the [code]cell_size[/code] to the product."
-starting_code = ""
+starting_code = "var cell_size = Vector2(120, 120)
+
+func convert_to_world_coordinates(cell):
+	"
 hints = PoolStringArray(  )
-validator_script_path = ""
-script_slice_path = ""
+validator_script_path = "convert-grid-coordinates/TestConvertGridCoordinates.gd"
+script_slice_path = "convert-grid-coordinates/ConvertGridCoordinates.live-editor/slices/ConvertGridCoordinates.run.slice.tres"
 documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 1 )
 description = "We lost the function to convert grid coordinates, but we desperately need it for our game! Make the turtle move again by coding it."
-
-[sub_resource type="Resource" id=18]
-script = ExtResource( 3 )
-practice_id = "res://course/lesson-22-functions-return-values/practice-8TLtZixQ.tres"
-title = "Concatenating a list of strings with a separator"
-goal = "There is a common operation in games: taking a list of strings and turning them into one string with some added separator.
-
-Say you have a list of character names in the game, and you want to present them separated by commas to the player.
-
-You will code a function that does that. The function should take an array containing only strings and a [code]separator[/code], also a text string.
-
-You should use a [code]for[/code] loop over the array sent to the function as it can have varying lengths.
-
-You should add the separator only between 2 elements in the strings list. Be careful, as you don't want to add the separator [i]after the last element[/i]."
-starting_code = ""
-hints = PoolStringArray(  )
-validator_script_path = ""
-script_slice_path = ""
-documentation_references = PoolStringArray(  )
-documentation_resource = ExtResource( 1 )
-description = "We want to display a list of character names as a pretty comma-separated line. You'll code a function to turn an array of names into that."
 
 [resource]
 script = ExtResource( 2 )
 title = "Functions that return a value"
 content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 19 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ]
-practices = [ SubResource( 17 ), SubResource( 18 ) ]
+practices = [ SubResource( 17 ) ]
