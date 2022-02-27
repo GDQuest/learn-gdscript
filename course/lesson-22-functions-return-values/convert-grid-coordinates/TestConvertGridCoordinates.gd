@@ -1,7 +1,5 @@
 extends PracticeTester
 
-const TEST_CELL_COORDINATES := [Vector2(0, 1), Vector2(2, 2), Vector2(1, 5)]
-
 var node: Node
 var cell_size := Vector2.ZERO
 
@@ -21,7 +19,7 @@ func test_function_maps_cell_to_world_coordinates() -> String:
 	if not "return" in _slice.current_text:
 		return tr("We didn't find any \"return\" keyword in your code. Did you forget to return the value from the convert_to_world_coordinates() function?")
 
-	for cell in TEST_CELL_COORDINATES:
+	for cell in node.get("TEST_CELL_COORDINATES"):
 		var student_result =node.convert_to_world_coordinates(cell)
 		var expected := cell_to_world(cell)
 		if not student_result is Vector2 or not expected.is_equal_approx(student_result):
