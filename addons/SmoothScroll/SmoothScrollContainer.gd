@@ -36,6 +36,7 @@ var _max_position_y := 0.0
 
 # Used to throttle touchpad scroll events.
 var _last_accepted_scroll_event_time := 0
+var _is_in_browser := OS.get_name() == "HTML5"
 
 # Control node to move when scrolling.
 onready var _content: Control = get_child(get_child_count() - 1) as Control
@@ -85,7 +86,10 @@ func _process(delta: float) -> void:
 func _gui_input(event: InputEvent) -> void:
 	# Used to throttle scroll events that are too fast, which happens with some
 	# touchpads.
-	var can_mouse_scroll := OS.get_ticks_msec() > _last_accepted_scroll_event_time + TIME_MSEC_BETWEEN_SCROLL_EVENTS
+	var can_mouse_scroll := true
+	if _is_in_browser:
+		can_mouse_scroll = OS.get_ticks_msec() > _last_accepted_scroll_event_time + TIME_MSEC_BETWEEN_SCROLL_EVENTS
+
 	if event.is_action_pressed("scroll_up_one_page"):
 		scroll_page_up()
 	elif event.is_action_pressed("scroll_down_one_page"):
