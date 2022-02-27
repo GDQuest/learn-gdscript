@@ -1,7 +1,9 @@
-[gd_resource type="Resource" load_steps=25 format=2]
+[gd_resource type="Resource" load_steps=29 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=3]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=4]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -249,8 +251,40 @@ visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=25]
+script = ExtResource( 4 )
+practice_id = "res://course/lesson-23-append-to-arrays/practice-KUdOCQiG.tres"
+title = "Completing orders"
+goal = "Move orders from the pending ones to the completed list using the array's [code]append()[/code] and [code]pop_front()[/code] functions.
+
+Remember that the array's [code]pop_front()[/code] function returns the popped value, which allows you to store it in a variable and then pass it to another function."
+starting_code = ""
+hints = PoolStringArray( "You first need to pop the first value from the pending orders array. To pop a value from the front of an array, you call [code]array.pop_front()[/code].", "You then need to append the popped value to the completed_orders array. To append a value to an array, you can call [code]array.append()[/code]." )
+validator_script_path = ""
+script_slice_path = ""
+documentation_references = PoolStringArray( "array.pop_front", "array.append" )
+documentation_resource = ExtResource( 3 )
+description = "Orders are piling up in the kitchen, and we need to clear them fast using the array's [code]pop_front()[/code] function."
+
+[sub_resource type="Resource" id=26]
+script = ExtResource( 4 )
+practice_id = "res://course/lesson-23-append-to-arrays/practice-B7tKRHJM.tres"
+title = "Clearing up the crates"
+goal = "Crates are piling up on the platform. Move them out of the way by popping them from their array.
+
+You need to remove them from top to bottom using the array's [code]pop_back()[/code] function.
+
+Your code should remove all the crates in the array using a while loop."
+starting_code = ""
+hints = PoolStringArray(  )
+validator_script_path = ""
+script_slice_path = ""
+documentation_references = PoolStringArray( "array.pop_back" )
+documentation_resource = ExtResource( 3 )
+description = "Crates are piling up on the platform. Move them out of the way by popping them from their array."
+
 [resource]
 script = ExtResource( 1 )
 title = "Appending and popping values from arrays"
 content_blocks = [ SubResource( 1 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 23 ), SubResource( 9 ), SubResource( 15 ), SubResource( 17 ), SubResource( 18 ), SubResource( 16 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 24 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ]
-practices = [  ]
+practices = [ SubResource( 25 ), SubResource( 26 ) ]
