@@ -11,6 +11,7 @@ onready var _animation_player = get_node(anim_player) as AnimationPlayer
 
 
 func _ready() -> void:
+	active = true
 	_animation_player.connect("animation_finished", self, "_on_animation_finished")
 
 
@@ -20,3 +21,11 @@ func travel(animation_name: String) -> void:
 
 func _on_animation_finished() -> void:
 	emit_signal("animation_finished")
+
+
+func get_current_animation() -> String:
+	return _state_machine.get_current_node()
+
+
+func has_animation(animation_name: String) -> bool:
+	return _animation_player.has_animation(animation_name)
