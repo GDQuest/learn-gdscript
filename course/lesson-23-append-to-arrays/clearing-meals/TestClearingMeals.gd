@@ -1,7 +1,7 @@
 extends PracticeTester
 
 var game_board: Node2D
-const WAIT_QUEUE := preload("/home/xananax/projects/gdscript-live-editor/course/lesson-23-append-to-arrays/clearing-meals/ClearingMeals.gd").WAIT_QUEUE
+const WAIT_QUEUE := preload("ClearingMeals.gd").WAIT_QUEUE
 
 func _prepare() -> void:
 	game_board = _scene_root_viewport.get_child(0)

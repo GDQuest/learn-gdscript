@@ -264,7 +264,7 @@ starting_code = "var waiting_orders := []
 var completed_orders := []
 
 func complete_current_order():
-	# write here"
+	"
 hints = PoolStringArray( "You first need to pop the first value from the pending orders array. To pop a value from the front of an array, you call [code]array.pop_front()[/code].", "You then need to append the popped value to the completed_orders array. To append a value to an array, you can call [code]array.append()[/code]." )
 validator_script_path = "res://course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd"
 script_slice_path = "res://course/lesson-23-append-to-arrays/clearing-meals/ClearingMeals.live-editor/slices/ClearingMeals.complete.slice.tres"
@@ -286,7 +286,7 @@ Your code should remove all the crates in the array using a while loop.
 starting_code = "var crates = []
 
 func run():
-	while #... your turn"
+	while "
 hints = PoolStringArray( "Remember [code]while[/code] loops\? ", "Every time you [code]pop[/code] an item, the array\'s [code]size[/code] gets reduced", "Try [code]while crates.size() > 0[/code]" )
 validator_script_path = "res://course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd"
 script_slice_path = "res://course/lesson-23-append-to-arrays/popping-crates/PoppingCrates.live-editor/slices/PoppingCrates.run.slice.tres"
