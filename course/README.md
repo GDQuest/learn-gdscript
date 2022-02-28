@@ -839,18 +839,25 @@ There are 3 advantages of functions that only calculate and return values:
 2. You can test them in isolation.
 3. As a result, they are easy to debug.
 
-## Remaining topics:
+## Extra topics to cover
 
-We need to review the techniques below before deciding which we should cover or not.
+List of extra lessons and topics to consider adding in future app updates:
 
-Specific techniques:
+- Booleans.
+- The `elif` keyword.
+- Breaking from a loop with the `break` keyword.
+- Continuing in a loop with the `continue` keyword.
+- Creating nested dictionaries (e.g. grid inventory mapping cells to {name: amount}).
+- Using arrays inside dictionaries (e.g. `{square = [Vector2(0, 0), Vector2(100, 0), ...]}`).
+- Constants.
+- Pattern matching with the `match` keyword.
+- Useful 2D vector calculations (dot product, direction, length).
+- Useful built-in functions like `lerp()`, `range_lerp`, `clamp()`, `min()`, `max()`, etc.
+- Combining multiple techniques in small projects, like coding an inventory. 
+- Listening to player input.
+- Coroutines?
+- Signals?
 
-- [ ] The `elif` keyword.
-- [ ] Breaking from a loop with the `break` keyword.
-- [ ] Creating nested dictionaries (e.g. grid inventory mapping cells to {name: amount}).
-- [ ] Using arrays inside dictionaries (e.g. `{square = [Vector2(0, 0), Vector2(100, 0), ...]}`).
-- [ ] Constants
-
-We don't plan to teach objects and object-oriented programming using the app.
+Note that we don't plan to teach objects and object-oriented programming using the app.
 
 We think it'd be better first to teach nodes etc. inside of Godot and later build upon the students' intuitive understanding of game entities to teach the more abstract classes, objects, and so on.
