@@ -1,7 +1,9 @@
-[gd_resource type="Resource" load_steps=26 format=2]
+[gd_resource type="Resource" load_steps=30 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=3]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=4]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -259,8 +261,40 @@ visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=24]
+script = ExtResource( 4 )
+practice_id = "res://course/lesson-28-specifying-types/practice-x0c7DDiz.tres"
+title = "Add the correct type hints to variables"
+goal = "Our variables get the correct values but not the right hints. Using your type-fu, add the correct type names in the variable definitions.
+
+You need to write the type name between the colon and the equal sign.
+
+Note: You cannot use type inference in this practice. You need to write the type name in full."
+starting_code = ""
+hints = PoolStringArray(  )
+validator_script_path = ""
+script_slice_path = ""
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 3 )
+description = ""
+
+[sub_resource type="Resource" id=25]
+script = ExtResource( 4 )
+practice_id = "res://course/lesson-28-specifying-types/practice-UdOCQiGj.tres"
+title = "Fix the values to match the type hints"
+goal = "It is the other way around in this practice: the type hints are fine, but the values are not.
+
+Your task is to fix the values after the equal sign, so they match the type hint of each variable."
+starting_code = ""
+hints = PoolStringArray( "The type [code]float[/code] means decimal number, so you need to write a number with a decimal part, like [code]3.14[/code].", "The type [code]int[/code] stands for integer or whole number, so you need the value to be a whole number without a decimal part.", "The type [code]String[/code] means you need to write a text string, a value surrounded by quotes." )
+validator_script_path = ""
+script_slice_path = ""
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 3 )
+description = ""
+
 [resource]
 script = ExtResource( 1 )
 title = "Specifying types with type hints"
 content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ]
-practices = [  ]
+practices = [ SubResource( 24 ), SubResource( 25 ) ]
