@@ -10,15 +10,16 @@ func _ready() -> void:
 
 func _run() -> void:
 	run()
-	_label.text = str(robot_name)
+	if robot_name is String:
+		_label.text = robot_name
 	yield(get_tree().create_timer(1.0), "timeout")
 	_animation_tree.travel("saying_hi")
 	Events.emit_signal("practice_run_completed")
 
 
-var robot_name = "Robot"
+var robot_name = -1
 
 # EXPORT print_string
 func run():
-	robot_name = "Robot"
+	robot_name = "Robi"
 # /EXPORT print_string
