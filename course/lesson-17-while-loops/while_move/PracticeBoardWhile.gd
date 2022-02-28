@@ -1,6 +1,6 @@
 extends Node2D
 
-export var size := Vector2(5, 5)
+export var board_size := Vector2(5, 5)
 export var cell_size := 64
 export var line_width := 4
 
@@ -26,7 +26,7 @@ func _run() -> void:
 
 # EXPORT move_to_end
 func move_to_bottom():
-	while cell.y < size.y - 1:
+	while cell.y < board_size.y - 1:
 		cell += Vector2(0, 1)
 # /EXPORT move_to_end
 
@@ -37,8 +37,8 @@ func reset() -> void:
 	
 
 func _draw() -> void:
-	for x in range(size.x):
-		for y in range(size.y):
+	for x in range(board_size.x):
+		for y in range(board_size.y):
 			draw_rect(Rect2(Vector2(x * cell_size, y * cell_size), Vector2.ONE * cell_size), Color.white, false, line_width)
 
 

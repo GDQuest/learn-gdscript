@@ -8,7 +8,7 @@ func _prepare() -> void:
 
 
 func test_robot_gets_to_bottom_of_board() -> String:
-	if not is_equal_approx(game_board.cell.y, game_board.size.y - 1):
+	if not is_equal_approx(game_board.cell.y, game_board.board_size.y - 1):
 		return tr("The robot isn't at the bottom of the game board. Did you increase its cell.y coordinate?")
 	return ""
 
