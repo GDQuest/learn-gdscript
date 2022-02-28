@@ -1,7 +1,9 @@
-[gd_resource type="Resource" load_steps=25 format=2]
+[gd_resource type="Resource" load_steps=31 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=3]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=4]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -143,6 +145,28 @@ visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=23]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-27-value-types/content-lkGx0c7D.tres"
+title = "Converting strings into numbers"
+type = 0
+text = "You can also convert strings into whole numbers or decimal numbers using respectively the [code]int()[/code] and [code]float()[/code] functions.
+
+Those functions can convert what the player writes in a text field into a number. For example, the number of potions to sell at once in a shop."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=24]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-27-value-types/content-DizKUdOC.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeStringToInt.tscn"
+reverse_blocks = false
+has_separator = false
+
 [sub_resource type="Resource" id=14]
 script = ExtResource( 2 )
 content_id = "res://course/lesson-27-value-types/content-NbDGt6fU.tres"
@@ -251,8 +275,54 @@ visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=25]
+script = ExtResource( 4 )
+practice_id = "res://course/lesson-27-value-types/practice-lkGx0c7D.tres"
+title = "Displaying the player's health and energy"
+goal = "We want to display the player's energy in the user interface.
+
+Currently, our code has a type error. We're trying to display a whole number while the [code]display_energy()[/code] function expects a string.
+
+Using the [code]str()[/code] function, clear the type error and make the energy amount display on the interface.
+
+You can't change the [code]energy[/code] variable definition: setting it to [code]\"80\"[/code] would break the rest of the game's code. You must convert the value when calling [code]display_energy()[/code]."
+starting_code = "var energy = 80
+
+func run():
+	display_energy(energy)"
+hints = PoolStringArray(  )
+validator_script_path = "display-energy/TestDisplayingEnergy.gd"
+script_slice_path = "display-energy/DisplayingEnergy.live-editor/slices/DisplayingEnergy.run.slice.tres"
+documentation_references = PoolStringArray( "str", "display_energy" )
+documentation_resource = ExtResource( 3 )
+description = "We want to display the player's energy in the interface but face a type error. Use your new knowledge to fix it."
+
+[sub_resource type="Resource" id=26]
+script = ExtResource( 4 )
+practice_id = "res://course/lesson-27-value-types/practice-izKUdOCQ.tres"
+title = "Letting the player type numbers"
+goal = "In our game's shops, we want to let the player type numbers to select the number of items they want to buy or sell.
+
+We need to know the number of items as an [code]int[/code], but the computer reads the player's input as a [code]String[/code].
+
+Your task is to convert the player's input into numbers for the shop's code to work.
+
+Using the [code]int()[/code] function, convert the player's input into a whole number and store the result in the [code]item_count[/code] variable."
+starting_code = "var player_input = \"\"
+var item_count = 0
+
+func buy_selected_item():
+	player_input = get_player_input()
+	"
+hints = PoolStringArray(  )
+validator_script_path = "player-input/TestPlayerInput.gd"
+script_slice_path = "player-input/PlayerInput.live-editor/slices/PlayerInput.run.slice.tres"
+documentation_references = PoolStringArray( "int" )
+documentation_resource = ExtResource( 3 )
+description = "We want the player to choose the number of items they buy or sell in our game's shops. But right now, all we get are type errors."
+
 [resource]
 script = ExtResource( 1 )
 title = "Value types"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ]
-practices = [  ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 23 ), SubResource( 24 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ]
+practices = [ SubResource( 25 ), SubResource( 26 ) ]
