@@ -1,4 +1,13 @@
-extends Control
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/ScriptProperties.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-23-append-to-arrays/popping-crates/PoppingCrates.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 1 )
+nodes_paths = [ NodePath("") ]
+script_file = ExtResource( 2 )
+original_script = "extends Control
 
 # @type Array[Node]
 onready var _initial_crates := $Column.get_children()
@@ -11,10 +20,10 @@ var _is_resetting := false
 func _ready() -> void:
 	_initial_crates.invert()
 	for crate in _initial_crates:
-		if not crate.is_connected("used", self, "_pop_next"):
-			crate.connect("used", self, "_pop_next")
-		if not crate.is_connected("restored", self, "_restore_next"):
-			crate.connect("restored", self, "_restore_next")
+		if not crate.is_connected(\"used\", self, \"_pop_next\"):
+			crate.connect(\"used\", self, \"_pop_next\")
+		if not crate.is_connected(\"restored\", self, \"_restore_next\"):
+			crate.connect(\"restored\", self, \"_restore_next\")
 	crates = _initial_crates.duplicate()
 
 
@@ -25,13 +34,13 @@ func _run() -> void:
 	
 
 func _complete_run() -> void:
-	Events.emit_signal("practice_run_completed")
+	Events.emit_signal(\"practice_run_completed\")
 
 func _pop_next():
 	if index >= _initial_crates.size():
 		_complete_run()
 	elif index < _initial_crates.size():
-		print("popping crate n˚%s"%[index])
+		print(\"popping crate n˚%s\"%[index])
 		var crate = _initial_crates[index]
 		crate.use()
 		index += 1
@@ -56,3 +65,4 @@ func run():
 	while crates.size() > 0:
 		crates.pop_back()
 # /EXPORT run
+"

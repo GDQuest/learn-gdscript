@@ -255,13 +255,19 @@ has_separator = false
 script = ExtResource( 4 )
 practice_id = "res://course/lesson-23-append-to-arrays/practice-KUdOCQiG.tres"
 title = "Completing orders"
-goal = "Move orders from the pending ones to the completed list using the array's [code]append()[/code] and [code]pop_front()[/code] functions.
+goal = "The [code]waiting_orders[/code] array will be filled over time.
+
+Your job is to move orders from waiting list  to [code]completed_orders[/code] list using the array's [code]append()[/code] and [code]pop_front()[/code] functions.
 
 Remember that the array's [code]pop_front()[/code] function returns the popped value, which allows you to store it in a variable and then pass it to another function."
-starting_code = ""
+starting_code = "var waiting_orders := []
+var completed_orders := []
+
+func complete_current_order():
+	# write here"
 hints = PoolStringArray( "You first need to pop the first value from the pending orders array. To pop a value from the front of an array, you call [code]array.pop_front()[/code].", "You then need to append the popped value to the completed_orders array. To append a value to an array, you can call [code]array.append()[/code]." )
-validator_script_path = ""
-script_slice_path = ""
+validator_script_path = "res://course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd"
+script_slice_path = "res://course/lesson-23-append-to-arrays/clearing-meals/ClearingMeals.live-editor/slices/ClearingMeals.complete.slice.tres"
 documentation_references = PoolStringArray( "array.pop_front", "array.append" )
 documentation_resource = ExtResource( 3 )
 description = "Orders are piling up in the kitchen, and we need to clear them fast using the array's [code]pop_front()[/code] function."
@@ -270,15 +276,20 @@ description = "Orders are piling up in the kitchen, and we need to clear them fa
 script = ExtResource( 4 )
 practice_id = "res://course/lesson-23-append-to-arrays/practice-B7tKRHJM.tres"
 title = "Clearing up the crates"
-goal = "Crates are piling up on the platform. Move them out of the way by popping them from their array.
+goal = "Crates are piling up on the platform. Move them out of the way by popping them from the [code]crates[/code] array.
 
 You need to remove them from top to bottom using the array's [code]pop_back()[/code] function.
 
-Your code should remove all the crates in the array using a while loop."
-starting_code = ""
-hints = PoolStringArray(  )
-validator_script_path = ""
-script_slice_path = ""
+Your code should remove all the crates in the array using a while loop.
+
+[b]Careful![/b] if you run a while loop carelessly, you can lock the software."
+starting_code = "var crates = []
+
+func run():
+	while #... your turn"
+hints = PoolStringArray( "Remember [code]while[/code] loops\? ", "Every time you [code]pop[/code] an item, the array\'s [code]size[/code] gets reduced", "Try [code]while crates.size() > 0[/code]" )
+validator_script_path = "res://course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd"
+script_slice_path = "res://course/lesson-23-append-to-arrays/popping-crates/PoppingCrates.live-editor/slices/PoppingCrates.run.slice.tres"
 documentation_references = PoolStringArray( "array.pop_back" )
 documentation_resource = ExtResource( 3 )
 description = "Crates are piling up on the platform. Move them out of the way by popping them from their array."

@@ -10,7 +10,7 @@ script = ExtResource( 1 )
 margin_left = -206.0
 margin_top = -97.0
 margin_right = 210.0
-margin_bottom = 68.0
+margin_bottom = 187.0
 custom_constants/separation = 16
 __meta__ = {
 "_edit_use_anchors_": false
@@ -18,7 +18,7 @@ __meta__ = {
 
 [node name="Pending" type="VBoxContainer" parent="Row"]
 margin_right = 200.0
-margin_bottom = 165.0
+margin_bottom = 284.0
 rect_min_size = Vector2( 200, 0 )
 theme = ExtResource( 2 )
 custom_constants/separation = 4
@@ -41,31 +41,15 @@ margin_top = 32.0
 margin_right = 200.0
 margin_bottom = 40.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Row/Pending"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Row/Pending"]
 margin_top = 44.0
 margin_right = 200.0
-margin_bottom = 165.0
-custom_constants/margin_right = 8
-custom_constants/margin_top = 0
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 0
-
-[node name="Orders" type="Label" parent="Row/Pending/MarginContainer"]
-margin_left = 8.0
-margin_right = 192.0
-margin_bottom = 121.0
-text = "• Test
-• Test
-• Test
-• Test"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_bottom = 44.0
 
 [node name="Done" type="VBoxContainer" parent="Row"]
 margin_left = 216.0
 margin_right = 416.0
-margin_bottom = 165.0
+margin_bottom = 284.0
 rect_min_size = Vector2( 200, 0 )
 theme = ExtResource( 2 )
 custom_constants/separation = 4
@@ -88,23 +72,14 @@ margin_top = 32.0
 margin_right = 200.0
 margin_bottom = 40.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Row/Done"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Row/Done"]
 margin_top = 44.0
 margin_right = 200.0
-margin_bottom = 165.0
-custom_constants/margin_right = 8
-custom_constants/margin_top = 0
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 0
+margin_bottom = 44.0
 
-[node name="Orders" type="Label" parent="Row/Done/MarginContainer"]
-margin_left = 8.0
-margin_right = 192.0
-margin_bottom = 121.0
-text = "• Test
-• Test
-• Test
-• Test"
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
