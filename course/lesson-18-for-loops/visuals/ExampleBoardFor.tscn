@@ -2,6 +2,7 @@
 
 [ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
+[ext_resource path="res://course/lesson-17-while-loops/visuals/Robot.gd" type="Script" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "tool
@@ -22,6 +23,10 @@ var _board_width := 0
 var _loops := 0
 
 
+func _ready() -> void:
+	_robot.connect(\"cell_changed\", self, \"_update_label\")
+
+
 func _update_label() -> void:
 	if not _label:
 		yield(self, \"ready\")
@@ -39,7 +44,6 @@ func reset() -> void:
 	_loops = 0
 	_timer.stop()
 	_robot.cell = Vector2(0, 1)
-	_update_label()
 
 
 func _on_timer_timeout() -> void:
@@ -50,29 +54,6 @@ func _on_timer_timeout() -> void:
 		return
 	
 	_robot.cell += Vector2(1, 0)
-	_update_label()
-"
-
-[sub_resource type="GDScript" id=3]
-script/source = "extends Node2D
-
-
-var cell := Vector2(0, 0) setget set_cell, get_cell
-var cell_size := 96
-var grid_size_px := Vector2.ZERO setget set_grid_size_px
-
-
-func set_cell(new_cell: Vector2) -> void:
-	cell = new_cell
-	position = new_cell * cell_size + Vector2(cell_size/2, 12) - grid_size_px / 2.0
-
-
-func get_cell() -> Vector2:
-	return cell
-
-func set_grid_size_px(value: Vector2):
-	grid_size_px = value
-	set_cell(cell)
 "
 
 [node name="ExampleBoardFor" type="PanelContainer"]
@@ -97,7 +78,7 @@ position = Vector2( 50, 100 )
 script = SubResource( 2 )
 
 [node name="Robot" parent="RunnableCodeExample/BoardForLoop" instance=ExtResource( 1 )]
-script = SubResource( 3 )
+script = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="RunnableCodeExample/BoardForLoop"]
 margin_left = 48.0
