@@ -270,10 +270,13 @@ goal = "Our variables get the correct values but not the right hints. Using your
 You need to write the type name between the colon and the equal sign.
 
 Note: You cannot use type inference in this practice. You need to write the type name in full."
-starting_code = ""
+starting_code = "var vector: String = Vector2(1, 1)
+var text: int = \"Placeholder text\"
+var whole_number: Vector2 = 4
+var decimal_number: String = 3.14"
 hints = PoolStringArray(  )
-validator_script_path = ""
-script_slice_path = ""
+validator_script_path = "fix-hints/TestFixHints.gd"
+script_slice_path = "fix-hints/FixHints.live-editor/slices/FixHints.fix.slice.tres"
 documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 3 )
 description = ""
@@ -285,10 +288,13 @@ title = "Fix the values to match the type hints"
 goal = "It is the other way around in this practice: the type hints are fine, but the values are not.
 
 Your task is to fix the values after the equal sign, so they match the type hint of each variable."
-starting_code = ""
+starting_code = "var whole_number: int = \"Hello, world!\"
+var text: String = 4
+var vector: Vector2 = 3.14
+var decimal_number: float = []"
 hints = PoolStringArray( "The type [code]float[/code] means decimal number, so you need to write a number with a decimal part, like [code]3.14[/code].", "The type [code]int[/code] stands for integer or whole number, so you need the value to be a whole number without a decimal part.", "The type [code]String[/code] means you need to write a text string, a value surrounded by quotes." )
-validator_script_path = ""
-script_slice_path = ""
+validator_script_path = "fix-values/TestFixValues.gd"
+script_slice_path = "fix-values/FixValues.live-editor/slices/FixValues.fix.slice.tres"
 documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 3 )
 description = ""
