@@ -17,7 +17,9 @@ const textures = [
 	LIGHTNING
 ]
 
-var texture: Texture setget set_texture, get_texture
+
+export var texture: Texture setget set_texture, get_texture
+export var hide_after_animation := false
 
 onready var anim_player := $AnimationPlayer as AnimationPlayer
 onready var texture_rect := $TextureRect as TextureRect
@@ -27,11 +29,28 @@ var _animation_backwards := false
 
 
 func _ready() -> void:
+	set_label_index(get_index())
 	if texture == null:
-		set_texture(textures[randi() % textures.size()])
+		randomize()
+		set_random_texture()
 	anim_player.connect("animation_finished", self, "_on_animation_finished")
 
 
+func set_random_texture():
+	if get_index() > 0 and get_index() < textures.size():
+		# ensure textures appear at least once each in the first loop
+		var previous_crate = get_parent().get_child(get_index() - 1)
+		if previous_crate and previous_crate.texture:
+			var previous_texture_index := textures.find(previous_crate.texture)
+			if previous_texture_index > -1:
+				var next_index := (previous_texture_index + 1) % textures.size()
+				set_texture(textures[next_index])
+				return
+	randomize_texture()
+
+func randomize_texture():
+	set_texture(textures[randi() % textures.size()])
+	
 func use() -> void:
 	anim_player.play("use")
 
@@ -52,7 +71,8 @@ func _on_animation_finished(animation_name: String) -> void:
 		_animation_backwards = false
 		emit_signal("restored")
 		return
-	hide()
+	if hide_after_animation:
+		hide()
 	emit_signal("used")
 
 
