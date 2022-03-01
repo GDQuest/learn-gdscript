@@ -246,14 +246,14 @@ However, several chunks are misaligned. You need to find them in the [code]track
 To do so, you need to access the array by index.
 
 This time, though, you need to access them with [i]negative indices[/i]."
-starting_code = "var inventory = []
+starting_code = "var tracks = []
 
-func pick_items():
-	use_item(inventory[5])
-	use_item(inventory[9])"
+func fix_tracks():
+	tracks[1].position.y -= 10
+	tracks[8].position += Vector2(-10, 10)"
 hints = PoolStringArray( "The syntax to access an item by index in an array uses square brackets with a number in between right after the array name. For example, write [code]tracks[-1][/code] to access the [i]last[/i] element in the array.", "To align the second chunk, call [code]realign(tracks[-2])[/code]. You need to call the same function another two times with the other chunks.", "" )
-validator_script_path = ""
-script_slice_path = ""
+validator_script_path = "res://course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd"
+script_slice_path = "res://course/lesson-24-access-array-indices/align-tracks/AlignTracks.live-editor/slices/AlignTracks.fix.slice.tres"
 documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 1 )
 description = "Some chunks of our train tracks are misaligned, and the train can't pass. Find the faulty pieces and realign them."

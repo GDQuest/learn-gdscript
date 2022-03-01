@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/SliceProperties.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-24-access-array-indices/align-tracks/AlignTracks.live-editor/scene/AlignTracks.tscn.tres" type="Resource" id=2]
+[ext_resource path="res://course/lesson-24-access-array-indices/align-tracks/AlignTracks.live-editor/scripts/AlignTracks.gd.tres" type="Resource" id=3]
+
+[resource]
+script = ExtResource( 1 )
+scene_properties = ExtResource( 2 )
+script_properties = ExtResource( 3 )
+leading_spaces = 0
+keyword = "EXPORT"
+closing = false
+name = "fix"
+is_full_file = false
+start = 42
+end = 47
+lines_before = [ "extends Node2D", "", "onready var index_label := $PanelContainer/HBoxContainer/Values/IndexLabel as Label", "onready var position_label := $PanelContainer/HBoxContainer/Values/PositionLabel as Label", "", "var current_item: Sprite", "", "func _ready() -> void:", "	tracks = $Grid.get_children()", "	for i in tracks.size():", "		var track := tracks[i] as Sprite", "		var container := Control.new()", "		add_child(container)", "		container.rect_size = track.region_rect.size", "		container.rect_global_position = track.global_position - container.rect_size / 2", "		container.connect(\"mouse_entered\", self, \"set_current_item\", [true, track])", "		container.connect(\"mouse_exited\", self, \"set_current_item\", [false, track])", "	if get_tree().get_current_scene() == self:", "		_run()", "", "func _input(event: InputEvent) -> void:", "	if event is InputEventMouseButton:", "		var mouse_event := event as InputEventMouseButton", "		if not mouse_event.pressed and current_item:", "			var text = \"index: %s, position: %s\"%[current_item.get_index(), current_item.position.round()]", "			print(text)", "", "func set_current_item(enter: bool, item: Sprite):", "	if not enter:", "		current_item = null", "		index_label.text = \"-1\"", "		position_label.text = \"(0, 0)\"", "	else:", "		current_item = item", "		index_label.text = str(current_item.get_index())", "		position_label.text = str(current_item.position.round())", "		", "", "func _run():", "	fix_tracks()", "	Events.emit_signal(\"practice_completed\")", "" ]
+lines_after = [ "" ]
+lines_editable = [ "var tracks = []", "func fix_tracks():", "	tracks[1].position.y -= 10", "	tracks[8].position += Vector2(-10, 10)" ]

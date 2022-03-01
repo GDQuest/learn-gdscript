@@ -24,4 +24,3 @@ func test_picked_correct_item_amount() -> String:
 	if received.size() != 2:
 		return "We expected 2 items to be picked. Instead, we got %s."%[received.size()]
 	return ""
-
