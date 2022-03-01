@@ -5,7 +5,6 @@
 [ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=4]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=5]
-[ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=7]
 [ext_resource path="res://ui/theme/button_outline_large_focus.tres" type="StyleBox" id=8]
 [ext_resource path="res://ui/theme/button_outline_large_accented.tres" type="StyleBox" id=9]
@@ -15,14 +14,27 @@ bg_color = Color( 0.239216, 1, 0.431373, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.0784314, 0.0823529, 0.164706, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="ConfirmPopup" type="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.0352941, 0.0392157, 0.129412, 0.627451 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 min_size = Vector2( 0, 0 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -109,13 +121,14 @@ margin_bottom = 68.0
 rect_min_size = Vector2( 200, 68 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
-custom_colors/font_color = Color( 0.239216, 1, 0.431373, 1 )
-custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
+custom_colors/font_color_focus = Color( 0.239216, 1, 0.431373, 1 )
+custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+custom_colors/font_color_hover = Color( 0.239216, 1, 0.431373, 1 )
 custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
-custom_styles/hover = ExtResource( 6 )
+custom_styles/hover = ExtResource( 9 )
 custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 8 )
-custom_styles/normal = ExtResource( 9 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/normal = SubResource( 2 )
 text = "Confirm"
 
 [node name="CancelButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons"]
@@ -125,10 +138,11 @@ margin_bottom = 68.0
 rect_min_size = Vector2( 200, 68 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
+custom_colors/font_color_focus = Color( 0.960784, 0.980392, 0.980392, 1 )
 custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
-custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
+custom_colors/font_color_hover = Color( 0.960784, 0.980392, 0.980392, 1 )
 custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
-custom_styles/hover = ExtResource( 6 )
+custom_styles/hover = ExtResource( 8 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 8 )
 custom_styles/normal = ExtResource( 4 )
