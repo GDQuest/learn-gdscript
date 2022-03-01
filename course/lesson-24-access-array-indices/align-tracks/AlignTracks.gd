@@ -11,7 +11,7 @@ func _ready() -> void:
 	tilemap.hide()
 	reset()
 	if get_tree().get_current_scene() == self:
-		_run()		
+		_run()
 
 
 func reset():
@@ -87,7 +87,8 @@ func _run():
 
 
 # EXPORT fix
-var tracks := []
+var tracks = []
+
 func fix_tracks():
 	align(tracks[-1])
 	align(tracks[-3])
