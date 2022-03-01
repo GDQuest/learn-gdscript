@@ -1,10 +1,9 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/popups/LessonDonePopup.gd" type="Script" id=2]
 [ext_resource path="res://ui/theme/fonts/font_well_done_title.tres" type="DynamicFont" id=3]
 [ext_resource path="res://ui/theme/fonts/font_well_done_normal.tres" type="DynamicFont" id=4]
-[ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=5]
 [ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=7]
 [ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=8]
@@ -180,10 +179,11 @@ margin_bottom = 68.0
 rect_min_size = Vector2( 200, 68 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
+custom_colors/font_color_focus = Color( 0.960784, 0.980392, 0.980392, 1 )
 custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
-custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
+custom_colors/font_color_hover = Color( 0.960784, 0.980392, 0.980392, 1 )
 custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
-custom_styles/hover = ExtResource( 5 )
+custom_styles/hover = ExtResource( 9 )
 custom_styles/pressed = ExtResource( 6 )
 custom_styles/focus = ExtResource( 9 )
 custom_styles/normal = ExtResource( 8 )
@@ -196,13 +196,14 @@ margin_bottom = 68.0
 rect_min_size = Vector2( 200, 68 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
-custom_colors/font_color = Color( 0.239216, 1, 0.431373, 1 )
-custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
+custom_colors/font_color_focus = Color( 0.239216, 1, 0.431373, 1 )
+custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+custom_colors/font_color_hover = Color( 0.239216, 1, 0.431373, 1 )
 custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
-custom_styles/hover = ExtResource( 5 )
+custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 9 )
-custom_styles/normal = ExtResource( 13 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/normal = ExtResource( 8 )
 text = "Continue"
 
 [node name="Tween" type="Tween" parent="."]
