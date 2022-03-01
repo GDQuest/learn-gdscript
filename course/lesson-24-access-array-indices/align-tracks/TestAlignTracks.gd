@@ -2,19 +2,20 @@ extends PracticeTester
 
 
 var game_board: Node2D
-var tracks := []
 var expected_positions := {
-	1: Vector2(96, 32),
-	8: Vector2(32, 160)
+	-1: Vector2(7, 6) * 64,
+	-3: Vector2(5, 6) * 64,
+	-4: Vector2(4, 6) * 64
 }
 
 
 func _prepare() -> void:
 	game_board = _scene_root_viewport.get_child(0)
-	tracks = game_board.tracks
+
 
 func _compare(track_index: int) -> String:
 	var expected: Vector2 = expected_positions[track_index]
+	var tracks: Array = game_board.tracks
 	var track: Sprite = tracks[track_index]
 	var received := track.position
 	if received.is_equal_approx(expected):
@@ -29,7 +30,13 @@ func test_first_track_is_well_positioned() -> String:
 func test_second_track_is_well_positioned() -> String:
 	return _compare(expected_positions.keys()[1])
 
-func test_tracks_are_aligned() -> String:
+
+func test_third_track_is_well_positioned() -> String:
+	return _compare(expected_positions.keys()[2])
+
+
+func test_all_other_tracks_are_aligned_to_grid() -> String:
+	var tracks: Array = game_board.tracks
 	for i in tracks.size():
 		var track: Sprite = tracks[i]
 		var x := int(track.position.x) % 32

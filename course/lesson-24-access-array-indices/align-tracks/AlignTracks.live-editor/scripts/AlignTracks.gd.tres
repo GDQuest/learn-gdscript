@@ -9,50 +9,97 @@ nodes_paths = [ NodePath("") ]
 script_file = ExtResource( 2 )
 original_script = "extends Node2D
 
-onready var index_label := $PanelContainer/HBoxContainer/Values/IndexLabel as Label
-onready var position_label := $PanelContainer/HBoxContainer/Values/PositionLabel as Label
+onready var tilemap := $TileMap as TileMap
+onready var tiles := $Tiles as Node2D
 
-var current_item: Sprite
+const shift := Vector2(10, 10)
+var aligned_tracks := []
+
 
 func _ready() -> void:
-	tracks = $Grid.get_children()
-	for i in tracks.size():
-		var track := tracks[i] as Sprite
-		var container := Control.new()
-		add_child(container)
-		container.rect_size = track.region_rect.size
-		container.rect_global_position = track.global_position - container.rect_size / 2
-		container.connect(\"mouse_entered\", self, \"set_current_item\", [true, track])
-		container.connect(\"mouse_exited\", self, \"set_current_item\", [false, track])
+	tilemap.hide()
+	reset()
 	if get_tree().get_current_scene() == self:
-		_run()
+		_run()		
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		var mouse_event := event as InputEventMouseButton
-		if not mouse_event.pressed and current_item:
-			var text = \"index: %s, position: %s\"%[current_item.get_index(), current_item.position.round()]
-			print(text)
 
-func set_current_item(enter: bool, item: Sprite):
-	if not enter:
-		current_item = null
-		index_label.text = \"-1\"
-		position_label.text = \"(0, 0)\"
+func reset():
+	aligned_tracks = []
+	remove_cells()
+	copy_cells()
+
+
+func remove_cells():
+	tracks = []
+	for child in tiles.get_children():
+		child.queue_free()
+
+
+func copy_cells():
+	for cell_pos in tilemap.get_used_cells():
+		var x := int(cell_pos.x)
+		var y := int(cell_pos.y)
+		var cell := tilemap.get_cell(x, y)
+		var is_transposed := tilemap.is_cell_transposed(x, y)
+		var is_x_flipped := tilemap.is_cell_x_flipped(x, y)
+		var is_y_flipped := tilemap.is_cell_y_flipped(x, y)
+		var sub_tilemap = TileMap.new()
+		var is_not_in_position := false
+		if cell == 4:
+			cell = 2
+			is_not_in_position = true
+		sub_tilemap.tile_set = tilemap.tile_set
+		sub_tilemap.set_cell(0, 0, cell, is_x_flipped, is_y_flipped, is_transposed)
+		var sprite := Sprite.new()
+		sprite.position = tilemap.map_to_world(cell_pos)
+		if is_not_in_position:
+			sprite.position += shift
+		sprite.add_child(sub_tilemap)
+		tiles.add_child(sprite)
+		tracks.append(sprite)
+
+
+func align(track: Sprite) -> void:
+	if track == null:
+		aligned_tracks.append(\"You tried to align a track that doesn't exist. Make sure your indices make sense\")
 	else:
-		current_item = item
-		index_label.text = str(current_item.get_index())
-		position_label.text = str(current_item.position.round())
-		
+		aligned_tracks.append(track)
+
+
+func _realign_selected_sprites() -> void:
+	var item = aligned_tracks.pop_front()
+	if item is String:
+		push_error(item)
+	elif item:
+		var track := item as Sprite
+		var tween := Tween.new()
+		track.add_child(tween)
+		var initial := track.position
+		var target := initial - shift
+		tween.connect(\"tween_all_completed\", self, \"_realign_selected_sprites\")
+		tween.connect(\"tween_all_completed\", tween, \"queue_free\")
+		tween.interpolate_property(track, \"position\", initial, target, 1, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+		tween.start()
+	else:
+		_complete_run()
+
+
+func _complete_run() -> void:
+	yield(get_tree().create_timer(0.5), \"timeout\")
+	Events.emit_signal(\"practice_run_completed\")
+
 
 func _run():
+	reset()
 	fix_tracks()
-	Events.emit_signal(\"practice_completed\")
+	_realign_selected_sprites()
+
 
 # EXPORT fix
-var tracks = []
+var tracks := []
 func fix_tracks():
-	tracks[1].position.y -= 10
-	tracks[8].position += Vector2(-10, 10)
+	align(tracks[-1])
+	align(tracks[-3])
+	align(tracks[-4])
 # /EXPORT fix
 "

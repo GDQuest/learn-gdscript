@@ -241,17 +241,15 @@ practice_id = "res://course/lesson-24-access-array-indices/practice-wfi7YGry.tre
 title = "Realigning the train tracks"
 goal = "We have train tracks broken down into little chunks in our game. We use them to make modular tracks and draw circuits of all shapes and sizes.
 
-However, several chunks are misaligned. You need to find them in the [code]tracks[/code] array and pass them to the [code]realign()[/code] function.
+However, several chunks are misaligned. You need to find them in the [code]tracks[/code] array and pass them to the [code]align()[/code] function.
 
 To do so, you need to access the array by index.
 
 This time, though, you need to access them with [i]negative indices[/i]."
-starting_code = "var tracks = []
+starting_code = "var tracks := []
 
-func fix_tracks():
-	tracks[1].position.y -= 10
-	tracks[8].position += Vector2(-10, 10)"
-hints = PoolStringArray( "The syntax to access an item by index in an array uses square brackets with a number in between right after the array name. For example, write [code]tracks[-1][/code] to access the [i]last[/i] element in the array.", "To align the second chunk, call [code]realign(tracks[-2])[/code]. You need to call the same function another two times with the other chunks.", "" )
+func fix_tracks():"
+hints = PoolStringArray( "The syntax to access an item by index in an array uses square brackets with a number in between right after the array name. For example, write [code]tracks[-1][/code] to access the [i]last[/i] element in the array.", "To align the second chunk, call [code]align(tracks[-3])[/code]. You need to call the same function another two times with the other chunks.", "" )
 validator_script_path = "res://course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd"
 script_slice_path = "res://course/lesson-24-access-array-indices/align-tracks/AlignTracks.live-editor/slices/AlignTracks.fix.slice.tres"
 documentation_references = PoolStringArray(  )
