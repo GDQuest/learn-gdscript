@@ -1,19 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/RunnableCodeExample.gd" type="Script" id=2]
 [ext_resource path="res://ui/theme/textedit_stylebox.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/theme/fonts/font_button_small.tres" type="DynamicFont" id=4]
 [ext_resource path="res://ui/theme/outline_runnable_example.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/theme/button_outlined_pressed.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/theme/button_outlined_normal.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/theme/button_outlined_hover.tres" type="StyleBox" id=9]
 
 [node name="RunnableCodeExample" type="HBoxContainer"]
 margin_right = 1030.0
 margin_bottom = 278.0
 size_flags_horizontal = 3
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Frame" type="Control" parent="."]
 margin_right = 1030.0
@@ -28,9 +28,6 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Sliders" type="VBoxContainer" parent="Frame"]
 margin_left = 10.0
@@ -64,12 +61,20 @@ __meta__ = {
 
 [node name="ResetButton" type="Button" parent="Frame/HBoxContainer"]
 margin_right = 80.0
-margin_bottom = 40.0
+margin_bottom = 47.0
 grow_horizontal = 0
 grow_vertical = 0
 rect_min_size = Vector2( 80, 40 )
 mouse_default_cursor_shape = 2
+custom_colors/font_color_focus = Color( 0.960784, 0.980392, 0.980392, 1 )
+custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+custom_colors/font_color_hover = Color( 0.960784, 0.980392, 0.980392, 1 )
+custom_colors/font_color_pressed = Color( 0.14902, 0.776471, 0.968627, 1 )
 custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/normal = ExtResource( 7 )
 text = "Reset"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -78,12 +83,20 @@ __meta__ = {
 [node name="RunButton" type="Button" parent="Frame/HBoxContainer"]
 margin_left = 88.0
 margin_right = 168.0
-margin_bottom = 40.0
+margin_bottom = 47.0
 grow_horizontal = 0
 grow_vertical = 0
 rect_min_size = Vector2( 80, 40 )
 mouse_default_cursor_shape = 2
+custom_colors/font_color_focus = Color( 0.960784, 0.980392, 0.980392, 1 )
+custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+custom_colors/font_color_hover = Color( 0.960784, 0.980392, 0.980392, 1 )
+custom_colors/font_color_pressed = Color( 0.14902, 0.776471, 0.968627, 1 )
 custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/normal = ExtResource( 7 )
 text = "run()"
 __meta__ = {
 "_edit_use_anchors_": false
