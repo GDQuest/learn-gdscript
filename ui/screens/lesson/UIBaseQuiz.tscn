@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/fonts/font_text_bold_italics.tres" type="DynamicFont" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://ui/theme/button_outline_normal.tres" type="StyleBox" id=7]
 [ext_resource path="res://ui/theme/button_outline_hover.tres" type="StyleBox" id=8]
 [ext_resource path="res://ui/theme/button_outline_pressed.tres" type="StyleBox" id=9]
+[ext_resource path="res://ui/theme/button_outline_focus.tres" type="StyleBox" id=10]
 
 [node name="UIBaseQuiz" type="PanelContainer"]
 margin_right = 400.0
@@ -100,6 +101,7 @@ hint_tooltip = "You need to try to answer once before you can skip a quiz."
 mouse_default_cursor_shape = 2
 custom_styles/hover = ExtResource( 8 )
 custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 10 )
 custom_styles/normal = ExtResource( 7 )
 disabled = true
 text = "Skip"
@@ -112,6 +114,7 @@ rect_min_size = Vector2( 120, 0 )
 mouse_default_cursor_shape = 2
 custom_styles/hover = ExtResource( 8 )
 custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 10 )
 custom_styles/normal = ExtResource( 7 )
 text = "Submit"
 

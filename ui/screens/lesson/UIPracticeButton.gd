@@ -59,9 +59,6 @@ func set_is_highlighted(value: bool) -> void:
 		yield(self, "ready")
 	
 	_next_pill_label.visible = is_highlighted
-	_navigate_button.add_stylebox_override("normal", preload("res://ui/theme/button_outline_large_normal.tres"))
-	_navigate_button.add_stylebox_override("hover", preload("res://ui/theme/button_outline_large_hover.tres"))
-	_navigate_button.add_stylebox_override("pressed", preload("res://ui/theme/button_outline_large_pressed.tres"))
 
 
 func set_navigation_disabled(value: bool) -> void:

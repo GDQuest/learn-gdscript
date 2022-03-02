@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/RunnableCodeExample.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://ui/theme/button_outline_hover.tres" type="StyleBox" id=7]
 [ext_resource path="res://ui/theme/button_outline_pressed.tres" type="StyleBox" id=8]
 [ext_resource path="res://ui/theme/button_outline_normal_muted.tres" type="StyleBox" id=9]
+[ext_resource path="res://ui/theme/button_outline_focus.tres" type="StyleBox" id=10]
 
 [node name="RunnableCodeExample" type="HBoxContainer"]
 margin_right = 1030.0
@@ -72,6 +73,7 @@ custom_colors/font_color = Color( 0.290196, 0.294118, 0.388235, 1 )
 custom_fonts/font = ExtResource( 4 )
 custom_styles/hover = ExtResource( 7 )
 custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 10 )
 custom_styles/normal = ExtResource( 9 )
 text = "Reset"
 __meta__ = {
@@ -89,6 +91,7 @@ mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 4 )
 custom_styles/hover = ExtResource( 7 )
 custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 10 )
 custom_styles/normal = ExtResource( 6 )
 text = "run()"
 __meta__ = {

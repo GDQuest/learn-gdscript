@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/fonts/font_button_small.tres" type="DynamicFont" id=2]
@@ -6,11 +6,12 @@
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=4]
 [ext_resource path="res://ui/screens/lesson/UIPracticeButton.gd" type="Script" id=5]
 [ext_resource path="res://ui/icons/checkmark_valid.svg" type="Texture" id=6]
-[ext_resource path="res://ui/theme/button_outline_hover.tres" type="StyleBox" id=7]
-[ext_resource path="res://ui/theme/button_outline_pressed.tres" type="StyleBox" id=8]
-[ext_resource path="res://ui/theme/button_outline_normal.tres" type="StyleBox" id=9]
+[ext_resource path="res://ui/theme/focus.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=8]
+[ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=9]
 [ext_resource path="res://ui/theme/fonts/font_button.tres" type="DynamicFont" id=10]
 [ext_resource path="res://ui/theme/pill.tres" type="StyleBox" id=11]
+[ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=12]
 
 [node name="UIPracticeButton" type="PanelContainer"]
 anchor_right = 1.0
@@ -92,9 +93,10 @@ rect_min_size = Vector2( 180, 60 )
 hint_tooltip = "Open this practice."
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
-custom_styles/hover = ExtResource( 7 )
-custom_styles/pressed = ExtResource( 8 )
-custom_styles/normal = ExtResource( 9 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/normal = ExtResource( 12 )
 text = "Practice"
 
 [node name="NoNavigationLabel" type="Label" parent="Margin/Row"]
