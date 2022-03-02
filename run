@@ -190,6 +190,7 @@ export_custom(){
   output=$2
   dir=$(dirname "$output")
   mkdir -p "$dir"
+  prepare_versionfile
   if [ -z "$debug" ]; then
     echo "godot --quiet --no-window --export \"$export_name\" \"$output\""
     test "$dry" || godot --quiet --no-window --export "$export_name" "$output"
@@ -460,7 +461,7 @@ prepare_htmltemplate(){
     echo "cannot run in dry mode"
     exit 0
   fi
-  sed "s@>branch and commit hash@>${watermark}<@" html_export/index_template.html > html_export/index.html
+  sed "s@>branch and commit hash<@>${watermark}<@" html_export/index_template.html > html_export/index.html
   sed -i "s@GDQUEST_ENVIRONMENT = {}@GDQUEST_ENVIRONMENT = {\n \
      build_date: \"$build_date\",\n \
      build_date_iso: \"$build_date_iso\",\n \
@@ -522,6 +523,9 @@ _prepare_build_vars(){
     version=$(git describe --tags --abbrev=0 --match "*.*.*")
   fi
   watermark="$build_date_iso | $git_branch:$version:$git_commit"
+  if [ "$should_use_branch" = false ]; then
+    watermark="version: $version"
+  fi
   if [ -z "$url" ]; then
     url=${1:-"https://gdquest.github.io/learn-gdscript"}
     if [ "$should_use_branch" = true ]; then
