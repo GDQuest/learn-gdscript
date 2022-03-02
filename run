@@ -190,6 +190,7 @@ export_custom(){
   output=$2
   dir=$(dirname "$output")
   mkdir -p "$dir"
+  prepare_versionfile
   if [ -z "$debug" ]; then
     echo "godot --quiet --no-window --export \"$export_name\" \"$output\""
     test "$dry" || godot --quiet --no-window --export "$export_name" "$output"
