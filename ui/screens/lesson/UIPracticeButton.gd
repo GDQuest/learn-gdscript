@@ -9,7 +9,7 @@ var _practice: Practice
 
 onready var _title_label := $Margin/Row/Column/Row/Title as Label
 onready var _next_pill_label := $Margin/Row/Column/Row/NextPill as Label
-onready var _description_label := $Margin/Row/Column/Description as Label
+onready var _description_label := $Margin/Row/Column/Description as RichTextLabel
 onready var _completed_before_icon := $Margin/Row/Column/Row/CompletedBeforeIcon as TextureRect
 onready var _navigate_button := $Margin/Row/NavigateButton as Button
 onready var _no_navigation_label := $Margin/Row/NoNavigationLabel as Label
@@ -31,7 +31,7 @@ func setup(practice: Practice) -> void:
 		yield(self, "ready")
 
 	_title_label.text = tr(_practice.title).capitalize()
-	_description_label.text = tr(_practice.description)
+	_description_label.bbcode_text = tr(_practice.description)
 	_description_label.visible = not _practice.description.empty()
 	_navigate_button.connect("pressed", Events, "emit_signal", ["practice_requested", _practice])
 
@@ -41,7 +41,7 @@ func _update_labels() -> void:
 		return
 	
 	_title_label.text = tr(_practice.title).capitalize()
-	_description_label.text = tr(_practice.description)
+	_description_label.bbcode_text = tr(_practice.description)
 
 
 func set_completed_before(value: bool) -> void:
