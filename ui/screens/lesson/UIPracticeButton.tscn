@@ -22,7 +22,7 @@ script = ExtResource( 5 )
 
 [node name="Margin" type="MarginContainer" parent="."]
 margin_right = 1920.0
-margin_bottom = 110.0
+margin_bottom = 111.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -32,11 +32,11 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
-margin_bottom = 90.0
+margin_bottom = 91.0
 
 [node name="Column" type="VBoxContainer" parent="Margin/Row"]
 margin_right = 1684.0
-margin_bottom = 70.0
+margin_bottom = 71.0
 size_flags_horizontal = 3
 alignment = 1
 
@@ -76,13 +76,13 @@ custom_fonts/font = ExtResource( 2 )
 custom_styles/normal = ExtResource( 11 )
 text = "next"
 
-[node name="Description" type="Label" parent="Margin/Row/Column"]
+[node name="Description" type="RichTextLabel" parent="Margin/Row/Column"]
 margin_top = 42.0
 margin_right = 1684.0
-margin_bottom = 70.0
+margin_bottom = 71.0
 size_flags_horizontal = 3
-text = "Description"
-autowrap = true
+bbcode_enabled = true
+fit_content_height = true
 
 [node name="NavigateButton" type="Button" parent="Margin/Row"]
 margin_left = 1700.0

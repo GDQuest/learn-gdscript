@@ -158,6 +158,11 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	_scene_instance.show_behind_parent = true
 	_frame_container.add_child(_scene_instance)
 	_center_scene_instance()
+	if _scene_instance.has_method('get_code'):
+		# TODO: why is this not setting the code value?
+		gdscript_code = _scene_instance.get_code(gdscript_code)
+		set_code(gdscript_code)
+
 
 	_reset_button.visible = _scene_instance.has_method("reset")
 	if _scene_instance.has_method("run"):

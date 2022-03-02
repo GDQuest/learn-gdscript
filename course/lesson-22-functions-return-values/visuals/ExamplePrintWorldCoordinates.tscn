@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/components/OutputConsole.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends OutputConsole
+
+var cell_size = Vector2(120, 120)
+
+
+func run():
+	clear_messages()
+	var player_cell = Vector2(1, 1)
+	var world_position = convert_to_world_coordinates(player_cell)
+	print_output([\"Vector2%s\" % world_position])
+
+func convert_to_world_coordinates(cell):
+	return cell * cell_size + cell_size / 2
+"
+
+[node name="Example" type="PanelContainer"]
+margin_right = 771.0
+margin_bottom = 414.0
+size_flags_horizontal = 3
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 764.0
+margin_bottom = 407.0
+rect_min_size = Vector2( 600, 400 )
+gdscript_code = "var cell_size = Vector2(120, 120)
+
+func run():
+	var world_position = convert_to_world_coordinates(Vector2(1, 1))
+	print(world_position)"
+
+[node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 648.0
+margin_right = 757.0
+margin_bottom = 400.0
+size_flags_stretch_ratio = 0.5
+script = SubResource( 1 )

@@ -1,0 +1,232 @@
+[gd_resource type="Resource" load_steps=23 format=2]
+
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
+[ext_resource path="res://resources/Lesson.gd" type="Script" id=2]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=3]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=4]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-RHJMQ2XN.tres"
+title = ""
+type = 0
+text = "Until now, you learned that functions are sequences of instructions you give a name and you can call any time.
+
+On top of that, functions can make calculations and [i]return[/i] new values.
+
+Let's look at some examples to see why it's useful."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-wQMqAYVj.tres"
+title = "Built-in functions that return a value"
+type = 0
+text = "Many functions built into with GDScript make calculations and return a new value.
+
+For example, the [code]round()[/code] function takes a decimal number as an argument and gives you back a new number rounded to the nearest digit."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-otxF5HUx.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExamplePrintRound.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-ZPxY8VUD.tres"
+title = ""
+type = 0
+text = "Imagine you have a game where you track the player's health as a percentage, a decimal number going from [code]0.0[/code] to [code]100.0[/code]. 
+
+When displaying the health on the interface, you don't want to show the decimal part. In that case, you may use the [code]round()[/code] function, like so."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-pPwQDwfy.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleRoundingHealth.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-qdYOexRj.tres"
+title = ""
+type = 0
+text = "Notice how we assign the result of the function call to a variable. Because the [code]round()[/code] function returns a [i]new[/i] value, we need to store the result.
+
+So we assign the result to a variable."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-TRhZN4rS.tres"
+title = "A cooler example: lerp()"
+type = 0
+text = "The [code]lerp()[/code] function, short for [i]linear interpolate[/i], calculates and returns a weighted average between two values.
+
+It takes three arguments: the two values to average and a value between [code]0.0[/code] and [code]1.0[/code] to skew the result.
+
+It's popular in games to animate things moving towards a target with a single line of code."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-hcPK34PG.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeLerpTurtlePosition.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-5AJTESv5.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleTurtleLerp.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-TtcyhcIb.tres"
+title = ""
+type = 0
+text = "Every frame, the code calculates a position somewhere between the turtle and the mouse cursor. The [code]lerp()[/code] function takes care of everything.
+
+It's not the most robust approach for smooth movement, as you'll learn in the future, but it's a helpful function nonetheless."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-tT6n1Txl.tres"
+title = "Writing a function that returns a value"
+type = 0
+text = "You can make [i]your[/i] functions return values. 
+
+To make a function return a value, you use the [code]return[/code] keyword followed by the value in question.
+
+In previous lessons, we had characters walking on grids.
+
+And for those practices, you were working directly with cell coordinates.
+
+Well, cell coordinates don't correspond to positions on the screen, so we need to convert cell positions to screen positions."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-5BnVHARb.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleGridPosition.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-BWNbDGt6.tres"
+title = ""
+type = 0
+text = "To do so, we use a function. It multiplies the cell coordinate by the cell size, adds half the cell size to the product, and returns the result."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-fUqbTxYe.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeCellToWorld.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-j47MqE82.tres"
+title = ""
+type = 0
+text = "The [code]return[/code] keyword returns the value to the code calling the function. You'll receive the result where you call the function."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-V6jGvGm2.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExamplePrintWorldCoordinates.tscn"
+reverse_blocks = false
+has_separator = true
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-2rtQEn91.tres"
+title = ""
+type = 0
+text = "Some functions return values, and some do not. You can learn which functions return a result using the documentation panel in the practice screen.
+
+There, functions that start with the term [code]void[/code] do not return a value. Any other term means the function does return a value. You'll learn more about what other terms mean in a couple of lessons when we explore value [i]types[/i].
+
+For now, let's practice returning values from functions!"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-22-functions-return-values/practice-llf8B67U.tres"
+title = "Converting coordinates from the grid to the screen"
+goal = "Define a function that converts a position on a grid to the screen.
+
+The function takes a [code]Vector2[/code] cell coordinates as an argument. It should return the corresponding [code]Vector2[/code] screen coordinates at the center of the cell.
+
+Every cell is a square of size [code]cell_size[/code]. You can multiply the [code]cell[/code] by this value to calculate the top-left of a cell in screen coordinates.
+
+To get the center of a cell, you need to add half the [code]cell_size[/code] to the product."
+starting_code = "var cell_size = Vector2(80, 80)
+
+func convert_to_world_coordinates(cell):
+	"
+hints = PoolStringArray(  )
+validator_script_path = "convert-grid-coordinates/TestConvertGridCoordinates.gd"
+script_slice_path = "convert-grid-coordinates/ConvertGridCoordinates.live-editor/slices/ConvertGridCoordinates.run.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 1 )
+description = "We lost the function to convert grid coordinates, but we desperately need it for our game! Make the turtle move again by coding it."
+
+[resource]
+script = ExtResource( 2 )
+title = "Functions that return a value"
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 19 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ]
+practices = [ SubResource( 17 ) ]

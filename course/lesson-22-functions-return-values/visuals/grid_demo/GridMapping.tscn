@@ -1,0 +1,92 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://course/lesson-22-functions-return-values/visuals/grid_demo/GridCell.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/lesson-22-functions-return-values/visuals/grid_demo/GridMapping.gd" type="Script" id=2]
+[ext_resource path="res://ui/theme/fonts/font_title_slim.tres" type="DynamicFont" id=3]
+
+[node name="MarginContainer" type="MarginContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 632.0
+margin_bottom = 315.0
+size_flags_horizontal = 3
+custom_constants/separation = 24
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+margin_right = 616.0
+margin_bottom = 244.0
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/CenterContainer"]
+margin_right = 616.0
+margin_bottom = 244.0
+columns = 5
+
+[node name="GridCell" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 1 )]
+margin_right = 120.0
+margin_bottom = 120.0
+
+[node name="GridCell2" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 124.0
+margin_right = 244.0
+margin_bottom = 120.0
+
+[node name="GridCell3" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 248.0
+margin_right = 368.0
+margin_bottom = 120.0
+
+[node name="GridCell4" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 372.0
+margin_right = 492.0
+margin_bottom = 120.0
+
+[node name="GridCell5" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 496.0
+margin_right = 616.0
+margin_bottom = 120.0
+
+[node name="GridCell6" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 1 )]
+margin_top = 124.0
+margin_right = 120.0
+margin_bottom = 244.0
+
+[node name="GridCell7" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 124.0
+margin_top = 124.0
+margin_right = 244.0
+margin_bottom = 244.0
+
+[node name="GridCell8" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 248.0
+margin_top = 124.0
+margin_right = 368.0
+margin_bottom = 244.0
+
+[node name="GridCell9" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 372.0
+margin_top = 124.0
+margin_right = 492.0
+margin_bottom = 244.0
+
+[node name="GridCell10" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 496.0
+margin_top = 124.0
+margin_right = 616.0
+margin_bottom = 244.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 268.0
+margin_right = 616.0
+margin_bottom = 299.0
+custom_fonts/font = ExtResource( 3 )
+text = "Hover over a cell"
+align = 1

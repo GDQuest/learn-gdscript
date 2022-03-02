@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/lesson-21-strings/string_error/StringError.gd" type="Script" id=2]
+[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=3]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[node name="StringError" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="AnimationTree" parent="." index="3"]
+parameters/playback = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
+current = true
+
+[node name="Label" type="Label" parent="." index="5"]
+margin_left = -250.0
+margin_top = -127.0
+margin_right = 250.0
+margin_bottom = -99.0
+rect_clip_content = true
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 3 )
+text = "INVALID NAME"
+align = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
