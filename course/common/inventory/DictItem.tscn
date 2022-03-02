@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://course/lesson-19-creating-arrays/visuals/rocks_gems.png" type="Texture" id=2]
 [ext_resource path="res://course/common/inventory/DictItem.gd" type="Script" id=3]
 
@@ -17,8 +17,8 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [node name="DictItem" type="Button"]
-margin_right = 356.0
-margin_bottom = 80.0
+margin_right = 254.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 120, 100 )
 size_flags_horizontal = 3
 custom_styles/hover = SubResource( 1 )
@@ -31,42 +31,42 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 20
 custom_constants/margin_top = 10
-custom_constants/margin_left = 20
+custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
 [node name="Item" type="HBoxContainer" parent="Margin"]
-margin_left = 20.0
+margin_left = 10.0
 margin_top = 10.0
-margin_right = 336.0
+margin_right = 234.0
 margin_bottom = 90.0
 size_flags_horizontal = 3
 
 [node name="Icon" type="TextureRect" parent="Margin/Item"]
-margin_right = 80.0
+margin_right = 60.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 80, 80 )
+rect_min_size = Vector2( 60, 60 )
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
 [node name="Name" type="Label" parent="Margin/Item"]
-margin_left = 84.0
-margin_top = 24.0
-margin_right = 220.0
-margin_bottom = 55.0
+margin_left = 64.0
+margin_top = 27.0
+margin_right = 179.0
+margin_bottom = 53.0
 custom_fonts/font = ExtResource( 1 )
 text = "item name"
 
 [node name="Spacer" type="Control" parent="Margin/Item"]
-margin_left = 224.0
-margin_right = 296.0
+margin_left = 183.0
+margin_right = 206.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 
 [node name="Amount" type="Label" parent="Margin/Item"]
-margin_left = 300.0
-margin_top = 24.0
-margin_right = 316.0
-margin_bottom = 55.0
+margin_left = 210.0
+margin_top = 27.0
+margin_right = 224.0
+margin_bottom = 53.0
 custom_fonts/font = ExtResource( 1 )
 text = "0"
