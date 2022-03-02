@@ -41,7 +41,7 @@ clean_web(){
 }
 
 
-clean(){
+clean_all(){
   if [ "$1" == "help" ]; then
     echo "Removes all build directories"
     exit 0
@@ -57,6 +57,17 @@ clean(){
 }
 
 
+clean(){
+  if [ "$1" == "help" ]; then
+    echo "Removes one or all build directories"
+    exit 0
+  fi
+  
+  echo "choose what to clean"
+  exit 1
+}
+
+
 ######################################## WEB DEV HELPERS
 
 
@@ -65,12 +76,17 @@ web_server(){
     echo "Runs a python webserver in build/web"
     exit 0
   fi
-  if ! command -v python &> /dev/null; then
-      echo "Python 3 isn't available. It is required to run the server"
+  if ! command -v python3 &> /dev/null; then
+      echo ""
+      echo "ERROR: Python 3 isn't available. It is required to run the server"
+      echo " - in Debian/Ubuntu: sudo apt-get -y install inotify-tools"
+      echo " - in Arch/Manjaro: sudo pacman --needed --noconfirm -S python"
+      echo " - in Fedora: sudo dnf install python3"
+      echo ""
       exit 1
   fi
-  echo "python -m http.server 8000 --directory \"${dirs[web]}\""
-  test "$dry" || python -m http.server 8000 --directory "${dirs[web]}"
+  echo "python3 -m http.server 8000 --directory \"${dirs[web]}\""
+  test "$dry" || python3 -m http.server 8000 --directory "${dirs[web]}"
 }
 
 
@@ -80,39 +96,61 @@ web_watch(){
     echo "Overwrites JS and CSS files in the static directory when they change"
     exit 0
   fi
+  if ! command -v inotifywait &> /dev/null; then
+      echo ""
+      echo "ERROR: inotifywait isn't available. It is required to run the server"
+      echo "this command is usually part of the package inotify-tools"
+      echo " - in Debian/Ubuntu: sudo apt-get -y install inotify-tools"
+      echo " - in Arch/Manjaro: sudo pacman --needed --noconfirm -S inotify-tools"
+      echo " - in Fedora: sudo dnf install inotify-tools"
+      echo ""
+      exit 1
+  fi
   last_time_compiled=0
   throttle_compile=10
   last_time_copied=0
   throttle_copy=1
   source_dir=${1:-.}
   full_path=$(readlink -f $source_dir)
+  _update_file(){
+    if [ "$base_dir" = "html_export" ]; then
+      if (($now - $last_time_copied >= $throttle_copy)); then
+        if [[ "$filename" == "index_template.html" ]]; then
+          prepare_htmltemplate
+          changed_file="./html_export/index.html"
+          filename="index.html"
+        fi
+        echo "cp \"$changed_file\" \"${dirs[web]}/$filename\""
+        cp "$changed_file" "${dirs[web]}/$filename"
+      fi
+      last_time_copied=$(date +%s)
+    else
+      echo "Changes detected in $changed_file, will recompile"
+      if (($now - $last_time_compiled >= $throttle_compile)); then
+        export_custom "${presets[web]}" "${dirs[web]}/index.html"
+      fi 
+      last_time_compiled=$(date +%s)
+    fi
+  }
   echo "will watch $full_path"
-  inotifywait --monitor --recursive --quiet --event modify,move,create,delete --format '%w%f' --includei "\.(js|css|html|gd)" "$source_dir" | while read changed_file
+  inotifywait --monitor --recursive --quiet --event modify,move,create,delete --format '%w%f' "$source_dir" | while read changed_file
   do
     changed_dir=$(dirname "$changed_file")
     base_dir=$(echo "$changed_dir" | cut -d "/" -f2)
-    if [ "$base_dir" != "build" ]; then
-      now=$(date +%s)
-      filename=$(basename "$changed_file")
-      ext=${changed_file##*.}
-      if [ "$base_dir" = "html_export" ]; then
-        if (($now - $last_time_copied >= $throttle_copy)); then
-          if [[ "$filename" == "index_template.html" ]]; then
-            prepare_htmltemplate
-            changed_file="./html_export/index.html"
-            filename="index.html"
-          fi
-          echo "will copy $changed_file"
-          cp "$changed_file" "${dirs[web]}/$filename"
-        fi
-        last_time_copied=$(date +%s)
-      else
-        echo "Changes detected in $changed_file, will recompile"
-        if (($now - $last_time_compiled >= $throttle_compile)); then
-          export_custom "${presets[web]}" "${dirs[web]/index.html}"
-        fi 
-        last_time_compiled=$(date +%s)
-      fi
+    ext=${changed_file##*.}
+    now=$(date +%s)
+    filename=$(basename "$changed_file")
+    ext=$(echo "$ext" |  tr '[:upper:]' '[:lower:]')
+    exclude=0
+    include=0
+    if [[ -d "$$changed_file" ]] || [[ "$filename" =~ ^\. ]] || [[ "$base_dir" == "build" ]]; then
+      exclude=1
+    fi
+    if [[ "$exclude" -eq 0 ]] && [[ $ext =~ gd|tscn|tres|js|css|html ]]; then
+      include=1
+    fi
+    if [[ "$exclude" -eq 0 ]] && [[ "$include" -eq 1 ]]; then
+      _update_file
     fi
   done
 }
