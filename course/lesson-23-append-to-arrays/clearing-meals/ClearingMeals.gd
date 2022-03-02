@@ -43,9 +43,11 @@ func add_order():
 func _on_meal_ready(completed_meal: Meal):
 	print("completing order `%s`"%[completed_meal.text])
 	complete_current_order()
-	var order_name := "%s"%[completed_orders.back()]
-	var meal := Meal.new(order_name)
-	_completed_orders_box.add_child(meal)
+	var order = completed_orders.back()
+	if order != null:
+		var order_name := "%s"%[order]
+		var meal := Meal.new(order_name)
+		_completed_orders_box.add_child(meal)
 	if waiting_orders.empty():
 		_complete_run()
 

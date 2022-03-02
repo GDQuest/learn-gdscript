@@ -28,6 +28,8 @@ func _ready() -> void:
 		if not crate.is_connected(\"restored\", self, \"_restore_next\"):
 			crate.connect(\"restored\", self, \"_restore_next\")
 	crates = _initial_crates.duplicate()
+	if get_tree().current_scene == self:
+		_run()
 
 
 func _run() -> void:
@@ -45,6 +47,7 @@ func _pop_next():
 	elif index < _initial_crates.size():
 		var crate = _initial_crates[index]
 		var crate_name = crate.get_texture_name()
+		#var display_index = _initial_crates.size() - index - 1
 		print(\"popping crate n˚%s '%s'\"%[index, crate_name])
 		crate.use()
 		index += 1

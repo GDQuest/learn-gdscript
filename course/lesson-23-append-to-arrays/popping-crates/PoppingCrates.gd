@@ -19,6 +19,8 @@ func _ready() -> void:
 		if not crate.is_connected("restored", self, "_restore_next"):
 			crate.connect("restored", self, "_restore_next")
 	crates = _initial_crates.duplicate()
+	if get_tree().current_scene == self:
+		_run()
 
 
 func _run() -> void:
