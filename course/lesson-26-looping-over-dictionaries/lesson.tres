@@ -200,10 +200,17 @@ goal = "We use a dictionary to represent the player's inventory in this game. Th
 You need to loop over the dictionary and display the name and amount of every item in the inventory.
 
 To do so, call the [code]display_item()[/code] function. It takes two arguments: the item name and the amount."
-starting_code = ""
+starting_code = "var inventory := {
+	\"healing heart\": 3,
+	\"fire gem\": 5,
+	\"ice gem\": 1,
+}
+
+func run():
+	"
 hints = PoolStringArray(  )
-validator_script_path = ""
-script_slice_path = ""
+validator_script_path = "display-inventory/TestDisplayInventory.gd"
+script_slice_path = "display-inventory/DisplayInventory.live-editor/slices/DisplayInventory.run.slice.tres"
 documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 1 )
 description = "We need to display the player's inventory on the screen but lack the code to do so. Use a loop to display every item."
