@@ -208,10 +208,10 @@ starting_code = "var inventory := {
 
 func run():
 	"
-hints = PoolStringArray(  )
+hints = PoolStringArray( "The [code]display_item()[/code] function needs the item type and its amount, so you need to get the amount using the item name as a key in the [code]inventory[/code] variable.", "You can get the amount of each item using the syntax [code]inventory[item_name][/code]." )
 validator_script_path = "display-inventory/TestDisplayInventory.gd"
 script_slice_path = "display-inventory/DisplayInventory.live-editor/slices/DisplayInventory.run.slice.tres"
-documentation_references = PoolStringArray(  )
+documentation_references = PoolStringArray( "display_item" )
 documentation_resource = ExtResource( 1 )
 description = "We need to display the player's inventory on the screen but lack the code to do so. Use a loop to display every item."
 
@@ -219,12 +219,21 @@ description = "We need to display the player's inventory on the screen but lack 
 script = ExtResource( 2 )
 practice_id = "res://course/lesson-26-looping-over-dictionaries/practice-bDGt6fUq.tres"
 title = "Placing units on the board"
-goal = ""
-starting_code = ""
-hints = PoolStringArray(  )
-validator_script_path = ""
-script_slice_path = ""
-documentation_references = PoolStringArray(  )
+goal = "We have a dictionary named [code]units[/code] that maps a cell position on the grid to a unit to put there.
+
+Using a for loop and the [code]place_unit()[/code] function, place every unit in the units dictionary at the desired position on the game board."
+starting_code = "var units = {
+	Vector2(1, 0): \"robot\",
+	Vector2(2, 2): \"turtle\",
+	Vector2(3, 0): \"robot\",
+}
+
+func run():
+	"
+hints = PoolStringArray( "The dictionary keys are cell coordinates you can use to access the unit type from the [code]units[/code] dictionary.", "To access a unit’s type from a cell, use the syntax [code]units[cell_coordinates][/code]." )
+validator_script_path = "place-units/TestPlaceUnits.gd"
+script_slice_path = "place-units/PlaceUnits.live-editor/slices/PlaceUnits.run.slice.tres"
+documentation_references = PoolStringArray( "place_unit" )
 documentation_resource = ExtResource( 1 )
 description = "We want to populate our game board with units at the start of every battle. Loop over the dictionary to place units on the board."
 
