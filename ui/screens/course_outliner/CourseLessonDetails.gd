@@ -25,6 +25,7 @@ func _ready() -> void:
 	_update_visuals()
 	
 	_goto_lesson_button.connect("pressed", self, "_on_goto_lesson_pressed")
+	_goto_lesson_button.grab_focus()
 
 
 func set_lesson(value: Lesson) -> void:
