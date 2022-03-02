@@ -1,0 +1,44 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/ScriptProperties.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-22-strings/string_array/StringArray.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 1 )
+nodes_paths = [ NodePath("") ]
+script_file = ExtResource( 2 )
+original_script = "extends Node2D
+
+onready var _animation_tree := find_node(\"AnimationTree\")
+
+
+func _ready() -> void:
+	_animation_tree.travel(\"idle\")
+
+
+func _run() -> void:
+	run()
+	play_combo()
+	Events.emit_signal(\"practice_run_completed\")
+
+
+func play_combo() -> void:
+	for action in combo:
+		if _animation_tree.has_animation(str(action)):
+			_animation_tree.travel(action)
+			yield(_animation_tree, \"animation_finished\")
+
+
+var combo = []
+
+# EXPORT combo
+func run():
+	combo = [\"jab\", \"jab\", \"uppercut\"]
+	for animation_name in combo:
+		play_animation(animation_name)
+# /EXPORT combo
+
+# A blank function because yields don't work with slices.
+func play_animation(action: String) -> void:
+	pass
+"

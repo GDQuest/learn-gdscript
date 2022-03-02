@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/fonts/font_button_small.tres" type="DynamicFont" id=2]
@@ -6,38 +6,24 @@
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=4]
 [ext_resource path="res://ui/screens/lesson/UIPracticeButton.gd" type="Script" id=5]
 [ext_resource path="res://ui/icons/checkmark_valid.svg" type="Texture" id=6]
-[ext_resource path="res://ui/theme/button_outlined_hover.tres" type="StyleBox" id=7]
-[ext_resource path="res://ui/theme/button_outlined_pressed.tres" type="StyleBox" id=8]
-[ext_resource path="res://ui/theme/button_outlined_normal.tres" type="StyleBox" id=9]
+[ext_resource path="res://ui/theme/focus.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=8]
+[ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=9]
 [ext_resource path="res://ui/theme/fonts/font_button.tres" type="DynamicFont" id=10]
-
-[sub_resource type="StyleBoxFlat" id=1]
-content_margin_left = 12.0
-content_margin_right = 12.0
-content_margin_top = 0.0
-content_margin_bottom = 0.0
-bg_color = Color( 0.290196, 0.294118, 0.388235, 1 )
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-expand_margin_top = 2.0
-expand_margin_bottom = 2.0
+[ext_resource path="res://ui/theme/pill.tres" type="StyleBox" id=11]
+[ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=12]
 
 [node name="UIPracticeButton" type="PanelContainer"]
 anchor_right = 1.0
 margin_bottom = 110.0
+theme = ExtResource( 4 )
 custom_styles/panel = ExtResource( 3 )
 script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Margin" type="MarginContainer" parent="."]
 margin_right = 1920.0
 margin_bottom = 111.0
 size_flags_horizontal = 3
-theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -87,7 +73,7 @@ margin_top = 1.0
 margin_right = 243.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 2 )
-custom_styles/normal = SubResource( 1 )
+custom_styles/normal = ExtResource( 11 )
 text = "next"
 
 [node name="Description" type="RichTextLabel" parent="Margin/Row/Column"]
@@ -107,9 +93,10 @@ rect_min_size = Vector2( 180, 60 )
 hint_tooltip = "Open this practice."
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
-custom_styles/hover = ExtResource( 7 )
-custom_styles/pressed = ExtResource( 8 )
-custom_styles/normal = ExtResource( 9 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/normal = ExtResource( 12 )
 text = "Practice"
 
 [node name="NoNavigationLabel" type="Label" parent="Margin/Row"]

@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://ui/components/popups/SettingsPopup.gd" type="Script" id=1]
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=4]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=5]
-[ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/theme/button_outline_large_accent.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=7]
-[ext_resource path="res://ui/theme/button_outline_large_focus.tres" type="StyleBox" id=8]
+[ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=8]
+[ext_resource path="res://ui/theme/focus_accent.tres" type="StyleBox" id=9]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -16,11 +17,9 @@
 [node name="SettingsPopup" type="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 7 )
 color = Color( 0.0352941, 0.0392157, 0.129412, 0.627451 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchor_left = 0.5
@@ -32,10 +31,6 @@ margin_top = -240.0
 margin_right = 360.0
 margin_bottom = 240.0
 rect_min_size = Vector2( 720, 540 )
-theme = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="PanelContainer"]
 margin_right = 720.0
@@ -215,12 +210,8 @@ margin_bottom = 68.0
 rect_min_size = Vector2( 200, 68 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
-custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
-custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
-custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
-custom_styles/hover = ExtResource( 6 )
+custom_styles/hover = ExtResource( 8 )
 custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 8 )
 custom_styles/normal = ExtResource( 4 )
 text = "Close"
 
@@ -231,11 +222,10 @@ margin_bottom = 68.0
 rect_min_size = Vector2( 200, 68 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
-custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
-custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
-custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
+custom_colors/font_color_hover = Color( 0.239216, 1, 0.431373, 1 )
+custom_colors/font_color_pressed = Color( 0.239216, 1, 0.431373, 1 )
 custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 9 )
 custom_styles/normal = ExtResource( 4 )
 text = "Apply"

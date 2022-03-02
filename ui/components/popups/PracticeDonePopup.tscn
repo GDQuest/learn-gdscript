@@ -9,19 +9,17 @@
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=7]
 [ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=8]
 [ext_resource path="res://ui/screens/practice/gdquestboy_logo.png" type="Texture" id=9]
+[ext_resource path="res://ui/theme/focus_accent.tres" type="StyleBox" id=10]
 [ext_resource path="res://ui/screens/practice/gdquestboy_frame.tres" type="StyleBox" id=11]
 [ext_resource path="res://ui/theme/fonts/font_well_done_bold.tres" type="DynamicFont" id=12]
-[ext_resource path="res://ui/theme/button_outline_large_accented.tres" type="StyleBox" id=13]
-[ext_resource path="res://ui/theme/button_outline_large_focus.tres" type="StyleBox" id=14]
+[ext_resource path="res://ui/theme/button_outline_large_accent.tres" type="StyleBox" id=13]
 
 [node name="PracticeDonePopup" type="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 1 )
 color = Color( 0.0352941, 0.0392157, 0.129412, 0.627451 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Layout" type="HBoxContainer" parent="."]
 anchor_left = 0.5
@@ -48,10 +46,6 @@ size_flags_vertical = 4
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 600, 405 )
-theme = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="Layout/WellDoneAnchors/PanelContainer"]
 margin_right = 600.0
@@ -144,12 +138,8 @@ focus_next = NodePath("../MoveOnButton")
 focus_previous = NodePath(".")
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
-custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
-custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
-custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 14 )
 custom_styles/normal = ExtResource( 8 )
 text = "Stay"
 
@@ -166,13 +156,12 @@ focus_next = NodePath(".")
 focus_previous = NodePath("../StayButton")
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
-custom_colors/font_color = Color( 0.239216, 1, 0.431373, 1 )
-custom_colors/font_color_hover = Color( 0.74902, 0.741176, 0.85098, 1 )
-custom_colors/font_color_pressed = Color( 0.290196, 0.294118, 0.388235, 1 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 14 )
-custom_styles/normal = ExtResource( 13 )
+custom_colors/font_color_hover = Color( 0.239216, 1, 0.431373, 1 )
+custom_colors/font_color_pressed = Color( 0.239216, 1, 0.431373, 1 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 10 )
+custom_styles/normal = ExtResource( 8 )
 text = "Continue"
 
 [node name="GameAnchors" type="Control" parent="Layout"]

@@ -11,6 +11,13 @@ func _ready() -> void:
 
 	Events.connect("practice_requested", self, "_on_practice_requested")
 	_cancel_button.connect("pressed", self, "hide")
+	connect("visibility_changed", self, "_on_visibility_changed")
+
+
+
+func _on_visibility_changed() -> void:
+	if visible:
+		_cancel_button.grab_focus()
 
 
 func clear_items() -> void:
