@@ -1,16 +1,68 @@
 term,optional_plural_form,explanation
-argument,arguments,
-array,arrays,
-assign,,
-dictionary,dictionaries,
-for loop,for loops,
-function,functions,"A function is a named group of code instructions."
-increment,increments,
-instruction,instructions,
 member function,member functions,
 member variable,member variables,
 parameter,parameters,
 radian,radians,
-variable,variables,"A variable."
+type,types,
+iteration,iterations,
 vector,vectors,
-while loop,while loops,
+argument,arguments,"An argument is a value that you pass to a function when calling the function. For example, in the call [code]rotate(0.5)[/code], the value [code]0.5[/code] in the parentheses is an argument.
+
+A function can receive no arguments, one argument, or multiple arguments. Arguments can be mandatory or optional.
+
+When a function takes multiple arguments, you separate the values with commas, like in this function call: jump(50, 100)
+
+When [i]calling[/i] a function, we name the values passed in parentheses [i]arguments[/i].
+
+When writing a function definition, however, we talk about function [i]parameters[/i]. In the following example, the names [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
+array,arrays,"An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value.
+
+To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]
+
+In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere.
+
+Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
+assign,,"Assigning a value to a variable means that you store a value inside the variable. You do this with the equal sign ([code]=[/code])."
+dictionary,dictionaries,"A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value.
+
+In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game.
+
+You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database.
+
+Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
+for loop,for loops,"A for loop instructs the computer to repeat a set of instructions once for each value in an array.
+
+In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body.
+
+For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met.
+
+We recommend favoring for loops when you can. They're safer and easier to use than while loops."
+function,functions,"A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains.
+
+You can modify a function's behavior with parameters. Parameters are variable names that you write in the function definition. You can then use them in the function's body to make your code adapt to different cases.
+
+Also, functions can optionally return a value to the code calling it."
+increment,increments,"An increment is the amount by which a value changes in your code."
+instruction,instructions,"In computer programming, instructions are a single operation the computer recognizes and can execute.
+
+For example, a function call, an addition, or assigning a value to a variable."
+variable,variables,"Variables are a tool to give a name to values you want to store in your code and change over time.
+
+For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up.
+
+You can create a variable named [code]health[/code] to represent the health.
+
+Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you.
+
+Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
+while loop,while loops,"A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running.
+
+When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong.
+
+That's why we recommend using the safer for loop whenever you can.
+
+However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
+body,,"We talk about a loop or a function's body to refer to the lines of code that are part of the loop or function."
+return,,"Returning a value is the process of sending a value to the place where you call a function.
+
+It happens when a function uses the [code]return[/code] keyword followed by a value, for example: [code]return -1[/code]."

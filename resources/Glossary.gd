@@ -18,7 +18,6 @@ func _init() -> void:
 	for key in _glossary:
 		patterns.append(key)
 	var terms_pattern := "(%s)" % patterns.join("|")
-	print(terms_pattern)
 	_glossary_regex.compile(terms_pattern)
 
 
@@ -47,13 +46,14 @@ static func _parse_glossary_file(path: String) -> Dictionary:
 		if not csv_line[0]:
 			break
 
+		var plural_form = csv_line[1]
 		var keyword = csv_line[0]
 		assert(not keyword in glossary, "Duplicate key %s in glossary." % keyword)
+		assert(not plural_form in glossary, "Duplicate key %s in glossary." % keyword)
 		var entry := Entry.new(csv_line)
-		glossary[keyword] = entry
-		var plural_form = csv_line[1]
 		if plural_form:
 			glossary[plural_form] = entry
+		glossary[keyword] = entry
 
 	file.close()
 	return glossary
