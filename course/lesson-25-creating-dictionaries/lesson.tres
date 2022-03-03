@@ -1,14 +1,187 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=18 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-25-creating-dictionaries/content-tKRHJMQ2.tres"
+title = ""
+type = 0
+text = "In the last lesson, we used an array to represent a player's inventory. This would work, but we'd have to have one array to store the item names, and one to store the amounts. Communicating between the two arrays would be awkward.
+
+Instead, we can bundle the item names and amounts into a single [i]dictionary[/i].
+
+A dictionary has a list of [i]keys[/i], and each key points to a [i]value[/i].
+
+To define a dictionary, we use curly brackets. Each key and its value are separated by a colon. Each key and value pair are separated by a comma."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
 content_id = "res://course/lesson-25-creating-dictionaries/content-jB7tKRHJ.tres"
 title = ""
 type = 0
-text = ""
+text = "[Visual syntax]
+
+var dictionary_name = {
+	key1 : key1_value,
+	key2 : key2_value,
+}
+
+"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-25-creating-dictionaries/content-XNwQMqAY.tres"
+title = ""
+type = 1
+text = "[About associative arrays]"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-25-creating-dictionaries/content-VjotxF5H.tres"
+title = "Dictionaries can hold numbers and strings"
+type = 0
+text = "Unlike arrays, dictionaries don't have to have [i]only[/i] strings or [i]only[/i] strings; we can have both.
+
+Because we can mix and match strings and numbers, this makes dictionaries excellent for keeping track of a player's inventory.
+
+We can use the name of the item as the key, and keep track of how many the player has."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-25-creating-dictionaries/content-UxZPxY8V.tres"
+title = ""
+type = 0
+text = "[code block inventory]
+var inventory = {
+	\"healing heart\" : 3,
+	\"fire gem\": 5,
+	\"ice gem\": 1,
+}"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-25-creating-dictionaries/content-UDpPwQDw.tres"
+title = ""
+type = 0
+text = "Here we matched the name (a string) to the amount (a number). But a key could be a string, a number - even a [code]Vector2[/code]! 
+
+Although we can have all of these different keys, keep in mind that they have to be [i]unique[/i]. That means we couldn't have a dictionary like the following."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-25-creating-dictionaries/content-fyqdYOex.tres"
+title = ""
+type = 0
+text = "[Error dictionary]
+
+var inventory = {
+	\"fire gem\": 5,
+	\"healing heart\" : 3,
+	\"ice gem\": 1,
+	\"healing heart\" : 8,
+}"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 3 )
+quiz_id = "res://course/lesson-25-creating-dictionaries/quiz-RjTRhZN4.tres"
+question = "In the above example, which key would cause an error?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = ""
+answer_options = [ "\"healing heart\"", "ice gem", "fire gem" ]
+valid_answers = [ "\"healing heart\"" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-25-creating-dictionaries/content-rS5AJTES.tres"
+title = "Accessing values"
+type = 0
+text = "We access the value of keys by writing the dictionary name, with the key in-between square brackets."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-25-creating-dictionaries/content-v5tT6n1T.tres"
+title = ""
+type = 0
+text = "[Code to access value]
+
+var value = dictionary[key]
+"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 3 )
+quiz_id = "res://course/lesson-25-creating-dictionaries/quiz-Ib5BnVHA.tres"
+question = "How would you access how many ice gems the player has?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = ""
+answer_options = [ "var item_count = inventory[\"ice gem\"]", "var item_count = inventory[\"ice gems\"]", "var item_count = inventory[\"fire gem\"]" ]
+valid_answers = [ "var item_count = inventory[\"ice gem\"]" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-25-creating-dictionaries/content-RbBWNbDG.tres"
+title = "Changing values"
+type = 0
+text = "We can also change values directly, which is useful in our case for adding or removing items from the player's inventory."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-25-creating-dictionaries/content-t6fUqbTx.tres"
+title = ""
+type = 0
+text = "[Inventory with adding function]
+
+func run():
+	inventory[\"healing heart\"] += 1
+"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-25-creating-dictionaries/content-Yej47MqE.tres"
+title = ""
+type = 0
+text = "In the following practices, we'll creat a player inventory and code important functions to change the value of items."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -16,5 +189,5 @@ has_separator = false
 [resource]
 script = ExtResource( 1 )
 title = "Creating Dictionaries"
-content_blocks = [ SubResource( 1 ) ]
+content_blocks = [ SubResource( 2 ), SubResource( 1 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ]
 practices = [  ]
