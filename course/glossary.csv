@@ -1,11 +1,31 @@
 term,optional_plural_form,explanation
-member function,member functions,
-member variable,member variables,
-parameter,parameters,
-radian,radians,
-type,types,
-iteration,iterations,
-vector,vectors,
+member function,member functions,"Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods.
+
+For example, arrays have member functions like [code]array.append()[/code].
+
+You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
+member variable,member variables,"Member variables are variables attached to a specific value type, like a vector's [code]x[/code] and [code]y[/code] sub-variables. We also call them [i]properties[/i] or [i]fields[/i] of the vector.
+
+To access a member variable, you must first write the value's name followed by the access operator ([code].[/code]). For example, [code]position.x[/code]."
+parameter,parameters,"A parameter is a variable you create as part of a function definition.
+
+It allows you to reuse the function more by having values that vary in the function's body."
+radian,radians,"A radian is a unit of measurement of angles based on the circle's circumference.
+
+We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common.
+
+An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
+type,types,"In computer programming, a type is the class of a value. For example, whole numbers like [code]3[/code], [code]11[/code], and [code]255462[/code] are all of type [code]int[/code] (short for integer).
+
+The computer uses types to determine which operations are valid between two values and when they're undefined."
+iteration,iterations,"In computer code, an iteration is one repetition of some process or code. We typically use the term with loops, where one iteration is one run of the loop's code.
+
+When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
+vector,vectors,"In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers.
+
+We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves.
+
+Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
 argument,arguments,"An argument is a value that you pass to a function when calling the function. For example, in the call [code]rotate(0.5)[/code], the value [code]0.5[/code] in the parentheses is an argument.
 
 A function can receive no arguments, one argument, or multiple arguments. Arguments can be mandatory or optional.
