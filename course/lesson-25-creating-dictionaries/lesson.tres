@@ -1,8 +1,10 @@
-[gd_resource type="Resource" load_steps=20 format=2]
+[gd_resource type="Resource" load_steps=23 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
 [ext_resource path="res://resources/QuizChoice.gd" type="Script" id=3]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=4]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=5]
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 2 )
@@ -186,8 +188,31 @@ visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=17]
+script = ExtResource( 4 )
+practice_id = "res://course/lesson-25-creating-dictionaries/practice-tZixQOPR.tres"
+title = "Creating an inventory using a dictionary"
+goal = "Let's give some items to the player.
+
+We use a dictionary to store the player's items. The [code]inventory[/code] dictionary is defined, but it contains no items.
+
+Give the player the following items by adding the correct keys and values to the dictionary.
+
+- 3 healing heart
+- 2 fire gem
+- 1 ice gem"
+starting_code = "var inventory := {
+	
+}"
+hints = PoolStringArray( "For our inventory, we use strings for the keys, and numbers for the item counts.", "Don\'t forget to add commas to separate each key and value pair", "To define a key and give it an item count, use [code]\"item name\" : number[/code]" )
+validator_script_path = "res://course/lesson-25-creating-dictionaries/creating-inventory/TestInventory.gd"
+script_slice_path = "creating-inventory/CreatingInventory.live-editor/slices/CreatingInventory.create.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 5 )
+description = "Collecting items is fun, but we need a good way to store them. Dictionaries help us manage the playrs items."
+
 [resource]
 script = ExtResource( 1 )
 title = "Creating Dictionaries"
 content_blocks = [ SubResource( 2 ), SubResource( 1 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 16 ), SubResource( 11 ), SubResource( 12 ), SubResource( 15 ), SubResource( 13 ), SubResource( 14 ) ]
-practices = [  ]
+practices = [ SubResource( 17 ) ]
