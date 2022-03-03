@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=23 format=2]
+[gd_resource type="Resource" load_steps=24 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
@@ -183,7 +183,7 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-25-creating-dictionaries/content-Yej47MqE.tres"
 title = ""
 type = 0
-text = "In the following practices, we'll use a dictionary to create a player inventory and code important functions to change the value of items."
+text = "In the following practices, we'll use a dictionary to create a player inventory and create a function to change the value of items."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -211,8 +211,21 @@ documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 5 )
 description = "Collecting items is fun, but we need a good way to store them. Dictionaries help us manage the playrs items."
 
+[sub_resource type="Resource" id=18]
+script = ExtResource( 4 )
+practice_id = "res://course/lesson-25-creating-dictionaries/practice-9clsFcSr.tres"
+title = "Increasing item counts"
+goal = ""
+starting_code = ""
+hints = PoolStringArray(  )
+validator_script_path = "adding-items/TestAddingItems.gd"
+script_slice_path = "adding-items/AddingItems.live-editor/slices/AddingItems.add.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 5 )
+description = "The player might walks over a pick-up, or find something in a chest, so we need a way to change the item counts in our inventory."
+
 [resource]
 script = ExtResource( 1 )
 title = "Creating Dictionaries"
 content_blocks = [ SubResource( 2 ), SubResource( 1 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 16 ), SubResource( 11 ), SubResource( 12 ), SubResource( 15 ), SubResource( 13 ), SubResource( 14 ) ]
-practices = [ SubResource( 17 ) ]
+practices = [ SubResource( 17 ), SubResource( 18 ) ]
