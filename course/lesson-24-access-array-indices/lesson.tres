@@ -1,0 +1,265 @@
+[gd_resource type="Resource" load_steps=27 format=2]
+
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
+[ext_resource path="res://resources/Lesson.gd" type="Script" id=2]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=3]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=4]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-3s7CAcYu.tres"
+title = ""
+type = 0
+text = "You learned to loop over all the values in an array using the [code]for[/code] keyword."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-vjbGhMYC.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeForLoop.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-e6KHzm4j.tres"
+title = ""
+type = 0
+text = "But what if you need to access the third item in the player's inventory? The tenth item?
+
+There's a dedicated notation to access one element in an array by index.
+
+To do so, you use square brackets with a number inside the brackets."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-wrXKq6Ew.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/SyntaxAccessIndex.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-p0jEfcot.tres"
+title = ""
+type = 0
+text = "Index zero is the [i]first[/i] element in the array."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-xUHuVoRx.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleUseFirstItem.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-vHMa19hc.tres"
+title = ""
+type = 0
+text = "Index one is the [i]second[/i] element in the array, and so on.
+
+You would access the [i]fourth[/i] element in the [code]inventory[/code] array like so."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-PK34PGsS.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleUseFourthItem.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 5 )
+quiz_id = "res://course/lesson-24-access-array-indices/quiz-ZG3sVzWj.tres"
+question = "How would you access the [i]third[/i] item in the [code]inventory[/code] array?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "Indices start at zero, so the index of the [i]third[/i] item is [code]2[/code]. That's why you need to write [code]inventory[2][/code]."
+answer_options = [ "inventory[2]", "inventory[3]" ]
+valid_answers = [ "inventory[2]" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-Dpz6XRuQ.tres"
+title = "Accessing the last values with negative indices"
+type = 0
+text = "What if you want to access the last or second-before-last item in the [code]inventory[/code]?
+
+In that case, you can use negative indices. If you write [code]-1[/code] in the brackets, you will get the last item in the array. You will get the second-to-last item if you write [code]-2[/code]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-lEtSpGcw.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleUseSecondToLastItem.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-sz1nFYDO.tres"
+title = ""
+type = 0
+text = "That's very convenient when you need to quickly access elements from the end of the list."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 5 )
+quiz_id = "res://course/lesson-24-access-array-indices/quiz-mfMmeRR3.tres"
+question = "How would you access the third-to-last item in the inventory array?"
+content_bbcode = ""
+hint = ""
+explanation_bbcode = "When using negative indices, [code]-1[/code] means the [i]last[/i] element in the array. Index [code]-2[/code] will be the second-to-last, thus [code]-3[/code] will be the third-to-last.
+
+It can be little confusing as it seems to work differently from positive indices. However, it's because there's no difference between index [code]0[/code] and [code]-0[/code]: they both point to the first item in the array."
+answer_options = [ "inventory[-3]", "inventory[-2]" ]
+valid_answers = [ "inventory[-3]" ]
+is_multiple_choice = false
+do_shuffle_answers = true
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-E15b0TjG.tres"
+title = "You can't access non-existent indices"
+type = 0
+text = "There's a catch with this syntax: if you try to access an index that does not exist, you will get an error. You have to be careful always to access existing elements in the array.
+
+There are a couple of ways you can check for valid indices. One of them is checking the array's size."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-rSCXh1e4.tres"
+title = ""
+type = 0
+text = "[b]Checking the size of the array[/b]
+
+Arrays come with a member function named [code]size()[/code]. You can call it on the array anytime to know its [i]current[/i] size."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-bJSkChZQ.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExamplePrintSize.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-PNBSEyYz.tres"
+title = ""
+type = 0
+text = "The maximum index you can access in an array is [code]array.size() - 1[/code]: it's the last item in the array."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-Qk7svswt.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleUseLastItem.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-24-access-array-indices/content-kAEnHbnw.tres"
+title = ""
+type = 0
+text = "In the following practices, you will use array indices to realign train tracks and grab the correct item in an inventory."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-24-access-array-indices/practice-ErO9L4MW.tres"
+title = "Using the right crystals"
+goal = "In our game, the player has an inventory that works as an array under the hood.
+
+They want to use the pink and yellow crystals to buff their characters. Like before, we need you to find them in the array.
+
+You need to access elements in the [code]inventory[/code] array by index to do so.
+
+Call the [code]use()[/code] function with the item as an argument to use an item. For example, you can use the first item by calling [code]use(inventory[0])[/code]."
+starting_code = "var inventory = []
+
+func pick_items():
+	"
+hints = PoolStringArray( "use the function [code]use_item(item)[/code], where [code]item[/code] is an element of the [code]inventory[/code] array", "use [code]brackets[/code] to access specific array indices" )
+validator_script_path = "res://course/lesson-24-access-array-indices/find-crystals/TestFindCrystals.gd"
+script_slice_path = "res://course/lesson-24-access-array-indices/find-crystals/FindCrystals.live-editor/slices/FindCrystals.pick.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 1 )
+description = "Find the right crystals to use in the player's inventory."
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 3 )
+practice_id = "res://course/lesson-24-access-array-indices/practice-wfi7YGry.tres"
+title = "Realigning the train tracks"
+goal = "We have train tracks broken down into little chunks in our game. We use them to make modular tracks and draw circuits of all shapes and sizes.
+
+However, several chunks are misaligned. You need to find them in the [code]tracks[/code] array and pass them to the [code]align()[/code] function.
+
+To do so, you need to access the array by index.
+
+This time, though, you need to access them with [i]negative indices[/i]."
+starting_code = "var tracks := []
+
+func fix_tracks():
+	"
+hints = PoolStringArray( "The syntax to access an item by index in an array uses square brackets with a number in between right after the array name. For example, write [code]tracks[-1][/code] to access the [i]last[/i] element in the array.", "To align the second chunk, call [code]align(tracks[-3])[/code]. You need to call the same function another two times with the other chunks.", "" )
+validator_script_path = "res://course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd"
+script_slice_path = "res://course/lesson-24-access-array-indices/align-tracks/AlignTracks.live-editor/slices/AlignTracks.fix.slice.tres"
+documentation_references = PoolStringArray(  )
+documentation_resource = ExtResource( 1 )
+description = "Some chunks of our train tracks are misaligned, and the train can't pass. Find the faulty pieces and realign them."
+
+[resource]
+script = ExtResource( 2 )
+title = "Accessing values in arrays"
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 15 ), SubResource( 9 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 19 ) ]
+practices = [ SubResource( 20 ), SubResource( 21 ) ]

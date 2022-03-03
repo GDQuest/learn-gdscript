@@ -1,0 +1,301 @@
+[gd_resource type="Resource" load_steps=29 format=2]
+
+[ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=3]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=4]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-DizKUdOC.tres"
+title = ""
+type = 0
+text = "In previous lessons, you learned how to create arrays to store lists of values and how to loop over them. It's nice, but you won't go far with only that.
+
+The real strength of arrays is that you can add and remove values from them at any time. It allows you to [i]queue[/i] or [i]stack[/i] data."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-wQMqAYVj.tres"
+title = ""
+type = 0
+text = "For now, let's take another example."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-otxF5HUx.tres"
+title = "Tracking orders in a restaurant management game"
+type = 0
+text = "You're making a restaurant management game where customers place orders, and you need to handle them as they come.
+
+In this game, customers order meals that end up in a queue. You need to prepare them in the kitchen.
+
+In this example, we simulate orders arriving and getting completed over time."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-ZPxY8VUD.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleRestaurantOrders.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-pPwQDwfy.tres"
+title = ""
+type = 0
+text = "How do you keep track of pending and completed orders? With an array!
+
+When a customer purchases a meal, you want to [i]append[/i] it to the array. Then, as you complete a meal in the kitchen and serve it, you want to remove it from the array.
+
+You can do that with the [code]append()[/code] and the [code]pop_front()[/code] functions of the array, respectively.
+
+Try to read the code below before moving on. Don't worry if not everything makes sense as we'll break it down."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-qdYOexRj.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeOrderMeals.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=23]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-qdYOexRj.tres"
+title = ""
+type = 0
+text = "Notice how we call some functions by writing a dot after a variable name. Like a given value type can have sub-variables, it can also have its own functions.
+
+Functions like [code]append()[/code] and [code]pop_front()[/code] only exist on arrays. That's why to call them, we need to access it from the array using the dot: [code]array.append()[/code]."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = true
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-TRhZN4rS.tres"
+title = ""
+type = 0
+text = "Let's break down the code.
+
+We queue orders in the [code]waiting_orders[/code] array by appending them to the array."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-DizKUdOC.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeAppendMeal.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-QiGjB7tK.tres"
+title = ""
+type = 0
+text = "We can use a string to represent a meal when calling the [code]add_order()[/code] function."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-RHJMQ2XN.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeAddOrder.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-lkGx0c7D.tres"
+title = ""
+type = 0
+text = "When completing an order, we remove it from the [code]waiting_orders[/code] array by calling its [code]pop_front()[/code] function. This function gives us the order back, which allows us to assign it to a temporary variable."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-ZPxY8VUD.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodePopOrder.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-wQMqAYVj.tres"
+title = ""
+type = 0
+text = "We can then append the order to our [code]completed_orders[/code] array."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-pPwQDwfy.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeAppendToComplete.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-otxF5HUx.tres"
+title = ""
+type = 0
+text = "We call arrays like [code]waiting_orders[/code] a [i]queue[/i]: the first element we append to the array is the first one we remove."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=24]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-5AJTESv5.tres"
+title = "What does #... mean?"
+type = 1
+text = "We write [code]#...[/code] to represent ellipses in the code. It means \"we're completing the function's code.\" We use that to break down code examples and make them easier to learn from.
+
+The hash sign itself marks the start of a code comment. It's a line the computer will ignore, which is why it typically appears in grey."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-5AJTESv5.tres"
+title = "Using arrays as stacks"
+type = 0
+text = "Another common use of arrays is [i]stacks[/i] of data.
+
+Take a factory management game where you need to retrieve materials from stacks of crates. They arrive at the factory piled up vertically, and you need to take them from top to bottom."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-tT6n1Txl.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleCrateStack.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-TtcyhcIb.tres"
+title = ""
+type = 0
+text = "To take a crate from the back of the array, this time, we use the [code]pop_back()[/code] array function.
+
+This function removes (pops) the last value from the array and returns it to you."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-5BnVHARb.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExamplePrintArrayPop.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-23-append-to-arrays/content-BWNbDGt6.tres"
+title = ""
+type = 0
+text = "Like [code]pop_front()[/code], the function returns the value removed from the array. You will often store that value in a variable.
+
+The value in question could be the crate's content, which you can then use to give resources to the player.
+
+In the following practices, you will use the [code]append()[/code], [code]pop_front()[/code], and [code]pop_back()[/code] array functions."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=25]
+script = ExtResource( 4 )
+practice_id = "res://course/lesson-23-append-to-arrays/practice-KUdOCQiG.tres"
+title = "Completing orders"
+goal = "The [code]waiting_orders[/code] array will be filled over time.
+
+Your job is to move orders from waiting list  to [code]completed_orders[/code] list using the array's [code]append()[/code] and [code]pop_front()[/code] functions.
+
+Remember that the array's [code]pop_front()[/code] function returns the popped value, which allows you to store it in a variable and then pass it to another function."
+starting_code = "var waiting_orders := []
+var completed_orders := []
+
+func complete_current_order():
+	"
+hints = PoolStringArray( "You first need to pop the first value from the pending orders array. To pop a value from the front of an array, you call [code]array.pop_front()[/code].", "You then need to append the popped value to the completed_orders array. To append a value to an array, you can call [code]array.append()[/code]." )
+validator_script_path = "res://course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd"
+script_slice_path = "res://course/lesson-23-append-to-arrays/clearing-meals/ClearingMeals.live-editor/slices/ClearingMeals.complete.slice.tres"
+documentation_references = PoolStringArray( "array.pop_front", "array.append" )
+documentation_resource = ExtResource( 3 )
+description = "Orders are piling up in the kitchen, and we need to clear them fast using the array's [code]pop_front()[/code] function."
+
+[sub_resource type="Resource" id=26]
+script = ExtResource( 4 )
+practice_id = "res://course/lesson-23-append-to-arrays/practice-B7tKRHJM.tres"
+title = "Clearing up the crates"
+goal = "Crates are piling up on the platform. Move them out of the way by popping them from the [code]crates[/code] array.
+
+You need to remove them from top to bottom using the array's [code]pop_back()[/code] function.
+
+Your code should remove all the crates in the array using a while loop.
+
+[b]Careful![/b] if you run a while loop carelessly, you can lock the software."
+starting_code = "var crates = []
+
+func run():
+	while "
+hints = PoolStringArray( "Remember [code]while[/code] loops\? ", "Every time you [code]pop[/code] an item, the array\'s [code]size[/code] gets reduced", "Try [code]while crates.size() > 0[/code]" )
+validator_script_path = "res://course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd"
+script_slice_path = "res://course/lesson-23-append-to-arrays/popping-crates/PoppingCrates.live-editor/slices/PoppingCrates.run.slice.tres"
+documentation_references = PoolStringArray( "array.pop_back" )
+documentation_resource = ExtResource( 3 )
+description = "Crates are piling up on the platform. Move them out of the way by popping them from their array."
+
+[resource]
+script = ExtResource( 1 )
+title = "Appending and popping values from arrays"
+content_blocks = [ SubResource( 1 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 23 ), SubResource( 9 ), SubResource( 15 ), SubResource( 17 ), SubResource( 18 ), SubResource( 16 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 24 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ]
+practices = [ SubResource( 25 ), SubResource( 26 ) ]

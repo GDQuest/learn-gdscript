@@ -22,12 +22,14 @@ func reset() -> void:
 	_robot.cell = Vector2(0, 1)
 	_update_label()
 
+
 func _on_timer_timeout() -> void:
 	if _robot.cell.x > 1:
 		_timer.stop()
 		return
 	_robot.cell += Vector2(1, 0)
 	_update_label()
+
 
 func _update_label() -> void:
 	_label.text = \"cell = Vector2\" + str(_robot.cell)
@@ -37,9 +39,6 @@ func _update_label() -> void:
 margin_right = 658.0
 margin_bottom = 384.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0

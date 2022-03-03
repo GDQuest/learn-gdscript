@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/lesson-22-functions-return-values/visuals/grid_demo/GridMapping.tscn" type="PackedScene" id=2]
+
+[node name="PanelContainer" type="PanelContainer"]
+margin_right = 800.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 800, 400 )
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 899.0
+margin_bottom = 393.0
+mouse_filter = 2
+
+[node name="MarginContainer" parent="RunnableCodeExample" instance=ExtResource( 2 )]
+margin_left = 244.0
+margin_right = 892.0
+margin_bottom = 386.0

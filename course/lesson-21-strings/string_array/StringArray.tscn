@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/lesson-21-strings/string_array/StringArray.gd" type="Script" id=2]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[node name="StringArray" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="AnimationTree" parent="." index="3"]
+parameters/playback = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
+current = true
