@@ -1,13 +1,13 @@
 [gd_resource type="Resource" load_steps=20 format=2]
 
-[ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
-[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=2]
-[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=3]
-[ext_resource path="res://course/Documentation.tres" type="Resource" id=4]
-[ext_resource path="res://resources/Practice.gd" type="Script" id=5]
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=2]
+[ext_resource path="res://resources/Lesson.gd" type="Script" id=3]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=4]
+[ext_resource path="res://resources/QuizChoice.gd" type="Script" id=5]
 
 [sub_resource type="Resource" id=1]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 content_id = "res://course/lesson-22-strings/content-jotxF5HU.tres"
 title = ""
 type = 0
@@ -21,7 +21,7 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=2]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 content_id = "res://course/lesson-22-strings/content-xZPxY8VU.tres"
 title = ""
 type = 0
@@ -31,7 +31,7 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=3]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 content_id = "res://course/lesson-22-strings/content-DpPwQDwf.tres"
 title = "What are strings"
 type = 0
@@ -45,7 +45,7 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=6]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 content_id = "res://course/lesson-22-strings/content-S5AJTESv.tres"
 title = ""
 type = 0
@@ -55,7 +55,7 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=7]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 content_id = "res://course/lesson-22-strings/content-5tT6n1Tx.tres"
 title = ""
 type = 0
@@ -65,7 +65,7 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=8]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 content_id = "res://course/lesson-22-strings/content-lTtcyhcI.tres"
 title = ""
 type = 0
@@ -75,7 +75,7 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=4]
-script = ExtResource( 2 )
+script = ExtResource( 5 )
 quiz_id = "res://course/lesson-22-strings/quiz-yqdYOexR.tres"
 question = "Which of these are strings?"
 content_bbcode = ""
@@ -91,7 +91,7 @@ is_multiple_choice = true
 do_shuffle_answers = true
 
 [sub_resource type="Resource" id=9]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 content_id = "res://course/lesson-22-strings/content-b5BnVHAR.tres"
 title = "Why we use strings"
 type = 0
@@ -101,7 +101,7 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=10]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 content_id = "res://course/lesson-22-strings/content-bBWNbDGt.tres"
 title = ""
 type = 0
@@ -111,7 +111,7 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=11]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 content_id = "res://course/lesson-22-strings/content-6fUqbTxY.tres"
 title = ""
 type = 0
@@ -125,7 +125,7 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=12]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 content_id = "res://course/lesson-22-strings/content-2V6jGvGm.tres"
 title = ""
 type = 0
@@ -135,7 +135,7 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=13]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 content_id = "res://course/lesson-22-strings/content-ej47MqE8.tres"
 title = ""
 type = 0
@@ -145,7 +145,7 @@ reverse_blocks = false
 has_separator = false
 
 [sub_resource type="Resource" id=15]
-script = ExtResource( 5 )
+script = ExtResource( 2 )
 practice_id = "res://course/lesson-22-strings/practice-iGjB7tKR.tres"
 title = "Creating string variables"
 goal = "Currently, the robot has a number stored in the [code]robot_name[/code] variable. 
@@ -157,11 +157,11 @@ hints = PoolStringArray( "Make sure to use quotes when defining strings to diffe
 validator_script_path = "string_error/TestsStringError.gd"
 script_slice_path = "string_error/StringError.live-editor/slices/StringError.print_string.slice.tres"
 documentation_references = PoolStringArray( "print" )
-documentation_resource = ExtResource( 4 )
+documentation_resource = ExtResource( 1 )
 description = "Give the robot a readable name using a string stored in a variable."
 
 [sub_resource type="Resource" id=16]
-script = ExtResource( 5 )
+script = ExtResource( 2 )
 practice_id = "res://course/lesson-22-strings/practice-NwQMqAYV.tres"
 title = "Using an array of strings to play a combo"
 goal = "In this practice, we'll chain together animations using an array of strings. You might find such combinations in fighting games.
@@ -182,11 +182,11 @@ hints = PoolStringArray( "Make sure to use (\"\") for each animation name when y
 validator_script_path = "string_array/TestsStringArray.gd"
 script_slice_path = "string_array/StringArray.live-editor/slices/StringArray.combo.slice.tres"
 documentation_references = PoolStringArray( "play_animation" )
-documentation_resource = ExtResource( 4 )
+documentation_resource = ExtResource( 1 )
 description = "Define an array of strings to unleash a powerful combo."
 
 [resource]
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 title = "Strings"
 content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 4 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]
 practices = [ SubResource( 15 ), SubResource( 16 ) ]
