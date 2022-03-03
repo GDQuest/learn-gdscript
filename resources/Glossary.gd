@@ -15,10 +15,10 @@ var _glossary_regex := RegEx.new()
 func _init() -> void:
 	_glossary = _parse_glossary_file(glossary_file)
 	var patterns := PoolStringArray()
-	for entry in _glossary.values():
-		patterns.append(entry.term)
-		patterns.append(entry.plural_form)
+	for key in _glossary:
+		patterns.append(key)
 	var terms_pattern := "(%s)" % patterns.join("|")
+	print(terms_pattern)
 	_glossary_regex.compile(terms_pattern)
 
 
@@ -31,10 +31,7 @@ func has(keyword: String) -> bool:
 
 
 func get_match(keyword: String) -> Entry:
-	if keyword.ends_with("s"):
-		keyword = keyword.substr(0, keyword.length() - 1)
-		print(keyword)
-	return _glossary.get(keyword)
+	return _glossary[keyword.to_lower()]
 
 
 # Parses the input CSV file and returns a dictionary mapping keywords to
@@ -54,6 +51,9 @@ static func _parse_glossary_file(path: String) -> Dictionary:
 		assert(not keyword in glossary, "Duplicate key %s in glossary." % keyword)
 		var entry := Entry.new(csv_line)
 		glossary[keyword] = entry
+		var plural_form = csv_line[1]
+		if plural_form:
+			glossary[plural_form] = entry
 
 	file.close()
 	return glossary

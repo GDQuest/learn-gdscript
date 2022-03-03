@@ -7,6 +7,7 @@ onready var _content := $Panel/MarginContainer/Column/Content as RichTextLabel
 
 func _ready() -> void:
 	_popup.hide()
+	_popup.connect("mouse_exited", _popup, "hide")
 
 
 func setup(term: String, bbcode_text: String) -> void:
@@ -14,7 +15,6 @@ func setup(term: String, bbcode_text: String) -> void:
 		yield(self, "ready")
 	_title.text = term
 	_content.bbcode_text = bbcode_text
-	_popup.connect("mouse_exited", _popup, "hide")
 
 
 func show():
