@@ -34,24 +34,24 @@ size_flags_horizontal = 3
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 855.0
+margin_right = 879.0
 margin_bottom = 407.0
 rect_min_size = Vector2( 600, 200 )
 script = SubResource( 2 )
-gdscript_code = "set_text(round(health))"
+gdscript_code = "var rounded_health = round(health)
+set_text(rounded_health)"
 
 [node name="PanelContainer" type="PanelContainer" parent="RunnableCodeExample"]
-margin_left = 648.0
-margin_right = 848.0
+margin_left = 672.0
+margin_right = 872.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 200, 100 )
 script = SubResource( 3 )
 
 [node name="Label" type="Label" parent="RunnableCodeExample/PanelContainer"]
-margin_left = 7.0
-margin_top = 193.0
-margin_right = 193.0
-margin_bottom = 207.0
+margin_top = 186.0
+margin_right = 200.0
+margin_bottom = 214.0
 text = "Health: "
 align = 1
 valign = 1
