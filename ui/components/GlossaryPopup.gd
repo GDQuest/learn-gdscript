@@ -2,6 +2,8 @@ extends Node
 
 # Duration of the appear and disappear animations in seconds.
 const TRANSITION_DURATION := 0.15
+# Margin for info panel so hiding it isn't triggered by a 1px mouse move
+const MOUSE_MARGIN := 25.0 * Vector2.ONE
 
 onready var _panel := $Panel as Control
 # Makes the mouse interaction area larger than the panel.
