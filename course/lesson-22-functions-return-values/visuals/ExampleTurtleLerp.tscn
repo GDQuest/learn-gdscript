@@ -14,8 +14,16 @@ const ARRIVED_THRESHOLD := 20.0
 var max_speed := 250.0
 var velocity := Vector2.ZERO
 
+var turtle_padding = Vector2(100, 100)
 var limits = Rect2(Vector2(-300, -150), Vector2(600, 300))
 var detection_limits = Rect2(Vector2(-2000, -1000), Vector2(4000, 2000))
+
+
+func _ready() -> void:
+	var panel_size = owner.rect_size
+	limits.size = panel_size - turtle_padding
+	limits.position = -panel_size * 0.5 + turtle_padding * 0.5
+
 
 func _process(delta):
 	if not detection_limits.has_point(get_local_mouse_position()):
