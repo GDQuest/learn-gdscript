@@ -254,4 +254,4 @@ func _open_glossary_popup(meta: String) -> void:
 	var entry: Glossary.Entry = _glossary.get_match(meta)
 	_glossary_popup.setup(entry.term, entry.explanation)
 	_glossary_popup.align_with_mouse(get_global_mouse_position())
-	_glossary_popup.show()
+	_glossary_popup.appear()
