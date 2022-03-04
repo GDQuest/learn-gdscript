@@ -243,12 +243,19 @@ description = "Collecting items is fun, but we need a good way to store them. Wr
 script = ExtResource( 4 )
 practice_id = "res://course/lesson-25-creating-dictionaries/practice-9clsFcSr.tres"
 title = "Increasing item counts"
-goal = ""
-starting_code = ""
-hints = PoolStringArray(  )
+goal = "We want to be able to change the item counts in the player's inventory whenever the player picks up or uses an item.
+
+We've started the [code]add_item()[/code] function for you.
+
+The [code]inventory[/code] dictionary should use the [code]item_name[/code] parameter as the key to access its values, and we should increase the value by [code]amount[/code].
+
+To test this practice, we'll use your [code]add_item()[/code] function to increase the item count of Healing Heart, Fire Gem, and Ice Gem."
+starting_code = "func add_item(item_name, amount):
+	"
+hints = PoolStringArray( "You can access the value in the [code]inventory[/code] dictionary by using [code]inventory[item_name][/code]", "Remember to add [code]amount[/code] to the value. You can do this directly with [code]+=[/code]" )
 validator_script_path = "adding-items/TestAddingItems.gd"
 script_slice_path = "adding-items/AddingItems.live-editor/slices/AddingItems.add.slice.tres"
-documentation_references = PoolStringArray(  )
+documentation_references = PoolStringArray( "add_item" )
 documentation_resource = ExtResource( 5 )
 description = "The player might walk over a pick-up or find something in a chest, so we need a way to change the item counts in our inventory."
 

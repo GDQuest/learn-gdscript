@@ -20,15 +20,22 @@ onready var _grid := $Margin/Column/Grid as GridContainer
 
 
 func _ready() -> void:
-	for item in inventory:
-		var amount = inventory[item]
-		display_item(item, amount)
+	reset()
+
+
+func reset():
+	for node in item_nodes.values():
+		node.hide()
+	
+	inventory[\"healing heart\"] = 0
+	inventory[\"fire gem\"] = 0
+	inventory[\"ice gem\"] = 0
 
 
 var inventory := {
-	\"healing heart\": 3,
-	\"fire gem\": 2,
-	\"ice gem\": 1,
+	\"healing heart\": 0,
+	\"fire gem\": 0,
+	\"ice gem\": 0,
 }
 
 # EXPORT add
@@ -38,7 +45,13 @@ func add_item(item_name, amount):
 
 
 func run():
-	pass
+	for i in range(2):
+		add_item(\"healing heart\", 4)
+		add_item(\"fire gem\", 2)
+		add_item(\"ice gem\", 3)
+	for item in inventory:
+		var amount = inventory[item]
+		display_item(item, amount)
 
 
 func _run():

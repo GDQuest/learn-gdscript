@@ -11,8 +11,8 @@ onready var _grid := $Margin/Column/Grid as GridContainer
 
 
 func _ready() -> void:
-	for node in item_nodes.values():
-		node.hide()
+	reset()
+
 
 func reset():
 	for node in item_nodes.values():
