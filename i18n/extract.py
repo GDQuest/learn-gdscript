@@ -174,6 +174,7 @@ def extract_glossary_database() -> None:
 
     extracted_fields = [
         "term",
+        "optional_plural_form",
         "explanation",
     ]
 
@@ -239,6 +240,7 @@ def main():
     extract_course_messages()
     extract_error_database()
     extract_classref_database()
+    extract_glossary_database()
 
 
 if __name__ == "__main__":
