@@ -6,6 +6,27 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends \"res://course/lesson-24-access-array-indices/visuals/inventory/Inventory.gd\"
 
+
+const CODE_BEGIN := PoolStringArray([\"var inventory = [\"])
+const CODE_END := PoolStringArray([
+	\"]\",
+	\"\",
+	\"func run():\",
+	\"	use_item(inventory[0])\"
+])
+
+
+func _ready() -> void:
+	var runnable_code_example = get_parent()
+	var item_names: PoolStringArray = []
+	for item in get_children():
+		item_names.append('\\t\"%s\"' % item.get_texture_name().split(\" \")[0])
+	var code := CODE_BEGIN
+	code.append_array(item_names)
+	code.append_array(CODE_END)
+	runnable_code_example.gdscript_code = code.join(\"\\n\")
+
+
 func run():
 	use_item(0)
 "
@@ -18,7 +39,7 @@ size_flags_horizontal = 3
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 1023.0
+margin_right = 1047.0
 margin_bottom = 407.0
 rect_min_size = Vector2( 600, 400 )
 gdscript_code = "var inventory = [
@@ -33,7 +54,7 @@ func run():
 	use_item(inventory[0])"
 
 [node name="Inventory" parent="RunnableCodeExample" instance=ExtResource( 2 )]
-margin_left = 648.0
-margin_right = 1016.0
+margin_left = 672.0
+margin_right = 1040.0
 margin_bottom = 400.0
 script = SubResource( 1 )
