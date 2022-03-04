@@ -30,20 +30,16 @@ custom_styles/panel = ExtResource( 6 )
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 580.0
 margin_bottom = 362.0
-custom_constants/margin_right = 8
-custom_constants/margin_top = 8
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 8
 
 [node name="Column" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 572.0
-margin_bottom = 354.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 560.0
+margin_bottom = 342.0
 custom_constants/separation = 8
 
 [node name="ErrorLabel" type="Label" parent="MarginContainer/Column"]
-margin_right = 564.0
+margin_right = 540.0
 margin_bottom = 28.0
 custom_colors/font_color = Color( 0.360784, 0.678431, 0.988235, 1 )
 custom_fonts/font = ExtResource( 7 )
@@ -52,18 +48,18 @@ autowrap = true
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/Column"]
 margin_top = 36.0
-margin_right = 564.0
+margin_right = 540.0
 margin_bottom = 36.0
 custom_constants/separation = 0
 
 [node name="Content" type="VBoxContainer" parent="MarginContainer/Column"]
 margin_top = 44.0
-margin_right = 564.0
-margin_bottom = 346.0
+margin_right = 540.0
+margin_bottom = 322.0
 size_flags_vertical = 3
 
 [node name="ErrorExplanation" parent="MarginContainer/Column/Content" instance=ExtResource( 5 )]
-margin_right = 564.0
+margin_right = 540.0
 margin_bottom = 99.0
 rect_min_size = Vector2( 200, 0 )
 title = "Why this happens"
@@ -72,7 +68,7 @@ is_expanded = true
 [node name="Value" type="RichTextLabel" parent="MarginContainer/Column/Content/ErrorExplanation"]
 margin_left = 8.0
 margin_top = 58.0
-margin_right = 556.0
+margin_right = 532.0
 margin_bottom = 87.0
 bbcode_enabled = true
 bbcode_text = "Our error explanation."
@@ -81,7 +77,7 @@ fit_content_height = true
 
 [node name="ErrorSuggestion" parent="MarginContainer/Column/Content" instance=ExtResource( 5 )]
 margin_top = 115.0
-margin_right = 564.0
+margin_right = 540.0
 margin_bottom = 161.0
 title = "How to fix this"
 

@@ -17,6 +17,8 @@ const AUTOSCROLL_DURATION := 0.24
 export var test_lesson: Resource
 
 var _lesson: Lesson
+# Resource used to highlight glossary entries in the lesson text.
+var _glossary: Glossary = preload("res://course/glossary.tres")
 var _visible_index := -1
 var _quizzes_done := -1 # Start with -1 because we will always autoincrement at least once.
 var _quizz_count := 0
@@ -36,6 +38,7 @@ onready var _practices_container := (
 )
 onready var _debounce_timer := $DebounceTimer as Timer
 onready var _tweener := $Tween as Tween
+onready var _glossary_popup := $GlossaryPopup
 
 onready var _start_content_width := _content_container.rect_size.x
 
@@ -172,6 +175,11 @@ func setup(lesson: Lesson, course: Course) -> void:
 		)
 		_tweener.start()
 
+	# Underline glossary entries
+	for rtl in get_tree().get_nodes_in_group("rich_text_label"):
+		rtl.bbcode_text = _glossary.replace_matching_terms(rtl.bbcode_text)
+		rtl.connect("meta_clicked", self, "_open_glossary_popup")
+
 	# Call this immediately to update for the blocks that are already visible.
 	_emit_read_content()
 
@@ -240,3 +248,10 @@ func _emit_read_content() -> void:
 func _update_content_container_width(new_font_scale: int) -> void:
 	var font_size_multiplier := float(_base_text_font_size + new_font_scale * 2) / _base_text_font_size
 	_content_container.rect_min_size.x = _start_content_width * font_size_multiplier
+
+
+func _open_glossary_popup(meta: String) -> void:
+	var entry: Glossary.Entry = _glossary.get_match(meta)
+	_glossary_popup.setup(entry.term, entry.explanation)
+	_glossary_popup.align_with_mouse(get_global_mouse_position())
+	_glossary_popup.appear()

@@ -186,7 +186,6 @@ func _open_rich_text_node_meta(metadata: String) -> void:
 	):
 		OS.shell_open(metadata)
 		return
-	navigate_to(metadata)
 
 
 func connect_rich_text_node(rich_text_node: RichTextLabel) -> void:
