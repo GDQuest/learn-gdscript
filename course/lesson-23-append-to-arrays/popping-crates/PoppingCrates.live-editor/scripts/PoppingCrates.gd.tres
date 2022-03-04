@@ -34,7 +34,7 @@ func _ready() -> void:
 
 func _run() -> void:
 	run()
-	index = crates.size()
+	index = _initial_crates.size() -1
 	_pop_next()
 	
 
@@ -42,15 +42,14 @@ func _complete_run() -> void:
 	Events.emit_signal(\"practice_run_completed\")
 
 func _pop_next():
-	if index >= _initial_crates.size():
+	if index < crates.size():
 		_complete_run()
-	elif index < _initial_crates.size():
+	else:
 		var crate = _initial_crates[index]
 		var crate_name = crate.get_texture_name()
-		#var display_index = _initial_crates.size() - index - 1
-		print(\"popping crate n˚%s '%s'\"%[index, crate_name])
+		print(\"popping crate %s '%s'\"%[index, crate_name])
 		crate.use()
-		index += 1
+		index -= 1
 	
 
 func reset():
@@ -66,7 +65,7 @@ func _restore_next():
 	_initial_crates[index].reset(3)
 
 # EXPORT run
-var crates = []
+var crates = [\"gem\", \"health\", \"ice\", \"lightning\"]
 
 func run():
 	while crates.size() > 0:
