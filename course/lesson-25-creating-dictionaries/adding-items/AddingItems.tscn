@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
+[ext_resource path="res://course/lesson-25-creating-dictionaries/adding-items/AddingItems.gd" type="Script" id=1]
 [ext_resource path="res://ui/theme/fonts/font_title_big.tres" type="DynamicFont" id=2]
-[ext_resource path="res://course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.gd" type="Script" id=3]
-[ext_resource path="res://course/lesson-26-looping-over-dictionaries/display-inventory/pickup_fire.png" type="Texture" id=5]
-[ext_resource path="res://course/lesson-26-looping-over-dictionaries/display-inventory/pickup_ice.png" type="Texture" id=6]
-[ext_resource path="res://course/lesson-26-looping-over-dictionaries/display-inventory/pickup_health.png" type="Texture" id=7]
-[ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=8]
+[ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=4]
+[ext_resource path="res://course/lesson-26-looping-over-dictionaries/display-inventory/pickup_health.png" type="Texture" id=5]
+[ext_resource path="res://course/lesson-26-looping-over-dictionaries/display-inventory/pickup_fire.png" type="Texture" id=6]
+[ext_resource path="res://course/lesson-26-looping-over-dictionaries/display-inventory/pickup_ice.png" type="Texture" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0901961, 0.0941176, 0.188235, 1 )
@@ -38,14 +38,14 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="DictInventory" type="PanelContainer"]
+[node name="AddingItems" type="PanelContainer"]
 margin_top = 44.0
 margin_right = 565.0
 margin_bottom = 384.0
 size_flags_vertical = 3
-theme = ExtResource( 1 )
+theme = ExtResource( 4 )
 custom_styles/panel = SubResource( 1 )
-script = ExtResource( 3 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -119,7 +119,7 @@ custom_constants/separation = 4
 margin_right = 50.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 50, 50 )
-texture = ExtResource( 7 )
+texture = ExtResource( 5 )
 expand = true
 stretch_mode = 6
 
@@ -128,7 +128,7 @@ margin_left = 54.0
 margin_top = 31.0
 margin_right = 200.0
 margin_bottom = 57.0
-custom_fonts/font = ExtResource( 8 )
+custom_fonts/font = ExtResource( 3 )
 text = "Healing Heart"
 
 [node name="Spacer" type="Control" parent="Margin/Column/Grid/HealingHeart/Margin/Item"]
@@ -142,7 +142,7 @@ margin_left = 234.0
 margin_top = 31.0
 margin_right = 248.0
 margin_bottom = 57.0
-custom_fonts/font = ExtResource( 8 )
+custom_fonts/font = ExtResource( 3 )
 text = "0"
 
 [node name="FireGem" type="Button" parent="Margin/Column/Grid"]
@@ -175,7 +175,7 @@ custom_constants/separation = 4
 margin_right = 50.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 50, 50 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 expand = true
 stretch_mode = 6
 
@@ -184,7 +184,7 @@ margin_left = 54.0
 margin_top = 31.0
 margin_right = 150.0
 margin_bottom = 57.0
-custom_fonts/font = ExtResource( 8 )
+custom_fonts/font = ExtResource( 3 )
 text = "Fire Gem"
 
 [node name="Spacer" type="Control" parent="Margin/Column/Grid/FireGem/Margin/Item"]
@@ -198,7 +198,7 @@ margin_left = 234.0
 margin_top = 31.0
 margin_right = 248.0
 margin_bottom = 57.0
-custom_fonts/font = ExtResource( 8 )
+custom_fonts/font = ExtResource( 3 )
 text = "0"
 
 [node name="IceGem" type="Button" parent="Margin/Column/Grid"]
@@ -231,7 +231,7 @@ custom_constants/separation = 4
 margin_right = 50.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 50, 50 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 expand = true
 stretch_mode = 6
 
@@ -240,7 +240,7 @@ margin_left = 54.0
 margin_top = 31.0
 margin_right = 141.0
 margin_bottom = 57.0
-custom_fonts/font = ExtResource( 8 )
+custom_fonts/font = ExtResource( 3 )
 text = "Ice Gem"
 
 [node name="Spacer" type="Control" parent="Margin/Column/Grid/IceGem/Margin/Item"]
@@ -254,5 +254,5 @@ margin_left = 234.0
 margin_top = 31.0
 margin_right = 248.0
 margin_bottom = 57.0
-custom_fonts/font = ExtResource( 8 )
+custom_fonts/font = ExtResource( 3 )
 text = "0"
