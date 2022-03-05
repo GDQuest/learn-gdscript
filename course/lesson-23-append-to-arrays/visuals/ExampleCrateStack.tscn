@@ -14,13 +14,13 @@ __meta__ = {
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 607.0
+margin_right = 663.0
 margin_bottom = 507.0
 rect_min_size = Vector2( 600, 500 )
 scene = ExtResource( 2 )
 gdscript_code = "var crates = [\"fire gem\", \"fire gem\", \"fire gem\"]
 
-func use_last_crate():
+func use_top_crate():
 	var crate = crates.pop_back()
 	use(crate)"
 run_button_label = "use_top_crate()"
