@@ -70,6 +70,6 @@ func _on_Timer_timeout() -> void:
 func _on_Tween_tween_all_completed() -> void:
 	if _panel.modulate.a < 0.01:
 		_content.bbcode_text = ""
-		_panel.rect_size = _panel.rect_min_size
 		_panel.hide()
 		_interaction_area.hide()
+		_panel.set_deferred("rect_size", _panel.rect_min_size)
