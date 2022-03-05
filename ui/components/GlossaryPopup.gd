@@ -18,6 +18,7 @@ onready var _timer := $Timer as Timer
 
 func _ready() -> void:
 	_panel.hide()
+	_interaction_area.hide()
 	_interaction_area.connect("mouse_exited", self, "disappear")
 	_timer.connect("timeout", self, "_on_Timer_timeout")
 	_tween.connect("tween_all_completed", self, "_on_Tween_tween_all_completed")
@@ -44,6 +45,7 @@ func align_with_mouse(global_mouse_position: Vector2) -> void:
 
 func appear() -> void:
 	_panel.show()
+	_interaction_area.show()
 	_tween.stop_all()
 	_tween.interpolate_property(_panel, "modulate:a", 0.0, 1.0, TRANSITION_DURATION)
 	_tween.start()
@@ -69,3 +71,5 @@ func _on_Tween_tween_all_completed() -> void:
 	if _panel.modulate.a < 0.01:
 		_content.bbcode_text = ""
 		_panel.rect_size = _panel.rect_min_size
+		_panel.hide()
+		_interaction_area.hide()
