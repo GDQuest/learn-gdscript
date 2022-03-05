@@ -224,15 +224,17 @@ goal = "Let's give some items to the player.
 
 We use a dictionary for the player's inventory. We defined the [code]inventory[/code] variable for you, but it contains no items yet.
 
-Give the player the following items by adding the correct keys and values to the dictionary.
+Give the player the following items by adding the correct keys and values to the dictionary:
 
 - Three \"healing heart\".
 - Two \"fire gem\".
-- One \"ice gem\"."
-starting_code = "var inventory := {
+- One \"ice gem\".
+
+The keys should be text strings, and the values whole numbers."
+starting_code = "var inventory = {
 	
 }"
-hints = PoolStringArray( "For our inventory, we use strings for the keys, and numbers for the item counts.", "Don\'t forget to add commas to separate each key and value pair", "To define a key and give it an item count, use [code]\"item name\" : number[/code]" )
+hints = PoolStringArray( "Don\'t forget to add commas to separate each key and value pair.", "To define a key and give it an item count, use [code]\"item name\" : number[/code]." )
 validator_script_path = "res://course/lesson-25-creating-dictionaries/creating-inventory/TestInventory.gd"
 script_slice_path = "creating-inventory/CreatingInventory.live-editor/slices/CreatingInventory.create.slice.tres"
 documentation_references = PoolStringArray(  )
@@ -243,7 +245,7 @@ description = "Collecting items is fun, but we need a good way to store them. Wr
 script = ExtResource( 4 )
 practice_id = "res://course/lesson-25-creating-dictionaries/practice-9clsFcSr.tres"
 title = "Increasing item counts"
-goal = "We want to be able to change the item counts in the player's inventory whenever the player picks up or uses an item.
+goal = "We want to change the item counts in the player's inventory whenever the player picks up or uses an item.
 
 We've started the [code]add_item()[/code] function for you.
 

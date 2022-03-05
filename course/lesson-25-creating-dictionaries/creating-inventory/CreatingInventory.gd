@@ -19,7 +19,7 @@ func reset():
 		node.hide()
 
 # EXPORT create
-var inventory := {
+var inventory = {
 	"healing heart": 3,
 	"fire gem": 2,
 	"ice gem": 1,
