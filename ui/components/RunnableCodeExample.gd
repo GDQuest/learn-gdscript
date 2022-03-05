@@ -159,7 +159,9 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	_frame_container.add_child(_scene_instance)
 	_center_scene_instance()
 	if _scene_instance.has_method('get_code'):
-		# TODO: why is this not setting the code value?
+		# Skip a frame to allow all nodes to be ready. 
+		# Avoids overwriting text via yield(node, "ready").
+		yield(get_tree(), "idle_frame")
 		gdscript_code = _scene_instance.get_code(gdscript_code)
 		set_code(gdscript_code)
 
