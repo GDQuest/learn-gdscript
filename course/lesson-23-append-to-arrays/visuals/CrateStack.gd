@@ -8,8 +8,7 @@ var crates := []
 var _is_resetting := false
 
 
-const code = """
-var crates = ["%s"]
+const code = """var crates = ["%s"]
 
 func use_top_crate():
 	var crate = crates.pop_back()
