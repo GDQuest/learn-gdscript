@@ -7,7 +7,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     document.getElementById("canvas")
   );
   const canvasContainer = /** @type {HTMLDivElement} */ (
-    document.getElementById("canvas-container")
+    document.getElementById("canvas-frame")
   );
 
   const noOp = () => {};
@@ -26,11 +26,13 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
 
   const aspectRatio =
     (maxW = 0, maxH = 0) =>
-    (width = window.innerWidth, height = window.innerHeight) => {
-      const ratioW = width / maxW;
-      const ratioH = height / maxH;
-      var ratio = Math.min(ratioW, ratioH);
-      return { width: maxW * ratio, height: maxH * ratio, ratio };
+    (currentWidth = window.innerWidth, currentHeight = window.innerHeight) => {
+      const ratioW = currentWidth / maxW;
+      const ratioH = currentHeight / maxH;
+      const ratio = Math.min(Math.min(ratioW, ratioH), 1);
+      const width = maxW * ratio;
+      const height = maxH * ratio;
+      return { width, height, ratio };
     };
 
   /**
@@ -129,6 +131,8 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       const { width, height, ratio } = aspectRatioCanvas();
       canvas.width = width;
       canvas.height = height;
+      canvasContainer.style.setProperty(`width`, `${width}px`);
+      canvasContainer.style.setProperty(`height`, `${height}px`);
       document.documentElement.style.setProperty("--scale", `${ratio}`);
     };
     const aspectRatioCanvas = aspectRatio(1920, 1080);
@@ -414,13 +418,12 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
         const { width, height } = screen;
         const { innerHeight, innerWidth } = window;
         const {
-          github_repository,
-          github_workflow,
-          github_ref_name,
-          github_sha,
-          override_file,
-          sub_build_path,
-          watermark,
+          build_date,
+          build_date_iso,
+          build_date_unix,
+          git_branch,
+          git_commit,
+          version,
         } = GDQUEST_ENVIRONMENT || {};
         const data = {
           userAgent,
@@ -429,13 +432,12 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
           height,
           innerHeight,
           innerWidth,
-          github_repository,
-          github_workflow,
-          github_ref_name,
-          github_sha,
-          override_file,
-          sub_build_path,
-          watermark,
+          build_date,
+          build_date_iso,
+          build_date_unix,
+          git_branch,
+          git_commit,
+          version,
           ...additionalData,
         };
         makeLogFunction(LEVELS.TRACE)(data, `INIT`);
@@ -555,22 +557,11 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       return button;
     })();
 
-    const placeButton = () => {
-      const canvasRect = canvas.getBoundingClientRect();
-      const right = window.innerWidth - (canvasRect.left + canvasRect.width); // - buttonRect.width;
-      const top = canvasRect.top;
-      button.style.setProperty("right", `${right}px`);
-      button.style.setProperty("top", `${top}px`);
-    };
-
-    GDQUEST.events.onResize.connect(placeButton);
-
     /**
      * Only add the button if Godot has loaded
      */
     GDQUEST.events.onGodotLoaded.once(() => {
       canvasContainer.appendChild(button);
-      placeButton();
     });
 
     /**
