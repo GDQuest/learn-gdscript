@@ -124,6 +124,7 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	# FIXME: Some weird Windows issue, replace before translating so matching works.
 	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(tr(practice.goal.replace("\r\n", "\n")))
 	_code_editor.text = practice.starting_code
+	_code_editor.update_cursor_position(practice.cursor_line, practice.cursor_column)
 
 	_hints_container.visible = not practice.hints.empty()
 	var index := 0

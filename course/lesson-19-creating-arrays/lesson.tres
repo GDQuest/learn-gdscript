@@ -256,6 +256,8 @@ The turtle can move up, down, left, or right. It cannot move diagonally.
 
 We recommend copying and pasting to fill the array with comma-separated [code]Vector2[/code] values quickly."
 starting_code = "var turtle_path = []"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Any path that doesn\'t touch rocks is valid. The turtle could first move down or to the right. So the first value could either be [code]Vector2(1, 0)[/code] or [code]Vector2(0, 1)[/code].", "Every [code]Vector2[/code] in the array should be one unit away from the previous one. That means there should only be a difference of 1 on the X-axis or the Y-axis between two [code]Vector2[/code] in the array." )
 validator_script_path = "moving-turtle/TestMovingTurtle.gd"
 script_slice_path = "moving-turtle/MovingTurtle.live-editor/slices/MovingTurtle.path.slice.tres"
@@ -276,6 +278,8 @@ You can pass arrays in function calls as arguments. As an array is a value type 
 Select all units on the board by passing the correct array to the [code]select_units()[/code] function."
 starting_code = "func run():
 	select_units([])"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "You can write [code]Vector2[/code] values inside the brackets in the function call: [code]select_units([Vector2(1, 1), Vector2(3, 2), Vector2(3, 5)])[/code]." )
 validator_script_path = "selecting-units/TestSelectingUnits.gd"
 script_slice_path = "selecting-units/SelectingUnits.live-editor/slices/SelectingUnits.run.slice.tres"

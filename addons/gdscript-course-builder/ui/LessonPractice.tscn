@@ -223,18 +223,18 @@ margin_bottom = 128.0
 [node name="MainSplit" type="HSplitContainer" parent="BackgroundPanel/Layout"]
 margin_top = 132.0
 margin_right = 1912.0
-margin_bottom = 1076.0
+margin_bottom = 1048.0
 size_flags_vertical = 3
 
 [node name="Texts" type="VBoxContainer" parent="BackgroundPanel/Layout/MainSplit"]
 margin_right = 1268.0
-margin_bottom = 944.0
+margin_bottom = 916.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="GoalContent" type="VBoxContainer" parent="BackgroundPanel/Layout/MainSplit/Texts"]
 margin_right = 1268.0
-margin_bottom = 470.0
+margin_bottom = 456.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="BackgroundPanel/Layout/MainSplit/Texts/GoalContent"]
@@ -245,12 +245,12 @@ text = "Practice Goal:"
 [node name="Editor" type="HBoxContainer" parent="BackgroundPanel/Layout/MainSplit/Texts/GoalContent"]
 margin_top = 18.0
 margin_right = 1268.0
-margin_bottom = 470.0
+margin_bottom = 456.0
 size_flags_vertical = 3
 
 [node name="TextEdit" type="TextEdit" parent="BackgroundPanel/Layout/MainSplit/Texts/GoalContent/Editor"]
 margin_right = 1236.0
-margin_bottom = 452.0
+margin_bottom = 438.0
 rect_min_size = Vector2( 0, 120 )
 size_flags_horizontal = 3
 wrap_enabled = true
@@ -258,13 +258,13 @@ wrap_enabled = true
 [node name="ExpandButton" type="Button" parent="BackgroundPanel/Layout/MainSplit/Texts/GoalContent/Editor"]
 margin_left = 1240.0
 margin_right = 1268.0
-margin_bottom = 452.0
+margin_bottom = 438.0
 icon = SubResource( 5 )
 
 [node name="StartingCode" type="VBoxContainer" parent="BackgroundPanel/Layout/MainSplit/Texts"]
-margin_top = 474.0
+margin_top = 460.0
 margin_right = 1268.0
-margin_bottom = 944.0
+margin_bottom = 916.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="BackgroundPanel/Layout/MainSplit/Texts/StartingCode"]
@@ -275,12 +275,12 @@ text = "Starting Code:"
 [node name="Editor" type="HBoxContainer" parent="BackgroundPanel/Layout/MainSplit/Texts/StartingCode"]
 margin_top = 18.0
 margin_right = 1268.0
-margin_bottom = 470.0
+margin_bottom = 456.0
 size_flags_vertical = 3
 
 [node name="TextEdit" type="TextEdit" parent="BackgroundPanel/Layout/MainSplit/Texts/StartingCode/Editor"]
 margin_right = 1236.0
-margin_bottom = 452.0
+margin_bottom = 438.0
 rect_min_size = Vector2( 0, 120 )
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 8 )
@@ -292,13 +292,13 @@ wrap_enabled = true
 [node name="ExpandButton" type="Button" parent="BackgroundPanel/Layout/MainSplit/Texts/StartingCode/Editor"]
 margin_left = 1240.0
 margin_right = 1268.0
-margin_bottom = 452.0
+margin_bottom = 438.0
 icon = SubResource( 5 )
 
 [node name="Column" type="VBoxContainer" parent="BackgroundPanel/Layout/MainSplit"]
 margin_left = 1280.0
 margin_right = 1912.0
-margin_bottom = 944.0
+margin_bottom = 916.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -307,7 +307,7 @@ __meta__ = {
 
 [node name="Hints" type="VBoxContainer" parent="BackgroundPanel/Layout/MainSplit/Column"]
 margin_right = 632.0
-margin_bottom = 470.0
+margin_bottom = 456.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -336,7 +336,7 @@ text = "Add Hint"
 [node name="HintsPanel" type="PanelContainer" parent="BackgroundPanel/Layout/MainSplit/Column/Hints"]
 margin_top = 24.0
 margin_right = 632.0
-margin_bottom = 470.0
+margin_bottom = 456.0
 rect_min_size = Vector2( 0, 140 )
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 9 )
@@ -345,13 +345,51 @@ custom_styles/panel = SubResource( 9 )
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 632.0
-margin_bottom = 446.0
+margin_bottom = 432.0
 drag_enabled = false
 
 [node name="CodeRefList" parent="BackgroundPanel/Layout/MainSplit/Column" instance=ExtResource( 4 )]
-margin_top = 474.0
+margin_top = 460.0
 margin_right = 632.0
-margin_bottom = 944.0
+margin_bottom = 916.0
+
+[node name="CursorPosition" type="HBoxContainer" parent="BackgroundPanel/Layout"]
+margin_top = 1052.0
+margin_right = 1912.0
+margin_bottom = 1076.0
+
+[node name="GetCursorPositionButton" type="Button" parent="BackgroundPanel/Layout/CursorPosition"]
+margin_right = 194.0
+margin_bottom = 24.0
+text = "Grab Current Cursor Position"
+
+[node name="LineLabel" type="Label" parent="BackgroundPanel/Layout/CursorPosition"]
+margin_left = 198.0
+margin_top = 5.0
+margin_right = 229.0
+margin_bottom = 19.0
+text = "Line:"
+
+[node name="LineSpinBox" type="SpinBox" parent="BackgroundPanel/Layout/CursorPosition"]
+margin_left = 233.0
+margin_right = 307.0
+margin_bottom = 24.0
+rounded = true
+allow_greater = true
+
+[node name="ColumnLabel" type="Label" parent="BackgroundPanel/Layout/CursorPosition"]
+margin_left = 311.0
+margin_top = 5.0
+margin_right = 364.0
+margin_bottom = 19.0
+text = "Column:"
+
+[node name="ColumnSpinBox" type="SpinBox" parent="BackgroundPanel/Layout/CursorPosition"]
+margin_left = 368.0
+margin_right = 442.0
+margin_bottom = 24.0
+rounded = true
+allow_greater = true
 
 [node name="DropTarget" type="Control" parent="."]
 visible = false

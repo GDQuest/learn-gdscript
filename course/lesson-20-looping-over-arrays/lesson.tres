@@ -225,6 +225,8 @@ starting_code = "var robot_path = [Vector2(1, 0), Vector2(1, 1), Vector2(1, 2), 
 
 func run():
 	"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "You should start with a for loop that iterates over every cell in [code]robot_path[/code].", "You need to pass the cell position to the robot\'s [code]move_to()[/code] function in the loop." )
 validator_script_path = "robot-path/TestRobotPath.gd"
 script_slice_path = "robot-path/RobotPath.live-editor/slices/RobotPath.run.slice.tres"
@@ -249,6 +251,8 @@ starting_code = "var rectangle_sizes = [Vector2(200, 120), Vector2(140, 80), Vec
 
 func run():
 	"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Each value in the [code]rectangle_sizes[/code] array is a [code]Vector2[/code]. You\'ll need to access its [code]x[/code] and [code]y[/code] sub-components to draw rectangles.", "In the loop, you first need to call [code]draw_rectangle()[/code], and then [code]jump()[/code]. Otherwise, at least two rectangles will overlap.", "The arguments when calling [code]jump()[/code] can just be large enough to space out the rectangles. For example, [code]jump(300, 0)[/code]" )
 validator_script_path = "drawing-in-loops/TestsDrawingInLoops.gd"
 script_slice_path = "drawing-in-loops/DrawingInLoops.live-editor/slices/DrawingInLoops.draw.slice.tres"

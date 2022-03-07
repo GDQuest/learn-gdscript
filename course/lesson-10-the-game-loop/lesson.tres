@@ -165,6 +165,8 @@ goal = "Make the robot rotate slowly by adding to the [code]_process()[/code] fu
 A rotation speed of about [code]0.05[/code] each frame should do."
 starting_code = "func _process(_delta):
 	"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Replace [code]pass[/code] with the [code]rotate()[/code] function", "The [code]rotate()[/code] function takes one parameter" )
 validator_script_path = "rotating-sprite/TestsRotating.gd"
 script_slice_path = "rotating-sprite/RotatingSprite.live-editor/slices/RotatingSprite.move_and_rotate.slice.tres"
@@ -183,6 +185,8 @@ To do this, add the [code]rotate()[/code] and [code]move_local_x()[/code] functi
 Use a rotation speed of [code]0.05[/code] radians per frame, and move the robot [code]5[/code] pixels per frame."
 starting_code = "func _process(_delta):
 	"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Replace [code]pass[/code] with the [code]rotate()[/code] and [code]move_local_x()[/code] functions" )
 validator_script_path = "rotating-and-moving/TestsRotatingAndMoving.gd"
 script_slice_path = "rotating-and-moving/RotateAndMoveSprite.live-editor/slices/RotateAndMoveSprite.move_and_rotate.slice.tres"

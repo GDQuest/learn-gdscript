@@ -41,6 +41,7 @@ onready var _distraction_free_mode_button := $Column/PanelContainer/DFMButton as
 onready var _locked_overlay := $Column/PanelContainer/LockedOverlay as Control
 onready var _locked_overlay_label := $Column/PanelContainer/LockedOverlay/Layout/Label as Label
 
+
 # Buttons to toggle disabled when running the code, until the server responds.
 onready var _buttons_to_disable := [
 	_run_button,
@@ -98,13 +99,23 @@ func _gui_input(event: InputEvent) -> void:
 		accept_event()
 
 
+func update_cursor_position(line: int, column: int) -> void:
+	# Fix for lines with TAB indent
+	column = column - 1
+	line = line - 1
+	var string = slice_editor.get_line(line)
+	var tabs = min(column, string.count("\t"))
+	column = 3 * tabs + column
+
+	slice_editor.cursor_set_line(1000000 if line < 0 else line)
+	slice_editor.cursor_set_column(1000000 if column < 0 else column)
+
+
 func set_text(new_text: String) -> void:
 	text = new_text
 	if not is_inside_tree():
 		yield(self, "ready")
 	slice_editor.text = new_text
-	slice_editor.cursor_set_line(1000000)
-	slice_editor.cursor_set_column(1000000)
 
 
 func get_text() -> String:

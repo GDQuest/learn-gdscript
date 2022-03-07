@@ -299,6 +299,8 @@ starting_code = "func draw_corner():
 	move_forward()
 	turn_right(90)
 	move_forward()"
+cursor_line = 1
+cursor_column = 18
 hints = PoolStringArray( "You need to add the parameter [code]length[/code] three times in this practice" )
 validator_script_path = "drawing_corners/TestsDrawingCorners.gd"
 script_slice_path = "drawing_corners/DrawingCorners.live-editor/slices/DrawingCorners.draw_corner.slice.tres"
@@ -317,6 +319,8 @@ starting_code = "func draw_corner(length):
 	move_forward(length)
 	turn_right()
 	move_forward(length)"
+cursor_line = 1
+cursor_column = 24
 hints = PoolStringArray( "Parameters in functions are separated by commas", "You need to add the parameter [code]angle[/code] two times in this practice", "Use [code]func draw_corner(length, angle):[/code]" )
 validator_script_path = "drawing_corners_advanced/TestsDrawingCornersAdvanced.gd"
 script_slice_path = "drawing_corners_advanced/DrawingCornersAdvanced.live-editor/slices/DrawingCornersAdvanced.draw_corner.slice.tres"
@@ -336,6 +340,8 @@ Create a function named [code]draw_square()[/code] that takes one parameter: the
 
 The turtle should face towards the right when starting or completing a rectangle."
 starting_code = ""
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "You need to specify one parameter in the function definition", "Use [code]func draw_square(length):[/code]", "Call [code]move_forward()[/code] four times for each side of the square", "Make sure to [code]turn_right(90)[/code] after moving forward to create each corner" )
 validator_script_path = "drawing_squares/TestsDrawingSquares.gd"
 script_slice_path = "drawing_squares/DrawingSquares.live-editor/slices/DrawingSquares.draw.slice.tres"
@@ -354,6 +360,8 @@ Your job is to code a function named [code]draw_rectangle()[/code] that takes tw
 The turtle should face towards the right when starting or completing a rectangle.
 
 Note that we could still draw a square with [code]draw_rectangle()[/code] by having the [code]length[/code] and [code]height[/code] equal the same value."
+cursor_line = 0
+cursor_column = 0
 starting_code = "func draw_rectangle():
 	move_forward()
 	turn_right(90)

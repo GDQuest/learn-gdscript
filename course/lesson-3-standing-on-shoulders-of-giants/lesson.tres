@@ -249,6 +249,8 @@ goal = "Our robot character's invisible! Call the [code]show()[/code] function t
 Please call [code]show()[/code] inside the [code]run()[/code] function, on line [code]2[/code], and keep the [code]Tab[/code] character at the start of the line. The computer needs that to understand your code."
 starting_code = "func run():
 	"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Your code should call show() inside the run() function." )
 validator_script_path = "make-visible/TestsMakeCharacterVisible.gd"
 script_slice_path = "make-visible/MakeCharacterVisible.live-editor/slices/MakeCharacterVisible.show.slice.tres"
@@ -265,6 +267,8 @@ goal = "The robot was turned by [code]-0.5[/code] radians. You need to make it u
 Please call [code]rotate()[/code] inside the [code]run()[/code] function, on line [code]2[/code], and keep the [code]Tab[/code] character at the start of the line. The computer needs that to understand your code."
 starting_code = "func run():
 	"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "You need to use the rotate() function, and give the proper arguments.", "Call rotate(0.5) to turn the character 0.5 radians clockwise.", "You need to call the rotate() function inside the run() function." )
 validator_script_path = "make-upright/TestsMakeRobotUpright.gd"
 script_slice_path = "make-upright/MakeRobotUpright.live-editor/slices/MakeRobotUpright.rotate.slice.tres"

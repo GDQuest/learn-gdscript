@@ -257,6 +257,8 @@ Add to the [code]level_up()[/code] function so it does the following:
 - Increases [code]max_health[/code] by 10%."
 starting_code = "func level_up():
 	pass"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "To increase a number by 10%, multiply it by [code]1.1[/code]" )
 validator_script_path = "increase_max_health/TestHealthIncreased.gd"
 script_slice_path = "increase_max_health/IncreaseMaxHealth.live-editor/slices/IncreaseMaxHealth.level.slice.tres"
@@ -283,6 +285,8 @@ starting_code = "func take_damage(amount):
 
 	if health < 0:
 		health = 0"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "You need to use an [code]if[/code] statement at the top of the function to check if the robot\'s [code]level[/code] is greater than [code]2[/code]", "To reduce the [code]amount[/code], multiply it by a value less than [code]1[/code]", "Multiplying any value by [code]0.5[/code] reduces it by 50%" )
 validator_script_path = "reducing_damage/TestReducingDamage.gd"
 script_slice_path = "reducing_damage/ReducingDamage.live-editor/slices/ReducingDamage.damage.slice.tres"
