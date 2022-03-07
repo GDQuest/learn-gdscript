@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/theme/fonts/font_text_italics.tres" type="DynamicFont" id=4]
 [ext_resource path="res://ui/theme/quiz_outline_neutral.tres" type="StyleBox" id=5]
 
 [sub_resource type="GDScript" id=1]
@@ -13,31 +12,21 @@ func _ready() -> void:
 	_animation_tree.travel(\"saying_hi\")
 "
 
-[node name="PanelContainer" type="PanelContainer"]
-margin_right = 320.0
-margin_bottom = 251.0
-rect_min_size = Vector2( 400, 300 )
+[node name="PanelContainer2" type="PanelContainer"]
+margin_right = 400.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 400, 260 )
+size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Robot" parent="." instance=ExtResource( 1 )]
-position = Vector2( 196, 137 )
-script = SubResource( 1 )
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Center" type="Control" parent="."]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 396.0
-margin_bottom = 296.0
+margin_right = 404.0
+margin_bottom = 264.0
+rect_min_size = Vector2( 400, 260 )
+size_flags_horizontal = 4
 
-[node name="Label" type="Label" parent="MarginContainer"]
-margin_top = 233.0
-margin_right = 392.0
-margin_bottom = 292.0
-size_flags_vertical = 12
-custom_fonts/font = ExtResource( 4 )
-text = "This is a placeholder for until we complete the app"
-align = 1
-autowrap = true
+[node name="Robot" parent="Center" instance=ExtResource( 1 )]
+position = Vector2( 196, 156 )
+script = SubResource( 1 )

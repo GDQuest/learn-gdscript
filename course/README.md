@@ -847,6 +847,7 @@ List of extra lessons and topics to consider adding in future app updates:
 - The `elif` keyword.
 - Breaking from a loop with the `break` keyword.
 - Continuing in a loop with the `continue` keyword.
+- Drawing functions (and `_draw()`)
 - Creating nested dictionaries (e.g. grid inventory mapping cells to {name: amount}).
 - Using arrays inside dictionaries (e.g. `{square = [Vector2(0, 0), Vector2(100, 0), ...]}`).
 - Constants.
