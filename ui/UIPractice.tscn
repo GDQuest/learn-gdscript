@@ -137,12 +137,21 @@ custom_fonts/font = ExtResource( 13 )
 custom_styles/normal = ExtResource( 14 )
 text = "Suggested Solution"
 
-[node name="SliceEditor" type="TextEdit" parent="Margin/Layout/OutputAnchors/SolutionContainer/Layout"]
+[node name="MarginContainer2" type="MarginContainer" parent="Margin/Layout/OutputAnchors/SolutionContainer/Layout"]
 margin_top = 56.0
 margin_right = 619.0
 margin_bottom = 949.0
+size_flags_vertical = 3
+custom_constants/margin_top = 0
+custom_constants/margin_bottom = 0
+
+[node name="SliceEditor" type="TextEdit" parent="Margin/Layout/OutputAnchors/SolutionContainer/Layout/MarginContainer2"]
+margin_left = 20.0
+margin_right = 599.0
+margin_bottom = 893.0
 rect_min_size = Vector2( 500, 0 )
 size_flags_vertical = 3
+custom_styles/read_only = ExtResource( 11 )
 readonly = true
 syntax_highlighting = true
 show_line_numbers = true
