@@ -271,7 +271,7 @@ You need to write the type name between the colon and the equal sign.
 
 Note: You cannot use type inference in this practice. You need to write the type name in full."
 starting_code = "var vector: String = Vector2(1, 1)
-var text: int = \"Placeholder text\"
+var text: int = \"Hello, world!\"
 var whole_number: Vector2 = 4
 var decimal_number: String = 3.14"
 hints = PoolStringArray(  )
@@ -279,7 +279,7 @@ validator_script_path = "fix-hints/TestFixHints.gd"
 script_slice_path = "fix-hints/FixHints.live-editor/slices/FixHints.fix.slice.tres"
 documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 3 )
-description = ""
+description = "Our variables have the wrong type hints, causing errors. Correct them to make the code run."
 
 [sub_resource type="Resource" id=25]
 script = ExtResource( 4 )
@@ -297,7 +297,7 @@ validator_script_path = "fix-values/TestFixValues.gd"
 script_slice_path = "fix-values/FixValues.live-editor/slices/FixValues.fix.slice.tres"
 documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 3 )
-description = ""
+description = "This time, it's the other way around: variables have the correct type hints but the wrong values. Change the values to make the code run."
 
 [resource]
 script = ExtResource( 1 )
