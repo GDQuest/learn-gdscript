@@ -95,7 +95,12 @@ INVALID_CLASS_DECLARATION,"When defining a new class, you need to follow a speci
 We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name.","To fix this error, replace whatever you put after the 'extends' or 'class_name' keyword by a name without spaces and starting with a capital letter.
 
 You can optionally use numbers in the name, but not in the first position."
-DUPLICATE_DECLARATION,"You are trying to define a signal that already exists; You can't do that.
+DUPLICATE_DECLARATION,"You are trying to define a function or variable that already exists; You can't do that.
+
+Perhaps the function or variable already exists in the current code file, but it may also be in a parent class that this GDScript code extends.","In the app, your code extends some built-in Godot code that's not visible to you.
+
+When that happens, you need to either rename your function or variable to one that will not collide with an existing one or remove this line of code."
+DUPLICATE_SIGNAL_DECLARATION,"You are trying to define a signal that already exists; You can't do that.
 
 Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends.","In the app, your code extends some built-in Godot code that's not visible to you.
 

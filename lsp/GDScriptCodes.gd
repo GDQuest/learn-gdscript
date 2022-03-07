@@ -37,6 +37,7 @@ enum ErrorCode {
 	EXPECTED_CONSTANT_EXPRESSION,
 	
 	INVALID_CLASS_DECLARATION,
+	DUPLICATE_SIGNAL_DECLARATION,
 	DUPLICATE_DECLARATION,
 	SIGNATURE_MISMATCH,
 	INVALID_ARGUMENTS,
@@ -151,7 +152,7 @@ const MESSAGE_DATABASE := [
 			"Signal '%SIGNAL_NAME%' redefined (in current or parent class)",
 			"Signal '%SIGNAL_NAME%' redefined (original in native class '%CLASS_NAME%')",
 		],
-		"code": ErrorCode.DUPLICATE_DECLARATION,
+		"code": ErrorCode.DUPLICATE_SIGNAL_DECLARATION,
 	},
 
 	# Parser errors.

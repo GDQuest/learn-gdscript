@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=25 format=2]
+[gd_resource type="Resource" load_steps=26 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
@@ -13,9 +13,17 @@ title = ""
 type = 0
 text = "Learning to program can be daunting.
 
-Yet, you want to make video games, so there is no way around learning to program. Every video game is a computer program.
+Yet, you want to make video games, so [b]there is no way around learning to program[/b]. [i]Every[/i] video game is a computer program."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
 
-Programming is the process of writing precise instructions that tell a computer how to perform a task.
+[sub_resource type="Resource" id=20]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-1-what-code-is-like/content-izKUdOCQ.tres"
+title = "Telling the computer what to do"
+type = 0
+text = "Programming is the process of writing precise instructions that tell a computer how to perform a task.
 
 A game's instructions are, for example: moving a character, drawing a life bar, or playing a sound."
 visual_element_path = ""
@@ -27,11 +35,11 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-1-what-code-is-like/content-101880.tres"
 title = ""
 type = 0
-text = "To do any of that, you need to learn a programming language: a specialized language to tell the computer what to do.
+text = "To do any of that, you need to learn a [b]programming language[/b]: a specialized language to tell the computer what to do.
 
-Programming languages are different from natural ones like English or Spanish. The computer does not think. It can't [i]interpret[/i] what you tell it.
+Programming languages are different from natural ones like English or Spanish. The computer does not think. Unlike us,it can't [i]interpret[/i] what you tell it.
 
-So you can't tell it something vague like \"draw a circle.\"
+You can't tell it something vague like \"draw a circle.\"
 
 Which circle? Where? Which color should it be? How big should it be?"
 visual_element_path = ""
@@ -41,13 +49,13 @@ has_separator = false
 [sub_resource type="Resource" id=3]
 script = ExtResource( 5 )
 content_id = "res://course/lesson-1-what-code-is-like/content-29551.tres"
-title = ""
+title = "The computer needs exact instructions"
 type = 0
-text = "To draw a filled circle, the computer needs to know exact drawing coordinates, the radius, the thickness, and color you want for the outline.
+text = "To draw a filled circle, the computer needs to know exact drawing coordinates, the radius, the thickness, and color you want.
 
 The code to do so [i]may[/i] look like this.
 
-[i]Click the Run button to run the code example and see the result.[/i]"
+[i]Click the button to run the code example and see the result.[/i]"
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -62,30 +70,18 @@ visual_element_path = "RunDrawCircle.tscn"
 reverse_blocks = false
 has_separator = false
 
-[sub_resource type="Resource" id=5]
-script = ExtResource( 5 )
-content_id = "res://course/lesson-1-what-code-is-like/content-zKUdOCQi.tres"
-title = ""
-type = 0
-text = "[i]The dark gray parts following the \"#\" sign are comments, they're not part of the code. The computer skips comments.[/i]"
-visual_element_path = ""
-reverse_blocks = false
-has_separator = false
-
 [sub_resource type="Resource" id=6]
 script = ExtResource( 5 )
 content_id = "res://course/lesson-1-what-code-is-like/content-54291.tres"
 title = ""
 type = 0
-text = "In the following lessons, you'll learn how this code works and what each part means.
+text = "In the following lessons, you'll learn how this code works.
 
-For now, we want to give you a sense of what computer code looks like: in this example, each parenthesis, capital letter, period, and comma matter.
+For now, we want to give you a sense of what computer code looks like. In this example, everything matters: each parenthesis, capital letter, period, and comma.
 
-The computer will always do exactly what you tell it to. No more, no less. It [i]blindly[/i] follows every instruction.
+The computer always does [b]exactly[/b] what you tell it to. No more, no less. It [i]blindly[/i] follows every instruction.
 
-[b]When you program, you're the one in charge, and you're free to do [i]anything[/i] you want.[/b]
-
-At the same time, there is a [i]lot[/i] to learn to tame the dumb beast that is your computer."
+[b]When you program, you're the one in charge, and you're free to do [i]anything[/i] you want.[/b]"
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -121,13 +117,19 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-1-what-code-is-like/content-92597.tres"
 title = ""
 type = 0
-text = "It's an excellent language to get started with programming because it's specialized. Unlike some other languages, it doesn't have an overwhelming amount of features for you to learn.
+text = "It's an excellent language to get started with programming because it's specialized. Unlike some other languages, it doesn't have an [i]overwhelming[/i] amount of features for you to learn."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
 
-Don't be afraid of being locked in. The concepts you learn in your first programming language will apply to all the others.
+[sub_resource type="Resource" id=21]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-1-what-code-is-like/content-iGjB7tKR.tres"
+title = "Most programming languages are similar"
+type = 0
+text = "Don't be afraid of being locked in. The concepts you learn in your first programming language will apply to all the others.
 
 Most languages have more similarities than differences. Once you learn one, it takes much less time to become productive with the next one.
-
-Like most game developers, we learned and used more than ten programming languages.
 
 Here's an example of the same code in three languages: GDScript, JavaScript, and Python.
 
@@ -179,11 +181,11 @@ title = "This is a course for beginners"
 type = 0
 text = "If you want to learn to make games or code but don't know where to start, this course should be perfect.
 
-We designed it for absolute beginners, but if you already know another language, it can also be a fun way to get started with Godot.
+We designed it for absolute beginners, but if you already know another language, it can be a fun way to get started with Godot.
 
 We will give you the coding foundations you need to start making games and applications with Godot.
 
-Please be patient. Mind that it will take time before you can make your first complete game or app alone."
+Please be patient. It will take time before you can make your first complete game alone."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -191,15 +193,13 @@ has_separator = false
 [sub_resource type="Resource" id=14]
 script = ExtResource( 5 )
 content_id = "res://course/lesson-1-what-code-is-like/content-21206.tres"
-title = ""
+title = "Learning to make games takes practice"
 type = 0
-text = "Creating games is more accessible than ever, but it still takes a lot of work and practice. Do not expect any single course, or book, to turn you into a professional. Programming is something you learn through practice.
+text = "Creating games is more accessible than ever, but it still takes a lot of work and practice. Do not expect any single course or book to turn you into a professional. Programming is something you learn through practice.
 
-If something doesn't make immediate sense, don't stress it too much! Keep practicing and come back to it later. Enjoy the learning process, and celebrate every little success.
+If something doesn't make immediate sense, don't stress it too much! Keep learning and come back to it later.
 
-It's important because you will never stop learning as a game designer and developer. You will keep discovering new and more expressive ways to program as you gain experience.
-
-It's part of the process."
+Enjoy the process and celebrate every little success. You will never stop learning as a game developer."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -232,15 +232,14 @@ type = 0
 text = "Along the way, we'll teach you:
 
 - Some of the mindset you need as a developer. Too many programming courses skip that essential part.
-- Some foundations of game programming. Knowing that will help you with any game engine.
-- How to write real GDScript code.
-- Most of the GDScript language's syntax.
+- How to write GDScript code.
+- Essentials programming foundations to get you started.
 
 As you go through the course, you will have many questions. We will answer them the best we can as we go.
 
-But there is so much to cover that we'll have to take a few shortcuts. We don't want to [i]overwhelm[/i] you with information. We also want to respect the pace at which our brains memorize things.
+But there is so much to cover that we have to take a few shortcuts. We don't want to [i]overwhelm[/i] you with information. We also want to respect the pace at which our brains memorize things.
 
-We broke down the course into bite-size lessons with many short practices. If we put too much in each part, you'd learn slower.
+We broke down the course into short lessons and practices. If we put too much into each part, you'd learn slower.
 
 If at any time you're left with burning questions, you're more than welcome to join [url=https://discord.gg/87NNb3Z]our Discord community[/url]."
 visual_element_path = ""
@@ -254,7 +253,7 @@ title = "Programming is a skill"
 type = 0
 text = "Programming is a skill, so to get good at it, you must practice. It is why we built this app.
 
-Each short lesson is immediately followed by an interactive practice to get you to use what you learned.
+Each lesson is followed by an interactive practice to use what you learned.
 
 Speaking of which, it's time to look at the practice screen!
 
@@ -282,5 +281,5 @@ description = "Run your first bit of code and see the result."
 [resource]
 script = ExtResource( 1 )
 title = "What Code is Like"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 20 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 21 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ]
 practices = [ SubResource( 19 ) ]
