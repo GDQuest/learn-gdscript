@@ -1,5 +1,6 @@
 extends Control
 
+
 onready var _content_container := $Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/VBoxContainer
 onready var _outliner_button := $Layout/TopBar/MarginContainer/ToolBarLayout/OutlinerButton as Button
 
