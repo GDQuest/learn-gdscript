@@ -24,9 +24,9 @@ func _ready() -> void:
 	for i in inventory.size():
 		var child = inventory[i]
 		if i == first_item_index:
-			child.texture = child.FIRE
+			child.texture = child.SWORD
 		elif i == second_item_index:
-			child.texture = child.LIGHTNING
+			child.texture = child.SHIELD
 		child.connect("mouse_entered", self, "set_current_item", [child])
 		child.connect("mouse_exited", self, "set_current_item", [null])
 		child.connect("used", self, "_on_item_used")

@@ -1,8 +1,8 @@
 extends PracticeTester
 
 var permutations = [
-	PoolStringArray(["fire pickup", "lightning pickup"]),
-	PoolStringArray(["lightning pickup", "fire pickup"])
+	PoolStringArray(["sword", "shield"]),
+	PoolStringArray(["shield", "sword"])
 ]
 
 var game_board: Control
