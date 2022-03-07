@@ -5,6 +5,7 @@ signal course_requested(force_outliner)
 onready var _settings_button := $Layout/MarginContainer/ColumnLayout/SideColumn/SettingsButton as Button
 onready var _outliner_button := $Layout/MarginContainer/ColumnLayout/SideColumn/OutlinerButton as Button
 onready var _start_button := $Layout/MarginContainer/ColumnLayout/SideColumn/StartButton as Button
+onready var _quit_button := $Layout/MarginContainer/ColumnLayout/SideColumn/QuitButton as Button
 onready var _report_button := $Layout/TopBar/MarginContainer/ToolBarLayout/ReportButton as Button
 onready var _scroll_container := $Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer as ScrollContainer
 
@@ -18,6 +19,7 @@ func _ready() -> void:
 	_settings_button.connect("pressed", Events, "emit_signal", ["settings_requested"])
 	_outliner_button.connect("pressed", self, "_on_outliner_pressed")
 	_start_button.connect("pressed", self, "_on_start_requested")
+	_quit_button.connect("pressed", get_tree(), "quit")
 	
 	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
 	for child in _content_list.get_children():
@@ -25,6 +27,9 @@ func _ready() -> void:
 			child.connect("meta_clicked", OS, "shell_open")
 
 	_scroll_container.grab_focus()
+	
+	if OS.has_feature('JavaScript'):
+		_quit_button.queue_free()
 
 
 func set_button_continue(enable: bool = true) -> void:

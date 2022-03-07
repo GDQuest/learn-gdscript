@@ -14,6 +14,7 @@ func _ready() -> void:
 		return
 	connect("pressed", self, "_on_pressed")
 	Events.connect("fullscreen_toggled", self, "_update_icon")
+	_update_icon()
 
 
 func _on_pressed() -> void:

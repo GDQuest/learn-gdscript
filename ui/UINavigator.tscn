@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/BreadCrumbs.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://ui/icons/icon_godot_head.svg" type="Texture" id=10]
 [ext_resource path="res://ui/components/FullScreenButton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://ui/components/popups/LessonDonePopup.tscn" type="PackedScene" id=12]
+[ext_resource path="res://ui/components/QuitButton.tscn" type="PackedScene" id=13]
 
 [node name="UINavigator" type="PanelContainer"]
 anchor_right = 1.0
@@ -19,9 +20,6 @@ anchor_bottom = 1.0
 mouse_filter = 2
 theme = ExtResource( 1 )
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Layout" type="VBoxContainer" parent="."]
 margin_right = 1920.0
@@ -84,14 +82,14 @@ margin_right = 96.0
 
 [node name="Spacer" type="Control" parent="Layout/Header/MarginContainer/HeaderContent"]
 margin_left = 112.0
-margin_right = 1712.0
+margin_right = 1656.0
 margin_bottom = 48.0
 rect_pivot_offset = Vector2( -514, 99 )
 size_flags_horizontal = 3
 
 [node name="ReportButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
-margin_left = 1728.0
-margin_right = 1776.0
+margin_left = 1672.0
+margin_right = 1720.0
 margin_bottom = 48.0
 hint_tooltip = "Report an issue"
 mouse_default_cursor_shape = 2
@@ -99,8 +97,8 @@ icon = ExtResource( 6 )
 flat = true
 
 [node name="SettingsButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
-margin_left = 1792.0
-margin_right = 1840.0
+margin_left = 1736.0
+margin_right = 1784.0
 margin_bottom = 48.0
 hint_tooltip = "Configure the app"
 mouse_default_cursor_shape = 2
@@ -108,11 +106,14 @@ icon = ExtResource( 5 )
 flat = true
 
 [node name="FullScreenButton" parent="Layout/Header/MarginContainer/HeaderContent" instance=ExtResource( 11 )]
+margin_left = 1800.0
+margin_right = 1840.0
+margin_bottom = 47.0
+
+[node name="QuitButton" parent="Layout/Header/MarginContainer/HeaderContent" instance=ExtResource( 13 )]
 margin_left = 1856.0
 margin_right = 1896.0
-margin_bottom = 48.0
-mouse_default_cursor_shape = 2
-size_flags_vertical = 1
+margin_bottom = 47.0
 
 [node name="Content" type="Panel" parent="Layout"]
 margin_top = 48.0
