@@ -1,77 +1,60 @@
 tool
 extends Node2D
 
-const color_green := Color("3dff6e")
-const color_red := Color("928fb8")
 
-export var _offset := Vector2.ZERO
-export (int, 1, 7) var number := 5 setget _set_number, get_number
-export (int, 1, 7) var modulo := 3 setget _set_modulo, get_modulo
+const NORMAL_STYLEBOX := preload("res://course/lesson-15-modulo/visuals/Modulo/normal_stylebox.tres")
+const REMAINDER_STYLEBOX := preload("res://course/lesson-15-modulo/visuals/Modulo/remainder_stylebox.tres")
+const MODULO_SIZE_X := 48
+const MODULO_GAP := 4
 
-onready var _blocks := $Blocks
-onready var _string := $String
-onready var _remainder := $Remainder
+export (int, 1, 7) var number := 5 setget _set_number
+export (int, 1, 7) var modulo := 3 setget _set_modulo
 
+var number_color := Color.black
+var modulo_color := Color.black
+
+onready var _result := $Result as Control
+onready var _result_blocks := $Result/HBoxContainerBlocks as HBoxContainer
+onready var _result_modulo := $Result/HBoxContainerModulo as HBoxContainer
+onready var _string := $String as RichTextLabel
+onready var _remainder := $Remainder as Label
 
 func _ready() -> void:
-	_align_blocks()
+	number_color = NORMAL_STYLEBOX.border_color
+	modulo_color = _result_modulo.get_child(0).get_stylebox("panel").border_color
 	_update_visual()
 
 
-func _align_blocks() -> void:
-	for c in _blocks.get_children():
-		c.modulate.a = 0.0
-	
-	var row := 0
-	var column := 0
-	for i in range(max(number, modulo)):
-		_blocks.get_child(i).position = Vector2(40 * column, row * 40) + _offset
-		row += 1
-		if row % modulo == 0 and modulo < number:
-			column += 1
-			row = 0
-
-
 func _update_visual() -> void:
-	if number >= modulo:
-		for i in range(number):
-			_blocks.get_child(i).modulate.a = 0
-			if i < number - (number % modulo):
-				_blocks.get_child(i).modulate = color_red
-			else:
-				_blocks.get_child(i).modulate = color_green
-	else:
-		for i in range(modulo):
-			_blocks.get_child(i).modulate = color_green
-			
-			if i >= number:
-				_blocks.get_child(i).modulate = color_red
-	
-	_string.text = "%s %% %s" % [number, modulo]
+	var remainder := number % modulo
+	var cap := max(number, remainder)
+	for i in range(_result_blocks.get_child_count()):
+		var block: Panel = _result_blocks.get_child(i)
+		block.visible = i < cap
+		block.add_stylebox_override("panel", NORMAL_STYLEBOX if i < number - remainder else REMAINDER_STYLEBOX)
+
+	var rest := int(number / modulo)
+	for i in range(_result_modulo.get_child_count()):
+		var modulo_highlight: Panel = _result_modulo.get_child(i)
+		modulo_highlight.visible = i < rest
+		modulo_highlight.rect_min_size.x = MODULO_SIZE_X * modulo + MODULO_GAP * (modulo - 1)
+
+	_string.bbcode_text = (
+		"[center][color=#%s]%s[/color] %% [color=#%s]%s[/color][/center]" %
+		[number_color.to_html(), number, modulo_color.to_html(), modulo]
+	)
 	_remainder.text = "Remainder: %s" % [number % modulo]
 
 
 func _set_number(value: int) -> void:
 	number = value
-	emit_signal("number_changed", value)
-	if not _blocks:
+	if not _result:
 		return
-	_align_blocks()
 	_update_visual()
 
 
 func _set_modulo(value: int) -> void:
 	modulo = value
-	emit_signal("modulo_changed", value)
-	if not _blocks:
+	if not _result:
 		return
-	_align_blocks()
 	_update_visual()
-
-
-func get_number() -> int:
-	return number
-
-
-func get_modulo() -> int:
-	return modulo

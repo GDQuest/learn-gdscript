@@ -7,6 +7,7 @@ extends HBoxContainer
 signal scene_instance_set
 
 const ERROR_NO_RUN_FUNCTION := "Scene %s doesn't have a run() function. The Run button won't work."
+const HSLIDER_GRABBER_HIGHLIGHT := preload("res://ui/theme/hslider_grabber_highlight.tres")
 
 export var scene: PackedScene setget set_scene
 export(String, MULTILINE) var gdscript_code := "" setget set_code
@@ -112,7 +113,7 @@ func set_run_button_label(new_text: String) -> void:
 		_run_button.text = run_button_label
 
 
-func create_slider_for(property_name, min_value := 0.0, max_value := 100.0, step := 1.0) -> HSlider:
+func create_slider_for(property_name, min_value := 0.0, max_value := 100.0, step := 1.0, color := Color.black) -> HSlider:
 	if not _scene_instance:
 		yield(self, "scene_instance_set")
 	var box := HBoxContainer.new()
@@ -134,6 +135,16 @@ func create_slider_for(property_name, min_value := 0.0, max_value := 100.0, step
 	slider.rect_min_size.x = 100.0
 	slider.connect("value_changed", self, "_set_instance_value", [property_name, value_label])
 	_set_instance_value(property_value, property_name, value_label)
+	
+	if color != Color.black:
+		var hslider_grabber_highlight := HSLIDER_GRABBER_HIGHLIGHT.duplicate()
+		hslider_grabber_highlight.bg_color = color
+
+		label.add_color_override("font_color", color)
+		value_label.add_color_override("font_color", color)
+		slider.add_stylebox_override("grabber_area", hslider_grabber_highlight)
+		slider.add_stylebox_override("grabber_area_highlight", hslider_grabber_highlight)
+	
 	return slider
 
 
