@@ -1,6 +1,5 @@
 extends Node2D
 
-var health = 50
 var _healing = 50
 var _max_health = 100
 
@@ -27,6 +26,8 @@ func _update_robot() -> void:
 
 
 # EXPORT heal
+var health = 50
+
 func heal(amount):
 	health += amount
 # /EXPORT heal
