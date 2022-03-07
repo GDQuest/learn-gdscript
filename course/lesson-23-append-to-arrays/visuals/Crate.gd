@@ -3,18 +3,16 @@ extends Panel
 signal used
 signal restored
 
-const FIRE := preload("res://course/lesson-24-access-array-indices/visuals/inventory/pickup_fire.png")
-const GEM := preload("res://course/lesson-24-access-array-indices/visuals/inventory/pickup_gem.png")
-const HEALTH := preload("res://course/lesson-24-access-array-indices/visuals/inventory/pickup_health.png")
-const ICE := preload("res://course/lesson-24-access-array-indices/visuals/inventory/pickup_ice.png")
-const LIGHTNING := preload("res://course/lesson-24-access-array-indices/visuals/inventory/pickup_lightning.png")
+const SWORD := preload("res://course/common/inventory/sword.png")
+const SHIELD := preload("res://course/common/inventory/shield.png")
+const HEALTH := preload("res://course/common/inventory/healing_heart.png")
+const GEMS := preload("res://course/common/inventory/gems.png")
 
 const textures = [
-	FIRE,
-	GEM,
+	SWORD,
+	SHIELD,
 	HEALTH,
-	ICE,
-	LIGHTNING
+	GEMS
 ]
 
 
@@ -88,7 +86,6 @@ func get_texture() -> Texture:
 func get_texture_name():
 	var path := texture.resource_path
 	var filename := path.get_file().get_basename().split("_")
-	filename.invert()
 	return PoolStringArray(filename).join(" ")
 
 func set_label_index(index: int) -> void:
