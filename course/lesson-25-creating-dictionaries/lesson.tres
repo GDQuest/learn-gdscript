@@ -109,7 +109,7 @@ hint = ""
 explanation_bbcode = "The key [code]\"healing heart\"[/code] appears [b]twice[/b] in the dictionary.
 
 In the above example, Godot wouldn't know whether to return [code]3[/code] or [code]8[/code] when using [code]inventory[\"healing heart\"][/code]. This is why keys need to be unique."
-answer_options = [ "\"healing heart\"", "\"ice gem\"", "\"fire gem\"" ]
+answer_options = [ "\"healing heart\"", "\"shield\"", "\"sword\"" ]
 valid_answers = [ "\"healing heart\"" ]
 is_multiple_choice = false
 do_shuffle_answers = true
@@ -165,14 +165,14 @@ has_separator = false
 [sub_resource type="Resource" id=11]
 script = ExtResource( 3 )
 quiz_id = "res://course/lesson-25-creating-dictionaries/quiz-Ib5BnVHA.tres"
-question = "How would you access how many ice gems the player has?"
+question = "How would you access how many gems the player has?"
 content_bbcode = ""
 hint = ""
 explanation_bbcode = "We need to make sure the key is the same as we defined in the dictionary.
 
-In our case, [code]var item_count = inventory[\"ice gem\"][/code] is correct."
-answer_options = [ "var item_count = inventory[\"ice gem\"]", "var item_count = inventory[\"ice gems\"]", "var item_count = inventory[\"fire gem\"]" ]
-valid_answers = [ "var item_count = inventory[\"ice gem\"]" ]
+In our case, [code]var item_count = inventory[\"gems\"][/code] is correct."
+answer_options = [ "var item_count = inventory[\"gem\"]", "var item_count = inventory[\"gems\"]", "var item_count = inventory[\"sword\"]" ]
+valid_answers = [ "var item_count = inventory[\"gem\"]" ]
 is_multiple_choice = false
 do_shuffle_answers = true
 
@@ -227,8 +227,8 @@ We use a dictionary for the player's inventory. We defined the [code]inventory[/
 Give the player the following items by adding the correct keys and values to the dictionary:
 
 - Three \"healing heart\".
-- Two \"fire gem\".
-- One \"ice gem\".
+- Nine \"gems\".
+- One \"sword\".
 
 The keys should be text strings, and the values whole numbers."
 starting_code = "var inventory = {
@@ -251,7 +251,7 @@ We've started the [code]add_item()[/code] function for you.
 
 The [code]inventory[/code] dictionary should use the [code]item_name[/code] parameter as the key to access its values, and we should increase the value by [code]amount[/code].
 
-To test this practice, we'll use your [code]add_item()[/code] function to increase the item count of Healing Heart, Fire Gem, and Ice Gem."
+To test this practice, we'll use your [code]add_item()[/code] function to increase the item count of Healing Heart, Gems, and Sword."
 starting_code = "func add_item(item_name, amount):
 	"
 hints = PoolStringArray( "You can access the value in the [code]inventory[/code] dictionary by using [code]inventory[item_name][/code]", "Remember to add [code]amount[/code] to the value. You can do this directly with [code]+=[/code]" )

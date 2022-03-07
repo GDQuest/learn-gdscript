@@ -4,8 +4,8 @@ var inventory: Node
 
 var desired_inventory := {
 	"healing heart": 8,
-	"fire gem": 4,
-	"ice gem": 6,
+	"gems": 4,
+	"sword": 6,
 }
 
 func _prepare() -> void:

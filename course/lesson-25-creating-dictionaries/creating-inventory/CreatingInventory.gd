@@ -2,9 +2,9 @@ extends Control
 
 
 onready var item_nodes := {
-	"healing heart": $Margin/Column/Grid/HealingHeart,
-	"fire gem": $Margin/Column/Grid/FireGem,
-	"ice gem": $Margin/Column/Grid/IceGem,
+	"healing heart": find_node("HealingHeart"),
+	"gems": find_node("Gems"),
+	"sword": find_node("Sword"),
 }
 
 onready var _grid := $Margin/Column/Grid as GridContainer
@@ -21,8 +21,8 @@ func reset():
 # EXPORT create
 var inventory = {
 	"healing heart": 3,
-	"fire gem": 2,
-	"ice gem": 1,
+	"gems": 9,
+	"sword": 1,
 }
 # /EXPORT create
 
@@ -30,7 +30,6 @@ func run():
 	for item in inventory:
 		var amount = inventory[item]
 		display_item(item, amount)
-
 
 
 func _run():
