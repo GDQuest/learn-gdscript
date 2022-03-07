@@ -1,0 +1,244 @@
+[gd_resource type="Resource" load_steps=24 format=2]
+
+[ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
+[ext_resource path="res://resources/Practice.gd" type="Script" id=2]
+[ext_resource path="res://resources/Lesson.gd" type="Script" id=3]
+[ext_resource path="res://resources/ContentBlock.gd" type="Script" id=4]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-DizKUdOC.tres"
+title = ""
+type = 0
+text = "Like with arrays, you can loop over dictionaries. You can loop over both their keys and values.
+
+Let's see how it works with two examples."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-QiGjB7tK.tres"
+title = "Displaying an inventory's content"
+type = 0
+text = "To display the player's inventory, you need to know what it contains. You need the name and amount of each object.
+
+And from code, you can only achieve that by looping over the whole dictionary and processing key-value pairs one by one.
+
+To get the list of keys in the dictionary, you can call it's [code]keys()[/code] member function."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-RHJMQ2XN.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ExamplePrintKeys.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-wQMqAYVj.tres"
+title = ""
+type = 0
+text = "But it's something we do so much that you don't need to call the function.
+
+Instead, you can directly type the variable name in a [code]for[/code] loop after the [code]in[/code] keyword. The language understands that you implicitly want to loop over the dictionary's keys."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-otxF5HUx.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "CodeLoopOverDictionary.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-ej47MqE8.tres"
+title = ""
+type = 0
+text = "You can get the values with the syntax [code]dictionary[key][/code] as you learned in the previous lesson.
+
+We can loop over the inventory keys, get the corresponding values, and display all that information in the user interface."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-22rtQEn9.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "CodePrintKeyValues.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-2V6jGvGm.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ExamplePrintKeyValues.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-ZPxY8VUD.tres"
+title = ""
+type = 0
+text = "Instead of printing the key-value pairs to the output console, we can code and call a dedicated function that displays items in the user interface."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-1c9llf8B.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "CodeDisplayInventory.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-pPwQDwfy.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ExampleDisplayInventory.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-qdYOexRj.tres"
+title = "Mapping grid cells to units"
+type = 0
+text = "We can also use a dictionary to map units to their position on a game board.
+
+That's how you'd typically code a board game, a grid-based RPG, or a tactical RPG.
+
+While we focused on [code]String[/code] keys so far, GDScript dictionaries accept any value type as a key, allowing you to map anything to anything.
+
+The only limitation is that every key must be unique."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-TRhZN4rS.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "CodeUnitsDict.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-5AJTESv5.tres"
+title = ""
+type = 0
+text = "Using a [code]for[/code] loop, you can use the key-value pairs to place units on the board at the start of a game."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-67UJ8TLt.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "CodeUnitsDictForLoop.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-tT6n1Txl.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "ExampleGameBoard.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-26-looping-over-dictionaries/content-TtcyhcIb.tres"
+title = ""
+type = 0
+text = "In the following practices, you will loop over dictionaries and process their content."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 2 )
+practice_id = "res://course/lesson-26-looping-over-dictionaries/practice-nVHARbBW.tres"
+title = "Displaying the inventory"
+goal = "We use a dictionary to represent the player's inventory in this game. The dictionary keys are the name of items, and they map to the number of items that the player owns.
+
+You need to loop over the dictionary and display the name and amount of every item in the inventory.
+
+To do so, call the [code]display_item()[/code] function. It takes two arguments: the item name and the amount."
+starting_code = "var inventory := {
+	\"healing heart\": 3,
+	\"gems\": 5,
+	\"sword\": 1,
+}
+
+func run():
+	"
+hints = PoolStringArray( "The [code]display_item()[/code] function needs the item type and its amount, so you need to get the amount using the item name as a key in the [code]inventory[/code] variable.", "You can get the amount of each item using the syntax [code]inventory[item_name][/code]." )
+validator_script_path = "display-inventory/TestDisplayInventory.gd"
+script_slice_path = "display-inventory/DisplayInventory.live-editor/slices/DisplayInventory.run.slice.tres"
+documentation_references = PoolStringArray( "display_item" )
+documentation_resource = ExtResource( 1 )
+description = "We need to display the player's inventory on the screen but lack the code to do so. Use a loop to display every item."
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 2 )
+practice_id = "res://course/lesson-26-looping-over-dictionaries/practice-bDGt6fUq.tres"
+title = "Placing units on the board"
+goal = "We have a dictionary named [code]units[/code] that maps a cell position on the grid to a unit to put there.
+
+Using a for loop and the [code]place_unit()[/code] function, place every unit in the units dictionary at the desired position on the game board."
+starting_code = "var units = {
+	Vector2(1, 0): \"robot\",
+	Vector2(2, 2): \"turtle\",
+	Vector2(3, 0): \"robot\",
+}
+
+func run():
+	"
+hints = PoolStringArray( "The dictionary keys are cell coordinates you can use to access the unit type from the [code]units[/code] dictionary.", "To access a unit’s type from a cell, use the syntax [code]units[cell_coordinates][/code]." )
+validator_script_path = "place-units/TestPlaceUnits.gd"
+script_slice_path = "place-units/PlaceUnits.live-editor/slices/PlaceUnits.run.slice.tres"
+documentation_references = PoolStringArray( "place_unit" )
+documentation_resource = ExtResource( 1 )
+description = "We want to populate our game board with units at the start of every battle. Loop over the dictionary to place units on the board."
+
+[resource]
+script = ExtResource( 3 )
+title = "Looping over dictionaries"
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 15 ), SubResource( 17 ), SubResource( 16 ), SubResource( 6 ), SubResource( 18 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 19 ), SubResource( 11 ), SubResource( 12 ) ]
+practices = [ SubResource( 13 ), SubResource( 14 ) ]

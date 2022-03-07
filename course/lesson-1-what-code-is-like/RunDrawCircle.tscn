@@ -29,17 +29,14 @@ margin_right = 14.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 theme = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_right = 656.0
 margin_bottom = 260.0
 gdscript_code = "draw_circle(
-	Vector2(0, 0), # position
-	60, # radius
-	Color.aqua # color
+	Vector2(0, 0),
+	60,
+	Color.aqua
 )"
 run_button_label = "draw_circle()"
 

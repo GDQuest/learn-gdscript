@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/SliceProperties.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-27-value-types/display-energy/DisplayingEnergy.live-editor/scene/DisplayingEnergy.tscn.tres" type="Resource" id=2]
+[ext_resource path="res://course/lesson-27-value-types/display-energy/DisplayingEnergy.live-editor/scripts/DisplayingEnergy.gd.tres" type="Resource" id=3]
+
+[resource]
+script = ExtResource( 1 )
+scene_properties = ExtResource( 2 )
+script_properties = ExtResource( 3 )
+leading_spaces = 0
+keyword = "EXPORT"
+closing = false
+name = "run"
+is_full_file = false
+start = 14
+end = 19
+lines_before = [ "extends Node", "", "onready var bar := $VBoxContainer/HBoxContainer/Bar as ProgressBar", "", "onready var energy_label := $VBoxContainer/HBoxContainer/Bar/EnergyLabel as Label", "onready var shadow := $VBoxContainer/HBoxContainer/Bar/EnergyLabel/Shadow as Label", "", "", "func _run():", "	run()", "	yield(get_tree().create_timer(0.5), \"timeout\")", "	Events.emit_signal(\"practice_run_completed\")", "", "" ]
+lines_after = [ "	bar.value = energy", "", "", "func display_energy(value):", "	if not value is String:", "		return", "	energy_label.text = \"%s / 100\" % value", "	shadow.text = energy_label.text", "" ]
+lines_editable = [ "var energy = 80", "", "func run():", "	display_energy(str(energy))" ]

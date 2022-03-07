@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://course/common/GDScriptCodeExample.tscn" type="PackedScene" id=1]
 [ext_resource path="res://course/lesson-1-what-code-is-like/ThreeCodeExamples.gd" type="Script" id=2]
+[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=3]
 
 [node name="ThreeCodeExamples" type="VBoxContainer"]
 anchor_right = 1.0
@@ -22,7 +23,6 @@ func take_damage(amount):
 	health -= amount
 	if health < 0:
 		die()"
-draw_spaces = true
 
 [node name="JavascriptCodeExample" type="TextEdit" parent="."]
 margin_top = 190.0
@@ -30,6 +30,7 @@ margin_right = 1920.0
 margin_bottom = 440.0
 rect_min_size = Vector2( 0, 250 )
 size_flags_horizontal = 3
+custom_styles/read_only = ExtResource( 3 )
 text = "// JavaScript
 function take_damage(amount) {
   health -= amount
@@ -37,6 +38,7 @@ function take_damage(amount) {
     die()
   }
 }"
+readonly = true
 syntax_highlighting = true
 show_line_numbers = true
 draw_tabs = true
@@ -47,11 +49,13 @@ margin_right = 1920.0
 margin_bottom = 630.0
 rect_min_size = Vector2( 0, 186 )
 size_flags_horizontal = 3
+custom_styles/read_only = ExtResource( 3 )
 text = "# Python
 def take_damage(amount):
     health -= amount
     if health < 0:
         die()"
+readonly = true
 syntax_highlighting = true
 show_line_numbers = true
 draw_tabs = true

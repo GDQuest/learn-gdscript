@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://ui/components/SliceEditor.gd" type="Script" id=1]
 [ext_resource path="res://ui/icons/icon_pause.png" type="Texture" id=2]
@@ -10,9 +10,7 @@
 [ext_resource path="res://ui/theme/panel_sliceeditor.tres" type="StyleBox" id=8]
 [ext_resource path="res://ui/icons/icon_console.png" type="Texture" id=9]
 [ext_resource path="res://ui/icons/expand.png" type="Texture" id=10]
-[ext_resource path="res://ui/theme/button_practice_pressed.tres" type="StyleBox" id=11]
-[ext_resource path="res://ui/theme/button_practice_normal.tres" type="StyleBox" id=12]
-[ext_resource path="res://ui/theme/button_practice_hover.tres" type="StyleBox" id=13]
+[ext_resource path="res://ui/theme/focus_outside_button.tres" type="StyleBox" id=11]
 [ext_resource path="res://ui/components/LockedOverlay.tscn" type="PackedScene" id=14]
 [ext_resource path="res://ui/icons/icon_continue.png" type="Texture" id=17]
 [ext_resource path="res://ui/components/ConnectionIndicator.tscn" type="PackedScene" id=18]
@@ -67,9 +65,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 7 )
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Column" type="VBoxContainer" parent="."]
 margin_right = 1920.0
@@ -80,14 +75,14 @@ size_flags_horizontal = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="Column"]
 margin_right = 1920.0
-margin_bottom = 867.0
+margin_bottom = 883.0
 rect_clip_content = true
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 8 )
 
 [node name="SliceEditor" type="TextEdit" parent="Column/PanelContainer"]
 margin_right = 1920.0
-margin_bottom = 867.0
+margin_bottom = 883.0
 rect_min_size = Vector2( 500, 0 )
 syntax_highlighting = true
 show_line_numbers = true
@@ -101,9 +96,9 @@ script = ExtResource( 1 )
 [node name="DFMButton" type="Button" parent="Column/PanelContainer"]
 modulate = Color( 1, 1, 1, 0.12549 )
 margin_left = 1880.0
-margin_top = 820.0
+margin_top = 836.0
 margin_right = 1920.0
-margin_bottom = 867.0
+margin_bottom = 883.0
 hint_tooltip = "Toggle the code editor expanded."
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 8
@@ -115,6 +110,8 @@ flat = true
 
 [node name="LockedOverlay" parent="Column/PanelContainer" instance=ExtResource( 14 )]
 visible = false
+margin_right = 1906.0
+margin_bottom = 953.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Column/PanelContainer"]
 margin_left = 1864.0
@@ -133,7 +130,7 @@ rect_min_size = Vector2( 24, 24 )
 expand = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Column"]
-margin_top = 883.0
+margin_top = 899.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 mouse_filter = 2
@@ -142,25 +139,23 @@ mouse_filter = 2
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
-margin_bottom = 177.0
+margin_bottom = 161.0
 mouse_filter = 2
 
 [node name="Row" type="HBoxContainer" parent="Column/MarginContainer/Column"]
 margin_right = 1880.0
-margin_bottom = 71.0
+margin_bottom = 63.0
 mouse_filter = 2
 alignment = 1
 
 [node name="RunButton" type="Button" parent="Column/MarginContainer/Column/Row"]
 margin_left = 684.0
 margin_right = 844.0
-margin_bottom = 71.0
+margin_bottom = 63.0
 rect_min_size = Vector2( 160, 40 )
 hint_tooltip = "Run your code."
 mouse_default_cursor_shape = 2
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 11 )
-custom_styles/normal = ExtResource( 12 )
+custom_styles/focus = ExtResource( 11 )
 shortcut_in_tooltip = false
 shortcut = SubResource( 2 )
 text = "Run"
@@ -169,13 +164,11 @@ icon = ExtResource( 3 )
 [node name="PauseButton" type="Button" parent="Column/MarginContainer/Column/Row"]
 margin_left = 860.0
 margin_right = 1020.0
-margin_bottom = 71.0
+margin_bottom = 63.0
 rect_min_size = Vector2( 160, 40 )
 hint_tooltip = "Toggle the game viewport paused."
 mouse_default_cursor_shape = 2
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 11 )
-custom_styles/normal = ExtResource( 12 )
+custom_styles/focus = ExtResource( 11 )
 toggle_mode = true
 shortcut_in_tooltip = false
 shortcut = SubResource( 4 )
@@ -185,14 +178,12 @@ icon = ExtResource( 2 )
 [node name="RestoreButton" type="Button" parent="Column/MarginContainer/Column/Row"]
 margin_left = 1036.0
 margin_right = 1196.0
-margin_bottom = 71.0
+margin_bottom = 63.0
 rect_min_size = Vector2( 160, 40 )
 hint_tooltip = "Reset your code to the starting point."
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 11 )
-custom_styles/normal = ExtResource( 12 )
+custom_styles/focus = ExtResource( 11 )
 disabled = true
 shortcut_in_tooltip = false
 shortcut = SubResource( 8 )
@@ -200,23 +191,21 @@ text = "Reset"
 icon = ExtResource( 5 )
 
 [node name="Row2" type="HBoxContainer" parent="Column/MarginContainer/Column"]
-margin_top = 87.0
+margin_top = 79.0
 margin_right = 1880.0
-margin_bottom = 157.0
+margin_bottom = 141.0
 mouse_filter = 2
 alignment = 1
 
 [node name="SolutionButton" type="Button" parent="Column/MarginContainer/Column/Row2"]
-margin_left = 652.0
-margin_right = 834.0
-margin_bottom = 70.0
+margin_left = 658.0
+margin_right = 836.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 160, 40 )
 hint_tooltip = "Show this practice's solution code."
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 11 )
-custom_styles/normal = ExtResource( 12 )
+custom_styles/focus = ExtResource( 11 )
 toggle_mode = true
 shortcut_in_tooltip = false
 shortcut = SubResource( 10 )
@@ -224,14 +213,12 @@ text = "Solution"
 icon = ExtResource( 4 )
 
 [node name="ConsoleButton" type="Button" parent="Column/MarginContainer/Column/Row2"]
-margin_left = 850.0
-margin_right = 1017.0
-margin_bottom = 70.0
+margin_left = 852.0
+margin_right = 1015.0
+margin_bottom = 62.0
 hint_tooltip = "Toggle the output console's visibility."
 mouse_default_cursor_shape = 2
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 11 )
-custom_styles/normal = ExtResource( 12 )
+custom_styles/focus = ExtResource( 11 )
 toggle_mode = true
 shortcut_in_tooltip = false
 pressed = true
@@ -240,16 +227,14 @@ text = "Output"
 icon = ExtResource( 9 )
 
 [node name="ContinueButton" type="Button" parent="Column/MarginContainer/Column/Row2"]
-margin_left = 1033.0
-margin_right = 1227.0
-margin_bottom = 70.0
+margin_left = 1031.0
+margin_right = 1221.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 160, 40 )
 hint_tooltip = "Continue the course."
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 11 )
-custom_styles/normal = ExtResource( 12 )
+custom_styles/focus = ExtResource( 11 )
 disabled = true
 shortcut_in_tooltip = false
 shortcut = SubResource( 10 )

@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/popups/ErrorOverlayPopup.gd" type="Script" id=2]
-[ext_resource path="res://ui/theme/button_outline_large_focus.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=7]
@@ -21,9 +20,6 @@ custom_constants/margin_top = 0
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="."]
 margin_right = 580.0
@@ -34,20 +30,16 @@ custom_styles/panel = ExtResource( 6 )
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 580.0
 margin_bottom = 362.0
-custom_constants/margin_right = 8
-custom_constants/margin_top = 8
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 8
 
 [node name="Column" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 572.0
-margin_bottom = 354.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 560.0
+margin_bottom = 342.0
 custom_constants/separation = 8
 
 [node name="ErrorLabel" type="Label" parent="MarginContainer/Column"]
-margin_right = 564.0
+margin_right = 540.0
 margin_bottom = 28.0
 custom_colors/font_color = Color( 0.360784, 0.678431, 0.988235, 1 )
 custom_fonts/font = ExtResource( 7 )
@@ -56,18 +48,18 @@ autowrap = true
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/Column"]
 margin_top = 36.0
-margin_right = 564.0
+margin_right = 540.0
 margin_bottom = 36.0
 custom_constants/separation = 0
 
 [node name="Content" type="VBoxContainer" parent="MarginContainer/Column"]
 margin_top = 44.0
-margin_right = 564.0
-margin_bottom = 346.0
+margin_right = 540.0
+margin_bottom = 322.0
 size_flags_vertical = 3
 
 [node name="ErrorExplanation" parent="MarginContainer/Column/Content" instance=ExtResource( 5 )]
-margin_right = 564.0
+margin_right = 540.0
 margin_bottom = 99.0
 rect_min_size = Vector2( 200, 0 )
 title = "Why this happens"
@@ -76,7 +68,7 @@ is_expanded = true
 [node name="Value" type="RichTextLabel" parent="MarginContainer/Column/Content/ErrorExplanation"]
 margin_left = 8.0
 margin_top = 58.0
-margin_right = 556.0
+margin_right = 532.0
 margin_bottom = 87.0
 bbcode_enabled = true
 bbcode_text = "Our error explanation."
@@ -85,16 +77,16 @@ fit_content_height = true
 
 [node name="ErrorSuggestion" parent="MarginContainer/Column/Content" instance=ExtResource( 5 )]
 margin_top = 115.0
-margin_right = 564.0
+margin_right = 540.0
 margin_bottom = 161.0
 title = "How to fix this"
 
 [node name="Value" type="RichTextLabel" parent="MarginContainer/Column/Content/ErrorSuggestion"]
 visible = false
 margin_left = 8.0
-margin_top = 52.0
-margin_right = 564.0
-margin_bottom = 180.0
+margin_top = 58.0
+margin_right = 556.0
+margin_bottom = 87.0
 bbcode_enabled = true
 bbcode_text = "Our suggestion on how to fix it."
 text = "Our suggestion on how to fix it."
@@ -120,18 +112,17 @@ Thank you!"
 
 [node name="Buttons" type="HBoxContainer" parent="MarginContainer/Column"]
 visible = false
-margin_top = 287.0
-margin_right = 537.0
-margin_bottom = 334.0
+margin_top = 299.0
+margin_right = 564.0
+margin_bottom = 346.0
 alignment = 1
 
 [node name="CloseButton" type="Button" parent="MarginContainer/Column/Buttons"]
-margin_left = 208.0
-margin_right = 328.0
+margin_left = 222.0
+margin_right = 342.0
 margin_bottom = 47.0
 rect_min_size = Vector2( 120, 0 )
 custom_styles/hover = ExtResource( 9 )
 custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 3 )
 custom_styles/normal = ExtResource( 8 )
 text = "Hide"

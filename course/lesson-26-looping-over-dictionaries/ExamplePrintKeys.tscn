@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/components/OutputConsole.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends OutputConsole
+
+var inventory = {
+	\"healing heart\": 3,
+	\"gems\": 5,
+	\"sword\": 1,
+}
+
+func run():
+	clear_messages()
+	for item_name in inventory.keys():
+		print_output([item_name])
+
+func reset():
+	clear_messages()
+"
+
+[node name="Panel" type="PanelContainer"]
+margin_right = 1047.0
+margin_bottom = 298.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1040.0
+margin_bottom = 387.0
+rect_min_size = Vector2( 0, 380 )
+gdscript_code = "var inventory = {
+	\"healing heart\": 3,
+	\"gems\": 5,
+	\"sword\": 1,
+}
+
+func run():
+	for item_name in inventory.keys():
+		print(item_name)"
+run_button_label = "run()"
+
+[node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 924.0
+margin_right = 1033.0
+margin_bottom = 380.0
+script = SubResource( 1 )

@@ -4,7 +4,7 @@
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/theme/fonts/font_title_big.tres" type="DynamicFont" id=4]
-[ext_resource path="res://ui/icons/icon_report.png" type="Texture" id=5]
+[ext_resource path="res://ui/components/QuitButton.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/screens/end_screen/EndScreen.gd" type="Script" id=6]
 [ext_resource path="res://ui/components/FullScreenButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/theme/panel_breadcrumbs.tres" type="StyleBox" id=8]
@@ -18,9 +18,6 @@ anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 2495, 16 )
 theme = ExtResource( 2 )
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Layout" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -32,13 +29,13 @@ __meta__ = {
 
 [node name="TopBar" type="PanelContainer" parent="Layout"]
 margin_right = 1920.0
-margin_bottom = 48.0
+margin_bottom = 47.0
 rect_min_size = Vector2( 0, 40 )
 custom_styles/panel = ExtResource( 8 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Layout/TopBar"]
 margin_right = 1920.0
-margin_bottom = 48.0
+margin_bottom = 47.0
 custom_constants/margin_right = 12
 custom_constants/margin_top = 0
 custom_constants/margin_left = 12
@@ -47,12 +44,12 @@ custom_constants/margin_bottom = 0
 [node name="ToolBarLayout" type="HBoxContainer" parent="Layout/TopBar/MarginContainer"]
 margin_left = 12.0
 margin_right = 1908.0
-margin_bottom = 48.0
+margin_bottom = 47.0
 rect_pivot_offset = Vector2( -683, 4 )
 
 [node name="OutlinerButton" type="Button" parent="Layout/TopBar/MarginContainer/ToolBarLayout"]
 margin_right = 32.0
-margin_bottom = 48.0
+margin_bottom = 47.0
 hint_tooltip = "Open the course index"
 mouse_default_cursor_shape = 2
 icon = ExtResource( 11 )
@@ -60,26 +57,23 @@ flat = true
 
 [node name="Control" type="Control" parent="Layout/TopBar/MarginContainer/ToolBarLayout"]
 margin_left = 48.0
-margin_right = 1568.0
-margin_bottom = 48.0
+margin_right = 1784.0
+margin_bottom = 47.0
 size_flags_horizontal = 3
 
 [node name="FullScreenButton" parent="Layout/TopBar/MarginContainer/ToolBarLayout" instance=ExtResource( 7 )]
-margin_left = 1584.0
-margin_top = 4.0
-margin_right = 1624.0
-margin_bottom = 44.0
+margin_left = 1800.0
+margin_right = 1840.0
+margin_bottom = 47.0
 
-[node name="ReportButton" type="Button" parent="Layout/TopBar/MarginContainer/ToolBarLayout"]
-margin_left = 1640.0
+[node name="QuitButton" parent="Layout/TopBar/MarginContainer/ToolBarLayout" instance=ExtResource( 5 )]
+margin_left = 1856.0
 margin_right = 1896.0
-margin_bottom = 48.0
-text = "Report an issue"
-icon = ExtResource( 5 )
+margin_bottom = 47.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Layout"]
 margin_left = 512.0
-margin_top = 64.0
+margin_top = 63.0
 margin_right = 1408.0
 margin_bottom = 1080.0
 size_flags_horizontal = 6
@@ -89,12 +83,12 @@ size_flags_vertical = 3
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 876.0
-margin_bottom = 996.0
+margin_bottom = 997.0
 alignment = 1
 
 [node name="MainColumn" type="VBoxContainer" parent="Layout/MarginContainer/ColumnLayout"]
 margin_right = 856.0
-margin_bottom = 976.0
+margin_bottom = 977.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 
@@ -132,7 +126,7 @@ valign = 1
 [node name="MainContent" type="PanelContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn"]
 margin_top = 152.0
 margin_right = 856.0
-margin_bottom = 976.0
+margin_bottom = 977.0
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 3 )
 
@@ -140,13 +134,13 @@ custom_styles/panel = ExtResource( 3 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 848.0
-margin_bottom = 816.0
+margin_bottom = 817.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 820.0
-margin_bottom = 788.0
+margin_bottom = 789.0
 scroll_horizontal_enabled = false
 script = ExtResource( 9 )
 

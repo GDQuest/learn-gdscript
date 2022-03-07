@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+onready var _animation_tree := find_node(\"AnimationTree\") as AnimationTree
+onready var _animation_player := find_node(\"AnimationPlayer\") as AnimationPlayer
+
+var combo = [\"jump\", \"damage\", \"damage\", \"jump\", \"level\"]
+
+func run():
+	if not _animation_tree.get_current_animation() == \"idle\":
+		return
+	
+	for action in combo:
+		_animation_tree.travel(action)
+		yield(_animation_tree, \"animation_finished\")
+"
+
+[node name="ExampleCombo" type="PanelContainer"]
+margin_right = 1047.0
+margin_bottom = 298.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1040.0
+margin_bottom = 291.0
+gdscript_code = "var combo = [\"jump\", \"damage\", \"damage\", \"jump\", \"level\"]
+
+func perform_combo():
+	for action in combo:
+		play_animation(action)"
+run_button_label = "perform_combo()"
+
+[node name="RobotJump" parent="RunnableCodeExample" instance=ExtResource( 2 )]
+script = SubResource( 1 )

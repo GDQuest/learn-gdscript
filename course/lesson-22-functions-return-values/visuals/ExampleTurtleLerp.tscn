@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game_demos/turtle.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+onready var turtle := $Turtle as Sprite
+
+const ARRIVE_DISTANCE := 100.0
+const ARRIVED_THRESHOLD := 20.0
+
+var max_speed := 250.0
+var velocity := Vector2.ZERO
+
+var turtle_padding = Vector2(100, 100)
+var limits = Rect2(Vector2(-300, -150), Vector2(600, 300))
+var detection_limits = Rect2(Vector2(-2000, -1000), Vector2(4000, 2000))
+
+
+func _ready() -> void:
+	var panel_size = owner.rect_size
+	limits.size = panel_size - turtle_padding
+	limits.position = -panel_size * 0.5 + turtle_padding * 0.5
+
+
+func _process(delta):
+	if not detection_limits.has_point(get_local_mouse_position()):
+		return
+	var clipped_mouse_position = clip(get_local_mouse_position())
+
+	turtle.position = lerp(turtle.position, clipped_mouse_position, 2.0 * delta)
+	
+
+func clip(target_position: Vector2) -> Vector2:
+	if limits.has_point(target_position):
+		return target_position
+	var new_target := target_position
+	new_target.x = min(limits.end.x, new_target.x)
+	new_target.x = max(limits.position.x, new_target.x)
+	new_target.y = min(limits.end.y, new_target.y)
+	new_target.y = max(limits.position.y, new_target.y)
+	return new_target
+"
+
+[node name="PanelContainer" type="PanelContainer"]
+margin_right = 800.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 800, 400 )
+mouse_filter = 2
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 793.0
+margin_bottom = 393.0
+mouse_filter = 2
+
+[node name="FollowingTurtle" type="Node2D" parent="RunnableCodeExample"]
+script = SubResource( 1 )
+
+[node name="Turtle" type="Sprite" parent="RunnableCodeExample/FollowingTurtle"]
+position = Vector2( 1, 0 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 2 )

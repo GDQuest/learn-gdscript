@@ -4,10 +4,6 @@ const NODE_FONT := preload("res://ui/theme/fonts/font_text.tres")
 const NODE_FONT_CURRENT := preload("res://ui/theme/fonts/font_text_bold.tres")
 const NODE_COLOR := Color(0.572549, 0.560784, 0.721569)
 
-const BUTTON_NORMAL := preload("res://ui/theme/button_navigation_normal.tres")
-const BUTTON_PRESSED := preload("res://ui/theme/button_navigation_pressed.tres")
-const BUTTON_HOVER := preload("res://ui/theme/button_navigation_hover.tres")
-const BUTTON_DISABLED := preload("res://ui/theme/button_navigation_disabled.tres")
 
 var _last_course: Course
 var _last_target: Resource
@@ -96,17 +92,12 @@ func _create_navigation_node(text: String, path: String = "", current: bool = fa
 		navigation_node.text = text
 		navigation_node.add_font_override("font", NODE_FONT_CURRENT if current else NODE_FONT)
 		navigation_node.add_color_override("font_color", NODE_COLOR)
-		navigation_node.add_stylebox_override("normal", BUTTON_NORMAL)
 		add_child(navigation_node)
 	else:
 		var navigation_node := Button.new()
 		navigation_node.flat = true
 		navigation_node.text = text
 		navigation_node.add_font_override("font", NODE_FONT_CURRENT if current else NODE_FONT)
-		navigation_node.add_stylebox_override("normal", BUTTON_NORMAL)
-		navigation_node.add_stylebox_override("pressed", BUTTON_PRESSED)
-		navigation_node.add_stylebox_override("hover", BUTTON_HOVER)
-		navigation_node.add_stylebox_override("disabled", BUTTON_DISABLED)
 		navigation_node.mouse_default_cursor_shape = CURSOR_POINTING_HAND
 		add_child(navigation_node)
 		navigation_node.connect("pressed", self, "_on_navigation_pressed", [ path ])

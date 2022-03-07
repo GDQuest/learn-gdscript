@@ -29,12 +29,20 @@ To do so:
 
 You can test the app online here:
 
-- Latest stable release: https://gdquest.github.io/learn-gdscript/
 - Bleeding edge version: https://gdquest.github.io/learn-gdscript/staging/ (we update this version periodically as we make improvements)
+- Latest stable release: https://gdquest.github.io/learn-gdscript/
 
-We only recommend importing the app in Godot to study its source code or [contribute](#how-to-contribute). If you want to do so, you will need Godot 3.4.2 or a more recent stable version of Godot 3. The app requires features we added to Godot 3.4.2 to work.
+You can download the app for Windows, macOS, and Linux on itch.io: https://gdquest.itch.io/learn-godot-gdscript
 
-Note that if you run the app in Godot, practice errors will trigger the debugger and pause execution, unlike when using the online version.
+The desktop version offers better performance than the online version. We recommend it if your computer is a little old or has a slow processor.
+
+### Running the app in Godot to contribute
+
+You can also run the project straight in Godot by cloning the repository and importing the folder into the engine.
+
+We only recommend importing the app in Godot to study its source code or [contribute](#how-to-contribute). You will need **Godot 3.4.2** or a more recent stable version of Godot 3. The project requires features we added to Godot 3.4.2.
+
+Please note that practice errors will trigger the debugger and pause execution in Godot, unlike when using the online version. That's expected behavior, and you'll need to continue execution by pressing <kbd>F7</kbd> when that happens.
 
 ## Roadmap
 
@@ -42,25 +50,13 @@ In this section, you'll find a summary of our roadmap for the app.
 
 For more details regarding the planned improvements for each milestone, please head to the [Milestones page](https://github.com/GDQuest/learn-gdscript/milestones).
 
-### Milestone 0.3
-
-_Planned release: by March 1, 2022_
-
-For the next milestone, we're looking to add three major features:
-
-1. Interactive tutorials.
-1. A glossary.
-1. Localization support.
-
-We'll also work on many improvements and bug fixes based on people's feedback. And, of course, a batch of new lessons and practices.
-
 ### Milestone 1.0
 
 _Planned release: by March 15, 2022_
 
-This milestone will mark the first complete release of the app and GDScript course. It should contain over 30 lessons and practices.
+This milestone will mark the first complete release of the app and GDScript course. It should contain 28 lessons and dozens of practices.
 
-On the app's side, we will focus on polishing the experience.
+On the app's side, we will focus on polishing the user experience.
 
 ## Feedback, requests, and discussions
 

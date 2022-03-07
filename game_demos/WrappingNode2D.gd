@@ -33,6 +33,6 @@ func wrap_inside_frame(frame_bounds: Rect2) -> void:
 	if _bounds.position.y < frame_bounds.position.y - frame_bounds.size.y / 2.0:
 		position.y = frame_bounds.size.y - _bounds.size.y / 2.0
 	elif _bounds.position.y + _bounds.size.y > frame_bounds.position.y + frame_bounds.size.y / 2.0:
-		position.y = frame_bounds.position.y + _bounds.size.y / 2.0
+		position.y = frame_bounds.position.y + _bounds.size.y
 
 	_bounds = calculate_bounding_rect(_sprites)

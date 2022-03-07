@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource path="res://course/lesson-24-access-array-indices/visuals/inventory/Inventory.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://course/lesson-24-access-array-indices/visuals/inventory/Inventory.gd\"
+
+
+const CODE_BEGIN := PoolStringArray([\"var inventory = [\"])
+const CODE_END := PoolStringArray([
+	\"]\",
+	\"\",
+	\"func run():\",
+	\"	use_item(inventory[0])\"
+])
+
+
+func _ready() -> void:
+	var runnable_code_example = get_parent()
+	var item_names: PoolStringArray = []
+	for item in get_children():
+		item_names.append('\\t\"%s\"' % item.get_texture_name())
+	var code := CODE_BEGIN
+	code.append_array(item_names)
+	code.append_array(CODE_END)
+	runnable_code_example.gdscript_code = code.join(\"\\n\")
+
+
+func run():
+	use_item(0)
+"
+
+[node name="Example" type="PanelContainer"]
+margin_right = 771.0
+margin_bottom = 414.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1047.0
+margin_bottom = 407.0
+rect_min_size = Vector2( 600, 400 )
+gdscript_code = "var inventory = [
+	\"red gem\",
+	\"white gem\",
+	\"green heart\",
+	\"blue gem\",
+	\"yellow gem\"
+]
+
+func run():
+	use_item(inventory[0])"
+
+[node name="Inventory" parent="RunnableCodeExample" instance=ExtResource( 2 )]
+margin_left = 672.0
+margin_right = 1040.0
+margin_bottom = 400.0
+script = SubResource( 1 )

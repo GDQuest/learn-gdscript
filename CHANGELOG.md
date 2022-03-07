@@ -2,6 +2,144 @@
 
 This document lists changes between releases.
 
+## Learn GDScript From Zero release 0.4.0
+
+_Released on March 7, 2022_
+
+This update adds **12 new lessons**, completing the planned content for the 1.0 release on the app. 
+
+Once more, we spent a lot of time refining the app to provide you with a better experience. You can find the details below.
+
+The key feature in this update is **localization support**. We're now working on Spanish and French translation, and the community's contributing more languages in the [app translation repository](https://github.com/GDQuest/learn-gdscript-translations).
+
+We also added desktop exports as performance and text rendering can be much better outside the browser. You can find desktop builds on [the app's itch.io](https://gdquest.itch.io/learn-godot-gdscript) page.
+
+### New features
+
+- Add server connection indicator in practice screen
+- Animate turtle turning
+- Add localization support to the app
+- Add interactive glossary
+
+### Content changes
+
+- Add lesson 17: Introduction to while loops
+- Add lesson 18: Introduction to for loops
+- Add lesson 19: Creating arrays
+- Add lesson 20: Looping over arrays
+- Add lesson 21: Strings
+- Add lesson 22: functions that return values
+- Add lesson 23: array append and pop
+- Add lesson 24: array access by index
+- Add lesson 25: creating dictionaries
+- Add lesson 26: Looping over dictionaries
+- Add lesson 27: value types
+- Add lesson 28: type hints
+- Edit first 15 lessons to make phrasing a bit more explicit
+- Use explicit functions in lessons 1 to 3, explain in lesson 3
+- Make function calls explicit in lessons 3 and 4, rework practices
+- Make function calls explicit in lessons 5 to 7
+- Make function calls explicit in lessons 8 to 11, update practices
+- Reset practice visuals with reset button
+- Stress the importance of multiplying by delta in lesson 11
+- Clarify the server disconnected error and steps to address it
+- Add duplicate variable definition error in lesson 8
+- Remind that you use = to change a variable's value in lesson 7
+- Remove an example that was too technical in lesson 6
+- Add 7 new error explanations
+- Add examples of what vectors are and what they can do in lesson 16
+- Introduce else keyword in lesson 13
+- Tidy up visual example in lesson 23
+- Add health variable definition in lesson 9 practices
+- Clarify pop() example in lesson 23
+- Make lesson 6 square practice more precise, improve tests
+- Shorten text in lessons 1 and 2, add 2 new glossary entries
+- Load and translate a real error example in lesson 2
+- Add application UI translations in French
+
+### Improvements
+
+- Reduce app CPU usage (up to 90% less usage)
+- Add option to disable labels in DrawingTurtle
+- Give outline buttons a white outline when in focus
+- Add keyboard focus when opening various popups
+- Allow for small demos that can receive mouse input
+- Remove and dim text outlines in buttons and progress bars
+- Give outliner button a fixed width
+- Add new turtle design by Kay Lousberg
+- Integrate new GDQuest boy design by Kay Lousberg
+- Change indicator when running code without connection to server
+- Make all big green and red buttons use outline styles
+- Allow changing the button name in RunnableCodeExample
+- Make function calls explicit in lessons 12 to 16
+- Animate the turtle jumping
+- Added exports and itch support
+- Add CI setup scripts
+- Testing workflow
+- Make the code cursor jump to the last character by default
+- Add setting to change the app's framerate
+- Add board_size and cell code references
+- Swap the order of buttons in quizzes and settings
+- Add translation support with live updating to lessons and practices
+- Add translation support to the rest of the application
+- Support recompiling html template while watching
+- Make outlined button theme consistent and less confusing
+- Make separator lines thicker by default
+- Redo and unify button styles
+- Make inventory items more distinct
+- Start in fullscreen mode on desktop
+- Add illustrations to lesson 1, improve phrasing
+
+### Bug fixes
+
+- Fix typo in lesson 16 practice error message
+- Prevent lesson 11 practices from passing when multiplying after call
+- Use websockets
+- Use websockets for heartbeat connection
+- Restore "is_connected_to_server"
+- Address full-screen toggle issues by handling it browser-side
+- Attempt to correct fullscreen woes
+- Resize canvas through JS
+- Workflow does not depend on another
+- Wrong Godot build
+- Typo in Godot version number
+- Prevent smooth scrolling from overshooting when framerate goes down
+- Correct handling of camera and position when drawing with the turtle
+- Fix error when adding a scene as a child of RunnableCodeExample
+- Correct typo in lesson 15 practice 2
+- Force Unix-friendly line endings in translations
+- Add missing icons for the option button
+- Correctly save user settings when changing language
+- Restored proper variables for logging
+- Support generating logs in desktop app
+- Added a container to aid button placement
+- Typo in run file
+- Do not call methods before js interface exists
+- Open links when clicking them in lessons
+- Restore normal scrolling speed on desktop platforms
+- Ensure the robot doesn't clip when wrapping in lesson 3
+- Typo "directoin" in lesson 16
+- Typos in lesson 17
+- Pick correct node to check in validation script
+- Correct variable name in leson 17 practice
+- Properly reject incorrect solutions
+- Remove trailing whitespace in two examples in lesson 18
+- Constrain robot to game board in lessons 17 and 18
+- Properly remove checks when switching language
+- Second exercis expecting four rectangles
+- Remove Report Issue button on end screen
+- Match while loop content to run code
+- Restore working modulo example
+- Make build script more portable
+- Make practice description render bbcode
+- Output scroll container should clip content
+- Pop gems starting from the top one
+- Prefer fuzzy font on scale rather than pixelated
+- Match inventory order with visual textures
+- TextEdit text not changing properly
+- Prevent commented code lines from making L10 practices pass
+- Prevent invisible fullscreen button from grabbing focus
+
 ## Learn GDScript From Zero release 0.3.0
 
 _Released on February 8, 2022_

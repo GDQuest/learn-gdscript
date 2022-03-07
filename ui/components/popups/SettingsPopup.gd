@@ -1,4 +1,4 @@
-extends ColorRect
+extends Node
 
 enum Framerates { SIXTY_FPS, THIRTY_FPS, NO_LIMIT }
 
@@ -11,6 +11,8 @@ const FRAMERATE_MAP := {
 
 var _sample_default_font: DynamicFont
 
+onready var _panel := $PanelContainer as PanelContainer
+onready var _color_rect := $ColorRect as ColorRect
 onready var _language_value := $PanelContainer/Column/Margin/Column/Settings/LanguageSetting/Value as OptionButton
 onready var _font_size_value := $PanelContainer/Column/Margin/Column/Settings/FontSizeSetting/ValueContainer/Value as HSlider
 onready var _font_size_sample := $PanelContainer/Column/Margin/Column/Settings/FontSizeSetting/ValueContainer/SampleText as Label
@@ -34,7 +36,17 @@ func _ready() -> void:
 	
 	_apply_button.connect("pressed", self, "_on_apply_settings")
 	_cancel_button.connect("pressed", self, "hide")
-	connect("visibility_changed", self, "_on_visibility_changed")
+	_panel.connect("visibility_changed", self, "_on_visibility_changed")
+
+
+func show() -> void:
+	_panel.show()
+	_color_rect.show()
+
+
+func hide() -> void:
+	_panel.hide()
+	_color_rect.hide()
 
 
 func _init_languages() -> void:
@@ -84,5 +96,5 @@ func _on_font_size_changed(value: int) -> void:
 
 
 func _on_visibility_changed() -> void:
-	if visible:
+	if _panel.visible:
 		_font_size_value.grab_focus()

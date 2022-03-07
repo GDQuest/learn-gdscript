@@ -1,0 +1,69 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://addons/gdscript-slice-exporter/collections/ScriptProperties.gd" type="Script" id=1]
+[ext_resource path="res://course/lesson-25-creating-dictionaries/creating-inventory/CreatingInventory.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 1 )
+nodes_paths = [ NodePath("") ]
+script_file = ExtResource( 2 )
+original_script = "extends Control
+
+
+onready var item_nodes := {
+	\"healing heart\": find_node(\"HealingHeart\"),
+	\"gems\": find_node(\"Gems\"),
+	\"sword\": find_node(\"Sword\"),
+}
+
+onready var _grid := $Margin/Column/Grid as GridContainer
+
+
+func _ready() -> void:
+	reset()
+
+
+func reset():
+	for node in item_nodes.values():
+		node.hide()
+
+# EXPORT create
+var inventory = {
+	\"healing heart\": 3,
+	\"gems\": 9,
+	\"sword\": 1,
+}
+# /EXPORT create
+
+func run():
+	for item in inventory:
+		var amount = inventory[item]
+		display_item(item, amount)
+
+
+func _run():
+	clear_drawing()
+	run()
+	yield(get_tree().create_timer(0.5), \"timeout\")
+	Events.emit_signal(\"practice_run_completed\")
+
+
+func clear_drawing():
+	for child in _grid.get_children():
+		child.hide()
+	
+
+func display_item(item: String, amount: int):
+	if not item in item_nodes:
+		return
+
+	var instance = item_nodes[item]
+	instance.get_node(\"Margin/Item/Amount\").text = str(amount)
+	instance.show()
+
+
+func update_display():
+	clear_drawing()
+	for item in inventory:
+		display_item(item, inventory[item])
+"

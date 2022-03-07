@@ -1,11 +1,11 @@
-[gd_resource type="Theme" load_steps=58 format=2]
+[gd_resource type="Theme" load_steps=55 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_text.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/vscrollbar_grabber.tres" type="StyleBox" id=2]
 [ext_resource path="res://ui/theme/button_normal.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/theme/textedit_stylebox.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/theme/empty.tres" type="StyleBox" id=4]
 [ext_resource path="res://ui/theme/button_hover.tres" type="StyleBox" id=5]
-[ext_resource path="res://ui/theme/button_empty.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/theme/focus.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/theme/fonts/font_button.tres" type="DynamicFont" id=7]
 [ext_resource path="res://ui/theme/fonts/font_percent.tres" type="DynamicFont" id=8]
 [ext_resource path="res://ui/theme/progress_bar_background.tres" type="StyleBox" id=9]
@@ -20,7 +20,7 @@
 [ext_resource path="res://ui/theme/button_pressed.tres" type="StyleBox" id=18]
 [ext_resource path="res://ui/theme/stylebox_empty.tres" type="StyleBox" id=19]
 [ext_resource path="res://ui/theme/button_disabled.tres" type="StyleBox" id=20]
-[ext_resource path="res://ui/theme/lineedit_stylebox_normal.tres" type="StyleBox" id=21]
+[ext_resource path="res://ui/theme/text_stylebox_readonly.tres" type="StyleBox" id=21]
 [ext_resource path="res://ui/theme/panel_tooltip.tres" type="StyleBox" id=22]
 [ext_resource path="res://ui/theme/hslider_grabber.tres" type="StyleBox" id=23]
 [ext_resource path="res://ui/theme/hslider_slider.tres" type="StyleBox" id=24]
@@ -29,11 +29,9 @@
 [ext_resource path="res://ui/icons/icon_hslider_tick.png" type="Texture" id=27]
 [ext_resource path="res://ui/icons/icon_slider_grabber_hl.png" type="Texture" id=28]
 [ext_resource path="res://ui/icons/icon_option_button_arrow.png" type="Texture" id=29]
-[ext_resource path="res://ui/theme/textedit_stylebox_readonly.tres" type="StyleBox" id=30]
+[ext_resource path="res://ui/theme/text_stylebox_normal.tres" type="StyleBox" id=30]
 [ext_resource path="res://ui/theme/popupmenu_panel.tres" type="StyleBox" id=31]
 [ext_resource path="res://ui/theme/popupmenu_item_hover.tres" type="StyleBox" id=32]
-[ext_resource path="res://ui/theme/lineedit_stylebox_focus.tres" type="StyleBox" id=33]
-[ext_resource path="res://ui/theme/lineedit_stylebox_readonly.tres" type="StyleBox" id=34]
 [ext_resource path="res://ui/theme/hscrollbar_scroll.tres" type="StyleBox" id=35]
 [ext_resource path="res://ui/theme/hscrollbar_grabber.tres" type="StyleBox" id=36]
 [ext_resource path="res://ui/theme/hscrollbar_grabber_pressed.tres" type="StyleBox" id=37]
@@ -58,8 +56,6 @@
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=3]
-
-[sub_resource type="StyleBoxEmpty" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
@@ -105,9 +101,9 @@ HSlider/styles/slider = ExtResource( 24 )
 LineEdit/colors/font_color_selected = Color( 0.960784, 0.980392, 0.980392, 1 )
 LineEdit/colors/selection_color = Color( 0.188235, 0.188235, 0.286275, 1 )
 LineEdit/fonts/font = ExtResource( 13 )
-LineEdit/styles/focus = ExtResource( 33 )
-LineEdit/styles/normal = ExtResource( 21 )
-LineEdit/styles/read_only = ExtResource( 34 )
+LineEdit/styles/focus = ExtResource( 6 )
+LineEdit/styles/normal = ExtResource( 30 )
+LineEdit/styles/read_only = ExtResource( 21 )
 MarginContainer/constants/margin_bottom = 20
 MarginContainer/constants/margin_left = 20
 MarginContainer/constants/margin_right = 20
@@ -180,9 +176,9 @@ TextEdit/icons/folded = null
 TextEdit/icons/space = null
 TextEdit/icons/tab = ExtResource( 46 )
 TextEdit/styles/completion = null
-TextEdit/styles/focus = SubResource( 7 )
-TextEdit/styles/normal = ExtResource( 4 )
-TextEdit/styles/read_only = ExtResource( 30 )
+TextEdit/styles/focus = ExtResource( 4 )
+TextEdit/styles/normal = ExtResource( 30 )
+TextEdit/styles/read_only = ExtResource( 21 )
 TooltipLabel/colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
 TooltipLabel/fonts/font = ExtResource( 1 )
 TooltipPanel/styles/panel = ExtResource( 22 )

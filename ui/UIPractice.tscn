@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://ui/components/CodeEditor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/theme/panel_course_page.tres" type="StyleBox" id=2]
@@ -16,6 +16,9 @@
 [ext_resource path="res://ui/theme/panel_sliceeditor_title.tres" type="StyleBox" id=14]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=15]
 [ext_resource path="res://ui/components/popups/PracticeLeaveUnfinishedPopup.tscn" type="PackedScene" id=16]
+[ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=17]
+[ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=18]
+[ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=19]
 
 [node name="UIPractice" type="PanelContainer"]
 pause_mode = 2
@@ -24,9 +27,6 @@ anchor_bottom = 1.0
 theme = ExtResource( 15 )
 custom_styles/panel = ExtResource( 2 )
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Margin" type="MarginContainer" parent="."]
 margin_right = 1920.0
@@ -67,9 +67,6 @@ size_flags_horizontal = 3
 [node name="Output" type="VBoxContainer" parent="Margin/Layout/OutputAnchors"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GameAnchors" type="Control" parent="Margin/Layout/OutputAnchors/Output"]
 margin_right = 619.0
@@ -127,9 +124,6 @@ anchor_bottom = 1.0
 rect_clip_content = true
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 11 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Layout" type="VBoxContainer" parent="Margin/Layout/OutputAnchors/SolutionContainer"]
 margin_right = 619.0
@@ -143,12 +137,21 @@ custom_fonts/font = ExtResource( 13 )
 custom_styles/normal = ExtResource( 14 )
 text = "Suggested Solution"
 
-[node name="SliceEditor" type="TextEdit" parent="Margin/Layout/OutputAnchors/SolutionContainer/Layout"]
+[node name="MarginContainer2" type="MarginContainer" parent="Margin/Layout/OutputAnchors/SolutionContainer/Layout"]
 margin_top = 56.0
 margin_right = 619.0
 margin_bottom = 949.0
+size_flags_vertical = 3
+custom_constants/margin_top = 0
+custom_constants/margin_bottom = 0
+
+[node name="SliceEditor" type="TextEdit" parent="Margin/Layout/OutputAnchors/SolutionContainer/Layout/MarginContainer2"]
+margin_left = 20.0
+margin_right = 599.0
+margin_bottom = 893.0
 rect_min_size = Vector2( 500, 0 )
 size_flags_vertical = 3
+custom_styles/read_only = ExtResource( 11 )
 readonly = true
 syntax_highlighting = true
 show_line_numbers = true
@@ -180,6 +183,9 @@ hint_tooltip = "Use the suggested solution.
 Warning: Using the suggested solution will leave this practice unfinished.
 You can come back and try to solve it yourself later."
 mouse_default_cursor_shape = 2
+custom_styles/hover = ExtResource( 18 )
+custom_styles/pressed = ExtResource( 17 )
+custom_styles/normal = ExtResource( 19 )
 text = "Use Solution"
 
 [node name="PracticeListPopup" parent="." instance=ExtResource( 6 )]
