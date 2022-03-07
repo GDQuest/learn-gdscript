@@ -332,7 +332,9 @@ goal = "We want a function to draw squares of any size.
 
 We could use these squares as outlines when selecting units in a tactical game, as a frame for items in an inventory, and more.
 
-Create a function named [code]draw_square()[/code] that takes one parameter: the [code]length[/code] of the square's sides."
+Create a function named [code]draw_square()[/code] that takes one parameter: the [code]length[/code] of the square's sides.
+
+The turtle should face towards the right when starting or completing a rectangle."
 starting_code = ""
 hints = PoolStringArray( "You need to specify one parameter in the function definition", "Use [code]func draw_square(length):[/code]", "Call [code]move_forward()[/code] four times for each side of the square", "Make sure to [code]turn_right(90)[/code] after moving forward to create each corner" )
 validator_script_path = "drawing_squares/TestsDrawingSquares.gd"
@@ -348,6 +350,8 @@ title = "Drawing rectangles of any size"
 goal = "Let's make our square drawing function more flexible to include rectangles of varying sizes.
 
 Your job is to code a function named [code]draw_rectangle()[/code] that takes two parameters: the [code]length[/code] and the [code]height[/code] of the rectangle.
+
+The turtle should face towards the right when starting or completing a rectangle.
 
 Note that we could still draw a square with [code]draw_rectangle()[/code] by having the [code]length[/code] and [code]height[/code] equal the same value."
 starting_code = "func draw_rectangle():
