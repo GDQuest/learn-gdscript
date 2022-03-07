@@ -2,24 +2,36 @@ interface GDQuestLib {
   startLoading: () => void;
   displayFailureNotice: (err: Error | string) => void;
   log: Log;
+  makeLogger: (title: string) => Console;
+  fullScreen: {
+    isIt: {
+      checkFullScreenElement: () => boolean;
+      checkCSSMediaQuery: () => boolean;
+      checkWindowMargins: () => boolean;
+    };
+    toggle: () => void;
+  };
   events: {
     onError: Signal;
+    onFullScreen: Signal;
+    onGodotLoaded: Signal;
+    onResize: Signal;
   };
 }
 
 declare const GDQUEST_ENVIRONMENT: {
-  github_repository: string;
-  github_workflow: string;
-  github_ref_name: string;
-  github_sha: string;
-  override_file: string;
-  sub_build_path: string;
-  watermark: string;
+  build_date: string;
+  build_date_iso: string;
+  build_date_unix: number;
+  git_branch: string;
+  git_commit: string;
+  version: string;
 };
 
 interface Signal {
   disconnect: (fn: (...args: any[]) => void) => boolean;
   connect: (fn: (...args: any[]) => void) => () => boolean;
+  once: (fn: (...args: any[]) => void) => () => boolean;
   emit: (...args: any[]) => void;
 }
 
