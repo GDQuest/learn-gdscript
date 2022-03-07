@@ -6,7 +6,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends OutputConsole
 
-var crates = [\"fire gem\", \"blue gem\", \"yellow gem\"]
+var crates = [\"sword\", \"shield\", \"gems\"]
 
 func run():
 	crates.pop_back()
@@ -14,7 +14,7 @@ func run():
 
 func reset():
 	clear_messages()
-	crates = [\"fire gem\", \"blue gem\", \"yellow gem\"]
+	crates = [\"sword\", \"shield\", \"gems\"]
 "
 
 [node name="Example" type="PanelContainer"]
@@ -28,10 +28,10 @@ __meta__ = {
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 764.0
+margin_right = 788.0
 margin_bottom = 407.0
 rect_min_size = Vector2( 600, 200 )
-gdscript_code = "var crates = [\"fire gem\", \"blue gem\", \"yellow gem\"]
+gdscript_code = "var crates = [\"sword\", \"shield\", \"gems\"]
 
 func run():
 	crates.pop_back()
@@ -40,7 +40,7 @@ func run():
 [node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 648.0
-margin_right = 757.0
+margin_left = 672.0
+margin_right = 781.0
 margin_bottom = 400.0
 script = SubResource( 1 )
