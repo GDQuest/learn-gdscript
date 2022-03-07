@@ -217,24 +217,24 @@ has_separator = false
 [sub_resource type="Resource" id=20]
 script = ExtResource( 3 )
 practice_id = "res://course/lesson-24-access-array-indices/practice-ErO9L4MW.tres"
-title = "Using the right crystals"
+title = "Using the right items"
 goal = "In our game, the player has an inventory that works as an array under the hood.
 
-They want to use the pink and yellow crystals to buff their characters. Like before, we need you to find them in the array.
+They want to use equip a sword and a shield to buff their characters. Like before, we need you to find them in the array.
 
 You need to access elements in the [code]inventory[/code] array by index to do so.
 
-Call the [code]use()[/code] function with the item as an argument to use an item. For example, you can use the first item by calling [code]use(inventory[0])[/code]."
+Call the [code]use_item()[/code] function with the item as an argument to use an item. For example, you can use the first item by calling [code]use_item(inventory[0])[/code]."
 starting_code = "var inventory = []
 
 func pick_items():
 	"
-hints = PoolStringArray( "use the function [code]use_item(item)[/code], where [code]item[/code] is an element of the [code]inventory[/code] array", "use [code]brackets[/code] to access specific array indices" )
+hints = PoolStringArray( "Use the function [code]use_item(item)[/code], where [code]item[/code] is an element of the [code]inventory[/code] array", "Use [code]brackets[/code] to access specific array indices" )
 validator_script_path = "res://course/lesson-24-access-array-indices/find-crystals/TestFindCrystals.gd"
 script_slice_path = "res://course/lesson-24-access-array-indices/find-crystals/FindCrystals.live-editor/slices/FindCrystals.pick.slice.tres"
 documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 1 )
-description = "Find the right crystals to use in the player's inventory."
+description = "Find the right items to use in the player's inventory."
 
 [sub_resource type="Resource" id=21]
 script = ExtResource( 3 )
@@ -247,7 +247,7 @@ However, several chunks are misaligned. You need to find them in the [code]track
 To do so, you need to access the array by index.
 
 This time, though, you need to access them with [i]negative indices[/i]."
-starting_code = "var tracks := []
+starting_code = "var tracks = []
 
 func fix_tracks():
 	"

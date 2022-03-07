@@ -3,8 +3,8 @@ extends Control
 
 onready var item_nodes := {
 	"healing heart": $Margin/Column/Grid/HealingHeart,
-	"fire gem": $Margin/Column/Grid/FireGem,
-	"ice gem": $Margin/Column/Grid/IceGem,
+	"gems": $Margin/Column/Grid/Gems,
+	"sword": $Margin/Column/Grid/Sword,
 }
 
 onready var _grid := $Margin/Column/Grid as GridContainer
@@ -17,8 +17,8 @@ func _ready() -> void:
 # EXPORT run
 var inventory := {
 	"healing heart": 3,
-	"fire gem": 5,
-	"ice gem": 1,
+	"gems": 5,
+	"sword": 1,
 }
 
 func run():

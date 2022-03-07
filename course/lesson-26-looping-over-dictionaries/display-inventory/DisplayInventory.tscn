@@ -3,9 +3,9 @@
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/theme/fonts/font_title_big.tres" type="DynamicFont" id=2]
 [ext_resource path="res://course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.gd" type="Script" id=3]
-[ext_resource path="res://course/lesson-26-looping-over-dictionaries/display-inventory/pickup_fire.png" type="Texture" id=5]
-[ext_resource path="res://course/lesson-26-looping-over-dictionaries/display-inventory/pickup_ice.png" type="Texture" id=6]
-[ext_resource path="res://course/lesson-26-looping-over-dictionaries/display-inventory/pickup_health.png" type="Texture" id=7]
+[ext_resource path="res://course/common/inventory/healing_heart.png" type="Texture" id=4]
+[ext_resource path="res://course/common/inventory/gems.png" type="Texture" id=5]
+[ext_resource path="res://course/common/inventory/sword.png" type="Texture" id=6]
 [ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -106,6 +106,9 @@ custom_constants/margin_right = 12
 custom_constants/margin_top = 6
 custom_constants/margin_left = 6
 custom_constants/margin_bottom = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Item" type="HBoxContainer" parent="Margin/Column/Grid/HealingHeart/Margin"]
 margin_left = 6.0
@@ -119,7 +122,7 @@ custom_constants/separation = 4
 margin_right = 50.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 50, 50 )
-texture = ExtResource( 7 )
+texture = ExtResource( 4 )
 expand = true
 stretch_mode = 6
 
@@ -145,7 +148,7 @@ margin_bottom = 57.0
 custom_fonts/font = ExtResource( 8 )
 text = "0"
 
-[node name="FireGem" type="Button" parent="Margin/Column/Grid"]
+[node name="Gems" type="Button" parent="Margin/Column/Grid"]
 margin_left = 270.0
 margin_right = 536.0
 margin_bottom = 100.0
@@ -154,7 +157,7 @@ size_flags_horizontal = 3
 custom_styles/hover = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
 
-[node name="Margin" type="MarginContainer" parent="Margin/Column/Grid/FireGem"]
+[node name="Margin" type="MarginContainer" parent="Margin/Column/Grid/Gems"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -163,7 +166,7 @@ custom_constants/margin_top = 6
 custom_constants/margin_left = 6
 custom_constants/margin_bottom = 6
 
-[node name="Item" type="HBoxContainer" parent="Margin/Column/Grid/FireGem/Margin"]
+[node name="Item" type="HBoxContainer" parent="Margin/Column/Grid/Gems/Margin"]
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 254.0
@@ -171,7 +174,7 @@ margin_bottom = 94.0
 size_flags_horizontal = 3
 custom_constants/separation = 4
 
-[node name="Icon" type="TextureRect" parent="Margin/Column/Grid/FireGem/Margin/Item"]
+[node name="Icon" type="TextureRect" parent="Margin/Column/Grid/Gems/Margin/Item"]
 margin_right = 50.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 50, 50 )
@@ -179,21 +182,21 @@ texture = ExtResource( 5 )
 expand = true
 stretch_mode = 6
 
-[node name="Name" type="Label" parent="Margin/Column/Grid/FireGem/Margin/Item"]
+[node name="Name" type="Label" parent="Margin/Column/Grid/Gems/Margin/Item"]
 margin_left = 54.0
 margin_top = 31.0
-margin_right = 150.0
+margin_right = 114.0
 margin_bottom = 57.0
 custom_fonts/font = ExtResource( 8 )
-text = "Fire Gem"
+text = "Gems"
 
-[node name="Spacer" type="Control" parent="Margin/Column/Grid/FireGem/Margin/Item"]
-margin_left = 154.0
+[node name="Spacer" type="Control" parent="Margin/Column/Grid/Gems/Margin/Item"]
+margin_left = 118.0
 margin_right = 230.0
 margin_bottom = 88.0
 size_flags_horizontal = 3
 
-[node name="Amount" type="Label" parent="Margin/Column/Grid/FireGem/Margin/Item"]
+[node name="Amount" type="Label" parent="Margin/Column/Grid/Gems/Margin/Item"]
 margin_left = 234.0
 margin_top = 31.0
 margin_right = 248.0
@@ -201,7 +204,7 @@ margin_bottom = 57.0
 custom_fonts/font = ExtResource( 8 )
 text = "0"
 
-[node name="IceGem" type="Button" parent="Margin/Column/Grid"]
+[node name="Sword" type="Button" parent="Margin/Column/Grid"]
 margin_top = 104.0
 margin_right = 266.0
 margin_bottom = 204.0
@@ -210,7 +213,7 @@ size_flags_horizontal = 3
 custom_styles/hover = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
 
-[node name="Margin" type="MarginContainer" parent="Margin/Column/Grid/IceGem"]
+[node name="Margin" type="MarginContainer" parent="Margin/Column/Grid/Sword"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -219,7 +222,7 @@ custom_constants/margin_top = 6
 custom_constants/margin_left = 6
 custom_constants/margin_bottom = 6
 
-[node name="Item" type="HBoxContainer" parent="Margin/Column/Grid/IceGem/Margin"]
+[node name="Item" type="HBoxContainer" parent="Margin/Column/Grid/Sword/Margin"]
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 254.0
@@ -227,7 +230,7 @@ margin_bottom = 94.0
 size_flags_horizontal = 3
 custom_constants/separation = 4
 
-[node name="Icon" type="TextureRect" parent="Margin/Column/Grid/IceGem/Margin/Item"]
+[node name="Icon" type="TextureRect" parent="Margin/Column/Grid/Sword/Margin/Item"]
 margin_right = 50.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 50, 50 )
@@ -235,21 +238,21 @@ texture = ExtResource( 6 )
 expand = true
 stretch_mode = 6
 
-[node name="Name" type="Label" parent="Margin/Column/Grid/IceGem/Margin/Item"]
+[node name="Name" type="Label" parent="Margin/Column/Grid/Sword/Margin/Item"]
 margin_left = 54.0
 margin_top = 31.0
-margin_right = 141.0
+margin_right = 122.0
 margin_bottom = 57.0
 custom_fonts/font = ExtResource( 8 )
-text = "Ice Gem"
+text = "Sword"
 
-[node name="Spacer" type="Control" parent="Margin/Column/Grid/IceGem/Margin/Item"]
-margin_left = 145.0
+[node name="Spacer" type="Control" parent="Margin/Column/Grid/Sword/Margin/Item"]
+margin_left = 126.0
 margin_right = 230.0
 margin_bottom = 88.0
 size_flags_horizontal = 3
 
-[node name="Amount" type="Label" parent="Margin/Column/Grid/IceGem/Margin/Item"]
+[node name="Amount" type="Label" parent="Margin/Column/Grid/Sword/Margin/Item"]
 margin_left = 234.0
 margin_top = 31.0
 margin_right = 248.0

@@ -20,7 +20,7 @@ func _ready() -> void:
 	var runnable_code_example = get_parent()
 	var item_names: PoolStringArray = []
 	for item in get_children():
-		item_names.append('\\t\"%s\"' % item.get_texture_name().split(\" \")[0])
+		item_names.append('\\t\"%s\"' % item.get_texture_name())
 	var code := CODE_BEGIN
 	code.append_array(item_names)
 	code.append_array(CODE_END)
@@ -35,6 +35,9 @@ func run():
 margin_right = 771.0
 margin_bottom = 414.0
 size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0

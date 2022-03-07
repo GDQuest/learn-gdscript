@@ -24,16 +24,18 @@ func _ready() -> void:
 	# var second_item_index := first_item_index
 	# while second_item_index - first_item_index < 2:
 	#	second_item_index = randi() % inventory.size()
+	# The user can pick any tuple [ fire, lightning ], but
+	# we need to ensure there are at least 2 we know for sure
 	# make sure those indices are the same in `pick_items`
 	# at the bottom
-	var first_item_index := 5
-	var second_item_index := 9
+	var first_item_index := 6
+	var second_item_index := 8
 	for i in inventory.size():
 		var child = inventory[i]
 		if i == first_item_index:
-			child.texture = child.FIRE
+			child.texture = child.SWORD
 		elif i == second_item_index:
-			child.texture = child.LIGHTNING
+			child.texture = child.SHIELD
 		child.connect(\"mouse_entered\", self, \"set_current_item\", [child])
 		child.connect(\"mouse_exited\", self, \"set_current_item\", [null])
 		child.connect(\"used\", self, \"_on_item_used\")
@@ -87,7 +89,7 @@ func _run():
 var inventory = []
 
 func pick_items():
-	use_item(inventory[5])
-	use_item(inventory[9])
+	use_item(inventory[6])
+	use_item(inventory[8])
 # /EXPORT pick
 "

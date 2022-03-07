@@ -6,25 +6,31 @@ const DictItemScene := preload("DictItem.tscn")
 const ITEM_DATABASE := {
 	"healing heart":
 	{
-		"icon": preload("pickup_health.png"),
-		"name": "Healing heart",
+		"icon": preload("healing_heart.png"),
+		"name": "Healing Heart",
 	},
-	"fire gem":
+	"sword":
 	{
-		"icon": preload("pickup_fire.png"),
-		"name": "Fire Gem",
+		"icon": preload("sword.png"),
+		"name": "Sword",
 	},
-	"ice gem":
+	"shield":
 	{
-		"icon": preload("pickup_ice.png"),
-		"name": "Ice Gem",
+		"icon": preload("shield.png"),
+		"name": "Shield",
+	},
+	"gems":
+	{
+		"icon": preload("gems.png"),
+		"name": "Gems",
 	},
 }
 
 var inventory := {
 	"healing heart": 3,
-	"fire gem": 5,
-	"ice gem": 1,
+	"sword": 1,
+	"shield": 1,
+	"gems": 10,
 }
 
 onready var _grid := $Margin/Column/Grid as GridContainer
