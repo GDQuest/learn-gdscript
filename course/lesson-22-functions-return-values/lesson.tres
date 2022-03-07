@@ -209,16 +209,12 @@ practice_id = "res://course/lesson-22-functions-return-values/practice-llf8B67U.
 title = "Converting coordinates from the grid to the screen"
 goal = "Define a function that converts a position on a grid to the screen.
 
-The function takes a [code]Vector2[/code] cell coordinates as an argument. It should return the corresponding [code]Vector2[/code] screen coordinates at the center of the cell.
-
-Every cell is a square of size [code]cell_size[/code]. You can multiply the [code]cell[/code] by this value to calculate the top-left of a cell in screen coordinates.
-
-To get the center of a cell, you need to add half the [code]cell_size[/code] to the product."
+The function takes a [code]Vector2[/code] cell coordinates as an argument. It should return the corresponding [code]Vector2[/code] screen coordinates at the center of the cell."
 starting_code = "var cell_size = Vector2(80, 80)
 
 func convert_to_world_coordinates(cell):
 	"
-hints = PoolStringArray(  )
+hints = PoolStringArray( "Every cell is a square of size [code]cell_size[/code]. You can multiply the [code]cell[/code] by this value to calculate the top-left of a cell in screen coordinates.", "To get the center of a cell, you need to add half the [code]cell_size[/code] to the product." )
 validator_script_path = "convert-grid-coordinates/TestConvertGridCoordinates.gd"
 script_slice_path = "convert-grid-coordinates/ConvertGridCoordinates.live-editor/slices/ConvertGridCoordinates.run.slice.tres"
 documentation_references = PoolStringArray(  )
