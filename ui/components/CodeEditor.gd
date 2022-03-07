@@ -107,8 +107,8 @@ func update_cursor_position(line: int, column: int) -> void:
 	var tabs = min(column, string.count("\t"))
 	column = 3 * tabs + column
 
-	slice_editor.cursor_set_column(1000000 if column < 0 else column)
 	slice_editor.cursor_set_line(1000000 if line < 0 else line)
+	slice_editor.cursor_set_column(1000000 if column < 0 else column)
 
 
 func set_text(new_text: String) -> void:
