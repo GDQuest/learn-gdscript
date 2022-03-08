@@ -1,157 +1,126 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://course/lesson-15-modulo/visuals/square.png" type="Texture" id=2]
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "tool
 extends Node2D
 
-const color_green := Color(\"3dff6e\")
-const color_red := Color(\"928fb8\")
-const results := [\"Even\", \"Odd\"]
 
-export var _offset := Vector2.ZERO
-export (int, 1, 7) var number := 5 setget _set_number, get_number
+const RESULTS := [\"Even\", \"Odd\"]
+
+export (int, 1, 7) var number := 5 setget _set_number
 export (int, 1, 7) var modulo := 2
 
-onready var _blocks := $Blocks
-onready var _string := $String
-onready var _remainder := $Remainder
+onready var _blocks := $Blocks as GridContainer
+onready var _string := $String as Label
+onready var _remainder := $Remainder as Label
 
 
 func _ready() -> void:
-	_align_blocks()
 	_update_visual()
 
 
-func _align_blocks() -> void:
-	for c in _blocks.get_children():
-		c.modulate.a = 0.0
-	
-	var row := 0
-	var column := 0
-	for i in range(max(number, modulo)):
-		_blocks.get_child(i).position = Vector2(40 * column, row * 40) + _offset
-		row += 1
-		if row % modulo == 0 and modulo < number:
-			column += 1
-			row = 0
-
-
 func _update_visual() -> void:
-	if number >= modulo:
-		for i in range(number):
-			_blocks.get_child(i).modulate.a = 0
-			if i < number - (number % modulo):
-				_blocks.get_child(i).modulate = color_red
-			else:
-				_blocks.get_child(i).modulate = color_green
-	else:
-		for i in range(modulo):
-			_blocks.get_child(i).modulate = color_green
-			
-			if i >= number:
-				_blocks.get_child(i).modulate = color_red
-	
-	_string.text = \"%s\" % [results[number % modulo]]
-	_remainder.text = \"Remainder: %s\" % [number % modulo]
+	var remainder := number % modulo
+	for i in range(_blocks.get_child_count()):
+		var block: Panel = _blocks.get_child(i)
+		block.visible = i < number - remainder
+	_blocks.get_child(_blocks.get_child_count() - 1).visible = remainder == 1
+
+	_string.text = \"%s\" % [RESULTS[remainder]]
+	_remainder.text = \"Remainder: %s\" % [remainder]
 
 
 func _set_number(value: int) -> void:
 	number = value
 	if not _blocks:
 		return
-	_align_blocks()
 	_update_visual()
-
-
-func get_number() -> int:
-	return number
 "
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+border_width_right = 4
+border_color = Color( 0.960784, 0.980392, 0.980392, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.239216, 1, 0.431373, 1 )
+border_width_right = 4
+border_color = Color( 0.960784, 0.980392, 0.980392, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="OddEven" type="Node2D"]
 script = SubResource( 1 )
 _offset = Vector2( -120, -90 )
 
-[node name="Blocks" type="Node2D" parent="."]
+[node name="Blocks" type="GridContainer" parent="."]
+margin_left = -120.0
+margin_top = -90.0
+margin_right = -44.0
+margin_bottom = 50.0
+rect_rotation = 90.0
+rect_scale = Vector2( 1, -1 )
+columns = 2
 
-[node name="Block" type="Sprite" parent="Blocks"]
-modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
-position = Vector2( -120, -90 )
-texture = ExtResource( 2 )
+[node name="Block" type="Panel" parent="Blocks"]
+margin_right = 36.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 36, 32 )
+custom_styles/panel = SubResource( 2 )
 
-[node name="Shadow" type="Sprite" parent="Blocks/Block"]
-modulate = Color( 0.0901961, 0.0941176, 0.188235, 1 )
-show_behind_parent = true
-position = Vector2( 0, 4 )
-texture = ExtResource( 2 )
+[node name="Block2" type="Panel" parent="Blocks"]
+margin_left = 40.0
+margin_right = 76.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 36, 32 )
+custom_styles/panel = SubResource( 2 )
 
-[node name="Block2" type="Sprite" parent="Blocks"]
-modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
-position = Vector2( -120, -50 )
-texture = ExtResource( 2 )
+[node name="Block3" type="Panel" parent="Blocks"]
+margin_top = 36.0
+margin_right = 36.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 36, 32 )
+custom_styles/panel = SubResource( 2 )
 
-[node name="Shadow" type="Sprite" parent="Blocks/Block2"]
-modulate = Color( 0.0901961, 0.0941176, 0.188235, 1 )
-show_behind_parent = true
-position = Vector2( 0, 4 )
-texture = ExtResource( 2 )
+[node name="Block4" type="Panel" parent="Blocks"]
+margin_left = 40.0
+margin_top = 36.0
+margin_right = 76.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 36, 32 )
+custom_styles/panel = SubResource( 2 )
 
-[node name="Block3" type="Sprite" parent="Blocks"]
-modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
-position = Vector2( -80, -90 )
-texture = ExtResource( 2 )
+[node name="Block5" type="Panel" parent="Blocks"]
+visible = false
+margin_top = 72.0
+margin_right = 36.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 36, 32 )
+custom_styles/panel = SubResource( 2 )
 
-[node name="Shadow" type="Sprite" parent="Blocks/Block3"]
-modulate = Color( 0.0901961, 0.0941176, 0.188235, 1 )
-show_behind_parent = true
-position = Vector2( 0, 4 )
-texture = ExtResource( 2 )
+[node name="Block6" type="Panel" parent="Blocks"]
+visible = false
+margin_left = 40.0
+margin_top = 72.0
+margin_right = 76.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 36, 32 )
+custom_styles/panel = SubResource( 2 )
 
-[node name="Block4" type="Sprite" parent="Blocks"]
-modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
-position = Vector2( -80, -50 )
-texture = ExtResource( 2 )
-
-[node name="Shadow" type="Sprite" parent="Blocks/Block4"]
-modulate = Color( 0.0901961, 0.0941176, 0.188235, 1 )
-show_behind_parent = true
-position = Vector2( 0, 4 )
-texture = ExtResource( 2 )
-
-[node name="Block5" type="Sprite" parent="Blocks"]
-modulate = Color( 0.239216, 1, 0.431373, 1 )
-position = Vector2( -40, -90 )
-texture = ExtResource( 2 )
-
-[node name="Shadow" type="Sprite" parent="Blocks/Block5"]
-modulate = Color( 0.0901961, 0.0941176, 0.188235, 1 )
-show_behind_parent = true
-position = Vector2( 0, 4 )
-texture = ExtResource( 2 )
-
-[node name="Block6" type="Sprite" parent="Blocks"]
-modulate = Color( 1, 0, 0, 0 )
-position = Vector2( 40, 40 )
-texture = ExtResource( 2 )
-
-[node name="Shadow" type="Sprite" parent="Blocks/Block6"]
-modulate = Color( 0.0901961, 0.0941176, 0.188235, 1 )
-show_behind_parent = true
-position = Vector2( 0, 4 )
-texture = ExtResource( 2 )
-
-[node name="Block7" type="Sprite" parent="Blocks"]
-modulate = Color( 1, 0, 0, 0 )
-position = Vector2( 40, 80 )
-texture = ExtResource( 2 )
-
-[node name="Shadow" type="Sprite" parent="Blocks/Block7"]
-modulate = Color( 0.0901961, 0.0941176, 0.188235, 1 )
-show_behind_parent = true
-position = Vector2( 0, 4 )
-texture = ExtResource( 2 )
+[node name="Block7" type="Panel" parent="Blocks"]
+margin_top = 72.0
+margin_right = 36.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 36, 32 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="String" type="Label" parent="."]
 margin_left = -39.0
@@ -161,9 +130,6 @@ margin_bottom = 99.0
 custom_fonts/font = ExtResource( 3 )
 text = "Odd"
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Remainder" type="Label" parent="."]
 margin_left = -39.0
