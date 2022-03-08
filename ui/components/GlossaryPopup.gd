@@ -22,6 +22,7 @@ func _ready() -> void:
 	_interaction_area.connect("mouse_exited", self, "disappear")
 	_timer.connect("timeout", self, "_on_Timer_timeout")
 	_tween.connect("tween_all_completed", self, "_on_Tween_tween_all_completed")
+	_content.connect("resized", self, "_on_Content_resized")
 
 
 func setup(term: String, bbcode_text: String) -> void:
@@ -72,4 +73,7 @@ func _on_Tween_tween_all_completed() -> void:
 		_content.bbcode_text = ""
 		_panel.hide()
 		_interaction_area.hide()
-		_panel.set_deferred("rect_size", _panel.rect_min_size)
+
+
+func _on_Content_resized() -> void:
+	_panel.set_deferred("rect_size", _panel.rect_min_size)
