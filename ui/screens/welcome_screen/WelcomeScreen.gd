@@ -2,41 +2,46 @@ extends Control
 
 signal course_requested(force_outliner)
 
-onready var _settings_button := $Layout/MarginContainer/ColumnLayout/SideColumn/SettingsButton as Button
-onready var _outliner_button := $Layout/MarginContainer/ColumnLayout/SideColumn/OutlinerButton as Button
-onready var _start_button := $Layout/MarginContainer/ColumnLayout/SideColumn/StartButton as Button
-onready var _quit_button := $Layout/MarginContainer/ColumnLayout/SideColumn/QuitButton as Button
-onready var _report_button := $Layout/TopBar/MarginContainer/ToolBarLayout/ReportButton as Button
-onready var _scroll_container := $Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer as ScrollContainer
+onready var _settings_button := $GDQuestBoy/Margin/Buttons/SettingsButton as Button
+onready var _outliner_button := $GDQuestBoy/Margin/Buttons/OutlinerButton as Button
+onready var _start_button := $GDQuestBoy/Margin/Buttons/StartButton as Button
+onready var _quit_button := $GDQuestBoy/Margin/Buttons/QuitButton as Button
 
-onready var _main_content_block := $Layout/MarginContainer/ColumnLayout/MainColumn/MainContent as Container
-onready var _content_list := (
-	_main_content_block.get_node("MarginContainer/ScrollContainer/MarginContainer/VBoxContainer") as Container
-)
+onready var _anim_player:= $AnimationPlayer as AnimationPlayer
+onready var _robot := $Robot
+
+onready var _buttons_to_disable := [_settings_button, _outliner_button, _start_button, _quit_button]
+
+func _init() -> void:
+	randomize()
 
 
 func _ready() -> void:
+	for button in _buttons_to_disable:
+		button.disabled = true
+
 	_settings_button.connect("pressed", Events, "emit_signal", ["settings_requested"])
 	_outliner_button.connect("pressed", self, "_on_outliner_pressed")
 	_start_button.connect("pressed", self, "_on_start_requested")
 	_quit_button.connect("pressed", get_tree(), "quit")
 	
-	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
-	for child in _content_list.get_children():
-		if child is RichTextLabel:
-			child.connect("meta_clicked", OS, "shell_open")
-
-	_scroll_container.grab_focus()
+	_start_button.grab_focus()
 	
 	if OS.has_feature('JavaScript'):
 		_quit_button.queue_free()
+	
+	_anim_player.connect("animation_finished", self, "_on_animation_finished")
+
+
+func appear() -> void:
+	_anim_player.play("appear")
 
 
 func set_button_continue(enable: bool = true) -> void:
 	if enable:
-		_start_button.text = "Continue Course"
+		_start_button.text = tr("CONTINUE")
 	else:
-		_start_button.text = "Start Course"
+		_start_button.text = tr("START")
 
 
 func _on_outliner_pressed() -> void:
@@ -45,3 +50,10 @@ func _on_outliner_pressed() -> void:
 
 func _on_start_requested() -> void:
 	emit_signal("course_requested", false)
+
+
+func _on_animation_finished(anim_name: String) -> void:
+	for button in _buttons_to_disable:
+		button.disabled = false
+	_robot.appear()
+	

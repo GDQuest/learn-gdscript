@@ -1,7 +1,7 @@
 extends TextureButton
 
 const COLOR_IDLE := Color(0.572549, 0.560784, 0.721569)
-const COLOR_HOVER := Color(0.733774, 0.723858, 0.859375)
+const COLOR_HOVER := Color(0.960784, 0.980392, 0.980392)
 const COLOR_PRESSED := Color(0.455042, 0.441932, 0.621094)
 
 var is_hovered := false setget set_is_hovered

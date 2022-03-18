@@ -50,8 +50,8 @@ func _ready() -> void:
 	if NavigationManager.current_url != "":
 		_on_course_requested()
 		return
-
-	load_immediately(_welcome_screen)
+	_loading_screen.hide()
+	_welcome_screen.appear()
 
 
 func _unhandled_input(event: InputEvent) -> void:
