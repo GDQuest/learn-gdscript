@@ -33,7 +33,7 @@ title = ""
 type = 0
 text = "The [code]range()[/code] function produced an array that the [code]for[/code] keyword could loop over.
 
-We can give for loops [i]any[/i] array, and they will loop over them just the same.
+We can give [code]for[/code] loops [i]any[/i] array, and they will loop over them just the same.
 
 Instead of using the [code]range()[/code] function, we could manually write the numbers and get the same result."
 visual_element_path = ""
@@ -83,11 +83,11 @@ for number in numbers:
     print(number)
 [/code]"
 hint = ""
-explanation_bbcode = "Compared to previous examples, we store the array in the [code]numbers[/code] variable. Using the [code]numbers[/code] variable in our for loop allows the computer to access the array of numbers like before.
+explanation_bbcode = "Compared to previous examples, we store the array in the [code]numbers[/code] variable. Using the [code]numbers[/code] variable in our [code]for[/code] loop allows the computer to access the array of numbers like before.
 
 We have three numbers in the array: [code]0[/code], [code]1[/code], and [code]2[/code].
 
-The loop extracts each of them sequentially and assigns it to the [code]number[/code] temporary variable. As, inside the loop, we print the number, the output will print [code]0[/code], then [code]1[/code], then [code]2[/code], each on a separate line."
+The loop extracts each of them sequentially and assigns it to the [code]number[/code] temporary variable. As the loop processes each number, the output will print [code]0[/code], then [code]1[/code], then [code]2[/code], each on a separate line."
 answer_options = [ "0, 1, and 2", "1, 2, and 3", "0, 0, and 0" ]
 valid_answers = [ "0, 1, and 2" ]
 is_multiple_choice = false
@@ -182,7 +182,7 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-20-looping-over-arrays/content-En91c9ll.tres"
 title = ""
 type = 0
-text = "The code above uses several features you didn't learn yet:
+text = "The code above uses several features you haven't learned yet:
 
 - In a condition, the [code]in[/code] keyword allows you to check if a value exists [i]in[/i] an array.
 - The array's [code]append()[/code] function appends a new value at the end of the array.
@@ -203,7 +203,7 @@ title = ""
 type = 0
 text = "The beauty of loops is that they work regardless of the size of your arrays. 
 
-The code just works whether you have one or 10,000 units to select. And that with only a couple lines of code.
+The code just works whether you have one or ten thousand units to select. It is all accomplished with only a couple lines of code.
 
 That's the power of computer programming.
 
@@ -240,7 +240,7 @@ practice_id = "res://course/lesson-20-looping-over-arrays/practice-clsFcSrG.tres
 title = "Back to the drawing board"
 goal = "We want to draw many rectangles, something surprisingly common in games.
 
-When writing the code by hand, it gets tedious. Instead, you'll often store the size of your shapes in arrays and use a loop to draw them all in batches.
+However, writing this code by hand can get tedious. Instead, you could store the size of your shapes in arrays and use a loop to draw them all in batches.
 
 That's what you'll do in this practice.
 
