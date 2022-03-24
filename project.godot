@@ -82,7 +82,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "GDQuestCodes",
 "language": "GDScript",
-"path": "res://lsp/GDQuestCodes.gd"
+"path": "res://script_checking/GDQuestCodes.gd"
 }, {
 "base": "TextEdit",
 "class": "GDScriptCodeExample",
@@ -92,7 +92,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "GDScriptCodes",
 "language": "GDScript",
-"path": "res://lsp/GDScriptCodes.gd"
+"path": "res://script_checking/GDScriptCodes.gd"
 }, {
 "base": "Control",
 "class": "GameView",
@@ -103,11 +103,6 @@ _global_script_classes=[ {
 "class": "Glossary",
 "language": "GDScript",
 "path": "res://resources/Glossary.gd"
-}, {
-"base": "Reference",
-"class": "LanguageServerError",
-"language": "GDScript",
-"path": "res://lsp/LanguageServerError.gd"
 }, {
 "base": "Resource",
 "class": "Lesson",
@@ -122,7 +117,12 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "MiniGDScriptTokenizer",
 "language": "GDScript",
-"path": "res://lsp/MiniGDScriptTokenizer.gd"
+"path": "res://script_checking/MiniGDScriptTokenizer.gd"
+}, {
+"base": "Reference",
+"class": "OfflineScriptVerifier",
+"language": "GDScript",
+"path": "res://script_checking/OfflineScriptVerifier.gd"
 }, {
 "base": "PanelContainer",
 "class": "OutputConsole",
@@ -199,6 +199,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gdscript-slice-exporter/collections/SceneProperties.gd"
 }, {
+"base": "Reference",
+"class": "ScriptError",
+"language": "GDScript",
+"path": "res://script_checking/ScriptError.gd"
+}, {
 "base": "Resource",
 "class": "ScriptProperties",
 "language": "GDScript",
@@ -212,7 +217,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "ScriptVerifier",
 "language": "GDScript",
-"path": "res://lsp/ScriptVerifier.gd"
+"path": "res://script_checking/ScriptVerifier.gd"
 }, {
 "base": "TextEdit",
 "class": "SliceEditor",
@@ -324,10 +329,10 @@ _global_script_class_icons={
 "GDScriptCodes": "",
 "GameView": "",
 "Glossary": "",
-"LanguageServerError": "",
 "Lesson": "",
 "LessonProgress": "",
 "MiniGDScriptTokenizer": "",
+"OfflineScriptVerifier": "",
 "OutputConsole": "",
 "Practice": "",
 "PracticeHint": "",
@@ -343,6 +348,7 @@ _global_script_class_icons={
 "Revealer": "res://ui/components/Revealer.svg",
 "RunnableCodeExample": "",
 "SceneProperties": "",
+"ScriptError": "",
 "ScriptProperties": "",
 "ScriptSlice": "",
 "ScriptVerifier": "",
@@ -383,7 +389,6 @@ NavigationManager="*res://autoload/NavigationManager.gd"
 GDScriptErrorDatabase="*res://autoload/GDScriptErrorDatabase.gd"
 Log="*res://autoload/Log.gd"
 Globals="*res://autoload/Globals.gd"
-ConnectionChecker="*res://autoload/ConnectionChecker.gd"
 
 [debug]
 
@@ -411,11 +416,6 @@ enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://ad
 [gdscript-slice-exporter]
 
 scene="res://addons/gdscript-course-builder/ui/CourseEditor.tscn"
-
-[global]
-
-lsp_url="https://lsp.gdquest.com/api/v1"
-lsp_url.release="https://lsp.gdquest.com/api/v1"
 
 [input]
 

@@ -1,7 +1,7 @@
 class_name SliceEditorOverlay
 extends Control
 
-const LanguageServerRange = LanguageServerError.ErrorRange
+const ErrorRange = ScriptError.ErrorRange
 
 var lines_offset := 0 setget set_lines_offset
 var character_offset := 0 setget set_character_offset
@@ -51,7 +51,7 @@ func update_overlays() -> void:
 			highlight_overlay.regions = _get_line_regions(highlight_overlay.line_index, text_edit)
 
 
-func add_error(error: LanguageServerError) -> ErrorOverlay:
+func add_error(error: ScriptError) -> ErrorOverlay:
 	var text_edit := get_parent() as TextEdit
 	if not text_edit:
 		return null
@@ -65,7 +65,7 @@ func add_error(error: LanguageServerError) -> ErrorOverlay:
 	return error_overlay
 
 
-func _get_error_range_regions(error_range: LanguageServerRange, text_edit: TextEdit) -> Array:
+func _get_error_range_regions(error_range: ErrorRange, text_edit: TextEdit) -> Array:
 	var start_line := error_range.start.line - lines_offset
 	var end_line = error_range.end.line - lines_offset
 	var start_char = error_range.start.character - character_offset
@@ -109,7 +109,7 @@ func _get_text_range_regions(
 		var line = text_edit.get_line(line_index)
 		var region := Rect2(-1, -1, 0, 0)
 
-		# Starting point of the first line is as reported by the LSP. For the following
+		# Starting point of the first line is as reported by the error. For the following
 		# lines it's the first character in the line.
 		var first_char: int
 		if line_index == start_line:
@@ -117,7 +117,7 @@ func _get_text_range_regions(
 		else:
 			first_char = 0
 
-		# Ending point of the last line is as reported by the LSP. For the preceding
+		# Ending point of the last line is as reported by the error. For the preceding
 		# lines it's the last character in the line.
 		var last_char: int
 		if line_index == end_line:
@@ -174,7 +174,7 @@ class ErrorOverlay:
 	signal region_exited
 
 	var severity := 0
-	var error_range := LanguageServerRange.new()
+	var error_range := ErrorRange.new()
 	var regions := [] setget set_regions
 
 	var _lines := []

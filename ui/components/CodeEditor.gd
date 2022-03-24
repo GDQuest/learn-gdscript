@@ -22,9 +22,8 @@ export(String, MULTILINE) var text := "" setget set_text, get_text
 
 var _initial_text := ""
 
-# When pressing the run button, we disable buttons until the server responds.
-# When the server responds, we use this var to restore the buttons' previous
-# disabled state.
+# When pressing the run button, we disable buttons until the checks complete.
+# Once done, we use this var to restore the buttons' previous disabled state.
 var _buttons_previous_disabled_state := {}
 
 onready var slice_editor := $Column/PanelContainer/SliceEditor as SliceEditor

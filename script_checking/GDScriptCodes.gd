@@ -13,7 +13,7 @@
 # contents. We store those messages (cleaned up for better maintainability) as is, but we don't
 # actually use the raw messages for anything. Instead, each noteworthy message is assigned a
 # number of text snippets which are unique to it. These snippets are then used to figure out
-# which message was received from the LSP. When we successfully identified the message, we give it
+# which message was generated. When we successfully identified the message, we give it
 # a code from the enum below. That code is then used to fetch our custom error explanation,
 # translation, etc. Multiple raw messages can share the same code.
 #

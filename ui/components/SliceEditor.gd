@@ -1,7 +1,7 @@
 # A code editor with a few conveniences:
 #
 # 1. Can show errors in an overlay, when given an array of
-#    LanguageServerErrors
+#    ScriptErrors
 # 2. Dispatches a signal when scroll values change
 # 3. If given a ScriptSlice instance, will synchronize the text state and the
 #    ScriptSlice.current_text state
@@ -29,7 +29,7 @@ signal scroll_changed(vector2)
 var errors_overlay := SliceEditorOverlay.new()
 var errors_overlay_message: ErrorOverlayPopup = ErrorOverlayPopupScene.instance()
 
-# Array<LanguageServerError>
+# Array<ScriptError>
 var errors := [] setget set_errors
 
 var _slice_properties: SliceProperties
@@ -99,11 +99,11 @@ func sync_text_with_slice() -> void:
 	_on_text_changed()
 
 
-# Receives an array of `LanguageServerError`s
+# Receives an array of `ScriptError`s
 func set_errors(new_errors: Array) -> void:
 	if OS.is_debug_build():
 		for err in errors:
-			assert(err is LanguageServerError, "Error %s isn't a valid LanguageServerError" % [err])
+			assert(err is ScriptError, "Error %s isn't a valid ScriptError" % [err])
 	errors = new_errors
 	_reset_overlays()
 
@@ -169,7 +169,7 @@ func _reset_overlays() -> void:
 	errors_overlay.character_offset = slice_properties.leading_spaces
 
 	for index in errors.size():
-		var error: LanguageServerError = errors[index]
+		var error: ScriptError = errors[index]
 
 		var is_outside_lens: bool = (
 			(show_lines_from > 0 and error.error_range.start.line < show_lines_from)

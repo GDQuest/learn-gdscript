@@ -241,32 +241,35 @@ func _validate_and_run_student_code() -> void:
 	var recursive_function := MiniGDScriptTokenizer.new(script_text).find_any_recursive_function()
 	if recursive_function != "":
 		var error = make_error_recursive_function(recursive_function)
-		MessageBus.print_lsp_error(error, script_file_name)
+		MessageBus.print_script_error(error, script_file_name)
 		_code_editor.unlock_editor()
 		return
 
-	# Check the script against the remote language server.
-	var verifier := ScriptVerifier.new(self, script_file_path, script_text)
-	verifier.test()
+	var errors := _run_check(script_text)
 
-	var errors: Array = yield(verifier, "errors")
 	if not errors.empty():
 		_code_editor.slice_editor.errors = errors
 
 		for index in errors.size():
-			var error: LanguageServerError = errors[index]
-			MessageBus.print_lsp_error(error, script_file_name)
+			var error: ScriptError = errors[index]
+			MessageBus.print_script_error(error, script_file_name)
 
-		# If the user could not connect to the server, still try to run their code.
-		var is_connection_error: bool = (
+		var is_missing_parser_error: bool = (
 			errors.size() == 1 and \
-			ScriptVerifier.check_error_is_connection_error(errors[0])
+			OfflineScriptVerifier.check_error_is_missing_parser_error(errors[0])
 		)
-		if not is_connection_error:
+		
+		if not is_missing_parser_error:
 			_code_editor.unlock_editor()
 			return
 
 	_run_student_code()
+
+
+func _run_check(script_text: String) -> Array:
+	var verifier := OfflineScriptVerifier.new(script_text)
+	verifier.test()
+	return verifier.errors
 
 
 func _run_student_code() -> void:
@@ -284,8 +287,8 @@ func _run_student_code() -> void:
 
 	var script_is_valid = script.reload()
 	if script_is_valid != OK:
-		var error := make_error_lsp_silent()
-		MessageBus.print_lsp_error(error, script_file_name)
+		var error := make_error_script_silent()
+		MessageBus.print_script_error(error, script_file_name)
 		_code_editor.unlock_editor()
 		return
 
@@ -668,16 +671,16 @@ static func set_node_properties(node: Node, props_backup: Dictionary) -> void:
 		node.set(prop_name, backed_up_value)
 
 
-static func make_error_lsp_silent() -> LanguageServerError:
-		var err = LanguageServerError.new()
-		err.message = "Oh no! The script has an error, but the Script Verifier Server did not catch it"
+static func make_error_script_silent() -> ScriptError:
+		var err = ScriptError.new()
+		err.message = "Oh no! The script has an error, but the Script Verifier did not catch it"
 		err.severity = 1
-		err.code = GDQuestCodes.ErrorCode.LSP_UNDETECTED_ERROR
+		err.code = GDQuestCodes.ErrorCode.INVALID_NO_CATCH
 		return err
 
 
-static func make_error_recursive_function(func_name: String) -> LanguageServerError:
-	var err = LanguageServerError.new()
+static func make_error_recursive_function(func_name: String) -> ScriptError:
+	var err = ScriptError.new()
 	err.message = "The function `%s` calls itself, this creates an infinite loop"%[func_name]
 	err.severity = 1
 	err.code = GDQuestCodes.ErrorCode.RECURSIVE_FUNCTION

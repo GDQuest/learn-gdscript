@@ -78,7 +78,7 @@ func replace_script(script_file_name: String, script_text: String) -> String:
 	return lines.join("\n")
 
 
-func print_lsp_error(error: LanguageServerError, script_file_name := "") -> void:
+func print_script_error(error: ScriptError, script_file_name := "") -> void:
 	MessageBus.print_error(
 		error.message,
 		script_file_name,
