@@ -75,9 +75,9 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-17-while-loops/content-kGx0c7DD.tres"
 title = "Using while loops to repeat code"
 type = 0
-text = "While loops make the computer repeat a block of code until you meet a specific condition or decide to break from the loop.
+text = "You can use a [code]while[/code] loop to make the computer repeat a block of code until you meet a specific condition or decide to break from the loop.
 
-Here's how we use a while loop."
+Here's how we use a [code]while[/code] loop."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -97,13 +97,13 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-17-while-loops/content-dOCQiGjB.tres"
 title = ""
 type = 0
-text = "We use the variable [code]number[/code] to keep track of how many loops the while loop completes.
+text = "We use the variable [code]number[/code] to keep track of how many loops the [code]while[/code] loop completes.
 
-Each time we go through the while loop, we add [code]1[/code] to [code]number[/code].
+Each time we go through the [code]while[/code] loop, we add [code]1[/code] to [code]number[/code].
 
-The while loop keeps running for as long as the condition is true. In this case, it keeps running while [code]number[/code] is less than [code]4[/code].
+The [code]while[/code] loop keeps running for as long as the condition is true. In this case, it keeps running while [code]number[/code] is less than [code]4[/code].
 
-You can see the following code is executed four times in the console."
+You can see that the following code is executed four times in the console."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -125,9 +125,9 @@ title = ""
 type = 0
 text = "Let's apply this to our [code]move_to_end()[/code] function.
 
-This time, we compare the number of loops to the board's width. We keep looping through until we reach the width of the board.
+This time, we compare the number of loops to the board's width. We go through the loop until we reach the width of the board.
 
-Note we move one less than the board width because the robot is already on the first cell."
+Note that we move one less than the board's width because the robot is already on the first cell."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -157,7 +157,7 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-17-while-loops/content-RjTRhZN4.tres"
 title = "While loops can cause issues"
 type = 0
-text = "If you're not careful, your while loop can run infinitely. In that case, the application will freeze.
+text = "If you're not careful, your [code]while[/code] loop can run infinitely. In that case, the application will freeze.
 
 Take a look at this code example."
 visual_element_path = ""
@@ -180,7 +180,7 @@ quiz_id = "res://course/lesson-17-while-loops/quiz-v5tT6n1T.tres"
 question = "What would happen if the computer tried to run the code above?"
 content_bbcode = ""
 hint = ""
-explanation_bbcode = "Because we don't increment [code]number[/code] within the while loop, it always stays at [code]0[/code].
+explanation_bbcode = "Because we don't increment [code]number[/code] within the [code]while[/code] loop, it always stays at [code]0[/code].
 
 As a result, the number is always lower than [code]10[/code], so we never break out of the loop.
 
@@ -205,14 +205,14 @@ Yet, [code]while[/code] loops have important intermediate to advanced-level uses
 
 We use [code]while[/code] loops every time we need to loop an unknown number of times.
 
-For example, games run in a loop that typically generates 60 images per second until the user closes the game. This is possible thanks to while loops.
+For example, games run in a loop that typically generates sixty images per second until the user closes the game. This is possible thanks to [code]while[/code] loops.
 
-There are other good uses for it:
+There are other good uses for [code]while[/code] loops:
 
-- Reading and processing a file, like a text file, line by line.
+- Reading and processing a file, like a text document, line by line.
 - Processing a constant stream of data, like someone recording audio with a microphone.
 - Reading code and converting it into instructions the computer understands.
-- Various intermediate to advanced-level algorithms like finding paths around a map for AI."
+- Various intermediate to advanced-level algorithms, like finding paths around a map for AI."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = true
@@ -222,7 +222,7 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-17-while-loops/content-Ib5BnVHA.tres"
 title = ""
 type = 0
-text = "Let's practice while loops real quick as they're useful to know. It's also an excellent opportunity to practice 2D vectors.
+text = "Let's practice some [code]while[/code] loops, as they're useful to know. It's also an excellent opportunity to practice 2D vectors.
 
 Then, we'll move on to the safer [code]for[/code] loops in the following lesson."
 visual_element_path = ""
@@ -241,7 +241,7 @@ The board size is determined by the [code]Vector2[/code] [code]board_size[/code]
 
 The robot's current cell is [code]Vector2(2, 0)[/code]. 
 
-Make sure to use a while loop so the function works for any board size."
+Make sure to use a [code]while[/code] loop so the function works for any board size."
 starting_code = "func move_to_bottom():
 	pass"
 cursor_line = 0
