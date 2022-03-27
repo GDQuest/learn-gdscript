@@ -12,19 +12,6 @@ We're early in production and plan to complete the project at the end of May 202
 
 Over 1600 backers funded this project on Kickstarter, which is why we could make a complete interactive app to learn GDScript for free.
 
-## The app is in beta
-
-We first released the app on December 28, 2021. It's currently in a beta testing phase.
-
-While we're doing our best to make everything work, you should expect issues. Please report any issue or bug you face to help make the app better for you and everyone else.
-
-To do so:
-
-- Head to the [Issues](https://github.com/GDQuest/learn-gdscript/issues) tab.
-- Search for a report matching your issue.
-- If you can't find any, click the _New issue_ button in the top-right corner.
-- Follow the instructions on the screen.
-
 ## How to run the app
 
 You can test the app online here:
@@ -43,20 +30,6 @@ You can also run the project straight in Godot by cloning the repository and imp
 We only recommend importing the app in Godot to study its source code or [contribute](#how-to-contribute). You will need **Godot 3.4.2** or a more recent stable version of Godot 3. The project requires features we added to Godot 3.4.2.
 
 Please note that practice errors will trigger the debugger and pause execution in Godot, unlike when using the online version. That's expected behavior, and you'll need to continue execution by pressing <kbd>F7</kbd> when that happens.
-
-## Roadmap
-
-In this section, you'll find a summary of our roadmap for the app.
-
-For more details regarding the planned improvements for each milestone, please head to the [Milestones page](https://github.com/GDQuest/learn-gdscript/milestones).
-
-### Milestone 1.0
-
-_Planned release: by March 15, 2022_
-
-This milestone will mark the first complete release of the app and GDScript course. It should contain 28 lessons and dozens of practices.
-
-On the app's side, we will focus on polishing the user experience.
 
 ## Feedback, requests, and discussions
 
