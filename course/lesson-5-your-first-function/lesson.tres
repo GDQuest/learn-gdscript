@@ -241,7 +241,7 @@ cursor_column = 0
 hints = PoolStringArray( "The function body will be very similar to what you did in the previous practice.", "Don\'t forget to add a leading Tab character to every line inside the function.", "The function definition (the first line) should be [code]func draw_square():[/code]" )
 validator_script_path = "TestsDrawingSquare.gd"
 script_slice_path = "drawing_squares/DrawingSquares.live-editor/slices/DrawingSquares.draw_square.slice.tres"
-documentation_references = PoolStringArray(  )
+documentation_references = PoolStringArray( "move_forward", "turn_right" )
 documentation_resource = ExtResource( 2 )
 description = "Until now, you've had to write code by hand, and it's boring. It's time to code a reusable function. You'll use it to draw multiple squares."
 
@@ -270,7 +270,7 @@ cursor_column = 0
 hints = PoolStringArray( "You need to define a new function below draw_square() named [code]draw_three_squares().[/code]", "Your new function should call [code]draw_square()[/code] three times, on three different lines.", "Between each call to [code]draw_square[/code], there should be a call to [code]jump(300,300)[/code]" )
 validator_script_path = "TestsDrawingThreeSquares.gd"
 script_slice_path = "drawing_multiple_squares/DrawingMultipleSquares.live-editor/slices/DrawingMultipleSquares.draw_three_squares.slice.tres"
-documentation_references = PoolStringArray(  )
+documentation_references = PoolStringArray( "move_forward", "turn_right" )
 documentation_resource = ExtResource( 2 )
 description = "Now you created a function to draw squares, you can reuse it by calling it multiple times."
 
