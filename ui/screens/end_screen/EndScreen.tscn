@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
@@ -37,6 +37,46 @@ func update_size() -> void:
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0.105882, 0.243137, 0.760784 )
 shadow_offset = Vector2( 0, 4 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.14902, 0.776471, 0.968627, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.396078, 0.858824, 1, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.0666667, 0.564706, 0.807843, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id=9]
+content_margin_left = 6.0
+content_margin_right = 6.0
+bg_color = Color( 0.290196, 0.294118, 0.388235, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 4
+
+[sub_resource type="Theme" id=5]
+VScrollBar/styles/grabber = SubResource( 6 )
+VScrollBar/styles/grabber_highlight = SubResource( 7 )
+VScrollBar/styles/grabber_pressed = SubResource( 8 )
+VScrollBar/styles/scroll = SubResource( 9 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 content_margin_left = 8.0
@@ -171,6 +211,7 @@ margin_left = 120.0
 margin_top = 20.0
 margin_right = 840.0
 margin_bottom = 966.0
+theme = SubResource( 5 )
 script = ExtResource( 9 )
 
 [node name="Column" type="VBoxContainer" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer"]
@@ -181,39 +222,36 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="Label" type="Label" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
+margin_top = 15.0
 margin_right = 720.0
-margin_bottom = 31.0
+margin_bottom = 46.0
 custom_fonts/font = ExtResource( 1 )
-text = "You completed Learn GDScript From Zero"
+text = "Congratulations!"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_top = 47.0
+margin_top = 62.0
 margin_right = 720.0
-margin_bottom = 250.0
+margin_bottom = 207.0
 bbcode_enabled = true
-bbcode_text = "Congratulations!
+bbcode_text = "You completed Learn GDScript From Zero. You now have the basics you need to dive into game creation with the Godot game engine.
 
-You now have the basics you need to dive into game creation with the Godot game engine.
+If you're looking for a free series to keep learning the basics with us, you can move on to [url=https://www.gdquest.com/tutorial/godot/learning-paths/getting-started-in-2021/]Getting Started with Godot[/url]."
+text = "You completed Learn GDScript From Zero. You now have the foundations you need to dive into game creation with the Godot game engine.
 
-If you're looking for a free course to keep learning, you can move on to [url=https://www.gdquest.com/tutorial/godot/learning-paths/getting-started-in-2021/]Getting Started with Godot[/url]."
-text = "Congratulations!
-
-You now have the basics you need to dive into game creation with the Godot game engine.
-
-If you're looking for a free course to keep learning, you can move on to Getting Started with Godot."
+If you're looking for a free series to keep learning the basics with us, you can move on to Getting Started with Godot."
 fit_content_height = true
 
-[node name="Label2" type="Label" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_top = 266.0
+[node name="Label4" type="Label" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
+margin_top = 223.0
 margin_right = 720.0
-margin_bottom = 297.0
+margin_bottom = 254.0
 custom_fonts/font = ExtResource( 1 )
-text = "Or you can take a shortcut"
+text = "Or level up faster by taking this shortcut"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_top = 313.0
+margin_top = 270.0
 margin_right = 720.0
-margin_bottom = 603.0
+margin_bottom = 560.0
 bbcode_enabled = true
 bbcode_text = "There are loads of free game creation tutorials, but they don't form a clear path.
 
@@ -232,34 +270,34 @@ Learning that on your own can take years."
 fit_content_height = true
 
 [node name="Label3" type="Label" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_top = 619.0
+margin_top = 576.0
 margin_right = 720.0
-margin_bottom = 650.0
+margin_bottom = 607.0
 custom_fonts/font = ExtResource( 1 )
 text = "Learn to Code From Zero, with Godot"
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_top = 666.0
+margin_top = 623.0
 margin_right = 720.0
-margin_bottom = 869.0
+margin_bottom = 855.0
 bbcode_enabled = true
-bbcode_text = "We created a brand new course, [url=https://gdquest.mavenseed.com/courses/learn-to-code-from-zero-with-godot][b]Learn to Code From Zero, with Godot[/b][/url].
+bbcode_text = "This app is the free part of our in-depth course, [url=https://gdquest.mavenseed.com/courses/learn-to-code-from-zero-with-godot][b]Learn to Code From Zero, with Godot[/b][/url].
 
-It picks up right where this app ends to take you to the point where you can make [i]your[/i] game.
+The course picks up right where this app ends to take you to the point where you can make [i]your[/i] game.
 
 It's the only course that'll truly teach you [i]how to become a game developer[/i] with Godot."
-text = "We created a brand new course, Learn to Code From Zero, with Godot.
+text = "This app is the free part of our in-depth course, Learn to Code From Zero, with Godot.
 
-It picks up right where this app ends to take you to the point where you can make your game.
+The course picks up right where this app ends to take you to the point where you can make your game.
 
 It's the only course that'll truly teach you how to become a game developer with Godot."
 fit_content_height = true
 
 [node name="LearnMoreButton" type="Button" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
 margin_left = 210.0
-margin_top = 885.0
+margin_top = 871.0
 margin_right = 510.0
-margin_bottom = 945.0
+margin_bottom = 931.0
 rect_min_size = Vector2( 300, 60 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
@@ -280,6 +318,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="TextureRect" type="TextureRect" parent="Layout/PanelContainer/Sky/Control2"]
+modulate = Color( 0.772549, 0.847059, 0.882353, 1 )
 margin_left = -960.0
 margin_right = 960.0
 margin_bottom = 986.0
@@ -288,6 +327,7 @@ texture = ExtResource( 3 )
 expand = true
 
 [node name="Illustration" type="TextureRect" parent="Layout/PanelContainer/Sky/Control2"]
+modulate = Color( 0.964706, 0.964706, 0.964706, 1 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -319,7 +359,7 @@ __meta__ = {
 }
 
 [node name="Logo2" type="TextureRect" parent="Layout/PanelContainer/Sky/Control2/Logo"]
-modulate = Color( 0.14902, 0.776471, 0.968627, 1 )
+modulate = Color( 0.129412, 0.517647, 0.756863, 1 )
 show_behind_parent = true
 anchor_left = 0.5
 anchor_top = 0.5
@@ -343,6 +383,10 @@ rect_clip_content = true
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="TextureRect" type="TextureRect" parent="Layout/PanelContainer/Sky/Control3"]
 margin_left = -1600.0
