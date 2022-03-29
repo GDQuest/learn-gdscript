@@ -1,16 +1,74 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://ui/components/GDQuestLogo.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
-[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/theme/fonts/font_title_big.tres" type="DynamicFont" id=4]
+[ext_resource path="res://ui/screens/end_screen/main_menu/sky_evening.png" type="Texture" id=3]
+[ext_resource path="res://ui/screens/end_screen/main_menu/logo.png" type="Texture" id=4]
 [ext_resource path="res://ui/components/QuitButton.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/screens/end_screen/EndScreen.gd" type="Script" id=6]
 [ext_resource path="res://ui/components/FullScreenButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/theme/panel_breadcrumbs.tres" type="StyleBox" id=8]
 [ext_resource path="res://addons/SmoothScroll/SmoothScrollContainer.gd" type="Script" id=9]
-[ext_resource path="res://icon.png" type="Texture" id=10]
+[ext_resource path="res://ui/screens/end_screen/main_menu/illustration.png" type="Texture" id=10]
 [ext_resource path="res://ui/icons/navigation_outliner.png" type="Texture" id=11]
+[ext_resource path="res://ui/screens/end_screen/main_menu/sky_dark.png" type="Texture" id=12]
+[ext_resource path="res://ui/screens/end_screen/main_menu/sky_day_blurred.png" type="Texture" id=13]
+
+[sub_resource type="GDScript" id=2]
+script/source = "tool
+extends HBoxContainer
+
+onready var tree := get_tree()
+
+
+func _ready() -> void:
+	connect(\"resized\", self, \"update_size\")
+
+
+func update_size() -> void:
+	yield(tree, \"idle_frame\")
+	for control in get_children():
+		var new_position: Vector2 = control.rect_position
+		var texture_rect: TextureRect = control.get_child(0)
+		texture_rect.rect_position.x = - new_position.x
+		texture_rect.rect_size = rect_size
+"
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0.105882, 0.243137, 0.760784 )
+shadow_offset = Vector2( 0, 4 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.960784, 0.980392, 0.980392, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.14902, 0.776471, 0.968627, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="EndScreen" type="Control"]
 anchor_right = 1.0
@@ -23,9 +81,7 @@ script = ExtResource( 6 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
+custom_constants/separation = 0
 
 [node name="TopBar" type="PanelContainer" parent="Layout"]
 margin_right = 1920.0
@@ -71,140 +127,259 @@ margin_left = 1856.0
 margin_right = 1896.0
 margin_bottom = 47.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Layout"]
-margin_left = 512.0
-margin_top = 63.0
-margin_right = 1408.0
-margin_bottom = 1080.0
-size_flags_horizontal = 6
+[node name="PanelContainer" type="PanelContainer" parent="Layout"]
+margin_top = 47.0
+margin_right = 1920.0
+margin_bottom = 1033.0
 size_flags_vertical = 3
 
-[node name="ColumnLayout" type="HBoxContainer" parent="Layout/MarginContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 876.0
-margin_bottom = 997.0
-alignment = 1
-
-[node name="MainColumn" type="VBoxContainer" parent="Layout/MarginContainer/ColumnLayout"]
-margin_right = 856.0
-margin_bottom = 977.0
+[node name="Sky" type="HBoxContainer" parent="Layout/PanelContainer"]
+margin_right = 1920.0
+margin_bottom = 986.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+script = SubResource( 2 )
+
+[node name="Control" type="Control" parent="Layout/PanelContainer/Sky"]
+margin_right = 960.0
+margin_bottom = 986.0
+rect_clip_content = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="WelcomeTitle" type="PanelContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn"]
-margin_right = 856.0
-margin_bottom = 136.0
-custom_styles/panel = ExtResource( 3 )
-
-[node name="MarginContainer" type="MarginContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/WelcomeTitle"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 848.0
-margin_bottom = 128.0
-
-[node name="Icon" type="TextureRect" parent="Layout/MarginContainer/ColumnLayout/MainColumn/WelcomeTitle/MarginContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 820.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 80, 80 )
-texture = ExtResource( 10 )
+[node name="TextureRect" type="TextureRect" parent="Layout/PanelContainer/Sky/Control"]
+margin_right = 1920.0
+margin_bottom = 986.0
+texture = ExtResource( 13 )
 expand = true
-stretch_mode = 5
 
-[node name="TitleLabel" type="Label" parent="Layout/MarginContainer/ColumnLayout/MainColumn/WelcomeTitle/MarginContainer"]
-margin_left = 20.0
-margin_top = 40.0
-margin_right = 820.0
-margin_bottom = 80.0
-custom_fonts/font = ExtResource( 4 )
-text = "That's it... for now!"
-align = 1
-valign = 1
+[node name="Panel" type="PanelContainer" parent="Layout/PanelContainer/Sky/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
 
-[node name="MainContent" type="PanelContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn"]
-margin_top = 152.0
-margin_right = 856.0
-margin_bottom = 977.0
-size_flags_vertical = 3
-custom_styles/panel = ExtResource( 3 )
+[node name="Margin" type="MarginContainer" parent="Layout/PanelContainer/Sky/Control/Panel"]
+margin_right = 960.0
+margin_bottom = 986.0
+custom_constants/margin_right = 120
+custom_constants/margin_left = 120
 
-[node name="MarginContainer" type="MarginContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 848.0
-margin_bottom = 817.0
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer"]
-margin_left = 20.0
+[node name="ScrollContainer" type="ScrollContainer" parent="Layout/PanelContainer/Sky/Control/Panel/Margin"]
+margin_left = 120.0
 margin_top = 20.0
-margin_right = 820.0
-margin_bottom = 789.0
-scroll_horizontal_enabled = false
+margin_right = 840.0
+margin_bottom = 966.0
 script = ExtResource( 9 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer"]
-margin_right = 800.0
-margin_bottom = 441.0
-custom_constants/separation = 32
+[node name="Column" type="VBoxContainer" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer"]
+margin_right = 720.0
+margin_bottom = 946.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/VBoxContainer"]
-margin_right = 800.0
-margin_bottom = 261.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_min_size = Vector2( 800, 100 )
-size_flags_horizontal = 6
+[node name="Label" type="Label" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
+margin_right = 720.0
+margin_bottom = 31.0
+custom_fonts/font = ExtResource( 1 )
+text = "You completed Learn GDScript From Zero"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
+margin_top = 47.0
+margin_right = 720.0
+margin_bottom = 250.0
 bbcode_enabled = true
-bbcode_text = "Thanks for participating in the beta test.
+bbcode_text = "Congratulations!
 
-We hope you enjoyed what's available so far.
+You now have the basics you need to dive into game creation with the Godot game engine.
 
-We wish we had a lot more to give you already, but creating this app took time. A [i]lot[/i] of time.
+If you're looking for a free course to keep learning, you can move on to [url=https://www.gdquest.com/tutorial/godot/learning-paths/getting-started-in-2021/]Getting Started with Godot[/url]."
+text = "Congratulations!
 
-The good news is: now we figured out many of the more challenging parts, moving forward, we can shift our focus onto new lessons and practices."
-text = "Thanks for participating in the beta test.
+You now have the basics you need to dive into game creation with the Godot game engine.
 
-We hope you enjoyed what's available so far.
-
-We wish we had a lot more to give you already, but creating this app took time. A lot of time.
-
-The good news is: now we figured out many of the more challenging parts, moving forward, we can shift our focus onto new lessons and practices."
+If you're looking for a free course to keep learning, you can move on to Getting Started with Godot."
 fit_content_height = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RichTextLabel4" type="RichTextLabel" parent="Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/VBoxContainer"]
-margin_top = 293.0
-margin_right = 800.0
-margin_bottom = 441.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_min_size = Vector2( 800, 100 )
-size_flags_horizontal = 6
+[node name="Label2" type="Label" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
+margin_top = 266.0
+margin_right = 720.0
+margin_bottom = 297.0
+custom_fonts/font = ExtResource( 1 )
+text = "Or you can take a shortcut"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
+margin_top = 313.0
+margin_right = 720.0
+margin_bottom = 603.0
 bbcode_enabled = true
-bbcode_text = "[font=res://ui/theme/fonts/font_title.tres]What's coming next[/font]
+bbcode_text = "There are loads of free game creation tutorials, but they don't form a clear path.
 
-We have plans for many more lessons and improvements.
+Worse, most of them are like step-by-step recipes. But as you learned, you can't become a developer by just following recipes.
 
-You can find our plan for future releases on our [url=https://github.com/GDQuest/learn-gdscript#roadmap]roadmap[/url]."
-text = "What's coming next
+Every project has unique challenges and requires [i]creative problem solving[/i]. You need to [i]think like a programmer[/i].
 
-We have plans for many more lessons and improvements.
+Learning that on your own can take years."
+text = "There are loads of free game creation tutorials, but they don't form a clear path.
 
-You can find our plan for future releases on our roadmap."
+Worse, most of them are like step-by-step recipes. But as you learned, you can't become a developer by just following recipes.
+
+Every project has unique challenges and requires creative problem solving. You need to think like a programmer.
+
+Learning that on your own can take years."
 fit_content_height = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="GDQuestLogo" parent="." instance=ExtResource( 1 )]
-modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
+[node name="Label3" type="Label" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
+margin_top = 619.0
+margin_right = 720.0
+margin_bottom = 650.0
+custom_fonts/font = ExtResource( 1 )
+text = "Learn to Code From Zero, with Godot"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
+margin_top = 666.0
+margin_right = 720.0
+margin_bottom = 869.0
+bbcode_enabled = true
+bbcode_text = "We created a brand new course, [url=https://gdquest.mavenseed.com/courses/learn-to-code-from-zero-with-godot][b]Learn to Code From Zero, with Godot[/b][/url].
+
+It picks up right where this app ends to take you to the point where you can make [i]your[/i] game.
+
+It's the only course that'll truly teach you [i]how to become a game developer[/i] with Godot."
+text = "We created a brand new course, Learn to Code From Zero, with Godot.
+
+It picks up right where this app ends to take you to the point where you can make your game.
+
+It's the only course that'll truly teach you how to become a game developer with Godot."
+fit_content_height = true
+
+[node name="LearnMoreButton" type="Button" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
+margin_left = 210.0
+margin_top = 885.0
+margin_right = 510.0
+margin_bottom = 945.0
+rect_min_size = Vector2( 300, 60 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+custom_colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+text = "Learn More"
+
+[node name="Control2" type="Control" parent="Layout/PanelContainer/Sky"]
+margin_left = 960.0
+margin_right = 1600.0
+margin_bottom = 986.0
+rect_clip_content = true
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="TextureRect" type="TextureRect" parent="Layout/PanelContainer/Sky/Control2"]
+margin_left = -960.0
+margin_right = 960.0
+margin_bottom = 986.0
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Illustration" type="TextureRect" parent="Layout/PanelContainer/Sky/Control2"]
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 86.0
-margin_top = -80.0
-margin_right = 267.0
-margin_bottom = -24.0
+margin_left = 13.0
+margin_top = -521.0
+margin_right = -13.0
+margin_bottom = 47.0
+mouse_filter = 2
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Logo" type="TextureRect" parent="Layout/PanelContainer/Sky/Control2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -249.0
+margin_top = -412.0
+margin_right = 243.0
+margin_bottom = -73.0
+mouse_filter = 2
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Logo2" type="TextureRect" parent="Layout/PanelContainer/Sky/Control2/Logo"]
+modulate = Color( 0.14902, 0.776471, 0.968627, 1 )
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -247.0
+margin_top = -162.5
+margin_right = 245.0
+margin_bottom = 176.5
+mouse_filter = 2
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Control3" type="Control" parent="Layout/PanelContainer/Sky"]
+margin_left = 1600.0
+margin_right = 1920.0
+margin_bottom = 986.0
+rect_clip_content = true
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Layout/PanelContainer/Sky/Control3"]
+margin_left = -1600.0
+margin_right = 320.0
+margin_bottom = 986.0
+mouse_filter = 2
+texture = ExtResource( 12 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Layout"]
+margin_top = 1033.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+
+[node name="ColorRect" type="ColorRect" parent="Layout/HBoxContainer"]
+margin_right = 960.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 0, 47 )
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+color = Color( 0, 0.517647, 0.737255, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="Layout/HBoxContainer"]
+margin_left = 960.0
+margin_right = 1600.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 0, 47 )
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+color = Color( 0.470588, 0.843137, 1, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="Layout/HBoxContainer"]
+margin_left = 1600.0
+margin_right = 1920.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 0, 47 )
+size_flags_horizontal = 3
+color = Color( 0, 0.517647, 0.737255, 1 )

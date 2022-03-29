@@ -1,16 +1,20 @@
 extends Control
 
+const COURSE_URL := "https://gdquest.mavenseed.com/courses/learn-to-code-from-zero-with-godot"
 
-onready var _content_container := $Layout/MarginContainer/ColumnLayout/MainColumn/MainContent/MarginContainer/ScrollContainer/VBoxContainer
-onready var _outliner_button := $Layout/TopBar/MarginContainer/ToolBarLayout/OutlinerButton as Button
+onready var _outliner_button := $Layout/TopBar/MarginContainer/ToolBarLayout/OutlinerButton
+onready var _text_column := $Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column
+onready var _learn_more_button := $Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column/LearnMoreButton
 
 
 func _ready() -> void:
 	_outliner_button.connect("pressed", self, "_on_outliner_button_pressed")
-
-	for child in _content_container.get_children():
-		if child is RichTextLabel:
-			child.connect("meta_clicked", OS, "shell_open")
+	for node in _text_column.get_children():
+		var rtl := node as RichTextLabel
+		if not rtl:
+			continue
+		rtl.connect("meta_clicked", OS, "shell_open")
+	_learn_more_button.connect("pressed", OS, "shell_open", [COURSE_URL])
 
 
 func _on_outliner_button_pressed() -> void:
