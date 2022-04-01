@@ -59,6 +59,6 @@ func _restore_next():
 var crates = ["healing heart", "shield", "gems", "sword"]
 
 func run():
-	while crates.size() > 0:
+	while crates:
 		crates.pop_back()
 # /EXPORT run

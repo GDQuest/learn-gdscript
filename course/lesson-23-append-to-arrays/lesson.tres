@@ -267,6 +267,8 @@ var completed_orders := []
 
 func complete_current_order():
 	"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "You first need to pop the first value from the pending orders array. To pop a value from the front of an array, you call [code]array.pop_front()[/code].", "You then need to append the popped value to the completed_orders array. To append a value to an array, you can call [code]array.append()[/code]." )
 validator_script_path = "res://course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd"
 script_slice_path = "res://course/lesson-23-append-to-arrays/clearing-meals/ClearingMeals.live-editor/slices/ClearingMeals.complete.slice.tres"
@@ -284,11 +286,15 @@ You need to remove them from top to bottom using the array's [code]pop_back()[/c
 
 Your code should remove all the crates in the array using a while loop.
 
-[b]Careful![/b] if you run a while loop carelessly, you can lock the software."
+[b]Careful![/b] if you run a while loop carelessly, you can lock the software.
+
+You can check if the [code]crates[/code] array still contains values by writing [code]while crates:[/code]"
 starting_code = "var crates = [\"healing heart\", \"shield\", \"gems\", \"sword\"]
 
 func run():
 	while "
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Remember [code]while[/code] loops\? ", "Every time you [code]pop[/code] an item, the array\'s [code]size[/code] gets reduced", "Try [code]while crates.size() > 0[/code]" )
 validator_script_path = "res://course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd"
 script_slice_path = "res://course/lesson-23-append-to-arrays/popping-crates/PoppingCrates.live-editor/slices/PoppingCrates.run.slice.tres"
