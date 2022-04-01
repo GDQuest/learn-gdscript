@@ -6,10 +6,12 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
+onready var drawing_turtle = $Pivot/DrawingTurtle as DrawingTurtle
+onready var pivot = $Pivot as Node2D
+
 func run():
-	var drawing_turtle = $DrawingTurtle as DrawingTurtle
+	pivot.position = Vector2(-50, -100)
 	drawing_turtle.reset()
-	drawing_turtle.position = Vector2(-50, -100)
 	drawing_turtle.move_forward(100)
 	drawing_turtle.jump(-100, 50)
 	drawing_turtle.move_forward(100)
@@ -22,14 +24,11 @@ func run():
 margin_right = 14.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 651.0
+margin_right = 663.0
 margin_bottom = 327.0
 rect_min_size = Vector2( 0, 320 )
 gdscript_code = "func draw_three_lines():
@@ -44,4 +43,6 @@ run_button_label = "draw_three_lines()"
 [node name="JumpingTurtle" type="Node2D" parent="RunnableCodeExample"]
 script = SubResource( 1 )
 
-[node name="DrawingTurtle" parent="RunnableCodeExample/JumpingTurtle" instance=ExtResource( 2 )]
+[node name="Pivot" type="Node2D" parent="RunnableCodeExample/JumpingTurtle"]
+
+[node name="DrawingTurtle" parent="RunnableCodeExample/JumpingTurtle/Pivot" instance=ExtResource( 2 )]

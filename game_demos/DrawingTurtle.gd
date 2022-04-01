@@ -79,9 +79,7 @@ func turn_left(angle_degrees: float) -> void:
 # Completes the current polygon's drawing and virtually jumps the turtle to a
 # new start position.
 func jump(x: float, y: float) -> void:
-	var last_point := Vector2.ZERO
-	if not _points.empty():
-		last_point = _points[-1]
+	var last_point := Vector2.ZERO if _points.empty() else _points[-1]
 	_close_polygon()
 	_points.append(Vector2.ZERO)
 	_current_offset += Vector2(x, y) + last_point
