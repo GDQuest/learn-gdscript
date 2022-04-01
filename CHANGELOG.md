@@ -2,6 +2,42 @@
 
 This document lists changes between releases.
 
+## Learn GDScript From Zero 1.0.0
+
+_Released on April 1, 2022_
+
+### Content changes
+
+- Improve phrasing and formatting in lessons 16 to 28 (#463)
+- Clarify practice description in lesson 7
+- Add code mark to code in glossary entries
+- Correct typo in lesson 8
+- Make the solution in lesson 23 practice not use `Array.size()`
+- Add variable definitions to lesson 14 practices
+- Make it so using a loop in lesson 6 practice works
+- Change "type" into "enter" in lesson 6 to avoid wrong glossary highlight
+
+### Improvements
+
+- Title screen redesign
+- End screen redesign
+- Redesign modulo examples to be more intuitive (#437)
+- Give cursor more natural start position in practices
+- Add new train track sprites in lesson 24
+- Reset visibility and transform when pressing reset button in practices
+
+### Bug fixes
+
+- Change correct answer in quiz in lesson 25
+- Reset glossary popup size when clicking a word with a short explanation
+- Match number with boxes in even-odd example
+- Correct error message in lesson 28
+- Remove button to load incomplete Russian translation
+- Correctly name array brackets
+- Add missing period in error explanations (#450)
+- Add missing documentation in practices in lessons 4 and 5
+- Make turtle draw three parallel lines in lesson 5 example
+
 ## Learn GDScript From Zero release 0.4.0
 
 _Released on March 7, 2022_
