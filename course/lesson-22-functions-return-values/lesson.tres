@@ -214,6 +214,8 @@ starting_code = "var cell_size = Vector2(80, 80)
 
 func convert_to_world_coordinates(cell):
 	"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Every cell is a square of size [code]cell_size[/code]. You can multiply the [code]cell[/code] by this value to calculate the top-left of a cell in screen coordinates.", "To get the center of a cell, you need to add half the [code]cell_size[/code] to the product." )
 validator_script_path = "convert-grid-coordinates/TestConvertGridCoordinates.gd"
 script_slice_path = "convert-grid-coordinates/ConvertGridCoordinates.live-editor/slices/ConvertGridCoordinates.run.slice.tres"

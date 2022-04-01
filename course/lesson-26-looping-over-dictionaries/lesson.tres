@@ -208,6 +208,8 @@ starting_code = "var inventory := {
 
 func run():
 	"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "The [code]display_item()[/code] function needs the item type and its amount, so you need to get the amount using the item name as a key in the [code]inventory[/code] variable.", "You can get the amount of each item using the syntax [code]inventory[item_name][/code]." )
 validator_script_path = "display-inventory/TestDisplayInventory.gd"
 script_slice_path = "display-inventory/DisplayInventory.live-editor/slices/DisplayInventory.run.slice.tres"
@@ -230,6 +232,8 @@ starting_code = "var units = {
 
 func run():
 	"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "The dictionary keys are cell coordinates you can use to access the unit type from the [code]units[/code] dictionary.", "To access a unit’s type from a cell, use the syntax [code]units[cell_coordinates][/code]." )
 validator_script_path = "place-units/TestPlaceUnits.gd"
 script_slice_path = "place-units/PlaceUnits.live-editor/slices/PlaceUnits.run.slice.tres"

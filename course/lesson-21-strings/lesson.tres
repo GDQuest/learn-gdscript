@@ -153,6 +153,8 @@ goal = "Currently, the robot has a number stored in the [code]robot_name[/code] 
 Change the [code]robot_name[/code] variable so that it's a string instead. You can give it any name you'd like."
 starting_code = "func run():
 	robot_name = 0"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Make sure to use quotes when defining strings to differentiate them from other variable types." )
 validator_script_path = "string_error/TestsStringError.gd"
 script_slice_path = "string_error/StringError.live-editor/slices/StringError.print_string.slice.tres"
@@ -178,6 +180,8 @@ Then, for each action in the array, call the [code]play_animation()[/code] funct
 The robot should do the following actions in order: [code]jab, jab, uppercut[/code]."
 starting_code = "func run():
 	combo = []"
+cursor_line = 0
+cursor_column = 0
 hints = PoolStringArray( "Make sure to use (\"\") for each animation name when you add them to the combo array", "Use a for loop and the [code]play_animation()[/code] function for each animation name" )
 validator_script_path = "string_array/TestsStringArray.gd"
 script_slice_path = "string_array/StringArray.live-editor/slices/StringArray.combo.slice.tres"
