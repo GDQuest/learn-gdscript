@@ -31,6 +31,12 @@ var _is_info_panel_open := true
 var _is_solution_panel_open := false
 
 var _current_scene: Node
+# Used to automate resetting transform and visibility to default in case the
+# student calls hide(), changes transform, etc. in their practice code.
+var _current_scene_reset_values := {
+	visible = null,
+	transform = null,
+}
 
 onready var _layout_container := $Margin/Layout as Control
 
@@ -203,8 +209,11 @@ func _set_script_slice(new_slice: SliceProperties) -> void:
 	if new_slice == _script_slice:
 		return
 	_script_slice = new_slice
-	_current_scene = _script_slice.get_scene_properties().scene.instance()
 	_output_console.setup(_script_slice)
+
+	_current_scene = _script_slice.get_scene_properties().scene.instance()
+	_current_scene_reset_values.visible = _current_scene.get("visible")
+	_current_scene_reset_values.transform = _current_scene.get("transform")
 
 
 func _validate_and_run_student_code() -> void:
@@ -329,6 +338,8 @@ func _reset_practice() -> void:
 
 	if _current_scene.has_method("reset"):
 		_current_scene.call("reset")
+		for property in _current_scene_reset_values:
+			_current_scene.set(property, _current_scene_reset_values[property])
 
 
 func _update_slidable_panels() -> void:
