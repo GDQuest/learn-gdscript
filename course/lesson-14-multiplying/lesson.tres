@@ -255,8 +255,11 @@ Add to the [code]level_up()[/code] function so it does the following:
 
 - Increases [code]level[/code] by one.
 - Increases [code]max_health[/code] by 10%."
-starting_code = "func level_up():
-	pass"
+starting_code = "var level = 1
+var max_health = 100
+
+func level_up():
+	"
 cursor_line = 0
 cursor_column = 0
 hints = PoolStringArray( "To increase a number by 10%, multiply it by [code]1.1[/code]" )
@@ -277,7 +280,11 @@ Add to the [code]take_damage()[/code] function so the following happens:
 - [code]if[/code] the robot's [code]level[/code] is greater than [code]2[/code], reduce the damage [code]amount[/code] by 50%
 
 The robot is level 3. An enemy is going to attack for 10 damage. This damage should reduce to 5."
-starting_code = "func take_damage(amount):
+starting_code = "var level = 3
+var health = 100
+var max_health = 100
+
+func take_damage(amount):
 	health -= amount
 
 	if health > max_health:

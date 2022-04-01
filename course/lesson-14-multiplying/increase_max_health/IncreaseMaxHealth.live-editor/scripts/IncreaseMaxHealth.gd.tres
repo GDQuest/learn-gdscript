@@ -13,10 +13,10 @@ onready var _animation_tree := find_node(\"AnimationTree\") as AnimationTree
 onready var _health_bar := find_node(\"CustomHealthBar\")
 
 
+# EXPORT level
 var level = 1
 var max_health = 100
 
-# EXPORT level
 func level_up():
 	level += 1
 	max_health *= 1.1

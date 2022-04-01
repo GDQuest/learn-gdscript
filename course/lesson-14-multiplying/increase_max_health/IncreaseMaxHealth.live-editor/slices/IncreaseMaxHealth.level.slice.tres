@@ -13,8 +13,8 @@ keyword = "EXPORT"
 closing = false
 name = "level"
 is_full_file = false
-start = 9
+start = 6
 end = 13
-lines_before = [ "extends Node2D", "", "onready var _animation_tree := find_node(\"AnimationTree\") as AnimationTree", "onready var _health_bar := find_node(\"CustomHealthBar\")", "", "", "var level = 1", "var max_health = 100", "" ]
+lines_before = [ "extends Node2D", "", "onready var _animation_tree := find_node(\"AnimationTree\") as AnimationTree", "onready var _health_bar := find_node(\"CustomHealthBar\")", "", "" ]
 lines_after = [ "	_health_bar.set_max_health(max_health)", "", "func _run():", "	reset()", "	for i in range(2):", "		level_up()", "		_animation_tree.travel(\"level\")", "		yield(_animation_tree, \"animation_finished\")", "	Events.emit_signal(\"practice_run_completed\")", "", "func reset():", "	level = 1", "	max_health = 100", "	_health_bar.set_max_health(max_health)", "" ]
-lines_editable = [ "func level_up():", "	level += 1", "	max_health *= 1.1" ]
+lines_editable = [ "var level = 1", "var max_health = 100", "", "func level_up():", "	level += 1", "	max_health *= 1.1" ]

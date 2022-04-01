@@ -1,14 +1,16 @@
 extends Node2D
 
 
-var level = 3
-var health = 100
-var max_health = 100
+
 
 onready var _animation_tree := find_node("AnimationTree")
 onready var _health_bar := find_node("CustomHealthBar") as ColorRect
 
 # EXPORT damage
+var level = 3
+var health = 100
+var max_health = 100
+
 func take_damage(amount):
 	if level > 2:
 		amount *= 0.5
