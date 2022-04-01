@@ -6,9 +6,6 @@ var expected_rects := [
 ]
 
 var turtle: DrawingTurtle
-# Number of times the user calls turn_right(90) on the turtle.
-var turn_right_count := 0
-
 
 # We sort vertices for accurate comparison
 func _init() -> void:
@@ -19,18 +16,9 @@ func _init() -> void:
 func _prepare():
 	turtle = _scene_root_viewport.get_child(0)
 
-	turn_right_count = 0
-	for line in _slice.current_text.split("\n"):
-		line = line.strip_edges().replace(" ", "")
-		if line.empty():
-			continue
-
-		if line.begins_with("turn_right(90)"):
-			turn_right_count += 1
-
 
 func test_turtle_ends_facing_towards_the_right() -> String:
-	if turn_right_count != 4:
+	if not is_equal_approx(wrapf(turtle.turn_degrees, 0.0, 360.0), 0.0):
 		return tr(
 			"The turtle should be facing towards the right to draw squares in the same direction every time. Did you call turn_right(90) four times in your function?"
 		)

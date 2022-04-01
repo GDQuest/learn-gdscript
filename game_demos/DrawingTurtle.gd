@@ -31,7 +31,7 @@ var _temp_command_stack = []
 
 var _tween := Tween.new()
 
-onready var _turn_degrees = rotation_degrees
+onready var turn_degrees = rotation_degrees
 
 onready var _pivot := $Pivot as Node2D
 onready var _sprite := $Pivot/Sprite as Sprite
@@ -57,7 +57,7 @@ func move_forward(distance: float) -> void:
 		_points.append(previous_point)
 	else:
 		previous_point = _points[-1]
-	var new_point := previous_point + Vector2.RIGHT.rotated(deg2rad(_turn_degrees)) * distance
+	var new_point := previous_point + Vector2.RIGHT.rotated(deg2rad(turn_degrees)) * distance
 	new_point = new_point.snapped(Vector2.ONE)
 	_points.append(new_point)
 
@@ -67,12 +67,12 @@ func move_forward(distance: float) -> void:
 
 
 func turn_right(angle_degrees: float) -> void:
-	_turn_degrees = round(_turn_degrees + angle_degrees)
+	turn_degrees = round(turn_degrees + angle_degrees)
 	_temp_command_stack.append({command = "turn", angle = round(angle_degrees)})
 
 
 func turn_left(angle_degrees: float) -> void:
-	_turn_degrees = round(_turn_degrees - angle_degrees)
+	turn_degrees = round(turn_degrees - angle_degrees)
 	_temp_command_stack.append({command = "turn", angle = round(-angle_degrees)})
 
 
@@ -96,7 +96,7 @@ func reset() -> void:
 	stop_animation()
 
 	rotation_degrees = 0.0
-	_turn_degrees = 0.0
+	turn_degrees = 0.0
 	_pivot.rotation_degrees = 0.0
 	_pivot.position = Vector2.ZERO
 	_camera.position = Vector2.ZERO
