@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=23 format=2]
+[gd_resource type="Resource" load_steps=25 format=2]
 
 [ext_resource path="res://course/Documentation.tres" type="Resource" id=1]
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=2]
@@ -68,9 +68,29 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-22-functions-return-values/content-qdYOexRj.tres"
 title = ""
 type = 0
-text = "Notice how we assign the result of the function call to a variable. Because the [code]round()[/code] function returns a [i]new[/i] value, we need to store the result.
+text = "Notice how we assign the result of the function call to a variable. Because the [code]round()[/code] function returns a [i]new[/i] value, we need to either store the result or use the value immediately.
 
-So we assign the result to a variable."
+Above, we assigned it to a variable, but you could also do the following."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-izKUdOCQ.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/CodeRoundingHealth2.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 4 )
+content_id = "res://course/lesson-22-functions-return-values/content-iGjB7tKR.tres"
+title = ""
+type = 0
+text = "You can assign the return value of a function call if you plan on using it more than once."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -226,5 +246,5 @@ description = "We lost the function to convert grid coordinates, but we desperat
 [resource]
 script = ExtResource( 2 )
 title = "Functions that return a value"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 19 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 20 ), SubResource( 21 ), SubResource( 7 ), SubResource( 19 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ]
 practices = [ SubResource( 17 ) ]
