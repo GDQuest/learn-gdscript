@@ -5,14 +5,19 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
+onready var drawing_turtle = $DrawingTurtle as DrawingTurtle
+
+
 func run():
-	var drawing_turtle = $DrawingTurtle as DrawingTurtle
 	drawing_turtle.reset()
 	drawing_turtle.position.x = -100
 	drawing_turtle.move_forward(200)
 	drawing_turtle.turn_right(90)
 	drawing_turtle.play_draw_animation()
-	
+
+
+func reset():
+	drawing_turtle.reset()
 "
 
 [node name="ExampleTurtleMoveAndRotate" type="Node2D"]

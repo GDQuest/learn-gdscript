@@ -92,6 +92,7 @@ func jump(x: float, y: float) -> void:
 func reset() -> void:
 	_command_stack.clear()
 	stop_animation()
+	_animate_jump(0)
 
 	rotation_degrees = 0.0
 	turn_degrees = 0.0
