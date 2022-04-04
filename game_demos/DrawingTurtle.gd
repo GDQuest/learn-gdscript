@@ -113,7 +113,7 @@ func get_polygons() -> Array:
 
 
 func stop_animation() -> void:
-	_tween.stop_all()
+	_tween.remove_all()
 	for line in _canvas.get_children():
 		line.stop()
 
