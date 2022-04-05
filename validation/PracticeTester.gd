@@ -31,37 +31,37 @@ func get_test_names() -> Array:
 
 func run_tests() -> TestResult:
 	var result := TestResult.new()
-	
+
 	_prepare()
-	
+
 	for method in _test_methods:
 		var test_name = _test_methods[method]
-		
+
 		var error_message: String = call(method)
 		if error_message != "":
 			result.errors[test_name] = error_message
 		else:
 			# We pass the test name to display it in the interface.
 			result.passed_tests.push_back(_test_methods[method])
-	
+
 	_clean_up()
-	
+
 	return result
 
 
 func _find_test_method_names() -> Dictionary:
 	var output := {}
-	
+
 	var methods := []
 	for method in get_method_list():
 		if method.name.begins_with("test_"):
 			methods.append(method.name)
-	
+
 	methods.sort()
-	
+
 	for method in methods:
 		output[method] = method.trim_prefix("test_").capitalize()
-	
+
 	return output
 
 
@@ -75,6 +75,17 @@ func _prepare() -> void:
 # Called after running tests.
 func _clean_up() -> void:
 	pass
+
+
+# Returns true if a line in the input `code` matches one of the `target_lines`.
+# Uses String.match to match lines, so you can use ? and * in `target_lines`.
+func matches_code_line(target_lines: Array) -> bool:
+	for line in _slice.slice_text.split("\n"):
+		line = line.replace(" ", "").strip_edges()
+		for match_pattern in target_lines:
+			if line.match(match_pattern):
+				return true
+	return false
 
 
 class TestResult:

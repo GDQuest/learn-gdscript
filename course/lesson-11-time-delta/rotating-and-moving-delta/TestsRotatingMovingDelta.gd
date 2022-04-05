@@ -1,6 +1,5 @@
 extends PracticeTester
 
-
 var _robot: Node2D
 var _lines: PoolStringArray
 
@@ -42,12 +41,11 @@ func test_movement_is_time_dependent() -> String:
 
 
 func test_movement_speed_is_correct() -> String:
-	var has_correct_rotation := false
-	var has_correct_speed := false
-	for line in _lines:
-		has_correct_rotation = has_correct_rotation or line in ["rotate(delta*2)", "rotate(2*delta)"]
-		has_correct_speed = has_correct_speed or line in ["move_local_x(100*delta)", "move_local_x(delta*100)", "move_local_x(100*delta,false)", "move_local_x(delta*100,false)"]
-	
+	var has_correct_rotation := matches_code_line(["rotate(delta*2*)", "rotate(2*delta)"])
+	var has_correct_speed := matches_code_line(
+		["move_local_x(100*delta*)", "move_local_x(delta*100*)"]
+	)
+
 	if not has_correct_rotation:
 		return tr("Is the rotation speed correct?")
 	elif not has_correct_speed:
