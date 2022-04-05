@@ -52,6 +52,11 @@ func run() -> void:
 	_line.start_draw_animation()
 
 
+func reset() -> void:
+	_line.reset()
+	_last_point = Vector2(0, 0)
+
+
 func _process(_delta: float) -> void:
 	if Engine.editor_hint:
 		return
@@ -75,7 +80,8 @@ func _draw() -> void:
 	for i in range(graph_size.y / axis_increments):
 		draw_circle(-Vector2(0, axis_increments + i * axis_increments) + draw_offset, 4, Color.white)
 	
-	draw_circle(_last_point, 4, Color.white)
+	if _last_point != Vector2(0, 0):
+		draw_circle(_last_point, 4, Color.white)
 
 
 class Polygon:
@@ -135,7 +141,7 @@ class Polygon:
 		_tween.start()
 
 	func stop_animation() -> void:
-		_tween.stop_all()
+		_tween.remove_all()
 
 	func is_drawing() -> bool:
 		return _tween.is_active()
