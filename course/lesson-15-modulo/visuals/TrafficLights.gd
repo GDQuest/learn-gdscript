@@ -1,7 +1,8 @@
 extends Node2D
 
 
-var light_index := -1
+var initial_light_index := 0
+var light_index := initial_light_index - 1
 
 onready var _tween := $Tween
 onready var _index_label := $Index
@@ -23,6 +24,13 @@ func run() -> void:
 	light_index += 1
 	light_index %= 3
 	turn_on_light(light_index)
+	
+	_index_label.text = str(light_index)
+
+
+func reset() -> void:
+	light_index = initial_light_index
+	turn_on_light(initial_light_index)
 	
 	_index_label.text = str(light_index)
 
