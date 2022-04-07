@@ -7,14 +7,17 @@ script/source = "
 tool
 extends RunnableCodeExample
 
+
 func _ready():
-	create_slider_for(\"health\", 0.0, 100.0, 0.1)
+	_scene_instance.health_slider = create_slider_for(\"health\", 0.0, 100.0, 0.1)
 "
 
 [sub_resource type="GDScript" id=3]
 script/source = "extends PanelContainer
 
-var health := 100.0 setget set_health
+var initial_health := 100.0
+var health := initial_health setget set_health
+var health_slider: HSlider
 
 onready var label := $Label as Label
 
@@ -24,6 +27,11 @@ func set_health(new_value: float):
 	if not label:
 		yield(self, \"ready\")
 	label.text = \"Health: %s\" % round(health)
+
+
+func reset() -> void:
+	self.health = initial_health
+	health_slider.value = initial_health
 "
 
 [node name="Example" type="PanelContainer"]
