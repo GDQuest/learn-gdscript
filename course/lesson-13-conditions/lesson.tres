@@ -310,11 +310,11 @@ We might want to display the health number on screen, like in Japanese RPGs.
 
 We don't want negative numbers. We want to stop at zero instead.
 
-Replace [code]pass[/code] with code that reduces [code]health[/code] by [code]amount[/code].
+Calling the function should reduce [code]health[/code] by [code]amount[/code].
 
 If [code]health[/code] goes below [code]0[/code], set it to [code]0[/code] again."
 starting_code = "func take_damage(amount):
-	pass"
+	"
 cursor_line = 0
 cursor_column = 0
 hints = PoolStringArray( "You can use a condition to check if the health goes below zero", "You need to decrease health by the received amount", "You need to reset the health to [code]0[/code] when the health value goes below [code]0[/code]" )
