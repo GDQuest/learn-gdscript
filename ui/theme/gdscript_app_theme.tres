@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=55 format=2]
+[gd_resource type="Theme" load_steps=50 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_text.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/vscrollbar_grabber.tres" type="StyleBox" id=2]
@@ -18,7 +18,6 @@
 [ext_resource path="res://ui/theme/vscrollbar_grabber_highlight.tres" type="StyleBox" id=16]
 [ext_resource path="res://ui/theme/vscrollbar_scroll.tres" type="StyleBox" id=17]
 [ext_resource path="res://ui/theme/button_pressed.tres" type="StyleBox" id=18]
-[ext_resource path="res://ui/theme/stylebox_empty.tres" type="StyleBox" id=19]
 [ext_resource path="res://ui/theme/button_disabled.tres" type="StyleBox" id=20]
 [ext_resource path="res://ui/theme/text_stylebox_readonly.tres" type="StyleBox" id=21]
 [ext_resource path="res://ui/theme/panel_tooltip.tres" type="StyleBox" id=22]
@@ -51,14 +50,6 @@
 [ext_resource path="res://ui/icons/radiomark_small_empty.png" type="Texture" id=51]
 [ext_resource path="res://ui/icons/radiomark_small_checked.png" type="Texture" id=52]
 
-[sub_resource type="StyleBoxEmpty" id=6]
-
-[sub_resource type="StyleBoxEmpty" id=2]
-
-[sub_resource type="StyleBoxEmpty" id=3]
-
-[sub_resource type="StyleBoxEmpty" id=4]
-
 [resource]
 default_font = ExtResource( 1 )
 Button/colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
@@ -88,7 +79,7 @@ HScrollBar/styles/grabber = ExtResource( 36 )
 HScrollBar/styles/grabber_highlight = ExtResource( 38 )
 HScrollBar/styles/grabber_pressed = ExtResource( 37 )
 HScrollBar/styles/scroll = ExtResource( 35 )
-HScrollBar/styles/scroll_focus = SubResource( 6 )
+HScrollBar/styles/scroll_focus = ExtResource( 4 )
 HSeparator/constants/separation = 8
 HSeparator/styles/separator = ExtResource( 50 )
 HSlider/icons/grabber = ExtResource( 26 )
@@ -110,8 +101,8 @@ MarginContainer/constants/margin_right = 20
 MarginContainer/constants/margin_top = 20
 OptionButton/constants/arrow_margin = 12
 OptionButton/icons/arrow = ExtResource( 29 )
-Panel/styles/panel = SubResource( 2 )
-PanelContainer/styles/panel = ExtResource( 19 )
+Panel/styles/panel = ExtResource( 4 )
+PanelContainer/styles/panel = ExtResource( 4 )
 PopupMenu/colors/font_color_disabled = Color( 0.290196, 0.294118, 0.388235, 1 )
 PopupMenu/icons/radio_checked = ExtResource( 52 )
 PopupMenu/icons/radio_unchecked = ExtResource( 51 )
@@ -137,7 +128,7 @@ RichTextLabel/fonts/bold_italics_font = ExtResource( 12 )
 RichTextLabel/fonts/italics_font = ExtResource( 14 )
 RichTextLabel/fonts/mono_font = ExtResource( 13 )
 RichTextLabel/fonts/normal_font = ExtResource( 1 )
-RichTextLabel/styles/focus = SubResource( 3 )
+RichTextLabel/styles/focus = ExtResource( 4 )
 RichTextLabel/styles/normal = null
 ScrollContainer/styles/bg = null
 TextEdit/colors/background_color = Color( 0, 0, 0, 0 )
@@ -193,7 +184,7 @@ VScrollBar/styles/grabber = ExtResource( 2 )
 VScrollBar/styles/grabber_highlight = ExtResource( 16 )
 VScrollBar/styles/grabber_pressed = ExtResource( 15 )
 VScrollBar/styles/scroll = ExtResource( 17 )
-VScrollBar/styles/scroll_focus = SubResource( 4 )
+VScrollBar/styles/scroll_focus = ExtResource( 4 )
 VSeparator/constants/separation = 8
 VSeparator/styles/separator = ExtResource( 49 )
 VSlider/icons/grabber = ExtResource( 26 )
