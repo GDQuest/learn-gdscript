@@ -382,6 +382,28 @@ prepare_ci_copytemplates(){
 }
 
 
+prepare_ci_gettemplates(){
+  if [ "$1" == "help" ]; then
+    echo "Prepares the CI by getting the custom templates online"
+    echo "You should not run this on your local computer"
+    echo "cannot run in dry mode"
+    exit 0
+  fi
+  if [ -z "$GODOT_VERSION" ] || [ "$GODOT_VERSION" == "" ]; then
+    echo "\$GODOT_VERSION environment variable is not set"
+    exit 1
+  fi
+  echo "Will get the custom templates for ${GODOT_VERSION}"
+  echo "wget https://github.com/Razoric480/godot/releases/download/${GODOT_VERSION}-parser/$(sed 's/\.//g' <<< ${GODOT_VERSION})custom-templates.zip"
+  wget https://github.com/Razoric480/godot/releases/download/${GODOT_VERSION}-parser/$(sed 's/\.//g' <<< ${GODOT_VERSION})custom-templates.zip
+  echo "✓ Downloaded templates"
+  echo "Will unzip templates"
+  echo "unzip $(sed 's/\.//g' <<< ${GODOT_VERSION})custom-templates.zip -d templates"
+  unzip $(sed 's/\.//g' <<< ${GODOT_VERSION})custom-templates.zip -d templates
+  echo "✓ copied templates"
+}
+
+
 prepare_ci_software(){
   if [ "$1" == "help" ]; then
     echo "Prepares the CI by installing the necessary software"
@@ -426,7 +448,8 @@ prepare_ci(){
     echo "cannot run in dry mode"
     exit 0
   fi
-  prepare_ci_copytemplates
+  #prepare_ci_copytemplates
+  prepare_ci_gettemplates
   prepare_ci_software
   prepare_overridefile $@
   echo "✓ CI prepared"
