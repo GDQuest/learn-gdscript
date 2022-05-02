@@ -1,6 +1,6 @@
 extends Node
 
-const DATABASE_SOURCE := "res://lsp/error_database.csv"
+const DATABASE_SOURCE := "res://script_checking/error_database.csv"
 
 const CSV_DELIMITER := ","
 const CSV_IDENTIFIER_FIELD := "error_code"

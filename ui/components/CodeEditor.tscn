@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://ui/components/SliceEditor.gd" type="Script" id=1]
 [ext_resource path="res://ui/icons/icon_pause.png" type="Texture" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://ui/theme/focus_outside_button.tres" type="StyleBox" id=11]
 [ext_resource path="res://ui/components/LockedOverlay.tscn" type="PackedScene" id=14]
 [ext_resource path="res://ui/icons/icon_continue.png" type="Texture" id=17]
-[ext_resource path="res://ui/components/ConnectionIndicator.tscn" type="PackedScene" id=18]
 
 [sub_resource type="InputEventAction" id=14]
 action = "toggle_distraction_free_mode"
@@ -112,22 +111,6 @@ flat = true
 visible = false
 margin_right = 1906.0
 margin_bottom = 953.0
-
-[node name="MarginContainer" type="MarginContainer" parent="Column/PanelContainer"]
-margin_left = 1864.0
-margin_right = 1920.0
-margin_bottom = 56.0
-size_flags_horizontal = 8
-size_flags_vertical = 0
-custom_constants/margin_right = 12
-custom_constants/margin_top = 12
-
-[node name="ConnectionIndicator" parent="Column/PanelContainer/MarginContainer" instance=ExtResource( 18 )]
-margin_top = 12.0
-margin_right = 44.0
-margin_bottom = 36.0
-rect_min_size = Vector2( 24, 24 )
-expand = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Column"]
 margin_top = 899.0
