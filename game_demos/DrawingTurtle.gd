@@ -92,6 +92,7 @@ func jump(x: float, y: float) -> void:
 func reset() -> void:
 	_command_stack.clear()
 	stop_animation()
+	_animate_jump(0)
 
 	rotation_degrees = 0.0
 	turn_degrees = 0.0
@@ -112,7 +113,7 @@ func get_polygons() -> Array:
 
 
 func stop_animation() -> void:
-	_tween.stop_all()
+	_tween.remove_all()
 	for line in _canvas.get_children():
 		line.stop()
 

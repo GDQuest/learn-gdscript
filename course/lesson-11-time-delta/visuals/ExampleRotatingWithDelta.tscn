@@ -9,14 +9,16 @@ script/source = "extends Node2D
 
 func _ready() -> void:
 	set_process(false)
-	
+
 
 func _process(delta: float) -> void:
 	rotate(3.0 * delta)
 
+
 func reset():
 	set_process(false)
-	
+	rotation = 0
+
 
 func run():
 	set_process(true)

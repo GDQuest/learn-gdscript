@@ -126,3 +126,7 @@ func _on_explain_requested(error_code: int, error_message: String) -> void:
 
 func _on_resized() -> void:
 	_error_popup.set_margins_preset(Control.PRESET_WIDE)
+
+
+func reset():
+	clear_messages()
