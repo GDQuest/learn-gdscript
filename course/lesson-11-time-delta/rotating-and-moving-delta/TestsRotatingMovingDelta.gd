@@ -33,7 +33,10 @@ func test_moving_in_a_circle() -> String:
 func test_movement_is_time_dependent() -> String:
 	var has_delta := false
 	for line in _lines:
-		has_delta = has_delta and "(delta" in line or "delta)" in line
+		if not "delta" in line.replace(" ", ""):
+			has_delta = false
+			break
+		has_delta = true
 
 	if not has_delta:
 		return tr("Did you use delta in the right places to make the rotation time-dependent?")
