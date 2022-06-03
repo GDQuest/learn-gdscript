@@ -35,7 +35,7 @@ func test_rotating_character_is_time_dependent() -> String:
 func test_rotation_speed_is_2_radians_per_second() -> String:
 	if not _has_proper_body:
 		var has_multiplication_sign: bool = _body.rfind("*") > 0
-		var has_two: bool = _body.rfind("2") > 0
+		var has_two: bool = _body.rfind("2") > 0 and not _body.rfind(".2") > 0
 
 		if not has_two:
 			return tr("Is the rotation speed correct?")
