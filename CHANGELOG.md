@@ -4,7 +4,7 @@ This document lists changes between releases.
 
 ## Learn GDScript From Zero 1.1.0
 
-_Released on April 1, 2022_
+_Released on June 3, 2022_
 
 ### New features
 
