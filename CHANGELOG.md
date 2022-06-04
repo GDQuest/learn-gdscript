@@ -2,6 +2,30 @@
 
 This document lists changes between releases.
 
+## Learn GDScript From Zero 1.1.0
+
+_Released on April 1, 2022_
+
+### New features
+
+- Add offline script verifying support using custom build of Godot (#469)
+- Add reset functionality to all relevant examples (#487)
+
+### Content changes
+
+- Remove extra line in lesson 22 practice solution
+- Explain when you want to store return values in lesson 22
+- Remove remaining uses of "pass" and update practice hints
+
+### Bug fixes
+
+- Handle optional parameters on `move_local_x()` in lesson 11 (#480)
+- Correct typo in lesson 1
+- Make practice pass if using float instead of int in lesson 11
+- Updated moving turtle test for lesson 19 to include the starting point (#524)
+- Delta check in the moving in a circle lesson (#526)
+- Don't pass in lesson 11 practice if speed is 0.2 instead of 2
+
 ## Learn GDScript From Zero 1.0.0
 
 _Released on April 1, 2022_
