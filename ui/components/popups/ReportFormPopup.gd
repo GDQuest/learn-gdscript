@@ -1,13 +1,27 @@
-extends ColorRect
+extends CanvasLayer
+
+onready var _color_rect := $ColorRect as ColorRect
+onready var _panel := $PanelContainer as PanelContainer
 
 onready var _confirm_button := $PanelContainer/Column/Margin/Column/ConfirmButton as Button
 onready var _summary_label := $PanelContainer/Column/Margin/Column/Summary as RichTextLabel
 
 
 func _ready():
+	hide()
 	_confirm_button.connect("pressed", self, "hide")
 	_summary_label.connect("meta_clicked", self, "_on_meta_clicked")
-	connect("visibility_changed", self, "_on_visibility_changed")
+
+
+func show() -> void:
+	_color_rect.show()
+	_panel.show()
+
+
+func hide() -> void:
+	_confirm_button.grab_focus()
+	_color_rect.hide()
+	_panel.hide()
 
 
 func _on_meta_clicked(data) -> void:
@@ -16,8 +30,3 @@ func _on_meta_clicked(data) -> void:
 			OS.shell_open(data)
 		elif data == "download":
 			Log.download()
-
-
-func _on_visibility_changed() -> void:
-	if visible:
-		_confirm_button.grab_focus()
