@@ -1,7 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://course/common/inventory/DictInventory.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+border_color = Color( 0.4, 0.384314, 0.564706, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends DictInventory
@@ -31,9 +39,10 @@ size_flags_vertical = 5
 run_button_label = "run()"
 
 [node name="DictInventory" parent="RunnableCodeExample" instance=ExtResource( 1 )]
-margin_left = 823.0
+margin_left = 831.0
 margin_top = 0.0
 margin_right = 1033.0
 margin_bottom = 380.0
 size_flags_horizontal = 5
+custom_styles/panel = SubResource( 2 )
 script = SubResource( 1 )
