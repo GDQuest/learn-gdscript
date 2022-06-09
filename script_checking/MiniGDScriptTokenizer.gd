@@ -1,44 +1,75 @@
-# Simple and brutish tokenizer
-# We only use it to test for recursive calls (at the moment)
-# the way it works:
-# 1. walk line by line
-# 2. put each line through a bunch of regexes
-# 3. if a regex match, extract a dict of values from the group, then
-# 4. check if there is a custom parser method.
-#    - If yes, send the dict there
-#    - If no, append the dict to the current token list
-# current token list is by default the top level, but can be changed. For example,
-# when a function is found, it sets its "body" variable as `_current_scope`, which
-# makes it so every subsequent line gets appended to its body 
+# Limited GDScript tokenizer. We use it to prevent crashes in students' code:
+#
+# - Stack overflows due to recursive functions.
+# - Infinite loops.
+#
+# It works like so:
+#
+# 1. Read each line of code.
+# 2. Put each line through a bunch of regexes.
+# 3. If a regex regex_match, extract a dict of values from the group, then
+# 4. Check if there is a custom parser method.
+#    - If so, send the dict there
+#    - If not, append the dict to the current token list
+#
+# Current token list is by default the top level, but can be changed. For
+# example, when a function is found_token, it sets its "body" variable as
+# `_current_scope`, which makes it so every subsequent line gets appended to its
+# body
 class_name MiniGDScriptTokenizer
 
 const TOKEN_FUNC_DECLARATION := "function_declaration"
 const TOKEN_FUNC_CALL := "function_call"
 
-var _lines := PoolStringArray()
-var _index := 0
-var _current_line := ""
 var tokens := []
+
+var _code_lines := PoolStringArray()
+var _line_index := 0
+
+var _current_line := ""
+
 var _current_scope := []
-var indent_regex := RegEx.new()
+var _indent_regex := RegEx.new()
 
 
 var _available_tokens := {
 	TOKEN_FUNC_DECLARATION: "^func\\s+(?<func_name>[a-zA-Z_].*?)(?:\\(\\s*(?:(?<args>[^)]+)[,)])*|\\):)",
-	TOKEN_FUNC_CALL: "\\t.*?\\s?(?<func_name>[a-zA-Z_][a-zA-Z0-9_]+)\\(\\s*(?<params>.*?)\\s*\\)"
+	TOKEN_FUNC_CALL: "\\t.*?\\s?(?<func_name>[a-zA-Z_][a-zA-Z0-9_]+)\\(\\s*(?<params>.*?)\\s*\\)",
 }
 
 
 func _init(text: String) -> void:
-	_lines = text.split("\n")
-	indent_regex.compile('^(\\s|\\t)')
+	_code_lines = text.split("\n")
+	_indent_regex.compile('^(\\s|\\t)')
 	for token_type in _available_tokens:
 		var pattern: String = _available_tokens[token_type]
 		var regex := RegEx.new()
 		regex.compile(pattern)
 		_available_tokens[token_type] = regex
+
 	_current_scope = tokens
 	tokenize()
+
+
+func tokenize():
+	_line_index = 0
+	var size := _code_lines.size()
+	while _line_index < size:
+		_current_line = _code_lines[_line_index]
+
+		# Skip comments, we don't care
+		if _current_line.strip_edges().begins_with("#"):
+			_line_index += 1
+			continue
+
+		var is_indented := _indent_regex.search(_current_line)
+		# Any line at the root level, apart for a comment, resets the context
+		if is_indented == null:
+			_current_scope = tokens
+
+		var found_token := _tokenize_line(_current_line)
+		if not found_token:
+			_line_index += 1
 
 
 func _process_function_declaration(token: Dictionary):
@@ -66,53 +97,35 @@ func _process_function_declaration(token: Dictionary):
 	token["body"] = body
 	_current_scope = body
 	tokens.append(token)
-	_index += 1
+	_line_index += 1
 
 
 func _test_regex(type: String, regex: RegEx, line: String) -> bool:
-	var m := regex.search(line)
-	if m == null or m.names.size() == 0:
+	var regex_match := regex.search(line)
+	if regex_match == null or regex_match.names.size() == 0:
 		return false
+
 	var token := {
 		"type": type
 	}
-	for group_name in m.names:
-		token[group_name] = m.get_string(group_name)
-	var further_process_method_name := "_process_%s"%[type]
-	if has_method(further_process_method_name):
-		call(further_process_method_name, token)
+	for group_name in regex_match.names:
+		token[group_name] = regex_match.get_string(group_name)
+
+	if type == TOKEN_FUNC_DECLARATION:
+		_process_function_declaration(token)
 	else:
 		_current_scope.append(token)
-		_index += 1
+		_line_index += 1
 	return true
 
 
 func _tokenize_line(line: String) -> bool:
 	for token_type in _available_tokens:
 		var regex := _available_tokens[token_type] as RegEx
-		var found := _test_regex(token_type, regex, line)
-		if found:
+		var found_token := _test_regex(token_type, regex, line)
+		if found_token:
 			return true
 	return false
-
-
-func tokenize():
-	_index = 0
-	var size := _lines.size()
-	while _index < size:
-		_current_line = _lines[_index]
-		# skip comments early, we don't care
-		if _current_line.begins_with("#"):
-			_index += 1
-			continue
-		var is_indented := indent_regex.search(_current_line)
-		# any line at the root level, apart for a comment, resets the context
-		if is_indented == null:
-			_current_scope = tokens
-		var found := _tokenize_line(_current_line)
-		if not found:
-			# couldn't find any token, increment _index
-			_index += 1
 
 
 ###############################################################################
@@ -125,11 +138,6 @@ func find_any_recursive_function() -> String:
 	for token in tokens:
 		if token.type == TOKEN_FUNC_DECLARATION:
 			for sub_token in token.body:
-				if sub_token.type == TOKEN_FUNC_CALL:
-					if sub_token.func_name == token.func_name:
-						return token.func_name
+				if sub_token.type == TOKEN_FUNC_CALL and sub_token.func_name == token.func_name:
+					return token.func_name
 	return ""
-
-
-func _to_string():
-	return JSON.print(tokens, "  ")
