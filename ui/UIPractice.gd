@@ -4,6 +4,11 @@ extends UINavigatablePage
 
 const RUN_AUTOTIMER_DURATION := 5.0
 const SLIDE_TRANSITION_DURATION := 0.5
+# Maximum allowed iterations in while loops to prevent infinite loops.
+#
+# Keep this number low to avoid freezing the app if the student calls print() in
+# the loop.
+const MAX_WHILE_LOOP_ITERATIONS := 100
 
 const PracticeHintScene := preload("screens/practice/PracticeHint.tscn")
 const PracticeListPopup := preload("components/popups/PracticeListPopup.gd")
@@ -282,6 +287,26 @@ func _run_student_code() -> void:
 	yield(get_tree(), "idle_frame")
 
 	script_text = MessageBus.replace_print_calls_in_script(script_file_name, script_text)
+
+	# Guard against infinite while loops
+	if "while " in script_text:
+		var modified_code := PoolStringArray()
+		for line in script_text.split("\n"):
+			if "while " in line:
+				var indent := 0
+				while line[indent] == "\t":
+					indent += 1
+
+				var tabs := "\t".repeat(indent)
+				modified_code.append(tabs + "var __guard_counter := 0")
+				modified_code.append(line)
+				modified_code.append(tabs + "\t" + "__guard_counter += 1")
+				modified_code.append(tabs + "\t" + "if __guard_counter > %s:" % MAX_WHILE_LOOP_ITERATIONS)
+				modified_code.append(tabs + "\t\t" + "break")
+			else:
+				modified_code.append(line)
+		script_text = modified_code.join("\n")
+
 	var script = GDScript.new()
 	script.source_code = script_text
 
