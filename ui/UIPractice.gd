@@ -281,7 +281,7 @@ func _run_student_code() -> void:
 	_code_editor.set_locked_message(tr("Running Your Code..."))
 	yield(get_tree(), "idle_frame")
 
-	script_text = MessageBus.replace_script(script_file_name, script_text)
+	script_text = MessageBus.replace_print_calls_in_script(script_file_name, script_text)
 	var script = GDScript.new()
 	script.source_code = script_text
 

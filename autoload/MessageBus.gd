@@ -37,7 +37,7 @@ export var print_to_output: bool = OS.is_debug_build()
 
 # Transforms a script's print statements (and similar) to calls to this
 # singleton.
-func replace_script(script_file_name: String, script_text: String) -> String:
+func replace_print_calls_in_script(script_file_name: String, script_text: String) -> String:
 	var lines = script_text.split("\n")
 	for line_nb in lines.size():
 		var line: String = lines[line_nb]
@@ -52,11 +52,11 @@ func replace_script(script_file_name: String, script_text: String) -> String:
 					start = end
 					break
 				else:
-					var m: RegExMatch = maybe_match as RegExMatch
+					var m := maybe_match as RegExMatch
 					var starting_char := m.get_start()
 					var ending_char := m.get_end()
 					var args = m.get_string("args")
-					if args[0] == '"':
+					if args and args[0] == '"':
 						# Godot somehow removes `"` if they are the first
 						# character of a string
 						args = " " + args
