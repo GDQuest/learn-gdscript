@@ -13,15 +13,9 @@ func _prepare() -> void:
 
 
 func test_character_is_moving_in_a_circle_clockwise() -> String:
-	var has_rotate := false
-	var has_move_local := false
-	for line in lines:
-		has_rotate = has_rotate or line.begins_with("rotate(")
-		has_move_local = has_move_local or line.begins_with("move_local_x(")
-
-	if not has_rotate:
+	if not matches_code_line(["rotate(*)"]):
 		return tr("Did you use rotate() to make the sprite rotate?")
-	elif not has_move_local:
+	elif not matches_code_line(["move_local_x(*)"]):
 		return tr("Did you use make_local_x() to make the sprite move locally?")
 
 	if robot.rotation < 0.0:

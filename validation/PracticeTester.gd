@@ -17,6 +17,7 @@ var _scene_root_viewport: Node
 # Reference to the edited script slice. Use it to look at the user's code.
 var _slice: SliceProperties
 var _test_methods := _find_test_method_names()
+var _code_lines := []
 
 
 # We're not using _init() because it doesn't work unless you define it and call the parent's constructor in child classes. It would add boilerplate to every PracticeTester script.
@@ -31,7 +32,8 @@ func get_test_names() -> Array:
 
 func run_tests() -> TestResult:
 	var result := TestResult.new()
-
+	
+	_code_lines.clear()
 	_prepare()
 
 	for method in _test_methods:
@@ -80,10 +82,33 @@ func _clean_up() -> void:
 # Returns true if a line in the input `code` matches one of the `target_lines`.
 # Uses String.match to match lines, so you can use ? and * in `target_lines`.
 func matches_code_line(target_lines: Array) -> bool:
-	for line in _slice.slice_text.split("\n"):
+	if not _code_lines:
+		_code_lines = _slice.current_text.split("\n")
+
+	for line in _code_lines:
 		line = line.replace(" ", "").strip_edges()
 		for match_pattern in target_lines:
 			if line.match(match_pattern):
+				return true
+	return false
+
+
+# Returns true if a line in the input `code` matches one of the `target_lines`.
+# Uses RegEx to match lines.
+func matches_code_line_regex(regex_patterns: Array) -> bool:
+	var regexes = []
+	for pattern in regex_patterns:
+		var regex := RegEx.new()
+		regex.compile(pattern)
+		regexes.append(regex)
+
+	if not _code_lines:
+		_code_lines = _slice.current_text.split("\n")
+
+	for line in _code_lines:
+		for regex in regexes:
+			var m = regex.search(line)
+			if regex.search(line):
 				return true
 	return false
 
