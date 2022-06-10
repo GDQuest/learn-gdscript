@@ -18,6 +18,7 @@ func _init() -> void:
 
 
 func _prepare() -> void:
+	points.clear()
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	polygons = turtle.get_polygons()
 	if polygons.back().is_empty():
