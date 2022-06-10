@@ -17,12 +17,13 @@ func _init() -> void:
 	var patterns := PoolStringArray()
 	for key in _glossary:
 		patterns.append(key)
-	var terms_pattern := "(%s)" % patterns.join("|")
+	var terms_pattern := "(?:\\[ignore\\]\\w+)(*SKIP)(*F)|(%s)" % patterns.join("|")
+
 	_glossary_regex.compile(terms_pattern)
 
 
 func replace_matching_terms(text_bbcode: String) -> String:
-	return _glossary_regex.sub(text_bbcode, "[url=$1]$1[/url]", true)
+	return _glossary_regex.sub(text_bbcode, "[url=$1]$1[/url]", true).replace("[ignore]", "")
 
 
 func has(keyword: String) -> bool:
