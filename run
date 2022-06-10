@@ -3,6 +3,9 @@
 
 
 APP_NAME="learn_to_code"
+# This is used while developing to supply the `GODOT_VERSION` variable that is 
+# normally provided by the CI
+local_godot_version=${GODOT_VERSION:-"3.4.4"}
 
 
 ######################################## HELP
@@ -363,6 +366,11 @@ push_all(){
 
 prepare_ci_copytemplates(){
   if [ "$1" == "help" ]; then
+    echo "-- DEPRECATED --"
+    echo "Do not use this, use gettemplates instead"
+    echo "We need to download custom templates to enable offline GDScript error reporting"
+    echo "Once/if this is merged in master, we can use copytemplates again"
+    echo "----------------"
     echo "Prepares the CI by copying the template from the docker"
     echo "You should not run this on your local computer"
     echo "cannot run in dry mode"
@@ -385,7 +393,6 @@ prepare_ci_copytemplates(){
 prepare_ci_gettemplates(){
   if [ "$1" == "help" ]; then
     echo "Prepares the CI by getting the custom templates online"
-    echo "You should not run this on your local computer"
     echo "cannot run in dry mode"
     exit 0
   fi
@@ -496,6 +503,18 @@ prepare_htmltemplate(){
    }@" html_export/index.html
   sed -i "s@%url%@$url@" html_export/index.html
   echo "✓ generated html template"
+}
+
+
+prepare_local(){
+  # TODO: remove this if/when prepare_ci_gettemplates becomes unecessary
+  if [ "$1" == "help" ]; then
+    echo "Downloads the custom templates locally"
+    echo "Necessary before any export"
+    echo "cannot run in dry mode"
+    exit 0
+  fi
+  GODOT_VERSION="$local_godot_version" prepare_ci_gettemplates
 }
 
 
