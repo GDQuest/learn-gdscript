@@ -25,15 +25,15 @@ var _matches := {}
 var _lesson_index := 0
 var _lesson_count: int = 0
 
-onready var _home_button := $Layout/Header/MarginContainer/HeaderContent/HomeButton as Button
-onready var _outliner_button := $Layout/Header/MarginContainer/HeaderContent/OutlinerButton as Button
-onready var _back_button := $Layout/Header/MarginContainer/HeaderContent/BackButton as Button
-onready var _breadcrumbs := $Layout/Header/MarginContainer/HeaderContent/BreadCrumbs as BreadCrumbs
-onready var _settings_button := $Layout/Header/MarginContainer/HeaderContent/SettingsButton as Button
-onready var _report_button := $Layout/Header/MarginContainer/HeaderContent/ReportButton as Button
+onready var _home_button := get_node("%HomeButton") as Button
+onready var _outliner_button := get_node("%OutlinerButton") as Button
+onready var _back_button := get_node("%BackButton") as Button
+onready var _breadcrumbs := get_node("%BreadCrumbs") as BreadCrumbs
+onready var _settings_button := get_node("%SettingsButton") as Button
+onready var _report_button := get_node("%ReportButton") as Button
 
-onready var _screen_container := $Layout/Content/ScreenContainer as Container
-onready var _course_outliner := $Layout/Content/CourseOutliner as CourseOutliner
+onready var _screen_container := get_node("%ScreenContainer") as Container
+onready var _course_outliner := get_node("%CourseOutliner") as CourseOutliner
 
 onready var _lesson_done_popup := $LessonDonePopup as LessonDonePopup
 

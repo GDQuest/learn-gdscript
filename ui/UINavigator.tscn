@@ -50,6 +50,7 @@ margin_right = 1908.0
 margin_bottom = 48.0
 
 [node name="HomeButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
+unique_name_in_owner = true
 visible = false
 margin_left = 48.0
 margin_right = 92.0
@@ -60,6 +61,7 @@ icon = ExtResource( 10 )
 flat = true
 
 [node name="OutlinerButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
+unique_name_in_owner = true
 margin_right = 32.0
 margin_bottom = 48.0
 hint_tooltip = "Open the course index"
@@ -68,6 +70,7 @@ icon = ExtResource( 9 )
 flat = true
 
 [node name="BackButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
+unique_name_in_owner = true
 margin_left = 48.0
 margin_right = 80.0
 margin_bottom = 48.0
@@ -77,6 +80,7 @@ icon = ExtResource( 8 )
 flat = true
 
 [node name="BreadCrumbs" parent="Layout/Header/MarginContainer/HeaderContent" instance=ExtResource( 2 )]
+unique_name_in_owner = true
 margin_left = 96.0
 margin_right = 96.0
 
@@ -88,6 +92,7 @@ rect_pivot_offset = Vector2( -514, 99 )
 size_flags_horizontal = 3
 
 [node name="ReportButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
+unique_name_in_owner = true
 margin_left = 1672.0
 margin_right = 1720.0
 margin_bottom = 48.0
@@ -97,6 +102,7 @@ icon = ExtResource( 6 )
 flat = true
 
 [node name="SettingsButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
+unique_name_in_owner = true
 margin_left = 1736.0
 margin_right = 1784.0
 margin_bottom = 48.0
@@ -106,11 +112,13 @@ icon = ExtResource( 5 )
 flat = true
 
 [node name="FullScreenButton" parent="Layout/Header/MarginContainer/HeaderContent" instance=ExtResource( 11 )]
+unique_name_in_owner = true
 margin_left = 1800.0
 margin_right = 1840.0
 margin_bottom = 47.0
 
 [node name="QuitButton" parent="Layout/Header/MarginContainer/HeaderContent" instance=ExtResource( 13 )]
+unique_name_in_owner = true
 margin_left = 1856.0
 margin_right = 1896.0
 margin_bottom = 47.0
@@ -124,20 +132,20 @@ mouse_filter = 2
 size_flags_vertical = 3
 
 [node name="ScreenContainer" type="PanelContainer" parent="Layout/Content"]
+unique_name_in_owner = true
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CourseOutliner" parent="Layout/Content" instance=ExtResource( 7 )]
+unique_name_in_owner = true
 visible = false
 
 [node name="LessonDonePopup" parent="." instance=ExtResource( 12 )]
+unique_name_in_owner = true
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0

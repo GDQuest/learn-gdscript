@@ -12,9 +12,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 3 )
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ClearColor" type="ColorRect" parent="."]
 margin_right = 1920.0
@@ -55,6 +52,7 @@ margin_right = 1900.0
 margin_bottom = 1060.0
 
 [node name="ProgressBar" type="ProgressBar" parent="MarginContainer/Control"]
+unique_name_in_owner = true
 anchor_left = 0.25
 anchor_top = 0.85
 anchor_right = 0.75

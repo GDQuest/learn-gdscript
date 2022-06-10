@@ -35,6 +35,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="Layout" type="HBoxContainer" parent="Margin"]
+unique_name_in_owner = true
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
@@ -42,16 +43,19 @@ margin_bottom = 1060.0
 custom_constants/separation = 12
 
 [node name="InfoPanelAnchors" type="Control" parent="Margin/Layout"]
+unique_name_in_owner = true
 margin_right = 618.0
 margin_bottom = 1040.0
 size_flags_horizontal = 3
 
 [node name="PracticeInfoPanel" parent="Margin/Layout/InfoPanelAnchors" instance=ExtResource( 3 )]
+unique_name_in_owner = true
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_stretch_ratio = 2.0
 
 [node name="CodeEditor" parent="Margin/Layout" instance=ExtResource( 1 )]
+unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 630.0
@@ -59,12 +63,14 @@ margin_right = 1249.0
 margin_bottom = 1040.0
 
 [node name="OutputAnchors" type="Control" parent="Margin/Layout"]
+unique_name_in_owner = true
 margin_left = 1261.0
 margin_right = 1880.0
 margin_bottom = 1040.0
 size_flags_horizontal = 3
 
 [node name="Output" type="VBoxContainer" parent="Margin/Layout/OutputAnchors"]
+unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -75,12 +81,10 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="GameContainer" type="PanelContainer" parent="Margin/Layout/OutputAnchors/Output/GameAnchors"]
+unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MarginContainer" type="MarginContainer" parent="Margin/Layout/OutputAnchors/Output/GameAnchors/GameContainer"]
 margin_left = 38.0
@@ -93,6 +97,7 @@ custom_constants/margin_left = 0
 custom_constants/margin_bottom = 60
 
 [node name="GameView" parent="Margin/Layout/OutputAnchors/Output/GameAnchors/GameContainer/MarginContainer" instance=ExtResource( 4 )]
+unique_name_in_owner = true
 margin_left = 0.0
 margin_top = 0.0
 margin_right = 543.0
@@ -112,6 +117,7 @@ __meta__ = {
 }
 
 [node name="Console" parent="Margin/Layout/OutputAnchors/Output" instance=ExtResource( 5 )]
+unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 698.0
@@ -119,6 +125,7 @@ margin_right = 619.0
 margin_bottom = 1040.0
 
 [node name="SolutionContainer" type="PanelContainer" parent="Margin/Layout/OutputAnchors"]
+unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_clip_content = true
@@ -146,6 +153,7 @@ custom_constants/margin_top = 0
 custom_constants/margin_bottom = 0
 
 [node name="SliceEditor" type="TextEdit" parent="Margin/Layout/OutputAnchors/SolutionContainer/Layout/MarginContainer2"]
+unique_name_in_owner = true
 margin_left = 20.0
 margin_right = 599.0
 margin_bottom = 893.0
@@ -175,6 +183,7 @@ margin_bottom = 67.0
 alignment = 2
 
 [node name="UseSolutionButton" type="Button" parent="Margin/Layout/OutputAnchors/SolutionContainer/Layout/MarginContainer/Buttons"]
+unique_name_in_owner = true
 margin_left = 405.0
 margin_right = 579.0
 margin_bottom = 47.0
@@ -189,6 +198,7 @@ custom_styles/normal = ExtResource( 19 )
 text = "Use Solution"
 
 [node name="PracticeListPopup" parent="." instance=ExtResource( 6 )]
+unique_name_in_owner = true
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -196,6 +206,7 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 
 [node name="PracticeDonePopup" parent="." instance=ExtResource( 10 )]
+unique_name_in_owner = true
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -203,6 +214,7 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 
 [node name="PracticeLeaveUnfinishedPopup" parent="." instance=ExtResource( 16 )]
+unique_name_in_owner = true
 visible = false
 title = "Leave unfinished practice?"
 text_content = "You will lose your progress on this practice!"

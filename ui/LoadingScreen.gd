@@ -13,7 +13,7 @@ var progress_value := 0.0 setget set_progress_value
 
 var _state: int = State.IDLE
 
-onready var _progress_bar := $MarginContainer/Control/ProgressBar as ProgressBar
+onready var _progress_bar := get_node("%ProgressBar") as ProgressBar
 onready var _tweener := $Tween as Tween
 
 

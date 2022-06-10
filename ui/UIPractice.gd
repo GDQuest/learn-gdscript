@@ -45,28 +45,27 @@ var _current_scene_reset_values := {
 	transform = null,
 }
 
-onready var _layout_container := $Margin/Layout as Control
+onready var _layout_container := get_node("%Layout") as Control
 
-onready var _output_container := find_node("Output") as Control
-onready var _game_container := find_node("GameContainer") as Container
-onready var _game_view := _output_container.find_node("GameView") as GameView
-onready var _output_console := _output_container.find_node("Console") as OutputConsole
+onready var _output_container := get_node("%Output") as Control
+onready var _game_container := get_node("%GameContainer") as Container
+onready var _game_view := _output_container.get_node("%GameView") as GameView
+onready var _output_console := _output_container.get_node("%Console") as OutputConsole
 
-onready var _output_anchors := $Margin/Layout/OutputAnchors as Control
-onready var _solution_panel := find_node("SolutionContainer") as Control
-onready var _solution_editor := _solution_panel.find_node("SliceEditor") as SliceEditor
-onready var _use_solution_button := _solution_panel.find_node("UseSolutionButton") as Button
+onready var _output_anchors := get_node("%OutputAnchors") as Control
+onready var _solution_panel := get_node("%SolutionContainer") as Control
+onready var _solution_editor := _solution_panel.get_node("%SliceEditor") as SliceEditor
+onready var _use_solution_button := _solution_panel.get_node("%UseSolutionButton") as Button
 
-onready var _info_panel_anchors := $Margin/Layout/InfoPanelAnchors as Control
-onready var _info_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
-onready var _documentation_panel := find_node("DocumentationPanel") as RichTextLabel
+onready var _info_panel_anchors := get_node("%InfoPanelAnchors") as Control
+onready var _info_panel := get_node("%PracticeInfoPanel") as PracticeInfoPanel
 onready var _hints_container := _info_panel.hints_container as Revealer
 
-onready var _practice_list := find_node("PracticeListPopup") as PracticeListPopup
-onready var _practice_done_popup := find_node("PracticeDonePopup") as PracticeDonePopup
-onready var _practice_leave_unfinished_popup := find_node("PracticeLeaveUnfinishedPopup") as PracticeLeaveUnfinishedPopup
+onready var _practice_list := get_node("%PracticeListPopup") as PracticeListPopup
+onready var _practice_done_popup := get_node("%PracticeDonePopup") as PracticeDonePopup
+onready var _practice_leave_unfinished_popup := get_node("%PracticeLeaveUnfinishedPopup") as PracticeLeaveUnfinishedPopup
 
-onready var _code_editor := find_node("CodeEditor") as CodeEditor
+onready var _code_editor := get_node("%CodeEditor") as CodeEditor
 
 onready var _tween := $Tween as Tween
 

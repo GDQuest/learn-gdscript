@@ -12,12 +12,13 @@ var _loading_target: Control
 var _course_navigator: UINavigator
 
 onready var _pages := $Pages as Control
-onready var _loading_screen := $Pages/LoadingScreen as LoadingScreen
-onready var _welcome_screen := $Pages/WelcomeScreen as WelcomeScreen
-onready var _end_screen := $Pages/EndScreen as Control
+
+onready var _loading_screen := get_node("%LoadingScreen") as LoadingScreen
+onready var _welcome_screen := get_node("%WelcomeScreen") as WelcomeScreen
+onready var _end_screen := get_node("%EndScreen") as Control
+onready var _settings_screen := get_node("%SettingsScreen") as Control
+onready var _course_screen := get_node("%CourseScreen") as Control
 onready var _sponsorless_end_screen := $Pages/SponsorlessEndScreen as Control
-onready var _settings_screen := $Pages/SettingsScreen as Control
-onready var _course_screen := $Pages/CourseScreen as Control
 
 onready var _settings_popup := $SettingsPopup as SettingsPopup
 onready var _report_form_popup := $ReportFormPopup as ReportFormPopup
@@ -103,7 +104,7 @@ func _on_course_requested(force_outliner: bool = false) -> void:
 	# We don't preload this scene, nor the course resource, so that the initial load into the app
 	# is faster.
 	# FIXME: Use interactive loader instead?
-	var course_navigator_scene := load("res://ui/UINavigator.tscn") as PackedScene
+	var course_navigator_scene := load("res://ui/UINavigator.tscn")
 	_course_navigator = course_navigator_scene.instance()
 	_course_navigator.course = load(default_course) as Course
 

@@ -42,6 +42,7 @@ __meta__ = {
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="OuterMargin"]
+unique_name_in_owner = true
 margin_left = 12.0
 margin_top = 20.0
 margin_right = 1920.0
@@ -62,6 +63,7 @@ __meta__ = {
 }
 
 [node name="InnerMargin" type="MarginContainer" parent="OuterMargin/ScrollContainer"]
+unique_name_in_owner = true
 margin_right = 1908.0
 margin_bottom = 282.0
 mouse_filter = 2
@@ -69,6 +71,7 @@ size_flags_horizontal = 3
 custom_constants/margin_top = 40
 
 [node name="Content" type="VBoxContainer" parent="OuterMargin/ScrollContainer/InnerMargin"]
+unique_name_in_owner = true
 margin_left = 574.0
 margin_top = 40.0
 margin_right = 1334.0
@@ -84,6 +87,7 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="OuterMargin/ScrollContainer/InnerMargin/Content" groups=["navigation_text"]]
+unique_name_in_owner = true
 margin_right = 760.0
 margin_bottom = 40.0
 custom_fonts/font = ExtResource( 4 )
@@ -98,6 +102,7 @@ mouse_filter = 2
 custom_constants/separation = 30
 
 [node name="ContentBlocks" type="VBoxContainer" parent="OuterMargin/ScrollContainer/InnerMargin/Content"]
+unique_name_in_owner = true
 margin_top = 82.0
 margin_right = 760.0
 margin_bottom = 82.0
@@ -105,6 +110,7 @@ mouse_filter = 2
 custom_constants/separation = 20
 
 [node name="PracticesContainer" type="VBoxContainer" parent="OuterMargin/ScrollContainer/InnerMargin/Content"]
+unique_name_in_owner = true
 margin_top = 88.0
 margin_right = 760.0
 margin_bottom = 222.0
@@ -126,6 +132,7 @@ text = "Practices"
 align = 1
 
 [node name="Practices" type="VBoxContainer" parent="OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer"]
+unique_name_in_owner = true
 margin_top = 134.0
 margin_right = 760.0
 margin_bottom = 134.0
