@@ -138,8 +138,9 @@ body {
 .notices {
   font-family: "Noto Sans", "Droid Sans", Arial, sans-serif;
   color: #3b3943;
-  width: 640px;
+  max-width: 640px;
   padding: 3em;
+  margin: 1em;
   background: #fdfdfd;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
@@ -180,7 +181,7 @@ body {
   display: none;
 }
 
-@media (orientation: portrait), (max-aspect-ratio: 4/3), (max-width: 750px) {
+@media (orientation: portrait), (max-width: 700px) {
   .mobile-only {
     display: flex;
   }
