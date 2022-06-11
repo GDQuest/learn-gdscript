@@ -22,9 +22,11 @@ extends TextEdit
 
 const ErrorOverlayPopupScene := preload("./popups/ErrorOverlayPopup.tscn")
 
+signal scroll_changed(vector2)
+
 enum SCROLL_DIR { HORIZONTAL, VERTICAL }
 
-signal scroll_changed(vector2)
+const BRACKET_PAIRS := {"(": ")", "[": "]"}
 
 var errors_overlay := SliceEditorOverlay.new()
 var errors_overlay_message: ErrorOverlayPopup = ErrorOverlayPopupScene.instance()
@@ -36,6 +38,13 @@ var _slice_properties: SliceProperties
 # Used to know when to add an indent level.
 var _current_line := cursor_get_line()
 var _remove_last_character := false
+# Used to automatically close brackets. As soon as you type a bracket, the
+# selection gets erased, so we need to cache that info to wrap the selection in
+# brackets.
+var _last_typed_character := ""
+var _last_selected_text := ""
+var _last_selection_start := Vector2.ZERO
+var _last_selection_end := Vector2.ZERO
 
 
 func _ready() -> void:
@@ -76,7 +85,6 @@ func _ready() -> void:
 	connect("text_changed", self, "_on_text_changed")
 	connect("draw", self, "_update_overlays")
 
-
 func _gui_input(event: InputEvent) -> void:
 	# Shortcut uses Enter by default which adds a new line in TextEdit without any means to stop it.
 	# So we remove it.
@@ -84,8 +92,17 @@ func _gui_input(event: InputEvent) -> void:
 		_remove_last_character = true
 	
 	# Capture keyboard events if we are the focus owner, otherwise left arrow causes navigation events.
-	if event is InputEventKey and get_focus_owner() == self:
-		get_tree().set_input_as_handled()
+	if event is InputEventKey:
+		if get_focus_owner() == self:
+			get_tree().set_input_as_handled()
+
+		if event.is_pressed():
+			_last_typed_character = char(event.unicode)
+
+			_last_selected_text = get_selection_text()
+			if get_selection_text():
+				_last_selection_start = Vector2(get_selection_from_line(), get_selection_from_column())
+				_last_selection_end = Vector2(get_selection_to_line(), get_selection_to_column())
 
 
 func setup(slice_properties: SliceProperties) -> void:
@@ -120,7 +137,6 @@ func highlight_line(line_index: int, at_char: int = 0) -> void:
 
 	errors_overlay.add_line_highlight(line_index)
 
-
 func _on_text_changed() -> void:
 	if _remove_last_character:
 		var column := cursor_get_column()
@@ -144,6 +160,25 @@ func _on_text_changed() -> void:
 		text += "\t"
 		cursor_set_line(_current_line)
 		cursor_set_column(column + 1)
+	
+	# Automatically close brackets.
+	if _last_typed_character in BRACKET_PAIRS:
+		var closing_bracket: String = BRACKET_PAIRS[_last_typed_character]
+
+		if _last_selected_text:
+			_last_selected_text = ""
+
+			undo()
+			cursor_set_line(_last_selection_start.x)
+			cursor_set_column(_last_selection_start.y)
+
+			insert_text_at_cursor(_last_typed_character)
+
+			cursor_set_line(_last_selection_end.x)
+			cursor_set_column(_last_selection_end.y + 1)
+
+		insert_text_at_cursor(closing_bracket)
+		_last_typed_character = ""
 
 
 func _on_scrollbar_value_changed(value: float, direction: int) -> void:
