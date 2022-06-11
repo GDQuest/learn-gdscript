@@ -166,7 +166,6 @@ func _on_text_changed() -> void:
 		var closing_bracket: String = BRACKET_PAIRS[_last_typed_character]
 
 		if _last_selected_text:
-			_last_selected_text = ""
 
 			undo()
 			cursor_set_line(_last_selection_start.x)
@@ -178,6 +177,11 @@ func _on_text_changed() -> void:
 			cursor_set_column(_last_selection_end.y + 1)
 
 		insert_text_at_cursor(closing_bracket)
+
+		if not _last_selected_text:
+			cursor_set_column(cursor_get_column() - 1)
+
+		_last_selected_text = ""
 		_last_typed_character = ""
 
 
