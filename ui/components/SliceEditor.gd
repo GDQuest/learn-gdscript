@@ -26,7 +26,7 @@ signal scroll_changed(vector2)
 
 enum SCROLL_DIR { HORIZONTAL, VERTICAL }
 
-const BRACKET_PAIRS := {"(": ")", "[": "]"}
+const BRACKET_PAIRS := {"(": ")", "[": "]", "{": "}"}
 
 var errors_overlay := SliceEditorOverlay.new()
 var errors_overlay_message: ErrorOverlayPopup = ErrorOverlayPopupScene.instance()
