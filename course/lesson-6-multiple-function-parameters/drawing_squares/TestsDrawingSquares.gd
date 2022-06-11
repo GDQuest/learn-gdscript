@@ -18,6 +18,19 @@ func _prepare():
 
 
 func test_turtle_ends_facing_towards_the_right() -> String:
+	var turn_right_between_jumps := 0
+	for command in turtle.get_command_stack():
+		if command.command == "turn":
+			turn_right_between_jumps += 1
+			if not is_equal_approx(command.angle, 90.0):
+				return tr("The turtle should always turn by 90 degrees. Instead, we found that it turned by %s degrees in one call to turn_right()." % command.angle)
+		elif command.command == "jump":
+			if turn_right_between_jumps != 4:
+				return tr("The turtle should turn four times to draw a square so that it always starts drawing the squares in the same direction. Did you call turn_right() four times?")
+	return ""
+
+
+func test_turtle_starts_each_square_facing_towards_the_right() -> String:
 	if not is_equal_approx(wrapf(turtle.turn_degrees, 0.0, 360.0), 0.0):
 		return tr(
 			"The turtle should be facing towards the right to draw squares in the same direction every time. Did you call turn_right(90) four times in your function?"

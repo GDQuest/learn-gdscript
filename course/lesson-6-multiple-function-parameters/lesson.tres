@@ -338,7 +338,9 @@ We could use these squares as outlines when selecting units in a tactical game, 
 
 Create a function named [code]draw_square()[/code] that takes one parameter: the [code]length[/code] of the square's sides.
 
-The turtle should face towards the right when starting or completing a rectangle."
+[b]The turtle should face towards the right when starting or completing a square.[/b]
+
+Be sure to call [b]turn_right(90)[/b]  enough times in your function to do so."
 starting_code = ""
 cursor_line = 0
 cursor_column = 0
@@ -357,7 +359,7 @@ goal = "Let's make our square drawing function more flexible to include rectangl
 
 Your job is to code a function named [code]draw_rectangle()[/code] that takes two parameters: the [code]length[/code] and the [code]height[/code] of the rectangle.
 
-The turtle should face towards the right when starting or completing a rectangle.
+[b]The turtle should face towards the right when starting or completing a rectangle.[/b]
 
 Note that we could still draw a square with [code]draw_rectangle()[/code] by having the [code]length[/code] and [code]height[/code] equal the same value."
 starting_code = "func draw_rectangle():

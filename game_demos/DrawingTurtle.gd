@@ -207,15 +207,6 @@ func play_draw_animation() -> void:
 		line.start()
 
 
-# Animates the turtle's height and shadow scale when jumping. Tween the progress
-# value from 0 to 1.
-func _animate_jump(progress: float) -> void:
-	var parabola := -pow(2.0 * progress - 1.0, 2.0) + 1.0
-	_sprite.position.y = -parabola * 100.0
-	var shadow_scale := (1.0 - parabola + 1.0) / 2.0
-	_shadow.scale = shadow_scale * Vector2.ONE
-
-
 # Returns the total bounding rectangle enclosing all the turtle's drawn
 # polygons.
 func get_rect() -> Rect2:
@@ -225,6 +216,19 @@ func get_rect() -> Rect2:
 		rect.position += polygon.position
 		bounds = bounds.merge(rect)
 	return bounds
+
+
+func get_command_stack() -> Array:
+	return _command_stack.duplicate()
+
+
+# Animates the turtle's height and shadow scale when jumping. Tween the progress
+# value from 0 to 1.
+func _animate_jump(progress: float) -> void:
+	var parabola := -pow(2.0 * progress - 1.0, 2.0) + 1.0
+	_sprite.position.y = -parabola * 100.0
+	var shadow_scale := (1.0 - parabola + 1.0) / 2.0
+	_shadow.scale = shadow_scale * Vector2.ONE
 
 
 func _close_polygon() -> void:
