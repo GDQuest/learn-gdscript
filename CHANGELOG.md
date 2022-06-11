@@ -2,6 +2,44 @@
 
 This document lists changes between releases.
 
+## Learn GDScript From Zero 1.2.0
+
+*Released on June 11, 2022*
+
+### New features
+
+- Add auto-closing brackets to code editor
+
+### Content changes
+
+- Fix cell coordinates in lesson 26
+- Fix example converting string into number in lesson 27
+- Correct example looping over values of an array in lesson 24
+- Remove glossary underline from word type in lesson 6
+- Clarify one answer in quiz in lesson 5
+- Precise where to add the length parameter in lesson 6 practice
+- Replace quiz in lesson 4 by a more appropriate one
+- Remove leading underscore to delta in lesson 10
+- Add extra test to drawing squares practice in lesson 6
+- Add note to practice in lesson 11 not to use local variables
+
+### Improvements
+
+- Update warning popup text for small screen (#549)
+- Allow to further reduce the text size for large displays
+
+### Bug fixes
+
+- Remove double border on example in lesson 1
+- Ensure lesson examples always draw behind issue popup
+- Fix error when calling print() without arguments
+- Fix crashes when coding infinite while loops
+- Fix practice in lesson 20 not passing if not solved at first trial
+- Prevent error when not drawing any polygons in Back to the drawing board practice
+- Prevent the mobile warning popup from going off-screen
+- Check edited slice code instead of source text in practice tests
+- Make animation play based on calls to play_animation() in lesson 21 practice
+
 ## Learn GDScript From Zero 1.1.0
 
 _Released on June 3, 2022_
