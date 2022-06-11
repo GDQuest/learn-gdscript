@@ -2,6 +2,19 @@
 
 This document lists changes between releases.
 
+## Learn GDScript From Zero 1.2.1
+
+*Released on June 11, 2022*
+
+### Improvements
+
+- Auto complete dictionary braces
+
+### Bug fixes
+
+- Move cursor inside parens when writing parens without a selection
+- Fix indent error in practice in lesson 24
+
 ## Learn GDScript From Zero 1.2.0
 
 *Released on June 11, 2022*
