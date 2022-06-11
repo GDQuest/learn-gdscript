@@ -121,14 +121,16 @@ has_separator = false
 [sub_resource type="Resource" id=10]
 script = ExtResource( 4 )
 quiz_id = "res://course/lesson-4-drawing-a-rectangle/quiz-izKUdOCQ.tres"
-question = "In the function definition below, which part is the function parameter?"
-content_bbcode = "[code]func move_forward(pixels)[/code]"
+question = "In the function call below, which part is the argument?"
+content_bbcode = "[code]move_forward(30)[/code]"
 hint = ""
-explanation_bbcode = "The function parameters are inside the parentheses in a function definition.
+explanation_bbcode = "A function's arguments are all the values inside the parentheses. In this case, there's only one, but there can be multiple separated by commas.
 
-The [code]func[/code] keyword tells the computer you're defining a new function, and [code]move_forward[/code] is the function's name."
-answer_options = [ "func", "move_forward", "pixels" ]
-valid_answers = [ "pixels" ]
+In this case, [code]move_forward[/code] is the function's name and [code]30[/code] is the argument.
+
+This function call will make the turtle move forward by [code]30[/code] pixels."
+answer_options = [ "move_forward", "30" ]
+valid_answers = [ "30" ]
 is_multiple_choice = false
 do_shuffle_answers = true
 
