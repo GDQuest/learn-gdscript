@@ -292,7 +292,7 @@ func _run_student_code() -> void:
 	if "while " in script_text:
 		var modified_code := PoolStringArray()
 		for line in script_text.split("\n"):
-			if "while " in line:
+			if "while " in line and not line.strip_edges(true, false).begins_with("#"):
 				var indent := 0
 				while line[indent] == "\t":
 					indent += 1
