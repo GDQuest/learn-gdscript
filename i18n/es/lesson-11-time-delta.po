@@ -1,0 +1,428 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# Automatically generated, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-06-12 11:07+0200\n"
+"PO-Revision-Date: 2022-06-12 11:27+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: course/lesson-11-time-delta/lesson.tres:14
+msgid ""
+"We've seen how we can use our character's [code]_process()[/code] function "
+"to make it move continuously."
+msgstr ""
+"Hemos visto cómo podemos utilizar la función [code]_process()[/code] de "
+"nuestro personaje para hacer que se mueva continuamente."
+
+#: course/lesson-11-time-delta/lesson.tres:34
+msgid ""
+"But it's not just our character that has a [code]_process()[/code] function; "
+"Almost everything in the game has a [code]_process()[/code] function!\n"
+"\n"
+"Dozens of times per second, Godot runs every [code]_process()[/code] "
+"function in the game to update the game world.\n"
+"\n"
+"After that, it displays an image of the game world on the screen. We call "
+"that image a [b]frame[/b].\n"
+"\n"
+"Godot then moves on to calculating the next frame.\n"
+"\n"
+"As this happens dozens of times per second, you get the illusion of "
+"movement. This is similar to how traditional animation works."
+msgstr ""
+"Pero no es sólo nuestro personaje el que tiene una función [code]_process()[/"
+"code]; ¡casi todo en el juego tiene una función [code]_process()[/code]!\n"
+"\n"
+"Docenas de veces por segundo, Godot ejecuta cada función [code]_process()[/"
+"code] en el juego para actualizar el mundo del juego.\n"
+"\n"
+"Después, muestra una imagen del mundo del juego en la pantalla. Llamamos a "
+"esa imagen un [b]fotograma[/b].\n"
+"\n"
+"A continuación, Godot pasa a calcular el siguiente fotograma.\n"
+"\n"
+"Como esto ocurre decenas de veces por segundo, obtenemos la ilusión de "
+"movimiento. Esto es similar a cómo funciona la animación tradicional."
+
+#: course/lesson-11-time-delta/lesson.tres:52
+msgid ""
+"You may have heard of frames per second, or FPS for short. Games often run "
+"at 60 frames per second. \n"
+"\n"
+"It means that everything in the game updates 60 times each second.\n"
+"\n"
+"The number varies while playing, depending on the game and the device it "
+"runs on.\n"
+"\n"
+"On powerful computers, you may get frame rates in the hundreds or thousands "
+"of frames per second."
+msgstr ""
+"Es posible que hayas oído hablar de los fotogramas por segundo, o FPS para "
+"abreviar. Los juegos a menudo se ejecutan a 60 fotogramas por segundo.\n"
+"\n"
+"Esto significa que todo en el juego se actualiza 60 veces por segundo.\n"
+"\n"
+"El número varía mientras se juega, dependiendo del juego y del dispositivo "
+"en el que se ejecute.\n"
+"\n"
+"En computadoras potentes, puedes obtener velocidades de fotogramas de "
+"cientos o miles de fotogramas por segundo."
+
+#: course/lesson-11-time-delta/lesson.tres:68
+msgid "Let's look at the [code]_process()[/code] function in more detail."
+msgstr "Veamos la función [code]_process()[/code] con más detalle."
+
+#: course/lesson-11-time-delta/lesson.tres:76
+msgid "What parameter does the _process() function take?"
+msgstr "¿Qué parámetro toma la función _process()?"
+
+#: course/lesson-11-time-delta/lesson.tres:77
+msgid ""
+"[code]\n"
+"func _process(delta):\n"
+"\trotate(0.05)\n"
+"[/code]"
+msgstr ""
+"[code]\n"
+"func _process(delta):\n"
+"\trotate(0.05)\n"
+"[/code]"
+
+#: course/lesson-11-time-delta/lesson.tres:82
+msgid ""
+"The [code]_process()[/code] function has one parameter named [code]delta[/"
+"code]."
+msgstr ""
+"La función [code]_process()[/code] tiene un parámetro llamado [code]delta[/"
+"code]."
+
+#: course/lesson-11-time-delta/lesson.tres:83
+msgid "rotate"
+msgstr "rotate"
+
+#: course/lesson-11-time-delta/lesson.tres:83
+msgid "0.05"
+msgstr "0.05"
+
+#: course/lesson-11-time-delta/lesson.tres:83
+#: course/lesson-11-time-delta/lesson.tres:84
+msgid "delta"
+msgstr "delta"
+
+#: course/lesson-11-time-delta/lesson.tres:91
+msgid "Frames take varying amounts of time to calculate"
+msgstr "Los fotogramas tardan diferentes cantidades de tiempo en calcularse"
+
+#: course/lesson-11-time-delta/lesson.tres:93
+msgid ""
+"Depending on the game, the computer, and what the game engine needs to "
+"calculate, frames take more or less time to display.\n"
+"\n"
+"There will always be milliseconds variations from frame to frame.\n"
+"\n"
+"That is why the [code]_process()[/code] function receives a [code]delta[/"
+"code] parameter.\n"
+"\n"
+"The word \"delta\" represents a time difference. It's the time passed since "
+"the previous frame, in seconds.\n"
+"\n"
+"The [code]delta[/code] parameter tells us how long it took for Godot to "
+"complete the [b]previous frame[/b].\n"
+"\n"
+"We can use it to ensure that the variations between frames don't make the "
+"game's simulation unreliable."
+msgstr ""
+"Dependiendo del juego, de la computadora y de lo que el motor del juego "
+"tenga que calcular, los fotogramas tardan más o menos tiempo en mostrarse.\n"
+"\n"
+"Siempre habrá variaciones de milisegundos de un fotograma a otro.\n"
+"\n"
+"Es por eso que la función [code]_process()[/code] recibe un parámetro "
+"[code]delta[/code].\n"
+"\n"
+"La palabra \"delta\" representa una diferencia de tiempo. Es el tiempo "
+"transcurrido desde el fotograma anterior, en segundos.\n"
+"\n"
+"El parámetro [code]delta[/code] nos dice cuánto tiempo le tomó a Godot "
+"completar el [b]fotograma anterior[/b].\n"
+"\n"
+"Podemos utilizarlo para asegurarnos de que las variaciones entre fotogramas "
+"no hacen que la simulación del juego sea poco fiable."
+
+#: course/lesson-11-time-delta/lesson.tres:111
+msgid "What do we know about delta?"
+msgstr "¿Qué sabemos sobre delta?"
+
+#: course/lesson-11-time-delta/lesson.tres:114
+msgid ""
+"[code]delta[/code] is the time it takes Godot to complete the previous frame "
+"in seconds.\n"
+"\n"
+"It's very small because frames happen many times a second.\n"
+"\n"
+"It varies each frame because Godot needs to process more or less each frame."
+msgstr ""
+"[code]delta[/code] es el tiempo que le toma a Godot completar el fotograma "
+"anterior en segundos.\n"
+"\n"
+"Es muy pequeño porque los fotogramas ocurren muchas veces por segundo.\n"
+"\n"
+"Varía en cada fotograma porque Godot necesita procesar más o menos cada "
+"fotograma."
+
+#: course/lesson-11-time-delta/lesson.tres:119
+#: course/lesson-11-time-delta/lesson.tres:120
+msgid "It's a value in seconds."
+msgstr "Es un valor en segundos."
+
+#: course/lesson-11-time-delta/lesson.tres:119
+#: course/lesson-11-time-delta/lesson.tres:120
+msgid "It varies each frame."
+msgstr "Varía en cada fotograma."
+
+#: course/lesson-11-time-delta/lesson.tres:119
+#: course/lesson-11-time-delta/lesson.tres:120
+msgid "It's the time it takes Godot to complete the previous frame."
+msgstr "Es el tiempo que le toma a Godot completar el fotograma anterior."
+
+#: course/lesson-11-time-delta/lesson.tres:127
+msgid "Multiplying by delta"
+msgstr "Multiplicar por delta"
+
+#: course/lesson-11-time-delta/lesson.tres:129
+msgid ""
+"The [code]delta[/code] you get in [code]_process()[/code] is a time "
+"difference in seconds. It will generally be a tiny decimal number.\n"
+"\n"
+"To apply [code]delta[/code], you need to [i]multiply[/i] your speed values "
+"by it."
+msgstr ""
+"El [code]delta[/code] que obtienes en [code]_process()[/code] es una "
+"diferencia de tiempo en segundos. Por lo general, será un número decimal muy "
+"pequeño.\n"
+"\n"
+"Para aplicar [code]delta[/code], tienes que [i]multiplicar[/i] tus valores "
+"de velocidad por él."
+
+#: course/lesson-11-time-delta/lesson.tres:151
+msgid ""
+"When multiplying by [code]delta[/code], you make motion [i]time-dependent[/"
+"i] rather than [i]frame-dependent[/i].\n"
+"\n"
+"That's essential to make your game consistent and fair."
+msgstr ""
+"Al multiplicar por [code]delta[/code], haces que el movimiento sea "
+"[i]dependiente del tiempo[/i] en lugar de [i]dependiente del fotograma[/i].\n"
+"\n"
+"Eso es esencial para que tu juego sea consistente y justo."
+
+#: course/lesson-11-time-delta/lesson.tres:161
+msgid "Why do we use the number 3.0 in this example?"
+msgstr "¿Por qué utilizamos el número 3.0 en este ejemplo?"
+
+#: course/lesson-11-time-delta/lesson.tres:163
+msgid ""
+"At the top of the lesson, we made the robot rotate a fixed amount every "
+"frame: [code]0.05[/code] radians.\n"
+"\n"
+"In the example above, we now [i]multiply[/i] the argument by the very small "
+"[code]delta[/code] value, a value way below [code]1.0[/code]. It makes the "
+"robot turn at a constant speed over time.\n"
+"\n"
+"However, multiplying by a number below [code]1.0[/code] like [code]delta[/"
+"code] makes the result smaller.\n"
+"\n"
+"To compensate for that and make the robot turn fast enough, we use a larger "
+"number than before, [code]3.0[/code] instead of [code]0.05[/code].\n"
+"\n"
+"Those numbers have two different [i]units[/i]: [code]0.05[/code] is an "
+"[i]angle[/i] in radians, while [code]3.0[/code] is an [i]angular speed[/i] "
+"in radians per second.\n"
+"\n"
+"When you multiply a speed by a time delta, it gives you an angle.\n"
+"\n"
+"Don't worry if it's a little confusing for now. It'll eventually click as "
+"you deal with speed, acceleration, and motion in your game projects."
+msgstr ""
+"Al principio de la lección, hicimos que el robot girara por una cantidad "
+"fija en cada fotograma: [code]0.05[/code] radianes.\n"
+"\n"
+"En el ejemplo anterior, ahora [i]multiplicamos[/i] el argumento por el muy "
+"pequeño valor de [code]delta[/code], un valor muy inferior a [code]1.0[/"
+"code]. Esto hace que el robot gire a una velocidad constante en el tiempo.\n"
+"\n"
+"Sin embargo, multiplicar por un número inferior a [code]1.0[/code] como "
+"[code]delta[/code] hace que el resultado sea más pequeño.\n"
+"\n"
+"Para compensar eso y hacer que el robot gire lo suficientemente rápido, "
+"utilizamos un número mayor que antes, [code]3.0[/code] en lugar de "
+"[code]0.05[/code].\n"
+"\n"
+"Esos números tienen dos [i]unidades[/i] diferentes: [code]0.05[/code] es un "
+"[i]ángulo[/i] en radianes, mientras que [code]3.0[/code] es una [i]velocidad "
+"angular[/i] en radianes por segundo.\n"
+"\n"
+"Cuando multiplicas una velocidad por un delta de tiempo, te da un ángulo.\n"
+"\n"
+"No te preocupes si es un poco confuso por ahora. Con el tiempo irá encajando "
+"a medida que trates con la velocidad, la aceleración y el movimiento en tus "
+"proyectos de juego."
+
+#: course/lesson-11-time-delta/lesson.tres:183
+msgid "Why the time between frames matters"
+msgstr "Por qué es importante el tiempo entre fotogramas"
+
+#: course/lesson-11-time-delta/lesson.tres:185
+msgid ""
+"The time it takes to display a new frame varies.\n"
+"\n"
+"If you don't take that time into account in your code, your game will have "
+"gameplay issues and bugs. Godot provides that time to the [code]_process()[/"
+"code] function through the [code]delta[/code] parameter.\n"
+"\n"
+"In the example below, the top robot moves using [code]delta[/code]. As a "
+"result, it moves at a fixed speed.\n"
+"\n"
+"The bottom robot moves over a constant distance every frame, [i]without[/i] "
+"taking [code]delta[/code] into account. It will move faster or slower than "
+"the top robot on [i]your[/i] computer.\n"
+"\n"
+"The bottom robot will move [i]differently for everyone[/i]!"
+msgstr ""
+"El tiempo que tarda en aparecer un nuevo fotograma varía.\n"
+"\n"
+"Si no tienes en cuenta ese tiempo en tu código, tu juego tendrá problemas de "
+"jugabilidad y errores. Godot proporciona ese tiempo a la función "
+"[code]_process()[/code] a través del parámetro [code]delta[/code].\n"
+"\n"
+"En el ejemplo siguiente, el robot que está arriba se mueve utilizando "
+"[code]delta[/code]. Como resultado, se mueve a una velocidad fija.\n"
+"\n"
+"El robot que está abajo se mueve a una distancia constante en cada "
+"fotograma, [i]sin[/i] tener en cuenta el [code]delta[/code]. Se moverá más "
+"rápido o más lento que el robot de arriba en [i]tu[/i] computadora.\n"
+"\n"
+"¡El robot de abajo se moverá [i]de forma diferente para todos[/i]!"
+
+#: course/lesson-11-time-delta/lesson.tres:213
+msgid ""
+"Multiplying time-sensitive values by [code]delta[/code] makes them [b]time-"
+"dependent[/b] rather than [b]frame-dependent[/b].\n"
+"\n"
+"Thanks to that, we get reliable movement over time.\n"
+"\n"
+"Without [code]delta[/code], frame times vary from computer to computer and "
+"during gameplay. Because of that, the movement will differ for every player, "
+"making the game inconsistent and messy."
+msgstr ""
+"Multiplicar los valores sensibles al tiempo por [code]delta[/code] los hace "
+"[b]dependientes del tiempo[/b] en lugar de [b]dependientes de los "
+"fotogramas[/b].\n"
+"\n"
+"Gracias a esto, obtenemos un movimiento fiable a lo largo del tiempo.\n"
+"\n"
+"Sin [code]delta[/code], los tiempos de los fotogramas varían de una "
+"computadora a otra y durante el juego. Por eso, el movimiento será diferente "
+"para cada jugador, haciendo que el juego sea inconsistente y desordenado."
+
+#: course/lesson-11-time-delta/lesson.tres:225
+msgid "What does this mean?"
+msgstr "¿Qué significa esto?"
+
+#: course/lesson-11-time-delta/lesson.tres:226
+msgid "[code]rotation_speed * delta[/code]"
+msgstr "[code]rotation_speed * delta[/code]"
+
+#: course/lesson-11-time-delta/lesson.tres:228
+msgid ""
+"The [code]*[/code] symbol means we're multiplying [code]rotation_speed[/"
+"code] by [code]delta[/code] time."
+msgstr ""
+"El símbolo [code]*[/code] significa que estamos multiplicando "
+"[code]rotation_speed[/code] por el tiempo [code]delta[/code]."
+
+#: course/lesson-11-time-delta/lesson.tres:229
+#: course/lesson-11-time-delta/lesson.tres:230
+msgid "We're multiplying rotation_speed by delta."
+msgstr "Que multiplicamos la rotation_speed por delta."
+
+#: course/lesson-11-time-delta/lesson.tres:229
+msgid "We're dividing delta by rotation_speed."
+msgstr "Que dividimos delta por la rotation_speed."
+
+#: course/lesson-11-time-delta/lesson.tres:229
+msgid "We're adding rotation_speed to delta."
+msgstr "Que le sumamos la rotation_speed a delta."
+
+#: course/lesson-11-time-delta/lesson.tres:229
+msgid "We're subtracting delta from rotation_speed."
+msgstr "Que le restamos delta a la rotation_speed."
+
+#: course/lesson-11-time-delta/lesson.tres:239
+msgid "In the next practice, we'll use delta to make rotating time-dependent."
+msgstr ""
+"En la siguiente práctica, usaremos el delta para hacer que la rotación "
+"dependa del tiempo."
+
+#: course/lesson-11-time-delta/lesson.tres:247
+msgid "Rotating Using Delta"
+msgstr "Girar usando delta"
+
+#: course/lesson-11-time-delta/lesson.tres:248
+msgid ""
+"At the moment, the rotation of the robot is frame-dependent.\n"
+"\n"
+"Add [code]delta[/code] to make the rotational speed time-dependent.\n"
+"\n"
+"The robot should rotate [code]2[/code] radians per second."
+msgstr ""
+"Por el momento, la rotación del robot depende de los fotogramas.\n"
+"\n"
+"Añade [code]delta[/code] para hacer que la velocidad de rotación dependa del "
+"tiempo.\n"
+"\n"
+"El robot debe girar [code]2[/code] radianes por segundo."
+
+#: course/lesson-11-time-delta/lesson.tres:267
+msgid "Moving in a Circle Using Delta"
+msgstr "Moverse en un círculo usando delta"
+
+#: course/lesson-11-time-delta/lesson.tres:268
+msgid ""
+"In this practice, make the robot move in a smooth circle using delta.\n"
+"\n"
+"To get this movement, the robot should rotate [code]2[/code] radians per "
+"second and move [code]100[/code] pixels per second towards clockwise.\n"
+"\n"
+"[b]Note:[/b] Please write the values in the parentheses when calling the "
+"functions. If you define extra variables, we will not be able to check your "
+"practice."
+msgstr ""
+"En esta práctica, haz que el robot se mueva en un círculo de forma suave y "
+"fluida utilizando delta.\n"
+"\n"
+"Para conseguir este movimiento, el robot debe girar [code]2[/code] radianes "
+"por segundo y moverse [code]100[/code] pixeles por segundo en el sentido de "
+"las agujas del reloj.\n"
+"\n"
+"[b]Nota:[/b] Escribe los valores entre paréntesis cuando llame a las "
+"funciones. Si define variables adicionales, no podremos verificar su "
+"práctica."
+
+#: course/lesson-11-time-delta/lesson.tres:286
+msgid "Time Delta"
+msgstr "Delta de tiempo"

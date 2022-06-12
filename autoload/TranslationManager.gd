@@ -7,7 +7,8 @@ const PO_EXTENSION := "po"
 # OS.get_locale() is available, if we want to guess the language based on the OS setting.
 const DEFAULT_LOCALE := "en"
 const SUPPORTED_LOCALES := [
-	"en"
+	"en",
+	"es"
 ]
 
 var current_language := DEFAULT_LOCALE setget set_language

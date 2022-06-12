@@ -1,0 +1,208 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-06-12 11:07+0200\n"
+"PO-Revision-Date: 2022-03-26 18:33+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:13
+msgid ""
+"Like with arrays, you can loop over dictionaries. You can loop over both "
+"their keys and values.\n"
+"\n"
+"Let's see how it works with two examples."
+msgstr ""
+"Al igual que con las matrices, puedes hacer un bucle sobre los diccionarios. "
+"Puedes hacer un bucle sobre sus claves y valores.\n"
+"\n"
+"Veamos cómo funciona con dos ejemplos."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:23
+msgid "Displaying an inventory's content"
+msgstr "Mostrar el contenido de un inventario"
+
+# it's
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:25
+msgid ""
+"To display the player's inventory, you need to know what it contains. You "
+"need the name and amount of each object.\n"
+"\n"
+"And from code, you can only achieve that by looping over the whole "
+"dictionary and processing key-value pairs one by one.\n"
+"\n"
+"To get the list of keys in the dictionary, you can call its [code]keys()[/"
+"code] member function."
+msgstr ""
+"Para mostrar el inventario del jugador, necesitas saber lo que contiene. "
+"Necesitas el nombre y la cantidad de cada objeto.\n"
+"\n"
+"Y desde el código, sólo puedes conseguir esto haciendo un bucle sobre todo "
+"el diccionario y procesando los pares clave-valor uno por uno.\n"
+"\n"
+"Para obtener la lista de claves del diccionario, puedes llamar a su función "
+"miembro [code]keys()[/code]."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:49
+msgid ""
+"But it's something we do so much that you don't need to call the function.\n"
+"\n"
+"Instead, you can directly type the variable name in a [code]for[/code] loop "
+"after the [code]in[/code] keyword. The language understands that you "
+"implicitly want to loop over the dictionary's keys."
+msgstr ""
+"Pero esto es algo que hacemos tanto que no es necesario llamar a la "
+"función.\n"
+"\n"
+"En su lugar, puedes escribir directamente el nombre de la variable en un "
+"bucle [code]for[/code] después de la palabra clave [code]in[/code]. El "
+"lenguaje entiende que implícitamente quieres hacer un bucle sobre las claves "
+"del diccionario."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:71
+msgid ""
+"You can get the values with the syntax [code]dictionary[key][/code] as you "
+"learned in the previous lesson.\n"
+"\n"
+"We can loop over the inventory keys, get the corresponding values, and "
+"display all that information in the user interface."
+msgstr ""
+"Puedes obtener los valores con la sintaxis [code]dictionary[key][/code] como "
+"aprendiste en la lección anterior.\n"
+"\n"
+"Podemos hacer un bucle sobre las claves del inventario, obtener los valores "
+"correspondientes y mostrar toda esa información en la interfaz de usuario."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:103
+msgid ""
+"Instead of printing the key-value pairs to the output console, we can code "
+"and call a dedicated function that displays items in the user interface."
+msgstr ""
+"En lugar de imprimir los pares clave-valor en la consola de salida, podemos "
+"codificar y llamar a una función dedicada que muestra los elementos en la "
+"interfaz de usuario."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:131
+msgid "Mapping grid cells to units"
+msgstr "Mapear celdas de cuadrícula a unidades"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:133
+msgid ""
+"We can also use a dictionary to map units to their position on a game "
+"board.\n"
+"\n"
+"That's how you'd typically code a board game, a grid-based RPG, or a "
+"tactical RPG.\n"
+"\n"
+"While we focused on [code]String[/code] keys so far, GDScript dictionaries "
+"accept any value type as a key, allowing you to map anything to anything.\n"
+"\n"
+"The only limitation is that every key must be unique."
+msgstr ""
+"También podemos utilizar un diccionario para mapear unidades a su posición "
+"en un tablero de juego.\n"
+"\n"
+"Así es como normalmente codificarías un juego de mesa, un RPG basado en "
+"cuadrículas o un RPG táctico.\n"
+"\n"
+"Aunque hasta ahora nos hemos centrado en las claves [code]String[/code], los "
+"diccionarios GDScript aceptan cualquier tipo de valor como clave, lo que te "
+"permite mapear cualquier cosa a cualquier cosa.\n"
+"\n"
+"La única limitación es que cada clave debe ser única."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:159
+msgid ""
+"Using a [code]for[/code] loop, you can use the key-value pairs to place "
+"units on the board at the start of a game."
+msgstr ""
+"Utilizando un bucle [code]for[/code], puedes utilizar los pares clave-valor "
+"para colocar unidades en el tablero al inicio de un juego."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:189
+msgid ""
+"In the following practices, you will loop over dictionaries and process "
+"their content."
+msgstr ""
+"En las siguientes prácticas, harás un bucle sobre los diccionarios y "
+"procesarás su contenido."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:197
+msgid "Displaying the inventory"
+msgstr "Mostrar el inventario"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:198
+msgid ""
+"We use a dictionary to represent the player's inventory in this game. The "
+"dictionary keys are the name of items, and they map to the number of items "
+"that the player owns.\n"
+"\n"
+"You need to loop over the dictionary and display the name and amount of "
+"every item in the inventory.\n"
+"\n"
+"To do so, call the [code]display_item()[/code] function. It takes two "
+"arguments: the item name and the amount."
+msgstr ""
+"Utilizamos un diccionario para representar el inventario del jugador en este "
+"juego. Las claves del diccionario son los nombres de los objetos y se mapean "
+"al número de objetos que posee el jugador.\n"
+"\n"
+"Tienes que hacer un bucle sobre el diccionario y mostrar el nombre y la "
+"cantidad de cada objeto del inventario.\n"
+"\n"
+"Para ello, llama a la función [code]display_item()[/code]. Esta toma dos "
+"argumentos: el nombre del objeto y la cantidad."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:218
+msgid ""
+"We need to display the player's inventory on the screen but lack the code to "
+"do so. Use a loop to display every item."
+msgstr ""
+"Necesitamos mostrar el inventario del jugador en la pantalla, pero nos falta "
+"el código para hacerlo. Utiliza un bucle para mostrar cada objeto."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:223
+msgid "Placing units on the board"
+msgstr "Colocar unidades en el tablero"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:224
+msgid ""
+"We have a dictionary named [code]units[/code] that maps a cell position on "
+"the grid to a unit to put there.\n"
+"\n"
+"Using a for loop and the [code]place_unit()[/code] function, place every "
+"unit in the units dictionary at the desired position on the game board."
+msgstr ""
+"Tenemos un diccionario llamado [code]units[/code] que mapea una posición de "
+"celda de la cuadrícula a una unidad para ponerla allí.\n"
+"\n"
+"Utilizando un bucle for y la función [code]place_unit()[/code], coloca cada "
+"unidad del diccionario de unidades en la posición deseada del tablero de "
+"juego."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:242
+msgid ""
+"We want to populate our game board with units at the start of every battle. "
+"Loop over the dictionary to place units on the board."
+msgstr ""
+"Queremos poblar nuestro tablero de juego con unidades al comienzo de cada "
+"batalla. Haz un bucle sobre el diccionario para colocar las unidades en el "
+"tablero."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:246
+msgid "Looping over dictionaries"
+msgstr "Hacer un bucle sobre los diccionarios"

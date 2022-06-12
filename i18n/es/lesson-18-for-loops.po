@@ -1,0 +1,282 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# Automatically generated, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-03-26 17:50+0100\n"
+"PO-Revision-Date: 2022-03-26 18:20+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: course/lesson-18-for-loops/lesson.tres:14
+msgid ""
+"In the last lesson, we looked at [code]while[/code] loops. We found they "
+"were useful if we don't know how many times we should repeat code. \n"
+"\n"
+"However, they could result in infinite loops if we're not careful.\n"
+"\n"
+"The loop below never ends because we never increment [code]number[/code]."
+msgstr ""
+"En la última lección, vimos los bucles [code]while[/code]. Descubrimos que "
+"eran útiles si no sabemos cuántas veces debemos repetir el código.\n"
+"\n"
+"Sin embargo, podrían resultar en bucles infinitos si no tenemos cuidado.\n"
+"\n"
+"El bucle a continuación nunca termina porque nunca incrementamos "
+"[code]number[/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:38
+msgid ""
+"There's a safer and often easier kind of loop: the [code]for[/code] loop.\n"
+"\n"
+"We'll look at it in this lesson.\n"
+"\n"
+"Unlike [code]while[/code] loops, [code]for[/code] loops don't run "
+"infinitely, so it's much less likely that you'll get bugs in your game. "
+"[b]We recommend favoring for loops over while loops because of this[/b].\n"
+"\n"
+"Let's change the code above to use a [code]for[/code] loop instead.\n"
+"\n"
+"The loop below will change the [code]cell[/code] three times."
+msgstr ""
+"Hay un tipo de bucle que es más seguro y a menudo más fácil de utilizar: el "
+"bucle [code]for[/code].\n"
+"\n"
+"Lo veremos en esta lección.\n"
+"\n"
+"A diferencia de los bucles [code]while[/code], los bucles [code]for[/code] "
+"no se ejecutan infinitamente, por lo que es mucho menos probable que "
+"obtengas errores en tu juego. [b]Debido a esto, recomendamos favorecer los "
+"bucles for sobre los bucles while[/b].\n"
+"\n"
+"Cambiemos el código anterior para utilizar un bucle [code]for[/code] en su "
+"lugar.\n"
+"\n"
+"El bucle a continuación cambiará la [code]cell[/code] tres veces."
+
+#: course/lesson-18-for-loops/lesson.tres:66
+msgid "Let's explain what's going on here."
+msgstr "Vamos a explicar lo que está ocurriendo aquí."
+
+#: course/lesson-18-for-loops/lesson.tres:74
+msgid "The range() function"
+msgstr "La función range()"
+
+#: course/lesson-18-for-loops/lesson.tres:76
+msgid ""
+"Godot has the helper function [code]range()[/code]. Calling [code]range(n)[/"
+"code] creates a list of numbers from [code]0[/code] to [code]n - 1[/code]. \n"
+"\n"
+"So calling [code]range(3)[/code] outputs the list of number [code][0, 1, 2][/"
+"code], and [code]range(5)[/code] outputs [code][0, 1, 2, 3, 4][/code]."
+msgstr ""
+"Godot tiene la función auxiliar [code]range()[/code]. Al llamar a "
+"[code]range(n)[/code], se crea una lista de números desde [code]0[/code] "
+"hasta [code]n - 1[/code]\n"
+"\n"
+"Así, llamar a [code]range(3)[/code] genera la lista de números [code][0, 1, "
+"2][/code], y [code]range(5)[/code] genera [code][0, 1, 2, 3, 4][/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:86
+msgid "What list of numbers would range(6) create?"
+msgstr "¿Qué lista de números crearía range(6)?"
+
+#: course/lesson-18-for-loops/lesson.tres:87
+msgid "What would [code]print(range(6))[/code] print to the console?"
+msgstr "¿Qué imprimiría [code]print(range(6))[/code] en la consola?"
+
+#: course/lesson-18-for-loops/lesson.tres:89
+msgid ""
+"The function [code]range(n)[/code] creates a list of numbers from [code]0[/"
+"code] to [code]n - 1[/code]. The output list will start with [code]0[/code] "
+"and end with [code]5[/code].\n"
+"\n"
+"So calling [code]range(6)[/code] will output a list of six numbers which are "
+"[code][0, 1, 2, 3, 4, 5][/code].\n"
+msgstr ""
+"La función [code]range(n)[/code] crea una lista de números desde [code]0[/"
+"code] hasta [code]n - 1[/code]. La lista de salida comenzará con [code]0[/"
+"code] y terminará con [code]5[/code].\n"
+"\n"
+"Así, al llamar a [code]range(6)[/code], se generará una lista de seis "
+"números que son [code][0, 1, 2, 3, 4, 5][/code].\n"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+#: course/lesson-18-for-loops/lesson.tres:94
+msgid "[0, 1, 2, 3, 4, 5]"
+msgstr "[0, 1, 2, 3, 4, 5]"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+msgid "[1, 2, 3, 4, 5, 6]"
+msgstr "[1, 2, 3, 4, 5, 6]"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+msgid "[0, 1, 2, 3, 4, 5, 6]"
+msgstr "[0, 1, 2, 3, 4, 5, 6]"
+
+#: course/lesson-18-for-loops/lesson.tres:101
+msgid "How for loops work"
+msgstr "Cómo funcionan los bucles for"
+
+#: course/lesson-18-for-loops/lesson.tres:103
+msgid ""
+"In a [code]for[/code] loop, the computer takes each value inside a list, "
+"stores it in a temporary variable, and executes the code in the loop once "
+"per value."
+msgstr ""
+"En un bucle [code]for[/code], la computadora toma cada valor dentro de una "
+"lista, lo almacena en una variable temporal y ejecuta el código del bucle "
+"una vez por valor."
+
+# Godot sets [code]number[/code] to the item,
+#: course/lesson-18-for-loops/lesson.tres:123
+msgid ""
+"In the above example, for each item in the list [code][0, 1, 2][/code], "
+"Godot sets [code]number[/code] to the item, then executes the code in the "
+"[code]for[/code] loop.\n"
+"\n"
+"In this example, we're printing the value of [code]number[/code] as Godot "
+"moves through the loop.\n"
+"\n"
+"We can put whatever code we like in the loop's code block, including other "
+"function calls like [code]draw_rectangle()[/code]."
+msgstr ""
+"En el ejemplo anterior, para cada elemento de la lista [code][0, 1, 2][/"
+"code], Godot asigna el elemento a la variable [code]number[/code], y luego "
+"ejecuta el código en el bucle [code]for[/code].\n"
+"\n"
+"En este ejemplo, estamos imprimiendo el valor de [code]number[/code] a "
+"medida que Godot se mueve por el bucle.\n"
+"\n"
+"Podemos poner el código que queramos en el bloque de código del bucle, "
+"incluyendo otras llamadas a funciones como [code]draw_rectangle()[/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:135
+msgid "Using a for loop instead of a while loop"
+msgstr "Utilizar un bucle for en lugar de bucles while"
+
+#: course/lesson-18-for-loops/lesson.tres:137
+msgid ""
+"Here's our old [code]move_to_end()[/code] function which used in a "
+"[code]while[/code] loop."
+msgstr ""
+"Aquí está nuestra antigua función [code]move_to_end()[/code] que utilizaba "
+"un bucle [code]while[/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:157
+msgid ""
+"If we use a [code]for[/code] loop instead, the code becomes a little simpler."
+msgstr ""
+"Si usamos un bucle [code]for[/code] en su lugar, el código se vuelve un poco "
+"más simple."
+
+#: course/lesson-18-for-loops/lesson.tres:177
+msgid ""
+"Rather than constantly checking if the robot reached the end of the board, "
+"with the [code]for[/code] loop, we take the board's width beforehand, then "
+"move the robot a set amount of times.\n"
+"\n"
+"The function still works the same. You can execute it below."
+msgstr ""
+"En lugar de comprobar constantemente si el robot ha llegado al final del "
+"tablero, con el bucle [code]for[/code], tomamos el ancho del tablero de "
+"antemano y luego movemos el robot una cantidad determinada de veces.\n"
+"\n"
+"La función sigue funcionando igual. Puedes ejecutarla a continuación."
+
+#: course/lesson-18-for-loops/lesson.tres:199
+msgid ""
+"In the practices, we'll use [code]for[/code] loops in different ways to get "
+"you used to using them."
+msgstr ""
+"En las prácticas, utilizaremos bucles [code]for[/code] de diferentes maneras "
+"para que te acostumbres a utilizarlos."
+
+#: course/lesson-18-for-loops/lesson.tres:207
+msgid "Using a for loop to move to the end of the board"
+msgstr "Utilizar un bucle for para moverse al final del tablero"
+
+#: course/lesson-18-for-loops/lesson.tres:208
+msgid ""
+"Once again, the robot has decided to stand at the top of the board.\n"
+"\n"
+"This time, use a [code]for[/code] loop in the [code]move_to_bottom()[/code] "
+"function to have it move to the bottom of the board.\n"
+"\n"
+"The board size is determined by the [code]Vector2[/code] variable "
+"[code]board_size[/code].\n"
+"\n"
+"The robot's starting cell is [code]Vector2(2, 0)[/code]."
+msgstr ""
+"Una vez más, el robot ha decidido situarse en la parte superior del "
+"tablero.\n"
+"\n"
+"Esta vez, utiliza un bucle [code]for[/code] en la función "
+"[code]move_to_bottom()[/code] para que se desplace a la parte inferior del "
+"tablero.\n"
+"\n"
+"El tamaño del tablero está determinado por la variable [code]Vector2[/code] "
+"llamada [code]board_size[/code].\n"
+"\n"
+"La celda inicial del robot es [code]Vector2(2, 0)[/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:224
+msgid ""
+"Use a for loop to have our robot move from the top of the board to the "
+"bottom."
+msgstr ""
+"Utiliza un bucle for para que nuestro robot se mueva de la parte superior "
+"del tablero a la inferior."
+
+#: course/lesson-18-for-loops/lesson.tres:229
+msgid "Improving code with a for loop"
+msgstr "Mejorar el código con un bucle for"
+
+#: course/lesson-18-for-loops/lesson.tres:230
+msgid ""
+"Use a [code]for[/code] loop to remove the duplicate code in the [code]run()[/"
+"code] function.\n"
+"\n"
+"In this practice, we revisit the turtle and drawing rectangles.\n"
+"\n"
+"With our new knowledge of [code]for[/code] loops, we can condense this code "
+"to take up less space and make it easier to modify.\n"
+"\n"
+"The turtle should draw three squares in a horizontal line. The squares "
+"should be 100 pixels apart."
+msgstr ""
+"Utiliza un bucle [code]for[/code] para eliminar el código duplicado en la "
+"función [code]run()[/code].\n"
+"\n"
+"En esta práctica, volvemos a hablar de la tortuga y de dibujar rectángulos.\n"
+"\n"
+"Con nuestros nuevos conocimientos sobre los bucles [code]for[/code], podemos "
+"condensar este código para que ocupe menos espacio y sea más fácil de "
+"modificar.\n"
+"\n"
+"La tortuga debe dibujar tres cuadrados en una línea horizontal. Los "
+"cuadrados deben estar separados por 100 pixeles."
+
+#: course/lesson-18-for-loops/lesson.tres:253
+msgid ""
+"In the past we had to copy and paste code to draw multiple rectangles. Let's "
+"revisit previous code and improve it with a for loop."
+msgstr ""
+"Antes teníamos que copiar y pegar el código para dibujar varios rectángulos. "
+"Revisemos el código anterior y mejorémoslo con un bucle for."
+
+#: course/lesson-18-for-loops/lesson.tres:257
+msgid "Introduction to For Loops"
+msgstr "Introducción a los bucles for"

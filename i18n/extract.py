@@ -147,7 +147,7 @@ def extract_error_database() -> None:
     ]
 
     extract_csv_and_write(
-        source_file="./lsp/error_database.csv",
+        source_file="./script_checking/error_database.csv",
         extract_fields=extracted_fields,
         reference_field="error_code",
         output_file="./i18n/error_database.pot",
