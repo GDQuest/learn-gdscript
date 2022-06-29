@@ -166,7 +166,6 @@ func _on_text_changed() -> void:
 		var closing_bracket: String = BRACKET_PAIRS[_last_typed_character]
 
 		if _last_selected_text:
-
 			undo()
 			cursor_set_line(_last_selection_start.x)
 			cursor_set_column(_last_selection_start.y)
@@ -183,6 +182,21 @@ func _on_text_changed() -> void:
 
 		_last_selected_text = ""
 		_last_typed_character = ""
+
+	# Pass over a closing bracket if writing a matching character
+	elif _last_typed_character in BRACKET_PAIRS.values():
+		var line := cursor_get_line()
+		var column := cursor_get_column()
+		select(line, column, line, column + 1)
+		var character := get_selection_text()
+		deselect()
+		if character == _last_typed_character:
+			# We simulate pressing backspace to remove the last typed character.
+			var event := InputEventKey.new()
+			event.scancode = KEY_BACKSPACE
+			event.pressed = true
+			Input.parse_input_event(event)
+			cursor_set_column(cursor_get_column() + 1)
 
 
 func _on_scrollbar_value_changed(value: float, direction: int) -> void:
