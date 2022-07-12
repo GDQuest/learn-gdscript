@@ -166,8 +166,8 @@ web_debug(){
     echo "be in your \$PATH"
     exit 0
   fi
+  echo "You need the custom templates. Please make sure to run prepare:local at least once!"
   debug=true
-  prepare_local
   clean_web
   export_web
   web_server &
