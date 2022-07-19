@@ -29,7 +29,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     (currentWidth = window.innerWidth, currentHeight = window.innerHeight) => {
       const ratioW = currentWidth / maxW;
       const ratioH = currentHeight / maxH;
-      const ratio = Math.min(Math.min(ratioW, ratioH), 1);
+      const ratio = Math.min(ratioW, ratioH);
       const width = maxW * ratio;
       const height = maxH * ratio;
       return { width, height, ratio };
