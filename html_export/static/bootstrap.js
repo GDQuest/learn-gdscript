@@ -131,8 +131,6 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
   resize: {
     const onResize = () => {
       const { width, height, ratio } = aspectRatioCanvas();
-      canvas.width = width;
-      canvas.height = height;
       canvasContainer.style.setProperty(`width`, `${width}px`);
       canvasContainer.style.setProperty(`height`, `${height}px`);
       document.documentElement.style.setProperty("--scale", `${ratio}`);

@@ -30,8 +30,8 @@ body {
   background-color: var(--game-background-color);
 }
 
-.layer {
-  position: absolute;
+.layer,
+.fullscreen {
   left: 0;
   top: 0;
   right: 0;
@@ -40,8 +40,18 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: var(--max-width);
   margin: 0 auto;
+}
+
+.layer {
+  position: absolute;
+  max-width: var(--max-width);
+}
+
+.fullscreen {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
 }
 
 /* --- /BASE --- */
@@ -58,6 +68,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  /**transform: scale(var(--scale));
+  transform-origin: center center;*/
 }
 
 /* --- /CANVAS CONTAINER --- */
@@ -73,6 +85,8 @@ body {
   margin: 0;
   border: none;
   background-color: var(--game-background-color);
+  width: 100%;
+  height: 100%;
 }
 
 #canvas:focus {
