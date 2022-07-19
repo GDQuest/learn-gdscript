@@ -129,37 +129,15 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
   };
 
   resize: {
-    const snap = (/** @type {number} */ step) => (/** @type {number} */ x) =>
-      Math.trunc(x / step) * step;
-
-    const toWidth = snap(240);
-    const toHeight = snap(135);
-
-    const aspectRatioCanvas = aspectRatio(1920, 1080);
-
-    const snappedAspectRation = () => {
-      const { width, height, ratio } = aspectRatioCanvas(
-        window.innerWidth,
-        window.innerHeight
-      );
-      const _width = toWidth(width);
-      const _height = toHeight(height);
-      return {
-        width: _width,
-        height: _height,
-        ratio: _width / 1920,
-      };
-    };
     const onResize = () => {
-      const { width, height, ratio } = snappedAspectRation();
+      const { width, height, ratio } = aspectRatioCanvas();
       canvas.width = width;
       canvas.height = height;
-      console.log({ width, height, ratio });
       canvasContainer.style.setProperty(`width`, `${width}px`);
       canvasContainer.style.setProperty(`height`, `${height}px`);
       document.documentElement.style.setProperty("--scale", `${ratio}`);
     };
-
+    const aspectRatioCanvas = aspectRatio(1920, 1080);
     window.addEventListener("resize", throttle(GDQUEST.events.onResize.emit));
     GDQUEST.events.onResize.connect(onResize);
     onResize();
