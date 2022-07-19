@@ -29,7 +29,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     (currentWidth = window.innerWidth, currentHeight = window.innerHeight) => {
       const ratioW = currentWidth / maxW;
       const ratioH = currentHeight / maxH;
-      const ratio = Math.min(Math.min(ratioW, ratioH), 1);
+      const ratio = Math.min(ratioW, ratioH);
       const width = maxW * ratio;
       const height = maxH * ratio;
       return { width, height, ratio };
@@ -68,7 +68,9 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       if (!isDebugMode) {
         return { app: true };
       }
-      const modulesList = params.get("debug").split(",").filter(Boolean);
+      const modulesList = (params.get("debug") || "")
+        .split(",")
+        .filter(Boolean);
       if (modulesList.length == 0) {
         return { "*": true };
       }
@@ -129,8 +131,6 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
   resize: {
     const onResize = () => {
       const { width, height, ratio } = aspectRatioCanvas();
-      canvas.width = width;
-      canvas.height = height;
       canvasContainer.style.setProperty(`width`, `${width}px`);
       canvasContainer.style.setProperty(`height`, `${height}px`);
       document.documentElement.style.setProperty("--scale", `${ratio}`);
@@ -186,22 +186,23 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       console.error(msg);
       setStatusMode(StatusMode.NOTICE);
       const statusNotice = document.getElementById("notices");
-      msg.split("\n").forEach((line) => {
-        statusNotice.appendChild(document.createTextNode(line));
-        statusNotice.appendChild(document.createElement("br"));
-      });
+      statusNotice &&
+        msg.split("\n").forEach((line) => {
+          statusNotice.appendChild(document.createTextNode(line));
+          statusNotice.appendChild(document.createElement("br"));
+        });
       is_done = true;
     };
 
+    const loaderElement = document.getElementById("loader");
     /**
      * Grows the visual loading bar
      * @param {number} percentage
      * @returns
      */
     const displayPercentage = (percentage = 0) =>
-      document
-        .getElementById("loader")
-        .style.setProperty("--progress", percentage * 100 + "%");
+      loaderElement &&
+      loaderElement.style.setProperty("--progress", percentage * 100 + "%");
 
     /**
      * Callback used during the loading of the engine and packages
@@ -289,9 +290,12 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       localStorage.setItem(KEY, "true");
     };
 
-    document
-      .getElementById("mobile-warning-dismiss-button")
-      .addEventListener("click", forceAppOnMobile);
+    const mobileWarningButton = document.getElementById(
+      "mobile-warning-dismiss-button"
+    );
+
+    mobileWarningButton &&
+      mobileWarningButton.addEventListener("click", forceAppOnMobile);
 
     const currentValue = JSON.parse(localStorage.getItem(KEY) || "false");
 
@@ -347,7 +351,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     const download = () =>
       generateDownloadableFile(
         `gdquest-${Date.now()}.log`,
-        localStorage.getItem(KEY)
+        localStorage.getItem(KEY) || ""
       );
 
     const makeLogFunction =
