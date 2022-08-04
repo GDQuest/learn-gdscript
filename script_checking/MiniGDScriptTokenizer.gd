@@ -64,7 +64,7 @@ func tokenize():
 
 		var is_indented := _indent_regex.search(_current_line)
 		# Any line at the root level, apart for a comment, resets the context
-		if is_indented == null:
+		if is_indented == null and _current_line.strip_edges() != "":
 			_current_scope = tokens
 
 		var found_token := _tokenize_line(_current_line)
