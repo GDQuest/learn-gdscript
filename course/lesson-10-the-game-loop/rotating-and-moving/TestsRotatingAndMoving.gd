@@ -16,7 +16,7 @@ func test_character_is_moving_in_a_circle_clockwise() -> String:
 	if not matches_code_line(["rotate(*)"]):
 		return tr("Did you use rotate() to make the sprite rotate?")
 	elif not matches_code_line(["move_local_x(*)"]):
-		return tr("Did you use make_local_x() to make the sprite move locally?")
+		return tr("Did you use move_local_x() to make the sprite move locally?")
 
 	if robot.rotation < 0.0:
 		return tr("The robot is turning in the wrong direction!")

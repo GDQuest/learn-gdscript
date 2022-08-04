@@ -26,7 +26,7 @@ func test_moving_in_a_circle() -> String:
 	if not has_rotate:
 		return tr("Did you use rotate() to make the sprite rotate?")
 	elif not has_move_local:
-		return tr("Did you use make_local_x() to make the sprite move locally?")
+		return tr("Did you use move_local_x() to make the sprite move locally?")
 	return ""
 
 
