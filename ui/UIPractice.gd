@@ -15,6 +15,8 @@ const PracticeListPopup := preload("components/popups/PracticeListPopup.gd")
 const PracticeDonePopup := preload("components/popups/PracticeDonePopup.gd")
 const PracticeLeaveUnfinishedPopup := preload("components/popups/PracticeLeaveUnfinishedPopup.gd")
 
+var REGEX_DIVSION_BY_ZERO := RegEx.new()
+
 export var test_practice: Resource
 
 var _practice: Practice
@@ -68,7 +70,10 @@ onready var _code_editor := find_node("CodeEditor") as CodeEditor
 
 onready var _tween := $Tween as Tween
 
+
 func _init():
+	REGEX_DIVSION_BY_ZERO.compile("[/%] *0")
+
 	_run_autotimer = Timer.new()
 	_run_autotimer.one_shot = true
 	_run_autotimer.wait_time = RUN_AUTOTIMER_DURATION
@@ -133,7 +138,9 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 
 	_info_panel.title_label.text = tr(practice.title).capitalize()
 	# FIXME: Some weird Windows issue, replace before translating so matching works.
-	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(tr(practice.goal.replace("\r\n", "\n")))
+	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(
+		tr(practice.goal.replace("\r\n", "\n"))
+	)
 	_code_editor.text = practice.starting_code
 	_code_editor.update_cursor_position(practice.cursor_line, practice.cursor_column)
 
@@ -141,7 +148,7 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	var index := 0
 	for hint in practice.hints:
 		var practice_hint: PracticeHint = PracticeHintScene.instance()
-		practice_hint.title = tr("Hint %s") % [ String(index + 1).pad_zeros(1) ]
+		practice_hint.title = tr("Hint %s") % [String(index + 1).pad_zeros(1)]
 		practice_hint.bbcode_text = tr(hint)
 		_hints_container.add_child(practice_hint)
 		index += 1
@@ -180,7 +187,9 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 			_practice_list.add_item(practice_data, lesson, course, practice_data == practice)
 
 		var user_profile := UserProfiles.get_profile()
-		var completed_before = user_profile.is_lesson_practice_completed(course.resource_path, lesson.resource_path, practice.practice_id)
+		var completed_before = user_profile.is_lesson_practice_completed(
+			course.resource_path, lesson.resource_path, practice.practice_id
+		)
 		if completed_before:
 			_info_panel.set_status_icon(_info_panel.Status.COMPLETED_BEFORE)
 
@@ -188,21 +197,23 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 func _update_labels() -> void:
 	if not _practice:
 		return
-	
+
 	_info_panel.title_label.text = tr(_practice.title).capitalize()
 	# FIXME: Some weird Windows issue, replace before translating so matching works.
-	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(tr(_practice.goal.replace("\r\n", "\n")))
-	
+	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(
+		tr(_practice.goal.replace("\r\n", "\n"))
+	)
+
 	var index := 0
 	for child_node in _hints_container.get_children():
 		var practice_hint = child_node as PracticeHint
 		if not practice_hint:
 			continue
-		
-		practice_hint.title = tr("Hint %s") % [ String(index + 1).pad_zeros(1) ]
+
+		practice_hint.title = tr("Hint %s") % [String(index + 1).pad_zeros(1)]
 		practice_hint.bbcode_text = tr(_practice.hints[index])
 		index += 1
-	
+
 	_info_panel.display_tests(_tester.get_test_names())
 
 
@@ -245,12 +256,20 @@ func _validate_and_run_student_code() -> void:
 	# Do local sanity checks for the script.
 	var recursive_function := MiniGDScriptTokenizer.new(script_text).find_any_recursive_function()
 	if recursive_function != "":
-		var error = make_error_recursive_function(recursive_function)
+		var error := ScriptError.new()
+		error.message = (
+			tr("The function `%s` calls itself, this creates an infinite loop")
+			% [recursive_function]
+		)
+		error.severity = 1
+		error.code = GDQuestCodes.ErrorCode.RECURSIVE_FUNCTION
 		MessageBus.print_script_error(error, script_file_name)
 		_code_editor.unlock_editor()
 		return
 
-	var errors := _run_check(script_text)
+	var verifier := OfflineScriptVerifier.new(script_text)
+	verifier.test()
+	var errors := verifier.errors
 
 	if not errors.empty():
 		_code_editor.slice_editor.errors = errors
@@ -260,26 +279,15 @@ func _validate_and_run_student_code() -> void:
 			MessageBus.print_script_error(error, script_file_name)
 
 		var is_missing_parser_error: bool = (
-			errors.size() == 1 and \
-			OfflineScriptVerifier.check_error_is_missing_parser_error(errors[0])
+			errors.size() == 1
+			and OfflineScriptVerifier.check_error_is_missing_parser_error(errors[0])
 		)
-		
+
 		if not is_missing_parser_error:
 			_code_editor.unlock_editor()
 			return
 
-	_run_student_code()
-
-
-func _run_check(script_text: String) -> Array:
-	var verifier := OfflineScriptVerifier.new(script_text)
-	verifier.test()
-	return verifier.errors
-
-
-func _run_student_code() -> void:
-	var script_text := _script_slice.current_full_text
-	var script_file_name := _script_slice.get_script_properties().file_name
+	# Run student code
 	var nodes_paths := _script_slice.get_script_properties().nodes_paths
 
 	# Generate a runnable script, check for uncaught errors.
@@ -301,18 +309,35 @@ func _run_student_code() -> void:
 				modified_code.append(tabs + "var __guard_counter := 0")
 				modified_code.append(line)
 				modified_code.append(tabs + "\t" + "__guard_counter += 1")
-				modified_code.append(tabs + "\t" + "if __guard_counter > %s:" % MAX_WHILE_LOOP_ITERATIONS)
+				modified_code.append(
+					tabs + "\t" + "if __guard_counter > %s:" % MAX_WHILE_LOOP_ITERATIONS
+				)
 				modified_code.append(tabs + "\t\t" + "break")
 			else:
 				modified_code.append(line)
 		script_text = modified_code.join("\n")
+	elif REGEX_DIVSION_BY_ZERO.search(script_text):
+		var error := ScriptError.new()
+		error.message = tr(
+			'There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no "/ 0" or "% 0" in your code.'
+		)
+		error.severity = 1
+		error.code = GDQuestCodes.ErrorCode.INVALID_NO_CATCH
+		MessageBus.print_script_error(error, script_file_name)
+		_code_editor.unlock_editor()
+		return
 
 	var script = GDScript.new()
 	script.source_code = script_text
 
 	var script_is_valid = script.reload()
 	if script_is_valid != OK:
-		var error := make_error_script_silent()
+		var error := ScriptError.new()
+		error.message = tr(
+			"Oh no! The script has an error, but the Script Verifier did not catch it"
+		)
+		error.severity = 1
+		error.code = GDQuestCodes.ErrorCode.INVALID_NO_CATCH
 		MessageBus.print_script_error(error, script_file_name)
 		_code_editor.unlock_editor()
 		return
@@ -551,7 +576,10 @@ func _on_use_solution_pressed() -> void:
 
 
 func _update_game_paused() -> void:
-	_game_view.paused = _code_editor.is_pause_button_pressed() || _code_editor.is_solution_button_pressed()
+	_game_view.paused = (
+		_code_editor.is_pause_button_pressed()
+		|| _code_editor.is_solution_button_pressed()
+	)
 
 
 func _on_code_editor_text_changed(_text: String) -> void:
@@ -696,22 +724,6 @@ static func set_node_properties(node: Node, props_backup: Dictionary) -> void:
 		node.set(prop_name, backed_up_value)
 
 
-static func make_error_script_silent() -> ScriptError:
-		var err = ScriptError.new()
-		err.message = "Oh no! The script has an error, but the Script Verifier did not catch it"
-		err.severity = 1
-		err.code = GDQuestCodes.ErrorCode.INVALID_NO_CATCH
-		return err
-
-
-static func make_error_recursive_function(func_name: String) -> ScriptError:
-	var err = ScriptError.new()
-	err.message = "The function `%s` calls itself, this creates an infinite loop"%[func_name]
-	err.severity = 1
-	err.code = GDQuestCodes.ErrorCode.RECURSIVE_FUNCTION
-	return err
-
-
 ###############################################################################
 #
 # JS INTERFACE
@@ -726,12 +738,12 @@ var _on_js_error_feedback_ref = JavaScript.create_callback(self, "_on_js_error_f
 # This will be called from Javascript
 func _on_js_error_feedback(args):
 	var code = args[0]
-	if code is String and code == 'RECURSIVE':
+	if code is String and code == "RECURSIVE":
 		print("recursive code")
 
 
 # Set the event listener
 func _on_init_set_javascript() -> void:
-	if OS.has_feature('JavaScript'):
+	if OS.has_feature("JavaScript"):
 		var GDQUEST = JavaScript.get_interface("GDQUEST")
 		GDQUEST.events.onError.connect(_on_js_error_feedback_ref)
