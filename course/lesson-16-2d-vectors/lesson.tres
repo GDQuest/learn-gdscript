@@ -168,8 +168,8 @@ content_bbcode = ""
 hint = ""
 explanation_bbcode = "[code]position -= Vector2(50, 0)[/code] subtracts [code]50[/code] to the sub-variable [code]x[/code], and [code]0[/code] to [code]y[/code].
 
-[code]position.x -= Vector(50, 0)[/code] tries to subtract a 2D vector to the sub-variable [code]x[/code], which is a decimal number. The value types are incompatible. If you try to do this, you will get an error."
-answer_options = [ "position -= Vector2(50, 0)", "position.x -= Vector(50, 0)" ]
+[code]position.x -= Vector2(50, 0)[/code] tries to subtract a 2D vector to the sub-variable [code]x[/code], which is a decimal number. The value types are incompatible. If you try to do this, you will get an error."
+answer_options = [ "position -= Vector2(50, 0)", "position.x -= Vector2(50, 0)" ]
 valid_answers = [ "position -= Vector2(50, 0)" ]
 is_multiple_choice = false
 do_shuffle_answers = true
