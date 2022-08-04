@@ -8,20 +8,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1264.0
 margin_bottom = -954.0
-rect_min_size = Vector2( 600, 440 )
+rect_min_size = Vector2( 600, 340 )
 size_flags_horizontal = 3
 theme = ExtResource( 1 )
 text = "var health = 100
 var max_health = 100
 
-func take_damage(amount):
-	health -= amount
+func heal(amount):
+	health += amount
 
 	if health > max_health:
-		health = max_health
-
-	if health < 0:
-		health = 0"
+		health = max_health"
 readonly = true
 syntax_highlighting = true
 show_line_numbers = true
@@ -37,4 +34,4 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-min_size = Vector2( 600, 440 )
+min_size = Vector2( 600, 340 )
