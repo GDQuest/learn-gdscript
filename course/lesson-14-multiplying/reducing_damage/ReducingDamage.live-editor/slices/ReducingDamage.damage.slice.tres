@@ -13,8 +13,8 @@ keyword = "EXPORT"
 closing = false
 name = "damage"
 is_full_file = false
-start = 8
-end = 24
-lines_before = [ "extends Node2D", "", "", "", "", "onready var _animation_tree := find_node(\"AnimationTree\")", "onready var _health_bar := find_node(\"CustomHealthBar\") as ColorRect", "" ]
+start = 5
+end = 18
+lines_before = [ "extends Node2D", "", "onready var _animation_tree := find_node(\"AnimationTree\")", "onready var _health_bar := find_node(\"CustomHealthBar\") as ColorRect", "" ]
 lines_after = [ "", "func _run():", "	reset()", "	take_damage(10)", "	_health_bar.set_health(health)", "	_animation_tree.travel(\"damage\")", "	yield(get_tree().create_timer(0.5), \"timeout\")", "	Events.emit_signal(\"practice_run_completed\")", "", "", "func reset():", "	level = 3", "	health = 100", "	max_health = 100", "	_health_bar.set_health(health)", "" ]
-lines_editable = [ "var level = 3", "var health = 100", "var max_health = 100", "", "func take_damage(amount):", "	if level > 2:", "		amount *= 0.5", "	", "	health -= amount", "", "	if health > max_health:", "		health = max_health", "", "	if health < 0:", "		health = 0" ]
+lines_editable = [ "var level = 3", "var health = 100", "var max_health = 100", "", "func take_damage(amount):", "	if level > 2:", "		amount *= 0.5", "	", "	health -= amount", "", "	if health < 0:", "		health = 0" ]

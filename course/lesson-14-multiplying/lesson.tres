@@ -287,9 +287,6 @@ var max_health = 100
 func take_damage(amount):
 	health -= amount
 
-	if health > max_health:
-		health = max_health
-
 	if health < 0:
 		health = 0"
 cursor_line = 0
