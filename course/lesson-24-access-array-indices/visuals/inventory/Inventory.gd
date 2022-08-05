@@ -8,14 +8,6 @@ func _ready() -> void:
 		child.connect("mouse_exited", self, "set_current_item", [null])
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		var mouse_event := event as InputEventMouseButton
-		if not mouse_event.pressed and current_item:
-			var index: int = current_item.get_index()
-			use_item(index)
-		
-
 func set_current_item(item: Node):
 	current_item = item
 
