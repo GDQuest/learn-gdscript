@@ -2,6 +2,39 @@
 
 This document lists changes between releases.
 
+## Learn GDScript From Zero 1.2.2
+
+*Released on August 5, 2022*
+
+### Content changes
+
+- Add Spanish version of the course
+- Add explicit mention you need to use draw_rectangle() in lesson 7
+- Fix typo in lesson 8
+- Fix typo in error message in lessons 10 and 11
+- Fix return type of array.pop_* functions
+- Remove explanation of underscore prefix for some functions
+- Fix typo in lesson 18
+- Fix typo in lesson 16
+- Use heal function in lesson 14 instead of take_damage
+- Remove unnecessary conditioin in lesson 14 practice 2
+- Correct typo in lesson 26
+
+### Bug fixes
+
+- Walk over closing bracket characters
+- Typos in lesson 1
+- Typo in lesson 18 (#577)
+- Typo in lesson 19 (#578)
+- Ensure canvas resolution scales with the parent containers to avoid blurry fonts (#585)
+- Replace rectangle with square in lesson 5 (#571)
+- Prevent crashes with division by zero, add error for this
+- Prevent infinite recursion after function blocks
+- Remove input detection on items in lesson 24
+- Check the whole path in lesson 20
+- Ignore first point in lesson 19 P1 if it's Vector2.ZERO
+- Prevent side panel from overflowing window with the largest font size
+
 ## Learn GDScript From Zero 1.2.1
 
 *Released on June 11, 2022*
