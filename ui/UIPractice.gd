@@ -421,10 +421,8 @@ func _toggle_distraction_free_mode() -> void:
 
 
 func _disable_distraction_free_mode() -> void:
-	_update_slidable_panels()
-
 	_is_info_panel_open = true
-	_tween.stop_all()
+	_tween.remove_all()
 
 	_tween.interpolate_property(
 		_info_panel_anchors,
@@ -462,7 +460,7 @@ func _enable_distraction_free_mode() -> void:
 	_update_slidable_panels()
 
 	_is_info_panel_open = false
-	_tween.stop_all()
+	_tween.remove_all()
 
 	_tween.interpolate_property(
 		_info_panel_anchors,
@@ -508,7 +506,7 @@ func _show_solution_panel() -> void:
 	_update_slidable_panels()
 
 	_is_solution_panel_open = true
-	_tween.stop_all()
+	_tween.remove_all()
 
 	_tween.interpolate_property(
 		_solution_panel,
@@ -537,7 +535,7 @@ func _hide_solution_panel() -> void:
 	_update_slidable_panels()
 
 	_is_solution_panel_open = false
-	_tween.stop_all()
+	_tween.remove_all()
 
 	_tween.interpolate_property(
 		_solution_panel,
