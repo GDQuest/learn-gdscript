@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/gut/gui/ShortcutButton.gd" type="Script" id=1]
+
+[node name="ShortcutButton" type="Control"]
+anchor_right = 0.123
+anchor_bottom = 0.04
+margin_right = 33.048
+margin_bottom = 1.0
+rect_min_size = Vector2( 125, 25 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Layout" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lblShortcut" type="Label" parent="Layout"]
+margin_right = 50.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "<None>"
+align = 2
+valign = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Layout"]
+margin_left = 54.0
+margin_right = 64.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="SetButton" type="Button" parent="Layout"]
+margin_left = 68.0
+margin_right = 128.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 60, 0 )
+text = "Set"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButton" type="Button" parent="Layout"]
+visible = false
+margin_left = 82.0
+margin_right = 142.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 60, 0 )
+text = "Save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CancelButton" type="Button" parent="Layout"]
+visible = false
+margin_left = 82.0
+margin_right = 142.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 60, 0 )
+text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClearButton" type="Button" parent="Layout"]
+margin_left = 132.0
+margin_right = 192.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 60, 0 )
+text = "Clear"
+
+[connection signal="pressed" from="Layout/SetButton" to="." method="_on_SetButton_pressed"]
+[connection signal="pressed" from="Layout/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="Layout/CancelButton" to="." method="_on_CancelButton_pressed"]
+[connection signal="pressed" from="Layout/ClearButton" to="." method="_on_ClearButton_pressed"]
