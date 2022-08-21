@@ -20,6 +20,9 @@ func test_randi_function_used_with_sides() -> String:
 
 func test_function_simulates_rolling_dice() -> String:
 	var results = first_node.get("results")
+	# Safeguard to prevent crash during Gut integration tests.
+	if not results:
+		return ""
 	
 	if results.min() < 7:
 		return tr("It looks like the minimum number the die can roll is too low. Did you add 1 to increase the range?")
