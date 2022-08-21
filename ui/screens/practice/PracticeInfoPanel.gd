@@ -15,6 +15,8 @@ const TestDisplayScene = preload("PracticeTestDisplay.tscn")
 
 export var title := "Title" setget set_title
 
+var skip_animations := false
+
 var _current_status: int = Status.NONE
 var _documentation_results: QueryResult
 
@@ -89,16 +91,15 @@ func set_tests_status(test_result: PracticeTester.TestResult, script_file_name: 
 		if checkmark.title in test_result.errors:
 			var error = test_result.errors[checkmark.title]
 			MessageBus.print_error(error, script_file_name)
-			
-			checkmark.mark_as_failed()
-			yield(checkmark, "marking_finished")
-			
+			checkmark.mark_as_failed(skip_animations)
 		elif checkmark.title in test_result.passed_tests:
-			checkmark.mark_as_passed()
-			yield(checkmark, "marking_finished")
-		
+			checkmark.mark_as_passed(skip_animations)
 		else:
 			checkmark.unmark(true)
+		
+		if skip_animations:
+			yield(get_tree(), "idle_frame")
+		else:
 			yield(checkmark, "marking_finished")
 	
 	emit_signal("tests_updated")

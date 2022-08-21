@@ -12,6 +12,7 @@ func test_course() -> void:
 		for practice in lesson.practices:
 			var ui_practice = UIPracticeScene.instance()
 			add_child(ui_practice)
+			ui_practice.turn_on_test_mode()
 			ui_practice.setup(practice, null, null)
 			ui_practice._on_use_solution_pressed()
 			ui_practice._run_tests_requested = true

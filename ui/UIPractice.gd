@@ -197,6 +197,10 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 			_info_panel.set_status_icon(_info_panel.Status.COMPLETED_BEFORE)
 
 
+# Turns off animations to run integration tests faster.
+func turn_on_test_mode() -> void:
+	_info_panel.skip_animations = true
+
 func _update_labels() -> void:
 	if not _practice:
 		return
