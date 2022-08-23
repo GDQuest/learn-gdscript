@@ -143,15 +143,17 @@ func setup(lesson: Lesson, course: Course) -> void:
 				restore_node = instance
 
 	var highlighted_next := false
+	var practice_index := 0
 	for practice in lesson.practices:
 		var button: UIPracticeButton = PracticeButtonScene.instance()
-		button.setup(practice)
+		button.setup(practice, practice_index)
 		if course:
 			button.completed_before = user_profile.is_lesson_practice_completed(course.resource_path, lesson.resource_path, practice.practice_id)
 			if not highlighted_next and not button.completed_before:
 				highlighted_next = true
 				button.is_highlighted = true
 		_practices_container.add_child(button)
+		practice_index += 1
 	_practices_visibility_container.hide()
 
 	_quizz_count = lesson.get_quizzes_count()

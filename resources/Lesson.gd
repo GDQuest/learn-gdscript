@@ -17,6 +17,14 @@ func _init() -> void:
 	practices = []
 
 
+func get_practice_index(practice_id: String) -> int:
+	for i in range(practices.size()):
+		var practice: Practice = practices[i]
+		if practice.practice_id == practice_id:
+			return i
+	return -1
+
+
 func get_quizzes() -> Array:
 	var quizzes := []
 	

@@ -65,10 +65,13 @@ func _rebuild_breadcrumbs() -> void:
 			i += 1
 
 		if lesson and lesson_index >= 0:
-			var lesson_text := "%s. %s" % [lesson_index + 1, tr(lesson.title)]
+			var lesson_text := "%d. %s" % [lesson_index + 1, tr(lesson.title)]
 			_create_navigation_node(lesson_text, lesson.resource_path)
 
-		var node_text: String = tr(practice.title)
+		var practice_index: int = (
+			lesson.get_practice_index(practice.practice_id)
+		)
+		var node_text: String = "%d. %s" % [practice_index + 1, tr(practice.title)]
 		_create_navigation_node(node_text, "", true)
 		return
 

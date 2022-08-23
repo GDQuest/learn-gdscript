@@ -24,13 +24,13 @@ func _notification(what: int) -> void:
 		_update_labels()
 
 
-func setup(practice: Practice) -> void:
+func setup(practice: Practice, practice_index: int) -> void:
 	_practice = practice
 	
 	if not is_inside_tree():
 		yield(self, "ready")
 
-	_title_label.text = tr(_practice.title).capitalize()
+	_title_label.text = "%d. %s" % [practice_index + 1, tr(_practice.title).capitalize()]
 	_description_label.bbcode_text = tr(_practice.description)
 	_description_label.visible = not _practice.description.empty()
 	_navigate_button.connect("pressed", Events, "emit_signal", ["practice_requested", _practice])
