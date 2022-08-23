@@ -1,7 +1,7 @@
 # Adds smooth scrolling support to vertical ScrollContainer nodes.
 #
 # This works by moving a direct child of the container. See `_content`.
-class_name SmoothScrollContainer
+class_name SmoothScrollContainer, "smooth_scroll_container_icon.svg"
 extends ScrollContainer
 
 # Amount of pixels to offset the scroll target when scrolling with the mouse
