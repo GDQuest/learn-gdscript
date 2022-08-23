@@ -28,7 +28,7 @@ func clear_items() -> void:
 
 func add_item(practice: Practice, lesson: Lesson, course: Course, current: bool = false) -> void:
 	var button: UIPracticeButton = PracticeButtonScene.instance()
-	button.setup(practice)
+	button.setup(practice, lesson.get_practice_index(practice.practice_id))
 
 	if course:
 		var user_profile := UserProfiles.get_profile()
