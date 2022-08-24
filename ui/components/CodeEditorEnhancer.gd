@@ -11,6 +11,7 @@ const COLOR_MEMBER := Color(0.14902, 0.776471, 0.968627)
 const COLOR_KEYWORD := Color(1, 0.094118, 0.321569)
 const COLOR_QUOTES := Color(1, 0.960784, 0.25098)
 const COLOR_COMMENTS := Color(0.290196, 0.294118, 0.388235)
+const COLOR_NUMBERS := Color(0.922, 0.580, 0.200)
 const KEYWORDS := [
 	
 	# Basic keywords.

@@ -5,13 +5,36 @@ extends Reference
 # Bad bad hacks, but it does the job and static class > autoload helper.
 const _cache := {}
 
+# Regex pattern to find [code][/code] tags
+const REGEX_PATTERN_CODE = "\\[code\\].+?\\[\\/code\\]"
+# Regex pattern to find the "func" literal
+const REGEX_PATTERN_FUNC = "(?<func>func)"
+# Regex pattern to find method calls (e.g. "draw(...)")
+const REGEX_PATTERN_METHOD_CALL = "(?<method_name>[^\\s\\[\\]]*)(?<method_args>\\(.*?\\))"
+# Regex pattern for numbers (with no special characters on either side)
+const REGEX_PATTERN_NUMBER = "(?<number>[^#\\[\\]\\(\\)]?[0-9]++\\.?[0-9][^#\\[\\]\\(\\)]?)"
 
 static func bbcode_add_code_color(bbcode_text := "") -> String:
-	if not _cache.has("regex_bbcode_code"):
-		_cache["regex_bbcode_code"] = RegEx.new()
-		_cache["regex_bbcode_code"].compile("\\[code\\].+?\\[\\/code\\]")
+	_initialize_regex_cache()
 
-	return _cache["regex_bbcode_code"].sub(bbcode_text, "[color=#c6c4e1]$0[/color]", true)
+	var regex_matches : Array = _cache["regex_bbcode_code"].search_all(bbcode_text)
+
+	var index_delta := 0
+	
+	for regex_match in regex_matches:
+		var index_offset = regex_match.get_start() + index_delta
+		var match_string : String = regex_match.strings[0]
+		var initial_length := match_string.length()
+		
+		match_string = _cache["regex_bbcode_func"].sub(match_string, "[color=#%s]$func[/color]" % CodeEditorEnhancer.COLOR_KEYWORD.to_html(false))
+		match_string = _cache["regex_bbcode_method_call"].sub(match_string, "[color=#%s]$method_name[/color]$method_args" % CodeEditorEnhancer.COLOR_MEMBER.to_html(false))
+		match_string = _cache["regex_bbcode_number"].sub(match_string, "[color=#%s]$number[/color]" % CodeEditorEnhancer.COLOR_NUMBERS.to_html(false))
+		
+		bbcode_text.erase(index_offset, initial_length)
+		bbcode_text = bbcode_text.insert(index_offset, match_string)
+		index_delta += (match_string.length() - initial_length)
+
+	return bbcode_text
 
 
 static func convert_input_action_to_tooltip(action: String) -> String:
@@ -82,3 +105,17 @@ static func convert_type_index_to_text(type: int) -> String:
 		_:
 			printerr("Type value %s should be a member of the TYPE_* enum, but it is not.")
 	return "[ERROR, nonexistent type value %s]" % type
+
+static func _initialize_regex_cache():
+	if not _cache.has("regex_bbcode_code"):
+		_cache["regex_bbcode_code"] = RegEx.new()
+		_cache["regex_bbcode_code"].compile(REGEX_PATTERN_CODE)
+	if not _cache.has("regex_bbcode_func"):
+		_cache["regex_bbcode_func"] = RegEx.new()
+		_cache["regex_bbcode_func"].compile(REGEX_PATTERN_FUNC)
+	if not _cache.has("regex_bbcode_method_call"):
+		_cache["regex_bbcode_method_call"] = RegEx.new()
+		_cache["regex_bbcode_method_call"].compile(REGEX_PATTERN_METHOD_CALL)
+	if not _cache.has("regex_bbcode_number"):
+		_cache["regex_bbcode_number"] = RegEx.new()
+		_cache["regex_bbcode_number"].compile(REGEX_PATTERN_NUMBER)
