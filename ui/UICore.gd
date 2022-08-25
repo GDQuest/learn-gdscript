@@ -131,12 +131,7 @@ func _on_loading_finished() -> void:
 
 
 func _show_end_screen(_course: Course) -> void:
-	var show_sponsored_screen := true
-	
-	if OS.has_feature("HTML5"):
-		var url_domain := JavascriptUtils.get_browser_url_domain()
-		if url_domain.find("godotengine.org") >= 0:
-			show_sponsored_screen = false
+	var show_sponsored_screen := UserProfiles.get_profile().is_sponsored_profile
 	
 	for page in _pages.get_children():
 		page.hide()

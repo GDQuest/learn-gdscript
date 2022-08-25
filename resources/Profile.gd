@@ -6,6 +6,7 @@ signal scroll_sensitivity_changed(new_value)
 signal framerate_limit_changed(new_value)
 
 const VALID_FRAMERATE_LIMITS := [0, 30, 60]
+const URL_GODOT_DOCS_REF = "ref=godot-docs"
 
 # General profile details
 export var player_name := ""
@@ -13,6 +14,7 @@ export var player_name := ""
 export var study_progression := []
 export var last_started_lesson := {}
 export var last_visible_lesson_block := {}
+export var is_sponsored_profile := true
 
 # User settings
 export var language := "en"
@@ -27,6 +29,11 @@ export var framerate_limit := 60 setget set_framerate_limit
 func _init() -> void:
 	study_progression = []
 	last_started_lesson = {}
+
+	if OS.has_feature("JavaScript"):
+		var window := JavaScript.get_interface("window")
+		var browser_url : String = window.location.href
+		is_sponsored_profile = browser_url.find(URL_GODOT_DOCS_REF) == -1
 
 
 func save() -> void:
