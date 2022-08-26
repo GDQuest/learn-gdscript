@@ -15,6 +15,7 @@ onready var _pages := $Pages as Control
 onready var _loading_screen := $Pages/LoadingScreen as LoadingScreen
 onready var _welcome_screen := $Pages/WelcomeScreen as WelcomeScreen
 onready var _end_screen := $Pages/EndScreen as Control
+onready var _sponsorless_end_screen := $Pages/SponsorlessEndScreen as Control
 onready var _settings_screen := $Pages/SettingsScreen as Control
 onready var _course_screen := $Pages/CourseScreen as Control
 
@@ -130,9 +131,15 @@ func _on_loading_finished() -> void:
 
 
 func _show_end_screen(_course: Course) -> void:
+	var show_sponsored_screen := UserProfiles.get_profile().is_sponsored_profile
+	
 	for page in _pages.get_children():
 		page.hide()
-	_end_screen.show()
+	
+	if show_sponsored_screen:
+		_end_screen.show()
+	else:
+		_sponsorless_end_screen.show()
 
 
 func _go_to_welcome_screen() -> void:

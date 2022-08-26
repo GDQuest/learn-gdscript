@@ -1,11 +1,10 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
 [ext_resource path="res://ui/screens/end_screen/main_menu/sky_evening.png" type="Texture" id=3]
-[ext_resource path="res://ui/screens/end_screen/main_menu/logo.png" type="Texture" id=4]
+[ext_resource path="res://ui/screens/end_screen/SponsorlessEndScreen.gd" type="Script" id=4]
 [ext_resource path="res://ui/components/QuitButton.tscn" type="PackedScene" id=5]
-[ext_resource path="res://ui/screens/end_screen/EndScreen.gd" type="Script" id=6]
 [ext_resource path="res://ui/components/FullScreenButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/theme/panel_breadcrumbs.tres" type="StyleBox" id=8]
 [ext_resource path="res://ui/components/SmoothScrollContainer.gd" type="Script" id=9]
@@ -78,44 +77,12 @@ VScrollBar/styles/grabber_highlight = SubResource( 7 )
 VScrollBar/styles/grabber_pressed = SubResource( 8 )
 VScrollBar/styles/scroll = SubResource( 9 )
 
-[sub_resource type="StyleBoxFlat" id=4]
-content_margin_left = 8.0
-content_margin_right = 8.0
-content_margin_top = 8.0
-content_margin_bottom = 8.0
-bg_color = Color( 0.0901961, 0.0941176, 0.188235, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 0.960784, 0.980392, 0.980392, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id=3]
-content_margin_left = 8.0
-content_margin_right = 8.0
-content_margin_top = 8.0
-content_margin_bottom = 8.0
-bg_color = Color( 0.0901961, 0.0941176, 0.188235, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 0.14902, 0.776471, 0.968627, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[node name="EndScreen" type="Control"]
+[node name="SponsorlessEndScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 2495, 16 )
 theme = ExtResource( 2 )
-script = ExtResource( 6 )
+script = ExtResource( 4 )
 
 [node name="Layout" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -222,90 +189,44 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="Label" type="Label" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_top = 15.0
+margin_top = 302.0
 margin_right = 720.0
-margin_bottom = 46.0
+margin_bottom = 333.0
 custom_fonts/font = ExtResource( 1 )
 text = "Congratulations!"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_top = 62.0
+margin_top = 349.0
 margin_right = 720.0
-margin_bottom = 207.0
+margin_bottom = 465.0
 bbcode_enabled = true
-bbcode_text = "You completed Learn GDScript From Zero. You now have the basics you need to dive into game creation with the Godot game engine.
+bbcode_text = "You completed Learn GDScript From Zero. You now have the basics you need to make games with the Godot game engine.
 
-If you're looking for a free series to keep learning the basics with us, you can move on to [url=https://www.gdquest.com/tutorial/godot/learning-paths/getting-started-in-2021/]Getting Started with Godot[/url]."
-text = "You completed Learn GDScript From Zero. You now have the basics you need to dive into game creation with the Godot game engine.
+You can keep learning with the free series [url=https://docs.godotengine.org/en/stable/getting_started/step_by_step/index.html]Getting Started with Godot[/url]."
+text = "You completed Learn GDScript From Zero. You now have the basics you need to make games with the Godot game engine.
 
-If you're looking for a free series to keep learning the basics with us, you can move on to Getting Started with Godot."
+You can keep learning with the free series Getting Started with Godot."
 fit_content_height = true
 
 [node name="Label4" type="Label" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_top = 223.0
+margin_top = 481.0
 margin_right = 720.0
-margin_bottom = 254.0
+margin_bottom = 512.0
 custom_fonts/font = ExtResource( 1 )
-text = "Or level up faster by taking this shortcut"
+text = "This is an Open-Source project!"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_top = 270.0
+margin_top = 528.0
 margin_right = 720.0
-margin_bottom = 560.0
+margin_bottom = 644.0
 bbcode_enabled = true
-bbcode_text = "There are loads of free game creation tutorials, but they don't form a clear path.
+bbcode_text = "Like Godot, this app and course is free and open-source. 
 
-Worse, most of them are like step-by-step recipes. But as you learned, you can't become a developer by just following recipes.
+You can find the app's source code and contribute translations here: [url=\"https://github.com/GDQuest/learn-gdscript\"]Learn GDScript From Zero (Github repository)[/url]."
+text = "Like Godot, this app and course are free and open-source. 
 
-Every project has unique challenges and requires [i]creative problem solving[/i]. You need to [i]think like a programmer[/i].
-
-Learning that on your own can take years."
-text = "There are loads of free game creation tutorials, but they don't form a clear path.
-
-Worse, most of them are like step-by-step recipes. But as you learned, you can't become a developer by just following recipes.
-
-Every project has unique challenges and requires creative problem solving. You need to think like a programmer.
-
-Learning that on your own can take years."
+You can find the app's source code and contribute translations here: Learn GDScript From Zero (Github repository)."
 fit_content_height = true
-
-[node name="Label3" type="Label" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_top = 576.0
-margin_right = 720.0
-margin_bottom = 607.0
-custom_fonts/font = ExtResource( 1 )
-text = "Learn to Code From Zero, with Godot"
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_top = 623.0
-margin_right = 720.0
-margin_bottom = 855.0
-bbcode_enabled = true
-bbcode_text = "This app is the free part of our in-depth course, [url=https://gdquest.mavenseed.com/courses/learn-to-code-from-zero-with-godot][b]Learn to Code From Zero, with Godot[/b][/url].
-
-The course picks up right where this app ends to take you to the point where you can make [i]your[/i] game.
-
-It's the only course that'll truly teach you [i]how to become a game developer[/i] with Godot."
-text = "This app is the free part of our in-depth course, Learn to Code From Zero, with Godot.
-
-The course picks up right where this app ends to take you to the point where you can make your game.
-
-It's the only course that'll truly teach you how to become a game developer with Godot."
-fit_content_height = true
-
-[node name="LearnMoreButton" type="Button" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_left = 210.0
-margin_top = 871.0
-margin_right = 510.0
-margin_bottom = 931.0
-rect_min_size = Vector2( 300, 60 )
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 4
-custom_colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
-custom_styles/hover = SubResource( 4 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 3 )
-text = "Learn More"
 
 [node name="Control2" type="Control" parent="Layout/PanelContainer/Sky"]
 margin_left = 960.0
@@ -339,38 +260,6 @@ mouse_filter = 2
 texture = ExtResource( 10 )
 expand = true
 stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="Logo" type="TextureRect" parent="Layout/PanelContainer/Sky/Control2"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -249.0
-margin_top = -412.0
-margin_right = 243.0
-margin_bottom = -73.0
-mouse_filter = 2
-texture = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="Logo2" type="TextureRect" parent="Layout/PanelContainer/Sky/Control2/Logo"]
-modulate = Color( 0.129412, 0.517647, 0.756863, 1 )
-show_behind_parent = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -247.0
-margin_top = -162.5
-margin_right = 245.0
-margin_bottom = 176.5
-mouse_filter = 2
-texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
