@@ -11,7 +11,7 @@ func run():
 	yield()
 	for i in [0, 1, 2]:
 		emit_signal(\"highlight_line\", 1)
-		emit_signal(\"arrow_animation\", [16 + 3*i,1], [5,6])
+		emit_signal(\"arrow_animation\", [17 + 3*i,1], [5,7])
 		yield()
 		print_output([i])
 		emit_signal(\"highlight_line\", 2)
@@ -29,8 +29,8 @@ margin_top = 7.0
 margin_right = 788.0
 margin_bottom = 267.0
 gdscript_code = "func run():
-	for number in [0, 1, 2]:
-		print(number)"
+	for element in [0, 1, 2]:
+		print(element)"
 
 [node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 anchor_right = 0.0
