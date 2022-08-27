@@ -20,10 +20,12 @@ var _base_text_font_size := preload("res://ui/theme/fonts/font_text.tres").size
 
 onready var _gdscript_text_edit := $GDScriptCode as TextEdit
 onready var _run_button := $Frame/HBoxContainer/RunButton as Button
+onready var _step_button := $Frame/HBoxContainer/StepButton as Button
 onready var _reset_button := $Frame/HBoxContainer/ResetButton as Button
 onready var _frame_container := $Frame/PanelContainer as Control
 onready var _sliders := $Frame/Sliders as VBoxContainer
-
+onready var _console_highlighter : ConsoleHighlighter = $ConsoleHighlighter
+onready var _script_function_state : GDScriptFunctionState
 onready var _start_code_example_height := _gdscript_text_edit.rect_size.y
 
 
@@ -33,6 +35,7 @@ func _ready() -> void:
 		_update_gdscript_text_edit_width(UserProfiles.get_profile().font_size_scale)
 
 	_run_button.connect("pressed", self, "run")
+	_step_button.connect("pressed", self, "step")
 	_reset_button.connect("pressed", self, "reset")
 	_frame_container.connect("resized", self, "_center_scene_instance")
 
@@ -61,13 +64,43 @@ func _get_configuration_warning() -> String:
 
 
 func run() -> void:
-	assert(_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()])
-	# warning-ignore:unsafe_method_access
-	_scene_instance.run()
-	if _scene_instance.has_method("wrap_inside_frame"):
+	if not _script_function_state:
+		assert(_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()])
 		# warning-ignore:unsafe_method_access
-		_scene_instance.wrap_inside_frame(_frame_container.get_rect())
+		var state : GDScriptFunctionState = _scene_instance.run()
+		while state:
+			state = state.resume()
+		if _scene_instance.has_method("wrap_inside_frame"):
+			# warning-ignore:unsafe_method_access
+			_scene_instance.wrap_inside_frame(_frame_container.get_rect())
 
+	else:
+		_script_function_state = _script_function_state.resume()
+		while _script_function_state:
+			_script_function_state = _script_function_state.resume()
+
+	_gdscript_text_edit.highlight_current_line = false
+	_console_highlighter.highlight_rects = []
+	_console_highlighter.reset_curve()
+
+
+func step() -> void:
+	if not _script_function_state:
+		assert(_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()])
+		# warning-ignore:unsafe_method_access
+		var state = _scene_instance.run()
+		if _scene_instance.has_method("wrap_inside_frame"):
+			# warning-ignore:unsafe_method_access
+			_scene_instance.wrap_inside_frame(_frame_container.get_rect())
+		if state is GDScriptFunctionState:
+			_script_function_state = state
+	else:
+		_console_highlighter.highlight_rects = []
+		_console_highlighter.reset_curve()
+
+		_script_function_state = _script_function_state.resume()
+		if not _script_function_state:
+			_gdscript_text_edit.highlight_current_line = false
 
 func reset() -> void:
 	if _scene_instance.has_method("reset"):
@@ -135,7 +168,7 @@ func create_slider_for(property_name, min_value := 0.0, max_value := 100.0, step
 	slider.rect_min_size.x = 100.0
 	slider.connect("value_changed", self, "_set_instance_value", [property_name, value_label])
 	_set_instance_value(property_value, property_name, value_label)
-	
+
 	if color != Color.black:
 		var hslider_grabber_highlight := HSLIDER_GRABBER_HIGHLIGHT.duplicate()
 		hslider_grabber_highlight.bg_color = color
@@ -144,7 +177,7 @@ func create_slider_for(property_name, min_value := 0.0, max_value := 100.0, step
 		value_label.add_color_override("font_color", color)
 		slider.add_stylebox_override("grabber_area", hslider_grabber_highlight)
 		slider.add_stylebox_override("grabber_area_highlight", hslider_grabber_highlight)
-	
+
 	return slider
 
 
@@ -164,25 +197,72 @@ func _center_scene_instance() -> void:
 
 
 func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
+	if new_scene_instance is OutputConsole:
+		new_scene_instance.connect("highlight_line", self, "_on_highlight_line")
+		new_scene_instance.connect("arrow_animation", self, "_on_arrow_animation")
+
 	_scene_instance = new_scene_instance
 	emit_signal("scene_instance_set")
 	_scene_instance.show_behind_parent = true
 	_frame_container.add_child(_scene_instance)
 	_center_scene_instance()
 	if _scene_instance.has_method('get_code'):
-		# Skip a frame to allow all nodes to be ready. 
+		# Skip a frame to allow all nodes to be ready.
 		# Avoids overwriting text via yield(node, "ready").
 		yield(get_tree(), "idle_frame")
 		gdscript_code = _scene_instance.get_code(gdscript_code)
+		_scene_instance.set_code()
 		set_code(gdscript_code)
 
 
 	_reset_button.visible = _scene_instance.has_method("reset")
-	if _scene_instance.has_method("run"):
-		_run_button.show()
-	elif _run_button.visible:
-		_run_button.hide()
+	_run_button.visible = _scene_instance.has_method("run")
+	_step_button.visible = _scene_instance.get_script().source_code.find("yield()") >= 0
+
+	if not _run_button.visible:
 		printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.filename])
+
+
+func _on_highlight_line(line_number : int) -> void:
+	# wait to see if script was interrupted
+	yield(get_tree(), "idle_frame")
+
+	if not _script_function_state:
+		return
+
+	_gdscript_text_edit.highlight_current_line = true
+	_gdscript_text_edit.cursor_set_line(line_number)
+
+
+func _on_arrow_animation(chars1 : Array, chars2: Array) -> void:
+	# wait to see if script was interrupted
+	yield(get_tree(), "idle_frame")
+	printt(chars1, chars2)
+
+	if not _script_function_state:
+		return
+
+	var current_line := _gdscript_text_edit.cursor_get_line()
+
+	var offset := Vector2.ZERO
+	# var x_offset := _gdscript_text_edit.get_total_gutter_width() + _gdscript_text_edit.rect_position.x
+	offset.x = _gdscript_text_edit.rect_position.x + 3
+
+	var rect1 := _gdscript_text_edit.get_rect_at_line_column(current_line, chars1[0])
+	var rect2 := _gdscript_text_edit.get_rect_at_line_column(current_line, chars2[0])
+
+	rect1.position += offset
+	rect2.position += offset
+
+	rect1.size.x *= chars1[1]
+	rect2.size.x *= chars2[1]
+
+	var rects := [rect1, rect2]
+
+	_console_highlighter.highlight_rects = rects
+	_console_highlighter.initial_point = rect1.position + Vector2(rect1.size.x/2,-5)
+	_console_highlighter.end_point = rect2.position  + Vector2(rect2.size.x/2,-5)
+	_console_highlighter.draw_curve()
 
 
 func _update_gdscript_text_edit_width(new_font_scale: int) -> void:
