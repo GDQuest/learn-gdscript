@@ -7,8 +7,18 @@
 script/source = "extends OutputConsole
 
 func run() -> void:
+	clear_messages()
+	emit_signal(\"highlight_line\", 0)
+	yield()
+	var _i := 0
 	for character in \"Robot\":
+		emit_signal(\"highlight_line\", 1)
+		emit_signal(\"arrow_animation\", [19 + _i, 1], [5,9])
+		_i += 1
+		yield()
 		print_output([character])
+		emit_signal(\"highlight_line\", 2)
+		yield()
 "
 
 [node name="PrintCharactersInName" type="PanelContainer"]
@@ -22,7 +32,7 @@ __meta__ = {
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 764.0
+margin_right = 788.0
 margin_bottom = 267.0
 gdscript_code = "func run():
 	for character in \"Robot\":
@@ -31,8 +41,8 @@ gdscript_code = "func run():
 [node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 648.0
-margin_right = 757.0
+margin_left = 672.0
+margin_right = 781.0
 margin_bottom = 260.0
 size_flags_horizontal = 3
 script = SubResource( 1 )
