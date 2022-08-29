@@ -6,6 +6,7 @@ extends HBoxContainer
 
 signal scene_instance_set
 
+const ConsoleArrowAnimationScene := preload("res://ui/components/ConsoleArrowAnimation.tscn")
 const ERROR_NO_RUN_FUNCTION := "Scene %s doesn't have a run() function. The Run button won't work."
 const HSLIDER_GRABBER_HIGHLIGHT := preload("res://ui/theme/hslider_grabber_highlight.tres")
 
@@ -24,7 +25,7 @@ onready var _step_button := $Frame/HBoxContainer/StepButton as Button
 onready var _reset_button := $Frame/HBoxContainer/ResetButton as Button
 onready var _frame_container := $Frame/PanelContainer as Control
 onready var _sliders := $Frame/Sliders as VBoxContainer
-onready var _console_highlighter : ConsoleHighlighter = $ConsoleHighlighter
+onready var _console_arrow_animation : ConsoleArrowAnimation
 onready var _script_function_state : GDScriptFunctionState
 onready var _start_code_example_height := _gdscript_text_edit.rect_size.y
 
@@ -80,8 +81,10 @@ func run() -> void:
 			_script_function_state = _script_function_state.resume()
 
 	_gdscript_text_edit.highlight_current_line = false
-	_console_highlighter.highlight_rects = []
-	_console_highlighter.reset_curve()
+
+	if _console_arrow_animation:
+		_console_arrow_animation.highlight_rects = []
+		_console_arrow_animation.reset_curve()
 
 
 func step() -> void:
@@ -95,8 +98,9 @@ func step() -> void:
 		if state is GDScriptFunctionState:
 			_script_function_state = state
 	else:
-		_console_highlighter.highlight_rects = []
-		_console_highlighter.reset_curve()
+		if _console_arrow_animation:
+			_console_arrow_animation.highlight_rects = []
+			_console_arrow_animation.reset_curve()
 
 		_script_function_state = _script_function_state.resume()
 		if not _script_function_state:
@@ -237,16 +241,18 @@ func _on_highlight_line(line_number : int) -> void:
 func _on_arrow_animation(chars1 : Array, chars2: Array) -> void:
 	# wait to see if script was interrupted
 	yield(get_tree(), "idle_frame")
-	printt(chars1, chars2)
 
 	if not _script_function_state:
 		return
 
+	if not _console_arrow_animation:
+		_console_arrow_animation = ConsoleArrowAnimationScene.instance()
+		add_child(_console_arrow_animation)
+
 	var current_line := _gdscript_text_edit.cursor_get_line()
 
 	var offset := Vector2.ZERO
-	# var x_offset := _gdscript_text_edit.get_total_gutter_width() + _gdscript_text_edit.rect_position.x
-	offset.x = _gdscript_text_edit.rect_position.x + 3
+	offset.x = _gdscript_text_edit.rect_position.x + 2
 
 	var rect1 := _gdscript_text_edit.get_rect_at_line_column(current_line, chars1[0])
 	var rect2 := _gdscript_text_edit.get_rect_at_line_column(current_line, chars2[0])
@@ -254,15 +260,15 @@ func _on_arrow_animation(chars1 : Array, chars2: Array) -> void:
 	rect1.position += offset
 	rect2.position += offset
 
-	rect1.size.x *= chars1[1]
-	rect2.size.x *= chars2[1]
+	rect1.size.x = (rect1.size.x * chars1[1]) + 4
+	rect2.size.x = (rect2.size.x * chars2[1]) + 4
 
 	var rects := [rect1, rect2]
 
-	_console_highlighter.highlight_rects = rects
-	_console_highlighter.initial_point = rect1.position + Vector2(rect1.size.x/2,-5)
-	_console_highlighter.end_point = rect2.position  + Vector2(rect2.size.x/2,-5)
-	_console_highlighter.draw_curve()
+	_console_arrow_animation.highlight_rects = rects
+	_console_arrow_animation.initial_point = rect1.position + Vector2(rect1.size.x/2,-5)
+	_console_arrow_animation.end_point = rect2.position  + Vector2(rect2.size.x/2,-5)
+	_console_arrow_animation.draw_curve()
 
 
 func _update_gdscript_text_edit_width(new_font_scale: int) -> void:

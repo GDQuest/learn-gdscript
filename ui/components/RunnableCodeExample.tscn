@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/RunnableCodeExample.gd" type="Script" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://ui/theme/button_outline_pressed.tres" type="StyleBox" id=8]
 [ext_resource path="res://ui/theme/button_outline_normal_muted.tres" type="StyleBox" id=9]
 [ext_resource path="res://ui/theme/button_outline_focus.tres" type="StyleBox" id=10]
-[ext_resource path="res://ui/components/ConsoleHighlighter.tscn" type="PackedScene" id=11]
 
 [node name="RunnableCodeExample" type="HBoxContainer"]
 margin_right = 1030.0
@@ -118,6 +117,7 @@ __meta__ = {
 }
 
 [node name="GDScriptCode" type="TextEdit" parent="."]
+visible = false
 margin_left = 523.0
 margin_right = 1030.0
 margin_bottom = 278.0
@@ -139,5 +139,3 @@ caret_blink = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ConsoleHighlighter" parent="." instance=ExtResource( 11 )]
