@@ -27,7 +27,7 @@ onready var _frame_container := $Frame/PanelContainer as Control
 onready var _sliders := $Frame/Sliders as VBoxContainer
 
 onready var _console_arrow_animation: ConsoleArrowAnimation
-# Used to keep track of the code example's run() function in case it has 
+# Used to keep track of the code example's run() function in case it has
 # calls to yield() and we want the user to step through the code.
 onready var _script_function_state: GDScriptFunctionState
 
@@ -35,7 +35,7 @@ onready var _start_code_example_height := _gdscript_text_edit.rect_size.y
 
 
 func _ready() -> void:
-	Events.connect("font_size_scale_changed", self, "_update_gdscript_text_edit_width")
+	Events.connect("font_size_scale_changed", self, "_on_Events_font_size_scale_changed")
 	if not Engine.editor_hint:
 		_update_gdscript_text_edit_width(UserProfiles.get_profile().font_size_scale)
 
@@ -71,12 +71,14 @@ func _get_configuration_warning() -> String:
 # Called when pressing the Run button. Calls the run() function of the example.
 func run() -> void:
 	if not _script_function_state:
-		assert(_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()])
+		assert(
+			_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()]
+		)
 		# warning-ignore:unsafe_method_access
 		# We use yield() in some code examples to allow the user to step through
 		# instructions. When pressing the Run button, we skip all yields and run
 		# all instructions.
-		var state : GDScriptFunctionState = _scene_instance.run()
+		var state: GDScriptFunctionState = _scene_instance.run()
 		while state:
 			state = state.resume()
 		if _scene_instance.has_method("wrap_inside_frame"):
@@ -90,16 +92,16 @@ func run() -> void:
 
 	_gdscript_text_edit.highlight_current_line = false
 
-	if _console_arrow_animation:
-		_console_arrow_animation.highlight_rects = []
-		_console_arrow_animation.reset_curve()
+	_clear_animated_arrows()
 
 
 # Called when pressing the Step button. Available only on examples that contain
 # calls to yield().
 func step() -> void:
 	if not _script_function_state:
-		assert(_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()])
+		assert(
+			_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()]
+		)
 		# warning-ignore:unsafe_method_access
 		var state = _scene_instance.run()
 		if _scene_instance.has_method("wrap_inside_frame"):
@@ -161,7 +163,9 @@ func set_run_button_label(new_text: String) -> void:
 		_run_button.text = run_button_label
 
 
-func create_slider_for(property_name, min_value := 0.0, max_value := 100.0, step := 1.0, color := Color.black) -> HSlider:
+func create_slider_for(
+	property_name, min_value := 0.0, max_value := 100.0, step := 1.0, color := Color.black
+) -> HSlider:
 	if not _scene_instance:
 		yield(self, "scene_instance_set")
 	var box := HBoxContainer.new()
@@ -221,14 +225,13 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	_scene_instance.show_behind_parent = true
 	_frame_container.add_child(_scene_instance)
 	_center_scene_instance()
-	if _scene_instance.has_method('get_code'):
+	if _scene_instance.has_method("get_code"):
 		# Skip a frame to allow all nodes to be ready.
 		# Avoids overwriting text via yield(node, "ready").
 		yield(get_tree(), "idle_frame")
 		gdscript_code = _scene_instance.get_code(gdscript_code)
 		_scene_instance.set_code()
 		set_code(gdscript_code)
-
 
 	_reset_button.visible = _scene_instance.has_method("reset")
 	_run_button.visible = _scene_instance.has_method("run")
@@ -238,7 +241,7 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 		printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.filename])
 
 
-func _on_highlight_line(line_number : int) -> void:
+func _on_highlight_line(line_number: int) -> void:
 	# wait to see if script was interrupted
 	yield(get_tree(), "idle_frame")
 
@@ -249,7 +252,7 @@ func _on_highlight_line(line_number : int) -> void:
 	_gdscript_text_edit.cursor_set_line(line_number)
 
 
-func _on_arrow_animation(chars1 : Array, chars2: Array) -> void:
+func _on_arrow_animation(chars1: Array, chars2: Array) -> void:
 	# wait to see if script was interrupted
 	yield(get_tree(), "idle_frame")
 
@@ -277,8 +280,8 @@ func _on_arrow_animation(chars1 : Array, chars2: Array) -> void:
 	var rects := [rect1, rect2]
 
 	_console_arrow_animation.highlight_rects = rects
-	_console_arrow_animation.initial_point = rect1.position + Vector2(rect1.size.x/2,-5)
-	_console_arrow_animation.end_point = rect2.position  + Vector2(rect2.size.x/2,-5)
+	_console_arrow_animation.initial_point = rect1.position + Vector2(rect1.size.x / 2, -5)
+	_console_arrow_animation.end_point = rect2.position + Vector2(rect2.size.x / 2, -5)
 	_console_arrow_animation.draw_curve()
 
 
@@ -288,7 +291,14 @@ func _update_gdscript_text_edit_width(new_font_scale: int) -> void:
 		/ _base_text_font_size
 	)
 	_gdscript_text_edit.rect_min_size.y = _start_code_example_height * font_size_multiplier
-	# Forces the text wrapping to update. Without this, the code can overflow
-	# the container when changing the font size.
-	# TODO: There is some computation error in the TextEdit, it seems. Need to investigate it further.
-	pass
+
+
+func _clear_animated_arrows() -> void:
+	if _console_arrow_animation:
+		_console_arrow_animation.highlight_rects = []
+		_console_arrow_animation.reset_curve()
+
+
+func _on_Events_font_size_scale_changed(new_font_scale: int) -> void:
+	_clear_animated_arrows()
+	_update_gdscript_text_edit_width(new_font_scale)
