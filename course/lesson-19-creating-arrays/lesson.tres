@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=28 format=2]
+[gd_resource type="Resource" load_steps=31 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/ContentBlock.gd" type="Script" id=2]
@@ -32,7 +32,7 @@ title = ""
 type = 0
 text = "A list of values, numbers or otherwise, has a precise name in code: we call them [i]arrays[/i]. So we can say calling the [code]range()[/code] function produces an [i]array[/i] of numbers.
 
-We could directly write and use that array inside our [code]for[/code] loop instead of the [code]range()[/code] function."
+We could directly write and use that array inside our [code]for[/code] loop instead of the [code]range()[/code] function. You can run the next function step-by-step to see how it works."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -52,8 +52,40 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-19-creating-arrays/content-QiGjB7tK.tres"
 title = ""
 type = 0
-text = "As you can see, the code still works the same."
+text = "As you can see, the code still works the same. Notice that when we create a [code]for[/code] loop, we also create a local variable to which the loop assigns one value per iteration. Above, we named it [code]number[/code] because the array we loop over contains three numbers (0, 1, and 2).
+
+But we could name it anything we'd like!"
 visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=25]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-Gx0c7DDi.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "res://course/lesson-19-creating-arrays/visuals/ExampleForArrayDifferentName.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=26]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-GjB7tKRH.tres"
+title = ""
+type = 0
+text = "If we \"unwrap\" the [code]for[/code] loop above, we'd get the following code with the exact same behaviour:"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=27]
+script = ExtResource( 2 )
+content_id = "res://course/lesson-19-creating-arrays/content-JMQ2XNwQ.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "res://course/lesson-19-creating-arrays/visuals/ExampleForArrayUnwrapped.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -290,5 +322,5 @@ description = "Write an array to select all units on the board in this strategy 
 [resource]
 script = ExtResource( 1 )
 title = "Creating arrays"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 18 ), SubResource( 17 ), SubResource( 3 ), SubResource( 4 ), SubResource( 24 ), SubResource( 5 ), SubResource( 19 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 15 ), SubResource( 20 ), SubResource( 21 ), SubResource( 16 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 18 ), SubResource( 17 ), SubResource( 3 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 4 ), SubResource( 24 ), SubResource( 5 ), SubResource( 19 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 15 ), SubResource( 20 ), SubResource( 21 ), SubResource( 16 ) ]
 practices = [ SubResource( 22 ), SubResource( 23 ) ]

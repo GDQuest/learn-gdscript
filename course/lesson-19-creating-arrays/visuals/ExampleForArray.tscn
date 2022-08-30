@@ -7,8 +7,16 @@
 script/source = "extends OutputConsole
 
 func run():
+	clear_messages()
+	emit_signal(\"line_highlight_requested\", 0)
+	yield()
 	for i in [0, 1, 2]:
+		emit_signal(\"line_highlight_requested\", 1)
+		emit_signal(\"animate_arrow_requested\", [16 + 3*i,1], [5,6])
+		yield()
 		print_output([i])
+		emit_signal(\"line_highlight_requested\", 2)
+		yield()
 "
 
 [node name="Panel" type="PanelContainer"]
@@ -19,7 +27,7 @@ size_flags_horizontal = 3
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 764.0
+margin_right = 788.0
 margin_bottom = 267.0
 gdscript_code = "func run():
 	for number in [0, 1, 2]:
@@ -28,8 +36,8 @@ gdscript_code = "func run():
 [node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 648.0
-margin_right = 757.0
+margin_left = 672.0
+margin_right = 781.0
 margin_bottom = 260.0
 size_flags_horizontal = 3
 script = SubResource( 1 )

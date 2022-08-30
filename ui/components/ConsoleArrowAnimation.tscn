@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/components/ConsoleArrowAnimation.gd" type="Script" id=1]
+[ext_resource path="res://ui/icons/chevron.png" type="Texture" id=2]
+
+[node name="ConsoleArrowAnimation" type="Node2D"]
+script = ExtResource( 1 )
+initial_point = Vector2( 400, 200 )
+end_point = Vector2( 200, 200 )
+
+[node name="Arrow" type="Sprite" parent="."]
+visible = false
+modulate = Color( 1, 0.960784, 0.25098, 1 )
+position = Vector2( 2, 2 )
+rotation = 2.41069
+scale = Vector2( 0.593671, 0.593671 )
+texture = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]

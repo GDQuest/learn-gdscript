@@ -6,19 +6,42 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends OutputConsole
 
-func run() -> void:
+func run():
 	clear_messages()
 	emit_signal(\"line_highlight_requested\", 0)
 	yield()
-	for number in range(3):
-		emit_signal(\"line_highlight_requested\", 1)
-		yield()
-		print_output([number])
-		emit_signal(\"line_highlight_requested\", 2)
-		yield()
+	
+	var array = [0, 1, 2]
+	emit_signal(\"line_highlight_requested\", 1)
+	yield()
+	
+	var number
+	emit_signal(\"line_highlight_requested\", 2)
+	yield()
+	
+	number = array[0]
+	emit_signal(\"line_highlight_requested\", 4)
+	yield()
+	print_output([number])
+	emit_signal(\"line_highlight_requested\", 5)
+	yield()
+	
+	number = array[1]
+	emit_signal(\"line_highlight_requested\", 7)
+	yield()
+	print_output([number])
+	emit_signal(\"line_highlight_requested\", 8)
+	yield()
+	
+	number = array[2]
+	emit_signal(\"line_highlight_requested\", 10)
+	yield()
+	print_output([number])
+	emit_signal(\"line_highlight_requested\", 11)
+	yield()
 "
 
-[node name="PrintForLoop" type="PanelContainer"]
+[node name="Panel" type="PanelContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
@@ -29,8 +52,17 @@ margin_top = 7.0
 margin_right = 788.0
 margin_bottom = 267.0
 gdscript_code = "func run():
-	for number in range(3):
-		print(number)"
+	var array = [0, 1, 2]
+	var element
+	
+	element = array[0]
+	print(element)
+	
+	element = array[1]
+	print(element)
+	
+	element = array[2]
+	print(element)"
 
 [node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 anchor_right = 0.0

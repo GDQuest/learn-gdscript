@@ -8,22 +8,26 @@ script/source = "extends OutputConsole
 
 func run() -> void:
 	clear_messages()
+	emit_signal(\"line_highlight_requested\", 0)
+	yield()
 	for number in range(3):
+		emit_signal(\"line_highlight_requested\", 1)
+		emit_signal(\"animate_arrow_requested\", [16 + (3*number),1], [5,6])
+		yield()
 		print_output([number])
+		emit_signal(\"line_highlight_requested\", 2)
+		yield()
 "
 
 [node name="PrintForLoop" type="PanelContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 764.0
+margin_right = 788.0
 margin_bottom = 267.0
 gdscript_code = "func run():
 	for number in [0, 1, 2]:
