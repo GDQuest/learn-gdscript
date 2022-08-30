@@ -44,13 +44,14 @@ func run():
 [node name="Panel" type="PanelContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
+rect_min_size = Vector2( 0, 400 )
 size_flags_horizontal = 3
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 788.0
-margin_bottom = 267.0
+margin_bottom = 393.0
 gdscript_code = "func run():
 	var array = [0, 1, 2]
 	var element
@@ -69,6 +70,6 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 672.0
 margin_right = 781.0
-margin_bottom = 260.0
+margin_bottom = 386.0
 size_flags_horizontal = 3
 script = SubResource( 1 )
