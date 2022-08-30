@@ -195,9 +195,14 @@ export_custom(){
   dir=$(dirname "$output")
   mkdir -p "$dir"
   prepare_versionfile
+  # THERE IS NO DIFFERENCE BETWEEN A DEBUG AND A RELEASE BUILD 
+  # we export a debug build in all cases, due to https://github.com/GDQuest/learn-gdscript/issues/618
+  # we could remove the `debug` keyword, but it is kept both for backwards
+  # compatibility, and in case we solve this differently in the future
+  # in which case, all that needs to be done is replce `export-debug` with `export`
   if [ -z "$debug" ]; then
-    echo "godot --quiet --no-window --export \"$export_name\" \"$output\""
-    test "$dry" || godot --quiet --no-window --export "$export_name" "$output"
+    echo "godot --quiet --no-window --export-debug \"$export_name\" \"$output\""
+    test "$dry" || godot --quiet --no-window --export-debug "$export_name" "$output"
   else
     echo "godot --quiet --no-window --export-debug \"$export_name\" \"$output\""
     test "$dry" || godot --quiet --no-window --export-debug "$export_name" "$output"
