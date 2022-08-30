@@ -3,8 +3,8 @@ class_name OutputConsole
 extends PanelContainer
 
 signal reference_clicked(file_name, line_nb, character)
-signal highlight_line(line_number)
-signal arrow_animation(chars1, chars2)
+signal line_highlight_requested(line_number)
+signal animate_arrow_requested(chars1, chars2)
 
 const OutputConsoleErrorMessage := preload("./OutputConsoleErrorMessage.gd")
 const OutputConsoleErrorMessageScene := preload("./OutputConsoleErrorMessage.tscn")

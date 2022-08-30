@@ -606,7 +606,7 @@ func _on_console_toggled() -> void:
 
 
 func _on_code_reference_clicked(_file_name: String, line: int, character: int) -> void:
-	_code_editor.slice_editor.highlight_line(line, character)
+	_code_editor.slice_editor.line_highlight_requested(line, character)
 
 
 func _on_previous_requested() -> void:

@@ -8,36 +8,36 @@ script/source = "extends OutputConsole
 
 func run():
 	clear_messages()
-	emit_signal(\"highlight_line\", 0)
+	emit_signal(\"line_highlight_requested\", 0)
 	yield()
 	
 	var array = [0, 1, 2]
-	emit_signal(\"highlight_line\", 1)
+	emit_signal(\"line_highlight_requested\", 1)
 	yield()
 	
 	var number
-	emit_signal(\"highlight_line\", 2)
+	emit_signal(\"line_highlight_requested\", 2)
 	yield()
 	
 	number = array[0]
-	emit_signal(\"highlight_line\", 4)
+	emit_signal(\"line_highlight_requested\", 4)
 	yield()
 	print_output([number])
-	emit_signal(\"highlight_line\", 5)
+	emit_signal(\"line_highlight_requested\", 5)
 	yield()
 	
 	number = array[1]
-	emit_signal(\"highlight_line\", 7)
+	emit_signal(\"line_highlight_requested\", 7)
 	yield()
 	print_output([number])
-	emit_signal(\"highlight_line\", 8)
+	emit_signal(\"line_highlight_requested\", 8)
 	yield()
 	
 	number = array[2]
-	emit_signal(\"highlight_line\", 10)
+	emit_signal(\"line_highlight_requested\", 10)
 	yield()
 	print_output([number])
-	emit_signal(\"highlight_line\", 11)
+	emit_signal(\"line_highlight_requested\", 11)
 	yield()
 "
 

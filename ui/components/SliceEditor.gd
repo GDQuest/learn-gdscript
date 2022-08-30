@@ -125,7 +125,7 @@ func set_errors(new_errors: Array) -> void:
 	_reset_overlays()
 
 
-func highlight_line(line_index: int, at_char: int = 0) -> void:
+func line_highlight_requested(line_index: int, at_char: int = 0) -> void:
 	if line_index < 0 or line_index >= get_line_count():
 		return
 	if at_char < 0:

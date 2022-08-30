@@ -25,8 +25,12 @@ onready var _step_button := $Frame/HBoxContainer/StepButton as Button
 onready var _reset_button := $Frame/HBoxContainer/ResetButton as Button
 onready var _frame_container := $Frame/PanelContainer as Control
 onready var _sliders := $Frame/Sliders as VBoxContainer
-onready var _console_arrow_animation : ConsoleArrowAnimation
-onready var _script_function_state : GDScriptFunctionState
+
+onready var _console_arrow_animation: ConsoleArrowAnimation
+# Used to keep track of the code example's run() function in case it has 
+# calls to yield() and we want the user to step through the code.
+onready var _script_function_state: GDScriptFunctionState
+
 onready var _start_code_example_height := _gdscript_text_edit.rect_size.y
 
 
@@ -64,10 +68,14 @@ func _get_configuration_warning() -> String:
 	return ""
 
 
+# Called when pressing the Run button. Calls the run() function of the example.
 func run() -> void:
 	if not _script_function_state:
 		assert(_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()])
 		# warning-ignore:unsafe_method_access
+		# We use yield() in some code examples to allow the user to step through
+		# instructions. When pressing the Run button, we skip all yields and run
+		# all instructions.
 		var state : GDScriptFunctionState = _scene_instance.run()
 		while state:
 			state = state.resume()
@@ -87,6 +95,8 @@ func run() -> void:
 		_console_arrow_animation.reset_curve()
 
 
+# Called when pressing the Step button. Available only on examples that contain
+# calls to yield().
 func step() -> void:
 	if not _script_function_state:
 		assert(_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()])
@@ -105,6 +115,7 @@ func step() -> void:
 		_script_function_state = _script_function_state.resume()
 		if not _script_function_state:
 			_gdscript_text_edit.highlight_current_line = false
+
 
 func reset() -> void:
 	if _scene_instance.has_method("reset"):
@@ -202,8 +213,8 @@ func _center_scene_instance() -> void:
 
 func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	if new_scene_instance is OutputConsole:
-		new_scene_instance.connect("highlight_line", self, "_on_highlight_line")
-		new_scene_instance.connect("arrow_animation", self, "_on_arrow_animation")
+		new_scene_instance.connect("line_highlight_requested", self, "_on_highlight_line")
+		new_scene_instance.connect("animate_arrow_requested", self, "_on_arrow_animation")
 
 	_scene_instance = new_scene_instance
 	emit_signal("scene_instance_set")

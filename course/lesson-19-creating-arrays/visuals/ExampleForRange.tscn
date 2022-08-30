@@ -8,13 +8,13 @@ script/source = "extends OutputConsole
 
 func run():
 	clear_messages()
-	emit_signal(\"highlight_line\", 0)
+	emit_signal(\"line_highlight_requested\", 0)
 	yield()
 	for i in range(3):
-		emit_signal(\"highlight_line\", 1)
+		emit_signal(\"line_highlight_requested\", 1)
 		yield()
 		print_output([i])
-		emit_signal(\"highlight_line\", 2)
+		emit_signal(\"line_highlight_requested\", 2)
 		yield()
 "
 

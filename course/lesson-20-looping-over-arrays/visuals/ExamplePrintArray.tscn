@@ -8,14 +8,14 @@ script/source = "extends OutputConsole
 
 func run() -> void:
 	clear_messages()
-	emit_signal(\"highlight_line\", 0)
+	emit_signal(\"line_highlight_requested\", 0)
 	yield()
 	for number in range(3):
-		emit_signal(\"highlight_line\", 1)
-		emit_signal(\"arrow_animation\", [16 + (3*number),1], [5,6])
+		emit_signal(\"line_highlight_requested\", 1)
+		emit_signal(\"animate_arrow_requested\", [16 + (3*number),1], [5,6])
 		yield()
 		print_output([number])
-		emit_signal(\"highlight_line\", 2)
+		emit_signal(\"line_highlight_requested\", 2)
 		yield()
 "
 
