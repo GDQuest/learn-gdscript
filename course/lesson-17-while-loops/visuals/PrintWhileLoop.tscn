@@ -8,19 +8,19 @@ script/source = "extends OutputConsole
 
 func run() -> void:
 	clear_messages()
-	emit_signal(\"highlight_line\", 0)
+	emit_signal(\"line_highlight_requested\", 0)
 	yield()
 	var number = 0
-	emit_signal(\"highlight_line\", 1)
+	emit_signal(\"line_highlight_requested\", 1)
 	yield()
 	while number < 4:
-		emit_signal(\"highlight_line\", 2)
+		emit_signal(\"line_highlight_requested\", 2)
 		yield()
 		print_output([number])
-		emit_signal(\"highlight_line\", 3)
+		emit_signal(\"line_highlight_requested\", 3)
 		yield()
 		number += 1
-		emit_signal(\"highlight_line\", 4)
+		emit_signal(\"line_highlight_requested\", 4)
 		yield()
 "
 
