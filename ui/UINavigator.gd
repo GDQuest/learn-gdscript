@@ -24,6 +24,7 @@ var _matches := {}
 
 var _lesson_index := 0
 var _lesson_count: int = 0
+var _is_navigating_to: bool = false
 
 onready var _home_button := $Layout/Header/MarginContainer/HeaderContent/HomeButton as Button
 onready var _outliner_button := $Layout/Header/MarginContainer/HeaderContent/OutlinerButton as Button
@@ -137,6 +138,10 @@ func _navigate_to_outliner() -> void:
 
 # Navigates forward to the next screen and adds it to the stack.
 func _navigate_to() -> void:
+	if _is_navigating_to: return
+	
+	_is_navigating_to = true
+	
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
 	var screen: UINavigatablePage
 	if target is Practice:
@@ -154,6 +159,7 @@ func _navigate_to() -> void:
 		_lesson_index = course.lessons.find(lesson) # Make sure the index is synced after navigation.
 	else:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
+		_is_navigating_to = false
 		return
 
 	_outliner_button.show()
@@ -191,6 +197,8 @@ func _navigate_to() -> void:
 		Events.emit_signal("practice_started", target)
 	elif target is Lesson:
 		Events.emit_signal("lesson_started", target)
+	
+	_is_navigating_to = false
 
 
 func _on_practice_next_requested(practice: Practice) -> void:
