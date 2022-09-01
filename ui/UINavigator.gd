@@ -24,7 +24,6 @@ var _matches := {}
 
 var _lesson_index := 0
 var _lesson_count: int = 0
-var _is_navigating_to: bool = false
 
 onready var _home_button := $Layout/Header/MarginContainer/HeaderContent/HomeButton as Button
 onready var _outliner_button := $Layout/Header/MarginContainer/HeaderContent/OutlinerButton as Button
@@ -96,6 +95,11 @@ func set_start_from_lesson(lesson_id: String) -> void:
 
 # Pops the last screen from the stack.
 func _navigate_back() -> void:
+	# Allowing to go back during a transition can cause the screen to get
+	# deleted, so we prevent this.
+	if _tween.is_active():
+		return
+
 	# Nothing to go back to, open the outliner.
 	if _screens_stack.size() < 2:
 		_navigate_to_outliner()
@@ -138,9 +142,8 @@ func _navigate_to_outliner() -> void:
 
 # Navigates forward to the next screen and adds it to the stack.
 func _navigate_to() -> void:
-	if _is_navigating_to: return
-	
-	_is_navigating_to = true
+	if _tween.is_active():
+		return
 	
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
 	var screen: UINavigatablePage
@@ -159,7 +162,6 @@ func _navigate_to() -> void:
 		_lesson_index = course.lessons.find(lesson) # Make sure the index is synced after navigation.
 	else:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
-		_is_navigating_to = false
 		return
 
 	_outliner_button.show()
@@ -198,8 +200,6 @@ func _navigate_to() -> void:
 	elif target is Lesson:
 		Events.emit_signal("lesson_started", target)
 	
-	_is_navigating_to = false
-
 
 func _on_practice_next_requested(practice: Practice) -> void:
 	var lesson_data := course.lessons[_lesson_index] as Lesson
@@ -284,8 +284,6 @@ func _transition_to(screen: Control, from_screen: Control = null, direction_in :
 		if screen.get_parent() == null:
 			_screen_container.add_child(screen)
 		screen.show()
-
-
 
 		yield(get_tree(), "idle_frame")
 		emit_signal("transition_completed")
