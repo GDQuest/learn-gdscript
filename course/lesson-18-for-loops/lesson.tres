@@ -122,7 +122,9 @@ title = ""
 type = 0
 text = "In the above example, for each item in the list [code][0, 1, 2][/code], Godot sets [code]number[/code] to the item, then executes the code in the [code]for[/code] loop.
 
-We'll get to explain arrays more throughly in the next lesson, but pay notice on the fact that [code]number[/code] is just a variable you are assigning values to using the [code]for[/code] loop, and you could name it anything you want. The above code has the exact same behaviour as the next example:"
+We'll explain arrays more throughly in the next lesson, but notice that [code]number[/code] is just a temporary variable. You create it when defining the loop, and the loop takes care of changing its value. Also, you can name this variable anything you want.
+
+This code behaves the same as the previous example:"
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -142,9 +144,11 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-0c7DDizK.tres"
 title = ""
 type = 0
-text = "In both examples, we're printing the value of the variable we created (named [code]number[/code] in the first example, and [code]element[/code] in the second) as Godot moves through the loop, assigning each element of the array (created by [code]range(3)[/code] or explicitly with [code][0, 1, 2][/code]) to that variable.
+text = "In both examples, we print the value of the temporary variable we created: [code]number[/code] in the first example and [code]element[/code] in the second.
 
-If we \"unwrap\" the previous example (by removing the loop and assigning each element manually), we'd get the following code with the same behaviour:"
+As Godot moves through the loop, it assigns each value of the array to that variable. First, it sets the variable to [code]0[/code], then to [code]1[/code], and finally, to [code]2[/code].
+
+We can break down the instructions the loop runs. You can see how a loop is a shortcut to code that otherwise gets very long."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
