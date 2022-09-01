@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=25 format=2]
+[gd_resource type="Resource" load_steps=29 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://resources/QuizChoice.gd" type="Script" id=2]
@@ -122,9 +122,53 @@ title = ""
 type = 0
 text = "In the above example, for each item in the list [code][0, 1, 2][/code], Godot sets [code]number[/code] to the item, then executes the code in the [code]for[/code] loop.
 
-In this example, we're printing the value of [code]number[/code] as Godot moves through the loop.
+We'll explain arrays more throughly in the next lesson, but notice that [code]number[/code] is just a temporary variable. You create it when defining the loop, and the loop takes care of changing its value. Also, you can name this variable anything you want.
 
-We can put whatever code we like in the loop's code block, including other function calls like [code]draw_rectangle()[/code]."
+This code behaves the same as the previous example:"
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-UdOCQiGj.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/PrintForLoopArray.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-0c7DDizK.tres"
+title = ""
+type = 0
+text = "In both examples, we print the value of the temporary variable we created: [code]number[/code] in the first example and [code]element[/code] in the second.
+
+As Godot moves through the loop, it assigns each value of the array to that variable. First, it sets the variable to [code]0[/code], then to [code]1[/code], and finally, to [code]2[/code].
+
+We can break down the instructions the loop runs. You can see how a loop is a shortcut to code that otherwise gets very long."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-Q2XNwQMq.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/PrintForLoopArrayUnwrapped.tscn"
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=23]
+script = ExtResource( 3 )
+content_id = "res://course/lesson-18-for-loops/content-B7tKRHJM.tres"
+title = ""
+type = 0
+text = "We can put whatever code we like in the loop's code block, including other function calls like [code]draw_rectangle()[/code]."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -255,5 +299,5 @@ description = "In the past we had to copy and paste code to draw multiple rectan
 [resource]
 script = ExtResource( 1 )
 title = "Introduction to For Loops"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 15 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 16 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 19 ), SubResource( 13 ), SubResource( 14 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 15 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 21 ), SubResource( 20 ), SubResource( 22 ), SubResource( 23 ), SubResource( 16 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 19 ), SubResource( 13 ), SubResource( 14 ) ]
 practices = [ SubResource( 17 ), SubResource( 18 ) ]

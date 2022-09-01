@@ -6,25 +6,20 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends OutputConsole
 
-func run() -> void:
+func run():
 	clear_messages()
 	emit_signal(\"line_highlight_requested\", 0)
 	yield()
-	var number = 0
-	emit_signal(\"line_highlight_requested\", 1)
-	yield()
-	while number < 4:
+	for i in [0, 1, 2]:
+		emit_signal(\"line_highlight_requested\", 1)
+		emit_signal(\"animate_arrow_requested\", [17 + 3*i,1], [5,7])
+		yield()
+		print_output([i])
 		emit_signal(\"line_highlight_requested\", 2)
-		yield()
-		print_output([number])
-		emit_signal(\"line_highlight_requested\", 3)
-		yield()
-		number += 1
-		emit_signal(\"line_highlight_requested\", 4)
 		yield()
 "
 
-[node name="PrintWhileLoop" type="PanelContainer"]
+[node name="Panel" type="PanelContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
@@ -35,10 +30,8 @@ margin_top = 7.0
 margin_right = 788.0
 margin_bottom = 267.0
 gdscript_code = "func run():
-	var number = 0
-	while number < 4:
-		print(number)
-		number += 1"
+	for element in [0, 1, 2]:
+		print(element)"
 
 [node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 anchor_right = 0.0
