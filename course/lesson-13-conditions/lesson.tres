@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=28 format=2]
+[gd_resource type="Resource" load_steps=29 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
@@ -181,6 +181,18 @@ visual_element_path = "visuals/ExampleComparisons.tscn"
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=23]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-13-conditions/content-XG5KmPI2.tres"
+title = "What does \"pass\" do in the code?"
+type = 1
+text = "[code]pass[/code] is a keyword in Godot that doesn't do anything. It's purpose is to denote a line of code that must have something, but [code]pass[/code] may be used as a placeholder so Godot won't give any errors.
+
+In the previous example, if there was nothing below the [code]if[/code] lines, Godot would give us an \"Expected an idented block after 'if' \" error, but using the [code]pass[/code] keyword allow us to avoid this error."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
 [sub_resource type="Resource" id=15]
 script = ExtResource( 4 )
 quiz_id = "res://course/lesson-13-conditions/quiz-j47MqE82.tres"
@@ -327,5 +339,5 @@ description = "Having a negative health value doesn't make a lot of sense. Make 
 [resource]
 script = ExtResource( 1 )
 title = "Conditions"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 16 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 23 ), SubResource( 15 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 16 ) ]
 practices = [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ]
