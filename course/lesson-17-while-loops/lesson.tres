@@ -15,7 +15,7 @@ text = "You've seen that you can use functions to [i]reuse[/i] code. In this les
 
 To illustrate how loops work, let's take a game board split into a grid.
 
-Our robot can move to neighboring cells by changing a [code]Vector2[/code] variable named [code]cell[/code] (it will represent the current cell the robot is at any time).
+Our robot can move to neighboring cells by changing a [code]Vector2[/code] variable named [code]cell[/code]. It represents the current cell the robot is in.
 
 When we increase [code]cell.x[/code], the robot moves to the right.
 
@@ -127,7 +127,9 @@ text = "Let's apply this to our [code]move_to_end()[/code] function.
 
 This time, we compare the number of loops to the board's width. We go through the loop until we reach the width of the board.
 
-Note that we move the robot until it's position is one less than the board's width because we are counting tiles from 0 (a normal practice in programming) - so a board of 3x3 would have tile coordinates going from 0 to 2."
+Note that we move the robot until its position is one less than the board's width because we are counting tiles from [code]0[/code].
+
+A board of [code]3[/code] by [code]3[/code] cells would have cell coordinates going from [code]0[/code] to [code]2[/code] on both the X and Y axes."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
