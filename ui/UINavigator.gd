@@ -95,6 +95,11 @@ func set_start_from_lesson(lesson_id: String) -> void:
 
 # Pops the last screen from the stack.
 func _navigate_back() -> void:
+	# Allowing to go back during a transition can cause the screen to get
+	# deleted, so we prevent this.
+	if _tween.is_active():
+		return
+
 	# Nothing to go back to, open the outliner.
 	if _screens_stack.size() < 2:
 		_navigate_to_outliner()
@@ -137,6 +142,9 @@ func _navigate_to_outliner() -> void:
 
 # Navigates forward to the next screen and adds it to the stack.
 func _navigate_to() -> void:
+	if _tween.is_active():
+		return
+	
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
 	var screen: UINavigatablePage
 	if target is Practice:
@@ -191,7 +199,7 @@ func _navigate_to() -> void:
 		Events.emit_signal("practice_started", target)
 	elif target is Lesson:
 		Events.emit_signal("lesson_started", target)
-
+	
 
 func _on_practice_next_requested(practice: Practice) -> void:
 	var lesson_data := course.lessons[_lesson_index] as Lesson
@@ -276,8 +284,6 @@ func _transition_to(screen: Control, from_screen: Control = null, direction_in :
 		if screen.get_parent() == null:
 			_screen_container.add_child(screen)
 		screen.show()
-
-
 
 		yield(get_tree(), "idle_frame")
 		emit_signal("transition_completed")
