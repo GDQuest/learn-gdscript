@@ -26,7 +26,13 @@ UNSAFE_CAST,,
 UNSAFE_CALL_ARGUMENT,,
 DEPRECATED_KEYWORD,,
 STANDALONE_TERNARY,,
-ASSIGNING_TO_EXPRESSION,This means you are trying to assign a value to a function call or the result of a literal expression.,"Remember that “assigning” something means you are storing a value or the result of an operation (the right side of the “=”) in a variable (the left side of the “=”); so check the left side of the equal to be sure it’s a variable, and not something else."
+ASSIGNING_TO_EXPRESSION,"If you get this error, you are most likely trying to assign a value to something other than a variable, which is impossible. You can only assign values to variables.
+
+Another possibility is that you want to check for equality in a condition but wrote a single = instead of ==.","If you want to assign a value to a variable, double-check that what you have on the left side of the = sign is a variable and not a function.
+
+You also need to ensure the syntax is correct. For example, there shouldn't be parentheses on the left side of the equal sign.
+
+In the case of a condition, ensure that you are using two equal signs to check for equality (==)."
 CYCLIC_REFERENCE,"A cyclic reference is when a class references itself, directly or indirectly.
 
 It has two possible causes:
