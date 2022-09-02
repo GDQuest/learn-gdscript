@@ -26,6 +26,13 @@ UNSAFE_CAST,,
 UNSAFE_CALL_ARGUMENT,,
 DEPRECATED_KEYWORD,,
 STANDALONE_TERNARY,,
+ASSIGNING_TO_EXPRESSION,"If you get this error, you are most likely trying to assign a value to something other than a variable, which is impossible. You can only assign values to variables.
+
+Another possibility is that you want to check for equality in a condition but wrote a single = instead of ==.","If you want to assign a value to a variable, double-check that what you have on the left side of the = sign is a variable and not a function.
+
+You also need to ensure the syntax is correct. For example, there shouldn't be parentheses on the left side of the equal sign.
+
+In the case of a condition, ensure that you are using two equal signs to check for equality (==)."
 CYCLIC_REFERENCE,"A cyclic reference is when a class references itself, directly or indirectly.
 
 It has two possible causes:
@@ -110,7 +117,7 @@ SIGNATURE_MISMATCH,"The function you're trying to define exists in a parent clas
 When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class.
 
 For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class.","You need to check the parent class's function and its definition in the code reference. Then, you need to edit your function definition to have the same number and type of parameters as the parent class."
-INVALID_ARGUMENTS,"This whole class of errors has to do with calling functions with either the wrong number of arguments or the wrong kind of argument. You will need to use the error message to see what is going wrong.","You need to either remove, add, or change the values you're trying to pass to the function to solve this issue. To know exactly how many arguments you need, you need to check the code reference. It will show you the function definition and the mandatory arguments."
+INVALID_ARGUMENTS,This whole class of errors has to do with calling functions with either the wrong number of arguments or the wrong kind of argument. You will need to use the error message to see what is going wrong.,"You need to either remove, add, or change the values you're trying to pass to the function to solve this issue. To know exactly how many arguments you need, you need to check the code reference. It will show you the function definition and the mandatory arguments."
 TYPE_MISMATCH,"All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!
 
 When you make any operation, the computer compares the types you are using.
@@ -134,5 +141,5 @@ RETURN_VALUE_MISMATCH,"There is an issue with the return value of your function.
 
 When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
 MISPLACED_STATIC_CALL,,
-INVALID_NO_CATCH, "Godot was unable to load your script, yet the language checker found nothing wrong.", "Please click on the ""report"" button at the top and please let us know."
-RECURSIVE_FUNCTION, "You called a function inside itself. This will loop forever.", "There are valid reasons for using recursive functions, but none of them are part of this course, so this cannot be a valid solution."
+INVALID_NO_CATCH,"Godot was unable to load your script, yet the language checker found nothing wrong.","Please click on the ""report"" button at the top and please let us know."
+RECURSIVE_FUNCTION,You called a function inside itself. This will loop forever.,"There are valid reasons for using recursive functions, but none of them are part of this course, so this cannot be a valid solution."

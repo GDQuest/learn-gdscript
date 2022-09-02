@@ -44,7 +44,9 @@ enum ErrorCode {
 	TYPE_MISMATCH,
 	TYPE_CANNOT_BE_INFERRED,
 	RETURN_VALUE_MISMATCH,
-	MISPLACED_STATIC_CALL
+	MISPLACED_STATIC_CALL,
+	
+	ASSIGNING_TO_EXPRESSION
 }
 
 enum WarningCode {
@@ -167,7 +169,6 @@ const MESSAGE_DATABASE := [
 			"Duplicate key found in Dictionary literal",
 			"Can't assign to constant",
 			"Can't assign to self.",
-			"Can't assign to an expression",
 			
 			"'..' pattern only allowed at the end of an array pattern",
 			"Not a valid pattern",
@@ -759,5 +760,12 @@ const MESSAGE_DATABASE := [
 			"The getter can't be a static function. See \"%FUNCTION_NAME%()\" definition at line %LINE_NUMBER%.",
 		],
 		"code": ErrorCode.MISPLACED_STATIC_CALL,
+	},
+	{
+		"patterns": [
+			["Can't assign to an expression"]
+		],
+		"raw": [],
+		"code": ErrorCode.ASSIGNING_TO_EXPRESSION
 	}
 ]
