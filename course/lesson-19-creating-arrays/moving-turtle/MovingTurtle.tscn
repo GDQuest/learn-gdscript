@@ -1,14 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://game_demos/turtle.png" type="Texture" id=1]
 [ext_resource path="res://course/lesson-19-creating-arrays/visuals/rocks_gems.png" type="Texture" id=2]
 [ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=3]
 [ext_resource path="res://course/lesson-19-creating-arrays/visuals/rocks_shield.png" type="Texture" id=4]
 [ext_resource path="res://course/lesson-19-creating-arrays/moving-turtle/MovingTurtle.gd" type="Script" id=5]
-[ext_resource path="res://ui/theme/fonts/SourceCodePro-Regular.otf" type="DynamicFontData" id=6]
-
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 6 )
+[ext_resource path="res://ui/theme/fonts/font_code_small.tres" type="DynamicFont" id=6]
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Sprite
@@ -29,7 +26,7 @@ func move(path: Array):
 [node name="MovingTurtle" type="Node2D"]
 script = ExtResource( 5 )
 draw_cell_coordinates = true
-label_font = SubResource( 1 )
+label_font = ExtResource( 6 )
 
 [node name="Turtle" type="Sprite" parent="."]
 position = Vector2( 20, 283 )
