@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/components/RunnableCodeExampleDebugger.gd" type="Script" id=5]
+
+[node name="RunnableCodeExampleDebugger" type="MarginContainer"]
+margin_right = 781.0
+margin_bottom = 117.0
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+script = ExtResource( 5 )
+
+[node name="VariablesContainer" type="VBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 761.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_constants/separation = 5
+
+[node name="Label" type="Label" parent="VariablesContainer"]
+margin_right = 741.0
+margin_bottom = 28.0
+text = "Debugger"

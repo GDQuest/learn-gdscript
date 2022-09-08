@@ -5,8 +5,11 @@ class_name RunnableCodeExample
 extends HBoxContainer
 
 signal scene_instance_set
+signal code_updated
 
 const ConsoleArrowAnimationScene := preload("res://ui/components/ConsoleArrowAnimation.tscn")
+const MonitoredVariableHighlightScene := preload("res://ui/components/MonitoredVariableHighlight.tscn")
+
 const ERROR_NO_RUN_FUNCTION := "Scene %s doesn't have a run() function. The Run button won't work."
 const HSLIDER_GRABBER_HIGHLIGHT := preload("res://ui/theme/hslider_grabber_highlight.tres")
 
@@ -92,6 +95,7 @@ func run() -> void:
 
 	_gdscript_text_edit.highlight_current_line = false
 
+	emit_signal("code_updated")
 	_clear_animated_arrows()
 
 
@@ -117,7 +121,7 @@ func step() -> void:
 		_script_function_state = _script_function_state.resume()
 		if not _script_function_state:
 			_gdscript_text_edit.highlight_current_line = false
-
+	emit_signal("code_updated")
 
 func reset() -> void:
 	if _scene_instance.has_method("reset"):
@@ -225,10 +229,12 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	_scene_instance.show_behind_parent = true
 	_frame_container.add_child(_scene_instance)
 	_center_scene_instance()
+
+	# Skip a frame to allow all nodes to be ready.
+	# Avoids overwriting text via yield(node, "ready").
+	yield(get_tree(), "idle_frame")
+
 	if _scene_instance.has_method("get_code"):
-		# Skip a frame to allow all nodes to be ready.
-		# Avoids overwriting text via yield(node, "ready").
-		yield(get_tree(), "idle_frame")
 		gdscript_code = _scene_instance.get_code(gdscript_code)
 		_scene_instance.set_code()
 		set_code(gdscript_code)
@@ -240,6 +246,39 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	if not _run_button.visible:
 		printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.filename])
 
+	if _scene_instance.get("monitored_variables"):
+		var monitored_variables : Array = _scene_instance.monitored_variables
+		var offset := Vector2.ZERO
+		offset.x = _gdscript_text_edit.rect_position.x
+
+		for variable_name in monitored_variables:
+			var last_line := 0
+			var last_column := -1 # Search offset to not repeat same result
+
+			while last_line >= 0:
+				var result := _gdscript_text_edit.search(variable_name, 0, last_line, last_column + 1)
+				if result.size() == 0:
+					last_line = -1
+				elif (result[TextEdit.SEARCH_RESULT_COLUMN] < last_column and
+					result[TextEdit.SEARCH_RESULT_LINE] <= last_line):
+					last_line = -1
+				else:
+					last_line = result[TextEdit.SEARCH_RESULT_LINE]
+					last_column = result[TextEdit.SEARCH_RESULT_COLUMN]
+
+					var rect = _gdscript_text_edit.get_rect_at_line_column(last_line, last_column)
+					rect.position += offset
+					rect.size.x = (rect.size.x * variable_name.length()) + 4
+
+					var monitored_variable : MonitoredVariableHighlight = MonitoredVariableHighlightScene.instance()
+					add_child(monitored_variable)
+					monitored_variable.highlight_rect = rect
+					monitored_variable.variable_name = variable_name
+					monitored_variable.setup(self, _scene_instance)
+
+		for node in get_parent().get_children():
+			if node is RunnableCodeExampleDebugger:
+				node.setup(self, _scene_instance)
 
 func _on_highlight_line(line_number: int) -> void:
 	# wait to see if script was interrupted
