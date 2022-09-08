@@ -1,9 +1,9 @@
 class_name RunnableCodeExampleDebugger
-extends MarginContainer
+extends PanelContainer
 
 const DebuggerConsoleMonitoredVariable = preload("res://ui/components/DebuggerConsoleMonitoredVariable.tscn")
 
-onready var variables_container := $VariablesContainer as VBoxContainer
+onready var variables_container := $MarginContainer/VariablesContainer as VBoxContainer
 
 onready var _scene_instance : Node = null
 onready var _console_variables := []
