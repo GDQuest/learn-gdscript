@@ -154,7 +154,7 @@ In previous lessons, we had characters walking on grids.
 
 And for those practices, you were working directly with cell coordinates.
 
-Well, cell coordinates don't correspond to positions on the screen, so we need to convert cell positions to screen positions."
+Well, cell coordinates don't correspond to positions on the screen. Each cell have a size in pixels of 120x120, so to get the center of any cell, we need to convert it's cell position to a screen position."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -174,7 +174,7 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-22-functions-return-values/content-BWNbDGt6.tres"
 title = ""
 type = 0
-text = "To do so, we use a function. It multiplies the cell coordinate by the cell size, adds half the cell size to the product, and returns the result."
+text = "To do so, we use a function. It does two things: first, it multiplies the cell coordinate by the cell size which gets us it's top-left corner posititon in pixels. Then it adds half of it's size to get the center of the cell, and finally returns the result."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
