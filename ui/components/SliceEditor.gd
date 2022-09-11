@@ -46,6 +46,8 @@ var _last_selected_text := ""
 var _last_selection_start := Vector2.ZERO
 var _last_selection_end := Vector2.ZERO
 
+var _is_in_browser := OS.get_name() == "HTML5"
+
 
 func _ready() -> void:
 	CodeEditorEnhancer.enhance(self)
@@ -85,12 +87,13 @@ func _ready() -> void:
 	connect("text_changed", self, "_on_text_changed")
 	connect("draw", self, "_update_overlays")
 
+
 func _gui_input(event: InputEvent) -> void:
 	# Shortcut uses Enter by default which adds a new line in TextEdit without any means to stop it.
 	# So we remove it.
 	if event.is_action_pressed("run_code"):
 		_remove_last_character = true
-	
+
 	# Capture keyboard events if we are the focus owner, otherwise left arrow causes navigation events.
 	if event is InputEventKey:
 		if get_focus_owner() == self:
@@ -101,8 +104,28 @@ func _gui_input(event: InputEvent) -> void:
 
 			_last_selected_text = get_selection_text()
 			if get_selection_text():
-				_last_selection_start = Vector2(get_selection_from_line(), get_selection_from_column())
+				_last_selection_start = Vector2(
+					get_selection_from_line(), get_selection_from_column()
+				)
 				_last_selection_end = Vector2(get_selection_to_line(), get_selection_to_column())
+
+	if not _is_in_browser:
+		return
+
+	# We add some macOS input actions in the browser because the app # is sandboxed and can't detect the user is on macOS.
+	# Then, it uses Ctrl instead of Cmd for common shortcuts.
+	if event.is_action_pressed("macos_copy"):
+		copy()
+	elif event.is_action_pressed("macos_cut"):
+		cut()
+	elif event.is_action_pressed("macos_paste"):
+		paste()
+	elif event.is_action_pressed("macos_undo"):
+		undo()
+	elif event.is_action_pressed("macos_redo"):
+		redo()
+	elif event.is_action_pressed("macos_select_all"):
+		select_all()
 
 
 func setup(slice_properties: SliceProperties) -> void:
@@ -137,6 +160,7 @@ func line_highlight_requested(line_index: int, at_char: int = 0) -> void:
 
 	errors_overlay.add_line_highlight(line_index)
 
+
 func _on_text_changed() -> void:
 	if _remove_last_character:
 		var column := cursor_get_column()
@@ -160,7 +184,7 @@ func _on_text_changed() -> void:
 		text += "\t"
 		cursor_set_line(_current_line)
 		cursor_set_column(column + 1)
-	
+
 	# Automatically close brackets.
 	if _last_typed_character in BRACKET_PAIRS:
 		var closing_bracket: String = BRACKET_PAIRS[_last_typed_character]
