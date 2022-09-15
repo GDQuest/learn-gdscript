@@ -266,10 +266,19 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 
 					while last_line >= 0:
 						var result := _gdscript_text_edit.search(variable_name, 0, last_line, last_column + 1)
+						
+						var is_result_in_line_before := false
+						var is_result_in_column_before := false
+						
+						if result.size() != 0:
+							is_result_in_line_before = result[TextEdit.SEARCH_RESULT_LINE] < last_line
+							is_result_in_column_before = (
+							result[TextEdit.SEARCH_RESULT_COLUMN] < last_column and
+							result[TextEdit.SEARCH_RESULT_LINE] <= last_line)
+						
 						if result.size() == 0:
 							last_line = -1
-						elif (result[TextEdit.SEARCH_RESULT_COLUMN] < last_column and
-							result[TextEdit.SEARCH_RESULT_LINE] <= last_line):
+						elif is_result_in_line_before or is_result_in_column_before:
 							last_line = -1
 						else:
 							last_line = result[TextEdit.SEARCH_RESULT_LINE]

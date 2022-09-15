@@ -12,7 +12,6 @@ onready var variable_name : String
 
 onready var _scene_instance : Node
 onready var _mouse_inside := false
-onready var _tween := $Tween as Tween
 onready var _mouse_blocker := $MouseBlocker as Control
 onready var _variable_value : String
 
