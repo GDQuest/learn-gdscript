@@ -11,9 +11,8 @@ onready var highlight_rect : Rect2 setget set_highlight_rect
 onready var variable_name : String
 
 onready var _scene_instance : Node
-onready var _mouse_inside := false
 onready var _mouse_blocker := $MouseBlocker as Control
-onready var _variable_value : String
+onready var _label := $MouseBlocker/Label as Label
 
 
 func _ready() -> void:
@@ -21,13 +20,8 @@ func _ready() -> void:
 	_mouse_blocker.connect("mouse_exited", self, "_on_blocker_mouse_exited")
 
 
-func _draw() -> void:
-	if _mouse_inside:
-		draw_string(font_resource, highlight_rect.position + (Vector2.RIGHT * 3) + (Vector2.UP * 3), _variable_value, Color.white)
-
-
 func setup(runnable_code, scene_instance : Node) -> void:
-	runnable_code.connect("code_updated", self, "_on_code_updated")
+	runnable_code.connect("code_updated", self, "_update_label_text")
 	_scene_instance = scene_instance
 
 
@@ -40,20 +34,16 @@ func set_highlight_rect(value) -> void:
 	_mouse_blocker.rect_position = highlight_rect.position
 	_mouse_blocker.rect_size = highlight_rect.size
 
-	update()
 
-
-func _on_code_updated():
-	_variable_value = str(_scene_instance.get(variable_name))
-	update()
+func _update_label_text():
+	_label.text = str(_scene_instance.get(variable_name))
+	_label.rect_position.x = (_mouse_blocker.rect_size.x/2 - _label.rect_size.x/2)
 
 
 func _on_blocker_mouse_entered():
-	_mouse_inside = true
-	update()
+	_update_label_text()
+	_label.show()
 
 
 func _on_blocker_mouse_exited():
-	_mouse_inside = false
-	update()
-
+	_label.hide()
