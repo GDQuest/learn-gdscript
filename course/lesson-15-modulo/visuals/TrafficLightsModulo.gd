@@ -1,5 +1,6 @@
 extends Node2D
 
+signal line_highlight_requested
 
 var initial_light_index := 0
 var light_index := initial_light_index - 1
@@ -14,18 +15,26 @@ onready var _lights := [
 
 
 func _ready() -> void:
-	run()
+	reset()
 
 
 func run() -> void:
+	emit_signal("line_highlight_requested", 0)
+	yield()
+	
 	if _tween.is_active():
 		return
 	
 	light_index += 1
-	light_index %= 3
-	turn_on_light(light_index)
-	
 	_index_label.text = str(light_index)
+	emit_signal("line_highlight_requested", 1)
+	yield()
+	light_index %= 3
+	_index_label.text = str(light_index)
+	emit_signal("line_highlight_requested", 2)
+	yield()
+	
+	turn_on_light(light_index)
 
 
 func reset() -> void:

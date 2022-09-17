@@ -220,8 +220,9 @@ func _center_scene_instance() -> void:
 
 
 func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
-	if new_scene_instance is OutputConsole:
+	if new_scene_instance.has_signal("line_highlight_requested"):
 		new_scene_instance.connect("line_highlight_requested", self, "_on_highlight_line")
+	if new_scene_instance.has_signal("animate_arrow_requested"):
 		new_scene_instance.connect("animate_arrow_requested", self, "_on_arrow_animation")
 
 	_scene_instance = new_scene_instance
@@ -236,12 +237,15 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 
 	if _scene_instance.has_method("get_code"):
 		gdscript_code = _scene_instance.get_code(gdscript_code)
-		_scene_instance.set_code()
 		set_code(gdscript_code)
 
 	_reset_button.visible = _scene_instance.has_method("reset")
 	_run_button.visible = _scene_instance.has_method("run")
-	_step_button.visible = _scene_instance.get_script().source_code.find("yield()") >= 0
+	var script : Reference = _scene_instance.get_script()
+	if script == null:
+		_step_button.hide()
+	else:
+		_step_button.visible = _scene_instance.get_script().source_code.find("yield()") >= 0
 
 	if not _run_button.visible:
 		printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.filename])

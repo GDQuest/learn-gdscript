@@ -36,9 +36,6 @@ func run() -> void:
 margin_right = 1047.0
 margin_bottom = 298.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
@@ -49,16 +46,20 @@ gdscript_code = "func heal(amount):
 	health += amount"
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 514.0
+margin_right = 508.0
 margin_bottom = 284.0
 
 [node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-margin_right = 174.0
+margin_right = 182.0
 text = "heal(50)"
+
+[node name="StepButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="2"]
+margin_left = 190.0
+margin_right = 270.0
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
 visible = true
-margin_left = 518.0
+margin_left = 524.0
 margin_right = 1033.0
 margin_bottom = 284.0
 text = "func heal(amount):

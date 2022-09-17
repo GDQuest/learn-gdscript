@@ -1,16 +1,22 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/components/OutputConsole.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/components/RunnableCodeExampleDebugger.tscn" type="PackedScene" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends OutputConsole
 
+onready var number := 0
+
+
 func run() -> void:
+	number = 0
 	clear_messages()
 	emit_signal(\"line_highlight_requested\", 0)
 	yield()
-	for number in range(3):
+	for i in range(3):
+		number = i
 		emit_signal(\"line_highlight_requested\", 1)
 		emit_signal(\"animate_arrow_requested\", [16 + (3*number),1], [5,6])
 		yield()
@@ -19,16 +25,14 @@ func run() -> void:
 		yield()
 "
 
-[node name="PrintForLoop" type="PanelContainer"]
+[node name="PrintForLoop" type="VBoxContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 788.0
-margin_bottom = 267.0
+margin_right = 781.0
+margin_bottom = 260.0
 gdscript_code = "func run():
 	for number in [0, 1, 2]:
 		print(number)"
@@ -36,8 +40,13 @@ gdscript_code = "func run():
 [node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 648.0
-margin_right = 757.0
+margin_left = 672.0
+margin_right = 781.0
 margin_bottom = 260.0
 size_flags_horizontal = 3
 script = SubResource( 1 )
+
+[node name="RunnableCodeExampleDebugger" parent="." instance=ExtResource( 3 )]
+margin_top = 264.0
+margin_bottom = 330.0
+monitored_variables = [ "number" ]

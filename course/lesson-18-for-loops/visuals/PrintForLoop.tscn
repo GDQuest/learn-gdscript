@@ -7,12 +7,12 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends OutputConsole
 
-onready var number = null
+onready var number := 0
 
 func run() -> void:
 	clear_messages()
 	emit_signal(\"line_highlight_requested\", 0)
-	number = null
+	number = 0
 	yield()
 	for _number in range(3):
 		emit_signal(\"line_highlight_requested\", 1)
@@ -29,8 +29,8 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_right = 365.0
-margin_bottom = 220.0
+margin_right = 781.0
+margin_bottom = 260.0
 gdscript_code = "func run():
 	for number in range(3):
 		print(number)"
@@ -38,14 +38,13 @@ gdscript_code = "func run():
 [node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 256.0
-margin_right = 365.0
-margin_bottom = 220.0
+margin_left = 672.0
+margin_right = 781.0
+margin_bottom = 260.0
 size_flags_horizontal = 3
 script = SubResource( 1 )
 
 [node name="RunnableCodeExampleDebugger" parent="." instance=ExtResource( 3 )]
-margin_top = 224.0
-margin_right = 365.0
-margin_bottom = 290.0
+margin_top = 264.0
+margin_bottom = 330.0
 monitored_variables = [ "number" ]
