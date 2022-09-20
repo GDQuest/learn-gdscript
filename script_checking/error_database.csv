@@ -30,9 +30,14 @@ INVALID_OPERATOR_USAGE,,
 MISPLACED_STATIC_CALL,,
 IN_EXPECTED_AFTER_IDENTIFIER,"You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword.
 
-In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid variable name to iterate. It will create a new variable with the given name, and it will assign each element of the array to it.","To fix this error, you need to ensure that the name between [code]for[/code] and [code]in[/code] is a valid variable name, with no punctuations or spaces in-between the word.
+In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid temporary variable name to assign values in each loop iteration. The loop creates a new variable with the desired name and assigns each element of the array to it.","To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces.
 
-You may want to assign something to the property of the variable (for example, in a [code]Vector2[/code] array). In this case, first assign a variable name on the loop, and then change the property inside the loop."
+For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name.
+
+To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:
+
+[code]for cell_position in cell_positions_array:
+    cell_position.x += 1.0[/code]"
 ASSIGNING_TO_EXPRESSION,"If you get this error, you are most likely trying to assign a value to something other than a variable, which is impossible. You can only assign values to variables.
 
 Another possibility is that you want to check for equality in a condition but wrote a single = instead of ==.","If you want to assign a value to a variable, double-check that what you have on the left side of the = sign is a variable and not a function.
