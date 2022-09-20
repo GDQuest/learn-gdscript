@@ -3,7 +3,7 @@ extends PanelContainer
 
 const DebuggerConsoleMonitoredVariable = preload("res://ui/components/DebuggerConsoleMonitoredVariable.tscn")
 
-export(Array, String) var monitored_variables
+export(Array, String) var monitored_variables: Array
 
 onready var variables_container := $MarginContainer/VariablesContainer as VBoxContainer
 

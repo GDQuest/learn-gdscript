@@ -11,7 +11,7 @@ const ConsoleArrowAnimationScene := preload("res://ui/components/ConsoleArrowAni
 const MonitoredVariableHighlightScene := preload("res://ui/components/MonitoredVariableHighlight.tscn")
 
 const ERROR_NO_RUN_FUNCTION := "Scene %s doesn't have a run() function. The Run button won't work."
-const HSLIDER_GRABBER_HIGHLIGHT := preload("res://ui/theme/hslider_grabber_highlight.tres")
+const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/hslider_grabber_highlight.tres")
 
 export var scene: PackedScene setget set_scene
 export(String, MULTILINE) var gdscript_code := "" setget set_code
@@ -193,7 +193,7 @@ func create_slider_for(
 	_set_instance_value(property_value, property_name, value_label)
 
 	if color != Color.black:
-		var hslider_grabber_highlight := HSLIDER_GRABBER_HIGHLIGHT.duplicate()
+		var hslider_grabber_highlight: StyleBoxFlat = HSLIDER_GRABBER_HIGHLIGHT.duplicate()
 		hslider_grabber_highlight.bg_color = color
 
 		label.add_color_override("font_color", color)
@@ -253,7 +253,7 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 
 	for node in get_parent().get_children():
 		if node is RunnableCodeExampleDebugger:
-			var debugger : RunnableCodeExampleDebugger = node
+			var debugger: RunnableCodeExampleDebugger = node
 			debugger.setup(self, _scene_instance)
 
 			if _scene_instance.has_signal("code_updated"):

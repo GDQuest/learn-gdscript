@@ -5,15 +5,15 @@ const LINE_COLOR := Color(1, 0.96, 0.25)
 const LINE_WIDTH := 3.0
 const TWEEN_DURATION := 0.2
 
-export(Vector2) var initial_point = Vector2.ZERO
-export(Vector2) var end_point = Vector2.ZERO
+export(Vector2) var initial_point := Vector2.ZERO
+export(Vector2) var end_point := Vector2.ZERO
 
 onready var highlight_rects : Array = [] setget set_highlight_rects
 
 onready var _arrow := $Arrow as Sprite
 onready var _tween := $Tween as Tween
 onready var _line_slice_limit := 0
-onready var _baked_line_points = []
+onready var _baked_line_points := []
 
 
 func _ready():
