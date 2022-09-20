@@ -26,6 +26,18 @@ UNSAFE_CAST,,
 UNSAFE_CALL_ARGUMENT,,
 DEPRECATED_KEYWORD,,
 STANDALONE_TERNARY,,
+INVALID_OPERATOR_USAGE,,
+MISPLACED_STATIC_CALL,,
+IN_EXPECTED_AFTER_IDENTIFIER,"You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword.
+
+In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid temporary variable name to assign values in each loop iteration. The loop creates a new variable with the desired name and assigns each element of the array to it.","To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces.
+
+For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name.
+
+To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:
+
+[code]for cell_position in cell_positions_array:
+    cell_position.x += 1.0[/code]"
 ASSIGNING_TO_EXPRESSION,"If you get this error, you are most likely trying to assign a value to something other than a variable, which is impossible. You can only assign values to variables.
 
 Another possibility is that you want to check for equality in a condition but wrote a single = instead of ==.","If you want to assign a value to a variable, double-check that what you have on the left side of the = sign is a variable and not a function.
@@ -63,7 +75,6 @@ UNEXPECTED_CHARACTER_IN_KEYWORD,"This error tells you that you are missing a par
 
 Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code].","To address the error, you want to add the missing opening parenthesis, the closing parenthesis, or the comma."
 UNEXPECTED_CHARACTER_IN_EXPORT_HINT,"This error tells you you are missing some parenthesis, a comma, or some value in your export hint.",You need to read the error message and add the missing character or value it requests.
-INVALID_OPERATOR_USAGE,,
 MISPLACED_IDENTIFIER,"This error happens in several cases:
 
 1. You wrote an identifier (variable or function name) in the wrong place.
@@ -140,6 +151,5 @@ RETURN_VALUE_MISMATCH,"There is an issue with the return value of your function.
 2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end.","When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that.
 
 When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
-MISPLACED_STATIC_CALL,,
 INVALID_NO_CATCH,"Godot was unable to load your script, yet the language checker found nothing wrong.","Please click on the ""report"" button at the top and please let us know."
 RECURSIVE_FUNCTION,You called a function inside itself. This will loop forever.,"There are valid reasons for using recursive functions, but none of them are part of this course, so this cannot be a valid solution."

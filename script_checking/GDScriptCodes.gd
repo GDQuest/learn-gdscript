@@ -46,7 +46,8 @@ enum ErrorCode {
 	RETURN_VALUE_MISMATCH,
 	MISPLACED_STATIC_CALL,
 	
-	ASSIGNING_TO_EXPRESSION
+	ASSIGNING_TO_EXPRESSION,
+	IN_EXPECTED_AFTER_IDENTIFIER
 }
 
 enum WarningCode {
@@ -416,7 +417,6 @@ const MESSAGE_DATABASE := [
 			[ "invalid operator in expression" ],
 			[ "Invalid operand", "for", "operator" ],
 			[ "Misplaced 'not'." ],
-			[ "\"in\" expected after identifier." ],
 			[ "Expected identifier before 'is' operator" ],
 		],
 		"raw": [
@@ -429,7 +429,6 @@ const MESSAGE_DATABASE := [
 			"Invalid operand for unary operator",
 			"Invalid operands for operator",
 			"Misplaced 'not'.",
-			"\"in\" expected after identifier.",
 			"Expected identifier before 'is' operator",
 		],
 		"code": ErrorCode.INVALID_OPERATOR_USAGE,
@@ -767,5 +766,14 @@ const MESSAGE_DATABASE := [
 		],
 		"raw": [],
 		"code": ErrorCode.ASSIGNING_TO_EXPRESSION
+	},
+	{
+		"patterns": [
+			[ "\"in\" expected after identifier." ]
+		],
+		"raw": [
+			"\"in\" expected after identifier.",
+		],
+		"code": ErrorCode.IN_EXPECTED_AFTER_IDENTIFIER
 	}
 ]
