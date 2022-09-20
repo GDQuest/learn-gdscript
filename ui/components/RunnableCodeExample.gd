@@ -25,6 +25,7 @@ onready var _step_button := $Frame/HBoxContainer/StepButton as Button
 onready var _reset_button := $Frame/HBoxContainer/ResetButton as Button
 onready var _frame_container := $Frame/PanelContainer as Control
 onready var _sliders := $Frame/Sliders as VBoxContainer
+onready var _buttons_container := $Frame/HBoxContainer as HBoxContainer
 
 onready var _console_arrow_animation: ConsoleArrowAnimation
 # Used to keep track of the code example's run() function in case it has
@@ -58,6 +59,11 @@ func _ready() -> void:
 		assert(last_child != _gdscript_text_edit and last_child != _frame_container)
 		remove_child(last_child)
 		_set_scene_instance(last_child)
+
+	# Godot doesn't allow changing Control nodes z-index in the inspector,
+	# so a workaround with the VisualServer is needed
+	var canvas_item := _buttons_container.get_canvas_item()
+	VisualServer.canvas_item_set_z_index(canvas_item, 10)
 
 
 func _get_configuration_warning() -> String:
