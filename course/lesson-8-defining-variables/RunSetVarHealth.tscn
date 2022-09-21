@@ -7,21 +7,22 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends OutputConsole
 
-onready var health := 100
+onready var health = null
 
 
 func run():
-	health = 100
+	health = null
 	clear_messages()
 	emit_signal(\"line_highlight_requested\", 0)
 	yield()
+	health = 100
 	emit_signal(\"line_highlight_requested\", 1)
 	yield()
 	health = 50
 	emit_signal(\"line_highlight_requested\", 2)
 	yield()
-	print_output([health])
 	emit_signal(\"line_highlight_requested\", 3)
+	print_output([health])
 	yield()
 "
 
@@ -34,6 +35,7 @@ size_flags_horizontal = 3
 margin_right = 781.0
 margin_bottom = 260.0
 gdscript_code = "func run():
+	var health = 100
 	health = 50
 	print(health)"
 
