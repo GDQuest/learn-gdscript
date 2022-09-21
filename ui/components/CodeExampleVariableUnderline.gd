@@ -7,10 +7,10 @@ const TWEEN_DURATION := 0.2
 
 export(Resource) var font_resource
 
-onready var highlight_rect : Rect2 setget set_highlight_rect
-onready var variable_name : String
+var highlight_rect := Rect2() setget set_highlight_rect
+var variable_name := ""
 
-onready var _scene_instance : Node
+onready var _scene_instance: Node
 onready var _mouse_blocker := $MouseBlocker as Control
 onready var _label := $MouseBlocker/Label as Label
 
@@ -20,7 +20,7 @@ func _ready() -> void:
 	_mouse_blocker.connect("mouse_exited", self, "_on_blocker_mouse_exited")
 
 
-func setup(runnable_code, scene_instance : Node) -> void:
+func setup(runnable_code, scene_instance: Node) -> void:
 	runnable_code.connect("code_updated", self, "_update_label_text")
 	_scene_instance = scene_instance
 
@@ -37,7 +37,7 @@ func set_highlight_rect(value) -> void:
 
 func _update_label_text():
 	_label.text = str(_scene_instance.get(variable_name))
-	_label.rect_position.x = (_mouse_blocker.rect_size.x/2 - _label.rect_size.x/2)
+	_label.rect_position.x = (_mouse_blocker.rect_size.x / 2 - _label.rect_size.x / 2)
 
 
 func _on_blocker_mouse_entered():

@@ -77,10 +77,10 @@ func run() -> void:
 		assert(
 			_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()]
 		)
-		
+
 		if _scene_instance.has_method("reset"):
 			_scene_instance.reset()
-		
+
 		# warning-ignore:unsafe_method_access
 		# We use yield() in some code examples to allow the user to step through
 		# instructions. When pressing the Run button, we skip all yields and run
@@ -110,10 +110,10 @@ func step() -> void:
 		assert(
 			_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()]
 		)
-		
+
 		if _scene_instance.has_method("reset"):
 			_scene_instance.reset()
-		
+
 		# warning-ignore:unsafe_method_access
 		var state = _scene_instance.run()
 		if _scene_instance.has_method("wrap_inside_frame"):
@@ -130,6 +130,7 @@ func step() -> void:
 		if not _script_function_state:
 			_gdscript_text_edit.highlight_current_line = false
 	emit_signal("code_updated")
+
 
 func reset() -> void:
 	# Finish running script if it's yielded
@@ -253,7 +254,7 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 
 	_reset_button.visible = _scene_instance.has_method("reset")
 	_run_button.visible = _scene_instance.has_method("run")
-	var script : Reference = _scene_instance.get_script()
+	var script: Reference = _scene_instance.get_script()
 	if script == null:
 		_step_button.hide()
 	else:
@@ -285,7 +286,7 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	var offset := Vector2(_gdscript_text_edit.rect_position.x, 0.0)
 	for variable_name in monitored_variables:
 		var last_line := 0
-		var last_column := -1 # Search offset to not repeat same result
+		var last_column := -1  # Search offset to not repeat same result
 
 		while last_line >= 0:
 			var result := _gdscript_text_edit.search(variable_name, 0, last_line, last_column + 1)
@@ -296,8 +297,9 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 			if result.size() != 0:
 				is_result_in_line_before = result[TextEdit.SEARCH_RESULT_LINE] < last_line
 				is_result_in_column_before = (
-				result[TextEdit.SEARCH_RESULT_COLUMN] < last_column and
-				result[TextEdit.SEARCH_RESULT_LINE] <= last_line)
+					result[TextEdit.SEARCH_RESULT_COLUMN] < last_column
+					and result[TextEdit.SEARCH_RESULT_LINE] <= last_line
+				)
 
 			if result.size() == 0:
 				last_line = -1
@@ -311,7 +313,7 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 				rect.position += offset
 				rect.size.x = (rect.size.x * variable_name.length()) + 4
 
-				var monitored_variable : CodeExampleVariableUnderline = CodeExampleVariableUnderlineScene.instance()
+				var monitored_variable: CodeExampleVariableUnderline = CodeExampleVariableUnderlineScene.instance()
 				add_child(monitored_variable)
 				monitored_variable.highlight_rect = rect
 				monitored_variable.variable_name = variable_name
