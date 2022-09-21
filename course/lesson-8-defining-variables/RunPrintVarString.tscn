@@ -7,11 +7,9 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends OutputConsole
 
-onready var health = 0
+onready var health = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
 
 func run():
-	health = 0
-	clear_messages()
 	emit_signal(\"line_highlight_requested\", 0)
 	yield()
 	health = 100
@@ -24,6 +22,11 @@ func run():
 	print_output([_text])
 	emit_signal(\"line_highlight_requested\", 3)
 	yield()
+
+
+func reset():
+	clear_messages()
+	health = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
 "
 
 [node name="PanelContainer" type="VBoxContainer"]

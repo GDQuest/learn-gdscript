@@ -77,6 +77,10 @@ func run() -> void:
 		assert(
 			_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()]
 		)
+		
+		if _scene_instance.has_method("reset"):
+			_scene_instance.reset()
+		
 		# warning-ignore:unsafe_method_access
 		# We use yield() in some code examples to allow the user to step through
 		# instructions. When pressing the Run button, we skip all yields and run
@@ -106,6 +110,10 @@ func step() -> void:
 		assert(
 			_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()]
 		)
+		
+		if _scene_instance.has_method("reset"):
+			_scene_instance.reset()
+		
 		# warning-ignore:unsafe_method_access
 		var state = _scene_instance.run()
 		if _scene_instance.has_method("wrap_inside_frame"):
@@ -253,7 +261,6 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 
 	if not _run_button.visible:
 		printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.filename])
-
 
 	for node in get_parent().get_children():
 		if node is RunnableCodeExampleDebugger:

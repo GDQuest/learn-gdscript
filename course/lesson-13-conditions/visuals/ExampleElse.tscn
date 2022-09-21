@@ -7,11 +7,9 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends OutputConsole
 
-onready var speed = 0
+onready var speed = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
 
 func run():
-	speed = 0
-	clear_messages()
 	emit_signal(\"line_highlight_requested\", 0)
 	yield()
 	speed = 120
@@ -28,7 +26,8 @@ func run():
 
 func reset() -> void:
 	clear_messages()
-	speed = 0"
+	speed = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
+"
 
 [node name="ExampleElse" type="VBoxContainer"]
 margin_right = 1047.0

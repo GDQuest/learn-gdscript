@@ -7,12 +7,10 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends OutputConsole
 
-onready var number := 0
+onready var number = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
 
 func run() -> void:
-	clear_messages()
 	emit_signal(\"line_highlight_requested\", 0)
-	number = 0
 	yield()
 	for _number in range(3):
 		emit_signal(\"line_highlight_requested\", 1)
@@ -25,7 +23,8 @@ func run() -> void:
 
 func reset() -> void:
 	clear_messages()
-	number = 0"
+	number = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
+"
 
 [node name="PrintForLoop" type="VBoxContainer"]
 margin_right = 14.0
