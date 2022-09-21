@@ -30,6 +30,11 @@ func run():
 
 	emit_signal(\"line_highlight_requested\", 3)
 	yield()
+
+
+func reset() -> void:
+	clear_messages()
+	health = 0
 "
 
 [node name="Example" type="VBoxContainer"]

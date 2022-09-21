@@ -124,9 +124,13 @@ func step() -> void:
 	emit_signal("code_updated")
 
 func reset() -> void:
+	# Finish running script if it's yielded
+	if _script_function_state:
+		run()
 	if _scene_instance.has_method("reset"):
 		_scene_instance.call("reset")
 	_center_scene_instance()
+	emit_signal("code_updated")
 
 
 func set_code(new_gdscript_code: String) -> void:

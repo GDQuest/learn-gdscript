@@ -21,6 +21,11 @@ func run() -> void:
 	print_output([_my_name])
 	emit_signal(\"line_highlight_requested\", 2)
 	yield()
+
+
+func reset() -> void:
+	clear_messages()
+	my_name = \"\\\"\\\"\"
 "
 
 [node name="PrintString" type="VBoxContainer"]

@@ -24,8 +24,11 @@ func run():
 	print_output([\"You're fast!\"])
 	emit_signal(\"line_highlight_requested\", 5)
 	yield()
-	
-"
+
+
+func reset() -> void:
+	clear_messages()
+	speed = 0"
 
 [node name="ExampleElse" type="VBoxContainer"]
 margin_right = 1047.0

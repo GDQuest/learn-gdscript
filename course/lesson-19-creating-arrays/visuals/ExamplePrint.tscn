@@ -22,7 +22,11 @@ func run() -> void:
 		print_output([number])
 		emit_signal(\"line_highlight_requested\", 2)
 		yield()
-"
+
+
+func reset() -> void:
+	clear_messages()
+	number = 0"
 
 [node name="PrintForLoop" type="VBoxContainer"]
 margin_right = 14.0

@@ -25,6 +25,11 @@ func run() -> void:
 		number += 1
 		emit_signal(\"line_highlight_requested\", 4)
 		yield()
+
+
+func reset() -> void:
+	clear_messages()
+	number = 0
 "
 
 [node name="PrintWhileLoop" type="VBoxContainer"]

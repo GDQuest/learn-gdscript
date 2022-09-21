@@ -24,7 +24,11 @@ func run():
 	emit_signal(\"line_highlight_requested\", 3)
 	print_output([health])
 	yield()
-"
+
+
+func reset() -> void:
+	clear_messages()
+	health = 100"
 
 [node name="PanelContainer" type="VBoxContainer"]
 margin_right = 14.0

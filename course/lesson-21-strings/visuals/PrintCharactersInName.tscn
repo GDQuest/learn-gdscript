@@ -25,7 +25,11 @@ func run() -> void:
 		print_output([c])
 		emit_signal(\"line_highlight_requested\", 2)
 		yield()
-"
+
+
+func reset() -> void:
+	clear_messages()
+	character = \"\\\"\\\"\""
 
 [node name="PrintCharactersInName" type="VBoxContainer"]
 margin_right = 14.0

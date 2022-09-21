@@ -22,7 +22,11 @@ func run():
 		print_output([i])
 		emit_signal(\"line_highlight_requested\", 2)
 		yield()
-"
+
+
+func reset():
+	clear_messages()
+	number = 0"
 
 [node name="Panel" type="VBoxContainer"]
 margin_right = 14.0

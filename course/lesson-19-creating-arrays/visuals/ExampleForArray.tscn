@@ -23,6 +23,11 @@ func run():
 		print_output([i])
 		emit_signal(\"line_highlight_requested\", 2)
 		yield()
+
+
+func reset() -> void:
+	clear_messages()
+	number = 0
 "
 
 [node name="Panel" type="VBoxContainer"]
