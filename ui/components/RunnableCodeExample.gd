@@ -29,7 +29,9 @@ onready var _reset_button := $Frame/HBoxContainer/ResetButton as Button
 onready var _frame_container := $Frame/PanelContainer as Control
 onready var _sliders := $Frame/Sliders as VBoxContainer
 
+onready var _debugger : RunnableCodeExampleDebugger
 onready var _console_arrow_animation: ConsoleArrowAnimation
+onready var _monitored_variable_highlights := []
 # Used to keep track of the code example's run() function in case it has
 # calls to yield() and we want the user to step through the code.
 onready var _script_function_state: GDScriptFunctionState
@@ -39,6 +41,7 @@ onready var _start_code_example_height := _gdscript_text_edit.rect_size.y
 
 func _ready() -> void:
 	Events.connect("font_size_scale_changed", self, "_on_Events_font_size_scale_changed")
+
 	if not Engine.editor_hint:
 		_update_gdscript_text_edit_width(UserProfiles.get_profile().font_size_scale)
 
@@ -267,26 +270,36 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	var debugger: RunnableCodeExampleDebugger = null
 	for node in get_parent().get_children():
 		if node is RunnableCodeExampleDebugger:
-			debugger = node
-			break
+			_debugger = node
+			_debugger.setup(self, _scene_instance)
+			if _scene_instance.has_signal("code_updated"):
+				_scene_instance.connect("code_updated", self, "emit_signal", ["code_updated"])
 
-	if not debugger:
+	_reset_monitored_variable_highlights()
+
+
+func _reset_monitored_variable_highlights():
+	if not _debugger:
 		return
 
-	debugger.setup(self, _scene_instance)
-	if _scene_instance.has_signal("code_updated"):
-		_scene_instance.connect("code_updated", self, "emit_signal", ["code_updated"])
+	# After changing font size, must wait a frame to create monitored variables
+	yield(get_tree(), "idle_frame")
+
+	for monitored_variable in _monitored_variable_highlights:
+		monitored_variable.queue_free()
+	_monitored_variable_highlights.clear()
 
 	if not _gdscript_text_edit.visible:
 		return
 
 	# Create widgets that underline a variable and display a variable's value
 	# when hovering with the mouse.
-	var monitored_variables := debugger.monitored_variables
+	var monitored_variables : Array = _debugger.monitored_variables
 	var offset := Vector2(_gdscript_text_edit.rect_position.x, 0.0)
+
 	for variable_name in monitored_variables:
 		var last_line := 0
-		var last_column := -1  # Search offset to not repeat same result
+		var last_column := -1 # Search offset to not repeat same result
 
 		while last_line >= 0:
 			var result := _gdscript_text_edit.search(variable_name, 0, last_line, last_column + 1)
@@ -313,11 +326,12 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 				rect.position += offset
 				rect.size.x = (rect.size.x * variable_name.length()) + 4
 
-				var monitored_variable: CodeExampleVariableUnderline = CodeExampleVariableUnderlineScene.instance()
+				var monitored_variable : CodeExampleVariableUnderline = CodeExampleVariableUnderlineScene.instance()
 				add_child(monitored_variable)
 				monitored_variable.highlight_rect = rect
 				monitored_variable.variable_name = variable_name
 				monitored_variable.setup(self, _scene_instance)
+				_monitored_variable_highlights.append(monitored_variable)
 
 
 func _on_highlight_line(line_number: int) -> void:
@@ -380,4 +394,5 @@ func _clear_animated_arrows() -> void:
 
 func _on_Events_font_size_scale_changed(new_font_scale: int) -> void:
 	_clear_animated_arrows()
+	_reset_monitored_variable_highlights()
 	_update_gdscript_text_edit_width(new_font_scale)

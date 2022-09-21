@@ -37,6 +37,7 @@ func set_highlight_rect(value) -> void:
 
 func _update_label_text():
 	_label.text = str(_scene_instance.get(variable_name))
+	_label.rect_size = _label.get_font("font").get_string_size(_label.text)
 	_label.rect_position.x = (_mouse_blocker.rect_size.x / 2 - _label.rect_size.x / 2)
 
 
