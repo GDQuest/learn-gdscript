@@ -16,10 +16,10 @@
 code = "shader_type canvas_item;
 render_mode blend_add;
 
-uniform float thickness = 1.0f;
+uniform float thickness = 1.0;
 
 void vertex() {
-    VERTEX.x *= (1.0 - INSTANCE_CUSTOM.y) * 2f;
+    VERTEX.x *= (1.0 - INSTANCE_CUSTOM.y) * 2.0;
 		VERTEX.y *= thickness;
 }"
 
