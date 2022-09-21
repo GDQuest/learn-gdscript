@@ -262,53 +262,60 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	if not _run_button.visible:
 		printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.filename])
 
+	# Setting up our fake debugger when it's there to allow executing the code line-by-line
+	var debugger: RunnableCodeExampleDebugger = null
 	for node in get_parent().get_children():
 		if node is RunnableCodeExampleDebugger:
-			var debugger: RunnableCodeExampleDebugger = node
-			debugger.setup(self, _scene_instance)
+			debugger = node
+			break
 
-			if _scene_instance.has_signal("code_updated"):
-				_scene_instance.connect("code_updated", self, "emit_signal", ["code_updated"])
-			_gdscript_text_edit.update()
-			yield(get_tree().create_timer(0.1), "timeout")
-			if _gdscript_text_edit.visible:
-				var monitored_variables : Array = debugger.monitored_variables
-				var offset := Vector2.ZERO
-				offset.x = _gdscript_text_edit.rect_position.x
+	if not debugger:
+		return
 
-				for variable_name in monitored_variables:
-					var last_line := 0
-					var last_column := -1 # Search offset to not repeat same result
+	debugger.setup(self, _scene_instance)
+	if _scene_instance.has_signal("code_updated"):
+		_scene_instance.connect("code_updated", self, "emit_signal", ["code_updated"])
 
-					while last_line >= 0:
-						var result := _gdscript_text_edit.search(variable_name, 0, last_line, last_column + 1)
-						
-						var is_result_in_line_before := false
-						var is_result_in_column_before := false
-						
-						if result.size() != 0:
-							is_result_in_line_before = result[TextEdit.SEARCH_RESULT_LINE] < last_line
-							is_result_in_column_before = (
-							result[TextEdit.SEARCH_RESULT_COLUMN] < last_column and
-							result[TextEdit.SEARCH_RESULT_LINE] <= last_line)
-						
-						if result.size() == 0:
-							last_line = -1
-						elif is_result_in_line_before or is_result_in_column_before:
-							last_line = -1
-						else:
-							last_line = result[TextEdit.SEARCH_RESULT_LINE]
-							last_column = result[TextEdit.SEARCH_RESULT_COLUMN]
+	if not _gdscript_text_edit.visible:
+		return
 
-							var rect = _gdscript_text_edit.get_rect_at_line_column(last_line, last_column)
-							rect.position += offset
-							rect.size.x = (rect.size.x * variable_name.length()) + 4
+	# Create widgets that underline a variable and display a variable's value
+	# when hovering with the mouse.
+	var monitored_variables := debugger.monitored_variables
+	var offset := Vector2(_gdscript_text_edit.rect_position.x, 0.0)
+	for variable_name in monitored_variables:
+		var last_line := 0
+		var last_column := -1 # Search offset to not repeat same result
 
-							var monitored_variable : CodeExampleVariableUnderline = CodeExampleVariableUnderlineScene.instance()
-							add_child(monitored_variable)
-							monitored_variable.highlight_rect = rect
-							monitored_variable.variable_name = variable_name
-							monitored_variable.setup(self, _scene_instance)
+		while last_line >= 0:
+			var result := _gdscript_text_edit.search(variable_name, 0, last_line, last_column + 1)
+
+			var is_result_in_line_before := false
+			var is_result_in_column_before := false
+
+			if result.size() != 0:
+				is_result_in_line_before = result[TextEdit.SEARCH_RESULT_LINE] < last_line
+				is_result_in_column_before = (
+				result[TextEdit.SEARCH_RESULT_COLUMN] < last_column and
+				result[TextEdit.SEARCH_RESULT_LINE] <= last_line)
+
+			if result.size() == 0:
+				last_line = -1
+			elif is_result_in_line_before or is_result_in_column_before:
+				last_line = -1
+			else:
+				last_line = result[TextEdit.SEARCH_RESULT_LINE]
+				last_column = result[TextEdit.SEARCH_RESULT_COLUMN]
+
+				var rect = _gdscript_text_edit.get_rect_at_line_column(last_line, last_column)
+				rect.position += offset
+				rect.size.x = (rect.size.x * variable_name.length()) + 4
+
+				var monitored_variable : CodeExampleVariableUnderline = CodeExampleVariableUnderlineScene.instance()
+				add_child(monitored_variable)
+				monitored_variable.highlight_rect = rect
+				monitored_variable.variable_name = variable_name
+				monitored_variable.setup(self, _scene_instance)
 
 
 func _on_highlight_line(line_number: int) -> void:
