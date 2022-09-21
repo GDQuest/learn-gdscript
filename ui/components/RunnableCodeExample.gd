@@ -8,7 +8,7 @@ signal scene_instance_set
 signal code_updated
 
 const ConsoleArrowAnimationScene := preload("res://ui/components/ConsoleArrowAnimation.tscn")
-const MonitoredVariableHighlightScene := preload("res://ui/components/MonitoredVariableHighlight.tscn")
+const CodeExampleVariableUnderlineScene := preload("res://ui/components/CodeExampleVariableUnderline.tscn")
 
 const ERROR_NO_RUN_FUNCTION := "Scene %s doesn't have a run() function. The Run button won't work."
 const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/hslider_grabber_highlight.tres")
@@ -269,7 +269,8 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 
 			if _scene_instance.has_signal("code_updated"):
 				_scene_instance.connect("code_updated", self, "emit_signal", ["code_updated"])
-
+			_gdscript_text_edit.update()
+			yield(get_tree().create_timer(0.1), "timeout")
 			if _gdscript_text_edit.visible:
 				var monitored_variables : Array = debugger.monitored_variables
 				var offset := Vector2.ZERO
@@ -303,7 +304,7 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 							rect.position += offset
 							rect.size.x = (rect.size.x * variable_name.length()) + 4
 
-							var monitored_variable : MonitoredVariableHighlight = MonitoredVariableHighlightScene.instance()
+							var monitored_variable : CodeExampleVariableUnderline = CodeExampleVariableUnderlineScene.instance()
 							add_child(monitored_variable)
 							monitored_variable.highlight_rect = rect
 							monitored_variable.variable_name = variable_name

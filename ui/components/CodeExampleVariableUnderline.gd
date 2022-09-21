@@ -1,4 +1,4 @@
-class_name MonitoredVariableHighlight
+class_name CodeExampleVariableUnderline
 extends Node2D
 
 const LINE_COLOR := Color(1, 0.96, 0.25)

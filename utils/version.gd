@@ -1,9 +1,9 @@
 # AUTO GENERATED changed_file, YOUR CHANGES WILL NOT REMAIN
 class_name AppVersion
 
-const version := "0.3.0";
-const git_commit := "6de164cb076cb7ae64eabd4e9e28fdcc865e3840";
-const git_branch := "version-number";
-const build_date := [2022, 03, 02, 14, 11, 31];
-const build_date_unix := 1646223091;
-const build_date_iso := "2022/03/02 14:11:31;"
+const version := "1.2.2";
+const git_commit := "3b03b62420d43c7f700c593a924be162853331e8";
+const git_branch := "feature/debugger-visualization";
+const build_date := [2022, 09, 21, 19, 59, 52];
+const build_date_unix := 1663783192;
+const build_date_iso := "2022/09/21 19:59:52;"
