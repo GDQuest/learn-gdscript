@@ -30,7 +30,7 @@ onready var _frame_container := $Frame/PanelContainer as Control
 onready var _sliders := $Frame/Sliders as VBoxContainer
 onready var _buttons_container := $Frame/HBoxContainer as HBoxContainer
 
-onready var _debugger : RunnableCodeExampleDebugger
+onready var _debugger: RunnableCodeExampleDebugger
 onready var _console_arrow_animation: ConsoleArrowAnimation
 onready var _monitored_variable_highlights := []
 # Used to keep track of the code example's run() function in case it has
@@ -300,12 +300,12 @@ func _reset_monitored_variable_highlights():
 
 	# Create widgets that underline a variable and display a variable's value
 	# when hovering with the mouse.
-	var monitored_variables : Array = _debugger.monitored_variables
+	var monitored_variables := _debugger.monitored_variables
 	var offset := Vector2(_gdscript_text_edit.rect_position.x, 0.0)
 
 	for variable_name in monitored_variables:
 		var last_line := 0
-		var last_column := -1 # Search offset to not repeat same result
+		var last_column := -1  # Search offset to not repeat same result
 
 		while last_line >= 0:
 			var result := _gdscript_text_edit.search(variable_name, 0, last_line, last_column + 1)
@@ -332,7 +332,7 @@ func _reset_monitored_variable_highlights():
 				rect.position += offset
 				rect.size.x = (rect.size.x * variable_name.length()) + 4
 
-				var monitored_variable : CodeExampleVariableUnderline = CodeExampleVariableUnderlineScene.instance()
+				var monitored_variable: CodeExampleVariableUnderline = CodeExampleVariableUnderlineScene.instance()
 				add_child(monitored_variable)
 				monitored_variable.highlight_rect = rect
 				monitored_variable.variable_name = variable_name
