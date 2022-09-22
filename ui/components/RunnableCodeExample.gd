@@ -5,10 +5,13 @@ class_name RunnableCodeExample
 extends HBoxContainer
 
 signal scene_instance_set
+signal code_updated
 
 const ConsoleArrowAnimationScene := preload("res://ui/components/ConsoleArrowAnimation.tscn")
+const CodeExampleVariableUnderlineScene := preload("res://ui/components/CodeExampleVariableUnderline.tscn")
+
 const ERROR_NO_RUN_FUNCTION := "Scene %s doesn't have a run() function. The Run button won't work."
-const HSLIDER_GRABBER_HIGHLIGHT := preload("res://ui/theme/hslider_grabber_highlight.tres")
+const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/hslider_grabber_highlight.tres")
 
 export var scene: PackedScene setget set_scene
 export(String, MULTILINE) var gdscript_code := "" setget set_code
@@ -27,7 +30,9 @@ onready var _frame_container := $Frame/PanelContainer as Control
 onready var _sliders := $Frame/Sliders as VBoxContainer
 onready var _buttons_container := $Frame/HBoxContainer as HBoxContainer
 
+onready var _debugger : RunnableCodeExampleDebugger
 onready var _console_arrow_animation: ConsoleArrowAnimation
+onready var _monitored_variable_highlights := []
 # Used to keep track of the code example's run() function in case it has
 # calls to yield() and we want the user to step through the code.
 onready var _script_function_state: GDScriptFunctionState
@@ -37,6 +42,7 @@ onready var _start_code_example_height := _gdscript_text_edit.rect_size.y
 
 func _ready() -> void:
 	Events.connect("font_size_scale_changed", self, "_on_Events_font_size_scale_changed")
+
 	if not Engine.editor_hint:
 		_update_gdscript_text_edit_width(UserProfiles.get_profile().font_size_scale)
 
@@ -80,6 +86,10 @@ func run() -> void:
 		assert(
 			_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()]
 		)
+
+		if _scene_instance.has_method("reset"):
+			_scene_instance.reset()
+
 		# warning-ignore:unsafe_method_access
 		# We use yield() in some code examples to allow the user to step through
 		# instructions. When pressing the Run button, we skip all yields and run
@@ -98,6 +108,7 @@ func run() -> void:
 
 	_gdscript_text_edit.highlight_current_line = false
 
+	emit_signal("code_updated")
 	_clear_animated_arrows()
 
 
@@ -108,6 +119,10 @@ func step() -> void:
 		assert(
 			_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()]
 		)
+
+		if _scene_instance.has_method("reset"):
+			_scene_instance.reset()
+
 		# warning-ignore:unsafe_method_access
 		var state = _scene_instance.run()
 		if _scene_instance.has_method("wrap_inside_frame"):
@@ -123,12 +138,17 @@ func step() -> void:
 		_script_function_state = _script_function_state.resume()
 		if not _script_function_state:
 			_gdscript_text_edit.highlight_current_line = false
+	emit_signal("code_updated")
 
 
 func reset() -> void:
+	# Finish running script if it's yielded
+	if _script_function_state:
+		run()
 	if _scene_instance.has_method("reset"):
 		_scene_instance.call("reset")
 	_center_scene_instance()
+	emit_signal("code_updated")
 
 
 func set_code(new_gdscript_code: String) -> void:
@@ -195,7 +215,7 @@ func create_slider_for(
 	_set_instance_value(property_value, property_name, value_label)
 
 	if color != Color.black:
-		var hslider_grabber_highlight := HSLIDER_GRABBER_HIGHLIGHT.duplicate()
+		var hslider_grabber_highlight: StyleBoxFlat = HSLIDER_GRABBER_HIGHLIGHT.duplicate()
 		hslider_grabber_highlight.bg_color = color
 
 		label.add_color_override("font_color", color)
@@ -222,8 +242,9 @@ func _center_scene_instance() -> void:
 
 
 func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
-	if new_scene_instance is OutputConsole:
+	if new_scene_instance.has_signal("line_highlight_requested"):
 		new_scene_instance.connect("line_highlight_requested", self, "_on_highlight_line")
+	if new_scene_instance.has_signal("animate_arrow_requested"):
 		new_scene_instance.connect("animate_arrow_requested", self, "_on_arrow_animation")
 
 	_scene_instance = new_scene_instance
@@ -231,20 +252,92 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	_scene_instance.show_behind_parent = true
 	_frame_container.add_child(_scene_instance)
 	_center_scene_instance()
+
+	# Skip a frame to allow all nodes to be ready.
+	# Avoids overwriting text via yield(node, "ready").
+	yield(get_tree(), "idle_frame")
+
 	if _scene_instance.has_method("get_code"):
-		# Skip a frame to allow all nodes to be ready.
-		# Avoids overwriting text via yield(node, "ready").
-		yield(get_tree(), "idle_frame")
 		gdscript_code = _scene_instance.get_code(gdscript_code)
-		_scene_instance.set_code()
 		set_code(gdscript_code)
 
 	_reset_button.visible = _scene_instance.has_method("reset")
 	_run_button.visible = _scene_instance.has_method("run")
-	_step_button.visible = _scene_instance.get_script().source_code.find("yield()") >= 0
+	var script: Reference = _scene_instance.get_script()
+	if script == null:
+		_step_button.hide()
+	else:
+		_step_button.visible = _scene_instance.get_script().source_code.find("yield()") >= 0
 
 	if not _run_button.visible:
 		printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.filename])
+
+	# Setting up our fake debugger when it's there to allow executing the code line-by-line
+	var debugger: RunnableCodeExampleDebugger = null
+	for node in get_parent().get_children():
+		if node is RunnableCodeExampleDebugger:
+			_debugger = node
+			_debugger.setup(self, _scene_instance)
+			if _scene_instance.has_signal("code_updated"):
+				_scene_instance.connect("code_updated", self, "emit_signal", ["code_updated"])
+
+	_reset_monitored_variable_highlights()
+
+
+func _reset_monitored_variable_highlights():
+	if not _debugger:
+		return
+
+	# After changing font size, must wait a frame to create monitored variables
+	yield(get_tree(), "idle_frame")
+
+	for monitored_variable in _monitored_variable_highlights:
+		monitored_variable.queue_free()
+	_monitored_variable_highlights.clear()
+
+	if not _gdscript_text_edit.visible:
+		return
+
+	# Create widgets that underline a variable and display a variable's value
+	# when hovering with the mouse.
+	var monitored_variables : Array = _debugger.monitored_variables
+	var offset := Vector2(_gdscript_text_edit.rect_position.x, 0.0)
+
+	for variable_name in monitored_variables:
+		var last_line := 0
+		var last_column := -1 # Search offset to not repeat same result
+
+		while last_line >= 0:
+			var result := _gdscript_text_edit.search(variable_name, 0, last_line, last_column + 1)
+
+			var is_result_in_line_before := false
+			var is_result_in_column_before := false
+
+			if result.size() != 0:
+				is_result_in_line_before = result[TextEdit.SEARCH_RESULT_LINE] < last_line
+				is_result_in_column_before = (
+					result[TextEdit.SEARCH_RESULT_COLUMN] < last_column
+					and result[TextEdit.SEARCH_RESULT_LINE] <= last_line
+				)
+
+			if result.size() == 0:
+				last_line = -1
+			elif is_result_in_line_before or is_result_in_column_before:
+				last_line = -1
+			else:
+				last_line = result[TextEdit.SEARCH_RESULT_LINE]
+				last_column = result[TextEdit.SEARCH_RESULT_COLUMN]
+
+				var rect = _gdscript_text_edit.get_rect_at_line_column(last_line, last_column)
+				rect.position += offset
+				rect.size.x = (rect.size.x * variable_name.length()) + 4
+
+				var monitored_variable : CodeExampleVariableUnderline = CodeExampleVariableUnderlineScene.instance()
+				add_child(monitored_variable)
+				monitored_variable.highlight_rect = rect
+				monitored_variable.variable_name = variable_name
+				monitored_variable.setup(self, _scene_instance)
+				_monitored_variable_highlights.append(monitored_variable)
 
 
 func _on_highlight_line(line_number: int) -> void:
@@ -307,4 +400,5 @@ func _clear_animated_arrows() -> void:
 
 func _on_Events_font_size_scale_changed(new_font_scale: int) -> void:
 	_clear_animated_arrows()
+	_reset_monitored_variable_highlights()
 	_update_gdscript_text_edit_width(new_font_scale)

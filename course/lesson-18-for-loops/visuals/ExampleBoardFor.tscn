@@ -19,6 +19,8 @@ func _set_instance_value(value: float, property_name: String, value_label: Label
 [sub_resource type="GDScript" id=2]
 script/source = "extends \"res://course/lesson-17-while-loops/visuals/Board.gd\"
 
+signal code_updated
+var cell = Vector2.ZERO
 var _board_width := 0
 var _loops := 0
 
@@ -44,7 +46,8 @@ func reset() -> void:
 	_loops = 0
 	_timer.stop()
 	_robot.cell = Vector2(0, 1)
-
+	cell = _robot.cell
+	emit_signal(\"code_updated\")
 
 func _on_timer_timeout() -> void:
 	_loops += 1
@@ -54,15 +57,14 @@ func _on_timer_timeout() -> void:
 		return
 	
 	_robot.cell += Vector2(1, 0)
+	cell = _robot.cell
+	emit_signal(\"code_updated\")
 "
 
 [node name="ExampleBoardFor" type="PanelContainer"]
 margin_right = 658.0
 margin_bottom = 384.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
 margin_left = 7.0
@@ -86,8 +88,5 @@ margin_top = -54.0
 margin_right = 201.0
 margin_bottom = -40.0
 text = "cell = Vector2(0, 1)"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Timer" type="Timer" parent="RunnableCodeExample/BoardForLoop"]

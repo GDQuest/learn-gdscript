@@ -1,32 +1,42 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/components/OutputConsole.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/components/RunnableCodeExampleDebugger.tscn" type="PackedScene" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends OutputConsole
 
+onready var health = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
+
 
 func run():
-	clear_messages()
-	var health = 5
+	emit_signal(\"line_highlight_requested\", 0)
+	yield()
+	health = 5
+	emit_signal(\"line_highlight_requested\", 1)
+	yield()
 	health -= 1
+	emit_signal(\"line_highlight_requested\", 2)
+	yield()
 	print_output([health])
+	emit_signal(\"line_highlight_requested\", 3)
+	yield()
+
+
+func reset() -> void:
+	clear_messages()
+	health = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
 "
 
-[node name="PanelContainer" type="PanelContainer"]
+[node name="PanelContainer" type="VBoxContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 764.0
-margin_bottom = 267.0
+margin_right = 781.0
+margin_bottom = 260.0
 gdscript_code = "func run():
 	var health = 5
 	health = health - 1
@@ -35,8 +45,13 @@ gdscript_code = "func run():
 [node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 648.0
-margin_right = 757.0
+margin_left = 672.0
+margin_right = 781.0
 margin_bottom = 260.0
 size_flags_horizontal = 3
 script = SubResource( 1 )
+
+[node name="RunnableCodeExampleDebugger" parent="." instance=ExtResource( 3 )]
+margin_top = 264.0
+margin_bottom = 330.0
+monitored_variables = [ "health" ]

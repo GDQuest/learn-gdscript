@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/components/DebuggerConsoleMonitoredVariable.gd" type="Script" id=2]
+[ext_resource path="res://ui/theme/panel_error_log.tres" type="StyleBox" id=3]
+
+[node name="DebuggerConsoleMonitoredVariable" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+custom_styles/panel = ExtResource( 3 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 1904.0
+margin_bottom = 36.0
+size_flags_vertical = 0
+text = "Value"
+
+[node name="Tween" type="Tween" parent="."]

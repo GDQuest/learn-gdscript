@@ -1,39 +1,44 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/components/OutputConsole.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/components/RunnableCodeExampleDebugger.tscn" type="PackedScene" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends OutputConsole
+
+onready var character = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
+
 
 func run() -> void:
 	clear_messages()
 	emit_signal(\"line_highlight_requested\", 0)
 	yield()
 	var _i := 0
-	for character in \"Robot\":
+	for c in \"Robot\":
+		character = \"\\\"%s\\\"\" % c
 		emit_signal(\"line_highlight_requested\", 1)
 		emit_signal(\"animate_arrow_requested\", [19 + _i, 1], [5,9])
 		_i += 1
 		yield()
-		print_output([character])
+		print_output([c])
 		emit_signal(\"line_highlight_requested\", 2)
 		yield()
+
+
+func reset() -> void:
+	clear_messages()
+	character = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
 "
 
-[node name="PrintCharactersInName" type="PanelContainer"]
+[node name="PrintCharactersInName" type="VBoxContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 788.0
-margin_bottom = 267.0
+margin_right = 781.0
+margin_bottom = 260.0
 gdscript_code = "func run():
 	for character in \"Robot\":
 		print(character)"
@@ -46,3 +51,8 @@ margin_right = 781.0
 margin_bottom = 260.0
 size_flags_horizontal = 3
 script = SubResource( 1 )
+
+[node name="RunnableCodeExampleDebugger" parent="." instance=ExtResource( 3 )]
+margin_top = 264.0
+margin_bottom = 330.0
+monitored_variables = [ "character" ]

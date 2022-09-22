@@ -1,11 +1,12 @@
 extends Node2D
 
+signal line_highlight_requested
 
 var initial_light_index := 0
 var light_index := initial_light_index - 1
 
-onready var _tween := $Tween
-onready var _index_label := $Index
+onready var _tween := $Tween as Tween
+onready var _index_label := $Index as Label
 onready var _lights := [
 	$Red,
 	$Yellow,
@@ -14,18 +15,28 @@ onready var _lights := [
 
 
 func _ready() -> void:
-	run()
+	reset()
 
 
 func run() -> void:
+	emit_signal("line_highlight_requested", 0)
+	yield()
+	
 	if _tween.is_active():
 		return
 	
 	light_index += 1
-	light_index %= 3
-	turn_on_light(light_index)
-	
 	_index_label.text = str(light_index)
+	emit_signal("line_highlight_requested", 1)
+	yield()
+	emit_signal("line_highlight_requested", 2)
+	yield()
+	if light_index == 3:
+		light_index = 0
+		_index_label.text = str(light_index)
+		emit_signal("line_highlight_requested", 3)
+		yield()
+	turn_on_light(light_index)
 
 
 func reset() -> void:
@@ -35,7 +46,7 @@ func reset() -> void:
 	_index_label.text = str(light_index)
 
 
-func turn_on_light(light_index) -> void:
+func turn_on_light(_light_index: int) -> void:
 	
 	for light in _lights:
 		_tween.interpolate_property(light, "modulate:a", light.modulate.a, 0, 0.2, Tween.TRANS_EXPO, Tween.EASE_OUT)

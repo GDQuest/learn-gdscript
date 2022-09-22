@@ -1,29 +1,42 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/components/OutputConsole.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/components/RunnableCodeExampleDebugger.tscn" type="PackedScene" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends OutputConsole
 
+onready var speed = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
+
 func run():
-	clear_messages()
+	emit_signal(\"line_highlight_requested\", 0)
+	yield()
+	speed = 120
+	emit_signal(\"line_highlight_requested\", 1)
+	yield()
+	emit_signal(\"line_highlight_requested\", 2)
+	yield()
+	emit_signal(\"line_highlight_requested\", 4)
+	yield()
 	print_output([\"You're fast!\"])
+	emit_signal(\"line_highlight_requested\", 5)
+	yield()
+
+
+func reset() -> void:
+	clear_messages()
+	speed = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
 "
 
-[node name="ExampleElse" type="PanelContainer"]
+[node name="ExampleElse" type="VBoxContainer"]
 margin_right = 1047.0
 margin_bottom = 298.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1040.0
-margin_bottom = 291.0
+margin_right = 1047.0
+margin_bottom = 260.0
 gdscript_code = "func run():
 	var speed = 120
 	if speed < 100:
@@ -35,8 +48,14 @@ run_button_label = "run()"
 [node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 720.0
-margin_right = 1033.0
-margin_bottom = 284.0
+margin_left = 739.0
+margin_right = 1047.0
+margin_bottom = 260.0
 size_flags_horizontal = 3
 script = SubResource( 1 )
+
+[node name="RunnableCodeExampleDebugger" parent="." instance=ExtResource( 3 )]
+margin_top = 264.0
+margin_right = 1047.0
+margin_bottom = 330.0
+monitored_variables = [ "speed" ]

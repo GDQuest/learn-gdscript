@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=2]
+[ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/theme/runnable_example_panel_outline.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/components/RunnableCodeExampleDebugger.gd" type="Script" id=5]
+
+[node name="RunnableCodeExampleDebugger" type="PanelContainer"]
+margin_right = 781.0
+margin_bottom = 117.0
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+script = ExtResource( 5 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 781.0
+margin_bottom = 117.0
+custom_styles/panel = ExtResource( 2 )
+
+[node name="Outline" type="Panel" parent="."]
+margin_right = 781.0
+margin_bottom = 117.0
+custom_styles/panel = ExtResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 781.0
+margin_bottom = 117.0
+
+[node name="VariablesContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 761.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VariablesContainer"]
+margin_right = 741.0
+margin_bottom = 26.0
+custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Debugger"

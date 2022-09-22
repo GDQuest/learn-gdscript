@@ -1,24 +1,22 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/lesson-15-modulo/visuals/TrafficLights.tscn" type="PackedScene" id=2]
+[ext_resource path="res://course/lesson-15-modulo/visuals/TrafficLightsCondition.tscn" type="PackedScene" id=2]
 
 [node name="Panel" type="PanelContainer"]
 margin_right = 728.0
 margin_bottom = 274.0
+rect_min_size = Vector2( 0, 320 )
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 721.0
-margin_bottom = 267.0
+margin_bottom = 313.0
 scene = ExtResource( 2 )
-gdscript_code = "func advance_light():
+gdscript_code = "func advance():
 	light_index += 1
 	if light_index == 3:
 		light_index = 0"
-run_button_label = "advance_light()"
+run_button_label = "advance()"
