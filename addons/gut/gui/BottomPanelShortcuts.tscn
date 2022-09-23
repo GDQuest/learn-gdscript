@@ -1,0 +1,232 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/gut/gui/ShortcutButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/gut/gui/BottomPanelShortcuts.gd" type="Script" id=2]
+
+[node name="BottomPanelShortcuts" type="WindowDialog"]
+visible = true
+anchor_right = 0.234
+anchor_bottom = 0.328
+margin_right = 195.384
+margin_bottom = 62.2
+rect_min_size = Vector2( 435, 305 )
+popup_exclusive = true
+window_title = "GUT Shortcuts"
+resizable = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Layout" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_right = -5.0
+margin_bottom = 2.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopPad" type="CenterContainer" parent="Layout"]
+margin_right = 425.0
+margin_bottom = 5.0
+rect_min_size = Vector2( 0, 5 )
+
+[node name="Label2" type="Label" parent="Layout"]
+margin_top = 9.0
+margin_right = 425.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 0, 20 )
+text = "Always Active"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="ColorRect" type="ColorRect" parent="Layout/Label2"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.196078 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CPanelButton" type="HBoxContainer" parent="Layout"]
+margin_top = 33.0
+margin_right = 425.0
+margin_bottom = 58.0
+
+[node name="Label" type="Label" parent="Layout/CPanelButton"]
+margin_right = 138.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_vertical = 7
+text = "Show/Hide GUT Panel"
+valign = 1
+
+[node name="ShortcutButton" parent="Layout/CPanelButton" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 142.0
+margin_right = 425.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+
+[node name="GutPanelPad" type="CenterContainer" parent="Layout"]
+margin_top = 62.0
+margin_right = 425.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 0, 5 )
+
+[node name="Label" type="Label" parent="Layout"]
+margin_top = 71.0
+margin_right = 425.0
+margin_bottom = 91.0
+rect_min_size = Vector2( 0, 20 )
+text = "Only Active When GUT Panel Shown"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="ColorRect2" type="ColorRect" parent="Layout/Label"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.196078 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopPad2" type="CenterContainer" parent="Layout"]
+margin_top = 95.0
+margin_right = 425.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 5 )
+
+[node name="CRunAll" type="HBoxContainer" parent="Layout"]
+margin_top = 104.0
+margin_right = 425.0
+margin_bottom = 129.0
+
+[node name="Label" type="Label" parent="Layout/CRunAll"]
+margin_right = 50.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_vertical = 7
+text = "Run All"
+valign = 1
+
+[node name="ShortcutButton" parent="Layout/CRunAll" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 54.0
+margin_right = 425.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+
+[node name="CRunCurrentScript" type="HBoxContainer" parent="Layout"]
+margin_top = 133.0
+margin_right = 425.0
+margin_bottom = 158.0
+
+[node name="Label" type="Label" parent="Layout/CRunCurrentScript"]
+margin_right = 115.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_vertical = 7
+text = "Run Current Script"
+valign = 1
+
+[node name="ShortcutButton" parent="Layout/CRunCurrentScript" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 119.0
+margin_right = 425.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+
+[node name="CRunCurrentInner" type="HBoxContainer" parent="Layout"]
+margin_top = 162.0
+margin_right = 425.0
+margin_bottom = 187.0
+
+[node name="Label" type="Label" parent="Layout/CRunCurrentInner"]
+margin_right = 150.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_vertical = 7
+text = "Run Current Inner Class"
+valign = 1
+
+[node name="ShortcutButton" parent="Layout/CRunCurrentInner" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 154.0
+margin_right = 425.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+
+[node name="CRunCurrentTest" type="HBoxContainer" parent="Layout"]
+margin_top = 191.0
+margin_right = 425.0
+margin_bottom = 216.0
+
+[node name="Label" type="Label" parent="Layout/CRunCurrentTest"]
+margin_right = 106.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_vertical = 7
+text = "Run Current Test"
+valign = 1
+
+[node name="ShortcutButton" parent="Layout/CRunCurrentTest" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 110.0
+margin_right = 425.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+
+[node name="CenterContainer2" type="CenterContainer" parent="Layout"]
+margin_top = 220.0
+margin_right = 425.0
+margin_bottom = 241.0
+rect_min_size = Vector2( 0, 5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ShiftDisclaimer" type="Label" parent="Layout"]
+margin_top = 245.0
+margin_right = 425.0
+margin_bottom = 259.0
+text = "\"Shift\" cannot be the only modifier for a shortcut."
+align = 2
+autowrap = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Layout"]
+margin_top = 263.0
+margin_right = 425.0
+margin_bottom = 293.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Layout/HBoxContainer"]
+margin_right = 361.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Hide" type="Button" parent="Layout/HBoxContainer"]
+margin_left = 365.0
+margin_right = 425.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 60, 30 )
+text = "Close"
+
+[node name="BottomPad" type="CenterContainer" parent="Layout"]
+margin_top = 297.0
+margin_right = 425.0
+margin_bottom = 307.0
+rect_min_size = Vector2( 0, 10 )
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="Layout/HBoxContainer/Hide" to="." method="_on_Hide_pressed"]

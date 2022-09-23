@@ -1,0 +1,385 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://addons/gut/gui/GutBottomPanel.gd" type="Script" id=1]
+[ext_resource path="res://addons/gut/gui/BottomPanelShortcuts.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/gut/gui/RunAtCursor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/gut/gui/play.png" type="Texture" id=4]
+[ext_resource path="res://addons/gut/gui/RunResults.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/gut/gui/OutputText.tscn" type="PackedScene" id=6]
+
+[sub_resource type="InputEventKey" id=8]
+control = true
+scancode = 49
+
+[sub_resource type="ShortCut" id=9]
+shortcut = SubResource( 8 )
+
+[sub_resource type="Image" id=10]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"format": "LumAlpha8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id=2]
+flags = 4
+flags = 4
+image = SubResource( 10 )
+size = Vector2( 16, 16 )
+
+[node name="GutBottomPanel" type="Control"]
+anchor_left = -0.0025866
+anchor_top = -0.00176575
+anchor_right = 0.997413
+anchor_bottom = 0.998234
+margin_left = 2.64868
+margin_top = 1.05945
+margin_right = 2.64862
+margin_bottom = 1.05945
+rect_min_size = Vector2( 0, 300 )
+script = ExtResource( 1 )
+
+[node name="layout" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ControlBar" type="HBoxContainer" parent="layout"]
+margin_right = 1023.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RunAll" type="Button" parent="layout/ControlBar"]
+margin_right = 150.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 150, 0 )
+hint_tooltip = "Run all test scripts in the suite."
+size_flags_vertical = 11
+shortcut = SubResource( 9 )
+text = "Run All"
+icon = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="layout/ControlBar"]
+margin_left = 154.0
+margin_top = 13.0
+margin_right = 213.0
+margin_bottom = 27.0
+hint_tooltip = "When a test script is edited, buttons are displayed to
+run the opened script or an Inner-Test-Class or a
+single test.  The buttons change based on the location
+of the cursor in the file.
+
+These buttons will remain active when editing other
+items so that you can run tests without having to switch
+back to the test script.
+
+You can assign keyboard shortcuts for these buttons
+using the \"shortcuts\" button in the GUT panel."
+mouse_filter = 1
+text = "Current:  "
+
+[node name="RunAtCursor" parent="layout/ControlBar" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 217.0
+margin_right = 548.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="CenterContainer2" type="CenterContainer" parent="layout/ControlBar"]
+margin_left = 552.0
+margin_right = 883.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+
+[node name="Sep1" type="ColorRect" parent="layout/ControlBar"]
+margin_left = 887.0
+margin_right = 889.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 2, 0 )
+
+[node name="RunResultsBtn" type="ToolButton" parent="layout/ControlBar"]
+margin_left = 893.0
+margin_right = 921.0
+margin_bottom = 40.0
+hint_tooltip = "Show/Hide Results Tree Panel."
+toggle_mode = true
+pressed = true
+icon = SubResource( 2 )
+
+[node name="OutputBtn" type="ToolButton" parent="layout/ControlBar"]
+margin_left = 925.0
+margin_right = 953.0
+margin_bottom = 40.0
+hint_tooltip = "Show/Hide Output Panel."
+toggle_mode = true
+pressed = true
+icon = SubResource( 2 )
+
+[node name="Settings" type="ToolButton" parent="layout/ControlBar"]
+margin_left = 957.0
+margin_right = 985.0
+margin_bottom = 40.0
+hint_tooltip = "Show/Hide Settings Panel."
+toggle_mode = true
+icon = SubResource( 2 )
+
+[node name="Sep2" type="ColorRect" parent="layout/ControlBar"]
+margin_left = 989.0
+margin_right = 991.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 2, 0 )
+
+[node name="Shortcuts" type="ToolButton" parent="layout/ControlBar"]
+margin_left = 995.0
+margin_right = 1023.0
+margin_bottom = 40.0
+hint_tooltip = "Set shortcuts for GUT buttons.  Shortcuts do not work when the GUT panel is not visible."
+size_flags_vertical = 11
+icon = SubResource( 2 )
+
+[node name="RSplit" type="HSplitContainer" parent="layout"]
+margin_top = 44.0
+margin_right = 1023.0
+margin_bottom = 599.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+collapsed = true
+
+[node name="sc" type="ScrollContainer" parent="layout/RSplit"]
+visible = false
+margin_left = 593.0
+margin_right = 1093.0
+margin_bottom = 555.0
+rect_min_size = Vector2( 500, 0 )
+mouse_filter = 1
+size_flags_vertical = 3
+
+[node name="Settings" type="VBoxContainer" parent="layout/RSplit/sc"]
+margin_right = 500.0
+margin_bottom = 908.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CResults" type="VBoxContainer" parent="layout/RSplit"]
+margin_right = 1023.0
+margin_bottom = 555.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ControlBar" type="HBoxContainer" parent="layout/RSplit/CResults"]
+margin_right = 1023.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 0, 35 )
+
+[node name="Light" type="Control" parent="layout/RSplit/CResults/ControlBar"]
+visible = false
+margin_right = 30.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 30, 30 )
+
+[node name="Passing" type="HBoxContainer" parent="layout/RSplit/CResults/ControlBar"]
+visible = false
+margin_left = 34.0
+margin_right = 107.0
+margin_bottom = 35.0
+
+[node name="Sep" type="ColorRect" parent="layout/RSplit/CResults/ControlBar/Passing"]
+margin_right = 2.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 2, 0 )
+
+[node name="label" type="Label" parent="layout/RSplit/CResults/ControlBar/Passing"]
+margin_left = 6.0
+margin_top = 10.0
+margin_right = 54.0
+margin_bottom = 24.0
+text = "Passing"
+
+[node name="value" type="Label" parent="layout/RSplit/CResults/ControlBar/Passing"]
+margin_left = 58.0
+margin_top = 10.0
+margin_right = 73.0
+margin_bottom = 24.0
+text = "---"
+
+[node name="Failing" type="HBoxContainer" parent="layout/RSplit/CResults/ControlBar"]
+visible = false
+margin_left = 34.0
+margin_right = 100.0
+margin_bottom = 35.0
+
+[node name="Sep" type="ColorRect" parent="layout/RSplit/CResults/ControlBar/Failing"]
+margin_right = 2.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 2, 0 )
+
+[node name="label" type="Label" parent="layout/RSplit/CResults/ControlBar/Failing"]
+margin_left = 6.0
+margin_top = 10.0
+margin_right = 47.0
+margin_bottom = 24.0
+text = "Failing"
+
+[node name="value" type="Label" parent="layout/RSplit/CResults/ControlBar/Failing"]
+margin_left = 51.0
+margin_top = 10.0
+margin_right = 66.0
+margin_bottom = 24.0
+text = "---"
+
+[node name="Pending" type="HBoxContainer" parent="layout/RSplit/CResults/ControlBar"]
+visible = false
+margin_left = 34.0
+margin_right = 110.0
+margin_bottom = 35.0
+
+[node name="Sep" type="ColorRect" parent="layout/RSplit/CResults/ControlBar/Pending"]
+margin_right = 2.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 2, 0 )
+
+[node name="label" type="Label" parent="layout/RSplit/CResults/ControlBar/Pending"]
+margin_left = 6.0
+margin_top = 10.0
+margin_right = 57.0
+margin_bottom = 24.0
+text = "Pending"
+
+[node name="value" type="Label" parent="layout/RSplit/CResults/ControlBar/Pending"]
+margin_left = 61.0
+margin_top = 10.0
+margin_right = 76.0
+margin_bottom = 24.0
+text = "---"
+
+[node name="Orphans" type="HBoxContainer" parent="layout/RSplit/CResults/ControlBar"]
+visible = false
+margin_left = 34.0
+margin_right = 110.0
+margin_bottom = 35.0
+
+[node name="Sep" type="ColorRect" parent="layout/RSplit/CResults/ControlBar/Orphans"]
+margin_right = 2.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 2, 0 )
+
+[node name="label" type="Label" parent="layout/RSplit/CResults/ControlBar/Orphans"]
+margin_left = 6.0
+margin_top = 10.0
+margin_right = 57.0
+margin_bottom = 24.0
+text = "Orphans"
+
+[node name="value" type="Label" parent="layout/RSplit/CResults/ControlBar/Orphans"]
+margin_left = 61.0
+margin_top = 10.0
+margin_right = 76.0
+margin_bottom = 24.0
+text = "---"
+
+[node name="Errors" type="HBoxContainer" parent="layout/RSplit/CResults/ControlBar"]
+visible = false
+margin_left = 34.0
+margin_right = 96.0
+margin_bottom = 35.0
+
+[node name="Sep" type="ColorRect" parent="layout/RSplit/CResults/ControlBar/Errors"]
+margin_right = 2.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 2, 0 )
+
+[node name="label" type="Label" parent="layout/RSplit/CResults/ControlBar/Errors"]
+margin_left = 6.0
+margin_top = 10.0
+margin_right = 43.0
+margin_bottom = 24.0
+hint_tooltip = "The number of GUT errors generated.  This does not include engine errors."
+text = "Errors"
+
+[node name="value" type="Label" parent="layout/RSplit/CResults/ControlBar/Errors"]
+margin_left = 47.0
+margin_top = 10.0
+margin_right = 62.0
+margin_bottom = 24.0
+text = "---"
+
+[node name="Warnings" type="HBoxContainer" parent="layout/RSplit/CResults/ControlBar"]
+visible = false
+margin_left = 34.0
+margin_right = 118.0
+margin_bottom = 35.0
+
+[node name="Sep" type="ColorRect" parent="layout/RSplit/CResults/ControlBar/Warnings"]
+margin_right = 2.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 2, 0 )
+
+[node name="label" type="Label" parent="layout/RSplit/CResults/ControlBar/Warnings"]
+margin_left = 6.0
+margin_top = 10.0
+margin_right = 65.0
+margin_bottom = 24.0
+text = "Warnings"
+__meta__ = {
+"_editor_description_": "The number of GUT Warnings generated.  This does not include engine warnings."
+}
+
+[node name="value" type="Label" parent="layout/RSplit/CResults/ControlBar/Warnings"]
+margin_left = 69.0
+margin_top = 10.0
+margin_right = 84.0
+margin_bottom = 24.0
+text = "---"
+
+[node name="CenterContainer" type="CenterContainer" parent="layout/RSplit/CResults/ControlBar"]
+margin_right = 1023.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+
+[node name="Tabs" type="HSplitContainer" parent="layout/RSplit/CResults"]
+margin_top = 39.0
+margin_right = 1023.0
+margin_bottom = 555.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RunResults" parent="layout/RSplit/CResults/Tabs" instance=ExtResource( 5 )]
+margin_right = 505.0
+margin_bottom = 516.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="OutputText" parent="layout/RSplit/CResults/Tabs" instance=ExtResource( 6 )]
+margin_left = 517.0
+margin_right = 1023.0
+margin_bottom = 516.0
+
+[node name="BottomPanelShortcuts" parent="." instance=ExtResource( 2 )]
+visible = false
+anchor_left = -0.000517324
+anchor_top = 0.000882874
+anchor_right = 0.233483
+anchor_bottom = 0.328883
+margin_left = 10.0649
+margin_top = -173.752
+margin_right = 31.6969
+margin_bottom = -125.552
+
+[connection signal="pressed" from="layout/ControlBar/RunAll" to="." method="_on_RunAll_pressed"]
+[connection signal="run_tests" from="layout/ControlBar/RunAtCursor" to="." method="_on_RunAtCursor_run_tests"]
+[connection signal="pressed" from="layout/ControlBar/RunResultsBtn" to="." method="_on_RunResultsBtn_pressed"]
+[connection signal="pressed" from="layout/ControlBar/OutputBtn" to="." method="_on_OutputBtn_pressed"]
+[connection signal="pressed" from="layout/ControlBar/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="layout/ControlBar/Shortcuts" to="." method="_on_Shortcuts_pressed"]
+[connection signal="draw" from="layout/RSplit/CResults/ControlBar/Light" to="." method="_on_Light_draw"]
+[connection signal="popup_hide" from="BottomPanelShortcuts" to="." method="_on_BottomPanelShortcuts_popup_hide"]

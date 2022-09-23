@@ -1,0 +1,58 @@
+# ##############################################################################
+# Start Script
+# ##############################################################################
+{extends}
+
+{constants}
+
+{properties}
+# ------------------------------------------------------------------------------
+# GUT Double properties and methods
+# ------------------------------------------------------------------------------
+var __gut_metadata_ = {
+	path = '{path}',
+	subpath = '{subpath}',
+	stubber = __gut_instance_from_id({stubber_id}),
+	spy = __gut_instance_from_id({spy_id}),
+	gut = __gut_instance_from_id({gut_id}),
+	from_singleton = '{singleton_name}',
+	is_partial = {is_partial}
+}
+
+func __gut_instance_from_id(inst_id):
+	if(inst_id ==  -1):
+		return null
+	else:
+		return instance_from_id(inst_id)
+
+func __gut_should_call_super(method_name, called_with):
+	if(__gut_metadata_.stubber != null):
+		return __gut_metadata_.stubber.should_call_super(self, method_name, called_with)
+	else:
+		return false
+
+var __gut_utils_ = load('res://addons/gut/utils.gd').get_instance()
+
+func __gut_spy(method_name, called_with):
+	if(__gut_metadata_.spy != null):
+		__gut_metadata_.spy.add_call(self, method_name, called_with)
+
+func __gut_get_stubbed_return(method_name, called_with):
+	if(__gut_metadata_.stubber != null):
+		return __gut_metadata_.stubber.get_return(self, method_name, called_with)
+	else:
+		return null
+
+func __gut_default_val(method_name, p_index):
+	if(__gut_metadata_.stubber != null):
+		return __gut_metadata_.stubber.get_default_value(self, method_name, p_index)
+	else:
+		return null
+
+func __gut_init():
+	if(__gut_metadata_.gut != null):
+		__gut_metadata_.gut.get_autofree().add_free(self)
+
+# ------------------------------------------------------------------------------
+# Methods start here
+# ------------------------------------------------------------------------------

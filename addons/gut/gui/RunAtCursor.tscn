@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/gut/gui/RunAtCursor.gd" type="Script" id=1]
+[ext_resource path="res://addons/gut/gui/play.png" type="Texture" id=2]
+[ext_resource path="res://addons/gut/gui/arrow.png" type="Texture" id=3]
+
+[node name="RunAtCursor" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1.0
+margin_bottom = -527.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBox" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LblNoneSelected" type="Label" parent="HBox"]
+margin_top = 29.0
+margin_right = 50.0
+margin_bottom = 43.0
+text = "<None>"
+
+[node name="BtnRunScript" type="Button" parent="HBox"]
+visible = false
+margin_left = 54.0
+margin_right = 140.0
+margin_bottom = 73.0
+text = "<script>"
+icon = ExtResource( 2 )
+
+[node name="Arrow1" type="TextureButton" parent="HBox"]
+visible = false
+margin_left = 54.0
+margin_right = 78.0
+margin_bottom = 73.0
+rect_min_size = Vector2( 24, 0 )
+texture_normal = ExtResource( 3 )
+expand = true
+stretch_mode = 3
+
+[node name="BtnRunInnerClass" type="Button" parent="HBox"]
+visible = false
+margin_left = 134.0
+margin_right = 243.0
+margin_bottom = 73.0
+text = "<inner class>"
+icon = ExtResource( 2 )
+
+[node name="Arrow2" type="TextureButton" parent="HBox"]
+visible = false
+margin_left = 54.0
+margin_right = 78.0
+margin_bottom = 73.0
+rect_min_size = Vector2( 24, 0 )
+texture_normal = ExtResource( 3 )
+expand = true
+stretch_mode = 3
+
+[node name="BtnRunMethod" type="Button" parent="HBox"]
+visible = false
+margin_left = 247.0
+margin_right = 337.0
+margin_bottom = 73.0
+text = "<method>"
+icon = ExtResource( 2 )
+
+[connection signal="pressed" from="HBox/BtnRunScript" to="." method="_on_BtnRunScript_pressed"]
+[connection signal="pressed" from="HBox/BtnRunInnerClass" to="." method="_on_BtnRunInnerClass_pressed"]
+[connection signal="pressed" from="HBox/BtnRunMethod" to="." method="_on_BtnRunMethod_pressed"]

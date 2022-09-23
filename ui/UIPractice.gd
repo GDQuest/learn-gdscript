@@ -2,6 +2,9 @@ tool
 class_name UIPractice
 extends UINavigatablePage
 
+
+signal test_student_code_completed
+
 const RUN_AUTOTIMER_DURATION := 5.0
 const SLIDE_TRANSITION_DURATION := 0.5
 # Maximum allowed iterations in while loops to prevent infinite loops.
@@ -194,6 +197,10 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 			_info_panel.set_status_icon(_info_panel.Status.COMPLETED_BEFORE)
 
 
+# Turns off animations to run integration tests faster.
+func turn_on_test_mode() -> void:
+	_info_panel.skip_animations = true
+
 func _update_labels() -> void:
 	if not _practice:
 		return
@@ -380,6 +387,8 @@ func _test_student_code() -> void:
 	_code_editor.unlock_editor()
 	if _practice_completed:
 		_code_editor.set_continue_allowed(true)
+
+	emit_signal("test_student_code_completed")
 
 
 func _reset_practice() -> void:
