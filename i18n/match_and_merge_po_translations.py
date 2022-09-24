@@ -2,7 +2,25 @@
 translated strings."""
 from dataclasses import dataclass
 from enum import Enum
+import os
 import re
+from datargs import parse, arg
+from typing import Sequence
+
+
+@dataclass
+class Args:
+    """Command-line arguments."""
+
+    files: Sequence[str] = arg(
+        positional=True,
+        default=tuple(),
+        help="List of paths to .po or .pot files to parse.",
+    )
+    output_directory: str = arg(
+        default="dist",
+        help="Directory to write .po files to.",
+    )
 
 
 class PropertyType(Enum):
@@ -23,17 +41,19 @@ class Entry:
 
 @dataclass
 class PoFile:
-    head = ""
+    head: str = ""
     entries = []
-    language = ""
+    language: str = ""
+    filename: str = ""
 
     def as_string(self):
         return self.head + "\n\n".join([entry.as_string() for entry in self.entries])
 
 
-def parse(filepath: str):
+def parse_po_file(filepath: str):
     """Parse one .pot or .po file and create a list of entries."""
     output = PoFile()
+    output.filename = os.path.basename(filepath)
 
     content = []
     with open(filepath, "r") as po_file:
@@ -83,16 +103,39 @@ def make_catalog(po_files: list[PoFile]):
 
             if entry.msgid not in output:
                 output[entry.msgid] = {}
-            output[entry.msgid][po_file.language] = entry.msgstr
+
+            translated_lines = entry.msgstr.split(r"\n")
+            source_lines = entry.msgid.split(r"\n")
+            for index in range(len(source_lines)):
+                line = source_lines[index]
+                if not line:
+                    continue
+                if not line in output:
+                    output[line] = {}
+                output[line][po_file.language] = translated_lines[index]
+
     return output
 
 
 def main():
-    test = parse(
-        "/home/gdquest/Repositories/learn-gdscript-translations/es/application.po"
-    )
-    catalog = make_catalog([test])
-    print(catalog)
+    args = parse(Args)
+    for f in args.files:
+        assert os.path.exists(f)
+
+    po_files = list(map(parse_po_file, args.files))
+    catalog = make_catalog(po_files)
+    # print_to_output(catalog)
+
+def print_catalog(catalog):
+    count = 0
+    for msgid in catalog:
+        if count > 5:
+            break
+        print(msgid)
+        for lang in catalog[msgid]:
+            print(catalog[msgid][lang])
+        print("-------")
+        count += 1
 
 
 if __name__ == "__main__":
