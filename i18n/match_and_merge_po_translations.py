@@ -25,6 +25,7 @@ class Entry:
 class PoFile:
     head = ""
     entries = []
+    language = ""
 
     def as_string(self):
         return self.head + "\n\n".join([entry.as_string() for entry in self.entries])
@@ -40,6 +41,11 @@ def parse(filepath: str):
 
     head_end = content.find("\n\n")
     output.head = content[0:head_end]
+    match = re.search(
+        r'^"Language: (?P<language>\w{2})\\n"', output.head, flags=re.MULTILINE
+    )
+    if match:
+        output.language = match.group(1)
 
     current_entry = None
     current_prop = ""
@@ -66,22 +72,27 @@ def parse(filepath: str):
     return output
 
 
-# for each #: comment
-# map each src string lines to translation string
-# strip explicit \n from each line
-
-
 def make_catalog(po_files: list[PoFile]):
     """Returns a map of source strings and corresponding translations in
     different languages."""
-    return {}
+    output = {}
+    for po_file in po_files:
+        for entry in po_file.entries:
+            if not entry.msgstr:
+                continue
+
+            if entry.msgid not in output:
+                output[entry.msgid] = {}
+            output[entry.msgid][po_file.language] = entry.msgstr
+    return output
 
 
 def main():
     test = parse(
         "/home/gdquest/Repositories/learn-gdscript-translations/es/application.po"
     )
-    print(test.entries[0])
+    catalog = make_catalog([test])
+    print(catalog)
 
 
 if __name__ == "__main__":
