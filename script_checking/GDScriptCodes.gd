@@ -47,7 +47,9 @@ enum ErrorCode {
 	MISPLACED_STATIC_CALL,
 	
 	ASSIGNING_TO_EXPRESSION,
-	IN_EXPECTED_AFTER_IDENTIFIER
+	IN_EXPECTED_AFTER_IDENTIFIER,
+
+	UNEXPECTED_EOL,
 }
 
 enum WarningCode {
@@ -218,8 +220,6 @@ const MESSAGE_DATABASE := [
 			
 			"Can't assign a new value to a constant.",
 			
-			# A generic parser error (invalid token?).
-			"Parse error: %ERROR_TOKEN%",
 			# Any warning can be reported as error with an editor setting.
 			"%WARNING_MESSAGE% (warning treated as error)",
 		],
@@ -775,5 +775,10 @@ const MESSAGE_DATABASE := [
 			"\"in\" expected after identifier.",
 		],
 		"code": ErrorCode.IN_EXPECTED_AFTER_IDENTIFIER
+	},
+	{
+		"patterns": [ ["Parse error: Unexpected EOL"]],
+		"raw": ["Parse error: Unexpected EOL at %TYPE_NAME%"],
+		"code": ErrorCode.UNEXPECTED_EOL
 	}
 ]
