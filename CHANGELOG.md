@@ -2,6 +2,47 @@
 
 This document lists changes between releases.
 
+## Learn GDScript From Zero 1.3.0
+
+*Released on September 25, 2022*
+
+### New features
+
+- Add syntax highlighting for code in lesson and practice text
+- Add sponsorless end screen for Godot docs (#632)
+- Add visualization of how values get assigned to cursor variable in for loops (#634)
+- Add common macOS Cmd shortcuts in code editor in browser
+
+### Content changes
+
+- Improve loop explanations and examples in lessons 17 and 18 (#641)
+- Rewrite lesson 9's first practice hint to make it clearer
+- Add error explanation for can't assign to expression
+- Explain pass keyword in lesson 13
+- Improve Lesson 22 cell screen-position explanation (#655)
+- Add specific error message for IN_EXPECTED_AFTER_IDENTIFIER error (#665)
+- Clarify explanation of documented functions in lesson 22 (#664)
+- Make numbers explicitly decimal in lesson 28 to make types clearer
+- Add error explanation for EOL at string parse error
+- Add explanation for "can't get index ... on base" error
+
+### Improvements
+
+- Move inline value display in code example to button
+- Add practice index to lesson practices list and breadcrumb
+- Make loop code example taller to avoid scroll bar
+- Ensure that the content of runnable code examples is behind buttons
+- Highlight symbols in lessons
+
+### Bug fixes
+
+- Make practice checks auto-wrap to not overflow window
+- Use debug build to prevent crash on nonexistent functions and variables
+- Prevent navigating during transitions
+- Add missing reset to lesson 11 practices
+- Don't highlight word "type" in lesson 13 (#656)
+- Correct syntax highlighting on nested function calls
+
 ## Learn GDScript From Zero 1.2.2
 
 *Released on August 5, 2022*
