@@ -34,9 +34,20 @@ class Entry:
     comment: str = ""
     msgid: str = ""
     msgstr: str = ""
+    reference: str = ""
+    is_fuzzy: bool = False
+    is_python_format: bool = False
 
     def as_string(self):
-        return "\n".join([self.comment, "msgid " + self.msgid, "msgstr " + self.msgstr])
+        lines = [self.comment]
+        if self.is_fuzzy:
+            lines.append("#, fuzzy")
+        if self.is_python_format:
+            lines.append("#, python-format")
+        if self.reference:
+            lines.append(self.reference)
+        lines += ["msgid " + self.msgid, "msgstr " + self.msgstr]
+        return "\n".join(lines)
 
 
 @dataclass
@@ -45,6 +56,9 @@ class PoFile:
     entries = []
     language: str = ""
     filename: str = ""
+
+    def __init__(self):
+        self.entries = []
 
     def as_string(self):
         return self.head + "\n\n".join([entry.as_string() for entry in self.entries])
@@ -62,18 +76,24 @@ def parse_po_file(filepath: str):
     head_end = content.find("\n\n")
     output.head = content[0:head_end]
     match = re.search(
-        r'^"Language: (?P<language>\w{2})\\n"', output.head, flags=re.MULTILINE
+        r'^"Language: (?P<language>\w+)\\n"', output.head, flags=re.MULTILINE
     )
     if match:
         output.language = match.group(1)
 
-    current_entry = None
+    current_entry = Entry()
     current_prop = ""
     for line in content[head_end:-1].split("\n"):
-        if line.startswith("#:"):
-            current_entry = Entry()
+        if line == "":
             output.entries.append(current_entry)
+            current_entry = Entry()
+        elif line.startswith("#:"):
             current_entry.comment = line
+        elif line.startswith("#,"):
+            current_entry.is_fuzzy = "fuzzy" in line
+            current_entry.is_python_format = "python-format" in line
+        elif line.startswith("#."):
+            current_entry.reference = line
         elif line.startswith("msgid"):
             current_prop = PropertyType.MSGID
         elif line.startswith("msgstr"):
@@ -95,17 +115,32 @@ def parse_po_file(filepath: str):
 def make_catalog(po_files: list[PoFile]):
     """Returns a map of source strings and corresponding translations in
     different languages."""
+
+    print("Creating translation catalog...")
+
     output = {}
+    skipped_count = 0
+    count = 0
+    file_count = 0
+
     for po_file in po_files:
+        file_count += 1
         for entry in po_file.entries:
             if not entry.msgstr:
                 continue
 
+            count += 1
             if entry.msgid not in output:
                 output[entry.msgid] = {}
 
-            translated_lines = entry.msgstr.split(r"\n")
-            source_lines = entry.msgid.split(r"\n")
+            translated_lines = [line for line in entry.msgstr.split(r"\n") if line]
+            source_lines = [line for line in entry.msgid.split(r"\n") if line]
+
+            source_count, translated_count = len(source_lines), len(translated_lines)
+            if source_count != translated_count:
+                skipped_count += 1
+                continue
+
             for index in range(len(source_lines)):
                 line = source_lines[index]
                 if not line:
@@ -114,6 +149,11 @@ def make_catalog(po_files: list[PoFile]):
                     output[line] = {}
                 output[line][po_file.language] = translated_lines[index]
 
+    print("Number of po files processed: {}".format(file_count))
+    print("Translation entries: {}".format(count))
+    languages = set([f.language for f in po_files])
+    print("{} languages: {}".format(len(languages), languages))
+    print("Skipped entries: {}".format(skipped_count))
     return output
 
 
@@ -124,9 +164,9 @@ def main():
 
     po_files = list(map(parse_po_file, args.files))
     catalog = make_catalog(po_files)
-    # print_to_output(catalog)
 
-def print_catalog(catalog):
+
+def print_catalog_head(catalog):
     count = 0
     for msgid in catalog:
         if count > 5:
