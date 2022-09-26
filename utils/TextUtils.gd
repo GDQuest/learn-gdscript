@@ -12,7 +12,7 @@ const REGEX_PATTERN_FUNC = "(?<func>func)"
 # Regex pattern to find method calls (e.g. "draw(...)")
 const REGEX_PATTERN_METHOD_CALL = "(?<method_name>\\w[\\w\\d]*)(?<method_args>\\(.*?\\))"
 # Regex pattern for numbers (with no special characters on either side)
-const REGEX_PATTERN_NUMBER = "(?<number>[^#\\[\\]\\(\\)]?[0-9]++\\.?[0-9][^#\\[\\]\\(\\)]?)"
+const REGEX_PATTERN_NUMBER = "(?<number>\\d+(\\.\\d+)?)"
 const REGEX_SYMBOL = "(?<symbol>[a-zA-Z][a-zA-Z0-9_]+)"
 
 
@@ -62,6 +62,8 @@ static func bbcode_add_code_color(bbcode_text := "") -> String:
 				colored_string += replaced.substr(current_index, last_closing_bracket_index)
 				current_index = last_closing_bracket_index
 
+		if colored_string == "":
+			colored_string = match_string
 		colored_string = "[code]" + colored_string + "[/code]"
 		bbcode_text.erase(index_offset, initial_length)
 		bbcode_text = bbcode_text.insert(index_offset, colored_string)
