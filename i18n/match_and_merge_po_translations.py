@@ -46,7 +46,7 @@ class Entry:
             lines.append("#, python-format")
         if self.reference:
             lines.append(self.reference)
-        lines += ["msgid " + self.msgid, "msgstr " + self.msgstr]
+        lines += ['msgid "' + self.msgid + '"', 'msgstr "' + self.msgstr + '"']
         return "\n".join(lines)
 
 
@@ -61,31 +61,33 @@ class PoFile:
         self.entries = []
 
     def as_string(self):
-        return self.head + "\n\n".join([entry.as_string() for entry in self.entries])
+        return (
+            self.head + "\n" + "\n".join([entry.as_string() for entry in self.entries])
+        )
 
 
 def parse_po_file(filepath: str):
     """Parse one .pot or .po file and create a list of entries."""
-    output = PoFile()
-    output.filename = os.path.basename(filepath)
+    new_files = PoFile()
+    new_files.filename = os.path.basename(filepath)
 
     content = []
     with open(filepath, "r") as po_file:
         content = po_file.read()
 
     head_end = content.find("\n\n")
-    output.head = content[0:head_end]
+    new_files.head = content[0:head_end]
     match = re.search(
-        r'^"Language: (?P<language>\w+)\\n"', output.head, flags=re.MULTILINE
+        r'^"Language: (?P<language>\w+)\\n"', new_files.head, flags=re.MULTILINE
     )
     if match:
-        output.language = match.group(1)
+        new_files.language = match.group(1)
 
     current_entry = Entry()
     current_prop = ""
     for line in content[head_end:-1].split("\n"):
         if line == "":
-            output.entries.append(current_entry)
+            new_files.entries.append(current_entry)
             current_entry = Entry()
         elif line.startswith("#:"):
             current_entry.comment = line
@@ -109,52 +111,59 @@ def parse_po_file(filepath: str):
                 elif current_prop == PropertyType.MSGSTR:
                     current_entry.msgstr += match.group(1)
 
-    return output
+    return new_files
 
 
-def make_catalog(po_files: list[PoFile]):
+def split_translations(po_files: list[PoFile]):
     """Returns a map of source strings and corresponding translations in
     different languages."""
 
-    print("Creating translation catalog...")
+    print("Creating new translation files with split entries...")
 
-    output = {}
-    skipped_count = 0
+    new_files = []
+
     count = 0
     file_count = 0
 
     for po_file in po_files:
+        new_file = PoFile()
+        new_file.filename = po_file.filename
+        new_file.language = po_file.language
+        new_file.head = po_file.head
+        new_files.append(new_file)
         file_count += 1
-        for entry in po_file.entries:
-            if not entry.msgstr:
-                continue
 
-            count += 1
-            if entry.msgid not in output:
-                output[entry.msgid] = {}
+        # Workaround an issue where the same translation line may appear twice
+        # in a document.
+        split_strings = set()
+        for entry in po_file.entries:
 
             translated_lines = [line for line in entry.msgstr.split(r"\n") if line]
             source_lines = [line for line in entry.msgid.split(r"\n") if line]
 
             source_count, translated_count = len(source_lines), len(translated_lines)
-            if source_count != translated_count:
-                skipped_count += 1
-                continue
+            count += source_count
 
-            for index in range(len(source_lines)):
-                line = source_lines[index]
-                if not line:
-                    continue
-                if not line in output:
-                    output[line] = {}
-                output[line][po_file.language] = translated_lines[index]
+            if source_count != translated_count:
+                for msgid in source_lines:
+                    entry = Entry()
+                    entry.msgid = msgid
+                    new_file.entries.append(entry)
+            else:
+                for index in range(len(source_lines)):
+                    msgid = source_lines[index]
+                    if msgid in split_strings:
+                        continue
+
+                    entry = Entry()
+                    entry.msgid = msgid
+                    entry.msgstr = translated_lines[index]
+                    new_file.entries.append(entry)
+                    split_strings.add(msgid)
 
     print("Number of po files processed: {}".format(file_count))
-    print("Translation entries: {}".format(count))
-    languages = set([f.language for f in po_files])
-    print("{} languages: {}".format(len(languages), languages))
-    print("Skipped entries: {}".format(skipped_count))
-    return output
+    print("Created translation entries: {}".format(count))
+    return new_files
 
 
 def main():
@@ -163,19 +172,21 @@ def main():
         assert os.path.exists(f)
 
     po_files = list(map(parse_po_file, args.files))
-    catalog = make_catalog(po_files)
+    new_files = split_translations(po_files)
 
+    languages = set([f.language for f in po_files])
+    print("{} languages: {}".format(len(languages), languages))
 
-def print_catalog_head(catalog):
-    count = 0
-    for msgid in catalog:
-        if count > 5:
-            break
-        print(msgid)
-        for lang in catalog[msgid]:
-            print(catalog[msgid][lang])
-        print("-------")
-        count += 1
+    for language in languages:
+        language_directory = os.path.join(args.output_directory, language)
+        if not os.path.exists(language_directory):
+            os.makedirs(language_directory)
+
+    print("Writing new translation files to ", os.path.abspath(args.output_directory))
+    for f in new_files:
+        output_path = os.path.join(args.output_directory, f.language, f.filename)
+        with open(output_path, "w") as output_file:
+            output_file.write(f.as_string())
 
 
 if __name__ == "__main__":
