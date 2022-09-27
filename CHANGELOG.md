@@ -2,6 +2,14 @@
 
 This document lists changes between releases.
 
+## Learn GDScript From Zero 1.3.1
+
+*Released on September 26, 2022*
+
+### Bug fixes
+
+- Fix numbers not being highlighted and being eaten in some cases
+
 ## Learn GDScript From Zero 1.3.0
 
 *Released on September 25, 2022*
