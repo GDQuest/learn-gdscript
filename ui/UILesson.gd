@@ -48,6 +48,7 @@ func _ready() -> void:
 	_update_content_container_width(UserProfiles.get_profile().font_size_scale)
 	_scroll_container.get_v_scrollbar().connect("value_changed", self, "_on_content_scrolled")
 	_debounce_timer.connect("timeout", self, "_emit_read_content")
+	TranslationManager.connect("translation_changed", self, "_on_translation_changed")
 
 	if test_lesson and get_parent() == get_tree().root:
 		setup(test_lesson, null)
@@ -177,15 +178,17 @@ func setup(lesson: Lesson, course: Course) -> void:
 		)
 		_tweener.start()
 
-	# Underline glossary entries
-	for rtl in get_tree().get_nodes_in_group("rich_text_label"):
-		rtl.bbcode_text = _glossary.replace_matching_terms(rtl.bbcode_text)
-		rtl.connect("meta_clicked", self, "_open_glossary_popup")
+	_underline_glossary_entries()
 
 	# Call this immediately to update for the blocks that are already visible.
 	_emit_read_content()
 
-
+func _underline_glossary_entries() -> void:
+	# Underline glossary entries
+	for rtl in get_tree().get_nodes_in_group("rich_text_label"):
+		rtl.bbcode_text = _glossary.replace_matching_terms(rtl.bbcode_text)
+		rtl.connect("meta_clicked", self, "_open_glossary_popup")
+		
 func _update_labels() -> void:
 	if not _lesson:
 		return
@@ -250,6 +253,9 @@ func _emit_read_content() -> void:
 func _update_content_container_width(new_font_scale: int) -> void:
 	var font_size_multiplier := float(_base_text_font_size + new_font_scale * 2) / _base_text_font_size
 	_content_container.rect_min_size.x = _start_content_width * font_size_multiplier
+
+func _on_translation_changed() -> void:
+	_underline_glossary_entries()
 
 
 func _open_glossary_popup(meta: String) -> void:
