@@ -86,7 +86,7 @@ func set_list_index(index: int) -> void:
 
 
 func set_hint_text(value: String) -> void:
-	_hint_text = value
+	_hint_text = tr(value)
 	_hint_value.text = _hint_text
 
 
