@@ -1,9 +1,15 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
 [ext_resource path="res://ui/theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui/theme/fonts/NotoSerifJP-Regular.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://ui/theme/fonts/NotoSerifTC-Regular.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://ui/theme/fonts/NotoSerifKR-Regular.otf" type="DynamicFontData" id=4]
 
 [resource]
 size = 20
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
+fallback/0 = ExtResource( 3 )
+fallback/1 = ExtResource( 2 )
+fallback/2 = ExtResource( 4 )
