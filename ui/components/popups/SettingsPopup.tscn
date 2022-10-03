@@ -202,16 +202,51 @@ text = "60 FPS"
 items = [ "60 FPS", null, false, 0, false, "30 FPS", null, false, 0, false, "No limit", null, false, 0, false ]
 selected = 0
 
-[node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column"]
-margin_top = 384.0
+[node name="TextColorSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column"]
+margin_top = 369.0
 margin_right = 680.0
-margin_bottom = 404.0
+margin_bottom = 468.0
+
+[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/TextColorSetting"]
+margin_right = 332.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Text Color"
+
+[node name="ColorContainer" type="VBoxContainer" parent="PanelContainer/Column/Margin/Column/TextColorSetting"]
+margin_left = 348.0
+margin_right = 680.0
+margin_bottom = 99.0
+size_flags_horizontal = 3
+custom_constants/separation = 12
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="PanelContainer/Column/Margin/Column/TextColorSetting/ColorContainer"]
+margin_right = 332.0
+margin_bottom = 47.0
+hint_tooltip = "Change the color of all text in the app."
+size_flags_horizontal = 3
+color = Color( 1, 1, 1, 1 )
+
+[node name="SampleText" type="Label" parent="PanelContainer/Column/Margin/Column/TextColorSetting/ColorContainer"]
+margin_top = 59.0
+margin_right = 332.0
+margin_bottom = 99.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+text = "Sample text"
+align = 1
+
+[node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column"]
+margin_top = 480.0
+margin_right = 680.0
+margin_bottom = 500.0
 rect_min_size = Vector2( 400, 20 )
 
 [node name="Buttons" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column"]
-margin_top = 416.0
+margin_top = 512.0
 margin_right = 680.0
-margin_bottom = 484.0
+margin_bottom = 580.0
 alignment = 1
 
 [node name="CancelButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons"]

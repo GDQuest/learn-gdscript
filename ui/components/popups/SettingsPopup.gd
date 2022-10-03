@@ -19,6 +19,10 @@ onready var _font_size_sample := $PanelContainer/Column/Margin/Column/Settings/F
 onready var _scroll_sensitivity_slider := $PanelContainer/Column/Margin/Column/Settings/ScrollSensitivitySetting/Value as HSlider
 onready var _framerate_option := $PanelContainer/Column/Margin/Column/Settings/FramerateSetting/Value as OptionButton
 
+onready var _font_color := $PanelContainer/Column/Margin/Column/TextColorSetting/ColorContainer/ColorPickerButton as ColorPickerButton
+onready var _font_color_sample := $PanelContainer/Column/Margin/Column/TextColorSetting/ColorContainer/SampleText as Label
+
+
 onready var _apply_button := $PanelContainer/Column/Margin/Column/Buttons/ApplyButton as Button
 onready var _cancel_button := $PanelContainer/Column/Margin/Column/Buttons/CancelButton as Button
 
@@ -33,6 +37,7 @@ func _ready() -> void:
 	_init_values()
 	
 	_font_size_value.connect("value_changed", self, "_on_font_size_changed")
+	_font_color.connect("color_changed", self, "_on_font_color_changed")
 	
 	_apply_button.connect("pressed", self, "_on_apply_settings")
 	_cancel_button.connect("pressed", self, "hide")
@@ -74,6 +79,8 @@ func _init_values() -> void:
 	)
 	_scroll_sensitivity_slider.value = current_profile.scroll_sensitivity
 	_framerate_option.selected = FRAMERATE_MAP.values().find(current_profile.framerate_limit)
+	
+	_font_color.color = current_profile.font_color
 
 
 func _on_apply_settings() -> void:
@@ -81,6 +88,8 @@ func _on_apply_settings() -> void:
 	
 	var size_scale := int(_font_size_value.value)
 	ThemeManager.scale_all_font_sizes(size_scale)
+	
+	ThemeManager.change_font_color(_font_color.color)
 	
 	current_profile.set_scroll_sensitivity(_scroll_sensitivity_slider.value)
 	current_profile.set_framerate_limit(FRAMERATE_MAP[_framerate_option.selected])
@@ -93,6 +102,10 @@ func _on_font_size_changed(value: int) -> void:
 	var font_override = _sample_default_font.duplicate() as DynamicFont
 	font_override.size += 2 * value
 	_font_size_sample.add_font_override("font", font_override)
+
+
+func _on_font_color_changed(color: Color) -> void:
+	_font_color_sample.add_color_override("font_color", color)
 
 
 func _on_visibility_changed() -> void:

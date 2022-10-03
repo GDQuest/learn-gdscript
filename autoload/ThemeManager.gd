@@ -3,6 +3,8 @@ extends Node
 const THEME_ROOT := "res://ui/theme/"
 const THEME_FONTS_ROOT := "res://ui/theme/fonts/"
 
+onready var _theme = preload("res://ui/theme/gdscript_app_theme.tres")
+
 var _font_size_defaults := {}
 
 
@@ -11,6 +13,7 @@ func _ready() -> void:
 	
 	var current_profile := UserProfiles.get_profile()
 	scale_all_font_sizes(current_profile.font_size_scale, false)
+	change_font_color(current_profile.font_color, false)
 
 
 func _cache_font_size_defaults() -> void:
@@ -57,3 +60,12 @@ func scale_all_font_sizes(size_scale: int, and_save: bool = true) -> void:
 		current_profile.font_size_scale = size_scale
 		current_profile.save()
 		Events.emit_signal("font_size_scale_changed", size_scale)
+
+func change_font_color(color: Color, and_save: bool = true) -> void:
+	_theme.set_color("font_color", "Label", color)
+	_theme.set_color("default_color", "RichTextLabel", color)
+	
+	if and_save:
+		var current_profile := UserProfiles.get_profile()
+		current_profile.font_color = color
+		current_profile.save()

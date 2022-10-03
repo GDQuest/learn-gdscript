@@ -20,6 +20,8 @@ export var is_sponsored_profile := true
 export var language := "en"
 # Relative size adjustment of all fonts, in integer numbers.
 export var font_size_scale := 0
+# Font Color
+export var font_color := Color(255,255,255,255)
 # Sensitivity when scrolling with the mouse wheel or touchpad.
 export var scroll_sensitivity := 1.0 setget set_scroll_sensitivity
 # Target framerate for the application, to reduce update intensity on lower end devices.
