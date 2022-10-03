@@ -11,8 +11,10 @@ var _glossary := {}
 # and wrap glossary entries in rich text labels.
 var _glossary_regex := RegEx.new()
 
-
 func _init() -> void:
+	setup()
+
+func setup() -> void:
 	_glossary = _parse_glossary_file(glossary_file)
 	var patterns := PoolStringArray()
 	for key in _glossary:
@@ -36,7 +38,7 @@ func get_match(keyword: String) -> Entry:
 
 # Parses the input CSV file and returns a dictionary mapping keywords to
 # glossary entries.
-static func _parse_glossary_file(path: String) -> Dictionary:
+func _parse_glossary_file(path: String) -> Dictionary:
 	var glossary := {}
 	var file := File.new()
 	file.open(path, file.READ)
@@ -47,8 +49,8 @@ static func _parse_glossary_file(path: String) -> Dictionary:
 		if not csv_line[0]:
 			break
 
-		var plural_form = csv_line[1]
-		var keyword = csv_line[0]
+		var plural_form = tr(csv_line[1])
+		var keyword = tr(csv_line[0])
 		assert(not keyword in glossary, "Duplicate key %s in glossary." % keyword)
 		assert(not plural_form in glossary, "Duplicate key %s in glossary." % keyword)
 		var entry := Entry.new(csv_line)

@@ -18,7 +18,7 @@ export var test_lesson: Resource
 
 var _lesson: Lesson
 # Resource used to highlight glossary entries in the lesson text.
-var _glossary: Glossary = preload("res://course/glossary.tres")
+var _glossary: Glossary
 var _visible_index := -1
 var _quizzes_done := -1 # Start with -1 because we will always autoincrement at least once.
 var _quizz_count := 0
@@ -49,6 +49,8 @@ func _ready() -> void:
 	_scroll_container.get_v_scrollbar().connect("value_changed", self, "_on_content_scrolled")
 	_debounce_timer.connect("timeout", self, "_emit_read_content")
 	TranslationManager.connect("translation_changed", self, "_on_translation_changed")
+	
+	_glossary = load("res://course/glossary.tres")
 
 	if test_lesson and get_parent() == get_tree().root:
 		setup(test_lesson, null)
@@ -184,6 +186,7 @@ func setup(lesson: Lesson, course: Course) -> void:
 	_emit_read_content()
 
 func _underline_glossary_entries() -> void:
+	_glossary.setup()
 	# Underline glossary entries
 	for rtl in get_tree().get_nodes_in_group("rich_text_label"):
 		rtl.bbcode_text = _glossary.replace_matching_terms(rtl.bbcode_text)
