@@ -68,6 +68,6 @@ class Entry:
 	var explanation: String
 
 	func _init(csv_line: Array) -> void:
-		term = tr(csv_line[0].capitalize())
+		term = tr(csv_line[0]).capitalize()
 		plural_form = tr(csv_line[1])
 		explanation = tr(csv_line[2])
