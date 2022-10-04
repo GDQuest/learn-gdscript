@@ -52,6 +52,7 @@ func set_language(language_code: String) -> void:
 		TranslationServer.set_locale(current_language)
 		current_profile.language = current_language
 		current_profile.save()
+		emit_signal("translation_changed")
 		return
 	
 	# Load order shouldn't be important, so we'll just load everything from the folder.
@@ -106,6 +107,7 @@ func set_language(language_code: String) -> void:
 	TranslationServer.set_locale(current_language)
 	current_profile.language = current_language
 	current_profile.save()
+	emit_signal("translation_changed")
 
 
 func _reset_language() -> void:

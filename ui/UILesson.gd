@@ -18,9 +18,9 @@ export var test_lesson: Resource
 
 var _lesson: Lesson
 # Resource used to highlight glossary entries in the lesson text.
-var _glossary: Glossary = preload("res://course/glossary.tres")
+var _glossary: Glossary
 var _visible_index := -1
-var _quizzes_done := -1 # Start with -1 because we will always autoincrement at least once.
+var _quizzes_done := -1  # Start with -1 because we will always autoincrement at least once.
 var _quizz_count := 0
 
 var _base_text_font_size := preload("res://ui/theme/fonts/font_text.tres").size
@@ -30,12 +30,8 @@ onready var _scroll_content := $OuterMargin/ScrollContainer/InnerMargin as Contr
 onready var _title := $OuterMargin/ScrollContainer/InnerMargin/Content/Title as Label
 onready var _content_blocks := $OuterMargin/ScrollContainer/InnerMargin/Content/ContentBlocks as VBoxContainer
 onready var _content_container := $OuterMargin/ScrollContainer/InnerMargin/Content as VBoxContainer
-onready var _practices_visibility_container := (
-	$OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer as VBoxContainer
-)
-onready var _practices_container := (
-	$OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer/Practices as VBoxContainer
-)
+onready var _practices_visibility_container := $OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer as VBoxContainer
+onready var _practices_container := $OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer/Practices as VBoxContainer
 onready var _debounce_timer := $DebounceTimer as Timer
 onready var _tweener := $Tween as Tween
 onready var _glossary_popup := $GlossaryPopup
@@ -48,6 +44,9 @@ func _ready() -> void:
 	_update_content_container_width(UserProfiles.get_profile().font_size_scale)
 	_scroll_container.get_v_scrollbar().connect("value_changed", self, "_on_content_scrolled")
 	_debounce_timer.connect("timeout", self, "_emit_read_content")
+	TranslationManager.connect("translation_changed", self, "_on_translation_changed")
+
+	_glossary = load("res://course/glossary.tres")
 
 	if test_lesson and get_parent() == get_tree().root:
 		setup(test_lesson, null)
@@ -91,10 +90,16 @@ func setup(lesson: Lesson, course: Course) -> void:
 		# the position to the first unread block.
 
 		if is_returning:
-			restore_id = user_profile.get_last_visited_lesson_block(course.resource_path, lesson.resource_path)
+			restore_id = user_profile.get_last_visited_lesson_block(
+				course.resource_path, lesson.resource_path
+			)
 
-		var reading_done := user_profile.is_lesson_reading_completed(course.resource_path, lesson.resource_path)
-		var reading_started := user_profile.has_lesson_blocks_read(course.resource_path, lesson.resource_path)
+		var reading_done := user_profile.is_lesson_reading_completed(
+			course.resource_path, lesson.resource_path
+		)
+		var reading_started := user_profile.has_lesson_blocks_read(
+			course.resource_path, lesson.resource_path
+		)
 		if restore_id.empty() and not reading_done and reading_started:
 			for block in lesson.content_blocks:
 				var block_id := ""
@@ -103,7 +108,9 @@ func setup(lesson: Lesson, course: Course) -> void:
 				else:
 					block_id = block.content_id
 
-				if user_profile.is_lesson_block_read(course.resource_path, lesson.resource_path, block_id):
+				if user_profile.is_lesson_block_read(
+					course.resource_path, lesson.resource_path, block_id
+				):
 					continue
 
 				restore_id = block_id
@@ -130,7 +137,9 @@ func setup(lesson: Lesson, course: Course) -> void:
 
 			var completed_before := false
 			if course:
-				completed_before = user_profile.is_lesson_quiz_completed(course.resource_path, lesson.resource_path, block.quiz_id)
+				completed_before = user_profile.is_lesson_quiz_completed(
+					course.resource_path, lesson.resource_path, block.quiz_id
+				)
 				if completed_before:
 					_quizzes_done += 1
 			instance.completed_before = completed_before
@@ -148,7 +157,9 @@ func setup(lesson: Lesson, course: Course) -> void:
 		var button: UIPracticeButton = PracticeButtonScene.instance()
 		button.setup(practice, practice_index)
 		if course:
-			button.completed_before = user_profile.is_lesson_practice_completed(course.resource_path, lesson.resource_path, practice.practice_id)
+			button.completed_before = user_profile.is_lesson_practice_completed(
+				course.resource_path, lesson.resource_path, practice.practice_id
+			)
 			if not highlighted_next and not button.completed_before:
 				highlighted_next = true
 				button.is_highlighted = true
@@ -163,12 +174,14 @@ func setup(lesson: Lesson, course: Course) -> void:
 	# the scroll container and its content.
 	yield(Events, "lesson_started")
 	if restore_node and restore_node.is_visible_in_tree():
-		var scroll_offset = abs(_scroll_content.rect_global_position.y - _content_blocks.rect_global_position.y)
+		var scroll_offset = abs(
+			_scroll_content.rect_global_position.y - _content_blocks.rect_global_position.y
+		)
 		var scroll_target = restore_node.rect_position.y + scroll_offset - AUTOSCROLL_PADDING
 		_tweener.stop_all()
 		_tweener.interpolate_method(
 			_scroll_container,
-			"set_v_scroll", # So it plays nice with our smooth scroller
+			"set_v_scroll",  # So it plays nice with our smooth scroller
 			_scroll_container.scroll_vertical,
 			scroll_target,
 			AUTOSCROLL_DURATION,
@@ -177,19 +190,24 @@ func setup(lesson: Lesson, course: Course) -> void:
 		)
 		_tweener.start()
 
-	# Underline glossary entries
-	for rtl in get_tree().get_nodes_in_group("rich_text_label"):
-		rtl.bbcode_text = _glossary.replace_matching_terms(rtl.bbcode_text)
-		rtl.connect("meta_clicked", self, "_open_glossary_popup")
+	_underline_glossary_entries()
 
 	# Call this immediately to update for the blocks that are already visible.
 	_emit_read_content()
 
 
+func _underline_glossary_entries() -> void:
+	_glossary.setup()
+	# Underline glossary entries
+	for rtl in get_tree().get_nodes_in_group("rich_text_label"):
+		rtl.bbcode_text = _glossary.replace_matching_terms(rtl.bbcode_text)
+		rtl.connect("meta_clicked", self, "_open_glossary_popup")
+
+
 func _update_labels() -> void:
 	if not _lesson:
 		return
-	
+
 	_title.text = tr(_lesson.title)
 
 
@@ -219,7 +237,9 @@ func _on_content_scrolled(_value: float) -> void:
 
 
 func _emit_read_content() -> void:
-	var scroll_offset = abs(_scroll_content.rect_global_position.y - _content_blocks.rect_global_position.y)
+	var scroll_offset = abs(
+		_scroll_content.rect_global_position.y - _content_blocks.rect_global_position.y
+	)
 	var scroll_distance = _scroll_container.scroll_vertical - scroll_offset - AUTOSCROLL_PADDING
 
 	var content_index := 0
@@ -248,8 +268,15 @@ func _emit_read_content() -> void:
 
 
 func _update_content_container_width(new_font_scale: int) -> void:
-	var font_size_multiplier := float(_base_text_font_size + new_font_scale * 2) / _base_text_font_size
+	var font_size_multiplier := (
+		float(_base_text_font_size + new_font_scale * 2)
+		/ _base_text_font_size
+	)
 	_content_container.rect_min_size.x = _start_content_width * font_size_multiplier
+
+
+func _on_translation_changed() -> void:
+	_underline_glossary_entries()
 
 
 func _open_glossary_popup(meta: String) -> void:
