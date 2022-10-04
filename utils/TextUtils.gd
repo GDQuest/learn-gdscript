@@ -1,15 +1,5 @@
 extends Node
 
-# Regex pattern to find [code][/code] tags
-const REGEX_PATTERN_CODE = "\\[code\\](.+?)\\[\\/code\\]"
-# Regex pattern to find the "func" literal
-const REGEX_PATTERN_FUNC = "(?<func>func)"
-# Regex pattern to find method calls (e.g. "draw(...)")
-const REGEX_PATTERN_METHOD_CALL = "(?<method_name>\\w[\\w\\d]*)(?<method_args>\\(.*?\\))"
-# Regex pattern for numbers (with no special characters on either side)
-const REGEX_PATTERN_NUMBER = "(?<number>\\d+(\\.\\d+)?)"
-const REGEX_SYMBOL = "(?<symbol>[a-zA-Z][a-zA-Z0-9_]+)"
-
 # Maps type indices to their string representation.
 const TYPE_MAP := {
 	TYPE_BOOL: "boolean",
@@ -41,23 +31,23 @@ const TYPE_MAP := {
 }
 
 # Caches regexes to highlight code in text.
-const _REGEX_CACHE := {}
+const _REGEXES := {}
 # Intended to be used as a constant
 var _REGEX_REPLACE_MAP := {}
 
 
 func _init() -> void:
-	_REGEX_CACHE["code"] = RegEx.new()
-	_REGEX_CACHE["func"] = RegEx.new()
-	_REGEX_CACHE["method_call"] = RegEx.new()
-	_REGEX_CACHE["number"] = RegEx.new()
-	_REGEX_CACHE["symbol"] = RegEx.new()
+	_REGEXES["code"] = RegEx.new()
+	_REGEXES["func"] = RegEx.new()
+	_REGEXES["method_call"] = RegEx.new()
+	_REGEXES["number"] = RegEx.new()
+	_REGEXES["symbol"] = RegEx.new()
 
-	_REGEX_CACHE["code"].compile(REGEX_PATTERN_CODE)
-	_REGEX_CACHE["func"].compile(REGEX_PATTERN_FUNC)
-	_REGEX_CACHE["method_call"].compile(REGEX_PATTERN_METHOD_CALL)
-	_REGEX_CACHE["number"].compile(REGEX_PATTERN_NUMBER)
-	_REGEX_CACHE["symbol"].compile(REGEX_SYMBOL)
+	_REGEXES["code"].compile("\\[code\\](.+?)\\[\\/code\\]")
+	_REGEXES["func"].compile("(?<func>func)")
+	_REGEXES["method_call"].compile("(?<method_name>\\w[\\w\\d]*)(?<method_args>\\(.*?\\))")
+	_REGEXES["number"].compile("(?<number>\\d+(\\.\\d+)?)")
+	_REGEXES["symbol"].compile("(?<symbol>[a-zA-Z][a-zA-Z0-9_]+)")
 
 	_REGEX_REPLACE_MAP = {
 		"func": "[color=#%s]$func[/color]" % CodeEditorEnhancer.COLOR_KEYWORD.to_html(false),
@@ -72,7 +62,7 @@ func _init() -> void:
 
 
 func bbcode_add_code_color(bbcode_text := "") -> String:
-	var regex_matches: Array = _REGEX_CACHE["code"].search_all(bbcode_text)
+	var regex_matches: Array = _REGEXES["code"].search_all(bbcode_text)
 	var index_delta := 0
 
 	for regex_match in regex_matches:
@@ -80,8 +70,6 @@ func bbcode_add_code_color(bbcode_text := "") -> String:
 		var initial_length: int = regex_match.strings[0].length()
 		var match_string: String = regex_match.strings[1]
 
-		var current_index := 0
-		var last_closing_bracket_index := 0
 		var colored_string := ""
 		for regex_type in [
 			"func",
@@ -89,14 +77,12 @@ func bbcode_add_code_color(bbcode_text := "") -> String:
 			"number",
 			"symbol",
 		]:
-			var before := match_string.substr(current_index)
-			var replaced: String = _REGEX_CACHE[regex_type].sub(
-				match_string, _REGEX_REPLACE_MAP[regex_type], false, current_index
+			var replaced: String = _REGEXES[regex_type].sub(
+				match_string, _REGEX_REPLACE_MAP[regex_type], false
 			)
-			if replaced != before:
-				last_closing_bracket_index = match_string.rfind("]")
-				colored_string += replaced.substr(current_index, last_closing_bracket_index)
-				current_index = last_closing_bracket_index
+			if match_string != replaced:
+				colored_string = replaced
+				break
 
 		if colored_string == "":
 			colored_string = match_string
