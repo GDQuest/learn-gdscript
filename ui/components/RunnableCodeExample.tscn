@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/RunnableCodeExample.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://ui/theme/button_outline_pressed.tres" type="StyleBox" id=8]
 [ext_resource path="res://ui/theme/button_outline_normal_muted.tres" type="StyleBox" id=9]
 [ext_resource path="res://ui/theme/button_outline_focus.tres" type="StyleBox" id=10]
+[ext_resource path="res://ui/components/examples_background.svg" type="Texture" id=11]
 
 [node name="RunnableCodeExample" type="HBoxContainer"]
 margin_right = 1030.0
@@ -33,14 +34,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 5 )
 
+[node name="TextureRect" type="TextureRect" parent="Frame/PanelContainer"]
+show_behind_parent = true
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 1026.0
+margin_bottom = 274.0
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 2
+
 [node name="Sliders" type="VBoxContainer" parent="Frame"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 50.0
 margin_bottom = 50.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Frame"]
 anchor_left = 1.0
