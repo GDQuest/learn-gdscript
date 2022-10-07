@@ -6,7 +6,8 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends WrappingNode2D
 
-onready var start_position = position
+onready var start_position = null
+
 
 func _ready() -> void:
 	_sprites = [$Pivot/HandIceLeft, $Pivot/HandIceRight, $Pivot/RobotBody]
@@ -20,6 +21,8 @@ func run():
 
 
 func reset():
+	if start_position == null:
+		start_position = position
 	position = start_position
 	_bounds = calculate_bounding_rect(_sprites)
 "
