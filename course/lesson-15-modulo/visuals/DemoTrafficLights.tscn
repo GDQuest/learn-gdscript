@@ -15,7 +15,10 @@ margin_top = 7.0
 margin_right = 721.0
 margin_bottom = 313.0
 scene = ExtResource( 2 )
-gdscript_code = "func advance():
+gdscript_code = "var light_index = 0
+
+func advance():
 	light_index += 1
-	light_index %= 3"
+	light_index %= 3
+	update_semaphore()"
 run_button_label = "advance()"
