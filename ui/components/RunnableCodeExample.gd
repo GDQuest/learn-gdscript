@@ -87,7 +87,10 @@ func run() -> void:
 			_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()]
 		)
 
-		if _scene_instance.has_method("reset"):
+		# Some examples expect to be able to play them from the previous state,
+		# while others don't. In general, we only need to reset a demo
+		# to its initial state if it has a Debugger node.
+		if _scene_instance.has_method("reset") and _debugger:
 			_scene_instance.reset()
 
 		# warning-ignore:unsafe_method_access
