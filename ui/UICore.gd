@@ -54,14 +54,17 @@ func _ready() -> void:
 	_loading_screen.hide()
 	_welcome_screen.appear()
 
-	# /!\ In the browser we must register macOS shortcuts by hand in Godot 3.
-	# Godot otherwise uses Ctrl-based shortcuts only, making the experience of
-	# mac users so-so.
+	# /!\ In browsers other than FireFox we must register macOS shortcuts by hand 
+	# in Godot 3. Godot otherwise uses Ctrl-based shortcuts only, making the
+	# experience of mac users so-so.
 	#
 	# We'll need to remove this when this issue is fixed in Godot 4:
 	# https://github.com/godotengine/godot-proposals/issues/3754
-	if OS.get_name() == "HTML5":
-		_register_macos_shortcuts()
+	if OS.has_feature('JavaScript'):
+		var window := JavaScript.get_interface("window")
+		var user_agent: String = window.navigator.userAgent
+		if user_agent.to_lower().find("firefox") == -1:
+			_register_macos_shortcuts()
 
 
 func _unhandled_input(event: InputEvent) -> void:
