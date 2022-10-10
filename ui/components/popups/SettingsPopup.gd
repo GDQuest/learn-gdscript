@@ -19,7 +19,7 @@ onready var _font_size_sample := $PanelContainer/Column/Margin/Column/Settings/F
 onready var _scroll_sensitivity_slider := $PanelContainer/Column/Margin/Column/Settings/ScrollSensitivitySetting/Value as HSlider
 onready var _framerate_option := $PanelContainer/Column/Margin/Column/Settings/FramerateSetting/Value as OptionButton
 
-onready var _lower_contrast := $PanelContainer/Column/Margin/Column/Settings/LowerContrasSetting/CheckButton as CheckButton
+onready var _lower_contrast := $PanelContainer/Column/Margin/Column/Settings/LowerContrasSetting/CheckBox as CheckBox
 
 onready var _apply_button := $PanelContainer/Column/Margin/Column/Buttons/ApplyButton as Button
 onready var _cancel_button := $PanelContainer/Column/Margin/Column/Buttons/CancelButton as Button
@@ -86,7 +86,7 @@ func _on_apply_settings() -> void:
 	var size_scale := int(_font_size_value.value)
 	ThemeManager.scale_all_font_sizes(size_scale)
 	
-	ThemeManager.change_lower_contrast(_lower_contrast.pressed)
+	ThemeManager.set_lower_contrast(_lower_contrast.pressed)
 
 	current_profile.set_scroll_sensitivity(_scroll_sensitivity_slider.value)
 	current_profile.set_framerate_limit(FRAMERATE_MAP[_framerate_option.selected])
