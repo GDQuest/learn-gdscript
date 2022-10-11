@@ -11,7 +11,14 @@ onready var _animation_player := find_node(\"AnimationPlayer\") as AnimationPlay
 
 var combo = [\"jump\", \"damage\", \"damage\", \"jump\", \"level\"]
 
+
 func run():
+	# Running as a private method to avoid returning a \"GDScriptFunctionState\"
+	# to RunnableCodeExample after \"yield()\".
+	_run()
+
+
+func _run():
 	if not _animation_tree.get_current_animation() == \"idle\":
 		return
 	
