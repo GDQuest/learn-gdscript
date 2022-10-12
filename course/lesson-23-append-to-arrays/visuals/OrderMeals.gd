@@ -98,6 +98,7 @@ class Meal extends VBoxContainer:
 		label.text = init_text
 
 	func _ready() -> void:
+		modulate.a = 0.0
 		tween.interpolate_property(self, "modulate:a", 0, 1, 1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 		if time > 0:
 			texture.texture = TEXTURE_UNCHECKED
@@ -116,5 +117,4 @@ class Meal extends VBoxContainer:
 		texture.texture = TEXTURE_CHECKED
 		emit_signal("meal_ready")
 		tween.interpolate_property(self, "modulate:a", modulate.a, 0, 1, Tween.TRANS_LINEAR, Tween.EASE_IN)
-		#tween.interpolate_property(self, "rect_position:x", rect_position.x, rect_position.x + 100, 1, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		tween.start()
