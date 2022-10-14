@@ -19,9 +19,6 @@ func reset():
 margin_right = 1047.0
 margin_bottom = 298.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
@@ -29,9 +26,10 @@ margin_top = 7.0
 margin_right = 1040.0
 margin_bottom = 291.0
 gdscript_code = "func run():
-	position.x = 180
-	position.y = 120"
+	position.x = 200
+	position.y = 250"
 center_in_frame = false
 
 [node name="SetSpritePosition" parent="RunnableCodeExample" instance=ExtResource( 2 )]
+position = Vector2( 90, 100 )
 script = SubResource( 1 )
