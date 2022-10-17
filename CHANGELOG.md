@@ -2,6 +2,34 @@
 
 This document lists changes between releases.
 
+## Learn GDScript From Zero 1.3.2
+
+*Released on September 26, 2022*
+
+### Improvements
+
+- Make glossary entries work in other languages (#687)
+- Add option to lower the main text's brightness (#689)
+
+### Content changes
+
+- Improve note block titles (#682)
+- Fix typo in lesson 14
+- Clarify requirements in lesson 21 combo practice
+
+### Improvements
+
+- Load translation into glossary and practice hints (#686)
+- Add tiling background to demos
+
+### Bug fixes
+
+- Fix function call being partly eaten in lesson 24
+- Restore Traffic Light example in Lesson 15 (#696)
+- Ensure examples with no debugger nodes don't reset on every call to run()
+- Make code examples work with debugger in lesson 21
+- Remove visual jitter in orders animation in Lesson 23
+
 ## Learn GDScript From Zero 1.3.1
 
 *Released on September 26, 2022*
