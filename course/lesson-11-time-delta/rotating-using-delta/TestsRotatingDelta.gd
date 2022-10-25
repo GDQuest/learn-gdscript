@@ -28,11 +28,11 @@ func test_rotating_character_is_time_dependent() -> String:
 		var is_in_parentheses: bool = false
 
 		#Regular expression to check if delta is inside parenthesis
-		#I know, regexp is ancient evil magic:
+		#I know, regexp is ancient evil magic, as the quote goes:
 		#  Some people, when confronted with a problem, think
 		#  "I know, I'll use regular expressions" 
 		#  Now they have two problems. 
-		# But sometimes it works. 
+		# But sometimes it does actually work
 
 		var regex_delta_in_parentheses = RegEx.new()
 		#This regex matches if:
@@ -49,6 +49,7 @@ func test_rotating_character_is_time_dependent() -> String:
 
 		#thanks to https://regexr.com/ for the awesome regexp playground to help me figure this out after a ton of trial and error and hair pulling. 
 		
+		#with double backlashes to escape the escapes
 		regex_delta_in_parentheses.compile("rotate\\([^\\)]*delta.*\\)") 
 		var result = regex_delta_in_parentheses.search(_body)
 		
@@ -63,9 +64,49 @@ func test_rotating_character_is_time_dependent() -> String:
 
 func test_rotation_speed_is_2_radians_per_second() -> String:
 	if not _has_proper_body:
+		#reverse find for any instance of a multiplication asterisk 
 		var has_multiplication_sign: bool = _body.rfind("*") > 0
-		var has_two: bool = _body.rfind("2") > 0 and not _body.rfind(".2") > 0
+		#set has_two false by default
+		var has_two: bool = false
 
+		#Regular expression to check if the function call to rotate has 2 included
+		var regex_has_two = RegEx.new()
+		#This regex matches if:
+		#1. rotate appears first
+		#2. followed by an open parenthesis
+		#3. followed by any character that is NOT a close parenthesis, numeral, or a decimal
+		#4. The numeral 2 appears followed by
+		#5. 0 or more characters that aren't close parenthesis, numeral, or a decimal
+		#6. followed by a close parenthesis  
+		#from the cmdline: grep -Ei "rotate\([^\)0-9.]*2[^0-9.\)]*\)"
+
+		#NOTE: the first regexp excludes 2.0 which is technically valid
+		#the regexp would get far more complicated/unreadable if including
+		#an optional decimal point and then any number of zeros
+
+		#To catch this case, I've added a second regexp with a non-optional decimal and
+		#linked the two with an OR bar
+		#This second regex matches if:
+		#1. rotate appears first
+		#2. followed by an open parenthesis
+		#3. followed by any character that is NOT a close parenthesis, numeral, or a decimal
+		#4. The numeral 2 appears followed by the decimal point, a literal escaped .
+		#5. At least ONE(the + modifier) zero follows the "2." 
+		#6. followed by 0 or more characters that aren't a close parenthesis, numeral, or a decimal, or close parenthesis
+		#7. followed by a single close parenthesis 
+		#from the cmdline: grep -Ei "rotate\([^\)0-9.]*2\.[0]+[^0-9.\)]*\)"
+
+		#the complete regexp with both matches:
+		#grep -Ei "rotate\([^\)0-9.]*2[^0-9.\)]*\)|rotate\([^\)0-9.]*2\.[0]+[^0-9.\)]*\)"
+
+		#with double backlashes to escape the escapes
+		regex_has_two.compile("rotate\\([^\\)0-9.]*2[^0-9.\\)]*\\)|rotate\\([^\\)0-9.]*2\\.[0]+[^0-9.\\)]*\\)") 
+
+		var result = regex_has_two.search(_body)
+		if result:
+			has_two = true
+		
+		print("has_two:", has_two)
 		if not has_two:
 			return tr("Is the rotation speed correct?")
 		elif not has_multiplication_sign:
