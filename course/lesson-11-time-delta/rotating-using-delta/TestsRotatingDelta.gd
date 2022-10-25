@@ -105,8 +105,7 @@ func test_rotation_speed_is_2_radians_per_second() -> String:
 		var result = regex_has_two.search(_body)
 		if result:
 			has_two = true
-		
-		print("has_two:", has_two)
+
 		if not has_two:
 			return tr("Is the rotation speed correct?")
 		elif not has_multiplication_sign:
