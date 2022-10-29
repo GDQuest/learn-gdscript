@@ -22,23 +22,29 @@ func _prepare() -> void:
 
 func test_rotating_character_is_time_dependent() -> String:
 	if not _has_proper_body:
-		var has_delta: bool = _body.rfind("delta") > 0
-		var is_in_parentheses: bool = _body.rfind(")")
-
+		var has_delta := _body.rfind("delta") > 0
 		if not has_delta:
 			return tr("Did you use delta to make the rotation time-dependent?")
-		elif not is_in_parentheses:
+
+		var regex_delta_in_parentheses = RegEx.new()
+		regex_delta_in_parentheses.compile("rotate\\([^\\)]*delta.*\\)")
+
+		var is_in_parentheses: bool = regex_delta_in_parentheses.search(_body) != null
+		if not is_in_parentheses:
 			return tr("Did you not multiply by delta inside the function call? You need to multiply inside the parentheses for delta to take effect.")
 	return ""
 
 
 func test_rotation_speed_is_2_radians_per_second() -> String:
 	if not _has_proper_body:
-		var has_multiplication_sign: bool = _body.rfind("*") > 0
-		var has_two: bool = _body.rfind("2") > 0 and not _body.rfind(".2") > 0
+		var regex_has_two = RegEx.new()
+		regex_has_two.compile("rotate\\([^\\)0-9.]*2[^0-9.\\)]*\\)|rotate\\([^\\)0-9.]*2\\.[0]+[^0-9.\\)]*\\)")
 
+		var has_two: bool = regex_has_two.search(_body) != null
 		if not has_two:
 			return tr("Is the rotation speed correct?")
-		elif not has_multiplication_sign:
+
+		var has_multiplication_sign := _body.rfind("*") > 0
+		if not has_multiplication_sign:
 			return tr("We couldn't find a multiplication sign. Did you use it to make the rotation time-dependent?")
 	return ""
