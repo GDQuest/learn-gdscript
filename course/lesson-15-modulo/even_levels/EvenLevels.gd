@@ -1,6 +1,5 @@
 extends Node2D
 
-export var health := 100
 export var max_health := 100
 
 var level := 1

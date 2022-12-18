@@ -1,20 +1,20 @@
 [gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://addons/gdscript-slice-exporter/collections/SliceProperties.gd" type="Script" id=1]
-[ext_resource path="res://course/lesson-15-modulo/even_levels/EvenLevels.live-editor/scene/EvenLevels.tscn.tres" type="Resource" id=2]
-[ext_resource path="res://course/lesson-15-modulo/even_levels/EvenLevels.live-editor/scripts/EvenLevels.gd.tres" type="Resource" id=3]
+[ext_resource path="res://course/lesson-15-modulo/even_levels/EvenLevels.live-editor/scripts/EvenLevels.gd.tres" type="Resource" id=2]
+[ext_resource path="res://course/lesson-15-modulo/even_levels/EvenLevels.live-editor/scene/EvenLevels.tscn.tres" type="Resource" id=3]
 
 [resource]
 script = ExtResource( 1 )
-scene_properties = ExtResource( 2 )
-script_properties = ExtResource( 3 )
+scene_properties = ExtResource( 3 )
+script_properties = ExtResource( 2 )
 leading_spaces = 0
 keyword = "EXPORT"
 closing = false
 name = "even_level"
 is_full_file = false
-start = 22
-end = 28
-lines_before = [ "extends Node2D", "", "export var health := 100", "export var max_health := 100", "", "var level := 1", "", "onready var _health_bar := find_node(\"CustomHealthBar\") as ColorRect", "onready var _label_level := find_node(\"LevelLabel\") as Label", "onready var _animation_tree := find_node(\"AnimationTree\") as AnimationTree", "", "func _run():", "	reset()", "	for i in range(3):", "		level_up()", "		_health_bar.set_max_health(max_health)", "		_label_level.text = \"Level %s\" % level", "		_animation_tree.travel(\"level\")", "		yield(_animation_tree, \"animation_finished\")", "	", "	Events.emit_signal(\"practice_run_completed\")", "	" ]
+start = 21
+end = 27
+lines_before = [ "extends Node2D", "", "export var max_health := 100", "", "var level := 1", "", "onready var _health_bar := find_node(\"CustomHealthBar\") as ColorRect", "onready var _label_level := find_node(\"LevelLabel\") as Label", "onready var _animation_tree := find_node(\"AnimationTree\") as AnimationTree", "", "func _run():", "	reset()", "	for i in range(3):", "		level_up()", "		_health_bar.set_max_health(max_health)", "		_label_level.text = \"Level %s\" % level", "		_animation_tree.travel(\"level\")", "		yield(_animation_tree, \"animation_finished\")", "	", "	Events.emit_signal(\"practice_run_completed\")", "	" ]
 lines_after = [ "", "func reset():", "	level = 1", "	max_health = 100", "	_health_bar.set_max_health(max_health)", "" ]
 lines_editable = [ "func level_up():", "	level += 1", "	max_health += 5", "	if level % 2 == 0:", "		max_health += 5" ]

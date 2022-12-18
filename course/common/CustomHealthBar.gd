@@ -20,6 +20,7 @@ func set_health(new_health: int) -> void:
 
 func set_max_health(new_max_health: int) -> void:
 	max_health = new_max_health
+	health = max_health
 	_update_bars()
 
 
