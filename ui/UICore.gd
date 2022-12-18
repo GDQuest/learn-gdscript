@@ -54,15 +54,6 @@ func _ready() -> void:
 	_loading_screen.hide()
 	_welcome_screen.appear()
 
-	# /!\ In the browser we must register macOS shortcuts by hand in Godot 3.
-	# Godot otherwise uses Ctrl-based shortcuts only, making the experience of
-	# mac users so-so.
-	#
-	# We'll need to remove this when this issue is fixed in Godot 4:
-	# https://github.com/godotengine/godot-proposals/issues/3754
-	if OS.get_name() == "HTML5":
-		_register_macos_shortcuts()
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	# We need to check the distraction free mode to avoid conflicts with the
@@ -167,32 +158,3 @@ func _update_welcome_button() -> void:
 	var user_profile = UserProfiles.get_profile()
 	var lesson_id = user_profile.get_last_started_lesson(default_course)
 	_welcome_screen.set_button_continue(not lesson_id.empty())
-
-
-# Adds macOS-specific shortcuts in the browser.
-# Without this, shortcuts in the browser for mac users use Ctrl 
-# instead of Cmd.
-func _register_macos_shortcuts() -> void:
-	var keymap := {
-		"macos_copy": KEY_C,
-		"macos_paste": KEY_V,
-		"macos_cut": KEY_X,
-		"macos_undo": KEY_Z,
-		"macos_select_all": KEY_A,
-	}
-	for action in keymap:
-		var input_event := InputEventKey.new()
-		input_event.command = true
-		input_event.scancode = keymap[action]
-
-		InputMap.add_action(action)
-		InputMap.action_add_event(action, input_event)
-
-	# Redo is the only shortcut using Shift so we add it separately
-	var input_event := InputEventKey.new()
-	input_event.command = true
-	input_event.shift = true
-	input_event.scancode = KEY_Z
-
-	InputMap.add_action("macos_redo")
-	InputMap.action_add_event("macos_redo", input_event)
