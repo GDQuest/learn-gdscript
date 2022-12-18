@@ -13,26 +13,31 @@ _data = {
 margin_right = 14.0
 margin_bottom = 14.0
 rect_min_size = Vector2( 400, 400 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 393.0
-margin_bottom = 393.0
+margin_right = 400.0
+margin_bottom = 450.0
+rect_min_size = Vector2( 400, 450 )
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 386.0
-margin_bottom = 386.0
+margin_right = 400.0
+margin_bottom = 450.0
+
+[node name="TextureRect" parent="RunnableCodeExample/Frame/PanelContainer" index="0"]
+margin_right = 396.0
+margin_bottom = 446.0
 
 [node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="0"]
 visible = false
 
 [node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-margin_left = 71.0
+margin_left = 0.0
+margin_right = 105.0
 text = "Show Me"
+
+[node name="StepButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="2"]
+margin_left = 113.0
+margin_right = 193.0
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
 margin_left = 244.0

@@ -60,6 +60,8 @@ text = "To use a variable, you must first define it so the computer registers it
 
 To do so, you start a line of code with the [code]var[/code] keyword followed by your desired variable name. Like [code]func[/code] stands for [i]function[/i], [code]var[/code] stands for [i]variable[/i].
 
+Variables are case-sensitive, which means [code]health[/code] and [code]Health[/code] are technically different variables. Be careful to use the same capitalization wherever you refer to the same variable, or you could be reading or writing to a different variable.
+
 The following line defines a [code]health[/code] variable pointing to no value. You can think of it as creating a product label you have yet to stick onto something."
 visual_element_path = ""
 reverse_blocks = false
@@ -254,6 +256,8 @@ text = "The above code is like taking a label from the appropriate item and stic
 - From line 3, [code]health[/code] holds text.
 
 The computer will let you do that! The code's syntax and \"grammar\" are correct, but it's not good.
+
+Variable names should describe the value they contain, so a [code]health[/code] variable with a text value will confuse your future self and other coders. It can also cause errors in your game.
 
 Later on, we'll see how to avoid this issue with [i]variable types[/i]. For now, let's practice creating variables!"
 visual_element_path = ""
