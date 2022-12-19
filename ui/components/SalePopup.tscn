@@ -1,0 +1,183 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=2]
+[ext_resource path="res://ui/theme/fonts/font_well_done_bold.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/theme/fonts/font_well_done_title.tres" type="DynamicFont" id=4]
+[ext_resource path="res://ui/theme/fonts/font_well_done_normal.tres" type="DynamicFont" id=5]
+[ext_resource path="res://ui/theme/fonts/font_title_big.tres" type="DynamicFont" id=6]
+[ext_resource path="res://ui/components/SalePopup.gd" type="Script" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 0.960784, 0.25098, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.960784, 0.980392, 0.980392, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.0784314, 0.0823529, 0.164706, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 1, 0.960784, 0.25098, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[node name="SalePopup" type="ColorRect"]
+visible = false
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_pivot_offset = Vector2( 2826, 416 )
+theme = ExtResource( 1 )
+color = Color( 0.0352941, 0.0392157, 0.129412, 0.627451 )
+script = ExtResource( 7 )
+end_datetime_iso = "2020-01-01T00:00"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -394.0
+margin_top = -189.0
+margin_right = 394.0
+margin_bottom = 189.0
+rect_min_size = Vector2( 640, 0 )
+
+[node name="Panel" type="Panel" parent="PanelContainer"]
+margin_right = 788.0
+margin_bottom = 442.0
+custom_styles/panel = ExtResource( 2 )
+
+[node name="Layout" type="VBoxContainer" parent="PanelContainer"]
+margin_right = 788.0
+margin_bottom = 442.0
+custom_constants/separation = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Layout"]
+margin_right = 788.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+custom_styles/fg = SubResource( 1 )
+value = 100.0
+percent_visible = false
+
+[node name="Margin" type="MarginContainer" parent="PanelContainer/Layout"]
+margin_top = 16.0
+margin_right = 788.0
+margin_bottom = 442.0
+
+[node name="Column" type="VBoxContainer" parent="PanelContainer/Layout/Margin"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 768.0
+margin_bottom = 406.0
+custom_constants/separation = 20
+
+[node name="Spacer" type="Control" parent="PanelContainer/Layout/Margin/Column"]
+margin_right = 748.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 400, 8 )
+
+[node name="Title" type="Label" parent="PanelContainer/Layout/Margin/Column"]
+margin_top = 28.0
+margin_right = 748.0
+margin_bottom = 80.0
+custom_fonts/font = ExtResource( 4 )
+align = 1
+
+[node name="Summary" type="RichTextLabel" parent="PanelContainer/Layout/Margin/Column"]
+margin_top = 100.0
+margin_right = 748.0
+margin_bottom = 174.0
+size_flags_vertical = 0
+custom_fonts/bold_font = ExtResource( 3 )
+custom_fonts/normal_font = ExtResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[center]Get [b]50% off[/b] on all our Godot courses with the 
+coupon code [b]DISCOUNT50[/b][/center]"
+text = "Get 50% off on all our Godot courses with the 
+coupon code DISCOUNT50"
+fit_content_height = true
+
+[node name="TimeLeftLabel" type="Label" parent="PanelContainer/Layout/Margin/Column"]
+margin_top = 194.0
+margin_right = 748.0
+margin_bottom = 234.0
+custom_fonts/font = ExtResource( 6 )
+text = "Only until "
+align = 1
+
+[node name="Spacer2" type="Control" parent="PanelContainer/Layout/Margin/Column"]
+margin_top = 254.0
+margin_right = 748.0
+margin_bottom = 254.0
+
+[node name="GoButton" type="Button" parent="PanelContainer/Layout/Margin/Column"]
+margin_left = 124.0
+margin_top = 274.0
+margin_right = 624.0
+margin_bottom = 354.0
+rect_min_size = Vector2( 500, 80 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+custom_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.960784, 0.25098, 1 )
+custom_fonts/font = ExtResource( 6 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 3 )
+text = "CHECK OUT OUR COURSES"
+
+[node name="Spacer3" type="Control" parent="PanelContainer/Layout/Margin/Column"]
+margin_top = 374.0
+margin_right = 748.0
+margin_bottom = 386.0
+rect_min_size = Vector2( 0, 12 )
+
+[node name="Control" type="Control" parent="PanelContainer"]
+margin_right = 788.0
+margin_bottom = 442.0
+mouse_filter = 2
+
+[node name="CloseButton" type="Button" parent="PanelContainer/Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -64.0
+margin_top = 16.0
+margin_right = -4.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 60, 60 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+shortcut_in_tooltip = false
+text = "X"
+flat = true
+
+[node name="Tween" type="Tween" parent="."]

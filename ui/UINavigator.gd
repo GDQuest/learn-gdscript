@@ -39,6 +39,9 @@ onready var _lesson_done_popup := $LessonDonePopup as LessonDonePopup
 
 onready var _tween := $Tween as Tween
 
+onready var _sale_button := $Layout/Header/MarginContainer/HeaderContent/SaleButton as Button
+onready var _sale_popup := $SalePopup
+
 
 func _ready() -> void:
 	_lesson_count = course.lessons.size()
@@ -47,6 +50,7 @@ func _ready() -> void:
 	NavigationManager.connect("navigation_requested", self, "_navigate_to")
 	NavigationManager.connect("back_navigation_requested", self, "_navigate_back")
 	NavigationManager.connect("outliner_navigation_requested", self, "_navigate_to_outliner")
+	
 
 	Events.connect("practice_next_requested", self, "_on_practice_next_requested")
 	Events.connect("practice_previous_requested", self, "_on_practice_previous_requested")
@@ -60,6 +64,11 @@ func _ready() -> void:
 
 	_settings_button.connect("pressed", Events, "emit_signal", ["settings_requested"])
 	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
+	
+	if not UserProfiles.get_profile().is_sponsored_profile or _sale_popup.is_sale_over():
+		_sale_button.hide()
+	else:
+		_sale_button.connect("pressed", _sale_popup, "show")
 
 	if NavigationManager.current_url == "":
 		if load_into_outliner:

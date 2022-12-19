@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/BreadCrumbs.tscn" type="PackedScene" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://ui/components/FullScreenButton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://ui/components/popups/LessonDonePopup.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/components/QuitButton.tscn" type="PackedScene" id=13]
+[ext_resource path="res://ui/components/SalePopup.tscn" type="PackedScene" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=1]
 
 [node name="UINavigator" type="PanelContainer"]
 anchor_right = 1.0
@@ -82,10 +85,23 @@ margin_right = 96.0
 
 [node name="Spacer" type="Control" parent="Layout/Header/MarginContainer/HeaderContent"]
 margin_left = 112.0
-margin_right = 1656.0
+margin_right = 1273.0
 margin_bottom = 48.0
 rect_pivot_offset = Vector2( -514, 99 )
 size_flags_horizontal = 3
+
+[node name="SaleButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
+margin_left = 1289.0
+margin_right = 1656.0
+margin_bottom = 48.0
+hint_tooltip = "Go back in your navigation history"
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
+custom_colors/font_color_hover = Color( 0.960784, 0.980392, 0.980392, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.960784, 0.25098, 1 )
+custom_styles/focus = SubResource( 1 )
+text = "CHRISTMAS SALE - 50% OFF"
+flat = true
 
 [node name="ReportButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
 margin_left = 1672.0
@@ -130,9 +146,6 @@ anchor_bottom = 1.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CourseOutliner" parent="Layout/Content" instance=ExtResource( 7 )]
 visible = false
@@ -145,3 +158,9 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="SalePopup" parent="." instance=ExtResource( 14 )]
+title = "CHRISTMAS SALE"
+only_until_string = "the end of the year"
+end_datetime_iso = "2023-01-01T00:00"
+sale_url = "https://gdquest.mavenseed.com/courses/"
