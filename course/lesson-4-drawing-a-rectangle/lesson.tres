@@ -48,8 +48,8 @@ To make it draw, you give it a list of instructions: on each code line, you call
 We prepared several functions for you:
 
 - [code]move_forward(pixels)[/code] makes the turtle move forward over a given distance in [i]pixels[/i].  
-- [code]turn_right(degrees)[/code] makes the turtle turn to the right by a precise amount of [i]degrees[/i].
-- [code]turn_left(degrees)[/code] works the same as [code]turn_right(degrees)[/code], except the turtle turns to the left.
+- [code]turn_right(degrees)[/code] makes the turtle turn clockwise by a precise amount of [i]degrees[/i].
+- [code]turn_left(degrees)[/code] works the same as [code]turn_right(degrees)[/code], except the turtle turns counter-clockwise.
 
 You'll use these functions the same way you used [code]rotate()[/code] before.
 
@@ -142,11 +142,11 @@ goal = "In this practice, we'll tell the turtle to draw a corner.
 
 The corner is made up of two lines that are [code]200[/code] pixels long. The lines are connected at each end by [code]90[/code] degrees, or right-angle.
 
-The [code]move_forward()[/code] and [code]turn_right()[/code] functions to the right draw a corner, but they're missing some parameters.
+The [code]move_forward()[/code] and [code]turn_right()[/code] functions to the right draw a corner, but they're missing some arguments.
 
-Add the missing parameters so the turtle moves forward [code]200[/code] pixels, turns right [code]90[/code] degrees, then moves forward again [code]200[/code] pixels.
+Add the missing arguments so the turtle moves forward [code]200[/code] pixels, turns right [code]90[/code] degrees, then moves forward again [code]200[/code] pixels.
 
-We added the first parameter for you so the turtle moves forward [code]200[/code] pixels.
+We added the first argument for you so the turtle moves forward [code]200[/code] pixels.
 
 In the following practices, we'll draw multiple corners to create rectangles.
 
@@ -157,7 +157,7 @@ starting_code = "func draw_corner():
 	move_forward()"
 cursor_line = 3
 cursor_column = 13
-hints = PoolStringArray( "You need to add two parameters to the [code]turn_right()[/code] and [code]move_forward()[/code] functions: [code]90[/code] and [code]200[/code]." )
+hints = PoolStringArray( "You need to add two arguments to the [code]turn_right()[/code] and [code]move_forward()[/code] functions: [code]90[/code] and [code]200[/code]." )
 validator_script_path = "turning_right/TestsTurningRight.gd"
 script_slice_path = "turning_right/TurningRight.live-editor/slices/TurningRight.draw_corner.slice.tres"
 documentation_references = PoolStringArray( "move_forward", "turn_right" )
@@ -168,9 +168,9 @@ description = "Use the turtle to draw a square's corner. You'll then build upon 
 script = ExtResource( 3 )
 practice_id = "res://course/lesson-4-drawing-a-rectangle/practice-5AJTESv5.tres"
 title = "Drawing a Rectangle"
-goal = "Add the correct parameters to the functions [code]move_forward()[/code] and [code]turn_right()[/code] to draw a rectangle with a width of [code]200[/code] pixels, and a height of [code]120[/code] pixels.
+goal = "Add the correct arguments to the functions [code]move_forward()[/code] and [code]turn_right()[/code] to draw a rectangle with a width of [code]200[/code] pixels, and a height of [code]120[/code] pixels.
 
-We wrote the first parameter for you.
+We wrote the first argument for you.
 
 In the next practice, you'll use the same functions to draw a bigger rectangle."
 starting_code = "func draw_rectangle():
@@ -183,7 +183,7 @@ starting_code = "func draw_rectangle():
 	move_forward()"
 cursor_line = 3
 cursor_column = 13
-hints = PoolStringArray( "Both [code]move_forward()[/code] and [code]turn_right()[/code] take a numerical parameter between the parenthesis", "[code]turn_right[/code]\'s numerical parameter indicates how many [i]degrees[/i] the turtle should turn.", "[code]move_forward[/code]\'s numerical parameters indicates how many pixels the turtle should move." )
+hints = PoolStringArray( "Both [code]move_forward()[/code] and [code]turn_right()[/code] take a numerical argument between the parenthesis", "[code]turn_right[/code]\'s numerical argument indicates how many [i]degrees[/i] the turtle should turn.", "[code]move_forward[/code]\'s numerical arguments indicates how many pixels the turtle should move." )
 validator_script_path = "drawing_rectangle/TestsDrawingRectangle.gd"
 script_slice_path = "drawing_rectangle/DrawingRectangle.live-editor/slices/DrawingRectangle.draw_rectangle.slice.tres"
 documentation_references = PoolStringArray( "move_forward", "turn_right" )
@@ -206,7 +206,7 @@ starting_code = "func draw_rectangle():
 	turn_right(90)"
 cursor_line = 0
 cursor_column = 0
-hints = PoolStringArray( "Start by moving forward to create the height of the rectangle.", "[code]move_forward[/code]\'s numerical parameters indicates how many pixels the turtle should move.", "[code]turn_right[/code]\'s numerical parameter indicates how many [i]degrees[/i] the turtle should turn." )
+hints = PoolStringArray( "Start by moving forward to create the height of the rectangle.", "[code]move_forward[/code]\'s numerical arguments indicates how many pixels the turtle should move.", "[code]turn_right[/code]\'s numerical argument indicates how many [i]degrees[/i] the turtle should turn." )
 validator_script_path = "drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd"
 script_slice_path = "drawing_bigger_rectangle/DrawingBiggerRectangle.live-editor/slices/DrawingBiggerRectangle.draw_rectangle.slice.tres"
 documentation_references = PoolStringArray( "move_forward", "turn_right" )
