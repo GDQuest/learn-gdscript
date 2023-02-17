@@ -100,6 +100,7 @@ func _on_font_size_changed(value: int) -> void:
 	font_override.size += 2 * value
 	_font_size_sample.add_font_override("font", font_override)
 
+
 func _on_visibility_changed() -> void:
 	if _panel.visible:
 		_font_size_value.grab_focus()

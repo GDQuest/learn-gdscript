@@ -22,11 +22,12 @@ onready var _course_screen := $Pages/CourseScreen as Control
 onready var _settings_popup := $SettingsPopup as SettingsPopup
 onready var _report_form_popup := $ReportFormPopup as ReportFormPopup
 
+var _user_profile := UserProfiles.get_profile()
+
 
 func _init() -> void:
-	var user_profile := UserProfiles.get_profile()
-	Engine.target_fps = user_profile.framerate_limit
-	user_profile.connect("framerate_limit_changed", Engine, "set_target_fps")
+	_update_framerate(_user_profile.framerate_limit)
+	_user_profile.connect("framerate_limit_changed", self, "_update_framerate")
 	OS.low_processor_usage_mode = true
 	OS.low_processor_usage_mode_sleep_usec = 20000
 
@@ -158,3 +159,10 @@ func _update_welcome_button() -> void:
 	var user_profile = UserProfiles.get_profile()
 	var lesson_id = user_profile.get_last_started_lesson(default_course)
 	_welcome_screen.set_button_continue(not lesson_id.empty())
+
+
+func _update_framerate(new_framerate: int) -> void:
+	if new_framerate == 0:
+		new_framerate = 1000
+	OS.low_processor_usage_mode_sleep_usec = 1_000_000 / new_framerate
+	print(OS.low_processor_usage_mode_sleep_usec)
