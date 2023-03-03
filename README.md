@@ -56,6 +56,7 @@ Please always start pull request titles and commit messages with one of the foll
 - `fix:` for a bug fix.
 - `docs:` for changes to the project's documentation.
 - `build:` for anything related to GitHub actions.
+- `content:` for typo or something unclear in project's text.
 
 ### How we work
 
