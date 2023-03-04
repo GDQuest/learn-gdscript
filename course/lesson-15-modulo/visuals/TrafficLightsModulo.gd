@@ -36,6 +36,7 @@ func run() -> void:
 
 
 func reset() -> void:
+	light_index = 0
 	turn_on_light(light_index, true)
 	_index_label.text = str(light_index)
 

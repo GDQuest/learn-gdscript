@@ -123,7 +123,7 @@ func step() -> void:
 			_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()]
 		)
 
-		if _scene_instance.has_method("reset"):
+		if _scene_instance.has_method("reset") and _debugger:
 			_scene_instance.reset()
 
 		# warning-ignore:unsafe_method_access
