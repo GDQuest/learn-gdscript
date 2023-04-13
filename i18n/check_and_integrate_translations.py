@@ -116,7 +116,7 @@ def main(argv):
     languages_to_integrate = list()
     for lang, results in analysis_results.items():
         results["completion"] = 100 - (100 * results["missings"] // results["total"])
-        results["rework"] = 100 * results['fuzzies'] // results['total']
+        results["rework"] = 100 * results['fuzzies'] // (results['total'] - results["missings"])
         if threshold is not None and results["completion"] >= threshold:
             languages_to_integrate.append(lang)
 
