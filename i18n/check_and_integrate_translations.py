@@ -5,6 +5,7 @@ from getopt import getopt
 from shutil import move
 from match_and_merge_po_translations import parse_po_file
 
+
 def help_output():
     """
     Displays the script help message and exit process.
@@ -21,7 +22,7 @@ def help_output():
 
 def main(argv):
     # Recovering options and arguments from command line
-    opts, args = getopt(argv, "ht:c", ["help", "trans_path=", "completion_threshold="])
+    opts, args = getopt(argv, "ht:c:ES", ["help", "trans_path=", "completion_threshold=", "skip-extract", "skip-sync"])
     opts_dict = {opt[0]: opt[1] for opt in opts}
 
     # Getting Translations Directory Path from options
@@ -31,6 +32,23 @@ def main(argv):
     elif '--trans_path' in opts_dict.keys():
         translations_path = opts_dict['--trans_path']
 
+    # Getting Threshold value from options
+    if '-c' in opts_dict.keys():
+        try:
+            threshold = int(opts_dict["-c"])
+        except ValueError:
+            print("WARN: Incorrect Threshold value. Script will proceed without languages integration.")
+            threshold = None
+    elif '--completion_threshold' in opts_dict.keys():
+        try:
+            threshold = int(opts_dict["--completion_threshold"])
+        except ValueError:
+            print("WARN: Incorrect Threshold value. Script will proceed without languages integration.")
+            threshold = None
+    else:
+        print("WARN: Missing Threshold value. Script will proceed without languages integration.")
+        threshold = None
+
     # Triggering Help message if translations path missing or help options present.
     if translations_path == '' or not os.path.exists(translations_path)\
             or len(opts) == 0 or '-h' in opts_dict.keys() or '--help' in opts_dict.keys():
@@ -38,28 +56,35 @@ def main(argv):
 
     # Prevent execution from another directory than script source directory
     if not os.getcwd().endswith('learn-gdscript'):
-        print("ERROR: This script should be executed from learn-gdscript project directory.")
-        sys.exit()
+        sys.exit("ERROR: This script should be executed from learn-gdscript project directory.")
 
     # Generating POT files from extract.py
-    print("INFO: Extracting strings and generating POT files...")
+    extract_result = -1
+    if not ('-E' in opts_dict.keys() or '--skip-extract' in opts_dict.keys()):
+        print("INFO: Extracting strings and generating POT files...")
+        extract_result = system("python3 i18n/extract.py")
 
-    if system("python3 i18n/extract.py"):
-        print("ERROR: Extraction scripts ended with errors")
-        sys.exit()
+        if extract_result:
+            sys.exit("ERROR: Extraction scripts ended with errors")
 
-    # Moving POT files to translations project
-    print("INFO: Moving POT files to translations folder")
-    pot_files = [file for file in os.listdir('i18n') if file.endswith(".pot")]
-    for pot_file in pot_files:
-        move(os.path.join('i18n', pot_file), os.path.join(translations_path, pot_file))
+        # Moving POT files to translations project
+        print("INFO: Moving POT files to translations folder")
+        pot_files = [file for file in os.listdir('i18n') if file.endswith(".pot")]
+        for pot_file in pot_files:
+            move(os.path.join('i18n', pot_file), os.path.join(translations_path, pot_file))
+    else:
+        print("WARN: Skipping strings extraction and POT files generation...")
 
     # Updating PO files with sync_translations.py
     os.chdir(translations_path)
-    print("INFO: Running synchronization script")
-    system("python3 sync_translations.py")
+    if not ('-S' in opts_dict.keys() or '--skip-sync' in opts_dict.keys()):
+        print("INFO: Running synchronization script")
+        system("python3 sync_translations.py")
+    else:
+        print("WARN: Skipping PO files extraction...")
 
     # Parsing and Analyzing PO files
+    print("INFO: Parsing PO files in ")
     languages_directories = [lan_dir.path for lan_dir in os.scandir() if lan_dir.is_dir() and lan_dir.path[:3] != './.']
     analysis_results = {}
 
@@ -88,10 +113,24 @@ def main(argv):
 
     # Computing translations indicator values
     print("INFO: Computing completion indicator for each language.")
+    languages_to_integrate = list()
     for lang, results in analysis_results.items():
-        print(lang, results)
+        results["completion"] = 100 - (100 * results["missings"] // results["total"])
+        results["rework"] = 100 * results['fuzzies'] // results['total']
+        if threshold is not None and results["completion"] >= threshold:
+            languages_to_integrate.append(lang)
+
+    # Sorting and Outputting results
+    for lang, results in sorted(analysis_results.items(), key=lambda v: v[1]["completion"], reverse=True):
+        print(f"Language : {lang.upper()[2:]} - {results['completion']}% including {results['rework']}% fuzzy")
 
     # Integrating translations in GD_Learn project
+    if len(languages_to_integrate) > 0:
+        print(f"INFO: Integrating languages above {threshold}%.")
+        for lang in languages_to_integrate:
+            print("Copying ", lang)
+    else:
+        print("WARN: No language complete enough to be integrated.")
 
 
 if __name__ == "__main__":
