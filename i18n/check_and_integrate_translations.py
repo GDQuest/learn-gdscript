@@ -84,7 +84,7 @@ def main(argv):
         print("WARN: Skipping PO files merging with POT...")
 
     # Parsing and Analyzing PO files
-    print("INFO: Parsing PO files in ")
+    print("INFO: Parsing PO files and counting missing translations")
     languages_directories = [lan_dir.path for lan_dir in os.scandir() if lan_dir.is_dir() and lan_dir.path[:3] != './.']
     analysis_results = {}
 
