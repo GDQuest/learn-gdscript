@@ -81,7 +81,7 @@ def main(argv):
         print("INFO: Running synchronization script")
         system("python3 sync_translations.py")
     else:
-        print("WARN: Skipping PO files extraction...")
+        print("WARN: Skipping PO files merging with POT...")
 
     # Parsing and Analyzing PO files
     print("INFO: Parsing PO files in ")
