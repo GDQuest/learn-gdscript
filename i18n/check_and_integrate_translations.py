@@ -10,19 +10,26 @@ def help_output():
     """
     Displays the script help message and exit process.
     """
-    print("Usage 1: check_and_integrate_translations.py [-T] TRANSLATIONS_TARGET")
-    print("Usage 2: check_and_integrate_translations.py [-T] TRANSLATIONS_TARGET [-C] 95")
+    print("    Usage 1: check_and_integrate_translations.py [-T] TRANSLATIONS_PATH")
+    print("    Usage 2: check_and_integrate_translations.py [-T] TRANSLATIONS_PATH [-C] 95")
     print("""This script performs text extraction from the application and move generated POT files in the translations 
     project in order to compare with translations source and output a translation completion indicator for each 
-    language.
-    Usage 2: The script will then automatically integrate translations files with a completion above given value, 95% in
-     the given example""")
+    language.""")
+    print("""Usage 2: The script will then automatically integrate translations files with a completion above given 
+    value, 95% in the given example""")
+    print("    Options:")
+    print("        -h, --help : Output this help message.")
+    print("        -t, --translations_path : relative or absolute path to GD-Learn-translations directory.")
+    print("        -c, --completion_threshold : Minimum completion percentage value for a language to be integrated.")
+    print("                                     Language integration is skipped if no value is given.")
+    print("        -E, --skip-extract : Skip the extraction of strings and POT files generation.")
+    print("        -S, --skip-sync : Skip the synchronization and merge of PO files with the reference POT files.")
     sys.exit()
 
 
 def main(argv):
     # Recovering options and arguments from command line
-    opts, args = getopt(argv, "ht:c:ES", ["help", "trans_path=", "completion_threshold=", "skip-extract", "skip-sync"])
+    opts, args = getopt(argv, "ht:c:ES", ["help", "translations_path=", "completion_threshold=", "skip-extract", "skip-sync"])
     opts_dict = {opt[0]: opt[1] for opt in opts}
 
     # Getting Translations Directory Path from options
