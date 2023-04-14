@@ -2,7 +2,7 @@ import os.path
 from os import system
 import sys
 from getopt import getopt
-from shutil import move
+from shutil import move, copytree, rmtree
 from match_and_merge_po_translations import parse_po_file
 
 
@@ -62,7 +62,8 @@ def main(argv):
         help_output()
 
     # Prevent execution from another directory than script source directory
-    if not os.getcwd().endswith('learn-gdscript'):
+    source_dir = os.getcwd()
+    if not source_dir.endswith('learn-gdscript'):
         sys.exit("ERROR: This script should be executed from learn-gdscript project directory.")
 
     # Generating POT files from extract.py
@@ -136,6 +137,10 @@ def main(argv):
         print(f"INFO: Integrating languages above {threshold}%.")
         for lang in languages_to_integrate:
             print("Copying ", lang)
+            dest = os.path.join(source_dir, "i18n", lang)
+            if os.path.exists(dest):
+                rmtree(dest)
+            copytree(lang, dest)
     else:
         print("WARN: No language complete enough to be integrated.")
 
