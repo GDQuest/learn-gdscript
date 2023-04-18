@@ -99,7 +99,7 @@ def extract_babel_and_write(
 ) -> None:
 
     print("  Starting extraction...")
-    catalog = Catalog(
+    cat = Catalog(
         project=PROJECT,
         version=VERSION,
         copyright_holder=COPYRIGHT_HOLDER,
@@ -116,27 +116,23 @@ def extract_babel_and_write(
         strip_comment_tags=False,
     )
 
-    # (filename, lineno, translation string, comments, context)
-    for message_data in extractor:
-        message_id = message_data[2]
+    # (filename, lineno, message, comments, context)
+    for message in extractor:
+        message_id = message[2]
         message_id = message_id.replace("\r\n", "\n")
 
-        # We split blocks into individual translation strings to make updating
-        # translations easier.
-        for line in message_id.split("\n"):
-            if line.strip() != "":
-                catalog.add(
-                    id=line,
-                    string="",
-                    locations=[(message_data[0], message_data[1])],
-                    auto_comments=message_data[3],
-                    context=message_data[4],
-                )
+        cat.add(
+            id=message_id,
+            string="",
+            locations=[(message[0], message[1])],
+            auto_comments=message[3],
+            context=message[4],
+        )
 
     with open(output_file, "wb") as file:
         pofile.write_po(
             fileobj=file,
-            catalog=catalog,
+            catalog=cat,
         )
 
     print("  Finished extraction.")
@@ -198,7 +194,7 @@ def extract_csv_and_write(
 ) -> None:
 
     print("  Starting extraction...")
-    catalog = Catalog(
+    cat = Catalog(
         project=PROJECT,
         version=VERSION,
         copyright_holder=COPYRIGHT_HOLDER,
@@ -218,7 +214,7 @@ def extract_csv_and_write(
 
                 message_id = message_id.replace("\r\n", "\n")
 
-                catalog.add(
+                cat.add(
                     id=message_id,
                     string="",
                     locations=[(source_file, reader.line_num)],
@@ -229,7 +225,7 @@ def extract_csv_and_write(
     with open(output_file, "wb") as file:
         pofile.write_po(
             fileobj=file,
-            catalog=catalog,
+            catalog=cat,
         )
 
     print("  Finished extraction.")
