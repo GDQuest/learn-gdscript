@@ -1,7 +1,7 @@
 import os.path
 from os import system
 import sys
-from getopt import getopt
+from getopt import getopt, GetoptError
 from shutil import move, copytree, rmtree
 from match_and_merge_po_translations import parse_po_file
 
@@ -20,8 +20,8 @@ def help_output():
     print("    Options:")
     print("        -h, --help : Output this help message.")
     print("        -t, --translations_path : relative or absolute path to GD-Learn-translations directory.")
-    print("        -c, --completion_threshold : Minimum completion percentage value for a language to be integrated.")
-    print("                                     Language integration is skipped if no value is given.")
+    print("        -i, --integrate : Minimum completion percentage value for a language to be integrated.")
+    print("                          Language integration is skipped if no value is given.")
     print("        -E, --skip-extract : Skip the extraction of strings and POT files generation.")
     print("        -S, --skip-sync : Skip the synchronization and merge of PO files with the reference POT files.")
     sys.exit()
@@ -29,7 +29,12 @@ def help_output():
 
 def main(argv):
     # Recovering options and arguments from command line
-    opts, args = getopt(argv, "ht:c:ES", ["help", "translations_path=", "completion_threshold=", "skip-extract", "skip-sync"])
+    opts = list()
+    try:
+        opts, args = getopt(argv, "ht:i:ES", ["help", "translations_path=", "integrate=", "skip-extract", "skip-sync"])
+    except GetoptError:
+        help_output()
+    # Converting list of tuples in a convenient dictionary
     opts_dict = {opt[0]: opt[1] for opt in opts}
 
     # Getting Translations Directory Path from options
@@ -40,13 +45,13 @@ def main(argv):
         translations_path = opts_dict['--trans_path']
 
     # Getting Threshold value from options
-    if '-c' in opts_dict.keys():
+    if '-i' in opts_dict.keys():
         try:
             threshold = int(opts_dict["-c"])
         except ValueError:
             print("WARN: Incorrect Threshold value. Script will proceed without languages integration.")
             threshold = None
-    elif '--completion_threshold' in opts_dict.keys():
+    elif '--integrate' in opts_dict.keys():
         try:
             threshold = int(opts_dict["--completion_threshold"])
         except ValueError:
