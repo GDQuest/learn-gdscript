@@ -99,7 +99,7 @@ def extract_babel_and_write(
 ) -> None:
 
     print("  Starting extraction...")
-    cat = Catalog(
+    catalog = Catalog(
         project=PROJECT,
         version=VERSION,
         copyright_holder=COPYRIGHT_HOLDER,
@@ -121,7 +121,7 @@ def extract_babel_and_write(
         message_id = message[2]
         message_id = message_id.replace("\r\n", "\n")
 
-        cat.add(
+        catalog.add(
             id=message_id,
             string="",
             locations=[(message[0], message[1])],
@@ -132,7 +132,7 @@ def extract_babel_and_write(
     with open(output_file, "wb") as file:
         pofile.write_po(
             fileobj=file,
-            catalog=cat,
+            catalog=catalog,
         )
 
     print("  Finished extraction.")
@@ -194,7 +194,7 @@ def extract_csv_and_write(
 ) -> None:
 
     print("  Starting extraction...")
-    cat = Catalog(
+    catalog = Catalog(
         project=PROJECT,
         version=VERSION,
         copyright_holder=COPYRIGHT_HOLDER,
@@ -214,7 +214,7 @@ def extract_csv_and_write(
 
                 message_id = message_id.replace("\r\n", "\n")
 
-                cat.add(
+                catalog.add(
                     id=message_id,
                     string="",
                     locations=[(source_file, reader.line_num)],
@@ -225,7 +225,7 @@ def extract_csv_and_write(
     with open(output_file, "wb") as file:
         pofile.write_po(
             fileobj=file,
-            catalog=cat,
+            catalog=catalog,
         )
 
     print("  Finished extraction.")
