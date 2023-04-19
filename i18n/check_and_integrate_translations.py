@@ -11,7 +11,7 @@ def help_output():
     Displays the script help message and exit process.
     """
     print("    Usage 1: check_and_integrate_translations.py [-T] TRANSLATIONS_PATH")
-    print("    Usage 2: check_and_integrate_translations.py [-T] TRANSLATIONS_PATH [-C] 95")
+    print("    Usage 2: check_and_integrate_translations.py [-T] TRANSLATIONS_PATH [-I] 95")
     print("""This script performs text extraction from the application and move generated POT files in the translations 
     project in order to compare with translations source and output a translation completion indicator for each 
     language.""")
