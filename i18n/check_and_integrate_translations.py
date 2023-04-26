@@ -22,6 +22,7 @@ class TranslationsData:
         """Returns the completion rate of the language with an int between 0 and 100, with 100 representing 100% completion."""
         if self._completion_rate == -1:
             todo_count = self.missing_translations + self.fuzzy_translations
+
             self._completion_rate = 100 - (100 * todo_count // self.total_strings)
 
         return self._completion_rate
@@ -118,21 +119,24 @@ def main():
     languages_directories = []
     for name in os.listdir(args.translations_path):
         folder_path = os.path.join(args.translations_path, name)
-        if os.path.isdir(folder_path):
-            languages_directories.append(name)
+        if os.path.isdir(folder_path) and name not in [".git", "images"]:
+            languages_directories.append(folder_path)
 
     translation_datas = []
     for language_directory in languages_directories:
-        po_files = glob.glob("*.po", root_dir=language_directory)
+        po_files = [os.path.join(language_directory, file) for file in glob.glob("*.po", root_dir=language_directory)]
         parsed_po_files = list(map(parse_po_file, po_files))
         data = TranslationsData(
             language_code=os.path.basename(language_directory),
             directory_path=language_directory,
+            total_strings=0,
+            missing_translations=0,
+            fuzzy_translations=0,
         )
 
         # Iterating through PO files entries in order to count missing and fuzzy translations
         for po_file in parsed_po_files:
-            data.total_strings = len(po_file.entries)
+            data.total_strings += len(po_file.entries)
             for entry in po_file.entries:
                 if entry.msgstr == "" and entry.msgid != "":
                     # Case 1 : entry has no translated string whereas it has an id value
@@ -152,8 +156,8 @@ def main():
         translation_datas, key=lambda data: data.get_completion_rate(), reverse=True
     ):
         print(
-            f"Language : {data.language_code} - {data.get_completion_rate()}% "
-            f"including {data.fuzzy_translations}% fuzzy and {data.missing_translations}% missing translations."
+            f"Language : {data.language_code} - translations are {data.get_completion_rate()}% complete, "
+            f"including {data.fuzzy_translations} fuzzy and {data.missing_translations} missing translations."
         )
 
     languages_to_integrate = [
