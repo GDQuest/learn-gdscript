@@ -1,98 +1,58 @@
-import os.path
-from os import system
+import os
 import sys
-from getopt import getopt, GetoptError
-from shutil import move, copytree, rmtree
+import argparse
+import subprocess
+import shutil
 from match_and_merge_po_translations import parse_po_file
 
 
-def help_output():
+def parse_command_line_arguments():
     """
-    Displays the script help message and exit process.
+    Parses command line arguments and returns a dictionary containing options and arguments.
     """
-    print("    Usage 1: check_and_integrate_translations.py -t TRANSLATIONS_PATH")
-    print("    Usage 2: check_and_integrate_translations.py -t TRANSLATIONS_PATH [-i] 95")
-    print("""This script performs text extraction from the application and move generated POT files in the translations 
-    project in order to compare with translations source and output a translation completion indicator for each 
-    language.""")
-    print("""Usage 2: The script will then automatically integrate translations files with a completion above given 
-    value, 95% in the given example""")
-    print("    Options:")
-    print("        -h, --help : Output this help message.")
-    print("        -t, --translations_path : relative or absolute path to GD-Learn-translations directory.")
-    print("        -i, --integrate : Minimum completion percentage value for a language to be integrated.")
-    print("                          Language integration is skipped if no value is given.")
-    print("        -E, --skip-extract : Skip the extraction of strings and POT files generation.")
-    print("        -S, --skip-sync : Skip the synchronization and merge of PO files with the reference POT files.")
-    sys.exit()
+    parser = argparse.ArgumentParser(description="This script performs text extraction from the application and move "
+                                                 "generated POT files in the translations project in order to compare "
+                                                 "with translations source and output a translation completion "
+                                                 "indicator for each language.")
+    parser.add_argument("translations_path", help="Relative or absolute path to the repository learn-gdscript-translations/.")
+    parser.add_argument("-t", "--threshold", type=int, default=95, help="Minimum completion percentage value for a language to be integrated.")
+    parser.add_argument("-E", "--skip-extract", action="store_true", help="Skip the extraction of strings and POT files generation.")
+    parser.add_argument("-S", "--skip-sync", action="store_true", help="Skip the synchronization and merge of PO files with the reference POT files.")
+    return vars(parser.parse_args())
 
 
-def main(argv):
-    # Recovering options and arguments from command line
-    opts = list()
-    try:
-        opts, args = getopt(argv, "ht:i:ES", ["help", "translations_path=", "integrate=", "skip-extract", "skip-sync"])
-    except GetoptError:
-        help_output()
-    # Converting list of tuples in a convenient dictionary
-    opts_dict = {opt[0]: opt[1] for opt in opts}
+def main():
+    args = parse_command_line_arguments()
 
-    # Getting Translations Directory Path from options
-    translations_path = ''
-    if '-t' in opts_dict.keys():
-        translations_path = opts_dict['-t']
-    elif '--trans_path' in opts_dict.keys():
-        translations_path = opts_dict['--trans_path']
+    I18N_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
+    SOURCE_DIRECTORY = os.path.join(I18N_DIRECTORY, "..")
 
-    # Getting Threshold value from options
-    if '-i' in opts_dict.keys():
-        try:
-            threshold = int(opts_dict["-c"])
-        except ValueError:
-            print("WARN: Incorrect Threshold value. Script will proceed without languages integration.")
-            threshold = None
-    elif '--integrate' in opts_dict.keys():
-        try:
-            threshold = int(opts_dict["--completion_threshold"])
-        except ValueError:
-            print("WARN: Incorrect Threshold value. Script will proceed without languages integration.")
-            threshold = None
-    else:
-        print("WARN: Missing Threshold value. Script will proceed without languages integration.")
-        threshold = None
+    if not args['skip_extract']:
+        print("INFO: Extracting translation strings from learn-gdscript source code and generating POT files...")
+        EXTRACT_SCRIPT_PATH = os.path.join(I18N_DIRECTORY, "extract.py")
+        result = subprocess.run([ "python3", EXTRACT_SCRIPT_PATH], capture_output=True)
 
-    # Triggering Help message if translations path missing or help options present.
-    if translations_path == '' or not os.path.exists(translations_path)\
-            or len(opts) == 0 or '-h' in opts_dict.keys() or '--help' in opts_dict.keys():
-        help_output()
+        # if there was an error, print stdout and stderr and exit
+        if result.returncode > 0:
+            sys.exit("ERROR: Extraction scripts ended with errors. Aborting script.\n" 
+                     f"Script {EXTRACT_SCRIPT_PATH} output the following errors:"
+                     f"Error code: {result.returncode}"
+                     f"\n{result.stderr.decode('utf-8')}")
 
-    # Prevent execution from another directory than script source directory
-    source_dir = os.getcwd()
-    if not source_dir.endswith('learn-gdscript'):
-        sys.exit("ERROR: This script should be executed from learn-gdscript project directory.")
-
-    # Generating POT files from extract.py
-    extract_result = -1
-    if not ('-E' in opts_dict.keys() or '--skip-extract' in opts_dict.keys()):
-        print("INFO: Extracting strings and generating POT files...")
-        extract_result = system("python3 i18n/extract.py")
-
-        if extract_result:
-            sys.exit("ERROR: Extraction scripts ended with errors")
-
-        # Moving POT files to translations project
         print("INFO: Moving POT files to translations folder")
-        pot_files = [file for file in os.listdir('i18n') if file.endswith(".pot")]
+        pot_files = [file for file in os.listdir(I18N_DIRECTORY) if file.endswith(".pot")]
         for pot_file in pot_files:
-            move(os.path.join('i18n', pot_file), os.path.join(translations_path, pot_file))
+            shutil.move(os.path.join(I18N_DIRECTORY, pot_file), os.path.join(args["translations_path"], pot_file))
     else:
         print("WARN: Skipping strings extraction and POT files generation...")
 
     # Updating PO files with sync_translations.py
-    os.chdir(translations_path)
-    if not ('-S' in opts_dict.keys() or '--skip-sync' in opts_dict.keys()):
+    # TODO: remove chdir, update from here down
+    os.chdir(args["translations_path"])
+    source_dir = os.path.join(args["translations_path"], "source")
+    if not args["skip_sync"]:
         print("INFO: Running synchronization script")
-        system("python3 sync_translations.py")
+        subprocess.run(["python3", "sync_translations.py"])
     else:
         print("WARN: Skipping PO files merging with POT...")
 
@@ -100,7 +60,6 @@ def main(argv):
     print("INFO: Parsing PO files and counting missing translations")
     languages_directories = [lan_dir.path for lan_dir in os.scandir() if lan_dir.is_dir() and lan_dir.path[:3] != './.']
     analysis_results = {}
-
     for lan_dir in languages_directories:
         po_files = [os.path.join(lan_dir, file) for file in os.listdir(lan_dir) if file.endswith(".po")]
         parsed_po_files = list(map(parse_po_file, po_files))
@@ -127,6 +86,7 @@ def main(argv):
     # Computing translations indicator values
     print("INFO: Computing completion indicator for each language.")
     languages_to_integrate = list()
+    threshold = args["threshold"]
     for lang, results in analysis_results.items():
         results["completion"] = 100 - (100 * results["missings"] // results["total"])
         results["rework"] = 100 * results['fuzzies'] // (results['total'] - results["missings"])
@@ -144,11 +104,11 @@ def main(argv):
             print("Copying ", lang)
             dest = os.path.join(source_dir, "i18n", lang)
             if os.path.exists(dest):
-                rmtree(dest)
-            copytree(lang, dest)
+                shutil.rmtree(dest)
+            shutil.copytree(lang, dest)
     else:
         print("WARN: No language complete enough to be integrated.")
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main()
