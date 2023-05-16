@@ -2,6 +2,31 @@
 
 This document lists changes between releases.
 
+## Learn GDScript From Zero 1.4.0
+
+### New features
+
+- Add script to extract, sync, check, and integrate new translations (#814)
+
+### Content changes
+
+- Replace parameter with argument in lesson 4 practices
+- Add correct return types to documentation of str and int functions
+- Correct typo in lesson 7
+- Correct typo in lesson 9, improve wording
+- Update Spanish translations for lessons 1 to 7
+
+### Improvements
+
+- Turn off vsync for faster response times
+
+### Bug fixes
+
+- Use low processor mode instead of target FPS to uncap framerate
+- Lesson 21 - remove Step button from combo example (#801)
+- Lesson 18 - fix unwrapped loop resetting (#800)
+- Lesson 15 - fix traffic light resetting (#797)
+
 ## Learn GDScript From Zero 1.3.2
 
 *Released on October 17, 2022*
