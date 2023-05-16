@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2022-03-26 17:50+0100\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
 "PO-Revision-Date: 2022-03-26 18:19+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -21,6 +21,7 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #: course/lesson-17-while-loops/lesson.tres:14
+#, fuzzy
 msgid ""
 "You've seen that you can use functions to [i]reuse[/i] code. In this lesson, "
 "you'll learn about [b]loops[/b]. Loops help you [i]repeat[/i] code.\n"
@@ -28,7 +29,8 @@ msgid ""
 "To illustrate how loops work, let's take a game board split into a grid.\n"
 "\n"
 "Our robot can move to neighboring cells by changing a [code]Vector2[/code] "
-"variable named [code]cell[/code].\n"
+"variable named [code]cell[/code]. It represents the current cell the robot "
+"is in.\n"
 "\n"
 "When we increase [code]cell.x[/code], the robot moves to the right.\n"
 "\n"
@@ -124,14 +126,19 @@ msgstr ""
 "Puedes ver que el siguiente código se ejecuta cuatro veces en la consola."
 
 #: course/lesson-17-while-loops/lesson.tres:126
+#, fuzzy
 msgid ""
 "Let's apply this to our [code]move_to_end()[/code] function.\n"
 "\n"
 "This time, we compare the number of loops to the board's width. We go "
 "through the loop until we reach the width of the board.\n"
 "\n"
-"Note that we move one less than the board's width because the robot is "
-"already on the first cell."
+"Note that we move the robot until its position is one less than the board's "
+"width because we are counting tiles from [code]0[/code].\n"
+"\n"
+"A board of [code]3[/code] by [code]3[/code] cells would have cell "
+"coordinates going from [code]0[/code] to [code]2[/code] on both the X and Y "
+"axes."
 msgstr ""
 "Apliquemos esto a nuestra función [code]move_to_end()[/code].\n"
 "\n"
@@ -141,10 +148,12 @@ msgstr ""
 "Ten en cuenta que nos movemos uno menos que el ancho del tablero porque el "
 "robot ya está en la primera celda."
 
+#: course/lesson-17-while-loops/lesson.tres:160
 #: course/lesson-17-while-loops/lesson.tres:158
 msgid "While loops can cause issues"
 msgstr "Los bucles while pueden causar problemas"
 
+#: course/lesson-17-while-loops/lesson.tres:162
 #: course/lesson-17-while-loops/lesson.tres:160
 msgid ""
 "If you're not careful, your [code]while[/code] loop can run infinitely. In "
@@ -157,10 +166,12 @@ msgstr ""
 "\n"
 "Echa un vistazo a este ejemplo de código."
 
+#: course/lesson-17-while-loops/lesson.tres:182
 #: course/lesson-17-while-loops/lesson.tres:180
 msgid "What would happen if the computer tried to run the code above?"
 msgstr "¿Qué pasaría si la computadora intentara ejecutar el código anterior?"
 
+#: course/lesson-17-while-loops/lesson.tres:185
 #: course/lesson-17-while-loops/lesson.tres:183
 msgid ""
 "Because we don't increment [code]number[/code] within the [code]while[/code] "
@@ -175,36 +186,41 @@ msgid ""
 "When programs stop responding on your computer, it's often due to an "
 "infinite loop!"
 msgstr ""
-"Debido a que no incrementamos [code]number[/code] dentro del bucle "
-"[code]while[/code], este siempre se queda en [code]0[/code].\n"
+"Como no incrementamos [code]número[/code] dentro del bucle [code]while[/"
+"code], siempre se queda en [code]0[/code].\n"
 "\n"
-"Como resultado, el número siempre es inferior a [code]10[/code], por lo que "
+"Como resultado, el número es siempre menor que [code]10[/code], por lo que "
 "nunca salimos del bucle.\n"
 "\n"
-"Como no hay forma de salir del bucle [code][code]while[/code][/code], la "
-"computadora tratará de dibujar cuadrados infinitamente, lo que congelará el "
-"programa.\n"
+"Como no hay forma de salir del bucle [code]while[/code], el ordenador "
+"intentará dibujar cuadrados infinitamente, lo que congelará el programa.\n"
 "\n"
-"Cuando los programas dejan de responder en tu computadora, ¡a menudo se debe "
-"a un bucle infinito!"
+"Cuando los programas dejan de responder en tu ordenador, ¡a menudo se debe a "
+"un bucle infinito!"
 
+#: course/lesson-17-while-loops/lesson.tres:192
+#: course/lesson-17-while-loops/lesson.tres:193
 #: course/lesson-17-while-loops/lesson.tres:190
 #: course/lesson-17-while-loops/lesson.tres:191
 msgid "It would draw squares infinitely until the program is terminated"
 msgstr "Dibujaría cuadrados infinitamente hasta que el programa sea finalizado"
 
+#: course/lesson-17-while-loops/lesson.tres:192
 #: course/lesson-17-while-loops/lesson.tres:190
 msgid "It would draw 10 squares"
 msgstr "Dibujaría 10 cuadrados"
 
+#: course/lesson-17-while-loops/lesson.tres:192
 #: course/lesson-17-while-loops/lesson.tres:190
 msgid "It would draw 20 squares"
 msgstr "Dibujaría 20 cuadrados"
 
+#: course/lesson-17-while-loops/lesson.tres:200
 #: course/lesson-17-while-loops/lesson.tres:198
 msgid "When to use while loops"
 msgstr "Cuándo utilizar los bucles while"
 
+#: course/lesson-17-while-loops/lesson.tres:202
 #: course/lesson-17-while-loops/lesson.tres:200
 msgid ""
 "At first, you will not need [code]while[/code] loops often. Even the code we "
@@ -259,6 +275,7 @@ msgstr ""
 "- Varios algoritmos de nivel intermedio a avanzado, como encontrar caminos "
 "en un mapa para la IA."
 
+#: course/lesson-17-while-loops/lesson.tres:227
 #: course/lesson-17-while-loops/lesson.tres:225
 msgid ""
 "Let's practice some [code]while[/code] loops, as they're useful to know. "
@@ -274,10 +291,12 @@ msgstr ""
 "Luego, pasaremos a los bucles [code]for[/code], los cuales son más seguros, "
 "en la siguiente lección."
 
+#: course/lesson-17-while-loops/lesson.tres:237
 #: course/lesson-17-while-loops/lesson.tres:235
 msgid "Moving to the end of a board"
 msgstr "Moverse al final de un tablero"
 
+#: course/lesson-17-while-loops/lesson.tres:238
 #: course/lesson-17-while-loops/lesson.tres:236
 msgid ""
 "Our robot has decided to stand at the top of the board.\n"
@@ -306,6 +325,7 @@ msgstr ""
 "Asegúrate de utilizar un bucle [code]while[/code] para que la función "
 "funcione para cualquier tamaño de tablero."
 
+#: course/lesson-17-while-loops/lesson.tres:256
 #: course/lesson-17-while-loops/lesson.tres:254
 msgid ""
 "Use a while loop to have our robot move from the top of the board to the "
@@ -314,6 +334,56 @@ msgstr ""
 "Utiliza un bucle while para que nuestro robot se mueva desde la parte "
 "superior del tablero hasta la inferior."
 
+#: course/lesson-17-while-loops/lesson.tres:260
 #: course/lesson-17-while-loops/lesson.tres:258
 msgid "Introduction to While Loops"
 msgstr "Introducción a los bucles while"
+
+#: course/lesson-17-while-loops/lesson.tres:14
+msgid ""
+"You've seen that you can use functions to [i]reuse[/i] code. In this lesson, "
+"you'll learn about [b]loops[/b]. Loops help you [i]repeat[/i] code.\n"
+"\n"
+"To illustrate how loops work, let's take a game board split into a grid.\n"
+"\n"
+"Our robot can move to neighboring cells by changing a [code]Vector2[/code] "
+"variable named [code]cell[/code].\n"
+"\n"
+"When we increase [code]cell.x[/code], the robot moves to the right.\n"
+"\n"
+"Note that we delay the robot's movement in the app to help you visualize how "
+"it moves. The following code would normally move the robot instantly."
+msgstr ""
+"Ya has visto que puedes utilizar funciones para [i]reutilizar[/i] código. En "
+"esta lección, aprenderás sobre los [b]bucles[/b]. Los bucles te ayudan a "
+"[i]repetir[/i] código.\n"
+"\n"
+"Para ilustrar cómo funcionan los bucles, tomemos un tablero de juego "
+"dividido en una cuadrícula.\n"
+"\n"
+"Nuestro robot puede moverse a las celdas vecinas cambiando una variable "
+"[code]Vector2[/code] llamada variable celda, o [code]cell[/code].\n"
+"\n"
+"Cuando aumentamos [code]cell.x[/code], el robot se mueve hacia la derecha.\n"
+"\n"
+"Ten en cuenta que retrasamos el movimiento del robot en la aplicación para "
+"ayudarte a visualizar cómo se mueve. El siguiente código normalmente movería "
+"el robot de forma instantánea."
+
+#: course/lesson-17-while-loops/lesson.tres:126
+msgid ""
+"Let's apply this to our [code]move_to_end()[/code] function.\n"
+"\n"
+"This time, we compare the number of loops to the board's width. We go "
+"through the loop until we reach the width of the board.\n"
+"\n"
+"Note that we move one less than the board's width because the robot is "
+"already on the first cell."
+msgstr ""
+"Apliquemos esto a nuestra función [code]move_to_end()[/code].\n"
+"\n"
+"Esta vez, comparamos el número de bucles con el ancho del tablero. Seguimos "
+"haciendo bucles hasta alcanzar el ancho del tablero.\n"
+"\n"
+"Ten en cuenta que nos movemos uno menos que el ancho del tablero porque el "
+"robot ya está en la primera celda."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2022-06-12 11:07+0200\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
 "PO-Revision-Date: 2022-06-12 11:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -57,9 +57,10 @@ msgstr ""
 "argumento y te devuelve un nuevo número redondeado al dígito más cercano."
 
 #: course/lesson-22-functions-return-values/lesson.tres:49
+#, fuzzy
 msgid ""
 "Imagine you have a game where you track the player's health as a percentage, "
-"a decimal number going from [code]0.0[/code] to [code]100.0[/code]. \n"
+"a decimal number going from [code]0.0[/code] to [code]100.0[/code].\n"
 "\n"
 "When displaying the health on the interface, you don't want to show the "
 "decimal part. In that case, you may use the [code]round()[/code] function, "
@@ -140,8 +141,9 @@ msgid "Writing a function that returns a value"
 msgstr "Escribir una función que devuelva un valor"
 
 #: course/lesson-22-functions-return-values/lesson.tres:149
+#, fuzzy
 msgid ""
-"You can make [i]your[/i] functions return values. \n"
+"You can make [i]your[/i] functions return values.\n"
 "\n"
 "To make a function return a value, you use the [code]return[/code] keyword "
 "followed by the value in question.\n"
@@ -150,8 +152,9 @@ msgid ""
 "\n"
 "And for those practices, you were working directly with cell coordinates.\n"
 "\n"
-"Well, cell coordinates don't correspond to positions on the screen, so we "
-"need to convert cell positions to screen positions."
+"Well, cell coordinates don't correspond to positions on the screen. To find "
+"the center of any cell on the screen, we need to convert the cell's "
+"coordinates to a position on the screen, in pixels."
 msgstr ""
 "Puedes hacer que [i]tus[/i] funciones devuelvan valores.\n"
 "\n"
@@ -170,14 +173,16 @@ msgstr ""
 
 #: course/lesson-22-functions-return-values/lesson.tres:177
 msgid ""
-"To do so, we use a function. It multiplies the cell coordinate by the cell "
-"size, adds half the cell size to the product, and returns the result."
+"To do so, we use a function. The function does two things:\n"
+"\n"
+"1. First, it multiplies the cell coordinates by the cell size, which gives "
+"us the position of the cell's top-left corner on the screen, in pixels.\n"
+"2. Then, we add half of the cell size to get the center of the cell.\n"
+"\n"
+"The function returns the result, allowing us to store it in a variable."
 msgstr ""
-"Para ello, utilizamos una función. Esta multiplica la coordenada de la celda "
-"por el tamaño de la misma, le suma la mitad del tamaño de la celda al "
-"producto y devuelve el resultado."
 
-#: course/lesson-22-functions-return-values/lesson.tres:197
+#: course/lesson-22-functions-return-values/lesson.tres:202
 msgid ""
 "The [code]return[/code] keyword returns the value to the code calling the "
 "function. You'll receive the result where you call the function."
@@ -185,10 +190,12 @@ msgstr ""
 "La palabra clave [code]return[/code] devuelve el valor al código que llama a "
 "la función. Recibirás el resultado donde llames a la función."
 
-#: course/lesson-22-functions-return-values/lesson.tres:217
+#: course/lesson-22-functions-return-values/lesson.tres:222
+#, fuzzy
 msgid ""
-"Some functions return values, and some do not. You can learn which functions "
-"return a result using the documentation panel in the practice screen.\n"
+"Some functions return values, and some do not. During practices, you can "
+"learn which functions return a value using the documentation panel. It will "
+"display if the practice requires using specific functions or variables.\n"
 "\n"
 "There, functions that start with the term [code]void[/code] do not return a "
 "value. Any other term means the function does return a value. You'll learn "
@@ -208,11 +215,11 @@ msgstr ""
 "\n"
 "Por ahora, ¡vamos a practicar la devolución de valores desde las funciones!"
 
-#: course/lesson-22-functions-return-values/lesson.tres:229
+#: course/lesson-22-functions-return-values/lesson.tres:234
 msgid "Converting coordinates from the grid to the screen"
 msgstr "Convertir coordenadas de la cuadrícula a la pantalla"
 
-#: course/lesson-22-functions-return-values/lesson.tres:230
+#: course/lesson-22-functions-return-values/lesson.tres:235
 msgid ""
 "Define a function that converts a position on a grid to the screen.\n"
 "\n"
@@ -227,7 +234,7 @@ msgstr ""
 "argumento. Esta debe devolver las coordenadas de pantalla [code]Vector2[/"
 "code] correspondientes en el centro de la celda."
 
-#: course/lesson-22-functions-return-values/lesson.tres:244
+#: course/lesson-22-functions-return-values/lesson.tres:249
 msgid ""
 "We lost the function to convert grid coordinates, but we desperately need it "
 "for our game! Make the turtle move again by coding it."
@@ -236,6 +243,14 @@ msgstr ""
 "¡pero la necesitamos desesperadamente para nuestro juego! Haz que la tortuga "
 "se mueva de nuevo codificándola."
 
-#: course/lesson-22-functions-return-values/lesson.tres:248
+#: course/lesson-22-functions-return-values/lesson.tres:253
 msgid "Functions that return a value"
 msgstr "Funciones que devuelven un valor"
+
+#~ msgid ""
+#~ "To do so, we use a function. It multiplies the cell coordinate by the "
+#~ "cell size, adds half the cell size to the product, and returns the result."
+#~ msgstr ""
+#~ "Para ello, utilizamos una función. Esta multiplica la coordenada de la "
+#~ "celda por el tamaño de la misma, le suma la mitad del tamaño de la celda "
+#~ "al producto y devuelve el resultado."

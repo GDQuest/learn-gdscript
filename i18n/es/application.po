@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2022-06-12 11:07+0200\n"
-"PO-Revision-Date: 2022-06-12 11:17+0200\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"PO-Revision-Date: 2023-05-16 13:45+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.9.0\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: resources/QuizInputField.gd:17
 msgid "You need to type a whole number for this answer. Example: 42"
@@ -40,28 +40,55 @@ msgstr "Título"
 msgid "Practices"
 msgstr "Prácticas"
 
-#: ui/UINavigator.gd:350
+#: ui/UINavigator.gd:365
 msgid "Go back in your navigation history"
 msgstr "Vuelve al historial de navegación"
 
-#: ui/UINavigator.gd:353
+#: ui/UINavigator.gd:368
 msgid "(no previous history)"
 msgstr "(sin historial previo)"
 
-#: ui/UIPractice.gd:144 ui/UIPractice.gd:202
+#: ui/UINavigator.tscn:103
+msgid "CHRISTMAS SALE - 50% OFF"
+msgstr "REBAJAS DE NAVIDAD - 50% DE DESCUENTO"
+
+#: ui/UINavigator.tscn:163
+msgid "CHRISTMAS SALE"
+msgstr "REBAJAS DE NAVIDAD"
+
+#: ui/UIPractice.gd:154 ui/UIPractice.gd:220
 #, python-format
 msgid "Hint %s"
 msgstr "Pista %s"
 
-#: ui/UIPractice.gd:230
+#: ui/UIPractice.gd:248
 msgid "Validating Your Code..."
 msgstr "Validando tu código..."
 
-#: ui/UIPractice.gd:286
+#: ui/UIPractice.gd:268
+#, python-format
+msgid "The function `%s` calls itself, this creates an infinite loop"
+msgstr "La función `%s` se llama a sí misma, esto crea un bucle infinito"
+
+#: ui/UIPractice.gd:301
 msgid "Running Your Code..."
 msgstr "Ejecutando tu código..."
 
-#: ui/UIPractice.gd:337
+#: ui/UIPractice.gd:328
+msgid ""
+"There is a division by zero in your code. You cannot divide by zero in code. "
+"Please ensure you have no \"/ 0\" or \"% 0\" in your code."
+msgstr ""
+"Hay una división por cero en tu código. No se puede dividir por cero en "
+"código. Por favor, asegúrete de que no tiene \"/ 0\" o \"% 0\" en su código."
+
+#: ui/UIPractice.gd:343
+msgid ""
+"Oh no! The script has an error, but the Script Verifier did not catch it"
+msgstr ""
+"¡Oh, no! El script tiene un error, pero el verificador de script no lo ha ."
+
+#: ui/UIPractice.gd:369
 msgid "Running Tests..."
 msgstr "Ejecutando pruebas..."
 
@@ -89,7 +116,7 @@ msgstr "Ejecutar"
 msgid "Pause"
 msgstr "Pausa"
 
-#: ui/components/CodeEditor.tscn:173 ui/components/RunnableCodeExample.tscn:78
+#: ui/components/CodeEditor.tscn:173 ui/components/RunnableCodeExample.tscn:87
 msgid "Reset"
 msgstr "Reiniciar"
 
@@ -106,6 +133,11 @@ msgstr "Salida"
 #: ui/components/popups/PracticeDonePopup.tscn:165
 msgid "Continue"
 msgstr "Continuar"
+
+#: ui/components/DebuggerConsoleMonitoredVariable.tscn:20
+#: ui/components/OutputConsolePrintMessage.tscn:23
+msgid "Value"
+msgstr "Valor"
 
 #: ui/components/GameView.tscn:72
 msgid "Paused"
@@ -158,17 +190,43 @@ msgstr ""
 msgid "Explain"
 msgstr "Explicar"
 
-#: ui/components/OutputConsolePrintMessage.tscn:23
-msgid "Value"
-msgstr "Valor"
-
 #: ui/components/Revealer.tscn:74
 msgid "Expand"
 msgstr "Expandir"
 
-#: ui/components/RunnableCodeExample.tscn:96
+#: ui/components/RunnableCodeExample.tscn:105
 msgid "run()"
 msgstr "run()"
+
+#: ui/components/RunnableCodeExample.tscn:123
+msgid "step"
+msgstr "paso"
+
+#: ui/components/RunnableCodeExampleDebugger.tscn:44
+msgid "Debugger"
+msgstr "Depurador"
+
+#: ui/components/SalePopup.tscn:121
+#, python-format
+msgid ""
+"[center]Get [b]50% off[/b] on all our Godot courses with the \n"
+"coupon code [b]DISCOUNT50[/b][/center]"
+msgstr ""
+"[center]Consigue un [b]50% de descuento[/b] en todos nuestros cursos de "
+"Godot con el \n"
+"código [b]DESCUENTO50[/b][/center]"
+
+#: ui/components/SalePopup.tscn:132
+msgid "Only until "
+msgstr "Solamente hasta"
+
+#: ui/components/SalePopup.tscn:155
+msgid "CHECK OUT OUR COURSES"
+msgstr "DESCUBRA NUESTROS CURSOS"
+
+#: ui/components/SalePopup.tscn:180
+msgid "X"
+msgstr "X"
 
 #: ui/components/popups/ConfirmPopup.tscn:115
 #: ui/components/popups/PracticeLeaveUnfinishedPopup.tscn:119
@@ -225,19 +283,19 @@ msgstr "¿De dónde vienen los errores externos?"
 
 #: ui/components/popups/ExternalErrorPopup.tscn:83
 msgid ""
-"Lessons in this course are constructed in such a way that you only need to "
-"edit the [b]important bits[/b]. But there is much more code outside of what "
-"you see that makes the project run.\n"
+"Lessons in this course are designed so you only need to edit the "
+"[b]important bits[/b]. But there is much more code outside of what you see "
+"that makes the project run.\n"
 "\n"
-"This means that sometimes changes that you make can affect code that you "
-"have no control over. But don't worry, you can still fix all the issues "
-"yourself with the code you [b]can[/b] edit!\n"
+"This means that sometimes changes you make can affect code you have no "
+"control over. But don't worry, you can still fix all the issues yourself "
+"with the code you [b]can[/b] edit!\n"
 "\n"
-"[i]This is kind of like game engines work too.[/i] There is a lot of hidden "
-"code that they execute to make sure your projects runs smoothly. And yet, an "
-"error in your scripts can break them. We'll try to explain how to address "
-"each individual error that you face. Quick, click the [b]Explain[/b] button "
-"next to the error message!"
+"[i]This is like how game engines work too.[/i] There is a lot of hidden code "
+"that they execute to ensure your project runs smoothly. And yet, an error in "
+"your scripts can break them. We'll try to explain how to address each "
+"individual error that you face. Quick, click the [b]Explain[/b] button next "
+"to the error message!"
 msgstr ""
 "Las lecciones de este curso están construidas de tal manera que sólo tienes "
 "que editar las [b]partes importantes[/b]. Pero hay mucho más código fuera de "
@@ -304,7 +362,7 @@ msgid "Practice List"
 msgstr "Lista de prácticas"
 
 #: ui/components/popups/PracticeListPopup.tscn:115
-#: ui/components/popups/SettingsPopup.tscn:227
+#: ui/components/popups/SettingsPopup.tscn:244
 msgid "Close"
 msgstr "Cerrar"
 
@@ -396,31 +454,35 @@ msgstr ""
 msgid "OK"
 msgstr "OK"
 
-#: ui/components/popups/SettingsPopup.tscn:79
+#: ui/components/popups/SettingsPopup.tscn:76
 msgid "Configure the App"
 msgstr "Configurar la aplicación"
 
-#: ui/components/popups/SettingsPopup.tscn:106
+#: ui/components/popups/SettingsPopup.tscn:103
 msgid "Language"
 msgstr "Idioma"
 
-#: ui/components/popups/SettingsPopup.tscn:126
+#: ui/components/popups/SettingsPopup.tscn:123
 msgid "Text Size"
 msgstr "Tamaño del texto"
 
-#: ui/components/popups/SettingsPopup.tscn:154
+#: ui/components/popups/SettingsPopup.tscn:151
 msgid "Sample text"
 msgstr "Texto de muestra"
 
-#: ui/components/popups/SettingsPopup.tscn:167
+#: ui/components/popups/SettingsPopup.tscn:164
 msgid "Scroll sensitivity"
 msgstr "Sensibilidad de desplazamiento"
 
-#: ui/components/popups/SettingsPopup.tscn:193
+#: ui/components/popups/SettingsPopup.tscn:190
 msgid "Framerate cap"
 msgstr "Límite de velocidad de fotogramas"
 
-#: ui/components/popups/SettingsPopup.tscn:242
+#: ui/components/popups/SettingsPopup.tscn:212
+msgid "Lower contrast"
+msgstr "Bajar el contraste"
+
+#: ui/components/popups/SettingsPopup.tscn:259
 msgid "Apply"
 msgstr "Aplicar"
 
@@ -487,6 +549,7 @@ msgid "Confirm Resetting Progress"
 msgstr "Confirmar reiniciar el progreso"
 
 #: ui/screens/end_screen/EndScreen.tscn:229
+#: ui/screens/end_screen/SponsorlessEndScreen.tscn:196
 msgid "Congratulations!"
 msgstr "Felicitaciones!"
 
@@ -569,6 +632,43 @@ msgstr ""
 msgid "Learn More"
 msgstr "Aprende más"
 
+#: ui/screens/end_screen/SponsorlessEndScreen.tscn:203
+msgid ""
+"You completed Learn GDScript From Zero. You now have the basics you need to "
+"make games with the Godot game engine.\n"
+"\n"
+"You can keep learning with the free series [url=https://docs.godotengine.org/"
+"en/stable/getting_started/step_by_step/index.html]Getting Started with "
+"Godot[/url]."
+msgstr ""
+"Ha completado Learn GDScript From Zero. Ahora tienes los conceptos básicos "
+"que necesitas para sumergirte en la creación de juegos con el motor de "
+"juegos Godot.\n"
+"\n"
+"Si estás buscando una serie gratuita para seguir aprendiendo los conceptos "
+"básicos con nosotros, puede pasar a [url=https://www.gdquest.com/tutorial/"
+"godot/learning-paths/getting-started-in-2021 /]Empezando con Godot[/url] "
+"(curso en inglés)."
+
+#: ui/screens/end_screen/SponsorlessEndScreen.tscn:216
+msgid "This is an Open-Source project!"
+msgstr "Este proyecto es de código abierto."
+
+#: ui/screens/end_screen/SponsorlessEndScreen.tscn:223
+msgid ""
+"Like Godot, this app and course is free and open-source. \n"
+"\n"
+"You can find the app's source code and contribute translations here: [url="
+"\"https://github.com/GDQuest/learn-gdscript\"]Learn GDScript From Zero "
+"(Github repository)[/url]."
+msgstr ""
+"Como Godot, esta aplicación y este curso son gratuitos y de código "
+"abierto. \n"
+"\n"
+"Puedes encontrar el código fuente de la aplicación y contribuir con "
+"traducciones aquí: [url=\"https://github.com/GDQuest/learn-gdscript\"]Learn "
+"GDScript From Zero (repositorio Github, en inglés)[/url]."
+
 #: ui/screens/lesson/UIBaseQuiz.tscn:56
 msgid "[b]Question[/b]"
 msgstr "[b]Pregunta[/b]"
@@ -625,11 +725,11 @@ msgstr "(selecciona todas las que correspondan)"
 msgid "Show Hint"
 msgstr "Mostrar pista"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:143
+#: ui/screens/practice/PracticeInfoPanel.gd:144
 msgid "Method descriptions"
 msgstr "Descripciones de los métodos"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:159
+#: ui/screens/practice/PracticeInfoPanel.gd:160
 msgid "Property descriptions"
 msgstr "Descripciones de las propiedades"
 
@@ -658,7 +758,7 @@ msgstr "Documentación"
 msgid "Open Practice List"
 msgstr "Abrir lista de prácticas"
 
-#: ui/screens/practice/PracticeTestDisplay.tscn:42
+#: ui/screens/practice/PracticeTestDisplay.tscn:40
 msgid "Test text"
 msgstr "Texto de prueba"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2022-06-12 11:07+0200\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
 "PO-Revision-Date: 2022-06-12 11:26+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -21,6 +21,7 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #: course/lesson-8-defining-variables/lesson.tres:13
+#, fuzzy
 msgid ""
 "In the previous lesson, you used a predefined member variable named "
 "[code]position[/code].\n"
@@ -36,8 +37,14 @@ msgid ""
 "To keep track of that, you can create a variable named [code]health[/code] "
 "to which you add and subtract points.\n"
 "\n"
-"[i]The example below introduces the [code]print()[/code] function, which "
-"outputs its parameter to the output box on the left.[/i]"
+"The example below introduces the [code]print()[/code] function, which "
+"outputs its argument to the output box on the left.\n"
+"\n"
+"Click the [i]run()[/i] button to instantly run the entire function, and "
+"click the [i]step[/i] button to execute lines of code one by one.\n"
+"\n"
+"The [i]Debugger[/i] panel at the bottom shows the current value of the "
+"[code]health[/code] variable."
 msgstr ""
 "En la lección anterior, usaste una variable miembro predefinida llamada "
 "[code]position[/code].\n"
@@ -57,7 +64,7 @@ msgstr ""
 "[i]El siguiente ejemplo introduce la función [code]print()[/code], que envía "
 "su parámetro a la casilla de salida de la izquierda.[/i]"
 
-#: course/lesson-8-defining-variables/lesson.tres:43
+#: course/lesson-8-defining-variables/lesson.tres:47
 msgid ""
 "After executing the first two lines of code, you will have a health variable "
 "storing a value of [code]4[/code].\n"
@@ -71,11 +78,12 @@ msgstr ""
 "A continuación, desglosaremos cómo defines nuevas variables y explicaremos "
 "la función [code]print()[/code]."
 
-#: course/lesson-8-defining-variables/lesson.tres:53
+#: course/lesson-8-defining-variables/lesson.tres:57
 msgid "Defining a variable"
 msgstr "Definir una variable"
 
-#: course/lesson-8-defining-variables/lesson.tres:55
+#: course/lesson-8-defining-variables/lesson.tres:59
+#, fuzzy
 msgid ""
 "To use a variable, you must first define it so the computer registers its "
 "name.\n"
@@ -83,6 +91,11 @@ msgid ""
 "To do so, you start a line of code with the [code]var[/code] keyword "
 "followed by your desired variable name. Like [code]func[/code] stands for "
 "[i]function[/i], [code]var[/code] stands for [i]variable[/i].\n"
+"\n"
+"Variables are case-sensitive, which means [code]health[/code] and "
+"[code]Health[/code] are technically different variables. Be careful to use "
+"the same capitalization wherever you refer to the same variable, or you "
+"could be reading or writing to a different variable.\n"
 "\n"
 "The following line defines a [code]health[/code] variable pointing to no "
 "value. You can think of it as creating a product label you have yet to stick "
@@ -100,7 +113,7 @@ msgstr ""
 "ningún valor. Puedes pensar en ello como crear una etiqueta de un producto "
 "que aún tienes que pegar en algo."
 
-#: course/lesson-8-defining-variables/lesson.tres:79
+#: course/lesson-8-defining-variables/lesson.tres:85
 msgid ""
 "Like with functions, a member variable's name must be unique inside a given "
 "code file. Creating two variables next to each other with the same name will "
@@ -110,7 +123,7 @@ msgstr ""
 "único dentro de un archivo de código determinado. Crear dos variables "
 "contiguas con el mismo nombre provocará un error."
 
-#: course/lesson-8-defining-variables/lesson.tres:99
+#: course/lesson-8-defining-variables/lesson.tres:105
 msgid ""
 "To use a variable, you want to assign it a starting value. You can do so "
 "using the equal sign (=).\n"
@@ -124,7 +137,7 @@ msgstr ""
 "Este código asigna el valor [code]100[/code] a una nueva variable llamada "
 "[code]health[/code]."
 
-#: course/lesson-8-defining-variables/lesson.tres:121
+#: course/lesson-8-defining-variables/lesson.tres:127
 msgid ""
 "After defining your variable, you can access its value by writing the "
 "variable's name."
@@ -132,7 +145,7 @@ msgstr ""
 "Después de definir tu variable, puedes acceder a su valor escribiendo el "
 "nombre de la variable."
 
-#: course/lesson-8-defining-variables/lesson.tres:141
+#: course/lesson-8-defining-variables/lesson.tres:147
 msgid ""
 "The code above will display the number [code]100[/code] to some output "
 "window.\n"
@@ -152,11 +165,11 @@ msgstr ""
 "Además, una vez que hayas definido una variable, puedes cambiar su valor en "
 "cualquier momento con el signo igual."
 
-#: course/lesson-8-defining-variables/lesson.tres:163
+#: course/lesson-8-defining-variables/lesson.tres:169
 msgid "About the print function"
 msgstr "Acerca de la función de impresión"
 
-#: course/lesson-8-defining-variables/lesson.tres:165
+#: course/lesson-8-defining-variables/lesson.tres:171
 msgid ""
 "The [code]print()[/code] function is generally the first function you learn "
 "in academic programming courses.\n"
@@ -170,7 +183,7 @@ msgstr ""
 "Esta envía (\"imprime\") el mensaje o valor que le das a alguna ventana de "
 "salida, a menudo una ventana negra con texto simple en blanco."
 
-#: course/lesson-8-defining-variables/lesson.tres:177
+#: course/lesson-8-defining-variables/lesson.tres:183
 msgid ""
 "Programmers often use [code]print()[/code] to quickly check the value of "
 "their variables when their game runs.\n"
@@ -185,7 +198,7 @@ msgstr ""
 "las llamadas a [code]print()[/code] y muestra una tarjeta para hacerlo más "
 "amigable para ti."
 
-#: course/lesson-8-defining-variables/lesson.tres:199
+#: course/lesson-8-defining-variables/lesson.tres:205
 msgid ""
 "Here, the verb [i]print[/i] means \"to send information to display on the "
 "screen.\"\n"
@@ -199,11 +212,11 @@ msgstr ""
 "La función \"imprime\" cosas en la pantalla de tu computadora; no se "
 "relaciona con las impresoras."
 
-#: course/lesson-8-defining-variables/lesson.tres:209
+#: course/lesson-8-defining-variables/lesson.tres:215
 msgid "Variables are like labels"
 msgstr "Las variables son como etiquetas"
 
-#: course/lesson-8-defining-variables/lesson.tres:211
+#: course/lesson-8-defining-variables/lesson.tres:217
 msgid ""
 "As we hinted above, in GDScript, variables work a bit like labels.\n"
 "\n"
@@ -216,7 +229,7 @@ msgstr ""
 "Asignar un valor a una variable es como tomar tu etiqueta (la variable) y "
 "pegarla en algún elemento (el valor)."
 
-#: course/lesson-8-defining-variables/lesson.tres:223
+#: course/lesson-8-defining-variables/lesson.tres:229
 msgid ""
 "Like a supermarket has a database of product labels, the computer keeps a "
 "list of all variables in your code.\n"
@@ -236,16 +249,21 @@ msgstr ""
 "Esto tiene una consecuencia importante. En GDScript, puedes pegar esa "
 "etiqueta a cualquier otro valor."
 
-#: course/lesson-8-defining-variables/lesson.tres:247
+#: course/lesson-8-defining-variables/lesson.tres:253
+#, fuzzy
 msgid ""
 "The above code is like taking a label from the appropriate item and sticking "
 "it to the wrong thing:\n"
 "\n"
-"- At line 1, the [code]health[/code] variable holds a number.\n"
-"- From line 2, [code]health[/code] holds text.\n"
+"- At line 2, the [code]health[/code] variable holds a number.\n"
+"- From line 3, [code]health[/code] holds text.\n"
 "\n"
 "The computer will let you do that! The code's syntax and \"grammar\" are "
 "correct, but it's not good.\n"
+"\n"
+"Variable names should describe the value they contain, so a [code]health[/"
+"code] variable with a text value will confuse your future self and other "
+"coders. It can also cause errors in your game.\n"
 "\n"
 "Later on, we'll see how to avoid this issue with [i]variable types[/i]. For "
 "now, let's practice creating variables!"
@@ -262,11 +280,11 @@ msgstr ""
 "Más adelante, veremos cómo evitar este problema con los [i]tipos de "
 "variables[/i]. Por ahora, ¡vamos a practicar la creación de variables!"
 
-#: course/lesson-8-defining-variables/lesson.tres:262
+#: course/lesson-8-defining-variables/lesson.tres:270
 msgid "Define a health variable"
 msgstr "Definir una variable de salud"
 
-#: course/lesson-8-defining-variables/lesson.tres:263
+#: course/lesson-8-defining-variables/lesson.tres:271
 msgid ""
 "Define a variable named [code]health[/code] with a starting value of "
 "[code]100[/code].\n"
@@ -280,7 +298,7 @@ msgstr ""
 "Puedes definir las variables dentro o fuera de las funciones. En esta "
 "práctica, no debes crear una función."
 
-#: course/lesson-8-defining-variables/lesson.tres:274
+#: course/lesson-8-defining-variables/lesson.tres:282
 msgid ""
 "In this practice, you'll define your first variable and give it a specific "
 "starting value."
@@ -288,6 +306,6 @@ msgstr ""
 "En esta práctica, definirás tu primera variable y le darás un valor inicial "
 "específico."
 
-#: course/lesson-8-defining-variables/lesson.tres:278
+#: course/lesson-8-defining-variables/lesson.tres:286
 msgid "Defining Your Own Variables"
 msgstr "Definir tus propias variables"

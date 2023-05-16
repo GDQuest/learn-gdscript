@@ -8,7 +8,7 @@ const PO_EXTENSION := "po"
 const DEFAULT_LOCALE := "en"
 const SUPPORTED_LOCALES := [
 	"en",
-	"es"
+	"es",
 ]
 
 var current_language := DEFAULT_LOCALE setget set_language
