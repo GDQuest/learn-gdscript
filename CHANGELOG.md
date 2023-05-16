@@ -4,6 +4,8 @@ This document lists changes between releases.
 
 ## Learn GDScript From Zero 1.4.0
 
+*Released on May 16 2023*
+
 ### New features
 
 - Add script to extract, sync, check, and integrate new translations (#814)
@@ -15,6 +17,13 @@ This document lists changes between releases.
 - Correct typo in lesson 7
 - Correct typo in lesson 9, improve wording
 - Update Spanish translations for lessons 1 to 7
+- Change parameter into argument in lesson 6
+- Improve phrasing and correct typo in external error popup
+- Correct tense in time delta lesson
+- Improve lesson 15 note title (#740)
+- Check for the use of two arguments in function call in lesson 11
+- Improve explanations in lessons 2, 3, 7, 8, 10, 11, and 14
+- Correct grammar in lesson 19
 
 ### Improvements
 
@@ -26,6 +35,10 @@ This document lists changes between releases.
 - Lesson 21 - remove Step button from combo example (#801)
 - Lesson 18 - fix unwrapped loop resetting (#800)
 - Lesson 15 - fix traffic light resetting (#797)
+- Allow writing decimal number in lesson 11 practice
+- Update bar health when changing max health
+- Check for play_animation() call in lesson 21
+- Correct hint text for lesson 16 (#732)
 
 ## Learn GDScript From Zero 1.3.2
 
