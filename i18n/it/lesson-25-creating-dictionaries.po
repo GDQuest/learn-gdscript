@@ -1,0 +1,321 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# Automatically generated, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-03-26 17:50+0100\n"
+"PO-Revision-Date: 2022-07-02 10:17+0000\n"
+"Last-Translator: Fettenderi <mang.marco03@gmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-25-creating-dictionaries/it/>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.13.1-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:14
+msgid ""
+"In the last lesson, we used an array to represent a player's inventory.\n"
+"\n"
+"With just an array of item names, though, we can't easily keep track of the "
+"amount of each item.\n"
+"\n"
+"Instead, we can bundle the item names and amounts into a single "
+"[i]dictionary[/i].\n"
+"\n"
+"A dictionary is a data structure that allows you to map pairs of values. In "
+"the pair, we call the first value a [i]key[/i] as we use it to access the "
+"second.\n"
+"\n"
+"In other words, a dictionary has a list of [i]keys[/i], and each key points "
+"to a [i]value[/i].\n"
+"\n"
+"To define a dictionary, we use curly brackets. A colon separates each key "
+"and its value. A comma separates each key and value pair."
+msgstr ""
+"Nell'ultima lezione, abbiamo usato un array per rappresentare l'inventario "
+"del giocatore.\n"
+"\n"
+"Però con soltanto un array di nomi di oggetti, non possiamo tenere conto "
+"delle quantità di ogni oggetto.\n"
+"\n"
+"Piuttosto, possiamo raggruppare i nomi degli oggetti e le relative quantità "
+"in un singolo [i]dizionario[/i].\n"
+"\n"
+"Un dizionario è una struttura di dati che ti permette di mappare una coppia "
+"di valori. In questa coppia, chiamiamo il primo valore una [i]chiave[/i] "
+"dato che lo usiamo per ottenere il secondo.\n"
+"\n"
+"In altre parole, un dizionario ha una lista di [i]chiavi[/i] ed ogni chiave "
+"punta ad un [i]valore[/i].\n"
+"\n"
+"Per definire un dizionario, usiamo le parentesi graffe. Dei due punti "
+"separano ogni chiave dal suo valore. Una virgola separa ogni coppia di "
+"chiave e valore."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:42
+msgid "Dictionaries can hold any values"
+msgstr "I dizionari possono conservare ogni valore"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:44
+msgid ""
+"Dictionaries can map about any value to any other value.\n"
+"\n"
+"For example, we can use the name of an item as a key and the amount as the "
+"corresponding value. This makes dictionaries excellent for keeping track of "
+"a player's inventory."
+msgstr ""
+"I dizionari possono mappare praticamente ogni valore ad ogni altro.\n"
+"\n"
+"Per esempio, possiamo usare il nome di un oggetto come chiave e la quantità "
+"come valore corrispondente. Questo rende i dizionari eccellenti per "
+"implementare un inventario."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:66
+msgid ""
+"Here we matched the name (a string) to the amount (a number). But a key "
+"could be a string, a number, or even a vector! \n"
+"\n"
+"Although we can have all of these different keys, keep in mind that every "
+"key has to be [i]unique[/i]. That means we [i]couldn't[/i] have a dictionary "
+"like the following."
+msgstr ""
+"Qui abbiamo abbinato il nome (una stringa) alla quantità (un numero). Ma una "
+"chiave può essere una tringa, un numero o anche un vettore! \n"
+"\n"
+"Anche se possiamo avere tutte queste chiavi differenti, tieni bene a mente "
+"che ogni chiave deve essere [i]unica[/i]. Questo significa che [i]non "
+"possiamo[/i] avere un dizionario come il seguente."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:88
+msgid "We would get the following error."
+msgstr "Otterremmo il seguente errore."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:106
+msgid "In the above example, which key would cause an error?"
+msgstr "Nell'esempio qui sopra, quale chiave causerebbe un errore?"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:109
+msgid ""
+"The key [code]\"healing heart\"[/code] appears [b]twice[/b] in the "
+"dictionary.\n"
+"\n"
+"In the above example, Godot wouldn't know whether to return [code]3[/code] "
+"or [code]8[/code] when using [code]inventory[\"healing heart\"][/code]. This "
+"is why keys need to be unique."
+msgstr ""
+"La chiave [code]\"healing heart\"[/code] compare [b]due volte[/b] nel "
+"dizionario.\n"
+"\n"
+"Nell'esempio qui sopra, Godot non saprebbe se ritornare il valore "
+"[code]3[/code] o [code]8[/code] quando viene chiamato [code]inventory["
+"\"healing heart\"][/code]. Questo è perchè la chiave deve essere unico."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:112
+#: course/lesson-25-creating-dictionaries/lesson.tres:113
+msgid "\"healing heart\""
+msgstr "\"healing heart\""
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:112
+msgid "\"shield\""
+msgstr "\"shield\""
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:112
+msgid "\"sword\""
+msgstr "\"sword\""
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:120
+msgid "How dictionaries work under the hood"
+msgstr "Come funzionano i dizionari realmente"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:122
+msgid ""
+"Dictionaries are also called mappings or [i]associative arrays[/i]. Under "
+"the hood, they use arrays and several functions to efficiently store and "
+"retrieve values across arrays.\n"
+"\n"
+"Precisely, dictionaries use a [i]hashing algorithm[/i]. Hashing algorithms "
+"convert one value into another.\n"
+"\n"
+"In this case, hashing consists of converting a given key into a unique whole "
+"number. The dictionary then uses that number as an array's index!\n"
+"\n"
+"That's how a dictionary works: when you give it a key, it converts it into a "
+"unique index and uses that index to retrieve the corresponding value in the "
+"computer's memory.\n"
+"\n"
+"That's also why you can't have the same key twice: it would map to the same "
+"array index, causing you to overwrite an existing value."
+msgstr ""
+"I dizionari vengono anche chiamati mappature o [i]array associativi[/i]. In "
+"realtà, usano degli array e molte funzioni per conservare efficientemente e "
+"recuperare valori tra gli array.\n"
+"\n"
+"In particolare, i dizionari usano un [i]algoritmo di hashing[/i]. Gli "
+"algoritmi si hash convertono un valore in un altro.\n"
+"\n"
+"In questo caso, hash consiste nel convertire una chiave in un numero intero "
+"unico. Il dizionario poi usa quel numero come indice dell'array!\n"
+"\n"
+"Così funzionano i dizionari: quando gli dai una chiave, la converte in un "
+"indice unico e lo usa come indice per recuperare il valore corrispondente "
+"nella memoria del computer.\n"
+"\n"
+"Questo è anche il motivo per cui non puoi avere la stessa chiave due volte: "
+"verrebbe mappato allo stesso indice di array, facendoti sovrascrivere un "
+"valore esistente."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:138
+msgid "Accessing values"
+msgstr "Accedere ai valori"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:140
+msgid ""
+"We access the value of keys by writing the dictionary name, with the key in "
+"between square brackets."
+msgstr ""
+"Accediamo al valore delle chiavi scrivendo il nome del dizionario, con la "
+"chiave tra parentesi quadre."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:168
+msgid "How would you access how many gems the player has?"
+msgstr "Come faresti a capire quante gemme ha il giocatore?"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:171
+msgid ""
+"We need to make sure the key is the same as we defined in the dictionary.\n"
+"\n"
+"In our case, [code]var item_count = inventory[\"gems\"][/code] is correct."
+msgstr ""
+"Dobbiamo assicurarci che la chiave sia la stessa che abbiamo definito nel "
+"dizionario.\n"
+"\n"
+"Nel nostro caso, [code]var item_count = inventory[\"gems\"][/code] è "
+"corretto."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:174
+msgid "var item_count = inventory[\"gem\"]"
+msgstr "var item_count = inventory[\"gem\"]"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:174
+#: course/lesson-25-creating-dictionaries/lesson.tres:175
+msgid "var item_count = inventory[\"gems\"]"
+msgstr "var item_count = inventory[\"gems\"]"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:174
+msgid "var item_count = inventory[\"sword\"]"
+msgstr "var item_count = inventory[\"sword\"]"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:182
+msgid "Changing values"
+msgstr "Cambiare i valori"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:184
+msgid ""
+"We can also change values directly, which is useful in our case for adding "
+"or removing items from the player's inventory."
+msgstr ""
+"Possiamo anche cambiare i valori direttamente, questo ci torna utile nel "
+"nostro caso per aggiungere e rimuovere oggetti dall'inventario del giocatore."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:214
+msgid ""
+"In the following practices, we'll use a dictionary to create a player "
+"inventory and create a function to change the value of items."
+msgstr ""
+"Nelle seguenti pratiche, useremo un dizionario per creare un inventario per "
+"il giocatore e per creare una funzione che cambi i valori degli oggetti."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:222
+msgid "Creating an inventory using a dictionary"
+msgstr "Creare un inventario usando un dizionario"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:223
+msgid ""
+"Let's give some items to the player.\n"
+"\n"
+"We use a dictionary for the player's inventory. We defined the "
+"[code]inventory[/code] variable for you, but it contains no items yet.\n"
+"\n"
+"Give the player the following items by adding the correct keys and values to "
+"the dictionary:\n"
+"\n"
+"- Three \"healing heart\".\n"
+"- Nine \"gems\".\n"
+"- One \"sword\".\n"
+"\n"
+"The keys should be text strings, and the values whole numbers."
+msgstr ""
+"Diamo qualche oggetto al giocatore.\n"
+"\n"
+"Usiamo un dizionario per l'inventario del giocatore. Abbiamo già definito la "
+"variabile [code]inventory[/code] per te, ma ancora non contiene alcun "
+"oggetto.\n"
+"\n"
+"Dà al giocatore i seguenti oggetti aggiungendo le chiavi corrette e i valori "
+"al dizionario.\n"
+"\n"
+"- Tre \"healing heart\".\n"
+"- Nove \"gems\".\n"
+"- Una \"sword\".\n"
+"\n"
+"Le chiavi dovrebbero essere stringhe di testo e i valori numeri interi."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:244
+msgid ""
+"Collecting items is fun, but we need a good way to store them. Write a "
+"dictionary to display the player's items."
+msgstr ""
+"Collezionare oggetti è divertente, ma abbiamo bisogno di un buon metodo per "
+"conservarli. Scrivi un dizionario che mostri gli oggetti del giocatore."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:249
+msgid "Increasing item counts"
+msgstr "Aumentare la quantità di oggetti"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:250
+msgid ""
+"We want to change the item counts in the player's inventory whenever the "
+"player picks up or uses an item.\n"
+"\n"
+"We've started the [code]add_item()[/code] function for you.\n"
+"\n"
+"The [code]inventory[/code] dictionary should use the [code]item_name[/code] "
+"parameter as the key to access its values, and we should increase the value "
+"by [code]amount[/code].\n"
+"\n"
+"To test this practice, we'll use your [code]add_item()[/code] function to "
+"increase the item count of Healing Heart, Gems, and Sword."
+msgstr ""
+"Vogliamo cambiare le quantità di oggetti nell'inventario ogni volta che il "
+"giocatore prende o utilizza un oggetto.\n"
+"\n"
+"Abbiamo iniziato la funzione [code]add_item()[/code] per te.\n"
+"\n"
+"Il dizionario [code]inventory[/code] dovrebbe usare il parametro "
+"[code]item_name[/code] come chiave per accedere ai valori e dovremmo "
+"incrementarne il valore di [code]amount[/code].\n"
+"\n"
+"Per provare questa pratica, useremo la funzione [code]add_item()[/code] per "
+"aumentare la quantità di oggetti di Healing Heart, Gems e Sword."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:266
+msgid ""
+"The player might walk over a pick-up or find something in a chest, so we "
+"need a way to change the item counts in our inventory."
+msgstr ""
+"Il giocatore potrebbe camminare sopra un oggetto fluttuante o trovare "
+"qualcosa in una cassa, dunque abbiamo bisogno di un modo per cambiare il "
+"conteggio degli oggetti nel nostro inventario."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:270
+msgid "Creating Dictionaries"
+msgstr "Creando Dizionari"

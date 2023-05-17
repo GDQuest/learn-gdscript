@@ -1,0 +1,318 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# Automatically generated, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"PO-Revision-Date: 2023-05-17 10:51+0000\n"
+"Last-Translator: Riccardo Santangelo <s.burns@live.it>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-18-for-loops/it/>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.18-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-18-for-loops/lesson.tres:14
+msgid ""
+"In the last lesson, we looked at [code]while[/code] loops. We found they "
+"were useful if we don't know how many times we should repeat code. \n"
+"\n"
+"However, they could result in infinite loops if we're not careful.\n"
+"\n"
+"The loop below never ends because we never increment [code]number[/code]."
+msgstr ""
+"Nell'ultima lezione abbiamo analizzato i cicli [code]while[/code]. Abbiamo "
+"scoperto che sono utili se non sappiamo quante volte dobbiamo ripetere il "
+"codice. \n"
+"\n"
+"Tuttavia, se non stiamo attenti, possono dare origine a cicli infiniti.\n"
+"\n"
+"Il ciclo sottostante non termina mai perché non incrementiamo mai "
+"[code]number[/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:38
+msgid ""
+"There's a safer and often easier kind of loop: the [code]for[/code] loop.\n"
+"\n"
+"We'll look at it in this lesson.\n"
+"\n"
+"Unlike [code]while[/code] loops, [code]for[/code] loops don't run "
+"infinitely, so it's much less likely that you'll get bugs in your game. "
+"[b]We recommend favoring for loops over while loops because of this[/b].\n"
+"\n"
+"Let's change the code above to use a [code]for[/code] loop instead.\n"
+"\n"
+"The loop below will change the [code]cell[/code] three times."
+msgstr ""
+"C'è una tipologia di ciclo più sicura e spesso più facile da usare: il ciclo "
+"[code]for[/code].\n"
+"\n"
+"Lo esploreremo in questa lezione.\n"
+"\n"
+"Al contrario dei cicli [code]while[/code], i cicli [code]for[/code] non "
+"vengono eseguiti all'infinito, quindi ha molte meno probabilità di causare "
+"bug nel tuo gioco. [b]Ti consigliamo di preferire i cicli for al posto di "
+"quelli while per questo motivo[/b].\n"
+"\n"
+"Cambiamo il codice qua sopra cosicché usi un ciclo [code]for[/code].\n"
+"\n"
+"Il ciclo qui sotto cambierà la [code]cell[/code] tre volte."
+
+#: course/lesson-18-for-loops/lesson.tres:66
+msgid "Let's explain what's going on here."
+msgstr "Spieghiamo cosa succede qui."
+
+#: course/lesson-18-for-loops/lesson.tres:74
+msgid "The range() function"
+msgstr "La funzione range()"
+
+#: course/lesson-18-for-loops/lesson.tres:76
+msgid ""
+"Godot has the helper function [code]range()[/code]. Calling [code]range(n)[/"
+"code] creates a list of numbers from [code]0[/code] to [code]n - 1[/code]. \n"
+"\n"
+"So calling [code]range(3)[/code] outputs the list of numbers [code][0, 1, 2]"
+"[/code], and [code]range(5)[/code] outputs [code][0, 1, 2, 3, 4][/code]."
+msgstr ""
+"Godot dispone della funzione di aiuto [code]range()[/code]. Chiamando "
+"[code]range(n)[/code] si crea un elenco di numeri da [code]0[/code] a [code]"
+"n - 1[/code]. \n"
+"\n"
+"Quindi, chiamando [code]range(3)[/code] si ottiene l'elenco di numeri [code]["
+"0, 1, 2][/code], mentre [code]range(5)[/code] produce [code][0, 1, 2, 3, "
+"4][/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:86
+msgid "What list of numbers would range(6) create?"
+msgstr "Quale lista di numeri creerebbe range(6)?"
+
+#: course/lesson-18-for-loops/lesson.tres:87
+msgid "What would [code]print(range(6))[/code] print to the console?"
+msgstr "Cosa stamperebbe [code]print(range(6))[/code] sulla console?"
+
+#: course/lesson-18-for-loops/lesson.tres:89
+msgid ""
+"The function [code]range(n)[/code] creates a list of numbers from [code]0[/"
+"code] to [code]n - 1[/code]. The output list will start with [code]0[/code] "
+"and end with [code]5[/code].\n"
+"\n"
+"So calling [code]range(6)[/code] will output a list of six numbers which are "
+"[code][0, 1, 2, 3, 4, 5][/code].\n"
+msgstr ""
+"La funzione [code]range(n)[/code] crea una lista di numeri da [code]0[/code] "
+"a [code]n - 1[/code]. La lista risultante inizierà da [code]0[/code] e "
+"finirà con [code]5[/code].\n"
+"\n"
+"Quindi chiamare [code]range(6)[/code] darà come risultato una lista di sei "
+"numeri che sono [code][0 ,1 ,2 ,3 ,4 , 5][/code].\n"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+#: course/lesson-18-for-loops/lesson.tres:94
+msgid "[0, 1, 2, 3, 4, 5]"
+msgstr "[0, 1, 2, 3, 4, 5]"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+msgid "[1, 2, 3, 4, 5, 6]"
+msgstr "[1, 2, 3, 4, 5, 6]"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+msgid "[0, 1, 2, 3, 4, 5, 6]"
+msgstr "[0, 1, 2, 3, 4, 5, 6]"
+
+#: course/lesson-18-for-loops/lesson.tres:101
+msgid "How for loops work"
+msgstr "Come funziona il ciclo for"
+
+#: course/lesson-18-for-loops/lesson.tres:103
+msgid ""
+"In a [code]for[/code] loop, the computer takes each value inside a list, "
+"stores it in a temporary variable, and executes the code in the loop once "
+"per value."
+msgstr ""
+"In un ciclo [code]for[/code], il computer prende ogni valore nella lista, lo "
+"conserva in una variabile temporanea ed esegue il codice nel ciclo una volta "
+"per ogni valore."
+
+#: course/lesson-18-for-loops/lesson.tres:123
+msgid ""
+"In the above example, for each item in the list [code][0, 1, 2][/code], "
+"Godot sets [code]number[/code] to the item, then executes the code in the "
+"[code]for[/code] loop.\n"
+"\n"
+"We'll explain arrays more throughly in the next lesson, but notice that "
+"[code]number[/code] is just a temporary variable. You create it when "
+"defining the loop, and the loop takes care of changing its value. Also, you "
+"can name this variable anything you want.\n"
+"\n"
+"This code behaves the same as the previous example:"
+msgstr ""
+"Nell'esempio precedente, per ogni elemento dell'elenco [code][0, 1, 2][/code]"
+", Godot imposta [code]numero[/code] all'elemento, quindi esegue il codice "
+"nel ciclo [code]for[/code].\n"
+"\n"
+"Spiegheremo meglio gli array nella prossima lezione, ma notate che "
+"[code]number[/code] è solo una variabile temporanea. La si crea quando si "
+"definisce il ciclo e il ciclo si occupa di modificarne il valore. Inoltre, è "
+"possibile dare a questa variabile il nome che si desidera.\n"
+"\n"
+"Questo codice si comporta come l'esempio precedente:"
+
+#: course/lesson-18-for-loops/lesson.tres:147
+msgid ""
+"In both examples, we print the value of the temporary variable we created: "
+"[code]number[/code] in the first example and [code]element[/code] in the "
+"second.\n"
+"\n"
+"As Godot moves through the loop, it assigns each value of the array to that "
+"variable. First, it sets the variable to [code]0[/code], then to [code]1[/"
+"code], and finally, to [code]2[/code].\n"
+"\n"
+"We can break down the instructions the loop runs. You can see how a loop is "
+"a shortcut to code that otherwise gets very long."
+msgstr ""
+"In entrambi gli esempi, stampiamo il valore della variabile temporanea "
+"creata: [code]number[/code] nel primo esempio e [code]element[/code] nel "
+"secondo.\n"
+"\n"
+"Man mano che Godot procede nel ciclo, assegna ogni valore dell'array a "
+"quella variabile. Prima imposta la variabile a [code]0[/code], poi a "
+"[code]1[/code] e infine a [code]2[/code].\n"
+"\n"
+"Possiamo suddividere le istruzioni che il ciclo esegue. Si può notare come "
+"un ciclo sia una scorciatoia per un codice che altrimenti diventerebbe molto "
+"lungo."
+
+#: course/lesson-18-for-loops/lesson.tres:171
+msgid ""
+"We can put whatever code we like in the loop's code block, including other "
+"function calls like [code]draw_rectangle()[/code]."
+msgstr ""
+"Nel blocco di codice del ciclo possiamo inserire tutto il codice che "
+"vogliamo, comprese altre chiamate di funzione come "
+"[code]draw_rectangle()[/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:179
+msgid "Using a for loop instead of a while loop"
+msgstr "Usando un ciclo for al posto di un ciclo while"
+
+#: course/lesson-18-for-loops/lesson.tres:181
+msgid ""
+"Here's our old [code]move_to_end()[/code] function which used a [code]while[/"
+"code] loop."
+msgstr ""
+"Ecco la nostra vecchia funzione [code]move_to_end()[/code] che utilizzava un "
+"ciclo [code]while[/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:201
+msgid ""
+"If we use a [code]for[/code] loop instead, the code becomes a little simpler."
+msgstr ""
+"Usando un ciclo [code]for[/code] invece, il codice diventerebbe un po' più "
+"semplice."
+
+#: course/lesson-18-for-loops/lesson.tres:221
+msgid ""
+"Rather than constantly checking if the robot reached the end of the board, "
+"with the [code]for[/code] loop, we take the board's width beforehand, then "
+"move the robot a set amount of times.\n"
+"\n"
+"The function still works the same. You can execute it below."
+msgstr ""
+"Invece di controllare costantemente se il robot ha raggiungo la fine della "
+"tavola, con il ciclo [code]for[/code], prima prendiamo la larghezza della "
+"tavola, poi muoviamo il robot un determinato numero di volte.\n"
+"\n"
+"La funzione funziona sempre allo stesso modo. Puoi eseguirlo qui sotto."
+
+#: course/lesson-18-for-loops/lesson.tres:243
+msgid ""
+"In the practices, we'll use [code]for[/code] loops in different ways to get "
+"you used to using them."
+msgstr ""
+"Nelle pratiche, useremo il ciclo [code]for[/code] in modi differenti per "
+"abituarti a usarlo."
+
+#: course/lesson-18-for-loops/lesson.tres:251
+msgid "Using a for loop to move to the end of the board"
+msgstr "Usando un ciclo for per arrivare alla fine della tavola"
+
+#: course/lesson-18-for-loops/lesson.tres:252
+msgid ""
+"Once again, the robot has decided to stand at the top of the board.\n"
+"\n"
+"This time, use a [code]for[/code] loop in the [code]move_to_bottom()[/code] "
+"function to have it move to the bottom of the board.\n"
+"\n"
+"The board size is determined by the [code]Vector2[/code] variable "
+"[code]board_size[/code].\n"
+"\n"
+"The robot's starting cell is [code]Vector2(2, 0)[/code]."
+msgstr ""
+"Un'altra volta, il robot ha deciso di stare in cima alla tavola.\n"
+"\n"
+"Questa volta, usa un ciclo [code]for[/code] nella funzione "
+"[code]move_to_bottom()[/code] per far sì che il robot arrivi alla fine della "
+"tavola.\n"
+"\n"
+"La grandezza della tavola è determinata dalla variabile [code]Vector2[/code] "
+"[code]board_size[/code].\n"
+"\n"
+"La cella iniziale del robot è [code]Vector2(2, 0)[/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:268
+msgid ""
+"Use a for loop to have our robot move from the top of the board to the "
+"bottom."
+msgstr ""
+"Una un ciclo for per far muovere il robot dalla cima alla fine della tavola."
+
+#: course/lesson-18-for-loops/lesson.tres:273
+msgid "Improving code with a for loop"
+msgstr "Migliorando il codice con un ciclo for"
+
+#: course/lesson-18-for-loops/lesson.tres:274
+msgid ""
+"Use a [code]for[/code] loop to remove the duplicate code in the [code]run()[/"
+"code] function.\n"
+"\n"
+"In this practice, we revisit the turtle and drawing rectangles.\n"
+"\n"
+"With our new knowledge of [code]for[/code] loops, we can condense this code "
+"to take up less space and make it easier to modify.\n"
+"\n"
+"The turtle should draw three squares in a horizontal line. The squares "
+"should be 100 pixels apart."
+msgstr ""
+"Usa un ciclo [code]for[/code] per rimuovere il codice duplicato nella "
+"funzione [code]run()[/code].\n"
+"\n"
+"In questa pratica, rivisitiamo la tartaruga e l'illustrazione di "
+"rettangoli.\n"
+"\n"
+"Con la nostra nuova conoscenza sui cicli [code]for[/code], possiamo "
+"condensare questo codice per far sì che occupi meno spazio e che sia più "
+"facile da modificare.\n"
+"\n"
+"La tartaruga dovrebbe disegnare tre quadrati in una linea orizzontale. I "
+"quadrati dovrebbero essere a 100 pixel di distanza l'uno dall'altro."
+
+#: course/lesson-18-for-loops/lesson.tres:297
+msgid ""
+"In the past we had to copy and paste code to draw multiple rectangles. Let's "
+"revisit previous code and improve it with a for loop."
+msgstr ""
+"In passato dovevamo copiare e incollare codice per disegnare più rettangoli. "
+"Rivisitiamo il precedente codice per migliorarlo con un ciclo for."
+
+#: course/lesson-18-for-loops/lesson.tres:301
+msgid "Introduction to For Loops"
+msgstr "Introduzione Ai Cicli For"
