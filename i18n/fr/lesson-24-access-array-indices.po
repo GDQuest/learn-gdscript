@@ -1,0 +1,281 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# Automatically generated, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-06-12 11:07+0200\n"
+"PO-Revision-Date: 2023-06-08 15:10+0000\n"
+"Last-Translator: EGuillemot <Elouen.Guillemot@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-24-access-array-indices/fr/>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.18-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-24-access-array-indices/lesson.tres:14
+msgid ""
+"You learned to loop over all the values in an array using the [code]for[/"
+"code] keyword."
+msgstr ""
+"Vous avez appris à boucler sur toutes les valeurs d'un tableau en utilisant "
+"le mot-clé [code]for[/code]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:34
+msgid ""
+"But what if you need to access the third item in the player's inventory? The "
+"tenth item?\n"
+"\n"
+"There's a dedicated notation to access one element in an array by index.\n"
+"\n"
+"To do so, you use square brackets with a number inside the brackets."
+msgstr ""
+"Mais que se passe-t-il si vous avez besoin d'accéder au troisième objet de "
+"l'inventaire du joueur ? Le dixième objet ?\n"
+"\n"
+"Il existe une notation dédiée pour accéder à un élément d'un tableau par "
+"indice.\n"
+"\n"
+"Pour ce faire, vous utilisez des crochets avec un nombre à l'intérieur des "
+"crochets."
+
+#: course/lesson-24-access-array-indices/lesson.tres:58
+msgid "Index zero is the [i]first[/i] element in the array."
+msgstr "L'indice zéro est le [i]premier[/i] élément du tableau."
+
+#: course/lesson-24-access-array-indices/lesson.tres:78
+msgid ""
+"Index one is the [i]second[/i] element in the array, and so on.\n"
+"\n"
+"You would access the [i]fourth[/i] element in the [code]inventory[/code] "
+"array like so."
+msgstr ""
+"L'indice un est le [i]deuxième[/i] élément du tableau, et ainsi de suite.\n"
+"\n"
+"Vous accéderiez au [i]quatrième[/i] élément du tableau [code]inventaire[/"
+"code] comme suit."
+
+#: course/lesson-24-access-array-indices/lesson.tres:98
+msgid ""
+"How would you access the [i]third[/i] item in the [code]inventory[/code] "
+"array?"
+msgstr ""
+"Comment accéderiez-vous au [i]troisième[/i] élément du tableau "
+"[code]inventory[/code] ?"
+
+#: course/lesson-24-access-array-indices/lesson.tres:101
+msgid ""
+"Indices start at zero, so the index of the [i]third[/i] item is [code]2[/"
+"code]. That's why you need to write [code]inventory[2][/code]."
+msgstr ""
+"Les indices commencent à zéro, donc l'indice du [i]troisième[/i] élément est "
+"[code]2[/code]. C'est pourquoi vous devez écrire [code]inventory[2][/code]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:102
+#: course/lesson-24-access-array-indices/lesson.tres:103
+msgid "inventory[2]"
+msgstr "inventory[2]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:102
+msgid "inventory[3]"
+msgstr "inventory[3]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:110
+msgid "Accessing the last values with negative indices"
+msgstr "Accéder aux dernières valeurs avec des indices négatifs"
+
+#: course/lesson-24-access-array-indices/lesson.tres:112
+msgid ""
+"What if you want to access the last or second-before-last item in the "
+"[code]inventory[/code]?\n"
+"\n"
+"In that case, you can use negative indices. If you write [code]-1[/code] in "
+"the brackets, you will get the last item in the array. You will get the "
+"second-to-last item if you write [code]-2[/code]."
+msgstr ""
+"Et si vous voulez accéder au dernier ou à l'avant-dernier objet du tableau "
+"[code]inventory[/code] ?\n"
+"\n"
+"Dans ce cas, vous pouvez utiliser des indices négatifs. Si vous écrivez "
+"[code]-1[/code] dans les parenthèses, vous obtiendrez le dernier élément du "
+"tableau. Vous obtiendrez l'avant-dernier élément si vous écrivez [code]-2[/"
+"code]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:134
+msgid ""
+"That's very convenient when you need to quickly access elements from the end "
+"of the list."
+msgstr ""
+"C'est très pratique lorsque vous avez besoin d'accéder rapidement aux "
+"éléments de la fin de la liste."
+
+# antépénultième element 
+#: course/lesson-24-access-array-indices/lesson.tres:142
+msgid "How would you access the third-to-last item in the inventory array?"
+msgstr ""
+"Comment accéderiez-vous à l'élément qui précède l'avant-dernier élément du "
+"tableau d'inventaire ?"
+
+# donc [code]-3[/code] sera le deuxième avant-dernier
+#: course/lesson-24-access-array-indices/lesson.tres:145
+msgid ""
+"When using negative indices, [code]-1[/code] means the [i]last[/i] element "
+"in the array. Index [code]-2[/code] will be the second-to-last, thus "
+"[code]-3[/code] will be the third-to-last.\n"
+"\n"
+"It can be little confusing as it seems to work differently from positive "
+"indices. However, it's because there's no difference between index [code]0[/"
+"code] and [code]-0[/code]: they both point to the first item in the array."
+msgstr ""
+"Lorsque vous utilisez des indices négatifs, [code]-1[/code] signifie le "
+"[i]dernier[/i] élément du tableau. L'indice [code]-2[/code] sera l'avant-"
+"dernier, donc [code]-3[/code] sera l'élément qui précède l'avant-dernier.\n"
+"\n"
+"Cela peut être un peu déroutant car il semble fonctionner différemment des "
+"indices positifs. Cependant, c'est parce qu'il n'y a pas de différence entre "
+"les indices [code]0[/code] et [code]-0[/code] : ils pointent tous les deux "
+"vers le premier élément du tableau."
+
+#: course/lesson-24-access-array-indices/lesson.tres:148
+#: course/lesson-24-access-array-indices/lesson.tres:149
+msgid "inventory[-3]"
+msgstr "inventory[-3]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:148
+msgid "inventory[-2]"
+msgstr "inventory[-2]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:156
+msgid "You can't access non-existent indices"
+msgstr "Vous ne pouvez pas accéder à des index inexistants"
+
+# hic
+#: course/lesson-24-access-array-indices/lesson.tres:158
+msgid ""
+"There's a catch with this syntax: if you try to access an index that does "
+"not exist, you will get an error. You have to be careful always to access "
+"existing elements in the array.\n"
+"\n"
+"There are a couple of ways you can check for valid indices. One of them is "
+"checking the array's size."
+msgstr ""
+"Il y a un piège avec cette syntaxe : si vous essayez d'accéder à un indice "
+"qui n'existe pas, vous obtiendrez une erreur. Vous devez toujours faire "
+"attention à accéder aux éléments existants dans le tableau.\n"
+"\n"
+"Il existe plusieurs façons de vérifier les indices valides. L'une d'entre "
+"elles consiste à vérifier la taille du tableau."
+
+#: course/lesson-24-access-array-indices/lesson.tres:170
+msgid ""
+"[b]Checking the size of the array[/b]\n"
+"\n"
+"Arrays come with a member function named [code]size()[/code]. You can call "
+"it on the array anytime to know its [i]current[/i] size."
+msgstr ""
+"[b]Vérifier la taille du tableau[/b]\n"
+"\n"
+"Les tableaux sont fournis avec une fonction membre nommée [code]size()[/"
+"code]. Vous pouvez l'appeler sur le tableau à tout moment pour connaître sa "
+"taille [i]actuelle[/i]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:192
+msgid ""
+"The maximum index you can access in an array is [code]array.size() - 1[/"
+"code]: it's the last item in the array."
+msgstr ""
+"L'indice maximum auquel vous pouvez accéder dans un tableau est [code]array."
+"size() - 1[/code] : c'est le dernier élément du tableau."
+
+#: course/lesson-24-access-array-indices/lesson.tres:212
+msgid ""
+"In the following practices, you will use array indices to realign train "
+"tracks and grab the correct item in an inventory."
+msgstr ""
+"Dans la pratique suivante, vous allez utiliser des indices de tableau pour "
+"réaligner des voies ferrées et saisir l'article correct d'un inventaire."
+
+#: course/lesson-24-access-array-indices/lesson.tres:220
+msgid "Using the right items"
+msgstr "Utiliser les bons objets"
+
+#: course/lesson-24-access-array-indices/lesson.tres:221
+msgid ""
+"In our game, the player has an inventory that works as an array under the "
+"hood.\n"
+"\n"
+"They want to equip a sword and a shield to buff their characters. Like "
+"before, we need you to find them in the array.\n"
+"\n"
+"You need to access elements in the [code]inventory[/code] array by index to "
+"do so.\n"
+"\n"
+"Call the [code]use_item()[/code] function with the item as an argument to "
+"use an item. For example, you can use the first item by calling "
+"[code]use_item(inventory[0])[/code]."
+msgstr ""
+"Dans notre jeu, le joueur a un inventaire qui fonctionne comme un tableau "
+"sous le capot.\n"
+"\n"
+"Il veut équiper une épée et un bouclier pour améliorer leurs personnages. "
+"Comme avant, nous avons besoin de vous pour les trouver dans le tableau.\n"
+"\n"
+"Pour ce faire, vous devez accéder aux éléments du tableau [code]inventory[/"
+"code] par indice.\n"
+"\n"
+"Appelez la fonction [code]use_item()[/code] avec l'objet comme argument pour "
+"utiliser un objet. Par exemple, vous pouvez utiliser le premier élément en "
+"appelant [code]use_item(inventory[0])[/code]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:239
+msgid "Find the right items to use in the player's inventory."
+msgstr "Trouvez les bons objets à utiliser dans l'inventaire du joueur."
+
+#: course/lesson-24-access-array-indices/lesson.tres:244
+msgid "Realigning the train tracks"
+msgstr "Réalignement des voies ferrées"
+
+#: course/lesson-24-access-array-indices/lesson.tres:245
+msgid ""
+"We have train tracks broken down into little chunks in our game. We use them "
+"to make modular tracks and draw circuits of all shapes and sizes.\n"
+"\n"
+"However, several chunks are misaligned. You need to find them in the "
+"[code]tracks[/code] array and pass them to the [code]align()[/code] "
+"function.\n"
+"\n"
+"To do so, you need to access the array by index.\n"
+"\n"
+"This time, though, you need to access them with [i]negative indices[/i]."
+msgstr ""
+"Nous avons des vois ferrées décomposées en petits morceaux dans notre jeu. "
+"Nous les utilisons pour faire des pistes modulaires et dessiner des circuits "
+"de toutes formes et tailles.\n"
+"\n"
+"Cependant, plusieurs morceaux sont mal alignés. Vous devez les trouver dans "
+"le tableau [code]tracks[/code] et les passer à la fonction [code]align()[/"
+"code].\n"
+"\n"
+"Pour ce faire, vous devez accéder au tableau avec des indices.\n"
+"\n"
+"Cette fois, cependant, vous devez y accéder avec des [i]indices négatifs[/i]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:263
+msgid ""
+"Some chunks of our train tracks are misaligned, and the train can't pass. "
+"Find the faulty pieces and realign them."
+msgstr ""
+"Certaines parties de nos rails de train sont mal alignés, et le train ne "
+"peut pas passer. Trouvez les pièces défectueuses et réalignez-les."
+
+#: course/lesson-24-access-array-indices/lesson.tres:267
+msgid "Accessing values in arrays"
+msgstr "Accéder aux valeurs dans les tableaux"

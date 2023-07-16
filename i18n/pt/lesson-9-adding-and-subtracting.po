@@ -1,0 +1,216 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-06-12 11:07+0200\n"
+"PO-Revision-Date: 2023-04-23 18:50+0000\n"
+"Last-Translator: ssantos <ssantos@web.de>\n"
+"Language-Team: Portuguese <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-9-adding-and-subtracting/pt/>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.18-dev\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:14
+msgid ""
+"Our character in our game will have health by defining the "
+"[code]health[/code] variable. The higher the character's health, the "
+"further away the player is from losing the game.\n"
+"\n"
+"Health that changes adds tension to the game, especially if the player is"
+" fighting with low health! It's a resource that that player should manage"
+" carefully.\n"
+"\n"
+"The character's health might get low if an enemy attacks them or they "
+"fall into a hole.\n"
+"\n"
+"We can create a function to represent damage in these cases."
+msgstr ""
+"A personagem do nosso jogo vai ter uma vida quando definirmos a variável "
+"[code]health[/code]. Quanto maior a vida da personagem, mais distante o "
+"jogador está de perder o jogo.\n"
+"\n"
+"Uma vida que varia adiciona tensão no jogo, especialmente se o jogador lutar "
+"com pouca vida! É um recurso que esse jogador deve gerir com cuidado.\n"
+"\n"
+"A vida da personagem pode ficar baixa se um inimigo o atacar ou cair num "
+"buraco.\n"
+"\n"
+"Podemos criar uma função para representar o dano nesses casos."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:40
+msgid ""
+"We pass the amount of damage the robot should take as a parameter.\n"
+"\n"
+"Line 2 subtracts [code]amount[/code] from [code]health[/code].\n"
+"\n"
+"Note the [code]-=[/code] syntax which achieves this. It's a shorthand we "
+"often use.\n"
+"\n"
+"You can also use a longer form. Both of these lines have the same effect."
+" They both subtract the value of [code]amount[/code] to the "
+"[code]health[/code] variable:\n"
+"\n"
+"[code]health -= amount[/code]\n"
+"[code]health = health - amount[/code]\n"
+"\n"
+"You may notice that the health of the robot can go below [code]0[/code]. "
+"We'll see how to manage this in a future lesson using [i]conditions[/i]."
+msgstr ""
+"Passamos a quantidade de dano que o robô deve tomar como parâmetro.\n"
+"\n"
+"Na linha 2 subtraímos [code]amount[/code] de [code]health[/code].\n"
+"\n"
+"Observe a sintaxe [code]-=[/code]. É uma abreviação que costumamos usar.\n"
+"\n"
+" Também pode usar uma forma mais longa. Ambas as linhas têm o mesmo efeito. "
+"Ambas subtraem o valor de [code]amount[/code] para a variável "
+"[code]health[/code]:\n"
+"\n"
+"[code]health -= amount[/code]\n"
+"[code]health = health - amount[/code]\n"
+"\n"
+"Pode notar que a vida do robô pode ficar abaixo de [code]0[/code]. Veremos "
+"como gerir isso numa lição futura usando [i]condições[/i]."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:61
+msgid ""
+"The robot's health could increase instead if the player picks up an item "
+"that heals them, or if they use a healing item."
+msgstr ""
+"A vida do robô pode aumentar se o jogador levar um item que o cure "
+"imediatamente ou se usar um item de cura."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:81
+msgid ""
+"Here again, the health can go beyond [code]100[/code].\n"
+"\n"
+"Also, once more, the short line [code]health += amount[/code] is "
+"equivalent to the longer form [code]health = health + amount[/code]."
+msgstr ""
+"Aqui também, a vida pode ir além de [code]100[/code].\n"
+"\n"
+"Além disso, mais uma vez, a forma abreviada [code]health += amount[/code] é "
+"equivalente à forma mais longa [code]health = health + amount[/code]."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:91
+msgid "Which of these would increase the health of the robot?"
+msgstr "Qual dessas opções aumentaria a vida do robô?"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:94
+msgid ""
+"Both of these lines increase the [code]health[/code] of the robot by "
+"[code]amount[/code].\n"
+"[code]\n"
+"health += amount\n"
+"health = health + amount\n"
+"[/code]"
+msgstr ""
+"Ambas as linhas aumentam a variável [code]health[/code] (vida) do robô por "
+"[code]amount[/code] (uma certa quantidade).\n"
+"[code]\n"
+"health+= amount\n"
+"health= health+ amount\n"
+"[/code]"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+msgid "health -= amount"
+msgstr "health -= amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+#: course/lesson-9-adding-and-subtracting/lesson.tres:100
+msgid "health += amount"
+msgstr "health += amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+#: course/lesson-9-adding-and-subtracting/lesson.tres:100
+msgid "health = health + amount"
+msgstr "health = health + amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+msgid "health = health - amount"
+msgstr "health = health - amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:109
+msgid ""
+"In the following practices, you'll code the [code]take_damage()[/code] "
+"and [code]heal()[/code] functions so the robot's health can decrease and "
+"increase."
+msgstr ""
+"Nas práticas a seguir, vai programar as funções [code]take_damage()[/code] e "
+"[code]heal()[/code] para que a vida do robô possa diminuir e aumentar."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:117
+msgid "Damaging the Robot"
+msgstr "Fazendo o robô levar dano"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:118
+msgid ""
+"In our game, the main character has a certain amount of "
+"[code]health[/code]. When it gets hit, the health should go down by a "
+"varying [code]amount[/code] of damage.\n"
+"\n"
+"Add to the [code]take_damage()[/code] function so it subtracts the "
+"[code]amount[/code] to the predefined [code]health[/code] variable.\n"
+"\n"
+"The robot starts with 100 health and will take 50 damage."
+msgstr ""
+"No nosso jogo, a personagem principal tem uma certa quantidade de "
+"[code]health[/code]. Quando é atingido, a vida dele deve diminuir "
+"[code]amount[/code] (uma certa quantidade) de dano.\n"
+"\n"
+"Adicione algo na função [code]take_damage()[/code] para que ela subtraia o "
+"[code]amount[/code] da variável [code]health[/code] predefinida.\n"
+"\n"
+"O robô começa com 100 de vida e vai receber 50 de dano."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:134
+msgid "Learn how to deal damage to entities like our robot."
+msgstr "Aprenda a causar dano em entidades no jogo como nosso robô."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:139
+msgid "Healing the Robot"
+msgstr "Curando o robô"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:140
+msgid ""
+"It's time to heal the robot up to full health!\n"
+"\n"
+"Write a function called [code]heal()[/code] that takes "
+"[code]amount[/code] as a parameter.\n"
+"\n"
+"The function should add [code]amount[/code] to [code]health[/code].\n"
+"\n"
+"The robot starts with 50 health and will heal 50 to get it up to 100."
+msgstr ""
+"É hora de curar o robô até a vida máxima!\n"
+"\n"
+"Escreva uma função chamada [code]heal()[/code] que receba [code]amount[/code]"
+" como parâmetro.\n"
+"\n"
+"A função deve adicionar o valor de [code]amount[/code] na variável "
+"[code]health[/code].\n"
+"\n"
+"O robô começa com 50 de vida e cura 50 para chegar a 100."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:157
+msgid ""
+"Our robot needs healing after that practice! Create a function to heal it"
+" back to full health."
+msgstr ""
+"Nosso robô precisa de cura depois dessa prática! Crie uma função para curar "
+"a vida dele de volta para o valor máximo."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:161
+msgid "Adding and Subtracting"
+msgstr "Adicionando e Subtraindo"

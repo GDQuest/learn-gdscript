@@ -1,0 +1,264 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"PO-Revision-Date: 2023-07-14 21:12+0000\n"
+"Last-Translator: Yılmaz Durmaz <yilmaz_durmaz@hotmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-10-the-game-loop/tr/>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.0-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-10-the-game-loop/lesson.tres:14
+msgid ""
+"As we've seen, Godot has functions that do certain actions. For example, the "
+"[code]show()[/code] and [code]hide()[/code] functions change the visibility "
+"of things.\n"
+"\n"
+"We can also create our own functions to make custom effects like adding or "
+"removing health to a character.\n"
+"\n"
+"Godot also has special functions we can customize or add to.\n"
+"\n"
+"Take the [code]_process()[/code] function."
+msgstr ""
+"Şimdiye kadar gördüğümüz gibi, Godot'un belirli eylemleri gerçekleştiren "
+"kendi fonksiyonları var. Örneğin, [code]show()[/code] (göster) ve "
+"[code]hide()[/code] (gizle) fonksiyonları nesnelerin görünürlüğünü "
+"değiştirir.\n"
+"\n"
+"Ayrıca, bir karaktere sağlık eklemek veya çıkarmak gibi özel yapım etkiler "
+"oluşturmak için, kendi fonksiyonlarımızı da oluşturabiliriz.\n"
+"\n"
+"Godot ayrıca, özelleştirebileceğimiz veya üzerine ekleyebileceğimiz özel "
+"fonksiyonlara da sahiptir.\n"
+"\n"
+"[code]_process()[/code] fonksiyonunu ele alalım."
+
+#: course/lesson-10-the-game-loop/lesson.tres:40
+msgid ""
+"The [code]_process()[/code] function gets its name because it does "
+"calculations or continuous actions.\n"
+"\n"
+"It's like a juice factory that [b]processes[/b] juice bottles: the bottles "
+"are always moving along a conveyor belt, while different machines operate on "
+"them."
+msgstr ""
+"[code]_process()[/code] (işleme) fonksiyonu, hesaplamalar veya sürekli "
+"eylemler yaptığı için bu adı almıştır.\n"
+"\n"
+"Tıpkı, meyve suyu şişelerini [b]işleyen[/b] bir meyve suyu fabrikası gibi: "
+"şişeler, farklı makineler tarafından üzerlerinde işlem yapılırken, her zaman "
+"bir taşıma bandı boyunca hareket eder."
+
+#: course/lesson-10-the-game-loop/lesson.tres:52
+msgid ""
+"It's similar in Godot, but this function can run [b]hundreds of times a "
+"second[/b]."
+msgstr ""
+"Bu Godot için de benzerdir, ancak bu fonksiyon, [b]bir saniyede yüzlerce kez "
+"çalışabilir[/b]."
+
+#: course/lesson-10-the-game-loop/lesson.tres:60
+msgid "How many parameters does this function take?"
+msgstr "Bu fonksiyonun kaç tane alınan değişkeni var?"
+
+#: course/lesson-10-the-game-loop/lesson.tres:61
+msgid ""
+"[code]\n"
+"func _process(delta):\n"
+"[/code]"
+msgstr ""
+"[code]\n"
+"func _process(delta):\n"
+"[/code]"
+
+#: course/lesson-10-the-game-loop/lesson.tres:65
+msgid ""
+"The [code]_process()[/code] function takes one parameter: [code]delta[/"
+"code].\n"
+"\n"
+"We'll look at what [code]delta[/code] is in the next lesson, as well as show "
+"how to use it."
+msgstr ""
+"[code]_process()[/code] fonksiyonunun bir tane alınan değeri var: "
+"[code]delta[/code].\n"
+"\n"
+"Bir sonraki derste [code]delta[/code] 'nın (küçük miktar) ne olduğuna tekrar "
+"bakacağız ve nasıl kullanılacağını göstereceğiz."
+
+#: course/lesson-10-the-game-loop/lesson.tres:68
+#: course/lesson-10-the-game-loop/lesson.tres:69
+msgid "1"
+msgstr "1"
+
+#: course/lesson-10-the-game-loop/lesson.tres:68
+msgid "2"
+msgstr "2"
+
+#: course/lesson-10-the-game-loop/lesson.tres:78
+msgid ""
+"The [code]_process()[/code] function won't do anything until we add "
+"something to it.\n"
+"\n"
+"You might notice the underscore [code]_[/code] in front of the function "
+"name. This is a convention programmers use to coordinate work, and it'll "
+"only make sense once you have experience coding in Godot.\n"
+"\n"
+"For now, all you need to know is that if the function exists in your code, "
+"and it is called precisely [code]_process[/code], then Godot will "
+"automatically run it every [i]frame[/i].\n"
+"\n"
+"When Godot draws on the screen, we call that a frame."
+msgstr ""
+"[code]_process()[/code] fonksiyonu, biz ona bir şey ekleyene kadar hiçbir "
+"şey yapmayacaktır.\n"
+"\n"
+"Fonksiyon adının önündeki alt çizgiyi, [code]_[/code], fark etmişsindir. Bu, "
+"programcıların işleri uyumlu çalıştırmak için kullandıkları bir gelenektir, "
+"ve ancak Godot'ta kodlama deneyimin olduğunda anlam kazanacaktır.\n"
+"\n"
+"Şimdilik bilmen gereken tek şey, bu fonksiyon kodunda mevcutsa, ve tam "
+"olarak [code]_process[/code] ismiyle çağrılırsa, o zaman Godot, bunu her "
+"oyun karesinde, [i]frame[/i], otomatik olarak çalıştıracaktır.\n"
+"\n"
+"Godot ekrana çizim yaptığında, buna bir çerçeve, yada oyun karesi (frame), "
+"diyoruz."
+
+#: course/lesson-10-the-game-loop/lesson.tres:92
+msgid "Is this the same for other engines?"
+msgstr "Bu diğer motorlar için de aynı mı?"
+
+#: course/lesson-10-the-game-loop/lesson.tres:94
+msgid ""
+"Other game engines might use different names like [code]_update()[/code]."
+msgstr ""
+"Diğer oyun motorları, [code]_update()[/code] (güncelle) gibi farklı isimler "
+"kullanabilir."
+
+#: course/lesson-10-the-game-loop/lesson.tres:102
+msgid "Why is the _process() function useful?"
+msgstr "_process() fonksiyonu neden yararlıdır?"
+
+#: course/lesson-10-the-game-loop/lesson.tres:104
+msgid ""
+"It's perhaps better to see the [code]_process()[/code] function in action.\n"
+"\n"
+"Take the following example."
+msgstr ""
+"[code]_process()[/code] fonksiyonunu çalışırken görmek belki daha iyi "
+"olacaktır.\n"
+"\n"
+"Aşağıdaki örneği ele alalım."
+
+#: course/lesson-10-the-game-loop/lesson.tres:126
+msgid ""
+"When you click the button [code]set_process(true)[/code], you activate "
+"processing on the robot.\n"
+"\n"
+"From there, every frame, Godot runs the [code]_process()[/code] function.\n"
+"\n"
+"Since we wrote a [code]rotate()[/code] instruction, Godot is rotating the "
+"character by [code]0.05[/code] radians [b]many[/b] times a second."
+msgstr ""
+"[code]set_process(true)[/code] (\"ayarla_işlem(doğru)\") düğmesine "
+"tıklarsan, robot üzerinde işlem yapmayı etkinleştirirsin.\n"
+"\n"
+"Bundan sonra Godot, her karede [code]_process()[/code] fonksiyonunu "
+"çalıştırır.\n"
+"\n"
+"Bir [code]rotate()[/code] (döndür) komutu yazdığımız için, Godot, karakteri, "
+"saniyede [b]birçok kez[/b] [code]0,05[/code] radyan kadar döndürüyor."
+
+#: course/lesson-10-the-game-loop/lesson.tres:138
+msgid "How often does the _process() function run?"
+msgstr "_process() fonksiyonu ne sıklıkla çalışır?"
+
+#: course/lesson-10-the-game-loop/lesson.tres:141
+msgid ""
+"The faster your computer, the more times [code]_process()[/code] will run.\n"
+"\n"
+"Godot will try and run [code]_process()[/code] as quickly as it can. This "
+"makes sure any movement or animations look smooth and fluid."
+msgstr ""
+"Bilgisayarın ne kadar hızlıysa, [code]_process()[/code] o kadar çok "
+"çalışacaktır.\n"
+"\n"
+"Godot, [code]_process()[/code] fonksiyonunu olabildiğince hızlı çalıştırmayı "
+"deneyecektir. Bu, herhangi bir hareketin veya hareketli görüntünün "
+"(animasyon) pürüzsüz ve akıcı görünmesini sağlar."
+
+#: course/lesson-10-the-game-loop/lesson.tres:144
+msgid "Once a second."
+msgstr "Saniyede bir kez."
+
+#: course/lesson-10-the-game-loop/lesson.tres:144
+#: course/lesson-10-the-game-loop/lesson.tres:145
+msgid "Multiple times a second."
+msgstr "Saniyede bir çok kez."
+
+#: course/lesson-10-the-game-loop/lesson.tres:154
+msgid ""
+"In the practice, you'll learn how to use the process function to rotate and "
+"move a character yourself."
+msgstr ""
+"Bu uygulamada, bir karakteri döndürmen ve taşıman için, bu \"_process\" "
+"fonksiyonunu nasıl kullanacağını öğreneceksin."
+
+#: course/lesson-10-the-game-loop/lesson.tres:162
+msgid "Rotating a Character Continuously"
+msgstr "Bir Karakteri Sürekli Döndürme"
+
+#: course/lesson-10-the-game-loop/lesson.tres:163
+msgid ""
+"Make the robot rotate slowly by adding to the [code]_process()[/code] "
+"function.\n"
+"\n"
+"A rotation speed of about [code]0.05[/code] each frame should do."
+msgstr ""
+"[code]_process()[/code] fonksiyonuna ekleme yaparak, robotun yavaşça "
+"dönmesini (rotate) sağla.\n"
+"\n"
+"Her karede yaklaşık [code]0,05[/code] dönüş hızı yeterli olacaktır."
+
+#: course/lesson-10-the-game-loop/lesson.tres:180
+msgid "Creating Circular Movement"
+msgstr "Dairesel Hareket Oluşturmak"
+
+#: course/lesson-10-the-game-loop/lesson.tres:181
+msgid ""
+"Make the robot move in a large circle slowly by rotating it and "
+"simultaneously moving it along its x direction.\n"
+"\n"
+"To do this, add the [code]rotate()[/code] and [code]move_local_x()[/code] "
+"functions to [code]_process()[/code].\n"
+"\n"
+"Use a rotation speed of [code]0.05[/code] radians per frame, and move the "
+"robot [code]5[/code] pixels per frame."
+msgstr ""
+"Robotu, aynı anda hem yavaşça döndürerek ve hem de kendi yerel x yönü (bize "
+"göre olan x yönü değil) boyunca hareket ettirerek, büyük bir daire içinde "
+"yavaşça hareket etmesini sağla.\n"
+"\n"
+"Bunu yapmak için, [code]rotate()[/code] (döndür) ve "
+"[code]move_local_x()[/code] (yerel x üzerinde ilerlet) fonksiyonlarını "
+"[code]_process()[/code] öğesine ekle.\n"
+"\n"
+"Kare başına [code]0,05[/code] radyan dönüş hızı kullan, ve robotu kare "
+"başına [code]5[/code] piksel hareket ettir."
+
+#: course/lesson-10-the-game-loop/lesson.tres:199
+msgid "The Game Loop"
+msgstr "Oyun Döngüsü"

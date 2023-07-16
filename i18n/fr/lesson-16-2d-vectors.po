@@ -1,0 +1,311 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# Automatically generated, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"PO-Revision-Date: 2023-06-08 15:10+0000\n"
+"Last-Translator: EGuillemot <Elouen.Guillemot@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-16-2d-vectors/fr/>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.18-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-16-2d-vectors/lesson.tres:14
+msgid ""
+"Suppose we want to increase the size of the robot when it levels up.\n"
+"\n"
+"As you may recall, we do this by using the following code."
+msgstr ""
+"Supposons que nous voulions augmenter la taille du robot lorsqu'il monte de "
+"niveau.\n"
+"\n"
+"Comme vous vous en souviendrez, nous le faisons en utilisant le code suivant."
+
+#: course/lesson-16-2d-vectors/lesson.tres:36
+msgid ""
+"As we talked about in lesson 7, the [code]scale[/code] variable has two sub-"
+"variables to it: [code]x[/code] and [code]y[/code].\n"
+"\n"
+"This is because [code]scale[/code] is a [code]Vector2[/code], which stands "
+"for two-dimensional vector. A [code]Vector2[/code] represents 2D coordinates."
+msgstr ""
+"Comme nous en avons parlé dans la leçon 7, la variable [code]scale[/code] a "
+"deux sous-variables : [code]x[/code] et [code]y[/code].\n"
+"\n"
+"Cela est dû au fait que [code]scale[/code] est un [code]Vector2[/code], ce "
+"qui signifie « vecteur bidimensionnel ». Un [code]Vector2[/code] représente "
+"des coordonnées 2D."
+
+#: course/lesson-16-2d-vectors/lesson.tres:46
+msgid "What are vectors?"
+msgstr "Que sont les vecteurs ?"
+
+# named [code]Vector2[/code],
+#: course/lesson-16-2d-vectors/lesson.tres:48
+msgid ""
+"A vector, in physics, is a quantity with a magnitude and a direction. For "
+"example, a force applied to some object, the velocity (speed and direction) "
+"of a character, and so on.\n"
+"\n"
+"We often represent this quantity with an arrow.\n"
+"\n"
+"In Godot, 2D vectors are a common value type named [code]Vector2[/code],\n"
+"\n"
+"Unlike plain numbers, they store [i]two[/i] decimal numbers: one for the X "
+"coordinate and one for the Y coordinate."
+msgstr ""
+"Un vecteur, en physique, est une quantité avec une magnitude et une "
+"direction. Par exemple, une force appliquée à un objet, la vélocité (vitesse "
+"et direction) d'un personnage, etc.\n"
+"\n"
+"On représente souvent cette quantité par une flèche.\n"
+"\n"
+"Dans Godot, les vecteurs 2D sont un type de valeur commun appelé "
+"[code]Vector2[/code],\n"
+"\n"
+"Contrairement aux nombres simples, ils stockent [i]deux[/i] nombres "
+"décimaux : un pour la coordonnée X et un pour la coordonnée Y."
+
+#: course/lesson-16-2d-vectors/lesson.tres:72
+msgid ""
+"So far, you've come across two variables in the course which are vectors. "
+"Which are they?"
+msgstr ""
+"Jusqu'à présent, vous avez rencontré deux variables dans le cours qui sont "
+"des vecteurs. Lesquelles sont-elles ?"
+
+#: course/lesson-16-2d-vectors/lesson.tres:75
+msgid ""
+"Both [code]scale[/code] and [code]position[/code] have [code]x[/code] and "
+"[code]y[/code] sub-variables, so Godot uses a [code]Vector2[/code] to store "
+"their values."
+msgstr ""
+"Les variables [code]scale[/code] et [code]position[/code] ont des sous-"
+"variables [code]x[/code] et [code]y[/code], donc Godot utilise un "
+"[code]Vector2[/code] pour stocker leurs valeurs."
+
+#: course/lesson-16-2d-vectors/lesson.tres:76
+#: course/lesson-16-2d-vectors/lesson.tres:77
+msgid "scale"
+msgstr "[code]scale[/code] (échelle)"
+
+#: course/lesson-16-2d-vectors/lesson.tres:76
+#: course/lesson-16-2d-vectors/lesson.tres:77
+msgid "position"
+msgstr "[code]position[/code]"
+
+#: course/lesson-16-2d-vectors/lesson.tres:76
+msgid "health"
+msgstr "[code]health[/code] (santé)"
+
+# rapidité ?
+#: course/lesson-16-2d-vectors/lesson.tres:76
+msgid "speed"
+msgstr "[code]speed[/code] (vitesse)"
+
+#: course/lesson-16-2d-vectors/lesson.tres:84
+msgid "Vectors are great for games"
+msgstr "Les vecteurs sont parfaits pour les jeux"
+
+# comme ça
+#: course/lesson-16-2d-vectors/lesson.tres:86
+msgid ""
+"Vectors are [i]essential[/i] in video games.\n"
+"\n"
+"They allow you to represent a character's movement speed and direction, "
+"calculate the distance to a target, and more, with little code.\n"
+"\n"
+"Take this turtle AI below. You've probably seen games where enemies move "
+"like this.\n"
+"\n"
+"This is done with just seven lines of pure vector calculation code.\n"
+"\n"
+"The code is a bit too difficult for now, so we'll spare you the details, but "
+"this turtle gives you a glimpse of what 2D vectors can do for you and your "
+"game projects."
+msgstr ""
+"Les vecteurs sont [i]essentiels[/i] dans les jeux vidéo.\n"
+"\n"
+"Ils vous permettent de représenter la vitesse et la direction du mouvement "
+"d'un personnage, de calculer la distance par rapport à une cible, et bien "
+"plus encore, avec peu de code.\n"
+"\n"
+"Prenez comme exemple l'IA de la tortue ci-dessous. Vous avez probablement "
+"déjà vu des jeux où les ennemis se déplacent comme ça.\n"
+"\n"
+"Cela se fait avec seulement sept lignes de code de calcul vectoriel pur.\n"
+"\n"
+"Le code est peut-être un peu difficile pour l'instant, alors nous vous "
+"épargnerons les détails, mais cette tortue vous donne un aperçu de ce que "
+"les vecteurs 2D peuvent faire pour vous et vos projets de jeu."
+
+#: course/lesson-16-2d-vectors/lesson.tres:114
+msgid ""
+"We scale the robot again, this time by adding to it directly using a "
+"[code]Vector2[/code]. The following code has the same effect as the previous "
+"example."
+msgstr ""
+"Nous modifions à nouveau l'échelle du robot, cette fois en lui ajoutant "
+"directement les valeurs souhaitées à l'aide d'un [code]Vector2[/code]. Le "
+"code suivant a le même effet que l'exemple précédent."
+
+#: course/lesson-16-2d-vectors/lesson.tres:134
+msgid ""
+"Notice how we use parentheses and two arguments inside parentheses, just "
+"like other function calls.\n"
+"\n"
+"We call this a [i]constructor function call[/i]. You can think of it as a "
+"special kind of function that creates a particular type of value.\n"
+"\n"
+"The code [code]Vector2(0.2, 0.2)[/code] constructs a new [code]Vector2[/"
+"code] value with its [code]x[/code] set to [code]0.2[/code] and its [code]y[/"
+"code] set to [code]0.2[/code], respectively."
+msgstr ""
+"Remarquez comment nous utilisons des parenthèses et deux arguments à "
+"l'intérieur des parenthèses, tout comme les autres appels de fonction.\n"
+"\n"
+"Nous appelons cela un [i]appel de fonction constructeur[/i]. Vous pouvez le "
+"considérer comme un type spécial de fonction qui crée un type particulier de "
+"valeur.\n"
+"\n"
+"Le code [code]Vector2(0.2, 0.2)[/code] construit une nouvelle valeur de "
+"[code]Vector2[/code] avec son [code]x[/code] défini sur [code]0.2[/code] et "
+"son [code]y[/code] défini sur [code]0.2[/code], respectivement."
+
+#: course/lesson-16-2d-vectors/lesson.tres:146
+msgid "Using vectors to change the position"
+msgstr "Utiliser des vecteurs pour changer la position"
+
+#: course/lesson-16-2d-vectors/lesson.tres:148
+msgid ""
+"We can add and subtract vectors to [code]position[/code] because it's a "
+"vector. If we wanted to move our robot to a new relative position, we would "
+"add a [code]Vector2[/code] to its [code]position[/code]."
+msgstr ""
+"Nous pouvons ajouter et soustraire des vecteurs à [code]position[/code] car "
+"ceci est un vecteur. Si nous voulions déplacer notre robot vers une nouvelle "
+"position relative, nous ajouterions un [code]Vector2[/code] à sa "
+"[code]position[/code]."
+
+#: course/lesson-16-2d-vectors/lesson.tres:166
+msgid "How would you move the robot 50 pixels to the left?"
+msgstr "Comment déplaceriez-vous le robot de 50 pixels vers la gauche ?"
+
+#: course/lesson-16-2d-vectors/lesson.tres:169
+msgid ""
+"[code]position -= Vector2(50, 0)[/code] subtracts [code]50[/code] to the sub-"
+"variable [code]x[/code], and [code]0[/code] to [code]y[/code].\n"
+"\n"
+"[code]position.x -= Vector2(50, 0)[/code] tries to subtract a 2D vector to "
+"the sub-variable [code]x[/code], which is a decimal number. The value types "
+"are incompatible. If you try to do this, you will get an error."
+msgstr ""
+"[code]position -= Vector2(50, 0)[/code] soustrait [code]50[/code] à la sous-"
+"variable [code]x[/code], et [code]0[/code] à [code]y[/code].\n"
+"\n"
+"[code]position.x -= Vecteur(50, 0)[/code] essaie de soustraire un vecteur 2D "
+"à la sous-variable [code]x[/code], qui est un nombre décimal. Les types de "
+"valeurs sont incompatibles. Si vous essayez de le faire, vous obtiendrez une "
+"erreur."
+
+#: course/lesson-16-2d-vectors/lesson.tres:172
+#: course/lesson-16-2d-vectors/lesson.tres:173
+msgid "position -= Vector2(50, 0)"
+msgstr "position -= Vector2(50, 0)"
+
+#: course/lesson-16-2d-vectors/lesson.tres:172
+msgid "position.x -= Vector2(50, 0)"
+msgstr "position.x -= Vector2(50, 0)"
+
+#: course/lesson-16-2d-vectors/lesson.tres:182
+msgid ""
+"In the next few practices, you'll use vectors to change scale and position "
+"values."
+msgstr ""
+"Dans les exercices suivants, vous utiliserez des vecteurs pour modifier les "
+"valeurs d'échelle et de position."
+
+#: course/lesson-16-2d-vectors/lesson.tres:190
+msgid "Increasing scale using vectors"
+msgstr "Augmenter l'échelle en utilisant des vecteurs"
+
+#: course/lesson-16-2d-vectors/lesson.tres:191
+msgid ""
+"Add a line of code to the [code]level_up()[/code] function to increase the "
+"[code]scale[/code] of the robot by [code]Vector2(0.2, 0.2)[/code] every time "
+"it levels up."
+msgstr ""
+"Ajoutez une ligne de code à la fonction [code]level_up()[/code] pour "
+"augmenter la [code]scale[/code] du robot de [code]Vector2(0.2, 0.2)[/code] à "
+"chaque fois qu'il monte de niveau."
+
+# Rien ne peut mal tourner
+# rien ne peut aller de travers
+#: course/lesson-16-2d-vectors/lesson.tres:202
+msgid ""
+"To visually show our robot has gained in strength, let's increase its size "
+"every time it levels up. Nothing could go wrong!"
+msgstr ""
+"Pour montrer visuellement que notre robot a gagné en force, augmentons sa "
+"taille à chaque fois qu'il monte de niveau. Rien ne peut mal se passer !"
+
+#: course/lesson-16-2d-vectors/lesson.tres:207
+msgid "Resetting size and position using vectors"
+msgstr "Réinitialiser la taille et la position à l'aide de vecteurs"
+
+#: course/lesson-16-2d-vectors/lesson.tres:208
+msgid ""
+"The robot's level has increased a lot, and so has its size!\n"
+"\n"
+"Let's fix this by resetting the robot's [code]scale[/code] and "
+"[code]position[/code] values.\n"
+"\n"
+"Create a function named [code]reset_robot()[/code] that sets the "
+"[code]scale[/code] and [code]position[/code] of the robot.\n"
+"\n"
+"The [code]x[/code] and [code]y[/code] sub-variables of the robot's "
+"[code]scale[/code] need to be [code]1.0[/code].\n"
+"\n"
+"The robot's [code]position[/code] needs to be [code]Vector2(0, 0)[/code].\n"
+"\n"
+"As in the previous practice, make sure to use vectors when dealing with "
+"scale and position."
+msgstr ""
+"Le niveau du robot a beaucoup augmenté, et sa taille aussi !\n"
+"\n"
+"Corrigeons cela en réinitialisant les valeurs [code]scale[/code] et "
+"[code]position[/code] du robot.\n"
+"\n"
+"Créez une fonction appelée [code]reset_robot()[/code] qui définit les "
+"valeurs [code]scale[/code] et [code]position[/code] du robot.\n"
+"\n"
+"Les sous-variables [code]x[/code] et [code]y[/code] de la [code]scale[/code] "
+"du robot doivent être [code]1.0[/code].\n"
+"\n"
+"La [code]position[/code] du robot doit être [code]Vector2(0, 0)[/code].\n"
+"\n"
+"Comme dans l'exercice précédent, assurez-vous d'utiliser des vecteurs "
+"lorsque vous travaillez avec l'échelle et la position."
+
+#: course/lesson-16-2d-vectors/lesson.tres:227
+msgid ""
+"Perhaps increasing the scale every level was a bad idea! Let's restore the "
+"robot to the correct size."
+msgstr ""
+"Augmenter l'échelle à chaque niveau était peut-être une mauvaise idée ! "
+"Remettons le robot à la bonne taille."
+
+#: course/lesson-16-2d-vectors/lesson.tres:231
+msgid "2D Vectors"
+msgstr "Vecteurs 2D"

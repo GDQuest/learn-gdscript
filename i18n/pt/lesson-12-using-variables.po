@@ -1,0 +1,297 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-06-12 11:07+0200\n"
+"PO-Revision-Date: 2023-04-23 18:50+0000\n"
+"Last-Translator: ssantos <ssantos@web.de>\n"
+"Language-Team: Portuguese <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-12-using-variables/pt/>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.18-dev\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: course/lesson-12-using-variables/lesson.tres:14
+msgid ""
+"In this lesson, we'll make our code easier to follow and understand at a "
+"glance.\n"
+"\n"
+"Take a look at this example."
+msgstr ""
+"Nessa lição, vamos tornar nosso código mais fácil de seguir e entender "
+"rapidamente.\n"
+"\n"
+"Observe esse exemplo."
+
+#: course/lesson-12-using-variables/lesson.tres:34
+msgid "In the above example, what does the number 4 mean?"
+msgstr "No exemplo acima, o que significa o número 4?"
+
+#: course/lesson-12-using-variables/lesson.tres:37
+msgid "The code above rotates the character [code]4[/code] radians per second."
+msgstr ""
+"O código acima rotaciona a personagem [code]4[/code] radianos por segundo."
+
+#: course/lesson-12-using-variables/lesson.tres:38
+#: course/lesson-12-using-variables/lesson.tres:39
+msgid "It's how fast the character rotates."
+msgstr "É o quão rápido a personagem rotaciona."
+
+#: course/lesson-12-using-variables/lesson.tres:38
+msgid "It's how far the character moves in pixels."
+msgstr "É o quão longe a personagem se move em pixels."
+
+#: course/lesson-12-using-variables/lesson.tres:38
+msgid "It's how long the rotation takes."
+msgstr "É a quantidade de tempo que leva a rotação."
+
+#: course/lesson-12-using-variables/lesson.tres:48
+msgid ""
+"We can guess what a number represents by looking at the function names, "
+"but it's harder to recall what this number does by quickly looking at the"
+" code.\n"
+"\n"
+"We've seen how different functions have their own names. Using these "
+"names communicates to developers what the functions do."
+msgstr ""
+"Podemos adivinhar o que um número representa observando os nomes das "
+"funções, mas é mais difícil de se lembrar o que esse número faz só olhando "
+"rapidamente ao código.\n"
+"\n"
+"Vimos como diferentes funções têm nomes próprios. O uso desses nomes diz aos "
+"programadores o que as funções fazem."
+
+#: course/lesson-12-using-variables/lesson.tres:70
+msgid ""
+"As we learned in lesson 8, we can also assign labels to numbers to help "
+"us remember what they do.\n"
+"\n"
+"We call these labels [i]variables[/i].\n"
+"\n"
+"[b]A variable is a label for a value we can save, change, and read "
+"later.[/b]\n"
+"\n"
+"Let's recap how to define a variable."
+msgstr ""
+"Como aprendemos na lição 8, também podemos atribuir rótulos (nomes) aos "
+"números para nos ajudar a se lembrar o que eles fazem.\n"
+"\n"
+"Chamamos esses nomes de [i]variáveis[/i].\n"
+"\n"
+"[b]Uma variável é um nome que damos a um valor que podemos salvar, alterar e "
+"ler mais tarde.[/b]\n"
+"\n"
+"Vamos revisar como definir uma variável."
+
+#: course/lesson-12-using-variables/lesson.tres:96
+msgid ""
+"We improve the first example to make it clear what the number "
+"[code]4[/code] does."
+msgstr ""
+"Melhoramos o primeiro exemplo para deixar claro o que o número [code]4[/code]"
+" faz."
+
+#: course/lesson-12-using-variables/lesson.tres:116
+msgid ""
+"Labeling a value makes the code easier for us to read now [i]and[/i] in "
+"the future."
+msgstr "Nomear um valor facilita a leitura do código agora [i]e[/i] no futuro."
+
+#: course/lesson-12-using-variables/lesson.tres:124
+msgid "In the above example, which line defines the angular speed variable?"
+msgstr "No exemplo acima, qual linha define a variável de velocidade angular?"
+
+#: course/lesson-12-using-variables/lesson.tres:127
+msgid ""
+"We create the [code]angular_speed[/code] variable, then assign it the "
+"value of [code]4[/code]."
+msgstr ""
+"Criamos a variável [code]angular_speed[/code] e atribuímos-la o valor "
+"[code]4[/code]."
+
+#: course/lesson-12-using-variables/lesson.tres:128
+#: course/lesson-12-using-variables/lesson.tres:129
+msgid "var angular_speed = 4"
+msgstr "var angular_speed = 4"
+
+#: course/lesson-12-using-variables/lesson.tres:128
+msgid "func _process(delta):"
+msgstr "func _process(delta):"
+
+#: course/lesson-12-using-variables/lesson.tres:128
+msgid "rotate(angular_speed * delta)"
+msgstr "rotate(angular_speed * delta)"
+
+#: course/lesson-12-using-variables/lesson.tres:138
+msgid ""
+"If we define variables outside of functions, we can re-use them in "
+"different functions.\n"
+"\n"
+"Because any function can use variables we define outside of them, we call"
+" these variables [b]script-wide[/b].\n"
+"\n"
+"Here we use the [code]angular_speed[/code] script-wide variable in both "
+"the [code]_process()[/code] function and the "
+"[code]set_angular_speed()[/code] function."
+msgstr ""
+"Se definirmos variáveis fora das funções, podemos reutilizá-las em funções "
+"diferentes.\n"
+"\n"
+"Como qualquer função pode usar variáveis que definimos fora delas, chamamos "
+"essas variáveis de [b]script-wide[/b] (ou variáveis de script, ou seja, são "
+"variáveis que fazem parte de todo o script, não apenas de um só bloco de "
+"código).\n"
+"\n"
+"Aqui usamos a variável de script [code]angular_speed[/code] na função "
+"[code]_process()[/code] e na função [code]set_angular_speed()[/code]."
+
+#: course/lesson-12-using-variables/lesson.tres:162
+msgid ""
+"We can also define variables inside of functions.\n"
+"\n"
+"We align the variable assignment by indenting to make it part of the "
+"function body. Make sure to create the variable before using it!\n"
+"\n"
+"If we define a variable inside of a function, only that function can use "
+"it."
+msgstr ""
+"Também podemos definir variáveis dentro de funções.\n"
+"\n"
+"Alinhamos a atribuição de variável recuando ela (fazendo uma indentação) "
+"para torná-la parte do corpo da função. Certifique-se de criar a variável "
+"antes de usá-la!\n"
+"\n"
+"Se definirmos uma variável dentro de uma função, somente essa função vai "
+"poder usar ela."
+
+#: course/lesson-12-using-variables/lesson.tres:186
+msgid ""
+"The [code]angular_speed[/code] variable only exists inside "
+"[code]_process()[/code], because we defined it there. The "
+"[code]set_angular_speed()[/code] function can't use it.\n"
+"\n"
+"Trying to use it there will result in an error.\n"
+"\n"
+"Here's what this error might look like."
+msgstr ""
+"A variável [code]angular_speed[/code] só existe dentro da função "
+"[code]_process()[/code], porque a definimos lá. A função "
+"[code]set_angular_speed()[/code] não pode usá-la.\n"
+"\n"
+"Tentar usar ela vai resultar num erro.\n"
+"\n"
+"Veja aqui como pode ser esse erro."
+
+#: course/lesson-12-using-variables/lesson.tres:208
+msgid "Where can we define variables?"
+msgstr "Onde podemos definir variáveis?"
+
+#: course/lesson-12-using-variables/lesson.tres:211
+msgid ""
+"Functions can use any variables defined outside of functions. These "
+"variables are [b]script-wide[/b].\n"
+"\n"
+"If we define a variable inside of a function, only that function can use "
+"it."
+msgstr ""
+"As funções podem usar quaisquer variáveis definidas fora das funções. Essas "
+"variáveis são [b]script-wide[/b] (variáveis de script).\n"
+"\n"
+"Se definirmos uma variável dentro de uma função, somente essa função poderá "
+"usá-la."
+
+#: course/lesson-12-using-variables/lesson.tres:214
+#: course/lesson-12-using-variables/lesson.tres:215
+msgid "Outside of functions."
+msgstr "Fora das funções."
+
+#: course/lesson-12-using-variables/lesson.tres:214
+#: course/lesson-12-using-variables/lesson.tres:215
+msgid "Inside of functions."
+msgstr "Dentro das funções."
+
+#: course/lesson-12-using-variables/lesson.tres:224
+msgid ""
+"Variables are also great at grouping values that control how a character "
+"behaves.\n"
+"\n"
+"Grouping them in this way allows us to easily change them."
+msgstr ""
+"As variáveis também são ótimas para agrupar valores que controlam como uma "
+"personagem se comporta.\n"
+"\n"
+"Agrupá-las dessa maneira permite-nos alterá-las facilmente."
+
+#: course/lesson-12-using-variables/lesson.tres:246
+msgid ""
+"In the following practices, we'll define variables and use them with some"
+" familiar functions to make our code more readable."
+msgstr ""
+"Nas práticas a seguir, vamos definir variáveis e as usaremos com algumas "
+"funções familiares para tornar nosso código mais legível."
+
+#: course/lesson-12-using-variables/lesson.tres:254
+msgid "Clarifying Code Using Variables"
+msgstr "Esclarecendo o Código Usando Variáveis"
+
+#: course/lesson-12-using-variables/lesson.tres:255
+msgid ""
+"Let's give the [code]4[/code] here a label so we know what it does.\n"
+"\n"
+"Create a variable called [code]angular_speed[/code] outside of the "
+"[code]_process()[/code] function to make it script-wide. This allows us "
+"to use it in other functions too.\n"
+"\n"
+"Then, replace the [code]4[/code] with [code]angular_speed[/code]."
+msgstr ""
+"Vamos dar um nome ao valor [code]4[/code] aqui para sabermos o que ele faz.\n"
+"\n"
+"Crie uma variável chamada [code]angular_speed[/code] fora da função "
+"[code]_process()[/code] para torná-la uma variável de script. Isso nos "
+"permite usá-la em outras funções também.\n"
+"\n"
+"Em seguida, substitua o [code]4[/code] por [code]angular_speed[/code]."
+
+#: course/lesson-12-using-variables/lesson.tres:269
+msgid ""
+"Using variables to store number values makes code easier to read. Tidy up"
+" this function by storing a value in a variable."
+msgstr ""
+"O uso de variáveis para armazenar valores numéricos facilita a leitura do "
+"código. Arrume essa função armazenando um valor numa variável."
+
+#: course/lesson-12-using-variables/lesson.tres:274
+msgid "Fixing an Out of Scope Error"
+msgstr "Corrigindo um Erro Chamado Fora do Escopo (Out of Scope Error)"
+
+#: course/lesson-12-using-variables/lesson.tres:275
+msgid ""
+"There's something wrong with the code here. Can you see what it is?\n"
+"\n"
+"Run the code and read the error.\n"
+"\n"
+"Correct the code so it works as intended."
+msgstr ""
+"Tem alguma coisa de errado com o código aqui. Pode ver o que é?\n"
+"\n"
+"Execute o código e leia o erro.\n"
+"\n"
+"Corrija o código para que funcione como pretendido."
+
+#: course/lesson-12-using-variables/lesson.tres:293
+msgid "Uh oh! There's something wrong here. Can you fix it?"
+msgstr "Uh oh! Há algo de errado aqui. Pode consertar isso?"
+
+#: course/lesson-12-using-variables/lesson.tres:297
+msgid "Using Variables to Make Code Easier to Read"
+msgstr "Usando Variáveis para Fazer o Código Mais Fácil de se Ler"

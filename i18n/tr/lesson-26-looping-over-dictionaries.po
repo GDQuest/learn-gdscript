@@ -1,0 +1,206 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-06-12 11:07+0200\n"
+"PO-Revision-Date: 2023-07-14 21:12+0000\n"
+"Last-Translator: Yılmaz Durmaz <yilmaz_durmaz@hotmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-26-looping-over-dictionaries/tr/>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.0-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:13
+msgid ""
+"Like with arrays, you can loop over dictionaries. You can loop over both "
+"their keys and values.\n"
+"\n"
+"Let's see how it works with two examples."
+msgstr ""
+"Dizilerde olduğu gibi, sözlükler üzerinde de döngü oluşturabilirsin. Hem "
+"anahtarların hem de değerlerin üzerinde döngü oluşturabilirsin.\n"
+"\n"
+"İki örnekle nasıl çalıştığını görelim."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:23
+msgid "Displaying an inventory's content"
+msgstr "Bir envanterin içeriğini görüntülemek"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:25
+msgid ""
+"To display the player's inventory, you need to know what it contains. You "
+"need the name and amount of each object.\n"
+"\n"
+"And from code, you can only achieve that by looping over the whole "
+"dictionary and processing key-value pairs one by one.\n"
+"\n"
+"To get the list of keys in the dictionary, you can call its [code]keys()[/"
+"code] member function."
+msgstr ""
+"Oyuncunun envanterini görüntülemek için, neleri içerdiğini bilmen gerekir. "
+"Her nesnenin adına ve miktarına ihtiyacın vardır.\n"
+"\n"
+"Ve kodun içinde, bunu yalnızca sözlüğün tamamı üzerinde döngü oluşturarak, "
+"ve anahtar-değer çiftlerini tek tek işleyerek başarabilirsin.\n"
+"\n"
+"Sözlükteki anahtarların listesini almak için [code]keys()[/code] (anahtarlar)"
+" üye fonksiyonunu çağırabilirsin."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:49
+msgid ""
+"But it's something we do so much that you don't need to call the function.\n"
+"\n"
+"Instead, you can directly type the variable name in a [code]for[/code] loop "
+"after the [code]in[/code] keyword. The language understands that you "
+"implicitly want to loop over the dictionary's keys."
+msgstr ""
+"Ancak bu o kadar çok yaptığımız bir şey ki, bu fonksiyonu çağırmana gerek "
+"yok.\n"
+"\n"
+"Bunun yerine, [code]for[/code] döngüsünde, [code]in[/code] (içinde) anahtar "
+"sözcüğünden sonra doğrudan değişkenin adını yazabilirsin. Dil, dolaylı "
+"olarak sözlüğün anahtarları üzerinde döngü yapmak istediğini anlar."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:71
+msgid ""
+"You can get the values with the syntax [code]dictionary[key][/code] as you "
+"learned in the previous lesson.\n"
+"\n"
+"We can loop over the inventory keys, get the corresponding values, and "
+"display all that information in the user interface."
+msgstr ""
+"Önceki derste öğrendiğin gibi [code]sözlük_değişkeni[anahtar][/code] "
+"sözdizimi ile değerleri alabilirsin.\n"
+"\n"
+"Envanter anahtarları üzerinde döngü yapabilir, karşılık gelen değerleri "
+"alabilir, ve tüm bu bilgileri kullanıcı arayüzünde görüntüleyebiliriz."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:103
+msgid ""
+"Instead of printing the key-value pairs to the output console, we can code "
+"and call a dedicated function that displays items in the user interface."
+msgstr ""
+"Anahtar-değer çiftlerini çıktı penceresine yazdırmak yerine, bu öğeleri "
+"kullanıcı arayüzünde görüntüleyen özel bir fonksiyon kodlayıp çağırabiliriz."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:131
+msgid "Mapping grid cells to units"
+msgstr "Izgara hücrelerini birimlere eşlemek"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:133
+msgid ""
+"We can also use a dictionary to map units to their position on a game "
+"board.\n"
+"\n"
+"That's how you'd typically code a board game, a grid-based RPG, or a "
+"tactical RPG.\n"
+"\n"
+"While we focused on [code]String[/code] keys so far, GDScript dictionaries "
+"accept any value type as a key, allowing you to map anything to anything.\n"
+"\n"
+"The only limitation is that every key must be unique."
+msgstr ""
+"Birimleri, bir oyun tahtasındaki konumlarına eşlemek için bir sözlük de "
+"kullanabiliriz.\n"
+"\n"
+"Genellikle bir masa oyununu, ızgara tabanlı bir RPG'yi, veya taktiksel bir "
+"RPG'yi bu şekilde kodlarsın.\n"
+"\n"
+"Şimdiye kadar dize tipinde ([code]String[/code]) anahtarlarına odaklanmış "
+"olsak da, GDScript sözlükleri herhangi bir değer tipini anahtar olarak kabul "
+"edebilir, ve herhangi bir şeyi herhangi başka bir şeyle eşlemene olanak "
+"tanır.\n"
+"\n"
+"Tek sınırlama, her anahtarın benzersiz olması gerektiğidir."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:159
+msgid ""
+"Using a [code]for[/code] loop, you can use the key-value pairs to place "
+"units on the board at the start of a game."
+msgstr ""
+"Oyunun başında birimleri tahtaya yerleştirmek için, [code]for[/code] "
+"döngüsünü ile anahtar-değer çiftlerini kullanabilirsin."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:189
+msgid ""
+"In the following practices, you will loop over dictionaries and process "
+"their content."
+msgstr ""
+"Sıradaki alıştırmalarda, sözlükler üzerinde döngü oluşturacak ve "
+"içeriklerini işleyeceksin."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:197
+msgid "Displaying the inventory"
+msgstr "Envanteri görüntülemek"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:198
+msgid ""
+"We use a dictionary to represent the player's inventory in this game. The "
+"dictionary keys are the name of items, and they map to the number of items "
+"that the player owns.\n"
+"\n"
+"You need to loop over the dictionary and display the name and amount of "
+"every item in the inventory.\n"
+"\n"
+"To do so, call the [code]display_item()[/code] function. It takes two "
+"arguments: the item name and the amount."
+msgstr ""
+"Bu oyunda, oyuncunun envanterini temsil etmek için bir sözlük kullanıyoruz "
+"(inventory). Sözlüğün anahtarları öğelerin isimleridir ve oyuncunun sahip "
+"olduğu öğe sayılarıyla eşlenir.\n"
+"\n"
+"Sözlüğün üzerinde döngü yapman ve envanterdeki her öğenin adını ve miktarını "
+"görüntülemen gerekiyor.\n"
+"\n"
+"Bunu yapmak için [code]display_item()[/code] (görüntüle_öğe) fonksiyonunu "
+"çağır. Bu fonksiyon iki girdi değişkeni gerektirir: öğenin ismi ve miktarı."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:218
+msgid ""
+"We need to display the player's inventory on the screen but lack the code to "
+"do so. Use a loop to display every item."
+msgstr ""
+"Oyuncunun envanterini ekranda göstermemiz gerekiyor, ancak bunu yapmak için "
+"kodumuz yok. Her öğeyi görüntülemek için bir döngü kullan."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:223
+msgid "Placing units on the board"
+msgstr "Birimleri tahtaya yerleştirmek"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:224
+msgid ""
+"We have a dictionary named [code]units[/code] that maps a cell position on "
+"the grid to a unit to put there.\n"
+"\n"
+"Using a for loop and the [code]place_unit()[/code] function, place every "
+"unit in the units dictionary at the desired position on the game board."
+msgstr ""
+"[code]units[/code] adında (birimler), ızgaradaki bir hücre konumunu, oraya "
+"koyacağımız bir birimle eşleyen bir sözlüğümüz var.\n"
+"\n"
+"Bir for döngüsü ve [code]place_unit()[/code] (yerleştir_birim) fonksiyonunu "
+"kullanarak, birimler sözlüğündeki her birimi oyun tahtasında istenen konuma "
+"yerleştir."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:242
+msgid ""
+"We want to populate our game board with units at the start of every battle. "
+"Loop over the dictionary to place units on the board."
+msgstr ""
+"Her savaşın başında, oyun tahtamızı birimlerle doldurmak istiyoruz. "
+"Birimleri tahtaya yerleştirmek için sözlüğün üzerinde döngü yap."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:246
+msgid "Looping over dictionaries"
+msgstr "Sözlükler üzerinde döngü kurmak"
