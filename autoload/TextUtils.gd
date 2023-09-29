@@ -39,23 +39,19 @@ var _REGEX_REPLACE_MAP := {}
 func _init() -> void:
 	_REGEXES["code"] = RegEx.new()
 	_REGEXES["func"] = RegEx.new()
-	_REGEXES["method_call"] = RegEx.new()
 	_REGEXES["number"] = RegEx.new()
 	_REGEXES["symbol"] = RegEx.new()
+	_REGEXES["format"] = RegEx.new()
+	
 
 	_REGEXES["code"].compile("\\[code\\](.+?)\\[\\/code\\]")
 	_REGEXES["func"].compile("(?<func>func)")
-	_REGEXES["method_call"].compile("(?<method_name>\\w[\\w\\d]*)(?<method_args>\\(.*?\\))")
 	_REGEXES["number"].compile("(?<number>\\d+(\\.\\d+)?)")
-	_REGEXES["symbol"].compile("(?<symbol>[a-zA-Z][a-zA-Z0-9_]+)")
+	_REGEXES["symbol"].compile("(?<symbol>[a-zA-Z][a-zA-Z0-9_]+|[a-zA-Z])")
+	_REGEXES["format"].compile("\\d+(\\.\\d+)?|[a-zA-Z0-9_]+")
 
 	_REGEX_REPLACE_MAP = {
 		"func": "[color=#%s]$func[/color]" % CodeEditorEnhancer.COLOR_KEYWORD.to_html(false),
-		"method_call":
-		(
-			"[color=#%s]$method_name[/color]$method_args"
-			% CodeEditorEnhancer.COLOR_MEMBER.to_html(false)
-		),
 		"number": "[color=#%s]$number[/color]" % CodeEditorEnhancer.COLOR_NUMBERS.to_html(false),
 		"symbol": "[color=#%s]$symbol[/color]" % CodeEditorEnhancer.COLOR_MEMBER.to_html(false)
 	}
@@ -71,21 +67,30 @@ func bbcode_add_code_color(bbcode_text := "") -> String:
 		var match_string: String = regex_match.strings[1]
 
 		var colored_string := ""
-		for regex_type in [
-			"func",
-			"method_call",
-			"number",
-			"symbol",
-		]:
-			var replaced: String = _REGEXES[regex_type].sub(
-				match_string, _REGEX_REPLACE_MAP[regex_type], false
-			)
-			if match_string != replaced:
-				colored_string = replaced
-				break
+		# The algorithm consists of finding all regex matches of a-zA-Z0-9_ and \d.\d
+		# Then formatting these regex matches, and adding the parts in-between 
+		# matches to the formatted string.
+		var to_format: Array = _REGEXES["format"].search_all(match_string)
+		var last_match_end := -1
+		for match_to_format in to_format:
+			var match_start: int = match_to_format.get_start()
+			if last_match_end != -1:
+				colored_string += match_string.substr(last_match_end, match_start - last_match_end)
+			var part: String = match_to_format.get_string()
+			for regex_type in [
+				"func",
+				"symbol",
+				"number",
+			]:
+				var replaced: String = _REGEXES[regex_type].sub(
+					part, _REGEX_REPLACE_MAP[regex_type], false
+				)
+				if part != replaced:
+					colored_string += replaced
+					last_match_end = match_to_format.get_end()
+					break
 
-		if colored_string == "":
-			colored_string = match_string
+		colored_string += match_string.substr(last_match_end)
 		colored_string = "[code]" + colored_string + "[/code]"
 		bbcode_text.erase(index_offset, initial_length)
 		bbcode_text = bbcode_text.insert(index_offset, colored_string)
