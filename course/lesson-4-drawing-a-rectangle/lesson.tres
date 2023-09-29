@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=19 format=2]
+[gd_resource type="Resource" load_steps=21 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
@@ -73,7 +73,7 @@ has_separator = false
 [sub_resource type="Resource" id=6]
 script = ExtResource( 5 )
 content_id = "res://course/lesson-4-drawing-a-rectangle/content-RjTRhZN4.tres"
-title = ""
+title = "Turning left and right"
 type = 0
 text = "The functions [code]turn_left()[/code] and [code]turn_right()[/code] work the same.
 
@@ -133,6 +133,28 @@ answer_options = [ "move_forward", "30" ]
 valid_answers = [ "30" ]
 is_multiple_choice = false
 do_shuffle_answers = true
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-4-drawing-a-rectangle/content-c7DDizKU.tres"
+title = "The turtle uses code made specifically for this app!"
+type = 0
+text = "The turtle is a little learning tool custom-made for this course, based on a proven code learning methodology. It's designed to teach you how to use and create functions.
+
+So please don't be surprised if writing code like [code]turn_left()[/code] inside of the Godot editor doesn't work! And don't worry, once you've learned the foundations, you'll see they make it faster and easier to learn Godot functions."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-4-drawing-a-rectangle/content-dOCQiGjB.tres"
+title = ""
+type = 0
+text = "Let's move on to practice! You'll get to play with the turtle functions to draw shapes."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
 
 [sub_resource type="Resource" id=11]
 script = ExtResource( 3 )
@@ -216,5 +238,5 @@ description = "At this point, you're ready to code entirely on your own. Call fu
 [resource]
 script = ExtResource( 1 )
 title = "Drawing a Rectangle"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 14 ), SubResource( 15 ) ]
 practices = [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]

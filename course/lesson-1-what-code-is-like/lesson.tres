@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=32 format=2]
+[gd_resource type="Resource" load_steps=33 format=2]
 
 [ext_resource path="res://resources/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://course/Documentation.tres" type="Resource" id=2]
@@ -125,7 +125,9 @@ text = "In this course, you'll learn the GDScript programming language (the name
 
 This is a language by game developers for game developers. You can use it within the Godot game engine to create games and applications.
 
-SEGA used the Godot engine to create the remake of Sonic Colors Ultimate. Engineers at Tesla use it for their cars' dashboards."
+It's the language used by games like [ignore][url=https://store.steampowered.com/app/1637320/Dome_Keeper/]Dome Keeper[/url] and [ignore][url=https://store.steampowered.com/app/1942280/Brotato/]Brotato[/url].
+
+Engineers at Tesla also used it for their cars' dashboards."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -136,7 +138,7 @@ content_id = "res://course/lesson-1-what-code-is-like/content-iGjB7tKR.tres"
 title = ""
 type = 0
 text = ""
-visual_element_path = "ImageSonic.tscn"
+visual_element_path = "ImageBrotato.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -304,6 +306,16 @@ visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
+[sub_resource type="Resource" id=28]
+script = ExtResource( 5 )
+content_id = "res://course/lesson-1-what-code-is-like/content-kGx0c7DD.tres"
+title = "Is this for Godot 4?"
+type = 1
+text = "What you'll learn in this free course is fully compatible with Godot 4. While we initially designed this series for Godot 3, the foundations of GDScript are still the same in Godot 4."
+visual_element_path = ""
+reverse_blocks = false
+has_separator = false
+
 [sub_resource type="Resource" id=18]
 script = ExtResource( 5 )
 content_id = "res://course/lesson-1-what-code-is-like/content-37794.tres"
@@ -327,7 +339,7 @@ title = "Try Your First Code"
 goal = "We prepared a code sample for you. For this practice, you don't need to change anything.
 
 To test the code, click the [i]Run[/i] button below the code editor."
-starting_code = "func _ready() -> void:
+starting_code = "func _ready():
 	print(\"Welcome!\")"
 cursor_line = 0
 cursor_column = 0
@@ -341,5 +353,5 @@ description = "Run your first bit of code and see the result."
 [resource]
 script = ExtResource( 1 )
 title = "What Code is Like"
-content_blocks = [ SubResource( 1 ), SubResource( 20 ), SubResource( 2 ), SubResource( 22 ), SubResource( 23 ), SubResource( 3 ), SubResource( 4 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 24 ), SubResource( 9 ), SubResource( 21 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 16 ), SubResource( 25 ), SubResource( 14 ), SubResource( 15 ), SubResource( 26 ), SubResource( 27 ), SubResource( 17 ), SubResource( 18 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 20 ), SubResource( 2 ), SubResource( 22 ), SubResource( 23 ), SubResource( 3 ), SubResource( 4 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 24 ), SubResource( 9 ), SubResource( 21 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 16 ), SubResource( 25 ), SubResource( 14 ), SubResource( 15 ), SubResource( 26 ), SubResource( 27 ), SubResource( 17 ), SubResource( 28 ), SubResource( 18 ) ]
 practices = [ SubResource( 19 ) ]
