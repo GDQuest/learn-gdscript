@@ -281,6 +281,8 @@ func _on_translation_changed() -> void:
 
 func _open_glossary_popup(meta: String) -> void:
 	var entry: Glossary.Entry = _glossary.get_match(meta)
+	if entry == null:
+		return
 	_glossary_popup.setup(entry.term, entry.explanation)
 	_glossary_popup.call_deferred("align_with_mouse", get_global_mouse_position())
 	_glossary_popup.appear()

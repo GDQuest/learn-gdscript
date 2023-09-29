@@ -16,7 +16,7 @@ var max_range = 2000.0
 var max_bullet_speed = 1500.0
 
 func shoot():
-	var bullet = bullet_scene.instance()
+	var bullet = bullet_scene.instantiate()
 	add_child(bullet)
 	bullet.global_transform = global_transform"
 readonly = true

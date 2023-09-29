@@ -33,6 +33,9 @@ func has(keyword: String) -> bool:
 
 
 func get_match(keyword: String) -> Entry:
+	var key := keyword.to_lower()
+	if not key in _glossary:
+		return null
 	return _glossary[keyword.to_lower()]
 
 

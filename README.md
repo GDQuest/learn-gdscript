@@ -8,14 +8,14 @@ It's a beginner-friendly programming course.
 
 This app is the free part of a larger paid course to become a game developer: [Learn to Code From Zero, with Godot](https://gdquest.mavenseed.com/courses/learn-to-code-from-zero-with-godot).
 
-Over 1600 backers funded this project on Kickstarter.
+The series is compatible with Godot 4.
 
 ## How to run the app
 
 You can run the app online here:
 
-- Bleeding edge version: https://gdquest.github.io/learn-gdscript/staging/ (we update this version periodically as we make improvements)
 - Latest stable release: https://gdquest.github.io/learn-gdscript/
+- Bleeding edge version: https://gdquest.github.io/learn-gdscript/staging/ (we update this version periodically as we make improvements)
 
 Also, you can download the app for Windows, macOS, and Linux on Itch.io: https://gdquest.itch.io/learn-godot-gdscript
 
@@ -25,7 +25,7 @@ The desktop version offers better performance and crisper text than the web vers
 
 You can also run the project straight in Godot by cloning the repository and importing the folder into the engine.
 
-We only recommend importing the app in Godot to study its source code or [contribute](#how-to-contribute). You will need **Godot 3.4.2** or a more recent stable version of Godot 3. Otherwise, it won't run.
+We only recommend importing the app in Godot to study its source code or [contribute](#how-to-contribute). You will need **Godot 3.5 LTS** or a more recent stable version of Godot 3. Otherwise, it won't run.
 
 Please note that practice errors will trigger the debugger and pause execution in Godot, unlike when using the release build. That's normal, and you'll need to continue execution by pressing <kbd>F7</kbd> when that happens.
 
