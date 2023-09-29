@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://course/lesson-1-what-code-is-like/first_practice/WelcomeToTheApp.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [node name="WelcomeToTheApp" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="Pivot" index="3"]
 current = true
+
+[node name="AnimationTree" parent="." index="3"]
+parameters/playback = SubResource( 1 )
