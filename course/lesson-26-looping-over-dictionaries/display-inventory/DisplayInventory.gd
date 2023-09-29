@@ -15,7 +15,7 @@ func _ready() -> void:
 		node.hide()
 
 # EXPORT run
-var inventory := {
+var inventory = {
 	"healing heart": 3,
 	"gems": 5,
 	"sword": 1,

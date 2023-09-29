@@ -23,7 +23,7 @@ func reset():
 	inventory["sword"] = 0
 
 
-var inventory := {
+var inventory = {
 	"healing heart": 0,
 	"gems": 0,
 	"sword": 0,

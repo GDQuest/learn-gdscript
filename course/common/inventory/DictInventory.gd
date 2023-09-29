@@ -26,7 +26,7 @@ const ITEM_DATABASE := {
 	},
 }
 
-var inventory := {
+var inventory = {
 	"healing heart": 3,
 	"sword": 1,
 	"shield": 1,
