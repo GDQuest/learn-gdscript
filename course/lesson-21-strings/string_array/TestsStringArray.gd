@@ -12,6 +12,8 @@ func test_use_for_loop() -> String:
 		return "Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!"
 	if not  "play_animation(" in _slice.current_text:
 		return "Your code does not play any animations. Did you remember to call play_animation() in your for loop?"
+	if "play_animation(combo)" in _slice.current_text:
+		return "It seems you're passing the entire array of combos instead of a single animation name at a time."
 	return ""
 
 
