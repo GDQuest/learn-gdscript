@@ -1,10 +1,12 @@
 extends Node2D
 
+const START_CELL := Vector2(2, 0)
+
 export var board_size := Vector2(5, 5)
 export var cell_size := 64
 export var line_width := 4
 
-var cell := Vector2(2, 0)
+var cell := START_CELL
 
 onready var _label := $Label
 onready var _robot := $Robot
@@ -32,7 +34,7 @@ func move_to_bottom():
 
 
 func reset() -> void:
-	_robot.cell = Vector2(0, 1)
+	_robot.cell = START_CELL
 	_update_label()
 	
 
