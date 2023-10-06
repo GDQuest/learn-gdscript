@@ -2,8 +2,6 @@
 
 Learn GDScript From Zero is a free and open-source app for absolute beginners to learn to program with Godot's GDScript language.
 
-![](app-practice-screen.png)
-
 It's a beginner-friendly programming course.
 
 This app is the free part of a larger paid course to become a game developer: [Learn to Code From Zero, with Godot](https://gdquest.mavenseed.com/courses/learn-to-code-from-zero-with-godot).
@@ -12,22 +10,11 @@ The series is compatible with Godot 4.
 
 ## How to run the app
 
-You can run the app online here:
-
-- Latest stable release: https://gdquest.github.io/learn-gdscript/
-- Bleeding edge version: https://gdquest.github.io/learn-gdscript/staging/ (we update this version periodically as we make improvements)
+You can run the app online here: https://gdquest.github.io/learn-gdscript/
 
 Also, you can download the app for Windows, macOS, and Linux on Itch.io: https://gdquest.itch.io/learn-godot-gdscript
 
-The desktop version offers better performance and crisper text than the web version.
-
-### Importing the app in Godot to contribute
-
-You can also run the project straight in Godot by cloning the repository and importing the folder into the engine.
-
-We only recommend importing the app in Godot to study its source code or [contribute](#how-to-contribute). You will need **Godot 3.5 LTS** or a more recent stable version of Godot 3. Otherwise, it won't run.
-
-Please note that practice errors will trigger the debugger and pause execution in Godot, unlike when using the release build. That's normal, and you'll need to continue execution by pressing <kbd>F7</kbd> when that happens.
+The desktop version can offer better performance and crisper text than the web version.
 
 ## Feedback, requests, and discussions
 
@@ -68,3 +55,14 @@ This happens primarily in two cases:
 
 - The changes don't answer an issue we created or vetted.
 - The pull request's author didn't make the requested changes for over a month.
+
+### Importing the app in Godot to contribute
+
+**Warning: this is not the recommended way to run the app for learning. Use this only to study the code and contribute.**
+
+You can also run the project straight in Godot by cloning the repository and importing the folder into the engine.
+
+We only recommend importing the app in Godot to study its source code or [contribute](#how-to-contribute). You will need **Godot 3.5 LTS** or a more recent stable version of Godot 3. Otherwise, it won't run.
+
+Please note that practice errors will trigger the debugger and pause execution in Godot, unlike when using the release build. That's normal, and you'll need to continue execution by pressing <kbd>F7</kbd> when that happens.
+
