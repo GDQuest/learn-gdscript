@@ -1,0 +1,309 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-10-06 07:34+0200\n"
+"PO-Revision-Date: 2022-06-19 11:18+0000\n"
+"Last-Translator: adadaadadade <272169607@qq.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-4-drawing-a-rectangle/zh_Hans/>\n"
+"Language: zh_Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.13.1-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:14
+msgid ""
+"We'll use code created by others like we did in the previous lesson. This "
+"time, we'll solve a more complicated problem: drawing shapes."
+msgstr ""
+"我们将使用其他人创建的代码，就像我们在上一课中所做的那样。 这一次，我们将解决"
+"一个更复杂的问题：绘制形状。"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:22
+msgid "Meet the turtle"
+msgstr "遇见乌龟"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:24
+msgid ""
+"We present you: the turtle! We created the turtle to teach you how to call "
+"functions."
+msgstr "我们向您介绍：乌龟！ 我们创建了海龟来教你如何调用函数。"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:44
+#, fuzzy
+msgid ""
+"The turtle is a little machine that moves forward, turns, and draws lines "
+"along its path.\n"
+"\n"
+"To make it draw, you give it a list of instructions: on each code line, you "
+"call one specific function.\n"
+"\n"
+"We prepared several functions for you:\n"
+"\n"
+"- [code]move_forward(pixels)[/code] makes the turtle move forward over a "
+"given distance in [i]pixels[/i].  \n"
+"- [code]turn_right(degrees)[/code] makes the turtle turn clockwise by a "
+"precise amount of [i]degrees[/i].\n"
+"- [code]turn_left(degrees)[/code] works the same as [code]turn_right(degrees)"
+"[/code], except the turtle turns counter-clockwise.\n"
+"\n"
+"You'll use these functions the same way you used [code]rotate()[/code] "
+"before.\n"
+"\n"
+"The turtle draws a white line as it moves. We'll use this line to draw "
+"shapes.\n"
+"\n"
+"For example, to move the turtle 200 pixels, you would write "
+"[code]move_forward(200)[/code]."
+msgstr ""
+"乌龟是一个小机器，它会向前移动、转动并沿着它的路径画线。\n"
+"\n"
+"为了让它绘制，你给它一个指令列表：在每一行代码上，你调用一个特定的函数。\n"
+"\n"
+"我们为您准备了几个功能：\n"
+"\n"
+"- [code]move_forward(pixels)[/code] 使海龟向前移动 [i]pixels[/i] 中的给定距"
+"离。\n"
+"- [code]turn_right(degrees)[/code] 使海龟向右转动精确的 [i]degrees[/i]。\n"
+"- [code]turn_left(degrees)[/code] 与 [code]turn_right(degrees)[/code] 相同，"
+"只是海龟向左转。\n"
+"\n"
+"您将像以前使用 [code]rotate()[/code] 一样使用这些函数。\n"
+"\n"
+"乌龟在移动时会画一条白线。 我们将使用这条线来绘制形状。\n"
+"\n"
+"例如，要将海龟移动 200 像素，您可以编写 [code]move_forward(200)[/code]。"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:76
+msgid "Turning left and right"
+msgstr ""
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:78
+msgid ""
+"The functions [code]turn_left()[/code] and [code]turn_right()[/code] work "
+"the same.\n"
+"\n"
+"To turn 45 degrees to the right, you would write [code]turn_right(45)[/"
+"code].\n"
+"\n"
+"If we call [code]turn_right(45)[/code], the turtle turns 45 degrees to the "
+"right before moving on to the next instruction."
+msgstr ""
+"[code]turn_left()[/code] 和 [code]turn_right()[/code] 功能相同。\n"
+"\n"
+"要向右转 45 度，可以编写 [code]turn_right(45)[/code]。\n"
+"\n"
+"如果我们调用 [code]turn_right(45)[/code]，海龟会向右转 45 度，然后继续执行下"
+"一条指令。"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:102
+msgid ""
+"Using these instructions, we can make any two-dimensional shape we like!\n"
+"\n"
+"Try to understand the example below. \n"
+"\n"
+"In the next practice, you'll use the functions we saw above to first draw a "
+"corner, then a rectangle like this one."
+msgstr ""
+"使用这些说明，我们可以制作任何我们喜欢的二维形状！\n"
+"\n"
+"试着理解下面的例子。\n"
+"\n"
+"在下一个练习中，您将使用我们在上面看到的函数首先绘制一个角，然后绘制一个像这"
+"样的矩形。"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:124
+msgid "In the function call below, which part is the argument?"
+msgstr "在下面的函数调用中，哪一部分是函数参数？"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:125
+msgid "[code]move_forward(30)[/code]"
+msgstr "[code]move_forward(30)[/code]"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:127
+msgid ""
+"A function's arguments are all the values inside the parentheses. In this "
+"case, there's only one, but there can be multiple separated by commas.\n"
+"\n"
+"In this case, [code]move_forward[/code] is the function's name and [code]30[/"
+"code] is the argument.\n"
+"\n"
+"This function call will make the turtle move forward by [code]30[/code] "
+"pixels."
+msgstr ""
+"括号内是函数参数。当前例子中参数虽然只有一个，但是可以有多个得情况，使用逗号"
+"隔开。\n"
+"\n"
+"例子中[code]move_forward[/code]是函数名[code]30[/code]是函数参数。\n"
+"\n"
+"函数调用后海龟会向前移动[code]30[/code]个像素。"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:132
+msgid "move_forward"
+msgstr "move_forward"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:132
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:133
+msgid "30"
+msgstr "30"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:140
+msgid "The turtle uses code made specifically for this app!"
+msgstr ""
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:142
+msgid ""
+"The turtle is a little learning tool custom-made for this course, based on a "
+"proven code learning methodology. It's designed to teach you how to use and "
+"create functions.\n"
+"\n"
+"So please don't be surprised if writing code like [code]turn_left()[/code] "
+"inside of the Godot editor doesn't work! And don't worry, once you've "
+"learned the foundations, you'll see they make it faster and easier to learn "
+"Godot functions."
+msgstr ""
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:154
+msgid ""
+"Let's move on to practice! You'll get to play with the turtle functions to "
+"draw shapes."
+msgstr ""
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:162
+msgid "Drawing a Corner"
+msgstr "画一个直角"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:163
+#, fuzzy
+msgid ""
+"In this practice, we'll tell the turtle to draw a corner.\n"
+"\n"
+"The corner is made up of two lines that are [code]200[/code] pixels long. "
+"The lines are connected at each end by [code]90[/code] degrees, or right-"
+"angle.\n"
+"\n"
+"The [code]move_forward()[/code] and [code]turn_right()[/code] functions to "
+"the right draw a corner, but they're missing some arguments.\n"
+"\n"
+"Add the missing arguments so the turtle moves forward [code]200[/code] "
+"pixels, turns right [code]90[/code] degrees, then moves forward again "
+"[code]200[/code] pixels.\n"
+"\n"
+"We added the first argument for you so the turtle moves forward [code]200[/"
+"code] pixels.\n"
+"\n"
+"In the following practices, we'll draw multiple corners to create "
+"rectangles.\n"
+"\n"
+msgstr ""
+"在这个练习中，我们将告诉海龟画一个角。\n"
+"\n"
+"角由两条 [code]200[/code] 像素长的线组成。 这些线在每一端以 [code]90[/code] "
+"度或直角连接。\n"
+"\n"
+"右边的 [code]move_forward()[/code] 和 [code]turn_right()[/code] 函数画了一个"
+"角，但它们缺少一些参数。\n"
+"\n"
+"添加缺少的参数，使海龟向前移动 [code]200[/code] 像素，向右转 [code]90[/code] "
+"度，然后再次向前移动 [code]200[/code] 像素。\n"
+"\n"
+"我们为您添加了第一个参数，以便海龟向前移动 [code]200[/code] 像素。\n"
+"\n"
+"在下面的实践中，我们将绘制多个角来创建矩形。\n"
+"\n"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:187
+msgid ""
+"Use the turtle to draw a square's corner. You'll then build upon it to draw "
+"a rectangle."
+msgstr "使用海龟画一个正方形的角。 然后，您将在它的基础上绘制一个矩形。"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:192
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:240
+msgid "Drawing a Rectangle"
+msgstr "绘制一个矩形"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:193
+#, fuzzy
+msgid ""
+"Add the correct arguments to the functions [code]move_forward()[/code] and "
+"[code]turn_right()[/code] to draw a rectangle with a width of [code]200[/"
+"code] pixels, and a height of [code]120[/code] pixels.\n"
+"\n"
+"We wrote the first argument for you.\n"
+"\n"
+"In the next practice, you'll use the same functions to draw a bigger "
+"rectangle."
+msgstr ""
+"在函数[code]move_forward()[/code]和[code]turn_right()[/code]中添加正确的参"
+"数，绘制一个宽度为[code]200[/code]像素、高度为 [code]120[/code] 像素。\n"
+"\n"
+"我们为您编写了第一个参数。\n"
+"\n"
+"在下一个练习中，您将使用相同的函数来绘制一个更大的矩形。"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:213
+msgid ""
+"Based on your rectangle corner, you now need to draw a complete rectangle."
+msgstr "根据您的矩形角，您现在需要绘制一个完整的矩形。"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:218
+msgid "Drawing a Bigger Rectangle"
+msgstr "画一个更大的矩形"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:219
+msgid ""
+"Write out calls to the functions [code]move_forward()[/code] and "
+"[code]turn_right()[/code] to draw a rectangle with a width of 220 pixels, "
+"and a height of 260 pixels.\n"
+"\n"
+"We wrote the first two lines for you.\n"
+"\n"
+"Be sure to write each instruction on a separate line.\n"
+"\n"
+"Every line should start with one [code]Tab[/code] character so the computer "
+"understands it's part of the [code]draw_rectangle()[/code] function."
+msgstr ""
+"写出对函数 [code]move_forward()[/code] 和 [code]turn_right()[/code] 的调用，"
+"以绘制一个宽度为 220 像素、高度为 260 像素的矩形。\n"
+"\n"
+"我们为您编写了前两行。\n"
+"\n"
+"确保将每条指令写在单独的行上。\n"
+"\n"
+"每一行都应该以一个 [code]Tab[/code] 字符开头，以便计算机理解它是 "
+"[code]draw_rectangle()[/code] 函数的一部分。"
+
+#: course/lesson-4-drawing-a-rectangle/lesson.tres:236
+msgid ""
+"At this point, you're ready to code entirely on your own. Call functions by "
+"yourself to draw a complete rectangle."
+msgstr "此时，您已准备好完全自己编写代码。 自己调用函数绘制一个完整的矩形。"
+
+#~ msgid ""
+#~ "The function parameters are inside the parentheses in a function "
+#~ "definition.\n"
+#~ "\n"
+#~ "The [code]func[/code] keyword tells the computer you're defining a new "
+#~ "function, and [code]move_forward[/code] is the function's name."
+#~ msgstr ""
+#~ "函数参数位于函数定义的括号内。\n"
+#~ "\n"
+#~ "[code]func[/code] 关键字告诉计算机您正在定义一个新函数，而 "
+#~ "[code]move_forward[/code] 是函数的名称。"
+
+#~ msgid "func"
+#~ msgstr "func"
+
+#~ msgid "pixels"
+#~ msgstr "像素"

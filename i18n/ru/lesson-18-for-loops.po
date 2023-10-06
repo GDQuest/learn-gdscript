@@ -1,0 +1,319 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"PO-Revision-Date: 2023-09-01 23:07+0000\n"
+"Last-Translator: gsomgsom <zhelneen@yandex.ru>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-18-for-loops/ru/>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.0.1-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-18-for-loops/lesson.tres:14
+msgid ""
+"In the last lesson, we looked at [code]while[/code] loops. We found they "
+"were useful if we don't know how many times we should repeat code. \n"
+"\n"
+"However, they could result in infinite loops if we're not careful.\n"
+"\n"
+"The loop below never ends because we never increment [code]number[/code]."
+msgstr ""
+"В последнем уроке мы рассмотрели циклы [code]while[/code]. Мы обнаружили, "
+"что они полезны в случаях, когда нам не известно заранее, сколько раз "
+"следует повторить код.\n"
+"\n"
+"Однако, из-за них программа может застрять в бесконечном цикле, если мы не "
+"будем соблюдать осторожность.\n"
+"\n"
+"Приведённый ниже цикл никогда не закончится, потому что мы никогда не "
+"увеличиваем [code]number[/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:38
+msgid ""
+"There's a safer and often easier kind of loop: the [code]for[/code] loop.\n"
+"\n"
+"We'll look at it in this lesson.\n"
+"\n"
+"Unlike [code]while[/code] loops, [code]for[/code] loops don't run "
+"infinitely, so it's much less likely that you'll get bugs in your game. "
+"[b]We recommend favoring for loops over while loops because of this[/b].\n"
+"\n"
+"Let's change the code above to use a [code]for[/code] loop instead.\n"
+"\n"
+"The loop below will change the [code]cell[/code] three times."
+msgstr ""
+"Существует более безопасный и, в большинстве случаев, более простой вид "
+"цикла: цикл [code]for[/code].\n"
+"\n"
+"Мы рассмотрим его в этом уроке.\n"
+"\n"
+"В отличие от циклов [code]while[/code], циклы [code]for[/code] не могут "
+"выполняться бесконечно, поэтому, вероятность того, что их использование "
+"приведёт к ошибкам в вашей игре, гораздо меньше. [b]По этой причине мы "
+"рекомендуем использовать циклы for вместо циклов while везде, где это "
+"возможно[/b].\n"
+"\n"
+"Давайте изменим приведённый выше код с использованием цикла [code]for[/"
+"code].\n"
+"\n"
+"Цикл в примере ниже изменит [code]cell[/code] три раза."
+
+#: course/lesson-18-for-loops/lesson.tres:66
+msgid "Let's explain what's going on here."
+msgstr "Давайте рассмотрим, что здесь происходит."
+
+#: course/lesson-18-for-loops/lesson.tres:74
+msgid "The range() function"
+msgstr "Функция range()"
+
+#: course/lesson-18-for-loops/lesson.tres:76
+msgid ""
+"Godot has the helper function [code]range()[/code]. Calling [code]range(n)[/"
+"code] creates a list of numbers from [code]0[/code] to [code]n - 1[/code]. \n"
+"\n"
+"So calling [code]range(3)[/code] outputs the list of numbers [code][0, 1, 2]"
+"[/code], and [code]range(5)[/code] outputs [code][0, 1, 2, 3, 4][/code]."
+msgstr ""
+"В Godot есть вспомогательная функция [code]range()[/code]. Вызов "
+"[code]range(n)[/code] создаёт список чисел от [code]0[/code] до [code]n - "
+"1[/code].\n"
+"\n"
+"Таким образом, вызов [code]range(3)[/code] создаст список чисел [code][0, 1, "
+"2][/code], а [code]range(5)[/code] создаст список [code][0, 1, 2, 3, "
+"4][/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:86
+msgid "What list of numbers would range(6) create?"
+msgstr "Какой список чисел создаст вызов range(6)?"
+
+#: course/lesson-18-for-loops/lesson.tres:87
+msgid "What would [code]print(range(6))[/code] print to the console?"
+msgstr "Что [code]print(range(6))[/code] выведет в консоль?"
+
+#: course/lesson-18-for-loops/lesson.tres:89
+msgid ""
+"The function [code]range(n)[/code] creates a list of numbers from [code]0[/"
+"code] to [code]n - 1[/code]. The output list will start with [code]0[/code] "
+"and end with [code]5[/code].\n"
+"\n"
+"So calling [code]range(6)[/code] will output a list of six numbers which are "
+"[code][0, 1, 2, 3, 4, 5][/code].\n"
+msgstr ""
+"Функция [code]range(n)[/code] создаёт список чисел от [code]0[/code] до "
+"[code]n - 1[/code]. Выходной список будет начинаться с [code]0[/code] и "
+"заканчиваться на [code]5[/code].\n"
+"\n"
+"Поэтому вызов [code]range(6)[/code] выведет список из шести чисел: [code][0, "
+"1, 2, 3, 4, 5][/code].\n"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+#: course/lesson-18-for-loops/lesson.tres:94
+msgid "[0, 1, 2, 3, 4, 5]"
+msgstr "[0, 1, 2, 3, 4, 5]"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+msgid "[1, 2, 3, 4, 5, 6]"
+msgstr "[1, 2, 3, 4, 5, 6]"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+msgid "[0, 1, 2, 3, 4, 5, 6]"
+msgstr "[0, 1, 2, 3, 4, 5, 6]"
+
+#: course/lesson-18-for-loops/lesson.tres:101
+msgid "How for loops work"
+msgstr "Как работают циклы for"
+
+#: course/lesson-18-for-loops/lesson.tres:103
+msgid ""
+"In a [code]for[/code] loop, the computer takes each value inside a list, "
+"stores it in a temporary variable, and executes the code in the loop once "
+"per value."
+msgstr ""
+"При выполнении цикла [code]for[/code] компьютер берёт значение из списка, "
+"сохраняет его во временной переменной и выполняет код тела цикла по одному "
+"разу для каждого значения."
+
+#: course/lesson-18-for-loops/lesson.tres:123
+msgid ""
+"In the above example, for each item in the list [code][0, 1, 2][/code], "
+"Godot sets [code]number[/code] to the item, then executes the code in the "
+"[code]for[/code] loop.\n"
+"\n"
+"We'll explain arrays more throughly in the next lesson, but notice that "
+"[code]number[/code] is just a temporary variable. You create it when "
+"defining the loop, and the loop takes care of changing its value. Also, you "
+"can name this variable anything you want.\n"
+"\n"
+"This code behaves the same as the previous example:"
+msgstr ""
+"В примере ниже, для каждого элемента в списке [code][0, 1, 2][/code] Godot "
+"присваивает [code]number[/code] значение числа, а затем выполняет код тела "
+"цикла [code]for[/code].\n"
+"\n"
+"В этом примере мы выводим значение [code]number[/code] в процессе "
+"продвижения Godot через цикл. Вы создаете его при определении цикла, и цикл "
+"сам заботится об изменении своего значения. Кроме того, вы можете назвать "
+"эту переменную как угодно.\n"
+"\n"
+"Этот код ведёт себя похожим образом с кодом из предыдущего примера:"
+
+#: course/lesson-18-for-loops/lesson.tres:147
+msgid ""
+"In both examples, we print the value of the temporary variable we created: "
+"[code]number[/code] in the first example and [code]element[/code] in the "
+"second.\n"
+"\n"
+"As Godot moves through the loop, it assigns each value of the array to that "
+"variable. First, it sets the variable to [code]0[/code], then to [code]1[/"
+"code], and finally, to [code]2[/code].\n"
+"\n"
+"We can break down the instructions the loop runs. You can see how a loop is "
+"a shortcut to code that otherwise gets very long."
+msgstr ""
+"В обоих примерах мы печатаем значение созданной нами временной переменной: "
+"[code]number[/code] в первом примере и [code]element[/code] во втором.\n"
+"\n"
+"По мере прохождения цикла Godot присваивает каждое значение массива этой "
+"переменной. Сначала он присваивает переменной значение [code]0[/code], затем "
+"значение [code]1[/code] и, наконец, значение [code]2[/code].\n"
+"\n"
+"Мы можем остановить инструкции, которые выполняет цикл. Вы можете видеть, "
+"что цикл — это специальный приём упрощения кода, который другим способом "
+"становится очень длинным."
+
+#: course/lesson-18-for-loops/lesson.tres:171
+msgid ""
+"We can put whatever code we like in the loop's code block, including other "
+"function calls like [code]draw_rectangle()[/code]."
+msgstr ""
+"Мы можем поместить в блок кода цикла любой код, который нам нравится, "
+"включая вызовы других функций, таких как [code]draw_rectangle()[/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:179
+msgid "Using a for loop instead of a while loop"
+msgstr "Использование цикла for внутри цикла while"
+
+#: course/lesson-18-for-loops/lesson.tres:181
+msgid ""
+"Here's our old [code]move_to_end()[/code] function which used a [code]while[/"
+"code] loop."
+msgstr ""
+"Вот наш старая функция [code]move_to_end()[/code], которая использует цикл "
+"[code]while[/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:201
+msgid ""
+"If we use a [code]for[/code] loop instead, the code becomes a little simpler."
+msgstr ""
+"Если мы используем цикл [code]for[/code] вместо него, код станет немного "
+"проще."
+
+#: course/lesson-18-for-loops/lesson.tres:221
+msgid ""
+"Rather than constantly checking if the robot reached the end of the board, "
+"with the [code]for[/code] loop, we take the board's width beforehand, then "
+"move the robot a set amount of times.\n"
+"\n"
+"The function still works the same. You can execute it below."
+msgstr ""
+"Вместо того, чтобы каждый раз проверять, достиг ли робот конца доски, в "
+"цикле [code]for[/code] мы можем взять ширину доски перед выполнением "
+"итераций, а после — передвинуть робота требуемое количество раз.\n"
+"\n"
+"Функция всё ещё работает точно так же. Вы можете выполнить её ниже."
+
+#: course/lesson-18-for-loops/lesson.tres:243
+msgid ""
+"In the practices, we'll use [code]for[/code] loops in different ways to get "
+"you used to using them."
+msgstr ""
+"В упражнениях мы будем использовать цикл [code]for[/code] различными "
+"способами для того, чтобы вы привыкли их использовать."
+
+#: course/lesson-18-for-loops/lesson.tres:251
+msgid "Using a for loop to move to the end of the board"
+msgstr "Использование цикла for для перемещения к концу доски"
+
+#: course/lesson-18-for-loops/lesson.tres:252
+msgid ""
+"Once again, the robot has decided to stand at the top of the board.\n"
+"\n"
+"This time, use a [code]for[/code] loop in the [code]move_to_bottom()[/code] "
+"function to have it move to the bottom of the board.\n"
+"\n"
+"The board size is determined by the [code]Vector2[/code] variable "
+"[code]board_size[/code].\n"
+"\n"
+"The robot's starting cell is [code]Vector2(2, 0)[/code]."
+msgstr ""
+"Робот снова решил остановиться в верхней части доски.\n"
+"\n"
+"В этот раз используйте цикл [code]for[/code] в функции [code]move_to_bottom()"
+"[/code], чтобы переместить робота в нижнюю часть доски.\n"
+"\n"
+"Размер доски определяется переменной типа [code]Vector2[/code] — "
+"[code]board_size[/code].\n"
+"\n"
+"Стартовая ячейка робота — [code]Vector2(2, 0)[/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:268
+msgid ""
+"Use a for loop to have our robot move from the top of the board to the "
+"bottom."
+msgstr ""
+"Используйте цикл for для перемещения нашего робота из верхней части доски в "
+"нижнюю."
+
+#: course/lesson-18-for-loops/lesson.tres:273
+msgid "Improving code with a for loop"
+msgstr "Улучшение кода при помощи цикла for"
+
+#: course/lesson-18-for-loops/lesson.tres:274
+msgid ""
+"Use a [code]for[/code] loop to remove the duplicate code in the [code]run()[/"
+"code] function.\n"
+"\n"
+"In this practice, we revisit the turtle and drawing rectangles.\n"
+"\n"
+"With our new knowledge of [code]for[/code] loops, we can condense this code "
+"to take up less space and make it easier to modify.\n"
+"\n"
+"The turtle should draw three squares in a horizontal line. The squares "
+"should be 100 pixels apart."
+msgstr ""
+"Используйте цикл [code]for[/code] для удаления дубликатов кода в функции "
+"[code]run()[/code].\n"
+"\n"
+"В этом упражнении мы вернёмся к черепахе и рисованию прямоугольников.\n"
+"\n"
+"Наши новые знания циклов [code]for[/code] позволяют нам сократить этот код, "
+"чтобы он занимал меньше места и его было проще модифицировать.\n"
+"\n"
+"Черепаха должна нарисовать три квадрата горизонтально, друг за другом. "
+"Сторона квадрата должна быть равна 100 пикселям."
+
+#: course/lesson-18-for-loops/lesson.tres:297
+msgid ""
+"In the past we had to copy and paste code to draw multiple rectangles. Let's "
+"revisit previous code and improve it with a for loop."
+msgstr ""
+"В прошлом нам пришлось копировать код, чтобы нарисовать несколько "
+"прямоугольников. Давайте вернёмся к старому коду и улучшим его при помощи "
+"цикла for."
+
+#: course/lesson-18-for-loops/lesson.tres:301
+msgid "Introduction to For Loops"
+msgstr "Введение в циклы for"

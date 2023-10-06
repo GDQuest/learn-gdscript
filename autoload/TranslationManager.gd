@@ -10,10 +10,10 @@ const SUPPORTED_LOCALES := [
 	"en",
 	"es",
 	"it",
-  "fr",
-  "pt",
-  "pt_BR",
-  "tr",
+	"fr",
+	"pt",
+	"pt_BR",
+	"tr",
 ]
 
 var current_language := DEFAULT_LOCALE setget set_language

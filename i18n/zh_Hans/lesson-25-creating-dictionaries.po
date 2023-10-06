@@ -1,0 +1,295 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-03-26 17:50+0100\n"
+"PO-Revision-Date: 2022-05-08 14:10+0000\n"
+"Last-Translator: 巽星石 <xun19900424@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-25-creating-dictionaries/zh_Hans/>\n"
+"Language: zh_Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.12.1\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:14
+msgid ""
+"In the last lesson, we used an array to represent a player's inventory.\n"
+"\n"
+"With just an array of item names, though, we can't easily keep track of "
+"the amount of each item.\n"
+"\n"
+"Instead, we can bundle the item names and amounts into a single "
+"[i]dictionary[/i].\n"
+"\n"
+"A dictionary is a data structure that allows you to map pairs of values. "
+"In the pair, we call the first value a [i]key[/i] as we use it to access "
+"the second.\n"
+"\n"
+"In other words, a dictionary has a list of [i]keys[/i], and each key "
+"points to a [i]value[/i].\n"
+"\n"
+"To define a dictionary, we use curly brackets. A colon separates each key"
+" and its value. A comma separates each key and value pair."
+msgstr ""
+"在上一课中，我们使用了一个数组来表示玩家的物品栏。\n"
+"\n"
+"但是，仅使用一组项目名称，我们无法轻松跟踪每个项目的数量。\n"
+"\n"
+"相反，我们可以将项目名称和金额捆绑到一个 [i]dictionary[/i] 中。\n"
+"\n"
+"字典是一种数据结构，允许您映射成对的值。 在这对中，我们将第一个值称为 "
+"[i]key[/i]，因为我们使用它来访问第二个。\n"
+"\n"
+"换句话说，字典有一个 [i]keys[/i] 的列表，每个 key 指向一个 [i]value[/i]。\n"
+"\n"
+"要定义字典，我们使用大括号。 冒号分隔每个键及其值。 逗号分隔每个键和值对。"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:42
+msgid "Dictionaries can hold any values"
+msgstr "字典可以保存任何值"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:44
+msgid ""
+"Dictionaries can map about any value to any other value.\n"
+"\n"
+"For example, we can use the name of an item as a key and the amount as "
+"the corresponding value. This makes dictionaries excellent for keeping "
+"track of a player's inventory."
+msgstr ""
+"字典可以将任何值映射到任何其他值。\n"
+"\n"
+"例如，我们可以使用商品的名称作为键，金额作为对应的值。 "
+"这使得字典非常适合跟踪玩家的库存。"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:66
+msgid ""
+"Here we matched the name (a string) to the amount (a number). But a key "
+"could be a string, a number, or even a vector! \n"
+"\n"
+"Although we can have all of these different keys, keep in mind that every"
+" key has to be [i]unique[/i]. That means we [i]couldn't[/i] have a "
+"dictionary like the following."
+msgstr ""
+"在这里，我们将名称（字符串）与金额（数字）相匹配。 "
+"但是一个键可以是一个字符串、一个数字，甚至是一个向量！\n"
+"\n"
+"尽管我们可以拥有所有这些不同的键，但请记住，每个键都必须是 [i] 唯一的 [/i]。 "
+"这意味着我们 [i] 不能[/i] 拥有像下面这样的字典。"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:88
+msgid "We would get the following error."
+msgstr "我们会得到以下错误。"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:106
+msgid "In the above example, which key would cause an error?"
+msgstr "在上面的例子中，哪个键会导致错误？"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:109
+msgid ""
+"The key [code]\"healing heart\"[/code] appears [b]twice[/b] in the "
+"dictionary.\n"
+"\n"
+"In the above example, Godot wouldn't know whether to return "
+"[code]3[/code] or [code]8[/code] when using [code]inventory[\"healing "
+"heart\"][/code]. This is why keys need to be unique."
+msgstr ""
+"关键字 [code]\"healing heart\"[/code] 在字典中出现 [b] 两次 [/b]。\n"
+"\n"
+"在上面的例子中，Godot 在使用 [code]inventory[\"healing heart\"][/code] "
+"时不知道是返回 [code]3[/code] 还是 [code]8[/code]。 "
+"这就是为什么键需要是唯一的。"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:112
+#: course/lesson-25-creating-dictionaries/lesson.tres:113
+msgid "\"healing heart\""
+msgstr "\"healing heart\""
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:112
+msgid "\"shield\""
+msgstr "\"shield\""
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:112
+msgid "\"sword\""
+msgstr "\"sword\""
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:120
+msgid "How dictionaries work under the hood"
+msgstr "字典如何在幕后工作"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:122
+msgid ""
+"Dictionaries are also called mappings or [i]associative arrays[/i]. Under"
+" the hood, they use arrays and several functions to efficiently store and"
+" retrieve values across arrays.\n"
+"\n"
+"Precisely, dictionaries use a [i]hashing algorithm[/i]. Hashing "
+"algorithms convert one value into another.\n"
+"\n"
+"In this case, hashing consists of converting a given key into a unique "
+"whole number. The dictionary then uses that number as an array's index!\n"
+"\n"
+"That's how a dictionary works: when you give it a key, it converts it "
+"into a unique index and uses that index to retrieve the corresponding "
+"value in the computer's memory.\n"
+"\n"
+"That's also why you can't have the same key twice: it would map to the "
+"same array index, causing you to overwrite an existing value."
+msgstr ""
+"字典也称为映射或 [i] 关联数组 [/i]。 "
+"在底层，他们使用数组和几个函数来有效地跨数组存储和检索值。\n"
+"\n"
+"准确地说，字典使用[i]散列算法[/i]。 散列算法将一个值转换为另一个值。\n"
+"\n"
+"在这种情况下，散列包括将给定的键转换为唯一的整数。 "
+"然后字典将该数字用作数组的索引！\n"
+"\n"
+"这就是字典的工作原理：当你给它一个键时，它会将它转换为一个唯一的索引，并使用"
+"该索引来检索计算机内存中的相应值。\n"
+"\n"
+"这也是为什么您不能两次拥有相同的键：它会映射到相同的数组索引，导致您覆盖现有"
+"值。"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:138
+msgid "Accessing values"
+msgstr "访问值"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:140
+msgid ""
+"We access the value of keys by writing the dictionary name, with the key "
+"in between square brackets."
+msgstr "我们通过写字典名称来访问键的值，键在方括号之间。"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:168
+msgid "How would you access how many gems the player has?"
+msgstr "您将如何访问玩家拥有的宝石数量？"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:171
+msgid ""
+"We need to make sure the key is the same as we defined in the dictionary."
+"\n"
+"\n"
+"In our case, [code]var item_count = inventory[\"gems\"][/code] is correct."
+msgstr ""
+"我们需要确保键与我们在字典中定义的键相同。\n"
+"\n"
+"在我们的例子中，[code]var item_count = inventory[\"gems\"][/code] 是正确的。"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:174
+msgid "var item_count = inventory[\"gem\"]"
+msgstr "var item_count = inventory[\"gem\"]"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:174
+#: course/lesson-25-creating-dictionaries/lesson.tres:175
+msgid "var item_count = inventory[\"gems\"]"
+msgstr "var item_count = inventory[\"gems\"]"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:174
+msgid "var item_count = inventory[\"sword\"]"
+msgstr "var item_count = inventory[\"sword\"]"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:182
+msgid "Changing values"
+msgstr "修改值"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:184
+msgid ""
+"We can also change values directly, which is useful in our case for "
+"adding or removing items from the player's inventory."
+msgstr "我们还可以直接更改值，这在我们的例子中对于从玩家的库存中添加或删除项目很有用"
+"。"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:214
+msgid ""
+"In the following practices, we'll use a dictionary to create a player "
+"inventory and create a function to change the value of items."
+msgstr "在下面的实践中，我们将使用字典来创建玩家物品栏并创建一个函数来更改物品的价值"
+"。"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:222
+msgid "Creating an inventory using a dictionary"
+msgstr "使用字典创建背包"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:223
+msgid ""
+"Let's give some items to the player.\n"
+"\n"
+"We use a dictionary for the player's inventory. We defined the "
+"[code]inventory[/code] variable for you, but it contains no items yet.\n"
+"\n"
+"Give the player the following items by adding the correct keys and values"
+" to the dictionary:\n"
+"\n"
+"- Three \"healing heart\".\n"
+"- Nine \"gems\".\n"
+"- One \"sword\".\n"
+"\n"
+"The keys should be text strings, and the values whole numbers."
+msgstr ""
+"让我们给玩家一些物品。\n"
+"\n"
+"我们为玩家的库存使用字典。 我们为您定义了 [code]inventory[/code] "
+"变量，但它还没有包含任何项目。\n"
+"\n"
+"通过将正确的键和值添加到字典中，为玩家提供以下项目：\n"
+"\n"
+"——三“疗愈心”。\n"
+"- 九颗“宝石”。\n"
+"- 一把“剑”。\n"
+"\n"
+"键应该是文本字符串，值应该是整数。"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:244
+msgid ""
+"Collecting items is fun, but we need a good way to store them. Write a "
+"dictionary to display the player's items."
+msgstr "收集物品很有趣，但我们需要一种很好的方式来储存它们。 "
+"编写一个字典来显示玩家的物品。"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:249
+msgid "Increasing item counts"
+msgstr "增加项目数量"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:250
+msgid ""
+"We want to change the item counts in the player's inventory whenever the "
+"player picks up or uses an item.\n"
+"\n"
+"We've started the [code]add_item()[/code] function for you.\n"
+"\n"
+"The [code]inventory[/code] dictionary should use the "
+"[code]item_name[/code] parameter as the key to access its values, and we "
+"should increase the value by [code]amount[/code].\n"
+"\n"
+"To test this practice, we'll use your [code]add_item()[/code] function to"
+" increase the item count of Healing Heart, Gems, and Sword."
+msgstr ""
+"我们希望在玩家拾取或使用物品时更改玩家库存中的物品数量。\n"
+"\n"
+"我们已经为您启动了 [code]add_item()[/code] 函数。\n"
+"\n"
+"[code]inventory[/code] 字典应该使用 [code]item_name[/code] "
+"参数作为访问其值的键，我们应该将值增加 [code]amount[/code]。\n"
+"\n"
+"为了测试这种做法，我们将使用您的 [code]add_item()[/code] "
+"函数来增加治疗之心、宝石和剑的物品数量。"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:266
+msgid ""
+"The player might walk over a pick-up or find something in a chest, so we "
+"need a way to change the item counts in our inventory."
+msgstr "玩家可能会走过拾取物或在箱子里找到东西，所以我们需要一种方法来更改库存中的物"
+"品数量。"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:270
+msgid "Creating Dictionaries"
+msgstr "创建字典"

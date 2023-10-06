@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
 "POT-Creation-Date: 2023-05-16 09:25+0200\n"
-"PO-Revision-Date: 2022-03-26 18:20+0100\n"
+"PO-Revision-Date: 2023-10-06 07:59+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.9.0\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: course/lesson-18-for-loops/lesson.tres:14
 msgid ""
@@ -75,7 +75,6 @@ msgid "The range() function"
 msgstr "La función range()"
 
 #: course/lesson-18-for-loops/lesson.tres:76
-#, fuzzy
 msgid ""
 "Godot has the helper function [code]range()[/code]. Calling [code]range(n)[/"
 "code] creates a list of numbers from [code]0[/code] to [code]n - 1[/code]. \n"
@@ -143,7 +142,6 @@ msgstr ""
 
 # Godot sets [code]number[/code] to the item,
 #: course/lesson-18-for-loops/lesson.tres:123
-#, fuzzy
 msgid ""
 "In the above example, for each item in the list [code][0, 1, 2][/code], "
 "Godot sets [code]number[/code] to the item, then executes the code in the "
@@ -160,11 +158,12 @@ msgstr ""
 "code], Godot asigna el elemento a la variable [code]number[/code], y luego "
 "ejecuta el código en el bucle [code]for[/code].\n"
 "\n"
-"En este ejemplo, estamos imprimiendo el valor de [code]number[/code] a "
-"medida que Godot se mueve por el bucle.\n"
+"Explicaremos los arrays con más detalle en la próxima lección, pero fíjate "
+"en que [code]number[/code] es sólo una variable temporal. La creas cuando "
+"defines el bucle, y el bucle se encarga de cambiar su valor. Además, puedes "
+"nombrar esta variable como quieras.\n"
 "\n"
-"Podemos poner el código que queramos en el bloque de código del bucle, "
-"incluyendo otras llamadas a funciones como [code]draw_rectangle()[/code]."
+"Este código se comporta igual que el ejemplo anterior:"
 
 #: course/lesson-18-for-loops/lesson.tres:147
 msgid ""
@@ -179,19 +178,30 @@ msgid ""
 "We can break down the instructions the loop runs. You can see how a loop is "
 "a shortcut to code that otherwise gets very long."
 msgstr ""
+"En ambos ejemplos, imprimimos el valor de la variable temporal que hemos "
+"creado: [code]número[/code] en el primer ejemplo y [code]elemento[/code] en "
+"el segundo.\n"
+"\n"
+"A medida que Godot avanza por el bucle, asigna cada valor de la matriz a esa "
+"variable. Primero, asigna a la variable el valor [code]0[/code], luego el "
+"valor [code]1[/code] y, por último, el valor [code]2[/code].\n"
+"\n"
+"Podemos desglosar las instrucciones que ejecuta el bucle. Puedes ver cómo un "
+"bucle es un atajo para un código que, de otro modo, sería muy largo."
 
 #: course/lesson-18-for-loops/lesson.tres:171
 msgid ""
 "We can put whatever code we like in the loop's code block, including other "
 "function calls like [code]draw_rectangle()[/code]."
 msgstr ""
+"Podemos poner el código que queramos en el bloque de código del bucle, "
+"incluyendo otras llamadas a funciones como [code]draw_rectangle()[/code]."
 
 #: course/lesson-18-for-loops/lesson.tres:179
 msgid "Using a for loop instead of a while loop"
 msgstr "Utilizar un bucle for en lugar de bucles while"
 
 #: course/lesson-18-for-loops/lesson.tres:181
-#, fuzzy
 msgid ""
 "Here's our old [code]move_to_end()[/code] function which used a [code]while[/"
 "code] loop."

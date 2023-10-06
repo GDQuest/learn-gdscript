@@ -1,0 +1,272 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-06-12 11:07+0200\n"
+"PO-Revision-Date: 2023-09-01 23:07+0000\n"
+"Last-Translator: gsomgsom <zhelneen@yandex.ru>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-24-access-array-indices/ru/>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.0.1-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-24-access-array-indices/lesson.tres:14
+msgid ""
+"You learned to loop over all the values in an array using the [code]for[/"
+"code] keyword."
+msgstr ""
+"Вы научились перебирать значения массива циклом при помощи ключевого слова "
+"[code]for[/code]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:34
+msgid ""
+"But what if you need to access the third item in the player's inventory? The "
+"tenth item?\n"
+"\n"
+"There's a dedicated notation to access one element in an array by index.\n"
+"\n"
+"To do so, you use square brackets with a number inside the brackets."
+msgstr ""
+"Но что, если вам нужно получить доступ к третьему предмету в инвентаре "
+"игрока? А к десятому предмету?\n"
+"\n"
+"Для этого существует специальная нотация получения конкретного элемента "
+"массива по индексу.\n"
+"\n"
+"Для получения элемента используйте квадратные скобки с числом — индексом "
+"внутри."
+
+#: course/lesson-24-access-array-indices/lesson.tres:58
+msgid "Index zero is the [i]first[/i] element in the array."
+msgstr "Элемент под индексом ноль — это [i]первый[/i] элемент массива."
+
+#: course/lesson-24-access-array-indices/lesson.tres:78
+msgid ""
+"Index one is the [i]second[/i] element in the array, and so on.\n"
+"\n"
+"You would access the [i]fourth[/i] element in the [code]inventory[/code] "
+"array like so."
+msgstr ""
+"Элемент под индексом один — это [i]второй[/i] элемент массива, и так далее.\n"
+"\n"
+"Получить [i]четвёртый[/i] элемент массива [code]inventory[/code] можно таким "
+"образом."
+
+#: course/lesson-24-access-array-indices/lesson.tres:98
+msgid ""
+"How would you access the [i]third[/i] item in the [code]inventory[/code] "
+"array?"
+msgstr "Как получить [i]третий[/i] элемент массива [code]inventory[/code]?"
+
+#: course/lesson-24-access-array-indices/lesson.tres:101
+msgid ""
+"Indices start at zero, so the index of the [i]third[/i] item is [code]2[/"
+"code]. That's why you need to write [code]inventory[2][/code]."
+msgstr ""
+"Индексы начинаются с нуля, поэтому индекс [i]третьего[/i] предмета — это "
+"[code]2[/code]. Для получения элемента вам нужно написать [code]inventory[2]"
+"[/code]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:102
+#: course/lesson-24-access-array-indices/lesson.tres:103
+msgid "inventory[2]"
+msgstr "inventory[2]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:102
+msgid "inventory[3]"
+msgstr "inventory[3]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:110
+msgid "Accessing the last values with negative indices"
+msgstr "Получение последних значений при помощи отрицательных индексов"
+
+#: course/lesson-24-access-array-indices/lesson.tres:112
+msgid ""
+"What if you want to access the last or second-before-last item in the "
+"[code]inventory[/code]?\n"
+"\n"
+"In that case, you can use negative indices. If you write [code]-1[/code] in "
+"the brackets, you will get the last item in the array. You will get the "
+"second-to-last item if you write [code]-2[/code]."
+msgstr ""
+"Что если вы хотите получить последний или предпоследний элемент из "
+"[code]inventory[/code]?\n"
+"\n"
+"В этом случае вы можете использовать отрицательные индексы. Если указать в "
+"скобках [code]-1[/code], то вы получите последний элемент массива. Для "
+"получения предпоследнего элемента, можно использовать [code]-2[/code]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:134
+msgid ""
+"That's very convenient when you need to quickly access elements from the end "
+"of the list."
+msgstr ""
+"Это очень удобно, в случаях, когда вам нужно быстро получить последний "
+"элемент списка."
+
+#: course/lesson-24-access-array-indices/lesson.tres:142
+msgid "How would you access the third-to-last item in the inventory array?"
+msgstr "Как получить перед-предпоследний элемент из массива inventory?"
+
+#: course/lesson-24-access-array-indices/lesson.tres:145
+msgid ""
+"When using negative indices, [code]-1[/code] means the [i]last[/i] element "
+"in the array. Index [code]-2[/code] will be the second-to-last, thus "
+"[code]-3[/code] will be the third-to-last.\n"
+"\n"
+"It can be little confusing as it seems to work differently from positive "
+"indices. However, it's because there's no difference between index [code]0[/"
+"code] and [code]-0[/code]: they both point to the first item in the array."
+msgstr ""
+"При использовании отрицательных индексов, [code]-1[/code] означает "
+"[i]последний[/i] элемент массива. Индекс [code]-2[/code] — второй с конца, "
+"[code]-3[/code] третий с конца и так далее.\n"
+"\n"
+"Это может немного запутать, ведь всё выглядит так, будто отрицательные и "
+"положительные индексы работают по-разному. На самом же деле, они работают "
+"одинаково, просто между индексами [code]0[/code] и [code]-0[/code] нет "
+"разницы: они оба указывают на первый элемент массива."
+
+#: course/lesson-24-access-array-indices/lesson.tres:148
+#: course/lesson-24-access-array-indices/lesson.tres:149
+msgid "inventory[-3]"
+msgstr "inventory[-3]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:148
+msgid "inventory[-2]"
+msgstr "inventory[-2]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:156
+msgid "You can't access non-existent indices"
+msgstr "Нельзя получить отсутствующий элемент по индексу"
+
+#: course/lesson-24-access-array-indices/lesson.tres:158
+msgid ""
+"There's a catch with this syntax: if you try to access an index that does "
+"not exist, you will get an error. You have to be careful always to access "
+"existing elements in the array.\n"
+"\n"
+"There are a couple of ways you can check for valid indices. One of them is "
+"checking the array's size."
+msgstr ""
+"В этом синтаксисе есть небольшая ловушка: если вы попытаетесь получить по "
+"индексу элемент, которого не существует, вы получите ошибку. Всегда "
+"соблюдайте осторожность при получении элемента массива по индексу.\n"
+"\n"
+"Есть несколько способов, которыми можно проверить, присутствует ли элемент "
+"под индексом в массиве. Один из них — посмотреть на размер массива."
+
+#: course/lesson-24-access-array-indices/lesson.tres:170
+msgid ""
+"[b]Checking the size of the array[/b]\n"
+"\n"
+"Arrays come with a member function named [code]size()[/code]. You can call "
+"it on the array anytime to know its [i]current[/i] size."
+msgstr ""
+"[b]Проверка количества элементов в массиве[/b]\n"
+"\n"
+"Массивы имеют внутреннюю функцию [code]size()[/code]. Вы можете вызвать её в "
+"любое время, чтобы узнать [i]текущий[/i] размер массива."
+
+#: course/lesson-24-access-array-indices/lesson.tres:192
+msgid ""
+"The maximum index you can access in an array is [code]array.size() - 1[/"
+"code]: it's the last item in the array."
+msgstr ""
+"Максимальный индекс, он же индекс последнего элемента в массиве, всегда "
+"равен [code]array.size() - 1[/code]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:212
+msgid ""
+"In the following practices, you will use array indices to realign train "
+"tracks and grab the correct item in an inventory."
+msgstr ""
+"В последующих упражнениях вы будете получать элементы из массивов по "
+"индексам для починки железной дороги и вытаскивания правильных предметов из "
+"инвентаря."
+
+#: course/lesson-24-access-array-indices/lesson.tres:220
+msgid "Using the right items"
+msgstr "Использование правильных предметов"
+
+#: course/lesson-24-access-array-indices/lesson.tres:221
+msgid ""
+"In our game, the player has an inventory that works as an array under the "
+"hood.\n"
+"\n"
+"They want to equip a sword and a shield to buff their characters. Like "
+"before, we need you to find them in the array.\n"
+"\n"
+"You need to access elements in the [code]inventory[/code] array by index to "
+"do so.\n"
+"\n"
+"Call the [code]use_item()[/code] function with the item as an argument to "
+"use an item. For example, you can use the first item by calling "
+"[code]use_item(inventory[0])[/code]."
+msgstr ""
+"В нашей игре у игрока есть инвентарь, который под капотом представляет из "
+"себя массив.\n"
+"\n"
+"Игрок хочет экипировать меч и щит для того, чтобы усилить своего персонажа. "
+"Вам нужно найти правильные элементы в массиве, как вы делали это раньше.\n"
+"\n"
+"Возьмите правильные элементы из массива [code]inventory[/code] по индексам.\n"
+"\n"
+"Вызовите фунцию [code]use_item()[/code] с предметом в качестве аргумента, "
+"чтобы использовать предмет. Например, вы можете использовать первый предмет "
+"при помощи вызова [code]use_item(inventory[0])[/code]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:239
+msgid "Find the right items to use in the player's inventory."
+msgstr "Найдите правильные предметы в инвентаре игрока, чтобы их использовать."
+
+#: course/lesson-24-access-array-indices/lesson.tres:244
+msgid "Realigning the train tracks"
+msgstr "Починка железной дороги"
+
+#: course/lesson-24-access-array-indices/lesson.tres:245
+msgid ""
+"We have train tracks broken down into little chunks in our game. We use them "
+"to make modular tracks and draw circuits of all shapes and sizes.\n"
+"\n"
+"However, several chunks are misaligned. You need to find them in the "
+"[code]tracks[/code] array and pass them to the [code]align()[/code] "
+"function.\n"
+"\n"
+"To do so, you need to access the array by index.\n"
+"\n"
+"This time, though, you need to access them with [i]negative indices[/i]."
+msgstr ""
+"В нашей игре есть рельсовые пути, разбитые на маленькие части. Мы используем "
+"их для составления маршрутов любых форм и размеров.\n"
+"\n"
+"Но сейчас несколько частей расположены неправильно. Вам нужно достать их из "
+"массива [code]tracks[/code] и передать в функцию [code]align()[/code].\n"
+"\n"
+"Для этого вам нужно получить элементы массива по индексам.\n"
+"\n"
+"В этот раз используйте [i]отрицательные индексы[/i]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:263
+msgid ""
+"Some chunks of our train tracks are misaligned, and the train can't pass. "
+"Find the faulty pieces and realign them."
+msgstr ""
+"Несколько частей железной дороги расположены неправильно, это мешает поезду "
+"проехать. Найдите проблемные части и исправьте их."
+
+#: course/lesson-24-access-array-indices/lesson.tres:267
+msgid "Accessing values in arrays"
+msgstr "Получение значений из массивов"

@@ -1,0 +1,418 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"PO-Revision-Date: 2023-09-01 23:07+0000\n"
+"Last-Translator: Gevorg Kuzbashian <gevorgkuzbashian@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-5-your-first-function/ru/>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.0.1-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-5-your-first-function/lesson.tres:14
+msgid ""
+"So far, we have called existing functions that other developers wrote.\n"
+"\n"
+"In this lesson, we'll talk more about what functions are and see some "
+"examples. Then, you will learn how to define your own functions."
+msgstr ""
+"До сих пор, мы лишь вызывали существующие функции, написанные другими "
+"разработчиками.\n"
+"\n"
+"В этом уроке мы подробнее разберём что такое функции и посмотрим на "
+"некоторые примеры. В результате, вы научитесь объявлять собственные функции."
+
+#: course/lesson-5-your-first-function/lesson.tres:24
+msgid "Functions are named sequences of instructions"
+msgstr "Функции — это именованные последовательности инструкций"
+
+#: course/lesson-5-your-first-function/lesson.tres:26
+msgid ""
+"Functions are [i]sequences of instructions[/i] we give a name. We call that "
+"name an [i]identifier[/i].\n"
+"\n"
+"Using the identifier, we can get the computer to execute all the "
+"instructions inside the function as many times as we need. This is what a "
+"[i]function call[/i] does."
+msgstr ""
+"Функция — это [i]последовательность инструкций[/i], которой мы дали имя. Мы "
+"называем это имя [i]идентификатором[/i].\n"
+"\n"
+"Используя этот идентификатор, мы можем приказать компьютеру выполнить "
+"инструкции внутри функции столько раз, сколько нам нужно. Вот что делает "
+"[i]вызов функции[/i]."
+
+#: course/lesson-5-your-first-function/lesson.tres:36
+msgid "Learn more about identifiers"
+msgstr "Подробнее об идентификаторах"
+
+#: course/lesson-5-your-first-function/lesson.tres:38
+msgid ""
+"In computer programming, we talk about [i]identifiers[/i] rather than "
+"\"names\".\n"
+"\n"
+"It is because a function name is a label the computer uses to precisely "
+"[i]identify[/i] and refer to a function or other code elements.\n"
+"\n"
+"Identifiers are unique: you cannot reuse the same name in a given [i]space[/"
+"i] in your code.\n"
+"\n"
+"If you try to name two functions the same, the computer will raise an error."
+msgstr ""
+"В программировании, мы называем «имена» [i]идентификаторами[/i].\n"
+"\n"
+"Так принято, потому что имена используются компьютером, чтобы однозначно "
+"[i]идентифицировать[/i] функции или другие элементы кода.\n"
+"\n"
+"Идентификаторы уникальны: вы не можете использовать одно и то же имя для "
+"определения разных элементов в одной [i]области[/i] вашего кода.\n"
+"\n"
+"Если вы попытаетесь назвать две функции одинаково, компьютер покажет ошибку."
+
+#: course/lesson-5-your-first-function/lesson.tres:54
+msgid ""
+"If there is any code that you need to run multiple times, you can put it "
+"inside a function and give it a name.\n"
+"\n"
+"The instructions inside a function can be any code you want, and they will "
+"all run every time you call the function.\n"
+"\n"
+"Here's the example of a [code]move_and_rotate()[/code] function that moves "
+"the turtle forward and then turns it 90°."
+msgstr ""
+"Если вы хотите исполнить какой-то код несколько раз, вы можете поместить его "
+"в функцию и дать ей имя.\n"
+"\n"
+"Функция может содержать любые инструкции в виде кода, все эти инструкции "
+"будут выполнены при каждом вызове функции вами.\n"
+"\n"
+"Например, функция [code]move_and_rotate()[/code] при вызове переместит "
+"черепашку вперёд и повернёт её на 90°."
+
+#: course/lesson-5-your-first-function/lesson.tres:78
+msgid ""
+"The [code]move_and_rotate()[/code] function consists of two instructions, "
+"each on a separate line. Both of those instructions call another familiar "
+"function.\n"
+"\n"
+"You could write another function that calls [code]move_and_rotate()[/code] "
+"four times to draw a square of length 200 pixels."
+msgstr ""
+"Функция [code]move_and_rotate()[/code] состоит из двух инструкций, каждая из "
+"которых расположена на отдельной строке. Обе инструкции вызывают другие, "
+"знакомые вам функции.\n"
+"\n"
+"Вы можете написать другую функцию вызывающую [code]move_and_rotate()[/code] "
+"четыре раза, чтобы нарисовать квадрат длиной в 200 пикселей."
+
+#: course/lesson-5-your-first-function/lesson.tres:100
+msgid ""
+"Every time we call [code]move_and_rotate()[/code], the two functions "
+"[code]move_forward(200)[/code] and [code]turn_right(90)[/code] are called in "
+"sequence.\n"
+"\n"
+"In this simple example, it may not feel super useful. Here's a more useful "
+"and realistic one: a function to draw any square.\n"
+"\n"
+"The following function uses [i]parameters[/i], which we will explore in the "
+"next lesson.\n"
+"\n"
+"[i]Drag the slider to change the square's size.[/i]"
+msgstr ""
+"Каждый раз, когда мы вызываем [code]move_and_rotate()[/code], две функции "
+"[code]move_forward(200)[/code] и [code]turn_right(90)[/code] вызываются "
+"последовательно.\n"
+"\n"
+"В этом простом примере может показаться, что это не слишком полезно. Вот "
+"более полезный и реалистичный пример: функция, рисующая любой прямоугольник."
+"\n"
+"\n"
+"Эта функция использует [i]параметры[/i], которые мы изучим в следующем уроке."
+"\n"
+"\n"
+"[i]Используйте ползунок чтобы изменить размер квадрата.[/i]"
+
+#: course/lesson-5-your-first-function/lesson.tres:124
+msgid "How to define your own functions"
+msgstr "Как объявить ваши собственные функции"
+
+#: course/lesson-5-your-first-function/lesson.tres:126
+msgid ""
+"Let's break down how you define a function.\n"
+"\n"
+"A function definition starts with the [code]func[/code] keyword followed by "
+"a space, the function's name, parentheses, and a colon."
+msgstr ""
+"Давайте разберём, как же всё-таки объявить функцию.\n"
+"\n"
+"Объявление функции начинается с ключевого слова [code]func[/code], с "
+"последующим пробелом, именем функции, круглыми скобками и двоеточием."
+
+#: course/lesson-5-your-first-function/lesson.tres:148
+msgid ""
+"The instructions inside the function [b]must[/b] all start with a leading "
+"tab character. You can insert that tab character by pressing the [b]Tab[/b] "
+"key.\n"
+"\n"
+"We call those leading tabs [i]indents[/i]. They're important: the computer "
+"uses them to know which instructions are part of the same code block."
+msgstr ""
+"Все инструкции внутри функции [b]должны[/b] начинаться с ведущего символа "
+"табуляции. Вы можете вставить его с помощью кнопки [b]Tab[/b] на "
+"клавиатуре.\n"
+"\n"
+"Ведущие символы табуляции так же называют [i]отступами[/i]. Отступы важны: "
+"компьютер использует их чтобы узнать, какие инструкции являются частью "
+"одного и того же блока кода."
+
+#: course/lesson-5-your-first-function/lesson.tres:158
+msgid "Why do we use functions?"
+msgstr "Почему мы используем функции?"
+
+#: course/lesson-5-your-first-function/lesson.tres:161
+msgid ""
+"Functions are groups of instructions we reuse every time we call the "
+"function.\n"
+"\n"
+"Because we give functions a name, they also allow us to name a set of "
+"instructions, which is handy!"
+msgstr ""
+"Функции это группы инструкций, которые мы переиспользуем каждый раз, когда "
+"вызываем функцию.\n"
+"\n"
+"Поскольку мы даём функциям имена, они позволяют нам объединить множество "
+"инструкций, что очень удобно!"
+
+#: course/lesson-5-your-first-function/lesson.tres:164
+#: course/lesson-5-your-first-function/lesson.tres:165
+msgid "To reuse code multiple times. "
+msgstr "Чтобы переиспользовать код несколько раз. "
+
+#: course/lesson-5-your-first-function/lesson.tres:164
+#: course/lesson-5-your-first-function/lesson.tres:165
+msgid "To run multiple instructions in one go."
+msgstr "Чтобы исполнить несколько инструкций одним вызовом."
+
+#: course/lesson-5-your-first-function/lesson.tres:164
+#: course/lesson-5-your-first-function/lesson.tres:165
+msgid "To put a name on multiple lines of code."
+msgstr "Чтобы дать имя нескольким строчкам кода."
+
+#: course/lesson-5-your-first-function/lesson.tres:172
+msgid "Names in code have rules"
+msgstr "Правила имён в коде"
+
+#: course/lesson-5-your-first-function/lesson.tres:174
+msgid ""
+"Function identifiers cannot contain spaces. In general, names in programming "
+"languages cannot contain spaces.\n"
+"\n"
+"The computer uses spaces to detect the separation between different keywords "
+"and identifiers.\n"
+"\n"
+"Instead of spaces, in GDScript, we use underscores (\"_\"). You saw this "
+"already with functions like [code]move_forward()[/code] or "
+"[code]move_local_x()[/code]. This is the convention we follow in GDScript.\n"
+"\n"
+"There's another convention programmers use in some other programming "
+"languages.\n"
+"\n"
+"Instead of using underscores, they start words with capital letters except "
+"for the first one. With that convention, you'd write function names like "
+"[code]moveForward()[/code] or [code]moveLocalX()[/code]\n"
+"\n"
+"Identifiers also [i]have[/i] to start with a letter or an underscore; You "
+"[i]can't[/i] begin with a number, but you can use numbers after the first "
+"character."
+msgstr ""
+"Идентификаторы функций не могут содержать пробелы. В целом, имена в языках "
+"программирования не могут содержать пробелы.\n"
+"\n"
+"Компьютер использует пробелы для распознавания разделений между разными "
+"ключевыми словами и идентификаторами.\n"
+"\n"
+"Вместо пробелов в GDScript мы используем нижнее подчёркивание («_»). Вы уже "
+"видели его в названиях функций [code]move_forward()[/code] и "
+"[code]move_local_x()[/code]. Это соглашение, которому мы следуем в "
+"GDScript.\n"
+"\n"
+"Существуют и другие соглашения которым следуют программисты в других языках "
+"программирования.\n"
+"\n"
+"Вместо использования нижнего подчеркивания, они начинают все слова в "
+"идентификаторах, кроме первого, с заглавных букв. Если бы мы придерживались "
+"этого соглашения, то имена функций выглядели бы так: [code]moveForward()[/"
+"code] или [code]moveLocalX()[/code]\n"
+"\n"
+"Идентификаторы также [i]должны[/i] начинаться с буквы или нижнего "
+"подчеркивания; Вы [i]не можете[/i] начать идентификатор с числа, но числа "
+"могут использоваться после первого символа."
+
+#: course/lesson-5-your-first-function/lesson.tres:192
+msgid "Which of the following names are valid function names?"
+msgstr ""
+"Какие из перечисленных имён являются корректными идентификаторами функций?"
+
+#: course/lesson-5-your-first-function/lesson.tres:193
+msgid "Note that it's fine to use capital letters."
+msgstr "Обратите внимание, что использование заглавных букв разрешено."
+
+#: course/lesson-5-your-first-function/lesson.tres:195
+msgid ""
+"You can't name a function [code]move forward[/code] because it contains a "
+"space. Names in code cannot contain spaces.\n"
+"\n"
+"They can't start with numbers either, which is why [code]45_degree_turn[/"
+"code] is also invalid. \n"
+"\n"
+"However, having numbers elsewhere in a function name is fine. That's why "
+"[code]make3NewCharacters[/code] works."
+msgstr ""
+"Вы не можете назвать функцию [code]move forward[/code] потому что это "
+"название содержит пробел. Имена в коде не могут содержать пробелы.\n"
+"\n"
+"Так же, они не могут начинаться с чисел, поэтому название "
+"[code]45_degree_turn[/code] является некорректным.\n"
+"\n"
+"Однако иметь числа в другом месте имени функции — это нормально. Вот почему "
+"[code]make3NewCharacters[/code] является корректным именем."
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+msgid "move forward"
+msgstr "идти вперёд"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+#: course/lesson-5-your-first-function/lesson.tres:201
+msgid "jump"
+msgstr "jump"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+#: course/lesson-5-your-first-function/lesson.tres:201
+msgid "make3NewCharacters"
+msgstr "make3NewCharacters"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+#: course/lesson-5-your-first-function/lesson.tres:201
+msgid "move_forward"
+msgstr "move_forward"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+msgid "45_degree_turn"
+msgstr "45_degree_turn"
+
+#: course/lesson-5-your-first-function/lesson.tres:208
+msgid "Instantly moving the turtle to a different position"
+msgstr "Мгновенно перемещаем черепашку в другое место"
+
+#: course/lesson-5-your-first-function/lesson.tres:210
+msgid ""
+"In order to draw multiple squares in different positions, we introduce a new "
+"function for our turtle to use.\n"
+"\n"
+"The [code]jump()[/code] function picks up the turtle and places it relative "
+"to where it is.\n"
+"\n"
+"So calling [code]jump(-100, 50)[/code] moves the turtle by 100 pixels to the "
+"[b]left[/b] and 50 pixels [b]down[/b] without drawing any lines."
+msgstr ""
+"Для того, чтобы нарисовать несколько квадратов в разных местах, представляем "
+"вам новую функцию для управления нашей черепашкой.\n"
+"\n"
+"Функция [code]jump()[/code] поднимает черепашку и располагает её куда-то "
+"относительно места, где она находится на данный момент.\n"
+"\n"
+"Вызов [code]jump(-100, 50)[/code] перемещает черепашку на 100 пикселей "
+"[b]влево[/b] и 50 пикселей [b]вниз[/b] без отрисовки новых линий."
+
+#: course/lesson-5-your-first-function/lesson.tres:232
+msgid "A function to draw squares"
+msgstr "Функция для отрисовки квадратов"
+
+#: course/lesson-5-your-first-function/lesson.tres:233
+msgid ""
+"Code a function named [code]draw_square()[/code] to draw one square of "
+"length 200 pixels. The function should take no parameters.\n"
+"\n"
+"Use the [code]move_forward()[/code] and [code]turn_right()[/code] functions "
+"to instruct the turtle.\n"
+"\n"
+"In the following practice, you'll use the [code]draw_square()[/code] "
+"function to draw multiple squares by calling your own function."
+msgstr ""
+"Напишите функцию с именем [code]draw_square()[/code] чтобы нарисовать один "
+"квадрат длинной в 200 пикселей. Функция не должна принимать никаких "
+"параметров.\n"
+"\n"
+"Используйте функции [code]move_forward()[/code] и [code]turn_right()[/code] "
+"для управления черепашкой.\n"
+"\n"
+"В следующем практическом упражнении, вы будете использовать свою собственную "
+"функцию [code]draw_square()[/code] для создания нескольких квадратов."
+
+#: course/lesson-5-your-first-function/lesson.tres:246
+msgid ""
+"Until now, you've had to write code by hand, and it's boring. It's time to "
+"code a reusable function. You'll use it to draw multiple squares."
+msgstr ""
+"До сих пор, вам приходилось писать код от руки, и это скучно. Настало время "
+"создать переиспользуемые функции. Они пригодятся вам для того, чтобы "
+"нарисовать несколько квадратов."
+
+#: course/lesson-5-your-first-function/lesson.tres:251
+msgid "Drawing multiple squares"
+msgstr "Рисуем несколько квадратов"
+
+#: course/lesson-5-your-first-function/lesson.tres:252
+msgid ""
+"You have a function to draw one square: [code]draw_square()[/code]. Use it "
+"to draw three squares.\n"
+"\n"
+"We already created [code]draw_square()[/code] for you. Create a function "
+"named [code]draw_three_squares[/code] that calls [code]draw_square()[/code] "
+"three times.\n"
+"\n"
+"If you just call the function, all three squares will overlap. To stack them "
+"diagonally, call [code]jump(300, 300)[/code] between two calls to "
+"[code]draw_square()[/code].\n"
+"\n"
+"Calling [code]jump(300, 300)[/code] makes the turtle jump by 300 pixels to "
+"the right and 300 pixels down without drawing any lines."
+msgstr ""
+"У вас есть функция для того чтобы нарисовать один квадрат: "
+"[code]draw_square()[/code]. Используйте её, чтобы нарисовать три квадрата.\n"
+"\n"
+"Мы уже создали [code]draw_square()[/code] для вас. Создайте функцию с именем "
+"[code]draw_three_squares[/code] которая сможет вызвать [code]draw_square()[/"
+"code] три раза.\n"
+"\n"
+"Если вы просто вызовете функцию, все три квадрата нарисуются друг поверх "
+"друга. Чтобы разместить их по диагонали, вызовите [code]jump(300, 300)[/"
+"code] между вызовами [code]draw_square()[/code].\n"
+"\n"
+"Вызов [code]jump(300,300)[/code] заставляет черепашку прыгнуть на 300 "
+"пикселей вправо и 300 пикселей вниз, без отрисовки новых линий."
+
+#: course/lesson-5-your-first-function/lesson.tres:275
+msgid ""
+"Now you created a function to draw squares, you can reuse it by calling it "
+"multiple times."
+msgstr ""
+"Теперь, когда вы создали функцию рисующую квадраты, её можно "
+"переиспользовать — вызвать несколько раз."
+
+#: course/lesson-5-your-first-function/lesson.tres:279
+msgid "Coding Your First Function"
+msgstr "Создание вашей первой функции"

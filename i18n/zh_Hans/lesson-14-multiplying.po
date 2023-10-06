@@ -1,0 +1,302 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"PO-Revision-Date: 2022-05-08 12:00+0000\n"
+"Last-Translator: 巽星石 <xun19900424@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-14-multiplying/zh_Hans/>\n"
+"Language: zh_Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.12.1\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-14-multiplying/lesson.tres:14
+msgid ""
+"Our robot's health is always between [code]0[/code] and [code]100[/code].\n"
+"\n"
+"But as our robot fights, we want to increase its strength and toughness.\n"
+"\n"
+"When a character levels up, it might deal more damage to enemies, gain new "
+"abilities or, in our case, gain more health."
+msgstr ""
+"我们机器人的血量状况始终介于 [code]0[/code] 和 [code]100[/code] 之间。\n"
+"\n"
+"但是当我们的机器人战斗时，我们想要增加它的力量和韧性。\n"
+"\n"
+"当一个角色升级时，它可能会对敌人造成更多伤害，获得新的能力，或者在我们的例子"
+"中，获得更多的血量。"
+
+#: course/lesson-14-multiplying/lesson.tres:28
+msgid ""
+"We define a [code]level[/code] variable to keep track of the level of the "
+"robot. It starts at level one.\n"
+"\n"
+"When the robot has defeated enough enemies, we call the [code]level_up()[/"
+"code] function to increment the robot's level."
+msgstr ""
+"我们定义了一个 [code]level[/code] 变量来跟踪机器人的等级。它从第一级开始。\n"
+"\n"
+"当机器人击败足够多的敌人时，我们调用 [code]level_up()[/code] 函数来增加机器人"
+"的等级。"
+
+#: course/lesson-14-multiplying/lesson.tres:50
+msgid ""
+"As we briefly saw in the last lesson, our robot could have a range of "
+"variables that could increase when it levels up."
+msgstr ""
+"正如我们在上一课中简要介绍的那样，我们的机器人可能有一系列变量，当它升级时可"
+"能会增加。"
+
+#: course/lesson-14-multiplying/lesson.tres:70
+#, fuzzy
+msgid ""
+"In this lesson, we'll just focus on increasing the robot's [code]max_health[/"
+"code].\n"
+"\n"
+"The variable [code]max_health[/code] is the maximum amount the robot's "
+"[code]health[/code] can be. We change our [code]heal()[/code] function to "
+"use this variable."
+msgstr ""
+"在本课中，我们将只关注增加机器人的 [code]max_health[/code]。\n"
+"\n"
+"变量 [code]max_health[/code] 是机器人的 [code]血量[/code] 可以达到的最大值。"
+"我们改变我们的 [code]take_damage()[/code] 函数来使用这个变量。"
+
+#: course/lesson-14-multiplying/lesson.tres:92
+msgid ""
+"We could add [code]5[/code] to the [code]max_health[/code] every time the "
+"robot levels up."
+msgstr ""
+"每次机器人升级时，我们可以将 [code]5[/code] 添加到 [code]max_health[/code]。"
+
+#: course/lesson-14-multiplying/lesson.tres:112
+msgid ""
+"This would increase [code]max_health[/code] the same amount every time.\n"
+"\n"
+"If we graphed [code]max_health[/code], it'd look something like this."
+msgstr ""
+"这将每次增加 [code]max_health[/code] 相同的数量。\n"
+"\n"
+"如果我们绘制 [code]max_health[/code]，它看起来像这样。"
+
+#: course/lesson-14-multiplying/lesson.tres:134
+msgid ""
+"This growth is [b]linear[/b].\n"
+"\n"
+"In our case, we want a feeling of more and more power as the robot levels "
+"up.\n"
+"\n"
+"We want a graph like this."
+msgstr ""
+"这种增长是[b]线性[/b]。\n"
+"\n"
+"在我们的例子中，我们希望随着机器人的升级而感受到越来越强大的力量。\n"
+"\n"
+"我们想要这样的图表。"
+
+#: course/lesson-14-multiplying/lesson.tres:158
+msgid ""
+"This growth is [b]exponential[/b].\n"
+"\n"
+"With each level, more [code]max_health[/code] is added than the previous "
+"level up.\n"
+"\n"
+"To get the exponential growth, we multiply the [code]max_health[/code] by an "
+"amount greater than [code]1[/code] each time the robot levels up.\n"
+"\n"
+"To multiply values together, we use [code]*[/code]."
+msgstr ""
+"这种增长是[b]指数[/b]。\n"
+"\n"
+"每个级别都会添加比上一个级别更多的 [code]max_health[/code]。\n"
+"\n"
+"为了获得指数增长，每次机器人升级时，我们将 [code]max_health[/code] 乘以大于 "
+"[code]1[/code] 的数量。\n"
+"\n"
+"要将值相乘，我们使用 [code]*[/code]。"
+
+#: course/lesson-14-multiplying/lesson.tres:172
+msgid "What is the value of damage?"
+msgstr "伤害的值是多少？"
+
+#: course/lesson-14-multiplying/lesson.tres:173
+msgid ""
+"[code]\n"
+"var level = 5\n"
+"var power = 3\n"
+"\n"
+"func calculate_damage():\n"
+"\tvar damage = power * level\n"
+"[/code]"
+msgstr ""
+"[code]\n"
+"var level = 5\n"
+"var power = 3\n"
+"\n"
+"func calculate_damage():\n"
+"\tvar damage = power * level\n"
+"[/code]"
+
+#: course/lesson-14-multiplying/lesson.tres:181
+msgid ""
+"We multiply [code]power[/code] by [code]level[/code] using [code]*[/code] to "
+"get the result of [code]15[/code]."
+msgstr ""
+"我们使用 [code]*[/code] 将 [code]power[/code] 乘以 [code]level[/code] 得到 "
+"[code]15[/code] 的结果。"
+
+#: course/lesson-14-multiplying/lesson.tres:182
+#: course/lesson-14-multiplying/lesson.tres:183
+msgid "15"
+msgstr "15"
+
+#: course/lesson-14-multiplying/lesson.tres:182
+msgid "9"
+msgstr "9"
+
+#: course/lesson-14-multiplying/lesson.tres:182
+msgid "10"
+msgstr "10"
+
+#: course/lesson-14-multiplying/lesson.tres:192
+msgid ""
+"We can use [code]*=[/code] in the same way as [code]-=[/code] and [code]+=[/"
+"code]."
+msgstr ""
+"我们可以像使用[code]-=[/code]和[code]+=[/code]一样使用[code]*=[/code]。"
+
+#: course/lesson-14-multiplying/lesson.tres:200
+msgid "What is the value of damage now?"
+msgstr "现在伤害值是多少？"
+
+#: course/lesson-14-multiplying/lesson.tres:201
+msgid ""
+"[code]\n"
+"var level = 5\n"
+"var power = 3\n"
+"\n"
+"func calculate_damage():\n"
+"\tvar damage = power * level\n"
+"\tdamage *= 2\n"
+"[/code]"
+msgstr ""
+"[code]\n"
+"var level = 5\n"
+"var power = 3\n"
+"\n"
+"func calculate_damage():\n"
+"\tvar damage = power * level\n"
+"\tdamage *= 2\n"
+"[/code]"
+
+#: course/lesson-14-multiplying/lesson.tres:210
+msgid ""
+"The value of [code]damage[/code] starts as [code]15[/code].\n"
+"\n"
+"Then, [code]damage *= 2[/code] multiplies it by [code]2[/code] to get "
+"[code]30[/code]."
+msgstr ""
+"[code]damage[/code] 的值以 [code]15[/code] 开头。\n"
+"\n"
+"然后，[code]damage *= 2[/code] 乘以 [code]2[/code] 得到 [code]30[/code]。"
+
+#: course/lesson-14-multiplying/lesson.tres:213
+#: course/lesson-14-multiplying/lesson.tres:214
+msgid "30"
+msgstr "30"
+
+#: course/lesson-14-multiplying/lesson.tres:213
+msgid "13"
+msgstr "13"
+
+#: course/lesson-14-multiplying/lesson.tres:213
+msgid "25"
+msgstr "25"
+
+#: course/lesson-14-multiplying/lesson.tres:223
+msgid ""
+"Let's level up our robot and add exponential growth to [code]max_health[/"
+"code]."
+msgstr "让我们升级我们的机器人并将指数增长添加到 [code]max_health[/code]。"
+
+#: course/lesson-14-multiplying/lesson.tres:243
+msgid ""
+"In the practices, you'll increase the robot's [code]max_health[/code] and "
+"add a special ability to our robot to make it extra tough at high levels."
+msgstr ""
+"在练习中，您将增加机器人的 [code]max_health[/code] 并为我们的机器人添加特殊能"
+"力，使其在高水平时更加坚韧。"
+
+#: course/lesson-14-multiplying/lesson.tres:251
+msgid "Increasing maximum health exponentially"
+msgstr "成倍增加最大生命值"
+
+#: course/lesson-14-multiplying/lesson.tres:252
+msgid ""
+"Let's make the robot stronger when it levels up.\n"
+"\n"
+"Add to the [code]level_up()[/code] function so it does the following:\n"
+"\n"
+"- Increases [code]level[/code] by one.\n"
+"- Increases [code]max_health[/code] by 10%."
+msgstr ""
+"让机器人在升级时变得更强大。\n"
+"\n"
+"添加到 [code]level_up()[/code] 函数，使其执行以下操作：\n"
+"\n"
+"- 将 [code]level[/code] 增加一。\n"
+"- 将 [code]max_health[/code] 提高 10%。"
+
+#: course/lesson-14-multiplying/lesson.tres:270
+msgid ""
+"We want our robot to increase in strength as it levels up. Let's increase "
+"its health exponentially!"
+msgstr "我们希望我们的机器人随着它的升级而增加强度。让我们成倍地增加它的健康！"
+
+#: course/lesson-14-multiplying/lesson.tres:275
+msgid "Reducing damage at higher levels"
+msgstr "降低更高级别的伤害"
+
+#: course/lesson-14-multiplying/lesson.tres:276
+msgid ""
+"When our robot's [code]level[/code] is [code]3[/code] or more, we want it to "
+"take a lot less damage.\n"
+"\n"
+"Add to the [code]take_damage()[/code] function so the following happens:\n"
+"\n"
+"- [code]if[/code] the robot's [code]level[/code] is greater than [code]2[/"
+"code], reduce the damage [code]amount[/code] by 50%\n"
+"\n"
+"The robot is level 3. An enemy is going to attack for 10 damage. This damage "
+"should reduce to 5."
+msgstr ""
+"当我们的机器人的 [code]level[/code] 为 [code]3[/code] 或更高时，我们希望它受"
+"到的伤害更少。\n"
+"\n"
+"添加到 [code]take_damage()[/code] 函数，这样会发生以下情况：\n"
+"\n"
+"- [code]if[/code]机器人的[code]level[/code]大于[code]2[/code]，减少"
+"[code]amount[/code]伤害50%\n"
+"\n"
+"机器人是 3 级。一个敌人会攻击 10 点伤害。这个伤害应该减少到5。"
+
+#: course/lesson-14-multiplying/lesson.tres:299
+msgid ""
+"At higher levels, we want our robot to be super tough and take even less "
+"damage!"
+msgstr "在更高的等级上，我们希望我们的机器人超级强悍并且受到更少的伤害！"
+
+#: course/lesson-14-multiplying/lesson.tres:303
+msgid "Multiplying"
+msgstr "乘法"

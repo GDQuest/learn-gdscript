@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
 "POT-Creation-Date: 2023-05-16 09:25+0200\n"
-"PO-Revision-Date: 2022-06-12 11:27+0200\n"
+"PO-Revision-Date: 2023-10-06 08:01+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.9.0\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: course/lesson-11-time-delta/lesson.tres:14
 msgid ""
@@ -60,7 +60,7 @@ msgstr ""
 
 #: course/lesson-11-time-delta/lesson.tres:50
 msgid "This sounds like Frames Per Second..."
-msgstr ""
+msgstr "Esto suena como Frames Per Second (Fotograma Por Segundo)..."
 
 #: course/lesson-11-time-delta/lesson.tres:52
 msgid ""
@@ -132,7 +132,6 @@ msgid "Frames take varying amounts of time to calculate"
 msgstr "Los fotogramas tardan diferentes cantidades de tiempo en calcularse"
 
 #: course/lesson-11-time-delta/lesson.tres:93
-#, fuzzy
 msgid ""
 "Depending on the game, the computer, and what the game engine needs to "
 "calculate, frames take more or less time to display.\n"
@@ -173,14 +172,20 @@ msgstr ""
 "completar el [b]fotograma anterior[/b].\n"
 "\n"
 "Podemos utilizarlo para asegurarnos de que las variaciones entre fotogramas "
-"no hacen que la simulación del juego sea poco fiable."
+"no hacen que la simulación del juego sea poco fiable.\n"
+"\n"
+"Esto es porque los distintos ordenadores funcionan de forma diferente, por "
+"lo que un ordenador rápido tendrá más fotogramas por segundo que uno lento.\n"
+"\n"
+"Si ignoramos [code]delta[/code], la experiencia de juego variará en función "
+"del ordenador. Delta ayuda a que la experiencia de juego sea uniforme para "
+"todos."
 
 #: course/lesson-11-time-delta/lesson.tres:115
 msgid "What do we know about delta?"
 msgstr "¿Qué sabemos sobre delta?"
 
 #: course/lesson-11-time-delta/lesson.tres:118
-#, fuzzy
 msgid ""
 "[code]delta[/code] is the time it took Godot to complete the previous frame "
 "in seconds.\n"
@@ -209,7 +214,6 @@ msgstr "Varía en cada fotograma."
 
 #: course/lesson-11-time-delta/lesson.tres:123
 #: course/lesson-11-time-delta/lesson.tres:124
-#, fuzzy
 msgid "It's the time it took Godot to complete the previous frame."
 msgstr "Es el tiempo que le toma a Godot completar el fotograma anterior."
 

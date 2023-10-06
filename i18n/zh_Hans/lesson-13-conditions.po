@@ -1,0 +1,403 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"PO-Revision-Date: 2023-09-14 03:34+0000\n"
+"Last-Translator: KeJun <kejun1997@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-13-conditions/zh_Hans/>\n"
+"Language: zh_Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.0.1-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-13-conditions/lesson.tres:14
+msgid ""
+"In previous lessons, we decreased and increased a character's health, but "
+"there was no limit to how much health they could have."
+msgstr ""
+"在之前的课程中，我们减少和增加了角色的生命值，但他们可以拥有的生命值没有限"
+"制。"
+
+#: course/lesson-13-conditions/lesson.tres:34
+msgid ""
+"As a result, the player could increase their character's health "
+"indefinitely, which we do not want."
+msgstr "结果，玩家可以无限期地增加角色的生命值，这是我们不希望的。"
+
+#: course/lesson-13-conditions/lesson.tres:52
+msgid "What happens to health when we damage our character?"
+msgstr "当我们销毁我们的角色时，健康会发生什么？"
+
+#: course/lesson-13-conditions/lesson.tres:53
+msgid ""
+"Suppose our character has [code]100[/code] health.\n"
+"\n"
+"What would the value of health be if we called [code]take_damage(25)[/code] "
+"[b]five times[/b]?"
+msgstr ""
+"假设我们的角色有 [code]100[/code] 健康。\n"
+"\n"
+"如果我们调用 [code]take_damage(25)[/code] [b]五次[/b]，health的值是多少？"
+
+#: course/lesson-13-conditions/lesson.tres:57
+msgid ""
+"Calling [code]take_damage(25)[/code] five times would subtract a total of "
+"[code]125[/code] from [code]100[/code].\n"
+"\n"
+"100\n"
+"75\n"
+"50\n"
+"25\n"
+"0\n"
+"-25"
+msgstr ""
+"调用 [code]take_damage(25)[/code] 五次将从 [code]100[/code] 中减去总共 "
+"[code]125[/code]。\n"
+"\n"
+"100\n"
+"75\n"
+"50\n"
+"25\n"
+"0\n"
+"-25"
+
+#: course/lesson-13-conditions/lesson.tres:65
+#: course/lesson-13-conditions/lesson.tres:66
+msgid "-25"
+msgstr "-25"
+
+#: course/lesson-13-conditions/lesson.tres:65
+msgid "25"
+msgstr "25"
+
+#: course/lesson-13-conditions/lesson.tres:65
+msgid "0"
+msgstr "0"
+
+#: course/lesson-13-conditions/lesson.tres:75
+msgid ""
+"We can use conditions to run actions [b]selectively[/b].\n"
+"\n"
+"Conditions make your code branch into two paths: if the condition is met, "
+"the computer will run the corresponding instructions. Otherwise, those "
+"instructions will not run at all."
+msgstr ""
+"我们可以使用条件来[b]有选择地[/b]运行动作。\n"
+"\n"
+"条件使你的代码分支成两条路径：如果条件满足，计算机将运行相应的指令。否则，这"
+"些指令将根本不会运行。"
+
+#: course/lesson-13-conditions/lesson.tres:87
+msgid ""
+"Video games and other computer programs are full of conditions. For example, "
+"game input largely relies on conditions: [i]if[/i] the player presses the "
+"button on a gamepad, the character jumps."
+msgstr ""
+"视频游戏和其他计算机程序充满了条件。例如，游戏输入很大程度上依赖于条件：[i]如"
+"果[/i]玩家按下游戏手柄上的按钮，角色就会跳跃。"
+
+#: course/lesson-13-conditions/lesson.tres:107
+#, fuzzy
+msgid ""
+"When the computer checks a condition, this is called [b]to evaluate[/b] a "
+"condition. All conditions [b]evaluate[/b] to either [code]true[/code] or "
+"[code]false[/code].\n"
+"\n"
+"Either the player is pressing the button, or not. Either the character is "
+"touching an enemy, or not.\n"
+"\n"
+"In our case, [i]if[/i] the health goes over a maximum value, we want to "
+"reset it to the maximum.\n"
+"\n"
+"To define a condition, we use the [code]if[/code] keyword. We write a line "
+"starting with [code]if[/code], [ignore]type the condition to evaluate, and "
+"end the line with a colon."
+msgstr ""
+"当计算机检查一个条件时，这称为 [b] 来评估 [/b] 一个条件。所有条件 [b]评估[/"
+"b] 为 [code]true[/code] 或 [code]false[/code]。\n"
+"\n"
+"玩家正在按下按钮，或者没有。角色正在接触敌人，或者没有。\n"
+"\n"
+"在我们的例子中，[i]如果[/i] 生命值超过最大值，我们希望将其重置为最大值。\n"
+"\n"
+"要定义条件，我们使用 [code]if[/code] 关键字。我们写一行以 [code]if[/code] 开"
+"头，键入要评估的条件，并以冒号结束该行。"
+
+#: course/lesson-13-conditions/lesson.tres:133
+#, fuzzy
+msgid ""
+"Notice the [code]>[/code] comparison sign. We read this symbol as \"greater "
+"than\".\n"
+"\n"
+"We've seen how function definitions use a colon at the end of the first line "
+"and nest content inside.\n"
+"\n"
+"In GDScript, this syntax is a recurring pattern for all code blocks.\n"
+"\n"
+"The computer knows which instructions belong to the condition because they "
+"are indented."
+msgstr ""
+"注意 [code]>[/code] 比较符号。我们将此符号读作“大于”。\n"
+"\n"
+"我们已经看到函数定义如何在第一行末尾使用冒号并在其中嵌套内容。\n"
+"\n"
+"在 GDScript 中，这种语法是所有代码块的重复模式。\n"
+"\n"
+"计算机知道哪些指令属于该条件，因为它们是缩进的。"
+
+#: course/lesson-13-conditions/lesson.tres:157
+msgid "Comparisons"
+msgstr "比较"
+
+#: course/lesson-13-conditions/lesson.tres:159
+msgid ""
+"In the above example, we used the [code]>[/code] syntax to mean \"greater "
+"than\".\n"
+"\n"
+"We can compare numbers in other ways too.\n"
+"\n"
+"[code]>[/code] means \"greater than\"\n"
+"[code]<[/code] means \"less than\"\n"
+"[code]==[/code] means \"equal to\"\n"
+"[code]!=[/code] means \"not equal to\"\n"
+"\n"
+"Here's how we might use these in [code]if[/code] statements.\n"
+msgstr ""
+"在上面的示例中，我们使用 [code]>[/code] 语法来表示“大于”。\n"
+"\n"
+"我们也可以用其他方式比较数字。\n"
+"\n"
+"[code]>[/code] 意思是“大于”\n"
+"[code]<[/code] 意思是“小于”\n"
+"[code]==[/code] 意思是“等于”\n"
+"[code]!=[/code] 表示“不等于”\n"
+"\n"
+"下面是我们如何在 [code]if[/code] 语句中使用它们。\n"
+
+#: course/lesson-13-conditions/lesson.tres:187
+msgid "What does \"pass\" do in the code?"
+msgstr "在代码中，\"pass \"有什么作用？"
+
+#: course/lesson-13-conditions/lesson.tres:189
+msgid ""
+"The [code]pass[/code] keyword prevents errors in our code when a line cannot "
+"be empty.\n"
+"\n"
+"For example, we must have a line of code after a function definition or an "
+"[code]if[/code] block. When you don't know what to write yet, you can use "
+"the [code]pass[/code] keyword as a placeholder, and Godot won't give any "
+"errors.\n"
+"\n"
+"In the previous example, if there was nothing below the [code]if[/code] "
+"lines, Godot would give us an \"Expected an indented block after 'if' \" "
+"error."
+msgstr ""
+"当一行代码不能为空时，[code]pass[/code] 关键字可以防止代码出错。\n"
+"\n"
+"例如，我们必须在函数定义或 [code]if[/code] "
+"代码块之后写一行代码。当你还不知道要写什么时，可以使用 [code]pass[/code] "
+"关键字作为占位符，这样 Godot 就不会报错了。\n"
+"\n"
+"在上一个示例中，如果 [code]if[/code] 行下面没有任何内容，Godot 就会抛出 "
+"\"Expected an indented block after 'if' \" 的错误。"
+
+#: course/lesson-13-conditions/lesson.tres:201
+msgid "Which of these statements are true?"
+msgstr "这些陈述中哪些是正确的？"
+
+#: course/lesson-13-conditions/lesson.tres:204
+msgid ""
+"The comparison [code]3 > 1[/code] means \"three is greater than one\" which "
+"is [b]true[/b].\n"
+"The comparison [code]2 < 3[/code] means \"two is less than three\" which is "
+"[b]true[/b].\n"
+"The comparison [code]1 != 3[/code] means \"one is not equal to three\" which "
+"is [b]true[/b].\n"
+"\n"
+"The comparison [code]2 == 1[/code] means \"two is equal to one\" which is "
+"[b]false[/b].\n"
+"The comparison [code]3 < 1[/code] means \"three is less than one\" which is "
+"[b]false[/b]."
+msgstr ""
+"比较 [code]3 > 1[/code] 表示“三大于一”，为 [b]true[/b]。\n"
+"比较 [code]2 < 3[/code] 表示“二小于三”，为 [b]true[/b]。\n"
+"比较 [code]1 != 3[/code] 表示“一不等于三”，为 [b]true[/b]。\n"
+"\n"
+"比较 [code]2 == 1[/code] 表示“二等于一”，为 [b]false[/b]。\n"
+"比较 [code]3 < 1[/code] 表示“三小于一”，为 [b]false[/b]。"
+
+#: course/lesson-13-conditions/lesson.tres:210
+#: course/lesson-13-conditions/lesson.tres:211
+msgid "3 > 1"
+msgstr "3 > 1"
+
+#: course/lesson-13-conditions/lesson.tres:210
+msgid "2 == 1"
+msgstr "2 == 1"
+
+#: course/lesson-13-conditions/lesson.tres:210
+#: course/lesson-13-conditions/lesson.tres:211
+msgid "2 < 3"
+msgstr "2 < 3"
+
+#: course/lesson-13-conditions/lesson.tres:210
+#: course/lesson-13-conditions/lesson.tres:211
+msgid "1 != 3"
+msgstr "1 != 3"
+
+#: course/lesson-13-conditions/lesson.tres:210
+msgid "3 < 1"
+msgstr "3 < 1"
+
+#: course/lesson-13-conditions/lesson.tres:218
+msgid "Or else..."
+msgstr "亦或..."
+
+#: course/lesson-13-conditions/lesson.tres:220
+msgid ""
+"The [code]if[/code] keyword comes with a complementary [code]else[/code] "
+"keyword.\n"
+"\n"
+"You can write an [code]else[/code] block after an [code]if[/code] block, "
+"like so."
+msgstr ""
+"[code]if[/code] 关键字带有一个搭配的 [code]else[/code] 关键字。\n"
+"\n"
+"您可以在 [code]if[/code] 块之后编写 [code]else[/code] 块，就像这样。"
+
+#: course/lesson-13-conditions/lesson.tres:242
+msgid ""
+"The [code]else[/code] block will run whenever the condition above it isn't "
+"met."
+msgstr "只要不满足上面的条件，[code]else[/code] 块就会运行。"
+
+#: course/lesson-13-conditions/lesson.tres:252
+msgid ""
+"In the following practices, we'll use conditions and improve the way our "
+"character's health changes so it has limits."
+msgstr ""
+"在接下来的实践中，我们将使用条件并改进角色血量变化的方式，使其具有限制。"
+
+#: course/lesson-13-conditions/lesson.tres:260
+msgid "Using Comparisons"
+msgstr "使用比较"
+
+#: course/lesson-13-conditions/lesson.tres:261
+#, fuzzy
+msgid ""
+"This series of [code]if[/code] statements is all wrong. Change the "
+"comparisons so each comparison matches the instruction below it.\n"
+"\n"
+"Keep the values and statements as they are; only change the comparison "
+"signs.\n"
+"\n"
+"As a reminder, the comparison signs are:\n"
+"[code]\n"
+"> greater than\n"
+"< less than\n"
+"== equal to\n"
+"!= not equal to\n"
+"[/code]\n"
+"\n"
+"The line [code]health < 5:[/code] means \"health is less than 5\".\n"
+"\n"
+"Because [code]health = 100[/code], this is false so [code]print(\"health is "
+"greater than five.\")[/code] won't run."
+msgstr ""
+"这一系列 [code]if[/code] 语句都是错误的。更改比较，使每个比较与下面的指令相匹"
+"配。\n"
+"\n"
+"保持原样的价值观和陈述；只更改比较符号。\n"
+"\n"
+"提醒一下，比较符号是：\n"
+"[code]\n"
+"> 大于\n"
+"< 小于\n"
+"== 等于\n"
+"!= 不等于\n"
+"[/code]\n"
+"\n"
+"[code]health < 5:[/code] 行的意思是“健康小于 5”。\n"
+"\n"
+"因为 [code]health = 100[/code]是错误的，所以 [code]print(\"health is greater "
+"than 5.\")[/code] 不会运行。"
+
+#: course/lesson-13-conditions/lesson.tres:297
+msgid ""
+"Comparing values allows us to make decisions in code. But there's something "
+"wrong with these statements.."
+msgstr "比较值允许我们在代码中做出决定。但是这些说法有问题.."
+
+#: course/lesson-13-conditions/lesson.tres:302
+msgid "Limiting Healing"
+msgstr "限制愈合"
+
+#: course/lesson-13-conditions/lesson.tres:303
+msgid ""
+"We have a heal function that adds an amount to the character's health.\n"
+"\n"
+"Add to the function so the character's health is never greater than "
+"[code]80[/code]."
+msgstr ""
+"我们有一个治疗功能，可以增加角色的生命值。\n"
+"\n"
+"添加到函数中，使角色的生命值永远不会超过 [code]80[/code]。"
+
+#: course/lesson-13-conditions/lesson.tres:315
+msgid ""
+"As much as we might like, we don't want our robot to have too much health. "
+"Limit how much healing the robot can take."
+msgstr ""
+"尽管我们可能喜欢，我们不希望我们的机器人有太多的血量。限制机器人可以进行多少"
+"治疗。"
+
+#: course/lesson-13-conditions/lesson.tres:320
+msgid "Preventing Health from Going Below Zero"
+msgstr "防止血量低于零"
+
+#: course/lesson-13-conditions/lesson.tres:321
+msgid ""
+"When the robot takes damage, its health can be negative.\n"
+"\n"
+"We might want to display the health number on screen, like in Japanese "
+"RPGs.\n"
+"\n"
+"We don't want negative numbers. We want to stop at zero instead.\n"
+"\n"
+"Calling the function should reduce [code]health[/code] by [code]amount[/"
+"code].\n"
+"\n"
+"If [code]health[/code] goes below [code]0[/code], set it to [code]0[/code] "
+"again."
+msgstr ""
+"当机器人受到伤害时，它的血量可能变成负的。\n"
+"\n"
+"我们可能想在屏幕上显示血量的数字，就像在日式RPG 中一样。\n"
+"\n"
+"我们不想要负数。相反，我们想停在零。\n"
+"\n"
+"调用这一函数会将 [code]health[/code] 减少 [code]amount[/code]大小 。\n"
+"\n"
+"如果 [code]health[/code] 低于 [code]0[/code]，请再次将其设置为 [code]0[/"
+"code]。"
+
+#: course/lesson-13-conditions/lesson.tres:339
+msgid ""
+"Having a negative health value doesn't make a lot of sense. Make sure the "
+"robot's health can't go below zero."
+msgstr "具有负数的血量并没有多大意义。确保机器人的血量不能低于零。"
+
+#: course/lesson-13-conditions/lesson.tres:343
+msgid "Conditions"
+msgstr "条件"

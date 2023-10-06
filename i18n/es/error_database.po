@@ -8,17 +8,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2023-05-16 09:25+0200\n"
-"PO-Revision-Date: 2022-06-12 11:18+0200\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2023-10-06 07:34+0200\n"
+"PO-Revision-Date: 2023-09-12 19:49+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/error-explanations/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 "Generated-By: Babel 2.9.0\n"
-"X-Generator: Poedit 3.0.1\n"
 
 #. Reference: IN_EXPECTED_AFTER_IDENTIFIER
 #: script_checking/error_database.csv:40
@@ -32,6 +33,14 @@ msgid ""
 "creates a new variable with the desired name and assigns each element of the "
 "array to it."
 msgstr ""
+"Obtienes este error cuando el nombre entre [code]for[/code] y [code]in[/"
+"code] no es un nombre de variable válido, o te falta la palabra clave "
+"[code]in[/code].\n"
+"\n"
+"En un bucle [code]for[/code], la palabra clave [code]in[/code] sólo acepta "
+"un nombre de variable temporal válido para asignar valores en cada iteración "
+"del bucle. El bucle crea una nueva variable con el nombre deseado y le "
+"asigna cada elemento del array."
 
 #. Reference: IN_EXPECTED_AFTER_IDENTIFIER
 #: script_checking/error_database.csv:40
@@ -50,6 +59,19 @@ msgid ""
 "[code]for cell_position in cell_positions_array:\n"
 "    cell_position.x += 1.0[/code]"
 msgstr ""
+"Para solucionar este error, debes asegurarte de que el nombre entre las "
+"palabras clave [code]for[/code] y [code]in[/code] es un nombre de una "
+"variable válido sin puntuación ni espacios.\n"
+"\n"
+"Por ejemplo, este código no es válido [code]for cell_position.x in "
+"cell_positions_array:[/code] porque [code]cell_position.x[/code] no es un "
+"nombre de una variable válida.\n"
+"\n"
+"Para acceder al subcomponente [code]x[/code] de la variable, tienes que "
+"hacerlo dentro del cuerpo del bucle:\n"
+"\n"
+"[code]for cell_position in cell_positions_array:\n"
+"    cell_position.x += 1.0[/code]"
 
 #. Reference: ASSIGNING_TO_EXPRESSION
 #: script_checking/error_database.csv:47
@@ -61,6 +83,12 @@ msgid ""
 "Another possibility is that you want to check for equality in a condition "
 "but wrote a single = instead of ==."
 msgstr ""
+"Si obtienes este error, lo más probable es que estés intentando asignar un "
+"valor a algo que no sea una variable, lo cual es imposible. Sólo se pueden "
+"asignar valores a variables.\n"
+"\n"
+"Otra posibilidad es que quieras comprobar la igualdad en una condición pero "
+"hayas escrito un solo = en lugar de ==."
 
 #. Reference: ASSIGNING_TO_EXPRESSION
 #: script_checking/error_database.csv:47
@@ -74,6 +102,14 @@ msgid ""
 "In the case of a condition, ensure that you are using two equal signs to "
 "check for equality (==)."
 msgstr ""
+"Si quieres asignar un valor a una variable, comprueba que lo que tienes a la "
+"izquierda del signo = es una variable y no una función.\n"
+"\n"
+"También debes asegurarte de que la sintaxis es correcta. Por ejemplo, no "
+"debe haber un paréntesis a la izquierda del signo igual.\n"
+"\n"
+"En el caso de una condición, asegúrate de que estás utilizando dos signos "
+"iguales para comprobar la igualdad (==)."
 
 #. Reference: CYCLIC_REFERENCE
 #: script_checking/error_database.csv:57
@@ -773,6 +809,11 @@ msgid ""
 "The most common case is when you forget to close a string: you have opening "
 "quotes, but you forget to add a matching closing quote."
 msgstr ""
+"El ordenador llegó al final de la línea de código, pero la línea tenía un "
+"error de sintaxis.\n"
+"El caso más común es cuando te olvidas de cerrar una cadena: tienes comillas "
+"de apertura, pero te olvidas de añadir las comillas de cierre "
+"correspondientes."
 
 #. Reference: UNEXPECTED_EOL
 #: script_checking/error_database.csv:157
@@ -781,11 +822,13 @@ msgid ""
 "character you used to start the string is the same as the one you used to "
 "close the string."
 msgstr ""
+"Comprueba que no te falta ninguna comilla o que la comilla con la que "
+"empiezas la cadena es la misma que utilizas para cerrarla."
 
 #. Reference: CANT_GET_INDEX
 #: script_checking/error_database.csv:160
 msgid "The sub-variable you are trying to access does not exist."
-msgstr ""
+msgstr "La subvariable a la que intentas acceder no existe."
 
 #. Reference: CANT_GET_INDEX
 #: script_checking/error_database.csv:160
@@ -796,6 +839,11 @@ msgid ""
 "Ensure that you don't have a capital letter where you should have a "
 "lowercase letter and vice versa."
 msgstr ""
+"Es probable que haya un error tipográfico en el nombre de la subvariable a "
+"la que intentas acceder.\n"
+"\n"
+"Asegúrate de que no tienes una letra mayúscula donde deberías tener una "
+"letra minúscula y viceversa."
 
 #~ msgid ""
 #~ "The server or your computer may currently be disconnected. Also, an app "

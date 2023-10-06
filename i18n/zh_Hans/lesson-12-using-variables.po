@@ -1,0 +1,277 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-03-26 17:50+0100\n"
+"PO-Revision-Date: 2022-05-08 12:00+0000\n"
+"Last-Translator: 巽星石 <xun19900424@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-12-using-variables/zh_Hans/>\n"
+"Language: zh_Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.12.1\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-12-using-variables/lesson.tres:14
+msgid ""
+"In this lesson, we'll make our code easier to follow and understand at a "
+"glance.\n"
+"\n"
+"Take a look at this example."
+msgstr ""
+"在本课中，我们将使我们的代码一目了然地更容易理解和理解。\n"
+"\n"
+"看看这个例子。"
+
+#: course/lesson-12-using-variables/lesson.tres:34
+msgid "In the above example, what does the number 4 mean?"
+msgstr "在上面的例子中，数字 4 是什么意思？"
+
+#: course/lesson-12-using-variables/lesson.tres:37
+msgid "The code above rotates the character [code]4[/code] radians per second."
+msgstr "上面的代码每秒旋转角色[code]4[/code] 弧度。"
+
+#: course/lesson-12-using-variables/lesson.tres:38
+#: course/lesson-12-using-variables/lesson.tres:39
+msgid "It's how fast the character rotates."
+msgstr "这是角色旋转的速度。"
+
+#: course/lesson-12-using-variables/lesson.tres:38
+msgid "It's how far the character moves in pixels."
+msgstr "这是角色移动的距离，以像素为单位。"
+
+#: course/lesson-12-using-variables/lesson.tres:38
+msgid "It's how long the rotation takes."
+msgstr "这是旋转需要多长时间。"
+
+#: course/lesson-12-using-variables/lesson.tres:48
+msgid ""
+"We can guess what a number represents by looking at the function names, "
+"but it's harder to recall what this number does by quickly looking at the"
+" code.\n"
+"\n"
+"We've seen how different functions have their own names. Using these "
+"names communicates to developers what the functions do."
+msgstr ""
+"我们可以通过查看函数名称来猜测一个数字代表什么，但通过快速查看代码很难回忆这"
+"个数字的作用。\n"
+"\n"
+"我们已经看到不同的函数有自己的名字。使用这些名称可以向开发人员传达函数的作用"
+"。"
+
+#: course/lesson-12-using-variables/lesson.tres:70
+msgid ""
+"As we learned in lesson 8, we can also assign labels to numbers to help "
+"us remember what they do.\n"
+"\n"
+"We call these labels [i]variables[/i].\n"
+"\n"
+"[b]A variable is a label for a value we can save, change, and read "
+"later.[/b]\n"
+"\n"
+"Let's recap how to define a variable."
+msgstr ""
+"正如我们在第 8 "
+"课中所学到的，我们还可以为数字分配标签以帮助我们记住它们的作用。\n"
+"\n"
+"我们称这些标签为[i]变量[/i]。\n"
+"\n"
+"[b]变量是我们可以保存、更改和稍后读取的值的标签。[/b]\n"
+"\n"
+"让我们回顾一下如何定义一个变量。"
+
+#: course/lesson-12-using-variables/lesson.tres:96
+msgid ""
+"We improve the first example to make it clear what the number "
+"[code]4[/code] does."
+msgstr "我们改进了第一个示例，以明确数字 [code]4[/code] 的作用。"
+
+#: course/lesson-12-using-variables/lesson.tres:116
+msgid ""
+"Labeling a value makes the code easier for us to read now [i]and[/i] in "
+"the future."
+msgstr "标记一个值使我们现在 [i] 和 [/i] 将来更容易阅读代码。"
+
+#: course/lesson-12-using-variables/lesson.tres:124
+msgid "In the above example, which line defines the angular speed variable?"
+msgstr "在上面的例子中，哪一行定义了角速度变量？"
+
+#: course/lesson-12-using-variables/lesson.tres:127
+msgid ""
+"We create the [code]angular_speed[/code] variable, then assign it the "
+"value of [code]4[/code]."
+msgstr "我们创建 [code]angular_speed[/code] 变量，然后为它分配 [code]4[/code] 的值。"
+
+#: course/lesson-12-using-variables/lesson.tres:128
+#: course/lesson-12-using-variables/lesson.tres:129
+msgid "var angular_speed = 4"
+msgstr "var angular_speed = 4"
+
+#: course/lesson-12-using-variables/lesson.tres:128
+msgid "func _process(delta):"
+msgstr "func _process(delta):"
+
+#: course/lesson-12-using-variables/lesson.tres:128
+msgid "rotate(angular_speed * delta)"
+msgstr "rotate(angular_speed * delta)"
+
+#: course/lesson-12-using-variables/lesson.tres:138
+msgid ""
+"If we define variables outside of functions, we can re-use them in "
+"different functions.\n"
+"\n"
+"Because any function can use variables we define outside of them, we call"
+" these variables [b]script-wide[/b].\n"
+"\n"
+"Here we use the [code]angular_speed[/code] script-wide variable in both "
+"the [code]_process()[/code] function and the "
+"[code]set_angular_speed()[/code] function."
+msgstr ""
+"如果我们在函数之外定义变量，我们可以在不同的函数中重用它们。\n"
+"\n"
+"因为任何函数都可以使用我们在它们之外定义的变量，所以我们称这些变量为 [b"
+"]脚本范围script-wide）（[/b]的。\n"
+"\n"
+"在这里，我们在 [code]_process()[/code] 函数和 "
+"[code]set_angular_speed()[/code] 函数中都使用了 [code]angular_speed[/code] "
+"脚本范围的变量。"
+
+#: course/lesson-12-using-variables/lesson.tres:162
+msgid ""
+"We can also define variables inside of functions.\n"
+"\n"
+"We align the variable assignment by indenting to make it part of the "
+"function body. Make sure to create the variable before using it!\n"
+"\n"
+"If we define a variable inside of a function, only that function can use "
+"it."
+msgstr ""
+"我们还可以在函数内部定义变量。\n"
+"\n"
+"我们通过缩进对齐变量赋值，使其成为函数体的一部分。确保在使用之前创建变量！\n"
+"\n"
+"如果我们在函数内部定义一个变量，那么只有该函数可以使用它。"
+
+#: course/lesson-12-using-variables/lesson.tres:186
+msgid ""
+"The [code]angular_speed[/code] variable only exists inside "
+"[code]_process()[/code], because we defined it there. The "
+"[code]set_angular_speed()[/code] function can't use it.\n"
+"\n"
+"Trying to use it there will result in an error.\n"
+"\n"
+"Here's what this error might look like."
+msgstr ""
+"[code]angular_speed[/code] 变量只存在于 [code]_process()[/code] "
+"中，因为我们在那里定义了它。 [code]set_angular_speed()[/code] 函数不能使用。"
+"\n"
+"\n"
+"尝试在那里使用它会导致错误。\n"
+"\n"
+"这是这个错误的样子。"
+
+#: course/lesson-12-using-variables/lesson.tres:208
+msgid "Where can we define variables?"
+msgstr "我们在哪里可以定义变量？"
+
+#: course/lesson-12-using-variables/lesson.tres:211
+msgid ""
+"Functions can use any variables defined outside of functions. These "
+"variables are [b]script-wide[/b].\n"
+"\n"
+"If we define a variable inside of a function, only that function can use "
+"it."
+msgstr ""
+"函数可以使用在函数之外定义的任何变量。这些变量是 [b] 脚本范围的 [/b]。\n"
+"\n"
+"如果我们在函数内部定义一个变量，那么只有该函数可以使用它。"
+
+#: course/lesson-12-using-variables/lesson.tres:214
+#: course/lesson-12-using-variables/lesson.tres:215
+msgid "Outside of functions."
+msgstr "函数之外。"
+
+#: course/lesson-12-using-variables/lesson.tres:214
+#: course/lesson-12-using-variables/lesson.tres:215
+msgid "Inside of functions."
+msgstr "函数内部。"
+
+#: course/lesson-12-using-variables/lesson.tres:224
+msgid ""
+"Variables are also great at grouping values that control how a character "
+"behaves.\n"
+"\n"
+"Grouping them in this way allows us to easily change them."
+msgstr ""
+"变量也很擅长对控制角色行为的值进行分组。\n"
+"\n"
+"以这种方式对它们进行分组使我们可以轻松地更改它们。"
+
+#: course/lesson-12-using-variables/lesson.tres:246
+msgid ""
+"In the following practices, we'll define variables and use them with some"
+" familiar functions to make our code more readable."
+msgstr "在接下来的实践中，我们将定义变量并将它们与一些熟悉的函数一起使用，以使我们的"
+"代码更具可读性。"
+
+#: course/lesson-12-using-variables/lesson.tres:254
+msgid "Clarifying Code Using Variables"
+msgstr "用变量使代码清晰化"
+
+#: course/lesson-12-using-variables/lesson.tres:255
+msgid ""
+"Let's give the [code]4[/code] here a label so we know what it does.\n"
+"\n"
+"Create a variable called [code]angular_speed[/code] outside of the "
+"[code]_process()[/code] function to make it script-wide. This allows us "
+"to use it in other functions too.\n"
+"\n"
+"Then, replace the [code]4[/code] with [code]angular_speed[/code]."
+msgstr ""
+"让我们在这里给 [code]4[/code] 一个标签，以便我们知道它的作用。\n"
+"\n"
+"在 [code]_process()[/code] 函数之外创建一个名为 [code]angular_speed[/code] "
+"的变量，以使其在脚本范围内。这使我们也可以在其他函数中使用它。\n"
+"\n"
+"然后，将 [code]4[/code] 替换为 [code]angular_speed[/code]。"
+
+#: course/lesson-12-using-variables/lesson.tres:269
+msgid ""
+"Using variables to store number values makes code easier to read. Tidy up"
+" this function by storing a value in a variable."
+msgstr "使用变量来存储数值使代码更易于阅读。通过将值存储在变量中来整理此函数。"
+
+#: course/lesson-12-using-variables/lesson.tres:274
+msgid "Fixing an Out of Scope Error"
+msgstr "修复超出范围的错误"
+
+#: course/lesson-12-using-variables/lesson.tres:275
+msgid ""
+"There's something wrong with the code here. Can you see what it is?\n"
+"\n"
+"Run the code and read the error.\n"
+"\n"
+"Correct the code so it works as intended."
+msgstr ""
+"这里的代码有问题。你能看出它是什么吗？\n"
+"\n"
+"运行代码并读取错误。\n"
+"\n"
+"更正代码，使其按预期工作。"
+
+#: course/lesson-12-using-variables/lesson.tres:293
+msgid "Uh oh! There's something wrong here. Can you fix it?"
+msgstr "哦哦！这里有问题。你能修好它吗？"
+
+#: course/lesson-12-using-variables/lesson.tres:297
+msgid "Using Variables to Make Code Easier to Read"
+msgstr "使用变量使代码更易于阅读"
