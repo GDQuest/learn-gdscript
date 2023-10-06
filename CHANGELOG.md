@@ -2,6 +2,32 @@
 
 This document lists changes between releases.
 
+## Learn GDScript From Zero 1.5.0
+
+### Content changes
+
+- Review every lesson and practice to make it work as well as possible for Godot 4. The course is still also compatible with Godot 3.
+- Remove lesson 15, modulo.
+- Add Italian translations.
+- Add and update FR, ES, PT, PT_BR, and TR translations. FR and ES translations should be up to date, other languages need updates.
+- Move the dot out of the quotes in lesson 3 (#793).
+- Edit first lesson to be compatible with Godot 4.
+- Remove type hint from code in lesson 1 practice.
+- Clarify that turtle code is specific to app.
+- Lesson 7 explanation fix (#865).
+- Add updated translations for 6 languages.
+
+### Bug fixes
+
+- Update quiz that broke after text fix in l3.
+- Ignore word type in glossary in lesson 25.
+- Remove type inference from practice in l25.
+- Add check that student isn't passing entire combo array in l20.
+- Rewrite l14 practice 2 tests to be more accurate.
+- Rewrite code highlight algorithm for nicer highlighting of symbols and numbers.
+- Reset robot to correct position in practice l17 practice.
+- Apply translations to report problem popup.
+
 ## Learn GDScript From Zero 1.4.0
 
 *Released on May 16 2023*
