@@ -40,20 +40,23 @@ func _init() -> void:
 	_REGEXES["code"] = RegEx.new()
 	_REGEXES["func"] = RegEx.new()
 	_REGEXES["number"] = RegEx.new()
+	_REGEXES["string"] = RegEx.new()
 	_REGEXES["symbol"] = RegEx.new()
 	_REGEXES["format"] = RegEx.new()
 	
 
 	_REGEXES["code"].compile("\\[code\\](.+?)\\[\\/code\\]")
 	_REGEXES["func"].compile("(?<func>func)")
-	_REGEXES["number"].compile("(?<number>\\d+(\\.\\d+)?)")
+	_REGEXES["number"].compile("(?<number>-?\\d+(\\.\\d+)?)")
+	_REGEXES["string"].compile("(?<string>[\"'].+[\"'])")
 	_REGEXES["symbol"].compile("(?<symbol>[a-zA-Z][a-zA-Z0-9_]+|[a-zA-Z])")
-	_REGEXES["format"].compile("\\d+(\\.\\d+)?|[a-zA-Z0-9_]+")
+	_REGEXES["format"].compile("[\"\\-']?\\d+(\\.\\d+)?[\"']?|[\"'].+[\"']|[a-zA-Z0-9_]+")
 
 	_REGEX_REPLACE_MAP = {
 		"func": "[color=#%s]$func[/color]" % CodeEditorEnhancer.COLOR_KEYWORD.to_html(false),
 		"number": "[color=#%s]$number[/color]" % CodeEditorEnhancer.COLOR_NUMBERS.to_html(false),
-		"symbol": "[color=#%s]$symbol[/color]" % CodeEditorEnhancer.COLOR_MEMBER.to_html(false)
+		"symbol": "[color=#%s]$symbol[/color]" % CodeEditorEnhancer.COLOR_MEMBER.to_html(false),
+		"string": "[color=#%s]$string[/color]" % CodeEditorEnhancer.COLOR_QUOTES.to_html(false),
 	}
 
 
@@ -78,6 +81,7 @@ func bbcode_add_code_color(bbcode_text := "") -> String:
 				colored_string += match_string.substr(last_match_end, match_start - last_match_end)
 			var part: String = match_to_format.get_string()
 			for regex_type in [
+				"string",
 				"func",
 				"symbol",
 				"number",
@@ -116,3 +120,29 @@ func convert_type_index_to_text(type: int) -> String:
 	else:
 		printerr("Type value %s should be a member of the TYPE_* enum, but it is not.")
 		return "[ERROR, nonexistent type value %s]" % type
+
+
+func _ready() -> void:
+	_test_formatting()
+
+# Call this function to ensure that changes to the formatter don't change color highlighting.
+func _test_formatting() -> void:
+	var color_keyword := CodeEditorEnhancer.COLOR_KEYWORD.to_html(false)
+	var color_number := CodeEditorEnhancer.COLOR_NUMBERS.to_html(false)
+	var color_symbol := CodeEditorEnhancer.COLOR_MEMBER.to_html(false)
+	var color_string := CodeEditorEnhancer.COLOR_QUOTES.to_html(false)
+	# Pairs of strings that would be inside of [code] bbcode tags and their formatted output.
+	# We omit the [code] tags in the dictionary for readability, they get added in the tests.
+	var test_pairs := {
+		"-10": "[color=#" + color_number + "]-10[/color]",
+		"\"Some string.\"": "[color=#" + color_string + "]\"Some string.\"[/color]",
+		"add_order()": "[color=#" + color_symbol + "]add_order[/color]()",
+		"Vector2(2, 0)": "[color=#" + color_symbol + "]Vector2[/color]([color=#" + color_number + "]2[/color], [color=#" + color_number + "]0[/color])",
+		"use_item(item)": "[color=#" + color_symbol + "]use_item[/color]([color=#" + color_symbol + "]item[/color])",
+	}
+	
+	for input_text in test_pairs:
+		var expected_output: String = "[code]" + test_pairs[input_text] + "[/code]"
+		var output := bbcode_add_code_color("[code]" + input_text + "[/code]")
+		assert(output == expected_output, "Expected output '%s' but got '%s' instead." % [expected_output, output])
+
