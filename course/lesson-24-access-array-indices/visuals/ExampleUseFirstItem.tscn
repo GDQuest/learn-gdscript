@@ -20,7 +20,8 @@ func _ready() -> void:
 	var runnable_code_example = get_parent()
 	var item_names: PoolStringArray = []
 	for item in get_children():
-		item_names.append('\\t\"%s\"' % item.get_texture_name())
+		item_names.append('\\t\"%s\",' % item.get_texture_name())
+	item_names[-1] = item_names[-1].rstrip(',')
 	var code := CODE_BEGIN
 	code.append_array(item_names)
 	code.append_array(CODE_END)
