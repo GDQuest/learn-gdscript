@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://ui/screens/welcome_screen/background.png" type="Texture" id=1]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://ui/screens/welcome_screen/star_white_small.png" type="Texture" id=17]
 [ext_resource path="res://course/common/robot_body.png" type="Texture" id=18]
 [ext_resource path="res://course/common/hand_ice.png" type="Texture" id=19]
+[ext_resource path="res://ui/screens/welcome_screen/godot-4-compatibility-label.svg" type="Texture" id=20]
 
 [sub_resource type="GDScript" id=7]
 script/source = "extends Node2D
@@ -590,9 +591,6 @@ margin_top = -512.0
 margin_right = 227.0
 margin_bottom = -12.0
 custom_styles/panel = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Margin" type="MarginContainer" parent="GDQuestBoy"]
 margin_left = 28.0
@@ -605,7 +603,7 @@ custom_constants/margin_left = 0
 custom_constants/margin_bottom = 60
 
 [node name="Buttons" type="VBoxContainer" parent="GDQuestBoy/Margin"]
-margin_right = 398.0
+margin_right = 397.0
 margin_bottom = 312.0
 size_flags_horizontal = 3
 custom_constants/separation = 8
@@ -613,7 +611,7 @@ alignment = 1
 
 [node name="StartButton" type="Button" parent="GDQuestBoy/Margin/Buttons"]
 margin_top = 32.0
-margin_right = 398.0
+margin_right = 397.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 0, 48 )
 mouse_default_cursor_shape = 2
@@ -632,7 +630,7 @@ __meta__ = {
 
 [node name="OutlinerButton" type="Button" parent="GDQuestBoy/Margin/Buttons"]
 margin_top = 96.0
-margin_right = 398.0
+margin_right = 397.0
 margin_bottom = 152.0
 rect_min_size = Vector2( 0, 48 )
 mouse_default_cursor_shape = 2
@@ -646,7 +644,7 @@ text = "SELECT LESSON"
 
 [node name="SettingsButton" type="Button" parent="GDQuestBoy/Margin/Buttons"]
 margin_top = 160.0
-margin_right = 398.0
+margin_right = 397.0
 margin_bottom = 216.0
 rect_min_size = Vector2( 0, 48 )
 mouse_default_cursor_shape = 2
@@ -680,7 +678,7 @@ script = SubResource( 1 )
 
 [node name="QuitButton" type="Button" parent="GDQuestBoy/Margin/Buttons"]
 margin_top = 224.0
-margin_right = 398.0
+margin_right = 397.0
 margin_bottom = 280.0
 rect_min_size = Vector2( 0, 48 )
 mouse_default_cursor_shape = 2
@@ -720,9 +718,6 @@ margin_top = -339.0
 margin_right = 480.5
 margin_bottom = -109.0
 texture = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Title" type="TextureRect" parent="TitleBackground"]
 anchor_right = 1.0
@@ -780,6 +775,10 @@ margin_left = 869.5
 margin_top = 116.0
 margin_right = 907.5
 margin_bottom = 154.0
+
+[node name="Godot-4-compatibility-label" type="Sprite" parent="TitleBackground/Title"]
+position = Vector2( 882.5, 243 )
+texture = ExtResource( 20 )
 
 [node name="FullScreenButton" parent="." instance=ExtResource( 11 )]
 anchor_left = 1.0
