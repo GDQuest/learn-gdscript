@@ -2,6 +2,17 @@
 
 This document lists changes between releases.
 
+## Learn GDScript From Zero 1.5.1
+
+### Improvements
+
+- Add color highlighting for strings in bbcode
+
+### Bug fixes
+
+- Fix highlighting of numbers in bbcode
+- Add missing commas in code example in lesson 23
+
 ## Learn GDScript From Zero 1.5.0
 
 ### Content changes
