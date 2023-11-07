@@ -95,6 +95,8 @@ func bbcode_add_code_color(bbcode_text := "") -> String:
 					break
 
 		colored_string += match_string.substr(last_match_end)
+		if colored_string == "":
+			colored_string = match_string
 		colored_string = "[code]" + colored_string + "[/code]"
 		bbcode_text.erase(index_offset, initial_length)
 		bbcode_text = bbcode_text.insert(index_offset, colored_string)
@@ -122,9 +124,6 @@ func convert_type_index_to_text(type: int) -> String:
 		return "[ERROR, nonexistent type value %s]" % type
 
 
-func _ready() -> void:
-	_test_formatting()
-
 # Call this function to ensure that changes to the formatter don't change color highlighting.
 func _test_formatting() -> void:
 	var color_keyword := CodeEditorEnhancer.COLOR_KEYWORD.to_html(false)
@@ -139,6 +138,8 @@ func _test_formatting() -> void:
 		"add_order()": "[color=#" + color_symbol + "]add_order[/color]()",
 		"Vector2(2, 0)": "[color=#" + color_symbol + "]Vector2[/color]([color=#" + color_number + "]2[/color], [color=#" + color_number + "]0[/color])",
 		"use_item(item)": "[color=#" + color_symbol + "]use_item[/color]([color=#" + color_symbol + "]item[/color])",
+		"=": "=",
+		">": ">",
 	}
 	
 	for input_text in test_pairs:
