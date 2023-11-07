@@ -2,6 +2,12 @@
 
 This document lists changes between releases.
 
+## Learn GDScript From Zero 1.5.2
+
+### Bug fixes
+
+- Fix some symbols getting lost in code examples (=, <, >, etc.)
+
 ## Learn GDScript From Zero 1.5.1
 
 ### Improvements
