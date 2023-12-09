@@ -1,12 +1,13 @@
 extends TextureButton
 
-const COLOR_IDLE := Color(0.572549, 0.560784, 0.721569)
-const COLOR_HOVER := Color(0.960784, 0.980392, 0.980392)
-const COLOR_PRESSED := Color(0.455042, 0.441932, 0.621094)
+export var COLOR_IDLE := Color(0.572549, 0.560784, 0.721569)
+export var COLOR_HOVER := Color(0.960784, 0.980392, 0.980392)
+export var COLOR_PRESSED := Color(0.455042, 0.441932, 0.621094)
 
 var is_hovered := false setget set_is_hovered
 
 func _ready() -> void:
+	modulate = COLOR_IDLE
 	connect("pressed", self, "open_gdquest_website")
 	connect("button_down", self, "_toggle_shade", [true])
 	connect("button_up", self, "_toggle_shade", [false])

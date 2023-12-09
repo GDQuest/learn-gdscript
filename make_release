@@ -1,0 +1,6 @@
+#!/bin/bash
+
+./run export:web && butler push "build/web" "gdquest/learn-godot-gdscript:web-release"
+./run export:windows && butler push "build/windows" "gdquest/learn-godot-gdscript:windows-release"
+./run export:osx && butler push "build/osx" "gdquest/learn-godot-gdscript:osx-release"
+./run export:linux && butler push "build/linux" "gdquest/learn-godot-gdscript:linux-release"
