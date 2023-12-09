@@ -77,6 +77,8 @@ func bbcode_add_code_color(bbcode_text := "") -> String:
 		var last_match_end := -1
 		for match_to_format in to_format:
 			var match_start: int = match_to_format.get_start()
+			if last_match_end == -1 and match_start > 0:
+				colored_string += match_string.substr(0, match_start)
 			if last_match_end != -1:
 				colored_string += match_string.substr(last_match_end, match_start - last_match_end)
 			var part: String = match_to_format.get_string()
@@ -133,6 +135,7 @@ func _test_formatting() -> void:
 	# Pairs of strings that would be inside of [code] bbcode tags and their formatted output.
 	# We omit the [code] tags in the dictionary for readability, they get added in the tests.
 	var test_pairs := {
+		"[0, 1, 2]": "[[color=#eb9433]0[/color], [color=#eb9433]1[/color], [color=#eb9433]2[/color]]",
 		"-10": "[color=#" + color_number + "]-10[/color]",
 		"\"Some string.\"": "[color=#" + color_string + "]\"Some string.\"[/color]",
 		"add_order()": "[color=#" + color_symbol + "]add_order[/color]()",
