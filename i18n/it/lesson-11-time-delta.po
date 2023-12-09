@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"POT-Creation-Date: 2023-12-09 20:05+0100\n"
 "PO-Revision-Date: 2023-05-17 10:51+0000\n"
 "Last-Translator: Riccardo Santangelo <s.burns@live.it>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/"
-"learn-gdscript-from-zero/lesson-11-time-delta/it/>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-11-time-delta/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -134,6 +134,7 @@ msgid "Frames take varying amounts of time to calculate"
 msgstr "I frame impiegano quantità di tempo variabili per essere calcolati"
 
 #: course/lesson-11-time-delta/lesson.tres:93
+#, fuzzy
 msgid ""
 "Depending on the game, the computer, and what the game engine needs to "
 "calculate, frames take more or less time to display.\n"
@@ -145,9 +146,6 @@ msgid ""
 "\n"
 "Delta represents a time difference. It's the time passed since the previous "
 "frame, in seconds.\n"
-"\n"
-"The [code]delta[/code] parameter tells us how long it took for Godot to "
-"complete the [b]previous frame[/b].\n"
 "\n"
 "We can use it to ensure that the changes between frames don't make the "
 "game's behavior unreliable.\n"
@@ -183,11 +181,11 @@ msgstr ""
 "computer. Il delta contribuisce a rendere l'esperienza di gioco coerente per "
 "tutti."
 
-#: course/lesson-11-time-delta/lesson.tres:115
+#: course/lesson-11-time-delta/lesson.tres:113
 msgid "What do we know about delta?"
 msgstr "Cosa sappiamo riguardo a delta?"
 
-#: course/lesson-11-time-delta/lesson.tres:118
+#: course/lesson-11-time-delta/lesson.tres:116
 msgid ""
 "[code]delta[/code] is the time it took Godot to complete the previous frame "
 "in seconds.\n"
@@ -204,27 +202,27 @@ msgstr ""
 "Varia a ogni fotogramma perché Godot ha bisogno di elaborare più o meno "
 "fotogrammi."
 
-#: course/lesson-11-time-delta/lesson.tres:123
-#: course/lesson-11-time-delta/lesson.tres:124
+#: course/lesson-11-time-delta/lesson.tres:121
+#: course/lesson-11-time-delta/lesson.tres:122
 msgid "It's a value in seconds."
 msgstr "Viene espresso in secondi."
 
-#: course/lesson-11-time-delta/lesson.tres:123
-#: course/lesson-11-time-delta/lesson.tres:124
+#: course/lesson-11-time-delta/lesson.tres:121
+#: course/lesson-11-time-delta/lesson.tres:122
 msgid "It varies each frame."
 msgstr "Varia ad ogni frame."
 
-#: course/lesson-11-time-delta/lesson.tres:123
-#: course/lesson-11-time-delta/lesson.tres:124
+#: course/lesson-11-time-delta/lesson.tres:121
+#: course/lesson-11-time-delta/lesson.tres:122
 msgid "It's the time it took Godot to complete the previous frame."
 msgstr ""
 "Rappresenta il tempo che Godot impiega a completare il frame precedente."
 
-#: course/lesson-11-time-delta/lesson.tres:131
+#: course/lesson-11-time-delta/lesson.tres:129
 msgid "Multiplying by delta"
 msgstr "Moltiplicando per delta"
 
-#: course/lesson-11-time-delta/lesson.tres:133
+#: course/lesson-11-time-delta/lesson.tres:131
 msgid ""
 "The [code]delta[/code] you get in [code]_process()[/code] is a time "
 "difference in seconds. It will generally be a tiny decimal number.\n"
@@ -239,7 +237,7 @@ msgstr ""
 "Per applicare il [code]delta[/code], devi [i]moltiplicarlo[/i] ai tuoi "
 "valori di velocità."
 
-#: course/lesson-11-time-delta/lesson.tres:155
+#: course/lesson-11-time-delta/lesson.tres:153
 msgid ""
 "When multiplying by [code]delta[/code], you make motion [i]time-dependent[/"
 "i] rather than [i]frame-dependent[/i].\n"
@@ -251,11 +249,11 @@ msgstr ""
 "\n"
 "Questo è essenziale per rendere il tuo gioco costante e onesto."
 
-#: course/lesson-11-time-delta/lesson.tres:165
+#: course/lesson-11-time-delta/lesson.tres:163
 msgid "Why do we use the number 3.0 in this example?"
 msgstr "Perché utilizziamo il numero 3.0 in questo esempio?"
 
-#: course/lesson-11-time-delta/lesson.tres:167
+#: course/lesson-11-time-delta/lesson.tres:165
 msgid ""
 "At the top of the lesson, we made the robot rotate a fixed amount every "
 "frame: [code]0.05[/code] radians.\n"
@@ -303,11 +301,11 @@ msgstr ""
 "l'abitudine lavorando con velocità, accelerazioni e moti nei tuoi progetti "
 "videoludici."
 
-#: course/lesson-11-time-delta/lesson.tres:187
+#: course/lesson-11-time-delta/lesson.tres:185
 msgid "Why the time between frames matters"
 msgstr "Perché il tempo tra i frame importa"
 
-#: course/lesson-11-time-delta/lesson.tres:189
+#: course/lesson-11-time-delta/lesson.tres:187
 msgid ""
 "The time it takes to display a new frame varies.\n"
 "\n"
@@ -339,7 +337,7 @@ msgstr ""
 "\n"
 "Il robot in basso si muoverà [i]diversamente per tutti[/i]!"
 
-#: course/lesson-11-time-delta/lesson.tres:217
+#: course/lesson-11-time-delta/lesson.tres:215
 msgid ""
 "Multiplying time-sensitive values by [code]delta[/code] makes them [b]time-"
 "dependent[/b] rather than [b]frame-dependent[/b].\n"
@@ -359,15 +357,15 @@ msgstr ""
 "computer e durante il gameplay. Per questo motivo, il movimento sarà "
 "differente per ogni giocatore, rendendo il gioco incoerente e caotico."
 
-#: course/lesson-11-time-delta/lesson.tres:229
+#: course/lesson-11-time-delta/lesson.tres:227
 msgid "What does this mean?"
 msgstr "Cosa significa questo?"
 
-#: course/lesson-11-time-delta/lesson.tres:230
+#: course/lesson-11-time-delta/lesson.tres:228
 msgid "[code]rotation_speed * delta[/code]"
 msgstr "[code]rotation_speed * delta[/code]"
 
-#: course/lesson-11-time-delta/lesson.tres:232
+#: course/lesson-11-time-delta/lesson.tres:230
 msgid ""
 "The [code]*[/code] symbol means we're multiplying [code]rotation_speed[/"
 "code] by [code]delta[/code] time."
@@ -375,34 +373,34 @@ msgstr ""
 "Il simbolo [code]*[/code] significa moltiplicare [code]rotation_speed[/code] "
 "per il tempo [code]delta[/code]."
 
-#: course/lesson-11-time-delta/lesson.tres:233
-#: course/lesson-11-time-delta/lesson.tres:234
+#: course/lesson-11-time-delta/lesson.tres:231
+#: course/lesson-11-time-delta/lesson.tres:232
 msgid "We're multiplying rotation_speed by delta."
 msgstr "Stiamo moltiplicando rotation_speed per delta."
 
-#: course/lesson-11-time-delta/lesson.tres:233
+#: course/lesson-11-time-delta/lesson.tres:231
 msgid "We're dividing delta by rotation_speed."
 msgstr "Stiamo dividendo il delta per rotation_speed."
 
-#: course/lesson-11-time-delta/lesson.tres:233
+#: course/lesson-11-time-delta/lesson.tres:231
 msgid "We're adding rotation_speed to delta."
 msgstr "Stiamo aggiungendo rotation_speed a delta."
 
-#: course/lesson-11-time-delta/lesson.tres:233
+#: course/lesson-11-time-delta/lesson.tres:231
 msgid "We're subtracting delta from rotation_speed."
 msgstr "Stiamo sottraendo delta da rotation_speed."
 
-#: course/lesson-11-time-delta/lesson.tres:243
+#: course/lesson-11-time-delta/lesson.tres:241
 msgid "In the next practice, we'll use delta to make rotating time-dependent."
 msgstr ""
 "Nella prossima pratica, useremo delta per rendere le rotazioni tempo-"
 "dipendenti."
 
-#: course/lesson-11-time-delta/lesson.tres:251
+#: course/lesson-11-time-delta/lesson.tres:249
 msgid "Rotating Using Delta"
 msgstr "Rotando Usando Il Delta"
 
-#: course/lesson-11-time-delta/lesson.tres:252
+#: course/lesson-11-time-delta/lesson.tres:250
 msgid ""
 "At the moment, the rotation of the robot is frame-dependent.\n"
 "\n"
@@ -417,11 +415,11 @@ msgstr ""
 "\n"
 "Il robot dovrebbe ruotare di [code]2[/code] radianti al secondo."
 
-#: course/lesson-11-time-delta/lesson.tres:271
+#: course/lesson-11-time-delta/lesson.tres:269
 msgid "Moving in a Circle Using Delta"
 msgstr "Muovendo in un Cerchio Usando Il Delta"
 
-#: course/lesson-11-time-delta/lesson.tres:272
+#: course/lesson-11-time-delta/lesson.tres:270
 msgid ""
 "In this practice, make the robot move in a smooth circle using delta.\n"
 "\n"
@@ -442,6 +440,6 @@ msgstr ""
 "[b]Nota:[/b] Scrivi i valori nelle parentesi quando chiami le funzioni. Se "
 "definisci variabili extra, non saremo in grado di validare la tua pratica."
 
-#: course/lesson-11-time-delta/lesson.tres:290
+#: course/lesson-11-time-delta/lesson.tres:288
 msgid "Time Delta"
 msgstr "Tempo Delta"
