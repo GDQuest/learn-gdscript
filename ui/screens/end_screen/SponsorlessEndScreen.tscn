@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
@@ -12,6 +12,13 @@
 [ext_resource path="res://ui/icons/navigation_outliner.png" type="Texture" id=11]
 [ext_resource path="res://ui/screens/end_screen/main_menu/sky_dark.png" type="Texture" id=12]
 [ext_resource path="res://ui/screens/end_screen/main_menu/sky_day_blurred.png" type="Texture" id=13]
+
+[sub_resource type="GDScript" id=10]
+script/source = "extends Button
+
+func _ready() -> void:
+	connect(\"pressed\", get_tree(), \"change_scene\", [\"res://ui/UICore.tscn\"])
+"
 
 [sub_resource type="GDScript" id=2]
 script/source = "tool
@@ -117,6 +124,7 @@ hint_tooltip = "Open the course index"
 mouse_default_cursor_shape = 2
 icon = ExtResource( 11 )
 flat = true
+script = SubResource( 10 )
 
 [node name="Control" type="Control" parent="Layout/TopBar/MarginContainer/ToolBarLayout"]
 margin_left = 48.0
@@ -223,7 +231,7 @@ bbcode_enabled = true
 bbcode_text = "Like Godot, this app and course is free and open-source. 
 
 You can find the app's source code and contribute translations here: [url=\"https://github.com/GDQuest/learn-gdscript\"]Learn GDScript From Zero (Github repository)[/url]."
-text = "Like Godot, this app and course are free and open-source. 
+text = "Like Godot, this app and course is free and open-source. 
 
 You can find the app's source code and contribute translations here: Learn GDScript From Zero (Github repository)."
 fit_content_height = true

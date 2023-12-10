@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/screens/welcome_screen/WelcomeScreen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
@@ -6,15 +6,15 @@
 [ext_resource path="res://ui/UICore.gd" type="Script" id=4]
 [ext_resource path="res://ui/components/popups/ReportFormPopup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/components/popups/SettingsPopup.tscn" type="PackedScene" id=6]
-[ext_resource path="res://ui/screens/end_screen/EndScreen.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/UIVersion.gd" type="Script" id=8]
 [ext_resource path="res://ui/theme/fonts/font_version.tres" type="DynamicFont" id=9]
-[ext_resource path="res://ui/screens/end_screen/SponsorlessEndScreen.tscn" type="PackedScene" id=10]
 
 [node name="UICore" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 2.0
+margin_right = 2.0
 mouse_filter = 2
 theme = ExtResource( 2 )
 script = ExtResource( 4 )
@@ -38,13 +38,6 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-
-[node name="EndScreen" parent="Pages" instance=ExtResource( 7 )]
-visible = false
-mouse_filter = 2
-
-[node name="SponsorlessEndScreen" parent="Pages" instance=ExtResource( 10 )]
-visible = false
 
 [node name="LoadingScreen" parent="Pages" instance=ExtResource( 3 )]
 mouse_filter = 2
@@ -72,6 +65,7 @@ margin_right = -2.0
 grow_vertical = 0
 rect_min_size = Vector2( 1918, 20 )
 focus_mode = 2
+mouse_filter = 2
 custom_colors/default_color = Color( 0.572549, 0.560784, 0.721569, 1 )
 custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true

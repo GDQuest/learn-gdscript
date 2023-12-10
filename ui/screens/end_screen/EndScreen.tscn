@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://ui/theme/fonts/Inter-Medium.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
@@ -22,6 +22,13 @@
 [ext_resource path="res://ui/theme/fonts/Poppins-Bold.ttf" type="DynamicFontData" id=20]
 [ext_resource path="res://ui/screens/end_screen/third-person-platformer-panoramic.jpg" type="Texture" id=21]
 [ext_resource path="res://ui/screens/end_screen/arrow_black.svg" type="Texture" id=22]
+
+[sub_resource type="GDScript" id=37]
+script/source = "extends Button
+
+func _ready() -> void:
+	connect(\"pressed\", get_tree(), \"change_scene\", [\"res://ui/UICore.tscn\"])
+"
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.251478, 0.2021, 0.43, 0.894118 )
@@ -241,6 +248,7 @@ hint_tooltip = "Open the course index"
 mouse_default_cursor_shape = 2
 icon = ExtResource( 11 )
 flat = true
+script = SubResource( 37 )
 
 [node name="Control" type="Control" parent="Layout/TopBar/MarginContainer/ToolBarLayout"]
 margin_left = 48.0

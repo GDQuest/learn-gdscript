@@ -14,8 +14,6 @@ var _course_navigator: UINavigator
 onready var _pages := $Pages as Control
 onready var _loading_screen := $Pages/LoadingScreen as LoadingScreen
 onready var _welcome_screen := $Pages/WelcomeScreen as WelcomeScreen
-onready var _end_screen := $Pages/EndScreen as Control
-onready var _sponsorless_end_screen := $Pages/SponsorlessEndScreen as Control
 onready var _settings_screen := $Pages/SettingsScreen as Control
 onready var _course_screen := $Pages/CourseScreen as Control
 
@@ -138,9 +136,9 @@ func _show_end_screen(_course: Course) -> void:
 		page.hide()
 	
 	if show_sponsored_screen:
-		_end_screen.show()
+		get_tree().change_scene("res://ui/screens/end_screen/EndScreen.tscn")
 	else:
-		_sponsorless_end_screen.show()
+		get_tree().change_scene("res://ui/screens/end_screen/SponsorlessEndScreen.tscn")
 
 
 func _go_to_welcome_screen() -> void:
