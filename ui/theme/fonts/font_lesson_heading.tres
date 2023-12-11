@@ -1,6 +1,9 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
 [ext_resource path="res://ui/theme/fonts/Montserrat-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui/theme/fonts/NotoSerifJP-Bold.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://ui/theme/fonts/NotoSerifTC-Bold.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://ui/theme/fonts/NotoSerifKR-Bold.otf" type="DynamicFontData" id=4]
 
 [resource]
 size = 28
@@ -8,3 +11,6 @@ use_mipmaps = true
 use_filter = true
 extra_spacing_top = 8
 font_data = ExtResource( 1 )
+fallback/0 = ExtResource( 3 )
+fallback/1 = ExtResource( 2 )
+fallback/2 = ExtResource( 4 )
