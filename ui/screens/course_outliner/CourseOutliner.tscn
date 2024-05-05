@@ -58,21 +58,22 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="LeftColumn" type="VBoxContainer" parent="MarginContainer/Layout/HBoxContainer"]
-margin_left = 244.0
-margin_right = 1199.0
+margin_left = 402.0
+margin_right = 1042.0
 margin_bottom = 993.0
 
 [node name="LessonList" parent="MarginContainer/Layout/HBoxContainer/LeftColumn" instance=ExtResource( 4 )]
+margin_right = 640.0
 margin_bottom = 930.0
 size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Layout/HBoxContainer/LeftColumn"]
 margin_top = 946.0
-margin_right = 955.0
+margin_right = 640.0
 margin_bottom = 993.0
 
 [node name="Buttons" type="HBoxContainer" parent="MarginContainer/Layout/HBoxContainer/LeftColumn/PanelContainer"]
-margin_right = 955.0
+margin_right = 640.0
 margin_bottom = 47.0
 
 [node name="ResetButton" type="Button" parent="MarginContainer/Layout/HBoxContainer/LeftColumn/PanelContainer/Buttons"]
@@ -84,8 +85,8 @@ text = "Reset Progress"
 [node name="LessonDetails" parent="MarginContainer/Layout/HBoxContainer" instance=ExtResource( 6 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1215.0
-margin_right = 1635.0
+margin_left = 1058.0
+margin_right = 1478.0
 margin_bottom = 993.0
 
 [node name="ConfirmResetPopup" parent="." instance=ExtResource( 7 )]
