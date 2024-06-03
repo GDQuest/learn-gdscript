@@ -61,9 +61,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		event.is_action_pressed("toggle_full_screen")
 		and not event.is_action_pressed("toggle_distraction_free_mode")
 	):
-		# Work around an issue in browsers where OS.window_fullscreen doesn't
-		# update as expected.
-		Globals.is_fullscreen = not Globals.is_fullscreen
+		Events.emit_signal("fullscreen_toggled")
 		accept_event()
 
 
@@ -131,10 +129,10 @@ func _on_loading_finished() -> void:
 
 func _show_end_screen(_course: Course) -> void:
 	var show_sponsored_screen := UserProfiles.get_profile().is_sponsored_profile
-	
+
 	for page in _pages.get_children():
 		page.hide()
-	
+
 	if show_sponsored_screen:
 		get_tree().change_scene("res://ui/screens/end_screen/EndScreen.tscn")
 	else:
