@@ -3,17 +3,8 @@ interface GDQuestLib {
   displayFailureNotice: (err: Error | string) => void;
   log: Log;
   makeLogger: (title: string) => Console;
-  fullScreen: {
-    isIt: {
-      checkFullScreenElement: () => boolean;
-      checkCSSMediaQuery: () => boolean;
-      checkWindowMargins: () => boolean;
-    };
-    toggle: () => void;
-  };
   events: {
     onError: Signal;
-    onFullScreen: Signal;
     onGodotLoaded: Signal;
     onResize: Signal;
   };
@@ -83,7 +74,7 @@ declare const GODOT_CONFIG: {
 };
 
 declare const Engine: {
-  new (config: typeof GODOT_CONFIG): GodotEngineInstance;
+  new(config: typeof GODOT_CONFIG): GodotEngineInstance;
   isWebGLAvailable: () => boolean;
 };
 
