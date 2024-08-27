@@ -22,8 +22,12 @@ func test_moving_in_a_circle() -> String:
 	for line in _lines:
 		has_rotate = has_rotate or line.begins_with("rotate(")
 		has_move_local = has_move_local or line.begins_with("move_local_x(")
-		if has_move_local and "," in line:
-			return tr("It seems that you called move_local_x() with two arguments but you should only use one. Did you add a comma between values? You need to multipy them instead.")
+		# TODO: reconsider this check. move_local_x() supports two arguments, the second being a bool.
+		# We'd need to parse the values to gives students more feedback. Like, if they wrote.
+#		if has_move_local and "," in line:
+#			return tr(
+#				"It seems that you called move_local_x() with two arguments but you should only use one. Did you add a comma between values? You need to multipy them instead."
+#			)
 
 	if not has_rotate:
 		return tr("Did you use rotate() to make the sprite rotate?")
