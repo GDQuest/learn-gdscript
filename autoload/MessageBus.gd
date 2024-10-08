@@ -18,7 +18,7 @@ var script_replacements := RegExpGroup.collection(
 	{
 		"\\b(?<command>prints)\\((?<args>.*?)\\)":
 		"MessageBus.print_log([{args}], \"{file}\", {line}, {char})",
-		"\\b(?<command>print)\\((?<args>.*?)\\)":
+		"\\b(?<command>print)\\((?<args>[^()]*(?:\\([^()]*\\))?[^()]*)\\)":
 		"MessageBus.print_log([{args}], \"{file}\", {line}, {char})",
 		"\\b(?<command>push_error)\\((?<args>.*?)\\)":
 		"MessageBus.print_error({args}, \"{file}\", {line}, {char})",
