@@ -50,7 +50,7 @@ func _ready() -> void:
 	NavigationManager.connect("navigation_requested", self, "_navigate_to")
 	NavigationManager.connect("back_navigation_requested", self, "_navigate_back")
 	NavigationManager.connect("outliner_navigation_requested", self, "_navigate_to_outliner")
-	
+
 
 	Events.connect("practice_next_requested", self, "_on_practice_next_requested")
 	Events.connect("practice_previous_requested", self, "_on_practice_previous_requested")
@@ -64,7 +64,7 @@ func _ready() -> void:
 
 	_settings_button.connect("pressed", Events, "emit_signal", ["settings_requested"])
 	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
-	
+
 	if not UserProfiles.get_profile().is_sponsored_profile or _sale_popup.is_sale_over():
 		_sale_button.hide()
 	else:
@@ -153,7 +153,7 @@ func _navigate_to_outliner() -> void:
 func _navigate_to() -> void:
 	if _tween.is_active():
 		return
-	
+
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
 	var screen: UINavigatablePage
 	if target is Practice:
@@ -208,7 +208,7 @@ func _navigate_to() -> void:
 		Events.emit_signal("practice_started", target)
 	elif target is Lesson:
 		Events.emit_signal("lesson_started", target)
-	
+
 
 func _on_practice_next_requested(practice: Practice) -> void:
 	var lesson_data := course.lessons[_lesson_index] as Lesson
