@@ -306,6 +306,7 @@ func _validate_and_run_student_code() -> void:
 	# Guard against infinite while loops
 	if "while " in script_text:
 		var modified_code := PoolStringArray()
+		var guard_counter_defined = false
 		for line in script_text.split("\n"):
 			if "while " in line and not line.strip_edges(true, false).begins_with("#"):
 				var indent := 0
@@ -313,7 +314,11 @@ func _validate_and_run_student_code() -> void:
 					indent += 1
 
 				var tabs := "\t".repeat(indent)
-				modified_code.append(tabs + "var __guard_counter := 0")
+				if guard_counter_defined:
+					modified_code.append(tabs + "__guard_counter = 0")
+				else:
+					modified_code.append(tabs + "var __guard_counter := 0")
+					guard_counter_defined = true
 				modified_code.append(line)
 				modified_code.append(tabs + "\t" + "__guard_counter += 1")
 				modified_code.append(
