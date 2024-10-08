@@ -5,7 +5,7 @@ const EDITOR_COLLAPSE_ICON := preload("res://ui/icons/fullscreen_off.png")
 
 func _ready() -> void:
 	if OS.has_feature("JavaScript"):
-		visible = false
+		modulate.a = 0.0
 		return
 
 	connect("pressed", self, "_toggle_fullscreen")
