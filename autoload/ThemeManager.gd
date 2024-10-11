@@ -17,6 +17,7 @@ func _ready() -> void:
 	var current_profile := UserProfiles.get_profile()
 	scale_all_font_sizes(current_profile.font_size_scale, false)
 	set_lower_contrast(current_profile.lower_contrast, false)
+	set_font(current_profile.font, false)
 
 
 func _cache_font_size_defaults() -> void:
@@ -73,4 +74,18 @@ func set_lower_contrast(lower_contrast: bool, and_save: bool = true) -> void:
 	if and_save:
 		var current_profile := UserProfiles.get_profile()
 		current_profile.lower_contrast = lower_contrast
+		current_profile.save()
+
+
+func set_font(font: String, and_save: bool = true) -> void:
+	for font_resource in _font_size_defaults:
+		font_resource = font_resource as DynamicFont
+		if not font_resource:
+			continue
+			
+		font_resource.font_data = load("res://ui/theme/fonts/" + font)
+	
+	if and_save:
+		var current_profile := UserProfiles.get_profile()
+		current_profile.font = font
 		current_profile.save()
