@@ -127,7 +127,5 @@ func _on_visibility_changed() -> void:
 
 
 func _on_font_item_selected(index: int) -> void:
-	print(_font_value.get_item_text(index))
 	var font := str(_font_value.get_item_metadata(_font_value.selected))
-	print(font)
 	ThemeManager.set_font(font)
