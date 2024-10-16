@@ -14,6 +14,12 @@ func _prepare() -> void:
 
 func test_inventory_has_correct_keys():
 	var source: Dictionary = inventory.get("inventory")	
+	
+	if source.size() != desired_inventory.size():
+		return tr(
+			"The amount of items is not correct. Are you missing any or add to many?"
+		)
+	
 	var inventories_match := desired_inventory.has_all(source.keys())
 	if inventories_match:
 		return ""
