@@ -13,8 +13,8 @@ func _prepare() -> void:
 
 
 func test_inventory_has_correct_keys():
-	var source: Dictionary = inventory.get("inventory")
-	var inventories_match := source.has_all(desired_inventory.keys())
+	var source: Dictionary = inventory.get("inventory")	
+	var inventories_match := desired_inventory.has_all(source.keys())
 	if inventories_match:
 		return ""
 
@@ -27,7 +27,7 @@ func test_inventory_has_correct_keys():
 
 func test_inventory_has_correct_values():
 	var source: Dictionary = inventory.get("inventory")
-	var inventories_match := source.has_all(desired_inventory.keys())
+	var inventories_match := desired_inventory.has_all(source.keys())
 	if inventories_match:
 		for key in source.keys():
 			if not desired_inventory[key] == source[key]:
