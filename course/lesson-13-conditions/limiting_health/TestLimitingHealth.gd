@@ -22,6 +22,10 @@ func test_health_limit_is_not_too_low() -> String:
 	return ""
 
 func test_health_takes_different_values() -> String:
-	if first_node.get_produced_health_values() != _expected_health_values:
+	var produced_health_values = first_node.get_produced_health_values() 
+
+	for i in range(produced_health_values.size()):
+		if produced_health_values[i] != _expected_health_values[i]:
 		return tr("When healing the character twice by 40 points, the health should go up to 60, then 80. Instead, we got %s.\nAre you using the amount parameter?") % [first_node.get_produced_health_values()]
+			
 	return ""
