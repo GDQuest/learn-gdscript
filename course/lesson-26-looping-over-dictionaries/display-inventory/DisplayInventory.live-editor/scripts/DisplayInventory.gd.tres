@@ -23,6 +23,11 @@ func _ready() -> void:
 	for node in item_nodes.values():
 		node.hide()
 
+
+func reset() -> void:
+	for node in item_nodes.values():
+		node.hide()
+
 # EXPORT run
 var inventory = {
 	\"healing heart\": 3,
