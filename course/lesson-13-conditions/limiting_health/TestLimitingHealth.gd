@@ -1,7 +1,7 @@
 extends PracticeTester
 
 var first_node: Control
-var health := 0
+var health := 0.0
 
 var _expected_health_values = [60, 80]
 
@@ -26,6 +26,6 @@ func test_health_takes_different_values() -> String:
 
 	for i in range(produced_health_values.size()):
 		if produced_health_values[i] != _expected_health_values[i]:
-		return tr("When healing the character twice by 40 points, the health should go up to 60, then 80. Instead, we got %s.\nAre you using the amount parameter?") % [first_node.get_produced_health_values()]
+			return tr("When healing the character twice by 40 points, the health should go up to 60, then 80. Instead, we got %s.\nAre you using the amount parameter?") % [first_node.get_produced_health_values()]
 			
 	return ""
