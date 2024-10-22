@@ -19,6 +19,13 @@ func _ready() -> void:
 		node.hide()
 
 	update()
+	
+
+func reset():
+	for node in [$Robot, $Turtle]:
+		node.hide()
+	clear_units()
+
 
 func _run():
 	clear_units()
