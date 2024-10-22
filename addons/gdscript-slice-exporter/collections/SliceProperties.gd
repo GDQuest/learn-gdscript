@@ -169,6 +169,22 @@ func as_json() -> Dictionary:
 	}
 
 
+const COMMENT_REGEX := "#.*$"
+
+# Takes the code of a slice and removes whitespace and commented lines,
+# making it easier to check the student's source code via string matching.
+# Returns an array of strings, one per line of code.
+static func preprocess_practice_code(code: String) -> String:
+	var result := PoolStringArray()
+	var comment_suffix := RegEx.new()
+	comment_suffix.compile(COMMENT_REGEX)
+	for line in code.split("\n"):
+		line = line.strip_edges().replace(" ", "")
+		if not (line.empty() or line.begins_with("#")):
+			result.push_back(comment_suffix.sub(line, ""))
+	return result.join("\n")
+
+
 func _to_string() -> String:
 	#return JSON.print(as_json(), "  ")
 	return "(%s:%s)" % [script_properties.get_save_name(), name]
