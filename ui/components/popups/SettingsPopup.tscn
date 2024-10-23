@@ -41,12 +41,12 @@ __meta__ = {
 
 [node name="Panel" type="Panel" parent="PanelContainer"]
 margin_right = 720.0
-margin_bottom = 675.0
+margin_bottom = 679.0
 custom_styles/panel = ExtResource( 5 )
 
 [node name="Column" type="VBoxContainer" parent="PanelContainer"]
 margin_right = 720.0
-margin_bottom = 675.0
+margin_bottom = 679.0
 custom_constants/separation = 0
 
 [node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Column"]
@@ -59,14 +59,14 @@ percent_visible = false
 [node name="Margin" type="MarginContainer" parent="PanelContainer/Column"]
 margin_top = 16.0
 margin_right = 720.0
-margin_bottom = 675.0
+margin_bottom = 679.0
 size_flags_vertical = 3
 
 [node name="Column" type="VBoxContainer" parent="PanelContainer/Column/Margin"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 700.0
-margin_bottom = 639.0
+margin_bottom = 643.0
 custom_constants/separation = 12
 
 [node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column"]
@@ -87,7 +87,7 @@ size_flags_horizontal = 4
 [node name="Settings" type="VBoxContainer" parent="PanelContainer/Column/Margin/Column"]
 margin_top = 63.0
 margin_right = 680.0
-margin_bottom = 507.0
+margin_bottom = 511.0
 size_flags_vertical = 3
 custom_constants/separation = 32
 
@@ -223,7 +223,7 @@ text = "Enabled"
 [node name="FontSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/Settings"]
 margin_top = 400.0
 margin_right = 680.0
-margin_bottom = 444.0
+margin_bottom = 448.0
 rect_pivot_offset = Vector2( -389, 116 )
 
 [node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/Settings/FontSetting"]
@@ -231,25 +231,26 @@ margin_right = 332.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
-text = "Font"
+text = "Dyslexia Font"
 
-[node name="Value" type="OptionButton" parent="PanelContainer/Column/Margin/Column/Settings/FontSetting"]
+[node name="CheckBox" type="CheckBox" parent="PanelContainer/Column/Margin/Column/Settings/FontSetting"]
 margin_left = 348.0
 margin_right = 680.0
-margin_bottom = 44.0
-hint_tooltip = "Change the course's language. We plan to add other languages, but only English is available for now."
+margin_bottom = 48.0
+hint_tooltip = "Lower the text's brightness."
 size_flags_horizontal = 3
+text = "Enabled"
 
 [node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column"]
-margin_top = 519.0
+margin_top = 523.0
 margin_right = 680.0
-margin_bottom = 539.0
+margin_bottom = 543.0
 rect_min_size = Vector2( 400, 20 )
 
 [node name="Buttons" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column"]
-margin_top = 551.0
+margin_top = 555.0
 margin_right = 680.0
-margin_bottom = 619.0
+margin_bottom = 623.0
 alignment = 1
 
 [node name="CancelButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons"]

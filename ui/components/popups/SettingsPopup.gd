@@ -20,7 +20,7 @@ onready var _scroll_sensitivity_slider := $PanelContainer/Column/Margin/Column/S
 onready var _framerate_option := $PanelContainer/Column/Margin/Column/Settings/FramerateSetting/Value as OptionButton
 
 onready var _lower_contrast := $PanelContainer/Column/Margin/Column/Settings/LowerContrasSetting/CheckBox as CheckBox
-onready var _font_value :=$PanelContainer/Column/Margin/Column/Settings/FontSetting/Value as OptionButton
+onready var _dyslexia_font :=$PanelContainer/Column/Margin/Column/Settings/FontSetting/CheckBox as CheckBox
 
 onready var _apply_button := $PanelContainer/Column/Margin/Column/Buttons/ApplyButton as Button
 onready var _cancel_button := $PanelContainer/Column/Margin/Column/Buttons/CancelButton as Button
@@ -33,11 +33,9 @@ func _init() -> void:
 
 func _ready() -> void:
 	_init_languages()
-	_init_fonts()
 	_init_values()
 	
 	_font_size_value.connect("value_changed", self, "_on_font_size_changed")
-	_font_value.connect("item_selected", self, "_on_font_item_selected")
 	
 	_apply_button.connect("pressed", self, "_on_apply_settings")
 	_cancel_button.connect("pressed", self, "hide")
@@ -65,17 +63,6 @@ func _init_languages() -> void:
 		_language_value.set_item_metadata(item_index, language_data.code)
 
 
-func _init_fonts() -> void:
-	_font_value.clear()
-	
-	var fonts = {"OpenSans": "OpenSans-Regular.ttf", "OpenDyslexic": "OpenDyslexic-Regular.otf"}
-	for font in fonts:
-		var item_index := _font_value.get_item_count()
-		
-		_font_value.add_item(font)
-		_font_value.set_item_metadata(item_index, fonts[font])
-
-
 func _init_values() -> void:
 	var current_profile = UserProfiles.get_profile()
 	
@@ -83,12 +70,6 @@ func _init_values() -> void:
 		var language_code := str(_language_value.get_item_metadata(i))
 		if language_code == current_profile.language:
 			_language_value.select(i)
-			break
-
-	for i in _font_value.get_item_count():
-		var font := str(_font_value.get_item_metadata(i))
-		if font == current_profile.font:
-			_font_value.select(i)
 			break
 	
 	_font_size_value.value = clamp(
@@ -98,6 +79,7 @@ func _init_values() -> void:
 	_framerate_option.selected = FRAMERATE_MAP.values().find(current_profile.framerate_limit)
 	
 	_lower_contrast.pressed = current_profile.lower_contrast
+	_dyslexia_font.pressed = current_profile.dyslexia_font
 
 
 func _on_apply_settings() -> void:
@@ -107,6 +89,7 @@ func _on_apply_settings() -> void:
 	ThemeManager.scale_all_font_sizes(size_scale)
 	
 	ThemeManager.set_lower_contrast(_lower_contrast.pressed)
+	ThemeManager.set_dyslexia_font(_dyslexia_font.pressed)
 
 	current_profile.set_scroll_sensitivity(_scroll_sensitivity_slider.value)
 	current_profile.set_framerate_limit(FRAMERATE_MAP[_framerate_option.selected])
@@ -124,8 +107,3 @@ func _on_font_size_changed(value: int) -> void:
 func _on_visibility_changed() -> void:
 	if _panel.visible:
 		_font_size_value.grab_focus()
-
-
-func _on_font_item_selected(index: int) -> void:
-	var font := str(_font_value.get_item_metadata(_font_value.selected))
-	ThemeManager.set_font(font)
