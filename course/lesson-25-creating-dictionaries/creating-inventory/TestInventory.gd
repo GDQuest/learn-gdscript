@@ -14,29 +14,35 @@ func _prepare() -> void:
 
 func test_inventory_has_correct_keys():
 	var source: Dictionary = inventory.get("inventory")
-	var inventories_match := source.has_all(desired_inventory.keys())
+
+	if source.size() != desired_inventory.size():
+		return tr(
+			"The amount of items is not as expected. The inventory should have %s items but your inventory has %s."
+		) % [desired_inventory.size(), source.size()] + " " +\
+		tr("Are you missing any items?")
+
+	var inventories_match := desired_inventory.has_all(source.keys())
 	if inventories_match:
 		return ""
 
 	return tr(
-		"The item names aren't correct. Are you missing any?"
-	)
+		"The inventory doesn't contain all the required items. Make sure you have '%s' as keys in your inventory dictionary."
+	) % PoolStringArray(desired_inventory.keys()).join("', '")
 
 	return ""
 
 
 func test_inventory_has_correct_values():
 	var source: Dictionary = inventory.get("inventory")
-	var inventories_match := source.has_all(desired_inventory.keys())
+	var inventories_match := desired_inventory.size() == source.size() and desired_inventory.has_all(source.keys())
 	if inventories_match:
 		for key in source.keys():
 			if not desired_inventory[key] == source[key]:
 				inventories_match = false
 				break
-
-	if not inventories_match:
+	else:
 		return tr(
-			"The amount of items isn't correct. Does each key have the correct value?"
-		)
+			"The values for one or more items aren't correct. You need %s healing hearts, %s gems, and %s sword."
+		) % [desired_inventory["healing heart"], desired_inventory["gems"], desired_inventory["sword"]]
 
 	return ""
