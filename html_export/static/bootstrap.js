@@ -10,7 +10,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     document.getElementById("canvas-frame")
   );
 
-  const noOp = () => {};
+  const noOp = () => { };
 
   const throttle = (callback, limit = 50) => {
     let waiting = false;
@@ -26,14 +26,14 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
 
   const aspectRatio =
     (maxW = 0, maxH = 0) =>
-    (currentWidth = window.innerWidth, currentHeight = window.innerHeight) => {
-      const ratioW = currentWidth / maxW;
-      const ratioH = currentHeight / maxH;
-      const ratio = Math.min(ratioW, ratioH);
-      const width = maxW * ratio;
-      const height = maxH * ratio;
-      return { width, height, ratio };
-    };
+      (currentWidth = window.innerWidth, currentHeight = window.innerHeight) => {
+        const ratioW = currentWidth / maxW;
+        const ratioH = currentHeight / maxH;
+        const ratio = Math.min(ratioW, ratioH);
+        const width = maxW * ratio;
+        const height = maxH * ratio;
+        return { width, height, ratio };
+      };
 
   /**
    * Returns a proxied console that can be turned off and on by appending
@@ -124,7 +124,6 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
   GDQUEST.events = {
     onError: makeSignal(),
     onGodotLoaded: makeSignal(),
-    onFullScreen: makeSignal(),
     onResize: makeSignal(),
   };
 
@@ -356,45 +355,45 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
 
     const makeLogFunction =
       (level = LEVELS.INFO) =>
-      /** @type {LogFunction} */
-      (anything, msg = "") => {
-        if (typeof anything === "string" || typeof anything === "number") {
-          msg = String(anything);
-          anything = null;
-        }
+        /** @type {LogFunction} */
+        (anything, msg = "") => {
+          if (typeof anything === "string" || typeof anything === "number") {
+            msg = String(anything);
+            anything = null;
+          }
 
-        const time = Date.now();
-        /** @type {LogLine} */
-        const log_line = { time, level, msg, ...(anything || {}) };
-        log_lines.push(log_line);
-        localStorage.setItem(KEY, JSON.stringify(log_lines));
+          const time = Date.now();
+          /** @type {LogLine} */
+          const log_line = { time, level, msg, ...(anything || {}) };
+          log_lines.push(log_line);
+          localStorage.setItem(KEY, JSON.stringify(log_lines));
 
-        if (level < 30) {
-          if (anything) {
-            debug.log(msg, anything);
+          if (level < 30) {
+            if (anything) {
+              debug.log(msg, anything);
+            } else {
+              debug.log(msg);
+            }
+          } else if (level < 40) {
+            if (anything) {
+              debug.info(msg, anything);
+            } else {
+              debug.info(msg);
+            }
+          } else if (level < 50) {
+            if (anything) {
+              debug.warn(msg, anything);
+            } else {
+              debug.warn(msg);
+            }
           } else {
-            debug.log(msg);
+            if (anything) {
+              debug.error(msg, anything);
+            } else {
+              debug.error(msg);
+            }
           }
-        } else if (level < 40) {
-          if (anything) {
-            debug.info(msg, anything);
-          } else {
-            debug.info(msg);
-          }
-        } else if (level < 50) {
-          if (anything) {
-            debug.warn(msg, anything);
-          } else {
-            debug.warn(msg);
-          }
-        } else {
-          if (anything) {
-            debug.error(msg, anything);
-          } else {
-            debug.error(msg);
-          }
-        }
-      };
+        };
 
     /** @type { Log['display'] } */
     const display = () => console.table(get());
@@ -466,163 +465,47 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
   }
 
   fullscreen: {
-    const debug = makeLogger("fullscreen");
-    /**
-     * Browsers make it exceedingly hard to get that information reliably, so
-     * we have to rely on a bunch of different strategies
+    /*
+     * Create a button with a label.
      */
-    const isIt = (() => {
-      /**
-       * This is an invisible element which changes position when the browser
-       * is full screen. We do this through the media query:
-       * ```css
-       * @media all and (display-mode: fullscreen) {
-       *    #fullscreen-detector {
-       *      top: 1px;
-       *    }
-       *  }
-       * ```
-       */
-      const fullScreenPoller = (() => {
-        const el = document.createElement("div");
-        el.id = "fullscreen-detector";
-        document.body.appendChild(el);
-        return el;
-      })();
-
-      /** check is the element has moved */
-      const checkCSSMediaQuery = () => {
-        const top = fullScreenPoller.getBoundingClientRect().top > 0;
-        return top;
-      };
-
-      /** check if browser has borders. Take zoom into account */
-      const checkWindowMargins = () => {
-        const zoom = window.outerWidth / window.innerWidth;
-        const hasMargin =
-          Math.abs(window.innerWidth * zoom - screen.width) < 10;
-        return hasMargin;
-      };
-
-      /** check if some element has been set fullscreen through the JS API */
-      const checkFullScreenElement = () => {
-        const hasSomeFullScreenElement = document.fullscreenElement !== null;
-        return hasSomeFullScreenElement;
-      };
-
-      return {
-        checkFullScreenElement,
-        checkCSSMediaQuery,
-        checkWindowMargins,
-      };
-    })();
-
-    let isFullScreen = false;
-    let wasFullScreen = false;
-
-    /** use the JS API to call fullscreen */
-    const toggle = () => {
-      //debug.info(`will`, isFullScreen ? "exit" : "enter", "fullscreen mode");
-      const isItActuallyFullScreen = isIt.checkCSSMediaQuery();
-      if (isItActuallyFullScreen !== isFullScreen) {
-        debug.error(
-          `Mismatch! Expected fullscreen to be ${isFullScreen}, but it is ${isItActuallyFullScreen}.`
-        );
-        if (isItActuallyFullScreen) {
-          debug.error(
-            `Cannot exit a fullscreen mode set natively. Bailing out!`
-          );
-          return;
-        } else {
-          debug.warn(`Will set our fullscreen now`);
-          isFullScreen = false;
-        }
-      }
-      isFullScreen
-        ? document.exitFullscreen()
-        : document.documentElement.requestFullscreen();
-      isFullScreen = !isFullScreen;
-    };
-
-    /**
-     * Create a button with the proper classes; change class when
-     * fullscreen event happens
-     */
-    const button = (() => {
-      const normalClassName = "button-fullscreen";
-
+    const makeFullscreenButton = (className, onClick = () => { }) => {
       const button = document.createElement("button");
-      button.classList.add(normalClassName);
-      button.addEventListener("click", toggle);
+      button.classList.add(className);
+      button.addEventListener("click", onClick);
 
       const label = document.createElement("span");
       label.textContent = "toggle Fullscreen";
       button.appendChild(label);
       return button;
-    })();
+    }
+
+    /**
+     * Create a button with the proper classes; change class when
+     * fullscreen event happens
+     */
+    const fullscreenOnButton = makeFullscreenButton("button-fullscreen-on", () => document.documentElement.requestFullscreen());
+    const fullscreenOffButton = makeFullscreenButton("button-fullscreen-off", () => {
+      document.exitFullscreen().catch((err) => err.name !== "TypeError" && console.error(err));
+    });
 
     /**
      * Only add the button if Godot has loaded
      */
     GDQUEST.events.onGodotLoaded.once(() => {
-      canvasContainer.appendChild(button);
+      canvasContainer.appendChild(fullscreenOnButton);
+      canvasContainer.appendChild(fullscreenOffButton);
     });
-
-    /**
-     * Checks if the actual fullscreen state was set through an API
-     * If we're _exiting_ fullscreen, then we can't check, but we
-     * set `isFullScreen` to `false`.
-     * @param {boolean} isItActuallyFullScreen
-     */
-    const wasItOurFullScreen = (isItActuallyFullScreen) => {
-      if (isItActuallyFullScreen) {
-        if (isIt.checkFullScreenElement()) {
-          debug.log("full screen changed through our button");
-        } else {
-          // that means fullscreen was set _not_ through our button
-          debug.warn("full screen changed through shortcut, hiding the button");
-          document.body.classList.add("native-fullscreen");
-        }
-      } else {
-        debug.log("exiting fullscreen");
-        isFullScreen = false;
-        document.body.classList.remove("native-fullscreen");
-      }
-    };
-
-    /**
-     * @param {Event} evt
-     */
-    const onFullScreenChange = (evt) => {
-      const isItActuallyFullScreen = isIt.checkFullScreenElement();
-      if (isItActuallyFullScreen != wasFullScreen) {
-        wasFullScreen = isItActuallyFullScreen;
-        debug.info(`[ ${evt.type} ]`, `full screen state changed`);
-        const wasIt = wasItOurFullScreen(isItActuallyFullScreen);
-        GDQUEST.events.onFullScreen.emit(isItActuallyFullScreen, wasIt);
-      }
-    };
 
     document.addEventListener("keydown", (event) => {
-      if (event.code == `F11`) {
+      if (event.code === "F11") {
         event.preventDefault();
-        button.focus();
-        debug.log("Stopped F11");
+        if (getComputedStyle(fullscreenOnButton).display !== "none") {
+          fullscreenOnButton.click();
+        } else if (getComputedStyle(fullscreenOffButton).display !== "none") {
+          fullscreenOffButton.click();
+        }
       }
     });
-
-    /**
-     * This is for when using the JS API
-     */
-    document.addEventListener("fullscreenchange", onFullScreenChange);
-    /**
-     * This is for buttons, shortcuts, and other methods for setting fullscreen.
-     * We could also potentially poll for size after keypresses, but this seems
-     * to work well enough
-     */
-    GDQUEST.events.onResize.connect(onFullScreenChange);
-
-    GDQUEST.fullScreen = { isIt, toggle };
   }
 
   return GDQUEST;
