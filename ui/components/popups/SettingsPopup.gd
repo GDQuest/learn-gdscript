@@ -13,14 +13,14 @@ var _sample_default_font: DynamicFont
 
 onready var _panel := $PanelContainer as PanelContainer
 onready var _color_rect := $ColorRect as ColorRect
-onready var _language_value := $PanelContainer/Column/Margin/Column/Settings/LanguageSetting/Value as OptionButton
-onready var _font_size_value := $PanelContainer/Column/Margin/Column/Settings/FontSizeSetting/ValueContainer/Value as HSlider
-onready var _font_size_sample := $PanelContainer/Column/Margin/Column/Settings/FontSizeSetting/ValueContainer/SampleText as Label
-onready var _scroll_sensitivity_slider := $PanelContainer/Column/Margin/Column/Settings/ScrollSensitivitySetting/Value as HSlider
-onready var _framerate_option := $PanelContainer/Column/Margin/Column/Settings/FramerateSetting/Value as OptionButton
+onready var _language_value := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/Value as OptionButton
+onready var _font_size_value := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer/Value as HSlider
+onready var _font_size_sample := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer/SampleText as Label
+onready var _scroll_sensitivity_slider := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/ScrollSensitivitySetting/Value as HSlider
+onready var _framerate_option := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting/Value as OptionButton
 
-onready var _lower_contrast := $PanelContainer/Column/Margin/Column/Settings/LowerContrasSetting/CheckBox as CheckBox
-onready var _dyslexia_font :=$PanelContainer/Column/Margin/Column/Settings/FontSetting/CheckBox as CheckBox
+onready var _lower_contrast := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LowerContrasSetting/CheckBox as CheckBox
+onready var _dyslexia_font :=$PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSetting/CheckBox as CheckBox
 
 onready var _apply_button := $PanelContainer/Column/Margin/Column/Buttons/ApplyButton as Button
 onready var _cancel_button := $PanelContainer/Column/Margin/Column/Buttons/CancelButton as Button
