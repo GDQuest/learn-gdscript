@@ -84,11 +84,14 @@ func set_dyslexia_font(dyslexia_font: bool, and_save: bool = true) -> void:
 			continue
 
 		if dyslexia_font:
-			if "Regular" in font_resource.font_data.font_path:
+			font_resource.size -= (font_resource.size * 0.25)
+			if "SourceCodePro" in font_resource.font_data.font_path:
+				font_resource.font_data = load("res://ui/theme/fonts/OpenDyslexicMono-Regular.otf")
+			elif "Regular" in font_resource.font_data.font_path:
 				font_resource.font_data = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
-			if "Bold" in font_resource.font_data.font_path:
+			elif "Bold" in font_resource.font_data.font_path:
 				font_resource.font_data = load("res://ui/theme/fonts/OpenDyslexic-Bold.otf")
-			if "Italic" in font_resource.font_data.font_path:
+			elif "Italic" in font_resource.font_data.font_path:
 				font_resource.font_data = load("res://ui/theme/fonts/OpenDyslexic-Italic.otf")
 		else:
 			font_resource.font_data = load(_font_defaults[font_resource]["font"])
