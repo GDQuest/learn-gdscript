@@ -96,11 +96,19 @@ func _on_apply_settings() -> void:
 	
 	var language_code := str(_language_value.get_item_metadata(_language_value.selected))
 	TranslationManager.set_language(language_code)
+	
+	var current_font = _font_size_sample.get_font("custom_fonts/font")
+	if current_profile.dyslexia_font:
+		current_font.font_data = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
+	_font_size_sample.add_font_override("font", current_font)
 
 
 func _on_font_size_changed(value: int) -> void:
+	var current_profile = UserProfiles.get_profile()
 	var font_override = _sample_default_font.duplicate() as DynamicFont
 	font_override.size += 2 * value
+	if current_profile.dyslexia_font:
+		font_override.font_data = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
 	_font_size_sample.add_font_override("font", font_override)
 
 
