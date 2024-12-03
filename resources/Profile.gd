@@ -22,6 +22,8 @@ export var language := "en"
 export var font_size_scale := 0
 # Lower contrast enabled
 export var lower_contrast := false
+# Dyslexia Font enabled
+export var dyslexia_font := false
 # Sensitivity when scrolling with the mouse wheel or touchpad.
 export var scroll_sensitivity := 1.0 setget set_scroll_sensitivity
 # Target framerate for the application, to reduce update intensity on lower end devices.
