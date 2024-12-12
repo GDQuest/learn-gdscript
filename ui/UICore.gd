@@ -161,4 +161,3 @@ func _update_framerate(new_framerate: int) -> void:
 	if new_framerate == 0:
 		new_framerate = 1000
 	OS.low_processor_usage_mode_sleep_usec = 1_000_000 / new_framerate
-	print(OS.low_processor_usage_mode_sleep_usec)
