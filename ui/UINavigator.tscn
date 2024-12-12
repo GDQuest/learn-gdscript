@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/components/BreadCrumbs.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://ui/components/popups/LessonDonePopup.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/components/QuitButton.tscn" type="PackedScene" id=13]
 [ext_resource path="res://ui/components/SalePopup.tscn" type="PackedScene" id=14]
+[ext_resource path="res://ui/components/GDQuestCreditsLabel.tscn" type="PackedScene" id=15]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -164,3 +165,13 @@ title = "CHRISTMAS SALE"
 only_until_string = "the end of the year"
 end_datetime_iso = "2023-01-01T00:00"
 sale_url = "https://gdquest.mavenseed.com/courses/"
+
+[node name="GDQuestCreditsLabel" parent="." instance=ExtResource( 15 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1920.0
+margin_top = 1080.0
+margin_right = 1920.0
+margin_bottom = 1080.0
