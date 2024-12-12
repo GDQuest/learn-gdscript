@@ -61,6 +61,9 @@ func _init() -> void:
 
 
 func bbcode_add_code_color(bbcode_text := "") -> String:
+	if _REGEXES.empty():
+		return bbcode_text
+
 	var regex_matches: Array = _REGEXES["code"].search_all(bbcode_text)
 	var index_delta := 0
 
