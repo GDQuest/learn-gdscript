@@ -1,0 +1,418 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"PO-Revision-Date: 2024-04-01 14:01+0000\n"
+"Last-Translator: Matthijs <m4tthijsbl0m@gmail.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-5-your-first-function/nl/>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.5-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-5-your-first-function/lesson.tres:14
+msgid ""
+"So far, we have called existing functions that other developers wrote.\n"
+"\n"
+"In this lesson, we'll talk more about what functions are and see some "
+"examples. Then, you will learn how to define your own functions."
+msgstr ""
+"Tot nu toe hebben we bestaande functies aangeroepen die andere ontwikkelaars "
+"hebben geschreven.\n"
+"\n"
+"In deze les zullen we meer bespreken wat functies zijn en enkele voorbeelden "
+"bekijken. Daarna leer je hoe je je eigen functies kunt definiëren."
+
+#: course/lesson-5-your-first-function/lesson.tres:24
+msgid "Functions are named sequences of instructions"
+msgstr "Functies zijn reeksen instructies met een naam"
+
+#: course/lesson-5-your-first-function/lesson.tres:26
+msgid ""
+"Functions are [i]sequences of instructions[/i] we give a name. We call that "
+"name an [i]identifier[/i].\n"
+"\n"
+"Using the identifier, we can get the computer to execute all the "
+"instructions inside the function as many times as we need. This is what a "
+"[i]function call[/i] does."
+msgstr ""
+"Functies zijn [i]reeksen instructies[/i] die we een naam geven. We noemen "
+"die naam een [i]identifier[/i].\n"
+"\n"
+"Door de identifier te gebruiken, kunnen we de computer alle instructies in "
+"de functie zo vaak laten uitvoeren als we nodig hebben. Dit is wat een "
+"[i]functieaanroep[/i] doet."
+
+#: course/lesson-5-your-first-function/lesson.tres:36
+msgid "Learn more about identifiers"
+msgstr "Leer meer over identifiers"
+
+#: course/lesson-5-your-first-function/lesson.tres:38
+msgid ""
+"In computer programming, we talk about [i]identifiers[/i] rather than "
+"\"names\".\n"
+"\n"
+"It is because a function name is a label the computer uses to precisely "
+"[i]identify[/i] and refer to a function or other code elements.\n"
+"\n"
+"Identifiers are unique: you cannot reuse the same name in a given [i]space[/"
+"i] in your code.\n"
+"\n"
+"If you try to name two functions the same, the computer will raise an error."
+msgstr ""
+"Bij computerprogrammeren hebben we het over [i]identifiers[/i] in plaats van "
+"\"namen\".\n"
+"\n"
+"Dat is omdat een functienaam een label is dat de computer gebruikt om een "
+"functie of andere code-elementen precies te [i]identificeren[/i] en ernaar "
+"te verwijzen.\n"
+"\n"
+"Identifiers zijn uniek: je kunt dezelfde naam niet hergebruiken in een "
+"bepaalde [i]ruimte[/i] in je code.\n"
+"\n"
+"Als je twee functies dezelfde naam probeert te geven, zal de computer een "
+"foutmelding geven."
+
+#: course/lesson-5-your-first-function/lesson.tres:54
+msgid ""
+"If there is any code that you need to run multiple times, you can put it "
+"inside a function and give it a name.\n"
+"\n"
+"The instructions inside a function can be any code you want, and they will "
+"all run every time you call the function.\n"
+"\n"
+"Here's the example of a [code]move_and_rotate()[/code] function that moves "
+"the turtle forward and then turns it 90°."
+msgstr ""
+"Als er code is die meerdere keren moet worden uitgevoerd, kun je deze in een "
+"functie plaatsen en een naam geven.\n"
+"\n"
+"De instructies in een functie kunnen elke code zijn die je wilt, en ze "
+"zullen allemaal worden uitgevoerd elke keer dat je de functie aanroept.\n"
+"\n"
+"Hier is een voorbeeld van een [code]move_and_rotate()[/code] functie die de "
+"schildpad naar voren beweegt en dan 90° draait."
+
+#: course/lesson-5-your-first-function/lesson.tres:78
+msgid ""
+"The [code]move_and_rotate()[/code] function consists of two instructions, "
+"each on a separate line. Both of those instructions call another familiar "
+"function.\n"
+"\n"
+"You could write another function that calls [code]move_and_rotate()[/code] "
+"four times to draw a square of length 200 pixels."
+msgstr ""
+"De [code]move_and_rotate()[/code] functie bestaat uit twee instructies, elk "
+"op een aparte regel. Beide instructies roepen een andere bekende functie aan."
+"\n"
+"\n"
+"Je zou een andere functie kunnen schrijven die [code]move_and_rotate()[/code]"
+" vier keer aanroept om een vierkant met een lengte van 200 pixels te tekenen."
+
+#: course/lesson-5-your-first-function/lesson.tres:100
+msgid ""
+"Every time we call [code]move_and_rotate()[/code], the two functions "
+"[code]move_forward(200)[/code] and [code]turn_right(90)[/code] are called in "
+"sequence.\n"
+"\n"
+"In this simple example, it may not feel super useful. Here's a more useful "
+"and realistic one: a function to draw any square.\n"
+"\n"
+"The following function uses [i]parameters[/i], which we will explore in the "
+"next lesson.\n"
+"\n"
+"[i]Drag the slider to change the square's size.[/i]"
+msgstr ""
+"Telkens wanneer we [code]move_and_rotate()[/code] aanroepen, worden "
+"achtereenvolgens de twee functies [code]move_forward(200)[/code] en "
+"[code]turn_right(90)[/code] aangeroepen.\n"
+"\n"
+"In dit eenvoudige voorbeeld voelt het misschien niet super nuttig aan. Hier "
+"is een nuttiger en realistischer voorbeeld: een functie om een willekeurig "
+"vierkant te tekenen.\n"
+"\n"
+"De volgende functie gebruikt [i]parameters[/i], die we in de volgende les "
+"zullen verkennen.\n"
+"\n"
+"[i]Versleep de schuifregelaar om de grootte van het vierkant te wijzigen.[/i]"
+
+#: course/lesson-5-your-first-function/lesson.tres:124
+msgid "How to define your own functions"
+msgstr "Je eigen functies definiëren"
+
+#: course/lesson-5-your-first-function/lesson.tres:126
+msgid ""
+"Let's break down how you define a function.\n"
+"\n"
+"A function definition starts with the [code]func[/code] keyword followed by "
+"a space, the function's name, parentheses, and a colon."
+msgstr ""
+"Laten we eens kijken hoe je een functie definieert.\n"
+"\n"
+"Een functiedefinitie begint met het sleutelwoord [code]func[/code], gevolgd "
+"door een spatie, de naam van de functie, haakjes en een dubbele punt."
+
+#: course/lesson-5-your-first-function/lesson.tres:148
+msgid ""
+"The instructions inside the function [b]must[/b] all start with a leading "
+"tab character. You can insert that tab character by pressing the [b]Tab[/b] "
+"key.\n"
+"\n"
+"We call those leading tabs [i]indents[/i]. They're important: the computer "
+"uses them to know which instructions are part of the same code block."
+msgstr ""
+"De instructies in de functie [b]moeten[/b] allemaal beginnen met een "
+"voorafgaand tab-teken. Je kunt dat tab-teken invoegen door op de [b]Tab[/b]-"
+"toets te drukken.\n"
+"\n"
+"We noemen deze voorlopende tabs [i]inspringingen[/i]. Ze zijn belangrijk: de "
+"computer gebruikt ze om te weten welke instructies deel uitmaken van "
+"hetzelfde codeblok."
+
+#: course/lesson-5-your-first-function/lesson.tres:158
+msgid "Why do we use functions?"
+msgstr "Waarom gebruiken we functies?"
+
+#: course/lesson-5-your-first-function/lesson.tres:161
+msgid ""
+"Functions are groups of instructions we reuse every time we call the "
+"function.\n"
+"\n"
+"Because we give functions a name, they also allow us to name a set of "
+"instructions, which is handy!"
+msgstr ""
+"Functies zijn groepen instructies die hergebruiken iedere keer dat we de "
+"functie aanroepen.\n"
+"\n"
+"Omdat we functies een naam geven, stellen ze ons ook in staat om een reeks "
+"instructies een naam te geven, wat handig is!"
+
+#: course/lesson-5-your-first-function/lesson.tres:164
+#: course/lesson-5-your-first-function/lesson.tres:165
+msgid "To reuse code multiple times. "
+msgstr "Om code meerdere keren te hergebruiken. "
+
+#: course/lesson-5-your-first-function/lesson.tres:164
+#: course/lesson-5-your-first-function/lesson.tres:165
+msgid "To run multiple instructions in one go."
+msgstr "Om meerdere instructies in één keer uit te voeren."
+
+#: course/lesson-5-your-first-function/lesson.tres:164
+#: course/lesson-5-your-first-function/lesson.tres:165
+msgid "To put a name on multiple lines of code."
+msgstr "Om een naam te geven aan meerdere regels code."
+
+#: course/lesson-5-your-first-function/lesson.tres:172
+msgid "Names in code have rules"
+msgstr "Namen in code moeten voldoen aan regels"
+
+#: course/lesson-5-your-first-function/lesson.tres:174
+msgid ""
+"Function identifiers cannot contain spaces. In general, names in programming "
+"languages cannot contain spaces.\n"
+"\n"
+"The computer uses spaces to detect the separation between different keywords "
+"and identifiers.\n"
+"\n"
+"Instead of spaces, in GDScript, we use underscores (\"_\"). You saw this "
+"already with functions like [code]move_forward()[/code] or "
+"[code]move_local_x()[/code]. This is the convention we follow in GDScript.\n"
+"\n"
+"There's another convention programmers use in some other programming "
+"languages.\n"
+"\n"
+"Instead of using underscores, they start words with capital letters except "
+"for the first one. With that convention, you'd write function names like "
+"[code]moveForward()[/code] or [code]moveLocalX()[/code]\n"
+"\n"
+"Identifiers also [i]have[/i] to start with a letter or an underscore; You "
+"[i]can't[/i] begin with a number, but you can use numbers after the first "
+"character."
+msgstr ""
+"Functie-identifiers kunnen geen spaties bevatten. In het algemeen kunnen "
+"namen in programmeertalen geen spaties bevatten.\n"
+"\n"
+"De computer gebruikt spaties om de scheiding tussen verschillende "
+"sleutelwoorden en identifiers aan te geven.\n"
+"\n"
+"In GDScript gebruiken we in plaats van spaties lage streepjes (\"_\"). Je "
+"zag dit al bij functies als [code]move_forward()[/code] of "
+"[code]move_local_x()[/code]. Dit is de conventie die we volgen in GDScript.\n"
+"\n"
+"In sommige andere programmeertalen gebruiken programmeurs nog een andere "
+"conventie.\n"
+"\n"
+"In plaats van underscores te gebruiken, beginnen ze woorden met "
+"hoofdletters, behalve de eerste. Met die conventie zou je functienamen "
+"schrijven als [code]moveForward()[/code] of [code]moveLocalX()[/code].\n"
+"\n"
+"Identifiers [i]moeten[/i] ook beginnen met een letter of een underscore; ze "
+"[i]kunnen niet[/i] beginnen met een cijfer, maar je kunt wel cijfers "
+"gebruiken na het eerste teken."
+
+#: course/lesson-5-your-first-function/lesson.tres:192
+msgid "Which of the following names are valid function names?"
+msgstr "Welke van de volgende namen zijn geldige functienamen?"
+
+#: course/lesson-5-your-first-function/lesson.tres:193
+msgid "Note that it's fine to use capital letters."
+msgstr "Merk op dat het prima is om hoofdletters te gebruiken."
+
+#: course/lesson-5-your-first-function/lesson.tres:195
+msgid ""
+"You can't name a function [code]move forward[/code] because it contains a "
+"space. Names in code cannot contain spaces.\n"
+"\n"
+"They can't start with numbers either, which is why [code]45_degree_turn[/"
+"code] is also invalid. \n"
+"\n"
+"However, having numbers elsewhere in a function name is fine. That's why "
+"[code]make3NewCharacters[/code] works."
+msgstr ""
+"Je kunt een functie niet [code]move forward[/code] noemen omdat er een "
+"spatie in staat. Namen in code kunnen geen spaties bevatten.\n"
+"\n"
+"Ze kunnen ook niet beginnen met getallen, daarom is "
+"[code]45_degree_turn[/code] ook ongeldig. \n"
+"\n"
+"Maar cijfers elders in een functienaam zijn wel toegestaan. Daarom werkt "
+"[code]make3NewCharacters[/code] wel."
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+msgid "move forward"
+msgstr "move forward"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+#: course/lesson-5-your-first-function/lesson.tres:201
+msgid "jump"
+msgstr "jump"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+#: course/lesson-5-your-first-function/lesson.tres:201
+msgid "make3NewCharacters"
+msgstr "make3NewCharacters"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+#: course/lesson-5-your-first-function/lesson.tres:201
+msgid "move_forward"
+msgstr "move_forward"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+msgid "45_degree_turn"
+msgstr "45_degree_turn"
+
+#: course/lesson-5-your-first-function/lesson.tres:208
+msgid "Instantly moving the turtle to a different position"
+msgstr "De schildpad onmiddellijk naar een andere plek verplaatsen"
+
+#: course/lesson-5-your-first-function/lesson.tres:210
+msgid ""
+"In order to draw multiple squares in different positions, we introduce a new "
+"function for our turtle to use.\n"
+"\n"
+"The [code]jump()[/code] function picks up the turtle and places it relative "
+"to where it is.\n"
+"\n"
+"So calling [code]jump(-100, 50)[/code] moves the turtle by 100 pixels to the "
+"[b]left[/b] and 50 pixels [b]down[/b] without drawing any lines."
+msgstr ""
+"Om meerdere vierkanten op verschillende plekken te tekenen, introduceren we "
+"een nieuwe functie die onze schildpad kan gebruiken.\n"
+"\n"
+"De [code]jump()[/code] functie pakt de schildpad op en plaatst hem relatief "
+"ten opzichte van waar hij was.\n"
+"\n"
+"Dus als je [code]jump(-100, 50)[/code] oproept, wordt de schildpad 100 "
+"pixels naar [b]links[/b] en 50 pixels naar [b]beneden[/b] verplaatst zonder "
+"lijnen te tekenen."
+
+#: course/lesson-5-your-first-function/lesson.tres:232
+msgid "A function to draw squares"
+msgstr "Een functie om vierkanten te tekenen"
+
+#: course/lesson-5-your-first-function/lesson.tres:233
+msgid ""
+"Code a function named [code]draw_square()[/code] to draw one square of "
+"length 200 pixels. The function should take no parameters.\n"
+"\n"
+"Use the [code]move_forward()[/code] and [code]turn_right()[/code] functions "
+"to instruct the turtle.\n"
+"\n"
+"In the following practice, you'll use the [code]draw_square()[/code] "
+"function to draw multiple squares by calling your own function."
+msgstr ""
+"Schrijf een functie met de naam [code]draw_square()[/code] om een vierkant "
+"met een lengte van 200 pixels te tekenen. De functie hoeft geen parameters "
+"aan te nemen.\n"
+"\n"
+"Gebruik de functies [code]move_forward()[/code] en [code]turn_right()[/code] "
+"om de schildpad te aan te sturen.\n"
+"\n"
+"In de volgende oefening gebruik je de functie [code]draw_square()[/code] om "
+"meerdere vierkanten te tekenen door je eigen functie aan te roepen."
+
+#: course/lesson-5-your-first-function/lesson.tres:246
+msgid ""
+"Until now, you've had to write code by hand, and it's boring. It's time to "
+"code a reusable function. You'll use it to draw multiple squares."
+msgstr ""
+"Tot dusver moest je code met de hand schrijven en dat is saai. Het is tijd "
+"om een herbruikbare functie te schrijven. Je zult het gebruiken om meerdere "
+"vierkanten te tekenen."
+
+#: course/lesson-5-your-first-function/lesson.tres:251
+msgid "Drawing multiple squares"
+msgstr "Meerdere vierkanten tekenen"
+
+#: course/lesson-5-your-first-function/lesson.tres:252
+msgid ""
+"You have a function to draw one square: [code]draw_square()[/code]. Use it "
+"to draw three squares.\n"
+"\n"
+"We already created [code]draw_square()[/code] for you. Create a function "
+"named [code]draw_three_squares[/code] that calls [code]draw_square()[/code] "
+"three times.\n"
+"\n"
+"If you just call the function, all three squares will overlap. To stack them "
+"diagonally, call [code]jump(300, 300)[/code] between two calls to "
+"[code]draw_square()[/code].\n"
+"\n"
+"Calling [code]jump(300, 300)[/code] makes the turtle jump by 300 pixels to "
+"the right and 300 pixels down without drawing any lines."
+msgstr ""
+"Je hebt een functie om een vierkant te tekenen: [code]draw_square()[/code]. "
+"Gebruik deze functie om drie vierkanten te tekenen.\n"
+"\n"
+"We hebben [code]draw_square()[/code] al voor je gemaakt. Maak een functie "
+"met de naam [code]draw_three_squares[/code] die [code]draw_square()[/code] "
+"drie keer aanroept.\n"
+"\n"
+"Als je alleen de functie aanroept, zullen alle drie de vierkanten "
+"overlappen. Om ze diagonaal te stapelen, roep je [code]jump(300, 300)[/code] "
+"aan tussen twee aanroepen van [code]draw_square()[/code].\n"
+"\n"
+"Door [code]jump(300, 300)[/code] aan te roepen springt de schildpad 300 "
+"pixels naar rechts en 300 pixels naar beneden zonder lijnen te tekenen."
+
+#: course/lesson-5-your-first-function/lesson.tres:275
+msgid ""
+"Now you created a function to draw squares, you can reuse it by calling it "
+"multiple times."
+msgstr ""
+"Nu je een functie hebt gemaakt om vierkanten te tekenen, kun je deze "
+"hergebruiken door hem meerdere keren aan te roepen."
+
+#: course/lesson-5-your-first-function/lesson.tres:279
+msgid "Coding Your First Function"
+msgstr "Je eerste functie coderen"

@@ -1,0 +1,283 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-03-26 17:50+0100\n"
+"PO-Revision-Date: 2024-03-31 09:14+0000\n"
+"Last-Translator: cyochot <k97un9ri@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-12-using-variables/ja/>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.5-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-12-using-variables/lesson.tres:14
+msgid ""
+"In this lesson, we'll make our code easier to follow and understand at a "
+"glance.\n"
+"\n"
+"Take a look at this example."
+msgstr ""
+"このレッスンでは、コードを簡単に理解しやすくし、一目で理解できるようにします"
+"。\n"
+"\n"
+"この例を見てください。"
+
+#: course/lesson-12-using-variables/lesson.tres:34
+msgid "In the above example, what does the number 4 mean?"
+msgstr "上記の例で、数字の4はどういう意味ですか?"
+
+#: course/lesson-12-using-variables/lesson.tres:37
+msgid "The code above rotates the character [code]4[/code] radians per second."
+msgstr "上記のコードは、キャラクターを 1 秒あたり [code]4[/code] "
+"ラジアン回転させます。"
+
+#: course/lesson-12-using-variables/lesson.tres:38
+#: course/lesson-12-using-variables/lesson.tres:39
+msgid "It's how fast the character rotates."
+msgstr "キャラクターの回転速度です。"
+
+#: course/lesson-12-using-variables/lesson.tres:38
+msgid "It's how far the character moves in pixels."
+msgstr "これは、キャラクターがピクセル単位で移動する距離です。"
+
+#: course/lesson-12-using-variables/lesson.tres:38
+msgid "It's how long the rotation takes."
+msgstr "これは、回転にかかる時間です。"
+
+#: course/lesson-12-using-variables/lesson.tres:48
+msgid ""
+"We can guess what a number represents by looking at the function names, "
+"but it's harder to recall what this number does by quickly looking at the"
+" code.\n"
+"\n"
+"We've seen how different functions have their own names. Using these "
+"names communicates to developers what the functions do."
+msgstr ""
+"関数名を見れば数値が何を表しているかを推測できますが、コードをすばやく見ても"
+"、この数値が何を意味するかを思い出すのは困難です。\n"
+"\n"
+"さまざまな関数に独自の名前がある方法を見てきました。これらの名前を使用すると"
+"、関数の機能が開発者に伝わります。"
+
+#: course/lesson-12-using-variables/lesson.tres:70
+msgid ""
+"As we learned in lesson 8, we can also assign labels to numbers to help "
+"us remember what they do.\n"
+"\n"
+"We call these labels [i]variables[/i].\n"
+"\n"
+"[b]A variable is a label for a value we can save, change, and read "
+"later.[/b]\n"
+"\n"
+"Let's recap how to define a variable."
+msgstr ""
+"レッスン 8 で学んだように、数値にラベルを割り当てて、その機能を覚えやすくする"
+"こともできます。\n"
+"\n"
+"これらのラベルを[i]変数[/i]と呼びます。\n"
+"\n"
+"[b]変数は、後で保存、変更、および読み取ることができる値のラベルです。[/b]\n"
+"\n"
+"変数を定義する方法をおさらいしましょう。"
+
+#: course/lesson-12-using-variables/lesson.tres:96
+msgid ""
+"We improve the first example to make it clear what the number "
+"[code]4[/code] does."
+msgstr "最初の例を改善して、数値 [code]4[/code] が何をするのかを明確にします。"
+
+#: course/lesson-12-using-variables/lesson.tres:116
+msgid ""
+"Labeling a value makes the code easier for us to read now [i]and[/i] in "
+"the future."
+msgstr "値にラベルを付けると、現在[i]および[/i]将来にわたってコードを読みやすくなりま"
+"す。"
+
+#: course/lesson-12-using-variables/lesson.tres:124
+msgid "In the above example, which line defines the angular speed variable?"
+msgstr "上記の例では、どの行が角速度変数を定義していますか?"
+
+#: course/lesson-12-using-variables/lesson.tres:127
+msgid ""
+"We create the [code]angular_speed[/code] variable, then assign it the "
+"value of [code]4[/code]."
+msgstr "[code]angular_speed[/code] 変数を作成し、それに [code]4[/code] "
+"の値を割り当てます。"
+
+#: course/lesson-12-using-variables/lesson.tres:128
+#: course/lesson-12-using-variables/lesson.tres:129
+msgid "var angular_speed = 4"
+msgstr "var angular_speed = 4"
+
+#: course/lesson-12-using-variables/lesson.tres:128
+msgid "func _process(delta):"
+msgstr "func _process(delta):"
+
+#: course/lesson-12-using-variables/lesson.tres:128
+msgid "rotate(angular_speed * delta)"
+msgstr "rotate(angular_speed * delta)"
+
+#: course/lesson-12-using-variables/lesson.tres:138
+msgid ""
+"If we define variables outside of functions, we can re-use them in "
+"different functions.\n"
+"\n"
+"Because any function can use variables we define outside of them, we call"
+" these variables [b]script-wide[/b].\n"
+"\n"
+"Here we use the [code]angular_speed[/code] script-wide variable in both "
+"the [code]_process()[/code] function and the "
+"[code]set_angular_speed()[/code] function."
+msgstr ""
+"関数の外部で変数を定義すると、それらを別の関数で再利用できます。\n"
+"\n"
+"どの関数でも外部で定義した変数を使用できるため、これらの変数を[b]スクリプト全"
+"体[/b]で呼び出します。\n"
+"\n"
+"ここでは、[code]angular_speed[/code] 関数と [code]set_angular_speed()[/code] "
+"関数の両方で [code]_process[/code] スクリプト全体の変数を使用します。"
+
+#: course/lesson-12-using-variables/lesson.tres:162
+msgid ""
+"We can also define variables inside of functions.\n"
+"\n"
+"We align the variable assignment by indenting to make it part of the "
+"function body. Make sure to create the variable before using it!\n"
+"\n"
+"If we define a variable inside of a function, only that function can use "
+"it."
+msgstr ""
+"関数内で変数を定義することもできます。\n"
+"\n"
+"インデントによって変数の代入を整列させ、関数本体の一部にします。使用する前に"
+"、必ず変数を作成してください。\n"
+"\n"
+"関数内で変数を定義すると、その関数のみがそれを使用できます。"
+
+#: course/lesson-12-using-variables/lesson.tres:186
+msgid ""
+"The [code]angular_speed[/code] variable only exists inside "
+"[code]_process()[/code], because we defined it there. The "
+"[code]set_angular_speed()[/code] function can't use it.\n"
+"\n"
+"Trying to use it there will result in an error.\n"
+"\n"
+"Here's what this error might look like."
+msgstr ""
+"[code]angular_speed[/code] 変数は [code]_process()[/code] "
+"内でのみ存在します。[code]set_angular_speed()[/code]関数では使用できません。"
+"\n"
+"\n"
+"そこで使用しようとすると、エラーが発生します。\n"
+"\n"
+"このエラーは次のようになります。"
+
+#: course/lesson-12-using-variables/lesson.tres:208
+msgid "Where can we define variables?"
+msgstr "変数はどこで定義できますか?"
+
+#: course/lesson-12-using-variables/lesson.tres:211
+msgid ""
+"Functions can use any variables defined outside of functions. These "
+"variables are [b]script-wide[/b].\n"
+"\n"
+"If we define a variable inside of a function, only that function can use "
+"it."
+msgstr ""
+"関数は、関数の外部で定義された任意の変数を使用できます。これらの変数は[b]スク"
+"リプト全体[/b]です。\n"
+"\n"
+"関数内で変数を定義すると、その関数のみがそれを使用できます。"
+
+#: course/lesson-12-using-variables/lesson.tres:214
+#: course/lesson-12-using-variables/lesson.tres:215
+msgid "Outside of functions."
+msgstr "関数の外部。"
+
+#: course/lesson-12-using-variables/lesson.tres:214
+#: course/lesson-12-using-variables/lesson.tres:215
+msgid "Inside of functions."
+msgstr "関数の内部。"
+
+#: course/lesson-12-using-variables/lesson.tres:224
+msgid ""
+"Variables are also great at grouping values that control how a character "
+"behaves.\n"
+"\n"
+"Grouping them in this way allows us to easily change them."
+msgstr ""
+"変数は、キャラクターの動作を制御する値をグループ化するのにも優れています。\n"
+"\n"
+"この方法でグループ化すると、簡単に変更できます。"
+
+#: course/lesson-12-using-variables/lesson.tres:246
+msgid ""
+"In the following practices, we'll define variables and use them with some"
+" familiar functions to make our code more readable."
+msgstr "次の演習では、変数を定義し、使い慣れた関数でそれらを使用して、コードを読みや"
+"すくします。"
+
+#: course/lesson-12-using-variables/lesson.tres:254
+msgid "Clarifying Code Using Variables"
+msgstr "変数を使用したコードの明確化"
+
+#: course/lesson-12-using-variables/lesson.tres:255
+msgid ""
+"Let's give the [code]4[/code] here a label so we know what it does.\n"
+"\n"
+"Create a variable called [code]angular_speed[/code] outside of the "
+"[code]_process()[/code] function to make it script-wide. This allows us "
+"to use it in other functions too.\n"
+"\n"
+"Then, replace the [code]4[/code] with [code]angular_speed[/code]."
+msgstr ""
+"ここで[code]4[/code]にラベルを付けて、それが何をするかを理解しましょう。\n"
+"\n"
+"[code]angular_speed[/code] 関数の外側に [code]_process[/code] という変数を作"
+"成して、スクリプト全体にします。これにより、他の機能でも使用できます。\n"
+"\n"
+"次に、[code]4[/code]を[code]angular_speed[/code]に置き換えます。"
+
+#: course/lesson-12-using-variables/lesson.tres:269
+msgid ""
+"Using variables to store number values makes code easier to read. Tidy up"
+" this function by storing a value in a variable."
+msgstr "変数を使用して数値を格納すると、コードが読みやすくなります。変数に値を格納す"
+"ることで、この関数を整理します。"
+
+#: course/lesson-12-using-variables/lesson.tres:274
+msgid "Fixing an Out of Scope Error"
+msgstr "範囲外エラーの修正"
+
+#: course/lesson-12-using-variables/lesson.tres:275
+msgid ""
+"There's something wrong with the code here. Can you see what it is?\n"
+"\n"
+"Run the code and read the error.\n"
+"\n"
+"Correct the code so it works as intended."
+msgstr ""
+"ここのコードに問題があります。それが何であるかわかりますか?\n"
+"\n"
+"コードを実行し、エラーを読みます。\n"
+"\n"
+"意図したとおりに動作するようにコードを修正します。"
+
+#: course/lesson-12-using-variables/lesson.tres:293
+msgid "Uh oh! There's something wrong here. Can you fix it?"
+msgstr "ああああ!何かがおかしい。修正できますか?"
+
+#: course/lesson-12-using-variables/lesson.tres:297
+msgid "Using Variables to Make Code Easier to Read"
+msgstr "変数を使用してコードを読みやすくする"

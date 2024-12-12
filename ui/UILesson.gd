@@ -201,7 +201,8 @@ func _underline_glossary_entries() -> void:
 	# Underline glossary entries
 	for rtl in get_tree().get_nodes_in_group("rich_text_label"):
 		rtl.bbcode_text = _glossary.replace_matching_terms(rtl.bbcode_text)
-		rtl.connect("meta_clicked", self, "_open_glossary_popup")
+		if not rtl.is_connected("meta_clicked", self, "_open_glossary_popup"):
+			rtl.connect("meta_clicked", self, "_open_glossary_popup")
 
 
 func _update_labels() -> void:

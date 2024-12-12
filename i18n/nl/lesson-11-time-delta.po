@@ -1,0 +1,439 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-12-09 20:05+0100\n"
+"PO-Revision-Date: 2024-04-03 17:03+0000\n"
+"Last-Translator: Matthijs <m4tthijsbl0m@gmail.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-11-time-delta/nl/>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.5-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-11-time-delta/lesson.tres:14
+msgid ""
+"We've seen how we can use our character's [code]_process()[/code] function "
+"to make it move continuously."
+msgstr ""
+"We hebben gezien hoe we de [code]_process()[/code] functie van ons personage "
+"kunnen gebruiken om het continu te laten bewegen."
+
+#: course/lesson-11-time-delta/lesson.tres:34
+msgid ""
+"But it's not just our character that has a [code]_process()[/code] function; "
+"Almost everything in the game has a [code]_process()[/code] function!\n"
+"\n"
+"Dozens of times per second, Godot runs every [code]_process()[/code] "
+"function in the game to update the game world.\n"
+"\n"
+"After that, it displays an image of the game world on the screen. We call "
+"that image a [b]frame[/b].\n"
+"\n"
+"Godot then moves on to calculating the next frame.\n"
+"\n"
+"As this happens dozens of times per second, you get the illusion of "
+"movement. This is similar to how traditional animation works."
+msgstr ""
+"Maar niet alleen ons personage heeft een [code]_process()[/code] functie; "
+"bijna alles in het spel heeft een [code]_process()[/code] functie!\n"
+"\n"
+"Tientallen keren per seconde voert Godot elke [code]_process()[/code] "
+"functie in het spel uit om de spelwereld bij te werken.\n"
+"\n"
+"Daarna wordt een afbeelding van de spelwereld op het scherm weergegeven. We "
+"noemen die afbeelding een [b]frame[/b].\n"
+"\n"
+"Godot gaat vervolgens verder met het berekenen van het volgende frame.\n"
+"\n"
+"Omdat dit tientallen keren per seconde gebeurt, krijg je de illusie van "
+"beweging. Dit is vergelijkbaar met hoe traditionele animatie werkt."
+
+#: course/lesson-11-time-delta/lesson.tres:50
+msgid "This sounds like Frames Per Second..."
+msgstr "Dit klinkt als Frames Per Seconde..."
+
+#: course/lesson-11-time-delta/lesson.tres:52
+msgid ""
+"You may have heard of frames per second, or FPS for short. Games often run "
+"at 60 frames per second. \n"
+"\n"
+"It means that everything in the game updates 60 times each second.\n"
+"\n"
+"The number varies while playing, depending on the game and the device it "
+"runs on.\n"
+"\n"
+"On powerful computers, you may get frame rates in the hundreds or thousands "
+"of frames per second."
+msgstr ""
+"Je hebt misschien wel eens gehoord van frames per seconde, of kortweg FPS. "
+"Games draaien vaak op 60 frames per seconde. \n"
+"\n"
+"Dit betekent dat alles in het spel 60 keer per seconde wordt bijgewerkt.\n"
+"\n"
+"Het aantal varieert tijdens het spelen, afhankelijk van het spel en het "
+"apparaat waarop het draait.\n"
+"\n"
+"Op krachtige computers kun je framesnelheden van honderden of duizenden "
+"frames per seconde krijgen."
+
+#: course/lesson-11-time-delta/lesson.tres:68
+msgid "Let's look at the [code]_process()[/code] function in more detail."
+msgstr "Laten we de [code]_process()[/code] functie in meer detail bekijken."
+
+#: course/lesson-11-time-delta/lesson.tres:76
+msgid "What parameter does the _process() function take?"
+msgstr "Welke parameter heeft de _process() functie?"
+
+#: course/lesson-11-time-delta/lesson.tres:77
+msgid ""
+"[code]\n"
+"func _process(delta):\n"
+"\trotate(0.05)\n"
+"[/code]"
+msgstr ""
+"[code]\n"
+"func _process(delta):\n"
+"\trotate(0.05)\n"
+"[/code]"
+
+#: course/lesson-11-time-delta/lesson.tres:82
+msgid ""
+"The [code]_process()[/code] function has one parameter named [code]delta[/"
+"code]."
+msgstr ""
+"De functie [code]_process()[/code] heeft één parameter met de naam "
+"[code]delta[/code]."
+
+#: course/lesson-11-time-delta/lesson.tres:83
+msgid "rotate"
+msgstr "rotate"
+
+#: course/lesson-11-time-delta/lesson.tres:83
+msgid "0.05"
+msgstr "0.05"
+
+#: course/lesson-11-time-delta/lesson.tres:83
+#: course/lesson-11-time-delta/lesson.tres:84
+msgid "delta"
+msgstr "delta"
+
+#: course/lesson-11-time-delta/lesson.tres:91
+msgid "Frames take varying amounts of time to calculate"
+msgstr "Frames hebben verschillende hoeveelheden tijd nodig om te rekenen"
+
+#: course/lesson-11-time-delta/lesson.tres:93
+msgid ""
+"Depending on the game, the computer, and what the game engine needs to "
+"calculate, frames take more or less time to display.\n"
+"\n"
+"There will always be milliseconds variations from frame to frame.\n"
+"\n"
+"That is why the [code]_process()[/code] function receives a [code]delta[/"
+"code] parameter.\n"
+"\n"
+"Delta represents a time difference. It's the time passed since the previous "
+"frame, in seconds.\n"
+"\n"
+"We can use it to ensure that the changes between frames don't make the "
+"game's behavior unreliable.\n"
+"\n"
+"This is because different computers run differently, so a fast computer will "
+"have more frames per second than a slow computer.\n"
+"\n"
+"If we ignore [code]delta[/code], the game experience will vary, depending on "
+"the computer. Delta helps to make the game experience consistent for "
+"everyone."
+msgstr ""
+"Afhankelijk van het spel, de computer en wat de game engine moet berekenen, "
+"hebben frames meer of minder tijd nodig om weergegeven te worden.\n"
+"\n"
+"Er zijn altijd variaties in milliseconden van frame tot frame.\n"
+"\n"
+"Daarom krijgt de [code]_process()[/code] functie een [code]delta[/code] "
+"parameter.\n"
+"\n"
+"Delta vertegenwoordigt een tijdsverschil. Het is de tijd die verstreken is "
+"sinds het vorige frame, in seconden.\n"
+"\n"
+"We kunnen het gebruiken om ervoor te zorgen dat de veranderingen tussen "
+"frames het gedrag van het spel niet onbetrouwbaar maken.\n"
+"\n"
+"Dit is nodig omdat verschillende computers anders werken, dus een snelle "
+"computer zal meer frames per seconde weergeven dan een langzame computer.\n"
+"\n"
+"Als we [code]delta[/code] negeren, zal de spelervaring variëren, afhankelijk "
+"van de computer. Delta helpt om de spelervaring voor iedereen hetzelfde te "
+"maken."
+
+#: course/lesson-11-time-delta/lesson.tres:113
+msgid "What do we know about delta?"
+msgstr "Wat weten we over delta?"
+
+#: course/lesson-11-time-delta/lesson.tres:116
+msgid ""
+"[code]delta[/code] is the time it took Godot to complete the previous frame "
+"in seconds.\n"
+"\n"
+"It's very small because frames happen many times a second.\n"
+"\n"
+"It varies each frame because Godot needs to process more or less each frame."
+msgstr ""
+"[code]delta[/code] is de tijd die Godot nodig had om het vorige frame te "
+"voltooien in seconden.\n"
+"\n"
+"Het is erg klein omdat frames vele keren per seconde verschijnen.\n"
+"\n"
+"Het varieert per frame omdat Godot elk frame meer of minder moet verwerken."
+
+#: course/lesson-11-time-delta/lesson.tres:121
+#: course/lesson-11-time-delta/lesson.tres:122
+msgid "It's a value in seconds."
+msgstr "Het is een aantal seconden."
+
+#: course/lesson-11-time-delta/lesson.tres:121
+#: course/lesson-11-time-delta/lesson.tres:122
+msgid "It varies each frame."
+msgstr "Het verschilt per frame."
+
+#: course/lesson-11-time-delta/lesson.tres:121
+#: course/lesson-11-time-delta/lesson.tres:122
+msgid "It's the time it took Godot to complete the previous frame."
+msgstr "Het is de tijd die Godot nodig had om het vorige frame te voltooien."
+
+#: course/lesson-11-time-delta/lesson.tres:129
+msgid "Multiplying by delta"
+msgstr "Vermenigvuldigen met delta"
+
+#: course/lesson-11-time-delta/lesson.tres:131
+msgid ""
+"The [code]delta[/code] you get in [code]_process()[/code] is a time "
+"difference in seconds. It will generally be a tiny decimal number.\n"
+"\n"
+"To apply [code]delta[/code], you need to [i]multiply[/i] your speed values "
+"by it."
+msgstr ""
+"De [code]delta[/code] die je krijgt in [code]_process()[/code] is een "
+"tijdsverschil in seconden. Het zal over het algemeen een klein kommagetal "
+"zijn.\n"
+"\n"
+"Om [code]delta[/code] toe te passen, moet je je snelheidswaarden ermee "
+"[i]vermenigvuldigen[/i]."
+
+#: course/lesson-11-time-delta/lesson.tres:153
+msgid ""
+"When multiplying by [code]delta[/code], you make motion [i]time-dependent[/"
+"i] rather than [i]frame-dependent[/i].\n"
+"\n"
+"That's essential to make your game consistent and fair."
+msgstr ""
+"Wanneer je vermenigvuldigt met [code]delta[/code], maak je beweging "
+"[i]tijdsafhankelijk[/i] in plaats van [i]frame-afhankelijk[/i].\n"
+"\n"
+"Dat is essentieel om je spel consistent en eerlijk te maken."
+
+#: course/lesson-11-time-delta/lesson.tres:163
+msgid "Why do we use the number 3.0 in this example?"
+msgstr "Waarom gebruiken we het getal 3,0 in dit voorbeeld?"
+
+#: course/lesson-11-time-delta/lesson.tres:165
+msgid ""
+"At the top of the lesson, we made the robot rotate a fixed amount every "
+"frame: [code]0.05[/code] radians.\n"
+"\n"
+"In the example above, we now [i]multiply[/i] the argument by the very small "
+"[code]delta[/code] value, a value way below [code]1.0[/code]. It makes the "
+"robot turn at a constant speed over time.\n"
+"\n"
+"However, multiplying by a number below [code]1.0[/code] like [code]delta[/"
+"code] makes the result smaller.\n"
+"\n"
+"To compensate for that and make the robot turn fast enough, we use a larger "
+"number than before, [code]3.0[/code] instead of [code]0.05[/code].\n"
+"\n"
+"Those numbers have two different [i]units[/i]: [code]0.05[/code] is an "
+"[i]angle[/i] in radians, while [code]3.0[/code] is an [i]angular speed[/i] "
+"in radians per second.\n"
+"\n"
+"When you multiply a speed by a time delta, it gives you an angle.\n"
+"\n"
+"Don't worry if it's a little confusing for now. It'll eventually click as "
+"you deal with speed, acceleration, and motion in your game projects."
+msgstr ""
+"Aan het begin van de les hebben we de robot elk frame een vaste hoeveelheid "
+"laten draaien: [code]0.05[/code] radialen.\n"
+"\n"
+"In het bovenstaande voorbeeld [i]vermenigvuldigen[/i] we het argument nu met "
+"de zeer kleine waarde [code]delta[/code], een waarde ver onder [code]1."
+"0[/code]. Hierdoor draait de robot met een constante snelheid in de tijd.\n"
+"\n"
+"Echter, vermenigvuldigen met een getal onder de [code]1.0[/code] zoals "
+"[code]delta[/code] maakt het resultaat kleiner.\n"
+"\n"
+"Om dat te compenseren en de robot snel genoeg te laten draaien, gebruiken we "
+"een groter getal dan voorheen, [code]3.0[/code] in plaats van [code]0."
+"05[/code].\n"
+"\n"
+"Deze getallen hebben twee verschillende [i]eenheden[/i]: [code]0,05[/code] "
+"is een [i]hoek[/i] in radialen, terwijl [code]3,0[/code] een "
+"[i]hoeksnelheid[/i] in radialen per seconde is.\n"
+"\n"
+"Als je een hoeksnelheid vermenigvuldigt met een tijdsdelta, krijg je een "
+"hoek.\n"
+"\n"
+"Maak je geen zorgen als het nu nog wat verwarrend is. Het zal uiteindelijk "
+"wel klikken als je in je spelprojecten te maken krijgt met snelheid, "
+"versnelling en beweging."
+
+#: course/lesson-11-time-delta/lesson.tres:185
+msgid "Why the time between frames matters"
+msgstr "Waarom de tijd tussen frames ertoe doet"
+
+#: course/lesson-11-time-delta/lesson.tres:187
+msgid ""
+"The time it takes to display a new frame varies.\n"
+"\n"
+"If you don't take that time into account in your code, your game will have "
+"gameplay issues and bugs. Godot provides that time to the [code]_process()[/"
+"code] function through the [code]delta[/code] parameter.\n"
+"\n"
+"In the example below, the top robot moves using [code]delta[/code]. As a "
+"result, it moves at a fixed speed.\n"
+"\n"
+"The bottom robot moves over a constant distance every frame, [i]without[/i] "
+"taking [code]delta[/code] into account. It will move faster or slower than "
+"the top robot on [i]your[/i] computer.\n"
+"\n"
+"The bottom robot will move [i]differently for everyone[/i]!"
+msgstr ""
+"De tijd die nodig is om een nieuw frame weer te geven varieert.\n"
+"\n"
+"Als je in je code geen rekening houdt met die tijd, zal je spel "
+"gameplayproblemen en bugs vertonen. Godot geeft die tijd door aan de "
+"[code]_process()[/code] functie via de [code]delta[/code] parameter.\n"
+"\n"
+"In het onderstaande voorbeeld beweegt de bovenste robot met behulp van "
+"[code]delta[/code]. Daardoor beweegt hij met een vaste snelheid.\n"
+"\n"
+"De onderste robot beweegt elk frame over een constante afstand, [i]zonder[/i]"
+" rekening te houden met [code]delta[/code]. Hij zal sneller of langzamer "
+"bewegen dan de bovenste robot op [i]jouw[/i] computer.\n"
+"\n"
+"De onderste robot zal [i]voor iedereen[/i] anders bewegen!"
+
+#: course/lesson-11-time-delta/lesson.tres:215
+msgid ""
+"Multiplying time-sensitive values by [code]delta[/code] makes them [b]time-"
+"dependent[/b] rather than [b]frame-dependent[/b].\n"
+"\n"
+"Thanks to that, we get reliable movement over time.\n"
+"\n"
+"Without [code]delta[/code], frame times vary from computer to computer and "
+"during gameplay. Because of that, the movement will differ for every player, "
+"making the game inconsistent and messy."
+msgstr ""
+"Tijdgevoelige waarden vermenigvuldigen met [code]delta[/code] maakt ze "
+"[b]tijdsafhankelijk[/b] in plaats van [b]frame-afhankelijk[/b].\n"
+"\n"
+"Daardoor krijgen we betrouwbare beweging in de tijd.\n"
+"\n"
+"Zonder [code]delta[/code] variëren frametijden van computer tot computer en "
+"tijdens het spelen. Daardoor verschilt de beweging voor elke speler, "
+"waardoor het spel onregelmatig en rommelig wordt."
+
+#: course/lesson-11-time-delta/lesson.tres:227
+msgid "What does this mean?"
+msgstr "Wat betekent dit?"
+
+#: course/lesson-11-time-delta/lesson.tres:228
+msgid "[code]rotation_speed * delta[/code]"
+msgstr "[code]rotation_speed * delta[/code]"
+
+#: course/lesson-11-time-delta/lesson.tres:230
+msgid ""
+"The [code]*[/code] symbol means we're multiplying [code]rotation_speed[/"
+"code] by [code]delta[/code] time."
+msgstr ""
+"Het symbool [code]*[/code] betekent dat we de [code]rotation_speed[/code] "
+"vermenigvuldigen met de tijd [code]delta[/code]."
+
+#: course/lesson-11-time-delta/lesson.tres:231
+#: course/lesson-11-time-delta/lesson.tres:232
+msgid "We're multiplying rotation_speed by delta."
+msgstr "We vermenigvuldigen rotation_speed met delta."
+
+#: course/lesson-11-time-delta/lesson.tres:231
+msgid "We're dividing delta by rotation_speed."
+msgstr "We delen delta door rotation_speed."
+
+#: course/lesson-11-time-delta/lesson.tres:231
+msgid "We're adding rotation_speed to delta."
+msgstr "We tellen rotation_speed op bij delta."
+
+#: course/lesson-11-time-delta/lesson.tres:231
+msgid "We're subtracting delta from rotation_speed."
+msgstr "We trekken delta af van rotation_speed."
+
+#: course/lesson-11-time-delta/lesson.tres:241
+msgid "In the next practice, we'll use delta to make rotating time-dependent."
+msgstr ""
+"In de volgende oefening zullen we delta gebruiken om het draaien "
+"tijdsafhankelijk te maken."
+
+#: course/lesson-11-time-delta/lesson.tres:249
+msgid "Rotating Using Delta"
+msgstr "Draaien met delta"
+
+#: course/lesson-11-time-delta/lesson.tres:250
+msgid ""
+"At the moment, the rotation of the robot is frame-dependent.\n"
+"\n"
+"Add [code]delta[/code] to make the rotational speed time-dependent.\n"
+"\n"
+"The robot should rotate [code]2[/code] radians per second."
+msgstr ""
+"Op dit moment is de draaiing van de robot frame-afhankelijk.\n"
+"\n"
+"Voeg [code]delta[/code] toe om de draaisnelheid tijdsafhankelijk te maken.\n"
+"\n"
+"De robot moet [code]2[/code] radialen per seconde draaien."
+
+#: course/lesson-11-time-delta/lesson.tres:269
+msgid "Moving in a Circle Using Delta"
+msgstr "In een cirkel bewegen met delta"
+
+#: course/lesson-11-time-delta/lesson.tres:270
+msgid ""
+"In this practice, make the robot move in a smooth circle using delta.\n"
+"\n"
+"To get this movement, the robot should rotate [code]2[/code] radians per "
+"second and move [code]100[/code] pixels per second towards clockwise.\n"
+"\n"
+"[b]Note:[/b] Please write the values in the parentheses when calling the "
+"functions. If you define extra variables, we will not be able to check your "
+"practice."
+msgstr ""
+"In deze oefening laat je de robot in een vloeiende cirkel bewegen met behulp "
+"van delta.\n"
+"\n"
+"Om deze beweging te krijgen, moet de robot [code]2[/code] radialen per "
+"seconde draaien en [code]100[/code] pixels per seconde met de klok mee "
+"bewegen.\n"
+"\n"
+"[b]Let op:[/b] Schrijf de waarden tussen de haakjes wanneer je de functies "
+"aanroept. Als je extra variabelen definieert, kunnen we je oefening niet "
+"controleren."
+
+#: course/lesson-11-time-delta/lesson.tres:288
+msgid "Time Delta"
+msgstr "De tijdsdelta"

@@ -1,0 +1,221 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-10-06 07:34+0200\n"
+"PO-Revision-Date: 2024-04-02 16:02+0000\n"
+"Last-Translator: Matthijs <m4tthijsbl0m@gmail.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-9-adding-and-subtracting/nl/>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.5-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:14
+msgid ""
+"Our character in our game will have health by defining the [code]health[/"
+"code] variable. The higher the character's health, the further away the "
+"player is from losing the game.\n"
+"\n"
+"Health that changes adds tension to the game, especially if the player is "
+"fighting with low health! It's a resource that the player should manage "
+"carefully.\n"
+"\n"
+"The character's health might get low if an enemy attacks them or they fall "
+"into a hole.\n"
+"\n"
+"We can create a function to represent damage in these cases."
+msgstr ""
+"Ons personage in ons spel zal gezondheid hebben als we de variabele "
+"[code]health[/code] definiëren. Hoe hoger de gezondheid van het personage, "
+"hoe verder de speler verwijderd is van het verliezen van het spel.\n"
+"\n"
+"Gezondheid die verandert voegt spanning toe aan het spel, vooral als de "
+"speler vecht met een lage gezondheid! Het is een middel dat de speler "
+"zorgvuldig moet beheren.\n"
+"\n"
+"De gezondheid van een personage kan laag worden als een vijand hem aanvalt "
+"of als hij in een gat valt.\n"
+"\n"
+"We kunnen een functie maken om schade in deze gevallen weer te geven."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:40
+msgid ""
+"We pass the amount of damage the robot should take as a parameter.\n"
+"\n"
+"Line 2 subtracts [code]amount[/code] from [code]health[/code].\n"
+"\n"
+"Note the [code]-=[/code] syntax which achieves this. It's a shorthand we "
+"often use.\n"
+"\n"
+"You can also use a longer form. Both of these lines have the same effect. "
+"They both subtract the value of [code]amount[/code] from the [code]health[/"
+"code] variable:\n"
+"\n"
+"[code]health -= amount[/code]\n"
+"[code]health = health - amount[/code]\n"
+"\n"
+"You may notice that the health of the robot can go below [code]0[/code]. "
+"We'll see how to manage this in a future lesson using [i]conditions[/i]."
+msgstr ""
+"We geven de hoeveelheid schade die de robot zou moeten oplopen mee als "
+"parameter.\n"
+"\n"
+"Regel 2 trekt [code]amount[/code] af van [code]health[/code].\n"
+"\n"
+"Merk de vorm [code]-=[/code] op die dit bereikt. Het is een afkorting die we "
+"vaak gebruiken.\n"
+"\n"
+"Je kunt ook een langere vorm gebruiken. Beide regels hebben hetzelfde "
+"effect. Ze trekken allebei de waarde van [code]amount[/code] af van de "
+"variabele [code]health[/code]:\n"
+"\n"
+"[code]health -= amount[/code]\n"
+"[code]health = health - amount[/code]\n"
+"\n"
+"Je zou kunnen merken dat de gezondheid van de robot onder de [code]0[/code] "
+"kan komen. We zullen in een volgende les zien hoe we dit kunnen beheersen "
+"met behulp van [i]condities[/i]."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:61
+msgid ""
+"The robot's health could increase instead if the player picks up an item "
+"that heals them, or if they use a healing item."
+msgstr ""
+"De gezondheid van de robot zou ook kunnen toenemen wanneer de speler een "
+"voorwerp pakt dat hem geneest, of wanneer hij een genezend voorwerp gebruikt."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:81
+msgid ""
+"Here again, the health can go beyond [code]100[/code].\n"
+"\n"
+"Also, once more, the short line [code]health += amount[/code] is equivalent "
+"to the longer form [code]health = health + amount[/code]."
+msgstr ""
+"Ook hier kan de gezondheid voorbij [code]100[/code] oplopen.\n"
+"\n"
+"Nogmaals, de korte regel [code]health += amount[/code] is betekent hetzelfde "
+"als de langere vorm [code]health = health + amount[/code]."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:91
+msgid "Which of these would increase the health of the robot?"
+msgstr "Welke van deze zou de gezondheid van de robot verbeteren?"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:94
+msgid ""
+"Both of these lines increase the [code]health[/code] of the robot by "
+"[code]amount[/code].\n"
+"[code]\n"
+"health += amount\n"
+"health = health + amount\n"
+"[/code]"
+msgstr ""
+"Deze beide regels verhogen de [code]health[/code] van de robot met "
+"[code]amount[/code].\n"
+"[code]\n"
+"health += amount\n"
+"health = health + amount\n"
+"[/code]"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+msgid "health -= amount"
+msgstr "health -= amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+#: course/lesson-9-adding-and-subtracting/lesson.tres:100
+msgid "health += amount"
+msgstr "health += amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+#: course/lesson-9-adding-and-subtracting/lesson.tres:100
+msgid "health = health + amount"
+msgstr "health = health + amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+msgid "health = health - amount"
+msgstr "health = health - amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:109
+msgid ""
+"In the following practices, you'll code the [code]take_damage()[/code] and "
+"[code]heal()[/code] functions so the robot's health can decrease and "
+"increase."
+msgstr ""
+"In de volgende oefeningen schrijf je de functies [code]take_damage()[/code] "
+"en [code]heal()[/code] zodat de gezondheid van de robot kan afnemen en "
+"toenemen."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:117
+msgid "Damaging the Robot"
+msgstr "De robot beschadigen"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:118
+msgid ""
+"In our game, the main character has a certain amount of [code]health[/code]. "
+"When it gets hit, the health should go down by a varying [code]amount[/code] "
+"of damage.\n"
+"\n"
+"Add to the [code]take_damage()[/code] function so it subtracts the "
+"[code]amount[/code] to the predefined [code]health[/code] variable.\n"
+"\n"
+"The robot starts with 100 health and will take 50 damage."
+msgstr ""
+"In ons spel heeft het hoofdpersonage een bepaalde hoeveelheid "
+"[code]health[/code]. Als het geraakt wordt, moet de gezondheid afnemen met "
+"een variërende [code]amount[/code] schade.\n"
+"\n"
+"Vul de functie [code]take_damage()[/code] aan zodat deze de "
+"[code]amount[/code] aftrekt van de vooraf gedefinieerde variabele "
+"[code]health[/code].\n"
+"\n"
+"De robot begint met 100 gezondheid en zal 50 schade oplopen."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:134
+msgid "Learn how to deal damage to entities like our robot."
+msgstr "Leer hoe je schade kunt toebrengen aan objecten zoals onze robot."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:139
+msgid "Healing the Robot"
+msgstr "De robot genezen"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:140
+msgid ""
+"It's time to heal the robot up to full health!\n"
+"\n"
+"Write a function called [code]heal()[/code] that takes [code]amount[/code] "
+"as a parameter.\n"
+"\n"
+"The function should add [code]amount[/code] to [code]health[/code].\n"
+"\n"
+"The robot starts with 50 health and will heal 50 to get it up to 100."
+msgstr ""
+"Het is tijd om de robot weer helemaal gezond te maken!\n"
+"\n"
+"Schrijf een functie genaamd [code]heal()[/code] die [code]amount[/code] als "
+"parameter neemt.\n"
+"\n"
+"De functie moet [code]amount[/code] toevoegen aan [code]health[/code].\n"
+"\n"
+"De robot begint met 50 gezondheid en zal 50 genezen om op 100 te komen."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:157
+msgid ""
+"Our robot needs healing after that practice! Create a function to heal it "
+"back to full health."
+msgstr ""
+"Onze robot heeft genezing nodig na de vorige oefening! Maak een functie om "
+"hem weer helemaal gezond te maken."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:161
+msgid "Adding and Subtracting"
+msgstr "Optellen en aftrekken"

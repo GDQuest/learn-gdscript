@@ -8,13 +8,31 @@ const PO_EXTENSION := "po"
 const DEFAULT_LOCALE := "en"
 const SUPPORTED_LOCALES := [
 	"en",
-	"es",
-	"it",
 	"fr",
-	"pt",
+	"es",
+	"ja",
+	"it",
 	"pt_BR",
+	"zh_Hans",
+	"ru",
+	"de",
 	"tr",
+	"nl",
 ]
+
+const LOCALE_TO_LABEL := {
+	"fr": "Français",
+	"es": "Español",
+	"ja": "日本語",
+	"it": "Italiano",
+	"pt_BR": "Portugés",
+	"zh_Hans": "中文",
+	"ru": "русский",
+	"de": "Deutsch",
+	"tr": "Türkçe",
+	"nl": "Nederlands",
+}
+
 
 var current_language := DEFAULT_LOCALE setget set_language
 
@@ -30,9 +48,13 @@ func get_available_languages() -> Array:
 	var languages := []
 	
 	for locale_code in SUPPORTED_LOCALES:
+		var language_name: String = LOCALE_TO_LABEL.get(locale_code, "")
+		if language_name == "":
+			language_name = TranslationServer.get_locale_name(locale_code)
+			
 		languages.append({
 			"code": locale_code,
-			"name": TranslationServer.get_locale_name(locale_code),
+			"name": language_name,
 		})
 	
 	return languages

@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
 "POT-Creation-Date: 2023-12-09 20:05+0100\n"
-"PO-Revision-Date: 2023-09-14 03:34+0000\n"
-"Last-Translator: KeJun <kejun1997@gmail.com>\n"
+"PO-Revision-Date: 2024-02-29 06:02+0000\n"
+"Last-Translator: 二中 <worigoule@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "learn-gdscript-from-zero/lesson-11-time-delta/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -18,15 +18,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.0.1-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: course/lesson-11-time-delta/lesson.tres:14
 msgid ""
 "We've seen how we can use our character's [code]_process()[/code] function "
 "to make it move continuously."
-msgstr ""
-"我们已经看到了如何使用角色的 [code]_process()[/code] 函数使其连续移动。"
+msgstr "我们已经看过了如何使用角色的 [code]_process()[/code] 函数使其持续移动。"
 
 #: course/lesson-11-time-delta/lesson.tres:34
 msgid ""
@@ -44,21 +43,23 @@ msgid ""
 "As this happens dozens of times per second, you get the illusion of "
 "movement. This is similar to how traditional animation works."
 msgstr ""
-"但不仅仅是我们的角色有 [code]_process()[/code] 函数；游戏中几乎所有的东西都有"
-"一个 [code]_process()[/code] 函数！\n"
+"但不仅仅是我们的角色有 [code]_process()[/code] 函数；"
+"游戏中几乎所有的东西都有一个 [code]_process()[/code] 函数！\n"
 "\n"
-"每秒数十次，Godot 运行游戏中的每个 [code]_process()[/code] 函数来更新游戏世"
-"界。\n"
+"以每秒几十次的频率，Godot 通过运行游戏中的每个 [code]_process()[/code] "
+"函数来更新游戏世界。\n"
 "\n"
-"之后，它会在屏幕上显示游戏世界的图像。我们称该图像为 [b] 帧 [/b]。\n"
+"结束一次运行后，它会在屏幕上显示一张游戏世界的图像。我们称该张图像为一 [b] "
+"帧 [/b]。\n"
 "\n"
-"Godot 然后继续计算下一帧。\n"
+"紧接着 Godot 会计算下一帧。\n"
 "\n"
-"当这种情况每秒发生数十次时，您会产生运动的错觉。这类似于传统动画的工作方式。"
+"因为这是以每秒几十次的频率发生的，你会产生一切都在动的错觉。这类似于传统手绘"
+"动画的工作方式。"
 
 #: course/lesson-11-time-delta/lesson.tres:50
 msgid "This sounds like Frames Per Second..."
-msgstr "这听起来像每秒帧数(FPS)..."
+msgstr "听着让人想起了帧率(FPS)..."
 
 #: course/lesson-11-time-delta/lesson.tres:52
 msgid ""
@@ -73,22 +74,22 @@ msgid ""
 "On powerful computers, you may get frame rates in the hundreds or thousands "
 "of frames per second."
 msgstr ""
-"您可能听说过每秒帧数（frames per second），简称 FPS。游戏通常以每秒 60 帧的速"
-"度运行。\n"
+"你可能听说过帧率（frames per second，每一秒的帧数），简称 FPS。"
+"游戏通常以每秒 60 帧的速度运行。\n"
 "\n"
 "这意味着游戏中的所有内容每秒更新 60 次。\n"
 "\n"
-"该数字在玩游戏时会有所不同，具体取决于游戏及其运行的设备。\n"
+"该数字在玩游戏时会有所不同，取决于不同的游戏及其运行设备。\n"
 "\n"
-"在功能强大的计算机上，您可能会获得每秒数百或数千帧的帧速率。"
+"在性能强劲的计算机上，帧率可能来到每秒数百或数千帧。"
 
 #: course/lesson-11-time-delta/lesson.tres:68
 msgid "Let's look at the [code]_process()[/code] function in more detail."
-msgstr "让我们更详细地看一下 [code]_process()[/code] 函数。"
+msgstr "让我们来更仔细地看一下 [code]_process()[/code] 函数。"
 
 #: course/lesson-11-time-delta/lesson.tres:76
 msgid "What parameter does the _process() function take?"
-msgstr "_process() 函数采用什么参数？"
+msgstr "_process() 函数的参数是什么？"
 
 #: course/lesson-11-time-delta/lesson.tres:77
 msgid ""
@@ -106,11 +107,11 @@ msgstr ""
 msgid ""
 "The [code]_process()[/code] function has one parameter named [code]delta[/"
 "code]."
-msgstr "[code]_process()[/code] 函数有一个名为 [code]delta[/code] 的参数。"
+msgstr "[code]_process()[/code] 函数有一个参数，叫 [code]delta[/code] 。"
 
 #: course/lesson-11-time-delta/lesson.tres:83
 msgid "rotate"
-msgstr "旋转"
+msgstr "rotate"
 
 #: course/lesson-11-time-delta/lesson.tres:83
 msgid "0.05"
@@ -123,10 +124,9 @@ msgstr "delta"
 
 #: course/lesson-11-time-delta/lesson.tres:91
 msgid "Frames take varying amounts of time to calculate"
-msgstr "帧需要不同的时间来计算"
+msgstr "不同的帧需要的计算时间长短不同"
 
 #: course/lesson-11-time-delta/lesson.tres:93
-#, fuzzy
 msgid ""
 "Depending on the game, the computer, and what the game engine needs to "
 "calculate, frames take more or less time to display.\n"
@@ -149,24 +149,28 @@ msgid ""
 "the computer. Delta helps to make the game experience consistent for "
 "everyone."
 msgstr ""
-"根据游戏、计算机和游戏引擎需要计算的内容，显示帧需要或多或少的时间。\n"
+"由于游戏、计算机不同，以及不同时刻游戏引擎需要计算的内容不同，不同的帧需要相"
+"对而言或多或少的时间才能显示出来。\n"
 "\n"
-"从帧到帧总是会有毫秒的变化。\n"
+"不同的帧之间的间隔总是会有毫秒级的差别。\n"
 "\n"
 "这就是 [code]_process()[/code] 函数接收 [code]delta[/code] 参数的原因。\n"
 "\n"
 "单词“delta”代表时间差。这是自上一帧以来经过的时间，以秒为单位。\n"
 "\n"
-"[code]delta[/code] 参数告诉我们 Godot 完成 [b] 上一帧 [/b] 需要多长时间。\n"
+"用它可以确保帧之间的变化不会使游戏的模拟变得不可靠。\n"
 "\n"
-"我们可以使用它来确保帧之间的变化不会使游戏的模拟不可靠。"
+"这是因为不同的计算机运行起来千差万别，所以速度快的电脑比慢点的每秒会多出来很"
+"多的帧。\n"
+"\n"
+"如果我们忽视帧间隔带来的[code]delta[/code]（时间差），那游戏玩起来就因为电脑"
+"快慢而有所不同了。delta能帮我们确保游戏的体验在任何地方都是一致的。"
 
 #: course/lesson-11-time-delta/lesson.tres:113
 msgid "What do we know about delta?"
-msgstr "我们对delta了解多少？"
+msgstr "下列关于delta的事哪些是正确的？"
 
 #: course/lesson-11-time-delta/lesson.tres:116
-#, fuzzy
 msgid ""
 "[code]delta[/code] is the time it took Godot to complete the previous frame "
 "in seconds.\n"
@@ -177,9 +181,9 @@ msgid ""
 msgstr ""
 "[code]delta[/code] 是 Godot 完成前一帧所需的时间，以秒为单位。\n"
 "\n"
-"它非常小，因为帧每秒发生很多次。\n"
+"它的值非常小，因为每秒会出现很多帧。\n"
 "\n"
-"它改变每一帧，因为 Godot 需要或多或少地处理每一帧。"
+"它随着每一帧不同而改变，因为 Godot 需要或多或少的时间来处理每一帧。"
 
 #: course/lesson-11-time-delta/lesson.tres:121
 #: course/lesson-11-time-delta/lesson.tres:122
@@ -189,17 +193,16 @@ msgstr "这是一个以秒为单位的值。"
 #: course/lesson-11-time-delta/lesson.tres:121
 #: course/lesson-11-time-delta/lesson.tres:122
 msgid "It varies each frame."
-msgstr "它每帧都不同。"
+msgstr "它的值每帧都不同。"
 
 #: course/lesson-11-time-delta/lesson.tres:121
 #: course/lesson-11-time-delta/lesson.tres:122
-#, fuzzy
 msgid "It's the time it took Godot to complete the previous frame."
-msgstr "这是 Godot 完成前一帧所需的时间。"
+msgstr "这是 Godot 完成前一帧耗费的时间。"
 
 #: course/lesson-11-time-delta/lesson.tres:129
 msgid "Multiplying by delta"
-msgstr "乘以 delta"
+msgstr "乘个delta"
 
 #: course/lesson-11-time-delta/lesson.tres:131
 msgid ""
@@ -209,10 +212,10 @@ msgid ""
 "To apply [code]delta[/code], you need to [i]multiply[/i] your speed values "
 "by it."
 msgstr ""
-"您在 [code]_process()[/code] 中获得的 [code]delta[/code] 是以秒为单位的时间"
-"差。它通常是一个很小的十进制数。\n"
+"你在 [code]_process()[/code] 中获得的 [code]delta[/code] "
+"变量是一个以秒为单位的时间差。它通常是一个很小的小数。\n"
 "\n"
-"要应用 [code]delta[/code]，您需要 [i]乘以[/i] 你的速度值乘以它。"
+"要应用 [code]delta[/code]，你需要用它 [i]乘以[/i] 你的速度值。"
 
 #: course/lesson-11-time-delta/lesson.tres:153
 msgid ""
@@ -221,14 +224,14 @@ msgid ""
 "\n"
 "That's essential to make your game consistent and fair."
 msgstr ""
-"当乘以 [code]delta[/code] 时，您使运动 [i]基于时间（time-dependent）[/i] 而不"
-"是 [i]基于帧（frame-dependent）[/i]。\n"
+"当乘以 [code]delta[/code] 时，运动变成了 [i]基于时间（time-"
+"dependent）[/i]的，而不是 [i]基于帧（frame-dependent）[/i]的。\n"
 "\n"
-"这对于使您的游戏保持一致和公平至关重要。"
+"要让游戏保持前后一致且合理的话，这是至关重要的。"
 
 #: course/lesson-11-time-delta/lesson.tres:163
 msgid "Why do we use the number 3.0 in this example?"
-msgstr "为什么我们在这个例子中使用数字 3.0？"
+msgstr "为什么我们在这个例子中用的值是 3.0？"
 
 #: course/lesson-11-time-delta/lesson.tres:165
 msgid ""
@@ -254,28 +257,30 @@ msgid ""
 "Don't worry if it's a little confusing for now. It'll eventually click as "
 "you deal with speed, acceleration, and motion in your game projects."
 msgstr ""
-"在课程的顶部，我们让机器人每帧旋转一个固定的量：[code]0.05[/code] 弧度。\n"
+"在课程的开始时期，我们让机器人每帧旋转一个固定的量：[code]0.05[/code] 弧度。"
 "\n"
-"在上面的示例中，我们现在 [i] 将参数乘以 [/i] 非常小的 [code]delta[/code] 值，"
-"该值远低于 [code]1.0[/code]。它使机器人随着时间的推移以恒定的速度转动。\n"
 "\n"
-"但是，乘以低于 [code]1.0[/code] 的数字，如 [code]delta[/code] 会使结果更"
-"小。\n"
+"在上面的示例中，现在我们要把参数[i] 乘上 [/i]一个非常小的 [code]delta[/code] "
+"值，该值远小于 [code]1.0[/code]。它能让机器人随着时间的推移以恒定的速度转动。"
 "\n"
-"为了弥补这一点并让机器人转动得足够快，我们使用了比以前更大的数字，[code]3.0[/"
-"code] 而不是 [code]0.05[/code]。\n"
 "\n"
-"这些数字有两个不同的 [i]单位[/i]：[code]0.05[/code] 是以弧度表示的 [i]角度[/"
-"i]，而 [code]3.0[/code] 是 [i]角速度[/i] 以弧度每秒为单位。\n"
+"但是，乘以一个小于 [code]1.0[/code] 的数字，如 "
+"[code]delta[/code]这种数会使结果非常小。\n"
 "\n"
-"当您将速度乘以时间增量时，它会给您一个角度。\n"
+"为了弥补这一点，让机器人转动得足够快，我们用了比以前更大的数，[code]3."
+"0[/code] 而不是 [code]0.05[/code]。\n"
 "\n"
-"如果现在有点混乱，请不要担心。当您在游戏项目中处理速度、加速度和运动时，它最"
-"终会点击。"
+"这两个数的 [i]单位[/i]不同：[code]0.05[/code] 的是以弧度表示的 [i]角度[/i]，"
+"而 [code]3.0[/code] 是 [i]角速度[/i]，以弧度每秒为单位。\n"
+"\n"
+"将角速度乘以时间增量delta时，你会得到一个角度。\n"
+"\n"
+"如果现在有点搞不清楚，不用担心。当你最终在游戏项目中处理速度、加速度和运动时"
+"，这种问题一点就通。"
 
 #: course/lesson-11-time-delta/lesson.tres:185
 msgid "Why the time between frames matters"
-msgstr "为什么帧之间的时间很重要"
+msgstr "为什么帧之间的时间间隔很重要"
 
 #: course/lesson-11-time-delta/lesson.tres:187
 msgid ""
@@ -294,18 +299,18 @@ msgid ""
 "\n"
 "The bottom robot will move [i]differently for everyone[/i]!"
 msgstr ""
-"显示新帧所需的时间会有所不同。\n"
+"显示新的一帧所需的时间会有所不同。\n"
 "\n"
-"如果您在代码中不考虑这段时间，您的游戏就会出现游戏性问题和错误。 Godot 通过 "
-"[code]delta[/code] 参数向 [code]_process()[/code] 函数提供该时间。\n"
+"如果你在代码中不考虑这个时间差，你的游戏就会出现游戏性问题和各种bug。 Godot "
+"通过 [code]delta[/code] 参数向 [code]_process()[/code] 函数提供了该时间。\n"
 "\n"
-"在下面的示例中，顶部机器人使用 [code]delta[/code] 移动。结果，它以固定的速度"
-"移动。\n"
+"在下面的示例中，上面的机器人使用 [code]delta[/code] "
+"移动。结果数，它以恒定的速度移动。\n"
 "\n"
-"底部机器人每帧移动一个恒定的距离，[i]没有[/i]考虑[code]delta[/code]。它会比 "
-"[i]your[/i] 计算机上的顶级机器人移动得更快或更慢。\n"
+"下面的机器人每帧移动一个恒定的距离，[i]没有[/i]考虑[code]delta[/code]。在 "
+"[i]你的这台[/i] 计算机上，它会比上面那个机器人更快或更慢。\n"
 "\n"
-"底部的机器人会为每个人[i]以不同的方式移动[/i]！"
+"下面的机器人会[i]因为设备的不同有着完全不同的移动方式[/i]！"
 
 #: course/lesson-11-time-delta/lesson.tres:215
 msgid ""
@@ -318,54 +323,55 @@ msgid ""
 "during gameplay. Because of that, the movement will differ for every player, "
 "making the game inconsistent and messy."
 msgstr ""
-"将时间敏感值乘以 [code]delta[/code] 使它们 [b]基于时间（time-dependent）[/b] "
-"而不是 [b]基于帧（frame-dependent）[/b]。\n"
+"将时间高度相关的值乘以 [code]delta[/code] 使它们的行为 [b]基于时间（time-"
+"dependent）[/b] 进行而不是 [b]基于帧（frame-dependent）[/b]进行。\n"
 "\n"
-"多亏了这一点，我们才能随着时间的推移获得可靠的运动。\n"
+"好在能这样做，我们才能得到随着时间推移可靠的运动。\n"
 "\n"
-"如果没有 [code]delta[/code]，帧时间会因计算机和游戏过程而异。因此，每个玩家的"
-"动作都会有所不同，从而使游戏变得不一致和混乱。"
+"如果没有 [code]delta[/code]，每帧的时间会因计算机不同和游玩过程不同而不同。受"
+"此影响，每个玩家看到的运动模式都会有所不同，游戏会变得不稳定、表现得乱七八糟"
+"的。"
 
 #: course/lesson-11-time-delta/lesson.tres:227
 msgid "What does this mean?"
-msgstr "这是什么意思？"
+msgstr "下面这个式子是什么意思？"
 
 #: course/lesson-11-time-delta/lesson.tres:228
 msgid "[code]rotation_speed * delta[/code]"
-msgstr "[code]rotation_speed * delta[/code]"
+msgstr "[code]rotation_speed * delta[/code]（旋转速度*delta）"
 
 #: course/lesson-11-time-delta/lesson.tres:230
 msgid ""
 "The [code]*[/code] symbol means we're multiplying [code]rotation_speed[/"
 "code] by [code]delta[/code] time."
 msgstr ""
-"[code]*[/code] 符号表示我们将 [code]rotation_speed[/code] 乘以 [code]delta[/"
-"code] 时间。"
+"[code]*[/code] 符号表示将 [code]rotation_speed[/code] 乘以 [code]delta[/code]"
+" 时间。"
 
 #: course/lesson-11-time-delta/lesson.tres:231
 #: course/lesson-11-time-delta/lesson.tres:232
 msgid "We're multiplying rotation_speed by delta."
-msgstr "我们将rotation_speed 乘以delta。"
+msgstr "将rotation_speed 乘以delta。"
 
 #: course/lesson-11-time-delta/lesson.tres:231
 msgid "We're dividing delta by rotation_speed."
-msgstr "我们将delta除以rotation_speed。"
+msgstr "将delta除以rotation_speed。"
 
 #: course/lesson-11-time-delta/lesson.tres:231
 msgid "We're adding rotation_speed to delta."
-msgstr "我们将rotation_speed 添加到delta。"
+msgstr "将rotation_speed和delta相加。"
 
 #: course/lesson-11-time-delta/lesson.tres:231
 msgid "We're subtracting delta from rotation_speed."
-msgstr "我们从rotation_speed 中减去delta。"
+msgstr "从rotation_speed 中减去delta。"
 
 #: course/lesson-11-time-delta/lesson.tres:241
 msgid "In the next practice, we'll use delta to make rotating time-dependent."
-msgstr "在接下来的练习中，我们将使用 delta 来使旋转与时间相关。"
+msgstr "在接下来的练习中，我们将使用 delta 来使旋转与时间关联起来。"
 
 #: course/lesson-11-time-delta/lesson.tres:249
 msgid "Rotating Using Delta"
-msgstr "使用 Delta 旋转"
+msgstr "使用 Delta 的旋转"
 
 #: course/lesson-11-time-delta/lesson.tres:250
 msgid ""
@@ -375,15 +381,15 @@ msgid ""
 "\n"
 "The robot should rotate [code]2[/code] radians per second."
 msgstr ""
-"目前，机器人的旋转依赖于帧。\n"
+"目前，机器人的旋转是帧相关的运动。\n"
 "\n"
-"添加 [code]delta[/code] 以使旋转速度与时间相关。\n"
+"添加 [code]delta[/code] 变量，以使旋转速度与时间相关。\n"
 "\n"
 "机器人应该每秒旋转 [code]2[/code] 弧度。"
 
 #: course/lesson-11-time-delta/lesson.tres:269
 msgid "Moving in a Circle Using Delta"
-msgstr "使用 Delta 绕圈移动"
+msgstr "使用 Delta 的绕圈移动"
 
 #: course/lesson-11-time-delta/lesson.tres:270
 msgid ""
@@ -396,14 +402,14 @@ msgid ""
 "functions. If you define extra variables, we will not be able to check your "
 "practice."
 msgstr ""
-"在这个练习中，使用 delta 使机器人在一个平滑的圆周上移动。\n"
+"在这个练习中，使用 delta 使机器人做平滑的圆周运动。\n"
 "\n"
-"为了达到这种运动，机器人应该每秒旋转 [code]2[/code] 弧度，并以每秒 "
-"[code]100[/code] 个像素向顺时针方向移动。\n"
+"为了实现这种运动，机器人应该每秒旋转 [code]2[/code] 弧度，并以每秒 "
+"[code]100[/code] 个像素的线速度向顺时针方向移动。\n"
 "\n"
-"[b]请注意：[/b]在调用函数时请将值写在小括号内。如果你定义了额外的变量，我们将"
-"无法检查你的练习。"
+"[b]请注意：[/b]在调用函数时请将值写在函数的小括号内。以及如果你定义了额外的变"
+"量，我们将无法检查你的练习。"
 
 #: course/lesson-11-time-delta/lesson.tres:288
 msgid "Time Delta"
-msgstr "时间增量"
+msgstr "时间增量Delta"

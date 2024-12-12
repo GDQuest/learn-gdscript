@@ -1,0 +1,543 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"PO-Revision-Date: 2024-04-06 19:01+0000\n"
+"Last-Translator: Matthijs <m4tthijsbl0m@gmail.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-6-multiple-function-parameters/nl/>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.5-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:14
+msgid ""
+"In the previous part, you created a function to draw a square of a fixed "
+"size.\n"
+"\n"
+"This function is a bit limiting. Instead, it would be much better if we had "
+"a function to draw a square of [i]any[/i] size. Or better: any kind of "
+"rectangle (a square is a specific kind of rectangle).\n"
+"\n"
+"In previous lessons, you used the [code]rotate()[/code] function and gave it "
+"an [i]argument[/i]."
+msgstr ""
+"In het vorige hoofdstuk heb je een functie gemaakt om een vierkant met een "
+"vaste grootte te tekenen.\n"
+"\n"
+"Deze functie is een beetje beperkend. In plaats daarvan zou het veel beter "
+"zijn als we een functie hadden om een vierkant van een [i]willekeurige[/i] "
+"grootte te tekenen. Of nog beter: elke soort rechthoek (een vierkant is een "
+"specifieke soort rechthoek).\n"
+"\n"
+"In vorige lessen gebruikte je de functie [code]rotate()[/code] en gaf je "
+"deze een [i]argument[/i]."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:38
+msgid ""
+"Just like [code]rotate()[/code], we can also give our function "
+"[i]parameters[/i]. Parameters are labels you give to values passed to the "
+"function."
+msgstr ""
+"Net als [code]rotate()[/code], kunnen we ook onze functie [i]parameters[/i] "
+"geven. Parameters zijn labels die je geeft aan waarden die worden meegegeven "
+"aan de functie."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:46
+msgid "Can I rotate in both directions?"
+msgstr "Kan ik in beide richtingen draaien?"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:48
+msgid ""
+"The [code]radians[/code] can be a positive or negative number, which allows "
+"you to rotate both clockwise and counter-clockwise."
+msgstr ""
+"De [code]radians[/code] kunnen een positief of negatief getal zijn, waardoor "
+"je zowel met de klok mee als tegen de klok in kunt draaien."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:58
+msgid ""
+"For now, please focus on the first line: [code]func rotate(radians)[/code].\n"
+"\n"
+"When you call [code]rotate(0.5)[/code], the computer binds the value "
+"[code]0.5[/code] to the label [code]radians[/code].\n"
+"\n"
+"Wherever the computer sees the identifier [code]radians[/code] inside the "
+"function, it replaces it with the [code]0.5[/code] value.\n"
+"\n"
+"The parameter name is always a label you use to refer to a [i]value[/i]. The "
+"value in question can be a number, text, or anything else.\n"
+"\n"
+"For now, we'll stick to numbers as we have yet to see other value types."
+msgstr ""
+"Concentreer je nu op de eerste regel: [code]func rotate(radians)[/code].\n"
+"\n"
+"Wanneer je [code]rotate(0.5)[/code] aanroept, bindt de computer de waarde "
+"[code]0.5[/code] aan het label [code]radians[/code].\n"
+"\n"
+"Overal waar de computer de identifier [code]radialen[/code] in de functie "
+"ziet, vervangt hij deze door de waarde [code]0.5[/code].\n"
+"\n"
+"De parameternaam is altijd een label dat je gebruikt om te verwijzen naar "
+"een [i]waarde[/i]. De waarde in kwestie kan een getal, tekst of iets anders "
+"zijn.\n"
+"\n"
+"Voor nu houden we het bij getallen, omdat we nog geen andere soorten waarden "
+"hebben gezien."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:74
+msgid "What is a function parameter?"
+msgstr "Wat is een functieparameter?"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:77
+msgid ""
+"A parameter is a label that represents a value.\n"
+"\n"
+"The value in question can change: it depends on what you put in parentheses "
+"when calling a function."
+msgstr ""
+"Een parameter is een label dat een waarde vertegenwoordigt.\n"
+"\n"
+"De waarde in kwestie kan veranderen: het hangt af van wat je tussen haakjes "
+"zet wanneer je een functie aanroept."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:80
+#: course/lesson-6-multiple-function-parameters/lesson.tres:81
+msgid "A label you give to a value the function receives."
+msgstr "Een label dat je geeft aan een waarde die de functie ontvangt."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:80
+msgid "A number you use to make calculations."
+msgstr "Een getal dat je gebruikt voor berekeningen."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:80
+msgid "The name of a function."
+msgstr "De naam van een functie."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:88
+msgid "How to create functions with parameters"
+msgstr "Functies met parameters maken"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:90
+msgid ""
+"You can give your function parameters when writing its [i]definition[/i] "
+"(the line starting with the [code]func[/code] keyword).\n"
+"\n"
+"To do so, you add a name inside of the parentheses."
+msgstr ""
+"Je kunt je functie parameters geven wanneer je de [i]definitie[/i] ervan "
+"schrijft (de regel die begint met het [code]func[/code] sleutelwoord).\n"
+"\n"
+"Om dit te doen, voeg je een naam toe tussen de haakjes."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:112
+msgid ""
+"You can give parameters any name. How you name functions and parameters is "
+"up to you. \n"
+"\n"
+"Just remember that names cannot contain spaces. To write parameter names "
+"with multiple words, you need to use underscores.\n"
+"\n"
+"The following function definition is exactly equivalent to the previous one."
+msgstr ""
+"Je kunt parameters een willekeurige naam geven. Hoe je functies en "
+"parameters noemt is helemaal aan jou. \n"
+"\n"
+"Onthoud wel dat namen geen spaties mogen bevatten. Om parameternamen met "
+"meerdere woorden te schrijven, zul je lage streepjes moeten gebruiken.\n"
+"\n"
+"De volgende functiedefinitie komt precies overeen met de vorige."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:136
+msgid ""
+"Parameters make your code easier to reuse.\n"
+"\n"
+"Here's an example with a function to draw any square. Use the slider to "
+"change the value passed to the function and draw squares of different sizes."
+msgstr ""
+"Parameters maken je code gemakkelijker te hergebruiken.\n"
+"\n"
+"Hier is een voorbeeld met een functie om een willekeurig vierkant te "
+"tekenen. Gebruik de schuifregelaar om de waarde die aan de functie wordt "
+"doorgegeven te veranderen en zo vierkanten van verschillende groottes te "
+"tekenen."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:156
+msgid "Which is the correct syntax for a function definition?"
+msgstr "Wat is de juiste vorm voor een functiedefinitie?"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:159
+msgid ""
+"To define a function, you need to start with the [code]func[/code] keyword "
+"followed by a space, the [code]function_name[/code], and optional parameters "
+"inside parentheses.\n"
+"\n"
+"You must end the line with a colon, which defines a new code block. We'll "
+"see moving forward that keywords other than [code]func[/code] require a "
+"colon at the end of the line."
+msgstr ""
+"Om een functie te definiëren, moet je beginnen met het sleutelwoord "
+"[code]func[/code], gevolgd door een spatie, de [code]function_name[/code] en "
+"eventuele parameters tussen haakjes.\n"
+"\n"
+"Je moet de regel afsluiten met een dubbele punt, die een nieuw codeblok "
+"begint. We zullen verderop zien dat andere sleutelwoorden dan "
+"[code]func[/code] ook een dubbele punt aan het einde van de regel nodig "
+"hebben."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:162
+#: course/lesson-6-multiple-function-parameters/lesson.tres:163
+msgid "func function_name(parameter_name):"
+msgstr "func function_name(parameter_name):"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:162
+msgid "func (function_name): parameter_name"
+msgstr "func (function_name): parameter_name"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:162
+msgid "func function_name(parameter_name)"
+msgstr "func function_name(parameter_name)"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:162
+msgid "function_name(parameter_name):"
+msgstr "function_name(parameter_name):"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:170
+msgid "Functions can have multiple parameters"
+msgstr "Functies kunnen meerdere parameters hebben"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:172
+msgid ""
+"You can use multiple parameters in a function. In fact, you can use as many "
+"as you [i]need[/i].\n"
+"\n"
+"To separate the function parameters, you need to write a comma between them."
+msgstr ""
+"Je kunt meerdere parameters gebruiken in een functie. Je kunt er zelfs "
+"zoveel gebruiken als je [i]nodig hebt[/i].\n"
+"\n"
+"Om de functieparameters te scheiden, moet je er een komma tussen zetten."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:192
+msgid "Must I write  spaces between function parameters?"
+msgstr "Moet ik spaties zetten tussen functieparameters?"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:194
+msgid ""
+"In a function definition, you must have a space between the [code]func[/"
+"code] keyword and the function name.\n"
+"\n"
+"However, because we use the comma to separate parameters, it doesn't matter "
+"if you use spaces between parameters. As long as you have the comma, either "
+"syntax is correct.\n"
+"\n"
+"We often use spaces after the comma for readability."
+msgstr ""
+"In een functiedefinitie moet er een spatie staan tussen het sleutelwoord "
+"[code]func[/code] en de functienaam.\n"
+"\n"
+"Maar omdat we de komma gebruiken om parameters te scheiden, maakt het niet "
+"uit of je spaties zet tussen de parameters. Zolang je de komma gebruikt, "
+"zijn beide vormen correct.\n"
+"\n"
+"We gebruiken vaak spaties na de komma voor de leesbaarheid."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:208
+msgid ""
+"The following example defines a function that uses two parameters to move an "
+"entity on both the X and Y axes."
+msgstr ""
+"Het volgend voorbeeld definieert een functie die twee parameters gebruikt om "
+"een object te verplaatsen langs zowel de X-as als de Y-as."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:226
+msgid "How should I name my functions and parameters?"
+msgstr "Hoe moet ik mijn functies en parameters noemen?"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:228
+msgid ""
+"The names of functions, parameters, or other things in your code are "
+"entirely up to you.\n"
+"\n"
+"They are written by us programmers for other programmers. You want to use "
+"the names that make the most sense to you and fellow programmers.\n"
+"\n"
+"You could absolutely write single-letter names like in maths classes: "
+"[code]a[/code], [code]b[/code], [code]f[/code].\n"
+"\n"
+"You can also write abbreviated names like [code]pos[/code] for position, "
+"[code]bg[/code] for background, and so on.\n"
+"\n"
+"Many programmers do either or both of the above.\n"
+"\n"
+"At GDQuest, we favor complete and explicit names.\n"
+"\n"
+"We generally try to write code that is explicit and relatively easy to "
+"read.\n"
+"\n"
+"Right now, you have to enter every letter when you code, so long names may "
+"feel inconvenient.\n"
+"\n"
+"However, this is good for learning: it trains your fingers to [ignore]type "
+"precisely.\n"
+"\n"
+"Then, after you finish this course, you will see that the computer assists "
+"you a lot when you code real games with a feature called auto-completion.\n"
+"\n"
+"Based on a few characters you [ignore]type, it will offer you to complete "
+"long names."
+msgstr ""
+"De namen van functies, parameters en andere dingen in je code zijn geheel "
+"aan jou.\n"
+"\n"
+"Ze zijn geschreven door ons programmeurs voor andere programmeurs. Je wilt "
+"namen gebruiken die voor jou en je collega-programmeurs het meest logisch "
+"zijn.\n"
+"\n"
+"Je zou zeker namen van één letter kunnen gebruiken, zoals in wiskundelessen: "
+"[code]a[/code], [code]b[/code], [code]f[/code].\n"
+"\n"
+"Je kunt ook afgekorte namen gebruiken zoals [code]pos[/code] voor positie, "
+"[code]ag[/code] voor achtergrond, enzovoort.\n"
+"\n"
+"Veel programmeurs gebruiken een van de bovenstaande of beide.\n"
+"\n"
+"Bij GDQuest geven we de voorkeur aan volledige en duidelijke namen.\n"
+"\n"
+"Over het algemeen proberen we code te schrijven die duidelijk en relatief "
+"gemakkelijk te lezen is.\n"
+"\n"
+"Op dit moment moet je elke letter invoeren tijdens het coderen, dus lange "
+"namen kunnen onhandig aanvoelen.\n"
+"\n"
+"Dit is echter goed voor het leerproces: het traint je vingers om precies te "
+"[ignore]typen.\n"
+"\n"
+"Wanneer je klaar bent met deze cursus, zul je zien dat de computer je veel "
+"helpt bij het programmeren van echte spellen met een functionaliteit genaamd "
+"auto-completion.\n"
+"\n"
+"Op basis van een paar tekens die je [negeert]typt, biedt het je aan om lange "
+"namen aan te vullen."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:256
+msgid "When defining a function, parameters are..."
+msgstr "Bij het definiëren van een functie zijn parameters..."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:259
+msgid ""
+"You can define functions with or without parameters, depending on your needs."
+msgstr ""
+"Je kunt functies definiëren met of zonder parameters, afhankelijk van wat je "
+"nodig hebt."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:260
+#: course/lesson-6-multiple-function-parameters/lesson.tres:261
+msgid "Optional"
+msgstr "Niet verplicht"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:260
+msgid "Mandatory"
+msgstr "Verplicht"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:268
+msgid ""
+"What's the correct syntax to define a function with multiple parameters?"
+msgstr ""
+"Wat is de juiste vorm om een functie met meerdere parameters te definiëren?"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:271
+msgid ""
+"You always write the function parameters inside of the parentheses. To "
+"define multiple parameters, you separate them with a comma."
+msgstr ""
+"Je zet de functieparameters altijd tussen de haakjes. Om meerdere parameters "
+"te definiëren, scheid je ze met een komma."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:272
+#: course/lesson-6-multiple-function-parameters/lesson.tres:273
+msgid "func function_name(parameter_1, parameter_2, ...):"
+msgstr "func function_name(parameter_1, parameter_2, ...):"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:272
+msgid "func function_name(parameter_1 parameter_2 ...):"
+msgstr "func function_name(parameter_1 parameter_2 ...):"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:272
+msgid "func function_name(): parameter_1, parameter_2, ..."
+msgstr "func function_name(): parameter_1, parameter_2, ..."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:282
+msgid ""
+"Now it's your turn to create a function with multiple parameters: a function "
+"to draw rectangles of any size."
+msgstr ""
+"Nu is het jouw beurt om een functie met meerdere parameters te maken: een "
+"functie om rechthoeken van elke grootte te tekenen."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:290
+msgid "Drawing corners of different sizes"
+msgstr "Hoeken van verschillende groottes tekenen"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:291
+msgid ""
+"Before we create a rectangle of any size, let's first see how we can use "
+"parameters to draw simpler shapes.\n"
+"\n"
+"Here we have an incomplete function that will draw corners with lines of any "
+"length, but it's missing its [code]length[/code] parameter.\n"
+"\n"
+"The function will move the turtle forward an amount defined by the parameter "
+"[code]length[/code], turn [code]90[/code] degrees, then move forward "
+"[code]length[/code] pixels.\n"
+"\n"
+"Complete the [code]draw_corner()[/code] function so it uses the "
+"[code]length[/code] parameter to draw corners."
+msgstr ""
+"Voordat we een rechthoek van willekeurige grootte maken, laten we eerst eens "
+"kijken hoe we parameters kunnen gebruiken om eenvoudigere vormen te tekenen."
+"\n"
+"\n"
+"Hier hebben we een onvolledige functie die hoeken zal tekenen met lijnen van "
+"willekeurige lengte, maar de parameter [code]length[/code] ontbreekt nog.\n"
+"\n"
+"De functie zal de schildpad een afstand, bepaald door de parameter "
+"[code]length[/code], naar voren verplaatsen, [code]90[/code] graden draaien "
+"en dan [code]length[/code] pixels naar voren verplaatsen.\n"
+"\n"
+"Vul de functie [code]draw_corner()[/code] aan zodat deze de parameter "
+"[code]length[/code] gebruikt om hoeken te tekenen."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:309
+msgid ""
+"Using function parameters, code a function you can reuse to draw corners "
+"with lines of varying sizes."
+msgstr ""
+"Gebruik functieparameters om een functie te maken die je kunt hergebruiken "
+"om hoeken te tekenen met lijnen van verschillende grootte."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:314
+msgid "Using multiple parameters"
+msgstr "Meerdere parameters gebruiken"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:315
+msgid ""
+"In this practice, we'll improve our [code]draw_corner()[/code] function so "
+"the angle can also vary.\n"
+"\n"
+"Add the [code]angle[/code] parameter after the [code]length[/code] parameter "
+"in the [code]draw_corner()[/code] function and use it to draw corners of "
+"varying angles."
+msgstr ""
+"In deze oefening verbeteren we onze [code]draw_corner()[/code] functie zodat "
+"de hoek ook kan variëren.\n"
+"\n"
+"Voeg de parameter [code]angle[/code] toe na de parameter [code]length[/code] "
+"in de functie [code]draw_corner()[/code] en gebruik deze om hoeken met "
+"verschillende hoeken te tekenen."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:329
+msgid "With two parameters, code a function to draw corners with any angle."
+msgstr ""
+"Door middel van twee parameters, maak een functie om hoeken met een "
+"willekeurige hoek te tekenen."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:334
+msgid "Drawing squares of any size"
+msgstr "Vierkanten van willekeurige grootte tekenen"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:335
+msgid ""
+"We want a function to draw squares of any size.\n"
+"\n"
+"We could use these squares as outlines when selecting units in a tactical "
+"game, as a frame for items in an inventory, and more.\n"
+"\n"
+"Create a function named [code]draw_square()[/code] that takes one parameter: "
+"the [code]length[/code] of the square's sides.\n"
+"\n"
+"[b]The turtle should face towards the right when starting or completing a "
+"square.[/b]\n"
+"\n"
+"Be sure to call [b]turn_right(90)[/b]  enough times in your function to do "
+"so."
+msgstr ""
+"We willen een functie om vierkanten van willekeurige grootte te tekenen.\n"
+"\n"
+"We kunnen deze vierkanten gebruiken als omtreklijnen bij het selecteren van "
+"eenheden in een tactisch spel, als omlijsting voor voorwerpen in een "
+"inventaris, en meer.\n"
+"\n"
+"Maak een functie met de naam [code]draw_square()[/code] met één parameter: "
+"de [code]length[/code] van de zijden van het vierkant.\n"
+"\n"
+"[b]De schildpad moet naar rechts kijken wanneer hij een vierkant begint of "
+"voltooit.[/b]\n"
+"\n"
+"Zorg ervoor dat je [b]turn_right(90)[/b] vaak genoeg aanroept in je functie "
+"om dit te doen."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:352
+msgid ""
+"In the previous lesson, your function would draw squares of a fixed size. "
+"Using a parameter, code a function to draw squares of any size."
+msgstr ""
+"In de vorige les tekende je functie vierkanten van een vaste grootte. "
+"Gebruik een parameter en schrijf een functie om vierkanten van willekeurige "
+"grootte te tekenen."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:357
+msgid "Drawing rectangles of any size"
+msgstr "Rechthoeken van willekeurige grootte tekenen"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:358
+msgid ""
+"Let's make our square drawing function more flexible to include rectangles "
+"of varying sizes.\n"
+"\n"
+"Your job is to code a function named [code]draw_rectangle()[/code] that "
+"takes two parameters: the [code]length[/code] and the [code]height[/code] of "
+"the rectangle.\n"
+"\n"
+"[b]The turtle should face towards the right when starting or completing a "
+"rectangle.[/b]\n"
+"\n"
+"Note that we could still draw a square with [code]draw_rectangle()[/code] by "
+"having the [code]length[/code] and [code]height[/code] equal the same value."
+msgstr ""
+"Laten we onze functie voor het tekenen van vierkanten flexibeler maken zodat "
+"ze ook rechthoeken van verschillende groottes kan tekenen.\n"
+"\n"
+"Het is jouw taak om een functie te schrijven met de naam "
+"[code]draw_rectangle()[/code] met twee parameters: de [code]length[/code] en "
+"de [code]height[/code] van de rechthoek.\n"
+"\n"
+"[b]De schildpad moet naar rechts kijken wanneer hij een rechthoek begint of "
+"voltooit.[/b]\n"
+"\n"
+"Merk op dat we nog steeds een vierkant kunnen tekenen met "
+"[code]draw_rectangle()[/code] door de [code]length[/code] en "
+"[code]height[/code] dezelfde waarde te geven."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:381
+msgid ""
+"With one parameter, you can make squares of any size. With two, you can draw "
+"any rectangle! You'll do so in this practice."
+msgstr ""
+"Met één parameter kun je vierkanten van elke grootte maken. Met twee kun je "
+"elke rechthoek tekenen! Dat zul je in deze oefening doen."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:385
+msgid "Your First Function Parameter"
+msgstr "Je eerste functieparameter"
