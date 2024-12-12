@@ -8,7 +8,7 @@
 [ext_resource path="res://ui/components/popups/PracticeListPopup.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/screens/practice/gdquestboy_frame.tres" type="StyleBox" id=7]
 [ext_resource path="res://ui/UIPractice.gd" type="Script" id=8]
-[ext_resource path="res://ui/screens/practice/gdquestboy_logo.png" type="Texture" id=9]
+[ext_resource path="res://ui/components/GDQuestLogo.tscn" type="PackedScene" id=9]
 [ext_resource path="res://ui/components/popups/PracticeDonePopup.tscn" type="PackedScene" id=10]
 [ext_resource path="res://ui/theme/panel_sliceeditor.tres" type="StyleBox" id=11]
 [ext_resource path="res://ui/components/SliceEditor.gd" type="Script" id=12]
@@ -78,9 +78,6 @@ size_flags_stretch_ratio = 2.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MarginContainer" type="MarginContainer" parent="Margin/Layout/OutputAnchors/Output/GameAnchors/GameContainer"]
 margin_left = 38.0
@@ -98,18 +95,27 @@ margin_top = 0.0
 margin_right = 543.0
 margin_bottom = 486.0
 
-[node name="Label" type="TextureRect" parent="Margin/Layout/OutputAnchors/Output/GameAnchors/GameContainer"]
-margin_left = 38.0
+[node name="Control" type="Control" parent="Margin/Layout/OutputAnchors/Output/GameAnchors/GameContainer"]
+margin_left = 209.0
 margin_top = 582.544
-margin_right = 581.0
+margin_right = 409.0
 margin_bottom = 630.544
-rect_min_size = Vector2( 0, 48 )
+rect_min_size = Vector2( 200, 48 )
+size_flags_horizontal = 4
 size_flags_vertical = 8
-texture = ExtResource( 9 )
-stretch_mode = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="GDQuestLogo" parent="Margin/Layout/OutputAnchors/Output/GameAnchors/GameContainer/Control" instance=ExtResource( 9 )]
+modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -90.0
+margin_top = -27.0
+margin_right = 91.0
+margin_bottom = 29.0
+expand = true
+stretch_mode = 5
 
 [node name="Console" parent="Margin/Layout/OutputAnchors/Output" instance=ExtResource( 5 )]
 anchor_right = 0.0
@@ -119,6 +125,7 @@ margin_right = 619.0
 margin_bottom = 1040.0
 
 [node name="SolutionContainer" type="PanelContainer" parent="Margin/Layout/OutputAnchors"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_clip_content = true
