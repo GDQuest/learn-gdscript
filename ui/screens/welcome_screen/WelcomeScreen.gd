@@ -6,6 +6,7 @@ onready var _settings_button := $GDQuestBoy/Margin/Buttons/SettingsButton as But
 onready var _outliner_button := $GDQuestBoy/Margin/Buttons/OutlinerButton as Button
 onready var _start_button := $GDQuestBoy/Margin/Buttons/StartButton as Button
 onready var _quit_button := $GDQuestBoy/Margin/Buttons/QuitButton as Button
+onready var _title_link_label := $TitleBackground/Title/TitleLinkLabel as RichTextLabel
 
 onready var _anim_player:= $AnimationPlayer as AnimationPlayer
 onready var _robot := $Robot
@@ -24,6 +25,7 @@ func _ready() -> void:
 	_outliner_button.connect("pressed", self, "_on_outliner_pressed")
 	_start_button.connect("pressed", self, "_on_start_requested")
 	_quit_button.connect("pressed", get_tree(), "quit")
+	_title_link_label.connect("meta_clicked", self, "_on_meta_clicked")
 	
 	_start_button.grab_focus()
 	
@@ -56,4 +58,9 @@ func _on_animation_finished(anim_name: String) -> void:
 	for button in _buttons_to_disable:
 		button.disabled = false
 	_robot.appear()
-	
+
+
+func _on_meta_clicked(data) -> void:
+	if typeof(data) == TYPE_STRING:
+		if data.begins_with("https://"):
+			OS.shell_open(data)
