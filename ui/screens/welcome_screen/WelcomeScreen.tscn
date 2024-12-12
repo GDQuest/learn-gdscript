@@ -307,6 +307,18 @@ tracks/7/keys = {
 "update": 0,
 "values": [ Vector2( 733, 568 ) ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("TitleBackground/Title/TitleLinkLabel:rect_position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 25, 233 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "appear"
@@ -415,8 +427,7 @@ rect_pivot_offset = Vector2( 811, 264 )
 theme = ExtResource( 2 )
 script = ExtResource( 8 )
 __meta__ = {
-"_edit_horizontal_guides_": [ 1060.0 ],
-"_edit_use_anchors_": false
+"_edit_horizontal_guides_": [ 1060.0 ]
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -724,9 +735,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 5 )
 stretch_mode = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="StarGreen" parent="TitleBackground/Title" instance=ExtResource( 13 )]
 margin_left = 37.5
