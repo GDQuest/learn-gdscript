@@ -13,13 +13,14 @@ var _sample_default_font: DynamicFont
 
 onready var _panel := $PanelContainer as PanelContainer
 onready var _color_rect := $ColorRect as ColorRect
-onready var _language_value := $PanelContainer/Column/Margin/Column/Settings/LanguageSetting/Value as OptionButton
-onready var _font_size_value := $PanelContainer/Column/Margin/Column/Settings/FontSizeSetting/ValueContainer/Value as HSlider
-onready var _font_size_sample := $PanelContainer/Column/Margin/Column/Settings/FontSizeSetting/ValueContainer/SampleText as Label
-onready var _scroll_sensitivity_slider := $PanelContainer/Column/Margin/Column/Settings/ScrollSensitivitySetting/Value as HSlider
-onready var _framerate_option := $PanelContainer/Column/Margin/Column/Settings/FramerateSetting/Value as OptionButton
+onready var _language_value := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/Value as OptionButton
+onready var _font_size_value := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer/Value as HSlider
+onready var _font_size_sample := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer/SampleText as Label
+onready var _scroll_sensitivity_slider := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/ScrollSensitivitySetting/Value as HSlider
+onready var _framerate_option := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting/Value as OptionButton
 
-onready var _lower_contrast := $PanelContainer/Column/Margin/Column/Settings/LowerContrasSetting/CheckBox as CheckBox
+onready var _lower_contrast := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LowerContrasSetting/CheckBox as CheckBox
+onready var _dyslexia_font :=$PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSetting/CheckBox as CheckBox
 
 onready var _apply_button := $PanelContainer/Column/Margin/Column/Buttons/ApplyButton as Button
 onready var _cancel_button := $PanelContainer/Column/Margin/Column/Buttons/CancelButton as Button
@@ -78,6 +79,7 @@ func _init_values() -> void:
 	_framerate_option.selected = FRAMERATE_MAP.values().find(current_profile.framerate_limit)
 	
 	_lower_contrast.pressed = current_profile.lower_contrast
+	_dyslexia_font.pressed = current_profile.dyslexia_font
 
 
 func _on_apply_settings() -> void:
@@ -87,17 +89,26 @@ func _on_apply_settings() -> void:
 	ThemeManager.scale_all_font_sizes(size_scale)
 	
 	ThemeManager.set_lower_contrast(_lower_contrast.pressed)
+	ThemeManager.set_dyslexia_font(_dyslexia_font.pressed)
 
 	current_profile.set_scroll_sensitivity(_scroll_sensitivity_slider.value)
 	current_profile.set_framerate_limit(FRAMERATE_MAP[_framerate_option.selected])
 	
 	var language_code := str(_language_value.get_item_metadata(_language_value.selected))
 	TranslationManager.set_language(language_code)
+	
+	var current_font = _font_size_sample.get_font("custom_fonts/font")
+	if current_profile.dyslexia_font:
+		current_font.font_data = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
+	_font_size_sample.add_font_override("font", current_font)
 
 
 func _on_font_size_changed(value: int) -> void:
+	var current_profile = UserProfiles.get_profile()
 	var font_override = _sample_default_font.duplicate() as DynamicFont
 	font_override.size += 2 * value
+	if current_profile.dyslexia_font:
+		font_override.font_data = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
 	_font_size_sample.add_font_override("font", font_override)
 
 
