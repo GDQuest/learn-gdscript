@@ -42,14 +42,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -360.0
-margin_top = -240.0
+margin_top = -345.5
 margin_right = 360.0
-margin_bottom = 300.0
+margin_bottom = 345.5
 rect_min_size = Vector2( 720, 540 )
 theme = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="PanelContainer"]
 margin_right = 720.0
@@ -112,27 +109,27 @@ custom_constants/separation = 32
 
 [node name="LanguageSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings"]
 margin_right = 650.0
-margin_bottom = 44.0
+margin_bottom = 47.0
 
 [node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting"]
-margin_top = 8.0
+margin_top = 9.0
 margin_right = 317.0
-margin_bottom = 36.0
+margin_bottom = 37.0
 size_flags_horizontal = 3
 text = "Language"
 
 [node name="Value" type="OptionButton" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting"]
 margin_left = 333.0
 margin_right = 650.0
-margin_bottom = 44.0
+margin_bottom = 47.0
 hint_tooltip = "Change the course's language. We plan to add other languages, but only English is available for now."
 size_flags_horizontal = 3
 text = "English"
 
 [node name="FontSizeSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings"]
-margin_top = 76.0
+margin_top = 79.0
 margin_right = 650.0
-margin_bottom = 152.0
+margin_bottom = 155.0
 
 [node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting"]
 margin_right = 317.0
@@ -171,9 +168,9 @@ text = "Sample text"
 align = 1
 
 [node name="ScrollSensitivitySetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings"]
-margin_top = 184.0
+margin_top = 187.0
 margin_right = 650.0
-margin_bottom = 212.0
+margin_bottom = 215.0
 
 [node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/ScrollSensitivitySetting"]
 margin_right = 317.0
@@ -197,9 +194,9 @@ tick_count = 2
 ticks_on_borders = true
 
 [node name="FramerateSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings"]
-margin_top = 244.0
+margin_top = 247.0
 margin_right = 650.0
-margin_bottom = 288.0
+margin_bottom = 294.0
 
 [node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting"]
 margin_right = 317.0
@@ -211,7 +208,7 @@ text = "Framerate cap"
 [node name="Value" type="OptionButton" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting"]
 margin_left = 333.0
 margin_right = 650.0
-margin_bottom = 44.0
+margin_bottom = 47.0
 hint_tooltip = "Limit the app's framerate. Lower values make the app use less resources, especially when running in the browser, but may feel less fluid."
 size_flags_horizontal = 3
 text = "60 FPS"
@@ -219,9 +216,9 @@ items = [ "60 FPS", null, false, 0, false, "30 FPS", null, false, 0, false, "No 
 selected = 0
 
 [node name="LowerContrasSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings"]
-margin_top = 320.0
+margin_top = 326.0
 margin_right = 650.0
-margin_bottom = 368.0
+margin_bottom = 374.0
 rect_pivot_offset = Vector2( -389, 116 )
 
 [node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LowerContrasSetting"]
@@ -240,9 +237,9 @@ size_flags_horizontal = 3
 text = "Enabled"
 
 [node name="FontSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings"]
-margin_top = 400.0
+margin_top = 406.0
 margin_right = 650.0
-margin_bottom = 448.0
+margin_bottom = 454.0
 rect_pivot_offset = Vector2( -389, 116 )
 
 [node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSetting"]
@@ -256,7 +253,7 @@ text = "Dyslexia Font"
 margin_left = 333.0
 margin_right = 650.0
 margin_bottom = 48.0
-hint_tooltip = "Lower the text's brightness."
+hint_tooltip = "Change the text style to make the text easier to read if you have dyslexia. This option is incompatible with languages like Chinese and Japanese."
 size_flags_horizontal = 3
 text = "Enabled"
 
