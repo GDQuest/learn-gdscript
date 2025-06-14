@@ -1,0 +1,218 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2023 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-12-09 20:05+0100\n"
+"PO-Revision-Date: 2024-12-18 22:00+0000\n"
+"Last-Translator: Олександр Пилипчук <lxlalexlxl@ukr.net>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-9-adding-and-subtracting/uk/>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.9.2-dev\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:14
+msgid ""
+"Our character in our game will have health by defining the "
+"[code]health[/code] variable. The higher the character's health, the "
+"further away the player is from losing the game.\n"
+"\n"
+"Health that changes adds tension to the game, especially if the player is"
+" fighting with low health! It's a resource that the player should manage "
+"carefully.\n"
+"\n"
+"The character's health might get low if an enemy attacks them or they "
+"fall into a hole.\n"
+"\n"
+"We can create a function to represent damage in these cases."
+msgstr ""
+"Здоров'я головного героя нашої гри буде визначати змінна [code]health[/code]"
+". Що більше здоров'я персонажа, то далі гравець від поразки.\n"
+"\n"
+"Здоров'я додає грі напруги, особливо якщо гравець бореться на низькому його "
+"рівні! Здоров'я – це ресурс, яким гравець має розпоряджатися обережно.\n"
+"\n"
+"Здоров'я персонажа зменшується, якщо він падає у прірву або його атакує "
+"супротивник.\n"
+"\n"
+"Ми можемо створити функцію, яка завдає пошкоджень у цих випадках."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:40
+msgid ""
+"We pass the amount of damage the robot should take as a parameter.\n"
+"\n"
+"Line 2 subtracts [code]amount[/code] from [code]health[/code].\n"
+"\n"
+"Note the [code]-=[/code] syntax which achieves this. It's a shorthand we "
+"often use.\n"
+"\n"
+"You can also use a longer form. Both of these lines have the same effect."
+" They both subtract the value of [code]amount[/code] from the "
+"[code]health[/code] variable:\n"
+"\n"
+"[code]health -= amount[/code]\n"
+"[code]health = health - amount[/code]\n"
+"\n"
+"You may notice that the health of the robot can go below [code]0[/code]. "
+"We'll see how to manage this in a future lesson using [i]conditions[/i]."
+msgstr ""
+"Ми передаємо рівень ушкоджень, які має отримати робот, як параметр.\n"
+"\n"
+"У рядку 2 від [code]health[/code] віднімається [code]amount[/code].\n"
+"\n"
+"Зверніть увагу, що віднімання здійснюється за допомогою синтаксису [code]-="
+"[/code]. Це скорочення, яке ми часто використовуємо.\n"
+"\n"
+"Також ви можете використовувати довшу форму. Обидва рядки, наведені нижче, "
+"мають однаковий ефект. В них обох від змінної [code]health[/code] "
+"віднімається [code]amount[/code]:\n"
+"\n"
+"[code]health -= amount[/code]\n"
+"[code]health = health - amount[/code]\n"
+"\n"
+"Ви можете помітити, що здоров'я робота може впасти нижче [code]0[/code]. У "
+"наступних уроках ми розберемо, як із цим впоратися за допомогою [i]умов[/i]."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:61
+msgid ""
+"The robot's health could increase instead if the player picks up an item "
+"that heals them, or if they use a healing item."
+msgstr ""
+"Здоров'я робота може зрости, якщо гравець підбере або використає цілющий "
+"предмет."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:81
+msgid ""
+"Here again, the health can go beyond [code]100[/code].\n"
+"\n"
+"Also, once more, the short line [code]health += amount[/code] is "
+"equivalent to the longer form [code]health = health + amount[/code]."
+msgstr ""
+"Також, здоров'я може перевищити [code]100[/code].\n"
+"\n"
+"Тут, як і в попередньому прикладі, ми використовуємо скорочення [code]health "
+"+= amount[/code] еквівалентне довгій формі [code]health = health + amount[/"
+"code]."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:91
+msgid "Which of these would increase the health of the robot?"
+msgstr "Який із цих виразів збільшить здоров'я робота?"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:94
+msgid ""
+"Both of these lines increase the [code]health[/code] of the robot by "
+"[code]amount[/code].\n"
+"[code]\n"
+"health += amount\n"
+"health = health + amount\n"
+"[/code]"
+msgstr ""
+"Обидва вирази збільшать [code]health[/code] робота на [code]amount[/code].\n"
+"[code]\n"
+"health += amount\n"
+"health = health + amount\n"
+"[/code]"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+msgid "health -= amount"
+msgstr "health -= amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+#: course/lesson-9-adding-and-subtracting/lesson.tres:100
+msgid "health += amount"
+msgstr "health += amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+#: course/lesson-9-adding-and-subtracting/lesson.tres:100
+msgid "health = health + amount"
+msgstr "health = health + amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+msgid "health = health - amount"
+msgstr "health = health - amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:109
+msgid ""
+"In the following practices, you'll code the [code]take_damage()[/code] "
+"and [code]heal()[/code] functions so the robot's health can decrease and "
+"increase."
+msgstr ""
+"У наступних вправах ви створите функції [code]take_damage()[/code] і [code]"
+"heal()[/code], що дозволяють зменшувати та збільшувати здоров'я робота."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:117
+msgid "Damaging the Robot"
+msgstr "Пошкодження робота"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:118
+msgid ""
+"In our game, the main character has a certain amount of "
+"[code]health[/code]. When it gets hit, the health should go down by a "
+"varying [code]amount[/code] of damage.\n"
+"\n"
+"Add to the [code]take_damage()[/code] function so it subtracts the "
+"[code]amount[/code] to the predefined [code]health[/code] variable.\n"
+"\n"
+"The robot starts with 100 health and will take 50 damage."
+msgstr ""
+"У нашій грі головний герой має певну кількість здоров'я ([code]health[/code])"
+". Коли персонаж зазнає удару, його здоров'я має зменшитися на певну "
+"кількість ([code]amount[/code]) очок.\n"
+"\n"
+"Доробіть функцію [code]take_damage()[/code] так, щоб при її виклику, "
+"значення раніше оголошеної змінної [code]health[/code] зменшувалося на [code]"
+"amount[/code].\n"
+"\n"
+"Робот має почати зі 100 очками здоров'я та отримати 50 одиниць ушкоджень."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:134
+msgid "Learn how to deal damage to entities like our robot."
+msgstr "Навчіться завдавати ушкодження об'єктам на зразок робота."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:139
+msgid "Healing the Robot"
+msgstr "Лікування робота"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:140
+msgid ""
+"It's time to heal the robot up to full health!\n"
+"\n"
+"Write a function called [code]heal()[/code] that takes "
+"[code]amount[/code] as a parameter.\n"
+"\n"
+"The function should add [code]amount[/code] to [code]health[/code].\n"
+"\n"
+"The robot starts with 50 health and will heal 50 to get it up to 100."
+msgstr ""
+"Настав час зцілити нашого робота\n"
+"\n"
+"Напишіть функцію [code]heal()[/code], яка приймає [code]amount[/code] як "
+"параметр.\n"
+"\n"
+"Функція має додавати [code]amount[/code] до [code]health[/code].\n"
+"\n"
+"Робот має почати з 50 очками здоров'я та зцілитися на 50 внаслідок виконання "
+"функції, щоб повністю відновитись до 100."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:157
+msgid ""
+"Our robot needs healing after that practice! Create a function to heal it"
+" back to full health."
+msgstr ""
+"Після попередньої вправи наш робот потребує лікування! Створіть функцію, щоб "
+"відновити здоров'я до повного рівня."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:161
+msgid "Adding and Subtracting"
+msgstr "Додавання та віднімання"

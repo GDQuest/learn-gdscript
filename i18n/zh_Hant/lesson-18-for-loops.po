@@ -1,0 +1,290 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"PO-Revision-Date: 2025-04-04 07:24+0000\n"
+"Last-Translator: MuryanBKS <muryanbks+github@gmail.com>\n"
+"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
+"projects/learn-gdscript-from-zero/lesson-18-for-loops/zh_Hant/>\n"
+"Language: zh_Hant\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-18-for-loops/lesson.tres:14
+msgid ""
+"In the last lesson, we looked at [code]while[/code] loops. We found they "
+"were useful if we don't know how many times we should repeat code. \n"
+"\n"
+"However, they could result in infinite loops if we're not careful.\n"
+"\n"
+"The loop below never ends because we never increment [code]number[/code]."
+msgstr ""
+"在上堂課中，我們學習了 [code]while[/code] "
+"迴圈。當我們無法確定該重複執行程式碼的次數時，[code]while[/code] "
+"迴圈會非常有用。\n"
+"\n"
+"然而如果我們不小心，可能會導致無限迴圈。\n"
+"\n"
+"以下的迴圈永遠不會結束，因為我們沒有遞增 [code]number[/code]。"
+
+#: course/lesson-18-for-loops/lesson.tres:38
+msgid ""
+"There's a safer and often easier kind of loop: the [code]for[/code] loop.\n"
+"\n"
+"We'll look at it in this lesson.\n"
+"\n"
+"Unlike [code]while[/code] loops, [code]for[/code] loops don't run "
+"infinitely, so it's much less likely that you'll get bugs in your game. "
+"[b]We recommend favoring for loops over while loops because of this[/b].\n"
+"\n"
+"Let's change the code above to use a [code]for[/code] loop instead.\n"
+"\n"
+"The loop below will change the [code]cell[/code] three times."
+msgstr ""
+"有一種更安全且通常更簡單的迴圈：[code]for[/code] 迴圈。\n"
+"\n"
+"我們會在本課中學習它。\n"
+"\n"
+"與 [code]while[/code] 迴圈不同，[code]for[/code] "
+"迴圈不會無限執行，因此更不容易讓你的遊戲出現錯誤。[b]因此我們建議優先使用 "
+"for 迴圈，而不是 [code]while[/code] 迴圈。[/b]\n"
+"\n"
+"現在讓我們將上面的程式碼改為 [code]for[/code] 迴圈。\n"
+"\n"
+"以下的迴圈將改變 [code]cell[/code] 三次。"
+
+#: course/lesson-18-for-loops/lesson.tres:66
+msgid "Let's explain what's going on here."
+msgstr "讓我們解釋一下這裡發生了什麼。"
+
+#: course/lesson-18-for-loops/lesson.tres:74
+msgid "The range() function"
+msgstr "range() 函式"
+
+#: course/lesson-18-for-loops/lesson.tres:76
+msgid ""
+"Godot has the helper function [code]range()[/code]. Calling [code]range(n)[/"
+"code] creates a list of numbers from [code]0[/code] to [code]n - 1[/code]. \n"
+"\n"
+"So calling [code]range(3)[/code] outputs the list of numbers [code][0, 1, 2]"
+"[/code], and [code]range(5)[/code] outputs [code][0, 1, 2, 3, 4][/code]."
+msgstr ""
+"Godot 有一個輔助函式 [code]range()[/code]。呼叫 [code]range(n)[/code] "
+"會創建一個從 [code]0[/code] 到 [code]n - 1[/code] 的數字列表。\n"
+"\n"
+"因此呼叫 [code]range(3)[/code] 會輸出數字列表 [code][0, 1, 2][/code]，而 "
+"[code]range(5)[/code] 會輸出 [code][0, 1, 2, 3, 4][/code]。"
+
+#: course/lesson-18-for-loops/lesson.tres:86
+msgid "What list of numbers would range(6) create?"
+msgstr "range(6) 會創建什麼數字列表？"
+
+#: course/lesson-18-for-loops/lesson.tres:87
+msgid "What would [code]print(range(6))[/code] print to the console?"
+msgstr "[code]print(range(6))[/code] 會在控制台顯示什麼？"
+
+#: course/lesson-18-for-loops/lesson.tres:89
+msgid ""
+"The function [code]range(n)[/code] creates a list of numbers from [code]0[/"
+"code] to [code]n - 1[/code]. The output list will start with [code]0[/code] "
+"and end with [code]5[/code].\n"
+"\n"
+"So calling [code]range(6)[/code] will output a list of six numbers which are "
+"[code][0, 1, 2, 3, 4, 5][/code].\n"
+msgstr ""
+"[code]range(n)[/code] 函式會創建一個從 [code]0[/code] 到 [code]n - 1[/code] "
+"的數字列表。輸出的列表將以 [code]0[/code] 開始，並以 [code]5[/code] 結束。\n"
+"\n"
+"因此呼叫 [code]range(6)[/code] 會輸出六個數字的列表：[code][0, 1, 2, 3, 4, 5]"
+"[/code]。\n"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+#: course/lesson-18-for-loops/lesson.tres:94
+msgid "[0, 1, 2, 3, 4, 5]"
+msgstr "[0, 1, 2, 3, 4, 5]"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+msgid "[1, 2, 3, 4, 5, 6]"
+msgstr "[1, 2, 3, 4, 5, 6]"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+msgid "[0, 1, 2, 3, 4, 5, 6]"
+msgstr "[0, 1, 2, 3, 4, 5, 6]"
+
+#: course/lesson-18-for-loops/lesson.tres:101
+msgid "How for loops work"
+msgstr "for 循環是如何運作的"
+
+#: course/lesson-18-for-loops/lesson.tres:103
+msgid ""
+"In a [code]for[/code] loop, the computer takes each value inside a list, "
+"stores it in a temporary variable, and executes the code in the loop once "
+"per value."
+msgstr "在 [code]for[/code] "
+"迴圈中，電腦會將列表中的每個值取出，儲存到一個暫時變數中，並針對每個值執行一"
+"次迴圈中的程式碼。"
+
+#: course/lesson-18-for-loops/lesson.tres:123
+msgid ""
+"In the above example, for each item in the list [code][0, 1, 2][/code], "
+"Godot sets [code]number[/code] to the item, then executes the code in the "
+"[code]for[/code] loop.\n"
+"\n"
+"We'll explain arrays more thoroughly in the next lesson, but notice that "
+"[code]number[/code] is just a temporary variable. You create it when "
+"defining the loop, and the loop takes care of changing its value. Also, you "
+"can name this variable anything you want.\n"
+"\n"
+"This code behaves the same as the previous example:"
+msgstr ""
+"在上述範例中，對於列表 [code][0, 1, 2][/code] 中的每個項目，Godot 會將 [code]"
+"number[/code] 設為該項目，然後執行 [code]for[/code] 迴圈中的程式碼。\n"
+"\n"
+"我們會在下堂課更詳細地解釋陣列(Array)，但要注意的是 [code]number[/code] "
+"只是個暫時變數。你在定義迴圈時創建它，並且迴圈會負責改變它的值。此外你可以隨"
+"意命名這個變數。\n"
+"\n"
+"這段程式碼的行為和之前的範例相同："
+
+#: course/lesson-18-for-loops/lesson.tres:147
+msgid ""
+"In both examples, we print the value of the temporary variable we created: "
+"[code]number[/code] in the first example and [code]element[/code] in the "
+"second.\n"
+"\n"
+"As Godot moves through the loop, it assigns each value of the array to that "
+"variable. First, it sets the variable to [code]0[/code], then to [code]1[/"
+"code], and finally, to [code]2[/code].\n"
+"\n"
+"We can break down the instructions the loop runs. You can see how a loop is "
+"a shortcut to code that otherwise gets very long."
+msgstr ""
+"在兩個範例中，我們列印了創建的暫時變數的值：第一個範例是 [code]number[/"
+"code]，第二個範例是 [code]element[/code]。\n"
+"\n"
+"當 Godot 執行迴圈時，它將陣列中的每個值指定給該變數。首先，它將變數設為 "
+"[code]0[/code]，接著是 [code]1[/code]，最後是 [code]2[/code]。\n"
+"\n"
+"我們可以分解迴圈執行的指令。你可以看到迴圈是一種捷徑，能夠簡化原本會變得非常"
+"長的程式碼。"
+
+#: course/lesson-18-for-loops/lesson.tres:171
+msgid ""
+"We can put whatever code we like in the loop's code block, including other "
+"function calls like [code]draw_rectangle()[/code]."
+msgstr "我們可以在迴圈的程式區塊中放入任何喜歡的程式碼，包括像是 [code]"
+"draw_rectangle()[/code] 這樣的函式呼叫。"
+
+#: course/lesson-18-for-loops/lesson.tres:179
+msgid "Using a for loop instead of a while loop"
+msgstr "使用 for 迴圈而不是 while 迴圈"
+
+#: course/lesson-18-for-loops/lesson.tres:181
+msgid ""
+"Here's our old [code]move_to_end()[/code] function which used a [code]while[/"
+"code] loop."
+msgstr "這是我們之前的 [code]move_to_end()[/code] 函式，它使用了 [code]while[/code] "
+"迴圈。"
+
+#: course/lesson-18-for-loops/lesson.tres:201
+msgid ""
+"If we use a [code]for[/code] loop instead, the code becomes a little simpler."
+msgstr "如果我們改用 [code]for[/code] 迴圈，程式碼會變得簡單一些。"
+
+#: course/lesson-18-for-loops/lesson.tres:221
+msgid ""
+"Rather than constantly checking if the robot reached the end of the board, "
+"with the [code]for[/code] loop, we take the board's width beforehand, then "
+"move the robot a set amount of times.\n"
+"\n"
+"The function still works the same. You can execute it below."
+msgstr ""
+"不需要一直檢查機器人是否達到棋盤的終點，使用 [code]for[/code] "
+"迴圈後，我們可以事先取得棋盤的寬度，然後讓機器人移動固定次數。\n"
+"\n"
+"這個函式的運作方式仍然相同。你可以在下面執行它。"
+
+#: course/lesson-18-for-loops/lesson.tres:243
+msgid ""
+"In the practices, we'll use [code]for[/code] loops in different ways to get "
+"you used to using them."
+msgstr "在練習中，我們會以不同的方式使用 [code]for[/code] 迴圈，讓你習慣使用它們。"
+
+#: course/lesson-18-for-loops/lesson.tres:251
+msgid "Using a for loop to move to the end of the board"
+msgstr "使用 for 迴圈移動到棋盤的終點"
+
+#: course/lesson-18-for-loops/lesson.tres:252
+msgid ""
+"Once again, the robot has decided to stand at the top of the board.\n"
+"\n"
+"This time, use a [code]for[/code] loop in the [code]move_to_bottom()[/code] "
+"function to have it move to the bottom of the board.\n"
+"\n"
+"The board size is determined by the [code]Vector2[/code] variable "
+"[code]board_size[/code].\n"
+"\n"
+"The robot's starting cell is [code]Vector2(2, 0)[/code]."
+msgstr ""
+"再一次，機器人決定站在棋盤上方。\n"
+"\n"
+"這次請在 [code]move_to_bottom()[/code] 函式中使用 [code]for[/code] "
+"迴圈，讓它移動到棋盤的底部。\n"
+"\n"
+"棋盤的大小由 [code]Vector2[/code] 變數 [code]board_size[/code] 決定。\n"
+"\n"
+"機器人初始的位置是 [code]Vector2(2, 0)[/code]。"
+
+#: course/lesson-18-for-loops/lesson.tres:268
+msgid ""
+"Use a for loop to have our robot move from the top of the board to the "
+"bottom."
+msgstr "使用 for 迴圈讓我們的機器人從棋盤的頂端移動到底部。"
+
+#: course/lesson-18-for-loops/lesson.tres:273
+msgid "Improving code with a for loop"
+msgstr "使用 for 迴圈改進程式碼"
+
+#: course/lesson-18-for-loops/lesson.tres:274
+msgid ""
+"Use a [code]for[/code] loop to remove the duplicate code in the [code]run()[/"
+"code] function.\n"
+"\n"
+"In this practice, we revisit the turtle and drawing rectangles.\n"
+"\n"
+"With our new knowledge of [code]for[/code] loops, we can condense this code "
+"to take up less space and make it easier to modify.\n"
+"\n"
+"The turtle should draw three squares in a horizontal line. The squares "
+"should be 100 pixels apart."
+msgstr ""
+"使用 [code]for[/code] 迴圈來移除 [code]run()[/code] 函式中的重複程式碼。\n"
+"\n"
+"在這個練習中，我們將重新使用烏龜並繪製矩形。\n"
+"\n"
+"運用我們剛學到的 [code]for[/code] "
+"迴圈，我們可以讓程式碼更精簡，使其更容易修改。\n"
+"\n"
+"烏龜應該在水平方向上繪製三個正方形，且每個正方形之間應間隔 100 像素。"
+
+#: course/lesson-18-for-loops/lesson.tres:297
+msgid ""
+"In the past we had to copy and paste code to draw multiple rectangles. Let's "
+"revisit previous code and improve it with a for loop."
+msgstr "過去我們必須複製貼上程式碼來繪製多個矩形。現在讓我們回顧之前的程式碼，並使用 "
+"for 迴圈來改進它。"
+
+#: course/lesson-18-for-loops/lesson.tres:301
+msgid "Introduction to For Loops"
+msgstr "For 迴圈入門"

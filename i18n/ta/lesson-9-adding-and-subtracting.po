@@ -1,0 +1,222 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2024 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2024-12-12 14:39+0100\n"
+"PO-Revision-Date: 2025-01-11 17:54+0000\n"
+"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-9-adding-and-subtracting/ta/>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10-dev\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:14
+msgid ""
+"Our character in our game will have health by defining the "
+"[code]health[/code] variable. The higher the character's health, the "
+"further away the player is from losing the game.\n"
+"\n"
+"Health that changes adds tension to the game, especially if the player is"
+" fighting with low health! It's a resource that the player should manage "
+"carefully.\n"
+"\n"
+"The character's health might get low if an enemy attacks them or they "
+"fall into a hole.\n"
+"\n"
+"We can create a function to represent damage in these cases."
+msgstr ""
+"[குறியீடு] உடல்நலம் [/குறியீடு] மாறியை வரையறுப்பதன் மூலம் எங்கள் விளையாட்டில் எங்கள் "
+"கதாபாத்திரம் ஆரோக்கியத்தைக் கொண்டிருக்கும். கதாபாத்திரத்தின் உடல்நலம் அதிகமாக இருப்பதால், "
+"வீரர் விளையாட்டை இழப்பதே என்பதுதான்.\n"
+"\n"
+" மாற்றும் உடல்நலம் விளையாட்டுக்கு பதற்றத்தை சேர்க்கிறது, குறிப்பாக வீரர் குறைந்த "
+"ஆரோக்கியத்துடன் போராடுகிறார் என்றால்! வீரர் கவனமாக நிர்வகிக்க வேண்டிய ஒரு சான்று இது.\n"
+"\n"
+" ஒரு எதிரி அவர்களைத் தாக்கினால் அல்லது அவை ஒரு துளைக்குள் விழுந்தால் கதாபாத்திரத்தின் "
+"உடல்நிலை குறைவாக இருக்கும்.\n"
+"\n"
+" இந்த நிகழ்வுகளில் சேதத்தைக் குறிக்க ஒரு செயல்பாட்டை உருவாக்கலாம்."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:40
+msgid ""
+"We pass the amount of damage the robot should take as a parameter.\n"
+"\n"
+"Line 2 subtracts [code]amount[/code] from [code]health[/code].\n"
+"\n"
+"Note the [code]-=[/code] syntax which achieves this. It's a shorthand we "
+"often use.\n"
+"\n"
+"You can also use a longer form. Both of these lines have the same effect."
+" They both subtract the value of [code]amount[/code] from the "
+"[code]health[/code] variable:\n"
+"\n"
+"[code]health -= amount[/code]\n"
+"[code]health = health - amount[/code]\n"
+"\n"
+"You may notice that the health of the robot can go below [code]0[/code]. "
+"We'll see how to manage this in a future lesson using [i]conditions[/i]."
+msgstr ""
+"ரோபோ ஒரு அளவுருவாக எடுக்க வேண்டிய சேதத்தின் அளவை நாங்கள் கடந்து செல்கிறோம்.\n"
+"\n"
+" வரி 2 [குறியீடு] ஆரோக்கியத்திலிருந்து [/குறியீடு] [/குறியீடு] [/குறியீடு] "
+"கழிக்கிறது.\n"
+"\n"
+" இதை அடைவதற்கான [குறியீடு]-= [/குறியீடு] தொடரியல் கவனியுங்கள். இது நாம் அடிக்கடி "
+"பயன்படுத்தும் ஒரு சுருக்கெழுத்து.\n"
+"\n"
+" நீங்கள் நீண்ட வடிவத்தையும் பயன்படுத்தலாம். இந்த இரண்டு வரிகளும் ஒரே விளைவைக் கொண்டுள்ளன. அவை"
+" இரண்டும் [குறியீடு] உடல் [/குறியீடு] [குறியீடு] உடல்நலம் [/குறியீடு] மாறியிலிருந்து "
+"கழிக்கின்றன:\n"
+"\n"
+" [குறியீடு] உடல்நலம் -= தொகை [/குறியீடு]\n"
+" [குறியீடு] உடல்நலம் = உடல்நலம் - தொகை [/குறியீடு]\n"
+"\n"
+" ரோபோவின் உடல்நலம் [குறியீடு] 0 [/குறியீடு] கீழே செல்லலாம் என்பதை நீங்கள் கவனிக்கலாம். [I] "
+"நிபந்தனைகளைப் பயன்படுத்தி எதிர்கால பாடத்தில் இதை எவ்வாறு நிர்வகிப்பது என்று பார்ப்போம் [/i]"
+"."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:61
+msgid ""
+"The robot's health could increase instead if the player picks up an item "
+"that heals them, or if they use a healing item."
+msgstr ""
+"வீரர் அவர்களை குணப்படுத்தும் ஒரு பொருளை எடுத்தால் அல்லது அவர்கள் குணப்படுத்தும் பொருளைப் "
+"பயன்படுத்தினால் அதற்கு பதிலாக ரோபோவின் உடல்நிலை அதிகரிக்கும்."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:81
+msgid ""
+"Here again, the health can go beyond [code]100[/code].\n"
+"\n"
+"Also, once more, the short line [code]health += amount[/code] is "
+"equivalent to the longer form [code]health = health + amount[/code]."
+msgstr ""
+"இங்கே மீண்டும், உடல்நலம் [குறியீடு] 100 [/குறியீடு] க்கு அப்பால் செல்லலாம்.\n"
+"\n"
+" மேலும், மீண்டும் ஒரு முறை, குறுகிய வரி [குறியீடு] உடல்நலம் + = தொகை [/குறியீடு] நீண்ட "
+"வடிவத்திற்கு சமம் [குறியீடு] உடல்நலம் = உடல்நலம் + அளவு [/குறியீடு]."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:91
+msgid "Which of these would increase the health of the robot?"
+msgstr "இவற்றில் எது ரோபோவின் ஆரோக்கியத்தை அதிகரிக்கும்?"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:94
+msgid ""
+"Both of these lines increase the [code]health[/code] of the robot by "
+"[code]amount[/code].\n"
+"[code]\n"
+"health += amount\n"
+"health = health + amount\n"
+"[/code]"
+msgstr ""
+"இந்த இரண்டு வரிகளும் ரோபோவின் [குறியீடு] ஆரோக்கியத்தை [குறியீடு] தொகை [/குறியீடு] மூலம்"
+" அதிகரிக்கின்றன.\n"
+" [குறியீடு]\n"
+" உடல்நலம் += தொகை\n"
+" உடல்நலம் = உடல்நலம் + தொகை\n"
+" [/குறியீடு]"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+msgid "health -= amount"
+msgstr "உடல்நலம் -= தொகை"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+#: course/lesson-9-adding-and-subtracting/lesson.tres:100
+msgid "health += amount"
+msgstr "உடல்நலம் += தொகை"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+#: course/lesson-9-adding-and-subtracting/lesson.tres:100
+msgid "health = health + amount"
+msgstr "உடல்நலம் = உடல்நலம் + தொகை"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+msgid "health = health - amount"
+msgstr "உடல்நலம் = உடல்நலம் - தொகை"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:109
+msgid ""
+"In the following practices, you'll code the [code]take_damage()[/code] "
+"and [code]heal()[/code] functions so the robot's health can decrease and "
+"increase."
+msgstr ""
+"பின்வரும் நடைமுறைகளில், நீங்கள் [குறியீடு] டேக்_டேமேச் () [/குறியீடு] மற்றும் [குறியீடு] "
+"குணப்படுத்தும் () [/குறியீடு] செயல்பாடுகளை குறியிடுவீர்கள், எனவே ரோபோவின் உடல்நலம் "
+"குறைத்து அதிகரிக்கும்."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:117
+msgid "Damaging the Robot"
+msgstr "ரோபோவை சேதப்படுத்துகிறது"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:118
+msgid ""
+"In our game, the main character has a certain amount of "
+"[code]health[/code]. When it gets hit, the health should go down by a "
+"varying [code]amount[/code] of damage.\n"
+"\n"
+"Add to the [code]take_damage()[/code] function so it subtracts the "
+"[code]amount[/code] to the predefined [code]health[/code] variable.\n"
+"\n"
+"The robot starts with 100 health and will take 50 damage."
+msgstr ""
+"எங்கள் விளையாட்டில், முக்கிய கதாபாத்திரத்தில் ஒரு குறிப்பிட்ட அளவு [குறியீடு] உடல்நலம் "
+"உள்ளது [/குறியீடு]. அது பாதிக்கப்படும்போது, சேதத்தின் மாறுபட்ட [குறியீடு] தொகை "
+"[/குறியீடு] மூலம் உடல்நலம் குறைக்கப்பட வேண்டும்.\n"
+"\n"
+" [குறியீடு] டேக்_டேச் () [/குறியீடு] செயல்பாட்டில் சேர்க்கவும், இது [குறியீடு] அளவு "
+"[/குறியீடு] ஐ முன் வரையறுக்கப்பட்ட [குறியீடு] உடல்நலம் [/குறியீடு] மாறிக்கு கழிக்கிறது."
+"\n"
+"\n"
+" ரோபோ 100 ஆரோக்கியத்துடன் தொடங்குகிறது மற்றும் 50 சேதங்களை எடுக்கும்."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:134
+msgid "Learn how to deal damage to entities like our robot."
+msgstr ""
+"எங்கள் ரோபோ போன்ற நிறுவனங்களுக்கு சேதத்தை எவ்வாறு கையாள்வது என்பதை அறிக."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:139
+msgid "Healing the Robot"
+msgstr "ரோபோவை குணப்படுத்துதல்"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:140
+msgid ""
+"It's time to heal the robot up to full health!\n"
+"\n"
+"Write a function called [code]heal()[/code] that takes "
+"[code]amount[/code] as a parameter.\n"
+"\n"
+"The function should add [code]amount[/code] to [code]health[/code].\n"
+"\n"
+"The robot starts with 50 health and will heal 50 to get it up to 100."
+msgstr ""
+"ரோபோவை முழு ஆரோக்கியத்திற்கு குணப்படுத்த வேண்டிய நேரம் இது!\n"
+"\n"
+" [குறியீடு] குணப்படுத்தும் () [/குறியீடு] எனப்படும் செயல்பாட்டை எழுதுங்கள், இது "
+"[குறியீடு] தொகை [/குறியீடு] ஒரு அளவுருவாக எடுக்கும்.\n"
+"\n"
+" செயல்பாடு [குறியீடு] ஆரோக்கியத்தில் [குறியீடு] ஆரோக்கியத்தில் [/குறியீடு] சேர்க்க "
+"வேண்டும்.\n"
+"\n"
+" ரோபோ 50 ஆரோக்கியத்துடன் தொடங்குகிறது, மேலும் அதை 100 வரை பெற 50 குணமாகும்."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:157
+msgid ""
+"Our robot needs healing after that practice! Create a function to heal it"
+" back to full health."
+msgstr ""
+"அந்த நடைமுறைக்குப் பிறகு எங்கள் ரோபோவுக்கு குணப்படுத்த வேண்டும்! முழு ஆரோக்கியத்திற்கும் "
+"அதை குணப்படுத்த ஒரு செயல்பாட்டை உருவாக்கவும்."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:161
+msgid "Adding and Subtracting"
+msgstr "சேர்த்தல் மற்றும் கழித்தல்"

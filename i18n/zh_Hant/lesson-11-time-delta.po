@@ -1,0 +1,411 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-12-09 20:05+0100\n"
+"PO-Revision-Date: 2025-04-04 01:42+0000\n"
+"Last-Translator: MuryanBKS <muryanbks+github@gmail.com>\n"
+"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
+"projects/learn-gdscript-from-zero/lesson-11-time-delta/zh_Hant/>\n"
+"Language: zh_Hant\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-11-time-delta/lesson.tres:14
+msgid ""
+"We've seen how we can use our character's [code]_process()[/code] function "
+"to make it move continuously."
+msgstr "我們已經看到如何使用角色的 [code]_process()[/code] 函式來讓它持續移動。"
+
+#: course/lesson-11-time-delta/lesson.tres:34
+msgid ""
+"But it's not just our character that has a [code]_process()[/code] function; "
+"Almost everything in the game has a [code]_process()[/code] function!\n"
+"\n"
+"Dozens of times per second, Godot runs every [code]_process()[/code] "
+"function in the game to update the game world.\n"
+"\n"
+"After that, it displays an image of the game world on the screen. We call "
+"that image a [b]frame[/b].\n"
+"\n"
+"Godot then moves on to calculating the next frame.\n"
+"\n"
+"As this happens dozens of times per second, you get the illusion of "
+"movement. This is similar to how traditional animation works."
+msgstr ""
+"但不只是我們的角色有 [code]_process()[/code] 函式；遊戲中的幾乎每個東西都有 "
+"[code]_process()[/code] 函式！\n"
+"\n"
+"每秒多次，Godot 會執行遊戲中每個 [code]_process()[/code] 函式來更新遊戲世界。"
+"\n"
+"\n"
+"接著它會在螢幕上顯示遊戲世界的圖像。我們稱這個圖像為一[b]幀[/b]。\n"
+"\n"
+"然後 Godot 會繼續計算下一幀。\n"
+"\n"
+"由於這個過程每秒發生數十次，會感覺到動作在進行。這與傳統動畫的運作方式相似。"
+
+#: course/lesson-11-time-delta/lesson.tres:50
+msgid "This sounds like Frames Per Second..."
+msgstr "這聽起來像是每秒幀數（Frames Per Second，簡稱 FPS）…"
+
+#: course/lesson-11-time-delta/lesson.tres:52
+msgid ""
+"You may have heard of frames per second, or FPS for short. Games often run "
+"at 60 frames per second. \n"
+"\n"
+"It means that everything in the game updates 60 times each second.\n"
+"\n"
+"The number varies while playing, depending on the game and the device it "
+"runs on.\n"
+"\n"
+"On powerful computers, you may get frame rates in the hundreds or thousands "
+"of frames per second."
+msgstr ""
+"你可能聽過每秒幀數，簡稱 FPS。遊戲通常以每秒 60 幀的速度運行。\n"
+"\n"
+"這意味著遊戲中的一切每秒更新 60 次。\n"
+"\n"
+"這個數字會根據遊戲和執行的裝置而有所變化。\n"
+"\n"
+"在高效能的電腦上，你可能會看到每秒數百或數千幀的幀率。"
+
+#: course/lesson-11-time-delta/lesson.tres:68
+msgid "Let's look at the [code]_process()[/code] function in more detail."
+msgstr "讓我們更詳細地看看 [code]_process()[/code] 函式。"
+
+#: course/lesson-11-time-delta/lesson.tres:76
+msgid "What parameter does the _process() function take?"
+msgstr "_process() 函式的參數是什麼？"
+
+#: course/lesson-11-time-delta/lesson.tres:77
+msgid ""
+"[code]\n"
+"func _process(delta):\n"
+"\trotate(0.05)\n"
+"[/code]"
+msgstr ""
+"[code]\n"
+"func _process(delta):\n"
+"\trotate(0.05)\n"
+"[/code]"
+
+#: course/lesson-11-time-delta/lesson.tres:82
+msgid ""
+"The [code]_process()[/code] function has one parameter named [code]delta[/"
+"code]."
+msgstr "[code]_process()[/code] 函式有一個參數，名為 [code]delta[/code]。"
+
+#: course/lesson-11-time-delta/lesson.tres:83
+msgid "rotate"
+msgstr "rotate"
+
+#: course/lesson-11-time-delta/lesson.tres:83
+msgid "0.05"
+msgstr "0.05"
+
+#: course/lesson-11-time-delta/lesson.tres:83
+#: course/lesson-11-time-delta/lesson.tres:84
+msgid "delta"
+msgstr "delta"
+
+#: course/lesson-11-time-delta/lesson.tres:91
+msgid "Frames take varying amounts of time to calculate"
+msgstr "每幀的計算所需時間會有所不同"
+
+#: course/lesson-11-time-delta/lesson.tres:93
+msgid ""
+"Depending on the game, the computer, and what the game engine needs to "
+"calculate, frames take more or less time to display.\n"
+"\n"
+"There will always be milliseconds variations from frame to frame.\n"
+"\n"
+"That is why the [code]_process()[/code] function receives a [code]delta[/"
+"code] parameter.\n"
+"\n"
+"Delta represents a time difference. It's the time passed since the previous "
+"frame, in seconds.\n"
+"\n"
+"We can use it to ensure that the changes between frames don't make the "
+"game's behavior unreliable.\n"
+"\n"
+"This is because different computers run differently, so a fast computer will "
+"have more frames per second than a slow computer.\n"
+"\n"
+"If we ignore [code]delta[/code], the game experience will vary, depending on "
+"the computer. Delta helps to make the game experience consistent for "
+"everyone."
+msgstr ""
+"根據遊戲、電腦和遊戲引擎需要計算的內容，顯示每幀所需的時間會有所不同。\n"
+"\n"
+"每幀之間的時間會有毫秒級的變化。\n"
+"\n"
+"這就是為什麼 [code]_process()[/code] 函式會接收一個 [code]delta[/code] 參數。"
+"\n"
+"\n"
+"Delta 代表時間差。它是自上一幀以來經過的時間，單位為秒。\n"
+"\n"
+"我們可以利用它來確保幀之間的變化不會讓遊戲的行為變得不穩定。\n"
+"\n"
+"這是因為不同的電腦運行速度不同，所以快速的電腦每秒能顯示更多幀，而慢速的電腦"
+"則顯示較少。\n"
+"\n"
+"如果我們忽略 [code]delta[/code]，遊戲體驗會因為電腦不同而有所變化。Delta "
+"幫助確保每個人的遊戲體驗是一致的。"
+
+#: course/lesson-11-time-delta/lesson.tres:113
+msgid "What do we know about delta?"
+msgstr "關於 delta 的事哪些是我們知道的？"
+
+#: course/lesson-11-time-delta/lesson.tres:116
+msgid ""
+"[code]delta[/code] is the time it took Godot to complete the previous frame "
+"in seconds.\n"
+"\n"
+"It's very small because frames happen many times a second.\n"
+"\n"
+"It varies each frame because Godot needs to process more or less each frame."
+msgstr ""
+"[code]delta[/code] 是 Godot 完成上一幀所花費的時間，單位為秒。\n"
+"\n"
+"它的數值非常小，因為每秒會有很多幀。\n"
+"\n"
+"它在每幀之間有所變化，因為 Godot 每幀需要處理的內容多寡不同。"
+
+#: course/lesson-11-time-delta/lesson.tres:121
+#: course/lesson-11-time-delta/lesson.tres:122
+msgid "It's a value in seconds."
+msgstr "它是以秒為單位的數值。"
+
+#: course/lesson-11-time-delta/lesson.tres:121
+#: course/lesson-11-time-delta/lesson.tres:122
+msgid "It varies each frame."
+msgstr "它的值每幀都不同。"
+
+#: course/lesson-11-time-delta/lesson.tres:121
+#: course/lesson-11-time-delta/lesson.tres:122
+msgid "It's the time it took Godot to complete the previous frame."
+msgstr "它是 Godot 完成上一幀所花費的時間。"
+
+#: course/lesson-11-time-delta/lesson.tres:129
+msgid "Multiplying by delta"
+msgstr "乘上 delta"
+
+#: course/lesson-11-time-delta/lesson.tres:131
+msgid ""
+"The [code]delta[/code] you get in [code]_process()[/code] is a time "
+"difference in seconds. It will generally be a tiny decimal number.\n"
+"\n"
+"To apply [code]delta[/code], you need to [i]multiply[/i] your speed values "
+"by it."
+msgstr ""
+"在 [code]_process()[/code] 中取得的 [code]delta[/code] "
+"是以秒為單位的時間差。它通常是個很小的十進位數字。\n"
+"\n"
+"要應用 [code]delta[/code]，你需要將你的速度值[b]乘以[/b]它。"
+
+#: course/lesson-11-time-delta/lesson.tres:153
+msgid ""
+"When multiplying by [code]delta[/code], you make motion [i]time-dependent[/"
+"i] rather than [i]frame-dependent[/i].\n"
+"\n"
+"That's essential to make your game consistent and fair."
+msgstr ""
+"當你將速度值乘以 [code]delta[/code] 時，你使得運動變為[b]基於時間[/b]而非[b]"
+"基於幀[/b]。\n"
+"\n"
+"這對於保持遊戲的一致性和公平性是至關重要的。"
+
+#: course/lesson-11-time-delta/lesson.tres:163
+msgid "Why do we use the number 3.0 in this example?"
+msgstr "為什麼我們在這個例子中使用的值是 3.0？"
+
+#: course/lesson-11-time-delta/lesson.tres:165
+msgid ""
+"At the top of the lesson, we made the robot rotate a fixed amount every "
+"frame: [code]0.05[/code] radians.\n"
+"\n"
+"In the example above, we now [i]multiply[/i] the argument by the very small "
+"[code]delta[/code] value, a value way below [code]1.0[/code]. It makes the "
+"robot turn at a constant speed over time.\n"
+"\n"
+"However, multiplying by a number below [code]1.0[/code] like [code]delta[/"
+"code] makes the result smaller.\n"
+"\n"
+"To compensate for that and make the robot turn fast enough, we use a larger "
+"number than before, [code]3.0[/code] instead of [code]0.05[/code].\n"
+"\n"
+"Those numbers have two different [i]units[/i]: [code]0.05[/code] is an "
+"[i]angle[/i] in radians, while [code]3.0[/code] is an [i]angular speed[/i] "
+"in radians per second.\n"
+"\n"
+"When you multiply a speed by a time delta, it gives you an angle.\n"
+"\n"
+"Don't worry if it's a little confusing for now. It'll eventually click as "
+"you deal with speed, acceleration, and motion in your game projects."
+msgstr ""
+"在課程的開始，我們讓機器人每幀旋轉固定的角度：[code]0.05[/code] 弧度。\n"
+"\n"
+"在上面的例子中，我們現在將引數乘以一個非常小的 [code]delta[/code] 值，"
+"這個值遠低於 [code]1.0[/code]。這樣做使得機器人以恆定的速度隨時間旋轉。\n"
+"\n"
+"然而，將數字乘以像 [code]delta[/code] 這樣小於 [code]1.0[/code] "
+"的數值會使結果變得更小。\n"
+"\n"
+"為了補償這一點並讓機器人足夠快地旋轉，我們使用了比之前更大的數字，[code]3.0[/"
+"code] 取代了 [code]0.05[/code]。\n"
+"\n"
+"這些數字有兩種不同的[b]單位[/b]： [code]0.05[/code] 是[b]角度[/b]"
+"（以弧度為單位），而 [code]3.0[/code] 是[b]角速度[/b]（每秒弧度數）。\n"
+"\n"
+"當你將一個速度與時間差 [code]delta[/code] 相乘時，它會給你一個角度。\n"
+"\n"
+"如果現在有些混亂也不用擔心，當你在遊戲專案中處理速度、加速度和運動時，這些概"
+"念最終會變得更清晰。"
+
+#: course/lesson-11-time-delta/lesson.tres:185
+msgid "Why the time between frames matters"
+msgstr "為什麼幀之間的時間很重要"
+
+#: course/lesson-11-time-delta/lesson.tres:187
+msgid ""
+"The time it takes to display a new frame varies.\n"
+"\n"
+"If you don't take that time into account in your code, your game will have "
+"gameplay issues and bugs. Godot provides that time to the [code]_process()[/"
+"code] function through the [code]delta[/code] parameter.\n"
+"\n"
+"In the example below, the top robot moves using [code]delta[/code]. As a "
+"result, it moves at a fixed speed.\n"
+"\n"
+"The bottom robot moves over a constant distance every frame, [i]without[/i] "
+"taking [code]delta[/code] into account. It will move faster or slower than "
+"the top robot on [i]your[/i] computer.\n"
+"\n"
+"The bottom robot will move [i]differently for everyone[/i]!"
+msgstr ""
+"顯示新幀的時間是變化的。\n"
+"\n"
+"如果你在程式碼中不考慮這段時間，遊戲將會出現遊玩上的問題和錯誤。Godot 透過 "
+"[code]delta[/code] 參數，將這段時間提供給 [code]_process()[/code] 函式。\n"
+"\n"
+"在下面的範例中，頂部的機器人使用 [code]delta[/code] "
+"來移動。這樣一來，它會以固定的速度移動。\n"
+"\n"
+"底下的機器人則每幀移動固定的距離，[b]沒有[/b]考慮 [code]delta[/"
+"code]。這樣它會比上面的機器人更快或更慢地移動，取決於[b]你的[/b]電腦。\n"
+"\n"
+"底下的機器人會因為[b]設備的不同對每個人都有不同的移動方式[/b]！"
+
+#: course/lesson-11-time-delta/lesson.tres:215
+msgid ""
+"Multiplying time-sensitive values by [code]delta[/code] makes them [b]time-"
+"dependent[/b] rather than [b]frame-dependent[/b].\n"
+"\n"
+"Thanks to that, we get reliable movement over time.\n"
+"\n"
+"Without [code]delta[/code], frame times vary from computer to computer and "
+"during gameplay. Because of that, the movement will differ for every player, "
+"making the game inconsistent and messy."
+msgstr ""
+"將時間相關的數值乘以 [code]delta[/code] 使它們變成[b]基於時間[/b]而非[b]"
+"基於幀[/b]。\n"
+"\n"
+"藉由這樣，我們能夠實現隨著時間可靠的移動。\n"
+"\n"
+"如果沒有 [code]delta[/"
+"code]，每台電腦和遊玩過程中的幀時間都會有所不同。這樣一來，移動會對每位玩家有"
+"所不同，導致遊戲體驗不一致且混亂。"
+
+#: course/lesson-11-time-delta/lesson.tres:227
+msgid "What does this mean?"
+msgstr "這代表什麼？"
+
+#: course/lesson-11-time-delta/lesson.tres:228
+msgid "[code]rotation_speed * delta[/code]"
+msgstr "[code]rotation_speed * delta[/code]"
+
+#: course/lesson-11-time-delta/lesson.tres:230
+msgid ""
+"The [code]*[/code] symbol means we're multiplying [code]rotation_speed[/"
+"code] by [code]delta[/code] time."
+msgstr ""
+"[code]*[/code] 符號表示我們將 [code]rotation_speed[/code] 乘以 [code]delta[/"
+"code] 時間。"
+
+#: course/lesson-11-time-delta/lesson.tres:231
+#: course/lesson-11-time-delta/lesson.tres:232
+msgid "We're multiplying rotation_speed by delta."
+msgstr "我們將 rotation_speed 乘以 delta。"
+
+#: course/lesson-11-time-delta/lesson.tres:231
+msgid "We're dividing delta by rotation_speed."
+msgstr "我們將 delta 除以 rotation_speed。"
+
+#: course/lesson-11-time-delta/lesson.tres:231
+msgid "We're adding rotation_speed to delta."
+msgstr "我們將 rotation_speed 加到 delta。"
+
+#: course/lesson-11-time-delta/lesson.tres:231
+msgid "We're subtracting delta from rotation_speed."
+msgstr "我們將 delta 從 rotation_speed 中減去。"
+
+#: course/lesson-11-time-delta/lesson.tres:241
+msgid "In the next practice, we'll use delta to make rotating time-dependent."
+msgstr "在下一個練習中，我們將使用 delta 讓旋轉與時間變得有關聯。"
+
+#: course/lesson-11-time-delta/lesson.tres:249
+msgid "Rotating Using Delta"
+msgstr "使用 Delta 來旋轉"
+
+#: course/lesson-11-time-delta/lesson.tres:250
+msgid ""
+"At the moment, the rotation of the robot is frame-dependent.\n"
+"\n"
+"Add [code]delta[/code] to make the rotational speed time-dependent.\n"
+"\n"
+"The robot should rotate [code]2[/code] radians per second."
+msgstr ""
+"目前，機器人的旋轉是依賴於每個幀的。\n"
+"\n"
+"加入 [code]delta[/code] 使旋轉速度變為依賴時間。\n"
+"\n"
+"機器人應該每秒旋轉 [code]2[/code] 弧度。"
+
+#: course/lesson-11-time-delta/lesson.tres:269
+msgid "Moving in a Circle Using Delta"
+msgstr "使用 Delta 的圓周運動"
+
+#: course/lesson-11-time-delta/lesson.tres:270
+msgid ""
+"In this practice, make the robot move in a smooth circle using delta.\n"
+"\n"
+"To get this movement, the robot should rotate [code]2[/code] radians per "
+"second and move [code]100[/code] pixels per second towards clockwise.\n"
+"\n"
+"[b]Note:[/b] Please write the values in the parentheses when calling the "
+"functions. If you define extra variables, we will not be able to check your "
+"practice."
+msgstr ""
+"在這個練習中，讓機器人使用 [code]delta[/code] 平滑地移動在圓形軌道上。\n"
+"\n"
+"為了達成這個移動，機器人應該每秒旋轉 [code]2[/code] 弧度，並且每秒移動 [code]"
+"100[/code] 像素，沿順時針方向。\n"
+"\n"
+"[b]注意：[/b] "
+"請在呼叫函式時填寫括號中的數值。如果你定義額外的變數，我們將無法檢查你的練習"
+"。"
+
+#: course/lesson-11-time-delta/lesson.tres:288
+msgid "Time Delta"
+msgstr "時間增量 Delta"

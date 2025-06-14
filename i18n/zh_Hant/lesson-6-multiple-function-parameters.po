@@ -1,0 +1,497 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2025-06-14 15:02+0200\n"
+"PO-Revision-Date: 2025-04-03 18:23+0000\n"
+"Last-Translator: MuryanBKS <muryanbks+github@gmail.com>\n"
+"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
+"projects/learn-gdscript-from-zero/lesson-6-multiple-function-parameters/"
+"zh_Hant/>\n"
+"Language: zh_Hant\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:14
+msgid ""
+"In the previous part, you created a function to draw a square of a fixed "
+"size.\n"
+"\n"
+"This function is a bit limiting. Instead, it would be much better if we had "
+"a function to draw a square of [i]any[/i] size. Or better: any kind of "
+"rectangle (a square is a specific kind of rectangle).\n"
+"\n"
+"In previous lessons, you used the [code]rotate()[/code] function and gave it "
+"an [i]argument[/i]."
+msgstr ""
+"在上一部分中，你創建了一個畫固定大小正方形的函式。\n"
+"\n"
+"不過這個函式有點限制。如果我們能夠創建一個可以畫任意大小正方形的函式，那會更"
+"好。或者更進一步，能畫任何種類的長方形（因為正方形本身就是長方形的一種特殊情"
+"況）。\n"
+"\n"
+"在之前的課程中，你使用過 [code]rotate()[/code] 函式，並且傳遞了一個[b]引數[/"
+"b]給它。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:38
+msgid ""
+"Just like [code]rotate()[/code], we can also give our function "
+"[i]parameters[/i]. Parameters are labels you give to values passed to the "
+"function."
+msgstr ""
+"就像 [code]rotate()[/code] 一樣，我們也可以給我們的函式傳遞[b]參數[/b]。參數"
+"是你傳遞給函式的值的標籤。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:46
+msgid "Can I rotate in both directions?"
+msgstr "我可以向兩個方向旋轉嗎？"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:48
+msgid ""
+"The [code]radians[/code] can be a positive or negative number, which allows "
+"you to rotate both clockwise and counter-clockwise."
+msgstr ""
+"[code]radians[/code] 可以是正數或負數，這樣就可以讓你進行順時針或逆時針旋轉。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:58
+msgid ""
+"For now, please focus on the first line: [code]func rotate(radians)[/code].\n"
+"\n"
+"When you call [code]rotate(0.5)[/code], the computer binds the value "
+"[code]0.5[/code] to the label [code]radians[/code].\n"
+"\n"
+"Wherever the computer sees the identifier [code]radians[/code] inside the "
+"function, it replaces it with the [code]0.5[/code] value.\n"
+"\n"
+"The parameter name is always a label you use to refer to a [i]value[/i]. The "
+"value in question can be a number, text, or anything else.\n"
+"\n"
+"For now, we'll stick to numbers as we have yet to see other value types."
+msgstr ""
+"現在，請專注於第一行：[code]func rotate(radians)[/code]。\n"
+"\n"
+"當你呼叫 [code]rotate(0.5)[/code] 時，電腦會將數值 [code]0.5[/code] 綁定到 "
+"[code]radians[/code] 這個標籤上。\n"
+"\n"
+"當電腦在函式內部看到標識符 [code]radians[/code] 時，它會將其替換為 "
+"[code]0.5[/code] 這個數值。\n"
+"\n"
+"參數名稱始終是你用來指代[b]值[/b]的標籤。這個數值可以是數字、文字或其他任何東"
+"西。\n"
+"\n"
+"目前我們將專注於數字，因為我們還沒有接觸到其他值類型。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:74
+msgid "What is a function parameter?"
+msgstr "什麼是函式參數？"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:77
+msgid ""
+"A parameter is a label that represents a value.\n"
+"\n"
+"The value in question can change: it depends on what you put in parentheses "
+"when calling a function."
+msgstr ""
+"參數是一個代表值的標籤。\n"
+"\n"
+"這個值是可以改變的：它取決於你在呼叫函式時，放在括號中的內容。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:80
+#: course/lesson-6-multiple-function-parameters/lesson.tres:81
+msgid "A label you give to a value the function receives."
+msgstr "你給函式接收的數值所指定的標籤。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:80
+msgid "A number you use to make calculations."
+msgstr "用於計算的數字。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:80
+msgid "The name of a function."
+msgstr "函式的名稱。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:88
+msgid "How to create functions with parameters"
+msgstr "如何建立帶有參數的函式"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:90
+msgid ""
+"You can give your function parameters when writing its [i]definition[/i] "
+"(the line starting with the [code]func[/code] keyword).\n"
+"\n"
+"To do so, you add a name inside of the parentheses."
+msgstr ""
+"你可以在寫函式的[b]定義[/b]時，為函式加入參數（即從 [code]func[/code] 關鍵字"
+"開始的那一行）。\n"
+"\n"
+"為此，你需要在括號內加上一個名稱。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:112
+msgid ""
+"You can give parameters any name. How you name functions and parameters is "
+"up to you. \n"
+"\n"
+"Just remember that names cannot contain spaces. To write parameter names "
+"with multiple words, you need to use underscores.\n"
+"\n"
+"The following function definition is exactly equivalent to the previous one."
+msgstr ""
+"你可以隨意為參數命名，函式和參數的命名由你決定。\n"
+"\n"
+"只要記得，名稱不能包含空格。如果參數名稱包含多個單字，則需要使用底線（\"_\"）"
+"來連接。\n"
+"\n"
+"以下的函式定義和之前的完全相同。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:136
+msgid ""
+"Parameters make your code easier to reuse.\n"
+"\n"
+"Here's an example with a function to draw any square. Use the slider to "
+"change the value passed to the function and draw squares of different sizes."
+msgstr ""
+"參數讓你的程式碼更容易重複使用。\n"
+"\n"
+"這裡有一個範例，展示如何使用函式來畫出任何大小的正方形。你可以透過滑桿來改變"
+"傳遞給函式的數值，並繪製不同大小的正方形。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:156
+msgid "Which is the correct syntax for a function definition?"
+msgstr "哪一個是正確的函式定義語法？"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:159
+msgid ""
+"To define a function, you need to start with the [code]func[/code] keyword "
+"followed by a space, the [code]function_name[/code], and optional parameters "
+"inside parentheses.\n"
+"\n"
+"You must end the line with a colon, which defines a new code block. We'll "
+"see moving forward that keywords other than [code]func[/code] require a "
+"colon at the end of the line."
+msgstr ""
+"要定義一個函式，你需要以 [code]func[/code] 關鍵字開始，接著是空格，然後是函式"
+"的名稱 [code]function_name[/code]，以及放在括號內可選的參數。\n"
+"\n"
+"你必須以冒號結尾，這樣才能定義一個新的程式碼區塊。我們接下來會看到，除了 "
+"[code]func[/code] 之外，其他的關鍵字也需要在行尾加上冒號。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:162
+#: course/lesson-6-multiple-function-parameters/lesson.tres:163
+msgid "func function_name(parameter_name):"
+msgstr "func function_name(parameter_name):"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:162
+msgid "func (function_name): parameter_name"
+msgstr "func (function_name): parameter_name"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:162
+msgid "func function_name(parameter_name)"
+msgstr "func function_name(parameter_name)"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:162
+msgid "function_name(parameter_name):"
+msgstr "function_name(parameter_name):"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:170
+msgid "Functions can have multiple parameters"
+msgstr "函式可以有多個參數"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:172
+msgid ""
+"You can use multiple parameters in a function. In fact, you can use as many "
+"as you [i]need[/i].\n"
+"\n"
+"To separate the function parameters, you need to write a comma between them."
+msgstr ""
+"你可以在函式中使用多個參數。事實上，你可以使用你[b]需要[/b]的任意數量。\n"
+"\n"
+"要分隔函式參數，你需要在它們之間寫上逗號。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:192
+#, fuzzy
+msgid "Must I write spaces between function parameters?"
+msgstr "我必須在函式參數之間寫空格嗎？"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:194
+msgid ""
+"In a function definition, you must have a space between the [code]func[/"
+"code] keyword and the function name.\n"
+"\n"
+"However, because we use the comma to separate parameters, it doesn't matter "
+"if you use spaces between parameters. As long as you have the comma, either "
+"syntax is correct.\n"
+"\n"
+"We often use spaces after the comma for readability."
+msgstr ""
+"在函式定義中，你必須在 [code]func[/code] 關鍵字和函式名稱之間加上一個空格。\n"
+"\n"
+"然而，因為我們使用逗號來分隔參數，所以在參數之間是否使用空格並不重要。只要有"
+"逗號，兩種語法都是正確的。\n"
+"\n"
+"為了可讀性，我們通常會在逗號後加上一個空格。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:208
+msgid ""
+"The following example defines a function that uses two parameters to move an "
+"entity on both the X and Y axes."
+msgstr ""
+"以下範例定義了一個函式，使用兩個參數來同時移動一個實體於 X 軸和 Y 軸上。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:226
+msgid "How should I name my functions and parameters?"
+msgstr "我應該如何命名我的函式和參數？"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:228
+msgid ""
+"The names of functions, parameters, or other things in your code are "
+"entirely up to you.\n"
+"\n"
+"They are written by us programmers for other programmers. You want to use "
+"the names that make the most sense to you and fellow programmers.\n"
+"\n"
+"You could absolutely write single-letter names like in maths classes: "
+"[code]a[/code], [code]b[/code], [code]f[/code].\n"
+"\n"
+"You can also write abbreviated names like [code]pos[/code] for position, "
+"[code]bg[/code] for background, and so on.\n"
+"\n"
+"Many programmers do either or both of the above.\n"
+"\n"
+"At GDQuest, we favor complete and explicit names.\n"
+"\n"
+"We generally try to write code that is explicit and relatively easy to "
+"read.\n"
+"\n"
+"Right now, you have to enter every letter when you code, so long names may "
+"feel inconvenient.\n"
+"\n"
+"However, this is good for learning: it trains your fingers to [ignore]type "
+"precisely.\n"
+"\n"
+"Then, after you finish this course, you will see that the computer assists "
+"you a lot when you code real games with a feature called auto-completion.\n"
+"\n"
+"Based on a few characters you [ignore]type, it will offer you to complete "
+"long names."
+msgstr ""
+"在程式碼中，函式、參數或其他元素的名稱完全由你決定。\n"
+"\n"
+"這些名稱是程式設計師為其他程式設計師所寫的，因此你應該使用對自己和其他程式設"
+"計師來說最有意義的名稱。\n"
+"\n"
+"你完全可以像數學課一樣使用單字母名稱：[code]a[/code]、[code]b[/code]、"
+"[code]f[/code]。\n"
+"\n"
+"你也可以寫簡短的縮寫名稱，例如 [code]pos[/code] 代表位置、[code]bg[/code] 代"
+"表背景等等。\n"
+"\n"
+"許多程式設計師都會使用上述其中一種或兩者。\n"
+"\n"
+"在 GDQuest，我們偏好使用完整且明確的名稱。\n"
+"\n"
+"我們通常會寫出較為明確、易讀的程式碼。\n"
+"\n"
+"現在你必須手動輸入每個字母，所以長名稱可能會覺得不太方便。\n"
+"\n"
+"然而這對學習來說是好的：它訓練你的手指進行精確的輸入。\n"
+"\n"
+"等你完成這個課程後，你會發現當你開始製作真正的遊戲時，電腦會透過自動補全功能"
+"幫助你很多。\n"
+"\n"
+"只需要輸入幾個字母，電腦就會幫你完成長名稱。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:256
+msgid "When defining a function, parameters are..."
+msgstr "定義函式時，參數是…"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:259
+msgid ""
+"You can define functions with or without parameters, depending on your needs."
+msgstr "你可以根據需求定義有參數或無參數的函式。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:260
+#: course/lesson-6-multiple-function-parameters/lesson.tres:261
+msgid "Optional"
+msgstr "可選"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:260
+msgid "Mandatory"
+msgstr "必須"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:268
+msgid ""
+"What's the correct syntax to define a function with multiple parameters?"
+msgstr "定義具有多個參數的函式的正確語法是什麼？"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:271
+msgid ""
+"You always write the function parameters inside of the parentheses. To "
+"define multiple parameters, you separate them with a comma."
+msgstr "你始終得把函式的參數寫在括號內。要定義多個參數，則需要用逗號分隔它們。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:272
+#: course/lesson-6-multiple-function-parameters/lesson.tres:273
+msgid "func function_name(parameter_1, parameter_2, ...):"
+msgstr "func function_name(parameter_1, parameter_2, ...):"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:272
+msgid "func function_name(parameter_1 parameter_2 ...):"
+msgstr "func function_name(parameter_1 parameter_2 ...):"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:272
+msgid "func function_name(): parameter_1, parameter_2, ..."
+msgstr "func function_name(): parameter_1, parameter_2, ..."
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:282
+msgid ""
+"Now it's your turn to create a function with multiple parameters: a function "
+"to draw rectangles of any size."
+msgstr "現在輪到你來創建一個帶有多個參數的函式：一個可以畫任意大小矩形的函式。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:290
+msgid "Drawing corners of different sizes"
+msgstr "繪製不同大小的直角"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:291
+msgid ""
+"Before we create a rectangle of any size, let's first see how we can use "
+"parameters to draw simpler shapes.\n"
+"\n"
+"Here we have an incomplete function that will draw corners with lines of any "
+"length, but it's missing its [code]length[/code] parameter.\n"
+"\n"
+"The function will move the turtle forward an amount defined by the parameter "
+"[code]length[/code], turn [code]90[/code] degrees, then move forward "
+"[code]length[/code] pixels.\n"
+"\n"
+"Complete the [code]draw_corner()[/code] function so it uses the "
+"[code]length[/code] parameter to draw corners."
+msgstr ""
+"在我們創建任意大小矩形之前，先來看看如何使用參數畫一些簡單的形狀。\n"
+"\n"
+"這裡有一個不完整的函式，它將畫出任意長度的直角線條，但缺少了 [code]length[/"
+"code] 參數。\n"
+"\n"
+"這個函式會讓海龜前進一個由 [code]length[/code] 參數定義的距離，然後右轉 90 "
+"度，再前進 [code]length[/code] 像素。\n"
+"\n"
+"請完成 [code]draw_corner()[/code] 函式，讓它使用 [code]length[/code] 參數來畫"
+"直角。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:309
+msgid ""
+"Using function parameters, code a function you can reuse to draw corners "
+"with lines of varying sizes."
+msgstr "使用函式參數，編寫一個可以重複使用的函式來畫出不同長度的角。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:314
+msgid "Using multiple parameters"
+msgstr "使用多個參數"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:315
+msgid ""
+"In this practice, we'll improve our [code]draw_corner()[/code] function so "
+"the angle can also vary.\n"
+"\n"
+"Add the [code]angle[/code] parameter after the [code]length[/code] parameter "
+"in the [code]draw_corner()[/code] function and use it to draw corners of "
+"varying angles."
+msgstr ""
+"在這個練習中，我們將改善我們的 [code]draw_corner()[/code] 函式，使得角度也能"
+"變化。\n"
+"\n"
+"在 [code]draw_corner()[/code] 函式中，將 [code]angle[/code] 參數放在 "
+"[code]length[/code] 參數之後，並使用它來畫出不同角度的角。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:329
+msgid "With two parameters, code a function to draw corners with any angle."
+msgstr "使用兩個參數，編寫一個函式來繪製具有任意角度的角。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:334
+msgid "Drawing squares of any size"
+msgstr "繪製任意大小的正方形"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:335
+msgid ""
+"We want a function to draw squares of any size.\n"
+"\n"
+"We could use these squares as outlines when selecting units in a tactical "
+"game, as a frame for items in an inventory, and more.\n"
+"\n"
+"Create a function named [code]draw_square()[/code] that takes one parameter: "
+"the [code]length[/code] of the square's sides.\n"
+"\n"
+"[b]The turtle should face towards the right when starting or completing a "
+"square.[/b]\n"
+"\n"
+"Be sure to call [b]turn_right(90)[/b]  enough times in your function to do "
+"so."
+msgstr ""
+"我們想要一個能夠繪製任意大小正方形的函式。\n"
+"\n"
+"我們可以將這些正方形用在戰術遊戲中選擇單位的輪廓、物品欄中的框架等等。\n"
+"\n"
+"創建一個名為 [code]draw_square()[/code] 的函式，它有一個參數：正方形邊長的 "
+"[code]length[/code]。\n"
+"\n"
+"[b]當開始或完成正方形時，烏龜應該面向右方。[/b]\n"
+"\n"
+"確保在函式中足夠次數地呼叫 [b]turn_right(90)[/b] 來達成這一點。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:352
+msgid ""
+"In the previous lesson, your function would draw squares of a fixed size. "
+"Using a parameter, code a function to draw squares of any size."
+msgstr ""
+"在前一課中，你的函式會繪製固定大小的正方形。現在，使用參數來編寫一個能夠繪製"
+"任意大小正方形的函式。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:357
+msgid "Drawing rectangles of any size"
+msgstr "繪製任意大小的矩形"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:358
+msgid ""
+"Let's make our square drawing function more flexible to include rectangles "
+"of varying sizes.\n"
+"\n"
+"Your job is to code a function named [code]draw_rectangle()[/code] that "
+"takes two parameters: the [code]length[/code] and the [code]height[/code] of "
+"the rectangle.\n"
+"\n"
+"[b]The turtle should face towards the right when starting or completing a "
+"rectangle.[/b]\n"
+"\n"
+"Note that we could still draw a square with [code]draw_rectangle()[/code] by "
+"having the [code]length[/code] and [code]height[/code] equal the same value."
+msgstr ""
+"讓我們繪製正方形的函式更加靈活，並能繪製不同大小的矩形。\n"
+"\n"
+"你的任務是編寫一個名為 [code]draw_rectangle()[/code] 的函式，該函式需要兩個參"
+"數：長方形的 [code]length[/code]（長度）和 [code]height[/code]（高度）。\n"
+"\n"
+"[b]當開始或完成矩形時，海龜應該朝向右邊。[/b]\n"
+"\n"
+"請注意，我們仍然可以通過將 [code]length[/code] 和 [code]height[/code] 設置為"
+"相同的值來使用 [code]draw_rectangle()[/code] 繪製正方形。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:381
+msgid ""
+"With one parameter, you can make squares of any size. With two, you can draw "
+"any rectangle! You'll do so in this practice."
+msgstr ""
+"使用一個參數，你可以繪製任何大小的正方形；使用兩個參數，你就可以繪製任何矩"
+"形！你將在這個練習中做到這一點。"
+
+#: course/lesson-6-multiple-function-parameters/lesson.tres:385
+msgid "Your First Function Parameter"
+msgstr "你的第一個函式參數"

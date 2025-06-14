@@ -1,0 +1,248 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"PO-Revision-Date: 2023-12-18 08:01+0000\n"
+"Last-Translator: ebor <ebor@post.cz>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-10-the-game-loop/cs/>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 5.3\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-10-the-game-loop/lesson.tres:14
+msgid ""
+"As we've seen, Godot has functions that do certain actions. For example, the "
+"[code]show()[/code] and [code]hide()[/code] functions change the visibility "
+"of things.\n"
+"\n"
+"We can also create our own functions to make custom effects like adding or "
+"removing health to a character.\n"
+"\n"
+"Godot also has special functions we can customize or add to.\n"
+"\n"
+"Take the [code]_process()[/code] function."
+msgstr ""
+"Jak jsme viděli, Godot má funkce, které provádějí určité akce. Například "
+"funkce [code]show()[/code] a [code]hide()[/code] mění viditelnost věcí.\n"
+"\n"
+"Můžeme také vytvářet vlastní funkce pro vytváření vlastních efektů, jako je "
+"přidávání nebo odebírání zdraví postavě.\n"
+"\n"
+"Godot má také speciální funkce, které si můžeme přizpůsobit nebo doplnit.\n"
+"\n"
+"Například funkce [code]_process()[/code]."
+
+#: course/lesson-10-the-game-loop/lesson.tres:40
+msgid ""
+"The [code]_process()[/code] function gets its name because it does "
+"calculations or continuous actions.\n"
+"\n"
+"It's like a juice factory that [b]processes[/b] juice bottles: the bottles "
+"are always moving along a conveyor belt, while different machines operate on "
+"them."
+msgstr ""
+"Funkce [code]_process()[/code] získá svůj název, protože provádí výpočty "
+"nebo nepřetržité akce.\n"
+"\n"
+"Je to jako továrna na džusy, která [b] zpracovává [/b] láhve na džusy: lahve "
+"se vždy pohybují podél dopravního pásu, zatímco na nich pracují různé stroje."
+
+#: course/lesson-10-the-game-loop/lesson.tres:52
+msgid ""
+"It's similar in Godot, but this function can run [b]hundreds of times a "
+"second[/b]."
+msgstr ""
+"V Godotu je to podobné, ale tato funkce může běžet [b] stokrát za sekundu [/"
+"b]."
+
+#: course/lesson-10-the-game-loop/lesson.tres:60
+msgid "How many parameters does this function take?"
+msgstr "Kolik parametrů tato funkce vyžaduje?"
+
+#: course/lesson-10-the-game-loop/lesson.tres:61
+msgid ""
+"[code]\n"
+"func _process(delta):\n"
+"[/code]"
+msgstr ""
+"[code]\n"
+"func _process(delta):\n"
+"[/code]"
+
+#: course/lesson-10-the-game-loop/lesson.tres:65
+msgid ""
+"The [code]_process()[/code] function takes one parameter: [code]delta[/"
+"code].\n"
+"\n"
+"We'll look at what [code]delta[/code] is in the next lesson, as well as show "
+"how to use it."
+msgstr ""
+"Funkce [code]_process()[/code] má jeden parametr: [code]delta[/code].\n"
+"\n"
+"V další lekci se podíváme na to, co je [code]delta[/code], a také ukážeme, "
+"jak ji používat."
+
+#: course/lesson-10-the-game-loop/lesson.tres:68
+#: course/lesson-10-the-game-loop/lesson.tres:69
+msgid "1"
+msgstr "1"
+
+#: course/lesson-10-the-game-loop/lesson.tres:68
+msgid "2"
+msgstr "2"
+
+#: course/lesson-10-the-game-loop/lesson.tres:78
+#, fuzzy
+msgid ""
+"The [code]_process()[/code] function won't do anything until we add "
+"something to it.\n"
+"\n"
+"You might notice the underscore [code]_[/code] in front of the function "
+"name. This is a convention programmers use to coordinate work, and it'll "
+"only make sense once you have experience coding in Godot.\n"
+"\n"
+"For now, all you need to know is that if the function exists in your code, "
+"and it is called precisely [code]_process[/code], then Godot will "
+"automatically run it every [i]frame[/i].\n"
+"\n"
+"When Godot draws on the screen, we call that a frame."
+msgstr ""
+"Funkce [code]_process()[/code] neudělá nic, dokud k ní něco nepřidáme.\n"
+"\n"
+"Před názvem funkce si můžete všimnout podtržítka [code]_[/code]. To je "
+"konvence. To znamená, že funkce je již definována Godotem.\n"
+"\n"
+"Pokud funkce existuje a jmenuje se přesně [code]_process[/code], pak ji "
+"Godot automaticky spustí každý snímek. "
+
+#: course/lesson-10-the-game-loop/lesson.tres:92
+msgid "Is this the same for other engines?"
+msgstr "Je to stejné i u jiných herních enginů?"
+
+#: course/lesson-10-the-game-loop/lesson.tres:94
+msgid ""
+"Other game engines might use different names like [code]_update()[/code]."
+msgstr ""
+"Jiné herní enginy mohou používat jiné názvy jako [code]_update()[/code]."
+
+#: course/lesson-10-the-game-loop/lesson.tres:102
+msgid "Why is the _process() function useful?"
+msgstr "Proč je funkce _process() užitečná?"
+
+#: course/lesson-10-the-game-loop/lesson.tres:104
+msgid ""
+"It's perhaps better to see the [code]_process()[/code] function in action.\n"
+"\n"
+"Take the following example."
+msgstr ""
+"Možná je lepší vidět funkci [code]_process()[/code] v akci.\n"
+"\n"
+"Vezměte si následující příklad."
+
+#: course/lesson-10-the-game-loop/lesson.tres:126
+msgid ""
+"When you click the button [code]set_process(true)[/code], you activate "
+"processing on the robot.\n"
+"\n"
+"From there, every frame, Godot runs the [code]_process()[/code] function.\n"
+"\n"
+"Since we wrote a [code]rotate()[/code] instruction, Godot is rotating the "
+"character by [code]0.05[/code] radians [b]many[/b] times a second."
+msgstr ""
+"Když kliknete na tlačítko [code]set_process(true)[/code], aktivujete "
+"zpracování robota.\n"
+"\n"
+"Odtud Godot každý snímek spustí funkci [code]_process()[/code].\n"
+"\n"
+"Protože jsme napsali instrukci [code]rotate()[/code], Godot otáčí postavu o "
+"[code]0,05[/code] radiánů [b]mnohokrát[/b] za sekundu."
+
+#: course/lesson-10-the-game-loop/lesson.tres:138
+msgid "How often does the _process() function run?"
+msgstr "Jak často se spouští funkce _process()?"
+
+#: course/lesson-10-the-game-loop/lesson.tres:141
+msgid ""
+"The faster your computer, the more times [code]_process()[/code] will run.\n"
+"\n"
+"Godot will try and run [code]_process()[/code] as quickly as it can. This "
+"makes sure any movement or animations look smooth and fluid."
+msgstr ""
+"Čím rychlejší je váš počítač, tím vícekrát se [code]_process()[/code] "
+"spustí.\n"
+"\n"
+"Godot se bude snažit spustit [code]_process()[/code] co nejrychleji. Tím se "
+"zajistí, že jakýkoli pohyb nebo animace budou vypadat plynule a hladce."
+
+#: course/lesson-10-the-game-loop/lesson.tres:144
+msgid "Once a second."
+msgstr "Jednou za sekundu."
+
+#: course/lesson-10-the-game-loop/lesson.tres:144
+#: course/lesson-10-the-game-loop/lesson.tres:145
+msgid "Multiple times a second."
+msgstr "Několikrát za sekundu."
+
+#: course/lesson-10-the-game-loop/lesson.tres:154
+msgid ""
+"In the practice, you'll learn how to use the process function to rotate and "
+"move a character yourself."
+msgstr ""
+"V tomto cvičení se naučíte, jak pomocí funkce Process otáčet a přesouvat "
+"postavu."
+
+#: course/lesson-10-the-game-loop/lesson.tres:162
+msgid "Rotating a Character Continuously"
+msgstr "Nepřetržité otáčení postavy"
+
+#: course/lesson-10-the-game-loop/lesson.tres:163
+msgid ""
+"Make the robot rotate slowly by adding to the [code]_process()[/code] "
+"function.\n"
+"\n"
+"A rotation speed of about [code]0.05[/code] each frame should do."
+msgstr ""
+"Přimějte robota, aby se pomalu otáčel, přidáním funkce [code]_process()[/"
+"code].\n"
+"\n"
+"Měla by stačit rychlost otáčení přibližně [code]0,05[/code] v každém snímku."
+
+#: course/lesson-10-the-game-loop/lesson.tres:180
+msgid "Creating Circular Movement"
+msgstr "Vytváření kruhového pohybu"
+
+#: course/lesson-10-the-game-loop/lesson.tres:181
+msgid ""
+"Make the robot move in a large circle slowly by rotating it and "
+"simultaneously moving it along its x direction.\n"
+"\n"
+"To do this, add the [code]rotate()[/code] and [code]move_local_x()[/code] "
+"functions to [code]_process()[/code].\n"
+"\n"
+"Use a rotation speed of [code]0.05[/code] radians per frame, and move the "
+"robot [code]5[/code] pixels per frame."
+msgstr ""
+"Nechte robota pohybovat se ve velkém kruhu pomalu tím, že ho otočíte a "
+"současně ho pohybujete po jeho směru x.\n"
+"\n"
+"Chcete-li to provést, přidejte funkce [code]rotate()[/code] a "
+"[code]move_local_x()[/code] do funkce [code]_process()[/code].\n"
+"\n"
+"Použijte rychlost otáčení [code]0,05[/code] radiánů na snímek a pohybujte "
+"robotem [code]5[/code] pixelů na snímek."
+
+#: course/lesson-10-the-game-loop/lesson.tres:199
+msgid "The Game Loop"
+msgstr "Herní smyčka"

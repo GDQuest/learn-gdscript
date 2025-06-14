@@ -1,0 +1,318 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2024 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2024-12-12 14:39+0100\n"
+"PO-Revision-Date: 2025-01-11 17:54+0000\n"
+"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-18-for-loops/ta/>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10-dev\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: course/lesson-18-for-loops/lesson.tres:14
+msgid ""
+"In the last lesson, we looked at [code]while[/code] loops. We found they "
+"were useful if we don't know how many times we should repeat code. \n"
+"\n"
+"However, they could result in infinite loops if we're not careful.\n"
+"\n"
+"The loop below never ends because we never increment [code]number[/code]."
+msgstr ""
+"கடைசி பாடத்தில், [/குறியீடு] சுழலும் போது [குறியீட்டை] பார்த்தோம். குறியீட்டை எத்தனை முறை"
+" மீண்டும் செய்ய வேண்டும் என்று எங்களுக்குத் தெரியாவிட்டால் அவை பயனுள்ளதாக இருக்கும் என்று "
+"நாங்கள் கண்டறிந்தோம்.\n"
+"\n"
+" இருப்பினும், நாங்கள் கவனமாக இல்லாவிட்டால் அவை எல்லையற்ற சுழல்களை ஏற்படுத்தக்கூடும்.\n"
+"\n"
+" கீழே உள்ள வளையம் ஒருபோதும் முடிவடையாது, ஏனென்றால் நாங்கள் ஒருபோதும் [குறியீடு] எண்ணை "
+"அதிகரிக்கவில்லை [/குறியீடு]."
+
+#: course/lesson-18-for-loops/lesson.tres:38
+msgid ""
+"There's a safer and often easier kind of loop: the [code]for[/code] loop."
+"\n"
+"\n"
+"We'll look at it in this lesson.\n"
+"\n"
+"Unlike [code]while[/code] loops, [code]for[/code] loops don't run "
+"infinitely, so it's much less likely that you'll get bugs in your game. "
+"[b]We recommend favoring for loops over while loops because of this[/b]."
+"\n"
+"\n"
+"Let's change the code above to use a [code]for[/code] loop instead.\n"
+"\n"
+"The loop below will change the [code]cell[/code] three times."
+msgstr ""
+"பாதுகாப்பான மற்றும் பெரும்பாலும் எளிதான வகையான வளையம் உள்ளது: [/குறியீடு] வளையத்திற்கா"
+"ன [குறியீடு].\n"
+"\n"
+" இந்த பாடத்தில் அதைப் பார்ப்போம்.\n"
+"\n"
+" [/குறியீடு] ஐப் போலல்லாமல், [/குறியீடு] சுழல்கள், [/குறியீடு] சுழல்களுக்கான [குறியீடு] "
+"எண்ணற்ற அளவில் இயங்காது, எனவே உங்கள் விளையாட்டில் பிழைகள் கிடைக்கும் வாய்ப்பு மிகக் குறைவு"
+". [b] இதன் காரணமாக சுழல்களின் போது சுழல்களுக்கு சாதகமாக பரிந்துரைக்கிறோம் [/b].\n"
+"\n"
+" அதற்கு பதிலாக [/குறியீடு] வளையத்திற்கு [குறியீடு] பயன்படுத்த மேலே உள்ள குறியீட்டை "
+"மாற்றுவோம்.\n"
+"\n"
+" கீழே உள்ள லூப் [குறியீடு] கலத்தை [/குறியீடு] மூன்று முறை மாற்றும்."
+
+#: course/lesson-18-for-loops/lesson.tres:66
+msgid "Let's explain what's going on here."
+msgstr "இங்கே என்ன நடக்கிறது என்பதை விளக்குவோம்."
+
+#: course/lesson-18-for-loops/lesson.tres:74
+msgid "The range() function"
+msgstr "வரம்பு () செயல்பாடு"
+
+#: course/lesson-18-for-loops/lesson.tres:76
+msgid ""
+"Godot has the helper function [code]range()[/code]. Calling "
+"[code]range(n)[/code] creates a list of numbers from [code]0[/code] to "
+"[code]n - 1[/code]. \n"
+"\n"
+"So calling [code]range(3)[/code] outputs the list of numbers [code][0, 1,"
+" 2][/code], and [code]range(5)[/code] outputs [code][0, 1, 2, 3, "
+"4][/code]."
+msgstr ""
+"கோடோட் உதவி செயல்பாடு [குறியீடு] வரம்பு () [/குறியீடு] ஐக் கொண்டுள்ளது. [குறியீடு] "
+"வரம்பு (n) [/குறியீடு] ஐ அழைப்பது [குறியீடு] 0 [/குறியீடு] இலிருந்து [குறியீடு] N - "
+"1 [/குறியீடு] வரை எண்களின் பட்டியலை உருவாக்குகிறது.\n"
+"\n"
+" எனவே [குறியீடு] வரம்பு (3) [/குறியீடு] ஐ அழைப்பது எண்களின் பட்டியலை [குறியீடு] "
+"[0, 1, 2] [/குறியீடு], மற்றும் [குறியீடு] வரம்பு (5) [/குறியீடு] வெளியீடுகள் "
+"[குறியீடு] [ 0, 1, 2, 3, 4] [/குறியீடு]."
+
+#: course/lesson-18-for-loops/lesson.tres:86
+msgid "What list of numbers would range(6) create?"
+msgstr "எண்களின் எந்த பட்டியல் வரம்பை உருவாக்கும் (6) உருவாக்கும்?"
+
+#: course/lesson-18-for-loops/lesson.tres:87
+msgid "What would [code]print(range(6))[/code] print to the console?"
+msgstr "[குறியீடு] அச்சு (வரம்பு (6)) [/குறியீடு] கன்சோலுக்கு அச்சிடும்?"
+
+#: course/lesson-18-for-loops/lesson.tres:89
+msgid ""
+"The function [code]range(n)[/code] creates a list of numbers from "
+"[code]0[/code] to [code]n - 1[/code]. The output list will start with "
+"[code]0[/code] and end with [code]5[/code].\n"
+"\n"
+"So calling [code]range(6)[/code] will output a list of six numbers which "
+"are [code][0, 1, 2, 3, 4, 5][/code].\n"
+msgstr ""
+"செயல்பாடு [குறியீடு] வரம்பு (n) [/குறியீடு] [குறியீடு] 0 [/குறியீடு] இலிருந்து "
+"[குறியீடு] N - 1 [/குறியீடு] வரை எண்களின் பட்டியலை உருவாக்குகிறது. வெளியீட்டு பட்டியல் "
+"[குறியீடு] 0 [/குறியீடு] உடன் தொடங்கி [குறியீடு] 5 [/குறியீடு] உடன் முடிவடையும்.\n"
+"\n"
+" எனவே [குறியீடு] வரம்பு (6) [/குறியீடு] ஐ அழைப்பது [குறியீடு] [0, 1, 2, 3, 4, 5] "
+"[/குறியீடு] ஆறு எண்களின் பட்டியலை வெளியிடும்.\n"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+#: course/lesson-18-for-loops/lesson.tres:94
+msgid "[0, 1, 2, 3, 4, 5]"
+msgstr "[0, 1, 2, 3, 4, 5]"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+msgid "[1, 2, 3, 4, 5, 6]"
+msgstr "[1, 2, 3, 4, 5, 6]"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+msgid "[0, 1, 2, 3, 4, 5, 6]"
+msgstr "[0, 1, 2, 3, 4, 5, 6]"
+
+#: course/lesson-18-for-loops/lesson.tres:101
+msgid "How for loops work"
+msgstr "சுழல்கள் எவ்வாறு செயல்படுகின்றன"
+
+#: course/lesson-18-for-loops/lesson.tres:103
+msgid ""
+"In a [code]for[/code] loop, the computer takes each value inside a list, "
+"stores it in a temporary variable, and executes the code in the loop once"
+" per value."
+msgstr ""
+"[/குறியீடு] வளையத்திற்கான [குறியீடு] இல், கணினி ஒவ்வொரு மதிப்பையும் ஒரு பட்டியலுக்குள் "
+"எடுத்து, தற்காலிக மாறியில் சேமித்து, ஒரு மதிப்புக்கு ஒரு முறை சுழற்சியில் குறியீட்டை "
+"இயக்குகிறது."
+
+#: course/lesson-18-for-loops/lesson.tres:123
+msgid ""
+"In the above example, for each item in the list [code][0, 1, 2][/code], "
+"Godot sets [code]number[/code] to the item, then executes the code in the"
+" [code]for[/code] loop.\n"
+"\n"
+"We'll explain arrays more thoroughly in the next lesson, but notice that "
+"[code]number[/code] is just a temporary variable. You create it when "
+"defining the loop, and the loop takes care of changing its value. Also, "
+"you can name this variable anything you want.\n"
+"\n"
+"This code behaves the same as the previous example:"
+msgstr ""
+"மேலே உள்ள எடுத்துக்காட்டில், பட்டியலில் உள்ள ஒவ்வொரு பொருளுக்கும் [குறியீடு] [0, 1, 2] "
+"[/குறியீடு], கோடோட் [குறியீடு] எண்ணை [/குறியீடு] உருப்படிக்கு அமைக்கிறது, பின்னர் "
+"[குறியீட்டில்] குறியீட்டை இயக்குகிறது [/குறியீடு] லூப்.\n"
+"\n"
+" அடுத்த பாடத்தில் வரிசைகளை இன்னும் முழுமையாக விளக்குவோம், ஆனால் [குறியீடு] எண் "
+"[/குறியீடு] ஒரு தற்காலிக மாறி என்பதை கவனியுங்கள். வளையத்தை வரையறுக்கும் போது நீங்கள் அதை"
+" உருவாக்குகிறீர்கள், மேலும் அதன் மதிப்பை மாற்றுவதை வளையம் கவனித்துக்கொள்கிறது. மேலும், இந்"
+"த மாறியை நீங்கள் விரும்பும் எதையும் பெயரிடலாம்.\n"
+"\n"
+" இந்த குறியீடு முந்தைய எடுத்துக்காட்டு போலவே செயல்படுகிறது:"
+
+#: course/lesson-18-for-loops/lesson.tres:147
+msgid ""
+"In both examples, we print the value of the temporary variable we "
+"created: [code]number[/code] in the first example and "
+"[code]element[/code] in the second.\n"
+"\n"
+"As Godot moves through the loop, it assigns each value of the array to "
+"that variable. First, it sets the variable to [code]0[/code], then to "
+"[code]1[/code], and finally, to [code]2[/code].\n"
+"\n"
+"We can break down the instructions the loop runs. You can see how a loop "
+"is a shortcut to code that otherwise gets very long."
+msgstr ""
+"இரண்டு எடுத்துக்காட்டுகளிலும், நாங்கள் உருவாக்கிய தற்காலிக மாறியின் மதிப்பை அச்சிடுகிறோம்:"
+" [குறியீடு] எண் [/குறியீடு] முதல் எடுத்துக்காட்டில் மற்றும் [குறியீடு] உறுப்பு [/குறியீடு]"
+" இரண்டாவதாக.\n"
+"\n"
+" கோடோட் வளையத்தின் வழியாக நகரும்போது, அது வரிசையின் ஒவ்வொரு மதிப்பையும் அந்த மாறிக்கு "
+"ஒதுக்குகிறது. முதலில், இது மாறியை [குறியீடு] 0 [/குறியீடு] ஆகவும், பின்னர் [குறியீடு]"
+" 1 [/குறியீடு] ஆகவும், இறுதியாக, [குறியீடு] 2 [/குறியீடு] ஆகவும் அமைக்கிறது.\n"
+"\n"
+" லூப் இயங்கும் வழிமுறைகளை நாம் உடைக்கலாம். ஒரு லூப் என்பது குறியீட்டிற்கான குறுக்குவழி "
+"என்பது எப்படி என்பதை நீங்கள் காணலாம், இல்லையெனில் மிக நீளமாக இருக்கும்."
+
+#: course/lesson-18-for-loops/lesson.tres:171
+msgid ""
+"We can put whatever code we like in the loop's code block, including "
+"other function calls like [code]draw_rectangle()[/code]."
+msgstr ""
+"[குறியீடு] டிரா_ரெக்டாங்கல் () [/குறியீடு] போன்ற பிற செயல்பாட்டு அழைப்புகள் உட்பட, "
+"லூப்பின் குறியீடு தொகுதியில் நாங்கள் விரும்பும் எந்த குறியீட்டையும் வைக்கலாம்."
+
+#: course/lesson-18-for-loops/lesson.tres:179
+msgid "Using a for loop instead of a while loop"
+msgstr "சிறிது நேரம் வளையத்திற்கு பதிலாக A க்கு A ஐப் பயன்படுத்துதல்"
+
+#: course/lesson-18-for-loops/lesson.tres:181
+msgid ""
+"Here's our old [code]move_to_end()[/code] function which used a "
+"[code]while[/code] loop."
+msgstr ""
+"எங்கள் பழைய [குறியீடு] MOVE_TO_END () [/குறியீடு] செயல்பாடு [/குறியீடு] சுழற்சியைப் "
+"பயன்படுத்தியது."
+
+#: course/lesson-18-for-loops/lesson.tres:201
+msgid ""
+"If we use a [code]for[/code] loop instead, the code becomes a little "
+"simpler."
+msgstr ""
+"அதற்கு பதிலாக [/குறியீடு] வளையத்திற்கு [குறியீடு] பயன்படுத்தினால், குறியீடு கொஞ்சம் "
+"எளிமையாகிறது."
+
+#: course/lesson-18-for-loops/lesson.tres:221
+msgid ""
+"Rather than constantly checking if the robot reached the end of the "
+"board, with the [code]for[/code] loop, we take the board's width "
+"beforehand, then move the robot a set amount of times.\n"
+"\n"
+"The function still works the same. You can execute it below."
+msgstr ""
+"[/குறியீடு] வளையத்திற்கான [குறியீடு] ரோபோ பலகையின் முடிவை எட்டியதா என்பதை தொடர்ந்து "
+"சோதிப்பதற்குப் பதிலாக, நாங்கள் போர்டின் அகலத்தை முன்பே எடுத்துக்கொள்கிறோம், பின்னர் ரோபோவை "
+"ஒரு குறிப்பிட்ட அளவு நகர்த்துவோம்.\n"
+"\n"
+" செயல்பாடு இன்னும் ஒரே மாதிரியாக செயல்படுகிறது. நீங்கள் அதை கீழே இயக்கலாம்."
+
+#: course/lesson-18-for-loops/lesson.tres:243
+msgid ""
+"In the practices, we'll use [code]for[/code] loops in different ways to "
+"get you used to using them."
+msgstr ""
+"நடைமுறைகளில், [/குறியீடு] சுழல்களை வெவ்வேறு வழிகளில் [குறியீடு] பயன்படுத்துவோம்."
+
+#: course/lesson-18-for-loops/lesson.tres:251
+msgid "Using a for loop to move to the end of the board"
+msgstr "பலகையின் முடிவுக்கு செல்ல ஒரு ஃபார் லூப்பைப் பயன்படுத்துதல்"
+
+#: course/lesson-18-for-loops/lesson.tres:252
+msgid ""
+"Once again, the robot has decided to stand at the top of the board.\n"
+"\n"
+"This time, use a [code]for[/code] loop in the "
+"[code]move_to_bottom()[/code] function to have it move to the bottom of "
+"the board.\n"
+"\n"
+"The board size is determined by the [code]Vector2[/code] variable "
+"[code]board_size[/code].\n"
+"\n"
+"The robot's starting cell is [code]Vector2(2, 0)[/code]."
+msgstr ""
+"மீண்டும், ரோபோ போர்டின் உச்சியில் நிற்க முடிவு செய்துள்ளது.\n"
+"\n"
+" இந்த நேரத்தில், [/குறியீடு] வளையத்திற்கு [குறியீடு] நகர்வு_டோ_பொட்டோம் () [/குறியீடு] "
+"செயல்பாட்டில் ஒரு [குறியீடு] வளையத்தைப் பயன்படுத்தவும்.\n"
+"\n"
+" போர்டு அளவு [குறியீடு] திசையன் 2 [/குறியீடு] மாறி [குறியீடு] போர்டு_சைச் [/குறியீடு]"
+" மூலம் தீர்மானிக்கப்படுகிறது.\n"
+"\n"
+" ரோபோவின் தொடக்க செல் [குறியீடு] வெக்டர் 2 (2, 0) [/குறியீடு] ஆகும்."
+
+#: course/lesson-18-for-loops/lesson.tres:268
+msgid ""
+"Use a for loop to have our robot move from the top of the board to the "
+"bottom."
+msgstr ""
+"எங்கள் ரோபோ பலகையின் மேலிருந்து கீழே செல்ல எங்கள் ரோபோவை பயன்படுத்த A க்கு பயன்படுத்தவும்."
+
+#: course/lesson-18-for-loops/lesson.tres:273
+msgid "Improving code with a for loop"
+msgstr "ஒரு வளையத்துடன் குறியீட்டை மேம்படுத்துதல்"
+
+#: course/lesson-18-for-loops/lesson.tres:274
+msgid ""
+"Use a [code]for[/code] loop to remove the duplicate code in the "
+"[code]run()[/code] function.\n"
+"\n"
+"In this practice, we revisit the turtle and drawing rectangles.\n"
+"\n"
+"With our new knowledge of [code]for[/code] loops, we can condense this "
+"code to take up less space and make it easier to modify.\n"
+"\n"
+"The turtle should draw three squares in a horizontal line. The squares "
+"should be 100 pixels apart."
+msgstr ""
+"[குறியீடு] ரன் () [/குறியீடு] செயல்பாட்டில் நகல் குறியீட்டை அகற்ற [/குறியீடு] வளையத்திற்கு"
+" [குறியீடு] பயன்படுத்தவும்.\n"
+"\n"
+" இந்த நடைமுறையில், நாங்கள் ஆமை மற்றும் செவ்வகங்களை வரைவோம்.\n"
+"\n"
+" [/குறியீடு] சுழல்களுக்கான [குறியீடு] பற்றிய எங்கள் புதிய அறிவைக் கொண்டு, குறைந்த இடத்தை"
+" எடுத்துக்கொள்வதற்கும் மாற்றியமைப்பதை எளிதாக்குவதற்கும் இந்த குறியீட்டை நாங்கள் ஒடுக்கலாம்.\n"
+"\n"
+" ஆமை ஒரு கிடைமட்ட கோட்டில் மூன்று சதுரங்களை வரைய வேண்டும். சதுரங்கள் 100 படப்புள்ளிகள் "
+"இடைவெளியில் இருக்க வேண்டும்."
+
+#: course/lesson-18-for-loops/lesson.tres:297
+msgid ""
+"In the past we had to copy and paste code to draw multiple rectangles. "
+"Let's revisit previous code and improve it with a for loop."
+msgstr ""
+"கடந்த காலத்தில் பல செவ்வகங்களை வரைய குறியீட்டை நகலெடுத்து ஒட்ட வேண்டியிருந்தது. முந்தைய "
+"குறியீட்டை மறுபரிசீலனை செய்து அதை ஒரு லூப் மூலம் மேம்படுத்துவோம்."
+
+#: course/lesson-18-for-loops/lesson.tres:301
+msgid "Introduction to For Loops"
+msgstr "சுழல்களுக்கு அறிமுகம்"

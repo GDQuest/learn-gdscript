@@ -1,0 +1,276 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2025-06-14 15:02+0200\n"
+"PO-Revision-Date: 2022-06-20 15:19+0000\n"
+"Last-Translator: Roman Rous <roman.rous@atlas.cz>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-24-access-array-indices/cs/>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.13.1-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-24-access-array-indices/lesson.tres:14
+msgid ""
+"You learned to loop over all the values in an array using the [code]for[/"
+"code] keyword."
+msgstr ""
+"Naučili jste se procházet všechny hodnoty v poli pomocí klíčového slova "
+"[code]for[/code]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:34
+msgid ""
+"But what if you need to access the third item in the player's inventory? The "
+"tenth item?\n"
+"\n"
+"There's a dedicated notation to access one element in an array by index.\n"
+"\n"
+"To do so, you use square brackets with a number inside the brackets."
+msgstr ""
+"Ale co když potřebujete získat přístup ke třetímu předmětu v inventáři "
+"hráče? Nebo desátý předmět?\n"
+"\n"
+"Existuje speciální zápis pro přístup k jednomu prvku pole podle indexu.\n"
+"\n"
+"Použijete k tomu hranaté závorky s číslem uvnitř závorek."
+
+#: course/lesson-24-access-array-indices/lesson.tres:58
+msgid "Index zero is the [i]first[/i] element in the array."
+msgstr "Index nula je [i]první[/i] prvek pole."
+
+#: course/lesson-24-access-array-indices/lesson.tres:78
+msgid ""
+"Index one is the [i]second[/i] element in the array, and so on.\n"
+"\n"
+"You would access the [i]fourth[/i] element in the [code]inventory[/code] "
+"array like so."
+msgstr ""
+"Index jedna je [i]druhý[/i] prvek pole atd.\n"
+"\n"
+"K [i]čtvrtému[/i] prvku v poli [code]inventář[/code] byste přistupovali "
+"takto."
+
+#: course/lesson-24-access-array-indices/lesson.tres:98
+msgid ""
+"How would you access the [i]third[/i] item in the [code]inventory[/code] "
+"array?"
+msgstr ""
+"Jak byste získali přístup k [i]třetí[/i] položce v poli [code]inventory[/"
+"code]?"
+
+#: course/lesson-24-access-array-indices/lesson.tres:101
+msgid ""
+"Indices start at zero, so the index of the [i]third[/i] item is [code]2[/"
+"code]. That's why you need to write [code]inventory[2][/code]."
+msgstr ""
+"Indexy začínají nulou, takže index [i]třetího[/i] prvku je [code]2[/code]. "
+"Proto je třeba napsat [code]inventory[2][/code]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:102
+#: course/lesson-24-access-array-indices/lesson.tres:103
+msgid "inventory[2]"
+msgstr "inventory[2]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:102
+msgid "inventory[3]"
+msgstr "inventory[3]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:110
+msgid "Accessing the last values with negative indices"
+msgstr "Přístup k posledním hodnotám pomocí záporných indexů"
+
+#: course/lesson-24-access-array-indices/lesson.tres:112
+msgid ""
+"What if you want to access the last or second-before-last item in the "
+"[code]inventory[/code]?\n"
+"\n"
+"In that case, you can use negative indices. If you write [code]-1[/code] in "
+"the brackets, you will get the last item in the array. You will get the "
+"second-to-last item if you write [code]-2[/code]."
+msgstr ""
+"Co když chcete získat přístup k poslední nebo předposlední položce v "
+"[code]inventory[/code]?\n"
+"\n"
+"V takovém případě můžete použít záporné indexy. Pokud do závorek napíšete "
+"[code]-1[/code], získáte poslední položku v poli. Pokud napíšete [code]-2[/"
+"code], získáte předposlední položku (druhou od konce)."
+
+#: course/lesson-24-access-array-indices/lesson.tres:134
+msgid ""
+"That's very convenient when you need to quickly access elements from the end "
+"of the list."
+msgstr ""
+"Toto je velmi pohodlné řešení, když potřebujete rychle přistupovat k prvkům "
+"z konce seznamu."
+
+#: course/lesson-24-access-array-indices/lesson.tres:142
+msgid "How would you access the third-to-last item in the inventory array?"
+msgstr ""
+"Jak byste získali přístup k předpředposlední (třetí od konce) položce v poli "
+"inventáře?"
+
+#: course/lesson-24-access-array-indices/lesson.tres:145
+msgid ""
+"When using negative indices, [code]-1[/code] means the [i]last[/i] element "
+"in the array. Index [code]-2[/code] will be the second-to-last, thus "
+"[code]-3[/code] will be the third-to-last.\n"
+"\n"
+"It can be little confusing as it seems to work differently from positive "
+"indices. However, it's because there's no difference between index [code]0[/"
+"code] and [code]-0[/code]: they both point to the first item in the array."
+msgstr ""
+"Při použití záporných indexů [code]-1[/code] znamená [i]poslední[/i] prvek v "
+"poli. Index [code]-2[/code] bude předposlední, tedy [code]-3[/code] bude "
+"předpředposlední.\n"
+"\n"
+"Může to být trochu matoucí, protože se zdá, že to funguje jinak než u "
+"kladných indexů. Je to však proto, že mezi indexy [code]0[/code] a [code]-0[/"
+"code] není žádný rozdíl: oba ukazují na první položku v poli."
+
+#: course/lesson-24-access-array-indices/lesson.tres:148
+#: course/lesson-24-access-array-indices/lesson.tres:149
+msgid "inventory[-3]"
+msgstr "inventory[-3]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:148
+msgid "inventory[-2]"
+msgstr "inventory[-2]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:156
+msgid "You can't access non-existent indices"
+msgstr "K neexistujícím indexům přistupovat nelze"
+
+#: course/lesson-24-access-array-indices/lesson.tres:158
+msgid ""
+"There's a catch with this syntax: if you try to access an index that does "
+"not exist, you will get an error. You have to be careful always to access "
+"existing elements in the array.\n"
+"\n"
+"There are a couple of ways you can check for valid indices. One of them is "
+"checking the array's size."
+msgstr ""
+"Tato syntaxe má jeden háček: pokud se pokusíte přistoupit k neexistujícímu "
+"indexu, dojde k chybě. Musíte si vždy dávat pozor, abyste přistupovali k "
+"existujícím prvkům pole.\n"
+"\n"
+"Existuje několik způsobů, jak můžete kontrolovat platné indexy. Jedním z "
+"nich je kontrola velikosti pole."
+
+#: course/lesson-24-access-array-indices/lesson.tres:170
+msgid ""
+"[b]Checking the size of the array[/b]\n"
+"\n"
+"Arrays come with a member function named [code]size()[/code]. You can call "
+"it on the array anytime to know its [i]current[/i] size."
+msgstr ""
+"[b]Kontrola velikosti pole[/b]\n"
+"\n"
+"Pole jsou vybavena členskou funkcí [code]size()[/code]. Můžete ji kdykoli "
+"zavolat na poli, abyste zjistili jeho [i]aktuální[/i] velikost."
+
+#: course/lesson-24-access-array-indices/lesson.tres:192
+msgid ""
+"The maximum index you can access in an array is [code]array.size() - 1[/"
+"code]: it's the last item in the array."
+msgstr ""
+"Maximální index, ke kterému můžete v poli přistupovat, je [code]array.size() "
+"- 1[/code]: je to poslední položka v poli."
+
+#: course/lesson-24-access-array-indices/lesson.tres:212
+msgid ""
+"In the following practices, you will use array indices to realign train "
+"tracks and grab the correct item in an inventory."
+msgstr ""
+"V následujících praktických příkladech budete používat indexy polí k "
+"zarovnání vlakových kolejí a k uchopení správné položky v inventáři."
+
+#: course/lesson-24-access-array-indices/lesson.tres:220
+msgid "Using the right items"
+msgstr "Používání správných položek"
+
+#: course/lesson-24-access-array-indices/lesson.tres:221
+#, fuzzy
+msgid ""
+"In our game, the player has an inventory that works as an array under the "
+"hood.\n"
+"\n"
+"The player knows they have a sword and a shield somewhere in their "
+"inventory, but they don't remember exactly where.\n"
+"\n"
+"You can see the inventory drawn on the right, along with the index of each "
+"item in the inventory.\n"
+"\n"
+"Your task is to find one sword and one shield in the array using their "
+"index, then call [code]use_item()[/code] on each of them so the player can "
+"equip those items.\n"
+"\n"
+"For example, if the first item in the array is what you need, you would call "
+"[code]use_item(inventory[0])[/code]."
+msgstr ""
+"V naší hře má hráč inventář, který funguje jako pole.\n"
+"\n"
+"Chtějí se vybavit mečem a štítem, aby si vylepšili své postavy. Stejně jako "
+"dříve je potřebujeme v poli najít.\n"
+"\n"
+"K tomu je třeba přistupovat k prvkům v poli [code]inventory[/code] podle "
+"indexu.\n"
+"\n"
+"Chcete-li použít prvek, zavolejte funkci [code]use_item()[/code] s předmětem "
+"v argumentu. Například první položku můžete použít voláním "
+"[code]use_item(inventory[0])[/code]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:241
+#, fuzzy
+msgid ""
+"Find the right items to use in the player's inventory, using their index."
+msgstr "Najděte v inventáři hráče správné předměty, které chcete použít."
+
+#: course/lesson-24-access-array-indices/lesson.tres:246
+msgid "Realigning the train tracks"
+msgstr "Přerovnání vlakových kolejí"
+
+#: course/lesson-24-access-array-indices/lesson.tres:247
+msgid ""
+"We have train tracks broken down into little chunks in our game. We use them "
+"to make modular tracks and draw circuits of all shapes and sizes.\n"
+"\n"
+"However, several chunks are misaligned. You need to find them in the "
+"[code]tracks[/code] array and pass them to the [code]align()[/code] "
+"function.\n"
+"\n"
+"To do so, you need to access the array by index.\n"
+"\n"
+"This time, though, you need to access them with [i]negative indices[/i]."
+msgstr ""
+"V naší hře máme vlakové tratě rozdělené na malé kousky. Z nich vytváříme "
+"modulové tratě a kreslíme okruhy všech tvarů a velikostí.\n"
+"\n"
+"Několik dílků je však špatně zarovnaných. Je třeba je najít v poli "
+"[code]tracks[/code] a předat je funkci [code]align()[/code].\n"
+"\n"
+"K tomu je třeba přistupovat k poli podle indexu.\n"
+"\n"
+"Tentokrát k nim však musíte přistupovat pomocí [i]záporných indexů[/i]."
+
+#: course/lesson-24-access-array-indices/lesson.tres:265
+msgid ""
+"Some chunks of our train tracks are misaligned, and the train can't pass. "
+"Find the faulty pieces and realign them."
+msgstr ""
+"Některé kusy našich vlakových kolejí jsou špatně zarovnané a vlak nemůže "
+"projet. Najděte vadné kusy a znovu je zarovnejte."
+
+#: course/lesson-24-access-array-indices/lesson.tres:269
+msgid "Accessing values in arrays"
+msgstr "Přístup k hodnotám v polích"

@@ -1,0 +1,186 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-10-06 07:34+0200\n"
+"PO-Revision-Date: 2025-04-05 11:59+0000\n"
+"Last-Translator: MuryanBKS <muryanbks+github@gmail.com>\n"
+"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
+"projects/learn-gdscript-from-zero/lesson-26-looping-over-dictionaries/"
+"zh_Hant/>\n"
+"Language: zh_Hant\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:13
+msgid ""
+"Like with arrays, you can loop over dictionaries. You can loop over both "
+"their keys and values.\n"
+"\n"
+"Let's see how it works with two examples."
+msgstr ""
+"像處理陣列一樣，你也可以對字典進行迴圈處理。你可以對字典的鍵和值進行迴圈。\n"
+"\n"
+"讓我們透過兩個範例來看看是如何運作的。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:23
+msgid "Displaying an inventory's content"
+msgstr "顯示背包中的內容"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:25
+msgid ""
+"To display the player's inventory, you need to know what it contains. You "
+"need the name and amount of each object.\n"
+"\n"
+"And from code, you can only achieve that by looping over the whole "
+"dictionary and processing key-value pairs one by one.\n"
+"\n"
+"To get the list of keys in the dictionary, you can call its [code]keys()[/"
+"code] member function."
+msgstr ""
+"要顯示玩家的物品清單，你需要知道它包含了什麼。也就是每個物品的名稱和數量。\n"
+"\n"
+"而從程式碼中，你只能透過對整個字典進行迴圈，逐一處理鍵值對，來達成這個目的。"
+"\n"
+"\n"
+"要獲得字典中的鍵列表，你可以呼叫它的 [code]keys()[/code] 成員函式。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:49
+msgid ""
+"But it's something we do so much that you don't need to call the function.\n"
+"\n"
+"Instead, you can directly [ignore]type the variable name in a [code]for[/"
+"code] loop after the [code]in[/code] keyword. The language understands that "
+"you implicitly want to loop over the dictionary's keys."
+msgstr ""
+"但這是我們做得非常頻繁的操作，因此你不需要特別呼叫函式。\n"
+"\n"
+"相反地，你可以在 [code]for[/code] 迴圈中的 [code]in[/code] "
+"關鍵字後直接使用變數名稱。程式語言會自動理解你是想對字典的鍵進行迴圈。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:71
+msgid ""
+"You can get the values with the syntax [code]dictionary[key][/code] as you "
+"learned in the previous lesson.\n"
+"\n"
+"We can loop over the inventory keys, get the corresponding values, and "
+"display all that information in the user interface."
+msgstr ""
+"你可以使用語法 [code]dictionary[key][/code] "
+"來取得對應的值，這是你在前一課學過的內容。\n"
+"\n"
+"我們可以對物品庫的鍵進行迴圈，取得對應的值，並將所有資訊顯示在使用者介面上。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:103
+msgid ""
+"Instead of printing the key-value pairs to the output console, we can code "
+"and call a dedicated function that displays items in the user interface."
+msgstr "我們可以編寫並呼叫一個專門顯示物品的函式，將項目顯示在使用者介面上，而不是將"
+"鍵值對輸出到控制台。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:131
+msgid "Mapping grid cells to units"
+msgstr "將網格座標對應到單位"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:133
+msgid ""
+"We can also use a dictionary to map units to their position on a game "
+"board.\n"
+"\n"
+"That's how you'd typically code a board game, a grid-based RPG, or a "
+"tactical RPG.\n"
+"\n"
+"While we focused on [code]String[/code] keys so far, GDScript dictionaries "
+"accept any value type as a key, allowing you to map anything to anything.\n"
+"\n"
+"The only limitation is that every key must be unique."
+msgstr ""
+"我們也可以使用字典將單位映射到遊戲棋盤上的位置。\n"
+"\n"
+"這通常用來編寫桌上遊戲、基於網格的 RPG 或戰略 RPG。\n"
+"\n"
+"儘管到目前為止我們專注於 [code]字串(String)[/code] 鍵，但 GDScript "
+"字典接受任何值類型作為鍵，讓你可以將任何東西映射到任何東西。\n"
+"\n"
+"唯一的限制是每個鍵必須是唯一的。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:159
+msgid ""
+"Using a [code]for[/code] loop, you can use the key-value pairs to place "
+"units on the board at the start of a game."
+msgstr "使用 [code]for[/code] 迴圈，你可以使用鍵值對在遊戲開始時將單位放置在棋盤上。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:189
+msgid ""
+"In the following practices, you will loop over dictionaries and process "
+"their content."
+msgstr "在接下來的練習中，你將會遍歷字典並處理它們的內容。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:197
+msgid "Displaying the inventory"
+msgstr "顯示背包的內容"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:198
+msgid ""
+"We use a dictionary to represent the player's inventory in this game. The "
+"dictionary keys are the name of items, and they map to the number of items "
+"that the player owns.\n"
+"\n"
+"You need to loop over the dictionary and display the name and amount of "
+"every item in the inventory.\n"
+"\n"
+"To do so, call the [code]display_item()[/code] function. It takes two "
+"arguments: the item name and the amount."
+msgstr ""
+"我們使用字典來表示這個遊戲中的玩家物品清單。字典的鍵是物品名稱，並且映射到玩"
+"家擁有的物品數量。\n"
+"\n"
+"你需要遍歷字典並顯示每個物品名稱和數量。\n"
+"\n"
+"為此可以呼叫 [code]display_item()[/code] 函式。它有兩個引數：物品名稱和數量。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:218
+msgid ""
+"We need to display the player's inventory on the screen but lack the code to "
+"do so. Use a loop to display every item."
+msgstr "我們需要在畫面上顯示玩家的物品清單，但缺少相關程式碼。使用迴圈來顯示每個物品"
+"。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:223
+msgid "Placing units on the board"
+msgstr "將單位放置在棋盤上"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:224
+msgid ""
+"We have a dictionary named [code]units[/code] that maps a cell position on "
+"the grid to a unit to put there.\n"
+"\n"
+"Using a for loop and the [code]place_unit()[/code] function, place every "
+"unit in the units dictionary at the desired position on the game board."
+msgstr ""
+"我們有一個名為 [code]units[/code] "
+"的字典，它將格子上的位置對應到要放置的單位。\n"
+"\n"
+"使用 for 迴圈和 [code]place_unit()[/code] 函式，將 [code]units[/code] "
+"字典中的每個單位放置到棋盤上的指定位置。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:242
+msgid ""
+"We want to populate our game board with units at the start of every battle. "
+"Loop over the dictionary to place units on the board."
+msgstr "我們希望在每場戰鬥開始時將單位配置到棋盤。使用迴圈遍歷字典，將單位放置到棋盤"
+"上。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:246
+msgid "Looping over dictionaries"
+msgstr "用迴圈遍歷字典"

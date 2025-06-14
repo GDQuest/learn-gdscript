@@ -1,0 +1,203 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-10-06 07:34+0200\n"
+"PO-Revision-Date: 2022-06-19 11:18+0000\n"
+"Last-Translator: Roman Rous <roman.rous@atlas.cz>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-26-looping-over-dictionaries/cs/>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.13.1-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:13
+msgid ""
+"Like with arrays, you can loop over dictionaries. You can loop over both "
+"their keys and values.\n"
+"\n"
+"Let's see how it works with two examples."
+msgstr ""
+"Stejně jako u polí můžete přes slovníky procházet smyčkou. Můžete procházet "
+"jak přes klíče, tak přes hodnoty.\n"
+"\n"
+"Podívejme se, jak to funguje na dvou příkladech."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:23
+msgid "Displaying an inventory's content"
+msgstr "Zobrazení obsahu inventáře"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:25
+msgid ""
+"To display the player's inventory, you need to know what it contains. You "
+"need the name and amount of each object.\n"
+"\n"
+"And from code, you can only achieve that by looping over the whole "
+"dictionary and processing key-value pairs one by one.\n"
+"\n"
+"To get the list of keys in the dictionary, you can call its [code]keys()[/"
+"code] member function."
+msgstr ""
+"Chcete-li zobrazit inventář hráče, musíte vědět, co obsahuje. Potřebujete "
+"název a množství každého předmětu.\n"
+"\n"
+"A toho z kódu dosáhnete pouze tak, že projdete celý slovník a postupně "
+"zpracujete dvojice klíč-hodnota.\n"
+"\n"
+"Chcete-li získat seznam klíčů ve slovníku, můžete zavolat jeho členskou "
+"funkci [code]keys()[/code]."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:49
+#, fuzzy
+msgid ""
+"But it's something we do so much that you don't need to call the function.\n"
+"\n"
+"Instead, you can directly [ignore]type the variable name in a [code]for[/"
+"code] loop after the [code]in[/code] keyword. The language understands that "
+"you implicitly want to loop over the dictionary's keys."
+msgstr ""
+"Ale je to něco, co děláme tak často, že nemusíte volat funkci.\n"
+"\n"
+"Místo toho můžete přímo zadat název proměnné ve smyčce [code]for[/code] za "
+"klíčové slovo [code]in[/code]. Jazyk chápe, že chcete procházet smyčku přes "
+"klíče slovníku."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:71
+msgid ""
+"You can get the values with the syntax [code]dictionary[key][/code] as you "
+"learned in the previous lesson.\n"
+"\n"
+"We can loop over the inventory keys, get the corresponding values, and "
+"display all that information in the user interface."
+msgstr ""
+"Hodnoty můžete získat pomocí syntaxe [code]dictionary[key][/code], jak jste "
+"se naučili v předchozí lekci.\n"
+"\n"
+"Můžeme procházet klíči inventáře, získat odpovídající hodnoty a zobrazit "
+"všechny tyto informace v uživatelském rozhraní."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:103
+msgid ""
+"Instead of printing the key-value pairs to the output console, we can code "
+"and call a dedicated function that displays items in the user interface."
+msgstr ""
+"Místo vypisování dvojic klíč-hodnota na výstupní konzolu můžeme nakódovat a "
+"zavolat vyhrazenou funkci, která zobrazí položky v uživatelském rozhraní."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:131
+msgid "Mapping grid cells to units"
+msgstr "Mapování buněk mřížky na jednotky"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:133
+msgid ""
+"We can also use a dictionary to map units to their position on a game "
+"board.\n"
+"\n"
+"That's how you'd typically code a board game, a grid-based RPG, or a "
+"tactical RPG.\n"
+"\n"
+"While we focused on [code]String[/code] keys so far, GDScript dictionaries "
+"accept any value type as a key, allowing you to map anything to anything.\n"
+"\n"
+"The only limitation is that every key must be unique."
+msgstr ""
+"Můžeme také použít slovník k mapování jednotek na jejich pozici na herním "
+"plánu.\n"
+"\n"
+"Takto byste obvykle kódovali deskovou hru, gridové RPG nebo taktické RPG.\n"
+"\n"
+"Zatímco jsme se dosud soustředili na klíče [code]String[/code], slovníky "
+"GDScript přijímají jako klíč jakýkoli typ hodnoty, což vám umožňuje mapovat "
+"cokoli na cokoli.\n"
+"\n"
+"Jediným omezením je, že každý klíč musí být jedinečný."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:159
+msgid ""
+"Using a [code]for[/code] loop, you can use the key-value pairs to place "
+"units on the board at the start of a game."
+msgstr ""
+"Pomocí cyklu [code]for[/code] můžete na začátku hry umístit jednotky na "
+"hrací plochu pomocí dvojic klíč-hodnota."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:189
+msgid ""
+"In the following practices, you will loop over dictionaries and process "
+"their content."
+msgstr ""
+"V následujících postupech budete procházet slovníky a zpracovávat jejich "
+"obsah."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:197
+msgid "Displaying the inventory"
+msgstr "Zobrazení inventáře"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:198
+msgid ""
+"We use a dictionary to represent the player's inventory in this game. The "
+"dictionary keys are the name of items, and they map to the number of items "
+"that the player owns.\n"
+"\n"
+"You need to loop over the dictionary and display the name and amount of "
+"every item in the inventory.\n"
+"\n"
+"To do so, call the [code]display_item()[/code] function. It takes two "
+"arguments: the item name and the amount."
+msgstr ""
+"V této hře používáme slovník, který reprezentuje hráčův inventář. Klíče "
+"slovníku jsou názvy předmětů a mapují se na počet předmětů, které hráč "
+"vlastní.\n"
+"\n"
+"Je třeba procházet slovníkem ve smyčce a zobrazit název a množství každé "
+"položky v inventáři.\n"
+"\n"
+"Za tímto účelem zavolejte funkci [code]display_item()[/code]. Ta přijímá dva "
+"argumenty: název položky a částku."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:218
+msgid ""
+"We need to display the player's inventory on the screen but lack the code to "
+"do so. Use a loop to display every item."
+msgstr ""
+"Potřebujeme zobrazit inventář hráče na obrazovce, ale chybí nám k tomu kód. "
+"K zobrazení každé položky použijte smyčku."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:223
+msgid "Placing units on the board"
+msgstr "Umístění jednotek na hrací plochu"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:224
+msgid ""
+"We have a dictionary named [code]units[/code] that maps a cell position on "
+"the grid to a unit to put there.\n"
+"\n"
+"Using a for loop and the [code]place_unit()[/code] function, place every "
+"unit in the units dictionary at the desired position on the game board."
+msgstr ""
+"Máme slovník s názvem [code]units[/code], který mapuje pozici buňky na "
+"mřížce na jednotku, kterou tam vložíte.\n"
+"\n"
+"Pomocí cyklu for a funkce [code]place_unit()[/code] umístěte každou jednotku "
+"ve slovníku jednotek na požadované místo na herním plánu."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:242
+msgid ""
+"We want to populate our game board with units at the start of every battle. "
+"Loop over the dictionary to place units on the board."
+msgstr ""
+"Na začátku každé bitvy chceme herní plán naplnit jednotkami. Smyčkou nad "
+"slovníkem umístěte jednotky na hrací plochu."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:246
+msgid "Looping over dictionaries"
+msgstr "Procházení slovníků"

@@ -1,0 +1,260 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2025-06-14 15:02+0200\n"
+"PO-Revision-Date: 2025-04-05 11:59+0000\n"
+"Last-Translator: MuryanBKS <muryanbks+github@gmail.com>\n"
+"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
+"projects/learn-gdscript-from-zero/lesson-24-access-array-indices/zh_Hant/>\n"
+"Language: zh_Hant\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-24-access-array-indices/lesson.tres:14
+msgid ""
+"You learned to loop over all the values in an array using the [code]for[/"
+"code] keyword."
+msgstr "你已學會使用 [code]for[/code] 關鍵字來迴圈遍歷陣列中的所有值。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:34
+msgid ""
+"But what if you need to access the third item in the player's inventory? The "
+"tenth item?\n"
+"\n"
+"There's a dedicated notation to access one element in an array by index.\n"
+"\n"
+"To do so, you use square brackets with a number inside the brackets."
+msgstr ""
+"但如果你需要存取玩家背包中的第三個物品呢？第十個物品呢？\n"
+"\n"
+"有一種專門的語法可以透過索引來存取陣列中的特定元素。\n"
+"\n"
+"要做到這點，你可以使用方括號，並在括號內填入一個數字。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:58
+msgid "Index zero is the [i]first[/i] element in the array."
+msgstr "索引 0 是陣列中的[b]第一個[/b]元素。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:78
+msgid ""
+"Index one is the [i]second[/i] element in the array, and so on.\n"
+"\n"
+"You would access the [i]fourth[/i] element in the [code]inventory[/code] "
+"array like so."
+msgstr ""
+"索引 1 是陣列中的[b]第二個[/b]元素，以此類推。\n"
+"\n"
+"你可以這樣存取 [code]inventory[/code] 陣列中的[b]第四個[/b]元素。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:98
+msgid ""
+"How would you access the [i]third[/i] item in the [code]inventory[/code] "
+"array?"
+msgstr "怎麼存取在 [code]inventory[/code] 陣列中的[b]第三個[/b]項目？"
+
+#: course/lesson-24-access-array-indices/lesson.tres:101
+msgid ""
+"Indices start at zero, so the index of the [i]third[/i] item is [code]2[/"
+"code]. That's why you need to write [code]inventory[2][/code]."
+msgstr ""
+"索引從零開始，所以[b]第三個[/b]項目的索引是 [code]2[/code]。這就是為什麼你需"
+"要寫 [code]inventory[2][/code]。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:102
+#: course/lesson-24-access-array-indices/lesson.tres:103
+msgid "inventory[2]"
+msgstr "inventory[2]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:102
+msgid "inventory[3]"
+msgstr "inventory[3]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:110
+msgid "Accessing the last values with negative indices"
+msgstr "使用負索引存取最後幾個值"
+
+#: course/lesson-24-access-array-indices/lesson.tres:112
+msgid ""
+"What if you want to access the last or second-before-last item in the "
+"[code]inventory[/code]?\n"
+"\n"
+"In that case, you can use negative indices. If you write [code]-1[/code] in "
+"the brackets, you will get the last item in the array. You will get the "
+"second-to-last item if you write [code]-2[/code]."
+msgstr ""
+"如果你想存取 [code]inventory[/code] 中的最後一個或倒數第二個項目的話怎麼"
+"做？\n"
+"\n"
+"在這種情況下，你可以使用負索引。若在方括號內寫入 [code]-1[/code]，將會獲取陣"
+"列中的最後一個項目。若寫入 [code]-2[/code]，則會獲取倒數第二個項目。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:134
+msgid ""
+"That's very convenient when you need to quickly access elements from the end "
+"of the list."
+msgstr "當你需要快速存取列表末端的元素時，這將會非常方便。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:142
+msgid "How would you access the third-to-last item in the inventory array?"
+msgstr "你會如何存取 inventory 陣列中的倒數第三個項目？"
+
+#: course/lesson-24-access-array-indices/lesson.tres:145
+msgid ""
+"When using negative indices, [code]-1[/code] means the [i]last[/i] element "
+"in the array. Index [code]-2[/code] will be the second-to-last, thus "
+"[code]-3[/code] will be the third-to-last.\n"
+"\n"
+"It can be little confusing as it seems to work differently from positive "
+"indices. However, it's because there's no difference between index [code]0[/"
+"code] and [code]-0[/code]: they both point to the first item in the array."
+msgstr ""
+"當使用負數索引時，[code]-1[/code] 代表陣列中的[b]最後一個[/b]元素。索引 "
+"[code]-2[/code] 則是倒數第二個，依此類推，[code]-3[/code] 代表倒數第三個。\n"
+"\n"
+"這可能會有點令人混亂，因為它似乎和正數索引的運作方式不同。不過這是因為索引 "
+"[code]0[/code] 和 [code]-0[/code] 其實是沒有區別的：它們都指向陣列中的第一個"
+"項目。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:148
+#: course/lesson-24-access-array-indices/lesson.tres:149
+msgid "inventory[-3]"
+msgstr "inventory[-3]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:148
+msgid "inventory[-2]"
+msgstr "inventory[-2]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:156
+msgid "You can't access non-existent indices"
+msgstr "你沒辦法存取不存在的索引"
+
+#: course/lesson-24-access-array-indices/lesson.tres:158
+msgid ""
+"There's a catch with this syntax: if you try to access an index that does "
+"not exist, you will get an error. You have to be careful always to access "
+"existing elements in the array.\n"
+"\n"
+"There are a couple of ways you can check for valid indices. One of them is "
+"checking the array's size."
+msgstr ""
+"這種語法有一個陷阱：如果你嘗試存取一個不存在的索引，會發生錯誤。你必須小心，"
+"確保總是存取陣列中已存在的元素。\n"
+"\n"
+"有幾種方法可以檢查索引是否有效，其中一種是檢查陣列的大小。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:170
+msgid ""
+"[b]Checking the size of the array[/b]\n"
+"\n"
+"Arrays come with a member function named [code]size()[/code]. You can call "
+"it on the array anytime to know its [i]current[/i] size."
+msgstr ""
+"[b]檢查陣列的大小[/b]\n"
+"\n"
+"陣列有一個名為 [code]size()[/code] 的成員函式。你可以隨時在陣列上呼叫它，以獲"
+"取陣列的[b]目前[/b]大小。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:192
+msgid ""
+"The maximum index you can access in an array is [code]array.size() - 1[/"
+"code]: it's the last item in the array."
+msgstr ""
+"你可以在陣列中訪問的最大索引是 [code]array.size() - 1[/code]：它是陣列中的最"
+"後一個項目。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:212
+msgid ""
+"In the following practices, you will use array indices to realign train "
+"tracks and grab the correct item in an inventory."
+msgstr ""
+"在接下來的練習中，你將會使用陣列索引來重新對齊火車軌道，還有從背包中抓取正確"
+"的物品。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:220
+msgid "Using the right items"
+msgstr "使用正確的物品"
+
+#: course/lesson-24-access-array-indices/lesson.tres:221
+#, fuzzy
+msgid ""
+"In our game, the player has an inventory that works as an array under the "
+"hood.\n"
+"\n"
+"The player knows they have a sword and a shield somewhere in their "
+"inventory, but they don't remember exactly where.\n"
+"\n"
+"You can see the inventory drawn on the right, along with the index of each "
+"item in the inventory.\n"
+"\n"
+"Your task is to find one sword and one shield in the array using their "
+"index, then call [code]use_item()[/code] on each of them so the player can "
+"equip those items.\n"
+"\n"
+"For example, if the first item in the array is what you need, you would call "
+"[code]use_item(inventory[0])[/code]."
+msgstr ""
+"在我們的遊戲中，玩家有一個背包，背包運作方式是基於陣列。\n"
+"\n"
+"玩家想要裝備一把劍和一面盾牌來強化他們的角色。就像之前一樣，我們需要讓你在陣"
+"列中找到這些物品。\n"
+"\n"
+"你需要透過索引來存取 [code]inventory[/code] 陣列中的元素。\n"
+"\n"
+"呼叫 [code]use_item()[/code] 函式並將物品作為引數傳入來使用物品。例如，你可以"
+"透過呼叫 [code]use_item(inventory[0])[/code] 來使用第一個物品。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:241
+#, fuzzy
+msgid ""
+"Find the right items to use in the player's inventory, using their index."
+msgstr "在玩家的背包中找到正確的物品來使用。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:246
+msgid "Realigning the train tracks"
+msgstr "重新調整火車軌道"
+
+#: course/lesson-24-access-array-indices/lesson.tres:247
+msgid ""
+"We have train tracks broken down into little chunks in our game. We use them "
+"to make modular tracks and draw circuits of all shapes and sizes.\n"
+"\n"
+"However, several chunks are misaligned. You need to find them in the "
+"[code]tracks[/code] array and pass them to the [code]align()[/code] "
+"function.\n"
+"\n"
+"To do so, you need to access the array by index.\n"
+"\n"
+"This time, though, you need to access them with [i]negative indices[/i]."
+msgstr ""
+"在我們的遊戲中，火車軌道被拆分成許多小軌道。我們使用它們來製作模組化的軌道，"
+"並畫出各種形狀和大小的電路。\n"
+"\n"
+"然而幾個軌道段落沒有對齊。你需要在 [code]tracks[/code] 陣列中找到它們，並將它"
+"們傳遞給 [code]align()[/code] 函式。\n"
+"\n"
+"為了做到這一點，你需要通過索引來訪問陣列。\n"
+"\n"
+"不過這次你需要使用[b]負數索引[/b]來訪問它們。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:265
+msgid ""
+"Some chunks of our train tracks are misaligned, and the train can't pass. "
+"Find the faulty pieces and realign them."
+msgstr ""
+"有一些火車軌道段落沒有對齊，導致火車無法通過。找出那些故障的軌道段，並將它們"
+"重新對齊。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:269
+msgid "Accessing values in arrays"
+msgstr "存取陣列中的值"

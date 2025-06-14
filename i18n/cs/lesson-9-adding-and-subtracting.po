@@ -1,0 +1,217 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-10-06 07:34+0200\n"
+"PO-Revision-Date: 2022-06-13 17:18+0000\n"
+"Last-Translator: Roman Rous <roman.rous@atlas.cz>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-9-adding-and-subtracting/cs/>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.13-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:14
+#, fuzzy
+msgid ""
+"Our character in our game will have health by defining the [code]health[/"
+"code] variable. The higher the character's health, the further away the "
+"player is from losing the game.\n"
+"\n"
+"Health that changes adds tension to the game, especially if the player is "
+"fighting with low health! It's a resource that the player should manage "
+"carefully.\n"
+"\n"
+"The character's health might get low if an enemy attacks them or they fall "
+"into a hole.\n"
+"\n"
+"We can create a function to represent damage in these cases."
+msgstr ""
+"Naše postava v naší hře bude mít zdraví definované proměnnou [code]health[/"
+"code]. Čím vyšší má postava zdraví, tím dále je hráč od prohry ve hře.\n"
+"\n"
+"Zdraví, které se mění, dodává hře napětí, zejména pokud hráč bojuje s nízkým "
+"zdravím! Je to zdroj, se kterým by měl hráč pečlivě hospodařit.\n"
+"\n"
+"Zdraví postavy se může snížit, pokud na ni zaútočí nepřítel nebo spadne do "
+"díry.\n"
+"\n"
+"Pro tyto případy můžeme vytvořit funkci, která bude představovat poškození."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:40
+#, fuzzy
+msgid ""
+"We pass the amount of damage the robot should take as a parameter.\n"
+"\n"
+"Line 2 subtracts [code]amount[/code] from [code]health[/code].\n"
+"\n"
+"Note the [code]-=[/code] syntax which achieves this. It's a shorthand we "
+"often use.\n"
+"\n"
+"You can also use a longer form. Both of these lines have the same effect. "
+"They both subtract the value of [code]amount[/code] from the [code]health[/"
+"code] variable:\n"
+"\n"
+"[code]health -= amount[/code]\n"
+"[code]health = health - amount[/code]\n"
+"\n"
+"You may notice that the health of the robot can go below [code]0[/code]. "
+"We'll see how to manage this in a future lesson using [i]conditions[/i]."
+msgstr ""
+"Jako parametr předáváme velikost poškození, které má robot utrpět.\n"
+"\n"
+"Na řádku 2 odečteme [code]amount[/code](určité množství) od [code]health[/"
+"code].\n"
+"\n"
+"Všimněte si syntaxe [code]-=[/code], která toho dosáhne. Je to zkratka, "
+"kterou často používáme.\n"
+"\n"
+"Můžete také použít delší formu. Oba tyto řádky mají stejný efekt. Oba "
+"odečtou hodnotu [code]amount[/code] od proměnné [code]health[/code]:\n"
+"\n"
+"[code]health -= amount[/code]\n"
+"[code]health = health - amount[/code].\n"
+"\n"
+"Můžete si všimnout, že zdraví robota může klesnout pod [code]0[/code]. V "
+"některé z příštích lekcí se podíváme, jak tuto situaci zvládnout pomocí "
+"[i]podmínek[/i]."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:61
+msgid ""
+"The robot's health could increase instead if the player picks up an item "
+"that heals them, or if they use a healing item."
+msgstr ""
+"Zdraví robota by se místo toho mohlo zvýšit, pokud hráč vezme předmět, který "
+"ho léčí, nebo pokud použije léčivý předmět."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:81
+msgid ""
+"Here again, the health can go beyond [code]100[/code].\n"
+"\n"
+"Also, once more, the short line [code]health += amount[/code] is equivalent "
+"to the longer form [code]health = health + amount[/code]."
+msgstr ""
+"I zde může zdraví přesáhnout [code]100[/code].\n"
+"\n"
+"Také ještě jednou, krátký zápis [code]health += amount[/code] je "
+"ekvivalentní delší formě [code]health = health + amount[/code]."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:91
+msgid "Which of these would increase the health of the robot?"
+msgstr "Která z těchto možností by zvýšila zdraví robota?"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:94
+msgid ""
+"Both of these lines increase the [code]health[/code] of the robot by "
+"[code]amount[/code].\n"
+"[code]\n"
+"health += amount\n"
+"health = health + amount\n"
+"[/code]"
+msgstr ""
+"Oba tyto řádky zvýší [code] health[/code] robota o [code] amount[/code].\n"
+"[code]\n"
+"health += amount\n"
+"health = health + amount\n"
+"[/code]"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+msgid "health -= amount"
+msgstr "health -= amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+#: course/lesson-9-adding-and-subtracting/lesson.tres:100
+msgid "health += amount"
+msgstr "health += amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+#: course/lesson-9-adding-and-subtracting/lesson.tres:100
+msgid "health = health + amount"
+msgstr "health = health + amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+msgid "health = health - amount"
+msgstr "health = health - amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:109
+msgid ""
+"In the following practices, you'll code the [code]take_damage()[/code] and "
+"[code]heal()[/code] functions so the robot's health can decrease and "
+"increase."
+msgstr ""
+"V následujících postupech nakódujete funkce [code]take_damage()[/code] a "
+"[code]heal()[/code] ke snížení a zvýšení zdraví robota."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:117
+msgid "Damaging the Robot"
+msgstr "Poškozování robota"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:118
+msgid ""
+"In our game, the main character has a certain amount of [code]health[/code]. "
+"When it gets hit, the health should go down by a varying [code]amount[/code] "
+"of damage.\n"
+"\n"
+"Add to the [code]take_damage()[/code] function so it subtracts the "
+"[code]amount[/code] to the predefined [code]health[/code] variable.\n"
+"\n"
+"The robot starts with 100 health and will take 50 damage."
+msgstr ""
+"V naší hře má hlavní postava určité množství [code]health[/code] (zdraví). "
+"Když dostane zásah, mělo by se zdraví snížit o různé [code]amount[/code] "
+"(množství) poškození.\n"
+"\n"
+"Přidejte něco do funkce [code]take_damage()[/code] k tomu, aby odečítala "
+"[code]amount[/code] z předdefinované proměnné [code]health[/code].\n"
+"\n"
+"Robot začíná se zdravím 100 a utrpí poškození 50."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:134
+msgid "Learn how to deal damage to entities like our robot."
+msgstr "Naučte se způsobovat poškození entitám, jako je náš robot."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:139
+msgid "Healing the Robot"
+msgstr "Léčení robota"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:140
+msgid ""
+"It's time to heal the robot up to full health!\n"
+"\n"
+"Write a function called [code]heal()[/code] that takes [code]amount[/code] "
+"as a parameter.\n"
+"\n"
+"The function should add [code]amount[/code] to [code]health[/code].\n"
+"\n"
+"The robot starts with 50 health and will heal 50 to get it up to 100."
+msgstr ""
+"Je čas vyléčit robota až do plného zdraví!\n"
+"\n"
+"Napište funkci s názvem [code]heal()[/code], která jako parametr převezme "
+"[code]amount[/code].\n"
+"\n"
+"Funkce by měla přidat [code]amount[/code] do [code]health[/code].\n"
+"\n"
+"Robot začíná s 50 zdravím a vyléčí 50, aby se dostal až na 100."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:157
+msgid ""
+"Our robot needs healing after that practice! Create a function to heal it "
+"back to full health."
+msgstr ""
+"Náš robot potřebuje po tomto tréninku uzdravit! Vytvořte funkci, která ho "
+"uzdraví."
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:161
+msgid "Adding and Subtracting"
+msgstr "Sčítání a odečítání"

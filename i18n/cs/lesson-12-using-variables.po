@@ -1,0 +1,288 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2022-03-26 17:50+0100\n"
+"PO-Revision-Date: 2022-06-14 18:18+0000\n"
+"Last-Translator: Roman Rous <roman.rous@atlas.cz>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-12-using-variables/cs/>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.13-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-12-using-variables/lesson.tres:14
+msgid ""
+"In this lesson, we'll make our code easier to follow and understand at a "
+"glance.\n"
+"\n"
+"Take a look at this example."
+msgstr ""
+"V této lekci usnadníme sledování a pochopení našeho kódu na první pohled.\n"
+"\n"
+"Podívejte se na tento příklad."
+
+#: course/lesson-12-using-variables/lesson.tres:34
+msgid "In the above example, what does the number 4 mean?"
+msgstr "Co ve výše uvedeném příkladu znamená číslo 4?"
+
+#: course/lesson-12-using-variables/lesson.tres:37
+msgid "The code above rotates the character [code]4[/code] radians per second."
+msgstr "Výše uvedený kód otáčí postavu [code]4[/code] radiány za sekundu."
+
+#: course/lesson-12-using-variables/lesson.tres:38
+#: course/lesson-12-using-variables/lesson.tres:39
+msgid "It's how fast the character rotates."
+msgstr "Jde o to, jak rychle se postava otáčí."
+
+#: course/lesson-12-using-variables/lesson.tres:38
+msgid "It's how far the character moves in pixels."
+msgstr "Jde o to, jak daleko se postava pohybuje v pixelech."
+
+#: course/lesson-12-using-variables/lesson.tres:38
+msgid "It's how long the rotation takes."
+msgstr "Jde o to, jak dlouho trvá rotace."
+
+#: course/lesson-12-using-variables/lesson.tres:48
+msgid ""
+"We can guess what a number represents by looking at the function names, "
+"but it's harder to recall what this number does by quickly looking at the"
+" code.\n"
+"\n"
+"We've seen how different functions have their own names. Using these "
+"names communicates to developers what the functions do."
+msgstr ""
+"Při pohledu na názvy funkcí můžeme odhadnout, co číslo představuje, ale při "
+"rychlém pohledu na kód je těžší si vybavit, co toto číslo dělá.\n"
+"\n"
+"Viděli jsme, jak mají různé funkce svá vlastní jména. Používání těchto názvů "
+"sděluje vývojářům, co funkce dělají."
+
+#: course/lesson-12-using-variables/lesson.tres:70
+msgid ""
+"As we learned in lesson 8, we can also assign labels to numbers to help "
+"us remember what they do.\n"
+"\n"
+"We call these labels [i]variables[/i].\n"
+"\n"
+"[b]A variable is a label for a value we can save, change, and read "
+"later.[/b]\n"
+"\n"
+"Let's recap how to define a variable."
+msgstr ""
+"Jak jsme se dozvěděli v lekci 8, můžeme také číslům přiřadit štítky, které "
+"nám pomohou zapamatovat si, co dělají.\n"
+"\n"
+"Tyto popisky nazýváme [i]variables[/i] (proměnné).\n"
+"\n"
+"[b] Proměnná je popisek hodnoty, kterou můžeme uložit, změnit a přečíst "
+"později. [/b]\n"
+"\n"
+"Pojďme si zrekapitulovat, jak definovat proměnnou."
+
+#: course/lesson-12-using-variables/lesson.tres:96
+msgid ""
+"We improve the first example to make it clear what the number "
+"[code]4[/code] does."
+msgstr "Vylepšíme první příklad, aby bylo jasné, co dělá číslo [code]4[/code]."
+
+#: course/lesson-12-using-variables/lesson.tres:116
+msgid ""
+"Labeling a value makes the code easier for us to read now [i]and[/i] in "
+"the future."
+msgstr "Označení hodnoty nám usnadňuje čtení kódu nyní [i] a [/i] v budoucnu."
+
+#: course/lesson-12-using-variables/lesson.tres:124
+msgid "In the above example, which line defines the angular speed variable?"
+msgstr ""
+"Který řádek ve výše uvedeném příkladu definuje proměnnou pro úhlová rychlost?"
+
+#: course/lesson-12-using-variables/lesson.tres:127
+msgid ""
+"We create the [code]angular_speed[/code] variable, then assign it the "
+"value of [code]4[/code]."
+msgstr ""
+"Vytvoříme proměnnou [code]angular_speed[/code] a přiřadíme jí hodnotu "
+"[code]4[/code]."
+
+#: course/lesson-12-using-variables/lesson.tres:128
+#: course/lesson-12-using-variables/lesson.tres:129
+msgid "var angular_speed = 4"
+msgstr "var angular_speed = 4"
+
+#: course/lesson-12-using-variables/lesson.tres:128
+msgid "func _process(delta):"
+msgstr "func _process(delta):"
+
+#: course/lesson-12-using-variables/lesson.tres:128
+msgid "rotate(angular_speed * delta)"
+msgstr "rotate(angular_speed * delta)"
+
+#: course/lesson-12-using-variables/lesson.tres:138
+msgid ""
+"If we define variables outside of functions, we can re-use them in "
+"different functions.\n"
+"\n"
+"Because any function can use variables we define outside of them, we call"
+" these variables [b]script-wide[/b].\n"
+"\n"
+"Here we use the [code]angular_speed[/code] script-wide variable in both "
+"the [code]_process()[/code] function and the "
+"[code]set_angular_speed()[/code] function."
+msgstr ""
+"Pokud definujeme proměnné mimo funkce, můžeme je znovu použít v různých "
+"funkcích.\n"
+"\n"
+"Protože každá funkce může používat proměnné, které definujeme mimo ni, "
+"nazýváme tyto proměnné [b]script-wide[/b].\n"
+"\n"
+"Zde používáme proměnnou [code]angular_speed[/code] script-wide jak ve funkci "
+"[code]_process()[/code], tak ve funkci [code]set_angular_speed()[/code]."
+
+#: course/lesson-12-using-variables/lesson.tres:162
+msgid ""
+"We can also define variables inside of functions.\n"
+"\n"
+"We align the variable assignment by indenting to make it part of the "
+"function body. Make sure to create the variable before using it!\n"
+"\n"
+"If we define a variable inside of a function, only that function can use "
+"it."
+msgstr ""
+"Proměnné můžeme definovat i uvnitř funkcí.\n"
+"\n"
+"Přiřazení proměnné odsadíme tak, aby byla součástí těla funkce. Před "
+"použitím proměnné se ujistěte, že jste ji vytvořili (definovali s var)!\n"
+"\n"
+"Pokud definujeme proměnnou uvnitř funkce, může ji používat pouze tato funkce."
+
+#: course/lesson-12-using-variables/lesson.tres:186
+msgid ""
+"The [code]angular_speed[/code] variable only exists inside "
+"[code]_process()[/code], because we defined it there. The "
+"[code]set_angular_speed()[/code] function can't use it.\n"
+"\n"
+"Trying to use it there will result in an error.\n"
+"\n"
+"Here's what this error might look like."
+msgstr ""
+"Proměnná [code]angular_speed[/code] existuje pouze uvnitř "
+"[code]_process()[/code], protože jsme ji tam definovali. Funkce "
+"[code]set_angular_speed()[/code] ji nemůže použít.\n"
+"\n"
+"Pokus o její použití zde povede k chybě.\n"
+"\n"
+"Chyba může vypadat takto."
+
+#: course/lesson-12-using-variables/lesson.tres:208
+msgid "Where can we define variables?"
+msgstr "Kde můžeme definovat proměnné?"
+
+#: course/lesson-12-using-variables/lesson.tres:211
+msgid ""
+"Functions can use any variables defined outside of functions. These "
+"variables are [b]script-wide[/b].\n"
+"\n"
+"If we define a variable inside of a function, only that function can use "
+"it."
+msgstr ""
+"Funkce mohou používat libovolné proměnné definované mimo funkce. Tyto "
+"proměnné jsou [b]pro celý skript[/b] (script-wide).\n"
+"\n"
+"Pokud definujeme proměnnou uvnitř funkce, může ji používat pouze tato funkce."
+
+#: course/lesson-12-using-variables/lesson.tres:214
+#: course/lesson-12-using-variables/lesson.tres:215
+msgid "Outside of functions."
+msgstr "Mimo funkce."
+
+#: course/lesson-12-using-variables/lesson.tres:214
+#: course/lesson-12-using-variables/lesson.tres:215
+msgid "Inside of functions."
+msgstr "Uvnitř funkcí."
+
+#: course/lesson-12-using-variables/lesson.tres:224
+msgid ""
+"Variables are also great at grouping values that control how a character "
+"behaves.\n"
+"\n"
+"Grouping them in this way allows us to easily change them."
+msgstr ""
+"Proměnné jsou také skvělé pro seskupování hodnot, které řídí chování postavy."
+"\n"
+"\n"
+"Jejich seskupení nám umožňuje je snadno měnit."
+
+#: course/lesson-12-using-variables/lesson.tres:246
+msgid ""
+"In the following practices, we'll define variables and use them with some"
+" familiar functions to make our code more readable."
+msgstr ""
+"V následujících postupech budeme definovat proměnné a používat je s "
+"některými známými funkcemi, aby byl náš kód čitelnější."
+
+#: course/lesson-12-using-variables/lesson.tres:254
+msgid "Clarifying Code Using Variables"
+msgstr "Zpřehlednění kódu pomocí proměnných"
+
+#: course/lesson-12-using-variables/lesson.tres:255
+msgid ""
+"Let's give the [code]4[/code] here a label so we know what it does.\n"
+"\n"
+"Create a variable called [code]angular_speed[/code] outside of the "
+"[code]_process()[/code] function to make it script-wide. This allows us "
+"to use it in other functions too.\n"
+"\n"
+"Then, replace the [code]4[/code] with [code]angular_speed[/code]."
+msgstr ""
+"Dejme zde [code]4[/code] popisek, abychom věděli, co dělá.\n"
+"\n"
+"Vytvořte proměnnou s názvem [code]angular_speed[/code] mimo funkci "
+"[code]_process()[/code], aby byla pro celý skript (script-wide). To nám "
+"umožní používat ji i v jiných funkcích.\n"
+"\n"
+"Dále nahraďte [code]4[/code] proměnnou [code]angular_speed[/code]."
+
+#: course/lesson-12-using-variables/lesson.tres:269
+msgid ""
+"Using variables to store number values makes code easier to read. Tidy up"
+" this function by storing a value in a variable."
+msgstr ""
+"Používání proměnných k ukládání číselných hodnot usnadňuje čtení kódu. "
+"Uspořádejte tuto funkci uložením hodnoty do proměnné."
+
+#: course/lesson-12-using-variables/lesson.tres:274
+msgid "Fixing an Out of Scope Error"
+msgstr "Oprava chyby mimo rozsah(Out of Scope)"
+
+#: course/lesson-12-using-variables/lesson.tres:275
+msgid ""
+"There's something wrong with the code here. Can you see what it is?\n"
+"\n"
+"Run the code and read the error.\n"
+"\n"
+"Correct the code so it works as intended."
+msgstr ""
+"V kódu je něco špatně. Vidíte, co to je?\n"
+"\n"
+"Spusťte kód a přečtěte si chybu.\n"
+"\n"
+"Opravte kód tak, aby fungoval, jak má."
+
+#: course/lesson-12-using-variables/lesson.tres:293
+msgid "Uh oh! There's something wrong here. Can you fix it?"
+msgstr "Uh oh! Něco tu nehraje. Dokážete to opravit?"
+
+#: course/lesson-12-using-variables/lesson.tres:297
+msgid "Using Variables to Make Code Easier to Read"
+msgstr "Používání proměnných pro snazší čtení kódu"

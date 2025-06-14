@@ -1,0 +1,206 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-10-06 07:34+0200\n"
+"PO-Revision-Date: 2025-04-04 01:42+0000\n"
+"Last-Translator: MuryanBKS <muryanbks+github@gmail.com>\n"
+"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
+"projects/learn-gdscript-from-zero/lesson-9-adding-and-subtracting/zh_Hant/>\n"
+"Language: zh_Hant\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:14
+msgid ""
+"Our character in our game will have health by defining the [code]health[/"
+"code] variable. The higher the character's health, the further away the "
+"player is from losing the game.\n"
+"\n"
+"Health that changes adds tension to the game, especially if the player is "
+"fighting with low health! It's a resource that the player should manage "
+"carefully.\n"
+"\n"
+"The character's health might get low if an enemy attacks them or they fall "
+"into a hole.\n"
+"\n"
+"We can create a function to represent damage in these cases."
+msgstr ""
+"我們遊戲中的角色將會有生命值，這是通過定義 [code]health[/code] "
+"變數來實現的。角色的生命值越高，玩家就越不容易輸掉遊戲。\n"
+"\n"
+"變動的生命值會增加遊戲的緊張感，尤其是當玩家在生命值低時與敵人作戰！它是一個"
+"玩家需要小心管理的資源。\n"
+"\n"
+"當敵人攻擊角色或角色掉進洞裡時，角色的生命值可能會變低。\n"
+"\n"
+"我們可以創建一個函式來代表這些情況下的傷害。"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:40
+msgid ""
+"We pass the amount of damage the robot should take as a parameter.\n"
+"\n"
+"Line 2 subtracts [code]amount[/code] from [code]health[/code].\n"
+"\n"
+"Note the [code]-=[/code] syntax which achieves this. It's a shorthand we "
+"often use.\n"
+"\n"
+"You can also use a longer form. Both of these lines have the same effect. "
+"They both subtract the value of [code]amount[/code] from the [code]health[/"
+"code] variable:\n"
+"\n"
+"[code]health -= amount[/code]\n"
+"[code]health = health - amount[/code]\n"
+"\n"
+"You may notice that the health of the robot can go below [code]0[/code]. "
+"We'll see how to manage this in a future lesson using [i]conditions[/i]."
+msgstr ""
+"我們將機器人應該承受的傷害量作為參數傳遞。\n"
+"\n"
+"第 2 行將 [code]health[/code] 減掉 [code]amount[/code] 。\n"
+"\n"
+"注意 [code]-=[/code] 的語法，它實現了這個操作。這是我們經常使用的簡寫。\n"
+"\n"
+"你也可以使用較長的寫法，這兩行程式碼效果相同。它們都將 [code]amount[/code] "
+"的值從 [code]health[/code] 變數中減去：\n"
+"\n"
+"[code]health -= amount[/code]\n"
+"[code]health = health - amount[/code]\n"
+"\n"
+"你可能會注意到，機器人的生命值可以低於 [code]0[/"
+"code]。我們會在未來的課程中學習如何使用[b]條件[/b]來管理這個情況。"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:61
+msgid ""
+"The robot's health could increase instead if the player picks up an item "
+"that heals them, or if they use a healing item."
+msgstr "如果玩家撿起一個治療物品，或者使用治療道具，機器人的生命值可能會增加。"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:81
+msgid ""
+"Here again, the health can go beyond [code]100[/code].\n"
+"\n"
+"Also, once more, the short line [code]health += amount[/code] is equivalent "
+"to the longer form [code]health = health + amount[/code]."
+msgstr ""
+"同樣地，生命值可能會超過 [code]100[/code]。\n"
+"\n"
+"此外，簡寫的 [code]health += amount[/code] 等同於較長的寫法 [code]health = "
+"health + amount[/code]。"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:91
+msgid "Which of these would increase the health of the robot?"
+msgstr "哪一個選項會增加機器人的生命值？"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:94
+msgid ""
+"Both of these lines increase the [code]health[/code] of the robot by "
+"[code]amount[/code].\n"
+"[code]\n"
+"health += amount\n"
+"health = health + amount\n"
+"[/code]"
+msgstr ""
+"這兩行程式碼都會將機器人的 [code]health[/code] 增加 [code]amount[/code]：\n"
+"[code]\n"
+"health += amount\n"
+"health = health + amount\n"
+"[/code]"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+msgid "health -= amount"
+msgstr "health -= amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+#: course/lesson-9-adding-and-subtracting/lesson.tres:100
+msgid "health += amount"
+msgstr "health += amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+#: course/lesson-9-adding-and-subtracting/lesson.tres:100
+msgid "health = health + amount"
+msgstr "health = health + amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:99
+msgid "health = health - amount"
+msgstr "health = health - amount"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:109
+msgid ""
+"In the following practices, you'll code the [code]take_damage()[/code] and "
+"[code]heal()[/code] functions so the robot's health can decrease and "
+"increase."
+msgstr ""
+"在接下來的練習中，你將編寫 [code]take_damage()[/code] 和 [code]heal()[/code] "
+"函式，讓機器人的生命值能夠減少和增加。"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:117
+msgid "Damaging the Robot"
+msgstr "讓機器人受傷"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:118
+msgid ""
+"In our game, the main character has a certain amount of [code]health[/code]. "
+"When it gets hit, the health should go down by a varying [code]amount[/code] "
+"of damage.\n"
+"\n"
+"Add to the [code]take_damage()[/code] function so it subtracts the "
+"[code]amount[/code] to the predefined [code]health[/code] variable.\n"
+"\n"
+"The robot starts with 100 health and will take 50 damage."
+msgstr ""
+"在我們的遊戲中，主角擁有一定的 [code]health[/code]。當它受到攻擊時，"
+"生命值應該根據不同的 [code]amount[/code] 受到傷害而減少。\n"
+"\n"
+"請在 [code]take_damage()[/code] 函式中加入程式碼，使其從預先定義的 [code]"
+"health[/code] 變數中減去 [code]amount[/code]。\n"
+"\n"
+"機器人起始生命值 100，並將受到 50 點傷害。"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:134
+msgid "Learn how to deal damage to entities like our robot."
+msgstr "學習如何對機器人等實體造成傷害的方法。"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:139
+msgid "Healing the Robot"
+msgstr "治療這個機器人"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:140
+msgid ""
+"It's time to heal the robot up to full health!\n"
+"\n"
+"Write a function called [code]heal()[/code] that takes [code]amount[/code] "
+"as a parameter.\n"
+"\n"
+"The function should add [code]amount[/code] to [code]health[/code].\n"
+"\n"
+"The robot starts with 50 health and will heal 50 to get it up to 100."
+msgstr ""
+"是時候讓機器人回復到滿血狀態了！\n"
+"\n"
+"請撰寫一個名為 [code]heal()[/code] 的函式，並讓它接受 [code]amount[/code] "
+"作為參數。\n"
+"\n"
+"該函式應該將 [code]amount[/code] 加到 [code]health[/code] 上。\n"
+"\n"
+"機器人起始生命值為 50，並將恢復 50 點，使其回復至 100。"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:157
+msgid ""
+"Our robot needs healing after that practice! Create a function to heal it "
+"back to full health."
+msgstr "我們的機器人在剛才的練習後需要治療！請創建一個函式來讓它回復到滿血狀態。"
+
+#: course/lesson-9-adding-and-subtracting/lesson.tres:161
+msgid "Adding and Subtracting"
+msgstr "加減法"

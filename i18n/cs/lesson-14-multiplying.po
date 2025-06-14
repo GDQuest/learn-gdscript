@@ -1,0 +1,316 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"PO-Revision-Date: 2022-06-16 09:17+0000\n"
+"Last-Translator: Roman Rous <roman.rous@atlas.cz>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-14-multiplying/cs/>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.13-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-14-multiplying/lesson.tres:14
+msgid ""
+"Our robot's health is always between [code]0[/code] and [code]100[/code].\n"
+"\n"
+"But as our robot fights, we want to increase its strength and toughness.\n"
+"\n"
+"When a character levels up, it might deal more damage to enemies, gain new "
+"abilities or, in our case, gain more health."
+msgstr ""
+"Zdraví našeho robota je vždy mezi [code]0[/code] a [code]100[/code].\n"
+"\n"
+"Ale jak náš robot bojuje, chceme zvýšit jeho pevnost a houževnatost.\n"
+"\n"
+"Když se postava dostane na vyšší úroveň, může způsobit více poškození "
+"nepřátelům, získat nové schopnosti nebo v našem případě získat více zdraví."
+
+#: course/lesson-14-multiplying/lesson.tres:28
+msgid ""
+"We define a [code]level[/code] variable to keep track of the level of the "
+"robot. It starts at level one.\n"
+"\n"
+"When the robot has defeated enough enemies, we call the [code]level_up()[/"
+"code] function to increment the robot's level."
+msgstr ""
+"Definujeme proměnnou [code]úroveň[/code] pro sledování úrovně robota. Začíná "
+"na úrovni jedna.\n"
+"\n"
+"Když robot porazil dostatek nepřátel, zavoláme funkci [code]level_up()[/"
+"code] ke zvýšení úrovně robota."
+
+#: course/lesson-14-multiplying/lesson.tres:50
+msgid ""
+"As we briefly saw in the last lesson, our robot could have a range of "
+"variables that could increase when it levels up."
+msgstr ""
+"Jak jsme krátce viděli v minulé lekci, náš robot může mít řadu proměnných, "
+"které se mohou zvýšit, když se zvýší jeho úroveň."
+
+#: course/lesson-14-multiplying/lesson.tres:70
+#, fuzzy
+msgid ""
+"In this lesson, we'll just focus on increasing the robot's [code]max_health[/"
+"code].\n"
+"\n"
+"The variable [code]max_health[/code] is the maximum amount the robot's "
+"[code]health[/code] can be. We change our [code]heal()[/code] function to "
+"use this variable."
+msgstr ""
+"V této lekci se zaměříme pouze na zvýšení [code]max_health[/code] robota.\n"
+"\n"
+"Proměnná [code]max_health[/code] je maximální hodnota [code]zdraví [/code] "
+"robota. Změníme naši funkci [code]take_damage()[/code] tak, aby používala "
+"tuto proměnnou."
+
+#: course/lesson-14-multiplying/lesson.tres:92
+msgid ""
+"We could add [code]5[/code] to the [code]max_health[/code] every time the "
+"robot levels up."
+msgstr ""
+"Mohli bychom přidat [code]5[/code] k [code]max_health[/code] při každém "
+"zvýšení úrovně robota."
+
+#: course/lesson-14-multiplying/lesson.tres:112
+msgid ""
+"This would increase [code]max_health[/code] the same amount every time.\n"
+"\n"
+"If we graphed [code]max_health[/code], it'd look something like this."
+msgstr ""
+"Tím by se [code]max_health[/code] pokaždé zvýšilo o stejnou hodnotu.\n"
+"\n"
+"Kdybychom do grafu vynesli [code]max_health[/code], vypadalo by to asi takto."
+
+#: course/lesson-14-multiplying/lesson.tres:134
+msgid ""
+"This growth is [b]linear[/b].\n"
+"\n"
+"In our case, we want a feeling of more and more power as the robot levels "
+"up.\n"
+"\n"
+"We want a graph like this."
+msgstr ""
+"Tento růst je [b]lineární[/b].\n"
+"\n"
+"V našem případě chceme mít pocit stále větší síly s tím, jak robot roste na "
+"vyšší úroveň.\n"
+"\n"
+"Chceme takovýto graf."
+
+#: course/lesson-14-multiplying/lesson.tres:158
+msgid ""
+"This growth is [b]exponential[/b].\n"
+"\n"
+"With each level, more [code]max_health[/code] is added than the previous "
+"level up.\n"
+"\n"
+"To get the exponential growth, we multiply the [code]max_health[/code] by an "
+"amount greater than [code]1[/code] each time the robot levels up.\n"
+"\n"
+"To multiply values together, we use [code]*[/code]."
+msgstr ""
+"Tento růst je [b]exponenciální[/b].\n"
+"\n"
+"S každou úrovní přibývá více [code]max_zdraví[/code] než s předchozí úrovní "
+"nahoru.\n"
+"\n"
+"Exponenciální růst získáme tak, že při každém zvýšení úrovně robota "
+"vynásobíme [code]max_health[/code] částkou větší než [code]1[/code].\n"
+"\n"
+"Pro vynásobení hodnot dohromady použijeme [code]*[/code]."
+
+#: course/lesson-14-multiplying/lesson.tres:172
+msgid "What is the value of damage?"
+msgstr "Jaká je hodnota škody?"
+
+#: course/lesson-14-multiplying/lesson.tres:173
+msgid ""
+"[code]\n"
+"var level = 5\n"
+"var power = 3\n"
+"\n"
+"func calculate_damage():\n"
+"\tvar damage = power * level\n"
+"[/code]"
+msgstr ""
+"[code]\n"
+"var level = 5\n"
+"var power = 3\n"
+"\n"
+"func calculate_damage():\n"
+"\tvar damage = power * level\n"
+"[/code]"
+
+#: course/lesson-14-multiplying/lesson.tres:181
+msgid ""
+"We multiply [code]power[/code] by [code]level[/code] using [code]*[/code] to "
+"get the result of [code]15[/code]."
+msgstr ""
+"Vynásobíme [code]power[/code] úrovní [code]level[/code] pomocí [code]*[/"
+"code], abychom získali výsledek [code]15[/code]."
+
+#: course/lesson-14-multiplying/lesson.tres:182
+#: course/lesson-14-multiplying/lesson.tres:183
+msgid "15"
+msgstr "15"
+
+#: course/lesson-14-multiplying/lesson.tres:182
+msgid "9"
+msgstr "9"
+
+#: course/lesson-14-multiplying/lesson.tres:182
+msgid "10"
+msgstr "10"
+
+#: course/lesson-14-multiplying/lesson.tres:192
+msgid ""
+"We can use [code]*=[/code] in the same way as [code]-=[/code] and [code]+=[/"
+"code]."
+msgstr ""
+"Stejně jako [code]*=[/code] můžeme použít [code]-=[/code] a [code]+=[/code]."
+
+#: course/lesson-14-multiplying/lesson.tres:200
+msgid "What is the value of damage now?"
+msgstr "Jaká je nyní hodnota škody?"
+
+#: course/lesson-14-multiplying/lesson.tres:201
+msgid ""
+"[code]\n"
+"var level = 5\n"
+"var power = 3\n"
+"\n"
+"func calculate_damage():\n"
+"\tvar damage = power * level\n"
+"\tdamage *= 2\n"
+"[/code]"
+msgstr ""
+"[code]\n"
+"var level = 5\n"
+"var power = 3\n"
+"\n"
+"func calculate_damage():\n"
+"\tvar damage = power * level\n"
+"\tdamage *= 2\n"
+"[/code]"
+
+#: course/lesson-14-multiplying/lesson.tres:210
+msgid ""
+"The value of [code]damage[/code] starts as [code]15[/code].\n"
+"\n"
+"Then, [code]damage *= 2[/code] multiplies it by [code]2[/code] to get "
+"[code]30[/code]."
+msgstr ""
+"Hodnota [code]damage[/code] začíná jako [code]15[/code].\n"
+"\n"
+"Pak pomocí [code]damage *= 2[/code] vynásobíme [code]2[/code] a získáme "
+"[code]30[/code]."
+
+#: course/lesson-14-multiplying/lesson.tres:213
+#: course/lesson-14-multiplying/lesson.tres:214
+msgid "30"
+msgstr "30"
+
+#: course/lesson-14-multiplying/lesson.tres:213
+msgid "13"
+msgstr "13"
+
+#: course/lesson-14-multiplying/lesson.tres:213
+msgid "25"
+msgstr "25"
+
+#: course/lesson-14-multiplying/lesson.tres:223
+msgid ""
+"Let's level up our robot and add exponential growth to [code]max_health[/"
+"code]."
+msgstr ""
+"Zvyšme úroveň našeho robota a přidejme exponenciální růst do "
+"[code]max_health[/code]."
+
+#: course/lesson-14-multiplying/lesson.tres:243
+msgid ""
+"In the practices, you'll increase the robot's [code]max_health[/code] and "
+"add a special ability to our robot to make it extra tough at high levels."
+msgstr ""
+"Během cvičení zvýšíte [code]max_health[/code] robota a přidáte našemu "
+"robotovi speciální schopnost, aby byl na vysokých úrovních mimořádně odolný."
+
+#: course/lesson-14-multiplying/lesson.tres:251
+msgid "Increasing maximum health exponentially"
+msgstr "Exponenciální zvyšování maximálního zdraví"
+
+#: course/lesson-14-multiplying/lesson.tres:252
+msgid ""
+"Let's make the robot stronger when it levels up.\n"
+"\n"
+"Add to the [code]level_up()[/code] function so it does the following:\n"
+"\n"
+"- Increases [code]level[/code] by one.\n"
+"- Increases [code]max_health[/code] by 10%."
+msgstr ""
+"Udělejme robota silnějšího, až se dostane na vyšší úroveň.\n"
+"\n"
+"Přidejte do funkce [code]level_up()[/code] instrukce, aby provedla:\n"
+"\n"
+"- Zvýšení [code]úroveň[/code] o jedna.\n"
+"- Zvýšení [code]max_health[/code] o 10 %."
+
+#: course/lesson-14-multiplying/lesson.tres:270
+msgid ""
+"We want our robot to increase in strength as it levels up. Let's increase "
+"its health exponentially!"
+msgstr ""
+"Chceme, aby se síla našeho robota zvyšovala s tím, jak se bude zvyšovat jeho "
+"úroveň. Zvyšme jeho zdraví exponenciálně!"
+
+#: course/lesson-14-multiplying/lesson.tres:275
+msgid "Reducing damage at higher levels"
+msgstr "Snížení poškození na vyšších úrovních"
+
+#: course/lesson-14-multiplying/lesson.tres:276
+msgid ""
+"When our robot's [code]level[/code] is [code]3[/code] or more, we want it to "
+"take a lot less damage.\n"
+"\n"
+"Add to the [code]take_damage()[/code] function so the following happens:\n"
+"\n"
+"- [code]if[/code] the robot's [code]level[/code] is greater than [code]2[/"
+"code], reduce the damage [code]amount[/code] by 50%\n"
+"\n"
+"The robot is level 3. An enemy is going to attack for 10 damage. This damage "
+"should reduce to 5."
+msgstr ""
+"Když je náš robot[code]level[/code] [code]3[/code] nebo vyšší, chceme, aby "
+"utrpěl mnohem menší poškození.\n"
+"\n"
+"Přidejte instrukce do funkce [code]take_damage()[/code], aby se stalo "
+"následující:\n"
+"\n"
+"- [code]if[/code] je [code]level[code] robota větší než [code]2 [/code], "
+"snížíme [code]amount[/code](hodnotu) poškození o 50%.\n"
+"\n"
+"Robot je na úrovni 3. Nepřítel zaútočí za 10 poškození. Toto poškození by se "
+"mělo snížit na 5."
+
+#: course/lesson-14-multiplying/lesson.tres:299
+msgid ""
+"At higher levels, we want our robot to be super tough and take even less "
+"damage!"
+msgstr ""
+"Na vyšších úrovních chceme, aby byl náš robot super odolný a utrpěl ještě "
+"menší poškození!"
+
+#: course/lesson-14-multiplying/lesson.tres:303
+msgid "Multiplying"
+msgstr "Násobení"

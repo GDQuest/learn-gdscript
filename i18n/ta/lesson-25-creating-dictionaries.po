@@ -1,0 +1,315 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2024 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2024-12-12 14:39+0100\n"
+"PO-Revision-Date: 2025-01-11 17:54+0000\n"
+"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-25-creating-dictionaries/ta/>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10-dev\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:14
+msgid ""
+"In the last lesson, we used an array to represent a player's inventory.\n"
+"\n"
+"With just an array of item names, though, we can't easily keep track of "
+"the amount of each item.\n"
+"\n"
+"Instead, we can bundle the item names and amounts into a single "
+"[i]dictionary[/i].\n"
+"\n"
+"A dictionary is a data structure that allows you to map pairs of values. "
+"In the pair, we call the first value a [i]key[/i] as we use it to access "
+"the second.\n"
+"\n"
+"In other words, a dictionary has a list of [i]keys[/i], and each key "
+"points to a [i]value[/i].\n"
+"\n"
+"To define a dictionary, we use curly brackets. A colon separates each key"
+" and its value. A comma separates each key and value pair."
+msgstr ""
+"கடைசி பாடத்தில், ஒரு வீரரின் சரக்குகளை குறிக்க ஒரு வரிசையைப் பயன்படுத்தினோம்.\n"
+"\n"
+" உருப்படி பெயர்களின் வரிசையுடன், ஒவ்வொரு பொருளின் அளவையும் நாம் எளிதாகக் கண்காணிக்க "
+"முடியாது.\n"
+"\n"
+" அதற்கு பதிலாக, நாம் உருப்படி பெயர்களையும் அளவுகளையும் ஒற்றை [i] அகராதியாக மாற்றலாம் "
+"[/i].\n"
+"\n"
+" ஒரு அகராதி என்பது ஒரு தரவு கட்டமைப்பாகும், இது சோடிகளின் மதிப்புகளை வரைபட "
+"அனுமதிக்கிறது. இந்த சோடியில், முதல் மதிப்பை [i] விசையை [/i] என்று அழைக்கிறோம்.\n"
+"\n"
+" வேறு வார்த்தைகளில் கூறுவதானால், ஒரு அகராதியில் [i] விசைகள் [/i] இன் பட்டியல் உள்ளது, "
+"மேலும் ஒவ்வொரு முக்கியமும் ஒரு [i] மதிப்பை சுட்டிக்காட்டுகிறது [/i].\n"
+"\n"
+" ஒரு அகராதியை வரையறுக்க, நாங்கள் சுருள் அடைப்புக்குறிகளைப் பயன்படுத்துகிறோம். ஒரு "
+"பெருங்குடல் ஒவ்வொரு விசையையும் அதன் மதிப்பையும் பிரிக்கிறது. ஒரு கமா ஒவ்வொரு விசை "
+"மற்றும் மதிப்பு சோடியையும் பிரிக்கிறது."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:42
+msgid "Dictionaries can hold any values"
+msgstr "அகராதிகள் எந்த மதிப்புகளையும் வைத்திருக்க முடியும்"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:44
+msgid ""
+"Dictionaries can map about any value to any other value.\n"
+"\n"
+"For example, we can use the name of an item as a key and the amount as "
+"the corresponding value. This makes dictionaries excellent for keeping "
+"track of a player's inventory."
+msgstr ""
+"அகராதிகள் வேறு எந்த மதிப்புக்கும் எந்த மதிப்பையும் வரைபடமாக்கலாம்.\n"
+"\n"
+" எடுத்துக்காட்டாக, ஒரு பொருளின் பெயரையும் ஒரு விசையாகவும், தொகையை தொடர்புடைய "
+"மதிப்பாகவும் பயன்படுத்தலாம். இது ஒரு வீரரின் சரக்குகளை கண்காணிக்க அகராதிகளை "
+"சிறந்ததாக்குகிறது."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:66
+msgid ""
+"Here we matched the name (a string) to the amount (a number). But a key "
+"could be a string, a number, or even a vector! \n"
+"\n"
+"Although we can have all of these different keys, keep in mind that every"
+" key has to be [i]unique[/i]. That means we [i]couldn't[/i] have a "
+"dictionary like the following."
+msgstr ""
+"இங்கே நாங்கள் பெயரை (ஒரு சரம்) தொகையுடன் (ஒரு எண்) பொருத்தினோம். ஆனால் ஒரு விசை ஒரு "
+"சரம், எண் அல்லது ஒரு திசையன் கூட இருக்கலாம்!\n"
+"\n"
+" இந்த வெவ்வேறு விசைகள் அனைத்தையும் நாம் கொண்டிருக்க முடியும் என்றாலும், ஒவ்வொரு விசையும் "
+"[i] தனித்துவமாக இருக்க வேண்டும் என்பதை நினைவில் கொள்ளுங்கள் [/i]. அதாவது, "
+"பின்வருவனவற்றைப் போன்ற ஒரு அகராதி எங்களால் [/i] இருக்க முடியவில்லை."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:88
+msgid "We would get the following error."
+msgstr "பின்வரும் பிழையைப் பெறுவோம்."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:106
+msgid "In the above example, which key would cause an error?"
+msgstr "மேலே உள்ள எடுத்துக்காட்டில், எந்த விசை பிழையை ஏற்படுத்தும்?"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:109
+msgid ""
+"The key [code]\"healing heart\"[/code] appears [b]twice[/b] in the "
+"dictionary.\n"
+"\n"
+"In the above example, Godot wouldn't know whether to return "
+"[code]3[/code] or [code]8[/code] when using [code]inventory[\"healing "
+"heart\"][/code]. This is why keys need to be unique."
+msgstr ""
+"முக்கிய [குறியீடு] \"குணப்படுத்தும் இதயம்\" [/குறியீடு] அகராதியில் [b] [/b] தோன்றும்.\n"
+"\n"
+" மேலே உள்ள எடுத்துக்காட்டில், [குறியீடு] 3 [/குறியீடு] அல்லது [குறியீடு] 8 [/குறியீடு] "
+"ஐ [குறியீடு] சரக்கு [\"குணப்படுத்தும் இதயம்\"] [/குறியீடு] ஐப் பயன்படுத்தும்போது கோடோட் "
+"அறிய மாட்டார். இதனால்தான் விசைகள் தனித்துவமாக இருக்க வேண்டும்."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:112
+#: course/lesson-25-creating-dictionaries/lesson.tres:113
+msgid "\"healing heart\""
+msgstr "\"குணப்படுத்தும் இதயம்\""
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:112
+msgid "\"shield\""
+msgstr "\"கவசம்\""
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:112
+msgid "\"sword\""
+msgstr "\"வாள்\""
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:120
+msgid "How dictionaries work under the hood"
+msgstr "அகராதிகள் பேட்டைக்கு அடியில் எவ்வாறு செயல்படுகின்றன"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:122
+msgid ""
+"Dictionaries are also called mappings or [i]associative arrays[/i]. Under"
+" the hood, they use arrays and several functions to efficiently store and"
+" retrieve values across arrays.\n"
+"\n"
+"Precisely, dictionaries use a [i]hashing algorithm[/i]. Hashing "
+"algorithms convert one value into another.\n"
+"\n"
+"In this case, hashing consists of converting a given key into a unique "
+"whole number. The dictionary then uses that number as an array's index!\n"
+"\n"
+"That's how a dictionary works: when you give it a key, it converts it "
+"into a unique index and uses that index to retrieve the corresponding "
+"value in the computer's memory.\n"
+"\n"
+"That's also why you can't have the same key twice: it would map to the "
+"same array index, causing you to overwrite an existing value."
+msgstr ""
+"அகராதிகள் மேப்பிங்ச் அல்லது [i] துணை வரிசைகள் [/i] என்றும் அழைக்கப்படுகின்றன. ஊட்டின் கீழ், "
+"வரிசைகள் முழுவதும் மதிப்புகளை திறம்பட சேமித்து மீட்டெடுக்க வரிசைகள் மற்றும் பல "
+"செயல்பாடுகளைப் பயன்படுத்துகின்றன.\n"
+"\n"
+" துல்லியமாக, அகராதிகள் ஒரு [i] ஆசிங் வழிமுறையைப் பயன்படுத்துகின்றன [/i]. ஆசிங் "
+"வழிமுறைகள் ஒரு மதிப்பை மற்றொன்றாக மாற்றுகின்றன.\n"
+"\n"
+" இந்த விசயத்தில், ஆசிங் கொடுக்கப்பட்ட விசையை ஒரு தனித்துவமான முழு எண்ணாக மாற்றுவதைக் "
+"கொண்டுள்ளது. அகராதி பின்னர் அந்த எண்ணை ஒரு வரிசையின் குறியீடாகப் பயன்படுத்துகிறது!\n"
+"\n"
+" ஒரு அகராதி எவ்வாறு செயல்படுகிறது: நீங்கள் அதை ஒரு விசையை கொடுக்கும்போது, அதை ஒரு "
+"தனித்துவமான குறியீடாக மாற்றி, கணினியின் நினைவகத்தில் தொடர்புடைய மதிப்பை மீட்டெடுக்க அந்த "
+"குறியீட்டைப் பயன்படுத்துகிறது.\n"
+"\n"
+" அதனால்தான் நீங்கள் ஒரே விசையை இரண்டு முறை வைத்திருக்க முடியாது: இது அதே வரிசை "
+"குறியீட்டில் வரைபடமாக்கும், இதனால் ஏற்கனவே இருக்கும் மதிப்பை மேலெழுதும்."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:138
+msgid "Accessing values"
+msgstr "மதிப்புகளை அணுகும்"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:140
+msgid ""
+"We access the value of keys by writing the dictionary name, with the key "
+"in between square brackets."
+msgstr ""
+"சதுர அடைப்புக்குறிக்கு இடையில் உள்ள சாவியுடன் அகராதி பெயரை எழுதுவதன் மூலம் விசைகளின் "
+"மதிப்பை அணுகுவோம்."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:168
+msgid "How would you access how many gems the player has?"
+msgstr "வீரருக்கு எத்தனை ரத்தினங்கள் உள்ளன என்பதை நீங்கள் எவ்வாறு அணுகுவீர்கள்?"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:171
+msgid ""
+"We need to make sure the key is the same as we defined in the dictionary."
+"\n"
+"\n"
+"In our case, [code]var item_count = inventory[\"gems\"][/code] is correct."
+msgstr ""
+"அகராதியில் நாம் வரையறுத்துள்ளதைப் போலவே முக்கியமானது என்பதை உறுதிப்படுத்த வேண்டும்.\n"
+"\n"
+" எங்கள் விசயத்தில், [குறியீடு] var item_count = சரக்கு [\"ரத்தினங்கள்\"] [/குறியீடு] "
+"சரியானது."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:174
+msgid "var item_count = inventory[\"gem\"]"
+msgstr "var item_count = சரக்கு [\"GEM\"]"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:174
+#: course/lesson-25-creating-dictionaries/lesson.tres:175
+msgid "var item_count = inventory[\"gems\"]"
+msgstr "var item_count = சரக்கு [\"ரத்தினங்கள்\"]"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:174
+msgid "var item_count = inventory[\"sword\"]"
+msgstr "var item_count = சரக்கு [\"வாள்\"]"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:182
+msgid "Changing values"
+msgstr "மதிப்புகளை மாற்றுதல்"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:184
+msgid ""
+"We can also change values directly, which is useful in our case for "
+"adding or removing items from the player's inventory."
+msgstr ""
+"மதிப்புகளை நேரடியாக மாற்றலாம், இது பிளேயரின் சரக்குகளிலிருந்து உருப்படிகளைச் சேர்ப்பது "
+"அல்லது அகற்றுவதற்கு எங்கள் விசயத்தில் பயனுள்ளதாக இருக்கும்."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:214
+msgid ""
+"In the following practices, we'll use a dictionary to create a player "
+"inventory and create a function to change the value of items."
+msgstr ""
+"பின்வரும் நடைமுறைகளில், ஒரு பிளேயர் சரக்குகளை உருவாக்க மற்றும் உருப்படிகளின் மதிப்பை மாற்"
+"ற ஒரு செயல்பாட்டை உருவாக்க ஒரு அகராதியைப் பயன்படுத்துவோம்."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:222
+msgid "Creating an inventory using a dictionary"
+msgstr "அகராதியைப் பயன்படுத்தி ஒரு சரக்குகளை உருவாக்குதல்"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:223
+msgid ""
+"Let's give some items to the player.\n"
+"\n"
+"We use a dictionary for the player's inventory. We defined the "
+"[code]inventory[/code] variable for you, but it contains no items yet.\n"
+"\n"
+"Give the player the following items by adding the correct keys and values"
+" to the dictionary:\n"
+"\n"
+"- Three \"healing heart\".\n"
+"- Nine \"gems\".\n"
+"- One \"sword\".\n"
+"\n"
+"The keys should be text strings, and the values whole numbers."
+msgstr ""
+"பிளேயருக்கு சில பொருட்களைக் கொடுப்போம்.\n"
+"\n"
+" வீரரின் சரக்குகளுக்கு ஒரு அகராதியைப் பயன்படுத்துகிறோம். உங்களுக்கான [குறியீடு] சரக்கு "
+"[/குறியீடு] மாறியை நாங்கள் வரையறுத்துள்ளோம், ஆனால் அதில் இதுவரை எந்த உருப்படிகளும் இல்லை."
+"\n"
+"\n"
+" அகராதியில் சரியான விசைகள் மற்றும் மதிப்புகளைச் சேர்ப்பதன் மூலம் பிளேயருக்கு பின்வரும் "
+"உருப்படிகளைக் கொடுங்கள்:\n"
+"\n"
+" - மூன்று \"குணப்படுத்தும் இதயம்\".\n"
+" - ஒன்பது \"ரத்தினங்கள்\".\n"
+" - ஒரு \"வாள்\".\n"
+"\n"
+" விசைகள் உரை சரங்களாகவும், மதிப்புகள் முழு எண்களாகவும் இருக்க வேண்டும்."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:244
+msgid ""
+"Collecting items is fun, but we need a good way to store them. Write a "
+"dictionary to display the player's items."
+msgstr ""
+"பொருட்களை சேகரிப்பது வேடிக்கையானது, ஆனால் அவற்றை சேமிக்க எங்களுக்கு ஒரு நல்ல வழி தேவை"
+". பிளேயரின் உருப்படிகளைக் காட்ட ஒரு அகராதியை எழுதுங்கள்."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:249
+msgid "Increasing item counts"
+msgstr "உருப்படி எண்ணிக்கையை அதிகரிக்கும்"
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:250
+msgid ""
+"We want to change the item counts in the player's inventory whenever the "
+"player picks up or uses an item.\n"
+"\n"
+"We've started the [code]add_item()[/code] function for you.\n"
+"\n"
+"The [code]inventory[/code] dictionary should use the "
+"[code]item_name[/code] parameter as the key to access its values, and we "
+"should increase the value by [code]amount[/code].\n"
+"\n"
+"To test this practice, we'll use your [code]add_item()[/code] function to"
+" increase the item count of Healing Heart, Gems, and Sword."
+msgstr ""
+"வீரர் எடுக்கும் போதெல்லாம் அல்லது ஒரு பொருளைப் பயன்படுத்தும்போதெல்லாம் பிளேயரின் சரக்குகளில் "
+"உள்ள உருப்படி எண்ணிக்கையை மாற்ற விரும்புகிறோம்.\n"
+"\n"
+" உங்களுக்கான [குறியீடு] add_item () [/குறியீடு] செயல்பாட்டை நாங்கள் தொடங்கினோம்.\n"
+"\n"
+" .\n"
+"\n"
+" இந்த நடைமுறையை சோதிக்க, குணப்படுத்தும் இதயம், ரத்தினங்கள் மற்றும் வாள் ஆகியவற்றின் உருப்படி"
+" எண்ணிக்கையை அதிகரிக்க உங்கள் [குறியீடு] add_item () [/குறியீடு] செயல்பாட்டைப் "
+"பயன்படுத்துவோம்."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:266
+msgid ""
+"The player might walk over a pick-up or find something in a chest, so we "
+"need a way to change the item counts in our inventory."
+msgstr ""
+"வீரர் ஒரு பிக்-அப் மீது நடக்கலாம் அல்லது மார்பில் ஏதாவது ஒன்றைக் காணலாம், எனவே எங்கள் "
+"சரக்குகளில் உள்ள உருப்படி எண்ணிக்கையை மாற்ற எங்களுக்கு ஒரு வழி தேவை."
+
+#: course/lesson-25-creating-dictionaries/lesson.tres:270
+msgid "Creating Dictionaries"
+msgstr "அகராதிகளை உருவாக்குதல்"

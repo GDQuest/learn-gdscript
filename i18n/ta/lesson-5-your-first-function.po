@@ -1,0 +1,415 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2024 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2024-12-12 14:39+0100\n"
+"PO-Revision-Date: 2025-01-11 17:54+0000\n"
+"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-5-your-first-function/ta/>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10-dev\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: course/lesson-5-your-first-function/lesson.tres:14
+msgid ""
+"So far, we have called existing functions that other developers wrote.\n"
+"\n"
+"In this lesson, we'll talk more about what functions are and see some "
+"examples. Then, you will learn how to define your own functions."
+msgstr ""
+"இதுவரை, மற்ற உருவாக்குபவர்கள் எழுதிய தற்போதைய செயல்பாடுகளை நாங்கள் அழைத்தோம்.\n"
+"\n"
+" இந்த பாடத்தில், என்ன செயல்பாடுகள் பற்றி மேலும் பேசுவோம், சில எடுத்துக்காட்டுகளைப் பார்ப்போம்"
+". பின்னர், உங்கள் சொந்த செயல்பாடுகளை எவ்வாறு வரையறுப்பது என்பதை நீங்கள் கற்றுக் கொள்வீர்கள்."
+
+#: course/lesson-5-your-first-function/lesson.tres:24
+msgid "Functions are named sequences of instructions"
+msgstr "செயல்பாடுகள் அறிவுறுத்தல்களின் வரிசைகளுக்கு பெயரிடப்பட்டுள்ளன"
+
+#: course/lesson-5-your-first-function/lesson.tres:26
+msgid ""
+"Functions are [i]sequences of instructions[/i] we give a name. We call "
+"that name an [i]identifier[/i].\n"
+"\n"
+"Using the identifier, we can get the computer to execute all the "
+"instructions inside the function as many times as we need. This is what a"
+" [i]function call[/i] does."
+msgstr ""
+"செயல்பாடுகள் [i] வழிமுறைகளின் காட்சிகள் [/i] நாங்கள் ஒரு பெயரைக் கொடுக்கிறோம். நாங்கள் அந்"
+"த பெயரை ஒரு [i] அடையாளங்காட்டி [/i] என்று அழைக்கிறோம்.\n"
+"\n"
+" அடையாளங்காட்டியைப் பயன்படுத்தி, செயல்பாட்டிற்குள் உள்ள அனைத்து வழிமுறைகளையும் நமக்குத் "
+"தேவையான பல மடங்கு செயல்படுத்த கணினியைப் பெறலாம். இதைத்தான் ஒரு [i] செயல்பாட்டு அழைப்பு "
+"[/i] செய்கிறது."
+
+#: course/lesson-5-your-first-function/lesson.tres:36
+msgid "Learn more about identifiers"
+msgstr "அடையாளங்காட்டிகளைப் பற்றி மேலும் அறிக"
+
+#: course/lesson-5-your-first-function/lesson.tres:38
+msgid ""
+"In computer programming, we talk about [i]identifiers[/i] rather than "
+"\"names\".\n"
+"\n"
+"It is because a function name is a label the computer uses to precisely "
+"[i]identify[/i] and refer to a function or other code elements.\n"
+"\n"
+"Identifiers are unique: you cannot reuse the same name in a given "
+"[i]space[/i] in your code.\n"
+"\n"
+"If you try to name two functions the same, the computer will raise an "
+"error."
+msgstr ""
+"கணினி நிரலாக்கத்தில், \"பெயர்கள்\" என்பதை விட [i] அடையாளங்காட்டிகள் [/i] பற்றி "
+"பேசுகிறோம்.\n"
+"\n"
+" ஒரு செயல்பாட்டு பெயர் என்பது கணினி துல்லியமாக [/i] ஐ அடையாளம் காணவும், ஒரு செயல்பாடு"
+" அல்லது பிற குறியீடு கூறுகளைக் குறிக்கவும் பயன்படுத்தும் சிட்டை ஆகும்.\n"
+"\n"
+" அடையாளங்காட்டிகள் தனித்துவமானது: உங்கள் குறியீட்டில் கொடுக்கப்பட்ட [i] இடத்தில் [/i] அதே "
+"பெயரை மீண்டும் பயன்படுத்த முடியாது.\n"
+"\n"
+" இரண்டு செயல்பாடுகளை ஒரே மாதிரியாக பெயரிட முயற்சித்தால், கணினி ஒரு பிழையை எழுப்பும்."
+
+#: course/lesson-5-your-first-function/lesson.tres:54
+msgid ""
+"If there is any code that you need to run multiple times, you can put it "
+"inside a function and give it a name.\n"
+"\n"
+"The instructions inside a function can be any code you want, and they "
+"will all run every time you call the function.\n"
+"\n"
+"Here's the example of a [code]move_and_rotate()[/code] function that "
+"moves the turtle forward and then turns it 90°."
+msgstr ""
+"நீங்கள் பல முறை இயக்க வேண்டிய குறியீடு ஏதேனும் இருந்தால், நீங்கள் அதை ஒரு செயல்பாட்டிற்குள் "
+"வைத்து அதற்கு ஒரு பெயரைக் கொடுக்கலாம்.\n"
+"\n"
+" ஒரு செயல்பாட்டிற்குள் உள்ள வழிமுறைகள் நீங்கள் விரும்பும் எந்த குறியீடாகவும் இருக்கலாம், "
+"மேலும் நீங்கள் செயல்பாட்டை அழைக்கும் ஒவ்வொரு முறையும் அவை அனைத்தும் இயங்கும்.\n"
+"\n"
+" ஆமை முன்னோக்கி நகர்த்தி பின்னர் அதை 90 by திருப்பும் [குறியீடு] MOVE_AND_ROTATE () "
+"[/குறியீடு] செயல்பாட்டின் எடுத்துக்காட்டு இங்கே."
+
+#: course/lesson-5-your-first-function/lesson.tres:78
+msgid ""
+"The [code]move_and_rotate()[/code] function consists of two instructions,"
+" each on a separate line. Both of those instructions call another "
+"familiar function.\n"
+"\n"
+"You could write another function that calls "
+"[code]move_and_rotate()[/code] four times to draw a square of length 200 "
+"pixels."
+msgstr ""
+"[குறியீடு] MOVE_AND_ROTATE () [/குறியீடு] செயல்பாடு இரண்டு வழிமுறைகளைக் கொண்டுள்ளது"
+", ஒவ்வொன்றும் ஒரு தனி வரியில். அந்த இரண்டு அறிவுறுத்தல்களும் மற்றொரு பழக்கமான செயல்பாட்டை "
+"அழைக்கின்றன.\n"
+"\n"
+" [குறியீடு] MOVE_AND_ROTATE () [/code] ஐ நான்கு முறை அழைக்கும் மற்றொரு செயல்பாட்டை "
+"நீங்கள் எழுதலாம்."
+
+#: course/lesson-5-your-first-function/lesson.tres:100
+msgid ""
+"Every time we call [code]move_and_rotate()[/code], the two functions "
+"[code]move_forward(200)[/code] and [code]turn_right(90)[/code] are called"
+" in sequence.\n"
+"\n"
+"In this simple example, it may not feel super useful. Here's a more "
+"useful and realistic one: a function to draw any square.\n"
+"\n"
+"The following function uses [i]parameters[/i], which we will explore in "
+"the next lesson.\n"
+"\n"
+"[i]Drag the slider to change the square's size.[/i]"
+msgstr ""
+"ஒவ்வொரு முறையும் நாம் [குறியீடு] MOVE_AND_ROTATE () [/code] ஐ அழைக்கும்போது, இரண்டு "
+"செயல்பாடுகள் [குறியீடு] MOVE_FORWARD (200) [/குறியீடு] மற்றும் [குறியீடு] டர்ன்_ரைட் "
+"(90) [/குறியீடு] வரிசையில் அழைக்கப்படுகின்றன.\n"
+"\n"
+" இந்த எளிய எடுத்துக்காட்டில், இது மிகவும் பயனுள்ளதாக இருக்காது. இங்கே மிகவும் பயனுள்ள "
+"மற்றும் யதார்த்தமான ஒன்று: எந்த சதுரத்தையும் வரைய ஒரு செயல்பாடு.\n"
+"\n"
+" பின்வரும் செயல்பாடு [i] அளவுருக்களைப் பயன்படுத்துகிறது [/i], அடுத்த பாடத்தில் நாங்கள் "
+"ஆராய்வோம்.\n"
+"\n"
+" [i] சதுரத்தின் அளவை மாற்ற ச்லைடரை இழுக்கவும். [/i]"
+
+#: course/lesson-5-your-first-function/lesson.tres:124
+msgid "How to define your own functions"
+msgstr "உங்கள் சொந்த செயல்பாடுகளை எவ்வாறு வரையறுப்பது"
+
+#: course/lesson-5-your-first-function/lesson.tres:126
+msgid ""
+"Let's break down how you define a function.\n"
+"\n"
+"A function definition starts with the [code]func[/code] keyword followed "
+"by a space, the function's name, parentheses, and a colon."
+msgstr ""
+"ஒரு செயல்பாட்டை நீங்கள் எவ்வாறு வரையறுக்கிறீர்கள் என்பதை உடைப்போம்.\n"
+"\n"
+" ஒரு செயல்பாட்டு வரையறை [குறியீடு] FUNC [/code] முக்கிய சொல்லுடன் தொடங்குகிறது, அதைத்"
+" தொடர்ந்து ஒரு இடம், செயல்பாட்டின் பெயர், அடைப்புக்குறிப்புகள் மற்றும் ஒரு பெருங்குடல்."
+
+#: course/lesson-5-your-first-function/lesson.tres:148
+msgid ""
+"The instructions inside the function [b]must[/b] all start with a leading"
+" tab character. You can insert that tab character by pressing the "
+"[b]Tab[/b] key.\n"
+"\n"
+"We call those leading tabs [i]indents[/i]. They're important: the "
+"computer uses them to know which instructions are part of the same code "
+"block."
+msgstr ""
+"[B] செயல்பாட்டிற்குள் உள்ள வழிமுறைகள் [/b] அனைத்தும் ஒரு முன்னணி தாவல் எழுத்துடன் தொடங்க "
+"வேண்டும். [B] தாவல் [/b] விசையை அழுத்துவதன் மூலம் அந்த தாவல் எழுத்தை நீங்கள் செருகலாம்.\n"
+"\n"
+" அந்த முன்னணி தாவல்களை [i] உள்தள்ளல்கள் [/i] என்று அழைக்கிறோம். அவை முக்கியமானவை: எந்த "
+"வழிமுறைகள் ஒரே குறியீடு தொகுதியின் ஒரு பகுதி என்பதை அறிய கணினி அவற்றைப் "
+"பயன்படுத்துகிறது."
+
+#: course/lesson-5-your-first-function/lesson.tres:158
+msgid "Why do we use functions?"
+msgstr "நாம் ஏன் செயல்பாடுகளைப் பயன்படுத்துகிறோம்?"
+
+#: course/lesson-5-your-first-function/lesson.tres:161
+msgid ""
+"Functions are groups of instructions we reuse every time we call the "
+"function.\n"
+"\n"
+"Because we give functions a name, they also allow us to name a set of "
+"instructions, which is handy!"
+msgstr ""
+"செயல்பாடுகள் ஒவ்வொரு முறையும் செயல்பாட்டை அழைக்கும் ஒவ்வொரு முறையும் நாம் மீண்டும் "
+"பயன்படுத்தும் வழிமுறைகளின் குழுக்கள்.\n"
+"\n"
+" நாங்கள் செயல்பாடுகளுக்கு ஒரு பெயரைக் கொடுப்பதால், அவை ஒரு அறிவுறுத்தல்களின் பெயரையும் "
+"பெயரிட அனுமதிக்கின்றன, இது எளிது!"
+
+#: course/lesson-5-your-first-function/lesson.tres:164
+#: course/lesson-5-your-first-function/lesson.tres:165
+msgid "To reuse code multiple times. "
+msgstr "குறியீட்டை பல முறை மீண்டும் பயன்படுத்த. "
+
+#: course/lesson-5-your-first-function/lesson.tres:164
+#: course/lesson-5-your-first-function/lesson.tres:165
+msgid "To run multiple instructions in one go."
+msgstr "ஒரே நேரத்தில் பல வழிமுறைகளை இயக்க."
+
+#: course/lesson-5-your-first-function/lesson.tres:164
+#: course/lesson-5-your-first-function/lesson.tres:165
+msgid "To put a name on multiple lines of code."
+msgstr "குறியீட்டின் பல வரிகளில் ஒரு பெயரை வைக்க."
+
+#: course/lesson-5-your-first-function/lesson.tres:172
+msgid "Names in code have rules"
+msgstr "குறியீட்டில் உள்ள பெயர்களுக்கு விதிகள் உள்ளன"
+
+#: course/lesson-5-your-first-function/lesson.tres:174
+msgid ""
+"Function identifiers cannot contain spaces. In general, names in "
+"programming languages cannot contain spaces.\n"
+"\n"
+"The computer uses spaces to detect the separation between different "
+"keywords and identifiers.\n"
+"\n"
+"Instead of spaces, in GDScript, we use underscores (\"_\"). You saw this "
+"already with functions like [code]move_forward()[/code] or "
+"[code]move_local_x()[/code]. This is the convention we follow in "
+"GDScript.\n"
+"\n"
+"There's another convention programmers use in some other programming "
+"languages.\n"
+"\n"
+"Instead of using underscores, they start words with capital letters "
+"except for the first one. With that convention, you'd write function "
+"names like [code]moveForward()[/code] or [code]moveLocalX()[/code]\n"
+"\n"
+"Identifiers also [i]have[/i] to start with a letter or an underscore; You"
+" [i]can't[/i] begin with a number, but you can use numbers after the "
+"first character."
+msgstr ""
+"செயல்பாட்டு அடையாளங்காட்டிகள் இடைவெளிகளைக் கொண்டிருக்க முடியாது. பொதுவாக, நிரலாக்க "
+"மொழிகளில் உள்ள பெயர்கள் இடைவெளிகளைக் கொண்டிருக்க முடியாது.\n"
+"\n"
+" வெவ்வேறு சொற்களுக்கும் அடையாளங்காட்டிகளுக்கும் இடையில் பிரிப்பதைக் கண்டறிய கணினி "
+"இடைவெளிகளைப் பயன்படுத்துகிறது.\n"
+"\n"
+" இடைவெளிகளுக்கு பதிலாக, GDSCRIPT இல், நாங்கள் அடிக்கோடிட்டு (\"_\") பயன்படுத்துகிறோம்"
+". [குறியீடு] MOVE_FORWARD () [/code] அல்லது [குறியீடு] MOVE_LOCAL_X () [/code] "
+"போன்ற செயல்பாடுகளுடன் இதை நீங்கள் ஏற்கனவே பார்த்தீர்கள். GDSCRIPT இல் நாம் பின்பற்றும் மாநாடு "
+"இதுதான்.\n"
+"\n"
+" வேறு சில நிரலாக்க மொழிகளில் புரோகிராமர்கள் பயன்படுத்தும் மற்றொரு மாநாடு உள்ளது.\n"
+"\n"
+" அடிக்கோடிட்டுக் காட்டுவதற்குப் பதிலாக, அவை முதல் ஒன்றைத் தவிர பெரிய எழுத்துக்களுடன் "
+"சொற்களைத் தொடங்குகின்றன. அந்த மாநாட்டின் மூலம், நீங்கள் [குறியீடு] நகர்வு () [/குறியீடு] "
+"அல்லது [குறியீடு] மூவெலோகல்க்ச் () [/குறியீடு] போன்ற செயல்பாட்டு பெயர்களை எழுதுவீர்கள்\n"
+"\n"
+" அடையாளங்காட்டிகளும் [i] ஒரு கடிதம் அல்லது அடிக்கோடிட்டுக் கொண்டு தொடங்க [/i]; நீங்கள் "
+"[என்னால்] முடியாது [/i] ஒரு எண்ணுடன் தொடங்க முடியாது, ஆனால் முதல் எழுத்துக்குப் பிறகு "
+"நீங்கள் எண்களைப் பயன்படுத்தலாம்."
+
+#: course/lesson-5-your-first-function/lesson.tres:192
+msgid "Which of the following names are valid function names?"
+msgstr "பின்வரும் பெயர்களில் எது சரியான செயல்பாட்டு பெயர்கள்?"
+
+#: course/lesson-5-your-first-function/lesson.tres:193
+msgid "Note that it's fine to use capital letters."
+msgstr "பெரிய எழுத்துக்களைப் பயன்படுத்துவது நல்லது என்பதை நினைவில் கொள்க."
+
+#: course/lesson-5-your-first-function/lesson.tres:195
+msgid ""
+"You can't name a function [code]move forward[/code] because it contains a"
+" space. Names in code cannot contain spaces.\n"
+"\n"
+"They can't start with numbers either, which is why "
+"[code]45_degree_turn[/code] is also invalid. \n"
+"\n"
+"However, having numbers elsewhere in a function name is fine. That's why "
+"[code]make3NewCharacters[/code] works."
+msgstr ""
+"ஒரு செயல்பாட்டை நீங்கள் பெயரிட முடியாது [குறியீடு] முன்னேறவும் [/குறியீடு] ஏனெனில் அதில்"
+" ஒரு இடம் உள்ளது. குறியீட்டில் உள்ள பெயர்களில் இடைவெளிகளைக் கொண்டிருக்க முடியாது.\n"
+"\n"
+" அவர்களால் எண்களுடன் தொடங்க முடியாது, அதனால்தான் [குறியீடு] 45_degree_turn [/code] கூ"
+"ட தவறானது.\n"
+"\n"
+" இருப்பினும், ஒரு செயல்பாட்டு பெயரில் வேறு எங்கும் எண்களைக் கொண்டிருப்பது நல்லது. "
+"அதனால்தான் [குறியீடு] Make3Newcharacters [/code] வேலை செய்கிறது."
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+msgid "move forward"
+msgstr "முன்னேறவும்"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+#: course/lesson-5-your-first-function/lesson.tres:201
+msgid "jump"
+msgstr "தாவு"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+#: course/lesson-5-your-first-function/lesson.tres:201
+msgid "make3NewCharacters"
+msgstr "make3newharacters"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+#: course/lesson-5-your-first-function/lesson.tres:201
+msgid "move_forward"
+msgstr "move_forward"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+msgid "45_degree_turn"
+msgstr "45_degree_turn"
+
+#: course/lesson-5-your-first-function/lesson.tres:208
+msgid "Instantly moving the turtle to a different position"
+msgstr "உடனடியாக ஆமை வேறு நிலைக்கு நகர்த்துகிறது"
+
+#: course/lesson-5-your-first-function/lesson.tres:210
+msgid ""
+"In order to draw multiple squares in different positions, we introduce a "
+"new function for our turtle to use.\n"
+"\n"
+"The [code]jump()[/code] function picks up the turtle and places it "
+"relative to where it is.\n"
+"\n"
+"So calling [code]jump(-100, 50)[/code] moves the turtle by 100 pixels to "
+"the [b]left[/b] and 50 pixels [b]down[/b] without drawing any lines."
+msgstr ""
+"வெவ்வேறு நிலைகளில் பல சதுரங்களை வரைய, எங்கள் ஆமை பயன்படுத்த ஒரு புதிய செயல்பாட்டை "
+"அறிமுகப்படுத்துகிறோம்.\n"
+"\n"
+" [குறியீடு] சம்ப் () [/குறியீடு] செயல்பாடு ஆமை எடுத்து, அது இருக்கும் இடத்துடன் "
+"ஒப்பிடுகிறது.\n"
+"\n"
+" எனவே [குறியீடு] சம்ப் (-100, 50) [/குறியீடு] ஆமை 100 படப்புள்ளிகள் [/b] மற்றும் 50 "
+"படப்புள்ளிகள் [b] கீழே [/b] க்கு நகர்த்துகிறது."
+
+#: course/lesson-5-your-first-function/lesson.tres:232
+msgid "A function to draw squares"
+msgstr "சதுரங்களை வரைய ஒரு செயல்பாடு"
+
+#: course/lesson-5-your-first-function/lesson.tres:233
+msgid ""
+"Code a function named [code]draw_square()[/code] to draw one square of "
+"length 200 pixels. The function should take no parameters.\n"
+"\n"
+"Use the [code]move_forward()[/code] and [code]turn_right()[/code] "
+"functions to instruct the turtle.\n"
+"\n"
+"In the following practice, you'll use the [code]draw_square()[/code] "
+"function to draw multiple squares by calling your own function."
+msgstr ""
+"ஒரு சதுர நீளம் 200 படப்புள்ளிகள் வரைய [குறியீடு] டிரா_ச்குவேர் () [/குறியீடு] என்ற "
+"செயல்பாட்டை குறியீடு. செயல்பாடு அளவுருக்கள் எடுக்கக்கூடாது.\n"
+"\n"
+" ஆமை அறிவுறுத்துவதற்கு [CODE] MOVE_FORWARD () [/code] மற்றும் [குறியீடு] டர்ன்_ரைட் "
+"() [/குறியீடு] செயல்பாடுகளைப் பயன்படுத்தவும்.\n"
+"\n"
+" பின்வரும் நடைமுறையில், உங்கள் சொந்த செயல்பாட்டை அழைப்பதன் மூலம் பல சதுரங்களை வரைய "
+"[குறியீடு] டிரா_ச்குவேர் () [/குறியீடு] செயல்பாட்டைப் பயன்படுத்துவீர்கள்."
+
+#: course/lesson-5-your-first-function/lesson.tres:246
+msgid ""
+"Until now, you've had to write code by hand, and it's boring. It's time "
+"to code a reusable function. You'll use it to draw multiple squares."
+msgstr ""
+"இப்போது வரை, நீங்கள் கையால் குறியீட்டை எழுத வேண்டியிருந்தது, அது சலிப்பை ஏற்படுத்துகிறது"
+". மீண்டும் பயன்படுத்தக்கூடிய செயல்பாட்டை குறியிட வேண்டிய நேரம் இது. பல சதுரங்களை வரைய "
+"நீங்கள் இதைப் பயன்படுத்துவீர்கள்."
+
+#: course/lesson-5-your-first-function/lesson.tres:251
+msgid "Drawing multiple squares"
+msgstr "பல சதுரங்களை வரைதல்"
+
+#: course/lesson-5-your-first-function/lesson.tres:252
+msgid ""
+"You have a function to draw one square: [code]draw_square()[/code]. Use "
+"it to draw three squares.\n"
+"\n"
+"We already created [code]draw_square()[/code] for you. Create a function "
+"named [code]draw_three_squares[/code] that calls "
+"[code]draw_square()[/code] three times.\n"
+"\n"
+"If you just call the function, all three squares will overlap. To stack "
+"them diagonally, call [code]jump(300, 300)[/code] between two calls to "
+"[code]draw_square()[/code].\n"
+"\n"
+"Calling [code]jump(300, 300)[/code] makes the turtle jump by 300 pixels "
+"to the right and 300 pixels down without drawing any lines."
+msgstr ""
+"ஒரு சதுரத்தை வரைய உங்களிடம் ஒரு செயல்பாடு உள்ளது: [குறியீடு] draw_square () [/code]"
+". மூன்று சதுரங்களை வரைய இதைப் பயன்படுத்தவும்.\n"
+"\n"
+" உங்களுக்காக [குறியீடு] டிரா_ச்குவேர் () [/குறியீடு] ஐ நாங்கள் ஏற்கனவே உருவாக்கியுள்ளோம்"
+". [குறியீடு] [குறியீடு] [குறியீடு] Draw_square () [/code] ஐ மூன்று முறை அழைக்கும் "
+"என்ற செயல்பாட்டை உருவாக்கவும்.\n"
+"\n"
+" நீங்கள் செயல்பாட்டை அழைத்தால், மூன்று சதுரங்களும் ஒன்றுடன் ஒன்று இருக்கும். அவற்றை குறுக்காக "
+"அடுக்கி வைக்க, [குறியீடு] [குறியீடு] சம்ப் (300, 300) [/குறியீடு] ஐ [குறியீடு] "
+"Draw_square () [/code] க்கு இரண்டு அழைப்புகளுக்கு இடையில் அழைக்கவும்.\n"
+"\n"
+" அழைப்பை [குறியீடு] சம்ப் (300, 300) [/குறியீடு] ஆமை 300 படப்புள்ளிகள் வலதுபுறமாகவும்"
+", 300 படப்புள்ளிகள் எந்த வரிகளையும் வரையவில்லை."
+
+#: course/lesson-5-your-first-function/lesson.tres:275
+msgid ""
+"Now you created a function to draw squares, you can reuse it by calling "
+"it multiple times."
+msgstr ""
+"இப்போது நீங்கள் சதுரங்களை வரைய ஒரு செயல்பாட்டை உருவாக்கியுள்ளீர்கள், அதை பல முறை அழைப்பதன் "
+"மூலம் அதை மீண்டும் பயன்படுத்தலாம்."
+
+#: course/lesson-5-your-first-function/lesson.tres:279
+msgid "Coding Your First Function"
+msgstr "உங்கள் முதல் செயல்பாட்டை குறியிடுதல்"

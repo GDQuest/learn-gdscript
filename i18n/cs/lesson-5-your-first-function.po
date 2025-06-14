@@ -1,0 +1,411 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"PO-Revision-Date: 2023-12-18 08:01+0000\n"
+"Last-Translator: ebor <ebor@post.cz>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-5-your-first-function/cs/>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 5.3\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-5-your-first-function/lesson.tres:14
+msgid ""
+"So far, we have called existing functions that other developers wrote.\n"
+"\n"
+"In this lesson, we'll talk more about what functions are and see some "
+"examples. Then, you will learn how to define your own functions."
+msgstr ""
+"Dosud jsme volali existující funkce, které napsali jiní vývojáři.\n"
+"\n"
+"V této lekci si povíme více o tom, co jsou funkce, a podíváme se na několik "
+"příkladů. Poté se naučíte, jak definovat své vlastní funkce."
+
+#: course/lesson-5-your-first-function/lesson.tres:24
+msgid "Functions are named sequences of instructions"
+msgstr "Funkce jsou pojmenované sekvence instrukcí"
+
+#: course/lesson-5-your-first-function/lesson.tres:26
+msgid ""
+"Functions are [i]sequences of instructions[/i] we give a name. We call that "
+"name an [i]identifier[/i].\n"
+"\n"
+"Using the identifier, we can get the computer to execute all the "
+"instructions inside the function as many times as we need. This is what a "
+"[i]function call[/i] does."
+msgstr ""
+"Funkce jsou [i]posloupnosti instrukcí[/i], které pojmenujeme. Tomuto jménu "
+"říkáme [i]identifikátor[/i].\n"
+"\n"
+"Pomocí identifikátoru můžeme přimět počítač, aby provedl všechny instrukce "
+"uvnitř funkce tolikrát, kolikrát potřebujeme. K tomu slouží [i]volání "
+"funkce[/i]."
+
+#: course/lesson-5-your-first-function/lesson.tres:36
+msgid "Learn more about identifiers"
+msgstr "Více informací o identifikátorech"
+
+#: course/lesson-5-your-first-function/lesson.tres:38
+msgid ""
+"In computer programming, we talk about [i]identifiers[/i] rather than "
+"\"names\".\n"
+"\n"
+"It is because a function name is a label the computer uses to precisely "
+"[i]identify[/i] and refer to a function or other code elements.\n"
+"\n"
+"Identifiers are unique: you cannot reuse the same name in a given [i]space[/"
+"i] in your code.\n"
+"\n"
+"If you try to name two functions the same, the computer will raise an error."
+msgstr ""
+"V počítačovém programování se spíše než o \"jménech\" hovoří o "
+"[i]identifikátorech[/i].\n"
+"\n"
+"Je to proto, že jméno funkce je označení, které počítač používá k přesné "
+"[i]identifikaci[/i] a odkazu na funkci nebo jiný prvek kódu.\n"
+"\n"
+"Identifikátory jsou jedinečné: v daném [i]místě[/i] kódu nelze opakovaně "
+"použít stejný název.\n"
+"\n"
+"Pokud se pokusíte pojmenovat dvě funkce stejně, počítač vyhodí chybu."
+
+#: course/lesson-5-your-first-function/lesson.tres:54
+msgid ""
+"If there is any code that you need to run multiple times, you can put it "
+"inside a function and give it a name.\n"
+"\n"
+"The instructions inside a function can be any code you want, and they will "
+"all run every time you call the function.\n"
+"\n"
+"Here's the example of a [code]move_and_rotate()[/code] function that moves "
+"the turtle forward and then turns it 90°."
+msgstr ""
+"Pokud existuje kód, který potřebujete spustit vícekrát, můžete jej vložit do "
+"funkce a pojmenovat ji.\n"
+"\n"
+"Instrukce uvnitř funkce mohou obsahovat libovolný kódem a všechny se spustí "
+"při každém volání funkce.\n"
+"\n"
+"Zde je příklad funkce [code]move_and_rotate()[/code], která posune želvu "
+"dopředu a pak ji otočí o 90°."
+
+#: course/lesson-5-your-first-function/lesson.tres:78
+msgid ""
+"The [code]move_and_rotate()[/code] function consists of two instructions, "
+"each on a separate line. Both of those instructions call another familiar "
+"function.\n"
+"\n"
+"You could write another function that calls [code]move_and_rotate()[/code] "
+"four times to draw a square of length 200 pixels."
+msgstr ""
+"Funkce [code]move_and_rotate()[/code] se skládá ze dvou instrukcí, z nichž "
+"každá je na samostatném řádku. Obě tyto instrukce volají jinou známou "
+"funkci.\n"
+"\n"
+"Můžete napsat jinou funkci, která volá [code]move_and_rotate()[/code] "
+"čtyřikrát a nakreslí čtverec o délce 200 pixelů."
+
+#: course/lesson-5-your-first-function/lesson.tres:100
+#, fuzzy
+msgid ""
+"Every time we call [code]move_and_rotate()[/code], the two functions "
+"[code]move_forward(200)[/code] and [code]turn_right(90)[/code] are called in "
+"sequence.\n"
+"\n"
+"In this simple example, it may not feel super useful. Here's a more useful "
+"and realistic one: a function to draw any square.\n"
+"\n"
+"The following function uses [i]parameters[/i], which we will explore in the "
+"next lesson.\n"
+"\n"
+"[i]Drag the slider to change the square's size.[/i]"
+msgstr ""
+"Při každém volání [code]move_and_rotate()[/code] jsou postupně volány dvě "
+"funkce [code]move_forward(200)[/code] a [code]turn_right(90)[/code].\n"
+"\n"
+"V tomto jednoduchém příkladu se to nemusí zdát super užitečné. Zde je "
+"užitečnější a reálnější příklad: funkce pro vykreslení libovolného "
+"obdélníku.\n"
+"\n"
+"Následující funkce používá [i]parametry[/i], které prozkoumáme v příští "
+"lekci.\n"
+"\n"
+"[i]Potažením posuvníku změníte velikost čtverce'[/i]."
+
+#: course/lesson-5-your-first-function/lesson.tres:124
+msgid "How to define your own functions"
+msgstr "Jak definovat vlastní funkce"
+
+#: course/lesson-5-your-first-function/lesson.tres:126
+msgid ""
+"Let's break down how you define a function.\n"
+"\n"
+"A function definition starts with the [code]func[/code] keyword followed by "
+"a space, the function's name, parentheses, and a colon."
+msgstr ""
+"Rozebereme si, jak funkci definovat.\n"
+"\n"
+"Definice funkce začíná klíčovým slovem [code]func[/code], za kterým "
+"následuje mezera, název funkce a závorky a dvojtečka."
+
+#: course/lesson-5-your-first-function/lesson.tres:148
+msgid ""
+"The instructions inside the function [b]must[/b] all start with a leading "
+"tab character. You can insert that tab character by pressing the [b]Tab[/b] "
+"key.\n"
+"\n"
+"We call those leading tabs [i]indents[/i]. They're important: the computer "
+"uses them to know which instructions are part of the same code block."
+msgstr ""
+"Všechny instrukce uvnitř funkce [b]musí[/b] začínat úvodním znakem "
+"tabulátoru. Tento znak tabulátoru můžete vložit stisknutím klávesy [b]Tab[/"
+"b].\n"
+"\n"
+"Těmto úvodním znakům tabulátoru říkáme [i]odstavce[/i]. Jsou důležité: "
+"počítač podle nich pozná, které instrukce jsou součástí stejného bloku kódu."
+
+#: course/lesson-5-your-first-function/lesson.tres:158
+msgid "Why do we use functions?"
+msgstr "Proč používáme funkce?"
+
+#: course/lesson-5-your-first-function/lesson.tres:161
+msgid ""
+"Functions are groups of instructions we reuse every time we call the "
+"function.\n"
+"\n"
+"Because we give functions a name, they also allow us to name a set of "
+"instructions, which is handy!"
+msgstr ""
+"Funkce jsou skupiny instrukcí, které opakovaně používáme při každém volání "
+"funkce.\n"
+"\n"
+"Protože funkcím dáváme jméno, umožňují nám také pojmenovat sadu instrukcí, "
+"což je užitečné!"
+
+#: course/lesson-5-your-first-function/lesson.tres:164
+#: course/lesson-5-your-first-function/lesson.tres:165
+msgid "To reuse code multiple times. "
+msgstr "Chcete-li kód použít vícekrát. "
+
+#: course/lesson-5-your-first-function/lesson.tres:164
+#: course/lesson-5-your-first-function/lesson.tres:165
+msgid "To run multiple instructions in one go."
+msgstr "Chcete-li spustit více instrukcí najednou."
+
+#: course/lesson-5-your-first-function/lesson.tres:164
+#: course/lesson-5-your-first-function/lesson.tres:165
+msgid "To put a name on multiple lines of code."
+msgstr "Chcete-li pojmenovat více řádků kódu."
+
+#: course/lesson-5-your-first-function/lesson.tres:172
+msgid "Names in code have rules"
+msgstr "Názvy v kódu mají pravidla"
+
+#: course/lesson-5-your-first-function/lesson.tres:174
+msgid ""
+"Function identifiers cannot contain spaces. In general, names in programming "
+"languages cannot contain spaces.\n"
+"\n"
+"The computer uses spaces to detect the separation between different keywords "
+"and identifiers.\n"
+"\n"
+"Instead of spaces, in GDScript, we use underscores (\"_\"). You saw this "
+"already with functions like [code]move_forward()[/code] or "
+"[code]move_local_x()[/code]. This is the convention we follow in GDScript.\n"
+"\n"
+"There's another convention programmers use in some other programming "
+"languages.\n"
+"\n"
+"Instead of using underscores, they start words with capital letters except "
+"for the first one. With that convention, you'd write function names like "
+"[code]moveForward()[/code] or [code]moveLocalX()[/code]\n"
+"\n"
+"Identifiers also [i]have[/i] to start with a letter or an underscore; You "
+"[i]can't[/i] begin with a number, but you can use numbers after the first "
+"character."
+msgstr ""
+"Identifikátory funkcí nesmí obsahovat mezery. Obecně platí, že názvy v "
+"programovacích jazycích nemohou obsahovat mezery.\n"
+"\n"
+"Počítač používá mezery k rozpoznání oddělení různých klíčových slov a "
+"identifikátorů.\n"
+"\n"
+"Místo mezer používáme v jazyce GDScript podtržítka (\"_\"). Viděli jste to "
+"již u funkcí jako [code]move_forward()[/code] nebo [code]move_local_x()[/"
+"code]. Tuto konvenci dodržujeme v jazyce GDScript.\n"
+"\n"
+"V některých jiných programovacích jazycích používají programátoři jinou "
+"konvenci.\n"
+"\n"
+"Místo podtržítek začínají slova velkými písmeny s výjimkou prvního. Podle "
+"této konvence byste psali názvy funkcí jako [code]moveForward()[/code] nebo "
+"[code]moveLocalX()[/code].\n"
+"\n"
+"Identifikátory také [i]musí[/i] začínat písmenem nebo podtržítkem; Ty "
+"[i]nemohou[/i] začínat číslem, ale můžete použít čísla druhém, třetím atd. "
+"místě."
+
+#: course/lesson-5-your-first-function/lesson.tres:192
+msgid "Which of the following names are valid function names?"
+msgstr "Které z následujících názvů jsou platné názvy funkcí?"
+
+#: course/lesson-5-your-first-function/lesson.tres:193
+msgid "Note that it's fine to use capital letters."
+msgstr "Všimněte si, že je v pořádku používat velká písmena."
+
+#: course/lesson-5-your-first-function/lesson.tres:195
+msgid ""
+"You can't name a function [code]move forward[/code] because it contains a "
+"space. Names in code cannot contain spaces.\n"
+"\n"
+"They can't start with numbers either, which is why [code]45_degree_turn[/"
+"code] is also invalid. \n"
+"\n"
+"However, having numbers elsewhere in a function name is fine. That's why "
+"[code]make3NewCharacters[/code] works."
+msgstr ""
+"Nemůžete'pojmenovat funkci [code]move forward[/code], protože název obsahuje "
+"mezeru. Názvy v kódu nemohou obsahovat mezery.\n"
+"\n"
+"Nemohou také začínat čísly, proto je [code]45_stupňů_otáčení[/code] také "
+"neplatné.\n"
+"\n"
+"Pokud jsou však čísla v názvu funkce na jiném místě, je to v pořádku. Proto "
+"[code]make3NewCharacters[/code] funguje."
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+msgid "move forward"
+msgstr "move forward"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+#: course/lesson-5-your-first-function/lesson.tres:201
+msgid "jump"
+msgstr "jump"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+#: course/lesson-5-your-first-function/lesson.tres:201
+msgid "make3NewCharacters"
+msgstr "make3NewCharacters"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+#: course/lesson-5-your-first-function/lesson.tres:201
+msgid "move_forward"
+msgstr "move_forward"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+msgid "45_degree_turn"
+msgstr "45_degree_turn"
+
+#: course/lesson-5-your-first-function/lesson.tres:208
+msgid "Instantly moving the turtle to a different position"
+msgstr "Okamžitý přesun želvy na jinou pozici"
+
+#: course/lesson-5-your-first-function/lesson.tres:210
+msgid ""
+"In order to draw multiple squares in different positions, we introduce a new "
+"function for our turtle to use.\n"
+"\n"
+"The [code]jump()[/code] function picks up the turtle and places it relative "
+"to where it is.\n"
+"\n"
+"So calling [code]jump(-100, 50)[/code] moves the turtle by 100 pixels to the "
+"[b]left[/b] and 50 pixels [b]down[/b] without drawing any lines."
+msgstr ""
+"Abychom mohli nakreslit více čtverců na různých pozicích, zavedeme pro naši "
+"želvu novou funkci.\n"
+"\n"
+"Funkce [code]jump()[/code] zvedne želvu a umístí ji vzhledem k místu, kde se "
+"nachází.\n"
+"\n"
+"Takže voláním [code]jump(-100, 50)[/code] se želva posune o 100 pixelů "
+"doleva [b] a o 50 pixelů [b] dolů[/b], aniž by se vykreslily nějaké čáry."
+
+#: course/lesson-5-your-first-function/lesson.tres:232
+msgid "A function to draw squares"
+msgstr "Funkce pro kreslení čtverců"
+
+#: course/lesson-5-your-first-function/lesson.tres:233
+msgid ""
+"Code a function named [code]draw_square()[/code] to draw one square of "
+"length 200 pixels. The function should take no parameters.\n"
+"\n"
+"Use the [code]move_forward()[/code] and [code]turn_right()[/code] functions "
+"to instruct the turtle.\n"
+"\n"
+"In the following practice, you'll use the [code]draw_square()[/code] "
+"function to draw multiple squares by calling your own function."
+msgstr ""
+"Nakódujte funkci s názvem [code]draw_square()[/code] tak, aby nakreslila "
+"jeden čtverec o délce 200 pixelů. Funkce by neměla mít žádné parametry.\n"
+"\n"
+"Pomocí funkcí [code]move_forward()[/code] a [code]turn_right()[/code] dejte "
+"želvě pokyny.\n"
+"\n"
+"V následujícím cvičení použijete funkci [code]draw_square()[/code] k "
+"nakreslení více čtverců voláním vlastní funkce."
+
+#: course/lesson-5-your-first-function/lesson.tres:246
+msgid ""
+"Until now, you've had to write code by hand, and it's boring. It's time to "
+"code a reusable function. You'll use it to draw multiple squares."
+msgstr ""
+"Až dosud jste museli psát kód ručně a to je nuda. Je na čase nakódovat "
+"opakovaně použitelnou funkci. Budete ji používat k vykreslování více čtverců."
+
+#: course/lesson-5-your-first-function/lesson.tres:251
+msgid "Drawing multiple squares"
+msgstr "Kreslení více čtverců"
+
+#: course/lesson-5-your-first-function/lesson.tres:252
+msgid ""
+"You have a function to draw one square: [code]draw_square()[/code]. Use it "
+"to draw three squares.\n"
+"\n"
+"We already created [code]draw_square()[/code] for you. Create a function "
+"named [code]draw_three_squares[/code] that calls [code]draw_square()[/code] "
+"three times.\n"
+"\n"
+"If you just call the function, all three squares will overlap. To stack them "
+"diagonally, call [code]jump(300, 300)[/code] between two calls to "
+"[code]draw_square()[/code].\n"
+"\n"
+"Calling [code]jump(300, 300)[/code] makes the turtle jump by 300 pixels to "
+"the right and 300 pixels down without drawing any lines."
+msgstr ""
+"Máte funkci pro vykreslení jednoho čtverce: [code]draw_square()[/code]. "
+"Použijte ji pro nakreslení tří čtverců.\n"
+"\n"
+"Už jsme pro Vás vytvořili funkci [code]draw_square()[/code]. Vytvořte funkci "
+"s názvem [code]draw_three_squares[/code], která třikrát zavolá "
+"[code]draw_square()[/code].\n"
+"\n"
+"Pokud zavoláte pouze tuto funkci, všechny tři čtverce se budou překrývat. "
+"Chcete-li je poskládat diagonálně, zavolejte [code]jump(300, 300)[/code] "
+"mezi dvěma voláními [code]draw_square()[/code].\n"
+"\n"
+"Volání [code]jump(300, 300)[/code] způsobí, že želva skočí o 300 pixelů "
+"doprava a 300 pixelů dolů, aniž by se vykreslily nějaké čáry."
+
+#: course/lesson-5-your-first-function/lesson.tres:275
+msgid ""
+"Now you created a function to draw squares, you can reuse it by calling it "
+"multiple times."
+msgstr ""
+"Nyní jste vytvořili funkci pro vykreslování čtverců, kterou můžete opakovaně "
+"volat."
+
+#: course/lesson-5-your-first-function/lesson.tres:279
+msgid "Coding Your First Function"
+msgstr "Kódování vaší první funkce"

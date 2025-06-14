@@ -1,0 +1,302 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2022 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"PO-Revision-Date: 2022-06-16 09:17+0000\n"
+"Last-Translator: Roman Rous <roman.rous@atlas.cz>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-16-2d-vectors/cs/>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.13-dev\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: course/lesson-16-2d-vectors/lesson.tres:14
+msgid ""
+"Suppose we want to increase the size of the robot when it levels up.\n"
+"\n"
+"As you may recall, we do this by using the following code."
+msgstr ""
+"Předpokládejme, že chceme zvětšit velikost robota, když se dostane na vyšší "
+"úroveň.\n"
+"\n"
+"Jak si možná vzpomínáte, uděláme to pomocí následujícího kódu."
+
+#: course/lesson-16-2d-vectors/lesson.tres:36
+msgid ""
+"As we talked about in lesson 7, the [code]scale[/code] variable has two sub-"
+"variables to it: [code]x[/code] and [code]y[/code].\n"
+"\n"
+"This is because [code]scale[/code] is a [code]Vector2[/code], which stands "
+"for two-dimensional vector. A [code]Vector2[/code] represents 2D coordinates."
+msgstr ""
+"Jak jsme si řekli v lekci 7, proměnná [code]scale[/code] má dvě dílčí "
+"proměnné: [code]x[/code] a [code]y[/code].\n"
+"\n"
+"Je to proto, že [code]scale[/code] je [code]Vector2[/code], což znamená "
+"dvourozměrný vektor. A [code]Vector2[/code] představuje 2D souřadnice."
+
+#: course/lesson-16-2d-vectors/lesson.tres:46
+msgid "What are vectors?"
+msgstr "Co jsou to vektory?"
+
+#: course/lesson-16-2d-vectors/lesson.tres:48
+msgid ""
+"A vector, in physics, is a quantity with a magnitude and a direction. For "
+"example, a force applied to some object, the velocity (speed and direction) "
+"of a character, and so on.\n"
+"\n"
+"We often represent this quantity with an arrow.\n"
+"\n"
+"In Godot, 2D vectors are a common value type named [code]Vector2[/code],\n"
+"\n"
+"Unlike plain numbers, they store [i]two[/i] decimal numbers: one for the X "
+"coordinate and one for the Y coordinate."
+msgstr ""
+"Vektor je ve fyzice veličina, která má velikost a směr. Například síla "
+"působící na nějaký objekt, pohyb (rychlost a směr) postavy atd.\n"
+"\n"
+"Tuto veličinu často znázorňujeme šipkou.\n"
+"\n"
+"V Godotu jsou 2D vektory běžným typem hodnoty s názvem [code]Vector2[/"
+"code],\n"
+"\n"
+"Na rozdíl od obyčejných čísel uchovávají [i]dvě[/i] desetinná čísla: jedno "
+"pro souřadnici X a druhé pro souřadnici Y."
+
+#: course/lesson-16-2d-vectors/lesson.tres:72
+msgid ""
+"So far, you've come across two variables in the course which are vectors. "
+"Which are they?"
+msgstr ""
+"Zatím jste se v kurzu setkali se dvěma veličinami, které jsou vektory. Které "
+"to jsou?"
+
+#: course/lesson-16-2d-vectors/lesson.tres:75
+msgid ""
+"Both [code]scale[/code] and [code]position[/code] have [code]x[/code] and "
+"[code]y[/code] sub-variables, so Godot uses a [code]Vector2[/code] to store "
+"their values."
+msgstr ""
+"Jak [code]měřítko[/code], tak [code]pozice[/code] mají dílčí proměnné "
+"[code]x[/code] a [code]y[/code], takže Godot používá [code]Vector2[/code] k "
+"uložení jejich hodnoty."
+
+#: course/lesson-16-2d-vectors/lesson.tres:76
+#: course/lesson-16-2d-vectors/lesson.tres:77
+msgid "scale"
+msgstr "měřítko"
+
+#: course/lesson-16-2d-vectors/lesson.tres:76
+#: course/lesson-16-2d-vectors/lesson.tres:77
+msgid "position"
+msgstr "pozice"
+
+#: course/lesson-16-2d-vectors/lesson.tres:76
+msgid "health"
+msgstr "health"
+
+#: course/lesson-16-2d-vectors/lesson.tres:76
+msgid "speed"
+msgstr "rychlost"
+
+#: course/lesson-16-2d-vectors/lesson.tres:84
+msgid "Vectors are great for games"
+msgstr "Vektory jsou pro hry skvělé"
+
+#: course/lesson-16-2d-vectors/lesson.tres:86
+msgid ""
+"Vectors are [i]essential[/i] in video games.\n"
+"\n"
+"They allow you to represent a character's movement speed and direction, "
+"calculate the distance to a target, and more, with little code.\n"
+"\n"
+"Take this turtle AI below. You've probably seen games where enemies move "
+"like this.\n"
+"\n"
+"This is done with just seven lines of pure vector calculation code.\n"
+"\n"
+"The code is a bit too difficult for now, so we'll spare you the details, but "
+"this turtle gives you a glimpse of what 2D vectors can do for you and your "
+"game projects."
+msgstr ""
+"Vektory jsou [i]ve videohrách nezbytné[/i].\n"
+"\n"
+"Umožňují znázornit rychlost a směr pohybu postavy, vypočítat vzdálenost k "
+"cíli a mnoho dalšího s malým množstvím kódu.\n"
+"\n"
+"Vezměte si například tuto želví umělou inteligenci níže. Pravděpodobně jste "
+"už viděli hry, kde se nepřátelé pohybují takto.\n"
+"\n"
+"K tomu stačí pouhých sedm řádků čistě vektorového výpočetního kódu.\n"
+"\n"
+"Kód je pro tuto chvíli příliš složitý, takže vás ušetříme detailů, ale tato "
+"želva vám poskytne náhled na to, co 2D vektory mohou udělat pro vás a vaše "
+"herní projekty."
+
+#: course/lesson-16-2d-vectors/lesson.tres:114
+msgid ""
+"We scale the robot again, this time by adding to it directly using a "
+"[code]Vector2[/code]. The following code has the same effect as the previous "
+"example."
+msgstr ""
+"Znovu upravíme měřítko robota, tentokrát tak, že přímo změníme "
+"[code]Vector2[/code]. Následující kód má stejný účinek jako předchozí "
+"příklad."
+
+#: course/lesson-16-2d-vectors/lesson.tres:134
+msgid ""
+"Notice how we use parentheses and two arguments inside parentheses, just "
+"like other function calls.\n"
+"\n"
+"We call this a [i]constructor function call[/i]. You can think of it as a "
+"special kind of function that creates a particular type of value.\n"
+"\n"
+"The code [code]Vector2(0.2, 0.2)[/code] constructs a new [code]Vector2[/"
+"code] value with its [code]x[/code] set to [code]0.2[/code] and its [code]y[/"
+"code] set to [code]0.2[/code], respectively."
+msgstr ""
+"Všimněte si, že používáme závorky a dva argumenty uvnitř závorek, stejně "
+"jako při volání jiných funkcí.\n"
+"\n"
+"Říkáme tomu [i]volání funkce konstruktoru[/i]. Můžete si to představit jako "
+"zvláštní druh funkce, která vytváří hodnotu daného typu (tady Vector2).\n"
+"\n"
+"Kód [code]Vector2(0.2, 0.2)[/code] konstruuje novou hodnotu [code]Vector2[/"
+"code] s její [code]x[/code] nastavenou na [code]0.2[/code] a jeho [code]y[/"
+"code] nastavenou na [code]0,2[/code]."
+
+#: course/lesson-16-2d-vectors/lesson.tres:146
+msgid "Using vectors to change the position"
+msgstr "Použití vektorů ke změně polohy"
+
+#: course/lesson-16-2d-vectors/lesson.tres:148
+msgid ""
+"We can add and subtract vectors to [code]position[/code] because it's a "
+"vector. If we wanted to move our robot to a new relative position, we would "
+"add a [code]Vector2[/code] to its [code]position[/code]."
+msgstr ""
+"Můžeme přičítat a odečítat vektory do/z [code]position[/code], protože je "
+"typu vektor. Pokud bychom chtěli přesunout našeho robota do nové relativní "
+"polohy, přidali bychom [code]Vector2[/code] do jeho [code]position[/code]."
+
+#: course/lesson-16-2d-vectors/lesson.tres:166
+msgid "How would you move the robot 50 pixels to the left?"
+msgstr "Jak byste posunuli robota o 50 pixelů doleva?"
+
+#: course/lesson-16-2d-vectors/lesson.tres:169
+#, fuzzy
+msgid ""
+"[code]position -= Vector2(50, 0)[/code] subtracts [code]50[/code] to the sub-"
+"variable [code]x[/code], and [code]0[/code] to [code]y[/code].\n"
+"\n"
+"[code]position.x -= Vector2(50, 0)[/code] tries to subtract a 2D vector to "
+"the sub-variable [code]x[/code], which is a decimal number. The value types "
+"are incompatible. If you try to do this, you will get an error."
+msgstr ""
+"[code]position -= Vector2(50, 0)[/code] odečte [code]50[/code] k podproměnné "
+"[code]x[/code] a [code]0[/code] k [code]y[/code].\n"
+"\n"
+"[code]position.x -= Vektor(50, 0)[/code] se pokusí odečíst 2D vektor k "
+"podproměnné [code]x[/code], což je desetinné číslo. Typy hodnot jsou "
+"nekompatibilní. Pokud se o to pokusíte, zobrazí se chyba."
+
+#: course/lesson-16-2d-vectors/lesson.tres:172
+#: course/lesson-16-2d-vectors/lesson.tres:173
+msgid "position -= Vector2(50, 0)"
+msgstr "position -= Vector2(50, 0)"
+
+#: course/lesson-16-2d-vectors/lesson.tres:172
+#, fuzzy
+msgid "position.x -= Vector2(50, 0)"
+msgstr "position.x -= Vektor(50, 0)"
+
+#: course/lesson-16-2d-vectors/lesson.tres:182
+msgid ""
+"In the next few practices, you'll use vectors to change scale and position "
+"values."
+msgstr ""
+"V několika následujících cvičeních budete používat vektory ke změně hodnot "
+"měřítka a polohy."
+
+#: course/lesson-16-2d-vectors/lesson.tres:190
+msgid "Increasing scale using vectors"
+msgstr "Zvětšování měřítka pomocí vektorů"
+
+#: course/lesson-16-2d-vectors/lesson.tres:191
+msgid ""
+"Add a line of code to the [code]level_up()[/code] function to increase the "
+"[code]scale[/code] of the robot by [code]Vector2(0.2, 0.2)[/code] every time "
+"it levels up."
+msgstr ""
+"Přidejte do funkce [code]level_up()[/code] řádek kódu, který zvýší "
+"[code]scale[/code] robota o [code]Vector2(0.2, 0.2)[/code] při každém "
+"zvýšení úrovně."
+
+#: course/lesson-16-2d-vectors/lesson.tres:202
+msgid ""
+"To visually show our robot has gained in strength, let's increase its size "
+"every time it levels up. Nothing could go wrong!"
+msgstr ""
+"Abychom názorně ukázali, že náš robot získal na síle, zvětšeme jeho velikost "
+"pokaždé, když se dostane na vyšší úroveň. Nic se tím nepokazí!"
+
+#: course/lesson-16-2d-vectors/lesson.tres:207
+msgid "Resetting size and position using vectors"
+msgstr "Resetování velikosti a polohy pomocí vektorů"
+
+#: course/lesson-16-2d-vectors/lesson.tres:208
+msgid ""
+"The robot's level has increased a lot, and so has its size!\n"
+"\n"
+"Let's fix this by resetting the robot's [code]scale[/code] and "
+"[code]position[/code] values.\n"
+"\n"
+"Create a function named [code]reset_robot()[/code] that sets the "
+"[code]scale[/code] and [code]position[/code] of the robot.\n"
+"\n"
+"The [code]x[/code] and [code]y[/code] sub-variables of the robot's "
+"[code]scale[/code] need to be [code]1.0[/code].\n"
+"\n"
+"The robot's [code]position[/code] needs to be [code]Vector2(0, 0)[/code].\n"
+"\n"
+"As in the previous practice, make sure to use vectors when dealing with "
+"scale and position."
+msgstr ""
+"Úroveň robota se hodně zvýšila, stejně jako jeho velikost!\n"
+"\n"
+"Pojďme to napravit resetováním hodnot [code]scale[/code] a [code]position[/"
+"code] robota.\n"
+"\n"
+"Vytvořte funkci s názvem [code]reset_robot()[/code], která nastaví "
+"[code]scale[/code] a [code]position[/code] robota.\n"
+"\n"
+"Podproměné [code]x[/code] a [code]y[/code] měřítka [code]scale[/code] robota "
+"musí být [code]1.0[/code].\n"
+"\n"
+"Poloha robota [code]position[/code] musí být [code]Vector2(0, 0)[/code].\n"
+"\n"
+"Stejně jako v předchozím cvičení se ujistěte, že používáte vektory při práci "
+"s měřítkem a polohou."
+
+#: course/lesson-16-2d-vectors/lesson.tres:227
+msgid ""
+"Perhaps increasing the scale every level was a bad idea! Let's restore the "
+"robot to the correct size."
+msgstr ""
+"Možná, že zvyšování měřítka na každé úrovni byl špatný nápad! Vraťme "
+"robotovi správnou velikost."
+
+#: course/lesson-16-2d-vectors/lesson.tres:231
+msgid "2D Vectors"
+msgstr "2D vektory"

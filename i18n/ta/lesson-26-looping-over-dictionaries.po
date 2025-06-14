@@ -1,0 +1,205 @@
+# Translations template for Learn GDScript From Zero.
+# Copyright (C) 2024 GDQuest
+# This file is distributed under the same license as the Learn GDScript From
+# Zero project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2024-12-12 14:39+0100\n"
+"PO-Revision-Date: 2025-01-11 17:54+0000\n"
+"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-26-looping-over-dictionaries/ta/>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10-dev\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:13
+msgid ""
+"Like with arrays, you can loop over dictionaries. You can loop over both "
+"their keys and values.\n"
+"\n"
+"Let's see how it works with two examples."
+msgstr ""
+"வரிசையைப் போலவே, நீங்கள் அகராதி மீது சுழற்றலாம். அவர்களின் சாவிகள் மற்றும் மதிப்புகள் "
+"இரண்டையும் நீங்கள் சுழற்றலாம்.\n"
+" இது இரண்டு எடுத்துக்காட்டுகளுடன் எவ்வாறு செயல்படுகிறது என்று பார்ப்போம்."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:23
+msgid "Displaying an inventory's content"
+msgstr "சரக்குகளின் உள்ளடக்கத்தைக் காண்பிக்கும்"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:25
+msgid ""
+"To display the player's inventory, you need to know what it contains. You"
+" need the name and amount of each object.\n"
+"\n"
+"And from code, you can only achieve that by looping over the whole "
+"dictionary and processing key-value pairs one by one.\n"
+"\n"
+"To get the list of keys in the dictionary, you can call its "
+"[code]keys()[/code] member function."
+msgstr ""
+"பிளேயரின் சரக்குகளைக் காட்ட, அதில் என்ன இருக்கிறது என்பதை நீங்கள் அறிந்து கொள்ள வேண்டும். "
+"ஒவ்வொரு பொருளின் பெயர் மற்றும் அளவு உங்களுக்கு தேவை.\n"
+"\n"
+" குறியீட்டிலிருந்து, முழு அகராதியையும் சுழற்றுவதன் மூலமும், முக்கிய மதிப்பு சோடிகளை "
+"ஒவ்வொன்றாக செயலாக்குவதன் மூலமும் மட்டுமே நீங்கள் அதை அடைய முடியும்.\n"
+"\n"
+" அகராதியில் விசைகளின் பட்டியலைப் பெற, நீங்கள் அதன் [குறியீடு] விசைகள் () [/குறியீடு] "
+"உறுப்பினர் செயல்பாட்டை அழைக்கலாம்."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:49
+msgid ""
+"But it's something we do so much that you don't need to call the "
+"function.\n"
+"\n"
+"Instead, you can directly [ignore]type the variable name in a "
+"[code]for[/code] loop after the [code]in[/code] keyword. The language "
+"understands that you implicitly want to loop over the dictionary's keys."
+msgstr ""
+"ஆனால் இது நாங்கள் மிகவும் செய்யும் ஒன்று, நீங்கள் செயல்பாட்டை அழைக்க தேவையில்லை.\n"
+"\n"
+" அதற்கு பதிலாக, [/குறியீடு] முக்கிய சொற்களில் [/குறியீடு] க்குப் பிறகு [/குறியீடு] "
+"வளையத்திற்கான மாறி பெயரை நேரடியாக [புறக்கணிக்க] தட்டச்சு செய்யலாம். அகராதியின் சாவியை "
+"நீங்கள் மறைமுகமாக வளைய விரும்புகிறீர்கள் என்பதை மொழி புரிந்துகொள்கிறது."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:71
+msgid ""
+"You can get the values with the syntax [code]dictionary[key][/code] as "
+"you learned in the previous lesson.\n"
+"\n"
+"We can loop over the inventory keys, get the corresponding values, and "
+"display all that information in the user interface."
+msgstr ""
+"முந்தைய பாடத்தில் நீங்கள் கற்றுக்கொண்டபடி தொடரியல் [குறியீடு] அகராதி [விசை] [/குறியீடு] "
+"மூலம் மதிப்புகளைப் பெறலாம்.\n"
+"\n"
+" சரக்கு விசைகளை நாம் வளையலாம், தொடர்புடைய மதிப்புகளைப் பெறலாம் மற்றும் பயனர் இடைமுகத்தில்"
+" அந்த எல்லா தகவல்களையும் காண்பிக்கலாம்."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:103
+msgid ""
+"Instead of printing the key-value pairs to the output console, we can "
+"code and call a dedicated function that displays items in the user "
+"interface."
+msgstr ""
+"வெளியீட்டு கன்சோலுக்கு முக்கிய மதிப்பு சோடிகளை அச்சிடுவதற்குப் பதிலாக, பயனர் இடைமுகத்தில்"
+" உருப்படிகளைக் காண்பிக்கும் பிரத்யேக செயல்பாட்டை குறியிட்டு அழைக்கலாம்."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:131
+msgid "Mapping grid cells to units"
+msgstr "கட்டம் செல்களை அலகுகளுக்கு மேப்பிங் செய்வது"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:133
+msgid ""
+"We can also use a dictionary to map units to their position on a game "
+"board.\n"
+"\n"
+"That's how you'd typically code a board game, a grid-based RPG, or a "
+"tactical RPG.\n"
+"\n"
+"While we focused on [code]String[/code] keys so far, GDScript "
+"dictionaries accept any value type as a key, allowing you to map anything"
+" to anything.\n"
+"\n"
+"The only limitation is that every key must be unique."
+msgstr ""
+"ஒரு விளையாட்டு பலகையில் தங்கள் நிலைக்கு அலகுகளை வரைபடமாக்க ஒரு அகராதியைப் "
+"பயன்படுத்தலாம்.\n"
+"\n"
+" நீங்கள் பொதுவாக ஒரு போர்டு விளையாட்டு, கட்டம் அடிப்படையிலான ஆர்பிசி அல்லது ஒரு "
+"தந்திரோபாய ஆர்பிசி ஆகியவற்றைக் குறியிடுவீர்கள்.\n"
+"\n"
+" நாங்கள் இதுவரை [குறியீடு] சரம் [/குறியீடு] விசைகளில் கவனம் செலுத்துகையில், GDSCRIPT "
+"அகராதிகள் எந்த மதிப்பு வகையையும் ஒரு விசையாக ஏற்றுக்கொள்கின்றன, இது எதையும் எதற்கும் "
+"வரைபடமாக்க உங்களை அனுமதிக்கிறது.\n"
+"\n"
+" ஒரே வரம்பு என்னவென்றால், ஒவ்வொரு விசையும் தனித்துவமாக இருக்க வேண்டும்."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:159
+msgid ""
+"Using a [code]for[/code] loop, you can use the key-value pairs to place "
+"units on the board at the start of a game."
+msgstr ""
+"[/குறியீடு] வளையத்திற்கு [குறியீடு] ஐப் பயன்படுத்தி, ஒரு விளையாட்டின் தொடக்கத்தில் "
+"பலகையில் அலகுகளை வைக்க விசை மதிப்பு சோடிகளைப் பயன்படுத்தலாம்."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:189
+msgid ""
+"In the following practices, you will loop over dictionaries and process "
+"their content."
+msgstr ""
+"பின்வரும் நடைமுறைகளில், நீங்கள் அகராதிகள் மீது நுழைந்து அவற்றின் உள்ளடக்கத்தை செயலாக்குவீர்கள்."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:197
+msgid "Displaying the inventory"
+msgstr "சரக்குகளைக் காண்பிக்கும்"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:198
+msgid ""
+"We use a dictionary to represent the player's inventory in this game. The"
+" dictionary keys are the name of items, and they map to the number of "
+"items that the player owns.\n"
+"\n"
+"You need to loop over the dictionary and display the name and amount of "
+"every item in the inventory.\n"
+"\n"
+"To do so, call the [code]display_item()[/code] function. It takes two "
+"arguments: the item name and the amount."
+msgstr ""
+"இந்த விளையாட்டில் வீரரின் சரக்குகளை பிரதிநிதித்துவப்படுத்த ஒரு அகராதியைப் "
+"பயன்படுத்துகிறோம். அகராதி விசைகள் உருப்படிகளின் பெயர், மேலும் அவை பிளேயருக்கு சொந்தமான "
+"பொருட்களின் எண்ணிக்கையை வரைபடமாக்குகின்றன.\n"
+"\n"
+" நீங்கள் அகராதியின் மீது வளைய வேண்டும் மற்றும் சரக்குகளில் உள்ள ஒவ்வொரு பொருளின் பெயரையும் "
+"அளவையும் காட்ட வேண்டும்.\n"
+"\n"
+" அவ்வாறு செய்ய, [குறியீடு] display_item () [/குறியீடு] செயல்பாட்டை அழைக்கவும். இது "
+"இரண்டு வாதங்களை எடுக்கிறது: உருப்படி பெயர் மற்றும் தொகை."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:218
+msgid ""
+"We need to display the player's inventory on the screen but lack the code"
+" to do so. Use a loop to display every item."
+msgstr ""
+"பிளேயரின் சரக்குகளை நாம் திரையில் காண்பிக்க வேண்டும், ஆனால் அவ்வாறு செய்வதற்கான குறியீடு "
+"இல்லை. ஒவ்வொரு பொருளையும் காண்பிக்க ஒரு வளையத்தைப் பயன்படுத்தவும்."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:223
+msgid "Placing units on the board"
+msgstr "பலகையில் அலகுகளை வைப்பது"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:224
+msgid ""
+"We have a dictionary named [code]units[/code] that maps a cell position "
+"on the grid to a unit to put there.\n"
+"\n"
+"Using a for loop and the [code]place_unit()[/code] function, place every "
+"unit in the units dictionary at the desired position on the game board."
+msgstr ""
+"எங்களிடம் [குறியீடு] அலகுகள் [/குறியீடு] என்ற அகராதி உள்ளது, இது கட்டத்தில் ஒரு செல் "
+"நிலையை ஒரு அலகுக்கு வரைபடமாக்குகிறது.\n"
+"\n"
+" A க்கான லூப்பைப் பயன்படுத்தி [குறியீடு] Place_unit () [/code] செயல்பாட்டைப் பயன்படுத்தி"
+", அலகுகள் அகராதியில் ஒவ்வொரு யூனிட்டையும் விளையாட்டு பலகையில் விரும்பிய நிலையில் "
+"வைக்கவும்."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:242
+msgid ""
+"We want to populate our game board with units at the start of every "
+"battle. Loop over the dictionary to place units on the board."
+msgstr ""
+"ஒவ்வொரு போரின் தொடக்கத்திலும் எங்கள் விளையாட்டு பலகையை அலகுகளுடன் விரிவுபடுத்த "
+"விரும்புகிறோம். போர்டில் அலகுகளை வைக்க அகராதியின் மீது சுழற்சி."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:246
+msgid "Looping over dictionaries"
+msgstr "அகராதிகள் மீது சுழலும்"
