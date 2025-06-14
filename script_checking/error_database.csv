@@ -52,7 +52,7 @@ It has two possible causes:
 1. You used the class name in the class itself.
 2. Your code refers to another class that refers to this class, causing an endless reference cycle.
 
-Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime.","Erase the type hint in the error line, and the problem should disappear. 
+Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime.","Erase the type hint in the error line, and the problem should disappear.
 
 At GDQuest, when we face this error, we remove the type hints on lines causing cyclic references. It solves the problem in the vast majority of cases."
 INVALID_INDENTATION,"The indentation of your code (the number of tab characters at the start of the line) is incorrect.
@@ -74,7 +74,7 @@ If it says ""unterminated,"" you are missing some character at the end of an exp
 UNEXPECTED_CHARACTER_IN_KEYWORD,"This error tells you that you are missing a parenthesis (or sometimes a comma or a path).
 
 Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code].","To address the error, you want to add the missing opening parenthesis, the closing parenthesis, or the comma."
-UNEXPECTED_CHARACTER_IN_EXPORT_HINT,"This error tells you you are missing some parenthesis, a comma, or some value in your export hint.",You need to read the error message and add the missing character or value it requests.
+UNEXPECTED_CHARACTER_IN_EXPORT_HINT,"This error tells you are missing some parenthesis, a comma, or some value in your export hint.",You need to read the error message and add the missing character or value it requests.
 MISPLACED_IDENTIFIER,"This error happens in several cases:
 
 1. You wrote an identifier (variable or function name) in the wrong place.
