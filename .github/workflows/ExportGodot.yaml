@@ -4,7 +4,7 @@ on:
   workflow_call:
   workflow_dispatch:
   push:
-    branches: 
+    branches:
       - release
       - staging
 
@@ -16,21 +16,20 @@ env:
   git_branch: ${{ github.ref_name }}
 
 jobs:
-
   export-linux:
     name: Linux Export
     runs-on: ubuntu-latest
     container: barichello/godot-ci:3.4.4
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - run: ./run prepare:ci
       - run: ./run export:linux
       - run: ./run push:linux
-      - name: Artifact
-        uses: actions/upload-artifact@v1
+      - name: Upload Linux Artifact
+        uses: actions/upload-artifact@v4
         with:
           name: linux
           path: build/linux
@@ -49,14 +48,14 @@ jobs:
     container: barichello/godot-ci:3.4.4
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - run: ./run prepare:ci
       - run: ./run export:windows
       - run: ./run push:windows
       - name: Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: windows
           path: build/windows
@@ -75,18 +74,19 @@ jobs:
     container: barichello/godot-ci:3.4.4
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - run: ./run prepare:ci
       - run: ./run export:osx
       - run: ./run push:osx
       - name: Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
-          name: osx
+          name: macos-build
           path: build/osx
-      - name: Releases
+          retention-days: 30
+      - name: Upload macOS Release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -94,7 +94,6 @@ jobs:
           tag: osx
           file_glob: true
           overwrite: true
-  
 
   export-web:
     name: Web Export
@@ -102,17 +101,16 @@ jobs:
     container: barichello/godot-ci:3.4.4
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - run: ./run prepare:ci
-      #- if: ${{ github.ref == 'refs/heads/release' }}
       - run: ./run export:web
       - run: ./run push:web
       - name: Deploy to GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: build/web
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: build/web
           clean: false
