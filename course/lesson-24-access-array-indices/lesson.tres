@@ -224,25 +224,21 @@ The player knows they have a sword and a shield somewhere in their inventory, bu
 
 You can see the inventory drawn on the right, along with the index of each item in the inventory.
 
-Your task is find one sword and one shield in the array, then call [code]use_item()[/code] on each of them so the player can equip those items.
+Your task is to find one sword and one shield in the array using their index, then call [code]use_item()[/code] on each of them so the player can equip those items.
 
-For example, if the first item in the array is what you need, you would call [code]use_item(inventory[0])[/code].
+For example, if the first item in the array is what you need, you would call [code]use_item(inventory[0])[/code]."
 starting_code = "var inventory = []
-
-# Before pick_items() is called, we will fill
-# the inventory variable with the items shown
-# on the right
 
 func pick_items():
 	"
 cursor_line = 0
 cursor_column = 0
-hints = PoolStringArray( "Use the function [code]use_item(item)[/code], where [code]item[/code] is an element of the [code]inventory[/code] array", "Use [code]brackets[/code] to access specific array indices" )
+hints = PoolStringArray( "Use the function [code]use_item(index)[/code], where [code]index[/code] is the index of an item in the [code]inventory[/code] array", "Use [code]square brackets[/code] to access specific array indices" )
 validator_script_path = "res://course/lesson-24-access-array-indices/find-crystals/TestFindCrystals.gd"
 script_slice_path = "res://course/lesson-24-access-array-indices/find-crystals/FindCrystals.live-editor/slices/FindCrystals.pick.slice.tres"
 documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 1 )
-description = "Find the right items to use in the player's inventory."
+description = "Find the right items to use in the player's inventory, using their index."
 
 [sub_resource type="Resource" id=21]
 script = ExtResource( 3 )
