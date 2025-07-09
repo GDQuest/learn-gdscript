@@ -26,33 +26,17 @@ In the [Discussions](https://github.com/GDQuest/learn-gdscript/discussions) tab,
 
 ## How to contribute
 
-Contributions are welcome if you feel like giving a hand.
+Contributions are most welcome if you'd like to help us improve the app!
 
-To contribute, you need to follow a couple of guidelines.
+You can help us by:
 
-First, we ultimately decide on the app's design and features or changes. Before you make a change, please ensure there's an existing [Issues](https://github.com/GDQuest/learn-gdscript/issues) for it, and please let us know you're working on it.
+- **Translating** the app into your language. The translations are stored in a separate repository: [GDQuest/learn-gdscript-translations](https://github.com/GDQuest/learn-gdscript-translations). Please check it out if you want to help us translate the lessons.
+- **Reporting bugs** and typos in the [Issues](issues) tab.
+- **Making pull requests** to fix bugs, typos, or improve the app.
 
-Here's our GDScript code style guide: [GDQuest GDScript style guide](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/).
+Please make sure to get in touch before making any substantial change! You can ask us in the issue tracker directly if you have any questions on how to go about addressing specific issues. We'll be happy to help you get started.
 
-Please always start pull request titles and commit messages with one of the following prefixes:
-
-- `feat:` for new features.
-- `improvement:` for an improvement to an existing feature.
-- `fix:` for a bug fix.
-- `docs:` for changes to the project's documentation.
-- `build:` for anything related to GitHub actions.
-- `content:` for changes to lesson and helper text, be it correcting typos, adding new paragraphs, and more.
-
-### How we work
-
-We may directly edit your code to merge it faster when reviewing your changes. This is something we do in our team, too, for efficiency. We may also request changes.
-
-Finally, if some contribution doesn't work for us, we _may_ close the pull request.
-
-This happens primarily in two cases:
-
-- The changes don't answer an issue we created or vetted.
-- The pull request's author didn't make the requested changes for over a month.
+For code contributions, be sure to bookmark our GDScript code style guide: [GDQuest GDScript style guide](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/).
 
 ### Importing the app in Godot to contribute
 
@@ -76,6 +60,6 @@ That's why the lessons in Learn GDScript From Zero isolate and sandbox programmi
 
 Students naturally solidify these concepts as they revisit them in the context of game projects and tutorials. They can also always refer back to the app to review what they learned.
 
-Since then we've built [our own web platform](https://www.gdquest.com/library/first_3d_game_godot4_arena_fps/) with more lesson options. This lets students who want the gist of things get just that, while those who want to learn more can opt into detailed explanations.
+Since then, we've built [our own web platform](https://www.gdquest.com/library/first_3d_game_godot4_arena_fps/) with more lesson options. This lets students who want the gist of things get just that, while those who want to learn more can opt into detailed explanations.
 
 When we built Learn GDScript From Zero, we didn't have the resources to make this platform or basically build two or three courses into one to cater to different kinds of people. So we chose to keep the app simple and focused on the essentials.
