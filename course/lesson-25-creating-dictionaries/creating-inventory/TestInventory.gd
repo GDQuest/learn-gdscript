@@ -11,7 +11,6 @@ var desired_inventory := {
 func _prepare() -> void:
 	inventory = _scene_root_viewport.get_child(0)
 
-
 func test_inventory_has_correct_keys():
 	var source: Dictionary = inventory.get("inventory")
 
@@ -31,18 +30,24 @@ func test_inventory_has_correct_keys():
 
 	return ""
 
-
 func test_inventory_has_correct_values():
 	var source: Dictionary = inventory.get("inventory")
-	var inventories_match := desired_inventory.size() == source.size() and desired_inventory.has_all(source.keys())
-	if inventories_match:
+	var inventory_values_match := desired_inventory.size() == source.size() and desired_inventory.has_all(source.keys())
+	var inventory_keys_match : bool = true
+	if inventory_values_match:
 		for key in source.keys():
 			if not desired_inventory[key] == source[key]:
-				inventories_match = false
+				inventory_keys_match = false
 				break
 	else:
+		return tr(
+			"The inventory doesn't contain all the required items. Make sure you have '%s' as keys in your inventory dictionary."
+		) % PoolStringArray(desired_inventory.keys()).join("', '")
+
+	if not inventory_keys_match:
 		return tr(
 			"The values for one or more items aren't correct. You need %s healing hearts, %s gems, and %s sword."
 		) % [desired_inventory["healing heart"], desired_inventory["gems"], desired_inventory["sword"]]
 
-	return ""
+	else:
+		return ""
