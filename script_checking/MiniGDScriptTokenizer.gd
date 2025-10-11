@@ -20,6 +20,9 @@ class_name MiniGDScriptTokenizer
 
 const TOKEN_FUNC_DECLARATION := "function_declaration"
 const TOKEN_FUNC_CALL := "function_call"
+const TOKEN_WHILE_LOOP := "while_loop"
+const TOKEN_BREAK := "break_statement"
+const TOKEN_ASSIGNMENT := "assignment"
 
 var tokens := []
 
@@ -31,10 +34,21 @@ var _current_line := ""
 var _current_scope := []
 var _indent_regex := RegEx.new()
 
+# Order matters! While loop must be checked before function call to avoid matching "while(...)" as a function
+var _token_order := [
+	TOKEN_FUNC_DECLARATION,
+	TOKEN_WHILE_LOOP,
+	TOKEN_BREAK,
+	TOKEN_ASSIGNMENT,
+	TOKEN_FUNC_CALL,
+]
 
 var _available_tokens := {
 	TOKEN_FUNC_DECLARATION: "^func\\s+(?<func_name>[a-zA-Z_].*?)(?:\\(\\s*(?:(?<args>[^)]+)[,)])*|\\):)",
 	TOKEN_FUNC_CALL: "\\t.*?\\s?(?<func_name>[a-zA-Z_][a-zA-Z0-9_]+)\\(\\s*(?<params>.*?)\\s*\\)",
+	TOKEN_WHILE_LOOP: "^\\s*while\\s*\\(?\\s*(?<condition>.+?)\\s*\\)?\\s*:",
+	TOKEN_BREAK: "^\\s*(?<keyword>break)\\s*$",
+	TOKEN_ASSIGNMENT: "^\\s*(?<var_name>[a-zA-Z_][a-zA-Z0-9_]*)(?:\\.[a-zA-Z_][a-zA-Z0-9_]*)*\\s*[+\\-*/]?=",
 }
 
 
@@ -81,7 +95,7 @@ func _process_function_declaration(token: Dictionary):
 			"name": "",
 			"type": "",
 			"default": "",
-			"required": true
+			"required": true,
 		}
 		param.name = tuple[0].strip_edges()
 		if tuple.size() > 1:
@@ -100,19 +114,65 @@ func _process_function_declaration(token: Dictionary):
 	_line_index += 1
 
 
+func _process_while_loop(token: Dictionary):
+	var body := []
+	token["body"] = body
+	var previous_scope := _current_scope
+	_current_scope.append(token)
+	_current_scope = body
+	_line_index += 1
+
+	var while_indent := 0
+	var line := _code_lines[_line_index - 1]
+	for i in range(line.length()):
+		if line[i] == ' ' or line[i] == '\t':
+			while_indent += 1
+		else:
+			break
+
+	# Continue parsing the body until we reach a statement with equal or less indentation
+	while _line_index < _code_lines.size():
+		var current_line := _code_lines[_line_index]
+
+		if current_line.strip_edges() == "" or current_line.strip_edges().begins_with("#"):
+			_line_index += 1
+			continue
+
+		var current_indent := 0
+		for i in range(current_line.length()):
+			if current_line[i] == ' ' or current_line[i] == '\t':
+				current_indent += 1
+			else:
+				break
+
+		# If we've dedented, the while body is done. Otherwise, tokenize this
+		# line as part of the while body
+		if current_indent <= while_indent:
+			_current_scope = previous_scope
+			return
+
+		var found_token := _tokenize_line(current_line)
+		if not found_token:
+			_line_index += 1
+
+	_current_scope = previous_scope
+
+
 func _test_regex(type: String, regex: RegEx, line: String) -> bool:
 	var regex_match := regex.search(line)
-	if regex_match == null or regex_match.names.size() == 0:
+	if regex_match == null:
 		return false
 
 	var token := {
-		"type": type
+		"type": type,
 	}
 	for group_name in regex_match.names:
 		token[group_name] = regex_match.get_string(group_name)
 
 	if type == TOKEN_FUNC_DECLARATION:
 		_process_function_declaration(token)
+	elif type == TOKEN_WHILE_LOOP:
+		_process_while_loop(token)
 	else:
 		_current_scope.append(token)
 		_line_index += 1
@@ -120,7 +180,7 @@ func _test_regex(type: String, regex: RegEx, line: String) -> bool:
 
 
 func _tokenize_line(line: String) -> bool:
-	for token_type in _available_tokens:
+	for token_type in _token_order:
 		var regex := _available_tokens[token_type] as RegEx
 		var found_token := _test_regex(token_type, regex, line)
 		if found_token:
@@ -132,7 +192,6 @@ func _tokenize_line(line: String) -> bool:
 #
 # Analysis Utilities
 #
-
 # If there is one recursive function, this function returns its name
 func find_any_recursive_function() -> String:
 	for token in tokens:
@@ -141,3 +200,90 @@ func find_any_recursive_function() -> String:
 				if sub_token.type == TOKEN_FUNC_CALL and sub_token.func_name == token.func_name:
 					return token.func_name
 	return ""
+
+
+# Returns true if there is an infinite while loop in the code
+func has_infinite_while_loop() -> bool:
+	return _check_infinite_while_in_tokens(tokens)
+
+
+# Recursively checks tokens for infinite while loops
+func _check_infinite_while_in_tokens(token_list: Array) -> bool:
+	for token in token_list:
+		if token.type == TOKEN_WHILE_LOOP:
+			if _is_while_loop_infinite(token):
+				return true
+		elif token.has("body"):
+			if _check_infinite_while_in_tokens(token.body):
+				return true
+	return false
+
+
+func _is_while_loop_infinite(while_token: Dictionary) -> bool:
+	var condition: String = while_token.get("condition", "")
+
+	if _has_break_statement(while_token.body):
+		return false
+
+	var stripped := condition.strip_edges()
+	if stripped in ["true", "1"] or stripped in ["not false", "!false"]:
+		return true
+
+	# Here we check if it is a condition based on variables that are never modified,
+	# like a count variable that never changes in the loop body
+	var condition_vars := _extract_variables_from_condition(condition)
+	if condition_vars.size() > 0:
+		var modified_vars := _get_modified_variables(while_token.body)
+		for var_name in condition_vars:
+			if not modified_vars.has(var_name):
+				return true
+
+	return false
+
+
+# Extracts variable names from a condition string
+func _extract_variables_from_condition(condition: String) -> Array:
+	var variables := []
+	var var_regex := RegEx.new()
+	# This captures variables including dot access like position.x
+	var_regex.compile("([a-zA-Z_][a-zA-Z0-9_]*)(?:\\.[a-zA-Z_][a-zA-Z0-9_]*)*")
+
+	var matches := var_regex.search_all(condition)
+	for regex_match in matches:
+		var var_name: String = regex_match.get_string(1)
+		# Ignore keywords
+		if not var_name in ["true", "false", "and", "or", "not"]:
+			if not variables.has(var_name):
+				variables.append(var_name)
+
+	return variables
+
+
+# Returns all the variables that are modified (assigned to) in a token body
+func _get_modified_variables(body: Array) -> Array:
+	var modified := []
+
+	for token in body:
+		if token.type == TOKEN_ASSIGNMENT:
+			var var_name: String = token.get("var_name", "")
+			if var_name != "" and not modified.has(var_name):
+				modified.append(var_name)
+
+		if token.has("body"):
+			var nested_modified := _get_modified_variables(token.body)
+			for var_name in nested_modified:
+				if not modified.has(var_name):
+					modified.append(var_name)
+
+	return modified
+
+
+# Checks if a token body contains a break statement
+func _has_break_statement(body: Array) -> bool:
+	for token in body:
+		if token.type == TOKEN_BREAK:
+			return true
+		if token.has("body"):
+			if _has_break_statement(token.body):
+				return true
+	return false

@@ -261,7 +261,10 @@ func _validate_and_run_student_code() -> void:
 	var script_file_path := _script_slice.get_script_properties().file_path.lstrip("res://")
 
 	# Do local sanity checks for the script.
-	var recursive_function := MiniGDScriptTokenizer.new(script_text).find_any_recursive_function()
+	var tokenizer := MiniGDScriptTokenizer.new(script_text)
+	
+	# Check for recursive functions
+	var recursive_function := tokenizer.find_any_recursive_function()
 	if recursive_function != "":
 		var error := ScriptError.new()
 		error.message = (
@@ -273,6 +276,18 @@ func _validate_and_run_student_code() -> void:
 		MessageBus.print_script_error(error, script_file_name)
 		_code_editor.unlock_editor()
 		return
+	# Check for infinite while loops
+	if tokenizer.has_infinite_while_loop():
+		var error := ScriptError.new()
+		error.message = tr(
+			"You have a while loop that runs forever (while true) without a break statement. This will freeze the app."
+		)
+		error.severity = 1
+		error.code = GDQuestCodes.ErrorCode.INFINITE_WHILE_LOOP
+		MessageBus.print_script_error(error, script_file_name)
+		_code_editor.unlock_editor()
+		return
+
 
 	var verifier := OfflineScriptVerifier.new(script_text)
 	verifier.test()
