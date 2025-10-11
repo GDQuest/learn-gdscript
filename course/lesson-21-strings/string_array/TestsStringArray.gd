@@ -34,6 +34,28 @@ func test_use_for_loop() -> String:
 
 func test_robot_combo_is_correct() -> String:
 	var robot_combo = robot.get("combo")
-	if not robot_combo == desired_combo:
-		return "The combo isn't correct. Did you use the right actions in the right order?"
-	return ""
+	# pass if robot combo already matches expected
+	if robot_combo == desired_combo:
+		return ""
+	# otherwise inspect the student's code; preprocess_practice_code removes spaces/comments
+	var processed_code := _slice.preprocess_practice_code(_slice.current_text)
+	# allow a local 'combo' (declared with or without 'var') used correctly in a for loop
+	if "var combo" in processed_code or "combo=" in processed_code:
+		var regex = RegEx.new()
+		# match: for<iterator>incombo  (no spaces because spaces were removed)
+		regex.compile("for(\\w+)incombo")
+		var result = regex.search(processed_code)
+		if result:
+			var iterator_name = result.get_string(1)
+			# processed_code has no spaces, so check play_animation(iterator) similarly
+			if ("play_animation(" + iterator_name + ")") in processed_code:
+				return ""
+		# also accept indexed access inside a loop: for i in ... play_animation(combo[i])
+		# match iterator used as index into combo
+		regex.compile("for(\\w+)in")
+		result = regex.search(processed_code)
+		if result:
+			var it = result.get_string(1)
+			if ("play_animation(combo[" + it + "])") in processed_code:
+				return ""
+	return "The combo isn't correct. Did you use the right actions in the right order?"
