@@ -19,20 +19,17 @@ var _slice: SliceProperties
 var _test_methods := _find_test_method_names()
 var _code_lines := []
 
-
 # We're not using _init() because it doesn't work unless you define it and call the parent's constructor in child classes. It would add boilerplate to every PracticeTester script.
 func setup(scene_root: Node, slice: SliceProperties) -> void:
 	_slice = slice
 	_scene_root_viewport = scene_root
 
-
 func get_test_names() -> Array:
 	return _test_methods.values()
 
-
 func run_tests() -> TestResult:
 	var result := TestResult.new()
-	
+
 	_code_lines.clear()
 	_prepare()
 
@@ -50,7 +47,6 @@ func run_tests() -> TestResult:
 
 	return result
 
-
 func _find_test_method_names() -> Dictionary:
 	var output := {}
 
@@ -66,18 +62,15 @@ func _find_test_method_names() -> Dictionary:
 
 	return output
 
-
 # Virtual method.
 # Called before running tests.
 func _prepare() -> void:
 	pass
 
-
 # Virtual method.
 # Called after running tests.
 func _clean_up() -> void:
 	pass
-
 
 # Returns true if a line in the input `code` matches one of the `target_lines`.
 # Uses String.match to match lines, so you can use ? and * in `target_lines`.
@@ -87,16 +80,18 @@ func matches_code_line(target_lines: Array) -> bool:
 
 	for line in _code_lines:
 		line = line.replace(" ", "").strip_edges()
+		# Allow optional trailing semicolons so students who add ';' at the end of lines still pass.
+		while line.ends_with(";"):
+			line = line.substr(0, line.length() - 1)
 		for match_pattern in target_lines:
 			if line.match(match_pattern):
 				return true
 	return false
 
-
 # Returns true if a line in the input `code` matches one of the `target_lines`.
 # Uses RegEx to match lines.
 func matches_code_line_regex(regex_patterns: Array) -> bool:
-	var regexes = []
+	var regexes := []
 	for pattern in regex_patterns:
 		var regex := RegEx.new()
 		regex.compile(pattern)
@@ -106,12 +101,14 @@ func matches_code_line_regex(regex_patterns: Array) -> bool:
 		_code_lines = _slice.current_text.split("\n")
 
 	for line in _code_lines:
+		# Normalize line before running regexes: remove spaces/edges and optional trailing semicolons.
+		var cleaned: String = line.replace(" ", "").strip_edges()
+		while cleaned.ends_with(";"):
+			cleaned = cleaned.substr(0, cleaned.length() - 1)
 		for regex in regexes:
-			var m = regex.search(line)
-			if regex.search(line):
+			if regex.search(cleaned):
 				return true
 	return false
-
 
 class TestResult:
 	# List of tests passed successfully in the test suite.
