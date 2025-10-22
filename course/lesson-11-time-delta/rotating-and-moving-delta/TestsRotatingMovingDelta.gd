@@ -28,7 +28,7 @@ func test_moving_in_a_circle() -> String:
 #			return tr(
 #				"It seems that you called move_local_x() with two arguments but you should only use one. Did you add a comma between values? You need to multipy them instead."
 #			)
-
+	
 	if not has_rotate:
 		return tr("Did you use rotate() to make the sprite rotate?")
 	elif not has_move_local:
@@ -50,10 +50,12 @@ func test_movement_is_time_dependent() -> String:
 
 
 func test_movement_speed_is_correct() -> String:
-	var has_correct_rotation := matches_code_line(["rotate(delta*2*)", "rotate(2*delta)"])
-	var has_correct_speed := matches_code_line(
-		["move_local_x(100*delta*)", "move_local_x(delta*100*)"]
-	)
+	var has_correct_rotation := matches_code_line_regex([
+		"rotate\\s*\\(\\s*(?:2(?:\\.0+)?\\s*\\*\\s*delta|delta\\s*\\*\\s*2(?:\\.0+)?)\\s*\\)"
+	])
+	var has_correct_speed := matches_code_line_regex([
+		"move_local_x\\s*\\(\\s*(?:100(?:\\.0+)?\\s*\\*\\s*delta|delta\\s*\\*\\s*100(?:\\.0+)?)\\s*\\)"
+	])
 
 	if not has_correct_rotation:
 		return tr("Is the rotation speed correct?")

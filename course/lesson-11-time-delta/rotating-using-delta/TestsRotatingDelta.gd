@@ -37,8 +37,8 @@ func test_rotating_character_is_time_dependent() -> String:
 
 func test_rotation_speed_is_2_radians_per_second() -> String:
 	if not _has_proper_body:
-		var regex_has_two = RegEx.new()
-		regex_has_two.compile("rotate\\([^\\)0-9.]*2[^0-9.\\)]*\\)|rotate\\([^\\)0-9.]*2\\.[0]+[^0-9.\\)]*\\)")
+		var regex_has_two := RegEx.new()
+		regex_has_two.compile("rotate\\s*\\(\\s*(?:2(?:\\.0+)?\\s*\\*\\s*delta|delta\\s*\\*\\s*2(?:\\.0+)?)\\s*\\)")
 
 		var has_two: bool = regex_has_two.search(_body) != null
 		if not has_two:
