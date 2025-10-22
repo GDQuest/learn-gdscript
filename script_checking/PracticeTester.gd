@@ -88,10 +88,11 @@ func matches_code_line(target_lines: Array) -> bool:
 				return true
 	return false
 
+
 # Returns true if a line in the input `code` matches one of the `target_lines`.
 # Uses RegEx to match lines.
 func matches_code_line_regex(regex_patterns: Array) -> bool:
-	var regexes := []
+	var regexes = []
 	for pattern in regex_patterns:
 		var regex := RegEx.new()
 		regex.compile(pattern)
@@ -101,12 +102,8 @@ func matches_code_line_regex(regex_patterns: Array) -> bool:
 		_code_lines = _slice.current_text.split("\n")
 
 	for line in _code_lines:
-		# Normalize line before running regexes: remove spaces/edges and optional trailing semicolons.
-		var cleaned: String = line.replace(" ", "").strip_edges()
-		while cleaned.ends_with(";"):
-			cleaned = cleaned.substr(0, cleaned.length() - 1)
 		for regex in regexes:
-			if regex.search(cleaned):
+			if regex.search(line):
 				return true
 	return false
 
