@@ -19,13 +19,16 @@ var _slice: SliceProperties
 var _test_methods := _find_test_method_names()
 var _code_lines := []
 
+
 # We're not using _init() because it doesn't work unless you define it and call the parent's constructor in child classes. It would add boilerplate to every PracticeTester script.
 func setup(scene_root: Node, slice: SliceProperties) -> void:
 	_slice = slice
 	_scene_root_viewport = scene_root
 
+
 func get_test_names() -> Array:
 	return _test_methods.values()
+
 
 func run_tests() -> TestResult:
 	var result := TestResult.new()
@@ -47,8 +50,9 @@ func run_tests() -> TestResult:
 
 	return result
 
+
 func _find_test_method_names() -> Dictionary:
-	var output := {}
+	var output := { }
 
 	var methods := []
 	for method in get_method_list():
@@ -62,15 +66,18 @@ func _find_test_method_names() -> Dictionary:
 
 	return output
 
+
 # Virtual method.
 # Called before running tests.
 func _prepare() -> void:
 	pass
 
+
 # Virtual method.
 # Called after running tests.
 func _clean_up() -> void:
 	pass
+
 
 # Returns true if a line in the input `code` matches one of the `target_lines`.
 # Uses String.match to match lines, so you can use ? and * in `target_lines`.
@@ -79,10 +86,7 @@ func matches_code_line(target_lines: Array) -> bool:
 		_code_lines = _slice.current_text.split("\n")
 
 	for line in _code_lines:
-		line = line.replace(" ", "").strip_edges()
-		# Allow optional trailing semicolons so students who add ';' at the end of lines still pass.
-		while line.ends_with(";"):
-			line = line.substr(0, line.length() - 1)
+		line = line.replace(" ", "").strip_edges().rstrip(";")
 		for match_pattern in target_lines:
 			if line.match(match_pattern):
 				return true
@@ -107,10 +111,12 @@ func matches_code_line_regex(regex_patterns: Array) -> bool:
 				return true
 	return false
 
+
 class TestResult:
 	# List of tests passed successfully in the test suite.
 	var passed_tests := []
-	var errors := {}
+	var errors := { }
+
 
 	func is_success() -> bool:
 		return errors.empty()
