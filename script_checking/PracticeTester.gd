@@ -32,7 +32,7 @@ func get_test_names() -> Array:
 
 func run_tests() -> TestResult:
 	var result := TestResult.new()
-	
+
 	_code_lines.clear()
 	_prepare()
 
@@ -52,7 +52,7 @@ func run_tests() -> TestResult:
 
 
 func _find_test_method_names() -> Dictionary:
-	var output := {}
+	var output := { }
 
 	var methods := []
 	for method in get_method_list():
@@ -86,7 +86,7 @@ func matches_code_line(target_lines: Array) -> bool:
 		_code_lines = _slice.current_text.split("\n")
 
 	for line in _code_lines:
-		line = line.replace(" ", "").strip_edges()
+		line = line.replace(" ", "").strip_edges().rstrip(";")
 		for match_pattern in target_lines:
 			if line.match(match_pattern):
 				return true
@@ -107,7 +107,6 @@ func matches_code_line_regex(regex_patterns: Array) -> bool:
 
 	for line in _code_lines:
 		for regex in regexes:
-			var m = regex.search(line)
 			if regex.search(line):
 				return true
 	return false
@@ -116,7 +115,8 @@ func matches_code_line_regex(regex_patterns: Array) -> bool:
 class TestResult:
 	# List of tests passed successfully in the test suite.
 	var passed_tests := []
-	var errors := {}
+	var errors := { }
+
 
 	func is_success() -> bool:
 		return errors.empty()
