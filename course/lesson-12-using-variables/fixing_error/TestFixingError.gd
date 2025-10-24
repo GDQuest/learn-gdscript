@@ -30,10 +30,10 @@ func test_angular_speed_has_value_of_4() -> String:
 
 func test_angular_speed_is_used_in_process_function() -> String:
 	var regex = RegEx.new()
-	regex.compile("rotate\\(\\s*angular_speed")
+	regex.compile("rotate\\([^)]*(?:angular_speed\\s*\\*\\s*delta|delta\\s*\\*\\s*angular_speed)")
 	var result = regex.search(_slice.current_text)
 	if not result:
-		return tr("The rotate() function doesn't seem to use the angular_speed variable.")
+		return tr("The rotate() call must multiply angular_speed by delta (e.g. rotate(angular_speed * delta)).")
 	return ""
 
 
