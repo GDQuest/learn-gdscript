@@ -235,10 +235,10 @@ func _is_while_loop_infinite(while_token: Dictionary) -> bool:
 	if condition_vars.size() > 0:
 		var modified_vars := _get_modified_variables(while_token.body)
 		for var_name in condition_vars:
-			if not modified_vars.has(var_name):
-				return true
+			if modified_vars.has(var_name):
+				return false
 
-	return false
+	return true
 
 
 # Extracts variable names from a condition string
@@ -268,6 +268,10 @@ func _get_modified_variables(body: Array) -> Array:
 			var var_name: String = token.get("var_name", "")
 			if var_name != "" and not modified.has(var_name):
 				modified.append(var_name)
+				# Also extract the base variable name (before dot) for property assignments
+				var base_var := var_name.split(".")[0]
+				if base_var != var_name and not modified.has(base_var):
+					modified.append(base_var)
 
 		if token.has("body"):
 			var nested_modified := _get_modified_variables(token.body)
