@@ -229,57 +229,7 @@ func _is_while_loop_infinite(while_token: Dictionary) -> bool:
 	if stripped in ["true", "1"] or stripped in ["not false", "!false"]:
 		return true
 
-	# Here we check if it is a condition based on variables that are never modified,
-	# like a count variable that never changes in the loop body
-	var condition_vars := _extract_variables_from_condition(condition)
-	if condition_vars.size() > 0:
-		var modified_vars := _get_modified_variables(while_token.body)
-		for var_name in condition_vars:
-			if modified_vars.has(var_name):
-				return false
-
-	return true
-
-
-# Extracts variable names from a condition string
-func _extract_variables_from_condition(condition: String) -> Array:
-	var variables := []
-	var var_regex := RegEx.new()
-	# This captures variables including dot access like position.x
-	var_regex.compile("([a-zA-Z_][a-zA-Z0-9_]*)(?:\\.[a-zA-Z_][a-zA-Z0-9_]*)*")
-
-	var matches := var_regex.search_all(condition)
-	for regex_match in matches:
-		var var_name: String = regex_match.get_string(1)
-		# Ignore keywords
-		if not var_name in ["true", "false", "and", "or", "not"]:
-			if not variables.has(var_name):
-				variables.append(var_name)
-
-	return variables
-
-
-# Returns all the variables that are modified (assigned to) in a token body
-func _get_modified_variables(body: Array) -> Array:
-	var modified := []
-
-	for token in body:
-		if token.type == TOKEN_ASSIGNMENT:
-			var var_name: String = token.get("var_name", "")
-			if var_name != "" and not modified.has(var_name):
-				modified.append(var_name)
-				# Also extract the base variable name (before dot) for property assignments
-				var base_var := var_name.split(".")[0]
-				if base_var != var_name and not modified.has(base_var):
-					modified.append(base_var)
-
-		if token.has("body"):
-			var nested_modified := _get_modified_variables(token.body)
-			for var_name in nested_modified:
-				if not modified.has(var_name):
-					modified.append(var_name)
-
-	return modified
+	return false
 
 
 # Checks if a token body contains a break statement
