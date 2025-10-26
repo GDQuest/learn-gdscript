@@ -59,31 +59,32 @@ func move_forward(distance: float) -> void:
 		previous_point = _points[-1]
 	var new_point := previous_point + Vector2.RIGHT.rotated(deg2rad(turn_degrees)) * distance
 	new_point = new_point.snapped(Vector2.ONE)
-	var is_closed := false
-	# Consider the polygon closed if a coordinate is repeated.
-	if new_point in _points:
-		is_closed = true
+	
 	_points.append(new_point)
 	_temp_command_stack.append(
 		{command = "move_to", target = new_point + position + _current_offset}
 	)
-	if is_closed:
-		_close_polygon()
+	_temp_command_stack.append({command = "close"})
 
 
 func turn_right(angle_degrees: float) -> void:
+	_remove_pending_close_checks()
 	turn_degrees = round(turn_degrees + angle_degrees)
 	_temp_command_stack.append({command = "turn", angle = round(angle_degrees)})
+	_temp_command_stack.append({command = "close"})
 
 
 func turn_left(angle_degrees: float) -> void:
+	_remove_pending_close_checks()
 	turn_degrees = round(turn_degrees - angle_degrees)
 	_temp_command_stack.append({command = "turn", angle = round(-angle_degrees)})
+	_temp_command_stack.append({command = "close"})
 
 
 # Completes the current polygon's drawing and virtually jumps the turtle to a
 # new start position.
 func jump(x: float, y: float) -> void:
+	_remove_pending_close_checks()
 	var last_point := Vector2.ZERO if _points.empty() else _points[-1]
 	_close_polygon()
 	_points.append(Vector2.ZERO)
@@ -96,6 +97,7 @@ func jump(x: float, y: float) -> void:
 # reset the object between runs.
 func reset() -> void:
 	_command_stack.clear()
+	_temp_command_stack.clear()
 	stop_animation()
 	_animate_jump(0)
 
@@ -126,6 +128,7 @@ func stop_animation() -> void:
 # Queues all tweens required to animate the turtle drawing all the shapes and
 # starts the tween animation.
 func play_draw_animation() -> void:
+	_remove_pending_close_checks()
 	_close_polygon()
 
 	# We queue all tweens at once, based on commands: moving the turtle, turning
@@ -236,8 +239,30 @@ func _animate_jump(progress: float) -> void:
 	_shadow.scale = shadow_scale * Vector2.ONE
 
 
+func _remove_pending_close_checks() -> void:
+	var filtered := []
+	for command in _temp_command_stack:
+		if command.command != "close":
+			filtered.append(command)
+	_temp_command_stack = filtered
+
+
 func _close_polygon() -> void:
 	if _points.empty():
+		return
+	
+	# Check if the polygon has vertices that align. In that case, we consider it
+	# closed.
+	var is_closed := false
+	if _points.size() > 1:
+		var last_point = _points[-1]
+		for i in range(_points.size() - 1):
+			if _points[i].is_equal_approx(last_point):
+				is_closed = true
+				break
+	
+	if _points.size() <= 1:
+		_points.clear()
 		return
 
 	var polygon := Polygon.new()
