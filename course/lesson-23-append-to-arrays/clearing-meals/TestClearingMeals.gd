@@ -8,7 +8,7 @@ func _prepare() -> void:
 
 
 func test_used_pop_front() -> String:
-	if not "waiting_orders.pop_front()" in _slice.current_text:
+	if not "waiting_orders.pop_front" in _slice.current_text:
 		return tr("We found no call to the pop_front() function. Did you forget to call it?")
 	return ""
 
