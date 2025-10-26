@@ -12,8 +12,8 @@ func test_all_items_are_displayed():
 	var source: Dictionary = grid.get("units")
 	var dicts_match := displayed.has_all(source.keys())
 	if dicts_match:
-		for value in displayed.values():
-			if not source.values().has(value):
+		for key in displayed:
+			if displayed[key] != source[key]:
 				dicts_match = false
 				break
 
