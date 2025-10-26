@@ -59,7 +59,6 @@ func move_forward(distance: float) -> void:
 		previous_point = _points[-1]
 	var new_point := previous_point + Vector2.RIGHT.rotated(deg2rad(turn_degrees)) * distance
 	new_point = new_point.snapped(Vector2.ONE)
-	_points.append(new_point)
 	var is_closed := false
 	if new_point in _points:
 		# consider the polygon closed if a coordinate is repeated.
