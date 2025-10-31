@@ -46,7 +46,7 @@ func _init() -> void:
 	
 
 	_REGEXES["code"].compile("\\[code\\](.+?)\\[\\/code\\]")
-	_REGEXES["func"].compile("(?<func>func)")
+	_REGEXES["func"].compile("(?<func>\\bfunc\\b)")
 	_REGEXES["number"].compile("(?<number>-?\\d+(\\.\\d+)?)")
 	_REGEXES["string"].compile("(?<string>[\"'].+[\"'])")
 	_REGEXES["symbol"].compile("(?<symbol>[a-zA-Z][a-zA-Z0-9_]+|[a-zA-Z])")
