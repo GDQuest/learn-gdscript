@@ -10,7 +10,7 @@ const OutputConsoleErrorMessage := preload("./OutputConsoleErrorMessage.gd")
 const OutputConsoleErrorMessageScene := preload("./OutputConsoleErrorMessage.tscn")
 const OutputConsolePrintMessageScene := preload("./OutputConsolePrintMessage.tscn")
 
-var _slice_properties: SliceProperties
+var _slice_properties: ScriptSlice = null
 
 onready var _scroll_container := $MarginContainer/VBoxContainer/ScrollContainer as ScrollContainer
 onready var _message_list := $MarginContainer/VBoxContainer/ScrollContainer/MessageList as Control
@@ -29,8 +29,8 @@ func _ready() -> void:
 	MessageBus.connect("print_request", self, "print_bus_message")
 
 
-func setup(slice_properties: SliceProperties) -> void:
-	_slice_properties = slice_properties
+func setup(slice: ScriptSlice) -> void:
+	_slice_properties = slice
 
 
 # Adds a message related to a specific line in a specific file
@@ -86,8 +86,8 @@ func print_error(type: int, text: String, file_name: String, line: int, characte
 
 	# We need to adjust the reported range to show the lines as the student sees them
 	# in the slice editor.
-	var show_lines_from := _slice_properties.start_offset
-	var show_lines_to := _slice_properties.end_offset
+	var show_lines_from := _slice_properties.get_start_offset()
+	var show_lines_to := _slice_properties.get_end_offset()
 	var character_offset := _slice_properties.leading_spaces
 
 	var message_node := OutputConsoleErrorMessageScene.instance() as OutputConsoleErrorMessage

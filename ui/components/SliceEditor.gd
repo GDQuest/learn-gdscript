@@ -34,7 +34,7 @@ var errors_overlay_message: ErrorOverlayPopup = ErrorOverlayPopupScene.instance(
 # Array<ScriptError>
 var errors := [] setget set_errors
 
-var _slice_properties: SliceProperties
+var _slice_properties: ScriptSlice = null
 # Used to know when to add an indent level.
 var _current_line := cursor_get_line()
 var _remove_last_character := false
@@ -105,8 +105,8 @@ func _gui_input(event: InputEvent) -> void:
 				_last_selection_end = Vector2(get_selection_to_line(), get_selection_to_column())
 
 
-func setup(slice_properties: SliceProperties) -> void:
-	_slice_properties = slice_properties
+func setup(slice: ScriptSlice) -> void:
+	_slice_properties = slice
 
 
 func sync_text_with_slice() -> void:
@@ -215,10 +215,10 @@ func _reset_overlays() -> void:
 	if slice_properties == null:
 		return
 
-	var show_lines_from = slice_properties.start_offset
-	var show_lines_to = slice_properties.end_offset
+	var show_lines_from = slice_properties.get_start_offset()
+	var show_lines_to = slice_properties.get_end_offset()
 
-	errors_overlay.lines_offset = slice_properties.start_offset
+	errors_overlay.lines_offset = slice_properties.get_start_offset()
 	errors_overlay.character_offset = slice_properties.leading_spaces
 
 	for index in errors.size():

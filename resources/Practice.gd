@@ -15,6 +15,9 @@ export(int, 9999) var cursor_column := 0
 export var hints := PoolStringArray()
 export(String, FILE) var validator_script_path := ""
 export(String, FILE) var script_slice_path := ""
+# Optional: Name of the EXPORT slice to use (if script has multiple EXPORT blocks)
+# If empty, will use the first EXPORT found in the script
+export var slice_name := ""
 export var documentation_references := PoolStringArray()
 export var documentation_resource: Resource = preload("res://course/Documentation.tres") setget set_documentation_resource
 export var description := ""

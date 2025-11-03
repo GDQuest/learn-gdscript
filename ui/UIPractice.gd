@@ -26,7 +26,7 @@ var _practice: Practice
 var _practice_completed := false
 var _practice_solution_used := false
 
-var _script_slice: SliceProperties setget _set_script_slice
+var _script_slice: ScriptSlice setget _set_script_slice
 var _tester: PracticeTester
 # If `true`, the text changed but was not saved.
 var _code_editor_is_dirty := false
@@ -159,10 +159,17 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	# TODO: Should probably avoid relying on content ID for getting paths.
 	var base_directory := practice.practice_id.get_base_dir()
 
-	var slice_path := practice.script_slice_path
-	if slice_path.is_rel_path():
-		slice_path = base_directory.plus_file(slice_path)
-	_set_script_slice(load(slice_path))
+	var script_path := practice.script_slice_path
+	if script_path.is_rel_path():
+		script_path = base_directory.plus_file(script_path)
+	if not script_path.begins_with("res://"):
+		script_path = "res://" + script_path
+	var slice_name := practice.slice_name if practice.slice_name else ""
+	var slice := SliceParser.load_from_script(script_path, slice_name)
+	if not slice:
+		push_error("Failed to load script slice from: " + script_path)
+		return
+	_set_script_slice(slice)
 	_code_editor.slice_editor.setup(_script_slice)
 	_code_editor.set_continue_allowed(false)
 
@@ -181,7 +188,7 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 		_info_panel.set_documentation(documentation_reference)
 
 	_info_panel.display_tests(_tester.get_test_names())
-	_game_view.use_scene(_current_scene, _script_slice.get_scene_properties().viewport_size)
+	_game_view.use_scene(_current_scene, _script_slice.get_viewport_size())
 
 	# In case we directly test a practice from the editor, we don't have access to the lesson.
 	if lesson and course:
@@ -228,13 +235,17 @@ func get_screen_resource() -> Practice:
 	return _practice
 
 
-func _set_script_slice(new_slice: SliceProperties) -> void:
+func _set_script_slice(new_slice: ScriptSlice) -> void:
 	if new_slice == _script_slice:
 		return
 	_script_slice = new_slice
 	_output_console.setup(_script_slice)
 
-	_current_scene = _script_slice.get_scene_properties().scene.instance()
+	var scene := _script_slice.get_scene()
+	if not scene:
+		push_error("Failed to load scene for script: " + _script_slice.script_path)
+		return
+	_current_scene = scene.instance()
 	_current_scene_reset_values.visible = _current_scene.get("visible")
 	_current_scene_reset_values.transform = _current_scene.get("transform")
 
@@ -256,9 +267,9 @@ func _validate_and_run_student_code() -> void:
 
 	# Complete the script from the slice and the base script.
 	_script_slice.current_text = _code_editor.get_text()
-	var script_text := _script_slice.current_full_text
-	var script_file_name := _script_slice.get_script_properties().file_name
-	var script_file_path := _script_slice.get_script_properties().file_path.lstrip("res://")
+	var script_text := _script_slice.get_current_full_text()
+	var script_file_name := _script_slice.get_script_file_name()
+	var script_file_path := _script_slice.get_script_file_path().lstrip("res://")
 
 	# Do local sanity checks for the script.
 	var tokenizer := MiniGDScriptTokenizer.new(script_text)
@@ -310,8 +321,6 @@ func _validate_and_run_student_code() -> void:
 			return
 
 	# Run student code
-	var nodes_paths := _script_slice.get_script_properties().nodes_paths
-
 	# Generate a runnable script, check for uncaught errors.
 	_code_editor.set_locked_message(tr("Running Your Code..."))
 	yield(get_tree(), "idle_frame")
@@ -373,6 +382,10 @@ func _validate_and_run_student_code() -> void:
 	_run_tests_requested = true
 	_run_autotimer.start()
 	# Reset and run the test scene.
+	# TODO: node_paths is a leftover from an older prototype where we had the ability
+	# to navigate and edit multiple scripts, so we needed to be able to update multiple
+	# nodes potentially. This could now be removed.
+	var nodes_paths := [NodePath("")]
 	_update_nodes(script, nodes_paths)
 
 
@@ -381,7 +394,7 @@ func _test_student_code() -> void:
 		return
 	_run_tests_requested = false
 
-	var script_file_name := _script_slice.get_script_properties().file_name
+	var script_file_name := _script_slice.get_script_file_name()
 
 	# Run tests on the scene.
 	_code_editor.set_locked_message(tr("Running Tests..."))

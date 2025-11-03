@@ -204,20 +204,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/components/RunnableCodeExampleDebugger.gd"
 }, {
-"base": "Resource",
-"class": "SceneProperties",
-"language": "GDScript",
-"path": "res://addons/gdscript-slice-exporter/collections/SceneProperties.gd"
-}, {
 "base": "Reference",
 "class": "ScriptError",
 "language": "GDScript",
 "path": "res://script_checking/ScriptError.gd"
-}, {
-"base": "Resource",
-"class": "ScriptProperties",
-"language": "GDScript",
-"path": "res://addons/gdscript-slice-exporter/collections/ScriptProperties.gd"
 }, {
 "base": "Resource",
 "class": "ScriptSlice",
@@ -239,15 +229,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/components/SliceEditorOverlay.gd"
 }, {
-"base": "Resource",
-"class": "SliceProperties",
-"language": "GDScript",
-"path": "res://addons/gdscript-slice-exporter/collections/SliceProperties.gd"
-}, {
 "base": "Reference",
-"class": "SlicesUtils",
+"class": "SliceParser",
 "language": "GDScript",
-"path": "res://addons/gdscript-slice-exporter/collections/SlicesUtil.gd"
+"path": "res://utils/SliceParser.gd"
 }, {
 "base": "ScrollContainer",
 "class": "SmoothScrollContainer",
@@ -354,15 +339,12 @@ _global_script_class_icons={
 "Revealer": "res://ui/components/Revealer.svg",
 "RunnableCodeExample": "",
 "RunnableCodeExampleDebugger": "",
-"SceneProperties": "",
 "ScriptError": "",
-"ScriptProperties": "",
 "ScriptSlice": "",
 "ScriptVerifier": "",
 "SliceEditor": "",
 "SliceEditorOverlay": "",
-"SliceProperties": "",
-"SlicesUtils": "",
+"SliceParser": "",
 "SmoothScrollContainer": "res://ui/components/smooth_scroll_container_icon.svg",
 "SortableList": "",
 "UIBaseQuiz": "",
@@ -418,11 +400,7 @@ window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://addons/gdscript-course-builder/plugin.cfg", "res://addons/gdscript-slice-exporter/plugin.cfg" )
-
-[gdscript-slice-exporter]
-
-scene="res://addons/gdscript-course-builder/ui/CourseEditor.tscn"
+enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://addons/gdscript-course-builder/plugin.cfg" )
 
 [input]
 
