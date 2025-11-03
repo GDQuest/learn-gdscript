@@ -16,12 +16,15 @@ const AUTOSCROLL_DURATION := 0.24
 
 export var test_lesson: Resource
 
+signal lesson_displayed
+
 var _lesson: Lesson
 # Resource used to highlight glossary entries in the lesson text.
 var _glossary: Glossary
 var _visible_index := -1
 var _quizzes_done := -1  # Start with -1 because we will always autoincrement at least once.
 var _quizz_count := 0
+var _integration_test_mode := false
 
 var _base_text_font_size := preload("res://ui/theme/fonts/font_text.tres").size
 
@@ -170,6 +173,11 @@ func setup(lesson: Lesson, course: Course) -> void:
 	_quizz_count = lesson.get_quizzes_count()
 	_reveal_up_to_next_quiz()
 
+	if _integration_test_mode:
+		yield(get_tree(), "idle_frame")
+		emit_signal("lesson_displayed")
+		return
+
 	# Wait until the lesson is considered loaded by the system, and then update the size of
 	# the scroll container and its content.
 	yield(Events, "lesson_started")
@@ -216,7 +224,21 @@ func get_screen_resource() -> Lesson:
 	return _lesson
 
 
+func enable_integration_test_mode() -> void:
+	_integration_test_mode = true
+
+
 func _reveal_up_to_next_quiz() -> void:
+	if _integration_test_mode:
+		# In integration test mode, skip quiz checks and reveal all content immediately
+		_visible_index = _content_blocks.get_child_count() - 1
+		for child in _content_blocks.get_children():
+			child.show()
+		_practices_visibility_container.show()
+		_quizzes_done = _quizz_count
+		emit_signal("lesson_displayed")
+		return
+
 	_quizzes_done += 1
 
 	var child_count := _content_blocks.get_child_count()
