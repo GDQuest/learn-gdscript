@@ -98,8 +98,7 @@ func _on_course_requested(force_outliner: bool = false) -> void:
 		return
 
 	# We don't preload this scene, nor the course resource, so that the initial load into the app
-	# is faster.
-	# FIXME: Use interactive loader instead?
+	# is faster. Consider using ResourceLoader.load_interactive() for progress updates in the future.
 	var course_navigator_scene := load("res://ui/UINavigator.tscn") as PackedScene
 	_course_navigator = course_navigator_scene.instance()
 	_course_navigator.course = load(default_course) as Course
