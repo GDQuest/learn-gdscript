@@ -9,7 +9,6 @@ const ROOT_DIR := "user://user_settings"
 
 var current_player := "Player"
 var _loaded_profile: Profile
-var uuid := UUID.v4()
 
 func profile_exists(profile_name: String) -> bool:
 	var file_path := _get_file_path(profile_name)
@@ -39,13 +38,11 @@ func get_profile(profile_name: String = current_player) -> Profile:
 		
 		_loaded_profile = user_profile
 		Log.info({
-			"id": UserProfiles.uuid,
 			"profileName":profile_name
 			}, "created profile")
 		return user_profile
 	
 	Log.info({
-		"id": UserProfiles.uuid,
 		"profileName":profile_name
 		}, "loaded profile")
 	_loaded_profile = ResourceLoader.load(file_path) as Profile
