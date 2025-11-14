@@ -13,15 +13,12 @@ func _prepare() -> void:
 
 
 func test_has_robot_name_variable() -> String:
-	if not has_name_prop:
-		return "The robot_name variable doesn't exist. Did you define it with the var keyword?"
+	if not has_name_prop or robot.get("robot_name") == null:
+		return "The robot_name variable doesn't exist. Make sure it's defined. Do not use the 'var' keyword."
 	return ""
 
 
 func test_robot_name_is_a_string() -> String:
-	if not has_name_prop:
-		return "The robot_name variable doesn't exist. Make sure it's defined."
-	var robot_name = robot.get("robot_name")
-	if not robot_name is String:
+	if not has_name_prop or not robot.get("robot_name") is String:
 		return "The robot_name isn't a string. Did you add quotes around the value?"
 	return ""
