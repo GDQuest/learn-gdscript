@@ -17,7 +17,7 @@ func _run() -> void:
 	Events.emit_signal("practice_run_completed")
 
 
-var robot_name = -1
+var robot_name = null
 
 # EXPORT print_string
 func run():
