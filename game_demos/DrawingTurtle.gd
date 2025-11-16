@@ -156,6 +156,7 @@ func play_draw_animation() -> void:
 					_tween.interpolate_callback(
 						self, tween_start_time, "_move_camera", command.target
 					)
+					print("interpolating...")
 			"move_to":
 				duration = turtle_position.distance_to(command.target) / draw_speed / speed_multiplier
 				_tween.interpolate_property(
@@ -264,7 +265,7 @@ func _close_polygon() -> void:
 
 	# We can't know exactly when and where to move the camera until completing a
 	# shape, as we want to center the camera on the shape.
-	_command_stack.append({command = "move_camera", target = polygon.get_center()})
+	_command_stack.append({command = "move_camera", target = polygon.get_center() + global_position})
 	for command in _temp_command_stack:
 		_command_stack.append(command)
 	_temp_command_stack.clear()
@@ -279,6 +280,7 @@ func _handle_position_setting() -> void:
 	if not _points.empty():
 		previous_point = _points[-1]
 	if not position.is_equal_approx(previous_point):
+		_command_stack.append({command = "move_camera", target = position + global_position})
 		_temp_command_stack.append({command = "set_position", target = position})
 		_close_polygon()
 		_points.append(position)
