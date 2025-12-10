@@ -148,14 +148,15 @@ has_separator = false
 script = ExtResource( 2 )
 practice_id = "res://course/lesson-21-strings/practice-iGjB7tKR.tres"
 title = "Creating string variables"
-goal = "Currently, the robot has a number stored in the [code]robot_name[/code] variable. 
+goal = "Currently, the robot has a number stored in the [code]robot_name[/code] variable.
 
 Change the [code]robot_name[/code] variable so that it's a string instead. You can give it any name you'd like."
-starting_code = "func run():
-	robot_name = 0"
-cursor_line = 0
+starting_code = "var robot_name = 0
+
+func run():
+	print(\"Hi, \" + robot_name + \"!\")"
 cursor_column = 0
-hints = PoolStringArray( "Make sure to use quotes when defining strings to differentiate them from other variable types." )
+hints = PoolStringArray( "Strings need to be wrapped in quotes like \"Robi\".", "Replace the number 0 with your string (the robot's name)." )
 validator_script_path = "string_error/TestsStringError.gd"
 script_slice_path = "string_error/StringError.gd"
 slice_name = "print_string"
