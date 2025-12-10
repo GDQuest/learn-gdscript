@@ -280,7 +280,6 @@ func _handle_position_setting() -> void:
 	if not _points.empty():
 		previous_point = _points[-1]
 	if not position.is_equal_approx(previous_point):
-		_command_stack.append({command = "move_camera", target = position + global_position})
 		_temp_command_stack.append({command = "set_position", target = position})
 		_close_polygon()
 		_points.append(position)
@@ -332,7 +331,7 @@ class Polygon:
 		var first_point = Vector2.ZERO
 		if not points.empty():
 			first_point = points[0]
-		
+
 		for point in points:
 			local_points.append(point - first_point)
 		return local_points
