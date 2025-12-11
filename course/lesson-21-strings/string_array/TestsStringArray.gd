@@ -42,12 +42,14 @@ func test_robot_combo_is_correct() -> String:
 	# correctly in a for loop. Some students will shadow member variables with
 	# local ones so this still allows them to pass.
 	var processed_code := _slice.preprocess_practice_code(_slice.current_text)
-	if "var combo" in processed_code or "combo=" in processed_code:
+	if "varcombo" in processed_code or "combo=" in processed_code:
 		var regex = RegEx.new()
 		regex.compile("for(\\w+)incombo")
 		var result = regex.search(processed_code)
 		if result:
 			var iterator_name = result.get_string(1)
 			if ("play_animation(" + iterator_name + ")") in processed_code:
-				return ""
+				# Even with a local combo variable or if the student has the correct iterator, the combo must match desired_combo
+				if robot_combo == desired_combo:
+					return ""
 	return tr("The combo isn't correct. Did you use the right actions in the right order?")
