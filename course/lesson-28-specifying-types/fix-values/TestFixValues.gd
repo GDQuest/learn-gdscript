@@ -16,7 +16,7 @@ var hints_map := {
 
 
 func _init() -> void:
-	regex.compile("(\\w+):\\s*(\\w+)\\s*=")
+	regex.compile("(\\w+)\\s*:\\s*(\\w+)\\s*=")
 
 
 # Ensures the user preserved the original hints. If the value is compatible, the
