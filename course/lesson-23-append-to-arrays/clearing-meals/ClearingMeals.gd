@@ -52,8 +52,8 @@ func _on_meal_ready(completed_meal: Meal):
 		_complete_run()
 
 # EXPORT complete
-var waiting_orders := []
-var completed_orders := []
+var waiting_orders = []
+var completed_orders = []
 
 func complete_current_order():
 	var completed_order = waiting_orders.pop_front()
