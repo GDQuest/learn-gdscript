@@ -136,6 +136,7 @@ func stop_animation() -> void:
 func play_draw_animation() -> void:
 	_close_polygon()
 
+	position = Vector2.ZERO
 	# We queue all tweens at once, based on commands: moving the turtle, turning
 	# it, drawing lines...
 	var tween_start_time := 0.0
@@ -265,7 +266,7 @@ func _close_polygon() -> void:
 
 	# We can't know exactly when and where to move the camera until completing a
 	# shape, as we want to center the camera on the shape.
-	_command_stack.append({command = "move_camera", target = polygon.get_center() + global_position})
+	_command_stack.append({command = "move_camera", target = polygon.get_center()})
 	for command in _temp_command_stack:
 		_command_stack.append(command)
 	_temp_command_stack.clear()
