@@ -52,26 +52,37 @@ func _ready() -> void:
 
 # Virtually moves the turtle and records a new vertex.
 func move_forward(distance: float) -> void:
-	var previous_point := Vector2.ZERO
+	_handle_position_setting()
 	if _points.empty():
-		_points.append(previous_point)
-	else:
-		previous_point = _points[-1]
-	var new_point := previous_point + Vector2.RIGHT.rotated(deg2rad(turn_degrees)) * distance
+		_points.append(Vector2.ZERO)
+
+	var new_point := position + Vector2.RIGHT.rotated(deg2rad(turn_degrees)) * distance
 	new_point = new_point.snapped(Vector2.ONE)
 	_points.append(new_point)
+	position = new_point
 
 	_temp_command_stack.append(
-		{command = "move_to", target = new_point + position + _current_offset}
+		{command = "move_to", target = new_point}
 	)
+
+	# Check if the polygon has vertices that align. In that case, we consider it
+	# closed.
+	if _points.size() > 1:
+		var last_point = _points[-1]
+		for i in range(_points.size() - 1):
+			if _points[i].is_equal_approx(last_point):
+				_close_polygon()
+				break
 
 
 func turn_right(angle_degrees: float) -> void:
+	_handle_position_setting()
 	turn_degrees = round(turn_degrees + angle_degrees)
 	_temp_command_stack.append({command = "turn", angle = round(angle_degrees)})
 
 
 func turn_left(angle_degrees: float) -> void:
+	_handle_position_setting()
 	turn_degrees = round(turn_degrees - angle_degrees)
 	_temp_command_stack.append({command = "turn", angle = round(-angle_degrees)})
 
@@ -79,10 +90,12 @@ func turn_left(angle_degrees: float) -> void:
 # Completes the current polygon's drawing and virtually jumps the turtle to a
 # new start position.
 func jump(x: float, y: float) -> void:
+	_handle_position_setting()
 	var last_point := Vector2.ZERO if _points.empty() else _points[-1]
 	_close_polygon()
-	_points.append(Vector2.ZERO)
-	_current_offset += Vector2(x, y) + last_point
+
+	position += Vector2(x, y)
+	_points.append(position)
 
 	_command_stack.append({command = "jump", offset = Vector2(x, y)})
 
@@ -103,7 +116,7 @@ func reset() -> void:
 	_polygons.clear()
 	for child in _canvas.get_children():
 		child.queue_free()
-	_current_offset = Vector2.ZERO
+	position = Vector2.ZERO
 	_pivot.position = Vector2.ZERO
 
 
@@ -123,10 +136,11 @@ func stop_animation() -> void:
 func play_draw_animation() -> void:
 	_close_polygon()
 
+	position = Vector2.ZERO
 	# We queue all tweens at once, based on commands: moving the turtle, turning
 	# it, drawing lines...
 	var tween_start_time := 0.0
-	var turtle_position := position
+	var turtle_position := Vector2.ZERO
 	var turtle_rotation_degrees := rotation_degrees
 	for command in _command_stack:
 		var duration := 1.0
@@ -147,16 +161,16 @@ func play_draw_animation() -> void:
 				_tween.interpolate_property(
 					_pivot,
 					"position",
-					turtle_position - position,
-					command.target - position,
+					turtle_position,
+					command.target,
 					duration,
 					Tween.TRANS_LINEAR,
 					Tween.EASE_IN,
 					tween_start_time
 				)
 				var line := DrawingLine2D.new(
-					turtle_position - position,
-					command.target - position,
+					turtle_position,
+					command.target,
 					duration,
 					tween_start_time
 				)
@@ -232,26 +246,47 @@ func _animate_jump(progress: float) -> void:
 
 
 func _close_polygon() -> void:
-	if _points.empty():
+	if _points.size() <= 1:
+		_points.clear()
+		for command in _temp_command_stack:
+			_command_stack.append(command)
+		_temp_command_stack.clear()
 		return
 
 	var polygon := Polygon.new()
 	# We want to test shapes being drawn at the correct position using the
 	# position property. It works differently from jump() which offsets the
 	# turtle from its position.
-	polygon.position = position + _current_offset
+	polygon.position = position
 	polygon.points = PoolVector2Array(_points)
 	_polygons.append(polygon)
+	var center := Vector2.ZERO
+	if not _points.empty():
+		var bounds := Rect2(_points[0], Vector2.ZERO)
+		for point in _points:
+			bounds = bounds.expand(point)
+			center = bounds.position + bounds.size / 2.0
 	_points.clear()
-
-	if not position.is_equal_approx(Vector2.ZERO):
-		_command_stack.append({command = "set_position", target = position})
 	# We can't know exactly when and where to move the camera until completing a
 	# shape, as we want to center the camera on the shape.
-	_command_stack.append({command = "move_camera", target = polygon.get_center()})
+	_command_stack.append({command = "move_camera", target = center})
 	for command in _temp_command_stack:
 		_command_stack.append(command)
 	_temp_command_stack.clear()
+
+func _handle_position_setting() -> void:
+	# When the user accesses and adjusts the position variable directly, we must
+	# detect this, close the polygon, and add to the command stack.
+	if _points.empty() and position.is_equal_approx(Vector2.ZERO):
+		return
+
+	var previous_point = Vector2.ZERO
+	if not _points.empty():
+		previous_point = _points[-1]
+	if not position.is_equal_approx(previous_point):
+		_temp_command_stack.append({command = "set_position", target = position})
+		_close_polygon()
+		_points.append(position)
 
 
 func _move_camera(target_global_position: Vector2) -> void:
@@ -269,7 +304,8 @@ class Polygon:
 	func get_rect() -> Rect2:
 		var top_left := Vector2.ZERO
 		var bottom_right := Vector2.ZERO
-		for p in points:
+		var local_points = get_points()
+		for p in local_points:
 			if p.x > bottom_right.x:
 				bottom_right.x = p.x
 			elif p.x < top_left.x:
@@ -295,7 +331,14 @@ class Polygon:
 		return (rect.position + rect.end) / 2.0 + global_position
 
 	func get_points() -> PoolVector2Array:
-		return points
+		var local_points = []
+		var first_point = Vector2.ZERO
+		if not points.empty():
+			first_point = points[0]
+
+		for point in points:
+			local_points.append(point - first_point)
+		return local_points
 
 	func is_empty():
 		return points.empty() or points == PoolVector2Array([Vector2.ZERO])
