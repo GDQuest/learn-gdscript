@@ -24,17 +24,23 @@ In the [Discussions](https://github.com/GDQuest/learn-gdscript/discussions) tab,
 
 **To report bugs, typos,** and discuss existing tasks, please head to the [Issues](issues) tab instead.
 
+### Warning: Translation issues go to a different repository
+
+**If you want to report a translation problem or help translate the app, please go to the translations repository:** [GDQuest/learn-gdscript-translations](https://github.com/GDQuest/learn-gdscript-translations)
+
+All translation work happens in that separate repository. Please open issues and pull requests related to translations there.
+
 ## How to contribute
 
 Contributions are most welcome if you'd like to help us improve the app!
 
 You can help us by:
 
-- **Translating** the app into your language. The translations are stored in a separate repository: [GDQuest/learn-gdscript-translations](https://github.com/GDQuest/learn-gdscript-translations). Please check it out if you want to help us translate the lessons.
-- **Reporting bugs** and typos in the [Issues](issues) tab.
-- **Making pull requests** to fix bugs, typos, or improve the app.
+- **Translating the app:** All translations happen in a separate repository. Go to [GDQuest/learn-gdscript-translations](https://github.com/GDQuest/learn-gdscript-translations) to help translate lessons into your language or report translation problems.
+- **Reporting bugs and typos:** Use the [Issues](issues) tab in this repository. This is for bugs, features, or English content issues.
+- **Making pull requests:** Fix bugs, typos, or improve the app code. Code changes go in this repository.
 
-Please make sure to get in touch before making any substantial change! You can ask us in the issue tracker directly if you have any questions on how to go about addressing specific issues. We'll be happy to help you get started.
+Please make sure to get in touch before working on any big changes! You can ask us in the issue tracker if you have questions about how to fix something. We'll be happy to help you get started.
 
 For code contributions, be sure to bookmark our GDScript code style guide: [GDQuest GDScript style guide](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/).
 
