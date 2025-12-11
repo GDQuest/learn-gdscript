@@ -10,6 +10,9 @@ export(Resource) var font_resource
 var highlight_rect := Rect2() setget set_highlight_rect
 var variable_name := ""
 
+var highlight_line := -1
+var highlight_column := -1
+
 onready var _scene_instance: Node
 onready var _mouse_blocker := $MouseBlocker as Control
 onready var _label := $MouseBlocker/Label as Label

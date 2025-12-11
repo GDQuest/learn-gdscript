@@ -156,7 +156,7 @@ static func enhance(text_edit: TextEdit) -> void:
 	text_edit.draw_spaces = true
 	text_edit.smooth_scrolling = true
 	text_edit.caret_blink = true
-	text_edit.wrap_enabled = true
+	text_edit.wrap_enabled = false
 
 	text_edit.add_color_region('"', '"', COLOR_QUOTES)
 	text_edit.add_color_region("'", "'", COLOR_QUOTES)

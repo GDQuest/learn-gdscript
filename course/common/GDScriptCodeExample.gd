@@ -10,6 +10,7 @@ func _ready() -> void:
 	context_menu_enabled = false
 	shortcut_keys_enabled = false
 	readonly = true
+	wrap_enabled = false
 	CodeEditorEnhancer.enhance(self)
 
 

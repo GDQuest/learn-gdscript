@@ -301,6 +301,14 @@ func _reset_monitored_variable_highlights():
 	if not _gdscript_text_edit.visible:
 		return
 
+	var h_scroll_bar: HScrollBar = null
+	for current_child in _gdscript_text_edit.get_children():
+		if current_child is HScrollBar:
+			h_scroll_bar = current_child
+			break
+	if h_scroll_bar != null:
+		h_scroll_bar.connect("scrolling", self, "_on_HScrollBar_scrolling")
+
 	# Create widgets that underline a variable and display a variable's value
 	# when hovering with the mouse.
 	var monitored_variables := _debugger.monitored_variables
@@ -338,9 +346,28 @@ func _reset_monitored_variable_highlights():
 				var monitored_variable: CodeExampleVariableUnderline = CodeExampleVariableUnderlineScene.instance()
 				add_child(monitored_variable)
 				monitored_variable.highlight_rect = rect
+				monitored_variable.highlight_line = last_line
+				monitored_variable.highlight_column = last_column
 				monitored_variable.variable_name = variable_name
 				monitored_variable.setup(self, _scene_instance)
 				_monitored_variable_highlights.append(monitored_variable)
+
+
+func _on_HScrollBar_scrolling() -> void:
+	# When scrolling horizontally, we need to recalculate the rectangle area in the code editor
+	# for each monitored variable. The monitored variable draws an underline that spans the
+	# variable it's highlighting, but when scrolling, this region changes, so we need to
+	# recalculate and update the highlight_rect for each monitored variable.
+	var offset := Vector2(_gdscript_text_edit.rect_position.x, 0.0)
+
+	for monitored_variable in _monitored_variable_highlights:
+		var rect = _gdscript_text_edit.get_rect_at_line_column(
+			monitored_variable.highlight_line,
+			monitored_variable.highlight_column
+		)
+		rect.position += offset
+		rect.size.x = (rect.size.x * monitored_variable.variable_name.length()) + 4
+		monitored_variable.highlight_rect = rect
 
 
 func _on_highlight_line(line_number: int) -> void:
