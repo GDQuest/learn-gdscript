@@ -26,15 +26,19 @@ vector,vectors,"In math, a vector is a list of numbers. In games, we often use 2
 We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves.
 
 Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
-argument,arguments,"An argument is a value that you pass to a function when calling the function. For example, in the call [code]rotate(0.5)[/code], the value [code]0.5[/code] in the parentheses is an argument.
+argument,arguments,"An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument.
 
-A function can receive no arguments, one argument, or multiple arguments. Arguments can be mandatory or optional.
+A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional.
 
-When a function takes multiple arguments, you separate the values with commas, like in this function call: [code]jump(50, 100)[/code]
+When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]
 
-When [i]calling[/i] a function, we name the values passed in parentheses [i]arguments[/i].
+When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i].
 
-When writing a function definition, however, we talk about function [i]parameters[/i]. In the following example, the names [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
+But when you [i]write[/i] a function definition, we call them [i]parameters[/i] instead. Here's an example:
+
+[code]func move_to_position(x, y):[/code]
+
+In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
 array,arrays,"An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value.
 
 To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]
