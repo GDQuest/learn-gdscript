@@ -19,7 +19,7 @@ func _ready() -> void:
 		node.hide()
 
 	update()
-	
+
 
 func reset():
 	for node in [$Robot, $Turtle]:
@@ -40,10 +40,11 @@ var units = {
 	Vector2(3, 0): "robot",
 }
 
+
 func run():
 	for cell in units:
-		var unit_type = units[cell]
-		place_unit(cell, unit_type)
+		var unit = units[cell]
+		place_unit(cell, unit)
 # /EXPORT run
 
 
@@ -88,4 +89,3 @@ func world_to_cell(world_position: Vector2) -> Vector2:
 
 func set_board_size(new_size: Vector2):
 	board_size = new_size
-

@@ -26,9 +26,9 @@ var inventory = {
 }
 
 func run():
-	for item in inventory:
-		var amount = inventory[item]
-		display_item(item, amount)
+	for item_name in inventory:
+		var item_count = inventory[item_name]
+		display_item(item_name, item_count)
 # /EXPORT run
 
 
@@ -42,7 +42,7 @@ func _run():
 func clear_drawing():
 	for child in _grid.get_children():
 		child.hide()
-	
+
 
 func display_item(item: String, amount: int):
 	if not item in item_nodes:

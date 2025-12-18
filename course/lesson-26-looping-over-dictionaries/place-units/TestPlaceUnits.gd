@@ -7,7 +7,7 @@ func _prepare() -> void:
 	grid = _scene_root_viewport.get_child(0)
 
 
-func test_all_items_are_displayed():
+func test_all_units_are_displayed():
 	var displayed: Dictionary = grid.get_displayed_units_info()
 	var source: Dictionary = grid.get("units")
 	var dicts_match := displayed.has_all(source.keys())
@@ -18,10 +18,7 @@ func test_all_items_are_displayed():
 				break
 
 	if not dicts_match:
-		return tr(
-			"The displayed units do not match the units variable's content. Did you call the place_unit() function for each unit in the units dictionary?"
-		)
-
+		return tr("The displayed units do not match the units variable's content. Did you call the place_unit() function for each unit in the units dictionary?")
 	return ""
 
 
@@ -33,7 +30,5 @@ func test_code_uses_a_for_loop():
 			break
 
 	if not loops_over_inventory:
-		return tr(
-			"Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!"
-		)
+		return tr("Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!")
 	return ""

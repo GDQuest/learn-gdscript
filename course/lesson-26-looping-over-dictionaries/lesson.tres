@@ -10,9 +10,9 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-26-looping-over-dictionaries/content-DizKUdOC.tres"
 title = ""
 type = 0
-text = "Like with arrays, you can loop over dictionaries. You can loop over both their keys and values.
+text = "You can loop over dictionaries, just like you learned to loop over arrays. When you loop over a dictionary, you get its keys one by one. You can then use each key to get its value.
 
-Let's see how it works with two examples."
+Let's see how this works with two examples."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -22,11 +22,11 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-26-looping-over-dictionaries/content-QiGjB7tK.tres"
 title = "Displaying an inventory's content"
 type = 0
-text = "To display the player's inventory, you need to know what it contains. You need the name and amount of each object.
+text = "To display the player's inventory, you need to know what it contains: the name and amount of each item.
 
-And from code, you can only achieve that by looping over the whole dictionary and processing key-value pairs one by one.
+To do this, you loop over the dictionary and process each key-value pair one at a time.
 
-To get the list of keys in the dictionary, you can call its [code]keys()[/code] member function."
+You can get the list of all the keys in a dictionary by calling its [code]keys()[/code] function."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -46,9 +46,9 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-26-looping-over-dictionaries/content-wQMqAYVj.tres"
 title = ""
 type = 0
-text = "But it's something we do so much that you don't need to call the function.
+text = "Looping over dictionary keys is so common that GDScript gives you a shortcut.
 
-Instead, you can directly [ignore]type the variable name in a [code]for[/code] loop after the [code]in[/code] keyword. The language understands that you implicitly want to loop over the dictionary's keys."
+You can write the dictionary variable name directly after the [code]in[/code] keyword in a [code]for[/code] loop. GDScript automatically loops over the dictionary's keys."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -68,9 +68,11 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-26-looping-over-dictionaries/content-ej47MqE8.tres"
 title = ""
 type = 0
-text = "You can get the values with the syntax [code]dictionary[key][/code] as you learned in the previous lesson.
+text = "Remember: the name after the [code]for[/code] keyword is a variable name you choose yourself. You could call it [code]item_name[/code], [code]item[/code], [code]key[/code], or anything else. This variable holds one key at a time as the loop runs.
 
-We can loop over the inventory keys, get the corresponding values, and display all that information in the user interface."
+You can get each value with the syntax [code]dictionary[key][/code], as you learned in the previous lesson.
+
+So we can loop over the inventory keys, get their values, and display that information on screen."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -100,7 +102,7 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-26-looping-over-dictionaries/content-ZPxY8VUD.tres"
 title = ""
 type = 0
-text = "Instead of printing the key-value pairs to the output console, we can code and call a dedicated function that displays items in the user interface."
+text = "Instead of printing the key-value pairs to the output console, we can write and call a function that displays items on the screen."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -130,13 +132,13 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-26-looping-over-dictionaries/content-qdYOexRj.tres"
 title = "Mapping grid cells to units"
 type = 0
-text = "We can also use a dictionary to map units to their position on a game board.
+text = "You can also use a dictionary to store which units are at which positions on a game board.
 
-That's how you'd typically code a board game, a grid-based RPG, or a tactical RPG.
+This is how you'd typically code a board game, a grid-based RPG, or a tactical RPG.
 
-While we focused on [code]String[/code] keys so far, GDScript dictionaries accept any value type as a key, allowing you to map anything to anything.
+So far, we used [code]String[/code] keys. But GDScript dictionaries can use any type as a key. In this example, we use [code]Vector2[/code] values as keys to represent grid positions.
 
-The only limitation is that every key must be unique."
+The only rule is that every key in a dictionary must be unique."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -156,7 +158,7 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-26-looping-over-dictionaries/content-5AJTESv5.tres"
 title = ""
 type = 0
-text = "Using a [code]for[/code] loop, you can use the key-value pairs to place units on the board at the start of a game."
+text = "With a [code]for[/code] loop, you can place all the units on the board when a game starts."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -195,11 +197,11 @@ has_separator = false
 script = ExtResource( 2 )
 practice_id = "res://course/lesson-26-looping-over-dictionaries/practice-nVHARbBW.tres"
 title = "Displaying the inventory"
-goal = "We use a dictionary to represent the player's inventory in this game. The dictionary keys are the name of items, and they map to the number of items that the player owns.
+goal = "We use a dictionary to store the player's inventory. The keys are item names, and the values are how many of each item the player has.
 
-You need to loop over the dictionary and display the name and amount of every item in the inventory.
+Loop over the dictionary and display every item in the inventory.
 
-To do so, call the [code]display_item()[/code] function. It takes two arguments: the item name and the amount."
+Call the [code]display_item()[/code] function for each item. It takes two arguments: the item name and the amount."
 starting_code = "var inventory = {
 	\"healing heart\": 3,
 	\"gems\": 5,
@@ -210,21 +212,21 @@ func run():
 	"
 cursor_line = 0
 cursor_column = 0
-hints = PoolStringArray( "The [code]display_item()[/code] function needs the item type and its amount, so you need to get the amount using the item name as a key in the [code]inventory[/code] variable.", "You can get the amount of each item using the syntax [code]inventory[item_name][/code]." )
+hints = PoolStringArray( "The [code]display_item()[/code] function needs the item name and its amount. You need to get the amount using the item name as a key in the [code]inventory[/code] dictionary.", "Inside the for loop, you can get the amount of each item using the syntax [code]inventory[item_name][/code], where [code]item_name[/code] is the loop variable you created after the [code]for[/code] keyword." )
 validator_script_path = "display-inventory/TestDisplayInventory.gd"
 script_slice_path = "display-inventory/DisplayInventory.gd"
 slice_name = "run"
 documentation_references = PoolStringArray( "display_item" )
 documentation_resource = ExtResource( 1 )
-description = "We need to display the player's inventory on the screen but lack the code to do so. Use a loop to display every item."
+description = "The player's inventory needs to appear on screen. Use a loop to display every item."
 
 [sub_resource type="Resource" id=14]
 script = ExtResource( 2 )
 practice_id = "res://course/lesson-26-looping-over-dictionaries/practice-bDGt6fUq.tres"
 title = "Placing units on the board"
-goal = "We have a dictionary named [code]units[/code] that maps a cell position on the grid to a unit to put there.
+goal = "We have a dictionary named [code]units[/code]. It maps cell positions on the grid to the type of unit at that position.
 
-Using a for loop and the [code]place_unit()[/code] function, place every unit in the units dictionary at the desired position on the game board."
+Use a for loop to place every unit on the game board. Call the [code]place_unit()[/code] function for each unit. It takes two arguments: first the cell position, then the unit type."
 starting_code = "var units = {
 	Vector2(1, 0): \"robot\",
 	Vector2(2, 2): \"turtle\",
@@ -235,13 +237,13 @@ func run():
 	"
 cursor_line = 0
 cursor_column = 0
-hints = PoolStringArray( "The dictionary keys are cell coordinates you can use to access the unit type from the [code]units[/code] dictionary.", "To access a unit’s type from a cell, use the syntax [code]units[cell_coordinates][/code]." )
+hints = PoolStringArray( "The dictionary keys are cell coordinates. You can use them to access the unit type from the [code]units[/code] dictionary.", "Inside the for loop, you can get a unit's type using the syntax [code]units[cell][/code], where [code]cell[/code] is the loop variable you created after the [code]for[/code] keyword." )
 validator_script_path = "place-units/TestPlaceUnits.gd"
 script_slice_path = "place-units/PlaceUnits.gd"
 slice_name = "run"
 documentation_references = PoolStringArray( "place_unit" )
 documentation_resource = ExtResource( 1 )
-description = "We want to populate our game board with units at the start of every battle. Loop over the dictionary to place units on the board."
+description = "At the start of each battle, units need to appear on the game board. Loop over the dictionary to place them."
 
 [resource]
 script = ExtResource( 3 )

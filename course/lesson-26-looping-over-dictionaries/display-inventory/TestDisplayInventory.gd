@@ -12,15 +12,13 @@ func test_all_items_are_displayed():
 	var source: Dictionary = inventory.get("inventory")
 	var inventories_match := displayed.has_all(source.keys())
 	if inventories_match:
-		for value in displayed.values():
-			if not source.values().has(value):
+		for key in displayed:
+			if displayed[key] != source[key]:
 				inventories_match = false
 				break
 
 	if not inventories_match:
-		return tr(
-			"The displayed items do not match the inventory variable's content. Did you call the display_item() function for each item in the inventory?"
-		)
+		return tr("The displayed items do not match the inventory variable's content. Did you call the display_item() function for each item in the inventory?")
 
 	return ""
 
@@ -33,7 +31,5 @@ func test_code_uses_a_for_loop():
 			break
 
 	if not loops_over_inventory:
-		return tr(
-			"Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!"
-		)
+		return tr("Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!")
 	return ""
