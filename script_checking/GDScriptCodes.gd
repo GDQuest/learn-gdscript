@@ -43,39 +43,41 @@ enum ErrorCode {
 	RETURN_VALUE_MISMATCH,
 	MISPLACED_STATIC_CALL,
 	ASSIGNING_TO_EXPRESSION,
+	CANT_ASSIGN_TO_CONSTANT,
 	IN_EXPECTED_AFTER_IDENTIFIER,
 	UNEXPECTED_EOL,
 	CANT_GET_INDEX,
+	SPACES_BEFORE_TABS,
 }
 
 enum WarningCode {
-	UNASSIGNED_VARIABLE,  # Variable used but never assigned.
-	UNASSIGNED_VARIABLE_OP_ASSIGN,  # Variable never assigned but used in an assignment operation (+=, *=, etc).
-	UNUSED_VARIABLE,  # Local variable is declared but never used.
-	SHADOWED_VARIABLE,  # Variable name shadowed by other variable.
-	UNUSED_CLASS_VARIABLE,  # Class variable is declared but never used in the file.
-	UNUSED_ARGUMENT,  # Function argument is never used.
-	UNREACHABLE_CODE,  # Code after a return statement.
-	STANDALONE_EXPRESSION,  # Expression not assigned to a variable.
-	VOID_ASSIGNMENT,  # Function returns void but it's assigned to a variable.
-	NARROWING_CONVERSION,  # Float value into an integer slot, precision is lost.
-	FUNCTION_MAY_YIELD,  # Typed assign of function call that yields (it may return a function state).
-	VARIABLE_CONFLICTS_FUNCTION,  # Variable has the same name of a function.
-	FUNCTION_CONFLICTS_VARIABLE,  # Function has the same name of a variable.
-	FUNCTION_CONFLICTS_CONSTANT,  # Function has the same name of a constant.
-	INCOMPATIBLE_TERNARY,  # Possible values of a ternary if are not mutually compatible.
-	UNUSED_SIGNAL,  # Signal is defined but never emitted.
-	RETURN_VALUE_DISCARDED,  # Function call returns something but the value isn't used.
-	PROPERTY_USED_AS_FUNCTION,  # Function not found, but there's a property with the same name.
-	CONSTANT_USED_AS_FUNCTION,  # Function not found, but there's a constant with the same name.
-	FUNCTION_USED_AS_PROPERTY,  # Property not found, but there's a function with the same name.
-	INTEGER_DIVISION,  # Integer divide by integer, decimal part is discarded.
-	UNSAFE_PROPERTY_ACCESS,  # Property not found in the detected type (but can be in subtypes).
-	UNSAFE_METHOD_ACCESS,  # Function not found in the detected type (but can be in subtypes).
-	UNSAFE_CAST,  # Cast used in an unknown type.
-	UNSAFE_CALL_ARGUMENT,  # Function call argument is of a supertype of the require argument.
-	DEPRECATED_KEYWORD,  # The keyword is deprecated and should be replaced.
-	STANDALONE_TERNARY  # Return value of ternary expression is discarded.
+	UNASSIGNED_VARIABLE, # Variable used but never assigned.
+	UNASSIGNED_VARIABLE_OP_ASSIGN, # Variable never assigned but used in an assignment operation (+=, *=, etc).
+	UNUSED_VARIABLE, # Local variable is declared but never used.
+	SHADOWED_VARIABLE, # Variable name shadowed by other variable.
+	UNUSED_CLASS_VARIABLE, # Class variable is declared but never used in the file.
+	UNUSED_ARGUMENT, # Function argument is never used.
+	UNREACHABLE_CODE, # Code after a return statement.
+	STANDALONE_EXPRESSION, # Expression not assigned to a variable.
+	VOID_ASSIGNMENT, # Function returns void but it's assigned to a variable.
+	NARROWING_CONVERSION, # Float value into an integer slot, precision is lost.
+	FUNCTION_MAY_YIELD, # Typed assign of function call that yields (it may return a function state).
+	VARIABLE_CONFLICTS_FUNCTION, # Variable has the same name of a function.
+	FUNCTION_CONFLICTS_VARIABLE, # Function has the same name of a variable.
+	FUNCTION_CONFLICTS_CONSTANT, # Function has the same name of a constant.
+	INCOMPATIBLE_TERNARY, # Possible values of a ternary if are not mutually compatible.
+	UNUSED_SIGNAL, # Signal is defined but never emitted.
+	RETURN_VALUE_DISCARDED, # Function call returns something but the value isn't used.
+	PROPERTY_USED_AS_FUNCTION, # Function not found, but there's a property with the same name.
+	CONSTANT_USED_AS_FUNCTION, # Function not found, but there's a constant with the same name.
+	FUNCTION_USED_AS_PROPERTY, # Property not found, but there's a function with the same name.
+	INTEGER_DIVISION, # Integer divide by integer, decimal part is discarded.
+	UNSAFE_PROPERTY_ACCESS, # Property not found in the detected type (but can be in subtypes).
+	UNSAFE_METHOD_ACCESS, # Function not found in the detected type (but can be in subtypes).
+	UNSAFE_CAST, # Cast used in an unknown type.
+	UNSAFE_CALL_ARGUMENT, # Function call argument is of a supertype of the require argument.
+	DEPRECATED_KEYWORD, # The keyword is deprecated and should be replaced.
+	STANDALONE_TERNARY, # Return value of ternary expression is discarded.
 }
 
 # The database of error messages from GDScript parser and compiler.
@@ -98,22 +100,19 @@ enum WarningCode {
 const MESSAGE_DATABASE := [
 	# Compiler errors.
 	{
-		"_unused":
-		[
+		"_unused": [
 			"'self' not present in static function!",
 			"Must use '%IDENTIFIER%' instead of 'self.%IDENTIFIER%' in getter.",
 			"Must use '%IDENTIFIER%' instead of 'self.%IDENTIFIER%' in setter.",
 		],
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["Using own name in class file is not allowed (creates a cyclic reference)"],
 			["Can't load global class", ", cyclic reference?"],
 			["Cyclic class reference for"],
 		],
-		"raw":
-		[
+		"raw": [
 			"Using own name in class file is not allowed (creates a cyclic reference)",
 			"Can't load global class %IDENTIFIER%, cyclic reference?",
 			"Cyclic class reference for '%CLASS_NAME%'.",
@@ -121,16 +120,14 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.CYCLIC_REFERENCE,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["Identifier not found"],
 			["Invalid native class type"],
 			["Parser bug: unresolved data type."],
 			["Attempt to call a non-identifier."],
 			["Parser bug: invalid inheritance."],
 		],
-		"raw":
-		[
+		"raw": [
 			"Identifier not found: %IDENTIFIER%",
 			"Invalid native class type '%NATIVE_TYPE%'.",
 			"Parser bug: unresolved data type.",
@@ -141,8 +138,7 @@ const MESSAGE_DATABASE := [
 	},
 	{
 		"patterns": [["not within loop"]],
-		"raw":
-		[
+		"raw": [
 			"'break'' not within loop",
 			"'continue' not within loop",
 		],
@@ -150,8 +146,7 @@ const MESSAGE_DATABASE := [
 	},
 	{
 		"patterns": [["Signal", "redefined"]],
-		"raw":
-		[
+		"raw": [
 			"Signal '%SIGNAL_NAME%' redefined (in current or parent class)",
 			"Signal '%SIGNAL_NAME%' redefined (original in native class '%CLASS_NAME%')",
 		],
@@ -159,15 +154,13 @@ const MESSAGE_DATABASE := [
 	},
 	# Parser errors.
 	{
-		"_unused":
-		[
+		"_unused": [
 			"Yet another parser bug....",
 			"Parser bug...",
 			"Can't preload itself (use 'get_script()').",
 			"Can't preload resource at path: %PATH%",
 			"Using assignment with operation on a variable that was never assigned.",
 			"Duplicate key found in Dictionary literal",
-			"Can't assign to constant",
 			"Can't assign to self.",
 			"'..' pattern only allowed at the end of an array pattern",
 			"Not a valid pattern",
@@ -212,8 +205,7 @@ const MESSAGE_DATABASE := [
 		],
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["Couldn't fully preload the script, possible cyclic reference or compilation error."],
 			["Script isn't fully loaded (cyclic preload?)"],
 			["The class", "couldn't be fully loaded (script error or cyclic dependency)."],
@@ -222,12 +214,11 @@ const MESSAGE_DATABASE := [
 			[
 				"Couldn't fully load",
 				"singleton script",
-				"(possible cyclic reference or parse error)."
+				"(possible cyclic reference or parse error).",
 			],
 			["Cyclic inheritance."],
 		],
-		"raw":
-		[
+		"raw": [
 			'Couldn\'t fully preload the script, possible cyclic reference or compilation error. Use "load()" instead if a cyclic reference is intended.',
 			"Script isn't fully loaded (cyclic preload?): %PATH%",
 			'The class "%CLASS_NAME%" couldn\'t be fully loaded (script error or cyclic dependency).',
@@ -240,8 +231,7 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.CYCLIC_REFERENCE,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["Invalid indentation."],
 			["Expected an indented block after"],
 			["Indented block expected."],
@@ -253,8 +243,7 @@ const MESSAGE_DATABASE := [
 			["Indented block expected after declaration of"],
 			["Mixed tabs and spaces in indentation."],
 		],
-		"raw":
-		[
+		"raw": [
 			"Invalid indentation.",
 			"Invalid indentation. Bug?",
 			'Expected an indented block after "if".',
@@ -273,8 +262,7 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.INVALID_INDENTATION,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["Expected end of statement", "got", "instead"],
 			["Unexpected end of expression"],
 			["Unexpected end of file."],
@@ -310,8 +298,7 @@ const MESSAGE_DATABASE := [
 			["Assignment inside an expression isn't allowed"],
 			["Error parsing expression, misplaced"],
 		],
-		"raw":
-		[
+		"raw": [
 			'Expected end of statement ("%STATEMENT_NAME%"), got %TOKEN_NAME% ("%IDENTIFIER%") instead.',
 			'Expected end of statement ("%STATEMENT_NAME%"), got %TOKEN_NAME% instead.',
 			"Expected end of statement after expression, got %TOKEN_NAME% instead.",
@@ -352,15 +339,13 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.UNEXPECTED_CHARACTER,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["Expected", "after", "preload"],
 			["expected string constant as 'preload' argument."],
 			["Expected", "after", "yield"],
 			["Expected", "after", "assert"],
 		],
-		"raw":
-		[
+		"raw": [
 			"Expected '(' after 'preload'",
 			"Expected ')' after 'preload' path",
 			"expected string constant as 'preload' argument.",
@@ -372,16 +357,14 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.UNEXPECTED_CHARACTER_IN_KEYWORD,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["Expected", "in the", "hint"],
 			["Expected", "string constant with filter"],
 			["Color type hint expects RGB or RGBA as hints."],
 			['Expected "FLAGS" after comma.'],
 			['Expected ")" or "," after the export hint.'],
 		],
-		"raw":
-		[
+		"raw": [
 			'Expected "," in the bit flags hint.',
 			"Expected a string constant in the named bit flags hint.",
 			'Expected ")" or "," in the named bit flags hint.',
@@ -410,8 +393,7 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.UNEXPECTED_CHARACTER_IN_EXPORT_HINT,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["Unexpected two consecutive operators"],
 			["Unexpected operator"],
 			["Invalid operator in pattern"],
@@ -420,8 +402,7 @@ const MESSAGE_DATABASE := [
 			["Misplaced 'not'."],
 			["Expected identifier before 'is' operator"],
 		],
-		"raw":
-		[
+		"raw": [
 			"Unexpected two consecutive operators after ternary if.",
 			"Unexpected two consecutive operators after ternary else.",
 			"Unexpected two consecutive operators.",
@@ -436,8 +417,7 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.INVALID_OPERATOR_USAGE,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["Unexpected identifier."],
 			["Unexpected constant of type"],
 			["Unexpected token"],
@@ -449,8 +429,7 @@ const MESSAGE_DATABASE := [
 			["Expected identifier for binding variable name"],
 			["Expected", "after the identifier"],
 		],
-		"raw":
-		[
+		"raw": [
 			"Unexpected identifier.",
 			"Unexpected constant of type: %TYPE_NAME%",
 			"Unexpected token: %TOKEN_NAME%:%IDENTIFIER%",
@@ -473,13 +452,11 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.MISPLACED_IDENTIFIER,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["Expected", "type for"],
 			["Expected type after"],
 		],
-		"raw":
-		[
+		"raw": [
 			"Expected a type for the class variable.",
 			"Expected a type for the class constant.",
 			"Expected a type for the variable.",
@@ -491,8 +468,7 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.MISPLACED_TYPE_IDENTIFIER,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["Unknown class"],
 			["Couldn't find the subclass"],
 			["Couldn't resolve the constant"],
@@ -505,15 +481,14 @@ const MESSAGE_DATABASE := [
 			["isn't declared on base"],
 			["isn't declared in the current class"],
 			["isn't declared in the current scope"],
-			["etter function isn't defined"],  # Yes, etter!
+			["etter function isn't defined"], # Yes, etter!
 			[
-				'Invalid "is" test: the right operand isn\'t a type (neither a native type nor a script).'
+				'Invalid "is" test: the right operand isn\'t a type (neither a native type nor a script).',
 			],
 			["not present in built-in type"],
 			["invalid index", "in constant expression"],
 		],
-		"raw":
-		[
+		"raw": [
 			'Unknown class: "%CLASS_NAME%"',
 			"Couldn't find the subclass: %SUBCLASS_NAME%",
 			'Couldn\'t resolve the constant "%CONSTANT_NAME%".',
@@ -536,12 +511,11 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.NONEXISTENT_IDENTIFIER,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			['"yield()" can only be used inside function blocks.'],
 			['"self" isn\'t allowed in a static function or constant expression.'],
 			[
-				'Expected "var", "onready", "remote", "master", "puppet", "sync", "remotesync", "mastersync", "puppetsync".'
+				'Expected "var", "onready", "remote", "master", "puppet", "sync", "remotesync", "mastersync", "puppetsync".',
 			],
 			['Expected "var".'],
 			['Expected "var" or "func".'],
@@ -555,8 +529,7 @@ const MESSAGE_DATABASE := [
 			['"class_name" can only be present once per script.'],
 			['The "tool" keyword can only be present once per script.'],
 		],
-		"raw":
-		[
+		"raw": [
 			'"yield()" can only be used inside function blocks.',
 			'"self" isn\'t allowed in a static function or constant expression.',
 			'Expected "var", "onready", "remote", "master", "puppet", "sync", "remotesync", "mastersync", "puppetsync".',
@@ -575,14 +548,12 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.MISPLACED_KEYWORD,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["Expected a constant expression"],
 			["constant expression", "or variables", "in a pattern"],
 			["Not a constant expression as key"],
 		],
-		"raw":
-		[
+		"raw": [
 			"Expected a constant expression.",
 			"Expect constant expression or variables in a pattern",
 			"Only constant expression or variables allowed in a pattern",
@@ -592,8 +563,7 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.EXPECTED_CONSTANT_EXPRESSION,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			[
 				'"extends" constant must be a string.',
 			],
@@ -610,8 +580,7 @@ const MESSAGE_DATABASE := [
 				'"class" syntax: "class <Name>:" or "class <Name> extends <BaseClass>:"',
 			],
 		],
-		"raw":
-		[
+		"raw": [
 			'"extends" constant must be a string.',
 			'Invalid "extends" syntax, expected string constant (path) and/or identifier (parent class).',
 			'"class_name" syntax: "class_name <UniqueName>"',
@@ -621,8 +590,7 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.INVALID_CLASS_DECLARATION,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["already exists in", "scope"],
 			["already exists in this class"],
 			["already exists in a parent class"],
@@ -633,8 +601,7 @@ const MESSAGE_DATABASE := [
 			["already defined in the scope"],
 			["global class", "already exists at"],
 		],
-		"raw":
-		[
+		"raw": [
 			'Another class named "%CLASS_NAME%" already exists in this scope (at line %LINE_NUMBER%).',
 			'A constant named "%CONSTANT_NAME%" already exists in the outer class scope (at line%LINE_NUMBER%).',
 			'A variable named "%VARIABLE_NAME%" already exists in the outer class scope (at line %LINE_NUMBER%).',
@@ -660,21 +627,18 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.DUPLICATE_DECLARATION,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["No constructor of", "matches the signature"],
 			["The function signature doesn't match the parent"],
 		],
-		"raw":
-		[
+		"raw": [
 			"No constructor of '%TYPE_NAME%' matches the signature '%TYPE_NAME%(%ARGUMENT_TYPE_LIST%)'.",
 			'The function signature doesn\'t match the parent. Parent signature is: "%FUNCTION_SIGNATURE%".',
 		],
 		"code": ErrorCode.SIGNATURE_MISMATCH,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["Invalid argument", "for"],
 			["Too many arguments for"],
 			["Too few arguments for"],
@@ -692,8 +656,7 @@ const MESSAGE_DATABASE := [
 			["Parser bug: self method call without enough arguments."],
 			["Parser bug: invalid function call argument."],
 		],
-		"raw":
-		[
+		"raw": [
 			"Invalid argument (#%ARGUMENT_NUMBER%) for '%TYPE_NAME%' constructor.",
 			"Too many arguments for '%TYPE_NAME%' constructor.",
 			"Too few arguments for '%TYPE_NAME%' constructor.",
@@ -721,14 +684,12 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.INVALID_ARGUMENTS,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["type", "isn't compatible with", "type"],
 			["type", "doesn't match", "type"],
 			["Invalid operand type", "to", "operator"],
 		],
-		"raw":
-		[
+		"raw": [
 			"The pattern type (%PATTERN_TYPE%) isn't compatible with the type of the value to match (%MATCH_TYPE%).",
 			"The constant value type (%TYPE_NAME%) isn't compatible with declared type (%TYPE_NAME%).",
 			"At \"%CALLEE_NAME%()\" call, argument %ARGUMENT_NUMBER%. The passed argument's type (%TYPE_NAME%) doesn't match the function's expected argument type (%TYPE_NAME%).",
@@ -747,16 +708,14 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.TYPE_MISMATCH,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["Unexpected ':=', use '=' instead. Expected end of statement after expression."],
 			["Type-less export needs a constant expression assigned to infer type."],
 			["Can't accept a null constant expression for inferring export type."],
 			["The assigned value doesn't have a set type; the variable type can't be inferred."],
 			['The variable type cannot be inferred because its value is "null".'],
 		],
-		"raw":
-		[
+		"raw": [
 			"Unexpected ':=', use '=' instead. Expected end of statement after expression.",
 			"Type-less export needs a constant expression assigned to infer type.",
 			"Can't accept a null constant expression for inferring export type.",
@@ -766,15 +725,13 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.TYPE_CANNOT_BE_INFERRED,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["The constructor can't return a value."],
 			["A non-void function must return a value in all possible paths."],
 			["A void function cannot return a value."],
 			["A non-void function must return a value."],
 		],
-		"raw":
-		[
+		"raw": [
 			"The constructor can't return a value.",
 			"A non-void function must return a value in all possible paths.",
 			"A void function cannot return a value.",
@@ -783,16 +740,14 @@ const MESSAGE_DATABASE := [
 		"code": ErrorCode.RETURN_VALUE_MISMATCH,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			["The constructor cannot be static."],
 			["Can't call non-static function from a static function."],
 			["Non-static function", "can only be called from an instance"],
 			["Can't access member variable", "from a static function"],
-			["etter can't be a static function"],  # Yes, etter!
+			["etter can't be a static function"], # Yes, etter!
 		],
-		"raw":
-		[
+		"raw": [
 			"The constructor cannot be static.",
 			"Can't call non-static function from a static function.",
 			'Non-static function "%CALLEE_NAME%" can only be called from an instance.',
@@ -804,31 +759,39 @@ const MESSAGE_DATABASE := [
 	},
 	{
 		"patterns": [["Can't assign to an expression"]],
-		"raw": [],
-		"code": ErrorCode.ASSIGNING_TO_EXPRESSION
+		"raw": ["Can't assign to an expression."],
+		"code": ErrorCode.ASSIGNING_TO_EXPRESSION,
+	},
+	{
+		"patterns": [["Can't assign to constant"]],
+		"raw": ["Can't assign to constant."],
+		"code": ErrorCode.CANT_ASSIGN_TO_CONSTANT,
 	},
 	{
 		"patterns": [['"in" expected after identifier.']],
-		"raw":
-		[
+		"raw": [
 			'"in" expected after identifier.',
 		],
-		"code": ErrorCode.IN_EXPECTED_AFTER_IDENTIFIER
+		"code": ErrorCode.IN_EXPECTED_AFTER_IDENTIFIER,
 	},
 	{
 		"patterns": [["Parse error: Unexpected EOL"]],
 		"raw": ["Parse error: Unexpected EOL at %TYPE_NAME%"],
-		"code": ErrorCode.UNEXPECTED_EOL
+		"code": ErrorCode.UNEXPECTED_EOL,
 	},
 	{
-		"patterns":
-		[
+		"patterns": [
 			[
 				"Can't get index",
 				"on base",
-			]
+			],
 		],
 		"raw": ['Can\'t get index "%INDEX_NAME%" on base "%TYPE_NAME%".'],
-		"code": ErrorCode.CANT_GET_INDEX
-	}
+		"code": ErrorCode.CANT_GET_INDEX,
+	},
+	{
+		"patterns": [["Parse error: Spaces used before tabs on a line"]],
+		"raw": ["Parse error: Spaces used before tabs on a line."],
+		"code": ErrorCode.SPACES_BEFORE_TABS,
+	},
 ]

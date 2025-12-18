@@ -38,13 +38,34 @@ To access the [code]x[/code] sub-component of the variable, you need to do that 
 
 [code]for cell_position in cell_positions_array:
     cell_position.x += 1.0[/code]"
-ASSIGNING_TO_EXPRESSION,"If you get this error, you are most likely trying to assign a value to something other than a variable, which is impossible. You can only assign values to variables.
+ASSIGNING_TO_EXPRESSION,"You get this error when you try to assign a value to something that is not a variable.
 
-Another possibility is that you want to check for equality in a condition but wrote a single = instead of ==.","If you want to assign a value to a variable, double-check that what you have on the left side of the = sign is a variable and not a function.
+You can only assign values to variables. You cannot assign values to function calls or calculations.
 
-You also need to ensure the syntax is correct. For example, there shouldn't be parentheses on the left side of the equal sign.
+For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call, not a variable.","Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name.
 
-In the case of a condition, ensure that you are using two equal signs to check for equality (==)."
+If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call.
+
+If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
+CANT_ASSIGN_TO_CONSTANT,"You get this error when you try to change the value of a constant.
+
+A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it.
+
+For example, if you write [code]const MAX_SPEED = 100[/code], you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code].
+
+Many constants are built into Godot and GDScript, and you cannot change them either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters.","Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:
+
+1. If the value should never change, or it comes from Godot, remove the line that tries to change it.
+2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
+SPACES_BEFORE_TABS,"You get this error when you have a space character before a tab character at the start of a line.
+
+In GDScript, you must use tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character.
+
+If you accidentally type a space before a tab, the computer gets confused about your code's indentation.","To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line.
+
+Then, make sure the line starts with only tab characters for indentation.
+
+Most code editors will automatically use tabs when you press the Tab key. If your editor is inserting spaces instead, you may need to check your editor settings."
 CYCLIC_REFERENCE,"A cyclic reference is when a class references itself, directly or indirectly.
 
 It has two possible causes:
