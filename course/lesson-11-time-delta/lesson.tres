@@ -31,7 +31,7 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-11-time-delta/content-N4rS5AJT.tres"
 title = ""
 type = 0
-text = "But it's not just our character that has a [code]_process()[/code] function; Almost everything in the game has a [code]_process()[/code] function!
+text = "But it's not just our character that has a [code]_process()[/code] function. Almost everything in the game has a [code]_process()[/code] function!
 
 Dozens of times per second, Godot runs every [code]_process()[/code] function in the game to update the game world.
 
@@ -49,7 +49,7 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-11-time-delta/content-1TxlTtcy.tres"
 title = "This sounds like Frames Per Second..."
 type = 1
-text = "You may have heard of frames per second, or FPS for short. Games often run at 60 frames per second. 
+text = "You may have heard of frames per second, or FPS for short. Games often run at 60 frames per second.
 
 It means that everything in the game updates 60 times each second.
 
@@ -92,17 +92,17 @@ title = "Frames take varying amounts of time to calculate"
 type = 0
 text = "Depending on the game, the computer, and what the game engine needs to calculate, frames take more or less time to display.
 
-There will always be milliseconds variations from frame to frame.
+There will always be small variations from frame to frame.
 
 That is why the [code]_process()[/code] function receives a [code]delta[/code] parameter.
 
-Delta represents a time difference. It's the time passed since the previous frame, in seconds.
+Delta represents a time difference. It's the time it took Godot to complete the previous frame, in seconds.
 
-We can use it to ensure that the changes between frames don't make the game's behavior unreliable.
+We can use it to make sure the game runs at the same speed on all computers.
 
-This is because different computers run differently, so a fast computer will have more frames per second than a slow computer.
+This is because different computers have different processing power, so a fast computer will have more frames per second than a slow computer.
 
-If we ignore [code]delta[/code], the game experience will vary, depending on the computer. Delta helps to make the game experience consistent for everyone."
+If we ignore [code]delta[/code], movement speed will vary depending on the computer. Delta helps to make the game consistent for everyone."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -117,7 +117,7 @@ explanation_bbcode = "[code]delta[/code] is the time it took Godot to complete t
 
 It's very small because frames happen many times a second.
 
-It varies each frame because Godot needs to process more or less each frame."
+It varies each frame because Godot has more or less to process each frame."
 answer_options = [ "It's a value in seconds.", "It varies each frame.", "It's the time it took Godot to complete the previous frame." ]
 valid_answers = [ "It's a value in seconds.", "It varies each frame.", "It's the time it took Godot to complete the previous frame." ]
 is_multiple_choice = true
@@ -164,7 +164,7 @@ title = "Why do we use the number 3.0 in this example?"
 type = 1
 text = "At the top of the lesson, we made the robot rotate a fixed amount every frame: [code]0.05[/code] radians.
 
-In the example above, we now [i]multiply[/i] the argument by the very small [code]delta[/code] value, a value way below [code]1.0[/code]. It makes the robot turn at a constant speed over time.
+In the example above, we now [i]multiply[/i] the argument by the very small [code]delta[/code] value, a value much smaller than [code]1.0[/code]. It makes the robot turn at a constant speed over time.
 
 However, multiplying by a number below [code]1.0[/code] like [code]delta[/code] makes the result smaller.
 
@@ -172,7 +172,7 @@ To compensate for that and make the robot turn fast enough, we use a larger numb
 
 Those numbers have two different [i]units[/i]: [code]0.05[/code] is an [i]angle[/i] in radians, while [code]3.0[/code] is an [i]angular speed[/i] in radians per second.
 
-When you multiply a speed by a time delta, it gives you an angle.
+When you multiply an angular speed by a time delta, it gives you an angle.
 
 Don't worry if it's a little confusing for now. It'll eventually click as you deal with speed, acceleration, and motion in your game projects."
 visual_element_path = ""
@@ -216,7 +216,7 @@ text = "Multiplying time-sensitive values by [code]delta[/code] makes them [b]ti
 
 Thanks to that, we get reliable movement over time.
 
-Without [code]delta[/code], frame times vary from computer to computer and during gameplay. Because of that, the movement will differ for every player, making the game inconsistent and messy."
+Frame times vary from computer to computer and from frame to frame during gameplay. Because frame times vary, if [code]delta[/code] is not used, movement speed will differ for each player, making the game inconsistent and messy."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -227,7 +227,7 @@ quiz_id = "res://course/lesson-11-time-delta/quiz-PRw9clsF.tres"
 question = "What does this mean?"
 content_bbcode = "[code]rotation_speed * delta[/code]"
 hint = ""
-explanation_bbcode = "The [code]*[/code] symbol means we're multiplying [code]rotation_speed[/code] by [code]delta[/code] time."
+explanation_bbcode = "The [code]*[/code] symbol means we're multiplying [code]rotation_speed[/code] by [code]delta[/code]."
 answer_options = [ "We're multiplying rotation_speed by delta.", "We're dividing delta by rotation_speed.", "We're adding rotation_speed to delta.", "We're subtracting delta from rotation_speed." ]
 valid_answers = [ "We're multiplying rotation_speed by delta." ]
 is_multiple_choice = false
@@ -238,7 +238,7 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-11-time-delta/content-cSrGQgrV.tres"
 title = ""
 type = 0
-text = "In the next practice, we'll use delta to make rotating time-dependent."
+text = "In the next practice, we'll use delta to make the rotation time-dependent."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -270,7 +270,7 @@ practice_id = "res://course/lesson-11-time-delta/practice-x0c7DDiz.tres"
 title = "Moving in a Circle Using Delta"
 goal = "In this practice, make the robot move in a smooth circle using delta.
 
-To get this movement, the robot should rotate [code]2[/code] radians per second and move [code]100[/code] pixels per second towards clockwise.
+The robot should rotate [code]2[/code] radians per second and move [code]100[/code] pixels per second forward. This combination makes it travel in a clockwise circle.
 
 [b]Note:[/b] Please write the values in the parentheses when calling the functions. If you define extra variables, we will not be able to check your practice."
 starting_code = "func _process(delta):
