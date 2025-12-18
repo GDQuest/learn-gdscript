@@ -56,7 +56,12 @@ func _restore_next():
 	_initial_crates[index].reset(3)
 
 # EXPORT run
-var crates = ["healing heart", "shield", "gems", "sword"]
+var crates = [
+	"healing heart",
+	"shield",
+	"gems",
+	"sword"
+]
 
 func run():
 	while crates:

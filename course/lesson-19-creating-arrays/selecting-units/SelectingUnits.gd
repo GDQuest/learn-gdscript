@@ -21,12 +21,14 @@ onready var turtle := $Turtle
 func _ready() -> void:
 	_label_container.show_behind_parent = true
 	add_child(_label_container)
-	set_units({
-		Vector2(1, 0): $Robot,
-		Vector2(4, 2): $Robot2,
-		Vector2(0, 3): $Robot3,
-		Vector2(5, 1): $Robot4,
-	})
+	set_units(
+		{
+			Vector2(1, 0): $Robot,
+			Vector2(4, 2): $Robot2,
+			Vector2(0, 3): $Robot3,
+			Vector2(5, 1): $Robot4,
+		}
+	)
 
 
 func _run():
@@ -37,7 +39,15 @@ func _run():
 
 # EXPORT run
 func run():
-	select_units([Vector2(1, 0), Vector2(4, 2), Vector2(0, 3), Vector2(5, 1)])
+	# Note: Putting each vector on a 
+	# separate line is just for 
+	# readability. It's optional.
+	select_units([
+		Vector2(1, 0),
+		Vector2(4, 2),
+		Vector2(0, 3),
+		Vector2(5, 1),
+	])
 # /EXPORT run
 
 

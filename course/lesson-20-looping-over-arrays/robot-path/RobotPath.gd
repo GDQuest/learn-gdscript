@@ -18,7 +18,15 @@ func _ready() -> void:
 
 
 # EXPORT run
-var robot_path = [Vector2(1, 0), Vector2(1, 1), Vector2(1, 2), Vector2(2, 2), Vector2(3, 2), Vector2(4, 2), Vector2(5, 2)]
+var robot_path = [
+	Vector2(1, 0),
+	Vector2(1, 1),
+	Vector2(1, 2),
+	Vector2(2, 2),
+	Vector2(3, 2),
+	Vector2(4, 2),
+	Vector2(5, 2),
+]
 
 func run():
 	for cell in robot_path:

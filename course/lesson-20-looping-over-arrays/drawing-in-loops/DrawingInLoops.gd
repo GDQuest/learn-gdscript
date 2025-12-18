@@ -10,7 +10,12 @@ func _run():
 
 
 # EXPORT draw
-var rectangle_sizes = [Vector2(200, 120), Vector2(140, 80), Vector2(80, 140), Vector2(200, 140)]
+var rectangle_sizes = [
+	Vector2(200, 120),
+	Vector2(140, 80),
+	Vector2(80, 140),
+	Vector2(200, 140),
+]
 
 func run():
 	for size in rectangle_sizes:

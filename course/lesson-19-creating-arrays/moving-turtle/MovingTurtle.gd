@@ -14,7 +14,19 @@ onready var units: Dictionary setget set_units
 var _label_container := Control.new()
 
 # EXPORT path
-var turtle_path = [Vector2(1, 0), Vector2(1, 1), Vector2(2, 1), Vector2(3, 1), Vector2(4, 1), Vector2(5, 1), Vector2(5, 2), Vector2(5, 3)]
+# Note: Putting each vector on a 
+# separate line is just for 
+# readability. It's optional.
+var turtle_path = [
+	Vector2(1, 0),
+	Vector2(1, 1),
+	Vector2(2, 1),
+	Vector2(3, 1),
+	Vector2(4, 1),
+	Vector2(5, 1),
+	Vector2(5, 2),
+	Vector2(5, 3)
+]
 # /EXPORT path
 
 onready var turtle := $Turtle
