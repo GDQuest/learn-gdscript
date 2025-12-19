@@ -21,7 +21,7 @@ func _run():
 var cell_size = Vector2(80, 80)
 
 func convert_to_world_coordinates(cell):
-	return cell * cell_size + cell_size / 2
+	return cell * cell_size
 # /EXPORT run
 
 var _grid_size_px = GRID_SIZE * cell_size
@@ -44,5 +44,5 @@ func draw_cell(cell: Vector2) -> void:
 	if not has_method("convert_to_world_coordinates"):
 		return
 
-	var r := Rect2(convert_to_world_coordinates(cell) - cell_size / 2 - _grid_size_px / 2, cell_size)
+	var r := Rect2(convert_to_world_coordinates(cell) - _grid_size_px / 2, cell_size)
 	draw_rect(r, COLOR_BLUE_TRANSPARENT)

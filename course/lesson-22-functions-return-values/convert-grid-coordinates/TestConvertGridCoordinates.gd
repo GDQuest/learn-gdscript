@@ -9,7 +9,7 @@ func _prepare() -> void:
 
 
 func cell_to_world(cell: Vector2) -> Vector2:
-	return cell * cell_size + cell_size / 2
+	return cell * cell_size
 
 
 func test_function_maps_cell_to_world_coordinates() -> String:

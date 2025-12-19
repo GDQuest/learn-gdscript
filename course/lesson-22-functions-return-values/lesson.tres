@@ -10,11 +10,11 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-22-functions-return-values/content-RHJMQ2XN.tres"
 title = ""
 type = 0
-text = "Until now, you learned that functions are sequences of instructions you give a name and you can call any time.
+text = "Until now, you learned that functions are a way to group instructions, give them a name, and reuse them.
 
-On top of that, functions can make calculations and [i]return[/i] new values.
+Functions can also make calculations and [i]return[/i] new values.
 
-Let's look at some examples to see why it's useful."
+Let's look at some examples to see why this is useful."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -26,7 +26,7 @@ title = "Built-in functions that return a value"
 type = 0
 text = "Many functions built into GDScript make calculations and return a new value.
 
-For example, the [code]round()[/code] function takes a decimal number as an argument and gives you back a new number rounded to the nearest digit."
+For example, the [code]round()[/code] function takes a decimal number as an argument and gives you back a new whole number rounded to the nearest digit."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -68,7 +68,7 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-22-functions-return-values/content-qdYOexRj.tres"
 title = ""
 type = 0
-text = "Notice how we assign the result of the function call to a variable. Because the [code]round()[/code] function returns a [i]new[/i] value, we need to either store the result or use the value immediately.
+text = "Notice how we assign the result of the function call to a variable. Because the [code]round()[/code] function returns a [i]new[/i] value, we need to either store the result in a variable or use the value immediately.
 
 Above, we assigned it to a variable, but you could also do the following."
 visual_element_path = ""
@@ -90,7 +90,7 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-22-functions-return-values/content-iGjB7tKR.tres"
 title = ""
 type = 0
-text = "You can assign the return value of a function call if you plan on using it more than once."
+text = "If you need to use a returned value more than once, store it in a variable first. Otherwise, you can use the function call directly where you need it."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -100,11 +100,13 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-22-functions-return-values/content-TRhZN4rS.tres"
 title = "A cooler example: lerp()"
 type = 0
-text = "The [code]lerp()[/code] function, short for [i]linear interpolate[/i], calculates and returns a weighted average between two values.
+text = "The [code]lerp()[/code] function (short for [i]linear interpolate[/i]), blends between two values.
 
-It takes three arguments: the two values to average and a value between [code]0.0[/code] and [code]1.0[/code] to skew the result.
+It takes three arguments: a start value, an end value, and a blend amount between [code]0.0[/code] and [code]1.0[/code] that controls the blend. A value of [code]0.0[/code] gives you the start value, [code]1.0[/code] gives you the end value, and [code]0.5[/code] gives you halfway between them.
 
-In game programming, it's used to animate things moving towards a target with a single line of code."
+In games, [code]lerp()[/code] is often used to make things move smoothly towards a target.
+
+[b]Note:[/b] In the code example below, I wrote the [code]lerp()[/code] function call across multiple lines for readability. This works exactly the same as writing it on one line."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -150,11 +152,13 @@ text = "You can make [i]your[/i] functions return values.
 
 To make a function return a value, you use the [code]return[/code] keyword followed by the value in question.
 
-In previous lessons, we had characters walking on grids.
+In previous lessons, we had characters walking on grids. For those practices, you were working with cell coordinates like [code]Vector2(0, 0)[/code] or [code]Vector2(2, 1)[/code].
 
-And for those practices, you were working directly with cell coordinates.
+But cell coordinates are not the same as positions on the screen. A cell coordinate like [code]Vector2(2, 1)[/code] tells us which cell we're in, but not where it is in pixels. To draw something on screen, we need pixel positions.
 
-Well, cell coordinates don't correspond to positions on the screen. To find the center of any cell on the screen, we need to convert the cell's coordinates to a position on the screen, in pixels."
+We can write a function to convert cell coordinates to pixel positions. Hover over the cells below to see how it works.
+
+The yellow circle marks the pixel position at the top-left corner of each cell. This corner is the reference point we use for grid position."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -174,12 +178,18 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-22-functions-return-values/content-BWNbDGt6.tres"
 title = ""
 type = 0
-text = "To do so, we use a function. The function does two things:
+text = "To convert cell coordinates to pixel positions, we multiply the cell coordinates by the size of each cell in pixels.
 
-1. First, it multiplies the cell coordinates by the cell size, which gives us the position of the cell's top-left corner on the screen, in pixels.
-2. Then, we add half of the cell size to get the center of the cell.
+For example, if each cell is [code]120[/code] pixels wide and tall, then:
 
-The function returns the result, allowing us to store it in a variable."
+- Cell [code]Vector2(1, 0)[/code] is at pixel position [code]Vector2(120, 0)[/code].
+- Cell [code]Vector2(2, 1)[/code] would be at [code]Vector2(240, 120)[/code] pixels.
+
+Use the interactive grid above to visualize the calculations.
+
+This gives us the top-left corner of each cell, which is the standard way to position things on a grid in games.
+
+The function below does this calculation and returns the result, so we can store it in a variable or use it right away."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -199,7 +209,11 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-22-functions-return-values/content-j47MqE82.tres"
 title = ""
 type = 0
-text = "The [code]return[/code] keyword returns the value to the code calling the function. You'll receive the result where you call the function."
+text = "The [code]return[/code] keyword sends the calculated value back to the code that called the function.
+
+Note: In Godot, we write coordinates as [code]Vector2(x, y)[/code]. The [code]x[/code] value goes left to right (the column), and [code]y[/code] goes top to bottom (the row).
+
+In the example below, we call the function and store the returned value in the variable [code]world_position[/code]. Click the run button to see the result."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -219,9 +233,9 @@ script = ExtResource( 4 )
 content_id = "res://course/lesson-22-functions-return-values/content-2rtQEn91.tres"
 title = ""
 type = 0
-text = "Some functions return values, and some do not. During practices, you can learn which functions return a value using the documentation panel. It will display if the practice requires using specific functions or variables.
+text = "Some functions return values, and some do not. You can check this in the documentation panel during practices. When a practice uses specific functions, the panel shows information about them.
 
-There, functions that start with the term [code]void[/code] do not return a value. Any other term means the function does return a value. You'll learn more about what other terms mean in a couple of lessons when we explore value [i]types[/i].
+In the documentation, functions that start with the word [code]void[/code] do not return a value. Any other word before the function name means it returns a value of that type. You'll learn more about types in a couple of lessons.
 
 For now, let's practice returning values from functions!"
 visual_element_path = ""
@@ -232,22 +246,24 @@ has_separator = false
 script = ExtResource( 3 )
 practice_id = "res://course/lesson-22-functions-return-values/practice-llf8B67U.tres"
 title = "Converting coordinates from the grid to the screen"
-goal = "Define a function that converts a position on a grid to the screen.
+goal = "Complete the function that converts a cell coordinate to a pixel position on the screen.
 
-The function takes a [code]Vector2[/code] cell coordinate as an argument. It should return the corresponding [code]Vector2[/code] screen coordinates at the center of the cell."
+The function takes a [code]Vector2[/code] cell coordinate as an argument, like [code]Vector2(2, 1)[/code]. It should return the pixel position of that cell's top-left corner.
+
+To convert, multiply the cell coordinate by the [code]cell_size[/code]."
 starting_code = "var cell_size = Vector2(80, 80)
 
 func convert_to_world_coordinates(cell):
 	"
 cursor_line = 0
 cursor_column = 0
-hints = PoolStringArray( "Every cell is a square of size [code]cell_size[/code]. You can multiply the [code]cell[/code] by this value to calculate the top-left of a cell in screen coordinates.", "To get the center of a cell, you need to add half the [code]cell_size[/code] to the product." )
+hints = PoolStringArray( "To convert a cell coordinate to pixels, multiply the [code]cell[/code] by [code]cell_size[/code].", "Use the [code]return[/code] keyword to send the result back. For example: [code]return cell * cell_size[/code]" )
 validator_script_path = "convert-grid-coordinates/TestConvertGridCoordinates.gd"
 script_slice_path = "convert-grid-coordinates/ConvertGridCoordinates.gd"
 slice_name = "run"
 documentation_references = PoolStringArray(  )
 documentation_resource = ExtResource( 1 )
-description = "We lost the function to convert grid coordinates, but we desperately need it for our game! Make the turtle move again by coding it."
+description = "We need a function to convert grid coordinates to pixel positions. Complete the function to make the turtle move to the correct cells!"
 
 [resource]
 script = ExtResource( 2 )
