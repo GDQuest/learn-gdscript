@@ -7,36 +7,36 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends OutputConsole
 
-onready var array = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
-onready var element = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
+onready var array = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
+onready var element = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
 
 
 func run():
 	emit_signal(\"line_highlight_requested\", 0)
 	yield()
-	
+
 	array = [0, 1, 2]
 	emit_signal(\"line_highlight_requested\", 1)
 	yield()
-	
+
 	element = null
 	emit_signal(\"line_highlight_requested\", 2)
 	yield()
-	
+
 	element = array[0]
 	emit_signal(\"line_highlight_requested\", 4)
 	yield()
 	print_output([element])
 	emit_signal(\"line_highlight_requested\", 5)
 	yield()
-	
+
 	element = array[1]
 	emit_signal(\"line_highlight_requested\", 7)
 	yield()
 	print_output([element])
 	emit_signal(\"line_highlight_requested\", 8)
 	yield()
-	
+
 	element = array[2]
 	emit_signal(\"line_highlight_requested\", 10)
 	yield()
@@ -47,8 +47,8 @@ func run():
 
 func reset() -> void:
 	clear_messages()
-	array = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
-	element = RunnableCodeExampleDebugger.UNINTIALIZED_VARIABLE_VALUE
+	array = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
+	element = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
 "
 
 [node name="Panel" type="VBoxContainer"]
@@ -63,13 +63,13 @@ rect_min_size = Vector2( 0, 400 )
 gdscript_code = "func run():
 	var array = [0, 1, 2]
 	var element
-	
+
 	element = array[0]
 	print(element)
-	
+
 	element = array[1]
 	print(element)
-	
+
 	element = array[2]
 	print(element)"
 

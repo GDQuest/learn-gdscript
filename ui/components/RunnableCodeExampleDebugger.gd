@@ -2,7 +2,7 @@ class_name RunnableCodeExampleDebugger
 extends PanelContainer
 
 const DebuggerConsoleMonitoredVariable = preload("res://ui/components/DebuggerConsoleMonitoredVariable.tscn")
-const UNINTIALIZED_VARIABLE_VALUE := "unintialized"
+const UNINITIALIZED_VARIABLE_VALUE := "uninitialized"
 
 export(Array, String) var monitored_variables: Array
 
@@ -33,4 +33,4 @@ func _on_code_updated():
 		var variable_value: String = str(_scene_instance.get(variable_name))
 
 		_console_variables[i].set_values(["%s:" % variable_name, variable_value])
-		_console_variables[i].visible = variable_value != UNINTIALIZED_VARIABLE_VALUE
+		_console_variables[i].visible = variable_value != UNINITIALIZED_VARIABLE_VALUE
