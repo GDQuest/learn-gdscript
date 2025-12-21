@@ -35,6 +35,7 @@ var _title_style: StyleBox
 
 
 func _ready() -> void:
+	size_flags_horizontal = SIZE_FILL | SIZE_EXPAND
 	_toggle_label.text = title
 	_toggle_button.pressed = is_expanded
 	_index_content()
@@ -59,7 +60,10 @@ func _draw() -> void:
 	if _title_style:
 		var title_rect := Rect2()
 		title_rect.position = Vector2(0, 0)
-		title_rect.size = _toggle_bar.rect_size + _title_style.get_minimum_size()
+		# Use rect_size.x (Revealer's width) instead of _toggle_bar.rect_size.x
+		# to avoid drawing a narrow background when _toggle_bar hasn't been resized yet
+		title_rect.size.x = rect_size.x
+		title_rect.size.y = _toggle_bar.rect_size.y + _title_style.get_minimum_size().y
 		draw_style_box(_title_style, title_rect)
 
 		title_size += _title_style.get_minimum_size()
@@ -223,11 +227,11 @@ func set_title(value: String) -> void:
 func set_is_expanded(value: bool) -> void:
 	if is_expanded == value:
 		return
-	
+
 	is_expanded = value
 	if is_expanded:
 		emit_signal("expanded")
-	
+
 	if is_inside_tree():
 		_toggle_button.pressed = is_expanded
 		_toggle_content(is_expanded)
