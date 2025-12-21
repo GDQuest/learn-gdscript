@@ -7,8 +7,8 @@ const WAIT_QUEUE := [
 	{name = "tomato soup", time = 2.0},
 ]
 
-var waiting_orders := []
-var completed_orders := []
+var waiting_orders = []
+var completed_orders = []
 var _add_timer := Timer.new()
 
 var _wait_queue := []

@@ -10,9 +10,9 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-23-append-to-arrays/content-DizKUdOC.tres"
 title = ""
 type = 0
-text = "In previous lessons, you learned how to create arrays to store lists of values and how to loop over them. It's nice, but you won't go far with only that.
+text = "In previous lessons, you learned how to create arrays to store lists of values and how to loop over them. That's useful, but arrays can do much more.
 
-The real strength of arrays is that you can add and remove values from them at any time. It allows you to [i]queue[/i] or [i]stack[/i] data."
+The real strength of GDScript arrays is that you can add and remove values from them at any time. This lets you build waiting lines of data or piles of data. We call these [i]queues[/i] and [i]stacks[/i], respectively. We'll see what that means in this lesson."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -22,7 +22,7 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-23-append-to-arrays/content-wQMqAYVj.tres"
 title = ""
 type = 0
-text = "For now, let's take another example."
+text = "Let's look at a concrete example."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -32,11 +32,9 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-23-append-to-arrays/content-otxF5HUx.tres"
 title = "Tracking orders in a restaurant management game"
 type = 0
-text = "You're making a restaurant management game where customers place orders, and you need to handle them as they come.
+text = "You're making a restaurant management game where customers place orders, and you need to handle them one by one.
 
-In this game, customers order meals that end up in a queue. You need to prepare them in the kitchen.
-
-In this example, we simulate orders arriving and getting completed over time."
+In the example below, customers order meals that end up in a waiting line (a queue). You need to prepare them in the kitchen. We simulate orders arriving and getting completed over time."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -58,9 +56,9 @@ title = ""
 type = 0
 text = "How do you keep track of pending and completed orders? With an array!
 
-When a customer purchases a meal, you want to [i]append[/i] it to the array. Then, as you complete a meal in the kitchen and serve it, you want to remove it from the array.
+When a customer purchases a meal, you want to [i]append[/i] (add) it to the array. Then, as you complete a meal in the kitchen and serve it, you want to remove it from the array.
 
-You can do that with the [code]append()[/code] and the [code]pop_front()[/code] functions of the array, respectively.
+You can use the [code]append()[/code] function to add values at the end of an array. To remove values from the start, you can use the [code]pop_front()[/code] function. We call it \"pop\" because the value jumps out of the array.
 
 Try to read the code below before moving on. Don't worry if not everything makes sense, as we'll break it all down."
 visual_element_path = ""
@@ -82,9 +80,9 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-23-append-to-arrays/content-qdYOexRj.tres"
 title = ""
 type = 0
-text = "Notice how we call some functions by writing a dot after a variable name. Like a given value type can have sub-variables, it can also have its own functions.
+text = "Notice how we call some functions by writing a dot after a variable name. Just like some values have variables you can access with a dot (like the [code]x[/code] variable in [code]position.x[/code]), they can also have their own functions.
 
-Functions like [code]append()[/code] and [code]pop_front()[/code] only exist on arrays. That's why to call them, we need to access it from the array using the dot: [code]array.append()[/code]."
+Functions like [code]append()[/code] and [code]pop_front()[/code] only exist on arrays. To call them, we need to write the array name, then a dot, then the function: [code]array_name.append()[/code]."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = true
@@ -94,9 +92,7 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-23-append-to-arrays/content-TRhZN4rS.tres"
 title = ""
 type = 0
-text = "Let's break down the code.
-
-We queue orders in the [code]waiting_orders[/code] array by appending them to the array."
+text = "Let's break down the code. We add orders to the [code]waiting_orders[/code] array by appending them."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -176,7 +172,7 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-23-append-to-arrays/content-otxF5HUx.tres"
 title = ""
 type = 0
-text = "We call arrays like [code]waiting_orders[/code] a [i]queue[/i]: the first element we append to the array is the first one we remove."
+text = "When we use an array this way, we call it a [i]queue[/i]: the first element we add to the array is the first one we remove. It's like a waiting line at a store."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -186,9 +182,9 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-23-append-to-arrays/content-5AJTESv5.tres"
 title = "What does #... mean?"
 type = 1
-text = "We write [code]#...[/code] to represent ellipses in the code. It means \"we're completing the function's code.\" We use that to break down code examples and make them easier to learn from.
+text = "We write [code]#...[/code] to show that there is more code here. The three dots mean \"we are not showing all the code.\" We use this to break down code examples and make them easier to learn from.
 
-The hash sign itself marks the start of a code comment. It's a line the computer will ignore, which is why it typically appears in grey."
+The hash sign ([code]#[/code]) marks the start of a code comment. It's a line the computer will ignore, which is why it typically appears in grey."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -244,9 +240,9 @@ script = ExtResource( 2 )
 content_id = "res://course/lesson-23-append-to-arrays/content-BWNbDGt6.tres"
 title = ""
 type = 0
-text = "Like [code]pop_front()[/code], the function returns the value removed from the array. You will often store that value in a variable.
+text = "Like [code]pop_front()[/code], the function returns the value removed from the array. You will often store that value in a variable. This value could be the crate's content, which you can then use to give resources to the player.
 
-The value in question could be the crate's content, which you can then use to give resources to the player.
+When we use an array this way, we call it a [i]stack[/i]: the last element we add is the first one we remove. It's like a pile of plates where you take from the top.
 
 In the following practices, you will use the [code]append()[/code], [code]pop_front()[/code], and [code]pop_back()[/code] array functions."
 visual_element_path = ""
@@ -287,16 +283,16 @@ You need to remove them from top to bottom using the array's [code]pop_back()[/c
 
 Your code should remove all the crates in the array using a while loop.
 
-[b]Careful![/b] if you run a while loop carelessly, you can lock the software.
+[b]Careful![/b] If you write the while loop incorrectly, you can freeze the program.
 
-You can check if the [code]crates[/code] array still contains values by writing [code]while crates:[/code]"
+You can check if the [code]crates[/code] array still has values by writing [code]while crates:[/code]. This works because an empty array counts as [code]false[/code], and an array with items counts as [code]true[/code]."
 starting_code = "var crates = [\"healing heart\", \"shield\", \"gems\", \"sword\"]
 
 func run():
 	while "
 cursor_line = 0
 cursor_column = 0
-hints = PoolStringArray( "Remember [code]while[/code] loops\? ", "Every time you [code]pop[/code] an item, the array\'s [code]size[/code] gets reduced", "You can write [code]while crates:[/code] to run code in a loop while there are values in the [code]crates[/code] array." )
+hints = PoolStringArray( "Think about how [code]while[/code] loops work.", "Every time you [code]pop[/code] an item, the array\'s [code]size[/code] gets smaller.", "You can write [code]while crates:[/code] to run code in a loop while there are values in the [code]crates[/code] array." )
 validator_script_path = "res://course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd"
 script_slice_path = "res://course/lesson-23-append-to-arrays/popping-crates/PoppingCrates.gd"
 slice_name = "run"
