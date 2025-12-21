@@ -14,6 +14,8 @@ const PracticeButtonScene := preload("screens/lesson/UIPracticeButton.tscn")
 const AUTOSCROLL_PADDING := 20
 const AUTOSCROLL_DURATION := 0.24
 
+export var test_lesson: Resource
+
 signal lesson_displayed
 
 var _lesson: Lesson
@@ -48,6 +50,12 @@ func _ready() -> void:
 	TranslationManager.connect("translation_changed", self, "_on_translation_changed")
 
 	_glossary = load("res://course/glossary.tres")
+
+	if test_lesson and get_parent() == get_tree().root:
+		setup(test_lesson, null)
+		for child in _content_blocks.get_children():
+			child.show()
+		_practices_container.show()
 
 	_scroll_container.grab_focus()
 
