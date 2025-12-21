@@ -1,0 +1,448 @@
+# Danish translations for Learn GDScript From.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2025-06-14 15:02+0200\n"
+"PO-Revision-Date: 2025-11-28 08:00+0000\n"
+"Last-Translator: Jeppe Nellemann <jepnel@proton.me>\n"
+"Language: da\n"
+"Language-Team: Danish <https://hosted.weblate.org/projects/learn-"
+"gdscript-from-zero/lesson-7-member-variables/da/>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-7-member-variables/lesson.tres:14
+msgid "In this lesson, we take a first look at variables."
+msgstr "I denne lektion tager vi et første kig på variabler."
+
+msgid "In games, you need to keep track of many values that change over time:"
+msgstr "I spil, skal du holde styr på mange værdier, der ændrer sig over tid:"
+
+msgid ""
+"- The player's score.\n"
+"- Every character or enemy's health.\n"
+"- The last checkpoint."
+msgstr ""
+"- Spillerens score.\n"
+"- Hver figur eller fjendes helbred.\n"
+"- Det sidste checkpoint."
+
+msgid "And so much more. You need to store, retrieve, and update those values."
+msgstr "Og så meget mere. Du skal gemme, hente og opdatere disse værdier."
+
+msgid ""
+"We call those values [i]variables[/i]. Variables are labels you use to "
+"keep track of values that vary over time. Here's an example of a variable"
+" tracking a character or monster's health."
+msgstr ""
+"Vi kalder disse værdier [i]variabler[/i]. Variabler er etiketter, du "
+"bruger til at holde styr på værdier, der varierer over tid. Her er et "
+"eksempel på en variabel der holder styr på en figur eller monsters liv."
+
+#: course/lesson-7-member-variables/lesson.tres:44
+msgid ""
+"The line above defines a new variable named [code]health[/code] and "
+"assigns it a starting value of [code]100[/code] (that's what the equal "
+"sign does, more on that below)."
+msgstr ""
+"Linjen ovenfor definerer en ny variabel kaldet [code]health[/code] og "
+"tildeler den en startværdi på [code]100[/code] (det er hvad ligmed tegnet"
+" gør, mere om det nedenfor)."
+
+msgid ""
+"Function parameters, which you saw in the previous lesson, are another "
+"example of variables."
+msgstr ""
+"Funktionsparametre, som du så i den tidligere lektion, er et andet "
+"eksempel på variabler."
+
+#: course/lesson-7-member-variables/lesson.tres:56
+msgid ""
+"In this lesson, we start using variables built into Godot. They're a "
+"particular kind called [i]member variables[/i]."
+msgstr ""
+"I denne lektion begynder vi at bruge variabler bygget ind i Godot. De er "
+"en bestemt type kaldet [i]medlemsvariabler[/i]."
+
+msgid ""
+"Member variables are values attached to a game entity. They're useful "
+"properties like the [code]position[/code], [code]rotation[/code], and "
+"[code]scale[/code] of a character."
+msgstr ""
+"Medlemsvariabler er værdier knyttet til en spilenhed. De er nyttige "
+"egenskaber som [code]position[/code], [code]rotation[/code], og "
+"[code]skala[/code] af en figur."
+
+msgid ""
+"In a previous lesson, we saw how we could use the [code]rotate()[/code] "
+"function to rotate our character."
+msgstr ""
+"I en tidligere lektion så vi, hvordan vi kunne bruge "
+"[code]rotate()[/code] funktionen til at rotere vores tegn."
+
+#: course/lesson-7-member-variables/lesson.tres:80
+msgid ""
+"This function increases or decreases the value of the entity's "
+"[code]rotation[/code] member variable."
+msgstr ""
+"Denne funktion øger eller mindsker værdien af enhedens "
+"[code]rotation[/code] medlemsvariabel."
+
+msgid ""
+"Say we want to reset the rotation to [code]0[/code] and make the "
+"character upright. Using the [code]rotate()[/code] function can prove "
+"difficult: you need to know the character's exact current angle to cancel"
+" it out."
+msgstr ""
+"Hvis nu vi vil nulstille rotationen til [code]0[/code] og gøre figuren "
+"oprejst. Brug af funktionen [code]rotate()[/code] kan være vanskelig: du "
+"skal kende figurens nøjagtige aktuelle vinkel for at annullere den."
+
+msgid "It's much easier to use the member variable rather than the function."
+msgstr "Det er meget nemmere at bruge medlemsvariablen i stedet for funktionen."
+
+msgid ""
+"The following code assigns the value [code]0[/code] to the character's "
+"rotation, resetting its angle and making it upright."
+msgstr ""
+"Følgende kode tildeler værdien [code]0[/code] til figurens rotation, "
+"nulstiller dens vinkel og gør den oprejst."
+
+#: course/lesson-7-member-variables/lesson.tres:106
+msgid ""
+"Notice how we use the equal sign ([code]=[/code]) to change the value of "
+"a variable."
+msgstr ""
+"Bemærk hvordan vi bruger lighedstegnet ([code]=[/code]) til at ændre "
+"værdien af en variabel."
+
+#: course/lesson-7-member-variables/lesson.tres:114
+msgid "What's a variable?"
+msgstr "Hvad er en variabel?"
+
+#: course/lesson-7-member-variables/lesson.tres:117
+msgid "Variables are labels you use to access values that change over time."
+msgstr ""
+"Variabler er etiketter, du bruger til at få adgang til værdier, der "
+"ændrer sig over tid."
+
+msgid ""
+"You can also use them to put a name on a value you want to reuse "
+"throughout your code. It makes your code easier to read and to change."
+msgstr ""
+"Du kan også bruge dem til at give et navn til en værdi, du vil genbruge i"
+" hele din kode. Det gør din kode nemmere at læse og ændre."
+
+#: course/lesson-7-member-variables/lesson.tres:120
+#: course/lesson-7-member-variables/lesson.tres:121
+msgid "A label you use to keep track of a value that can change."
+msgstr "En etiket du bruger til at holde styr på en værdi, der kan ændre sig."
+
+#: course/lesson-7-member-variables/lesson.tres:120
+msgid "A function that varies over time."
+msgstr "En funktion, der varierer over tid."
+
+#: course/lesson-7-member-variables/lesson.tres:120
+msgid "A decimal number."
+msgstr "Et decimaltal."
+
+#: course/lesson-7-member-variables/lesson.tres:128
+msgid "Accessing sub-variables with the dot"
+msgstr "Adgang til undervariabler med punktum"
+
+#: course/lesson-7-member-variables/lesson.tres:130
+msgid "In video games, you will see many member variables that have sub-values."
+msgstr "I videospil vil du se mange medlemsvariabler, der har underværdier."
+
+msgid ""
+"For example, the [code]position[/code] we mentioned has two coordinates: "
+"[code]x[/code] and [code]y[/code]."
+msgstr ""
+"For eksempel, [code]position[/code], vi nævnte, har to koordinater: "
+"[code]x[/code] og [code]y[/code]."
+
+msgid ""
+"It's the same for the [code]scale[/code]: it has [code]x[/code] and "
+"[code]y[/code] sub-variables. They respectively control the horizontal "
+"and vertical size of the game entity."
+msgstr ""
+"Det er det samme for [code]scale[/code]: den har undervariablerne "
+"[code]x[/code] og [code]y[/code]. De styrer henholdsvis den vandrette og "
+"lodrette størrelse af spillets entitet."
+
+msgid ""
+"To access those X and Y sub-components, you add a dot (\".\") after the "
+"variable name."
+msgstr ""
+"For at få adgang til disse X- og Y-underkomponenter tilføjer du et "
+"punktum (\".\") efter variabelnavnet."
+
+msgid ""
+"The code below places the entity at [code]200[/code] pixels on the x-axis"
+" and [code]250[/code] pixels on the y-axis."
+msgstr ""
+"Koden nedenfor placerer enheden ved [code]200[/code] pixels på x-aksen og"
+" [code]250[/code] pixels på y-aksen."
+
+#: course/lesson-7-member-variables/lesson.tres:158
+msgid ""
+"Notice how we use the equal sign (\"=\") to assign the numbers on the "
+"right to the sub-variables on the left."
+msgstr ""
+"Bemærk, hvordan vi bruger lighedstegnet (\"=\") for at tildele tallene "
+"til højre til undervariablerne til venstre."
+
+msgid ""
+"Unlike in maths, in computer programming, the equal sign (\"=\") does not"
+" mean \"is equal to.\""
+msgstr ""
+"I modsætning til i matematik betyder lighedstegnet (\"=\") i "
+"computerprogrammering ikke \"er lig med\"."
+
+msgid ""
+"Instead, it means \"assign the result of the expression on the right to "
+"the variable on the left\". We assign values so often in code that we "
+"prefer to reserve the equal sign for that."
+msgstr ""
+"I stedet betyder det \"tildel resultatet af udtrykket til højre til "
+"variablen til venstre\". Vi tildeler værdier så ofte i kode, at vi "
+"foretrækker at reservere lighedstegnet til det."
+
+#: course/lesson-7-member-variables/lesson.tres:170
+msgid "In games, the Y-axis is positive going down"
+msgstr "I spil er Y-aksen positiv gående nedad"
+
+#: course/lesson-7-member-variables/lesson.tres:172
+msgid ""
+"Note that in games, assuming your character's position starts at (0, 0), "
+"the code above moves the entity [code]200[/code] pixels to the right and "
+"[code]250[/code] pixels down."
+msgstr ""
+"Bemærk, at i spil, forudsat at din figurs position starter ved (0, 0), "
+"flytter koden ovenfor enheden [code]200[/code] pixels til højre og "
+"[code]250[/code] pixels nedad."
+
+msgid "In math, the y-axis is generally positive going up by convention."
+msgstr ""
+"I matematik er y-aksen generelt positiv, når den går opad, ifølge "
+"konventionen."
+
+msgid ""
+"The convention is the [i]opposite[/i] in video games and many computer "
+"applications: the y-axis is positive going down."
+msgstr ""
+"Konventionen er den [i]modsatte[/i] i videospil og mange "
+"computerapplikationer: y-aksen er positiv, når den går nedad."
+
+#: course/lesson-7-member-variables/lesson.tres:194
+msgid "Why does the Y-axis point downwards?"
+msgstr "Hvorfor peger Y-aksen nedad?"
+
+#: course/lesson-7-member-variables/lesson.tres:196
+msgid ""
+"This may be confusing if you only saw the y-axis pointing up in math "
+"classes. However, in math, axes go in any direction. They don't even have"
+" to be perpendicular."
+msgstr ""
+"Dette kan være forvirrende, hvis du kun ser y-aksen pege opad i "
+"matematiktimerne. I matematik går akser dog i alle retninger. De behøver "
+"ikke engang at være vinkelrette."
+
+msgid ""
+"On the computer, the position (0, 0) happens to correspond to the top-"
+"left of your computer screen. It then makes sense for coordinates to be "
+"positive when going towards the bottom-right corner."
+msgstr ""
+"På computeren svarer positionen (0, 0) tilfældigvis til øverste venstre "
+"hjørne af din computerskærm. Det giver så mening, at koordinaterne er "
+"positive, når de går mod nederste højre hjørne."
+
+msgid ""
+"This leads to another question: why is position zero the top left of the "
+"screen? This is due to computer and TV displays history: they would "
+"calculate and display pixels starting from the top left corner and moving"
+" towards the bottom right corner."
+msgstr ""
+"Dette fører til et andet spørgsmål: hvorfor er position nul øverst til "
+"venstre på skærmen? Dette skyldes computer- og tv-skærmes historie: de "
+"beregnede og viste pixels startende fra øverste venstre hjørne og "
+"bevægede sig mod nederste højre hjørne."
+
+#: course/lesson-7-member-variables/lesson.tres:210
+msgid ""
+"Let's look at one last example before moving on to the practice. The "
+"following code makes the character 1.5 times its starting size."
+msgstr ""
+"Lad os se på et sidste eksempel, før vi går videre til øvelsen. Følgende "
+"kode gør karakteren 1,5 gange dens startstørrelse."
+
+#: course/lesson-7-member-variables/lesson.tres:228
+msgid "How do you access sub-variables?"
+msgstr "Hvordan får du adgang til undervariabler?"
+
+#: course/lesson-7-member-variables/lesson.tres:229
+msgid ""
+"Variables often hold sub-values, like the [code]position[/code] has two "
+"sub-variables: [code]x[/code] and [code]y[/code]. How would you access "
+"the [code]x[/code], for example?"
+msgstr ""
+"Variabler indeholder ofte underværdier, f.eks. har [code]position[/code] "
+"to undervariabler: [code]x[/code] og [code]y[/code]. Hvordan ville du for"
+" eksempel tilgå [code]x[/code]?"
+
+#: course/lesson-7-member-variables/lesson.tres:231
+msgid ""
+"To access a sub-variable, you need to write a dot between the parent "
+"variable name and the sub-variable name."
+msgstr ""
+"For at få adgang til en undervariabel skal du skrive et punktum mellem "
+"navnet på den overordnede variabel og navnet på undervariablen."
+
+msgid ""
+"For example, to access the [code]x[/code] sub-variable of the "
+"[code]position[/code] variable, you'll write [code]position.x[/code]."
+msgstr ""
+"For eksempel, for at få adgang til undervariablen [code]x[/code] af "
+"variablen [code]position[/code] skal du skrive [code]position.x[/code]."
+
+#: course/lesson-7-member-variables/lesson.tres:234
+#: course/lesson-7-member-variables/lesson.tres:235
+msgid "You write a dot (\".\") between the variable and the sub-variable name."
+msgstr "Du skriver et punktum (\".\") mellem variablen og undervariablens navn."
+
+#: course/lesson-7-member-variables/lesson.tres:234
+msgid ""
+"You write an arrow (\"->\") between the variable and the sub-variable "
+"name."
+msgstr "Du skriver en pil (\"->\") mellem variablen og undervariablens navn."
+
+#: course/lesson-7-member-variables/lesson.tres:234
+msgid "You write a slash (\"/\") between the variable and the sub-variable name."
+msgstr "Du skriver et skråstreg (\"/\") mellem variablen og undervariablens navn."
+
+#: course/lesson-7-member-variables/lesson.tres:244
+msgid ""
+"In a future lesson, we'll explain why and how those variables have sub-"
+"variables."
+msgstr ""
+"I en fremtidig lektion vil vi forklare, hvorfor og hvordan disse "
+"variabler har undervariabler."
+
+msgid "For now, just know you can use the dot to access them."
+msgstr ""
+"For nu skal du bare vide, at du kan bruge punktum til at få adgang til "
+"dem."
+
+msgid ""
+"We'll tell you which variables have sub-components and what their names "
+"are."
+msgstr ""
+"Vi fortæller dig, hvilke variabler der har underkomponenter, og hvad "
+"deres navne er."
+
+msgid ""
+"In the next lessons, you'll create your own variables and do operations "
+"on them to add or remove [code]score[/code], [code]health[/code], you "
+"name it."
+msgstr ""
+"I de næste lektioner vil du oprette dine egne variabler og udføre "
+"operationer på dem for at tilføje eller fjerne [code]score[/code], "
+"[code]health[/code], you name it."
+
+msgid "For now, let's practice accessing variables."
+msgstr "Lad os nu øve os i at få adgang til variabler."
+
+#: course/lesson-7-member-variables/lesson.tres:260
+msgid "Draw a rectangle at a precise position"
+msgstr "Tegn et rektangel på en præcis position"
+
+#: course/lesson-7-member-variables/lesson.tres:261
+msgid ""
+"Draw a rectangle of 200 by 120 pixels at the X position of 120 pixels and"
+" Y position of 100 pixels."
+msgstr ""
+"Tegn et rektangel på 200 gange 120 pixels ved X-positionen på 120 pixels "
+"og Y-positionen på 100 pixels."
+
+msgid ""
+"You need to replace the numbers in the code editor to draw the correct "
+"rectangle."
+msgstr ""
+"Du skal erstatte tallene i kodeeditoren for at tegne det korrekte "
+"rektangel."
+
+#: course/lesson-7-member-variables/lesson.tres:275
+msgid ""
+"Use the position member variable and its sub-variables to change the "
+"rectangle's position."
+msgstr ""
+"Brug «position» medlemsvariablen og dens undervariabler til at ændre "
+"rektanglets position."
+
+#: course/lesson-7-member-variables/lesson.tres:280
+msgid "Draw squares at different positions"
+msgstr "Tegn firkanter på forskellige positioner"
+
+#: course/lesson-7-member-variables/lesson.tres:281
+msgid ""
+"Draw three squares of size 100 by 100 that are 100 pixels apart on the "
+"horizontal axis. In other words, there should be a 100-pixel gap between "
+"two squares."
+msgstr ""
+"Tegn tre firkanter på størrelse 100 gange 100, der er 100 pixels fra "
+"hinanden på den vandrette akse. Med andre ord skal der være et mellemrum "
+"på 100 pixels mellem to firkanter."
+
+msgid ""
+"You should draw the squares starting at the position (100, 100). This "
+"means you should position the first square at 100 on the X axis and 100 "
+"on the Y axis."
+msgstr ""
+"Du skal tegne firkanterne startende ved positionen (100, 100). Det "
+"betyder, at du skal placere den første firkant ved 100 på X-aksen og 100 "
+"på Y-aksen."
+
+msgid ""
+"Remember you need to use the equal sign ([code]=[/code]) to change the "
+"value of a variable, like the turtle's position."
+msgstr ""
+"Husk, at du skal bruge lighedstegnet ([code]=[/code]) for at ændre "
+"værdien af en variabel, f.eks. skildpaddens position."
+
+msgid ""
+"Write your code inside the [code]run()[/code] function so the computer "
+"can recognize it."
+msgstr ""
+"Skriv din kode i funktionen [code]run()[/code], så computeren kan "
+"genkende den."
+
+msgid ""
+"Use the provided [code]draw_rectangle()[/code] function to draw each "
+"square."
+msgstr ""
+"Brug den medfølgende funktion [code]draw_rectangle()[/code] til at tegne "
+"hver firkant."
+
+#: course/lesson-7-member-variables/lesson.tres:299
+msgid ""
+"Now you can place and draw one shape, but how about drawing several? In "
+"this practice, you'll place three squares side by side to really get the "
+"hang of properties."
+msgstr ""
+"Nu kan du placere og tegne én figur, men hvad med at tegne flere? I denne"
+" øvelse placerer du tre firkanter side om side for virkelig at få styr på"
+" egenskaberne."
+
+#: course/lesson-7-member-variables/lesson.tres:303
+msgid "Introduction to Member Variables"
+msgstr "Introduktion til medlemsvariabler"
+

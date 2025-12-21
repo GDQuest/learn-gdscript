@@ -1,0 +1,443 @@
+# Danish translations for Learn GDScript From.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2025-06-14 15:02+0200\n"
+"PO-Revision-Date: 2025-12-01 14:00+0000\n"
+"Last-Translator: Jeppe Nellemann <jepnel@proton.me>\n"
+"Language: da\n"
+"Language-Team: Danish <https://hosted.weblate.org/projects/learn-"
+"gdscript-from-zero/lesson-13-conditions/da/>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-13-conditions/lesson.tres:14
+msgid ""
+"In previous lessons, we decreased and increased a character's health, but"
+" there was no limit to how much health they could have."
+msgstr ""
+"I tidligere lektioner, mindskede og øgede vi en karakters liv, men der "
+"var ingen grænse for, hvor meget liv de kunne have."
+
+#: course/lesson-13-conditions/lesson.tres:34
+msgid ""
+"As a result, the player could increase their character's health "
+"indefinitely, which we do not want."
+msgstr ""
+"Som følge heraf kunne spilleren øge sin karakters liv på ubestemt tid, "
+"hvilket vi ikke ønsker."
+
+#: course/lesson-13-conditions/lesson.tres:52
+msgid "What happens to health when we damage our character?"
+msgstr "Hvad sker der med liv, når vi skader vores karakter?"
+
+#: course/lesson-13-conditions/lesson.tres:53
+msgid "Suppose our character has [code]100[/code] health."
+msgstr "Antag at vores karakter har [code]100[/code] liv."
+
+msgid ""
+"What would the value of health be if we called "
+"[code]take_damage(25)[/code] [b]five times[/b]?"
+msgstr ""
+"Hvad ville værdien af liv være, hvis vi kaldte "
+"[code]take_damage(25)[/code] [b]fem gange[/b]?"
+
+#: course/lesson-13-conditions/lesson.tres:57
+msgid ""
+"Calling [code]take_damage(25)[/code] five times would subtract a total of"
+" [code]125[/code] from [code]100[/code]."
+msgstr ""
+"Hvis man kalder [code]take_damage(25)[/code] fem gange, trækkes i alt "
+"[code]125[/code] fra [code]100[/code]."
+
+msgid ""
+"100\n"
+"75\n"
+"50\n"
+"25\n"
+"0\n"
+"-25"
+msgstr ""
+"100\n"
+"75\n"
+"50\n"
+"25\n"
+"0\n"
+"-25"
+
+#: course/lesson-13-conditions/lesson.tres:65
+#: course/lesson-13-conditions/lesson.tres:66
+msgid "-25"
+msgstr "-25"
+
+#: course/lesson-13-conditions/lesson.tres:65
+msgid "25"
+msgstr "25"
+
+#: course/lesson-13-conditions/lesson.tres:65
+msgid "0"
+msgstr "0"
+
+#: course/lesson-13-conditions/lesson.tres:75
+msgid "We can use conditions to run actions [b]selectively[/b]."
+msgstr "Vi kan bruge betingelser til at udføre handlinger [b]selektivt[/b]."
+
+msgid ""
+"Conditions make your code branch into two paths: if the condition is met,"
+" the computer will run the corresponding instructions. Otherwise, those "
+"instructions will not run at all."
+msgstr ""
+"Betingelser får din kode til at forgrene sig i to stier: Hvis betingelsen"
+" er opfyldt, vil computeren køre de tilsvarende instruktioner. Ellers vil"
+" disse instruktioner slet ikke køre."
+
+#: course/lesson-13-conditions/lesson.tres:87
+msgid ""
+"Video games and other computer programs are full of conditions. For "
+"example, game input largely relies on conditions: [i]if[/i] the player "
+"presses the button on a gamepad, the character jumps."
+msgstr ""
+"Videospil og andre computerprogrammer er fulde af betingelser. For "
+"eksempel afhænger spilinput i høj grad af betingelser: [i]hvis[/i] "
+"spilleren trykker på knappen på en gamepad, hopper karakteren."
+
+#: course/lesson-13-conditions/lesson.tres:107
+msgid ""
+"When the computer checks a condition, this is called [b]to evaluate[/b] a"
+" condition. All conditions [b]evaluate[/b] to either [code]true[/code] or"
+" [code]false[/code]."
+msgstr ""
+"Når computeren kontrollerer en betingelse, kaldes dette [b]at "
+"evaluere[/b] en betingelse. Alle betingelser [b]evaluerer[/b] til enten "
+"[code]true[/code](«sandt») eller [code]false[/code](«falsk»)."
+
+msgid ""
+"Either the player is pressing the button, or not. Either the character is"
+" touching an enemy, or not."
+msgstr ""
+"Enten trykker spilleren på knappen, eller ej. Enten rører karakteren en "
+"fjende, eller ej."
+
+msgid ""
+"In our case, [i]if[/i] the health goes over a maximum value, we want to "
+"reset it to the maximum."
+msgstr ""
+"I vores tilfælde, [i]hvis[/i] livet overstiger en maksimal værdi, vil vi "
+"nulstille det til maksimum."
+
+msgid ""
+"To define a condition, we use the [code]if[/code] keyword. We write a "
+"line starting with [code]if[/code], [ignore]type the condition to "
+"evaluate, and end the line with a colon."
+msgstr ""
+"For at definere en betingelse bruger vi nøgleordet [code]if[/code](«hvis»"
+" på engelsk). Vi skriver en linje, der starter med [code]if[/code], "
+"skriver den betingelse, der skal evalueres, og afslutter linjen med et "
+"kolon."
+
+#: course/lesson-13-conditions/lesson.tres:133
+msgid ""
+"Notice the [code]>[/code] comparison sign. We read this symbol as "
+"\"greater than\"."
+msgstr ""
+"Bemærk sammenligningstegnet [code]>[/code]. Vi læser dette symbol som "
+"\"større end\"."
+
+msgid ""
+"We've seen how function definitions use a colon at the end of the first "
+"line and nest content inside."
+msgstr ""
+"Vi har set, hvordan funktionsdefinitioner bruger et kolon i slutningen af"
+" den første linje og indlejrer indhold indeni."
+
+msgid "In GDScript, this syntax is a recurring pattern for all code blocks."
+msgstr ""
+"I GDScript er denne syntaks et tilbagevendende mønster for alle "
+"kodeblokke."
+
+msgid ""
+"The computer knows which instructions belong to the condition because "
+"they are indented."
+msgstr ""
+"Computeren ved, hvilke instruktioner der hører til betingelsen, fordi de "
+"er indrykket."
+
+#: course/lesson-13-conditions/lesson.tres:157
+msgid "Comparisons"
+msgstr "Sammenligninger"
+
+#: course/lesson-13-conditions/lesson.tres:159
+msgid ""
+"In the above example, we used the [code]>[/code] syntax to mean \"greater"
+" than\"."
+msgstr ""
+"I ovenstående eksempel brugte vi [code]>[/code]-syntaksen til at betyde "
+"\"større end\"."
+
+msgid "We can compare numbers in other ways too."
+msgstr "Vi kan også sammenligne tal på andre måder."
+
+msgid ""
+"[code]>[/code] means \"greater than\"\n"
+"[code]<[/code] means \"less than\"\n"
+"[code]==[/code] means \"equal to\"\n"
+"[code]!=[/code] means \"not equal to\""
+msgstr ""
+"[code]>[/code] betyder \"større end\"\n"
+"[code]<[/code] betyder \"mindre end\"\n"
+"[code]==[/code] betyder \"lig med\"\n"
+"[code]!=[/code] betyder \"ikke lig med\""
+
+msgid "Here's how we might use these in [code]if[/code] statements."
+msgstr "Sådan kan vi bruge disse i [code]if[/code]-sætninger."
+
+#: course/lesson-13-conditions/lesson.tres:187
+msgid "What does \"pass\" do in the code?"
+msgstr "Hvad gør \"pass\" i koden?"
+
+#: course/lesson-13-conditions/lesson.tres:189
+msgid ""
+"The [code]pass[/code] keyword prevents errors in our code when a line "
+"cannot be empty."
+msgstr ""
+"Nøgleordet [code]pass[/code] forhindrer fejl i vores kode, når en linje "
+"ikke kan være tom."
+
+msgid ""
+"For example, we must have a line of code after a function definition or "
+"an [code]if[/code] block. When you don't know what to write yet, you can "
+"use the [code]pass[/code] keyword as a placeholder, and Godot won't give "
+"any errors."
+msgstr ""
+"For eksempel skal vi have en linje kode efter en funktionsdefinition "
+"eller en [code]if[/code]-blok. Når du ikke ved, hvad du skal skrive "
+"endnu, kan du bruge nøgleordet [code]pass[/code] som en pladsholder, og "
+"Godot vil ikke give nogen fejl."
+
+msgid ""
+"In the previous example, if there was nothing below the [code]if[/code] "
+"lines, Godot would give us an \"Expected an indented block after 'if' \" "
+"error."
+msgstr ""
+"I det foregående eksempel, hvis der ikke var noget under "
+"[code]if[/code]-linjerne, ville Godot give os fejlen \"Forventede en "
+"indrykket blok efter 'if'\"."
+
+#: course/lesson-13-conditions/lesson.tres:201
+msgid "Which of these statements are true?"
+msgstr "Hvilke af disse udsagn er sande?"
+
+#: course/lesson-13-conditions/lesson.tres:204
+msgid ""
+"The comparison [code]3 > 1[/code] means \"three is greater than one\" "
+"which is [b]true[/b].\n"
+"The comparison [code]2 < 3[/code] means \"two is less than three\" which "
+"is [b]true[/b].\n"
+"The comparison [code]1 != 3[/code] means \"one is not equal to three\" "
+"which is [b]true[/b]."
+msgstr ""
+"Sammenligningen [code]3 > 1[/code] betyder \"tre er større end ét\", "
+"hvilket er [b]sandt[/b].\n"
+"Sammenligningen [code]2 < 3[/code] betyder \"to er mindre end tre\", "
+"hvilket er [b]sandt[/b].\n"
+"Sammenligningen [code]1 != 3[/code] betyder \"én er ikke lig med tre\", "
+"hvilket er [b]sandt[/b]."
+
+msgid ""
+"The comparison [code]2 == 1[/code] means \"two is equal to one\" which is"
+" [b]false[/b].\n"
+"The comparison [code]3 < 1[/code] means \"three is less than one\" which "
+"is [b]false[/b]."
+msgstr ""
+"Sammenligningen [code]2 == 1[/code] betyder \"to er lig med ét\", hvilket"
+" er [b]falsk[/b].\n"
+"Sammenligningen [code]3 < 1[/code] betyder \"tre er mindre end ét\", "
+"hvilket er [b]falsk[/b]."
+
+#: course/lesson-13-conditions/lesson.tres:210
+#: course/lesson-13-conditions/lesson.tres:211
+msgid "3 > 1"
+msgstr "3 > 1"
+
+#: course/lesson-13-conditions/lesson.tres:210
+msgid "2 == 1"
+msgstr "2 == 1"
+
+#: course/lesson-13-conditions/lesson.tres:210
+#: course/lesson-13-conditions/lesson.tres:211
+msgid "2 < 3"
+msgstr "2 < 3"
+
+#: course/lesson-13-conditions/lesson.tres:210
+#: course/lesson-13-conditions/lesson.tres:211
+msgid "1 != 3"
+msgstr "1 != 3"
+
+#: course/lesson-13-conditions/lesson.tres:210
+msgid "3 < 1"
+msgstr "3 < 1"
+
+#: course/lesson-13-conditions/lesson.tres:218
+msgid "Or else..."
+msgstr "Eller også..."
+
+#: course/lesson-13-conditions/lesson.tres:220
+msgid ""
+"The [code]if[/code] keyword comes with a complementary [code]else[/code] "
+"keyword."
+msgstr ""
+"Nøgleordet [code]if[/code] kommer med et supplerende "
+"[code]else[/code](«ellers» på engelsk)-nøgleord."
+
+msgid ""
+"You can write an [code]else[/code] block after an [code]if[/code] block, "
+"like so."
+msgstr ""
+"Du kan skrive en [code]else[/code]-blok efter en [code]if[/code]-blok, "
+"sådan her."
+
+#: course/lesson-13-conditions/lesson.tres:242
+msgid ""
+"The [code]else[/code] block will run whenever the condition above it "
+"isn't met."
+msgstr "Blokken [code]else[/code] kører, når betingelsen ovenfor ikke er opfyldt."
+
+#: course/lesson-13-conditions/lesson.tres:252
+msgid ""
+"In the following practices, we'll use conditions and improve the way our "
+"character's health changes so it has limits."
+msgstr ""
+"I de følgende øvelser bruger vi betingelser og forbedrer den måde, vores "
+"karakters helbred ændrer sig på, så det har grænser."
+
+#: course/lesson-13-conditions/lesson.tres:260
+msgid "Using Comparisons"
+msgstr "Brug af sammenligninger"
+
+#: course/lesson-13-conditions/lesson.tres:261
+msgid ""
+"This series of [code]if[/code] statements is all wrong. Change the "
+"comparisons so each comparison matches the instruction below it."
+msgstr ""
+"Denne serie af [code]if[/code]-udsagn er helt forkerte. Rediger "
+"sammenligningerne, så hver sammenligning matcher instruktionen "
+"nedenunder."
+
+msgid ""
+"Keep the values and statements as they are; only change the comparison "
+"signs."
+msgstr ""
+"Behold værdierne og udsagnene, som de er; rediger kun "
+"sammenligningstegnene."
+
+msgid ""
+"As a reminder, the comparison signs are:\n"
+"[code]\n"
+"> greater than\n"
+"< less than\n"
+"== equal to\n"
+"!= not equal to\n"
+"[/code]"
+msgstr ""
+"Som en påmindelse er sammenligningstegnene:\n"
+"[code]\n"
+"> større end\n"
+"< mindre end\n"
+"== lig med\n"
+"!= ikke lig med\n"
+"[/code]"
+
+msgid "The line [code]health < 5:[/code] means \"health is less than 5\"."
+msgstr "Linjen [code]health < 5:[/code] betyder \"liv er mindre end 5\"."
+
+msgid ""
+"Because [code]health = 100[/code], this is false so [code]print(\"health "
+"is greater than five.\")[/code] won't run."
+msgstr ""
+"Fordi [code]health = 100[/code], er dette falsk, så [code]print(\"health "
+"is greater than five.\")[/code] vil ikke køre."
+
+#: course/lesson-13-conditions/lesson.tres:297
+msgid ""
+"Comparing values allows us to make decisions in code. But there's "
+"something wrong with these statements.."
+msgstr ""
+"Sammenligning af værdier giver os mulighed for at træffe beslutninger i "
+"kode. Men der er noget galt med disse udsagn.."
+
+#: course/lesson-13-conditions/lesson.tres:302
+msgid "Limiting Healing"
+msgstr "Begrænsning af Healing"
+
+#: course/lesson-13-conditions/lesson.tres:303
+msgid "We have a heal function that adds an amount to the character's health."
+msgstr ""
+"Vi har en helbredelsesfunktion, der tilføjer et beløb til karakterens "
+"helbred."
+
+msgid ""
+"Add to the function so the character's health is never greater than "
+"[code]80[/code]."
+msgstr ""
+"Læg det til funktionen, så karakterens helbred aldrig er større end "
+"[code]80[/code]."
+
+#: course/lesson-13-conditions/lesson.tres:315
+msgid ""
+"As much as we might like, we don't want our robot to have too much "
+"health. Limit how much healing the robot can take."
+msgstr ""
+"Så meget som vi måske gerne vil, ønsker vi ikke, at vores robot skal have"
+" for meget liv. Begræns, hvor meget helbredelse robotten kan tage."
+
+#: course/lesson-13-conditions/lesson.tres:320
+msgid "Preventing Health from Going Below Zero"
+msgstr "Forhindre at Liv Kan Gå Under Nul"
+
+#: course/lesson-13-conditions/lesson.tres:321
+msgid "When the robot takes damage, its health can be negative."
+msgstr "Når robotten tager skade, kan dens helbred være negativt."
+
+msgid ""
+"We might want to display the health number on screen, like in Japanese "
+"RPGs."
+msgstr "Vi vil måske gerne vise livs-tallet på skærmen, ligesom i japanske RPG'er."
+
+msgid "We don't want negative numbers. We want to stop at zero instead."
+msgstr "Vi ønsker ikke negative tal. Vi vil i stedet stoppe ved nul."
+
+msgid ""
+"Calling the function should reduce [code]health[/code] by "
+"[code]amount[/code]."
+msgstr ""
+"Kald af funktionen bør reducere [code]health[/code] med "
+"[code]amount[/code]."
+
+msgid ""
+"If [code]health[/code] goes below [code]0[/code], set it to "
+"[code]0[/code] again."
+msgstr ""
+"Hvis [code]health[/code] går under [code]0[/code], skal du indstille den "
+"til [code]0[/code] igen."
+
+#: course/lesson-13-conditions/lesson.tres:339
+msgid ""
+"Having a negative health value doesn't make a lot of sense. Make sure the"
+" robot's health can't go below zero."
+msgstr ""
+"Det giver ikke meget mening at have en negativ livs-værdi. Sørg for, at "
+"robottens livs-niveau ikke kan falde under nul."
+
+#: course/lesson-13-conditions/lesson.tres:343
+msgid "Conditions"
+msgstr "Betingelser"
+

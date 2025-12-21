@@ -1,10 +1,8 @@
+import csv
+import os
 from typing import List
 
-import os
-import csv
-from babel.messages import extract
-from babel.messages import Catalog
-from babel.messages import pofile
+from babel.messages import Catalog, extract, pofile
 
 PROJECT = "Learn GDScript From Zero"
 VERSION = " "
@@ -91,13 +89,20 @@ def extract_lesson_messages(lesson: str) -> None:
     )
 
 
+def split_by_paragraph(text: str) -> List[str]:
+    """Split text by double newlines, filtering out empty paragraphs."""
+    if not text:
+        return []
+    paragraphs = text.split("\n\n")
+    return [p.strip() for p in paragraphs if p.strip()]
+
+
 def extract_babel_and_write(
     globs_map,
     options_map,
     keywords,
     output_file: str,
 ) -> None:
-
     print("  Starting extraction...")
     catalog = Catalog(
         project=PROJECT,
@@ -105,6 +110,8 @@ def extract_babel_and_write(
         copyright_holder=COPYRIGHT_HOLDER,
         msgid_bugs_address=BUGS_ADDRESS,
     )
+
+    seen_msgids = set()
 
     extractor = extract.extract_from_dir(
         dirname=".",
@@ -121,13 +128,21 @@ def extract_babel_and_write(
         message_id = message[2]
         message_id = message_id.replace("\r\n", "\n")
 
-        catalog.add(
-            id=message_id,
-            string="",
-            locations=[(message[0], message[1])],
-            auto_comments=message[3],
-            context=message[4],
-        )
+        paragraphs = split_by_paragraph(message_id)
+
+        for i, paragraph in enumerate(paragraphs):
+            if paragraph in seen_msgids:
+                continue
+
+            catalog.add(
+                id=paragraph,
+                string="",
+                # Only the first paragraph gets the location and comments
+                locations=[(message[0], message[1])] if i == 0 else [],
+                auto_comments=message[3] if i == 0 else [],
+                context=message[4] if i == 0 else None,
+            )
+            seen_msgids.add(paragraph)
 
     with open(output_file, "wb") as file:
         pofile.write_po(
@@ -192,7 +207,6 @@ def extract_csv_and_write(
     reference_field: str,
     output_file: str,
 ) -> None:
-
     print("  Starting extraction...")
     catalog = Catalog(
         project=PROJECT,
@@ -200,6 +214,8 @@ def extract_csv_and_write(
         copyright_holder=COPYRIGHT_HOLDER,
         msgid_bugs_address=BUGS_ADDRESS,
     )
+
+    seen_msgids = set()
 
     with open(source_file, "r", newline="") as cvsfile:
         reader = csv.DictReader(
@@ -214,13 +230,22 @@ def extract_csv_and_write(
 
                 message_id = message_id.replace("\r\n", "\n")
 
-                catalog.add(
-                    id=message_id,
-                    string="",
-                    locations=[(source_file, reader.line_num)],
-                    auto_comments=["Reference: " + row[reference_field]],
-                    context=None,
-                )
+                paragraphs = split_by_paragraph(message_id)
+                reference_comment = "Reference: " + row[reference_field]
+
+                for i, paragraph in enumerate(paragraphs):
+                    if paragraph in seen_msgids:
+                        continue
+
+                    catalog.add(
+                        id=paragraph,
+                        string="",
+                        # Only the first paragraph gets the location and comments
+                        locations=[(source_file, reader.line_num)] if i == 0 else [],
+                        auto_comments=[reference_comment] if i == 0 else [],
+                        context=None,
+                    )
+                    seen_msgids.add(paragraph)
 
     with open(output_file, "wb") as file:
         pofile.write_po(

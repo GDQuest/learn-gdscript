@@ -140,9 +140,8 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	_practice_solution_used = false
 
 	_info_panel.title_label.text = tr(practice.title).capitalize()
-	# FIXME: Some weird Windows issue, replace before translating so matching works.
 	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(
-		tr(practice.goal.replace("\r\n", "\n"))
+		TextUtils.tr_paragraph(practice.goal)
 	)
 	_code_editor.text = practice.starting_code
 	_code_editor.update_cursor_position(practice.cursor_line, practice.cursor_column)
@@ -152,7 +151,7 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	for hint in practice.hints:
 		var practice_hint: PracticeHint = PracticeHintScene.instance()
 		practice_hint.title = tr("Hint %s") % [String(index + 1).pad_zeros(1)]
-		practice_hint.bbcode_text = tr(hint)
+		practice_hint.bbcode_text = hint
 		_hints_container.add_child(practice_hint)
 		index += 1
 
@@ -213,9 +212,8 @@ func _update_labels() -> void:
 		return
 
 	_info_panel.title_label.text = tr(_practice.title).capitalize()
-	# FIXME: Some weird Windows issue, replace before translating so matching works.
 	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(
-		tr(_practice.goal.replace("\r\n", "\n"))
+		TextUtils.tr_paragraph(_practice.goal)
 	)
 
 	var index := 0
@@ -225,7 +223,7 @@ func _update_labels() -> void:
 			continue
 
 		practice_hint.title = tr("Hint %s") % [String(index + 1).pad_zeros(1)]
-		practice_hint.bbcode_text = tr(_practice.hints[index])
+		practice_hint.bbcode_text = _practice.hints[index]
 		index += 1
 
 	_info_panel.display_tests(_tester.get_test_names())
@@ -273,7 +271,7 @@ func _validate_and_run_student_code() -> void:
 
 	# Do local sanity checks for the script.
 	var tokenizer := MiniGDScriptTokenizer.new(script_text)
-	
+
 	# Check for recursive functions
 	var recursive_function := tokenizer.find_any_recursive_function()
 	if recursive_function != "":
@@ -338,7 +336,7 @@ func _validate_and_run_student_code() -> void:
 					indent += 1
 
 				var tabs := "\t".repeat(indent)
-				var guard_counter_varname = "__guard_counter" + str(guard_counter) 
+				var guard_counter_varname = "__guard_counter" + str(guard_counter)
 				guard_counter += 1
 				modified_code.append(tabs + "var " + guard_counter_varname + " := 0")
 				modified_code.append(line)

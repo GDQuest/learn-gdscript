@@ -1,0 +1,319 @@
+# Danish translations for Learn GDScript From.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2025-06-14 15:02+0200\n"
+"PO-Revision-Date: 2025-12-14 14:00+0000\n"
+"Last-Translator: Jeppe Nellemann <jepnel@proton.me>\n"
+"Language: da\n"
+"Language-Team: Danish <https://hosted.weblate.org/projects/learn-"
+"gdscript-from-zero/lesson-20-looping-over-arrays/da/>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:14
+msgid ""
+"We used the [code]range()[/code] function in combination with "
+"[code]for[/code] loops."
+msgstr ""
+"Vi brugte funktionen [code]range()[/code] i kombination med "
+"[code]for[/code] løkker."
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:34
+msgid ""
+"The [code]range()[/code] function produced an array that the "
+"[code]for[/code] keyword could loop over."
+msgstr ""
+"[code]range()[/code] funktionen lavede et array, som [code]for[/code] "
+"nøgleordet kunne loope hen over."
+
+msgid ""
+"We can give [code]for[/code] loops [i]any[/i] array, and they will loop "
+"over them just the same."
+msgstr ""
+"Vi kan give [code]for[/code] loops [i]hvilket som helst[/i] array, og de "
+"vil loope over dem på samme måde."
+
+msgid ""
+"Instead of using the [code]range()[/code] function, we could manually "
+"write the numbers and get the same result."
+msgstr ""
+"I stedet for at bruge funktionen [code]range()[/code] kunne vi manuelt "
+"skrive tallene og få det samme resultat."
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:58
+msgid ""
+"For each element inside the array, the [code]for[/code] loop extracts it,"
+" stores it in the temporary variable named [code]number[/code], and "
+"executes the loop's code once."
+msgstr ""
+"For hvert element inde i arrayet, udtrækker [code]for[/code]-løkken det "
+"og gemmer det i den midlertidige variabel, der hedder "
+"[code]number[/code], og udfører løkkens kode én gang."
+
+msgid ""
+"Inside the loop, you can access the [code]number[/code] variable, which "
+"changes on each [i]iteration[/i]."
+msgstr ""
+"Inde i løkken kan du få adgang til [code]number[/code] variablen, som "
+"ændrer sig på hver [i]iteration[/i]."
+
+msgid ""
+"The code works regardless of the array or where you store it. Often, you "
+"will store arrays in variables for easy access."
+msgstr ""
+"Koden fungerer uanset arrayet eller hvor du gemmer det. Ofte vil du gemme"
+" arrays i variabler for nem adgang."
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:80
+msgid "What will this code print?"
+msgstr "Hvad vil denne kode udskrive?"
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:81
+msgid ""
+"[code]var numbers = [0, 1, 2]\n"
+"for number in numbers:\n"
+"    print(number)\n"
+"[/code]"
+msgstr ""
+"[code]var numbers = [0, 1, 2]\n"
+"for number in numbers:\n"
+"    print(number)\n"
+"[/code]"
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:86
+msgid ""
+"Compared to previous examples, we store the array in the "
+"[code]numbers[/code] variable. Using the [code]numbers[/code] variable in"
+" our [code]for[/code] loop allows the computer to access the array of "
+"numbers like before."
+msgstr ""
+"Sammenlignet med tidligere eksempler gemmer vi arrayet i variablen "
+"[code]numbers[/code]. Brug af variablen [code]numbers[/code] i vores "
+"[code]for[/code]-løkke giver computeren adgang til arrayet af tal som "
+"før."
+
+msgid ""
+"We have three numbers in the array: [code]0[/code], [code]1[/code], and "
+"[code]2[/code]."
+msgstr ""
+"Vi har tre tal i arrayet: [code]0[/code], [code]1[/code] og "
+"[code]2[/code]."
+
+msgid ""
+"The loop extracts each of them sequentially and assigns it to the "
+"[code]number[/code] temporary variable. As the loop processes each "
+"number, the output will print [code]0[/code], then [code]1[/code], then "
+"[code]2[/code], each on a separate line."
+msgstr ""
+"Løkken udtrækker hvert af dem sekventielt og tildeler det til den "
+"midlertidige variabel [code]number[/code]. Når løkken behandler hvert "
+"tal, vil outputtet udskrive [code]0[/code], derefter [code]1[/code] og "
+"derefter [code]2[/code], hver på en separat linje."
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:91
+#: course/lesson-20-looping-over-arrays/lesson.tres:92
+msgid "0, 1, and 2"
+msgstr "0, 1, og 2"
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:91
+msgid "1, 2, and 3"
+msgstr "1, 2, og 3"
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:91
+msgid "0, 0, and 0"
+msgstr "0, 0, og 0"
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:99
+msgid "Making the turtle walk, with a loop"
+msgstr "Få skildpadden til at gå, med en løkke"
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:101
+msgid ""
+"In the previous lesson, you made a turtle walk along a path by writing "
+"[code]Vector2[/code] coordinates in an array."
+msgstr ""
+"I den forrige lektion fik du en skildpadde til at gå langs en sti ved at "
+"skrive [code]Vector2[/code] koordinater i et array."
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:121
+msgid "It's a [code]for[/code] loop that makes the turtle walk along the path."
+msgstr ""
+"Det er en [code]for[/code]-løkke, der får skildpadden til at gå langs "
+"stien."
+
+msgid ""
+"The loop works like this: for each coordinate in the array, it moves the "
+"turtle once to that cell."
+msgstr ""
+"Løkken fungerer sådan her: for hver koordinat i arrayet flytter den "
+"skildpadden én gang til den celle."
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:143
+msgid "It's the same principle with unit selection."
+msgstr "Det er det samme princip med enhedsvalg."
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:163
+msgid ""
+"For each coordinate in an array named [code]selected_units[/code], we "
+"check if there is a unit in that cell. If so, we select it."
+msgstr ""
+"For hver koordinat i array'et med navnet [code]selected_units[/code] "
+"kontrollerer vi, om der er en enhed i den celle. Hvis det er tilfældet, "
+"vælger vi den."
+
+msgid "In that case, we use an array, a loop, and a condition together."
+msgstr "I så fald bruger vi et array, en løkke og en betingelse sammen."
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:185
+msgid "The code above uses several features you haven't learned yet:"
+msgstr "Ovenstående kode bruger flere funktioner, du ikke har lært om endnu:"
+
+msgid ""
+"- In a condition, the [code]in[/code] keyword allows you to check if a "
+"value exists [i]in[/i] an array.\n"
+"- The array's [code]append()[/code] function appends a new value at the "
+"end of the array."
+msgstr ""
+"- I en betingelse giver nøgleordet [code]in[/code] dig mulighed for at "
+"kontrollere, om en værdi findes [i]i[/i] et array.\n"
+"- Arrayets funktion [code]append()[/code] tilføjer en ny værdi i "
+"slutningen af arrayet."
+
+msgid ""
+"Notice the use of a period after the [code]selected_units[/code] "
+"variable, to call the [code]append()[/code] function. It's because this "
+"function exists only on arrays."
+msgstr ""
+"Bemærk brugen af et punktum efter variablen [code]selected_units[/code] "
+"for at kalde funktionen [code]append()[/code]. Det skyldes, at denne "
+"funktion kun findes på arrays."
+
+msgid ""
+"When functions exist only on a specific value type, you write a dot after"
+" the value to call the function on it."
+msgstr ""
+"Når funktioner kun findes på en bestemt værditype, skriver du et punktum "
+"efter værdien for at kalde funktionen på den."
+
+msgid "We'll revisit those two features again in the following lessons."
+msgstr "Vi vil gennemgå disse to funktioner igen i de følgende lektioner."
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:204
+msgid ""
+"The beauty of loops is that they work regardless of the size of your "
+"arrays."
+msgstr "Det smukke ved loops er, at de fungerer uanset størrelsen på dine arrays."
+
+msgid ""
+"The code just works whether you have one or ten thousand units to select."
+" It is all accomplished with only a couple lines of code."
+msgstr ""
+"Koden fungerer, uanset om du har én eller ti tusind enheder at vælge. Det"
+" hele opnås med kun et par linjer kode."
+
+msgid "That's the power of computer programming."
+msgstr "Det er styrken ved computerprogrammering."
+
+msgid ""
+"In the following practices, you will use arrays combined with "
+"[code]for[/code] loops to achieve similar results."
+msgstr ""
+"I de følgende øvelser vil du bruge arrays kombineret med "
+"[code]for[/code]-løkker for at opnå lignende resultater."
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:218
+msgid "Move the robot along the path"
+msgstr "Flyt robotten langs stien"
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:219
+msgid ""
+"Our AI pathfinding algorithm provided a path for the robot to move to the"
+" right edge of the grid. Your task is to use a [code]for[/code] loop to "
+"make the robot move."
+msgstr ""
+"Vores AI-stifindingsalgoritme gav robotten en sti, så den kunne bevæge "
+"sig til højre kant af gitteret. Din opgave er at bruge en "
+"[code]for[/code]-løkke til at få robotten til at bevæge sig."
+
+msgid ""
+"To move the robot, call [i]its[/i] [code]move_to()[/code] function, like "
+"so: [code]robot.move_to()[/code]."
+msgstr ""
+"For at bevæge robotten skal du kalde [i]dens[/i] "
+"[code]move_to()[/code]-funktion, således: [code]robot.move_to()[/code]."
+
+msgid ""
+"The [code]move_to()[/code] function only exists on the robot, which is "
+"why you need to access it this way."
+msgstr ""
+"Funktionen [code]move_to()[/code] findes kun på robotten, hvilket er "
+"grunden til, at du skal tilgå den på denne måde."
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:235
+msgid ""
+"Our AI pathfinding algorithm is giving us a path to move the robot. Now, "
+"you need to make the turtle move along the path."
+msgstr ""
+"Vores AI-stifindingsalgoritme giver os en rute til at bevæge robotten. Nu"
+" skal du få skildpadden til at bevæge sig langs stien."
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:240
+msgid "Back to the drawing board"
+msgstr "Tilbage til tegnebrættet"
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:241
+msgid "We want to draw many rectangles, something surprisingly common in games."
+msgstr ""
+"Vi vil gerne tegne mange rektangler, noget der er overraskende "
+"almindeligt i spil."
+
+msgid ""
+"However, writing this code by hand can get tedious. Instead, you could "
+"store the size of your shapes in arrays and use a loop to draw them all "
+"in batches."
+msgstr ""
+"Det kan dog blive kedeligt at skrive denne kode i hånden. I stedet kan du"
+" gemme størrelsen på dine figurer i arrays og bruge en løkke til at tegne"
+" dem alle i batches."
+
+msgid "That's what you'll do in this practice."
+msgstr "Det er det, du skal gøre i denne øvelse."
+
+msgid ""
+"Use a [code]for[/code] loop to draw every rectangle in the "
+"[code]rectangle_sizes[/code] array with the [code]draw_rectangle()[/code]"
+" function."
+msgstr ""
+"Brug en [code]for[/code]-løkke til at tegne hvert rektangel i "
+"[code]rectangle_sizes[/code] arrayet med funktionen "
+"[code]draw_rectangle()[/code]."
+
+msgid ""
+"The rectangles shouldn't overlap or cross each other. To avoid that, "
+"you'll need to call the [code]jump()[/code] function."
+msgstr ""
+"Rektanglerne bør ikke overlappe eller krydse hinanden. For at undgå det "
+"skal du kalde funktionen [code]jump()[/code]."
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:261
+msgid ""
+"The drawing turtle makes its comeback. Fear not! Armed with loops, you'll"
+" make it draw faster than ever before."
+msgstr ""
+"Tegneskildpadden vender tilbage. Frygt ej! Bevæbnet med løkker, får du "
+"den til at tegne hurtigere end nogensinde før."
+
+#: course/lesson-20-looping-over-arrays/lesson.tres:265
+msgid "Looping over arrays"
+msgstr "Loope over arrays"
+

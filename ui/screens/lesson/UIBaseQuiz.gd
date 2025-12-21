@@ -56,11 +56,11 @@ func _ready() -> void:
 	_submit_button.connect("pressed", self, "_test_answer")
 	_skip_button.connect("pressed", self, "_show_answer", [false])
 	connect("item_rect_changed", self, "_on_item_rect_changed")
-	
+
 	_help_message.connect("visibility_changed", self, "_on_help_message_visibility_changed")
 	_choice_container.connect("minimum_size_changed", self, "_on_choice_container_minimum_size_changed")
 	_result_container.connect("minimum_size_changed", self, "_on_result_container_minimum_size_changed")
-	
+
 	_size_tween.connect("tween_step", self, "_on_size_tween_step")
 	_size_tween.connect("tween_completed", self, "_on_size_tween_completed")
 
@@ -79,12 +79,10 @@ func setup(quiz: Quiz) -> void:
 	_question.bbcode_text = "[b]" + tr(_quiz.question) + "[/b]"
 
 	_content.visible = not _quiz.content_bbcode.empty()
-	# FIXME: Some weird Windows issue, replace before translating so matching works.
-	_content.bbcode_text = TextUtils.bbcode_add_code_color(tr(_quiz.content_bbcode.replace("\r\n", "\n")))
+	_content.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(_quiz.content_bbcode))
 
 	_explanation.visible = not _quiz.explanation_bbcode.empty()
-	# FIXME: Some weird Windows issue, replace before translating so matching works.
-	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(tr(_quiz.explanation_bbcode.replace("\r\n", "\n")))
+	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(_quiz.explanation_bbcode))
 
 
 func set_completed_before(value: bool) -> void:
@@ -97,13 +95,11 @@ func set_completed_before(value: bool) -> void:
 func _update_labels() -> void:
 	if not _quiz:
 		return
-	
+
 	_question.bbcode_text = "[b]" + tr(_quiz.question) + "[/b]"
-	
-	# FIXME: Some weird Windows issue, replace before translating so matching works.
-	_content.bbcode_text = TextUtils.bbcode_add_code_color(tr(_quiz.content_bbcode.replace("\r\n", "\n")))
-	# FIXME: Some weird Windows issue, replace before translating so matching works.
-	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(tr(_quiz.explanation_bbcode.replace("\r\n", "\n")))
+
+	_content.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(_quiz.content_bbcode))
+	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(_quiz.explanation_bbcode))
 
 
 # Virtual
@@ -159,7 +155,7 @@ func _show_answer(gave_correct_answer := true) -> void:
 
 	_result_container.show()
 	_change_rect_size_to(_result_container.rect_size)
-	
+
 	#Hiding choice view upon completion of the following tween
 	_size_tween.interpolate_property(
 		_choice_container,
@@ -168,7 +164,7 @@ func _show_answer(gave_correct_answer := true) -> void:
 		0,
 		FADE_OUT_TIME
 	)
-	
+
 	_size_tween.interpolate_property(
 		_result_container,
 		"modulate:a",
@@ -179,9 +175,9 @@ func _show_answer(gave_correct_answer := true) -> void:
 		Tween.EASE_IN_OUT,
 		FADE_OUT_TIME
 	)
-	
+
 	_size_tween.start()
-	
+
 	if gave_correct_answer:
 		emit_signal("quiz_passed")
 	else:
@@ -195,15 +191,15 @@ func _show_answer(gave_correct_answer := true) -> void:
 
 func _change_rect_size_to(size: Vector2, instant := false) -> void:
 	_size_tween.stop_all()
-	
+
 	if instant:
 		rect_min_size = size
 		return
-	
+
 	_previous_rect_size = rect_min_size
 	_next_rect_size = size
 	_percent_transformed = 0.0
-	
+
 	_size_tween.interpolate_property(
 		self,
 		"_percent_transformed",
@@ -213,7 +209,7 @@ func _change_rect_size_to(size: Vector2, instant := false) -> void:
 		Tween.TRANS_SINE,
 		Tween.EASE_IN_OUT
 	)
-	
+
 	_size_tween.start()
 
 func _on_item_rect_changed() -> void:
@@ -231,7 +227,7 @@ func _on_help_label_visibility_changed() -> void:
 func _on_choice_container_minimum_size_changed() -> void:
 	if _choice_container.rect_size.y > _choice_container.get_combined_minimum_size().y:
 		_choice_container.rect_size.y = _choice_container.get_combined_minimum_size().y
-	
+
 	if not _result_container.visible:
 		# If not animating the hint, just resize normally.
 		_change_rect_size_to(_choice_container.rect_size, !_animating_hint)
@@ -239,7 +235,7 @@ func _on_choice_container_minimum_size_changed() -> void:
 func _on_result_container_minimum_size_changed() -> void:
 	if _result_container.rect_size.y > _result_container.get_combined_minimum_size().y:
 		_result_container.rect_size.y = _result_container.get_combined_minimum_size().y
-	
+
 	if _result_container.visible:
 		_change_rect_size_to(_result_container.rect_size)
 
@@ -254,7 +250,7 @@ func _on_size_tween_completed(object: Object, key: NodePath) -> void:
 	if object == self and key == ":_percent_transformed":
 		_next_rect_size = Vector2.ZERO
 		_animating_hint = false
-	
+
 	# To avoid the buttons being clickable after choice view is gone.
 	if object == _choice_container and key == ":modulate:a":
 		_choice_container.hide()

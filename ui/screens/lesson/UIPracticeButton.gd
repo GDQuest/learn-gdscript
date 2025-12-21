@@ -26,12 +26,12 @@ func _notification(what: int) -> void:
 
 func setup(practice: Practice, practice_index: int) -> void:
 	_practice = practice
-	
+
 	if not is_inside_tree():
 		yield(self, "ready")
 
 	_title_label.text = "%d. %s" % [practice_index + 1, tr(_practice.title).capitalize()]
-	_description_label.bbcode_text = tr(_practice.description)
+	_description_label.bbcode_text = TextUtils.tr_paragraph(_practice.description)
 	_description_label.visible = not _practice.description.empty()
 	_navigate_button.connect("pressed", Events, "emit_signal", ["practice_requested", _practice])
 
@@ -39,9 +39,9 @@ func setup(practice: Practice, practice_index: int) -> void:
 func _update_labels() -> void:
 	if not _practice:
 		return
-	
+
 	_title_label.text = tr(_practice.title).capitalize()
-	_description_label.bbcode_text = tr(_practice.description)
+	_description_label.bbcode_text = TextUtils.tr_paragraph(_practice.description)
 
 
 func set_completed_before(value: bool) -> void:
@@ -57,16 +57,15 @@ func set_is_highlighted(value: bool) -> void:
 
 	if not is_inside_tree():
 		yield(self, "ready")
-	
+
 	_next_pill_label.visible = is_highlighted
 
 
 func set_navigation_disabled(value: bool) -> void:
 	navigation_disabled = value
-	
+
 	if not is_inside_tree():
 		yield(self, "ready")
-	
+
 	_navigate_button.visible = not navigation_disabled
 	_no_navigation_label.visible = navigation_disabled
-	

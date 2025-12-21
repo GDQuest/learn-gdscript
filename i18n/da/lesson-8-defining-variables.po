@@ -1,0 +1,338 @@
+# Danish translations for Learn GDScript From.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2025-06-14 15:02+0200\n"
+"PO-Revision-Date: 2025-11-28 08:00+0000\n"
+"Last-Translator: Jeppe Nellemann <jepnel@proton.me>\n"
+"Language: da\n"
+"Language-Team: Danish <https://hosted.weblate.org/projects/learn-"
+"gdscript-from-zero/lesson-8-defining-variables/da/>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-8-defining-variables/lesson.tres:13
+msgid ""
+"In the previous lesson, you used a predefined member variable named "
+"[code]position[/code]."
+msgstr ""
+"I den forrige lektion brugte du en foruddefineret medlemsvariabel ved "
+"navn [code]position[/code]."
+
+msgid "In your projects, you will need to define your own variables."
+msgstr "I dine projekter skal du definere dine egne variabler."
+
+msgid "Imagine that you need to track the player's health in your game."
+msgstr "Forestil dig, at du skal spore spillerens liv i dit spil."
+
+msgid ""
+"They may start with [code]5[/code] health points. When taking a hit, the "
+"health should go down to [code]4[/code]. After another hit, it should be "
+"[code]3[/code]. And so on."
+msgstr ""
+"De kan starte med [code]5[/code] livspoint. Når du tager et slag, skal "
+"livet gå ned til [code]4[/code]. Efter et andet slag skal det være "
+"[code]3[/code]. Og så videre."
+
+msgid ""
+"To keep track of that, you can create a variable named "
+"[code]health[/code] to which you add and subtract points."
+msgstr ""
+"For at holde styr på det, kan du oprette en variabel med navnet "
+"[code]health[/code], som du tilføjer og trækker point fra."
+
+msgid ""
+"The example below introduces the [code]print()[/code] function, which "
+"outputs its argument to the output box on the left."
+msgstr ""
+"Eksemplet nedenfor introducerer funktionen [code]print()[/code], som "
+"udsender sit argument til output boksen til venstre."
+
+msgid ""
+"Click the [i]run()[/i] button to instantly run the entire function, and "
+"click the [i]step[/i] button to execute lines of code one by one."
+msgstr ""
+"Klik på knappen [i]run()[/i] for øjeblikkeligt at køre hele funktionen, "
+"og klik på knappen [i]step[/i] for at udføre koden linje for linje."
+
+msgid ""
+"The [i]Debugger[/i] panel at the bottom shows the current value of the "
+"[code]health[/code] variable."
+msgstr ""
+"[i]Fejlfindings[/i] panelet nederst viser den aktuelle værdi af "
+"[code]health[/code] variabelen."
+
+#: course/lesson-8-defining-variables/lesson.tres:47
+msgid ""
+"After executing the first two lines of code, you will have a health "
+"variable storing a value of [code]4[/code]."
+msgstr ""
+"Efter at have kørt de første to linjer kode, vil du have en livs variabel"
+" der lagere af en værdi af [code]4[/code]."
+
+msgid ""
+"Below, we'll break down how you define new variables and explain the "
+"[code]print()[/code] function."
+msgstr ""
+"Nedenfor vil vi se på, hvordan du definerer nye variabler og forklarer "
+"funktionen [code]print()[/code]."
+
+#: course/lesson-8-defining-variables/lesson.tres:57
+msgid "Defining a variable"
+msgstr "Definering af en variabel"
+
+#: course/lesson-8-defining-variables/lesson.tres:59
+msgid ""
+"To use a variable, you must first define it so the computer registers its"
+" name."
+msgstr ""
+"For at bruge en variabel skal du først definere den, så computeren "
+"registrerer dens navn."
+
+msgid ""
+"To do so, you start a line of code with the [code]var[/code] keyword "
+"followed by your desired variable name. Like [code]func[/code] stands for"
+" [i]function[/i], [code]var[/code] stands for [i]variable[/i]."
+msgstr ""
+"For at gøre dette starter du en linje kode med nøgleordet "
+"[code]var[/code] efterfulgt af dit ønskede variabelnavn. Ligesom "
+"[code]func[/code] står for [i]function[/i], står [code]var[/code] for "
+"[i]variabel[/i]."
+
+msgid ""
+"Variables are case-sensitive, which means [code]health[/code] and "
+"[code]Health[/code] are technically different variables. Be careful to "
+"use the same capitalization wherever you refer to the same variable, or "
+"you could be reading or writing to a different variable."
+msgstr ""
+"Variabler skelner mellem store og små bogstaver, hvilket betyder, at "
+"[code]health[/code] og [code]Health[/code] teknisk set er forskellige "
+"variabler. Vær omhyggelig med at bruge de samme store og små bogstaver, "
+"når du refererer til den samme variabel, ellers kan du læse eller skrive "
+"til en anden variabel."
+
+msgid ""
+"The following line defines a [code]health[/code] variable pointing to no "
+"value. You can think of it as creating a product label you have yet to "
+"stick onto something."
+msgstr ""
+"Den følgende linje definerer en [code]health[/code]-variabel, der ikke "
+"peger på nogen værdi. Du kan tænke på det som at oprette en "
+"produktetiket, du endnu ikke har sat på noget."
+
+#: course/lesson-8-defining-variables/lesson.tres:85
+msgid ""
+"Like with functions, a member variable's name must be unique inside a "
+"given code file. Creating two variables next to each other with the same "
+"name will cause an error."
+msgstr ""
+"Ligesom med funktioner skal navnet på en medlemsvariabel være unikt i en "
+"given kodefil. Oprettelse af to variabler ved siden af hinanden med samme"
+" navn vil forårsage en fejl."
+
+#: course/lesson-8-defining-variables/lesson.tres:105
+msgid ""
+"To use a variable, you want to assign it a starting value. You can do so "
+"using the equal sign (=)."
+msgstr ""
+"For at bruge en variabel skal du tildele den en startværdi. Du kan gøre "
+"dette ved at bruge lighedstegnet (=)."
+
+msgid ""
+"This code assigns the value [code]100[/code] to a new variable named "
+"[code]health[/code]."
+msgstr ""
+"Denne kode tildeler værdien [code]100[/code] til en ny variabel med "
+"navnet [code]health[/code]."
+
+#: course/lesson-8-defining-variables/lesson.tres:127
+msgid ""
+"After defining your variable, you can access its value by writing the "
+"variable's name."
+msgstr ""
+"Når du har defineret din variable, kan du få adgang til værdien ved at "
+"skrive variablens navn."
+
+#: course/lesson-8-defining-variables/lesson.tres:147
+msgid ""
+"The code above will display the number [code]100[/code] to some output "
+"window."
+msgstr "Ovenstående kode vil vise tallet [code]100[/code] i et outputvindue."
+
+msgid ""
+"Notice we don't use the [code]var[/code] keyword anymore as we only need "
+"it to [i]define[/i] a variable."
+msgstr ""
+"Bemærk, at vi ikke længere bruger nøgleordet [code]var[/code], da vi kun "
+"skal bruge det til at [i]definere[/i] en variabel."
+
+msgid ""
+"Also, once you define a variable, you can change its value anytime with "
+"the equal sign."
+msgstr ""
+"Når du først har defineret en variabel, kan du også ændre dens værdi når "
+"som helst med lighedstegnet."
+
+#: course/lesson-8-defining-variables/lesson.tres:169
+msgid "About the print function"
+msgstr "Om udskriftsfunktionen"
+
+#: course/lesson-8-defining-variables/lesson.tres:171
+msgid ""
+"The [code]print()[/code] function is generally the first function you "
+"learn in academic programming courses."
+msgstr ""
+"Funktionen [code]print()[/code] er generelt den første funktion, du lærer"
+" i akademiske programmeringskurser."
+
+msgid ""
+"It sends (\"prints\") the message or value you give it to some output "
+"window, often a black window with plain white text."
+msgstr ""
+"Den sender (\"printer\") den besked eller værdi, du giver den, til et "
+"outputvindue, ofte et sort vindue med almindelig hvid tekst."
+
+#: course/lesson-8-defining-variables/lesson.tres:183
+msgid ""
+"Programmers often use [code]print()[/code] to quickly check the value of "
+"their variables when their game runs."
+msgstr ""
+"Programmører bruger ofte [code]print()[/code] til hurtigt at tjekke "
+"værdien af deres variabler, når deres spil kører."
+
+msgid ""
+"In the app, we made a special output window that captures calls to "
+"[code]print()[/code] and displays a card to make it friendlier for you."
+msgstr ""
+"I appen har vi lavet et særligt outputvindue, der registrerer kald til "
+"[code]print()[/code] og viser et kort for at gøre det mere brugervenligt "
+"for dig."
+
+#: course/lesson-8-defining-variables/lesson.tres:205
+msgid ""
+"Here, the verb [i]print[/i] means \"to send information to display on the"
+" screen.\""
+msgstr ""
+"Her betyder verbet [i]print[/i] \"at sende information til visning på "
+"skærmen\"."
+
+msgid ""
+"The function \"prints\" things on your computer display; It does not "
+"relate to printers."
+msgstr ""
+"Funktionen \"udskriver\" ting på din computerskærm; den har ikke noget "
+"med printere at gøre."
+
+#: course/lesson-8-defining-variables/lesson.tres:215
+msgid "Variables are like labels"
+msgstr "Varer er som etiketter"
+
+#: course/lesson-8-defining-variables/lesson.tres:217
+msgid "As we hinted above, in GDScript, variables work a bit like labels."
+msgstr ""
+"Som vi antydede ovenfor, fungerer variabler i GDScript lidt ligesom "
+"etiketter."
+
+msgid ""
+"Assigning a value to a variable is like taking your label (the variable) "
+"and sticking it onto some item (the value)."
+msgstr ""
+"At tildele en værdi til en variabel er som at tage din etiket (variablen)"
+" og sætte den på et element (værdien)."
+
+#: course/lesson-8-defining-variables/lesson.tres:229
+msgid ""
+"Like a supermarket has a database of product labels, the computer keeps a"
+" list of all variables in your code."
+msgstr ""
+"Ligesom et supermarked har en database med produktetiketter, opbevarer "
+"computeren en liste over alle variabler i din kode."
+
+msgid "Given the variable name, the computer can look up the attached value."
+msgstr "Med variabelnavnet kan computeren slå den tilknyttede værdi op."
+
+msgid ""
+"It has an important consequence. In GDScript, you can stick that label to"
+" any other value."
+msgstr ""
+"Det har en vigtig konsekvens. I GDScript kan du hæfte denne etiket til "
+"enhver anden værdi."
+
+#: course/lesson-8-defining-variables/lesson.tres:253
+msgid ""
+"The above code is like taking a label from the appropriate item and "
+"sticking it to the wrong thing:"
+msgstr ""
+"Ovenstående kode er som at tage en etiket fra den relevante genstand og "
+"sætte den på den forkerte ting:"
+
+msgid ""
+"- At line 2, the [code]health[/code] variable holds a number.\n"
+"- From line 3, [code]health[/code] holds text."
+msgstr ""
+"- På linje 2 indeholder variablen [code]health[/code] et tal.\n"
+"- Fra linje 3 indeholder [code]health[/code] tekst."
+
+msgid ""
+"The computer will let you do that! The code's syntax and \"grammar\" are "
+"correct, but it's not good."
+msgstr ""
+"Computeren lader dig gøre det! Kodens syntaks og \"grammatik\" er "
+"korrekt, men den er ikke god."
+
+msgid ""
+"Variable names should describe the value they contain, so a "
+"[code]health[/code] variable with a text value will confuse your future "
+"self and other coders. It can also cause errors in your game."
+msgstr ""
+"Variabelnavne bør beskrive den værdi, de indeholder, så en "
+"[code]health[/code]-variabel med en tekstværdi vil forvirre dit "
+"fremtidige jeg og andre kodere. Det kan også forårsage fejl i dit spil."
+
+msgid ""
+"Later on, we'll see how to avoid this issue with [i]variable types[/i]. "
+"For now, let's practice creating variables!"
+msgstr ""
+"Senere vil vi se, hvordan man undgår dette problem med "
+"[i]variabeltyper[/i]. Lad os nu øve os i at oprette variabler!"
+
+#: course/lesson-8-defining-variables/lesson.tres:270
+msgid "Define a health variable"
+msgstr "Definer en livsvariabel"
+
+#: course/lesson-8-defining-variables/lesson.tres:271
+msgid ""
+"Define a variable named [code]health[/code] with a starting value of "
+"[code]100[/code]."
+msgstr ""
+"Definer en variabel med navnet [code]health[/code] med en startværdi på "
+"[code]100[/code]."
+
+msgid ""
+"You can define variables inside or outside functions. In this practice, "
+"you shouldn't create a function."
+msgstr ""
+"Du kan definere variabler inden for eller uden for funktioner. I denne "
+"øvelse bør du ikke oprette en funktion."
+
+#: course/lesson-8-defining-variables/lesson.tres:282
+msgid ""
+"In this practice, you'll define your first variable and give it a "
+"specific starting value."
+msgstr ""
+"I denne øvelse definerer du din første variabel og giver den en specifik "
+"startværdi."
+
+#: course/lesson-8-defining-variables/lesson.tres:286
+msgid "Defining Your Own Variables"
+msgstr "Definering af dine egne variabler"
+

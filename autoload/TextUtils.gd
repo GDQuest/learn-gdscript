@@ -43,7 +43,6 @@ func _init() -> void:
 	_REGEXES["string"] = RegEx.new()
 	_REGEXES["symbol"] = RegEx.new()
 	_REGEXES["format"] = RegEx.new()
-	
 
 	_REGEXES["code"].compile("\\[code\\](.+?)\\[\\/code\\]")
 	_REGEXES["func"].compile("(?<func>\\bfunc\\b)")
@@ -74,7 +73,7 @@ func bbcode_add_code_color(bbcode_text := "") -> String:
 
 		var colored_string := ""
 		# The algorithm consists of finding all regex matches of a-zA-Z0-9_ and \d.\d
-		# Then formatting these regex matches, and adding the parts in-between 
+		# Then formatting these regex matches, and adding the parts in-between
 		# matches to the formatted string.
 		var to_format: Array = _REGEXES["format"].search_all(match_string)
 		var last_match_end := -1
@@ -129,6 +128,34 @@ func convert_type_index_to_text(type: int) -> String:
 		return "[ERROR, nonexistent type value %s]" % type
 
 
+# Translates multi-paragraph text by splitting on double newlines.
+#
+# We split strings on paragraph breaks in the build system to make translations more fine-grained and easier to update.
+#
+# each paragraph individually, then we join the result. This allows PO files to store
+# translations at the paragraph level rather than as large multi-paragraph blocks.
+func tr_paragraph(text: String) -> String:
+	if text.empty():
+		return text
+
+	# Normalize line endings first (Windows CRLF to LF) to avoid edge cases on
+	# Windows in particular.
+	var normalized := text.replace("\r\n", "\n")
+	var paragraphs := normalized.split("\n\n")
+	if paragraphs.size() <= 1:
+		return tr(normalized)
+
+	var translated_paragraphs := PoolStringArray()
+	for paragraph in paragraphs:
+		var trimmed: String = paragraph.strip_edges()
+		if trimmed.empty():
+			translated_paragraphs.append("")
+		else:
+			translated_paragraphs.append(tr(trimmed))
+
+	return translated_paragraphs.join("\n\n")
+
+
 # Call this function to ensure that changes to the formatter don't change color highlighting.
 func _test_formatting() -> void:
 	var color_keyword := CodeEditorEnhancer.COLOR_KEYWORD.to_html(false)
@@ -147,9 +174,8 @@ func _test_formatting() -> void:
 		"=": "=",
 		">": ">",
 	}
-	
+
 	for input_text in test_pairs:
 		var expected_output: String = "[code]" + test_pairs[input_text] + "[/code]"
 		var output := bbcode_add_code_color("[code]" + input_text + "[/code]")
 		assert(output == expected_output, "Expected output '%s' but got '%s' instead." % [expected_output, output])
-

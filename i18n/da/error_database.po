@@ -1,0 +1,860 @@
+# Danish translations for Learn GDScript From.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2025-06-14 15:02+0200\n"
+"PO-Revision-Date: 2025-11-25 18:51+0000\n"
+"Last-Translator: Jeppe Nellemann <jepnel@proton.me>\n"
+"Language: da\n"
+"Language-Team: Danish <https://hosted.weblate.org/projects/learn-"
+"gdscript-from-zero/error-explanations/da/>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#. Reference: IN_EXPECTED_AFTER_IDENTIFIER
+#: ./script_checking/error_database.csv:40
+msgid ""
+"You get this error when the name between the [code]for[/code] and "
+"[code]in[/code] is not a valid variable name, or you are missing the "
+"[code]in[/code] keyword."
+msgstr ""
+"Du får denne fejl, når navnet mellem [code]for[/code] og [code]in[/code] "
+"ikke er et gyldigt variabel navn, eller du mangler [code]in[/code] "
+"nøgleord."
+
+msgid ""
+"In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a "
+"valid temporary variable name to assign values in each loop iteration. "
+"The loop creates a new variable with the desired name and assigns each "
+"element of the array to it."
+msgstr ""
+"I et [code]for[/code] loop accepterer [code]in[/code] kun et gyldigt "
+"midlertidig variabelt navn for at tildele værdier i hver løkke iteration."
+" Løkken laver en ny variabel med det ønskede navn og tildeler hvert "
+"element af arrayet til det."
+
+#. Reference: IN_EXPECTED_AFTER_IDENTIFIER
+#: ./script_checking/error_database.csv:40
+msgid ""
+"To fix this error, you need to ensure that the name between the "
+"[code]for[/code] and [code]in[/code] keywords is a valid variable name "
+"with no punctuation or spaces."
+msgstr ""
+"For at rette denne fejl, skal du sikre, at navnet mellem [code]for[/code]"
+" og [code]in[/code] nøgleord er et gyldigt variabel navn uden punktum "
+"eller mellemrum."
+
+msgid ""
+"For example, this code is invalid: [code]for cell_position.x in "
+"cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a"
+" valid variable name."
+msgstr ""
+"For eksempel er denne kode ugyldig: [code]for cell_position.x in "
+"cell_positions_array:[/code], fordi [code]cell_position.x[/code] ikke er "
+"et gyldigt variabel navn."
+
+msgid ""
+"To access the [code]x[/code] sub-component of the variable, you need to "
+"do that inside of the loop's body:"
+msgstr ""
+"For at få adgang til [code]x[/code] underkomponenten af variablen skal du"
+" gøre det inde i sløjfens krop:"
+
+msgid ""
+"[code]for cell_position in cell_positions_array:\n"
+"    cell_position.x += 1.0[/code]"
+msgstr ""
+"[code]for cell_position in cell_positions_array:\n"
+"    cell_position.x += 1.0[/code]"
+
+#. Reference: ASSIGNING_TO_EXPRESSION
+#: ./script_checking/error_database.csv:47
+msgid ""
+"If you get this error, you are most likely trying to assign a value to "
+"something other than a variable, which is impossible. You can only assign"
+" values to variables."
+msgstr ""
+"Hvis du får denne fejl, forsøger du sandsynligvis at tildele en værdi til"
+" noget andet end en variabel, hvilket er umuligt. Du kan kun tildele "
+"værdier til variabler."
+
+msgid ""
+"Another possibility is that you want to check for equality in a condition"
+" but wrote a single = instead of ==."
+msgstr ""
+"En anden mulighed er, at du ønsker at kontrollere for lighed i en "
+"tilstand, men skrev en enkelt = i stedet for ==."
+
+#. Reference: ASSIGNING_TO_EXPRESSION
+#: ./script_checking/error_database.csv:47
+msgid ""
+"If you want to assign a value to a variable, double-check that what you "
+"have on the left side of the = sign is a variable and not a function."
+msgstr ""
+"Hvis du vil tildele en værdi til en variabel, skal du dobbelttjeke, at "
+"hvad du har på venstre side af = tegn er en variabel og ikke en funktion."
+
+msgid ""
+"You also need to ensure the syntax is correct. For example, there "
+"shouldn't be parentheses on the left side of the equal sign."
+msgstr ""
+"Du skal også sikre, at synsaksen er korrekt. For eksempel bør der ikke "
+"være parenteser på venstre side af ligmed tegnet."
+
+msgid ""
+"In the case of a condition, ensure that you are using two equal signs to "
+"check for equality (==)."
+msgstr ""
+"I tilfælde af en betingelse, sikre, at du bruger to ligmed tegn til at "
+"kontrollere lighed (==)."
+
+#. Reference: CYCLIC_REFERENCE
+#: ./script_checking/error_database.csv:57
+msgid ""
+"A cyclic reference is when a class references itself, directly or "
+"indirectly."
+msgstr ""
+"En cyklisk reference er, når en klasse refererer til sig selv, direkte "
+"eller indirekte."
+
+msgid "It has two possible causes:"
+msgstr "Det har to mulige årsager:"
+
+msgid ""
+"1. You used the class name in the class itself.\n"
+"2. Your code refers to another class that refers to this class, causing "
+"an endless reference cycle."
+msgstr ""
+"1. Du brugte klassenavnet i selve klassen.\n"
+"2. Din kode refererer til en anden klasse, der refererer til denne "
+"klasse, hvilket forårsager en uendelig referencecyklus."
+
+msgid ""
+"Either way, due to how GDScript works in Godot 3, unfortunately,you "
+"cannot do this. Godot 4 should solve this problem, but you need to work "
+"around it in the meantime."
+msgstr ""
+"Uanset hvad, på grund af hvordan GDScript fungerer i Godot 3, kan du "
+"desværre ikke gøre dette. Godot 4 burde løse dette problem, men du er "
+"nødt til at arbejde omkring det i mellemtiden."
+
+#. Reference: CYCLIC_REFERENCE
+#: ./script_checking/error_database.csv:57
+msgid "Erase the type hint in the error line, and the problem should disappear."
+msgstr "Slet typehintet i fejllinjen, og problemet burde forsvinde."
+
+msgid ""
+"At GDQuest, when we face this error, we remove the type hints on lines "
+"causing cyclic references. It solves the problem in the vast majority of "
+"cases."
+msgstr ""
+"Når vi hos GDQuest støder på denne fejl, fjerner vi typehintene på "
+"linjer, der forårsager cykliske referencer. Det løser problemet i langt "
+"de fleste tilfælde."
+
+#. Reference: INVALID_INDENTATION
+#: ./script_checking/error_database.csv:64
+msgid ""
+"The indentation of your code (the number of tab characters at the start "
+"of the line) is incorrect."
+msgstr ""
+"Indrykningen af din kode (antallet af tabulatortegn i starten af linjen) "
+"er forkert."
+
+msgid "You are missing one or more tabs, or you inserted too many."
+msgstr "Du mangler en eller flere tabulatorer, eller du har indsat for mange."
+
+msgid ""
+"The computer uses those leading tab characters on code lines to know "
+"which lines of code are part of a code block, like a function."
+msgstr ""
+"Computeren bruger de indledende tabulatortegn på kodelinjer til at vide, "
+"hvilke kodelinjer der er en del af en kodeblok, f.eks. en funktion."
+
+#. Reference: INVALID_INDENTATION
+#: ./script_checking/error_database.csv:64
+msgid ""
+"If the line of code with the error is right after a line ending with a "
+"colon, like a function definition, you need one extra indent level "
+"compared to the previous line."
+msgstr ""
+"Hvis kodelinjen med fejlen er lige efter en linje, der slutter med et "
+"kolon, f.eks. en funktionsdefinition, skal du bruge et ekstra "
+"indrykningsniveau i forhold til den foregående linje."
+
+msgid ""
+"In other words, your line should have one more leading tab character than"
+" the function definition."
+msgstr ""
+"Med andre ord skal din linje have et indledende tabulatortegn mere end "
+"funktionsdefinitionen."
+
+#. Reference: UNEXPECTED_CHARACTER
+#: ./script_checking/error_database.csv:73
+msgid ""
+"You get this error when you wrote something that is syntactically "
+"invalid, or you are missing something to complete this line or previous "
+"lines of code."
+msgstr ""
+"Du får denne fejl, når du har skrevet noget, der er syntaktisk ugyldigt, "
+"eller du mangler noget for at fuldføre denne linje eller foregående "
+"linjer kode."
+
+msgid ""
+"You need to be extremely precise when you write code for the computer. "
+"This kind of error is easy to get as all it takes is one wrong character."
+msgstr ""
+"Du skal være ekstremt præcis, når du skriver kode til computeren. Denne "
+"type fejl er let at få, da alt, hvad der kræves, er ét forkert tegn."
+
+msgid ""
+"Note that this error can appear [b]after[/b] the line causing it due to "
+"how the computer reads and analyzes your code."
+msgstr ""
+"Bemærk, at denne fejl kan vises [b]efter[/b] den linje, der forårsager "
+"den, på grund af den måde, computeren læser og analyserer din kode på."
+
+#. Reference: UNEXPECTED_CHARACTER
+#: ./script_checking/error_database.csv:73
+msgid ""
+"The way to solve this kind of error is highly contextual. The error "
+"message should tell you which character or element it's missing."
+msgstr ""
+"Løsningen på denne type fejl er meget kontekstafhængig. Fejlmeddelelsen "
+"bør fortælle dig, hvilket tegn eller element der mangler."
+
+msgid ""
+"If the error says \"expected,\" then you're likely missing something in "
+"one of the [b]previous[/b] code lines. It could be a punctuation mark, a "
+"parenthesis, or something else."
+msgstr ""
+"Hvis fejlen siger \"forventet\", mangler du sandsynligvis noget i en af "
+"de [b]forrige[/b] kodelinjer. Det kan være et tegnsætningstegn, en "
+"parentes eller noget andet."
+
+msgid ""
+"If it says \"unterminated,\" you are missing some character at the end of"
+" an expression, like a closing bracket. In this case, it most likely "
+"comes from the line with the error."
+msgstr ""
+"Hvis der står \"uafsluttet\", mangler du et tegn i slutningen af et "
+"udtryk, f.eks. en afsluttende parentes. I dette tilfælde kommer det højst"
+" sandsynligt fra linjen med fejlen."
+
+#. Reference: UNEXPECTED_CHARACTER_IN_KEYWORD
+#: ./script_checking/error_database.csv:76
+msgid ""
+"This error tells you that you are missing a parenthesis (or sometimes a "
+"comma or a path)."
+msgstr ""
+"Denne fejl fortæller dig, at du mangler en parentes (eller nogle gange et"
+" komma eller en sti)."
+
+msgid ""
+"Three keywords in GDScript work like function calls and require "
+"parentheses: [code]yield()[/code], [code]preload()[/code], and "
+"[code]assert()[/code]."
+msgstr ""
+"Tre nøgleord i GDScript fungerer som funktionskald og kræver parenteser: "
+"[code]yield()[/code], [code]preload()[/code] og [code]assert()[/code]."
+
+#. Reference: UNEXPECTED_CHARACTER_IN_KEYWORD
+#: ./script_checking/error_database.csv:76
+msgid ""
+"To address the error, you want to add the missing opening parenthesis, "
+"the closing parenthesis, or the comma."
+msgstr ""
+"For at rette fejlen skal du tilføje den manglende indledende parentes, "
+"den afsluttende parentes eller kommaet."
+
+#. Reference: UNEXPECTED_CHARACTER_IN_EXPORT_HINT
+#: ./script_checking/error_database.csv:77
+msgid ""
+"This error tells you are missing some parenthesis, a comma, or some value"
+" in your export hint."
+msgstr ""
+"Denne fejl fortæller, at du mangler en parentes, et komma eller en værdi "
+"i dit eksporthint."
+
+#. Reference: UNEXPECTED_CHARACTER_IN_EXPORT_HINT
+#: ./script_checking/error_database.csv:77
+msgid ""
+"You need to read the error message and add the missing character or value"
+" it requests."
+msgstr ""
+"Du skal læse fejlmeddelelsen og tilføje det manglende tegn eller den "
+"manglende værdi, den anmoder om."
+
+#. Reference: MISPLACED_IDENTIFIER
+#: ./script_checking/error_database.csv:86
+msgid "This error happens in several cases:"
+msgstr "Denne fejl opstår i flere tilfælde:"
+
+msgid ""
+"1. You wrote an identifier (variable or function name) in the wrong "
+"place.\n"
+"2. You wrote a keyword like [code]var[/code], [code]func[/code], "
+"[code]for[/code], or [code]signal[/code], and you did not follow it by a "
+"name.\n"
+"3. You wrote a function definition but forgot the parentheses before the "
+"colon."
+msgstr ""
+"1. Du skrev en identifikator (variabel- eller funktionsnavn) det forkerte"
+" sted.\n"
+"2. Du skrev et nøgleord som [code]var[/code], [code]func[/code], "
+"[code]for[/code] eller [code]signal[/code], og du efterfulgte det ikke af"
+" et navn.\n"
+"3. Du skrev en funktionsdefinition, men glemte parenteserne før kolonet."
+
+#. Reference: MISPLACED_IDENTIFIER
+#: ./script_checking/error_database.csv:86
+msgid ""
+"If the error tells you it expected something, you likely forgot to write "
+"a name after a keyword like [code]var[/code], [code]func[/code], "
+"[code]for[/code], or [code]signal[/code], making your code invalid. Or "
+"you forgot parentheses in a function definition. You can address the "
+"error by adding the missing name or parentheses."
+msgstr ""
+"Hvis fejlen fortæller dig, at den forventede noget, har du sandsynligvis "
+"glemt at skrive et navn efter et nøgleord som [code]var[/code], "
+"[code]func[/code], [code]for[/code] eller [code]signal[/code], hvilket "
+"gør din kode ugyldig. Eller du har glemt parenteser i en "
+"funktionsdefinition. Du kan løse fejlen ved at tilføje det manglende navn"
+" eller de manglende parenteser."
+
+msgid ""
+"If the error says you have something unexpected, you are likely missing a"
+" keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc."
+msgstr ""
+"Hvis fejlen siger, at du har noget uventet, mangler du sandsynligvis et "
+"nøgleord som [code]var[/code], [code]func[/code], [code]for[/code] osv."
+
+msgid ""
+"Another possibility is that you need to write a colon at the end of a "
+"function definition, [code]for[/code] loop, or a line starting with "
+"[code]if[/code], [code]elif[/code], or [code]else[/code]."
+msgstr ""
+"En anden mulighed er, at du skal skrive et kolon i slutningen af en "
+"funktionsdefinition, en [code]for[/code]-løkke eller en linje, der "
+"starter med [code]if[/code], [code]elif[/code] eller [code]else[/code]."
+
+#. Reference: MISPLACED_TYPE_IDENTIFIER
+#: ./script_checking/error_database.csv:91
+msgid ""
+"This error tells you that you are missing a type somewhere. A type can be"
+" [code]int[/code], [code]float[/code], [code]String[/code], "
+"[code]Array[/code], [code]Vector2[/code], and many identifiers "
+"representing a data structure."
+msgstr ""
+"Denne fejl fortæller dig, at du mangler en type et sted. En type kan være"
+" [code]int[/code], [code]float[/code], [code]String[/code], "
+"[code]Array[/code], [code]Vector2[/code] og mange identifikatorer, der "
+"repræsenterer en datastruktur."
+
+msgid ""
+"Most of the time, this error occurs when you wrote a colon after a "
+"variable name but did not follow it with a type name."
+msgstr ""
+"Denne fejl opstår oftest, når du har skrevet et kolon efter et "
+"variabelnavn, men ikke efterfulgt det af et typenavn."
+
+msgid ""
+"It also occurs when you write an arrow ([code]->[/code]) after the "
+"parentheses of a function definition but do not follow it with a type "
+"name."
+msgstr ""
+"Den opstår også, når du skriver en pil ([code]->[/code]) efter "
+"parenteserne i en funktionsdefinition, men ikke efterfulgt den af et "
+"typenavn."
+
+#. Reference: MISPLACED_TYPE_IDENTIFIER
+#: ./script_checking/error_database.csv:91
+msgid ""
+"To solve this, you need to write the name of the type after the colon, "
+"arrow (in the case of function return types), inside parentheses (for "
+"export types), or after the [code]as[/code] keyword."
+msgstr ""
+"For at løse dette skal du skrive navnet på typen efter kolon, pil (i "
+"tilfælde af funktionsreturtyper), i parenteser (for eksporttyper) eller "
+"efter nøgleordet [code]as[/code]."
+
+#. Reference: NONEXISTENT_IDENTIFIER
+#: ./script_checking/error_database.csv:100
+msgid ""
+"The variable, function name, or class name you are trying to use does not"
+" exist."
+msgstr ""
+"Variablen, funktionsnavnet eller klassenavnet, du prøver at bruge, findes"
+" ikke."
+
+msgid ""
+"You most often get this error when you make typos. Maybe you swapped two "
+"letters, forgot a letter... sometimes, it's hard to spot."
+msgstr ""
+"Du får oftest denne fejl, når du laver stavefejl. Måske har du byttet om "
+"på to bogstaver, glemt et bogstav... nogle gange er det svært at få øje "
+"på."
+
+msgid ""
+"The other cause for this error is that you didn't define the variable, "
+"function, or class you're trying to access."
+msgstr ""
+"Den anden årsag til denne fejl er, at du ikke har defineret den variabel,"
+" funktion eller klasse, du prøver at få adgang til."
+
+#. Reference: NONEXISTENT_IDENTIFIER
+#: ./script_checking/error_database.csv:100
+msgid "To solve this error, triple-check that there is no typo in the line."
+msgstr ""
+"For at løse denne fejl skal du tredobbelt kontrollere, at der ikke er "
+"nogen tastefejl i linjen."
+
+msgid ""
+"If you can, try to go to the variable or function definition, double-"
+"click the name, copy it, and paste it where you see the error."
+msgstr ""
+"Hvis du kan, så prøv at gå til definitionen af variablen eller "
+"funktionen, dobbeltklik på navnet, kopier det og indsæt det, hvor du ser "
+"fejlen."
+
+msgid ""
+"If you don't see any typo, then you need to ensure that you defined the "
+"variable, function, or class you are referring to."
+msgstr ""
+"Hvis du ikke ser nogen tastefejl, skal du sørge for at have defineret den"
+" variabel, funktion eller klasse, du refererer til."
+
+#. Reference: MISPLACED_KEYWORD
+#: ./script_checking/error_database.csv:105
+msgid ""
+"You can only use keywords like [code]break[/code] or "
+"[code]continue[/code] in a loop. Outside a loop, they are invalid."
+msgstr ""
+"Du kan kun bruge nøgleord som [code]break[/code] eller "
+"[code]continue[/code] i et loop. Uden for et loop er de ugyldige."
+
+msgid ""
+"The [code]continue[/code] keyword means \"jump to the next iteration of "
+"the loop.\" And the [code]break[/code] keyword means \"end the loop right"
+" now and jump to the first line of code after the loop block."
+msgstr ""
+"Nøgleordet [code]continue[/code] betyder \"hop til den næste iteration af"
+" loopet\". Og nøgleordet [code]break[/code] betyder \"afslut loopet lige "
+"nu og hop til den første kodelinje efter loopblokken\"."
+
+#. Reference: MISPLACED_KEYWORD
+#: ./script_checking/error_database.csv:105
+msgid "If you wrote one of these keywords outside a loop, you need to remove it."
+msgstr "Hvis du skrev et af disse nøgleord uden for en løkke, skal du fjerne det."
+
+msgid ""
+"If you are trying to use it inside a loop, your indentation is most "
+"likely at fault. You may need to insert one or more leading tab "
+"characters to the keyword."
+msgstr ""
+"Hvis du prøver at bruge det i en løkke, er det højst sandsynligt din "
+"indrykning, der er skyld i problemet. Du skal muligvis indsætte et eller "
+"flere indledende tabulatortegn før nøgleordet."
+
+#. Reference: EXPECTED_CONSTANT_EXPRESSION
+#: ./script_checking/error_database.csv:110
+msgid ""
+"When the computer talks about a constant expression, it expects a fixed "
+"value, a fixed calculation, or the name of an existing constant."
+msgstr ""
+"Når computeren taler om et konstant udtryk, forventer den en fast værdi, "
+"en fast beregning eller navnet på en eksisterende konstant."
+
+msgid ""
+"In other words, it wants something that can never change. This is why the"
+" computer will reject function calls and variables where it needs a "
+"constant expression."
+msgstr ""
+"Med andre ord ønsker den noget, der aldrig kan ændre sig. Det er derfor, "
+"computeren vil afvise funktionskald og variabler, hvor den har brug for "
+"et konstant udtryk."
+
+#. Reference: EXPECTED_CONSTANT_EXPRESSION
+#: ./script_checking/error_database.csv:110
+msgid ""
+"You need to replace function calls or variables with a constant value "
+"like a whole number, decimal number, string, vector, a predefined array, "
+"etc."
+msgstr ""
+"Du skal erstatte funktionskald eller variabler med en konstant værdi, som"
+" et helt tal, et decimaltal, en streng, en vektor, et foruddefineret "
+"array osv."
+
+msgid ""
+"You can also use arithmetic operators like multiplications (*), additions"
+" (+), and so on."
+msgstr ""
+"Du kan også bruge aritmetiske operatorer som multiplikationer (*), "
+"additioner (+) osv."
+
+#. Reference: INVALID_CLASS_DECLARATION
+#: ./script_checking/error_database.csv:115
+msgid ""
+"When defining a new class, you need to follow a specific pattern. You "
+"must write the name in plain text, starting with a letter."
+msgstr ""
+"Når du definerer en ny klasse, skal du følge et specifikt mønster. Du "
+"skal skrive navnet i almindelig tekst, startende med et bogstav."
+
+msgid ""
+"We typically write class names in PascalCase: with a capital letter at "
+"the start of every word that composes the class name."
+msgstr ""
+"Vi skriver typisk klassenavne i PascalCase: med et stort bogstav i "
+"starten af hvert ord, der udgør klassenavnet."
+
+#. Reference: INVALID_CLASS_DECLARATION
+#: ./script_checking/error_database.csv:115
+msgid ""
+"To fix this error, replace whatever you put after the 'extends' or "
+"'class_name' keyword by a name without spaces and starting with a capital"
+" letter."
+msgstr ""
+"For at rette denne fejl skal du erstatte det, du har angivet efter "
+"nøgleordet 'extends' eller 'class_name', med et navn uden mellemrum, der "
+"starter med et stort bogstav."
+
+msgid "You can optionally use numbers in the name, but not in the first position."
+msgstr "Du kan eventuelt bruge tal i navnet, men ikke på første position."
+
+#. Reference: DUPLICATE_DECLARATION
+#: ./script_checking/error_database.csv:120
+msgid ""
+"You are trying to define a function or variable that already exists; You "
+"can't do that."
+msgstr ""
+"Du forsøger at definere en funktion eller variabel, der allerede findes; "
+"Det kan du ikke."
+
+msgid ""
+"Perhaps the function or variable already exists in the current code file,"
+" but it may also be in a parent class that this GDScript code extends."
+msgstr ""
+"Måske findes funktionen eller variablen allerede i den aktuelle kodefil, "
+"men den kan også være i en overordnet klasse, som denne GDScript-kode "
+"udvider."
+
+#. Reference: DUPLICATE_DECLARATION
+#: ./script_checking/error_database.csv:120
+msgid ""
+"In the app, your code extends some built-in Godot code that's not visible"
+" to you."
+msgstr "I appen udvider din kode noget indbygget Godot-kode, som du ikke kan se."
+
+msgid ""
+"When that happens, you need to either rename your function or variable to"
+" one that will not collide with an existing one or remove this line of "
+"code."
+msgstr ""
+"Når det sker, skal du enten omdøbe din funktion eller variabel til en, "
+"der ikke kolliderer med en eksisterende, eller fjerne denne kodelinje."
+
+#. Reference: DUPLICATE_SIGNAL_DECLARATION
+#: ./script_checking/error_database.csv:125
+msgid "You are trying to define a signal that already exists; You can't do that."
+msgstr "Du prøver at definere et signal, der allerede findes. Det kan du ikke."
+
+msgid ""
+"Perhaps the signal already exists in the current code file, but it may "
+"also be in a parent class that this GDScript code extends."
+msgstr ""
+"Måske findes signalet allerede i den aktuelle kodefil, men det kan også "
+"være i en overordnet klasse, som denne GDScript-kode udvider."
+
+msgid ""
+"When that happens, you need to either rename your signal to one that will"
+" not collide with an existing one or remove this line of code."
+msgstr ""
+"Når det sker, skal du enten omdøbe dit signal til et, der ikke kolliderer"
+" med et eksisterende signal, eller fjerne denne kodelinje."
+
+#. Reference: SIGNATURE_MISMATCH
+#: ./script_checking/error_database.csv:130
+msgid ""
+"The function you're trying to define exists in a parent class, so your "
+"definition overrides the parent class's function."
+msgstr ""
+"Den funktion, du forsøger at definere, findes i en overordnede klasse, så"
+" din definition overskriver den overordnede klasses funktion."
+
+msgid ""
+"When you override a parent class's function, the new function must match "
+"the parent. The new function should have the same number and type of "
+"parameters as the parent class."
+msgstr ""
+"Når du overskriver en overordnede klasses funktion, skal den nye funktion"
+" matche den overordnede. Den nye funktion skal have samme antal og type "
+"parametre som den overordnede klasse."
+
+msgid ""
+"For example, if the parent has two arguments, you need your new function "
+"also to have two arguments. If you use type hints in your function "
+"definitions, the argument types must match the parent class."
+msgstr ""
+"For eksempel, hvis den overordnede har to argumenter, skal din nye "
+"funktion også have to argumenter. Hvis du bruger typehints i dine "
+"funktionsdefinitioner, skal argumenttyperne matche den overordnede "
+"klasse."
+
+#. Reference: SIGNATURE_MISMATCH
+#: ./script_checking/error_database.csv:130
+msgid ""
+"You need to check the parent class's function and its definition in the "
+"code reference. Then, you need to edit your function definition to have "
+"the same number and type of parameters as the parent class."
+msgstr ""
+"Du skal kontrollere den overordnede klasses funktion og dens definition i"
+" kodereferencen. Derefter skal du redigere din funktionsdefinition, så "
+"den har det samme antal og den samme type parametre som den overordnede "
+"klasse."
+
+#. Reference: INVALID_ARGUMENTS
+#: ./script_checking/error_database.csv:131
+msgid ""
+"This whole class of errors has to do with calling functions with either "
+"the wrong number of arguments or the wrong kind of argument. You will "
+"need to use the error message to see what is going wrong."
+msgstr ""
+"Hele denne klasse af fejl har at gøre med kald af funktioner med enten "
+"det forkerte antal argumenter eller den forkerte type argument. Du bliver"
+" nød til at bruge fejlmeddelelsen til at se, hvad der går galt."
+
+#. Reference: INVALID_ARGUMENTS
+#: ./script_checking/error_database.csv:131
+msgid ""
+"You need to either remove, add, or change the values you're trying to "
+"pass to the function to solve this issue. To know exactly how many "
+"arguments you need, you need to check the code reference. It will show "
+"you the function definition and the mandatory arguments."
+msgstr ""
+"Du skal enten fjerne, tilføje eller ændre de værdier, du prøver at "
+"videregive til funktionen, for at løse dette problem. For at vide præcis,"
+" hvor mange argumenter du har brug for, skal du tjekke kodereferencen. "
+"Den viser dig funktionsdefinitionen og de obligatoriske argumenter."
+
+#. Reference: TYPE_MISMATCH
+#: ./script_checking/error_database.csv:142
+msgid ""
+"All the values in your code have a specific type. That type can be a "
+"whole number (int), a decimal number (float), text (String), and so on. "
+"There are tons of possible types, and you can even define your own!"
+msgstr ""
+"Alle værdierne i din kode har en specifik type. Denne type kan være et "
+"helt tal (int), et decimaltal (float), tekst (String) osv. Der er tonsvis"
+" af mulige typer, og du kan endda definere dine egne!"
+
+msgid ""
+"When you make any operation, the computer compares the types you are "
+"using."
+msgstr "Når du udfører en handling, sammenligner computeren de typer, du bruger."
+
+msgid ""
+"Some types are compatible, and some are not. For example, you cannot "
+"directly add a whole number to a text string. You first need to convert "
+"the number into text."
+msgstr ""
+"Nogle typer er kompatible, og andre er ikke. For eksempel kan du ikke "
+"direkte tilføje et helt tal til en tekststreng. Du skal først konvertere "
+"tallet til tekst."
+
+msgid ""
+"You'll need to read the error message to see what is not matching because"
+" there are many possible cases."
+msgstr ""
+"Du skal læse fejlmeddelelsen for at se, hvad der ikke matcher, fordi der "
+"er mange mulige tilfælde."
+
+#. Reference: TYPE_MISMATCH
+#: ./script_checking/error_database.csv:142
+msgid ""
+"If the error mentions the assigned value type not matching the variable, "
+"the problem is on the right side of the equal sign (=)."
+msgstr ""
+"Hvis fejlen nævner, at den tildelte værditype ikke matcher variablen, "
+"ligger problemet på højre side af lighedstegnet (=)."
+
+msgid ""
+"If the error talks about the return type not matching the function, then "
+"it is the value after the return keyword that is problematic."
+msgstr ""
+"Hvis fejlen angiver, at returtypen ikke matcher funktionen, er det "
+"værdien efter return nøgleordet, der er problematisk."
+
+msgid ""
+"If the computer talks about an invalid operand, then the issue is that "
+"the operation does not exist for the type you're trying to use. For "
+"example, while you can add two 2D vectors, you can't add a whole number "
+"or text to a 2D vector."
+msgstr ""
+"Hvis computeren angiver en ugyldig operand, er problemet, at operationen "
+"ikke findes for den type, du forsøger at bruge. For eksempel, selvom du "
+"kan addere to 2D-vektorer, kan du ikke addere et helt tal eller tekst til"
+" en 2D-vektor."
+
+#. Reference: TYPE_CANNOT_BE_INFERRED
+#: ./script_checking/error_database.csv:147
+msgid ""
+"GDScript supports type inference. The computer will automatically "
+"recognize the type of value you are working with. In some cases, though, "
+"it can't figure it out."
+msgstr ""
+"GDScript understøtter typeinferens. Computeren genkender automatisk den "
+"type værdi, du arbejder med. I nogle tilfælde kan den dog ikke finde ud "
+"af det."
+
+msgid ""
+"When that happens, you need to specify the type yourself or remove type "
+"inference altogether for this variable."
+msgstr ""
+"Når det sker, skal du selv angive typen eller helt fjerne typeinferens "
+"for denne variabel."
+
+#. Reference: TYPE_CANNOT_BE_INFERRED
+#: ./script_checking/error_database.csv:147
+msgid ""
+"The simplest way to solve this error is to remove types for this variable"
+" or this function's arguments. Otherwise, you can manually specify the "
+"value type after the colon."
+msgstr ""
+"Den enkleste måde at løse denne fejl på er at fjerne typer for denne "
+"variabel eller denne funktions argumenter. Ellers kan du manuelt angive "
+"værditypen efter kolon."
+
+msgid ""
+"We recommend specifying the type whenever possible to reap the typing "
+"system's benefits."
+msgstr ""
+"Vi anbefaler at angive typen, når det er muligt, for at høste fordelene "
+"ved maskinskrivningssystemet."
+
+#. Reference: RETURN_VALUE_MISMATCH
+#: ./script_checking/error_database.csv:153
+msgid ""
+"There is an issue with the return value of your function. There are two "
+"main cases here:"
+msgstr ""
+"Der er et problem med returværdien af din funktion. Der er to "
+"hovedtilfælde her:"
+
+msgid ""
+"1. Your function is a void function, thus it should not return a value. "
+"This includes functions with the '-> void' syntax and class constructors "
+"('_init()').\n"
+"2. You specified a return type for your function, but you are not "
+"returning a value in all possible branches (if, elif, and else blocks) or"
+" at the end."
+msgstr ""
+"1. Din funktion er en void-funktion, og derfor bør den ikke returnere en "
+"værdi. Dette inkluderer funktioner med syntaksen '-> void' og "
+"klassekonstruktører ('_init()').\n"
+"2. Du har angivet en returtype for din funktion, men du returnerer ikke "
+"en værdi i alle mulige grene (if, elif og else-blokke) eller i "
+"slutningen."
+
+#. Reference: RETURN_VALUE_MISMATCH
+#: ./script_checking/error_database.csv:153
+msgid ""
+"When your function is 'void', you should never return a value. You can "
+"use the 'return' keyword to end the function early, but you should never "
+"write anything after that."
+msgstr ""
+"Når din funktion er 'void', bør du aldrig returnere en værdi. Du kan "
+"bruge nøgleordet 'return' til at afslutte funktionen tidligt, men du bør "
+"aldrig skrive noget efter det."
+
+msgid ""
+"When you use a return type, you must always return something at the end "
+"of the function or in every branch (if, elif, and else block) of the "
+"function."
+msgstr ""
+"Når du bruger en returtype, skal du altid returnere noget i slutningen af"
+" funktionen eller i hver gren (if, elif og else-blok) af funktionen."
+
+#. Reference: INVALID_NO_CATCH
+#: ./script_checking/error_database.csv:154
+msgid ""
+"Godot was unable to load your script, yet the language checker found "
+"nothing wrong."
+msgstr ""
+"Godot kunne ikke indlæse dit script, men sprogkontrollen fandt ikke noget"
+" galt."
+
+#. Reference: INVALID_NO_CATCH
+#: ./script_checking/error_database.csv:154
+msgid "Please click on the \"report\" button at the top and please let us know."
+msgstr "Klik venligst på knappen \"anmeld\" øverst, og giv os besked."
+
+#. Reference: RECURSIVE_FUNCTION
+#: ./script_checking/error_database.csv:155
+msgid "You called a function inside itself. This will loop forever."
+msgstr "Du kaldte en funktion i sig selv. Dette vil køre i en løkke for evigt."
+
+#. Reference: RECURSIVE_FUNCTION
+#: ./script_checking/error_database.csv:155
+msgid ""
+"There are valid reasons for using recursive functions, but none of them "
+"are part of this course, so this cannot be a valid solution."
+msgstr ""
+"Der er gyldige grunde til at bruge rekursive funktioner, men ingen af dem"
+" er en del af dette kursus, så dette kan ikke være en gyldig løsning."
+
+#. Reference: UNEXPECTED_EOL
+#: ./script_checking/error_database.csv:157
+msgid ""
+"The computer reached the end of the line of code, but the line had a "
+"syntax error.\n"
+"The most common case is when you forget to close a string: you have "
+"opening quotes, but you forget to add a matching closing quote."
+msgstr ""
+"Computeren nåede slutningen af kodelinjen, men linjen havde en "
+"syntaksfejl.\n"
+"Det mest almindelige tilfælde er, når man glemmer at afslutte en streng: "
+"man har indledende anførselstegn, men man glemmer at tilføje et matchende"
+" afsluttende anførselstegn."
+
+#. Reference: UNEXPECTED_EOL
+#: ./script_checking/error_database.csv:157
+msgid ""
+"Double-check that you are not missing a quote character or that the quote"
+" character you used to start the string is the same as the one you used "
+"to close the string."
+msgstr ""
+"Dobbelttjek, at du ikke mangler et anførselstegn, eller at det "
+"anførselstegn, du brugte til at starte strengen, er det samme som det, du"
+" brugte til at afslutte strengen."
+
+#. Reference: CANT_GET_INDEX
+#: ./script_checking/error_database.csv:160
+msgid "The sub-variable you are trying to access does not exist."
+msgstr "Den undervariabel, du forsøger at tilgå, findes ikke."
+
+#. Reference: CANT_GET_INDEX
+#: ./script_checking/error_database.csv:160
+msgid ""
+"You probably have a typo in the name of the sub-variable that you are "
+"trying to access."
+msgstr ""
+"Du har sandsynligvis en tastefejl i navnet på den undervariabel, du "
+"prøver at tilgå."
+
+msgid ""
+"Ensure that you don't have a capital letter where you should have a "
+"lowercase letter and vice versa."
+msgstr ""
+"Sørg for, at du ikke har et stort bogstav, hvor du burde have et lille "
+"bogstav, og omvendt."
+

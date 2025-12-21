@@ -46,8 +46,7 @@ func setup(content_block: ContentBlock) -> void:
 		_content_header.visible = false
 		_make_revealer()
 
-	# FIXME: Some weird Windows issue, replace before translating so matching works.
-	_text_content.bbcode_text = TextUtils.bbcode_add_code_color(tr(_content_block.text.replace("\r\n", "\n")))
+	_text_content.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(_content_block.text))
 	_text_content.visible = not _content_block.text.empty()
 
 	if _content_block.visual_element_path != "":
@@ -123,13 +122,12 @@ func _make_visual_element() -> void:
 func _update_labels() -> void:
 	if not _content_block:
 		return
-	
+
 	if _content_block.type == ContentBlock.Type.PLAIN:
 		_content_header.text = tr(_content_block.title)
-	
-	# FIXME: Some weird Windows issue, replace before translating so matching works.
-	_text_content.bbcode_text = TextUtils.bbcode_add_code_color(tr(_content_block.text.replace("\r\n", "\n")))
-	
+
+	_text_content.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(_content_block.text))
+
 	if _revealer_block:
 		_revealer_block.title = tr("Learn More") if _content_block.title.empty() else tr(_content_block.title)
 

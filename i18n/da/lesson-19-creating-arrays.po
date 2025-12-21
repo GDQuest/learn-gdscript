@@ -1,0 +1,305 @@
+# Danish translations for Learn GDScript From.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2025-06-14 15:02+0200\n"
+"PO-Revision-Date: 2025-12-20 19:00+0000\n"
+"Last-Translator: Jeppe Nellemann <jepnel@proton.me>\n"
+"Language: da\n"
+"Language-Team: Danish <https://hosted.weblate.org/projects/learn-"
+"gdscript-from-zero/lesson-19-creating-arrays/da/>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-19-creating-arrays/lesson.tres:13
+msgid ""
+"The [code]range()[/code] function we saw in the previous lesson outputs a"
+" list of numbers. For example, calling [code]range(3)[/code] produces the"
+" list of numbers [code][0, 1, 2][/code]."
+msgstr ""
+"[code]range()[/code] funktionen, vi så i den forrige lektion, udskriver "
+"en liste af tal. For eksempel, kaldet [code]range(3)[/code] producerer "
+"listen med tal [code][0, 1, 2][/code]."
+
+#: course/lesson-19-creating-arrays/lesson.tres:33
+msgid ""
+"A list of values, numbers or otherwise, has a precise name in code: we "
+"call it an [i]array[/i]. So we can say calling the [code]range()[/code] "
+"function produces an [i]array[/i] of numbers."
+msgstr ""
+"En liste over værdier, tal eller andet, har et præcist navn i kode: vi "
+"kalder det et [i]array[/i]. Så vi kan sige at kalde [code]range()[/code] "
+"funktionen producerer et [i]array[/i] af tal."
+
+msgid ""
+"We could directly write and use that array inside our [code]for[/code] "
+"loop instead of the [code]range()[/code] function. You can run the next "
+"function step-by-step to see how it works."
+msgstr ""
+"Vi kunne direkte skrive og bruge det array inde i vores [code]for[/code] "
+"loop i stedet for [code]range()[/code] funktionen. Du kan køre næste "
+"funktion trin-for-trin for at se, hvordan det virker."
+
+#: course/lesson-19-creating-arrays/lesson.tres:55
+msgid ""
+"As you can see, the code still works the same. Notice that when we create"
+" a [code]for[/code] loop, we also create a local variable to which the "
+"loop assigns one value per iteration. Above, we named it "
+"[code]number[/code] because the array we loop over contains three numbers"
+" (0, 1, and 2)."
+msgstr ""
+"Som du kan se, fungerer koden stadig på samme måde. Bemærk, at når vi "
+"opretter en [code]for[/code] løkke, opretter vi også en lokal variabel, "
+"som løkken tildeler én værdi pr. iteration. Ovenstående kaldte vi den "
+"[code]number[/code], fordi det array, vi sløjfer over indeholder tre tal "
+"(0, 1 og 2)."
+
+msgid "But we could name it anything we'd like!"
+msgstr "Men vi kunne navngive den hvad som helst!"
+
+#: course/lesson-19-creating-arrays/lesson.tres:77
+msgid ""
+"If we \"unwrap\" the [code]for[/code] loop above, we'd get the following "
+"code with the exact same behaviour:"
+msgstr ""
+"Hvis vi \"udpakker\" [code]for[/code]-løkken ovenfor, får vi følgende "
+"kode med præcis samme opførsel:"
+
+#: course/lesson-19-creating-arrays/lesson.tres:95
+msgid "The syntax of arrays"
+msgstr "Syntaksen for arrays"
+
+#: course/lesson-19-creating-arrays/lesson.tres:97
+msgid "We write arrays this way in GDScript."
+msgstr "Vi skriver arrays på denne måde i GDScript."
+
+#: course/lesson-19-creating-arrays/lesson.tres:117
+msgid ""
+"You start with an opening square bracket. Then, you write comma-separated"
+" values that compose the array. Finally, you need a closing square "
+"bracket to complete the array."
+msgstr ""
+"Du starter med en indledende firkantet parentes. Derefter skriver du "
+"kommaseparerede værdier, der udgør arrayet. Til sidst skal du bruge en "
+"afsluttende firkantet parentes for at fuldføre arrayet."
+
+msgid ""
+"Here are a couple of valid arrays. Notice how you can mix values, and how"
+" they don't need to follow one another."
+msgstr ""
+"Her er et par gyldige arrays. Bemærk, hvordan du kan blande værdier, og "
+"hvordan de ikke behøver at følge hinanden."
+
+#: course/lesson-19-creating-arrays/lesson.tres:139
+msgid ""
+"Because arrays themselves are a value type, just like numbers or "
+"[code]Vector2[/code], we can assign arrays to variables to reaccess them "
+"later."
+msgstr ""
+"Fordi arrays i sig selv er en værditype, ligesom tal eller "
+"[code]Vector2[/code], kan vi tildele arrays til variabler for at få "
+"adgang til dem senere."
+
+msgid ""
+"That'll come in handy in the next lesson, where we'll use those variables"
+" in loops."
+msgstr ""
+"Det vil være nyttigt i den næste lektion, hvor vi vil bruge disse "
+"variabler i løkker."
+
+#: course/lesson-19-creating-arrays/lesson.tres:161
+msgid "But first, let's see [i]when[/i] you'd use an array."
+msgstr "Men først, lad os se på [i]hvornår[/i] du ville bruge et array."
+
+#: course/lesson-19-creating-arrays/lesson.tres:169
+msgid "When you use arrays"
+msgstr "Hvornår bruges arrays"
+
+#: course/lesson-19-creating-arrays/lesson.tres:171
+msgid "In computer programming, we use arrays [i]all the time[/i]."
+msgstr "I computerprogrammering bruger vi arrays [i]hele tiden[/i]."
+
+msgid ""
+"Precisely, you'll use them whenever you need to store a [i]list of "
+"things[/i]."
+msgstr ""
+"Normalt set bruger du dem, når du har brug for at gemme en [i]liste over "
+"ting[/i]."
+
+msgid "You always need lists of things in games:"
+msgstr "Du har altid brug for lister over ting i spil:"
+
+msgid ""
+"- The player's party in an RPG.\n"
+"- The items in the player's inventory.\n"
+"- The high scores in an arcade game.\n"
+"- The objects in the game world."
+msgstr ""
+"- Spillerens gruppe i et RPG.\n"
+"- Genstandene i spillerens lager.\n"
+"- Highscores i et arkadespil.\n"
+"- Objekterne i spilverdenen."
+
+msgid "All of those and many more rely on arrays."
+msgstr "Alle disse og mange flere er afhængige af arrays."
+
+#: course/lesson-19-creating-arrays/lesson.tres:190
+msgid "Using arrays to follow a path"
+msgstr "Brug af arrays til at følge en sti"
+
+#: course/lesson-19-creating-arrays/lesson.tres:192
+msgid ""
+"Let's look at a widespread use of arrays in games: finding and following "
+"a path."
+msgstr "Lad os se på en udbredt brug af arrays i spil: at finde og følge en sti."
+
+msgid ""
+"In games, you need allies or monsters to find their way to their target, "
+"whether it's the player or some point of interest."
+msgstr ""
+"I spil har du brug for at allierede eller monstre kan finde vej til deres"
+" mål, uanset om det er spilleren eller et interessepunkt."
+
+msgid ""
+"To achieve that, we use [i]pathfinding algorithms[/i]. As the name "
+"suggests, those algorithms find the path between two points and allow AIs"
+" to traverse the game."
+msgstr ""
+"For at opnå det bruger vi [i]stifindingsalgoritmer[/i]. Som navnet "
+"antyder, finder disse algoritmer stien mellem to punkter og tillader "
+"AI'er at gennemløbe spillet."
+
+#: course/lesson-19-creating-arrays/lesson.tres:216
+msgid ""
+"Many of those algorithms use arrays of [code]Vector2[/code] coordinates "
+"to represent the path."
+msgstr ""
+"Mange af disse algoritmer bruger arrays af [code]Vector2[/code] "
+"koordinater til at repræsentere stien."
+
+msgid ""
+"Take this turtle pet. It wants to follow the robot, but there are rocks "
+"in the way."
+msgstr ""
+"Tag dette skildpaddekæledyr. Den vil følge robotten, men der er sten i "
+"vejen."
+
+msgid "How can we tell it where to walk to reach the robot? With an array!"
+msgstr ""
+"Hvordan kan vi fortælle den, hvor den skal gå for at nå robotten? Med et "
+"array!"
+
+#: course/lesson-19-creating-arrays/lesson.tres:250
+msgid ""
+"Every value in the array is a [code]Vector2[/code] and represents a cell "
+"the turtle needs to walk through."
+msgstr ""
+"Hver værdi i arrayet er en [code]Vector2[/code] og repræsenterer en "
+"celle, som skildpadden skal gå igennem."
+
+msgid "Together, all the values in the array represent a path we can draw."
+msgstr "Tilsammen repræsenterer alle værdierne i arrayet en sti, vi kan tegne."
+
+#: course/lesson-19-creating-arrays/lesson.tres:272
+msgid ""
+"In upcoming lessons, you will see how we can use arrays to store player "
+"inventories or design attack combos."
+msgstr ""
+"I kommende lektioner vil du se, hvordan vi kan bruge arrays til at gemme "
+"spillerinventarer eller designe angrebskombinationer."
+
+msgid "For now, let's practice creating arrays."
+msgstr "Lad os nu øve os i at oprette arrays."
+
+#: course/lesson-19-creating-arrays/lesson.tres:282
+msgid "Walking to the robot"
+msgstr "Gå hen til robotten"
+
+#: course/lesson-19-creating-arrays/lesson.tres:283
+msgid "The turtle wants to meet the robot! But it cannot find it on its own."
+msgstr ""
+"Skildpadden vil gerne møde robotten! Men den kan ikke finde den på egen "
+"hånd."
+
+msgid ""
+"Fill the [code]turtle_path[/code] array with [code]Vector2[/code] "
+"coordinates indicating where the turtle should move to avoid the "
+"obstacles and arrive safely to the robot."
+msgstr ""
+"Udfyld [code]turtle_path[/code]-arrayet med "
+"[code]Vector2[/code]-koordinater, der angiver, hvor skildpadden skal "
+"bevæge sig hen for at undgå forhindringerne og komme sikkert frem til "
+"robotten."
+
+msgid "The turtle can move up, down, left, or right. It cannot move diagonally."
+msgstr ""
+"Skildpadden kan bevæge sig op, ned, til venstre eller til højre. Den kan "
+"ikke bevæge sig diagonalt."
+
+msgid ""
+"We recommend copying and pasting to fill the array with comma-separated "
+"[code]Vector2[/code] values quickly."
+msgstr ""
+"Vi anbefaler at kopiere og indsætte for hurtigt at udfylde arrayet med "
+"kommaseparerede [code]Vector2[/code]-værdier."
+
+#: course/lesson-19-creating-arrays/lesson.tres:298
+msgid ""
+"Help the turtle find its way to the robot! Give it a path to follow to "
+"reach the robot."
+msgstr ""
+"Hjælp skildpadden med at finde vej til robotten! Giv den en sti at følge "
+"for at nå frem til robotten."
+
+#: course/lesson-19-creating-arrays/lesson.tres:303
+msgid "Selecting units"
+msgstr "Valg af enheder"
+
+#: course/lesson-19-creating-arrays/lesson.tres:304
+msgid ""
+"In this tactical game, the player and computer can select multiple units "
+"at once. You need to call the [code]select_units()[/code] function and "
+"pass it an array of [code]Vector2[/code] coordinates to know which units "
+"to select."
+msgstr ""
+"I dette taktiske spil kan spilleren og computeren vælge flere enheder på "
+"én gang. Du skal kalde funktionen [code]select_units()[/code] og sende et"
+" array af [code]Vector2[/code]-koordinater til den for at vide, hvilke "
+"enheder der skal vælges."
+
+msgid "Each [code]Vector2[/code] in the array represents a cell with a unit."
+msgstr "Hver [code]Vector2[/code] i arrayet repræsenterer en celle med en enhed."
+
+msgid ""
+"You can pass arrays in function calls as arguments. As an array is a "
+"value type the computer recognizes, you can pass the whole array as a "
+"single function argument."
+msgstr ""
+"Du kan sende arrays i funktionskald som argumenter. Da et array er en "
+"værditype, som computeren genkender, kan du sende hele arrayet som et "
+"enkelt funktionsargument."
+
+msgid ""
+"Select all units on the board by passing the correct array to the "
+"[code]select_units()[/code] function."
+msgstr ""
+"Vælg alle enheder på spillepladen ved at sende det korrekte array til "
+"funktionen [code]select_units()[/code]."
+
+#: course/lesson-19-creating-arrays/lesson.tres:320
+msgid "Write an array to select all units on the board in this strategy game."
+msgstr "Skriv et array for at vælge alle enheder på brættet i dette strategispil."
+
+#: course/lesson-19-creating-arrays/lesson.tres:324
+msgid "Creating arrays"
+msgstr "Oprettelse af arrays"
+

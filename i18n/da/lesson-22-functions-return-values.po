@@ -1,0 +1,252 @@
+# Danish translations for Learn GDScript From.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2025-06-14 15:02+0200\n"
+"PO-Revision-Date: 2025-12-19 16:00+0000\n"
+"Last-Translator: Jeppe Nellemann <jepnel@proton.me>\n"
+"Language: da\n"
+"Language-Team: Danish <https://hosted.weblate.org/projects/learn-"
+"gdscript-from-zero/lesson-22-functions-return-values/da/>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-22-functions-return-values/lesson.tres:13
+msgid ""
+"Until now, you learned that functions are sequences of instructions you "
+"give a name and you can call any time."
+msgstr ""
+"Indtil nu har du lært, at funktioner er sekvenser af instruktioner, du "
+"giver et navn, og du kan kalde til enhver tid."
+
+msgid ""
+"On top of that, functions can make calculations and [i]return[/i] new "
+"values."
+msgstr "Desuden kan funktioner lave beregninger og [i]retunere[/i] nye værdier."
+
+msgid "Let's look at some examples to see why it's useful."
+msgstr "Lad os se på nogle eksempler for at se, hvorfor det er nyttigt."
+
+#: course/lesson-22-functions-return-values/lesson.tres:25
+msgid "Built-in functions that return a value"
+msgstr "Indbygget funktioner, der returnerer en værdi"
+
+#: course/lesson-22-functions-return-values/lesson.tres:27
+msgid ""
+"Many functions built into GDScript make calculations and return a new "
+"value."
+msgstr ""
+"Mange funktioner indbygget i GDScript laver beregninger og returnerer en "
+"ny værdi."
+
+msgid ""
+"For example, the [code]round()[/code] function takes a decimal number as "
+"an argument and gives you back a new number rounded to the nearest digit."
+msgstr ""
+"For eksempel, funktionen [code]round()[/code] tager et decimaltal som et "
+"argument og giver dig tilbage et nyt nummer afrundet til det nærmeste "
+"heltal."
+
+#: course/lesson-22-functions-return-values/lesson.tres:49
+msgid ""
+"Imagine you have a game where you track the player's health as a "
+"percentage, a decimal number going from [code]0.0[/code] to "
+"[code]100.0[/code]."
+msgstr ""
+"Forestil dig et spil, hvor du sporer spillerens liv i procent, et "
+"decimaltal der går fra [code]0.0[/code] til [code]100.0[/code]."
+
+msgid ""
+"When displaying the health on the interface, you don't want to show the "
+"decimal part. In that case, you may use the [code]round()[/code] "
+"function, like so."
+msgstr ""
+"Når livet vises på brugerfladen, ønsker du ikke at vise decimaldelen. I "
+"så fald kan du bruge funktionen [code]round()[/code] på denne måde."
+
+#: course/lesson-22-functions-return-values/lesson.tres:71
+msgid ""
+"Notice how we assign the result of the function call to a variable. "
+"Because the [code]round()[/code] function returns a [i]new[/i] value, we "
+"need to either store the result or use the value immediately."
+msgstr ""
+"Bemærk, hvordan vi tildeler resultatet af funktionskaldet til en "
+"variabel. Fordi funktionen [code]round()[/code] returnerer en [i]ny[/i] "
+"værdi, skal vi enten gemme resultatet eller bruge værdien med det samme."
+
+msgid "Above, we assigned it to a variable, but you could also do the following."
+msgstr "Ovenfor tildelte vi det til en variabel, men du kan også gøre følgende."
+
+#: course/lesson-22-functions-return-values/lesson.tres:93
+msgid ""
+"You can assign the return value of a function call if you plan on using "
+"it more than once."
+msgstr ""
+"Du kan tildele returværdien for et funktionskald, hvis du planlægger at "
+"bruge det mere end én gang."
+
+#: course/lesson-22-functions-return-values/lesson.tres:101
+msgid "A cooler example: lerp()"
+msgstr "Et smartere eksempel: lerp()"
+
+#: course/lesson-22-functions-return-values/lesson.tres:103
+msgid ""
+"The [code]lerp()[/code] function, short for [i]linear interpolate[/i], "
+"calculates and returns a weighted average between two values."
+msgstr ""
+"Funktionen [code]lerp()[/code] er en forkortelse for [i]lineær "
+"interpolering[/i], og beregner og returnerer et vægtet gennemsnit mellem "
+"to værdier."
+
+msgid ""
+"It takes three arguments: the two values to average and a value between "
+"[code]0.0[/code] and [code]1.0[/code] to skew the result."
+msgstr ""
+"Den kræver tre argumenter: de to værdier, der skal beregnes gennemsnittet"
+" af, og en værdi mellem [code]0.0[/code] og [code]1.0[/code] for at "
+"skævvride resultatet."
+
+msgid ""
+"In game programming, it's used to animate things moving towards a target "
+"with a single line of code."
+msgstr ""
+"I spilprogrammering bruges den til at animere ting, der bevæger sig mod "
+"et mål, med en enkelt linje kode."
+
+#: course/lesson-22-functions-return-values/lesson.tres:137
+msgid ""
+"Every frame, the code calculates a position somewhere between the turtle "
+"and the mouse cursor. The [code]lerp()[/code] function takes care of "
+"everything."
+msgstr ""
+"For hver frame beregner koden en position et sted mellem skildpadden og "
+"musemarkøren. Funktionen [code]lerp()[/code] tager sig af alt."
+
+msgid ""
+"It's not the most robust approach for smooth movement, as you'll learn in"
+" the future, but it's a helpful function nonetheless."
+msgstr ""
+"Det er ikke den mest robuste metode til jævn bevægelse, som du vil lære i"
+" fremtiden, men det er ikke desto mindre en nyttig funktion."
+
+#: course/lesson-22-functions-return-values/lesson.tres:147
+msgid "Writing a function that returns a value"
+msgstr "At skrive en funktion, der returnerer en værdi"
+
+#: course/lesson-22-functions-return-values/lesson.tres:149
+msgid "You can make [i]your[/i] functions return values."
+msgstr "Du kan få [i]dine[/i] funktioner til at returnere værdier."
+
+msgid ""
+"To make a function return a value, you use the [code]return[/code] "
+"keyword followed by the value in question."
+msgstr ""
+"For at få en funktion til at returnere en værdi, bruger du nøgleordet "
+"[code]return[/code] efterfulgt af den pågældende værdi."
+
+msgid "In previous lessons, we had characters walking on grids."
+msgstr "I tidligere lektioner havde vi karaktere, der gik på gitre."
+
+msgid "And for those practices, you were working directly with cell coordinates."
+msgstr "Og i disse øvelser arbejdede du direkte med cellekoordinater."
+
+msgid ""
+"Well, cell coordinates don't correspond to positions on the screen. To "
+"find the center of any cell on the screen, we need to convert the cell's "
+"coordinates to a position on the screen, in pixels."
+msgstr ""
+"Cellekoordinater svarer ikke til positioner på skærmen. For at finde "
+"midten af en celle på skærmen skal vi konvertere cellens koordinater til "
+"en position på skærmen i pixels."
+
+#: course/lesson-22-functions-return-values/lesson.tres:177
+msgid "To do so, we use a function. The function does two things:"
+msgstr "For at gøre det bruger vi en funktion. Funktionen gør to ting:"
+
+msgid ""
+"1. First, it multiplies the cell coordinates by the cell size, which "
+"gives us the position of the cell's top-left corner on the screen, in "
+"pixels.\n"
+"2. Then, we add half of the cell size to get the center of the cell."
+msgstr ""
+"1. Først ganger den cellekoordinaterne med cellestørrelsen, hvilket giver"
+" os positionen af cellens øverste venstre hjørne på skærmen i pixels.\n"
+"2. Derefter lægger vi halvdelen af cellestørrelsen til for at få cellens "
+"centrum."
+
+msgid "The function returns the result, allowing us to store it in a variable."
+msgstr "Funktionen returnerer resultatet, så vi kan gemme det i en variabel."
+
+#: course/lesson-22-functions-return-values/lesson.tres:202
+msgid ""
+"The [code]return[/code] keyword returns the value to the code calling the"
+" function. You'll receive the result where you call the function."
+msgstr ""
+"Nøgleordet [code]return[/code] returnerer værdien til den kode, der "
+"kalder funktionen. Du modtager resultatet, der hvor du kalder funktionen."
+
+#: course/lesson-22-functions-return-values/lesson.tres:222
+msgid ""
+"Some functions return values, and some do not. During practices, you can "
+"learn which functions return a value using the documentation panel. It "
+"will display if the practice requires using specific functions or "
+"variables."
+msgstr ""
+"Nogle funktioner returnerer værdier, og andre gør ikke. Under øvelser kan"
+" du lære, hvilke funktioner der returnerer en værdi, ved hjælp af "
+"dokumentationspanelet. Det vil vise, om øvelsen kræver brug af specifikke"
+" funktioner eller variabler."
+
+msgid ""
+"There, functions that start with the term [code]void[/code] do not return"
+" a value. Any other term means the function does return a value. You'll "
+"learn more about what other terms mean in a couple of lessons when we "
+"explore value [i]types[/i]."
+msgstr ""
+"Funktioner der starter med termen [code]void[/code], returnerer ikke en "
+"værdi. Ethvert andet term betyder, at funktionen returnerer en værdi. Du "
+"vil lære mere om, hvad andre termer betyder, om et par lektioner, når vi "
+"udforsker værdi [i]typer[/i]."
+
+msgid "For now, let's practice returning values from functions!"
+msgstr "Lad os nu øve os i at returnere værdier fra funktioner!"
+
+#: course/lesson-22-functions-return-values/lesson.tres:234
+msgid "Converting coordinates from the grid to the screen"
+msgstr "Konvertering af koordinater fra gitteret til skærmen"
+
+#: course/lesson-22-functions-return-values/lesson.tres:235
+msgid "Define a function that converts a position on a grid to the screen."
+msgstr "Definer en funktion, der konverterer en position på et gitter til skærmen."
+
+msgid ""
+"The function takes a [code]Vector2[/code] cell coordinate as an argument."
+" It should return the corresponding [code]Vector2[/code] screen "
+"coordinates at the center of the cell."
+msgstr ""
+"Funktionen tager en [code]Vector2[/code] cellekoordinat som argument. Den"
+" skal returnere de tilsvarende [code]Vector2[/code] skærmkoordinater i "
+"midten af cellen."
+
+#: course/lesson-22-functions-return-values/lesson.tres:249
+msgid ""
+"We lost the function to convert grid coordinates, but we desperately need"
+" it for our game! Make the turtle move again by coding it."
+msgstr ""
+"Vi har mistet funktionen til at konvertere gitterkoordinater, men vi har "
+"desperat brug for den til vores spil! Få skildpadden til at bevæge sig "
+"igen ved at kode den."
+
+#: course/lesson-22-functions-return-values/lesson.tres:253
+msgid "Functions that return a value"
+msgstr "Funktioner, der returnerer en værdi"
+

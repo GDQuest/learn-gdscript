@@ -1,0 +1,346 @@
+# Danish translations for Learn GDScript From.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2025-06-14 15:02+0200\n"
+"PO-Revision-Date: 2025-12-20 19:00+0000\n"
+"Last-Translator: Jeppe Nellemann <jepnel@proton.me>\n"
+"Language: da\n"
+"Language-Team: Danish <https://hosted.weblate.org/projects/learn-"
+"gdscript-from-zero/lesson-27-value-types/da/>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-27-value-types/lesson.tres:13
+msgid ""
+"In your code, values have a particular [i]type[/i]. You have already "
+"learned about several: whole numbers, decimal numbers, strings, 2D "
+"vectors, arrays, and dictionaries."
+msgstr ""
+"I din kode, har værdier en bestemt [i]type[/i]. Du har allerede lært om "
+"flere: hele tal, decimaltal, strenge, 2D vektorer, arrays og ordbøger."
+
+msgid ""
+"The computer uses the type of a value to know which operations and "
+"functions you can use with them."
+msgstr ""
+"Computeren bruger typen af en værdi til at vide, hvilke operationer og "
+"funktioner du kan bruge med dem."
+
+msgid ""
+"As a result, it's essential to understand types: they are not fully "
+"compatible with one another, and misusing them will cause errors."
+msgstr ""
+"Som følge heraf er det vigtigt at forstå typer: de er ikke fuldt "
+"kompatible med hinanden, og misbruger du dem vil det forårsage fejl."
+
+#: course/lesson-27-value-types/lesson.tres:25
+msgid "A prime example"
+msgstr "Et førsteklasses eksempel"
+
+#: course/lesson-27-value-types/lesson.tres:27
+msgid ""
+"You want to display the player's health in the interface. Your code "
+"tracks health as a whole number, a value of type [code]int[/code] (short "
+"for integer)."
+msgstr ""
+"Du ønsker at vise spillerens liv i interfacet. Din kode holder styr på "
+"liv som et helt nummer, en værdi af typen [code]int[/code] (heltal)."
+
+#: course/lesson-27-value-types/lesson.tres:47
+msgid ""
+"However, to display it on the player's screen, the computer wants text: "
+"it needs a value of type [code]String[/code]."
+msgstr ""
+"For at vise det på spillerens skærm skal computeren dog bruge tekst: den "
+"skal bruge en værdi af typen [code]String[/code]."
+
+msgid "You can concatenate two strings with the [code]+[/code] operator."
+msgstr "Du kan sammenkæde to strenge med operatoren [code]+[/code]."
+
+#: course/lesson-27-value-types/lesson.tres:69
+msgid "So the following code looks like it could work at first glance."
+msgstr "Så følgende kode ser ud til at kunne virke ved første øjekast."
+
+#: course/lesson-27-value-types/lesson.tres:89
+msgid "But when running the code, we get this strange error."
+msgstr "Men når vi kører koden, får vi denne mærkelige fejl."
+
+#: course/lesson-27-value-types/lesson.tres:109
+msgid ""
+"It tells you can't add values of type [code]String[/code] and "
+"[code]int[/code]: they're incompatible."
+msgstr ""
+"Den fortæller dig, at du ikke kan tilføje værdier af typen "
+"[code]String[/code] og [code]int[/code]: de er inkompatible."
+
+msgid ""
+"In that case, you need to convert the [code]health[/code] number into a "
+"[code]String[/code]."
+msgstr ""
+"I så fald skal du konvertere [code]health[/code]-tallet til en "
+"[code]String[/code]."
+
+#: course/lesson-27-value-types/lesson.tres:119
+msgid "Converting values into strings"
+msgstr "Konvertering af værdier til strenge"
+
+#: course/lesson-27-value-types/lesson.tres:121
+msgid ""
+"You can get the text representation of a value by calling the "
+"[code]str()[/code] function (short for \"string\"). The function returns "
+"its argument as a new [code]String[/code]."
+msgstr ""
+"Du kan få tekstrepræsentationen af en værdi ved at kalde funktionen "
+"[code]str()[/code] (forkortelse for \"string\"). Funktionen returnerer "
+"sit argument som en ny [code]String[/code]."
+
+msgid ""
+"You can use this function whenever you want to turn some number or vector"
+" into text."
+msgstr ""
+"Du kan bruge denne funktion, når du vil omdanne et tal eller en vektor "
+"til tekst."
+
+#: course/lesson-27-value-types/lesson.tres:143
+msgid ""
+"In this case, it turns the number [code]100[/code] into the string "
+"[code]\"100\"[/code]. Or whatever number [code]health[/code] is "
+"currently."
+msgstr ""
+"I dette tilfælde ændres tallet [code]100[/code] til strengen "
+"[code]\"100\"[/code]. Eller hvilket tal [code]health[/code] nu er."
+
+#: course/lesson-27-value-types/lesson.tres:151
+msgid "Converting strings into numbers"
+msgstr "Konvertering af strenge til tal"
+
+#: course/lesson-27-value-types/lesson.tres:153
+msgid ""
+"You can also convert strings into whole numbers or decimal numbers using "
+"respectively the [code]int()[/code] and [code]float()[/code] functions."
+msgstr ""
+"Du kan også konvertere strenge til hele tal eller decimaltal ved hjælp af"
+" henholdsvis funktionerne [code]int()[/code] og [code]float()[/code]."
+
+msgid ""
+"Those functions can convert what the player writes in a text field into a"
+" number. For example, the number of potions to sell at once in a shop."
+msgstr ""
+"Disse funktioner kan konvertere det, spilleren skriver i et tekstfelt, "
+"til et tal. For eksempel antallet af eliksirer, der skal sælges på én "
+"gang i en butik."
+
+#: course/lesson-27-value-types/lesson.tres:173
+msgid "Some types are partially compatible"
+msgstr "Nogle typer er delvist kompatible"
+
+#: course/lesson-27-value-types/lesson.tres:175
+msgid ""
+"Most types are incompatible. For example, you can't directly add or "
+"multiply an array with a number."
+msgstr ""
+"De fleste typer er inkompatible. For eksempel kan du ikke direkte addere "
+"eller gange et array med et tal."
+
+msgid ""
+"However, some types are [i]partially[/i] compatible. For example, you can"
+" multiply or divide a vector by a number."
+msgstr ""
+"Nogle typer er dog [i]delvist[/i] kompatible. For eksempel kan du gange "
+"eller dividere en vektor med et tal."
+
+#: course/lesson-27-value-types/lesson.tres:197
+msgid ""
+"It is possible because other developers defined that operation for you "
+"under the hood."
+msgstr ""
+"Det er muligt, fordi andre udviklere har defineret den operation for dig "
+"under motorhjelmen."
+
+msgid ""
+"However, you cannot directly add or subtract a number to a vector. You'll"
+" get an error. That's why, in earlier lessons, you had to access the sub-"
+"variables of [code]position[/code] to add numbers to them."
+msgstr ""
+"Du kan dog ikke direkte tilføje eller trække et tal fra en vektor. Du får"
+" en fejl. Derfor skulle du i tidligere lektioner tilgå undervariablerne "
+"af [code]position[/code] for at tilføje tal til dem."
+
+#: course/lesson-27-value-types/lesson.tres:207
+msgid "A surprising result"
+msgstr "Et overraskende resultat"
+
+#: course/lesson-27-value-types/lesson.tres:209
+msgid ""
+"Take the following division: [code]3/2[/code]. What result would you "
+"expect to get? [code]1.5[/code]?"
+msgstr ""
+"Tag følgende division: [code]3/2[/code]. Hvilket resultat ville du "
+"forvente at få? [code]1.5[/code]?"
+
+#: course/lesson-27-value-types/lesson.tres:229
+msgid "Well, for the computer, the result of [code]3/2[/code] is [code]1[/code]."
+msgstr "For computeren er resultatet af [code]3/2[/code], [code]1[/code]."
+
+msgid "Wait, what?!"
+msgstr "Vent, hvad?!"
+
+msgid ""
+"That's because, for the computer, the division of two whole numbers "
+"should always result in a whole number."
+msgstr ""
+"Det skyldes, at division af to hele tal for computeren altid skal "
+"resultere i et helt tal."
+
+msgid ""
+"When you divide decimal numbers instead, you will get a decimal number as"
+" a result."
+msgstr "Når du dividerer decimaltal i stedet, får du et decimaltal som resultat."
+
+#: course/lesson-27-value-types/lesson.tres:255
+msgid ""
+"Even if it's just a [code]0[/code], adding a decimal place tells the "
+"computer we want decimal numbers."
+msgstr ""
+"Selv hvis det bare er et [code]0[/code], fortæller tilføjelsen af et "
+"decimaltegn computeren, at vi vil have decimaltal."
+
+msgid ""
+"This shows you how mindful you need to be with types. Otherwise, you will"
+" get unexpected results. It can get pretty serious: number errors can "
+"lead to bugs like controls not working as intended or charging the wrong "
+"price to players."
+msgstr ""
+"Dette viser dig, hvor omhyggelig du skal være med typer. Ellers får du "
+"uventede resultater. Det kan blive ret alvorligt: talfejl kan føre til "
+"fejl, som f.eks. at kontroller ikke fungerer som tilsigtet, eller at "
+"spillerne opkræver den forkerte pris."
+
+#: course/lesson-27-value-types/lesson.tres:265
+msgid "Understanding and mastering types is a key skill for developers"
+msgstr "At forstå og mestre typer er en nøglefærdighed for udviklere"
+
+#: course/lesson-27-value-types/lesson.tres:267
+msgid ""
+"Programming beginners often struggle due to the lack of understanding of "
+"types."
+msgstr ""
+"Begyndere inden for programmering kæmper ofte på grund af manglende "
+"forståelse af typer."
+
+msgid ""
+"Languages like GDScript hide the types from you by default. As a result, "
+"if you don't understand that some are incompatible, you can get stuck "
+"when facing type-related errors."
+msgstr ""
+"Sprog som GDScript skjuler som standard typerne for dig. Som følge heraf "
+"kan du gå i stå, når du støder på typerelaterede fejl, hvis du ikke "
+"forstår, at nogle er inkompatible."
+
+msgid ""
+"You'll want to keep that in mind in your learning journey. When writing "
+"code, you will need to understand everything that's happening."
+msgstr ""
+"Du bør huske på det i din læringsproces. Når du skriver kode, skal du "
+"forstå alt, hvad der sker."
+
+msgid "That said, let's practice some type conversions."
+msgstr "Når det er sagt, lad os øve os på nogle typekonverteringer."
+
+#: course/lesson-27-value-types/lesson.tres:281
+msgid "Displaying the player's health and energy"
+msgstr "Visning af spillerens liv og energi"
+
+#: course/lesson-27-value-types/lesson.tres:282
+msgid "We want to display the player's energy in the user interface."
+msgstr "Vi ønsker at vise spillerens energi i brugergrænsefladen."
+
+msgid ""
+"Currently, our code has a type error. We're trying to display a whole "
+"number while the [code]display_energy()[/code] function expects a string."
+msgstr ""
+"I øjeblikket har vores kode en typefejl. Vi forsøger at vise et helt tal,"
+" mens funktionen [code]display_energy()[/code] forventer en streng."
+
+msgid ""
+"Using the [code]str()[/code] function, clear the type error and make the "
+"energy amount display on the interface."
+msgstr ""
+"Brug funktionen [code]str()[/code] til at fjerne typefejlen og få "
+"energimængden vist på brugergrænsefladen."
+
+msgid ""
+"You can't change the [code]energy[/code] variable definition: setting it "
+"to [code]\"80\"[/code] would break the rest of the game's code. You must "
+"convert the value when calling [code]display_energy()[/code]."
+msgstr ""
+"Du kan ikke ændre definitionen af variabel [code]energy[/code]: at "
+"indstille den til [code]\"80\"[/code] ville ødelægge resten af spillets "
+"kode. Du skal konvertere værdien, når du kalder "
+"[code]display_energy()[/code]."
+
+#: course/lesson-27-value-types/lesson.tres:300
+msgid ""
+"We want to display the player's energy in the interface but face a type "
+"error. Use your new knowledge to fix it."
+msgstr ""
+"Vi vil gerne vise spillerens energi i brugerfladen, men støder på en type"
+" fejl. Brug din nye viden til at rette den."
+
+#: course/lesson-27-value-types/lesson.tres:305
+msgid "Letting the player type numbers"
+msgstr "Lad spilleren indtaste tal"
+
+#: course/lesson-27-value-types/lesson.tres:306
+msgid ""
+"In our game's shops, we want to let the player type numbers to select the"
+" number of items they want to buy or sell."
+msgstr ""
+"I vores spils butikker vil vi lade spilleren indtaste tal for at vælge "
+"antallet af varer, de vil købe eller sælge."
+
+msgid ""
+"We need to know the number of items as an [code]int[/code], but the "
+"computer reads the player's input as a [code]String[/code]."
+msgstr ""
+"Vi skal kende antallet af varer som en [code]int[/code], men computeren "
+"læser spillerens input som en [code]String[/code]."
+
+msgid ""
+"Your task is to convert the player's input into numbers for the shop's "
+"code to work."
+msgstr ""
+"Din opgave er at konvertere spillerens input til tal, for at butikkens "
+"kode kan fungere."
+
+msgid ""
+"Using the [code]int()[/code] function, convert the player's input into a "
+"whole number and store the result in the [code]item_count[/code] "
+"variable."
+msgstr ""
+"Ved hjælp af funktionen [code]int()[/code] skal du konvertere spillerens "
+"input til et helt tal og gemme resultatet i variablen "
+"[code]item_count[/code]."
+
+#: course/lesson-27-value-types/lesson.tres:326
+msgid ""
+"We want the player to choose the number of items they buy or sell in our "
+"game's shops. But right now, all we get are type errors."
+msgstr ""
+"Vi vil have, at spilleren kan vælge antallet af varer, de køber eller "
+"sælger i spillets butikker. Men lige nu er alt, hvad vi får, type fejl."
+
+#: course/lesson-27-value-types/lesson.tres:330
+msgid "Value types"
+msgstr "Værdityper"
+

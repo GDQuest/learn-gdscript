@@ -1,0 +1,316 @@
+# Danish translations for Learn GDScript From.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2025-06-14 15:02+0200\n"
+"PO-Revision-Date: 2025-12-20 19:00+0000\n"
+"Last-Translator: Jeppe Nellemann <jepnel@proton.me>\n"
+"Language: da\n"
+"Language-Team: Danish <https://hosted.weblate.org/projects/learn-"
+"gdscript-from-zero/lesson-18-for-loops/da/>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-18-for-loops/lesson.tres:14
+msgid ""
+"In the last lesson, we looked at [code]while[/code] loops. We found they "
+"were useful if we don't know how many times we should repeat code."
+msgstr ""
+"I den forrige lektion så vi på [code]while[/code] loops. Vi så de var "
+"nyttige, hvis vi ikke ved, hvor mange gange vi skal gentage kode."
+
+msgid "However, they could result in infinite loops if we're not careful."
+msgstr "Men de kunne resultere i uendelige loops, hvis vi ikke var forsigtig."
+
+msgid "The loop below never ends because we never increment [code]number[/code]."
+msgstr "Løkken slutter aldrig, fordi vi aldrig forøger [code]nummer[/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:38
+msgid "There's a safer and often easier kind of loop: the [code]for[/code] loop."
+msgstr "Der findes en sikrere og ofte nemmere type løkke: [code]for[/code]-løkken."
+
+msgid "We'll look at it in this lesson."
+msgstr "Vi vil se på den i denne lektion."
+
+msgid ""
+"Unlike [code]while[/code] loops, [code]for[/code] loops don't run "
+"infinitely, so it's much less likely that you'll get bugs in your game. "
+"[b]We recommend favoring for loops over while loops because of this[/b]."
+msgstr ""
+"I modsætning til [code]while[/code]-løkker kører [code]for[/code]-løkker "
+"ikke uendeligt, så det er meget mindre sandsynligt, at du får fejl i dit "
+"spil. [b]Vi anbefaler at foretrække for-løkker frem for while-løkker på "
+"grund af dette[/b]."
+
+msgid "Let's change the code above to use a [code]for[/code] loop instead."
+msgstr ""
+"Lad os ændre koden ovenfor til at bruge en [code]for[/code]-løkke i "
+"stedet."
+
+msgid "The loop below will change the [code]cell[/code] three times."
+msgstr "Løkken nedenfor vil ændre [code]cell[/code] tre gange."
+
+#: course/lesson-18-for-loops/lesson.tres:66
+msgid "Let's explain what's going on here."
+msgstr "Lad os forklare, hvad der foregår her."
+
+#: course/lesson-18-for-loops/lesson.tres:74
+msgid "The range() function"
+msgstr "Funktionen range()"
+
+#: course/lesson-18-for-loops/lesson.tres:76
+msgid ""
+"Godot has the helper function [code]range()[/code]. Calling "
+"[code]range(n)[/code] creates a list of numbers from [code]0[/code] to "
+"[code]n - 1[/code]."
+msgstr ""
+"Godot har hjælpefunktionen [code]range()[/code]. Kald af "
+"[code]range(n)[/code] opretter en liste med tal fra [code]0[/code] til "
+"[code]n - 1[/code]."
+
+msgid ""
+"So calling [code]range(3)[/code] outputs the list of numbers [code][0, 1,"
+" 2][/code], and [code]range(5)[/code] outputs [code][0, 1, 2, 3, "
+"4][/code]."
+msgstr ""
+"Så kald af [code]range(3)[/code] giver listen med tal [code][0, 1, "
+"2][/code], og [code]range(5)[/code] giver [code][0, 1, 2, 3, 4][/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:86
+msgid "What list of numbers would range(6) create?"
+msgstr "Hvilken liste af tal vil range(6) oprette?"
+
+#: course/lesson-18-for-loops/lesson.tres:87
+msgid "What would [code]print(range(6))[/code] print to the console?"
+msgstr "Hvad ville [code]print(range(6))[/code] udskrive til konsollen?"
+
+#: course/lesson-18-for-loops/lesson.tres:89
+msgid ""
+"The function [code]range(n)[/code] creates a list of numbers from "
+"[code]0[/code] to [code]n - 1[/code]. The output list will start with "
+"[code]0[/code] and end with [code]5[/code]."
+msgstr ""
+"Funktionen [code]range(n)[/code] opretter en liste med tal fra "
+"[code]0[/code] til [code]n - 1[/code]. Outputlisten starter med "
+"[code]0[/code] og slutter med [code]5[/code]."
+
+msgid ""
+"So calling [code]range(6)[/code] will output a list of six numbers which "
+"are [code][0, 1, 2, 3, 4, 5][/code]."
+msgstr ""
+"Så kald af [code]range(6)[/code] vil generere en liste med seks tal, som "
+"er [code][0, 1, 2, 3, 4, 5][/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:93
+#: course/lesson-18-for-loops/lesson.tres:94
+msgid "[0, 1, 2, 3, 4, 5]"
+msgstr "[0, 1, 2, 3, 4, 5]"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+msgid "[1, 2, 3, 4, 5, 6]"
+msgstr "[1, 2, 3, 4, 5, 6]"
+
+#: course/lesson-18-for-loops/lesson.tres:93
+msgid "[0, 1, 2, 3, 4, 5, 6]"
+msgstr "[0, 1, 2, 3, 4, 5, 6]"
+
+#: course/lesson-18-for-loops/lesson.tres:101
+msgid "How for loops work"
+msgstr "Hvordan for-løkker virker"
+
+#: course/lesson-18-for-loops/lesson.tres:103
+msgid ""
+"In a [code]for[/code] loop, the computer takes each value inside a list, "
+"stores it in a temporary variable, and executes the code in the loop once"
+" per value."
+msgstr ""
+"I et [code]for[/code]-løkke tager computeren hver værdi i en liste, "
+"gemmer den i en midlertidig variabel og udfører koden i løkken én gang "
+"pr. værdi."
+
+#: course/lesson-18-for-loops/lesson.tres:123
+msgid ""
+"In the above example, for each item in the list [code][0, 1, 2][/code], "
+"Godot sets [code]number[/code] to the item, then executes the code in the"
+" [code]for[/code] loop."
+msgstr ""
+"I ovenstående eksempel, for hvert genstand i listen [code][0, 1, "
+"2][/code] sætter Godot [code]number[/code] til genstanden og udfører "
+"derefter koden i [code]for[/code]-løkken."
+
+msgid ""
+"We'll explain arrays more thoroughly in the next lesson, but notice that "
+"[code]number[/code] is just a temporary variable. You create it when "
+"defining the loop, and the loop takes care of changing its value. Also, "
+"you can name this variable anything you want."
+msgstr ""
+"Vi vil forklare arrays mere grundigt i den næste lektion, men bemærk, at "
+"[code]number[/code] blot er en midlertidig variabel. Du opretter den, når"
+" du definerer løkken, og løkken sørger for at ændre dens værdi. Du kan "
+"navngive denne variabel, hvad du vil."
+
+msgid "This code behaves the same as the previous example:"
+msgstr "Denne kode opfører sig på samme måde som det foregående eksempel:"
+
+#: course/lesson-18-for-loops/lesson.tres:147
+msgid ""
+"In both examples, we print the value of the temporary variable we "
+"created: [code]number[/code] in the first example and "
+"[code]element[/code] in the second."
+msgstr ""
+"I begge eksempler udskriver vi værdien af den midlertidige variabel, vi "
+"oprettede: [code]number[/code] i det første eksempel og "
+"[code]element[/code] i det andet."
+
+msgid ""
+"As Godot moves through the loop, it assigns each value of the array to "
+"that variable. First, it sets the variable to [code]0[/code], then to "
+"[code]1[/code], and finally, to [code]2[/code]."
+msgstr ""
+"Når Godot bevæger sig gennem løkken, tildeler den hver værdi i arrayet "
+"til den pågældende variabel. Først sætter den variablen til "
+"[code]0[/code], derefter til [code]1[/code] og endelig til "
+"[code]2[/code]."
+
+msgid ""
+"We can break down the instructions the loop runs. You can see how a loop "
+"is a shortcut to code that otherwise gets very long."
+msgstr ""
+"Vi kan opdele de instruktioner, som løkken kører. Du kan se, hvordan en "
+"løkke er en genvej til kode, der ellers bliver meget lang."
+
+#: course/lesson-18-for-loops/lesson.tres:171
+msgid ""
+"We can put whatever code we like in the loop's code block, including "
+"other function calls like [code]draw_rectangle()[/code]."
+msgstr ""
+"Vi kan indsætte lige den kode, vi ønsker, i løkkens kodeblok, inklusive "
+"andre funktionskald som [code]draw_rectangle()[/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:179
+msgid "Using a for loop instead of a while loop"
+msgstr "Brug af en for-løkke i stedet for en while-løkke"
+
+#: course/lesson-18-for-loops/lesson.tres:181
+msgid ""
+"Here's our old [code]move_to_end()[/code] function which used a "
+"[code]while[/code] loop."
+msgstr ""
+"Her er vores gamle [code]move_to_end()[/code] funktion, som brugte en "
+"[code]while[/code]-løkke."
+
+#: course/lesson-18-for-loops/lesson.tres:201
+msgid ""
+"If we use a [code]for[/code] loop instead, the code becomes a little "
+"simpler."
+msgstr ""
+"Hvis vi i stedet bruger en [code]for[/code]-løkke, bliver koden lidt mere"
+" enkel."
+
+#: course/lesson-18-for-loops/lesson.tres:221
+msgid ""
+"Rather than constantly checking if the robot reached the end of the "
+"board, with the [code]for[/code] loop, we take the board's width "
+"beforehand, then move the robot a set amount of times."
+msgstr ""
+"I stedet for konstant at tjekke, om robotten nåede slutningen af brættet,"
+" tager vi brættets bredde på forhånd med [code]for[/code]-løkken, og "
+"bevæger derefter robotten et bestemt antal gange."
+
+msgid "The function still works the same. You can execute it below."
+msgstr "Funktionen fungerer stadig på samme måde. Du kan udføre den nedenfor."
+
+#: course/lesson-18-for-loops/lesson.tres:243
+msgid ""
+"In the practices, we'll use [code]for[/code] loops in different ways to "
+"get you used to using them."
+msgstr ""
+"I øvelserne vil vi bruge [code]for[/code]-løkker på forskellige måder for"
+" at vænne dig til at bruge dem."
+
+#: course/lesson-18-for-loops/lesson.tres:251
+msgid "Using a for loop to move to the end of the board"
+msgstr "Brug af en for-løkke til at flytte til slutningen af brættet"
+
+#: course/lesson-18-for-loops/lesson.tres:252
+msgid "Once again, the robot has decided to stand at the top of the board."
+msgstr "Endnu engang har robotten besluttet sig for at stå øverst på brættet."
+
+msgid ""
+"This time, use a [code]for[/code] loop in the "
+"[code]move_to_bottom()[/code] function to have it move to the bottom of "
+"the board."
+msgstr ""
+"Denne gang skal du bruge en [code]for[/code]-løkke i funktionen "
+"[code]move_to_bottom()[/code] for at få den til at flytte sig til bunden "
+"af brættet."
+
+msgid ""
+"The board size is determined by the [code]Vector2[/code] variable "
+"[code]board_size[/code]."
+msgstr ""
+"Brættets størrelse bestemmes af [code]Vector2[/code] variablen "
+"[code]board_size[/code]."
+
+msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
+msgstr "Robottens startcelle er [code]Vector2(2, 0)[/code]."
+
+#: course/lesson-18-for-loops/lesson.tres:268
+msgid ""
+"Use a for loop to have our robot move from the top of the board to the "
+"bottom."
+msgstr ""
+"Brug en for-løkke til at få vores robot til at bevæge sig fra toppen af "
+"brættet til bunden."
+
+#: course/lesson-18-for-loops/lesson.tres:273
+msgid "Improving code with a for loop"
+msgstr "Forbedring af kode med en for-løkke"
+
+#: course/lesson-18-for-loops/lesson.tres:274
+msgid ""
+"Use a [code]for[/code] loop to remove the duplicate code in the "
+"[code]run()[/code] function."
+msgstr ""
+"Brug en [code]for[/code]-løkke til at fjerne den duplikerede kode i "
+"[code]run()[/code]-funktionen."
+
+msgid "In this practice, we revisit the turtle and drawing rectangles."
+msgstr "I denne øvelse gennemgår vi skildpadden og tegning af rektangler."
+
+msgid ""
+"With our new knowledge of [code]for[/code] loops, we can condense this "
+"code to take up less space and make it easier to modify."
+msgstr ""
+"Med vores nye viden om [code]for[/code]-løkker kan vi kondensere denne "
+"kode, så den fylder mindre og gør den nemmere at ændre."
+
+msgid ""
+"The turtle should draw three squares in a horizontal line. The squares "
+"should be 100 pixels apart."
+msgstr ""
+"Skildpadden skal tegne tre firkanter i en vandret linje. Firkanterne skal"
+" være 100 pixels fra hinanden."
+
+#: course/lesson-18-for-loops/lesson.tres:297
+msgid ""
+"In the past we had to copy and paste code to draw multiple rectangles. "
+"Let's revisit previous code and improve it with a for loop."
+msgstr ""
+"Tidligere måtte vi kopiere og indsætte kode for at tegne flere "
+"rektangler. Lad os gennemgå tidligere kode og forbedre den med en for-"
+"løkke."
+
+#: course/lesson-18-for-loops/lesson.tres:301
+msgid "Introduction to For Loops"
+msgstr "Introduktion til For-løkker"
+

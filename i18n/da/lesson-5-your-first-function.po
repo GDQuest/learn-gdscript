@@ -1,0 +1,447 @@
+# Danish translations for Learn GDScript From.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2025-06-14 15:02+0200\n"
+"PO-Revision-Date: 2025-11-27 07:00+0000\n"
+"Last-Translator: Jeppe Nellemann <jepnel@proton.me>\n"
+"Language: da\n"
+"Language-Team: Danish <https://hosted.weblate.org/projects/learn-"
+"gdscript-from-zero/lesson-5-your-first-function/da/>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-5-your-first-function/lesson.tres:14
+msgid "So far, we have called existing functions that other developers wrote."
+msgstr ""
+"Indtil videre har vi kaldt eksisterende funktioner, som andre udviklere "
+"har skrevet."
+
+msgid ""
+"In this lesson, we'll talk more about what functions are and see some "
+"examples. Then, you will learn how to define your own functions."
+msgstr ""
+"I denne lektion vil vi snakke mere om, hvad funktioner er og se nogle "
+"eksempler. Og så vil du lære at definere dine egne funktioner."
+
+#: course/lesson-5-your-first-function/lesson.tres:24
+msgid "Functions are named sequences of instructions"
+msgstr "Funktioner er navngivet sekvenser af instruktioner"
+
+#: course/lesson-5-your-first-function/lesson.tres:26
+msgid ""
+"Functions are [i]sequences of instructions[/i] we give a name. We call "
+"that name an [i]identifier[/i]."
+msgstr ""
+"Funktioner er [i]sekvenser af instruktioner[/i] vi giver et navn. Vi "
+"kalder dette navn [i]identifikator[/i]."
+
+msgid ""
+"Using the identifier, we can get the computer to execute all the "
+"instructions inside the function as many times as we need. This is what a"
+" [i]function call[/i] does."
+msgstr ""
+"Ved hjælp af identifikatoren kan vi få computeren til at udføre alle "
+"instruktionerne inde i funktionen så mange gange som vi har brug for. "
+"Dette er, hvad et [i]funktions kald[/i] gør."
+
+#: course/lesson-5-your-first-function/lesson.tres:36
+msgid "Learn more about identifiers"
+msgstr "Lær mere om identifikatorer"
+
+#: course/lesson-5-your-first-function/lesson.tres:38
+msgid ""
+"In computer programming, we talk about [i]identifiers[/i] rather than "
+"\"names\"."
+msgstr ""
+"I computerprogrammering taler vi om [i]identifikatorer[/i] snarere end "
+"\"navne\"."
+
+msgid ""
+"It is because a function name is a label the computer uses to precisely "
+"[i]identify[/i] and refer to a function or other code elements."
+msgstr ""
+"Det skyldes, at et funktionsnavn er en etiket, som computeren bruger til "
+"præcist at [i]identificere[/i] og henvise til en funktion eller andre "
+"kodeelementer."
+
+msgid ""
+"Identifiers are unique: you cannot reuse the same name in a given "
+"[i]space[/i] in your code."
+msgstr ""
+"Identifikatorer er unikke: du kan ikke genbruge det samme navn i et givet"
+" [i]område[/i] i din kode."
+
+msgid ""
+"If you try to name two functions the same, the computer will raise an "
+"error."
+msgstr ""
+"Hvis du forsøger at navngive to funktioner ens, vil computeren give en "
+"fejl."
+
+#: course/lesson-5-your-first-function/lesson.tres:54
+msgid ""
+"If there is any code that you need to run multiple times, you can put it "
+"inside a function and give it a name."
+msgstr ""
+"Hvis der er kode, du skal køre flere gange, kan du placere den i en "
+"funktion og give den et navn."
+
+msgid ""
+"The instructions inside a function can be any code you want, and they "
+"will all run every time you call the function."
+msgstr ""
+"Instruktionerne i en funktion kan være enhver kode, du ønsker, og de vil "
+"alle køre hver gang du kalder funktionen."
+
+msgid ""
+"Here's the example of a [code]move_and_rotate()[/code] function that "
+"moves the turtle forward and then turns it 90°."
+msgstr ""
+"Her er et eksempel på en [code]move_and_rotate()[/code]-funktion, der "
+"bevæger skildpadden fremad og derefter drejer den 90°."
+
+#: course/lesson-5-your-first-function/lesson.tres:78
+msgid ""
+"The [code]move_and_rotate()[/code] function consists of two instructions,"
+" each on a separate line. Both of those instructions call another "
+"familiar function."
+msgstr ""
+"Funktionen [code]move_and_rotate()[/code] består af to instruktioner, der"
+" hver er på en separat linje. Begge disse instruktioner kalder en anden "
+"velkendt funktion."
+
+msgid ""
+"You could write another function that calls "
+"[code]move_and_rotate()[/code] four times to draw a square of length 200 "
+"pixels."
+msgstr ""
+"Du kan skrive en anden funktion, der kalder "
+"[code]move_and_rotate()[/code] fire gange for at tegne et kvadrat med en "
+"længde på 200 pixels."
+
+#: course/lesson-5-your-first-function/lesson.tres:100
+msgid ""
+"Every time we call [code]move_and_rotate()[/code], the two functions "
+"[code]move_forward(200)[/code] and [code]turn_right(90)[/code] are called"
+" in sequence."
+msgstr ""
+"Hver gang vi kalder [code]move_and_rotate()[/code], kaldes de to "
+"funktioner [code]move_forward(200)[/code] og [code]turn_right(90)[/code] "
+"i rækkefølge."
+
+msgid ""
+"In this simple example, it may not feel super useful. Here's a more "
+"useful and realistic one: a function to draw any square."
+msgstr ""
+"I dette simple eksempel føles det måske ikke super nyttigt. Her er et "
+"mere nyttigt og realistisk eksempel: en funktion til at tegne et hvilket "
+"som helst kvadrat."
+
+msgid ""
+"The following function uses [i]parameters[/i], which we will explore in "
+"the next lesson."
+msgstr ""
+"Følgende funktion bruger [i]parametre[/i], som vi vil udforske i den "
+"næste lektion."
+
+msgid "[i]Drag the slider to change the square's size.[/i]"
+msgstr "[i]Træk skyderen for at ændre kvadratets størrelse.[/i]"
+
+#: course/lesson-5-your-first-function/lesson.tres:124
+msgid "How to define your own functions"
+msgstr "Sådan definerer du dine egne funktioner"
+
+#: course/lesson-5-your-first-function/lesson.tres:126
+msgid "Let's break down how you define a function."
+msgstr "Lad os gennemgå, hvordan du definerer en funktion."
+
+msgid ""
+"A function definition starts with the [code]func[/code] keyword followed "
+"by a space, the function's name, parentheses, and a colon."
+msgstr ""
+"En funktionsdefinition starter med nøgleordet [code]func[/code] "
+"efterfulgt af et mellemrum, funktionens navn, parenteser og et kolon."
+
+#: course/lesson-5-your-first-function/lesson.tres:148
+msgid ""
+"The instructions inside the function [b]must[/b] all start with a leading"
+" tab character. You can insert that tab character by pressing the "
+"[b]Tab[/b] key."
+msgstr ""
+"Instruktionerne i funktionen [b]skal[/b] alle starte med et indledende "
+"tabulatortegn. Du kan indsætte dette tabulatortegn ved at trykke på "
+"[b]Tabulator[/b]-tasten."
+
+msgid ""
+"We call those leading tabs [i]indents[/i]. They're important: the "
+"computer uses them to know which instructions are part of the same code "
+"block."
+msgstr ""
+"Vi kalder disse indledende tabulatorer for [i]indryk[/i]. De er vigtige: "
+"computeren bruger dem til at vide, hvilke instruktioner der er en del af "
+"den samme kodeblok."
+
+#: course/lesson-5-your-first-function/lesson.tres:158
+msgid "Why do we use functions?"
+msgstr "Hvorfor bruger vi funktioner?"
+
+#: course/lesson-5-your-first-function/lesson.tres:161
+msgid ""
+"Functions are groups of instructions we reuse every time we call the "
+"function."
+msgstr ""
+"Funktioner er grupper af instruktioner, som vi genbruger hver gang vi "
+"kalder funktionen."
+
+msgid ""
+"Because we give functions a name, they also allow us to name a set of "
+"instructions, which is handy!"
+msgstr ""
+"Fordi vi giver funktioner et navn, giver de os også mulighed for at "
+"navngive et sæt instruktioner, hvilket er praktisk!"
+
+#: course/lesson-5-your-first-function/lesson.tres:164
+#: course/lesson-5-your-first-function/lesson.tres:165
+msgid "To reuse code multiple times. "
+msgstr "At genbruge kode flere gange. "
+
+#: course/lesson-5-your-first-function/lesson.tres:164
+#: course/lesson-5-your-first-function/lesson.tres:165
+msgid "To run multiple instructions in one go."
+msgstr "At køre flere instruktioner på én gang."
+
+#: course/lesson-5-your-first-function/lesson.tres:164
+#: course/lesson-5-your-first-function/lesson.tres:165
+msgid "To put a name on multiple lines of code."
+msgstr "For at sætte et navn, på flere linjer kode."
+
+#: course/lesson-5-your-first-function/lesson.tres:172
+msgid "Names in code have rules"
+msgstr "Navne i kode har regler"
+
+#: course/lesson-5-your-first-function/lesson.tres:174
+msgid ""
+"Function identifiers cannot contain spaces. In general, names in "
+"programming languages cannot contain spaces."
+msgstr ""
+"Funktionsidentifikatorer må ikke indeholde mellemrum. Generelt må navne i"
+" programmeringssprog ikke indeholde mellemrum."
+
+msgid ""
+"The computer uses spaces to detect the separation between different "
+"keywords and identifiers."
+msgstr ""
+"Computeren bruger mellemrum til at registrere adskillelsen mellem "
+"forskellige nøgleord og identifikatorer."
+
+msgid ""
+"Instead of spaces, in GDScript, we use underscores (\"_\"). You saw this "
+"already with functions like [code]move_forward()[/code] or "
+"[code]move_local_x()[/code]. This is the convention we follow in "
+"GDScript."
+msgstr ""
+"I stedet for mellemrum bruger vi understregninger (\"_\") i GDScript. Du "
+"har allerede set dette med funktioner som [code]move_forward()[/code] "
+"eller [code]move_local_x()[/code]. Dette er den konvention, vi følger i "
+"GDScript."
+
+msgid ""
+"There's another convention programmers use in some other programming "
+"languages."
+msgstr ""
+"Der er en anden konvention, som programmører bruger i nogle andre "
+"programmeringssprog."
+
+msgid ""
+"Instead of using underscores, they start words with capital letters "
+"except for the first one. With that convention, you'd write function "
+"names like [code]moveForward()[/code] or [code]moveLocalX()[/code]"
+msgstr ""
+"I stedet for at bruge understregninger starter de ord med store bogstaver"
+" undtagen det første. Med denne konvention ville du skrive funktionsnavne"
+" som [code]moveForward()[/code] eller [code]moveLocalX()[/code]."
+
+msgid ""
+"Identifiers also [i]have[/i] to start with a letter or an underscore; You"
+" [i]can't[/i] begin with a number, but you can use numbers after the "
+"first character."
+msgstr ""
+"Identifikatorer [i]skal[/i] også starte med et bogstav eller et "
+"understregningstegn; Du [i]kan[/i] ikke starte med et tal, men du kan "
+"bruge tal efter det første tegn."
+
+#: course/lesson-5-your-first-function/lesson.tres:192
+msgid "Which of the following names are valid function names?"
+msgstr "Hvilke af følgende navne er gyldige funktionsnavne?"
+
+#: course/lesson-5-your-first-function/lesson.tres:193
+msgid "Note that it's fine to use capital letters."
+msgstr "Bemærk at det er fint at bruge store bogstaver."
+
+#: course/lesson-5-your-first-function/lesson.tres:195
+msgid ""
+"You can't name a function [code]move forward[/code] because it contains a"
+" space. Names in code cannot contain spaces."
+msgstr ""
+"Du kan ikke navngive en funktion [code]move forward[/code], fordi den "
+"indeholder et mellemrum. Navne i kode må ikke indeholde mellemrum."
+
+msgid ""
+"They can't start with numbers either, which is why "
+"[code]45_degree_turn[/code] is also invalid."
+msgstr ""
+"De må heller ikke starte med tal, hvilket er grunden til, at "
+"[code]45_degree_turn[/code] også er ugyldig."
+
+msgid ""
+"However, having numbers elsewhere in a function name is fine. That's why "
+"[code]make3NewCharacters[/code] works."
+msgstr ""
+"Det er dog fint at have tal andre steder i et funktionsnavn. Derfor "
+"fungerer [code]make3NewCharacters[/code]."
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+msgid "move forward"
+msgstr "move forward"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+#: course/lesson-5-your-first-function/lesson.tres:201
+msgid "jump"
+msgstr "jump"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+#: course/lesson-5-your-first-function/lesson.tres:201
+msgid "make3NewCharacters"
+msgstr "make3NewCharacters"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+#: course/lesson-5-your-first-function/lesson.tres:201
+msgid "move_forward"
+msgstr "move_forward"
+
+#: course/lesson-5-your-first-function/lesson.tres:200
+msgid "45_degree_turn"
+msgstr "45_degree_turn"
+
+#: course/lesson-5-your-first-function/lesson.tres:208
+msgid "Instantly moving the turtle to a different position"
+msgstr "Flytter øjeblikkeligt skildpadden til en anden position"
+
+#: course/lesson-5-your-first-function/lesson.tres:210
+msgid ""
+"In order to draw multiple squares in different positions, we introduce a "
+"new function for our turtle to use."
+msgstr ""
+"For at kunne tegne flere firkanter i forskellige positioner introducerer "
+"vi en ny funktion, som vores skildpadde kan bruge."
+
+msgid ""
+"The [code]jump()[/code] function picks up the turtle and places it "
+"relative to where it is."
+msgstr ""
+"Funktionen [code]jump()[/code] samler skildpadden op og placerer den i "
+"forhold til, hvor den er."
+
+msgid ""
+"So calling [code]jump(-100, 50)[/code] moves the turtle by 100 pixels to "
+"the [b]left[/b] and 50 pixels [b]down[/b] without drawing any lines."
+msgstr ""
+"Så ved at kalde [code]jump(-100, 50)[/code] flyttes skildpadden 100 "
+"pixels til [b]venstre[/b] og 50 pixels [b]ned[/b] uden at tegne nogen "
+"linjer."
+
+#: course/lesson-5-your-first-function/lesson.tres:232
+msgid "A function to draw squares"
+msgstr "En funktion til at tegne firkanter"
+
+#: course/lesson-5-your-first-function/lesson.tres:233
+msgid ""
+"Code a function named [code]draw_square()[/code] to draw one square of "
+"length 200 pixels. The function should take no parameters."
+msgstr ""
+"Kod en funktion med navnet [code]draw_square()[/code] for at tegne et "
+"kvadrat med en længde på 200 pixels. Funktionen bør ikke bruge nogen "
+"parametre."
+
+msgid ""
+"Use the [code]move_forward()[/code] and [code]turn_right()[/code] "
+"functions to instruct the turtle."
+msgstr ""
+"Brug funktionerne [code]move_forward()[/code] og "
+"[code]turn_right()[/code] til at instruere skildpadden."
+
+msgid ""
+"In the following practice, you'll use the [code]draw_square()[/code] "
+"function to draw multiple squares by calling your own function."
+msgstr ""
+"I den følgende øvelse bruger du funktionen [code]draw_square()[/code] til"
+" at tegne flere kvadrater ved at kalde din egen funktion."
+
+#: course/lesson-5-your-first-function/lesson.tres:246
+msgid ""
+"Until now, you've had to write code by hand, and it's boring. It's time "
+"to code a reusable function. You'll use it to draw multiple squares."
+msgstr ""
+"Indtil nu har du været nødt til at skrive kode i hånden, og det er "
+"kedeligt. Det er tid til at kode en genbrugelig funktion. Du skal bruge "
+"den til at tegne flere firkanter."
+
+#: course/lesson-5-your-first-function/lesson.tres:251
+msgid "Drawing multiple squares"
+msgstr "Tegning af flere firkanter"
+
+#: course/lesson-5-your-first-function/lesson.tres:252
+msgid ""
+"You have a function to draw one square: [code]draw_square()[/code]. Use "
+"it to draw three squares."
+msgstr ""
+"Du har en funktion til at tegne et kvadrat: [code]draw_square()[/code]. "
+"Brug den til at tegne tre kvadrater."
+
+msgid ""
+"We already created [code]draw_square()[/code] for you. Create a function "
+"named [code]draw_three_squares[/code] that calls "
+"[code]draw_square()[/code] three times."
+msgstr ""
+"Vi har allerede lavet [code]draw_square()[/code] til dig. Opret en "
+"funktion med navnet [code]draw_three_squares[/code], der kalder "
+"[code]draw_square()[/code] tre gange."
+
+msgid ""
+"If you just call the function, all three squares will overlap. To stack "
+"them diagonally, call [code]jump(300, 300)[/code] between two calls to "
+"[code]draw_square()[/code]."
+msgstr ""
+"Hvis du bare kalder funktionen, vil alle tre kvadrater overlappe "
+"hinanden. For at stable dem diagonalt skal du kalde [code]jump(300, "
+"300)[/code] mellem to kald til [code]draw_square()[/code]."
+
+msgid ""
+"Calling [code]jump(300, 300)[/code] makes the turtle jump by 300 pixels "
+"to the right and 300 pixels down without drawing any lines."
+msgstr ""
+"Ved at kalde [code]jump(300, 300)[/code] hopper skildpadden 300 pixels "
+"til højre og 300 pixels ned uden at tegne nogen linjer."
+
+#: course/lesson-5-your-first-function/lesson.tres:275
+msgid ""
+"Now you created a function to draw squares, you can reuse it by calling "
+"it multiple times."
+msgstr ""
+"Nu har du oprettet en funktion til at tegne firkanter, som du kan "
+"genbruge ved at kalde den flere gange."
+
+#: course/lesson-5-your-first-function/lesson.tres:279
+msgid "Coding Your First Function"
+msgstr "Kodning af Din Første Funktion"
+
