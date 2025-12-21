@@ -11,11 +11,9 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-zKUdOCQi.tres"
 title = ""
 type = 0
-text = "In the last lesson, we looked at [code]while[/code] loops. We found they were useful if we don't know how many times we should repeat code.
+text = "In the last lesson, we looked at [code]while[/code] loops. We found they were useful if we don't know how many times we should repeat code. But [code]while[/code] loops can result in infinite loops if we're not careful.
 
-However, they could result in infinite loops if we're not careful.
-
-The loop below never ends because we never increment [code]number[/code]."
+For example, the loop below never ends because we never increment [code]number[/code]."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -35,15 +33,11 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-JMQ2XNwQ.tres"
 title = ""
 type = 0
-text = "There's a safer and often easier kind of loop: the [code]for[/code] loop.
+text = "There's a safer and easier kind of loop: the [code]for[/code] loop. We'll look at it in this lesson.
 
-We'll look at it in this lesson.
+Unlike [code]while[/code] loops, [code]for[/code] loops don't run forever, so you're much less likely to get infinite loop bugs in your game. [b]We recommend using for loops instead of while loops because of this[/b].
 
-Unlike [code]while[/code] loops, [code]for[/code] loops don't run infinitely, so it's much less likely that you'll get bugs in your game. [b]We recommend favoring for loops over while loops because of this[/b].
-
-Let's change the code above to use a [code]for[/code] loop instead.
-
-The loop below will change the [code]cell[/code] three times."
+In this example, I changed the code above to use a [code]for[/code] loop instead. The loop below will change the [code]cell[/code] three times."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -218,9 +212,9 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-Gx0c7DDi.tres"
 title = ""
 type = 0
-text = "Rather than constantly checking if the robot reached the end of the board, with the [code]for[/code] loop, we take the board's width beforehand, then move the robot a set amount of times.
+text = "With the [code]for[/code] loop, we check the board's width first. Then we move the robot that many times. This is simpler than checking if the robot reached the end of the board over and over.
 
-The function still works the same. You can execute it below."
+The function still works the same way. You can run it below."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
