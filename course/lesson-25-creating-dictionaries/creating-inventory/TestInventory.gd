@@ -20,7 +20,7 @@ func test_inventory_has_correct_keys():
 		return (
 			tr(
 				"The amount of items is not as expected. The inventory should have %s items but your inventory has %s."
-			) % [desired_inventory.size(), source.size()] + " " + 
+			) % [desired_inventory.size(), source.size()] + " " +
 			tr("Are you missing any items?")
 		)
 
@@ -32,8 +32,6 @@ func test_inventory_has_correct_keys():
 		"The inventory doesn't contain all the required items. Make sure you have '%s' as keys in your inventory dictionary."
 	) % PoolStringArray(desired_inventory.keys()).join("', '")
 
-	return ""
-
 
 func test_inventory_has_correct_values():
 	var source: Dictionary = inventory.get("inventory")
@@ -44,7 +42,7 @@ func test_inventory_has_correct_values():
 	var inventory_values_do_match := true
 	if inventory_keys_do_match:
 		for key in source.keys():
-			if not desired_inventory[key] == source[key]:
+			if not (desired_inventory[key] == source[key]):
 				inventory_values_do_match = false
 				break
 	else:
