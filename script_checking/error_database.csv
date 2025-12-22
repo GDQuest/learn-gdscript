@@ -57,15 +57,15 @@ Many constants are built into Godot and GDScript, and you cannot change them eit
 
 1. If the value should never change, or it comes from Godot, remove the line that tries to change it.
 2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
-SPACES_BEFORE_TABS,"You get this error when you have a space character before a tab character at the start of a line.
+SPACES_BEFORE_TABS,"You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line.
 
-In GDScript, you must use tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character.
+In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character.
 
-If you accidentally type a space before a tab, the computer gets confused about your code's indentation.","To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line.
+If you accidentally type a space before a tab, or a tab before a space, the computer gets confused about your code's indentation.","To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters.
 
-Then, make sure the line starts with only tab characters for indentation.
+Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference.
 
-Most code editors will automatically use tabs when you press the Tab key. If your editor is inserting spaces instead, you may need to check your editor settings."
+Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
 CYCLIC_REFERENCE,"A cyclic reference is when a class references itself, directly or indirectly.
 
 It has two possible causes:
