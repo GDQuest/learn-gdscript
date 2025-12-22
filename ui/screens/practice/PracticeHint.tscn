@@ -4,12 +4,13 @@
 [ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=2]
 
 [node name="PracticeHint" instance=ExtResource( 2 )]
+size_flags_horizontal = 3
 script = ExtResource( 1 )
 title = "Show Hint"
 title_font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+bbcode_text = ""
 
 [node name="ToggleBar" parent="." index="1"]
-modulate = Color( 1, 1, 1, 0.65 )
 margin_right = 156.0
 
 [node name="ToggleCapturer" parent="ToggleBar" index="0"]
