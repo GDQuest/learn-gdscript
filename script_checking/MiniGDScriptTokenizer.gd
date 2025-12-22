@@ -122,13 +122,7 @@ func _process_while_loop(token: Dictionary):
 	_current_scope = body
 	_line_index += 1
 
-	var while_indent := 0
-	var line := _code_lines[_line_index - 1]
-	for i in range(line.length()):
-		if line[i] == ' ' or line[i] == '\t':
-			while_indent += 1
-		else:
-			break
+	var while_indent := _get_indentation_level(_code_lines[_line_index - 1])
 
 	# Continue parsing the body until we reach a statement with equal or less indentation
 	while _line_index < _code_lines.size():
@@ -138,12 +132,7 @@ func _process_while_loop(token: Dictionary):
 			_line_index += 1
 			continue
 
-		var current_indent := 0
-		for i in range(current_line.length()):
-			if current_line[i] == ' ' or current_line[i] == '\t':
-				current_indent += 1
-			else:
-				break
+		var current_indent := _get_indentation_level(current_line)
 
 		# If we've dedented, the while body is done. Otherwise, tokenize this
 		# line as part of the while body
@@ -241,3 +230,18 @@ func _has_break_statement(body: Array) -> bool:
 			if _has_break_statement(token.body):
 				return true
 	return false
+
+
+# Gets the indentation level of a line, counting tabs as equivalent to 4 spaces
+# This helps normalize mixed indentation for comparison purposes
+func _get_indentation_level(line: String) -> int:
+	var indent := 0
+	for i in range(line.length()):
+		var character := line[i]
+		if character == '\t':
+			indent += 4
+		elif character == ' ':
+			indent += 1
+		else:
+			break
+	return indent / 4
