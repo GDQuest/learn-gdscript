@@ -25,6 +25,7 @@ enum ErrorCode {
 	CYCLIC_REFERENCE = 10000,
 	INVALID_INDENTATION,
 	UNEXPECTED_CHARACTER,
+	UNKNOWN_CHARACTER,
 	UNEXPECTED_CHARACTER_IN_KEYWORD,
 	UNEXPECTED_CHARACTER_IN_EXPORT_HINT,
 	INVALID_OPERATOR_USAGE,
@@ -337,6 +338,15 @@ const MESSAGE_DATABASE := [
 			"Error parsing expression, misplaced: %TOKEN_NAME%",
 		],
 		"code": ErrorCode.UNEXPECTED_CHARACTER,
+	},
+	{
+		"patterns": [
+			["Unknown character"]
+		],
+		"raw": [
+			"Unknown character",
+		],
+		"code": ErrorCode.UNKNOWN_CHARACTER,
 	},
 	{
 		"patterns": [

@@ -92,6 +92,15 @@ Note that this error can appear [b]after[/b] the line causing it due to how the 
 If the error says ""expected,"" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else.
 
 If it says ""unterminated,"" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
+UNKNOWN_CHARACTER,"You get this error when you use a special character that GDScript doesn't recognize.
+
+This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings).
+
+[b]Note:[/b] Godot 4 supports special and non-Latin characters in code (Unicode characters), but this app is built with Godot 3, which does not.","To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements.
+
+You can use accented characters inside text strings (between quotes), but not in the code itself.
+
+You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
 UNEXPECTED_CHARACTER_IN_KEYWORD,"This error tells you that you are missing a parenthesis (or sometimes a comma or a path).
 
 Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code].","To address the error, you want to add the missing opening parenthesis, the closing parenthesis, or the comma."
