@@ -11,11 +11,11 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-6-multiple-function-parameters/content-jB7tKRHJ.tres"
 title = ""
 type = 0
-text = "In the previous part, you created a function to draw a square of a fixed size.
+text = "In the previous lesson, you created a function to draw a square of a fixed size.
 
 This function is a bit limiting. Instead, it would be much better if we had a function to draw a square of [i]any[/i] size. Or better: any kind of rectangle (a square is a specific kind of rectangle).
 
-In previous lessons, you used the [code]rotate()[/code] function and gave it an [i]argument[/i]."
+In previous lessons, you used the [code]rotate()[/code] function and gave it an [b]argument[/b]."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -35,18 +35,22 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-6-multiple-function-parameters/content-Y8VUDpPw.tres"
 title = ""
 type = 0
-text = "Just like [code]rotate()[/code], we can also give our function [i]parameters[/i]. Parameters are labels you give to values passed to the function."
+text = "Just like [code]rotate()[/code], we can also give our functions [b]parameters[/b].
+
+Parameters act as [i]placeholders[/i] in the function's code. They work like blank spaces that get filled in each time someone calls your function.
+
+When you write a function with parameters, you create a flexible template that can work with different values each time you use it. Let's see how the rotate() function is defined and uses a parameter:"
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
 
-[sub_resource type="Resource" id=6]
+[sub_resource type="Resource" id=31]
 script = ExtResource( 5 )
-content_id = "res://course/lesson-6-multiple-function-parameters/content-QDwfyqdY.tres"
-title = "Can I rotate in both directions?"
-type = 1
-text = "The [code]radians[/code] can be a positive or negative number, which allows you to rotate both clockwise and counter-clockwise."
-visual_element_path = ""
+content_id = "res://course/lesson-6-multiple-function-parameters/content-0c7DDizK.tres"
+title = ""
+type = 0
+text = ""
+visual_element_path = "visuals/ExampleRotateFunction.tscn"
 reverse_blocks = false
 has_separator = false
 
@@ -55,15 +59,15 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-6-multiple-function-parameters/content-OexRjTRh.tres"
 title = ""
 type = 0
-text = "For now, please focus on the first line: [code]func rotate(radians)[/code].
+text = "For now, focus on the first line, the function [i]definition[/i]: [code]func rotate(radians)[/code].
 
-When you call [code]rotate(0.5)[/code], the computer binds the value [code]0.5[/code] to the label [code]radians[/code].
+The word [code]radians[/code] is the function's parameter. It's the placeholder that gets \"replaced\" with the actual value when you call the function.
 
-Wherever the computer sees the identifier [code]radians[/code] inside the function, it replaces it with the [code]0.5[/code] value.
+When you [i]call[/i] this function with [code]rotate(0.5)[/code], the computer replaces the name \"radians\" in the function with [code]0.5[/code].
 
-The parameter name is always a label you use to refer to a [i]value[/i]. The value in question can be a number, text, or anything else.
+Each time you call the function, the replacement happens again: If you call [code]rotate(1.2)[/code], [code]radians[/code] becomes [code]1.2[/code].
 
-For now, we'll stick to numbers as we have yet to see other value types."
+The parameter can be filled with a number, text, or anything else. In this lesson, we'll only use numbers as we have yet to learn about other value types."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -74,9 +78,9 @@ quiz_id = "res://course/lesson-6-multiple-function-parameters/quiz-DXXb7kug.tres
 question = "What is a function parameter?"
 content_bbcode = ""
 hint = ""
-explanation_bbcode = "A parameter is a label that represents a value.
+explanation_bbcode = "A parameter is a placeholder that gets replaced with the actual value you pass when calling the function.
 
-The value in question can change: it depends on what you put in parentheses when calling a function."
+The value can be different each time you call the function: it depends on what you put in parentheses."
 answer_options = [ "A label you give to a value the function receives.", "A number you use to make calculations.", "The name of a function." ]
 valid_answers = [ "A label you give to a value the function receives." ]
 is_multiple_choice = false
@@ -87,9 +91,9 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-6-multiple-function-parameters/content-ZN4rS5AJ.tres"
 title = "How to create functions with parameters"
 type = 0
-text = "You can give your function parameters when writing its [i]definition[/i] (the line starting with the [code]func[/code] keyword).
+text = "When you write a function [i]definition[/i] (the line starting with the [code]func[/code] keyword), you can add parameters.
 
-To do so, you add a name inside of the parentheses."
+To add a parameter, write a placeholder name inside the parentheses. When someone calls your function with a value, every copy of the parameter in the function gets replaced with that value."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -109,9 +113,9 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-6-multiple-function-parameters/content-yhcIb5Bn.tres"
 title = ""
 type = 0
-text = "You can give parameters any name. How you name functions and parameters is up to you. 
+text = "You can give parameters any name! How you name functions and parameters is up to you.
 
-Just remember that names cannot contain spaces. To write parameter names with multiple words, you need to use underscores.
+Just remember that names cannot contain spaces. To write parameter names with multiple words, in GDScript, we use underscores by convention.
 
 The following function definition is exactly equivalent to the previous one."
 visual_element_path = ""
@@ -133,9 +137,9 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-6-multiple-function-parameters/content-bDGt6fUq.tres"
 title = ""
 type = 0
-text = "Parameters make your code easier to reuse.
+text = "Parameters make your code easier to reuse. You write the function once as a template, then you can call it many times with different values.
 
-Here's an example with a function to draw any square. Use the slider to change the value passed to the function and draw squares of different sizes."
+Here's an example with a function to draw any square. The parameter [code]length[/code] is a placeholder. Use the slider to change the value. When you click the button, the app calls [code]draw_square()[/code] and the placeholder gets replaced with your value, drawing squares of different sizes."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -169,9 +173,11 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-6-multiple-function-parameters/content-MqE82V6j.tres"
 title = "Functions can have multiple parameters"
 type = 0
-text = "You can use multiple parameters in a function. In fact, you can use as many as you [i]need[/i].
+text = "A function can have multiple parameters. You can use as many placeholders as you [i]need[/i].
 
-To separate the function parameters, you need to write a comma between them."
+To add multiple parameters, write a comma between each placeholder name.
+
+For example, [code]func move(x, y)[/code] has two placeholders: [code]x[/code] and [code]y[/code]. Each one gets replaced with its own value when you call the function."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -205,7 +211,9 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-6-multiple-function-parameters/content-DizKUdOC.tres"
 title = ""
 type = 0
-text = "The following example defines a function that uses two parameters to move an entity on both the X and Y axes."
+text = "The following example shows a function with two parameters. The function moves an entity on both the X and Y axes.
+
+When you call [code]move(50, 100)[/code], every [code]x[/code] in the function gets replaced with [code]50[/code], and every [code]y[/code] gets replaced with [code]100[/code]."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -279,7 +287,9 @@ script = ExtResource( 5 )
 content_id = "res://course/lesson-6-multiple-function-parameters/content-QEn91c9l.tres"
 title = ""
 type = 0
-text = "Now it's your turn to create a function with multiple parameters: a function to draw rectangles of any size."
+text = "Now it's your turn to create a function with multiple parameters.
+
+In the following practices, you'll write functions that I will call with different values. Your functions need to work correctly no matter what values the app passes to them."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -288,13 +298,18 @@ has_separator = false
 script = ExtResource( 3 )
 practice_id = "res://course/lesson-6-multiple-function-parameters/practice-qAYVjotx.tres"
 title = "Drawing corners of different sizes"
-goal = "Before we create a rectangle of any size, let's first see how we can use parameters to draw simpler shapes.
+goal = "Before we create a rectangle of any size, let's first practice with a simpler shape.
 
-Here we have an incomplete function that will draw corners with lines of any length, but it's missing its [code]length[/code] parameter.
+I will call your function twice with different values:
 
-The function will move the turtle forward an amount defined by the parameter [code]length[/code], turn [code]90[/code] degrees, then move forward [code]length[/code] pixels.
+[code]draw_corner(240)[/code]
+[code]draw_corner(120)[/code]
 
-Complete the [code]draw_corner()[/code] function so it uses the [code]length[/code] parameter to draw corners."
+Your task is to add a parameter named [code]length[/code] to your function definition. This creates a placeholder. When the app calls your function, the placeholder will get replaced with the value in parentheses.
+
+Your function should move the turtle forward by an amount defined by the [code]length[/code] parameter, turn right [code]90[/code] degrees, then move forward by [code]length[/code] again.
+
+Each time the app calls your function, [code]length[/code] will be replaced with a different value: first [code]240[/code], then [code]120[/code]."
 starting_code = "func draw_corner():
 	move_forward()
 	turn_right(90)
@@ -313,9 +328,16 @@ description = "Using function parameters, code a function you can reuse to draw 
 script = ExtResource( 3 )
 practice_id = "res://course/lesson-6-multiple-function-parameters/practice-DwfyqdYO.tres"
 title = "Using multiple parameters"
-goal = "In this practice, we'll improve our [code]draw_corner()[/code] function so the angle can also vary.
+goal = "Now let's make the [code]draw_corner()[/code] function even more flexible. We'll add a second placeholder so the angle can also vary.
 
-Add the [code]angle[/code] parameter after the [code]length[/code] parameter in the [code]draw_corner()[/code] function and use it to draw corners of varying angles."
+I will call your function with different length and angle values:
+
+[code]draw_corner(240, 45)[/code]
+[code]draw_corner(120, 90)[/code]
+
+Your task is to add the [code]angle[/code] parameter after [code]length[/code] in the function definition. Remember to separate the two placeholders with a comma.
+
+Remember: When the app calls [code]draw_corner(240, 45)[/code], the parameter [code]length[/code] will get replaced with [code]240[/code] and [code]angle[/code] will get replaced with [code]45[/code]."
 starting_code = "func draw_corner(length):
 	move_forward(length)
 	turn_right()
@@ -334,15 +356,18 @@ description = "With two parameters, code a function to draw corners with any ang
 script = ExtResource( 3 )
 practice_id = "res://course/lesson-6-multiple-function-parameters/practice-v5tT6n1T.tres"
 title = "Drawing squares of any size"
-goal = "We want a function to draw squares of any size.
+goal = "Time to write a complete function from scratch! You'll make a function that draws squares of any size.
 
-We could use these squares as outlines when selecting units in a tactical game, as a frame for items in an inventory, and more.
+I will call your function with different sizes:
 
-Create a function named [code]draw_square()[/code] that takes one parameter: the [code]length[/code] of the square's sides.
+[code]draw_square(200)[/code]
+[code]draw_square(100)[/code]
 
-[b]The turtle should face towards the right when starting or completing a square.[/b]
+Write a function named [code]draw_square()[/code] with one parameter called [code]length[/code]. Remember, this parameter is a placeholder that gets filled with the actual value when the function is called.
 
-Be sure to call [b]turn_right(90)[/b]  enough times in your function to do so."
+Your function needs to move forward by [code]length[/code], turn right 90 degrees, and do this four times to complete all four sides of the square.
+
+[b]Important:[/b] When the turtle finishes drawing, it should face right. So you need to turn right a total of four times."
 starting_code = ""
 cursor_line = 0
 cursor_column = 0
@@ -358,13 +383,20 @@ description = "In the previous lesson, your function would draw squares of a fix
 script = ExtResource( 3 )
 practice_id = "res://course/lesson-6-multiple-function-parameters/practice-lkGx0c7D.tres"
 title = "Drawing rectangles of any size"
-goal = "Let's make our square drawing function more flexible to include rectangles of varying sizes.
+goal = "Let's create a function to draw rectangles with any length and height.
 
-Your job is to code a function named [code]draw_rectangle()[/code] that takes two parameters: the [code]length[/code] and the [code]height[/code] of the rectangle.
+I will call your function twice with different sizes:
 
-[b]The turtle should face towards the right when starting or completing a rectangle.[/b]
+[code]draw_rectangle(260, 180)[/code]
+[code]draw_rectangle(160, 210)[/code]
 
-Note that we could still draw a square with [code]draw_rectangle()[/code] by having the [code]length[/code] and [code]height[/code] equal the same value."
+Your function needs two parameters: [code]length[/code] and [code]height[/code]. When the app calls your function, the first number replaces [code]length[/code], and the second number replaces [code]height[/code].
+
+Use [code]length[/code] when you move horizontally and [code]height[/code] when you move vertically.
+
+This is the pattern you need to follow: move forward by [code]length[/code], turn right, move forward by [code]height[/code], turn right, then repeat this sequence once more.
+
+[b]Important:[/b] When the turtle finishes drawing, it should face right. Make sure you turn right four times in total."
 starting_code = "func draw_rectangle():
 	move_forward()
 	turn_right(90)
@@ -387,5 +419,5 @@ description = "With one parameter, you can make squares of any size. With two, y
 [resource]
 script = ExtResource( 1 )
 title = "Your First Function Parameter"
-content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ]
+content_blocks = [ SubResource( 1 ), SubResource( 2 ), SubResource( 5 ), SubResource( 31 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ]
 practices = [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ]
