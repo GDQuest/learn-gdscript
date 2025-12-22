@@ -269,6 +269,20 @@ func _validate_and_run_student_code() -> void:
 	var script_file_name := _script_slice.get_script_file_name()
 	var script_file_path := _script_slice.get_script_file_path().lstrip("res://")
 
+	# Mixed indentation is an error we cannot catch from the GDScript parser in
+	# some situations, so we manually look for it to help students understand the error.
+	var mixed_indent_error_line := _check_for_mixed_indentation(script_text)
+	if mixed_indent_error_line != -1:
+		var error := ScriptError.new()
+		error.message = "Parse error: Spaces used before tabs on a line"
+		error.severity = 1
+		error.code = GDScriptCodes.ErrorCode.SPACES_BEFORE_TABS
+		error.error_range.start.line = mixed_indent_error_line
+		error.error_range.start.character = 0
+		MessageBus.print_script_error(error, script_file_name)
+		_code_editor.unlock_editor()
+		return
+
 	# Do local sanity checks for the script.
 	var tokenizer := MiniGDScriptTokenizer.new(script_text)
 
@@ -738,3 +752,29 @@ func _on_init_set_javascript() -> void:
 	if OS.has_feature("JavaScript"):
 		var GDQUEST = JavaScript.get_interface("GDQUEST")
 		GDQUEST.events.onError.connect(_on_js_error_feedback_ref)
+
+
+# Checks if the script text has mixed tabs and spaces in indentation.
+# Returns the line number of the error or -1 if there's no error
+func _check_for_mixed_indentation(text: String) -> int:
+	var lines := text.split("\n")
+	for line_number in range(lines.size()):
+		var line := lines[line_number]
+		if line.empty() or line.strip_edges() == "":
+			continue
+
+		var has_space := false
+		var has_tab := false
+
+		for i in range(line.length()):
+			var character := line[i]
+			if character == ' ':
+				has_space = true
+			elif character == '\t':
+				has_tab = true
+			else:
+				break
+
+		if has_space and has_tab:
+			return line_number
+	return -1
