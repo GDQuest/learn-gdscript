@@ -1,0 +1,71 @@
+[lesson title="Functions that return a value"]
+Until now, you learned that functions are a way to group instructions, give them a name, and reuse them.
+
+Functions can also make calculations and [i]return[/i] new values.
+
+[title]Built-in functions that return a value[/title]
+
+Example: the [code]round()[/code] function:
+
+[codeblock]
+func run():
+	var number = round(3.4)
+	print(number)
+[/codeblock]
+
+Runnable output (TODO: unsupported yet):
+
+[codeblock runnable="true"]
+func run():
+	var health = 73.4
+	var display_health = round(health)
+	print(display_health)
+[/codeblock]
+
+[title]A cooler example: lerp()[/title]
+
+The [code]lerp()[/code] function (short for [i]linear interpolate[/i]), blends between two values.
+
+[visual path="visuals/ExampleTurtleLerp.tscn"]
+
+[note title="About interpolation"]
+Note folded content.
+[/note]
+
+Quiz test:
+
+[quiz_choice question="What does the return keyword do?" multiple="false" shuffle="true"]
+    [option]It stops the program entirely[/option]
+    [option]It prints a value to the console[/option]
+    [option correct]It sends a value back to the code that called the function[/option]
+    [option]It creates a new variable[/option]
+    [hint]Think about what happens when a function finishes its work.[/hint]
+    [explanation]The return keyword sends a value back to wherever the function was called from. This allows you to use the result of the function's calculations.[/explanation]
+[/quiz_choice]
+
+[quiz_input question="What is round(4.6)?" answer="5"]
+    [hint]The round function rounds to the nearest whole number.[/hint]
+    [explanation]4.6 is closer to 5 than to 4, so round(4.6) returns 5.[/explanation]
+[/quiz_input]
+
+[practice id="convert-grid-coordinates" title="Converting coordinates from the grid to the screen"]
+    [description]We need a function to convert grid coordinates to pixel positions. Complete the function to make the turtle move to the correct cells![/description]
+    [goal]
+    Complete the function that converts a cell coordinate to a pixel position on the screen.
+
+    Goal description continues here.
+    [/goal]
+    [starting_code]
+    var cell_size = Vector2(80, 80)
+
+    func convert_to_world_coordinates(cell):
+
+    [/starting_code]
+    [cursor line="4" column="1"]
+    [validator path="convert-grid-coordinates/TestConvertGridCoordinates.gd"]
+    [script_slice path="convert-grid-coordinates/ConvertGridCoordinates.gd" name="run"]
+    [hint]To convert a cell coordinate to pixels, multiply the [code]cell[/code] by [code]cell_size[/code].[/hint]
+    [hint]Use the [code]return[/code] keyword to send the result back. For example: [code]return cell * cell_size[/code][/hint]
+    [docs]round,lerp[/docs]
+[/practice]
+[/lesson]
