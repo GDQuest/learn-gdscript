@@ -6,25 +6,6 @@
 [node name="UIQuizInputField" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="Outline" parent="." index="0"]
-margin_bottom = 232.0
-
-[node name="MarginContainer" parent="." index="1"]
-margin_bottom = 232.0
-
-[node name="ChoiceView" parent="MarginContainer" index="0"]
-margin_bottom = 212.0
-
-[node name="Answers" parent="MarginContainer/ChoiceView" index="2"]
-margin_bottom = 129.0
-
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/ChoiceView/Answers" index="0"]
+[node name="LineEdit" type="LineEdit" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/Answers" index="0"]
 margin_right = 360.0
 margin_bottom = 42.0
-
-[node name="HBoxContainer" parent="MarginContainer/ChoiceView" index="3"]
-margin_top = 145.0
-margin_bottom = 192.0
-
-[node name="ResultView" parent="MarginContainer" index="1"]
-margin_bottom = 212.0

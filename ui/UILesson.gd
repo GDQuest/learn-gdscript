@@ -10,6 +10,7 @@ const ContentBlockScene := preload("screens/lesson/UIContentBlock.tscn")
 const QuizInputFieldScene := preload("screens/lesson/quizzes/UIQuizInputField.tscn")
 const QuizChoiceScene := preload("screens/lesson/quizzes/UIQuizChoice.tscn")
 const PracticeButtonScene := preload("screens/lesson/UIPracticeButton.tscn")
+const GDScriptCodeExampleScene := preload("res://course/common/GDScriptCodeExample.tscn")
 
 const AUTOSCROLL_PADDING := 20
 const AUTOSCROLL_DURATION := 0.24
@@ -120,7 +121,17 @@ func setup(lesson: Lesson, course: Course) -> void:
 				break
 
 	for block in lesson.content_blocks:
-		if block is ContentBlock:
+		if block is CodeBlock:
+			var instance: GDScriptCodeExample = GDScriptCodeExampleScene.instance()
+			instance.name = block.content_id.get_file().get_basename()
+			instance.text = block.code
+			_content_blocks.add_child(instance)
+			instance.hide()
+
+			if restore_id == block.content_id:
+				restore_node = instance
+
+		elif block is ContentBlock:
 			var instance: UIContentBlock = ContentBlockScene.instance()
 			instance.name = block.content_id.get_file().get_basename()
 			_content_blocks.add_child(instance)
