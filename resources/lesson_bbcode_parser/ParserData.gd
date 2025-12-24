@@ -27,6 +27,7 @@ enum Tag {
 	VALIDATOR,
 	SCRIPT_SLICE,
 	DOCS,
+	SEPARATOR,
 }
 
 
@@ -67,6 +68,8 @@ var TAG_DEFINITIONS := {
 		TagDefinition.new("script_slice", false, true, [Tag.PRACTICE], ["path"], ["name"], []),
 	Tag.DOCS:
 		TagDefinition.new("docs", true, false, [Tag.PRACTICE], [], [], []),
+	Tag.SEPARATOR:
+		TagDefinition.new("separator", false, true, [Tag.LESSON], [], [], []),
 }
 
 const CONTENT_PRODUCING_TAGS := [
@@ -77,6 +80,7 @@ const CONTENT_PRODUCING_TAGS := [
 	Tag.QUIZ_CHOICE,
 	Tag.QUIZ_INPUT,
 	Tag.PRACTICE,
+	Tag.SEPARATOR,
 ]
 
 var _tag_name_to_id := {}
