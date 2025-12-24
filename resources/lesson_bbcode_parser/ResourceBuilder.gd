@@ -61,6 +61,11 @@ func build_lesson(root: BBCodeParser.ParseNode, base_path: String = "") -> Lesso
 		elif child_node.tag == _parser_data.Tag.VISUAL:
 			lesson.content_blocks.append(_create_visual_block(child_node))
 
+		elif child_node.tag == _parser_data.Tag.SEPARATOR:
+			var separator_block := ContentBlock.new()
+			separator_block.has_separator = true
+			lesson.content_blocks.append(separator_block)
+
 		elif child_node.tag == _parser_data.Tag.NOTE:
 			lesson.content_blocks.append(_create_note_block(child_node))
 
