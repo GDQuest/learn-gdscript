@@ -1,4 +1,4 @@
-tool
+@tool
 class_name UIPractice
 extends UINavigatablePage
 
@@ -20,13 +20,19 @@ const PracticeLeaveUnfinishedPopup := preload("components/popups/PracticeLeaveUn
 
 var REGEX_DIVSION_BY_ZERO := RegEx.new()
 
-export var test_practice: Resource
+@export var test_practice: Resource
 
 var _practice: Practice
 var _practice_completed := false
 var _practice_solution_used := false
 
-var _script_slice: ScriptSlice setget _set_script_slice
+var _script_slice: ScriptSlice
+
+var script_slice: ScriptSlice:
+	set(value):
+		_set_script_slice(value)
+	get:
+		return _script_slice
 var _tester: PracticeTester
 # If `true`, the text changed but was not saved.
 var _code_editor_is_dirty := false
@@ -48,30 +54,30 @@ var _current_scene_reset_values := {
 	transform = null,
 }
 
-onready var _layout_container := $Margin/Layout as Control
+@onready var _layout_container := $Margin/Layout as Control
 
-onready var _output_container := find_node("Output") as Control
-onready var _game_container := find_node("GameContainer") as Container
-onready var _game_view := _output_container.find_node("GameView") as GameView
-onready var _output_console := _output_container.find_node("Console") as OutputConsole
+@onready var _output_container := find_child("Output", true, false) as Control
+@onready var _game_container := find_child("GameContainer", true, false) as Container
+@onready var _game_view := (_output_container as Node).find_child("GameView", true, false) as GameView
+@onready var _output_console := (_output_container as Node).find_child("Console", true, false) as OutputConsole
 
-onready var _output_anchors := $Margin/Layout/OutputAnchors as Control
-onready var _solution_panel := find_node("SolutionContainer") as Control
-onready var _solution_editor := _solution_panel.find_node("SliceEditor") as SliceEditor
-onready var _use_solution_button := _solution_panel.find_node("UseSolutionButton") as Button
+@onready var _output_anchors := $Margin/Layout/OutputAnchors as Control
+@onready var _solution_panel := find_child("SolutionContainer", true, false) as Control
+@onready var _solution_editor := (_solution_panel as Node).find_child("SliceEditor", true, false) as SliceEditor
+@onready var _use_solution_button := (_solution_panel as Node).find_child("UseSolutionButton", true, false) as Button
 
-onready var _info_panel_anchors := $Margin/Layout/InfoPanelAnchors as Control
-onready var _info_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
-onready var _documentation_panel := find_node("DocumentationPanel") as RichTextLabel
-onready var _hints_container := _info_panel.hints_container as Revealer
+@onready var _info_panel_anchors := $Margin/Layout/InfoPanelAnchors as Control
+@onready var _info_panel := find_child("PracticeInfoPanel", true, false) as PracticeInfoPanel
+@onready var _documentation_panel := find_child("DocumentationPanel", true, false) as RichTextLabel
+@onready var _hints_container := _info_panel.hints_container as Revealer
 
-onready var _practice_list := find_node("PracticeListPopup") as PracticeListPopup
-onready var _practice_done_popup := find_node("PracticeDonePopup") as PracticeDonePopup
-onready var _practice_leave_unfinished_popup := find_node("PracticeLeaveUnfinishedPopup") as PracticeLeaveUnfinishedPopup
+@onready var _practice_list := find_child("PracticeListPopup", true, false) as PracticeListPopup
+@onready var _practice_done_popup := find_child("PracticeDonePopup", true, false) as PracticeDonePopup
+@onready var _practice_leave_unfinished_popup := find_child("PracticeLeaveUnfinishedPopup", true, false) as PracticeLeaveUnfinishedPopup
 
-onready var _code_editor := find_node("CodeEditor") as CodeEditor
+@onready var _code_editor := find_child("CodeEditor", true, false) as CodeEditor
 
-onready var _tween := $Tween as Tween
+var _tween: Tween
 
 
 func _init():
@@ -82,36 +88,37 @@ func _init():
 	_run_autotimer.wait_time = RUN_AUTOTIMER_DURATION
 	add_child(_run_autotimer)
 
-	_run_autotimer.connect("timeout", self, "_on_autotimer_timeout")
+	_run_autotimer.timeout.connect(_on_autotimer_timeout)
 
 	_on_init_set_javascript()
 
 
 func _ready() -> void:
 	randomize()
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		return
 
-	_code_editor.connect("action_taken", self, "_on_code_editor_action_taken")
-	_code_editor.connect("text_changed", self, "_on_code_editor_text_changed")
-	_code_editor.connect("console_toggled", self, "_on_console_toggled")
-	_output_console.connect("reference_clicked", self, "_on_code_reference_clicked")
-	_use_solution_button.connect("pressed", self, "_on_use_solution_pressed")
 
-	_info_panel.connect("list_requested", self, "_on_list_requested")
+	_code_editor.action_taken.connect(_on_code_editor_action_taken)
+	_code_editor.text_changed.connect(_on_code_editor_text_changed)
+	_code_editor.console_toggled.connect(_on_console_toggled)
+	_output_console.reference_clicked.connect(_on_code_reference_clicked)
+	_use_solution_button.pressed.connect(_on_use_solution_pressed)
 
-	_practice_done_popup.connect("accepted", self, "_on_next_requested")
+	_info_panel.list_requested.connect(_on_list_requested)
 
-	_practice_leave_unfinished_popup.connect("confirmed", self, "_accept_unload")
-	_practice_leave_unfinished_popup.connect("denied", self, "_deny_unload")
+	_practice_done_popup.accepted.connect(_on_next_requested)
 
-	Events.connect("practice_run_completed", self, "_test_student_code")
+	_practice_leave_unfinished_popup.confirmed.connect(_accept_unload)
+	_practice_leave_unfinished_popup.denied.connect(_deny_unload)
+
+	Events.practice_run_completed.connect(_test_student_code)
 
 	_update_slidable_panels()
-	_layout_container.connect("resized", self, "_update_slidable_panels")
+	_layout_container.resized.connect(_update_slidable_panels)
 
 	_solution_panel.modulate.a = 0.0
-	_solution_panel.margin_left = _output_anchors.rect_size.x
+	_solution_panel.position.x = _output_anchors.size.x
 
 	if test_practice and get_parent() == get_tree().root:
 		setup(test_practice, null, null)
@@ -125,15 +132,15 @@ func _notification(what: int) -> void:
 
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
-	if mb and mb.button_index == BUTTON_LEFT and mb.pressed and get_focus_owner():
-		# Makes clicks on the empty area to remove focus from various controls, specifically
-		# the code editor.
-		get_focus_owner().release_focus()
+	if mb and mb.button_index == MOUSE_BUTTON_LEFT and mb.pressed:
+		var focus_owner := get_viewport().gui_get_focus_owner()
+		if focus_owner:
+			focus_owner.release_focus()
 
 
 func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	if not is_inside_tree():
-		yield(self, "ready")
+		await ready
 
 	_practice = practice
 	_practice_completed = false
@@ -146,11 +153,11 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	_code_editor.text = practice.starting_code
 	_code_editor.update_cursor_position(practice.cursor_line, practice.cursor_column)
 
-	_hints_container.visible = not practice.hints.empty()
+	_hints_container.visible = not practice.hints.is_empty()
 	var index := 0
 	for hint in practice.hints:
 		var practice_hint: PracticeHint = PracticeHintScene.instance()
-		practice_hint.title = tr("Hint %s") % [String(index + 1).pad_zeros(1)]
+		practice_hint.title = tr("Hint %s") % str(index + 1)
 		practice_hint.bbcode_text = hint
 		_hints_container.add_child(practice_hint)
 		index += 1
@@ -159,8 +166,8 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	var base_directory := practice.practice_id.get_base_dir()
 
 	var script_path := practice.script_slice_path
-	if script_path.is_rel_path():
-		script_path = base_directory.plus_file(script_path)
+	if script_path.is_relative_path():
+		script_path = base_directory.path_join(script_path)
 	if not script_path.begins_with("res://"):
 		script_path = "res://" + script_path
 	var slice_name := practice.slice_name if practice.slice_name else ""
@@ -175,8 +182,8 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	_solution_editor.text = _script_slice.slice_text
 
 	var validator_path := practice.validator_script_path
-	if validator_path.is_rel_path():
-		validator_path = base_directory.plus_file(validator_path)
+	if validator_path.is_relative_path():
+		validator_path = base_directory.path_join(validator_path)
 	_tester = (load(validator_path) as GDScript).new()
 	_tester.setup(_game_view.get_viewport(), _script_slice)
 
@@ -222,7 +229,7 @@ func _update_labels() -> void:
 		if not practice_hint:
 			continue
 
-		practice_hint.title = tr("Hint %s") % [String(index + 1).pad_zeros(1)]
+		practice_hint.title = tr("Hint %s") % [str(index + 1).pad_zeros(1)]
 		practice_hint.bbcode_text = _practice.hints[index]
 		index += 1
 
@@ -269,20 +276,6 @@ func _validate_and_run_student_code() -> void:
 	var script_file_name := _script_slice.get_script_file_name()
 	var script_file_path := _script_slice.get_script_file_path().lstrip("res://")
 
-	# Mixed indentation is an error we cannot catch from the GDScript parser in
-	# some situations, so we manually look for it to help students understand the error.
-	var mixed_indent_error_line := _check_for_mixed_indentation(script_text)
-	if mixed_indent_error_line != -1:
-		var error := ScriptError.new()
-		error.message = "Parse error: Spaces used before tabs on a line"
-		error.severity = 1
-		error.code = GDScriptCodes.ErrorCode.SPACES_BEFORE_TABS
-		error.error_range.start.line = mixed_indent_error_line
-		error.error_range.start.character = 0
-		MessageBus.print_script_error(error, script_file_name)
-		_code_editor.unlock_editor()
-		return
-
 	# Do local sanity checks for the script.
 	var tokenizer := MiniGDScriptTokenizer.new(script_text)
 
@@ -316,7 +309,7 @@ func _validate_and_run_student_code() -> void:
 	verifier.test()
 	var errors := verifier.errors
 
-	if not errors.empty():
+	if not errors.is_empty():
 		_code_editor.slice_editor.errors = errors
 
 		for index in errors.size():
@@ -335,13 +328,13 @@ func _validate_and_run_student_code() -> void:
 	# Run student code
 	# Generate a runnable script, check for uncaught errors.
 	_code_editor.set_locked_message(tr("Running Your Code..."))
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 
 	script_text = MessageBus.replace_print_calls_in_script(script_file_name, script_text)
 
 	# Guard against infinite while loops
 	if "while " in script_text:
-		var modified_code := PoolStringArray()
+		var modified_code := PackedStringArray()
 		var guard_counter = 0
 		for line in script_text.split("\n"):
 			if "while " in line and not line.strip_edges(true, false).begins_with("#"):
@@ -361,7 +354,7 @@ func _validate_and_run_student_code() -> void:
 				modified_code.append(tabs + "\t\t" + "break")
 			else:
 				modified_code.append(line)
-		script_text = modified_code.join("\n")
+		script_text = "\n".join(modified_code)
 	elif REGEX_DIVSION_BY_ZERO.search(script_text):
 		var error := ScriptError.new()
 		error.message = tr(
@@ -414,7 +407,7 @@ func _test_student_code() -> void:
 
 	var result := _tester.run_tests()
 	_info_panel.set_tests_status(result, script_file_name)
-	yield(_info_panel, "tests_updated")
+	await _info_panel.tests_updated
 
 	# Show the end of practice popup.
 	if not _practice_completed and result.is_success():
@@ -449,20 +442,21 @@ func _reset_practice() -> void:
 
 func _update_slidable_panels() -> void:
 	# Wait a frame to make sure the new size has been applied.
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 
 	# We use _output_anchors for reference because it never leaves the screen, so we can rely on it
 	# to always report the target size for one third of the hbox.
 
 	# Update info panel.
-	_info_panel.rect_min_size = Vector2(_output_anchors.rect_size.x, 0)
-	_info_panel.set_anchors_and_margins_preset(Control.PRESET_WIDE, Control.PRESET_MODE_MINSIZE)
+	_info_panel.custom_minimum_size = Vector2(_output_anchors.size.x, 0)
+	_info_panel.set_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE)
+
 
 	# Update solution panel.
-	_solution_panel.rect_min_size = Vector2(_output_anchors.rect_size.x, 0)
-	_solution_panel.set_anchors_and_margins_preset(Control.PRESET_WIDE, Control.PRESET_MODE_MINSIZE)
+	_solution_panel.custom_minimum_size = Vector2(_output_anchors.size.x, 0)
+	_solution_panel.set_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE)
 	if not _is_solution_panel_open:
-		_solution_panel.margin_left = _output_anchors.rect_size.x
+		_solution_panel.offset_left = _output_anchors.size.x
 
 
 func _toggle_distraction_free_mode() -> void:
@@ -474,77 +468,43 @@ func _toggle_distraction_free_mode() -> void:
 
 func _disable_distraction_free_mode() -> void:
 	_is_info_panel_open = true
-	_tween.remove_all()
 
-	_tween.interpolate_property(
-		_info_panel_anchors,
-		"size_flags_stretch_ratio",
-		_info_panel_anchors.size_flags_stretch_ratio,
-		1.0,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN_OUT
-	)
-	_tween.interpolate_property(
-		_code_editor,
-		"size_flags_stretch_ratio",
-		_code_editor.size_flags_stretch_ratio,
-		1.0,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN_OUT
-	)
-	_tween.interpolate_property(
-		_info_panel_anchors,
-		"modulate:a",
-		_info_panel_anchors.modulate.a,
-		1.0,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN
-	)
+	if _tween:
+		_tween.kill()
+	_tween = create_tween()
 
-	_tween.start()
-	_code_editor.set_distraction_free_state(not _is_info_panel_open)
+	_tween.tween_property(_info_panel_anchors, "size_flags_stretch_ratio", 1.0, SLIDE_TRANSITION_DURATION)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	_tween.parallel().tween_property(_code_editor, "size_flags_stretch_ratio", 1.0, SLIDE_TRANSITION_DURATION)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	_tween.parallel().tween_property(_info_panel_anchors, "modulate:a", 1.0, SLIDE_TRANSITION_DURATION)\
+		.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
+
+	_code_editor.set_distraction_free_state(true)
 
 
 func _enable_distraction_free_mode() -> void:
 	_update_slidable_panels()
 
 	_is_info_panel_open = false
-	_tween.remove_all()
 
-	_tween.interpolate_property(
-		_info_panel_anchors,
-		"size_flags_stretch_ratio",
-		_info_panel_anchors.size_flags_stretch_ratio,
-		0.0,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN_OUT
-	)
-	_tween.interpolate_property(
-		_code_editor,
-		"size_flags_stretch_ratio",
-		_code_editor.size_flags_stretch_ratio,
-		2.0,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN_OUT
-	)
-	_tween.interpolate_property(
-		_info_panel_anchors,
-		"modulate:a",
-		_info_panel_anchors.modulate.a,
-		0.0,
-		SLIDE_TRANSITION_DURATION - 0.25,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN,
-		0.15
-	)
+	if _tween:
+		_tween.kill()
+	_tween = create_tween()
 
-	_tween.start()
-	_code_editor.set_distraction_free_state(not _is_info_panel_open)
+	_tween.tween_property(_info_panel_anchors, "size_flags_stretch_ratio", 0.0, SLIDE_TRANSITION_DURATION)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	_tween.parallel().tween_property(_code_editor, "size_flags_stretch_ratio", 2.0, SLIDE_TRANSITION_DURATION)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	# delay 0.15 like your old call
+	_tween.parallel().tween_property(_info_panel_anchors, "modulate:a", 0.0, SLIDE_TRANSITION_DURATION - 0.25)\
+		.set_delay(0.15).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
+
+	_code_editor.set_distraction_free_state(false)
 
 
 func _toggle_solution_panel() -> void:
@@ -558,59 +518,32 @@ func _show_solution_panel() -> void:
 	_update_slidable_panels()
 
 	_is_solution_panel_open = true
-	_tween.remove_all()
 
-	_tween.interpolate_property(
-		_solution_panel,
-		"margin_left",
-		_solution_panel.margin_left,
-		0.0,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN_OUT
-	)
+	if _tween:
+		_tween.kill()
+	_tween = create_tween()
 
-	_tween.interpolate_property(
-		_solution_panel,
-		"modulate:a",
-		_solution_panel.modulate.a,
-		1.0,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN
-	)
+	_tween.tween_property(_solution_panel, "offset_left", 0.0, SLIDE_TRANSITION_DURATION)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-	_tween.start()
+	_tween.parallel().tween_property(_solution_panel, "modulate:a", 1.0, SLIDE_TRANSITION_DURATION)\
+		.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
 
 
 func _hide_solution_panel() -> void:
 	_update_slidable_panels()
 
 	_is_solution_panel_open = false
-	_tween.remove_all()
 
-	_tween.interpolate_property(
-		_solution_panel,
-		"margin_left",
-		_solution_panel.margin_left,
-		_output_anchors.rect_size.x,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN_OUT
-	)
+	if _tween:
+		_tween.kill()
+	_tween = create_tween()
 
-	_tween.interpolate_property(
-		_solution_panel,
-		"modulate:a",
-		_solution_panel.modulate.a,
-		0.0,
-		SLIDE_TRANSITION_DURATION - 0.25,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN,
-		0.15
-	)
+	_tween.tween_property(_solution_panel, "offset_left", _output_anchors.size.x, SLIDE_TRANSITION_DURATION)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-	_tween.start()
+	_tween.parallel().tween_property(_solution_panel, "modulate:a", 0.0, SLIDE_TRANSITION_DURATION - 0.25)\
+		.set_delay(0.15).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
 
 
 func _on_use_solution_pressed() -> void:
@@ -732,49 +665,25 @@ static func try_validate_and_replace_script(node: Node, script: GDScript) -> voi
 ###############################################################################
 #
 # JS INTERFACE
-# the below intends to listen to the `RECURSIVE` error event dispatched back
-# from JS and react to it
 #
 
 # JS error event listener
-var _on_js_error_feedback_ref = JavaScript.create_callback(self, "_on_js_error_feedback")
-
+var _on_js_error_feedback_ref := JavaScriptBridge.create_callback(_on_js_error_feedback)
 
 # This will be called from Javascript
-func _on_js_error_feedback(args):
-	var code = args[0]
+func _on_js_error_feedback(args: Array) -> void:
+	if args.is_empty():
+		return
+
+	var code: String = str(args[0])
 	if code is String and code == "RECURSIVE":
 		print("recursive code")
 
-
 # Set the event listener
 func _on_init_set_javascript() -> void:
-	if OS.has_feature("JavaScript"):
-		var GDQUEST = JavaScript.get_interface("GDQUEST")
-		GDQUEST.events.onError.connect(_on_js_error_feedback_ref)
-
-
-# Checks if the script text has mixed tabs and spaces in indentation.
-# Returns the line number of the error or -1 if there's no error
-func _check_for_mixed_indentation(text: String) -> int:
-	var lines := text.split("\n")
-	for line_number in range(lines.size()):
-		var line := lines[line_number]
-		if line.empty() or line.strip_edges() == "":
-			continue
-
-		var has_space := false
-		var has_tab := false
-
-		for i in range(line.length()):
-			var character := line[i]
-			if character == ' ':
-				has_space = true
-			elif character == '\t':
-				has_tab = true
-			else:
-				break
-
-		if has_space and has_tab:
-			return line_number
-	return -1
+	# Godot 4: web builds use "web"
+	if OS.has_feature("web"):
+		var gdquest := JavaScriptBridge.get_interface("GDQUEST")
+		if gdquest:
+			# Keep this as-is if GDQUEST.events.onError is your JS-side event emitter.
+			gdquest.events.onError.connect(_on_js_error_feedback_ref)

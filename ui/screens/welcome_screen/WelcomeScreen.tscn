@@ -1,821 +1,665 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=23 format=3 uid="uid://b1lpjgiqmvmil"]
 
-[ext_resource path="res://ui/screens/welcome_screen/background.png" type="Texture" id=1]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
-[ext_resource path="res://ui/screens/practice/gdquestboy_frame_main_menu.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/screens/welcome_screen/title.png" type="Texture" id=5]
-[ext_resource path="res://ui/screens/welcome_screen/title_background.png" type="Texture" id=6]
-[ext_resource path="res://ui/theme/button_main_menu_normal.tres" type="StyleBox" id=7]
-[ext_resource path="res://ui/screens/welcome_screen/WelcomeScreen.gd" type="Script" id=8]
-[ext_resource path="res://ui/theme/button_main_menu_focus.tres" type="StyleBox" id=9]
-[ext_resource path="res://ui/theme/button_main_menu_hover.tres" type="StyleBox" id=10]
-[ext_resource path="res://ui/components/FullScreenButton.tscn" type="PackedScene" id=11]
-[ext_resource path="res://ui/theme/fonts/font_main_menu_buttons.tres" type="DynamicFont" id=12]
-[ext_resource path="res://ui/screens/welcome_screen/StarGreen.tscn" type="PackedScene" id=13]
-[ext_resource path="res://ui/screens/welcome_screen/StarWhite.tscn" type="PackedScene" id=14]
-[ext_resource path="res://ui/components/GDQuestLogo.tscn" type="PackedScene" id=15]
-[ext_resource path="res://ui/screens/welcome_screen/star_green_small.png" type="Texture" id=16]
-[ext_resource path="res://ui/screens/welcome_screen/star_white_small.png" type="Texture" id=17]
-[ext_resource path="res://course/common/robot_body.png" type="Texture" id=18]
-[ext_resource path="res://course/common/hand_ice.png" type="Texture" id=19]
-[ext_resource path="res://ui/screens/welcome_screen/godot-4-compatibility-label.svg" type="Texture" id=20]
-[ext_resource path="res://ui/theme/fonts/NotoSansSC-Bold.ttf" type="DynamicFontData" id=21]
-[ext_resource path="res://ui/theme/fonts/Montserrat-SemiBoldItalic.ttf" type="DynamicFontData" id=22]
+[ext_resource type="Texture2D" uid="uid://m11xdrk3008h" path="res://ui/screens/welcome_screen/background.png" id="1"]
+[ext_resource type="Theme" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://3afne0c54r54" path="res://ui/screens/welcome_screen/title.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cpqps7ejje4xi" path="res://ui/screens/welcome_screen/title_background.png" id="6"]
+[ext_resource type="Script" uid="uid://drhdjixoeh5nu" path="res://ui/screens/welcome_screen/WelcomeScreen.gd" id="8"]
+[ext_resource type="PackedScene" path="res://ui/components/FullScreenButton.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://ui/screens/welcome_screen/StarGreen.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://ui/screens/welcome_screen/StarWhite.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://ui/components/GDQuestLogo.tscn" id="15"]
+[ext_resource type="Texture2D" uid="uid://cirl713ohnacn" path="res://ui/screens/welcome_screen/star_green_small.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://c6yrt2o57e1yr" path="res://ui/screens/welcome_screen/star_white_small.png" id="17"]
+[ext_resource type="Texture2D" uid="uid://bqp7ok1qp4whd" path="res://course/common/robot_body.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://d3cg0co37ylpk" path="res://course/common/hand_ice.png" id="19"]
+[ext_resource type="Texture2D" uid="uid://dpiglmcnektsx" path="res://ui/screens/welcome_screen/godot-4-compatibility-label.svg" id="20"]
 
-[sub_resource type="GDScript" id=7]
+[sub_resource type="GDScript" id="7"]
 script/source = "extends Node2D
 
-onready var _anim_player := $AnimationPlayer
-
+@onready var _anim_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
-	_anim_player.connect(\"animation_finished\", self, \"_on_animation_finished\")
-
+	_anim_player.animation_finished.connect(_on_animation_finished)
 
 func appear() -> void:
 	show()
 	_anim_player.play(\"peek\")
 
-
-func _on_animation_finished(anim_name: String) -> void:
-	yield(get_tree().create_timer(10.0), \"timeout\")
+func _on_animation_finished(_anim_name: String) -> void:
+	await get_tree().create_timer(10.0).timeout
 	_anim_player.play(\"peek\")
 "
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id="5"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Pivot/RobotBody:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 13, 0 ) ]
+"values": [Vector2(13, 0)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Pivot/RobotBody:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 17.5843 ]
+"values": [17.5843]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("Pivot/HandIceRight:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 29, -35 ) ]
+"values": [Vector2(29, -35)]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("Pivot/HandIceRight:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ -206.344 ]
+"values": [-206.344]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("Pivot/HandIceLeft:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 27, 20 ) ]
+"values": [Vector2(27, 20)]
 }
 tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("Pivot/HandIceLeft:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 42.2378 ]
+"values": [42.2378]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id="6"]
 resource_name = "peek"
 length = 9.0
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Pivot/RobotBody:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3.2, 4, 4.4, 5.1, 6, 6.2, 7, 7.9, 8.4, 9 ),
-"transitions": PoolRealArray( 1, 0.307786, 1, 1, 0.307786, 0.307786, 1, 1, 0.31864, 1, 1 ),
+"times": PackedFloat32Array(0, 3.2, 4, 4.4, 5.1, 6, 6.2, 7, 7.9, 8.4, 9),
+"transitions": PackedFloat32Array(1, 0.307786, 1, 1, 0.307786, 0.307786, 1, 1, 0.31864, 1, 1),
 "update": 0,
-"values": [ Vector2( 13, 0 ), Vector2( 13, 0 ), Vector2( 51, -3 ), Vector2( 51, -3 ), Vector2( 13, 0 ), Vector2( 13, 0 ), Vector2( 76, -2 ), Vector2( 84, -2 ), Vector2( 85, -2 ), Vector2( 2, 0 ), Vector2( 13, 0 ) ]
+"values": [Vector2(13, 0), Vector2(13, 0), Vector2(51, -3), Vector2(51, -3), Vector2(13, 0), Vector2(13, 0), Vector2(76, -2), Vector2(84, -2), Vector2(85, -2), Vector2(2, 0), Vector2(13, 0)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Pivot/RobotBody:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 3.2, 4, 4.4, 5.1, 6, 6.2, 7, 7.9, 8.4, 9 ),
-"transitions": PoolRealArray( 1, 0.307786, 1, 1, 0.307786, 0.307786, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 3.2, 4, 4.4, 5.1, 6, 6.2, 7, 7.9, 8.4, 9),
+"transitions": PackedFloat32Array(1, 0.307786, 1, 1, 0.307786, 0.307786, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [ 17.5843, 17.5843, 45.5041, 45.5041, 17.5843, 17.5843, 41.8058, 47.0077, 45.963, 24.8671, 17.5843 ]
+"values": [17.5843, 17.5843, 45.5041, 45.5041, 17.5843, 17.5843, 41.8058, 47.0077, 45.963, 24.8671, 17.5843]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("Pivot/HandIceRight:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 2.3, 2.6, 8.5, 8.8, 9 ),
-"transitions": PoolRealArray( 0.406126, 0.406126, 1, 0.353553, 1, 0.406126 ),
+"times": PackedFloat32Array(0, 2.3, 2.6, 8.5, 8.8, 9),
+"transitions": PackedFloat32Array(0.406126, 0.406126, 1, 0.353553, 1, 0.406126),
 "update": 0,
-"values": [ Vector2( 29, -35 ), Vector2( 29, -35 ), Vector2( 43, -41 ), Vector2( 43, -41 ), Vector2( 13, -38 ), Vector2( 29, -35 ) ]
+"values": [Vector2(29, -35), Vector2(29, -35), Vector2(43, -41), Vector2(43, -41), Vector2(13, -38), Vector2(29, -35)]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("Pivot/HandIceRight:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 2.3, 2.6, 8.5, 8.8, 9 ),
-"transitions": PoolRealArray( 1, 1, 1, 0.353553, 1, 1 ),
+"times": PackedFloat32Array(0, 2.3, 2.6, 8.5, 8.8, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 0.353553, 1, 1),
 "update": 0,
-"values": [ -206.344, -206.344, -206.344, -206.344, -214.941, -206.344 ]
+"values": [-206.344, -206.344, -206.344, -206.344, -214.941, -206.344]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("Pivot/HandIceLeft:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 2.9, 3.1, 8.3, 8.7, 9 ),
-"transitions": PoolRealArray( 1, 0.435275, 1, 0.353553, 1, 1 ),
+"times": PackedFloat32Array(0, 2.9, 3.1, 8.3, 8.7, 9),
+"transitions": PackedFloat32Array(1, 0.435275, 1, 0.353553, 1, 1),
 "update": 0,
-"values": [ Vector2( 27, 20 ), Vector2( 27, 20 ), Vector2( 47, 19 ), Vector2( 47, 19 ), Vector2( 12, 15 ), Vector2( 27, 20 ) ]
+"values": [Vector2(27, 20), Vector2(27, 20), Vector2(47, 19), Vector2(47, 19), Vector2(12, 15), Vector2(27, 20)]
 }
 tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("Pivot/HandIceLeft:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 2.9, 3.1, 8.3, 8.7, 9 ),
-"transitions": PoolRealArray( 1, 1, 1, 0.353553, 1, 1 ),
+"times": PackedFloat32Array(0, 2.9, 3.1, 8.3, 8.7, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 0.353553, 1, 1),
 "update": 0,
-"values": [ 42.2378, 42.2378, 42.2378, 42.2378, 27.7693, 42.2378 ]
+"values": [42.2378, 42.2378, 42.2378, 42.2378, 27.7693, 42.2378]
 }
 
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ausbq"]
+_data = {
+&"RESET": SubResource("5"),
+&"peek": SubResource("6")
+}
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends OptionButton
 
 func _ready() -> void:
-	get_popup().add_font_override(\"font\", preload(\"res://ui/theme/fonts/font_main_menu_buttons.tres\"))
+	var popup := get_popup()
+	popup.add_theme_font_override(\"font\", preload(\"res://ui/theme/fonts/font_main_menu_buttons.tres\"))
 "
 
-[sub_resource type="DynamicFont" id=8]
-size = 20
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 22 )
-fallback/0 = ExtResource( 21 )
-
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("CenterContainer/Background:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("CenterContainer/Background:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [Vector2(0, 0)]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("TitleBackground/Title:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("TitleBackground:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("TitleBackground/Title:rect_position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [Vector2(0, 0)]
 }
 tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("TitleBackground:rect_position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 479.5, 201 ) ]
+"values": [Vector2(479.5, 201)]
 }
 tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
 tracks/6/path = NodePath("GDQuestBoy:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
 tracks/7/path = NodePath("GDQuestBoy:rect_position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 733, 568 ) ]
+"values": [Vector2(733, 568)]
 }
 tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
 tracks/8/path = NodePath("TitleBackground/Title/TitleLinkLabel:rect_position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 25, 233 ) ]
+"values": [Vector2(25, 233)]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 resource_name = "appear"
 length = 1.4
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("CenterContainer/Background:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.9 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("CenterContainer/Background:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 0.435275, 1 ),
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(0.435275, 1),
 "update": 0,
-"values": [ Vector2( -106, 0 ), Vector2( 0, 0 ) ]
+"values": [Vector2(-106, 0), Vector2(0, 0)]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("TitleBackground/Title:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("TitleBackground:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("TitleBackground/Title:rect_position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.3, 0.8 ),
-"transitions": PoolRealArray( 1, 0.435275, 1 ),
+"times": PackedFloat32Array(0, 0.3, 0.8),
+"transitions": PackedFloat32Array(1, 0.435275, 1),
 "update": 0,
-"values": [ Vector2( -32, 0 ), Vector2( -32, 0 ), Vector2( 0, 0 ) ]
+"values": [Vector2(-32, 0), Vector2(-32, 0), Vector2(0, 0)]
 }
 tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("TitleBackground:rect_position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.2, 0.5 ),
-"transitions": PoolRealArray( 1, 0.34151, 1 ),
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 0.34151, 1),
 "update": 0,
-"values": [ Vector2( 450, 201 ), Vector2( 450, 201 ), Vector2( 479.5, 201 ) ]
+"values": [Vector2(450, 201), Vector2(450, 201), Vector2(479.5, 201)]
 }
 tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
 tracks/6/path = NodePath("GDQuestBoy:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.9, 1.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.9, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
 tracks/7/path = NodePath("GDQuestBoy:rect_position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 0.9, 1.4 ),
-"transitions": PoolRealArray( 1, 0.392292, 1 ),
+"times": PackedFloat32Array(0, 0.9, 1.4),
+"transitions": PackedFloat32Array(1, 0.392292, 1),
 "update": 0,
-"values": [ Vector2( 701, 568 ), Vector2( 701, 568 ), Vector2( 733, 568 ) ]
+"values": [Vector2(701, 568), Vector2(701, 568), Vector2(733, 568)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7s4vs"]
+_data = {
+&"RESET": SubResource("2"),
+&"appear": SubResource("3")
 }
 
 [node name="WelcomeScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 811, 264 )
-theme = ExtResource( 2 )
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_horizontal_guides_": [ 1060.0 ]
-}
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2")
+script = ExtResource("8")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.0352941, 0.0392157, 0.12549, 1 )
+color = Color(0.0352941, 0.0392157, 0.12549, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Background" type="TextureRect" parent="CenterContainer"]
-margin_right = 1920.0
-margin_bottom = 1080.0
-texture = ExtResource( 1 )
+layout_mode = 2
+texture = ExtResource("1")
 stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="StarGreen" parent="CenterContainer/Background" instance=ExtResource( 13 )]
-margin_left = 548.0
-margin_top = 676.0
-margin_right = 586.0
-margin_bottom = 714.0
+[node name="StarGreen" parent="CenterContainer/Background" instance=ExtResource("13")]
+layout_mode = 0
 
-[node name="StarGreen5" parent="CenterContainer/Background" instance=ExtResource( 13 )]
-margin_left = 630.0
-margin_top = 837.0
-margin_right = 653.0
-margin_bottom = 860.0
-texture = ExtResource( 16 )
+[node name="StarGreen5" parent="CenterContainer/Background" instance=ExtResource("13")]
+layout_mode = 0
+texture = ExtResource("16")
 min_offset = 2.0
 max_offset = 8.0
 
-[node name="StarGreen6" parent="CenterContainer/Background" instance=ExtResource( 13 )]
-margin_left = 1339.0
-margin_top = 817.0
-margin_right = 1362.0
-margin_bottom = 840.0
-texture = ExtResource( 16 )
+[node name="StarGreen6" parent="CenterContainer/Background" instance=ExtResource("13")]
+layout_mode = 0
+texture = ExtResource("16")
 min_offset = 2.0
 max_offset = 8.0
 
-[node name="StarGreen2" parent="CenterContainer/Background" instance=ExtResource( 13 )]
-margin_left = 414.0
-margin_top = 539.0
-margin_right = 452.0
-margin_bottom = 577.0
+[node name="StarGreen2" parent="CenterContainer/Background" instance=ExtResource("13")]
+layout_mode = 0
 
-[node name="StarGreen4" parent="CenterContainer/Background" instance=ExtResource( 13 )]
-margin_left = 1473.0
-margin_top = 600.0
-margin_right = 1511.0
-margin_bottom = 638.0
+[node name="StarGreen4" parent="CenterContainer/Background" instance=ExtResource("13")]
+layout_mode = 0
 
-[node name="StarWhite" parent="CenterContainer/Background" instance=ExtResource( 14 )]
-margin_left = 1404.0
-margin_top = 832.0
-margin_right = 1442.0
-margin_bottom = 870.0
+[node name="StarWhite" parent="CenterContainer/Background" instance=ExtResource("14")]
+layout_mode = 0
 
-[node name="StarWhite3" parent="CenterContainer/Background" instance=ExtResource( 14 )]
-margin_left = 1381.0
-margin_top = 743.0
-margin_right = 1419.0
-margin_bottom = 781.0
+[node name="StarWhite3" parent="CenterContainer/Background" instance=ExtResource("14")]
+layout_mode = 0
 
-[node name="StarWhite5" parent="CenterContainer/Background" instance=ExtResource( 14 )]
-margin_left = 602.0
-margin_top = 786.0
-margin_right = 625.0
-margin_bottom = 809.0
-texture = ExtResource( 17 )
+[node name="StarWhite5" parent="CenterContainer/Background" instance=ExtResource("14")]
+layout_mode = 0
+texture = ExtResource("17")
 min_offset = 2.0
 max_offset = 8.0
 
-[node name="StarWhite8" parent="CenterContainer/Background" instance=ExtResource( 14 )]
-margin_left = 1428.0
-margin_top = 578.0
-margin_right = 1451.0
-margin_bottom = 601.0
-texture = ExtResource( 17 )
+[node name="StarWhite8" parent="CenterContainer/Background" instance=ExtResource("14")]
+layout_mode = 0
+texture = ExtResource("17")
 min_offset = 2.0
 max_offset = 8.0
 
-[node name="StarWhite7" parent="CenterContainer/Background" instance=ExtResource( 14 )]
-margin_left = 469.0
-margin_top = 511.0
-margin_right = 492.0
-margin_bottom = 534.0
-texture = ExtResource( 17 )
+[node name="StarWhite7" parent="CenterContainer/Background" instance=ExtResource("14")]
+layout_mode = 0
+texture = ExtResource("17")
 min_offset = 2.0
 max_offset = 8.0
 
-[node name="StarWhite6" parent="CenterContainer/Background" instance=ExtResource( 14 )]
-margin_left = 568.0
-margin_top = 858.0
-margin_right = 606.0
-margin_bottom = 896.0
+[node name="StarWhite6" parent="CenterContainer/Background" instance=ExtResource("14")]
+layout_mode = 0
 
-[node name="StarWhite2" parent="CenterContainer/Background" instance=ExtResource( 14 )]
-margin_left = 1464.0
-margin_top = 517.0
-margin_right = 1502.0
-margin_bottom = 555.0
+[node name="StarWhite2" parent="CenterContainer/Background" instance=ExtResource("14")]
+layout_mode = 0
 
-[node name="StarWhite4" parent="CenterContainer/Background" instance=ExtResource( 14 )]
-margin_left = 483.0
-margin_top = 571.0
-margin_right = 521.0
-margin_bottom = 609.0
+[node name="StarWhite4" parent="CenterContainer/Background" instance=ExtResource("14")]
+layout_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 811.0
-margin_top = 771.0
-margin_right = 1109.0
-margin_bottom = 1080.0
-mouse_filter = 2
+layout_mode = 0
 size_flags_horizontal = 6
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="Robot" type="Node2D" parent="."]
 visible = false
-position = Vector2( 1120, 711 )
 z_index = 1
-script = SubResource( 7 )
+position = Vector2(867.5, 791)
+script = SubResource("7")
 
-[node name="Pivot" type="Position2D" parent="Robot"]
-position = Vector2( 0, -32 )
+[node name="Pivot" type="Marker2D" parent="Robot"]
+position = Vector2(0, -32)
 
-[node name="RobotBody" type="Sprite" parent="Robot/Pivot"]
-position = Vector2( 13, 0 )
-rotation = 0.306904
+[node name="RobotBody" type="Sprite2D" parent="Robot/Pivot"]
 z_index = -1
-texture = ExtResource( 18 )
+position = Vector2(13, 0)
+rotation = 0.3069039
+texture = ExtResource("18")
 
-[node name="HandIceRight" type="Sprite" parent="Robot/Pivot"]
-position = Vector2( 29, -35 )
-rotation = -3.60138
+[node name="HandIceRight" type="Sprite2D" parent="Robot/Pivot"]
 z_index = -1
-texture = ExtResource( 19 )
-offset = Vector2( -21, -3 )
+position = Vector2(29, -35)
+rotation = -3.601382
+texture = ExtResource("19")
+offset = Vector2(-21, -3)
 flip_h = true
 
-[node name="HandIceLeft" type="Sprite" parent="Robot/Pivot"]
-position = Vector2( 27, 20 )
-rotation = 0.737189
+[node name="HandIceLeft" type="Sprite2D" parent="Robot/Pivot"]
 z_index = -1
-texture = ExtResource( 19 )
-offset = Vector2( 24.1958, 2.15936 )
+position = Vector2(27, 20)
+rotation = 0.7371887
+texture = ExtResource("19")
+offset = Vector2(24.1958, 2.15936)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Robot"]
-anims/RESET = SubResource( 5 )
-anims/peek = SubResource( 6 )
+libraries = {
+&"": SubResource("AnimationLibrary_ausbq")
+}
 
 [node name="GDQuestBoy" type="PanelContainer" parent="."]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 733.0
-margin_top = 568.0
-margin_right = 1187.0
-margin_bottom = 1068.0
 grow_horizontal = 2
-custom_styles/panel = ExtResource( 3 )
 
 [node name="Margin" type="MarginContainer" parent="GDQuestBoy"]
-margin_left = 28.0
-margin_top = 84.0
-margin_right = 426.0
-margin_bottom = 456.0
-grow_horizontal = 2
-custom_constants/margin_right = 0
-custom_constants/margin_top = 0
-custom_constants/margin_left = 0
-custom_constants/margin_bottom = 60
+layout_mode = 2
 
 [node name="Buttons" type="VBoxContainer" parent="GDQuestBoy/Margin"]
-margin_right = 398.0
-margin_bottom = 312.0
-grow_horizontal = 2
-grow_vertical = 0
+layout_mode = 2
 size_flags_horizontal = 3
-custom_constants/separation = 8
 alignment = 1
 
 [node name="StartButton" type="Button" parent="GDQuestBoy/Margin/Buttons"]
-margin_top = 32.0
-margin_right = 398.0
-margin_bottom = 88.0
-rect_min_size = Vector2( 0, 48 )
+layout_mode = 2
 mouse_default_cursor_shape = 2
-theme = ExtResource( 2 )
-custom_colors/font_color_disabled = Color( 0.572549, 0.560784, 0.721569, 1 )
-custom_fonts/font = ExtResource( 12 )
-custom_styles/hover = ExtResource( 10 )
-custom_styles/focus = ExtResource( 9 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/normal = ExtResource( 7 )
+theme = ExtResource("2")
 text = "START"
 expand_icon = true
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="OutlinerButton" type="Button" parent="GDQuestBoy/Margin/Buttons"]
-margin_top = 96.0
-margin_right = 398.0
-margin_bottom = 152.0
-rect_min_size = Vector2( 0, 48 )
+layout_mode = 2
 mouse_default_cursor_shape = 2
-custom_colors/font_color_disabled = Color( 0.572549, 0.560784, 0.721569, 1 )
-custom_fonts/font = ExtResource( 12 )
-custom_styles/hover = ExtResource( 10 )
-custom_styles/focus = ExtResource( 9 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/normal = ExtResource( 7 )
 text = "SELECT LESSON"
 
 [node name="SettingsButton" type="Button" parent="GDQuestBoy/Margin/Buttons"]
-margin_top = 160.0
-margin_right = 398.0
-margin_bottom = 216.0
-rect_min_size = Vector2( 0, 48 )
+layout_mode = 2
 mouse_default_cursor_shape = 2
-custom_colors/font_color_disabled = Color( 0.572549, 0.560784, 0.721569, 1 )
-custom_fonts/font = ExtResource( 12 )
-custom_styles/hover = ExtResource( 10 )
-custom_styles/focus = ExtResource( 9 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/normal = ExtResource( 7 )
 text = "OPTIONS"
 
 [node name="LanguageButton" type="OptionButton" parent="GDQuestBoy/Margin/Buttons"]
 visible = false
-margin_top = 192.0
-margin_right = 398.0
-margin_bottom = 248.0
-rect_min_size = Vector2( 0, 48 )
+layout_mode = 2
 mouse_default_cursor_shape = 2
-custom_colors/font_color_disabled = Color( 0.572549, 0.560784, 0.721569, 1 )
-custom_fonts/font = ExtResource( 12 )
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 9 )
-custom_styles/focus = ExtResource( 9 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/normal = ExtResource( 7 )
-text = "ENGLISH"
-align = 1
-items = [ "ENGLISH", null, false, 0, null ]
-selected = 0
-script = SubResource( 1 )
+script = SubResource("1")
 
 [node name="QuitButton" type="Button" parent="GDQuestBoy/Margin/Buttons"]
-margin_top = 224.0
-margin_right = 398.0
-margin_bottom = 280.0
-rect_min_size = Vector2( 0, 48 )
+layout_mode = 2
 mouse_default_cursor_shape = 2
-custom_colors/font_color_disabled = Color( 0.572549, 0.560784, 0.721569, 1 )
-custom_fonts/font = ExtResource( 12 )
-custom_styles/hover = ExtResource( 10 )
-custom_styles/focus = ExtResource( 9 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/normal = ExtResource( 7 )
 text = "QUIT"
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="GDQuestBoy"]
-position = Vector2( 387, 143 )
+position = Vector2(387, 143)
 remote_path = NodePath("../../Robot")
 
 [node name="Control" type="Control" parent="GDQuestBoy"]
-margin_left = 127.0
-margin_top = 435.0
-margin_right = 327.0
-margin_bottom = 456.0
-rect_min_size = Vector2( 200, 21 )
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="GDQuestLogo" parent="GDQuestBoy/Control" instance=ExtResource( 15 )]
-modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
+[node name="GDQuestLogo" parent="GDQuestBoy/Control" instance=ExtResource("15")]
+modulate = Color(0.572549, 0.560784, 0.721569, 1)
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -73.0
-margin_top = -22.5
-margin_right = 73.0
-margin_bottom = 22.5
-expand = true
 
 [node name="TitleBackground" type="TextureRect" parent="."]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 479.5
-margin_top = 201.0
-margin_right = 1440.5
-margin_bottom = 431.0
-texture = ExtResource( 6 )
+texture = ExtResource("6")
 
 [node name="Title" type="TextureRect" parent="TitleBackground"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 961.0
-margin_bottom = 230.0
-texture = ExtResource( 5 )
+texture = ExtResource("5")
 stretch_mode = 4
 
-[node name="StarGreen" parent="TitleBackground/Title" instance=ExtResource( 13 )]
-margin_left = 37.5
-margin_top = 54.0
-margin_right = 60.5
-margin_bottom = 77.0
-texture = ExtResource( 16 )
+[node name="StarGreen" parent="TitleBackground/Title" instance=ExtResource("13")]
+layout_mode = 0
+texture = ExtResource("16")
 min_offset = 2.0
 max_offset = 8.0
 
-[node name="StarGreen4" parent="TitleBackground/Title" instance=ExtResource( 13 )]
-margin_left = 131.5
-margin_top = 162.0
-margin_right = 154.5
-margin_bottom = 185.0
-texture = ExtResource( 16 )
+[node name="StarGreen4" parent="TitleBackground/Title" instance=ExtResource("13")]
+layout_mode = 0
+texture = ExtResource("16")
 min_offset = 2.0
 max_offset = 8.0
 
-[node name="StarGreen5" parent="TitleBackground/Title" instance=ExtResource( 13 )]
-margin_left = 893.5
-margin_top = 55.0
-margin_right = 916.5
-margin_bottom = 78.0
-texture = ExtResource( 16 )
+[node name="StarGreen5" parent="TitleBackground/Title" instance=ExtResource("13")]
+layout_mode = 0
+texture = ExtResource("16")
 min_offset = 2.0
 max_offset = 8.0
 
-[node name="StarGreen6" parent="TitleBackground/Title" instance=ExtResource( 13 )]
-margin_left = 809.5
-margin_top = 163.0
-margin_right = 832.5
-margin_bottom = 186.0
-texture = ExtResource( 16 )
+[node name="StarGreen6" parent="TitleBackground/Title" instance=ExtResource("13")]
+layout_mode = 0
+texture = ExtResource("16")
 min_offset = 2.0
 max_offset = 8.0
 
-[node name="StarGreen2" parent="TitleBackground/Title" instance=ExtResource( 13 )]
-margin_left = 54.5
-margin_top = 116.0
-margin_right = 92.5
-margin_bottom = 154.0
+[node name="StarGreen2" parent="TitleBackground/Title" instance=ExtResource("13")]
+layout_mode = 0
 
-[node name="StarGreen3" parent="TitleBackground/Title" instance=ExtResource( 13 )]
-margin_left = 869.5
-margin_top = 116.0
-margin_right = 907.5
-margin_bottom = 154.0
+[node name="StarGreen3" parent="TitleBackground/Title" instance=ExtResource("13")]
+layout_mode = 0
 
-[node name="Godot-4-compatibility-label" type="Sprite" parent="TitleBackground/Title"]
-position = Vector2( 882.5, 243 )
-texture = ExtResource( 20 )
+[node name="Godot-4-compatibility-label" type="Sprite2D" parent="TitleBackground/Title"]
+position = Vector2(882.5, 243)
+texture = ExtResource("20")
 
 [node name="TitleLinkLabel" type="RichTextLabel" parent="TitleBackground/Title"]
+layout_mode = 0
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 25.0
-margin_top = 233.0
-margin_right = 522.0
-margin_bottom = 261.0
-custom_colors/default_color = Color( 0.576471, 0.560784, 0.721569, 1 )
-custom_fonts/normal_font = SubResource( 8 )
 bbcode_enabled = true
-bbcode_text = "An open source project by [url=https://www.gdquest.com/]GDQuest.com[/url]"
 text = "An open source project by GDQuest.com"
 scroll_active = false
 
-[node name="FullScreenButton" parent="." instance=ExtResource( 11 )]
+[node name="FullScreenButton" parent="." instance=ExtResource("11")]
+layout_mode = 0
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -56.0
-margin_top = 16.0
-margin_right = -16.0
-margin_bottom = 63.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 2 )
-anims/appear = SubResource( 3 )
+libraries = {
+&"": SubResource("AnimationLibrary_7s4vs")
+}

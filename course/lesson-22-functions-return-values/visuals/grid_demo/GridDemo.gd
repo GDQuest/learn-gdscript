@@ -3,11 +3,11 @@ extends Control
 const FONT := preload("res://ui/theme/fonts/font_text.tres")
 const TITLE_FONT := preload("res://ui/theme/fonts/font_title_slim.tres")
 
-export var grid_columns := 5
-export var grid_rows := 2
-export var cell_size := 120
-export var line_width := 3.0
-export var outer_line_width := 4.0
+@export var grid_columns := 5
+@export var grid_rows := 2
+@export var cell_size := 120
+@export var line_width := 3.0
+@export var outer_line_width := 4.0
 
 var _hovered_cell := Vector2(-1, -1)
 var _grid_size_px := Vector2.ZERO
@@ -19,7 +19,8 @@ var _grid_node: Node2D = null
 
 func _ready() -> void:
 	_grid_size_px = Vector2(grid_columns * cell_size, grid_rows * cell_size)
-	rect_min_size = Vector2(600, 380)
+	# rect_min_size -> custom_minimum_size
+	custom_minimum_size = Vector2(600, 380)
 	_grid_offset = Vector2(
 		(600 - _grid_size_px.x) / 2.0,
 		50
@@ -27,16 +28,22 @@ func _ready() -> void:
 
 	_grid_node = Node2D.new()
 	_grid_node.position = _grid_offset
-	_grid_node.connect("draw", self, "_draw_grid_content")
+	# Godot 4 signal syntax
+	_grid_node.draw.connect(_draw_grid_content)
 	add_child(_grid_node)
 
 	_info_label = Label.new()
-	_info_label.add_font_override("font", TITLE_FONT)
+	# add_font_override -> add_theme_font_override
+	_info_label.add_theme_font_override("font", TITLE_FONT)
 	_info_label.text = tr("Hover over a cell to see its pixel position")
-	_info_label.align = Label.ALIGN_CENTER
-	_info_label.autowrap = true
-	_info_label.rect_position = Vector2(0, _grid_offset.y + _grid_size_px.y + 20)
-	_info_label.rect_size = Vector2(600, 60)
+	
+	# Label alignment and autowrap changed in Godot 4
+	_info_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_info_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	
+	# rect_position -> position, rect_size -> size
+	_info_label.position = Vector2(0, _grid_offset.y + _grid_size_px.y + 20)
+	_info_label.size = Vector2(600, 60)
 	add_child(_info_label)
 
 
@@ -46,7 +53,8 @@ func _process(_delta: float) -> void:
 
 	if new_hovered_cell != _hovered_cell:
 		_hovered_cell = new_hovered_cell
-		_grid_node.update()
+		# update() -> queue_redraw()
+		_grid_node.queue_redraw()
 		_update_info_label()
 
 
@@ -110,12 +118,18 @@ func _draw_grid_content() -> void:
 			var cell_pos = Vector2(x * cell_size, y * cell_size)
 			var cell_center = cell_pos + Vector2(cell_size, cell_size) / 2.0
 			var text = "(%d, %d)" % [x, y]
-			var text_size = FONT.get_string_size(text)
+			
+			# draw_string arguments changed significantly in Godot 4
+			# We typically need to specify a font_size.
+			var font_size = 16 # Adjust this based on your theme
+			var text_size = FONT.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
 			var text_pos = cell_center - text_size / 2.0
-			_grid_node.draw_string(FONT, text_pos, text, text_color)
+			
+			# Vector2(text_pos.x, text_pos.y + (text_size.y / 4.0)) helps with baseline centering
+			var draw_pos = Vector2(text_pos.x, text_pos.y + (text_size.y * 0.8))
+			_grid_node.draw_string(FONT, draw_pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, text_color)
 
 	# yellow circle/position mark at top left of the cell
-	# (This indicates the cell position that's calculated in the label below the grid)
 	if _hovered_cell.x >= 0:
 		var pixel_pos = _hovered_cell * cell_size
 		var marker_color = Color(1.0, 0.8, 0.2, 1.0)

@@ -2,9 +2,9 @@
 class_name Course
 extends Resource
 
-export var title := ""
+@export var title := ""
 # Array[Lesson]
-export var lessons: Array
+@export var lessons: Array
 
 
 func _init() -> void:

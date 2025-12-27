@@ -41,7 +41,7 @@ static func save_course(course: Course, file_path: String) -> bool:
 				practice_data.practice_id = practice_data.practice_id.replace(old_base_path, base_path)
 
 	# Start saving resources, top to bottom.
-	var error = ResourceSaver.save(file_path, course)
+	var error = ResourceSaver.save(course, file_path)
 	if not error == OK:
 		printerr("Failed to save the Course resource at '%s', error code: %d" % [file_path, error])
 		return false
@@ -49,14 +49,13 @@ static func save_course(course: Course, file_path: String) -> bool:
 	# TODO: Update the paths when "Save As" was used and the root resource was moved
 
 	var had_errors := false
-	var fs := Directory.new()
 
 	for lesson_data in course.lessons:
 		var lesson_dir = lesson_data.resource_path.get_base_dir()
-		if not fs.dir_exists(lesson_dir):
-			fs.make_dir_recursive(lesson_dir)
+		if not DirAccess.dir_exists_absolute(lesson_dir):
+			DirAccess.make_dir_recursive_absolute(lesson_dir)
 
-		error = ResourceSaver.save(lesson_data.resource_path, lesson_data)
+		error = ResourceSaver.save(lesson_data, lesson_data.resource_path)
 		if not error == OK:
 			printerr(
 				(
@@ -70,29 +69,27 @@ static func save_course(course: Course, file_path: String) -> bool:
 	return not had_errors
 
 static func remove_obsolete(file_paths: Array) -> void:
-	if file_paths.empty():
+	if file_paths.is_empty():
 		return
 
-	var fs := Directory.new()
-	var error
-
+	var error: int
 	for file_path in file_paths:
-		if not file_path.empty() and fs.file_exists(file_path):
-			error = fs.remove(file_path)
+		if not file_path.is_empty() and FileAccess.file_exists(file_path):
+			error = DirAccess.remove_absolute(file_path)
 			if error != OK:
 				printerr(
-					"Failed to remove an obsolete file at '%s', error code: %d" % [file_path, error]
-				)
+					"Failed to remove an obsolete file at '%s', error code: %d" % 
+					[file_path, error])
 
 static func random_lesson_path(course: Course) -> String:
-	var _file_tester := Directory.new()
 	var base_path := course.resource_path.get_base_dir()
 	var lesson_directory := "lesson-" + generate_random_path_slug()
-	var dirpath := base_path.plus_file(lesson_directory)
-	while _file_tester.dir_exists(dirpath):
+	var dirpath := base_path.path_join(lesson_directory)
+	while DirAccess.dir_exists_absolute(dirpath):
 		lesson_directory = "lesson-" + generate_random_path_slug()
-		dirpath = base_path.plus_file(lesson_directory)
-	return dirpath.plus_file("lesson.tres")
+		dirpath = base_path.path_join(lesson_directory)
+	return dirpath.path_join("lesson.tres")
+
 
 static func slugged_lesson_path(course: Course, slug: String) -> String:
 	var base_path = course.resource_path.get_base_dir()
@@ -100,17 +97,16 @@ static func slugged_lesson_path(course: Course, slug: String) -> String:
 	return base_path.plus_file(lesson_slug).plus_file("lesson.tres")
 
 static func generate_random_lesson_subresource_path(lesson: Lesson, kind: String) -> String:
-	var _file_tester := Directory.new()
 	var base_path = lesson.resource_path.get_base_dir()
 	assert(
 		kind in SUPPORTED_LESSON_RESOURCES,
 		"Resource name must be one of %s" % [SUPPORTED_LESSON_RESOURCES]
 	)
 	var block_file = "%s-%s.tres" % [kind, generate_random_path_slug()]
-	var path = base_path.plus_file(block_file)
-	while _file_tester.file_exists(path):
+	var path = base_path.path_join(block_file)
+	while FileAccess.file_exists(path):
 		block_file = "%s-%s.tres" % [kind, generate_random_path_slug()]
-		path = base_path.plus_file(block_file)
+		path = base_path.path_join(block_file)
 	return path
 
 static func generate_random_path_slug(length := 8) -> String:
@@ -126,8 +122,8 @@ static func pack_playable_scene(instance: Node, base_path: String, keyword: Stri
 		printerr("Failed to pack the %s scene from the instance '%s': Error code %d" % [keyword, instance, error])
 		return null
 
-	var practice_path = base_path.plus_file("test-%s.tscn" % [keyword])
-	error = ResourceSaver.save(practice_path, packed_instance)
+	var practice_path = base_path.path_join("test-%s.tscn" % [keyword])
+	error = ResourceSaver.save(packed_instance, practice_path)
 	if error != OK:
 		printerr("Failed to save the %s scene at '%s': Error code %d" % [keyword, practice_path, error])
 		return null

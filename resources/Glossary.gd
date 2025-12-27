@@ -16,10 +16,11 @@ func _init() -> void:
 
 func setup() -> void:
 	_glossary = _parse_glossary_file(glossary_file)
-	var patterns := PoolStringArray()
+	var patterns := PackedStringArray()
 	for key in _glossary:
-		patterns.append(key)
-	var terms_pattern := "(?:\\[ignore\\]\\w+)(*SKIP)(*F)|(%s)" % patterns.join("|")
+		patterns.append(key as String)
+	var terms_pattern := "(?:\\[ignore\\]\\w+)(*SKIP)(*F)|(%s)" % "|".join(patterns)
+
 
 	_glossary_regex.compile(terms_pattern)
 
@@ -43,13 +44,12 @@ func get_match(keyword: String) -> Entry:
 # glossary entries.
 func _parse_glossary_file(path: String) -> Dictionary:
 	var glossary := {}
-	var file := File.new()
-	file.open(path, file.READ)
+	var file := FileAccess.open(path, FileAccess.READ)
 	var _header := Array(file.get_csv_line())
 
-	while !file.eof_reached():
-		var csv_line := file.get_csv_line()
-		if not csv_line[0]:
+	while not file.eof_reached():
+		var csv_line: PackedStringArray = file.get_csv_line()
+		if csv_line.is_empty() or csv_line[0].is_empty():
 			break
 
 		var plural_form = tr(csv_line[1])
@@ -71,6 +71,6 @@ class Entry:
 	var explanation: String
 
 	func _init(csv_line: Array) -> void:
-		term = tr(csv_line[0]).capitalize()
-		plural_form = tr(csv_line[1])
-		explanation = TextUtils.tr_paragraph(csv_line[2])
+		term = tr(StringName(csv_line[0] as String)).capitalize()
+		plural_form = tr(StringName(csv_line[1] as String))
+		explanation = TextUtils.tr_paragraph(csv_line[2] as String)

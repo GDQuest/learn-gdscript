@@ -3,6 +3,7 @@ extends Panel
 signal used
 signal restored
 
+# Godot 4 uses Texture2D for UI textures
 const SWORD := preload("res://course/common/inventory/sword.png")
 const SHIELD := preload("res://course/common/inventory/shield.png")
 const HEALTH := preload("res://course/common/inventory/healing_heart.png")
@@ -15,13 +16,22 @@ const textures = [
 	GEMS
 ]
 
+# Godot 4 Property syntax replacing setget
+@export var texture: Texture2D:
+	set(value):
+		texture = value
+		if not is_inside_tree():
+			await ready
+		if texture_rect:
+			texture_rect.texture = value
+	get:
+		return texture
 
-export var texture: Texture setget set_texture, get_texture
-export var hide_after_animation := false
+@export var hide_after_animation := false
 
-onready var anim_player := $AnimationPlayer as AnimationPlayer
-onready var texture_rect := $TextureRect as TextureRect
-onready var label := $Label as Label
+@onready var anim_player := $AnimationPlayer as AnimationPlayer
+@onready var texture_rect := $TextureRect as TextureRect
+@onready var label := $Label as Label
 
 var _animation_backwards := false
 
@@ -29,26 +39,33 @@ var _animation_backwards := false
 func _ready() -> void:
 	set_label_index(get_index())
 	if texture == null:
-		randomize()
+		# Note: In Godot 4, randomize() is called automatically on startup, 
+		# but you can still call it if you need a specific seed reset.
 		set_random_texture()
-	anim_player.connect("animation_finished", self, "_on_animation_finished")
+	
+	# Godot 4 Signal connection syntax
+	anim_player.animation_finished.connect(_on_animation_finished)
 
 
-func set_random_texture():
+func set_random_texture() -> void:
 	if get_index() > 0 and get_index() < textures.size():
 		# ensure textures appear at least once each in the first loop
-		var previous_crate = get_parent().get_child(get_index() - 1)
-		if previous_crate and previous_crate.texture:
-			var previous_texture_index := textures.find(previous_crate.texture)
-			if previous_texture_index > -1:
-				var next_index := (previous_texture_index + 1) % textures.size()
-				set_texture(textures[next_index])
-				return
+		var parent = get_parent()
+		if parent:
+			var previous_crate = parent.get_child(get_index() - 1)
+			if previous_crate and previous_crate.texture:
+				var previous_texture_index := textures.find(previous_crate.texture)
+				if previous_texture_index > -1:
+					var next_index := (previous_texture_index + 1) % textures.size()
+					texture = textures[next_index]
+					return
 	randomize_texture()
 
-func randomize_texture():
-	set_texture(textures[randi() % textures.size()])
+
+func randomize_texture() -> void:
+	texture = textures[randi() % textures.size()]
 	
+
 func use() -> void:
 	anim_player.play("use")
 
@@ -59,34 +76,30 @@ func reset(speed := 2.0) -> void:
 		anim_player.play("RESET")
 		return
 	_animation_backwards = true
-	anim_player.play("use", -1, -1 * speed, true)
+	# play(name, custom_blend, custom_speed, from_end)
+	anim_player.play("use", -1, -1.0 * speed, true)
 
 
-func _on_animation_finished(animation_name: String) -> void:
-	if animation_name != "use":
+func _on_animation_finished(animation_name: StringName) -> void:
+	if animation_name != &"use":
 		return
 	if _animation_backwards:
 		_animation_backwards = false
-		emit_signal("restored")
+		restored.emit()
 		return
 	if hide_after_animation:
 		hide()
-	emit_signal("used")
+	used.emit()
 
 
-func set_texture(new_texture: Texture) -> void:
-	texture = new_texture
-	if not is_inside_tree():
-		yield(self, "ready")
-	texture_rect.texture = new_texture
-	
-func get_texture() -> Texture:
-	return texture
-
-func get_texture_name():
+func get_texture_name() -> String:
+	if not texture:
+		return ""
 	var path := texture.resource_path
-	var filename := path.get_file().get_basename().split("_")
-	return PoolStringArray(filename).join(" ")
+	var filename_parts := path.get_file().get_basename().split("_")
+	# Godot 4: join is now a method of the string separator
+	return " ".join(PackedStringArray(filename_parts))
+
 
 func set_label_index(index: int) -> void:
 	label.text = str(index)

@@ -6,15 +6,15 @@ func _ready() -> void:
 
 
 # EXPORT move_and_rotate
-func _process(delta):
-	rotate(0.05)
+func _process(delta: float) -> void:
+	rotation += 0.05 * delta
 # /EXPORT move_and_rotate
 
 
 func _run() -> void:
 	reset()
 	set_process(true)
-	yield(get_tree().create_timer(1.0), "timeout")
+	await get_tree().create_timer(1.0).timeout
 	Events.emit_signal("practice_run_completed")
 
 

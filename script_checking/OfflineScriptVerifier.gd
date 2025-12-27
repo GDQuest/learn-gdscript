@@ -17,20 +17,23 @@ const PARSE_WRAPPER_CLASS := "GDScriptParserWrap"
 var errors := []
 
 
-func _init(new_script_text: String).(new_script_text) -> void:
-	pass
-
+func _init(new_script_text: String) -> void:
+	super(new_script_text)
 
 func test() -> void:
 	if ClassDB.class_exists(PARSE_WRAPPER_CLASS):
-		var wrap: Reference = ClassDB.instance(PARSE_WRAPPER_CLASS)
-		wrap.parse_script(_new_script_text)
-		if wrap.has_error():
-			var error_line: int = wrap.get_error_line() - 1
-			var line_text := _new_script_text.split("\n")[error_line]
+		var wrapper := ClassDB.instantiate(PARSE_WRAPPER_CLASS) as Object
+		wrapper.call("parse_script", _new_script_text)
+
+		var has_err := wrapper.call("has_error") as bool
+		if has_err:
+			var error_line := (wrapper.call("get_error_line") as int) - 1
+			var line_text: String = _new_script_text.split("\n")[error_line]
+			var err_msg: String = str(wrapper.call("get_error"))
+
 			var error_data := make_error_from_data(
 				1,
-				wrap.get_error(),
+				err_msg,
 				"gdscript",
 				-1,
 				error_line,
@@ -47,8 +50,9 @@ func test() -> void:
 		return
 
 
+
 static func make_error_no_parser_wrapper_class() -> ScriptError:
-	var err = ScriptVerifier.ScriptError.new()
+	var err := ScriptError.new()
 	err.message = "No Script Parser class in exported app. There will be no error checking possible"
 	err.severity = 1
 	err.code = ScriptVerifier.GDQuestErrorCode.NO_PARSER_CLASS
@@ -59,7 +63,7 @@ static func make_error_from_data(
 		severity: int,
 		message: String,
 		source: String,
-		code: int,
+		_code: int,
 		line: int,
 		character_start: int,
 		character_end: int
@@ -82,9 +86,10 @@ static func make_error_from_data(
 		}
 	}
 	
-	var error = ScriptVerifier.ScriptError.new()
+	var error := ScriptError.new()
 	error.from_JSON(error_block)
 	return error
+
 
 
 static func check_error_is_missing_parser_error(error: ScriptError) -> bool:

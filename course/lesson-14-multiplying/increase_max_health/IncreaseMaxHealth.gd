@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var _animation_tree := find_node("AnimationTree") as AnimationTree
-onready var _health_bar := find_node("CustomHealthBar")
+@onready var _animation_tree := find_child("AnimationTree") as AnimationTree
+@onready var _health_bar := find_child("CustomHealthBar")
 
 
 # EXPORT level
@@ -14,14 +14,23 @@ func level_up():
 # /EXPORT level
 	_health_bar.set_max_health(max_health)
 
-func _run():
+func _run() -> void:
 	reset()
-	for i in range(2):
+	# Typed loop variable for Godot 4
+	for i: int in range(2):
 		level_up()
-		_animation_tree.travel("level")
-		yield(_animation_tree, "animation_finished")
-	Events.emit_signal("practice_run_completed")
-
+		
+		# FIX: AnimationTree travel logic for Godot 4
+		var playback := _animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+		if playback:
+			playback.travel("level")
+		
+		# yield(node, "signal") -> await node.signal
+		await _animation_tree.animation_finished
+		
+	# Godot 4 signal syntax
+	Events.practice_run_completed.emit()
+	
 func reset():
 	level = 1
 	max_health = 100

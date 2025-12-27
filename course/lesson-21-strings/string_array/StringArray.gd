@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var _animation_tree := find_node("AnimationTree")
+@onready var _animation_tree := find_child("AnimationTree")
 
 
 func _ready() -> void:
@@ -22,7 +22,7 @@ func play_combo() -> void:
 	for action in _animation_queue:
 		if _animation_tree.has_animation(str(action)):
 			_animation_tree.travel(action)
-			yield(_animation_tree, "animation_finished")
+			await _animation_tree.animation_finished
 
 
 var combo = []

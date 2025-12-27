@@ -1,32 +1,19 @@
 # Integration test that runs through all lessons and practices in the course.
-# Tests that lessons load correctly, practices load correctly, solution code
-# does solve every practice.
-#
-# This test does not currently run through the application navigation through
-# the user interface. It currently loads the lessons and practices independently
-# and just checks that individually the screens and all the content load and
-# display without error and that we're able to apply the solution to a practice,
-# run it, and complete the practice.
-#
-# A future improvement would be making it run entirely through the application
-# UI, but this already safeguards things.
-#
-# To run, run the scene file that uses this script from the editor.
 extends Node
 
 const COURSE_PATH := "res://course/course-learn-gdscript.tres"
 const UILessonScene := preload("res://ui/UILesson.tscn")
 const UIPracticeScene := preload("res://ui/UIPractice.tscn")
 
-export var time_scale := 4.0
-export var lesson_load_timeout := 2.0
-export var practice_setup_timeout := 2.0
-export var practice_execution_timeout := 10.0
+@export var time_scale := 4.0
+@export var lesson_load_timeout := 2.0
+@export var practice_setup_timeout := 2.0
+@export var practice_execution_timeout := 10.0
 
 var _course_resource: Course = null
 
-var _fail_messages := []
-var _timeout_messages := []
+var _fail_messages: Array[String] = []
+var _timeout_messages: Array[String] = []
 
 var _tests_run_count := 0
 var _tests_passed_count := 0
@@ -61,9 +48,10 @@ func _run_integration_test() -> void:
 		var lesson: Lesson = _course_resource.lessons[lesson_index]
 		print("[Lesson %d/%d] Testing: %s" % [lesson_index + 1, total_lessons, lesson.title])
 		
-		# Functions yield which in Godot 3 returns function state objects
-		var awaited_lesson_test: GDScriptFunctionState = _test_lesson(lesson)
-		var is_lesson_test_passed: bool = yield(awaited_lesson_test, "completed")
+		# In Godot 4, we await the function directly. 
+		# If the function is async (contains await), it returns the result when finished.
+		var is_lesson_test_passed: bool = await _test_lesson(lesson)
+		
 		if not is_lesson_test_passed:
 			_fail_messages.append("Lesson %d: %s - Failed to load/display" % [lesson_index + 1, lesson.title])
 			print("  FAIL - Lesson failed\n")
@@ -77,8 +65,8 @@ func _run_integration_test() -> void:
 			_tests_run_count += 1
 			print("  [Practice %d/%d] Testing: %s" % [practice_index, lesson.practices.size(), practice.title])
 			
-			var awaited_practice_test: GDScriptFunctionState = _test_practice(practice, lesson)
-			var is_practice_test_passed: bool = yield(awaited_practice_test, "completed")
+			var is_practice_test_passed: bool = await _test_practice(practice, lesson)
+			
 			if not is_practice_test_passed:
 				_fail_messages.append("Practice: %s (Lesson %d)" % [practice.title, lesson_index + 1])
 				print("    FAIL - Practice failed")
@@ -92,13 +80,13 @@ func _run_integration_test() -> void:
 
 
 func _test_lesson(lesson: Lesson) -> bool:
-	var ui_lesson: UILesson = UILessonScene.instance()
+	var ui_lesson: UILesson = UILessonScene.instantiate() # instance() -> instantiate()
 	add_child(ui_lesson)
 	
 	ui_lesson.enable_integration_test_mode()
 	
-	var setup_result: GDScriptFunctionState = ui_lesson.setup(lesson, _course_resource)
-	yield(setup_result, "completed")
+	# ui_lesson.setup is likely async, so we await it
+	await ui_lesson.setup(lesson, _course_resource)
 	
 	var displayed := false
 	var timed_out := false
@@ -108,19 +96,22 @@ func _test_lesson(lesson: Lesson) -> bool:
 	add_child(timer)
 	
 	var state := {"displayed": false, "timer": timer}
-	ui_lesson.connect("lesson_displayed", self, "_on_lesson_displayed_signal", [state])
-	timer.connect("timeout", self, "_on_lesson_timeout_signal", [state])
+	
+	# Godot 4 Signal connection syntax
+	ui_lesson.lesson_displayed.connect(_on_lesson_displayed_signal.bind(state))
+	timer.timeout.connect(_on_lesson_timeout_signal.bind(state))
 	timer.start()
 	
-	var wait_start_time := OS.get_ticks_msec()
+	var wait_start_time := Time.get_ticks_msec() # OS.get_ticks_msec() -> Time.get_ticks_msec()
 	while not displayed and not timed_out:
-		if OS.get_ticks_msec() - wait_start_time > lesson_load_timeout * 1000.0:
+		if Time.get_ticks_msec() - wait_start_time > lesson_load_timeout * 1000.0:
 			timed_out = true
 			break
+		# Check internal property directly if signal didn't fire yet
 		if state.displayed or ui_lesson._practices_visibility_container.visible:
 			displayed = true
 			break
-		yield(get_tree(), "idle_frame")
+		await get_tree().process_frame
 	
 	timer.queue_free()
 	
@@ -152,18 +143,17 @@ func _on_lesson_timeout_signal(state: Dictionary) -> void:
 
 
 func _test_practice(practice: Practice, lesson: Lesson) -> bool:
-	var ui_practice: UIPractice = UIPracticeScene.instance()
+	var ui_practice: UIPractice = UIPracticeScene.instantiate()
 	add_child(ui_practice)
 	
 	ui_practice.turn_on_test_mode()
 	
-	var setup_result = ui_practice.setup(practice, lesson, _course_resource)
-	if setup_result != null and setup_result is GDScriptFunctionState:
-		yield(setup_result, "completed")
+	# Use await on the setup call
+	await ui_practice.setup(practice, lesson, _course_resource)
 	
 	var frames_waited := 0
 	while frames_waited < 5:
-		yield(get_tree(), "idle_frame")
+		await get_tree().process_frame
 		frames_waited += 1
 	
 	if not ui_practice._practice or ui_practice._practice != practice:
@@ -172,7 +162,7 @@ func _test_practice(practice: Practice, lesson: Lesson) -> bool:
 	
 	ui_practice._on_use_solution_pressed()
 	
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 	
 	ui_practice._validate_and_run_student_code()
 	
@@ -185,19 +175,21 @@ func _test_practice(practice: Practice, lesson: Lesson) -> bool:
 	add_child(execution_timer)
 	
 	var state := {"complete": false, "timer": execution_timer}
-	ui_practice.connect("test_student_code_completed", self, "_on_practice_execution_complete_signal", [state])
-	execution_timer.connect("timeout", self, "_on_practice_execution_timeout_signal", [state])
+	
+	# Assuming 'test_student_code_completed' is a signal defined in UIPractice
+	ui_practice.test_student_code_completed.connect(_on_practice_execution_complete_signal.bind(state))
+	execution_timer.timeout.connect(_on_practice_execution_timeout_signal.bind(state))
 	execution_timer.start()
 	
-	var wait_start_time := OS.get_ticks_msec()
+	var wait_start_time := Time.get_ticks_msec()
 	while not execution_complete and not timed_out:
-		if OS.get_ticks_msec() - wait_start_time > practice_execution_timeout * 1000.0:
+		if Time.get_ticks_msec() - wait_start_time > practice_execution_timeout * 1000.0:
 			timed_out = true
 			break
 		if state.complete or execution_timer.is_stopped():
 			execution_complete = true
 			break
-		yield(get_tree(), "idle_frame")
+		await get_tree().process_frame
 	
 	execution_timer.queue_free()
 	
@@ -225,9 +217,7 @@ func _on_practice_execution_timeout_signal(state: Dictionary) -> void:
 
 
 func _print_summary() -> void:
-	var separator := ""
-	for i in range(50):
-		separator += "="
+	var separator := "=".repeat(50)
 	print("\n" + separator)
 	print("Test Summary")
 	print(separator)
@@ -259,4 +249,3 @@ func _print_summary() -> void:
 	else:
 		print("\nFAIL - Tests failed")
 		get_tree().quit(1)
-

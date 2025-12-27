@@ -10,7 +10,7 @@ func _init() -> void:
 func test_draw_square_of_200_pixels() -> String:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	var polygons := turtle.get_polygons()
-	if polygons.empty():
+	if polygons.is_empty():
 		return tr("Nothing drawn. Did you not call move_forward()?")
 
 	var square: DrawingTurtle.Polygon = polygons[0]

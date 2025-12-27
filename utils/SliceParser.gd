@@ -12,7 +12,7 @@ const EXPORT_REGEX_PATTERN := "^\\s*#\\s*(/)?EXPORT(?:\\s+(\\w+))?\\s*$"
 # slice_name: Name of the slice to extract (empty string = first EXPORT found)
 # Dictionary with: {lines_before, lines_after, lines_editable, leading_spaces, start, end}
 static func parse_slice(script_source: String, slice_name: String = "") -> Dictionary:
-	var lines := Array(script_source.split("\n"))
+	var lines: PackedStringArray = script_source.split("\n")
 	var export_regex := RegEx.new()
 	export_regex.compile(EXPORT_REGEX_PATTERN)
 	
@@ -20,7 +20,7 @@ static func parse_slice(script_source: String, slice_name: String = "") -> Dicti
 	var export_start_line := -1
 	var export_end_line := -1
 	var found_closing := false
-	var found_any_slice := false
+	var _found_any_slice := false
 	
 	# Find the EXPORT comments
 	for i in range(lines.size()):
@@ -40,16 +40,18 @@ static func parse_slice(script_source: String, slice_name: String = "") -> Dicti
 			continue
 		
 		if export_start_line < 0:
-			if target_slice_name.empty():
+			if target_slice_name.is_empty():
 				target_slice_name = matched_name if matched_name else ""
 				export_start_line = i
-				found_any_slice = true
+				_found_any_slice = true
 			elif matched_name == target_slice_name:
 				export_start_line = i
-				found_any_slice = true
+				_found_any_slice = true
 	
 	if export_start_line < 0:
-		push_error("EXPORT slice not found: " + (target_slice_name if not target_slice_name.empty() else "(any)"))
+		push_error("EXPORT slice not found: " + (
+			target_slice_name if not target_slice_name.is_empty() else "(any)")
+)
 		return {}
 	
 	if not found_closing:
@@ -65,7 +67,7 @@ static func parse_slice(script_source: String, slice_name: String = "") -> Dicti
 	var lines_editable := lines.slice(editable_start, export_end_line - 1)
 	var lines_after := lines.slice(export_end_line + 1, lines.size())
 	
-	var leading_spaces := 0
+	var leading_spaces: float = 0.0
 	if lines_editable.size() > 0:
 		var first_line: String = lines_editable[0]
 		for i in range(first_line.length()):
@@ -116,7 +118,7 @@ static func parse_slice(script_source: String, slice_name: String = "") -> Dicti
 # Finds all EXPORT slice names in a script and returns an Array of slice names
 # found in the script
 static func find_all_slice_names(script_source: String) -> Array:
-	var lines := Array(script_source.split("\n"))
+	var lines: PackedStringArray = script_source.split("\n")
 	var export_regex := RegEx.new()
 	export_regex.compile(EXPORT_REGEX_PATTERN)
 	
@@ -135,22 +137,22 @@ static func find_all_slice_names(script_source: String) -> Array:
 # slice_name: Name of the EXPORT slice to extract (empty = first one found)
 # returns ScriptSlice resource with parsed data
 static func load_from_script(script_path: String, slice_name: String = "") -> ScriptSlice:
-	if script_path.is_rel_path():
+	if script_path.is_relative_path():
 		script_path = "res://" + script_path
 	elif not script_path.begins_with("res://"):
 		push_error("Script path must be a resource path: " + script_path)
 		return null
 	
-	var file := File.new()
-	if file.open(script_path, File.READ) != OK:
+	var file := FileAccess.open(script_path, FileAccess.READ)
+	if file == null:
 		push_error("Failed to read script file: " + script_path)
 		return null
-	
-	var script_source := file.get_as_text()
-	file.close()
+
+	var script_source: String = file.get_as_text()
+
 	
 	var parsed_data := parse_slice(script_source, slice_name)
-	if parsed_data.empty():
+	if parsed_data.is_empty():
 		return null
 	
 	var slice := ScriptSlice.new()
@@ -164,4 +166,3 @@ static func load_from_script(script_path: String, slice_name: String = "") -> Sc
 	slice.lines_editable = parsed_data.get("lines_editable", [])
 	
 	return slice
-

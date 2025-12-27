@@ -1,7 +1,8 @@
 extends PracticeTester
 
 func test_remove_errors() -> String:
-	for line in _slice.get_slice_text():
+	# FIX: Added ': String' to the loop variable to avoid Variant warnings
+	for line: String in _slice.get_slice_text():
 		if "#" in line:
 			return tr("There's still a comment in your code. You need to remove the comment sign (#).")
 	return ""

@@ -1,23 +1,35 @@
 extends PanelContainer
 
-var values := [] setget set_values
+var _values: Array = []
+var _tween: Tween = null
 
-onready var _label := $Label as Label
-onready var _tween := $Tween as Tween
+@onready var _label: Label = $Label
+
+
+var values: Array:
+	set(v):
+		set_values(v)
+	get:
+		return _values
 
 
 func set_values(new_values: Array) -> void:
-	values = new_values
+	_values = new_values
 	if not is_inside_tree():
-		yield(self, "ready")
+		await ready
 
-	var message = PoolStringArray(new_values).join(" ")
+	var parts: Array[String] = []
+	for v in new_values:
+		parts.append(str(v))
+	var message: String = " ".join(parts)
 
 	if _label.text == message:
 		return
 
 	_label.text = message
 
-	_tween.stop_all()
-	_tween.interpolate_property(self, "self_modulate:a", 1.0, 0.25, 1.5)
-	_tween.start()
+	if _tween != null:
+		_tween.kill()
+
+	_tween = create_tween()
+	_tween.tween_property(self, "self_modulate:a", 0.25, 1.5).from(1.0)

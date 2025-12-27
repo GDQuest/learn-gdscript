@@ -8,7 +8,7 @@
 # var error = ScriptError.new()
 # error.from_JSON(json_error)
 class_name ScriptError
-extends Reference
+extends RefCounted
 
 var error_range := ErrorRange.new()
 var message := ""
@@ -17,14 +17,25 @@ var code := 0
 
 
 func from_JSON(json: Dictionary) -> void:
-	if "message" in json:
-		message = String(json.message)
-	if "range" in json:
-		error_range.from_JSON(json.range)
-	if "severity" in json:
-		severity = int(json.severity)
-	if "code" in json:
-		code = _improve_error_code(json.code, message)
+	if json.has("message"):
+		var msg := json["message"] as String
+		if msg != null:
+			message = msg
+		else:
+			message = str(json["message"])
+
+	if json.has("range"):
+		var r := json["range"] as Dictionary
+		if r != null:
+			error_range.from_JSON(r)
+
+	if json.has("severity"):
+		var sev := json["severity"] as int
+		severity = sev
+
+	if json.has("code"):
+		var c := json["code"] as int
+		code = _improve_error_code(c, message)
 
 
 func _improve_error_code(raw_code: int, raw_message: String) -> int:
@@ -35,9 +46,10 @@ func _improve_error_code(raw_code: int, raw_message: String) -> int:
 	# But if it's -1, try to remap the message to a new code using the GDScript codes database.
 	var remapped_code := -1
 	# Iterate through every record to find the one that has a matching pattern.
-	for record in GDScriptCodes.MESSAGE_DATABASE:
+	for rec_v in GDScriptCodes.MESSAGE_DATABASE:
+		var record := rec_v as Dictionary
 		# First check if the record has a valid structure, just in case.
-		if not typeof(record) == TYPE_DICTIONARY:
+		if record.is_empty():
 			continue
 		if not record.has("patterns") or not record.has("code"):
 			continue
@@ -47,27 +59,29 @@ func _improve_error_code(raw_code: int, raw_message: String) -> int:
 		# Iterate through an array of match patterns to see if any of them matches our message
 		# completely.
 		var matched = false
-		for pattern in record.patterns:
+		var patterns: Array = record["patterns"] as Array
+		
+		for pattern_v in patterns:
+			var pattern: Array = pattern_v as Array
 			# Pattern must be an array of strings.
-			if not typeof(pattern) == TYPE_ARRAY:
+			if pattern.is_empty():
 				continue
 
 			# We'll be modifying the message here, so copy it.
-			var curr_message = raw_message
+			var curr_message: String = raw_message
 			# Pattern's substrings must match the target message in order.
-			for i in pattern.size():
+			for i in range(pattern.size()):
 				# If the substring does not match, exit early, this is not our match.
-				var substring := pattern[i] as String
-				var found = curr_message.find(substring)
+				var substring: String = pattern[i] as String
+				var found: int = curr_message.find(substring)
 				if found == -1:
 					break
 
-				# Cut a part of the message that we have already matched to exclude it from
-				# further checks.
+				# substr() needs ints; found is now int.
 				curr_message = curr_message.substr(found)
 				i += 1
-				# We reached the end of the pattern without errors, so this is our match.
-				if i >= pattern.size():
+				# If we reached the last element and never broke, it's a match.
+				if i == pattern.size() - 1:
 					matched = true
 					break
 
@@ -90,10 +104,11 @@ class ErrorRange:
 	var end := ErrorPosition.new()
 
 	func from_JSON(json: Dictionary) -> void:
-		if "start" in json:
-			start.from_JSON(json.start)
-		if "end" in json:
-			end.from_JSON(json.end)
+		if json.has("start") and json["start"] is Dictionary:
+			start.from_JSON(json["start"] as Dictionary)
+
+		if json.has("end") and json["end"] is Dictionary:
+			end.from_JSON(json["end"] as Dictionary)
 
 	func _to_string() -> String:
 		return "[%s-%s]" % [start, end]
@@ -104,10 +119,28 @@ class ErrorPosition:
 	var line := 0
 
 	func from_JSON(json: Dictionary) -> void:
-		if "character" in json:
-			character = int(json.character)
-		if "line" in json:
-			line = int(json.line)
+		if json.has("character"):
+			var v: Variant = json["character"]
+			if v is int:
+				character = v as int
+			elif v is float:
+				character = int(v as float)
+			elif v is bool:
+				character = int(v as bool)
+			elif v is String:
+				character = int((v as String).to_float())
+
+		if json.has("line"):
+			var v2: Variant = json["line"]
+			if v2 is int:
+				line = v2 as int
+			elif v2 is float:
+				line = int(v2 as float)
+			elif v2 is bool:
+				line = int(v2 as bool)
+			elif v2 is String:
+				line = int((v2 as String).to_float())
+
 
 	func _to_string() -> String:
 		return "(%s:%s)" % [line, character]

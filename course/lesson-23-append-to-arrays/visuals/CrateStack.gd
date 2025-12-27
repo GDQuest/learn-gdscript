@@ -1,12 +1,10 @@
 extends Control
 
-# @type Array[Node]
-onready var _initial_crates := $Column.get_children()
-# @type Array[int]
-var crates := []
+# In Godot 4, we use typed arrays for better performance and editor support
+@onready var _initial_crates: Array[Node] = $Column.get_children()
+var crates: Array[int] = []
 
 var _is_resetting := false
-
 
 const code = """var crates = ["%s"]
 
@@ -17,42 +15,55 @@ func use_top_crate():
 
 
 func _ready() -> void:
-	_initial_crates.invert()
-	var i:= 0
-	for crate in _initial_crates:
+	# Godot 4: Array.invert() is now Array.reverse()
+	_initial_crates.reverse()
+	
+	for i in range(_initial_crates.size()):
+		var crate = _initial_crates[i]
+		# Assuming Crate nodes have these methods/properties
 		crate.set_label_index(i)
-		i += 1
 		crate.hide_after_animation = true
-		crate.connect("restored", self, "restore_crate")
-	crates = range(_initial_crates.size())
+		# Godot 4 Signal connection syntax
+		crate.restored.connect(restore_crate)
+	
+	# Assign range to typed array
+	crates.clear()
+	for i in range(_initial_crates.size()):
+		crates.append(i)
 
 
 func run() -> void:
-	crates.pop_back()
-	_sync_nodes()
+	if not crates.is_empty():
+		crates.pop_back()
+		_sync_nodes()
 
 
-func _sync_nodes():
+func _sync_nodes() -> void:
 	var index := crates.size()
-	if index < 0:
+	if index < 0 or index >= _initial_crates.size():
 		return
+		
 	var crate = _initial_crates[index]
-	crate.use()
-	var remaining = PoolStringArray()
+	if crate.has_method("use"):
+		crate.use()
+	
+	var remaining := PackedStringArray()
 	for crate_index in crates:
 		remaining.append(_initial_crates[crate_index].get_texture_name())
-	# TODO: display this to the user?
+	
+	# CHANGED HERE:
 	prints(
 		"removed: ", crate.get_texture_name(), 
-		"remaining: ", '["'+remaining.join('", "')+'"]'
+		"remaining: ", '["' + '", "'.join(remaining) + '"]'
 	)
 
 
-func reset():
+
+func reset() -> void:
 	restore_crate()
 
 
-func restore_crate():
+func restore_crate() -> void:
 	var index = crates.size()
 	if index >= _initial_crates.size():
 		_is_resetting = false
@@ -62,7 +73,9 @@ func restore_crate():
 
 
 func get_code(_initial_code: String) -> String:
-	var names := PoolStringArray()
+	var names := PackedStringArray()
 	for crate in _initial_crates:
 		names.append(crate.get_texture_name())
-	return code % [names.join('", "')]
+	
+	# CHANGED HERE:
+	return code % ['", "'.join(names)]

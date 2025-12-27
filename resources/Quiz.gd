@@ -3,12 +3,12 @@ class_name Quiz
 extends Resource
 
 # Uniquely identifies the quiz resource.
-export var quiz_id := ""
+@export var quiz_id := ""
 
-export var question := ""
-export var content_bbcode := ""
-export var hint := ""
-export var explanation_bbcode := ""
+@export var question := ""
+@export var content_bbcode := ""
+@export var hint := ""
+@export var explanation_bbcode := ""
 
 
 class AnswerTestResult:

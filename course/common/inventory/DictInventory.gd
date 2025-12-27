@@ -1,7 +1,8 @@
 class_name DictInventory
 extends Control
 
-const DictItemScene := preload("DictItem.tscn")
+const DictItemScene: PackedScene = preload("res://course/common/inventory/DictItem.tscn")
+
 
 const ITEM_DATABASE := {
 	"healing heart":
@@ -33,31 +34,30 @@ var inventory = {
 	"gems": 10,
 }
 
-onready var _grid := $Margin/Column/Grid as GridContainer
+@onready var _grid := $Margin/Column/Grid as GridContainer
 
 
 func _ready():
 	update_display()
 
 
-func add_item(name: String, amount := 1):
-	assert(name in ITEM_DATABASE)
-	if name in inventory:
-		inventory[name] += amount
+func add_item(item_id: String, amount := 1):
+	assert(item_id in ITEM_DATABASE)
+	if item_id in inventory:
+		inventory[item_id] += amount
 	else:
-		inventory[name] = amount
+		inventory[item_id] = amount
 	update_display()
 
-
-func remove_item(name: String, amount := 1):
-	assert(name in ITEM_DATABASE)
-	if name in inventory:
-		inventory[name] -= amount
-		if inventory[name] <= 0:
-			inventory.erase(name)
+func remove_item(item_id: String, amount := 1):
+	assert(item_id in ITEM_DATABASE)
+	if item_id in inventory:
+		inventory[item_id] -= amount
+		if inventory[item_id] <= 0:
+			inventory.erase(item_id)
 		update_display()
 	else:
-		printerr("Trying to remove nonexistent item in inventory: " + name)
+		printerr("Trying to remove nonexistent item in inventory: " + item_id)
 
 
 func update_display():
@@ -65,8 +65,7 @@ func update_display():
 		child.queue_free()
 
 	for item in inventory:
-		var instance = DictItemScene.instance()
-		assert(item in ITEM_DATABASE, "The item must exist in the ITEM_DATABASE dictionary.")
+		var instance := DictItemScene.instantiate() as DictItem
 		instance.icon = ITEM_DATABASE[item].icon
 		instance.item_name = ITEM_DATABASE[item].name
 		instance.amount = inventory[item]

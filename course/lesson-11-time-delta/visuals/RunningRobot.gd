@@ -1,13 +1,14 @@
 extends Node2D
 
 var computer_speed := 1.0
-var distance := 400
-var speed := distance/3
+var distance: float = 400.0
+var speed: float = distance / 3.0
 
-onready var _sprite := $Robot
+@onready var _sprite: Node2D = $Robot
 
 func _ready() -> void:
-	_sprite.position.x = -distance/2
+	_sprite.position.x = -distance / 2.0
+
 
 func run() -> void:
 	pass

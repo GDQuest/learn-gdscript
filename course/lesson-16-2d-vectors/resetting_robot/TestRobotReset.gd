@@ -12,7 +12,7 @@ func test_use_vector2_to_reset_robot() -> String:
 	# We need to track these because students might assign Vector2 values to variables
 	# and then use those variables to reset position/scale.
 	var declaration_regex := RegEx.new()
-	var compile_result := declaration_regex.compile("(?m)\\b(?:var|const|onready)\\s+([A-Za-z_]\\w*)\\s*(?::\\s*Vector2\\s*)?(?:=|:=)\\s*Vector2\\s*\\(")
+	var _compile_result := declaration_regex.compile("(?m)\\b(?:var|const|onready)\\s+([A-Za-z_]\\w*)\\s*(?::\\s*Vector2\\s*)?(?:=|:=)\\s*Vector2\\s*\\(")
 	var vector2_variables := []
 	var last_search_start_index := 0
 	while true:
@@ -39,25 +39,25 @@ func test_use_vector2_to_reset_robot() -> String:
 
 	# Check if the position is assigned a Vector2 value directly, using the Vector2 constructor or Vector2.ZERO
 	var position_direct_regex := RegEx.new()
-	compile_result = position_direct_regex.compile("\\b(?:self\\.)?position\\s*=\\s*(?:Vector2\\s*\\(|Vector2\\.ZERO\\b)")
+	_compile_result = position_direct_regex.compile("\\b(?:self\\.)?position\\s*=\\s*(?:Vector2\\s*\\(|Vector2\\.ZERO\\b)")
 	if position_direct_regex.search(_slice.current_text):
 		position_ok = true
 	# Check if we assign a Vector2 variable to position
 	elif variable_alternatives != "":
 		var position_variable_regex := RegEx.new()
-		compile_result = position_variable_regex.compile("\\b(?:self\\.)?position\\s*=\\s*" + variable_alternatives + "\\b")
+		_compile_result = position_variable_regex.compile("\\b(?:self\\.)?position\\s*=\\s*" + variable_alternatives + "\\b")
 		if position_variable_regex.search(_slice.current_text):
 			position_ok = true
 
 	# Check if the scale is set using the Vector2 constructor or Vector2.ZERO/Vector2.ONE
 	var scale_direct_regex := RegEx.new()
-	compile_result = scale_direct_regex.compile("\\b(?:self\\.)?scale\\s*=\\s*(?:Vector2\\s*\\(|Vector2\\.(?:ZERO|ONE)\\b)")
+	_compile_result = scale_direct_regex.compile("\\b(?:self\\.)?scale\\s*=\\s*(?:Vector2\\s*\\(|Vector2\\.(?:ZERO|ONE)\\b)")
 	if scale_direct_regex.search(_slice.current_text):
 		scale_ok = true
 	# Check if we assign a Vector2 variable to scale
 	elif variable_alternatives != "":
 		var scale_variable_regex := RegEx.new()
-		compile_result = scale_variable_regex.compile("\\b(?:self\\.)?scale\\s*=\\s*" + variable_alternatives + "\\b")
+		_compile_result = scale_variable_regex.compile("\\b(?:self\\.)?scale\\s*=\\s*" + variable_alternatives + "\\b")
 		if scale_variable_regex.search(_slice.current_text):
 			scale_ok = true
 

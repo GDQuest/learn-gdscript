@@ -1,4 +1,4 @@
-tool
+@tool
 extends VBoxContainer
 
 signal lesson_added
@@ -12,24 +12,24 @@ var _base_path := ""
 var _drop_highlight: TreeItem
 var _selected_lesson := -1
 
-onready var _background_panel := $BackgroundPanel as PanelContainer
-onready var _lesson_items := $BackgroundPanel/ItemList as Control
-onready var _add_lesson_button := $ToolBar/AddButton as Button
+@onready var _background_panel := $BackgroundPanel as PanelContainer
+@onready var _lesson_items := $BackgroundPanel/ItemList as Control
+@onready var _add_lesson_button := $ToolBar/AddButton as Button
 
 
 func _ready() -> void:
 	_update_theme()
 	_lesson_items.set_drag_source_tag("lesson_list")
 
-	_lesson_items.connect("item_moved", self, "_on_lesson_moved")
-	_add_lesson_button.connect("pressed", self, "_on_lesson_added")
+	_lesson_items.item_moved.connect(Callable(self, "_on_lesson_moved"))
+	_add_lesson_button.pressed.connect(Callable(self, "_on_lesson_added"))
 
 
 func _update_theme() -> void:
 	if not is_inside_tree():
 		return
 
-	_background_panel.add_stylebox_override("panel", get_stylebox("panel", "Panel"))
+	_background_panel.add_stylebox_override("panel", get_theme_stylebox("panel", "Panel"))
 
 
 func set_base_path(base_path: String) -> void:

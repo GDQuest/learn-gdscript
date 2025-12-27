@@ -1,66 +1,52 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://i65hoja3jqfj"]
 
-[ext_resource path="res://addons/gdscript-course-builder/ui/InsertContentBlockDialog.gd" type="Script" id=1]
+[ext_resource type="Script" uid="uid://bew0l1y82yn2y" path="res://addons/gdscript-course-builder/ui/InsertContentBlockDialog.gd" id="1"]
 
-[node name="InsertContentBlockDialog" type="WindowDialog"]
+[node name="InsertContentBlockDialog" type="Window"]
 visible = true
-margin_right = 420.0
-margin_bottom = 180.0
-rect_min_size = Vector2( 420, 180 )
-window_title = "Select the type of content..."
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+title = "Select the type of content..."
+
+oversampling_override = 1.0
+size = Vector2i(420, 180)
+min_size = Vector2i(420, 180)
+script = ExtResource("1")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 8
-custom_constants/margin_top = 4
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 4
 
 [node name="Layout" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 8.0
-margin_top = 4.0
-margin_right = 412.0
-margin_bottom = 176.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="Options" type="VBoxContainer" parent="MarginContainer/Layout"]
-margin_right = 404.0
-margin_bottom = 148.0
 size_flags_vertical = 3
 alignment = 1
 
 [node name="AddBlockButton" type="Button" parent="MarginContainer/Layout/Options"]
-margin_top = 32.0
-margin_right = 404.0
-margin_bottom = 72.0
-rect_min_size = Vector2( 0, 40 )
+custom_minimum_size = Vector2(0, 40)
 text = "Add Content Block"
 
 [node name="AddQuizButton" type="Button" parent="MarginContainer/Layout/Options"]
-margin_top = 76.0
-margin_right = 404.0
-margin_bottom = 116.0
-rect_min_size = Vector2( 0, 40 )
+custom_minimum_size = Vector2(0, 40)
 text = "Add Quiz"
 
 [node name="Buttons" type="HBoxContainer" parent="MarginContainer/Layout"]
-margin_top = 152.0
-margin_right = 404.0
-margin_bottom = 172.0
 alignment = 1
 
 [node name="CancelButton" type="Button" parent="MarginContainer/Layout/Buttons"]
-margin_left = 175.0
-margin_right = 229.0
-margin_bottom = 20.0
 text = "Cancel"

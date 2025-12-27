@@ -1,43 +1,56 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://b61bhldqe135i"]
 
-[ext_resource path="res://ui/screens/welcome_screen/WelcomeScreen.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
-[ext_resource path="res://ui/LoadingScreen.tscn" type="PackedScene" id=3]
-[ext_resource path="res://ui/UICore.gd" type="Script" id=4]
-[ext_resource path="res://ui/components/popups/ReportFormPopup.tscn" type="PackedScene" id=5]
-[ext_resource path="res://ui/components/popups/SettingsPopup.tscn" type="PackedScene" id=6]
+[ext_resource type="PackedScene" uid="uid://b1lpjgiqmvmil" path="res://ui/screens/welcome_screen/WelcomeScreen.tscn" id="1"]
+[ext_resource type="Theme" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
+[ext_resource type="PackedScene" path="res://ui/LoadingScreen.tscn" id="3"]
+[ext_resource type="Script" uid="uid://b2qsh8rqt75fu" path="res://ui/UICore.gd" id="4"]
+[ext_resource type="PackedScene" path="res://ui/components/popups/ReportFormPopup.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://ui/components/popups/SettingsPopup.tscn" id="6"]
 
 [node name="UICore" type="Control"]
-pause_mode = 2
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
-theme = ExtResource( 2 )
-script = ExtResource( 4 )
+theme = ExtResource("2")
+script = ExtResource("4")
 
 [node name="Pages" type="Control" parent="."]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="WelcomeScreen" parent="Pages" instance=ExtResource( 1 )]
+[node name="WelcomeScreen" parent="Pages" instance=ExtResource("1")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 mouse_filter = 2
 
 [node name="SettingsScreen" type="MarginContainer" parent="Pages"]
 visible = false
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="CourseScreen" type="Control" parent="Pages"]
 visible = false
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="LoadingScreen" parent="Pages" instance=ExtResource( 3 )]
+[node name="LoadingScreen" parent="Pages" instance=ExtResource("3")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 mouse_filter = 2
 
-[node name="ReportFormPopup" parent="." instance=ExtResource( 5 )]
+[node name="ReportFormPopup" parent="." instance=ExtResource("5")]
 
-[node name="SettingsPopup" parent="." instance=ExtResource( 6 )]
+[node name="SettingsPopup" parent="." instance=ExtResource("6")]

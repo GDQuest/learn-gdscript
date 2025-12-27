@@ -1,4 +1,4 @@
-tool
+@tool
 class_name CodeRefList
 extends VBoxContainer
 
@@ -6,17 +6,18 @@ const CodeRefItemScene = preload("CodeRefItem.tscn")
 
 var _practice: Practice
 
-onready var _add_button := $Header/AddButton as Button
+@onready var _add_button := $Header/AddButton as Button
 
 
 func _ready() -> void:
-	_add_button.connect("pressed", self, "_add_function")
+	_add_button.pressed.connect(Callable(self, "_add_function"))
+
 
 
 func setup(practice: Practice) -> void:
 	_practice = practice
 	if not is_inside_tree():
-		yield(self, "ready")
+		await ready
 	for function in practice.documentation_references:
 		_add_function(function)
 
@@ -30,7 +31,7 @@ func _update_list_labels() -> void:
 
 
 func _update_practice_code_ref() -> void:
-	var refs := PoolStringArray()
+	var refs := PackedStringArray()
 	for child in get_children():
 		if not child is CodeRefItem or child.is_queued_for_deletion():
 			continue

@@ -1,14 +1,14 @@
 extends Node
 
-onready var bar := $VBoxContainer/HBoxContainer/Bar as ProgressBar
+@onready var bar := $VBoxContainer/HBoxContainer/Bar as ProgressBar
 
-onready var energy_label := $VBoxContainer/HBoxContainer/Bar/EnergyLabel as Label
-onready var shadow := $VBoxContainer/HBoxContainer/Bar/EnergyLabel/Shadow as Label
+@onready var energy_label := $VBoxContainer/HBoxContainer/Bar/EnergyLabel as Label
+@onready var shadow := $VBoxContainer/HBoxContainer/Bar/EnergyLabel/Shadow as Label
 
 
 func _run():
 	run()
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	Events.emit_signal("practice_run_completed")
 
 

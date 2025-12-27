@@ -6,7 +6,7 @@ func _run():
 	play_draw_animation()
 
 
-func draw_rectangle(length, height):
+func draw_rectangle(length: float, height: float):
 	move_forward(length)
 	turn_right(90)
 	move_forward(height)
@@ -27,10 +27,10 @@ func run():
 
 
 func _ready() -> void:
-	if not is_connected("turtle_finished", self, "_complete_run"):
-		connect("turtle_finished", self, "_complete_run")
+	if not turtle_finished.is_connected(_complete_run):
+		turtle_finished.connect(_complete_run)
 
 
 func _complete_run() -> void:
-	yield(get_tree().create_timer(0.5), "timeout")
-	Events.emit_signal("practice_run_completed")
+	await get_tree().create_timer(0.5).timeout
+	Events.practice_run_completed.emit()

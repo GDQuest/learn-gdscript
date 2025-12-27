@@ -1,19 +1,19 @@
 extends CenterContainer
 
-var health = 20
-var _health_gained = 40
-var _max_health = 80
+var health := 20
+var _health_gained := 40
+var _max_health := 80
 
-var _produced_health_values = []
+var _produced_health_values := []
 
-onready var _robot := find_node("Robot")
-onready var _animation_tree := find_node("AnimationTree")
-onready var _health_bar := find_node("CustomHealthBar")
+@onready var _animation_tree := find_child("AnimationTree") as AnimationTree
+@onready var _health_bar := find_child("CustomHealthBar") as Node
 
 
 func _ready() -> void:
-	_health_bar.max_health = _max_health
-	_health_bar.set_health(health)
+	# Use set() and call() to access custom properties/methods on nodes found via find_child
+	_health_bar.set("max_health", _max_health)
+	_health_bar.call("set_health", health)
 
 
 func _run() -> void:
@@ -23,17 +23,21 @@ func _run() -> void:
 	heal(_health_gained)
 	_produced_health_values.append(health)
 	_update_robot()
-	yield(get_tree().create_timer(1.0), "timeout")
-	Events.emit_signal("practice_run_completed")
+	await get_tree().create_timer(1.0).timeout
+	# Godot 4 signal syntax
+	Events.practice_run_completed.emit()
 
 
 func _update_robot() -> void:
-	_animation_tree.travel("heal")
-	_health_bar.set_health(health)
+	var playback := _animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+	if playback:
+		playback.travel("heal")
+	
+	_health_bar.call("set_health", health)
 
 
 # EXPORT heal
-func heal(amount):
+func heal(amount: int) -> void:
 	health += amount
 	if health > 80:
 		health = 80
@@ -43,7 +47,7 @@ func get_produced_health_values() -> Array:
 	return _produced_health_values
 
 
-func reset():
+func reset() -> void:
 	health = 20
-	_health_bar.set_health(health)
+	_health_bar.call("set_health", health)
 	_produced_health_values.clear()
