@@ -1,46 +1,48 @@
-tool
+@tool
 extends Path2D
 
 const COLOR_GREY := Color("928fb8")
 
-export var graph_size := Vector2.ONE * 250
-export var text_x := "x-axis"
-export var text_y := "y-axis"
-export var axis_increments := 50
-export var show_speed := 400
+@export var graph_size := Vector2.ONE * 250
+@export var text_x := "x-axis"
+@export var text_y := "y-axis"
+@export var axis_increments := 50
+@export var show_speed := 400
 
-var _line
-var _points := []
+var _line: Polygon
+var _points: PackedVector2Array = []
 var _last_point := Vector2.ZERO
 # Need a draw offset as the scene is centered in lessons
-var _draw_offset := Vector2(-graph_size.x / 2, graph_size.y/2)
+@onready var _draw_offset := Vector2(-graph_size.x / 2.0, graph_size.y / 2.0)
 
-onready var _label_x := $LabelX as Label
-onready var _label_y := $LabelY as Label
+@onready var _label_x := $LabelX as Label
+@onready var _label_y := $LabelY as Label
 
 
 func _ready() -> void:
-	update()
+	queue_redraw()
 
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		return
 
-	_label_x.rect_position += _draw_offset
-	_label_x.rect_size.x = graph_size.x
+	_label_x.position += _draw_offset
+	_label_x.size.x = graph_size.x
 	_label_x.text = text_x
-	_label_y.rect_position += _draw_offset
-	_label_y.rect_size.x = graph_size.y
+	
+	_label_y.position += _draw_offset
+	_label_y.size.x = graph_size.y
 	_label_y.text = text_y
 
 	_points = curve.tessellate(5, 4)
 	_line = Polygon.new(show_speed)
 	_line.position = _draw_offset
 	_line.line_2d.width = 3
-	_line.line_2d.default_color = Color.white
-	_line.connect("line_end_moved", self, "_change_sprite_position")
+	_line.line_2d.default_color = Color.WHITE
+	_line.line_end_moved.connect(_change_sprite_position)
 	add_child(_line)
 	
-	_last_point = _points[0] + _draw_offset
+	if _points.size() > 0:
+		_last_point = _points[0] + _draw_offset
 
 
 func run() -> void:
@@ -58,10 +60,9 @@ func reset() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		return
-	
-	update()
+	queue_redraw()
 
 
 func _change_sprite_position(new_position: Vector2) -> void:
@@ -70,38 +71,37 @@ func _change_sprite_position(new_position: Vector2) -> void:
 
 func _draw() -> void:
 	# Don't offset the graph in the editor as drawing curves won't line up
-	var draw_offset = Vector2.ZERO if Engine.editor_hint else _draw_offset
+	var draw_offset = Vector2.ZERO if Engine.is_editor_hint() else _draw_offset
 
 	draw_line(Vector2.ZERO + draw_offset, Vector2(graph_size.x, 0) + draw_offset, COLOR_GREY, 4, true)
 	draw_line(Vector2.ZERO + draw_offset, Vector2(0, -graph_size.y) + draw_offset, COLOR_GREY, 4, true)
 	
-	for i in range(graph_size.x / axis_increments):
-		draw_circle(Vector2(axis_increments + i * axis_increments, 0) + draw_offset, 4, Color.white)
-	for i in range(graph_size.y / axis_increments):
-		draw_circle(-Vector2(0, axis_increments + i * axis_increments) + draw_offset, 4, Color.white)
+	for i in range(int(graph_size.x / axis_increments)):
+		draw_circle(Vector2(axis_increments + i * axis_increments, 0) + draw_offset, 4, Color.WHITE)
+	for i in range(int(graph_size.y / axis_increments)):
+		draw_circle(-Vector2(0, axis_increments + i * axis_increments) + draw_offset, 4, Color.WHITE)
 	
 	if _last_point != Vector2(0, 0):
-		draw_circle(_last_point, 4, Color.white)
+		draw_circle(_last_point, 4, Color.WHITE)
 
 
-class Polygon:
-	extends Node2D
-
-	var points := PoolVector2Array() setget , get_points
+# Inner class converted to Godot 4
+class Polygon extends Node2D:
+	var points := PackedVector2Array(): 
+		get: return points
+	
 	var draw_speed := 400.0
 	var line_2d := Line2D.new()
-	var _tween := Tween.new()
-	var _current_points := PoolVector2Array()
+	var _tween: Tween
+	var _current_points := PackedVector2Array()
 	var _current_point_index := 0
 	var _total_distance := 0.0
 
 	signal animation_finished
-	signal line_end_moved(new_coordinates)
+	signal line_end_moved(new_coordinates: Vector2)
 
 	func _init(line_draw_speed := 400.0) -> void:
-		add_child(_tween)
 		add_child(line_2d)
-		_tween.connect("tween_all_completed", self, "next")
 		draw_speed = line_draw_speed
 
 	func reset() -> void:
@@ -112,18 +112,22 @@ class Polygon:
 		_current_points.resize(0)
 
 	func start_draw_animation() -> void:
-		var previous_point := points[0] as Vector2
+		if points.is_empty():
+			return
+			
+		var previous_point := points[0]
 		for index in range(1, points.size()):
-			var p := points[index] as Vector2
+			var p := points[index]
 			var distance = previous_point.distance_to(p)
 			previous_point = p
 			_total_distance += distance
-		_tween.stop_all()
+		
+		stop_animation()
 		next()
 
 	func next() -> void:
 		if points.size() - _current_point_index < 2:
-			emit_signal("animation_finished")
+			animation_finished.emit()
 			return
 
 		var starting_point: Vector2 = points[_current_point_index]
@@ -135,25 +139,25 @@ class Polygon:
 
 		_current_points.append(starting_point)
 		line_2d.points = _current_points
-		_tween.interpolate_method(
-			self, "_animate_point_position", starting_point, destination, animation_duration
-		)
-		_tween.start()
+		
+		# Create a new tween for the segment
+		_tween = create_tween()
+		_tween.tween_method(_animate_point_position, starting_point, destination, animation_duration)
+		_tween.finished.connect(next)
 
 	func stop_animation() -> void:
-		_tween.remove_all()
+		if _tween:
+			_tween.kill()
 
 	func is_drawing() -> bool:
-		return _tween.is_active()
+		return _tween != null and _tween.is_valid()
 
 	func _animate_point_position(point: Vector2) -> void:
-		var new_points := _current_points
+		var new_points := _current_points.duplicate()
 		new_points.push_back(point)
 		line_2d.points = new_points
-		emit_signal("line_end_moved", point + position)
+		line_end_moved.emit(point + position)
 
-	# Returns the local bounds of the polygon. That is to say, it only takes the
-	# point into account in local space, but not the polygon's `position`.
 	func get_rect() -> Rect2:
 		var top_left := Vector2.ZERO
 		var bottom_right := Vector2.ZERO
@@ -172,6 +176,3 @@ class Polygon:
 	func get_center() -> Vector2:
 		var rect := get_rect()
 		return (rect.position + rect.end) / 2.0 + position
-
-	func get_points() -> PoolVector2Array:
-		return points

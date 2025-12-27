@@ -1,7 +1,7 @@
 # Utility class that provides utility to quickly create regex objects and
 # replace text with multiple regular expressions.
 class_name RegExpGroup
-extends Reference
+extends RefCounted
 
 static func compile(pattern: String) -> RegEx:
 	var regex := RegEx.new()
@@ -17,19 +17,18 @@ class RegExCollection:
 	var _current_index := 0
 	var _current_array := []
 
-	func _init(regexes: Dictionary) -> void:
-		for pattern in regexes:
-			var replacement: String = regexes[pattern]
+	func _init(regex_data: Dictionary) -> void:
+		for pattern: String in regex_data:
+			var replacement: String = regex_data[pattern]
 			var regex := RegEx.new()
-			regex.compile(pattern)
+			var error := regex.compile(pattern)
+			if error != OK:
+				push_error("RegExpGroup: Failed to compile pattern: ", pattern)
 			_regexes[regex] = replacement
-		_current_array = _regexes.keys()
-
-	func replace(text: String) -> String:
-		for regex in _regexes:
-			var replacement: String = _regexes[regex]
-			text = regex.sub(text, replacement, true)
-		return text
+		
+		_current_array.clear()
+		for r: RegEx in _regexes.keys():
+			_current_array.append(r)
 
 	func _iterator_is_valid() -> bool:
 		return _current_index < _current_array.size()

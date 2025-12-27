@@ -5,7 +5,7 @@ signal marking_finished
 
 enum Status { IDLE, FAILED, PASSED, PENDING }
 
-const COLOR_IDLE = Color.white
+const COLOR_IDLE = Color(1.0, 1.0, 1.0)
 const COLOR_PASSED = Color(0.239216, 1, 0.431373)
 const COLOR_FAILED = Color(1, 0.094118, 0.321569)
 const COLOR_PENDING = Color(0.572549, 0.560784, 0.721569)
@@ -15,13 +15,28 @@ const FADE_COLOR_DURATION := 0.2
 const FADE_SCALE_DURATION := 0.65
 const FADE_SCALE_START_AT := 2.5
 
-var status: int = Status.IDLE setget set_status
-var title := "" setget set_title
+var _status: int = Status.IDLE
 
-onready var _icon := $IconAnchors/Icon as TextureRect
-onready var _label := $Label as Label
-onready var _tweener := $Tween as Tween
+var status: int:
+	set(value):
+		set_status(value)
+	get:
+		return _status
 
+var title_label := find_child("Title", true, false) as Label
+
+@onready var _icon := $IconAnchors/Icon as TextureRect
+@onready var _label := $Label as Label
+
+var _tweener: Tween
+
+var _title: String = "Title"
+
+@export var title: String:
+	set(value):
+		set_title(value)
+	get:
+		return _title
 
 func mark_as_failed(immediate: bool = false) -> void:
 	set_status(Status.FAILED)
@@ -56,17 +71,17 @@ func unmark(immediate: bool = false) -> void:
 
 
 func set_title(new_title: String) -> void:
-	title = new_title
+	_title = new_title
 	if not is_inside_tree():
-		yield(self, "ready")
-	_label.text = new_title
+		await ready
+	_label.text = _title
 
 
 func set_status(new_status: int) -> void:
 	status = new_status
 	
 	if not is_inside_tree():
-		yield(self, "ready")
+		await ready
 	
 	match status:
 		Status.PASSED:
@@ -86,8 +101,8 @@ func set_status(new_status: int) -> void:
 func _fade_in_status() -> void:
 	if not is_inside_tree():
 		return
-	
-	var final_color := Color.white
+
+	var final_color := Color(1.0, 1.0, 1.0)
 	match status:
 		Status.PASSED:
 			final_color = COLOR_PASSED
@@ -95,10 +110,18 @@ func _fade_in_status() -> void:
 			final_color = COLOR_FAILED
 		Status.PENDING:
 			final_color = COLOR_PENDING
+
+	if _tweener:
+		_tweener.kill()
+
+	_tweener = create_tween()
+	_tweener.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+
+	_tweener.tween_property(self, "modulate", final_color, FADE_COLOR_DURATION)
+
+	_icon.scale = Vector2(FADE_SCALE_START_AT, FADE_SCALE_START_AT)
+	_tweener.parallel().tween_property(_icon, "scale", Vector2.ONE, FADE_SCALE_DURATION)
+
+	_tweener.tween_interval(FADE_TOTAL_DURATION - max(FADE_COLOR_DURATION, FADE_SCALE_DURATION))
+	_tweener.tween_callback(func(): marking_finished.emit())
 	
-	_tweener.stop_all()
-	_tweener.interpolate_property(self, "modulate", Color.white, final_color, FADE_COLOR_DURATION, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	_tweener.interpolate_property(_icon, "rect_scale:x", FADE_SCALE_START_AT, 1.0, FADE_SCALE_DURATION, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	_tweener.interpolate_property(_icon, "rect_scale:y", FADE_SCALE_START_AT, 1.0, FADE_SCALE_DURATION, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	_tweener.interpolate_callback(self, FADE_TOTAL_DURATION, "emit_signal", "marking_finished")
-	_tweener.start()

@@ -16,7 +16,7 @@
 # The theme gets passed to the overlay at build time, so if you
 # change the theme at runtime, make sure you also change the overlay's
 # theme.
-tool
+@tool
 class_name SliceEditor
 extends TextEdit
 
@@ -29,14 +29,16 @@ enum SCROLL_DIR { HORIZONTAL, VERTICAL }
 const BRACKET_PAIRS := {"(": ")", "[": "]", "{": "}"}
 
 var errors_overlay := SliceEditorOverlay.new()
-var errors_overlay_message: ErrorOverlayPopup = ErrorOverlayPopupScene.instance()
+var errors_overlay_message: ErrorOverlayPopup = ErrorOverlayPopupScene.instantiate()
 
 # Array<ScriptError>
-var errors := [] setget set_errors
+var errors: Array = []:
+	set(value):
+		set_errors(value)
 
 var _slice_properties: ScriptSlice = null
 # Used to know when to add an indent level.
-var _current_line := cursor_get_line()
+var _current_line := get_caret_line()
 var _remove_last_character := false
 # Used to automatically close brackets. As soon as you type a bracket, the
 # selection gets erased, so we need to cache that info to wrap the selection in
@@ -57,33 +59,33 @@ func _ready() -> void:
 			break
 		if child is VScrollBar:
 			var vscrollbar: VScrollBar = child
-			vscrollbar.connect(
-				"value_changed", self, "_on_scrollbar_value_changed", [SCROLL_DIR.VERTICAL]
+			vscrollbar.value_changed.connect(func(v: float) -> void:
+				_on_scrollbar_value_changed(v, SCROLL_DIR.VERTICAL)
 			)
 			scroll_offsets.x = vscrollbar.get_minimum_size().x
 
 			found += 1
 		elif child is HScrollBar:
 			var hscrollbar: HScrollBar = child
-			hscrollbar.connect(
-				"value_changed", self, "_on_scrollbar_value_changed", [SCROLL_DIR.HORIZONTAL]
+			hscrollbar.value_changed.connect(func(v: float) -> void:
+				_on_scrollbar_value_changed(v, SCROLL_DIR.HORIZONTAL)
 			)
 			scroll_offsets.y = hscrollbar.get_minimum_size().y
 
 			found += 1
 
 	errors_overlay.name = "ErrorsOverlay"
-	errors_overlay.set_anchors_and_margins_preset(Control.PRESET_WIDE)
-	errors_overlay.margin_right = -scroll_offsets.x
-	errors_overlay.margin_bottom = -scroll_offsets.y
+	errors_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+	errors_overlay.offset_right = -scroll_offsets.x
+	errors_overlay.offset_bottom = -scroll_offsets.y
 	add_child(errors_overlay)
 
 	add_child(errors_overlay_message)
-	errors_overlay_message.set_as_toplevel(true)
+	errors_overlay_message.top_level = true
 	errors_overlay_message.hide()
 
-	connect("text_changed", self, "_on_text_changed")
-	connect("draw", self, "_update_overlays")
+	text_changed.connect(_on_text_changed)
+	draw.connect(_update_overlays)
 
 func _gui_input(event: InputEvent) -> void:
 	# Shortcut uses Enter by default which adds a new line in TextEdit without any means to stop it.
@@ -93,14 +95,16 @@ func _gui_input(event: InputEvent) -> void:
 	
 	# Capture keyboard events if we are the focus owner, otherwise left arrow causes navigation events.
 	if event is InputEventKey:
-		if get_focus_owner() == self:
-			get_tree().set_input_as_handled()
+		var key_event := event as InputEventKey
+		# In Godot 4, Control has focus checks directly.
+		if has_focus():
+			get_viewport().set_input_as_handled()
 
-		if event.is_pressed():
-			_last_typed_character = char(event.unicode)
+		if key_event.pressed:
+			_last_typed_character = char(key_event.unicode) if key_event.unicode != 0 else ""
 
-			_last_selected_text = get_selection_text()
-			if get_selection_text():
+			_last_selected_text = get_selected_text()
+			if not _last_selected_text.is_empty():
 				_last_selection_start = Vector2(get_selection_from_line(), get_selection_from_column())
 				_last_selection_end = Vector2(get_selection_to_line(), get_selection_to_column())
 
@@ -131,18 +135,18 @@ func line_highlight_requested(line_index: int, at_char: int = 0) -> void:
 	if at_char < 0:
 		at_char = 0
 
-	cursor_set_line(line_index, false)
-	cursor_set_column(at_char)
-	center_viewport_to_cursor()
+	set_caret_line(line_index)
+	set_caret_column(at_char)
+	center_viewport_to_caret()
 
 	errors_overlay.add_line_highlight(line_index)
 
 func _on_text_changed() -> void:
 	if _remove_last_character:
-		var column := cursor_get_column()
+		var column := get_caret_column()
 		undo()
 		_remove_last_character = false
-		cursor_set_column(column)
+		set_caret_column(column)
 		return
 
 	if _slice_properties != null:
@@ -154,12 +158,12 @@ func _on_text_changed() -> void:
 
 	# Insert extra indents when entering new code block
 	var previous_line := _current_line
-	_current_line = cursor_get_line()
+	_current_line = get_caret_line()
 	if _current_line > previous_line and not text.ends_with("\t") and text.rstrip("\t").ends_with(":\n"):
-		var column := cursor_get_column()
+		var column := get_caret_column()
 		text += "\t"
-		cursor_set_line(_current_line)
-		cursor_set_column(column + 1)
+		set_caret_line(_current_line)
+		set_caret_column(column + 1)
 	
 	# Automatically close brackets.
 	if _last_typed_character in BRACKET_PAIRS:
@@ -167,41 +171,42 @@ func _on_text_changed() -> void:
 
 		if _last_selected_text:
 			undo()
-			cursor_set_line(_last_selection_start.x)
-			cursor_set_column(_last_selection_start.y)
+			set_caret_line(int(_last_selection_start.x))
+			set_caret_column(int(_last_selection_start.y))
 
-			insert_text_at_cursor(_last_typed_character)
+			insert_text_at_caret(_last_typed_character)
 
-			cursor_set_line(_last_selection_end.x)
-			cursor_set_column(_last_selection_end.y + 1)
+			set_caret_line(int(_last_selection_end.x))
+			set_caret_column(int(_last_selection_end.y) + 1)
 
-		insert_text_at_cursor(closing_bracket)
+		insert_text_at_caret(closing_bracket)
 
-		if not _last_selected_text:
-			cursor_set_column(cursor_get_column() - 1)
+		if _last_selected_text.is_empty():
+			set_caret_column(get_caret_column() - 1)
 
 		_last_selected_text = ""
 		_last_typed_character = ""
 
 	# Pass over a closing bracket if writing a matching character
 	elif _last_typed_character in BRACKET_PAIRS.values():
-		var line := cursor_get_line()
-		var column := cursor_get_column()
+		var line: int = get_caret_line()
+		var column: int = get_caret_column()
 		select(line, column, line, column + 1)
-		var character := get_selection_text()
+		var character: String = get_selected_text()
 		deselect()
 		if character == _last_typed_character:
 			# We simulate pressing backspace to remove the last typed character.
 			var event := InputEventKey.new()
-			event.scancode = KEY_BACKSPACE
+			event.keycode = KEY_BACKSPACE
 			event.pressed = true
 			Input.parse_input_event(event)
-			cursor_set_column(cursor_get_column() + 1)
+			set_caret_column(get_caret_column() + 1)
 
 
 func _on_scrollbar_value_changed(value: float, direction: int) -> void:
 	var vec2 = Vector2(0, value) if direction == SCROLL_DIR.VERTICAL else Vector2(value, 0)
-	emit_signal("scroll_changed", vec2)
+	scroll_changed.emit(vec2)
+
 
 
 # Recreates the overlays at the correct position after the underlying data has
@@ -221,7 +226,7 @@ func _reset_overlays() -> void:
 	errors_overlay.lines_offset = slice_properties.get_start_offset()
 	errors_overlay.character_offset = slice_properties.leading_spaces
 
-	for index in errors.size():
+	for index in range(errors.size()):
 		var error: ScriptError = errors[index]
 
 		var is_outside_lens: bool = (
@@ -235,14 +240,12 @@ func _reset_overlays() -> void:
 		if not error_node:
 			continue
 
-		error_node.connect(
-			"region_entered",
-			errors_overlay_message,
-			"show_message",
-			[error.code, error.message, error_node]
+		error_node.region_entered.connect(func(reference_position: Vector2) -> void:
+			errors_overlay_message.show_message(reference_position, error.code, error.message, error_node)
 		)
-		error_node.connect("region_exited", errors_overlay_message, "hide_message", [error_node])
-
+		error_node.region_exited.connect(func() -> void:
+			errors_overlay_message.hide_message(error_node)
+		)
 
 # Updates the position of existing overlays to align with the text edit after it updates.
 # As such, it is called on the `draw` signal. This method should be fast enough to do that.

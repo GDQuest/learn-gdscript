@@ -4,7 +4,9 @@ extends Node2D
 var _position_start = Vector2(310.5413, 460.98476)
 var _scale_start = Vector2(5.154, 5.154)
 
-onready var _animation_tree := find_node("AnimationTree")
+@onready var _animation_tree: AnimationNodeStateMachinePlayback = (
+	get_node("AnimationTree") as AnimationTree
+).get("parameters/playback") as AnimationNodeStateMachinePlayback
 
 func _ready() -> void:
 	reset()
@@ -17,7 +19,7 @@ func reset_robot():
 
 func _run() -> void:
 	reset_robot()
-	yield(get_tree().create_timer(1), "timeout")
+	await get_tree().create_timer(1.0).timeout
 	Events.emit_signal("practice_run_completed")
 	_animation_tree.travel("saying_hi")
 

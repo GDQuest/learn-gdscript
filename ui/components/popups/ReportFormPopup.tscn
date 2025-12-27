@@ -1,112 +1,56 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://celb73k83rjrw"]
 
-[ext_resource path="res://ui/components/popups/ReportFormPopup.gd" type="Script" id=1]
-[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=2]
-[ext_resource path="res://ui/theme/focus_accent.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=4]
-[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=5]
-[ext_resource path="res://ui/theme/button_outline_large_accent.tres" type="StyleBox" id=6]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=7]
+[ext_resource type="Script" uid="uid://1ohhfekfg6dm" path="res://ui/components/popups/ReportFormPopup.gd" id="1"]
+[ext_resource type="Theme" path="res://ui/theme/gdscript_app_theme.tres" id="7"]
 
 [node name="ReportFormPopup" type="CanvasLayer"]
 layer = 10
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.0352941, 0.0392157, 0.129412, 0.627451 )
+color = Color(0.0352941, 0.0392157, 0.129412, 0.627451)
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -430.0
-margin_top = -370.0
-margin_right = 430.0
-margin_bottom = 370.0
-rect_min_size = Vector2( 860, 740 )
-theme = ExtResource( 7 )
+theme = ExtResource("7")
 
 [node name="Panel" type="Panel" parent="PanelContainer"]
-margin_right = 860.0
-margin_bottom = 740.0
-custom_styles/panel = ExtResource( 5 )
+layout_mode = 2
 
 [node name="Column" type="VBoxContainer" parent="PanelContainer"]
-margin_right = 860.0
-margin_bottom = 740.0
-custom_constants/separation = 0
+layout_mode = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Column"]
-margin_right = 860.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 0, 16 )
+layout_mode = 2
 value = 100.0
-percent_visible = false
 
 [node name="Margin" type="MarginContainer" parent="PanelContainer/Column"]
-margin_top = 16.0
-margin_right = 860.0
-margin_bottom = 740.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Column" type="VBoxContainer" parent="PanelContainer/Column/Margin"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 840.0
-margin_bottom = 704.0
-custom_constants/separation = 12
+layout_mode = 2
 
 [node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column"]
-margin_right = 820.0
-margin_bottom = 31.0
-custom_fonts/font = ExtResource( 2 )
+layout_mode = 2
 text = "Report an issue"
-align = 1
+horizontal_alignment = 1
 
 [node name="Separator" type="HSeparator" parent="PanelContainer/Column/Margin/Column"]
-margin_left = 210.0
-margin_top = 43.0
-margin_right = 610.0
-margin_bottom = 51.0
-rect_min_size = Vector2( 400, 0 )
+layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="Summary" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column"]
-margin_top = 63.0
-margin_right = 820.0
-margin_bottom = 572.0
+layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-bbcode_text = "If you face an issue in the app, please click the link below to report it on GitHub:
-
-[center][b][url=https://github.com/GDQuest/learn-gdscript/issues]GitHub.com > GDQuest > learn-gdscript > Issues[/url][/b][/center]
-
-On that page, you can report any issues, whether something's not working or there's an error in a lesson.
-
-You can generate a log to help us identify the problem. To do so, click here: [b][url=download]generate error log[/url][/b].
-
-Please drag and drop the generated file onto your issue on GitHub to attach it.
-
-[font=res://ui/theme/fonts/font_title.tres]What's GitHub[/font]
-
-GitHub is an online platform to host and manage open-source projects like the GDScript Learn app. It helps developers organize their work and collaborate online.
-
-You can use GitHub to study the source code of many open projects, report issues, or even contribute code yourself.
-
-[font=res://ui/theme/fonts/font_title.tres]How to report an issue[/font]
-
-1. Click the link above to get to the [i]GitHub Issues[/i] page.
-2. Click on the [i]New Issue[/i] button.
-3. Fill out the form to tell us more about your problem.
-
-You will need a GitHub account to do so.
-
-Please add as much relevant information as possible, such as the kind of device you're using to access the app, and maybe attach a screenshot or video clip showcasing the issue.
-
-[center]Thank you for contributing to open source![/center]"
 text = "If you face an issue in the app, please click the link below to report it on GitHub:
 
 GitHub.com > GDQuest > learn-gdscript > Issues
@@ -136,23 +80,10 @@ Please add as much relevant information as possible, such as the kind of device 
 Thank you for contributing to open source!"
 
 [node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column"]
-margin_top = 584.0
-margin_right = 820.0
-margin_bottom = 604.0
-rect_min_size = Vector2( 400, 20 )
+layout_mode = 2
 
 [node name="ConfirmButton" type="Button" parent="PanelContainer/Column/Margin/Column"]
-margin_left = 310.0
-margin_top = 616.0
-margin_right = 510.0
-margin_bottom = 684.0
-rect_min_size = Vector2( 200, 68 )
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 4
-custom_colors/font_color_hover = Color( 0.239216, 1, 0.431373, 1 )
-custom_colors/font_color_pressed = Color( 0.239216, 1, 0.431373, 1 )
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 3 )
-custom_styles/normal = ExtResource( 4 )
+mouse_default_cursor_shape = 2
 text = "OK"

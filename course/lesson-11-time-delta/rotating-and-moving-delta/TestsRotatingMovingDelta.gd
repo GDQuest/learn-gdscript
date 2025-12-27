@@ -1,17 +1,16 @@
 extends PracticeTester
 
 var _robot: Node2D
-var _lines: PoolStringArray
-
+var _lines: PackedStringArray = []
 
 func _prepare() -> void:
 	_robot = _scene_root_viewport.get_child(0).get_node("Robot")
-	_lines = []
+	_lines.clear()
 
 	var index := 0
 	for line in _slice.current_text.split("\n"):
 		line = line.strip_edges().replace(" ", "")
-		if line != "" and index > 0:
+		if not line.is_empty() and index > 0:
 			_lines.push_back(line)
 		index += 1
 

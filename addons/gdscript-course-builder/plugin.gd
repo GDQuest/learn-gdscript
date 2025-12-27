@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorPlugin
 
 var _main_screen_plugin

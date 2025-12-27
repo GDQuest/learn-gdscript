@@ -1,31 +1,43 @@
-tool
+@tool
 extends ColorRect
 
 # regex pattern used to convert end_datetime_iso to _end_datetime
 const REGEX_PATTERN_DATETIME := "(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})T(?<hour>\\d{2}):(?<minute>\\d{2})"
 
-export var title := "" setget set_title
-# String displayed on the label after "Only until"
-export var only_until_string := "" setget set_only_until_string
+@export var _title: String = ""
+@export var _only_until_string: String = ""
+
+var title: String:
+	set(value):
+		set_title(value)
+	get:
+		return _title
+
+var only_until_string: String:
+	set(value):
+		set_only_until_string(value)
+	get:
+		return _only_until_string
+
 # Datetime string in ISO format to end the sale. After this date, the banner will not show anymore.
-export var end_datetime_iso := "2020-01-01T00:00"
+@export var end_datetime_iso := "2020-01-01T00:00"
 # Web page to open when clicking the button
-export var sale_url := ""
+@export var sale_url := ""
 
 var _end_datetime := {year = 2022, month = 12, day = 1, hour = 0, minute = 0}
 var _datetime_regex := RegEx.new()
 
-onready var title_label := $PanelContainer/Layout/Margin/Column/Title as Label
-onready var time_left_label := $PanelContainer/Layout/Margin/Column/TimeLeftLabel as Label
-onready var go_button := $PanelContainer/Layout/Margin/Column/GoButton as Button
-onready var close_button := $PanelContainer/Control/CloseButton as Button
+@onready var title_label := $PanelContainer/Layout/Margin/Column/Title as Label
+@onready var time_left_label := $PanelContainer/Layout/Margin/Column/TimeLeftLabel as Label
+@onready var go_button := $PanelContainer/Layout/Margin/Column/GoButton as Button
+@onready var close_button := $PanelContainer/Control/CloseButton as Button
 
 
 func _ready() -> void:
 	set_title(title)
 	set_only_until_string(only_until_string)
-	go_button.connect("pressed", self, "_open_sale_url")
-	close_button.connect("pressed", self, "hide")
+	go_button.pressed.connect(_open_sale_url)
+	close_button.pressed.connect(hide)
 	if get_tree().current_scene != self:
 		hide()
 
@@ -58,33 +70,33 @@ func _get_configuration_warning() -> String:
 
 
 func set_title(new_title: String) -> void:
-	title = new_title
-	if title_label:
+	_title = new_title
+	if is_inside_tree():
 		title_label.text = new_title
 
 
 func set_only_until_string(new_date: String) -> void:
-	only_until_string = new_date
+	_only_until_string = new_date
 	if time_left_label:
 		time_left_label.text = "Only until " + new_date
 
 
 func is_sale_over() -> bool:
-	var datetime := OS.get_datetime(true)
+	var datetime := Time.get_datetime_dict_from_system(true)
 
-	if datetime.year > _end_datetime.year:
+	if datetime["year"] > _end_datetime["year"]:
 		return true
-	if datetime.year < _end_datetime.year:
+	if datetime["year"] < _end_datetime["year"]:
 		return false
-	if datetime.month > _end_datetime.month:
+	if datetime["month"] > _end_datetime["month"]:
 		return true
-	if datetime.month == _end_datetime.month and datetime.day > _end_datetime.day:
+	if datetime["month"] == _end_datetime["month"] and datetime["day"] > _end_datetime["day"]:
 		return true
-	if datetime.day < _end_datetime.day:
+	if datetime["day"] < _end_datetime["day"]:
 		return false
-	if datetime.hour > _end_datetime.hour:
+	if datetime["hour"] > _end_datetime["hour"]:
 		return true
-	if datetime.hour == _end_datetime.hour and datetime.minute > _end_datetime.minute:
+	if datetime["hour"] == _end_datetime["hour"] and datetime["minute"] > _end_datetime["minute"]:
 		return true
 
 	return false

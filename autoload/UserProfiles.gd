@@ -5,6 +5,8 @@
 #
 extends Node
 
+@export var player_name: String = ""
+
 const ROOT_DIR := "user://user_settings"
 
 var current_player := "Player"
@@ -12,7 +14,7 @@ var _loaded_profile: Profile
 
 func profile_exists(profile_name: String) -> bool:
 	var file_path := _get_file_path(profile_name)
-	return File.new().file_exists(file_path)
+	return FileAccess.file_exists(file_path)
 
 
 # Returns the profile designated by the provided name.
@@ -28,9 +30,8 @@ func get_profile(profile_name: String = current_player) -> Profile:
 	var file_path := _get_file_path(profile_name)
 	
 	if not profile_exists(profile_name):
-		var fs = Directory.new()
 		var directory := file_path.get_base_dir()
-		fs.make_dir_recursive(directory)
+		DirAccess.make_dir_recursive_absolute(directory)
 		
 		var user_profile := Profile.new()
 		user_profile.resource_path = file_path
@@ -50,29 +51,29 @@ func get_profile(profile_name: String = current_player) -> Profile:
 
 
 func _get_file_path(file_name: String) -> String:
-	return ROOT_DIR.plus_file(file_name) + ".tres"
+	return ROOT_DIR.path_join(file_name) + ".tres"
 
 
-func list_profiles() -> PoolStringArray:
-	var profiles := PoolStringArray()
-	
-	var fs := Directory.new()
-	var error = fs.open(ROOT_DIR)
-	if error != OK:
-		profiles.push_back(current_player)
+func list_profiles() -> PackedStringArray:
+	var profiles := PackedStringArray()
+
+	var fs := DirAccess.open(ROOT_DIR)
+	if fs == null:
+		profiles.append(current_player)
 		return profiles
-	
+
 	fs.list_dir_begin()
 	var file_name := fs.get_next()
-	while not file_name.empty():
+	while file_name != "":
 		if fs.current_is_dir() or file_name.get_extension() != "tres":
 			file_name = fs.get_next()
 			continue
-		
-		var profile = ResourceLoader.load(file_name) as Profile
-		if profile:
-			profiles.push_back(profile.player_name)
-		
+
+		var full_path := ROOT_DIR.path_join(file_name)
+		var profile := ResourceLoader.load(full_path) as Profile
+		if profile != null:
+			profiles.append(profile.player_name)
+
 		file_name = fs.get_next()
 
 	return profiles

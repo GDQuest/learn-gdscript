@@ -1,4 +1,4 @@
-tool
+@tool
 extends MarginContainer
 
 signal block_removed
@@ -21,70 +21,75 @@ var _confirm_dialog_mode := -1
 var _change_quiz_type_target := -1
 var _drag_preview_style: StyleBox
 
-onready var _background_panel := $BackgroundPanel as PanelContainer
-onready var _header_bar := $BackgroundPanel/Layout/HeaderBar as Control
-onready var _drag_icon := $BackgroundPanel/Layout/HeaderBar/DragIcon as TextureRect
-onready var _drop_target := $DropTarget as Control
+@onready var _background_panel := $BackgroundPanel as PanelContainer
+@onready var _header_bar := $BackgroundPanel/Layout/HeaderBar as Control
+@onready var _drag_icon := $BackgroundPanel/Layout/HeaderBar/DragIcon as TextureRect
+@onready var _drop_target := $DropTarget as Control
 
-onready var _title_label := $BackgroundPanel/Layout/HeaderBar/ContentTitle as Label
-onready var _remove_button := $BackgroundPanel/Layout/HeaderBar/RemoveButton as Button
+@onready var _title_label := $BackgroundPanel/Layout/HeaderBar/ContentTitle as Label
+@onready var _remove_button := $BackgroundPanel/Layout/HeaderBar/RemoveButton as Button
 
-onready var _question_line_edit := $BackgroundPanel/Layout/Question/LineEdit as LineEdit
-onready var _quiz_type_options := $BackgroundPanel/Layout/Settings/QuizTypeOption as OptionButton
+@onready var _question_line_edit := $BackgroundPanel/Layout/Question/LineEdit as LineEdit
+@onready var _quiz_type_options := $BackgroundPanel/Layout/Settings/QuizTypeOption as OptionButton
 
-onready var _body_text_edit := $BackgroundPanel/Layout/Body/Editor/TextEdit as TextEdit
-onready var _body_expand_button := $BackgroundPanel/Layout/Body/Editor/ExpandButton as Button
-onready var _body_info_label := $BackgroundPanel/Layout/Body/Editor/TextEdit/Label as Label
+@onready var _body_text_edit := $BackgroundPanel/Layout/Body/Editor/TextEdit as TextEdit
+@onready var _body_expand_button := $BackgroundPanel/Layout/Body/Editor/ExpandButton as Button
+@onready var _body_info_label := $BackgroundPanel/Layout/Body/Editor/TextEdit/Label as Label
 
-onready var _explanation_text_edit := $BackgroundPanel/Layout/Explanation/Editor/TextEdit as TextEdit
-onready var _explanation_expand_button := $BackgroundPanel/Layout/Explanation/Editor/ExpandButton as Button
-onready var _explanation_info_label := $BackgroundPanel/Layout/Explanation/Editor/TextEdit/Label as Label
+@onready var _explanation_text_edit := $BackgroundPanel/Layout/Explanation/Editor/TextEdit as TextEdit
+@onready var _explanation_expand_button := $BackgroundPanel/Layout/Explanation/Editor/ExpandButton as Button
+@onready var _explanation_info_label := $BackgroundPanel/Layout/Explanation/Editor/TextEdit/Label as Label
 
-onready var _answers_container := $BackgroundPanel/Layout/Answers as PanelContainer
+@onready var _answers_container := $BackgroundPanel/Layout/Answers as PanelContainer
 
-onready var _text_edit_dialog := $TextEditDialog as WindowDialog
+@onready var _text_edit_dialog := $TextEditDialog as Window
 # Poup dialog used to confirm deleting items.
-onready var _confirm_dialog := $ConfirmDialog as ConfirmationDialog
+@onready var _confirm_dialog := $ConfirmDialog as ConfirmationDialog
 
 
 func _ready() -> void:
-	_drag_icon.set_drag_forwarding(self)
+	_drag_icon.set_drag_forwarding(
+		Callable(self, "_get_drag_data"),
+		Callable(self, "_can_drop_data"),
+		Callable(self, "_drop_data")
+		)
+	_text_edit_dialog.size = _text_edit_dialog.get_minimum_size()
 
-	_text_edit_dialog.rect_size = _text_edit_dialog.rect_min_size
+	_remove_button.pressed.connect(Callable(self, "_on_remove_block_requested"))
 
-	_remove_button.connect("pressed", self, "_on_remove_block_requested")
+	_body_text_edit.text_changed.connect(Callable(self, "_on_body_text_edit_text_changed"))
+	_body_expand_button.pressed.connect(Callable(self, "_open_text_edit_dialog").bind(_body_text_edit))
 
-	_body_text_edit.connect("text_changed", self, "_on_body_text_edit_text_changed")
-	_body_expand_button.connect("pressed", self, "_open_text_edit_dialog", [_body_text_edit])
 
-	_explanation_text_edit.connect("text_changed", self, "_on_explanation_text_edit_text_changed")
-	_explanation_expand_button.connect(
-		"pressed", self, "_open_text_edit_dialog", [_explanation_text_edit]
+	_explanation_text_edit.text_changed.connect(Callable(self, "_on_explanation_text_edit_text_changed"))
+	_explanation_expand_button.pressed.connect(
+	Callable(self, "_open_text_edit_dialog").bind(_explanation_text_edit)
 	)
 
-	_body_text_edit.connect("gui_input", self, "_text_edit_gui_input", [_body_text_edit])
-	_explanation_text_edit.connect(
-		"gui_input", self, "_text_edit_gui_input", [_explanation_text_edit]
-	)
+	_body_text_edit.gui_input.connect(Callable(
+		self, "_text_edit_gui_input").bind(_body_text_edit))
+	_explanation_text_edit.gui_input.connect(Callable(
+		self, "_text_edit_gui_input").bind(_explanation_text_edit))
 
-	_question_line_edit.connect("text_changed", self, "_on_question_line_edit_text_changed")
+	_question_line_edit.text_changed.connect(Callable(self, "_on_question_line_edit_text_changed"))
 
-	_confirm_dialog.connect("confirmed", self, "_on_confirm_dialog_confirmed")
+	_confirm_dialog.confirmed.connect(Callable(self, "_on_confirm_dialog_confirmed"))
 	_confirm_dialog.get_cancel().connect("pressed", self, "_on_confirm_dialog_cancelled")
 
-	_quiz_type_options.connect("item_selected", self, "_on_quiz_type_options_item_selected")
+	_quiz_type_options.item_selected.connect(Callable(self, "_on_quiz_type_options_item_selected"))
 
 	# Update theme items
-	var panel_style = get_stylebox("panel", "Panel").duplicate()
+	var panel_style = get_theme_stylebox("panel", "Panel").duplicate()
 	if panel_style is StyleBoxFlat:
-		panel_style.bg_color = get_color("base_color", "Editor")
-		panel_style.border_color = get_color("prop_section", "Editor").linear_interpolate(
-			get_color("accent_color", "Editor"), 0.1
+		panel_style.bg_color = get_theme_color("base_color", "Editor")
+
+		panel_style.bg_color = get_theme_color("base_color", "Editor").lerp(
+			get_theme_color("accent_color", "Editor"), 0.1
 		)
 		panel_style.border_width_bottom = 2
 		panel_style.border_width_top = (
 			_header_bar.rect_size.y
-			+ panel_style.get_margin(MARGIN_TOP) * 2
+			+ panel_style.get_margin(SIDE_TOP) * 2
 		)
 		panel_style.content_margin_left = 10
 		panel_style.content_margin_right = 10
@@ -93,23 +98,33 @@ func _ready() -> void:
 		panel_style.set_corner_radius_all(2)
 	_background_panel.add_stylebox_override("panel", panel_style)
 
-	_drag_preview_style = get_stylebox("panel", "Panel").duplicate()
+	_drag_preview_style = get_theme_stylebox("panel", "Panel").duplicate()
 	if _drag_preview_style is StyleBoxFlat:
-		_drag_preview_style.bg_color = get_color("prop_section", "Editor").linear_interpolate(
-			get_color("accent_color", "Editor"), 0.3
+		_drag_preview_style.bg_color = get_theme_color("prop_section", "Editor").lerp(
+			get_theme_color("accent_color", "Editor"), 0.3
 		)
 		_drag_preview_style.corner_detail = 4
 		_drag_preview_style.set_corner_radius_all(2)
 
-	_drag_icon.texture = get_icon("Sort", "EditorIcons")
-	_remove_button.icon = get_icon("Remove", "EditorIcons")
-	_body_expand_button.icon = get_icon("DistractionFree", "EditorIcons")
+	_drag_icon.texture = get_theme_icon("Sort", "EditorIcons")
+	_remove_button.icon = get_theme_icon("Remove", "EditorIcons")
+	_body_expand_button.icon = get_theme_icon("DistractionFree", "EditorIcons")
 	_explanation_expand_button.icon = _body_expand_button.icon
 
+	# Drag Support
+	
+func _get_drag_data(_at_position: Vector2) -> Variant:
+	return null
 
+func _can_drop_data(_at_position: Vector2, _data: Variant) -> bool:
+	return false
+
+func _drop_data(_at_position: Vector2, _data: Variant) -> void:
+	pass
+	
 func get_drag_target_rect() -> Rect2:
 	var target_rect = _drag_icon.get_global_rect()
-	target_rect.position -= rect_global_position
+	target_rect.position -= global_position
 	return target_rect
 
 
@@ -142,10 +157,11 @@ func setup(quiz_block: Quiz) -> void:
 	_question_line_edit.text = _quiz.question
 
 	_body_text_edit.text = _quiz.content_bbcode
-	_body_info_label.visible = _quiz.content_bbcode.empty()
+	_body_info_label.visible = _quiz.content_bbcode.is_empty()
+
 
 	_explanation_text_edit.text = _quiz.explanation_bbcode
-	_explanation_info_label.visible = _quiz.explanation_bbcode.empty()
+	_explanation_info_label.visible = _quiz.explanation_bbcode.is_empty()
 
 	if _quiz is QuizInputField:
 		_quiz_type_options.selected = 2
@@ -157,13 +173,13 @@ func setup(quiz_block: Quiz) -> void:
 	_rebuild_answers()
 
 
-func search(search_text: String, from_line := 0, from_column := 0) -> PoolIntArray:
-	var result := PoolIntArray()
+func search(search_text: String, from_line := 0, from_column := 0) -> PackedInt32Array:
+	var result := PackedInt32Array()
 	for text_edit in [_body_text_edit, _explanation_text_edit]:
 		result = text_edit.search(search_text, TextEdit.SEARCH_MATCH_CASE, from_line, from_column)
-		if not result.empty():
-			var line := result[TextEdit.SEARCH_RESULT_LINE]
-			var column := result[TextEdit.SEARCH_RESULT_COLUMN]
+		if not result.is_empty():
+			var line: int = result[0]
+			var column: int = result[1]
 			text_edit.grab_focus()
 			text_edit.select(line, column, line, column + search_text.length())
 			break
@@ -175,7 +191,7 @@ func _rebuild_answers() -> void:
 		child.queue_free()
 
 	var scene = QuizChoiceListScene if _quiz is QuizChoice else QuizInputFieldScene
-	var instance = scene.instance()
+	var instance = scene.instantiate()
 	_answers_container.add_child(instance)
 	instance.setup(_quiz)
 
@@ -184,7 +200,7 @@ func _rebuild_answers() -> void:
 func _show_confirm(message: String, title: String = "Confirm") -> void:
 	_confirm_dialog.window_title = title
 	_confirm_dialog.dialog_text = message
-	_confirm_dialog.popup_centered(_confirm_dialog.rect_min_size)
+	_confirm_dialog.popup_centered(_confirm_dialog.size)
 
 
 # Handlers
@@ -226,13 +242,13 @@ func _on_question_line_edit_text_changed(new_text: String) -> void:
 
 
 func _on_body_text_edit_text_changed() -> void:
-	_body_info_label.visible = _body_text_edit.text.empty()
+	_body_info_label.visible = _body_text_edit.text.is_empty()
 	_quiz.content_bbcode = _body_text_edit.text
 	_quiz.emit_changed()
 
 
 func _on_explanation_text_edit_text_changed() -> void:
-	_explanation_info_label.visible = _explanation_text_edit.text.empty()
+	_explanation_info_label.visible = _explanation_text_edit.text.is_empty()
 	_quiz.explanation_bbcode = _explanation_text_edit.text
 	_quiz.emit_changed()
 
@@ -276,15 +292,26 @@ func _text_edit_gui_input(event: InputEvent, source: TextEdit) -> void:
 
 
 func _open_text_edit_dialog(source: TextEdit) -> void:
-	if _text_edit_dialog.is_connected("confirmed", self, "_transfer_text_edit_dialog_text"):
-		_text_edit_dialog.disconnect("confirmed", self, "_transfer_text_edit_dialog_text")
+	if _text_edit_dialog.is_connected(
+		"confirmed",
+		Callable(self, "_transfer_text_edit_dialog_text")
+	):
+		_text_edit_dialog.disconnect(
+			"confirmed",
+			Callable(self, "_transfer_text_edit_dialog_text")
+		)
 
 	_text_edit_dialog.popup_centered()
 	_text_edit_dialog.text = source.text
-	_text_edit_dialog.set_line_column(source.cursor_get_line(), source.cursor_get_column())
+	_text_edit_dialog.set_line_column(
+		source.cursor_get_line(),
+		source.cursor_get_column()
+	)
 	_text_edit_dialog.popup_centered()
-	_text_edit_dialog.connect(
-		"confirmed", self, "_transfer_text_edit_dialog_text", [source], CONNECT_ONESHOT
+
+	_text_edit_dialog.confirmed.connect(
+		Callable(self, "_transfer_text_edit_dialog_text").bind(source),
+		CONNECT_ONE_SHOT
 	)
 
 

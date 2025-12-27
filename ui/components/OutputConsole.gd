@@ -6,27 +6,32 @@ signal reference_clicked(file_name, line_nb, character)
 signal line_highlight_requested(line_number)
 signal animate_arrow_requested(chars1, chars2)
 
-const OutputConsoleErrorMessage := preload("./OutputConsoleErrorMessage.gd")
-const OutputConsoleErrorMessageScene := preload("./OutputConsoleErrorMessage.tscn")
-const OutputConsolePrintMessageScene := preload("./OutputConsolePrintMessage.tscn")
+const OutputConsoleErrorMessage := preload("res://ui/components/OutputConsoleErrorMessage.gd")
+const OutputConsoleErrorMessageScene := preload("res://ui/components/OutputConsoleErrorMessage.tscn")
+const OutputConsolePrintMessageScene := preload("res://ui/components/OutputConsolePrintMessage.tscn")
 
 var _slice_properties: ScriptSlice = null
 
-onready var _scroll_container := $MarginContainer/VBoxContainer/ScrollContainer as ScrollContainer
-onready var _message_list := $MarginContainer/VBoxContainer/ScrollContainer/MessageList as Control
+@onready var _scroll_container := $MarginContainer/VBoxContainer/ScrollContainer as ScrollContainer
+@onready var _message_list := $MarginContainer/VBoxContainer/ScrollContainer/MessageList as Control
 
-onready var _error_popup := $ErrorPopup as Control
-onready var _error_overlay_popup := $ErrorPopup/ErrorOverlayPopup as ErrorOverlayPopup
-onready var _external_error_popup := $ExternalErrorPopup as Control
+@onready var _error_popup := $ErrorPopup as Control
+@onready var _error_overlay_popup := $ErrorPopup/ErrorOverlayPopup as ErrorOverlayPopup
+@onready var _external_error_popup := $ExternalErrorPopup as Control
 
 
 func _ready() -> void:
-	_external_error_popup.set_as_toplevel(true)
-	_error_popup.set_as_toplevel(true)
-	_error_overlay_popup.connect("hide", _error_popup, "hide")
-	connect("resized", self, "_on_resized")
+	_external_error_popup.top_level = true
+	_error_popup.top_level = true
 
-	MessageBus.connect("print_request", self, "print_bus_message")
+	_error_overlay_popup.visibility_changed.connect(func():
+		if not _error_overlay_popup.visible:
+			_error_popup.hide()
+	)
+	resized.connect(_on_resized)
+
+	MessageBus.print_request.connect(print_bus_message)
+
 
 
 func setup(slice: ScriptSlice) -> void:
@@ -55,13 +60,14 @@ func print_bus_message(
 func clear_messages() -> void:
 	if not is_inside_tree():
 		return
-
 	for message_node in _message_list.get_children():
 		if message_node is OutputConsoleErrorMessage:
-			message_node.disconnect("external_explain_requested", self, "_on_external_requested")
-			message_node.disconnect("show_code_requested", self, "_on_code_requested")
-			message_node.disconnect("explain_error_requested", self, "_on_explain_requested")
+			var err := message_node as OutputConsoleErrorMessage
+			err.external_explain_requested.disconnect(_on_external_requested)
+			err.show_code_requested.disconnect(_on_code_requested)
+			err.explain_error_requested.disconnect(_on_explain_requested)
 
+				
 		_message_list.remove_child(message_node)
 		message_node.queue_free()
 
@@ -72,12 +78,14 @@ func print_output(values: Array) -> void:
 	if not is_inside_tree():
 		return
 
-	var message_node = OutputConsolePrintMessageScene.instance()
+	var message_node := OutputConsolePrintMessageScene.instantiate() as OutputConsolePrintMessage
 	message_node.values = values
 	_message_list.add_child(message_node)
 
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 	_scroll_container.ensure_control_visible(message_node)
+
+
 
 
 func print_error(type: int, text: String, file_name: String, line: int, character: int, code: int) -> void:
@@ -90,7 +98,9 @@ func print_error(type: int, text: String, file_name: String, line: int, characte
 	var show_lines_to := _slice_properties.get_end_offset()
 	var character_offset := _slice_properties.leading_spaces
 
-	var message_node := OutputConsoleErrorMessageScene.instance() as OutputConsoleErrorMessage
+	var message_node := OutputConsoleErrorMessageScene.instantiate(
+	) as OutputConsoleErrorMessage
+
 	message_node.message_severity = type
 	message_node.message_text = text
 	message_node.message_code = code
@@ -103,11 +113,12 @@ func print_error(type: int, text: String, file_name: String, line: int, characte
 		message_node.external_error = true
 
 	_message_list.add_child(message_node)
-	message_node.connect("external_explain_requested", self, "_on_external_requested")
-	message_node.connect("show_code_requested", self, "_on_code_requested")
-	message_node.connect("explain_error_requested", self, "_on_explain_requested")
+	message_node.external_explain_requested.connect(_on_external_requested)
+	message_node.show_code_requested.connect(_on_code_requested)
+	message_node.explain_error_requested.connect(_on_explain_requested)
 
-	yield(get_tree(), "idle_frame")
+
+	await get_tree().process_frame
 	_scroll_container.ensure_control_visible(message_node)
 
 
@@ -127,7 +138,8 @@ func _on_explain_requested(error_code: int, error_message: String) -> void:
 
 
 func _on_resized() -> void:
-	_error_popup.set_margins_preset(Control.PRESET_WIDE)
+	_error_popup.set_anchors_preset(Control.PRESET_FULL_RECT)
+
 
 
 func reset():

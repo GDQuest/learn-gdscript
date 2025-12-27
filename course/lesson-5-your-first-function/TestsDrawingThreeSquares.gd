@@ -12,7 +12,7 @@ func _init() -> void:
 func test_draw_three_squares_of_200_pixels() -> String:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	var polygons := turtle.get_polygons()
-	if polygons.empty():
+	if polygons.is_empty():
 		return tr("Nothing drawn. Did you not call draw_square()?")
 
 	var count := polygons.size()

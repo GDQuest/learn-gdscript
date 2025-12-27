@@ -10,7 +10,7 @@
 # You can probe the tested scene and script slice using the `_scene` and
 # `_slice` properties below.
 class_name PracticeTester
-extends Reference
+extends RefCounted
 
 # Reference to the tested scene. Use it to test the state of nodes in the scene.
 var _scene_root_viewport: Node
@@ -119,4 +119,4 @@ class TestResult:
 
 
 	func is_success() -> bool:
-		return errors.empty()
+		return errors.is_empty()

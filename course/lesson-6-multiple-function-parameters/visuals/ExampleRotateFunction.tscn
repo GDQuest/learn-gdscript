@@ -1,32 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=2]
-[ext_resource path="res://course/common/GDScriptCodeExample.gd" type="Script" id=3]
+[ext_resource path="res://course/common/GDScriptCodeExample.tscn" type="PackedScene" id=1]
 
-[node name="ExampleRotateFunction" type="TextEdit"]
+[node name="Control" type="PanelContainer"]
+margin_right = 614.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 0, 120 )
+size_flags_horizontal = 3
+
+[node name="GDScriptCodeExample" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 607.0
-margin_bottom = 127.0
-rect_min_size = Vector2( 600, 120 )
-size_flags_horizontal = 3
-theme = ExtResource( 1 )
-custom_styles/read_only = ExtResource( 2 )
+margin_bottom = 113.0
+rect_min_size = Vector2( 600, 100 )
 text = "func rotate(radians):
-	rotation = rotation + radians"
-readonly = true
-syntax_highlighting = true
-show_line_numbers = true
-draw_tabs = true
-draw_spaces = true
-context_menu_enabled = false
-shortcut_keys_enabled = false
-smooth_scrolling = true
-caret_block_mode = true
-caret_blink = true
-script = ExtResource( 3 )
-__meta__ = {
-"_editor_description_": ""
-}
-min_size = Vector2( 600, 120 )
+	set_rotation(get_rotation() + radians)"

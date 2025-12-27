@@ -8,5 +8,5 @@ var decimal_number: float = 3.14
 # /EXPORT fix
 
 func _run():
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	Events.emit_signal("practice_run_completed")

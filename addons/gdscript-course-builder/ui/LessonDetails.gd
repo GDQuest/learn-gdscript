@@ -1,4 +1,4 @@
-tool
+@tool
 extends MarginContainer
 
 signal lesson_title_changed(title)
@@ -21,21 +21,21 @@ const INDEX_PRACTICE_TAB := 1
 var _edited_lesson: Lesson
 var _last_search_result: SearchResult
 
-onready var _no_content_block := $NoContent as Control
-onready var _content_block := $Content as Control
+@onready var _no_content_block := $NoContent as Control
+@onready var _content_block := $Content as Control
 
-onready var _lesson_path_value := $Content/LessonPath/LineEdit as LineEdit
-onready var _lesson_title_value := $Content/LessonTitle/LineEdit as LineEdit
-onready var _edit_slug_button := $Content/LessonPath/SlugButton as Button
-onready var _edit_slug_dialog := $SlugDialog as WindowDialog
+@onready var _lesson_path_value := $Content/LessonPath/LineEdit as LineEdit
+@onready var _lesson_title_value := $Content/LessonTitle/LineEdit as LineEdit
+@onready var _edit_slug_button := $Content/LessonPath/SlugButton as Button
+@onready var _edit_slug_dialog := $SlugDialog as Window
 
-onready var _lesson_tabs := $Content/LessonContent as TabContainer
-onready var _lesson_content_blocks := $Content/LessonContent/ContentBlocks/ItemList as SortableList
-onready var _add_content_block_button := $Content/LessonContent/ContentBlocks/ToolBar/AddBlockButton as Button
-onready var _add_quiz_button := $Content/LessonContent/ContentBlocks/ToolBar/AddQuizButton as Button
-onready var _insert_content_block_dialog := $InsertContentBlockDialog as WindowDialog
-onready var _lesson_practices := $Content/LessonContent/Practices/ItemList as Control
-onready var _add_practice_button := $Content/LessonContent/Practices/ToolBar/AddPracticeButton as Button
+@onready var _lesson_tabs := $Content/LessonContent as TabContainer
+@onready var _lesson_content_blocks := $Content/LessonContent/ContentBlocks/ItemList as SortableList
+@onready var _add_content_block_button := $Content/LessonContent/ContentBlocks/ToolBar/AddBlockButton as Button
+@onready var _add_quiz_button := $Content/LessonContent/ContentBlocks/ToolBar/AddQuizButton as Button
+@onready var _insert_content_block_dialog := $InsertContentBlockDialog as Window
+@onready var _lesson_practices := $Content/LessonContent/Practices/ItemList as Control
+@onready var _add_practice_button := $Content/LessonContent/Practices/ToolBar/AddPracticeButton as Button
 
 
 func _ready() -> void:
@@ -45,22 +45,22 @@ func _ready() -> void:
 	_content_block.hide()
 	_no_content_block.show()
 
-	_lesson_tabs.connect("tab_changed", self, "_on_LessonContent_tab_changed")
+	_lesson_tabs.tab_changed.connect(Callable(self, "_on_LessonContent_tab_changed"))
 
-	_lesson_title_value.connect("text_changed", self, "_on_title_text_changed")
-	_add_content_block_button.connect("pressed", self, "_on_content_block_added")
-	_add_quiz_button.connect("pressed", self, "_on_quiz_added")
-	_lesson_content_blocks.connect("item_moved", self, "_on_content_block_moved")
-	_lesson_content_blocks.connect("item_requested_at_index", self, "_on_content_block_requested")
-	_add_practice_button.connect("pressed", self, "_on_practice_added")
-	_lesson_practices.connect("item_moved", self, "_on_practice_moved")
-	_lesson_practices.connect("item_requested_at_index", self, "_on_practice_added")
+	_lesson_title_value.text_changed.connect(Callable(self, "_on_title_text_changed"))
+	_add_content_block_button.pressed.connect(Callable(self, "_on_content_block_added"))
+	_add_quiz_button.pressed.connect(Callable(self, "_on_quiz_added"))
+	_lesson_content_blocks.item_moved.connect(Callable(self, "_on_content_block_moved"))
+	_lesson_content_blocks.item_requested_at_index.connect(Callable(self, "_on_content_block_requested"))
+	_add_practice_button.pressed.connect(Callable(self, "_on_practice_added"))
+	_lesson_practices.item_moved.connect(Callable(self, "_on_practice_moved"))
+	_lesson_practices.item_requested_at_index.connect(Callable(self, "_on_practice_added"))
 
-	_edit_slug_button.connect("pressed", self, "_on_edit_slug_pressed")
-	_edit_slug_dialog.connect("confirmed", self, "_on_edit_slug_confirmed")
+	_edit_slug_button.pressed.connect(Callable(self, "_on_edit_slug_pressed"))
+	_edit_slug_dialog.confirmed.connect(Callable(self, "_on_edit_slug_confirmed"))
 
-	_insert_content_block_dialog.connect("block_selected", self, "_on_content_block_added")
-	_insert_content_block_dialog.connect("quiz_selected", self, "_on_quiz_added")
+	_insert_content_block_dialog.block_selected.connect(Callable(self, "_on_content_block_added"))
+	_insert_content_block_dialog.quiz_selected.connect(Callable(self, "_on_quiz_added"))
 
 
 func _update_theme() -> void:
@@ -68,16 +68,16 @@ func _update_theme() -> void:
 		return
 
 	_lesson_path_value.add_color_override(
-		"font_color_uneditable", get_color("disabled_font_color", "Editor")
+		"font_color_uneditable", get_theme_color("disabled_font_color", "Editor")
 	)
-	_add_content_block_button.icon = get_icon("New", "EditorIcons")
+	_add_content_block_button.icon = get_theme_icon("New", "EditorIcons")
 	_add_quiz_button.icon = _add_content_block_button.icon
-	_add_practice_button.icon = get_icon("New", "EditorIcons")
+	_add_practice_button.icon = get_theme_icon("New", "EditorIcons")
 
-	var tab_style = get_stylebox("panel", "TabContainer")
+	var tab_style = get_theme_stylebox("panel", "TabContainer")
 	if tab_style is StyleBoxFlat:
-		tab_style.bg_color = get_color("base_color", "Editor").linear_interpolate(
-			get_color("dark_color_1", "Editor"), 0.5
+		tab_style.bg_color = get_theme_color("base_color", "Editor").lerp(
+			get_theme_color("dark_color_1", "Editor"), 0.5
 		)
 	_lesson_tabs.add_stylebox_override("panel", tab_style)
 
@@ -103,7 +103,7 @@ func set_lesson(lesson: Lesson) -> void:
 
 	_lesson_path_value.text = (
 		"* unsaved"
-		if _edited_lesson.resource_path.empty()
+		if _edited_lesson.resource_path.is_empty()
 		else _edited_lesson.resource_path
 	)
 	_lesson_title_value.text = _edited_lesson.title
@@ -132,12 +132,13 @@ func search(query: String) -> void:
 
 		var start_line := _last_search_result.start_line if _last_search_result else 0
 		var start_column := _last_search_result.end_column if _last_search_result else 0
-		var text_edit_search_result: PoolIntArray = block.search(query, start_line, start_column)
-		if not text_edit_search_result.empty():
-			var line := text_edit_search_result[TextEdit.SEARCH_RESULT_LINE]
-			var column := text_edit_search_result[TextEdit.SEARCH_RESULT_COLUMN]
+		var text_edit_search_result: Vector2i = block.search(query, start_line, start_column)
+		if text_edit_search_result.x != -1:
+			var line := text_edit_search_result.x
+			var column := text_edit_search_result.y
 			result = SearchResult.new(index, line, column, column + query.length(), "text")
 			break
+
 
 	_last_search_result = result
 
@@ -174,10 +175,11 @@ func _recreate_practices() -> void:
 
 
 func _create_practice_item(practice: Practice, i: int) -> void:
-	var instance: LessonPractice = PracticeScene.instance()
+	var instance: LessonPractice = PracticeScene.instantiate()
 	_lesson_practices.add_item(instance)
-	instance.connect("practice_removed", self, "_on_practice_removed", [i])
-	instance.connect("got_edit_focus", self, "_on_practice_got_edit_focus", [instance])
+
+	instance.practice_removed.connect(Callable(self, "_on_practice_removed").bind(i))
+	instance.got_edit_focus.connect(Callable(self, "_on_practice_got_edit_focus").bind(instance))
 
 	instance.set_list_index(i)
 	instance.set_practice(practice)
@@ -202,7 +204,7 @@ func _on_edit_slug_pressed() -> void:
 		return
 
 	var slug_text = ""
-	if not _edited_lesson.resource_path.empty():
+	if not _edited_lesson.resource_path.is_empty():
 		slug_text = _edited_lesson.resource_path.get_base_dir().get_file().trim_prefix("lesson-")
 
 	_edit_slug_dialog.slug_text = slug_text
@@ -231,7 +233,7 @@ func _on_content_block_added(at_index: int = -1) -> void:
 	_edited_lesson.emit_changed()
 
 	_recreate_content_blocks()
-	block_data.connect("changed", self, "_on_lesson_resource_changed")
+	block_data.changed.connect(Callable(self, "_on_lesson_resource_changed"))
 
 
 func _on_quiz_added(at_index: int = -1) -> void:
@@ -248,7 +250,7 @@ func _on_quiz_added(at_index: int = -1) -> void:
 	_edited_lesson.emit_changed()
 
 	_recreate_content_blocks()
-	block_data.connect("changed", self, "_on_lesson_resource_changed")
+	block_data.changed.connect(Callable(self, "_on_lesson_resource_changed"))
 
 
 func _on_content_block_moved(item_index: int, new_index: int) -> void:
@@ -305,7 +307,7 @@ func _on_practice_added(at_index: int = -1) -> void:
 	_edited_lesson.emit_changed()
 
 	_recreate_practices()
-	practice_data.connect("changed", self, "_on_lesson_resource_changed")
+	practice_data.changed.connect(Callable(self, "_on_lesson_resource_changed"))
 
 
 func _on_practice_moved(item_index: int, new_index: int) -> void:

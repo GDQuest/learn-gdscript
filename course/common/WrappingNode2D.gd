@@ -2,25 +2,28 @@ class_name WrappingNode2D
 extends Node2D
 
 var _bounds := Rect2()
-var _sprites := []
+var _sprites: Array[CanvasItem] = []
 
-
-func calculate_bounding_rect(sprites: Array) -> Rect2:
-	if sprites.empty():
-		print_debug("No sprites to calculate bounding rect, nothing to calculate.")
+func calculate_bounding_rect(sprites: Array[CanvasItem]) -> Rect2:
+	if sprites.is_empty():
 		return Rect2()
 
 	var bounds := Rect2()
-	for sprite in sprites:
-		var sprite_rect = sprite.get_rect()
-		sprite_rect.position += sprite.position
+	for item: CanvasItem in sprites:
+		var node := item as Node2D
+		if not node:
+			continue
+			
+		var sprite_rect := Rect2()
+		if node.has_method("get_rect"):
+			sprite_rect = node.call("get_rect")
+		
+		sprite_rect.position += node.position
 		bounds = bounds.merge(sprite_rect)
+
 	bounds.position += position
 	return bounds
 
-
-# For now we just teleport the entity, but we may want to duplicate the entity
-# to make it appear like it's moving through the bounds.
 func wrap_inside_frame(frame_bounds: Rect2) -> void:
 	if frame_bounds.encloses(_bounds):
 		return

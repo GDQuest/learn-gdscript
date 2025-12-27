@@ -10,7 +10,7 @@ func _init() -> void:
 func test_draw_corner_of_200_by_200() -> String:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	var polygons := turtle.get_polygons()
-	if polygons.empty():
+	if polygons.is_empty():
 		return tr("Nothing drawn. Did you call move_forward()?")
 
 	var rectangle: DrawingTurtle.Polygon = polygons[0]

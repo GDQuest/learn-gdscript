@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var _animation_tree := find_node("AnimationTree")
-onready var _label := find_node("Label")
+@onready var _animation_tree := find_child("AnimationTree")
+@onready var _label := find_child("Label")
 
 
 func _ready() -> void:
@@ -14,7 +14,7 @@ func _run() -> void:
 		_label.text = robot_name
 	else:
 		_label.text = "robot_name"
-	yield(get_tree().create_timer(1.0), "timeout")
+	await get_tree().create_timer(1.0).timeout
 	_animation_tree.travel("saying_hi")
 	Events.emit_signal("practice_run_completed")
 

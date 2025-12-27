@@ -1,20 +1,38 @@
 extends PanelContainer
+class_name OutputConsolePrintMessage
 
-var values := [] setget set_values
+var values: Array = []:
+	set(value):
+		set_values(value)
 
-onready var _label := $Label as Label
-onready var _tween := $Tween as Tween
+@onready var _label: Label = $Label
+
+var _tween: Tween
 
 
 func _ready() -> void:
-	_tween.stop_all()
-	_tween.interpolate_property(self, "self_modulate:a", 1.0, 0.25, 1.5)
-	_tween.start()
+	_restart_tween()
+
+
+func _restart_tween() -> void:
+	if _tween:
+		_tween.kill()
+
+	# "self_modulate" exists on CanvasItem; PanelContainer inherits it.
+	# Use tween_property + NodePath for subproperty "a".
+	_tween = create_tween()
+	_tween.tween_property(self, NodePath("self_modulate:a"), 0.25, 1.5)
 
 
 func set_values(new_values: Array) -> void:
 	values = new_values
 	if not is_inside_tree():
-		yield(self, "ready")
+		await ready
 
-	_label.text = PoolStringArray(new_values).join(" ")
+	# Convert to strings safely, then join.
+	var parts: PackedStringArray = PackedStringArray()
+	for v in new_values:
+		parts.append(str(v))
+	_label.text = " ".join(parts)
+
+	_restart_tween()

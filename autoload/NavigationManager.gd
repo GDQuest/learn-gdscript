@@ -11,16 +11,23 @@ enum UNLOAD_TYPE { BACK, OUTLINER }
 
 const ERROR_WRONG_UNLOAD_TYPE := "Unsupported unload type in NavigationManager! Unload type: %s"
 
-var history := PoolStringArray()
-var current_url := "" setget set_current_url, get_current_url
-var is_mobile_platform := OS.get_name() in ["Android", "HTML5", "iOS"]
+var history: PackedStringArray = PackedStringArray()
+
+# Godot 4: replace setget with property setter/getter.
+var _current_url: String = ""
+var current_url: String:
+	get:
+		return get_current_url()
+	set(value):
+		set_current_url(value)
+
+var is_mobile_platform := OS.get_name() in ["Android", "Web", "iOS"]
 var arguments := {}
 
 var _current_unload_type := -1
 var _url_normalization_regex := RegExpGroup.compile(
 	"^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)\\.(?<extension>t?res)"
 )
-
 
 func _init() -> void:
 	_parse_arguments()
@@ -49,7 +56,7 @@ func _parse_arguments() -> void:
 func _is_unload_confirmation_required() -> bool:
 	# For the home screen and outliner, get_current_url() returns "". We use
 	# that to return false for those screens.
-	if get_current_url():
+	if get_current_url() != "":
 		var resource = get_navigation_resource(get_current_url())
 		return resource is Practice or resource is Lesson
 
@@ -111,14 +118,13 @@ func _navigate_back() -> void:
 		navigate_to_outliner()
 		return
 
-	history.remove(history.size() - 1)
+	history.remove_at(history.size() - 1)
 	_js_back()
 
 	emit_signal("back_navigation_requested")
 
 
 func _navigate_to_outliner() -> void:
-	# prints("emptying history")
 	history.resize(0)
 	_js_to_outliner()
 
@@ -136,7 +142,7 @@ func navigate_to(metadata: String) -> void:
 		return
 	var normalized := NormalizedUrl.new(regex_result)
 
-	if not normalized.path:
+	if normalized.path == "":
 		push_error("`%s` is not a valid path" % metadata)
 		return
 
@@ -159,8 +165,10 @@ func get_navigation_resource(resource_id: String) -> Resource:
 	if is_lesson:
 		return load(resource_id) as Resource
 
-	var lesson_path := resource_id.get_base_dir().plus_file("lesson.tres")
+	var lesson_path := resource_id.get_base_dir().path_join("lesson.tres")
 	var lesson_data := load(lesson_path) as Lesson
+	if lesson_data == null:
+		return null
 
 	# If it's not a lesson, it's a practice. May support some other types in future.
 	for practice_res in lesson_data.practices:
@@ -174,7 +182,7 @@ func get_navigation_resource(resource_id: String) -> Resource:
 func _notification(what: int) -> void:
 	if not is_mobile_platform:
 		return
-	if what in [MainLoop.NOTIFICATION_WM_QUIT_REQUEST, MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST]:
+	if what in [NOTIFICATION_WM_CLOSE_REQUEST, NOTIFICATION_WM_GO_BACK_REQUEST]:
 		navigate_back()
 
 
@@ -189,18 +197,22 @@ func _open_rich_text_node_meta(metadata: String) -> void:
 
 
 func connect_rich_text_node(rich_text_node: RichTextLabel) -> void:
+	# Godot 4: RichTextLabel still supports BBCode, but property is `bbcode_enabled`.
 	if not rich_text_node.bbcode_enabled:
 		return
-	if rich_text_node.is_connected("meta_clicked", self, "_open_rich_text_node_meta"):
+
+	var cb := Callable(self, "_open_rich_text_node_meta")
+	if rich_text_node.meta_clicked.is_connected(cb):
 		return
-	rich_text_node.connect("meta_clicked", self, "_open_rich_text_node_meta")
+	rich_text_node.meta_clicked.connect(cb)
 
 
-func set_current_url(_new_url: String) -> void:
-	pass
+func set_current_url(new_url: String) -> void:
+	_current_url = new_url
 
 
-func get_current_url():
+func get_current_url() -> String:
+	# Historical behavior: current url is the last entry.
 	return get_history(1)
 
 
@@ -209,42 +221,45 @@ func get_current_url():
 # JAVASCRIPT INTERFACE
 #
 
-var _js_available := OS.has_feature("JavaScript")
-var _js_history: JavaScriptObject
-var _js_popstate_listener_ref: JavaScriptObject
-var _js_window: JavaScriptObject
-# We do not want to capture the JS state change when we control it ourselves
-# We use this to stop listening on one frame
+var _js_available := OS.has_feature("web")
+var _js_history: Object
+var _js_popstate_listener_ref
+var _js_window: Object
+
+# We do not want to capture the JS state change when we control it ourselves.
+# We use this to stop listening on one frame.
 var _temporary_disable_back_listener := false
 
 
 func _on_init_setup_js() -> void:
 	if not _js_available:
 		return
-	_js_history = JavaScript.get_interface("history")
 
-	# if the reference doesn't survive the method call, the callback will be dereferenced
-	_js_popstate_listener_ref = JavaScript.create_callback(self, "_on_js_popstate")
+	_js_history = JavaScriptBridge.get_interface("history") as Object
+	_js_window = JavaScriptBridge.get_interface("window") as Object
+	if _js_history == null or _js_window == null:
+		_js_available = false
+		return
 
-	_js_window = JavaScript.get_interface("window")
-	# warning-ignore:unsafe_method_access
-	_js_window.addEventListener("popstate", _js_popstate_listener_ref)
+	# Keep a reference so the callback isn't GC'd.
+	_js_popstate_listener_ref = JavaScriptBridge.create_callback(Callable(self, "_on_js_popstate"))
+	_js_window.call("addEventListener", "popstate", _js_popstate_listener_ref)
 
-	# warning-ignore:unsafe_property_access
-	var url: String = (
-		# warning-ignore:unsafe_property_access
-		# warning-ignore:unsafe_property_access
-		_js_window.location.hash.trim_prefix("#").trim_prefix("/")
-		if _js_window.location.hash
-		else ""
-	)
-	if url:
+	var location_obj := _js_window.get("location") as Object
+	var url := ""
+	if location_obj != null:
+		var hash_val = location_obj.get("hash")
+		if hash_val is String:
+			var h := hash_val as String
+			url = h.trim_prefix("#").trim_prefix("/")
+
+	if url != "":
 		navigate_to("res://%s" % [url])
 
 
 # Handles user changing the url manually or pressing back
 func _on_js_popstate(_args: Array) -> void:
-	# we have set this to `false` either in _js_to_outliner or _js_back, we can set it back to true now
+	# We have set this to true either in _js_to_outliner or _js_back; we can restore listening now.
 	if _temporary_disable_back_listener:
 		return
 	_navigate_back()
@@ -256,8 +271,7 @@ func _js_back() -> void:
 	if not _js_available:
 		return
 	_disable_popstate_listener()
-	# warning-ignore:unsafe_method_access
-	_js_history.back()
+	_js_history.call("back")
 	_restore_popstate_listener()
 
 
@@ -267,10 +281,16 @@ func _js_to_outliner() -> void:
 	if not _js_available:
 		return
 	_disable_popstate_listener()
-	# warning-ignore:unsafe_method_access
-	# warning-ignore:unsafe_method_access
-	# warning-ignore:unsafe_property_access
-	_js_history.go(-_js_history.length)
+
+	var len_val = _js_history.get("length")
+	var length_i := 0
+
+	if len_val is int:
+		length_i = len_val
+	elif len_val is float:
+		length_i = len_val as int
+
+	_js_history.call("go", -length_i)
 	_restore_popstate_listener()
 
 
@@ -279,7 +299,7 @@ func _disable_popstate_listener() -> void:
 
 
 func _restore_popstate_listener() -> void:
-	yield(get_tree().create_timer(0.3), "timeout")
+	await get_tree().create_timer(0.3).timeout
 	_temporary_disable_back_listener = false
 
 
@@ -288,8 +308,7 @@ func _restore_popstate_listener() -> void:
 func _push_javascript_state(url: String) -> void:
 	if not _js_available:
 		return
-	# warning-ignore:unsafe_method_access
-	_js_history.pushState(url, "", "#" + url)
+	_js_history.call("pushState", url, "", "#" + url)
 
 
 class NormalizedUrl:

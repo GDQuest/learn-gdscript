@@ -1,20 +1,20 @@
 extends PracticeTester
 
-var game_board: Node2D
-var robot: Node2D
-var path_source := []
-var path_robot := []
+var game_board: Node
+var robot: Node
+var path_source: Array[Vector2] = []
+var path_robot: Array[Vector2] = []
 
 
 func _prepare() -> void:
 	game_board = _scene_root_viewport.get_child(0)
 	robot = game_board.get_node("Robot")
-	path_source = game_board.robot_path
-	path_robot = robot.points
+	path_source = game_board.get("robot_path") as Array[Vector2]
+	path_robot = robot.get("points") as Array[Vector2]
 
 
 func test_robot_moves_along_blue_path() -> String:
-	if game_board.EXPECTED_PATH != path_source:
+	if game_board.get("EXPECTED_PATH") != path_source:
 		return tr("The robot's path changed. Did you change the robot_path array?")
 
 	if path_robot.size() == 0:

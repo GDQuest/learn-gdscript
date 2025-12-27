@@ -2,9 +2,9 @@
 #
 # Usage: override the test() function.
 class_name ScriptVerifier
-extends Reference
+extends RefCounted
 
-const ScriptError := preload("./ScriptError.gd")
+const ScriptErrorScript := preload("./ScriptError.gd")
 const WarningCode := GDScriptCodes.WarningCode
 const ErrorCode := GDScriptCodes.ErrorCode
 const GDQuestErrorCode := GDQuestCodes.ErrorCode
@@ -40,6 +40,6 @@ func test() -> void:
 # this will stop the running application if there's an error
 # in the script
 static func test_file(current_file_name: String) -> bool:
-	var test_file := load(current_file_name) as GDScript
-	var test_instance = test_file.new()
+	var script := load(current_file_name) as GDScript
+	var test_instance = script.new()
 	return test_instance != null

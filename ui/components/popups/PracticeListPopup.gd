@@ -2,16 +2,16 @@ extends ColorRect
 
 const PracticeButtonScene := preload("res://ui/screens/lesson/UIPracticeButton.tscn")
 
-onready var _practice_items := $PanelContainer/Column/Margin/Column/PracticeList/Items as Control
-onready var _cancel_button := $PanelContainer/Column/Margin/Column/Buttons/CancelButton as Button
+@onready var _practice_items := $PanelContainer/Column/Margin/Column/PracticeList/Items as Control
+@onready var _cancel_button := $PanelContainer/Column/Margin/Column/Buttons/CancelButton as Button
 
 
 func _ready() -> void:
-	set_as_toplevel(true)
+	top_level = true
 
-	Events.connect("practice_requested", self, "_on_practice_requested")
-	_cancel_button.connect("pressed", self, "hide")
-	connect("visibility_changed", self, "_on_visibility_changed")
+	Events.practice_requested.connect(_on_practice_requested)
+	_cancel_button.pressed.connect(hide)
+	visibility_changed.connect(_on_visibility_changed)
 
 
 
@@ -27,7 +27,7 @@ func clear_items() -> void:
 
 
 func add_item(practice: Practice, lesson: Lesson, course: Course, current: bool = false) -> void:
-	var button: UIPracticeButton = PracticeButtonScene.instance()
+	var button: UIPracticeButton = PracticeButtonScene.instantiate()
 	button.setup(practice, lesson.get_practice_index(practice.practice_id))
 
 	if course:
