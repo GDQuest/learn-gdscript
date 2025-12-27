@@ -1,0 +1,110 @@
+[lesson title="Looping over dictionaries"]
+
+You can loop over dictionaries, just like you learned to loop over arrays. When you loop over a dictionary, you get its keys one by one. You can then use each key to get its value.
+
+Let's see how this works with two examples.
+
+[title]Displaying an inventory's content[/title]
+
+To display the player's inventory, you need to know what it contains: the name and amount of each item.
+
+To do this, you loop over the dictionary and process each key-value pair one at a time.
+
+You can get the list of all the keys in a dictionary by calling its [code]keys()[/code] function.
+
+[visual path="ExamplePrintKeys.tscn"]
+
+Looping over dictionary keys is so common that GDScript gives you a shortcut.
+
+You can write the dictionary variable name directly after the [code]in[/code] keyword in a [code]for[/code] loop. GDScript automatically loops over the dictionary's keys.
+
+[visual path="CodeLoopOverDictionary.tscn"]
+
+Remember: the name after the [code]for[/code] keyword is a variable name you choose yourself. You could call it [code]item_name[/code], [code]item[/code], [code]key[/code], or anything else. This variable holds one key at a time as the loop runs.
+
+You can get each value with the syntax [code]dictionary[key][/code], as you learned in the previous lesson.
+
+So we can loop over the inventory keys, get their values, and display that information on screen.
+
+[visual path="CodePrintKeyValues.tscn"]
+
+[visual path="ExamplePrintKeyValues.tscn"]
+
+Instead of printing the key-value pairs to the output console, we can write and call a function that displays items on the screen.
+
+[visual path="CodeDisplayInventory.tscn"]
+
+[visual path="ExampleDisplayInventory.tscn"]
+
+[title]Mapping grid cells to units[/title]
+
+You can also use a dictionary to store which units are at which positions on a game board.
+
+This is how you'd typically code a board game, a grid-based RPG, or a tactical RPG.
+
+So far, we used [code]String[/code] keys. But GDScript dictionaries can use any type as a key. In this example, we use [code]Vector2[/code] values as keys to represent grid positions.
+
+The only rule is that every key in a dictionary must be unique.
+
+[visual path="CodeUnitsDict.tscn"]
+
+With a [code]for[/code] loop, you can place all the units on the board when a game starts.
+
+[visual path="CodeUnitsDictForLoop.tscn"]
+
+[visual path="ExampleGameBoard.tscn"]
+
+In the following practices, you will loop over dictionaries and process their content.
+
+[practice id="res://course/lesson-26-looping-over-dictionaries/practice-nVHARbBW.tres" title="Displaying the inventory"]
+[description]The player's inventory needs to appear on screen. Use a loop to display every item.[/description]
+[goal]
+We use a dictionary to store the player's inventory. The keys are item names, and the values are how many of each item the player has.
+
+Loop over the dictionary and display every item in the inventory.
+
+Call the [code]display_item()[/code] function for each item. It takes two arguments: the item name and the amount.
+[/goal]
+[starting_code]
+var inventory = {
+	"healing heart": 3,
+	"gems": 5,
+	"sword": 1,
+}
+
+func run():
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="display-inventory/TestDisplayInventory.gd"]
+[script_slice path="display-inventory/DisplayInventory.gd" name="run"]
+[hint]The [code]display_item()[/code] function needs the item name and its amount. You need to get the amount using the item name as a key in the [code]inventory[/code] dictionary.[/hint]
+[hint]Inside the for loop, you can get the amount of each item using the syntax [code]inventory[item_name][/code], where [code]item_name[/code] is the loop variable you created after the [code]for[/code] keyword.[/hint]
+[docs]display_item[/docs]
+[/practice]
+
+[practice id="res://course/lesson-26-looping-over-dictionaries/practice-bDGt6fUq.tres" title="Placing units on the board"]
+[description]At the start of each battle, units need to appear on the game board. Loop over the dictionary to place them.[/description]
+[goal]
+We have a dictionary named [code]units[/code]. It maps cell positions on the grid to the type of unit at that position.
+
+Use a for loop to place every unit on the game board. Call the [code]place_unit()[/code] function for each unit. It takes two arguments: first the cell position, then the unit type.
+[/goal]
+[starting_code]
+var units = {
+	Vector2(1, 0): "robot",
+	Vector2(2, 2): "turtle",
+	Vector2(3, 0): "robot",
+}
+
+func run():
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="place-units/TestPlaceUnits.gd"]
+[script_slice path="place-units/PlaceUnits.gd" name="run"]
+[hint]The dictionary keys are cell coordinates. You can use them to access the unit type from the [code]units[/code] dictionary.[/hint]
+[hint]Inside the for loop, you can get a unit's type using the syntax [code]units[cell][/code], where [code]cell[/code] is the loop variable you created after the [code]for[/code] keyword.[/hint]
+[docs]place_unit[/docs]
+[/practice]
+[/lesson]

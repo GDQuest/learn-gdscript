@@ -1,0 +1,146 @@
+[lesson title="Drawing a Rectangle"]
+
+We'll use code created by others like we did in the previous lesson. This time, we'll solve a more complicated problem: drawing shapes.
+
+[title]Meet the turtle[/title]
+
+We present you: the turtle! We created the turtle to teach you how to call functions.
+
+[visual path="visuals/TurtleHello.tscn"]
+
+The turtle is a little machine that moves forward, turns, and draws lines along its path.
+
+To make it draw, you give it a list of instructions: on each code line, you call one specific function.
+
+We prepared several functions for you:
+
+- [code]move_forward(pixels)[/code] makes the turtle move forward over a given distance in [i]pixels[/i].  
+- [code]turn_right(degrees)[/code] makes the turtle turn clockwise by a precise amount of [i]degrees[/i].
+- [code]turn_left(degrees)[/code] works the same as [code]turn_right(degrees)[/code], except the turtle turns counter-clockwise.
+
+You'll use these functions the same way you used [code]rotate()[/code] before.
+
+The turtle draws a white line as it moves. We'll use this line to draw shapes.
+
+For example, to move the turtle 200 pixels, you would write [code]move_forward(200)[/code].
+
+[visual path="visuals/ExampleMoveForward.tscn"]
+
+[title]Turning left and right[/title]
+
+The functions [code]turn_left()[/code] and [code]turn_right()[/code] work the same.
+
+To turn 45 degrees to the right, you would write [code]turn_right(45)[/code].
+
+If we call [code]turn_right(45)[/code], the turtle turns 45 degrees to the right before moving on to the next instruction.
+
+[visual path="visuals/ExampleRotate.tscn"]
+
+Using these instructions, we can make any two-dimensional shape we like!
+
+Try to understand the example below. 
+
+In the next practice, you'll use the functions we saw above to first draw a corner, then a rectangle like this one.
+
+[visual path="visuals/ExampleRectangle.tscn"]
+
+[quiz_choice question="In the function call below, which part is the argument?" multiple="false" shuffle="true"]
+[code]move_forward(30)[/code]
+[option]move_forward[/option]
+[option correct]30[/option]
+[explanation]A function's arguments are all the values inside the parentheses. In this case, there's only one, but there can be multiple separated by commas.
+
+In this case, [code]move_forward[/code] is the function's name and [code]30[/code] is the argument.
+
+This function call will make the turtle move forward by [code]30[/code] pixels.[/explanation]
+[/quiz_choice]
+
+[title]The turtle uses code made specifically for this app![/title]
+
+The turtle is a little learning tool custom-made for this course, based on a proven code learning methodology. It's designed to teach you how to use and create functions.
+
+So please don't be surprised if writing code like [code]turn_left()[/code] inside of the Godot editor doesn't work! And don't worry, once you've learned the foundations, you'll see they make it faster and easier to learn Godot functions.
+
+Let's move on to practice! You'll get to play with the turtle functions to draw shapes.
+
+[practice id="res://course/lesson-4-drawing-a-rectangle/practice-Gx0c7DDi.tres" title="Drawing a Corner"]
+[description]Use the turtle to draw a square's corner. You'll then build upon it to draw a rectangle.[/description]
+[goal]
+In this practice, we'll tell the turtle to draw a corner.
+
+The corner is made up of two lines that are [code]200[/code] pixels long. The lines are connected at each end by [code]90[/code] degrees, or right-angle.
+
+The [code]move_forward()[/code] and [code]turn_right()[/code] functions to the right draw a corner, but they're missing some arguments.
+
+Add the missing arguments so the turtle moves forward [code]200[/code] pixels, turns right [code]90[/code] degrees, then moves forward again [code]200[/code] pixels.
+
+We added the first argument for you so the turtle moves forward [code]200[/code] pixels.
+
+In the following practices, we'll draw multiple corners to create rectangles.
+[/goal]
+[starting_code]
+func draw_corner():
+	move_forward(200)
+	turn_right()
+	move_forward()
+[/starting_code]
+[cursor line="3" column="13"]
+[validator path="turning_right/TestsTurningRight.gd"]
+[script_slice path="turning_right/TurningRight.gd" name="draw_corner"]
+[hint]You need to add two arguments to the [code]turn_right()[/code] and [code]move_forward()[/code] functions: [code]90[/code] and [code]200[/code].[/hint]
+[docs]move_forward,turn_right[/docs]
+[/practice]
+
+[practice id="res://course/lesson-4-drawing-a-rectangle/practice-5AJTESv5.tres" title="Drawing a Rectangle"]
+[description]Based on your rectangle corner, you now need to draw a complete rectangle.[/description]
+[goal]
+Add the correct arguments to the functions [code]move_forward()[/code] and [code]turn_right()[/code] to draw a rectangle with a width of [code]200[/code] pixels, and a height of [code]120[/code] pixels.
+
+We wrote the first argument for you.
+
+In the next practice, you'll use the same functions to draw a bigger rectangle.
+[/goal]
+[starting_code]
+func draw_rectangle():
+	move_forward(200)
+	turn_right()
+	move_forward()
+	turn_right()
+	move_forward()
+	turn_right()
+	move_forward()
+[/starting_code]
+[cursor line="3" column="13"]
+[validator path="drawing_rectangle/TestsDrawingRectangle.gd"]
+[script_slice path="drawing_rectangle/DrawingRectangle.gd" name="draw_rectangle"]
+[hint]Both [code]move_forward()[/code] and [code]turn_right()[/code] take a numerical argument between the parenthesis[/hint]
+[hint][code]turn_right[/code]'s numerical argument indicates how many [i]degrees[/i] the turtle should turn.[/hint]
+[hint][code]move_forward[/code]'s numerical arguments indicates how many pixels the turtle should move.[/hint]
+[docs]move_forward,turn_right[/docs]
+[/practice]
+
+[practice id="res://course/lesson-4-drawing-a-rectangle/practice-kGx0c7DD.tres" title="Drawing a Bigger Rectangle"]
+[description]At this point, you're ready to code entirely on your own. Call functions by yourself to draw a complete rectangle.[/description]
+[goal]
+Write out calls to the functions [code]move_forward()[/code] and [code]turn_right()[/code] to draw a rectangle with a width of 220 pixels, and a height of 260 pixels.
+
+We wrote the first two lines for you.
+
+Be sure to write each instruction on a separate line.
+
+Every line should start with one [code]Tab[/code] character so the computer understands it's part of the [code]draw_rectangle()[/code] function.
+[/goal]
+[starting_code]
+func draw_rectangle():
+	move_forward(220)
+	turn_right(90)
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd"]
+[script_slice path="drawing_bigger_rectangle/DrawingBiggerRectangle.gd" name="draw_rectangle"]
+[hint]Start by moving forward to create the height of the rectangle.[/hint]
+[hint][code]move_forward[/code]'s numerical arguments indicates how many pixels the turtle should move.[/hint]
+[hint][code]turn_right[/code]'s numerical argument indicates how many [i]degrees[/i] the turtle should turn.[/hint]
+[docs]move_forward,turn_right[/docs]
+[/practice]
+[/lesson]

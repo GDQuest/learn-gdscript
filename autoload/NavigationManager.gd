@@ -157,10 +157,12 @@ func get_navigation_resource(resource_id: String) -> Resource:
 	var is_lesson := resource_id.ends_with("lesson.tres")
 
 	if is_lesson:
-		return load(resource_id) as Resource
-
+		# TODO: remove when bbcode migration is complete, this can load directly
+		# instead of going through LessonLoader.
+		# Same for other call to LessonLoader below.
+		return LessonLoader.load_lesson(resource_id) as Resource
 	var lesson_path := resource_id.get_base_dir().plus_file("lesson.tres")
-	var lesson_data := load(lesson_path) as Lesson
+	var lesson_data := LessonLoader.load_lesson(lesson_path) as Lesson
 
 	# If it's not a lesson, it's a practice. May support some other types in future.
 	for practice_res in lesson_data.practices:

@@ -1,0 +1,100 @@
+[lesson title="Strings"]
+
+Throughout this course, we've mostly stored numbers in variables. But what if we wanted to store a player's name?
+
+This is where strings help us.
+
+Strings are instrumental in games and applications. We use them to display information such as the description of a spell or the name of a character.
+
+[visual path="visuals/RobotWithRegularName.tscn"]
+
+[title]What are strings[/title]
+
+A [code]String[/code] is a value type which holds text. To create a [code]String[/code], you write text wrapped in quotation marks ([code]""[/code]). For example: [code]"This is a text string."[/code]
+
+The quotation marks differentiate strings from other value types and function names.
+
+You may remember we've used strings before in previous lessons.
+
+[visual path="visuals/PrintString.tscn"]
+
+Under the hood, strings are arrays of characters. In fact, we can use a [code]for[/code] loop to loop through the characters of a [code]String[/code] as we would with any other array.
+
+[visual path="visuals/PrintCharactersInName.tscn"]
+
+[quiz_choice question="Which of these are strings?" multiple="true" shuffle="true"]
+[option]1[/option]
+[option correct]"1"[/option]
+[option correct]"name"[/option]
+[explanation][code]"1"[/code] and [code]"name"[/code] are strings.
+
+[code]"1"[/code] only contains a character and [i]doesn't[/i] represent the number [code]1[/code].
+
+[code]"name"[/code] is made up of four different characters.[/explanation]
+[/quiz_choice]
+
+[title]Why we use strings[/title]
+
+
+
+[visual path="visuals/RobotWithRegularName.tscn"]
+
+Every piece of text you see in this app is a string that Godot is displaying for us.
+
+Much like how [code]Vector2[/code] variables make calculations easier, [code]string[/code] variables come with many helper functions and tricks we can use.
+
+We can use arrays to store strings too. This is useful for chaining animations. In this example, the [code]play_animation()[/code] plays a specific animation.
+
+[visual path="visuals/ExampleCombo.tscn"]
+
+In the next few practices, we'll use strings in combination with different concepts from earlier lessons.
+
+[practice id="res://course/lesson-21-strings/practice-iGjB7tKR.tres" title="Creating string variables"]
+[description]Give the robot a readable name using a string stored in a variable.[/description]
+[goal]
+Currently, the robot has a number stored in the [code]robot_name[/code] variable.
+
+Change the [code]robot_name[/code] variable so that it's a string instead. You can give it any name you'd like.
+[/goal]
+[starting_code]
+var robot_name = 0
+
+func run():
+	print("Hi, " + robot_name + "!")
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="string_error/TestsStringError.gd"]
+[script_slice path="string_error/StringError.gd" name="print_string"]
+[hint]Strings need to be wrapped in quotes like "Robi".[/hint]
+[hint]Replace the number 0 with your string (the robot's name).[/hint]
+[docs]print[/docs]
+[/practice]
+
+[practice id="res://course/lesson-21-strings/practice-NwQMqAYV.tres" title="Using an array of strings to play a combo"]
+[description]Define an array of strings to unleash a powerful combo.[/description]
+[goal]
+In this practice, we'll chain together animations using an array of strings. You might find such combinations in fighting games.
+
+The robot has the following animation names:
+
+- [code]jab[/code] (makes the robot perform a quick punch)
+- [code]uppercut[/code] (the robot uses a powerful jumping punch)
+
+Populate the combo array with animation names as strings.
+
+Then, for each action in the array, call the [code]play_animation()[/code] function to play them.
+
+The array should contain three values, so the robot makes these three attacks: two jabs followed by one uppercut.
+[/goal]
+[starting_code]
+func run():
+	combo = []
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="string_array/TestsStringArray.gd"]
+[script_slice path="string_array/StringArray.gd" name="combo"]
+[hint]Make sure to use ("") for each animation name when you add them to the combo array[/hint]
+[hint]Use a for loop and the [code]play_animation()[/code] function for each animation name[/hint]
+[docs]play_animation[/docs]
+[/practice]
+[/lesson]

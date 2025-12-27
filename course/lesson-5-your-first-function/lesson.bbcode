@@ -1,0 +1,152 @@
+[lesson title="Coding Your First Function"]
+
+So far, we have called existing functions that other developers wrote.
+
+In this lesson, we'll talk more about what functions are and see some examples. Then, you will learn how to define your own functions.
+
+[title]Functions are named sequences of instructions[/title]
+
+Functions are [i]sequences of instructions[/i] we give a name. We call that name an [i]identifier[/i].
+
+Using the identifier, we can get the computer to execute all the instructions inside the function as many times as we need. This is what a [i]function call[/i] does.
+
+[note title="Learn more about identifiers"]
+In computer programming, we talk about [i]identifiers[/i] rather than "names".
+
+It is because a function name is a label the computer uses to precisely [i]identify[/i] and refer to a function or other code elements.
+
+Identifiers are unique: you cannot reuse the same name in a given [i]space[/i] in your code.
+
+If you try to name two functions the same, the computer will raise an error.
+[/note]
+
+If there is any code that you need to run multiple times, you can put it inside a function and give it a name.
+
+The instructions inside a function can be any code you want, and they will all run every time you call the function.
+
+Here's the example of a [code]move_and_rotate()[/code] function that moves the turtle forward and then turns it 90°.
+
+[visual path="ExampleMoveAndRotate.tscn"]
+
+The [code]move_and_rotate()[/code] function consists of two instructions, each on a separate line. Both of those instructions call another familiar function.
+
+You could write another function that calls [code]move_and_rotate()[/code] four times to draw a square of length 200 pixels.
+
+[visual path="ExampleDrawSquare.tscn"]
+
+Every time we call [code]move_and_rotate()[/code], the two functions [code]move_forward(200)[/code] and [code]turn_right(90)[/code] are called in sequence.
+
+In this simple example, it may not feel super useful. Here's a more useful and realistic one: a function to draw any square.
+
+The following function uses [i]parameters[/i], which we will explore in the next lesson.
+
+[i]Drag the slider to change the square's size.[/i]
+
+[visual path="../lesson-6-multiple-function-parameters/visuals/ExampleDrawAnySquare.tscn"]
+
+[title]How to define your own functions[/title]
+
+Let's break down how you define a function.
+
+A function definition starts with the [code]func[/code] keyword followed by a space, the function's name, parentheses, and a colon.
+
+[visual path="VisualFunctionDefinition.tscn"]
+
+[visual path="ExampleFunctionBody.tscn"]
+
+[quiz_choice question="Why do we use functions?" multiple="true" shuffle="true"]
+[option correct]To reuse code multiple times. [/option]
+[option correct]To run multiple instructions in one go.[/option]
+[option correct]To put a name on multiple lines of code.[/option]
+[explanation]Functions are groups of instructions we reuse every time we call the function.
+
+Because we give functions a name, they also allow us to name a set of instructions, which is handy![/explanation]
+[/quiz_choice]
+
+[title]Names in code have rules[/title]
+
+Function identifiers cannot contain spaces. In general, names in programming languages cannot contain spaces.
+
+The computer uses spaces to detect the separation between different keywords and identifiers.
+
+Instead of spaces, in GDScript, we use underscores ("_"). You saw this already with functions like [code]move_forward()[/code] or [code]move_local_x()[/code]. This is the convention we follow in GDScript.
+
+There's another convention programmers use in some other programming languages.
+
+Instead of using underscores, they start words with capital letters except for the first one. With that convention, you'd write function names like [code]moveForward()[/code] or [code]moveLocalX()[/code]
+
+Identifiers also [i]have[/i] to start with a letter or an underscore; You [i]can't[/i] begin with a number, but you can use numbers after the first character.
+
+[quiz_choice question="Which of the following names are valid function names?" multiple="true" shuffle="true"]
+Note that it's fine to use capital letters.
+[option]move forward[/option]
+[option correct]jump[/option]
+[option correct]make3NewCharacters[/option]
+[option correct]move_forward[/option]
+[option]45_degree_turn[/option]
+[explanation]You can't name a function [code]move forward[/code] because it contains a space. Names in code cannot contain spaces.
+
+They can't start with numbers either, which is why [code]45_degree_turn[/code] is also invalid. 
+
+However, having numbers elsewhere in a function name is fine. That's why [code]make3NewCharacters[/code] works.[/explanation]
+[/quiz_choice]
+
+[title]Instantly moving the turtle to a different position[/title]
+
+In order to draw multiple squares in different positions, we introduce a new function for our turtle to use.
+
+The [code]jump()[/code] function picks up the turtle and places it relative to where it is.
+
+So calling [code]jump(-100, 50)[/code] moves the turtle by 100 pixels to the [b]left[/b] and 50 pixels [b]down[/b] without drawing any lines.
+
+[visual path="ExampleJumpingTurtle.tscn"]
+
+[practice id="res://course/lesson-5-your-first-function/practice-QiGjB7tK.tres" title="A function to draw squares"]
+[description]Until now, you've had to write code by hand, and it's boring. It's time to code a reusable function. You'll use it to draw multiple squares.[/description]
+[goal]
+Code a function named [code]draw_square()[/code] to draw one square of length 200 pixels. The function should take no parameters.
+
+Use the [code]move_forward()[/code] and [code]turn_right()[/code] functions to instruct the turtle.
+
+In the following practice, you'll use the [code]draw_square()[/code] function to draw multiple squares by calling your own function.
+[/goal]
+[cursor line="0" column="0"]
+[validator path="TestsDrawingSquare.gd"]
+[script_slice path="drawing_squares/DrawingSquares.gd" name="draw_square"]
+[hint]The function body will be very similar to what you did in the previous practice.[/hint]
+[hint]Don't forget to add a leading Tab character to every line inside the function.[/hint]
+[hint]The function definition (the first line) should be [code]func draw_square():[/code][/hint]
+[docs]move_forward,turn_right[/docs]
+[/practice]
+
+[practice id="res://course/lesson-5-your-first-function/practice-kGx0c7DD.tres" title="Drawing multiple squares"]
+[description]Now you created a function to draw squares, you can reuse it by calling it multiple times.[/description]
+[goal]
+You have a function to draw one square: [code]draw_square()[/code]. Use it to draw three squares.
+
+We already created [code]draw_square()[/code] for you. Create a function named [code]draw_three_squares[/code] that calls [code]draw_square()[/code] three times.
+
+If you just call the function, all three squares will overlap. To stack them diagonally, call [code]jump(300, 300)[/code] between two calls to [code]draw_square()[/code].
+
+Calling [code]jump(300, 300)[/code] makes the turtle jump by 300 pixels to the right and 300 pixels down without drawing any lines.
+[/goal]
+[starting_code]
+func draw_square():
+	move_forward(200)
+	turn_right(90)
+	move_forward(200)
+	turn_right(90)
+	move_forward(200)
+	turn_right(90)
+	move_forward(200)
+	turn_right(90)
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="TestsDrawingThreeSquares.gd"]
+[script_slice path="drawing_multiple_squares/DrawingMultipleSquares.gd" name="draw_three_squares"]
+[hint]You need to define a new function below draw_square() named [code]draw_three_squares().[/code][/hint]
+[hint]Your new function should call [code]draw_square()[/code] three times, on three different lines.[/hint]
+[hint]Between each call to [code]draw_square[/code], there should be a call to [code]jump(300,300)[/code][/hint]
+[docs]move_forward,turn_right[/docs]
+[/practice]
+[/lesson]

@@ -1,0 +1,140 @@
+[lesson title="Value types"]
+
+In your code, values have a particular [i]type[/i]. You have already learned about several: whole numbers, decimal numbers, strings, 2D vectors, arrays, and dictionaries.
+
+The computer uses the type of a value to know which operations and functions you can use with them.
+
+As a result, it's essential to understand types: they are not fully compatible with one another, and misusing them will cause errors.
+
+[title]A prime example[/title]
+
+You want to display the player's health in the interface. Your code tracks health as a whole number, a value of type [code]int[/code] (short for integer).
+
+[visual path="visuals/CodeHealthVar.tscn"]
+
+However, to display it on the player's screen, the computer wants text: it needs a value of type [code]String[/code].
+
+You can concatenate two strings with the [code]+[/code] operator.
+
+[visual path="visuals/ExampleHelloThere.tscn"]
+
+So the following code looks like it could work at first glance.
+
+[visual path="visuals/CodeAddIntToString.tscn"]
+
+But when running the code, we get this strange error.
+
+[visual path="visuals/ErrorInvalidOperands.tscn"]
+
+It tells you can't add values of type [code]String[/code] and [code]int[/code]: they're incompatible.
+
+In that case, you need to convert the [code]health[/code] number into a [code]String[/code].
+
+[title]Converting values into strings[/title]
+
+You can get the text representation of a value by calling the [code]str()[/code] function (short for "string"). The function returns its argument as a new [code]String[/code].
+
+You can use this function whenever you want to turn some number or vector into text.
+
+[visual path="visuals/ExamplePrintHealth.tscn"]
+
+In this case, it turns the number [code]100[/code] into the string [code]"100"[/code]. Or whatever number [code]health[/code] is currently.
+
+[title]Converting strings into numbers[/title]
+
+You can also convert strings into whole numbers or decimal numbers using respectively the [code]int()[/code] and [code]float()[/code] functions.
+
+Those functions can convert what the player writes in a text field into a number. For example, the number of potions to sell at once in a shop.
+
+[visual path="visuals/CodeStringToInt.tscn"]
+
+[title]Some types are partially compatible[/title]
+
+Most types are incompatible. For example, you can't directly add or multiply an array with a number.
+
+However, some types are [i]partially[/i] compatible. For example, you can multiply or divide a vector by a number.
+
+[visual path="visuals/ExamplePrintVectorMult.tscn"]
+
+It is possible because other developers defined that operation for you under the hood.
+
+However, you cannot directly add or subtract a number to a vector. You'll get an error. That's why, in earlier lessons, you had to access the sub-variables of [code]position[/code] to add numbers to them.
+
+[title]A surprising result[/title]
+
+Take the following division: [code]3/2[/code]. What result would you expect to get? [code]1.5[/code]?
+
+[visual path="visuals/ExamplePrintIntDivision.tscn"]
+
+Well, for the computer, the result of [code]3/2[/code] is [code]1[/code].
+
+Wait, what?!
+
+That's because, for the computer, the division of two whole numbers should always result in a whole number.
+
+When you divide decimal numbers instead, you will get a decimal number as a result.
+
+[visual path="visuals/ExamplePrintFloatDivision.tscn"]
+
+Even if it's just a [code]0[/code], adding a decimal place tells the computer we want decimal numbers.
+
+This shows you how mindful you need to be with types. Otherwise, you will get unexpected results. It can get pretty serious: number errors can lead to bugs like controls not working as intended or charging the wrong price to players.
+
+[title]Understanding and mastering types is a key skill for developers[/title]
+
+Programming beginners often struggle due to the lack of understanding of types.
+
+Languages like GDScript hide the types from you by default. As a result, if you don't understand that some are incompatible, you can get stuck when facing type-related errors.
+
+You'll want to keep that in mind in your learning journey. When writing code, you will need to understand everything that's happening.
+
+That said, let's practice some type conversions.
+
+[practice id="res://course/lesson-27-value-types/practice-lkGx0c7D.tres" title="Displaying the player's health and energy"]
+[description]We want to display the player's energy in the interface but face a type error. Use your new knowledge to fix it.[/description]
+[goal]
+We want to display the player's energy in the user interface.
+
+Currently, our code has a type error. We're trying to display a whole number while the [code]display_energy()[/code] function expects a string.
+
+Using the [code]str()[/code] function, clear the type error and make the energy amount display on the interface.
+
+You can't change the [code]energy[/code] variable definition: setting it to [code]"80"[/code] would break the rest of the game's code. You must convert the value when calling [code]display_energy()[/code].
+[/goal]
+[starting_code]
+var energy = 80
+
+func run():
+	display_energy(energy)
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="display-energy/TestDisplayingEnergy.gd"]
+[script_slice path="display-energy/DisplayingEnergy.gd" name="run"]
+[docs]str,display_energy[/docs]
+[/practice]
+
+[practice id="res://course/lesson-27-value-types/practice-izKUdOCQ.tres" title="Letting the player type numbers"]
+[description]We want the player to choose the number of items they buy or sell in our game's shops. But right now, all we get are type errors.[/description]
+[goal]
+In our game's shops, we want to let the player type numbers to select the number of items they want to buy or sell.
+
+We need to know the number of items as an [code]int[/code], but the computer reads the player's input as a [code]String[/code].
+
+Your task is to convert the player's input into numbers for the shop's code to work.
+
+Using the [code]int()[/code] function, convert the player's input into a whole number and store the result in the [code]item_count[/code] variable.
+[/goal]
+[starting_code]
+var player_input = ""
+var item_count = 0
+
+func buy_selected_item():
+	player_input = get_player_input()
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="player-input/TestPlayerInput.gd"]
+[script_slice path="player-input/PlayerInput.gd" name="run"]
+[docs]int[/docs]
+[/practice]
+[/lesson]

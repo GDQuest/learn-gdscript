@@ -1,0 +1,165 @@
+[lesson title="We Stand on the Shoulders of Giants"]
+
+As programmers, we rely on a lot of code created by others before us.
+
+Every programming language comes with a wealth of features created by other programmers to save you time.
+
+We call a bundle of code created by fellow developers a [i]library[/i].
+
+It's a bunch of code sitting there, waiting for you to use it.
+
+Game engines like Godot bundle many libraries together. They provide a massive toolset to save you time when making games.
+
+[title]You'll always use a lot of existing code[/title]
+
+When coding, you always use a lot of code from developers who came before you.
+
+In a moment, you'll write your first code. You'll use [i]functions[/i] created by the Godot developers.
+
+A function is a list of instructions with an exact name. We can tell the computer to execute all the instructions in sequence with that name.
+
+[title]Calling functions[/title]
+
+When you tell the computer to execute a function, we say you [i]call[/i] the function.
+
+To call a function, you write its [i]exact[/i] name followed by an open and closed parenthesis. To call the function named "show", you would write [code]show()[/code].
+
+In Godot, calling [code]show()[/code] makes something visible, like a character or item. The complementary [code]hide()[/code] function hides the entity.
+
+Once an entity is visible, calling [code]show()[/code] again doesn't have any effect.
+
+Similarly, once you hide something, calling [code]hide()[/code] again doesn't change anything.
+
+[i]Click the Run button on any example below to execute the code listing.[/i]
+
+[visual path="ExampleShow.tscn"]
+
+In the code listing above, we write the function call [code]hide()[/code] in a new function named [code]run()[/code] to execute the code. Creating a new function is necessary to execute instructions in GDScript.
+
+[note title="Can you tell me more about that \"run()\" function?"]
+In GDScript, unlike in some other languages, we must write our code inside of custom functions.
+
+You'll learn what functions are and how they work in great detail in the course, but here's a quick look at them if you're curious.
+
+A function is a bundle of code you can execute anytime. It's a named list of instructions.
+
+To define a function, you need to write the [code]func[/code] keyword, the function's name, parentheses, and a colon: [code]func run():[/code] defines a function named [code]run()[/code].
+
+You then go to the next line to write the function's body. That's the instructions of the function.
+
+Notice how each instruction starts with a leading [code]Tab[/code] character. The computer uses that to know which lines are part of the function.
+
+Throughout the course, you'll see many functions called [code]run()[/code].
+
+Those are functions we created to give you interactive examples.
+[/note]
+
+[title]Function arguments[/title]
+
+We use parentheses to call functions because you can give the function [i]arguments[/i] inside the parentheses when calling it.
+
+Here's a [i]sprite[/i] standing straight. If we call the [code]rotate(0.3)[/code] function, the character [i]sprite[/i] turns by 0.3 radians.
+
+[visual path="ExampleRotateSprite.tscn"]
+
+The [code]0.3[/code] part between the parentheses is the function's [i]argument[/i].
+
+Arguments are values (numbers, bits of text, and more) that change how the function behaves.
+
+Arguments let you fine-tune the effect of the function call. They can be optional at times, but functions often require arguments in order to work.
+
+For example, calling [code]rotate()[/code] without any argument would result in an error. Without an argument, Godot doesn't know by [i]how much[/i] you intend to rotate the [i]sprite[/i].
+
+Don't worry about memorizing what arguments each function requires or accepts! As a programmer, the documentation will always be close by for you to refer to.
+
+Finally, notice how we use a dot in the number [code]0.3[/code] above: you need to use a dot like this to represent decimal numbers. You can't use commas as they have a different purpose in code.
+
+[note title="What are radians?"]
+The value of [code]0.3[/code] is an angle in [i]radians[/i]. In daily life, we're used to measuring angles in degrees. The radian is another scale commonly used in video games and math.
+
+You can convert radians into degrees by multiplying them by 180 and dividing them by PI:
+
+[code]degrees = radians * 180 / PI[/code]
+
+An angle of [code]PI[/code] radians corresponds to [code]180[/code] degrees. And [code]2 * PI[/code] is a full turn: [code]360[/code] degrees.
+
+[b]How do radians work exactly?[/b]
+
+Radians are a way to measure angles based on the radius of a circle.
+
+To get the angle in radians, you take the circle's radius and wrap it around the circle. That angle is [code]1[/code] radian because you are wrapping the radius [code]1[/code] time around the circle.
+
+Because the perimeter of a circle is [code]2 * PI * radius[/code], a full turn (360°) corresponds to [code]2 * PI[/code] radians: you need to wrap the radius of a circle [code]2 * PI[/code] times around the circle to make a full circle.
+[/note]
+
+[quiz_choice question="What does the code below do?" multiple="true" shuffle="true"]
+[code]show()[/code]
+[option correct]It calls the function named "show".[/option]
+[option correct]It makes the entity (like a game character or a sprite) visible.[/option]
+[explanation]Both answers were right! Technically, the code calls the [code]show()[/code] function. And doing so makes the game entity visible.[/explanation]
+[/quiz_choice]
+
+Another example: With the [code]move_local_x()[/code] function, you can move the character to its left and right. The function takes one argument: a number of pixels to offset the entity.
+
+The complementary function [code]move_local_y()[/code] makes the character move up and down.
+
+This is one way to move a character in a game, although we'll see more powerful ways to do this later.
+
+[visual path="ExampleMoveSprite.tscn"]
+
+[note title="Why move_local_y(20) moves the character down"]
+With positive values ([code]20[/code]), the code above moves the robot to the right and down.
+
+This is probably different than what you studied at school: in math classes, the horizontal axis points to the right, like here, but the vertical axis points up.
+
+In video games, and generally in 2D computer graphics, the vertical axis points down instead. So whenever you move something on the Y-axis with a positive value, it'll move [i]down[/i].
+[/note]
+
+[quiz_choice question="How do you call a function?" multiple="false" shuffle="true"]
+What is the syntax you use to call a function in general?
+[option correct]You write its name followed by an opening and a closing parenthesis.[/option]
+[option]You write its name followed by a colon.[/option]
+[option]You write a value, like a number, followed by an opening and a closing parenthesis.[/option]
+[explanation]To call a function, you need to write its exact name followed by an opening and a closing parenthesis.
+
+If the function requires one or more [i]arguments[/i], you add them inside the parentheses. Whether you need to do that or not depends on the function.[/explanation]
+[/quiz_choice]
+
+[practice id="res://course/lesson-3-standing-on-shoulders-of-giants/practice-QiGjB7tK.tres" title="Make The Character Visible"]
+[description]The robot's invisible! Call a function to bring it back.[/description]
+[goal]
+Our robot character's invisible! Call the [code]show()[/code] function to make it appear.
+
+Please call [code]show()[/code] inside the [code]run()[/code] function, on line [code]2[/code], and keep the [code]Tab[/code] character at the start of the line. The computer needs that to understand your code.
+[/goal]
+[starting_code]
+func run():
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="make-visible/TestsMakeCharacterVisible.gd"]
+[script_slice path="make-visible/MakeCharacterVisible.gd" name="show"]
+[hint]Your code should call show() inside the run() function.[/hint]
+[docs]show[/docs]
+[/practice]
+
+[practice id="res://course/lesson-3-standing-on-shoulders-of-giants/practice-HJMQ2XNw.tres" title="Make the Robot Upright"]
+[description]The robot is turned sideways. Help it straighten up with a function call.[/description]
+[goal]
+The robot was turned by [code]-0.5[/code] radians. You need to make it upright by calling the [code]rotate()[/code] function.
+
+Please call [code]rotate()[/code] inside the [code]run()[/code] function, on line [code]2[/code], and keep the [code]Tab[/code] character at the start of the line. The computer needs that to understand your code.
+[/goal]
+[starting_code]
+func run():
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="make-upright/TestsMakeRobotUpright.gd"]
+[script_slice path="make-upright/MakeRobotUpright.gd" name="rotate"]
+[hint]You need to use the rotate() function, and give the proper arguments.[/hint]
+[hint]You need to call the rotate() function inside the run() function.[/hint]
+[hint]Call rotate(0.5) to turn the character 0.5 radians clockwise.[/hint]
+[docs]rotate[/docs]
+[/practice]
+[/lesson]

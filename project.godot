@@ -9,6 +9,31 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "BBCodeParser",
+"language": "GDScript",
+"path": "res://resources/lesson_bbcode_parser/BBCodeParser.gd"
+}, {
+"base": "Reference",
+"class": "BBCodeParserData",
+"language": "GDScript",
+"path": "res://resources/lesson_bbcode_parser/ParserData.gd"
+}, {
+"base": "Reference",
+"class": "BBCodeResourceBuilder",
+"language": "GDScript",
+"path": "res://resources/lesson_bbcode_parser/ResourceBuilder.gd"
+}, {
+"base": "Reference",
+"class": "BBCodeTreeValidator",
+"language": "GDScript",
+"path": "res://resources/lesson_bbcode_parser/TreeValidator.gd"
+}, {
+"base": "Resource",
+"class": "CodeBlock",
+"language": "GDScript",
+"path": "res://resources/CodeBlock.gd"
+}, {
 "base": "PanelContainer",
 "class": "CodeEditor",
 "language": "GDScript",
@@ -113,6 +138,11 @@ _global_script_classes=[ {
 "class": "Lesson",
 "language": "GDScript",
 "path": "res://resources/Lesson.gd"
+}, {
+"base": "Reference",
+"class": "LessonBBCodeParser",
+"language": "GDScript",
+"path": "res://resources/LessonBBCodeParser.gd"
 }, {
 "base": "Resource",
 "class": "LessonProgress",
@@ -295,6 +325,11 @@ _global_script_classes=[ {
 "path": "res://course/common/WrappingNode2D.gd"
 } ]
 _global_script_class_icons={
+"BBCodeParser": "",
+"BBCodeParserData": "",
+"BBCodeResourceBuilder": "",
+"BBCodeTreeValidator": "",
+"CodeBlock": "",
 "CodeEditor": "",
 "CodeEditorEnhancer": "",
 "CodeExampleVariableUnderline": "",
@@ -316,6 +351,7 @@ _global_script_class_icons={
 "GameView": "",
 "Glossary": "",
 "Lesson": "",
+"LessonBBCodeParser": "",
 "LessonProgress": "",
 "MiniGDScriptTokenizer": "",
 "OfflineScriptVerifier": "",
@@ -367,6 +403,7 @@ UserProfiles="*res://autoload/UserProfiles.gd"
 TranslationManager="*res://autoload/TranslationManager.gd"
 ThemeManager="*res://autoload/ThemeManager.gd"
 Events="*res://autoload/Events.gd"
+LessonLoader="*res://autoload/LessonLoader.gd"
 NavigationManager="*res://autoload/NavigationManager.gd"
 GDScriptErrorDatabase="*res://autoload/GDScriptErrorDatabase.gd"
 Log="*res://autoload/Log.gd"
