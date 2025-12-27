@@ -1,0 +1,132 @@
+[lesson title="Creating Dictionaries"]
+
+In the last lesson, we used an array to represent a player's inventory.
+
+With just an array of item names, though, we can't easily keep track of the amount of each item.
+
+Instead, we can bundle the item names and amounts into a single [i]dictionary[/i].
+
+A dictionary is a data structure that allows you to map pairs of values. In the pair, we call the first value a [i]key[/i] as we use it to access the second.
+
+In other words, a dictionary has a list of [i]keys[/i], and each key points to a [i]value[/i].
+
+To define a dictionary, we use curly brackets. A colon separates each key and its value. A comma separates each key and value pair.
+
+[visual path="visuals/CodeDictionary.tscn"]
+
+[title]Dictionaries can hold any values[/title]
+
+Dictionaries can map about any value to any other value.
+
+For example, we can use the name of an item as a key and the amount as the corresponding value. This makes dictionaries excellent for keeping track of a player's inventory.
+
+[visual path="visuals/CodeInventory.tscn"]
+
+Here we matched the name (a string) to the amount (a number). But a key could be a string, a number, or even a vector! 
+
+Although we can have all of these different keys, keep in mind that every key has to be [i]unique[/i]. That means we [i]couldn't[/i] have a dictionary like the following.
+
+[visual path="visuals/CodeInventoryError.tscn"]
+
+We would get the following error.
+
+[visual path="visuals/ErrorDuplicateKey.tscn"]
+
+[quiz_choice question="In the above example, which key would cause an error?" multiple="false" shuffle="true"]
+[option correct]"healing heart"[/option]
+[option]"shield"[/option]
+[option]"sword"[/option]
+[explanation]The key [code]"healing heart"[/code] appears [b]twice[/b] in the dictionary.
+
+In the above example, Godot wouldn't know whether to return [code]3[/code] or [code]8[/code] when using [code]inventory["healing heart"][/code]. This is why keys need to be unique.[/explanation]
+[/quiz_choice]
+
+[note title="How dictionaries work under the hood"]
+Dictionaries are also called mappings or [i]associative arrays[/i]. Under the hood, they use arrays and several functions to efficiently store and retrieve values across arrays.
+
+Precisely, dictionaries use a [i]hashing algorithm[/i]. Hashing algorithms convert one value into another.
+
+In this case, hashing consists of converting a given key into a unique whole number. The dictionary then uses that number as an array's index!
+
+That's how a dictionary works: when you give it a key, it converts it into a unique index and uses that index to retrieve the corresponding value in the computer's memory.
+
+That's also why you can't have the same key twice: it would map to the same array index, causing you to overwrite an existing value.
+[/note]
+
+[title]Accessing values[/title]
+
+We access the value of keys by writing the dictionary name, with the key in between square brackets.
+
+[visual path="visuals/SyntaxAccessValue.tscn"]
+
+[visual path="visuals/CodeInventory.tscn"]
+
+[quiz_choice question="How would you access how many gems the player has?" multiple="false" shuffle="true"]
+[option]var item_count = inventory["gem"][/option]
+[option correct]var item_count = inventory["gems"][/option]
+[option]var item_count = inventory["sword"][/option]
+[explanation]We need to make sure the key is the same as we defined in the dictionary.
+
+In our case, [code]var item_count = inventory["gems"][/code] is correct.[/explanation]
+[/quiz_choice]
+
+[title]Changing values[/title]
+
+We can also change values directly, which is useful in our case for adding or removing items from the player's inventory.
+
+[visual path="visuals/CodeAddValue.tscn"]
+
+[visual path="visuals/ExampleAddValue.tscn"]
+
+In the following practices, we'll use a dictionary to create a player inventory and create a function to change the value of items.
+
+[practice id="res://course/lesson-25-creating-dictionaries/practice-tZixQOPR.tres" title="Creating an inventory using a dictionary"]
+[description]Collecting items is fun, but we need a good way to store them. Write a dictionary to display the player's items.[/description]
+[goal]
+Let's give some items to the player.
+
+We use a dictionary for the player's inventory. We defined the [code]inventory[/code] variable for you, but it contains no items yet.
+
+Give the player the following items by adding the correct keys and values to the dictionary:
+
+- Three "healing heart".
+- Nine "gems".
+- One "sword".
+
+The keys should be text strings, and the values whole numbers.
+[/goal]
+[starting_code]
+var inventory = {
+	
+}
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="creating-inventory/TestInventory.gd"]
+[script_slice path="creating-inventory/CreatingInventory.gd" name="create"]
+[hint]Don't forget to add commas to separate each key and value pair.[/hint]
+[hint]To define a key and give it an item count, use [code]"item name" : number[/code].[/hint]
+[/practice]
+
+[practice id="res://course/lesson-25-creating-dictionaries/practice-9clsFcSr.tres" title="Increasing item counts"]
+[description]The player might walk over a pick-up or find something in a chest, so we need a way to change the item counts in our inventory.[/description]
+[goal]
+We want to change the item counts in the player's inventory whenever the player picks up or uses an item.
+
+We've started the [code]add_item()[/code] function for you.
+
+The [code]inventory[/code] dictionary should use the [code]item_name[/code] parameter as the key to access its values, and we should increase the value by [code]amount[/code].
+
+To test this practice, we'll use your [code]add_item()[/code] function to increase the item count of Healing Heart, Gems, and Sword.
+[/goal]
+[starting_code]
+func add_item(item_name, amount):
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="adding-items/TestAddingItems.gd"]
+[script_slice path="adding-items/AddingItems.gd" name="add"]
+[hint]You can access the value in the [code]inventory[/code] dictionary by using [code]inventory[item_name][/code][/hint]
+[hint]Remember to add [code]amount[/code] to the value. You can do this directly with [code]+=[/code][/hint]
+[docs]add_item[/docs]
+[/practice]
+[/lesson]

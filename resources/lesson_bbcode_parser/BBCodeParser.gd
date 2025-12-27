@@ -6,8 +6,9 @@
 class_name BBCodeParser
 extends Reference
 
-# When we tokenize the BBCode, we only consider opening and closing tags and accumulate all the text in between.
-# The goal of these tokens are to delineate just these big chunks.
+# When we tokenize the BBCode, we only consider opening and closing tags and
+# accumulate all the text in between. The goal of these tokens are to delineate
+# just these big chunks.
 enum TokenTypes {
 	TEXT,
 	TAG_OPEN,
@@ -24,9 +25,16 @@ var _result: ParseResult = null
 
 
 func _init() -> void:
+	# TODO: consider moving to a scanner parser, at least using string.find()
+	# and peeking ahead/behind instead of regex. We just need to be careful with
+	# escaped brackets or things like ignoring code/capturing it as plain text.
+	# For now I'm just sticking to regex cause the parser works okay, and it's
+	# not going to change much to scan linearly in GDScript.
+
 	_regex_tag_open = RegEx.new()
 	# Detects opening tags like [tag_name a="value" b] with optional attributes.
-	_regex_tag_open.compile("\\[([a-z_]+)((?:\\s+[a-z_]+(?:=\"[^\"]*\")?)*)\\]")
+	# This also handles escaped quotes in attribute values.
+	_regex_tag_open.compile("\\[([a-z_]+)((?:\\s+[a-z_]+(?:=\"(?:[^\\\\\"]|\\\\.)*\")?)*)\\]")
 
 	_regex_tag_close = RegEx.new()
 	# Detects closing tags like [/tag_name].
@@ -34,7 +42,8 @@ func _init() -> void:
 
 	_regex_attribute = RegEx.new()
 	# Detects attributes like name="value" or single flags like name.
-	_regex_attribute.compile("([a-z_]+)(?:=\"([^\"]*)\")?")
+	# This also handles escaped quotes in attribute values.
+	_regex_attribute.compile("([a-z_]+)(?:=\"((?:[^\\\\\"]|\\\\.)*)\")?")
 
 
 func parse(source: String, result: ParseResult) -> ParseNode:
@@ -70,8 +79,15 @@ func _tokenize_line(line: String, line_number: int) -> Array:
 			var tag_id := _parser_data.get_tag_enum(tag_name)
 
 			if tag_id == _parser_data.Tag.UNKNOWN:
-				if not tag_name in _parser_data.IGNORED_FORMATTING_TAGS:
-					_result.add_error("Unknown closing tag: [/%s]" % tag_name, line_number)
+				# Treat unknown tags (including ignored formatting tags like b,
+				# code, etc.) as literal text to insert into the content
+				var token := Token.new()
+				token.type = TokenTypes.TEXT
+				token.text = close_match.get_string()
+				token.line_number = line_number
+				tokens.append(token)
+				position_current = close_match.get_end()
+				continue
 			else:
 				var token := Token.new()
 				token.type = TokenTypes.TAG_CLOSE
@@ -89,8 +105,14 @@ func _tokenize_line(line: String, line_number: int) -> Array:
 			var tag_id := _parser_data.get_tag_enum(tag_name)
 
 			if tag_id == _parser_data.Tag.UNKNOWN:
-				if not tag_name in _parser_data.IGNORED_FORMATTING_TAGS:
-					_result.add_error("Unknown tag: [%s]" % tag_name, line_number)
+				# Same as above, we turn unknown tags into literal text content
+				var token := Token.new()
+				token.type = TokenTypes.TEXT
+				token.text = open_match.get_string()
+				token.line_number = line_number
+				tokens.append(token)
+				position_current = open_match.get_end()
+				continue
 			else:
 				var token := Token.new()
 				token.type = TokenTypes.TAG_OPEN
@@ -149,9 +171,14 @@ func _parse_attributes(attributes_string: String) -> Dictionary:
 		if attribute_value == "":
 			attributes[attribute_name] = true
 		else:
-			attributes[attribute_name] = attribute_value
+			attributes[attribute_name] = _unescape_attribute_value(attribute_value)
 
 	return attributes
+
+
+# Replaces escaped quotes and backslashes to turn them back into literal text.
+func _unescape_attribute_value(value: String) -> String:
+	return value.replace("\\\"", "\"").replace("\\\\", "\\")
 
 
 func _parse_tokens(tokens: Array) -> ParseNode:

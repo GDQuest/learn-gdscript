@@ -1,0 +1,113 @@
+[lesson title="Defining Your Own Variables"]
+
+In the previous lesson, you used a predefined member variable named [code]position[/code].
+
+In your projects, you will need to define your own variables.
+
+Imagine that you need to track the player's health in your game.
+
+They may start with [code]5[/code] health points. When taking a hit, the health should go down to [code]4[/code]. After another hit, it should be [code]3[/code]. And so on.
+
+To keep track of that, you can create a variable named [code]health[/code] to which you add and subtract points.
+
+The example below introduces the [code]print()[/code] function, which outputs its argument to the output box on the left.
+
+Click the [i]run()[/i] button to instantly run the entire function, and click the [i]step[/i] button to execute lines of code one by one.
+
+The [i]Debugger[/i] panel at the bottom shows the current value of the [code]health[/code] variable.
+
+[visual path="RunPrintVarHealth.tscn"]
+
+After executing the first two lines of code, you will have a health variable storing a value of [code]4[/code].
+
+Below, we'll break down how you define new variables and explain the [code]print()[/code] function.
+
+[title]Defining a variable[/title]
+
+To use a variable, you must first define it so the computer registers its name.
+
+To do so, you start a line of code with the [code]var[/code] keyword followed by your desired variable name. Like [code]func[/code] stands for [i]function[/i], [code]var[/code] stands for [i]variable[/i].
+
+Variables are case-sensitive, which means [code]health[/code] and [code]Health[/code] are technically different variables. Be careful to use the same capitalization wherever you refer to the same variable, or you could be reading or writing to a different variable.
+
+The following line defines a [code]health[/code] variable pointing to no value. You can think of it as creating a product label you have yet to stick onto something.
+
+[visual path="ExampleVarHealth.tscn"]
+
+Like with functions, a member variable's name must be unique inside a given code file. Creating two variables next to each other with the same name will cause an error.
+
+[visual path="ExampleHealthVariableDefinitionError.tscn"]
+
+To use a variable, you want to assign it a starting value. You can do so using the equal sign (=).
+
+This code assigns the value [code]100[/code] to a new variable named [code]health[/code].
+
+[visual path="ExampleHealthAssign.tscn"]
+
+After defining your variable, you can access its value by writing the variable's name.
+
+[visual path="RunPrintVarHealth2.tscn"]
+
+The code above will display the number [code]100[/code] to some output window.
+
+Notice we don't use the [code]var[/code] keyword anymore as we only need it to [i]define[/i] a variable.
+
+Also, once you define a variable, you can change its value anytime with the equal sign.
+
+[visual path="RunSetVarHealth.tscn"]
+
+[title]About the print function[/title]
+
+The [code]print()[/code] function is generally the first function you learn in academic programming courses.
+
+It sends ("prints") the message or value you give it to some output window, often a black window with plain white text.
+
+Programmers often use [code]print()[/code] to quickly check the value of their variables when their game runs.
+
+In the app, we made a special output window that captures calls to [code]print()[/code] and displays a card to make it friendlier for you.
+
+[visual path="RunPrintMessage.tscn"]
+
+Here, the verb [i]print[/i] means "to send information to display on the screen."
+
+The function "prints" things on your computer display; It does not relate to printers.
+
+[title]Variables are like labels[/title]
+
+As we hinted above, in GDScript, variables work a bit like labels.
+
+Assigning a value to a variable is like taking your label (the variable) and sticking it onto some item (the value).
+
+Like a supermarket has a database of product labels, the computer keeps a list of all variables in your code.
+
+Given the variable name, the computer can look up the attached value.
+
+It has an important consequence. In GDScript, you can stick that label to any other value.
+
+[visual path="RunPrintVarString.tscn"]
+
+The above code is like taking a label from the appropriate item and sticking it to the wrong thing:
+
+- At line 2, the [code]health[/code] variable holds a number.
+- From line 3, [code]health[/code] holds text.
+
+The computer will let you do that! The code's syntax and "grammar" are correct, but it's not good.
+
+Variable names should describe the value they contain, so a [code]health[/code] variable with a text value will confuse your future self and other coders. It can also cause errors in your game.
+
+Later on, we'll see how to avoid this issue with [i]variable types[/i]. For now, let's practice creating variables!
+
+[practice id="res://course/lesson-8-defining-variables/practice-lkGx0c7D.tres" title="Define a health variable"]
+[description]In this practice, you'll define your first variable and give it a specific starting value.[/description]
+[goal]
+Define a variable named [code]health[/code] with a starting value of [code]100[/code].
+
+You can define variables inside or outside functions. In this practice, you shouldn't create a function.
+[/goal]
+[cursor line="0" column="0"]
+[validator path="define-health-variable/TestHasHealthVar.gd"]
+[script_slice path="define-health-variable/DefineHealthVar.gd" name="health"]
+[hint]To define a variable, you write the keyword var, a space, and the variable name[/hint]
+[hint]You can assign a value to a variable by writing = followed by the value[/hint]
+[/practice]
+[/lesson]

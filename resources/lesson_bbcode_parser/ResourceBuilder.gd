@@ -177,6 +177,7 @@ func _create_practice(node: BBCodeParser.ParseNode) -> Practice:
 	practice.title = node.attributes.get("title", "")
 
 	var hints := []
+	var doc_refs := []
 
 	for child in node.children:
 		if not child is BBCodeParser.ParseNode:
@@ -196,9 +197,15 @@ func _create_practice(node: BBCodeParser.ParseNode) -> Practice:
 			practice.cursor_line = int(line_number_string)
 			practice.cursor_column = int(column_string)
 		elif child_node.tag == _parser_data.Tag.VALIDATOR:
-			practice.validator_script_path = child_node.attributes.get("path", "")
+			var path = child_node.attributes.get("path", "")
+			if path != "" and path.is_rel_path() and _base_path != "":
+				path = _base_path.plus_file(path)
+			practice.validator_script_path = path
 		elif child_node.tag == _parser_data.Tag.SCRIPT_SLICE:
-			practice.script_slice_path = child_node.attributes.get("path", "")
+			var path = child_node.attributes.get("path", "")
+			if path != "" and path.is_rel_path() and _base_path != "":
+				path = _base_path.plus_file(path)
+			practice.script_slice_path = path
 			practice.slice_name = child_node.attributes.get("name", "")
 		elif child_node.tag == _parser_data.Tag.HINT:
 			hints.append(_clean_text_content(_get_node_text_content(child_node)))
@@ -207,9 +214,10 @@ func _create_practice(node: BBCodeParser.ParseNode) -> Practice:
 			if docs_text != "":
 				var refs := docs_text.split(",")
 				for ref in refs:
-					practice.documentation_references.append(ref.strip_edges())
+					doc_refs.append(ref.strip_edges())
 
 	practice.hints = PoolStringArray(hints)
+	practice.documentation_references = PoolStringArray(doc_refs)
 	if practice.cursor_line == 0 and practice.cursor_column == 0 and practice.starting_code != "":
 		var lines := practice.starting_code.split("\n")
 		practice.cursor_line = lines.size()
