@@ -1,0 +1,130 @@
+[lesson title="Appending and popping values from arrays"]
+
+In previous lessons, you learned how to create arrays to store lists of values and how to loop over them. That's useful, but arrays can do much more.
+
+The real strength of GDScript arrays is that you can add and remove values from them at any time. This lets you build waiting lines of data or piles of data. We call these [i]queues[/i] and [i]stacks[/i], respectively. We'll see what that means in this lesson.
+
+Let's look at a concrete example.
+
+[title]Tracking orders in a restaurant management game[/title]
+
+You're making a restaurant management game where customers place orders, and you need to handle them one by one.
+
+In the example below, customers order meals that end up in a waiting line (a queue). You need to prepare them in the kitchen. We simulate orders arriving and getting completed over time.
+
+[visual path="visuals/ExampleRestaurantOrders.tscn"]
+
+How do you keep track of pending and completed orders? With an array!
+
+When a customer purchases a meal, you want to [i]append[/i] (add) it to the array. Then, as you complete a meal in the kitchen and serve it, you want to remove it from the array.
+
+You can use the [code]append()[/code] function to add values at the end of an array. To remove values from the start, you can use the [code]pop_front()[/code] function. We call it "pop" because the value jumps out of the array.
+
+Try to read the code below before moving on. Don't worry if not everything makes sense, as we'll break it all down.
+
+[visual path="visuals/CodeOrderMeals.tscn"]
+
+Notice how we call some functions by writing a dot after a variable name. Just like some values have variables you can access with a dot (like the [code]x[/code] variable in [code]position.x[/code]), they can also have their own functions.
+
+Functions like [code]append()[/code] and [code]pop_front()[/code] only exist on arrays. To call them, we need to write the array name, then a dot, then the function: [code]array_name.append()[/code].
+
+[separator]
+
+Let's break down the code. We add orders to the [code]waiting_orders[/code] array by appending them.
+
+[visual path="visuals/CodeAppendMeal.tscn"]
+
+We can use a string to represent a meal when calling the [code]add_order()[/code] function.
+
+[visual path="visuals/CodeAddOrder.tscn"]
+
+When completing an order, we remove it from the [code]waiting_orders[/code] array by calling its [code]pop_front()[/code] function. This function gives us the order back, which allows us to assign it to a temporary variable.
+
+[visual path="visuals/CodePopOrder.tscn"]
+
+We can then append the order to our [code]completed_orders[/code] array.
+
+[visual path="visuals/CodeAppendToComplete.tscn"]
+
+When we use an array this way, we call it a [i]queue[/i]: the first element we add to the array is the first one we remove. It's like a waiting line at a store.
+
+[note title="What does #... mean?"]
+We write [code]#...[/code] to show that there is more code here. The three dots mean "we are not showing all the code." We use this to break down code examples and make them easier to learn from.
+
+The hash sign ([code]#[/code]) marks the start of a code comment. It's a line the computer will ignore, which is why it typically appears in grey.
+[/note]
+
+[title]Using arrays as stacks[/title]
+
+Another common use of arrays is [i]stacks[/i] of data.
+
+Take a factory management game where you need to retrieve materials from stacks of crates. They arrive at the factory piled up vertically, and you need to take them from top to bottom.
+
+[visual path="visuals/ExampleCrateStack.tscn"]
+
+To take a crate from the back of the array, this time, we use the [code]pop_back()[/code] array function.
+
+This function removes (pops) the last value from the array and returns it to you.
+
+Here we pop the last value of the array and print what's left of the array to demonstrate how the array gets smaller.
+
+[visual path="visuals/ExamplePrintArrayPop.tscn"]
+
+Like [code]pop_front()[/code], the function returns the value removed from the array. You will often store that value in a variable. This value could be the crate's content, which you can then use to give resources to the player.
+
+When we use an array this way, we call it a [i]stack[/i]: the last element we add is the first one we remove. It's like a pile of plates where you take from the top.
+
+In the following practices, you will use the [code]append()[/code], [code]pop_front()[/code], and [code]pop_back()[/code] array functions.
+
+[practice id="res://course/lesson-23-append-to-arrays/practice-KUdOCQiG.tres" title="Completing orders"]
+[description]Orders are piling up in the kitchen, and we need to clear them fast using the array's [code]pop_front()[/code] function.[/description]
+[goal]
+The [code]waiting_orders[/code] array will be filled over time.
+
+Your job is to move orders from the waiting list to the [code]completed_orders[/code] list using the array's [code]append()[/code] and [code]pop_front()[/code] functions.
+
+Remember that the array's [code]pop_front()[/code] function returns the popped value, which allows you to store it in a variable and then pass it to another function.
+[/goal]
+[starting_code]
+var waiting_orders = []
+var completed_orders = []
+
+func complete_current_order():
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="clearing-meals/TestClearingMeals.gd"]
+[script_slice path="clearing-meals/ClearingMeals.gd" name="complete"]
+[hint]You first need to pop the first value from the pending orders array. To pop a value from the front of an array, you call [code]array.pop_front()[/code].[/hint]
+[hint]You then need to append the popped value to the completed_orders array. To append a value to an array, you can call [code]array.append()[/code].[/hint]
+[docs]array.pop_front,array.append[/docs]
+[/practice]
+
+[practice id="res://course/lesson-23-append-to-arrays/practice-B7tKRHJM.tres" title="Clearing up the crates"]
+[description]Crates are piling up on the platform. Move them out of the way by popping them from their array.[/description]
+[goal]
+Crates are piling up on the platform. Move them out of the way by popping them from the [code]crates[/code] array.
+
+You need to remove them from top to bottom using the array's [code]pop_back()[/code] function.
+
+Your code should remove all the crates in the array using a while loop.
+
+[b]Careful![/b] If you write the while loop incorrectly, you can freeze the program.
+
+You can check if the [code]crates[/code] array still has values by writing [code]while crates:[/code]. This works because an empty array counts as [code]false[/code], and an array with items counts as [code]true[/code].
+[/goal]
+[starting_code]
+var crates = ["healing heart", "shield", "gems", "sword"]
+
+func run():
+	while 
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="popping-crates/TestPoppingCrates.gd"]
+[script_slice path="popping-crates/PoppingCrates.gd" name="run"]
+[hint]Think about how [code]while[/code] loops work.[/hint]
+[hint]Every time you [code]pop[/code] an item, the array's [code]size[/code] gets smaller.[/hint]
+[hint]You can write [code]while crates:[/code] to run code in a loop while there are values in the [code]crates[/code] array.[/hint]
+[docs]array.pop_back[/docs]
+[/practice]
+[/lesson]

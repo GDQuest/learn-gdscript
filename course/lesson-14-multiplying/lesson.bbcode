@@ -1,0 +1,140 @@
+[lesson title="Multiplying"]
+
+[visual path="visuals/LevelUpVisual.tscn"]
+
+We define a [code]level[/code] variable to keep track of the level of the robot. It starts at level one.
+
+When the robot has defeated enough enemies, we call the [code]level_up()[/code] function to increment the robot's level.
+
+[visual path="visuals/CodeLevelUpBasic.tscn"]
+
+As we briefly saw in the last lesson, our robot could have a range of variables that could increase when it levels up.
+
+[visual path="visuals/CodeStats.tscn"]
+
+In this lesson, we'll just focus on increasing the robot's [code]max_health[/code].
+
+The variable [code]max_health[/code] is the maximum amount the robot's [code]health[/code] can be. We change our [code]heal()[/code] function to use this variable.
+
+[visual path="visuals/CodeMaxHealth.tscn"]
+
+We could add [code]5[/code] to the [code]max_health[/code] every time the robot levels up.
+
+[visual path="visuals/CodeMaxHealthLinear.tscn"]
+
+This would increase [code]max_health[/code] the same amount every time.
+
+If we graphed [code]max_health[/code], it'd look something like this.
+
+[visual path="visuals/GraphLinear.tscn"]
+
+This growth is [b]linear[/b].
+
+In our case, we want a feeling of more and more power as the robot levels up.
+
+We want a graph like this.
+
+[visual path="visuals/GraphExp.tscn"]
+
+This growth is [b]exponential[/b].
+
+With each level, more [code]max_health[/code] is added than the previous level up.
+
+To get the exponential growth, we multiply the [code]max_health[/code] by an amount greater than [code]1[/code] each time the robot levels up.
+
+To multiply values together, we use [code]*[/code].
+
+[quiz_choice question="What is the value of damage?" multiple="false" shuffle="true"]
+[code]
+var level = 5
+var power = 3
+
+func calculate_damage():
+	var damage = power * level
+[/code]
+[option correct]15[/option]
+[option]9[/option]
+[option]10[/option]
+[explanation]We multiply [code]power[/code] by [code]level[/code] using [code]*[/code] to get the result of [code]15[/code].[/explanation]
+[/quiz_choice]
+
+We can use [code]*=[/code] in the same way as [code]-=[/code] and [code]+=[/code].
+
+[quiz_choice question="What is the value of damage now?" multiple="false" shuffle="true"]
+[code]
+var level = 5
+var power = 3
+
+func calculate_damage():
+	var damage = power * level
+	damage *= 2
+[/code]
+[option correct]30[/option]
+[option]13[/option]
+[option]25[/option]
+[explanation]The value of [code]damage[/code] starts as [code]15[/code].
+
+Then, [code]damage *= 2[/code] multiplies it by [code]2[/code] to get [code]30[/code].[/explanation]
+[/quiz_choice]
+
+Let's level up our robot and add exponential growth to [code]max_health[/code].
+
+[visual path="visuals/CodeLevelUpExp.tscn"]
+
+In the practices, you'll increase the robot's [code]max_health[/code] and add a special ability to our robot to make it extra tough at high levels.
+
+[practice id="res://course/lesson-14-multiplying/practice-0c7DDizK.tres" title="Increasing maximum health exponentially"]
+[description]We want our robot to increase in strength as it levels up. Let's increase its health exponentially![/description]
+[goal]
+Let's make the robot stronger when it levels up.
+
+Add to the [code]level_up()[/code] function so it does the following:
+
+- Increases [code]level[/code] by one.
+- Increases [code]max_health[/code] by 10%.
+[/goal]
+[starting_code]
+var level = 1
+var max_health = 100
+
+func level_up():
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="increase_max_health/TestHealthIncreased.gd"]
+[script_slice path="increase_max_health/IncreaseMaxHealth.gd" name="level"]
+[hint]To increase a number by 10%, multiply it by [code]1.1[/code][/hint]
+[docs]level_up[/docs]
+[/practice]
+
+[practice id="res://course/lesson-14-multiplying/practice-CQiGjB7t.tres" title="Reducing damage at higher levels"]
+[description]At higher levels, we want our robot to be super tough and take even less damage![/description]
+[goal]
+When our robot's [code]level[/code] is [code]3[/code] or more, we want it to take a lot less damage.
+
+Add to the [code]take_damage()[/code] function so the following happens:
+
+- [code]if[/code] the robot's [code]level[/code] is greater than [code]2[/code], reduce the damage [code]amount[/code] by 50%
+
+The robot is level 3. An enemy is going to attack for 10 damage. This damage should reduce to 5.
+[/goal]
+[starting_code]
+var level = 3
+var health = 100
+var max_health = 100
+
+func take_damage(amount):
+	health -= amount
+
+	if health < 0:
+		health = 0
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="reducing_damage/TestReducingDamage.gd"]
+[script_slice path="reducing_damage/ReducingDamage.gd" name="damage"]
+[hint]You need to use an [code]if[/code] statement at the top of the function to check if the robot's [code]level[/code] is greater than [code]2[/code][/hint]
+[hint]To reduce the [code]amount[/code], multiply it by a value less than [code]1[/code][/hint]
+[hint]Multiplying any value by [code]0.5[/code] reduces it by 50%[/hint]
+[docs]take_damage[/docs]
+[/practice]
+[/lesson]

@@ -1,0 +1,102 @@
+[lesson title="The Game Loop"]
+
+As we've seen, Godot has functions that do certain actions. For example, the [code]show()[/code] and [code]hide()[/code] functions change the visibility of things.
+
+We can also create our own functions to make custom effects like adding or removing health to a character.
+
+Godot also has special functions we can customize or add to.
+
+Take the [code]_process()[/code] function.
+
+[visual path="visuals/ExampleProcessFunction.tscn"]
+
+The [code]_process()[/code] function gets its name because it does calculations or continuous actions.
+
+It's like a juice factory that [b]processes[/b] juice bottles: the bottles are always moving along a conveyor belt, while different machines operate on them.
+
+It's similar in Godot, but this function can run [b]hundreds of times a second[/b].
+
+[quiz_choice question="How many parameters does this function take?" multiple="false" shuffle="true"]
+[code]
+func _process(delta):
+[/code]
+[option correct]1[/option]
+[option]2[/option]
+[explanation]The [code]_process()[/code] function takes one parameter: [code]delta[/code].
+
+We'll look at what [code]delta[/code] is in the next lesson, as well as show how to use it.[/explanation]
+[/quiz_choice]
+
+The [code]_process()[/code] function won't do anything until we add something to it.
+
+You might notice the underscore [code]_[/code] in front of the function name. This is a convention programmers use to coordinate work, and it'll only make sense once you have experience coding in Godot.
+
+For now, all you need to know is that if the function exists in your code, and it is called precisely [code]_process[/code], then Godot will automatically run it every [i]frame[/i].
+
+When Godot draws on the screen, we call that a frame.
+
+[note title="Is this the same for other engines?"]
+Other game engines might use different names like [code]_update()[/code].
+[/note]
+
+[title]Why is the _process() function useful?[/title]
+
+It's perhaps better to see the [code]_process()[/code] function in action.
+
+Take the following example.
+
+[visual path="visuals/ExampleRotatingSprite.tscn"]
+
+When you click the button [code]set_process(true)[/code], you activate processing on the robot.
+
+From there, every frame, Godot runs the [code]_process()[/code] function.
+
+Since we wrote a [code]rotate()[/code] instruction, Godot is rotating the character by [code]0.05[/code] radians [b]many[/b] times a second.
+
+[quiz_choice question="How often does the _process() function run?" multiple="false" shuffle="true"]
+[option]Once a second.[/option]
+[option correct]Multiple times a second.[/option]
+[explanation]The faster your computer, the more times [code]_process()[/code] will run.
+
+Godot will try and run [code]_process()[/code] as quickly as it can. This makes sure any movement or animations look smooth and fluid.[/explanation]
+[/quiz_choice]
+
+In the practice, you'll learn how to use the process function to rotate and move a character yourself.
+
+[practice id="res://course/lesson-10-the-game-loop/practice-tKRHJMQ2.tres" title="Rotating a Character Continuously"]
+[goal]
+Make the robot rotate slowly by adding to the [code]_process()[/code] function.
+
+A rotation speed of about [code]0.05[/code] each frame should do.
+[/goal]
+[starting_code]
+func _process(delta):
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="rotating-sprite/TestsRotating.gd"]
+[script_slice path="rotating-sprite/RotatingSprite.gd" name="move_and_rotate"]
+[hint]Call the [code]rotate()[/code] function[/hint]
+[hint]The [code]rotate()[/code] function takes one parameter[/hint]
+[docs]rotate[/docs]
+[/practice]
+
+[practice id="res://course/lesson-10-the-game-loop/practice-QiGjB7tK.tres" title="Creating Circular Movement"]
+[goal]
+Make the robot move in a large circle slowly by rotating it and simultaneously moving it along its x direction.
+
+To do this, add the [code]rotate()[/code] and [code]move_local_x()[/code] functions to [code]_process()[/code].
+
+Use a rotation speed of [code]0.05[/code] radians per frame, and move the robot [code]5[/code] pixels per frame.
+[/goal]
+[starting_code]
+func _process(delta):
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="rotating-and-moving/TestsRotatingAndMoving.gd"]
+[script_slice path="rotating-and-moving/RotateAndMoveSprite.gd" name="move_and_rotate"]
+[hint]Call the [code]rotate()[/code] and [code]move_local_x()[/code] functions[/hint]
+[docs]rotate,move_local_x[/docs]
+[/practice]
+[/lesson]

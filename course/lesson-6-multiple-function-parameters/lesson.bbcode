@@ -1,0 +1,256 @@
+[lesson title="Your First Function Parameter"]
+
+In the previous lesson, you created a function to draw a square of a fixed size.
+
+This function is a bit limiting. Instead, it would be much better if we had a function to draw a square of [i]any[/i] size. Or better: any kind of rectangle (a square is a specific kind of rectangle).
+
+In previous lessons, you used the [code]rotate()[/code] function and gave it an [b]argument[/b].
+
+[visual path="visuals/ExampleRotate.tscn"]
+
+Just like [code]rotate()[/code], we can also give our functions [b]parameters[/b].
+
+Parameters act as [i]placeholders[/i] in the function's code. They work like blank spaces that get filled in each time someone calls your function.
+
+When you write a function with parameters, you create a flexible template that can work with different values each time you use it. Let's see how the rotate() function is defined and uses a parameter:
+
+[visual path="visuals/ExampleRotateFunction.tscn"]
+
+For now, focus on the first line, the function [i]definition[/i]: [code]func rotate(radians)[/code].
+
+The word [code]radians[/code] is the function's parameter. It's the placeholder that gets "replaced" with the actual value when you call the function.
+
+When you [i]call[/i] this function with [code]rotate(0.5)[/code], the computer replaces the name "radians" in the function with [code]0.5[/code].
+
+Each time you call the function, the replacement happens again: If you call [code]rotate(1.2)[/code], [code]radians[/code] becomes [code]1.2[/code].
+
+The parameter can be filled with a number, text, or anything else. In this lesson, we'll only use numbers as we have yet to learn about other value types.
+
+[quiz_choice question="What is a function parameter?" multiple="false" shuffle="true"]
+[option correct]A label you give to a value the function receives.[/option]
+[option]A number you use to make calculations.[/option]
+[option]The name of a function.[/option]
+[explanation]A parameter is a placeholder that gets replaced with the actual value you pass when calling the function.
+
+The value can be different each time you call the function: it depends on what you put in parentheses.[/explanation]
+[/quiz_choice]
+
+[title]How to create functions with parameters[/title]
+
+When you write a function [i]definition[/i] (the line starting with the [code]func[/code] keyword), you can add parameters.
+
+To add a parameter, write a placeholder name inside the parentheses. When someone calls your function with a value, every copy of the parameter in the function gets replaced with that value.
+
+[visual path="visuals/ExampleDrawSquareDefinition1.tscn"]
+
+You can give parameters any name! How you name functions and parameters is up to you.
+
+Just remember that names cannot contain spaces. To write parameter names with multiple words, in GDScript, we use underscores by convention.
+
+The following function definition is exactly equivalent to the previous one.
+
+[visual path="visuals/ExampleDrawSquareDefinition2.tscn"]
+
+Parameters make your code easier to reuse. You write the function once as a template, then you can call it many times with different values.
+
+Here's an example with a function to draw any square. The parameter [code]length[/code] is a placeholder. Use the slider to change the value. When you click the button, the app calls [code]draw_square()[/code] and the placeholder gets replaced with your value, drawing squares of different sizes.
+
+[visual path="visuals/ExampleDrawAnySquare.tscn"]
+
+[quiz_choice question="Which is the correct syntax for a function definition?" multiple="false" shuffle="true"]
+[option correct]func function_name(parameter_name):[/option]
+[option]func (function_name): parameter_name[/option]
+[option]func function_name(parameter_name)[/option]
+[option]function_name(parameter_name):[/option]
+[explanation]To define a function, you need to start with the [code]func[/code] keyword followed by a space, the [code]function_name[/code], and optional parameters inside parentheses.
+
+You must end the line with a colon, which defines a new code block. We'll see moving forward that keywords other than [code]func[/code] require a colon at the end of the line.[/explanation]
+[/quiz_choice]
+
+[title]Functions can have multiple parameters[/title]
+
+A function can have multiple parameters. You can use as many placeholders as you [i]need[/i].
+
+To add multiple parameters, write a comma between each placeholder name.
+
+For example, [code]func move(x, y)[/code] has two placeholders: [code]x[/code] and [code]y[/code]. Each one gets replaced with its own value when you call the function.
+
+[visual path="visuals/FunctionDefinitionWithParams.tscn"]
+
+[note title="Must I write spaces between function parameters?"]
+In a function definition, you must have a space between the [code]func[/code] keyword and the function name.
+
+However, because we use the comma to separate parameters, it doesn't matter if you use spaces between parameters. As long as you have the comma, either syntax is correct.
+
+We often use spaces after the comma for readability.
+[/note]
+
+The following example shows a function with two parameters. The function moves an entity on both the X and Y axes.
+
+When you call [code]move(50, 100)[/code], every [code]x[/code] in the function gets replaced with [code]50[/code], and every [code]y[/code] gets replaced with [code]100[/code].
+
+[visual path="visuals/ExampleFunctionWithTwoParameters.tscn"]
+
+[note title="How should I name my functions and parameters?"]
+The names of functions, parameters, or other things in your code are entirely up to you.
+
+They are written by us programmers for other programmers. You want to use the names that make the most sense to you and fellow programmers.
+
+You could absolutely write single-letter names like in maths classes: [code]a[/code], [code]b[/code], [code]f[/code].
+
+You can also write abbreviated names like [code]pos[/code] for position, [code]bg[/code] for background, and so on.
+
+Many programmers do either or both of the above.
+
+At GDQuest, we favor complete and explicit names.
+
+We generally try to write code that is explicit and relatively easy to read.
+
+Right now, you have to enter every letter when you code, so long names may feel inconvenient.
+
+However, this is good for learning: it trains your fingers to [ignore]type precisely.
+
+Then, after you finish this course, you will see that the computer assists you a lot when you code real games with a feature called auto-completion.
+
+Based on a few characters you [ignore]type, it will offer you to complete long names.
+[/note]
+
+[quiz_choice question="When defining a function, parameters are..." multiple="false" shuffle="true"]
+[option correct]Optional[/option]
+[option]Mandatory[/option]
+[explanation]You can define functions with or without parameters, depending on your needs.[/explanation]
+[/quiz_choice]
+
+[quiz_choice question="What's the correct syntax to define a function with multiple parameters?" multiple="false" shuffle="true"]
+[option correct]func function_name(parameter_1, parameter_2, ...):[/option]
+[option]func function_name(parameter_1 parameter_2 ...):[/option]
+[option]func function_name(): parameter_1, parameter_2, ...[/option]
+[explanation]You always write the function parameters inside of the parentheses. To define multiple parameters, you separate them with a comma.[/explanation]
+[/quiz_choice]
+
+Now it's your turn to create a function with multiple parameters.
+
+In the following practices, you'll write functions that I will call with different values. Your functions need to work correctly no matter what values the app passes to them.
+
+[practice id="res://course/lesson-6-multiple-function-parameters/practice-qAYVjotx.tres" title="Drawing corners of different sizes"]
+[description]Using function parameters, code a function you can reuse to draw corners with lines of varying sizes.[/description]
+[goal]
+Before we create a rectangle of any size, let's first practice with a simpler shape.
+
+I will call your function twice with different values:
+
+[code]draw_corner(240)[/code]
+[code]draw_corner(120)[/code]
+
+Your task is to add a parameter named [code]length[/code] to your function definition. This creates a placeholder. When the app calls your function, the placeholder will get replaced with the value in parentheses.
+
+Your function should move the turtle forward by an amount defined by the [code]length[/code] parameter, turn right [code]90[/code] degrees, then move forward by [code]length[/code] again.
+
+Each time the app calls your function, [code]length[/code] will be replaced with a different value: first [code]240[/code], then [code]120[/code].
+[/goal]
+[starting_code]
+func draw_corner():
+	move_forward()
+	turn_right(90)
+	move_forward()
+[/starting_code]
+[cursor line="1" column="18"]
+[validator path="drawing_corners/TestsDrawingCorners.gd"]
+[script_slice path="drawing_corners/DrawingCorners.gd" name="draw_corner"]
+[hint]You need to add the parameter [code]length[/code] three times in this practice[/hint]
+[docs]move_forward,turn_right[/docs]
+[/practice]
+
+[practice id="res://course/lesson-6-multiple-function-parameters/practice-DwfyqdYO.tres" title="Using multiple parameters"]
+[description]With two parameters, code a function to draw corners with any angle.[/description]
+[goal]
+Now let's make the [code]draw_corner()[/code] function even more flexible. We'll add a second placeholder so the angle can also vary.
+
+I will call your function with different length and angle values:
+
+[code]draw_corner(240, 45)[/code]
+[code]draw_corner(120, 90)[/code]
+
+Your task is to add the [code]angle[/code] parameter after [code]length[/code] in the function definition. Remember to separate the two placeholders with a comma.
+
+Remember: When the app calls [code]draw_corner(240, 45)[/code], the parameter [code]length[/code] will get replaced with [code]240[/code] and [code]angle[/code] will get replaced with [code]45[/code].
+[/goal]
+[starting_code]
+func draw_corner(length):
+	move_forward(length)
+	turn_right()
+	move_forward(length)
+[/starting_code]
+[cursor line="1" column="24"]
+[validator path="drawing_corners_advanced/TestsDrawingCornersAdvanced.gd"]
+[script_slice path="drawing_corners_advanced/DrawingCornersAdvanced.gd" name="draw_corner"]
+[hint]Parameters in functions are separated by commas[/hint]
+[hint]You need to add the parameter [code]angle[/code] two times in this practice[/hint]
+[hint]Use [code]func draw_corner(length, angle):[/code][/hint]
+[docs]move_forward,turn_right[/docs]
+[/practice]
+
+[practice id="res://course/lesson-6-multiple-function-parameters/practice-v5tT6n1T.tres" title="Drawing squares of any size"]
+[description]In the previous lesson, your function would draw squares of a fixed size. Using a parameter, code a function to draw squares of any size.[/description]
+[goal]
+Time to write a complete function from scratch! You'll make a function that draws squares of any size.
+
+I will call your function with different sizes:
+
+[code]draw_square(200)[/code]
+[code]draw_square(100)[/code]
+
+Write a function named [code]draw_square()[/code] with one parameter called [code]length[/code]. Remember, this parameter is a placeholder that gets filled with the actual value when the function is called.
+
+Your function needs to move forward by [code]length[/code], turn right 90 degrees, and do this four times to complete all four sides of the square.
+
+[b]Important:[/b] When the turtle finishes drawing, it should face right. So you need to turn right a total of four times.
+[/goal]
+[cursor line="0" column="0"]
+[validator path="drawing_squares/TestsDrawingSquares.gd"]
+[script_slice path="drawing_squares/DrawingSquares.gd" name="draw"]
+[hint]You need to specify one parameter in the function definition[/hint]
+[hint]Use [code]func draw_square(length):[/code][/hint]
+[hint]Call [code]move_forward()[/code] four times for each side of the square[/hint]
+[hint]Make sure to [code]turn_right(90)[/code] after moving forward to create each corner[/hint]
+[docs]move_forward,turn_right[/docs]
+[/practice]
+
+[practice id="res://course/lesson-6-multiple-function-parameters/practice-lkGx0c7D.tres" title="Drawing rectangles of any size"]
+[description]With one parameter, you can make squares of any size. With two, you can draw any rectangle! You'll do so in this practice.[/description]
+[goal]
+Let's create a function to draw rectangles with any length and height.
+
+I will call your function twice with different sizes:
+
+[code]draw_rectangle(260, 180)[/code]
+[code]draw_rectangle(160, 210)[/code]
+
+Your function needs two parameters: [code]length[/code] and [code]height[/code]. When the app calls your function, the first number replaces [code]length[/code], and the second number replaces [code]height[/code].
+
+Use [code]length[/code] when you move horizontally and [code]height[/code] when you move vertically.
+
+This is the pattern you need to follow: move forward by [code]length[/code], turn right, move forward by [code]height[/code], turn right, then repeat this sequence once more.
+
+[b]Important:[/b] When the turtle finishes drawing, it should face right. Make sure you turn right four times in total.
+[/goal]
+[starting_code]
+func draw_rectangle():
+	move_forward()
+	turn_right(90)
+	move_forward()
+	turn_right(90)
+	move_forward()
+	turn_right(90)
+	move_forward()
+	turn_right(90)
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="drawing_rectangles/TestsDrawingRectangles.gd"]
+[script_slice path="drawing_rectangles/DrawingRectangles.gd" name="draw"]
+[hint]You need to specify the two parameters in the function definition[/hint]
+[hint]Use [code]func draw_rectangle(length, height):[/code][/hint]
+[hint]When calling move_forward, you need to alternate between using the length and the height arguments when calling move_forward.[/hint]
+[docs]move_forward,turn_right[/docs]
+[/practice]
+[/lesson]

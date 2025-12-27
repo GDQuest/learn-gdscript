@@ -1,0 +1,95 @@
+[lesson title="Adding and Subtracting"]
+
+Our character in our game will have health by defining the [code]health[/code] variable. The higher the character's health, the further away the player is from losing the game.
+
+Health that changes adds tension to the game, especially if the player is fighting with low health! It's a resource that the player should manage carefully.
+
+The character's health might get low if an enemy attacks them or they fall into a hole.
+
+We can create a function to represent damage in these cases.
+
+[visual path="visuals/ExampleDamage.tscn"]
+
+We pass the amount of damage the robot should take as a parameter.
+
+Line 2 subtracts [code]amount[/code] from [code]health[/code].
+
+Note the [code]-=[/code] syntax which achieves this. It's a shorthand we often use.
+
+You can also use a longer form. Both of these lines have the same effect. They both subtract the value of [code]amount[/code] from the [code]health[/code] variable:
+
+[code]health -= amount[/code]
+[code]health = health - amount[/code]
+
+You may notice that the health of the robot can go below [code]0[/code]. We'll see how to manage this in a future lesson using [i]conditions[/i].
+
+[separator]
+
+The robot's health could increase instead if the player picks up an item that heals them, or if they use a healing item.
+
+[visual path="visuals/ExampleHeal.tscn"]
+
+Here again, the health can go beyond [code]100[/code].
+
+Also, once more, the short line [code]health += amount[/code] is equivalent to the longer form [code]health = health + amount[/code].
+
+[quiz_choice question="Which of these would increase the health of the robot?" multiple="true" shuffle="true"]
+[option]health -= amount[/option]
+[option correct]health += amount[/option]
+[option correct]health = health + amount[/option]
+[option]health = health - amount[/option]
+[explanation]Both of these lines increase the [code]health[/code] of the robot by [code]amount[/code].
+[code]
+health += amount
+health = health + amount
+[/code][/explanation]
+[/quiz_choice]
+
+In the following practices, you'll code the [code]take_damage()[/code] and [code]heal()[/code] functions so the robot's health can decrease and increase.
+
+[practice id="res://course/lesson-9-adding-and-subtracting/practice-nk1K416Q.tres" title="Damaging the Robot"]
+[description]Learn how to deal damage to entities like our robot.[/description]
+[goal]
+In our game, the main character has a certain amount of [code]health[/code]. When it gets hit, the health should go down by a varying [code]amount[/code] of damage.
+
+Add to the [code]take_damage()[/code] function so it subtracts the [code]amount[/code] to the predefined [code]health[/code] variable.
+
+The robot starts with 100 health and will take 50 damage.
+[/goal]
+[starting_code]
+var health = 100
+
+func take_damage(amount):
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="taking-damage/TestDamagingRobot.gd"]
+[script_slice path="taking-damage/DamagingRobot.gd" name="damage"]
+[hint]Add an instruction to subtract [code]amount[/code] from [code]health[/code].[/hint]
+[docs]take_damage[/docs]
+[/practice]
+
+[practice id="res://course/lesson-9-adding-and-subtracting/practice-kGx0c7DD.tres" title="Healing the Robot"]
+[description]Our robot needs healing after that practice! Create a function to heal it back to full health.[/description]
+[goal]
+It's time to heal the robot up to full health!
+
+Write a function called [code]heal()[/code] that takes [code]amount[/code] as a parameter.
+
+The function should add [code]amount[/code] to [code]health[/code].
+
+The robot starts with 50 health and will heal 50 to get it up to 100.
+[/goal]
+[starting_code]
+var health = 50
+
+
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="healing/TestHealingRobot.gd"]
+[script_slice path="healing/HealingRobot.gd" name="heal"]
+[hint]Define the [code]heal()[/code] function using [code]func[/code][/hint]
+[hint]The first line is [code]func heal(amount):[/code][/hint]
+[docs]heal[/docs]
+[/practice]
+[/lesson]
