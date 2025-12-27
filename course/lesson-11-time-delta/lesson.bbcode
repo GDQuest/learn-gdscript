@@ -1,0 +1,164 @@
+[lesson title="Time Delta"]
+
+We've seen how we can use our character's [code]_process()[/code] function to make it move continuously.
+
+[visual path="res://course/lesson-10-the-game-loop/visuals/ExampleRotatingSprite.tscn"]
+
+But it's not just our character that has a [code]_process()[/code] function. Almost everything in the game has a [code]_process()[/code] function!
+
+Dozens of times per second, Godot runs every [code]_process()[/code] function in the game to update the game world.
+
+After that, it displays an image of the game world on the screen. We call that image a [b]frame[/b].
+
+Godot then moves on to calculating the next frame.
+
+As this happens dozens of times per second, you get the illusion of movement. This is similar to how traditional animation works.
+
+[note title="This sounds like Frames Per Second..."]
+You may have heard of frames per second, or FPS for short. Games often run at 60 frames per second.
+
+It means that everything in the game updates 60 times each second.
+
+The number varies while playing, depending on the game and the device it runs on.
+
+On powerful computers, you may get frame rates in the hundreds or thousands of frames per second.
+[/note]
+
+Let's look at the [code]_process()[/code] function in more detail.
+
+[quiz_choice question="What parameter does the _process() function take?" multiple="false" shuffle="true"]
+[code]
+func _process(delta):
+	rotate(0.05)
+[/code]
+[option]rotate[/option]
+[option]0.05[/option]
+[option correct]delta[/option]
+[explanation]The [code]_process()[/code] function has one parameter named [code]delta[/code].[/explanation]
+[/quiz_choice]
+
+[title]Frames take varying amounts of time to calculate[/title]
+
+Depending on the game, the computer, and what the game engine needs to calculate, frames take more or less time to display.
+
+There will always be small variations from frame to frame.
+
+That is why the [code]_process()[/code] function receives a [code]delta[/code] parameter.
+
+Delta represents a time difference. It's the time it took Godot to complete the previous frame, in seconds.
+
+We can use it to make sure the game runs at the same speed on all computers.
+
+This is because different computers have different processing power, so a fast computer will have more frames per second than a slow computer.
+
+If we ignore [code]delta[/code], movement speed will vary depending on the computer. Delta helps to make the game consistent for everyone.
+
+[quiz_choice question="What do we know about delta?" multiple="true" shuffle="true"]
+[option correct]It's a value in seconds.[/option]
+[option correct]It varies each frame.[/option]
+[option correct]It's the time it took Godot to complete the previous frame.[/option]
+[explanation][code]delta[/code] is the time it took Godot to complete the previous frame in seconds.
+
+It's very small because frames happen many times a second.
+
+It varies each frame because Godot has more or less to process each frame.[/explanation]
+[/quiz_choice]
+
+[title]Multiplying by delta[/title]
+
+The [code]delta[/code] you get in [code]_process()[/code] is a time difference in seconds. It will generally be a tiny decimal number.
+
+To apply [code]delta[/code], you need to [i]multiply[/i] your speed values by it.
+
+[visual path="visuals/ExampleRotatingWithDelta.tscn"]
+
+When multiplying by [code]delta[/code], you make motion [i]time-dependent[/i] rather than [i]frame-dependent[/i].
+
+That's essential to make your game consistent and fair.
+
+[note title="Why do we use the number 3.0 in this example?"]
+At the top of the lesson, we made the robot rotate a fixed amount every frame: [code]0.05[/code] radians.
+
+In the example above, we now [i]multiply[/i] the argument by the very small [code]delta[/code] value, a value much smaller than [code]1.0[/code]. It makes the robot turn at a constant speed over time.
+
+However, multiplying by a number below [code]1.0[/code] like [code]delta[/code] makes the result smaller.
+
+To compensate for that and make the robot turn fast enough, we use a larger number than before, [code]3.0[/code] instead of [code]0.05[/code].
+
+Those numbers have two different [i]units[/i]: [code]0.05[/code] is an [i]angle[/i] in radians, while [code]3.0[/code] is an [i]angular speed[/i] in radians per second.
+
+When you multiply an angular speed by a time delta, it gives you an angle.
+
+Don't worry if it's a little confusing for now. It'll eventually click as you deal with speed, acceleration, and motion in your game projects.
+[/note]
+
+[title]Why the time between frames matters[/title]
+
+The time it takes to display a new frame varies.
+
+If you don't take that time into account in your code, your game will have gameplay issues and bugs. Godot provides that time to the [code]_process()[/code] function through the [code]delta[/code] parameter.
+
+In the example below, the top robot moves using [code]delta[/code]. As a result, it moves at a fixed speed.
+
+The bottom robot moves over a constant distance every frame, [i]without[/i] taking [code]delta[/code] into account. It will move faster or slower than the top robot on [i]your[/i] computer.
+
+The bottom robot will move [i]differently for everyone[/i]!
+
+[visual path="visuals/DemoRobotRace.tscn"]
+
+Multiplying time-sensitive values by [code]delta[/code] makes them [b]time-dependent[/b] rather than [b]frame-dependent[/b].
+
+Thanks to that, we get reliable movement over time.
+
+Frame times vary from computer to computer and from frame to frame during gameplay. Because frame times vary, if [code]delta[/code] is not used, movement speed will differ for each player, making the game inconsistent and messy.
+
+[quiz_choice question="What does this mean?" multiple="false" shuffle="true"]
+[code]rotation_speed * delta[/code]
+[option correct]We're multiplying rotation_speed by delta.[/option]
+[option]We're dividing delta by rotation_speed.[/option]
+[option]We're adding rotation_speed to delta.[/option]
+[option]We're subtracting delta from rotation_speed.[/option]
+[explanation]The [code]*[/code] symbol means we're multiplying [code]rotation_speed[/code] by [code]delta[/code].[/explanation]
+[/quiz_choice]
+
+In the next practice, we'll use delta to make the rotation time-dependent.
+
+[practice id="res://course/lesson-11-time-delta/practice-UdOCQiGj.tres" title="Rotating Using Delta"]
+[goal]
+At the moment, the rotation of the robot is frame-dependent.
+
+Add [code]delta[/code] to make the rotational speed time-dependent.
+
+The robot should rotate [code]2[/code] radians per second.
+[/goal]
+[starting_code]
+func _process(delta):
+	rotate(2)
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="rotating-using-delta/TestsRotatingDelta.gd"]
+[script_slice path="rotating-using-delta/RotatingSpriteDelta.gd" name="move_and_rotate"]
+[hint]Multiply the radians by [code]delta[/code][/hint]
+[docs]rotate[/docs]
+[/practice]
+
+[practice id="res://course/lesson-11-time-delta/practice-x0c7DDiz.tres" title="Moving in a Circle Using Delta"]
+[goal]
+In this practice, make the robot move in a smooth circle using delta.
+
+The robot should rotate [code]2[/code] radians per second and move [code]100[/code] pixels per second forward. This combination makes it travel in a clockwise circle.
+
+[b]Note:[/b] Please write the values in the parentheses when calling the functions. If you define extra variables, we will not be able to check your practice.
+[/goal]
+[starting_code]
+func _process(delta):
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="rotating-and-moving-delta/TestsRotatingMovingDelta.gd"]
+[script_slice path="rotating-and-moving-delta/RotatingMovingSpriteDelta.gd" name="move_and_rotate"]
+[hint]Call the [code]rotate()[/code] and [code]move_local_x()[/code] functions[/hint]
+[hint]Make sure to multiply each parameter by [code]delta[/code][/hint]
+[docs]rotate,move_local_x[/docs]
+[/practice]
+[/lesson]

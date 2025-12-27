@@ -1,0 +1,125 @@
+[lesson title="Specifying types with type hints"]
+
+By default, GDScript is what we call a dynamically-typed language. That means that you can just write variables, assign them a value with a number, and assign them another value with a different type.
+
+Unlike in some other languages, in GDScript, the following code is valid.
+
+[visual path="ExamplePrintHealth2.tscn"]
+
+But this feature often causes problems down the line. Let's take one example.
+
+[title]Cell size: decimal number, or 2D vector?[/title]
+
+Games use grids all the time, be it for grid-based gameplay or to make algorithms faster.
+
+When working with grids, you need to convert grid coordinates into positions in the game world all the time. To do so, you give each cell a size in pixels.
+
+You'll likely pick one of two types for that: [code]float[/code] or [code]Vector2[/code], because pixel positions on the screen use [code]Vector2[/code] coordinates.
+
+Either of those two values would be fine:
+
+[visual path="CodeCellSize.tscn"]
+
+Using a [code]Vector2[/code] could simplify some calculations. For example, when converting grid coordinates to game world coordinates.
+
+[visual path="CodeGridToWorld.tscn"]
+
+In this example, because both [code]cell[/code] and [code]cell_size[/code] are [code]Vector2[/code] values, we can add them.
+
+However, if [code]cell_size[/code] is a [code]float[/code], we will get a type error.
+
+[visual path="CodeGridToWorldFloatError.tscn"]
+
+[visual path="ErrorInvalidOperands2.tscn"]
+
+Worse: due to dynamic typing, we won't get an error [i]right away[/i]. We will only get the error when calling [code]grid_to_world(Vector2(1, 1))[/code].
+
+And that's a big problem.
+
+[separator]
+
+Because we're learning, we only have small code examples in this course. But your games' code will get long and split into many files. When coding, you often forget about the code you wrote several weeks ago.
+
+And with a lot of code, it could take [i]hours[/i] of play before players trigger a type error in your code.
+
+[title]Using type hints[/title]
+
+Fortunately, GDScript has optional [i]type hints[/i].
+
+Type hints let the computer know the value type you want for variables and report errors before running the code.
+
+To specify the type a variable can accept, you can write a colon and a type after the name when defining a new variable.
+
+[visual path="SyntaxTypeHints.tscn"]
+
+You could tell the computer you want [code]cell_size[/code] only to accept [code]Vector2[/code] values like so.
+
+[visual path="CodeCellSizeWithType.tscn"]
+
+If you try to replace the [code]cell_size[/code] with a value of another type later, the computer will not let you.
+
+[visual path="CodeTryReplaceCellSize.tscn"]
+
+[visual path="ErrorInvalidType.tscn"]
+
+[title]Letting the computer figure it out[/title]
+
+GDScript comes with a feature called [i]type inference[/i]. In many cases, but not all, the computer can figure out the type of a variable for you.
+
+To do so, you write [code]:=[/code], without the type. The computer will set the type using the value after the equal sign. We could make [code]cell_size[/code] a variable of type [code]Vector2[/code] like so:
+
+[visual path="CodeCellSizeInferType.tscn"]
+
+This takes little typing, yet you get the benefits of using type hints, like the computer reporting errors better and faster.
+
+[title]Why bother to add hints?[/title]
+
+When you give the language hints like that, it will [i]prevent[/i] major type errors. When you work in Godot, you will see that the computer can report issues as you write the code. It makes the benefit even greater.
+
+Type hints can also help improve the readability of your code. It can help to put more information directly in the code. As we saw, types are essential when coding, and when using type hints, the computer will add them to the engine's built-in code documentation system.
+
+There's an incredible third benefit for you: by using type hints, you will learn types much faster. It's excellent for learning.
+
+In the following practices, you will write the correct type hints to make the code error-free.
+
+[practice id="res://course/lesson-28-specifying-types/practice-x0c7DDiz.tres" title="Add the correct type hints to variables"]
+[description]Our variables have the wrong type hints, causing errors. Correct them to make the code run.[/description]
+[goal]
+Our variables get the correct values but not the right hints. Using your type-fu, add the correct type names in the variable definitions.
+
+You need to write the type name between the colon and the equal sign.
+
+Note: You cannot use type inference in this practice. You need to write the type name in full.
+[/goal]
+[starting_code]
+var vector: String = Vector2(1, 1)
+var text: int = "Hello, world!"
+var whole_number: Vector2 = 4
+var decimal_number: String = 3.14
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="fix-hints/TestFixHints.gd"]
+[script_slice path="fix-hints/FixHints.gd" name="fix"]
+[/practice]
+
+[practice id="res://course/lesson-28-specifying-types/practice-UdOCQiGj.tres" title="Fix the values to match the type hints"]
+[description]This time, it's the other way around: variables have the correct type hints but the wrong values. Change the values to make the code run.[/description]
+[goal]
+It is the other way around in this practice: the type hints are fine, but the values are not.
+
+Your task is to fix the values after the equal sign, so they match the type hint of each variable.
+[/goal]
+[starting_code]
+var whole_number: int = "Hello, world!"
+var text: String = 4
+var vector: Vector2 = 3.14
+var decimal_number: float = Vector2(1, 1)
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="fix-values/TestFixValues.gd"]
+[script_slice path="fix-values/FixValues.gd" name="fix"]
+[hint]The type [code]float[/code] means decimal number, so you need to write a number with a decimal part, like [code]3.14[/code].[/hint]
+[hint]The type [code]int[/code] stands for integer or whole number, so you need the value to be a whole number without a decimal part.[/hint]
+[hint]The type [code]String[/code] means you need to write a text string, a value surrounded by quotes.[/hint]
+[/practice]
+[/lesson]

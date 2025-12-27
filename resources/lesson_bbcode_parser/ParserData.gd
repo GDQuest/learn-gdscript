@@ -5,7 +5,7 @@ extends Reference
 
 # Basic Godot BBCode formatting tags that should be ignored by the parser
 # These are handled by Godot's RichTextLabel and don't need validation
-const IGNORED_FORMATTING_TAGS := ["i", "b", "url", "img", "code", "right"]
+const IGNORED_FORMATTING_TAGS := ["i", "b", "url", "img", "code", "right", "ignore"]
 
 enum Tag {
 	UNKNOWN,

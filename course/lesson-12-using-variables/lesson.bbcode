@@ -1,0 +1,131 @@
+[lesson title="Using Variables to Make Code Easier to Read"]
+
+In this lesson, we'll make our code easier to follow and understand at a glance.
+
+Take a look at this example.
+
+[visual path="visuals/ExampleUnclear.tscn"]
+
+[quiz_choice question="In the above example, what does the number 4 mean?" multiple="false" shuffle="true"]
+[option correct]It's how fast the character rotates.[/option]
+[option]It's how far the character moves in pixels.[/option]
+[option]It's how long the rotation takes.[/option]
+[explanation]The code above rotates the character [code]4[/code] radians per second.[/explanation]
+[/quiz_choice]
+
+We can guess what a number represents by looking at the function names, but it's harder to recall what this number does by quickly looking at the code.
+
+We've seen how different functions have their own names. Using these names communicates to developers what the functions do.
+
+[visual path="visuals/ExampleFunctions.tscn"]
+
+As we learned in lesson 8, we can also assign labels to numbers to help us remember what they do.
+
+We call these labels [i]variables[/i].
+
+[b]A variable is a label for a value we can save, change, and read later.[/b]
+
+Let's recap how to define a variable.
+
+[visual path="visuals/VariableDefinition.tscn"]
+
+We improve the first example to make it clear what the number [code]4[/code] does.
+
+[visual path="visuals/ExampleUnclearImproved.tscn"]
+
+Labeling a value makes the code easier for us to read now [i]and[/i] in the future.
+
+[quiz_choice question="In the above example, which line defines the angular speed variable?" multiple="false" shuffle="true"]
+[option correct]var angular_speed = 4[/option]
+[option]func _process(delta):[/option]
+[option]rotate(angular_speed * delta)[/option]
+[explanation]We create the [code]angular_speed[/code] variable, then assign it the value of [code]4[/code].[/explanation]
+[/quiz_choice]
+
+If we define variables outside of functions, we can re-use them in different functions.
+
+Because any function can use variables we define outside of them, we call these variables [b]script-wide[/b].
+
+Here we use the [code]angular_speed[/code] script-wide variable in both the [code]_process()[/code] function and the [code]set_angular_speed()[/code] function.
+
+[visual path="visuals/ExampleScriptWide.tscn"]
+
+We can also define variables inside of functions.
+
+We align the variable assignment by indenting to make it part of the function body. Make sure to create the variable before using it!
+
+If we define a variable inside of a function, only that function can use it.
+
+[visual path="visuals/ExampleInFunction.tscn"]
+
+The [code]angular_speed[/code] variable only exists inside [code]_process()[/code], because we defined it there. The [code]set_angular_speed()[/code] function can't use it.
+
+Trying to use it there will result in an error.
+
+Here's what this error might look like.
+
+[visual path="visuals/ErrorAccess.tscn"]
+
+[quiz_choice question="Where can we define variables?" multiple="true" shuffle="true"]
+[option correct]Outside of functions.[/option]
+[option correct]Inside of functions.[/option]
+[explanation]Functions can use any variables defined outside of functions. These variables are [b]script-wide[/b].
+
+If we define a variable inside of a function, only that function can use it.[/explanation]
+[/quiz_choice]
+
+Variables are also great at grouping values that control how a character behaves.
+
+Grouping them in this way allows us to easily change them.
+
+[visual path="visuals/ExampleVariableGrouping.tscn"]
+
+In the following practices, we'll define variables and use them with some familiar functions to make our code more readable.
+
+[practice id="res://course/lesson-12-using-variables/practice-lkGx0c7D.tres" title="Clarifying Code Using Variables"]
+[description]Using variables to store number values makes code easier to read. Tidy up this function by storing a value in a variable.[/description]
+[goal]
+Let's give the [code]4[/code] here a label so we know what it does.
+
+Create a variable called [code]angular_speed[/code] outside of the [code]_process()[/code] function to make it script-wide. This allows us to use it in other functions too.
+
+Then, replace the [code]4[/code] with [code]angular_speed[/code].
+[/goal]
+[starting_code]
+func _process(delta):
+	rotate(4 * delta)
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="clarify/TestClarifyCode.gd"]
+[script_slice path="clarify/ClarifyCode.gd" name="clarify"]
+[hint]Define the [code]angular_speed[/code] variable at the top of the script to make it script-wide[/hint]
+[hint]Don't forget to use it in the [code]rotate()[/code] function[/hint]
+[hint]To define the variable, use [code]var angular_speed = 4[/code][/hint]
+[docs]rotate,_process[/docs]
+[/practice]
+
+[practice id="res://course/lesson-12-using-variables/practice-KUdOCQiG.tres" title="Fixing an Out of Scope Error"]
+[description]Uh oh! There's something wrong here. Can you fix it?[/description]
+[goal]
+There's something wrong with the code here. Can you see what it is?
+
+Run the code and read the error.
+
+Correct the code so it works as intended.
+[/goal]
+[starting_code]
+func _process(delta):
+	var angular_speed = 4
+	rotate(angular_speed * delta)
+
+func set_angular_speed(new_angular_speed):
+	angular_speed = new_angular_speed
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="fixing_error/TestFixingError.gd"]
+[script_slice path="fixing_error/FixingError.gd" name="clarify"]
+[hint]You need to make [code]angular_speed[/code] script-wide so it's available to all functions[/hint]
+[hint]Define [code]angular_speed[/code] at the top of the script instead[/hint]
+[docs]rotate,_process[/docs]
+[/practice]
+[/lesson]

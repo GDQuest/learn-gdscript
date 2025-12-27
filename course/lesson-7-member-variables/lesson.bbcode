@@ -1,0 +1,158 @@
+[lesson title="Introduction to Member Variables"]
+
+In this lesson, we take a first look at variables.
+
+In games, you need to keep track of many values that change over time:
+
+- The player's score.
+- Every character or enemy's health.
+- The last checkpoint.
+
+And so much more. You need to store, retrieve, and update those values.
+
+We call those values [i]variables[/i]. Variables are labels you use to keep track of values that vary over time. Here's an example of a variable tracking a character or monster's health.
+
+[visual path="ExampleHealthVariableDefinition.tscn"]
+
+The line above defines a new variable named [code]health[/code] and assigns it a starting value of [code]100[/code] (that's what the equal sign does, more on that below).
+
+Function parameters, which you saw in the previous lesson, are another example of variables.
+
+In this lesson, we start using variables built into Godot. They're a particular kind called [i]member variables[/i].
+
+Member variables are values attached to a game entity. They're useful properties like the [code]position[/code], [code]rotation[/code], and [code]scale[/code] of a character.
+
+In a previous lesson, we saw how we could use the [code]rotate()[/code] function to rotate our character.
+
+[visual path="res://course/lesson-3-standing-on-shoulders-of-giants/ExampleRotateSprite.tscn"]
+
+This function increases or decreases the value of the entity's [code]rotation[/code] member variable.
+
+Say we want to reset the rotation to [code]0[/code] and make the character upright. Using the [code]rotate()[/code] function can prove difficult: you need to know the character's exact current angle to cancel it out.
+
+It's much easier to use the member variable rather than the function.
+
+The following code assigns the value [code]0[/code] to the character's rotation, resetting its angle and making it upright.
+
+[visual path="RunResetCharacterRotation.tscn"]
+
+Notice how we use the equal sign ([code]=[/code]) to change the value of a variable.
+
+[quiz_choice question="What's a variable?" multiple="false" shuffle="true"]
+[option correct]A label you use to keep track of a value that can change.[/option]
+[option]A function that varies over time.[/option]
+[option]A decimal number.[/option]
+[explanation]Variables are labels you use to access values that change over time.
+
+You can also use them to put a name on a value you want to reuse throughout your code. It makes your code easier to read and to change.[/explanation]
+[/quiz_choice]
+
+[title]Accessing sub-variables with the dot[/title]
+
+In video games, you will see many member variables that have sub-values.
+
+For example, the [code]position[/code] we mentioned has two coordinates: [code]x[/code] and [code]y[/code].
+
+It's the same for the [code]scale[/code]: it has [code]x[/code] and [code]y[/code] sub-variables. They respectively control the horizontal and vertical size of the game entity.
+
+To access those X and Y sub-components, you add a dot (".") after the variable name.
+
+The code below places the entity at [code]200[/code] pixels on the x-axis and [code]250[/code] pixels on the y-axis.
+
+[visual path="ExampleSetCharacterPosition.tscn"]
+
+Notice how we use the equal sign ("=") to assign the numbers on the right to the sub-variables on the left.
+
+Unlike in maths, in computer programming, the equal sign ("=") does not mean "is equal to."
+
+Instead, it means "assign the result of the expression on the right to the variable on the left". We assign values so often in code that we prefer to reserve the equal sign for that.
+
+[title]In games, the Y-axis is positive going down[/title]
+
+Note that in games, assuming your character's position starts at (0, 0), the code above moves the entity [code]200[/code] pixels to the right and [code]250[/code] pixels down.
+
+In math, the y-axis is generally positive going up by convention.
+
+The convention is the [i]opposite[/i] in video games and many computer applications: the y-axis is positive going down.
+
+[visual path="VisualXAndYAxis.tscn"]
+
+[note title="Why does the Y-axis point downwards?"]
+This may be confusing if you only saw the y-axis pointing up in math classes. However, in math, axes go in any direction. They don't even have to be perpendicular.
+
+On the computer, the position (0, 0) happens to correspond to the top-left of your computer screen. It then makes sense for coordinates to be positive when going towards the bottom-right corner.
+
+This leads to another question: why is position zero the top left of the screen? This is due to computer and TV displays history: they would calculate and display pixels starting from the top left corner and moving towards the bottom right corner.
+[/note]
+
+Let's look at one last example before moving on to the practice. The following code makes the character 1.5 times its starting size.
+
+[visual path="ExampleSetCharacterScale.tscn"]
+
+[quiz_choice question="How do you access sub-variables?" multiple="false" shuffle="true"]
+Variables often hold sub-values, like the [code]position[/code] has two sub-variables: [code]x[/code] and [code]y[/code]. How would you access the [code]x[/code], for example?
+[option correct]You write a dot (".") between the variable and the sub-variable name.[/option]
+[option]You write an arrow ("->") between the variable and the sub-variable name.[/option]
+[option]You write a slash ("/") between the variable and the sub-variable name.[/option]
+[explanation]To access a sub-variable, you need to write a dot between the parent variable name and the sub-variable name.
+
+For example, to access the [code]x[/code] sub-variable of the [code]position[/code] variable, you'll write [code]position.x[/code].[/explanation]
+[/quiz_choice]
+
+In a future lesson, we'll explain why and how those variables have sub-variables.
+
+For now, just know you can use the dot to access them.
+
+We'll tell you which variables have sub-components and what their names are.
+
+In the next lessons, you'll create your own variables and do operations on them to add or remove [code]score[/code], [code]health[/code], you name it.
+
+For now, let's practice accessing variables.
+
+[practice id="res://course/lesson-7-member-variables/practice-Gx0c7DDi.tres" title="Draw a rectangle at a precise position"]
+[description]Use the position member variable and its sub-variables to change the rectangle's position.[/description]
+[goal]
+Draw a rectangle of 200 by 120 pixels at the X position of 120 pixels and Y position of 100 pixels.
+
+You need to replace the numbers in the code editor to draw the correct rectangle.
+[/goal]
+[starting_code]
+func run():
+	position.x = 0
+	position.y = 0
+	draw_rectangle(0, 0)
+[/starting_code]
+[cursor line="2" column="12"]
+[validator path="draw_rectangle_at_position/TestsDrawingRectangles.gd"]
+[script_slice path="draw_rectangle_at_position/DrawingRectangleAtPosition.gd" name="test_assignment"]
+[hint]You should set the X position to 120, and the Y position to 100.[/hint]
+[hint]You need to pass the numbers 200 and 120 respectively to draw_rectangle().[/hint]
+[docs]position.x,position.y,draw_rectangle[/docs]
+[/practice]
+
+[practice id="res://course/lesson-7-member-variables/practice-x0c7DDiz.tres" title="Draw squares at different positions"]
+[description]Now you can place and draw one shape, but how about drawing several? In this practice, you'll place three squares side by side to really get the hang of properties.[/description]
+[goal]
+Draw three squares of size 100 by 100 that are 100 pixels apart on the horizontal axis. In other words, there should be a 100-pixel gap between two squares.
+
+You should draw the squares starting at the position (100, 100). This means you should position the first square at 100 on the X axis and 100 on the Y axis.
+
+Remember you need to use the equal sign ([code]=[/code]) to change the value of a variable, like the turtle's position.
+
+Write your code inside the [code]run()[/code] function so the computer can recognize it.
+
+Use the provided [code]draw_rectangle()[/code] function to draw each square.
+[/goal]
+[starting_code]
+func run():
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="draw_rectangles_at_positions/TestsDrawingRectangles.gd"]
+[script_slice path="draw_rectangles_at_positions/DrawingMultipleRectangles.gd" name="run"]
+[hint]As each square is 100 pixels wide, to separate them by 100 pixels, you need to move the turtle by 200 pixels in total.[/hint]
+[hint]You need to change the turtle's X position before drawing each square.[/hint]
+[hint]To change the turtle's position to 100 pixels on the X axis, write [code]position.x = 100[/code]. You can write [code]position.y = 100[/code] to move the turtle to 100 pixels on the Y axis.[/hint]
+[docs]draw_rectangle,position.x,position.y[/docs]
+[/practice]
+[/lesson]
