@@ -3,9 +3,6 @@
 
 
 APP_NAME="learn_to_code"
-# This is used while developing to supply the `GODOT_VERSION` variable that is 
-# normally provided by the CI
-local_godot_version=${GODOT_VERSION:-"3.4.4"}
 
 
 ######################################## HELP
@@ -195,17 +192,12 @@ export_custom(){
   dir=$(dirname "$output")
   mkdir -p "$dir"
   prepare_versionfile
-  # THERE IS NO DIFFERENCE BETWEEN A DEBUG AND A RELEASE BUILD 
-  # we export a debug build in all cases, due to https://github.com/GDQuest/learn-gdscript/issues/618
-  # we could remove the `debug` keyword, but it is kept both for backwards
-  # compatibility, and in case we solve this differently in the future
-  # in which case, all that needs to be done is replce `export-debug` with `export`
   if [ -z "$debug" ]; then
     echo "godot --quiet --no-window --export-debug \"$export_name\" \"$output\""
     test "$dry" || godot --quiet --no-window --export-debug "$export_name" "$output"
   else
-    echo "godot --quiet --no-window --export-debug \"$export_name\" \"$output\""
-    test "$dry" || godot --quiet --no-window --export-debug "$export_name" "$output"
+    echo "godot --quiet --no-window --export \"$export_name\" \"$output\""
+    test "$dry" || godot --quiet --no-window --export "$export_name" "$output"
   fi
   echo "✓ Exported \`$export_name\` build to \`$dir\`"
 }
@@ -369,16 +361,9 @@ push_all(){
 
 ######################################## CI/CD
 
-
-prepare_ci_copytemplates(){
+prepare_ci_getheadless(){
   if [ "$1" == "help" ]; then
-    echo "-- DEPRECATED --"
-    echo "Do not use this, use gettemplates instead"
-    echo "We need to download custom templates to enable offline GDScript error reporting"
-    echo "Once/if this is merged in master, we can use copytemplates again"
-    echo "----------------"
-    echo "Prepares the CI by copying the template from the docker"
-    echo "You should not run this on your local computer"
+    echo "Prepares the CI by getting the custom headless build online"
     echo "cannot run in dry mode"
     exit 0
   fi
@@ -386,15 +371,25 @@ prepare_ci_copytemplates(){
     echo "\$GODOT_VERSION environment variable is not set"
     exit 1
   fi
-  echo "Will use templates for ${GODOT_VERSION}"
-  echo "mkdir -v -p ~/.local/share/godot/templates"
-  mkdir -v -p ~/.local/share/godot/templates
-  echo "✓ created local template directory"
-  echo "mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable"
-  mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-  echo "✓ copied templates"
+  if [ -z "$TEMPLATES_REPO" ] || [ "$TEMPLATES_REPO" == "" ]; then
+    echo "\$TEMPLATES_REPO environment variable is not set"
+    exit 1
+  fi
+  echo "Will get the custom headless for ${GODOT_VERSION}"
+  echo "wget https://github.com/${TEMPLATES_REPO}/releases/download/learn-${GODOT_VERSION}/godot-learn.${GODOT_VERSION}.headless.zip"
+  wget https://github.com/${TEMPLATES_REPO}/releases/download/learn-${GODOT_VERSION}/godot-learn.${GODOT_VERSION}.headless.zip || {
+    echo "Headless for \`${GODOT_VERSION}\` not found."
+	exit 1
+  }
+  echo "✓ Downloaded Headless"
+  echo "Will unzip headless"
+  echo "unzip godot-learn.${GODOT_VERSION}.headless.zip"
+  unzip godot-learn.${GODOT_VERSION}.headless.zip
+  echo "Will move headless to /usr/bin"
+  echo "mv godot_server.x11.opt.tools.64 /usr/local/bin/godot"
+  mv godot_server.x11.opt.tools.64 /usr/local/bin/godot
+  echo "✓ Headless prepared to godot command"
 }
-
 
 prepare_ci_gettemplates(){
   if [ "$1" == "help" ]; then
@@ -406,16 +401,20 @@ prepare_ci_gettemplates(){
     echo "\$GODOT_VERSION environment variable is not set"
     exit 1
   fi
+  if [ -z "$TEMPLATES_REPO" ] || [ "$TEMPLATES_REPO" == "" ]; then
+    echo "\$TEMPLATES_REPO environment variable is not set"
+    exit 1
+  fi
   echo "Will get the custom templates for ${GODOT_VERSION}"
-  echo "wget https://github.com/Razoric480/godot/releases/download/${GODOT_VERSION}-parser/$(sed 's/\.//g' <<< ${GODOT_VERSION})custom-templates.zip"
-  wget https://github.com/Razoric480/godot/releases/download/${GODOT_VERSION}-parser/$(sed 's/\.//g' <<< ${GODOT_VERSION})custom-templates.zip || {
+  echo "wget https://github.com/${TEMPLATES_REPO}/releases/download/learn-${GODOT_VERSION}/godot-learn.${GODOT_VERSION}.templates.zip"
+  wget https://github.com/${TEMPLATES_REPO}/releases/download/learn-${GODOT_VERSION}/godot-learn.${GODOT_VERSION}.templates.zip || {
     echo "Templates for \`${GODOT_VERSION}\` not found"
     exit 1
   }
   echo "✓ Downloaded templates"
   echo "Will unzip templates"
-  echo "unzip $(sed 's/\.//g' <<< ${GODOT_VERSION})custom-templates.zip -d templates"
-  unzip $(sed 's/\.//g' <<< ${GODOT_VERSION})custom-templates.zip -d templates
+  echo "unzip godot-learn.${GODOT_VERSION}.templates.zip -d /templates"
+  unzip godot-learn.${GODOT_VERSION}.templates.zip -d /templates
   echo "✓ copied templates"
 }
 
@@ -431,6 +430,14 @@ prepare_ci_software(){
   apt-get update
   echo "apt-get install -y --no-install-recommends sed rsync"
   apt-get install -y --no-install-recommends sed rsync
+  if [[ "${ACT}" = "true" ]]; then
+    # github injects a node runtime, but act does not do that
+    echo "Running in act, needs modern Nodejs in container"
+    echo "wget -qO- https://deb.nodesource.com/setup_24.x | bash -"
+    wget -qO- https://deb.nodesource.com/setup_24.x | bash -
+	echo "DEBIAN_FRONTEND=noninteractive TZ=UTC apt-get install -y nodejs"
+	DEBIAN_FRONTEND=noninteractive TZ=UTC apt-get install -y nodejs
+  fi
   echo "✓ installed software"
 }
 
@@ -464,9 +471,10 @@ prepare_ci(){
     echo "cannot run in dry mode"
     exit 0
   fi
-  #prepare_ci_copytemplates
+  prepare_ci_getheadless
   prepare_ci_gettemplates
   prepare_ci_software
+  prepare_course_scripts
   prepare_overridefile $@
   echo "✓ CI prepared"
 }
@@ -516,16 +524,31 @@ prepare_htmltemplate(){
 
 
 prepare_local(){
-  # TODO: remove this if/when prepare_ci_gettemplates becomes unecessary
   if [ "$1" == "help" ]; then
     echo "Downloads the custom templates locally"
     echo "Necessary before any export"
     echo "cannot run in dry mode"
     exit 0
   fi
-  GODOT_VERSION="$local_godot_version" prepare_ci_gettemplates
+  source ./.env
+  prepare_ci_getheadless
+  prepare_ci_gettemplates
+  prepare_course_scripts
 }
 
+prepare_course_scripts(){
+  if [ "$1" == "help" ]; then
+    echo "Copies all course .gd files to *.lgd text files. This is a mandatory step."
+    echo "The learn-gdscript app needs fully preserved, commented scripts for parsing"
+    echo "and godot turns scripts into bytecoded *.gdb when exporting."
+    exit 0
+  fi
+  
+  find course -type f -name '*.gd' | while IFS= read -r file; do
+    cp -- "$file" "${file%.gd}.lgd"
+  done
+  echo "✓ done text-preserving course scripts"
+}
 
 ######################################## BOOTSTRAP
 
