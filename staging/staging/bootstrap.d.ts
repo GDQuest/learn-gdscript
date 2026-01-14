@@ -11,6 +11,10 @@ interface GDQuestLib {
 }
 
 declare const GDQUEST_ENVIRONMENT: {
+  build_date: string;
+  build_date_iso: string;
+  build_date_unix: number;
+  git_branch: string;
   git_commit: string;
   version: string;
 };
@@ -70,7 +74,7 @@ declare const GODOT_CONFIG: {
 };
 
 declare const Engine: {
-  new (config: typeof GODOT_CONFIG): GodotEngineInstance;
+  new(config: typeof GODOT_CONFIG): GodotEngineInstance;
   isWebGLAvailable: () => boolean;
 };
 

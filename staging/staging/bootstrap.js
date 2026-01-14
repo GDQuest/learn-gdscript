@@ -10,7 +10,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     document.getElementById("canvas-frame")
   );
 
-  const noOp = () => {};
+  const noOp = () => { };
 
   const throttle = (callback, limit = 50) => {
     let waiting = false;
@@ -26,14 +26,14 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
 
   const aspectRatio =
     (maxW = 0, maxH = 0) =>
-    (currentWidth = window.innerWidth, currentHeight = window.innerHeight) => {
-      const ratioW = currentWidth / maxW;
-      const ratioH = currentHeight / maxH;
-      const ratio = Math.min(ratioW, ratioH);
-      const width = maxW * ratio;
-      const height = maxH * ratio;
-      return { width, height, ratio };
-    };
+      (currentWidth = window.innerWidth, currentHeight = window.innerHeight) => {
+        const ratioW = currentWidth / maxW;
+        const ratioH = currentHeight / maxH;
+        const ratio = Math.min(ratioW, ratioH);
+        const width = maxW * ratio;
+        const height = maxH * ratio;
+        return { width, height, ratio };
+      };
 
   /**
    * Returns a proxied console that can be turned off and on by appending
@@ -83,7 +83,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       const logger = /** @type {Console} */ ({});
       if (modules["*"] || modules[title]) {
         consoleMethods.forEach(
-          (k) => (logger[k] = (...args) => console[k](...prepared, ...args)),
+          (k) => (logger[k] = (...args) => console[k](...prepared, ...args))
         );
       } else {
         return fakeLogger;
@@ -290,7 +290,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     };
 
     const mobileWarningButton = document.getElementById(
-      "mobile-warning-dismiss-button",
+      "mobile-warning-dismiss-button"
     );
 
     mobileWarningButton &&
@@ -319,7 +319,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       var element = document.createElement("a");
       element.setAttribute(
         "href",
-        "data:text/plain;charset=utf-8," + encodeURIComponent(text),
+        "data:text/plain;charset=utf-8," + encodeURIComponent(text)
       );
       element.setAttribute("download", filename);
 
@@ -350,50 +350,50 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     const download = () =>
       generateDownloadableFile(
         `gdquest-${Date.now()}.log`,
-        localStorage.getItem(KEY) || "",
+        localStorage.getItem(KEY) || ""
       );
 
     const makeLogFunction =
       (level = LEVELS.INFO) =>
-      /** @type {LogFunction} */
-      (anything, msg = "") => {
-        if (typeof anything === "string" || typeof anything === "number") {
-          msg = String(anything);
-          anything = null;
-        }
+        /** @type {LogFunction} */
+        (anything, msg = "") => {
+          if (typeof anything === "string" || typeof anything === "number") {
+            msg = String(anything);
+            anything = null;
+          }
 
-        const time = Date.now();
-        /** @type {LogLine} */
-        const log_line = { time, level, msg, ...(anything || {}) };
-        log_lines.push(log_line);
-        localStorage.setItem(KEY, JSON.stringify(log_lines));
+          const time = Date.now();
+          /** @type {LogLine} */
+          const log_line = { time, level, msg, ...(anything || {}) };
+          log_lines.push(log_line);
+          localStorage.setItem(KEY, JSON.stringify(log_lines));
 
-        if (level < 30) {
-          if (anything) {
-            debug.log(msg, anything);
+          if (level < 30) {
+            if (anything) {
+              debug.log(msg, anything);
+            } else {
+              debug.log(msg);
+            }
+          } else if (level < 40) {
+            if (anything) {
+              debug.info(msg, anything);
+            } else {
+              debug.info(msg);
+            }
+          } else if (level < 50) {
+            if (anything) {
+              debug.warn(msg, anything);
+            } else {
+              debug.warn(msg);
+            }
           } else {
-            debug.log(msg);
+            if (anything) {
+              debug.error(msg, anything);
+            } else {
+              debug.error(msg);
+            }
           }
-        } else if (level < 40) {
-          if (anything) {
-            debug.info(msg, anything);
-          } else {
-            debug.info(msg);
-          }
-        } else if (level < 50) {
-          if (anything) {
-            debug.warn(msg, anything);
-          } else {
-            debug.warn(msg);
-          }
-        } else {
-          if (anything) {
-            debug.error(msg, anything);
-          } else {
-            debug.error(msg);
-          }
-        }
-      };
+        };
 
     /** @type { Log['display'] } */
     const display = () => console.table(get());
@@ -420,7 +420,14 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
         const { userAgent, vendor } = navigator;
         const { width, height } = screen;
         const { innerHeight, innerWidth } = window;
-        const { git_commit, version } = GDQUEST_ENVIRONMENT || {};
+        const {
+          build_date,
+          build_date_iso,
+          build_date_unix,
+          git_branch,
+          git_commit,
+          version,
+        } = GDQUEST_ENVIRONMENT || {};
         const data = {
           userAgent,
           vendor,
@@ -428,6 +435,10 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
           height,
           innerHeight,
           innerWidth,
+          build_date,
+          build_date_iso,
+          build_date_unix,
+          git_branch,
           git_commit,
           version,
           ...additionalData,
@@ -447,7 +458,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       logSystemInfoIfLogIsEmpty,
     };
     Object.keys(LEVELS).forEach(
-      (key) => (log[key.toLowerCase()] = makeLogFunction(LEVELS[key])),
+      (key) => (log[key.toLowerCase()] = makeLogFunction(LEVELS[key]))
     );
 
     GDQUEST.log = log;
@@ -457,7 +468,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     /*
      * Create a button with a label.
      */
-    const makeFullscreenButton = (className, onClick = () => {}) => {
+    const makeFullscreenButton = (className, onClick = () => { }) => {
       const button = document.createElement("button");
       button.classList.add(className);
       button.addEventListener("click", onClick);
@@ -466,24 +477,16 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       label.textContent = "toggle Fullscreen";
       button.appendChild(label);
       return button;
-    };
+    }
 
     /**
      * Create a button with the proper classes; change class when
      * fullscreen event happens
      */
-    const fullscreenOnButton = makeFullscreenButton(
-      "button-fullscreen-on",
-      () => document.documentElement.requestFullscreen(),
-    );
-    const fullscreenOffButton = makeFullscreenButton(
-      "button-fullscreen-off",
-      () => {
-        document
-          .exitFullscreen()
-          .catch((err) => err.name !== "TypeError" && console.error(err));
-      },
-    );
+    const fullscreenOnButton = makeFullscreenButton("button-fullscreen-on", () => document.documentElement.requestFullscreen());
+    const fullscreenOffButton = makeFullscreenButton("button-fullscreen-off", () => {
+      document.exitFullscreen().catch((err) => err.name !== "TypeError" && console.error(err));
+    });
 
     /**
      * Only add the button if Godot has loaded
