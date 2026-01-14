@@ -438,6 +438,10 @@ prepare_ci_software(){
 	echo "DEBIAN_FRONTEND=noninteractive TZ=UTC apt-get install -y nodejs"
 	DEBIAN_FRONTEND=noninteractive TZ=UTC apt-get install -y nodejs
   fi
+  echo "wget -O butler.zip https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default"
+  wget -O butler.zip https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default
+  echo "unzip butler.zip -d /usr/local/bin"
+  unzip butler.zip -d /usr/local/bin
   echo "✓ installed software"
 }
 
