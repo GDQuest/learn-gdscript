@@ -35,7 +35,11 @@ class BuildInfo:
         # Load variables from .env file into os.environ.
         env_path = Path(".env")
         if not env_path.exists():
-            return
+            print(f"Error: .env file not found at {env_path.absolute()}")
+            print(
+                "This file is required for build configuration (the GODOT_VERSION, TEMPLATES_REPO env vars are required)"
+            )
+            sys.exit(1)
 
         for line in env_path.read_text().splitlines():
             line = line.strip()
@@ -108,6 +112,34 @@ def run_command(command, check=True, capture_output=False):
     return result.stdout.strip() if capture_output else None
 
 
+def download_butler(target_dir=None):
+    """
+    Download Butler CLI tool for itch.io uploads.
+
+    Args:
+        target_dir: Directory to install Butler to. If None, installs to current directory.
+                    For local development, typically ~/.local/bin is used.
+    """
+    print("Downloading Butler...")
+    butler_dir = Path(target_dir) if target_dir else Path(".")
+    butler_dir.mkdir(parents=True, exist_ok=True)
+    zip_path = butler_dir / "butler.zip"
+
+    BUTLER_DOWNLOAD_URL = (
+        "https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default"
+    )
+    urllib.request.urlretrieve(BUTLER_DOWNLOAD_URL, zip_path)
+    with zipfile.ZipFile(zip_path, "r") as archive:
+        archive.extractall(butler_dir)
+    butler_path = (butler_dir / "butler").resolve()
+    os.chmod(butler_path, 0o755)
+    zip_path.unlink()
+    run_command(f'"{butler_path}" -V')
+    print("✓ Downloaded Butler\n")
+
+    return butler_dir
+
+
 def download_godot_and_templates():
     """Download Godot headless build and export templates from GitHub."""
     if not build_info.godot_version:
@@ -159,11 +191,12 @@ def prepare_course_scripts():
 def prepare_ci():
     """
     Set up the CI environment: download Godot headless build and export templates,
-    install required software, and prepare course scripts.
+    install required software, download Butler, and prepare course scripts.
     """
     print("Preparing CI environment...\n")
 
     download_godot_and_templates()
+    # download_butler()
 
     # Rename Godot binary to a standard name and make it executable
     source_file = "godot_server.x11.opt.tools.64"
@@ -290,24 +323,12 @@ def push_platform(platform):
         print(f"Error: Missing itch.io credentials: {', '.join(missing)}")
         sys.exit(1)
 
-    # Install butler if needed
     if not shutil.which("butler"):
-        print("Butler not found, downloading...")
-        butler_dir = Path.home() / ".local" / "bin"
-        butler_dir.mkdir(parents=True, exist_ok=True)
-        zip_path = butler_dir / "butler.zip"
-
-        BUTLER_DOWNLOAD_URL = (
-            "https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default"
-        )
-        urllib.request.urlretrieve(BUTLER_DOWNLOAD_URL, zip_path)
-        with zipfile.ZipFile(zip_path, "r") as archive:
-            archive.extractall(butler_dir)
-        os.chmod(butler_dir / "butler", 0o755)
-        zip_path.unlink()
+        print("Butler not found in PATH, downloading for local use...")
+        butler_dir = download_butler(Path.home() / ".local" / "bin")
         os.environ["PATH"] = f"{butler_dir}:{os.environ['PATH']}"
+    else:
         run_command("butler -V")
-        print("✓ Butler installed\n")
 
     build_dir = build_info.get_output_directory(platform)
     if not Path(build_dir).exists():
