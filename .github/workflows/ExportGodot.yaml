@@ -1,3 +1,6 @@
+# this actions workflow builds large dscript for desktop plus web. It also has
+# some steps to deploy to itch.io through their upload program butler. We have a
+# copy of the app on itch.
 name: "Export Godot"
 
 on:
@@ -12,11 +15,14 @@ env:
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
   ITCHIO_USERNAME: ${{ secrets.ITCHIO_USERNAME }}
   ITCHIO_GAME: ${{ secrets.ITCHIO_GAME }}
-  git_branch: ${{ github.ref_name }}
+  BUILD_GIT_COMMIT: ${{ github.sha }}
+  BUILD_GIT_BRANCH: ${{ github.ref_name }}
 
 jobs:
-  export-linux:
-    name: Linux Export
+  # This setup job runs only once and first to prepare the environment to avoid
+  # downloading Godot and the export templates multiple times.
+  setup:
+    name: Setup environment
     runs-on: ubuntu-latest
     container: registry.gitlab.com/greenfox/godot-build-automation:latest
     steps:
@@ -24,113 +30,105 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: false
+
       - name: Load .env file
-        run: cat .env >> "$GITHUB_ENV"
-      - name: Make run executable
-        run: chmod +x run
-      - run: ./run prepare:ci
-      - run: ./run export:linux
-      - name: Push to itch.io
-        if: github.ref_name == 'release'
-        run: ./run push:linux
-      - name: Upload Linux Artifact
+        run: |
+          if [ -f .env ]; then
+            cat .env >> "$GITHUB_ENV"
+          else
+            echo "Warning: .env file not found, skipping"
+          fi
+
+      - name: Install Python 3
+        run: apt-get update && apt-get install -y --no-install-recommends python3
+
+      - name: Prepare CI environment
+        run: python3 build.py prepare ci
+
+      - name: Upload prepared source
         uses: actions/upload-artifact@v4
         with:
-          name: linux
-          path: build/linux
-      - name: Releases
+          name: prepared-source
+          path: |
+            .
+            !.git
+          retention-days: 1
+          include-hidden-files: true
+
+  export:
+    name: Export ${{ matrix.platform }}
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [linux, windows, osx, web]
+        include:
+          - platform: linux
+            artifact_name: linux
+            release_tag: linux
+          - platform: windows
+            artifact_name: windows
+            release_tag: windows
+          - platform: osx
+            artifact_name: macos-build
+            release_tag: osx
+          - platform: web
+            artifact_name: web
+            release_tag: ""
+
+    steps:
+      - name: Checkout for GitHub Pages deploy
+        if: matrix.platform == 'web'
+        uses: actions/checkout@v4
+        with:
+          lfs: false
+
+      - name: Download prepared source
+        uses: actions/download-artifact@v4
+        with:
+          name: prepared-source
+
+      - name: Make Godot executable and set up environment
+        run: |
+          chmod +x ./godot
+          echo "$PWD" >> $GITHUB_PATH
+          echo "GODOT_TEMPLATES_DIR=$PWD/templates" >> $GITHUB_ENV
+
+      - name: Load .env file
+        run: |
+          if [ -f .env ]; then
+            cat .env >> "$GITHUB_ENV"
+          else
+            echo "Warning: .env file not found, skipping"
+          fi
+
+      - name: Export for ${{ matrix.platform }}
+        run: python3 build.py export ${{ matrix.platform }}
+
+      - name: Push to itch.io
+        if: github.ref_name == 'release'
+        run: python3 build.py push ${{ matrix.platform }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: build/${{ matrix.platform }}
+          retention-days: ${{ matrix.platform == 'osx' && 30 || 90 }}
+
+      - name: Upload desktop builds to GitHub Releases
+        if: matrix.release_tag != ''
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/linux/*
-          tag: linux
+          file: build/${{ matrix.platform }}/*
+          tag: ${{ matrix.release_tag }}
           file_glob: true
           overwrite: true
 
-  export-win:
-    name: Windows Export
-    runs-on: ubuntu-latest
-    container: registry.gitlab.com/greenfox/godot-build-automation:latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          lfs: false
-      - name: Load .env file
-        run: cat .env >> "$GITHUB_ENV"
-      - name: Make run executable
-        run: chmod +x run
-      - run: ./run prepare:ci
-      - run: ./run export:windows
-      - name: Push to itch.io
-        if: github.ref_name == 'release'
-        run: ./run push:windows
-      - name: Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows
-          path: build/windows
-      - name: Releases
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/windows/*
-          tag: windows
-          file_glob: true
-          overwrite: true
-
-  export-osx:
-    name: OSX Export
-    runs-on: ubuntu-latest
-    container: registry.gitlab.com/greenfox/godot-build-automation:latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          lfs: false
-      - name: Load .env file
-        run: cat .env >> "$GITHUB_ENV"
-      - name: Make run executable
-        run: chmod +x run
-      - run: ./run prepare:ci
-      - run: ./run export:osx
-      - name: Push to itch.io
-        if: github.ref_name == 'release'
-        run: ./run push:osx
-      - name: Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: macos-build
-          path: build/osx
-          retention-days: 30
-      - name: Upload macOS Release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/osx/*
-          tag: osx
-          file_glob: true
-          overwrite: true
-
-  export-web:
-    name: Web Export
-    runs-on: ubuntu-latest
-    container: registry.gitlab.com/greenfox/godot-build-automation:latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          lfs: false
-      - name: Load .env file
-        run: cat .env >> "$GITHUB_ENV"
-      - name: Make run executable
-        run: chmod +x run
-      - run: ./run prepare:ci
-      - run: ./run export:web
-      - name: Push to itch.io
-        if: github.ref_name == 'release'
-        run: ./run push:web
-      - name: Deploy to GitHub Pages 🚀
+      - name: Deploy web build to GitHub Pages
+        if: matrix.platform == 'web'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
