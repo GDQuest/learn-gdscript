@@ -46,7 +46,7 @@ clean_all(){
     echo "Removes all build directories"
     exit 0
   fi
-  
+
   echo "rm -rf build"
   test "$dry" || rm -rf build
   echo "mkdir -p build"
@@ -62,7 +62,7 @@ clean(){
     echo "Removes one or all build directories"
     exit 0
   fi
-  
+
   echo "choose what to clean"
   exit 1
 }
@@ -128,7 +128,7 @@ web_watch(){
       echo "Changes detected in $changed_file, will recompile"
       if (($now - $last_time_compiled >= $throttle_compile)); then
         export_custom "${presets[web]}" "${dirs[web]}/index.html"
-      fi 
+      fi
       last_time_compiled=$(date +%s)
     fi
   }
@@ -207,15 +207,15 @@ export_web(){
     echo "Exports the Web build and copies over static files"
     echo "You can specify the following environment variables:"
     echo " - \`\$url\` for the html template"
-    echo " - \`\$git_branch\` for deploying to a subfolder (the" 
+    echo " - \`\$git_branch\` for deploying to a subfolder (the"
     echo "   \`release\` branch will be blanked, and deployed to"
     echo "   the root subfolder)"
     exit 0
   fi
   prepare_htmltemplate
-  
+
   export_custom "${presets[web]}" "${dirs[web]}/index.html"
-  
+
   echo "cp -r html_export/static/* \"${dirs[web]}\""
   test "$dry" || cp -r html_export/static/* "${dirs[web]}"
 
@@ -284,7 +284,7 @@ push_custom(){
     done
     exit 0
   fi
-  
+
   current_build="$1"
   dir="${dirs[$current_build]}"
   if [ -z "$current_build" ]; then
@@ -300,7 +300,7 @@ push_custom(){
   IFS='-'
   all_tags="$*-$git_branch"
   IFS=$old
-  
+
   if [ ! -z "$dry" ] && [ -z "$ITCHIO_USERNAME" ]; then
     ITCHIO_USERNAME="user"
     ITCHIO_GAME="game"
@@ -538,12 +538,14 @@ prepare_local(){
 
 prepare_course_scripts(){
   if [ "$1" == "help" ]; then
-    echo "Copies all course .gd files to *.lgd text files. This is a mandatory step."
-    echo "The learn-gdscript app needs fully preserved, commented scripts for parsing"
-    echo "and godot turns scripts into bytecoded *.gdb when exporting."
-    exit 0
+      echo "Preserves GDScript source code for the learning app"
+      echo "This step is necessary because Godot converts scripts to bytecode during export,"
+      echo "which removes the source code. The learning app needs access to the original"
+      echo "GDScript files to display code to students and allow them to do interactive practices."
+      echo "This command copies all .gd files to .lgd files so the app can read them."
+      exit 0
   fi
-  
+
   find course -type f -name '*.gd' | while IFS= read -r file; do
     cp -- "$file" "${file%.gd}.lgd"
   done
@@ -631,7 +633,7 @@ _prepare_build_vars(){
   dirs[windows]="build/windows"
   dirs[osx]="build/osx"
   dirs[web]="build/web"
-  
+
   if [ "$should_use_branch" = true ]; then
     dirs[web]="${dirs[web]}/$git_branch"
   fi
