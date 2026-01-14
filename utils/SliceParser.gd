@@ -141,10 +141,13 @@ static func load_from_script(script_path: String, slice_name: String = "") -> Sc
 		push_error("Script path must be a resource path: " + script_path)
 		return null
 	
-	if not Engine.editor_hint:
+	var file := File.new()
+	if not Engine.editor_hint and not file.file_exists(script_path):
+		# When exporting the game, we need to make copies of GDScript files under a different 
+		# extension because Godot compiles GDScript files to bytecode.
+		# This means in the web build, files have different extensions, which we handle here.
 		script_path = script_path.replace(".gd", ".lgd")
 	
-	var file := File.new()
 	if file.open(script_path, File.READ) != OK:
 		push_error("Failed to read script file: " + script_path)
 		return null
