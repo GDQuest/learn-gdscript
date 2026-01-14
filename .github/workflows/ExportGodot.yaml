@@ -9,7 +9,6 @@ on:
       - staging
 
 env:
-  GODOT_VERSION: 3.4.4
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
   ITCHIO_USERNAME: ${{ secrets.ITCHIO_USERNAME }}
   ITCHIO_GAME: ${{ secrets.ITCHIO_GAME }}
@@ -19,12 +18,16 @@ jobs:
   export-linux:
     name: Linux Export
     runs-on: ubuntu-latest
-    container: barichello/godot-ci:3.4.4
+    container: registry.gitlab.com/greenfox/godot-build-automation:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           lfs: true
+      - name: Load .env file
+        run: cat .env >> "$GITHUB_ENV"
+      - name: Make run executable
+        run: chmod +x run
       - run: ./run prepare:ci
       - run: ./run export:linux
       - run: ./run push:linux
@@ -45,12 +48,16 @@ jobs:
   export-win:
     name: Windows Export
     runs-on: ubuntu-latest
-    container: barichello/godot-ci:3.4.4
+    container: registry.gitlab.com/greenfox/godot-build-automation:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           lfs: true
+      - name: Load .env file
+        run: cat .env >> "$GITHUB_ENV"
+      - name: Make run executable
+        run: chmod +x run
       - run: ./run prepare:ci
       - run: ./run export:windows
       - run: ./run push:windows
@@ -71,12 +78,16 @@ jobs:
   export-osx:
     name: OSX Export
     runs-on: ubuntu-latest
-    container: barichello/godot-ci:3.4.4
+    container: registry.gitlab.com/greenfox/godot-build-automation:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           lfs: true
+      - name: Load .env file
+        run: cat .env >> "$GITHUB_ENV"
+      - name: Make run executable
+        run: chmod +x run
       - run: ./run prepare:ci
       - run: ./run export:osx
       - run: ./run push:osx
@@ -98,12 +109,16 @@ jobs:
   export-web:
     name: Web Export
     runs-on: ubuntu-latest
-    container: barichello/godot-ci:3.4.4
+    container: registry.gitlab.com/greenfox/godot-build-automation:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           lfs: true
+      - name: Load .env file
+        run: cat .env >> "$GITHUB_ENV"
+      - name: Make run executable
+        run: chmod +x run
       - run: ./run prepare:ci
       - run: ./run export:web
       - run: ./run push:web
