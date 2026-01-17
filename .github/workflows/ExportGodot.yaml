@@ -112,12 +112,22 @@ jobs:
           file_glob: true
           overwrite: true
 
-      - name: Deploy web build to GitHub Pages
-        if: matrix.platform == 'web'
+      - name: Deploy release web build to GitHub Pages
+        if: (matrix.platform == 'web') && (github.ref_name == 'release')
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
-          folder: build/web/${{ github.ref_name == 'release' && '' || github.ref_name }}
-          target-folder: ${{ github.ref_name == 'release' && '' || github.ref_name }}
+          folder: build/web
+          target-folder: ''
+          clean: false
+
+      - name: Deploy staging/other web build to GitHub Pages
+        if: (matrix.platform == 'web') && (github.ref_name != 'release')
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: build/web/${{ github.ref_name }}
+          target-folder: ${{ github.ref_name }}
           clean: false
