@@ -24,6 +24,9 @@ GODOT_EXPORT_PRESET_NAMES = {
 }
 
 
+BUTLER_DEFAULT_PATH = "" # current directory
+
+
 class BuildInfo:
     """
     This global object holds information about the current build: git info,
@@ -118,10 +121,9 @@ def download_butler(target_dir=None):
 
     Args:
         target_dir: Directory to install Butler to. If None, installs to current directory.
-                    For local development, typically ~/.local/bin is used.
     """
     print("Downloading Butler...")
-    butler_dir = Path(target_dir) if target_dir else Path(".")
+    butler_dir = Path(target_dir) if target_dir else Path(BUTLER_DEFAULT_PATH)
     butler_dir.mkdir(parents=True, exist_ok=True)
     zip_path = butler_dir / "butler.zip"
 
@@ -196,7 +198,7 @@ def prepare_ci():
     print("Preparing CI environment...\n")
 
     download_godot_and_templates()
-    # download_butler()
+    download_butler()
 
     # Rename Godot binary to a standard name and make it executable
     source_file = "godot_server.x11.opt.tools.64"
@@ -236,6 +238,7 @@ def prepare_local():
     print("Preparing local environment...\n")
 
     download_godot_and_templates()
+    download_butler()
 
     prepare_course_scripts()
     print("\n✓ Local environment ready")
@@ -311,6 +314,20 @@ def push_platform(platform):
 
     print(f"Pushing {platform} to itch.io...\n")
 
+    local_butler = Path(BUTLER_DEFAULT_PATH) / "butler"
+    if local_butler.exists():
+        print("Using local butler installation")
+        os.environ["PATH"] = f"{local_butler.parent}:{os.environ['PATH']}"
+        run_command("butler -V")
+    elif shutil.which("butler"):
+        print("Using system butler installation")
+        run_command("butler -V")
+    else:
+        print("Butler not found, downloading for local use...")
+        butler_dir = download_butler()
+        os.environ["PATH"] = f"{butler_dir}:{os.environ['PATH']}"
+        run_command("butler -V")
+
     # Validate credentials
     missing = []
     if not build_info.butler_api_key:
@@ -323,12 +340,6 @@ def push_platform(platform):
         print(f"Error: Missing itch.io credentials: {', '.join(missing)}")
         sys.exit(1)
 
-    if not shutil.which("butler"):
-        print("Butler not found in PATH, downloading for local use...")
-        butler_dir = download_butler(Path.home() / ".local" / "bin")
-        os.environ["PATH"] = f"{butler_dir}:{os.environ['PATH']}"
-    else:
-        run_command("butler -V")
 
     build_dir = build_info.get_output_directory(platform)
     if not Path(build_dir).exists():

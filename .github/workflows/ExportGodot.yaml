@@ -92,7 +92,7 @@ jobs:
       - name: Make Godot and butler executable and set up environment
         run: |
           chmod +x ./godot
-          # chmod +x ./butler
+          chmod +x ./butler
           echo "$PWD" >> $GITHUB_PATH
           echo "GODOT_TEMPLATES_DIR=$PWD/templates" >> $GITHUB_ENV
 
@@ -107,9 +107,9 @@ jobs:
       - name: Export for ${{ matrix.platform }}
         run: python3 build.py export ${{ matrix.platform }}
 
-      # - name: Push to itch.io
-      #   if: github.ref_name == 'release'
-      #   run: python3 build.py push ${{ matrix.platform }}
+      - name: Push to itch.io
+        if: github.ref_name == 'release'
+        run: python3 build.py push ${{ matrix.platform }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
