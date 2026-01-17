@@ -24,6 +24,10 @@ GODOT_EXPORT_PRESET_NAMES = {
 }
 
 
+BUTLER_DEFAULT_PATH = "" # current directory
+GODOT_BINARY_NAME = "godot_server.x86_64" # make sure it matches what's in the Github workflow
+
+
 class BuildInfo:
     """
     This global object holds information about the current build: git info,
@@ -46,7 +50,9 @@ class BuildInfo:
             if not line or line.startswith("#") or "=" not in line:
                 continue
             key, value = line.split("=", 1)
-            os.environ[key] = value.strip('"').strip("'")
+            value = value.strip('"').strip("'")
+            if value:
+                os.environ[key] = value
 
         is_ci = (
             os.environ.get("CI") == "true" or os.environ.get("GITHUB_ACTIONS") == "true"
@@ -118,10 +124,9 @@ def download_butler(target_dir=None):
 
     Args:
         target_dir: Directory to install Butler to. If None, installs to current directory.
-                    For local development, typically ~/.local/bin is used.
     """
     print("Downloading Butler...")
-    butler_dir = Path(target_dir) if target_dir else Path(".")
+    butler_dir = Path(target_dir) if target_dir else Path(BUTLER_DEFAULT_PATH)
     butler_dir.mkdir(parents=True, exist_ok=True)
     zip_path = butler_dir / "butler.zip"
 
@@ -171,6 +176,21 @@ def download_godot_and_templates():
     with zipfile.ZipFile(templates_zip, "r") as archive:
         archive.extractall("templates")
     os.remove(templates_zip)
+
+    source_file = "godot_server.x11.opt.tools.64"
+    target_path = GODOT_BINARY_NAME
+
+    if not os.path.exists(source_file):
+        print(f"Error: {source_file} not found after download")
+        sys.exit(1)
+
+    shutil.move(source_file, GODOT_BINARY_NAME)
+    os.chmod(GODOT_BINARY_NAME, 0o755)
+
+    if not os.path.exists(GODOT_BINARY_NAME):
+        print(f"Error: Failed to rename Godot to {GODOT_BINARY_NAME}")
+    os.chmod(GODOT_BINARY_NAME, 0o755)
+
     print("✓ Downloaded export templates\n")
 
 
@@ -196,21 +216,10 @@ def prepare_ci():
     print("Preparing CI environment...\n")
 
     download_godot_and_templates()
-    # download_butler()
+    download_butler()
 
-    # Rename Godot binary to a standard name and make it executable
-    source_file = "godot_server.x11.opt.tools.64"
-    target_path = "godot"
-
-    if not os.path.exists(source_file):
-        print(f"Error: {source_file} not found after download")
-        sys.exit(1)
-
-    shutil.move(source_file, target_path)
-    os.chmod(target_path, 0o755)
-
-    if not os.path.exists(target_path):
-        print(f"Error: Failed to rename Godot to {target_path}")
+    if not os.path.exists(GODOT_BINARY_NAME):
+        print(f"Error: {GODOT_BINARY_NAME} not found after download")
         sys.exit(1)
 
     print("✓ Prepared Godot headless binary\n")
@@ -236,12 +245,22 @@ def prepare_local():
     print("Preparing local environment...\n")
 
     download_godot_and_templates()
+    download_butler()
 
     prepare_course_scripts()
     print("\n✓ Local environment ready")
 
 
 def export_platform(platform):
+    
+
+    godot_binary_path = Path(GODOT_BINARY_NAME)
+    if not godot_binary_path.exists():
+        print(f"Error: Godot executable '{GODOT_BINARY_NAME}' not found.")
+        print(f"Please make sure the binary exists at: {godot_binary_path.absolute()}")
+        print(f"Did you run the 'prepare' command first?")
+        sys.exit(1)
+
     if platform not in GODOT_EXPORT_PRESET_NAMES:
         print(
             f"Error: Unknown platform '{platform}'. Available: {', '.join(GODOT_EXPORT_PRESET_NAMES.keys())}"
@@ -284,7 +303,7 @@ const build_date := "{build_info.build_date_iso}";
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
     run_command(
-        f'godot --quiet --no-window --export-debug "{GODOT_EXPORT_PRESET_NAMES[platform]}" "{output_path}"'
+        f'./{GODOT_BINARY_NAME} --quiet --no-window --export-debug "{GODOT_EXPORT_PRESET_NAMES[platform]}" "{output_path}"'
     )
 
     if platform == "web":
@@ -311,6 +330,20 @@ def push_platform(platform):
 
     print(f"Pushing {platform} to itch.io...\n")
 
+    local_butler = Path(BUTLER_DEFAULT_PATH) / "butler"
+    if local_butler.exists():
+        print("Using local butler installation")
+        os.environ["PATH"] = f"{local_butler.parent}:{os.environ['PATH']}"
+        run_command("butler -V")
+    elif shutil.which("butler"):
+        print("Using system butler installation")
+        run_command("butler -V")
+    else:
+        print("Butler not found, downloading for local use...")
+        butler_dir = download_butler()
+        os.environ["PATH"] = f"{butler_dir}:{os.environ['PATH']}"
+        run_command("butler -V")
+
     # Validate credentials
     missing = []
     if not build_info.butler_api_key:
@@ -323,12 +356,6 @@ def push_platform(platform):
         print(f"Error: Missing itch.io credentials: {', '.join(missing)}")
         sys.exit(1)
 
-    if not shutil.which("butler"):
-        print("Butler not found in PATH, downloading for local use...")
-        butler_dir = download_butler(Path.home() / ".local" / "bin")
-        os.environ["PATH"] = f"{butler_dir}:{os.environ['PATH']}"
-    else:
-        run_command("butler -V")
 
     build_dir = build_info.get_output_directory(platform)
     if not Path(build_dir).exists():
@@ -397,6 +424,39 @@ def clean_web_build():
     print("✓ Cleaned web build")
 
 
+def prepare_clean():
+    """Remove files downloaded by 'prepare local' command."""
+    print("Cleaning prepare files...")
+    
+    files_to_remove = [
+        GODOT_BINARY_NAME,
+        "butler",
+        "7z.so",
+        "libc7zip.so",
+    ]
+    
+    for filename in files_to_remove:
+        file_path = Path(filename)
+        if file_path.exists():
+            file_path.unlink()
+            print(f"  Removed {filename}")
+    
+    templates_dir = Path("templates")
+    if templates_dir.exists():
+        shutil.rmtree(templates_dir)
+        print("  Removed templates/")
+    
+    # Remove .lgd files created by prepare_course_scripts
+    lgd_count = 0
+    for lgd_file in Path("course").rglob("*.lgd"):
+        lgd_file.unlink()
+        lgd_count += 1
+    if lgd_count > 0:
+        print(f"  Removed {lgd_count} .lgd files")
+    
+    print("✓ Cleaned prepare files")
+
+
 def web_debug():
     """Full dev mode: clean, build, serve, and watch for changes."""
     # Check for inotifywait before doing anything else
@@ -461,7 +521,7 @@ Examples:
     )
 
     prepare_cmd = subparsers.add_parser("prepare", help="Prepare build environment")
-    prepare_cmd.add_argument("target", choices=["ci", "local"])
+    prepare_cmd.add_argument("target", choices=["ci", "local", "clean"])
 
     clean_cmd = subparsers.add_parser("clean", help="Remove build files")
     clean_cmd.add_argument("target", choices=["all", "web"])
@@ -497,6 +557,8 @@ Examples:
     elif args.command == "prepare":
         if args.target == "ci":
             prepare_ci()
+        elif args.target == "clean":
+            prepare_clean()
         else:
             prepare_local()
     elif args.command == "clean":
