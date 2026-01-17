@@ -25,6 +25,7 @@ GODOT_EXPORT_PRESET_NAMES = {
 
 
 BUTLER_DEFAULT_PATH = "" # current directory
+GODOT_BINARY_NAME = "godot_server.x11.opt.tools.64"
 
 
 class BuildInfo:
@@ -173,6 +174,7 @@ def download_godot_and_templates():
     with zipfile.ZipFile(templates_zip, "r") as archive:
         archive.extractall("templates")
     os.remove(templates_zip)
+    os.chmod(GODOT_BINARY_NAME, 0o755)
     print("✓ Downloaded export templates\n")
 
 
@@ -200,19 +202,8 @@ def prepare_ci():
     download_godot_and_templates()
     download_butler()
 
-    # Rename Godot binary to a standard name and make it executable
-    source_file = "godot_server.x11.opt.tools.64"
-    target_path = "godot"
-
-    if not os.path.exists(source_file):
-        print(f"Error: {source_file} not found after download")
-        sys.exit(1)
-
-    shutil.move(source_file, target_path)
-    os.chmod(target_path, 0o755)
-
-    if not os.path.exists(target_path):
-        print(f"Error: Failed to rename Godot to {target_path}")
+    if not os.path.exists(GODOT_BINARY_NAME):
+        print(f"Error: {GODOT_BINARY_NAME} not found after download")
         sys.exit(1)
 
     print("✓ Prepared Godot headless binary\n")
@@ -245,6 +236,15 @@ def prepare_local():
 
 
 def export_platform(platform):
+    
+
+    godot_binary_path = Path(GODOT_BINARY_NAME)
+    if not godot_binary_path.exists():
+        print(f"Error: Godot executable '{GODOT_BINARY_NAME}' not found.")
+        print(f"Please make sure the binary exists at: {godot_binary_path.absolute()}")
+        print(f"Did you run the 'prepare' command first?")
+        sys.exit(1)
+
     if platform not in GODOT_EXPORT_PRESET_NAMES:
         print(
             f"Error: Unknown platform '{platform}'. Available: {', '.join(GODOT_EXPORT_PRESET_NAMES.keys())}"
@@ -287,7 +287,7 @@ const build_date := "{build_info.build_date_iso}";
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
     run_command(
-        f'godot --quiet --no-window --export-debug "{GODOT_EXPORT_PRESET_NAMES[platform]}" "{output_path}"'
+        f'./{GODOT_BINARY_NAME} --quiet --no-window --export-debug "{GODOT_EXPORT_PRESET_NAMES[platform]}" "{output_path}"'
     )
 
     if platform == "web":
