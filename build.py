@@ -25,7 +25,7 @@ GODOT_EXPORT_PRESET_NAMES = {
 
 
 BUTLER_DEFAULT_PATH = "" # current directory
-GODOT_BINARY_NAME = "godot_server.x11.opt.tools.64"
+GODOT_BINARY_NAME = "godot_server.x86_64" # make sure it matches what's in the Github workflow
 
 
 class BuildInfo:
@@ -174,7 +174,21 @@ def download_godot_and_templates():
     with zipfile.ZipFile(templates_zip, "r") as archive:
         archive.extractall("templates")
     os.remove(templates_zip)
+
+    source_file = "godot_server.x11.opt.tools.64"
+    target_path = GODOT_BINARY_NAME
+
+    if not os.path.exists(source_file):
+        print(f"Error: {source_file} not found after download")
+        sys.exit(1)
+
+    shutil.move(source_file, GODOT_BINARY_NAME)
     os.chmod(GODOT_BINARY_NAME, 0o755)
+
+    if not os.path.exists(GODOT_BINARY_NAME):
+        print(f"Error: Failed to rename Godot to {GODOT_BINARY_NAME}")
+    os.chmod(GODOT_BINARY_NAME, 0o755)
+
     print("✓ Downloaded export templates\n")
 
 
@@ -408,6 +422,39 @@ def clean_web_build():
     print("✓ Cleaned web build")
 
 
+def prepare_clean():
+    """Remove files downloaded by 'prepare local' command."""
+    print("Cleaning prepare files...")
+    
+    files_to_remove = [
+        GODOT_BINARY_NAME,
+        "butler",
+        "7z.so",
+        "libc7zip.so",
+    ]
+    
+    for filename in files_to_remove:
+        file_path = Path(filename)
+        if file_path.exists():
+            file_path.unlink()
+            print(f"  Removed {filename}")
+    
+    templates_dir = Path("templates")
+    if templates_dir.exists():
+        shutil.rmtree(templates_dir)
+        print("  Removed templates/")
+    
+    # Remove .lgd files created by prepare_course_scripts
+    lgd_count = 0
+    for lgd_file in Path("course").rglob("*.lgd"):
+        lgd_file.unlink()
+        lgd_count += 1
+    if lgd_count > 0:
+        print(f"  Removed {lgd_count} .lgd files")
+    
+    print("✓ Cleaned prepare files")
+
+
 def web_debug():
     """Full dev mode: clean, build, serve, and watch for changes."""
     # Check for inotifywait before doing anything else
@@ -472,7 +519,7 @@ Examples:
     )
 
     prepare_cmd = subparsers.add_parser("prepare", help="Prepare build environment")
-    prepare_cmd.add_argument("target", choices=["ci", "local"])
+    prepare_cmd.add_argument("target", choices=["ci", "local", "clean"])
 
     clean_cmd = subparsers.add_parser("clean", help="Remove build files")
     clean_cmd.add_argument("target", choices=["all", "web"])
@@ -508,6 +555,8 @@ Examples:
     elif args.command == "prepare":
         if args.target == "ci":
             prepare_ci()
+        elif args.target == "clean":
+            prepare_clean()
         else:
             prepare_local()
     elif args.command == "clean":

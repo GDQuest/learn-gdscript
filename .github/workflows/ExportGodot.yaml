@@ -91,6 +91,8 @@ jobs:
 
       - name: Make Godot and butler executable and set up environment
         run: |
+          chmod +x godot_server.x86_64
+          chmod +x butler
           echo "$PWD" >> $GITHUB_PATH
           echo "GODOT_TEMPLATES_DIR=$PWD/templates" >> $GITHUB_ENV
 
