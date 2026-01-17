@@ -118,6 +118,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
-          folder: build/web
+          folder: build/web/${{ github.ref_name }}
           target-folder: ${{ github.ref_name == 'release' && '' || github.ref_name }}
           clean: false
