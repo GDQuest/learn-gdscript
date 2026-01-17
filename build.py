@@ -50,7 +50,9 @@ class BuildInfo:
             if not line or line.startswith("#") or "=" not in line:
                 continue
             key, value = line.split("=", 1)
-            os.environ[key] = value.strip('"').strip("'")
+            value = value.strip('"').strip("'")
+            if value:
+                os.environ[key] = value
 
         is_ci = (
             os.environ.get("CI") == "true" or os.environ.get("GITHUB_ACTIONS") == "true"
