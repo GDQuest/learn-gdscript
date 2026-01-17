@@ -31,14 +31,6 @@ jobs:
         with:
           lfs: false
 
-      - name: Load .env file
-        run: |
-          if [ -f .env ]; then
-            cat .env >> "$GITHUB_ENV"
-          else
-            echo "Warning: .env file not found, skipping"
-          fi
-
       - name: Install Python 3
         run: apt-get update && apt-get install -y --no-install-recommends python3
 
@@ -99,10 +91,26 @@ jobs:
       - name: Load .env file
         run: |
           if [ -f .env ]; then
-            cat .env >> "$GITHUB_ENV"
+            # Only load non-empty values to avoid overwriting GitHub secrets
+            while IFS='=' read -r key value; do
+              # Skip comments and empty lines
+              [[ "$key" =~ ^#.*$ || -z "$key" ]] && continue
+              # Remove quotes from value
+              value=$(echo "$value" | sed -e 's/^["'\'']//' -e 's/["'\''']$//')
+              # Only set if value is not empty
+              if [ -n "$value" ]; then
+                echo "$key=$value" >> "$GITHUB_ENV"
+              fi
+            done < .env
           else
             echo "Warning: .env file not found, skipping"
           fi
+
+      - name: Debug environment variables
+        run: |
+          echo "BUTLER_API_KEY is $([ -n "$BUTLER_API_KEY" ] && echo 'set' || echo 'NOT set')"
+          echo "ITCHIO_USERNAME is $([ -n "$ITCHIO_USERNAME" ] && echo 'set' || echo 'NOT set')"
+          echo "ITCHIO_GAME is $([ -n "$ITCHIO_GAME" ] && echo 'set' || echo 'NOT set')"
 
       - name: Export for ${{ matrix.platform }}
         run: python3 build.py export ${{ matrix.platform }}
