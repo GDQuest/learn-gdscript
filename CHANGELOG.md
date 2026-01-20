@@ -2,6 +2,131 @@
 
 This document lists changes between releases.
 
+## Learn GDScript From Zero 1.8.0
+
+*Released on January 18, 2026*
+
+We've been working hard to improve the app's stability and make the lessons clearer for everyone! Because this version addresses many issues and notably updates the content, it affects many translations that will need to be updated. Translations are a community effort, so if you'd like to help, please check out the [translation repository](https://github.com/GDQuest/learn-gdscript-translations/).
+
+In this update we've added extra processing to the translations to split them up into smaller chunks, meaning that content updates invalidate fewer translations, which reduces the workload of updating translations.
+
+### Improvements to lessons and practices
+
+- We rewrote L6 (function parameters) to make it easier to understand. The lesson now better explains how the app will run and test your code in practice exercises.
+- Fixed several edge cases or code patterns with the turtle that wouldn't pass practices when it ideally should (in lessons 5, 20, 22, 24, and 25). This affected in particular code patterns that were valid but not taught in the lessons, for example, notably for people who already had a little prior programming experience.
+- Added error message explanations when you use unknown characters in your code, or when you mix tabs and spaces for indentation.
+- Made error explanations clearer and more helpful throughout the app. Notably, we added better documentation about how arguments work, and added a code example to illustrate the concept.
+- L21 now accepts when you use your own variable names in for loops instead of only the exact names we suggested.
+- Fixed L24.P1, it now correctly checks dictionary values and won't get stuck if you add extra items.
+- L11 now has more accurate information and clearer explanations about how things work.
+- L16.P1 now has a clearer description of what the board size variable does.
+- Improved L17's introduction to avoid confusion.
+- L21 was reworked completely, it has simpler practice, clearer explanations, and a new grid demo visual to help you understand how functions return results.
+- L22 also got a rework to be easier to follow. We removed the type inference marker from practices where it hadn't been explained yet.
+- Reworked L25 to be more consistent throughout and corrected several small issues.
+
+### Practice and code validation improvements
+
+- The app now better protects you from creating infinite loops that could freeze everything. In some cases, the former while loop protection would fail to detect certain common infinite loops beginners might write. We notably fixed an issue where the app would incorrectly report infinite loops in L16 and L22 with certain code patterns.
+- Added support for detecting more errors like trying to assign values to expressions or constants, to provide an explanation.
+- The code checker now accepts optional semicolons at the end of lines (it's valid GDScript syntax and some students like to use them).
+- L12 now properly requires you to use `angular_speed * delta` in the rotate function.
+- L11 practices won't pass anymore if you rotate more than expected.
+- L26.P1 now checks the exact text instead of just part of it, which makes validation more accurate.
+- Fixed the drawing turtle to handle positions better and avoid visual bugs.
+- You can now use spaces before type hints (like before the `:` character) in the last lesson's practices.
+
+### Interface updates
+
+- Code examples in lessons now create horizontal scrollbars instead of wrapping lines, which makes them more reliable. This notably fixes an issue that in some cases the text wrapping would fail and leave some small pieces of code hidden and inaccessible.
+- Fixed the revealer bar in lessons that sometimes wouldn't take the full width of the UI layout. They now reliably cover the full width from the start.
+- L10's code blocks now take up the full width and scale properly with different font sizes.
+- The welcome menu adjusts its size better when translations are longer.
+- Fixed a typo in the interactive variable values display.
+
+### Translation and language support
+
+- Split translations into smaller chunks to make them easier to update and reduce the number of translations to review and redo when content changes.
+- Updated translation files throughout the app.
+
+### Technical changes for developers
+
+- Updated to Godot 3.6.2
+- Optimized Godot builds to exclude several features unused by the app like XR support, etc. this reduces the app download size.
+- Rewrote the CI (continuous integration) system to use a simpler Python script and build platforms in parallel
+- Added short documentation on how to build the app (see howtobuild.md)
+- Removed the slice exporter manual build step for interactive practices and replaced it with a runtime preprocessor
+- Implemented our own simple integration test module for lessons and practices and removed GUT as a dependency
+- Cleaned up now obsolete files throughout the project
+
+## Learn GDScript From Zero 1.7.0
+
+*Released on December 12, 2024*
+
+This version focuses on making the app more accessible and adding support for more languages. We've also made the interface cleaner and fixed many small issues.
+
+### Improvements to lessons and practices
+
+- L24 about accessing array indices now has clearer text to help you understand the task and how the inventory works.
+- L6 now has clearer explanations about functions with multiple parameters.
+- L23 Practice 2 now includes documentation for the align function that was missing before.
+- Corrected several typos throughout the lessons.
+- Links to the official Godot documentation on the end screen are now properly clickable.
+- Changed a hint in L23 Practice 2 that mistakenly suggested using a function you haven't learned yet.
+
+### New features and interface improvements
+
+- Added a dyslexia-friendly font option. You can now turn on the Dyslexia Font option in the settings menu.
+- Added support for Japanese and Chinese (simplified).
+- Language names in the language selection menu are now shown in their own language, making it easier to find your language.
+- Added a credits link to lesson and practice screens so you can see who made the app.
+- The welcome screen has been refined and looks better.
+- The interface is now properly aligned, we fixed a 2-pixel offset that was making things look slightly off.
+- Replaced the "GDQuest Boy" label on practice screens with a cleaner GDQuest logo.
+- Removed the version and commit information label from the bottom of web builds for a cleaner look.
+- Added a scroll container to the settings menu so everything fits properly.
+- Added keyboard shortcuts for the close and apply buttons in settings.
+
+### Translation improvements
+
+- Updated many translations across the app.
+
+### Bug fixes
+
+- Fixed a rare issue where the app would crash because regular expressions weren't initialized properly.
+- Fixed the minimize/fullscreen button not working reliably on some web browsers when running from the github pages mirror.
+- L13 practice now passes correctly even when you use decimal numbers.
+- Added reset functions to L26 practices 1 and 2 so they work properly when you run them multiple times in a row without leaving the page.
+- Fixed L20.P2 so that extra whitespace doesn't cause errors.
+- Fixed an issue where having multiple while loops could cause errors about the counter variable already existing.
+- Fixed a problem where printing the result of a function call would cause an error.
+- Removed an inaccurate feedback message in L11.P2 about using two arguments in move_local_x().
+- Increased the maximum font size option so you can make text even bigger if needed.
+
+### Technical changes for developers
+
+- Optimized which files are included when exporting the app, reducing file size.
+- Updated project settings and cleaned up several unused resources.
+- Removed the auto-generated version script.
+- Updated GitHub Actions for building the app.
+- Removed the UUID system that was no longer needed.
+
+## Learn GDScript From Zero 1.6.0
+
+*Released on December 9, 2023*
+
+This version brings improvements to the end-of-course experience and fixes some issues with the code editor.
+
+### Changes
+
+- Completely redesigned the screen you see when you finish the course. It now looks better and makes it easier to see what to learn next.
+- Course thumbnails on end screens are now properly clickable.
+- Fixed a problem where typing a `[` (opening square bracket) would disappear when the app formatted your code.
+- Improved mouse interaction on the end screen.
+- Updated translation files.
+- Simplified mouse filter settings on end screen elements.
+- Minor UI adjustments and code cleanup.
+
 ## Learn GDScript From Zero 1.5.2
 
 ### Bug fixes
