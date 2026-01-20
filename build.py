@@ -23,9 +23,8 @@ GODOT_EXPORT_PRESET_NAMES = {
     "web": "HTML5",
 }
 
-
-BUTLER_DEFAULT_PATH = "" # current directory
-GODOT_BINARY_NAME = "godot_server.x86_64" # make sure it matches what's in the Github workflow
+# Make sure it matches what's in the Github workflow, ExportGodot.yaml
+GODOT_BINARY_NAME = "godot_server.x86_64"
 
 
 class BuildInfo:
@@ -91,6 +90,12 @@ class BuildInfo:
         self.itchio_username = os.environ.get("ITCHIO_USERNAME", "")
         self.itchio_game = os.environ.get("ITCHIO_GAME", "")
 
+    def is_ci(self):
+        """Returns True if running in CI environment."""
+        return (
+            os.environ.get("CI") == "true" or os.environ.get("GITHUB_ACTIONS") == "true"
+        )
+
     def get_output_directory(self, platform):
         """Get output directory for a platform. Web builds on non-release branches get a subfolder."""
         BUILD_DIRECTORIES = {
@@ -126,7 +131,7 @@ def download_butler(target_dir=None):
         target_dir: Directory to install Butler to. If None, installs to current directory.
     """
     print("Downloading Butler...")
-    butler_dir = Path(target_dir) if target_dir else Path(BUTLER_DEFAULT_PATH)
+    butler_dir = Path(target_dir) if target_dir else Path("")
     butler_dir.mkdir(parents=True, exist_ok=True)
     zip_path = butler_dir / "butler.zip"
 
@@ -178,7 +183,6 @@ def download_godot_and_templates():
     os.remove(templates_zip)
 
     source_file = "godot_server.x11.opt.tools.64"
-    target_path = GODOT_BINARY_NAME
 
     if not os.path.exists(source_file):
         print(f"Error: {source_file} not found after download")
@@ -252,13 +256,11 @@ def prepare_local():
 
 
 def export_platform(platform):
-    
-
     godot_binary_path = Path(GODOT_BINARY_NAME)
     if not godot_binary_path.exists():
         print(f"Error: Godot executable '{GODOT_BINARY_NAME}' not found.")
         print(f"Please make sure the binary exists at: {godot_binary_path.absolute()}")
-        print(f"Did you run the 'prepare' command first?")
+        print("Did you run the 'prepare' command first?")
         sys.exit(1)
 
     if platform not in GODOT_EXPORT_PRESET_NAMES:
@@ -330,7 +332,7 @@ def push_platform(platform):
 
     print(f"Pushing {platform} to itch.io...\n")
 
-    local_butler = Path(BUTLER_DEFAULT_PATH) / "butler"
+    local_butler = Path("butler")
     if local_butler.exists():
         print("Using local butler installation")
         os.environ["PATH"] = f"{local_butler.parent}:{os.environ['PATH']}"
@@ -355,7 +357,6 @@ def push_platform(platform):
     if missing:
         print(f"Error: Missing itch.io credentials: {', '.join(missing)}")
         sys.exit(1)
-
 
     build_dir = build_info.get_output_directory(platform)
     if not Path(build_dir).exists():
@@ -427,25 +428,25 @@ def clean_web_build():
 def prepare_clean():
     """Remove files downloaded by 'prepare local' command."""
     print("Cleaning prepare files...")
-    
+
     files_to_remove = [
         GODOT_BINARY_NAME,
         "butler",
         "7z.so",
         "libc7zip.so",
     ]
-    
+
     for filename in files_to_remove:
         file_path = Path(filename)
         if file_path.exists():
             file_path.unlink()
             print(f"  Removed {filename}")
-    
+
     templates_dir = Path("templates")
     if templates_dir.exists():
         shutil.rmtree(templates_dir)
         print("  Removed templates/")
-    
+
     # Remove .lgd files created by prepare_course_scripts
     lgd_count = 0
     for lgd_file in Path("course").rglob("*.lgd"):
@@ -453,7 +454,7 @@ def prepare_clean():
         lgd_count += 1
     if lgd_count > 0:
         print(f"  Removed {lgd_count} .lgd files")
-    
+
     print("✓ Cleaned prepare files")
 
 
@@ -539,6 +540,18 @@ Examples:
     build_info = BuildInfo()
 
     if args.command == "export":
+        # When building locally, we need to manually call the function to
+        # prepare the exports. This mainly creates a copy of the GDScript files that
+        # we can read in the exported app for interactive practices.
+        #
+        # In the CI we do it as a separate CI step ran manually because we want
+        # to prepare things only once and then build the different platforms in
+        # a build matrix in parallel.
+        if not build_info.is_ci():
+            print("Preparing course scripts for local export...\n")
+            prepare_course_scripts()
+            print()
+
         if args.platform == "all":
             print("Exporting all platforms...\n")
             for platform in GODOT_EXPORT_PRESET_NAMES:
