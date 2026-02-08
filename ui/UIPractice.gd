@@ -722,11 +722,11 @@ static func try_validate_and_replace_script(node: Node, script: GDScript) -> voi
 
 	node.set_script(script)
 
-	parent.add_child(node)
+	parent.call_deferred("add_child", node)
 
 	if node.has_method("_run"):
 		# warning-ignore:unsafe_method_access
-		node._run()
+		node.call_deferred("_run")
 
 
 ###############################################################################
