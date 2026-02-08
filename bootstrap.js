@@ -1,5 +1,3 @@
-//@ts-check
-/// <reference path="./bootstrap.d.ts"/>
 "use strict";
 
 window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
@@ -10,7 +8,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     document.getElementById("canvas-frame")
   );
 
-  const noOp = () => { };
+  const noOp = () => {};
 
   const throttle = (callback, limit = 50) => {
     let waiting = false;
@@ -26,14 +24,14 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
 
   const aspectRatio =
     (maxW = 0, maxH = 0) =>
-      (currentWidth = window.innerWidth, currentHeight = window.innerHeight) => {
-        const ratioW = currentWidth / maxW;
-        const ratioH = currentHeight / maxH;
-        const ratio = Math.min(ratioW, ratioH);
-        const width = maxW * ratio;
-        const height = maxH * ratio;
-        return { width, height, ratio };
-      };
+    (currentWidth = window.innerWidth, currentHeight = window.innerHeight) => {
+      const ratioW = currentWidth / maxW;
+      const ratioH = currentHeight / maxH;
+      const ratio = Math.min(ratioW, ratioH);
+      const width = maxW * ratio;
+      const height = maxH * ratio;
+      return { width, height, ratio };
+    };
 
   /**
    * Returns a proxied console that can be turned off and on by appending
@@ -64,7 +62,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     }
 
     const modules = (() => {
-      const modules = /**@type {Record<string, true>} */ ({});
+      const modules = /** @type {Record<string, true>} */ ({});
       if (!isDebugMode) {
         return { app: true };
       }
@@ -78,7 +76,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       return modules;
     })();
 
-    return (/**@type {string} **/ title) => {
+    return (/** @type {string} **/ title) => {
       const prepared = [`%c[${title}]`, `color:#5b5bdf;`];
       const logger = /** @type {Console} */ ({});
       if (modules["*"] || modules[title]) {
@@ -115,7 +113,9 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       };
       return connect(wrapped);
     };
-    const emit = (...args) => listeners.forEach((fn) => fn(...args));
+    const emit = (...args) => {
+      listeners.forEach((fn) => fn(...args));
+    };
     /** @type { Signal } */
     const signal = { disconnect, connect, emit, once };
     return signal;
@@ -181,7 +181,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
      * @param {Error|string} err
      */
     const displayFailureNotice = (err) => {
-      var msg = err instanceof Error ? err.message : err;
+      const msg = err instanceof Error ? err.message : err;
       console.error(msg);
       setStatusMode(StatusMode.NOTICE);
       const statusNotice = document.getElementById("notices");
@@ -238,11 +238,11 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     const onPrintError = (/** @type {any[]} */ ...args) => {
       if (args[0] instanceof Error) {
         const { message } = args[0];
-        if (/Maximum call stack size exceeded/.test(message)) {
+        if (message.includes("Maximum call stack size exceeded")) {
           GDQUEST.events.onError.emit("RECURSIVE");
         }
       } else if (typeof args[0] === "string") {
-        if (/Maximum call stack size exceeded/.test(args[0])) {
+        if (args[0].includes("Maximum call stack size exceeded")) {
           GDQUEST.events.onError.emit("RECURSIVE");
         }
       } else {
@@ -316,7 +316,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     };
 
     const generateDownloadableFile = (filename = "", text = "") => {
-      var element = document.createElement("a");
+      const element = document.createElement("a");
       element.setAttribute(
         "href",
         "data:text/plain;charset=utf-8," + encodeURIComponent(text)
@@ -347,56 +347,59 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     const getLocalStorageSize = getLocalStorageSizeOf(KEY);
 
     /** @type { Log['download'] } */
-    const download = () =>
+    const download = () => {
       generateDownloadableFile(
         `gdquest-${Date.now()}.log`,
         localStorage.getItem(KEY) || ""
       );
+    };
 
     const makeLogFunction =
       (level = LEVELS.INFO) =>
-        /** @type {LogFunction} */
-        (anything, msg = "") => {
-          if (typeof anything === "string" || typeof anything === "number") {
-            msg = String(anything);
-            anything = null;
-          }
+      /** @type {LogFunction} */
+      (anything, msg = "") => {
+        if (typeof anything === "string" || typeof anything === "number") {
+          msg = String(anything);
+          anything = null;
+        }
 
-          const time = Date.now();
-          /** @type {LogLine} */
-          const log_line = { time, level, msg, ...(anything || {}) };
-          log_lines.push(log_line);
-          localStorage.setItem(KEY, JSON.stringify(log_lines));
+        const time = Date.now();
+        /** @type {LogLine} */
+        const log_line = { time, level, msg, ...(anything || {}) };
+        log_lines.push(log_line);
+        localStorage.setItem(KEY, JSON.stringify(log_lines));
 
-          if (level < 30) {
-            if (anything) {
-              debug.log(msg, anything);
-            } else {
-              debug.log(msg);
-            }
-          } else if (level < 40) {
-            if (anything) {
-              debug.info(msg, anything);
-            } else {
-              debug.info(msg);
-            }
-          } else if (level < 50) {
-            if (anything) {
-              debug.warn(msg, anything);
-            } else {
-              debug.warn(msg);
-            }
+        if (level < 30) {
+          if (anything) {
+            debug.log(msg, anything);
           } else {
-            if (anything) {
-              debug.error(msg, anything);
-            } else {
-              debug.error(msg);
-            }
+            debug.log(msg);
           }
-        };
+        } else if (level < 40) {
+          if (anything) {
+            debug.info(msg, anything);
+          } else {
+            debug.info(msg);
+          }
+        } else if (level < 50) {
+          if (anything) {
+            debug.warn(msg, anything);
+          } else {
+            debug.warn(msg);
+          }
+        } else {
+          if (anything) {
+            debug.error(msg, anything);
+          } else {
+            debug.error(msg);
+          }
+        }
+      };
 
     /** @type { Log['display'] } */
-    const display = () => console.table(get());
+    const display = () => {
+      console.table(get());
+    };
 
     /** @type { Log['clear'] } */
     const clear = () => {
@@ -448,7 +451,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     };
 
     /** @type { Log } */
-    // @ts-ignore
+    // @ts-expect-error
     const log = {
       display,
       clear,
@@ -468,7 +471,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     /*
      * Create a button with a label.
      */
-    const makeFullscreenButton = (className, onClick = () => { }) => {
+    const makeFullscreenButton = (className, onClick = () => {}) => {
       const button = document.createElement("button");
       button.classList.add(className);
       button.addEventListener("click", onClick);
@@ -477,16 +480,26 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       label.textContent = "toggle Fullscreen";
       button.appendChild(label);
       return button;
-    }
+    };
 
     /**
      * Create a button with the proper classes; change class when
      * fullscreen event happens
      */
-    const fullscreenOnButton = makeFullscreenButton("button-fullscreen-on", () => document.documentElement.requestFullscreen());
-    const fullscreenOffButton = makeFullscreenButton("button-fullscreen-off", () => {
-      document.exitFullscreen().catch((err) => err.name !== "TypeError" && console.error(err));
-    });
+    const fullscreenOnButton = makeFullscreenButton(
+      "button-fullscreen-on",
+      async () => {
+        await document.documentElement.requestFullscreen();
+      }
+    );
+    const fullscreenOffButton = makeFullscreenButton(
+      "button-fullscreen-off",
+      () => {
+        document
+          .exitFullscreen()
+          .catch((err) => err.name !== "TypeError" && console.error(err));
+      }
+    );
 
     /**
      * Only add the button if Godot has loaded
@@ -509,7 +522,7 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
   }
 
   return GDQUEST;
-  // @ts-ignore
+  // @ts-expect-error
 })(window.GDQUEST || {});
 
 window.GDQUEST.startLoading();
