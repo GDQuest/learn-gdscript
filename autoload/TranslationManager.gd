@@ -21,6 +21,7 @@ const SUPPORTED_LOCALES := [
 	"uk",
 	"zh_Hant",
 	"cs",
+	"da",
 ]
 
 const LOCALE_TO_LABEL := {
@@ -37,6 +38,7 @@ const LOCALE_TO_LABEL := {
 	"uk": "Українська",
 	"zh_Hant": "繁體中文",
 	"cs": "Čeština",
+	"da": "Dansk",
 }
 
 
