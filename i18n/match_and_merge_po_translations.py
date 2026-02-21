@@ -1,26 +1,30 @@
 """Parse .pot and .po files with different string splits and matches already
 translated strings."""
+import argparse
 from dataclasses import dataclass
 from enum import Enum
 import os
 import re
-from datargs import parse, arg
-from typing import Sequence
 
 
-@dataclass
-class Args:
-    """Command-line arguments."""
 
-    files: Sequence[str] = arg(
-        positional=True,
-        default=tuple(),
+def get_args():
+    """Parse command-line arguments."""
+    parser = argparse.ArgumentParser(
+        description="Parse .pot and .po files with different string splits and matches already translated strings."
+    )
+    parser.add_argument(
+        "files",
+        nargs="*",
+        default=[],
         help="List of paths to .po or .pot files to parse.",
     )
-    output_directory: str = arg(
+    parser.add_argument(
+        "--output-directory",
         default="dist",
         help="Directory to write .po files to.",
     )
+    return parser.parse_args()
 
 
 class PropertyType(Enum):
@@ -167,7 +171,7 @@ def split_translations(po_files: list[PoFile]):
 
 
 def main():
-    args = parse(Args)
+    args = get_args()
     for f in args.files:
         assert os.path.exists(f)
 
