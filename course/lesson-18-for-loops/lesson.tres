@@ -69,7 +69,7 @@ title = "The range() function"
 type = 0
 text = "Godot has the helper function [code]range()[/code]. Calling [code]range(n)[/code] creates a list of numbers from [code]0[/code] to [code]n - 1[/code].
 
-So calling [code]range(3)[/code] outputs the list of numbers [code][0, 1, 2][/code], and [code]range(5)[/code] outputs [code][0, 1, 2, 3, 4][/code]."
+So calling [code]range(3)[/code] outputs the list of numbers [code][lb]0, 1, 2[rb][/code], and [code]range(5)[/code] outputs [code][lb]0, 1, 2, 3, 4[rb][/code]."
 visual_element_path = ""
 reverse_blocks = false
 has_separator = false
@@ -82,7 +82,7 @@ content_bbcode = "What would [code]print(range(6))[/code] print to the console?"
 hint = ""
 explanation_bbcode = "The function [code]range(n)[/code] creates a list of numbers from [code]0[/code] to [code]n - 1[/code]. The output list will start with [code]0[/code] and end with [code]5[/code].
 
-So calling [code]range(6)[/code] will output a list of six numbers which are [code][0, 1, 2, 3, 4, 5][/code].
+So calling [code]range(6)[/code] will output a list of six numbers which are [code][lb]0, 1, 2, 3, 4, 5[rb][/code].
 "
 answer_options = [ "[0, 1, 2, 3, 4, 5]", "[1, 2, 3, 4, 5, 6]", "[0, 1, 2, 3, 4, 5, 6]" ]
 valid_answers = [ "[0, 1, 2, 3, 4, 5]" ]
@@ -114,7 +114,7 @@ script = ExtResource( 3 )
 content_id = "res://course/lesson-18-for-loops/content-hZN4rS5A.tres"
 title = ""
 type = 0
-text = "In the above example, for each item in the list [code][0, 1, 2][/code], Godot sets [code]number[/code] to the item, then executes the code in the [code]for[/code] loop.
+text = "In the above example, for each item in the list [code][lb]0, 1, 2[rb][/code], Godot sets [code]number[/code] to the item, then executes the code in the [code]for[/code] loop.
 
 We'll explain arrays more thoroughly in the next lesson, but notice that [code]number[/code] is just a temporary variable. You create it when defining the loop, and the loop takes care of changing its value. Also, you can name this variable anything you want.
 
