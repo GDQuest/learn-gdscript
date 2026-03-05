@@ -90,6 +90,7 @@ func _create_content_block(text: String, title: String) -> ContentBlock:
 	block.title = title
 	block.text = _clean_text_content(text)
 	block.type = ContentBlock.Type.PLAIN
+	block.content_id = "_generated_content_block_plain"
 	return block
 
 
@@ -115,6 +116,7 @@ func _create_visual_block(node: BBCodeParser.ParseNode) -> ContentBlock:
 		path = _base_path.plus_file(path)
 
 	block.visual_element_path = path
+	block.content_id = "_generated_content_block_visual_element"
 	return block
 
 
@@ -123,6 +125,7 @@ func _create_note_block(node: BBCodeParser.ParseNode) -> ContentBlock:
 	block.type = ContentBlock.Type.NOTE
 	block.title = node.attributes.get("title", "")
 	block.text = _clean_text_content(_get_node_text_content(node))
+	block.content_id = "_generated_content_block_note"
 	return block
 
 
@@ -154,6 +157,8 @@ func _create_quiz_choice(node: BBCodeParser.ParseNode) -> QuizChoice:
 		elif child_node.tag == _parser_data.Tag.EXPLANATION:
 			quiz.explanation_bbcode = _clean_text_content(_get_node_text_content(child_node))
 
+	quiz.quiz_id = "_generated_choice_quiz"
+
 	return quiz
 
 
@@ -175,6 +180,8 @@ func _create_quiz_input(node: BBCodeParser.ParseNode) -> QuizInputField:
 			quiz.hint = _clean_text_content(_get_node_text_content(child_node))
 		elif child_node.tag == _parser_data.Tag.EXPLANATION:
 			quiz.explanation_bbcode = _clean_text_content(_get_node_text_content(child_node))
+
+	quiz.quiz_id = "_generated_quiz_input"
 
 	return quiz
 
