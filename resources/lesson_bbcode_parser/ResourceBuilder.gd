@@ -133,6 +133,10 @@ func _create_quiz_choice(node: BBCodeParser.ParseNode) -> QuizChoice:
 	quiz.do_shuffle_answers = _get_bool_attributes(node.attributes, "shuffle", true)
 
 	for child in node.children:
+		if child is String:
+			quiz.content_bbcode = _clean_text_content(child)
+			continue
+		
 		if not child is BBCodeParser.ParseNode:
 			continue
 
@@ -159,6 +163,10 @@ func _create_quiz_input(node: BBCodeParser.ParseNode) -> QuizInputField:
 	quiz.valid_answer = node.attributes.get("answer", "")
 
 	for child in node.children:
+		if child is String:
+			quiz.content_bbcode = _clean_text_content(child)
+			continue
+			
 		if not child is BBCodeParser.ParseNode:
 			continue
 

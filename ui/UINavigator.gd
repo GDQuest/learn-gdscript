@@ -168,7 +168,10 @@ func _navigate_to() -> void:
 		# warning-ignore:unsafe_method_access
 		screen.setup(target, course)
 
-		_lesson_index = course.lessons.find(lesson) # Make sure the index is synced after navigation.
+		for i in course.lessons.size():
+			if course.lessons[i].resource_path == lesson.resource_path:
+				_lesson_index = i
+				break
 	else:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
 		return
@@ -214,7 +217,11 @@ func _on_practice_next_requested(practice: Practice) -> void:
 	var lesson_data := course.lessons[_lesson_index] as Lesson
 	var practices: Array = lesson_data.practices
 
-	var index := practices.find(practice)
+	var index := -1
+	for i in practices.size():
+		if practices[i].practice_id == practice.practice_id:
+			index = i
+			break
 	# This practice is not in the current lesson, return early.
 	if index < 0:
 		return
@@ -240,7 +247,11 @@ func _on_practice_previous_requested(practice: Practice) -> void:
 	var lesson_data := course.lessons[_lesson_index] as Lesson
 	var practices: Array = lesson_data.practices
 
-	var index := practices.find(practice)
+	var index := -1
+	for i in practices.size():
+		if practices[i].practice_id == practice.practice_id:
+			index = i
+			break
 	# This practice is not in the current lesson, return early.
 	if index < 0:
 		return
@@ -257,7 +268,11 @@ func _on_practice_requested(practice: Practice) -> void:
 	var lesson_data := course.lessons[_lesson_index] as Lesson
 	var practices: Array = lesson_data.practices
 
-	var index := practices.find(practice)
+	var index := -1
+	for i in practices.size():
+		if practices[i].practice_id == practice.practice_id:
+			index = i
+			break
 	# This practice is not in the current lesson, return early.
 	if index < 0:
 		return
