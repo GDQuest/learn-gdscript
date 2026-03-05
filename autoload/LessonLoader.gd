@@ -56,7 +56,7 @@ static func load_lesson(tres_path: String, force_tres_fallback := false) -> Less
 		#
 		# Practices can still have an ID separate from the lesson resource path for
 		# tracking practice completion.
-		result.lesson.resource_path = tres_path
+		result.lesson.take_over_path(tres_path)
 		return result.lesson
 	else:
 		print("LessonLoader.gd: No bbcode file found, loading tres: ", tres_path)
