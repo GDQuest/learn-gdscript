@@ -180,6 +180,8 @@ func get_navigation_resource(resource_id: String) -> Resource:
 			for warning in result.warnings:
 				print("  ", warning.format())
 
+		# Copy resource_path from tres to maintain compatibility with existing code
+		# that relies on lesson.resource_path for progress tracking, navigation, etc.
 		lesson_data = result.lesson
 		result.lesson.take_over_path(bbcode_path)
 		_lesson_cache[bbcode_path] = result.lesson
