@@ -10,6 +10,7 @@ const ContentBlockScene := preload("screens/lesson/UIContentBlock.tscn")
 const QuizInputFieldScene := preload("screens/lesson/quizzes/UIQuizInputField.tscn")
 const QuizChoiceScene := preload("screens/lesson/quizzes/UIQuizChoice.tscn")
 const PracticeButtonScene := preload("screens/lesson/UIPracticeButton.tscn")
+const GDScriptCodeExampleScene := preload("res://course/common/GDScriptCodeExample.tscn")
 
 const AUTOSCROLL_PADDING := 20
 const AUTOSCROLL_DURATION := 0.24
@@ -65,7 +66,7 @@ func _notification(what: int) -> void:
 		_update_labels()
 
 
-func setup(lesson: Lesson, course: Course) -> void:
+func setup(lesson: Lesson, course_index: CourseIndex) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 
@@ -76,13 +77,13 @@ func setup(lesson: Lesson, course: Course) -> void:
 	# If this was the last lesson the student interacted with before, we will try to restore
 	# their reading position.
 	var is_returning := false
-	if course:
-		var last_lesson := user_profile.get_last_started_lesson(course.resource_path)
+	if course_index:
+		var last_lesson := user_profile.get_last_started_lesson(course_index.get_course_id())
 		is_returning = _lesson.resource_path == last_lesson
 
 	var restore_node: Control
 	var restore_id := ""
-	if course:
+	if course_index:
 		# We have 4 possible situations:
 		#  - We are returning to the last visited lesson and must set the position to the last content
 		# block the user has seen.
@@ -94,14 +95,14 @@ func setup(lesson: Lesson, course: Course) -> void:
 
 		if is_returning:
 			restore_id = user_profile.get_last_visited_lesson_block(
-				course.resource_path, lesson.resource_path
+				course_index.get_course_id(), lesson.resource_path
 			)
 
 		var reading_done := user_profile.is_lesson_reading_completed(
-			course.resource_path, lesson.resource_path
+			course_index.get_course_id(), lesson.resource_path
 		)
 		var reading_started := user_profile.has_lesson_blocks_read(
-			course.resource_path, lesson.resource_path
+			course_index.get_course_id(), lesson.resource_path
 		)
 		if restore_id.empty() and not reading_done and reading_started:
 			for block in lesson.content_blocks:
@@ -112,7 +113,7 @@ func setup(lesson: Lesson, course: Course) -> void:
 					block_id = block.content_id
 
 				if user_profile.is_lesson_block_read(
-					course.resource_path, lesson.resource_path, block_id
+					course_index.get_course_id(), lesson.resource_path, block_id
 				):
 					continue
 
@@ -120,7 +121,17 @@ func setup(lesson: Lesson, course: Course) -> void:
 				break
 
 	for block in lesson.content_blocks:
-		if block is ContentBlock:
+		if block is CodeBlock:
+			var instance: GDScriptCodeExample = GDScriptCodeExampleScene.instance()
+			instance.name = block.content_id.get_file().get_basename()
+			instance.text = block.code
+			_content_blocks.add_child(instance)
+			instance.hide()
+
+			if restore_id == block.content_id:
+				restore_node = instance
+
+		elif block is ContentBlock:
 			var instance: UIContentBlock = ContentBlockScene.instance()
 			instance.name = block.content_id.get_file().get_basename()
 			_content_blocks.add_child(instance)
@@ -139,9 +150,9 @@ func setup(lesson: Lesson, course: Course) -> void:
 			instance.hide()
 
 			var completed_before := false
-			if course:
+			if course_index:
 				completed_before = user_profile.is_lesson_quiz_completed(
-					course.resource_path, lesson.resource_path, block.quiz_id
+					course_index.get_course_id(), lesson.resource_path, block.quiz_id
 				)
 				if completed_before:
 					_quizzes_done += 1
@@ -159,9 +170,9 @@ func setup(lesson: Lesson, course: Course) -> void:
 	for practice in lesson.practices:
 		var button: UIPracticeButton = PracticeButtonScene.instance()
 		button.setup(practice, practice_index)
-		if course:
+		if course_index:
 			button.completed_before = user_profile.is_lesson_practice_completed(
-				course.resource_path, lesson.resource_path, practice.practice_id
+				course_index.get_course_id(), lesson.resource_path, practice.practice_id
 			)
 			if not highlighted_next and not button.completed_before:
 				highlighted_next = true

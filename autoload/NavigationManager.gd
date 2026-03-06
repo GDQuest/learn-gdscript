@@ -18,8 +18,9 @@ var arguments := {}
 
 var _current_unload_type := -1
 var _url_normalization_regex := RegExpGroup.compile(
-	"^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)\\.(?<extension>t?res)"
+	"^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)\\.(?<extension>(t?res|bbcode))"
 )
+var _lesson_cache := {}
 
 
 func _init() -> void:
@@ -132,7 +133,7 @@ func navigate_to_welcome_screen() -> void:
 func navigate_to(metadata: String) -> void:
 	var regex_result := _url_normalization_regex.search(metadata)
 	if not regex_result:
-		push_error("`%s` is not a valid resource path" % [metadata])
+		push_error("`%s` is not a valid resource or bbcode path" % [metadata])
 		return
 	var normalized := NormalizedUrl.new(regex_result)
 
@@ -154,14 +155,55 @@ func navigate_to(metadata: String) -> void:
 
 
 func get_navigation_resource(resource_id: String) -> Resource:
-	var is_lesson := resource_id.ends_with("lesson.tres")
+	var is_lesson := resource_id.ends_with("lesson.bbcode")
 
+	var bbcode_path := resource_id if is_lesson else resource_id.get_base_dir().plus_file("lesson.bbcode")
+	
+	var lesson_data: Lesson = null
+	if _lesson_cache.has(bbcode_path):
+		lesson_data = _lesson_cache[bbcode_path]
+	else:
+		var _parser := LessonBBCodeParser.new()
+		var file := File.new()
+		if not file.file_exists(bbcode_path):
+			return null
+		var result := _parser.parse_file(bbcode_path)
+
+		if result.errors:
+			push_error("LessonLoader.gd: Parse errors when loading lesson from bbcode file %s:" % bbcode_path)
+			for error in result.errors:
+				push_error("  " + error.format())
+			return null
+
+		if result.warnings:
+			print("LessonLoader.gd: Parse warnings when loading lesson from bbcode file %s:" % bbcode_path)
+			for warning in result.warnings:
+				print("  ", warning.format())
+
+		# Copy resource_path from tres to maintain compatibility with existing code
+		# that relies on lesson.resource_path for progress tracking, navigation, etc.
+		
+		# TODO: This also needs to be adapted: navigation, progress tracking, etc. as
+		# well as page slugs should probably be encoded in the new TOC file,
+		# probably a GDScript file. For progress tracking and remembering
+		# scrolling position we used blocks with unique ids BUT, now I'd model
+		# it more like the browser: possibly have a TOC on the left generated from headings
+		# and use those as anchors for navigation and progress tracking. Or use
+		# scroll % + number of completed quizzes for tracking progress through a lesson.
+		#
+		# Practices can still have an ID separate from the lesson resource path for
+		# tracking practice completion.
+		
+		# TODO:
+		# - Remove the need for intermediate resources and use BBCode directly
+		# - Delete ContentBlock.gd, CodeBlock.gd, Quiz*.gd, Practice.gd, Lesson.gd
+		lesson_data = result.lesson
+		result.lesson.take_over_path(bbcode_path)
+		_lesson_cache[bbcode_path] = result.lesson
+	
 	if is_lesson:
-		return load(resource_id) as Resource
-
-	var lesson_path := resource_id.get_base_dir().plus_file("lesson.tres")
-	var lesson_data := load(lesson_path) as Lesson
-
+		return lesson_data
+	
 	# If it's not a lesson, it's a practice. May support some other types in future.
 	for practice_res in lesson_data.practices:
 		if practice_res.practice_id == resource_id:

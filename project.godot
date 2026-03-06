@@ -10,9 +10,29 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
-"class": "AppVersion",
+"class": "BBCodeParser",
 "language": "GDScript",
-"path": "res://utils/version.gd"
+"path": "res://resources/lesson_bbcode_parser/BBCodeParser.gd"
+}, {
+"base": "Reference",
+"class": "BBCodeParserData",
+"language": "GDScript",
+"path": "res://resources/lesson_bbcode_parser/ParserData.gd"
+}, {
+"base": "Reference",
+"class": "BBCodeResourceBuilder",
+"language": "GDScript",
+"path": "res://resources/lesson_bbcode_parser/ResourceBuilder.gd"
+}, {
+"base": "Reference",
+"class": "BBCodeTreeValidator",
+"language": "GDScript",
+"path": "res://resources/lesson_bbcode_parser/TreeValidator.gd"
+}, {
+"base": "Resource",
+"class": "CodeBlock",
+"language": "GDScript",
+"path": "res://resources/CodeBlock.gd"
 }, {
 "base": "PanelContainer",
 "class": "CodeEditor",
@@ -29,16 +49,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/components/CodeExampleVariableUnderline.gd"
 }, {
-"base": "MarginContainer",
-"class": "CodeRefItem",
-"language": "GDScript",
-"path": "res://addons/gdscript-course-builder/ui/CodeRefItem.gd"
-}, {
-"base": "VBoxContainer",
-"class": "CodeRefList",
-"language": "GDScript",
-"path": "res://addons/gdscript-course-builder/ui/CodeRefList.gd"
-}, {
 "base": "ColorRect",
 "class": "ConfirmPopup",
 "language": "GDScript",
@@ -54,10 +64,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://resources/ContentBlock.gd"
 }, {
-"base": "Resource",
-"class": "Course",
+"base": "Reference",
+"class": "CourseIndex",
 "language": "GDScript",
-"path": "res://resources/Course.gd"
+"path": "res://resources/CourseIndex.gd"
 }, {
 "base": "Resource",
 "class": "CourseProgress",
@@ -119,6 +129,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://resources/Lesson.gd"
 }, {
+"base": "Reference",
+"class": "LessonBBCodeParser",
+"language": "GDScript",
+"path": "res://resources/LessonBBCodeParser.gd"
+}, {
 "base": "Resource",
 "class": "LessonProgress",
 "language": "GDScript",
@@ -178,11 +193,6 @@ _global_script_classes=[ {
 "class": "QuizChoice",
 "language": "GDScript",
 "path": "res://resources/QuizChoice.gd"
-}, {
-"base": "MarginContainer",
-"class": "QuizChoiceItem",
-"language": "GDScript",
-"path": "res://addons/gdscript-course-builder/ui/QuizChoiceItem.gd"
 }, {
 "base": "Quiz",
 "class": "QuizInputField",
@@ -244,11 +254,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/components/SmoothScrollContainer.gd"
 }, {
-"base": "ScrollContainer",
-"class": "SortableList",
-"language": "GDScript",
-"path": "res://addons/gdscript-course-builder/ui/SortableList.gd"
-}, {
 "base": "PanelContainer",
 "class": "UIBaseQuiz",
 "language": "GDScript",
@@ -300,16 +305,18 @@ _global_script_classes=[ {
 "path": "res://course/common/WrappingNode2D.gd"
 } ]
 _global_script_class_icons={
-"AppVersion": "",
+"BBCodeParser": "",
+"BBCodeParserData": "",
+"BBCodeResourceBuilder": "",
+"BBCodeTreeValidator": "",
+"CodeBlock": "",
 "CodeEditor": "",
 "CodeEditorEnhancer": "",
 "CodeExampleVariableUnderline": "",
-"CodeRefItem": "",
-"CodeRefList": "",
 "ConfirmPopup": "",
 "ConsoleArrowAnimation": "",
 "ContentBlock": "",
-"Course": "",
+"CourseIndex": "",
 "CourseProgress": "",
 "DictInventory": "",
 "DictItem": "",
@@ -322,6 +329,7 @@ _global_script_class_icons={
 "GameView": "",
 "Glossary": "",
 "Lesson": "",
+"LessonBBCodeParser": "",
 "LessonProgress": "",
 "MiniGDScriptTokenizer": "",
 "OfflineScriptVerifier": "",
@@ -334,7 +342,6 @@ _global_script_class_icons={
 "Profile": "",
 "Quiz": "",
 "QuizChoice": "",
-"QuizChoiceItem": "",
 "QuizInputField": "",
 "RegExpGroup": "",
 "Revealer": "res://ui/components/Revealer.svg",
@@ -347,7 +354,6 @@ _global_script_class_icons={
 "SliceEditorOverlay": "",
 "SliceParser": "",
 "SmoothScrollContainer": "res://ui/components/smooth_scroll_container_icon.svg",
-"SortableList": "",
 "UIBaseQuiz": "",
 "UIContentBlock": "",
 "UILesson": "",
@@ -400,7 +406,7 @@ window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg", "res://addons/gdscript-course-builder/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg" )
 
 [input]
 

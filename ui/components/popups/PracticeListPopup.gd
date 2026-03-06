@@ -26,13 +26,13 @@ func clear_items() -> void:
 		child_node.queue_free()
 
 
-func add_item(practice: Practice, lesson: Lesson, course: Course, current: bool = false) -> void:
+func add_item(practice: Practice, lesson: Lesson, course_index: CourseIndex, current: bool = false) -> void:
 	var button: UIPracticeButton = PracticeButtonScene.instance()
 	button.setup(practice, lesson.get_practice_index(practice.practice_id))
 
-	if course:
+	if course_index:
 		var user_profile := UserProfiles.get_profile()
-		button.completed_before = user_profile.is_lesson_practice_completed(course.resource_path, lesson.resource_path, practice.practice_id)
+		button.completed_before = user_profile.is_lesson_practice_completed(course_index.get_course_id(), lesson.resource_path, practice.practice_id)
 
 	if current:
 		button.navigation_disabled = true

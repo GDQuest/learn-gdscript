@@ -1,0 +1,65 @@
+[lesson title="Your First Error"]
+
+When you program, you are bound to run into errors. Tons of them.
+
+But you shouldn't worry! On the computer, [b]errors are a good thing[/b].
+
+You will encounter errors, and [i]that's okay[/i]: every programmer does. Especially professionals.
+
+At school, maybe you learned that mistakes are a bad thing. When you code something, it's not the case: [b]errors help you write correct programs[/b] because they show you what is wrong in your programs.
+
+A code error looks like this. It's a message that tells you some bit of your code doesn't work.
+
+[visual path="ErrorExample.tscn"]
+
+[title]Making errors friendlier[/title]
+
+Error messages can look a bit cryptic. This is because they're designed by programmers, for trained programmers.
+
+We added an error translator in this app that will help you get started.
+
+It shows you why an error happens and what the message means. It also gives you some tips on how to fix it.
+
+[visual path="ErrorTranslatorExample.tscn"]
+
+Error messages are designed on purpose by fellow programmers who came before you. They anticipated you might have specific issues and wanted to help you fix them.
+
+You shouldn't think of errors as failures. They are like mentors helping you from the past. Importantly, errors won't break your computer. At least not with GDScript because it's a pretty safe language.
+
+Ultimately, you want to fix all the errors in your program. Understanding what is causing the errors, with the help of error messages, is key to fixing them.
+
+[quiz_choice question="Are error messages a good or a bad thing in code?" multiple="false" shuffle="true"]
+[option]They're bad: error messages are always bad.[/option]
+[option correct]They're good: they're here to help.[/option]
+[explanation]Yes, error messages are here to help you!
+
+Pay attention to them, and do your best to read and understand them. With experience, you'll learn to make your code work more reliably thanks to error messages.[/explanation]
+[/quiz_choice]
+
+Okay, let's see an error in action. Once again, click the [i]Practice[/i] button below to face your first real error.
+
+[practice id="res://course/lesson-2-your-first-error/practice-85733.tres" title="Fix Your First Error"]
+[description]There's an error in this code. We need you to fix it![/description]
+[goal]
+This code is incorrect and will cause an error when you try to run it.
+
+The code defines an empty function named [code]this_code_is_wrong[/code].
+
+To work, the function should use the [code]return[/code] keyword. But this keyword is currently inside a comment, which the computer ignores.
+
+Test the current code by pressing the [i]Run[/i] button.
+
+Then, remove the comment sign (#) to make the code valid.
+
+Be careful not to remove the spacing before [code]return[/code]! Otherwise, that'll cause another error. You may try that too, if you feel like it.
+[/goal]
+[starting_code]
+func this_code_is_wrong():
+	#return
+[/starting_code]
+[cursor line="2" column="3"]
+[validator path="first-error/TestsFixError.gd"]
+[script_slice path="first-error/ErrorScene.gd" name="wrong_code"]
+[hint]Remove the # sign.[/hint]
+[/practice]
+[/lesson]
