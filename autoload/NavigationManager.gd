@@ -20,6 +20,7 @@ var _current_unload_type := -1
 var _url_normalization_regex := RegExpGroup.compile(
 	"^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)\\.(?<extension>(t?res|bbcode))"
 )
+var _lesson_cache := {}
 
 
 func _init() -> void:
@@ -156,14 +157,36 @@ func navigate_to(metadata: String) -> void:
 func get_navigation_resource(resource_id: String) -> Resource:
 	var is_lesson := resource_id.ends_with("lesson.bbcode")
 
-	if is_lesson:
-		# TODO: remove when bbcode migration is complete, this can load directly
-		# instead of going through LessonLoader.
-		# Same for other call to LessonLoader below.
-		return LessonLoader.load_lesson(resource_id) as Resource
-	var lesson_path := resource_id.get_base_dir().plus_file("lesson.bbcode")
-	var lesson_data := LessonLoader.load_lesson(lesson_path) as Lesson
+	var bbcode_path := resource_id if is_lesson else resource_id.get_base_dir().plus_file("lesson.bbcode")
+	
+	var lesson_data: Lesson = null
+	if _lesson_cache.has(bbcode_path):
+		lesson_data = _lesson_cache[bbcode_path]
+	else:
+		var _parser := LessonBBCodeParser.new()
+		var file := File.new()
+		if not file.file_exists(bbcode_path):
+			return null
+		var result := _parser.parse_file(bbcode_path)
 
+		if result.errors:
+			push_error("LessonLoader.gd: Parse errors when loading lesson from bbcode file %s:" % bbcode_path)
+			for error in result.errors:
+				push_error("  " + error.format())
+			return null
+
+		if result.warnings:
+			print("LessonLoader.gd: Parse warnings when loading lesson from bbcode file %s:" % bbcode_path)
+			for warning in result.warnings:
+				print("  ", warning.format())
+
+		lesson_data = result.lesson
+		result.lesson.take_over_path(bbcode_path)
+		_lesson_cache[bbcode_path] = result.lesson
+	
+	if is_lesson:
+		return lesson_data
+	
 	# If it's not a lesson, it's a practice. May support some other types in future.
 	for practice_res in lesson_data.practices:
 		if practice_res.practice_id == resource_id:
