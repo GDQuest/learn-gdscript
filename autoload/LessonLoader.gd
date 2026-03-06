@@ -8,8 +8,6 @@
 #
 # - Remove the LessonLoader.gd autoload from the project
 # - Update NavigationManager to load lessons directly from BBCode files
-# - Delete all the lesson.tres files + course.tres from the course/ directory
-# - Replace with a new GDScript index file that lists all lessons and their paths
 # - Delete related resource files: ContentBlock.gd, CodeBlock.gd, Quiz*.gd,
 # Practice.gd, Lesson.gd (only if they are no longer needed by the runtime)
 extends Node

@@ -34,7 +34,7 @@ func _rebuild_breadcrumbs() -> void:
 
 		var i := 0
 		for l in _last_course_index._get_lessons_count():
-			var lesson_data := NavigationManager.get_navigation_resource(_last_course_index.get_lesson(l)) as Lesson
+			var lesson_data := NavigationManager.get_navigation_resource(_last_course_index.get_lesson_path(l)) as Lesson
 			if lesson_data == lesson:
 				lesson_index = i
 				break
@@ -58,7 +58,7 @@ func _rebuild_breadcrumbs() -> void:
 
 		var i := 0
 		for l in _last_course_index.get_lessons_count():
-			var lesson_data := NavigationManager.get_navigation_resource(_last_course_index.get_lesson(l)) as Lesson
+			var lesson_data := NavigationManager.get_navigation_resource(_last_course_index.get_lesson_path(l)) as Lesson
 			if lesson_data.resource_path == lesson_path:
 				lesson = lesson_data
 				lesson_index = i

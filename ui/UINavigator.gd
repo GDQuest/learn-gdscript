@@ -76,7 +76,7 @@ func _ready() -> void:
 		else:
 			if _lesson_index < 0 or _lesson_index >= course_index.get_lessons_count():
 				_lesson_index = 0
-			NavigationManager.navigate_to(course_index.get_lesson(_lesson_index))
+			NavigationManager.navigate_to(course_index.get_lesson_path(_lesson_index))
 	else:
 		_navigate_to()
 
@@ -95,7 +95,7 @@ func set_start_from_lesson(lesson_id: String) -> void:
 
 	var matched_index := 0
 	for i in course_index.get_lessons_count():
-		var lesson := course_index.get_lesson(i)
+		var lesson := course_index.get_lesson_path(i)
 		if lesson == lesson_id:
 			_lesson_index = matched_index
 			break
@@ -158,7 +158,7 @@ func _navigate_to() -> void:
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
 	var screen: UINavigatablePage
 	if target is Practice:
-		var lesson = NavigationManager.get_navigation_resource(course_index.get_lesson(_lesson_index))
+		var lesson = NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index))
 
 		screen = preload("UIPractice.tscn").instance()
 		# warning-ignore:unsafe_method_access
@@ -170,7 +170,7 @@ func _navigate_to() -> void:
 		screen.setup(target, course_index)
 
 		for i in course_index.get_lessons_count():
-			if course_index.get_lesson(i) == lesson.resource_path:
+			if course_index.get_lesson_path(i) == lesson.resource_path:
 				_lesson_index = i
 				break
 	else:
@@ -215,7 +215,7 @@ func _navigate_to() -> void:
 
 
 func _on_practice_next_requested(practice: Practice) -> void:
-	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson(_lesson_index)) as Lesson
+	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as Lesson
 	var practices: Array = lesson_data.practices
 
 	var index := -1
@@ -245,7 +245,7 @@ func _on_practice_next_requested(practice: Practice) -> void:
 
 
 func _on_practice_previous_requested(practice: Practice) -> void:
-	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson(_lesson_index)) as Lesson
+	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as Lesson
 	var practices: Array = lesson_data.practices
 
 	var index := -1
@@ -266,7 +266,7 @@ func _on_practice_previous_requested(practice: Practice) -> void:
 
 
 func _on_practice_requested(practice: Practice) -> void:
-	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson(_lesson_index)) as Lesson
+	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as Lesson
 	var practices: Array = lesson_data.practices
 
 	var index := -1
@@ -282,7 +282,7 @@ func _on_practice_requested(practice: Practice) -> void:
 
 
 func _on_lesson_completed() -> void:
-	var lesson := NavigationManager.get_navigation_resource(course_index.get_lesson(_lesson_index)) as Lesson
+	var lesson := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as Lesson
 	Events.emit_signal("lesson_completed", lesson)
 
 	_lesson_index += 1
@@ -291,7 +291,7 @@ func _on_lesson_completed() -> void:
 		return
 
 	_clear_history_stack()
-	NavigationManager.navigate_to(course_index.get_lesson(_lesson_index))
+	NavigationManager.navigate_to(course_index.get_lesson_path(_lesson_index))
 
 
 func _on_course_completed() -> void:

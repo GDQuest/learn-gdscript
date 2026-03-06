@@ -58,7 +58,7 @@ func _update_outliner_index() -> void:
 	var lesson_index := 0
 	var _reselect_index := -1
 	for i in course_index.get_lessons_count():
-		var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson(i)) as Lesson
+		var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(i)) as Lesson
 		var lesson_progress := (
 			user_profile.get_or_create_lesson(course_index.get_course_id(), lesson_data.resource_path) as LessonProgress
 		)
@@ -95,7 +95,7 @@ func _on_lesson_selected(lesson_index: int) -> void:
 	if not course_index or lesson_index < 0 or lesson_index >= course_index.get_lessons_count():
 		return
 
-	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson(lesson_index)) as Lesson
+	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(lesson_index)) as Lesson
 	_lesson_details.lesson = lesson_data
 
 	var user_profile = UserProfiles.get_profile()

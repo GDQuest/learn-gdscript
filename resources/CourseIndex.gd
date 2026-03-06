@@ -10,8 +10,8 @@ func get_lessons_count() -> int:
 	return _get_lessons_count()
 
 
-func get_lesson(i: int) -> String:
-	return _get_lesson(i)
+func get_lesson_path(i: int) -> String:
+	return _get_lesson_path(i)
 
 
 func get_course_id() -> String:
@@ -30,5 +30,5 @@ func _get_title() -> String:
 	return "Empty Course"
 
 
-func _get_lesson(i: int) -> String:
+func _get_lesson_path(i: int) -> String:
 	return ""

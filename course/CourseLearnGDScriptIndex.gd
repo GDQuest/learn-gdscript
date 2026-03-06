@@ -40,7 +40,7 @@ func _get_title() -> String:
 	return "Learn GDScript From Zero"
 
 
-func _get_lesson(i: int) -> String:
+func _get_lesson_path(i: int) -> String:
 	return LESSONS[i]
 
 

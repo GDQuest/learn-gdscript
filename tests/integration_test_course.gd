@@ -51,7 +51,7 @@ func _run_integration_test() -> void:
 	var total_lessons: int = _course_index.get_lessons_count()
 	var total_practices := 0
 	for i in total_lessons:
-		var lesson := NavigationManager.get_navigation_resource(_course_index.get_lesson(i)) as Lesson
+		var lesson := NavigationManager.get_navigation_resource(_course_index.get_lesson_path(i)) as Lesson
 		total_practices += lesson.practices.size()
 	
 	print("Course: %s" % _course_index.get_title())
@@ -59,7 +59,7 @@ func _run_integration_test() -> void:
 	print("Total practices: %d\n" % total_practices)
 	
 	for lesson_index in range(total_lessons):
-		var lesson: Lesson = NavigationManager.get_navigation_resource(_course_index.get_lesson(lesson_index))
+		var lesson: Lesson = NavigationManager.get_navigation_resource(_course_index.get_lesson_path(lesson_index))
 		print("[Lesson %d/%d] Testing: %s" % [lesson_index + 1, total_lessons, lesson.title])
 		
 		# Functions yield which in Godot 3 returns function state objects
@@ -236,7 +236,7 @@ func _print_summary() -> void:
 	var total_lessons: int = _course_index.get_lessons_count()
 	var total_practices := 0
 	for i in total_lessons:
-		var lesson := NavigationManager.get_navigation_resource(_course_index.get_lesson(i)) as Lesson
+		var lesson := NavigationManager.get_navigation_resource(_course_index.get_lesson_path(i)) as Lesson
 		total_practices += lesson.practices.size()
 	
 	print("Total lessons tested: %d" % total_lessons)
