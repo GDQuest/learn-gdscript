@@ -47,7 +47,7 @@ func build_lesson(root: BBCodeParser.ParseNode, base_path: String = "") -> Lesso
 
 		if child_node.tag in _parser_data.CONTENT_PRODUCING_TAGS:
 			if text_accumulator.strip_edges() != "":
-				var block := _create_content_block(text_accumulator, current_title)
+				var block := _create_content_block(text_accumulator, current_title, child.line_number)
 				lesson.content_blocks.append(block)
 				text_accumulator = ""
 				current_title = ""
@@ -79,18 +79,18 @@ func build_lesson(root: BBCodeParser.ParseNode, base_path: String = "") -> Lesso
 			lesson.practices.append(_create_practice(child_node))
 
 	if text_accumulator.strip_edges() != "":
-		var block := _create_content_block(text_accumulator, current_title)
+		var block := _create_content_block(text_accumulator, current_title, -1)
 		lesson.content_blocks.append(block)
 
 	return lesson
 
 
-func _create_content_block(text: String, title: String) -> ContentBlock:
+func _create_content_block(text: String, title: String, line_number: int) -> ContentBlock:
 	var block := ContentBlock.new()
 	block.title = title
 	block.text = _clean_text_content(text)
 	block.type = ContentBlock.Type.PLAIN
-	block.content_id = "_generated_content_block_plain"
+	block.content_id = "_generated_content_block_plain_%s" % line_number
 	return block
 
 
@@ -100,9 +100,9 @@ func _create_codeblock(node: BBCodeParser.ParseNode) -> CodeBlock:
 	var block := CodeBlock.new()
 	block.is_runnable = _get_bool_attributes(node.attributes, "runnable", false)
 	if block.is_runnable:
-		block.content_id = "_generated_codeblock_runnable"
+		block.content_id = "_generated_codeblock_runnable_%s" % node.line_number
 	else:
-		block.content_id = "_generated_codeblock_static"
+		block.content_id = "_generated_codeblock_static_%s" % node.line_number
 	block.code = code
 	return block
 
@@ -116,7 +116,7 @@ func _create_visual_block(node: BBCodeParser.ParseNode) -> ContentBlock:
 		path = _base_path.plus_file(path)
 
 	block.visual_element_path = path
-	block.content_id = "_generated_content_block_visual_element"
+	block.content_id = "_generated_content_block_visual_element_%s" % node.line_number
 	return block
 
 
@@ -125,7 +125,7 @@ func _create_note_block(node: BBCodeParser.ParseNode) -> ContentBlock:
 	block.type = ContentBlock.Type.NOTE
 	block.title = node.attributes.get("title", "")
 	block.text = _clean_text_content(_get_node_text_content(node))
-	block.content_id = "_generated_content_block_note"
+	block.content_id = "_generated_content_block_note_%s" % node.line_number
 	return block
 
 
@@ -157,7 +157,7 @@ func _create_quiz_choice(node: BBCodeParser.ParseNode) -> QuizChoice:
 		elif child_node.tag == _parser_data.Tag.EXPLANATION:
 			quiz.explanation_bbcode = _clean_text_content(_get_node_text_content(child_node))
 
-	quiz.quiz_id = "_generated_choice_quiz"
+	quiz.quiz_id = _to_snake_case(quiz.question)
 
 	return quiz
 
@@ -181,9 +181,15 @@ func _create_quiz_input(node: BBCodeParser.ParseNode) -> QuizInputField:
 		elif child_node.tag == _parser_data.Tag.EXPLANATION:
 			quiz.explanation_bbcode = _clean_text_content(_get_node_text_content(child_node))
 
-	quiz.quiz_id = "_generated_quiz_input"
+	quiz.quiz_id = _to_snake_case(quiz.question)
 
 	return quiz
+
+
+static func _to_snake_case(input_string: String) -> String:
+	var regex := RegEx.new()
+	regex.compile("(?<=[a-z])(?=[A-Z])|[^a-zA-Z]")
+	return regex.sub(input_string, " ", true).strip_edges().replace(" ", "_").to_lower()
 
 
 func _create_practice(node: BBCodeParser.ParseNode) -> Practice:

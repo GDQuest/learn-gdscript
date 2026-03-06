@@ -131,7 +131,7 @@ func _gui_input(event: InputEvent) -> void:
 		get_focus_owner().release_focus()
 
 
-func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
+func setup(practice: Practice, lesson: Lesson, course_index: CourseIndex) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 
@@ -190,14 +190,14 @@ func setup(practice: Practice, lesson: Lesson, course: Course) -> void:
 	_game_view.use_scene(_current_scene, _script_slice.get_viewport_size())
 
 	# In case we directly test a practice from the editor, we don't have access to the lesson.
-	if lesson and course:
+	if lesson and course_index:
 		_practice_list.clear_items()
 		for practice_data in lesson.practices:
-			_practice_list.add_item(practice_data, lesson, course, practice_data == practice)
+			_practice_list.add_item(practice_data, lesson, course_index, practice_data == practice)
 
 		var user_profile := UserProfiles.get_profile()
 		var completed_before = user_profile.is_lesson_practice_completed(
-			course.resource_path, lesson.resource_path, practice.practice_id
+			course_index.get_course_id(), lesson.resource_path, practice.practice_id
 		)
 		if completed_before:
 			_info_panel.set_status_icon(_info_panel.Status.COMPLETED_BEFORE)

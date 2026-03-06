@@ -18,7 +18,7 @@ var arguments := {}
 
 var _current_unload_type := -1
 var _url_normalization_regex := RegExpGroup.compile(
-	"^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)\\.(?<extension>t?res)"
+	"^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)\\.(?<extension>(t?res|bbcode))"
 )
 
 
@@ -132,7 +132,7 @@ func navigate_to_welcome_screen() -> void:
 func navigate_to(metadata: String) -> void:
 	var regex_result := _url_normalization_regex.search(metadata)
 	if not regex_result:
-		push_error("`%s` is not a valid resource path" % [metadata])
+		push_error("`%s` is not a valid resource or bbcode path" % [metadata])
 		return
 	var normalized := NormalizedUrl.new(regex_result)
 
@@ -154,14 +154,14 @@ func navigate_to(metadata: String) -> void:
 
 
 func get_navigation_resource(resource_id: String) -> Resource:
-	var is_lesson := resource_id.ends_with("lesson.tres")
+	var is_lesson := resource_id.ends_with("lesson.bbcode")
 
 	if is_lesson:
 		# TODO: remove when bbcode migration is complete, this can load directly
 		# instead of going through LessonLoader.
 		# Same for other call to LessonLoader below.
 		return LessonLoader.load_lesson(resource_id) as Resource
-	var lesson_path := resource_id.get_base_dir().plus_file("lesson.tres")
+	var lesson_path := resource_id.get_base_dir().plus_file("lesson.bbcode")
 	var lesson_data := LessonLoader.load_lesson(lesson_path) as Lesson
 
 	# If it's not a lesson, it's a practice. May support some other types in future.
