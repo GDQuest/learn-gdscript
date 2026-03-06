@@ -40,7 +40,7 @@ func find_lesson_files(base_path: String) -> Array:
 		var full_path := base_path.plus_file(file_name)
 		if directory.current_is_dir():
 			results.append_array(find_lesson_files(full_path))
-		elif file_name == "lesson.tres":
+		elif file_name == "lesson.bbcode":
 			results.append(full_path)
 		file_name = directory.get_next()
 

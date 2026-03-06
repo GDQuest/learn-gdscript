@@ -11,7 +11,7 @@ const LessonDonePopup := preload("./components/popups/LessonDonePopup.gd")
 const SCREEN_TRANSITION_DURATION := 0.75
 const OUTLINER_TRANSITION_DURATION := 0.5
 
-var course: Course
+var course_index: CourseIndex
 
 # If `true`, play transition animations.
 var use_transitions := true
@@ -44,8 +44,8 @@ onready var _sale_popup := $SalePopup
 
 
 func _ready() -> void:
-	_lesson_count = course.lessons.size()
-	_course_outliner.course = course
+	_lesson_count = course_index.get_lessons_count()
+	_course_outliner.course_index = course_index
 
 	NavigationManager.connect("navigation_requested", self, "_navigate_to")
 	NavigationManager.connect("back_navigation_requested", self, "_navigate_back")
@@ -74,9 +74,9 @@ func _ready() -> void:
 		if load_into_outliner:
 			NavigationManager.navigate_to_outliner()
 		else:
-			if _lesson_index < 0 or _lesson_index >= course.lessons.size():
+			if _lesson_index < 0 or _lesson_index >= course_index.get_lessons_count():
 				_lesson_index = 0
-			NavigationManager.navigate_to(course.lessons[_lesson_index].resource_path)
+			NavigationManager.navigate_to(course_index.get_lesson(_lesson_index))
 	else:
 		_navigate_to()
 
@@ -90,12 +90,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func set_start_from_lesson(lesson_id: String) -> void:
-	if not course:
+	if not course_index:
 		return
 
 	var matched_index := 0
-	for lesson in course.lessons:
-		if lesson.resource_path == lesson_id:
+	for i in course_index.get_lessons_count():
+		var lesson := course_index.get_lesson(i)
+		if lesson == lesson_id:
 			_lesson_index = matched_index
 			break
 
@@ -120,7 +121,7 @@ func _navigate_back() -> void:
 
 	# warning-ignore:unsafe_method_access
 	var target = next_screen.get_screen_resource()
-	_breadcrumbs.update_breadcrumbs(course, target)
+	_breadcrumbs.update_breadcrumbs(course_index, target)
 
 	next_screen.set_is_current_screen(true)
 
@@ -157,19 +158,19 @@ func _navigate_to() -> void:
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
 	var screen: UINavigatablePage
 	if target is Practice:
-		var lesson = course.lessons[_lesson_index]
+		var lesson = NavigationManager.get_navigation_resource(course_index.get_lesson(_lesson_index))
 
 		screen = preload("UIPractice.tscn").instance()
 		# warning-ignore:unsafe_method_access
-		screen.setup(target, lesson, course)
+		screen.setup(target, lesson, course_index)
 	elif target is Lesson:
 		var lesson := target as Lesson
 		screen = preload("UILesson.tscn").instance()
 		# warning-ignore:unsafe_method_access
-		screen.setup(target, course)
+		screen.setup(target, course_index)
 
-		for i in course.lessons.size():
-			if course.lessons[i].resource_path == lesson.resource_path:
+		for i in course_index.get_lessons_count():
+			if course_index.get_lesson(i) == lesson.resource_path:
 				_lesson_index = i
 				break
 	else:
@@ -179,7 +180,7 @@ func _navigate_to() -> void:
 	_outliner_button.show()
 	_home_button.hide()
 	_screen_container.show()
-	_breadcrumbs.update_breadcrumbs(course, target)
+	_breadcrumbs.update_breadcrumbs(course_index, target)
 
 	var has_previous_screen = not _screens_stack.empty()
 	_screens_stack.push_back(screen)
@@ -214,7 +215,7 @@ func _navigate_to() -> void:
 
 
 func _on_practice_next_requested(practice: Practice) -> void:
-	var lesson_data := course.lessons[_lesson_index] as Lesson
+	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson(_lesson_index)) as Lesson
 	var practices: Array = lesson_data.practices
 
 	var index := -1
@@ -231,7 +232,7 @@ func _on_practice_next_requested(practice: Practice) -> void:
 		# Checking that it's the last practice is not enough.
 		# Check if all practices are completed before moving to the next lesson.
 		var user_profile = UserProfiles.get_profile()
-		var lesson_progress = user_profile.get_or_create_lesson(course.resource_path, lesson_data.resource_path)
+		var lesson_progress = user_profile.get_or_create_lesson(course_index.get_course_id(), lesson_data.resource_path)
 		var total_practices := practices.size()
 		var completed_practices = lesson_progress.get_completed_practices_count(practices)
 
@@ -244,7 +245,7 @@ func _on_practice_next_requested(practice: Practice) -> void:
 
 
 func _on_practice_previous_requested(practice: Practice) -> void:
-	var lesson_data := course.lessons[_lesson_index] as Lesson
+	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson(_lesson_index)) as Lesson
 	var practices: Array = lesson_data.practices
 
 	var index := -1
@@ -265,7 +266,7 @@ func _on_practice_previous_requested(practice: Practice) -> void:
 
 
 func _on_practice_requested(practice: Practice) -> void:
-	var lesson_data := course.lessons[_lesson_index] as Lesson
+	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson(_lesson_index)) as Lesson
 	var practices: Array = lesson_data.practices
 
 	var index := -1
@@ -281,7 +282,7 @@ func _on_practice_requested(practice: Practice) -> void:
 
 
 func _on_lesson_completed() -> void:
-	var lesson := course.lessons[_lesson_index] as Lesson
+	var lesson := NavigationManager.get_navigation_resource(course_index.get_lesson(_lesson_index)) as Lesson
 	Events.emit_signal("lesson_completed", lesson)
 
 	_lesson_index += 1
@@ -290,11 +291,11 @@ func _on_lesson_completed() -> void:
 		return
 
 	_clear_history_stack()
-	NavigationManager.navigate_to(course.lessons[_lesson_index].resource_path)
+	NavigationManager.navigate_to(course_index.get_lesson(_lesson_index))
 
 
 func _on_course_completed() -> void:
-	Events.emit_signal("course_completed", course)
+	Events.emit_signal("course_completed", course_index)
 	hide()
 
 
@@ -372,7 +373,7 @@ func _clear_history_stack() -> void:
 		screen.queue_free()
 	_screens_stack.clear()
 
-	_breadcrumbs.update_breadcrumbs(course, null)
+	_breadcrumbs.update_breadcrumbs(course_index, null)
 
 
 func _update_back_button(is_disabled: bool) -> void:

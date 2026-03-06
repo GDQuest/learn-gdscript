@@ -4,7 +4,7 @@ const CourseLessonList := preload("res://ui/screens/course_outliner/CourseLesson
 const LessonDetails := preload("./CourseLessonDetails.gd")
 
 
-var course: Course setget set_course
+var course_index: CourseIndex setget set_course
 var _current_lesson: Lesson
 var _current_practice: Practice
 
@@ -36,11 +36,11 @@ func _ready() -> void:
 	_reset_confirm_popup.connect("confirmed", self, "_on_reset_confirmed")
 
 
-func set_course(value: Course) -> void:
-	course = value
+func set_course(value: CourseIndex) -> void:
+	course_index = value
 	# Ensure that the user profile and the course progression data exists.
 	var user_profile = UserProfiles.get_profile()
-	user_profile.get_or_create_course(course.resource_path)
+	user_profile.get_or_create_course(course_index.get_course_id())
 
 	_update_outliner_index()
 
@@ -49,18 +49,18 @@ func _update_outliner_index() -> void:
 	_lesson_list.clear()
 	_lesson_details.hide()
 	_title_label.text = ""
-	if not course:
+	if not course_index:
 		return
 
-	_title_label.text = course.title
+	_title_label.text = course_index.get_title()
 
 	var user_profile = UserProfiles.get_profile()
 	var lesson_index := 0
 	var _reselect_index := -1
-	for lesson_data in course.lessons:
-		lesson_data = lesson_data as Lesson
+	for i in course_index.get_lessons_count():
+		var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson(i)) as Lesson
 		var lesson_progress := (
-			user_profile.get_or_create_lesson(course.resource_path, lesson_data.resource_path) as LessonProgress
+			user_profile.get_or_create_lesson(course_index.get_course_id(), lesson_data.resource_path) as LessonProgress
 		)
 
 		var completion := _calculate_lesson_completion(lesson_data, lesson_progress)
@@ -92,15 +92,15 @@ func _calculate_lesson_completion(lesson_data: Lesson, lesson_progress: LessonPr
 
 
 func _on_lesson_selected(lesson_index: int) -> void:
-	if not course or lesson_index < 0 or lesson_index >= course.lessons.size():
+	if not course_index or lesson_index < 0 or lesson_index >= course_index.get_lessons_count():
 		return
 
-	var lesson_data := course.lessons[lesson_index] as Lesson
+	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson(lesson_index)) as Lesson
 	_lesson_details.lesson = lesson_data
 
 	var user_profile = UserProfiles.get_profile()
 	var lesson_progress := (
-		user_profile.get_or_create_lesson(course.resource_path, lesson_data.resource_path) as LessonProgress
+		user_profile.get_or_create_lesson(course_index.get_course_id(), lesson_data.resource_path) as LessonProgress
 	)
 	_lesson_details.lesson_progress = lesson_progress
 
@@ -117,7 +117,7 @@ func _on_lesson_started(lesson_data: Lesson) -> void:
 	_last_selected_lesson = _current_lesson.resource_path
 
 	var user_profile = UserProfiles.get_profile()
-	user_profile.set_last_started_lesson(course.resource_path, _current_lesson.resource_path)
+	user_profile.set_last_started_lesson(course_index.get_course_id(), _current_lesson.resource_path)
 	_update_outliner_index()
 
 
@@ -133,14 +133,14 @@ func _on_lesson_reading_block(block_data: Resource, previous_blocks: Array = [])
 			block_id = prev_block_data.quiz_id
 		else:
 			block_id = prev_block_data.content_id
-		user_profile.set_lesson_reading_block(course.resource_path, _current_lesson.resource_path, block_id)
+		user_profile.set_lesson_reading_block(course_index.get_course_id(), _current_lesson.resource_path, block_id)
 	# Then set the last block.
 	var block_id := ""
 	if block_data is Quiz:
 		block_id = (block_data as Quiz).quiz_id
 	else:
 		block_id = (block_data as ContentBlock).content_id
-	user_profile.set_lesson_reading_block(course.resource_path, _current_lesson.resource_path, block_id)
+	user_profile.set_lesson_reading_block(course_index.get_course_id(), _current_lesson.resource_path, block_id)
 	_update_outliner_index()
 
 
@@ -149,7 +149,7 @@ func _on_quiz_completed(quiz_data: Quiz) -> void:
 		return
 
 	var user_profile = UserProfiles.get_profile()
-	user_profile.set_lesson_quiz_completed(course.resource_path, _current_lesson.resource_path, quiz_data.quiz_id, true)
+	user_profile.set_lesson_quiz_completed(course_index.get_course_id(), _current_lesson.resource_path, quiz_data.quiz_id, true)
 	_update_outliner_index()
 
 
@@ -159,7 +159,7 @@ func _on_practice_started(practice_data: Practice) -> void:
 	_current_practice = practice_data
 
 	var user_profile = UserProfiles.get_profile()
-	user_profile.set_lesson_reading_completed(course.resource_path, _current_lesson.resource_path, true)
+	user_profile.set_lesson_reading_completed(course_index.get_course_id(), _current_lesson.resource_path, true)
 	_update_outliner_index()
 
 
@@ -168,7 +168,7 @@ func _on_practice_completed(practice_data: Practice) -> void:
 		return
 
 	var user_profile = UserProfiles.get_profile()
-	user_profile.set_lesson_practice_completed(course.resource_path, _current_lesson.resource_path, practice_data.practice_id, true)
+	user_profile.set_lesson_practice_completed(course_index.get_course_id(), _current_lesson.resource_path, practice_data.practice_id, true)
 	_update_outliner_index()
 	_current_practice = null
 
@@ -178,7 +178,7 @@ func _on_lesson_completed(_lesson_data: Lesson) -> void:
 	_update_outliner_index()
 
 
-func _on_course_completed(_course_data: Course) -> void:
+func _on_course_completed(_course_data: Reference) -> void:
 	_update_outliner_index()
 
 
@@ -190,6 +190,6 @@ func _on_reset_confirmed() -> void:
 	_reset_confirm_popup.hide()
 
 	var user_profile = UserProfiles.get_profile()
-	user_profile.reset_course_progress(course.resource_path)
+	user_profile.reset_course_progress(course_index.get_course_id())
 
 	_update_outliner_index()
