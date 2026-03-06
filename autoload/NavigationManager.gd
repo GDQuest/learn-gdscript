@@ -182,6 +182,21 @@ func get_navigation_resource(resource_id: String) -> Resource:
 
 		# Copy resource_path from tres to maintain compatibility with existing code
 		# that relies on lesson.resource_path for progress tracking, navigation, etc.
+		
+		# TODO: This also needs to be adapted: navigation, progress tracking, etc. as
+		# well as page slugs should probably be encoded in the new TOC file,
+		# probably a GDScript file. For progress tracking and remembering
+		# scrolling position we used blocks with unique ids BUT, now I'd model
+		# it more like the browser: possibly have a TOC on the left generated from headings
+		# and use those as anchors for navigation and progress tracking. Or use
+		# scroll % + number of completed quizzes for tracking progress through a lesson.
+		#
+		# Practices can still have an ID separate from the lesson resource path for
+		# tracking practice completion.
+		
+		# TODO:
+		# - Remove the need for intermediate resources and use BBCode directly
+		# - Delete ContentBlock.gd, CodeBlock.gd, Quiz*.gd, Practice.gd, Lesson.gd
 		lesson_data = result.lesson
 		result.lesson.take_over_path(bbcode_path)
 		_lesson_cache[bbcode_path] = result.lesson
