@@ -5,8 +5,8 @@ const LessonDetails := preload("./CourseLessonDetails.gd")
 
 
 var course_index: CourseIndex setget set_course
-var _current_lesson: Lesson
-var _current_practice: Practice
+var _current_lesson: BBCodeParser.ParseNode
+var _current_practice: BBCodeParser.ParseNode
 
 var _last_selected_lesson := ""
 
@@ -58,15 +58,15 @@ func _update_outliner_index() -> void:
 	var lesson_index := 0
 	var _reselect_index := -1
 	for i in course_index.get_lessons_count():
-		var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(i)) as Lesson
+		var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(i)) as BBCodeParser.ParseNode
 		var lesson_progress := (
-			user_profile.get_or_create_lesson(course_index.get_course_id(), lesson_data.resource_path) as LessonProgress
+			user_profile.get_or_create_lesson(course_index.get_course_id(), lesson_data.bbcode_path) as LessonProgress
 		)
 
 		var completion := _calculate_lesson_completion(lesson_data, lesson_progress)
-		_lesson_list.add_item(lesson_index, lesson_data.title, completion)
+		_lesson_list.add_item(lesson_index, BBCodeUtils.get_lesson_title(lesson_data), completion)
 
-		if not _last_selected_lesson.empty() and lesson_data.resource_path == _last_selected_lesson:
+		if not _last_selected_lesson.empty() and lesson_data.bbcode_path == _last_selected_lesson:
 			_reselect_index = lesson_index
 
 		lesson_index += 1
@@ -76,17 +76,20 @@ func _update_outliner_index() -> void:
 		_on_lesson_selected(_reselect_index)
 
 
-func _calculate_lesson_completion(lesson_data: Lesson, lesson_progress: LessonProgress) -> int:
+func _calculate_lesson_completion(lesson_data: BBCodeParser.ParseNode, lesson_progress: LessonProgress) -> int:
 	var completion := 0
-	var max_completion := lesson_data.content_blocks.size() + lesson_data.practices.size() + lesson_data.get_quizzes_count()
+	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson_data)
+	var quiz_count := BBCodeUtils.get_lesson_quiz_count(lesson_data)
+	var block_count := BBCodeUtils.get_lesson_block_count(lesson_data) - practice_count - quiz_count
+	var max_completion := block_count + practice_count + quiz_count
 
 	if lesson_progress.completed_reading:
-		completion += lesson_data.content_blocks.size()
+		completion += block_count
 	else:
-		completion += lesson_progress.get_completed_blocks_count(lesson_data.content_blocks)
+		completion += lesson_progress.get_completed_blocks_count(lesson_data, block_count)
 
-	completion += lesson_progress.get_completed_quizzes_count(lesson_data.get_quizzes())
-	completion += lesson_progress.get_completed_practices_count(lesson_data.practices)
+	completion += lesson_progress.get_completed_quizzes_count(lesson_data)
+	completion += lesson_progress.get_completed_practices_count(lesson_data)
 
 	return int(clamp(float(completion) / float(max_completion) * 100, 0, 100))
 
@@ -95,85 +98,90 @@ func _on_lesson_selected(lesson_index: int) -> void:
 	if not course_index or lesson_index < 0 or lesson_index >= course_index.get_lessons_count():
 		return
 
-	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(lesson_index)) as Lesson
+	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(lesson_index)) as BBCodeParser.ParseNode
 	_lesson_details.lesson = lesson_data
 
 	var user_profile = UserProfiles.get_profile()
 	var lesson_progress := (
-		user_profile.get_or_create_lesson(course_index.get_course_id(), lesson_data.resource_path) as LessonProgress
+		user_profile.get_or_create_lesson(course_index.get_course_id(), lesson_data.bbcode_path) as LessonProgress
 	)
 	_lesson_details.lesson_progress = lesson_progress
 
 	_lesson_details.has_started = _calculate_lesson_completion(lesson_data, lesson_progress) > 0
 	_lesson_details.show()
 
-	_last_selected_lesson = lesson_data.resource_path
+	_last_selected_lesson = lesson_data.bbcode_path
 
 
-func _on_lesson_started(lesson_data: Lesson) -> void:
+func _on_lesson_started(lesson_data: BBCodeParser.ParseNode) -> void:
 	_current_lesson = lesson_data
 	_current_practice = null
 
-	_last_selected_lesson = _current_lesson.resource_path
+	_last_selected_lesson = _current_lesson.bbcode_path
 
 	var user_profile = UserProfiles.get_profile()
-	user_profile.set_last_started_lesson(course_index.get_course_id(), _current_lesson.resource_path)
+	user_profile.set_last_started_lesson(course_index.get_course_id(), _current_lesson.bbcode_path)
 	_update_outliner_index()
 
 
-func _on_lesson_reading_block(block_data: Resource, previous_blocks: Array = []) -> void:
+func _on_lesson_reading_block(block_data, block_idx: int, previous_blocks: Array = []) -> void:
 	if not _current_lesson:
 		return
 
 	var user_profile = UserProfiles.get_profile()
 	# Ensure that all previous blocks are also considered as read.
-	for prev_block_data in previous_blocks:
+	for i in previous_blocks.size():
+		var prev_block_data = previous_blocks[i]
 		var block_id := ""
-		if prev_block_data is Quiz:
-			block_id = prev_block_data.quiz_id
+		if prev_block_data is BBCodeParser.ParseNode and prev_block_data.tag in [BBCodeParserData.Tag.QUIZ_CHOICE, BBCodeParserData.Tag.QUIZ_INPUT]:
+			block_id = BBCodeUtils.get_quiz_id(prev_block_data)
+		elif prev_block_data is BBCodeParser.ParseNode:
+			block_id = BBCodeUtils.get_lesson_block_id(prev_block_data)
 		else:
-			block_id = prev_block_data.content_id
-		user_profile.set_lesson_reading_block(course_index.get_course_id(), _current_lesson.resource_path, block_id)
+			block_id = "_generated_content_block_plain_%s" % i
+		user_profile.set_lesson_reading_block(course_index.get_course_id(), _current_lesson.bbcode_path, block_id)
 	# Then set the last block.
 	var block_id := ""
-	if block_data is Quiz:
-		block_id = (block_data as Quiz).quiz_id
+	if block_data is BBCodeParser.ParseNode and block_data.tag in [BBCodeParserData.Tag.QUIZ_CHOICE, BBCodeParserData.Tag.QUIZ_INPUT]:
+		block_id = BBCodeUtils.get_quiz_id(block_data)
+	elif block_data is BBCodeParser.ParseNode:
+		block_id = BBCodeUtils.get_lesson_block_id(block_data)
 	else:
-		block_id = (block_data as ContentBlock).content_id
-	user_profile.set_lesson_reading_block(course_index.get_course_id(), _current_lesson.resource_path, block_id)
+		block_id = "_generated_content_block_plain_%s" % block_idx
+	user_profile.set_lesson_reading_block(course_index.get_course_id(), _current_lesson.bbcode_path, block_id)
 	_update_outliner_index()
 
 
-func _on_quiz_completed(quiz_data: Quiz) -> void:
+func _on_quiz_completed(quiz_data: BBCodeParser.ParseNode) -> void:
 	if not _current_lesson:
 		return
 
 	var user_profile = UserProfiles.get_profile()
-	user_profile.set_lesson_quiz_completed(course_index.get_course_id(), _current_lesson.resource_path, quiz_data.quiz_id, true)
+	user_profile.set_lesson_quiz_completed(course_index.get_course_id(), _current_lesson.bbcode_path, BBCodeUtils.get_quiz_id(quiz_data), true)
 	_update_outliner_index()
 
 
-func _on_practice_started(practice_data: Practice) -> void:
+func _on_practice_started(practice_data: BBCodeParser.ParseNode) -> void:
 	if not _current_lesson:
 		return
 	_current_practice = practice_data
 
 	var user_profile = UserProfiles.get_profile()
-	user_profile.set_lesson_reading_completed(course_index.get_course_id(), _current_lesson.resource_path, true)
+	user_profile.set_lesson_reading_completed(course_index.get_course_id(), _current_lesson.bbcode_path, true)
 	_update_outliner_index()
 
 
-func _on_practice_completed(practice_data: Practice) -> void:
+func _on_practice_completed(practice_data: BBCodeParser.ParseNode) -> void:
 	if not _current_lesson or not _current_practice:
 		return
 
 	var user_profile = UserProfiles.get_profile()
-	user_profile.set_lesson_practice_completed(course_index.get_course_id(), _current_lesson.resource_path, practice_data.practice_id, true)
+	user_profile.set_lesson_practice_completed(course_index.get_course_id(), _current_lesson.bbcode_path, BBCodeUtils.get_practice_id(practice_data), true)
 	_update_outliner_index()
 	_current_practice = null
 
 
-func _on_lesson_completed(_lesson_data: Lesson) -> void:
+func _on_lesson_completed(_lesson_data: BBCodeParser.ParseNode) -> void:
 	_current_lesson = null
 	_update_outliner_index()
 

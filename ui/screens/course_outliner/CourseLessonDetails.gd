@@ -5,7 +5,7 @@ const VALUE_CHECK_PASSED := preload("res://ui/icons/checkmark_valid.svg")
 const VALUE_COLOR_NONE := Color(0.290196, 0.294118, 0.388235)
 const VALUE_COLOR_PASSED := Color(0.239216, 1, 0.431373)
 
-var lesson: Lesson setget set_lesson
+var lesson: BBCodeParser.ParseNode setget set_lesson
 var lesson_progress: LessonProgress setget set_lesson_progress
 var has_started: bool = false setget set_has_started
 
@@ -28,7 +28,7 @@ func _ready() -> void:
 	_goto_lesson_button.grab_focus()
 
 
-func set_lesson(value: Lesson) -> void:
+func set_lesson(value: BBCodeParser.ParseNode) -> void:
 	lesson = value
 	_update_visuals()
 
@@ -49,12 +49,12 @@ func _update_visuals() -> void:
 	if not lesson:
 		return
 	
-	_title_label.text = lesson.title
+	_title_label.text = BBCodeUtils.get_lesson_title(lesson)
 	
 	var has_done_reading := false
 	if lesson_progress:
-		var total_blocks := lesson.content_blocks.size()
-		var completed_blocks := lesson_progress.get_completed_blocks_count(lesson.content_blocks)
+		var total_blocks := BBCodeUtils.get_lesson_block_count(lesson)
+		var completed_blocks := lesson_progress.get_completed_blocks_count(lesson, total_blocks)
 		
 		if lesson_progress.completed_reading or completed_blocks >= total_blocks:
 			_reading_stats_value.hide()
@@ -73,17 +73,17 @@ func _update_visuals() -> void:
 		_reading_stats_icon.modulate = VALUE_COLOR_NONE
 		_reading_stats_icon.show()
 	
-	var total_practices := lesson.practices.size()
+	var total_practices := BBCodeUtils.get_lesson_practice_count(lesson)
 	var completed_practices := 0
 	if lesson_progress:
-		completed_practices = lesson_progress.get_completed_practices_count(lesson.practices)
+		completed_practices = lesson_progress.get_completed_practices_count(lesson)
 	_practice_stats_value.text = "%d / %d" % [completed_practices, total_practices]
 
-	var total_quizzes := lesson.get_quizzes_count()
+	var total_quizzes := BBCodeUtils.get_lesson_quiz_count(lesson)
 	if total_quizzes > 0:
 		var completed_quizzes := 0
 		if lesson_progress:
-			completed_quizzes = lesson_progress.get_completed_quizzes_count(lesson.get_quizzes())
+			completed_quizzes = lesson_progress.get_completed_quizzes_count(lesson)
 		_quiz_stats_value.text = "%d / %d" % [completed_quizzes, total_quizzes]
 		_quiz_stats_block.show()
 	else:
@@ -101,4 +101,4 @@ func _on_goto_lesson_pressed() -> void:
 	if not lesson:
 		return
 	
-	NavigationManager.navigate_to(lesson.resource_path)
+	NavigationManager.navigate_to(lesson.bbcode_path)

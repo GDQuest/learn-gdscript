@@ -52,7 +52,7 @@ func _is_unload_confirmation_required() -> bool:
 	# that to return false for those screens.
 	if get_current_url():
 		var resource = get_navigation_resource(get_current_url())
-		return resource is Practice or resource is Lesson
+		return resource is BBCodeParser.ParseNode and resource.tag in [BBCodeParserData.Tag.LESSON, BBCodeParserData.Tag.PRACTICE]
 
 	return false
 
@@ -144,7 +144,7 @@ func navigate_to(metadata: String) -> void:
 	var file_path := normalized.get_file_path()
 
 	var resource := get_navigation_resource(file_path)
-	if not (resource is Resource):
+	if not (resource is BBCodeParser.ParseNode):
 		push_error("`%s` is not a resource" % file_path)
 		return
 
@@ -154,12 +154,12 @@ func navigate_to(metadata: String) -> void:
 	emit_signal("navigation_requested")
 
 
-func get_navigation_resource(resource_id: String) -> Resource:
+func get_navigation_resource(resource_id: String) -> BBCodeParser.ParseNode:
 	var is_lesson := resource_id.ends_with("lesson.bbcode")
 
 	var bbcode_path := resource_id if is_lesson else resource_id.get_base_dir().plus_file("lesson.bbcode")
 	
-	var lesson_data: Lesson = null
+	var lesson_data: BBCodeParser.ParseNode = null
 	if _lesson_cache.has(bbcode_path):
 		lesson_data = _lesson_cache[bbcode_path]
 	else:
@@ -197,17 +197,19 @@ func get_navigation_resource(resource_id: String) -> Resource:
 		# TODO:
 		# - Remove the need for intermediate resources and use BBCode directly
 		# - Delete ContentBlock.gd, CodeBlock.gd, Quiz*.gd, Practice.gd, Lesson.gd
-		lesson_data = result.lesson
-		result.lesson.take_over_path(bbcode_path)
-		_lesson_cache[bbcode_path] = result.lesson
+		lesson_data = result.root.children[0]
+		_lesson_cache[bbcode_path] = result.root.children[0]
 	
 	if is_lesson:
 		return lesson_data
 	
 	# If it's not a lesson, it's a practice. May support some other types in future.
-	for practice_res in lesson_data.practices:
-		if practice_res.practice_id == resource_id:
-			return practice_res
+	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson_data)
+	for i in practice_count:
+		var other_practice := BBCodeUtils.get_lesson_practice(lesson_data, i)
+		var other_practice_id := BBCodeUtils.get_practice_id(other_practice)
+		if other_practice_id == resource_id:
+			return other_practice
 
 	return null
 

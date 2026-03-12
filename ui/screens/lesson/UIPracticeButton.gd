@@ -5,7 +5,7 @@ var completed_before := false setget set_completed_before
 var is_highlighted := false setget set_is_highlighted
 var navigation_disabled := false setget set_navigation_disabled
 
-var _practice: Practice
+var _practice: BBCodeParser.ParseNode
 
 onready var _title_label := $Margin/Row/Column/Row/Title as Label
 onready var _next_pill_label := $Margin/Row/Column/Row/NextPill as Label
@@ -24,15 +24,18 @@ func _notification(what: int) -> void:
 		_update_labels()
 
 
-func setup(practice: Practice, practice_index: int) -> void:
+func setup(practice: BBCodeParser.ParseNode, practice_index: int) -> void:
 	_practice = practice
 
 	if not is_inside_tree():
 		yield(self, "ready")
 
-	_title_label.text = "%d. %s" % [practice_index + 1, tr(_practice.title).capitalize()]
-	_description_label.bbcode_text = TextUtils.tr_paragraph(_practice.description)
-	_description_label.visible = not _practice.description.empty()
+	var title := BBCodeUtils.get_practice_title(practice)
+	_title_label.text = "%d. %s" % [practice_index + 1, tr(title).capitalize()]
+	
+	var description := BBCodeUtils.get_practice_description(practice)
+	_description_label.bbcode_text = TextUtils.tr_paragraph(description)
+	_description_label.visible = not description.empty()
 	_navigate_button.connect("pressed", Events, "emit_signal", ["practice_requested", _practice])
 
 

@@ -41,7 +41,7 @@ onready var _error_tween := $ErrorTween as Tween
 onready var _size_tween := $SizeTween as Tween
 onready var _help_message := $ClipContentBoundary/ChoiceContainer/ChoiceView/HelpMessage as Label
 
-var _quiz: Quiz
+var _quiz: BBCodeParser.ParseNode
 var _shake_pos: float = 0
 # Used for animating size changes
 var _previous_rect_size := rect_size
@@ -70,19 +70,22 @@ func _notification(what: int) -> void:
 		_update_labels()
 
 
-func setup(quiz: Quiz) -> void:
+func setup(quiz: BBCodeParser.ParseNode) -> void:
 	_quiz = quiz
 
 	if not is_inside_tree():
 		yield(self, "ready")
 
-	_question.bbcode_text = "[b]" + tr(_quiz.question) + "[/b]"
+	var question: String = BBCodeUtils.get_quiz_question(_quiz)
+	_question.bbcode_text = "[b]" + tr(question) + "[/b]"
 
-	_content.visible = not _quiz.content_bbcode.empty()
-	_content.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(_quiz.content_bbcode))
+	var content: String = BBCodeUtils.get_quiz_content(_quiz)
+	_content.visible = not content.empty()
+	_content.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(content))
 
-	_explanation.visible = not _quiz.explanation_bbcode.empty()
-	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(_quiz.explanation_bbcode))
+	var explanation: String = BBCodeUtils.get_quiz_explanation(_quiz)
+	_explanation.visible = not explanation.empty()
+	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(explanation))
 
 
 func set_completed_before(value: bool) -> void:
@@ -108,13 +111,13 @@ func _get_answers() -> Array:
 
 
 func _test_answer() -> void:
-	var result: Quiz.AnswerTestResult = null
+	var result: AnswerTestResult = null
 	_skip_button.disabled = false
-	if _quiz is QuizChoice:
-		result = _quiz.test_answer(_get_answers())
+	if BBCodeUtils.get_quiz_type(_quiz) == BBCodeParserData.Tag.QUIZ_CHOICE:
+		result = _test_answer_against_quiz(_get_answers())
 	else:
 		# The input field quiz takes a single string as a test answer.
-		result = _quiz.test_answer(_get_answers().back())
+		result = _test_answer_against_quiz(_get_answers().back())
 	_help_message.text = result.help_message
 	_help_message.visible = not result.help_message.empty()
 	_error_tween.stop_all()
@@ -145,6 +148,10 @@ func _test_answer() -> void:
 		_error_tween.start()
 	else:
 		_show_answer()
+
+
+func _test_answer_against_quiz(answers: Array) -> AnswerTestResult:
+	return null
 
 
 func _show_answer(gave_correct_answer := true) -> void:
@@ -254,3 +261,8 @@ func _on_size_tween_completed(object: Object, key: NodePath) -> void:
 	# To avoid the buttons being clickable after choice view is gone.
 	if object == _choice_container and key == ":modulate:a":
 		_choice_container.hide()
+
+
+class AnswerTestResult:
+	var is_correct := false
+	var help_message := ""

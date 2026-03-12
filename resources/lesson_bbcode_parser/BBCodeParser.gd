@@ -46,12 +46,12 @@ func _init() -> void:
 	_regex_attribute.compile("([a-z_]+)(?:=\"((?:[^\\\\\"]|\\\\.)*)\")?")
 
 
-func parse(source: String, result: ParseResult) -> ParseNode:
+func parse(source: String, result: ParseResult, file_path: String) -> ParseNode:
 	_result = result
 	var tokens := _tokenize(source)
 	if not result.errors.empty():
 		return null
-	var root := _parse_tokens(tokens)
+	var root := _parse_tokens(tokens, file_path)
 	return root
 
 
@@ -181,10 +181,11 @@ func _unescape_attribute_value(value: String) -> String:
 	return value.replace("\\\"", "\"").replace("\\\\", "\\")
 
 
-func _parse_tokens(tokens: Array) -> ParseNode:
+func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 	var root := ParseNode.new()
 	root.tag = _parser_data.Tag.UNKNOWN
 	root.line_number = 0
+	root.bbcode_path = file_path
 
 	var stack := [root]
 	var accumulated_text := ""
@@ -223,6 +224,7 @@ func _parse_tokens(tokens: Array) -> ParseNode:
 			node.tag = token.tag
 			node.attributes = token.attributes
 			node.line_number = token.line_number
+			node.bbcode_path = file_path
 			current.children.append(node)
 
 			if _parser_data.is_container_tag(token.tag):
@@ -288,6 +290,7 @@ class ParseNode:
 	var attributes := {}
 	var children := []
 	var line_number := -1
+	var bbcode_path: String
 
 
 
@@ -311,19 +314,18 @@ class ParseError:
 # This is the result object produced by the parser that is passed back to the caller.
 # The parser aims to directly produce a lesson data structure that can be drawn by the app.
 class ParseResult:
-	var lesson: Lesson
 	var errors: Array
 	var warnings: Array
+	var root: BBCodeParser.ParseNode
 
 
 	func _init() -> void:
-		lesson = null
 		errors = []
 		warnings = []
 
 
 	func is_success() -> bool:
-		return errors.empty() and lesson != null
+		return errors.empty()
 
 
 	func add_error(message: String, line: int) -> void:

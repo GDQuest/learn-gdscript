@@ -28,6 +28,7 @@ enum Tag {
 	SCRIPT_SLICE,
 	DOCS,
 	SEPARATOR,
+	STRING,
 }
 
 

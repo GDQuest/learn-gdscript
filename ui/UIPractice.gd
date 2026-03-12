@@ -17,12 +17,13 @@ const PracticeHintScene := preload("screens/practice/PracticeHint.tscn")
 const PracticeListPopup := preload("components/popups/PracticeListPopup.gd")
 const PracticeDonePopup := preload("components/popups/PracticeDonePopup.gd")
 const PracticeLeaveUnfinishedPopup := preload("components/popups/PracticeLeaveUnfinishedPopup.gd")
+const documentation_resource: Resource = preload("res://course/Documentation.tres")
 
 var REGEX_DIVSION_BY_ZERO := RegEx.new()
 
 export var test_practice: Resource
 
-var _practice: Practice
+var _practice: BBCodeParser.ParseNode
 var _practice_completed := false
 var _practice_solution_used := false
 
@@ -113,8 +114,8 @@ func _ready() -> void:
 	_solution_panel.modulate.a = 0.0
 	_solution_panel.margin_left = _output_anchors.rect_size.x
 
-	if test_practice and get_parent() == get_tree().root:
-		setup(test_practice, null, null)
+#	if test_practice and get_parent() == get_tree().root:
+#		setup(test_practice, null, null)
 
 
 func _notification(what: int) -> void:
@@ -131,7 +132,7 @@ func _gui_input(event: InputEvent) -> void:
 		get_focus_owner().release_focus()
 
 
-func setup(practice: Practice, lesson: Lesson, course_index: CourseIndex) -> void:
+func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 
@@ -139,16 +140,21 @@ func setup(practice: Practice, lesson: Lesson, course_index: CourseIndex) -> voi
 	_practice_completed = false
 	_practice_solution_used = false
 
-	_info_panel.title_label.text = tr(practice.title).capitalize()
+	var title := BBCodeUtils.get_practice_title(practice)
+	_info_panel.title_label.text = tr(title).capitalize()
+	var goal := BBCodeUtils.get_practice_goal(practice)
 	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(
-		TextUtils.tr_paragraph(practice.goal)
+		TextUtils.tr_paragraph(goal)
 	)
-	_code_editor.text = practice.starting_code
-	_code_editor.update_cursor_position(practice.cursor_line, practice.cursor_column)
+	var starting_code := BBCodeUtils.get_practice_starting_code(practice)
+	_code_editor.text = starting_code
+	var starting_position := BBCodeUtils.get_practice_cursor(practice)
+	_code_editor.update_cursor_position(starting_position.x, starting_position.y)
 
-	_hints_container.visible = not practice.hints.empty()
+	var hints := BBCodeUtils.get_practice_hints(practice)
+	_hints_container.visible = not hints.empty()
 	var index := 0
-	for hint in practice.hints:
+	for hint in hints:
 		var practice_hint: PracticeHint = PracticeHintScene.instance()
 		practice_hint.title = tr("Hint %s") % [String(index + 1).pad_zeros(1)]
 		practice_hint.bbcode_text = hint
@@ -156,14 +162,15 @@ func setup(practice: Practice, lesson: Lesson, course_index: CourseIndex) -> voi
 		index += 1
 
 	# TODO: Should probably avoid relying on content ID for getting paths.
-	var base_directory := practice.practice_id.get_base_dir()
+	var practice_id := BBCodeUtils.get_practice_id(practice)
+	var base_directory := practice_id.get_base_dir()
 
-	var script_path := practice.script_slice_path
+	var script_path := BBCodeUtils.get_practice_script_slice_path(practice)
 	if script_path.is_rel_path():
 		script_path = base_directory.plus_file(script_path)
 	if not script_path.begins_with("res://"):
 		script_path = "res://" + script_path
-	var slice_name := practice.slice_name if practice.slice_name else ""
+	var slice_name := BBCodeUtils.get_practice_script_slice_name(practice)
 	var slice := SliceParser.load_from_script(script_path, slice_name)
 	if not slice:
 		push_error("Failed to load script slice from: " + script_path)
@@ -174,13 +181,14 @@ func setup(practice: Practice, lesson: Lesson, course_index: CourseIndex) -> voi
 
 	_solution_editor.text = _script_slice.slice_text
 
-	var validator_path := practice.validator_script_path
+	var validator_path := BBCodeUtils.get_practice_validator_path(practice)
 	if validator_path.is_rel_path():
 		validator_path = base_directory.plus_file(validator_path)
 	_tester = (load(validator_path) as GDScript).new()
 	_tester.setup(_game_view.get_viewport(), _script_slice)
 
-	var documentation_reference := _practice.get_documentation_raw()
+	var documentation_tags := BBCodeUtils.get_practice_documentation(practice)
+	var documentation_reference := documentation_resource.get_references(documentation_tags)
 	if documentation_reference.is_empty():
 		_info_panel.clear_documentation()
 	else:
@@ -192,12 +200,14 @@ func setup(practice: Practice, lesson: Lesson, course_index: CourseIndex) -> voi
 	# In case we directly test a practice from the editor, we don't have access to the lesson.
 	if lesson and course_index:
 		_practice_list.clear_items()
-		for practice_data in lesson.practices:
+		var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
+		for i in practice_count:
+			var practice_data := BBCodeUtils.get_lesson_practice(lesson, i)
 			_practice_list.add_item(practice_data, lesson, course_index, practice_data == practice)
 
 		var user_profile := UserProfiles.get_profile()
 		var completed_before = user_profile.is_lesson_practice_completed(
-			course_index.get_course_id(), lesson.resource_path, practice.practice_id
+			course_index.get_course_id(), lesson.bbcode_path, practice_id
 		)
 		if completed_before:
 			_info_panel.set_status_icon(_info_panel.Status.COMPLETED_BEFORE)
@@ -229,7 +239,7 @@ func _update_labels() -> void:
 	_info_panel.display_tests(_tester.get_test_names())
 
 
-func get_screen_resource() -> Practice:
+func get_screen_resource() -> BBCodeParser.ParseNode:
 	return _practice
 
 

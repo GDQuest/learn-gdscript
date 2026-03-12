@@ -7,13 +7,11 @@ var _base_path := ""
 
 var _parser: BBCodeParser = null
 var _tree_validator: BBCodeTreeValidator = null
-var _resource_builder: BBCodeResourceBuilder = null
 
 
 func _init() -> void:
 	_parser = BBCodeParser.new()
 	_tree_validator = BBCodeTreeValidator.new()
-	_resource_builder = BBCodeResourceBuilder.new()
 
 
 func parse_file(file_path: String) -> BBCodeParser.ParseResult:
@@ -28,13 +26,13 @@ func parse_file(file_path: String) -> BBCodeParser.ParseResult:
 	file.close()
 
 	_base_path = file_path.get_base_dir()
-	return parse_text(content, _base_path)
+	return parse_text(content, file_path, _base_path)
 
 
-func parse_text(source: String, base_path := "") -> BBCodeParser.ParseResult:
+func parse_text(source: String, file_path: String, base_path := "") -> BBCodeParser.ParseResult:
 	var result := BBCodeParser.ParseResult.new()
 
-	var root := _parser.parse(source, result)
+	var root := _parser.parse(source, result, file_path)
 	if not result.errors.empty():
 		return result
 
@@ -42,5 +40,5 @@ func parse_text(source: String, base_path := "") -> BBCodeParser.ParseResult:
 	if not result.errors.empty():
 		return result
 
-	result.lesson = _resource_builder.build_lesson(root, base_path)
+	result.root = root
 	return result

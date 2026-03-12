@@ -19,7 +19,7 @@ export var test_lesson: Resource
 
 signal lesson_displayed
 
-var _lesson: Lesson
+var _lesson: BBCodeParser.ParseNode
 # Resource used to highlight glossary entries in the lesson text.
 var _glossary: Glossary
 var _visible_index := -1
@@ -52,11 +52,11 @@ func _ready() -> void:
 
 	_glossary = load("res://course/glossary.tres")
 
-	if test_lesson and get_parent() == get_tree().root:
-		setup(test_lesson, null)
-		for child in _content_blocks.get_children():
-			child.show()
-		_practices_container.show()
+#	if test_lesson and get_parent() == get_tree().root:
+#		setup(test_lesson, null)
+#		for child in _content_blocks.get_children():
+#			child.show()
+#		_practices_container.show()
 
 	_scroll_container.grab_focus()
 
@@ -66,12 +66,12 @@ func _notification(what: int) -> void:
 		_update_labels()
 
 
-func setup(lesson: Lesson, course_index: CourseIndex) -> void:
+func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 	if not is_inside_tree():
 		yield(self, "ready")
 
 	_lesson = lesson
-	_title.text = tr(_lesson.title)
+	_title.text = tr(BBCodeUtils.get_lesson_title(lesson))
 	var user_profile := UserProfiles.get_profile()
 
 	# If this was the last lesson the student interacted with before, we will try to restore
@@ -79,7 +79,7 @@ func setup(lesson: Lesson, course_index: CourseIndex) -> void:
 	var is_returning := false
 	if course_index:
 		var last_lesson := user_profile.get_last_started_lesson(course_index.get_course_id())
-		is_returning = _lesson.resource_path == last_lesson
+		is_returning = _lesson.bbcode_path == last_lesson
 
 	var restore_node: Control
 	var restore_id := ""
@@ -95,93 +95,127 @@ func setup(lesson: Lesson, course_index: CourseIndex) -> void:
 
 		if is_returning:
 			restore_id = user_profile.get_last_visited_lesson_block(
-				course_index.get_course_id(), lesson.resource_path
+				course_index.get_course_id(), lesson.bbcode_path
 			)
 
 		var reading_done := user_profile.is_lesson_reading_completed(
-			course_index.get_course_id(), lesson.resource_path
+			course_index.get_course_id(), lesson.bbcode_path
 		)
 		var reading_started := user_profile.has_lesson_blocks_read(
-			course_index.get_course_id(), lesson.resource_path
+			course_index.get_course_id(), lesson.bbcode_path
 		)
 		if restore_id.empty() and not reading_done and reading_started:
-			for block in lesson.content_blocks:
-				var block_id := ""
-				if block is Quiz:
-					block_id = block.quiz_id
-				else:
-					block_id = block.content_id
+			pass
+#			for block in lesson.content_blocks:
+#				var block_id := ""
+#				if block is Quiz:
+#					block_id = block.quiz_id
+#				else:
+#					block_id = block.content_id
+#
+#				if user_profile.is_lesson_block_read(
+#					course_index.get_course_id(), lesson.bbcode_path, block_id
+#				):
+#					continue
+#
+#				restore_id = block_id
+#				break
 
-				if user_profile.is_lesson_block_read(
-					course_index.get_course_id(), lesson.resource_path, block_id
-				):
-					continue
+	var content_block_count := BBCodeUtils.get_lesson_block_count(lesson)
 
-				restore_id = block_id
-				break
-
-	for block in lesson.content_blocks:
-		if block is CodeBlock:
-			var instance: GDScriptCodeExample = GDScriptCodeExampleScene.instance()
-			instance.name = block.content_id.get_file().get_basename()
-			instance.text = block.code
-			_content_blocks.add_child(instance)
-			instance.hide()
-
-			if restore_id == block.content_id:
-				restore_node = instance
-
-		elif block is ContentBlock:
+	for i in content_block_count:
+		var type = BBCodeUtils.get_lesson_block_type(lesson, i)
+		if type == BBCodeParserData.Tag.STRING:
 			var instance: UIContentBlock = ContentBlockScene.instance()
-			instance.name = block.content_id.get_file().get_basename()
+			var block_id: String = "_generated_content_block_plain_%s" % i
+			instance.name = block_id
 			_content_blocks.add_child(instance)
-			instance.setup(block)
+			var content: String = lesson.children[i]
+			instance.setup(content, lesson, i)
 			instance.hide()
-
-			if restore_id == block.content_id:
+						
+			if restore_id == block_id:
 				restore_node = instance
-
-		elif block is Quiz:
-			var scene = QuizInputFieldScene if block is QuizInputField else QuizChoiceScene
-			var instance = scene.instance()
-			instance.name = block.quiz_id.get_file().get_basename()
-			_content_blocks.add_child(instance)
-			instance.setup(block)
-			instance.hide()
-
-			var completed_before := false
-			if course_index:
-				completed_before = user_profile.is_lesson_quiz_completed(
-					course_index.get_course_id(), lesson.resource_path, block.quiz_id
-				)
-				if completed_before:
-					_quizzes_done += 1
-			instance.completed_before = completed_before
-
-			instance.connect("quiz_passed", Events, "emit_signal", ["quiz_completed", block])
-			instance.connect("quiz_passed", self, "_reveal_up_to_next_quiz")
-			instance.connect("quiz_skipped", self, "_reveal_up_to_next_quiz")
-
-			if restore_id == block.quiz_id:
-				restore_node = instance
+			
+			
+		else:
+			var child_node: BBCodeParser.ParseNode = lesson.children[i]
+			match BBCodeUtils.get_node_type(child_node):
+				BBCodeParserData.Tag.QUIZ_CHOICE, BBCodeParserData.Tag.QUIZ_INPUT:
+					var scene := (
+						QuizChoiceScene if child_node.tag == BBCodeParserData.Tag.QUIZ_CHOICE
+						else QuizInputFieldScene
+					)
+					var instance := scene.instance()
+					var quiz_id := BBCodeUtils.get_quiz_id(child_node)
+					instance.name = quiz_id
+					_content_blocks.add_child(instance)
+					instance.setup(child_node)
+					instance.hide()
+					
+					var completed_before := false
+					if course_index:
+						completed_before = user_profile.is_lesson_quiz_completed(
+							course_index.get_course_id(), lesson.bbcode_path, quiz_id
+						)
+						if completed_before:
+							_quizzes_done += 1
+					instance.completed_before = completed_before
+					
+					instance.connect("quiz_passed", Events, "emit_signal", ["quiz_completed", child_node])
+					instance.connect("quiz_passed", self, "_reveal_up_to_next_quiz")
+					instance.connect("quiz_skipped", self, "_reveal_up_to_next_quiz")
+					
+					if restore_id == quiz_id:
+						restore_node = instance
+			
+				BBCodeParserData.Tag.CODEBLOCK:
+					var instance: UIContentBlock = ContentBlockScene.instance()
+					var block_id := BBCodeUtils.get_codeblock_id(child_node)
+					instance.name = block_id
+					instance.text = BBCodeUtils.get_codeblock_code(child_node)
+					_content_blocks.add_child(instance)
+					instance.hide()
+					
+					if restore_id == block_id:
+						restore_node = instance
+				
+				_:
+					if (
+						child_node.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS and
+						not child_node.tag == BBCodeParserData.Tag.PRACTICE and
+						not child_node.tag == BBCodeParserData.Tag.TITLE and
+						not child_node.tag == BBCodeParserData.Tag.PRACTICE and
+						not child_node.tag == BBCodeParserData.Tag.SEPARATOR
+					):
+						var instance: UIContentBlock = ContentBlockScene.instance()
+						var block_id := BBCodeUtils.get_lesson_block_id(child_node)
+						instance.name = block_id
+						_content_blocks.add_child(instance)
+						instance.setup(child_node, lesson, i)
+						instance.hide()
+						
+						if restore_id == block_id:
+							restore_node = instance
 
 	var highlighted_next := false
-	var practice_index := 0
-	for practice in lesson.practices:
+	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
+	for i in practice_count:
+		var practice := BBCodeUtils.get_lesson_practice(lesson, i)
+		var practice_id := BBCodeUtils.get_practice_id(practice)
 		var button: UIPracticeButton = PracticeButtonScene.instance()
-		button.setup(practice, practice_index)
+		button.setup(practice, i)
 		if course_index:
 			button.completed_before = user_profile.is_lesson_practice_completed(
-				course_index.get_course_id(), lesson.resource_path, practice.practice_id
+				course_index.get_course_id(), lesson.bbcode_path, practice_id
 			)
 			if not highlighted_next and not button.completed_before:
 				highlighted_next = true
 				button.is_highlighted = true
 		_practices_container.add_child(button)
-		practice_index += 1
 	_practices_visibility_container.hide()
 
-	_quizz_count = lesson.get_quizzes_count()
+	_quizz_count = BBCodeUtils.get_lesson_quiz_count(lesson)
 	_reveal_up_to_next_quiz()
 
 	if _integration_test_mode:
@@ -231,7 +265,7 @@ func _update_labels() -> void:
 	_title.text = tr(_lesson.title)
 
 
-func get_screen_resource() -> Lesson:
+func get_screen_resource() -> BBCodeParser.ParseNode:
 	return _lesson
 
 
@@ -288,8 +322,9 @@ func _emit_read_content() -> void:
 		if not control_node.visible:
 			break
 
-		if content_index < _lesson.content_blocks.size():
-			content_blocks.append(_lesson.content_blocks[content_index])
+		var content_block_count := BBCodeUtils.get_lesson_block_count(_lesson)
+		if content_index < content_block_count:
+			content_blocks.append(_lesson.children[content_index])
 
 		var content_offset := control_node.rect_position.y
 		if content_offset > scroll_distance:
@@ -298,7 +333,7 @@ func _emit_read_content() -> void:
 
 	if content_blocks.size() > 0:
 		var last_block = content_blocks.pop_back()
-		Events.emit_signal("lesson_reading_block", last_block, content_blocks)
+		Events.emit_signal("lesson_reading_block", last_block, content_index, content_blocks)
 
 
 func _update_content_container_width(new_font_scale: int) -> void:
