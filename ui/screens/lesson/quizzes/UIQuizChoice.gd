@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func setup(quiz: BBCodeParser.ParseNode) -> void:
 	.setup(quiz)
-	if not BBCodeUtils.get_quiz_type(quiz) == BBCodeParserData.Tag.QUIZ_CHOICE:
+	if not quiz.tag == BBCodeParserData.Tag.QUIZ_CHOICE:
 		return
 
 	var quiz_options := BBCodeUtils.get_quiz_choices(quiz)
@@ -37,7 +37,7 @@ func setup(quiz: BBCodeParser.ParseNode) -> void:
 # Returns an array of indices of selected answers
 func _get_answers() -> Array:
 	var answers := []
-	if BBCodeUtils.get_quiz_type(_quiz) != BBCodeParserData.Tag.QUIZ_CHOICE:
+	if _quiz.tag != BBCodeParserData.Tag.QUIZ_CHOICE:
 		return answers
 
 	var is_multiple_choice := BBCodeUtils.get_quiz_multiple_answers(_quiz)

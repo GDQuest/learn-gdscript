@@ -2,10 +2,6 @@ class_name BBCodeUtils
 extends Reference
 
 
-static func get_node_type(node: BBCodeParser.ParseNode) -> int:
-	return node.tag
-
-
 static func get_codeblock_id(codeblock: BBCodeParser.ParseNode) -> String:
 	if codeblock.attributes.get("runnable", false):
 		return "_generated_codeblock_runnable_%s" % codeblock.line_number
@@ -26,42 +22,33 @@ static func get_lesson_block_count(lesson: BBCodeParser.ParseNode) -> int:
 
 
 static func get_lesson_block_type(lesson: BBCodeParser.ParseNode, block_index: int) -> int:
-	assert(block_index >= 0 and block_index < get_lesson_block_count(lesson), "Invalid block index")
-	var child_count := 0
-	for child in lesson.children:
-		if child is String:
-			if block_index == child_count:
-				return BBCodeParserData.Tag.STRING
-		if child is BBCodeParser.ParseNode and child.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS:
-			if block_index == child_count:
-				return child.tag
-		child_count += 1
+	var child = lesson.children[block_index]
+	if child is String:
+		return BBCodeParserData.Tag.STRING
+	if child is BBCodeParser.ParseNode and child.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS:
+		return child.tag
 	return BBCodeParserData.Tag.UNKNOWN
 
 
 static func get_lesson_text_block(lesson: BBCodeParser.ParseNode, block_index: int) -> String:
-	assert(block_index >= 0 and block_index < get_lesson_block_count(lesson), "Invalid block index")
-	var child_count := 0
-	for child in lesson.children:
-		if child is String and block_index == child_count:
-			return child
-		child_count += 1
+	var child = lesson.children[block_index]
+	if child is String:
+		return child
 	return ""
 
 
 static func get_lesson_title_for_index(lesson: BBCodeParser.ParseNode, block_index: int) -> String:
-	assert(block_index >= 0 and block_index < get_lesson_block_count(lesson), "Invalid block index")
-	var child_count := 0
-	var last_title := ""
-	for child in lesson.children:
-		if child is BBCodeParser.ParseNode and child.tag == BBCodeParserData.Tag.TITLE:
-			last_title = clean_text_content(_get_text_content(child, true))
-		elif child is BBCodeParser.ParseNode and child.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS:
-			last_title = ""
-		if child_count == block_index:
-			break
-		child_count += 1
-	return last_title
+	# Work backwards from the content index to find the nearest title above the block
+	for i in range(block_index, -1, -1):
+		var child = lesson.children[i]
+		if child is BBCodeParser.ParseNode:
+			if child.tag == BBCodeParserData.Tag.TITLE:
+				return clean_text_content(_get_text_content(child, true))
+			# If a visual, quiz, separator or other block is encountered first, have no titles
+			if child.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS:
+				break
+		
+	return ""
 
 
 static func get_note_title(note: BBCodeParser.ParseNode) -> String:
@@ -77,7 +64,7 @@ static func get_visual_path(visual: BBCodeParser.ParseNode) -> String:
 
 
 static func get_block_type(block) -> int:
-	return block.tag if block is BBCodeParser.ParseNode else BBCodeParserData.Tag.STRING
+	return BBCodeParserData.Tag.STRING if block is String else block.tag if block is BBCodeParser.ParseNode else BBCodeParserData.Tag.UNKNOWN
 
 
 static func get_lesson_block_id(block: BBCodeParser.ParseNode) -> String:
@@ -217,10 +204,6 @@ static func get_quiz_explanation(quiz: BBCodeParser.ParseNode) -> String:
 			if child.tag == BBCodeParserData.Tag.EXPLANATION:
 				return clean_text_content(_get_text_content(child, true))
 	return ""
-
-
-static func get_quiz_type(quiz: BBCodeParser.ParseNode) -> int:
-	return quiz.tag
 
 
 static func get_quiz_choices(quiz: BBCodeParser.ParseNode) -> Dictionary:

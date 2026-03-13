@@ -43,8 +43,10 @@ func _update_labels() -> void:
 	if not _practice:
 		return
 
-	_title_label.text = tr(_practice.title).capitalize()
-	_description_label.bbcode_text = TextUtils.tr_paragraph(_practice.description)
+	var title := BBCodeUtils.get_practice_title(_practice)
+	_title_label.text = tr(title).capitalize()
+	var description := BBCodeUtils.get_practice_description(_practice)
+	_description_label.bbcode_text = TextUtils.tr_paragraph(description)
 
 
 func set_completed_before(value: bool) -> void:

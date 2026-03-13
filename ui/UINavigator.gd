@@ -157,13 +157,13 @@ func _navigate_to() -> void:
 
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
 	var screen: UINavigatablePage
-	if target is BBCodeParser.ParseNode and BBCodeUtils.get_node_type(target) == BBCodeParserData.Tag.PRACTICE:
+	if target is BBCodeParser.ParseNode and target.tag == BBCodeParserData.Tag.PRACTICE:
 		var lesson = NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index))
 
 		screen = preload("UIPractice.tscn").instance()
 		# warning-ignore:unsafe_method_access
 		screen.setup(target, lesson, course_index)
-	elif BBCodeUtils.get_node_type(target) == BBCodeParserData.Tag.LESSON:
+	elif target.tag == BBCodeParserData.Tag.LESSON:
 		var lesson := target as BBCodeParser.ParseNode
 		screen = preload("UILesson.tscn").instance()
 		# warning-ignore:unsafe_method_access
@@ -208,9 +208,9 @@ func _navigate_to() -> void:
 
 	_course_outliner.hide()
 
-	if BBCodeUtils.get_node_type(target) == BBCodeParserData.Tag.PRACTICE:
+	if target.tag == BBCodeParserData.Tag.PRACTICE:
 		Events.emit_signal("practice_started", target)
-	elif BBCodeUtils.get_node_type(target) == BBCodeParserData.Tag.LESSON:
+	elif target.tag == BBCodeParserData.Tag.LESSON:
 		Events.emit_signal("lesson_started", target)
 
 

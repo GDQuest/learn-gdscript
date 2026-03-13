@@ -170,35 +170,18 @@ func get_navigation_resource(resource_id: String) -> BBCodeParser.ParseNode:
 		var result := _parser.parse_file(bbcode_path)
 
 		if result.errors:
-			push_error("LessonLoader.gd: Parse errors when loading lesson from bbcode file %s:" % bbcode_path)
+			push_error("NavigationManager.gd:get_navigation_resource(): Parse errors when loading lesson from bbcode file %s:" % bbcode_path)
 			for error in result.errors:
 				push_error("  " + error.format())
 			return null
 
 		if result.warnings:
-			print("LessonLoader.gd: Parse warnings when loading lesson from bbcode file %s:" % bbcode_path)
+			print("NavigationManager.gd:get_navigation_resource(): Parse warnings when loading lesson from bbcode file %s:" % bbcode_path)
 			for warning in result.warnings:
 				print("  ", warning.format())
 
-		# Copy resource_path from tres to maintain compatibility with existing code
-		# that relies on lesson.resource_path for progress tracking, navigation, etc.
-		
-		# TODO: This also needs to be adapted: navigation, progress tracking, etc. as
-		# well as page slugs should probably be encoded in the new TOC file,
-		# probably a GDScript file. For progress tracking and remembering
-		# scrolling position we used blocks with unique ids BUT, now I'd model
-		# it more like the browser: possibly have a TOC on the left generated from headings
-		# and use those as anchors for navigation and progress tracking. Or use
-		# scroll % + number of completed quizzes for tracking progress through a lesson.
-		#
-		# Practices can still have an ID separate from the lesson resource path for
-		# tracking practice completion.
-		
-		# TODO:
-		# - Remove the need for intermediate resources and use BBCode directly
-		# - Delete ContentBlock.gd, CodeBlock.gd, Quiz*.gd, Practice.gd, Lesson.gd
 		lesson_data = result.root.children[0]
-		_lesson_cache[bbcode_path] = result.root.children[0]
+		_lesson_cache[bbcode_path] = lesson_data
 	
 	if is_lesson:
 		return lesson_data

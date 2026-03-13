@@ -28,7 +28,7 @@ func _rebuild_breadcrumbs() -> void:
 	
 	_clear_navigation_nodes()
 
-	if _last_target is BBCodeParser.ParseNode and BBCodeUtils.get_node_type(_last_target) == BBCodeParserData.Tag.LESSON:
+	if _last_target is BBCodeParser.ParseNode and _last_target.tag == BBCodeParserData.Tag.LESSON:
 		var lesson = _last_target as BBCodeParser.ParseNode
 		var lesson_index := -1
 
@@ -49,7 +49,7 @@ func _rebuild_breadcrumbs() -> void:
 		_create_navigation_node(node_text, "", true)
 		return
 
-	if _last_target is BBCodeParser.ParseNode and BBCodeUtils.get_node_type(_last_target) == BBCodeParserData.Tag.PRACTICE:
+	if _last_target is BBCodeParser.ParseNode and _last_target.tag == BBCodeParserData.Tag.PRACTICE:
 		var practice = _last_target as BBCodeParser.ParseNode
 		# TODO: Should probably avoid relying on content ID for getting paths.
 		var practice_id := BBCodeUtils.get_practice_id(practice)

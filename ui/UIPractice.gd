@@ -203,7 +203,8 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 		var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
 		for i in practice_count:
 			var practice_data := BBCodeUtils.get_lesson_practice(lesson, i)
-			_practice_list.add_item(practice_data, lesson, course_index, practice_data == practice)
+			var other_practice_id := BBCodeUtils.get_practice_id(practice_data)
+			_practice_list.add_item(practice_data, lesson, course_index, other_practice_id == practice_id)
 
 		var user_profile := UserProfiles.get_profile()
 		var completed_before = user_profile.is_lesson_practice_completed(
@@ -217,23 +218,27 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 func turn_on_test_mode() -> void:
 	_info_panel.skip_animations = true
 
+
 func _update_labels() -> void:
 	if not _practice:
 		return
 
-	_info_panel.title_label.text = tr(_practice.title).capitalize()
+	var title := BBCodeUtils.get_practice_title(_practice)
+	_info_panel.title_label.text = tr(title).capitalize()
+	var goal := BBCodeUtils.get_practice_goal(_practice)
 	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(
-		TextUtils.tr_paragraph(_practice.goal)
+		TextUtils.tr_paragraph(goal)
 	)
 
 	var index := 0
+	var hints := BBCodeUtils.get_practice_hints(_practice)
 	for child_node in _hints_container.get_children():
 		var practice_hint = child_node as PracticeHint
 		if not practice_hint:
 			continue
 
 		practice_hint.title = tr("Hint %s") % [String(index + 1).pad_zeros(1)]
-		practice_hint.bbcode_text = _practice.hints[index]
+		practice_hint.bbcode_text = hints[index]
 		index += 1
 
 	_info_panel.display_tests(_tester.get_test_names())

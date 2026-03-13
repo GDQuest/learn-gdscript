@@ -99,10 +99,13 @@ func _update_labels() -> void:
 	if not _quiz:
 		return
 
-	_question.bbcode_text = "[b]" + tr(_quiz.question) + "[/b]"
+	var question := BBCodeUtils.get_quiz_question(_quiz)
+	_question.bbcode_text = "[b]" + tr(question) + "[/b]"
 
-	_content.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(_quiz.content_bbcode))
-	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(_quiz.explanation_bbcode))
+	var content_bbcode := BBCodeUtils.get_quiz_content(_quiz)
+	_content.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(content_bbcode))
+	var explanation_bbcode := BBCodeUtils.get_quiz_explanation(_quiz)
+	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(explanation_bbcode))
 
 
 # Virtual
@@ -113,7 +116,7 @@ func _get_answers() -> Array:
 func _test_answer() -> void:
 	var result: AnswerTestResult = null
 	_skip_button.disabled = false
-	if BBCodeUtils.get_quiz_type(_quiz) == BBCodeParserData.Tag.QUIZ_CHOICE:
+	if _quiz.tag == BBCodeParserData.Tag.QUIZ_CHOICE:
 		result = _test_answer_against_quiz(_get_answers())
 	else:
 		# The input field quiz takes a single string as a test answer.
