@@ -4,7 +4,7 @@ var robot: Node2D
 
 
 func _prepare() -> void:
-	robot = _scene_root_viewport.get_child(0).get_child(1)
+	robot = _scene_root_viewport.get_child(0)
 
 
 func test_use_vector2_to_reset_robot() -> String:

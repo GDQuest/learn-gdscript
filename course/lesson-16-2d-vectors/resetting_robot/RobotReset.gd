@@ -1,12 +1,15 @@
 extends Node2D
 
-# Lowers the chance of the student brute forcing using -/+
-var _position_start = Vector2(310.5413, 460.98476)
-var _scale_start = Vector2(5.154, 5.154)
+var _position_start: Vector2
+var _scale_start: Vector2
 
 onready var _animation_tree := find_node("AnimationTree")
+onready var _camera := $Camera2D
 
 func _ready() -> void:
+	_position_start = position
+	_scale_start = scale
+	_camera.set_as_toplevel(true)
 	reset()
 
 # EXPORT reset
