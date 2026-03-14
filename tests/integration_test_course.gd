@@ -14,7 +14,7 @@
 # To run, run the scene file that uses this script from the editor.
 extends Node
 
-const COURSE_PATH := "res://course/course-learn-gdscript.tres"
+const COURSE_PATH := "res://course/CourseLearnGDScriptIndex.gd"
 const UILessonScene := preload("res://ui/UILesson.tscn")
 const UIPracticeScene := preload("res://ui/UIPractice.tscn")
 
@@ -23,7 +23,7 @@ export var lesson_load_timeout := 2.0
 export var practice_setup_timeout := 2.0
 export var practice_execution_timeout := 10.0
 
-var _course_resource: Course = null
+var _course_index: CourseIndex = null
 
 var _fail_messages := []
 var _timeout_messages := []
@@ -38,9 +38,9 @@ func _ready() -> void:
 	print("Time scale: %sx" % time_scale)
 	print("Course path: %s\n" % COURSE_PATH)
 	
-	_course_resource = load(COURSE_PATH)
-	if _course_resource == null:
-		push_error("Failed to load _course_resource from: %s" % COURSE_PATH)
+	_course_index = load(COURSE_PATH).new()
+	if _course_index == null:
+		push_error("Failed to load _course_index from: %s" % COURSE_PATH)
 		get_tree().quit(1)
 		return
 	
@@ -48,17 +48,18 @@ func _ready() -> void:
 
 
 func _run_integration_test() -> void:
-	var total_lessons := _course_resource.lessons.size()
+	var total_lessons: int = _course_index.get_lessons_count()
 	var total_practices := 0
-	for lesson in _course_resource.lessons:
+	for i in total_lessons:
+		var lesson := NavigationManager.get_navigation_resource(_course_index.get_lesson_path(i)) as Lesson
 		total_practices += lesson.practices.size()
 	
-	print("Course: %s" % _course_resource.title)
+	print("Course: %s" % _course_index.get_title())
 	print("Total lessons: %d" % total_lessons)
 	print("Total practices: %d\n" % total_practices)
 	
-	for lesson_index in range(_course_resource.lessons.size()):
-		var lesson: Lesson = _course_resource.lessons[lesson_index]
+	for lesson_index in range(total_lessons):
+		var lesson: Lesson = NavigationManager.get_navigation_resource(_course_index.get_lesson_path(lesson_index))
 		print("[Lesson %d/%d] Testing: %s" % [lesson_index + 1, total_lessons, lesson.title])
 		
 		# Functions yield which in Godot 3 returns function state objects
@@ -97,7 +98,7 @@ func _test_lesson(lesson: Lesson) -> bool:
 	
 	ui_lesson.enable_integration_test_mode()
 	
-	var setup_result: GDScriptFunctionState = ui_lesson.setup(lesson, _course_resource)
+	var setup_result: GDScriptFunctionState = ui_lesson.setup(lesson, _course_index)
 	yield(setup_result, "completed")
 	
 	var displayed := false
@@ -157,7 +158,7 @@ func _test_practice(practice: Practice, lesson: Lesson) -> bool:
 	
 	ui_practice.turn_on_test_mode()
 	
-	var setup_result = ui_practice.setup(practice, lesson, _course_resource)
+	var setup_result = ui_practice.setup(practice, lesson, _course_index)
 	if setup_result != null and setup_result is GDScriptFunctionState:
 		yield(setup_result, "completed")
 	
@@ -232,9 +233,10 @@ func _print_summary() -> void:
 	print("Test Summary")
 	print(separator)
 	
-	var total_lessons := _course_resource.lessons.size()
+	var total_lessons: int = _course_index.get_lessons_count()
 	var total_practices := 0
-	for lesson in _course_resource.lessons:
+	for i in total_lessons:
+		var lesson := NavigationManager.get_navigation_resource(_course_index.get_lesson_path(i)) as Lesson
 		total_practices += lesson.practices.size()
 	
 	print("Total lessons tested: %d" % total_lessons)

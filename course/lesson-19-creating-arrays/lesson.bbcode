@@ -1,0 +1,130 @@
+[lesson title="Creating arrays"]
+
+The [code]range()[/code] function we saw in the previous lesson outputs a list of numbers. For example, calling [code]range(3)[/code] produces the list of numbers [code][0, 1, 2][/code].
+
+[visual path="visuals/ExampleForRange.tscn"]
+
+A list of values, numbers or otherwise, has a precise name in code: we call it an [i]array[/i]. So we can say calling the [code]range()[/code] function produces an [i]array[/i] of numbers.
+
+We could directly write and use that array inside our [code]for[/code] loop instead of the [code]range()[/code] function. You can run the next function step-by-step to see how it works.
+
+[visual path="visuals/ExampleForArray.tscn"]
+
+As you can see, the code still works the same. Notice that when we create a [code]for[/code] loop, we also create a local variable to which the loop assigns one value per iteration. Above, we named it [code]number[/code] because the array we loop over contains three numbers (0, 1, and 2).
+
+But we could name it anything we'd like!
+
+[visual path="visuals/ExampleForArrayDifferentName.tscn"]
+
+If we "unwrap" the [code]for[/code] loop above, we'd get the following code with the exact same behaviour:
+
+[visual path="visuals/ExampleForArrayUnwrapped.tscn"]
+
+[title]The syntax of arrays[/title]
+
+We write arrays this way in GDScript.
+
+[visual path="visuals/ArrayDefinitionSyntax.tscn"]
+
+You start with an opening square bracket. Then, you write comma-separated values that compose the array. Finally, you need a closing square bracket to complete the array.
+
+Here are a couple of valid arrays. Notice how you can mix values, and how they don't need to follow one another.
+
+[visual path="visuals/CodeArrays.tscn"]
+
+Because arrays themselves are a value type, just like numbers or [code]Vector2[/code], we can assign arrays to variables to reaccess them later.
+
+That'll come in handy in the next lesson, where we'll use those variables in loops.
+
+[visual path="visuals/CodeArraysInVar.tscn"]
+
+But first, let's see [i]when[/i] you'd use an array.
+
+[title]When you use arrays[/title]
+
+In computer programming, we use arrays [i]all the time[/i].
+
+Precisely, you'll use them whenever you need to store a [i]list of things[/i].
+
+You always need lists of things in games:
+
+- The player's party in an RPG.
+- The items in the player's inventory.
+- The high scores in an arcade game.
+- The objects in the game world.
+
+All of those and many more rely on arrays.
+
+[title]Using arrays to follow a path[/title]
+
+Let's look at a widespread use of arrays in games: finding and following a path.
+
+In games, you need allies or monsters to find their way to their target, whether it's the player or some point of interest.
+
+To achieve that, we use [i]pathfinding algorithms[/i]. As the name suggests, those algorithms find the path between two points and allow AIs to traverse the game.
+
+[visual path="visuals/ExamplePathfinding.tscn"]
+
+Many of those algorithms use arrays of [code]Vector2[/code] coordinates to represent the path.
+
+Take this turtle pet. It wants to follow the robot, but there are rocks in the way.
+
+How can we tell it where to walk to reach the robot? With an array!
+
+[visual path="visuals/ExampleTurtleRobot.tscn"]
+
+[visual path="visuals/CodePathArray.tscn"]
+
+Every value in the array is a [code]Vector2[/code] and represents a cell the turtle needs to walk through.
+
+Together, all the values in the array represent a path we can draw.
+
+[visual path="visuals/ExampleTurtleRobotPath.tscn"]
+
+In upcoming lessons, you will see how we can use arrays to store player inventories or design attack combos.
+
+For now, let's practice creating arrays.
+
+[practice id="res://course/lesson-19-creating-arrays/practice-otxF5HUx.tres" title="Walking to the robot"]
+[description]Help the turtle find its way to the robot! Give it a path to follow to reach the robot.[/description]
+[goal]
+The turtle wants to meet the robot! But it cannot find it on its own.
+
+Fill the [code]turtle_path[/code] array with [code]Vector2[/code] coordinates indicating where the turtle should move to avoid the obstacles and arrive safely to the robot.
+
+The turtle can move up, down, left, or right. It cannot move diagonally.
+
+We recommend copying and pasting to fill the array with comma-separated [code]Vector2[/code] values quickly.
+[/goal]
+[starting_code]
+var turtle_path = []
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="moving-turtle/TestMovingTurtle.gd"]
+[script_slice path="moving-turtle/MovingTurtle.gd" name="path"]
+[hint]Any path that doesn't touch rocks is valid. The turtle could first move down or to the right. So the first value could either be [code]Vector2(1, 0)[/code] or [code]Vector2(0, 1)[/code].[/hint]
+[hint]Every [code]Vector2[/code] in the array should be one unit away from the previous one. That means there should only be a difference of 1 on the X-axis or the Y-axis between two [code]Vector2[/code] in the array.[/hint]
+[/practice]
+
+[practice id="res://course/lesson-19-creating-arrays/practice-PxY8VUDp.tres" title="Selecting units"]
+[description]Write an array to select all units on the board in this strategy game.[/description]
+[goal]
+In this tactical game, the player and computer can select multiple units at once. You need to call the [code]select_units()[/code] function and pass it an array of [code]Vector2[/code] coordinates to know which units to select.
+
+Each [code]Vector2[/code] in the array represents a cell with a unit.
+
+You can pass arrays in function calls as arguments. As an array is a value type the computer recognizes, you can pass the whole array as a single function argument.
+
+Select all units on the board by passing the correct array to the [code]select_units()[/code] function.
+[/goal]
+[starting_code]
+func run():
+	select_units([])
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="selecting-units/TestSelectingUnits.gd"]
+[script_slice path="selecting-units/SelectingUnits.gd" name="run"]
+[hint]You can write [code]Vector2[/code] values inside the brackets in the function call: [code]select_units([Vector2(1, 1), Vector2(3, 2), Vector2(3, 5)])[/code].[/hint]
+[docs]select_units[/docs]
+[/practice]
+[/lesson]

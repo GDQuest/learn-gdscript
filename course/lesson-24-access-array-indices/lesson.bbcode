@@ -1,0 +1,117 @@
+[lesson title="Accessing values in arrays"]
+
+You learned to loop over all the values in an array using the [code]for[/code] keyword.
+
+[visual path="visuals/CodeForLoop.tscn"]
+
+But what if you need to access the third item in the player's inventory? The tenth item?
+
+There's a dedicated notation to access one element in an array by index.
+
+To do so, you use square brackets with a number inside the brackets.
+
+[visual path="visuals/SyntaxAccessIndex.tscn"]
+
+Index zero is the [i]first[/i] element in the array.
+
+[visual path="visuals/ExampleUseFirstItem.tscn"]
+
+Index one is the [i]second[/i] element in the array, and so on.
+
+You would access the [i]fourth[/i] element in the [code]inventory[/code] array like so.
+
+[visual path="visuals/ExampleUseFourthItem.tscn"]
+
+[quiz_choice question="How would you access the [i]third[/i] item in the [code]inventory[/code] array?" multiple="false" shuffle="true"]
+[option correct]inventory[2][/option]
+[option]inventory[3][/option]
+[explanation]Indices start at zero, so the index of the [i]third[/i] item is [code]2[/code]. That's why you need to write [code]inventory[2][/code].[/explanation]
+[/quiz_choice]
+
+[title]Accessing the last values with negative indices[/title]
+
+What if you want to access the last or second-before-last item in the [code]inventory[/code]?
+
+In that case, you can use negative indices. If you write [code]-1[/code] in the brackets, you will get the last item in the array. You will get the second-to-last item if you write [code]-2[/code].
+
+[visual path="visuals/ExampleUseSecondToLastItem.tscn"]
+
+That's very convenient when you need to quickly access elements from the end of the list.
+
+[quiz_choice question="How would you access the third-to-last item in the inventory array?" multiple="false" shuffle="true"]
+[option correct]inventory[-3][/option]
+[option]inventory[-2][/option]
+[explanation]When using negative indices, [code]-1[/code] means the [i]last[/i] element in the array. Index [code]-2[/code] will be the second-to-last, thus [code]-3[/code] will be the third-to-last.
+
+It can be little confusing as it seems to work differently from positive indices. However, it's because there's no difference between index [code]0[/code] and [code]-0[/code]: they both point to the first item in the array.[/explanation]
+[/quiz_choice]
+
+[title]You can't access non-existent indices[/title]
+
+There's a catch with this syntax: if you try to access an index that does not exist, you will get an error. You have to be careful always to access existing elements in the array.
+
+There are a couple of ways you can check for valid indices. One of them is checking the array's size.
+
+[b]Checking the size of the array[/b]
+
+Arrays come with a member function named [code]size()[/code]. You can call it on the array anytime to know its [i]current[/i] size.
+
+[visual path="visuals/ExamplePrintSize.tscn"]
+
+The maximum index you can access in an array is [code]array.size() - 1[/code]: it's the last item in the array.
+
+[visual path="visuals/ExampleUseLastItem.tscn"]
+
+In the following practices, you will use array indices to realign train tracks and grab the correct item in an inventory.
+
+[practice id="res://course/lesson-24-access-array-indices/practice-ErO9L4MW.tres" title="Using the right items"]
+[description]Find the right items to use in the player's inventory, using their index.[/description]
+[goal]
+In our game, the player has an inventory that works as an array under the hood.
+
+The player knows they have a sword and a shield somewhere in their inventory, but they don't remember exactly where.
+
+You can see the inventory drawn on the right, along with the index of each item in the inventory.
+
+Your task is to find one sword and one shield in the array using their index, then call [code]use_item()[/code] on each of them so the player can equip those items.
+
+For example, if the first item in the array is what you need, you would call [code]use_item(inventory[0])[/code].
+[/goal]
+[starting_code]
+var inventory = []
+
+func pick_items():
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="find-crystals/TestFindCrystals.gd"]
+[script_slice path="find-crystals/FindCrystals.gd" name="pick"]
+[hint]Use the function [code]use_item(index)[/code], where [code]index[/code] is the index of an item in the [code]inventory[/code] array[/hint]
+[hint]Use [code]square brackets[/code] to access specific array indices[/hint]
+[/practice]
+
+[practice id="res://course/lesson-24-access-array-indices/practice-wfi7YGry.tres" title="Realigning the train tracks"]
+[description]Some chunks of our train tracks are misaligned, and the train can't pass. Find the faulty pieces and realign them.[/description]
+[goal]
+We have train tracks broken down into little chunks in our game. We use them to make modular tracks and draw circuits of all shapes and sizes.
+
+However, several chunks are misaligned. You need to find them in the [code]tracks[/code] array and pass them to the [code]align()[/code] function.
+
+To do so, you need to access the array by index.
+
+This time, though, you need to access them with [i]negative indices[/i].
+[/goal]
+[starting_code]
+var tracks = []
+
+func fix_tracks():
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="align-tracks/TestAlignTracks.gd"]
+[script_slice path="align-tracks/AlignTracks.gd" name="fix"]
+[hint]The syntax to access an item by index in an array uses square brackets with a number in between right after the array name. For example, write [code]tracks[-1][/code] to access the [i]last[/i] element in the array.[/hint]
+[hint]To align the second chunk, call [code]align(tracks[-3])[/code]. You need to call the same function another two times with the other chunks.[/hint]
+[docs]align[/docs]
+[/practice]
+[/lesson]

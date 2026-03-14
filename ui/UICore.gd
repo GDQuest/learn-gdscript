@@ -5,7 +5,7 @@ const LoadingScreen := preload("./LoadingScreen.gd")
 const ReportFormPopup := preload("./components/popups/ReportFormPopup.gd")
 const SettingsPopup := preload("./components/popups/SettingsPopup.gd")
 
-export var default_course := "res://course/course-learn-gdscript.tres"
+export var default_course := "res://course/CourseLearnGDScriptIndex.gd"
 
 var _unloading_target: Control
 var _loading_target: Control
@@ -101,10 +101,10 @@ func _on_course_requested(force_outliner: bool = false) -> void:
 	# is faster. Consider using ResourceLoader.load_interactive() for progress updates in the future.
 	var course_navigator_scene := load("res://ui/UINavigator.tscn") as PackedScene
 	_course_navigator = course_navigator_scene.instance()
-	_course_navigator.course = load(default_course) as Course
+	_course_navigator.course_index = load(default_course).new() as CourseIndex
 
 	var user_profile = UserProfiles.get_profile()
-	var lesson_id = user_profile.get_last_started_lesson(default_course)
+	var lesson_id = user_profile.get_last_started_lesson(_course_navigator.course_index.get_course_id())
 	if not lesson_id.empty():
 		_course_navigator.set_start_from_lesson(lesson_id)
 
@@ -126,7 +126,7 @@ func _on_loading_finished() -> void:
 		_loading_target = null
 
 
-func _show_end_screen(_course: Course) -> void:
+func _show_end_screen(_course_index: CourseIndex) -> void:
 	var show_sponsored_screen := UserProfiles.get_profile().is_sponsored_profile
 
 	for page in _pages.get_children():

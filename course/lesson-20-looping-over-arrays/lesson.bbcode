@@ -1,0 +1,133 @@
+[lesson title="Looping over arrays"]
+
+We used the [code]range()[/code] function in combination with [code]for[/code] loops.
+
+[visual path="res://course/lesson-19-creating-arrays/visuals/ExamplePrint.tscn"]
+
+The [code]range()[/code] function produced an array that the [code]for[/code] keyword could loop over.
+
+We can give [code]for[/code] loops [i]any[/i] array, and they will loop over them just the same.
+
+Instead of using the [code]range()[/code] function, we could manually write the numbers and get the same result.
+
+[visual path="visuals/ExamplePrintArray.tscn"]
+
+For each element inside the array, the [code]for[/code] loop extracts it, stores it in the temporary variable named [code]number[/code], and executes the loop's code once.
+
+Inside the loop, you can access the [code]number[/code] variable, which changes on each [i]iteration[/i].
+
+The code works regardless of the array or where you store it. Often, you will store arrays in variables for easy access.
+
+[visual path="visuals/CodeStoreArrayInVar.tscn"]
+
+[quiz_choice question="What will this code print?" multiple="false" shuffle="true"]
+[code]var numbers = [0, 1, 2]
+for number in numbers:
+    print(number)
+[/code]
+[option correct]0, 1, and 2[/option]
+[option]1, 2, and 3[/option]
+[option]0, 0, and 0[/option]
+[explanation]Compared to previous examples, we store the array in the [code]numbers[/code] variable. Using the [code]numbers[/code] variable in our [code]for[/code] loop allows the computer to access the array of numbers like before.
+
+We have three numbers in the array: [code]0[/code], [code]1[/code], and [code]2[/code].
+
+The loop extracts each of them sequentially and assigns it to the [code]number[/code] temporary variable. As the loop processes each number, the output will print [code]0[/code], then [code]1[/code], then [code]2[/code], each on a separate line.[/explanation]
+[/quiz_choice]
+
+[title]Making the turtle walk, with a loop[/title]
+
+In the previous lesson, you made a turtle walk along a path by writing [code]Vector2[/code] coordinates in an array.
+
+[visual path="res://course/lesson-19-creating-arrays/visuals/ExampleTurtleRobotPath.tscn"]
+
+It's a [code]for[/code] loop that makes the turtle walk along the path.
+
+The loop works like this: for each coordinate in the array, it moves the turtle once to that cell.
+
+[visual path="visuals/CodeTurtleMove.tscn"]
+
+[separator]
+
+It's the same principle with unit selection.
+
+[visual path="visuals/ExampleSelectUnits.tscn"]
+
+For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it. 
+
+In that case, we use an array, a loop, and a condition together.
+
+[visual path="visuals/CodeSelectUnits.tscn"]
+
+The code above uses several features you haven't learned yet:
+
+- In a condition, the [code]in[/code] keyword allows you to check if a value exists [i]in[/i] an array.
+- The array's [code]append()[/code] function appends a new value at the end of the array.
+
+Notice the use of a period after the [code]selected_units[/code] variable, to call the [code]append()[/code] function. It's because this function exists only on arrays.
+
+When functions exist only on a specific value type, you write a dot after the value to call the function on it.
+
+We'll revisit those two features again in the following lessons.
+
+[separator]
+
+The beauty of loops is that they work regardless of the size of your arrays. 
+
+The code just works whether you have one or ten thousand units to select. It is all accomplished with only a couple lines of code.
+
+That's the power of computer programming.
+
+In the following practices, you will use arrays combined with [code]for[/code] loops to achieve similar results.
+
+[practice id="res://course/lesson-20-looping-over-arrays/practice-f8B67UJ8.tres" title="Move the robot along the path"]
+[description]Our AI pathfinding algorithm is giving us a path to move the robot. Now, you need to make the turtle move along the path.[/description]
+[goal]
+Our AI pathfinding algorithm provided a path for the robot to move to the right edge of the grid. Your task is to use a [code]for[/code] loop to make the robot move.
+
+To move the robot, call [i]its[/i] [code]move_to()[/code] function, like so: [code]robot.move_to()[/code].
+
+The [code]move_to()[/code] function only exists on the robot, which is why you need to access it this way.
+[/goal]
+[starting_code]
+var robot_path = [Vector2(1, 0), Vector2(1, 1), Vector2(1, 2), Vector2(2, 2), Vector2(3, 2), Vector2(4, 2), Vector2(5, 2)]
+
+func run():
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="robot-path/TestRobotPath.gd"]
+[script_slice path="robot-path/RobotPath.gd" name="run"]
+[hint]You should start with a for loop that iterates over every cell in [code]robot_path[/code].[/hint]
+[hint]You need to pass the cell position to the robot's [code]move_to()[/code] function in the loop.[/hint]
+[docs]robot.move_to[/docs]
+[/practice]
+
+[practice id="res://course/lesson-20-looping-over-arrays/practice-clsFcSrG.tres" title="Back to the drawing board"]
+[description]The drawing turtle makes its comeback. Fear not! Armed with loops, you'll make it draw faster than ever before.[/description]
+[goal]
+We want to draw many rectangles, something surprisingly common in games.
+
+However, writing this code by hand can get tedious. Instead, you could store the size of your shapes in arrays and use a loop to draw them all in batches.
+
+That's what you'll do in this practice.
+
+Use a [code]for[/code] loop to draw every rectangle in the [code]rectangle_sizes[/code] array with the [code]draw_rectangle()[/code] function.
+
+The rectangles shouldn't overlap or cross each other. To avoid that, you'll need to call the [code]jump()[/code] function.
+[/goal]
+[starting_code]
+var rectangle_sizes = [Vector2(200, 120), Vector2(140, 80), Vector2(80, 140), Vector2(200, 140)]
+
+func run():
+	
+[/starting_code]
+[cursor line="0" column="0"]
+[validator path="drawing-in-loops/TestsDrawingInLoops.gd"]
+[script_slice path="drawing-in-loops/DrawingInLoops.gd" name="draw"]
+[hint]Each value in the [code]rectangle_sizes[/code] array is a [code]Vector2[/code]. You'll need to access its [code]x[/code] and [code]y[/code] sub-components to draw rectangles.[/hint]
+[hint]In the loop, you first need to call [code]draw_rectangle()[/code], and then [code]jump()[/code]. Otherwise, at least two rectangles will overlap.[/hint]
+[hint]The arguments when calling [code]jump()[/code] can just be large enough to space out the rectangles. For example, [code]jump(300, 0)[/code][/hint]
+[docs]draw_rectangle,jump[/docs]
+[/practice]
+[/lesson]

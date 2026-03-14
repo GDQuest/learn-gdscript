@@ -11,7 +11,7 @@ const LessonDonePopup := preload("./components/popups/LessonDonePopup.gd")
 const SCREEN_TRANSITION_DURATION := 0.75
 const OUTLINER_TRANSITION_DURATION := 0.5
 
-var course: Course
+var course_index: CourseIndex
 
 # If `true`, play transition animations.
 var use_transitions := true
@@ -44,8 +44,8 @@ onready var _sale_popup := $SalePopup
 
 
 func _ready() -> void:
-	_lesson_count = course.lessons.size()
-	_course_outliner.course = course
+	_lesson_count = course_index.get_lessons_count()
+	_course_outliner.course_index = course_index
 
 	NavigationManager.connect("navigation_requested", self, "_navigate_to")
 	NavigationManager.connect("back_navigation_requested", self, "_navigate_back")
@@ -74,9 +74,9 @@ func _ready() -> void:
 		if load_into_outliner:
 			NavigationManager.navigate_to_outliner()
 		else:
-			if _lesson_index < 0 or _lesson_index >= course.lessons.size():
+			if _lesson_index < 0 or _lesson_index >= course_index.get_lessons_count():
 				_lesson_index = 0
-			NavigationManager.navigate_to(course.lessons[_lesson_index].resource_path)
+			NavigationManager.navigate_to(course_index.get_lesson_path(_lesson_index))
 	else:
 		_navigate_to()
 
@@ -90,12 +90,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func set_start_from_lesson(lesson_id: String) -> void:
-	if not course:
+	if not course_index:
 		return
 
 	var matched_index := 0
-	for lesson in course.lessons:
-		if lesson.resource_path == lesson_id:
+	for i in course_index.get_lessons_count():
+		var lesson := course_index.get_lesson_path(i)
+		if lesson == lesson_id:
 			_lesson_index = matched_index
 			break
 
@@ -120,7 +121,7 @@ func _navigate_back() -> void:
 
 	# warning-ignore:unsafe_method_access
 	var target = next_screen.get_screen_resource()
-	_breadcrumbs.update_breadcrumbs(course, target)
+	_breadcrumbs.update_breadcrumbs(course_index, target)
 
 	next_screen.set_is_current_screen(true)
 
@@ -156,19 +157,22 @@ func _navigate_to() -> void:
 
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
 	var screen: UINavigatablePage
-	if target is Practice:
-		var lesson = course.lessons[_lesson_index]
+	if target is BBCodeParser.ParseNode and target.tag == BBCodeParserData.Tag.PRACTICE:
+		var lesson = NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index))
 
 		screen = preload("UIPractice.tscn").instance()
 		# warning-ignore:unsafe_method_access
-		screen.setup(target, lesson, course)
-	elif target is Lesson:
-		var lesson := target as Lesson
+		screen.setup(target, lesson, course_index)
+	elif target.tag == BBCodeParserData.Tag.LESSON:
+		var lesson := target as BBCodeParser.ParseNode
 		screen = preload("UILesson.tscn").instance()
 		# warning-ignore:unsafe_method_access
-		screen.setup(target, course)
+		screen.setup(target, course_index)
 
-		_lesson_index = course.lessons.find(lesson) # Make sure the index is synced after navigation.
+		for i in course_index.get_lessons_count():
+			if course_index.get_lesson_path(i) == lesson.bbcode_path:
+				_lesson_index = i
+				break
 	else:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
 		return
@@ -176,7 +180,7 @@ func _navigate_to() -> void:
 	_outliner_button.show()
 	_home_button.hide()
 	_screen_container.show()
-	_breadcrumbs.update_breadcrumbs(course, target)
+	_breadcrumbs.update_breadcrumbs(course_index, target)
 
 	var has_previous_screen = not _screens_stack.empty()
 	_screens_stack.push_back(screen)
@@ -204,43 +208,59 @@ func _navigate_to() -> void:
 
 	_course_outliner.hide()
 
-	if target is Practice:
+	if target.tag == BBCodeParserData.Tag.PRACTICE:
 		Events.emit_signal("practice_started", target)
-	elif target is Lesson:
+	elif target.tag == BBCodeParserData.Tag.LESSON:
 		Events.emit_signal("lesson_started", target)
 
 
-func _on_practice_next_requested(practice: Practice) -> void:
-	var lesson_data := course.lessons[_lesson_index] as Lesson
-	var practices: Array = lesson_data.practices
+func _on_practice_next_requested(practice: BBCodeParser.ParseNode) -> void:
+	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as BBCodeParser.ParseNode
+	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson_data)
+	var practice_id := BBCodeUtils.get_practice_id(practice)
 
-	var index := practices.find(practice)
+	var index := -1
+	for i in practice_count:
+		var other_practice := BBCodeUtils.get_lesson_practice(lesson_data, i)
+		var other_practice_id := BBCodeUtils.get_practice_id(other_practice)
+		if other_practice_id == practice_id:
+			index = i
+			break
 	# This practice is not in the current lesson, return early.
 	if index < 0:
 		return
 
 	# This is the last practice in the set, try to move to the next lesson.
-	if index >= practices.size() - 1:
+	if index >= practice_count - 1:
 		# Checking that it's the last practice is not enough.
 		# Check if all practices are completed before moving to the next lesson.
 		var user_profile = UserProfiles.get_profile()
-		var lesson_progress = user_profile.get_or_create_lesson(course.resource_path, lesson_data.resource_path)
-		var total_practices := practices.size()
-		var completed_practices = lesson_progress.get_completed_practices_count(practices)
-
+		var lesson_progress = user_profile.get_or_create_lesson(course_index.get_course_id(), lesson_data.bbcode_path)
+		var total_practices := practice_count
+		var completed_practices = lesson_progress.get_completed_practices_count(lesson_data)
+		
 		# Show a confirmation popup and optionally tell the user that the lesson is incomplete.
 		_lesson_done_popup.set_incomplete(completed_practices < total_practices)
 		_lesson_done_popup.popup_centered()
 	else:
 		# Otherwise, go to the next practice in the set.
-		NavigationManager.navigate_to(practices[index + 1].practice_id)
+		var next_practice := BBCodeUtils.get_lesson_practice(lesson_data, index + 1)
+		var next_practice_id := BBCodeUtils.get_practice_id(next_practice)
+		NavigationManager.navigate_to(next_practice_id)
 
 
-func _on_practice_previous_requested(practice: Practice) -> void:
-	var lesson_data := course.lessons[_lesson_index] as Lesson
-	var practices: Array = lesson_data.practices
-
-	var index := practices.find(practice)
+func _on_practice_previous_requested(practice: BBCodeParser.ParseNode) -> void:
+	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as BBCodeParser.ParseNode
+	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson_data)
+	var practice_id := BBCodeUtils.get_practice_id(practice)
+	
+	var index := -1
+	for i in practice_count:
+		var other_practice := BBCodeUtils.get_lesson_practice(lesson_data, i)
+		var other_practice_id := BBCodeUtils.get_practice_id(other_practice)
+		if other_practice_id == practice_id:
+			index = i
+			break
 	# This practice is not in the current lesson, return early.
 	if index < 0:
 		return
@@ -249,24 +269,33 @@ func _on_practice_previous_requested(practice: Practice) -> void:
 	if index == 0:
 		return
 	else:
+		var previous_practice := BBCodeUtils.get_lesson_practice(lesson_data, index - 1)
+		var previous_practice_id := BBCodeUtils.get_practice_id(previous_practice)
 		# Otherwise, go to the previous practice in the set.
-		NavigationManager.navigate_to(practices[index - 1].practice_id)
+		NavigationManager.navigate_to(previous_practice_id)
 
 
-func _on_practice_requested(practice: Practice) -> void:
-	var lesson_data := course.lessons[_lesson_index] as Lesson
-	var practices: Array = lesson_data.practices
-
-	var index := practices.find(practice)
+func _on_practice_requested(practice: BBCodeParser.ParseNode) -> void:
+	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as BBCodeParser.ParseNode
+	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson_data)
+	var practice_id := BBCodeUtils.get_practice_id(practice)
+	
+	var index := -1
+	for i in practice_count:
+		var other_practice := BBCodeUtils.get_lesson_practice(lesson_data, i)
+		var other_practice_id := BBCodeUtils.get_practice_id(other_practice)
+		if other_practice_id == practice_id:
+			index = i
+			break
 	# This practice is not in the current lesson, return early.
 	if index < 0:
 		return
 
-	NavigationManager.navigate_to(practice.practice_id)
+	NavigationManager.navigate_to(practice_id)
 
 
 func _on_lesson_completed() -> void:
-	var lesson := course.lessons[_lesson_index] as Lesson
+	var lesson := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as BBCodeParser.ParseNode
 	Events.emit_signal("lesson_completed", lesson)
 
 	_lesson_index += 1
@@ -275,11 +304,11 @@ func _on_lesson_completed() -> void:
 		return
 
 	_clear_history_stack()
-	NavigationManager.navigate_to(course.lessons[_lesson_index].resource_path)
+	NavigationManager.navigate_to(course_index.get_lesson_path(_lesson_index))
 
 
 func _on_course_completed() -> void:
-	Events.emit_signal("course_completed", course)
+	Events.emit_signal("course_completed", course_index)
 	hide()
 
 
@@ -357,7 +386,7 @@ func _clear_history_stack() -> void:
 		screen.queue_free()
 	_screens_stack.clear()
 
-	_breadcrumbs.update_breadcrumbs(course, null)
+	_breadcrumbs.update_breadcrumbs(course_index, null)
 
 
 func _update_back_button(is_disabled: bool) -> void:

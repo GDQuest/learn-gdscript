@@ -18,8 +18,9 @@ var arguments := {}
 
 var _current_unload_type := -1
 var _url_normalization_regex := RegExpGroup.compile(
-	"^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)\\.(?<extension>t?res)"
+	"^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)\\.(?<extension>(t?res|bbcode))"
 )
+var _lesson_cache := {}
 
 
 func _init() -> void:
@@ -51,7 +52,7 @@ func _is_unload_confirmation_required() -> bool:
 	# that to return false for those screens.
 	if get_current_url():
 		var resource = get_navigation_resource(get_current_url())
-		return resource is Practice or resource is Lesson
+		return resource is BBCodeParser.ParseNode and resource.tag in [BBCodeParserData.Tag.LESSON, BBCodeParserData.Tag.PRACTICE]
 
 	return false
 
@@ -132,7 +133,7 @@ func navigate_to_welcome_screen() -> void:
 func navigate_to(metadata: String) -> void:
 	var regex_result := _url_normalization_regex.search(metadata)
 	if not regex_result:
-		push_error("`%s` is not a valid resource path" % [metadata])
+		push_error("`%s` is not a valid resource or bbcode path" % [metadata])
 		return
 	var normalized := NormalizedUrl.new(regex_result)
 
@@ -143,7 +144,7 @@ func navigate_to(metadata: String) -> void:
 	var file_path := normalized.get_file_path()
 
 	var resource := get_navigation_resource(file_path)
-	if not (resource is Resource):
+	if not (resource is BBCodeParser.ParseNode):
 		push_error("`%s` is not a resource" % file_path)
 		return
 
@@ -153,19 +154,45 @@ func navigate_to(metadata: String) -> void:
 	emit_signal("navigation_requested")
 
 
-func get_navigation_resource(resource_id: String) -> Resource:
-	var is_lesson := resource_id.ends_with("lesson.tres")
+func get_navigation_resource(resource_id: String) -> BBCodeParser.ParseNode:
+	var is_lesson := resource_id.ends_with("lesson.bbcode")
 
+	var bbcode_path := resource_id if is_lesson else resource_id.get_base_dir().plus_file("lesson.bbcode")
+	
+	var lesson_data: BBCodeParser.ParseNode = null
+	if _lesson_cache.has(bbcode_path):
+		lesson_data = _lesson_cache[bbcode_path]
+	else:
+		var _parser := LessonBBCodeParser.new()
+		var file := File.new()
+		if not file.file_exists(bbcode_path):
+			return null
+		var result := _parser.parse_file(bbcode_path)
+
+		if result.errors:
+			push_error("NavigationManager.gd:get_navigation_resource(): Parse errors when loading lesson from bbcode file %s:" % bbcode_path)
+			for error in result.errors:
+				push_error("  " + error.format())
+			return null
+
+		if result.warnings:
+			print("NavigationManager.gd:get_navigation_resource(): Parse warnings when loading lesson from bbcode file %s:" % bbcode_path)
+			for warning in result.warnings:
+				print("  ", warning.format())
+
+		lesson_data = result.root.children[0]
+		_lesson_cache[bbcode_path] = lesson_data
+	
 	if is_lesson:
-		return load(resource_id) as Resource
-
-	var lesson_path := resource_id.get_base_dir().plus_file("lesson.tres")
-	var lesson_data := load(lesson_path) as Lesson
-
+		return lesson_data
+	
 	# If it's not a lesson, it's a practice. May support some other types in future.
-	for practice_res in lesson_data.practices:
-		if practice_res.practice_id == resource_id:
-			return practice_res
+	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson_data)
+	for i in practice_count:
+		var other_practice := BBCodeUtils.get_lesson_practice(lesson_data, i)
+		var other_practice_id := BBCodeUtils.get_practice_id(other_practice)
+		if other_practice_id == resource_id:
+			return other_practice
 
 	return null
 

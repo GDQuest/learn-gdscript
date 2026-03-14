@@ -18,17 +18,19 @@ func _init() -> void:
 	completed_practices = []
 
 
-func get_completed_blocks_count(blocks: Array) -> int:
+func get_completed_blocks_count(lesson: BBCodeParser.ParseNode, block_count: int) -> int:
 	var completed := 0
 
 	# We collect them beforehand so that we can clear the list as we go and ensure only
 	# unique entries are counted.
 	var available_blocks := []
-	for block_data in blocks:
-		if block_data is Quiz:
-			available_blocks.append(block_data.quiz_id)
+	for i in block_count:
+		var block_type = BBCodeUtils.get_lesson_block_type(lesson, i)
+		if block_type in [BBCodeParserData.Tag.QUIZ_CHOICE, BBCodeParserData.Tag.QUIZ_INPUT]:
+			var quiz_node := lesson.children[i] as BBCodeParser.ParseNode
+			available_blocks.append(BBCodeUtils.get_quiz_id(quiz_node))
 		else:
-			available_blocks.append(block_data.content_id)
+			available_blocks.append("_generated_content_block_plain_%s" % i)
 
 	for block_id in completed_blocks:
 		var matched_id := ""
@@ -45,14 +47,17 @@ func get_completed_blocks_count(blocks: Array) -> int:
 	return completed
 
 
-func get_completed_quizzes_count(quizzes: Array) -> int:
+func get_completed_quizzes_count(lesson: BBCodeParser.ParseNode) -> int:
+	var quiz_count := BBCodeUtils.get_lesson_quiz_count(lesson)
 	var completed := 0
 
 	# We collect them beforehand so that we can clear the list as we go and ensure only
 	# unique entries are counted.
 	var available_quizzes := []
-	for quiz_data in quizzes:
-		available_quizzes.append(quiz_data.quiz_id)
+	for i in quiz_count:
+		var quiz := BBCodeUtils.get_lesson_quiz(lesson, i)
+		var quiz_id := BBCodeUtils.get_quiz_id(quiz)
+		available_quizzes.append(quiz_id)
 
 	for quiz_id in completed_quizzes:
 		var matched_id := ""
@@ -69,14 +74,17 @@ func get_completed_quizzes_count(quizzes: Array) -> int:
 	return completed
 
 
-func get_completed_practices_count(practices: Array) -> int:
+func get_completed_practices_count(lesson: BBCodeParser.ParseNode) -> int:
+	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
 	var completed := 0
 
 	# We collect them beforehand so that we can clear the list as we go and ensure only
 	# unique entries are counted.
 	var available_practices := []
-	for practice_data in practices:
-		available_practices.append(practice_data.practice_id)
+	for i in practice_count:
+		var practice := BBCodeUtils.get_lesson_practice(lesson, i)
+		var practice_id := BBCodeUtils.get_practice_id(practice)
+		available_practices.append(practice_id)
 
 	for practice_id in completed_practices:
 		var matched_id := ""
