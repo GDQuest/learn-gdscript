@@ -13,8 +13,7 @@ func _get_answers() -> Array:
 
 
 func _test_answer_against_quiz(answers: Array) -> AnswerTestResult:
-	var parsed_answers := BBCodeUtils.get_quiz_choices(_quiz)
-	var parsed_answer: String = parsed_answers[0]
+	var parsed_answer: String = BBCodeUtils.get_quiz_valid_answers(_quiz).back()
 	var type := TYPE_STRING
 	if parsed_answer.is_valid_float():
 		type = TYPE_REAL

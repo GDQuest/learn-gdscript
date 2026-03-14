@@ -219,6 +219,35 @@ static func get_quiz_choices(quiz: BBCodeParser.ParseNode) -> Dictionary:
 	return {"answers": answers, "valid_answers": valid_answers}
 
 
+static func get_quiz_valid_answers(quiz: BBCodeParser.ParseNode) -> Array:
+	match quiz.tag:
+		BBCodeParserData.Tag.QUIZ_CHOICE:
+			return get_quiz_choices(quiz).valid_answers
+		BBCodeParserData.Tag.QUIZ_INPUT:
+			return [quiz.attributes.get("answer", "").strip_edges()]
+		_:
+			return []
+
+
+static func get_quiz_answer_count(quiz: BBCodeParser.ParseNode) -> int:
+	return get_quiz_valid_answers(quiz).size()
+
+
+static func get_quiz_correct_answer_string(quiz: BBCodeParser.ParseNode) -> String:
+	var valid_answers := get_quiz_valid_answers(quiz)
+	match valid_answers.size():
+		0:
+			return ""
+		1:
+			return str(valid_answers[0])
+		2:
+			return "%s and %s" % [valid_answers[0], valid_answers[1]]
+		_:
+			var answers := valid_answers.duplicate()
+			var last_answer = answers.pop_back()
+			return "%s, and %s" % [PoolStringArray(answers).join(", "), last_answer]
+
+
 static func get_quiz_shuffle(quiz: BBCodeParser.ParseNode) -> bool:
 	return quiz.attributes.get("shuffle", "false") == "true"
 

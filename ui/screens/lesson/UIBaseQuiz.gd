@@ -191,12 +191,12 @@ func _show_answer(gave_correct_answer := true) -> void:
 	if gave_correct_answer:
 		emit_signal("quiz_passed")
 	else:
-		if _quiz.get_answer_count() == 1:
+		if BBCodeUtils.get_quiz_answer_count(_quiz) == 1:
 			_result_label.text = "The answer was:"
 		else:
 			_result_label.text = "The answers were:"
 		_correct_answer_label.show()
-		_correct_answer_label.text = _quiz.get_correct_answer_string()
+		_correct_answer_label.text = BBCodeUtils.get_quiz_correct_answer_string(_quiz)
 		emit_signal("quiz_skipped")
 
 func _change_rect_size_to(size: Vector2, instant := false) -> void:
