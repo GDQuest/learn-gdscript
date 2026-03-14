@@ -186,74 +186,64 @@ static func get_practice_id(practice: BBCodeParser.ParseNode) -> String:
 	return practice.attributes.get("id", "")
 
 
-static func get_quiz_id(quiz: BBCodeParser.ParseNode) -> String:
-	return _to_snake_case(get_quiz_question(quiz))
-
-
-static func get_quiz_question(quiz: BBCodeParser.ParseNode) -> String:
-	return quiz.attributes.get("question", "")
-
-
-static func get_quiz_content(quiz: BBCodeParser.ParseNode) -> String:
-	return clean_text_content(_get_text_content(quiz, false))
-
-
-static func get_quiz_explanation(quiz: BBCodeParser.ParseNode) -> String:
-	for child in quiz.children:
-		if child is BBCodeParser.ParseNode:
-			if child.tag == BBCodeParserData.Tag.EXPLANATION:
-				return clean_text_content(_get_text_content(child, true))
-	return ""
-
-
-static func get_quiz_choices(quiz: BBCodeParser.ParseNode) -> Dictionary:
+class QuizData:
+	var tag: int = BBCodeParserData.Tag.UNKNOWN
+	var question := ""
+	var content := ""
+	var explanation := ""
 	var answers := []
 	var valid_answers := []
+	var shuffle := false
+	var multiple := false
+
+
+	func get_answer_count() -> int:
+		return valid_answers.size()
+
+
+	func get_correct_answer_string() -> String:
+		match valid_answers.size():
+			0:
+				return ""
+			1:
+				return str(valid_answers[0])
+			2:
+				return "%s and %s" % [valid_answers[0], valid_answers[1]]
+			_:
+				var answer_list := valid_answers.duplicate()
+				var last_answer = answer_list.pop_back()
+				return "%s, and %s" % [PoolStringArray(answer_list).join(", "), last_answer]
+
+
+static func get_quiz_id(quiz: BBCodeParser.ParseNode) -> String:
+	return _to_snake_case(quiz.attributes.get("question", ""))
+
+
+static func get_quiz_data(quiz: BBCodeParser.ParseNode) -> QuizData:
+	var data := QuizData.new()
+	data.tag = quiz.tag
+	data.question = quiz.attributes.get("question", "")
+	data.shuffle = quiz.attributes.get("shuffle", "false") == "true"
+	data.multiple = quiz.attributes.get("multiple", "false") == "true"
+	data.content = clean_text_content(_get_text_content(quiz, false))
+
+	if quiz.tag == BBCodeParserData.Tag.QUIZ_INPUT:
+		data.valid_answers = [quiz.attributes.get("answer", "").strip_edges()]
+
 	for child in quiz.children:
 		if child is BBCodeParser.ParseNode:
-			if child.tag == BBCodeParserData.Tag.OPTION:
-				var text: String = clean_text_content(_get_text_content(child, true))
-				answers.push_back(text)
-				if child.attributes.get("correct", false):
-					valid_answers.push_back(text)
-	return {"answers": answers, "valid_answers": valid_answers}
+			match child.tag:
+				BBCodeParserData.Tag.EXPLANATION:
+					data.explanation = clean_text_content(_get_text_content(child, true))
+				BBCodeParserData.Tag.OPTION:
+					var answer: String = clean_text_content(_get_text_content(child, true))
+					data.answers.push_back(answer)
+					if child.attributes.get("correct", false):
+						data.valid_answers.push_back(answer)
+				_:
+					pass
 
-
-static func get_quiz_valid_answers(quiz: BBCodeParser.ParseNode) -> Array:
-	match quiz.tag:
-		BBCodeParserData.Tag.QUIZ_CHOICE:
-			return get_quiz_choices(quiz).valid_answers
-		BBCodeParserData.Tag.QUIZ_INPUT:
-			return [quiz.attributes.get("answer", "").strip_edges()]
-		_:
-			return []
-
-
-static func get_quiz_answer_count(quiz: BBCodeParser.ParseNode) -> int:
-	return get_quiz_valid_answers(quiz).size()
-
-
-static func get_quiz_correct_answer_string(quiz: BBCodeParser.ParseNode) -> String:
-	var valid_answers := get_quiz_valid_answers(quiz)
-	match valid_answers.size():
-		0:
-			return ""
-		1:
-			return str(valid_answers[0])
-		2:
-			return "%s and %s" % [valid_answers[0], valid_answers[1]]
-		_:
-			var answers := valid_answers.duplicate()
-			var last_answer = answers.pop_back()
-			return "%s, and %s" % [PoolStringArray(answers).join(", "), last_answer]
-
-
-static func get_quiz_shuffle(quiz: BBCodeParser.ParseNode) -> bool:
-	return quiz.attributes.get("shuffle", "false") == "true"
-
-
-static func get_quiz_multiple_answers(quiz: BBCodeParser.ParseNode) -> bool:
-	return quiz.attributes.get("multiple", "false") == "true"
+	return data
 
 
 static func clean_text_content(text: String) -> String:

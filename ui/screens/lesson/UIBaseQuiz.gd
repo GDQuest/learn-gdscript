@@ -42,6 +42,7 @@ onready var _size_tween := $SizeTween as Tween
 onready var _help_message := $ClipContentBoundary/ChoiceContainer/ChoiceView/HelpMessage as Label
 
 var _quiz: BBCodeParser.ParseNode
+var _quiz_data: BBCodeUtils.QuizData
 var _shake_pos: float = 0
 # Used for animating size changes
 var _previous_rect_size := rect_size
@@ -72,18 +73,19 @@ func _notification(what: int) -> void:
 
 func setup(quiz: BBCodeParser.ParseNode) -> void:
 	_quiz = quiz
+	_quiz_data = BBCodeUtils.get_quiz_data(_quiz)
 
 	if not is_inside_tree():
 		yield(self, "ready")
 
-	var question: String = BBCodeUtils.get_quiz_question(_quiz)
+	var question: String = _quiz_data.question
 	_question.bbcode_text = "[b]" + tr(question) + "[/b]"
 
-	var content: String = BBCodeUtils.get_quiz_content(_quiz)
+	var content: String = _quiz_data.content
 	_content.visible = not content.empty()
 	_content.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(content))
 
-	var explanation: String = BBCodeUtils.get_quiz_explanation(_quiz)
+	var explanation: String = _quiz_data.explanation
 	_explanation.visible = not explanation.empty()
 	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(explanation))
 
@@ -99,12 +101,12 @@ func _update_labels() -> void:
 	if not _quiz:
 		return
 
-	var question := BBCodeUtils.get_quiz_question(_quiz)
+	var question := _quiz_data.question
 	_question.bbcode_text = "[b]" + tr(question) + "[/b]"
 
-	var content_bbcode := BBCodeUtils.get_quiz_content(_quiz)
+	var content_bbcode := _quiz_data.content
 	_content.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(content_bbcode))
-	var explanation_bbcode := BBCodeUtils.get_quiz_explanation(_quiz)
+	var explanation_bbcode := _quiz_data.explanation
 	_explanation.bbcode_text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(explanation_bbcode))
 
 
@@ -191,12 +193,12 @@ func _show_answer(gave_correct_answer := true) -> void:
 	if gave_correct_answer:
 		emit_signal("quiz_passed")
 	else:
-		if BBCodeUtils.get_quiz_answer_count(_quiz) == 1:
+		if _quiz_data.get_answer_count() == 1:
 			_result_label.text = "The answer was:"
 		else:
 			_result_label.text = "The answers were:"
 		_correct_answer_label.show()
-		_correct_answer_label.text = BBCodeUtils.get_quiz_correct_answer_string(_quiz)
+		_correct_answer_label.text = _quiz_data.get_correct_answer_string()
 		emit_signal("quiz_skipped")
 
 func _change_rect_size_to(size: Vector2, instant := false) -> void:

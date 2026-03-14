@@ -19,12 +19,11 @@ func setup(quiz: BBCodeParser.ParseNode) -> void:
 	if not quiz.tag == BBCodeParserData.Tag.QUIZ_CHOICE:
 		return
 
-	var quiz_options := BBCodeUtils.get_quiz_choices(quiz)
-	var answer_options: Array = quiz_options.answers.duplicate()
-	if BBCodeUtils.get_quiz_shuffle(quiz):
+	var answer_options: Array = _quiz_data.answers.duplicate()
+	if _quiz_data.shuffle:
 		answer_options.shuffle()
 
-	var is_multiple_choice := BBCodeUtils.get_quiz_multiple_answers(quiz)
+	var is_multiple_choice := _quiz_data.multiple
 	if is_multiple_choice:
 		_question.bbcode_text += " [i]" + tr("(select all that apply)") + "[/i]"
 
@@ -40,7 +39,7 @@ func _get_answers() -> Array:
 	if _quiz.tag != BBCodeParserData.Tag.QUIZ_CHOICE:
 		return answers
 
-	var is_multiple_choice := BBCodeUtils.get_quiz_multiple_answers(_quiz)
+	var is_multiple_choice := _quiz_data.multiple
 	for button in _choices.get_children():
 		var answer = button.get_answer()
 		if answer:
@@ -52,13 +51,12 @@ func _get_answers() -> Array:
 
 
 func _test_answer_against_quiz(answers: Array) -> AnswerTestResult:
-	var parsed_answers := BBCodeUtils.get_quiz_choices(_quiz)
-	assert(not parsed_answers.valid_answers.empty(), ERROR_NO_VALID_ANSWERS)
+	assert(not _quiz_data.valid_answers.empty(), ERROR_NO_VALID_ANSWERS)
 	var result := AnswerTestResult.new()
-	result.is_correct = answers.size() == parsed_answers.valid_answers.size()
+	result.is_correct = answers.size() == _quiz_data.valid_answers.size()
 	if result.is_correct:
 		for answer in answers:
-			if not answer in parsed_answers.valid_answers:
+			if not answer in _quiz_data.valid_answers:
 				result.is_correct = false
 				break
 	return result
