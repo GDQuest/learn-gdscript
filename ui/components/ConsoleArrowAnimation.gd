@@ -19,8 +19,6 @@ var _scene_tween: SceneTreeTween
 
 func _ready():
 	set_process(false)
-	#_tween.connect("tween_completed", self, "_on_tween_completed")
-	#_tween.connect("tween_step", self, "_on_tween_step")
 
 
 func _draw() -> void:
@@ -44,9 +42,9 @@ func draw_curve():
 
 	if _scene_tween:
 		_scene_tween.kill()
-	_scene_tween = create_tween()
+	_scene_tween = create_tween().set_parallel()
 	_scene_tween.connect("finished", self, "_on_tween_completed")
-	_scene_tween.connect("step_finished", self, "_on_tween_step")
+	_scene_tween.tween_method(self, "_on_tween_step", 0, 1, TWEEN_DURATION)
 	_scene_tween.tween_property(self, "_line_slice_limit", _baked_line_points.size(), TWEEN_DURATION).from(0)
 
 
@@ -69,5 +67,5 @@ func _on_tween_completed():
 	_arrow.show()
 
 
-func _on_tween_step(_step: int):
+func _on_tween_step(_step: float):
 	update()
