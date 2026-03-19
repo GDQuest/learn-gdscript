@@ -60,7 +60,7 @@ func set_release_date(value: String) -> void:
 
 
 func is_release_date_in_the_future(date: Dictionary) -> bool:
-	var today := OS.get_datetime(true)
+	var today := Time.get_datetime_dict_from_system(true)
 	return (date.year > today.year or date.month > today.month or date.day > today.day or \
 		date.hour > today.hour or date.minute > today.minute or date.second > today.second)
 

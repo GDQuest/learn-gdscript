@@ -107,7 +107,7 @@ func download() -> void:
 			json_string += JSON.print(line) + "\n"
 		var file := File.new()
 		var dir := Directory.new()
-		var time  := OS.get_datetime();
+		var time := Time.get_datetime_dict_from_system()
 		var dir_name := "error_logs"
 		var file_name := "%d-%02d-%02d-%02d-%02d" % [time.year, time.month, time.day, time.hour, time.minute];
 		var ok := dir.make_dir_recursive("user://%s/"%[dir_name])
@@ -161,7 +161,7 @@ func godot_dict_to_js_obj(properties: Dictionary):
 func get_info():
 	var info = {
 		"OS": OS.get_name(),
-		"datetime": OS.get_datetime(),
+		"datetime": Time.get_datetime_dict_from_system(),
 		"video_driver": OS.get_video_driver_name(OS.get_current_video_driver()),
 		"video_adapter": VisualServer.get_video_adapter_name(),
 		"video_vendor": VisualServer.get_video_adapter_vendor(),

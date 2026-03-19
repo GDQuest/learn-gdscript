@@ -10,4 +10,4 @@ onready var start_position := rect_position
 
 
 func _process(delta: float) -> void:
-	rect_position.y = start_position.y + sin(OS.get_ticks_msec() / 1000.0 + time_offset) * offset
+	rect_position.y = start_position.y + sin(Time.get_ticks_msec() / 1000.0 + time_offset) * offset

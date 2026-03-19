@@ -113,9 +113,9 @@ func _test_lesson(lesson: Lesson) -> bool:
 	timer.connect("timeout", self, "_on_lesson_timeout_signal", [state])
 	timer.start()
 	
-	var wait_start_time := OS.get_ticks_msec()
+	var wait_start_time := Time.get_ticks_msec()
 	while not displayed and not timed_out:
-		if OS.get_ticks_msec() - wait_start_time > lesson_load_timeout * 1000.0:
+		if Time.get_ticks_msec() - wait_start_time > lesson_load_timeout * 1000.0:
 			timed_out = true
 			break
 		if state.displayed or ui_lesson._practices_visibility_container.visible:
@@ -190,9 +190,9 @@ func _test_practice(practice: Practice, lesson: Lesson) -> bool:
 	execution_timer.connect("timeout", self, "_on_practice_execution_timeout_signal", [state])
 	execution_timer.start()
 	
-	var wait_start_time := OS.get_ticks_msec()
+	var wait_start_time := Time.get_ticks_msec()
 	while not execution_complete and not timed_out:
-		if OS.get_ticks_msec() - wait_start_time > practice_execution_timeout * 1000.0:
+		if Time.get_ticks_msec() - wait_start_time > practice_execution_timeout * 1000.0:
 			timed_out = true
 			break
 		if state.complete or execution_timer.is_stopped():

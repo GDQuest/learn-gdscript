@@ -70,7 +70,7 @@ func set_only_until_string(new_date: String) -> void:
 
 
 func is_sale_over() -> bool:
-	var datetime := OS.get_datetime(true)
+	var datetime := Time.get_datetime_dict_from_system(true)
 
 	if datetime.year > _end_datetime.year:
 		return true

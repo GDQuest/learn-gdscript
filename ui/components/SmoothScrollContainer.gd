@@ -88,7 +88,7 @@ func _gui_input(event: InputEvent) -> void:
 	# touchpads.
 	var can_mouse_scroll := true
 	if _is_in_browser:
-		can_mouse_scroll = OS.get_ticks_msec() > _last_accepted_scroll_event_time + TIME_MSEC_BETWEEN_SCROLL_EVENTS
+		can_mouse_scroll = Time.get_ticks_msec() > _last_accepted_scroll_event_time + TIME_MSEC_BETWEEN_SCROLL_EVENTS
 
 	if event.is_action_pressed("scroll_up_one_page"):
 		scroll_page_up()
@@ -107,12 +107,12 @@ func _gui_input(event: InputEvent) -> void:
 
 func scroll_up() -> void:
 	_set_target_position(_target_position + Vector2.UP * MOUSE_SCROLL_STEP * _scroll_sensitivity)
-	_last_accepted_scroll_event_time = OS.get_ticks_msec()
+	_last_accepted_scroll_event_time = Time.get_ticks_msec()
 
 
 func scroll_down() -> void:
 	_set_target_position(_target_position + Vector2.DOWN * MOUSE_SCROLL_STEP * _scroll_sensitivity)
-	_last_accepted_scroll_event_time = OS.get_ticks_msec()
+	_last_accepted_scroll_event_time = Time.get_ticks_msec()
 
 
 func scroll_page_up() -> void:
