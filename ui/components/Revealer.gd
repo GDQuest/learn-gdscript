@@ -22,7 +22,6 @@ export var title_panel_expanded: StyleBox setget set_title_panel_expanded
 export var content_panel: StyleBox setget set_content_panel
 export var content_separation: int = 2 setget set_content_separation
 
-onready var _tweener := $Tween as Tween
 onready var _toggle_bar := $ToggleBar as PanelContainer
 onready var _toggle_button := $ToggleBar/ToggleCapturer as Button
 onready var _toggle_label := $ToggleBar/BarLayout/Label as Label
@@ -32,6 +31,7 @@ onready var _toggle_icon := $ToggleBar/BarLayout/ToggleIcon/Texture as TextureRe
 var _content_children := []
 var _percent_revealed := 0.0
 var _title_style: StyleBox
+var _scene_tween: SceneTreeTween
 
 
 func _ready() -> void:
@@ -47,8 +47,6 @@ func _ready() -> void:
 	_toggle_button.connect("mouse_entered", self, "_on_toggle_entered")
 	_toggle_button.connect("mouse_exited", self, "_on_toggle_exited")
 	_toggle_button.connect("toggled", self, "_on_toggle_pressed")
-	_tweener.connect("tween_step", self, "_on_tweener_step")
-	_tweener.connect("tween_all_completed", self, "_on_tweener_completed")
 
 	_toggle_content(is_expanded, true)
 	_title_style = get_title_panel_style()
@@ -342,8 +340,11 @@ func _toggle_content(expanded: bool, immediate: bool = false) -> void:
 		return
 
 	# Animate the change smoothly.
-	_tweener.stop_all()
-
+	if _scene_tween:
+		_scene_tween.kill()
+	_scene_tween = create_tween().set_parallel()
+	_scene_tween.connect("finished", self, "_on_tween_completed")
+	
 	for child_node in get_children():
 		var control_node := child_node as Control
 		if not control_node or control_node == _toggle_bar:
@@ -352,19 +353,12 @@ func _toggle_content(expanded: bool, immediate: bool = false) -> void:
 		if expanded:
 			control_node.visible = true
 
-	_tweener.interpolate_property(
-		_toggle_icon, "rect_rotation",
-		_toggle_icon.rect_rotation, 90.0 * int(expanded),
-		ANIMATION_ICON_DURATION, Tween.TRANS_QUAD, Tween.EASE_IN_OUT
-	)
+	_scene_tween.tween_property(_toggle_icon, "rect_rotation", 90.0 * int(expanded), ANIMATION_ICON_DURATION).from(_toggle_icon.rect_rotation).set_trans(Tween.TRANS_QUAD)
 
 	var final_value := 1.0 * int(expanded)
-	_tweener.interpolate_property(
-		self, "_percent_revealed",
-		1.0 - final_value, final_value,
-		ANIMATION_REVEAL_DURATION, Tween.TRANS_QUAD, Tween.EASE_IN_OUT
-	)
-	_tweener.start()
+	_scene_tween.tween_property(self, "_percent_revealed", final_value, ANIMATION_REVEAL_DURATION).from(1.0 - final_value).set_trans(Tween.TRANS_QUAD)
+	
+	_scene_tween.tween_method(self, "_on_tween_step", 0, 1.0, ANIMATION_REVEAL_DURATION)
 
 
 func _on_toggle_entered() -> void:
@@ -379,12 +373,12 @@ func _on_toggle_pressed(pressed: bool) -> void:
 	set_is_expanded(pressed)
 
 
-func _on_tweener_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
+func _on_tween_step(_step: float) -> void:
 	_title_style = get_title_panel_style()
 	minimum_size_changed()
 
 
-func _on_tweener_completed() -> void:
+func _on_tween_completed() -> void:
 	_title_style = get_title_panel_style()
 	update()
 

@@ -24,6 +24,7 @@ var _matches := {}
 
 var _lesson_index := 0
 var _lesson_count: int = 0
+var _scene_tween: SceneTreeTween
 
 onready var _home_button := $Layout/Header/MarginContainer/HeaderContent/HomeButton as Button
 onready var _outliner_button := $Layout/Header/MarginContainer/HeaderContent/OutlinerButton as Button
@@ -37,10 +38,10 @@ onready var _course_outliner := $Layout/Content/CourseOutliner as CourseOutliner
 
 onready var _lesson_done_popup := $LessonDonePopup as LessonDonePopup
 
-onready var _tween := $Tween as Tween
 
 onready var _sale_button := $Layout/Header/MarginContainer/HeaderContent/SaleButton as Button
 onready var _sale_popup := $SalePopup
+
 
 
 func _ready() -> void:
@@ -107,7 +108,7 @@ func set_start_from_lesson(lesson_id: String) -> void:
 func _navigate_back() -> void:
 	# Allowing to go back during a transition can cause the screen to get
 	# deleted, so we prevent this.
-	if _tween.is_active():
+	if _scene_tween and _scene_tween.is_running():
 		return
 
 	# Nothing to go back to, open the outliner.
@@ -142,17 +143,17 @@ func _navigate_to_outliner() -> void:
 	_home_button.show()
 	_clear_history_stack()
 
-	_tween.stop_all()
+	if _scene_tween:
+		_scene_tween.kill()
 	_animate_outliner(true)
-	_tween.start()
-	yield(_tween, "tween_all_completed")
+	yield(_scene_tween, "finished")
 
 	_screen_container.hide()
 
 
 # Navigates forward to the next screen and adds it to the stack.
 func _navigate_to() -> void:
-	if _tween.is_active():
+	if _scene_tween and _scene_tween.is_running():
 		return
 
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
@@ -201,10 +202,10 @@ func _navigate_to() -> void:
 		NavigationManager.connect_rich_text_node(node)
 
 	if _course_outliner.visible:
-		_tween.stop_all()
+		if _scene_tween:
+			_scene_tween.kill()
 		_animate_outliner(false)
-		_tween.start()
-		yield(_tween, "tween_all_completed")
+		yield(_scene_tween, "finished")
 
 	_course_outliner.hide()
 
@@ -342,8 +343,7 @@ func _transition_to(screen: Control, from_screen: Control = null, direction_in :
 	if from_screen:
 		_animate_screen(from_screen, -viewport_width * direction)
 
-	_tween.start()
-	yield(_tween, "tween_all_completed")
+	yield(_scene_tween, "finished")
 
 	if from_screen:
 		from_screen.hide()
@@ -353,27 +353,15 @@ func _transition_to(screen: Control, from_screen: Control = null, direction_in :
 
 
 func _animate_screen(screen: Control, to_position: float) -> void:
-	_tween.interpolate_property(
-		screen,
-		"rect_position:x",
-		screen.rect_position.x,
-		to_position,
-		SCREEN_TRANSITION_DURATION,
-		Tween.TRANS_CUBIC,
-		Tween.EASE_IN_OUT
-	)
+	if not _scene_tween or not _scene_tween.is_valid():
+		_scene_tween = create_tween().set_parallel()
+	_scene_tween.tween_property(screen, "rect_position:x", to_position, SCREEN_TRANSITION_DURATION).from(screen.rect_position.x).set_trans(Tween.TRANS_CUBIC)
 
 
 func _animate_outliner(fade_in: bool) -> void:
-	_tween.interpolate_property(
-		_course_outliner,
-		"modulate:a",
-		0.0 if fade_in else 1.0,
-		1.0 if fade_in else 0.0,
-		OUTLINER_TRANSITION_DURATION,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT
-	)
+	if not _scene_tween or not _scene_tween.is_valid():
+		_scene_tween = create_tween().set_parallel()
+	_scene_tween.tween_property(_course_outliner, "modulate:a", 1.0 if fade_in else 0.0, OUTLINER_TRANSITION_DURATION).from(0.0 if fade_in else 1.0)
 
 
 func _clear_history_stack() -> void:

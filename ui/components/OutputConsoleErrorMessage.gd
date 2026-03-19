@@ -21,8 +21,6 @@ onready var _location_label := $Layout/Content/LocationRow/CodeLocation as Label
 onready var _external_label := $Layout/Content/ExternalError as Label
 onready var _message_explain_button := $Layout/ExplainButton as Button
 
-onready var _tweener := $Tween as Tween
-
 
 func _ready() -> void:
 	_update_visuals()
@@ -31,9 +29,8 @@ func _ready() -> void:
 	_location_row.connect("gui_input", self, "_location_row_gui_input")
 	_external_label.connect("gui_input", self, "_external_label_gui_input")
 
-	_tweener.stop_all()
-	_tweener.interpolate_property(self, "self_modulate:a", 1.0, 0.25, 1.5)
-	_tweener.start()
+	var _scene_tween := create_tween()
+	_scene_tween.tween_property(self, "self_modulate:a", 0.25, 1.5).from(1.0)
 
 
 func _update_visuals() -> void:

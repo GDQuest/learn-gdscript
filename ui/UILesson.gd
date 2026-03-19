@@ -28,6 +28,7 @@ var _quizz_count := 0
 var _integration_test_mode := false
 
 var _base_text_font_size := preload("res://ui/theme/fonts/font_text.tres").size
+var _scene_tween: SceneTreeTween
 
 onready var _scroll_container := $OuterMargin/ScrollContainer as ScrollContainer
 onready var _scroll_content := $OuterMargin/ScrollContainer/InnerMargin as Control
@@ -37,7 +38,6 @@ onready var _content_container := $OuterMargin/ScrollContainer/InnerMargin/Conte
 onready var _practices_visibility_container := $OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer as VBoxContainer
 onready var _practices_container := $OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer/Practices as VBoxContainer
 onready var _debounce_timer := $DebounceTimer as Timer
-onready var _tweener := $Tween as Tween
 onready var _glossary_popup := $GlossaryPopup
 
 onready var _start_content_width := _content_container.rect_size.x
@@ -214,17 +214,13 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 			_scroll_content.rect_global_position.y - _content_blocks.rect_global_position.y
 		)
 		var scroll_target = restore_node.rect_position.y + scroll_offset - AUTOSCROLL_PADDING
-		_tweener.stop_all()
-		_tweener.interpolate_method(
-			_scroll_container,
-			"set_v_scroll",  # So it plays nice with our smooth scroller
+		if _scene_tween:
+			_scene_tween.kill()
+		_scene_tween = create_tween()
+		_scene_tween.tween_method(_scroll_container, "set_v_scroll",
+			# So it plays nice with our smooth scroller
 			_scroll_container.scroll_vertical,
-			scroll_target,
-			AUTOSCROLL_DURATION,
-			Tween.TRANS_QUAD,
-			Tween.EASE_IN_OUT
-		)
-		_tweener.start()
+			scroll_target, AUTOSCROLL_DURATION).set_trans(Tween.TRANS_QUAD)
 
 	_underline_glossary_entries()
 

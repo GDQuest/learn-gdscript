@@ -10,10 +10,11 @@ onready var _panel := $Panel as Control
 onready var _interaction_area := $InteractionArea as Control
 onready var _title := $Panel/MarginContainer/Column/Title as Label
 onready var _content := $Panel/MarginContainer/Column/Content as RichTextLabel
-onready var _tween := $Tween as Tween
 # The timer prevents the panel from disappearing instantly when the mouse goes
 # out of the area too quickly.
 onready var _timer := $Timer as Timer
+
+var scene_tween: SceneTreeTween
 
 
 func _ready() -> void:
@@ -21,7 +22,6 @@ func _ready() -> void:
 	_interaction_area.hide()
 	_interaction_area.connect("mouse_exited", self, "disappear")
 	_timer.connect("timeout", self, "_on_Timer_timeout")
-	_tween.connect("tween_all_completed", self, "_on_Tween_tween_all_completed")
 	_content.connect("resized", self, "_on_Content_resized")
 
 
@@ -47,18 +47,25 @@ func align_with_mouse(global_mouse_position: Vector2) -> void:
 func appear() -> void:
 	_panel.show()
 	_interaction_area.show()
-	_tween.stop_all()
-	_tween.interpolate_property(_panel, "modulate:a", 0.0, 1.0, TRANSITION_DURATION)
-	_tween.start()
+	
+	if scene_tween:
+		scene_tween.kill()
+	
+	scene_tween = create_tween()
+	scene_tween.connect("finished", self, "_on_Tween_tween_all_completed")
+	scene_tween.tween_property(_panel, "modulate:a", 1.0, TRANSITION_DURATION).from(0.0)
 	_timer.start()
 
 
 func disappear() -> void:
 	if not _timer.is_stopped():
 		return
-	_tween.stop_all()
-	_tween.interpolate_property(_panel, "modulate:a", _panel.modulate.a, 0.0, TRANSITION_DURATION)
-	_tween.start()
+	
+	if scene_tween:
+		scene_tween.kill()
+	scene_tween = create_tween()
+	scene_tween.connect("finished", self, "_on_Tween_tween_all_completed")
+	scene_tween.tween_property(_panel, "modulate:a", 0.0, TRANSITION_DURATION).from(_panel.modulate.a)
 
 
 func _on_Timer_timeout() -> void:

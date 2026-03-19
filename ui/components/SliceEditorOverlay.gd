@@ -349,7 +349,7 @@ class HighlightOverlay:
 	var regions := [] setget set_regions
 
 	var _current_alpha := 0.0
-	var _tweener: Tween
+	var _tween: SceneTreeTween
 
 	func _init() -> void:
 		name = "HighlightOverlay"
@@ -357,16 +357,13 @@ class HighlightOverlay:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
 		
 		_current_alpha = DEFAULT_ALPHA
-		_tweener = Tween.new()
-		add_child(_tweener)
 
 	func _ready() -> void:
 		set_anchors_and_margins_preset(Control.PRESET_WIDE)
 		
-		_tweener.connect("tween_all_completed", self, "queue_free")
+		_tween = create_tween()
 		
-		_tweener.interpolate_method(self, "_dissolve_step", DEFAULT_ALPHA, 0.0, DISSOLVE_DURATION)
-		_tweener.start()
+		_tween.tween_method(self, "_dissolve_step", DEFAULT_ALPHA, 0.0, DISSOLVE_DURATION)
 	
 	
 	func _draw() -> void:

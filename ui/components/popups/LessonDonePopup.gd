@@ -16,7 +16,6 @@ onready var _summary_label := $PanelContainer/Layout/Margin/Column/Summary as Ri
 
 onready var _particles := $Particles as CPUParticles2D
 onready var _thick_particles := $ThickParticles as CPUParticles2D
-onready var _tween := $Tween as Tween
 
 
 func _ready() -> void:
@@ -51,16 +50,8 @@ func popup_centered() -> void:
 	_popup_container.set_anchors_and_margins_preset(Control.PRESET_CENTER, Control.PRESET_MODE_KEEP_SIZE)
 	_popup_container.rect_pivot_offset = _popup_container.rect_size / 2
 	
-	_tween.stop_all()
-	_tween.interpolate_property(
-		_popup_container,
-		"rect_scale",
-		_popup_container.rect_scale,
-		Vector2(1.0, 1.0),
-		FADE_IN_DURATION,
-		Tween.TRANS_CUBIC
-	)
-	_tween.start()
+	var scene_tween = create_tween()
+	scene_tween.tween_property(_popup_container, "rect_scale", Vector2(1.0, 1.0), FADE_IN_DURATION).from(_popup_container.rect_scale).set_trans(Tween.TRANS_CUBIC)
 	
 	_move_on_button.grab_focus()
 

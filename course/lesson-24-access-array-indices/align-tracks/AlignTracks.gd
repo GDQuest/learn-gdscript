@@ -63,14 +63,11 @@ func _realign_selected_sprites() -> void:
 		push_error(item)
 	elif item:
 		var track := item as Sprite
-		var tween := Tween.new()
-		track.add_child(tween)
+		var tween := create_tween()
 		var initial := track.position
 		var target := initial - shift
-		tween.connect("tween_all_completed", self, "_realign_selected_sprites")
-		tween.connect("tween_all_completed", tween, "queue_free")
-		tween.interpolate_property(track, "position", initial, target, 1, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
-		tween.start()
+		tween.connect("finished", self, "_realign_selected_sprites")
+		tween.tween_property(track, "position", target, 1).from(initial).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	else:
 		_complete_run()
 

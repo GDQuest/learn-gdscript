@@ -37,8 +37,6 @@ onready var _skip_button := $ClipContentBoundary/ChoiceContainer/ChoiceView/HBox
 onready var _result_label := $ClipContentBoundary/ResultContainer/ResultView/Label as Label
 onready var _correct_answer_label := $ClipContentBoundary/ResultContainer/ResultView/CorrectAnswer as Label
 
-onready var _error_tween := $ErrorTween as Tween
-onready var _size_tween := $SizeTween as Tween
 onready var _help_message := $ClipContentBoundary/ChoiceContainer/ChoiceView/HelpMessage as Label
 
 var _quiz: BBCodeParser.ParseNode
@@ -50,6 +48,8 @@ var _next_rect_size := Vector2.ZERO
 var _percent_transformed := 0.0
 var _animating_hint := false
 
+var _error_scene_tween: SceneTreeTween
+var _size_scene_tween: SceneTreeTween
 
 func _ready() -> void:
 	_completed_before_icon.visible = completed_before
@@ -61,9 +61,6 @@ func _ready() -> void:
 	_help_message.connect("visibility_changed", self, "_on_help_message_visibility_changed")
 	_choice_container.connect("minimum_size_changed", self, "_on_choice_container_minimum_size_changed")
 	_result_container.connect("minimum_size_changed", self, "_on_result_container_minimum_size_changed")
-
-	_size_tween.connect("tween_step", self, "_on_size_tween_step")
-	_size_tween.connect("tween_completed", self, "_on_size_tween_completed")
 
 
 func _notification(what: int) -> void:
@@ -125,32 +122,17 @@ func _test_answer() -> void:
 		result = _test_answer_against_quiz(_get_answers().back())
 	_help_message.text = result.help_message
 	_help_message.visible = not result.help_message.empty()
-	_error_tween.stop_all()
+	if _error_scene_tween:
+		_error_scene_tween.kill()
+	_error_scene_tween = create_tween().set_parallel()
+	
 	if not result.is_correct:
 		_outline.modulate.a = 1.0
 		_outline.add_stylebox_override("panel", ERROR_OUTLINE)
 
 		rect_position.y = _shake_pos
-		_error_tween.interpolate_property(
-			self,
-			"rect_position:y",
-			_shake_pos + ERROR_SHAKE_SIZE,
-			_shake_pos,
-			ERROR_SHAKE_TIME,
-			Tween.TRANS_ELASTIC,
-			Tween.EASE_OUT
-		)
-		_error_tween.interpolate_property(
-			_outline,
-			"modulate:a",
-			_outline.modulate.a,
-			0.0,
-			OUTLINE_FLASH_DURATION,
-			Tween.TRANS_LINEAR,
-			Tween.EASE_IN,
-			OUTLINE_FLASH_DELAY
-		)
-		_error_tween.start()
+		_error_scene_tween.tween_property(self, "rect_position:y", _shake_pos, ERROR_SHAKE_TIME).from(_shake_pos + ERROR_SHAKE_SIZE).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+		_error_scene_tween.tween_property(_outline, "modulate:a", 0.0, OUTLINE_FLASH_DURATION).from(_outline.modulate.a).set_ease(Tween.EASE_IN)
 	else:
 		_show_answer()
 
@@ -160,7 +142,8 @@ func _test_answer_against_quiz(answers: Array) -> AnswerTestResult:
 
 
 func _show_answer(gave_correct_answer := true) -> void:
-	_error_tween.stop_all()
+	if _error_scene_tween:
+		_error_scene_tween.kill()
 	_outline.add_stylebox_override("panel", PASSED_OUTLINE if gave_correct_answer else NEUTRAL_OUTLINE)
 	_outline.modulate.a = 1.0
 
@@ -169,26 +152,11 @@ func _show_answer(gave_correct_answer := true) -> void:
 	_change_rect_size_to(_result_container.rect_size)
 
 	#Hiding choice view upon completion of the following tween
-	_size_tween.interpolate_property(
-		_choice_container,
-		"modulate:a",
-		1,
-		0,
-		FADE_OUT_TIME
-	)
-
-	_size_tween.interpolate_property(
-		_result_container,
-		"modulate:a",
-		0,
-		1,
-		FADE_IN_TIME,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT,
-		FADE_OUT_TIME
-	)
-
-	_size_tween.start()
+	var fade_tween := create_tween().set_parallel()
+	
+	var choice_step := fade_tween.tween_property(_choice_container, "modulate:a", 0, FADE_OUT_TIME).from(1)
+	choice_step.connect("finished", self, "_on_fade_tween_completed")
+	fade_tween.tween_property(_result_container, "modulate:a", 1, FADE_IN_TIME).from(0)
 
 	if gave_correct_answer:
 		emit_signal("quiz_passed")
@@ -202,7 +170,9 @@ func _show_answer(gave_correct_answer := true) -> void:
 		emit_signal("quiz_skipped")
 
 func _change_rect_size_to(size: Vector2, instant := false) -> void:
-	_size_tween.stop_all()
+	if _size_scene_tween:
+		_size_scene_tween.kill()
+	_size_scene_tween = create_tween().set_parallel()
 
 	if instant:
 		rect_min_size = size
@@ -212,20 +182,12 @@ func _change_rect_size_to(size: Vector2, instant := false) -> void:
 	_next_rect_size = size
 	_percent_transformed = 0.0
 
-	_size_tween.interpolate_property(
-		self,
-		"_percent_transformed",
-		0.0,
-		1.0,
-		SIZE_CHANGE_TIME,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN_OUT
-	)
-
-	_size_tween.start()
+	_size_scene_tween.tween_property(self, "_percent_transformed", 1.0, SIZE_CHANGE_TIME).from(0.0).set_trans(Tween.TRANS_SINE)
+	_size_scene_tween.tween_method(self, "_on_size_tween_step", 0.0, 1.0, SIZE_CHANGE_TIME).set_trans(Tween.TRANS_SINE)
+	_size_scene_tween.connect("finished", self, "_on_size_tween_completed")
 
 func _on_item_rect_changed() -> void:
-	if not _error_tween.is_active() or _error_tween.tell() > ERROR_SHAKE_TIME:
+	if not _error_scene_tween or not _error_scene_tween.is_running() or _error_scene_tween.get_to() > ERROR_SHAKE_TIME:
 		_shake_pos = rect_position.y
 
 	if _choice_container.rect_size.x < rect_size.x:
@@ -251,21 +213,23 @@ func _on_result_container_minimum_size_changed() -> void:
 	if _result_container.visible:
 		_change_rect_size_to(_result_container.rect_size)
 
-func _on_size_tween_step(object: Object, key: NodePath, _elapsed: float, _value: Object) -> void:
-	if object == self and key == ":_percent_transformed" and _next_rect_size != Vector2.ZERO:
+
+func _on_size_tween_step(value: float) -> void:
+	if _next_rect_size != Vector2.ZERO:
 		var new_size := _previous_rect_size
 		var difference := _next_rect_size - _previous_rect_size
-		new_size += difference * _percent_transformed
+		new_size += difference * value
 		rect_min_size = new_size
 
-func _on_size_tween_completed(object: Object, key: NodePath) -> void:
-	if object == self and key == ":_percent_transformed":
-		_next_rect_size = Vector2.ZERO
-		_animating_hint = false
 
-	# To avoid the buttons being clickable after choice view is gone.
-	if object == _choice_container and key == ":modulate:a":
-		_choice_container.hide()
+func _on_fade_tween_completed() -> void:
+	_choice_container.hide()
+
+
+func _on_size_tween_completed() -> void:
+	_next_rect_size = Vector2.ZERO
+	_animating_hint = false
+
 
 
 class AnswerTestResult:

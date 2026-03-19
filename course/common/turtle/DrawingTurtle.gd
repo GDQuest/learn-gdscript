@@ -29,7 +29,8 @@ var _command_stack := []
 # camera.
 var _temp_command_stack = []
 
-var _tween := Tween.new()
+var _scene_tween: SceneTreeTween
+
 
 onready var turn_degrees = rotation_degrees
 
@@ -41,7 +42,6 @@ onready var _camera := $Camera2D as Camera2D
 
 
 func _ready() -> void:
-	add_child(_tween)
 	# Allows to have a camera follow the turtle when using it in practices,
 	# inside the GDQuestBoy.
 	if get_parent() is Viewport:
@@ -126,7 +126,8 @@ func get_polygons() -> Array:
 
 
 func stop_animation() -> void:
-	_tween.remove_all()
+	if _scene_tween:
+		_scene_tween.kill()
 	for line in _canvas.get_children():
 		line.stop()
 
@@ -142,6 +143,7 @@ func play_draw_animation() -> void:
 	var tween_start_time := 0.0
 	var turtle_position := Vector2.ZERO
 	var turtle_rotation_degrees := rotation_degrees
+	_scene_tween = create_tween().set_parallel()
 	for command in _command_stack:
 		var duration := 1.0
 		match command.command:
@@ -153,21 +155,10 @@ func play_draw_animation() -> void:
 				if is_equal_approx(tween_start_time, 0.0):
 					_move_camera(command.target)
 				else:
-					_tween.interpolate_callback(
-						self, tween_start_time, "_move_camera", command.target
-					)
+					_scene_tween.tween_callback(self, "_move_camera", [command.target]).set_delay(tween_start_time)
 			"move_to":
 				duration = turtle_position.distance_to(command.target) / draw_speed / speed_multiplier
-				_tween.interpolate_property(
-					_pivot,
-					"position",
-					turtle_position,
-					command.target,
-					duration,
-					Tween.TRANS_LINEAR,
-					Tween.EASE_IN,
-					tween_start_time
-				)
+				_scene_tween.tween_property(_pivot, "position", command.target, duration).from(turtle_position).set_ease(Tween.EASE_IN).set_delay(tween_start_time)
 				var line := DrawingLine2D.new(
 					turtle_position,
 					command.target,
@@ -180,43 +171,15 @@ func play_draw_animation() -> void:
 			"turn":
 				duration = abs(command.angle) / turn_speed_degrees / speed_multiplier
 				var target_angle: float = round(turtle_rotation_degrees + command.angle)
-				_tween.interpolate_property(
-					_pivot,
-					"rotation_degrees",
-					turtle_rotation_degrees,
-					target_angle,
-					duration,
-					Tween.TRANS_LINEAR,
-					Tween.EASE_IN,
-					tween_start_time
-				)
+				_scene_tween.tween_property(_pivot, "rotation_degrees", target_angle, duration).from(turtle_rotation_degrees).set_ease(Tween.EASE_IN).set_delay(tween_start_time)
 				turtle_rotation_degrees = target_angle
 				tween_start_time += duration
 			"jump":
 				duration = 0.5 / speed_multiplier
-				_tween.interpolate_property(
-					_pivot,
-					"position",
-					turtle_position,
-					turtle_position + command.offset,
-					duration,
-					Tween.TRANS_LINEAR,
-					Tween.EASE_IN,
-					tween_start_time
-				)
-				_tween.interpolate_method(
-					self,
-					"_animate_jump",
-					0.0,
-					1.0,
-					duration,
-					Tween.TRANS_LINEAR,
-					Tween.EASE_IN,
-					tween_start_time
-				)
+				_scene_tween.tween_property(_pivot, "position", turtle_position + command.offset, duration).from(turtle_position).set_ease(Tween.EASE_IN).set_delay(tween_start_time)
+				_scene_tween.tween_method(self, "_animate_jump", 0.0, 1.0, duration).set_ease(Tween.EASE_IN).set_delay(tween_start_time)
 				turtle_position += command.offset
 				tween_start_time += duration
-	_tween.start()
 	for line in _canvas.get_children():
 		line.start()
 
@@ -351,32 +314,25 @@ class DrawingLine2D:
 	const LINE_THICKNESS := 4.0
 	const DEFAULT_COLOR := Color.white
 
-	var _tween := Tween.new()
+	var _tween: SceneTreeTween
 
 	func _init(start: Vector2, end: Vector2, duration: float, start_time: float) -> void:
-		add_child(_tween)
-
 		width = LINE_THICKNESS
 		default_color = DEFAULT_COLOR
 		points = PoolVector2Array([start, start])
 
-		_tween.interpolate_callback(self, start_time, "_spawn_label")
-		_tween.interpolate_method(
-			self,
-			"_animate_drawing",
-			start,
-			end,
-			duration,
-			Tween.TRANS_LINEAR,
-			Tween.EASE_IN,
-			start_time
-		)
+		if not is_inside_tree():
+			yield(self, "ready")
+		
+		_tween = create_tween().set_parallel()
+		_tween.tween_callback(self, "_spawn_label").set_delay(start_time)
+		_tween.tween_method(self, "_animate_drawing", start, end, duration).set_ease(Tween.EASE_IN).set_delay(start_time)
 
 	func start() -> void:
-		_tween.start()
+		_tween.play()
 
 	func stop() -> void:
-		_tween.stop_all()
+		_tween.stop()
 
 	func _animate_drawing(point: Vector2) -> void:
 		points[-1] = point

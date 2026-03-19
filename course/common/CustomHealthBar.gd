@@ -6,7 +6,6 @@ var max_health := 100
 onready var _empty_health_bar := $HealthBarEmpty as ColorRect
 onready var _health_bar := $HealthBarCurrent as ColorRect
 onready var _label := $Label as Label
-onready var _tween := $Tween as Tween
 
 
 func _ready() -> void:
@@ -30,5 +29,5 @@ func _update_bars() -> void:
 	
 	_label.text = "health = %s" % [health]
 	
-	_tween.interpolate_property(_health_bar, "rect_size:x", size_current, size_to, 0.2, Tween.TRANS_EXPO, Tween.EASE_OUT)
-	_tween.start()
+	var tween := create_tween()
+	tween.tween_property(_health_bar, "rect_size:x", size_to, 0.2).from(size_current).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)

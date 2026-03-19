@@ -16,50 +16,33 @@ export var border_width := 0.0 setget set_border_width
 
 onready var _border_style: StyleBoxFlat = get("custom_styles/panel")
 
-onready var _tween := $Tween as Tween
+var _scene_tween: SceneTreeTween
 
 
 func _ready() -> void:
 	set_border_width(0.0)
 	hide()
-	_tween.connect("tween_completed", self, "_on_tween_completed")
 
 
 func appear() -> void:
-	_tween.stop_all()
-	_tween.interpolate_method(
-		self,
-		"set_border_width",
-		0.0,
-		max_border_width,
-		ANIMATION_DURATION,
-		Tween.TRANS_CIRC,
-		Tween.EASE_OUT
-	)
-	_tween.interpolate_property(
-		self, "self_modulate", COLOR_TRANSPARENT, Color.white, ANIMATION_DURATION / 2
-	)
-	_tween.start()
-	_tween.seek(0.0)
+	if _scene_tween:
+		_scene_tween.kill()
+	_scene_tween = create_tween().set_parallel()
+	_scene_tween.connect("finished", self, "_on_tween_completed")
+	
+	_scene_tween.tween_method(self, "set_border_width", 0.0, max_border_width, ANIMATION_DURATION).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+	_scene_tween.tween_property(self, "self_modulate", Color.white, ANIMATION_DURATION / 2).from(COLOR_TRANSPARENT)
 	show()
 
 
 func disappear() -> void:
-	_tween.stop_all()
-	_tween.interpolate_property(
-		self,
-		"border_width",
-		max_border_width,
-		0.0,
-		ANIMATION_DURATION,
-		Tween.TRANS_CIRC,
-		Tween.EASE_OUT
-	)
-	_tween.interpolate_property(
-		self, "self_modulate", Color.white, COLOR_TRANSPARENT, ANIMATION_DURATION / 2
-	)
-	_tween.start()
-	_tween.seek(0.0)
+	if _scene_tween:
+		_scene_tween.kill()
+	_scene_tween = create_tween().set_parallel()
+	_scene_tween.connect("finished", self, "_on_tween_completed")
+	
+	_scene_tween.tween_property(self, "border_width", 0.0, ANIMATION_DURATION).from(max_border_width).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+	_scene_tween.tween_property(self, "self_modulate", COLOR_TRANSPARENT, ANIMATION_DURATION / 2).from(Color.white)
 
 
 func set_max_border_width(new_width: float) -> void:
@@ -78,6 +61,6 @@ func set_border_width(new_width: float) -> void:
 	_border_style.expand_margin_bottom = new_width
 
 
-func _on_tween_completed(_object: Node, _key: String) -> void:
+func _on_tween_completed() -> void:
 	if border_width < 0.1:
 		hide()

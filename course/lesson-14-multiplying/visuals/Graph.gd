@@ -90,7 +90,7 @@ class Polygon:
 	var points := PoolVector2Array() setget , get_points
 	var draw_speed := 400.0
 	var line_2d := Line2D.new()
-	var _tween := Tween.new()
+	var _scene_tween: SceneTreeTween
 	var _current_points := PoolVector2Array()
 	var _current_point_index := 0
 	var _total_distance := 0.0
@@ -99,9 +99,7 @@ class Polygon:
 	signal line_end_moved(new_coordinates)
 
 	func _init(line_draw_speed := 400.0) -> void:
-		add_child(_tween)
 		add_child(line_2d)
-		_tween.connect("tween_all_completed", self, "next")
 		draw_speed = line_draw_speed
 
 	func reset() -> void:
@@ -118,7 +116,6 @@ class Polygon:
 			var distance = previous_point.distance_to(p)
 			previous_point = p
 			_total_distance += distance
-		_tween.stop_all()
 		next()
 
 	func next() -> void:
@@ -135,16 +132,16 @@ class Polygon:
 
 		_current_points.append(starting_point)
 		line_2d.points = _current_points
-		_tween.interpolate_method(
-			self, "_animate_point_position", starting_point, destination, animation_duration
-		)
-		_tween.start()
+		_scene_tween = create_tween()
+		_scene_tween.connect("finished", self, "next")
+		_scene_tween.tween_method(self, "_animate_point_position", starting_point, destination, animation_duration)
 
 	func stop_animation() -> void:
-		_tween.remove_all()
+		if _scene_tween and _scene_tween.is_valid():
+			_scene_tween.kill()
 
 	func is_drawing() -> bool:
-		return _tween.is_active()
+		return _scene_tween and _scene_tween.is_running()
 
 	func _animate_point_position(point: Vector2) -> void:
 		var new_points := _current_points

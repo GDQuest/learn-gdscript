@@ -72,7 +72,7 @@ onready var _practice_leave_unfinished_popup := find_node("PracticeLeaveUnfinish
 
 onready var _code_editor := find_node("CodeEditor") as CodeEditor
 
-onready var _tween := $Tween as Tween
+var _scene_tween: SceneTreeTween
 
 
 func _init():
@@ -489,37 +489,14 @@ func _toggle_distraction_free_mode() -> void:
 
 func _disable_distraction_free_mode() -> void:
 	_is_info_panel_open = true
-	_tween.remove_all()
+	if _scene_tween:
+		_scene_tween.kill()
 
-	_tween.interpolate_property(
-		_info_panel_anchors,
-		"size_flags_stretch_ratio",
-		_info_panel_anchors.size_flags_stretch_ratio,
-		1.0,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN_OUT
-	)
-	_tween.interpolate_property(
-		_code_editor,
-		"size_flags_stretch_ratio",
-		_code_editor.size_flags_stretch_ratio,
-		1.0,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN_OUT
-	)
-	_tween.interpolate_property(
-		_info_panel_anchors,
-		"modulate:a",
-		_info_panel_anchors.modulate.a,
-		1.0,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN
-	)
+	_scene_tween = create_tween().set_parallel()
+	_scene_tween.tween_property(_info_panel_anchors, "size_flags_stretch_ratio", 1.0, SLIDE_TRANSITION_DURATION).from(_info_panel_anchors.size_flags_stretch_ratio).set_trans(Tween.TRANS_SINE)
+	_scene_tween.tween_property(_code_editor, "size_flags_stretch_ratio", 1.0, SLIDE_TRANSITION_DURATION).from(_code_editor.size_flags_stretch_ratio).set_trans(Tween.TRANS_SINE)
+	_scene_tween.tween_property(_info_panel_anchors, "modulate:a", 1.0, SLIDE_TRANSITION_DURATION).from(_info_panel_anchors.modulate.a).set_ease(Tween.EASE_IN)
 
-	_tween.start()
 	_code_editor.set_distraction_free_state(not _is_info_panel_open)
 
 
@@ -527,38 +504,14 @@ func _enable_distraction_free_mode() -> void:
 	_update_slidable_panels()
 
 	_is_info_panel_open = false
-	_tween.remove_all()
+	if _scene_tween:
+		_scene_tween.kill()
+	_scene_tween = create_tween().set_parallel()
 
-	_tween.interpolate_property(
-		_info_panel_anchors,
-		"size_flags_stretch_ratio",
-		_info_panel_anchors.size_flags_stretch_ratio,
-		0.0,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN_OUT
-	)
-	_tween.interpolate_property(
-		_code_editor,
-		"size_flags_stretch_ratio",
-		_code_editor.size_flags_stretch_ratio,
-		2.0,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN_OUT
-	)
-	_tween.interpolate_property(
-		_info_panel_anchors,
-		"modulate:a",
-		_info_panel_anchors.modulate.a,
-		0.0,
-		SLIDE_TRANSITION_DURATION - 0.25,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN,
-		0.15
-	)
+	_scene_tween.tween_property(_info_panel_anchors, "size_flags_stretch_ratio", 0.0, SLIDE_TRANSITION_DURATION).from(_info_panel_anchors.size_flags_stretch_ratio).set_trans(Tween.TRANS_SINE)
+	_scene_tween.tween_property(_code_editor, "size_flags_stretch_ratio", 2.0, SLIDE_TRANSITION_DURATION).from(_code_editor.size_flags_stretch_ratio).set_trans(Tween.TRANS_SINE)
+	_scene_tween.tween_property(_info_panel_anchors, "modulate:a", 0.0, SLIDE_TRANSITION_DURATION - 0.25).from(_info_panel_anchors.modulate.a).set_ease(Tween.EASE_IN).set_delay(0.15)
 
-	_tween.start()
 	_code_editor.set_distraction_free_state(not _is_info_panel_open)
 
 
@@ -573,59 +526,24 @@ func _show_solution_panel() -> void:
 	_update_slidable_panels()
 
 	_is_solution_panel_open = true
-	_tween.remove_all()
+	if _scene_tween:
+		_scene_tween.kill()
+	_scene_tween = create_tween().set_parallel()
 
-	_tween.interpolate_property(
-		_solution_panel,
-		"margin_left",
-		_solution_panel.margin_left,
-		0.0,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN_OUT
-	)
-
-	_tween.interpolate_property(
-		_solution_panel,
-		"modulate:a",
-		_solution_panel.modulate.a,
-		1.0,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN
-	)
-
-	_tween.start()
+	_scene_tween.tween_property(_solution_panel, "margin_left", 0.0, SLIDE_TRANSITION_DURATION).from(_solution_panel.margin_left).set_trans(Tween.TRANS_SINE)
+	_scene_tween.tween_property(_solution_panel, "modulate:a", 1.0, SLIDE_TRANSITION_DURATION).from(_solution_panel.modulate.a).set_ease(Tween.EASE_IN)
 
 
 func _hide_solution_panel() -> void:
 	_update_slidable_panels()
 
 	_is_solution_panel_open = false
-	_tween.remove_all()
+	if _scene_tween:
+		_scene_tween.kill()
+	_scene_tween = create_tween().set_parallel()
 
-	_tween.interpolate_property(
-		_solution_panel,
-		"margin_left",
-		_solution_panel.margin_left,
-		_output_anchors.rect_size.x,
-		SLIDE_TRANSITION_DURATION,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN_OUT
-	)
-
-	_tween.interpolate_property(
-		_solution_panel,
-		"modulate:a",
-		_solution_panel.modulate.a,
-		0.0,
-		SLIDE_TRANSITION_DURATION - 0.25,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN,
-		0.15
-	)
-
-	_tween.start()
+	_scene_tween.tween_property(_solution_panel, "margin_left", _output_anchors.rect_size.x, SLIDE_TRANSITION_DURATION).from(_solution_panel.margin_left).set_trans(Tween.TRANS_SINE)
+	_scene_tween.tween_property(_solution_panel, "modulate:a", 0.0, SLIDE_TRANSITION_DURATION - 0.25).from(_solution_panel.modulate.a).set_ease(Tween.EASE_IN).set_delay(0.15)
 
 
 func _on_use_solution_pressed() -> void:
