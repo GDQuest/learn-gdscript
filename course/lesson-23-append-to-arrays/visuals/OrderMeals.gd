@@ -99,11 +99,11 @@ class Meal extends VBoxContainer:
 	func _ready() -> void:
 		modulate.a = 0.0
 		scene_tween = create_tween().set_parallel()
-		scene_tween.tween_property(self, "modulate:a", 1, 1).from(0).set_ease(Tween.EASE_OUT)
+		scene_tween.tween_property(self, "modulate:a", 1.0, 1).from(0).set_ease(Tween.EASE_OUT)
 		if time > 0:
 			texture.texture = TEXTURE_UNCHECKED
 			scene_tween.connect("finished", self, "_on_tween_completed")
-			scene_tween.tween_property(progress, "value", 100.0, time).from(0)
+			scene_tween.tween_property(progress, "value", 100.0, time).from(0.0)
 		else:
 			texture.texture = TEXTURE_CHECKED
 			progress.value = 100
@@ -116,4 +116,4 @@ class Meal extends VBoxContainer:
 		texture.texture = TEXTURE_CHECKED
 		emit_signal("meal_ready")
 		scene_tween = create_tween()
-		scene_tween.tween_property(self, "modulate:a", 0, 1).from(modulate.a).set_ease(Tween.EASE_IN)
+		scene_tween.tween_property(self, "modulate:a", 0.0, 1).from(modulate.a).set_ease(Tween.EASE_IN)

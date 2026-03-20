@@ -155,9 +155,9 @@ func _show_answer(gave_correct_answer := true) -> void:
 	#Hiding choice view upon completion of the following tween
 	var fade_tween := create_tween().set_parallel()
 	
-	var choice_step := fade_tween.tween_property(_choice_container, "modulate:a", 0, FADE_OUT_TIME).from(1)
-	choice_step.connect("finished", self, "_on_fade_tween_completed")
-	fade_tween.tween_property(_result_container, "modulate:a", 1, FADE_IN_TIME).from(0)
+	var choice_step := fade_tween.tween_property(_choice_container, "modulate:a", 0.0, FADE_OUT_TIME).from(1.0)
+	choice_step.connect("finished", _choice_container, "hide")
+	fade_tween.tween_property(_result_container, "modulate:a", 1.0, FADE_IN_TIME).from(0.0)
 
 	if gave_correct_answer:
 		emit_signal("quiz_passed")
@@ -169,6 +169,7 @@ func _show_answer(gave_correct_answer := true) -> void:
 		_correct_answer_label.show()
 		_correct_answer_label.text = _quiz_data.get_correct_answer_string()
 		emit_signal("quiz_skipped")
+
 
 func _change_rect_size_to(size: Vector2, instant := false) -> void:
 
@@ -221,10 +222,6 @@ func _on_size_tween_step(value: float) -> void:
 		var difference := _next_rect_size - _previous_rect_size
 		new_size += difference * value
 		rect_min_size = new_size
-
-
-func _on_fade_tween_completed() -> void:
-	_choice_container.hide()
 
 
 func _on_size_tween_completed() -> void:
