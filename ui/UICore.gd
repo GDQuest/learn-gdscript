@@ -5,7 +5,8 @@ const LoadingScreen := preload("./LoadingScreen.gd")
 const ReportFormPopup := preload("./components/popups/ReportFormPopup.gd")
 const SettingsPopup := preload("./components/popups/SettingsPopup.gd")
 
-export var default_course := "res://course/CourseLearnGDScriptIndex.gd"
+export var default_course_id := "learn_gdscript"
+export var default_course_path := "res://course/CourseLearnGDScriptIndex.gd"
 
 var _unloading_target: Control
 var _loading_target: Control
@@ -92,7 +93,7 @@ func _on_course_requested(force_outliner: bool = false) -> void:
 	_loading_screen.progress_value = 0.5
 	yield(get_tree(), "idle_frame")
 
-	if default_course.empty():
+	if default_course_path.empty():
 		# We completely failed, chief!
 		printerr("Missing the default course path, make sure to set it in the UICore scene.")
 		return
@@ -101,7 +102,7 @@ func _on_course_requested(force_outliner: bool = false) -> void:
 	# is faster. Consider using ResourceLoader.load_interactive() for progress updates in the future.
 	var course_navigator_scene := load("res://ui/UINavigator.tscn") as PackedScene
 	_course_navigator = course_navigator_scene.instance()
-	_course_navigator.course_index = load(default_course).new() as CourseIndex
+	_course_navigator.course_index = load(default_course_path).new() as CourseIndex
 
 	var user_profile = UserProfiles.get_profile()
 	var lesson_id = user_profile.get_last_started_lesson(_course_navigator.course_index.get_course_id())
@@ -148,11 +149,11 @@ func _go_to_welcome_screen() -> void:
 
 
 func _update_welcome_button() -> void:
-	if default_course.empty():
+	if default_course_id.empty():
 		return
 
 	var user_profile = UserProfiles.get_profile()
-	var lesson_id = user_profile.get_last_started_lesson(default_course)
+	var lesson_id = user_profile.get_last_started_lesson(default_course_id)
 	_welcome_screen.set_button_continue(not lesson_id.empty())
 
 
