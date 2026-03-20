@@ -187,7 +187,7 @@ func _change_rect_size_to(size: Vector2, instant := false) -> void:
 	_size_scene_tween.connect("finished", self, "_on_size_tween_completed")
 
 func _on_item_rect_changed() -> void:
-	if not _error_scene_tween or not _error_scene_tween.is_running() or _error_scene_tween.get_to() > ERROR_SHAKE_TIME:
+	if not _error_scene_tween or not _error_scene_tween.is_running() or _error_scene_tween.get_total_elapsed_time() > ERROR_SHAKE_TIME:
 		_shake_pos = rect_position.y
 
 	if _choice_container.rect_size.x < rect_size.x:
