@@ -65,16 +65,16 @@ func _animate_progress() -> void:
 		return
 	
 	_state = State.LOADING
-	if _scene_tween:
-		_scene_tween.kill()
-	_scene_tween = create_tween()
-	_scene_tween.connect("finished", self, "_on_tween_finished")
 
 	if _progress_bar.value == progress_value:
 		_state = State.IDLE
 		emit_signal("loading_finished")
 		return
 
+	if _scene_tween:
+		_scene_tween.kill()
+	_scene_tween = create_tween()
+	_scene_tween.connect("finished", self, "_on_tween_finished")
 	_scene_tween.tween_property(_progress_bar, "value", progress_value, PROGRESS_DURATION).from(_progress_bar.value).set_trans(Tween.TRANS_CUBIC)
 
 

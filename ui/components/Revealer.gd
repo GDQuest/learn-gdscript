@@ -340,10 +340,6 @@ func _toggle_content(expanded: bool, immediate: bool = false) -> void:
 		return
 
 	# Animate the change smoothly.
-	if _scene_tween:
-		_scene_tween.kill()
-	_scene_tween = create_tween().set_parallel()
-	_scene_tween.connect("finished", self, "_on_tween_completed")
 	
 	for child_node in get_children():
 		var control_node := child_node as Control
@@ -353,11 +349,14 @@ func _toggle_content(expanded: bool, immediate: bool = false) -> void:
 		if expanded:
 			control_node.visible = true
 
+	if _scene_tween:
+		_scene_tween.kill()
+	_scene_tween = create_tween().set_parallel()
+	_scene_tween.connect("finished", self, "_on_tween_completed")
 	_scene_tween.tween_property(_toggle_icon, "rect_rotation", 90.0 * int(expanded), ANIMATION_ICON_DURATION).from(_toggle_icon.rect_rotation).set_trans(Tween.TRANS_QUAD)
 
 	var final_value := 1.0 * int(expanded)
 	_scene_tween.tween_property(self, "_percent_revealed", final_value, ANIMATION_REVEAL_DURATION).from(1.0 - final_value).set_trans(Tween.TRANS_QUAD)
-	
 	_scene_tween.tween_method(self, "_on_tween_step", 0, 1.0, ANIMATION_REVEAL_DURATION)
 
 

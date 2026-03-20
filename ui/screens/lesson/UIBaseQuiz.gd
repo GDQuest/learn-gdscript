@@ -122,15 +122,16 @@ func _test_answer() -> void:
 		result = _test_answer_against_quiz(_get_answers().back())
 	_help_message.text = result.help_message
 	_help_message.visible = not result.help_message.empty()
-	if _error_scene_tween:
-		_error_scene_tween.kill()
-	_error_scene_tween = create_tween().set_parallel()
 	
 	if not result.is_correct:
 		_outline.modulate.a = 1.0
 		_outline.add_stylebox_override("panel", ERROR_OUTLINE)
 
 		rect_position.y = _shake_pos
+		
+		if _error_scene_tween:
+			_error_scene_tween.kill()
+		_error_scene_tween = create_tween().set_parallel()
 		_error_scene_tween.tween_property(self, "rect_position:y", _shake_pos, ERROR_SHAKE_TIME).from(_shake_pos + ERROR_SHAKE_SIZE).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 		_error_scene_tween.tween_property(_outline, "modulate:a", 0.0, OUTLINE_FLASH_DURATION).from(_outline.modulate.a).set_ease(Tween.EASE_IN)
 	else:
@@ -170,9 +171,6 @@ func _show_answer(gave_correct_answer := true) -> void:
 		emit_signal("quiz_skipped")
 
 func _change_rect_size_to(size: Vector2, instant := false) -> void:
-	if _size_scene_tween:
-		_size_scene_tween.kill()
-	_size_scene_tween = create_tween().set_parallel()
 
 	if instant:
 		rect_min_size = size
@@ -182,6 +180,9 @@ func _change_rect_size_to(size: Vector2, instant := false) -> void:
 	_next_rect_size = size
 	_percent_transformed = 0.0
 
+	if _size_scene_tween:
+		_size_scene_tween.kill()
+	_size_scene_tween = create_tween().set_parallel()
 	_size_scene_tween.tween_property(self, "_percent_transformed", 1.0, SIZE_CHANGE_TIME).from(0.0).set_trans(Tween.TRANS_SINE)
 	_size_scene_tween.tween_method(self, "_on_size_tween_step", 0.0, 1.0, SIZE_CHANGE_TIME).set_trans(Tween.TRANS_SINE)
 	_size_scene_tween.connect("finished", self, "_on_size_tween_completed")
