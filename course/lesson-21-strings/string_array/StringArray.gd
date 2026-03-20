@@ -13,10 +13,10 @@ func _run() -> void:
 	play_combo()
 	Events.emit_signal("practice_run_completed")
 
-
-# We use this internal queue because we need to yield between animations and 
+# We use this internal queue because we need to yield between animations and
 # we can't have the student do that in their for loop at this stage.
 var _animation_queue := []
+
 
 func play_combo() -> void:
 	for action in _animation_queue:
@@ -24,15 +24,14 @@ func play_combo() -> void:
 			_animation_tree.travel(action)
 			yield(_animation_tree, "animation_finished")
 
-
-var combo = []
-
 # EXPORT combo
+var combo = ["jab", "jab", "uppercut"]
+
 func run():
-	combo = ["jab", "jab", "uppercut"]
 	for animation_name in combo:
 		play_animation(animation_name)
 # /EXPORT combo
+
 
 func play_animation(action: String) -> void:
 	_animation_queue.append(action)

@@ -77,18 +77,18 @@ In this practice, we'll chain together animations using an array of strings. You
 
 The robot has the following animation names:
 
-- [code]jab[/code] (makes the robot perform a quick punch)
-- [code]uppercut[/code] (the robot uses a powerful jumping punch)
+- [code]"jab"[/code] (makes the robot perform a quick punch)
+- [code]"uppercut"[/code] (the robot uses a powerful jumping punch)
 
-Populate the combo array with animation names as strings.
+I defined the [code]combo[/code] variable at the top of the script. Fill its array with three animation names: two jabs followed by one uppercut.
 
-Then, for each action in the array, call the [code]play_animation()[/code] function to play them.
-
-The array should contain three values, so the robot makes these three attacks: two jabs followed by one uppercut.
+Then, in the [code]run()[/code] function, write a [code]for[/code] loop that goes through each item in the [code]combo[/code] variable and calls [code]play_animation()[/code] with that animation name.
 [/goal]
 [starting_code]
+var combo = []
+
 func run():
-	combo = []
+	pass
 [/starting_code]
 [cursor line="0" column="0"]
 [validator path="string_array/TestsStringArray.gd"]
