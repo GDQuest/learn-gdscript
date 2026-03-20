@@ -3,37 +3,33 @@ extends PanelContainer
 const CourseLessonList := preload("res://ui/screens/course_outliner/CourseLessonList.gd")
 const LessonDetails := preload("./CourseLessonDetails.gd")
 
+@export var _title_label: Label
+@export var _lesson_list: CourseLessonList
+@export var _lesson_details: LessonDetails
+@export var _reset_button: Button
+@export var _reset_confirm_popup: ConfirmPopup
 
-var course_index: CourseIndex setget set_course
+var course_index: CourseIndex: set = set_course
 var _current_lesson: BBCodeParser.ParseNode
 var _current_practice: BBCodeParser.ParseNode
 
 var _last_selected_lesson := ""
 
-onready var _title_label := $MarginContainer/Layout/TitleBox/TitleLabel as Label
-onready var _lesson_list := $MarginContainer/Layout/HBoxContainer/LeftColumn/LessonList as CourseLessonList
-onready var _lesson_details := $MarginContainer/Layout/HBoxContainer/LessonDetails as LessonDetails
-
-onready var _reset_button := (
-	$MarginContainer/Layout/HBoxContainer/LeftColumn/PanelContainer/Buttons/ResetButton as Button
-)
-onready var _reset_confirm_popup := $ConfirmResetPopup as ConfirmPopup
-
 
 func _ready() -> void:
 	_update_outliner_index()
 
-	Events.connect("lesson_started", self, "_on_lesson_started")
-	Events.connect("lesson_reading_block", self, "_on_lesson_reading_block")
-	Events.connect("quiz_completed", self, "_on_quiz_completed")
-	Events.connect("practice_started", self, "_on_practice_started")
-	Events.connect("practice_completed", self, "_on_practice_completed")
-	Events.connect("lesson_completed", self, "_on_lesson_completed")
-	Events.connect("course_completed", self, "_on_course_completed")
+	Events.connect("lesson_started", Callable(self, "_on_lesson_started"))
+	Events.connect("lesson_reading_block", Callable(self, "_on_lesson_reading_block"))
+	Events.connect("quiz_completed", Callable(self, "_on_quiz_completed"))
+	Events.connect("practice_started", Callable(self, "_on_practice_started"))
+	Events.connect("practice_completed", Callable(self, "_on_practice_completed"))
+	Events.connect("lesson_completed", Callable(self, "_on_lesson_completed"))
+	Events.connect("course_completed", Callable(self, "_on_course_completed"))
 
-	_lesson_list.connect("lesson_selected", self, "_on_lesson_selected")
-	_reset_button.connect("pressed", self, "_on_reset_requested")
-	_reset_confirm_popup.connect("confirmed", self, "_on_reset_confirmed")
+	_lesson_list.connect("lesson_selected", Callable(self, "_on_lesson_selected"))
+	_reset_button.connect("pressed", Callable(self, "_on_reset_requested"))
+	_reset_confirm_popup.connect("confirmed", Callable(self, "_on_reset_confirmed"))
 
 
 func set_course(value: CourseIndex) -> void:
@@ -66,7 +62,7 @@ func _update_outliner_index() -> void:
 		var completion := _calculate_lesson_completion(lesson_data, lesson_progress)
 		_lesson_list.add_item(lesson_index, BBCodeUtils.get_lesson_title(lesson_data), completion)
 
-		if not _last_selected_lesson.empty() and lesson_data.bbcode_path == _last_selected_lesson:
+		if not _last_selected_lesson.is_empty() and lesson_data.bbcode_path == _last_selected_lesson:
 			_reselect_index = lesson_index
 
 		lesson_index += 1
@@ -91,7 +87,7 @@ func _calculate_lesson_completion(lesson_data: BBCodeParser.ParseNode, lesson_pr
 	completion += lesson_progress.get_completed_quizzes_count(lesson_data)
 	completion += lesson_progress.get_completed_practices_count(lesson_data)
 
-	return int(clamp(float(completion) / float(max_completion) * 100, 0, 100))
+	return clampi(int(float(completion) / float(max_completion) * 100), 0, 100)
 
 
 func _on_lesson_selected(lesson_index: int) -> void:
@@ -186,7 +182,7 @@ func _on_lesson_completed(_lesson_data: BBCodeParser.ParseNode) -> void:
 	_update_outliner_index()
 
 
-func _on_course_completed(_course_data: Reference) -> void:
+func _on_course_completed(_course_data: RefCounted) -> void:
 	_update_outliner_index()
 
 

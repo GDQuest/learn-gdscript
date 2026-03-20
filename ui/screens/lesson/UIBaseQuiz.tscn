@@ -1,171 +1,145 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene format=3 uid="uid://076jcmgwamwb"]
 
-[ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=1]
-[ext_resource path="res://ui/theme/fonts/font_text_bold_italics.tres" type="DynamicFont" id=2]
-[ext_resource path="res://ui/theme/panel_darker.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=4]
-[ext_resource path="res://ui/icons/checkmark_valid.svg" type="Texture" id=5]
-[ext_resource path="res://ui/screens/lesson/UIBaseQuiz.gd" type="Script" id=6]
-[ext_resource path="res://ui/theme/button_outline_normal.tres" type="StyleBox" id=7]
-[ext_resource path="res://ui/theme/button_outline_hover.tres" type="StyleBox" id=8]
-[ext_resource path="res://ui/theme/button_outline_pressed.tres" type="StyleBox" id=9]
-[ext_resource path="res://ui/theme/button_outline_focus.tres" type="StyleBox" id=10]
+[ext_resource type="FontVariation" uid="uid://buul432qy6di5" path="res://ui/theme/fonts/font_title_small.tres" id="1"]
+[ext_resource type="FontVariation" uid="uid://tjdlgxmq2imy" path="res://ui/theme/fonts/font_text_bold_italics.tres" id="2"]
+[ext_resource type="StyleBox" path="res://ui/theme/panel_darker.tres" id="3"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="4"]
+[ext_resource type="Texture2D" uid="uid://botjmjx4xso5i" path="res://ui/icons/checkmark_valid.svg" id="5"]
+[ext_resource type="Script" uid="uid://canpc1deciatk" path="res://ui/screens/lesson/UIBaseQuiz.gd" id="6"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_normal.tres" id="7"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_hover.tres" id="8"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_pressed.tres" id="9"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_focus.tres" id="10"]
 
-[node name="UIBaseQuiz" type="PanelContainer"]
-margin_right = 400.0
-margin_bottom = 202.0
-rect_min_size = Vector2( 400, 0 )
-theme = ExtResource( 4 )
-custom_styles/panel = ExtResource( 3 )
-script = ExtResource( 6 )
+[node name="UIBaseQuiz" type="PanelContainer" unique_id=555159795 node_paths=PackedStringArray("_outline", "_question", "_explanation", "_content", "_completed_before_icon", "_choice_container", "_result_container", "_submit_button", "_skip_button", "_result_label", "_correct_answer_label", "_help_message")]
+custom_minimum_size = Vector2(400, 0)
+offset_right = 400.0
+offset_bottom = 202.0
+theme = ExtResource("4")
+theme_override_styles/panel = ExtResource("3")
+script = ExtResource("6")
+_outline = NodePath("Outline")
+_question = NodePath("ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader/Question")
+_explanation = NodePath("ClipContentBoundary/ResultContainer/ResultView/Explanation")
+_content = NodePath("ClipContentBoundary/ChoiceContainer/ChoiceView/Content")
+_completed_before_icon = NodePath("ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader/CompletedBeforeIcon")
+_choice_container = NodePath("ClipContentBoundary/ChoiceContainer")
+_result_container = NodePath("ClipContentBoundary/ResultContainer")
+_submit_button = NodePath("ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer/SubmitButton")
+_skip_button = NodePath("ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer/SkipButton")
+_result_label = NodePath("ClipContentBoundary/ResultContainer/ResultView/Label")
+_correct_answer_label = NodePath("ClipContentBoundary/ResultContainer/ResultView/CorrectAnswer")
+_help_message = NodePath("ClipContentBoundary/ChoiceContainer/ChoiceView/HelpMessage")
 
-[node name="Outline" type="PanelContainer" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-margin_right = 400.0
-margin_bottom = 202.0
+[node name="Outline" type="PanelContainer" parent="." unique_id=1216537051]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
 
-[node name="ClipContentBoundary" type="Control" parent="."]
-margin_right = 400.0
-margin_bottom = 202.0
-rect_clip_content = true
+[node name="ClipContentBoundary" type="Control" parent="." unique_id=501705969]
+clip_contents = true
+layout_mode = 2
 
-[node name="ChoiceContainer" type="MarginContainer" parent="ClipContentBoundary"]
-margin_right = 400.0
-margin_bottom = 202.0
-rect_clip_content = true
+[node name="ChoiceContainer" type="MarginContainer" parent="ClipContentBoundary" unique_id=1474703389]
+clip_contents = true
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 202.0
 
-[node name="ChoiceView" type="VBoxContainer" parent="ClipContentBoundary/ChoiceContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 380.0
-margin_bottom = 182.0
+[node name="ChoiceView" type="VBoxContainer" parent="ClipContentBoundary/ChoiceContainer" unique_id=2060584242]
+layout_mode = 2
 
-[node name="QuizHeader" type="HBoxContainer" parent="ClipContentBoundary/ChoiceContainer/ChoiceView"]
-margin_right = 360.0
-margin_bottom = 30.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="QuizHeader" type="HBoxContainer" parent="ClipContentBoundary/ChoiceContainer/ChoiceView" unique_id=1071973747]
+layout_mode = 2
 
-[node name="Question" type="RichTextLabel" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader"]
-margin_right = 320.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 0, 30 )
+[node name="Question" type="RichTextLabel" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader" unique_id=595174536]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
-bbcode_text = "[b]Question[/b]"
-meta_underlined = false
 text = "Question"
-fit_content_height = true
+fit_content = true
 scroll_active = false
+meta_underlined = false
 
-[node name="CompletedBeforeIcon" type="TextureRect" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader"]
-modulate = Color( 1, 1, 1, 0.235294 )
-margin_left = 336.0
-margin_right = 360.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "You've already answered this quiz correctly before.
+[node name="CompletedBeforeIcon" type="TextureRect" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader" unique_id=1174371104]
+modulate = Color(1, 1, 1, 0.235294)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "You've already answered this quiz correctly before.
 Feel free to try it again to refresh your memory!"
-texture = ExtResource( 5 )
-expand = true
+texture = ExtResource("5")
+expand_mode = 1
 stretch_mode = 6
 
-[node name="Content" type="RichTextLabel" parent="ClipContentBoundary/ChoiceContainer/ChoiceView"]
-margin_top = 46.0
-margin_right = 360.0
-margin_bottom = 75.0
+[node name="Content" type="RichTextLabel" parent="ClipContentBoundary/ChoiceContainer/ChoiceView" unique_id=785271005]
+layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-bbcode_text = "Explanation"
 text = "Explanation"
-fit_content_height = true
+fit_content = true
 
-[node name="Answers" type="VBoxContainer" parent="ClipContentBoundary/ChoiceContainer/ChoiceView"]
-margin_top = 91.0
-margin_right = 360.0
-margin_bottom = 91.0
+[node name="Answers" type="VBoxContainer" parent="ClipContentBoundary/ChoiceContainer/ChoiceView" unique_id=278723037]
+layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ClipContentBoundary/ChoiceContainer/ChoiceView"]
-margin_top = 107.0
-margin_right = 360.0
-margin_bottom = 162.0
+[node name="HBoxContainer" type="HBoxContainer" parent="ClipContentBoundary/ChoiceContainer/ChoiceView" unique_id=1363033946]
+layout_mode = 2
 alignment = 1
 
-[node name="SkipButton" type="Button" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer"]
-margin_left = 52.0
-margin_right = 172.0
-margin_bottom = 55.0
-rect_min_size = Vector2( 120, 0 )
-hint_tooltip = "You need to try to answer once before you can skip a quiz."
+[node name="SkipButton" type="Button" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer" unique_id=1660805853]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+tooltip_text = "You need to try to answer once before you can skip a quiz."
 mouse_default_cursor_shape = 2
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 9 )
-custom_styles/focus = ExtResource( 10 )
-custom_styles/normal = ExtResource( 7 )
+theme_override_styles/normal = ExtResource("7")
+theme_override_styles/pressed = ExtResource("9")
+theme_override_styles/hover = ExtResource("8")
+theme_override_styles/focus = ExtResource("10")
 disabled = true
 text = "Skip"
 
-[node name="SubmitButton" type="Button" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer"]
-margin_left = 188.0
-margin_right = 308.0
-margin_bottom = 55.0
-rect_min_size = Vector2( 120, 0 )
+[node name="SubmitButton" type="Button" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer" unique_id=684218590]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
 mouse_default_cursor_shape = 2
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 9 )
-custom_styles/focus = ExtResource( 10 )
-custom_styles/normal = ExtResource( 7 )
+theme_override_styles/normal = ExtResource("7")
+theme_override_styles/pressed = ExtResource("9")
+theme_override_styles/hover = ExtResource("8")
+theme_override_styles/focus = ExtResource("10")
 text = "Submit"
 
-[node name="HelpMessage" type="Label" parent="ClipContentBoundary/ChoiceContainer/ChoiceView"]
+[node name="HelpMessage" type="Label" parent="ClipContentBoundary/ChoiceContainer/ChoiceView" unique_id=262574087]
 visible = false
-margin_top = 208.0
-margin_right = 360.0
-margin_bottom = 236.0
-custom_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
-autowrap = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.14902, 0.776471, 0.968627, 1)
 
-[node name="ResultContainer" type="MarginContainer" parent="ClipContentBoundary"]
+[node name="ResultContainer" type="MarginContainer" parent="ClipContentBoundary" unique_id=79260002]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
-margin_right = 400.0
-margin_bottom = 111.0
-rect_clip_content = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+modulate = Color(1, 1, 1, 0)
+clip_contents = true
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 111.0
 
-[node name="ResultView" type="VBoxContainer" parent="ClipContentBoundary/ResultContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 380.0
-margin_bottom = 91.0
+[node name="ResultView" type="VBoxContainer" parent="ClipContentBoundary/ResultContainer" unique_id=1730954392]
+layout_mode = 2
 
-[node name="Label" type="Label" parent="ClipContentBoundary/ResultContainer/ResultView"]
-margin_right = 360.0
-margin_bottom = 26.0
-custom_colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
-custom_fonts/font = ExtResource( 1 )
+[node name="Label" type="Label" parent="ClipContentBoundary/ResultContainer/ResultView" unique_id=1147822428]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.960784, 0.980392, 0.980392, 1)
+theme_override_fonts/font = ExtResource("1")
 text = "You're right!"
 
-[node name="CorrectAnswer" type="Label" parent="ClipContentBoundary/ResultContainer/ResultView"]
+[node name="CorrectAnswer" type="Label" parent="ClipContentBoundary/ResultContainer/ResultView" unique_id=1113016439]
 visible = false
-margin_top = 42.0
-margin_right = 600.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 600, 0 )
-custom_colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
-custom_fonts/font = ExtResource( 2 )
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
+theme_override_fonts/font = ExtResource("2")
 text = "Answers here"
-autowrap = true
 
-[node name="Explanation" type="RichTextLabel" parent="ClipContentBoundary/ResultContainer/ResultView"]
-margin_top = 42.0
-margin_right = 360.0
-margin_bottom = 71.0
+[node name="Explanation" type="RichTextLabel" parent="ClipContentBoundary/ResultContainer/ResultView" unique_id=1244972795]
+layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-bbcode_text = "Explanation"
 text = "Explanation"
-fit_content_height = true
+fit_content = true

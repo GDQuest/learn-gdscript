@@ -8,7 +8,7 @@ script/source = "extends Node2D
 
 signal goal_reached
 
-onready var tween := $Tween as Tween
+@onready var tween := $Tween as Tween
 
 var move_queue := []
 var points := []
@@ -30,8 +30,8 @@ func _play_move_animation():
 	while target_cell:
 		tween.interpolate_property(self, \"position\", position, get_parent().cell_to_position(target_cell), 0.2)
 		tween.start()
-		yield(tween, \"tween_all_completed\")
-		yield(get_tree().create_timer(0.2), \"timeout\")
+		await tween.tween_all_completed
+		await get_tree().create_timer(0.2).timeout
 		target_cell = move_queue.pop_front()
 	emit_signal(\"goal_reached\")
 "

@@ -5,71 +5,71 @@
 [sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_scale")
+tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ) ]
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath(".:rect_scale:x")
+tracks/1/path = NodePath(".:scale:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath(".:rect_scale:y")
+tracks/2/path = NodePath(".:scale:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
 }
 
 [sub_resource type="Animation" id=2]
 resource_name = "pop"
 length = 0.4
 tracks/0/type = "bezier"
-tracks/0/path = NodePath(".:rect_scale:x")
+tracks/0/path = NodePath(".:scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 1e-05, -0.25, 0, 0.19528, 1.99369, 0.99637, -0.0634901, 0.0207652, 0.2, 0.0492506 ),
-"times": PoolRealArray( 0, 0.398256 )
+"points": PackedFloat32Array( 1e-05, -0.25, 0, 0.19528, 1.99369, 0.99637, -0.0634901, 0.0207652, 0.2, 0.0492506 ),
+"times": PackedFloat32Array( 0, 0.398256 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath(".:rect_scale:y")
+tracks/1/path = NodePath(".:scale:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 1e-05, -0.25, 0, 0.097159, 2.83044, 0.993921, -0.161476, 0.170011, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.396332 )
+"points": PackedFloat32Array( 1e-05, -0.25, 0, 0.097159, 2.83044, 0.993921, -0.161476, 0.170011, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.396332 )
 }
 
 [node name="DrawingTurtleLabel" type="PanelContainer"]
-margin_left = -19.0
-margin_top = -19.0
-margin_right = 19.0
-margin_bottom = 19.0
-rect_pivot_offset = Vector2( 19, 19 )
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 19.0
+offset_bottom = 19.0
+pivot_offset = Vector2( 19, 19 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_styles/panel = ExtResource( 1 )
+theme_override_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

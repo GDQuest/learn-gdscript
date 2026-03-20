@@ -7,7 +7,7 @@
 script/source = "extends Node2D
 
 
-onready var _animation_tree := find_node(\"AnimationTree\")
+@onready var _animation_tree := find_child(\"AnimationTree\")
 
 
 func run() -> void:
@@ -15,33 +15,33 @@ func run() -> void:
 "
 
 [node name="PanelContainer" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
+offset_right = 14.0
+offset_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 247.0
-margin_bottom = 227.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 247.0
+offset_bottom = 227.0
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 240.0
-margin_bottom = 220.0
+offset_right = 240.0
+offset_bottom = 220.0
 
 [node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="0"]
 visible = false
 
 [node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-margin_left = 71.0
+offset_left = 71.0
 text = "Level Up!"
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
-margin_left = 244.0
-margin_right = 644.0
-margin_bottom = 260.0
+offset_left = 244.0
+offset_right = 644.0
+offset_bottom = 260.0
 
 [node name="RobotLevel" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 position = Vector2( -7, -7 )

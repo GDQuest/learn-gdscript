@@ -13,7 +13,7 @@ func move(delta):
 	position.x += speed * delta
 
 
-onready var start_position = position
+@onready var start_position = position
 
 func reset():
 	position = start_position
@@ -28,7 +28,7 @@ func move(delta):
 	position.x += distance
 
 
-onready var start_position = position
+@onready var start_position = position
 
 func reset():
 	position = start_position
@@ -52,10 +52,10 @@ position = Vector2( -67, 220 )
 script = SubResource( 3 )
 
 [node name="Label" type="Label" parent="Robots"]
-margin_left = -292.0
-margin_right = -152.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 140, 0 )
+offset_left = -292.0
+offset_right = -152.0
+offset_bottom = 14.0
+custom_minimum_size = Vector2( 140, 0 )
 text = "With delta"
 align = 2
 __meta__ = {
@@ -63,11 +63,11 @@ __meta__ = {
 }
 
 [node name="Label2" type="Label" parent="Robots"]
-margin_left = -308.0
-margin_top = 150.0
-margin_right = -152.0
-margin_bottom = 164.0
-rect_min_size = Vector2( 140, 0 )
+offset_left = -308.0
+offset_top = 150.0
+offset_right = -152.0
+offset_bottom = 164.0
+custom_minimum_size = Vector2( 140, 0 )
 text = "Constant distance"
 align = 2
 __meta__ = {

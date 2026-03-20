@@ -29,23 +29,23 @@ var _command_stack := []
 # camera.
 var _temp_command_stack = []
 
-var _scene_tween: SceneTreeTween
+var _scene_tween: Tween
 
 
-onready var turn_degrees = rotation_degrees
+@onready var turn_degrees = rotation_degrees
 
-onready var _pivot := $Pivot as Node2D
-onready var _sprite := $Pivot/Sprite as Sprite
-onready var _shadow := $Pivot/Shadow as Sprite
-onready var _canvas := $Canvas as Node2D
-onready var _camera := $Camera2D as Camera2D
+@onready var _pivot := $Pivot as Node2D
+@onready var _sprite := $Pivot/Sprite2D as Sprite2D
+@onready var _shadow := $Pivot/Shadow as Sprite2D
+@onready var _canvas := $Canvas as Node2D
+@onready var _camera := $Camera2D as Camera2D
 
 
 func _ready() -> void:
 	# Allows to have a camera follow the turtle when using it in practices,
 	# inside the GDQuestBoy.
-	if get_parent() is Viewport:
-		_camera.set_as_toplevel(true)
+	if get_parent() is SubViewport:
+		_camera.set_as_top_level(true)
 		_camera.position = global_position
 		_camera.make_current()
 
@@ -53,10 +53,10 @@ func _ready() -> void:
 # Virtually moves the turtle and records a new vertex.
 func move_forward(distance: float) -> void:
 	_handle_position_setting()
-	if _points.empty():
+	if _points.is_empty():
 		_points.append(Vector2.ZERO)
 
-	var new_point := position + Vector2.RIGHT.rotated(deg2rad(turn_degrees)) * distance
+	var new_point := position + Vector2.RIGHT.rotated(deg_to_rad(turn_degrees)) * distance
 	new_point = new_point.snapped(Vector2.ONE)
 	_points.append(new_point)
 	position = new_point
@@ -91,7 +91,7 @@ func turn_left(angle_degrees: float) -> void:
 # new start position.
 func jump(x: float, y: float) -> void:
 	_handle_position_setting()
-	var last_point := Vector2.ZERO if _points.empty() else _points[-1]
+	var last_point: Vector2 = Vector2.ZERO if _points.is_empty() else _points[-1]
 	_close_polygon()
 
 	position += Vector2(x, y)
@@ -155,7 +155,7 @@ func play_draw_animation() -> void:
 				if is_equal_approx(tween_start_time, 0.0):
 					_move_camera(command.target)
 				else:
-					_scene_tween.tween_callback(self, "_move_camera", [command.target]).set_delay(tween_start_time)
+					_scene_tween.tween_callback(Callable(self, "_move_camera").bind(command.target)).set_delay(tween_start_time)
 			"move_to":
 				duration = turtle_position.distance_to(command.target) / draw_speed / speed_multiplier
 				_scene_tween.tween_property(_pivot, "position", command.target, duration).from(turtle_position).set_ease(Tween.EASE_IN).set_delay(tween_start_time)
@@ -163,7 +163,8 @@ func play_draw_animation() -> void:
 					turtle_position,
 					command.target,
 					duration,
-					tween_start_time
+					tween_start_time,
+					get_tree()
 				)
 				_canvas.add_child(line)
 				turtle_position = command.target
@@ -177,7 +178,7 @@ func play_draw_animation() -> void:
 			"jump":
 				duration = 0.5 / speed_multiplier
 				_scene_tween.tween_property(_pivot, "position", turtle_position + command.offset, duration).from(turtle_position).set_ease(Tween.EASE_IN).set_delay(tween_start_time)
-				_scene_tween.tween_method(self, "_animate_jump", 0.0, 1.0, duration).set_ease(Tween.EASE_IN).set_delay(tween_start_time)
+				_scene_tween.tween_method(Callable(self, "_animate_jump"), 0.0, 1.0, duration).set_ease(Tween.EASE_IN).set_delay(tween_start_time)
 				turtle_position += command.offset
 				tween_start_time += duration
 	for line in _canvas.get_children():
@@ -221,10 +222,10 @@ func _close_polygon() -> void:
 	# position property. It works differently from jump() which offsets the
 	# turtle from its position.
 	polygon.position = position
-	polygon.points = PoolVector2Array(_points)
+	polygon.points = PackedVector2Array(_points)
 	_polygons.append(polygon)
 	var center := Vector2.ZERO
-	if not _points.empty():
+	if not _points.is_empty():
 		var bounds := Rect2(_points[0], Vector2.ZERO)
 		for point in _points:
 			bounds = bounds.expand(point)
@@ -240,11 +241,11 @@ func _close_polygon() -> void:
 func _handle_position_setting() -> void:
 	# When the user accesses and adjusts the position variable directly, we must
 	# detect this, close the polygon, and add to the command stack.
-	if _points.empty() and position.is_equal_approx(Vector2.ZERO):
+	if _points.is_empty() and position.is_equal_approx(Vector2.ZERO):
 		return
 
 	var previous_point = Vector2.ZERO
-	if not _points.empty():
+	if not _points.is_empty():
 		previous_point = _points[-1]
 	if not position.is_equal_approx(previous_point):
 		_temp_command_stack.append({command = "set_position", target = position})
@@ -260,7 +261,7 @@ func _move_camera(target_global_position: Vector2) -> void:
 class Polygon:
 	extends Node2D
 
-	var points := PoolVector2Array() setget , get_points
+	var points := PackedVector2Array(): get = get_points
 
 	# Returns the local bounds of the polygon. That is to say, it only takes the
 	# point into account in local space, but not the polygon's `position`.
@@ -293,10 +294,10 @@ class Polygon:
 		var rect := get_rect()
 		return (rect.position + rect.end) / 2.0 + global_position
 
-	func get_points() -> PoolVector2Array:
+	func get_points() -> PackedVector2Array:
 		var local_points = []
 		var first_point = Vector2.ZERO
-		if not points.empty():
+		if not points.is_empty():
 			first_point = points[0]
 
 		for point in points:
@@ -304,7 +305,7 @@ class Polygon:
 		return local_points
 
 	func is_empty():
-		return points.empty() or points == PoolVector2Array([Vector2.ZERO])
+		return points.is_empty() or points == PackedVector2Array([Vector2.ZERO])
 
 
 class DrawingLine2D:
@@ -312,21 +313,18 @@ class DrawingLine2D:
 
 	const LabelScene := preload("DrawingTurtleLabel.tscn")
 	const LINE_THICKNESS := 4.0
-	const DEFAULT_COLOR := Color.white
+	const DEFAULT_COLOR := Color.WHITE
 
-	var _tween: SceneTreeTween
+	var _tween: Tween
 
-	func _init(start: Vector2, end: Vector2, duration: float, start_time: float) -> void:
+	func _init(start: Vector2, end: Vector2, duration: float, start_time: float, tree: SceneTree) -> void:
 		width = LINE_THICKNESS
 		default_color = DEFAULT_COLOR
-		points = PoolVector2Array([start, start])
+		points = PackedVector2Array([start, start])
 
-		if not is_inside_tree():
-			yield(self, "ready")
-		
-		_tween = create_tween().set_parallel()
-		_tween.tween_callback(self, "_spawn_label").set_delay(start_time)
-		_tween.tween_method(self, "_animate_drawing", start, end, duration).set_ease(Tween.EASE_IN).set_delay(start_time)
+		_tween = tree.create_tween().set_parallel().bind_node(self)
+		_tween.tween_callback(Callable(self, "_spawn_label")).set_delay(start_time)
+		_tween.tween_method(Callable(self, "_animate_drawing"), start, end, duration).set_ease(Tween.EASE_IN).set_delay(start_time)
 
 	func start() -> void:
 		_tween.play()
@@ -338,6 +336,6 @@ class DrawingLine2D:
 		points[-1] = point
 
 	func _spawn_label() -> void:
-		var label := LabelScene.instance() as PanelContainer
-		label.rect_position = points[0] - label.rect_size / 2
+		var label := LabelScene.instantiate() as PanelContainer
+		label.position = points[0] - label.size / 2
 		add_child(label)

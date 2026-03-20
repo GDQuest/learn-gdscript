@@ -3,24 +3,24 @@
 [ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
 [ext_resource path="res://ui/theme/focus_accent.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/theme/fonts/font_button_big_green.tres" type="DynamicFont" id=4]
+[ext_resource path="res://ui/theme/fonts/font_button_big_green.tres" type="FontFile" id=4]
 [ext_resource path="res://ui/components/BigGreenButton.gd" type="Script" id=5]
 [ext_resource path="res://ui/theme/button_outline_large_accent.tres" type="StyleBox" id=6]
 
 [node name="BigGreenButton" type="Button"]
-margin_top = 896.0
-margin_right = 356.0
-margin_bottom = 976.0
-rect_min_size = Vector2( 0, 80 )
+offset_top = 896.0
+offset_right = 356.0
+offset_bottom = 976.0
+custom_minimum_size = Vector2( 0, 80 )
 mouse_default_cursor_shape = 2
 theme = ExtResource( 2 )
-custom_colors/font_color_hover = Color( 0.239216, 1, 0.431373, 1 )
-custom_colors/font_color_pressed = Color( 0.239216, 1, 0.431373, 1 )
-custom_fonts/font = ExtResource( 4 )
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 3 )
-custom_styles/normal = ExtResource( 1 )
+theme_override_colors/font_hover_color = Color( 0.239216, 1, 0.431373, 1 )
+theme_override_colors/font_pressed_color = Color( 0.239216, 1, 0.431373, 1 )
+theme_override_fonts/font = ExtResource( 4 )
+theme_override_styles/hover = ExtResource( 6 )
+theme_override_styles/pressed = ExtResource( 6 )
+theme_override_styles/focus = ExtResource( 3 )
+theme_override_styles/normal = ExtResource( 1 )
 text = "Button"
 script = ExtResource( 5 )
 __meta__ = {

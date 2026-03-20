@@ -3,19 +3,19 @@ extends Node2D
 const LINE_WIDTH := 4.0
 const COLOR_SELECTED_CELL := Color(0.14902, 0.776471, 0.968627)
 
-export var board_size := Vector2(6, 4)
-export var cell_size := Vector2(80, 80)
-export var label_font: Resource
+@export var board_size := Vector2(6, 4)
+@export var cell_size := Vector2(80, 80)
+@export var label_font: Resource
 
 var board_size_px := cell_size * board_size
 
 # Maps cell positions to nodes
-var units: Dictionary setget set_units
+var units: Dictionary: set = set_units
 
 var selected_units := []
 
 var _label_container := Control.new()
-onready var turtle := $Turtle
+@onready var turtle := $Turtle
 
 
 func _ready() -> void:
@@ -33,7 +33,7 @@ func _ready() -> void:
 
 func _run():
 	run()
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	Events.emit_signal("practice_run_completed")
 
 
@@ -55,7 +55,7 @@ func run():
 func _draw() -> void:
 	for x in range(board_size.x):
 		for y in range(board_size.y):
-			draw_rect(Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, cell_size), Color.white, false, LINE_WIDTH)
+			draw_rect(Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, cell_size), Color.WHITE, false, LINE_WIDTH)
 
 	#TODO: select units
 	for cell in selected_units:
@@ -68,10 +68,10 @@ func _draw() -> void:
 		for y in board_size.y:
 			var cell = Vector2(x, y)
 			var label = Label.new()
-			label.add_font_override("font", label_font)
+			label.add_theme_font_override("font", label_font)
 			label.text = str(cell)
 			_label_container.add_child(label)
-			label.rect_position = calculate_cell_position(cell) - label.rect_size / 2.0
+			label.position = calculate_cell_position(cell) - label.size / 2.0
 
 
 func select_units(cells: Array) -> void:

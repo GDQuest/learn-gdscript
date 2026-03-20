@@ -6,12 +6,16 @@
 class_name CodeEditorEnhancer
 extends Node
 
+const GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH := "res://ui/theme/gdscript_syntax_highlighter.tres"
+
 const COLOR_CLASS := Color(0.666667, 0, 0.729412)
-const COLOR_MEMBER := Color(0.14902, 0.776471, 0.968627)
+const COLOR_MEMBER := Color(0.32, 0.82, 0.97)
 const COLOR_KEYWORD := Color(1, 0.094118, 0.321569)
 const COLOR_QUOTES := Color(1, 0.960784, 0.25098)
 const COLOR_COMMENTS := Color(0.290196, 0.294118, 0.388235)
 const COLOR_NUMBERS := Color(0.922, 0.580, 0.200)
+const COLOR_SYMBOLS := Color(0.407, 0.587, 1.0)
+const COLOR_FUNCTIONS := Color(0.34, 0.69, 1.0)
 const KEYWORDS := [
 	
 	# Basic keywords.
@@ -71,7 +75,7 @@ const KEYWORDS := [
 	"assert",
 	"atan",
 	"atan2",
-	"bytes2var",
+	"bytes_to_var",
 	"cartesian2polar",
 	"ceil",
 	"char",
@@ -79,11 +83,11 @@ const KEYWORDS := [
 	"convert",
 	"cos",
 	"cosh",
-	"db2linear",
+	"db_to_linear",
 	"decials",
-	"dectime",
-	"deg2rad",
-	"dict2inst",
+	"move_toward",
+	"deg_to_rad",
+	"dict_to_inst",
 	"ease",
 	"expo",
 	"floor",
@@ -91,14 +95,14 @@ const KEYWORDS := [
 	"fposmod",
 	"funcref",
 	"hash",
-	"inst2dict",
+	"inst_to_dict",
 	"instance_from_id",
 	"inverse_lerp",
 	"is_inf",
 	"is_nan",
 	"len",
 	"lerp",
-	"linear2db",
+	"linear_to_db",
 	"load",
 	"log",
 	"max",
@@ -114,31 +118,31 @@ const KEYWORDS := [
 	"printraw",
 	"prints",
 	"printt",
-	"rad2deg",
-	"rand_range",
+	"rad_to_deg",
+	"randf_range",
 	"rand_seed",
 	"randf",
 	"randi",
 	"randomize",
 	"range",
-	"range_lerp",
+	"remap",
 	"round",
 	"seed",
 	"sign",
 	"sin",
 	"sinh",
 	"sqrt",
-	"stepify",
+	"snapped",
 	"str",
-	"str2var",
+	"str_to_var",
 	"tan",
 	"tanh",
-	"to_json",
+	"JSON.new().stringify",
 	"type_exists",
 	"typeof",
 	"validate_json",
-	"var2bytes",
-	"var2str",
+	"var_to_bytes",
+	"var_to_str",
 	"weakref",
 	"wrapf",
 	"wrapi",
@@ -149,24 +153,45 @@ const KEYWORDS := [
 ]
 
 # Enhances a TextEdit to better highlight GDScript code.
-static func enhance(text_edit: TextEdit) -> void:
-	text_edit.syntax_highlighting = true
-	text_edit.show_line_numbers = true
+static func enhance(text_edit: CodeEdit) -> void:
+	text_edit.syntax_highlighter = load(GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH).duplicate()
+	text_edit.gutters_draw_line_numbers = true
 	text_edit.draw_tabs = true
 	text_edit.draw_spaces = true
-	text_edit.smooth_scrolling = true
+	text_edit.scroll_smooth = true
 	text_edit.caret_blink = true
-	text_edit.wrap_enabled = false
+	text_edit.wrap_mode = TextEdit.LINE_WRAPPING_NONE
 
-	text_edit.add_color_region('"', '"', COLOR_QUOTES)
-	text_edit.add_color_region("'", "'", COLOR_QUOTES)
-	text_edit.add_color_region("#", "\n", COLOR_COMMENTS, true)
+
+static func _input_event_bypass(event: InputEvent, target: Control) -> void:
+	if event is InputEventKey:
+		target.accept_event()
+
+
+static func prevent_editable(text_edit: CodeEdit) -> void:
+	text_edit.gui_input.connect(_input_event_bypass.bind(text_edit))
+
+
+static func enhance_highlighter(highlighter: CodeHighlighter) -> void:
+	highlighter.number_color = COLOR_NUMBERS
+	highlighter.member_variable_color = COLOR_MEMBER
+	highlighter.function_color = COLOR_FUNCTIONS
+	highlighter.symbol_color = COLOR_SYMBOLS
+	
+	highlighter.clear_color_regions()
+	highlighter.clear_keyword_colors()
+	highlighter.clear_member_keyword_colors()
+	highlighter.clear_highlighting_cache()
+	
+	highlighter.add_color_region("'", "'", COLOR_QUOTES)
+	highlighter.add_color_region('"', '"', COLOR_QUOTES)
+	highlighter.add_color_region("#", "", COLOR_COMMENTS, true)
 
 	for classname in ClassDB.get_class_list():
-		text_edit.add_keyword_color(classname, COLOR_CLASS)
-		for member in ClassDB.class_get_property_list(classname):
-			for key in member:
-				text_edit.add_keyword_color(key, COLOR_MEMBER)
+		highlighter.add_keyword_color(classname, COLOR_CLASS)
+		for member: Dictionary in ClassDB.class_get_property_list(classname):
+			var member_name: String = member.name
+			highlighter.add_member_keyword_color(member_name, COLOR_MEMBER)
 
-	for keyword in KEYWORDS:
-		text_edit.add_keyword_color(keyword, COLOR_KEYWORD)
+	for keyword: String in KEYWORDS:
+		highlighter.add_keyword_color(keyword, COLOR_KEYWORD)

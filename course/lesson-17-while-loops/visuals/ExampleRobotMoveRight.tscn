@@ -36,16 +36,16 @@ func _update_label() -> void:
 "
 
 [node name="PanelContainer" type="PanelContainer"]
-margin_right = 658.0
-margin_bottom = 384.0
+offset_right = 658.0
+offset_bottom = 384.0
 size_flags_horizontal = 3
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 651.0
-margin_bottom = 377.0
-rect_min_size = Vector2( 0, 370 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 651.0
+offset_bottom = 377.0
+custom_minimum_size = Vector2( 0, 370 )
 script = SubResource( 1 )
 gdscript_code = "func move_to_right():
 	cell.x += 1
@@ -61,9 +61,9 @@ scale = Vector2( 0.75, 0.75 )
 script = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="RunnableCodeExample/GridVisual"]
-margin_right = 153.0
-margin_bottom = 17.0
-rect_pivot_offset = Vector2( 76, 17 )
+offset_right = 153.0
+offset_bottom = 17.0
+pivot_offset = Vector2( 76, 17 )
 text = "cell = Vector2(0, 1)"
 align = 1
 valign = 1

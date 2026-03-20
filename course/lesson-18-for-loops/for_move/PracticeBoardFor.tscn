@@ -7,7 +7,7 @@
 script/source = "extends Node2D
 
 
-var cell := Vector2(0, 0) setget set_cell, get_cell
+var cell := Vector2(0, 0): get = get_cell, set = set_cell
 var cell_size := 96
 
 
@@ -34,10 +34,10 @@ script = SubResource( 1 )
 
 [node name="Label" type="Label" parent="."]
 visible = false
-margin_left = 48.0
-margin_top = -54.0
-margin_right = 201.0
-margin_bottom = -40.0
+offset_left = 48.0
+offset_top = -54.0
+offset_right = 201.0
+offset_bottom = -40.0
 text = "cell = Vector2(0, 1)"
 __meta__ = {
 "_edit_use_anchors_": false

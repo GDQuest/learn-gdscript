@@ -1,15 +1,15 @@
 extends Node2D
 
-export var board_size := Vector2(5, 3) setget set_board_size
-export var cell_size := Vector2(80, 80)
-export var line_width := 4
-export var draw_cell_coordinates := false
+@export var board_size := Vector2(5, 3): set = set_board_size
+@export var cell_size := Vector2(80, 80)
+@export var line_width := 4
+@export var draw_cell_coordinates := false
 
 var board_size_px := cell_size * board_size
 
 var _placed_units := []
 
-onready var units_map := {
+@onready var units_map := {
 	"robot": $Robot,
 	"turtle": $Turtle,
 }
@@ -30,7 +30,7 @@ func reset():
 func _run():
 	clear_units()
 	run()
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	Events.emit_signal("practice_run_completed")
 
 # EXPORT run
@@ -52,7 +52,7 @@ func run():
 func _draw() -> void:
 	for x in range(board_size.x):
 		for y in range(board_size.y):
-			draw_rect(Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, Vector2.ONE * cell_size), Color.white, false, line_width)
+			draw_rect(Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, Vector2.ONE * cell_size), Color.WHITE, false, line_width)
 
 
 func clear_units():

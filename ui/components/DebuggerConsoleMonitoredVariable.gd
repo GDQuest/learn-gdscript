@@ -1,25 +1,21 @@
 extends PanelContainer
 
-var values := [] setget set_values
+@export var _label: Label
+var values := []: set = set_values
 
-onready var _label := $Label as Label
-
-var _tween: SceneTreeTween
 
 
 func set_values(new_values: Array) -> void:
 	values = new_values
 	if not is_inside_tree():
-		yield(self, "ready")
+		await self.ready
 
-	var message = PoolStringArray(new_values).join(" ")
+	var message = " ".join(PackedStringArray(new_values))
 
 	if _label.text == message:
 		return
 
 	_label.text = message
 
-	if _tween:
-		_tween.kill()
-	_tween = create_tween()
-	_tween.tween_property(self, "self_modulate:a", 0.25, 1.5).from(1.0)
+	var tween = create_tween()
+	tween.tween_property(self, "self_modulate:a", 0.25, 1.5).from(1.0)

@@ -1,13 +1,13 @@
 extends Control
 
 
-onready var item_nodes := {
-	"healing heart": find_node("HealingHeart"),
-	"gems": find_node("Gems"),
-	"sword": find_node("Sword"),
+@onready var item_nodes := {
+	"healing heart": find_child("HealingHeart"),
+	"gems": find_child("Gems"),
+	"sword": find_child("Sword"),
 }
 
-onready var _grid := $Margin/Column/Grid as GridContainer
+@onready var _grid := $Margin/Column/Grid as GridContainer
 
 
 func _ready() -> void:
@@ -48,7 +48,7 @@ func run():
 func _run():
 	clear_drawing()
 	run()
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	Events.emit_signal("practice_run_completed")
 
 

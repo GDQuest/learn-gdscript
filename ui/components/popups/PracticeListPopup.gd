@@ -2,16 +2,16 @@ extends ColorRect
 
 const PracticeButtonScene := preload("res://ui/screens/lesson/UIPracticeButton.tscn")
 
-onready var _practice_items := $PanelContainer/Column/Margin/Column/PracticeList/Items as Control
-onready var _cancel_button := $PanelContainer/Column/Margin/Column/Buttons/CancelButton as Button
+@onready var _practice_items := $PanelContainer/Column/Margin/Column/PracticeList/Items as Control
+@onready var _cancel_button := $PanelContainer/Column/Margin/Column/Buttons/CancelButton as Button
 
 
 func _ready() -> void:
-	set_as_toplevel(true)
+	set_as_top_level(true)
 
-	Events.connect("practice_requested", self, "_on_practice_requested")
-	_cancel_button.connect("pressed", self, "hide")
-	connect("visibility_changed", self, "_on_visibility_changed")
+	Events.connect("practice_requested", Callable(self, "_on_practice_requested"))
+	_cancel_button.connect("pressed", Callable(self, "hide"))
+	connect("visibility_changed", Callable(self, "_on_visibility_changed"))
 
 
 
@@ -27,7 +27,7 @@ func clear_items() -> void:
 
 
 func add_item(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, course_index: CourseIndex, current: bool = false) -> void:
-	var button: UIPracticeButton = PracticeButtonScene.instance()
+	var button: UIPracticeButton = PracticeButtonScene.instantiate()
 	var practice_id := BBCodeUtils.get_practice_id(practice)
 	var practice_index := -1
 	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)

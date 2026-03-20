@@ -1,72 +1,56 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://b0p3dbj5sajyl"]
 
-[ext_resource path="res://ui/icons/icon_pause.png" type="Texture" id=2]
-[ext_resource path="res://ui/components/GameView.gd" type="Script" id=3]
-[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=4]
+[ext_resource type="Texture2D" uid="uid://d0cjya5j3qxpn" path="res://ui/icons/icon_pause.png" id="2"]
+[ext_resource type="Script" uid="uid://bc2g0cacxdkg2" path="res://ui/components/GameView.gd" id="3"]
+[ext_resource type="FontVariation" uid="uid://cipfqcm3yp0sc" path="res://ui/theme/fonts/font_text_bold.tres" id="4"]
 
-[sub_resource type="StyleBoxEmpty" id=1]
+[sub_resource type="StyleBoxEmpty" id="1"]
 
-[node name="GameView" type="PanelContainer"]
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 585.0
-margin_bottom = 606.0
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
+[node name="GameView" type="PanelContainer" unique_id=911031022 node_paths=PackedStringArray("_viewport_container", "_pause_rect")]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 585.0
+offset_bottom = 606.0
+theme_override_styles/panel = SubResource("1")
+script = ExtResource("3")
+_viewport_container = NodePath("SubViewportContainer")
+_pause_rect = NodePath("PauseRect")
 
-[node name="ViewportContainer" type="ViewportContainer" parent="."]
-pause_mode = 1
-margin_right = 573.0
-margin_bottom = 594.0
-rect_min_size = Vector2( 100, 0 )
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=324934379]
+process_mode = 1
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="PauseRect" type="ColorRect" parent="."]
+[node name="PauseRect" type="ColorRect" parent="." unique_id=11987188]
 visible = false
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 565.0
-margin_bottom = 586.0
-color = Color( 0.0352941, 0.0392157, 0.129412, 0.309804 )
+layout_mode = 2
+color = Color(0.0352941, 0.0392157, 0.129412, 0.309804)
 
-[node name="PauseLabel" type="HBoxContainer" parent="PauseRect"]
+[node name="PauseLabel" type="HBoxContainer" parent="PauseRect" unique_id=825331161]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -48.0
-margin_top = -62.0
-margin_right = 48.0
-margin_bottom = -16.0
+offset_left = -48.0
+offset_top = -62.0
+offset_right = 48.0
+offset_bottom = -16.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
-custom_constants/separation = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme_override_constants/separation = 8
 
-[node name="TextureRect" type="TextureRect" parent="PauseRect/PauseLabel"]
-margin_top = 11.0
-margin_right = 24.0
-margin_bottom = 35.0
-rect_min_size = Vector2( 24, 24 )
+[node name="TextureRect" type="TextureRect" parent="PauseRect/PauseLabel" unique_id=1235661049]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource( 2 )
-expand = true
+texture = ExtResource("2")
+expand_mode = 1
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="PauseRect/PauseLabel"]
-margin_left = 32.0
-margin_top = 9.0
-margin_right = 105.0
-margin_bottom = 37.0
-custom_fonts/font = ExtResource( 4 )
+[node name="Label" type="Label" parent="PauseRect/PauseLabel" unique_id=1171648724]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4")
 text = "Paused"

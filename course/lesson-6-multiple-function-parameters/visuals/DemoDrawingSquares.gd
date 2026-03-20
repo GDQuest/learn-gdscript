@@ -2,7 +2,7 @@ extends Node2D
 
 var size := 40.0
 
-onready var _turtle: DrawingTurtle = $DrawingTurtle
+@onready var _turtle: DrawingTurtle = $DrawingTurtle
 
 
 func run():

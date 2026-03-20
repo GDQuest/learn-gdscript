@@ -1,102 +1,85 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene format=3 uid="uid://e8nf20q1f60d"]
 
-[ext_resource path="res://ui/screens/course_outliner/CourseOutliner.gd" type="Script" id=1]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
-[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=3]
-[ext_resource path="res://ui/screens/course_outliner/CourseLessonList.tscn" type="PackedScene" id=4]
-[ext_resource path="res://ui/theme/fonts/font_title_slim.tres" type="DynamicFont" id=5]
-[ext_resource path="res://ui/screens/course_outliner/CourseLessonDetails.tscn" type="PackedScene" id=6]
-[ext_resource path="res://ui/components/popups/ConfirmPopup.tscn" type="PackedScene" id=7]
+[ext_resource type="Script" uid="uid://bfpid7jc46r62" path="res://ui/screens/course_outliner/CourseOutliner.gd" id="1"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
+[ext_resource type="FontVariation" uid="uid://bmjmlneuj5aky" path="res://ui/theme/fonts/font_title.tres" id="3"]
+[ext_resource type="PackedScene" path="res://ui/screens/course_outliner/CourseLessonList.tscn" id="4"]
+[ext_resource type="FontVariation" uid="uid://d3ldpsb1178ju" path="res://ui/theme/fonts/font_title_slim.tres" id="5"]
+[ext_resource type="PackedScene" path="res://ui/screens/course_outliner/CourseLessonDetails.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://ui/components/popups/ConfirmPopup.tscn" id="7"]
 
-[node name="CourseOutliner" type="PanelContainer"]
+[node name="CourseOutliner" type="PanelContainer" unique_id=695105099 node_paths=PackedStringArray("_title_label", "_lesson_list", "_lesson_details", "_reset_button", "_reset_confirm_popup")]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
-theme = ExtResource( 2 )
-script = ExtResource( 1 )
+theme = ExtResource("2")
+script = ExtResource("1")
+_title_label = NodePath("MarginContainer/Layout/TitleBox/TitleLabel")
+_lesson_list = NodePath("MarginContainer/Layout/HBoxContainer/LeftColumn/LessonList")
+_lesson_details = NodePath("MarginContainer/Layout/HBoxContainer/LessonDetails")
+_reset_button = NodePath("MarginContainer/Layout/HBoxContainer/LeftColumn/PanelContainer/Buttons/ResetButton")
+_reset_confirm_popup = NodePath("ConfirmResetPopup")
 
-[node name="ClearColor" type="ColorRect" parent="."]
-margin_right = 1920.0
-margin_bottom = 1080.0
-color = Color( 0.188235, 0.188235, 0.286275, 1 )
+[node name="ClearColor" type="ColorRect" parent="." unique_id=1439216820]
+layout_mode = 2
+color = Color(0.188235, 0.188235, 0.286275, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 1920.0
-margin_bottom = 1080.0
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=171084803]
+layout_mode = 2
 
-[node name="Layout" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1900.0
-margin_bottom = 1060.0
+[node name="Layout" type="VBoxContainer" parent="MarginContainer" unique_id=754030920]
+layout_mode = 2
 
-[node name="TitleBox" type="HBoxContainer" parent="MarginContainer/Layout"]
-margin_right = 1880.0
-margin_bottom = 31.0
-custom_constants/separation = 0
+[node name="TitleBox" type="HBoxContainer" parent="MarginContainer/Layout" unique_id=1134699094]
+layout_mode = 2
+theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/Layout/TitleBox"]
-margin_left = 708.0
-margin_right = 887.0
-margin_bottom = 31.0
-custom_fonts/font = ExtResource( 5 )
+[node name="Label" type="Label" parent="MarginContainer/Layout/TitleBox" unique_id=162856062]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5")
 text = "Course Index - "
 
-[node name="TitleLabel" type="Label" parent="MarginContainer/Layout/TitleBox"]
-margin_left = 887.0
-margin_right = 1172.0
-margin_bottom = 31.0
-custom_fonts/font = ExtResource( 3 )
+[node name="TitleLabel" type="Label" parent="MarginContainer/Layout/TitleBox" unique_id=1650628784]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3")
 text = "Course Title Goes Here"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Layout"]
-margin_top = 47.0
-margin_right = 1880.0
-margin_bottom = 1040.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Layout" unique_id=1089064792]
+layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="LeftColumn" type="VBoxContainer" parent="MarginContainer/Layout/HBoxContainer"]
-margin_left = 402.0
-margin_right = 1042.0
-margin_bottom = 993.0
+[node name="LeftColumn" type="VBoxContainer" parent="MarginContainer/Layout/HBoxContainer" unique_id=371607661]
+layout_mode = 2
 
-[node name="LessonList" parent="MarginContainer/Layout/HBoxContainer/LeftColumn" instance=ExtResource( 4 )]
-margin_right = 640.0
-margin_bottom = 930.0
+[node name="LessonList" parent="MarginContainer/Layout/HBoxContainer/LeftColumn" unique_id=1141099537 instance=ExtResource("4")]
+layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Layout/HBoxContainer/LeftColumn"]
-margin_top = 946.0
-margin_right = 640.0
-margin_bottom = 993.0
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Layout/HBoxContainer/LeftColumn" unique_id=1856694102]
+layout_mode = 2
 
-[node name="Buttons" type="HBoxContainer" parent="MarginContainer/Layout/HBoxContainer/LeftColumn/PanelContainer"]
-margin_right = 640.0
-margin_bottom = 47.0
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/Layout/HBoxContainer/LeftColumn/PanelContainer" unique_id=695176687]
+layout_mode = 2
 
-[node name="ResetButton" type="Button" parent="MarginContainer/Layout/HBoxContainer/LeftColumn/PanelContainer/Buttons"]
-margin_right = 206.0
-margin_bottom = 47.0
+[node name="ResetButton" type="Button" parent="MarginContainer/Layout/HBoxContainer/LeftColumn/PanelContainer/Buttons" unique_id=1800407149]
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Reset Progress"
 
-[node name="LessonDetails" parent="MarginContainer/Layout/HBoxContainer" instance=ExtResource( 6 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 1058.0
-margin_right = 1478.0
-margin_bottom = 993.0
+[node name="LessonDetails" parent="MarginContainer/Layout/HBoxContainer" unique_id=1508243306 instance=ExtResource("6")]
+layout_mode = 2
 
-[node name="ConfirmResetPopup" parent="." instance=ExtResource( 7 )]
+[node name="ConfirmResetPopup" parent="." unique_id=311974735 instance=ExtResource("7")]
 visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 1920.0
-margin_bottom = 1080.0
+top_level = true
+layout_mode = 2
 title = "Confirm Resetting Progress"
 text_content = "[center]Are you sure you want to reset the course progress?
 This cannot be undone.[/center]"
-min_size = Vector2( 420, 320 )
+min_size = Vector2(420, 320)
 strict = true

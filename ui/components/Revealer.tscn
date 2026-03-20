@@ -1,100 +1,89 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene format=3 uid="uid://cvl6pxx3qb736"]
 
-[ext_resource path="res://ui/icons/chevron.png" type="Texture" id=1]
-[ext_resource path="res://ui/components/Revealer.gd" type="Script" id=2]
-[ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=3]
-[ext_resource path="res://ui/theme/revealer_content_panel.tres" type="StyleBox" id=4]
-[ext_resource path="res://ui/theme/revealer_title_panel.tres" type="StyleBox" id=5]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=6]
-[ext_resource path="res://ui/theme/fonts/font_button_small.tres" type="DynamicFont" id=7]
+[ext_resource type="Texture2D" uid="uid://dyb1ekfp11ff3" path="res://ui/icons/chevron.png" id="1"]
+[ext_resource type="Script" uid="uid://mr52ykocftq3" path="res://ui/components/Revealer.gd" id="2"]
+[ext_resource type="FontVariation" uid="uid://buul432qy6di5" path="res://ui/theme/fonts/font_title_small.tres" id="3"]
+[ext_resource type="StyleBox" path="res://ui/theme/revealer_content_panel.tres" id="4"]
+[ext_resource type="StyleBox" path="res://ui/theme/revealer_title_panel.tres" id="5"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="6"]
+[ext_resource type="FontVariation" uid="uid://cbser3h81h3th" path="res://ui/theme/fonts/font_button_small.tres" id="7"]
 
-[sub_resource type="StyleBoxEmpty" id=1]
+[sub_resource type="StyleBoxEmpty" id="1"]
 
-[sub_resource type="StyleBoxEmpty" id=3]
+[sub_resource type="StyleBoxEmpty" id="6"]
 
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="StyleBoxEmpty" id="4"]
 
-[sub_resource type="StyleBoxEmpty" id=2]
+[sub_resource type="StyleBoxEmpty" id="3"]
 
-[sub_resource type="StyleBoxEmpty" id=5]
+[sub_resource type="StyleBoxEmpty" id="5"]
 
-[sub_resource type="StyleBoxEmpty" id=6]
+[sub_resource type="StyleBoxEmpty" id="2"]
 
-[node name="Revealer" type="Container"]
-margin_right = 136.0
-margin_bottom = 46.0
-rect_clip_content = true
-theme = ExtResource( 6 )
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-title_font = ExtResource( 3 )
-title_panel = ExtResource( 5 )
-content_panel = ExtResource( 4 )
-
-[node name="Tween" type="Tween" parent="."]
-
-[node name="ToggleBar" type="PanelContainer" parent="."]
-modulate = Color( 1, 1, 1, 0.65 )
-margin_left = 8.0
-margin_top = 10.0
-margin_right = 128.0
-margin_bottom = 36.0
-rect_min_size = Vector2( 120, 0 )
+[node name="Revealer" type="Container" unique_id=1296495712 node_paths=PackedStringArray("_toggle_bar", "_toggle_button", "_toggle_label", "_toggle_icon_anchor", "_toggle_icon")]
+clip_contents = true
+offset_right = 136.0
+offset_bottom = 46.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 1 )
+theme = ExtResource("6")
+script = ExtResource("2")
+title_font = ExtResource("3")
+title_panel = ExtResource("5")
+content_panel = ExtResource("4")
+_toggle_bar = NodePath("ToggleBar")
+_toggle_button = NodePath("ToggleBar/ToggleCapturer")
+_toggle_label = NodePath("ToggleBar/BarLayout/Label")
+_toggle_icon_anchor = NodePath("ToggleBar/BarLayout/ToggleIcon")
+_toggle_icon = NodePath("ToggleBar/BarLayout/ToggleIcon/Texture2D")
 
-[node name="ToggleCapturer" type="Button" parent="ToggleBar"]
-margin_right = 120.0
-margin_bottom = 26.0
+[node name="ToggleBar" type="PanelContainer" parent="." unique_id=1231853961]
+modulate = Color(1, 1, 1, 0.65)
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("1")
+
+[node name="ToggleCapturer" type="Button" parent="ToggleBar" unique_id=236168025]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 7 )
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 2 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
+theme_override_fonts/font = ExtResource("7")
+theme_override_styles/normal = SubResource("6")
+theme_override_styles/pressed = SubResource("4")
+theme_override_styles/hover = SubResource("3")
+theme_override_styles/disabled = SubResource("5")
+theme_override_styles/focus = SubResource("2")
 toggle_mode = true
 flat = true
-align = 0
 
-[node name="BarLayout" type="HBoxContainer" parent="ToggleBar"]
-margin_right = 120.0
-margin_bottom = 26.0
+[node name="BarLayout" type="HBoxContainer" parent="ToggleBar" unique_id=582316895]
+layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="ToggleBar/BarLayout"]
-margin_right = 82.0
-margin_bottom = 26.0
+[node name="Label" type="Label" parent="ToggleBar/BarLayout" unique_id=1830495365]
+layout_mode = 2
 size_flags_horizontal = 3
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 3 )
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3")
 text = "Expand"
-valign = 1
+vertical_alignment = 1
 
-[node name="ToggleIcon" type="Control" parent="ToggleBar/BarLayout"]
-margin_left = 98.0
-margin_top = 1.0
-margin_right = 120.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 22, 24 )
-mouse_filter = 2
+[node name="ToggleIcon" type="Control" parent="ToggleBar/BarLayout" unique_id=31201200]
+custom_minimum_size = Vector2(22, 24)
+layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 2
 
-[node name="Texture" type="TextureRect" parent="ToggleBar/BarLayout/ToggleIcon"]
+[node name="Texture2D" type="TextureRect" parent="ToggleBar/BarLayout/ToggleIcon" unique_id=270968484]
+layout_mode = 0
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -22.0
+offset_left = -22.0
 grow_horizontal = 0
 grow_vertical = 0
-rect_pivot_offset = Vector2( 11, 12 )
-mouse_filter = 2
+pivot_offset = Vector2(11, 12)
 size_flags_horizontal = 8
-texture = ExtResource( 1 )
+mouse_filter = 2
+texture = ExtResource("1")
 stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}

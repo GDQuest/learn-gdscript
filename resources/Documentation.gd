@@ -6,16 +6,16 @@ const COLOR_MEMBER := Color(0.960784, 0.980392, 0.980392)
 const COLOR_PARAMETER := Color(0.84511, 0.83905, 0.921875)
 const COLOR_VALUE := Color(0.369263, 0.373399, 0.472656)
 
-export(String, FILE, "*.csv") var documentation_file := ""
+@export var documentation_file := "" # (String, FILE, "*.csv")
 
 # Stores instances of MethodSpecification and PropertySpecification.
 var _references := {methods = {}, properties = {}}
 
 
 # Returns the raw reference objects for the requested names.
-func get_references(names: PoolStringArray) -> QueryResult:
+func get_references(names: PackedStringArray) -> QueryResult:
 	# Load CSV docstrings if necessary.
-	if _references.methods.empty() and _references.properties.empty():
+	if _references.methods.is_empty() and _references.properties.is_empty():
 		assert(
 			documentation_file != "", "documentation file for `%s` not specified" % [resource_path]
 		)
@@ -31,7 +31,7 @@ func get_references(names: PoolStringArray) -> QueryResult:
 
 
 # Returns the reference as formatted BBCode text for the requested names.
-func get_references_as_bbcode(names: PoolStringArray) -> String:
+func get_references_as_bbcode(names: PackedStringArray) -> String:
 	var selected_references := get_references(names)
 	if selected_references.is_empty():
 		return ""
@@ -50,8 +50,7 @@ func get_references_as_bbcode(names: PoolStringArray) -> String:
 
 static func _parse_documentation_file(path: String) -> Dictionary:
 	var all_references := {methods = {}, properties = {}}
-	var file := File.new()
-	file.open(path, file.READ)
+	var file := FileAccess.open(path, FileAccess.READ)
 	var _header := Array(file.get_csv_line())
 
 	while !file.eof_reached():
@@ -91,7 +90,7 @@ static func _parse_parameters(parameters_list_string: String) -> MethodParameter
 
 	var parameters_list := parameters_list_string.split(",")
 	for tuple_str in parameters_list:
-		var tuple: PoolStringArray = tuple_str.split(":")
+		var tuple: PackedStringArray = tuple_str.split(":")
 		var param := MethodParameter.new()
 		param.name = tuple[0].strip_edges()
 		if tuple.size() > 1:
@@ -129,14 +128,14 @@ class MethodParameterList:
 	var list := []
 
 	func _to_string() -> String:
-		return PoolStringArray(list).join(", ")
+		return ", ".join(PackedStringArray(list))
 
 	func to_bbcode() -> String:
-		var _list := PoolStringArray()
+		var _list := PackedStringArray()
 		for param in list:
 			param = param as MethodParameter
 			_list.push_back(param.to_bbcode())
-		return _list.join(", ")
+		return ", ".join(_list)
 
 
 class MethodSpecification:
@@ -183,4 +182,4 @@ class QueryResult:
 	var methods := []
 
 	func is_empty() -> bool:
-		return properties.empty() and methods.empty()
+		return properties.is_empty() and methods.is_empty()

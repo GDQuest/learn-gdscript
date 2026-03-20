@@ -2,15 +2,15 @@ extends Node2D
 
 const LABEL_FONT := preload("res://ui/theme/fonts/font_code_small.tres")
 
-export var board_size := Vector2(6, 4) setget set_board_size
-export var cell_size := Vector2(80, 80)
-export var line_width := 4
-export var draw_cell_coordinates := false
+@export var board_size := Vector2(6, 4): set = set_board_size
+@export var cell_size := Vector2(80, 80)
+@export var line_width := 4
+@export var draw_cell_coordinates := false
 
 var board_size_px := cell_size * board_size
 
 # Maps nodes to grid positions
-onready var units: Dictionary setget set_units
+@onready var units: Dictionary: set = set_units
 # Path to draw
 var _path := []
 
@@ -26,7 +26,7 @@ func _ready() -> void:
 func _draw() -> void:
 	for x in range(board_size.x):
 		for y in range(board_size.y):
-			draw_rect(Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, Vector2.ONE * cell_size), Color.white, false, line_width)
+			draw_rect(Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, Vector2.ONE * cell_size), Color.WHITE, false, line_width)
 	draw_path(_path)
 
 	if draw_cell_coordinates:
@@ -38,13 +38,13 @@ func _draw() -> void:
 				var cell = Vector2(x, y)
 				var label = Label.new()
 				label.text = str(cell)
-				label.add_font_override("font", LABEL_FONT)
+				label.add_theme_font_override("font", LABEL_FONT)
 				_label_container.add_child(label)
-				label.rect_position = calculate_cell_position(cell) - label.rect_size / 2.0
+				label.position = calculate_cell_position(cell) - label.size / 2.0
 
 
 func draw_path(cells: Array):
-	var points = PoolVector2Array()
+	var points = PackedVector2Array()
 	for cell in cells:
 		points.append(calculate_cell_position(cell))
 

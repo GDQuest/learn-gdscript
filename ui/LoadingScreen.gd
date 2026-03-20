@@ -9,12 +9,13 @@ const PROGRESS_DURATION := 0.75
 
 enum State { IDLE, LOADING, FADING_IN, FADING_OUT }
 
-var progress_value := 0.0 setget set_progress_value
+@export var _progress_bar: ProgressBar
+
+var progress_value := 0.0: set = set_progress_value
 
 var _state: int = State.IDLE
-var _scene_tween: SceneTreeTween
+var _scene_tween: Tween
 
-onready var _progress_bar := $MarginContainer/Control/ProgressBar as ProgressBar
 
 
 func _ready() -> void:
@@ -46,7 +47,7 @@ func fade_in() -> void:
 	if _scene_tween:
 		_scene_tween.kill()
 	_scene_tween = create_tween()
-	_scene_tween.connect("finished", self, "_on_tween_finished")
+	_scene_tween.connect("finished", Callable(self, "_on_tween_finished"))
 	_scene_tween.tween_property(self, "modulate:a", 1.0, FADING_DURATION).from(0.0)
 
 
@@ -56,7 +57,7 @@ func fade_out() -> void:
 	if _scene_tween:
 		_scene_tween.kill()
 	_scene_tween = create_tween()
-	_scene_tween.connect("finished", self, "_on_tween_finished")
+	_scene_tween.connect("finished", Callable(self, "_on_tween_finished"))
 	_scene_tween.tween_property(self, "modulate:a", 0.0, FADING_DURATION).from(modulate.a)
 
 
@@ -74,7 +75,7 @@ func _animate_progress() -> void:
 	if _scene_tween:
 		_scene_tween.kill()
 	_scene_tween = create_tween()
-	_scene_tween.connect("finished", self, "_on_tween_finished")
+	_scene_tween.connect("finished", Callable(self, "_on_tween_finished"))
 	_scene_tween.tween_property(_progress_bar, "value", progress_value, PROGRESS_DURATION).from(_progress_bar.value).set_trans(Tween.TRANS_CUBIC)
 
 

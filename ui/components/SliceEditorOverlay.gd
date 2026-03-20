@@ -3,8 +3,8 @@ extends Control
 
 const ErrorRange = ScriptError.ErrorRange
 
-var lines_offset := 0 setget set_lines_offset
-var character_offset := 0 setget set_character_offset
+var lines_offset := 0: set = set_lines_offset
+var character_offset := 0: set = set_character_offset
 
 
 func _init() -> void:
@@ -175,18 +175,18 @@ class ErrorOverlay:
 
 	var severity := 0
 	var error_range := ErrorRange.new()
-	var regions := [] setget set_regions
+	var regions := []: set = set_regions
 
 	var _lines := []
 	var _hovered_region := -1
 
 	func _init() -> void:
 		name = "ErrorOverlay"
-		rect_min_size = Vector2(0, 0)
+		custom_minimum_size = Vector2(0, 0)
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	func _ready() -> void:
-		set_anchors_and_margins_preset(Control.PRESET_WIDE)
+		set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 	func try_consume_mouse(point: Vector2) -> bool:
 		var region_has_point := -1
@@ -202,14 +202,14 @@ class ErrorOverlay:
 			return false
 
 		if _hovered_region == -1 and not region_has_point == -1:
-			var reference_position = _lines[i].rect_global_position
+			var reference_position = _lines[i].global_position
 			emit_signal("region_entered", reference_position)
 		elif not _hovered_region == -1 and region_has_point == -1:
 			emit_signal("region_exited")
 		else:
 			emit_signal("region_exited")
 
-			var reference_position = _lines[i].rect_global_position
+			var reference_position = _lines[i].global_position
 			emit_signal("region_entered", reference_position)
 
 		_hovered_region = region_has_point
@@ -240,7 +240,7 @@ class ErrorOverlay:
 					underline.line_type = ErrorUnderline.LineType.DASHED
 					underline.line_color = COLOR_INFO
 
-			underline.rect_position = Vector2(error_region.position.x, error_region.end.y)
+			underline.position = Vector2(error_region.position.x, error_region.end.y)
 			underline.line_length = error_region.size.x
 
 			add_child(underline)
@@ -264,11 +264,11 @@ class ErrorUnderline:
 	const DASHED_STEP_WIDTH := 14.0
 	const DASHED_GAP := 8.0
 
-	var line_length := 64.0 setget set_line_length
-	var line_type := -1 setget set_line_type
-	var line_color := Color.white setget set_line_color
+	var line_length := 64.0: set = set_line_length
+	var line_type := -1: set = set_line_type
+	var line_color := Color.WHITE: set = set_line_color
 
-	var _points: PoolVector2Array
+	var _points: PackedVector2Array
 
 	func _init() -> void:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -278,13 +278,13 @@ class ErrorUnderline:
 			# draw_multiline doesn't support thickness, so we have to do this manually.
 			var i := 0
 			while i < _points.size() - 1:
-				draw_line(_points[i], _points[i + 1], line_color, LINE_THICKNESS, true)
+				draw_line(_points[i], _points[i + 1], line_color, LINE_THICKNESS)
 				i += 2
 		else:
 			draw_polyline(_points, line_color, LINE_THICKNESS, true)
 
 	func update_points() -> void:
-		_points = PoolVector2Array()
+		_points = PackedVector2Array()
 
 		match line_type:
 			LineType.SQUIGGLY:
@@ -327,16 +327,16 @@ class ErrorUnderline:
 	func set_line_length(value: float) -> void:
 		line_length = value
 		update_points()
-		update()
+		queue_redraw()
 
 	func set_line_type(value: int) -> void:
 		line_type = value
 		update_points()
-		update()
+		queue_redraw()
 
 	func set_line_color(value: Color) -> void:
 		line_color = value
-		update()
+		queue_redraw()
 
 
 class HighlightOverlay:
@@ -346,24 +346,24 @@ class HighlightOverlay:
 	const DISSOLVE_DURATION := 1.5
 	
 	var line_index := -1
-	var regions := [] setget set_regions
+	var regions := []: set = set_regions
 
 	var _current_alpha := 0.0
-	var _tween: SceneTreeTween
+	var _tween: Tween
 
 	func _init() -> void:
 		name = "HighlightOverlay"
-		rect_min_size = Vector2(0, 0)
+		custom_minimum_size = Vector2(0, 0)
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
 		
 		_current_alpha = DEFAULT_ALPHA
 
 	func _ready() -> void:
-		set_anchors_and_margins_preset(Control.PRESET_WIDE)
+		set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		
 		_tween = create_tween()
 		
-		_tween.tween_method(self, "_dissolve_step", DEFAULT_ALPHA, 0.0, DISSOLVE_DURATION)
+		_tween.tween_method(Callable(self, "_dissolve_step"), DEFAULT_ALPHA, 0.0, DISSOLVE_DURATION)
 	
 	
 	func _draw() -> void:
@@ -373,9 +373,9 @@ class HighlightOverlay:
 	
 	func _dissolve_step(value: float) -> void:
 		_current_alpha = value
-		update()
+		queue_redraw()
 	
 	
 	func set_regions(hl_regions: Array) -> void:
 		regions = hl_regions
-		update()
+		queue_redraw()

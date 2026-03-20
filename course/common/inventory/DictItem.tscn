@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=1]
-[ext_resource path="res://course/common/inventory/healing_heart.png" type="Texture" id=2]
+[ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="FontFile" id=1]
+[ext_resource path="res://course/common/inventory/healing_heart.png" type="Texture2D" id=2]
 [ext_resource path="res://course/common/inventory/DictItem.gd" type="Script" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -17,12 +17,12 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [node name="DictItem" type="Button"]
-margin_right = 254.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 260, 100 )
+offset_right = 254.0
+offset_bottom = 100.0
+custom_minimum_size = Vector2( 260, 100 )
 size_flags_horizontal = 3
-custom_styles/hover = SubResource( 1 )
-custom_styles/normal = SubResource( 1 )
+theme_override_styles/hover = SubResource( 1 )
+theme_override_styles/normal = SubResource( 1 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -32,44 +32,44 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
-custom_constants/margin_right = 20
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_bottom = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Item" type="HBoxContainer" parent="Margin"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 240.0
-margin_bottom = 90.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 240.0
+offset_bottom = 90.0
 size_flags_horizontal = 3
-custom_constants/separation = -1
+theme_override_constants/separation = -1
 
 [node name="Icon" type="TextureRect" parent="Margin/Item"]
-margin_right = 60.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 60, 60 )
+offset_right = 60.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 60, 60 )
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
 [node name="Name" type="Label" parent="Margin/Item"]
-margin_left = 59.0
-margin_top = 27.0
-margin_right = 201.0
-margin_bottom = 53.0
-custom_fonts/font = ExtResource( 1 )
+offset_left = 59.0
+offset_top = 27.0
+offset_right = 201.0
+offset_bottom = 53.0
+theme_override_fonts/font = ExtResource( 1 )
 text = "healing heart"
 
 [node name="Amount" type="Label" parent="Margin/Item"]
-margin_left = 200.0
-margin_top = 27.0
-margin_right = 230.0
-margin_bottom = 53.0
+offset_left = 200.0
+offset_top = 27.0
+offset_right = 230.0
+offset_bottom = 53.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "0"
 align = 2

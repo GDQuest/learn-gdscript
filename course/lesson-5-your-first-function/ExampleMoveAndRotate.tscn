@@ -4,18 +4,18 @@
 [ext_resource path="res://course/lesson-5-your-first-function/ExampleTurtleMoveAndRotate.tscn" type="PackedScene" id=2]
 
 [node name="ExampleMoveAndRotate" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
+offset_right = 14.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 651.0
-margin_bottom = 267.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 651.0
+offset_bottom = 267.0
 scene = ExtResource( 2 )
 gdscript_code = "func move_and_rotate():
 	move_forward(200)

@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node2D
 
 const TEST_CELL_COORDINATES := [Vector2(0, 1), Vector2(2, 3), Vector2(5, 2)]
@@ -13,7 +13,7 @@ var _draw_cells := false
 func _run():
 	_draw_cells = true
 	update()
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	Events.emit_signal("practice_run_completed")
 
 
@@ -33,7 +33,7 @@ func _draw() -> void:
 	for x in range(GRID_SIZE.x):
 		for y in range(GRID_SIZE.y):
 			var rect := Rect2(Vector2(x, y) * cell_size - _grid_size_px / 2, cell_size)
-			draw_rect(rect, Color.white, false, LINE_WIDTH)
+			draw_rect(rect, Color.WHITE, false, LINE_WIDTH)
 
 	if _draw_cells:
 		for cell in TEST_CELL_COORDINATES:

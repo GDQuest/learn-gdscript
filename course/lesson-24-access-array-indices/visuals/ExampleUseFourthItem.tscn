@@ -11,24 +11,24 @@ func run():
 "
 
 [node name="Example" type="PanelContainer"]
-margin_right = 771.0
-margin_bottom = 414.0
+offset_right = 771.0
+offset_bottom = 414.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1047.0
-margin_bottom = 407.0
-rect_min_size = Vector2( 600, 400 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 1047.0
+offset_bottom = 407.0
+custom_minimum_size = Vector2( 600, 400 )
 gdscript_code = "func run():
 	use_item(inventory[3])"
 
 [node name="Inventory" parent="RunnableCodeExample" instance=ExtResource( 2 )]
-margin_left = 672.0
-margin_right = 1040.0
-margin_bottom = 400.0
+offset_left = 672.0
+offset_right = 1040.0
+offset_bottom = 400.0
 script = SubResource( 1 )

@@ -1,138 +1,117 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene format=3 uid="uid://qkdafe3ywysu"]
 
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/UILesson.gd" type="Script" id=2]
-[ext_resource path="res://ui/theme/vscrollbar_large_scroll.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/theme/fonts/font_title_big.tres" type="DynamicFont" id=4]
-[ext_resource path="res://ui/theme/panel_course_page.tres" type="StyleBox" id=5]
-[ext_resource path="res://ui/theme/vscrollbar_large_grabber.tres" type="StyleBox" id=6]
-[ext_resource path="res://ui/theme/vscrollbar_large_grabber_highlight.tres" type="StyleBox" id=7]
-[ext_resource path="res://ui/theme/vscrollbar_large_grabber_pressed.tres" type="StyleBox" id=8]
-[ext_resource path="res://ui/components/SmoothScrollContainer.gd" type="Script" id=9]
-[ext_resource path="res://ui/components/GlossaryPopup.tscn" type="PackedScene" id=10]
+[ext_resource type="Theme" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
+[ext_resource type="Script" uid="uid://bvhqoj5m0qrs1" path="res://ui/UILesson.gd" id="2"]
+[ext_resource type="StyleBox" path="res://ui/theme/vscrollbar_large_scroll.tres" id="3"]
+[ext_resource type="FontVariation" uid="uid://ehys7a6horyb" path="res://ui/theme/fonts/font_title_big.tres" id="4"]
+[ext_resource type="StyleBox" path="res://ui/theme/panel_course_page.tres" id="5"]
+[ext_resource type="StyleBox" path="res://ui/theme/vscrollbar_large_grabber.tres" id="6"]
+[ext_resource type="StyleBox" path="res://ui/theme/vscrollbar_large_grabber_highlight.tres" id="7"]
+[ext_resource type="StyleBox" path="res://ui/theme/vscrollbar_large_grabber_pressed.tres" id="8"]
+[ext_resource type="Script" uid="uid://dmptnpr0crwmq" path="res://ui/components/SmoothScrollContainer.gd" id="9"]
+[ext_resource type="PackedScene" path="res://ui/components/GlossaryPopup.tscn" id="10"]
 
-[sub_resource type="StyleBoxEmpty" id=1]
+[sub_resource type="StyleBoxEmpty" id="1"]
 
-[sub_resource type="Theme" id=2]
-VScrollBar/styles/grabber = ExtResource( 6 )
-VScrollBar/styles/grabber_highlight = ExtResource( 7 )
-VScrollBar/styles/grabber_pressed = ExtResource( 8 )
-VScrollBar/styles/scroll = ExtResource( 3 )
-VScrollBar/styles/scroll_focus = SubResource( 1 )
+[sub_resource type="Theme" id="2"]
+VScrollBar/styles/grabber = ExtResource("6")
+VScrollBar/styles/grabber_highlight = ExtResource("7")
+VScrollBar/styles/grabber_pressed = ExtResource("8")
+VScrollBar/styles/scroll = ExtResource("3")
+VScrollBar/styles/scroll_focus = SubResource("1")
 
-[node name="UILesson" type="PanelContainer"]
+[node name="UILesson" type="PanelContainer" unique_id=1974552379 node_paths=PackedStringArray("_scroll_container", "_scroll_content", "_title", "_content_blocks", "_content_container", "_practices_visibility_container", "_practices_container", "_debounce_timer", "_glossary_popup")]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_styles/panel = ExtResource( 5 )
-script = ExtResource( 2 )
-test_lesson = ExtResource( 5 )
+theme_override_styles/panel = ExtResource("5")
+script = ExtResource("2")
+test_lesson = ExtResource("5")
+_scroll_container = NodePath("OuterMargin/ScrollContainer")
+_scroll_content = NodePath("OuterMargin/ScrollContainer/InnerMargin")
+_title = NodePath("OuterMargin/ScrollContainer/InnerMargin/Content/Title")
+_content_blocks = NodePath("OuterMargin/ScrollContainer/InnerMargin/Content/ContentBlocks")
+_content_container = NodePath("OuterMargin/ScrollContainer/InnerMargin/Content")
+_practices_visibility_container = NodePath("OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer")
+_practices_container = NodePath("OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer/Practices")
+_debounce_timer = NodePath("DebounceTimer")
+_glossary_popup = NodePath("GlossaryPopup")
 
-[node name="OuterMargin" type="MarginContainer" parent="."]
-margin_right = 1920.0
-margin_bottom = 1080.0
+[node name="OuterMargin" type="MarginContainer" parent="." unique_id=1385473400]
+layout_mode = 2
 mouse_filter = 2
-theme = ExtResource( 1 )
-custom_constants/margin_right = 0
-custom_constants/margin_top = 20
-custom_constants/margin_left = 12
-custom_constants/margin_bottom = 20
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme = ExtResource("1")
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 20
 
-[node name="ScrollContainer" type="ScrollContainer" parent="OuterMargin"]
-margin_left = 12.0
-margin_top = 20.0
-margin_right = 1920.0
-margin_bottom = 1060.0
-rect_min_size = Vector2( 960, 0 )
-rect_clip_content = false
-focus_neighbour_top = NodePath(".")
-focus_neighbour_bottom = NodePath(".")
-focus_mode = 1
-mouse_filter = 1
+[node name="ScrollContainer" type="ScrollContainer" parent="OuterMargin" unique_id=976629436]
+clip_contents = false
+custom_minimum_size = Vector2(960, 0)
+layout_mode = 2
 size_flags_vertical = 3
-theme = SubResource( 2 )
+focus_neighbor_top = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_mode = 1
+theme = SubResource("2")
 follow_focus = true
-scroll_horizontal_enabled = false
-script = ExtResource( 9 )
-__meta__ = {
-"_editor_description_": ""
-}
+script = ExtResource("9")
 
-[node name="InnerMargin" type="MarginContainer" parent="OuterMargin/ScrollContainer"]
-margin_right = 1908.0
-margin_bottom = 282.0
-mouse_filter = 2
+[node name="InnerMargin" type="MarginContainer" parent="OuterMargin/ScrollContainer" unique_id=1171881479]
+layout_mode = 2
 size_flags_horizontal = 3
-custom_constants/margin_top = 40
-
-[node name="Content" type="VBoxContainer" parent="OuterMargin/ScrollContainer/InnerMargin"]
-margin_left = 574.0
-margin_top = 40.0
-margin_right = 1334.0
-margin_bottom = 262.0
-rect_min_size = Vector2( 760, 0 )
 mouse_filter = 2
+theme_override_constants/margin_top = 40
+
+[node name="Content" type="VBoxContainer" parent="OuterMargin/ScrollContainer/InnerMargin" unique_id=44176618]
+custom_minimum_size = Vector2(760, 0)
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
-theme = ExtResource( 1 )
-custom_constants/separation = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
+mouse_filter = 2
+theme = ExtResource("1")
+theme_override_constants/separation = 6
 
-[node name="Title" type="Label" parent="OuterMargin/ScrollContainer/InnerMargin/Content" groups=["navigation_text"]]
-margin_right = 760.0
-margin_bottom = 40.0
-custom_fonts/font = ExtResource( 4 )
+[node name="Title" type="Label" parent="OuterMargin/ScrollContainer/InnerMargin/Content" unique_id=1803172284 groups=["navigation_text"]]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4")
 text = "Title"
-align = 1
+horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="OuterMargin/ScrollContainer/InnerMargin/Content"]
-margin_top = 46.0
-margin_right = 760.0
-margin_bottom = 76.0
+[node name="HSeparator" type="HSeparator" parent="OuterMargin/ScrollContainer/InnerMargin/Content" unique_id=910963450]
+layout_mode = 2
 mouse_filter = 2
-custom_constants/separation = 30
+theme_override_constants/separation = 30
 
-[node name="ContentBlocks" type="VBoxContainer" parent="OuterMargin/ScrollContainer/InnerMargin/Content"]
-margin_top = 82.0
-margin_right = 760.0
-margin_bottom = 82.0
+[node name="ContentBlocks" type="VBoxContainer" parent="OuterMargin/ScrollContainer/InnerMargin/Content" unique_id=896218696]
+layout_mode = 2
 mouse_filter = 2
-custom_constants/separation = 20
+theme_override_constants/separation = 20
 
-[node name="PracticesContainer" type="VBoxContainer" parent="OuterMargin/ScrollContainer/InnerMargin/Content"]
-margin_top = 88.0
-margin_right = 760.0
-margin_bottom = 222.0
+[node name="PracticesContainer" type="VBoxContainer" parent="OuterMargin/ScrollContainer/InnerMargin/Content" unique_id=405356370]
+layout_mode = 2
 mouse_filter = 2
-custom_constants/separation = 32
+theme_override_constants/separation = 32
 
-[node name="HSeparator" type="HSeparator" parent="OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer"]
-margin_right = 760.0
-margin_bottom = 30.0
+[node name="HSeparator" type="HSeparator" parent="OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer" unique_id=682323162]
+layout_mode = 2
 mouse_filter = 2
-custom_constants/separation = 30
+theme_override_constants/separation = 30
 
-[node name="PracticesTitle" type="Label" parent="OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer" groups=["navigation_text"]]
-margin_top = 62.0
-margin_right = 760.0
-margin_bottom = 102.0
-custom_fonts/font = ExtResource( 4 )
+[node name="PracticesTitle" type="Label" parent="OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer" unique_id=877169471 groups=["navigation_text"]]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4")
 text = "Practices"
-align = 1
+horizontal_alignment = 1
 
-[node name="Practices" type="VBoxContainer" parent="OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer"]
-margin_top = 134.0
-margin_right = 760.0
-margin_bottom = 134.0
+[node name="Practices" type="VBoxContainer" parent="OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer" unique_id=1494278030]
+layout_mode = 2
 mouse_filter = 2
 
-[node name="DebounceTimer" type="Timer" parent="."]
+[node name="DebounceTimer" type="Timer" parent="." unique_id=1298038862]
 wait_time = 0.5
 one_shot = true
 
-[node name="GlossaryPopup" parent="." instance=ExtResource( 10 )]
+[node name="GlossaryPopup" parent="." unique_id=675004061 instance=ExtResource("10")]

@@ -23,25 +23,25 @@ func reset():
 "
 
 [node name="Panel" type="PanelContainer"]
-margin_right = 1047.0
-margin_bottom = 298.0
+offset_right = 1047.0
+offset_bottom = 298.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1040.0
-margin_bottom = 307.0
-rect_min_size = Vector2( 0, 300 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 1040.0
+offset_bottom = 307.0
+custom_minimum_size = Vector2( 0, 300 )
 run_button_label = "run()"
 
 [node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 924.0
-margin_right = 1033.0
-margin_bottom = 300.0
+offset_left = 924.0
+offset_right = 1033.0
+offset_bottom = 300.0
 script = SubResource( 1 )

@@ -13,7 +13,7 @@ func _ready():
 	create_slider_for(\"board_height\", 1.0, 4.0, 1.0)
 
 func _set_instance_value(value: float, property_name: String, value_label: Label) -> void:
-	._set_instance_value(value, property_name, value_label)
+	super._set_instance_value(value, property_name, value_label)
 	_gdscript_text_edit.text = gdscript_code.replace(property_name, \"%s [=%s]\"%[property_name, value])
 "
 
@@ -23,26 +23,26 @@ script/source = "extends \"Board.gd\"
 
 func _update_label() -> void:
 	if not _label:
-		yield(self, \"ready\")
+		await self.ready
 	
 	_label.text = \"board_size = Vector2%s\" % [grid_size]
 
 "
 
 [node name="ExampleGrid" type="PanelContainer"]
-margin_right = 658.0
-margin_bottom = 384.0
+offset_right = 658.0
+offset_bottom = 384.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 651.0
-margin_bottom = 377.0
-rect_min_size = Vector2( 0, 370 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 651.0
+offset_bottom = 377.0
+custom_minimum_size = Vector2( 0, 370 )
 script = SubResource( 1 )
 
 [node name="GridVisualNoRobot" type="Node2D" parent="RunnableCodeExample"]
@@ -55,10 +55,10 @@ scale = Vector2( 0.75, 0.75 )
 script = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="RunnableCodeExample/GridVisualNoRobot"]
-margin_left = 287.0
-margin_top = -54.0
-margin_right = 440.0
-margin_bottom = -40.0
+offset_left = 287.0
+offset_top = -54.0
+offset_right = 440.0
+offset_bottom = -40.0
 text = "grid_size = Vector2(3, 3)"
 __meta__ = {
 "_edit_use_anchors_": false

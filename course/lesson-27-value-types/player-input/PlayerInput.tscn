@@ -5,8 +5,8 @@
 [ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/theme/button_outline_large_strict.tres" type="StyleBox" id=4]
 [ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=5]
-[ext_resource path="res://ui/theme/fonts/font_title_big.tres" type="DynamicFont" id=6]
-[ext_resource path="res://course/common/inventory/healing_heart.png" type="Texture" id=7]
+[ext_resource path="res://ui/theme/fonts/font_title_big.tres" type="FontFile" id=6]
+[ext_resource path="res://course/common/inventory/healing_heart.png" type="Texture2D" id=7]
 [ext_resource path="res://course/lesson-27-value-types/player-input/PlayerInput.gd" type="Script" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -24,58 +24,58 @@ corner_radius_bottom_left = 12
 [node name="PlayerInput" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -1478.0
-margin_bottom = -783.0
+offset_right = -1478.0
+offset_bottom = -783.0
 theme = ExtResource( 1 )
-custom_styles/panel = SubResource( 1 )
+theme_override_styles/panel = SubResource( 1 )
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 438.0
-margin_bottom = 293.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 438.0
+offset_bottom = 293.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 414.0
-margin_bottom = 269.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 414.0
+offset_bottom = 269.0
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
-margin_top = 4.0
-margin_right = 394.0
-margin_bottom = 44.0
-custom_fonts/font = ExtResource( 6 )
+offset_top = 4.0
+offset_right = 394.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource( 6 )
 text = "Select count"
 align = 1
 
 [node name="Label2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
-margin_top = 60.0
-margin_right = 394.0
-margin_bottom = 68.0
+offset_top = 60.0
+offset_right = 394.0
+offset_bottom = 68.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 84.0
-margin_right = 394.0
-margin_bottom = 169.0
+offset_top = 84.0
+offset_right = 394.0
+offset_bottom = 169.0
 
 [node name="PickupFire" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-margin_right = 189.0
-margin_bottom = 85.0
+offset_right = 189.0
+offset_bottom = 85.0
 size_flags_horizontal = 3
 texture = ExtResource( 7 )
 stretch_mode = 4
 
 [node name="SpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 205.0
-margin_right = 394.0
-margin_bottom = 85.0
-rect_min_size = Vector2( 0, 60 )
+offset_left = 205.0
+offset_right = 394.0
+offset_bottom = 85.0
+custom_minimum_size = Vector2( 0, 60 )
 size_flags_horizontal = 3
 min_value = 1.0
 max_value = 99.0
@@ -83,31 +83,31 @@ value = 1.0
 rounded = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 185.0
-margin_right = 394.0
-margin_bottom = 245.0
+offset_top = 185.0
+offset_right = 394.0
+offset_bottom = 245.0
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-margin_right = 189.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 0, 60 )
+offset_right = 189.0
+offset_bottom = 60.0
+custom_minimum_size = Vector2( 0, 60 )
 size_flags_horizontal = 3
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/normal = ExtResource( 3 )
+theme_override_styles/hover = ExtResource( 2 )
+theme_override_styles/pressed = ExtResource( 5 )
+theme_override_styles/focus = ExtResource( 4 )
+theme_override_styles/normal = ExtResource( 3 )
 text = "Cancel"
 
 [node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 205.0
-margin_right = 394.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 0, 60 )
+offset_left = 205.0
+offset_right = 394.0
+offset_bottom = 60.0
+custom_minimum_size = Vector2( 0, 60 )
 size_flags_horizontal = 3
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/normal = ExtResource( 3 )
+theme_override_styles/hover = ExtResource( 2 )
+theme_override_styles/pressed = ExtResource( 5 )
+theme_override_styles/focus = ExtResource( 4 )
+theme_override_styles/normal = ExtResource( 3 )
 text = "OK"
 
 [node name="Camera2D" type="Camera2D" parent="."]

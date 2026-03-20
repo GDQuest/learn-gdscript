@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://xitqmns58aw4"]
 
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="Theme" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
 var do_draw := false
@@ -11,34 +11,33 @@ var do_draw := false
 
 func _draw() -> void:
 	if do_draw:
-		draw_circle(Vector2.ZERO, 60.0, Color.aqua)
+		draw_circle(Vector2.ZERO, 60.0, Color.AQUA)
 
 
 func run() -> void:
 	do_draw = true
-	update()
+	queue_redraw()
 
 
 func reset() -> void:
 	do_draw = false
-	update()
+	queue_redraw()
 "
 
-[node name="PanelContainer" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
+[node name="PanelContainer" type="PanelContainer" unique_id=1069752853]
+offset_right = 14.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
-theme = ExtResource( 2 )
+theme = ExtResource("2")
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_right = 656.0
-margin_bottom = 260.0
+[node name="RunnableCodeExample" parent="." unique_id=355736653 instance=ExtResource("1")]
+layout_mode = 2
 gdscript_code = "draw_circle(
 	Vector2(0, 0),
 	60,
-	Color.aqua
+	Color.AQUA
 )"
 run_button_label = "draw_circle()"
 
-[node name="CircleDrawer" type="Node2D" parent="RunnableCodeExample"]
-script = SubResource( 1 )
+[node name="CircleDrawer" type="Node2D" parent="RunnableCodeExample" unique_id=1150696349]
+script = SubResource("1")

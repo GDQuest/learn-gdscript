@@ -1,27 +1,27 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=1]
-[ext_resource path="res://course/lesson-7-member-variables/x-and-y-axes.svg" type="Texture" id=2]
+[ext_resource path="res://course/lesson-7-member-variables/x-and-y-axes.svg" type="Texture2D" id=2]
 
 [node name="PanelContainer" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
+offset_right = 14.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
-custom_styles/panel = ExtResource( 1 )
+theme_override_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 248.0
-margin_bottom = 188.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 248.0
+offset_bottom = 188.0
 
 [node name="X-and-y-axes" type="TextureRect" parent="MarginContainer"]
-margin_right = 240.0
-margin_bottom = 180.0
-rect_min_size = Vector2( 240, 180 )
+offset_right = 240.0
+offset_bottom = 180.0
+custom_minimum_size = Vector2( 240, 180 )
 size_flags_horizontal = 4
 texture = ExtResource( 2 )
 expand = true

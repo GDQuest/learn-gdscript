@@ -7,17 +7,17 @@ const UNITS_MAP := {
 	"turtle": preload("Turtle.tscn"),
 }
 
-export var board_size := Vector2(5, 3) setget set_board_size
-export var cell_size := Vector2(80, 80)
-export var line_width := 4
-export var draw_cell_coordinates := false
+@export var board_size := Vector2(5, 3): set = set_board_size
+@export var cell_size := Vector2(80, 80)
+@export var line_width := 4
+@export var draw_cell_coordinates := false
 
 var board_size_px := cell_size * board_size
 
 var _label_container := Control.new()
 
 # Maps nodes to grid positions
-onready var units: Dictionary setget set_units
+@onready var units: Dictionary: set = set_units
 
 
 func _ready() -> void:
@@ -36,7 +36,7 @@ func _ready() -> void:
 func _draw() -> void:
 	for x in range(board_size.x):
 		for y in range(board_size.y):
-			draw_rect(Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, Vector2.ONE * cell_size), Color.white, false, line_width)
+			draw_rect(Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, Vector2.ONE * cell_size), Color.WHITE, false, line_width)
 
 	if draw_cell_coordinates:
 		for label in _label_container.get_children():
@@ -47,22 +47,22 @@ func _draw() -> void:
 				var cell = Vector2(x, y)
 				var label = Label.new()
 				label.text = str(cell)
-				label.add_font_override("font", LABEL_FONT)
+				label.add_theme_font_override("font", LABEL_FONT)
 				_label_container.add_child(label)
-				label.rect_position = calculate_cell_position(cell) - label.rect_size / 2.0
+				label.position = calculate_cell_position(cell) - label.size / 2.0
 
 
 func set_units(new_value: Dictionary):
 	units = new_value
 	if not is_inside_tree():
-		yield(self, "ready")
+		await self.ready
 
 	for unit in get_children():
 		unit.queue_free()
 
 	for cell in units:
 		var unit_type = units[cell]
-		var unit = UNITS_MAP[unit_type].instance()
+		var unit = UNITS_MAP[unit_type].instantiate()
 		add_child(unit)
 		unit.position = calculate_cell_position(cell)
 

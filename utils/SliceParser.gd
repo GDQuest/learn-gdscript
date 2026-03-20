@@ -40,7 +40,7 @@ static func parse_slice(script_source: String, slice_name: String = "") -> Dicti
 			continue
 		
 		if export_start_line < 0:
-			if target_slice_name.empty():
+			if target_slice_name.is_empty():
 				target_slice_name = matched_name if matched_name else ""
 				export_start_line = i
 				found_any_slice = true
@@ -49,7 +49,7 @@ static func parse_slice(script_source: String, slice_name: String = "") -> Dicti
 				found_any_slice = true
 	
 	if export_start_line < 0:
-		push_error("EXPORT slice not found: " + (target_slice_name if not target_slice_name.empty() else "(any)"))
+		push_error("EXPORT slice not found: " + (target_slice_name if not target_slice_name.is_empty() else "(any)"))
 		return {}
 	
 	if not found_closing:
@@ -62,7 +62,7 @@ static func parse_slice(script_source: String, slice_name: String = "") -> Dicti
 	# Lines after is the rest.
 	var lines_before := lines.slice(0, export_start_line)
 	var editable_start := export_start_line + 1
-	var lines_editable := lines.slice(editable_start, export_end_line - 1)
+	var lines_editable := lines.slice(editable_start, export_end_line)
 	var lines_after := lines.slice(export_end_line + 1, lines.size())
 	
 	var leading_spaces := 0
@@ -135,20 +135,20 @@ static func find_all_slice_names(script_source: String) -> Array:
 # slice_name: Name of the EXPORT slice to extract (empty = first one found)
 # returns ScriptSlice resource with parsed data
 static func load_from_script(script_path: String, slice_name: String = "") -> ScriptSlice:
-	if script_path.is_rel_path():
+	if script_path.is_relative_path():
 		script_path = "res://" + script_path
 	elif not script_path.begins_with("res://"):
 		push_error("Script path must be a resource path: " + script_path)
 		return null
 	
-	var file := File.new()
-	if not Engine.editor_hint and not file.file_exists(script_path):
+	if not Engine.is_editor_hint() and not FileAccess.file_exists(script_path):
 		# When exporting the game, we need to make copies of GDScript files under a different 
 		# extension because Godot compiles GDScript files to bytecode.
 		# This means in the web build, files have different extensions, which we handle here.
 		script_path = script_path.replace(".gd", ".lgd")
 	
-	if file.open(script_path, File.READ) != OK:
+	var file := FileAccess.open(script_path, FileAccess.READ)
+	if not file:
 		push_error("Failed to read script file: " + script_path)
 		return null
 	
@@ -156,7 +156,7 @@ static func load_from_script(script_path: String, slice_name: String = "") -> Sc
 	file.close()
 	
 	var parsed_data := parse_slice(script_source, slice_name)
-	if parsed_data.empty():
+	if parsed_data.is_empty():
 		return null
 	
 	var slice := ScriptSlice.new()
@@ -170,4 +170,3 @@ static func load_from_script(script_path: String, slice_name: String = "") -> Sc
 	slice.lines_editable = parsed_data.get("lines_editable", [])
 	
 	return slice
-

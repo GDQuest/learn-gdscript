@@ -6,7 +6,7 @@ var _sprites := []
 
 
 func calculate_bounding_rect(sprites: Array) -> Rect2:
-	if sprites.empty():
+	if sprites.is_empty():
 		print_debug("No sprites to calculate bounding rect, nothing to calculate.")
 		return Rect2()
 

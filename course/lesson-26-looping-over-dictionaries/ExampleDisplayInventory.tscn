@@ -24,25 +24,25 @@ func _ready() -> void:
 "
 
 [node name="Panel" type="PanelContainer"]
-margin_right = 1047.0
-margin_bottom = 298.0
+offset_right = 1047.0
+offset_bottom = 298.0
 size_flags_horizontal = 3
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1040.0
-margin_bottom = 387.0
-rect_min_size = Vector2( 0, 380 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 1040.0
+offset_bottom = 387.0
+custom_minimum_size = Vector2( 0, 380 )
 size_flags_horizontal = 1
 size_flags_vertical = 5
 run_button_label = "run()"
 
 [node name="DictInventory" parent="RunnableCodeExample" instance=ExtResource( 1 )]
-margin_left = 831.0
-margin_top = 0.0
-margin_right = 1033.0
-margin_bottom = 380.0
+offset_left = 831.0
+offset_top = 0.0
+offset_right = 1033.0
+offset_bottom = 380.0
 size_flags_horizontal = 5
-custom_styles/panel = SubResource( 2 )
+theme_override_styles/panel = SubResource( 2 )
 script = SubResource( 1 )

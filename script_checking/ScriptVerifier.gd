@@ -2,7 +2,7 @@
 #
 # Usage: override the test() function.
 class_name ScriptVerifier
-extends Reference
+extends RefCounted
 
 const ScriptError := preload("./ScriptError.gd")
 const WarningCode := GDScriptCodes.WarningCode

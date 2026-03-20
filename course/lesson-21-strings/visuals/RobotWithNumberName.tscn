@@ -1,23 +1,23 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/theme/fonts/font_text_italics.tres" type="DynamicFont" id=4]
+[ext_resource path="res://ui/theme/fonts/font_text_italics.tres" type="FontFile" id=4]
 [ext_resource path="res://ui/theme/quiz_outline_neutral.tres" type="StyleBox" id=5]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-onready var _animation_tree := find_node(\"AnimationTree\")
+@onready var _animation_tree := find_child(\"AnimationTree\")
 
 func _ready() -> void:
 	_animation_tree.travel(\"saying_hi\")
 "
 
 [node name="RobotWithNumberName" type="PanelContainer"]
-margin_right = 320.0
-margin_bottom = 251.0
-rect_min_size = Vector2( 400, 250 )
-custom_styles/panel = ExtResource( 5 )
+offset_right = 320.0
+offset_bottom = 251.0
+custom_minimum_size = Vector2( 400, 250 )
+theme_override_styles/panel = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -27,22 +27,22 @@ position = Vector2( 196, 166 )
 script = SubResource( 1 )
 
 [node name="Control" type="Control" parent="."]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 396.0
-margin_bottom = 247.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 396.0
+offset_bottom = 247.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Control"]
-margin_top = 40.0
-margin_right = 392.0
-margin_bottom = 68.0
-rect_min_size = Vector2( 392, 28 )
+offset_top = 40.0
+offset_right = 392.0
+offset_bottom = 68.0
+custom_minimum_size = Vector2( 392, 28 )
 size_flags_horizontal = 3
 size_flags_vertical = 13
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "70801"
 align = 1
 autowrap = true

@@ -8,7 +8,7 @@
 # var error = ScriptError.new()
 # error.from_JSON(json_error)
 class_name ScriptError
-extends Reference
+extends RefCounted
 
 var error_range := ErrorRange.new()
 var message := ""
@@ -18,7 +18,7 @@ var code := 0
 
 func from_JSON(json: Dictionary) -> void:
 	if "message" in json:
-		message = String(json.message)
+		message = str(json.message)
 	if "range" in json:
 		error_range.from_JSON(json.range)
 	if "severity" in json:
@@ -35,7 +35,7 @@ func _improve_error_code(raw_code: int, raw_message: String) -> int:
 	# But if it's -1, try to remap the message to a new code using the GDScript codes database.
 	var remapped_code := -1
 	# Iterate through every record to find the one that has a matching pattern.
-	for record in GDScriptCodes.MESSAGE_DATABASE:
+	for record: Dictionary in GDScriptCodes.MESSAGE_DATABASE:
 		# First check if the record has a valid structure, just in case.
 		if not typeof(record) == TYPE_DICTIONARY:
 			continue
@@ -47,7 +47,7 @@ func _improve_error_code(raw_code: int, raw_message: String) -> int:
 		# Iterate through an array of match patterns to see if any of them matches our message
 		# completely.
 		var matched = false
-		for pattern in record.patterns:
+		for pattern: Array in record.patterns:
 			# Pattern must be an array of strings.
 			if not typeof(pattern) == TYPE_ARRAY:
 				continue

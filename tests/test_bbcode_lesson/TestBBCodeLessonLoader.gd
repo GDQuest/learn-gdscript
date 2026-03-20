@@ -1,7 +1,7 @@
 # Test script to load and parse the BBCode lesson file and display it in UILesson
 extends Node
 
-onready var ui_lesson: UILesson = get_node("UILesson")
+@onready var ui_lesson: UILesson = get_node("UILesson")
 
 var _parser := LessonBBCodeParser.new()
 

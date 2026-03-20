@@ -1,7 +1,7 @@
 extends Control
 
 # @type Array[Node]
-onready var _initial_crates := $Column.get_children()
+@onready var _initial_crates := $Column.get_children()
 # @type Array[int]
 var crates := []
 
@@ -23,7 +23,7 @@ func _ready() -> void:
 		crate.set_label_index(i)
 		i += 1
 		crate.hide_after_animation = true
-		crate.connect("restored", self, "restore_crate")
+		crate.connect("restored", Callable(self, "restore_crate"))
 	crates = range(_initial_crates.size())
 
 
@@ -38,13 +38,13 @@ func _sync_nodes():
 		return
 	var crate = _initial_crates[index]
 	crate.use()
-	var remaining = PoolStringArray()
+	var remaining = PackedStringArray()
 	for crate_index in crates:
 		remaining.append(_initial_crates[crate_index].get_texture_name())
 	# TODO: display this to the user?
 	prints(
 		"removed: ", crate.get_texture_name(), 
-		"remaining: ", '["'+remaining.join('", "')+'"]'
+		"remaining: ", '["'+'", "'.join(remaining)+'"]'
 	)
 
 
@@ -62,7 +62,7 @@ func restore_crate():
 
 
 func get_code(_initial_code: String) -> String:
-	var names := PoolStringArray()
+	var names := PackedStringArray()
 	for crate in _initial_crates:
 		names.append(crate.get_texture_name())
-	return code % [names.join('", "')]
+	return code % ['", "'.join(names)]

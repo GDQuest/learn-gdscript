@@ -6,25 +6,25 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-onready var _animation_tree := find_node(\"AnimationTree\")
+@onready var _animation_tree := find_child(\"AnimationTree\")
 
 func _ready() -> void:
 	_animation_tree.travel(\"saying_hi\")
 "
 
 [node name="PanelContainer2" type="PanelContainer"]
-margin_right = 400.0
-margin_bottom = 260.0
-rect_min_size = Vector2( 400, 260 )
+offset_right = 400.0
+offset_bottom = 260.0
+custom_minimum_size = Vector2( 400, 260 )
 size_flags_horizontal = 3
-custom_styles/panel = ExtResource( 5 )
+theme_override_styles/panel = ExtResource( 5 )
 
 [node name="Center" type="Control" parent="."]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 404.0
-margin_bottom = 264.0
-rect_min_size = Vector2( 400, 260 )
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 404.0
+offset_bottom = 264.0
+custom_minimum_size = Vector2( 400, 260 )
 size_flags_horizontal = 4
 
 [node name="Robot" parent="Center" instance=ExtResource( 1 )]

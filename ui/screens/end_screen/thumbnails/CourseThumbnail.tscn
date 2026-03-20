@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/screens/end_screen/thumbnails/CourseThumbnail.gd" type="Script" id=1]
-[ext_resource path="res://ui/screens/end_screen/thumbnails/bundle-godot-4-starter-kit.png" type="Texture" id=2]
-[ext_resource path="res://ui/theme/fonts/Montserrat-ExtraBold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://ui/screens/end_screen/thumbnails/bundle-godot-4-starter-kit.png" type="Texture2D" id=2]
+[ext_resource path="res://ui/theme/fonts/Montserrat-ExtraBold.ttf" type="FontFile" id=3]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="FontFile" id=1]
 size = 14
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
@@ -13,8 +13,8 @@ font_data = ExtResource( 3 )
 [node name="CourseThumbnail" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -1408.0
-margin_bottom = -791.0
+offset_right = -1408.0
+offset_bottom = -791.0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 3
 script = ExtResource( 1 )
@@ -33,11 +33,11 @@ stretch_mode = 6
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -26.0
-margin_bottom = -5.0
-rect_pivot_offset = Vector2( 256, 10.5 )
-custom_colors/font_color = Color( 1, 0.835294, 0, 1 )
-custom_fonts/font = SubResource( 1 )
+offset_top = -26.0
+offset_bottom = -5.0
+pivot_offset = Vector2( 256, 10.5 )
+theme_override_colors/font_color = Color( 1, 0.835294, 0, 1 )
+theme_override_fonts/font = SubResource( 1 )
 text = "Early Access release: 2024/01/30"
 align = 1
 uppercase = true

@@ -1,7 +1,7 @@
 extends Control
 
 # @type Array[Node]
-onready var _initial_crates := $Column.get_children()
+@onready var _initial_crates := $Column.get_children()
 
 var _crates := []
 var index := 0
@@ -14,10 +14,10 @@ func _ready() -> void:
 	for crate in _initial_crates:
 		crate.set_label_index(i)
 		i += 1
-		if not crate.is_connected("used", self, "_pop_next"):
-			crate.connect("used", self, "_pop_next")
-		if not crate.is_connected("restored", self, "_restore_next"):
-			crate.connect("restored", self, "_restore_next")
+		if not crate.is_connected("used", Callable(self, "_pop_next")):
+			crate.connect("used", Callable(self, "_pop_next"))
+		if not crate.is_connected("restored", Callable(self, "_restore_next")):
+			crate.connect("restored", Callable(self, "_restore_next"))
 	crates = _initial_crates.duplicate()
 	if get_tree().current_scene == self:
 		_run()

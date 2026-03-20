@@ -8,15 +8,15 @@ func _ready() -> void:
 		modulate.a = 0.0
 		return
 
-	connect("pressed", self, "_toggle_fullscreen")
-	Events.connect("fullscreen_toggled", self, "_toggle_fullscreen")
+	connect("pressed", Callable(self, "_toggle_fullscreen"))
+	Events.connect("fullscreen_toggled", Callable(self, "_toggle_fullscreen"))
 	_update_icon()
 
 
 func _toggle_fullscreen() -> void:
-	OS.window_fullscreen = not OS.window_fullscreen
+	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (not ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))) else Window.MODE_WINDOWED
 	_update_icon()
 
 
 func _update_icon():
-	icon = EDITOR_COLLAPSE_ICON if OS.window_fullscreen else EDITOR_EXPAND_ICON
+	icon = EDITOR_COLLAPSE_ICON if ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)) else EDITOR_EXPAND_ICON

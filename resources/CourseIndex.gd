@@ -1,5 +1,5 @@
 class_name CourseIndex
-extends Reference
+extends RefCounted
 
 
 func get_title() -> String:

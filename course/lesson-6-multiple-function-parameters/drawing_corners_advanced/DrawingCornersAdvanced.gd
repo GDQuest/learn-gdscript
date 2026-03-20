@@ -22,10 +22,10 @@ func draw_corner(length, angle):
 
 
 func _ready() -> void:
-	if not is_connected("turtle_finished", self, "_complete_run"):
-		connect("turtle_finished", self, "_complete_run")
+	if not is_connected("turtle_finished", Callable(self, "_complete_run")):
+		connect("turtle_finished", Callable(self, "_complete_run"))
 
 
 func _complete_run() -> void:
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	Events.emit_signal("practice_run_completed")

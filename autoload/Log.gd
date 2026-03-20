@@ -12,16 +12,16 @@ enum LEVEL {
 var also_print_to_godot := false;
 var _js_available := OS.has_feature("JavaScript")
 var is_joypad = false
-var joypad_index = -1
+var joypad_index := -1
 var GDQUEST: JavaScriptObject
 var _log_lines := []
 
 func _init() -> void:
-	var _err = Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")
+	var _err = Input.connect("joy_connection_changed", Callable(self, "_on_joy_connection_changed"))
 	if not _js_available:
 		log_system_info_if_log_is_empty(get_info())
 	
-	GDQUEST = JavaScript.get_interface("GDQUEST")
+	GDQUEST = JavaScriptBridge.get_interface("GDQUEST")
 	if not GDQUEST:
 		_js_available = false
 		return
@@ -32,13 +32,13 @@ func _init() -> void:
 func write(level: int, properties: Dictionary, message: String) -> void:
 	if also_print_to_godot and OS.is_debug_build():
 		var level_index := LEVEL.values().find(level)
-		var props := {
+		var print_props := {
 			"lvl": LEVEL.keys()[level_index] if level_index > -1 else "UNKNOWN",
 			"msg": message,
 			"prp": properties,
 			"sep": "------------"
 		}
-		var object := "[%lvl]\n%msg\n%prp\n%sep".format(props, "%_")
+		var object := "[%lvl]\n%msg\n%prp\n%sep".format(print_props, "%_")
 		match(level):
 			LEVEL.FATAL,LEVEL.ERROR:
 				push_error(object);
@@ -104,19 +104,17 @@ func download() -> void:
 	if not _js_available:
 		var json_string := ""
 		for line in _log_lines:
-			json_string += JSON.print(line) + "\n"
-		var file := File.new()
-		var dir := Directory.new()
+			json_string += JSON.stringify(line) + "\n"
 		var time := Time.get_datetime_dict_from_system()
 		var dir_name := "error_logs"
 		var file_name := "%d-%02d-%02d-%02d-%02d" % [time.year, time.month, time.day, time.hour, time.minute];
-		var ok := dir.make_dir_recursive("user://%s/"%[dir_name])
+		var ok := DirAccess.make_dir_recursive_absolute("user://%s/"%[dir_name])
 		if ok != OK:
 			push_error("could not create %s"%[dir_name])
-		file.open("user://%s/%s.log"%[dir_name, file_name], File.WRITE)
+		var file := FileAccess.open("user://%s/%s.log"%[dir_name, file_name], FileAccess.WRITE)
 		file.store_string(json_string)
 		file.close()
-		var dir_absolute_path := OS.get_user_data_dir().plus_file("error_logs")+"/"
+		var dir_absolute_path := OS.get_user_data_dir().path_join("error_logs")+"/"
 		OS.shell_open(dir_absolute_path)
 		return
 	# warning-ignore:unsafe_property_access
@@ -147,7 +145,7 @@ func log_system_info_if_log_is_empty(additional_data := {}) -> void:
 
 
 func godot_dict_to_js_obj(properties: Dictionary):
-	var props = JavaScript.create_object("Object", {})
+	var props = JavaScriptBridge.create_object("Object", {})
 	for key in properties:
 		var value = properties[key]
 		if value is Dictionary:
@@ -158,20 +156,20 @@ func godot_dict_to_js_obj(properties: Dictionary):
 	return props
 
 
-func get_info():
-	var info = {
+func get_info() -> Dictionary:
+	var local_info := {
 		"OS": OS.get_name(),
 		"datetime": Time.get_datetime_dict_from_system(),
-		"video_driver": OS.get_video_driver_name(OS.get_current_video_driver()),
-		"video_adapter": VisualServer.get_video_adapter_name(),
-		"video_vendor": VisualServer.get_video_adapter_vendor(),
-		"screen_size": OS.get_screen_size(),
-		"screen_dpi": OS.get_screen_dpi(),
+		"video_driver": RenderingServer.get_current_rendering_driver_name(),
+		"video_adapter": RenderingServer.get_video_adapter_name(),
+		"video_vendor": RenderingServer.get_video_adapter_vendor(),
+		"screen_size": DisplayServer.screen_get_size(),
+		"screen_dpi": DisplayServer.screen_get_dpi(),
 		"cores": OS.get_processor_count(),
 		"locale": OS.get_locale(),
 		"joypad": Input.get_joy_name(joypad_index) if is_joypad else "" 
 	}
-	return info
+	return local_info
 
 
 func _on_joy_connection_changed(device_id, connected):

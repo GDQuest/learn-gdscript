@@ -4,16 +4,16 @@
 
 [node name="GDScriptCodeExample" type="TextEdit"]
 anchor_right = 1.0
-margin_right = -1620.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 300, 172 )
+offset_right = -1620.0
+offset_bottom = 60.0
+custom_minimum_size = Vector2( 300, 172 )
 size_flags_horizontal = 3
 text = "func _process(delta):
 	position = lerp(
 		position, get_local_mouse_position(), 2 * delta
 	)"
 readonly = true
-syntax_highlighting = true
+syntax_highlighter = true
 show_line_numbers = true
 draw_tabs = true
 draw_spaces = true

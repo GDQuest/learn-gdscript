@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/theme/fonts/font_title_big.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/theme/fonts/font_title_big.tres" type="FontFile" id=2]
 [ext_resource path="res://course/common/inventory/DictInventory.gd" type="Script" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -23,49 +23,49 @@ grow_end = -100.0
 thickness = 4
 
 [node name="DictInventory" type="PanelContainer"]
-margin_top = 44.0
-margin_right = 840.0
-margin_bottom = 1080.0
+offset_top = 44.0
+offset_right = 840.0
+offset_bottom = 1080.0
 size_flags_vertical = 3
 theme = ExtResource( 1 )
-custom_styles/panel = SubResource( 1 )
+theme_override_styles/panel = SubResource( 1 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Margin" type="MarginContainer" parent="."]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 836.0
-margin_bottom = 1032.0
-custom_constants/margin_right = 20
-custom_constants/margin_top = 30
-custom_constants/margin_left = 20
-custom_constants/margin_bottom = 20
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 836.0
+offset_bottom = 1032.0
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="Column" type="VBoxContainer" parent="Margin"]
-margin_left = 20.0
-margin_top = 30.0
-margin_right = 812.0
-margin_bottom = 1008.0
-custom_constants/separation = 20
+offset_left = 20.0
+offset_top = 30.0
+offset_right = 812.0
+offset_bottom = 1008.0
+theme_override_constants/separation = 20
 
 [node name="Title" type="Label" parent="Margin/Column"]
-margin_right = 792.0
-margin_bottom = 40.0
-custom_fonts/font = ExtResource( 2 )
+offset_right = 792.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource( 2 )
 text = "Inventory"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="Margin/Column"]
-margin_top = 60.0
-margin_right = 792.0
-margin_bottom = 68.0
-custom_styles/separator = SubResource( 2 )
+offset_top = 60.0
+offset_right = 792.0
+offset_bottom = 68.0
+theme_override_styles/separator = SubResource( 2 )
 
 [node name="Grid" type="GridContainer" parent="Margin/Column"]
-margin_top = 88.0
-margin_right = 792.0
-margin_bottom = 88.0
+offset_top = 88.0
+offset_right = 792.0
+offset_bottom = 88.0
 columns = 2

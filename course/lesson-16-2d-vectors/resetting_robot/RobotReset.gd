@@ -3,13 +3,13 @@ extends Node2D
 var _position_start: Vector2
 var _scale_start: Vector2
 
-onready var _animation_tree := find_node("AnimationTree")
-onready var _camera := $Camera2D
+@onready var _animation_tree := find_child("AnimationTree")
+@onready var _camera := $Camera2D
 
 func _ready() -> void:
 	_position_start = position
 	_scale_start = scale
-	_camera.set_as_toplevel(true)
+	_camera.set_as_top_level(true)
 	reset()
 
 # EXPORT reset
@@ -20,7 +20,7 @@ func reset_robot():
 
 func _run() -> void:
 	reset_robot()
-	yield(get_tree().create_timer(1), "timeout")
+	await get_tree().create_timer(1).timeout
 	Events.emit_signal("practice_run_completed")
 	_animation_tree.travel("saying_hi")
 

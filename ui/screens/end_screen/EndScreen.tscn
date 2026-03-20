@@ -1,40 +1,40 @@
 [gd_scene load_steps=50 format=2]
 
-[ext_resource path="res://ui/theme/fonts/Inter-Medium.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui/theme/fonts/Inter-Medium.ttf" type="FontFile" id=1]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
 [ext_resource path="res://ui/screens/end_screen/thumbnails/CourseThumbnail.tscn" type="PackedScene" id=3]
-[ext_resource path="res://ui/screens/end_screen/thumbnails/bundle-learn-gamedev-godot-4.png" type="Texture" id=4]
+[ext_resource path="res://ui/screens/end_screen/thumbnails/bundle-learn-gamedev-godot-4.png" type="Texture2D" id=4]
 [ext_resource path="res://ui/components/QuitButton.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/screens/end_screen/EndScreen.gd" type="Script" id=6]
 [ext_resource path="res://ui/components/FullScreenButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/theme/panel_breadcrumbs.tres" type="StyleBox" id=8]
-[ext_resource path="res://ui/screens/end_screen/thumbnails/node-essentials-godot-4.png" type="Texture" id=9]
-[ext_resource path="res://ui/screens/end_screen/thumbnails/learn-3d-gamedev-godot-4.png" type="Texture" id=10]
-[ext_resource path="res://ui/icons/navigation_outliner.png" type="Texture" id=11]
-[ext_resource path="res://ui/screens/end_screen/thumbnails/learn-2d-gamedev-godot-4.png" type="Texture" id=12]
-[ext_resource path="res://ui/components/gdquest_logo_white.svg" type="Texture" id=13]
-[ext_resource path="res://ui/theme/fonts/Montserrat-Bold.ttf" type="DynamicFontData" id=14]
-[ext_resource path="res://ui/theme/fonts/Montserrat-Black.ttf" type="DynamicFontData" id=15]
-[ext_resource path="res://ui/theme/fonts/Montserrat-ExtraBold.ttf" type="DynamicFontData" id=16]
-[ext_resource path="res://ui/theme/fonts/Inter-Bold.ttf" type="DynamicFontData" id=17]
-[ext_resource path="res://ui/theme/fonts/Inter-MediumItalic.otf" type="DynamicFontData" id=18]
+[ext_resource path="res://ui/screens/end_screen/thumbnails/node-essentials-godot-4.png" type="Texture2D" id=9]
+[ext_resource path="res://ui/screens/end_screen/thumbnails/learn-3d-gamedev-godot-4.png" type="Texture2D" id=10]
+[ext_resource path="res://ui/icons/navigation_outliner.png" type="Texture2D" id=11]
+[ext_resource path="res://ui/screens/end_screen/thumbnails/learn-2d-gamedev-godot-4.png" type="Texture2D" id=12]
+[ext_resource path="res://ui/components/gdquest_logo_white.svg" type="Texture2D" id=13]
+[ext_resource path="res://ui/theme/fonts/Montserrat-Bold.ttf" type="FontFile" id=14]
+[ext_resource path="res://ui/theme/fonts/Montserrat-Black.ttf" type="FontFile" id=15]
+[ext_resource path="res://ui/theme/fonts/Montserrat-ExtraBold.ttf" type="FontFile" id=16]
+[ext_resource path="res://ui/theme/fonts/Inter-Bold.ttf" type="FontFile" id=17]
+[ext_resource path="res://ui/theme/fonts/Inter-MediumItalic.otf" type="FontFile" id=18]
 [ext_resource path="res://ui/components/GDQuestLogo.gd" type="Script" id=19]
-[ext_resource path="res://ui/theme/fonts/Poppins-Bold.ttf" type="DynamicFontData" id=20]
-[ext_resource path="res://ui/screens/end_screen/third-person-platformer-panoramic.jpg" type="Texture" id=21]
-[ext_resource path="res://ui/screens/end_screen/arrow_black.svg" type="Texture" id=22]
+[ext_resource path="res://ui/theme/fonts/Poppins-Bold.ttf" type="FontFile" id=20]
+[ext_resource path="res://ui/screens/end_screen/third-person-platformer-panoramic.jpg" type="Texture2D" id=21]
+[ext_resource path="res://ui/screens/end_screen/arrow_black.svg" type="Texture2D" id=22]
 
 [sub_resource type="GDScript" id=37]
 script/source = "extends Button
 
 func _ready() -> void:
-	connect(\"pressed\", get_tree(), \"change_scene\", [\"res://ui/UICore.tscn\"])
+	connect(\"pressed\", Callable(get_tree(), \"change_scene_to_file\").bind(\"res://ui/UICore.tscn\"))
 "
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.251478, 0.2021, 0.43, 0.894118 )
 shadow_offset = Vector2( 0, 4 )
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="FontFile" id=10]
 size = 38
 outline_size = 6
 outline_color = Color( 0.729412, 0.196078, 1, 1 )
@@ -48,42 +48,42 @@ content_margin_right = 8.0
 content_margin_top = 8.0
 content_margin_bottom = 8.0
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="FontFile" id=12]
 size = 18
 font_data = ExtResource( 14 )
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="FontFile" id=13]
 size = 28
 font_data = ExtResource( 15 )
 
-[sub_resource type="DynamicFont" id=14]
+[sub_resource type="FontFile" id=14]
 size = 20
 font_data = ExtResource( 16 )
 
-[sub_resource type="DynamicFont" id=15]
+[sub_resource type="FontFile" id=15]
 size = 17
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 14 )
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="FontFile" id=16]
 size = 18
 font_data = ExtResource( 16 )
 
-[sub_resource type="DynamicFont" id=17]
+[sub_resource type="FontFile" id=17]
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=18]
+[sub_resource type="FontFile" id=18]
 font_data = ExtResource( 17 )
 
-[sub_resource type="DynamicFont" id=25]
+[sub_resource type="FontFile" id=25]
 font_data = ExtResource( 17 )
 
-[sub_resource type="DynamicFont" id=19]
+[sub_resource type="FontFile" id=19]
 size = 13
 font_data = ExtResource( 18 )
 
-[sub_resource type="DynamicFont" id=20]
+[sub_resource type="FontFile" id=20]
 size = 20
 font_data = ExtResource( 20 )
 
@@ -138,12 +138,12 @@ shadow_offset = Vector2( 0, 8 )
 bg_color = Color( 1, 1, 1, 0.341176 )
 shadow_offset = Vector2( 0, 4 )
 
-[sub_resource type="DynamicFont" id=33]
+[sub_resource type="FontFile" id=33]
 size = 20
 use_filter = true
 font_data = ExtResource( 16 )
 
-[sub_resource type="DynamicFont" id=34]
+[sub_resource type="FontFile" id=34]
 font_data = ExtResource( 16 )
 
 [sub_resource type="GDScript" id=36]
@@ -158,15 +158,15 @@ func _ready() -> void:
 
 "
 
-[sub_resource type="DynamicFont" id=35]
+[sub_resource type="FontFile" id=35]
 size = 18
 font_data = ExtResource( 16 )
 
-[sub_resource type="DynamicFont" id=29]
+[sub_resource type="FontFile" id=29]
 size = 18
 font_data = ExtResource( 20 )
 
-[sub_resource type="DynamicFont" id=30]
+[sub_resource type="FontFile" id=30]
 size = 20
 font_data = ExtResource( 20 )
 
@@ -187,7 +187,7 @@ color = Color( 1, 0.254902, 0.490196, 1 )
 [node name="EndScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 2495, 16 )
+pivot_offset = Vector2( 2495, 16 )
 theme = ExtResource( 2 )
 script = ExtResource( 6 )
 __meta__ = {
@@ -199,17 +199,17 @@ anchor_left = 0.01
 anchor_top = 0.069
 anchor_right = 0.01
 anchor_bottom = 0.069
-margin_left = -19.2
-margin_top = -27.52
-margin_right = 1900.8
-margin_bottom = 959.48
+offset_left = -19.2
+offset_top = -27.52
+offset_right = 1900.8
+offset_bottom = 959.48
 mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -47.0
-margin_bottom = 46.0
+offset_top = -47.0
+offset_bottom = 46.0
 mouse_filter = 2
 texture = ExtResource( 21 )
 expand = true
@@ -219,94 +219,94 @@ stretch_mode = 7
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 
 [node name="TopBar" type="PanelContainer" parent="Layout"]
-margin_right = 1920.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 0, 40 )
-custom_styles/panel = ExtResource( 8 )
+offset_right = 1920.0
+offset_bottom = 47.0
+custom_minimum_size = Vector2( 0, 40 )
+theme_override_styles/panel = ExtResource( 8 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Layout/TopBar"]
-margin_right = 1920.0
-margin_bottom = 47.0
-custom_constants/margin_right = 12
-custom_constants/margin_top = 0
-custom_constants/margin_left = 12
-custom_constants/margin_bottom = 0
+offset_right = 1920.0
+offset_bottom = 47.0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_bottom = 0
 
 [node name="ToolBarLayout" type="HBoxContainer" parent="Layout/TopBar/MarginContainer"]
-margin_left = 12.0
-margin_right = 1908.0
-margin_bottom = 47.0
-rect_pivot_offset = Vector2( -683, 4 )
+offset_left = 12.0
+offset_right = 1908.0
+offset_bottom = 47.0
+pivot_offset = Vector2( -683, 4 )
 
 [node name="OutlinerButton" type="Button" parent="Layout/TopBar/MarginContainer/ToolBarLayout"]
-margin_right = 32.0
-margin_bottom = 47.0
-hint_tooltip = "Open the course index"
+offset_right = 32.0
+offset_bottom = 47.0
+tooltip_text = "Open the course index"
 mouse_default_cursor_shape = 2
 icon = ExtResource( 11 )
 flat = true
 script = SubResource( 37 )
 
 [node name="Control" type="Control" parent="Layout/TopBar/MarginContainer/ToolBarLayout"]
-margin_left = 48.0
-margin_right = 1784.0
-margin_bottom = 47.0
+offset_left = 48.0
+offset_right = 1784.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 
 [node name="FullScreenButton" parent="Layout/TopBar/MarginContainer/ToolBarLayout" instance=ExtResource( 7 )]
-margin_left = 1800.0
-margin_right = 1840.0
-margin_bottom = 47.0
+offset_left = 1800.0
+offset_right = 1840.0
+offset_bottom = 47.0
 
 [node name="QuitButton" parent="Layout/TopBar/MarginContainer/ToolBarLayout" instance=ExtResource( 5 )]
-margin_left = 1856.0
-margin_right = 1896.0
-margin_bottom = 47.0
+offset_left = 1856.0
+offset_right = 1896.0
+offset_bottom = 47.0
 
 [node name="CenterRow" type="HBoxContainer" parent="Layout"]
-margin_top = 47.0
-margin_right = 1920.0
-margin_bottom = 1033.0
+offset_top = 47.0
+offset_right = 1920.0
+offset_bottom = 1033.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 
 [node name="Panel" type="PanelContainer" parent="Layout/CenterRow"]
-margin_right = 750.0
-margin_bottom = 986.0
+offset_right = 750.0
+offset_bottom = 986.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-custom_styles/panel = SubResource( 1 )
+theme_override_styles/panel = SubResource( 1 )
 
 [node name="Margin" type="MarginContainer" parent="Layout/CenterRow/Panel"]
-margin_right = 750.0
-margin_bottom = 986.0
-custom_constants/margin_right = 106
-custom_constants/margin_left = 106
+offset_right = 750.0
+offset_bottom = 986.0
+theme_override_constants/margin_right = 106
+theme_override_constants/margin_left = 106
 
 [node name="Column" type="VBoxContainer" parent="Layout/CenterRow/Panel/Margin"]
-margin_left = 106.0
-margin_top = 20.0
-margin_right = 644.0
-margin_bottom = 966.0
+offset_left = 106.0
+offset_top = 20.0
+offset_right = 644.0
+offset_bottom = 966.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Control" type="Control" parent="Layout/CenterRow/Panel/Margin/Column"]
-margin_top = 15.0
-margin_right = 538.0
-margin_bottom = 73.0
-rect_min_size = Vector2( 0, 58 )
+offset_top = 15.0
+offset_right = 538.0
+offset_bottom = 73.0
+custom_minimum_size = Vector2( 0, 58 )
 
 [node name="Label" type="Label" parent="Layout/CenterRow/Panel/Margin/Column/Control"]
-margin_right = 588.0
-margin_bottom = 63.0
-custom_fonts/font = SubResource( 10 )
-custom_styles/normal = SubResource( 11 )
+offset_right = 588.0
+offset_bottom = 63.0
+theme_override_fonts/font = SubResource( 10 )
+theme_override_styles/normal = SubResource( 11 )
 text = "YOU MADE IT!"
 autowrap = true
 
@@ -314,227 +314,227 @@ autowrap = true
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 6.0
-margin_bottom = 6.0
-custom_colors/font_color = Color( 0, 0, 0, 0.34902 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 0.34902 )
-custom_fonts/font = SubResource( 10 )
-custom_styles/normal = SubResource( 11 )
+offset_top = 6.0
+offset_bottom = 6.0
+theme_override_colors/font_color = Color( 0, 0, 0, 0.34902 )
+theme_override_colors/font_outline_color = Color( 0, 0, 0, 0.34902 )
+theme_override_fonts/font = SubResource( 10 )
+theme_override_styles/normal = SubResource( 11 )
 text = "YOU MADE IT!"
 autowrap = true
 
 [node name="ColorRect" type="ColorRect" parent="Layout/CenterRow/Panel/Margin/Column/Control/Label"]
 show_behind_parent = true
-margin_left = 42.0
-margin_top = 21.0
-margin_right = 59.0
-margin_bottom = 41.0
+offset_left = 42.0
+offset_top = 21.0
+offset_right = 59.0
+offset_bottom = 41.0
 color = Color( 0.729412, 0.196078, 1, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="Layout/CenterRow/Panel/Margin/Column/Control/Label"]
 show_behind_parent = true
-margin_left = 184.0
-margin_top = 27.0
-margin_right = 193.0
-margin_bottom = 38.0
+offset_left = 184.0
+offset_top = 27.0
+offset_right = 193.0
+offset_bottom = 38.0
 color = Color( 0.729412, 0.196078, 1, 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Layout/CenterRow/Panel/Margin/Column"]
-margin_top = 89.0
-margin_right = 538.0
-margin_bottom = 154.0
+offset_top = 89.0
+offset_right = 538.0
+offset_bottom = 154.0
 
 [node name="RichTextLabel" type="Label" parent="Layout/CenterRow/Panel/Margin/Column/HBoxContainer"]
-margin_right = 414.0
-margin_bottom = 65.0
+offset_right = 414.0
+offset_bottom = 65.0
 size_flags_horizontal = 3
-custom_constants/line_spacing = -2
-custom_fonts/font = SubResource( 12 )
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = SubResource( 12 )
 text = "Not only did you learn the foundations of coding, you’re a big step closer to making your own games."
 autowrap = true
 
 [node name="Control" type="Control" parent="Layout/CenterRow/Panel/Margin/Column/HBoxContainer"]
-margin_left = 430.0
-margin_right = 538.0
-margin_bottom = 65.0
+offset_left = 430.0
+offset_right = 538.0
+offset_bottom = 65.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.26
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Layout/CenterRow/Panel/Margin/Column"]
-margin_top = 170.0
-margin_right = 538.0
-margin_bottom = 274.0
-custom_constants/separation = -4
+offset_top = 170.0
+offset_right = 538.0
+offset_bottom = 274.0
+theme_override_constants/separation = -4
 
 [node name="Label5" type="Label" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer"]
-margin_right = 538.0
-margin_bottom = 36.0
-custom_fonts/font = SubResource( 13 )
+offset_right = 538.0
+offset_bottom = 36.0
+theme_override_fonts/font = SubResource( 13 )
 text = "Don't stop here..."
 autowrap = true
 uppercase = true
 
 [node name="Label6" type="Label" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer"]
-margin_top = 32.0
-margin_right = 538.0
-margin_bottom = 58.0
-custom_colors/font_color = Color( 0.921569, 0.764706, 1, 1 )
-custom_fonts/font = SubResource( 14 )
+offset_top = 32.0
+offset_right = 538.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color( 0.921569, 0.764706, 1, 1 )
+theme_override_fonts/font = SubResource( 14 )
 text = "The fun stuff starts now!"
 autowrap = true
 uppercase = true
 
 [node name="Control" type="Control" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer"]
-margin_top = 54.0
-margin_right = 538.0
-margin_bottom = 86.0
-rect_min_size = Vector2( 0, 32 )
+offset_top = 54.0
+offset_right = 538.0
+offset_bottom = 86.0
+custom_minimum_size = Vector2( 0, 32 )
 
 [node name="Label3" type="Label" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer"]
-margin_top = 82.0
-margin_right = 538.0
-margin_bottom = 104.0
-custom_fonts/font = SubResource( 15 )
+offset_top = 82.0
+offset_right = 538.0
+offset_bottom = 104.0
+theme_override_fonts/font = SubResource( 15 )
 text = "There are 2 pathways learners traditionally take from here:"
 autowrap = true
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Layout/CenterRow/Panel/Margin/Column"]
-margin_top = 290.0
-margin_right = 538.0
-margin_bottom = 541.0
-custom_constants/separation = -4
+offset_top = 290.0
+offset_right = 538.0
+offset_bottom = 541.0
+theme_override_constants/separation = -4
 
 [node name="TitlePurple" type="Label" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer2"]
-margin_right = 538.0
-margin_bottom = 23.0
-custom_colors/font_color = Color( 0.921569, 0.764706, 1, 1 )
-custom_fonts/font = SubResource( 16 )
+offset_right = 538.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color( 0.921569, 0.764706, 1, 1 )
+theme_override_fonts/font = SubResource( 16 )
 text = "Following video tutorials"
 autowrap = true
 uppercase = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer2"]
-margin_top = 19.0
-margin_right = 538.0
-margin_bottom = 251.0
-custom_constants/separation = 0
+offset_top = 19.0
+offset_right = 538.0
+offset_bottom = 251.0
+theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer2/VBoxContainer"]
-margin_right = 538.0
-margin_bottom = 60.0
-custom_constants/line_spacing = 0
-custom_fonts/font = SubResource( 17 )
+offset_right = 538.0
+offset_bottom = 60.0
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = SubResource( 17 )
 text = "They’re a great way to pick up specific game mechanics but they’re not as effective when you’re trying to learn new skills from the ground up."
 autowrap = true
 
 [node name="Control" type="Control" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer2/VBoxContainer"]
-margin_top = 60.0
-margin_right = 538.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 0, 20 )
+offset_top = 60.0
+offset_right = 538.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 0, 20 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer2/VBoxContainer"]
-margin_top = 80.0
-margin_right = 538.0
-margin_bottom = 128.0
-custom_constants/separation = 0
+offset_top = 80.0
+offset_right = 538.0
+offset_bottom = 128.0
+theme_override_constants/separation = 0
 
 [node name="Control2" type="Control" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer2/VBoxContainer/HBoxContainer"]
-margin_right = 8.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 8, 8 )
+offset_right = 8.0
+offset_bottom = 48.0
+custom_minimum_size = Vector2( 8, 8 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer2/VBoxContainer/HBoxContainer"]
-margin_left = 8.0
-margin_right = 538.0
-margin_bottom = 48.0
+offset_left = 8.0
+offset_right = 538.0
+offset_bottom = 48.0
 size_flags_horizontal = 3
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 
 [node name="Label2" type="Label" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 530.0
-margin_bottom = 20.0
-custom_constants/line_spacing = 0
-custom_fonts/font = SubResource( 18 )
+offset_right = 530.0
+offset_bottom = 20.0
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = SubResource( 18 )
 text = "• There’s no clear learning path."
 autowrap = true
 
 [node name="Control2" type="Control" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 20.0
-margin_right = 530.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 0, 8 )
+offset_top = 20.0
+offset_right = 530.0
+offset_bottom = 28.0
+custom_minimum_size = Vector2( 0, 8 )
 
 [node name="Label3" type="Label" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 28.0
-margin_right = 530.0
-margin_bottom = 48.0
-custom_constants/line_spacing = 0
-custom_fonts/font = SubResource( 18 )
+offset_top = 28.0
+offset_right = 530.0
+offset_bottom = 48.0
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = SubResource( 18 )
 text = "• Retention and skill acquisition is slow and limited."
 autowrap = true
 
 [node name="Control3" type="Control" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer2/VBoxContainer"]
-margin_top = 128.0
-margin_right = 538.0
-margin_bottom = 148.0
-rect_min_size = Vector2( 0, 20 )
+offset_top = 128.0
+offset_right = 538.0
+offset_bottom = 148.0
+custom_minimum_size = Vector2( 0, 20 )
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer2/VBoxContainer"]
-margin_top = 148.0
-margin_right = 538.0
-margin_bottom = 232.0
-custom_fonts/bold_font = SubResource( 25 )
-custom_fonts/normal_font = SubResource( 17 )
+offset_top = 148.0
+offset_right = 538.0
+offset_bottom = 232.0
+theme_override_fonts/bold_font = SubResource( 25 )
+theme_override_fonts/normal_font = SubResource( 17 )
 bbcode_enabled = true
-bbcode_text = "We make our fair share of [b][color=#ebc3ff][url=https://www.youtube.com/@Gdquest/videos]free tutorials[/url][/color][/b]. They will come in very handy once you start making games on your own. But to get started, we really recommend you learn how to think like a game developer using [b][color=#ebc3ff][url=https://school.gdquest.com/godot-4-early-access]courses[/url][/color][/b]."
+text = "We make our fair share of [b][color=#ebc3ff][url=https://www.youtube.com/@Gdquest/videos]free tutorials[/url][/color][/b]. They will come in very handy once you start making games on your own. But to get started, we really recommend you learn how to think like a game developer using [b][color=#ebc3ff][url=https://school.gdquest.com/godot-4-early-access]courses[/url][/color][/b]."
 text = "We make our fair share of free tutorials. They will come in very handy once you start making games on your own. But to get started, we really recommend you learn how to think like a game developer using courses."
 fit_content_height = true
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Layout/CenterRow/Panel/Margin/Column"]
-margin_top = 557.0
-margin_right = 538.0
-margin_bottom = 767.0
-custom_constants/separation = -4
+offset_top = 557.0
+offset_right = 538.0
+offset_bottom = 767.0
+theme_override_constants/separation = -4
 
 [node name="TitlePurple2" type="Label" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer3"]
-margin_right = 538.0
-margin_bottom = 23.0
-custom_colors/font_color = Color( 0.921569, 0.764706, 1, 1 )
-custom_fonts/font = SubResource( 16 )
+offset_right = 538.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color( 0.921569, 0.764706, 1, 1 )
+theme_override_fonts/font = SubResource( 16 )
 text = "Learning with courses"
 autowrap = true
 uppercase = true
 
 [node name="Control" type="Control" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer3"]
-margin_top = 19.0
-margin_right = 538.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 0, 6 )
+offset_top = 19.0
+offset_right = 538.0
+offset_bottom = 25.0
+custom_minimum_size = Vector2( 0, 6 )
 
 [node name="Label" type="Label" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer3"]
-margin_top = 21.0
-margin_right = 538.0
-margin_bottom = 72.0
-custom_constants/line_spacing = 0
-custom_fonts/font = SubResource( 19 )
+offset_top = 21.0
+offset_right = 538.0
+offset_bottom = 72.0
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = SubResource( 19 )
 text = "Note that most available courses online are actually premium series of video tutorials. The problem of retaining information and acquiring real skills unfortunately still applies to them."
 autowrap = true
 
 [node name="Control3" type="Control" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer3"]
-margin_top = 68.0
-margin_right = 538.0
-margin_bottom = 88.0
-rect_min_size = Vector2( 0, 20 )
+offset_top = 68.0
+offset_right = 538.0
+offset_bottom = 88.0
+custom_minimum_size = Vector2( 0, 20 )
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer3"]
-margin_top = 84.0
-margin_right = 538.0
-margin_bottom = 210.0
-custom_fonts/bold_font = SubResource( 25 )
-custom_fonts/normal_font = SubResource( 17 )
+offset_top = 84.0
+offset_right = 538.0
+offset_bottom = 210.0
+theme_override_fonts/bold_font = SubResource( 25 )
+theme_override_fonts/normal_font = SubResource( 17 )
 bbcode_enabled = true
-bbcode_text = "At GDQuest, we’re educators at heart. We believe in applied study and we believe it doesn’t have to be boring. When teaching is done correctly, most people highly enjoy the sensation of leveling up!
+text = "At GDQuest, we’re educators at heart. We believe in applied study and we believe it doesn’t have to be boring. When teaching is done correctly, most people highly enjoy the sensation of leveling up!
 
 That’s the reason we made this app. It is in fact part of our beginner course [b][color=#ebc3ff][url=https://school.gdquest.com/products/bundle_learn_gamedev_godot_4]Learn Gamedev From Zero with Godot[/url][/color][/b]."
 text = "At GDQuest, we’re educators at heart. We believe in applied study and we believe it doesn’t have to be boring. When teaching is done correctly, most people highly enjoy the sensation of leveling up!
@@ -543,48 +543,48 @@ That’s the reason we made this app. It is in fact part of our beginner course 
 fit_content_height = true
 
 [node name="Control3" type="Control" parent="Layout/CenterRow/Panel/Margin/Column"]
-margin_top = 783.0
-margin_right = 538.0
-margin_bottom = 783.0
+offset_top = 783.0
+offset_right = 538.0
+offset_bottom = 783.0
 
 [node name="Control2" type="Control" parent="Layout/CenterRow/Panel/Margin/Column"]
-margin_top = 799.0
-margin_right = 538.0
-margin_bottom = 851.0
-rect_min_size = Vector2( 300, 52 )
+offset_top = 799.0
+offset_right = 538.0
+offset_bottom = 851.0
+custom_minimum_size = Vector2( 300, 52 )
 
 [node name="LearnMoreButton" type="Button" parent="Layout/CenterRow/Panel/Margin/Column/Control2"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -171.0
-margin_right = 171.0
-margin_bottom = 52.0
-rect_min_size = Vector2( 300, 52 )
-rect_pivot_offset = Vector2( -795, -265 )
+offset_left = -171.0
+offset_right = 171.0
+offset_bottom = 52.0
+custom_minimum_size = Vector2( 300, 52 )
+pivot_offset = Vector2( -795, -265 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
-custom_colors/font_color_focus = Color( 0.415686, 0.0980392, 0, 1 )
-custom_colors/font_color = Color( 0.415686, 0.0980392, 0, 1 )
-custom_colors/font_color_hover = Color( 0.54902, 0.184314, 0.0352941, 1 )
-custom_colors/font_color_pressed = Color( 0.415686, 0.0980392, 0, 1 )
-custom_fonts/font = SubResource( 20 )
-custom_styles/hover = SubResource( 26 )
-custom_styles/pressed = SubResource( 27 )
-custom_styles/focus = SubResource( 24 )
-custom_styles/normal = SubResource( 22 )
+theme_override_colors/font_focus_color = Color( 0.415686, 0.0980392, 0, 1 )
+theme_override_colors/font_color = Color( 0.415686, 0.0980392, 0, 1 )
+theme_override_colors/font_hover_color = Color( 0.54902, 0.184314, 0.0352941, 1 )
+theme_override_colors/font_pressed_color = Color( 0.415686, 0.0980392, 0, 1 )
+theme_override_fonts/font = SubResource( 20 )
+theme_override_styles/hover = SubResource( 26 )
+theme_override_styles/pressed = SubResource( 27 )
+theme_override_styles/focus = SubResource( 24 )
+theme_override_styles/normal = SubResource( 22 )
 text = "LEARN GAMEDEV WITH GODOT"
 
 [node name="Control4" type="Control" parent="Layout/CenterRow/Panel/Margin/Column"]
-margin_top = 867.0
-margin_right = 538.0
-margin_bottom = 867.0
+offset_top = 867.0
+offset_right = 538.0
+offset_bottom = 867.0
 
 [node name="GDQuestLogo" type="TextureButton" parent="Layout/CenterRow/Panel/Margin/Column"]
-margin_left = 194.0
-margin_top = 883.0
-margin_right = 344.0
-margin_bottom = 931.0
-rect_min_size = Vector2( 150, 48 )
+offset_left = 194.0
+offset_top = 883.0
+offset_right = 344.0
+offset_bottom = 931.0
+custom_minimum_size = Vector2( 150, 48 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource( 13 )
@@ -596,18 +596,18 @@ COLOR_HOVER = Color( 1, 1, 1, 1 )
 COLOR_PRESSED = Color( 0.956863, 0.866667, 1, 1 )
 
 [node name="Control2" type="Control" parent="Layout/CenterRow"]
-margin_left = 750.0
-margin_right = 1500.0
-margin_bottom = 986.0
+offset_left = 750.0
+offset_right = 1500.0
+offset_bottom = 986.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="Control3" type="Control" parent="Layout/CenterRow"]
-margin_left = 1500.0
-margin_right = 1920.0
-margin_bottom = 986.0
+offset_left = 1500.0
+offset_right = 1920.0
+offset_bottom = 986.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -616,22 +616,22 @@ size_flags_stretch_ratio = 1.12
 [node name="Panel" type="PanelContainer" parent="Layout/CenterRow/Control3"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 28 )
+theme_override_styles/panel = SubResource( 28 )
 
 [node name="Margin" type="MarginContainer" parent="Layout/CenterRow/Control3/Panel"]
-margin_right = 420.0
-margin_bottom = 986.0
+offset_right = 420.0
+offset_bottom = 986.0
 mouse_filter = 2
-custom_constants/margin_right = 40
-custom_constants/margin_top = 40
-custom_constants/margin_left = 40
-custom_constants/margin_bottom = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_bottom = 40
 
 [node name="Column" type="VBoxContainer" parent="Layout/CenterRow/Control3/Panel/Margin"]
-margin_left = 40.0
-margin_top = 40.0
-margin_right = 380.0
-margin_bottom = 946.0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 380.0
+offset_bottom = 946.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
@@ -639,8 +639,8 @@ alignment = 1
 [node name="CourseThumbnail" parent="Layout/CenterRow/Control3/Panel/Margin/Column" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 340.0
-margin_bottom = 182.0
+offset_right = 340.0
+offset_bottom = 182.0
 size_flags_stretch_ratio = 1.15
 link = "https://school.gdquest.com/products/bundle_godot_4_starter_kit"
 text_scale = 0.95
@@ -648,9 +648,9 @@ text_scale = 0.95
 [node name="CourseThumbnail2" parent="Layout/CenterRow/Control3/Panel/Margin/Column" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 198.0
-margin_right = 340.0
-margin_bottom = 381.0
+offset_top = 198.0
+offset_right = 340.0
+offset_bottom = 381.0
 size_flags_stretch_ratio = 1.15
 texture = ExtResource( 4 )
 link = "https://school.gdquest.com/products/bundle_learn_gamedev_godot_4"
@@ -659,9 +659,9 @@ text_scale = 0.95
 [node name="CourseThumbnail3" parent="Layout/CenterRow/Control3/Panel/Margin/Column" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 397.0
-margin_right = 340.0
-margin_bottom = 556.0
+offset_top = 397.0
+offset_right = 340.0
+offset_bottom = 556.0
 texture = ExtResource( 12 )
 link = "https://school.gdquest.com/products/learn_2d_gamedev_godot_4"
 text_scale = 0.8
@@ -669,9 +669,9 @@ text_scale = 0.8
 [node name="CourseThumbnail4" parent="Layout/CenterRow/Control3/Panel/Margin/Column" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 572.0
-margin_right = 340.0
-margin_bottom = 731.0
+offset_top = 572.0
+offset_right = 340.0
+offset_bottom = 731.0
 texture = ExtResource( 10 )
 release_date = "2024-04-30T12:00:00Z"
 link = "https://school.gdquest.com/products/learn_3d_gamedev_godot_4"
@@ -680,105 +680,105 @@ text_scale = 0.8
 [node name="CourseThumbnail5" parent="Layout/CenterRow/Control3/Panel/Margin/Column" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 747.0
-margin_right = 340.0
-margin_bottom = 906.0
+offset_top = 747.0
+offset_right = 340.0
+offset_bottom = 906.0
 texture = ExtResource( 9 )
 release_date = "2024-07-30T12:00:00Z"
 link = "https://school.gdquest.com/products/node_essentials_godot_4"
 text_scale = 0.8
 
 [node name="Control" type="Control" parent="Layout/CenterRow/Control3"]
-margin_left = -185.0
-margin_top = 149.0
-margin_bottom = 283.0
+offset_left = -185.0
+offset_top = 149.0
+offset_bottom = 283.0
 
 [node name="TextureRect" type="TextureRect" parent="Layout/CenterRow/Control3/Control"]
 anchor_top = -0.09
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 123.0
-margin_top = 6.06
-margin_right = -4.0
-margin_bottom = 1.0
+offset_left = 123.0
+offset_top = 6.06
+offset_right = -4.0
+offset_bottom = 1.0
 mouse_filter = 2
 texture = ExtResource( 22 )
 expand = true
 stretch_mode = 6
 
 [node name="Control" type="VBoxContainer" parent="Layout/CenterRow/Control3/Control"]
-margin_left = 4.0
-margin_top = 80.0
-margin_right = 211.0
-margin_bottom = 139.0
-rect_rotation = -6.81826
-custom_constants/separation = -4
+offset_left = 4.0
+offset_top = 80.0
+offset_right = 211.0
+offset_bottom = 139.0
+rotation = -6.81826
+theme_override_constants/separation = -4
 
 [node name="Label" type="Label" parent="Layout/CenterRow/Control3/Control/Control"]
-margin_right = 207.0
-margin_bottom = 26.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 33 )
+offset_right = 207.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = SubResource( 33 )
 text = "Now available"
 align = 1
 uppercase = true
 
 [node name="LabelPreorder" type="Label" parent="Layout/CenterRow/Control3/Control/Control"]
-margin_top = 22.0
-margin_right = 207.0
-margin_bottom = 43.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 34 )
+offset_top = 22.0
+offset_right = 207.0
+offset_bottom = 43.0
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = SubResource( 34 )
 text = "for preorders"
 align = 1
 uppercase = true
 script = SubResource( 36 )
 
 [node name="Control" type="Control" parent="Layout/CenterRow/Control3/Control/Control"]
-margin_top = 39.0
-margin_right = 207.0
-margin_bottom = 43.0
-rect_min_size = Vector2( 0, 4 )
+offset_top = 39.0
+offset_right = 207.0
+offset_bottom = 43.0
+custom_minimum_size = Vector2( 0, 4 )
 
 [node name="Label3" type="Label" parent="Layout/CenterRow/Control3/Control/Control"]
-margin_top = 39.0
-margin_right = 207.0
-margin_bottom = 62.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 35 )
+offset_top = 39.0
+offset_right = 207.0
+offset_bottom = 62.0
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = SubResource( 35 )
 text = "Godot 4 courses!!"
 align = 1
 
 [node name="BottomColorFringe" type="HBoxContainer" parent="Layout"]
-margin_top = 1033.0
-margin_right = 1920.0
-margin_bottom = 1080.0
+offset_top = 1033.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 mouse_filter = 2
 size_flags_horizontal = 3
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 
 [node name="ColorRect" type="ColorRect" parent="Layout/BottomColorFringe"]
-margin_right = 750.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 0, 47 )
+offset_right = 750.0
+offset_bottom = 47.0
+custom_minimum_size = Vector2( 0, 47 )
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 color = Color( 0.529412, 0.65098, 0.439216, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="Layout/BottomColorFringe"]
-margin_left = 750.0
-margin_right = 1500.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 0, 47 )
+offset_left = 750.0
+offset_right = 1500.0
+offset_bottom = 47.0
+custom_minimum_size = Vector2( 0, 47 )
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 color = Color( 0.643137, 0.878431, 0.541176, 1 )
 
 [node name="ColorRect3" type="ColorRect" parent="Layout/BottomColorFringe"]
-margin_left = 1500.0
-margin_right = 1920.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 0, 47 )
+offset_left = 1500.0
+offset_right = 1920.0
+offset_bottom = 47.0
+custom_minimum_size = Vector2( 0, 47 )
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.12
@@ -788,10 +788,10 @@ color = Color( 0.368627, 0.984314, 0.352941, 1 )
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = -23.0
-margin_bottom = 3.0
-custom_colors/font_color = Color( 0.254902, 0.25098, 0.258824, 1 )
-custom_fonts/font = SubResource( 29 )
+offset_top = -23.0
+offset_bottom = 3.0
+theme_override_colors/font_color = Color( 0.254902, 0.25098, 0.258824, 1 )
+theme_override_fonts/font = SubResource( 29 )
 text = "Teaching gamedev in the classroom?"
 align = 1
 
@@ -799,12 +799,12 @@ align = 1
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = -6.0
-margin_bottom = 26.0
+offset_top = -6.0
+offset_bottom = 26.0
 mouse_filter = 0
 mouse_default_cursor_shape = 2
-custom_colors/font_color = Color( 1, 0.254902, 0.490196, 1 )
-custom_fonts/font = SubResource( 30 )
+theme_override_colors/font_color = Color( 1, 0.254902, 0.490196, 1 )
+theme_override_fonts/font = SubResource( 30 )
 text = "Get in touch"
 align = 1
 uppercase = true
@@ -815,11 +815,11 @@ anchor_left = 0.0571429
 anchor_top = 0.90625
 anchor_right = 0.942857
 anchor_bottom = 0.90625
-margin_left = 115.0
-margin_top = -8.0
-margin_right = -116.0
+offset_left = 115.0
+offset_top = -8.0
+offset_right = -116.0
 mouse_filter = 2
-custom_styles/separator = SubResource( 32 )
+theme_override_styles/separator = SubResource( 32 )
 __meta__ = {
 "_edit_use_anchors_": true
 }

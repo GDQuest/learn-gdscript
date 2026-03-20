@@ -1,25 +1,21 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://doicj7hty5hyt"]
 
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://course/common/GDScriptCodeExample.gd" type="Script" id=2]
-[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=3]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
+[ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="3"]
+[ext_resource type="CodeHighlighter" uid="uid://btgneedqt1eni" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="3_l403w"]
 
-[node name="GDScriptCodeExample" type="TextEdit"]
+[node name="GDScriptCodeExample" type="CodeEdit" unique_id=726043684]
+custom_minimum_size = Vector2(600, 200)
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -1264.0
-margin_bottom = -954.0
-rect_min_size = Vector2( 600, 200 )
-theme = ExtResource( 1 )
-custom_styles/read_only = ExtResource( 3 )
-readonly = true
-syntax_highlighting = true
-show_line_numbers = true
-draw_tabs = true
-draw_spaces = true
+offset_right = -1264.0
+offset_bottom = -880.0
+theme = ExtResource("1")
+theme_override_styles/read_only = ExtResource("3")
 context_menu_enabled = false
 shortcut_keys_enabled = false
-smooth_scrolling = true
-caret_block_mode = true
 caret_blink = true
-script = ExtResource( 2 )
+syntax_highlighter = ExtResource("3_l403w")
+draw_tabs = true
+draw_spaces = true

@@ -1,128 +1,104 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene format=3 uid="uid://dnix44no1xkey"]
 
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/components/popups/ErrorOverlayPopup.gd" type="Script" id=2]
-[ext_resource path="res://ui/components/Revealer.tscn" type="PackedScene" id=5]
-[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=6]
-[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=7]
-[ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=8]
-[ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=9]
-[ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=10]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
+[ext_resource type="Script" uid="uid://dq0hubbnj6nws" path="res://ui/components/popups/ErrorOverlayPopup.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://cvl6pxx3qb736" path="res://ui/components/Revealer.tscn" id="5"]
+[ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="6"]
+[ext_resource type="FontVariation" uid="uid://cipfqcm3yp0sc" path="res://ui/theme/fonts/font_text_bold.tres" id="7"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="8"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_hover.tres" id="9"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="10"]
 
-[node name="ErrorOverlayPopup" type="MarginContainer"]
-margin_right = 553.0
-margin_bottom = 362.0
-rect_min_size = Vector2( 580, 360 )
+[node name="ErrorOverlayPopup" type="MarginContainer" unique_id=275232876 node_paths=PackedStringArray("_error_label", "_content_block", "_error_explanation_block", "_error_explanation_value", "_error_suggestion_block", "_error_suggestion_value", "_no_content_label", "_exclusive_buttons", "_close_button")]
+visible = false
+custom_minimum_size = Vector2(580, 360)
+offset_right = 553.0
+offset_bottom = 362.0
 mouse_filter = 2
-theme = ExtResource( 1 )
-custom_constants/margin_right = 0
-custom_constants/margin_top = 0
-custom_constants/margin_left = 0
-custom_constants/margin_bottom = 0
-script = ExtResource( 2 )
+theme = ExtResource("1")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("2")
+_error_label = NodePath("MarginContainer/Column/ErrorLabel")
+_content_block = NodePath("MarginContainer/Column/Content")
+_error_explanation_block = NodePath("MarginContainer/Column/Content/ErrorExplanation")
+_error_explanation_value = NodePath("MarginContainer/Column/Content/ErrorExplanation/Value")
+_error_suggestion_block = NodePath("MarginContainer/Column/Content/ErrorSuggestion")
+_error_suggestion_value = NodePath("MarginContainer/Column/Content/ErrorSuggestion/Value")
+_no_content_label = NodePath("MarginContainer/Column/NoContent")
+_exclusive_buttons = NodePath("MarginContainer/Column/Buttons")
+_close_button = NodePath("MarginContainer/Column/Buttons/CloseButton")
 
-[node name="Panel" type="Panel" parent="."]
-margin_right = 580.0
-margin_bottom = 362.0
+[node name="Panel" type="Panel" parent="." unique_id=1720875587]
+layout_mode = 2
 mouse_filter = 2
-custom_styles/panel = ExtResource( 6 )
+theme_override_styles/panel = ExtResource("6")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 580.0
-margin_bottom = 362.0
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=97064628]
+layout_mode = 2
 
-[node name="Column" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 560.0
-margin_bottom = 342.0
-custom_constants/separation = 8
+[node name="Column" type="VBoxContainer" parent="MarginContainer" unique_id=2038824587]
+layout_mode = 2
+theme_override_constants/separation = 8
 
-[node name="ErrorLabel" type="Label" parent="MarginContainer/Column"]
-margin_right = 540.0
-margin_bottom = 28.0
-custom_colors/font_color = Color( 0.360784, 0.678431, 0.988235, 1 )
-custom_fonts/font = ExtResource( 7 )
-text = "Original error message"
-autowrap = true
+[node name="ErrorLabel" type="Label" parent="MarginContainer/Column" unique_id=1311160456]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.360784, 0.678431, 0.988235, 1)
+theme_override_fonts/font = ExtResource("7")
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/Column"]
-margin_top = 36.0
-margin_right = 540.0
-margin_bottom = 36.0
-custom_constants/separation = 0
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/Column" unique_id=1301229982]
+layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="Content" type="VBoxContainer" parent="MarginContainer/Column"]
-margin_top = 44.0
-margin_right = 540.0
-margin_bottom = 322.0
+[node name="Content" type="VBoxContainer" parent="MarginContainer/Column" unique_id=468346313]
+visible = false
+layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ErrorExplanation" parent="MarginContainer/Column/Content" instance=ExtResource( 5 )]
-margin_right = 540.0
-margin_bottom = 99.0
-rect_min_size = Vector2( 200, 0 )
+[node name="ErrorExplanation" parent="MarginContainer/Column/Content" unique_id=577124066 instance=ExtResource("5")]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
 title = "Why this happens"
 is_expanded = true
 
-[node name="Value" type="RichTextLabel" parent="MarginContainer/Column/Content/ErrorExplanation"]
-margin_left = 8.0
-margin_top = 58.0
-margin_right = 532.0
-margin_bottom = 87.0
+[node name="Value" type="RichTextLabel" parent="MarginContainer/Column/Content/ErrorExplanation" unique_id=564563128]
+layout_mode = 2
 bbcode_enabled = true
-bbcode_text = "Our error explanation."
 text = "Our error explanation."
-fit_content_height = true
 
-[node name="ErrorSuggestion" parent="MarginContainer/Column/Content" instance=ExtResource( 5 )]
-margin_top = 115.0
-margin_right = 540.0
-margin_bottom = 161.0
+[node name="ErrorSuggestion" parent="MarginContainer/Column/Content" unique_id=430840361 instance=ExtResource("5")]
+visible = false
+layout_mode = 2
 title = "How to fix this"
 
-[node name="Value" type="RichTextLabel" parent="MarginContainer/Column/Content/ErrorSuggestion"]
+[node name="Value" type="RichTextLabel" parent="MarginContainer/Column/Content/ErrorSuggestion" unique_id=417247627]
 visible = false
-margin_left = 8.0
-margin_top = 58.0
-margin_right = 556.0
-margin_bottom = 87.0
+layout_mode = 2
 bbcode_enabled = true
-bbcode_text = "Our suggestion on how to fix it."
 text = "Our suggestion on how to fix it."
-fit_content_height = true
 
-[node name="NoContent" type="RichTextLabel" parent="MarginContainer/Column"]
-visible = false
-margin_top = 44.0
-margin_right = 537.0
-margin_bottom = 346.0
+[node name="NoContent" type="RichTextLabel" parent="MarginContainer/Column" unique_id=1738366945]
+layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-bbcode_text = "Sorry, we don't have this particular error message covered yet!
-
-Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.
-
-[center]Thank you![/center]"
 text = "Sorry, we don't have this particular error message covered yet!
 
 Please, use the Report button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.
 
 Thank you!"
 
-[node name="Buttons" type="HBoxContainer" parent="MarginContainer/Column"]
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/Column" unique_id=604373675]
 visible = false
-margin_top = 299.0
-margin_right = 564.0
-margin_bottom = 346.0
+layout_mode = 2
 alignment = 1
 
-[node name="CloseButton" type="Button" parent="MarginContainer/Column/Buttons"]
-margin_left = 222.0
-margin_right = 342.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 120, 0 )
-custom_styles/hover = ExtResource( 9 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/normal = ExtResource( 8 )
+[node name="CloseButton" type="Button" parent="MarginContainer/Column/Buttons" unique_id=828688913]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("8")
+theme_override_styles/pressed = ExtResource("10")
+theme_override_styles/hover = ExtResource("9")
 text = "Hide"

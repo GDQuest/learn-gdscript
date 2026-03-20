@@ -9,13 +9,13 @@ script/source = "extends Node2D
 const LINE_WIDTH := 4.0
 const COLOR_SELECTED_CELL := Color(0.14902, 0.776471, 0.968627)
 
-export var board_size := Vector2(6, 4)
-export var cell_size := Vector2(80, 80)
+@export var board_size := Vector2(6, 4)
+@export var cell_size := Vector2(80, 80)
 
 var board_size_px := cell_size * board_size
 
 # Maps cell positions to nodes
-var units: Dictionary setget set_units
+var units: Dictionary: set = set_units
 
 var selected_units := []
 
@@ -36,7 +36,7 @@ func _ready() -> void:
 func _draw() -> void:
 	for x in range(board_size.x):
 		for y in range(board_size.y):
-			draw_rect(Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, cell_size), Color.white, false, LINE_WIDTH)
+			draw_rect(Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, cell_size), Color.WHITE, false, LINE_WIDTH)
 
 	for cell in selected_units:
 		draw_rect(Rect2(units[cell].position - cell_size / 2.0, cell_size), COLOR_SELECTED_CELL, false, LINE_WIDTH)
@@ -62,19 +62,19 @@ func calculate_cell_position(cell: Vector2):
 "
 
 [node name="PrintForLoop" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
+offset_right = 14.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 607.0
-margin_bottom = 407.0
-rect_min_size = Vector2( 600, 400 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 607.0
+offset_bottom = 407.0
+custom_minimum_size = Vector2( 600, 400 )
 
 [node name="SelectingUnits" type="Node2D" parent="RunnableCodeExample"]
 script = SubResource( 1 )

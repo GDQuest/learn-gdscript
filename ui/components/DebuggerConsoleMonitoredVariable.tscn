@@ -1,22 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://7jp1gbrgurya"]
 
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/components/DebuggerConsoleMonitoredVariable.gd" type="Script" id=2]
-[ext_resource path="res://ui/theme/panel_error_log.tres" type="StyleBox" id=3]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
+[ext_resource type="Script" uid="uid://p2xc3lkx5ruh" path="res://ui/components/DebuggerConsoleMonitoredVariable.gd" id="2"]
+[ext_resource type="StyleBox" path="res://ui/theme/panel_error_log.tres" id="3"]
 
-[node name="DebuggerConsoleMonitoredVariable" type="PanelContainer"]
+[node name="DebuggerConsoleMonitoredVariable" type="PanelContainer" unique_id=2006603270 node_paths=PackedStringArray("_label")]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
-custom_styles/panel = ExtResource( 3 )
-script = ExtResource( 2 )
+theme = ExtResource("1")
+theme_override_styles/panel = ExtResource("3")
+script = ExtResource("2")
+_label = NodePath("Label")
 
-[node name="Label" type="Label" parent="."]
-margin_left = 16.0
-margin_top = 8.0
-margin_right = 1904.0
-margin_bottom = 36.0
+[node name="Label" type="Label" parent="." unique_id=713413045]
+layout_mode = 2
 size_flags_vertical = 0
 text = "Value"
-
-[node name="Tween" type="Tween" parent="."]

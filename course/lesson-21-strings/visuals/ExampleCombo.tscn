@@ -6,8 +6,8 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-onready var _animation_tree := find_node(\"AnimationTree\") as AnimationTree
-onready var _animation_player := find_node(\"AnimationPlayer\") as AnimationPlayer
+@onready var _animation_tree := find_child(\"AnimationTree\") as AnimationTree
+@onready var _animation_player := find_child(\"AnimationPlayer\") as AnimationPlayer
 
 var combo = [\"jump\", \"damage\", \"damage\", \"jump\", \"level\"]
 
@@ -24,22 +24,22 @@ func _run():
 	
 	for action in combo:
 		_animation_tree.travel(action)
-		yield(_animation_tree, \"animation_finished\")
+		await _animation_tree.animation_finished
 "
 
 [node name="ExampleCombo" type="PanelContainer"]
-margin_right = 1047.0
-margin_bottom = 298.0
+offset_right = 1047.0
+offset_bottom = 298.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1040.0
-margin_bottom = 291.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 1040.0
+offset_bottom = 291.0
 gdscript_code = "var combo = [\"jump\", \"damage\", \"damage\", \"jump\", \"level\"]
 
 func perform_combo():

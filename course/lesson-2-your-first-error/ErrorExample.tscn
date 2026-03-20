@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://ui/theme/fonts/font_code.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/theme/fonts/font_code.tres" type="FontFile" id=1]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=2]
 
 [node name="ErrorExample" type="Panel"]
-rect_min_size = Vector2( 460, 80 )
+custom_minimum_size = Vector2( 460, 80 )
 size_flags_horizontal = 3
-custom_styles/panel = ExtResource( 2 )
+theme_override_styles/panel = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -14,14 +14,14 @@ __meta__ = {
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 16.0
-margin_top = 16.0
-margin_right = -16.0
-margin_bottom = -16.0
-rect_min_size = Vector2( 400, 0 )
-custom_fonts/normal_font = ExtResource( 1 )
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+custom_minimum_size = Vector2( 400, 0 )
+theme_override_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
-bbcode_text = "[color=#ff1852]The function \"move\" already exists in this class (at line 22).[/color]"
+text = "[color=#ff1852]The function \"move\" already exists in this class (at line 22).[/color]"
 text = "The function \"move\" already exists in this class (at line 22)."
 fit_content_height = true
 scroll_active = false

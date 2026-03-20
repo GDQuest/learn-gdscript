@@ -3,46 +3,46 @@
 [ext_resource path="res://ui/components/popups/ErrorOverlayPopup.tscn" type="PackedScene" id=1]
 
 [node name="ErrorOverlayPopup" instance=ExtResource( 1 )]
-rect_min_size = Vector2( 540, 0 )
+custom_minimum_size = Vector2( 540, 0 )
 script = null
 
 [node name="Panel" parent="." index="0"]
-margin_right = 553.0
+offset_right = 553.0
 
 [node name="MarginContainer" parent="." index="1"]
-margin_right = 553.0
+offset_right = 553.0
 
 [node name="Column" parent="MarginContainer" index="0"]
-margin_right = 545.0
+offset_right = 545.0
 
 [node name="ErrorLabel" parent="MarginContainer/Column" index="0"]
-margin_right = 537.0
-margin_bottom = 59.0
+offset_right = 537.0
+offset_bottom = 59.0
 text = "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
 
 [node name="HSeparator" parent="MarginContainer/Column" index="1"]
-margin_top = 67.0
-margin_right = 537.0
-margin_bottom = 67.0
+offset_top = 67.0
+offset_right = 537.0
+offset_bottom = 67.0
 
 [node name="Content" parent="MarginContainer/Column" index="2"]
-margin_top = 75.0
-margin_right = 537.0
+offset_top = 75.0
+offset_right = 537.0
 
 [node name="ErrorExplanation" parent="MarginContainer/Column/Content" index="0"]
-margin_right = 537.0
+offset_right = 537.0
 
 [node name="Value" parent="MarginContainer/Column/Content/ErrorExplanation" index="2"]
-margin_right = 537.0
-bbcode_text = "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
+offset_right = 537.0
+text = "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
 text = "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
 
 [node name="ErrorSuggestion" parent="MarginContainer/Column/Content" index="1"]
-margin_right = 537.0
+offset_right = 537.0
 
 [node name="Value" parent="MarginContainer/Column/Content/ErrorSuggestion" index="2"]
-margin_right = 537.0
-bbcode_text = "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
+offset_right = 537.0
+text = "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
 text = "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
 
 [node name="NoContent" parent="MarginContainer/Column" index="3"]

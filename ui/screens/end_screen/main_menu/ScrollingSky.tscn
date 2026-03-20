@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://ui/screens/end_screen/main_menu/sky_dark.png" type="Texture" id=1]
-[ext_resource path="res://ui/screens/end_screen/main_menu/sky_day_blurred.png" type="Texture" id=2]
-[ext_resource path="res://ui/screens/end_screen/main_menu/sky_evening.png" type="Texture" id=3]
+[ext_resource path="res://ui/screens/end_screen/main_menu/sky_dark.png" type="Texture2D" id=1]
+[ext_resource path="res://ui/screens/end_screen/main_menu/sky_day_blurred.png" type="Texture2D" id=2]
+[ext_resource path="res://ui/screens/end_screen/main_menu/sky_evening.png" type="Texture2D" id=3]
 [ext_resource path="res://ui/screens/end_screen/main_menu/Sky.gd" type="Script" id=4]
 
 [node name="ScrollingSky" type="HBoxContainer"]
@@ -10,50 +10,50 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 script = ExtResource( 4 )
 
 [node name="Control" type="Control" parent="."]
-margin_right = 960.0
-margin_bottom = 1080.0
-rect_clip_content = true
+offset_right = 960.0
+offset_bottom = 1080.0
+clip_contents = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
-margin_right = 1920.0
-margin_bottom = 1080.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 texture = ExtResource( 2 )
 expand = true
 
 [node name="Control2" type="Control" parent="."]
-margin_left = 960.0
-margin_right = 1600.0
-margin_bottom = 1080.0
-rect_clip_content = true
+offset_left = 960.0
+offset_right = 1600.0
+offset_bottom = 1080.0
+clip_contents = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="TextureRect" type="TextureRect" parent="Control2"]
-margin_left = -959.0
-margin_right = 961.0
-margin_bottom = 1080.0
+offset_left = -959.0
+offset_right = 961.0
+offset_bottom = 1080.0
 texture = ExtResource( 3 )
 expand = true
 
 [node name="Control3" type="Control" parent="."]
-margin_left = 1600.0
-margin_right = 1920.0
-margin_bottom = 1080.0
-rect_clip_content = true
+offset_left = 1600.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+clip_contents = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="Control3"]
-margin_left = -1599.0
-margin_right = 321.0
-margin_bottom = 1080.0
+offset_left = -1599.0
+offset_right = 321.0
+offset_bottom = 1080.0
 texture = ExtResource( 1 )
 expand = true

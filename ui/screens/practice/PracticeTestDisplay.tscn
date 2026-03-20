@@ -1,29 +1,29 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui/screens/practice/PracticeTestDisplay.gd" type="Script" id=1]
-[ext_resource path="res://ui/icons/checkmark_none.svg" type="Texture" id=2]
+[ext_resource path="res://ui/icons/checkmark_none.svg" type="Texture2D" id=2]
 
 [node name="PracticeCheckDisplay" type="HBoxContainer"]
-margin_right = 136.0
-margin_bottom = 32.0
+offset_right = 136.0
+offset_bottom = 32.0
 script = ExtResource( 1 )
 
 [node name="IconAnchors" type="Control" parent="."]
-margin_right = 32.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
+offset_right = 32.0
+offset_bottom = 32.0
+custom_minimum_size = Vector2( 32, 32 )
 
 [node name="Icon" type="TextureRect" parent="IconAnchors"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -16.0
-margin_top = -16.0
-margin_right = 16.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 32, 32 )
-rect_pivot_offset = Vector2( 8, 16 )
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+custom_minimum_size = Vector2( 32, 32 )
+pivot_offset = Vector2( 8, 16 )
 texture = ExtResource( 2 )
 expand = true
 __meta__ = {
@@ -31,11 +31,11 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_left = 36.0
-margin_top = 9.0
-margin_right = 136.0
-margin_bottom = 23.0
-rect_min_size = Vector2( 100, 0 )
+offset_left = 36.0
+offset_top = 9.0
+offset_right = 136.0
+offset_bottom = 23.0
+custom_minimum_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
 text = "Test text"
 autowrap = true

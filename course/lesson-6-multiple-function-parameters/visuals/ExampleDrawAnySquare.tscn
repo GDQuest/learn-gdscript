@@ -5,19 +5,19 @@
 [ext_resource path="res://course/lesson-6-multiple-function-parameters/visuals/DemoDrawingSquares.tscn" type="PackedScene" id=3]
 
 [node name="ExampleDrawAnySquare" type="PanelContainer"]
-margin_right = 614.0
-margin_bottom = 114.0
-rect_min_size = Vector2( 0, 400 )
+offset_right = 614.0
+offset_bottom = 114.0
+custom_minimum_size = Vector2( 0, 400 )
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 651.0
-margin_bottom = 393.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 651.0
+offset_bottom = 393.0
 script = ExtResource( 2 )
 scene = ExtResource( 3 )
 gdscript_code = "func draw_square(size):

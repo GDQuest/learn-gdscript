@@ -6,9 +6,9 @@ var _max_health = 80
 
 var _produced_health_values = []
 
-onready var _robot := find_node("Robot")
-onready var _animation_tree := find_node("AnimationTree")
-onready var _health_bar := find_node("CustomHealthBar")
+@onready var _robot := find_child("Robot")
+@onready var _animation_tree := find_child("AnimationTree")
+@onready var _health_bar := find_child("CustomHealthBar")
 
 
 func _ready() -> void:
@@ -25,7 +25,7 @@ func _run() -> void:
 	take_damage(_health_lost)
 	_produced_health_values.append(health)
 	_update_robot()
-	yield(get_tree().create_timer(1.0), "timeout")
+	await get_tree().create_timer(1.0).timeout
 	Events.emit_signal("practice_run_completed")
 
 

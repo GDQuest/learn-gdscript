@@ -9,25 +9,25 @@ const VALID_FRAMERATE_LIMITS := [0, 30, 60]
 const URL_GODOT_DOCS_REF = "ref=godot-docs"
 
 # General profile details
-export var player_name := ""
+@export var player_name := ""
 # Study progression (across multiple courses)
-export var study_progression := []
-export var last_started_lesson := {}
-export var last_visible_lesson_block := {}
-export var is_sponsored_profile := true
+@export var study_progression := []
+@export var last_started_lesson := {}
+@export var last_visible_lesson_block := {}
+@export var is_sponsored_profile := true
 
 # User settings
-export var language := "en"
+@export var language := "en"
 # Relative size adjustment of all fonts, in integer numbers.
-export var font_size_scale := 0
+@export var font_size_scale := 0
 # Lower contrast enabled
-export var lower_contrast := false
+@export var lower_contrast := false
 # Dyslexia Font enabled
-export var dyslexia_font := false
+@export var dyslexia_font := false
 # Sensitivity when scrolling with the mouse wheel or touchpad.
-export var scroll_sensitivity := 1.0 setget set_scroll_sensitivity
+@export var scroll_sensitivity := 1.0: set = set_scroll_sensitivity
 # Target framerate for the application, to reduce update intensity on lower end devices.
-export var framerate_limit := 60 setget set_framerate_limit
+@export var framerate_limit := 60: set = set_framerate_limit
 
 
 func _init() -> void:
@@ -35,16 +35,16 @@ func _init() -> void:
 	last_started_lesson = {}
 
 	if OS.has_feature("JavaScript"):
-		var window := JavaScript.get_interface("window")
+		var window := JavaScriptBridge.get_interface("window")
 		var browser_url : String = window.location.href
 		is_sponsored_profile = browser_url.find(URL_GODOT_DOCS_REF) == -1
 
 
 func save() -> void:
-	if resource_path.empty():
+	if resource_path.is_empty():
 		push_error("Cannot save a file without a filename, set resource_path first.")
 		return
-	ResourceSaver.save(resource_path, self)
+	ResourceSaver.save(self, resource_path)
 	take_over_path(resource_path)
 
 
@@ -181,7 +181,7 @@ func get_last_started_lesson(course_id: String) -> String:
 	if last_started_lesson.has(course_id):
 		lesson_id = last_started_lesson[course_id]
 
-	if lesson_id.empty():
+	if lesson_id.is_empty():
 		return ""
 
 	# Ensure we have some data for the lesson, if we didn't have it before.

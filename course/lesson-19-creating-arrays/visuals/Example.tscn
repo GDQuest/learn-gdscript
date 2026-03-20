@@ -1,21 +1,21 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://course/common/turtle/turtle.png" type="Texture" id=1]
+[ext_resource path="res://course/common/turtle/turtle.png" type="Texture2D" id=1]
 [ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
 [ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=3]
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Node2D
 
-export var board_size := Vector2(6, 4) setget set_board_size
-export var cell_size := Vector2(64, 64)
-export var line_width := 4
-export var robot_start_position := Vector2(0, 1)
+@export var board_size := Vector2(6, 4): set = set_board_size
+@export var cell_size := Vector2(64, 64)
+@export var line_width := 4
+@export var robot_start_position := Vector2(0, 1)
 
 var board_size_px := cell_size * board_size
 
 # Maps nodes to grid positions
-onready var units := {
+@onready var units := {
 	$Turtle: Vector2(0, 0),
 	$Robot: Vector2(5, 2)
 }
@@ -38,12 +38,12 @@ func _ready() -> void:
 func _draw() -> void:
 	for x in range(board_size.x):
 		for y in range(board_size.y):
-			draw_rect(Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, Vector2.ONE * cell_size), Color.white, false, line_width)
+			draw_rect(Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, Vector2.ONE * cell_size), Color.WHITE, false, line_width)
 	draw_path(_path)
 
 
 func draw_path(cells: Array):
-	var points = PoolVector2Array()
+	var points = PackedVector2Array()
 	for cell in cells:
 		points.append(calculate_cell_position(cell))
 
@@ -65,24 +65,24 @@ func set_board_size(new_size: Vector2):
 "
 
 [node name="Panel" type="PanelContainer"]
-margin_right = 658.0
-margin_bottom = 384.0
+offset_right = 658.0
+offset_bottom = 384.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 651.0
-margin_bottom = 377.0
-rect_min_size = Vector2( 0, 370 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 651.0
+offset_bottom = 377.0
+custom_minimum_size = Vector2( 0, 370 )
 
 [node name="GameBoard" type="Node2D" parent="RunnableCodeExample"]
 script = SubResource( 2 )
 
-[node name="Turtle" type="Sprite" parent="RunnableCodeExample/GameBoard"]
+[node name="Turtle" type="Sprite2D" parent="RunnableCodeExample/GameBoard"]
 position = Vector2( 285, 199 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 1 )

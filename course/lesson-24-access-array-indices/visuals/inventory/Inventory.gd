@@ -4,8 +4,8 @@ var current_item: Node = null
 
 func _ready() -> void:
 	for child in get_children():
-		child.connect("mouse_entered", self, "set_current_item", [child])
-		child.connect("mouse_exited", self, "set_current_item", [null])
+		child.connect("mouse_entered", Callable(self, "set_current_item").bind(child))
+		child.connect("mouse_exited", Callable(self, "set_current_item").bind(null))
 
 
 func set_current_item(item: Node):

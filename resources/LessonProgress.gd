@@ -2,15 +2,15 @@ class_name LessonProgress
 extends Resource
 
 # Lesson resource identifier.
-export var lesson_id := ""
+@export var lesson_id := ""
 # Identifiers of reached content blocks.
-export var completed_blocks := [] # Array of String
+@export var completed_blocks := [] # Array of String
 # Set when the user got to the bottom of the lesson and clicked on any practice.
-export var completed_reading := false
+@export var completed_reading := false
 # Identifiers of completed quiz resources.
-export var completed_quizzes := [] # Array of String
+@export var completed_quizzes := [] # Array of String
 # Identifiers of completed practice resources.
-export var completed_practices := [] # Array of String
+@export var completed_practices := [] # Array of String
 
 func _init() -> void:
 	completed_blocks = []
@@ -40,7 +40,7 @@ func get_completed_blocks_count(lesson: BBCodeParser.ParseNode, block_count: int
 				matched_id = block_path
 				break
 
-		if not matched_id.empty():
+		if not matched_id.is_empty():
 			available_blocks.erase(matched_id)
 			completed += 1
 
@@ -67,7 +67,7 @@ func get_completed_quizzes_count(lesson: BBCodeParser.ParseNode) -> int:
 				matched_id = quiz_path
 				break
 
-		if not matched_id.empty():
+		if not matched_id.is_empty():
 			available_quizzes.erase(matched_id)
 			completed += 1
 
@@ -94,7 +94,7 @@ func get_completed_practices_count(lesson: BBCodeParser.ParseNode) -> int:
 				matched_id = practice_path
 				break
 
-		if not matched_id.empty():
+		if not matched_id.is_empty():
 			available_practices.erase(matched_id)
 			completed += 1
 

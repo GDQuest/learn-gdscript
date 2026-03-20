@@ -4,18 +4,18 @@
 [ext_resource path="res://course/lesson-11-time-delta/visuals/DemoRotatingTime.tscn" type="PackedScene" id=2]
 
 [node name="ExampleRotatingSpriteTime" type="PanelContainer"]
-margin_right = 1047.0
-margin_bottom = 298.0
+offset_right = 1047.0
+offset_bottom = 298.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1040.0
-margin_bottom = 291.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 1040.0
+offset_bottom = 291.0
 scene = ExtResource( 2 )
 gdscript_code = "func _process(delta):
 	rotate(1 * delta)"

@@ -3,13 +3,13 @@
 [ext_resource path="res://course/lesson-25-creating-dictionaries/adding-items/AddingItems.gd" type="Script" id=1]
 [ext_resource path="res://course/common/inventory/DictInventory.tscn" type="PackedScene" id=2]
 [ext_resource path="res://course/common/inventory/DictItem.tscn" type="PackedScene" id=3]
-[ext_resource path="res://course/common/inventory/gems.png" type="Texture" id=4]
-[ext_resource path="res://course/common/inventory/healing_heart.png" type="Texture" id=5]
-[ext_resource path="res://course/common/inventory/sword.png" type="Texture" id=6]
+[ext_resource path="res://course/common/inventory/gems.png" type="Texture2D" id=4]
+[ext_resource path="res://course/common/inventory/healing_heart.png" type="Texture2D" id=5]
+[ext_resource path="res://course/common/inventory/sword.png" type="Texture2D" id=6]
 
 [node name="CreatingInventory" instance=ExtResource( 2 )]
-margin_right = 564.0
-margin_bottom = 394.0
+offset_right = 564.0
+offset_bottom = 394.0
 script = ExtResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="." index="0"]
@@ -17,42 +17,42 @@ position = Vector2( 283, 159 )
 current = true
 
 [node name="Margin" parent="." index="1"]
-margin_right = 568.0
-margin_bottom = 346.0
+offset_right = 568.0
+offset_bottom = 346.0
 
 [node name="Column" parent="Margin" index="0"]
-margin_right = 544.0
-margin_bottom = 322.0
+offset_right = 544.0
+offset_bottom = 322.0
 
 [node name="Title" parent="Margin/Column" index="0"]
-margin_right = 524.0
+offset_right = 524.0
 
 [node name="HSeparator" parent="Margin/Column" index="1"]
-margin_right = 524.0
+offset_right = 524.0
 
 [node name="Grid" parent="Margin/Column" index="2"]
-margin_right = 524.0
-margin_bottom = 292.0
+offset_right = 524.0
+offset_bottom = 292.0
 
 [node name="HealingHeart" parent="Margin/Column/Grid" index="0" instance=ExtResource( 3 )]
-margin_right = 260.0
+offset_right = 260.0
 icon = ExtResource( 5 )
 icon = ExtResource( 5 )
 item_name = "Healing Heart"
 amount = 3
 
 [node name="Gems" parent="Margin/Column/Grid" index="1" instance=ExtResource( 3 )]
-margin_left = 264.0
-margin_right = 524.0
+offset_left = 264.0
+offset_right = 524.0
 icon = ExtResource( 4 )
 icon = ExtResource( 4 )
 item_name = "Gems"
 amount = 9
 
 [node name="Sword" parent="Margin/Column/Grid" index="2" instance=ExtResource( 3 )]
-margin_top = 104.0
-margin_right = 260.0
-margin_bottom = 204.0
+offset_top = 104.0
+offset_right = 260.0
+offset_bottom = 204.0
 icon = ExtResource( 6 )
 icon = ExtResource( 6 )
 item_name = "Sword"

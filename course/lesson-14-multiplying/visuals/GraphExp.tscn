@@ -6,44 +6,44 @@
 [sub_resource type="Curve2D" id=1]
 resource_local_to_scene = true
 _data = {
-"points": PoolVector2Array( 0.0245361, 0.446106, -0.0245361, -0.446106, 0, -50, -60.7556, 192.828, 60.7556, -192.828, 253, -247 )
+"points": PackedVector2Array( 0.0245361, 0.446106, -0.0245361, -0.446106, 0, -50, -60.7556, 192.828, 60.7556, -192.828, 253, -247 )
 }
 
 [node name="PanelContainer" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 400, 450 )
+offset_right = 14.0
+offset_bottom = 14.0
+custom_minimum_size = Vector2( 400, 450 )
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 393.0
-margin_bottom = 443.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 393.0
+offset_bottom = 443.0
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 386.0
-margin_bottom = 436.0
+offset_right = 386.0
+offset_bottom = 436.0
 
 [node name="TextureRect" parent="RunnableCodeExample/Frame/PanelContainer" index="0"]
-margin_right = 382.0
-margin_bottom = 432.0
+offset_right = 382.0
+offset_bottom = 432.0
 
 [node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="0"]
 visible = false
 
 [node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-margin_left = 0.0
-margin_right = 105.0
+offset_left = 0.0
+offset_right = 105.0
 text = "Show Me"
 
 [node name="StepButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="2"]
-margin_left = 113.0
-margin_right = 193.0
+offset_left = 113.0
+offset_right = 193.0
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
-margin_left = 244.0
-margin_right = 644.0
-margin_bottom = 260.0
+offset_left = 244.0
+offset_right = 644.0
+offset_bottom = 260.0
 
 [node name="Graph" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 curve = SubResource( 1 )

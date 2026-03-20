@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://kl5p8gbewug5"]
+
+[sub_resource type="GDScript" id="GDScript_1xs7u"]
+script/source = "extends Node
+
+
+func _ready() -> void:
+	var highlighter: CodeHighlighter = load(CodeEditorEnhancer.GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH)
+	CodeEditorEnhancer.enhance_highlighter(highlighter)
+	ResourceSaver.save(highlighter, CodeEditorEnhancer.GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH)
+"
+
+[node name="RecolorHighlighter" type="Node" unique_id=1605165953]
+script = SubResource("GDScript_1xs7u")

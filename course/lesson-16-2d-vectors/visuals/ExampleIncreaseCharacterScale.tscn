@@ -6,7 +6,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-onready var _animation_tree := find_node(\"AnimationTree\")
+@onready var _animation_tree := find_child(\"AnimationTree\")
 
 
 func run():
@@ -19,37 +19,37 @@ func reset():
 "
 
 [node name="PanelContainer" type="PanelContainer"]
-margin_right = 1047.0
-margin_bottom = 298.0
+offset_right = 1047.0
+offset_bottom = 298.0
 size_flags_horizontal = 3
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1040.0
-margin_bottom = 291.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 1040.0
+offset_bottom = 291.0
 gdscript_code = "func level_up():
 	scale.x += 0.2
 	scale.y += 0.2
 	# ..."
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 508.0
-margin_bottom = 284.0
+offset_right = 508.0
+offset_bottom = 284.0
 
 [node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-margin_right = 196.0
+offset_right = 196.0
 text = "level_up()"
 
 [node name="StepButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="2"]
-margin_left = 204.0
-margin_right = 284.0
+offset_left = 204.0
+offset_right = 284.0
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
 visible = true
-margin_left = 524.0
-margin_right = 1033.0
-margin_bottom = 284.0
+offset_left = 524.0
+offset_right = 1033.0
+offset_bottom = 284.0
 text = "func level_up():
 	scale.x += 0.2
 	scale.y += 0.2

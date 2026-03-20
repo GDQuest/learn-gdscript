@@ -16,16 +16,16 @@ func _ready():
 script/source = "extends PanelContainer
 
 var initial_health := 100.0
-var health := initial_health setget set_health
+var health := initial_health: set = set_health
 var health_slider: HSlider
 
-onready var label := $Label as Label
+@onready var label := $Label as Label
 
 
 func set_health(new_value: float):
 	health = new_value
 	if not label:
-		yield(self, \"ready\")
+		await self.ready
 	label.text = \"Health: %s\" % round(health)
 
 
@@ -35,31 +35,31 @@ func reset() -> void:
 "
 
 [node name="Example" type="PanelContainer"]
-margin_right = 771.0
-margin_bottom = 414.0
+offset_right = 771.0
+offset_bottom = 414.0
 size_flags_horizontal = 3
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 879.0
-margin_bottom = 407.0
-rect_min_size = Vector2( 600, 200 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 879.0
+offset_bottom = 407.0
+custom_minimum_size = Vector2( 600, 200 )
 script = SubResource( 2 )
 gdscript_code = "var rounded_health = round(health)
 set_text(rounded_health)"
 
 [node name="PanelContainer" type="PanelContainer" parent="RunnableCodeExample"]
-margin_left = 672.0
-margin_right = 872.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 200, 100 )
+offset_left = 672.0
+offset_right = 872.0
+offset_bottom = 400.0
+custom_minimum_size = Vector2( 200, 100 )
 script = SubResource( 3 )
 
 [node name="Label" type="Label" parent="RunnableCodeExample/PanelContainer"]
-margin_top = 186.0
-margin_right = 200.0
-margin_bottom = 214.0
+offset_top = 186.0
+offset_right = 200.0
+offset_bottom = 214.0
 text = "Health: "
 align = 1
 valign = 1

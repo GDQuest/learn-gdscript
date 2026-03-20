@@ -16,12 +16,12 @@ const textures = [
 ]
 
 
-export var texture: Texture setget set_texture, get_texture
-export var hide_after_animation := false
+@export var texture: Texture2D: get = get_texture, set = set_texture
+@export var hide_after_animation := false
 
-onready var anim_player := $AnimationPlayer as AnimationPlayer
-onready var texture_rect := $TextureRect as TextureRect
-onready var label := $Label as Label
+@onready var anim_player := $AnimationPlayer as AnimationPlayer
+@onready var texture_rect := $TextureRect as TextureRect
+@onready var label := $Label as Label
 
 var _animation_backwards := false
 
@@ -31,7 +31,7 @@ func _ready() -> void:
 	if texture == null:
 		randomize()
 		set_random_texture()
-	anim_player.connect("animation_finished", self, "_on_animation_finished")
+	anim_player.connect("animation_finished", Callable(self, "_on_animation_finished"))
 
 
 func set_random_texture():
@@ -74,19 +74,19 @@ func _on_animation_finished(animation_name: String) -> void:
 	emit_signal("used")
 
 
-func set_texture(new_texture: Texture) -> void:
+func set_texture(new_texture: Texture2D) -> void:
 	texture = new_texture
 	if not is_inside_tree():
-		yield(self, "ready")
+		await self.ready
 	texture_rect.texture = new_texture
 	
-func get_texture() -> Texture:
+func get_texture() -> Texture2D:
 	return texture
 
 func get_texture_name():
 	var path := texture.resource_path
 	var filename := path.get_file().get_basename().split("_")
-	return PoolStringArray(filename).join(" ")
+	return " ".join(PackedStringArray(filename))
 
 func set_label_index(index: int) -> void:
 	label.text = str(index)

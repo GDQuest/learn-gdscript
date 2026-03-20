@@ -3,21 +3,21 @@
 [ext_resource path="res://course/common/GDScriptCodeExample.gd" type="Script" id=1]
 
 [node name="HBoxContainer" type="HBoxContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GDScriptCodeExample" type="TextEdit" parent="."]
-margin_right = 300.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 300, 80 )
+offset_right = 300.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 300, 80 )
 size_flags_horizontal = 3
 text = "call(\"show\")"
 readonly = true
-syntax_highlighting = true
+syntax_highlighter = true
 show_line_numbers = true
 draw_tabs = true
 draw_spaces = true
@@ -31,14 +31,14 @@ script = ExtResource( 1 )
 min_size = Vector2( 300, 80 )
 
 [node name="GDScriptCodeExample2" type="TextEdit" parent="."]
-margin_left = 304.0
-margin_right = 604.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 300, 80 )
+offset_left = 304.0
+offset_right = 604.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 300, 80 )
 size_flags_horizontal = 3
 text = "show()"
 readonly = true
-syntax_highlighting = true
+syntax_highlighter = true
 show_line_numbers = true
 draw_tabs = true
 draw_spaces = true

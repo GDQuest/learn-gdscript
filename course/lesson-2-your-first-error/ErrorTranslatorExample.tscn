@@ -4,37 +4,37 @@
 [ext_resource path="res://course/lesson-2-your-first-error/ErrorTranslatorExample.gd" type="Script" id=2]
 
 [node name="ErrorOverlayPopup" instance=ExtResource( 1 )]
-rect_min_size = Vector2( 540, 0 )
+custom_minimum_size = Vector2( 540, 0 )
 script = ExtResource( 2 )
 
 [node name="Panel" parent="." index="0"]
-margin_right = 553.0
+offset_right = 553.0
 
 [node name="MarginContainer" parent="." index="1"]
-margin_right = 553.0
+offset_right = 553.0
 
 [node name="Column" parent="MarginContainer" index="0"]
-margin_right = 533.0
+offset_right = 533.0
 
 [node name="ErrorLabel" parent="MarginContainer/Column" index="0"]
-margin_right = 513.0
-margin_bottom = 59.0
+offset_right = 513.0
+offset_bottom = 59.0
 text = "The function \"move\" already exists in this class (at line 22)."
 
 [node name="HSeparator" parent="MarginContainer/Column" index="1"]
-margin_top = 67.0
-margin_right = 513.0
-margin_bottom = 67.0
+offset_top = 67.0
+offset_right = 513.0
+offset_bottom = 67.0
 
 [node name="Content" parent="MarginContainer/Column" index="2"]
-margin_top = 75.0
-margin_right = 513.0
+offset_top = 75.0
+offset_right = 513.0
 
 [node name="ErrorExplanation" parent="MarginContainer/Column/Content" index="0"]
-margin_right = 513.0
+offset_right = 513.0
 
 [node name="Value" parent="MarginContainer/Column/Content/ErrorExplanation" index="2"]
-margin_right = 505.0
+offset_right = 505.0
 
 [node name="ErrorSuggestion" parent="MarginContainer/Column/Content" index="1"]
-margin_right = 513.0
+offset_right = 513.0

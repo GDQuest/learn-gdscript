@@ -4,9 +4,9 @@
 [ext_resource path="res://course/lesson-16-2d-vectors/visuals/VectorVisual.tscn" type="PackedScene" id=2]
 
 [node name="PanelContainer" type="PanelContainer"]
-margin_right = 800.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 800, 400 )
+offset_right = 800.0
+offset_bottom = 400.0
+custom_minimum_size = Vector2( 800, 400 )
 mouse_filter = 2
 size_flags_horizontal = 3
 __meta__ = {
@@ -14,16 +14,16 @@ __meta__ = {
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 793.0
-margin_bottom = 393.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 793.0
+offset_bottom = 393.0
 mouse_filter = 2
 scene = ExtResource( 2 )
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 786.0
-margin_bottom = 386.0
+offset_right = 786.0
+offset_bottom = 386.0
 mouse_filter = 2
 
 [node name="PanelContainer" parent="RunnableCodeExample/Frame" index="0"]
@@ -42,8 +42,8 @@ visible = false
 visible = false
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
-margin_left = 518.0
-margin_right = 1033.0
-margin_bottom = 284.0
+offset_left = 518.0
+offset_right = 1033.0
+offset_bottom = 284.0
 
 [editable path="RunnableCodeExample"]

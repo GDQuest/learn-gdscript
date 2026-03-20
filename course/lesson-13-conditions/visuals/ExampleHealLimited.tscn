@@ -1,26 +1,28 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene format=3 uid="uid://dxnhdghohxp4g"]
 
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
-[ext_resource path="res://course/common/CustomHealthBar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://ui/components/RunnableCodeExampleDebugger.tscn" type="PackedScene" id=4]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://course/common/Robot.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://course/common/CustomHealthBar.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExampleDebugger.tscn" id="4"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
 signal line_highlight_requested(line)
+signal coroutine_step_requested
+signal coroutine_finished
 
-export var start_health := 75
-export var max_health := 100
-export var health_gained = 50
+@export var start_health := 75
+@export var max_health := 100
+@export var health_gained = 50
 var health := start_health
 
-onready var _health_bar := find_node(\"HealthBar\")
-onready var _animation_tree := find_node(\"AnimationTree\")
+@onready var _health_bar := find_child(\"HealthBar\")
+@onready var _animation_tree := find_child(\"AnimationTree\")
 
 
 func _ready() -> void:
-	yield(get_tree(), \"idle_frame\")
+	await get_tree().idle_frame
 	reset()
 
 
@@ -33,70 +35,84 @@ func run() -> void:
 	health = start_health
 	_health_bar.set_health(health)
 	emit_signal(\"line_highlight_requested\", 0)
-	yield()
+	await step_requested
 	
 	health += health_gained
 	_animation_tree.travel(\"heal\")
 	_health_bar.set_health(health)
 	emit_signal(\"line_highlight_requested\", 1)
-	yield()
+	await step_requested
 	
 	emit_signal(\"line_highlight_requested\", 2)
-	yield()
+	await step_requested
 	
 	if health > max_health:
 		health = max_health
 		_health_bar.set_health(health)
 		emit_signal(\"line_highlight_requested\", 3)
-		yield()
+		await step_requested
 	
 	_health_bar.set_health(health)
+	coroutine_finished.emit()
 "
 
-[node name="ExampleShow" type="VBoxContainer"]
-margin_right = 1047.0
-margin_bottom = 298.0
+[node name="ExampleShow" type="VBoxContainer" unique_id=1013773244]
+offset_right = 1047.0
+offset_bottom = 298.0
 size_flags_horizontal = 3
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_right = 1047.0
-margin_bottom = 260.0
+[node name="RunnableCodeExample" parent="." unique_id=652420169 instance=ExtResource("1")]
+layout_mode = 2
 gdscript_code = "func heal(amount):
 	health += amount
 	if health > 100:
 		health = 100"
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 515.0
-margin_bottom = 260.0
+layout_mode = 2
+
+[node name="PanelContainer" parent="RunnableCodeExample/Frame" index="0"]
+layout_mode = 0
+
+[node name="TextureRect" parent="RunnableCodeExample/Frame/PanelContainer" index="0"]
+layout_mode = 2
+expand_mode = 1
+
+[node name="Sliders" parent="RunnableCodeExample/Frame" index="1"]
+layout_mode = 0
+
+[node name="HBoxContainer" parent="RunnableCodeExample/Frame" index="2"]
+layout_mode = 0
+
+[node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="0"]
+layout_mode = 2
 
 [node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-margin_right = 182.0
+layout_mode = 2
 text = "heal(50)"
 
 [node name="StepButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="2"]
-margin_left = 190.0
-margin_right = 270.0
+layout_mode = 2
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
 visible = true
-margin_left = 531.0
-margin_right = 1047.0
-margin_bottom = 260.0
+layout_mode = 2
 text = "func heal(amount):
 	health += amount
 	if health > 100:
 		health = 100"
+syntax_highlighter = null
 
-[node name="HealRobot" parent="RunnableCodeExample" instance=ExtResource( 2 )]
-script = SubResource( 1 )
+[node name="HealRobot" parent="RunnableCodeExample" unique_id=1182116081 instance=ExtResource("2")]
+script = SubResource("1")
+start_health = null
+max_health = null
+health_gained = null
 
-[node name="HealthBar" parent="RunnableCodeExample/HealRobot" instance=ExtResource( 3 )]
+[node name="HealthBar" parent="RunnableCodeExample/HealRobot" unique_id=1140237310 instance=ExtResource("3")]
 
-[node name="RunnableCodeExampleDebugger" parent="." instance=ExtResource( 4 )]
-margin_top = 264.0
-margin_right = 1047.0
-margin_bottom = 330.0
-monitored_variables = [ "health" ]
+[node name="RunnableCodeExampleDebugger" parent="." unique_id=1312446814 instance=ExtResource("4")]
+layout_mode = 2
+monitored_variables = ["health"]
 
 [editable path="RunnableCodeExample"]

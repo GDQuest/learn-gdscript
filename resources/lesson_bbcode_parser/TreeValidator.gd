@@ -1,5 +1,5 @@
 class_name BBCodeTreeValidator
-extends Reference
+extends RefCounted
 
 var _parser_data := BBCodeParserData.new()
 var _result: BBCodeParser.ParseResult
@@ -40,7 +40,7 @@ func _validate_node_children(node: BBCodeParser.ParseNode) -> void:
 		return
 	var required_children: Array = tag_definition.required_children
 
-	if not required_children.empty():
+	if not required_children.is_empty():
 		var found_tags := {}
 		for child in node.children:
 			if child is BBCodeParser.ParseNode:

@@ -2,20 +2,21 @@ class_name UIQuizChoice
 extends UIBaseQuiz
 
 const QuizAnswerButtonScene := preload("res://ui/screens/lesson/quizzes/QuizAnswerButton.tscn")
+const QuizAnswerButton := preload("res://ui/screens/lesson/quizzes/QuizAnswerButton.gd")
 const ERROR_NO_VALID_ANSWERS := "No valid answers set for QuizChoice resource, can't test answers."
 
 
-onready var _choices := $ClipContentBoundary/ChoiceContainer/ChoiceView/Answers as VBoxContainer
+@export var _choices: VBoxContainer
 
 
 func _ready() -> void:
-	pass
+	super._ready()
 	#if test_quiz and test_quiz is Quiz:
 	#	setup(test_quiz)
 
 
 func setup(quiz: BBCodeParser.ParseNode) -> void:
-	.setup(quiz)
+	super.setup(quiz)
 	if not quiz.tag == BBCodeParserData.Tag.QUIZ_CHOICE:
 		return
 
@@ -25,10 +26,10 @@ func setup(quiz: BBCodeParser.ParseNode) -> void:
 
 	var is_multiple_choice := _quiz_data.multiple
 	if is_multiple_choice:
-		_question.bbcode_text += " [i]" + tr("(select all that apply)") + "[/i]"
+		_question.text += " [i]" + tr("(select all that apply)") + "[/i]"
 
-	for answer in answer_options:
-		var button = QuizAnswerButtonScene.instance()
+	for answer: String in answer_options:
+		var button: QuizAnswerButton = QuizAnswerButtonScene.instantiate()
 		button.setup(answer, is_multiple_choice)
 		_choices.add_child(button)
 
@@ -51,7 +52,7 @@ func _get_answers() -> Array:
 
 
 func _test_answer_against_quiz(answers: Array) -> AnswerTestResult:
-	assert(not _quiz_data.valid_answers.empty(), ERROR_NO_VALID_ANSWERS)
+	assert(not _quiz_data.valid_answers.is_empty(), ERROR_NO_VALID_ANSWERS)
 	var result := AnswerTestResult.new()
 	result.is_correct = answers.size() == _quiz_data.valid_answers.size()
 	if result.is_correct:

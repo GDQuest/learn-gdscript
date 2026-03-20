@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var _animation_tree := find_node("AnimationTree")
+@onready var _animation_tree := find_child("AnimationTree")
 
 
 var level = 1
@@ -23,7 +23,7 @@ func _run():
 	for i in range(2):
 		level_up()
 		_animation_tree.travel("level")
-		yield(_animation_tree, "animation_finished")
+		await _animation_tree.animation_finished
 	Events.emit_signal("practice_run_completed")
 
 func reset():

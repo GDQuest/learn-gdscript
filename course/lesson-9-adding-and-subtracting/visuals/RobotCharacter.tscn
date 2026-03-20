@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://course/common/CustomHealthBar.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/common/hand_ice.png" type="Texture" id=2]
-[ext_resource path="res://course/common/robot_body.png" type="Texture" id=3]
+[ext_resource path="res://course/common/hand_ice.png" type="Texture2D" id=2]
+[ext_resource path="res://course/common/robot_body.png" type="Texture2D" id=3]
 [ext_resource path="res://course/lesson-9-adding-and-subtracting/visuals/RobotCharacter.gd" type="Script" id=4]
-[ext_resource path="res://course/common/robot_body_happy.png" type="Texture" id=5]
+[ext_resource path="res://course/common/robot_body_happy.png" type="Texture2D" id=5]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -15,8 +15,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -27,8 +27,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 3 ) ]
 }
@@ -39,8 +39,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Vector2( 0, -17 ) ]
 }
@@ -51,8 +51,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ 0.0 ]
 }
@@ -67,8 +67,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.1, 0.2 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, -17 ), Vector2( 0, -32 ), Vector2( 0, -17 ) ]
 }
@@ -79,8 +79,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.1 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ -21.301, 0.0 ]
 }
@@ -95,8 +95,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.7 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
@@ -107,8 +107,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.8 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 5 ), ExtResource( 3 ) ]
 }
@@ -119,8 +119,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.1, 0.2 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, -17 ), Vector2( 0, -32 ), Vector2( 0, -17 ) ]
 }
@@ -131,16 +131,16 @@ _data = [ Vector2( 0.0111111, 0.0284091 ), 0.0, 4.13397, 0, 0, Vector2( 0.611111
 [node name="RobotCharacter" type="Node2D"]
 script = ExtResource( 4 )
 
-[node name="GodotBottom" type="Sprite" parent="."]
+[node name="GodotBottom" type="Sprite2D" parent="."]
 position = Vector2( 0, -17 )
 texture = ExtResource( 3 )
 
-[node name="HandIce" type="Sprite" parent="GodotBottom"]
+[node name="HandIce" type="Sprite2D" parent="GodotBottom"]
 position = Vector2( 66, 31 )
 rotation = 0.36894
 texture = ExtResource( 2 )
 
-[node name="HandIce2" type="Sprite" parent="GodotBottom"]
+[node name="HandIce2" type="Sprite2D" parent="GodotBottom"]
 position = Vector2( -65, 36 )
 rotation = -0.483649
 texture = ExtResource( 2 )

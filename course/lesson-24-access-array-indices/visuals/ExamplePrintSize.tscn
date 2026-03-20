@@ -15,16 +15,16 @@ func run():
 "
 
 [node name="Example" type="PanelContainer"]
-margin_right = 771.0
-margin_bottom = 414.0
+offset_right = 771.0
+offset_bottom = 414.0
 size_flags_horizontal = 3
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 788.0
-margin_bottom = 427.0
-rect_min_size = Vector2( 600, 420 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 788.0
+offset_bottom = 427.0
+custom_minimum_size = Vector2( 600, 420 )
 gdscript_code = "var inventory = [
 	\"healing heart\",
 	\"gems\",
@@ -38,7 +38,7 @@ func run():
 [node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 672.0
-margin_right = 781.0
-margin_bottom = 420.0
+offset_left = 672.0
+offset_right = 781.0
+offset_bottom = 420.0
 script = SubResource( 1 )

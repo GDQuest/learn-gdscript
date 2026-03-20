@@ -1,7 +1,8 @@
 # Adds smooth scrolling support to vertical ScrollContainer nodes.
 #
 # This works by moving a direct child of the container. See `_content`.
-class_name SmoothScrollContainer, "smooth_scroll_container_icon.svg"
+@icon("smooth_scroll_container_icon.svg")
+class_name SmoothScrollContainer
 extends ScrollContainer
 
 # Amount of pixels to offset the scroll target when scrolling with the mouse
@@ -31,7 +32,7 @@ var _velocity := Vector2(0, 0)
 # specific scrolling as directly updating the scroll properties conflicts with
 # the ScrollContainer's native behavior.
 var _current_scroll := Vector2.ZERO
-var _target_position := Vector2.ZERO setget _set_target_position
+var _target_position := Vector2.ZERO: set = _set_target_position
 var _max_position_y := 0.0
 
 # Used to throttle touchpad scroll events.
@@ -39,22 +40,22 @@ var _last_accepted_scroll_event_time := 0
 var _is_in_browser := OS.get_name() == "HTML5"
 
 # Control node to move when scrolling.
-onready var _content: Control = get_child(get_child_count() - 1) as Control
-onready var _scroll_sensitivity := 1.0
+@onready var _content: Control = get_child(get_child_count() - 1) as Control
+@onready var _scroll_sensitivity := 1.0
 
 
 func _ready() -> void:
 	set_process(false)
 
 	_update_max_position_y()
-	_content.connect("resized", self, "_update_max_position_y")
+	_content.connect("resized", Callable(self, "_update_max_position_y"))
 
-	get_v_scrollbar().connect("scrolling", self, "_on_VScrollBar_scrolling")
+	get_v_scroll_bar().connect("scrolling", Callable(self, "_on_VScrollBar_scrolling"))
 
 	var user_profile := UserProfiles.get_profile()
 	_scroll_sensitivity = user_profile.scroll_sensitivity
 	user_profile.connect(
-		"scroll_sensitivity_changed", self, "_on_UserProfile_scroll_sensitivity_changed"
+		"scroll_sensitivity_changed", Callable(self, "_on_UserProfile_scroll_sensitivity_changed")
 	)
 
 
@@ -64,14 +65,14 @@ func _process(delta: float) -> void:
 		set_process(false)
 		return
 
-	var speed_multiplier := max((distance_to_target - ACCELERATE_DISTANCE_THRESHOLD) / SPEED_DISTANCE_DIVISOR, 1.0)
+	var speed_multiplier := maxf((distance_to_target - ACCELERATE_DISTANCE_THRESHOLD) / SPEED_DISTANCE_DIVISOR, 1.0)
 	scroll_speed = SPEED_BASE * speed_multiplier
 	arrive_distance = ARRIVE_DISTANCE_BASE * speed_multiplier
 
 	var direction := _current_scroll.direction_to(_target_position)
 	var desired_velocity := direction * scroll_speed
 	if distance_to_target < arrive_distance:
-		desired_velocity = desired_velocity.linear_interpolate(Vector2.ZERO, 1.0 - distance_to_target / arrive_distance)
+		desired_velocity = desired_velocity.lerp(Vector2.ZERO, 1.0 - distance_to_target / arrive_distance)
 
 	var steering := desired_velocity - _velocity
 	_velocity += steering / 2.0
@@ -116,11 +117,11 @@ func scroll_down() -> void:
 
 
 func scroll_page_up() -> void:
-	_set_target_position(_target_position + Vector2.UP * rect_size.y)
+	_set_target_position(_target_position + Vector2.UP * size.y)
 
 
 func scroll_page_down() -> void:
-	_set_target_position(_target_position + Vector2.DOWN * rect_size.y)
+	_set_target_position(_target_position + Vector2.DOWN * size.y)
 
 
 func scroll_to_top() -> void:
@@ -132,8 +133,8 @@ func scroll_to_bottom() -> void:
 
 
 # Override default implementation to keep local properties in sync.
-func set_v_scroll(value: int) -> void:
-	.set_v_scroll(value)
+func set_v_scroll_override(value: int) -> void:
+	set_v_scroll(value)
 
 	if is_processing():
 		set_process(false)
@@ -148,7 +149,7 @@ func _set_target_position(new_position: Vector2) -> void:
 
 
 func _update_max_position_y() -> void:
-	_max_position_y = _content.rect_size.y - rect_size.y
+	_max_position_y = _content.size.y - size.y
 
 
 func _on_VScrollBar_scrolling() -> void:

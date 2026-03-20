@@ -1,4 +1,4 @@
-tool
+@tool
 class_name UIPractice
 extends UINavigatablePage
 
@@ -17,17 +17,32 @@ const PracticeHintScene := preload("screens/practice/PracticeHint.tscn")
 const PracticeListPopup := preload("components/popups/PracticeListPopup.gd")
 const PracticeDonePopup := preload("components/popups/PracticeDonePopup.gd")
 const PracticeLeaveUnfinishedPopup := preload("components/popups/PracticeLeaveUnfinishedPopup.gd")
-const documentation_resource: Resource = preload("res://course/Documentation.tres")
+const documentation_resource: Documentation = preload("res://course/Documentation.tres")
 
 var REGEX_DIVSION_BY_ZERO := RegEx.new()
 
-export var test_practice: Resource
+@export var test_practice: Resource
+@export var _layout_container: Control
+@export var _output_container: Control
+@export var _game_container: Container
+@export var _game_view: GameView
+@export var _output_console: OutputConsole
+@export var _output_anchors: Control
+@export var _solution_panel: Control
+@export var _use_solution_button: Button
+@export var _info_panel_anchors: Control
+@export var _info_panel: PracticeInfoPanel
+@export var _hints_container: Revealer
+@export var _practice_list: PracticeListPopup
+@export var _practice_done_popup: PracticeDonePopup
+@export var _practice_leave_unfinished_popup: PracticeLeaveUnfinishedPopup
+@export var _code_editor: CodeEditor
 
 var _practice: BBCodeParser.ParseNode
 var _practice_completed := false
 var _practice_solution_used := false
 
-var _script_slice: ScriptSlice setget _set_script_slice
+var _script_slice: ScriptSlice: set = _set_script_slice
 var _tester: PracticeTester
 # If `true`, the text changed but was not saved.
 var _code_editor_is_dirty := false
@@ -49,30 +64,10 @@ var _current_scene_reset_values := {
 	transform = null,
 }
 
-onready var _layout_container := $Margin/Layout as Control
+var _scene_tween: Tween
 
-onready var _output_container := find_node("Output") as Control
-onready var _game_container := find_node("GameContainer") as Container
-onready var _game_view := _output_container.find_node("GameView") as GameView
-onready var _output_console := _output_container.find_node("Console") as OutputConsole
-
-onready var _output_anchors := $Margin/Layout/OutputAnchors as Control
-onready var _solution_panel := find_node("SolutionContainer") as Control
-onready var _solution_editor := _solution_panel.find_node("SliceEditor") as SliceEditor
-onready var _use_solution_button := _solution_panel.find_node("UseSolutionButton") as Button
-
-onready var _info_panel_anchors := $Margin/Layout/InfoPanelAnchors as Control
-onready var _info_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
-onready var _documentation_panel := find_node("DocumentationPanel") as RichTextLabel
-onready var _hints_container := _info_panel.hints_container as Revealer
-
-onready var _practice_list := find_node("PracticeListPopup") as PracticeListPopup
-onready var _practice_done_popup := find_node("PracticeDonePopup") as PracticeDonePopup
-onready var _practice_leave_unfinished_popup := find_node("PracticeLeaveUnfinishedPopup") as PracticeLeaveUnfinishedPopup
-
-onready var _code_editor := find_node("CodeEditor") as CodeEditor
-
-var _scene_tween: SceneTreeTween
+@onready var _documentation_panel := find_child("DocumentationPanel") as RichTextLabel
+@onready var _solution_editor := _code_editor.slice_editor
 
 
 func _init():
@@ -83,36 +78,38 @@ func _init():
 	_run_autotimer.wait_time = RUN_AUTOTIMER_DURATION
 	add_child(_run_autotimer)
 
-	_run_autotimer.connect("timeout", self, "_on_autotimer_timeout")
+	_run_autotimer.connect("timeout", Callable(self, "_on_autotimer_timeout"))
 
 	_on_init_set_javascript()
 
 
 func _ready() -> void:
+	super._ready()
+	
 	randomize()
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		return
 
-	_code_editor.connect("action_taken", self, "_on_code_editor_action_taken")
-	_code_editor.connect("text_changed", self, "_on_code_editor_text_changed")
-	_code_editor.connect("console_toggled", self, "_on_console_toggled")
-	_output_console.connect("reference_clicked", self, "_on_code_reference_clicked")
-	_use_solution_button.connect("pressed", self, "_on_use_solution_pressed")
+	_code_editor.connect("action_taken", Callable(self, "_on_code_editor_action_taken"))
+	_code_editor.connect("text_changed", Callable(self, "_on_code_editor_text_changed"))
+	_code_editor.connect("console_toggled", Callable(self, "_on_console_toggled"))
+	_output_console.connect("reference_clicked", Callable(self, "_on_code_reference_clicked"))
+	_use_solution_button.connect("pressed", Callable(self, "_on_use_solution_pressed"))
 
-	_info_panel.connect("list_requested", self, "_on_list_requested")
+	_info_panel.connect("list_requested", Callable(self, "_on_list_requested"))
 
-	_practice_done_popup.connect("accepted", self, "_on_next_requested")
+	_practice_done_popup.connect("accepted", Callable(self, "_on_next_requested"))
 
-	_practice_leave_unfinished_popup.connect("confirmed", self, "_accept_unload")
-	_practice_leave_unfinished_popup.connect("denied", self, "_deny_unload")
+	_practice_leave_unfinished_popup.connect("confirmed", Callable(self, "_accept_unload"))
+	_practice_leave_unfinished_popup.connect("denied", Callable(self, "_deny_unload"))
 
-	Events.connect("practice_run_completed", self, "_test_student_code")
+	Events.connect("practice_run_completed", Callable(self, "_test_student_code"))
 
 	_update_slidable_panels()
-	_layout_container.connect("resized", self, "_update_slidable_panels")
+	_layout_container.connect("resized", Callable(self, "_update_slidable_panels"))
 
 	_solution_panel.modulate.a = 0.0
-	_solution_panel.margin_left = _output_anchors.rect_size.x
+	_solution_panel.offset_left = _output_anchors.size.x
 
 #	if test_practice and get_parent() == get_tree().root:
 #		setup(test_practice, null, null)
@@ -126,15 +123,15 @@ func _notification(what: int) -> void:
 
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
-	if mb and mb.button_index == BUTTON_LEFT and mb.pressed and get_focus_owner():
+	if mb and mb.button_index == MOUSE_BUTTON_LEFT and mb.pressed and get_viewport().gui_get_focus_owner():
 		# Makes clicks on the empty area to remove focus from various controls, specifically
 		# the code editor.
-		get_focus_owner().release_focus()
+		get_viewport().gui_get_focus_owner().release_focus()
 
 
 func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 	if not is_inside_tree():
-		yield(self, "ready")
+		await self.ready
 
 	_practice = practice
 	_practice_completed = false
@@ -143,7 +140,7 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 	var title := BBCodeUtils.get_practice_title(practice)
 	_info_panel.title_label.text = tr(title).capitalize()
 	var goal := BBCodeUtils.get_practice_goal(practice)
-	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(
+	_info_panel.goal_rich_text_label.text = TextUtils.bbcode_add_code_color(
 		TextUtils.tr_paragraph(goal)
 	)
 	var starting_code := BBCodeUtils.get_practice_starting_code(practice)
@@ -152,12 +149,12 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 	_code_editor.update_cursor_position(starting_position.x, starting_position.y)
 
 	var hints := BBCodeUtils.get_practice_hints(practice)
-	_hints_container.visible = not hints.empty()
+	_hints_container.visible = not hints.is_empty()
 	var index := 0
 	for hint in hints:
-		var practice_hint: PracticeHint = PracticeHintScene.instance()
-		practice_hint.title = tr("Hint %s") % [String(index + 1).pad_zeros(1)]
-		practice_hint.bbcode_text = hint
+		var practice_hint: PracticeHint = PracticeHintScene.instantiate()
+		practice_hint.title = tr("Hint %s") % [str(index + 1).pad_zeros(1)]
+		practice_hint.text = hint
 		_hints_container.add_child(practice_hint)
 		index += 1
 
@@ -166,8 +163,8 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 	var base_directory := practice_id.get_base_dir()
 
 	var script_path := BBCodeUtils.get_practice_script_slice_path(practice)
-	if script_path.is_rel_path():
-		script_path = base_directory.plus_file(script_path)
+	if script_path.is_relative_path():
+		script_path = base_directory.path_join(script_path)
 	if not script_path.begins_with("res://"):
 		script_path = "res://" + script_path
 	var slice_name := BBCodeUtils.get_practice_script_slice_name(practice)
@@ -182,10 +179,10 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 	_solution_editor.text = _script_slice.slice_text
 
 	var validator_path := BBCodeUtils.get_practice_validator_path(practice)
-	if validator_path.is_rel_path():
-		validator_path = base_directory.plus_file(validator_path)
+	if validator_path.is_relative_path():
+		validator_path = base_directory.path_join(validator_path)
 	_tester = (load(validator_path) as GDScript).new()
-	_tester.setup(_game_view.get_viewport(), _script_slice)
+	_tester.setup(_game_view.get_viewport_override(), _script_slice)
 
 	var documentation_tags := BBCodeUtils.get_practice_documentation(practice)
 	var documentation_reference := documentation_resource.get_references(documentation_tags)
@@ -226,7 +223,7 @@ func _update_labels() -> void:
 	var title := BBCodeUtils.get_practice_title(_practice)
 	_info_panel.title_label.text = tr(title).capitalize()
 	var goal := BBCodeUtils.get_practice_goal(_practice)
-	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(
+	_info_panel.goal_rich_text_label.text = TextUtils.bbcode_add_code_color(
 		TextUtils.tr_paragraph(goal)
 	)
 
@@ -237,8 +234,8 @@ func _update_labels() -> void:
 		if not practice_hint:
 			continue
 
-		practice_hint.title = tr("Hint %s") % [String(index + 1).pad_zeros(1)]
-		practice_hint.bbcode_text = hints[index]
+		practice_hint.title = tr("Hint %s") % [str(index + 1).pad_zeros(1)]
+		practice_hint.text = hints[index]
 		index += 1
 
 	_info_panel.display_tests(_tester.get_test_names())
@@ -258,7 +255,7 @@ func _set_script_slice(new_slice: ScriptSlice) -> void:
 	if not scene:
 		push_error("Failed to load scene for script: " + _script_slice.script_path)
 		return
-	_current_scene = scene.instance()
+	_current_scene = scene.instantiate()
 	_current_scene_reset_values.visible = _current_scene.get("visible")
 	_current_scene_reset_values.transform = _current_scene.get("transform")
 
@@ -331,7 +328,7 @@ func _validate_and_run_student_code() -> void:
 	verifier.test()
 	var errors := verifier.errors
 
-	if not errors.empty():
+	if not errors.is_empty():
 		_code_editor.slice_editor.errors = errors
 
 		for index in errors.size():
@@ -350,13 +347,13 @@ func _validate_and_run_student_code() -> void:
 	# Run student code
 	# Generate a runnable script, check for uncaught errors.
 	_code_editor.set_locked_message(tr("Running Your Code..."))
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 
 	script_text = MessageBus.replace_print_calls_in_script(script_file_name, script_text)
 
 	# Guard against infinite while loops
 	if "while " in script_text:
-		var modified_code := PoolStringArray()
+		var modified_code := PackedStringArray()
 		var guard_counter = 0
 		for line in script_text.split("\n"):
 			if "while " in line and not line.strip_edges(true, false).begins_with("#"):
@@ -376,7 +373,7 @@ func _validate_and_run_student_code() -> void:
 				modified_code.append(tabs + "\t\t" + "break")
 			else:
 				modified_code.append(line)
-		script_text = modified_code.join("\n")
+		script_text = "\n".join(modified_code)
 	elif REGEX_DIVSION_BY_ZERO.search(script_text):
 		var error := ScriptError.new()
 		error.message = tr(
@@ -429,7 +426,7 @@ func _test_student_code() -> void:
 
 	var result := _tester.run_tests()
 	_info_panel.set_tests_status(result, script_file_name)
-	yield(_info_panel, "tests_updated")
+	await _info_panel.tests_updated
 
 	# Show the end of practice popup.
 	if not _practice_completed and result.is_success():
@@ -464,20 +461,20 @@ func _reset_practice() -> void:
 
 func _update_slidable_panels() -> void:
 	# Wait a frame to make sure the new size has been applied.
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 
 	# We use _output_anchors for reference because it never leaves the screen, so we can rely on it
 	# to always report the target size for one third of the hbox.
 
 	# Update info panel.
-	_info_panel.rect_min_size = Vector2(_output_anchors.rect_size.x, 0)
-	_info_panel.set_anchors_and_margins_preset(Control.PRESET_WIDE, Control.PRESET_MODE_MINSIZE)
+	_info_panel.custom_minimum_size = Vector2(_output_anchors.size.x, 0)
+	_info_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE)
 
 	# Update solution panel.
-	_solution_panel.rect_min_size = Vector2(_output_anchors.rect_size.x, 0)
-	_solution_panel.set_anchors_and_margins_preset(Control.PRESET_WIDE, Control.PRESET_MODE_MINSIZE)
+	_solution_panel.custom_minimum_size = Vector2(_output_anchors.size.x, 0)
+	_solution_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE)
 	if not _is_solution_panel_open:
-		_solution_panel.margin_left = _output_anchors.rect_size.x
+		_solution_panel.offset_left = _output_anchors.size.x
 
 
 func _toggle_distraction_free_mode() -> void:
@@ -530,7 +527,7 @@ func _show_solution_panel() -> void:
 		_scene_tween.kill()
 	_scene_tween = create_tween().set_parallel()
 
-	_scene_tween.tween_property(_solution_panel, "margin_left", 0.0, SLIDE_TRANSITION_DURATION).from(_solution_panel.margin_left).set_trans(Tween.TRANS_SINE)
+	_scene_tween.tween_property(_solution_panel, "offset_left", 0.0, SLIDE_TRANSITION_DURATION).from(_solution_panel.offset_left).set_trans(Tween.TRANS_SINE)
 	_scene_tween.tween_property(_solution_panel, "modulate:a", 1.0, SLIDE_TRANSITION_DURATION).from(_solution_panel.modulate.a).set_ease(Tween.EASE_IN)
 
 
@@ -542,7 +539,7 @@ func _hide_solution_panel() -> void:
 		_scene_tween.kill()
 	_scene_tween = create_tween().set_parallel()
 
-	_scene_tween.tween_property(_solution_panel, "margin_left", _output_anchors.rect_size.x, SLIDE_TRANSITION_DURATION).from(_solution_panel.margin_left).set_trans(Tween.TRANS_SINE)
+	_scene_tween.tween_property(_solution_panel, "offset_left", _output_anchors.size.x, SLIDE_TRANSITION_DURATION).from(_solution_panel.offset_left).set_trans(Tween.TRANS_SINE)
 	_scene_tween.tween_property(_solution_panel, "modulate:a", 0.0, SLIDE_TRANSITION_DURATION - 0.25).from(_solution_panel.modulate.a).set_ease(Tween.EASE_IN).set_delay(0.15)
 
 
@@ -632,7 +629,7 @@ func _update_nodes(script: GDScript, node_paths: Array) -> void:
 		if node_path is NodePath or node_path is String:
 			var node = (
 				_current_scene.get_node_or_null(node_path)
-				if node_path != ""
+				if not node_path.is_empty()
 				else _current_scene
 			)
 			if node:
@@ -643,9 +640,9 @@ func _update_nodes(script: GDScript, node_paths: Array) -> void:
 # @param node         Node                  any valid node
 # @param script       GDScript              A GDScript instance
 static func try_validate_and_replace_script(node: Node, script: GDScript) -> void:
-	if not script.can_instance():
+	if not script.can_instantiate():
 		var error_code := script.reload()
-		if not script.can_instance():
+		if not script.can_instantiate():
 			print("Script errored out (code %s); skipping replacement" % [error_code])
 			return
 
@@ -670,7 +667,7 @@ static func try_validate_and_replace_script(node: Node, script: GDScript) -> voi
 #
 
 # JS error event listener
-var _on_js_error_feedback_ref = JavaScript.create_callback(self, "_on_js_error_feedback")
+var _on_js_error_feedback_ref = JavaScriptBridge.create_callback(_on_js_error_feedback)
 
 
 # This will be called from Javascript
@@ -683,7 +680,7 @@ func _on_js_error_feedback(args):
 # Set the event listener
 func _on_init_set_javascript() -> void:
 	if OS.has_feature("JavaScript"):
-		var GDQUEST = JavaScript.get_interface("GDQUEST")
+		var GDQUEST = JavaScriptBridge.get_interface("GDQUEST")
 		GDQUEST.events.onError.connect(_on_js_error_feedback_ref)
 
 
@@ -693,7 +690,7 @@ func _check_for_mixed_indentation(text: String) -> int:
 	var lines := text.split("\n")
 	for line_number in range(lines.size()):
 		var line := lines[line_number]
-		if line.empty() or line.strip_edges() == "":
+		if line.is_empty() or line.strip_edges() == "":
 			continue
 
 		var has_space := false

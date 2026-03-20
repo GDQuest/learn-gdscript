@@ -7,17 +7,17 @@
 [sub_resource type="GDScript" id=2]
 script/source = "extends Node2D
 
-export var start_health := 75
-export var max_health := 100
-export var health_gained = 50
+@export var start_health := 75
+@export var max_health := 100
+@export var health_gained = 50
 var health := start_health
 
-onready var _health_bar := find_node(\"HealthBar\")
-onready var _animation_tree := find_node(\"AnimationTree\")
+@onready var _health_bar := find_child(\"HealthBar\")
+@onready var _animation_tree := find_child(\"AnimationTree\")
 
 
 func _ready() -> void:
-	yield(get_tree(), \"idle_frame\")
+	await get_tree().idle_frame
 	reset()
 
 
@@ -33,35 +33,35 @@ func run() -> void:
 "
 
 [node name="ExampleHeal" type="PanelContainer"]
-margin_right = 1047.0
-margin_bottom = 298.0
+offset_right = 1047.0
+offset_bottom = 298.0
 size_flags_horizontal = 3
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1040.0
-margin_bottom = 291.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 1040.0
+offset_bottom = 291.0
 gdscript_code = "func heal(amount):
 	health += amount"
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 508.0
-margin_bottom = 284.0
+offset_right = 508.0
+offset_bottom = 284.0
 
 [node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-margin_right = 182.0
+offset_right = 182.0
 text = "heal(50)"
 
 [node name="StepButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="2"]
-margin_left = 190.0
-margin_right = 270.0
+offset_left = 190.0
+offset_right = 270.0
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
 visible = true
-margin_left = 524.0
-margin_right = 1033.0
-margin_bottom = 284.0
+offset_left = 524.0
+offset_right = 1033.0
+offset_bottom = 284.0
 text = "func heal(amount):
 	health += amount"
 

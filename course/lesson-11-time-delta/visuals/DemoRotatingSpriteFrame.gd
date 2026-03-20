@@ -3,10 +3,10 @@ extends Node2D
 const _times := preload("./DemoRotatingTime.gd")._times;
 var _index := 0
 
-onready var _timer := $Timer as Timer
-onready var _sprite := $DemoRotateSprite as Node2D
-onready var _label_rotation := $LabelRotation as Label
-onready var _label_frame := $LabelFrame as Label
+@onready var _timer := $Timer as Timer
+@onready var _sprite := $DemoRotateSprite as Node2D
+@onready var _label_rotation := $LabelRotation as Label
+@onready var _label_frame := $LabelFrame as Label
 
 func _ready():
 	_on_Timer_timeout()

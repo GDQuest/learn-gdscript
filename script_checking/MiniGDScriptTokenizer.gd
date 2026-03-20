@@ -26,7 +26,7 @@ const TOKEN_ASSIGNMENT := "assignment"
 
 var tokens := []
 
-var _code_lines := PoolStringArray()
+var _code_lines := PackedStringArray()
 var _line_index := 0
 
 var _current_line := ""
@@ -87,10 +87,10 @@ func tokenize():
 
 
 func _process_function_declaration(token: Dictionary):
-	var parameters_list: PoolStringArray = token.get("args", "").split(",")
+	var parameters_list: PackedStringArray = token.get("args", "").split(",")
 	var parameters := []
 	for tuple_str in parameters_list:
-		var tuple: PoolStringArray = tuple_str.split(":")
+		var tuple: PackedStringArray = tuple_str.split(":")
 		var param := {
 			"name": "",
 			"type": "",

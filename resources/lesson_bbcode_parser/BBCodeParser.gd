@@ -4,7 +4,7 @@
 # the engine, but regex parsing is always a bit limiting. We can later rewrite
 # it as a scanner parser if we need to make it more lenient.
 class_name BBCodeParser
-extends Reference
+extends RefCounted
 
 # When we tokenize the BBCode, we only consider opening and closing tags and
 # accumulate all the text in between. The goal of these tokens are to delineate
@@ -49,7 +49,7 @@ func _init() -> void:
 func parse(source: String, result: ParseResult, file_path: String) -> ParseNode:
 	_result = result
 	var tokens := _tokenize(source)
-	if not result.errors.empty():
+	if not result.errors.is_empty():
 		return null
 	var root := _parse_tokens(tokens, file_path)
 	return root
@@ -207,7 +207,7 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 				continue
 
 			var valid_parents: Array = tag_definition.valid_parents
-			if not valid_parents.empty() and not current.tag in valid_parents:
+			if not valid_parents.is_empty() and not current.tag in valid_parents:
 				var parent_names := []
 				for parent_current in valid_parents:
 					parent_names.append("[%s]" % _parser_data.get_tag_name(parent_current))
@@ -325,7 +325,7 @@ class ParseResult:
 
 
 	func is_success() -> bool:
-		return errors.empty()
+		return errors.is_empty()
 
 
 	func add_error(message: String, line: int) -> void:

@@ -3,11 +3,11 @@ extends Control
 const FONT := preload("res://ui/theme/fonts/font_text.tres")
 const TITLE_FONT := preload("res://ui/theme/fonts/font_title_slim.tres")
 
-export var grid_columns := 5
-export var grid_rows := 2
-export var cell_size := 120
-export var line_width := 3.0
-export var outer_line_width := 4.0
+@export var grid_columns := 5
+@export var grid_rows := 2
+@export var cell_size := 120
+@export var line_width := 3.0
+@export var outer_line_width := 4.0
 
 var _hovered_cell := Vector2(-1, -1)
 var _grid_size_px := Vector2.ZERO
@@ -19,7 +19,7 @@ var _grid_node: Node2D = null
 
 func _ready() -> void:
 	_grid_size_px = Vector2(grid_columns * cell_size, grid_rows * cell_size)
-	rect_min_size = Vector2(600, 380)
+	custom_minimum_size = Vector2(600, 380)
 	_grid_offset = Vector2(
 		(600 - _grid_size_px.x) / 2.0,
 		50
@@ -27,16 +27,16 @@ func _ready() -> void:
 
 	_grid_node = Node2D.new()
 	_grid_node.position = _grid_offset
-	_grid_node.connect("draw", self, "_draw_grid_content")
+	_grid_node.connect("draw", Callable(self, "_draw_grid_content"))
 	add_child(_grid_node)
 
 	_info_label = Label.new()
-	_info_label.add_font_override("font", TITLE_FONT)
+	_info_label.add_theme_font_override("font", TITLE_FONT)
 	_info_label.text = tr("Hover over a cell to see its pixel position")
-	_info_label.align = Label.ALIGN_CENTER
+	_info_label.align = Label.ALIGNMENT_CENTER
 	_info_label.autowrap = true
-	_info_label.rect_position = Vector2(0, _grid_offset.y + _grid_size_px.y + 20)
-	_info_label.rect_size = Vector2(600, 60)
+	_info_label.position = Vector2(0, _grid_offset.y + _grid_size_px.y + 20)
+	_info_label.size = Vector2(600, 60)
 	add_child(_info_label)
 
 

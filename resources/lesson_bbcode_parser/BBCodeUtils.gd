@@ -1,5 +1,5 @@
 class_name BBCodeUtils
-extends Reference
+extends RefCounted
 
 
 static func get_codeblock_id(codeblock: BBCodeParser.ParseNode) -> String:
@@ -145,8 +145,8 @@ static func get_practice_validator_path(practice: BBCodeParser.ParseNode) -> Str
 	return ""
 
 
-static func get_practice_documentation(practice: BBCodeParser.ParseNode) -> PoolStringArray:
-	var docs := PoolStringArray()
+static func get_practice_documentation(practice: BBCodeParser.ParseNode) -> PackedStringArray:
+	var docs := PackedStringArray()
 	for child in practice.children:
 		if child.tag == BBCodeParserData.Tag.DOCS:
 			docs.push_back(_get_text_content(child, true))
@@ -170,12 +170,12 @@ static func get_practice_starting_code(practice: BBCodeParser.ParseNode) -> Stri
 static func get_practice_cursor(practice: BBCodeParser.ParseNode) -> Vector2:
 	for child in practice.children:
 		if child.tag == BBCodeParserData.Tag.CURSOR:
-			return Vector2(child.attributes.get("line", 0), child.attributes.get("column", 0))
+			return Vector2(float(child.attributes.get("line", 0)), float(child.attributes.get("column", 0)))
 	return Vector2.ZERO
 
 
-static func get_practice_hints(practice: BBCodeParser.ParseNode) -> PoolStringArray:
-	var hints := PoolStringArray()
+static func get_practice_hints(practice: BBCodeParser.ParseNode) -> PackedStringArray:
+	var hints := PackedStringArray()
 	for child in practice.children:
 		if child.tag == BBCodeParserData.Tag.HINT:
 			hints.push_back(clean_text_content(_get_text_content(child, true)))
@@ -212,7 +212,7 @@ class QuizData:
 			_:
 				var answer_list := valid_answers.duplicate()
 				var last_answer = answer_list.pop_back()
-				return "%s, and %s" % [PoolStringArray(answer_list).join(", "), last_answer]
+				return "%s, and %s" % [", ".join(PackedStringArray(answer_list)), last_answer]
 
 
 static func get_quiz_id(quiz: BBCodeParser.ParseNode) -> String:
@@ -257,7 +257,7 @@ static func clean_text_content(text: String) -> String:
 			continue
 		cleaned_lines.append(line)
 		is_previous_line_blank = is_blank
-	return PoolStringArray(cleaned_lines).join("\n")
+	return "\n".join(PackedStringArray(cleaned_lines))
 
 
 static func _get_text_content(node: BBCodeParser.ParseNode, recurse: bool) -> String:

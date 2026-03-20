@@ -6,8 +6,8 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-onready var drawing_turtle = $Pivot/DrawingTurtle as DrawingTurtle
-onready var pivot = $Pivot as Node2D
+@onready var drawing_turtle = $Pivot/DrawingTurtle as DrawingTurtle
+@onready var pivot = $Pivot as Node2D
 
 func run():
 	pivot.position = Vector2(-50, -100)
@@ -25,16 +25,16 @@ func reset():
 "
 
 [node name="ExampleJumpingTurtle" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
+offset_right = 14.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 663.0
-margin_bottom = 327.0
-rect_min_size = Vector2( 0, 320 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 663.0
+offset_bottom = 327.0
+custom_minimum_size = Vector2( 0, 320 )
 gdscript_code = "func draw_three_lines():
 	move_forward(100)
 	jump(-100, 50)

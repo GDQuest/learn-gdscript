@@ -1,7 +1,7 @@
 extends PracticeTester
 
 var _robot: Node2D
-var _lines: PoolStringArray
+var _lines: PackedStringArray
 
 
 func _prepare() -> void:

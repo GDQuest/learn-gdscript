@@ -9,7 +9,7 @@ script/source = "extends Node2D
 var turn := 45
 var length := 80
 
-onready var _turtle: DrawingTurtle = $DrawingTurtle
+@onready var _turtle: DrawingTurtle = $DrawingTurtle
 
 func _ready() -> void:
 	_turtle.draw_speed = 200.0
@@ -30,18 +30,18 @@ func run() -> void:
 "
 
 [node name="ExampleRotate" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
+offset_right = 14.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 651.0
-margin_bottom = 267.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 651.0
+offset_bottom = 267.0
 gdscript_code = "func run():
 	move_forward(80)
 	turn_right(45)

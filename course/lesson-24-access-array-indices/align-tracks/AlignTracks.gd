@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var tilemap := $TileMap as TileMap
-onready var tiles := $Tiles as Node2D
+@onready var tilemap := $TileMap as TileMap
+@onready var tiles := $Tiles as Node2D
 
 const shift := Vector2(10, 10)
 var aligned_tracks := []
@@ -41,8 +41,8 @@ func copy_cells():
 			is_not_in_position = true
 		sub_tilemap.tile_set = tilemap.tile_set
 		sub_tilemap.set_cell(0, 0, cell, is_x_flipped, is_y_flipped, is_transposed)
-		var sprite := Sprite.new()
-		sprite.position = tilemap.map_to_world(cell_pos)
+		var sprite := Sprite2D.new()
+		sprite.position = tilemap.map_to_local(cell_pos)
 		if is_not_in_position:
 			sprite.position += shift
 		sprite.add_child(sub_tilemap)
@@ -50,7 +50,7 @@ func copy_cells():
 		tracks.append(sprite)
 
 
-func align(track: Sprite) -> void:
+func align(track: Sprite2D) -> void:
 	if track == null:
 		aligned_tracks.append("You tried to align a track that doesn't exist. Make sure your indices make sense")
 	else:
@@ -62,18 +62,18 @@ func _realign_selected_sprites() -> void:
 	if item is String:
 		push_error(item)
 	elif item:
-		var track := item as Sprite
+		var track := item as Sprite2D
 		var tween := create_tween()
 		var initial := track.position
 		var target := initial - shift
-		tween.connect("finished", self, "_realign_selected_sprites")
+		tween.connect("finished", Callable(self, "_realign_selected_sprites"))
 		tween.tween_property(track, "position", target, 1).from(initial).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	else:
 		_complete_run()
 
 
 func _complete_run() -> void:
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	Events.emit_signal("practice_run_completed")
 
 

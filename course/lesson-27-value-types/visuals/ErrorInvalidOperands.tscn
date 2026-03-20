@@ -1,36 +1,36 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/theme/fonts/font_title.tres" type="FontFile" id=1]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=2]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 1 )
 
 [node name="VisualFunctionDefinition" type="PanelContainer"]
-margin_right = 580.0
-margin_bottom = 45.0
-rect_min_size = Vector2( 0, 80 )
+offset_right = 580.0
+offset_bottom = 45.0
+custom_minimum_size = Vector2( 0, 80 )
 size_flags_horizontal = 3
-custom_styles/panel = ExtResource( 2 )
+theme_override_styles/panel = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Row" type="HBoxContainer" parent="."]
-margin_left = 8.0
-margin_top = 24.0
-margin_right = 610.0
-margin_bottom = 55.0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 610.0
+offset_bottom = 55.0
 size_flags_vertical = 4
 theme = SubResource( 1 )
-custom_constants/separation = 4
+theme_override_constants/separation = 4
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label6" type="Label" parent="Row"]
-margin_right = 602.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
+offset_right = 602.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
 text = "Invalid operands 'String' and 'int' in operator '+'."

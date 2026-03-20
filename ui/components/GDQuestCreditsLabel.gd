@@ -1,10 +1,10 @@
 extends Control
 
-onready var _rich_text_label := $RichTextLabel as RichTextLabel
+@export var _rich_text_label: RichTextLabel
 
 
 func _ready():
-	_rich_text_label.connect("meta_clicked", self, "_on_meta_clicked")
+	_rich_text_label.connect("meta_clicked", Callable(self, "_on_meta_clicked"))
 
 
 func _on_meta_clicked(data) -> void:

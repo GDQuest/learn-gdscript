@@ -3,9 +3,9 @@
 [ext_resource path="res://course/common/GDScriptCodeExample.tscn" type="PackedScene" id=1]
 
 [node name="Control" type="PanelContainer"]
-margin_right = 614.0
-margin_bottom = 114.0
-rect_min_size = Vector2( 0, 100 )
+offset_right = 614.0
+offset_bottom = 114.0
+custom_minimum_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -14,11 +14,11 @@ __meta__ = {
 [node name="GDScriptCodeExample" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 707.0
-margin_bottom = 267.0
-rect_min_size = Vector2( 700, 260 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 707.0
+offset_bottom = 267.0
+custom_minimum_size = Vector2( 700, 260 )
 text = "func _process(delta):
 	var angular_speed = 4
 	rotate(angular_speed * delta)

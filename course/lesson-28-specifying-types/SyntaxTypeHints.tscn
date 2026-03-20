@@ -1,108 +1,108 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
-[ext_resource path="res://ui/icons/icon_space.png" type="Texture" id=2]
+[ext_resource path="res://ui/theme/fonts/font_title.tres" type="FontFile" id=1]
+[ext_resource path="res://ui/icons/icon_space.png" type="Texture2D" id=2]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=3]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 1 )
 
 [node name="VisualVariableDefinition" type="PanelContainer"]
-margin_right = 580.0
-margin_bottom = 45.0
-rect_min_size = Vector2( 0, 80 )
+offset_right = 580.0
+offset_bottom = 45.0
+custom_minimum_size = Vector2( 0, 80 )
 size_flags_horizontal = 3
-custom_styles/panel = ExtResource( 3 )
+theme_override_styles/panel = ExtResource( 3 )
 
 [node name="Row" type="HBoxContainer" parent="."]
-margin_left = 8.0
-margin_top = 24.0
-margin_right = 572.0
-margin_bottom = 55.0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 572.0
+offset_bottom = 55.0
 size_flags_vertical = 4
 theme = SubResource( 1 )
-custom_constants/separation = 4
+theme_override_constants/separation = 4
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Row"]
-margin_left = 20.0
-margin_right = 59.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 1, 0.0941176, 0.321569, 1 )
+offset_left = 20.0
+offset_right = 59.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 1, 0.0941176, 0.321569, 1 )
 text = "var"
 
 [node name="Label10" type="TextureRect" parent="Row"]
 self_modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
-margin_left = 63.0
-margin_top = 21.0
-margin_right = 92.0
-margin_bottom = 31.0
+offset_left = 63.0
+offset_top = 21.0
+offset_right = 92.0
+offset_bottom = 31.0
 size_flags_vertical = 8
 texture = ExtResource( 2 )
 
 [node name="Label2" type="Label" parent="Row"]
-margin_left = 96.0
-margin_right = 280.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+offset_left = 96.0
+offset_right = 280.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 1, 1, 1, 1 )
 text = "variable_name"
 
 [node name="Label4" type="Label" parent="Row"]
 modulate = Color( 0.14902, 0.776471, 0.968627, 1 )
-margin_left = 284.0
-margin_right = 290.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+offset_left = 284.0
+offset_right = 290.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 1, 1, 1, 1 )
 text = ":"
 
 [node name="Label12" type="TextureRect" parent="Row"]
 self_modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
-margin_left = 294.0
-margin_top = 21.0
-margin_right = 323.0
-margin_bottom = 31.0
+offset_left = 294.0
+offset_top = 21.0
+offset_right = 323.0
+offset_bottom = 31.0
 size_flags_vertical = 8
 texture = ExtResource( 2 )
 
 [node name="Label6" type="Label" parent="Row"]
 modulate = Color( 0.666667, 0, 0.729412, 1 )
-margin_left = 327.0
-margin_right = 388.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+offset_left = 327.0
+offset_right = 388.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Type"
 
 [node name="Label14" type="TextureRect" parent="Row"]
 self_modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
-margin_left = 392.0
-margin_top = 21.0
-margin_right = 421.0
-margin_bottom = 31.0
+offset_left = 392.0
+offset_top = 21.0
+offset_right = 421.0
+offset_bottom = 31.0
 size_flags_vertical = 8
 texture = ExtResource( 2 )
 
 [node name="Label3" type="Label" parent="Row"]
-margin_left = 425.0
-margin_right = 439.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
+offset_left = 425.0
+offset_right = 439.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
 text = "="
 
 [node name="Label13" type="TextureRect" parent="Row"]
 self_modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
-margin_left = 443.0
-margin_top = 21.0
-margin_right = 472.0
-margin_bottom = 31.0
+offset_left = 443.0
+offset_top = 21.0
+offset_right = 472.0
+offset_bottom = 31.0
 size_flags_vertical = 8
 texture = ExtResource( 2 )
 
 [node name="Label5" type="Label" parent="Row"]
-margin_left = 476.0
-margin_right = 543.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
+offset_left = 476.0
+offset_right = 543.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
 text = "value"

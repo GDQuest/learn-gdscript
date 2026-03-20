@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://course/lesson-26-looping-over-dictionaries/place-units/PlaceUnits.gd" type="Script" id=1]
-[ext_resource path="res://course/common/turtle/turtle.png" type="Texture" id=2]
-[ext_resource path="res://course/common/hand_ice.png" type="Texture" id=3]
-[ext_resource path="res://course/common/robot_body.png" type="Texture" id=4]
+[ext_resource path="res://course/common/turtle/turtle.png" type="Texture2D" id=2]
+[ext_resource path="res://course/common/hand_ice.png" type="Texture2D" id=3]
+[ext_resource path="res://course/common/robot_body.png" type="Texture2D" id=4]
 
 [node name="PlaceUnits" type="Node2D"]
 script = ExtResource( 1 )
@@ -11,28 +11,28 @@ script = ExtResource( 1 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
-[node name="Robot" type="Sprite" parent="."]
+[node name="Robot" type="Sprite2D" parent="."]
 position = Vector2( -1, -2 )
 scale = Vector2( 0.8, 0.8 )
 z_index = 1
 texture = ExtResource( 4 )
 offset = Vector2( 1.25, -41.25 )
 
-[node name="HandIceRight" type="Sprite" parent="Robot"]
+[node name="HandIceRight" type="Sprite2D" parent="Robot"]
 position = Vector2( -45, -9.74389 )
 rotation = -0.918567
 texture = ExtResource( 3 )
 offset = Vector2( -21, -3 )
 flip_h = true
 
-[node name="HandIceLeft" type="Sprite" parent="Robot"]
+[node name="HandIceLeft" type="Sprite2D" parent="Robot"]
 position = Vector2( 49, -14.7439 )
 rotation = 0.737189
 z_index = -1
 texture = ExtResource( 3 )
 offset = Vector2( 24.1958, 2.15936 )
 
-[node name="Turtle" type="Sprite" parent="."]
+[node name="Turtle" type="Sprite2D" parent="."]
 position = Vector2( -0.999998, 93 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )

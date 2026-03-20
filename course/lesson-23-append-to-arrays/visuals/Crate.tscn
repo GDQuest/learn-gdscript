@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://course/common/inventory/gems.png" type="Texture" id=1]
+[ext_resource path="res://course/common/inventory/gems.png" type="Texture2D" id=1]
 [ext_resource path="res://course/lesson-23-append-to-arrays/visuals/Crate.gd" type="Script" id=2]
-[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="FontFile" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.188235, 0.188235, 0.286275, 1 )
@@ -19,26 +19,26 @@ corner_radius_bottom_left = 16
 [sub_resource type="Animation" id=3]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("TextureRect:rect_position")
+tracks/0/path = NodePath("TextureRect:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Vector2( 10, 16.5 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("TextureRect:rect_rotation")
+tracks/1/path = NodePath("TextureRect:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ 0.0 ]
 }
@@ -49,8 +49,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
@@ -61,8 +61,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
@@ -71,14 +71,14 @@ tracks/3/keys = {
 resource_name = "use"
 length = 0.7
 tracks/0/type = "value"
-tracks/0/path = NodePath("TextureRect:rect_position")
+tracks/0/path = NodePath("TextureRect:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.7 ),
-"transitions": PoolRealArray( 0.277392, 1.41421, 0.277392 ),
+"times": PackedFloat32Array( 0, 0.2, 0.7 ),
+"transitions": PackedFloat32Array( 0.277392, 1.41421, 0.277392 ),
 "update": 0,
 "values": [ Vector2( 10, 16.5 ), Vector2( 10, -12 ), Vector2( 10, 16.5 ) ]
 }
@@ -89,8 +89,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.5 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
@@ -101,18 +101,18 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.2, 0.7 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [node name="Crate" type="Panel"]
-margin_right = 120.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 120, 120 )
+offset_right = 120.0
+offset_bottom = 120.0
+custom_minimum_size = Vector2( 120, 120 )
 size_flags_horizontal = 4
-custom_styles/panel = SubResource( 1 )
+theme_override_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -123,10 +123,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 10.0
-margin_top = 16.5
-margin_right = 110.0
-margin_bottom = 107.5
+offset_left = 10.0
+offset_top = 16.5
+offset_right = 110.0
+offset_bottom = 107.5
 texture = ExtResource( 1 )
 stretch_mode = 4
 __meta__ = {
@@ -138,10 +138,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -20.0
-margin_top = -14.0
-margin_right = 20.0
-custom_fonts/font = ExtResource( 3 )
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+theme_override_fonts/font = ExtResource( 3 )
 text = "0"
 align = 1
 valign = 1

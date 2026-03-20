@@ -4,26 +4,26 @@ extends PanelContainer
 const DebuggerConsoleMonitoredVariable = preload("res://ui/components/DebuggerConsoleMonitoredVariable.tscn")
 const UNINITIALIZED_VARIABLE_VALUE := "uninitialized"
 
-export(Array, String) var monitored_variables: Array
+@export var monitored_variables: Array # (Array, String)
 
-onready var variables_container := $MarginContainer/VariablesContainer as VBoxContainer
+@export var variables_container: VBoxContainer
 
-onready var _scene_instance: Node = null
-onready var _console_variables := []
+@onready var _scene_instance: Node = null
+@onready var _console_variables := []
 
 
 func setup(runnable_code, scene_instance) -> void:
 	assert(runnable_code.has_signal("code_updated"))
-	runnable_code.connect("code_updated", self, "_on_code_updated")
+	runnable_code.connect("code_updated", Callable(self, "_on_code_updated"))
 	_scene_instance = scene_instance
 
 	for variable in monitored_variables:
-		var console_variable := DebuggerConsoleMonitoredVariable.instance()
+		var console_variable := DebuggerConsoleMonitoredVariable.instantiate()
 		variables_container.add_child(console_variable)
 		_console_variables.append(console_variable)
 
 	if not is_inside_tree():
-		yield(self, "ready")
+		await self.ready
 	_on_code_updated()
 
 

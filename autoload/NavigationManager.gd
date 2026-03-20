@@ -11,8 +11,8 @@ enum UNLOAD_TYPE { BACK, OUTLINER }
 
 const ERROR_WRONG_UNLOAD_TYPE := "Unsupported unload type in NavigationManager! Unload type: %s"
 
-var history := PoolStringArray()
-var current_url := "" setget set_current_url, get_current_url
+var history := PackedStringArray()
+var current_url := "": get = get_current_url, set = set_current_url
 var is_mobile_platform := OS.get_name() in ["Android", "HTML5", "iOS"]
 var arguments := {}
 
@@ -112,7 +112,7 @@ func _navigate_back() -> void:
 		navigate_to_outliner()
 		return
 
-	history.remove(history.size() - 1)
+	history.remove_at(history.size() - 1)
 	_js_back()
 
 	emit_signal("back_navigation_requested")
@@ -157,15 +157,14 @@ func navigate_to(metadata: String) -> void:
 func get_navigation_resource(resource_id: String) -> BBCodeParser.ParseNode:
 	var is_lesson := resource_id.ends_with("lesson.bbcode")
 
-	var bbcode_path := resource_id if is_lesson else resource_id.get_base_dir().plus_file("lesson.bbcode")
+	var bbcode_path := resource_id if is_lesson else resource_id.get_base_dir().path_join("lesson.bbcode")
 	
 	var lesson_data: BBCodeParser.ParseNode = null
 	if _lesson_cache.has(bbcode_path):
 		lesson_data = _lesson_cache[bbcode_path]
 	else:
 		var _parser := LessonBBCodeParser.new()
-		var file := File.new()
-		if not file.file_exists(bbcode_path):
+		if not FileAccess.file_exists(bbcode_path):
 			return null
 		var result := _parser.parse_file(bbcode_path)
 
@@ -201,7 +200,7 @@ func get_navigation_resource(resource_id: String) -> BBCodeParser.ParseNode:
 func _notification(what: int) -> void:
 	if not is_mobile_platform:
 		return
-	if what in [MainLoop.NOTIFICATION_WM_QUIT_REQUEST, MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST]:
+	if what in [NOTIFICATION_WM_CLOSE_REQUEST, NOTIFICATION_WM_GO_BACK_REQUEST]:
 		navigate_back()
 
 
@@ -218,9 +217,9 @@ func _open_rich_text_node_meta(metadata: String) -> void:
 func connect_rich_text_node(rich_text_node: RichTextLabel) -> void:
 	if not rich_text_node.bbcode_enabled:
 		return
-	if rich_text_node.is_connected("meta_clicked", self, "_open_rich_text_node_meta"):
+	if rich_text_node.is_connected("meta_clicked", Callable(self, "_open_rich_text_node_meta")):
 		return
-	rich_text_node.connect("meta_clicked", self, "_open_rich_text_node_meta")
+	rich_text_node.connect("meta_clicked", Callable(self, "_open_rich_text_node_meta"))
 
 
 func set_current_url(_new_url: String) -> void:
@@ -248,12 +247,12 @@ var _temporary_disable_back_listener := false
 func _on_init_setup_js() -> void:
 	if not _js_available:
 		return
-	_js_history = JavaScript.get_interface("history")
+	_js_history = JavaScriptBridge.get_interface("history")
 
 	# if the reference doesn't survive the method call, the callback will be dereferenced
-	_js_popstate_listener_ref = JavaScript.create_callback(self, "_on_js_popstate")
+	_js_popstate_listener_ref = JavaScriptBridge.create_callback(_on_js_popstate)
 
-	_js_window = JavaScript.get_interface("window")
+	_js_window = JavaScriptBridge.get_interface("window")
 	# warning-ignore:unsafe_method_access
 	_js_window.addEventListener("popstate", _js_popstate_listener_ref)
 
@@ -306,7 +305,7 @@ func _disable_popstate_listener() -> void:
 
 
 func _restore_popstate_listener() -> void:
-	yield(get_tree().create_timer(0.3), "timeout")
+	await get_tree().create_timer(0.3).timeout
 	_temporary_disable_back_listener = false
 
 

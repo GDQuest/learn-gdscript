@@ -13,26 +13,26 @@ func run():
 "
 
 [node name="PanelContainer" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
+offset_right = 14.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 788.0
-margin_bottom = 267.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 788.0
+offset_bottom = 267.0
 gdscript_code = "func run():
 	print(\"Hey there!\")"
 
 [node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 672.0
-margin_right = 781.0
-margin_bottom = 260.0
+offset_left = 672.0
+offset_right = 781.0
+offset_bottom = 260.0
 size_flags_horizontal = 3
 script = SubResource( 1 )

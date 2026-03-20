@@ -6,7 +6,7 @@
 [sub_resource type="GDScript" id=2]
 script/source = "extends WrappingNode2D
 
-onready var start_position = position
+@onready var start_position = position
 
 
 func _ready() -> void:
@@ -26,33 +26,33 @@ func reset():
 "
 
 [node name="ExampleMoveSpriteVector" type="PanelContainer"]
-margin_right = 1047.0
-margin_bottom = 298.0
+offset_right = 1047.0
+offset_bottom = 298.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1040.0
-margin_bottom = 291.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 1040.0
+offset_bottom = 291.0
 gdscript_code = "func move():
 	position += Vector2(20, 20)"
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 514.0
-margin_bottom = 284.0
+offset_right = 514.0
+offset_bottom = 284.0
 
 [node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
 text = "move()"
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
 visible = true
-margin_left = 518.0
-margin_right = 1033.0
-margin_bottom = 284.0
+offset_left = 518.0
+offset_right = 1033.0
+offset_bottom = 284.0
 text = "func move():
 	position += Vector2(20, 20)"
 

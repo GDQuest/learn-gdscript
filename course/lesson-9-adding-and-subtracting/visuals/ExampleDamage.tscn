@@ -10,12 +10,12 @@ script/source = "extends Node2D
 var initial_health := 75
 var health := initial_health
 
-onready var _animation_tree := find_node(\"AnimationTree\")
-onready var _health_bar := find_node(\"CustomHealthBar\")
+@onready var _animation_tree := find_child(\"AnimationTree\")
+@onready var _health_bar := find_child(\"CustomHealthBar\")
 
 
 func _ready() -> void:
-	yield(get_tree(), \"idle_frame\")
+	await get_tree().idle_frame
 	_health_bar.set_health(health)
 
 
@@ -31,35 +31,35 @@ func reset() -> void:
 "
 
 [node name="ExampleDamage" type="PanelContainer"]
-margin_right = 1047.0
-margin_bottom = 298.0
-rect_min_size = Vector2( 0, 340 )
+offset_right = 1047.0
+offset_bottom = 298.0
+custom_minimum_size = Vector2( 0, 340 )
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1040.0
-margin_bottom = 333.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 1040.0
+offset_bottom = 333.0
 gdscript_code = "func take_damage(amount):
 	health -= amount"
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 514.0
-margin_bottom = 326.0
+offset_right = 514.0
+offset_bottom = 326.0
 
 [node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-margin_right = 262.0
+offset_right = 262.0
 text = "take_damage(25)"
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
 visible = true
-margin_left = 518.0
-margin_right = 1033.0
-margin_bottom = 326.0
+offset_left = 518.0
+offset_right = 1033.0
+offset_bottom = 326.0
 text = "func take_damage(amount):
 	health -= amount"
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://course/lesson-11-time-delta/visuals/DemoRotatingSpriteFrame.gd" type="Script" id=1]
-[ext_resource path="res://course/common/robot_body.png" type="Texture" id=2]
-[ext_resource path="res://course/common/hand_ice.png" type="Texture" id=3]
+[ext_resource path="res://course/common/robot_body.png" type="Texture2D" id=2]
+[ext_resource path="res://course/common/hand_ice.png" type="Texture2D" id=3]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=4]
 
 [node name="Node2D" type="Node2D"]
@@ -10,16 +10,16 @@ script = ExtResource( 1 )
 
 [node name="DemoRotateSprite" type="Node2D" parent="."]
 
-[node name="GodotBottom" type="Sprite" parent="DemoRotateSprite"]
+[node name="GodotBottom" type="Sprite2D" parent="DemoRotateSprite"]
 position = Vector2( 0, -17 )
 texture = ExtResource( 2 )
 
-[node name="HandIce" type="Sprite" parent="DemoRotateSprite"]
+[node name="HandIce" type="Sprite2D" parent="DemoRotateSprite"]
 position = Vector2( 66, 14 )
 rotation = 0.36894
 texture = ExtResource( 3 )
 
-[node name="HandIce2" type="Sprite" parent="DemoRotateSprite"]
+[node name="HandIce2" type="Sprite2D" parent="DemoRotateSprite"]
 position = Vector2( -65, 19 )
 rotation = -0.483649
 texture = ExtResource( 3 )
@@ -28,10 +28,10 @@ flip_h = true
 [node name="Timer" type="Timer" parent="."]
 
 [node name="LabelRotation" type="Label" parent="."]
-margin_left = -127.0
-margin_top = -94.0
-margin_right = 55.0
-margin_bottom = -66.0
+offset_left = -127.0
+offset_top = -94.0
+offset_right = 55.0
+offset_bottom = -66.0
 theme = ExtResource( 4 )
 text = "rotation: 0"
 __meta__ = {
@@ -39,10 +39,10 @@ __meta__ = {
 }
 
 [node name="LabelFrame" type="Label" parent="."]
-margin_left = -127.0
-margin_top = -118.0
-margin_right = 55.0
-margin_bottom = -90.0
+offset_left = -127.0
+offset_top = -118.0
+offset_right = 55.0
+offset_bottom = -90.0
 theme = ExtResource( 4 )
 text = "frame speed: 0"
 __meta__ = {

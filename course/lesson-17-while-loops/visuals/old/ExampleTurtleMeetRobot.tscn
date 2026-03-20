@@ -9,9 +9,9 @@ script/source = "extends Node2D
 
 var size := 40.0
 
-onready var _turtle: DrawingTurtle = $DrawingTurtle
-onready var _robot := $Robot
-onready var _robot_animation_tree := find_node(\"AnimationTree\")
+@onready var _turtle: DrawingTurtle = $DrawingTurtle
+@onready var _robot := $Robot
+@onready var _robot_animation_tree := find_child(\"AnimationTree\")
 
 func run():
 	_turtle.reset()
@@ -26,9 +26,9 @@ func run():
 	var rect: Rect2 = _turtle.get_rect()
 	_turtle.position = - rect.size / 2.0
 	
-	yield(_turtle, \"turtle_finished\")
+	await _turtle.turtle_finished
 	_robot_animation_tree.travel(\"damage\")
-	yield(_robot_animation_tree, \"animation_finished\")
+	await _robot_animation_tree.animation_finished
 	_robot_animation_tree.travel(\"idle\")
 
 
@@ -44,19 +44,19 @@ func draw_square():
 "
 
 [node name="ExampleTurtleMeetRobot" type="PanelContainer"]
-margin_right = 658.0
-margin_bottom = 384.0
+offset_right = 658.0
+offset_bottom = 384.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 3 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 651.0
-margin_bottom = 377.0
-rect_min_size = Vector2( 0, 370 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 651.0
+offset_bottom = 377.0
+custom_minimum_size = Vector2( 0, 370 )
 gdscript_code = "func draw_wall():
 	draw_square()
 	jump(110, 0)
@@ -65,18 +65,18 @@ gdscript_code = "func draw_wall():
 	draw_square()"
 
 [node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 240.0
-margin_bottom = 370.0
+offset_right = 240.0
+offset_bottom = 370.0
 
 [node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-margin_right = 207.0
+offset_right = 207.0
 text = "draw_wall()"
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
 visible = true
-margin_left = 244.0
-margin_right = 644.0
-margin_bottom = 370.0
+offset_left = 244.0
+offset_right = 644.0
+offset_bottom = 370.0
 text = "func draw_wall():
 	draw_square()
 	jump(110, 0)

@@ -4,11 +4,11 @@
 [ext_resource path="res://course/common/CustomHealthBar.gd" type="Script" id=2]
 
 [node name="CustomHealthBar" type="ColorRect"]
-margin_left = -99.0
-margin_top = -103.0
-margin_right = 101.0
-margin_bottom = -83.0
-rect_min_size = Vector2( 200, 20 )
+offset_left = -99.0
+offset_top = -103.0
+offset_right = 101.0
+offset_bottom = -83.0
+custom_minimum_size = Vector2( 200, 20 )
 color = Color( 0.0352941, 0.0392157, 0.12549, 1 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -16,32 +16,32 @@ __meta__ = {
 }
 
 [node name="HealthBarEmpty" type="ColorRect" parent="."]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 195.0
-margin_bottom = 15.0
-rect_min_size = Vector2( 180, 10 )
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 195.0
+offset_bottom = 15.0
+custom_minimum_size = Vector2( 180, 10 )
 color = Color( 0.572549, 0.560784, 0.721569, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HealthBarCurrent" type="ColorRect" parent="."]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 195.0
-margin_bottom = 15.0
-rect_min_size = Vector2( 0, 10 )
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 195.0
+offset_bottom = 15.0
+custom_minimum_size = Vector2( 0, 10 )
 color = Color( 0.239216, 1, 0.431373, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="."]
-margin_top = -24.0
-margin_right = 200.0
-margin_bottom = 4.0
-rect_min_size = Vector2( 200, 0 )
+offset_top = -24.0
+offset_right = 200.0
+offset_bottom = 4.0
+custom_minimum_size = Vector2( 200, 0 )
 theme = ExtResource( 1 )
 text = "health = 100"
 align = 1

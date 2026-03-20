@@ -5,11 +5,11 @@ script/source = "extends RichTextLabel
 class_name DocumentationPanel
 
 
-export var documentation_resource: Resource setget set_documentation_resource
-var documentation_references := PoolStringArray()
+@export var documentation_resource: Resource: set = set_documentation_resource
+var documentation_references := PackedStringArray()
 
 func setup() -> void:
-	bbcode_text = get_documentation_resource().get_references_as_bbcode(documentation_references)
+	text = get_documentation_resource().get_references_as_bbcode(documentation_references)
 
 
 func set_documentation_resource(new_documentation_resource: Resource) -> void:

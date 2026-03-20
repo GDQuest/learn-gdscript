@@ -1,175 +1,157 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene format=3 uid="uid://bq0sxk44ctugl"]
 
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/components/BreadCrumbs.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/theme/panel_breadcrumbs.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/UINavigator.gd" type="Script" id=4]
-[ext_resource path="res://ui/icons/icon_settings.png" type="Texture" id=5]
-[ext_resource path="res://ui/icons/icon_report.png" type="Texture" id=6]
-[ext_resource path="res://ui/screens/course_outliner/CourseOutliner.tscn" type="PackedScene" id=7]
-[ext_resource path="res://ui/icons/navigation_back.png" type="Texture" id=8]
-[ext_resource path="res://ui/icons/navigation_outliner.png" type="Texture" id=9]
-[ext_resource path="res://ui/icons/icon_godot_head.svg" type="Texture" id=10]
-[ext_resource path="res://ui/components/FullScreenButton.tscn" type="PackedScene" id=11]
-[ext_resource path="res://ui/components/popups/LessonDonePopup.tscn" type="PackedScene" id=12]
-[ext_resource path="res://ui/components/QuitButton.tscn" type="PackedScene" id=13]
-[ext_resource path="res://ui/components/SalePopup.tscn" type="PackedScene" id=14]
-[ext_resource path="res://ui/components/GDQuestCreditsLabel.tscn" type="PackedScene" id=15]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
+[ext_resource type="PackedScene" path="res://ui/components/BreadCrumbs.tscn" id="2"]
+[ext_resource type="StyleBox" path="res://ui/theme/panel_breadcrumbs.tres" id="3"]
+[ext_resource type="Script" uid="uid://p0baorn0vev3" path="res://ui/UINavigator.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://dnsq0sexvhou0" path="res://ui/icons/icon_settings.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cx5pgbsm7s2qp" path="res://ui/icons/icon_report.png" id="6"]
+[ext_resource type="PackedScene" uid="uid://e8nf20q1f60d" path="res://ui/screens/course_outliner/CourseOutliner.tscn" id="7"]
+[ext_resource type="Texture2D" uid="uid://c7j3aoveyx42a" path="res://ui/icons/navigation_back.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://b2h3smb6gipdy" path="res://ui/icons/navigation_outliner.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://jenfh4moki2e" path="res://ui/icons/icon_godot_head.svg" id="10"]
+[ext_resource type="PackedScene" path="res://ui/components/FullScreenButton.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://dv2yg0u2clsic" path="res://ui/components/popups/LessonDonePopup.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://ui/components/QuitButton.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://bwru6nawsn8l6" path="res://ui/components/SalePopup.tscn" id="14"]
+[ext_resource type="PackedScene" uid="uid://cmkl63eydbdoa" path="res://ui/components/GDQuestCreditsLabel.tscn" id="15"]
 
-[sub_resource type="StyleBoxEmpty" id=1]
+[sub_resource type="StyleBoxEmpty" id="1"]
 
-[node name="UINavigator" type="PanelContainer"]
+[node name="UINavigator" type="PanelContainer" unique_id=1195579484 node_paths=PackedStringArray("_home_button", "_outliner_button", "_back_button", "_breadcrumbs", "_settings_button", "_report_button", "_screen_container", "_course_outliner", "_lesson_done_popup", "_sale_button", "_sale_popup")]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-theme = ExtResource( 1 )
-script = ExtResource( 4 )
+theme = ExtResource("1")
+script = ExtResource("4")
+_home_button = NodePath("Layout/Header/MarginContainer/HeaderContent/HomeButton")
+_outliner_button = NodePath("Layout/Header/MarginContainer/HeaderContent/OutlinerButton")
+_back_button = NodePath("Layout/Header/MarginContainer/HeaderContent/BackButton")
+_breadcrumbs = NodePath("Layout/Header/MarginContainer/HeaderContent/BreadCrumbs")
+_settings_button = NodePath("Layout/Header/MarginContainer/HeaderContent/SettingsButton")
+_report_button = NodePath("Layout/Header/MarginContainer/HeaderContent/ReportButton")
+_screen_container = NodePath("Layout/Content/ScreenContainer")
+_course_outliner = NodePath("Layout/Content/CourseOutliner")
+_lesson_done_popup = NodePath("LessonDonePopup")
+_sale_button = NodePath("Layout/Header/MarginContainer/HeaderContent/SaleButton")
+_sale_popup = NodePath("SalePopup")
 
-[node name="Layout" type="VBoxContainer" parent="."]
-margin_right = 1920.0
-margin_bottom = 1080.0
-mouse_filter = 2
+[node name="Layout" type="VBoxContainer" parent="." unique_id=589902555]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 0
+mouse_filter = 2
+theme_override_constants/separation = 0
 
-[node name="Header" type="PanelContainer" parent="Layout"]
-margin_right = 1920.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 0, 40 )
+[node name="Header" type="PanelContainer" parent="Layout" unique_id=1142096464]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
 size_flags_horizontal = 3
-custom_styles/panel = ExtResource( 3 )
+theme_override_styles/panel = ExtResource("3")
 
-[node name="MarginContainer" type="MarginContainer" parent="Layout/Header"]
-margin_right = 1920.0
-margin_bottom = 48.0
-custom_constants/margin_right = 12
-custom_constants/margin_top = 0
-custom_constants/margin_left = 12
-custom_constants/margin_bottom = 0
+[node name="MarginContainer" type="MarginContainer" parent="Layout/Header" unique_id=1792892609]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
 
-[node name="HeaderContent" type="HBoxContainer" parent="Layout/Header/MarginContainer"]
-margin_left = 12.0
-margin_right = 1908.0
-margin_bottom = 48.0
+[node name="HeaderContent" type="HBoxContainer" parent="Layout/Header/MarginContainer" unique_id=1720970000]
+layout_mode = 2
 
-[node name="HomeButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
+[node name="HomeButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=432730034]
 visible = false
-margin_left = 48.0
-margin_right = 92.0
-margin_bottom = 48.0
-hint_tooltip = "Go back to the main menu"
+layout_mode = 2
+tooltip_text = "Go back to the main menu"
 mouse_default_cursor_shape = 2
-icon = ExtResource( 10 )
+icon = ExtResource("10")
 flat = true
 
-[node name="OutlinerButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
-margin_right = 32.0
-margin_bottom = 48.0
-hint_tooltip = "Open the course index"
+[node name="OutlinerButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=852144902]
+layout_mode = 2
+tooltip_text = "Open the course index"
 mouse_default_cursor_shape = 2
-icon = ExtResource( 9 )
+icon = ExtResource("9")
 flat = true
 
-[node name="BackButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
-margin_left = 48.0
-margin_right = 80.0
-margin_bottom = 48.0
-hint_tooltip = "Go back in your navigation history"
+[node name="BackButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=375237761]
+layout_mode = 2
+tooltip_text = "Go back in your navigation history"
 mouse_default_cursor_shape = 2
-icon = ExtResource( 8 )
+icon = ExtResource("8")
 flat = true
 
-[node name="BreadCrumbs" parent="Layout/Header/MarginContainer/HeaderContent" instance=ExtResource( 2 )]
-margin_left = 96.0
-margin_right = 96.0
+[node name="BreadCrumbs" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=2073787700 instance=ExtResource("2")]
+layout_mode = 2
 
-[node name="Spacer" type="Control" parent="Layout/Header/MarginContainer/HeaderContent"]
-margin_left = 112.0
-margin_right = 1273.0
-margin_bottom = 48.0
-rect_pivot_offset = Vector2( -514, 99 )
+[node name="Spacer" type="Control" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=1941836464]
+layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SaleButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
-margin_left = 1289.0
-margin_right = 1656.0
-margin_bottom = 48.0
-hint_tooltip = "Go back in your navigation history"
+[node name="SaleButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=2134541165]
+layout_mode = 2
+tooltip_text = "Go back in your navigation history"
 mouse_default_cursor_shape = 2
-custom_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
-custom_colors/font_color_hover = Color( 0.960784, 0.980392, 0.980392, 1 )
-custom_colors/font_color_pressed = Color( 1, 0.960784, 0.25098, 1 )
-custom_styles/focus = SubResource( 1 )
+theme_override_colors/font_color = Color(1, 0.960784, 0.25098, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.960784, 0.25098, 1)
+theme_override_colors/font_hover_color = Color(0.960784, 0.980392, 0.980392, 1)
+theme_override_styles/focus = SubResource("1")
 text = "CHRISTMAS SALE - 50% OFF"
 flat = true
 
-[node name="ReportButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
-margin_left = 1672.0
-margin_right = 1720.0
-margin_bottom = 48.0
-hint_tooltip = "Report an issue"
+[node name="ReportButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=404748892]
+layout_mode = 2
+tooltip_text = "Report an issue"
 mouse_default_cursor_shape = 2
-icon = ExtResource( 6 )
+icon = ExtResource("6")
 flat = true
 
-[node name="SettingsButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent"]
-margin_left = 1736.0
-margin_right = 1784.0
-margin_bottom = 48.0
-hint_tooltip = "Configure the app"
+[node name="SettingsButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=1978516027]
+layout_mode = 2
+tooltip_text = "Configure the app"
 mouse_default_cursor_shape = 2
-icon = ExtResource( 5 )
+icon = ExtResource("5")
 flat = true
 
-[node name="FullScreenButton" parent="Layout/Header/MarginContainer/HeaderContent" instance=ExtResource( 11 )]
-margin_left = 1800.0
-margin_right = 1840.0
-margin_bottom = 47.0
+[node name="FullScreenButton" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=150737344 instance=ExtResource("11")]
+layout_mode = 2
 
-[node name="QuitButton" parent="Layout/Header/MarginContainer/HeaderContent" instance=ExtResource( 13 )]
-margin_left = 1856.0
-margin_right = 1896.0
-margin_bottom = 47.0
+[node name="QuitButton" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=1645660088 instance=ExtResource("13")]
+layout_mode = 2
 
-[node name="Content" type="Panel" parent="Layout"]
-margin_top = 48.0
-margin_right = 1920.0
-margin_bottom = 1080.0
-rect_clip_content = true
-mouse_filter = 2
+[node name="Content" type="Panel" parent="Layout" unique_id=59830397]
+clip_contents = true
+layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
-[node name="ScreenContainer" type="PanelContainer" parent="Layout/Content"]
+[node name="ScreenContainer" type="PanelContainer" parent="Layout/Content" unique_id=291767987]
 show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 
-[node name="CourseOutliner" parent="Layout/Content" instance=ExtResource( 7 )]
+[node name="CourseOutliner" parent="Layout/Content" unique_id=32806929 instance=ExtResource("7")]
 visible = false
+layout_mode = 1
 
-[node name="LessonDonePopup" parent="." instance=ExtResource( 12 )]
+[node name="LessonDonePopup" parent="." unique_id=27419743 instance=ExtResource("12")]
 visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 1920.0
-margin_bottom = 1080.0
+layout_mode = 2
 
-[node name="SalePopup" parent="." instance=ExtResource( 14 )]
+[node name="SalePopup" parent="." unique_id=1162155395 instance=ExtResource("14")]
+layout_mode = 2
 title = "CHRISTMAS SALE"
 only_until_string = "the end of the year"
 end_datetime_iso = "2023-01-01T00:00"
 sale_url = "https://gdquest.mavenseed.com/courses/"
 
-[node name="GDQuestCreditsLabel" parent="." instance=ExtResource( 15 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 1920.0
-margin_top = 1080.0
-margin_right = 1920.0
-margin_bottom = 1080.0
+[node name="GDQuestCreditsLabel" parent="." unique_id=1214855319 instance=ExtResource("15")]
+layout_mode = 2

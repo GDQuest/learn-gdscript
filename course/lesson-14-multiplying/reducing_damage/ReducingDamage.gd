@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var _animation_tree := find_node("AnimationTree")
-onready var _health_bar := find_node("CustomHealthBar") as ColorRect
+@onready var _animation_tree := find_child("AnimationTree")
+@onready var _health_bar := find_child("CustomHealthBar") as ColorRect
 
 # EXPORT damage
 var level = 3
@@ -23,7 +23,7 @@ func _run():
 	take_damage(10)
 	_health_bar.set_health(health)
 	_animation_tree.travel("damage")
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	Events.emit_signal("practice_run_completed")
 
 

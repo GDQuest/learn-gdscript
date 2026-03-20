@@ -6,31 +6,31 @@
 [ext_resource path="res://ui/components/SmoothScrollContainer.gd" type="Script" id=4]
 
 [node name="CourseLessonList" type="PanelContainer"]
-margin_right = 696.0
-margin_bottom = 993.0
-rect_min_size = Vector2( 640, 0 )
+offset_right = 696.0
+offset_bottom = 993.0
+custom_minimum_size = Vector2( 640, 0 )
 theme = ExtResource( 2 )
-custom_styles/panel = ExtResource( 1 )
+theme_override_styles/panel = ExtResource( 1 )
 script = ExtResource( 3 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 688.0
-margin_bottom = 985.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 688.0
+offset_bottom = 985.0
 scroll_horizontal_enabled = false
 script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
-margin_right = 680.0
-margin_bottom = 16.0
+offset_right = 680.0
+offset_bottom = 16.0
 size_flags_horizontal = 3
-custom_constants/margin_top = 8
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="Items" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 660.0
-margin_bottom = 8.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 660.0
+offset_bottom = 8.0

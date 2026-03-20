@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/components/popups/ReportFormPopup.gd" type="Script" id=1]
-[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/theme/fonts/font_title.tres" type="FontFile" id=2]
 [ext_resource path="res://ui/theme/focus_accent.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=4]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=5]
@@ -22,65 +22,65 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -430.0
-margin_top = -370.0
-margin_right = 430.0
-margin_bottom = 370.0
-rect_min_size = Vector2( 860, 740 )
+offset_left = -430.0
+offset_top = -370.0
+offset_right = 430.0
+offset_bottom = 370.0
+custom_minimum_size = Vector2( 860, 740 )
 theme = ExtResource( 7 )
 
 [node name="Panel" type="Panel" parent="PanelContainer"]
-margin_right = 860.0
-margin_bottom = 740.0
-custom_styles/panel = ExtResource( 5 )
+offset_right = 860.0
+offset_bottom = 740.0
+theme_override_styles/panel = ExtResource( 5 )
 
 [node name="Column" type="VBoxContainer" parent="PanelContainer"]
-margin_right = 860.0
-margin_bottom = 740.0
-custom_constants/separation = 0
+offset_right = 860.0
+offset_bottom = 740.0
+theme_override_constants/separation = 0
 
 [node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Column"]
-margin_right = 860.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 0, 16 )
+offset_right = 860.0
+offset_bottom = 16.0
+custom_minimum_size = Vector2( 0, 16 )
 value = 100.0
 percent_visible = false
 
 [node name="Margin" type="MarginContainer" parent="PanelContainer/Column"]
-margin_top = 16.0
-margin_right = 860.0
-margin_bottom = 740.0
+offset_top = 16.0
+offset_right = 860.0
+offset_bottom = 740.0
 size_flags_vertical = 3
 
 [node name="Column" type="VBoxContainer" parent="PanelContainer/Column/Margin"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 840.0
-margin_bottom = 704.0
-custom_constants/separation = 12
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 840.0
+offset_bottom = 704.0
+theme_override_constants/separation = 12
 
 [node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column"]
-margin_right = 820.0
-margin_bottom = 31.0
-custom_fonts/font = ExtResource( 2 )
+offset_right = 820.0
+offset_bottom = 31.0
+theme_override_fonts/font = ExtResource( 2 )
 text = "Report an issue"
 align = 1
 
 [node name="Separator" type="HSeparator" parent="PanelContainer/Column/Margin/Column"]
-margin_left = 210.0
-margin_top = 43.0
-margin_right = 610.0
-margin_bottom = 51.0
-rect_min_size = Vector2( 400, 0 )
+offset_left = 210.0
+offset_top = 43.0
+offset_right = 610.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 400, 0 )
 size_flags_horizontal = 4
 
 [node name="Summary" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column"]
-margin_top = 63.0
-margin_right = 820.0
-margin_bottom = 572.0
+offset_top = 63.0
+offset_right = 820.0
+offset_bottom = 572.0
 size_flags_vertical = 3
 bbcode_enabled = true
-bbcode_text = "If you face an issue in the app, please click the link below to report it on GitHub:
+text = "If you face an issue in the app, please click the link below to report it on GitHub:
 
 [center][b][url=https://github.com/GDQuest/learn-gdscript/issues]GitHub.com > GDQuest > learn-gdscript > Issues[/url][/b][/center]
 
@@ -136,23 +136,23 @@ Please add as much relevant information as possible, such as the kind of device 
 Thank you for contributing to open source!"
 
 [node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column"]
-margin_top = 584.0
-margin_right = 820.0
-margin_bottom = 604.0
-rect_min_size = Vector2( 400, 20 )
+offset_top = 584.0
+offset_right = 820.0
+offset_bottom = 604.0
+custom_minimum_size = Vector2( 400, 20 )
 
 [node name="ConfirmButton" type="Button" parent="PanelContainer/Column/Margin/Column"]
-margin_left = 310.0
-margin_top = 616.0
-margin_right = 510.0
-margin_bottom = 684.0
-rect_min_size = Vector2( 200, 68 )
+offset_left = 310.0
+offset_top = 616.0
+offset_right = 510.0
+offset_bottom = 684.0
+custom_minimum_size = Vector2( 200, 68 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
-custom_colors/font_color_hover = Color( 0.239216, 1, 0.431373, 1 )
-custom_colors/font_color_pressed = Color( 0.239216, 1, 0.431373, 1 )
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 3 )
-custom_styles/normal = ExtResource( 4 )
+theme_override_colors/font_hover_color = Color( 0.239216, 1, 0.431373, 1 )
+theme_override_colors/font_pressed_color = Color( 0.239216, 1, 0.431373, 1 )
+theme_override_styles/hover = ExtResource( 6 )
+theme_override_styles/pressed = ExtResource( 6 )
+theme_override_styles/focus = ExtResource( 3 )
+theme_override_styles/normal = ExtResource( 4 )
 text = "OK"

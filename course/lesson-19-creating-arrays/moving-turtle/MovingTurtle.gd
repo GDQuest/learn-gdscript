@@ -1,15 +1,15 @@
 extends Node2D
 
-export var board_size := Vector2(6, 4) setget set_board_size
-export var cell_size := Vector2(80, 80)
-export var line_width := 4
-export var draw_cell_coordinates := false
-export var label_font: Resource
+@export var board_size := Vector2(6, 4): set = set_board_size
+@export var cell_size := Vector2(80, 80)
+@export var line_width := 4
+@export var draw_cell_coordinates := false
+@export var label_font: Resource
 
 var board_size_px := cell_size * board_size
 
 # Maps nodes to grid positions
-onready var units: Dictionary setget set_units
+@onready var units: Dictionary: set = set_units
 
 var _label_container := Control.new()
 
@@ -29,7 +29,7 @@ var turtle_path = [
 ]
 # /EXPORT path
 
-onready var turtle := $Turtle
+@onready var turtle := $Turtle
 
 
 func _ready() -> void:
@@ -51,7 +51,7 @@ func _run():
 	for cell in turtle_path:
 		path.append(calculate_cell_position(cell))
 	turtle.move(path)
-	yield(turtle, "goal_reached")
+	await turtle.goal_reached
 	Events.emit_signal("practice_run_completed")
 
 
@@ -59,7 +59,7 @@ func _run():
 func _draw() -> void:
 	for x in range(board_size.x):
 		for y in range(board_size.y):
-			draw_rect(Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, Vector2.ONE * cell_size), Color.white, false, line_width)
+			draw_rect(Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, Vector2.ONE * cell_size), Color.WHITE, false, line_width)
 
 	if draw_cell_coordinates:
 		for label in _label_container.get_children():
@@ -69,10 +69,10 @@ func _draw() -> void:
 			for y in board_size.y:
 				var cell = Vector2(x, y)
 				var label = Label.new()
-				label.add_font_override("font", label_font)
+				label.add_theme_font_override("font", label_font)
 				label.text = str(cell)
 				_label_container.add_child(label)
-				label.rect_position = calculate_cell_position(cell) - label.rect_size / 2.0
+				label.position = calculate_cell_position(cell) - label.size / 2.0
 
 
 func set_units(new_value: Dictionary):

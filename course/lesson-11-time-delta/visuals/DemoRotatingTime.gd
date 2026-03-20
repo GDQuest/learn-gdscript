@@ -3,10 +3,10 @@ extends Node2D
 const _times := [0.1, 0.1, 0.2, 0.1, 0.2]
 var _index := 0
 
-onready var _timer := find_node("Timer") as Timer
-onready var _robot := find_node("Robot") as Node2D
-onready var _label_rotation := find_node("LabelRotation") as Label
-onready var _label_frame := find_node("LabelFrame") as Label
+@onready var _timer := find_child("Timer") as Timer
+@onready var _robot := find_child("Robot") as Node2D
+@onready var _label_rotation := find_child("LabelRotation") as Label
+@onready var _label_frame := find_child("LabelFrame") as Label
 
 func _ready():
 	_on_Timer_timeout()

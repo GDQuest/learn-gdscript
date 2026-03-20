@@ -5,26 +5,26 @@ const VALUE_CHECK_PASSED := preload("res://ui/icons/checkmark_valid.svg")
 const VALUE_COLOR_NONE := Color(0.290196, 0.294118, 0.388235)
 const VALUE_COLOR_PASSED := Color(0.239216, 1, 0.431373)
 
-var lesson: BBCodeParser.ParseNode setget set_lesson
-var lesson_progress: LessonProgress setget set_lesson_progress
-var has_started: bool = false setget set_has_started
+var lesson: BBCodeParser.ParseNode: set = set_lesson
+var lesson_progress: LessonProgress: set = set_lesson_progress
+var has_started: bool = false: set = set_has_started
 
-onready var _title_label := $MarginContainer/Layout/TitleLabel as Label
-onready var _reading_stats_block := $MarginContainer/Layout/ReadingStats as Control
-onready var _reading_stats_value := $MarginContainer/Layout/ReadingStats/ValueLabel as Label
-onready var _reading_stats_icon := $MarginContainer/Layout/ReadingStats/ValueIcon as TextureRect
-onready var _quiz_stats_block := $MarginContainer/Layout/QuizStats as Control
-onready var _quiz_stats_value := $MarginContainer/Layout/QuizStats/ValueLabel as Label
-onready var _practice_stats_block := $MarginContainer/Layout/PracticeStats as Control
-onready var _practice_stats_value := $MarginContainer/Layout/PracticeStats/ValueLabel as Label
+@onready var _title_label := $MarginContainer/Layout/TitleLabel as Label
+@onready var _reading_stats_block := $MarginContainer/Layout/ReadingStats as Control
+@onready var _reading_stats_value := $MarginContainer/Layout/ReadingStats/ValueLabel as Label
+@onready var _reading_stats_icon := $MarginContainer/Layout/ReadingStats/ValueIcon as TextureRect
+@onready var _quiz_stats_block := $MarginContainer/Layout/QuizStats as Control
+@onready var _quiz_stats_value := $MarginContainer/Layout/QuizStats/ValueLabel as Label
+@onready var _practice_stats_block := $MarginContainer/Layout/PracticeStats as Control
+@onready var _practice_stats_value := $MarginContainer/Layout/PracticeStats/ValueLabel as Label
 
-onready var _goto_lesson_button := $MarginContainer/Layout/Buttons/GoToButton as Button
+@onready var _goto_lesson_button := $MarginContainer/Layout/Buttons/GoToButton as Button
 
 
 func _ready() -> void:
 	_update_visuals()
 	
-	_goto_lesson_button.connect("pressed", self, "_on_goto_lesson_pressed")
+	_goto_lesson_button.connect("pressed", Callable(self, "_on_goto_lesson_pressed"))
 	_goto_lesson_button.grab_focus()
 
 

@@ -6,7 +6,7 @@
 [sub_resource type="Curve2D" id=1]
 resource_local_to_scene = true
 _data = {
-"points": PoolVector2Array( -243.974, 43.4138, 243.974, -43.4138, 0, 0, 0, 0, 0, 0, 250, -250 )
+"points": PackedVector2Array( -243.974, 43.4138, 243.974, -43.4138, 0, 0, 0, 0, 0, 0, 250, -250 )
 }
 
 [node name="Graph" type="Path2D"]
@@ -18,9 +18,9 @@ script = ExtResource( 1 )
 
 [node name="LabelX" type="Label" parent="."]
 self_modulate = Color( 0.960784, 0.980392, 0.980392, 1 )
-margin_top = 5.0
-margin_right = 250.0
-margin_bottom = 33.0
+offset_top = 5.0
+offset_right = 250.0
+offset_bottom = 33.0
 theme = ExtResource( 3 )
 text = "X"
 align = 1
@@ -29,10 +29,10 @@ __meta__ = {
 }
 
 [node name="LabelY" type="Label" parent="."]
-margin_left = -35.0
-margin_right = 215.0
-margin_bottom = 28.0
-rect_rotation = -90.0
+offset_left = -35.0
+offset_right = 215.0
+offset_bottom = 28.0
+rotation = -90.0
 theme = ExtResource( 3 )
 text = "Y"
 align = 1

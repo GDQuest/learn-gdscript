@@ -6,18 +6,18 @@
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=4]
 
 [node name="ExampleRotatingSpriteFrame" type="PanelContainer"]
-margin_right = 1047.0
-margin_bottom = 298.0
+offset_right = 1047.0
+offset_bottom = 298.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1040.0
-margin_bottom = 291.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 1040.0
+offset_bottom = 291.0
 gdscript_code = "func _process(delta):
 	rotate(0.2)"
 run_button_label = "set_process(true)"
@@ -28,10 +28,10 @@ script = ExtResource( 2 )
 [node name="Robot" parent="RunnableCodeExample/RotatingExample" instance=ExtResource( 3 )]
 
 [node name="LabelRotation" type="Label" parent="RunnableCodeExample/RotatingExample"]
-margin_left = -127.0
-margin_top = -94.0
-margin_right = 55.0
-margin_bottom = -66.0
+offset_left = -127.0
+offset_top = -94.0
+offset_right = 55.0
+offset_bottom = -66.0
 theme = ExtResource( 4 )
 text = "rotation: 0"
 __meta__ = {
@@ -39,10 +39,10 @@ __meta__ = {
 }
 
 [node name="LabelFrame" type="Label" parent="RunnableCodeExample/RotatingExample"]
-margin_left = -127.0
-margin_top = -118.0
-margin_right = 55.0
-margin_bottom = -90.0
+offset_left = -127.0
+offset_top = -118.0
+offset_right = 55.0
+offset_bottom = -90.0
 theme = ExtResource( 4 )
 text = "frame speed: 0"
 __meta__ = {

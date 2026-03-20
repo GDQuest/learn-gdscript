@@ -1,127 +1,127 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
-[ext_resource path="res://ui/icons/icon_space.png" type="Texture" id=2]
+[ext_resource path="res://ui/theme/fonts/font_title.tres" type="FontFile" id=1]
+[ext_resource path="res://ui/icons/icon_space.png" type="Texture2D" id=2]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=3]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 1 )
 
 [node name="VisualFunctionDefinition" type="PanelContainer"]
-margin_right = 580.0
-margin_bottom = 45.0
-rect_min_size = Vector2( 0, 80 )
+offset_right = 580.0
+offset_bottom = 45.0
+custom_minimum_size = Vector2( 0, 80 )
 size_flags_horizontal = 3
-custom_styles/panel = ExtResource( 3 )
+theme_override_styles/panel = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Row" type="HBoxContainer" parent="."]
-margin_left = 8.0
-margin_top = 24.0
-margin_right = 636.0
-margin_bottom = 55.0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 636.0
+offset_bottom = 55.0
 size_flags_vertical = 4
 theme = SubResource( 1 )
-custom_constants/separation = 4
+theme_override_constants/separation = 4
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Row"]
-margin_right = 56.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 1, 0.0941176, 0.321569, 1 )
+offset_right = 56.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 1, 0.0941176, 0.321569, 1 )
 text = "func"
 
 [node name="Label10" type="TextureRect" parent="Row"]
 self_modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
-margin_left = 60.0
-margin_top = 21.0
-margin_right = 89.0
-margin_bottom = 31.0
+offset_left = 60.0
+offset_top = 21.0
+offset_right = 89.0
+offset_bottom = 31.0
 size_flags_vertical = 8
 texture = ExtResource( 2 )
 
 [node name="Label2" type="Label" parent="Row"]
-margin_left = 93.0
-margin_right = 165.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
+offset_left = 93.0
+offset_right = 165.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
 text = "name"
 
 [node name="Label3" type="Label" parent="Row"]
-margin_left = 169.0
-margin_right = 178.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
+offset_left = 169.0
+offset_right = 178.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
 text = "("
 
 [node name="Label5" type="Label" parent="Row"]
-margin_left = 182.0
-margin_right = 335.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
+offset_left = 182.0
+offset_right = 335.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
 text = "parameter_1"
 
 [node name="Label4" type="Label" parent="Row"]
-margin_left = 339.0
-margin_right = 345.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
+offset_left = 339.0
+offset_right = 345.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
 text = ","
 
 [node name="Label12" type="TextureRect" parent="Row"]
 self_modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
-margin_left = 349.0
-margin_top = 21.0
-margin_right = 378.0
-margin_bottom = 31.0
+offset_left = 349.0
+offset_top = 21.0
+offset_right = 378.0
+offset_bottom = 31.0
 size_flags_vertical = 8
 texture = ExtResource( 2 )
 
 [node name="Label7" type="Label" parent="Row"]
-margin_left = 382.0
-margin_right = 540.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
+offset_left = 382.0
+offset_right = 540.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
 text = "parameter_2"
 
 [node name="Label8" type="Label" parent="Row"]
-margin_left = 544.0
-margin_right = 550.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
+offset_left = 544.0
+offset_right = 550.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
 text = ","
 
 [node name="Label13" type="TextureRect" parent="Row"]
 self_modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
-margin_left = 554.0
-margin_top = 21.0
-margin_right = 583.0
-margin_bottom = 31.0
+offset_left = 554.0
+offset_top = 21.0
+offset_right = 583.0
+offset_bottom = 31.0
 size_flags_vertical = 8
 texture = ExtResource( 2 )
 
 [node name="Label9" type="Label" parent="Row"]
-margin_left = 587.0
-margin_right = 605.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
+offset_left = 587.0
+offset_right = 605.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
 text = "..."
 
 [node name="Label6" type="Label" parent="Row"]
-margin_left = 609.0
-margin_right = 618.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
+offset_left = 609.0
+offset_right = 618.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
 text = ")"
 
 [node name="Label11" type="Label" parent="Row"]
-margin_left = 622.0
-margin_right = 628.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
+offset_left = 622.0
+offset_right = 628.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
 text = ":"

@@ -7,33 +7,33 @@ const FADE_IN_START_SCALE := 0.5
 
 var _raw_summary := ""
 
-onready var _popup_container := $PanelContainer as Control
-onready var _incomplete_summary := $PanelContainer/Layout/Margin/Column/IncompleteSummary as Label
-onready var _move_on_button := $PanelContainer/Layout/Margin/Column/Buttons/MoveOnButton as Button
-onready var _stay_button := $PanelContainer/Layout/Margin/Column/Buttons/StayButton as Button
+@onready var _popup_container := $PanelContainer as Control
+@onready var _incomplete_summary := $PanelContainer/Layout/Margin/Column/IncompleteSummary as Label
+@onready var _move_on_button := $PanelContainer/Layout/Margin/Column/Buttons/MoveOnButton as Button
+@onready var _stay_button := $PanelContainer/Layout/Margin/Column/Buttons/StayButton as Button
 
-onready var _summary_label := $PanelContainer/Layout/Margin/Column/Summary as RichTextLabel
+@onready var _summary_label := $PanelContainer/Layout/Margin/Column/Summary as RichTextLabel
 
-onready var _particles := $Particles as CPUParticles2D
-onready var _thick_particles := $ThickParticles as CPUParticles2D
+@onready var _particles := $Particles as CPUParticles2D
+@onready var _thick_particles := $ThickParticles as CPUParticles2D
 
 
 func _ready() -> void:
-	set_as_toplevel(true)
+	set_as_top_level(true)
 	
 	# BBCode text is not autotranslated, so we do this to preserve the initial value.
 	# FIXME: Some weird Windows issue, replace before translating so matching works.
-	_raw_summary = _summary_label.bbcode_text.replace("\r\n", "\n")
-	_summary_label.bbcode_text = tr(_raw_summary)
+	_raw_summary = _summary_label.text.replace("\r\n", "\n")
+	_summary_label.text = tr(_raw_summary)
 	
-	_move_on_button.connect("pressed", self, "_on_button_pressed")
-	_stay_button.connect("pressed", self, "hide")
+	_move_on_button.connect("pressed", Callable(self, "_on_button_pressed"))
+	_stay_button.connect("pressed", Callable(self, "hide"))
 
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
 		if is_instance_valid(_summary_label):
-			_summary_label.bbcode_text = tr(_raw_summary)
+			_summary_label.text = tr(_raw_summary)
 
 
 func set_incomplete(incomplete: bool) -> void:
@@ -41,17 +41,17 @@ func set_incomplete(incomplete: bool) -> void:
 
 
 func popup_centered() -> void:
-	_particles.position = rect_size / 2
-	_thick_particles.position = rect_size / 2
+	_particles.position = size / 2
+	_thick_particles.position = size / 2
 	
-	_popup_container.rect_size = _popup_container.rect_min_size
-	_popup_container.rect_scale = Vector2(FADE_IN_START_SCALE, FADE_IN_START_SCALE)
+	_popup_container.size = _popup_container.custom_minimum_size
+	_popup_container.scale = Vector2(FADE_IN_START_SCALE, FADE_IN_START_SCALE)
 	show()
-	_popup_container.set_anchors_and_margins_preset(Control.PRESET_CENTER, Control.PRESET_MODE_KEEP_SIZE)
-	_popup_container.rect_pivot_offset = _popup_container.rect_size / 2
+	_popup_container.set_anchors_and_offsets_preset(Control.PRESET_CENTER, Control.PRESET_MODE_KEEP_SIZE)
+	_popup_container.pivot_offset = _popup_container.size / 2
 	
 	var scene_tween = create_tween()
-	scene_tween.tween_property(_popup_container, "rect_scale", Vector2(1.0, 1.0), FADE_IN_DURATION).from(_popup_container.rect_scale).set_trans(Tween.TRANS_CUBIC)
+	scene_tween.tween_property(_popup_container, "scale", Vector2(1.0, 1.0), FADE_IN_DURATION).from(_popup_container.scale).set_trans(Tween.TRANS_CUBIC)
 	
 	_move_on_button.grab_focus()
 

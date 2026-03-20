@@ -4,43 +4,43 @@
 [ext_resource path="res://ui/theme/panel_darker.tres" type="StyleBox" id=2]
 
 [node name="ScrollableTextBox" type="PanelContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 200 )
+offset_right = 40.0
+offset_bottom = 40.0
+custom_minimum_size = Vector2( 0, 200 )
 theme = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 300.0
-margin_bottom = 417.0
-rect_min_size = Vector2( 300, 200 )
+offset_right = 300.0
+offset_bottom = 417.0
+custom_minimum_size = Vector2( 300, 200 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = ExtResource( 2 )
+theme_override_styles/panel = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 300.0
-margin_bottom = 417.0
+offset_right = 300.0
+offset_bottom = 417.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextBox" type="RichTextLabel" parent="MarginContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 280.0
-margin_bottom = 397.0
-rect_min_size = Vector2( 0, 100 )
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 280.0
+offset_bottom = 397.0
+custom_minimum_size = Vector2( 0, 100 )
 focus_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
-bbcode_text = "Placeholder text"
+text = "Placeholder text"
 meta_underlined = false
 text = "Placeholder text"
 fit_content_height = true

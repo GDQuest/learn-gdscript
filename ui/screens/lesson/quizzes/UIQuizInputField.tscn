@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene format=3 uid="uid://bal4vedp0bfn3"]
 
-[ext_resource path="res://ui/screens/lesson/UIBaseQuiz.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/screens/lesson/quizzes/UIQuizInputField.gd" type="Script" id=2]
+[ext_resource type="PackedScene" uid="uid://076jcmgwamwb" path="res://ui/screens/lesson/UIBaseQuiz.tscn" id="1"]
+[ext_resource type="Script" uid="uid://dg7d00q8dycvi" path="res://ui/screens/lesson/quizzes/UIQuizInputField.gd" id="2"]
 
-[node name="UIQuizInputField" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[node name="UIQuizInputField" unique_id=2004779685 node_paths=PackedStringArray("_line_edit") instance=ExtResource("1")]
+script = ExtResource("2")
+_line_edit = NodePath("ClipContentBoundary/ChoiceContainer/ChoiceView/Answers/LineEdit")
 
-[node name="LineEdit" type="LineEdit" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/Answers" index="0"]
-margin_right = 360.0
-margin_bottom = 42.0
+[node name="LineEdit" type="LineEdit" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/Answers" parent_id_path=PackedInt32Array(278723037) index="0" unique_id=1954366807]
+layout_mode = 2

@@ -11,37 +11,40 @@
 class_name OfflineScriptVerifier
 extends ScriptVerifier
 
-const PARSE_WRAPPER_CLASS := "GDScriptParserWrap"
+const PARSE_WRAPPER_CLASS := "GDScriptErrorChecker"
 
 # Array[ScriptError]
 var errors := []
 
 
-func _init(new_script_text: String).(new_script_text) -> void:
+func _init(new_script_text: String) -> void:
+	super(new_script_text)
 	pass
 
 
 func test() -> void:
 	if ClassDB.class_exists(PARSE_WRAPPER_CLASS):
-		var wrap: Reference = ClassDB.instance(PARSE_WRAPPER_CLASS)
-		wrap.parse_script(_new_script_text)
-		if wrap.has_error():
-			var error_line: int = wrap.get_error_line() - 1
-			var line_text := _new_script_text.split("\n")[error_line]
-			var error_data := make_error_from_data(
-				1,
-				wrap.get_error(),
-				"gdscript",
-				-1,
-				error_line,
-				line_text.length() - line_text.strip_edges(true, false).length(),
-				line_text.strip_edges(false).length()
-			)
-			errors = [error_data]
+		var wrap: RefCounted = ClassDB.instantiate(PARSE_WRAPPER_CLASS)
+		wrap.set_source(_new_script_text)
+		if wrap.has_errors():
+			errors = []
+			for i in wrap.get_error_count():
+				var error_line: int = wrap.get_error_line(i) - 1
+				var line_text := _new_script_text.split("\n")[error_line]
+				var error_data := make_error_from_data(
+					1,
+					wrap.get_error(i),
+					"gdscript",
+					-1,
+					error_line,
+					line_text.length() - line_text.strip_edges(true, false).length(),
+					line_text.strip_edges(false).length()
+				)
+				errors.push_back(error_data)
 		else:
 			errors = []
 	else:
-		push_error("Script Parser Wrapper class is missing!")
+		push_error("Script Error Checker class is missing!")
 		var error := make_error_no_parser_wrapper_class()
 		errors = [error]
 		return
@@ -49,7 +52,7 @@ func test() -> void:
 
 static func make_error_no_parser_wrapper_class() -> ScriptError:
 	var err = ScriptVerifier.ScriptError.new()
-	err.message = "No Script Parser class in exported app. There will be no error checking possible"
+	err.message = "No Script Error Checker class in exported app. There will be no error checking possible"
 	err.severity = 1
 	err.code = ScriptVerifier.GDQuestErrorCode.NO_PARSER_CLASS
 	return err

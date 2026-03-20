@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorScript
 
 const SOURCE_PATH := "res://tests/gdscript-error-list.txt"
@@ -13,12 +13,14 @@ func _run():
 		printerr("Failed to load the source file at '%s': Error code %d." % [SOURCE_PATH, error])
 		return
 
-	var message_list := PoolStringArray()
+	var message_list := PackedStringArray()
 	source_file.seek(0)
-	while source_file.get_position() < source_file.get_len():
+	while source_file.get_position() < source_file.get_length():
 		var line = source_file.get_line()
-		var error_message = parse_json(line)
-		if not error_message.empty():
+		var test_json_conv = JSON.new()
+		test_json_conv.parse(line)
+		var error_message = test_json_conv.get_data()
+		if not error_message.is_empty():
 			message_list.append(error_message)
 	source_file.close()
 

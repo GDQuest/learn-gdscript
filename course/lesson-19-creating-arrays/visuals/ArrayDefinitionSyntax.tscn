@@ -1,95 +1,95 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/theme/fonts/font_title.tres" type="FontFile" id=1]
 [ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=2]
-[ext_resource path="res://ui/icons/icon_space.png" type="Texture" id=3]
+[ext_resource path="res://ui/icons/icon_space.png" type="Texture2D" id=3]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 1 )
 
 [node name="VisualFunctionDefinition" type="PanelContainer"]
-margin_right = 580.0
-margin_bottom = 45.0
-rect_min_size = Vector2( 0, 80 )
+offset_right = 580.0
+offset_bottom = 45.0
+custom_minimum_size = Vector2( 0, 80 )
 size_flags_horizontal = 3
-custom_styles/panel = ExtResource( 2 )
+theme_override_styles/panel = ExtResource( 2 )
 
 [node name="Row" type="HBoxContainer" parent="."]
-margin_left = 8.0
-margin_top = 24.0
-margin_right = 572.0
-margin_bottom = 55.0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 572.0
+offset_bottom = 55.0
 size_flags_vertical = 4
 theme = SubResource( 1 )
-custom_constants/separation = 4
+theme_override_constants/separation = 4
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label3" type="Label" parent="Row"]
-margin_left = 122.0
-margin_right = 131.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
+offset_left = 122.0
+offset_right = 131.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
 text = "["
 
 [node name="Label2" type="Label" parent="Row"]
-margin_left = 135.0
-margin_right = 223.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
+offset_left = 135.0
+offset_right = 223.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
 text = "value_1"
 
 [node name="Label5" type="Label" parent="Row"]
-margin_left = 227.0
-margin_right = 233.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
+offset_left = 227.0
+offset_right = 233.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
 text = ","
 
 [node name="Label12" type="TextureRect" parent="Row"]
 self_modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
-margin_left = 237.0
-margin_top = 21.0
-margin_right = 266.0
-margin_bottom = 31.0
+offset_left = 237.0
+offset_top = 21.0
+offset_right = 266.0
+offset_bottom = 31.0
 size_flags_vertical = 8
 texture = ExtResource( 3 )
 
 [node name="Label7" type="Label" parent="Row"]
-margin_left = 270.0
-margin_right = 363.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
+offset_left = 270.0
+offset_right = 363.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
 text = "value_2"
 
 [node name="Label8" type="Label" parent="Row"]
-margin_left = 367.0
-margin_right = 373.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
+offset_left = 367.0
+offset_right = 373.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
 text = ","
 
 [node name="Label13" type="TextureRect" parent="Row"]
 self_modulate = Color( 0.572549, 0.560784, 0.721569, 1 )
-margin_left = 377.0
-margin_top = 21.0
-margin_right = 406.0
-margin_bottom = 31.0
+offset_left = 377.0
+offset_top = 21.0
+offset_right = 406.0
+offset_bottom = 31.0
 size_flags_vertical = 8
 texture = ExtResource( 3 )
 
 [node name="Label9" type="Label" parent="Row"]
-margin_left = 410.0
-margin_right = 428.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
+offset_left = 410.0
+offset_right = 428.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 0.14902, 0.776471, 0.968627, 1 )
 text = "..."
 
 [node name="Label4" type="Label" parent="Row"]
-margin_left = 432.0
-margin_right = 441.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
+offset_left = 432.0
+offset_right = 441.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color( 1, 0.960784, 0.25098, 1 )
 text = "]"

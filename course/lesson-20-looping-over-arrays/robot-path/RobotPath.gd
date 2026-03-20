@@ -5,12 +5,12 @@ const EXPECTED_PATH = [Vector2(1, 0), Vector2(1, 1), Vector2(1, 2), Vector2(2, 2
 const LINE_WIDTH := 4
 const COLOR_PATH := Color(0.14902, 0.776471, 0.968627)
 
-export var board_size := Vector2(6, 4)
-export var cell_size := Vector2(80, 80)
+@export var board_size := Vector2(6, 4)
+@export var cell_size := Vector2(80, 80)
 
 var board_size_px := cell_size * board_size
 
-onready var robot := $Robot
+@onready var robot := $Robot
 
 
 func _ready() -> void:
@@ -40,7 +40,7 @@ func _run():
 	robot.position = cell_to_position(Vector2.ZERO)
 	run()
 	update()
-	yield(robot, "goal_reached")
+	await robot.goal_reached
 	Events.emit_signal("practice_run_completed")
 
 
@@ -50,12 +50,12 @@ func _draw() -> void:
 		for y in range(board_size.y):
 			draw_rect(
 				Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, Vector2.ONE * cell_size),
-				Color.white,
+				Color.WHITE,
 				false,
 				LINE_WIDTH
 			)
 
-	var points := PoolVector2Array([cell_to_position(Vector2.ZERO)])
+	var points := PackedVector2Array([cell_to_position(Vector2.ZERO)])
 	for cell in robot_path:
 		points.append(cell_to_position(cell))
 	draw_polyline(points, COLOR_PATH, LINE_WIDTH)

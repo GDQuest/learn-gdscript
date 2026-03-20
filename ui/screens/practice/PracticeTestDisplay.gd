@@ -5,7 +5,7 @@ signal marking_finished
 
 enum Status { IDLE, FAILED, PASSED, PENDING }
 
-const COLOR_IDLE = Color.white
+const COLOR_IDLE = Color.WHITE
 const COLOR_PASSED = Color(0.239216, 1, 0.431373)
 const COLOR_FAILED = Color(1, 0.094118, 0.321569)
 const COLOR_PENDING = Color(0.572549, 0.560784, 0.721569)
@@ -15,11 +15,11 @@ const FADE_COLOR_DURATION := 0.2
 const FADE_SCALE_DURATION := 0.65
 const FADE_SCALE_START_AT := 2.5
 
-var status: int = Status.IDLE setget set_status
-var title := "" setget set_title
+var status: int = Status.IDLE: set = set_status
+var title := "": set = set_title
 
-onready var _icon := $IconAnchors/Icon as TextureRect
-onready var _label := $Label as Label
+@onready var _icon := $IconAnchors/Icon as TextureRect
+@onready var _label := $Label as Label
 
 
 func mark_as_failed(immediate: bool = false) -> void:
@@ -57,7 +57,7 @@ func unmark(immediate: bool = false) -> void:
 func set_title(new_title: String) -> void:
 	title = new_title
 	if not is_inside_tree():
-		yield(self, "ready")
+		await self.ready
 	_label.text = new_title
 
 
@@ -65,7 +65,7 @@ func set_status(new_status: int) -> void:
 	status = new_status
 	
 	if not is_inside_tree():
-		yield(self, "ready")
+		await self.ready
 	
 	match status:
 		Status.PASSED:
@@ -86,7 +86,7 @@ func _fade_in_status() -> void:
 	if not is_inside_tree():
 		return
 	
-	var final_color := Color.white
+	var final_color := Color.WHITE
 	match status:
 		Status.PASSED:
 			final_color = COLOR_PASSED
@@ -96,7 +96,7 @@ func _fade_in_status() -> void:
 			final_color = COLOR_PENDING
 	
 	var _tween := create_tween().set_parallel()
-	_tween.tween_property(self, "modulate", final_color, FADE_COLOR_DURATION).from(Color.white).set_trans(Tween.TRANS_QUAD)
-	_tween.tween_property(_icon, "rect_scale:x", 1.0, FADE_SCALE_DURATION).from(FADE_SCALE_START_AT).set_trans(Tween.TRANS_QUAD)
-	_tween.tween_property(_icon, "rect_scale:y", 1.0, FADE_SCALE_DURATION).from(FADE_SCALE_START_AT).set_trans(Tween.TRANS_QUAD)
-	_tween.tween_callback(self, "emit_signal", ["marking_finished"]).set_delay(FADE_TOTAL_DURATION)
+	_tween.tween_property(self, "modulate", final_color, FADE_COLOR_DURATION).from(Color.WHITE).set_trans(Tween.TRANS_QUAD)
+	_tween.tween_property(_icon, "scale:x", 1.0, FADE_SCALE_DURATION).from(FADE_SCALE_START_AT).set_trans(Tween.TRANS_QUAD)
+	_tween.tween_property(_icon, "scale:y", 1.0, FADE_SCALE_DURATION).from(FADE_SCALE_START_AT).set_trans(Tween.TRANS_QUAD)
+	_tween.tween_callback(Callable(self, "emit_signal").bind("marking_finished")).set_delay(FADE_TOTAL_DURATION)

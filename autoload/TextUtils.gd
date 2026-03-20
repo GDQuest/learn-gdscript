@@ -4,52 +4,45 @@ extends Node
 const TYPE_MAP := {
 	TYPE_BOOL: "boolean",
 	TYPE_INT: "whole number",
-	TYPE_REAL: "decimal number",
+	TYPE_FLOAT: "decimal number",
 	TYPE_STRING: "text string",
 	TYPE_VECTOR2: "2D vector",
 	TYPE_RECT2: "2D rectangle",
 	TYPE_VECTOR3: "3D vector",
 	TYPE_TRANSFORM2D: "2D transform",
 	TYPE_PLANE: "plane",
-	TYPE_QUAT: "quaternion",
+	TYPE_QUATERNION: "quaternion",
 	TYPE_AABB: "axis-aligned bounding box",
 	TYPE_BASIS: "basis",
-	TYPE_TRANSFORM: "3D transform",
+	TYPE_TRANSFORM3D: "3D transform",
 	TYPE_COLOR: "color",
 	TYPE_NODE_PATH: "node path",
 	TYPE_RID: "resource's unique ID",
 	TYPE_OBJECT: "object",
 	TYPE_DICTIONARY: "dictionary",
 	TYPE_ARRAY: "array",
-	TYPE_RAW_ARRAY: "PoolByteArray",
-	TYPE_INT_ARRAY: "PoolIntArray",
-	TYPE_REAL_ARRAY: "PoolRealArray",
-	TYPE_STRING_ARRAY: "PoolStringArray",
-	TYPE_VECTOR2_ARRAY: "PoolVector2Array",
-	TYPE_VECTOR3_ARRAY: "PoolVector3Array",
-	TYPE_COLOR_ARRAY: "PoolColorArray",
+	TYPE_PACKED_BYTE_ARRAY: "PackedByteArray",
+	TYPE_PACKED_INT32_ARRAY: "PackedInt32Array",
+	TYPE_PACKED_FLOAT32_ARRAY: "PackedFloat32Array",
+	TYPE_PACKED_STRING_ARRAY: "PackedStringArray",
+	TYPE_PACKED_VECTOR2_ARRAY: "PackedVector2Array",
+	TYPE_PACKED_VECTOR3_ARRAY: "PackedVector3Array",
+	TYPE_PACKED_COLOR_ARRAY: "PackedColorArray",
 }
 
 # Caches regexes to highlight code in text.
-const _REGEXES := {}
+var _REGEXES := {}
 # Intended to be used as a constant
 var _REGEX_REPLACE_MAP := {}
 
 
 func _init() -> void:
-	_REGEXES["code"] = RegEx.new()
-	_REGEXES["func"] = RegEx.new()
-	_REGEXES["number"] = RegEx.new()
-	_REGEXES["string"] = RegEx.new()
-	_REGEXES["symbol"] = RegEx.new()
-	_REGEXES["format"] = RegEx.new()
-
-	_REGEXES["code"].compile("\\[code\\](.+?)\\[\\/code\\]")
-	_REGEXES["func"].compile("(?<func>\\bfunc\\b)")
-	_REGEXES["number"].compile("(?<number>-?\\d+(\\.\\d+)?)")
-	_REGEXES["string"].compile("(?<string>[\"'].+[\"'])")
-	_REGEXES["symbol"].compile("(?<symbol>[a-zA-Z][a-zA-Z0-9_]+|[a-zA-Z])")
-	_REGEXES["format"].compile("[\"\\-']?\\d+(\\.\\d+)?[\"']?|[\"'].+[\"']|[a-zA-Z0-9_]+")
+	_REGEXES["code"] = RegEx.create_from_string(r"\[code\](.+?)\[\/code\]")
+	_REGEXES["func"] = RegEx.create_from_string(r"(?<func>\bfunc\b)")
+	_REGEXES["number"] = RegEx.create_from_string(r"(?<number>-?\d+(\.\d+)?)")
+	_REGEXES["string"] = RegEx.create_from_string("(?<string>[\"'].+[\"'])")
+	_REGEXES["symbol"] = RegEx.create_from_string("(?<symbol>[a-zA-Z][a-zA-Z0-9_]+|[a-zA-Z])")
+	_REGEXES["format"] = RegEx.create_from_string("[\"\\-']?\\d+(\\.\\d+)?[\"']?|[\"'].+[\"']|[a-zA-Z0-9_]+")
 
 	_REGEX_REPLACE_MAP = {
 		"func": "[color=#%s]$func[/color]" % CodeEditorEnhancer.COLOR_KEYWORD.to_html(false),
@@ -59,11 +52,11 @@ func _init() -> void:
 	}
 
 
-func bbcode_add_code_color(bbcode_text := "") -> String:
-	if _REGEXES.empty():
-		return bbcode_text
+func bbcode_add_code_color(text := "") -> String:
+	if _REGEXES.is_empty():
+		return text
 
-	var regex_matches: Array = _REGEXES["code"].search_all(bbcode_text)
+	var regex_matches: Array = _REGEXES["code"].search_all(text)
 	var index_delta := 0
 
 	for regex_match in regex_matches:
@@ -102,21 +95,21 @@ func bbcode_add_code_color(bbcode_text := "") -> String:
 		if colored_string == "":
 			colored_string = match_string
 		colored_string = "[code]" + colored_string + "[/code]"
-		bbcode_text.erase(index_offset, initial_length)
-		bbcode_text = bbcode_text.insert(index_offset, colored_string)
+		text.erase(index_offset, initial_length)
+		text = text.insert(index_offset, colored_string)
 		index_delta += (colored_string.length() - initial_length)
 
-	return bbcode_text
+	return text
 
 
 static func convert_input_action_to_tooltip(action: String) -> String:
-	var events := InputMap.get_action_list(action)
+	var events := InputMap.action_get_events(action)
 	var count := events.size()
 	var output := "Shortcut:" if count < 2 else "Shortcuts:"
 	for index in count:
 		if index > 0:
 			output += ","
-		output += " " + OS.get_scancode_string(events[index].get_scancode_with_modifiers())
+		output += " " + OS.get_keycode_string(events[index].get_keycode_with_modifiers())
 	return output
 
 
@@ -135,7 +128,7 @@ func convert_type_index_to_text(type: int) -> String:
 # each paragraph individually, then we join the result. This allows PO files to store
 # translations at the paragraph level rather than as large multi-paragraph blocks.
 func tr_paragraph(text: String) -> String:
-	if text.empty():
+	if text.is_empty():
 		return text
 
 	# Normalize line endings first (Windows CRLF to LF) to avoid edge cases on
@@ -145,15 +138,15 @@ func tr_paragraph(text: String) -> String:
 	if paragraphs.size() <= 1:
 		return tr(normalized)
 
-	var translated_paragraphs := PoolStringArray()
+	var translated_paragraphs := PackedStringArray()
 	for paragraph in paragraphs:
 		var trimmed: String = paragraph.strip_edges()
-		if trimmed.empty():
+		if trimmed.is_empty():
 			translated_paragraphs.append("")
 		else:
 			translated_paragraphs.append(tr(trimmed))
 
-	return translated_paragraphs.join("\n\n")
+	return "\n\n".join(translated_paragraphs)
 
 
 # Call this function to ensure that changes to the formatter don't change color highlighting.

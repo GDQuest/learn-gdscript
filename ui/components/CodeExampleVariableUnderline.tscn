@@ -1,47 +1,54 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://5m5jnn3skytm"]
 
-[ext_resource path="res://ui/components/CodeExampleVariableUnderline.gd" type="Script" id=1]
-[ext_resource path="res://ui/theme/fonts/font_button_small.tres" type="DynamicFont" id=2]
-[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=3]
+[ext_resource type="Script" uid="uid://c4nyuefy44sjd" path="res://ui/components/CodeExampleVariableUnderline.gd" id="1"]
+[ext_resource type="FontVariation" uid="uid://cbser3h81h3th" path="res://ui/theme/fonts/font_button_small.tres" id="2"]
+[ext_resource type="FontVariation" uid="uid://cipfqcm3yp0sc" path="res://ui/theme/fonts/font_text_bold.tres" id="3"]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.188235, 0.188235, 0.286275, 1 )
+[sub_resource type="StyleBoxFlat" id="1"]
+bg_color = Color(0.188235, 0.188235, 0.286275, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="CodeExampleVariableUnderline" type="Node2D"]
-script = ExtResource( 1 )
-font_resource = ExtResource( 3 )
+[node name="CodeExampleVariableUnderline" type="Node2D" unique_id=35311342 node_paths=PackedStringArray("_mouse_blocker", "_label")]
+script = ExtResource("1")
+font_resource = ExtResource("3")
+_mouse_blocker = NodePath("MouseBlocker")
+_label = NodePath("MouseBlocker/Label")
 
-[node name="MouseBlocker" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="MouseBlocker" type="Control" parent="." unique_id=1683010723]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="ColorRect" type="ColorRect" parent="MouseBlocker"]
+[node name="ColorRect" type="ColorRect" parent="MouseBlocker" unique_id=1661919218]
+layout_mode = 0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -2.0
+offset_top = -2.0
 mouse_filter = 2
-color = Color( 1, 1, 1, 0.776471 )
+color = Color(1, 1, 1, 0.776471)
 
-[node name="Label" type="Label" parent="MouseBlocker"]
+[node name="Label" type="Label" parent="MouseBlocker" unique_id=1338160996]
 visible = false
-margin_left = 15.0
-margin_top = -19.0
-margin_right = 24.0
-margin_bottom = -5.0
-custom_fonts/font = ExtResource( 2 )
-align = 1
+layout_mode = 0
+offset_left = 15.0
+offset_top = -19.0
+offset_right = 24.0
+offset_bottom = -5.0
+theme_override_fonts/font = ExtResource("2")
+horizontal_alignment = 1
 
-[node name="Panel" type="Panel" parent="MouseBlocker/Label"]
+[node name="Panel" type="Panel" parent="MouseBlocker/Label" unique_id=1779860185]
 show_behind_parent = true
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -2.0
-margin_top = -3.0
-margin_right = 2.0
-margin_bottom = 1.0
-custom_styles/panel = SubResource( 1 )
+offset_left = -2.0
+offset_top = -3.0
+offset_right = 2.0
+offset_bottom = 1.0
+theme_override_styles/panel = SubResource("1")

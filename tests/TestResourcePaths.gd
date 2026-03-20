@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorScript
 
 const COURSE_RESOURCE_PATH := "res://course/course-learn-gdscript.tres"
@@ -22,7 +22,7 @@ func _run() -> void:
 			"Failed to load the course resource at '%s'. Aborting test." % [COURSE_RESOURCE_PATH]
 		)
 
-	var error_messages := PoolStringArray()
+	var error_messages := PackedStringArray()
 	var index := 1
 	for lesson in course.lessons:
 		for content_block in lesson.content_blocks:
@@ -67,7 +67,7 @@ func _run() -> void:
 	var count := error_messages.size()
 	if count > 0:
 		print("%s invalid resources found." % count)
-		print(error_messages.join("\n"))
+		"\n".join(print(error_messages))
 	else:
 		print("No invalid resources found!")
 	print("Done.")
@@ -75,12 +75,12 @@ func _run() -> void:
 
 # Returns true if the path is valid, whether it's relative or absolute.
 func _is_valid(resource: Resource, path: String, valid_extensions := ["tres"]) -> bool:
-	if path.empty():
+	if path.is_empty():
 		return true
 	if not path.get_extension().to_lower() in valid_extensions:
 		return false
 
 	var test_path := path
 	if test_path.is_rel_path():
-		test_path = resource.resource_path.get_base_dir().plus_file(test_path)
+		test_path = resource.resource_path.get_base_dir().path_join(test_path)
 	return _file_tester.file_exists(test_path)

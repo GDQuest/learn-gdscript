@@ -1,7 +1,7 @@
 # This script defines all of the supported tags in our lessons and some data
 # structures to help validate them. It's used by the BBCode parser.
 class_name BBCodeParserData
-extends Reference
+extends RefCounted
 
 # Basic Godot BBCode formatting tags that should be ignored by the parser
 # These are handled by Godot's RichTextLabel and don't need validation

@@ -1,43 +1,43 @@
 [gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/theme/fonts/font_title.tres" type="FontFile" id=1]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
-[ext_resource path="res://ui/screens/end_screen/main_menu/sky_evening.png" type="Texture" id=3]
+[ext_resource path="res://ui/screens/end_screen/main_menu/sky_evening.png" type="Texture2D" id=3]
 [ext_resource path="res://ui/screens/end_screen/SponsorlessEndScreen.gd" type="Script" id=4]
 [ext_resource path="res://ui/components/QuitButton.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/components/FullScreenButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/theme/panel_breadcrumbs.tres" type="StyleBox" id=8]
 [ext_resource path="res://ui/components/SmoothScrollContainer.gd" type="Script" id=9]
-[ext_resource path="res://ui/screens/end_screen/main_menu/illustration.png" type="Texture" id=10]
-[ext_resource path="res://ui/icons/navigation_outliner.png" type="Texture" id=11]
-[ext_resource path="res://ui/screens/end_screen/main_menu/sky_dark.png" type="Texture" id=12]
-[ext_resource path="res://ui/screens/end_screen/main_menu/sky_day_blurred.png" type="Texture" id=13]
+[ext_resource path="res://ui/screens/end_screen/main_menu/illustration.png" type="Texture2D" id=10]
+[ext_resource path="res://ui/icons/navigation_outliner.png" type="Texture2D" id=11]
+[ext_resource path="res://ui/screens/end_screen/main_menu/sky_dark.png" type="Texture2D" id=12]
+[ext_resource path="res://ui/screens/end_screen/main_menu/sky_day_blurred.png" type="Texture2D" id=13]
 
 [sub_resource type="GDScript" id=10]
 script/source = "extends Button
 
 func _ready() -> void:
-	connect(\"pressed\", get_tree(), \"change_scene\", [\"res://ui/UICore.tscn\"])
+	connect(\"pressed\", Callable(get_tree(), \"change_scene_to_file\").bind(\"res://ui/UICore.tscn\"))
 "
 
 [sub_resource type="GDScript" id=2]
 script/source = "tool
 extends HBoxContainer
 
-onready var tree := get_tree()
+@onready var tree := get_tree()
 
 
 func _ready() -> void:
-	connect(\"resized\", self, \"update_size\")
+	connect(\"resized\", Callable(self, \"update_size\"))
 
 
 func update_size() -> void:
-	yield(tree, \"idle_frame\")
+	await tree.idle_frame
 	for control in get_children():
-		var new_position: Vector2 = control.rect_position
+		var new_position: Vector2 = control.position
 		var texture_rect: TextureRect = control.get_child(0)
-		texture_rect.rect_position.x = - new_position.x
-		texture_rect.rect_size = rect_size
+		texture_rect.position.x = - new_position.x
+		texture_rect.size = size
 "
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -87,7 +87,7 @@ VScrollBar/styles/scroll = SubResource( 9 )
 [node name="SponsorlessEndScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 2495, 16 )
+pivot_offset = Vector2( 2495, 16 )
 theme = ExtResource( 2 )
 script = ExtResource( 4 )
 
@@ -95,120 +95,120 @@ script = ExtResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 
 [node name="TopBar" type="PanelContainer" parent="Layout"]
-margin_right = 1920.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 0, 40 )
-custom_styles/panel = ExtResource( 8 )
+offset_right = 1920.0
+offset_bottom = 47.0
+custom_minimum_size = Vector2( 0, 40 )
+theme_override_styles/panel = ExtResource( 8 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Layout/TopBar"]
-margin_right = 1920.0
-margin_bottom = 47.0
-custom_constants/margin_right = 12
-custom_constants/margin_top = 0
-custom_constants/margin_left = 12
-custom_constants/margin_bottom = 0
+offset_right = 1920.0
+offset_bottom = 47.0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_bottom = 0
 
 [node name="ToolBarLayout" type="HBoxContainer" parent="Layout/TopBar/MarginContainer"]
-margin_left = 12.0
-margin_right = 1908.0
-margin_bottom = 47.0
-rect_pivot_offset = Vector2( -683, 4 )
+offset_left = 12.0
+offset_right = 1908.0
+offset_bottom = 47.0
+pivot_offset = Vector2( -683, 4 )
 
 [node name="OutlinerButton" type="Button" parent="Layout/TopBar/MarginContainer/ToolBarLayout"]
-margin_right = 32.0
-margin_bottom = 47.0
-hint_tooltip = "Open the course index"
+offset_right = 32.0
+offset_bottom = 47.0
+tooltip_text = "Open the course index"
 mouse_default_cursor_shape = 2
 icon = ExtResource( 11 )
 flat = true
 script = SubResource( 10 )
 
 [node name="Control" type="Control" parent="Layout/TopBar/MarginContainer/ToolBarLayout"]
-margin_left = 48.0
-margin_right = 1784.0
-margin_bottom = 47.0
+offset_left = 48.0
+offset_right = 1784.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 
 [node name="FullScreenButton" parent="Layout/TopBar/MarginContainer/ToolBarLayout" instance=ExtResource( 7 )]
-margin_left = 1800.0
-margin_right = 1840.0
-margin_bottom = 47.0
+offset_left = 1800.0
+offset_right = 1840.0
+offset_bottom = 47.0
 
 [node name="QuitButton" parent="Layout/TopBar/MarginContainer/ToolBarLayout" instance=ExtResource( 5 )]
-margin_left = 1856.0
-margin_right = 1896.0
-margin_bottom = 47.0
+offset_left = 1856.0
+offset_right = 1896.0
+offset_bottom = 47.0
 
 [node name="PanelContainer" type="PanelContainer" parent="Layout"]
-margin_top = 47.0
-margin_right = 1920.0
-margin_bottom = 1033.0
+offset_top = 47.0
+offset_right = 1920.0
+offset_bottom = 1033.0
 size_flags_vertical = 3
 
 [node name="Sky" type="HBoxContainer" parent="Layout/PanelContainer"]
-margin_right = 1920.0
-margin_bottom = 986.0
+offset_right = 1920.0
+offset_bottom = 986.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 script = SubResource( 2 )
 
 [node name="Control" type="Control" parent="Layout/PanelContainer/Sky"]
-margin_right = 960.0
-margin_bottom = 986.0
-rect_clip_content = true
+offset_right = 960.0
+offset_bottom = 986.0
+clip_contents = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
 [node name="TextureRect" type="TextureRect" parent="Layout/PanelContainer/Sky/Control"]
-margin_right = 1920.0
-margin_bottom = 986.0
+offset_right = 1920.0
+offset_bottom = 986.0
 texture = ExtResource( 13 )
 expand = true
 
 [node name="Panel" type="PanelContainer" parent="Layout/PanelContainer/Sky/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 1 )
+theme_override_styles/panel = SubResource( 1 )
 
 [node name="Margin" type="MarginContainer" parent="Layout/PanelContainer/Sky/Control/Panel"]
-margin_right = 960.0
-margin_bottom = 986.0
-custom_constants/margin_right = 120
-custom_constants/margin_left = 120
+offset_right = 960.0
+offset_bottom = 986.0
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_left = 120
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Layout/PanelContainer/Sky/Control/Panel/Margin"]
-margin_left = 120.0
-margin_top = 20.0
-margin_right = 840.0
-margin_bottom = 966.0
+offset_left = 120.0
+offset_top = 20.0
+offset_right = 840.0
+offset_bottom = 966.0
 theme = SubResource( 5 )
 script = ExtResource( 9 )
 
 [node name="Column" type="VBoxContainer" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer"]
-margin_right = 720.0
-margin_bottom = 946.0
+offset_right = 720.0
+offset_bottom = 946.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Label" type="Label" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_top = 302.0
-margin_right = 720.0
-margin_bottom = 333.0
-custom_fonts/font = ExtResource( 1 )
+offset_top = 302.0
+offset_right = 720.0
+offset_bottom = 333.0
+theme_override_fonts/font = ExtResource( 1 )
 text = "Congratulations!"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_top = 349.0
-margin_right = 720.0
-margin_bottom = 465.0
+offset_top = 349.0
+offset_right = 720.0
+offset_bottom = 465.0
 bbcode_enabled = true
-bbcode_text = "You completed Learn GDScript From Zero. You now have the basics you need to make games with the Godot game engine.
+text = "You completed Learn GDScript From Zero. You now have the basics you need to make games with the Godot game engine.
 
 You can keep learning with the free series [url=https://docs.godotengine.org/en/stable/getting_started/step_by_step/index.html]Getting Started with Godot[/url]."
 text = "You completed Learn GDScript From Zero. You now have the basics you need to make games with the Godot game engine.
@@ -217,18 +217,18 @@ You can keep learning with the free series Getting Started with Godot."
 fit_content_height = true
 
 [node name="Label4" type="Label" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_top = 481.0
-margin_right = 720.0
-margin_bottom = 512.0
-custom_fonts/font = ExtResource( 1 )
+offset_top = 481.0
+offset_right = 720.0
+offset_bottom = 512.0
+theme_override_fonts/font = ExtResource( 1 )
 text = "This is an Open-Source project!"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column"]
-margin_top = 528.0
-margin_right = 720.0
-margin_bottom = 644.0
+offset_top = 528.0
+offset_right = 720.0
+offset_bottom = 644.0
 bbcode_enabled = true
-bbcode_text = "Like Godot, this app and course is free and open-source. 
+text = "Like Godot, this app and course is free and open-source. 
 
 You can find the app's source code and contribute translations here: [url=https://github.com/GDQuest/learn-gdscript]Learn GDScript From Zero (Github repository)[/url]."
 text = "Like Godot, this app and course is free and open-source. 
@@ -237,10 +237,10 @@ You can find the app's source code and contribute translations here: Learn GDScr
 fit_content_height = true
 
 [node name="Control2" type="Control" parent="Layout/PanelContainer/Sky"]
-margin_left = 960.0
-margin_right = 1600.0
-margin_bottom = 986.0
-rect_clip_content = true
+offset_left = 960.0
+offset_right = 1600.0
+offset_bottom = 986.0
+clip_contents = true
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -248,9 +248,9 @@ size_flags_stretch_ratio = 2.0
 
 [node name="TextureRect" type="TextureRect" parent="Layout/PanelContainer/Sky/Control2"]
 modulate = Color( 0.772549, 0.847059, 0.882353, 1 )
-margin_left = -960.0
-margin_right = 960.0
-margin_bottom = 986.0
+offset_left = -960.0
+offset_right = 960.0
+offset_bottom = 986.0
 mouse_filter = 2
 texture = ExtResource( 3 )
 expand = true
@@ -260,10 +260,10 @@ modulate = Color( 0.964706, 0.964706, 0.964706, 1 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 13.0
-margin_top = -521.0
-margin_right = -13.0
-margin_bottom = 47.0
+offset_left = 13.0
+offset_top = -521.0
+offset_right = -13.0
+offset_bottom = 47.0
 mouse_filter = 2
 texture = ExtResource( 10 )
 expand = true
@@ -273,10 +273,10 @@ __meta__ = {
 }
 
 [node name="Control3" type="Control" parent="Layout/PanelContainer/Sky"]
-margin_left = 1600.0
-margin_right = 1920.0
-margin_bottom = 986.0
-rect_clip_content = true
+offset_left = 1600.0
+offset_right = 1920.0
+offset_bottom = 986.0
+clip_contents = true
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -286,41 +286,41 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Layout/PanelContainer/Sky/Control3"]
-margin_left = -1600.0
-margin_right = 320.0
-margin_bottom = 986.0
+offset_left = -1600.0
+offset_right = 320.0
+offset_bottom = 986.0
 mouse_filter = 2
 texture = ExtResource( 12 )
 expand = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Layout"]
-margin_top = 1033.0
-margin_right = 1920.0
-margin_bottom = 1080.0
+offset_top = 1033.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 size_flags_horizontal = 3
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 
 [node name="ColorRect" type="ColorRect" parent="Layout/HBoxContainer"]
-margin_right = 960.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 0, 47 )
+offset_right = 960.0
+offset_bottom = 47.0
+custom_minimum_size = Vector2( 0, 47 )
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 color = Color( 0, 0.517647, 0.737255, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="Layout/HBoxContainer"]
-margin_left = 960.0
-margin_right = 1600.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 0, 47 )
+offset_left = 960.0
+offset_right = 1600.0
+offset_bottom = 47.0
+custom_minimum_size = Vector2( 0, 47 )
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 color = Color( 0.470588, 0.843137, 1, 1 )
 
 [node name="ColorRect3" type="ColorRect" parent="Layout/HBoxContainer"]
-margin_left = 1600.0
-margin_right = 1920.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 0, 47 )
+offset_left = 1600.0
+offset_right = 1920.0
+offset_bottom = 47.0
+custom_minimum_size = Vector2( 0, 47 )
 size_flags_horizontal = 3
 color = Color( 0, 0.517647, 0.737255, 1 )

@@ -5,14 +5,15 @@
 #
 extends Node
 
-const ROOT_DIR := "user://user_settings"
+const ROOT_DIR := "user://user_settings_4"
 
 var current_player := "Player"
 var _loaded_profile: Profile
 
+
 func profile_exists(profile_name: String) -> bool:
 	var file_path := _get_file_path(profile_name)
-	return File.new().file_exists(file_path)
+	return FileAccess.file_exists(file_path)
 
 
 # Returns the profile designated by the provided name.
@@ -28,9 +29,8 @@ func get_profile(profile_name: String = current_player) -> Profile:
 	var file_path := _get_file_path(profile_name)
 	
 	if not profile_exists(profile_name):
-		var fs = Directory.new()
 		var directory := file_path.get_base_dir()
-		fs.make_dir_recursive(directory)
+		DirAccess.make_dir_recursive_absolute(directory)
 		
 		var user_profile := Profile.new()
 		user_profile.resource_path = file_path
@@ -50,29 +50,23 @@ func get_profile(profile_name: String = current_player) -> Profile:
 
 
 func _get_file_path(file_name: String) -> String:
-	return ROOT_DIR.plus_file(file_name) + ".tres"
+	return ROOT_DIR.path_join(file_name) + ".tres"
 
 
-func list_profiles() -> PoolStringArray:
-	var profiles := PoolStringArray()
+func list_profiles() -> PackedStringArray:
+	var profiles := PackedStringArray()
 	
-	var fs := Directory.new()
-	var error = fs.open(ROOT_DIR)
-	if error != OK:
+	var fs := DirAccess.open(ROOT_DIR)
+	if not fs:
 		profiles.push_back(current_player)
 		return profiles
 	
-	fs.list_dir_begin()
-	var file_name := fs.get_next()
-	while not file_name.empty():
-		if fs.current_is_dir() or file_name.get_extension() != "tres":
-			file_name = fs.get_next()
+	for file in fs.get_files():
+		if not file.get_extension() != "tres":
 			continue
 		
-		var profile = ResourceLoader.load(file_name) as Profile
+		var profile := ResourceLoader.load(file) as Profile
 		if profile:
 			profiles.push_back(profile.player_name)
-		
-		file_name = fs.get_next()
 
 	return profiles

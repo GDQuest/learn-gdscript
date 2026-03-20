@@ -7,8 +7,8 @@
 script/source = "extends \"res://course/lesson-24-access-array-indices/visuals/inventory/Inventory.gd\"
 
 
-const CODE_BEGIN := PoolStringArray([\"var inventory = [\"])
-const CODE_END := PoolStringArray([
+const CODE_BEGIN := PackedStringArray([\"var inventory = [\"])
+const CODE_END := PackedStringArray([
 	\"]\",
 	\"\",
 	\"func run():\",
@@ -18,14 +18,14 @@ const CODE_END := PoolStringArray([
 
 func _ready() -> void:
 	var runnable_code_example = get_parent()
-	var item_names: PoolStringArray = []
+	var item_names: PackedStringArray = []
 	for item in get_children():
 		item_names.append('\\t\"%s\",' % item.get_texture_name())
 	item_names[-1] = item_names[-1].rstrip(',')
 	var code := CODE_BEGIN
 	code.append_array(item_names)
 	code.append_array(CODE_END)
-	runnable_code_example.gdscript_code = code.join(\"\\n\")
+	runnable_code_example.gdscript_code = \"\\n\".join(code)
 
 
 func run():
@@ -33,19 +33,19 @@ func run():
 "
 
 [node name="Example" type="PanelContainer"]
-margin_right = 771.0
-margin_bottom = 414.0
+offset_right = 771.0
+offset_bottom = 414.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1047.0
-margin_bottom = 407.0
-rect_min_size = Vector2( 600, 400 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 1047.0
+offset_bottom = 407.0
+custom_minimum_size = Vector2( 600, 400 )
 gdscript_code = "var inventory = [
 	\"red gem\",
 	\"white gem\",
@@ -58,7 +58,7 @@ func run():
 	use_item(inventory[0])"
 
 [node name="Inventory" parent="RunnableCodeExample" instance=ExtResource( 2 )]
-margin_left = 672.0
-margin_right = 1040.0
-margin_bottom = 400.0
+offset_left = 672.0
+offset_right = 1040.0
+offset_bottom = 400.0
 script = SubResource( 1 )

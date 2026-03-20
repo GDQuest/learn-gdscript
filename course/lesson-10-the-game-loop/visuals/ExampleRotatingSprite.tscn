@@ -24,19 +24,19 @@ func _process(delta : float) -> void:
 "
 
 [node name="ExampleRotatingSprite" type="PanelContainer"]
-margin_right = 1047.0
-margin_bottom = 298.0
+offset_right = 1047.0
+offset_bottom = 298.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1040.0
-margin_bottom = 291.0
-rect_pivot_offset = Vector2( -805, -204 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 1040.0
+offset_bottom = 291.0
+pivot_offset = Vector2( -805, -204 )
 gdscript_code = "func _process(delta):
 	rotate(0.05)"
 run_button_label = "set_process(true)"

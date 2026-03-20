@@ -1,130 +1,130 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/components/BigGreenButton.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/theme/fonts/font_title.tres" type="FontFile" id=3]
 [ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=4]
 [ext_resource path="res://ui/screens/course_outliner/CourseLessonDetails.gd" type="Script" id=5]
 [ext_resource path="res://ui/theme/outliner_details_background.tres" type="StyleBox" id=6]
-[ext_resource path="res://ui/icons/checkmark_none.svg" type="Texture" id=9]
+[ext_resource path="res://ui/icons/checkmark_none.svg" type="Texture2D" id=9]
 
 [node name="CourseLessonDetails" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 420, 0 )
+custom_minimum_size = Vector2( 420, 0 )
 theme = ExtResource( 4 )
-custom_styles/panel = ExtResource( 6 )
+theme_override_styles/panel = ExtResource( 6 )
 script = ExtResource( 5 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 1912.0
-margin_bottom = 1072.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 1912.0
+offset_bottom = 1072.0
 
 [node name="Layout" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1884.0
-margin_bottom = 1044.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 1884.0
+offset_bottom = 1044.0
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/Layout"]
-margin_right = 1864.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 0, 70 )
-custom_fonts/font = ExtResource( 3 )
+offset_right = 1864.0
+offset_bottom = 70.0
+custom_minimum_size = Vector2( 0, 70 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "Lesson Title Goes Here"
 autowrap = true
 
 [node name="ReadingStats" type="HBoxContainer" parent="MarginContainer/Layout"]
-margin_top = 86.0
-margin_right = 1864.0
-margin_bottom = 118.0
+offset_top = 86.0
+offset_right = 1864.0
+offset_bottom = 118.0
 
 [node name="Label" type="Label" parent="MarginContainer/Layout/ReadingStats"]
-margin_top = 2.0
-margin_right = 900.0
-margin_bottom = 30.0
+offset_top = 2.0
+offset_right = 900.0
+offset_bottom = 30.0
 size_flags_horizontal = 3
 text = "Lesson read"
 
 [node name="ValueLabel" type="Label" parent="MarginContainer/Layout/ReadingStats"]
-margin_left = 916.0
-margin_right = 1816.0
-margin_bottom = 31.0
+offset_left = 916.0
+offset_right = 1816.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "0%"
 align = 2
 
 [node name="ValueIcon" type="TextureRect" parent="MarginContainer/Layout/ReadingStats"]
-margin_left = 1832.0
-margin_right = 1864.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
+offset_left = 1832.0
+offset_right = 1864.0
+offset_bottom = 32.0
+custom_minimum_size = Vector2( 32, 32 )
 size_flags_horizontal = 8
 texture = ExtResource( 9 )
 expand = true
 stretch_mode = 6
 
 [node name="QuizStats" type="HBoxContainer" parent="MarginContainer/Layout"]
-margin_top = 134.0
-margin_right = 1864.0
-margin_bottom = 165.0
+offset_top = 134.0
+offset_right = 1864.0
+offset_bottom = 165.0
 
 [node name="Label" type="Label" parent="MarginContainer/Layout/QuizStats"]
-margin_top = 1.0
-margin_right = 924.0
-margin_bottom = 29.0
+offset_top = 1.0
+offset_right = 924.0
+offset_bottom = 29.0
 size_flags_horizontal = 3
 text = "Quizzes completed"
 
 [node name="ValueLabel" type="Label" parent="MarginContainer/Layout/QuizStats"]
-margin_left = 940.0
-margin_right = 1864.0
-margin_bottom = 31.0
+offset_left = 940.0
+offset_right = 1864.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "0 / 0"
 align = 2
 
 [node name="PracticeStats" type="HBoxContainer" parent="MarginContainer/Layout"]
-margin_top = 181.0
-margin_right = 1864.0
-margin_bottom = 212.0
+offset_top = 181.0
+offset_right = 1864.0
+offset_bottom = 212.0
 
 [node name="Label" type="Label" parent="MarginContainer/Layout/PracticeStats"]
-margin_top = 1.0
-margin_right = 924.0
-margin_bottom = 29.0
+offset_top = 1.0
+offset_right = 924.0
+offset_bottom = 29.0
 size_flags_horizontal = 3
 text = "Practices completed"
 
 [node name="ValueLabel" type="Label" parent="MarginContainer/Layout/PracticeStats"]
-margin_left = 940.0
-margin_right = 1864.0
-margin_bottom = 31.0
+offset_left = 940.0
+offset_right = 1864.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource( 3 )
 text = "0 / 0"
 align = 2
 
 [node name="Spacer" type="Control" parent="MarginContainer/Layout"]
-margin_top = 228.0
-margin_right = 1864.0
-margin_bottom = 928.0
+offset_top = 228.0
+offset_right = 1864.0
+offset_bottom = 928.0
 size_flags_vertical = 3
 
 [node name="Buttons" type="HBoxContainer" parent="MarginContainer/Layout"]
-margin_top = 944.0
-margin_right = 1864.0
-margin_bottom = 1024.0
+offset_top = 944.0
+offset_right = 1864.0
+offset_bottom = 1024.0
 alignment = 1
 
 [node name="GoToButton" parent="MarginContainer/Layout/Buttons" instance=ExtResource( 2 )]
-margin_left = 758.0
-margin_top = 0.0
-margin_right = 1106.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 348, 80 )
-custom_colors/font_color_hover = Color( 0.960784, 0.980392, 0.980392, 1 )
+offset_left = 758.0
+offset_top = 0.0
+offset_right = 1106.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 348, 80 )
+theme_override_colors/font_hover_color = Color( 0.960784, 0.980392, 0.980392, 1 )
 text = "Start Lesson"
