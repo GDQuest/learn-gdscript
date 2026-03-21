@@ -179,7 +179,7 @@ func _change_rect_size_to(size: Vector2, instant := false) -> void:
 		_size_scene_tween.kill()
 	_size_scene_tween = create_tween().set_parallel()
 	_size_scene_tween.tween_property(self, "_percent_transformed", 1.0, SIZE_CHANGE_TIME).from(0.0).set_trans(Tween.TRANS_SINE)
-	_size_scene_tween.tween_method(Callable(self, "_on_size_tween_step"), 0.0, 1.0, SIZE_CHANGE_TIME).set_trans(Tween.TRANS_SINE)
+	_size_scene_tween.tween_method(_on_size_tween_step, 0.0, 1.0, SIZE_CHANGE_TIME).set_trans(Tween.TRANS_SINE)
 	_size_scene_tween.finished.connect(_on_size_tween_completed)
 
 func _on_item_rect_changed() -> void:

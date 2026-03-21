@@ -219,7 +219,7 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 		if _scene_tween:
 			_scene_tween.kill()
 		_scene_tween = create_tween()
-		_scene_tween.tween_method(Callable(_scroll_container, "set_v_scroll_override"),
+		_scene_tween.tween_method(_scroll_container.set_v_scroll_override,
 			# So it plays nice with our smooth scroller
 			_scroll_container.scroll_vertical,
 			scroll_target, AUTOSCROLL_DURATION).set_trans(Tween.TRANS_QUAD)

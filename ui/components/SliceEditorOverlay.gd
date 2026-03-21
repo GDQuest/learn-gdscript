@@ -363,7 +363,7 @@ class HighlightOverlay:
 		
 		_tween = create_tween()
 		
-		_tween.tween_method(Callable(self, "_dissolve_step"), DEFAULT_ALPHA, 0.0, DISSOLVE_DURATION)
+		_tween.tween_method(_dissolve_step, DEFAULT_ALPHA, 0.0, DISSOLVE_DURATION)
 	
 	
 	func _draw() -> void:

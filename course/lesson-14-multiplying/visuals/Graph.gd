@@ -134,7 +134,7 @@ class Polygon:
 		line_2d.points = _current_points
 		_scene_tween = create_tween()
 		_scene_tween.finished.connect(next)
-		_scene_tween.tween_method(Callable(self, "_animate_point_position"), starting_point, destination, animation_duration)
+		_scene_tween.tween_method(_animate_point_position, starting_point, destination, animation_duration)
 
 	func stop_animation() -> void:
 		if _scene_tween and _scene_tween.is_valid():

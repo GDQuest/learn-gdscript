@@ -30,7 +30,7 @@ func appear() -> void:
 	_scene_tween = create_tween().set_parallel()
 	_scene_tween.finished.connect(_on_tween_completed)
 	
-	_scene_tween.tween_method(Callable(self, "set_border_width"), 0.0, max_border_width, ANIMATION_DURATION).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+	_scene_tween.tween_method(set_border_width, 0.0, max_border_width, ANIMATION_DURATION).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
 	_scene_tween.tween_property(self, "self_modulate", Color.WHITE, ANIMATION_DURATION / 2).from(COLOR_TRANSPARENT)
 	show()
 

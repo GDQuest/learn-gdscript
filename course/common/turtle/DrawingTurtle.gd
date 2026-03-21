@@ -155,7 +155,7 @@ func play_draw_animation() -> void:
 				if is_equal_approx(tween_start_time, 0.0):
 					_move_camera(command.target)
 				else:
-					_scene_tween.tween_callback(Callable(self, "_move_camera").bind(command.target)).set_delay(tween_start_time)
+					_scene_tween.tween_callback(_move_camera.bind(command.target)).set_delay(tween_start_time)
 			"move_to":
 				duration = turtle_position.distance_to(command.target) / draw_speed / speed_multiplier
 				_scene_tween.tween_property(_pivot, "position", command.target, duration).from(turtle_position).set_ease(Tween.EASE_IN).set_delay(tween_start_time)
@@ -178,7 +178,7 @@ func play_draw_animation() -> void:
 			"jump":
 				duration = 0.5 / speed_multiplier
 				_scene_tween.tween_property(_pivot, "position", turtle_position + command.offset, duration).from(turtle_position).set_ease(Tween.EASE_IN).set_delay(tween_start_time)
-				_scene_tween.tween_method(Callable(self, "_animate_jump"), 0.0, 1.0, duration).set_ease(Tween.EASE_IN).set_delay(tween_start_time)
+				_scene_tween.tween_method(_animate_jump, 0.0, 1.0, duration).set_ease(Tween.EASE_IN).set_delay(tween_start_time)
 				turtle_position += command.offset
 				tween_start_time += duration
 	for line in _canvas.get_children():
@@ -323,8 +323,8 @@ class DrawingLine2D:
 		points = PackedVector2Array([start, start])
 
 		_tween = tree.create_tween().set_parallel().bind_node(self)
-		_tween.tween_callback(Callable(self, "_spawn_label")).set_delay(start_time)
-		_tween.tween_method(Callable(self, "_animate_drawing"), start, end, duration).set_ease(Tween.EASE_IN).set_delay(start_time)
+		_tween.tween_callback(_spawn_label).set_delay(start_time)
+		_tween.tween_method(_animate_drawing, start, end, duration).set_ease(Tween.EASE_IN).set_delay(start_time)
 
 	func start() -> void:
 		_tween.play()

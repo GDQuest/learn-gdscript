@@ -357,7 +357,7 @@ func _toggle_content(expanded: bool, immediate: bool = false) -> void:
 
 	var final_value := 1.0 * int(expanded)
 	_scene_tween.tween_property(self, "_percent_revealed", final_value, ANIMATION_REVEAL_DURATION).from(1.0 - final_value).set_trans(Tween.TRANS_QUAD)
-	_scene_tween.tween_method(Callable(self, "_on_tween_step"), 0, 1.0, ANIMATION_REVEAL_DURATION)
+	_scene_tween.tween_method(_on_tween_step, 0, 1.0, ANIMATION_REVEAL_DURATION)
 
 
 func _on_toggle_entered() -> void:

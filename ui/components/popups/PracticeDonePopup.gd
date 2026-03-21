@@ -33,12 +33,12 @@ var _scene_tween: Tween
 func _ready() -> void:
 	set_as_top_level(true)
 	self_modulate.a = 0.0
-	
+
 	# BBCode text is not autotranslated, so we do this to preserve the initial value.
 	# FIXME: Some weird Windows issue, replace before translating so matching works.
 	_raw_summary = _summary2_label.text.replace("\r\n", "\n")
 	_summary2_label.text = tr(_raw_summary)
-	
+
 	_message_anchors.custom_minimum_size = _message_container.custom_minimum_size
 	var offscreen_offset := -get_viewport_rect().size.x
 	_message_container.offset_left = offscreen_offset
@@ -57,7 +57,7 @@ func _notification(what: int) -> void:
 func fade_in(game_container: Control) -> void:
 	if _scene_tween:
 		_scene_tween.kill()
-	
+
 	# Adjust the sizing to account for the game container.
 	_game_anchors.custom_minimum_size = game_container.size
 	var offscreen_offset := get_viewport_rect().size.x
@@ -67,11 +67,11 @@ func fade_in(game_container: Control) -> void:
 	_layout_container.set_anchors_and_offsets_preset(Control.PRESET_CENTER, Control.PRESET_MODE_KEEP_SIZE)
 	# Set the texture for the output replication.
 	_game_texture.texture = game_container.find_child("GameView").get_viewport_override().get_texture()
-	
+
 	# Fade in the background.
 	_scene_tween = create_tween().set_parallel()
 	_scene_tween.tween_property(self, "self_modulate:a", 1.0, BACKGROUND_FADE_DURATION).from(0.0)
-	
+
 	# Then move the message and the game together to clash at the center.
 	_animate_margin(_message_container, "offset_left", 0.0, CLASH_IN_DURATION, BACKGROUND_FADE_DURATION)
 	_animate_margin(_message_container, "offset_right", 0.0, CLASH_IN_DURATION, BACKGROUND_FADE_DURATION)
@@ -84,7 +84,7 @@ func fade_in(game_container: Control) -> void:
 func fade_out() -> void:
 	if _scene_tween:
 		_scene_tween.kill()
-	
+
 	_scene_tween = create_tween().set_parallel()
 
 	# The order is opposite to fade in. First "un-clash" the message and the game view.
@@ -98,8 +98,8 @@ func fade_out() -> void:
 
 	# Then fade out the background.
 	_scene_tween.chain().tween_property(self, "self_modulate:a", 1.0, BACKGROUND_FADE_DURATION).from(0.0)
-	
-	_scene_tween.tween_callback(Callable(self, "_on_fade_out_completed")).set_delay(CLASH_IN_DURATION + BACKGROUND_FADE_DURATION)
+
+	_scene_tween.tween_callback(_on_fade_out_completed).set_delay(CLASH_IN_DURATION + BACKGROUND_FADE_DURATION)
 
 
 func _animate_margin(control: Control, margin_name: String, to_value: float, duration: float, delay: float = 0.0) -> void:

@@ -26,7 +26,7 @@ func mark_as_failed(immediate: bool = false) -> void:
 	set_status(Status.FAILED)
 	if immediate:
 		return
-	
+
 	_fade_in_status()
 
 
@@ -34,7 +34,7 @@ func mark_as_passed(immediate: bool = false) -> void:
 	set_status(Status.PASSED)
 	if immediate:
 		return
-	
+
 	_fade_in_status()
 
 
@@ -42,7 +42,7 @@ func mark_as_pending(immediate: bool = false) -> void:
 	set_status(Status.PENDING)
 	if immediate:
 		return
-	
+
 	_fade_in_status()
 
 
@@ -50,7 +50,7 @@ func unmark(immediate: bool = false) -> void:
 	set_status(Status.IDLE)
 	if immediate:
 		return
-	
+
 	_fade_in_status()
 
 
@@ -63,10 +63,10 @@ func set_title(new_title: String) -> void:
 
 func set_status(new_status: int) -> void:
 	status = new_status
-	
+
 	if not is_inside_tree():
 		await self.ready
-	
+
 	match status:
 		Status.PASSED:
 			_icon.texture = preload("res://ui/icons/checkmark_valid.svg")
@@ -85,7 +85,7 @@ func set_status(new_status: int) -> void:
 func _fade_in_status() -> void:
 	if not is_inside_tree():
 		return
-	
+
 	var final_color := Color.WHITE
 	match status:
 		Status.PASSED:
@@ -94,9 +94,9 @@ func _fade_in_status() -> void:
 			final_color = COLOR_FAILED
 		Status.PENDING:
 			final_color = COLOR_PENDING
-	
+
 	var _tween := create_tween().set_parallel()
 	_tween.tween_property(self, "modulate", final_color, FADE_COLOR_DURATION).from(Color.WHITE).set_trans(Tween.TRANS_QUAD)
 	_tween.tween_property(_icon, "scale:x", 1.0, FADE_SCALE_DURATION).from(FADE_SCALE_START_AT).set_trans(Tween.TRANS_QUAD)
 	_tween.tween_property(_icon, "scale:y", 1.0, FADE_SCALE_DURATION).from(FADE_SCALE_START_AT).set_trans(Tween.TRANS_QUAD)
-	_tween.tween_callback(Callable(self, "emit_signal").bind("marking_finished")).set_delay(FADE_TOTAL_DURATION)
+	_tween.tween_callback(emit_signal.bind("marking_finished")).set_delay(FADE_TOTAL_DURATION)
