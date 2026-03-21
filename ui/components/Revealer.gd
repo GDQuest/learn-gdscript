@@ -51,7 +51,7 @@ func _ready() -> void:
 
 	_toggle_content(is_expanded, true)
 	_title_style = get_title_panel_style()
-	
+
 	child_entered_tree.connect(_on_child_added)
 	child_exiting_tree.connect(_on_child_removed)
 
@@ -257,15 +257,15 @@ func set_title_panel(value: StyleBox) -> void:
 		return
 
 	if title_panel:
-		title_panel.changed.disconnect(minimum_size_changed)
+		title_panel.changed.disconnect(update_minimum_size)
 		title_panel.changed.disconnect(queue_sort)
-		title_panel.changed.disconnect(update)
+		title_panel.changed.disconnect(queue_redraw)
 
 	title_panel = value
-	if title_panel and not title_panel.changed.is_connected(minimum_size_changed):
-		title_panel.changed.connect(minimum_size_changed)
+	if title_panel and not title_panel.changed.is_connected(update_minimum_size):
+		title_panel.changed.connect(update_minimum_size)
 		title_panel.changed.connect(queue_sort)
-		title_panel.changed.connect(update)
+		title_panel.changed.connect(queue_redraw)
 
 	update_minimum_size()
 	notification(NOTIFICATION_THEME_CHANGED)
@@ -276,15 +276,15 @@ func set_title_panel_expanded(value: StyleBox) -> void:
 		return
 
 	if title_panel_expanded:
-		title_panel_expanded.changed.disconnect(minimum_size_changed)
+		title_panel_expanded.changed.disconnect(update_minimum_size)
 		title_panel_expanded.changed.disconnect(queue_sort)
-		title_panel_expanded.changed.disconnect(update)
+		title_panel_expanded.changed.disconnect(queue_redraw)
 
 	title_panel_expanded = value
-	if title_panel_expanded and not title_panel_expanded.changed.is_connected(minimum_size_changed):
-		title_panel_expanded.changed.connect(minimum_size_changed)
+	if title_panel_expanded and not title_panel_expanded.changed.is_connected(update_minimum_size):
+		title_panel_expanded.changed.connect(update_minimum_size)
 		title_panel_expanded.changed.connect(queue_sort)
-		title_panel_expanded.changed.connect(update)
+		title_panel_expanded.changed.connect(queue_redraw)
 
 	update_minimum_size()
 	notification(NOTIFICATION_THEME_CHANGED)
@@ -301,15 +301,15 @@ func set_content_panel(value: StyleBox) -> void:
 		return
 
 	if content_panel:
-		content_panel.changed.disconnect(minimum_size_changed)
+		content_panel.changed.disconnect(update_minimum_size)
 		content_panel.changed.disconnect(queue_sort)
-		content_panel.changed.disconnect(update)
+		content_panel.changed.disconnect(queue_redraw)
 
 	content_panel = value
-	if content_panel and not content_panel.changed.is_connected(minimum_size_changed):
-		content_panel.changed.connect(minimum_size_changed)
+	if content_panel and not content_panel.changed.is_connected(update_minimum_size):
+		content_panel.changed.connect(update_minimum_size)
 		content_panel.changed.connect(queue_sort)
-		content_panel.changed.connect(update)
+		content_panel.changed.connect(queue_redraw)
 
 	update_minimum_size()
 	notification(NOTIFICATION_THEME_CHANGED)
@@ -340,7 +340,7 @@ func _toggle_content(expanded: bool, immediate: bool = false) -> void:
 		return
 
 	# Animate the change smoothly.
-	
+
 	for child_node in get_children():
 		var control_node := child_node as Control
 		if not control_node or control_node == _toggle_bar:
