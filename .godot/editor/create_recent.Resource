@@ -1,2 +1,0 @@
-FontVariation
-FontFile
