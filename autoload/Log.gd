@@ -17,7 +17,7 @@ var GDQUEST: JavaScriptObject
 var _log_lines := []
 
 func _init() -> void:
-	var _err = Input.connect("joy_connection_changed", Callable(self, "_on_joy_connection_changed"))
+	var _err = Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	if not _js_available:
 		log_system_info_if_log_is_empty(get_info())
 	

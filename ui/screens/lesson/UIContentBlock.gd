@@ -28,7 +28,7 @@ var _revealer_block: Revealer
 
 
 func _ready() -> void:
-	connect("resized", Callable(self, "_on_resized"))
+	resized.connect(_on_resized)
 
 
 func _notification(what: int) -> void:

@@ -48,15 +48,13 @@ func _ready() -> void:
 	set_process(false)
 
 	_update_max_position_y()
-	_content.connect("resized", Callable(self, "_update_max_position_y"))
+	_content.resized.connect(_update_max_position_y)
 
-	get_v_scroll_bar().connect("scrolling", Callable(self, "_on_VScrollBar_scrolling"))
+	get_v_scroll_bar().scrolling.connect(_on_VScrollBar_scrolling)
 
 	var user_profile := UserProfiles.get_profile()
 	_scroll_sensitivity = user_profile.scroll_sensitivity
-	user_profile.connect(
-		"scroll_sensitivity_changed", Callable(self, "_on_UserProfile_scroll_sensitivity_changed")
-	)
+	user_profile.scroll_sensitivity_changed.connect(_on_UserProfile_scroll_sensitivity_changed)
 
 
 func _process(delta: float) -> void:

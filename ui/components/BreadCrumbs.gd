@@ -114,7 +114,7 @@ func _create_navigation_node(text: String, path: String = "", current: bool = fa
 		navigation_node.add_theme_font_override("font", NODE_FONT_CURRENT if current else NODE_FONT)
 		navigation_node.mouse_default_cursor_shape = CURSOR_POINTING_HAND
 		add_child(navigation_node)
-		navigation_node.connect("pressed", Callable(self, "_on_navigation_pressed").bind(path))
+		navigation_node.pressed.connect(_on_navigation_pressed.bind(path))
 
 
 func _on_navigation_pressed(path: String) -> void:

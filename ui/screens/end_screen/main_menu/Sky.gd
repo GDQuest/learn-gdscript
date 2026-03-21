@@ -5,7 +5,7 @@ extends HBoxContainer
 
 
 func _ready() -> void:
-	connect("resized", Callable(self, "update_size"))
+	resized.connect(update_size)
 
 
 func update_size() -> void:

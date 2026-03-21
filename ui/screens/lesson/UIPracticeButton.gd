@@ -37,7 +37,7 @@ func setup(practice: BBCodeParser.ParseNode, practice_index: int) -> void:
 	var description := BBCodeUtils.get_practice_description(practice)
 	_description_label.text = TextUtils.tr_paragraph(description)
 	_description_label.visible = not description.is_empty()
-	_navigate_button.connect("pressed", Callable(Events, "emit_signal").bind("practice_requested", _practice))
+	_navigate_button.pressed.connect(Events.practice_requested.emit.bind(_practice))
 
 
 func _update_labels() -> void:

@@ -24,7 +24,7 @@ var has_started: bool = false: set = set_has_started
 func _ready() -> void:
 	_update_visuals()
 	
-	_goto_lesson_button.connect("pressed", Callable(self, "_on_goto_lesson_pressed"))
+	_goto_lesson_button.pressed.connect(_on_goto_lesson_pressed)
 	_goto_lesson_button.grab_focus()
 
 

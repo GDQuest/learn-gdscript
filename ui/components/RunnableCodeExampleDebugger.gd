@@ -14,7 +14,7 @@ const UNINITIALIZED_VARIABLE_VALUE := "uninitialized"
 
 func setup(runnable_code, scene_instance) -> void:
 	assert(runnable_code.has_signal("code_updated"))
-	runnable_code.connect("code_updated", Callable(self, "_on_code_updated"))
+	runnable_code.code_updated.connect(_on_code_updated)
 	_scene_instance = scene_instance
 
 	for variable in monitored_variables:

@@ -25,7 +25,7 @@ var _user_profile := UserProfiles.get_profile()
 
 func _init() -> void:
 	_update_framerate(_user_profile.framerate_limit)
-	_user_profile.connect("framerate_limit_changed", Callable(self, "_update_framerate"))
+	_user_profile.framerate_limit_changed.connect(_update_framerate)
 	OS.low_processor_usage_mode = true
 	OS.low_processor_usage_mode_sleep_usec = 20000
 
@@ -35,17 +35,17 @@ func _ready() -> void:
 	_report_form_popup.hide()
 	_update_welcome_button()
 
-	_loading_screen.connect("faded_in", Callable(self, "_on_loading_faded_in"))
-	_loading_screen.connect("loading_finished", Callable(self, "_on_loading_finished"))
-	_welcome_screen.connect("course_requested", Callable(self, "_on_course_requested"))
+	_loading_screen.faded_in.connect(_on_loading_faded_in)
+	_loading_screen.loading_finished.connect(_on_loading_finished)
+	_welcome_screen.course_requested.connect(_on_course_requested)
 
-	Events.connect("report_form_requested", Callable(_report_form_popup, "show"))
-	Events.connect("settings_requested", Callable(_settings_popup, "show"))
-	Events.connect("course_completed", Callable(self, "_show_end_screen"))
+	Events.report_form_requested.connect(_report_form_popup.show)
+	Events.settings_requested.connect(_settings_popup.show)
+	Events.course_completed.connect(_show_end_screen)
 
-	NavigationManager.connect("welcome_screen_navigation_requested", Callable(self, "_go_to_welcome_screen"))
+	NavigationManager.welcome_screen_navigation_requested.connect(_go_to_welcome_screen)
 	# Needed to navigate back from the end screen to the outliner.
-	NavigationManager.connect("outliner_navigation_requested", Callable(_course_screen, "show"))
+	NavigationManager.outliner_navigation_requested.connect(_course_screen.show)
 
 	if NavigationManager.current_url != "":
 		_on_course_requested()

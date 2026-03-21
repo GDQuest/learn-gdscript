@@ -19,12 +19,12 @@ var highlight_column := -1
 
 
 func _ready() -> void:
-	_mouse_blocker.connect("mouse_entered", Callable(self, "_on_blocker_mouse_entered"))
-	_mouse_blocker.connect("mouse_exited", Callable(self, "_on_blocker_mouse_exited"))
+	_mouse_blocker.mouse_entered.connect(_on_blocker_mouse_entered)
+	_mouse_blocker.mouse_exited.connect(_on_blocker_mouse_exited)
 
 
 func setup(runnable_code, scene_instance: Node) -> void:
-	runnable_code.connect("code_updated", Callable(self, "_update_label_text"))
+	runnable_code.code_updated.connect(_update_label_text)
 	_scene_instance = scene_instance
 
 

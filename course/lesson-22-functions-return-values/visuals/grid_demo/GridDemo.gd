@@ -27,7 +27,7 @@ func _ready() -> void:
 
 	_grid_node = Node2D.new()
 	_grid_node.position = _grid_offset
-	_grid_node.connect("draw", Callable(self, "_draw_grid_content"))
+	_grid_node.draw.connect(_draw_grid_content)
 	add_child(_grid_node)
 
 	_info_label = Label.new()

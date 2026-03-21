@@ -37,7 +37,7 @@ func _ready() -> void:
 	_line.position = _draw_offset
 	_line.line_2d.width = 3
 	_line.line_2d.default_color = Color.WHITE
-	_line.connect("line_end_moved", Callable(self, "_change_sprite_position"))
+	_line.line_end_moved.connect(_change_sprite_position)
 	add_child(_line)
 	
 	_last_point = _points[0] + _draw_offset
@@ -133,7 +133,7 @@ class Polygon:
 		_current_points.append(starting_point)
 		line_2d.points = _current_points
 		_scene_tween = create_tween()
-		_scene_tween.connect("finished", Callable(self, "next"))
+		_scene_tween.finished.connect(next)
 		_scene_tween.tween_method(Callable(self, "_animate_point_position"), starting_point, destination, animation_duration)
 
 	func stop_animation() -> void:

@@ -27,8 +27,8 @@ func run():
 
 
 func _ready() -> void:
-	if not is_connected("turtle_finished", Callable(self, "_complete_run")):
-		connect("turtle_finished", Callable(self, "_complete_run"))
+	if not turtle_finished.is_connected(_complete_run):
+		turtle_finished.connect(_complete_run)
 
 
 func _complete_run() -> void:

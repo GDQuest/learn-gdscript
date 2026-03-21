@@ -31,7 +31,7 @@ func _ready() -> void:
 	if texture == null:
 		randomize()
 		set_random_texture()
-	anim_player.connect("animation_finished", Callable(self, "_on_animation_finished"))
+	anim_player.animation_finished.connect(_on_animation_finished)
 
 
 func set_random_texture():

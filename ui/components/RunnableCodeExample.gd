@@ -39,15 +39,15 @@ var _coroutine_running := false
 
 
 func _ready() -> void:
-	Events.connect("font_size_scale_changed", Callable(self, "_on_Events_font_size_scale_changed"))
+	Events.font_size_scale_changed.connect(_on_Events_font_size_scale_changed)
 
 	if not Engine.is_editor_hint():
 		_update_gdscript_text_edit_width(UserProfiles.get_profile().font_size_scale)
 
-	_run_button.connect("pressed", Callable(self, "run"))
-	_step_button.connect("pressed", Callable(self, "step"))
-	_reset_button.connect("pressed", Callable(self, "reset"))
-	_frame_container.connect("resized", Callable(self, "_center_scene_instance"))
+	_run_button.pressed.connect(run)
+	_step_button.pressed.connect(step)
+	_reset_button.pressed.connect(reset)
+	_frame_container.resized.connect(_center_scene_instance)
 
 	CodeEditorEnhancer.enhance(_gdscript_text_edit)
 	if not _gdscript_text_edit.syntax_highlighter.has_color_region("[="):
@@ -92,7 +92,7 @@ func run() -> void:
 	if not _coroutine_running:
 		if is_coroutine:
 			_coroutine_running = true
-			_scene_instance.connect("coroutine_finished", func() -> void:
+			_scene_instance.coroutine_finished.connect(func() -> void:
 				_coroutine_running = false
 			)
 		_scene_instance.run()
@@ -124,7 +124,7 @@ func step() -> void:
 	if not _coroutine_running:
 		if is_coroutine:
 			_coroutine_running = true
-			_scene_instance.connect("coroutine_finished", func() -> void:
+			_scene_instance.coroutine_finished.connect(func() -> void:
 				_coroutine_running = false
 			)
 		_scene_instance.run()
@@ -211,7 +211,7 @@ func create_slider_for(
 	slider.value = property_value
 	slider.step = step
 	slider.custom_minimum_size.x = 100.0
-	slider.connect("value_changed", Callable(self, "_set_instance_value").bind(property_name, value_label))
+	slider.value_changed.connect(_set_instance_value.bind(property_name, value_label))
 	_set_instance_value(property_value, property_name, value_label)
 
 	if color != Color.BLACK:
@@ -243,9 +243,9 @@ func _center_scene_instance() -> void:
 
 func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	if new_scene_instance.has_signal("line_highlight_requested"):
-		new_scene_instance.connect("line_highlight_requested", Callable(self, "_on_highlight_line"))
+		new_scene_instance.line_highlight_requested.connect(_on_highlight_line)
 	if new_scene_instance.has_signal("animate_arrow_requested"):
-		new_scene_instance.connect("animate_arrow_requested", Callable(self, "_on_arrow_animation"))
+		new_scene_instance.animate_arrow_requested.connect(_on_arrow_animation)
 
 	_scene_instance = new_scene_instance
 	emit_signal("scene_instance_set")
@@ -279,7 +279,7 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 			_debugger = node
 			_debugger.setup(self, _scene_instance)
 			if _scene_instance.has_signal("code_updated"):
-				_scene_instance.connect("code_updated", Callable(self, "emit_signal").bind("code_updated"))
+				_scene_instance.code_updated.connect(code_updated.emit)
 
 	_reset_monitored_variable_highlights()
 
@@ -304,7 +304,7 @@ func _reset_monitored_variable_highlights():
 			h_scroll_bar = current_child
 			break
 	if h_scroll_bar != null:
-		h_scroll_bar.connect("scrolling", Callable(self, "_on_HScrollBar_scrolling"))
+		h_scroll_bar.scrolling.connect(_on_HScrollBar_scrolling)
 
 	# Create widgets that underline a variable and display a variable's value
 	# when hovering with the mouse.

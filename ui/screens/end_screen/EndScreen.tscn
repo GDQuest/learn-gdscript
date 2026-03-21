@@ -27,7 +27,7 @@
 script/source = "extends Button
 
 func _ready() -> void:
-	connect(\"pressed\", Callable(get_tree(), \"change_scene_to_file\").bind(\"res://ui/UICore.tscn\"))
+	pressed.connect(get_tree().change_scene_to_file.bind(\"res://ui/UICore.tscn\"))
 "
 
 [sub_resource type="StyleBoxFlat" id=1]

@@ -29,7 +29,7 @@ script/source = "extends Node2D
 
 
 func _ready() -> void:
-	_anim_player.connect(\"animation_finished\", Callable(self, \"_on_animation_finished\"))
+	_anim_player.animation_finished.connect(_on_animation_finished)
 
 
 func appear() -> void:

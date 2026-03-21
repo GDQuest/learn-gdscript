@@ -10,7 +10,7 @@ extends AnimationTree
 
 func _ready() -> void:
 	active = true
-	_animation_player.connect("animation_finished", Callable(self, "_on_animation_finished"))
+	_animation_player.animation_finished.connect(_on_animation_finished)
 
 
 func travel(animation_name: String) -> void:

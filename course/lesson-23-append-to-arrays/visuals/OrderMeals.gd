@@ -20,7 +20,7 @@ var _wait_queue := []
 func _ready():
 	add_child(_add_timer)
 	_add_timer.wait_time = 1.0
-	_add_timer.connect("timeout", Callable(self, "add_order"))
+	_add_timer.timeout.connect(add_order)
 
 
 func run():
@@ -36,7 +36,7 @@ func add_order():
 	
 	var order = _wait_queue.pop_back()
 	var meal := Meal.new(order.name, order.time)
-	meal.connect("meal_ready", Callable(self, "_on_meal_ready"))
+	meal.meal_ready.connect(_on_meal_ready)
 	waiting_orders.append(order.name)
 	_waiting_orders_box.add_child(meal)
 
@@ -102,7 +102,7 @@ class Meal extends VBoxContainer:
 		scene_tween.tween_property(self, "modulate:a", 1.0, 1).from(0).set_ease(Tween.EASE_OUT)
 		if time > 0:
 			texture.texture = TEXTURE_UNCHECKED
-			scene_tween.connect("finished", Callable(self, "_on_tween_completed"))
+			scene_tween.finished.connect(_on_tween_completed)
 			scene_tween.tween_property(progress, "value", 100.0, time).from(0.0)
 		else:
 			texture.texture = TEXTURE_CHECKED

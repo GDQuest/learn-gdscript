@@ -9,9 +9,9 @@ const PracticeButtonScene := preload("res://ui/screens/lesson/UIPracticeButton.t
 func _ready() -> void:
 	set_as_top_level(true)
 
-	Events.connect("practice_requested", Callable(self, "_on_practice_requested"))
-	_cancel_button.connect("pressed", Callable(self, "hide"))
-	connect("visibility_changed", Callable(self, "_on_visibility_changed"))
+	Events.practice_requested.connect(_on_practice_requested)
+	_cancel_button.pressed.connect(hide)
+	visibility_changed.connect(_on_visibility_changed)
 
 
 

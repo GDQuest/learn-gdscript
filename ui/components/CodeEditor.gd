@@ -18,13 +18,14 @@ const ACTIONS := {
 const EDITOR_EXPAND_ICON := preload("res://ui/icons/expand.png")
 const EDITOR_COLLAPSE_ICON := preload("res://ui/icons/collapse.png")
 
-@export var text := "": get = get_text, set = set_text # (String, MULTILINE)
+@export var text := "":
+	get = get_text, set = set_text # (String, MULTILINE)
 
 var _initial_text := ""
 
 # When pressing the run button, we disable buttons until the checks complete.
 # Once done, we use this var to restore the buttons' previous disabled state.
-var _buttons_previous_disabled_state := {}
+var _buttons_previous_disabled_state := { }
 
 @export var slice_editor: SliceEditor
 @export var _run_button: Button
@@ -36,7 +37,6 @@ var _buttons_previous_disabled_state := {}
 @export var _distraction_free_mode_button: Button
 @export var _locked_overlay: Control
 @export var _locked_overlay_label: Label
-
 
 # Buttons to toggle disabled when running the code, until the server responds.
 @onready var _buttons_to_disable := [
@@ -62,18 +62,16 @@ func _ready() -> void:
 	_locked_overlay.hide()
 
 	_restore_button.disabled = true
-	_restore_button.connect("pressed", Callable(self, "_on_restore_button_pressed"))
-	_run_button.connect("pressed", Callable(self, "_on_run_button_pressed"))
-	_pause_button.connect("pressed", Callable(self, "emit_signal").bind("action_taken", ACTIONS.PAUSE))
-	_solution_button.connect("pressed", Callable(self, "emit_signal").bind("action_taken", ACTIONS.SOLUTION))
-	_continue_button.connect("pressed", Callable(self, "emit_signal").bind("action_taken", ACTIONS.CONTINUE))
-	_distraction_free_mode_button.connect(
-		"pressed", Callable(self, "emit_signal").bind("action_taken").bind(ACTIONS.DFMODE)
-	)
-	_console_button.connect("pressed", Callable(self, "emit_signal").bind("console_toggled"))
+	_restore_button.pressed.connect(_on_restore_button_pressed)
+	_run_button.pressed.connect(_on_run_button_pressed)
+	_pause_button.pressed.connect(action_taken.emit.bind(ACTIONS.PAUSE))
+	_solution_button.pressed.connect(action_taken.emit.bind(ACTIONS.SOLUTION))
+	_continue_button.pressed.connect(action_taken.emit.bind(ACTIONS.CONTINUE))
+	_distraction_free_mode_button.pressed.connect(action_taken.emit.bind(ACTIONS.DFMODE))
+	_console_button.pressed.connect(console_toggled.emit)
 
-	slice_editor.connect("text_changed", Callable(self, "_on_text_changed"))
-	slice_editor.connect("gui_input", Callable(self, "_gui_input"))
+	slice_editor.text_changed.connect(_on_text_changed)
+	slice_editor.gui_input.connect(_gui_input)
 	await get_tree().process_frame
 	_initial_text = text
 
@@ -83,7 +81,7 @@ func _ready() -> void:
 		for button: BaseButton in _buttons_with_shortcuts:
 			assert(
 				button.shortcut.events.any(func(event: InputEvent) -> bool: return event is InputEventAction),
-				"Buttons must use an action as a shortcut to generate a shortcut tooltip for them."
+				"Buttons must use an action as a shortcut to generate a shortcut tooltip for them.",
 			)
 			var action_name: String = button.shortcut.events.back().action
 			button.tooltip_text += "\n" + TextUtils.convert_input_action_to_tooltip(action_name)
@@ -155,7 +153,7 @@ func lock_editor() -> void:
 	for button in _buttons_to_disable:
 		_buttons_previous_disabled_state[button] = button.disabled
 		button.disabled = true
-	
+
 	_locked_overlay.show()
 
 
@@ -164,7 +162,7 @@ func unlock_editor() -> void:
 	for button in _buttons_previous_disabled_state:
 		button.disabled = _buttons_previous_disabled_state[button]
 	_run_button.disabled = false
-	
+
 	_locked_overlay.hide()
 	set_locked_message("")
 

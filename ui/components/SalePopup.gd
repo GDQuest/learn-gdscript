@@ -24,8 +24,8 @@ var _datetime_regex := RegEx.new()
 func _ready() -> void:
 	set_title(title)
 	set_only_until_string(only_until_string)
-	go_button.connect("pressed", Callable(self, "_open_sale_url"))
-	close_button.connect("pressed", Callable(self, "hide"))
+	go_button.pressed.connect(_open_sale_url)
+	close_button.pressed.connect(hide)
 	if get_tree().current_scene != self:
 		hide()
 

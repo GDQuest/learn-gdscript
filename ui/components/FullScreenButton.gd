@@ -8,8 +8,8 @@ func _ready() -> void:
 		modulate.a = 0.0
 		return
 
-	connect("pressed", Callable(self, "_toggle_fullscreen"))
-	Events.connect("fullscreen_toggled", Callable(self, "_toggle_fullscreen"))
+	pressed.connect(_toggle_fullscreen)
+	Events.fullscreen_toggled.connect(_toggle_fullscreen)
 	_update_icon()
 
 

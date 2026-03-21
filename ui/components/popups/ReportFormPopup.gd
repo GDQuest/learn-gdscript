@@ -13,8 +13,8 @@ extends CanvasLayer
 
 func _ready():
 	hide()
-	_confirm_button.connect("pressed", Callable(self, "hide"))
-	_summary_label.connect("meta_clicked", Callable(self, "_on_meta_clicked"))
+	_confirm_button.pressed.connect(hide)
+	_summary_label.meta_clicked.connect(_on_meta_clicked)
 	_update_translations()
 	visibility_changed.connect(_on_visibility_changed)
 

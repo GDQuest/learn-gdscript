@@ -150,7 +150,7 @@ func _show_answer(gave_correct_answer := true) -> void:
 	var fade_tween := create_tween().set_parallel()
 	
 	var choice_step := fade_tween.tween_property(_choice_container, "modulate:a", 0.0, FADE_OUT_TIME).from(1.0)
-	choice_step.connect("finished", Callable(_choice_container, "hide"))
+	choice_step.finished.connect(_choice_container.hide)
 	fade_tween.tween_property(_result_container, "modulate:a", 1.0, FADE_IN_TIME).from(0.0)
 
 	if gave_correct_answer:
@@ -180,7 +180,7 @@ func _change_rect_size_to(size: Vector2, instant := false) -> void:
 	_size_scene_tween = create_tween().set_parallel()
 	_size_scene_tween.tween_property(self, "_percent_transformed", 1.0, SIZE_CHANGE_TIME).from(0.0).set_trans(Tween.TRANS_SINE)
 	_size_scene_tween.tween_method(Callable(self, "_on_size_tween_step"), 0.0, 1.0, SIZE_CHANGE_TIME).set_trans(Tween.TRANS_SINE)
-	_size_scene_tween.connect("finished", Callable(self, "_on_size_tween_completed"))
+	_size_scene_tween.finished.connect(_on_size_tween_completed)
 
 func _on_item_rect_changed() -> void:
 	if not _error_scene_tween or not _error_scene_tween.is_running() or _error_scene_tween.get_total_elapsed_time() > ERROR_SHAKE_TIME:

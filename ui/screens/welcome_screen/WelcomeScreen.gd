@@ -21,18 +21,18 @@ func _ready() -> void:
 	for button in _buttons_to_disable:
 		button.disabled = true
 
-	_settings_button.connect("pressed", Callable(Events, "emit_signal").bind("settings_requested"))
-	_outliner_button.connect("pressed", Callable(self, "_on_outliner_pressed"))
-	_start_button.connect("pressed", Callable(self, "_on_start_requested"))
-	_quit_button.connect("pressed", Callable(get_tree(), "quit"))
-	_title_link_label.connect("meta_clicked", Callable(self, "_on_meta_clicked"))
+	_settings_button.pressed.connect(Events.settings_requested.emit)
+	_outliner_button.pressed.connect(_on_outliner_pressed)
+	_start_button.pressed.connect(_on_start_requested)
+	_quit_button.pressed.connect(get_tree().quit)
+	_title_link_label.meta_clicked.connect(_on_meta_clicked)
 	
 	_start_button.grab_focus()
 	
 	if OS.has_feature('JavaScript'):
 		_quit_button.queue_free()
 	
-	_anim_player.connect("animation_finished", Callable(self, "_on_animation_finished"))
+	_anim_player.animation_finished.connect(_on_animation_finished)
 
 
 func appear() -> void:

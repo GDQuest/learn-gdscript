@@ -21,14 +21,14 @@ func add_item(lesson_index: int, lesson_title: String, completion: int) -> void:
 	item_node.completion = completion
 
 	_lesson_items.add_child(item_node)
-	item_node.connect("selected", Callable(self, "_on_item_selected").bind(lesson_index))
+	item_node.selected.connect(_on_item_selected.bind(lesson_index))
 
 
 func clear() -> void:
 	for child_node in _lesson_items.get_children():
 		var item_node = child_node as CourseLessonItem
 		if item_node:
-			item_node.disconnect("selected", Callable(self, "_on_item_selected"))
+			item_node.selected.disconnect(_on_item_selected)
 
 		_lesson_items.remove_child(child_node)
 		child_node.queue_free()

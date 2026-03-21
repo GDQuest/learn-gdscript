@@ -45,28 +45,28 @@ func _ready() -> void:
 	_lesson_count = course_index.get_lessons_count()
 	_course_outliner.course_index = course_index
 
-	NavigationManager.connect("navigation_requested", Callable(self, "_navigate_to"))
-	NavigationManager.connect("back_navigation_requested", Callable(self, "_navigate_back"))
-	NavigationManager.connect("outliner_navigation_requested", Callable(self, "_navigate_to_outliner"))
+	NavigationManager.navigation_requested.connect(_navigate_to)
+	NavigationManager.back_navigation_requested.connect(_navigate_back)
+	NavigationManager.outliner_navigation_requested.connect(_navigate_to_outliner)
 
 
-	Events.connect("practice_next_requested", Callable(self, "_on_practice_next_requested"))
-	Events.connect("practice_previous_requested", Callable(self, "_on_practice_previous_requested"))
-	Events.connect("practice_requested", Callable(self, "_on_practice_requested"))
+	Events.practice_next_requested.connect(_on_practice_next_requested)
+	Events.practice_previous_requested.connect(_on_practice_previous_requested)
+	Events.practice_requested.connect(_on_practice_requested)
 
-	_lesson_done_popup.connect("accepted", Callable(self, "_on_lesson_completed"))
+	_lesson_done_popup.accepted.connect(_on_lesson_completed)
 
-	_outliner_button.connect("pressed", Callable(NavigationManager, "navigate_to_outliner"))
-	_back_button.connect("pressed", Callable(NavigationManager, "navigate_back"))
-	_home_button.connect("pressed", Callable(NavigationManager, "navigate_to_welcome_screen"))
+	_outliner_button.pressed.connect(NavigationManager.navigate_to_outliner)
+	_back_button.pressed.connect(NavigationManager.navigate_back)
+	_home_button.pressed.connect(NavigationManager.navigate_to_welcome_screen)
 
-	_settings_button.connect("pressed", Callable(Events, "emit_signal").bind("settings_requested"))
-	_report_button.connect("pressed", Callable(Events, "emit_signal").bind("report_form_requested"))
+	_settings_button.pressed.connect(Events.settings_requested.emit)
+	_report_button.pressed.connect(Events.report_form_requested.emit)
 
 	if not UserProfiles.get_profile().is_sponsored_profile or _sale_popup.is_sale_over():
 		_sale_button.hide()
 	else:
-		_sale_button.connect("pressed", Callable(_sale_popup, "show"))
+		_sale_button.pressed.connect(_sale_popup.show)
 
 	if NavigationManager.current_url == "":
 		if load_into_outliner:

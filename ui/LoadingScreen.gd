@@ -47,7 +47,7 @@ func fade_in() -> void:
 	if _scene_tween:
 		_scene_tween.kill()
 	_scene_tween = create_tween()
-	_scene_tween.connect("finished", Callable(self, "_on_tween_finished"))
+	_scene_tween.finished.connect(_on_tween_finished)
 	_scene_tween.tween_property(self, "modulate:a", 1.0, FADING_DURATION).from(0.0)
 
 
@@ -57,7 +57,7 @@ func fade_out() -> void:
 	if _scene_tween:
 		_scene_tween.kill()
 	_scene_tween = create_tween()
-	_scene_tween.connect("finished", Callable(self, "_on_tween_finished"))
+	_scene_tween.finished.connect(_on_tween_finished)
 	_scene_tween.tween_property(self, "modulate:a", 0.0, FADING_DURATION).from(modulate.a)
 
 
@@ -75,7 +75,7 @@ func _animate_progress() -> void:
 	if _scene_tween:
 		_scene_tween.kill()
 	_scene_tween = create_tween()
-	_scene_tween.connect("finished", Callable(self, "_on_tween_finished"))
+	_scene_tween.finished.connect(_on_tween_finished)
 	_scene_tween.tween_property(_progress_bar, "value", progress_value, PROGRESS_DURATION).from(_progress_bar.value).set_trans(Tween.TRANS_CUBIC)
 
 

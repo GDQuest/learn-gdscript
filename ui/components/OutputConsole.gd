@@ -22,10 +22,10 @@ var _slice_properties: ScriptSlice = null
 func _ready() -> void:
 	_external_error_popup.set_as_top_level(true)
 	_error_popup.set_as_top_level(true)
-	_error_overlay_popup.connect("hidden", Callable(_error_popup, "hide"))
-	connect("resized", Callable(self, "_on_resized"))
+	_error_overlay_popup.hidden.connect(_error_popup.hide)
+	resized.connect(_on_resized)
 
-	MessageBus.connect("print_requested", Callable(self, "print_bus_message"))
+	MessageBus.print_requested.connect(print_bus_message)
 
 
 func setup(slice: ScriptSlice) -> void:
@@ -57,9 +57,9 @@ func clear_messages() -> void:
 
 	for message_node in _message_list.get_children():
 		if message_node is OutputConsoleErrorMessage:
-			message_node.disconnect("external_explain_requested", Callable(self, "_on_external_requested"))
-			message_node.disconnect("show_code_requested", Callable(self, "_on_code_requested"))
-			message_node.disconnect("explain_error_requested", Callable(self, "_on_explain_requested"))
+			message_node.external_explain_requested.disconnect(_on_external_requested)
+			message_node.show_code_requested.disconnect(_on_code_requested)
+			message_node.explain_error_requested.disconnect(_on_explain_requested)
 
 		_message_list.remove_child(message_node)
 		message_node.queue_free()
@@ -102,9 +102,9 @@ func print_error(type: int, text: String, file_name: String, line: int, characte
 		message_node.external_error = true
 
 	_message_list.add_child(message_node)
-	message_node.connect("external_explain_requested", Callable(self, "_on_external_requested"))
-	message_node.connect("show_code_requested", Callable(self, "_on_code_requested"))
-	message_node.connect("explain_error_requested", Callable(self, "_on_explain_requested"))
+	message_node.external_explain_requested.connect(_on_external_requested)
+	message_node.show_code_requested.connect(_on_code_requested)
+	message_node.explain_error_requested.connect(_on_explain_requested)
 
 	await get_tree().process_frame
 	_scroll_container.ensure_control_visible(message_node)

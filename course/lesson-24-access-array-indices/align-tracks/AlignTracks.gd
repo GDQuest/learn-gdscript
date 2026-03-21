@@ -66,7 +66,7 @@ func _realign_selected_sprites() -> void:
 		var tween := create_tween()
 		var initial := track.position
 		var target := initial - shift
-		tween.connect("finished", Callable(self, "_realign_selected_sprites"))
+		tween.finished.connect(_realign_selected_sprites)
 		tween.tween_property(track, "position", target, 1).from(initial).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	else:
 		_complete_run()

@@ -6,7 +6,7 @@ extends CodeEdit
 
 
 func _ready() -> void:
-	Events.connect("font_size_scale_changed", Callable(self, "_update_size"))
+	Events.font_size_scale_changed.connect(_update_size)
 	context_menu_enabled = false
 	shortcut_keys_enabled = false
 	editable = false

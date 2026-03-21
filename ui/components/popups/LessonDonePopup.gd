@@ -26,8 +26,8 @@ func _ready() -> void:
 	_raw_summary = _summary_label.text.replace("\r\n", "\n")
 	_summary_label.text = tr(_raw_summary)
 	
-	_move_on_button.connect("pressed", Callable(self, "_on_button_pressed"))
-	_stay_button.connect("pressed", Callable(self, "hide"))
+	_move_on_button.pressed.connect(_on_button_pressed)
+	_stay_button.pressed.connect(hide)
 
 
 func _notification(what: int) -> void:

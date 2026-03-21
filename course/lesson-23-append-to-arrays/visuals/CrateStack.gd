@@ -23,7 +23,7 @@ func _ready() -> void:
 		crate.set_label_index(i)
 		i += 1
 		crate.hide_after_animation = true
-		crate.connect("restored", Callable(self, "restore_crate"))
+		crate.restored.connect(restore_crate)
 	crates = range(_initial_crates.size())
 
 

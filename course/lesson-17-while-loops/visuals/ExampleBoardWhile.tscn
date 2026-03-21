@@ -21,7 +21,7 @@ script/source = "extends \"Board.gd\"
 
 
 func _ready() -> void:
-	_robot.connect(\"cell_changed\", Callable(self, \"_update_label\"))
+	_robot.cell_changed.connect(_update_label)
 
 
 func run() -> void:

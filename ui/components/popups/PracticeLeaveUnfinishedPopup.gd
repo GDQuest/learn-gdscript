@@ -26,11 +26,11 @@ func _ready():
 	_title_label.text = tr(title)
 	_message_content.text = tr(text_content)
 	
-	_confirm_button.connect("pressed", Callable(self, "emit_signal").bind("confirmed"))
-	_confirm_button.connect("pressed", Callable(self, "hide"))
+	_confirm_button.pressed.connect(confirmed.emit)
+	_confirm_button.pressed.connect(hide)
 
-	_cancel_button.connect("pressed", Callable(self, "emit_signal").bind("denied"))
-	_cancel_button.connect("pressed", Callable(self, "hide"))
+	_cancel_button.pressed.connect(denied.emit)
+	_cancel_button.pressed.connect(hide)
 
 
 func _notification(what: int) -> void:

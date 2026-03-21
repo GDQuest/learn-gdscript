@@ -4,8 +4,8 @@ extends ColorRect
 
 
 func _ready():
-	_confirm_button.connect("pressed", Callable(self, "hide"))
-	connect("visibility_changed", Callable(self, "_on_visibility_changed"))
+	_confirm_button.pressed.connect(hide)
+	visibility_changed.connect(_on_visibility_changed)
 
 
 func _on_visibility_changed() -> void:

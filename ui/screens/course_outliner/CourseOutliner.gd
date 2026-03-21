@@ -19,17 +19,17 @@ var _last_selected_lesson := ""
 func _ready() -> void:
 	_update_outliner_index()
 
-	Events.connect("lesson_started", Callable(self, "_on_lesson_started"))
-	Events.connect("lesson_reading_block", Callable(self, "_on_lesson_reading_block"))
-	Events.connect("quiz_completed", Callable(self, "_on_quiz_completed"))
-	Events.connect("practice_started", Callable(self, "_on_practice_started"))
-	Events.connect("practice_completed", Callable(self, "_on_practice_completed"))
-	Events.connect("lesson_completed", Callable(self, "_on_lesson_completed"))
-	Events.connect("course_completed", Callable(self, "_on_course_completed"))
+	Events.lesson_started.connect(_on_lesson_started)
+	Events.lesson_reading_block.connect(_on_lesson_reading_block)
+	Events.quiz_completed.connect(_on_quiz_completed)
+	Events.practice_started.connect(_on_practice_started)
+	Events.practice_completed.connect(_on_practice_completed)
+	Events.lesson_completed.connect(_on_lesson_completed)
+	Events.course_completed.connect(_on_course_completed)
 
-	_lesson_list.connect("lesson_selected", Callable(self, "_on_lesson_selected"))
-	_reset_button.connect("pressed", Callable(self, "_on_reset_requested"))
-	_reset_confirm_popup.connect("confirmed", Callable(self, "_on_reset_confirmed"))
+	_lesson_list.lesson_selected.connect(_on_lesson_selected)
+	_reset_button.pressed.connect(_on_reset_requested)
+	_reset_confirm_popup.confirmed.connect(_on_reset_confirmed)
 
 
 func set_course(value: CourseIndex) -> void:

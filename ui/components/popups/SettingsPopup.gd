@@ -35,11 +35,11 @@ func _ready() -> void:
 	_init_languages()
 	_init_values()
 	
-	_font_size_value.connect("value_changed", Callable(self, "_on_font_size_changed"))
+	_font_size_value.value_changed.connect(_on_font_size_changed)
 	
-	_apply_button.connect("pressed", Callable(self, "_on_apply_settings"))
-	_cancel_button.connect("pressed", Callable(self, "hide"))
-	_panel.connect("visibility_changed", Callable(self, "_on_visibility_changed"))
+	_apply_button.pressed.connect(_on_apply_settings)
+	_cancel_button.pressed.connect(hide)
+	_panel.visibility_changed.connect(_on_visibility_changed)
 
 
 func show() -> void:

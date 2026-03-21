@@ -7,9 +7,9 @@ extends Control
 ]
 
 func _ready() -> void:
-	_outliner_button.connect("pressed", Callable(self, "_on_outliner_button_pressed"))
+	_outliner_button.pressed.connect(_on_outliner_button_pressed)
 	for rtl in _rich_text_labels:
-		rtl.connect("meta_clicked", Callable(self, "_on_meta_clicked"))
+		rtl.meta_clicked.connect(_on_meta_clicked)
 
 
 func _on_outliner_button_pressed() -> void:

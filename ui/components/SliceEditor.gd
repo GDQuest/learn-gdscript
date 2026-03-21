@@ -57,13 +57,13 @@ func _ready() -> void:
 			break
 		if child is VScrollBar:
 			var vscrollbar: VScrollBar = child
-			vscrollbar.connect("value_changed", Callable(self, "_on_scrollbar_value_changed").bind(SCROLL_DIR.VERTICAL))
+			vscrollbar.value_changed.connect(_on_scrollbar_value_changed.bind(SCROLL_DIR.VERTICAL))
 			scroll_offsets.x = vscrollbar.get_minimum_size().x
 
 			found += 1
 		elif child is HScrollBar:
 			var hscrollbar: HScrollBar = child
-			hscrollbar.connect("value_changed", Callable(self, "_on_scrollbar_value_changed").bind(SCROLL_DIR.HORIZONTAL))
+			hscrollbar.value_changed.connect(_on_scrollbar_value_changed.bind(SCROLL_DIR.HORIZONTAL))
 			scroll_offsets.y = hscrollbar.get_minimum_size().y
 
 			found += 1
@@ -78,15 +78,15 @@ func _ready() -> void:
 	errors_overlay_message.set_as_top_level(true)
 	errors_overlay_message.hide()
 
-	connect("text_changed", Callable(self, "_on_text_changed"))
-	connect("draw", Callable(self, "_update_overlays"))
+	text_changed.connect(_on_text_changed)
+	draw.connect(_update_overlays)
 
 func _gui_input(event: InputEvent) -> void:
 	# Shortcut uses Enter by default which adds a new line in TextEdit without any means to stop it.
 	# So we remove it.
 	if event.is_action_pressed("run_code"):
 		_remove_last_character = true
-	
+
 	# Capture keyboard events if we are the focus owner, otherwise left arrow causes navigation events.
 	if event is InputEventKey:
 		if get_viewport().gui_get_focus_owner() == self:
@@ -156,7 +156,7 @@ func _on_text_changed() -> void:
 		text += "\t"
 		set_caret_line(_current_line)
 		set_caret_column(column + 1)
-	
+
 	# Automatically close brackets.
 	if _last_typed_character in BRACKET_PAIRS:
 		var closing_bracket: String = BRACKET_PAIRS[_last_typed_character]
@@ -231,12 +231,10 @@ func _reset_overlays() -> void:
 		if not error_node:
 			continue
 
-		error_node.connect(
-			"region_entered",
-			Callable(errors_overlay_message,
-			"show_message").bind(error.code).bind(error.message).bind(error_node)
+		error_node.region_entered.connect(
+			errors_overlay_message.show_message.bind(error.code, error.message, error_node)
 		)
-		error_node.connect("region_exited", Callable(errors_overlay_message, "hide_message").bind(error_node))
+		error_node.region_exited.connect(errors_overlay_message.hide_message.bind(error_node))
 
 
 # Updates the position of existing overlays to align with the text edit after it updates.

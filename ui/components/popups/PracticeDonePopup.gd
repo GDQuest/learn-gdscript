@@ -44,8 +44,8 @@ func _ready() -> void:
 	_message_container.offset_left = offscreen_offset
 	_message_container.offset_right = offscreen_offset
 
-	_move_on_button.connect("pressed", Callable(self, "fade_out"))
-	_stay_button.connect("pressed", Callable(self, "hide"))
+	_move_on_button.pressed.connect(fade_out)
+	_stay_button.pressed.connect(hide)
 
 
 func _notification(what: int) -> void:

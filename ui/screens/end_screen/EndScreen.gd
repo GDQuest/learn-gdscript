@@ -7,12 +7,12 @@ const COURSE_URL := "https://school.gdquest.com/products/godot-4-early-access"
 
 
 func _ready() -> void:
-	_outliner_button.connect("pressed", Callable(self, "_on_outliner_button_pressed"))
+	_outliner_button.pressed.connect(_on_outliner_button_pressed)
 	for node in [$Layout/CenterRow/Panel/Margin/Column/VBoxContainer2/VBoxContainer/RichTextLabel3, $Layout/CenterRow/Panel/Margin/Column/VBoxContainer3/RichTextLabel4]:
-		node.connect("meta_clicked", Callable(OS, "shell_open"))
-	_learn_more_button.connect("pressed", Callable(OS, "shell_open").bind(COURSE_URL))
-	_learn_more_button.connect("button_down", Callable(self, "_learn_more_button_button_down"))
-	_learn_more_button.connect("button_up", Callable(self, "_learn_more_button_button_up"))
+		node.meta_clicked.connect(OS.shell_open)
+	_learn_more_button.pressed.connect(OS.shell_open.bind(COURSE_URL))
+	_learn_more_button.button_down.connect(_learn_more_button_button_down)
+	_learn_more_button.button_up.connect(_learn_more_button_button_up)
 
 
 func _input(event: InputEvent) -> void:

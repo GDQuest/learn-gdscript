@@ -43,7 +43,7 @@ func draw_curve():
 	if _scene_tween:
 		_scene_tween.kill()
 	_scene_tween = create_tween().set_parallel()
-	_scene_tween.connect("finished", Callable(self, "_on_tween_completed"))
+	_scene_tween.finished.connect(_on_tween_completed)
 	_scene_tween.tween_method(Callable(self, "_on_tween_step"), 0, 1, TWEEN_DURATION)
 	_scene_tween.tween_property(self, "_line_slice_limit", _baked_line_points.size(), TWEEN_DURATION).from(0)
 

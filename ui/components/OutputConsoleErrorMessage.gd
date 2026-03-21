@@ -25,9 +25,9 @@ var origin_char := -1: set = set_origin_char
 func _ready() -> void:
 	_update_visuals()
 	
-	_message_explain_button.connect("pressed", Callable(self, "_on_explain_pressed"))
-	_location_row.connect("gui_input", Callable(self, "_location_row_gui_input"))
-	_external_label.connect("gui_input", Callable(self, "_external_label_gui_input"))
+	_message_explain_button.pressed.connect(_on_explain_pressed)
+	_location_row.gui_input.connect(_location_row_gui_input)
+	_external_label.gui_input.connect(_external_label_gui_input)
 
 	var _scene_tween := create_tween()
 	_scene_tween.tween_property(self, "self_modulate:a", 0.25, 1.5).from(1.0)

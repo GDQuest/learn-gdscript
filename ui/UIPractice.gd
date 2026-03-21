@@ -78,7 +78,7 @@ func _init():
 	_run_autotimer.wait_time = RUN_AUTOTIMER_DURATION
 	add_child(_run_autotimer)
 
-	_run_autotimer.connect("timeout", Callable(self, "_on_autotimer_timeout"))
+	_run_autotimer.timeout.connect(_on_autotimer_timeout)
 
 	_on_init_set_javascript()
 
@@ -90,23 +90,23 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 
-	_code_editor.connect("action_taken", Callable(self, "_on_code_editor_action_taken"))
-	_code_editor.connect("text_changed", Callable(self, "_on_code_editor_text_changed"))
-	_code_editor.connect("console_toggled", Callable(self, "_on_console_toggled"))
-	_output_console.connect("reference_clicked", Callable(self, "_on_code_reference_clicked"))
-	_use_solution_button.connect("pressed", Callable(self, "_on_use_solution_pressed"))
+	_code_editor.action_taken.connect(_on_code_editor_action_taken)
+	_code_editor.text_changed.connect(_on_code_editor_text_changed)
+	_code_editor.console_toggled.connect(_on_console_toggled)
+	_output_console.reference_clicked.connect(_on_code_reference_clicked)
+	_use_solution_button.pressed.connect(_on_use_solution_pressed)
 
-	_info_panel.connect("list_requested", Callable(self, "_on_list_requested"))
+	_info_panel.list_requested.connect(_on_list_requested)
 
-	_practice_done_popup.connect("accepted", Callable(self, "_on_next_requested"))
+	_practice_done_popup.accepted.connect(_on_next_requested)
 
-	_practice_leave_unfinished_popup.connect("confirmed", Callable(self, "_accept_unload"))
-	_practice_leave_unfinished_popup.connect("denied", Callable(self, "_deny_unload"))
+	_practice_leave_unfinished_popup.confirmed.connect(_accept_unload)
+	_practice_leave_unfinished_popup.denied.connect(_deny_unload)
 
-	Events.connect("practice_run_completed", Callable(self, "_test_student_code"))
+	Events.practice_run_completed.connect(_test_student_code)
 
 	_update_slidable_panels()
-	_layout_container.connect("resized", Callable(self, "_update_slidable_panels"))
+	_layout_container.resized.connect(_update_slidable_panels)
 
 	_solution_panel.modulate.a = 0.0
 	_solution_panel.offset_left = _output_anchors.size.x

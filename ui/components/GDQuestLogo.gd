@@ -12,13 +12,13 @@ var local_is_hovered := false:
 
 func _ready() -> void:
 	modulate = COLOR_IDLE
-	connect("pressed", Callable(self, "open_gdquest_website"))
-	connect("button_down", Callable(self, "_toggle_shade").bind(true))
-	connect("button_up", Callable(self, "_toggle_shade").bind(false))
-	connect("mouse_entered", func() -> void:
+	pressed.connect(open_gdquest_website)
+	button_down.connect(_toggle_shade.bind(true))
+	button_up.connect(_toggle_shade.bind(false))
+	mouse_entered.connect(func() -> void:
 		local_is_hovered = true
 	)
-	connect("mouse_exited", func() -> void:
+	mouse_exited.connect(func() -> void:
 		local_is_hovered = false
 	)
 

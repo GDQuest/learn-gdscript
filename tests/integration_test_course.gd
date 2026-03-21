@@ -109,8 +109,8 @@ func _test_lesson(lesson: Lesson) -> bool:
 	add_child(timer)
 	
 	var state := {"displayed": false, "timer": timer}
-	ui_lesson.connect("lesson_displayed", Callable(self, "_on_lesson_displayed_signal").bind(state))
-	timer.connect("timeout", Callable(self, "_on_lesson_timeout_signal").bind(state))
+	ui_lesson.lesson_displayed.connect(_on_lesson_displayed_signal.bind(state))
+	timer.timeout.connect(_on_lesson_timeout_signal.bind(state))
 	timer.start()
 	
 	var wait_start_time := Time.get_ticks_msec()
@@ -186,8 +186,8 @@ func _test_practice(practice: Practice, lesson: Lesson) -> bool:
 	add_child(execution_timer)
 	
 	var state := {"complete": false, "timer": execution_timer}
-	ui_practice.connect("test_student_code_completed", Callable(self, "_on_practice_execution_complete_signal").bind(state))
-	execution_timer.connect("timeout", Callable(self, "_on_practice_execution_timeout_signal").bind(state))
+	ui_practice.test_student_code_completed.connect(_on_practice_execution_complete_signal.bind(state))
+	execution_timer.timeout.connect(_on_practice_execution_timeout_signal.bind(state))
 	execution_timer.start()
 	
 	var wait_start_time := Time.get_ticks_msec()

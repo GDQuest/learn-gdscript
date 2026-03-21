@@ -35,8 +35,8 @@ func _ready():
 	_message_content.text = tr(text_content)
 	_update_top_bar()
 	
-	_confirm_button.connect("pressed", Callable(self, "emit_signal").bind("confirmed"))
-	_cancel_button.connect("pressed", Callable(self, "hide"))
+	_confirm_button.pressed.connect(confirmed.emit)
+	_cancel_button.pressed.connect(hide)
 
 
 func _notification(what: int) -> void:

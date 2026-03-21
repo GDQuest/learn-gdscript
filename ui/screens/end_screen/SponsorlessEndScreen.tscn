@@ -17,7 +17,7 @@
 script/source = "extends Button
 
 func _ready() -> void:
-	connect(\"pressed\", Callable(get_tree(), \"change_scene_to_file\").bind(\"res://ui/UICore.tscn\"))
+	pressed.connect(get_tree().change_scene_to_file.bind(\"res://ui/UICore.tscn\"))
 "
 
 [sub_resource type="GDScript" id=2]
@@ -28,7 +28,7 @@ extends HBoxContainer
 
 
 func _ready() -> void:
-	connect(\"resized\", Callable(self, \"update_size\"))
+	resized.connect(update_size)
 
 
 func update_size() -> void:

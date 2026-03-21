@@ -27,9 +27,9 @@ func _ready() -> void:
 	_update_explanation()
 	_exclusive_buttons.visible = exclusive
 
-	_error_explanation_block.connect("expanded", Callable(self, "_on_revealer_opened").bind(_error_explanation_block))
-	_error_suggestion_block.connect("expanded", Callable(self, "_on_revealer_opened").bind(_error_suggestion_block))
-	_close_button.connect("pressed", Callable(self, "hide"))
+	_error_explanation_block.expanded.connect(_on_revealer_opened.bind(_error_explanation_block))
+	_error_suggestion_block.expanded.connect(_on_revealer_opened.bind(_error_suggestion_block))
+	_close_button.pressed.connect(hide)
 	hide()
 
 

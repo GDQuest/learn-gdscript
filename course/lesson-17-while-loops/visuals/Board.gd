@@ -15,7 +15,7 @@ var grid_size_px := cell_size * grid_size
 
 
 func _ready() -> void:
-	_timer.connect("timeout", Callable(self, "_on_timer_timeout"))
+	_timer.timeout.connect(_on_timer_timeout)
 	_robot.cell_size = cell_size
 	_robot.grid_size_px = grid_size_px
 	_robot.cell = robot_start_position

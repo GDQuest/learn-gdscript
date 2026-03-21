@@ -20,9 +20,9 @@ var scene_tween: Tween
 func _ready() -> void:
 	_panel.hide()
 	_interaction_area.hide()
-	_interaction_area.connect("mouse_exited", Callable(self, "disappear"))
-	_timer.connect("timeout", Callable(self, "_on_Timer_timeout"))
-	_content.connect("resized", Callable(self, "_on_Content_resized"))
+	_interaction_area.mouse_exited.connect(disappear)
+	_timer.timeout.connect(_on_Timer_timeout)
+	_content.resized.connect(_on_Content_resized)
 
 
 func setup(term: String, text: String) -> void:
@@ -52,7 +52,7 @@ func appear() -> void:
 		scene_tween.kill()
 	
 	scene_tween = create_tween()
-	scene_tween.connect("finished", Callable(self, "_on_Tween_tween_all_completed"))
+	scene_tween.finished.connect(_on_Tween_tween_all_completed)
 	scene_tween.tween_property(_panel, "modulate:a", 1.0, TRANSITION_DURATION).from(0.0)
 	_timer.start()
 
@@ -64,7 +64,7 @@ func disappear() -> void:
 	if scene_tween:
 		scene_tween.kill()
 	scene_tween = create_tween()
-	scene_tween.connect("finished", Callable(self, "_on_Tween_tween_all_completed"))
+	scene_tween.finished.connect(_on_Tween_tween_all_completed)
 	scene_tween.tween_property(_panel, "modulate:a", 0.0, TRANSITION_DURATION).from(_panel.modulate.a)
 
 

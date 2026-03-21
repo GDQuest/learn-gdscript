@@ -45,9 +45,9 @@ func _ready() -> void:
 
 	_toggle_bar.modulate.a = TOGGLE_OPACITY
 
-	_toggle_button.connect("mouse_entered", Callable(self, "_on_toggle_entered"))
-	_toggle_button.connect("mouse_exited", Callable(self, "_on_toggle_exited"))
-	_toggle_button.connect("toggled", Callable(self, "_on_toggle_pressed"))
+	_toggle_button.mouse_entered.connect(_on_toggle_entered)
+	_toggle_button.mouse_exited.connect(_on_toggle_exited)
+	_toggle_button.toggled.connect(_on_toggle_pressed)
 
 	_toggle_content(is_expanded, true)
 	_title_style = get_title_panel_style()
@@ -257,15 +257,15 @@ func set_title_panel(value: StyleBox) -> void:
 		return
 
 	if title_panel:
-		title_panel.disconnect("changed", Callable(self, "minimum_size_changed"))
-		title_panel.disconnect("changed", Callable(self, "queue_sort"))
-		title_panel.disconnect("changed", Callable(self, "update"))
+		title_panel.changed.disconnect(minimum_size_changed)
+		title_panel.changed.disconnect(queue_sort)
+		title_panel.changed.disconnect(update)
 
 	title_panel = value
-	if title_panel and not title_panel.is_connected("changed", Callable(self, "minimum_size_changed")):
-		title_panel.connect("changed", Callable(self, "minimum_size_changed"))
-		title_panel.connect("changed", Callable(self, "queue_sort"))
-		title_panel.connect("changed", Callable(self, "update"))
+	if title_panel and not title_panel.changed.is_connected(minimum_size_changed):
+		title_panel.changed.connect(minimum_size_changed)
+		title_panel.changed.connect(queue_sort)
+		title_panel.changed.connect(update)
 
 	update_minimum_size()
 	notification(NOTIFICATION_THEME_CHANGED)
@@ -276,15 +276,15 @@ func set_title_panel_expanded(value: StyleBox) -> void:
 		return
 
 	if title_panel_expanded:
-		title_panel_expanded.disconnect("changed", Callable(self, "minimum_size_changed"))
-		title_panel_expanded.disconnect("changed", Callable(self, "queue_sort"))
-		title_panel_expanded.disconnect("changed", Callable(self, "update"))
+		title_panel_expanded.changed.disconnect(minimum_size_changed)
+		title_panel_expanded.changed.disconnect(queue_sort)
+		title_panel_expanded.changed.disconnect(update)
 
 	title_panel_expanded = value
-	if title_panel_expanded and not title_panel_expanded.is_connected("changed", Callable(self, "minimum_size_changed")):
-		title_panel_expanded.connect("changed", Callable(self, "minimum_size_changed"))
-		title_panel_expanded.connect("changed", Callable(self, "queue_sort"))
-		title_panel_expanded.connect("changed", Callable(self, "update"))
+	if title_panel_expanded and not title_panel_expanded.changed.is_connected(minimum_size_changed):
+		title_panel_expanded.changed.connect(minimum_size_changed)
+		title_panel_expanded.changed.connect(queue_sort)
+		title_panel_expanded.changed.connect(update)
 
 	update_minimum_size()
 	notification(NOTIFICATION_THEME_CHANGED)
@@ -301,15 +301,15 @@ func set_content_panel(value: StyleBox) -> void:
 		return
 
 	if content_panel:
-		content_panel.disconnect("changed", Callable(self, "minimum_size_changed"))
-		content_panel.disconnect("changed", Callable(self, "queue_sort"))
-		content_panel.disconnect("changed", Callable(self, "update"))
+		content_panel.changed.disconnect(minimum_size_changed)
+		content_panel.changed.disconnect(queue_sort)
+		content_panel.changed.disconnect(update)
 
 	content_panel = value
-	if content_panel and not content_panel.is_connected("changed", Callable(self, "minimum_size_changed")):
-		content_panel.connect("changed", Callable(self, "minimum_size_changed"))
-		content_panel.connect("changed", Callable(self, "queue_sort"))
-		content_panel.connect("changed", Callable(self, "update"))
+	if content_panel and not content_panel.changed.is_connected(minimum_size_changed):
+		content_panel.changed.connect(minimum_size_changed)
+		content_panel.changed.connect(queue_sort)
+		content_panel.changed.connect(update)
 
 	update_minimum_size()
 	notification(NOTIFICATION_THEME_CHANGED)
@@ -352,7 +352,7 @@ func _toggle_content(expanded: bool, immediate: bool = false) -> void:
 	if _scene_tween:
 		_scene_tween.kill()
 	_scene_tween = create_tween().set_parallel()
-	_scene_tween.connect("finished", Callable(self, "_on_tween_completed"))
+	_scene_tween.finished.connect(_on_tween_completed)
 	_scene_tween.tween_property(_toggle_icon, "rotation", 90.0 * int(expanded), ANIMATION_ICON_DURATION).from(_toggle_icon.rotation).set_trans(Tween.TRANS_QUAD)
 
 	var final_value := 1.0 * int(expanded)
