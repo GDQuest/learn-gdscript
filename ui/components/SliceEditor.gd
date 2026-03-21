@@ -89,7 +89,7 @@ func _gui_input(event: InputEvent) -> void:
 
 	# Capture keyboard events if we are the focus owner, otherwise left arrow causes navigation events.
 	if event is InputEventKey:
-		if get_viewport().gui_get_focus_owner() == self:
+		if get_viewport().gui_get_focus_owner() == self and event.keycode == KEY_LEFT:
 			get_viewport().set_input_as_handled()
 
 		if event.is_pressed():

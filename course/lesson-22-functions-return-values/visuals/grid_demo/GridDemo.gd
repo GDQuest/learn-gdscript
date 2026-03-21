@@ -33,7 +33,7 @@ func _ready() -> void:
 	_info_label = Label.new()
 	_info_label.add_theme_font_override("font", TITLE_FONT)
 	_info_label.text = tr("Hover over a cell to see its pixel position")
-	_info_label.align = Label.ALIGNMENT_CENTER
+	_info_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_info_label.autowrap = true
 	_info_label.position = Vector2(0, _grid_offset.y + _grid_size_px.y + 20)
 	_info_label.size = Vector2(600, 60)

@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var tilemap := $TileMap as TileMap
+@onready var tilemap := $TileMap as TileMapLayer
 @onready var tiles := $Tiles as Node2D
 
 const shift := Vector2(10, 10)
@@ -27,20 +27,20 @@ func remove_cells():
 
 
 func copy_cells():
-	for cell_pos in tilemap.get_used_cells():
-		var x := int(cell_pos.x)
-		var y := int(cell_pos.y)
-		var cell := tilemap.get_cell(x, y)
-		var is_transposed := tilemap.is_cell_transposed(x, y)
-		var is_x_flipped := tilemap.is_cell_x_flipped(x, y)
-		var is_y_flipped := tilemap.is_cell_y_flipped(x, y)
-		var sub_tilemap = TileMap.new()
+	
+	for cell_pos: Vector2i in tilemap.get_used_cells():
+		var cell := tilemap.get_cell_source_id(cell_pos)
+		var tile_alternative := tilemap.get_cell_alternative_tile(cell_pos)
+		var atlas_coords := tilemap.get_cell_atlas_coords(cell_pos)
+		
+		var sub_tilemap := TileMapLayer.new()
 		var is_not_in_position := false
 		if cell == 4:
 			cell = 2
 			is_not_in_position = true
 		sub_tilemap.tile_set = tilemap.tile_set
-		sub_tilemap.set_cell(0, 0, cell, is_x_flipped, is_y_flipped, is_transposed)
+		sub_tilemap.set_cell(Vector2i(0, 0), cell, atlas_coords, tile_alternative)
+		
 		var sprite := Sprite2D.new()
 		sprite.position = tilemap.map_to_local(cell_pos)
 		if is_not_in_position:

@@ -79,7 +79,7 @@ func select_units(cells: Array) -> void:
 	for cell in cells:
 		if cell in units:
 			selected_units.append(cell)
-	update()
+	queue_redraw()
 
 
 func set_units(new_value: Dictionary):

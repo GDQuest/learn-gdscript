@@ -18,7 +18,7 @@ func _ready() -> void:
 	for node in [$Robot, $Turtle]:
 		node.hide()
 
-	update()
+	queue_redraw()
 
 
 func reset():

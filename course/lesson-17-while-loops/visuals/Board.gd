@@ -19,7 +19,7 @@ func _ready() -> void:
 	_robot.cell_size = cell_size
 	_robot.grid_size_px = grid_size_px
 	_robot.cell = robot_start_position
-	update()
+	queue_redraw()
 	_update_label()
 
 
@@ -34,13 +34,13 @@ func set_grid_width(width) -> void:
 	grid_size.x = width
 	grid_size_px = grid_size * cell_size
 	_robot.grid_size_px = grid_size_px
-	update()
+	queue_redraw()
 
 
 func set_grid_height(height) -> void:
 	grid_size.y = height
 	grid_size_px = grid_size * cell_size
-	update()
+	queue_redraw()
 
 
 func _update_label() -> void:
@@ -49,4 +49,3 @@ func _update_label() -> void:
 
 func _on_timer_timeout() -> void:
 	pass
-

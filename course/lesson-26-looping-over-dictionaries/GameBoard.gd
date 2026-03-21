@@ -24,7 +24,7 @@ func _ready() -> void:
 	_label_container.show_behind_parent = true
 	add_child(_label_container)
 
-	update()
+	queue_redraw()
 	set_units({
 		Vector2(1, 0): "robot",
 		Vector2(2, 2): "turtle",
@@ -73,4 +73,3 @@ func calculate_cell_position(cell: Vector2):
 
 func set_board_size(new_size: Vector2):
 	board_size = new_size
-

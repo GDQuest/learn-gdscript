@@ -13,7 +13,7 @@ var cell := Vector2(2, 0)
 func _ready() -> void:
 	_robot.cell_size = cell_size
 	_robot.cell = cell
-	update()
+	queue_redraw()
 
 
 func _run() -> void:

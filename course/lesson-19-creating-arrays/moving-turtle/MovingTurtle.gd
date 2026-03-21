@@ -46,7 +46,7 @@ func _ready() -> void:
 
 
 func _run():
-	update()
+	queue_redraw()
 	var path = []
 	for cell in turtle_path:
 		path.append(calculate_cell_position(cell))
@@ -89,6 +89,3 @@ func calculate_cell_position(cell: Vector2):
 
 func set_board_size(new_size: Vector2):
 	board_size = new_size
-
-
-

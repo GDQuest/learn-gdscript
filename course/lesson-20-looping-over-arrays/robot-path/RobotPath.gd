@@ -39,7 +39,7 @@ func _run():
 	robot.move_queue.clear()
 	robot.position = cell_to_position(Vector2.ZERO)
 	run()
-	update()
+	queue_redraw()
 	await robot.goal_reached
 	Events.emit_signal("practice_run_completed")
 

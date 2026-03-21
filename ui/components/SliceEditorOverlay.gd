@@ -107,7 +107,7 @@ func _get_text_range_regions(
 			continue
 
 		var line = text_edit.get_line(line_index)
-		var region := Rect2(-1, -1, 0, 0)
+		var region := Rect2i(-1, -1, 0, 0)
 
 		# Starting point of the first line is as reported by the error. For the following
 		# lines it's the first character in the line.

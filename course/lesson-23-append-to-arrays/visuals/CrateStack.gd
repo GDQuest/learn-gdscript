@@ -17,7 +17,7 @@ func use_top_crate():
 
 
 func _ready() -> void:
-	_initial_crates.invert()
+	_initial_crates.reverse()
 	var i:= 0
 	for crate in _initial_crates:
 		crate.set_label_index(i)

@@ -15,7 +15,7 @@ var cell := START_CELL
 func _ready() -> void:
 	_robot.cell_size = cell_size
 	_robot.cell = cell
-	update()
+	queue_redraw()
 
 
 func _run() -> void:
