@@ -9,7 +9,7 @@ const COLOR_GREY := Color("928fb8")
 @export var axis_increments := 50
 @export var show_speed := 400
 
-var _line
+var _line: Polygon = null
 var _points := []
 var _last_point := Vector2.ZERO
 # Need a draw offset as the scene is centered in lessons
@@ -20,7 +20,7 @@ var _draw_offset := Vector2(-graph_size.x / 2, graph_size.y/2)
 
 
 func _ready() -> void:
-	update()
+	queue_redraw()
 
 	if Engine.is_editor_hint():
 		return
@@ -61,7 +61,7 @@ func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	
-	update()
+	queue_redraw()
 
 
 func _change_sprite_position(new_position: Vector2) -> void:
@@ -70,7 +70,7 @@ func _change_sprite_position(new_position: Vector2) -> void:
 
 func _draw() -> void:
 	# Don't offset the graph in the editor as drawing curves won't line up
-	var draw_offset = Vector2.ZERO if Engine.is_editor_hint() else _draw_offset
+	var draw_offset := Vector2.ZERO if Engine.is_editor_hint() else _draw_offset
 
 	draw_line(Vector2.ZERO + draw_offset, Vector2(graph_size.x, 0) + draw_offset, COLOR_GREY, 4)
 	draw_line(Vector2.ZERO + draw_offset, Vector2(0, -graph_size.y) + draw_offset, COLOR_GREY, 4)
