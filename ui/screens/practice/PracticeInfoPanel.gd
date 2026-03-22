@@ -129,7 +129,7 @@ func _update_documentation() -> void:
 		return
 
 	var template_label := RichTextLabel.new()
-	template_label.fit_content_height = true
+	template_label.fit_content = true
 	template_label.bbcode_enabled = true
 	template_label.add_theme_font_override("normal_font", preload("res://ui/theme/fonts/font_documentation_normal.tres"))
 	template_label.add_theme_font_override("bold_font", preload("res://ui/theme/fonts/font_documentation_bold.tres"))

@@ -81,6 +81,13 @@ func _ready() -> void:
 	text_changed.connect(_on_text_changed)
 	draw.connect(_update_overlays)
 
+
+func _shortcut_input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if get_viewport().gui_get_focus_owner() == self:
+			get_viewport().set_input_as_handled()
+
+
 func _gui_input(event: InputEvent) -> void:
 	# Shortcut uses Enter by default which adds a new line in TextEdit without any means to stop it.
 	# So we remove it.
@@ -89,9 +96,6 @@ func _gui_input(event: InputEvent) -> void:
 
 	# Capture keyboard events if we are the focus owner, otherwise left arrow causes navigation events.
 	if event is InputEventKey:
-		if get_viewport().gui_get_focus_owner() == self and event.keycode == KEY_LEFT:
-			get_viewport().set_input_as_handled()
-
 		if event.is_pressed():
 			_last_typed_character = char(event.unicode)
 

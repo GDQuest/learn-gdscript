@@ -37,6 +37,7 @@ var REGEX_DIVSION_BY_ZERO := RegEx.new()
 @export var _practice_done_popup: PracticeDonePopup
 @export var _practice_leave_unfinished_popup: PracticeLeaveUnfinishedPopup
 @export var _code_editor: CodeEditor
+@export var _solution_editor: SliceEditor
 
 var _practice: BBCodeParser.ParseNode
 var _practice_completed := false
@@ -67,7 +68,7 @@ var _current_scene_reset_values := {
 var _scene_tween: Tween
 
 @onready var _documentation_panel := find_child("DocumentationPanel") as RichTextLabel
-@onready var _solution_editor := _code_editor.slice_editor
+
 
 
 func _init():
@@ -175,6 +176,8 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 	_set_script_slice(slice)
 	_code_editor.slice_editor.setup(_script_slice)
 	_code_editor.set_continue_allowed(false)
+	
+	print(_solution_editor == _code_editor.slice_editor)
 
 	_solution_editor.text = _script_slice.slice_text
 
