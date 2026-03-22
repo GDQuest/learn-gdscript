@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://dtvefdvy6gax0"]
 
-[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="FontFile" id=1]
-[ext_resource path="res://course/lesson-16-2d-vectors/visuals/triangle.png" type="Texture2D" id=2]
+[ext_resource type="FontVariation" uid="uid://cipfqcm3yp0sc" path="res://ui/theme/fonts/font_text_bold.tres" id="1"]
+[ext_resource type="Texture2D" uid="uid://deb8pkjn6cdae" path="res://course/lesson-16-2d-vectors/visuals/triangle.png" id="2"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
 @export var size := Vector2(300, 300)
@@ -44,36 +44,33 @@ func _draw():
 	
 "
 
-[node name="VectorVisual" type="Node2D"]
+[node name="VectorVisual" type="Node2D" unique_id=1296238667]
 
-[node name="VectorVisual" type="Node2D" parent="."]
-script = SubResource( 1 )
+[node name="VectorVisual" type="Node2D" parent="." unique_id=642921031]
+script = SubResource("1")
 
-[node name="ColorRect" type="ColorRect" parent="VectorVisual"]
+[node name="ColorRect" type="ColorRect" parent="VectorVisual" unique_id=1537471873]
 visible = false
-modulate = Color( 1, 1, 1, 0.584314 )
+modulate = Color(1, 1, 1, 0.584314)
 offset_left = -150.0
 offset_top = -150.0
 offset_right = 150.0
 offset_bottom = 150.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Label" type="Label" parent="VectorVisual"]
+[node name="Label" type="Label" parent="VectorVisual" unique_id=1549705797]
+custom_minimum_size = Vector2(150, 0)
 offset_left = 12.0
 offset_top = -149.0
 offset_right = 179.0
 offset_bottom = -121.0
-custom_minimum_size = Vector2( 150, 0 )
-theme_override_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 20
 text = "Vector2(100, 100)"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="LabelX" type="Label" parent="VectorVisual"]
+[node name="LabelX" type="Label" parent="VectorVisual" unique_id=1088780076]
+custom_minimum_size = Vector2(50, 0)
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -82,14 +79,13 @@ offset_left = 160.0
 offset_top = -14.0
 offset_right = 210.0
 offset_bottom = 14.0
-custom_minimum_size = Vector2( 50, 0 )
-theme_override_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 20
 text = "X"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="LabelY" type="Label" parent="VectorVisual"]
+[node name="LabelY" type="Label" parent="VectorVisual" unique_id=1453749389]
+custom_minimum_size = Vector2(50, 0)
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -98,27 +94,24 @@ offset_left = -25.0
 offset_top = 150.0
 offset_right = 25.0
 offset_bottom = 178.0
-custom_minimum_size = Vector2( 50, 0 )
-theme_override_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 20
 text = "Y"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
-[node name="TriangleX" type="Sprite2D" parent="VectorVisual"]
-position = Vector2( 150, 0 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+[node name="TriangleX" type="Sprite2D" parent="VectorVisual" unique_id=76324547]
+position = Vector2(150, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2")
 
-[node name="TriangleY" type="Sprite2D" parent="VectorVisual"]
-position = Vector2( 0, 150 )
+[node name="TriangleY" type="Sprite2D" parent="VectorVisual" unique_id=1549479524]
+position = Vector2(0, 150)
 rotation = 1.5708
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2")
 
-[node name="TriangleMouse" type="Sprite2D" parent="VectorVisual"]
-position = Vector2( 54, 111 )
+[node name="TriangleMouse" type="Sprite2D" parent="VectorVisual" unique_id=20630281]
+position = Vector2(54, 111)
 rotation = 1.5708
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2")

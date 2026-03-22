@@ -1,127 +1,100 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene format=3 uid="uid://duub37a4814w"]
 
-[ext_resource path="res://ui/components/popups/ConfirmPopup.gd" type="Script" id=1]
-[ext_resource path="res://ui/theme/fonts/font_title.tres" type="FontFile" id=2]
-[ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=4]
-[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=5]
-[ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=6]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=7]
-[ext_resource path="res://ui/theme/focus_accent.tres" type="StyleBox" id=8]
-[ext_resource path="res://ui/theme/button_outline_large_accent.tres" type="StyleBox" id=9]
+[ext_resource type="Script" uid="uid://250i3m14c23m" path="res://ui/components/popups/ConfirmPopup.gd" id="1"]
+[ext_resource type="FontVariation" uid="uid://bmjmlneuj5aky" path="res://ui/theme/fonts/font_title.tres" id="2"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="3"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="4"]
+[ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="5"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_hover.tres" id="6"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="7"]
+[ext_resource type="StyleBox" path="res://ui/theme/focus_accent.tres" id="8"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_accent.tres" id="9"]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.239216, 1, 0.431373, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-
-[node name="ConfirmPopup" type="ColorRect"]
+[node name="ConfirmPopup" type="ColorRect" unique_id=756091133]
+top_level = true
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 7 )
-color = Color( 0.0352941, 0.0392157, 0.129412, 0.627451 )
-script = ExtResource( 1 )
-min_size = Vector2( 0, 0 )
+theme = ExtResource("7")
+color = Color(0.0352941, 0.0392157, 0.129412, 0.627451)
+script = ExtResource("1")
+min_size = Vector2(0, 0)
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=619614391]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -228.0
-offset_top = -115.5
+offset_top = -117.5
 offset_right = 228.0
-offset_bottom = 115.5
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_bottom = 117.5
 
-[node name="Panel" type="Panel" parent="PanelContainer"]
-offset_right = 456.0
-offset_bottom = 231.0
-theme_override_styles/panel = ExtResource( 5 )
+[node name="Panel" type="Panel" parent="PanelContainer" unique_id=820301940]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("5")
 
-[node name="Column" type="VBoxContainer" parent="PanelContainer"]
-offset_right = 456.0
-offset_bottom = 231.0
+[node name="Column" type="VBoxContainer" parent="PanelContainer" unique_id=852746223]
+layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Column"]
-offset_right = 456.0
-offset_bottom = 16.0
-custom_minimum_size = Vector2( 0, 16 )
-theme_override_styles/fg = SubResource( 1 )
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Column" unique_id=2049633585]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
 value = 100.0
-percent_visible = false
 
-[node name="Margin" type="MarginContainer" parent="PanelContainer/Column"]
-offset_top = 16.0
-offset_right = 456.0
-offset_bottom = 231.0
+[node name="Margin" type="MarginContainer" parent="PanelContainer/Column" unique_id=1257634434]
+layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Column" type="VBoxContainer" parent="PanelContainer/Column/Margin"]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 436.0
-offset_bottom = 195.0
+[node name="Column" type="VBoxContainer" parent="PanelContainer/Column/Margin" unique_id=648955689]
+layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column"]
-offset_right = 416.0
-offset_bottom = 31.0
-theme_override_fonts/font = ExtResource( 2 )
-align = 1
+[node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column" unique_id=708395120]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
 
-[node name="Separator" type="HSeparator" parent="PanelContainer/Column/Margin/Column"]
-offset_left = 8.0
-offset_top = 43.0
-offset_right = 408.0
-offset_bottom = 51.0
-custom_minimum_size = Vector2( 400, 0 )
+[node name="Separator" type="HSeparator" parent="PanelContainer/Column/Margin/Column" unique_id=922258803]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Message" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column"]
-offset_top = 63.0
-offset_right = 416.0
-offset_bottom = 63.0
+[node name="Message" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=1247922643]
+layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
 
-[node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column"]
-offset_top = 75.0
-offset_right = 416.0
-offset_bottom = 95.0
-custom_minimum_size = Vector2( 400, 20 )
+[node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column" unique_id=1185924261]
+custom_minimum_size = Vector2(400, 20)
+layout_mode = 2
 
-[node name="Buttons" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column"]
-offset_top = 107.0
-offset_right = 416.0
-offset_bottom = 175.0
+[node name="Buttons" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column" unique_id=1140309167]
+layout_mode = 2
 alignment = 1
 
-[node name="ConfirmButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons"]
-offset_right = 200.0
-offset_bottom = 68.0
-custom_minimum_size = Vector2( 200, 68 )
-mouse_default_cursor_shape = 2
+[node name="ConfirmButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons" unique_id=900963321]
+custom_minimum_size = Vector2(200, 68)
+layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_hover_color = Color( 0.239216, 1, 0.431373, 1 )
-theme_override_colors/font_pressed_color = Color( 0.239216, 1, 0.431373, 1 )
-theme_override_styles/hover = ExtResource( 9 )
-theme_override_styles/pressed = ExtResource( 9 )
-theme_override_styles/focus = ExtResource( 8 )
-theme_override_styles/normal = ExtResource( 4 )
+mouse_default_cursor_shape = 2
+theme_override_colors/font_pressed_color = Color(0.239216, 1, 0.431373, 1)
+theme_override_colors/font_hover_color = Color(0.239216, 1, 0.431373, 1)
+theme_override_styles/normal = ExtResource("4")
+theme_override_styles/pressed = ExtResource("9")
+theme_override_styles/hover = ExtResource("9")
+theme_override_styles/focus = ExtResource("8")
 text = "Confirm"
 
-[node name="CancelButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons"]
-offset_left = 216.0
-offset_right = 416.0
-offset_bottom = 68.0
-custom_minimum_size = Vector2( 200, 68 )
-mouse_default_cursor_shape = 2
+[node name="CancelButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons" unique_id=845867234]
+custom_minimum_size = Vector2(200, 68)
+layout_mode = 2
 size_flags_horizontal = 4
-theme_override_styles/hover = ExtResource( 6 )
-theme_override_styles/pressed = ExtResource( 3 )
-theme_override_styles/normal = ExtResource( 4 )
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("4")
+theme_override_styles/pressed = ExtResource("3")
+theme_override_styles/hover = ExtResource("6")
 text = "Cancel"

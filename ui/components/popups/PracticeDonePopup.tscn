@@ -73,6 +73,7 @@ layout_mode = 2
 [node name="Title" type="Label" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=619585571]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 42
 text = "Well done!"
 horizontal_alignment = 1
 
@@ -80,6 +81,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 26
 text = "You completed the practice."
 horizontal_alignment = 1
 
@@ -88,9 +90,13 @@ layout_mode = 2
 size_flags_vertical = 0
 theme_override_fonts/normal_font = ExtResource("4")
 theme_override_fonts/bold_font = ExtResource("12")
+theme_override_font_sizes/normal_font_size = 26
+theme_override_font_sizes/bold_font_size = 26
 bbcode_enabled = true
-text = "Stay and play around,
-or continue the course."
+text = "[b]Stay[/b] and play around,
+or [b]continue[/b] the course."
+fit_content = true
+horizontal_alignment = 1
 
 [node name="Spacer2" type="Control" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=1518012346]
 custom_minimum_size = Vector2(400, 8)

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ca4ktnbc30i1y"]
 
 [ext_resource type="Texture2D" uid="uid://cbj6vio5dq060" path="res://ui/screens/welcome_screen/background.png" id="1"]
-[ext_resource type="Theme" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://dmcpuk8fejld8" path="res://ui/screens/practice/gdquestboy_frame_main_menu.tres" id="3"]
 [ext_resource type="Texture2D" uid="uid://m003a0rm27w4" path="res://ui/screens/welcome_screen/title.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://by3dlo6kxjw1f" path="res://ui/screens/welcome_screen/title_background.png" id="6"]
@@ -227,6 +227,11 @@ cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
 cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
+cache/0/20/0/ascent = 0.0
+cache/0/20/0/descent = 0.0
+cache/0/20/0/underline_position = 0.0
+cache/0/20/0/underline_thickness = 0.0
+cache/0/20/0/scale = 1.0
 
 [sub_resource type="Animation" id="2"]
 length = 0.001
@@ -655,6 +660,7 @@ mouse_default_cursor_shape = 2
 theme = ExtResource("2")
 theme_override_colors/font_disabled_color = Color(0.572549, 0.560784, 0.721569, 1)
 theme_override_fonts/font = ExtResource("12")
+theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("10")
 theme_override_styles/disabled = SubResource("4")
@@ -668,6 +674,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_disabled_color = Color(0.572549, 0.560784, 0.721569, 1)
 theme_override_fonts/font = ExtResource("12")
+theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("10")
 theme_override_styles/disabled = SubResource("4")
@@ -680,6 +687,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_disabled_color = Color(0.572549, 0.560784, 0.721569, 1)
 theme_override_fonts/font = ExtResource("12")
+theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("10")
 theme_override_styles/disabled = SubResource("4")
@@ -693,6 +701,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_disabled_color = Color(0.572549, 0.560784, 0.721569, 1)
 theme_override_fonts/font = ExtResource("12")
+theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/pressed = ExtResource("9")
 theme_override_styles/hover = ExtResource("10")
@@ -706,6 +715,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_disabled_color = Color(0.572549, 0.560784, 0.721569, 1)
 theme_override_fonts/font = ExtResource("12")
+theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("10")
 theme_override_styles/disabled = SubResource("4")
@@ -724,18 +734,22 @@ size_flags_vertical = 8
 
 [node name="GDQuestLogo" parent="GDQuestBoy/Control" unique_id=458201937 instance=ExtResource("15")]
 modulate = Color(0.572549, 0.560784, 0.721569, 1)
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -73.0
-offset_top = -22.5
-offset_right = 73.0
-offset_bottom = 22.5
+offset_left = -89.63843
+offset_top = -20.5
+offset_right = 92.36157
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TitleBackground" type="TextureRect" parent="." unique_id=1579689017]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -747,11 +761,15 @@ offset_bottom = -109.0
 texture = ExtResource("6")
 
 [node name="Title" type="TextureRect" parent="TitleBackground" unique_id=1558095791]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("5")
-stretch_mode = 4
+expand_mode = 1
+stretch_mode = 3
 
 [node name="StarGreen" parent="TitleBackground/Title" unique_id=457109377 instance=ExtResource("13")]
 layout_mode = 0

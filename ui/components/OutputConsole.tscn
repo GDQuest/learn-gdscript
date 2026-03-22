@@ -3,8 +3,8 @@
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://ymps5jnfq2a3" path="res://ui/components/OutputConsole.gd" id="2"]
 [ext_resource type="FontVariation" uid="uid://buul432qy6di5" path="res://ui/theme/fonts/font_title_small.tres" id="3"]
-[ext_resource type="PackedScene" path="res://ui/components/popups/ExternalErrorPopup.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://ui/components/popups/ErrorOverlayPopup.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://crxjfqc0u6cof" path="res://ui/components/popups/ExternalErrorPopup.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://dnix44no1xkey" path="res://ui/components/popups/ErrorOverlayPopup.tscn" id="5"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="6"]
 [ext_resource type="Script" uid="uid://dmptnpr0crwmq" path="res://ui/components/SmoothScrollContainer.gd" id="7"]
 
@@ -40,6 +40,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
 theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 20
 text = "Output"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=1426649461]
@@ -59,7 +60,6 @@ layout_mode = 2
 color = Color(0.0352941, 0.0392157, 0.129412, 0.313726)
 
 [node name="ErrorOverlayPopup" parent="ErrorPopup" unique_id=2013705554 instance=ExtResource("5")]
-visible = false
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5

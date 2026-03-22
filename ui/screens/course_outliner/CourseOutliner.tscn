@@ -5,8 +5,8 @@
 [ext_resource type="FontVariation" uid="uid://bmjmlneuj5aky" path="res://ui/theme/fonts/font_title.tres" id="3"]
 [ext_resource type="PackedScene" path="res://ui/screens/course_outliner/CourseLessonList.tscn" id="4"]
 [ext_resource type="FontVariation" uid="uid://d3ldpsb1178ju" path="res://ui/theme/fonts/font_title_slim.tres" id="5"]
-[ext_resource type="PackedScene" path="res://ui/screens/course_outliner/CourseLessonDetails.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://ui/components/popups/ConfirmPopup.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://dcf1t6y5lr4oe" path="res://ui/screens/course_outliner/CourseLessonDetails.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://duub37a4814w" path="res://ui/components/popups/ConfirmPopup.tscn" id="7"]
 
 [node name="CourseOutliner" type="PanelContainer" unique_id=695105099 node_paths=PackedStringArray("_title_label", "_lesson_list", "_lesson_details", "_reset_button", "_reset_confirm_popup")]
 anchors_preset = 15
@@ -41,11 +41,13 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/Layout/TitleBox" unique_id=162856062]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5")
+theme_override_font_sizes/font_size = 24
 text = "Course Index - "
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/Layout/TitleBox" unique_id=1650628784]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 24
 text = "Course Title Goes Here"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Layout" unique_id=1089064792]
@@ -76,7 +78,6 @@ layout_mode = 2
 
 [node name="ConfirmResetPopup" parent="." unique_id=311974735 instance=ExtResource("7")]
 visible = false
-top_level = true
 layout_mode = 2
 title = "Confirm Resetting Progress"
 text_content = "[center]Are you sure you want to reset the course progress?

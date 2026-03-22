@@ -1,31 +1,23 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://c8xsfa324lx16"]
 
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/lesson-21-strings/string_error/StringError.gd" type="Script" id=2]
-[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="FontFile" id=3]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="1"]
+[ext_resource type="Script" uid="uid://brokelv6jp2j0" path="res://course/lesson-21-strings/string_error/StringError.gd" id="2"]
+[ext_resource type="FontVariation" uid="uid://cipfqcm3yp0sc" path="res://ui/theme/fonts/font_text_bold.tres" id="3"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+[node name="StringError" unique_id=1144351778 instance=ExtResource("1")]
+script = ExtResource("2")
 
-[node name="StringError" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[node name="Camera2D" type="Camera2D" parent="." index="4" unique_id=383139623]
 
-[node name="AnimationTree" parent="." index="3"]
-parameters/playback = SubResource( 1 )
-
-[node name="Camera2D" type="Camera2D" parent="." index="4"]
-current = true
-
-[node name="Label" type="Label" parent="." index="5"]
+[node name="Label" type="Label" parent="." index="5" unique_id=1516205708]
+clip_contents = true
 offset_left = -250.0
 offset_top = -127.0
 offset_right = 250.0
 offset_bottom = -99.0
-clip_contents = true
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource( 3 )
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 20
 text = "INVALID NAME"
-align = 1
+horizontal_alignment = 1
 clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}

@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://ccf4uf5trovhg"]
 
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/theme/fonts/font_text_italics.tres" type="FontFile" id=4]
-[ext_resource path="res://ui/theme/quiz_outline_neutral.tres" type="StyleBox" id=5]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="1"]
+[ext_resource type="FontVariation" uid="uid://csxfhsek43h8q" path="res://ui/theme/fonts/font_text_italics.tres" id="4"]
+[ext_resource type="StyleBox" path="res://ui/theme/quiz_outline_neutral.tres" id="5"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
 @onready var _animation_tree := find_child(\"AnimationTree\")
@@ -13,48 +13,30 @@ func _ready() -> void:
 	_animation_tree.travel(\"saying_hi\")
 "
 
-[node name="RobotToolTip" type="PanelContainer"]
+[node name="RobotToolTip" type="PanelContainer" unique_id=1756752325]
+custom_minimum_size = Vector2(400, 250)
 offset_right = 320.0
 offset_bottom = 251.0
-custom_minimum_size = Vector2( 400, 250 )
-theme_override_styles/panel = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme_override_styles/panel = ExtResource("5")
 
-[node name="Robot" parent="." instance=ExtResource( 1 )]
-position = Vector2( 196, 166 )
-script = SubResource( 1 )
+[node name="Robot" parent="." unique_id=1178863534 instance=ExtResource("1")]
+position = Vector2(196, 166)
+script = SubResource("1")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 396.0
-offset_bottom = 247.0
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1119867774]
+layout_mode = 2
 
-[node name="Control2" type="Control" parent="CenterContainer"]
-offset_left = 146.0
-offset_top = 71.0
-offset_right = 246.0
-offset_bottom = 171.0
-custom_minimum_size = Vector2( 100, 100 )
+[node name="Control2" type="Control" parent="CenterContainer" unique_id=55781742]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
 tooltip_text = "This is a hint."
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Label" type="Label" parent="."]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 396.0
-offset_bottom = 247.0
-custom_minimum_size = Vector2( 392, 28 )
+[node name="Label" type="Label" parent="." unique_id=1884073496]
+custom_minimum_size = Vector2(392, 28)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 13
-theme_override_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 20
 text = "Hover over the Robot to learn more"
-align = 1
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1

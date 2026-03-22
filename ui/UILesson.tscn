@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://qkdafe3ywysu"]
 
-[ext_resource type="Theme" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://bvhqoj5m0qrs1" path="res://ui/UILesson.gd" id="2"]
 [ext_resource type="StyleBox" path="res://ui/theme/vscrollbar_large_scroll.tres" id="3"]
 [ext_resource type="FontVariation" uid="uid://ehys7a6horyb" path="res://ui/theme/fonts/font_title_big.tres" id="4"]
@@ -9,7 +9,7 @@
 [ext_resource type="StyleBox" path="res://ui/theme/vscrollbar_large_grabber_highlight.tres" id="7"]
 [ext_resource type="StyleBox" path="res://ui/theme/vscrollbar_large_grabber_pressed.tres" id="8"]
 [ext_resource type="Script" uid="uid://dmptnpr0crwmq" path="res://ui/components/SmoothScrollContainer.gd" id="9"]
-[ext_resource type="PackedScene" path="res://ui/components/GlossaryPopup.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://cwpkb454y13jm" path="res://ui/components/GlossaryPopup.tscn" id="10"]
 
 [sub_resource type="StyleBoxEmpty" id="1"]
 
@@ -77,6 +77,7 @@ theme_override_constants/separation = 6
 [node name="Title" type="Label" parent="OuterMargin/ScrollContainer/InnerMargin/Content" unique_id=1803172284 groups=["navigation_text"]]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 32
 text = "Title"
 horizontal_alignment = 1
 
@@ -103,6 +104,7 @@ theme_override_constants/separation = 30
 [node name="PracticesTitle" type="Label" parent="OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer" unique_id=877169471 groups=["navigation_text"]]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 32
 text = "Practices"
 horizontal_alignment = 1
 

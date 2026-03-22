@@ -4,8 +4,8 @@
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
 [ext_resource type="PackedScene" uid="uid://ohy3872ur1jh" path="res://ui/LoadingScreen.tscn" id="3"]
 [ext_resource type="Script" uid="uid://dyaj5wfakxepp" path="res://ui/UICore.gd" id="4"]
-[ext_resource type="PackedScene" path="res://ui/components/popups/ReportFormPopup.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://ui/components/popups/SettingsPopup.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://dxc8hjg7r2d7w" path="res://ui/components/popups/ReportFormPopup.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://dcl81wj587ph8" path="res://ui/components/popups/SettingsPopup.tscn" id="6"]
 
 [node name="UICore" type="Control" unique_id=1773901745 node_paths=PackedStringArray("_pages", "_loading_screen", "_welcome_screen", "_settings_screen", "_course_screen", "_settings_popup", "_report_form_popup")]
 process_mode = 3
@@ -60,7 +60,5 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="ReportFormPopup" parent="." unique_id=1845654964 instance=ExtResource("5")]
-visible = false
 
 [node name="SettingsPopup" parent="." unique_id=1766831282 instance=ExtResource("6")]
-visible = false
