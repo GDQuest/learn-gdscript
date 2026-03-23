@@ -24,7 +24,7 @@ GODOT_EXPORT_PRESET_NAMES = {
 }
 
 # Make sure it matches what's in the Github workflow, ExportGodot.yaml
-GODOT_BINARY_NAME = "godot.linuxbsd.editor.x86_64"
+GODOT_BINARY_NAME = "godot_server.x86_64"
 
 
 class BuildInfo:
@@ -163,8 +163,8 @@ def download_godot_and_templates():
     repo = build_info.templates_repo
 
     print("Downloading Godot headless build...")
-    headless_url = f"https://github.com/{repo}/releases/download/learn-{version}/godot-learn.{version}.headless.zip"
-    headless_zip = f"godot-learn.{version}.headless.zip"
+    headless_url = f"https://github.com/{repo}/releases/download/learn-{version}/godot-learn.{version}.editor.zip"
+    headless_zip = f"godot-learn.{version}.editor.zip"
 
     urllib.request.urlretrieve(headless_url, headless_zip)
     with zipfile.ZipFile(headless_zip, "r") as archive:
@@ -182,7 +182,7 @@ def download_godot_and_templates():
         archive.extractall("templates")
     os.remove(templates_zip)
 
-    source_file = "godot_server.x11.opt.tools.64"
+    source_file = "godot.linuxbsd.editor.x86_64"
 
     if not os.path.exists(source_file):
         print(f"Error: {source_file} not found after download")
