@@ -17,14 +17,14 @@ from datetime import datetime
 from pathlib import Path
 
 GODOT_EXPORT_PRESET_NAMES = {
-    "linux": "Linux/X11",
+    "linux": "Linux",
     "windows": "Windows Desktop",
-    "osx": "Mac OSX",
-    "web": "HTML5",
+    "osx": "macOS",
+    "web": "Web",
 }
 
 # Make sure it matches what's in the Github workflow, ExportGodot.yaml
-GODOT_BINARY_NAME = "godot_server.x86_64"
+GODOT_BINARY_NAME = "godot.linuxbsd.editor.x86_64"
 
 
 class BuildInfo:
@@ -305,7 +305,7 @@ const build_date := "{build_info.build_date_iso}";
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
     run_command(
-        f'./{GODOT_BINARY_NAME} --quiet --no-window --export-debug "{GODOT_EXPORT_PRESET_NAMES[platform]}" "{output_path}"'
+        f'./{GODOT_BINARY_NAME} --headless --quiet --no-window --export-debug "{GODOT_EXPORT_PRESET_NAMES[platform]}" "{output_path}"'
     )
 
     if platform == "web":
