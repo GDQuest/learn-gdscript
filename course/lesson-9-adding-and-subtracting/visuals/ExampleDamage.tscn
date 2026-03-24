@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://tahih8ses8et"]
 
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=3]
-[ext_resource path="res://course/common/CustomHealthBar.tscn" type="PackedScene" id=4]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://course/common/CustomHealthBar.tscn" id="4"]
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id="2"]
 script/source = "extends Node2D
 
 var initial_health := 75
@@ -15,7 +15,7 @@ var health := initial_health
 
 
 func _ready() -> void:
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	_health_bar.set_health(health)
 
 
@@ -30,42 +30,28 @@ func reset() -> void:
 	health = initial_health
 "
 
-[node name="ExampleDamage" type="PanelContainer"]
+[node name="ExampleDamage" type="PanelContainer" unique_id=1009526514]
+custom_minimum_size = Vector2(0, 340)
 offset_right = 1047.0
 offset_bottom = 298.0
-custom_minimum_size = Vector2( 0, 340 )
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 1040.0
-offset_bottom = 333.0
+[node name="RunnableCodeExample" parent="." unique_id=367294789 instance=ExtResource("2")]
+layout_mode = 2
 gdscript_code = "func take_damage(amount):
 	health -= amount"
 
-[node name="Frame" parent="RunnableCodeExample" index="0"]
-offset_right = 514.0
-offset_bottom = 326.0
-
-[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-offset_right = 262.0
+[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" parent_id_path=PackedInt32Array(367294789, 1323725507) index="1" unique_id=1248061364]
 text = "take_damage(25)"
 
-[node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
+[node name="GDScriptCode" parent="RunnableCodeExample" index="1" unique_id=175998401]
 visible = true
-offset_left = 518.0
-offset_right = 1033.0
-offset_bottom = 326.0
 text = "func take_damage(amount):
 	health -= amount"
 
-[node name="Robot" parent="RunnableCodeExample" instance=ExtResource( 3 )]
-script = SubResource( 2 )
+[node name="Robot" parent="RunnableCodeExample" unique_id=1421040461 instance=ExtResource("3")]
+script = SubResource("2")
 
-[node name="CustomHealthBar" parent="RunnableCodeExample/Robot" instance=ExtResource( 4 )]
+[node name="CustomHealthBar" parent="RunnableCodeExample/Robot" unique_id=1609615000 instance=ExtResource("4")]
 
 [editable path="RunnableCodeExample"]

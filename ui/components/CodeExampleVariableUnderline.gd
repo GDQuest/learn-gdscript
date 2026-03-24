@@ -7,6 +7,8 @@ const TWEEN_DURATION := 0.2
 
 @export var font_resource: Resource
 @export var font_size: int
+@export var _mouse_blocker: Control
+@export var _label: Label
 
 var highlight_rect := Rect2(): set = set_highlight_rect
 var variable_name := ""
@@ -15,8 +17,6 @@ var highlight_line := -1
 var highlight_column := -1
 
 @onready var _scene_instance: Node
-@export var _mouse_blocker: Control
-@export var _label: Label
 
 
 func _ready() -> void:
@@ -41,7 +41,7 @@ func set_highlight_rect(value) -> void:
 
 func _update_label_text():
 	_label.text = str(_scene_instance.get(variable_name))
-	_label.size = _label.get_font("font").get_string_size(_label.text)
+	_label.size = _label.get_theme_font("font").get_string_size(_label.text)
 	_label.position.x = (_mouse_blocker.size.x / 2 - _label.size.x / 2)
 
 

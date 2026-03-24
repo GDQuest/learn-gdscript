@@ -126,9 +126,10 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 		var type = BBCodeUtils.get_lesson_block_type(lesson, i)
 		if type == BBCodeParserData.Tag.STRING:
 			var instance: UIContentBlock = ContentBlockScene.instantiate()
-			instance.name = "_generated_string_%s" % i
 			_content_blocks.add_child(instance)
 			var content: String = lesson.children[i]
+			var instance_name: String = BBCodeUtils._to_snake_case(content.substr(0, 30 if content.length() > 30 else content.length()))
+			instance.name = instance_name
 			instance.setup(content, lesson, i)
 			instance.hide()
 		else:

@@ -23,6 +23,7 @@ func draw_square(length):
 
 
 func _ready() -> void:
+	super._ready()
 	if not turtle_finished.is_connected(_complete_run):
 		turtle_finished.connect(_complete_run)
 

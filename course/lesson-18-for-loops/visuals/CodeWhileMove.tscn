@@ -1,26 +1,17 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene format=3 uid="uid://cal0fe0i40bat"]
 
-[ext_resource path="res://course/common/GDScriptCodeExample.gd" type="Script" id=1]
-
-[node name="CodeWhileRobot" type="TextEdit"]
+[node name="CodeWhileRobot" type="CodeEdit" unique_id=1197454145]
+custom_minimum_size = Vector2(300, 210)
+anchors_preset = 10
 anchor_right = 1.0
 offset_right = -1620.0
-offset_bottom = 60.0
-custom_minimum_size = Vector2( 300, 210 )
+offset_bottom = 210.0
 size_flags_horizontal = 3
 text = "func move_to_end():
 	while cell.x < board_size.x - 1:
 		cell.x += 1"
-readonly = true
-syntax_highlighter = true
-show_line_numbers = true
-draw_tabs = true
-draw_spaces = true
 context_menu_enabled = false
 shortcut_keys_enabled = false
-smooth_scrolling = true
-wrap_enabled = true
-caret_block_mode = true
 caret_blink = true
-script = ExtResource( 1 )
-min_size = Vector2( 300, 210 )
+draw_tabs = true
+draw_spaces = true

@@ -13,11 +13,6 @@ const CodeExampleVariableUnderlineScene := preload("res://ui/components/CodeExam
 const ERROR_NO_RUN_FUNCTION := "Scene %s doesn't have a run() function. The Run button won't work."
 const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/hslider_grabber_highlight.tres")
 
-@export var scene: PackedScene: set = set_scene
-@export var gdscript_code := "": set = set_code
-@export var center_in_frame := true: set = set_center_in_frame
-@export var run_button_label := "": set = set_run_button_label
-
 @export var _gdscript_text_edit: CodeEdit
 @export var _run_button: Button
 @export var _step_button: Button
@@ -25,6 +20,11 @@ const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/hslider_
 @export var _frame_container: Control
 @export var _sliders: VBoxContainer
 @export var _buttons_container: HBoxContainer
+
+@export var scene: PackedScene: set = set_scene
+@export var center_in_frame := true: set = set_center_in_frame
+@export var run_button_label := "": set = set_run_button_label
+@export_multiline var gdscript_code := "": set = set_code
 
 var _scene_instance: CanvasItem: set = _set_scene_instance
 
@@ -50,6 +50,7 @@ func _ready() -> void:
 	_frame_container.resized.connect(_center_scene_instance)
 
 	CodeEditorEnhancer.enhance(_gdscript_text_edit)
+	CodeEditorEnhancer.prevent_editable(_gdscript_text_edit)
 	if not _gdscript_text_edit.syntax_highlighter.has_color_region("[="):
 		_gdscript_text_edit.syntax_highlighter.add_color_region("[=", "]", CodeEditorEnhancer.COLOR_COMMENTS)
 
@@ -59,7 +60,7 @@ func _ready() -> void:
 	# RunnableCodeExample, we use this as the scene instance.
 	#
 	# This simplifies the process of creating code examples.
-	if not Engine.is_editor_hint() and not scene and get_child_count() > 2:
+	if not Engine.is_editor_hint() and not scene and get_child_count() > 1:
 		var last_child = get_child(get_child_count() - 1)
 		assert(last_child != _gdscript_text_edit and last_child != _frame_container)
 		remove_child(last_child)
@@ -85,16 +86,16 @@ func run() -> void:
 	assert(
 		_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()]
 	)
-	if _scene_instance.has_meta("reset") and _debugger:
-		_scene_instance.reset()
-	
 	var is_coroutine := _scene_instance.has_signal("coroutine_finished")
+	if _scene_instance.has_method("reset") and _debugger and not _coroutine_running:
+		_scene_instance.reset()
+		if is_coroutine:
+			_scene_instance.disconnect("coroutine_finished", _finish_coroutine)
+	
 	if not _coroutine_running:
 		if is_coroutine:
 			_coroutine_running = true
-			_scene_instance.coroutine_finished.connect(func() -> void:
-				_coroutine_running = false
-			)
+			_scene_instance.connect("coroutine_finished", _finish_coroutine)
 		_scene_instance.run()
 		if _scene_instance.has_method("wrap_inside_frame"):
 			_scene_instance.wrap_inside_frame(_frame_container.get_rect())
@@ -111,22 +112,23 @@ func run() -> void:
 	code_updated.emit()
 	_clear_animated_arrows()
 
+
 # Called when pressing the Step button. Available only on examples that contain
 # calls to yield().
 func step() -> void:
 	assert(
 		_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()]
 	)
-	if _scene_instance.has_method("reset") and _debugger:
-		_scene_instance.reset()
-	
 	var is_coroutine := _scene_instance.has_signal("coroutine_finished")
+	if _scene_instance.has_method("reset") and _debugger and not _coroutine_running:
+		_scene_instance.reset()
+		if is_coroutine:
+			_scene_instance.disconnect("coroutine_finished", _finish_coroutine)
+	
 	if not _coroutine_running:
 		if is_coroutine:
 			_coroutine_running = true
-			_scene_instance.coroutine_finished.connect(func() -> void:
-				_coroutine_running = false
-			)
+			_scene_instance.connect("coroutine_finished", _finish_coroutine)
 		_scene_instance.run()
 		if _scene_instance.has_method("wrap_inside_frame"):
 			# warning-ignore:unsafe_method_access
@@ -139,6 +141,10 @@ func step() -> void:
 		if not _coroutine_running:
 			_gdscript_text_edit.highlight_current_line = false
 	emit_signal("code_updated")
+
+
+func _finish_coroutine() -> void:
+	_coroutine_running = false
 
 
 func reset() -> void:
@@ -172,7 +178,7 @@ func set_scene(new_scene: PackedScene) -> void:
 		_scene_instance.queue_free()
 
 	if scene:
-		_set_scene_instance(scene.instance())
+		_set_scene_instance(scene.instantiate())
 
 
 func set_center_in_frame(value: bool) -> void:
@@ -267,7 +273,7 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	if script == null:
 		_step_button.hide()
 	else:
-		_step_button.visible = _scene_instance.get_script().source_code.find("yield()") >= 0
+		_step_button.visible = _scene_instance.get_script().source_code.find("await ") >= 0
 
 	if not _run_button.visible:
 		printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.scene_file_path])
@@ -309,7 +315,7 @@ func _reset_monitored_variable_highlights():
 	# Create widgets that underline a variable and display a variable's value
 	# when hovering with the mouse.
 	var monitored_variables := _debugger.monitored_variables
-	var offset := Vector2(_gdscript_text_edit.position.x, 0.0)
+	var offset := Vector2i(_gdscript_text_edit.position.x, 0)
 
 	for variable_name in monitored_variables:
 		var last_line := 0
@@ -322,10 +328,10 @@ func _reset_monitored_variable_highlights():
 			var is_result_in_column_before := false
 
 			if result != Vector2i(-1, -1):
-				is_result_in_line_before = result.x < last_line
+				is_result_in_line_before = result.y < last_line
 				is_result_in_column_before = (
-					result.y < last_column
-					and result.x <= last_line
+					result.x < last_column
+					and result.y <= last_line
 				)
 
 			if result == Vector2i(-1, -1):
@@ -333,8 +339,8 @@ func _reset_monitored_variable_highlights():
 			elif is_result_in_line_before or is_result_in_column_before:
 				last_line = -1
 			else:
-				last_line = result.x
-				last_column = result.y
+				last_line = result.y
+				last_column = result.x
 
 				var rect = _gdscript_text_edit.get_rect_at_line_column(last_line, last_column)
 				rect.position += offset

@@ -20,6 +20,7 @@ class_name MiniGDScriptTokenizer
 
 const TOKEN_FUNC_DECLARATION := "function_declaration"
 const TOKEN_FUNC_CALL := "function_call"
+const TOKEN_FUNC_SUPER_CALL := "function_super_call"
 const TOKEN_WHILE_LOOP := "while_loop"
 const TOKEN_BREAK := "break_statement"
 const TOKEN_ASSIGNMENT := "assignment"
@@ -40,11 +41,13 @@ var _token_order := [
 	TOKEN_WHILE_LOOP,
 	TOKEN_BREAK,
 	TOKEN_ASSIGNMENT,
+	TOKEN_FUNC_SUPER_CALL,
 	TOKEN_FUNC_CALL,
 ]
 
 var _available_tokens := {
 	TOKEN_FUNC_DECLARATION: "^func\\s+(?<func_name>[a-zA-Z_].*?)(?:\\(\\s*(?:(?<args>[^)]+)[,)])*|\\):)",
+	TOKEN_FUNC_SUPER_CALL: "\\t.*?\\s?super\\.(?<func_name>[a-zA-Z_][a-zA-Z0-9_]+)\\(\\s*(?<params>.*?)\\s*\\)",
 	TOKEN_FUNC_CALL: "\\t.*?\\s?(?<func_name>[a-zA-Z_][a-zA-Z0-9_]+)\\(\\s*(?<params>.*?)\\s*\\)",
 	TOKEN_WHILE_LOOP: "^\\s*while\\s*\\(?\\s*(?<condition>.+?)\\s*\\)?\\s*:",
 	TOKEN_BREAK: "^\\s*(?<keyword>break)\\s*$",

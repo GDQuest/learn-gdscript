@@ -1,27 +1,30 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://6h34m3y7lj87"]
 
-[ext_resource path="res://ui/components/OutputConsole.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/components/RunnableCodeExampleDebugger.tscn" type="PackedScene" id=3]
+[ext_resource type="PackedScene" uid="uid://b0sm7ot8y7ae2" path="res://ui/components/OutputConsole.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://b1on88gerd51a" path="res://ui/components/RunnableCodeExampleDebugger.tscn" id="3"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends OutputConsole
+
+signal coroutine_step_requested
+signal coroutine_finished
 
 @onready var health = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
 
 
 func run():
 	emit_signal(\"line_highlight_requested\", 0)
-	yield()
+	await coroutine_step_requested
 	health = 100
 	emit_signal(\"line_highlight_requested\", 1)
-	yield()
+	await coroutine_step_requested
 	health = 50
 	emit_signal(\"line_highlight_requested\", 2)
-	yield()
+	await coroutine_step_requested
 	emit_signal(\"line_highlight_requested\", 3)
 	print_output([health])
-	yield()
+	coroutine_finished.emit()
 
 
 func reset() -> void:
@@ -29,29 +32,23 @@ func reset() -> void:
 	health = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
 "
 
-[node name="PanelContainer" type="VBoxContainer"]
+[node name="PanelContainer" type="VBoxContainer" unique_id=494110108]
 offset_right = 14.0
 offset_bottom = 14.0
 size_flags_horizontal = 3
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
-offset_right = 781.0
-offset_bottom = 260.0
+[node name="RunnableCodeExample" parent="." unique_id=303303277 instance=ExtResource("2")]
+layout_mode = 2
 gdscript_code = "func run():
 	var health = 100
 	health = 50
 	print(health)"
 
-[node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 672.0
-offset_right = 781.0
-offset_bottom = 260.0
+[node name="OutputConsole" parent="RunnableCodeExample" unique_id=1990000959 instance=ExtResource("1")]
+layout_mode = 2
 size_flags_horizontal = 3
-script = SubResource( 1 )
+script = SubResource("1")
 
-[node name="RunnableCodeExampleDebugger" parent="." instance=ExtResource( 3 )]
-offset_top = 264.0
-offset_bottom = 330.0
-monitored_variables = [ "health" ]
+[node name="RunnableCodeExampleDebugger" parent="." unique_id=434264047 instance=ExtResource("3")]
+layout_mode = 2
+monitored_variables = ["health"]

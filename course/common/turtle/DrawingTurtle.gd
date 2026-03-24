@@ -47,6 +47,7 @@ func _ready() -> void:
 	if get_parent() is SubViewport:
 		_camera.set_as_top_level(true)
 		_camera.position = global_position
+		_camera.enabled = true
 		_camera.make_current()
 
 
@@ -183,6 +184,7 @@ func play_draw_animation() -> void:
 				tween_start_time += duration
 	for line in _canvas.get_children():
 		line.start()
+	_scene_tween.tween_callback(turtle_finished.emit).set_delay(tween_start_time)
 
 
 # Returns the total bounding rectangle enclosing all the turtle's drawn

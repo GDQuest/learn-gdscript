@@ -67,6 +67,7 @@ const KEYWORDS := [
 	"true", "false",
 	
 	# Global GDScript namespace.
+	"await",
 	"Color8",
 	"ColorN",
 	"abs",
@@ -146,7 +147,6 @@ const KEYWORDS := [
 	"weakref",
 	"wrapf",
 	"wrapi",
-	"yield",
 	
 	"PI", "TAU", "INF", "NAN",
 	

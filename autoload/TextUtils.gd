@@ -95,7 +95,7 @@ func bbcode_add_code_color(text := "") -> String:
 		if colored_string == "":
 			colored_string = match_string
 		colored_string = "[code]" + colored_string + "[/code]"
-		text.erase(index_offset, initial_length)
+		text = text.erase(index_offset, initial_length)
 		text = text.insert(index_offset, colored_string)
 		index_delta += (colored_string.length() - initial_length)
 

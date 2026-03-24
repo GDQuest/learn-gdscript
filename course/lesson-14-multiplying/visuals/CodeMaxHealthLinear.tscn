@@ -1,32 +1,23 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene format=3 uid="uid://hquivg21dxk6"]
 
-[ext_resource path="res://course/common/GDScriptCodeExample.gd" type="Script" id=1]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
+[ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
 
-[node name="CodeMaxHealthLinear" type="TextEdit"]
+[node name="CodeMaxHealthLinear" type="CodeEdit" unique_id=1698756003]
+custom_minimum_size = Vector2(600, 150)
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -1264.0
-offset_bottom = -940.0
-custom_minimum_size = Vector2( 600, 150 )
+offset_bottom = -930.0
 size_flags_horizontal = 3
-theme = ExtResource( 2 )
+theme = ExtResource("2")
 text = "func level_up():
 	level += 1
 	max_health += 5"
-readonly = true
-syntax_highlighter = true
-show_line_numbers = true
-draw_tabs = true
-draw_spaces = true
 context_menu_enabled = false
 shortcut_keys_enabled = false
-smooth_scrolling = true
-wrap_enabled = true
-caret_block_mode = true
 caret_blink = true
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-min_size = Vector2( 600, 150 )
+draw_tabs = true
+draw_spaces = true
+script = ExtResource("1")

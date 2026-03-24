@@ -1,52 +1,33 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://g4p4wjhh1hil"]
 
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/lesson-14-multiplying/visuals/Graph.tscn" type="PackedScene" id=2]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bqx10jgyyomiq" path="res://course/lesson-14-multiplying/visuals/Graph.tscn" id="2"]
 
-[sub_resource type="Curve2D" id=1]
+[sub_resource type="Curve2D" id="Curve2D_a5r7b"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array( 0.0245361, 0.446106, -0.0245361, -0.446106, 0, -100, 0, 0, 0, 0, 253, -167 )
+"points": PackedVector2Array(0.0245361, 0.446106, -0.0245361, -0.446106, 0, -100, 0, 0, 0, 0, 253, -167)
 }
+point_count = 2
 
-[node name="PanelContainer" type="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" unique_id=1547677]
+custom_minimum_size = Vector2(400, 400)
 offset_right = 14.0
 offset_bottom = 14.0
-custom_minimum_size = Vector2( 400, 400 )
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-offset_right = 400.0
-offset_bottom = 450.0
-custom_minimum_size = Vector2( 400, 450 )
+[node name="RunnableCodeExample" parent="." unique_id=1082971184 instance=ExtResource("1")]
+custom_minimum_size = Vector2(400, 450)
+layout_mode = 2
 
-[node name="Frame" parent="RunnableCodeExample" index="0"]
-offset_right = 400.0
-offset_bottom = 450.0
-
-[node name="TextureRect" parent="RunnableCodeExample/Frame/PanelContainer" index="0"]
-offset_right = 396.0
-offset_bottom = 446.0
-
-[node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="0"]
+[node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" parent_id_path=PackedInt32Array(1082971184, 1323725507) index="0" unique_id=1494799076]
 visible = false
 
-[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-offset_left = 0.0
-offset_right = 105.0
+[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" parent_id_path=PackedInt32Array(1082971184, 1323725507) index="1" unique_id=1248061364]
 text = "Show Me"
 
-[node name="StepButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="2"]
-offset_left = 113.0
-offset_right = 193.0
-
-[node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
-offset_left = 244.0
-offset_right = 644.0
-offset_bottom = 260.0
-
-[node name="Graph" parent="RunnableCodeExample" instance=ExtResource( 2 )]
-curve = SubResource( 1 )
-graph_size = Vector2( 260, 260 )
+[node name="Graph" parent="RunnableCodeExample" unique_id=1389122925 instance=ExtResource("2")]
+curve = SubResource("Curve2D_a5r7b")
+graph_size = Vector2(260, 260)
 text_x = "Level"
 text_y = "Maximum Health"
 

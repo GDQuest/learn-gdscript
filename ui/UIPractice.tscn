@@ -20,7 +20,7 @@
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_hover.tres" id="18"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="19"]
 
-[sub_resource type="CodeHighlighter" id="CodeHighlighter_x4rpt"]
+[sub_resource type="CodeHighlighter" id="CodeHighlighter_p3qxn"]
 number_color = Color(0.922, 0.58, 0.2, 1)
 symbol_color = Color(0.407, 0.587, 1, 1)
 function_color = Color(0.34, 0.69, 1, 1)
@@ -5109,6 +5109,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="PracticeInfoPanel" parent="Margin/Layout/InfoPanelAnchors" unique_id=185118280 instance=ExtResource("3")]
+custom_minimum_size = Vector2(619, 0)
 layout_mode = 0
 anchors_preset = 0
 grow_horizontal = 0
@@ -5172,9 +5173,11 @@ layout_mode = 2
 
 [node name="SolutionContainer" type="PanelContainer" parent="Margin/Layout/OutputAnchors" unique_id=1555732183]
 clip_contents = true
+custom_minimum_size = Vector2(619, 0)
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 619.0
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("11")
 
@@ -5201,7 +5204,7 @@ size_flags_vertical = 3
 theme_override_styles/read_only = ExtResource("11")
 scroll_smooth = true
 caret_blink = true
-syntax_highlighter = SubResource("CodeHighlighter_x4rpt")
+syntax_highlighter = SubResource("CodeHighlighter_p3qxn")
 draw_tabs = true
 draw_spaces = true
 gutters_draw_line_numbers = true

@@ -9,9 +9,9 @@ func _ready() -> void:
 	Events.font_size_scale_changed.connect(_update_size)
 	context_menu_enabled = false
 	shortcut_keys_enabled = false
-	editable = false
 	wrap_mode = TextEdit.LINE_WRAPPING_NONE
 	CodeEditorEnhancer.enhance(self)
+	CodeEditorEnhancer.prevent_editable(self)
 
 
 func set_min_size(new_size: Vector2) -> void:
