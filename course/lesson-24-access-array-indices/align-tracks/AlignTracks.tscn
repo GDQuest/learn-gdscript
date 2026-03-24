@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://be24fhibq0qap"]
+[gd_scene format=4 uid="uid://be24fhibq0qap"]
 
 [ext_resource type="Script" uid="uid://bnetds2wmrrvu" path="res://course/lesson-24-access-array-indices/align-tracks/AlignTracks.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://egfs80afokmk" path="res://course/lesson-24-access-array-indices/align-tracks/tracks.png" id="3"]
@@ -9,6 +9,7 @@ margins = Vector2i(64, 0)
 texture_region_size = Vector2i(64, 64)
 0:0/next_alternative_id = 8
 0:0/0 = 0
+0:0/0/texture_origin = Vector2i(-32, -32)
 0:0/1 = 1
 0:0/1/flip_h = true
 0:0/2 = 2
@@ -145,6 +146,7 @@ script = ExtResource("2")
 
 [node name="TileMap" type="TileMapLayer" parent="." unique_id=637387557]
 use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAAABQAAAAAABAABAAAABQAAAAAABAACAAAABQAAAAAABAADAAAABQAAAAAABAAEAAAABQAAAAAABAAFAAAABQAAAAAABAAGAAAABQAAAAAABAAHAAAABgAAAAAAAQAHAAEABQAAAAAAAQAHAAIABgAAAAAAAwAGAAIABQAAAAAABAAFAAIABQAAAAAABAAEAAIABQAAAAAABAADAAIABQAAAAAABAACAAIABQAAAAAABAABAAIABQAAAAAABAAAAAIABgAAAAAAAAAAAAMABQAAAAAAAQAAAAQABgAAAAAAAgABAAQABQAAAAAABAACAAQABQAAAAAABAADAAQABQAAAAAABAAEAAQABQAAAAAABAAFAAQABQAAAAAABAAGAAQABQAAAAAABAAHAAQABgAAAAAAAQAHAAUABgAAAAAAAwAGAAUABQAAAAAABAAFAAUABQAAAAAABAAEAAUABQAAAAAABAADAAUABQAAAAAABAACAAUABQAAAAAABAABAAUABQAAAAAABAAAAAUABgAAAAAAAAAAAAYABgAAAAAAAgABAAYABQAAAAAABAACAAYABQAAAAAABAADAAYABQAAAAAABAAEAAYACQAAAAAAAAAFAAYACQAAAAAAAAAGAAYABQAAAAAABAAHAAYACQAAAAAAAAA=")
 tile_set = SubResource("1")
 
 [node name="Tiles" type="Node2D" parent="." unique_id=1563816691]

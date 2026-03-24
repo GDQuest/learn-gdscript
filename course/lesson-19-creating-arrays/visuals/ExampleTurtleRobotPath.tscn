@@ -1,15 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene format=3 uid="uid://cvfqnk2i4rycf"]
 
-[ext_resource path="res://course/common/turtle/turtle.png" type="Texture2D" id=1]
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=3]
-[ext_resource path="res://course/lesson-19-creating-arrays/visuals/rocks_shield.png" type="Texture2D" id=4]
-[ext_resource path="res://course/lesson-19-creating-arrays/visuals/rocks_gems.png" type="Texture2D" id=5]
+[ext_resource type="Texture2D" uid="uid://b4n28mvmpccia" path="res://course/common/turtle/turtle.png" id="1"]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://dqcfecquh3gvg" path="res://course/lesson-19-creating-arrays/visuals/rocks_shield.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dbc7usnmjjtbd" path="res://course/lesson-19-creating-arrays/visuals/rocks_gems.png" id="5"]
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id="2"]
 script/source = "extends \"GameBoard.gd\"
 
 func _ready() -> void:
+	super._ready()
+	
 	set_units({
 		$Turtle: Vector2(0, 0),
 		$Robot: Vector2(5, 2),
@@ -20,43 +22,37 @@ func _ready() -> void:
 	var cell: Vector2 = units[$Turtle]
 	_path = [cell]
 	_path.append_array(path_to_robot)
-	update()
+	queue_redraw()
 "
 
-[node name="Panel" type="PanelContainer"]
+[node name="Panel" type="PanelContainer" unique_id=420517700]
 offset_right = 658.0
 offset_bottom = 384.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 651.0
-offset_bottom = 377.0
-custom_minimum_size = Vector2( 0, 370 )
+[node name="RunnableCodeExample" parent="." unique_id=85641498 instance=ExtResource("2")]
+custom_minimum_size = Vector2(0, 370)
+layout_mode = 2
 
-[node name="GameBoard" type="Node2D" parent="RunnableCodeExample"]
-script = SubResource( 2 )
+[node name="GameBoard" type="Node2D" parent="RunnableCodeExample" unique_id=1070140081]
+script = SubResource("2")
 
-[node name="Turtle" type="Sprite2D" parent="RunnableCodeExample/GameBoard"]
-position = Vector2( 20, 283 )
-scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 1 )
+[node name="Turtle" type="Sprite2D" parent="RunnableCodeExample/GameBoard" unique_id=1492259608]
+position = Vector2(20, 283)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1")
 
-[node name="Robot" parent="RunnableCodeExample/GameBoard" instance=ExtResource( 3 )]
-scale = Vector2( 0.8, 0.8 )
+[node name="Robot" parent="RunnableCodeExample/GameBoard" unique_id=1621623856 instance=ExtResource("3")]
+scale = Vector2(0.8, 0.8)
 
-[node name="RocksGems" type="Sprite2D" parent="RunnableCodeExample/GameBoard"]
-position = Vector2( 17, 100 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 5 )
-offset = Vector2( 0, -17.1429 )
+[node name="RocksGems" type="Sprite2D" parent="RunnableCodeExample/GameBoard" unique_id=1162548684]
+position = Vector2(17, 100)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5")
+offset = Vector2(0, -17.1429)
 
-[node name="RocksShield" type="Sprite2D" parent="RunnableCodeExample/GameBoard"]
-position = Vector2( 18, 197 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 4 )
-offset = Vector2( 1.42853, -18.5714 )
+[node name="RocksShield" type="Sprite2D" parent="RunnableCodeExample/GameBoard" unique_id=816220]
+position = Vector2(18, 197)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4")
+offset = Vector2(1.42853, -18.5714)

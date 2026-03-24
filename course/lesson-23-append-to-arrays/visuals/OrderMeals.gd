@@ -88,7 +88,7 @@ class Meal extends VBoxContainer:
 	func _init(init_text: String, init_time: float = 0) -> void:
 		var label := Label.new()
 		var container := HBoxContainer.new()
-		progress.percent_visible = false
+		progress.show_percentage = false
 		container.add_child(texture)
 		container.add_child(label)
 		add_child(container)

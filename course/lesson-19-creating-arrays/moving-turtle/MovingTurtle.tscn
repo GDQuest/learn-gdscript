@@ -1,70 +1,79 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene format=3 uid="uid://cyhx22v4ivk65"]
 
-[ext_resource path="res://course/common/turtle/turtle.png" type="Texture2D" id=1]
-[ext_resource path="res://course/lesson-19-creating-arrays/visuals/rocks_gems.png" type="Texture2D" id=2]
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=3]
-[ext_resource path="res://course/lesson-19-creating-arrays/visuals/rocks_shield.png" type="Texture2D" id=4]
-[ext_resource path="res://course/lesson-19-creating-arrays/moving-turtle/MovingTurtle.gd" type="Script" id=5]
-[ext_resource path="res://ui/theme/fonts/SourceCodePro-Regular.otf" type="FontFile" id=6]
+[ext_resource type="Texture2D" uid="uid://b4n28mvmpccia" path="res://course/common/turtle/turtle.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dbc7usnmjjtbd" path="res://course/lesson-19-creating-arrays/visuals/rocks_gems.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://dqcfecquh3gvg" path="res://course/lesson-19-creating-arrays/visuals/rocks_shield.png" id="4"]
+[ext_resource type="Script" uid="uid://sob588xil5yc" path="res://course/lesson-19-creating-arrays/moving-turtle/MovingTurtle.gd" id="5"]
+[ext_resource type="FontFile" uid="uid://dhwfr6dl8eld3" path="res://ui/theme/fonts/SourceCodePro-Regular.otf" id="6"]
 
-[sub_resource type="FontFile" id=1]
-font_data = ExtResource( 6 )
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("6")])
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id="2"]
 script/source = "extends Sprite2D
 
 signal goal_reached
 
-@onready var tween := $Tween as Tween
-
 func move(path: Array):
 	for point in path:
-		tween.interpolate_property(self, \"position\", position, point, 0.2)
-		tween.start()
-		await tween.tween_all_completed
+		var tween := create_tween()
+		tween.tween_property(self, \"position\", point, 0.2).from(position)
+		await tween.finished
 		await get_tree().create_timer(0.2).timeout
 	emit_signal(\"goal_reached\")
 "
 
-[node name="MovingTurtle" type="Node2D"]
-script = ExtResource( 5 )
+[node name="MovingTurtle" type="Node2D" unique_id=100452924]
+script = ExtResource("5")
 draw_cell_coordinates = true
-label_font = SubResource( 1 )
+label_font = SubResource("1")
 
-[node name="Turtle" type="Sprite2D" parent="."]
-position = Vector2( 20, 283 )
-scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 1 )
-script = SubResource( 2 )
+[node name="Turtle" type="Sprite2D" parent="." unique_id=695639315]
+position = Vector2(20, 283)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1")
+script = SubResource("2")
 
-[node name="Tween" type="Tween" parent="Turtle"]
+[node name="RocksGems" type="Sprite2D" parent="." unique_id=1485393103]
+position = Vector2(17, 100)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2")
+offset = Vector2(0, -17.1429)
 
-[node name="RocksGems" type="Sprite2D" parent="."]
-position = Vector2( 17, 100 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 2 )
-offset = Vector2( 0, -17.1429 )
+[node name="RocksGems2" type="Sprite2D" parent="." unique_id=1505245189]
+position = Vector2(17, 100)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2")
+offset = Vector2(0, -17.1429)
 
-[node name="RocksGems2" type="Sprite2D" parent="."]
-position = Vector2( 17, 100 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 2 )
-offset = Vector2( 0, -17.1429 )
+[node name="RocksShield" type="Sprite2D" parent="." unique_id=494613484]
+position = Vector2(18, 197)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4")
+offset = Vector2(1.42853, -18.5714)
 
-[node name="RocksShield" type="Sprite2D" parent="."]
-position = Vector2( 18, 197 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 4 )
-offset = Vector2( 1.42853, -18.5714 )
+[node name="RocksShield2" type="Sprite2D" parent="." unique_id=1370464552]
+position = Vector2(18, 197)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4")
+offset = Vector2(1.42853, -18.5714)
 
-[node name="RocksShield2" type="Sprite2D" parent="."]
-position = Vector2( 18, 197 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 4 )
-offset = Vector2( 1.42853, -18.5714 )
+[node name="Robot" parent="." unique_id=1520208897 instance=ExtResource("3")]
+scale = Vector2(0.8, 0.8)
 
-[node name="Robot" parent="." instance=ExtResource( 3 )]
-scale = Vector2( 0.8, 0.8 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
+[node name="Camera2D" type="Camera2D" parent="." unique_id=891554956]

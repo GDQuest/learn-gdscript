@@ -35,14 +35,15 @@ func copy_cells():
 		
 		var sub_tilemap := TileMapLayer.new()
 		var is_not_in_position := false
-		if cell == 4:
-			cell = 2
+		if cell == 9:
+			cell = 5
+			tile_alternative = 4
 			is_not_in_position = true
 		sub_tilemap.tile_set = tilemap.tile_set
 		sub_tilemap.set_cell(Vector2i(0, 0), cell, atlas_coords, tile_alternative)
 		
 		var sprite := Sprite2D.new()
-		sprite.position = tilemap.map_to_local(cell_pos)
+		sprite.position = tilemap.map_to_local(cell_pos) - Vector2(tilemap.tile_set.tile_size/2)
 		if is_not_in_position:
 			sprite.position += shift
 		sprite.add_child(sub_tilemap)

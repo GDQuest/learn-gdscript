@@ -1,23 +1,23 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://0m427ud7pe6m"]
 
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
-[ext_resource path="res://course/lesson-20-looping-over-arrays/robot-path/RobotPath.gd" type="Script" id=3]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="2"]
+[ext_resource type="Script" uid="uid://broitwf3msyp8" path="res://course/lesson-20-looping-over-arrays/robot-path/RobotPath.gd" id="3"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
 signal goal_reached
 
-@onready var tween := $Tween as Tween
-
 var move_queue := []
 var points := []
+
+var tween: Tween
 
 
 func move_to(cell: Vector2):
 	move_queue.append(cell)
 	points.append(cell)
-	if not tween.is_active():
+	if not tween or not tween.is_running():
 		_play_move_animation()
 
 
@@ -28,22 +28,19 @@ func _play_move_animation():
 		return
 
 	while target_cell:
-		tween.interpolate_property(self, \"position\", position, get_parent().cell_to_position(target_cell), 0.2)
-		tween.start()
-		await tween.tween_all_completed
+		tween = create_tween()
+		tween.tween_property(self, \"position\", get_parent().cell_to_position(target_cell), 0.2).from(position)
+		await tween.finished
 		await get_tree().create_timer(0.2).timeout
 		target_cell = move_queue.pop_front()
 	emit_signal(\"goal_reached\")
 "
 
-[node name="RobotPath" type="Node2D"]
-script = ExtResource( 3 )
+[node name="RobotPath" type="Node2D" unique_id=110219823]
+script = ExtResource("3")
 
-[node name="Robot" parent="." instance=ExtResource( 2 )]
-scale = Vector2( 0.8, 0.8 )
-script = SubResource( 1 )
+[node name="Robot" parent="." unique_id=2067145344 instance=ExtResource("2")]
+scale = Vector2(0.8, 0.8)
+script = SubResource("1")
 
-[node name="Tween" type="Tween" parent="Robot"]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
+[node name="Camera2D" type="Camera2D" parent="." unique_id=901650798]

@@ -19,7 +19,7 @@ func _ready() -> void:
 
 
 func _run() -> void:
-	move_after()
+	move_to_bottom()
 	_robot.cell = cell
 	_update_label()
 	await get_tree().create_timer(0.5).timeout
@@ -27,7 +27,7 @@ func _run() -> void:
 
 
 # EXPORT move_to_end
-func move_after():
+func move_to_bottom():
 	while cell.y < board_size.y - 1:
 		cell += Vector2(0, 1)
 # /EXPORT move_to_end

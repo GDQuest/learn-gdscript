@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://l1g8rb8lwaoo"]
 
-[ext_resource path="res://course/common/turtle/turtle.png" type="Texture2D" id=1]
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=3]
+[ext_resource type="Texture2D" uid="uid://b4n28mvmpccia" path="res://course/common/turtle/turtle.png" id="1"]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="3"]
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id="2"]
 script/source = "extends Node2D
 
 @export var board_size := Vector2(6, 4): set = set_board_size
@@ -30,7 +30,7 @@ func _ready() -> void:
 		cell += direction
 		_path.append(cell)
 
-	update()
+	queue_redraw()
 	update_unit_positions()
 
 
@@ -64,28 +64,22 @@ func set_board_size(new_size: Vector2):
 	board_size = new_size
 "
 
-[node name="Panel" type="PanelContainer"]
+[node name="Panel" type="PanelContainer" unique_id=958666846]
 offset_right = 658.0
 offset_bottom = 384.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 651.0
-offset_bottom = 377.0
-custom_minimum_size = Vector2( 0, 370 )
+[node name="RunnableCodeExample" parent="." unique_id=1008307441 instance=ExtResource("2")]
+custom_minimum_size = Vector2(0, 370)
+layout_mode = 2
 
-[node name="GameBoard" type="Node2D" parent="RunnableCodeExample"]
-script = SubResource( 2 )
+[node name="GameBoard" type="Node2D" parent="RunnableCodeExample" unique_id=636981444]
+script = SubResource("2")
 
-[node name="Turtle" type="Sprite2D" parent="RunnableCodeExample/GameBoard"]
-position = Vector2( 285, 199 )
-scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 1 )
+[node name="Turtle" type="Sprite2D" parent="RunnableCodeExample/GameBoard" unique_id=1473370848]
+position = Vector2(285, 199)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1")
 
-[node name="Robot" parent="RunnableCodeExample/GameBoard" instance=ExtResource( 3 )]
-scale = Vector2( 0.8, 0.8 )
+[node name="Robot" parent="RunnableCodeExample/GameBoard" unique_id=291332148 instance=ExtResource("3")]
+scale = Vector2(0.8, 0.8)

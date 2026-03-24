@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://isw5sjt67wn8" path="res://ui/screens/practice/PracticeInfoPanel.gd" id="2"]
 [ext_resource type="FontVariation" uid="uid://bmjmlneuj5aky" path="res://ui/theme/fonts/font_title.tres" id="3"]
-[ext_resource type="PackedScene" path="res://ui/components/ScrollableTextBox.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://di4488a7ev4bi" path="res://ui/components/ScrollableTextBox.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://cvl6pxx3qb736" path="res://ui/components/Revealer.tscn" id="5"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="6"]
 [ext_resource type="StyleBox" path="res://ui/theme/revealer_hints_panel.tres" id="7"]
@@ -57,6 +57,7 @@ size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3")
 theme_override_font_sizes/font_size = 24
 text = "Summary - Lesson Name"
+autowrap_mode = 3
 
 [node name="StatusIcon" type="TextureRect" parent="LessonRequirements/Margin/Column/TitleBox" unique_id=1951238211]
 modulate = Color(0.572549, 0.560784, 0.721569, 1)

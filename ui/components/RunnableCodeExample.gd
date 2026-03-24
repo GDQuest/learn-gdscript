@@ -273,7 +273,7 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	if script == null:
 		_step_button.hide()
 	else:
-		_step_button.visible = _scene_instance.get_script().source_code.find("await ") >= 0
+		_step_button.visible = _scene_instance.get_script().source_code.find("await coroutine_step_requested") >= 0
 
 	if not _run_button.visible:
 		printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.scene_file_path])

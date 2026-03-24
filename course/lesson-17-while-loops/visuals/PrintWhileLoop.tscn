@@ -7,23 +7,27 @@
 [sub_resource type="GDScript" id="1"]
 script/source = "extends OutputConsole
 
+signal coroutine_step_requested
+signal coroutine_finished
+
 @onready var number = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
 
 func run() -> void:
 	emit_signal(\"line_highlight_requested\", 0)
-	yield()
+	await coroutine_step_requested
 	number = 0
 	emit_signal(\"line_highlight_requested\", 1)
-	yield()
+	await coroutine_step_requested
 	while number < 4:
 		emit_signal(\"line_highlight_requested\", 2)
-		yield()
+		await coroutine_step_requested
 		print_output([number])
 		emit_signal(\"line_highlight_requested\", 3)
-		yield()
+		await coroutine_step_requested
 		number += 1
 		emit_signal(\"line_highlight_requested\", 4)
-		yield()
+		await coroutine_step_requested
+	coroutine_finished.emit()
 
 
 func reset() -> void:

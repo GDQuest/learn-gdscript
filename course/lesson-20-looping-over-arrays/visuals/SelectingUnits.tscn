@@ -1,22 +1,21 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene format=3 uid="uid://d2m3ttdj3tgyy"]
 
-[ext_resource path="res://course/lesson-19-creating-arrays/selecting-units/SelectingUnits.gd" type="Script" id=1]
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=3]
+[ext_resource type="Script" uid="uid://cadapqed5vuml" path="res://course/lesson-19-creating-arrays/selecting-units/SelectingUnits.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="3"]
 
-[node name="SelectingUnits" type="Node2D"]
-script = ExtResource( 1 )
+[node name="SelectingUnits" type="Node2D" unique_id=677240516]
+script = ExtResource("1")
 
-[node name="Robot" parent="." instance=ExtResource( 3 )]
-scale = Vector2( 0.8, 0.8 )
+[node name="Robot" parent="." unique_id=669531113 instance=ExtResource("3")]
+scale = Vector2(0.8, 0.8)
 
-[node name="Robot2" parent="." instance=ExtResource( 3 )]
-scale = Vector2( 0.8, 0.8 )
+[node name="Robot2" parent="." unique_id=368745529 instance=ExtResource("3")]
+scale = Vector2(0.8, 0.8)
 
-[node name="Robot3" parent="." instance=ExtResource( 3 )]
-scale = Vector2( 0.8, 0.8 )
+[node name="Robot3" parent="." unique_id=732073087 instance=ExtResource("3")]
+scale = Vector2(0.8, 0.8)
 
-[node name="Robot4" parent="." instance=ExtResource( 3 )]
-scale = Vector2( 0.8, 0.8 )
+[node name="Robot4" parent="." unique_id=206418034 instance=ExtResource("3")]
+scale = Vector2(0.8, 0.8)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
+[node name="Camera2D" type="Camera2D" parent="." unique_id=273594850]

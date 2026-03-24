@@ -1236,9 +1236,13 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="46"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gkgsl"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="15"]
 states/RESET/node = SubResource("17")
 states/RESET/position = Vector2(102, 51)
+states/Start/position = Vector2(166, 136)
 states/damage/node = SubResource("18")
 states/damage/position = Vector2(686, 356)
 states/heal/node = SubResource("19")
@@ -1255,7 +1259,7 @@ states/saying_hi/node = SubResource("21")
 states/saying_hi/position = Vector2(342, 73)
 states/uppercut/node = SubResource("44")
 states/uppercut/position = Vector2(261, 330)
-transitions = ["level", "idle", SubResource("22"), "saying_hi", "idle", SubResource("23"), "heal", "idle", SubResource("25"), "damage", "idle", SubResource("26"), "idle", "jump", SubResource("27"), "jump", "idle", SubResource("28"), "idle", "damage", SubResource("29"), "idle", "level", SubResource("30"), "idle", "heal", SubResource("31"), "heal", "damage", SubResource("32"), "damage", "heal", SubResource("33"), "level", "heal", SubResource("34"), "heal", "level", SubResource("35"), "damage", "jump", SubResource("36"), "idle", "saying_hi", SubResource("37"), "idle", "jab", SubResource("42"), "jab", "idle", SubResource("43"), "uppercut", "idle", SubResource("45"), "idle", "uppercut", SubResource("46")]
+transitions = ["level", "idle", SubResource("22"), "saying_hi", "idle", SubResource("23"), "heal", "idle", SubResource("25"), "damage", "idle", SubResource("26"), "idle", "jump", SubResource("27"), "jump", "idle", SubResource("28"), "idle", "damage", SubResource("29"), "idle", "level", SubResource("30"), "idle", "heal", SubResource("31"), "heal", "damage", SubResource("32"), "damage", "heal", SubResource("33"), "level", "heal", SubResource("34"), "heal", "level", SubResource("35"), "damage", "jump", SubResource("36"), "idle", "saying_hi", SubResource("37"), "idle", "jab", SubResource("42"), "jab", "idle", SubResource("43"), "uppercut", "idle", SubResource("45"), "idle", "uppercut", SubResource("46"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_gkgsl")]
 
 [sub_resource type="Curve" id="39"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.298851, 0.3125), 0.0, 0.0, 0, 0, Vector2(0.775862, 0), 0.0, 0.0, 0, 0]
