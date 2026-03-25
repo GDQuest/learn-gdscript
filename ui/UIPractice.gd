@@ -176,8 +176,6 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 	_set_script_slice(slice)
 	_code_editor.slice_editor.setup(_script_slice)
 	_code_editor.set_continue_allowed(false)
-	
-	print(_solution_editor == _code_editor.slice_editor)
 
 	_solution_editor.text = _script_slice.slice_text
 

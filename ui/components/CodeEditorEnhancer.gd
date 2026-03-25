@@ -191,7 +191,7 @@ const ANNOTATIONS := [
 
 # Enhances a TextEdit to better highlight GDScript code.
 static func enhance(text_edit: CodeEdit) -> void:
-	if text_edit.syntax_highlighter or text_edit.syntax_highlighter.resource_path != GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH:
+	if not text_edit.syntax_highlighter or text_edit.syntax_highlighter.resource_path != GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH:
 		text_edit.syntax_highlighter = load(GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH)
 	if not Engine.is_editor_hint():
 		text_edit.syntax_highlighter = text_edit.syntax_highlighter.duplicate()
