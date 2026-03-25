@@ -2,14 +2,14 @@ extends Control
 
 signal course_requested(force_outliner)
 
-@onready var _settings_button := $GDQuestBoy/Margin/Buttons/SettingsButton as Button
-@onready var _outliner_button := $GDQuestBoy/Margin/Buttons/OutlinerButton as Button
-@onready var _start_button := $GDQuestBoy/Margin/Buttons/StartButton as Button
-@onready var _quit_button := $GDQuestBoy/Margin/Buttons/QuitButton as Button
-@onready var _title_link_label := $TitleBackground/Title/TitleLinkLabel as RichTextLabel
-
-@onready var _anim_player:= $AnimationPlayer as AnimationPlayer
-@onready var _robot := $Robot
+@export var _settings_button: Button
+@export var _outliner_button: Button
+@export var _start_button: Button
+@export var _quit_button: Button
+@export var _title_link_label: RichTextLabel
+@export var _anim_player: AnimationPlayer
+@export var _robot: Node2D
+@export var _gdquest_boy: PanelContainer
 
 @onready var _buttons_to_disable := [_settings_button, _outliner_button, _start_button, _quit_button]
 
@@ -18,7 +18,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	for button in _buttons_to_disable:
+	for button: BaseButton in _buttons_to_disable:
 		button.disabled = true
 
 	_settings_button.pressed.connect(Events.settings_requested.emit)

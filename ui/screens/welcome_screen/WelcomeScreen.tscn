@@ -5,7 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://dmcpuk8fejld8" path="res://ui/screens/practice/gdquestboy_frame_main_menu.tres" id="3"]
 [ext_resource type="Texture2D" uid="uid://m003a0rm27w4" path="res://ui/screens/welcome_screen/title.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://by3dlo6kxjw1f" path="res://ui/screens/welcome_screen/title_background.png" id="6"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_main_menu_normal.tres" id="7"]
+[ext_resource type="StyleBox" uid="uid://bdyrfadpi27ck" path="res://ui/theme/button_main_menu_normal.tres" id="7"]
 [ext_resource type="Script" uid="uid://f4uji8wpx0tc" path="res://ui/screens/welcome_screen/WelcomeScreen.gd" id="8"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_main_menu_focus.tres" id="9"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_main_menu_hover.tres" id="10"]
@@ -25,7 +25,7 @@
 [sub_resource type="GDScript" id="7"]
 script/source = "extends Node2D
 
-@onready var _anim_player := $AnimationPlayer
+@export var _anim_player: AnimationPlayer
 
 
 func _ready() -> void:
@@ -37,7 +37,7 @@ func appear() -> void:
 	_anim_player.play(\"peek\")
 
 
-func _on_animation_finished(anim_name: String) -> void:
+func _on_animation_finished(_anim_name: String) -> void:
 	await get_tree().create_timer(10.0).timeout
 	_anim_player.play(\"peek\")
 "
@@ -200,6 +200,10 @@ _data = {
 }
 
 [sub_resource type="StyleBoxEmpty" id="4"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
 
 [sub_resource type="GDScript" id="1"]
 script/source = "extends OptionButton
@@ -450,7 +454,7 @@ _data = {
 &"appear": SubResource("3")
 }
 
-[node name="WelcomeScreen" type="Control" unique_id=1937235772]
+[node name="WelcomeScreen" type="Control" unique_id=1937235772 node_paths=PackedStringArray("_settings_button", "_outliner_button", "_start_button", "_quit_button", "_title_link_label", "_anim_player", "_robot", "_gdquest_boy")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -460,6 +464,14 @@ grow_vertical = 2
 pivot_offset = Vector2(811, 264)
 theme = ExtResource("2")
 script = ExtResource("8")
+_settings_button = NodePath("GDQuestBoy/Margin/Buttons/SettingsButton")
+_outliner_button = NodePath("GDQuestBoy/Margin/Buttons/OutlinerButton")
+_start_button = NodePath("GDQuestBoy/Margin/Buttons/StartButton")
+_quit_button = NodePath("GDQuestBoy/Margin/Buttons/QuitButton")
+_title_link_label = NodePath("TitleBackground/Title/TitleLinkLabel")
+_anim_player = NodePath("AnimationPlayer")
+_robot = NodePath("Robot")
+_gdquest_boy = NodePath("GDQuestBoy")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=174110992]
 layout_mode = 0
@@ -593,11 +605,12 @@ size_flags_horizontal = 6
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Robot" type="Node2D" parent="." unique_id=1840976212]
+[node name="Robot" type="Node2D" parent="." unique_id=1840976212 node_paths=PackedStringArray("_anim_player")]
 visible = false
 z_index = 1
 position = Vector2(1120, 711)
 script = SubResource("7")
+_anim_player = NodePath("AnimationPlayer")
 
 [node name="Pivot" type="Marker2D" parent="Robot" unique_id=323616102]
 position = Vector2(0, -32)
@@ -635,7 +648,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -227.0
 offset_top = -512.0
-offset_right = 227.0
+offset_right = 226.99976
 offset_bottom = -12.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("3")
@@ -665,6 +678,7 @@ theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("10")
 theme_override_styles/disabled = SubResource("4")
 theme_override_styles/focus = ExtResource("9")
+disabled = true
 text = "START"
 expand_icon = true
 
@@ -679,6 +693,7 @@ theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("10")
 theme_override_styles/disabled = SubResource("4")
 theme_override_styles/focus = ExtResource("9")
+disabled = true
 text = "SELECT LESSON"
 
 [node name="SettingsButton" type="Button" parent="GDQuestBoy/Margin/Buttons" unique_id=461617742]
@@ -692,6 +707,7 @@ theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("10")
 theme_override_styles/disabled = SubResource("4")
 theme_override_styles/focus = ExtResource("9")
+disabled = true
 text = "OPTIONS"
 
 [node name="LanguageButton" type="OptionButton" parent="GDQuestBoy/Margin/Buttons" unique_id=1909110984]
@@ -720,6 +736,7 @@ theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("10")
 theme_override_styles/disabled = SubResource("4")
 theme_override_styles/focus = ExtResource("9")
+disabled = true
 text = "QUIT"
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="GDQuestBoy" unique_id=1790674599]
@@ -758,6 +775,8 @@ offset_left = -480.5
 offset_top = -339.0
 offset_right = 480.5
 offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("6")
 
 [node name="Title" type="TextureRect" parent="TitleBackground" unique_id=1558095791]

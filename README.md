@@ -50,7 +50,7 @@ For code contributions, be sure to bookmark our GDScript code style guide: [GDQu
 
 You can also run the project straight in Godot by cloning the repository and importing the folder into the engine.
 
-We only recommend importing the app in Godot to study its source code or [contribute](#how-to-contribute). You will need **Godot 3.5 LTS** or a more recent stable version of Godot 3. Otherwise, it won't run.
+We only recommend importing the app in Godot to study its source code or [contribute](#how-to-contribute). You will need **Godot 4.6.1 LTS** or a more recent stable version of Godot 4. Otherwise, it won't run.
 
 Please note that practice errors will trigger the debugger and pause execution in Godot, unlike when using the release build. That's normal, and you'll need to continue execution by pressing <kbd>F7</kbd> when that happens.
 
