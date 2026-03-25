@@ -19,8 +19,8 @@ render_mode blend_add;
 uniform float thickness = 1.0;
 
 void vertex() {
-    VERTEX.x *= (1.0 - INSTANCE_CUSTOM.y) * 2.0;
-		VERTEX.y *= thickness;
+    VERTEX.y *= (1.0 - INSTANCE_CUSTOM.y) * 2.0;
+	VERTEX.x *= thickness;
 }"
 
 [sub_resource type="ShaderMaterial" id="23"]
@@ -33,15 +33,27 @@ colors = PackedColorArray(0, 1, 0.286275, 0, 0.239216, 1, 0.431373, 1, 0, 1, 0.2
 
 [sub_resource type="GradientTexture2D" id="21"]
 gradient = SubResource("20")
-width = 32
+width = 2
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 1)
 
-[sub_resource type="Curve" id="25"]
-_data = [Vector2(0, 0), 0.0, 15.1674, 0, 0, Vector2(0.0419426, 1), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_qcsph"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(0.06878307, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="ShaderMaterial" id="26"]
 shader = SubResource("24")
-shader_parameter/thickness = 12.0
+shader_parameter/thickness = 3.0
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d0mvg"]
+gradient = SubResource("20")
+width = 13
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Curve" id="25"]
+_data = [Vector2(0, 0), 0.0, 15.1674, 0, 0, Vector2(0.0419426, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="LessonDonePopup" type="ColorRect" unique_id=357865209]
 anchors_preset = 15
@@ -57,20 +69,28 @@ material = SubResource("23")
 position = Vector2(960, 540)
 texture = SubResource("21")
 lifetime = 4.0
-emission_shape = 2
-emission_sphere_radius = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(960, 540)
 gravity = Vector2(0, 0)
-scale_amount_curve = SubResource("25")
+angle_min = 45.0
+angle_max = 45.0
+scale_amount_min = 4.5
+scale_amount_max = 5.5
+scale_amount_curve = SubResource("Curve_qcsph")
 
 [node name="ThickParticles" type="CPUParticles2D" parent="." unique_id=1095404079]
 material = SubResource("26")
 position = Vector2(960, 540)
 amount = 4
-texture = SubResource("21")
+texture = SubResource("GradientTexture2D_d0mvg")
 lifetime = 5.0
-emission_shape = 2
-emission_sphere_radius = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(240, 135)
 gravity = Vector2(0, 0)
+angle_min = 45.0
+angle_max = 45.0
+scale_amount_min = 4.0
+scale_amount_max = 10.0
 scale_amount_curve = SubResource("25")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1110205396]
