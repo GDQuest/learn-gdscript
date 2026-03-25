@@ -28,6 +28,7 @@ const KEYWORDS := [
 	"static",
 	"extends",
 	"self",
+	"super",
 	
 	# Control flow keywords.
 	"if",
@@ -50,14 +51,8 @@ const KEYWORDS := [
 	"is",
 	
 	# Godot-specific keywords.
-	"onready",
-	"export",
-	"tool",
 	"setget",
 	"breakpoint",
-	"remote", "sync",
-	"master", "puppet", "slave",
-	"remotesync", "mastersync", "puppetsync",
 	
 	# Primitive data types.
 	"bool",
@@ -65,6 +60,7 @@ const KEYWORDS := [
 	"float",
 	"null",
 	"true", "false",
+	"void",
 	
 	# Global GDScript namespace.
 	"await",
@@ -150,11 +146,55 @@ const KEYWORDS := [
 	
 	"PI", "TAU", "INF", "NAN",
 	
+	"Variant",
+]
+
+const ANNOTATIONS := [
+	"onready",
+	"icon",
+	"abstract",
+	"export",
+	"export_range",
+	"export_category",
+	"export_color_no_alpha",
+	"export_custom",
+	"export_dir",
+	"export_enum",
+	"export_exp_easing",
+	"export_file",
+	"export_file_path",
+	"export_flags",
+	"export_flags_2d_navigation",
+	"export_flags_2d_physics",
+	"export_flags_2d_render",
+	"export_flags_3d_navigation",
+	"export_flags_3d_physics",
+	"export_flags_3d_render",
+	"export_flags_avoidance",
+	"export_global_dir",
+	"export_global_file",
+	"export_group",
+	"export_multiline",
+	"export_node_path",
+	"export_placeholder",
+	"export_range",
+	"export_storage",
+	"export_subgroup",
+	"export_tool_button",
+	"rpc",
+	"static_unload",
+	"tool",
+	"warning_ignore",
+	"warning_ignore_restore",
+	"warning_ignore_start",
 ]
 
 # Enhances a TextEdit to better highlight GDScript code.
 static func enhance(text_edit: CodeEdit) -> void:
-	text_edit.syntax_highlighter = load(GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH).duplicate()
+	if text_edit.syntax_highlighter or text_edit.syntax_highlighter.resource_path != GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH:
+		text_edit.syntax_highlighter = load(GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH)
+	if not Engine.is_editor_hint():
+		text_edit.syntax_highlighter = text_edit.syntax_highlighter.duplicate()
 	text_edit.gutters_draw_line_numbers = true
 	text_edit.draw_tabs = true
 	text_edit.draw_spaces = true
@@ -195,3 +235,6 @@ static func enhance_highlighter(highlighter: CodeHighlighter) -> void:
 
 	for keyword: String in KEYWORDS:
 		highlighter.add_keyword_color(keyword, COLOR_KEYWORD)
+	
+	for annotation: String in ANNOTATIONS:
+		highlighter.add_keyword_color("@%s" % annotation, COLOR_NUMBERS)
