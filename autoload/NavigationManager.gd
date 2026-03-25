@@ -13,7 +13,7 @@ const ERROR_WRONG_UNLOAD_TYPE := "Unsupported unload type in NavigationManager! 
 
 var history := PackedStringArray()
 var current_url := "": get = get_current_url, set = set_current_url
-var is_mobile_platform := OS.get_name() in ["Android", "HTML5", "iOS"]
+var is_mobile_platform := OS.get_name() in ["Android", "Web", "iOS"]
 var arguments := {}
 
 var _current_unload_type := -1
