@@ -7,24 +7,22 @@
 [sub_resource type="GDScript" id="1"]
 script/source = "extends OutputConsole
 
-signal coroutine_step_requested
-signal coroutine_finished
 
 @onready var health = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
 
 
-func run():
+func run_coroutine(coroutine_controller: CoroutineController):
 	emit_signal(\"line_highlight_requested\", 0)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 	health = 5
 	emit_signal(\"line_highlight_requested\", 1)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 	health -= 1
 	emit_signal(\"line_highlight_requested\", 2)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 	print_output([health])
 	emit_signal(\"line_highlight_requested\", 3)
-	coroutine_finished.emit()
+	coroutine_controller.finished.emit()
 
 
 func reset() -> void:

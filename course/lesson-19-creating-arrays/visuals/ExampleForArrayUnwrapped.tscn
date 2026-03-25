@@ -7,46 +7,44 @@
 [sub_resource type="GDScript" id="1"]
 script/source = "extends OutputConsole
 
-signal coroutine_step_requested
-signal coroutine_finished
 
 @onready var element = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
 @onready var array = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
 
-func run():
+func run_coroutine(coroutine_controller: CoroutineController):
 	emit_signal(\"line_highlight_requested\", 0)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 
 	array = [0, 1, 2]
 	emit_signal(\"line_highlight_requested\", 1)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 
 	element = null
 	emit_signal(\"line_highlight_requested\", 2)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 
 	element = array[0]
 	emit_signal(\"line_highlight_requested\", 4)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 	print_output([element])
 	emit_signal(\"line_highlight_requested\", 5)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 
 	element = array[1]
 	emit_signal(\"line_highlight_requested\", 7)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 	print_output([element])
 	emit_signal(\"line_highlight_requested\", 8)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 
 	element = array[2]
 	emit_signal(\"line_highlight_requested\", 10)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 	print_output([element])
 	emit_signal(\"line_highlight_requested\", 11)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 	
-	coroutine_finished.emit()
+	coroutine_controller.finished.emit()
 
 
 func reset() -> void:

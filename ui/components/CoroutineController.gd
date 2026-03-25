@@ -1,0 +1,5 @@
+class_name CoroutineController
+extends RefCounted
+
+signal step_requested
+signal finished

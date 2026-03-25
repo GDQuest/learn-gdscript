@@ -11,6 +11,7 @@ const ConsoleArrowAnimationScene := preload("res://ui/components/ConsoleArrowAni
 const CodeExampleVariableUnderlineScene := preload("res://ui/components/CodeExampleVariableUnderline.tscn")
 
 const ERROR_NO_RUN_FUNCTION := "Scene %s doesn't have a run() function. The Run button won't work."
+const ERROR_MULTIPLE_RUN_FUNCTION := "Scene %s has both run() and run_coroutine() functions. It must only have one. The Run button won't work."
 const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/hslider_grabber_highlight.tres")
 
 @export var _gdscript_text_edit: CodeEdit
@@ -29,7 +30,7 @@ const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/hslider_
 var _scene_instance: CanvasItem: set = _set_scene_instance
 
 var _base_text_font_size := preload("res://ui/theme/fonts/font_text.tres").base_font.msdf_size
-var _coroutine_running := false
+var _current_coroutine: CoroutineController = null
 
 @onready var _debugger: RunnableCodeExampleDebugger
 @onready var _console_arrow_animation: ConsoleArrowAnimation
@@ -72,41 +73,53 @@ func _ready() -> void:
 	RenderingServer.canvas_item_set_z_index(canvas_item, 10)
 
 
+func _get_run_count(scene_instance: Node) -> int:
+	var has_run := scene_instance.has_method("run")
+	var has_run_coroutine := scene_instance.has_method("run_coroutine")
+	if has_run and has_run_coroutine:
+		return 2
+	if has_run or has_run_coroutine:
+		return 1
+	return 0
+
+
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings := PackedStringArray()
 	if not scene and get_child_count() == 0:
 		warnings.push_back("This node needs a scene to display.")
-	elif _scene_instance and not _scene_instance.has_method("run"):
+	elif _scene_instance and not _get_run_count(_scene_instance):
 		warnings.push_back(ERROR_NO_RUN_FUNCTION % [_scene_instance.scene_file_path])
+	elif _scene_instance and _get_run_count(_scene_instance) > 1:
+		warnings.push_back(ERROR_MULTIPLE_RUN_FUNCTION % [_scene_instance.scene_file_path])
 	return warnings
 
 
 # Called when pressing the Run button. Calls the run() function of the example.
 func run() -> void:
 	assert(
-		_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()]
+		_get_run_count(_scene_instance) == 1, "Node %s does not have a run method or has both run and run_coroutine" % [get_path()]
 	)
-	var is_coroutine := _scene_instance.has_signal("coroutine_finished")
-	if _scene_instance.has_method("reset") and _debugger and not _coroutine_running:
+	var is_coroutine := _scene_instance.has_method("run_coroutine")
+	if _scene_instance.has_method("reset") and _debugger and not _current_coroutine:
 		_scene_instance.reset()
-		if is_coroutine:
-			_scene_instance.disconnect("coroutine_finished", _finish_coroutine)
 	
-	if not _coroutine_running:
+	if not _current_coroutine:
 		if is_coroutine:
-			_coroutine_running = true
-			_scene_instance.connect("coroutine_finished", _finish_coroutine)
-		_scene_instance.run()
+			_current_coroutine = CoroutineController.new()
+			_current_coroutine.finished.connect(_finish_coroutine)
+			_scene_instance.run_coroutine(_current_coroutine)
+		else:
+			_scene_instance.run()
 		if _scene_instance.has_method("wrap_inside_frame"):
 			_scene_instance.wrap_inside_frame(_frame_container.get_rect())
 		if is_coroutine:
-			while _coroutine_running:
-				_scene_instance.emit_signal("coroutine_step_requested")
+			while _current_coroutine:
+				_current_coroutine.step_requested.emit()
 			if _scene_instance.has_method("wrap_inside_frame"):
 				_scene_instance.wrap_inside_frame(_frame_container.get_rect())
 	elif is_coroutine:
-		while _coroutine_running:
-			_scene_instance.emit_signal("coroutine_step_requested")
+		while _current_coroutine:
+			_current_coroutine.step_requested.emit()
 	
 	_gdscript_text_edit.highlight_current_line = false
 	code_updated.emit()
@@ -117,19 +130,19 @@ func run() -> void:
 # calls to yield().
 func step() -> void:
 	assert(
-		_scene_instance.has_method("run"), "Node %s does not have a run method" % [get_path()]
+		_get_run_count(_scene_instance) == 1, "Node %s does not have a run method or has both run and run_coroutine" % [get_path()]
 	)
-	var is_coroutine := _scene_instance.has_signal("coroutine_finished")
-	if _scene_instance.has_method("reset") and _debugger and not _coroutine_running:
+	var is_coroutine := _scene_instance.has_method("run_coroutine")
+	if _scene_instance.has_method("reset") and _debugger and not _current_coroutine:
 		_scene_instance.reset()
-		if is_coroutine:
-			_scene_instance.disconnect("coroutine_finished", _finish_coroutine)
 	
-	if not _coroutine_running:
+	if not _current_coroutine:
 		if is_coroutine:
-			_coroutine_running = true
-			_scene_instance.connect("coroutine_finished", _finish_coroutine)
-		_scene_instance.run()
+			_current_coroutine = CoroutineController.new()
+			_current_coroutine.finished.connect(_finish_coroutine)
+			_scene_instance.run_coroutine(_current_coroutine)
+		else:
+			_scene_instance.run()
 		if _scene_instance.has_method("wrap_inside_frame"):
 			# warning-ignore:unsafe_method_access
 			_scene_instance.wrap_inside_frame(_frame_container.get_rect())
@@ -137,19 +150,19 @@ func step() -> void:
 		if _console_arrow_animation:
 			_console_arrow_animation.highlight_rects = []
 			_console_arrow_animation.reset_curve()
-		_scene_instance.emit_signal("coroutine_step_requested")
-		if not _coroutine_running:
+		_current_coroutine.step_requested.emit()
+		if not _current_coroutine:
 			_gdscript_text_edit.highlight_current_line = false
 	emit_signal("code_updated")
 
 
 func _finish_coroutine() -> void:
-	_coroutine_running = false
+	_current_coroutine = null
 
 
 func reset() -> void:
 	# Finish running script if it's yielded
-	if _coroutine_running:
+	if _current_coroutine:
 		run()
 	if _scene_instance.has_method("reset"):
 		_scene_instance.call("reset")
@@ -268,12 +281,12 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 		set_code(gdscript_code)
 
 	_reset_button.visible = _scene_instance.has_method("reset")
-	_run_button.visible = _scene_instance.has_method("run")
+	_run_button.visible = _get_run_count(_scene_instance) == 1
 	var script: RefCounted = _scene_instance.get_script()
 	if script == null:
 		_step_button.hide()
 	else:
-		_step_button.visible = _scene_instance.get_script().source_code.find("await coroutine_step_requested") >= 0
+		_step_button.visible = _scene_instance.has_method("run_coroutine")
 
 	if not _run_button.visible:
 		printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.scene_file_path])
@@ -377,7 +390,7 @@ func _on_highlight_line(line_number: int) -> void:
 	# wait to see if script was interrupted
 	await get_tree().process_frame
 
-	if not _coroutine_running:
+	if not _current_coroutine:
 		return
 
 	_gdscript_text_edit.highlight_current_line = true
@@ -388,7 +401,7 @@ func _on_arrow_animation(chars1: Array, chars2: Array) -> void:
 	# wait to see if script was interrupted
 	await get_tree().process_frame
 
-	if not _coroutine_running:
+	if not _current_coroutine:
 		return
 
 	if not _console_arrow_animation:

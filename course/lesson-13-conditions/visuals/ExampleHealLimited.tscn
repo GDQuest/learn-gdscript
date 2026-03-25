@@ -9,8 +9,6 @@
 script/source = "extends Node2D
 
 signal line_highlight_requested(line)
-signal coroutine_step_requested
-signal coroutine_finished
 
 @export var start_health := 75
 @export var max_health := 100
@@ -31,29 +29,29 @@ func reset() -> void:
 	_health_bar.set_health(health)
 
 
-func run() -> void:
+func run_coroutine(coroutine_controller: CoroutineController):
 	health = start_health
 	_health_bar.set_health(health)
 	emit_signal(\"line_highlight_requested\", 0)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 	
 	health += health_gained
 	_animation_tree.travel(\"heal\")
 	_health_bar.set_health(health)
 	emit_signal(\"line_highlight_requested\", 1)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 	
 	emit_signal(\"line_highlight_requested\", 2)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 	
 	if health > max_health:
 		health = max_health
 		_health_bar.set_health(health)
 		emit_signal(\"line_highlight_requested\", 3)
-		await coroutine_step_requested
+		await coroutine_controller.step_requested
 	
 	_health_bar.set_health(health)
-	coroutine_finished.emit()
+	coroutine_controller.finished.emit()
 "
 
 [node name="ExampleShow" type="VBoxContainer" unique_id=1013773244]

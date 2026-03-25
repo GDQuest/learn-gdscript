@@ -7,27 +7,24 @@
 [sub_resource type="GDScript" id="1"]
 script/source = "extends OutputConsole
 
-signal coroutine_step_requested
-signal coroutine_finished
-
 @onready var character = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
 
 
-func run() -> void:
+func run_coroutine(coroutine_controller: CoroutineController):
 	clear_messages()
 	emit_signal(\"line_highlight_requested\", 0)
-	await coroutine_step_requested
+	await coroutine_controller.step_requested
 	var _i := 0
 	for c in \"Robot\":
 		character = \"\\\"%s\\\"\" % c
 		emit_signal(\"line_highlight_requested\", 1)
 		emit_signal(\"animate_arrow_requested\", [19 + _i, 1], [5,9])
 		_i += 1
-		await coroutine_step_requested
+		await coroutine_controller.step_requested
 		print_output([c])
 		emit_signal(\"line_highlight_requested\", 2)
-		await coroutine_step_requested
-	coroutine_finished.emit()
+		await coroutine_controller.step_requested
+	coroutine_controller.finished.emit()
 
 
 func reset() -> void:
