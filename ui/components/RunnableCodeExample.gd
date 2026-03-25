@@ -355,7 +355,7 @@ func _reset_monitored_variable_highlights():
 				last_line = result.y
 				last_column = result.x
 
-				var rect = _gdscript_text_edit.get_rect_at_line_column(last_line, last_column)
+				var rect = _gdscript_text_edit.get_rect_at_line_column(last_line, last_column + 1)
 				rect.position += offset
 				rect.size.x = (rect.size.x * variable_name.length()) + 4
 
