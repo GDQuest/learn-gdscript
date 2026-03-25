@@ -235,7 +235,7 @@ func get_current_url():
 # JAVASCRIPT INTERFACE
 #
 
-var _js_available := OS.has_feature("JavaScript")
+var _js_available := OS.has_feature("web")
 var _js_history: JavaScriptObject
 var _js_popstate_listener_ref: JavaScriptObject
 var _js_window: JavaScriptObject

@@ -10,7 +10,7 @@ enum LEVEL {
 };
 
 var also_print_to_godot := false;
-var _js_available := OS.has_feature("JavaScript")
+var _js_available := OS.has_feature("web")
 var is_joypad = false
 var joypad_index := -1
 var GDQUEST: JavaScriptObject

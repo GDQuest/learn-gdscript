@@ -29,7 +29,7 @@ func _ready() -> void:
 	
 	_start_button.grab_focus()
 	
-	if OS.has_feature('JavaScript'):
+	if OS.has_feature('web'):
 		_quit_button.queue_free()
 	
 	_anim_player.animation_finished.connect(_on_animation_finished)

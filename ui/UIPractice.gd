@@ -680,7 +680,7 @@ func _on_js_error_feedback(args):
 
 # Set the event listener
 func _on_init_set_javascript() -> void:
-	if OS.has_feature("JavaScript"):
+	if OS.has_feature("web"):
 		var GDQUEST = JavaScriptBridge.get_interface("GDQUEST")
 		GDQUEST.events.onError.connect(_on_js_error_feedback_ref)
 
