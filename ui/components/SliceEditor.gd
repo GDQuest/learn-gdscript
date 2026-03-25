@@ -95,14 +95,14 @@ func _gui_input(event: InputEvent) -> void:
 		_remove_last_character = true
 
 	# Capture keyboard events if we are the focus owner, otherwise left arrow causes navigation events.
-	if event is InputEventKey:
-		if event.is_pressed():
-			_last_typed_character = char(event.unicode)
+	var event_key := event as InputEventKey
+	if event_key and event_key.is_pressed() and event_key.unicode:
+		_last_typed_character = char(event_key.unicode)
 
-			_last_selected_text = get_selected_text()
-			if get_selected_text():
-				_last_selection_start = Vector2(get_selection_from_line(), get_selection_from_column())
-				_last_selection_end = Vector2(get_selection_to_line(), get_selection_to_column())
+		_last_selected_text = get_selected_text()
+		if get_selected_text():
+			_last_selection_start = Vector2(get_selection_from_line(), get_selection_from_column())
+			_last_selection_end = Vector2(get_selection_to_line(), get_selection_to_column())
 
 
 func setup(slice: ScriptSlice) -> void:
