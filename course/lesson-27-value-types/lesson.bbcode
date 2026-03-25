@@ -26,7 +26,7 @@ But when running the code, we get this strange error.
 
 [visual path="visuals/ErrorInvalidOperands.tscn"]
 
-It tells you can't add values of type [code]String[/code] and [code]int[/code]: they're incompatible.
+It tells you that you can't add values of type [code]String[/code] and [code]int[/code]: they're incompatible.
 
 In that case, you need to convert the [code]health[/code] number into a [code]String[/code].
 
@@ -130,7 +130,7 @@ var item_count = 0
 
 func buy_selected_item():
 	player_input = get_player_input()
-	
+
 [/starting_code]
 [cursor line="0" column="0"]
 [validator path="player-input/TestPlayerInput.gd"]
