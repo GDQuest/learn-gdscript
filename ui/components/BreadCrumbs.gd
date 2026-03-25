@@ -2,6 +2,7 @@ extends HBoxContainer
 
 const NODE_FONT := preload("res://ui/theme/fonts/font_text.tres")
 const NODE_FONT_CURRENT := preload("res://ui/theme/fonts/font_text_bold.tres")
+const NODE_FONT_SIZE := 20
 const NODE_COLOR := Color(0.572549, 0.560784, 0.721569)
 
 
@@ -98,6 +99,7 @@ func _create_navigation_node(text: String, path: String = "", current: bool = fa
 		var separator := Label.new()
 		separator.text = "•"
 		separator.add_theme_font_override("font", NODE_FONT)
+		separator.add_theme_font_size_override("font_size", NODE_FONT_SIZE)
 		separator.add_theme_color_override("font_color", NODE_COLOR)
 		add_child(separator)
 
@@ -105,6 +107,7 @@ func _create_navigation_node(text: String, path: String = "", current: bool = fa
 		var navigation_node := Label.new()
 		navigation_node.text = text
 		navigation_node.add_theme_font_override("font", NODE_FONT_CURRENT if current else NODE_FONT)
+		navigation_node.add_theme_font_size_override("font_size", NODE_FONT_SIZE)
 		navigation_node.add_theme_color_override("font_color", NODE_COLOR)
 		add_child(navigation_node)
 	else:
@@ -112,6 +115,7 @@ func _create_navigation_node(text: String, path: String = "", current: bool = fa
 		navigation_node.flat = true
 		navigation_node.text = text
 		navigation_node.add_theme_font_override("font", NODE_FONT_CURRENT if current else NODE_FONT)
+		navigation_node.add_theme_font_size_override("font_size", NODE_FONT_SIZE)
 		navigation_node.mouse_default_cursor_shape = CURSOR_POINTING_HAND
 		add_child(navigation_node)
 		navigation_node.pressed.connect(_on_navigation_pressed.bind(path))
