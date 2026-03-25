@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://by3dlo6kxjw1f" path="res://ui/screens/welcome_screen/title_background.png" id="6"]
 [ext_resource type="StyleBox" uid="uid://bdyrfadpi27ck" path="res://ui/theme/button_main_menu_normal.tres" id="7"]
 [ext_resource type="Script" uid="uid://f4uji8wpx0tc" path="res://ui/screens/welcome_screen/WelcomeScreen.gd" id="8"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_main_menu_focus.tres" id="9"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_main_menu_hover.tres" id="10"]
+[ext_resource type="StyleBox" uid="uid://bygw5to7m6lea" path="res://ui/theme/button_main_menu_focus.tres" id="9"]
+[ext_resource type="StyleBox" uid="uid://dwjeeu7f4b1w3" path="res://ui/theme/button_main_menu_hover.tres" id="10"]
 [ext_resource type="PackedScene" path="res://ui/components/FullScreenButton.tscn" id="11"]
 [ext_resource type="FontVariation" uid="uid://dmdjn3eprmf2m" path="res://ui/theme/fonts/font_main_menu_buttons.tres" id="12"]
 [ext_resource type="PackedScene" path="res://ui/screens/welcome_screen/StarGreen.tscn" id="13"]
@@ -200,10 +200,6 @@ _data = {
 }
 
 [sub_resource type="StyleBoxEmpty" id="4"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
 
 [sub_resource type="GDScript" id="1"]
 script/source = "extends OptionButton
@@ -648,7 +644,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -227.0
 offset_top = -512.0
-offset_right = 226.99976
+offset_right = 227.0
 offset_bottom = -12.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("3")

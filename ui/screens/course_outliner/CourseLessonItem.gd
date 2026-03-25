@@ -25,10 +25,10 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	if not _mouse_hovering and not selected:
+	if not _mouse_hovering and not is_selected:
 		return
 	
-	if selected:
+	if is_selected:
 		draw_style_box(SELECTED_STYLE, Rect2(Vector2.ZERO, size))
 	
 	if _mouse_hovering:
