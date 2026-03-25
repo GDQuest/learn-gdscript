@@ -21,6 +21,8 @@ func _init() -> void:
 func test_draw_rectangles_of_varying_sizes() -> String:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	var polygons := turtle.get_polygons()
+	if polygons.empty():
+		return tr("The turtle did not draw anything. Make sure your function calls move_forward() with the length and height parameters.")
 	for index in polygons.size():
 		var p = polygons[index]
 		var points = Array(p.get_points())

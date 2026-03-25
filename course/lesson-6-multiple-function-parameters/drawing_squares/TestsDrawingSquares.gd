@@ -18,6 +18,8 @@ func _prepare():
 
 
 func test_turtle_ends_facing_towards_the_right() -> String:
+	if turtle.get_polygons().empty():
+		return tr("The turtle did not draw anything. Make sure your function calls move_forward(length) to move the turtle.")
 	var turn_right_between_jumps := 0
 	for command in turtle.get_command_stack():
 		if command.command == "turn":
@@ -31,6 +33,8 @@ func test_turtle_ends_facing_towards_the_right() -> String:
 
 
 func test_turtle_starts_each_square_facing_towards_the_right() -> String:
+	if turtle.get_polygons().empty():
+		return tr("The turtle did not draw anything. Make sure your function calls move_forward(length) to move the turtle.")
 	if not is_equal_approx(wrapf(turtle.turn_degrees, 0.0, 360.0), 0.0):
 		return tr(
 			"The turtle should be facing towards the right to draw squares in the same direction every time. Did you call turn_right(90) four times in your function?"
@@ -40,6 +44,8 @@ func test_turtle_starts_each_square_facing_towards_the_right() -> String:
 
 func test_draw_squares_of_varying_sizes() -> String:
 	var polygons := turtle.get_polygons()
+	if polygons.empty():
+		return tr("The turtle did not draw anything. Make sure your function calls move_forward(length) to move the turtle.")
 	for index in polygons.size():
 		var p = polygons[index]
 		var points = Array(p.get_points())
