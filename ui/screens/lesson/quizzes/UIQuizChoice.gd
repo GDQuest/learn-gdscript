@@ -16,7 +16,7 @@ func _ready() -> void:
 
 
 func setup(quiz: BBCodeParser.ParseNode) -> void:
-	super.setup(quiz)
+	await super.setup(quiz)
 	if not quiz.tag == BBCodeParserData.Tag.QUIZ_CHOICE:
 		return
 

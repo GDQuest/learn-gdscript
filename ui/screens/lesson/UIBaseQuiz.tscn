@@ -109,8 +109,10 @@ text = "Submit"
 
 [node name="HelpMessage" type="Label" parent="ClipContentBoundary/ChoiceContainer/ChoiceView" unique_id=262574087]
 visible = false
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.14902, 0.776471, 0.968627, 1)
+autowrap_mode = 3
 
 [node name="ResultContainer" type="MarginContainer" parent="ClipContentBoundary" unique_id=79260002]
 visible = false
@@ -124,11 +126,13 @@ offset_bottom = 111.0
 layout_mode = 2
 
 [node name="Label" type="Label" parent="ClipContentBoundary/ResultContainer/ResultView" unique_id=1147822428]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.960784, 0.980392, 0.980392, 1)
 theme_override_fonts/font = ExtResource("1")
 theme_override_font_sizes/font_size = 20
 text = "You're right!"
+autowrap_mode = 3
 
 [node name="CorrectAnswer" type="Label" parent="ClipContentBoundary/ResultContainer/ResultView" unique_id=1113016439]
 visible = false
@@ -138,6 +142,7 @@ theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 20
 text = "Answers here"
+autowrap_mode = 3
 
 [node name="Explanation" type="RichTextLabel" parent="ClipContentBoundary/ResultContainer/ResultView" unique_id=1244972795]
 layout_mode = 2
