@@ -10,7 +10,6 @@
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="10"]
 
 [node name="ErrorOverlayPopup" type="MarginContainer" unique_id=275232876 node_paths=PackedStringArray("_error_label", "_content_block", "_error_explanation_block", "_error_explanation_value", "_error_suggestion_block", "_error_suggestion_value", "_no_content_label", "_exclusive_buttons", "_close_button")]
-visible = false
 custom_minimum_size = Vector2(580, 360)
 offset_right = 553.0
 offset_bottom = 362.0
@@ -54,12 +53,10 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="Content" type="VBoxContainer" parent="MarginContainer/Column" unique_id=468346313]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ErrorExplanation" parent="MarginContainer/Column/Content" unique_id=577124066 instance=ExtResource("5")]
-visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 title = "Why this happens"
@@ -69,9 +66,9 @@ is_expanded = true
 layout_mode = 2
 bbcode_enabled = true
 text = "Our error explanation."
+fit_content = true
 
 [node name="ErrorSuggestion" parent="MarginContainer/Column/Content" unique_id=430840361 instance=ExtResource("5")]
-visible = false
 layout_mode = 2
 title = "How to fix this"
 
@@ -80,8 +77,10 @@ visible = false
 layout_mode = 2
 bbcode_enabled = true
 text = "Our suggestion on how to fix it."
+fit_content = true
 
 [node name="NoContent" type="RichTextLabel" parent="MarginContainer/Column" unique_id=1738366945]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
