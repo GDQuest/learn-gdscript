@@ -103,22 +103,20 @@ func _gui_input(event: InputEvent) -> void:
 		accept_event()
 	elif can_mouse_scroll:
 		if event.is_action("scroll_up") and event.pressed:
-			scroll_up(event.factor)
+			scroll_up()
 			accept_event()
 		elif event.is_action("scroll_down") and event.pressed:
-			scroll_down(event.factor)
+			scroll_down()
 			accept_event()
 
 
-func scroll_up(scroll_factor: float) -> void:
-	var delta := scroll_factor * MOUSE_SCROLL_STEP * _scroll_sensitivity
-	_set_target_position(_target_position + Vector2.UP * delta)
+func scroll_up() -> void:
+	_set_target_position(_target_position + Vector2.UP * MOUSE_SCROLL_STEP * _scroll_sensitivity)
 	_last_accepted_scroll_event_time = Time.get_ticks_msec()
 
 
-func scroll_down(scroll_factor: float) -> void:
-	var delta := scroll_factor * MOUSE_SCROLL_STEP * _scroll_sensitivity
-	_set_target_position(_target_position + Vector2.DOWN * delta)
+func scroll_down() -> void:
+	_set_target_position(_target_position + Vector2.DOWN * MOUSE_SCROLL_STEP * _scroll_sensitivity)
 	_last_accepted_scroll_event_time = Time.get_ticks_msec()
 
 
