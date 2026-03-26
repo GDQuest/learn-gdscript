@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://5m5jnn3skytm"]
 
 [ext_resource type="Script" uid="uid://c4nyuefy44sjd" path="res://ui/components/CodeExampleVariableUnderline.gd" id="1"]
-[ext_resource type="FontVariation" uid="uid://cbser3h81h3th" path="res://ui/theme/fonts/font_button_small.tres" id="2"]
 [ext_resource type="FontVariation" uid="uid://cipfqcm3yp0sc" path="res://ui/theme/fonts/font_text_bold.tres" id="3"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="3_gmbyx"]
 
 [sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(0.188235, 0.188235, 0.286275, 1)
@@ -23,6 +23,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("3_gmbyx")
 
 [node name="ColorRect" type="ColorRect" parent="MouseBlocker" unique_id=1661919218]
 layout_mode = 0
@@ -40,8 +41,7 @@ offset_left = 15.0
 offset_top = -19.0
 offset_right = 24.0
 offset_bottom = -5.0
-theme_override_fonts/font = ExtResource("2")
-theme_override_font_sizes/font_size = 18
+theme_type_variation = &"LabelSmallButton"
 horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="MouseBlocker/Label" unique_id=1779860185]

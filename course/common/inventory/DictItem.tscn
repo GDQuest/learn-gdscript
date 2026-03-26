@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://s2dti2ugv3fv"]
 
-[ext_resource type="FontVariation" uid="uid://buul432qy6di5" path="res://ui/theme/fonts/font_title_small.tres" id="1"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1_7fcm0"]
 [ext_resource type="Texture2D" uid="uid://53p3lhsufh82" path="res://course/common/inventory/healing_heart.png" id="2"]
 [ext_resource type="Script" uid="uid://byafhjougrfbm" path="res://course/common/inventory/DictItem.gd" id="3"]
 
@@ -21,6 +21,7 @@ custom_minimum_size = Vector2(260, 100)
 offset_right = 254.0
 offset_bottom = 100.0
 size_flags_horizontal = 3
+theme = ExtResource("1_7fcm0")
 theme_override_styles/normal = SubResource("1")
 theme_override_styles/hover = SubResource("1")
 script = ExtResource("3")
@@ -49,14 +50,12 @@ stretch_mode = 6
 
 [node name="Name" type="Label" parent="Margin/Item" unique_id=1209791980]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 20
+theme_type_variation = &"LabelSmallTitle"
 text = "healing heart"
 
 [node name="Amount" type="Label" parent="Margin/Item" unique_id=36278985]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 20
+theme_type_variation = &"LabelSmallTitle"
 text = "0"
 horizontal_alignment = 2

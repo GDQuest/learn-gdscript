@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cyvrxprcwe8jl"]
 
 [ext_resource type="Script" uid="uid://clkdkuuv5miys" path="res://ui/screens/end_screen/thumbnails/CourseThumbnail.gd" id="1"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1_rctod"]
 [ext_resource type="Texture2D" uid="uid://dqi63w8s27xoq" path="res://ui/screens/end_screen/thumbnails/bundle-godot-4-starter-kit.png" id="2"]
-[ext_resource type="FontVariation" uid="uid://bwgat2nncph0" path="res://ui/theme/fonts/end_screen_title.tres" id="3_ggy50"]
 
 [node name="CourseThumbnail" type="Control" unique_id=1532854818]
 layout_mode = 3
@@ -11,8 +11,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -1408.0
 offset_bottom = -791.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
+theme = ExtResource("1_rctod")
 script = ExtResource("1")
 texture = ExtResource("2")
 release_date = "2024-01-30T12:00:00Z"
@@ -33,12 +36,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -26.0
 offset_bottom = -5.0
-pivot_offset = Vector2(256, 10.5)
+pivot_offset = Vector2(256, 11)
+theme_type_variation = &"LabelEndScreenTitle"
 theme_override_colors/font_color = Color(1, 0.835294, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("3_ggy50")
-theme_override_font_sizes/font_size = 14
 text = "Early Access release: 2024/01/30"
 horizontal_alignment = 1
 uppercase = true

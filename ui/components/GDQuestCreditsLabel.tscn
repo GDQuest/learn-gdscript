@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cmkl63eydbdoa"]
 
-[ext_resource type="FontFile" uid="uid://et4q3ev8neq6" path="res://ui/theme/fonts/Inter-Medium.ttf" id="1"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1_fso4g"]
 [ext_resource type="Script" uid="uid://k0c8lwhm1vt1" path="res://ui/components/GDQuestCreditsLabel.gd" id="2"]
 
 [node name="GDQuestCreditsLabel" type="Control" unique_id=1102432848 node_paths=PackedStringArray("_rich_text_label")]
@@ -16,6 +16,7 @@ grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme = ExtResource("1_fso4g")
 script = ExtResource("2")
 _rich_text_label = NodePath("RichTextLabel")
 
@@ -32,9 +33,8 @@ offset_right = -18.0
 offset_bottom = 2.0
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_type_variation = &"RTSCreditsLabel"
 theme_override_colors/default_color = Color(0.572549, 0.560784, 0.721569, 1)
-theme_override_fonts/normal_font = ExtResource("1")
-theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 text = "Learn GDScript From Zero is an open source project by [color=#FFD500][url=https://www.gdquest.com/]GDQUEST.COM[/url][/color]"
 scroll_active = false

@@ -6,7 +6,6 @@
 [ext_resource type="StyleBox" path="res://ui/theme/revealer_content_panel.tres" id="4"]
 [ext_resource type="StyleBox" path="res://ui/theme/revealer_title_panel.tres" id="5"]
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="6"]
-[ext_resource type="FontVariation" uid="uid://cbser3h81h3th" path="res://ui/theme/fonts/font_button_small.tres" id="7"]
 
 [sub_resource type="StyleBoxEmpty" id="1"]
 
@@ -47,8 +46,7 @@ theme_override_styles/panel = SubResource("1")
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-theme_override_fonts/font = ExtResource("7")
-theme_override_font_sizes/font_size = 18
+theme_type_variation = &"ButtonSmall"
 theme_override_styles/normal = SubResource("6")
 theme_override_styles/pressed = SubResource("4")
 theme_override_styles/hover = SubResource("3")
@@ -64,9 +62,8 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="ToggleBar/BarLayout" unique_id=1830495365]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"LabelSmallTitle"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3")
-theme_override_font_sizes/font_size = 20
 text = "Expand"
 vertical_alignment = 1
 

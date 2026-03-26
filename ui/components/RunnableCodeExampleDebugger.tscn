@@ -2,7 +2,6 @@
 
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="2"]
-[ext_resource type="FontVariation" uid="uid://buul432qy6di5" path="res://ui/theme/fonts/font_title_small.tres" id="3"]
 [ext_resource type="StyleBox" path="res://ui/theme/runnable_example_panel_outline.tres" id="4"]
 [ext_resource type="Script" uid="uid://dw3fyk4gof6ej" path="res://ui/components/RunnableCodeExampleDebugger.gd" id="5"]
 
@@ -33,6 +32,6 @@ theme_override_constants/separation = 5
 
 [node name="Label" type="Label" parent="MarginContainer/VariablesContainer" unique_id=1827394277]
 layout_mode = 2
+theme_type_variation = &"LabelSmallTitle"
 theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
-theme_override_fonts/font = ExtResource("3")
 text = "Debugger"

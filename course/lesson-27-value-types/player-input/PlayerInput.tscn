@@ -5,7 +5,6 @@
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="3"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_strict.tres" id="4"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="5"]
-[ext_resource type="FontVariation" uid="uid://ehys7a6horyb" path="res://ui/theme/fonts/font_title_big.tres" id="6"]
 [ext_resource type="Texture2D" uid="uid://53p3lhsufh82" path="res://course/common/inventory/healing_heart.png" id="7"]
 [ext_resource type="Script" uid="uid://b3ia0yi7k2p4t" path="res://course/lesson-27-value-types/player-input/PlayerInput.gd" id="8"]
 
@@ -40,8 +39,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=391793529]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("6")
-theme_override_font_sizes/font_size = 32
+theme_type_variation = &"LabelBigTitle"
 text = "Select count"
 horizontal_alignment = 1
 

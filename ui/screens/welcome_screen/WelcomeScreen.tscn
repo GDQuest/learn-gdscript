@@ -10,7 +10,6 @@
 [ext_resource type="StyleBox" uid="uid://bygw5to7m6lea" path="res://ui/theme/button_main_menu_focus.tres" id="9"]
 [ext_resource type="StyleBox" uid="uid://dwjeeu7f4b1w3" path="res://ui/theme/button_main_menu_hover.tres" id="10"]
 [ext_resource type="PackedScene" path="res://ui/components/FullScreenButton.tscn" id="11"]
-[ext_resource type="FontVariation" uid="uid://dmdjn3eprmf2m" path="res://ui/theme/fonts/font_main_menu_buttons.tres" id="12"]
 [ext_resource type="PackedScene" path="res://ui/screens/welcome_screen/StarGreen.tscn" id="13"]
 [ext_resource type="PackedScene" path="res://ui/screens/welcome_screen/StarWhite.tscn" id="14"]
 [ext_resource type="PackedScene" path="res://ui/components/GDQuestLogo.tscn" id="15"]
@@ -19,8 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://dh3skycmljjai" path="res://course/common/robot_body.png" id="18"]
 [ext_resource type="Texture2D" uid="uid://dbj7adb0vqf3d" path="res://course/common/hand_ice.png" id="19"]
 [ext_resource type="Texture2D" uid="uid://bsloy2bhjsw6l" path="res://ui/screens/welcome_screen/godot-4-compatibility-label.svg" id="20"]
-[ext_resource type="FontFile" uid="uid://qqya62gjsiae" path="res://ui/theme/fonts/NotoSansSC-Bold.ttf" id="21"]
-[ext_resource type="FontFile" uid="uid://cbbec84xbwn5b" path="res://ui/theme/fonts/Montserrat-SemiBoldItalic.ttf" id="22"]
 
 [sub_resource type="GDScript" id="7"]
 script/source = "extends Node2D
@@ -207,31 +204,6 @@ script/source = "extends OptionButton
 func _ready() -> void:
 	get_popup().add_theme_font_override(\"font\", preload(\"res://ui/theme/fonts/font_main_menu_buttons.tres\"))
 "
-
-[sub_resource type="FontFile" id="8"]
-fallbacks = Array[Font]([ExtResource("22"), ExtResource("21"), ExtResource("22"), ExtResource("21")])
-subpixel_positioning = 0
-msdf_pixel_range = 14
-msdf_size = 128
-cache/0/variation_coordinates = {}
-cache/0/face_index = 0
-cache/0/embolden = 0.0
-cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
-cache/0/spacing_top = 0
-cache/0/spacing_bottom = 0
-cache/0/spacing_space = 0
-cache/0/spacing_glyph = 0
-cache/0/baseline_offset = 0.0
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/20/0/ascent = 0.0
-cache/0/20/0/descent = 0.0
-cache/0/20/0/underline_position = 0.0
-cache/0/20/0/underline_thickness = 0.0
-cache/0/20/0/scale = 1.0
 
 [sub_resource type="Animation" id="2"]
 length = 0.001
@@ -667,9 +639,8 @@ custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = ExtResource("2")
+theme_type_variation = &"ButtonMainMenu"
 theme_override_colors/font_disabled_color = Color(0.572549, 0.560784, 0.721569, 1)
-theme_override_fonts/font = ExtResource("12")
-theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("10")
 theme_override_styles/disabled = SubResource("4")
@@ -682,9 +653,8 @@ expand_icon = true
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+theme_type_variation = &"ButtonMainMenu"
 theme_override_colors/font_disabled_color = Color(0.572549, 0.560784, 0.721569, 1)
-theme_override_fonts/font = ExtResource("12")
-theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("10")
 theme_override_styles/disabled = SubResource("4")
@@ -696,9 +666,8 @@ text = "SELECT LESSON"
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+theme_type_variation = &"ButtonMainMenu"
 theme_override_colors/font_disabled_color = Color(0.572549, 0.560784, 0.721569, 1)
-theme_override_fonts/font = ExtResource("12")
-theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("10")
 theme_override_styles/disabled = SubResource("4")
@@ -711,9 +680,8 @@ visible = false
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+theme_type_variation = &"OptionButtonMainMenu"
 theme_override_colors/font_disabled_color = Color(0.572549, 0.560784, 0.721569, 1)
-theme_override_fonts/font = ExtResource("12")
-theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/pressed = ExtResource("9")
 theme_override_styles/hover = ExtResource("10")
@@ -725,9 +693,8 @@ script = SubResource("1")
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+theme_type_variation = &"ButtonMainMenu"
 theme_override_colors/font_disabled_color = Color(0.572549, 0.560784, 0.721569, 1)
-theme_override_fonts/font = ExtResource("12")
-theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("10")
 theme_override_styles/disabled = SubResource("4")
@@ -852,8 +819,8 @@ offset_left = 25.0
 offset_top = 3.0
 offset_right = 522.0
 offset_bottom = 31.0
+theme_type_variation = &"RTLMainMenuTag"
 theme_override_colors/default_color = Color(0.576471, 0.560784, 0.721569, 1)
-theme_override_fonts/normal_font = SubResource("8")
 bbcode_enabled = true
 text = "An open source project by GDQuest.com"
 scroll_active = false
@@ -868,8 +835,8 @@ offset_top = 29.0
 offset_right = 689.5
 offset_bottom = 57.0
 grow_vertical = 0
+theme_type_variation = &"RTLMainMenuTag"
 theme_override_colors/default_color = Color(0.576471, 0.560784, 0.721569, 1)
-theme_override_fonts/normal_font = SubResource("8")
 bbcode_enabled = true
 text = "Godot 4 port test"
 scroll_active = false

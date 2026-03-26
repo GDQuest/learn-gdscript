@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://dq0hubbnj6nws" path="res://ui/components/popups/ErrorOverlayPopup.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cvl6pxx3qb736" path="res://ui/components/Revealer.tscn" id="5"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="6"]
-[ext_resource type="FontVariation" uid="uid://cipfqcm3yp0sc" path="res://ui/theme/fonts/font_text_bold.tres" id="7"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="8"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_hover.tres" id="9"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="10"]
@@ -44,9 +43,8 @@ theme_override_constants/separation = 8
 
 [node name="ErrorLabel" type="Label" parent="MarginContainer/Column" unique_id=1311160456]
 layout_mode = 2
+theme_type_variation = &"LabelBoldText"
 theme_override_colors/font_color = Color(0.360784, 0.678431, 0.988235, 1)
-theme_override_fonts/font = ExtResource("7")
-theme_override_font_sizes/font_size = 20
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/Column" unique_id=1301229982]
 layout_mode = 2

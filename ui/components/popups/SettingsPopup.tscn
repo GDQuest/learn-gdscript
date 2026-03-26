@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dcl81wj587ph8"]
 
 [ext_resource type="Script" uid="uid://clp346ybkc5c1" path="res://ui/components/popups/SettingsPopup.gd" id="1"]
-[ext_resource type="FontVariation" uid="uid://bmjmlneuj5aky" path="res://ui/theme/fonts/font_title.tres" id="2"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="3"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="4"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="5"]
@@ -18,9 +17,20 @@
 
 [sub_resource type="Shortcut" id="6"]
 
-[node name="CanvasLayer" type="CanvasLayer" unique_id=1461649153]
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1461649153 node_paths=PackedStringArray("_panel", "_color_rect", "_language_value", "_font_size_value", "_font_size_sample", "_scroll_sensitivity_slider", "_framerate_option", "_lower_contrast", "_dyslexia_font", "_apply_button", "_cancel_button")]
 layer = 2
 script = ExtResource("1")
+_panel = NodePath("PanelContainer")
+_color_rect = NodePath("ColorRect")
+_language_value = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/Value")
+_font_size_value = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer/Value")
+_font_size_sample = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer/SampleText")
+_scroll_sensitivity_slider = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/ScrollSensitivitySetting/Value")
+_framerate_option = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting/Value")
+_lower_contrast = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LowerContrasSetting/CheckBox")
+_dyslexia_font = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSetting/CheckBox")
+_apply_button = NodePath("PanelContainer/Column/Margin/Column/Buttons/ApplyButton")
+_cancel_button = NodePath("PanelContainer/Column/Margin/Column/Buttons/CancelButton")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=659238751]
 anchors_preset = 15
@@ -66,8 +76,7 @@ theme_override_constants/separation = 12
 
 [node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column" unique_id=1396300607]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2")
-theme_override_font_sizes/font_size = 24
+theme_type_variation = &"LabelTitle"
 text = "Configure the App"
 horizontal_alignment = 1
 
@@ -166,6 +175,14 @@ text = "Framerate cap"
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Limit the app's framerate. Lower values make the app use less resources, especially when running in the browser, but may feel less fluid."
+selected = 0
+item_count = 3
+popup/item_0/text = "60 FPS"
+popup/item_0/id = 0
+popup/item_1/text = "30 FPS"
+popup/item_1/id = 0
+popup/item_2/text = "No Limit"
+popup/item_2/id = 0
 
 [node name="LowerContrasSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=708106770]
 layout_mode = 2

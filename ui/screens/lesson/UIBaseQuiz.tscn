@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://076jcmgwamwb"]
 
-[ext_resource type="FontVariation" uid="uid://buul432qy6di5" path="res://ui/theme/fonts/font_title_small.tres" id="1"]
-[ext_resource type="FontVariation" uid="uid://tjdlgxmq2imy" path="res://ui/theme/fonts/font_text_bold_italics.tres" id="2"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_darker.tres" id="3"]
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="4"]
 [ext_resource type="Texture2D" uid="uid://botjmjx4xso5i" path="res://ui/icons/checkmark_valid.svg" id="5"]
@@ -128,9 +126,8 @@ layout_mode = 2
 [node name="Label" type="Label" parent="ClipContentBoundary/ResultContainer/ResultView" unique_id=1147822428]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+theme_type_variation = &"LabelSmallTitle"
 theme_override_colors/font_color = Color(0.960784, 0.980392, 0.980392, 1)
-theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 20
 text = "You're right!"
 autowrap_mode = 3
 
@@ -138,9 +135,8 @@ autowrap_mode = 3
 visible = false
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
+theme_type_variation = &"LabelTextBoldItalics"
 theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
-theme_override_fonts/font = ExtResource("2")
-theme_override_font_sizes/font_size = 20
 text = "Answers here"
 autowrap_mode = 3
 

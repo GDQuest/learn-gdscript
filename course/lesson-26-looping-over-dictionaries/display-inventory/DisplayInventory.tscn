@@ -1,12 +1,10 @@
 [gd_scene format=3 uid="uid://bap15sd5ve05s"]
 
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
-[ext_resource type="FontVariation" uid="uid://ehys7a6horyb" path="res://ui/theme/fonts/font_title_big.tres" id="2"]
 [ext_resource type="Script" uid="uid://n5cmi0tlair1" path="res://course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://53p3lhsufh82" path="res://course/common/inventory/healing_heart.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://dc8srtagvqfdv" path="res://course/common/inventory/gems.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://c6frj5ufe0uri" path="res://course/common/inventory/sword.png" id="6"]
-[ext_resource type="FontVariation" uid="uid://buul432qy6di5" path="res://ui/theme/fonts/font_title_small.tres" id="8"]
 
 [sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(0.0901961, 0.0941176, 0.188235, 1)
@@ -63,8 +61,7 @@ theme_override_constants/separation = 20
 
 [node name="Title" type="Label" parent="Margin/Column" unique_id=1232250260]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2")
-theme_override_font_sizes/font_size = 32
+theme_type_variation = &"LabelBigTitle"
 text = "Inventory"
 horizontal_alignment = 1
 
@@ -107,8 +104,7 @@ stretch_mode = 6
 
 [node name="Name" type="Label" parent="Margin/Column/Grid/HealingHeart/Margin/Item" unique_id=1543081321]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
-theme_override_font_sizes/font_size = 20
+theme_type_variation = &"LabelSmallTitle"
 text = "Healing Heart"
 
 [node name="Spacer" type="Control" parent="Margin/Column/Grid/HealingHeart/Margin/Item" unique_id=1419503025]
@@ -117,8 +113,7 @@ size_flags_horizontal = 3
 
 [node name="Amount" type="Label" parent="Margin/Column/Grid/HealingHeart/Margin/Item" unique_id=2068282124]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
-theme_override_font_sizes/font_size = 20
+theme_type_variation = &"LabelSmallTitle"
 text = "0"
 
 [node name="Gems" type="Button" parent="Margin/Column/Grid" unique_id=2083197741]
@@ -152,8 +147,7 @@ stretch_mode = 6
 
 [node name="Name" type="Label" parent="Margin/Column/Grid/Gems/Margin/Item" unique_id=1030635156]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
-theme_override_font_sizes/font_size = 20
+theme_type_variation = &"LabelSmallTitle"
 text = "Gems"
 
 [node name="Spacer" type="Control" parent="Margin/Column/Grid/Gems/Margin/Item" unique_id=1067680459]
@@ -162,8 +156,7 @@ size_flags_horizontal = 3
 
 [node name="Amount" type="Label" parent="Margin/Column/Grid/Gems/Margin/Item" unique_id=2131484373]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
-theme_override_font_sizes/font_size = 20
+theme_type_variation = &"LabelSmallTitle"
 text = "0"
 
 [node name="Sword" type="Button" parent="Margin/Column/Grid" unique_id=1706721305]
@@ -197,8 +190,7 @@ stretch_mode = 6
 
 [node name="Name" type="Label" parent="Margin/Column/Grid/Sword/Margin/Item" unique_id=1936840030]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
-theme_override_font_sizes/font_size = 20
+theme_type_variation = &"LabelSmallTitle"
 text = "Sword"
 
 [node name="Spacer" type="Control" parent="Margin/Column/Grid/Sword/Margin/Item" unique_id=142059894]
@@ -207,6 +199,5 @@ size_flags_horizontal = 3
 
 [node name="Amount" type="Label" parent="Margin/Column/Grid/Sword/Margin/Item" unique_id=1962732897]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8")
-theme_override_font_sizes/font_size = 20
+theme_type_variation = &"LabelSmallTitle"
 text = "0"

@@ -2,8 +2,6 @@
 
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://d00fibhej2dlw" path="res://ui/components/popups/PracticeDonePopup.gd" id="2"]
-[ext_resource type="FontVariation" uid="uid://cu6uwql0gkweb" path="res://ui/theme/fonts/font_well_done_title.tres" id="3"]
-[ext_resource type="FontVariation" uid="uid://yf532a1dq4bx" path="res://ui/theme/fonts/font_well_done_normal.tres" id="4"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_hover.tres" id="5"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="6"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="7"]
@@ -11,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://c7fcakvm0lt82" path="res://ui/screens/practice/gdquestboy_logo.png" id="9"]
 [ext_resource type="StyleBox" path="res://ui/theme/focus_accent.tres" id="10"]
 [ext_resource type="StyleBox" uid="uid://dvsoekg7egexu" path="res://ui/screens/practice/gdquestboy_frame.tres" id="11"]
-[ext_resource type="FontVariation" uid="uid://f0eovbqt255p" path="res://ui/theme/fonts/font_well_done_bold.tres" id="12"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_accent.tres" id="13"]
 
 [node name="PracticeDonePopup" type="ColorRect" unique_id=1024515831]
@@ -73,26 +70,21 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=619585571]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3")
-theme_override_font_sizes/font_size = 42
+theme_type_variation = &"LabelWellDone"
 text = "Well done!"
 horizontal_alignment = 1
 
 [node name="Summary" type="Label" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=2006724527]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("4")
-theme_override_font_sizes/font_size = 26
+theme_type_variation = &"LabelWellDoneNormal"
 text = "You completed the practice."
 horizontal_alignment = 1
 
 [node name="Summary2" type="RichTextLabel" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=1421384031]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_fonts/normal_font = ExtResource("4")
-theme_override_fonts/bold_font = ExtResource("12")
-theme_override_font_sizes/normal_font_size = 26
-theme_override_font_sizes/bold_font_size = 26
+theme_type_variation = &"RTSWellDone"
 bbcode_enabled = true
 text = "[b]Stay[/b] and play around,
 or [b]continue[/b] the course."

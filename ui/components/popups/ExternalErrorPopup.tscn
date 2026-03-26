@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://crxjfqc0u6cof"]
 
 [ext_resource type="Script" uid="uid://dqiirjrheybdv" path="res://ui/components/popups/ExternalErrorPopup.gd" id="1"]
-[ext_resource type="FontVariation" uid="uid://bmjmlneuj5aky" path="res://ui/theme/fonts/font_title.tres" id="2"]
 [ext_resource type="StyleBox" path="res://ui/theme/focus_accent.tres" id="3"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="4"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="5"]
@@ -40,6 +39,7 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 value = 100.0
+show_percentage = false
 
 [node name="Margin" type="MarginContainer" parent="PanelContainer/Column" unique_id=1434119433]
 layout_mode = 2
@@ -51,8 +51,7 @@ theme_override_constants/separation = 12
 
 [node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column" unique_id=790112763]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2")
-theme_override_font_sizes/font_size = 24
+theme_type_variation = &"LabelTitle"
 text = "Where do external errors come from?"
 horizontal_alignment = 1
 

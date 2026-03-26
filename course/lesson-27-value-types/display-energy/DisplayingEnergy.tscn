@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://blhah8xmh0ggv"]
 
-[ext_resource type="FontVariation" uid="uid://bmjmlneuj5aky" path="res://ui/theme/fonts/font_title.tres" id="1"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1_venkr"]
 [ext_resource type="Script" uid="uid://ixnwvqaio4cs" path="res://course/lesson-27-value-types/display-energy/DisplayingEnergy.gd" id="2"]
 
 [node name="Control" type="Control" unique_id=909589122]
@@ -8,6 +8,9 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_venkr")
 script = ExtResource("2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2029924614]
@@ -21,8 +24,7 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=2047939295]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 24
+theme_type_variation = &"LabelTitle"
 text = "Energy:"
 
 [node name="Bar" type="ProgressBar" parent="VBoxContainer/HBoxContainer" unique_id=1890482366]
@@ -40,7 +42,7 @@ offset_left = 18.0
 offset_top = -16.0
 offset_right = 112.0
 offset_bottom = 15.0
-theme_override_fonts/font = ExtResource("1")
+theme_type_variation = &"LabelTitle"
 text = "?? / 100"
 
 [node name="Shadow" type="Label" parent="VBoxContainer/HBoxContainer/Bar/EnergyLabel" unique_id=1634650660]
@@ -51,8 +53,8 @@ anchor_bottom = 0.5
 offset_top = -13.0
 offset_right = 94.0
 offset_bottom = 18.0
+theme_type_variation = &"LabelTitle"
 theme_override_colors/font_color = Color(0.223529, 0.160784, 0.27451, 1)
-theme_override_fonts/font = ExtResource("1")
 text = "?? / 100"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=110536119]

@@ -2,12 +2,10 @@
 
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://isw5sjt67wn8" path="res://ui/screens/practice/PracticeInfoPanel.gd" id="2"]
-[ext_resource type="FontVariation" uid="uid://bmjmlneuj5aky" path="res://ui/theme/fonts/font_title.tres" id="3"]
 [ext_resource type="PackedScene" uid="uid://di4488a7ev4bi" path="res://ui/components/ScrollableTextBox.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://cvl6pxx3qb736" path="res://ui/components/Revealer.tscn" id="5"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="6"]
 [ext_resource type="StyleBox" path="res://ui/theme/revealer_hints_panel.tres" id="7"]
-[ext_resource type="FontVariation" uid="uid://bb64gsjfaug41" path="res://ui/theme/fonts/font_practice_progress.tres" id="8"]
 [ext_resource type="Script" uid="uid://dmptnpr0crwmq" path="res://ui/components/SmoothScrollContainer.gd" id="9"]
 [ext_resource type="StyleBox" path="res://ui/theme/practice_list_button.tres" id="10"]
 [ext_resource type="Texture2D" uid="uid://ckvual55dmiwg" path="res://ui/icons/practice_list.png" id="11"]
@@ -55,8 +53,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3")
-theme_override_font_sizes/font_size = 24
+theme_type_variation = &"LabelTitle"
 text = "Summary - Lesson Name"
 autowrap_mode = 3
 
@@ -133,9 +130,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Open the list of practices for this lesson."
 mouse_default_cursor_shape = 2
+theme_type_variation = &"ButtonPracticeProgress"
 theme_override_colors/font_disabled_color = Color(0.188235, 0.188235, 0.286275, 1)
-theme_override_fonts/font = ExtResource("8")
-theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = ExtResource("10")
 theme_override_styles/pressed = ExtResource("10")
 theme_override_styles/hover = ExtResource("10")

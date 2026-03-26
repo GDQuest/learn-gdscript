@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://ddeoc8a6vlfrc" path="res://ui/screens/course_outliner/CourseLessonItem.gd" id="1"]
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
-[ext_resource type="FontVariation" uid="uid://cipfqcm3yp0sc" path="res://ui/theme/fonts/font_text_bold.tres" id="3"]
 
 [node name="CourseLessonItem" type="PanelContainer" unique_id=336975063]
 offset_right = 640.0
@@ -30,8 +29,7 @@ text = "Lesson 0"
 [node name="TitleLabel" type="Label" parent="MarginContainer/Layout" unique_id=2144158220]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3")
-theme_override_font_sizes/font_size = 20
+theme_type_variation = &"LabelBoldText"
 text = "Lesson Title"
 clip_text = true
 

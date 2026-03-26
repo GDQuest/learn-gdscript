@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://bj7mumgvm7xjf"]
 
-[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1_k2qp0"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="2"]
 
 [node name="ErrorExample" type="Panel" unique_id=1849908824]
 custom_minimum_size = Vector2(460, 80)
 size_flags_horizontal = 3
+theme = ExtResource("1_k2qp0")
 theme_override_styles/panel = ExtResource("2")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=648218814]
@@ -17,8 +18,8 @@ offset_left = 16.0
 offset_top = 16.0
 offset_right = -16.0
 offset_bottom = -16.0
-theme_override_fonts/normal_font = ExtResource("1")
-theme_override_font_sizes/normal_font_size = 20
+theme_type_variation = &"RTLCode"
 bbcode_enabled = true
 text = "The function \"move\" already exists in this class (at line 22)."
+fit_content = true
 scroll_active = false

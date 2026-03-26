@@ -2,10 +2,6 @@
 
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="2"]
-[ext_resource type="FontVariation" uid="uid://f0eovbqt255p" path="res://ui/theme/fonts/font_well_done_bold.tres" id="3"]
-[ext_resource type="FontVariation" uid="uid://cu6uwql0gkweb" path="res://ui/theme/fonts/font_well_done_title.tres" id="4"]
-[ext_resource type="FontVariation" uid="uid://yf532a1dq4bx" path="res://ui/theme/fonts/font_well_done_normal.tres" id="5"]
-[ext_resource type="FontVariation" uid="uid://ehys7a6horyb" path="res://ui/theme/fonts/font_title_big.tres" id="6"]
 [ext_resource type="Script" uid="uid://boolh00osexat" path="res://ui/components/SalePopup.gd" id="7"]
 
 [sub_resource type="StyleBoxFlat" id="3"]
@@ -43,6 +39,7 @@ corner_radius_bottom_left = 8
 [sub_resource type="StyleBoxEmpty" id="4"]
 
 [node name="SalePopup" type="ColorRect" unique_id=1857610448 node_paths=PackedStringArray("title_label", "time_left_label", "go_button", "close_button")]
+visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 pivot_offset = Vector2(2826, 416)
@@ -78,6 +75,7 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 value = 100.0
+show_percentage = false
 
 [node name="Margin" type="MarginContainer" parent="PanelContainer/Layout" unique_id=704816087]
 layout_mode = 2
@@ -92,17 +90,13 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="PanelContainer/Layout/Margin/Column" unique_id=103779209]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4")
-theme_override_font_sizes/font_size = 42
+theme_type_variation = &"LabelWellDone"
 horizontal_alignment = 1
 
 [node name="Summary" type="RichTextLabel" parent="PanelContainer/Layout/Margin/Column" unique_id=567233839]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_fonts/normal_font = ExtResource("5")
-theme_override_fonts/bold_font = ExtResource("3")
-theme_override_font_sizes/normal_font_size = 26
-theme_override_font_sizes/bold_font_size = 26
+theme_type_variation = &"RTSWellDone"
 bbcode_enabled = true
 text = "Get [b]50%[/b] off on all our Godot courses with the 
 coupon code [b]DISCOUNT50[/b]"
@@ -111,8 +105,7 @@ horizontal_alignment = 1
 
 [node name="TimeLeftLabel" type="Label" parent="PanelContainer/Layout/Margin/Column" unique_id=1879615245]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("6")
-theme_override_font_sizes/font_size = 32
+theme_type_variation = &"LabelBigTitle"
 text = "Only until "
 horizontal_alignment = 1
 
@@ -124,9 +117,9 @@ custom_minimum_size = Vector2(500, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
+theme_type_variation = &"ButtonBigTitle"
 theme_override_colors/font_color = Color(1, 0.960784, 0.25098, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.960784, 0.25098, 1)
-theme_override_fonts/font = ExtResource("6")
 theme_override_styles/normal = SubResource("3")
 theme_override_styles/pressed = SubResource("3")
 theme_override_styles/hover = SubResource("2")

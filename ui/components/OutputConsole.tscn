@@ -2,7 +2,6 @@
 
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://ymps5jnfq2a3" path="res://ui/components/OutputConsole.gd" id="2"]
-[ext_resource type="FontVariation" uid="uid://buul432qy6di5" path="res://ui/theme/fonts/font_title_small.tres" id="3"]
 [ext_resource type="PackedScene" uid="uid://crxjfqc0u6cof" path="res://ui/components/popups/ExternalErrorPopup.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://dnix44no1xkey" path="res://ui/components/popups/ErrorOverlayPopup.tscn" id="5"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="6"]
@@ -38,9 +37,8 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=440620391]
 layout_mode = 2
+theme_type_variation = &"LabelSmallTitle"
 theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
-theme_override_fonts/font = ExtResource("3")
-theme_override_font_sizes/font_size = 20
 text = "Output"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=1426649461]

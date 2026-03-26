@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dxc8hjg7r2d7w"]
 
 [ext_resource type="Script" uid="uid://bltsl5n1mk6ed" path="res://ui/components/popups/ReportFormPopup.gd" id="1"]
-[ext_resource type="FontVariation" uid="uid://bmjmlneuj5aky" path="res://ui/theme/fonts/font_title.tres" id="2"]
 [ext_resource type="StyleBox" path="res://ui/theme/focus_accent.tres" id="3"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="4"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="5"]
@@ -55,8 +54,7 @@ theme_override_constants/separation = 12
 
 [node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column" unique_id=332844595]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2")
-theme_override_font_sizes/font_size = 24
+theme_type_variation = &"LabelTitle"
 text = "Report an issue"
 horizontal_alignment = 1
 

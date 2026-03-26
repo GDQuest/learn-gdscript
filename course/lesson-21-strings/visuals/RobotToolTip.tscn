@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ccf4uf5trovhg"]
 
 [ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="1"]
-[ext_resource type="FontVariation" uid="uid://csxfhsek43h8q" path="res://ui/theme/fonts/font_text_italics.tres" id="4"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1_ig64n"]
 [ext_resource type="StyleBox" path="res://ui/theme/quiz_outline_neutral.tres" id="5"]
 
 [sub_resource type="GDScript" id="1"]
@@ -17,6 +17,7 @@ func _ready() -> void:
 custom_minimum_size = Vector2(400, 250)
 offset_right = 320.0
 offset_bottom = 251.0
+theme = ExtResource("1_ig64n")
 theme_override_styles/panel = ExtResource("5")
 
 [node name="Robot" parent="." unique_id=1178863534 instance=ExtResource("1")]
@@ -36,7 +37,6 @@ custom_minimum_size = Vector2(392, 28)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 13
-theme_override_fonts/font = ExtResource("4")
-theme_override_font_sizes/font_size = 20
+theme_type_variation = &"LabelItalics"
 text = "Hover over the Robot to learn more"
 horizontal_alignment = 1

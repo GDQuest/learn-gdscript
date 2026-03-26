@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://6ljnb0rf1kb"]
 
-[ext_resource type="FontVariation" uid="uid://clqgrikbb0cbt" path="res://ui/theme/fonts/font_lesson_heading.tres" id="1"]
-[ext_resource type="FontVariation" uid="uid://yrmgtopbyj86" path="res://ui/theme/fonts/font_text.tres" id="2"]
 [ext_resource type="StyleBox" path="res://ui/theme/hseparator_lesson_content.tres" id="3"]
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="4"]
 [ext_resource type="Script" uid="uid://b82vbwpyh2c7m" path="res://ui/screens/lesson/UIContentBlock.gd" id="5"]
@@ -36,8 +34,7 @@ mouse_filter = 2
 
 [node name="ContentHeader" type="Label" parent="Panel/MarginContainer/Layout" unique_id=1923147214]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 28
+theme_type_variation = &"LabelLessonHeading"
 text = "Placeholder heading"
 
 [node name="ContentLayout" type="HBoxContainer" parent="Panel/MarginContainer/Layout" unique_id=914689172]
@@ -50,8 +47,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
-theme_override_fonts/normal_font = ExtResource("2")
-theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "Placeholder text"
 fit_content = true

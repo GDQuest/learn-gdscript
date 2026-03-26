@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cjxtbrqi3hoy4"]
 
 [ext_resource type="Script" uid="uid://cmcy46dsgw1yi" path="res://ui/components/popups/PracticeLeaveUnfinishedPopup.gd" id="1"]
-[ext_resource type="FontVariation" uid="uid://bmjmlneuj5aky" path="res://ui/theme/fonts/font_title.tres" id="2"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="3"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="4"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="5"]
@@ -26,9 +25,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -228.0
-offset_top = -117.5
+offset_top = -121.0
 offset_right = 228.0
-offset_bottom = 117.5
+offset_bottom = 121.0
 theme = ExtResource("7")
 
 [node name="Panel" type="Panel" parent="PanelContainer" unique_id=1512695493]
@@ -43,6 +42,7 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 value = 100.0
+show_percentage = false
 
 [node name="Margin" type="MarginContainer" parent="PanelContainer/Column" unique_id=1096687672]
 layout_mode = 2
@@ -54,8 +54,7 @@ theme_override_constants/separation = 12
 
 [node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column" unique_id=681406051]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2")
-theme_override_font_sizes/font_size = 24
+theme_type_variation = &"LabelTitle"
 horizontal_alignment = 1
 
 [node name="Separator" type="HSeparator" parent="PanelContainer/Column/Margin/Column" unique_id=553088948]
@@ -67,6 +66,7 @@ size_flags_horizontal = 4
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
+fit_content = true
 
 [node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column" unique_id=643347881]
 custom_minimum_size = Vector2(400, 20)

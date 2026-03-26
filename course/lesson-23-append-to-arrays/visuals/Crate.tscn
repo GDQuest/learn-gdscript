@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://by0mg0hgvxi4n"]
 
 [ext_resource type="Texture2D" uid="uid://dc8srtagvqfdv" path="res://course/common/inventory/gems.png" id="1"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1_fldvo"]
 [ext_resource type="Script" uid="uid://co2f1t00ka4iq" path="res://course/lesson-23-append-to-arrays/visuals/Crate.gd" id="2"]
-[ext_resource type="FontVariation" uid="uid://cipfqcm3yp0sc" path="res://ui/theme/fonts/font_text_bold.tres" id="3"]
 
 [sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(0.188235, 0.188235, 0.286275, 1)
@@ -118,6 +118,7 @@ custom_minimum_size = Vector2(120, 120)
 offset_right = 120.0
 offset_bottom = 120.0
 size_flags_horizontal = 4
+theme = ExtResource("1_fldvo")
 theme_override_styles/panel = SubResource("1")
 script = ExtResource("2")
 
@@ -143,8 +144,7 @@ anchor_bottom = 1.0
 offset_left = -20.0
 offset_top = -14.0
 offset_right = 20.0
-theme_override_fonts/font = ExtResource("3")
-theme_override_font_sizes/font_size = 20
+theme_type_variation = &"LabelBoldText"
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1

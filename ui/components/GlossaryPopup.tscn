@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bmrywhp44ewj4" path="res://ui/components/GlossaryPopup.gd" id="1"]
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
-[ext_resource type="FontVariation" uid="uid://cipfqcm3yp0sc" path="res://ui/theme/fonts/font_text_bold.tres" id="3"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_darker_with_shadow.tres" id="4"]
 
 [node name="GlossaryPopup" type="CanvasLayer" unique_id=969137557 node_paths=PackedStringArray("_panel", "_interaction_area", "_title", "_content", "_timer")]
@@ -33,9 +32,8 @@ theme_override_constants/separation = 8
 
 [node name="Title" type="Label" parent="Panel/MarginContainer/Column" unique_id=1740499122]
 layout_mode = 2
+theme_type_variation = &"LabelBoldText"
 theme_override_colors/font_color = Color(0.360784, 0.678431, 0.988235, 1)
-theme_override_fonts/font = ExtResource("3")
-theme_override_font_sizes/font_size = 20
 text = "Term"
 
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/Column" unique_id=1927065562]

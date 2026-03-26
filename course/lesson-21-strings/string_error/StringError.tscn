@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="1"]
 [ext_resource type="Script" uid="uid://brokelv6jp2j0" path="res://course/lesson-21-strings/string_error/StringError.gd" id="2"]
-[ext_resource type="FontVariation" uid="uid://cipfqcm3yp0sc" path="res://ui/theme/fonts/font_text_bold.tres" id="3"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="3_fwnrf"]
 
 [node name="StringError" unique_id=1144351778 instance=ExtResource("1")]
 script = ExtResource("2")
@@ -16,8 +16,8 @@ offset_top = -127.0
 offset_right = 250.0
 offset_bottom = -99.0
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("3")
-theme_override_font_sizes/font_size = 20
+theme = ExtResource("3_fwnrf")
+theme_type_variation = &"LabelBoldText"
 text = "INVALID NAME"
 horizontal_alignment = 1
 clip_text = true

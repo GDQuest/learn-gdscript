@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://bcqewjywuh2vc"]
 
-[ext_resource type="FontVariation" uid="uid://bmjmlneuj5aky" path="res://ui/theme/fonts/font_title.tres" id="1"]
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://dmlfrbv6h64bn" path="res://ui/screens/end_screen/main_menu/sky_evening.png" id="3"]
 [ext_resource type="Script" uid="uid://bwqonh3c7lsu3" path="res://ui/screens/end_screen/SponsorlessEndScreen.gd" id="4"]
@@ -89,6 +88,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(2495, 16)
 theme = ExtResource("2")
 script = ExtResource("4")
@@ -182,8 +183,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column" unique_id=602054559]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 24
+theme_type_variation = &"LabelTitle"
 text = "Congratulations!"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column" unique_id=448622616]
@@ -192,11 +192,11 @@ bbcode_enabled = true
 text = "You completed Learn GDScript From Zero. You now have the basics you need to make games with the Godot game engine.
 
 You can keep learning with the free series Getting Started with Godot."
+fit_content = true
 
 [node name="Label4" type="Label" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column" unique_id=2040361780]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 24
+theme_type_variation = &"LabelTitle"
 text = "This is an Open-Source project!"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column" unique_id=1330755751]
@@ -205,6 +205,7 @@ bbcode_enabled = true
 text = "Like Godot, this app and course is free and open-source. 
 
 You can find the app's source code and contribute translations here: Learn GDScript From Zero (Github repository)."
+fit_content = true
 
 [node name="Control2" type="Control" parent="Layout/PanelContainer/Sky" unique_id=1249369151]
 clip_contents = true

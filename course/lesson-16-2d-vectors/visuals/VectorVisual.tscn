@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dtvefdvy6gax0"]
 
-[ext_resource type="FontVariation" uid="uid://cipfqcm3yp0sc" path="res://ui/theme/fonts/font_text_bold.tres" id="1"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1_qk0tp"]
 [ext_resource type="Texture2D" uid="uid://deb8pkjn6cdae" path="res://course/lesson-16-2d-vectors/visuals/triangle.png" id="2"]
 
 [sub_resource type="GDScript" id="1"]
@@ -64,8 +64,8 @@ offset_left = 12.0
 offset_top = -149.0
 offset_right = 179.0
 offset_bottom = -121.0
-theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 20
+theme = ExtResource("1_qk0tp")
+theme_type_variation = &"LabelBoldText"
 text = "Vector2(100, 100)"
 
 [node name="LabelX" type="Label" parent="VectorVisual" unique_id=1088780076]
@@ -79,8 +79,8 @@ offset_left = 160.0
 offset_top = -14.0
 offset_right = 210.0
 offset_bottom = 14.0
-theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 20
+theme = ExtResource("1_qk0tp")
+theme_type_variation = &"LabelBoldText"
 text = "X"
 
 [node name="LabelY" type="Label" parent="VectorVisual" unique_id=1453749389]
@@ -94,8 +94,8 @@ offset_left = -25.0
 offset_top = 150.0
 offset_right = 25.0
 offset_bottom = 178.0
-theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 20
+theme = ExtResource("1_qk0tp")
+theme_type_variation = &"LabelBoldText"
 text = "Y"
 horizontal_alignment = 1
 

@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://qap2kv8o04m6"]
 
-[ext_resource type="FontVariation" uid="uid://buul432qy6di5" path="res://ui/theme/fonts/font_title_small.tres" id="1"]
-[ext_resource type="FontVariation" uid="uid://cbser3h81h3th" path="res://ui/theme/fonts/font_button_small.tres" id="2"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_darker.tres" id="3"]
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="4"]
 [ext_resource type="Script" uid="uid://b6t32yqrdrppj" path="res://ui/screens/lesson/UIPracticeButton.gd" id="5"]
@@ -9,7 +7,6 @@
 [ext_resource type="StyleBox" path="res://ui/theme/focus.tres" id="7"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_hover.tres" id="8"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="9"]
-[ext_resource type="FontVariation" uid="uid://dxale88jj6wk7" path="res://ui/theme/fonts/font_button.tres" id="10"]
 [ext_resource type="StyleBox" path="res://ui/theme/pill.tres" id="11"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="12"]
 
@@ -45,8 +42,7 @@ theme_override_constants/separation = 8
 
 [node name="Title" type="Label" parent="Margin/Row/Column/Row" unique_id=1874089432]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1")
-theme_override_font_sizes/font_size = 20
+theme_type_variation = &"LabelSmallTitle"
 text = "Practice title"
 
 [node name="CompletedBeforeIcon" type="TextureRect" parent="Margin/Row/Column/Row" unique_id=69542882]
@@ -63,8 +59,7 @@ stretch_mode = 6
 [node name="NextPill" type="Label" parent="Margin/Row/Column/Row" unique_id=1152479974]
 visible = false
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2")
-theme_override_font_sizes/font_size = 18
+theme_type_variation = &"LabelSmallButton"
 theme_override_styles/normal = ExtResource("11")
 text = "next"
 
@@ -89,6 +84,6 @@ text = "Practice"
 [node name="NoNavigationLabel" type="Label" parent="Margin/Row" unique_id=700834557]
 visible = false
 layout_mode = 2
+theme_type_variation = &"LabelSmallButton"
 theme_override_colors/font_color = Color(0.290196, 0.294118, 0.388235, 1)
-theme_override_fonts/font = ExtResource("10")
 text = "You are here"

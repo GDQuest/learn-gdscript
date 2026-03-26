@@ -3,7 +3,6 @@
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://bvhqoj5m0qrs1" path="res://ui/UILesson.gd" id="2"]
 [ext_resource type="StyleBox" path="res://ui/theme/vscrollbar_large_scroll.tres" id="3"]
-[ext_resource type="FontVariation" uid="uid://ehys7a6horyb" path="res://ui/theme/fonts/font_title_big.tres" id="4"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_course_page.tres" id="5"]
 [ext_resource type="StyleBox" path="res://ui/theme/vscrollbar_large_grabber.tres" id="6"]
 [ext_resource type="StyleBox" path="res://ui/theme/vscrollbar_large_grabber_highlight.tres" id="7"]
@@ -77,8 +76,7 @@ theme_override_constants/separation = 6
 
 [node name="Title" type="Label" parent="OuterMargin/ScrollContainer/InnerMargin/Content" unique_id=1803172284 groups=["navigation_text"]]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4")
-theme_override_font_sizes/font_size = 32
+theme_type_variation = &"LabelBigTitle"
 text = "Title"
 horizontal_alignment = 1
 
@@ -104,8 +102,7 @@ theme_override_constants/separation = 30
 
 [node name="PracticesTitle" type="Label" parent="OuterMargin/ScrollContainer/InnerMargin/Content/PracticesContainer" unique_id=877169471 groups=["navigation_text"]]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4")
-theme_override_font_sizes/font_size = 32
+theme_type_variation = &"LabelBigTitle"
 text = "Practices"
 horizontal_alignment = 1
 

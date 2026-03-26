@@ -2,7 +2,6 @@
 
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://vmi2orvhk0yw" path="res://ui/components/OutputConsoleErrorMessage.gd" id="2"]
-[ext_resource type="FontVariation" uid="uid://cbser3h81h3th" path="res://ui/theme/fonts/font_button_small.tres" id="3"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_error_log.tres" id="4"]
 
 [node name="OutputConsoleErrorMessage" type="PanelContainer" unique_id=1485937269 node_paths=PackedStringArray("_severity_label", "_message_label", "_location_row", "_file_name_label", "_location_label", "_external_label", "_message_explain_button")]
@@ -82,6 +81,5 @@ text = "Sometimes errors are reported outside of your code. Why does that happen
 visible = false
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("3")
-theme_override_font_sizes/font_size = 18
+theme_type_variation = &"ButtonSmall"
 text = "Explain"

@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" path="res://ui/components/GDQuestLogo.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://dpi7388fmgj7g" path="res://ui/components/popups/PracticeDonePopup.tscn" id="10"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_sliceeditor.tres" id="11"]
-[ext_resource type="FontVariation" uid="uid://buul432qy6di5" path="res://ui/theme/fonts/font_title_small.tres" id="13"]
 [ext_resource type="Script" uid="uid://sfilcjuvjf0w" path="res://ui/components/SliceEditor.gd" id="13_p3qxn"]
 [ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="13_x4rpt"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_sliceeditor_title.tres" id="14"]
@@ -138,7 +137,7 @@ theme_override_constants/separation = 4
 
 [node name="Label" type="Label" parent="Margin/Layout/OutputAnchors/SolutionContainer/Layout" unique_id=47742744]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("13")
+theme_type_variation = &"LabelSmallTitle"
 theme_override_styles/normal = ExtResource("14")
 text = "Suggested Solution"
 

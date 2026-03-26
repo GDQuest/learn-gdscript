@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://c1yxaejn70xrh"]
 
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
-[ext_resource type="FontVariation" uid="uid://ehys7a6horyb" path="res://ui/theme/fonts/font_title_big.tres" id="2"]
 [ext_resource type="Script" uid="uid://r14urqhc40oi" path="res://course/common/inventory/DictInventory.gd" id="3"]
 
 [sub_resource type="StyleBoxFlat" id="1"]
@@ -44,8 +43,7 @@ theme_override_constants/separation = 20
 
 [node name="Title" type="Label" parent="Margin/Column" unique_id=1896727965]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2")
-theme_override_font_sizes/font_size = 32
+theme_type_variation = &"LabelBigTitle"
 text = "Inventory"
 horizontal_alignment = 1
 

@@ -1,45 +1,42 @@
 [gd_scene format=3 uid="uid://booujnrqp7o2t"]
 
-[ext_resource type="FontVariation" uid="uid://bmjmlneuj5aky" path="res://ui/theme/fonts/font_title.tres" id="1"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1_tpysi"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="2"]
-
-[sub_resource type="Theme" id="1"]
-default_font = ExtResource("1")
 
 [node name="SyntaxAccessValue" type="PanelContainer" unique_id=358328830]
 custom_minimum_size = Vector2(0, 80)
 offset_right = 580.0
 offset_bottom = 45.0
 size_flags_horizontal = 3
+theme = ExtResource("1_tpysi")
 theme_override_styles/panel = ExtResource("2")
 
 [node name="Row" type="HBoxContainer" parent="." unique_id=1381163340]
 layout_mode = 2
 size_flags_vertical = 4
-theme = SubResource("1")
 theme_override_constants/separation = 4
 alignment = 1
 
 [node name="Label2" type="Label" parent="Row" unique_id=750103362]
 layout_mode = 2
+theme_type_variation = &"LabelVisualDefinition"
 theme_override_colors/font_color = Color(0.14902, 0.776471, 0.968627, 1)
-theme_override_font_sizes/font_size = 24
 text = "dictionary"
 
 [node name="Label5" type="Label" parent="Row" unique_id=1469940723]
 layout_mode = 2
+theme_type_variation = &"LabelVisualDefinition"
 theme_override_colors/font_color = Color(1, 0.960784, 0.25098, 1)
-theme_override_font_sizes/font_size = 24
 text = "["
 
 [node name="Label7" type="Label" parent="Row" unique_id=1650240401]
 layout_mode = 2
+theme_type_variation = &"LabelVisualDefinition"
 theme_override_colors/font_color = Color(0.14902, 0.776471, 0.968627, 1)
-theme_override_font_sizes/font_size = 24
 text = "key"
 
 [node name="Label8" type="Label" parent="Row" unique_id=506699423]
 layout_mode = 2
+theme_type_variation = &"LabelVisualDefinition"
 theme_override_colors/font_color = Color(1, 0.960784, 0.25098, 1)
-theme_override_font_sizes/font_size = 24
 text = "]"
