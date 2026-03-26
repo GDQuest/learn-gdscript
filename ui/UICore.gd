@@ -24,12 +24,13 @@ var _user_profile := UserProfiles.get_profile()
 
 
 func _init() -> void:
-	OS.low_processor_usage_mode = true
-	# TODO: Update whenever https://github.com/godotengine/godot/issues/117875 is fixed
+	# TODO: Remove feature guard whenever https://github.com/godotengine/godot/issues/117875 is fixed
 	# also consider using Engine.max_fps instead when it's fixed
-	OS.low_processor_usage_mode_sleep_usec = 1
-	_update_framerate(_user_profile.framerate_limit)
-	_user_profile.framerate_limit_changed.connect(_update_framerate)
+	if not OS.has_feature("Web"):
+		OS.low_processor_usage_mode = true
+		OS.low_processor_usage_mode_sleep_usec = 20000
+		_update_framerate(_user_profile.framerate_limit)
+		_user_profile.framerate_limit_changed.connect(_update_framerate)
 
 
 func _ready() -> void:
@@ -161,6 +162,5 @@ func _update_welcome_button() -> void:
 func _update_framerate(new_framerate: int) -> void:
 	if new_framerate == 0:
 		new_framerate = 1000
-	# TODO: Update whenever https://github.com/godotengine/godot/issues/117875 is fixed
-	# also consider using Engine.max_fps instead when it's fixed
-	#OS.low_processor_usage_mode_sleep_usec = 1_000_000 / new_framerate
+	# TODO: Consider using Engine.max_fps instead
+	OS.low_processor_usage_mode_sleep_usec = 1_000_000 / new_framerate
