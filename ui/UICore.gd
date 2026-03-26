@@ -26,7 +26,7 @@ var _user_profile := UserProfiles.get_profile()
 func _init() -> void:
 	# TODO: Remove feature guard whenever https://github.com/godotengine/godot/issues/117875 is fixed
 	# also consider using Engine.max_fps instead when it's fixed
-	if not OS.has_feature("Web"):
+	if not OS.has_feature("web"):
 		OS.low_processor_usage_mode = true
 		OS.low_processor_usage_mode_sleep_usec = 20000
 		_update_framerate(_user_profile.framerate_limit)
