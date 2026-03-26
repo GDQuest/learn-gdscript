@@ -111,6 +111,9 @@ func set_dyslexia_font(dyslexia_font: bool, and_save: bool = true) -> void:
 			var scaled_size := default_size + current_scale * 2
 			
 			_theme.set_font_size(font_size_name, theme_type, scaled_size - scaled_size * (0.25 if dyslexia_font else 0.0))
+	var default_theme_size: int = get_default_font_size()
+	var scaled_theme_size := default_theme_size + current_scale * 2
+	_theme.default_font_size = scaled_theme_size - scaled_theme_size * (0.25 if dyslexia_font else 0.0)
 	
 	if and_save:
 		current_profile.dyslexia_font = dyslexia_font
