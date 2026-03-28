@@ -30,6 +30,9 @@ const URL_GODOT_DOCS_REF = "ref=godot-docs"
 @export var framerate_limit := 60: set = set_framerate_limit
 
 
+var _save_queued := false
+
+
 func _init() -> void:
 	study_progression = []
 	last_started_lesson = {}
@@ -41,11 +44,19 @@ func _init() -> void:
 
 
 func save() -> void:
+	if _save_queued:
+		return
+	_save_queued = true
+	_run_save.call_deferred()
+
+
+func _run_save() -> void:
 	if resource_path.is_empty():
 		push_error("Cannot save a file without a filename, set resource_path first.")
 		return
 	ResourceSaver.save(self, resource_path)
 	take_over_path(resource_path)
+	_save_queued = false
 
 
 func get_or_create_course(course_id: String) -> CourseProgress:
