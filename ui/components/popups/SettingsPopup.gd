@@ -15,6 +15,7 @@ const FRAMERATE_MAP := {
 @export var _font_size_value: HSlider
 @export var _font_size_sample: Label
 @export var _scroll_sensitivity_slider: HSlider
+@export var _framerate_settings_section: Control
 @export var _framerate_option: OptionButton
 @export var _lower_contrast: CheckBox
 @export var _dyslexia_font: CheckBox
@@ -30,6 +31,9 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	if OS.has_feature("web"):
+		_framerate_settings_section.hide()
+	
 	_init_languages()
 	_init_values()
 	

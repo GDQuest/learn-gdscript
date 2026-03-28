@@ -34,10 +34,11 @@ func _cache_font_defaults() -> void:
 		return
 	
 	for file in fs.get_files():
+		print(file)
 		match file.get_extension():
-			"remap" when Engine.is_editor_hint():
+			"remap" when not Engine.is_editor_hint():
 				file = file.substr(0, file.length() - 6)
-			"tres" when not Engine.is_editor_hint():
+			"tres" when Engine.is_editor_hint():
 				pass
 			_:
 				continue
@@ -94,6 +95,8 @@ func set_dyslexia_font(dyslexia_font: bool, and_save: bool = true) -> void:
 				font_resource.base_font = load("res://ui/theme/fonts/OpenDyslexicMono-Regular.otf")
 			elif "Regular" in font_resource.base_font.resource_path:
 				font_resource.base_font = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
+			elif "BoldItalic" in font_resource.base_font.resource_path:
+				font_resource.base_font = load("res://ui/theme/fonts/OpenDyslexic-Bold-Italic.otf")
 			elif "Bold" in font_resource.base_font.resource_path:
 				font_resource.base_font = load("res://ui/theme/fonts/OpenDyslexic-Bold.otf")
 			elif "Italic" in font_resource.base_font.resource_path:
