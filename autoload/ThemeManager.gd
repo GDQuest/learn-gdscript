@@ -34,11 +34,10 @@ func _cache_font_defaults() -> void:
 		return
 	
 	for file in fs.get_files():
-		print(file)
 		match file.get_extension():
-			"remap" when not Engine.is_editor_hint():
+			"remap":
 				file = file.substr(0, file.length() - 6)
-			"tres" when Engine.is_editor_hint():
+			"tres":
 				pass
 			_:
 				continue
