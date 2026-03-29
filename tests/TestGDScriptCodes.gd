@@ -7,10 +7,9 @@ const SOURCE_PATH := "res://tests/gdscript-error-list.txt"
 func _run():
 	print("[TEST] GDscript Error Codes")
 
-	var source_file := File.new()
-	var error = source_file.open(SOURCE_PATH, File.READ)
-	if error != OK:
-		printerr("Failed to load the source file at '%s': Error code %d." % [SOURCE_PATH, error])
+	var source_file := FileAccess.open(SOURCE_PATH, FileAccess.READ)
+	if source_file:
+		printerr("Failed to load the source file at '%s': Error code %d." % [SOURCE_PATH, FileAccess.get_open_error()])
 		return
 
 	var message_list := PackedStringArray()

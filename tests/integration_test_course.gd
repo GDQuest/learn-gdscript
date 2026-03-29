@@ -51,37 +51,41 @@ func _run_integration_test() -> void:
 	var total_lessons: int = _course_index.get_lessons_count()
 	var total_practices := 0
 	for i in total_lessons:
-		var lesson := NavigationManager.get_navigation_resource(_course_index.get_lesson_path(i)) as Lesson
-		total_practices += lesson.practices.size()
+		var lesson := NavigationManager.get_navigation_resource(_course_index.get_lesson_path(i)) as BBCodeParser.ParseNode
+		total_practices += BBCodeUtils.get_lesson_practice_count(lesson)
 
 	print("Course: %s" % _course_index.get_title())
 	print("Total lessons: %d" % total_lessons)
 	print("Total practices: %d\n" % total_practices)
 
 	for lesson_index in range(total_lessons):
-		var lesson: Lesson = NavigationManager.get_navigation_resource(_course_index.get_lesson_path(lesson_index))
-		print("[Lesson %d/%d] Testing: %s" % [lesson_index + 1, total_lessons, lesson.title])
+		var lesson: BBCodeParser.ParseNode = NavigationManager.get_navigation_resource(_course_index.get_lesson_path(lesson_index))
+		var title := BBCodeUtils.get_lesson_title(lesson)
+		print("[Lesson %d/%d] Testing: %s" % [lesson_index + 1, total_lessons, title])
 
 		# Functions yield which in Godot 3 returns function state objects
-		var awaited_lesson_test: GDScriptFunctionState = _test_lesson(lesson)
-		var is_lesson_test_passed: bool = await awaited_lesson_test.completed
+		var is_lesson_test_passed: bool = await _test_lesson(lesson)
 		if not is_lesson_test_passed:
-			_fail_messages.append("Lesson %d: %s - Failed to load/display" % [lesson_index + 1, lesson.title])
+			_fail_messages.append("Lesson %d: %s - Failed to load/display" % [lesson_index + 1, title])
 			print("  FAIL - Lesson failed\n")
 			continue
 
 		print("  OK - Lesson loaded successfully")
 
 		var practice_index := 0
-		for practice in lesson.practices:
+		var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
+		for i in practice_count:
 			practice_index += 1
 			_tests_run_count += 1
-			print("  [Practice %d/%d] Testing: %s" % [practice_index, lesson.practices.size(), practice.title])
 
-			var awaited_practice_test: GDScriptFunctionState = _test_practice(practice, lesson)
-			var is_practice_test_passed: bool = await awaited_practice_test.completed
+			var practice := BBCodeUtils.get_lesson_practice(lesson, i)
+			var practice_title := BBCodeUtils.get_practice_title(practice)
+
+			print("  [Practice %d/%d] Testing: %s" % [practice_index, practice_count, practice_title])
+
+			var is_practice_test_passed: bool = await _test_practice(practice, lesson)
 			if not is_practice_test_passed:
-				_fail_messages.append("Practice: %s (Lesson %d)" % [practice.title, lesson_index + 1])
+				_fail_messages.append("Practice: %s (Lesson %d)" % [practice_title, lesson_index + 1])
 				print("    FAIL - Practice failed")
 			else:
 				_tests_passed_count += 1
@@ -92,14 +96,13 @@ func _run_integration_test() -> void:
 	_print_summary()
 
 
-func _test_lesson(lesson: Lesson) -> bool:
+func _test_lesson(lesson: BBCodeParser.ParseNode) -> bool:
 	var ui_lesson: UILesson = UILessonScene.instantiate()
 	add_child(ui_lesson)
 
 	ui_lesson.enable_integration_test_mode()
 
-	var setup_result: GDScriptFunctionState = ui_lesson.setup(lesson, _course_index)
-	await setup_result.completed
+	await ui_lesson.setup(lesson, _course_index)
 
 	var displayed := false
 	var timed_out := false
@@ -126,7 +129,8 @@ func _test_lesson(lesson: Lesson) -> bool:
 	timer.queue_free()
 
 	if timed_out:
-		_timeout_messages.append("Lesson timeout (%.1fs): %s" % [lesson_load_timeout, lesson.title])
+		var lesson_title := BBCodeUtils.get_lesson_title(lesson)
+		_timeout_messages.append("Lesson timeout (%.1fs): %s" % [lesson_load_timeout, lesson_title])
 		ui_lesson.queue_free()
 		return false
 
@@ -152,15 +156,13 @@ func _on_lesson_timeout_signal(state: Dictionary) -> void:
 	pass
 
 
-func _test_practice(practice: Practice, lesson: Lesson) -> bool:
+func _test_practice(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode) -> bool:
 	var ui_practice: UIPractice = UIPracticeScene.instantiate()
 	add_child(ui_practice)
 
 	ui_practice.turn_on_test_mode()
 
-	var setup_result = ui_practice.setup(practice, lesson, _course_index)
-	if setup_result != null and setup_result is GDScriptFunctionState:
-		await setup_result.completed
+	await ui_practice.setup(practice, lesson, _course_index)
 
 	var frames_waited := 0
 	while frames_waited < 5:
@@ -203,7 +205,8 @@ func _test_practice(practice: Practice, lesson: Lesson) -> bool:
 	execution_timer.queue_free()
 
 	if timed_out:
-		_timeout_messages.append("Practice execution timeout (%.1fs): %s" % [practice_execution_timeout, practice.title])
+		var practice_title := BBCodeUtils.get_practice_title(practice)
+		_timeout_messages.append("Practice execution timeout (%.1fs): %s" % [practice_execution_timeout, practice_title])
 		ui_practice.queue_free()
 		return false
 
@@ -236,8 +239,8 @@ func _print_summary() -> void:
 	var total_lessons: int = _course_index.get_lessons_count()
 	var total_practices := 0
 	for i in total_lessons:
-		var lesson := NavigationManager.get_navigation_resource(_course_index.get_lesson_path(i)) as Lesson
-		total_practices += lesson.practices.size()
+		var lesson := NavigationManager.get_navigation_resource(_course_index.get_lesson_path(i)) as BBCodeParser.ParseNode
+		total_practices += BBCodeUtils.get_lesson_practice_count(lesson)
 
 	print("Total lessons tested: %d" % total_lessons)
 	print("Total practices tested: %d" % total_practices)

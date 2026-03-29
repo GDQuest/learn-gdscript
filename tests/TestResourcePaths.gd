@@ -1,10 +1,8 @@
 @tool
 extends EditorScript
 
-const COURSE_RESOURCE_PATH := "res://course/course-learn-gdscript.tres"
+const COURSE_RESOURCE_PATH := "res://course/CourseLearnGDScriptIndex.gd"
 const VISUAL_ELEMENT_EXTENSIONS := ["tscn", "png", "jpg", "jpeg", "svg", "gif"]
-
-var _file_tester := File.new()
 
 
 func _run() -> void:
@@ -16,49 +14,64 @@ func _run() -> void:
 		)
 		return
 
-	var course = ResourceLoader.load(COURSE_RESOURCE_PATH, "", true)
-	if not course:
+	var course_script = ResourceLoader.load(COURSE_RESOURCE_PATH, "", ResourceLoader.CACHE_MODE_IGNORE)
+	if not course_script:
 		printerr(
 			"Failed to load the course resource at '%s'. Aborting test." % [COURSE_RESOURCE_PATH],
 		)
 
+	var course: CourseIndex = course_script.new()
+
 	var error_messages := PackedStringArray()
 	var index := 1
-	for lesson in course.lessons:
-		for content_block in lesson.content_blocks:
-			if not _is_valid(lesson, content_block.visual_element_path, VISUAL_ELEMENT_EXTENSIONS):
-				error_messages.append(
-					(
-						"Lesson %s (%s): visual element at path '%s' is not valid."
-						% [index, lesson.title, content_block.visual_element_path]
-					),
-				)
+	for i in course.get_lessons_count():
+		var lesson_path := course.get_lesson_path(i)
+		var lesson := NavigationManager.get_navigation_resource(lesson_path)
+		var lesson_title := BBCodeUtils.get_lesson_title(lesson)
+		var block_count := BBCodeUtils.get_lesson_block_count(lesson)
+		for l in block_count:
+			var block_type := BBCodeUtils.get_lesson_block_type(lesson, l)
+			var block: BBCodeParser.ParseNode = lesson.children[l]
+			if block_type == BBCodeParserData.Tag.VISUAL:
+				var visual_path := BBCodeUtils.get_visual_path(block)
+				if not _is_valid(lesson, visual_path, VISUAL_ELEMENT_EXTENSIONS):
+					error_messages.append(
+						(
+							"Lesson %s (%s): visual element at path '%s' is not valid."
+							% [index, lesson_title, visual_path]
+						),
+					)
 
 		var practice_index := 1
-		for practice in lesson.practices:
-			if not _is_valid(lesson, practice.validator_script_path, ["gd"]):
+		var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
+		for l in practice_count:
+			var practice := BBCodeUtils.get_lesson_practice(lesson, l)
+			var practice_title := BBCodeUtils.get_practice_title(practice)
+			var validator_path := BBCodeUtils.get_practice_validator_path(practice)
+			if not _is_valid(lesson, validator_path, ["gd"]):
 				error_messages.append(
 					(
 						"Lesson %s (%s) / Practice %s (%s): validator script at path '%s' is not valid."
 						% [
 							index,
-							lesson.title,
+							lesson_title,
 							practice_index,
-							practice.title,
-							practice.validator_script_path,
+							practice_title,
+							validator_path,
 						]
 					),
 				)
-			if not _is_valid(lesson, practice.script_slice_path):
+			var slice_path := BBCodeUtils.get_practice_script_slice_path(practice)
+			if not _is_valid(lesson, slice_path):
 				error_messages.append(
 					(
 						"Lesson %s (%s) / Practice %s (%s): script slice at path '%s' is not valid."
 						% [
 							index,
-							lesson.title,
+							lesson_title,
 							practice_index,
-							practice.title,
-							practice.script_slice_path,
+							practice_title,
+							slice_path,
 						]
 					),
 				)
@@ -67,20 +80,20 @@ func _run() -> void:
 	var count := error_messages.size()
 	if count > 0:
 		print("%s invalid resources found." % count)
-		"\n".join(print(error_messages))
+		print("\n".join(error_messages))
 	else:
 		print("No invalid resources found!")
 	print("Done.")
 
 
 # Returns true if the path is valid, whether it's relative or absolute.
-func _is_valid(resource: Resource, path: String, valid_extensions := ["tres"]) -> bool:
+func _is_valid(resource: BBCodeParser.ParseNode, path: String, valid_extensions := ["tres"]) -> bool:
 	if path.is_empty():
 		return true
 	if not path.get_extension().to_lower() in valid_extensions:
 		return false
 
 	var test_path := path
-	if test_path.is_rel_path():
+	if test_path.is_relative_path():
 		test_path = resource.resource_path.get_base_dir().path_join(test_path)
-	return _file_tester.file_exists(test_path)
+	return FileAccess.file_exists(test_path)
