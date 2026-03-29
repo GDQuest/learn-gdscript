@@ -6,7 +6,7 @@
 class_name UILesson
 extends UINavigatablePage
 
-const DefaultCourseIndexPath := "res://course/CourseLearnGDScriptIndex.gd"
+const DEFAULT_COURSE_INDEX := "res://course/CourseLearnGDScriptIndex.gd"
 
 const ContentBlockScene := preload("screens/lesson/UIContentBlock.tscn")
 const QuizInputFieldScene := preload("screens/lesson/quizzes/UIQuizInputField.tscn")
@@ -58,7 +58,7 @@ func _ready() -> void:
 
 	if test_lesson and get_parent() == get_tree().root:
 		var _lesson_node := NavigationManager.get_navigation_resource(test_lesson)
-		var _course_index: CourseIndex = load(DefaultCourseIndexPath).new()
+		var _course_index: CourseIndex = load(DEFAULT_COURSE_INDEX).new()
 		setup(_lesson_node, _course_index)
 		for child in _content_blocks.get_children():
 			child.show()
