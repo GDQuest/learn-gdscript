@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://xwdpm30wddv6"]
 
-[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
+[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_xfu3p"]
 [ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="2"]
 
 [node name="CodeLevelUpBasic" type="CodeEdit" unique_id=972864036]
@@ -11,7 +11,7 @@ anchor_bottom = 1.0
 offset_right = -1264.0
 offset_bottom = -900.0
 size_flags_horizontal = 3
-theme = ExtResource("1")
+theme_override_fonts/font = ExtResource("1_xfu3p")
 text = "var level = 1
 
 func level_up():

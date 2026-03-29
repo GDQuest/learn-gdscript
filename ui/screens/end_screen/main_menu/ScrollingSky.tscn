@@ -1,59 +1,58 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://cp1dynlrnju0o"]
 
-[ext_resource path="res://ui/screens/end_screen/main_menu/sky_dark.png" type="Texture2D" id=1]
-[ext_resource path="res://ui/screens/end_screen/main_menu/sky_day_blurred.png" type="Texture2D" id=2]
-[ext_resource path="res://ui/screens/end_screen/main_menu/sky_evening.png" type="Texture2D" id=3]
-[ext_resource path="res://ui/screens/end_screen/main_menu/Sky.gd" type="Script" id=4]
+[ext_resource type="Texture2D" uid="uid://ctp4gm4ns6paw" path="res://ui/screens/end_screen/main_menu/sky_dark.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dxan5spd0hikk" path="res://ui/screens/end_screen/main_menu/sky_day_blurred.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://dmlfrbv6h64bn" path="res://ui/screens/end_screen/main_menu/sky_evening.png" id="3"]
+[ext_resource type="Script" uid="uid://by65efv4gqxuv" path="res://ui/screens/end_screen/main_menu/Sky.gd" id="4"]
 
-[node name="ScrollingSky" type="HBoxContainer"]
+[node name="ScrollingSky" type="HBoxContainer" unique_id=1460710912]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
-script = ExtResource( 4 )
+script = ExtResource("4")
 
-[node name="Control" type="Control" parent="."]
-offset_right = 960.0
-offset_bottom = 1080.0
+[node name="Control" type="Control" parent="." unique_id=1009231578]
 clip_contents = true
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=125274519]
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = ExtResource( 2 )
-expand = true
+texture = ExtResource("2")
+expand_mode = 1
 
-[node name="Control2" type="Control" parent="."]
-offset_left = 960.0
-offset_right = 1600.0
-offset_bottom = 1080.0
+[node name="Control2" type="Control" parent="." unique_id=820409369]
 clip_contents = true
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="TextureRect" type="TextureRect" parent="Control2"]
+[node name="TextureRect" type="TextureRect" parent="Control2" unique_id=1843881835]
+layout_mode = 0
 offset_left = -959.0
 offset_right = 961.0
 offset_bottom = 1080.0
-texture = ExtResource( 3 )
-expand = true
+texture = ExtResource("3")
+expand_mode = 1
 
-[node name="Control3" type="Control" parent="."]
-offset_left = 1600.0
-offset_right = 1920.0
-offset_bottom = 1080.0
+[node name="Control3" type="Control" parent="." unique_id=1905722430]
 clip_contents = true
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="Control3"]
+[node name="TextureRect" type="TextureRect" parent="Control3" unique_id=1413601422]
+layout_mode = 0
 offset_left = -1599.0
 offset_right = 321.0
 offset_bottom = 1080.0
-texture = ExtResource( 1 )
-expand = true
+texture = ExtResource("1")
+expand_mode = 1

@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://ukja5lpk5jw5"]
 
-[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://vmi2orvhk0yw" path="res://ui/components/OutputConsoleErrorMessage.gd" id="2"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_error_log.tres" id="4"]
 
@@ -9,7 +8,6 @@ self_modulate = Color(1, 1, 1, 0.25)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource("1")
 theme_override_styles/panel = ExtResource("4")
 script = ExtResource("2")
 _severity_label = NodePath("Layout/Content/MessageRow/MessageSeverity")

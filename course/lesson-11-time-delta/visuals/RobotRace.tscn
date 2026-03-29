@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://cwft6x5veh6yk"]
 
-[ext_resource path="res://course/lesson-11-time-delta/visuals/RunningRobot.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/lesson-11-time-delta/visuals/RobotRace.gd" type="Script" id=2]
+[ext_resource type="PackedScene" path="res://course/lesson-11-time-delta/visuals/RunningRobot.tscn" id="1"]
+[ext_resource type="Script" uid="uid://c3xmmmv87ece6" path="res://course/lesson-11-time-delta/visuals/RobotRace.gd" id="2"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
 var speed = 200.0
@@ -19,7 +19,7 @@ func reset():
 	position = start_position
 "
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id="3"]
 script/source = "extends Node2D
 
 var distance = 200.0 / 120.0
@@ -34,47 +34,38 @@ func reset():
 	position = start_position
 "
 
-[node name="RobotRace" type="Node2D"]
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_vertical_guides_": [ -151.0 ]
-}
+[node name="RobotRace" type="Node2D" unique_id=439008016]
+script = ExtResource("2")
 
-[node name="Robots" type="Node2D" parent="."]
-position = Vector2( 0, -87 )
+[node name="Robots" type="Node2D" parent="." unique_id=656311440]
+position = Vector2(0, -87)
 
-[node name="RunningRobotFrameDelta" parent="Robots" instance=ExtResource( 1 )]
-position = Vector2( -67, 70 )
-script = SubResource( 1 )
+[node name="RunningRobotFrameDelta" parent="Robots" unique_id=1324151216 instance=ExtResource("1")]
+position = Vector2(-67, 70)
+script = SubResource("1")
 
-[node name="RunningRobotFrame" parent="Robots" instance=ExtResource( 1 )]
-position = Vector2( -67, 220 )
-script = SubResource( 3 )
+[node name="RunningRobotFrame" parent="Robots" unique_id=855910025 instance=ExtResource("1")]
+position = Vector2(-67, 220)
+script = SubResource("3")
 
-[node name="Label" type="Label" parent="Robots"]
+[node name="Label" type="Label" parent="Robots" unique_id=2082438631]
+custom_minimum_size = Vector2(140, 0)
 offset_left = -292.0
 offset_right = -152.0
 offset_bottom = 14.0
-custom_minimum_size = Vector2( 140, 0 )
 text = "With delta"
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 2
 
-[node name="Label2" type="Label" parent="Robots"]
+[node name="Label2" type="Label" parent="Robots" unique_id=1870605043]
+custom_minimum_size = Vector2(140, 0)
 offset_left = -308.0
 offset_top = 150.0
 offset_right = -152.0
 offset_bottom = 164.0
-custom_minimum_size = Vector2( 140, 0 )
 text = "Constant distance"
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 2
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=226847187]
 one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

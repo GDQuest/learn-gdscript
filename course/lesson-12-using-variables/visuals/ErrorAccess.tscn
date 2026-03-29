@@ -1,51 +1,21 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene format=3 uid="uid://ch6vn8tsye2e5"]
 
-[ext_resource path="res://ui/components/popups/ErrorOverlayPopup.tscn" type="PackedScene" id=1]
+[ext_resource type="PackedScene" uid="uid://dnix44no1xkey" path="res://ui/components/popups/ErrorOverlayPopup.tscn" id="1"]
 
-[node name="ErrorOverlayPopup" instance=ExtResource( 1 )]
-custom_minimum_size = Vector2( 540, 0 )
+[node name="ErrorOverlayPopup" unique_id=1803970789 instance=ExtResource("1")]
+custom_minimum_size = Vector2(540, 0)
 script = null
 
-[node name="Panel" parent="." index="0"]
-offset_right = 553.0
-
-[node name="MarginContainer" parent="." index="1"]
-offset_right = 553.0
-
-[node name="Column" parent="MarginContainer" index="0"]
-offset_right = 545.0
-
-[node name="ErrorLabel" parent="MarginContainer/Column" index="0"]
-offset_right = 537.0
-offset_bottom = 59.0
+[node name="ErrorLabel" parent="MarginContainer/Column" parent_id_path=PackedInt32Array(2038824587) index="0" unique_id=1311160456]
 text = "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
 
-[node name="HSeparator" parent="MarginContainer/Column" index="1"]
-offset_top = 67.0
-offset_right = 537.0
-offset_bottom = 67.0
-
-[node name="Content" parent="MarginContainer/Column" index="2"]
-offset_top = 75.0
-offset_right = 537.0
-
-[node name="ErrorExplanation" parent="MarginContainer/Column/Content" index="0"]
-offset_right = 537.0
-
-[node name="Value" parent="MarginContainer/Column/Content/ErrorExplanation" index="2"]
-offset_right = 537.0
-text = "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
+[node name="Value" parent="MarginContainer/Column/Content/ErrorExplanation" parent_id_path=PackedInt32Array(577124066) index="1" unique_id=564563128]
 text = "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
 
-[node name="ErrorSuggestion" parent="MarginContainer/Column/Content" index="1"]
-offset_right = 537.0
-
-[node name="Value" parent="MarginContainer/Column/Content/ErrorSuggestion" index="2"]
-offset_right = 537.0
-text = "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
+[node name="Value" parent="MarginContainer/Column/Content/ErrorSuggestion" parent_id_path=PackedInt32Array(430840361) index="1" unique_id=417247627]
 text = "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
 
-[node name="NoContent" parent="MarginContainer/Column" index="3"]
+[node name="NoContent" parent="MarginContainer/Column" parent_id_path=PackedInt32Array(2038824587) index="3" unique_id=1738366945]
 text = "Sorry, we don't have this particular error message covered yet!
 
 Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://chk1w3ve0p4dj"]
 
+[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_7v76f"]
 [ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_pyqhd"]
 
 [node name="CodeAddValue" type="CodeEdit" unique_id=251908251]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 offset_right = -1620.0
 offset_bottom = 120.0
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_7v76f")
 text = "func run():
 	inventory[\"healing heart\"] += 1"
 context_menu_enabled = false

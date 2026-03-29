@@ -1,12 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene format=3 uid="uid://bi14q02321v7u"]
 
-[ext_resource path="res://course/lesson-10-the-game-loop/rotating-sprite/RotatingSprite.gd" type="Script" id=1]
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
+[ext_resource type="Script" uid="uid://2hneumtr0al3" path="res://course/lesson-10-the-game-loop/rotating-sprite/RotatingSprite.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="2"]
 
-[node name="RotatingMovingSpriteDelta" type="Node2D"]
+[node name="RotatingMovingSpriteDelta" type="Node2D" unique_id=177152113]
 
-[node name="Robot" parent="." instance=ExtResource( 2 )]
-script = ExtResource( 1 )
+[node name="Robot" parent="." unique_id=1807107853 instance=ExtResource("2")]
+script = ExtResource("1")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1613840616]

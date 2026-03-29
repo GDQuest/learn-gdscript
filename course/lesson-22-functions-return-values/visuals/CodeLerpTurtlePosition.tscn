@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dn6v2lo4nbci4"]
 
 [ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_0tnu8"]
+[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_do0yx"]
 
 [node name="GDScriptCodeExample" type="CodeEdit" unique_id=1496037944]
 custom_minimum_size = Vector2(300, 172)
@@ -9,6 +10,7 @@ anchor_right = 1.0
 offset_right = -1620.0
 offset_bottom = 172.0
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_do0yx")
 text = "func _process(delta):
 	position = lerp(
 		position, get_local_mouse_position(), 2 * delta

@@ -1,38 +1,37 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://b5ceiyewlw8ja"]
 
-[ext_resource path="res://course/lesson-26-looping-over-dictionaries/place-units/PlaceUnits.gd" type="Script" id=1]
-[ext_resource path="res://course/common/turtle/turtle.png" type="Texture2D" id=2]
-[ext_resource path="res://course/common/hand_ice.png" type="Texture2D" id=3]
-[ext_resource path="res://course/common/robot_body.png" type="Texture2D" id=4]
+[ext_resource type="Script" uid="uid://bkd4lgylucq0j" path="res://course/lesson-26-looping-over-dictionaries/place-units/PlaceUnits.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://b4n28mvmpccia" path="res://course/common/turtle/turtle.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://dbj7adb0vqf3d" path="res://course/common/hand_ice.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dh3skycmljjai" path="res://course/common/robot_body.png" id="4"]
 
-[node name="PlaceUnits" type="Node2D"]
-script = ExtResource( 1 )
+[node name="PlaceUnits" type="Node2D" unique_id=1867254320]
+script = ExtResource("1")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
+[node name="Camera2D" type="Camera2D" parent="." unique_id=90218828]
 
-[node name="Robot" type="Sprite2D" parent="."]
-position = Vector2( -1, -2 )
-scale = Vector2( 0.8, 0.8 )
+[node name="Robot" type="Sprite2D" parent="." unique_id=1335115128]
 z_index = 1
-texture = ExtResource( 4 )
-offset = Vector2( 1.25, -41.25 )
+position = Vector2(-1, -2)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4")
+offset = Vector2(1.25, -41.25)
 
-[node name="HandIceRight" type="Sprite2D" parent="Robot"]
-position = Vector2( -45, -9.74389 )
+[node name="HandIceRight" type="Sprite2D" parent="Robot" unique_id=1652129181]
+position = Vector2(-45, -9.74389)
 rotation = -0.918567
-texture = ExtResource( 3 )
-offset = Vector2( -21, -3 )
+texture = ExtResource("3")
+offset = Vector2(-21, -3)
 flip_h = true
 
-[node name="HandIceLeft" type="Sprite2D" parent="Robot"]
-position = Vector2( 49, -14.7439 )
-rotation = 0.737189
+[node name="HandIceLeft" type="Sprite2D" parent="Robot" unique_id=339050856]
 z_index = -1
-texture = ExtResource( 3 )
-offset = Vector2( 24.1958, 2.15936 )
+position = Vector2(49, -14.7439)
+rotation = 0.737189
+texture = ExtResource("3")
+offset = Vector2(24.1958, 2.15936)
 
-[node name="Turtle" type="Sprite2D" parent="."]
-position = Vector2( -0.999998, 93 )
-scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 2 )
+[node name="Turtle" type="Sprite2D" parent="." unique_id=448302535]
+position = Vector2(-0.999998, 93)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2")

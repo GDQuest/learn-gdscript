@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://bcqewjywuh2vc"]
 
-[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://dmlfrbv6h64bn" path="res://ui/screens/end_screen/main_menu/sky_evening.png" id="3"]
 [ext_resource type="Script" uid="uid://bwqonh3c7lsu3" path="res://ui/screens/end_screen/SponsorlessEndScreen.gd" id="4"]
-[ext_resource type="PackedScene" path="res://ui/components/QuitButton.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://ui/components/FullScreenButton.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://df3462xq6itnd" path="res://ui/components/QuitButton.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://cyursex2o2fep" path="res://ui/components/FullScreenButton.tscn" id="7"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_breadcrumbs.tres" id="8"]
 [ext_resource type="Script" uid="uid://dmptnpr0crwmq" path="res://ui/components/SmoothScrollContainer.gd" id="9"]
 [ext_resource type="Texture2D" uid="uid://els4t00fq2ri" path="res://ui/screens/end_screen/main_menu/illustration.png" id="10"]
@@ -91,7 +90,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(2495, 16)
-theme = ExtResource("2")
 script = ExtResource("4")
 
 [node name="Layout" type="VBoxContainer" parent="." unique_id=1746897061]
@@ -155,7 +153,7 @@ size_flags_stretch_ratio = 3.0
 [node name="TextureRect" type="TextureRect" parent="Layout/PanelContainer/Sky/Control" unique_id=84874309]
 layout_mode = 0
 offset_right = 1920.0
-offset_bottom = 986.0
+offset_bottom = 993.0
 texture = ExtResource("13")
 expand_mode = 1
 
@@ -220,7 +218,7 @@ modulate = Color(0.772549, 0.847059, 0.882353, 1)
 layout_mode = 0
 offset_left = -960.0
 offset_right = 960.0
-offset_bottom = 986.0
+offset_bottom = 993.0
 mouse_filter = 2
 texture = ExtResource("3")
 expand_mode = 1
@@ -251,7 +249,7 @@ mouse_filter = 2
 layout_mode = 0
 offset_left = -1600.0
 offset_right = 320.0
-offset_bottom = 986.0
+offset_bottom = 993.0
 mouse_filter = 2
 texture = ExtResource("12")
 expand_mode = 1

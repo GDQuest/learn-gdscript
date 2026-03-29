@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://fxq0w62fdr8m"]
 
 [ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_fy6ro"]
+[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_qruup"]
 
 [node name="GDScriptCodeExample" type="CodeEdit" unique_id=713300467]
 custom_minimum_size = Vector2(300, 100)
@@ -9,6 +10,7 @@ anchor_right = 1.0
 offset_right = -1620.0
 offset_bottom = 100.0
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_qruup")
 text = "func complete_current_order():
 	var first_order = waiting_orders.pop_front()"
 context_menu_enabled = false

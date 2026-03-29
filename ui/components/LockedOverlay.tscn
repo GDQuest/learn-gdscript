@@ -1,14 +1,12 @@
 [gd_scene format=3 uid="uid://bc2arcrhct3ho"]
 
 [ext_resource type="StyleBox" path="res://ui/theme/codeeditor_locked_panel.tres" id="1"]
-[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1_a3ikk"]
 [ext_resource type="Texture2D" uid="uid://bpyulvocwwwiw" path="res://ui/components/robot_tutor_running_code.svg" id="4"]
 [ext_resource type="Script" uid="uid://ci0h8jnoh0s5s" path="res://ui/components/LockedOverlay.gd" id="5"]
 
 [node name="LockedOverlay" type="Panel" unique_id=1460602262 node_paths=PackedStringArray("_texture_rect")]
 offset_right = 1920.0
 offset_bottom = 867.0
-theme = ExtResource("1_a3ikk")
 theme_override_styles/panel = ExtResource("1")
 script = ExtResource("5")
 _texture_rect = NodePath("Layout/TextureRect")

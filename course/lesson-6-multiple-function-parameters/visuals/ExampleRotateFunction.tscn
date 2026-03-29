@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cpstjqbcq4665"]
 
-[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
+[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_ltotu"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="2"]
 [ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="3"]
 
@@ -11,7 +11,7 @@ offset_top = 7.0
 offset_right = 607.0
 offset_bottom = 127.0
 size_flags_horizontal = 3
-theme = ExtResource("1")
+theme_override_fonts/font = ExtResource("1_ltotu")
 theme_override_styles/read_only = ExtResource("2")
 text = "func rotate(radians):
 	rotation = rotation + radians"

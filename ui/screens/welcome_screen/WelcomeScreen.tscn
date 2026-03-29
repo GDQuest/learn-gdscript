@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://ca4ktnbc30i1y"]
 
 [ext_resource type="Texture2D" uid="uid://cbj6vio5dq060" path="res://ui/screens/welcome_screen/background.png" id="1"]
-[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://dmcpuk8fejld8" path="res://ui/screens/practice/gdquestboy_frame_main_menu.tres" id="3"]
 [ext_resource type="Texture2D" uid="uid://m003a0rm27w4" path="res://ui/screens/welcome_screen/title.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://by3dlo6kxjw1f" path="res://ui/screens/welcome_screen/title_background.png" id="6"]
@@ -9,10 +8,10 @@
 [ext_resource type="Script" uid="uid://f4uji8wpx0tc" path="res://ui/screens/welcome_screen/WelcomeScreen.gd" id="8"]
 [ext_resource type="StyleBox" uid="uid://bygw5to7m6lea" path="res://ui/theme/button_main_menu_focus.tres" id="9"]
 [ext_resource type="StyleBox" uid="uid://dwjeeu7f4b1w3" path="res://ui/theme/button_main_menu_hover.tres" id="10"]
-[ext_resource type="PackedScene" path="res://ui/components/FullScreenButton.tscn" id="11"]
-[ext_resource type="PackedScene" path="res://ui/screens/welcome_screen/StarGreen.tscn" id="13"]
-[ext_resource type="PackedScene" path="res://ui/screens/welcome_screen/StarWhite.tscn" id="14"]
-[ext_resource type="PackedScene" path="res://ui/components/GDQuestLogo.tscn" id="15"]
+[ext_resource type="PackedScene" uid="uid://cyursex2o2fep" path="res://ui/components/FullScreenButton.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://bya7abfjldhwq" path="res://ui/screens/welcome_screen/StarGreen.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://d25feobicado5" path="res://ui/screens/welcome_screen/StarWhite.tscn" id="14"]
+[ext_resource type="PackedScene" uid="uid://clgi7v3ulsotm" path="res://ui/components/GDQuestLogo.tscn" id="15"]
 [ext_resource type="Texture2D" uid="uid://cxa7daoihmxqv" path="res://ui/screens/welcome_screen/star_green_small.png" id="16"]
 [ext_resource type="Texture2D" uid="uid://cpqntjkbm4rco" path="res://ui/screens/welcome_screen/star_white_small.png" id="17"]
 [ext_resource type="Texture2D" uid="uid://dh3skycmljjai" path="res://course/common/robot_body.png" id="18"]
@@ -430,7 +429,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(811, 264)
-theme = ExtResource("2")
 script = ExtResource("8")
 _settings_button = NodePath("GDQuestBoy/Margin/Buttons/SettingsButton")
 _outliner_button = NodePath("GDQuestBoy/Margin/Buttons/OutlinerButton")
@@ -638,7 +636,6 @@ alignment = 1
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 mouse_default_cursor_shape = 2
-theme = ExtResource("2")
 theme_type_variation = &"ButtonMainMenu"
 theme_override_colors/font_disabled_color = Color(0.572549, 0.560784, 0.721569, 1)
 theme_override_styles/normal = ExtResource("7")

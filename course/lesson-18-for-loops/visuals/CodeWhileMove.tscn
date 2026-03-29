@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cal0fe0i40bat"]
 
 [ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_84ccl"]
+[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_jfuyq"]
 
 [node name="CodeWhileRobot" type="CodeEdit" unique_id=1197454145]
 custom_minimum_size = Vector2(300, 210)
@@ -9,6 +10,7 @@ anchor_right = 1.0
 offset_right = -1620.0
 offset_bottom = 210.0
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_jfuyq")
 text = "func move_to_end():
 	while cell.x < board_size.x - 1:
 		cell.x += 1"

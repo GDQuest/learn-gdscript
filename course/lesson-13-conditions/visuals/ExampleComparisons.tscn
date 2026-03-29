@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cjh61e7n2vstk"]
 
-[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
+[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_2nxnl"]
 [ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="2"]
 
 [node name="GDScriptCodeExample" type="CodeEdit" unique_id=448132648]
@@ -11,7 +11,7 @@ anchor_bottom = 1.0
 offset_right = -1320.0
 offset_bottom = -760.0
 size_flags_horizontal = 3
-theme = ExtResource("1")
+theme_override_fonts/font = ExtResource("1_2nxnl")
 text = "if health > 100: # If health is greater than 100
 	pass
 if health < 50: # If health is less than 50

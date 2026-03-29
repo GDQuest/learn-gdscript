@@ -2,14 +2,12 @@
 
 [ext_resource type="StyleBox" path="res://ui/theme/panel_darker_with_shadow.tres" id="1"]
 [ext_resource type="Texture2D" uid="uid://de8hhb3bmbsjf" path="res://ui/icons/loading_splash.png" id="2"]
-[ext_resource type="Theme" path="res://ui/theme/gdscript_app_theme.tres" id="3"]
 [ext_resource type="Script" uid="uid://gi5dafepotsa" path="res://ui/LoadingScreen.gd" id="6"]
 
 [node name="LoadingScreen" type="PanelContainer" unique_id=672185924 node_paths=PackedStringArray("_progress_bar")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource("3")
 script = ExtResource("6")
 _progress_bar = NodePath("MarginContainer/Control/ProgressBar")
 

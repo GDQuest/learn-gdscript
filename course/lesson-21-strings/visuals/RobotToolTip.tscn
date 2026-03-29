@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://ccf4uf5trovhg"]
 
 [ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="1"]
-[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1_ig64n"]
 [ext_resource type="StyleBox" path="res://ui/theme/quiz_outline_neutral.tres" id="5"]
 
 [sub_resource type="GDScript" id="1"]
@@ -17,7 +16,6 @@ func _ready() -> void:
 custom_minimum_size = Vector2(400, 250)
 offset_right = 320.0
 offset_bottom = 251.0
-theme = ExtResource("1_ig64n")
 theme_override_styles/panel = ExtResource("5")
 
 [node name="Robot" parent="." unique_id=1178863534 instance=ExtResource("1")]

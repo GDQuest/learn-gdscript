@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://l8gav3ac75iy"]
 
-[ext_resource path="res://course/common/inventory/DictInventory.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
+[ext_resource type="PackedScene" uid="uid://c1yxaejn70xrh" path="res://course/common/inventory/DictInventory.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends DictInventory
 
 var initial_healing_heart_amount := 3
@@ -28,28 +28,19 @@ func reset():
 	update_display()
 "
 
-[node name="Panel" type="PanelContainer"]
+[node name="Panel" type="PanelContainer" unique_id=682449764]
 offset_right = 1047.0
 offset_bottom = 298.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 1040.0
-offset_bottom = 387.0
-custom_minimum_size = Vector2( 0, 380 )
+[node name="RunnableCodeExample" parent="." unique_id=106103867 instance=ExtResource("2")]
+custom_minimum_size = Vector2(0, 380)
+layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 5
 run_button_label = "run()"
 
-[node name="DictInventory" parent="RunnableCodeExample" instance=ExtResource( 1 )]
-offset_left = 823.0
-offset_top = 0.0
-offset_right = 1033.0
-offset_bottom = 380.0
+[node name="DictInventory" parent="RunnableCodeExample" unique_id=525154064 instance=ExtResource("1")]
+layout_mode = 2
 size_flags_horizontal = 5
-script = SubResource( 1 )
+script = SubResource("1")

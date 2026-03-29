@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://bc8jh113qfqd8"]
 
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="2"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
 
@@ -14,37 +14,21 @@ func run() -> void:
 	_animation_tree.travel(\"level\")
 "
 
-[node name="PanelContainer" type="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" unique_id=444457854]
 offset_right = 14.0
 offset_bottom = 14.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 247.0
-offset_bottom = 227.0
+[node name="RunnableCodeExample" parent="." unique_id=2047557930 instance=ExtResource("1")]
+layout_mode = 2
 
-[node name="Frame" parent="RunnableCodeExample" index="0"]
-offset_right = 240.0
-offset_bottom = 220.0
-
-[node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="0"]
+[node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" parent_id_path=PackedInt32Array(2047557930, 1323725507) index="0" unique_id=1494799076]
 visible = false
 
-[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-offset_left = 71.0
+[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" parent_id_path=PackedInt32Array(2047557930, 1323725507) index="1" unique_id=1248061364]
 text = "Level Up!"
 
-[node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
-offset_left = 244.0
-offset_right = 644.0
-offset_bottom = 260.0
-
-[node name="RobotLevel" parent="RunnableCodeExample" instance=ExtResource( 2 )]
-position = Vector2( -7, -7 )
-script = SubResource( 1 )
+[node name="RobotLevel" parent="RunnableCodeExample" unique_id=373006991 instance=ExtResource("2")]
+position = Vector2(-7, -7)
+script = SubResource("1")
 
 [editable path="RunnableCodeExample"]

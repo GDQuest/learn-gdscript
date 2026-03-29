@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://somuh0gjjx43"]
 
+[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_vufqw"]
 [ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_wuvnw"]
 
 [node name="CodeWhileLoop" type="CodeEdit" unique_id=1456346888]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 offset_right = -1620.0
 offset_bottom = 190.0
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_vufqw")
 text = "var number = 0
 while number < 3:
 	cell += Vector2(1, 1)"

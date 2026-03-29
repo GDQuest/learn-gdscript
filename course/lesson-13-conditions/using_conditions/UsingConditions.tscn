@@ -1,26 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://dya10oac8oev8"]
 
-[ext_resource path="res://course/lesson-13-conditions/using_conditions/UsingConditions.gd" type="Script" id=1]
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
+[ext_resource type="Script" uid="uid://bbj4xl1fyxemp" path="res://course/lesson-13-conditions/using_conditions/UsingConditions.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="2"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+[node name="UsingConditions" unique_id=981109357 instance=ExtResource("2")]
+script = ExtResource("1")
 
-[node name="UsingConditions" instance=ExtResource( 2 )]
-script = ExtResource( 1 )
-
-[node name="RobotBody" parent="Pivot" index="0"]
-position = Vector2( 0, 0 )
-
-[node name="HandIceRight" parent="Pivot" index="1"]
-position = Vector2( -45, 30 )
-rotation = -0.918567
-
-[node name="HandIceLeft" parent="Pivot" index="2"]
-position = Vector2( 49, 25 )
-rotation = 0.737189
-
-[node name="Camera2D" type="Camera2D" parent="." index="3"]
-current = true
-
-[node name="AnimationTree" parent="." index="4"]
-parameters/playback = SubResource( 1 )
+[node name="Camera2D" type="Camera2D" parent="." index="3" unique_id=1204635256]

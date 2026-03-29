@@ -1,166 +1,171 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene format=3 uid="uid://dhgh1hf0mk78x"]
 
-[ext_resource path="res://course/common/CustomHealthBar.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/common/hand_ice.png" type="Texture2D" id=2]
-[ext_resource path="res://course/common/robot_body.png" type="Texture2D" id=3]
-[ext_resource path="res://course/lesson-9-adding-and-subtracting/visuals/RobotCharacter.gd" type="Script" id=4]
-[ext_resource path="res://course/common/robot_body_happy.png" type="Texture2D" id=5]
+[ext_resource type="PackedScene" uid="uid://dd2vjgj5yweq5" path="res://course/common/CustomHealthBar.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://dbj7adb0vqf3d" path="res://course/common/hand_ice.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://dh3skycmljjai" path="res://course/common/robot_body.png" id="3"]
+[ext_resource type="Script" uid="uid://b21xlyr6qmtc7" path="res://course/lesson-9-adding-and-subtracting/visuals/RobotCharacter.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://cs8gfh225yjev" path="res://course/common/robot_body_happy.png" id="5"]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("ParticlesHeal:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ false ]
+"values": [false]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("GodotBottom:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ ExtResource( 3 ) ]
+"values": [ExtResource("3")]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("GodotBottom:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 0, -17 ) ]
+"values": [Vector2(0, -17)]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("GodotBottom:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0.0 ]
+"values": [0.0]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id="6"]
 resource_name = "damage"
 length = 0.3
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("GodotBottom:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.1, 0.2 ),
-"transitions": PackedFloat32Array( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ Vector2( 0, -17 ), Vector2( 0, -32 ), Vector2( 0, -17 ) ]
+"values": [Vector2(0, -17), Vector2(0, -32), Vector2(0, -17)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("GodotBottom:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0, 0.1 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ -21.301, 0.0 ]
+"values": [-21.301, 0.0]
 }
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 resource_name = "heal"
 length = 2.0
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("ParticlesHeal:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.7 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ true, false ]
+"values": [true, false]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("GodotBottom:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0, 0.8 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ ExtResource( 5 ), ExtResource( 3 ) ]
+"values": [ExtResource("5"), ExtResource("3")]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("GodotBottom:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 0, 0.1, 0.2 ),
-"transitions": PackedFloat32Array( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ Vector2( 0, -17 ), Vector2( 0, -32 ), Vector2( 0, -17 ) ]
+"values": [Vector2(0, -17), Vector2(0, -32), Vector2(0, -17)]
 }
 
-[sub_resource type="Curve" id=3]
-_data = [ Vector2( 0.0111111, 0.0284091 ), 0.0, 4.13397, 0, 0, Vector2( 0.611111, 0.519318 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -10.9432, 0.0, 0, 0 ]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6cgkt"]
+_data = {
+&"RESET": SubResource("2"),
+&"damage": SubResource("6"),
+&"heal": SubResource("1")
+}
 
-[node name="RobotCharacter" type="Node2D"]
-script = ExtResource( 4 )
+[sub_resource type="Curve" id="3"]
+_data = [Vector2(0.0111111, 0.0284091), 0.0, 4.13397, 0, 0, Vector2(0.611111, 0.519318), 0.0, 0.0, 0, 0, Vector2(1, 0), -10.9432, 0.0, 0, 0]
+point_count = 3
 
-[node name="GodotBottom" type="Sprite2D" parent="."]
-position = Vector2( 0, -17 )
-texture = ExtResource( 3 )
+[node name="RobotCharacter" type="Node2D" unique_id=382282586]
+script = ExtResource("4")
 
-[node name="HandIce" type="Sprite2D" parent="GodotBottom"]
-position = Vector2( 66, 31 )
+[node name="GodotBottom" type="Sprite2D" parent="." unique_id=1351547347]
+position = Vector2(0, -17)
+texture = ExtResource("3")
+
+[node name="HandIce" type="Sprite2D" parent="GodotBottom" unique_id=625983467]
+position = Vector2(66, 31)
 rotation = 0.36894
-texture = ExtResource( 2 )
+texture = ExtResource("2")
 
-[node name="HandIce2" type="Sprite2D" parent="GodotBottom"]
-position = Vector2( -65, 36 )
+[node name="HandIce2" type="Sprite2D" parent="GodotBottom" unique_id=1990546821]
+position = Vector2(-65, 36)
 rotation = -0.483649
-texture = ExtResource( 2 )
+texture = ExtResource("2")
 flip_h = true
 
-[node name="HealthBar" parent="." instance=ExtResource( 1 )]
+[node name="HealthBar" parent="." unique_id=1612799306 instance=ExtResource("1")]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 2 )
-anims/damage = SubResource( 6 )
-anims/heal = SubResource( 1 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1524070686]
+libraries/ = SubResource("AnimationLibrary_6cgkt")
 
-[node name="ParticlesHeal" type="CPUParticles2D" parent="."]
+[node name="ParticlesHeal" type="CPUParticles2D" parent="." unique_id=2043520965]
 emitting = false
 amount = 16
 lifetime = 0.8
 explosiveness = 0.46
 emission_shape = 1
 emission_sphere_radius = 64.0
-gravity = Vector2( 0, -98 )
-scale_amount = 8.0
-scale_amount_curve = SubResource( 3 )
-color = Color( 0.239216, 1, 0.431373, 1 )
+gravity = Vector2(0, -98)
+scale_amount_curve = SubResource("3")
+color = Color(0.239216, 1, 0.431373, 1)

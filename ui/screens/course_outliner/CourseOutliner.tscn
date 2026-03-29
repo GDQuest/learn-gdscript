@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://e8nf20q1f60d"]
 
 [ext_resource type="Script" uid="uid://bfpid7jc46r62" path="res://ui/screens/course_outliner/CourseOutliner.gd" id="1"]
-[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
-[ext_resource type="PackedScene" path="res://ui/screens/course_outliner/CourseLessonList.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://cm6r5g4lwpgbk" path="res://ui/screens/course_outliner/CourseLessonList.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://dcf1t6y5lr4oe" path="res://ui/screens/course_outliner/CourseLessonDetails.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://duub37a4814w" path="res://ui/components/popups/ConfirmPopup.tscn" id="7"]
 
@@ -13,7 +12,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-theme = ExtResource("2")
 script = ExtResource("1")
 _title_label = NodePath("MarginContainer/Layout/TitleBox/TitleLabel")
 _lesson_list = NodePath("MarginContainer/Layout/HBoxContainer/LeftColumn/LessonList")

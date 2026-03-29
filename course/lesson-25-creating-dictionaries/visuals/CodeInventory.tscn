@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dcortysdn5qe5"]
 
 [ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_du2a6"]
+[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_kdit1"]
 
 [node name="CodeInventory" type="CodeEdit" unique_id=1140210096]
 custom_minimum_size = Vector2(300, 190)
@@ -9,6 +10,7 @@ anchor_right = 1.0
 offset_right = -1620.0
 offset_bottom = 190.0
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_kdit1")
 text = "var inventory = {
 	\"healing heart\" : 3,
 	\"gems\": 5,

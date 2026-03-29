@@ -1,22 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene format=3 uid="uid://bjrlcm7qwn0c7"]
 
-[ext_resource path="res://course/common/GDScriptCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource type="PackedScene" uid="uid://doicj7hty5hyt" path="res://course/common/GDScriptCodeExample.tscn" id="1"]
 
-[node name="Control" type="PanelContainer"]
+[node name="Control" type="PanelContainer" unique_id=800129033]
+custom_minimum_size = Vector2(0, 100)
 offset_right = 614.0
 offset_bottom = 114.0
-custom_minimum_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="GDScriptCodeExample" parent="." instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 607.0
-offset_bottom = 107.0
-custom_minimum_size = Vector2( 600, 100 )
+[node name="GDScriptCodeExample" parent="." unique_id=1743417718 instance=ExtResource("1")]
+custom_minimum_size = Vector2(600, 100)
+layout_mode = 2
 text = "rotate(0.5)"

@@ -1,23 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene format=3 uid="uid://bj7hsofrewkxm"]
 
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/lesson-5-your-first-function/ExampleTurtleMoveAndRotate.tscn" type="PackedScene" id=2]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://course/lesson-5-your-first-function/ExampleTurtleMoveAndRotate.tscn" id="2"]
 
-[node name="ExampleMoveAndRotate" type="PanelContainer"]
+[node name="ExampleMoveAndRotate" type="PanelContainer" unique_id=2103075779]
 offset_right = 14.0
 offset_bottom = 14.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 651.0
-offset_bottom = 267.0
-scene = ExtResource( 2 )
+[node name="RunnableCodeExample" parent="." unique_id=990035819 instance=ExtResource("1")]
+layout_mode = 2
+scene = ExtResource("2")
+run_button_label = "move_and_rotate()"
 gdscript_code = "func move_and_rotate():
 	move_forward(200)
 	turn_right(90)"
-run_button_label = "move_and_rotate()"

@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://dsses8h3lxxej"]
 
-[ext_resource path="res://ui/components/OutputConsole.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
+[ext_resource type="PackedScene" uid="uid://b0sm7ot8y7ae2" path="res://ui/components/OutputConsole.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends OutputConsole
 
 
@@ -13,28 +13,18 @@ func run():
 	print_output([health])
 "
 
-[node name="PanelContainer" type="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" unique_id=687572150]
 offset_right = 14.0
 offset_bottom = 14.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 788.0
-offset_bottom = 267.0
+[node name="RunnableCodeExample" parent="." unique_id=253111825 instance=ExtResource("2")]
+layout_mode = 2
 gdscript_code = "func run():
 	var health = 100
 	print(health)"
 
-[node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 672.0
-offset_right = 781.0
-offset_bottom = 260.0
+[node name="OutputConsole" parent="RunnableCodeExample" unique_id=1339162155 instance=ExtResource("1")]
+layout_mode = 2
 size_flags_horizontal = 3
-script = SubResource( 1 )
+script = SubResource("1")

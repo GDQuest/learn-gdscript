@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://6ehtefhy8cso"]
 
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
 func run():
@@ -13,22 +13,16 @@ func reset():
 	scale = Vector2.ONE
 "
 
-[node name="PanelContainer" type="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" unique_id=282676438]
 offset_right = 1047.0
 offset_bottom = 298.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 1040.0
-offset_bottom = 291.0
+[node name="RunnableCodeExample" parent="." unique_id=1996742809 instance=ExtResource("2")]
+layout_mode = 2
 gdscript_code = "func run():
 	scale.x = 1.5
 	scale.y = 1.5"
 
-[node name="SetSpriteScale" parent="RunnableCodeExample" instance=ExtResource( 1 )]
-script = SubResource( 1 )
+[node name="SetSpriteScale" parent="RunnableCodeExample" unique_id=715289240 instance=ExtResource("1")]
+script = SubResource("1")

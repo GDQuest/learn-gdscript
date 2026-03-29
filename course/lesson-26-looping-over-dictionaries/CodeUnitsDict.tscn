@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://drfmx32ak3mwh"]
 
+[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_cef1o"]
 [ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_yed6i"]
 
 [node name="CodeExample" type="CodeEdit" unique_id=1765557012]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 offset_right = -1620.0
 offset_bottom = 210.0
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_cef1o")
 text = "var units = {
 	Vector2(1, 0): \"robot\",
 	Vector2(2, 2): \"turtle\",

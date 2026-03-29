@@ -1,36 +1,26 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://cm6r5g4lwpgbk"]
 
-[ext_resource path="res://ui/theme/outliner_background.tres" type="StyleBox" id=1]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
-[ext_resource path="res://ui/screens/course_outliner/CourseLessonList.gd" type="Script" id=3]
-[ext_resource path="res://ui/components/SmoothScrollContainer.gd" type="Script" id=4]
+[ext_resource type="StyleBox" path="res://ui/theme/outliner_background.tres" id="1"]
+[ext_resource type="Script" uid="uid://c16nbcburnaek" path="res://ui/screens/course_outliner/CourseLessonList.gd" id="3"]
+[ext_resource type="Script" uid="uid://dmptnpr0crwmq" path="res://ui/components/SmoothScrollContainer.gd" id="4"]
 
-[node name="CourseLessonList" type="PanelContainer"]
+[node name="CourseLessonList" type="PanelContainer" unique_id=1527153062]
+custom_minimum_size = Vector2(640, 0)
 offset_right = 696.0
 offset_bottom = 993.0
-custom_minimum_size = Vector2( 640, 0 )
-theme = ExtResource( 2 )
-theme_override_styles/panel = ExtResource( 1 )
-script = ExtResource( 3 )
+theme_override_styles/panel = ExtResource("1")
+script = ExtResource("3")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 688.0
-offset_bottom = 985.0
-scroll_horizontal_enabled = false
-script = ExtResource( 4 )
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=856694061]
+layout_mode = 2
+script = ExtResource("4")
 
-[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
-offset_right = 680.0
-offset_bottom = 16.0
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer" unique_id=2072020418]
+layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_top = 8
 theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Items" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 660.0
-offset_bottom = 8.0
+[node name="Items" type="VBoxContainer" parent="ScrollContainer/MarginContainer" unique_id=691799468]
+layout_mode = 2

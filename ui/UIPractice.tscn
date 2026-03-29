@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://sfilcjuvjf0w" path="res://ui/components/SliceEditor.gd" id="13_p3qxn"]
 [ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="13_x4rpt"]
 [ext_resource type="StyleBox" path="res://ui/theme/panel_sliceeditor_title.tres" id="14"]
-[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="15"]
 [ext_resource type="PackedScene" uid="uid://cjxtbrqi3hoy4" path="res://ui/components/popups/PracticeLeaveUnfinishedPopup.tscn" id="16"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="17"]
 [ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_hover.tres" id="18"]
@@ -25,7 +24,6 @@ process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource("15")
 theme_override_styles/panel = ExtResource("2")
 script = ExtResource("8")
 _layout_container = NodePath("Margin/Layout")
@@ -59,7 +57,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="PracticeInfoPanel" parent="Margin/Layout/InfoPanelAnchors" unique_id=185118280 instance=ExtResource("3")]
-custom_minimum_size = Vector2(619, 0)
+custom_minimum_size = Vector2(632, 0)
 layout_mode = 0
 anchors_preset = 0
 grow_horizontal = 0
@@ -123,11 +121,11 @@ layout_mode = 2
 
 [node name="SolutionContainer" type="PanelContainer" parent="Margin/Layout/OutputAnchors" unique_id=1555732183]
 clip_contents = true
-custom_minimum_size = Vector2(619, 0)
+custom_minimum_size = Vector2(632, 0)
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 619.0
+offset_left = 632.0
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("11")
 

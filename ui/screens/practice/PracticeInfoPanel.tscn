@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://dpq5xmear4w5d"]
 
-[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://isw5sjt67wn8" path="res://ui/screens/practice/PracticeInfoPanel.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://di4488a7ev4bi" path="res://ui/components/ScrollableTextBox.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://cvl6pxx3qb736" path="res://ui/components/Revealer.tscn" id="5"]
@@ -17,7 +16,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("1")
 script = ExtResource("2")
 title_label = NodePath("LessonRequirements/Margin/Column/TitleBox/Title")
 _status_icon = NodePath("LessonRequirements/Margin/Column/TitleBox/StatusIcon")
@@ -119,7 +117,6 @@ theme_override_styles/separator = ExtResource("12")
 
 [node name="Footer" type="MarginContainer" parent="LessonRequirements" unique_id=1924698223]
 layout_mode = 2
-theme = ExtResource("1")
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8

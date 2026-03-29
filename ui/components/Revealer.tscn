@@ -5,7 +5,6 @@
 [ext_resource type="FontVariation" uid="uid://buul432qy6di5" path="res://ui/theme/fonts/font_title_small.tres" id="3"]
 [ext_resource type="StyleBox" path="res://ui/theme/revealer_content_panel.tres" id="4"]
 [ext_resource type="StyleBox" path="res://ui/theme/revealer_title_panel.tres" id="5"]
-[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="6"]
 
 [sub_resource type="StyleBoxEmpty" id="1"]
 
@@ -24,7 +23,6 @@ clip_contents = true
 offset_right = 136.0
 offset_bottom = 46.0
 size_flags_horizontal = 3
-theme = ExtResource("6")
 script = ExtResource("2")
 title_font = ExtResource("3")
 title_panel = ExtResource("5")
@@ -64,6 +62,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelSmallTitle"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3")
 text = "Expand"
 vertical_alignment = 1
 

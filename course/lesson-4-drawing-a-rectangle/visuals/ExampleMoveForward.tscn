@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://b2wyaehptivk1"]
 
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/common/turtle/DrawingTurtle.tscn" type="PackedScene" id=3]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://xvanlg3swj1g" path="res://course/common/turtle/DrawingTurtle.tscn" id="3"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
 var length := 200
@@ -24,23 +24,17 @@ func run() -> void:
 	_turtle.play_draw_animation()
 "
 
-[node name="ExampleMoveForward" type="PanelContainer"]
+[node name="ExampleMoveForward" type="PanelContainer" unique_id=817258003]
 offset_right = 14.0
 offset_bottom = 14.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 651.0
-offset_bottom = 267.0
+[node name="RunnableCodeExample" parent="." unique_id=258293062 instance=ExtResource("1")]
+layout_mode = 2
 gdscript_code = "func run():
 	move_forward(200)"
 
-[node name="DemoDrawingMoveForward" type="Node2D" parent="RunnableCodeExample"]
-script = SubResource( 1 )
+[node name="DemoDrawingMoveForward" type="Node2D" parent="RunnableCodeExample" unique_id=146472504]
+script = SubResource("1")
 
-[node name="DrawingTurtle" parent="RunnableCodeExample/DemoDrawingMoveForward" instance=ExtResource( 3 )]
+[node name="DrawingTurtle" parent="RunnableCodeExample/DemoDrawingMoveForward" unique_id=355796564 instance=ExtResource("3")]

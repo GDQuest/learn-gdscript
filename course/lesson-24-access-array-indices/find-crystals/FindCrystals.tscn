@@ -1,84 +1,50 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene format=3 uid="uid://bvryfbixdijhy"]
 
-[ext_resource path="res://course/lesson-24-access-array-indices/visuals/inventory/Item.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/lesson-24-access-array-indices/find-crystals/FindCrystals.gd" type="Script" id=2]
+[ext_resource type="PackedScene" path="res://course/lesson-24-access-array-indices/visuals/inventory/Item.tscn" id="1"]
+[ext_resource type="Script" uid="uid://bkabdf40a8fl3" path="res://course/lesson-24-access-array-indices/find-crystals/FindCrystals.gd" id="2"]
 
-[node name="FindCrystals" type="CenterContainer"]
+[node name="FindCrystals" type="CenterContainer" unique_id=1354740061]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("2")
 
-[node name="GridContainer" type="GridContainer" parent="."]
-offset_left = 714.0
-offset_top = 326.0
-offset_right = 1206.0
-offset_bottom = 754.0
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1345629308]
+layout_mode = 2
 columns = 4
 
-[node name="Item" parent="GridContainer" instance=ExtResource( 1 )]
-offset_right = 120.0
-offset_bottom = 140.0
+[node name="Item" parent="GridContainer" unique_id=2053823652 instance=ExtResource("1")]
+layout_mode = 2
 
-[node name="Item2" parent="GridContainer" instance=ExtResource( 1 )]
-offset_left = 124.0
-offset_right = 244.0
-offset_bottom = 140.0
+[node name="Item2" parent="GridContainer" unique_id=1236832099 instance=ExtResource("1")]
+layout_mode = 2
 
-[node name="Item3" parent="GridContainer" instance=ExtResource( 1 )]
-offset_left = 248.0
-offset_right = 368.0
-offset_bottom = 140.0
+[node name="Item3" parent="GridContainer" unique_id=795717431 instance=ExtResource("1")]
+layout_mode = 2
 
-[node name="Item4" parent="GridContainer" instance=ExtResource( 1 )]
-offset_left = 372.0
-offset_right = 492.0
-offset_bottom = 140.0
+[node name="Item4" parent="GridContainer" unique_id=1110132632 instance=ExtResource("1")]
+layout_mode = 2
 
-[node name="Item5" parent="GridContainer" instance=ExtResource( 1 )]
-offset_top = 144.0
-offset_right = 120.0
-offset_bottom = 284.0
+[node name="Item5" parent="GridContainer" unique_id=1997504347 instance=ExtResource("1")]
+layout_mode = 2
 
-[node name="Item6" parent="GridContainer" instance=ExtResource( 1 )]
-offset_left = 124.0
-offset_top = 144.0
-offset_right = 244.0
-offset_bottom = 284.0
+[node name="Item6" parent="GridContainer" unique_id=1506203407 instance=ExtResource("1")]
+layout_mode = 2
 
-[node name="Item7" parent="GridContainer" instance=ExtResource( 1 )]
-offset_left = 248.0
-offset_top = 144.0
-offset_right = 368.0
-offset_bottom = 284.0
+[node name="Item7" parent="GridContainer" unique_id=360451019 instance=ExtResource("1")]
+layout_mode = 2
 
-[node name="Item8" parent="GridContainer" instance=ExtResource( 1 )]
-offset_left = 372.0
-offset_top = 144.0
-offset_right = 492.0
-offset_bottom = 284.0
+[node name="Item8" parent="GridContainer" unique_id=47297500 instance=ExtResource("1")]
+layout_mode = 2
 
-[node name="Item9" parent="GridContainer" instance=ExtResource( 1 )]
-offset_top = 288.0
-offset_right = 120.0
-offset_bottom = 428.0
+[node name="Item9" parent="GridContainer" unique_id=1751118004 instance=ExtResource("1")]
+layout_mode = 2
 
-[node name="Item10" parent="GridContainer" instance=ExtResource( 1 )]
-offset_left = 124.0
-offset_top = 288.0
-offset_right = 244.0
-offset_bottom = 428.0
+[node name="Item10" parent="GridContainer" unique_id=68460190 instance=ExtResource("1")]
+layout_mode = 2
 
-[node name="Item11" parent="GridContainer" instance=ExtResource( 1 )]
-offset_left = 248.0
-offset_top = 288.0
-offset_right = 368.0
-offset_bottom = 428.0
+[node name="Item11" parent="GridContainer" unique_id=724542013 instance=ExtResource("1")]
+layout_mode = 2
 
-[node name="Item12" parent="GridContainer" instance=ExtResource( 1 )]
-offset_left = 372.0
-offset_top = 288.0
-offset_right = 492.0
-offset_bottom = 428.0
+[node name="Item12" parent="GridContainer" unique_id=206518854 instance=ExtResource("1")]
+layout_mode = 2

@@ -1,34 +1,26 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://cp7jcjyidchyr"]
 
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/lesson-24-access-array-indices/visuals/inventory/Inventory.tscn" type="PackedScene" id=2]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://course/lesson-24-access-array-indices/visuals/inventory/Inventory.tscn" id="2"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends \"res://course/lesson-24-access-array-indices/visuals/inventory/Inventory.gd\"
 
 func run():
 	use_item(3)
 "
 
-[node name="Example" type="PanelContainer"]
+[node name="Example" type="PanelContainer" unique_id=1735790436]
 offset_right = 771.0
 offset_bottom = 414.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 1047.0
-offset_bottom = 407.0
-custom_minimum_size = Vector2( 600, 400 )
+[node name="RunnableCodeExample" parent="." unique_id=1441591656 instance=ExtResource("1")]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
 gdscript_code = "func run():
 	use_item(inventory[3])"
 
-[node name="Inventory" parent="RunnableCodeExample" instance=ExtResource( 2 )]
-offset_left = 672.0
-offset_right = 1040.0
-offset_bottom = 400.0
-script = SubResource( 1 )
+[node name="Inventory" parent="RunnableCodeExample" unique_id=958312711 instance=ExtResource("2")]
+layout_mode = 2
+script = SubResource("1")

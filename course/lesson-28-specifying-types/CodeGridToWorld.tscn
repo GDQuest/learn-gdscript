@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bo41e1oagpu8v"]
 
+[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_0785v"]
 [ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_wthp3"]
 
 [node name="GDScriptCodeExample" type="CodeEdit" unique_id=502554657]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 offset_right = -1620.0
 offset_bottom = 180.0
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_0785v")
 text = "var cell_size = Vector2(50.0, 50.0)
 
 func grid_to_world(cell):

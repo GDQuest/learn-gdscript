@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://xitqmns58aw4"]
 
-[ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
-[ext_resource type="Theme" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
 
 [sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
@@ -28,16 +27,15 @@ func reset() -> void:
 offset_right = 14.0
 offset_bottom = 14.0
 size_flags_horizontal = 3
-theme = ExtResource("2")
 
 [node name="RunnableCodeExample" parent="." unique_id=355736653 instance=ExtResource("1")]
 layout_mode = 2
+run_button_label = "draw_circle()"
 gdscript_code = "draw_circle(
 	Vector2(0, 0),
 	60,
 	Color.AQUA
 )"
-run_button_label = "draw_circle()"
 
 [node name="CircleDrawer" type="Node2D" parent="RunnableCodeExample" unique_id=1150696349]
 script = SubResource("1")
