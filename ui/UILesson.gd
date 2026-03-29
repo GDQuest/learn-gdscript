@@ -60,7 +60,7 @@ func _ready() -> void:
 #			child.show()
 #		_practices_container.show()
 
-_scroll_container.grab_focus()
+	_scroll_container.grab_focus()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
