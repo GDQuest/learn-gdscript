@@ -45,7 +45,7 @@ var _scene_tween: Tween
 
 func _ready() -> void:
 	super._ready()
-	
+
 	Events.font_size_scale_changed.connect(_update_content_container_width)
 	_update_content_container_width(UserProfiles.get_profile().font_size_scale)
 	_scroll_container.get_v_scroll_bar().value_changed.connect(_on_content_scrolled)
@@ -118,7 +118,7 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 					continue
 				if user_profile.is_lesson_block_read(course_index.get_course_id(), lesson.bbcode_path, block_id):
 					continue
-				
+
 				restore_id = block_id
 				break
 
@@ -147,7 +147,7 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 					_content_blocks.add_child(instance)
 					instance.setup(child_node)
 					instance.hide()
-					
+
 					var completed_before := false
 					if course_index:
 						completed_before = user_profile.is_lesson_quiz_completed(
@@ -156,25 +156,25 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 						if completed_before:
 							_quizzes_done += 1
 					instance.completed_before = completed_before
-					
+
 					instance.quiz_passed.connect(Events.quiz_completed.emit.bind(child_node))
 					instance.quiz_passed.connect(_reveal_up_to_next_quiz)
 					instance.quiz_skipped.connect(_reveal_up_to_next_quiz)
-					
+
 					if restore_id == quiz_id:
 						restore_node = instance
-			
+
 				BBCodeParserData.Tag.CODEBLOCK:
 					var instance: UIContentBlock = ContentBlockScene.instantiate()
 					instance.name = BBCodeUtils.get_codeblock_id(child_node)
 					instance.text = BBCodeUtils.get_codeblock_code(child_node)
 					_content_blocks.add_child(instance)
 					instance.hide()
-				
+
 				BBCodeParserData.Tag.PRACTICE, BBCodeParserData.Tag.TITLE, BBCodeParserData.Tag.SEPARATOR:
 					# handled separately or used to enhance other tags. no processing
 					pass
-				
+
 				_:
 					if child_node.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS:
 						var instance: UIContentBlock = ContentBlockScene.instantiate()
@@ -211,7 +211,7 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 	# Wait until the lesson is considered loaded by the system, and then update the size of
 	# the scroll container and its content.
 	await Events.lesson_started
-	
+
 	if restore_node and restore_node.is_visible_in_tree():
 		var scroll_offset = abs(
 			_scroll_content.global_position.y - _content_blocks.global_position.y
@@ -232,7 +232,6 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 
 
 func _underline_glossary_entries() -> void:
-	_glossary.setup()
 	# Underline glossary entries
 	for rtl: RichTextLabel in get_tree().get_nodes_in_group("rich_text_label"):
 		rtl.text = _glossary.replace_matching_terms(rtl.text)
@@ -328,6 +327,7 @@ func _update_content_container_width(new_font_scale: int) -> void:
 
 
 func _on_translation_changed() -> void:
+	_glossary.setup()
 	_underline_glossary_entries()
 
 

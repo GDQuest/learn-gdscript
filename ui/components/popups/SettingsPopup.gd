@@ -33,12 +33,12 @@ func _init() -> void:
 func _ready() -> void:
 	if OS.has_feature("web"):
 		_framerate_settings_section.hide()
-	
+
 	_init_languages()
 	_init_values()
-	
+
 	_font_size_value.value_changed.connect(_on_font_size_changed)
-	
+
 	_apply_button.pressed.connect(_on_apply_settings)
 	_cancel_button.pressed.connect(hide)
 	_panel.visibility_changed.connect(_on_visibility_changed)
@@ -56,49 +56,56 @@ func hide() -> void:
 
 func _init_languages() -> void:
 	_language_value.clear()
-	
+
 	var available_languages := TranslationManager.get_available_languages()
 	for language_data in available_languages:
 		var item_index := _language_value.get_item_count()
-		
+
 		_language_value.add_item(language_data.name)
 		_language_value.set_item_metadata(item_index, language_data.code)
 
 
 func _init_values() -> void:
 	var current_profile = UserProfiles.get_profile()
-	
+
 	for i in _language_value.get_item_count():
 		var language_code := str(_language_value.get_item_metadata(i))
 		if language_code == current_profile.language:
 			_language_value.select(i)
 			break
-	
+
 	_font_size_value.value = clamp(
 		int(current_profile.font_size_scale), _font_size_value.min_value, _font_size_value.max_value
 	)
 	_scroll_sensitivity_slider.value = current_profile.scroll_sensitivity
 	_framerate_option.selected = FRAMERATE_MAP.values().find(current_profile.framerate_limit)
-	
+
 	_lower_contrast.button_pressed = current_profile.lower_contrast
 	_dyslexia_font.button_pressed = current_profile.dyslexia_font
 
 
 func _on_apply_settings() -> void:
 	var current_profile = UserProfiles.get_profile()
-	
+
 	var size_scale := int(_font_size_value.value)
-	ThemeManager.scale_all_font_sizes(size_scale)
-	
-	ThemeManager.set_lower_contrast(_lower_contrast.button_pressed)
-	ThemeManager.set_dyslexia_font(_dyslexia_font.button_pressed)
+	var dyslexia_font := _dyslexia_font.button_pressed
+	if size_scale != current_profile.font_size_scale or dyslexia_font != current_profile.dyslexia_font:
+		ThemeManager.apply_font_settings(size_scale, dyslexia_font)
+		current_profile.font_size_scale = size_scale
+		current_profile.dyslexia_font = dyslexia_font
+		current_profile.save()
+		Events.emit_signal("font_size_scale_changed", size_scale)
+
+	if _lower_contrast.button_pressed != current_profile.lower_contrast:
+		ThemeManager.set_lower_contrast(_lower_contrast.button_pressed)
 
 	current_profile.set_scroll_sensitivity(_scroll_sensitivity_slider.value)
 	current_profile.set_framerate_limit(FRAMERATE_MAP[_framerate_option.selected])
-	
+
 	var language_code := str(_language_value.get_item_metadata(_language_value.selected))
-	TranslationManager.set_language(language_code)
-	
+	if language_code != TranslationManager.current_language:
+		TranslationManager.set_language(language_code)
+
 	var current_font = _font_size_sample.get_theme_font("font")
 	if current_profile.dyslexia_font:
 		current_font.base_font = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
