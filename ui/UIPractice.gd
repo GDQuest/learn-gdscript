@@ -4,6 +4,8 @@ extends UINavigatablePage
 
 signal test_student_code_completed
 
+const DEFAULT_COURSE_INDEX := "res://course/CourseLearnGDScriptIndex.gd"
+
 const RUN_AUTOTIMER_DURATION := 5.0
 const SLIDE_TRANSITION_DURATION := 0.5
 # Maximum allowed iterations in while loops to prevent infinite loops.
@@ -20,7 +22,8 @@ const documentation_resource: Documentation = preload("res://course/Documentatio
 
 var REGEX_DIVSION_BY_ZERO := RegEx.new()
 
-@export var test_practice: Resource
+@export var lesson_test_practice: String
+@export_range(0, 1, 1, "or_greater") var test_practice: int
 @export var _layout_container: Control
 @export var _output_container: Control
 @export var _game_container: Container
@@ -111,8 +114,11 @@ func _ready() -> void:
 	_solution_panel.modulate.a = 0.0
 	_solution_panel.offset_left = _output_anchors.size.x
 
-#	if test_practice and get_parent() == get_tree().root:
-#		setup(test_practice, null, null)
+	if lesson_test_practice and get_parent() == get_tree().root:
+		var course_index: CourseIndex = load(DEFAULT_COURSE_INDEX).new()
+		var lesson := NavigationManager.get_navigation_resource(lesson_test_practice)
+		var practice := BBCodeUtils.get_lesson_practice(lesson, test_practice)
+		setup(practice, lesson, course_index)
 
 
 func _notification(what: int) -> void:

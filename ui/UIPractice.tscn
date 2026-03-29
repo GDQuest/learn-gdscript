@@ -1,23 +1,23 @@
 [gd_scene format=3 uid="uid://c0a0827w7v1ok"]
 
 [ext_resource type="PackedScene" uid="uid://bhon7rvypb6bx" path="res://ui/components/CodeEditor.tscn" id="1"]
-[ext_resource type="StyleBox" path="res://ui/theme/panel_course_page.tres" id="2"]
+[ext_resource type="StyleBox" uid="uid://djjd55io3cgmv" path="res://ui/theme/panel_course_page.tres" id="2"]
 [ext_resource type="PackedScene" uid="uid://dpq5xmear4w5d" path="res://ui/screens/practice/PracticeInfoPanel.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://b0p3dbj5sajyl" path="res://ui/components/GameView.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://b0sm7ot8y7ae2" path="res://ui/components/OutputConsole.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://bvi8nis1j76hs" path="res://ui/components/popups/PracticeListPopup.tscn" id="6"]
 [ext_resource type="StyleBox" uid="uid://dvsoekg7egexu" path="res://ui/screens/practice/gdquestboy_frame.tres" id="7"]
 [ext_resource type="Script" uid="uid://66gajdi02lrv" path="res://ui/UIPractice.gd" id="8"]
-[ext_resource type="PackedScene" path="res://ui/components/GDQuestLogo.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://clgi7v3ulsotm" path="res://ui/components/GDQuestLogo.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://dpi7388fmgj7g" path="res://ui/components/popups/PracticeDonePopup.tscn" id="10"]
-[ext_resource type="StyleBox" path="res://ui/theme/panel_sliceeditor.tres" id="11"]
+[ext_resource type="StyleBox" uid="uid://bhh7fo3h6p5r5" path="res://ui/theme/panel_sliceeditor.tres" id="11"]
 [ext_resource type="Script" uid="uid://sfilcjuvjf0w" path="res://ui/components/SliceEditor.gd" id="13_p3qxn"]
 [ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="13_x4rpt"]
-[ext_resource type="StyleBox" path="res://ui/theme/panel_sliceeditor_title.tres" id="14"]
+[ext_resource type="StyleBox" uid="uid://cpleeoanevjlm" path="res://ui/theme/panel_sliceeditor_title.tres" id="14"]
 [ext_resource type="PackedScene" uid="uid://cjxtbrqi3hoy4" path="res://ui/components/popups/PracticeLeaveUnfinishedPopup.tscn" id="16"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="17"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_hover.tres" id="18"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="19"]
+[ext_resource type="StyleBox" uid="uid://bkqtmumr5t28" path="res://ui/theme/button_outline_large_pressed.tres" id="17"]
+[ext_resource type="StyleBox" uid="uid://dkeg6cbxbpnqe" path="res://ui/theme/button_outline_large_hover.tres" id="18"]
+[ext_resource type="StyleBox" uid="uid://b45mlqutqarjn" path="res://ui/theme/button_outline_large_normal.tres" id="19"]
 
 [node name="UIPractice" type="PanelContainer" unique_id=729081353 node_paths=PackedStringArray("_layout_container", "_output_container", "_game_container", "_game_view", "_output_console", "_output_anchors", "_solution_panel", "_use_solution_button", "_info_panel_anchors", "_info_panel", "_hints_container", "_practice_list", "_practice_done_popup", "_practice_leave_unfinished_popup", "_code_editor", "_solution_editor")]
 process_mode = 3
@@ -26,6 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_styles/panel = ExtResource("2")
 script = ExtResource("8")
+lesson_test_practice = "res://course/lesson-1-what-code-is-like/lesson.bbcode"
 _layout_container = NodePath("Margin/Layout")
 _output_container = NodePath("Margin/Layout/OutputAnchors/Output")
 _game_container = NodePath("Margin/Layout/OutputAnchors/Output/GameAnchors/GameContainer")

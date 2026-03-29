@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://qkdafe3ywysu"]
 
 [ext_resource type="Script" uid="uid://bvhqoj5m0qrs1" path="res://ui/UILesson.gd" id="2"]
-[ext_resource type="StyleBox" path="res://ui/theme/vscrollbar_large_scroll.tres" id="3"]
-[ext_resource type="StyleBox" path="res://ui/theme/panel_course_page.tres" id="5"]
-[ext_resource type="StyleBox" path="res://ui/theme/vscrollbar_large_grabber.tres" id="6"]
-[ext_resource type="StyleBox" path="res://ui/theme/vscrollbar_large_grabber_highlight.tres" id="7"]
-[ext_resource type="StyleBox" path="res://ui/theme/vscrollbar_large_grabber_pressed.tres" id="8"]
+[ext_resource type="StyleBox" uid="uid://cvo0aww1555hl" path="res://ui/theme/vscrollbar_large_scroll.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://djjd55io3cgmv" path="res://ui/theme/panel_course_page.tres" id="5"]
+[ext_resource type="StyleBox" uid="uid://irieyslwgi8s" path="res://ui/theme/vscrollbar_large_grabber.tres" id="6"]
+[ext_resource type="StyleBox" uid="uid://c5oped18cuaw8" path="res://ui/theme/vscrollbar_large_grabber_highlight.tres" id="7"]
+[ext_resource type="StyleBox" uid="uid://pyrh053wwmjc" path="res://ui/theme/vscrollbar_large_grabber_pressed.tres" id="8"]
 [ext_resource type="Script" uid="uid://dmptnpr0crwmq" path="res://ui/components/SmoothScrollContainer.gd" id="9"]
 [ext_resource type="PackedScene" uid="uid://cwpkb454y13jm" path="res://ui/components/GlossaryPopup.tscn" id="10"]
 
@@ -25,7 +25,7 @@ anchor_bottom = 1.0
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("5")
 script = ExtResource("2")
-test_lesson = ExtResource("5")
+test_lesson = "res://course/lesson-1-what-code-is-like/lesson.bbcode"
 _scroll_container = NodePath("OuterMargin/ScrollContainer")
 _scroll_content = NodePath("OuterMargin/ScrollContainer/InnerMargin")
 _title = NodePath("OuterMargin/ScrollContainer/InnerMargin/Content/Title")

@@ -6,6 +6,8 @@
 class_name UILesson
 extends UINavigatablePage
 
+const DefaultCourseIndexPath := "res://course/CourseLearnGDScriptIndex.gd"
+
 const ContentBlockScene := preload("screens/lesson/UIContentBlock.tscn")
 const QuizInputFieldScene := preload("screens/lesson/quizzes/UIQuizInputField.tscn")
 const QuizChoiceScene := preload("screens/lesson/quizzes/UIQuizChoice.tscn")
@@ -16,7 +18,7 @@ const GlossaryPopup := preload("res://ui/components/GlossaryPopup.gd")
 const AUTOSCROLL_PADDING := 20
 const AUTOSCROLL_DURATION := 0.24
 
-@export var test_lesson: Resource
+@export var test_lesson: String
 @export var _scroll_container: ScrollContainer
 @export var _scroll_content: Control
 @export var _title: Label
@@ -54,11 +56,13 @@ func _ready() -> void:
 
 	_glossary = load("res://course/glossary.tres")
 
-#	if test_lesson and get_parent() == get_tree().root:
-#		setup(test_lesson, null)
-#		for child in _content_blocks.get_children():
-#			child.show()
-#		_practices_container.show()
+	if test_lesson and get_parent() == get_tree().root:
+		var _lesson_node := NavigationManager.get_navigation_resource(test_lesson)
+		var _course_index: CourseIndex = load(DefaultCourseIndexPath).new()
+		setup(_lesson_node, _course_index)
+		for child in _content_blocks.get_children():
+			child.show()
+		_practices_container.show()
 
 	_scroll_container.grab_focus()
 
