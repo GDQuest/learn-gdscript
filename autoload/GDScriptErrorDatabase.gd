@@ -7,7 +7,7 @@ const CSV_IDENTIFIER_FIELD := "error_code"
 const CSV_EXPLANATION_FIELD := "error_explanation"
 const CSV_SUGGESTION_FIELD := "error_suggestion"
 
-var _main_table := {}
+var _main_table := { }
 
 
 func _init():
@@ -35,16 +35,16 @@ func get_message(error_code: int) -> Dictionary:
 func _load_csv_file(file_path: String) -> Dictionary:
 	if file_path.is_empty() or not FileAccess.file_exists(file_path):
 		printerr(
-			"Failed to open the error database source at '%s': File does not exist." % [file_path]
+			"Failed to open the error database source at '%s': File does not exist." % [file_path],
 		)
-		return {}
+		return { }
 
 	var database_file := FileAccess.open(file_path, FileAccess.READ)
 	if not database_file:
 		printerr(
-			"Failed to open the error database source at '%s': Error code %d" % [file_path, FileAccess.get_open_error()]
+			"Failed to open the error database source at '%s': Error code %d" % [file_path, FileAccess.get_open_error()],
 		)
-		return {}
+		return { }
 
 	var table := _parse_csv_file(database_file)
 	database_file.close()
@@ -52,7 +52,7 @@ func _load_csv_file(file_path: String) -> Dictionary:
 
 
 func _parse_csv_file(file: FileAccess) -> Dictionary:
-	var parsed := {}
+	var parsed := { }
 	if not file.is_open():
 		return parsed
 
@@ -83,11 +83,11 @@ func _parse_csv_file(file: FileAccess) -> Dictionary:
 			error_value = GDScriptCodes.ErrorCode[error_code]
 		elif GDQuestCodes.ErrorCode.has(error_code):
 			error_value = GDQuestCodes.ErrorCode[error_code]
-		
+
 		# It seems that the name of the error in the CSV file is invalid, reporting and skipping.
 		if error_value == -1:
 			printerr(
-				"Bad error database record '%s': No such error or warning code." % [error_code]
+				"Bad error database record '%s': No such error or warning code." % [error_code],
 			)
 			continue
 

@@ -6,13 +6,15 @@ var glossary_file := "res://course/glossary.csv"
 # Multiple keywords could point to the same definition, so we could use shared objects and map multiple keys to them.
 # Examples: call function and function call.
 # Dictionary mapping keywords or expressions to a definition.
-var _glossary := {}
+var _glossary := { }
 # Single regex to find all matching keywords in rich text labels. Used to detect
 # and wrap glossary entries in rich text labels.
 var _glossary_regex := RegEx.new()
 
+
 func _init() -> void:
 	setup()
+
 
 func setup() -> void:
 	_glossary = _parse_glossary_file(glossary_file)
@@ -42,7 +44,7 @@ func get_match(keyword: String) -> Entry:
 # Parses the input CSV file and returns a dictionary mapping keywords to
 # glossary entries.
 func _parse_glossary_file(path: String) -> Dictionary:
-	var glossary := {}
+	var glossary := { }
 	var file := FileAccess.open(path, FileAccess.READ)
 	var _header := Array(file.get_csv_line())
 
@@ -68,6 +70,7 @@ class Entry:
 	var term: String
 	var plural_form: String
 	var explanation: String
+
 
 	func _init(csv_line: Array) -> void:
 		term = tr(csv_line[0]).capitalize()

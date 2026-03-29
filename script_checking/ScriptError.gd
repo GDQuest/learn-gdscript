@@ -89,11 +89,13 @@ class ErrorRange:
 	var start := ErrorPosition.new()
 	var end := ErrorPosition.new()
 
+
 	func from_JSON(json: Dictionary) -> void:
 		if "start" in json:
 			start.from_JSON(json.start)
 		if "end" in json:
 			end.from_JSON(json.end)
+
 
 	func _to_string() -> String:
 		return "[%s-%s]" % [start, end]
@@ -103,11 +105,13 @@ class ErrorPosition:
 	var character := 0
 	var line := 0
 
+
 	func from_JSON(json: Dictionary) -> void:
 		if "character" in json:
 			character = int(json.character)
 		if "line" in json:
 			line = int(json.line)
+
 
 	func _to_string() -> String:
 		return "(%s:%s)" % [line, character]

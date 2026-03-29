@@ -1,7 +1,6 @@
 class_name CourseIndex
 extends RefCounted
 
-
 func get_title() -> String:
 	return _get_title()
 

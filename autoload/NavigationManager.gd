@@ -12,15 +12,16 @@ enum UNLOAD_TYPE { BACK, OUTLINER }
 const ERROR_WRONG_UNLOAD_TYPE := "Unsupported unload type in NavigationManager! Unload type: %s"
 
 var history := PackedStringArray()
-var current_url := "": get = get_current_url, set = set_current_url
+var current_url := "":
+	get = get_current_url, set = set_current_url
 var is_mobile_platform := OS.get_name() in ["Android", "Web", "iOS"]
-var arguments := {}
+var arguments := { }
 
 var _current_unload_type := -1
 var _url_normalization_regex := RegExpGroup.compile(
-	"^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)\\.(?<extension>(t?res|bbcode))"
+	"^(?<prefix>user:\\/\\/|res:\\/\\/|\\.*?\\/+)(?<url>.*)\\.(?<extension>(t?res|bbcode))",
 )
-var _lesson_cache := {}
+var _lesson_cache := { }
 
 
 func _init() -> void:
@@ -34,7 +35,7 @@ func _init() -> void:
 
 
 func _parse_arguments() -> void:
-	arguments = {}
+	arguments = { }
 	for argument in OS.get_cmdline_args():
 		if argument.find("=") > -1:
 			var arg_tuple = argument.split("=")
@@ -158,7 +159,7 @@ func get_navigation_resource(resource_id: String) -> BBCodeParser.ParseNode:
 	var is_lesson := resource_id.ends_with("lesson.bbcode")
 
 	var bbcode_path := resource_id if is_lesson else resource_id.get_base_dir().path_join("lesson.bbcode")
-	
+
 	var lesson_data: BBCodeParser.ParseNode = null
 	if _lesson_cache.has(bbcode_path):
 		lesson_data = _lesson_cache[bbcode_path]
@@ -181,10 +182,10 @@ func get_navigation_resource(resource_id: String) -> BBCodeParser.ParseNode:
 
 		lesson_data = result.root.children[0]
 		_lesson_cache[bbcode_path] = lesson_data
-	
+
 	if is_lesson:
 		return lesson_data
-	
+
 	# If it's not a lesson, it's a practice. May support some other types in future.
 	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson_data)
 	for i in practice_count:
@@ -228,7 +229,6 @@ func set_current_url(_new_url: String) -> void:
 
 func get_current_url():
 	return get_history(1)
-
 
 ###############################################################################
 #
@@ -323,6 +323,7 @@ class NormalizedUrl:
 	var path := ""
 	var extension := ""
 
+
 	func _init(regex_result: RegExMatch) -> void:
 		protocol = regex_result.get_string("prefix")
 		path = regex_result.get_string("url")
@@ -330,11 +331,14 @@ class NormalizedUrl:
 		if protocol in ["//", "/"]:
 			protocol = "res://"
 
+
 	func get_file_path() -> String:
 		return "%s%s.%s" % [protocol, path, extension]
 
+
 	func get_web_url() -> String:
 		return "%s.%s" % [path, extension]
+
 
 	func _to_string() -> String:
 		return protocol + path

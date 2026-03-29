@@ -4,15 +4,17 @@ extends ColorRect
 # regex pattern used to convert end_datetime_iso to _end_datetime
 const REGEX_PATTERN_DATETIME := "(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})T(?<hour>\\d{2}):(?<minute>\\d{2})"
 
-@export var title := "": set = set_title
+@export var title := "":
+	set = set_title
 # String displayed on the label after "Only until"
-@export var only_until_string := "": set = set_only_until_string
+@export var only_until_string := "":
+	set = set_only_until_string
 # Datetime string in ISO format to end the sale. After this date, the banner will not show anymore.
 @export var end_datetime_iso := "2020-01-01T00:00"
 # Web page to open when clicking the button
 @export var sale_url := ""
 
-var _end_datetime := {year = 2022, month = 12, day = 1, hour = 0, minute = 0}
+var _end_datetime := { year = 2022, month = 12, day = 1, hour = 0, minute = 0 }
 var _datetime_regex := RegEx.new()
 
 @export var title_label: Label
@@ -33,7 +35,7 @@ func _ready() -> void:
 	var re_match := _datetime_regex.search(end_datetime_iso)
 	assert(
 		re_match.get_group_count() == 5,
-		"Invalid datetime string. It should have the form 'yyyy-mm-ddThh:mm'"
+		"Invalid datetime string. It should have the form 'yyyy-mm-ddThh:mm'",
 	)
 	var keys := _end_datetime.keys()
 	for i in keys.size():

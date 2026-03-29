@@ -6,6 +6,7 @@ extends Resource
 # Lesson progression data.
 @export var lessons := [] # Array of LessonProgress
 
+
 func _init() -> void:
 	lessons = []
 

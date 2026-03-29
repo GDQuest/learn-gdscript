@@ -47,7 +47,7 @@ func _run():
 
 		if not record.has("patterns") or not record.has("code"):
 			printerr(
-				"Invalid error database record %d: Doesn't have 'patterns' or 'code' field." % [i]
+				"Invalid error database record %d: Doesn't have 'patterns' or 'code' field." % [i],
 			)
 			continue
 		if not typeof(record.patterns) == TYPE_ARRAY or not typeof(record.code) == TYPE_INT:
@@ -117,7 +117,7 @@ func _run():
 		(
 			"- Duplicate matches: %d/%d"
 			% [total_messages - (unique_matched_messages + unmatched_messages), total_messages]
-		)
+		),
 	)
 
 	print()

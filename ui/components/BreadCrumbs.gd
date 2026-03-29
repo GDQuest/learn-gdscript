@@ -5,7 +5,6 @@ const NODE_FONT_CURRENT := preload("res://ui/theme/fonts/font_text_bold.tres")
 const NODE_FONT_SIZE := 20
 const NODE_COLOR := Color(0.572549, 0.560784, 0.721569)
 
-
 var _last_course_index: CourseIndex
 var _last_target: BBCodeParser.ParseNode
 
@@ -19,14 +18,14 @@ func _notification(what: int) -> void:
 func update_breadcrumbs(course_index: CourseIndex, target: BBCodeParser.ParseNode) -> void:
 	_last_course_index = course_index
 	_last_target = target
-	
+
 	_rebuild_breadcrumbs()
 
 
 func _rebuild_breadcrumbs() -> void:
 	if not _last_course_index or not _last_target:
 		return
-	
+
 	_clear_navigation_nodes()
 
 	if _last_target is BBCodeParser.ParseNode and _last_target.tag == BBCodeParserData.Tag.LESSON:

@@ -11,17 +11,26 @@ const TOGGLE_OPACITY_HOVER := 1.0
 
 signal expanded
 
-@export var title := "Expand": set = set_title
-@export var is_expanded := false: set = set_is_expanded
+@export var title := "Expand":
+	set = set_title
+@export var is_expanded := false:
+	set = set_is_expanded
 
-@export var title_font_color: Color = Color.WHITE: set = set_title_font_color
-@export var title_icon_color: Color = Color.WHITE: set = set_title_icon_color
-@export var title_font: Font: set = set_title_font
-@export var title_panel: StyleBox: set = set_title_panel
-@export var title_panel_expanded: StyleBox: set = set_title_panel_expanded
+@export var title_font_color: Color = Color.WHITE:
+	set = set_title_font_color
+@export var title_icon_color: Color = Color.WHITE:
+	set = set_title_icon_color
+@export var title_font: Font:
+	set = set_title_font
+@export var title_panel: StyleBox:
+	set = set_title_panel
+@export var title_panel_expanded: StyleBox:
+	set = set_title_panel_expanded
 
-@export var content_panel: StyleBox: set = set_content_panel
-@export var content_separation: int = 2: set = set_content_separation
+@export var content_panel: StyleBox:
+	set = set_content_panel
+@export var content_separation: int = 2:
+	set = set_content_separation
 
 @export var _toggle_bar: PanelContainer
 @export var _toggle_button: Button

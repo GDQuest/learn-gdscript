@@ -12,6 +12,7 @@ extends Resource
 # Identifiers of completed practice resources.
 @export var completed_practices := [] # Array of String
 
+
 func _init() -> void:
 	completed_blocks = []
 	completed_quizzes = []

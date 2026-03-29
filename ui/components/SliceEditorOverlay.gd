@@ -3,8 +3,10 @@ extends Control
 
 const ErrorRange = ScriptError.ErrorRange
 
-var lines_offset := 0: set = set_lines_offset
-var character_offset := 0: set = set_character_offset
+var lines_offset := 0:
+	set = set_lines_offset
+var character_offset := 0:
+	set = set_character_offset
 
 
 func _init() -> void:
@@ -45,7 +47,7 @@ func update_overlays() -> void:
 		var error_overlay = overlay as ErrorOverlay
 		if is_instance_valid(error_overlay):
 			error_overlay.regions = _get_error_range_regions(error_overlay.error_range, text_edit)
-		
+
 		var highlight_overlay = overlay as HighlightOverlay
 		if is_instance_valid(highlight_overlay):
 			highlight_overlay.regions = _get_line_regions(highlight_overlay.line_index, text_edit)
@@ -70,7 +72,7 @@ func _get_error_range_regions(error_range: ErrorRange, text_edit: TextEdit) -> A
 	var end_line = error_range.end.line - lines_offset
 	var start_char = error_range.start.character - character_offset
 	var end_char = error_range.end.character - character_offset
-	
+
 	return _get_text_range_regions(start_line, start_char, end_line, end_char, text_edit)
 
 
@@ -87,13 +89,17 @@ func add_line_highlight(line_index: int) -> void:
 
 func _get_line_regions(line_index: int, text_edit: TextEdit) -> Array:
 	var line = text_edit.get_line(line_index)
-	var end_character = line.length() - 1 
-	
+	var end_character = line.length() - 1
+
 	return _get_text_range_regions(line_index, 0, line_index, end_character, text_edit)
 
 
 func _get_text_range_regions(
-	start_line: int, start_char: int, end_line: int, end_char: int, text_edit: TextEdit
+		start_line: int,
+		start_char: int,
+		end_line: int,
+		end_char: int,
+		text_edit: TextEdit,
 ) -> Array:
 	var regions := []
 	var line_count := text_edit.get_line_count()
@@ -175,18 +181,22 @@ class ErrorOverlay:
 
 	var severity := 0
 	var error_range := ErrorRange.new()
-	var regions := []: set = set_regions
+	var regions := []:
+		set = set_regions
 
 	var _lines := []
 	var _hovered_region := -1
+
 
 	func _init() -> void:
 		name = "ErrorOverlay"
 		custom_minimum_size = Vector2(0, 0)
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
 
+
 	func _ready() -> void:
 		set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+
 
 	func try_consume_mouse(point: Vector2) -> bool:
 		var region_has_point := -1
@@ -214,6 +224,7 @@ class ErrorOverlay:
 
 		_hovered_region = region_has_point
 		return true
+
 
 	func set_regions(error_regions: Array) -> void:
 		for underline in _lines:
@@ -264,14 +275,19 @@ class ErrorUnderline:
 	const DASHED_STEP_WIDTH := 14.0
 	const DASHED_GAP := 8.0
 
-	var line_length := 64.0: set = set_line_length
-	var line_type := -1: set = set_line_type
-	var line_color := Color.WHITE: set = set_line_color
+	var line_length := 64.0:
+		set = set_line_length
+	var line_type := -1:
+		set = set_line_type
+	var line_color := Color.WHITE:
+		set = set_line_color
 
 	var _points: PackedVector2Array
 
+
 	func _init() -> void:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 
 	func _draw() -> void:
 		if line_type == LineType.DASHED:
@@ -283,6 +299,7 @@ class ErrorUnderline:
 		else:
 			draw_polyline(_points, line_color, LINE_THICKNESS, true)
 
+
 	func update_points() -> void:
 		_points = PackedVector2Array()
 
@@ -292,25 +309,24 @@ class ErrorUnderline:
 					_points.append(
 						Vector2(
 							SQUIGGLY_STEP_WIDTH * i / SQUIGGLY_VERTEX_COUNT,
-							SQUIGGLY_HEIGHT / 2.0 * sin(TAU * i / SQUIGGLY_VERTEX_COUNT)
-						)
+							SQUIGGLY_HEIGHT / 2.0 * sin(TAU * i / SQUIGGLY_VERTEX_COUNT),
+						),
 					)
-
 			LineType.JAGGED:
 				for i in line_length / JAGGED_STEP_WIDTH:
 					_points.append(Vector2(JAGGED_STEP_WIDTH * i, 0.0))
 					_points.append(
 						Vector2(
-							JAGGED_STEP_WIDTH * i + JAGGED_STEP_WIDTH / 4.0, -JAGGED_HEIGHT / 2.0
-						)
+							JAGGED_STEP_WIDTH * i + JAGGED_STEP_WIDTH / 4.0,
+							-JAGGED_HEIGHT / 2.0,
+						),
 					)
 					_points.append(
 						Vector2(
 							JAGGED_STEP_WIDTH * i + JAGGED_STEP_WIDTH * 3.0 / 4.0,
-							JAGGED_HEIGHT / 2.0
-						)
+							JAGGED_HEIGHT / 2.0,
+						),
 					)
-
 			LineType.DASHED:
 				for i in line_length / (DASHED_STEP_WIDTH + DASHED_GAP):
 					_points.append(Vector2((DASHED_STEP_WIDTH + DASHED_GAP) * i, 0.0))
@@ -319,20 +335,22 @@ class ErrorUnderline:
 					if end_x > line_length:
 						end_x = line_length
 					_points.append(Vector2(end_x, 0.0))
-
 			_:
 				_points.append(Vector2(0.0, 0.0))
 				_points.append(Vector2(line_length, 0.0))
+
 
 	func set_line_length(value: float) -> void:
 		line_length = value
 		update_points()
 		queue_redraw()
 
+
 	func set_line_type(value: int) -> void:
 		line_type = value
 		update_points()
 		queue_redraw()
+
 
 	func set_line_color(value: Color) -> void:
 		line_color = value
@@ -341,41 +359,44 @@ class ErrorUnderline:
 
 class HighlightOverlay:
 	extends Control
-	
+
 	const DEFAULT_ALPHA := 0.16
 	const DISSOLVE_DURATION := 1.5
-	
+
 	var line_index := -1
-	var regions := []: set = set_regions
+	var regions := []:
+		set = set_regions
 
 	var _current_alpha := 0.0
 	var _tween: Tween
+
 
 	func _init() -> void:
 		name = "HighlightOverlay"
 		custom_minimum_size = Vector2(0, 0)
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
-		
+
 		_current_alpha = DEFAULT_ALPHA
+
 
 	func _ready() -> void:
 		set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		
+
 		_tween = create_tween()
-		
+
 		_tween.tween_method(_dissolve_step, DEFAULT_ALPHA, 0.0, DISSOLVE_DURATION)
-	
-	
+
+
 	func _draw() -> void:
 		for region in regions:
 			draw_rect(region, Color(1, 1, 1, _current_alpha), true)
-	
-	
+
+
 	func _dissolve_step(value: float) -> void:
 		_current_alpha = value
 		queue_redraw()
-	
-	
+
+
 	func set_regions(hl_regions: Array) -> void:
 		regions = hl_regions
 		queue_redraw()

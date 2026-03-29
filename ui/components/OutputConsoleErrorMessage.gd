@@ -4,14 +4,20 @@ signal show_code_requested(file_name, line, character)
 signal explain_error_requested(error_code, error_message)
 signal external_explain_requested
 
-var message_severity := -1: set = set_message_severity
-var message_text := "": set = set_message_text
+var message_severity := -1:
+	set = set_message_severity
+var message_text := "":
+	set = set_message_text
 var message_code := -1
 
-var external_error := false: set = set_external_error
-var origin_file := "": set = set_origin_file
-var origin_line := -1: set = set_origin_line
-var origin_char := -1: set = set_origin_char
+var external_error := false:
+	set = set_external_error
+var origin_file := "":
+	set = set_origin_file
+var origin_line := -1:
+	set = set_origin_line
+var origin_char := -1:
+	set = set_origin_char
 
 @export var _severity_label: Label
 @export var _message_label: Label
@@ -24,7 +30,7 @@ var origin_char := -1: set = set_origin_char
 
 func _ready() -> void:
 	_update_visuals()
-	
+
 	_message_explain_button.pressed.connect(_on_explain_pressed)
 	_location_row.gui_input.connect(_location_row_gui_input)
 	_external_label.gui_input.connect(_external_label_gui_input)
@@ -36,7 +42,7 @@ func _ready() -> void:
 func _update_visuals() -> void:
 	if not is_inside_tree():
 		return
-	
+
 	_message_label.text = message_text
 	if external_error:
 		_location_row.hide()
@@ -46,7 +52,7 @@ func _update_visuals() -> void:
 		_file_name_label.text = origin_file
 		_location_label.text = "line %d, column %d" % [origin_line + 1, origin_char]
 		_location_row.show()
-	
+
 	match message_severity:
 		MessageBus.MESSAGE_TYPE.ASSERT:
 			_severity_label.text = "ASSERT"
@@ -64,7 +70,7 @@ func _update_visuals() -> void:
 			_severity_label.text = "INFO"
 			_message_label.add_theme_color_override("font_color", Color(0.572549, 0.560784, 0.721569))
 			_severity_label.add_theme_color_override("font_color", Color(0.572549, 0.560784, 0.721569))
-			
+
 			_external_label.hide()
 			_message_explain_button.hide()
 

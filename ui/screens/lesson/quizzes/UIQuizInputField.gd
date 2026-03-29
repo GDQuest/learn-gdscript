@@ -20,11 +20,11 @@ func _test_answer_against_quiz(answers: Array) -> AnswerTestResult:
 		type = TYPE_FLOAT
 	elif parsed_answer.is_valid_int():
 		type = TYPE_INT
-	
+
 	var result := AnswerTestResult.new()
 	var answer: String = answers[0]
 	answer = answer.strip_edges()
-	
+
 	match type:
 		TYPE_INT:
 			if not answer.is_valid_int():

@@ -22,12 +22,17 @@ const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/hslider_
 @export var _sliders: VBoxContainer
 @export var _buttons_container: HBoxContainer
 
-@export var scene: PackedScene: set = set_scene
-@export var center_in_frame := true: set = set_center_in_frame
-@export var run_button_label := "": set = set_run_button_label
-@export_multiline var gdscript_code := "": set = set_code
+@export var scene: PackedScene:
+	set = set_scene
+@export var center_in_frame := true:
+	set = set_center_in_frame
+@export var run_button_label := "":
+	set = set_run_button_label
+@export_multiline var gdscript_code := "":
+	set = set_code
 
-var _scene_instance: CanvasItem: set = _set_scene_instance
+var _scene_instance: CanvasItem:
+	set = _set_scene_instance
 
 var _base_text_font_size := preload("res://ui/theme/fonts/font_text.tres").base_font.msdf_size
 var _current_coroutine: CoroutineController = null
@@ -97,12 +102,13 @@ func _get_configuration_warnings() -> PackedStringArray:
 # Called when pressing the Run button. Calls the run() function of the example.
 func run() -> void:
 	assert(
-		_get_run_count(_scene_instance) == 1, "Node %s does not have a run method or has both run and run_coroutine" % [get_path()]
+		_get_run_count(_scene_instance) == 1,
+		"Node %s does not have a run method or has both run and run_coroutine" % [get_path()],
 	)
 	var is_coroutine := _scene_instance.has_method("run_coroutine")
 	if _scene_instance.has_method("reset") and _debugger and not _current_coroutine:
 		_scene_instance.reset()
-	
+
 	if not _current_coroutine:
 		if is_coroutine:
 			_current_coroutine = CoroutineController.new()
@@ -120,7 +126,7 @@ func run() -> void:
 	elif is_coroutine:
 		while _current_coroutine:
 			_current_coroutine.step_requested.emit()
-	
+
 	_gdscript_text_edit.highlight_current_line = false
 	code_updated.emit()
 	_clear_animated_arrows()
@@ -130,12 +136,13 @@ func run() -> void:
 # calls to yield().
 func step() -> void:
 	assert(
-		_get_run_count(_scene_instance) == 1, "Node %s does not have a run method or has both run and run_coroutine" % [get_path()]
+		_get_run_count(_scene_instance) == 1,
+		"Node %s does not have a run method or has both run and run_coroutine" % [get_path()],
 	)
 	var is_coroutine := _scene_instance.has_method("run_coroutine")
 	if _scene_instance.has_method("reset") and _debugger and not _current_coroutine:
 		_scene_instance.reset()
-	
+
 	if not _current_coroutine:
 		if is_coroutine:
 			_current_coroutine = CoroutineController.new()
@@ -209,7 +216,11 @@ func set_run_button_label(new_text: String) -> void:
 
 
 func create_slider_for(
-	property_name, min_value := 0.0, max_value := 100.0, step := 1.0, color := Color.BLACK
+		property_name,
+		min_value := 0.0,
+		max_value := 100.0,
+		step := 1.0,
+		color := Color.BLACK,
 ) -> HSlider:
 	if not _scene_instance:
 		await self.scene_instance_set
@@ -332,7 +343,7 @@ func _reset_monitored_variable_highlights():
 
 	for variable_name in monitored_variables:
 		var last_line := 0
-		var last_column := -1  # Search offset to not repeat same result
+		var last_column := -1 # Search offset to not repeat same result
 
 		while last_line >= 0:
 			var result := _gdscript_text_edit.search(variable_name, 0, last_line, last_column + 1)
@@ -379,7 +390,7 @@ func _on_HScrollBar_scrolling() -> void:
 	for monitored_variable in _monitored_variable_highlights:
 		var rect = _gdscript_text_edit.get_rect_at_line_column(
 			monitored_variable.highlight_line,
-			monitored_variable.highlight_column
+			monitored_variable.highlight_column,
 		)
 		rect.position += offset
 		rect.size.x = (rect.size.x * monitored_variable.variable_name.length()) + 4

@@ -1,6 +1,5 @@
 extends CourseIndex
 
-
 const LESSONS := [
 	"res://course/lesson-1-what-code-is-like/lesson.bbcode",
 	"res://course/lesson-2-your-first-error/lesson.bbcode",

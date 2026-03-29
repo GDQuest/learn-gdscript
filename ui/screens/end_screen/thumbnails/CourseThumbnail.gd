@@ -1,26 +1,31 @@
 @tool
 extends Control
 
-@export var texture: CompressedTexture2D = null: set = set_texture
+@export var texture: CompressedTexture2D = null:
+	set = set_texture
 ## Date in ISO 8601 format.
-@export var release_date := "": set = set_release_date
+@export var release_date := "":
+	set = set_release_date
 @export var link := ""
-@export var text_scale := 1.0: set = set_text_scale
+@export var text_scale := 1.0:
+	set = set_text_scale
 
 @onready var _release_date_label: Label = $ReleaseDateLabel
 @onready var _texture_rect: TextureRect = $TextureRect
 
+
 func _ready() -> void:
 	_release_date_label.pivot_offset = _release_date_label.size / 2
+
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings := PackedStringArray()
 	if texture == null:
 		warnings.push_back("CompressedTexture2D is not set.")
-	
+
 	if link == "":
 		warnings.push_back("URL to open on click is not set")
-	
+
 	if release_date == "":
 		warnings.push_back("Release date is not set.")
 	elif release_date.length() != 20 or release_date[10] != "T" or release_date[19] != "Z":
@@ -63,7 +68,7 @@ func set_release_date(value: String) -> void:
 func is_release_date_in_the_future(date: Dictionary) -> bool:
 	var today := Time.get_datetime_dict_from_system(true)
 	return (date.year > today.year or date.month > today.month or date.day > today.day or \
-		date.hour > today.hour or date.minute > today.minute or date.second > today.second)
+		date.hour > today.hour or date.minute > today.minute or date.second > today.second )
 
 
 ## Parses a date in ISO 8601 format.

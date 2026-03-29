@@ -13,15 +13,15 @@ const GDQuestErrorCode := GDQuestCodes.ErrorCode
 # warnings
 var max_severity := 2
 
-
 # A list of error codes to ignore. All warnings are added automatically
 # (see _ready). This is similar to setting _max_severity to 1, but left here in
 # case we want more granularity
 var blacklist_codes := {
-	ErrorCode.INVALID_CLASS_DECLARATION: true
+	ErrorCode.INVALID_CLASS_DECLARATION: true,
 }
 
 var _new_script_text: String
+
 
 func _init(new_script_text: String) -> void:
 	for warning in WarningCode:

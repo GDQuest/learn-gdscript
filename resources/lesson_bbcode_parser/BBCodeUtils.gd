@@ -1,7 +1,6 @@
 class_name BBCodeUtils
 extends RefCounted
 
-
 static func get_codeblock_id(codeblock: BBCodeParser.ParseNode) -> String:
 	if codeblock.attributes.get("runnable", false):
 		return "_generated_codeblock_runnable_%s" % codeblock.line_number
@@ -47,7 +46,7 @@ static func get_lesson_title_for_index(lesson: BBCodeParser.ParseNode, block_ind
 			# If a visual, quiz, separator or other block is encountered first, have no titles
 			if child.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS:
 				break
-		
+
 	return ""
 
 

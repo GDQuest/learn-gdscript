@@ -33,7 +33,7 @@ var _lesson: BBCodeParser.ParseNode
 # Resource used to highlight glossary entries in the lesson text.
 var _glossary: Glossary
 var _visible_index := -1
-var _quizzes_done := -1  # Start with -1 because we will always autoincrement at least once.
+var _quizzes_done := -1 # Start with -1 because we will always autoincrement at least once.
 var _quizz_count := 0
 var _integration_test_mode := false
 
@@ -60,8 +60,7 @@ func _ready() -> void:
 #			child.show()
 #		_practices_container.show()
 
-	_scroll_container.grab_focus()
-
+_scroll_container.grab_focus()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
@@ -98,14 +97,17 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 
 		if is_returning:
 			restore_id = user_profile.get_last_visited_lesson_block(
-				course_index.get_course_id(), lesson.bbcode_path
+				course_index.get_course_id(),
+				lesson.bbcode_path,
 			)
 
 		var reading_done := user_profile.is_lesson_reading_completed(
-			course_index.get_course_id(), lesson.bbcode_path
+			course_index.get_course_id(),
+			lesson.bbcode_path,
 		)
 		var reading_started := user_profile.has_lesson_blocks_read(
-			course_index.get_course_id(), lesson.bbcode_path
+			course_index.get_course_id(),
+			lesson.bbcode_path,
 		)
 		if restore_id.is_empty() and not reading_done and reading_started:
 			for i in content_block_count:
@@ -151,7 +153,9 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 					var completed_before := false
 					if course_index:
 						completed_before = user_profile.is_lesson_quiz_completed(
-							course_index.get_course_id(), lesson.bbcode_path, quiz_id
+							course_index.get_course_id(),
+							lesson.bbcode_path,
+							quiz_id,
 						)
 						if completed_before:
 							_quizzes_done += 1
@@ -163,18 +167,15 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 
 					if restore_id == quiz_id:
 						restore_node = instance
-
 				BBCodeParserData.Tag.CODEBLOCK:
 					var instance: UIContentBlock = ContentBlockScene.instantiate()
 					instance.name = BBCodeUtils.get_codeblock_id(child_node)
 					instance.text = BBCodeUtils.get_codeblock_code(child_node)
 					_content_blocks.add_child(instance)
 					instance.hide()
-
 				BBCodeParserData.Tag.PRACTICE, BBCodeParserData.Tag.TITLE, BBCodeParserData.Tag.SEPARATOR:
 					# handled separately or used to enhance other tags. no processing
 					pass
-
 				_:
 					if child_node.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS:
 						var instance: UIContentBlock = ContentBlockScene.instantiate()
@@ -192,7 +193,9 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 		button.setup(practice, i)
 		if course_index:
 			button.completed_before = user_profile.is_lesson_practice_completed(
-				course_index.get_course_id(), lesson.bbcode_path, practice_id
+				course_index.get_course_id(),
+				lesson.bbcode_path,
+				practice_id,
 			)
 			if not highlighted_next and not button.completed_before:
 				highlighted_next = true
@@ -214,16 +217,19 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 
 	if restore_node and restore_node.is_visible_in_tree():
 		var scroll_offset = abs(
-			_scroll_content.global_position.y - _content_blocks.global_position.y
+			_scroll_content.global_position.y - _content_blocks.global_position.y,
 		)
 		var scroll_target = restore_node.position.y + scroll_offset - AUTOSCROLL_PADDING
 		if _scene_tween:
 			_scene_tween.kill()
 		_scene_tween = create_tween()
-		_scene_tween.tween_method(_scroll_container.set_v_scroll_override,
+		_scene_tween.tween_method(
+			_scroll_container.set_v_scroll_override,
 			# So it plays nice with our smooth scroller
 			_scroll_container.scroll_vertical,
-			scroll_target, AUTOSCROLL_DURATION).set_trans(Tween.TRANS_QUAD)
+			scroll_target,
+			AUTOSCROLL_DURATION,
+		).set_trans(Tween.TRANS_QUAD)
 
 	_underline_glossary_entries()
 
@@ -288,7 +294,7 @@ func _on_content_scrolled(_value: float) -> void:
 
 func _emit_read_content() -> void:
 	var scroll_offset = abs(
-		_scroll_content.global_position.y - _content_blocks.global_position.y
+		_scroll_content.global_position.y - _content_blocks.global_position.y,
 	)
 	var scroll_distance = _scroll_container.scroll_vertical - scroll_offset - AUTOSCROLL_PADDING
 

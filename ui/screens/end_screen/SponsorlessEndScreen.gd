@@ -6,6 +6,7 @@ extends Control
 	$Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column/RichTextLabel2,
 ]
 
+
 func _ready() -> void:
 	_outliner_button.pressed.connect(_on_outliner_button_pressed)
 	for rtl in _rich_text_labels:

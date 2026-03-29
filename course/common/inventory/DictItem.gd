@@ -2,9 +2,12 @@
 class_name DictItem
 extends Control
 
-@export var icon: CompressedTexture2D: set = set_icon
-@export var item_name: String: set = set_item_name
-@export var amount: int: set = set_amount
+@export var icon: CompressedTexture2D:
+	set = set_icon
+@export var item_name: String:
+	set = set_item_name
+@export var amount: int:
+	set = set_amount
 
 @onready var _icon := $Margin/Item/Icon as TextureRect
 @onready var _name_label := $Margin/Item/Name as Label

@@ -3,6 +3,7 @@ extends Button
 const EDITOR_EXPAND_ICON := preload("res://ui/icons/fullscreen_on.png")
 const EDITOR_COLLAPSE_ICON := preload("res://ui/icons/fullscreen_off.png")
 
+
 func _ready() -> void:
 	if OS.has_feature("web"):
 		modulate.a = 0.0

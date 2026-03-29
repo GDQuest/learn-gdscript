@@ -18,7 +18,8 @@ const SIZE_CHANGE_TIME := 0.5
 
 @export var test_quiz: Resource
 
-var completed_before := false: set = set_completed_before
+var completed_before := false:
+	set = set_completed_before
 
 @export var _outline: PanelContainer
 @export var _question: RichTextLabel
@@ -44,6 +45,7 @@ var _animating_hint := false
 
 var _error_scene_tween: Tween
 var _size_scene_tween: Tween
+
 
 func _ready() -> void:
 	_completed_before_icon.visible = completed_before
@@ -116,13 +118,13 @@ func _test_answer() -> void:
 		result = _test_answer_against_quiz(_get_answers().back())
 	_help_message.text = result.help_message
 	_help_message.visible = not result.help_message.is_empty()
-	
+
 	if not result.is_correct:
 		_outline.modulate.a = 1.0
 		_outline.add_theme_stylebox_override("panel", ERROR_OUTLINE)
 
 		position.y = _shake_pos
-		
+
 		if _error_scene_tween:
 			_error_scene_tween.kill()
 		_error_scene_tween = create_tween().set_parallel()
@@ -142,13 +144,12 @@ func _show_answer(gave_correct_answer := true) -> void:
 	_outline.add_theme_stylebox_override("panel", PASSED_OUTLINE if gave_correct_answer else NEUTRAL_OUTLINE)
 	_outline.modulate.a = 1.0
 
-
 	_result_container.show()
 	_change_rect_size_to(_result_container.size)
 
 	#Hiding choice view upon completion of the following tween
 	var fade_tween := create_tween().set_parallel()
-	
+
 	var choice_step := fade_tween.tween_property(_choice_container, "modulate:a", 0.0, FADE_OUT_TIME).from(1.0)
 	choice_step.finished.connect(_choice_container.hide)
 	fade_tween.tween_property(_result_container, "modulate:a", 1.0, FADE_IN_TIME).from(0.0)
@@ -166,7 +167,6 @@ func _show_answer(gave_correct_answer := true) -> void:
 
 
 func _change_rect_size_to(size: Vector2, instant := false) -> void:
-
 	if instant:
 		custom_minimum_size = size
 		return
@@ -182,6 +182,7 @@ func _change_rect_size_to(size: Vector2, instant := false) -> void:
 	_size_scene_tween.tween_method(_on_size_tween_step, 0.0, 1.0, SIZE_CHANGE_TIME).set_trans(Tween.TRANS_SINE)
 	_size_scene_tween.finished.connect(_on_size_tween_completed)
 
+
 func _on_item_rect_changed() -> void:
 	if not _error_scene_tween or not _error_scene_tween.is_running() or _error_scene_tween.get_total_elapsed_time() > ERROR_SHAKE_TIME:
 		_shake_pos = position.y
@@ -191,8 +192,10 @@ func _on_item_rect_changed() -> void:
 	if _result_container.size.x < size.x:
 		_result_container.size.x = size.x
 
+
 func _on_help_label_visibility_changed() -> void:
 	_animating_hint = true
+
 
 func _on_choice_container_minimum_size_changed() -> void:
 	if _choice_container.size.y > _choice_container.get_combined_minimum_size().y:
@@ -201,6 +204,7 @@ func _on_choice_container_minimum_size_changed() -> void:
 	if not _result_container.visible:
 		# If not animating the hint, just resize normally.
 		_change_rect_size_to(_choice_container.size, !_animating_hint)
+
 
 func _on_result_container_minimum_size_changed() -> void:
 	if _result_container.size.y > _result_container.get_combined_minimum_size().y:
@@ -221,7 +225,6 @@ func _on_size_tween_step(value: float) -> void:
 func _on_size_tween_completed() -> void:
 	_next_rect_size = Vector2.ZERO
 	_animating_hint = false
-
 
 
 class AnswerTestResult:

@@ -19,7 +19,6 @@ var _unloading_target: Control
 var _loading_target: Control
 var _course_navigator: UINavigator
 
-
 var _user_profile := UserProfiles.get_profile()
 
 

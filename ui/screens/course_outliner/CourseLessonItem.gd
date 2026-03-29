@@ -5,10 +5,14 @@ const SELECTED_STYLE := preload("res://ui/theme/outliner_item_selected.tres")
 
 signal selected()
 
-var lesson_index := -1: set = set_lesson_index
-var lesson_title := "": set = set_lesson_title
-var completion := 0: set = set_completion
-var is_selected := false: set = set_selected
+var lesson_index := -1:
+	set = set_lesson_index
+var lesson_title := "":
+	set = set_lesson_title
+var completion := 0:
+	set = set_completion
+var is_selected := false:
+	set = set_selected
 
 var _mouse_hovering := false
 
@@ -19,7 +23,7 @@ var _mouse_hovering := false
 
 func _ready() -> void:
 	_update_visuals()
-	
+
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 
@@ -27,10 +31,10 @@ func _ready() -> void:
 func _draw() -> void:
 	if not _mouse_hovering and not is_selected:
 		return
-	
+
 	if is_selected:
 		draw_style_box(SELECTED_STYLE, Rect2(Vector2.ZERO, size))
-	
+
 	if _mouse_hovering:
 		draw_style_box(HOVER_STYLE, Rect2(Vector2.ZERO, size))
 
@@ -64,12 +68,12 @@ func set_selected(value: bool) -> void:
 func _update_visuals() -> void:
 	if not is_inside_tree():
 		return
-	
+
 	_prefix_label.text = "Lesson %d" % [lesson_index + 1]
 	_title_label.text = lesson_title
 	_progress_bar.value = completion
 	tooltip_text = lesson_title
-	
+
 	if completion == 0:
 		_title_label.modulate.a = 0.65
 	else:

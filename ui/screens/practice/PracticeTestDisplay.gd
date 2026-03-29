@@ -15,8 +15,10 @@ const FADE_COLOR_DURATION := 0.2
 const FADE_SCALE_DURATION := 0.65
 const FADE_SCALE_START_AT := 2.5
 
-var status: int = Status.IDLE: set = set_status
-var title := "": set = set_title
+var status: int = Status.IDLE:
+	set = set_status
+var title := "":
+	set = set_title
 
 @onready var _icon := $IconAnchors/Icon as TextureRect
 @onready var _label := $Label as Label

@@ -4,9 +4,12 @@ extends ColorRect
 signal confirmed
 signal denied
 
-@export var title := "": set = set_title
-@export var text_content := "": set = set_text_content
-@export var min_size := Vector2(200, 120): set = set_min_size
+@export var title := "":
+	set = set_title
+@export var text_content := "":
+	set = set_text_content
+@export var min_size := Vector2(200, 120):
+	set = set_min_size
 
 @onready var _root_container := $PanelContainer as Container
 @onready var _top_bar := $PanelContainer/Column/ProgressBar as ProgressBar
@@ -22,10 +25,10 @@ func _ready():
 	_root_container.custom_minimum_size = min_size
 	_root_container.size = _root_container.custom_minimum_size
 	_root_container.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-	
+
 	_title_label.text = tr(title)
 	_message_content.text = tr(text_content)
-	
+
 	_confirm_button.pressed.connect(confirmed.emit)
 	_confirm_button.pressed.connect(hide)
 

@@ -26,13 +26,14 @@ signal scroll_changed(vector2)
 
 enum SCROLL_DIR { HORIZONTAL, VERTICAL }
 
-const BRACKET_PAIRS := {"(": ")", "[": "]", "{": "}"}
+const BRACKET_PAIRS := { "(": ")", "[": "]", "{": "}" }
 
 var errors_overlay := SliceEditorOverlay.new()
 var errors_overlay_message: ErrorOverlayPopup = ErrorOverlayPopupScene.instantiate()
 
 # Array<ScriptError>
-var errors := []: set = set_errors
+var errors := []:
+	set = set_errors
 
 var _slice_properties: ScriptSlice = null
 # Used to know when to add an indent level.
@@ -137,6 +138,7 @@ func line_highlight_requested(line_index: int, at_char: int = 0) -> void:
 
 	errors_overlay.add_line_highlight(line_index)
 
+
 func _on_text_changed() -> void:
 	if _remove_last_character:
 		var column := get_caret_column()
@@ -236,7 +238,7 @@ func _reset_overlays() -> void:
 			continue
 
 		error_node.region_entered.connect(
-			errors_overlay_message.show_message.bind(error.code, error.message, error_node)
+			errors_overlay_message.show_message.bind(error.code, error.message, error_node),
 		)
 		error_node.region_exited.connect(errors_overlay_message.hide_message.bind(error_node))
 

@@ -5,7 +5,6 @@ const QuizAnswerButtonScene := preload("res://ui/screens/lesson/quizzes/QuizAnsw
 const QuizAnswerButton := preload("res://ui/screens/lesson/quizzes/QuizAnswerButton.gd")
 const ERROR_NO_VALID_ANSWERS := "No valid answers set for QuizChoice resource, can't test answers."
 
-
 @export var _choices: VBoxContainer
 
 

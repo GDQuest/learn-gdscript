@@ -161,7 +161,7 @@ func _tokenize_line(line: String, line_number: int) -> Array:
 
 
 func _parse_attributes(attributes_string: String) -> Dictionary:
-	var attributes := {}
+	var attributes := { }
 	var matches := _regex_attribute.search_all(attributes_string)
 
 	for match_result in matches:
@@ -202,7 +202,7 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 			if tag_definition == null:
 				_result.add_error(
 					"No tag definition found for tag enum %d" % token.tag,
-					token.line_number
+					token.line_number,
 				)
 				continue
 
@@ -215,9 +215,9 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 					"Tag [%s] cannot appear inside [%s]. Valid parents: %s" % [
 						_parser_data.get_tag_name(token.tag),
 						_parser_data.get_tag_name(current.tag) if current.tag != _parser_data.Tag.UNKNOWN else "_root",
-						", ".join(parent_names)
+						", ".join(parent_names),
 					],
-					token.line_number
+					token.line_number,
 				)
 
 			var node := ParseNode.new()
@@ -244,15 +244,15 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 			if current.tag == _parser_data.Tag.UNKNOWN:
 				_result.add_error(
 					"Unexpected closing tag [/%s] with no matching opening tag" % closing_name,
-					token.line_number
+					token.line_number,
 				)
 			elif current.tag != token.tag:
 				_result.add_error(
 					"Mismatched closing tag: expected [/%s] but found [/%s]" % [
 						current_name,
-						closing_name
+						closing_name,
 					],
-					token.line_number
+					token.line_number,
 				)
 			else:
 				stack.pop_back()
@@ -266,9 +266,9 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 			_result.add_error(
 				"Unclosed tag [%s] opened at line %d" % [
 					_parser_data.get_tag_name(unclosed.tag),
-					unclosed.line_number
+					unclosed.line_number,
 				],
-				unclosed.line_number
+				unclosed.line_number,
 			)
 
 	return root
@@ -279,7 +279,7 @@ class Token:
 	var type: int = TokenTypes.TEXT
 	# We store the tag as we tokenize to avoid going back through it again later.
 	var tag: int = BBCodeParserData.Tag.UNKNOWN
-	var attributes := {}
+	var attributes := { }
 	var text := ""
 	var line_number := -1
 
@@ -287,11 +287,10 @@ class Token:
 # Parse tree node class
 class ParseNode:
 	var tag: int = BBCodeParserData.Tag.UNKNOWN
-	var attributes := {}
+	var attributes := { }
 	var children := []
 	var line_number := -1
 	var bbcode_path: String
-
 
 
 class ParseError:

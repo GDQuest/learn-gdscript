@@ -9,7 +9,8 @@ const TWEEN_DURATION := 0.2
 @export var end_point := Vector2.ZERO
 @export var _arrow: Sprite2D
 
-@onready var highlight_rects : Array = []: set = set_highlight_rects
+@onready var highlight_rects: Array = []:
+	set = set_highlight_rects
 
 @onready var _line_slice_limit := 0
 @onready var _baked_line_points := []
@@ -23,7 +24,7 @@ func _ready():
 
 func _draw() -> void:
 	for rect in highlight_rects:
-		draw_rect(rect, LINE_COLOR, false, LINE_WIDTH)# true) TODOConverter3To4 Antialiasing argument is missing
+		draw_rect(rect, LINE_COLOR, false, LINE_WIDTH) # true) TODOConverter3To4 Antialiasing argument is missing
 
 	if _line_slice_limit > 0:
 		draw_polyline(_baked_line_points.slice(0, _line_slice_limit), LINE_COLOR, LINE_WIDTH, true)

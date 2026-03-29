@@ -2,7 +2,6 @@
 class_name UIPractice
 extends UINavigatablePage
 
-
 signal test_student_code_completed
 
 const RUN_AUTOTIMER_DURATION := 5.0
@@ -43,7 +42,8 @@ var _practice: BBCodeParser.ParseNode
 var _practice_completed := false
 var _practice_solution_used := false
 
-var _script_slice: ScriptSlice: set = _set_script_slice
+var _script_slice: ScriptSlice:
+	set = _set_script_slice
 var _tester: PracticeTester
 # If `true`, the text changed but was not saved.
 var _code_editor_is_dirty := false
@@ -70,7 +70,6 @@ var _scene_tween: Tween
 @onready var _documentation_panel := find_child("DocumentationPanel") as RichTextLabel
 
 
-
 func _init():
 	REGEX_DIVSION_BY_ZERO.compile("[/%] *0")
 
@@ -86,7 +85,7 @@ func _init():
 
 func _ready() -> void:
 	super._ready()
-	
+
 	randomize()
 	if Engine.is_editor_hint():
 		return
@@ -142,7 +141,7 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 	_info_panel.title_label.text = tr(title).capitalize()
 	var goal := BBCodeUtils.get_practice_goal(practice)
 	_info_panel.goal_rich_text_label.text = TextUtils.bbcode_add_code_color(
-		TextUtils.tr_paragraph(goal)
+		TextUtils.tr_paragraph(goal),
 	)
 	var starting_code := BBCodeUtils.get_practice_starting_code(practice)
 	_code_editor.text = starting_code
@@ -206,7 +205,9 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 
 		var user_profile := UserProfiles.get_profile()
 		var completed_before = user_profile.is_lesson_practice_completed(
-			course_index.get_course_id(), lesson.bbcode_path, practice_id
+			course_index.get_course_id(),
+			lesson.bbcode_path,
+			practice_id,
 		)
 		if completed_before:
 			_info_panel.set_status_icon(_info_panel.Status.COMPLETED_BEFORE)
@@ -225,7 +226,7 @@ func _update_labels() -> void:
 	_info_panel.title_label.text = tr(title).capitalize()
 	var goal := BBCodeUtils.get_practice_goal(_practice)
 	_info_panel.goal_rich_text_label.text = TextUtils.bbcode_add_code_color(
-		TextUtils.tr_paragraph(goal)
+		TextUtils.tr_paragraph(goal),
 	)
 
 	var index := 0
@@ -316,14 +317,13 @@ func _validate_and_run_student_code() -> void:
 	if tokenizer.has_infinite_while_loop():
 		var error := ScriptError.new()
 		error.message = tr(
-			"You have a while loop that runs forever (while true) without a break statement. This will freeze the app."
+			"You have a while loop that runs forever (while true) without a break statement. This will freeze the app.",
 		)
 		error.severity = 1
 		error.code = GDQuestCodes.ErrorCode.INFINITE_WHILE_LOOP
 		MessageBus.print_script_error(error, script_file_name)
 		_code_editor.unlock_editor()
 		return
-
 
 	var verifier := OfflineScriptVerifier.new(script_text)
 	verifier.test()
@@ -369,7 +369,7 @@ func _validate_and_run_student_code() -> void:
 				modified_code.append(line)
 				modified_code.append(tabs + "\t" + guard_counter_varname + " += 1")
 				modified_code.append(
-					tabs + "\t" + "if " + guard_counter_varname + " > %s:" % MAX_WHILE_LOOP_ITERATIONS
+					tabs + "\t" + "if " + guard_counter_varname + " > %s:" % MAX_WHILE_LOOP_ITERATIONS,
 				)
 				modified_code.append(tabs + "\t\t" + "break")
 			else:
@@ -378,7 +378,7 @@ func _validate_and_run_student_code() -> void:
 	elif REGEX_DIVSION_BY_ZERO.search(script_text):
 		var error := ScriptError.new()
 		error.message = tr(
-			'There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no "/ 0" or "% 0" in your code.'
+			'There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no "/ 0" or "% 0" in your code.',
 		)
 		error.severity = 1
 		error.code = GDQuestCodes.ErrorCode.INVALID_NO_CATCH
@@ -393,7 +393,7 @@ func _validate_and_run_student_code() -> void:
 	if script_is_valid != OK:
 		var error := ScriptError.new()
 		error.message = tr(
-			"Oh no! The script has an error, but the Script Verifier did not catch it"
+			"Oh no! The script has an error, but the Script Verifier did not catch it",
 		)
 		error.severity = 1
 		error.code = GDQuestCodes.ErrorCode.INVALID_NO_CATCH
@@ -658,7 +658,6 @@ static func try_validate_and_replace_script(node: Node, script: GDScript) -> voi
 	if node.has_method("_run"):
 		# warning-ignore:unsafe_method_access
 		node.call_deferred("_run")
-
 
 ###############################################################################
 #

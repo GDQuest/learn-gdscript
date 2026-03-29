@@ -20,7 +20,7 @@ func parse_file(file_path: String) -> BBCodeParser.ParseResult:
 
 	var content := file.get_as_text()
 	file.close()
-	
+
 	return parse_text(content, file_path)
 
 

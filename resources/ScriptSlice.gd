@@ -25,9 +25,12 @@ var current_text := ""
 # pre-create slices as resources. I've replicated them to keep some of the old
 # interface.
 # Consider removing those and just keeping the functions to simplify the code.
-var slice_text: String: get = get_slice_text
-var start_offset: int: get = get_start_offset
-var end_offset: int: get = get_end_offset
+var slice_text: String:
+	get = get_slice_text
+var start_offset: int:
+	get = get_start_offset
+var end_offset: int:
+	get = get_end_offset
 
 
 # Returns the path to the scene file (we derive this from script_path)

@@ -32,7 +32,8 @@ var _velocity := Vector2(0, 0)
 # specific scrolling as directly updating the scroll properties conflicts with
 # the ScrollContainer's native behavior.
 var _current_scroll := Vector2.ZERO
-var _target_position := Vector2.ZERO: set = _set_target_position
+var _target_position := Vector2.ZERO:
+	set = _set_target_position
 var _max_position_y := 0.0
 
 # Used to throttle touchpad scroll events.

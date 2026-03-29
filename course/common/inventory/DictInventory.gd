@@ -4,23 +4,19 @@ extends Control
 const DictItemScene := preload("DictItem.tscn")
 
 const ITEM_DATABASE := {
-	"healing heart":
-	{
+	"healing heart": {
 		"icon": preload("healing_heart.png"),
 		"name": "Healing Heart",
 	},
-	"sword":
-	{
+	"sword": {
 		"icon": preload("sword.png"),
 		"name": "Sword",
 	},
-	"shield":
-	{
+	"shield": {
 		"icon": preload("shield.png"),
 		"name": "Shield",
 	},
-	"gems":
-	{
+	"gems": {
 		"icon": preload("gems.png"),
 		"name": "Gems",
 	},

@@ -1,6 +1,7 @@
 extends PanelContainer
 
-var values := []: set = set_values
+var values := []:
+	set = set_values
 
 @export var _label: Label
 

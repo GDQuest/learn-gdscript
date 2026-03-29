@@ -9,7 +9,8 @@ const LessonDetails := preload("./CourseLessonDetails.gd")
 @export var _reset_button: Button
 @export var _reset_confirm_popup: ConfirmPopup
 
-var course_index: CourseIndex: set = set_course
+var course_index: CourseIndex:
+	set = set_course
 var _current_lesson: BBCodeParser.ParseNode
 var _current_practice: BBCodeParser.ParseNode
 

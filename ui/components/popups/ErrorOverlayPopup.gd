@@ -3,7 +3,8 @@
 class_name ErrorOverlayPopup
 extends MarginContainer
 
-@export var exclusive := false: set = set_exclusive
+@export var exclusive := false:
+	set = set_exclusive
 @export var _error_label: Label
 @export var _content_block: Control
 @export var _error_explanation_block: Revealer
@@ -14,8 +15,10 @@ extends MarginContainer
 @export var _exclusive_buttons: Control
 @export var _close_button: Button
 
-var error_code: int = -1: set = set_error_code
-var error_message: String: set = set_error_message
+var error_code: int = -1:
+	set = set_error_code
+var error_message: String:
+	set = set_error_message
 
 var _current_message_source: Node
 var _error_explanation: String

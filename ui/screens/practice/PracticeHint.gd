@@ -2,7 +2,8 @@
 class_name PracticeHint
 extends Revealer
 
-@export var text: String: set = set_bbcode_text
+@export var text: String:
+	set = set_bbcode_text
 
 @onready var _rich_text_label := $RichTextLabel as RichTextLabel
 

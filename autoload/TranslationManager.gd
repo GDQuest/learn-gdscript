@@ -41,8 +41,8 @@ const LOCALE_TO_LABEL := {
 	"da": "Dansk",
 }
 
-
-var current_language := DEFAULT_LOCALE: set = set_language
+var current_language := DEFAULT_LOCALE:
+	set = set_language
 
 var _loaded_translations := []
 
@@ -60,10 +60,12 @@ func get_available_languages() -> Array:
 		if language_name == "":
 			language_name = TranslationServer.get_locale_name(locale_code)
 
-		languages.append({
-			"code": locale_code,
-			"name": language_name,
-		})
+		languages.append(
+			{
+				"code": locale_code,
+				"name": language_name,
+			},
+		)
 
 	return languages
 
@@ -94,30 +96,30 @@ func set_language(language_code: String) -> void:
 	var locale_dir_path := I18N_ROOT.path_join(current_language)
 
 	if not DirAccess.dir_exists_absolute(locale_dir_path):
-		printerr("Failed to change language to '%s': Language folder does not exist." % [ current_language ])
+		printerr("Failed to change language to '%s': Language folder does not exist." % [current_language])
 		_reset_language()
 		return
 
 	var fs := DirAccess.open(locale_dir_path)
 	if not fs:
-		printerr("Failed to open language folder for '%s': Error code %d" % [ current_language, DirAccess.get_open_error() ])
+		printerr("Failed to open language folder for '%s': Error code %d" % [current_language, DirAccess.get_open_error()])
 		_reset_language()
 		return
 
 	for file in fs.get_files():
 		if not file.get_extension() == PO_EXTENSION:
 			continue
-		
+
 		var full_path := locale_dir_path.path_join(file)
 		if not ResourceLoader.exists(full_path):
-			printerr("Language file at '%s' is not recognized as a valid resource." % [ full_path ])
+			printerr("Language file at '%s' is not recognized as a valid resource." % [full_path])
 			continue
-		
+
 		var position := ResourceLoader.load(full_path, "Translation") as Translation
 		if not position:
-			printerr("Language resource at '%s' has failed to load." % [ full_path ])
+			printerr("Language resource at '%s' has failed to load." % [full_path])
 			continue
-		
+
 		_loaded_translations.append(position)
 
 	# Add loaded translations to the translation server.

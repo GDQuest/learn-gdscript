@@ -12,8 +12,8 @@ const URL_GODOT_DOCS_REF = "ref=godot-docs"
 @export var player_name := ""
 # Study progression (across multiple courses)
 @export var study_progression := []
-@export var last_started_lesson := {}
-@export var last_visible_lesson_block := {}
+@export var last_started_lesson := { }
+@export var last_visible_lesson_block := { }
 @export var is_sponsored_profile := true
 
 # User settings
@@ -25,21 +25,22 @@ const URL_GODOT_DOCS_REF = "ref=godot-docs"
 # Dyslexia Font enabled
 @export var dyslexia_font := false
 # Sensitivity when scrolling with the mouse wheel or touchpad.
-@export var scroll_sensitivity := 1.0: set = set_scroll_sensitivity
+@export var scroll_sensitivity := 1.0:
+	set = set_scroll_sensitivity
 # Target framerate for the application, to reduce update intensity on lower end devices.
-@export var framerate_limit := 60: set = set_framerate_limit
-
+@export var framerate_limit := 60:
+	set = set_framerate_limit
 
 var _save_queued := false
 
 
 func _init() -> void:
 	study_progression = []
-	last_started_lesson = {}
+	last_started_lesson = { }
 
 	if OS.has_feature("JavaScript"):
 		var window := JavaScriptBridge.get_interface("window")
-		var browser_url : String = window.location.href
+		var browser_url: String = window.location.href
 		is_sponsored_profile = browser_url.find(URL_GODOT_DOCS_REF) == -1
 
 
@@ -97,7 +98,7 @@ func set_lesson_reading_block(course_id: String, lesson_id: String, block_id: St
 
 	# Set it as the last visible block to use it later to restore position on the page.
 	if not last_visible_lesson_block.has(course_id):
-		last_visible_lesson_block[course_id] = {}
+		last_visible_lesson_block[course_id] = { }
 	last_visible_lesson_block[course_id][lesson_id] = block_id
 
 	save()
@@ -138,7 +139,10 @@ func is_lesson_reading_completed(course_id: String, lesson_id: String) -> bool:
 
 
 func set_lesson_quiz_completed(
-	course_id: String, lesson_id: String, quiz_id: String, completed: bool
+		course_id: String,
+		lesson_id: String,
+		quiz_id: String,
+		completed: bool,
 ) -> void:
 	var lesson_progress := get_or_create_lesson(course_id, lesson_id)
 
@@ -157,7 +161,10 @@ func is_lesson_quiz_completed(course_id: String, lesson_id: String, quiz_id: Str
 
 
 func set_lesson_practice_completed(
-	course_id: String, lesson_id: String, practice_id: String, completed: bool
+		course_id: String,
+		lesson_id: String,
+		practice_id: String,
+		completed: bool,
 ) -> void:
 	var lesson_progress := get_or_create_lesson(course_id, lesson_id)
 
@@ -221,7 +228,7 @@ func set_scroll_sensitivity(amount: float) -> void:
 func set_framerate_limit(limit: int) -> void:
 	assert(
 		limit in VALID_FRAMERATE_LIMITS,
-		"The framerate limit must be one of: " + str(VALID_FRAMERATE_LIMITS)
+		"The framerate limit must be one of: " + str(VALID_FRAMERATE_LIMITS),
 	)
 	framerate_limit = limit
 	emit_signal("framerate_limit_changed", framerate_limit)

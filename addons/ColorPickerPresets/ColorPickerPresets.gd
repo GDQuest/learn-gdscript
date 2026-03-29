@@ -19,5 +19,7 @@ func _enter_tree() -> void:
 				presets.push_back(Color(hex))
 
 		get_editor_interface().get_editor_settings().set_project_metadata(
-			"color_picker", "presets", presets
+			"color_picker",
+			"presets",
+			presets,
 		)

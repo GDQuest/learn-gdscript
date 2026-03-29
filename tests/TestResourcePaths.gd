@@ -12,14 +12,14 @@ func _run() -> void:
 
 	if not ResourceLoader.exists(COURSE_RESOURCE_PATH):
 		printerr(
-			"Course resource at path '%s' does not exist. Aborting test." % [COURSE_RESOURCE_PATH]
+			"Course resource at path '%s' does not exist. Aborting test." % [COURSE_RESOURCE_PATH],
 		)
 		return
 
 	var course = ResourceLoader.load(COURSE_RESOURCE_PATH, "", true)
 	if not course:
 		printerr(
-			"Failed to load the course resource at '%s'. Aborting test." % [COURSE_RESOURCE_PATH]
+			"Failed to load the course resource at '%s'. Aborting test." % [COURSE_RESOURCE_PATH],
 		)
 
 	var error_messages := PackedStringArray()
@@ -31,7 +31,7 @@ func _run() -> void:
 					(
 						"Lesson %s (%s): visual element at path '%s' is not valid."
 						% [index, lesson.title, content_block.visual_element_path]
-					)
+					),
 				)
 
 		var practice_index := 1
@@ -45,9 +45,9 @@ func _run() -> void:
 							lesson.title,
 							practice_index,
 							practice.title,
-							practice.validator_script_path
+							practice.validator_script_path,
 						]
-					)
+					),
 				)
 			if not _is_valid(lesson, practice.script_slice_path):
 				error_messages.append(
@@ -58,9 +58,9 @@ func _run() -> void:
 							lesson.title,
 							practice_index,
 							practice.title,
-							practice.script_slice_path
+							practice.script_slice_path,
 						]
-					)
+					),
 				)
 		index += 1
 

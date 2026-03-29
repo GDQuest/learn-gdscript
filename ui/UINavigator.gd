@@ -33,12 +33,11 @@ var load_into_outliner := false
 
 var _screens_stack := []
 # Maps url strings to resource paths.
-var _matches := {}
+var _matches := { }
 
 var _lesson_index := 0
 var _lesson_count: int = 0
 var _scene_tween: Tween
-
 
 
 func _ready() -> void:
@@ -48,7 +47,6 @@ func _ready() -> void:
 	NavigationManager.navigation_requested.connect(_navigate_to)
 	NavigationManager.back_navigation_requested.connect(_navigate_back)
 	NavigationManager.outliner_navigation_requested.connect(_navigate_to_outliner)
-
 
 	Events.practice_next_requested.connect(_on_practice_next_requested)
 	Events.practice_previous_requested.connect(_on_practice_previous_requested)
@@ -236,7 +234,7 @@ func _on_practice_next_requested(practice: BBCodeParser.ParseNode) -> void:
 		var lesson_progress = user_profile.get_or_create_lesson(course_index.get_course_id(), lesson_data.bbcode_path)
 		var total_practices := practice_count
 		var completed_practices = lesson_progress.get_completed_practices_count(lesson_data)
-		
+
 		# Show a confirmation popup and optionally tell the user that the lesson is incomplete.
 		_lesson_done_popup.set_incomplete(completed_practices < total_practices)
 		_lesson_done_popup.popup_centered()
@@ -251,7 +249,7 @@ func _on_practice_previous_requested(practice: BBCodeParser.ParseNode) -> void:
 	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as BBCodeParser.ParseNode
 	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson_data)
 	var practice_id := BBCodeUtils.get_practice_id(practice)
-	
+
 	var index := -1
 	for i in practice_count:
 		var other_practice := BBCodeUtils.get_lesson_practice(lesson_data, i)
@@ -277,7 +275,7 @@ func _on_practice_requested(practice: BBCodeParser.ParseNode) -> void:
 	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as BBCodeParser.ParseNode
 	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson_data)
 	var practice_id := BBCodeUtils.get_practice_id(practice)
-	
+
 	var index := -1
 	for i in practice_count:
 		var other_practice := BBCodeUtils.get_lesson_practice(lesson_data, i)

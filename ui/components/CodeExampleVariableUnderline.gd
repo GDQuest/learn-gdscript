@@ -10,7 +10,8 @@ const TWEEN_DURATION := 0.2
 @export var _mouse_blocker: Control
 @export var _label: Label
 
-var highlight_rect := Rect2(): set = set_highlight_rect
+var highlight_rect := Rect2():
+	set = set_highlight_rect
 var variable_name := ""
 
 var highlight_line := -1

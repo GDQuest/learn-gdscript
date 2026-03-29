@@ -31,9 +31,9 @@ const TYPE_MAP := {
 }
 
 # Caches regexes to highlight code in text.
-var _REGEXES := {}
+var _REGEXES := { }
 # Intended to be used as a constant
-var _REGEX_REPLACE_MAP := {}
+var _REGEX_REPLACE_MAP := { }
 
 
 func _init() -> void:
@@ -84,7 +84,9 @@ func bbcode_add_code_color(text := "") -> String:
 				"number",
 			]:
 				var replaced: String = _REGEXES[regex_type].sub(
-					part, _REGEX_REPLACE_MAP[regex_type], false
+					part,
+					_REGEX_REPLACE_MAP[regex_type],
+					false,
 				)
 				if part != replaced:
 					colored_string += replaced

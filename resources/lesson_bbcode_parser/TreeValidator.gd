@@ -19,7 +19,7 @@ func validate_tree(root: BBCodeParser.ParseNode, result: BBCodeParser.ParseResul
 			else:
 				_result.add_error(
 					"Tag [%s] must be inside a [lesson] tag" % _parser_data.get_tag_name(child.tag),
-					child.line_number
+					child.line_number,
 				)
 		elif child is String and child.strip_edges() != "":
 			_result.add_error("Content found outside of [lesson] tag", 1)
@@ -41,7 +41,7 @@ func _validate_node_children(node: BBCodeParser.ParseNode) -> void:
 	var required_children: Array = tag_definition.required_children
 
 	if not required_children.is_empty():
-		var found_tags := {}
+		var found_tags := { }
 		for child in node.children:
 			if child is BBCodeParser.ParseNode:
 				found_tags[child.tag] = true
@@ -50,7 +50,7 @@ func _validate_node_children(node: BBCodeParser.ParseNode) -> void:
 			if not found_tags.has(required_tag):
 				_result.add_error(
 					"[%s] is missing required [%s] tag" % [_parser_data.get_tag_name(node.tag), _parser_data.get_tag_name(required_tag)],
-					node.line_number
+					node.line_number,
 				)
 
 	if node.tag == _parser_data.Tag.QUIZ_CHOICE:
@@ -63,7 +63,7 @@ func _validate_node_children(node: BBCodeParser.ParseNode) -> void:
 		if not has_correct_option:
 			_result.add_error(
 				"[quiz_choice] must have at least one [option correct] marking the correct answer",
-				node.line_number
+				node.line_number,
 			)
 
 	for child in node.children:

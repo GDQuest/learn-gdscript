@@ -75,7 +75,9 @@ func _init_values() -> void:
 			break
 
 	_font_size_value.value = clamp(
-		int(current_profile.font_size_scale), _font_size_value.min_value, _font_size_value.max_value
+		int(current_profile.font_size_scale),
+		_font_size_value.min_value,
+		_font_size_value.max_value,
 	)
 	_scroll_sensitivity_slider.value = current_profile.scroll_sensitivity
 	_framerate_option.selected = FRAMERATE_MAP.values().find(current_profile.framerate_limit)

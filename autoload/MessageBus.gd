@@ -16,17 +16,12 @@ signal print_requested(type, thing_to_print, file_name, line_nb, character, mess
 
 var script_replacements := RegExpGroup.collection(
 	{
-		"\\b(?<command>prints)\\((?<args>.*?)\\)":
-		"MessageBus.print_log([{args}], \"{file}\", {line}, {char})",
-		"\\b(?<command>print)\\((?<args>[^()]*(?:\\([^()]*\\))?[^()]*)\\)":
-		"MessageBus.print_log([{args}], \"{file}\", {line}, {char})",
-		"\\b(?<command>push_error)\\((?<args>.*?)\\)":
-		"MessageBus.print_error({args}, \"{file}\", {line}, {char})",
-		"\\b(?<command>push_warning)\\((?<args>.*?)\\)":
-		"MessageBus.print_warning({args}, \"{file}\", {line}, {char})",
-		"\\b(?<command>assert)\\((?<args>.*?)\\)":
-		"MessageBus.print_assert({args}, \"{file}\", {line}, {char})",
-	}
+		"\\b(?<command>prints)\\((?<args>.*?)\\)": "MessageBus.print_log([{args}], \"{file}\", {line}, {char})",
+		"\\b(?<command>print)\\((?<args>[^()]*(?:\\([^()]*\\))?[^()]*)\\)": "MessageBus.print_log([{args}], \"{file}\", {line}, {char})",
+		"\\b(?<command>push_error)\\((?<args>.*?)\\)": "MessageBus.print_error({args}, \"{file}\", {line}, {char})",
+		"\\b(?<command>push_warning)\\((?<args>.*?)\\)": "MessageBus.print_warning({args}, \"{file}\", {line}, {char})",
+		"\\b(?<command>assert)\\((?<args>.*?)\\)": "MessageBus.print_assert({args}, \"{file}\", {line}, {char})",
+	},
 )
 
 # If `true`, calls to this singleton will also print to the regular Godot
@@ -84,7 +79,7 @@ func print_script_error(error: ScriptError, script_file_name := "") -> void:
 		script_file_name,
 		error.error_range.start.line,
 		error.error_range.start.character,
-		error.code
+		error.code,
 	)
 
 
@@ -96,7 +91,11 @@ func print_log(thing_to_print: Array, file_name: String, line_nb: int = 0, chara
 
 
 func print_error(
-	thing_to_print, file_name: String, line_nb: int = 0, character: int = 0, error_code: int = -1
+		thing_to_print,
+		file_name: String,
+		line_nb: int = 0,
+		character: int = 0,
+		error_code: int = -1,
 ) -> void:
 	print_request(MESSAGE_TYPE.ERROR, String(thing_to_print), file_name, line_nb, character, error_code)
 	if print_to_output:
@@ -104,7 +103,11 @@ func print_error(
 
 
 func print_warning(
-	thing_to_print, file_name: String, line_nb: int = 0, character: int = 0, warning_code: int = -1
+		thing_to_print,
+		file_name: String,
+		line_nb: int = 0,
+		character: int = 0,
+		warning_code: int = -1,
 ) -> void:
 	print_request(MESSAGE_TYPE.WARNING, String(thing_to_print), file_name, line_nb, character, warning_code)
 	if print_to_output:
@@ -112,7 +115,11 @@ func print_warning(
 
 
 func print_assert(
-	assertion: bool, provided_message := "", file_name := "", line_nb: int = 0, character: int = 0
+		assertion: bool,
+		provided_message := "",
+		file_name := "",
+		line_nb: int = 0,
+		character: int = 0,
 ) -> void:
 	var message = ""
 	if not assertion:
@@ -127,6 +134,11 @@ func print_assert(
 # This is a proxy for emitting the signal, to work around Godot's lack of signal
 # typing.
 func print_request(
-	message_type: int, message: String, file_name: String, line_nb: int, character: int, message_code: int = -1
+		message_type: int,
+		message: String,
+		file_name: String,
+		line_nb: int,
+		character: int,
+		message_code: int = -1,
 ) -> void:
 	print_requested.emit(message_type, message, file_name, line_nb, character, message_code)

@@ -1,6 +1,5 @@
 extends Button
 
-
 func _ready() -> void:
 	var color := Color("303049")
 	add_theme_color_override("icon_color_normal", color)

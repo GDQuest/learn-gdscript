@@ -14,7 +14,6 @@ func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
 
 
-
 func _on_visibility_changed() -> void:
 	if visible:
 		_cancel_button.grab_focus()

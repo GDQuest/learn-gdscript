@@ -11,11 +11,11 @@ enum State { IDLE, LOADING, FADING_IN, FADING_OUT }
 
 @export var _progress_bar: ProgressBar
 
-var progress_value := 0.0: set = set_progress_value
+var progress_value := 0.0:
+	set = set_progress_value
 
 var _state: int = State.IDLE
 var _scene_tween: Tween
-
 
 
 func _ready() -> void:
@@ -27,14 +27,14 @@ func _ready() -> void:
 
 func set_progress_value(value: float) -> void:
 	progress_value = clamp(value, 0.0, 1.0)
-	
+
 	if is_inside_tree():
 		_animate_progress()
 
 
 func reset_progress_value() -> void:
 	progress_value = 0.0
-	
+
 	if is_inside_tree():
 		_progress_bar.value = progress_value
 
@@ -64,7 +64,7 @@ func fade_out() -> void:
 func _animate_progress() -> void:
 	if _state != State.IDLE:
 		return
-	
+
 	_state = State.LOADING
 
 	if _progress_bar.value == progress_value:

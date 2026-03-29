@@ -2,11 +2,10 @@
 class_name GDScriptCodeExample
 extends CodeEdit
 
-
 const CODE_FONT := "res://ui/theme/fonts/font_code.tres"
 
-
-@export var min_size := Vector2(600, 200): set = set_min_size
+@export var min_size := Vector2(600, 200):
+	set = set_min_size
 
 
 func _ready() -> void:

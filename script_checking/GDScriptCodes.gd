@@ -341,7 +341,7 @@ const MESSAGE_DATABASE := [
 	},
 	{
 		"patterns": [
-			["Unknown character"]
+			["Unknown character"],
 		],
 		"raw": [
 			"Unknown character",

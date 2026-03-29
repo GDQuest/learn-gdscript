@@ -5,7 +5,6 @@ signal toggled(is_pressed)
 const OPTION_FONT := preload("res://ui/theme/fonts/font_text.tres")
 const OPTION_SELECTED_FONT := preload("res://ui/theme/fonts/font_text_bold.tres")
 
-
 var _button_text := ""
 
 @export var _margin_container: MarginContainer
@@ -22,7 +21,7 @@ func _notification(what: int) -> void:
 
 func setup(text: String, is_multiple_choice: bool) -> void:
 	_button_text = text
-	
+
 	if not is_inside_tree():
 		await self.ready
 

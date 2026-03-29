@@ -15,11 +15,13 @@ func _ready() -> void:
 	pressed.connect(open_gdquest_website)
 	button_down.connect(_toggle_shade.bind(true))
 	button_up.connect(_toggle_shade.bind(false))
-	mouse_entered.connect(func() -> void:
-		local_is_hovered = true
+	mouse_entered.connect(
+		func() -> void:
+			local_is_hovered = true
 	)
-	mouse_exited.connect(func() -> void:
-		local_is_hovered = false
+	mouse_exited.connect(
+		func() -> void:
+			local_is_hovered = false
 	)
 
 

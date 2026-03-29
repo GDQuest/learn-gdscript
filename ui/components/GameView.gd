@@ -5,7 +5,8 @@ extends Control
 @export var _viewport_container: SubViewportContainer
 @export var _pause_rect: ColorRect
 
-var paused := false: set = set_paused
+var paused := false:
+	set = set_paused
 
 var _viewport := SubViewport.new()
 

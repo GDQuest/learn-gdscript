@@ -17,7 +17,7 @@ const COLOR_NUMBERS := Color(0.922, 0.580, 0.200)
 const COLOR_SYMBOLS := Color(0.407, 0.587, 1.0)
 const COLOR_FUNCTIONS := Color(0.34, 0.69, 1.0)
 const KEYWORDS := [
-	
+
 	# Basic keywords.
 	"var",
 	"const",
@@ -29,7 +29,7 @@ const KEYWORDS := [
 	"extends",
 	"self",
 	"super",
-	
+
 	# Control flow keywords.
 	"if",
 	"elif",
@@ -49,19 +49,20 @@ const KEYWORDS := [
 	"pass",
 	"return",
 	"is",
-	
+
 	# Godot-specific keywords.
 	"setget",
 	"breakpoint",
-	
+
 	# Primitive data types.
 	"bool",
 	"int",
 	"float",
 	"null",
-	"true", "false",
+	"true",
+	"false",
 	"void",
-	
+
 	# Global GDScript namespace.
 	"await",
 	"Color8",
@@ -143,9 +144,10 @@ const KEYWORDS := [
 	"weakref",
 	"wrapf",
 	"wrapi",
-	
-	"PI", "TAU", "INF", "NAN",
-	
+	"PI",
+	"TAU",
+	"INF",
+	"NAN",
 	"Variant",
 ]
 
@@ -189,6 +191,7 @@ const ANNOTATIONS := [
 	"warning_ignore_start",
 ]
 
+
 # Enhances a TextEdit to better highlight GDScript code.
 static func enhance(text_edit: CodeEdit) -> void:
 	if not text_edit.syntax_highlighter or text_edit.syntax_highlighter.resource_path != GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH:
@@ -217,12 +220,12 @@ static func enhance_highlighter(highlighter: CodeHighlighter) -> void:
 	highlighter.member_variable_color = COLOR_MEMBER
 	highlighter.function_color = COLOR_FUNCTIONS
 	highlighter.symbol_color = COLOR_SYMBOLS
-	
+
 	highlighter.clear_color_regions()
 	highlighter.clear_keyword_colors()
 	highlighter.clear_member_keyword_colors()
 	highlighter.clear_highlighting_cache()
-	
+
 	highlighter.add_color_region("'", "'", COLOR_QUOTES)
 	highlighter.add_color_region('"', '"', COLOR_QUOTES)
 	highlighter.add_color_region("#", "", COLOR_COMMENTS, true)
@@ -235,6 +238,6 @@ static func enhance_highlighter(highlighter: CodeHighlighter) -> void:
 
 	for keyword: String in KEYWORDS:
 		highlighter.add_keyword_color(keyword, COLOR_KEYWORD)
-	
+
 	for annotation: String in ANNOTATIONS:
 		highlighter.add_keyword_color("@%s" % annotation, COLOR_NUMBERS)

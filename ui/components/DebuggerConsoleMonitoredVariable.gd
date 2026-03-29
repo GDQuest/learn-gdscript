@@ -1,8 +1,8 @@
 extends PanelContainer
 
 @export var _label: Label
-var values := []: set = set_values
-
+var values := []:
+	set = set_values
 
 
 func set_values(new_values: Array) -> void:

@@ -31,7 +31,6 @@ var _temp_command_stack = []
 
 var _scene_tween: Tween
 
-
 @onready var turn_degrees = rotation_degrees
 
 @onready var _pivot := $Pivot as Node2D
@@ -63,7 +62,7 @@ func move_forward(distance: float) -> void:
 	position = new_point
 
 	_temp_command_stack.append(
-		{command = "move_to", target = new_point}
+		{ command = "move_to", target = new_point },
 	)
 
 	# Check if the polygon has vertices that align. In that case, we consider it
@@ -79,13 +78,13 @@ func move_forward(distance: float) -> void:
 func turn_right(angle_degrees: float) -> void:
 	_handle_position_setting()
 	turn_degrees = round(turn_degrees + angle_degrees)
-	_temp_command_stack.append({command = "turn", angle = round(angle_degrees)})
+	_temp_command_stack.append({ command = "turn", angle = round(angle_degrees) })
 
 
 func turn_left(angle_degrees: float) -> void:
 	_handle_position_setting()
 	turn_degrees = round(turn_degrees - angle_degrees)
-	_temp_command_stack.append({command = "turn", angle = round(-angle_degrees)})
+	_temp_command_stack.append({ command = "turn", angle = round(-angle_degrees) })
 
 
 # Completes the current polygon's drawing and virtually jumps the turtle to a
@@ -98,7 +97,7 @@ func jump(x: float, y: float) -> void:
 	position += Vector2(x, y)
 	_points.append(position)
 
-	_command_stack.append({command = "jump", offset = Vector2(x, y)})
+	_command_stack.append({ command = "jump", offset = Vector2(x, y) })
 
 
 # Resets the turtle's state. Use it when testing a student's assignments to
@@ -165,7 +164,7 @@ func play_draw_animation() -> void:
 					command.target,
 					duration,
 					tween_start_time,
-					get_tree()
+					get_tree(),
 				)
 				_canvas.add_child(line)
 				turtle_position = command.target
@@ -235,10 +234,11 @@ func _close_polygon() -> void:
 	_points.clear()
 	# We can't know exactly when and where to move the camera until completing a
 	# shape, as we want to center the camera on the shape.
-	_command_stack.append({command = "move_camera", target = center})
+	_command_stack.append({ command = "move_camera", target = center })
 	for command in _temp_command_stack:
 		_command_stack.append(command)
 	_temp_command_stack.clear()
+
 
 func _handle_position_setting() -> void:
 	# When the user accesses and adjusts the position variable directly, we must
@@ -250,7 +250,7 @@ func _handle_position_setting() -> void:
 	if not _points.is_empty():
 		previous_point = _points[-1]
 	if not position.is_equal_approx(previous_point):
-		_temp_command_stack.append({command = "set_position", target = position})
+		_temp_command_stack.append({ command = "set_position", target = position })
 		_close_polygon()
 		_points.append(position)
 
@@ -263,7 +263,9 @@ func _move_camera(target_global_position: Vector2) -> void:
 class Polygon:
 	extends Node2D
 
-	var points := PackedVector2Array(): get = get_points
+	var points := PackedVector2Array():
+		get = get_points
+
 
 	# Returns the local bounds of the polygon. That is to say, it only takes the
 	# point into account in local space, but not the polygon's `position`.
@@ -283,18 +285,22 @@ class Polygon:
 				top_left.y = p.y
 		return Rect2(top_left, bottom_right - top_left)
 
+
 	func get_positioned_rect() -> Rect2:
 		var rect := get_rect()
 		rect.position += position
 		return rect
 
+
 	func get_center() -> Vector2:
 		var rect := get_rect()
 		return (rect.position + rect.end) / 2.0 + position
 
+
 	func get_global_center() -> Vector2:
 		var rect := get_rect()
 		return (rect.position + rect.end) / 2.0 + global_position
+
 
 	func get_points() -> PackedVector2Array:
 		var local_points = []
@@ -305,6 +311,7 @@ class Polygon:
 		for point in points:
 			local_points.append(point - first_point)
 		return local_points
+
 
 	func is_empty():
 		return points.is_empty() or points == PackedVector2Array([Vector2.ZERO])
@@ -319,6 +326,7 @@ class DrawingLine2D:
 
 	var _tween: Tween
 
+
 	func _init(start: Vector2, end: Vector2, duration: float, start_time: float, tree: SceneTree) -> void:
 		width = LINE_THICKNESS
 		default_color = DEFAULT_COLOR
@@ -328,14 +336,18 @@ class DrawingLine2D:
 		_tween.tween_callback(_spawn_label).set_delay(start_time)
 		_tween.tween_method(_animate_drawing, start, end, duration).set_ease(Tween.EASE_IN).set_delay(start_time)
 
+
 	func start() -> void:
 		_tween.play()
+
 
 	func stop() -> void:
 		_tween.stop()
 
+
 	func _animate_drawing(point: Vector2) -> void:
 		points[-1] = point
+
 
 	func _spawn_label() -> void:
 		var label := LabelScene.instantiate() as PanelContainer

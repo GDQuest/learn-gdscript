@@ -13,5 +13,5 @@ func update_size() -> void:
 	for control in get_children():
 		var new_position: Vector2 = control.position
 		var texture_rect: TextureRect = control.get_child(0)
-		texture_rect.position.x = - new_position.x
+		texture_rect.position.x = -new_position.x
 		texture_rect.size = size

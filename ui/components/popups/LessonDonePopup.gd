@@ -20,12 +20,12 @@ var _raw_summary := ""
 
 func _ready() -> void:
 	set_as_top_level(true)
-	
+
 	# BBCode text is not autotranslated, so we do this to preserve the initial value.
 	# FIXME: Some weird Windows issue, replace before translating so matching works.
 	_raw_summary = _summary_label.text.replace("\r\n", "\n")
 	_summary_label.text = tr(_raw_summary)
-	
+
 	_move_on_button.pressed.connect(_on_button_pressed)
 	_stay_button.pressed.connect(hide)
 
@@ -43,16 +43,16 @@ func set_incomplete(incomplete: bool) -> void:
 func popup_centered() -> void:
 	_particles.position = size / 2
 	_thick_particles.position = size / 2
-	
+
 	_popup_container.size = _popup_container.custom_minimum_size
 	_popup_container.scale = Vector2(FADE_IN_START_SCALE, FADE_IN_START_SCALE)
 	show()
 	_popup_container.set_anchors_and_offsets_preset(Control.PRESET_CENTER, Control.PRESET_MODE_KEEP_SIZE)
 	_popup_container.pivot_offset = _popup_container.size / 2
-	
+
 	var scene_tween = create_tween()
 	scene_tween.tween_property(_popup_container, "scale", Vector2(1.0, 1.0), FADE_IN_DURATION).from(_popup_container.scale).set_trans(Tween.TRANS_CUBIC)
-	
+
 	_move_on_button.grab_focus()
 
 

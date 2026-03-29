@@ -11,10 +11,14 @@ const NORMAL_STYLEBOX := preload("res://ui/theme/button_outline_large_accent.tre
 const STRICT_FOCUS_STYLEBOX := preload("res://ui/theme/focus_strict.tres")
 const NORMAL_FOCUS_STYLEBOX := preload("res://ui/theme/focus_accent.tres")
 
-@export var title := "": set = set_title
-@export var text_content := "": set = set_text_content
-@export var min_size := Vector2(200, 120): set = set_min_size
-@export var strict := false: set = set_strict
+@export var title := "":
+	set = set_title
+@export var text_content := "":
+	set = set_text_content
+@export var min_size := Vector2(200, 120):
+	set = set_min_size
+@export var strict := false:
+	set = set_strict
 
 @onready var _root_container := $PanelContainer as Container
 @onready var _top_bar := $PanelContainer/Column/ProgressBar as ProgressBar
@@ -30,11 +34,11 @@ func _ready():
 	_root_container.custom_minimum_size = min_size
 	_root_container.size = _root_container.custom_minimum_size
 	_root_container.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-	
+
 	_title_label.text = tr(title)
 	_message_content.text = tr(text_content)
 	_update_top_bar()
-	
+
 	_confirm_button.pressed.connect(confirmed.emit)
 	_cancel_button.pressed.connect(hide)
 
@@ -82,7 +86,7 @@ func popup() -> void:
 func _update_top_bar() -> void:
 	if not is_inside_tree():
 		return
-	
+
 	var highlight_color := NORMAL_COLOR
 	var button_stylebox := NORMAL_STYLEBOX
 	var button_focus_stylebox := NORMAL_FOCUS_STYLEBOX
@@ -90,12 +94,12 @@ func _update_top_bar() -> void:
 		highlight_color = STRICT_COLOR
 		button_stylebox = STRICT_STYLEBOX
 		button_focus_stylebox = STRICT_FOCUS_STYLEBOX
-	
+
 	var bar_style := _top_bar.get_theme_stylebox("fg").duplicate()
 	if bar_style is StyleBoxFlat:
 		(bar_style as StyleBoxFlat).bg_color = highlight_color
 	_top_bar.add_theme_stylebox_override("fg", bar_style)
-	
+
 	_confirm_button.add_theme_stylebox_override("focus", button_focus_stylebox)
 	_confirm_button.add_theme_stylebox_override("hover", button_stylebox)
 	_confirm_button.add_theme_stylebox_override("pressed", button_stylebox)

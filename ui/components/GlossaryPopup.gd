@@ -47,10 +47,10 @@ func align_with_mouse(global_mouse_position: Vector2) -> void:
 func appear() -> void:
 	_panel.show()
 	_interaction_area.show()
-	
+
 	if scene_tween:
 		scene_tween.kill()
-	
+
 	scene_tween = create_tween()
 	scene_tween.finished.connect(_on_Tween_tween_all_completed)
 	scene_tween.tween_property(_panel, "modulate:a", 1.0, TRANSITION_DURATION).from(0.0)
@@ -60,7 +60,7 @@ func appear() -> void:
 func disappear() -> void:
 	if not _timer.is_stopped():
 		return
-	
+
 	if scene_tween:
 		scene_tween.kill()
 	scene_tween = create_tween()
@@ -70,7 +70,7 @@ func disappear() -> void:
 
 func _on_Timer_timeout() -> void:
 	if not _interaction_area.get_global_rect().has_point(
-		_interaction_area.get_global_mouse_position()
+		_interaction_area.get_global_mouse_position(),
 	):
 		disappear()
 

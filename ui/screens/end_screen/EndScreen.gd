@@ -30,7 +30,7 @@ func _on_outliner_button_pressed() -> void:
 
 func _learn_more_button_button_down():
 	_learn_more_button.position.y = 4
-	
+
 
 func _learn_more_button_button_up():
 	_learn_more_button.position.y = 0

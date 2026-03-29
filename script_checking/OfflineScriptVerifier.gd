@@ -7,7 +7,7 @@
 # var errors: Array = verifier.errors
 #
 # Where `errors` is an array of ScriptErrors
-# 
+#
 class_name OfflineScriptVerifier
 extends ScriptVerifier
 
@@ -38,7 +38,7 @@ func test() -> void:
 					-1,
 					error_line,
 					line_text.length() - line_text.strip_edges(true, false).length(),
-					line_text.strip_edges(false).length()
+					line_text.strip_edges(false).length(),
 				)
 				errors.push_back(error_data)
 		else:
@@ -65,9 +65,8 @@ static func make_error_from_data(
 		code: int,
 		line: int,
 		character_start: int,
-		character_end: int
+		character_end: int,
 ) -> ScriptError:
-	
 	var error_block := {
 		"severity": severity,
 		"message": message,
@@ -76,15 +75,15 @@ static func make_error_from_data(
 		"range": {
 			"start": {
 				"line": line,
-				"character": character_start
+				"character": character_start,
 			},
 			"end": {
 				"line": line,
-				"character": character_end
-			}
-		}
+				"character": character_end,
+			},
+		},
 	}
-	
+
 	var error = ScriptVerifier.ScriptError.new()
 	error.from_JSON(error_block)
 	return error

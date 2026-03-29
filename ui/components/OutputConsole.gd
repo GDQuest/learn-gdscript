@@ -34,7 +34,12 @@ func setup(slice: ScriptSlice) -> void:
 
 # Adds a message related to a specific line in a specific file
 func print_bus_message(
-	type: int, text: String, file_name: String, line: int, character: int, code: int
+		type: int,
+		text: String,
+		file_name: String,
+		line: int,
+		character: int,
+		code: int,
 ) -> void:
 	if not is_inside_tree():
 		return
@@ -42,12 +47,12 @@ func print_bus_message(
 	if type in [
 		MessageBus.MESSAGE_TYPE.ASSERT,
 		MessageBus.MESSAGE_TYPE.ERROR,
-		MessageBus.MESSAGE_TYPE.WARNING
+		MessageBus.MESSAGE_TYPE.WARNING,
 	]:
 		print_error(type, text, file_name, line, character, code)
 		return
 
-	print_output([ text ])
+	print_output([text])
 
 
 # Removes all children

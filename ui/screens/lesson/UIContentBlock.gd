@@ -11,7 +11,6 @@ const COLOR_NOTE := Color(0.14902, 0.776471, 0.968627)
 
 const RevealerScene := preload("res://ui/components/Revealer.tscn")
 
-
 var _content_block
 var _lesson: BBCodeParser.ParseNode
 var _block_index: int
@@ -97,7 +96,7 @@ func _make_visual_element() -> void:
 			(
 				"ContentBlock visual element is not a valid resource. From path: "
 				+ path
-			)
+			),
 		)
 		return
 
@@ -116,7 +115,7 @@ func _make_visual_element() -> void:
 				"ContentBlock visual element is not a Texture2D or a PackedScene. Loaded type: "
 				+ resource.get_class() + " From path: "
 				+ path
-			)
+			),
 		)
 		return
 

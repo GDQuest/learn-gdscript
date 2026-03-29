@@ -13,6 +13,7 @@ signal course_requested(force_outliner)
 
 @onready var _buttons_to_disable := [_settings_button, _outliner_button, _start_button, _quit_button]
 
+
 func _init() -> void:
 	randomize()
 
@@ -26,12 +27,12 @@ func _ready() -> void:
 	_start_button.pressed.connect(_on_start_requested)
 	_quit_button.pressed.connect(get_tree().quit)
 	_title_link_label.meta_clicked.connect(_on_meta_clicked)
-	
+
 	_start_button.grab_focus()
-	
+
 	if OS.has_feature('web'):
 		_quit_button.queue_free()
-	
+
 	_anim_player.animation_finished.connect(_on_animation_finished)
 
 
