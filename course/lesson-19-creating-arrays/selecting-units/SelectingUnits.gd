@@ -68,7 +68,8 @@ func _draw() -> void:
 		for y in board_size.y:
 			var cell = Vector2(x, y)
 			var label = Label.new()
-			label.add_theme_font_override("font", label_font)
+			if label_font != null:
+				label.add_theme_font_override("font", label_font)
 			label.text = str(cell)
 			_label_container.add_child(label)
 			label.position = calculate_cell_position(cell) - label.size / 2.0

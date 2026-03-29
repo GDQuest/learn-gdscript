@@ -48,7 +48,8 @@ func draw_path(cells: Array):
 	for cell in cells:
 		points.append(calculate_cell_position(cell))
 
-	draw_polyline(points, Color("fff540"), line_width)
+	if points.size() >= 2:
+		draw_polyline(points, Color("fff540"), line_width)
 
 
 func set_units(new_value: Dictionary):
