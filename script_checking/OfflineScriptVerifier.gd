@@ -29,8 +29,9 @@ func test() -> void:
 		if wrap.has_errors():
 			errors = []
 			for i in wrap.get_error_count():
-				var error_line: int = wrap.get_error_line(i) - 1
-				var line_text := _new_script_text.split("\n")[error_line]
+				var lines := _new_script_text.split("\n")
+				var error_line: int = clampi(wrap.get_error_line(i) - 1, 0, lines.size()-1)
+				var line_text := lines[error_line]
 				var error_data := make_error_from_data(
 					1,
 					wrap.get_error(i),

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cdrh84x70t6mh"]
 
 [ext_resource type="Script" uid="uid://duuccx1urqa0r" path="res://ui/components/OutputConsolePrintMessage.gd" id="2"]
-[ext_resource type="StyleBox" path="res://ui/theme/panel_error_log.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://d0pcjb7n8kfxq" path="res://ui/theme/panel_error_log.tres" id="3"]
 
 [node name="OutputConsolePrintMessage" type="PanelContainer" unique_id=502726398 node_paths=PackedStringArray("_label")]
 anchors_preset = 15
@@ -12,6 +12,8 @@ script = ExtResource("2")
 _label = NodePath("Label")
 
 [node name="Label" type="Label" parent="." unique_id=807380464]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 0
 text = "Value"
+autowrap_mode = 3

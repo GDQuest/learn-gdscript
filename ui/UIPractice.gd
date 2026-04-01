@@ -20,12 +20,12 @@ const PracticeDonePopup := preload("components/popups/PracticeDonePopup.gd")
 const PracticeLeaveUnfinishedPopup := preload("components/popups/PracticeLeaveUnfinishedPopup.gd")
 const documentation_resource: Documentation = preload("res://course/Documentation.tres")
 
-var REGEX_DIVSION_BY_ZERO := RegEx.new()
+static var REGEX_DIVSION_BY_ZERO := RegEx.create_from_string((r"[/%] *0"))
+static var REGEX_CLASS_NAME := RegEx.create_from_string(r"\s*class_name\s")
 
 @export var lesson_test_practice: String
 @export_range(0, 1, 1, "or_greater") var test_practice: int
 @export var _layout_container: Control
-@export var _output_container: Control
 @export var _game_container: Container
 @export var _game_view: GameView
 @export var _output_console: OutputConsole
@@ -331,15 +331,30 @@ func _validate_and_run_student_code() -> void:
 		_code_editor.unlock_editor()
 		return
 
-	var verifier := OfflineScriptVerifier.new(script_text)
+	var verifier_script := script_text
+	var script_is_desynced_by_one_line := false
+	
+	if not _has_class_name(verifier_script):
+		# required by GDScriptAnalyzer, since otherwise it has no external parser to cache
+		verifier_script = "class_name TEMP_UserScript\n" + verifier_script
+		script_is_desynced_by_one_line = true
+	
+	var verifier := OfflineScriptVerifier.new(verifier_script)
 	verifier.test()
 	var errors := verifier.errors
 
 	if not errors.is_empty():
+		if script_is_desynced_by_one_line:
+			for error: ScriptError in errors:
+				error.error_range.start.line -= 1
+				error.error_range.end.line -= 1
 		_code_editor.slice_editor.errors = errors
 
 		for index in errors.size():
 			var error: ScriptError = errors[index]
+			# GDScriptAnalyzer benign issue; script didn't exist until now
+			if error.message == 'Error while getting cache for script "".':
+				continue
 			MessageBus.print_script_error(error, script_file_name)
 
 		var is_missing_parser_error: bool = (
@@ -399,7 +414,7 @@ func _validate_and_run_student_code() -> void:
 	if script_is_valid != OK:
 		var error := ScriptError.new()
 		error.message = tr(
-			"Oh no! The script has an error, but the Script Verifier did not catch it",
+			"Oh no! The script has an error (code %s), but the Script Verifier did not catch it" % script_is_valid,
 		)
 		error.severity = 1
 		error.code = GDQuestCodes.ErrorCode.INVALID_NO_CATCH
@@ -688,6 +703,10 @@ func _on_init_set_javascript() -> void:
 	if OS.has_feature("web"):
 		var GDQUEST = JavaScriptBridge.get_interface("GDQUEST")
 		GDQUEST.events.onError.connect(_on_js_error_feedback_ref)
+
+
+func _has_class_name(source: String) -> bool:
+	return REGEX_CLASS_NAME.search(source) != null
 
 
 # Checks if the script text has mixed tabs and spaces in indentation.

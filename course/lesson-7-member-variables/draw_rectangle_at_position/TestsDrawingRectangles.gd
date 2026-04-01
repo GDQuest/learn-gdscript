@@ -28,4 +28,3 @@ func test_rectangle_size_is_200_by_120() -> String:
 	if points != expected_rect:
 		return tr("The drawn shapes don't have the expected length and height. Did you forget to use the length and height parameter?")
 	return ""
-

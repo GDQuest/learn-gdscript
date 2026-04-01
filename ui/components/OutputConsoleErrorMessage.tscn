@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ukja5lpk5jw5"]
 
 [ext_resource type="Script" uid="uid://vmi2orvhk0yw" path="res://ui/components/OutputConsoleErrorMessage.gd" id="2"]
-[ext_resource type="StyleBox" path="res://ui/theme/panel_error_log.tres" id="4"]
+[ext_resource type="StyleBox" uid="uid://d0pcjb7n8kfxq" path="res://ui/theme/panel_error_log.tres" id="4"]
 
 [node name="OutputConsoleErrorMessage" type="PanelContainer" unique_id=1485937269 node_paths=PackedStringArray("_severity_label", "_message_label", "_location_row", "_file_name_label", "_location_label", "_external_label", "_message_explain_button")]
 self_modulate = Color(1, 1, 1, 0.25)
@@ -37,10 +37,12 @@ theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
 text = "INFO"
 
 [node name="MessageValue" type="Label" parent="Layout/Content/MessageRow" unique_id=389845082]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
+autowrap_mode = 3
 
 [node name="LocationRow" type="HBoxContainer" parent="Layout/Content" unique_id=129616357]
 layout_mode = 2
