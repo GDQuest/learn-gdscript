@@ -24,17 +24,24 @@ func _init(new_script_text: String) -> void:
 
 func test() -> void:
 	if ClassDB.class_exists(PARSE_WRAPPER_CLASS):
-		var wrap: RefCounted = ClassDB.instantiate(PARSE_WRAPPER_CLASS)
-		wrap.set_source(_new_script_text)
-		if wrap.has_errors():
+		var wrap_instance: RefCounted = ClassDB.instantiate(PARSE_WRAPPER_CLASS)
+		@warning_ignore("unsafe_method_access")
+		wrap_instance.set_source(_new_script_text)
+		@warning_ignore("unsafe_method_access")
+		if wrap_instance.has_errors():
 			errors = []
-			for i in wrap.get_error_count():
-				var lines := _new_script_text.split("\n")
-				var error_line: int = clampi(wrap.get_error_line(i) - 1, 0, lines.size()-1)
+			var lines := _new_script_text.split("\n")
+			@warning_ignore("unsafe_method_access")
+			for i: int in wrap_instance.get_error_count():
+				@warning_ignore("unsafe_method_access")
+				var error_line: int = wrap_instance.get_error_line(i)
+				@warning_ignore("unsafe_method_access")
+				error_line = clampi(error_line - 1, 0, lines.size()-1)
 				var line_text := lines[error_line]
+				@warning_ignore("unsafe_method_access")
 				var error_data := make_error_from_data(
 					1,
-					wrap.get_error(i),
+					wrap_instance.get_error(i) as String,
 					"gdscript",
 					-1,
 					error_line,
@@ -72,7 +79,7 @@ static func make_error_from_data(
 		"severity": severity,
 		"message": message,
 		"source": source,
-		"code": -1,
+		"code": code,
 		"range": {
 			"start": {
 				"line": line,
