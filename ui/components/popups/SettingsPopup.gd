@@ -31,6 +31,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	# TODO: Remove whenever https://github.com/godotengine/godot/issues/117875 is fixed
 	if OS.has_feature("web"):
 		_framerate_settings_section.hide()
 
