@@ -22,6 +22,7 @@ const documentation_resource: Documentation = preload("res://course/Documentatio
 
 static var REGEX_DIVSION_BY_ZERO := RegEx.create_from_string((r"[/%] *0"))
 static var REGEX_CLASS_NAME := RegEx.create_from_string(r"\s*class_name\s")
+static var REGEX_TOP_ANNOTATION := RegEx.create_from_string(r"\s*@")
 
 @export var lesson_test_practice: String
 @export_range(0, 1, 1, "or_greater") var test_practice: int
@@ -88,7 +89,7 @@ func _init():
 
 func _ready() -> void:
 	super._ready()
-
+	
 	randomize()
 	if Engine.is_editor_hint():
 		return
@@ -335,8 +336,10 @@ func _validate_and_run_student_code() -> void:
 	var script_is_desynced_by_one_line := false
 	
 	if not _has_class_name(verifier_script):
-		# required by GDScriptAnalyzer, since otherwise it has no external parser to cache
-		verifier_script = "class_name TEMP_UserScript\n" + verifier_script
+		# GDScriptAnalyzer needs a path or class_name. As we're feeding code directly into the parser,
+		# we can't really have a path, so we need a class_name to fool it
+		var initial_insertion_character := _find_first_non_annotation_entry_point(verifier_script)
+		verifier_script = verifier_script.insert(initial_insertion_character, "class_name TEMP_UserScript\n")
 		script_is_desynced_by_one_line = true
 	
 	var verifier := OfflineScriptVerifier.new(verifier_script)
@@ -352,7 +355,8 @@ func _validate_and_run_student_code() -> void:
 
 		for index in errors.size():
 			var error: ScriptError = errors[index]
-			# GDScriptAnalyzer benign issue; script didn't exist until now
+			# GDScriptAnalyzer will complain the first time it parses the script from the verifier
+			# so we capture it here to ignore
 			if error.message == 'Error while getting cache for script "".':
 				continue
 			MessageBus.print_script_error(error, script_file_name)
@@ -707,6 +711,16 @@ func _on_init_set_javascript() -> void:
 
 func _has_class_name(source: String) -> bool:
 	return REGEX_CLASS_NAME.search(source) != null
+
+
+func _find_first_non_annotation_entry_point(source: String) -> int:
+	var lines := source.split("\n")
+	var character_count := 0
+	for i in lines.size():
+		if REGEX_TOP_ANNOTATION.search(lines[i]) == null:
+			break
+		character_count += lines[i].length() + 1
+	return character_count
 
 
 # Checks if the script text has mixed tabs and spaces in indentation.
