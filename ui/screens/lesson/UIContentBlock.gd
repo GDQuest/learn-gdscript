@@ -11,19 +11,18 @@ const COLOR_NOTE := Color(0.14902, 0.776471, 0.968627)
 
 const RevealerScene := preload("res://ui/components/Revealer.tscn")
 
+@export var _content_root: PanelContainer
+@export var _content_margin: MarginContainer
+@export var _content_header: Label
+@export var _content_container: Control
+@export var _text_content: RichTextLabel
+@export var _content_separator: HSeparator
+
 var _content_block
 var _lesson: BBCodeParser.ParseNode
 var _block_index: int
 var _visual_element: CanvasItem
 var _revealer_block: Revealer
-
-@onready var _content_root := $Panel as PanelContainer
-@onready var _content_margin := $Panel/MarginContainer as MarginContainer
-
-@onready var _content_header := $Panel/MarginContainer/Layout/ContentHeader as Label
-@onready var _content_container := $Panel/MarginContainer/Layout/ContentLayout as Control
-@onready var _text_content := $Panel/MarginContainer/Layout/ContentLayout/TextContent as RichTextLabel
-@onready var _content_separator := $Panel/MarginContainer/Layout/ContentSeparator as HSeparator
 
 
 func _ready() -> void:

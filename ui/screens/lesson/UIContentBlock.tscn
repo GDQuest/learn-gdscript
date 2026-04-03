@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://6ljnb0rf1kb"]
 
-[ext_resource type="StyleBox" path="res://ui/theme/hseparator_lesson_content.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://dnk8cxheocrdn" path="res://ui/theme/hseparator_lesson_content.tres" id="3"]
 [ext_resource type="Script" uid="uid://b82vbwpyh2c7m" path="res://ui/screens/lesson/UIContentBlock.gd" id="5"]
 
-[node name="UIContentBlock" type="MarginContainer" unique_id=1694981663]
+[node name="UIContentBlock" type="MarginContainer" unique_id=1694981663 node_paths=PackedStringArray("_content_root", "_content_margin", "_content_header", "_content_container", "_text_content", "_content_separator")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,6 +13,12 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 script = ExtResource("5")
+_content_root = NodePath("Panel")
+_content_margin = NodePath("Panel/MarginContainer")
+_content_header = NodePath("Panel/MarginContainer/Layout/ContentHeader")
+_content_container = NodePath("Panel/MarginContainer/Layout/ContentLayout")
+_text_content = NodePath("Panel/MarginContainer/Layout/ContentLayout/TextContent")
+_content_separator = NodePath("Panel/MarginContainer/Layout/ContentSeparator")
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=1710946007]
 layout_mode = 2
