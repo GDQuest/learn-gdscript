@@ -357,13 +357,6 @@ func _validate_and_run_student_code() -> void:
 				errors.remove_at(i)
 
 	if not errors.is_empty():
-		# GDScriptAnalyzer will complain the first time it parses the script from the verifier
-		# so we capture it here to ignore
-		for i in range(errors.size()-1, -1, -1):
-			var error: ScriptError = errors[i]
-			if error.message == BENIGN_CACHE_ERROR:
-				errors.remove_at(i)
-		
 		if script_is_desynced_by_one_line:
 			for error: ScriptError in errors:
 				error.error_range.start.line -= 1
