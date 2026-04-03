@@ -2,16 +2,24 @@
 
 [ext_resource type="PackedScene" uid="uid://8kodes3p33hf" path="res://ui/components/BigGreenButton.tscn" id="2"]
 [ext_resource type="Script" uid="uid://be72qp6w64w2l" path="res://ui/screens/course_outliner/CourseLessonDetails.gd" id="5"]
-[ext_resource type="StyleBox" path="res://ui/theme/outliner_details_background.tres" id="6"]
+[ext_resource type="StyleBox" uid="uid://cguhet6fdpmse" path="res://ui/theme/outliner_details_background.tres" id="6"]
 [ext_resource type="Texture2D" uid="uid://duytsuncyxp7n" path="res://ui/icons/checkmark_none.svg" id="9"]
 
-[node name="CourseLessonDetails" type="PanelContainer" unique_id=968761694]
+[node name="CourseLessonDetails" type="PanelContainer" unique_id=968761694 node_paths=PackedStringArray("_title_label", "_reading_stats_block", "_reading_stats_icon", "_quiz_stats_block", "_quiz_stats_value", "_practice_stats_block", "_practice_stats_value", "_goto_lesson_button")]
 custom_minimum_size = Vector2(420, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_styles/panel = ExtResource("6")
 script = ExtResource("5")
+_title_label = NodePath("MarginContainer/Layout/TitleLabel")
+_reading_stats_block = NodePath("MarginContainer/Layout/ReadingStats")
+_reading_stats_icon = NodePath("MarginContainer/Layout/ReadingStats/ValueIcon")
+_quiz_stats_block = NodePath("MarginContainer/Layout/QuizStats")
+_quiz_stats_value = NodePath("MarginContainer/Layout/QuizStats/ValueLabel")
+_practice_stats_block = NodePath("MarginContainer/Layout/PracticeStats")
+_practice_stats_value = NodePath("MarginContainer/Layout/PracticeStats/ValueLabel")
+_goto_lesson_button = NodePath("MarginContainer/Layout/Buttons/GoToButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=578601062]
 layout_mode = 2
@@ -34,13 +42,6 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Lesson read"
-
-[node name="ValueLabel" type="Label" parent="MarginContainer/Layout/ReadingStats" unique_id=394973946]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"LabelTitle"
-text = "0%"
-horizontal_alignment = 2
 
 [node name="ValueIcon" type="TextureRect" parent="MarginContainer/Layout/ReadingStats" unique_id=1093836447]
 custom_minimum_size = Vector2(32, 32)

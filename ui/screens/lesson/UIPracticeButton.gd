@@ -11,6 +11,7 @@ var navigation_disabled := false:
 
 var _practice: BBCodeParser.ParseNode
 
+@export var visibility_notifier: VisibleOnScreenNotifier2D
 @export var _title_label: Label
 @export var _next_pill_label: Label
 @export var _description_label: RichTextLabel

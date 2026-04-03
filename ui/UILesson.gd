@@ -32,6 +32,7 @@ const AUTOSCROLL_DURATION := 0.24
 signal lesson_displayed
 
 var _lesson: BBCodeParser.ParseNode
+var _course_index: CourseIndex
 # Resource used to highlight glossary entries in the lesson text.
 var _glossary: Glossary
 var _visible_index := -1
@@ -51,7 +52,6 @@ func _ready() -> void:
 	Events.font_size_scale_changed.connect(_update_content_container_width)
 	_update_content_container_width(UserProfiles.get_profile().font_size_scale)
 	_scroll_container.get_v_scroll_bar().value_changed.connect(_on_content_scrolled)
-	_debounce_timer.timeout.connect(_emit_read_content)
 	TranslationManager.translation_changed.connect(_on_translation_changed)
 
 	_glossary = load("res://course/glossary.tres")
@@ -76,6 +76,7 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 		await self.ready
 
 	_lesson = lesson
+	_course_index = course_index
 	_title.text = tr(BBCodeUtils.get_lesson_title(lesson))
 	var user_profile := UserProfiles.get_profile()
 
@@ -145,6 +146,8 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 		var practice_id := BBCodeUtils.get_practice_id(practice)
 		var button: UIPracticeButton = PracticeButtonScene.instantiate()
 		button.setup(practice, i)
+		if i == 0:
+			button.visibility_notifier.screen_entered.connect(_on_practice_first_visible)
 		if course_index:
 			button.completed_before = user_profile.is_lesson_practice_completed(
 				course_index.get_course_id(),
@@ -170,9 +173,6 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 	await Events.lesson_started
 
 	_underline_glossary_entries()
-
-	# Call this immediately to update for the blocks that are already visible.
-	_emit_read_content()
 
 
 func _underline_glossary_entries() -> void:
@@ -203,7 +203,7 @@ func _reveal_up_to_next_quiz() -> void:
 	if _integration_test_mode:
 		# In integration test mode, skip quiz checks and reveal all content immediately
 		_visible_index = _content_blocks.get_child_count() - 1
-		for child in _content_blocks.get_children():
+		for child: Control in _content_blocks.get_children():
 			child.show()
 		_practices_visibility_container.show()
 		_quizzes_done = _quizz_count
@@ -230,38 +230,6 @@ func _on_content_scrolled(_value: float) -> void:
 	_debounce_timer.start()
 
 
-func _emit_read_content() -> void:
-	var scroll_offset = abs(
-		_scroll_content.global_position.y - _content_blocks.global_position.y,
-	)
-	var scroll_distance = _scroll_container.scroll_vertical - scroll_offset - AUTOSCROLL_PADDING
-
-	var content_index := 0
-	var content_blocks := []
-
-	for child_node in _content_blocks.get_children():
-		var control_node := child_node as Control
-		if not control_node:
-			continue
-
-		# We reached the end of visible blocks.
-		if not control_node.visible:
-			break
-
-		var content_block_count := BBCodeUtils.get_lesson_block_count(_lesson)
-		if content_index < content_block_count:
-			content_blocks.append(_lesson.children[content_index])
-
-		var content_offset := control_node.position.y
-		if content_offset > scroll_distance:
-			break
-		content_index += 1
-
-	if content_blocks.size() > 0:
-		var last_block = content_blocks.pop_back()
-		Events.lesson_reading_block.emit(last_block, content_index, content_blocks)
-
-
 func _update_content_container_width(new_font_scale: int) -> void:
 	var font_size_multiplier := (
 		float(_base_text_font_size + new_font_scale * 2)
@@ -282,3 +250,7 @@ func _open_glossary_popup(meta: String) -> void:
 	_glossary_popup.setup(entry.term, entry.explanation)
 	_glossary_popup.align_with_mouse.call_deferred(get_global_mouse_position())
 	_glossary_popup.appear()
+
+
+func _on_practice_first_visible() -> void:
+	Events.lesson_read.emit(_lesson)

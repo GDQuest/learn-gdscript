@@ -1,20 +1,21 @@
 [gd_scene format=3 uid="uid://qap2kv8o04m6"]
 
-[ext_resource type="StyleBox" path="res://ui/theme/panel_darker.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://byx1m5sdpv2ns" path="res://ui/theme/panel_darker.tres" id="3"]
 [ext_resource type="Script" uid="uid://b6t32yqrdrppj" path="res://ui/screens/lesson/UIPracticeButton.gd" id="5"]
 [ext_resource type="Texture2D" uid="uid://botjmjx4xso5i" path="res://ui/icons/checkmark_valid.svg" id="6"]
-[ext_resource type="StyleBox" path="res://ui/theme/focus.tres" id="7"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_hover.tres" id="8"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="9"]
-[ext_resource type="StyleBox" path="res://ui/theme/pill.tres" id="11"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="12"]
+[ext_resource type="StyleBox" uid="uid://dojpxy1svgxi8" path="res://ui/theme/focus.tres" id="7"]
+[ext_resource type="StyleBox" uid="uid://dkeg6cbxbpnqe" path="res://ui/theme/button_outline_large_hover.tres" id="8"]
+[ext_resource type="StyleBox" uid="uid://bkqtmumr5t28" path="res://ui/theme/button_outline_large_pressed.tres" id="9"]
+[ext_resource type="StyleBox" uid="uid://dxgho6gnstasf" path="res://ui/theme/pill.tres" id="11"]
+[ext_resource type="StyleBox" uid="uid://b45mlqutqarjn" path="res://ui/theme/button_outline_large_normal.tres" id="12"]
 
-[node name="UIPracticeButton" type="PanelContainer" unique_id=789411901 node_paths=PackedStringArray("_title_label", "_next_pill_label", "_description_label", "_completed_before_icon", "_navigate_button", "_no_navigation_label")]
+[node name="UIPracticeButton" type="PanelContainer" unique_id=789411901 node_paths=PackedStringArray("visibility_notifier", "_title_label", "_next_pill_label", "_description_label", "_completed_before_icon", "_navigate_button", "_no_navigation_label")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 110.0
 theme_override_styles/panel = ExtResource("3")
 script = ExtResource("5")
+visibility_notifier = NodePath("Margin/Row/NavigateButton/VisibleOnScreenEnabler2D")
 _title_label = NodePath("Margin/Row/Column/Row/Title")
 _next_pill_label = NodePath("Margin/Row/Column/Row/NextPill")
 _description_label = NodePath("Margin/Row/Column/Description")
@@ -78,6 +79,10 @@ theme_override_styles/pressed = ExtResource("9")
 theme_override_styles/hover = ExtResource("8")
 theme_override_styles/focus = ExtResource("7")
 text = "Practice"
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Margin/Row/NavigateButton" unique_id=402497671]
+rect = Rect2(0, 0, 180, 60)
+enable_node_path = NodePath("../../../..")
 
 [node name="NoNavigationLabel" type="Label" parent="Margin/Row" unique_id=700834557]
 visible = false

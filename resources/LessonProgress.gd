@@ -19,35 +19,6 @@ func _init() -> void:
 	completed_practices = []
 
 
-func get_completed_blocks_count(lesson: BBCodeParser.ParseNode, block_count: int) -> int:
-	var completed := 0
-
-	# We collect them beforehand so that we can clear the list as we go and ensure only
-	# unique entries are counted.
-	var available_blocks := []
-	for i in block_count:
-		var block_type = BBCodeUtils.get_lesson_block_type(lesson, i)
-		if block_type in [BBCodeParserData.Tag.QUIZ_CHOICE, BBCodeParserData.Tag.QUIZ_INPUT]:
-			var quiz_node := lesson.children[i] as BBCodeParser.ParseNode
-			available_blocks.append(BBCodeUtils.get_quiz_id(quiz_node))
-		else:
-			available_blocks.append("_generated_content_block_plain_%s" % i)
-
-	for block_id in completed_blocks:
-		var matched_id := ""
-
-		for block_path in available_blocks:
-			if block_path == block_id:
-				matched_id = block_path
-				break
-
-		if not matched_id.is_empty():
-			available_blocks.erase(matched_id)
-			completed += 1
-
-	return completed
-
-
 func get_completed_quizzes_count(lesson: BBCodeParser.ParseNode) -> int:
 	var quiz_count := BBCodeUtils.get_lesson_quiz_count(lesson)
 	var completed := 0
