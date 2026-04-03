@@ -20,6 +20,8 @@ const PracticeDonePopup := preload("components/popups/PracticeDonePopup.gd")
 const PracticeLeaveUnfinishedPopup := preload("components/popups/PracticeLeaveUnfinishedPopup.gd")
 const documentation_resource: Documentation = preload("res://course/Documentation.tres")
 
+const BENIGN_CACHE_ERROR := 'Error while getting cache for script "".'
+
 static var REGEX_DIVSION_BY_ZERO := RegEx.create_from_string((r"[/%] *0"))
 static var REGEX_CLASS_NAME := RegEx.create_from_string(r"\s*class_name\s")
 static var REGEX_TOP_ANNOTATION := RegEx.create_from_string(r"\s*@")
@@ -345,8 +347,23 @@ func _validate_and_run_student_code() -> void:
 	var verifier := OfflineScriptVerifier.new(verifier_script)
 	verifier.test()
 	var errors := verifier.errors
+	
+	if not errors.is_empty():
+		# GDScriptAnalyzer will complain the first time it parses the script from the verifier
+		# so we capture it here to ignore
+		for i in range(errors.size()-1, -1, -1):
+			var error: ScriptError = errors[i]
+			if error.message == BENIGN_CACHE_ERROR:
+				errors.remove_at(i)
 
 	if not errors.is_empty():
+		# GDScriptAnalyzer will complain the first time it parses the script from the verifier
+		# so we capture it here to ignore
+		for i in range(errors.size()-1, -1, -1):
+			var error: ScriptError = errors[i]
+			if error.message == BENIGN_CACHE_ERROR:
+				errors.remove_at(i)
+		
 		if script_is_desynced_by_one_line:
 			for error: ScriptError in errors:
 				error.error_range.start.line -= 1
@@ -355,10 +372,6 @@ func _validate_and_run_student_code() -> void:
 
 		for index in errors.size():
 			var error: ScriptError = errors[index]
-			# GDScriptAnalyzer will complain the first time it parses the script from the verifier
-			# so we capture it here to ignore
-			if error.message == 'Error while getting cache for script "".':
-				continue
 			MessageBus.print_script_error(error, script_file_name)
 
 		var is_missing_parser_error: bool = (
@@ -672,17 +685,40 @@ static func try_validate_and_replace_script(node: Node, script: GDScript) -> voi
 			print("Script errored out (code %s); skipping replacement" % [error_code])
 			return
 
+	# save any @exported variables
+	var properties = _get_properties(node)
+
 	var parent = node.get_parent()
 	parent.remove_child(node)
 	node.request_ready()
 
 	node.set_script(script)
+	# restore @exported variables
+	_restore_properties(node, properties)
 
 	parent.call_deferred("add_child", node)
 
 	if node.has_method("_run"):
 		# warning-ignore:unsafe_method_access
 		node.call_deferred("_run")
+
+
+static func _get_properties(node: Node) -> Array[Dictionary]:
+	var properties := node.get_property_list().filter(func(prop: Dictionary) -> bool:
+		return (
+			prop.usage & (PropertyUsageFlags.PROPERTY_USAGE_STORAGE) != 0
+			and prop.usage & (PropertyUsageFlags.PROPERTY_USAGE_SCRIPT_VARIABLE) != 0
+		)
+	)
+	for property in properties:
+		property.value = node.get(property.name)
+	return properties
+
+
+static func _restore_properties(node: Node, properties: Array[Dictionary]) -> void:
+	for property in properties:
+		node.set(property.name, property.value)
+
 
 ###############################################################################
 #
