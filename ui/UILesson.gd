@@ -79,55 +79,7 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 	_title.text = tr(BBCodeUtils.get_lesson_title(lesson))
 	var user_profile := UserProfiles.get_profile()
 
-	# If this was the last lesson the student interacted with before, we will try to restore
-	# their reading position.
-	var is_returning := false
-	if course_index:
-		var last_lesson := user_profile.get_last_started_lesson(course_index.get_course_id())
-		is_returning = _lesson.bbcode_path == last_lesson
-
-	var restore_node: Control
-	var restore_id := ""
 	var content_block_count := BBCodeUtils.get_lesson_block_count(lesson)
-	if course_index:
-		# We have 4 possible situations:
-		#  - We are returning to the last visited lesson and must set the position to the last content
-		# block the user has seen.
-		#  - We are opening a lesson for the first time and must remain at the top.
-		#  - We are opening a lesson that is completed, at least the reading part, and must remain at
-		# the top.
-		#  - We are opening a lesson that we were in the middle of, but not the last one; we must set
-		# the position to the first unread block.
-
-		if is_returning:
-			restore_id = user_profile.get_last_visited_lesson_block(
-				course_index.get_course_id(),
-				lesson.bbcode_path,
-			)
-
-		var reading_done := user_profile.is_lesson_reading_completed(
-			course_index.get_course_id(),
-			lesson.bbcode_path,
-		)
-		var reading_started := user_profile.has_lesson_blocks_read(
-			course_index.get_course_id(),
-			lesson.bbcode_path,
-		)
-		if restore_id.is_empty() and not reading_done and reading_started:
-			for i in content_block_count:
-				var type := BBCodeUtils.get_lesson_block_type(lesson, i)
-				var block_id := ""
-				if type in [BBCodeParserData.Tag.QUIZ_CHOICE, BBCodeParserData.Tag.QUIZ_INPUT]:
-					var quiz_id := BBCodeUtils.get_quiz_id(lesson.children[i])
-					block_id = quiz_id
-				if not block_id:
-					continue
-				if user_profile.is_lesson_block_read(course_index.get_course_id(), lesson.bbcode_path, block_id):
-					continue
-
-				restore_id = block_id
-				break
-
 	for i in content_block_count:
 		var type = BBCodeUtils.get_lesson_block_type(lesson, i)
 		if type == BBCodeParserData.Tag.STRING:
@@ -169,8 +121,6 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 					instance.quiz_passed.connect(_reveal_up_to_next_quiz)
 					instance.quiz_skipped.connect(_reveal_up_to_next_quiz)
 
-					if restore_id == quiz_id:
-						restore_node = instance
 				BBCodeParserData.Tag.CODEBLOCK:
 					var instance: UIContentBlock = ContentBlockScene.instantiate()
 					instance.name = BBCodeUtils.get_codeblock_id(child_node)
@@ -218,22 +168,6 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 	# Wait until the lesson is considered loaded by the system, and then update the size of
 	# the scroll container and its content.
 	await Events.lesson_started
-
-	if restore_node and restore_node.is_visible_in_tree():
-		var scroll_offset = abs(
-			_scroll_content.global_position.y - _content_blocks.global_position.y,
-		)
-		var scroll_target = restore_node.position.y + scroll_offset - AUTOSCROLL_PADDING
-		if _scene_tween:
-			_scene_tween.kill()
-		_scene_tween = create_tween()
-		_scene_tween.tween_method(
-			_scroll_container.set_v_scroll_override,
-			# So it plays nice with our smooth scroller
-			_scroll_container.scroll_vertical,
-			scroll_target,
-			AUTOSCROLL_DURATION,
-		).set_trans(Tween.TRANS_QUAD)
 
 	_underline_glossary_entries()
 
