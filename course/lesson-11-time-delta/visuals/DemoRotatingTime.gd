@@ -1,15 +1,19 @@
 extends Node2D
 
 const _times := [0.1, 0.1, 0.2, 0.1, 0.2]
+
+@export var _timer: Timer
+@export var _robot: Node2D
+@export var _label_rotation: Label
+@export var _label_frame: Label
+
 var _index := 0
 
-@onready var _timer := find_child("Timer") as Timer
-@onready var _robot := find_child("Robot") as Node2D
-@onready var _label_rotation := find_child("LabelRotation") as Label
-@onready var _label_frame := find_child("LabelFrame") as Label
 
 func _ready():
+	_timer.timeout.connect(_on_Timer_timeout)
 	_on_Timer_timeout()
+
 
 func _on_Timer_timeout():
 	var rotation_amount := 1 * _timer.wait_time;

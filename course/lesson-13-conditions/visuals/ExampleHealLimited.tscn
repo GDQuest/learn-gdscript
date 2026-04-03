@@ -10,12 +10,13 @@ script/source = "extends Node2D
 
 signal line_highlight_requested(line)
 
+@export var _health_bar: ColorRect
+
 @export var start_health := 75
 @export var max_health := 100
 @export var health_gained = 50
 var health := start_health
 
-@onready var _health_bar := find_child(\"HealthBar\")
 @onready var _animation_tree := find_child(\"AnimationTree\")
 
 
@@ -101,8 +102,9 @@ text = "func heal(amount):
 		health = 100"
 syntax_highlighter = null
 
-[node name="HealRobot" parent="RunnableCodeExample" unique_id=1182116081 instance=ExtResource("2")]
+[node name="HealRobot" parent="RunnableCodeExample" unique_id=1182116081 node_paths=PackedStringArray("_health_bar") instance=ExtResource("2")]
 script = SubResource("1")
+_health_bar = NodePath("HealthBar")
 
 [node name="HealthBar" parent="RunnableCodeExample/HealRobot" unique_id=1140237310 instance=ExtResource("3")]
 

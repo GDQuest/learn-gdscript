@@ -3,7 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="1"]
 [ext_resource type="Script" uid="uid://bfk6m1ywuho6a" path="res://course/lesson-11-time-delta/visuals/RunningRobot.gd" id="2"]
 
-[node name="RunningRobot" type="Node2D" unique_id=1409696228]
+[node name="RunningRobot" type="Node2D" unique_id=1409696228 node_paths=PackedStringArray("_sprite")]
 script = ExtResource("2")
+_sprite = NodePath("Robot")
 
 [node name="Robot" parent="." unique_id=1667644749 instance=ExtResource("1")]

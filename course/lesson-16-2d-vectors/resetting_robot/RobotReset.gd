@@ -1,10 +1,11 @@
 extends Node2D
 
+@export var _camera: Camera2D
+
 var _position_start: Vector2
 var _scale_start: Vector2
 
 @onready var _animation_tree := find_child("AnimationTree")
-@onready var _camera := $Camera2D
 
 func _ready() -> void:
 	_position_start = position

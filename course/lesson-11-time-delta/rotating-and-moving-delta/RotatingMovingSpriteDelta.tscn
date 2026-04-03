@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://c1umkndfhg1su" path="res://course/lesson-11-time-delta/rotating-and-moving-delta/RotatingMovingSpriteDelta.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="2"]
 
-[node name="RotatingMovingSpriteDelta" type="Node2D" unique_id=372369776]
+[node name="RotatingMovingSpriteDelta" type="Node2D" unique_id=372369776 node_paths=PackedStringArray("camera_2d")]
 script = ExtResource("1")
+camera_2d = NodePath("Camera2D")
 
 [node name="Robot" parent="." unique_id=1082792329 instance=ExtResource("2")]
 

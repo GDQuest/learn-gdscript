@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cwft6x5veh6yk"]
 
-[ext_resource type="PackedScene" path="res://course/lesson-11-time-delta/visuals/RunningRobot.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://47tjeowshrie" path="res://course/lesson-11-time-delta/visuals/RunningRobot.tscn" id="1"]
 [ext_resource type="Script" uid="uid://c3xmmmv87ece6" path="res://course/lesson-11-time-delta/visuals/RobotRace.gd" id="2"]
 
 [sub_resource type="GDScript" id="1"]
@@ -8,12 +8,12 @@ script/source = "extends Node2D
 
 var speed = 200.0
 
+@onready var start_position = position
+
 
 func move(delta):
 	position.x += speed * delta
 
-
-@onready var start_position = position
 
 func reset():
 	position = start_position
@@ -24,18 +24,22 @@ script/source = "extends Node2D
 
 var distance = 200.0 / 120.0
 
+@onready var start_position = position
+
+
 func move(delta):
 	position.x += distance
 
-
-@onready var start_position = position
 
 func reset():
 	position = start_position
 "
 
-[node name="RobotRace" type="Node2D" unique_id=439008016]
+[node name="RobotRace" type="Node2D" unique_id=439008016 node_paths=PackedStringArray("_robot_frame_delta", "_robot_frame", "_timer")]
 script = ExtResource("2")
+_robot_frame_delta = NodePath("Robots/RunningRobotFrameDelta")
+_robot_frame = NodePath("Robots/RunningRobotFrame")
+_timer = NodePath("Timer")
 
 [node name="Robots" type="Node2D" parent="." unique_id=656311440]
 position = Vector2(0, -87)

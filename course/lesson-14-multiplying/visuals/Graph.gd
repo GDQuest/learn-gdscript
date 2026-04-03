@@ -3,6 +3,8 @@ extends Path2D
 
 const COLOR_GREY := Color("928fb8")
 
+@export var _label_x: Label
+@export var _label_y: Label
 @export var graph_size := Vector2.ONE * 250
 @export var text_x := "x-axis"
 @export var text_y := "y-axis"
@@ -15,8 +17,6 @@ var _last_point := Vector2.ZERO
 # Need a draw offset as the scene is centered in lessons
 var _draw_offset := Vector2(-graph_size.x / 2, graph_size.y/2)
 
-@onready var _label_x := $LabelX as Label
-@onready var _label_y := $LabelY as Label
 
 
 func _ready() -> void:

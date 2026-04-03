@@ -6,7 +6,7 @@
 [sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
-@onready var turtle := $Turtle as Sprite2D
+@export var turtle: Sprite2D
 
 const ARRIVE_DISTANCE := 100.0
 const ARRIVED_THRESHOLD := 1.0
@@ -58,8 +58,9 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 2
 
-[node name="FollowingTurtle" type="Node2D" parent="RunnableCodeExample" unique_id=861343650]
+[node name="FollowingTurtle" type="Node2D" parent="RunnableCodeExample" unique_id=861343650 node_paths=PackedStringArray("turtle")]
 script = SubResource("1")
+turtle = NodePath("Turtle")
 
 [node name="Turtle" type="Sprite2D" parent="RunnableCodeExample/FollowingTurtle" unique_id=2067940911]
 position = Vector2(1, 0)

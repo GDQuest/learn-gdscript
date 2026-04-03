@@ -9,8 +9,8 @@ script/source = "extends Node2D
 
 var size := 40.0
 
-@onready var _turtle: DrawingTurtle = $DrawingTurtle
-@onready var _robot := $Robot
+@export var _turtle: DrawingTurtle
+@export var _robot: Node2D
 @onready var _robot_animation_tree := find_child(\"AnimationTree\")
 
 func run():
@@ -70,8 +70,10 @@ text = "func draw_wall():
 	jump(110, 0)
 	draw_square()"
 
-[node name="Meeting" type="Node2D" parent="RunnableCodeExample" unique_id=1198646400]
+[node name="Meeting" type="Node2D" parent="RunnableCodeExample" unique_id=1198646400 node_paths=PackedStringArray("_turtle", "_robot")]
 script = SubResource("1")
+_turtle = NodePath("DrawingTurtle")
+_robot = NodePath("Robot")
 
 [node name="Robot" parent="RunnableCodeExample/Meeting" unique_id=1271106906 instance=ExtResource("1")]
 position = Vector2(0, -60)

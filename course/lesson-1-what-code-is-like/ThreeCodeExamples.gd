@@ -4,9 +4,9 @@ const COLOR_KEYWORD := Color(1, 0.094118, 0.321569)
 const COLOR_QUOTES := Color(1, 0.960784, 0.25098)
 const COLOR_COMMENTS := Color(0.290196, 0.294118, 0.388235)
 
-@onready var _gdscript_code := $GDScriptCodeExample as CodeEdit
-@onready var _python_code := $PythonCodeExample as CodeEdit
-@onready var _js_code := $JavascriptCodeExample as CodeEdit
+@export var _gdscript_code: CodeEdit
+@export var _python_code: CodeEdit
+@export var _js_code: CodeEdit
 
 
 func _ready() -> void:
@@ -17,9 +17,9 @@ func _ready() -> void:
 	CodeEditorEnhancer.enhance(_js_code)
 	CodeEditorEnhancer.prevent_editable(_js_code)
 	
-	_js_code.syntax_highlighter.add_color_region("//", "", COLOR_COMMENTS, true)
+	(_js_code.syntax_highlighter as CodeHighlighter).add_color_region("//", "", COLOR_COMMENTS, true)
 
-	for key in ["if", "function"]:
-		_js_code.syntax_highlighter.add_keyword_color(key, COLOR_KEYWORD)
-	for key in ["if", "def"]:
-		_python_code.syntax_highlighter.add_keyword_color(key, COLOR_KEYWORD)
+	for key: String in ["if", "function"]:
+		(_js_code.syntax_highlighter as CodeHighlighter).add_keyword_color(key, COLOR_KEYWORD)
+	for key: String in ["if", "def"]:
+		(_python_code.syntax_highlighter as CodeHighlighter).add_keyword_color(key, COLOR_KEYWORD)

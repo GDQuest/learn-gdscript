@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var camera_2d := $Camera2D
+@export var camera_2d: Camera2D
 
 func _ready() -> void:
 	set_process(false)

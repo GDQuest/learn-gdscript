@@ -1,14 +1,14 @@
 extends Control
 
+@export var _health_bar: ColorRect
+
 var health = 20
 var _health_lost = 10
 var _max_health = 80
 
 var _produced_health_values = []
 
-@onready var _robot := find_child("Robot")
 @onready var _animation_tree := find_child("AnimationTree")
-@onready var _health_bar := find_child("CustomHealthBar")
 
 
 func _ready() -> void:

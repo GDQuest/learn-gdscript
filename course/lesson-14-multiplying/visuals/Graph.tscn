@@ -9,9 +9,11 @@ _data = {
 }
 point_count = 2
 
-[node name="Graph" type="Path2D" unique_id=1372557815]
+[node name="Graph" type="Path2D" unique_id=1372557815 node_paths=PackedStringArray("_label_x", "_label_y")]
 curve = SubResource("1")
 script = ExtResource("1")
+_label_x = NodePath("LabelX")
+_label_y = NodePath("LabelY")
 
 [node name="LabelX" type="Label" parent="." unique_id=1993361408]
 self_modulate = Color(0.960784, 0.980392, 0.980392, 1)

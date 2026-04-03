@@ -4,8 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://dd2vjgj5yweq5" path="res://course/common/CustomHealthBar.tscn" id="3"]
 
-[node name="ReducingDamage" unique_id=445241828 instance=ExtResource("2")]
+[node name="ReducingDamage" unique_id=445241828 node_paths=PackedStringArray("_health_bar") instance=ExtResource("2")]
 script = ExtResource("1")
+_health_bar = NodePath("CustomHealthBar")
 
 [node name="Camera2D" type="Camera2D" parent="." index="3" unique_id=1771926645]
 

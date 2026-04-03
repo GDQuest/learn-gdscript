@@ -5,17 +5,18 @@
 [sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
+@export var _label: Label
+@export var _label_x: Label
+@export var _label_y: Label
+@export var _triangle_x: Sprite2D
+@export var _triangle_y: Sprite2D
+@export var _color_rect: ColorRect
+@export var _triangle_mouse: Sprite2D
+
 @export var size := Vector2(300, 300)
+
 var touch_down := Vector2.ZERO
 var vector :=- Vector2.ZERO
-
-@onready var _label := find_child(\"Label\")
-@onready var _label_x := find_child(\"LabelX\")
-@onready var _label_y := find_child(\"LabelY\")
-@onready var _triangle_x := find_child(\"TriangleX\")
-@onready var _triangle_y := find_child(\"TriangleY\")
-@onready var _color_rect := find_child(\"ColorRect\")
-@onready var _triangle_mouse := find_child(\"TriangleMouse\")
 
 
 func _ready():
@@ -28,7 +29,7 @@ func _ready():
 	queue_redraw()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	vector = get_local_mouse_position().limit_length(160)
 	_triangle_mouse.position = vector
 	_triangle_mouse.rotation = Vector2.RIGHT.angle_to(vector)
@@ -45,8 +46,15 @@ func _draw():
 
 [node name="VectorVisual" type="Node2D" unique_id=1296238667]
 
-[node name="VectorVisual" type="Node2D" parent="." unique_id=642921031]
+[node name="VectorVisual" type="Node2D" parent="." unique_id=642921031 node_paths=PackedStringArray("_label", "_label_x", "_label_y", "_triangle_x", "_triangle_y", "_color_rect", "_triangle_mouse")]
 script = SubResource("1")
+_label = NodePath("Label")
+_label_x = NodePath("LabelX")
+_label_y = NodePath("LabelY")
+_triangle_x = NodePath("TriangleX")
+_triangle_y = NodePath("TriangleY")
+_color_rect = NodePath("ColorRect")
+_triangle_mouse = NodePath("TriangleMouse")
 
 [node name="ColorRect" type="ColorRect" parent="VectorVisual" unique_id=1537471873]
 visible = false

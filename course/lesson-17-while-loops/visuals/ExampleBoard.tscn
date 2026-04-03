@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://duo53brwyhgp5" path="res://course/lesson-17-while-loops/visuals/Robot.gd" id="3"]
 
 [sub_resource type="GDScript" id="1"]
-script/source = "tool
+script/source = "@tool
 extends RunnableCodeExample
 
 func _ready():
@@ -26,7 +26,6 @@ func _update_label() -> void:
 		await self.ready
 	
 	_label.text = \"board_size = Vector2%s\" % [grid_size]
-
 "
 
 [node name="ExampleGrid" type="PanelContainer" unique_id=1865103866]

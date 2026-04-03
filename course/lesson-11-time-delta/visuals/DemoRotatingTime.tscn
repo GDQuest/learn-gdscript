@@ -4,8 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://dh3skycmljjai" path="res://course/common/robot_body.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://dbj7adb0vqf3d" path="res://course/common/hand_ice.png" id="3"]
 
-[node name="Node2D" type="Node2D" unique_id=1505172258]
+[node name="Node2D" type="Node2D" unique_id=1505172258 node_paths=PackedStringArray("_timer", "_robot", "_label_rotation", "_label_frame")]
 script = ExtResource("1")
+_timer = NodePath("Timer")
+_robot = NodePath("DemoRotateSprite")
+_label_rotation = NodePath("LabelRotation")
+_label_frame = NodePath("LabelFrame")
 
 [node name="DemoRotateSprite" type="Node2D" parent="." unique_id=2114400343]
 
@@ -39,5 +43,3 @@ offset_top = -118.0
 offset_right = 47.0
 offset_bottom = -90.0
 text = "frame speed: 0"
-
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

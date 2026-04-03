@@ -4,10 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://dd2vjgj5yweq5" path="res://course/common/CustomHealthBar.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="4"]
 
-[node name="LimitingHealth" type="CenterContainer" unique_id=1285593770]
+[node name="LimitingHealth" type="CenterContainer" unique_id=1285593770 node_paths=PackedStringArray("_health_bar")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1")
+_health_bar = NodePath("Robot/CustomHealthBar")
 
 [node name="Robot" parent="." unique_id=1954791860 instance=ExtResource("4")]
 

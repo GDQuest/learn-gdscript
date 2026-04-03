@@ -1,15 +1,19 @@
 extends Node2D
 
 const _times := preload("./DemoRotatingTime.gd")._times;
+
+@export var _timer: Timer
+@export var _sprite: Node2D
+@export var _label_rotation: Label
+@export var _label_frame: Label
+
 var _index := 0
 
-@onready var _timer := $Timer as Timer
-@onready var _sprite := $DemoRotateSprite as Node2D
-@onready var _label_rotation := $LabelRotation as Label
-@onready var _label_frame := $LabelFrame as Label
 
 func _ready():
+	_timer.timeout.connect(_on_Timer_timeout)
 	_on_Timer_timeout()
+
 
 func _on_Timer_timeout():
 	var rotation_amount := 0.2;

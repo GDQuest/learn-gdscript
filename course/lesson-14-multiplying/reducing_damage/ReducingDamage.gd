@@ -1,7 +1,8 @@
 extends Node2D
 
+@export var _health_bar: ColorRect
+
 @onready var _animation_tree := find_child("AnimationTree")
-@onready var _health_bar := find_child("CustomHealthBar") as ColorRect
 
 # EXPORT damage
 var level = 3
