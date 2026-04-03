@@ -16,8 +16,7 @@ var variable_name := ""
 
 var highlight_line := -1
 var highlight_column := -1
-
-@onready var _scene_instance: Node
+var _scene_instance: Node
 
 
 func _ready() -> void:

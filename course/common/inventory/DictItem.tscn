@@ -15,7 +15,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="DictItem" type="Button" unique_id=18552923]
+[node name="DictItem" type="Button" unique_id=18552923 node_paths=PackedStringArray("_icon", "_name_label", "_amount_label")]
 custom_minimum_size = Vector2(260, 100)
 offset_right = 254.0
 offset_bottom = 100.0
@@ -23,6 +23,9 @@ size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("1")
 theme_override_styles/hover = SubResource("1")
 script = ExtResource("3")
+_icon = NodePath("Margin/Item/Icon")
+_name_label = NodePath("Margin/Item/Name")
+_amount_label = NodePath("Margin/Item/Amount")
 
 [node name="Margin" type="MarginContainer" parent="." unique_id=1791908226]
 layout_mode = 0

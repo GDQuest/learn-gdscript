@@ -20,13 +20,14 @@ grow_begin = -100.0
 grow_end = -100.0
 thickness = 4
 
-[node name="DictInventory" type="PanelContainer" unique_id=503506075]
+[node name="DictInventory" type="PanelContainer" unique_id=503506075 node_paths=PackedStringArray("_grid")]
 offset_top = 44.0
 offset_right = 840.0
 offset_bottom = 1080.0
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("1")
 script = ExtResource("3")
+_grid = NodePath("Margin/Column/Grid")
 
 [node name="Margin" type="MarginContainer" parent="." unique_id=1988023211]
 layout_mode = 2

@@ -1,11 +1,11 @@
 extends ColorRect
 
+@export var _empty_health_bar: ColorRect
+@export var _health_bar: ColorRect
+@export var _label: Label
+
 var health := 100
 var max_health := 100
-
-@onready var _empty_health_bar := $HealthBarEmpty as ColorRect
-@onready var _health_bar := $HealthBarCurrent as ColorRect
-@onready var _label := $Label as Label
 
 
 func _ready() -> void:

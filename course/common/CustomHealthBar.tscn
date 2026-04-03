@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bc5p6fxowg02n" path="res://course/common/CustomHealthBar.gd" id="2"]
 
-[node name="CustomHealthBar" type="ColorRect" unique_id=240038208]
+[node name="CustomHealthBar" type="ColorRect" unique_id=240038208 node_paths=PackedStringArray("_empty_health_bar", "_health_bar", "_label")]
 custom_minimum_size = Vector2(200, 20)
 offset_left = -99.0
 offset_top = -103.0
@@ -10,6 +10,9 @@ offset_right = 101.0
 offset_bottom = -83.0
 color = Color(0.0352941, 0.0392157, 0.12549, 1)
 script = ExtResource("2")
+_empty_health_bar = NodePath("HealthBarEmpty")
+_health_bar = NodePath("HealthBarCurrent")
+_label = NodePath("Label")
 
 [node name="HealthBarEmpty" type="ColorRect" parent="." unique_id=2001191928]
 custom_minimum_size = Vector2(180, 10)
