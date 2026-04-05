@@ -6,7 +6,8 @@ const RobotAnimationTree := preload("res://course/common/RobotAnimationTree.gd")
 
 
 func _init() -> void:
-	ready.connect(_on_node_ready)
+	if not ready.is_connected(_on_node_ready):
+		ready.connect(_on_node_ready)
 
 
 # EXPORT welcome_to_app

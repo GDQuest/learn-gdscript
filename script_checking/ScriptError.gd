@@ -18,13 +18,17 @@ var code := 0
 
 func from_JSON(json: Dictionary) -> void:
 	if "message" in json:
-		message = str(json.message)
+		var json_message: String = json.message
+		message = str(json_message)
 	if "range" in json:
-		error_range.from_JSON(json.range)
+		var json_range: Dictionary = json.range
+		error_range.from_JSON(json_range)
 	if "severity" in json:
-		severity = int(json.severity)
+		var json_severity: int = json.severity
+		severity = int(json_severity)
 	if "code" in json:
-		code = _improve_error_code(json.code, message)
+		var json_code: int = json.code
+		code = _improve_error_code(json_code, message)
 
 
 func _improve_error_code(raw_code: int, raw_message: String) -> int:
@@ -58,7 +62,7 @@ func _improve_error_code(raw_code: int, raw_message: String) -> int:
 			for i in pattern.size():
 				# If the substring does not match, exit early, this is not our match.
 				var substring := pattern[i] as String
-				var found = curr_message.find(substring)
+				var found := curr_message.find(substring)
 				if found == -1:
 					break
 
@@ -92,9 +96,11 @@ class ErrorRange:
 
 	func from_JSON(json: Dictionary) -> void:
 		if "start" in json:
-			start.from_JSON(json.start)
+			var json_start: Dictionary = json.start
+			start.from_JSON(json_start)
 		if "end" in json:
-			end.from_JSON(json.end)
+			var json_end: Dictionary = json.end
+			end.from_JSON(json_end)
 
 
 	func _to_string() -> String:
@@ -108,9 +114,11 @@ class ErrorPosition:
 
 	func from_JSON(json: Dictionary) -> void:
 		if "character" in json:
-			character = int(json.character)
+			var json_character: int = json.character
+			character = int(json_character)
 		if "line" in json:
-			line = int(json.line)
+			var json_line: int = json.line
+			line = int(json_line)
 
 
 	func _to_string() -> String:

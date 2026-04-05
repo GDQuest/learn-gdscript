@@ -171,13 +171,13 @@ func get_navigation_resource(resource_id: String) -> BBCodeParser.ParseNode:
 
 		if result.errors:
 			push_error("NavigationManager.gd:get_navigation_resource(): Parse errors when loading lesson from bbcode file %s:" % bbcode_path)
-			for error in result.errors:
+			for error: BBCodeParser.ParseError in result.errors:
 				push_error("  " + error.format())
 			return null
 
 		if result.warnings:
 			print("NavigationManager.gd:get_navigation_resource(): Parse warnings when loading lesson from bbcode file %s:" % bbcode_path)
-			for warning in result.warnings:
+			for warning: BBCodeParser.ParseError in result.warnings:
 				print("  ", warning.format())
 
 		lesson_data = result.root.children[0]
@@ -227,7 +227,7 @@ func set_current_url(_new_url: String) -> void:
 	pass
 
 
-func get_current_url():
+func get_current_url() -> String:
 	return get_history(1)
 
 ###############################################################################
@@ -253,13 +253,12 @@ func _on_init_setup_js() -> void:
 	_js_popstate_listener_ref = JavaScriptBridge.create_callback(_on_js_popstate)
 
 	_js_window = JavaScriptBridge.get_interface("window")
-	# warning-ignore:unsafe_method_access
+	@warning_ignore("unsafe_method_access")
 	_js_window.addEventListener("popstate", _js_popstate_listener_ref)
 
-	# warning-ignore:unsafe_property_access
+	@warning_ignore("unsafe_method_access")
+	@warning_ignore("unsafe_property_access")
 	var url: String = (
-		# warning-ignore:unsafe_property_access
-		# warning-ignore:unsafe_property_access
 		_js_window.location.hash.trim_prefix("#").trim_prefix("/")
 		if _js_window.location.hash
 		else ""
@@ -282,7 +281,7 @@ func _js_back() -> void:
 	if not _js_available:
 		return
 	_disable_popstate_listener()
-	# warning-ignore:unsafe_method_access
+	@warning_ignore("unsafe_method_access")
 	_js_history.back()
 	_restore_popstate_listener()
 
@@ -293,9 +292,8 @@ func _js_to_outliner() -> void:
 	if not _js_available:
 		return
 	_disable_popstate_listener()
-	# warning-ignore:unsafe_method_access
-	# warning-ignore:unsafe_method_access
-	# warning-ignore:unsafe_property_access
+	@warning_ignore("unsafe_method_access")
+	@warning_ignore("unsafe_property_access")
 	_js_history.go(-_js_history.length)
 	_restore_popstate_listener()
 
@@ -314,7 +312,7 @@ func _restore_popstate_listener() -> void:
 func _push_javascript_state(url: String) -> void:
 	if not _js_available:
 		return
-	# warning-ignore:unsafe_method_access
+	@warning_ignore("unsafe_method_access")
 	_js_history.pushState(url, "", "#" + url)
 
 

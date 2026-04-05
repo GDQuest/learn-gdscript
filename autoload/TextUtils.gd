@@ -56,11 +56,12 @@ func bbcode_add_code_color(text := "") -> String:
 	if _REGEXES.is_empty():
 		return text
 
-	var regex_matches: Array = _REGEXES["code"].search_all(text)
+	var code_regex: RegEx = _REGEXES["code"]
+	var regex_matches: Array = code_regex.search_all(text)
 	var index_delta := 0
 
-	for regex_match in regex_matches:
-		var index_offset = regex_match.get_start() + index_delta
+	for regex_match: RegExMatch in regex_matches:
+		var index_offset := regex_match.get_start() + index_delta
 		var initial_length: int = regex_match.strings[0].length()
 		var match_string: String = regex_match.strings[1]
 
@@ -68,9 +69,10 @@ func bbcode_add_code_color(text := "") -> String:
 		# The algorithm consists of finding all regex matches of a-zA-Z0-9_ and \d.\d
 		# Then formatting these regex matches, and adding the parts in-between
 		# matches to the formatted string.
-		var to_format: Array = _REGEXES["format"].search_all(match_string)
+		var format_regex: RegEx = _REGEXES["format"]
+		var to_format: Array = format_regex.search_all(match_string)
 		var last_match_end := -1
-		for match_to_format in to_format:
+		for match_to_format: RegExMatch in to_format:
 			var match_start: int = match_to_format.get_start()
 			if last_match_end == -1 and match_start > 0:
 				colored_string += match_string.substr(0, match_start)
@@ -83,9 +85,10 @@ func bbcode_add_code_color(text := "") -> String:
 				"symbol",
 				"number",
 			]:
-				var replaced: String = _REGEXES[regex_type].sub(
+				var typed_regex: RegEx = _REGEXES[regex_type]
+				var replaced: String = typed_regex.sub(
 					part,
-					_REGEX_REPLACE_MAP[regex_type],
+					_REGEX_REPLACE_MAP[regex_type] as String,
 					false,
 				)
 				if part != replaced:
@@ -111,7 +114,7 @@ static func convert_input_action_to_tooltip(action: String) -> String:
 	for index in count:
 		if index > 0:
 			output += ","
-		output += " " + OS.get_keycode_string(events[index].get_keycode_with_modifiers())
+		output += " " + OS.get_keycode_string((events[index] as InputEventKey).get_keycode_with_modifiers())
 	return output
 
 
@@ -153,7 +156,6 @@ func tr_paragraph(text: String) -> String:
 
 # Call this function to ensure that changes to the formatter don't change color highlighting.
 func _test_formatting() -> void:
-	var color_keyword := CodeEditorEnhancer.COLOR_KEYWORD.to_html(false)
 	var color_number := CodeEditorEnhancer.COLOR_NUMBERS.to_html(false)
 	var color_symbol := CodeEditorEnhancer.COLOR_MEMBER.to_html(false)
 	var color_string := CodeEditorEnhancer.COLOR_QUOTES.to_html(false)
@@ -170,7 +172,7 @@ func _test_formatting() -> void:
 		">": ">",
 	}
 
-	for input_text in test_pairs:
+	for input_text: String in test_pairs:
 		var expected_output: String = "[code]" + test_pairs[input_text] + "[/code]"
 		var output := bbcode_add_code_color("[code]" + input_text + "[/code]")
 		assert(output == expected_output, "Expected output '%s' but got '%s' instead." % [expected_output, output])

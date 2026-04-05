@@ -9,7 +9,6 @@ signal course_requested(force_outliner)
 @export var _title_link_label: RichTextLabel
 @export var _anim_player: AnimationPlayer
 @export var _robot: Node2D
-@export var _gdquest_boy: PanelContainer
 
 @onready var _buttons_to_disable := [_settings_button, _outliner_button, _start_button, _quit_button]
 
@@ -55,13 +54,15 @@ func _on_start_requested() -> void:
 	emit_signal("course_requested", false)
 
 
-func _on_animation_finished(anim_name: String) -> void:
+func _on_animation_finished(_anim_name: String) -> void:
 	for button in _buttons_to_disable:
 		button.disabled = false
+	@warning_ignore("unsafe_method_access")
 	_robot.appear()
 
 
 func _on_meta_clicked(data) -> void:
 	if typeof(data) == TYPE_STRING:
-		if data.begins_with("https://"):
-			OS.shell_open(data)
+		var data_string: String = data
+		if data_string.begins_with("https://"):
+			OS.shell_open(data_string)

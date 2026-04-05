@@ -56,22 +56,28 @@ func write(level: int, properties: Dictionary, message: String) -> void:
 	var props = godot_dict_to_js_obj(properties)
 	match (level):
 		LEVEL.FATAL:
-			# warning-ignore:unsafe_property_access
+			@warning_ignore("unsafe_property_access")
+			@warning_ignore("unsafe_method_access")
 			GDQUEST.log.fatal(props, message)
 		LEVEL.ERROR:
-			# warning-ignore:unsafe_property_access
+			@warning_ignore("unsafe_property_access")
+			@warning_ignore("unsafe_method_access")
 			GDQUEST.log.error(props, message)
 		LEVEL.WARN:
-			# warning-ignore:unsafe_property_access
+			@warning_ignore("unsafe_property_access")
+			@warning_ignore("unsafe_method_access")
 			GDQUEST.log.warn(props, message)
 		LEVEL.INFO:
-			# warning-ignore:unsafe_property_access
+			@warning_ignore("unsafe_property_access")
+			@warning_ignore("unsafe_method_access")
 			GDQUEST.log.info(props, message)
 		LEVEL.DEBUG:
-			# warning-ignore:unsafe_property_access
+			@warning_ignore("unsafe_property_access")
+			@warning_ignore("unsafe_method_access")
 			GDQUEST.log.debug(props, message)
 		_:
-			# warning-ignore:unsafe_property_access
+			@warning_ignore("unsafe_property_access")
+			@warning_ignore("unsafe_method_access")
 			GDQUEST.log.trace(props, message)
 
 
@@ -118,7 +124,8 @@ func download() -> void:
 		var dir_absolute_path := OS.get_user_data_dir().path_join("error_logs") + "/"
 		OS.shell_open(dir_absolute_path)
 		return
-	# warning-ignore:unsafe_property_access
+	@warning_ignore("unsafe_method_access")
+	@warning_ignore("unsafe_property_access")
 	GDQUEST.log.download()
 
 
@@ -128,6 +135,8 @@ func trim_if_over_limit(max_kilo_bytes := 1000) -> bool:
 	if not _js_available:
 		return false
 	# warning-ignore:unsafe_property_access
+	@warning_ignore("unsafe_method_access")
+	@warning_ignore("unsafe_property_access")
 	return GDQUEST.log.trimIfOverLimit(max_kilo_bytes)
 
 
@@ -138,10 +147,12 @@ func log_system_info_if_log_is_empty(additional_data := { }) -> void:
 			trace(additional_data, 'INIT')
 	elif additional_data.size() > 0:
 		var props = godot_dict_to_js_obj(additional_data)
-		# warning-ignore:unsafe_property_access
+		@warning_ignore("unsafe_method_access")
+		@warning_ignore("unsafe_property_access")
 		GDQUEST.log.logSystemInfoIfLogIsEmpty(props)
 	else:
-		# warning-ignore:unsafe_property_access
+		@warning_ignore("unsafe_method_access")
+		@warning_ignore("unsafe_property_access")
 		GDQUEST.log.logSystemInfoIfLogIsEmpty()
 
 
@@ -150,7 +161,7 @@ func godot_dict_to_js_obj(properties: Dictionary):
 	for key in properties:
 		var value = properties[key]
 		if value is Dictionary:
-			value = godot_dict_to_js_obj(value)
+			value = godot_dict_to_js_obj(value as Dictionary)
 		elif value is Vector2 or value is Vector3:
 			value = "%s" % [value]
 		props[key] = value

@@ -3,8 +3,6 @@ extends Resource
 
 # Lesson resource identifier.
 @export var lesson_id := ""
-# Identifiers of reached content blocks.
-@export var completed_blocks := [] # Array of String
 # Set when the user got to the bottom of the lesson and clicked on any practice.
 @export var completed_reading := false
 # Identifiers of completed quiz resources.
@@ -14,7 +12,6 @@ extends Resource
 
 
 func _init() -> void:
-	completed_blocks = []
 	completed_quizzes = []
 	completed_practices = []
 
@@ -31,11 +28,11 @@ func get_completed_quizzes_count(lesson: BBCodeParser.ParseNode) -> int:
 		var quiz_id := BBCodeUtils.get_quiz_id(quiz)
 		available_quizzes.append(quiz_id)
 
-	for quiz_id in completed_quizzes:
+	for quiz_id: Variant in completed_quizzes:
 		var matched_id := ""
 
 		for quiz_path in available_quizzes:
-			if quiz_path == String(quiz_id): # Can be an int from old pre-beta versions.
+			if quiz_path == str(quiz_id): # Can be an int from old pre-beta versions.
 				matched_id = quiz_path
 				break
 

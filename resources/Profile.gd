@@ -13,7 +13,6 @@ const URL_GODOT_DOCS_REF = "ref=godot-docs"
 # Study progression (across multiple courses)
 @export var study_progression := []
 @export var last_started_lesson := { }
-@export var last_visible_lesson_block := { }
 @export var is_sponsored_profile := true
 
 # User settings
@@ -40,6 +39,7 @@ func _init() -> void:
 
 	if OS.has_feature("JavaScript"):
 		var window := JavaScriptBridge.get_interface("window")
+		@warning_ignore("unsafe_property_access")
 		var browser_url: String = window.location.href
 		is_sponsored_profile = browser_url.find(URL_GODOT_DOCS_REF) == -1
 
@@ -87,44 +87,6 @@ func get_or_create_lesson(course_id: String, lesson_id: String) -> LessonProgres
 	save()
 
 	return lesson_progress
-
-
-func set_lesson_reading_block(course_id: String, lesson_id: String, block_id: String) -> void:
-	var lesson_progress := get_or_create_lesson(course_id, lesson_id)
-
-	# Mark the block as read, if it wasn't marked before.
-	if not lesson_progress.completed_blocks.has(block_id):
-		lesson_progress.completed_blocks.append(block_id)
-
-	# Set it as the last visible block to use it later to restore position on the page.
-	if not last_visible_lesson_block.has(course_id):
-		last_visible_lesson_block[course_id] = { }
-	last_visible_lesson_block[course_id][lesson_id] = block_id
-
-	save()
-
-
-func has_lesson_blocks_read(course_id: String, lesson_id: String) -> bool:
-	var lesson_progress := get_or_create_lesson(course_id, lesson_id)
-	return lesson_progress.completed_blocks.size() > 0
-
-
-func is_lesson_block_read(course_id: String, lesson_id: String, block_id: String) -> bool:
-	var lesson_progress := get_or_create_lesson(course_id, lesson_id)
-	return lesson_progress.completed_blocks.has(block_id)
-
-
-func get_last_visited_lesson_block(course_id: String, lesson_id: String) -> String:
-	# Ensure we have some data for the course and the lesson, if we didn't have it before.
-	var _course_progress := get_or_create_course(course_id)
-	var _lesson_progress := get_or_create_lesson(course_id, lesson_id)
-
-	if not last_visible_lesson_block.has(course_id):
-		return ""
-	if not last_visible_lesson_block[course_id].has(lesson_id):
-		return ""
-
-	return last_visible_lesson_block[course_id][lesson_id]
 
 
 func set_lesson_reading_completed(course_id: String, lesson_id: String, completed: bool) -> void:
@@ -210,9 +172,6 @@ func get_last_started_lesson(course_id: String) -> String:
 func reset_course_progress(course_id: String) -> void:
 	var course_progress := get_or_create_course(course_id)
 	course_progress.reset()
-
-	if last_visible_lesson_block.has(course_id):
-		last_visible_lesson_block.erase(course_id)
 
 	if last_started_lesson.has(course_id):
 		last_started_lesson.erase(course_id)

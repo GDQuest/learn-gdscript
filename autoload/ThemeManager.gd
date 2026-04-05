@@ -22,7 +22,7 @@ func _ready() -> void:
 
 
 func get_default_font_size() -> int:
-	return _font_sizes["Label"]["font_size"]
+	return _font_sizes[&"Label"][&"font_size"]
 
 
 func _cache_font_defaults() -> void:
@@ -48,13 +48,13 @@ func _cache_font_defaults() -> void:
 
 		_font_defaults[font_resource] = font_resource.base_font.resource_path
 
-	for type in _theme.get_font_size_type_list():
+	for type: StringName in _theme.get_font_size_type_list():
 		var sizes := { }
 		for font_size_name in _theme.get_font_size_list(type):
 			sizes[font_size_name] = _theme.get_font_size(font_size_name, type)
 		_font_sizes[type] = sizes
-	if not _font_sizes.has("Label"):
-		_font_sizes["Label"] = { "font_size"= _theme.default_font_size }
+	if not _font_sizes.has(&"Label"):
+		_font_sizes[&"Label"] = { &"font_size": _theme.default_font_size }
 
 
 func scale_all_font_sizes(size_scale: int, and_save: bool = true) -> void:
@@ -114,19 +114,20 @@ func apply_font_settings(size_scale: int, use_dyslexia_font: bool) -> void:
 		for font_resource: FontVariation in _font_defaults:
 			if not font_resource:
 				continue
-			font_resource.base_font = load(_font_defaults[font_resource])
+			var font_defaults_path: String = _font_defaults[font_resource]
+			font_resource.base_font = load(font_defaults_path)
 
 	_apply_font_sizes(size_scale, use_dyslexia_font)
 
 
 func _apply_font_sizes(size_scale: int, use_dyslexia_font: bool) -> void:
 	var shrink := 0.25 if use_dyslexia_font else 0.0
-	for theme_type in _font_sizes:
+	for theme_type: StringName in _font_sizes:
 		var font_size_set := _font_sizes[theme_type] as Dictionary
-		for font_size_name in font_size_set:
+		for font_size_name: StringName in font_size_set:
 			var default_size: int = font_size_set[font_size_name]
 			var scaled_size := default_size + size_scale * 2
-			_theme.set_font_size(font_size_name, theme_type, scaled_size - scaled_size * shrink)
+			_theme.set_font_size(font_size_name, theme_type, ceili(scaled_size - scaled_size * shrink))
 	var default_theme_size: int = get_default_font_size()
 	var scaled_theme_size := default_theme_size + size_scale * 2
-	_theme.default_font_size = scaled_theme_size - scaled_theme_size * shrink
+	_theme.default_font_size = ceili(scaled_theme_size - scaled_theme_size * shrink)
