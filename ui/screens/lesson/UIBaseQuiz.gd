@@ -115,7 +115,7 @@ func _test_answer() -> void:
 		result = _test_answer_against_quiz(_get_answers())
 	else:
 		# The input field quiz takes a single string as a test answer.
-		result = _test_answer_against_quiz(_get_answers().back())
+		result = _test_answer_against_quiz(_get_answers().back() as Array)
 	_help_message.text = result.help_message
 	_help_message.visible = not result.help_message.is_empty()
 
@@ -134,7 +134,7 @@ func _test_answer() -> void:
 		_show_answer()
 
 
-func _test_answer_against_quiz(answers: Array) -> AnswerTestResult:
+func _test_answer_against_quiz(_answers: Array) -> AnswerTestResult:
 	return null
 
 
@@ -166,13 +166,13 @@ func _show_answer(gave_correct_answer := true) -> void:
 		emit_signal("quiz_skipped")
 
 
-func _change_rect_size_to(size: Vector2, instant := false) -> void:
+func _change_rect_size_to(new_size: Vector2, instant := false) -> void:
 	if instant:
-		custom_minimum_size = size
+		custom_minimum_size = new_size
 		return
 
 	_previous_rect_size = custom_minimum_size
-	_next_rect_size = size
+	_next_rect_size = new_size
 	_percent_transformed = 0.0
 
 	if _size_scene_tween:

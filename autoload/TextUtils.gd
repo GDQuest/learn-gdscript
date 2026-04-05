@@ -107,7 +107,7 @@ func bbcode_add_code_color(text := "") -> String:
 	return text
 
 
-static func convert_input_action_to_tooltip(action: String) -> String:
+func convert_input_action_to_tooltip(action: String) -> String:
 	var events := InputMap.action_get_events(action)
 	var count := events.size()
 	var output := "Shortcut:" if count < 2 else "Shortcuts:"

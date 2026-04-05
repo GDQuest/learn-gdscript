@@ -29,7 +29,7 @@ func _rebuild_breadcrumbs() -> void:
 	_clear_navigation_nodes()
 
 	if _last_target is BBCodeParser.ParseNode and _last_target.tag == BBCodeParserData.Tag.LESSON:
-		var lesson = _last_target as BBCodeParser.ParseNode
+		var lesson := _last_target as BBCodeParser.ParseNode
 		var lesson_index := -1
 
 		var i := 0
@@ -50,7 +50,7 @@ func _rebuild_breadcrumbs() -> void:
 		return
 
 	if _last_target is BBCodeParser.ParseNode and _last_target.tag == BBCodeParserData.Tag.PRACTICE:
-		var practice = _last_target as BBCodeParser.ParseNode
+		var practice := _last_target as BBCodeParser.ParseNode
 		# TODO: Should probably avoid relying on content ID for getting paths.
 		var practice_id := BBCodeUtils.get_practice_id(practice)
 		var lesson_path = practice_id.get_base_dir().path_join("lesson.bbcode")

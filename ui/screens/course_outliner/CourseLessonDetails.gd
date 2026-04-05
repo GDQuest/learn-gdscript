@@ -6,11 +6,9 @@ const VALUE_COLOR_NONE := Color(0.290196, 0.294118, 0.388235)
 const VALUE_COLOR_PASSED := Color(0.239216, 1, 0.431373)
 
 @export var _title_label: Label
-@export var _reading_stats_block: Control
 @export var _reading_stats_icon: TextureRect
 @export var _quiz_stats_block: Control
 @export var _quiz_stats_value: Label
-@export var _practice_stats_block: Control
 @export var _practice_stats_value: Label
 @export var _goto_lesson_button: Button
 

@@ -16,7 +16,9 @@ var _references := { methods = { }, properties = { } }
 # Returns the raw reference objects for the requested names.
 func get_references(names: PackedStringArray) -> QueryResult:
 	# Load CSV docstrings if necessary.
-	if _references.methods.is_empty() and _references.properties.is_empty():
+	var methods: Dictionary = _references.methods
+	var properties: Dictionary = _references.properties
+	if methods.is_empty() and properties.is_empty():
 		assert(
 			documentation_file != "",
 			"documentation file for `%s` not specified" % [resource_path],
@@ -25,9 +27,9 @@ func get_references(names: PackedStringArray) -> QueryResult:
 
 	var result := QueryResult.new()
 	for name in names:
-		if name in _references.methods:
+		if name in methods:
 			result.methods.push_back(_references.methods[name])
-		elif name in _references.properties:
+		elif name in properties:
 			result.properties.push_back(_references.properties[name])
 	return result
 
@@ -41,12 +43,12 @@ func get_references_as_bbcode(names: PackedStringArray) -> String:
 	var bbcode := ""
 	if selected_references.methods:
 		bbcode += "[b]Method descriptions[/b]"
-		for reference in selected_references.methods:
-			bbcode += "\n\n" + reference.to_bbcode()
+		for current_reference: MethodSpecification in selected_references.methods:
+			bbcode += "\n\n" + current_reference.to_bbcode()
 	if selected_references.properties:
 		bbcode += "\n\n" + "[b]Property descriptions[/b]"
-		for reference in selected_references.properties:
-			bbcode += "\n\n" + reference.to_bbcode()
+		for current_reference: PropertySpecification in selected_references.properties:
+			bbcode += "\n\n" + current_reference.to_bbcode()
 	return bbcode
 
 
@@ -120,12 +122,12 @@ class MethodParameter:
 
 	func to_bbcode() -> String:
 		var name_string := "[b][color=#%s]%s[/color][/b]" % [COLOR_PARAMETER.to_html(), name]
-		var type_string := "[color=#%s]%s[/color]" % [COLOR_TYPE.to_html(), type]
+		var typed_string := "[color=#%s]%s[/color]" % [COLOR_TYPE.to_html(), type]
 		var value_string := "[b][color=#%s]%s[/color][/b]" % [COLOR_VALUE.to_html(), default]
 
 		if required:
-			return "%s: %s" % [name_string, type_string]
-		return "%s: %s = %s" % [name_string, type_string, value_string]
+			return "%s: %s" % [name_string, typed_string]
+		return "%s: %s = %s" % [name_string, typed_string, value_string]
 
 
 class MethodParameterList:
@@ -138,8 +140,7 @@ class MethodParameterList:
 
 	func to_bbcode() -> String:
 		var _list := PackedStringArray()
-		for param in list:
-			param = param as MethodParameter
+		for param: MethodParameter in list:
 			_list.push_back(param.to_bbcode())
 		return ", ".join(_list)
 
@@ -156,10 +157,10 @@ class MethodSpecification:
 
 
 	func to_bbcode() -> String:
-		var type_string := "[color=#%s]%s[/color]" % [COLOR_TYPE.to_html(), return_type]
+		var typed_string := "[color=#%s]%s[/color]" % [COLOR_TYPE.to_html(), return_type]
 		var name_string := "[b][color=#%s]%s[/color][/b]" % [COLOR_MEMBER.to_html(), name]
 
-		return "%s %s(%s)" % [type_string, name_string, parameters.to_bbcode()]
+		return "%s %s(%s)" % [typed_string, name_string, parameters.to_bbcode()]
 
 
 class PropertySpecification:
@@ -176,15 +177,15 @@ class PropertySpecification:
 
 
 	func to_bbcode() -> String:
-		var type_string := "[color=#%s]%s[/color]" % [COLOR_TYPE.to_html(), type]
+		var typed_string := "[color=#%s]%s[/color]" % [COLOR_TYPE.to_html(), type]
 		var name_string := "[b][color=#%s]%s[/color][/b]" % [COLOR_MEMBER.to_html(), name]
 		if default_value:
 			var value_string := (
 				"[color=#%s][default: %s][/color]"
 				% [COLOR_VALUE.to_html(), default_value]
 			)
-			return "%s %s %s" % [type_string, name_string, value_string]
-		return "%s %s" % [type_string, name_string]
+			return "%s %s %s" % [typed_string, name_string, value_string]
+		return "%s %s" % [typed_string, name_string]
 
 
 class QueryResult:

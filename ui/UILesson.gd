@@ -20,7 +20,6 @@ const AUTOSCROLL_DURATION := 0.24
 
 @export var test_lesson: String
 @export var _scroll_container: ScrollContainer
-@export var _scroll_content: Control
 @export var _title: Label
 @export var _content_blocks: VBoxContainer
 @export var _content_container: VBoxContainer
@@ -41,7 +40,6 @@ var _quizz_count := 0
 var _integration_test_mode := false
 
 var _base_text_font_size := preload("res://ui/theme/fonts/font_text.tres").base_font.msdf_size
-var _scene_tween: Tween
 
 @onready var _start_content_width := _content_container.size.x
 
@@ -58,9 +56,9 @@ func _ready() -> void:
 
 	if test_lesson and get_parent() == get_tree().root:
 		var _lesson_node := NavigationManager.get_navigation_resource(test_lesson)
-		var _course_index: CourseIndex = load(DEFAULT_COURSE_INDEX).new()
-		setup(_lesson_node, _course_index)
-		for child in _content_blocks.get_children():
+		var test_course_index: CourseIndex = (load(DEFAULT_COURSE_INDEX) as GDScript).new()
+		setup(_lesson_node, test_course_index)
+		for child: Control in _content_blocks.get_children():
 			child.show()
 		_practices_container.show()
 
@@ -123,11 +121,13 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 					instance.quiz_skipped.connect(_reveal_up_to_next_quiz)
 
 				BBCodeParserData.Tag.CODEBLOCK:
-					var instance: UIContentBlock = ContentBlockScene.instantiate()
-					instance.name = BBCodeUtils.get_codeblock_id(child_node)
-					instance.text = BBCodeUtils.get_codeblock_code(child_node)
-					_content_blocks.add_child(instance)
-					instance.hide()
+					pass
+					# TODO: Implement BBCode [codeblock] tag and replace visuals or remove tag
+					#var instance: UIContentBlock = ContentBlockScene.instantiate()
+					#instance.name = BBCodeUtils.get_codeblock_id(child_node)
+					#instance.text = BBCodeUtils.get_codeblock_code(child_node)
+					#_content_blocks.add_child(instance)
+					#instance.hide()
 				BBCodeParserData.Tag.PRACTICE, BBCodeParserData.Tag.TITLE, BBCodeParserData.Tag.SEPARATOR:
 					# handled separately or used to enhance other tags. no processing
 					pass
@@ -216,10 +216,10 @@ func _reveal_up_to_next_quiz() -> void:
 	while _visible_index < child_count - 1:
 		_visible_index += 1
 
-		var child = _content_blocks.get_child(_visible_index)
+		var child: Control = _content_blocks.get_child(_visible_index)
 		child.show()
 
-		if child is UIBaseQuiz and not child.completed_before:
+		if child is UIBaseQuiz and not (child as UIBaseQuiz).completed_before:
 			break
 
 	if _visible_index >= child_count - 1 and _quizzes_done >= _quizz_count:

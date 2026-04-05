@@ -63,7 +63,7 @@ static func get_visual_path(visual: BBCodeParser.ParseNode) -> String:
 	return visual.attributes.get("path", "")
 
 
-static func get_block_type(block) -> int:
+static func get_block_type(block: Variant) -> int:
 	return BBCodeParserData.Tag.STRING if block is String else block.tag if block is BBCodeParser.ParseNode else BBCodeParserData.Tag.UNKNOWN
 
 

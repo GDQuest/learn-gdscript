@@ -66,7 +66,7 @@ func fade_in(game_container: Control) -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_layout_container.set_anchors_and_offsets_preset(Control.PRESET_CENTER, Control.PRESET_MODE_KEEP_SIZE)
 	# Set the texture for the output replication.
-	_game_texture.texture = game_container.find_child("GameView").get_viewport_override().get_texture()
+	_game_texture.texture = (game_container.find_child("GameView") as GameView).get_viewport_override().get_texture()
 
 	# Fade in the background.
 	_scene_tween = create_tween().set_parallel()
@@ -103,7 +103,7 @@ func fade_out() -> void:
 
 
 func _animate_margin(control: Control, margin_name: String, to_value: float, duration: float, delay: float = 0.0) -> void:
-	_scene_tween.tween_property(control, margin_name, to_value, duration).from(control.get(margin_name)).set_ease(Tween.EASE_OUT)
+	_scene_tween.tween_property(control, margin_name, to_value, duration).from(control.get(margin_name)).set_ease(Tween.EASE_OUT).set_delay(delay)
 
 
 func _on_fade_out_completed() -> void:

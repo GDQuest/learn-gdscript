@@ -59,7 +59,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	var distance_to_target = _current_scroll.distance_to(_target_position)
+	var distance_to_target := _current_scroll.distance_to(_target_position)
 	if distance_to_target <= ARRIVE_THRESHOLD * scroll_speed / SPEED_BASE:
 		set_process(false)
 		return
@@ -80,7 +80,7 @@ func _process(delta: float) -> void:
 		_velocity = _velocity.normalized() * distance_to_target / delta
 
 	_current_scroll += _velocity * delta
-	scroll_vertical = _current_scroll.y
+	scroll_vertical = int(_current_scroll.y)
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -103,11 +103,12 @@ func _gui_input(event: InputEvent) -> void:
 		scroll_to_bottom()
 		accept_event()
 	elif can_mouse_scroll:
-		if event.is_action("scroll_up") and event.pressed:
-			scroll_up(event.factor)
+		var mouse_button_event := event as InputEventMouseButton
+		if mouse_button_event and mouse_button_event.is_action("scroll_up") and mouse_button_event.pressed:
+			scroll_up(mouse_button_event.factor)
 			accept_event()
-		elif event.is_action("scroll_down") and event.pressed:
-			scroll_down(event.factor)
+		elif mouse_button_event and mouse_button_event.is_action("scroll_down") and mouse_button_event.pressed:
+			scroll_down(mouse_button_event.factor)
 			accept_event()
 
 

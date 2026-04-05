@@ -26,7 +26,7 @@ func add_item(lesson_index: int, lesson_title: String, completion: int) -> void:
 
 func clear() -> void:
 	for child_node in _lesson_items.get_children():
-		var item_node = child_node as CourseLessonItem
+		var item_node := child_node as CourseLessonItem
 		if item_node:
 			item_node.selected.disconnect(_on_item_selected)
 

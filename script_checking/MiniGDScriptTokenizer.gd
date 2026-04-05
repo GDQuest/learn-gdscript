@@ -90,7 +90,8 @@ func tokenize():
 
 
 func _process_function_declaration(token: Dictionary):
-	var parameters_list: PackedStringArray = token.get("args", "").split(",")
+	var token_args: String = token.get("args", "")
+	var parameters_list: PackedStringArray = token_args.split(",")
 	var parameters := []
 	for tuple_str in parameters_list:
 		var tuple: PackedStringArray = tuple_str.split(":")
@@ -172,7 +173,7 @@ func _test_regex(type: String, regex: RegEx, line: String) -> bool:
 
 
 func _tokenize_line(line: String) -> bool:
-	for token_type in _token_order:
+	for token_type: String in _token_order:
 		var regex := _available_tokens[token_type] as RegEx
 		var found_token := _test_regex(token_type, regex, line)
 		if found_token:
@@ -201,12 +202,13 @@ func has_infinite_while_loop() -> bool:
 
 # Recursively checks tokens for infinite while loops
 func _check_infinite_while_in_tokens(token_list: Array) -> bool:
-	for token in token_list:
+	for token: Dictionary in token_list:
 		if token.type == TOKEN_WHILE_LOOP:
 			if _is_while_loop_infinite(token):
 				return true
 		elif token.has("body"):
-			if _check_infinite_while_in_tokens(token.body):
+			var token_body: Array = token.body
+			if _check_infinite_while_in_tokens(token_body):
 				return true
 	return false
 
@@ -214,7 +216,8 @@ func _check_infinite_while_in_tokens(token_list: Array) -> bool:
 func _is_while_loop_infinite(while_token: Dictionary) -> bool:
 	var condition: String = while_token.get("condition", "")
 
-	if _has_break_statement(while_token.body):
+	var token_body: Array = while_token.body
+	if _has_break_statement(token_body):
 		return false
 
 	var stripped := condition.strip_edges()
@@ -226,11 +229,12 @@ func _is_while_loop_infinite(while_token: Dictionary) -> bool:
 
 # Checks if a token body contains a break statement
 func _has_break_statement(body: Array) -> bool:
-	for token in body:
+	for token: Dictionary in body:
 		if token.type == TOKEN_BREAK:
 			return true
 		if token.has("body"):
-			if _has_break_statement(token.body):
+			var token_body: Array = token.body
+			if _has_break_statement(token_body):
 				return true
 	return false
 
@@ -247,4 +251,4 @@ func _get_indentation_level(line: String) -> int:
 			indent += 1
 		else:
 			break
-	return indent / 4
+	return floori(indent / 4.0)

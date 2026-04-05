@@ -5,6 +5,7 @@
 # NavigationManager.gd.
 #
 # Defaults to always accept being unlaoded unless overriden.
+@abstract
 class_name UINavigatablePage
 extends Control
 
@@ -25,6 +26,10 @@ func set_is_current_screen(value: bool) -> void:
 		NavigationManager.last_screen_unload_requested.connect(_on_current_screen_unload_requested)
 	else:
 		NavigationManager.last_screen_unload_requested.disconnect(_on_current_screen_unload_requested)
+
+
+func get_screen_resource() -> BBCodeParser.ParseNode:
+	return null
 
 
 func _accept_unload() -> void:

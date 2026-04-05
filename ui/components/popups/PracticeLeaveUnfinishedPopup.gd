@@ -12,7 +12,6 @@ signal denied
 	set = set_min_size
 
 @onready var _root_container := $PanelContainer as Container
-@onready var _top_bar := $PanelContainer/Column/ProgressBar as ProgressBar
 @onready var _title_label := $PanelContainer/Column/Margin/Column/Title as Label
 @onready var _message_content := $PanelContainer/Column/Margin/Column/Message as RichTextLabel
 

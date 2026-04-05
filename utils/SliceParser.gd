@@ -13,7 +13,7 @@ const EXPORT_REGEX_PATTERN := "^\\s*#\\s*(/)?EXPORT(?:\\s+(\\w+))?\\s*$"
 # slice_name: Name of the slice to extract (empty string = first EXPORT found)
 # Dictionary with: {lines_before, lines_after, lines_editable, leading_spaces, start, end}
 static func parse_slice(script_source: String, slice_name: String = "") -> Dictionary:
-	var lines := Array(script_source.split("\n"))
+	var lines: Array[String] = Array(script_source.split("\n"))
 	var export_regex := RegEx.new()
 	export_regex.compile(EXPORT_REGEX_PATTERN)
 
@@ -21,7 +21,6 @@ static func parse_slice(script_source: String, slice_name: String = "") -> Dicti
 	var export_start_line := -1
 	var export_end_line := -1
 	var found_closing := false
-	var found_any_slice := false
 
 	# Find the EXPORT comments
 	for i in range(lines.size()):
@@ -44,10 +43,8 @@ static func parse_slice(script_source: String, slice_name: String = "") -> Dicti
 			if target_slice_name.is_empty():
 				target_slice_name = matched_name if matched_name else ""
 				export_start_line = i
-				found_any_slice = true
 			elif matched_name == target_slice_name:
 				export_start_line = i
-				found_any_slice = true
 
 	if export_start_line < 0:
 		push_error("EXPORT slice not found: " + (target_slice_name if not target_slice_name.is_empty() else "(any)"))
@@ -66,7 +63,7 @@ static func parse_slice(script_source: String, slice_name: String = "") -> Dicti
 	var lines_editable := lines.slice(editable_start, export_end_line)
 	var lines_after := lines.slice(export_end_line + 1, lines.size())
 
-	var leading_spaces := 0
+	var leading_spaces := 0.0
 	if lines_editable.size() > 0:
 		var first_line: String = lines_editable[0]
 		for i in range(first_line.length()):
@@ -122,7 +119,7 @@ static func find_all_slice_names(script_source: String) -> Array:
 	export_regex.compile(EXPORT_REGEX_PATTERN)
 
 	var slice_names := []
-	for line in lines:
+	for line: String in lines:
 		var match_result := export_regex.search(line)
 		if match_result and match_result.get_string(1) != "/":
 			var name := match_result.get_string(2)

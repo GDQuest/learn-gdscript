@@ -8,6 +8,7 @@ signal animate_arrow_requested(chars1, chars2)
 
 const OutputConsoleErrorMessage := preload("./OutputConsoleErrorMessage.gd")
 const OutputConsoleErrorMessageScene := preload("./OutputConsoleErrorMessage.tscn")
+const OutputConsolePrintMessage := preload("./OutputConsolePrintMessage.gd")
 const OutputConsolePrintMessageScene := preload("./OutputConsolePrintMessage.tscn")
 
 var _slice_properties: ScriptSlice = null
@@ -62,9 +63,10 @@ func clear_messages() -> void:
 
 	for message_node in _message_list.get_children():
 		if message_node is OutputConsoleErrorMessage:
-			message_node.external_explain_requested.disconnect(_on_external_requested)
-			message_node.show_code_requested.disconnect(_on_code_requested)
-			message_node.explain_error_requested.disconnect(_on_explain_requested)
+			var console_message_node := message_node as OutputConsoleErrorMessage
+			console_message_node.external_explain_requested.disconnect(_on_external_requested)
+			console_message_node.show_code_requested.disconnect(_on_code_requested)
+			console_message_node.explain_error_requested.disconnect(_on_explain_requested)
 
 		_message_list.remove_child(message_node)
 		message_node.queue_free()
@@ -76,7 +78,7 @@ func print_output(values: Array) -> void:
 	if not is_inside_tree():
 		return
 
-	var message_node = OutputConsolePrintMessageScene.instantiate()
+	var message_node: OutputConsolePrintMessage = OutputConsolePrintMessageScene.instantiate()
 	message_node.values = values
 	_message_list.add_child(message_node)
 

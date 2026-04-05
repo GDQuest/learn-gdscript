@@ -19,7 +19,7 @@ func _init() -> void:
 func setup() -> void:
 	_glossary = _parse_glossary_file(glossary_file)
 	var patterns := PackedStringArray()
-	for key in _glossary:
+	for key: String in _glossary:
 		patterns.append(key)
 	var terms_pattern := "(?:\\[ignore\\]\\w+)(*SKIP)(*F)|(%s)" % "|".join(patterns)
 
@@ -73,6 +73,6 @@ class Entry:
 
 
 	func _init(csv_line: Array) -> void:
-		term = tr(csv_line[0]).capitalize()
-		plural_form = tr(csv_line[1])
-		explanation = TextUtils.tr_paragraph(csv_line[2])
+		term = tr(csv_line[0] as String).capitalize()
+		plural_form = tr(csv_line[1] as String)
+		explanation = TextUtils.tr_paragraph(csv_line[2] as String)

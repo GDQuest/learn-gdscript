@@ -10,7 +10,6 @@ const SettingsPopup := preload("./components/popups/SettingsPopup.gd")
 @export var _pages: Control
 @export var _loading_screen: LoadingScreen
 @export var _welcome_screen: WelcomeScreen
-@export var _settings_screen: Control
 @export var _course_screen: Control
 @export var _settings_popup: SettingsPopup
 @export var _report_form_popup: ReportFormPopup
@@ -103,10 +102,10 @@ func _on_course_requested(force_outliner: bool = false) -> void:
 	# is faster. Consider using ResourceLoader.load_interactive() for progress updates in the future.
 	var course_navigator_scene := load("res://ui/UINavigator.tscn") as PackedScene
 	_course_navigator = course_navigator_scene.instantiate()
-	_course_navigator.course_index = load(default_course_path).new() as CourseIndex
+	_course_navigator.course_index = (load(default_course_path) as GDScript).new() as CourseIndex
 
 	var user_profile = UserProfiles.get_profile()
-	var lesson_id = user_profile.get_last_started_lesson(_course_navigator.course_index.get_course_id())
+	var lesson_id := user_profile.get_last_started_lesson(_course_navigator.course_index.get_course_id())
 	if not lesson_id.is_empty():
 		_course_navigator.set_start_from_lesson(lesson_id)
 
@@ -131,7 +130,7 @@ func _on_loading_finished() -> void:
 func _show_end_screen(_course_index: CourseIndex) -> void:
 	var show_sponsored_screen := UserProfiles.get_profile().is_sponsored_profile
 
-	for page in _pages.get_children():
+	for page: Control in _pages.get_children():
 		page.hide()
 
 	if show_sponsored_screen:
@@ -162,4 +161,4 @@ func _update_framerate(new_framerate: int) -> void:
 	if new_framerate == 0:
 		new_framerate = 1000
 	# TODO: Consider using Engine.max_fps instead
-	OS.low_processor_usage_mode_sleep_usec = 1_000_000 / new_framerate
+	OS.low_processor_usage_mode_sleep_usec = floori(1_000_000.0 / new_framerate)

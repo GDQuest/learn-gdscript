@@ -67,13 +67,11 @@ var _current_scene: Node
 # Used to automate resetting transform and visibility to default in case the
 # student calls hide(), changes transform, etc. in their practice code.
 var _current_scene_reset_values := {
-	visible = null,
-	transform = null,
+	&"visible": null,
+	&"transform": null,
 }
 
 var _scene_tween: Tween
-
-@onready var _documentation_panel := find_child("DocumentationPanel") as RichTextLabel
 
 
 func _init():
@@ -118,7 +116,7 @@ func _ready() -> void:
 	_solution_panel.offset_left = _output_anchors.size.x
 
 	if lesson_test_practice and get_parent() == get_tree().root:
-		var course_index: CourseIndex = load(DEFAULT_COURSE_INDEX).new()
+		var course_index: CourseIndex = (load(DEFAULT_COURSE_INDEX) as GDScript).new()
 		var lesson := NavigationManager.get_navigation_resource(lesson_test_practice)
 		var practice := BBCodeUtils.get_lesson_practice(lesson, test_practice)
 		setup(practice, lesson, course_index)
@@ -290,7 +288,6 @@ func _validate_and_run_student_code() -> void:
 	_script_slice.current_text = _code_editor.get_text()
 	var script_text := _script_slice.get_current_full_text()
 	var script_file_name := _script_slice.get_script_file_name()
-	var script_file_path := _script_slice.get_script_file_path().lstrip("res://")
 
 	# Mixed indentation is an error we cannot catch from the GDScript parser in
 	# some situations, so we manually look for it to help students understand the error.
@@ -369,7 +366,7 @@ func _validate_and_run_student_code() -> void:
 
 		var is_missing_parser_error: bool = (
 			errors.size() == 1
-			and OfflineScriptVerifier.check_error_is_missing_parser_error(errors[0])
+			and OfflineScriptVerifier.check_error_is_missing_parser_error(errors[0] as ScriptError)
 		)
 
 		if not is_missing_parser_error:
@@ -394,7 +391,7 @@ func _validate_and_run_student_code() -> void:
 					indent += 1
 
 				var tabs := "\t".repeat(indent)
-				var guard_counter_varname = "__guard_counter" + str(guard_counter)
+				var guard_counter_varname := "__guard_counter" + str(guard_counter)
 				guard_counter += 1
 				modified_code.append(tabs + "var " + guard_counter_varname + " := 0")
 				modified_code.append(line)
@@ -417,7 +414,7 @@ func _validate_and_run_student_code() -> void:
 		_code_editor.unlock_editor()
 		return
 
-	var script = GDScript.new()
+	var script := GDScript.new()
 	script.source_code = script_text
 
 	var script_is_valid = script.reload()
@@ -487,7 +484,7 @@ func _reset_practice() -> void:
 
 	if _current_scene.has_method("reset"):
 		_current_scene.call("reset")
-		for property in _current_scene_reset_values:
+		for property: StringName in _current_scene_reset_values:
 			_current_scene.set(property, _current_scene_reset_values[property])
 
 
@@ -657,15 +654,20 @@ func _on_current_screen_unload_requested() -> void:
 # Updates all nodes with the given script. If a node path isn't valid, the node
 # will be silently skipped.
 func _update_nodes(script: GDScript, node_paths: Array) -> void:
-	for node_path in node_paths:
-		if node_path is NodePath or node_path is String:
-			var node = (
-				_current_scene.get_node_or_null(node_path)
-				if not node_path.is_empty()
-				else _current_scene
-			)
-			if node:
-				try_validate_and_replace_script(node, script)
+	for path in node_paths:
+		var node_path: NodePath
+		if path is NodePath:
+			node_path = path
+		elif path is String:
+			node_path = NodePath(path as String)
+		
+		var node = (
+			_current_scene.get_node_or_null(node_path)
+			if not node_path.is_empty()
+			else _current_scene
+		)
+		if node:
+			try_validate_and_replace_script(node as Node, script)
 
 
 # If a script is valid, sets it in the node and optionally calls _run()
@@ -679,7 +681,7 @@ static func try_validate_and_replace_script(node: Node, script: GDScript) -> voi
 			return
 
 	# save any @exported variables
-	var properties = _get_properties(node)
+	var properties := _get_properties(node)
 
 	var parent = node.get_parent()
 	parent.remove_child(node)
@@ -704,13 +706,13 @@ static func _get_properties(node: Node) -> Array[Dictionary]:
 		)
 	)
 	for property in properties:
-		property.value = node.get(property.name)
+		property.value = node.get(property.name as StringName)
 	return properties
 
 
 static func _restore_properties(node: Node, properties: Array[Dictionary]) -> void:
 	for property in properties:
-		node.set(property.name, property.value)
+		node.set(property.name as StringName, property.value)
 
 
 ###############################################################################
@@ -735,6 +737,7 @@ func _on_js_error_feedback(args):
 func _on_init_set_javascript() -> void:
 	if OS.has_feature("web"):
 		var GDQUEST = JavaScriptBridge.get_interface("GDQUEST")
+		@warning_ignore("unsafe_method_access")
 		GDQUEST.events.onError.connect(_on_js_error_feedback_ref)
 
 

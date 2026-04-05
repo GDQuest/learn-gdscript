@@ -40,7 +40,7 @@ func _get_answers() -> Array:
 		return answers
 
 	var is_multiple_choice := _quiz_data.multiple
-	for button in _choices.get_children():
+	for button: QuizAnswerButton in _choices.get_children():
 		var answer = button.get_answer()
 		if answer:
 			answers.append(answer)

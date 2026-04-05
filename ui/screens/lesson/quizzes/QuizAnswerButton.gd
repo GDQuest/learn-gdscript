@@ -7,7 +7,6 @@ const OPTION_SELECTED_FONT := preload("res://ui/theme/fonts/font_text_bold.tres"
 
 var _button_text := ""
 
-@export var _margin_container: MarginContainer
 @export var _label: Label
 @export var _button: CheckBox
 

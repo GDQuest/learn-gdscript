@@ -59,7 +59,7 @@ func test() -> void:
 
 
 static func make_error_no_parser_wrapper_class() -> ScriptError:
-	var err = ScriptVerifier.ScriptError.new()
+	var err = ScriptError.new()
 	err.message = "No Script Error Checker class in exported app. There will be no error checking possible"
 	err.severity = 1
 	err.code = ScriptVerifier.GDQuestErrorCode.NO_PARSER_CLASS
@@ -92,7 +92,7 @@ static func make_error_from_data(
 		},
 	}
 
-	var error = ScriptVerifier.ScriptError.new()
+	var error = ScriptError.new()
 	error.from_JSON(error_block)
 	return error
 

@@ -59,10 +59,10 @@ func _init_languages() -> void:
 	_language_value.clear()
 
 	var available_languages := TranslationManager.get_available_languages()
-	for language_data in available_languages:
+	for language_data: Dictionary in available_languages:
 		var item_index := _language_value.get_item_count()
-
-		_language_value.add_item(language_data.name)
+		var language_name: String = language_data.name
+		_language_value.add_item(language_name)
 		_language_value.set_item_metadata(item_index, language_data.code)
 
 
@@ -76,7 +76,7 @@ func _init_values() -> void:
 			break
 
 	_font_size_value.value = clamp(
-		int(current_profile.font_size_scale),
+		current_profile.font_size_scale,
 		_font_size_value.min_value,
 		_font_size_value.max_value,
 	)
@@ -103,13 +103,13 @@ func _on_apply_settings() -> void:
 		ThemeManager.set_lower_contrast(_lower_contrast.button_pressed)
 
 	current_profile.set_scroll_sensitivity(_scroll_sensitivity_slider.value)
-	current_profile.set_framerate_limit(FRAMERATE_MAP[_framerate_option.selected])
+	current_profile.set_framerate_limit(FRAMERATE_MAP[_framerate_option.selected] as int)
 
 	var language_code := str(_language_value.get_item_metadata(_language_value.selected))
 	if language_code != TranslationManager.current_language:
 		TranslationManager.set_language(language_code)
 
-	var current_font = _font_size_sample.get_theme_font("font")
+	var current_font := _font_size_sample.get_theme_font("font") as FontVariation
 	if current_profile.dyslexia_font:
 		current_font.base_font = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
 	_font_size_sample.add_theme_font_override("font", current_font)
@@ -117,7 +117,7 @@ func _on_apply_settings() -> void:
 
 func _on_font_size_changed(value: int) -> void:
 	var current_profile = UserProfiles.get_profile()
-	var font_override = _sample_default_font.duplicate() as FontVariation
+	var font_override := _sample_default_font.duplicate() as FontVariation
 	var font_size := ThemeManager.get_default_font_size()
 	if current_profile.dyslexia_font:
 		font_override.base_font = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")

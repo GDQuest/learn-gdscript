@@ -44,8 +44,8 @@ var _remove_last_character := false
 # brackets.
 var _last_typed_character := ""
 var _last_selected_text := ""
-var _last_selection_start := Vector2.ZERO
-var _last_selection_end := Vector2.ZERO
+var _last_selection_start := Vector2i.ZERO
+var _last_selection_end := Vector2i.ZERO
 
 
 func _ready() -> void:

@@ -16,7 +16,7 @@ func _init() -> void:
 func _gui_input(event: InputEvent) -> void:
 	var mm = event as InputEventMouseMotion
 	if mm:
-		var point = get_local_mouse_position()
+		var point := get_local_mouse_position()
 		for overlay in get_children():
 			var error_overlay = overlay as ErrorOverlay
 			if is_instance_valid(error_overlay) and error_overlay.try_consume_mouse(point):
@@ -44,11 +44,11 @@ func update_overlays() -> void:
 		return
 
 	for overlay in get_children():
-		var error_overlay = overlay as ErrorOverlay
+		var error_overlay := overlay as ErrorOverlay
 		if is_instance_valid(error_overlay):
 			error_overlay.regions = _get_error_range_regions(error_overlay.error_range, text_edit)
 
-		var highlight_overlay = overlay as HighlightOverlay
+		var highlight_overlay := overlay as HighlightOverlay
 		if is_instance_valid(highlight_overlay):
 			highlight_overlay.regions = _get_line_regions(highlight_overlay.line_index, text_edit)
 
@@ -69,9 +69,9 @@ func add_error(error: ScriptError) -> ErrorOverlay:
 
 func _get_error_range_regions(error_range: ErrorRange, text_edit: TextEdit) -> Array:
 	var start_line := error_range.start.line - lines_offset
-	var end_line = error_range.end.line - lines_offset
-	var start_char = error_range.start.character - character_offset
-	var end_char = error_range.end.character - character_offset
+	var end_line := error_range.end.line - lines_offset
+	var start_char := error_range.start.character - character_offset
+	var end_char := error_range.end.character - character_offset
 
 	return _get_text_range_regions(start_line, start_char, end_line, end_char, text_edit)
 
@@ -88,8 +88,8 @@ func add_line_highlight(line_index: int) -> void:
 
 
 func _get_line_regions(line_index: int, text_edit: TextEdit) -> Array:
-	var line = text_edit.get_line(line_index)
-	var end_character = line.length() - 1
+	var line := text_edit.get_line(line_index)
+	var end_character := line.length() - 1
 
 	return _get_text_range_regions(line_index, 0, line_index, end_character, text_edit)
 
@@ -106,13 +106,13 @@ func _get_text_range_regions(
 
 	# Iterate through the lines of the error range and find the regions for each character
 	# span in the line, accounting for line wrapping.
-	var line_index = start_line
+	var line_index := start_line
 	while line_index <= end_line:
 		if line_index < 0 or line_index >= line_count:
 			line_index += 1
 			continue
 
-		var line = text_edit.get_line(line_index)
+		var line := text_edit.get_line(line_index)
 		var region := Rect2i(-1, -1, 0, 0)
 
 		# Starting point of the first line is as reported by the error. For the following
@@ -136,7 +136,7 @@ func _get_text_range_regions(
 		# that happens.
 		var char_index := first_char
 		while char_index <= last_char:
-			var char_rect = text_edit.get_rect_at_line_column(line_index, char_index)
+			var char_rect := text_edit.get_rect_at_line_column(line_index, char_index)
 			if char_rect.position.x == -1 or char_rect.position.y == -1:
 				char_index += 1
 				continue
@@ -201,7 +201,7 @@ class ErrorOverlay:
 	func try_consume_mouse(point: Vector2) -> bool:
 		var region_has_point := -1
 		var i := 0
-		for region_rect in regions:
+		for region_rect: Rect2 in regions:
 			if region_rect.has_point(point):
 				region_has_point = i
 				break
@@ -227,7 +227,7 @@ class ErrorOverlay:
 
 
 	func set_regions(error_regions: Array) -> void:
-		for underline in _lines:
+		for underline: Node in _lines:
 			underline = underline as ErrorUnderline
 			if not underline or not is_instance_valid(underline):
 				continue
@@ -237,7 +237,7 @@ class ErrorOverlay:
 		_lines = []
 		regions = []
 
-		for error_region in error_regions:
+		for error_region: Rect2 in error_regions:
 			var underline := ErrorUnderline.new()
 
 			match severity:
@@ -331,7 +331,7 @@ class ErrorUnderline:
 				for i in line_length / (DASHED_STEP_WIDTH + DASHED_GAP):
 					_points.append(Vector2((DASHED_STEP_WIDTH + DASHED_GAP) * i, 0.0))
 
-					var end_x = (DASHED_STEP_WIDTH + DASHED_GAP) * (i + 1) - DASHED_GAP
+					var end_x := (DASHED_STEP_WIDTH + DASHED_GAP) * (i + 1) - DASHED_GAP
 					if end_x > line_length:
 						end_x = line_length
 					_points.append(Vector2(end_x, 0.0))
@@ -388,7 +388,7 @@ class HighlightOverlay:
 
 
 	func _draw() -> void:
-		for region in regions:
+		for region: Rect2 in regions:
 			draw_rect(region, Color(1, 1, 1, _current_alpha), true)
 
 

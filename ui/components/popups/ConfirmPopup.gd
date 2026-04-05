@@ -98,7 +98,7 @@ func _update_top_bar() -> void:
 	var bar_style := _top_bar.get_theme_stylebox("fg").duplicate()
 	if bar_style is StyleBoxFlat:
 		(bar_style as StyleBoxFlat).bg_color = highlight_color
-	_top_bar.add_theme_stylebox_override("fg", bar_style)
+	_top_bar.add_theme_stylebox_override("fg", bar_style as StyleBox)
 
 	_confirm_button.add_theme_stylebox_override("focus", button_focus_stylebox)
 	_confirm_button.add_theme_stylebox_override("hover", button_stylebox)

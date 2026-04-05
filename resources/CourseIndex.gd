@@ -29,5 +29,5 @@ func _get_title() -> String:
 	return "Empty Course"
 
 
-func _get_lesson_path(i: int) -> String:
+func _get_lesson_path(_i: int) -> String:
 	return ""

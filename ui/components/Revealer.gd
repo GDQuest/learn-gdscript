@@ -205,13 +205,13 @@ func _resort() -> void:
 		if control_node == _toggle_bar:
 			continue
 
-		var position := Vector2.ZERO
-		var size := control_node.custom_minimum_size
-		size.x = base_width
+		var revealer_position := Vector2.ZERO
+		var revealer_size := control_node.custom_minimum_size
+		revealer_size.x = base_width
 
 		if content_panel:
-			position.x += content_panel.get_margin(SIDE_LEFT)
-			size.x -= content_panel.get_margin(SIDE_LEFT) + content_panel.get_margin(SIDE_RIGHT)
+			revealer_position.x += content_panel.get_margin(SIDE_LEFT)
+			revealer_size.x -= content_panel.get_margin(SIDE_LEFT) + content_panel.get_margin(SIDE_RIGHT)
 
 		if first:
 			first = false
@@ -219,9 +219,9 @@ func _resort() -> void:
 				content_offset += int(content_panel.get_margin(SIDE_TOP))
 		else:
 			content_offset += content_separation
-		position.y = content_offset
+		revealer_position.y = content_offset
 
-		fit_child_in_rect(control_node, Rect2(position, size))
+		fit_child_in_rect(control_node, Rect2(revealer_position, revealer_size))
 		content_offset += int(control_node.size.y)
 
 
@@ -334,7 +334,7 @@ func get_contents() -> Array:
 	return _content_children
 
 
-func _toggle_content(expanded: bool, immediate: bool = false) -> void:
+func _toggle_content(as_expanded: bool, immediate: bool = false) -> void:
 	# Just change immediately.
 	if immediate:
 		for child_node in get_children():
@@ -342,10 +342,10 @@ func _toggle_content(expanded: bool, immediate: bool = false) -> void:
 			if not control_node or control_node == _toggle_bar:
 				continue
 
-			control_node.visible = expanded
+			control_node.visible = as_expanded
 
-		_toggle_icon.rotation = 90.0 * int(expanded)
-		_percent_revealed = 1.0 * int(expanded)
+		_toggle_icon.rotation = 90.0 * int(as_expanded)
+		_percent_revealed = 1.0 * int(as_expanded)
 		return
 
 	# Animate the change smoothly.
@@ -362,9 +362,9 @@ func _toggle_content(expanded: bool, immediate: bool = false) -> void:
 		_scene_tween.kill()
 	_scene_tween = create_tween().set_parallel()
 	_scene_tween.finished.connect(_on_tween_completed)
-	_scene_tween.tween_property(_toggle_icon, "rotation_degrees", 90.0 * int(expanded), ANIMATION_ICON_DURATION).from(_toggle_icon.rotation).set_trans(Tween.TRANS_QUAD)
+	_scene_tween.tween_property(_toggle_icon, "rotation_degrees", 90.0 * int(as_expanded), ANIMATION_ICON_DURATION).from(_toggle_icon.rotation).set_trans(Tween.TRANS_QUAD)
 
-	var final_value := 1.0 * int(expanded)
+	var final_value := 1.0 * int(as_expanded)
 	_scene_tween.tween_property(self, "_percent_revealed", final_value, ANIMATION_REVEAL_DURATION).from(1.0 - final_value).set_trans(Tween.TRANS_QUAD)
 	_scene_tween.tween_method(_on_tween_step, 0, 1.0, ANIMATION_REVEAL_DURATION)
 

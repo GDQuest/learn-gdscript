@@ -41,13 +41,13 @@ func _notification(what: int) -> void:
 		_update_explanation()
 
 
-func show_message(position: Vector2, code: int, message: String, message_source: Node) -> void:
+func show_message(new_position: Vector2, code: int, message: String, message_source: Node) -> void:
 	_current_message_source = message_source
 
 	set_error_code(code)
 	set_error_message(message)
 
-	global_position = position
+	global_position = new_position
 	show()
 
 

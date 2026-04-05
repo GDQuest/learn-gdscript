@@ -32,8 +32,6 @@ var use_transitions := true
 var load_into_outliner := false
 
 var _screens_stack := []
-# Maps url strings to resource paths.
-var _matches := { }
 
 var _lesson_index := 0
 var _lesson_count: int = 0
@@ -81,7 +79,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Workaround for a bug where pressing Left triggers ui_back in a popup even
 	# though the event is set to Ctrl+Alt+Left.
 	# warning-ignore:unsafe_property_access
-	if event.is_action_released("ui_back") and event.alt:
+	if event.is_action_released("ui_back") and (event as InputEventWithModifiers).alt_pressed:
 		NavigationManager.navigate_back()
 
 
@@ -115,8 +113,7 @@ func _navigate_back() -> void:
 	var next_screen: UINavigatablePage = _screens_stack.back()
 	_update_back_button(_screens_stack.size() < 2)
 
-	# warning-ignore:unsafe_method_access
-	var target = next_screen.get_screen_resource()
+	var target := next_screen.get_screen_resource()
 	_breadcrumbs.update_breadcrumbs(course_index, target)
 
 	next_screen.set_is_current_screen(true)
@@ -154,16 +151,15 @@ func _navigate_to() -> void:
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
 	var screen: UINavigatablePage
 	if target is BBCodeParser.ParseNode and target.tag == BBCodeParserData.Tag.PRACTICE:
-		var lesson = NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index))
+		var lesson := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index))
 
 		screen = preload("UIPractice.tscn").instantiate()
-		# warning-ignore:unsafe_method_access
-		screen.setup(target, lesson, course_index)
+		(screen as UIPractice).setup(target, lesson, course_index)
 	elif target.tag == BBCodeParserData.Tag.LESSON:
 		var lesson := target as BBCodeParser.ParseNode
 		screen = preload("UILesson.tscn").instantiate()
 		# warning-ignore:unsafe_method_access
-		screen.setup(target, course_index)
+		(screen as UILesson).setup(target, course_index)
 
 		for i in course_index.get_lessons_count():
 			if course_index.get_lesson_path(i) == lesson.bbcode_path:
@@ -192,7 +188,7 @@ func _navigate_to() -> void:
 		await self.transition_completed
 
 	# Connect to RichTextLabel meta links to navigate to different scenes.
-	for node in get_tree().get_nodes_in_group("rich_text_label"):
+	for node: RichTextLabel in get_tree().get_nodes_in_group("rich_text_label"):
 		assert(node is RichTextLabel)
 		NavigationManager.connect_rich_text_node(node)
 
@@ -233,7 +229,7 @@ func _on_practice_next_requested(practice: BBCodeParser.ParseNode) -> void:
 		var user_profile = UserProfiles.get_profile()
 		var lesson_progress = user_profile.get_or_create_lesson(course_index.get_course_id(), lesson_data.bbcode_path)
 		var total_practices := practice_count
-		var completed_practices = lesson_progress.get_completed_practices_count(lesson_data)
+		var completed_practices := lesson_progress.get_completed_practices_count(lesson_data)
 
 		# Show a confirmation popup and optionally tell the user that the lesson is incomplete.
 		_lesson_done_popup.set_incomplete(completed_practices < total_practices)
@@ -365,7 +361,7 @@ func _clear_history_stack() -> void:
 		_screen_container.remove_child(child_node)
 		child_node.queue_free()
 	# Screens may be unloaded, so queue them for deletion from the stack as well.
-	for screen in _screens_stack:
+	for screen: Node in _screens_stack:
 		screen.queue_free()
 	_screens_stack.clear()
 

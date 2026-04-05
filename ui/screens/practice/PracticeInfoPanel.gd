@@ -46,7 +46,7 @@ func display_tests(info: Array) -> void:
 		check.queue_free()
 		check = _checks.get_contents().pop_back()
 
-	for test in info:
+	for test: String in info:
 		var instance: PracticeTestDisplay = TestDisplayScene.instantiate()
 		instance.title = tr(test)
 		_checks.add_child(instance)
@@ -142,7 +142,7 @@ func _update_documentation() -> void:
 		methods_header.text = "[b]" + tr("Method descriptions") + "[/b]"
 		_docs_item_list.add_child(methods_header)
 
-		for doc_spec in _documentation_results.methods:
+		for doc_spec: Documentation.MethodSpecification in _documentation_results.methods:
 			var docs_item := template_label.duplicate() as RichTextLabel
 			docs_item.text = (
 				"• [code]%s[/code]\n  %s"
@@ -158,7 +158,7 @@ func _update_documentation() -> void:
 		properties_header.text += "[b]" + tr("Property descriptions") + "[/b]"
 		_docs_item_list.add_child(properties_header)
 
-		for doc_spec in _documentation_results.properties:
+		for doc_spec: Documentation.PropertySpecification in _documentation_results.properties:
 			var docs_item := template_label.duplicate() as RichTextLabel
 			docs_item.text = (
 				"• [code]%s[/code]\n  %s"

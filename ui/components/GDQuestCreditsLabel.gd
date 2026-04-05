@@ -9,5 +9,6 @@ func _ready():
 
 func _on_meta_clicked(data) -> void:
 	if typeof(data) == TYPE_STRING:
-		if data.begins_with("https://"):
-			OS.shell_open(data)
+		var data_string: String = data
+		if data_string.begins_with("https://"):
+			OS.shell_open(data_string)
