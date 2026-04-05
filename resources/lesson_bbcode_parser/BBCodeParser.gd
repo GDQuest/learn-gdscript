@@ -239,7 +239,7 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 			if accumulated_text.strip_edges() != "":
 				current.children.append(accumulated_text)
 			elif accumulated_text != "":
-				if current.tag == _parser_data.Tag.CODEBLOCK or current.tag == _parser_data.Tag.STARTING_CODE:
+				if current.tag == _parser_data.Tag.STARTING_CODE:
 					current.children.append(accumulated_text)
 			accumulated_text = ""
 

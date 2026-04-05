@@ -1,16 +1,6 @@
 class_name BBCodeUtils
 extends RefCounted
 
-static func get_codeblock_id(codeblock: BBCodeParser.ParseNode) -> String:
-	if codeblock.attributes.get("runnable", false):
-		return "_generated_codeblock_runnable_%s" % codeblock.line_number
-	else:
-		return "_generated_codeblock_static_%s" % codeblock.line_number
-
-
-static func get_codeblock_code(codeblock: BBCodeParser.ParseNode) -> String:
-	return _strip_leading_trailing_newlines(_get_text_content(codeblock, true))
-
 
 static func get_lesson_block_count(lesson: BBCodeParser.ParseNode) -> int:
 	var child_count := 0
@@ -170,8 +160,8 @@ static func get_practice_starting_code(practice: BBCodeParser.ParseNode) -> Stri
 static func get_practice_cursor(practice: BBCodeParser.ParseNode) -> Vector2i:
 	for child: BBCodeParser.ParseNode in practice.children:
 		if child.tag == BBCodeParserData.Tag.CURSOR:
-			var child_attributes_line: int = child.attributes.get("line", 0)
-			var child_attributes_column: int = child.attributes.get("column", 0)
+			var child_attributes_line: int = int(child.attributes.get("line", 0) as String)
+			var child_attributes_column: int = int(child.attributes.get("column", 0) as String)
 			return Vector2i(child_attributes_line, child_attributes_column)
 	return Vector2i.ZERO
 

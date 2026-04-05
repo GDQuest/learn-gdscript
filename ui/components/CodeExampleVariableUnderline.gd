@@ -24,7 +24,7 @@ func _ready() -> void:
 	_mouse_blocker.mouse_exited.connect(_on_blocker_mouse_exited)
 
 
-func setup(runnable_code, scene_instance: Node) -> void:
+func setup(runnable_code: RunnableCodeExample, scene_instance: Node) -> void:
 	runnable_code.code_updated.connect(_update_label_text)
 	_scene_instance = scene_instance
 

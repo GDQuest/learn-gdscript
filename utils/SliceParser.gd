@@ -13,7 +13,7 @@ const EXPORT_REGEX_PATTERN := "^\\s*#\\s*(/)?EXPORT(?:\\s+(\\w+))?\\s*$"
 # slice_name: Name of the slice to extract (empty string = first EXPORT found)
 # Dictionary with: {lines_before, lines_after, lines_editable, leading_spaces, start, end}
 static func parse_slice(script_source: String, slice_name: String = "") -> Dictionary:
-	var lines: Array[String] = Array(script_source.split("\n"))
+	var lines: Array[String] = Array(Array(script_source.split("\n")), TYPE_STRING, "", null)
 	var export_regex := RegEx.new()
 	export_regex.compile(EXPORT_REGEX_PATTERN)
 

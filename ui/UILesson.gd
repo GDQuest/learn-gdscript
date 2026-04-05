@@ -120,14 +120,6 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 					instance.quiz_passed.connect(_reveal_up_to_next_quiz)
 					instance.quiz_skipped.connect(_reveal_up_to_next_quiz)
 
-				BBCodeParserData.Tag.CODEBLOCK:
-					pass
-					# TODO: Implement BBCode [codeblock] tag and replace visuals or remove tag
-					#var instance: UIContentBlock = ContentBlockScene.instantiate()
-					#instance.name = BBCodeUtils.get_codeblock_id(child_node)
-					#instance.text = BBCodeUtils.get_codeblock_code(child_node)
-					#_content_blocks.add_child(instance)
-					#instance.hide()
 				BBCodeParserData.Tag.PRACTICE, BBCodeParserData.Tag.TITLE, BBCodeParserData.Tag.SEPARATOR:
 					# handled separately or used to enhance other tags. no processing
 					pass

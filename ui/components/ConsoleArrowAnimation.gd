@@ -23,7 +23,7 @@ func _ready():
 
 
 func _draw() -> void:
-	for rect in highlight_rects:
+	for rect: Rect2 in highlight_rects:
 		draw_rect(rect, LINE_COLOR, false, LINE_WIDTH) # true) TODOConverter3To4 Antialiasing argument is missing
 
 	if _line_slice_limit > 0:

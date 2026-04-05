@@ -11,7 +11,6 @@ enum Tag {
 	UNKNOWN,
 	LESSON,
 	TITLE,
-	CODEBLOCK,
 	VISUAL,
 	NOTE,
 	QUIZ_CHOICE,
@@ -34,7 +33,6 @@ enum Tag {
 var TAG_DEFINITIONS := {
 	Tag.LESSON: TagDefinition.new("lesson", true, false, [], ["title"], [], []),
 	Tag.TITLE: TagDefinition.new("title", true, false, [Tag.LESSON], [], [], []),
-	Tag.CODEBLOCK: TagDefinition.new("codeblock", true, false, [Tag.LESSON], [], ["runnable"], []),
 	Tag.VISUAL: TagDefinition.new("visual", false, true, [Tag.LESSON], ["path"], [], []),
 	Tag.NOTE: TagDefinition.new("note", true, false, [Tag.LESSON], [], ["title"], []),
 	Tag.QUIZ_CHOICE: TagDefinition.new("quiz_choice", true, false, [Tag.LESSON], ["question"], ["multiple", "shuffle"], [Tag.OPTION, Tag.EXPLANATION]),
@@ -55,7 +53,6 @@ var TAG_DEFINITIONS := {
 
 const CONTENT_PRODUCING_TAGS := [
 	Tag.TITLE,
-	Tag.CODEBLOCK,
 	Tag.VISUAL,
 	Tag.NOTE,
 	Tag.QUIZ_CHOICE,
