@@ -57,8 +57,8 @@ func _ready() -> void:
 
 	CodeEditorEnhancer.enhance(_gdscript_text_edit)
 	CodeEditorEnhancer.prevent_editable(_gdscript_text_edit)
-	if not _gdscript_text_edit.syntax_highlighter.has_color_region("[="):
-		_gdscript_text_edit.syntax_highlighter.add_color_region("[=", "]", CodeEditorEnhancer.COLOR_COMMENTS)
+	if not (_gdscript_text_edit.syntax_highlighter as CodeHighlighter).has_color_region("[="):
+		(_gdscript_text_edit.syntax_highlighter as CodeHighlighter).add_color_region("[=", "]", CodeEditorEnhancer.COLOR_COMMENTS)
 
 	_gdscript_text_edit.visible = not gdscript_code.is_empty()
 
@@ -67,10 +67,10 @@ func _ready() -> void:
 	#
 	# This simplifies the process of creating code examples.
 	if not Engine.is_editor_hint() and not scene and get_child_count() > 1:
-		var last_child = get_child(get_child_count() - 1)
+		var last_child := get_child(get_child_count() - 1)
 		assert(last_child != _gdscript_text_edit and last_child != _frame_container)
 		remove_child(last_child)
-		_set_scene_instance(last_child)
+		_set_scene_instance(last_child as CanvasItem)
 
 	# Godot doesn't allow changing Control nodes z-index in the inspector,
 	# so a workaround with the VisualServer is needed
@@ -107,21 +107,26 @@ func run() -> void:
 	)
 	var is_coroutine := _scene_instance.has_method("run_coroutine")
 	if _scene_instance.has_method("reset") and _debugger and not _current_coroutine:
+		@warning_ignore("unsafe_method_access")
 		_scene_instance.reset()
 
 	if not _current_coroutine:
 		if is_coroutine:
 			_current_coroutine = CoroutineController.new()
 			_current_coroutine.finished.connect(_finish_coroutine)
+			@warning_ignore("unsafe_method_access")
 			_scene_instance.run_coroutine(_current_coroutine)
 		else:
+			@warning_ignore("unsafe_method_access")
 			_scene_instance.run()
 		if _scene_instance.has_method("wrap_inside_frame"):
+			@warning_ignore("unsafe_method_access")
 			_scene_instance.wrap_inside_frame(_frame_container.get_rect())
 		if is_coroutine:
 			while _current_coroutine:
 				_current_coroutine.step_requested.emit()
 			if _scene_instance.has_method("wrap_inside_frame"):
+				@warning_ignore("unsafe_method_access")
 				_scene_instance.wrap_inside_frame(_frame_container.get_rect())
 	elif is_coroutine:
 		while _current_coroutine:
@@ -141,17 +146,20 @@ func step() -> void:
 	)
 	var is_coroutine := _scene_instance.has_method("run_coroutine")
 	if _scene_instance.has_method("reset") and _debugger and not _current_coroutine:
+		@warning_ignore("unsafe_method_access")
 		_scene_instance.reset()
 
 	if not _current_coroutine:
 		if is_coroutine:
 			_current_coroutine = CoroutineController.new()
 			_current_coroutine.finished.connect(_finish_coroutine)
+			@warning_ignore("unsafe_method_access")
 			_scene_instance.run_coroutine(_current_coroutine)
 		else:
+			@warning_ignore("unsafe_method_access")
 			_scene_instance.run()
 		if _scene_instance.has_method("wrap_inside_frame"):
-			# warning-ignore:unsafe_method_access
+			@warning_ignore("unsafe_method_access")
 			_scene_instance.wrap_inside_frame(_frame_container.get_rect())
 	elif is_coroutine:
 		if _console_arrow_animation:
@@ -198,7 +206,7 @@ func set_scene(new_scene: PackedScene) -> void:
 		_scene_instance.queue_free()
 
 	if scene:
-		_set_scene_instance(scene.instantiate())
+		_set_scene_instance(scene.instantiate() as CanvasItem)
 
 
 func set_center_in_frame(value: bool) -> void:
@@ -216,10 +224,10 @@ func set_run_button_label(new_text: String) -> void:
 
 
 func create_slider_for(
-		property_name,
+		property_name: StringName,
 		min_value := 0.0,
 		max_value := 100.0,
-		step := 1.0,
+		slider_step := 1.0,
 		color := Color.BLACK,
 ) -> HSlider:
 	if not _scene_instance:
@@ -228,7 +236,7 @@ func create_slider_for(
 	var label := Label.new()
 	var value_label := Label.new()
 	var slider := HSlider.new()
-	var property_value = _scene_instance.get(property_name)
+	var property_value: float = _scene_instance.get(property_name)
 
 	_sliders.add_child(box)
 	box.add_child(label)
@@ -239,7 +247,7 @@ func create_slider_for(
 	slider.min_value = min_value
 	slider.max_value = max_value
 	slider.value = property_value
-	slider.step = step
+	slider.step = slider_step
 	slider.custom_minimum_size.x = 100.0
 	slider.value_changed.connect(_set_instance_value.bind(property_name, value_label))
 	_set_instance_value(property_value, property_name, value_label)
@@ -267,15 +275,14 @@ func _center_scene_instance() -> void:
 	if not center_in_frame or not _scene_instance:
 		return
 	if _scene_instance is Node2D:
-		# warning-ignore:unsafe_property_access
-		_scene_instance.position = _frame_container.size / 2
+		(_scene_instance as Node2D).position = _frame_container.size / 2
 
 
 func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	if new_scene_instance.has_signal("line_highlight_requested"):
-		new_scene_instance.line_highlight_requested.connect(_on_highlight_line)
+		new_scene_instance.connect("line_highlight_requested", _on_highlight_line)
 	if new_scene_instance.has_signal("animate_arrow_requested"):
-		new_scene_instance.animate_arrow_requested.connect(_on_arrow_animation)
+		new_scene_instance.connect("animate_arrow_requested", _on_arrow_animation)
 
 	_scene_instance = new_scene_instance
 	emit_signal("scene_instance_set")
@@ -288,6 +295,7 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	await get_tree().process_frame
 
 	if _scene_instance.has_method("get_code"):
+		@warning_ignore("unsafe_method_access")
 		gdscript_code = _scene_instance.get_code(gdscript_code)
 		set_code(gdscript_code)
 
@@ -303,13 +311,13 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 		printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.scene_file_path])
 
 	# Setting up our fake debugger when it's there to allow executing the code line-by-line
-	var debugger: RunnableCodeExampleDebugger = null
+	_debugger = null
 	for node in get_parent().get_children():
 		if node is RunnableCodeExampleDebugger:
 			_debugger = node
 			_debugger.setup(self, _scene_instance)
 			if _scene_instance.has_signal("code_updated"):
-				_scene_instance.code_updated.connect(code_updated.emit)
+				_scene_instance.connect("code_updated", code_updated.emit)
 
 	_reset_monitored_variable_highlights()
 
@@ -321,7 +329,7 @@ func _reset_monitored_variable_highlights():
 	# After changing font size, must wait a frame to create monitored variables
 	await get_tree().process_frame
 
-	for monitored_variable in _monitored_variable_highlights:
+	for monitored_variable: Node in _monitored_variable_highlights:
 		monitored_variable.queue_free()
 	_monitored_variable_highlights.clear()
 
@@ -339,9 +347,9 @@ func _reset_monitored_variable_highlights():
 	# Create widgets that underline a variable and display a variable's value
 	# when hovering with the mouse.
 	var monitored_variables := _debugger.monitored_variables
-	var offset := Vector2i(_gdscript_text_edit.position.x, 0)
+	var offset := Vector2i(_gdscript_text_edit.position.x as int, 0)
 
-	for variable_name in monitored_variables:
+	for variable_name: StringName in monitored_variables:
 		var last_line := 0
 		var last_column := -1 # Search offset to not repeat same result
 
@@ -387,7 +395,7 @@ func _on_HScrollBar_scrolling() -> void:
 	# recalculate and update the highlight_rect for each monitored variable.
 	var offset := Vector2(_gdscript_text_edit.position.x, 0.0)
 
-	for monitored_variable in _monitored_variable_highlights:
+	for monitored_variable: CodeExampleVariableUnderline in _monitored_variable_highlights:
 		var rect = _gdscript_text_edit.get_rect_at_line_column(
 			monitored_variable.highlight_line,
 			monitored_variable.highlight_column,
@@ -422,10 +430,10 @@ func _on_arrow_animation(chars1: Array, chars2: Array) -> void:
 	var current_line := _gdscript_text_edit.get_caret_line()
 
 	var offset := Vector2i.ZERO
-	offset.x = _gdscript_text_edit.position.x + 2
+	offset.x = floori(_gdscript_text_edit.position.x + 2)
 
-	var rect1 := _gdscript_text_edit.get_rect_at_line_column(current_line, chars1[0])
-	var rect2 := _gdscript_text_edit.get_rect_at_line_column(current_line, chars2[0])
+	var rect1 := _gdscript_text_edit.get_rect_at_line_column(current_line, chars1[0] as int)
+	var rect2 := _gdscript_text_edit.get_rect_at_line_column(current_line, chars2[0] as int)
 
 	rect1.position += offset
 	rect2.position += offset
@@ -436,8 +444,8 @@ func _on_arrow_animation(chars1: Array, chars2: Array) -> void:
 	var rects := [rect1, rect2]
 
 	_console_arrow_animation.highlight_rects = rects
-	_console_arrow_animation.initial_point = rect1.position + Vector2i(rect1.size.x / 2, -5)
-	_console_arrow_animation.end_point = rect2.position + Vector2i(rect2.size.x / 2, -5)
+	_console_arrow_animation.initial_point = rect1.position + Vector2i(floori(rect1.size.x / 2.0), -5)
+	_console_arrow_animation.end_point = rect2.position + Vector2i(floori(rect2.size.x / 2.0), -5)
 	_console_arrow_animation.draw_curve()
 
 
