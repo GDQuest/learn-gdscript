@@ -11,8 +11,8 @@ func calculate_bounding_rect(sprites: Array) -> Rect2:
 		return Rect2()
 
 	var bounds := Rect2()
-	for sprite in sprites:
-		var sprite_rect = sprite.get_rect()
+	for sprite: Sprite2D in sprites:
+		var sprite_rect := sprite.get_rect()
 		sprite_rect.position += sprite.position
 		bounds = bounds.merge(sprite_rect)
 	bounds.position += position

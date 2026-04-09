@@ -10,7 +10,7 @@ const CODE_FONT := "res://ui/theme/fonts/font_code.tres"
 
 func _ready() -> void:
 	if get_theme_font("font").resource_path != CODE_FONT:
-		add_theme_font_override("font", load(CODE_FONT))
+		add_theme_font_override("font", load(CODE_FONT) as FontVariation)
 	Events.font_size_scale_changed.connect(_update_size)
 	context_menu_enabled = false
 	shortcut_keys_enabled = false

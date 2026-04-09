@@ -31,10 +31,10 @@ func set_paused(value: bool) -> void:
 	_pause_rect.visible = paused
 
 
-func use_scene(node: Node, viewport_size: Vector2) -> void:
+func use_scene(node: Node, _viewport_size: Vector2) -> void:
 	_viewport.add_child(node)
 	move_child(_pause_rect, -1)
-	_viewport.size = viewport_size
+	#_viewport.size = viewport_size
 
 
 func get_viewport_override() -> SubViewport:
@@ -42,4 +42,4 @@ func get_viewport_override() -> SubViewport:
 
 
 func _on_screen_resized() -> void:
-	_viewport.size = size
+	pass #_viewport.size = size

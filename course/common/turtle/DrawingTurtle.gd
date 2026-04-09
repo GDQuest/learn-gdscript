@@ -119,7 +119,7 @@ func reset() -> void:
 
 
 # Returns a copy of the polygons the turtle will draw.
-func get_polygons() -> Array:
+func get_polygons() -> Array[Polygon]:
 	return _polygons.duplicate()
 
 
