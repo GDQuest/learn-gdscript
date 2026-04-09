@@ -6,7 +6,7 @@
 class_name UILesson
 extends UINavigatablePage
 
-const DEFAULT_COURSE_INDEX := "res://course/CourseLearnGDScriptIndex.gd"
+const DEFAULT_COURSE_INDEX_PATH := "res://course/CourseLearnGDScriptIndex.gd"
 
 const ContentBlockScene := preload("screens/lesson/UIContentBlock.tscn")
 const QuizInputFieldScene := preload("screens/lesson/quizzes/UIQuizInputField.tscn")
@@ -56,7 +56,7 @@ func _ready() -> void:
 
 	if test_lesson and get_parent() == get_tree().root:
 		var _lesson_node := NavigationManager.get_navigation_resource(test_lesson)
-		var test_course_index: CourseIndex = (load(DEFAULT_COURSE_INDEX) as GDScript).new()
+		var test_course_index: CourseIndex = (load(DEFAULT_COURSE_INDEX_PATH) as GDScript).new()
 		setup(_lesson_node, test_course_index)
 		for child: Control in _content_blocks.get_children():
 			child.show()
@@ -80,7 +80,7 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 
 	var content_block_count := BBCodeUtils.get_lesson_block_count(lesson)
 	for i in content_block_count:
-		var type = BBCodeUtils.get_lesson_block_type(lesson, i)
+		var type := BBCodeUtils.get_lesson_block_type(lesson, i)
 		if type == BBCodeParserData.Tag.STRING:
 			var instance: UIContentBlock = ContentBlockScene.instantiate()
 			_content_blocks.add_child(instance)

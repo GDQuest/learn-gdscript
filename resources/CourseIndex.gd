@@ -1,33 +1,19 @@
+@abstract
 class_name CourseIndex
 extends RefCounted
 
-func get_title() -> String:
-	return _get_title()
 
-
-func get_lessons_count() -> int:
-	return _get_lessons_count()
-
-
-func get_lesson_path(i: int) -> String:
-	return _get_lesson_path(i)
-
-
-func get_course_id() -> String:
-	return _get_course_id()
-
-
-func _get_course_id() -> String:
-	return "empty_course"
-
-
-func _get_lessons_count() -> int:
-	return 0
-
-
-func _get_title() -> String:
-	return "Empty Course"
-
-
-func _get_lesson_path(_i: int) -> String:
-	return ""
+@abstract
+func get_title() -> String
+@abstract
+func get_lessons_count() -> int
+@abstract
+func get_lesson_path(i: int) -> String
+@abstract
+func get_lesson_path_from_slug(slug: String) -> String
+@abstract
+func get_lesson_slug(i: int) -> String
+@abstract
+func get_course_id() -> String
+@abstract
+func get_real_slug_from_slug(slug: String) -> String

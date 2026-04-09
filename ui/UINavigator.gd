@@ -151,7 +151,7 @@ func _navigate_to() -> void:
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
 	var screen: UINavigatablePage
 	if target is BBCodeParser.ParseNode and target.tag == BBCodeParserData.Tag.PRACTICE:
-		var lesson := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index))
+		var lesson := NavigationManager.get_navigation_resource(target.bbcode_path)
 
 		screen = preload("UIPractice.tscn").instantiate()
 		(screen as UIPractice).setup(target, lesson, course_index)
@@ -268,7 +268,8 @@ func _on_practice_previous_requested(practice: BBCodeParser.ParseNode) -> void:
 
 
 func _on_practice_requested(practice: BBCodeParser.ParseNode) -> void:
-	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as BBCodeParser.ParseNode
+	var lesson_path := course_index.get_lesson_path(_lesson_index)
+	var lesson_data := NavigationManager.get_navigation_resource(lesson_path) as BBCodeParser.ParseNode
 	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson_data)
 	var practice_id := BBCodeUtils.get_practice_id(practice)
 
@@ -283,7 +284,7 @@ func _on_practice_requested(practice: BBCodeParser.ParseNode) -> void:
 	if index < 0:
 		return
 
-	NavigationManager.navigate_to(practice_id)
+	NavigationManager.navigate_to("%s#P%s" % [lesson_path, index])
 
 
 func _on_lesson_completed() -> void:

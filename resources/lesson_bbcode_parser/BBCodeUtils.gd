@@ -57,10 +57,6 @@ static func get_block_type(block: Variant) -> int:
 	return BBCodeParserData.Tag.STRING if block is String else block.tag if block is BBCodeParser.ParseNode else BBCodeParserData.Tag.UNKNOWN
 
 
-static func get_lesson_block_id(block: BBCodeParser.ParseNode) -> String:
-	return "_generated_content_block_plain_%s" % block.line_number
-
-
 static func get_lesson_title(lesson: BBCodeParser.ParseNode) -> String:
 	return lesson.attributes.get("title", "")
 
