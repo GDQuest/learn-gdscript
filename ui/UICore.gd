@@ -5,8 +5,7 @@ const LoadingScreen := preload("./LoadingScreen.gd")
 const ReportFormPopup := preload("./components/popups/ReportFormPopup.gd")
 const SettingsPopup := preload("./components/popups/SettingsPopup.gd")
 
-@export var default_course_id := "learn_gdscript"
-@export var default_course_path := "res://course/CourseLearnGDScriptIndex.gd"
+@export var default_course_id := "learn-gdscript"
 @export var _pages: Control
 @export var _loading_screen: LoadingScreen
 @export var _welcome_screen: WelcomeScreen
@@ -47,6 +46,8 @@ func _ready() -> void:
 	NavigationManager.welcome_screen_navigation_requested.connect(_go_to_welcome_screen)
 	# Needed to navigate back from the end screen to the outliner.
 	NavigationManager.outliner_navigation_requested.connect(_course_screen.show)
+
+	await get_tree().process_frame
 
 	if NavigationManager.current_url != "":
 		_on_course_requested()
@@ -93,7 +94,7 @@ func _on_course_requested(force_outliner: bool = false) -> void:
 	_loading_screen.progress_value = 0.5
 	await get_tree().process_frame
 
-	if default_course_path.is_empty():
+	if default_course_id.is_empty():
 		# We completely failed, chief!
 		printerr("Missing the default course path, make sure to set it in the UICore scene.")
 		return
@@ -102,7 +103,7 @@ func _on_course_requested(force_outliner: bool = false) -> void:
 	# is faster. Consider using ResourceLoader.load_interactive() for progress updates in the future.
 	var course_navigator_scene := load("res://ui/UINavigator.tscn") as PackedScene
 	_course_navigator = course_navigator_scene.instantiate()
-	_course_navigator.course_index = (load(default_course_path) as GDScript).new() as CourseIndex
+	_course_navigator.course_index = CourseIndexPaths.get_course_index_instance(default_course_id)
 
 	var user_profile = UserProfiles.get_profile()
 	var lesson_id := user_profile.get_last_started_lesson(_course_navigator.course_index.get_course_id())

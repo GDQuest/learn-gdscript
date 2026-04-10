@@ -268,23 +268,11 @@ func _on_practice_previous_requested(practice: BBCodeParser.ParseNode) -> void:
 
 
 func _on_practice_requested(practice: BBCodeParser.ParseNode) -> void:
-	var lesson_path := course_index.get_lesson_path(_lesson_index)
-	var lesson_data := NavigationManager.get_navigation_resource(lesson_path) as BBCodeParser.ParseNode
-	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson_data)
+	var lesson_path := course_index.get_lesson_slug(_lesson_index)
 	var practice_id := BBCodeUtils.get_practice_id(practice)
+	var course_id := course_index.get_course_id()
 
-	var index := -1
-	for i in practice_count:
-		var other_practice := BBCodeUtils.get_lesson_practice(lesson_data, i)
-		var other_practice_id := BBCodeUtils.get_practice_id(other_practice)
-		if other_practice_id == practice_id:
-			index = i
-			break
-	# This practice is not in the current lesson, return early.
-	if index < 0:
-		return
-
-	NavigationManager.navigate_to("%s#P%s" % [lesson_path, index])
+	NavigationManager.navigate_to("#%s/%s/$%s" % [course_id, lesson_path, practice_id])
 
 
 func _on_lesson_completed() -> void:

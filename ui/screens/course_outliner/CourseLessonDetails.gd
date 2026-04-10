@@ -12,7 +12,8 @@ const VALUE_COLOR_PASSED := Color(0.239216, 1, 0.431373)
 @export var _practice_stats_value: Label
 @export var _goto_lesson_button: Button
 
-
+var course_index: CourseIndex:
+	set = set_course_index
 var lesson: BBCodeParser.ParseNode:
 	set = set_lesson
 var lesson_progress: LessonProgress:
@@ -30,6 +31,11 @@ func _ready() -> void:
 
 func set_lesson(value: BBCodeParser.ParseNode) -> void:
 	lesson = value
+	_update_visuals()
+
+
+func set_course_index(value: CourseIndex) -> void:
+	course_index = value
 	_update_visuals()
 
 
@@ -94,4 +100,4 @@ func _on_goto_lesson_pressed() -> void:
 	if not lesson:
 		return
 
-	NavigationManager.navigate_to(lesson.bbcode_path)
+	NavigationManager.navigate_to("#%s/%s" % [course_index.get_course_id(), course_index.get_lesson_slug_from_path(lesson.bbcode_path)])

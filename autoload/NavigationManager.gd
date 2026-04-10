@@ -19,20 +19,24 @@ var arguments := { }
 
 var _current_unload_type := -1
 var _url_normalization_regex := RegExpGroup.compile(
-	r"^(?<prefix>user:\/\/|res:\/\/|\.*?\/+)#?(?<course>.*?)\/(?<lesson>.*)\.(?<extension>t?res|bbcode)(?<practice>#P[0-9]+)?",
+	r"^(?<prefix>user:\/\/|res:\/\/|\.*?\/+)#?(?<course>[^\/]+)\/(?<lesson>[^\/]+)\/?(?<lesson_file>[^\.]+\.[^\/]+)?\/?(?<practice>\$.*)?",
 )
-var _practice_regex := RegEx.create_from_string("#P[0-9]+")
+var _slug_normalization_regex := RegExpGroup.compile(
+	r"^#?(?<course>[^\/]+)\/(?<lesson>[^\$]+)\/?(?<practice>\$.*)?",
+)
 var _lesson_cache := { }
 
 
 func _init() -> void:
+	CourseIndexPaths.build_all_practice_slugs.call_deferred()
+	
 	_parse_arguments()
 	if _js_available:
-		_on_init_setup_js()
+		_on_init_setup_js.call_deferred()
 	else:
 		var initial_url: String = arguments.get("file", "")
 		if initial_url != "":
-			navigate_to(initial_url)
+			navigate_to.call_deferred(initial_url)
 
 
 func _parse_arguments() -> void:
@@ -135,7 +139,10 @@ func navigate_to_welcome_screen() -> void:
 func navigate_to(metadata: String) -> void:
 	var regex_result := _url_normalization_regex.search(metadata)
 	if not regex_result:
-		push_error("`%s` is not a valid resource or bbcode path" % [metadata])
+		regex_result = _slug_normalization_regex.search(metadata)
+	
+	if not regex_result:
+		push_error("`%s` is not a valid bbcode or slug path" % [metadata])
 		return
 	
 	var normalized := NormalizedUrl.new(regex_result)
@@ -145,47 +152,49 @@ func navigate_to(metadata: String) -> void:
 		push_error("'%s' is not a valid course" % [normalized.course_path])
 		return
 	
-	# legacy practices support
-	var full_lesson_path := "%s.%s" % [normalized.lesson_path, normalized.extension]
-	var alias := course_index.get_real_slug_from_slug(full_lesson_path)
-	if alias != full_lesson_path:
-		var new_path := "%s%s/%s" % [normalized.protocol, normalized.course_path, alias]
-		regex_result = _url_normalization_regex.search(new_path)
+	# legacy slugs support
+	var legacy_path := normalized.lesson_path
+	var lesson_slug := course_index.get_real_slug_from_slug(legacy_path)
+	if lesson_slug != legacy_path:
+		regex_result = _slug_normalization_regex.search("%s/%s" % [course_index.get_course_id(), lesson_slug])
 		normalized = NormalizedUrl.new(regex_result)
 
-	if not normalized.lesson_path:
-		push_error("`%s` is not a valid path" % metadata)
-		return
-
-	var lesson_path := course_index.get_lesson_path_from_slug("%s.%s" % [normalized.lesson_path, normalized.extension])
+	var lesson_path := course_index.get_lesson_path_from_slug(normalized.lesson_path)
 
 	var lesson := get_navigation_resource(lesson_path)
 	if not (lesson is BBCodeParser.ParseNode):
 		push_error("`%s` is not a lesson" % lesson_path)
 		return
 
-	var effective_path := lesson_path
-	if normalized.practice_index > -1:
-		var practice := BBCodeUtils.get_lesson_practice(lesson, normalized.practice_index)
+	var effective_path := "%s/%s" % [course_index.get_course_id(), normalized.lesson_path]
+	if normalized.practice_path != "":
+		var practice := course_index.get_practice_from_slug("%s/$%s" % [normalized.lesson_path, normalized.practice_path])
 		if not practice is BBCodeParser.ParseNode:
-			push_error("'%s' does not have a practice at index '%s'" % [lesson_path, normalized.practice_index])
+			push_error("'%s' does not have a practice at slug '%s'" % [lesson_path, normalized.practice_path])
 			return
-		effective_path += "#P%s" % [normalized.practice_index]
+		effective_path += "/$%s" % [normalized.practice_path]
 
 	history.push_back(effective_path)
-	_push_javascript_state(normalized.get_web_url())
+	_push_javascript_state(effective_path)
 
-	emit_signal("navigation_requested")
+	navigation_requested.emit()
 
 
 func get_navigation_resource(resource_id: String) -> BBCodeParser.ParseNode:
-	var practice_index_match := _practice_regex.search(resource_id)
-	var is_practice := practice_index_match != null
+	var normalized_url_groups := _url_normalization_regex.search(resource_id)
+	var is_slug := false
+	if not normalized_url_groups:
+		is_slug = true
+		normalized_url_groups = _slug_normalization_regex.search(resource_id)
+	var is_practice := not normalized_url_groups.get_string("practice").is_empty()
 	
 	var bbcode_path := resource_id
 	if is_practice:
-		bbcode_path = bbcode_path.left(-practice_index_match.strings[0].length())
-
+		bbcode_path = bbcode_path.left(-(normalized_url_groups.get_end("practice")-normalized_url_groups.get_start("practice")+1))
+	if is_slug:
+		var course_index := CourseIndexPaths.get_course_index_instance(normalized_url_groups.get_string("course"))
+		bbcode_path = course_index.get_lesson_path_from_slug(normalized_url_groups.get_string("lesson").trim_suffix("/"))
+	
 	var lesson_data: BBCodeParser.ParseNode = null
 	if _lesson_cache.has(bbcode_path):
 		lesson_data = _lesson_cache[bbcode_path]
@@ -210,9 +219,9 @@ func get_navigation_resource(resource_id: String) -> BBCodeParser.ParseNode:
 		_lesson_cache[bbcode_path] = lesson_data
 
 	if is_practice:
-		var practice_idx := int(practice_index_match.strings[0].substr(2))
-		return BBCodeUtils.get_lesson_practice(lesson_data, practice_idx)
-
+		var course_index := CourseIndexPaths.get_course_index_instance(normalized_url_groups.get_string("course"))
+		var lesson_slug := course_index.get_lesson_slug_from_path(bbcode_path)
+		return course_index.get_practice_from_slug("%s/%s" % [lesson_slug, normalized_url_groups.get_string("practice")])
 	return lesson_data
 
 
@@ -283,7 +292,7 @@ func _on_init_setup_js() -> void:
 		else ""
 	)
 	if url:
-		navigate_to("res://%s" % [url])
+		navigate_to(url)
 
 
 # Handles user changing the url manually or pressing back
@@ -339,39 +348,43 @@ class NormalizedUrl:
 	var protocol := ""
 	var course_path := ""
 	var lesson_path := ""
-	var practice_index := -1
-	var extension := ""
+	var practice_path := ""
+	var lesson_file := ""
 
 
 	func _init(regex_result: RegExMatch) -> void:
 		protocol = regex_result.get_string("prefix")
 		course_path = regex_result.get_string("course")
-		lesson_path = regex_result.get_string("lesson")
-		extension = regex_result.get_string("extension")
+		lesson_path = regex_result.get_string("lesson").trim_suffix("/")
+		practice_path = regex_result.get_string("practice").substr(1)
+		lesson_file = regex_result.get_string("lesson_file")
 		
-		var practice_string := regex_result.get_string("practice")
-		if practice_string:
-			practice_index = int(practice_string.substr(2))
 		if protocol in ["//", "/"]:
 			protocol = "res://"
 
 
-	func get_file_path() -> String:
-		var file_path := "%s%s/%s.%s" % [protocol, course_path, lesson_path, extension]
-		if practice_index > -1:
-			file_path += "#P" % [practice_index]
+	func get_file_path(with_practices: bool = false) -> String:
+		var file_path := "%s%s/%s" % [protocol, course_path, lesson_path]
+		if lesson_file != "":
+			file_path += "/%s" % [lesson_file]
+		if with_practices and practice_path != "":
+			file_path += "/$%s" % [practice_path]
 		return file_path
 
 
 	func get_web_url() -> String:
-		var url := "%s/%s.%s" % [course_path, lesson_path, extension]
-		if practice_index > -1:
-			url += "#P%s" % [practice_index]
+		var url := "%s/%s" % [course_path, lesson_path]
+		if lesson_file != "":
+			url += "/%s" % [lesson_file]
+		if practice_path != "":
+			url += "/$%s" % [practice_path]
 		return url
 
 
 	func _to_string() -> String:
-		var string := "%s%s/%s"
-		if practice_index > -1:
-			string += "#P%s" % [practice_index]
+		var string := "%s%s/%s" % [protocol, course_path, lesson_path]
+		if lesson_file != "":
+			string += "/%s" % [lesson_file]
+		if practice_path != "":
+			string += "/$%s" % [practice_path]
 		return string

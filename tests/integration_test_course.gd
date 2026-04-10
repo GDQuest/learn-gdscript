@@ -14,7 +14,7 @@
 # To run, run the scene file that uses this script from the editor.
 extends Node
 
-const COURSE_PATH := "res://course/CourseLearnGDScriptIndex.gd"
+const COURSE_ID := "learn-gdscript"
 const UILessonScene := preload("res://ui/UILesson.tscn")
 const UIPracticeScene := preload("res://ui/UIPractice.tscn")
 
@@ -36,11 +36,11 @@ func _ready() -> void:
 	Engine.time_scale = time_scale
 	print("RUNNING INTEGRATION TEST")
 	print("Time scale: %sx" % time_scale)
-	print("Course path: %s\n" % COURSE_PATH)
+	print("Course id: %s\n" % COURSE_ID)
 
-	_course_index = load(COURSE_PATH).new()
+	_course_index = CourseIndexPaths.get_course_index_instance("learn-gdscript")
 	if _course_index == null:
-		push_error("Failed to load _course_index from: %s" % COURSE_PATH)
+		push_error("Failed to load _course_index from: %s" % COURSE_ID)
 		get_tree().quit(1)
 		return
 

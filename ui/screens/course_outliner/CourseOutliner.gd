@@ -99,6 +99,7 @@ func _on_lesson_selected(lesson_index: int) -> void:
 		return
 
 	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(lesson_index)) as BBCodeParser.ParseNode
+	_lesson_details.course_index = course_index
 	_lesson_details.lesson = lesson_data
 
 	var user_profile = UserProfiles.get_profile()

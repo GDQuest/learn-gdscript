@@ -33,7 +33,7 @@ func _rebuild_breadcrumbs() -> void:
 		var lesson_index := -1
 
 		var i := 0
-		for l in _last_course_index._get_lessons_count():
+		for l in _last_course_index.get_lessons_count():
 			var lesson_data := NavigationManager.get_navigation_resource(_last_course_index.get_lesson_path(l)) as BBCodeParser.ParseNode
 			if lesson_data == lesson:
 				lesson_index = i

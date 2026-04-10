@@ -1,6 +1,8 @@
 class_name BBCodeUtils
 extends RefCounted
 
+static var snake_case_regex := RegEx.create_from_string("(?<=[a-z])(?=[A-Z])|[^a-zA-Z]")
+
 
 static func get_lesson_block_count(lesson: BBCodeParser.ParseNode) -> int:
 	var child_count := 0
@@ -263,10 +265,12 @@ static func _get_text_content(node: BBCodeParser.ParseNode, recurse: bool) -> St
 	return text
 
 
-static func _to_snake_case(input_string: String) -> String:
-	var regex := RegEx.new()
-	regex.compile("(?<=[a-z])(?=[A-Z])|[^a-zA-Z]")
-	return regex.sub(input_string, " ", true).strip_edges().replace(" ", "_").to_lower()
+static func _to_snake_case(input_string: String, separator := "_") -> String:
+	return snake_case_regex.sub(input_string, " ", true).strip_edges().replace(" ", separator).to_lower()
+
+
+static func _to_kebab_case(input_string: String) -> String:
+	return _to_snake_case(input_string, "-")
 
 
 static func _strip_leading_trailing_newlines(text: String) -> String:

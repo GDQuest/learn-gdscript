@@ -4,8 +4,6 @@ extends UINavigatablePage
 
 signal test_student_code_completed
 
-const DEFAULT_COURSE_INDEX := "res://course/CourseLearnGDScriptIndex.gd"
-
 const RUN_AUTOTIMER_DURATION := 5.0
 const SLIDE_TRANSITION_DURATION := 0.5
 # Maximum allowed iterations in while loops to prevent infinite loops.
@@ -116,7 +114,7 @@ func _ready() -> void:
 	_solution_panel.offset_left = _output_anchors.size.x
 
 	if lesson_test_practice and get_parent() == get_tree().root:
-		var course_index: CourseIndex = (load(DEFAULT_COURSE_INDEX) as GDScript).new()
+		var course_index: CourseIndex = CourseIndexPaths.get_course_index_instance()
 		var lesson := NavigationManager.get_navigation_resource(lesson_test_practice)
 		var practice := BBCodeUtils.get_lesson_practice(lesson, test_practice)
 		setup(practice, lesson, course_index)
@@ -165,9 +163,7 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 		_hints_container.add_child(practice_hint)
 		index += 1
 
-	# TODO: Should probably avoid relying on content ID for getting paths.
-	var practice_id := BBCodeUtils.get_practice_id(practice)
-	var base_directory := practice_id.get_base_dir()
+	var base_directory := practice.bbcode_path.get_base_dir()
 
 	var script_path := BBCodeUtils.get_practice_script_slice_path(practice)
 	if script_path.is_relative_path():
@@ -201,6 +197,7 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 	_info_panel.display_tests(_tester.get_test_names())
 	_game_view.use_scene(_current_scene, _script_slice.get_viewport_size())
 
+	var practice_id := BBCodeUtils.get_practice_id(practice)
 	# In case we directly test a practice from the editor, we don't have access to the lesson.
 	if lesson and course_index:
 		_practice_list.clear_items()
