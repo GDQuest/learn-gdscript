@@ -27,9 +27,12 @@ func _ready() -> void:
 			child.texture = child.SWORD
 		elif i == second_item_index:
 			child.texture = child.SHIELD
-		child.mouse_entered.connect(set_current_item.bind(child))
-		child.mouse_exited.connect(set_current_item.bind(null))
-		child.used.connect(_on_item_used)
+		if not child.mouse_entered.is_connected(set_current_item):
+			child.mouse_entered.connect(set_current_item.bind(child))
+		if not child.mouse_exited.is_connected(set_current_item):
+			child.mouse_exited.connect(set_current_item.bind(null))
+		if not child.used.is_connected(_on_item_used):
+			child.used.connect(_on_item_used)
 	if get_tree().get_current_scene() == self:
 		_run()
 

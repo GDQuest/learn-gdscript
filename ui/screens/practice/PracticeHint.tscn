@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://di847j05tbkfn" path="res://ui/screens/practice/PracticeHint.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cvl6pxx3qb736" path="res://ui/components/Revealer.tscn" id="2"]
 
-[node name="PracticeHint" unique_id=515684302 instance=ExtResource("2")]
+[node name="PracticeHint" unique_id=515684302 node_paths=PackedStringArray("_rich_text_label") instance=ExtResource("2")]
 script = ExtResource("1")
 text = ""
+_rich_text_label = NodePath("RichTextLabel")
 title = "Show Hint"
 title_font_color = Color(0.572549, 0.560784, 0.721569, 1)
 
@@ -14,7 +15,6 @@ theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
 text = "Show Hint"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." index="1" unique_id=1419085759]
-visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 bbcode_enabled = true

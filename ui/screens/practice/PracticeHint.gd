@@ -5,7 +5,7 @@ extends Revealer
 @export var text: String:
 	set = set_bbcode_text
 
-@onready var _rich_text_label := $RichTextLabel as RichTextLabel
+@export var _rich_text_label: RichTextLabel
 
 
 func _notification(what: int) -> void:

@@ -18,7 +18,7 @@ func _prepare():
 
 
 func test_turtle_ends_facing_towards_the_right() -> String:
-	if turtle.get_polygons().empty():
+	if turtle.get_polygons().is_empty():
 		return tr("The turtle did not draw anything. Make sure your function calls move_forward(length) to move the turtle.")
 	var turn_right_between_jumps := 0
 	for command in turtle.get_command_stack():
@@ -33,7 +33,7 @@ func test_turtle_ends_facing_towards_the_right() -> String:
 
 
 func test_turtle_starts_each_square_facing_towards_the_right() -> String:
-	if turtle.get_polygons().empty():
+	if turtle.get_polygons().is_empty():
 		return tr("The turtle did not draw anything. Make sure your function calls move_forward(length) to move the turtle.")
 	if not is_equal_approx(wrapf(turtle.turn_degrees, 0.0, 360.0), 0.0):
 		return tr(
@@ -44,7 +44,7 @@ func test_turtle_starts_each_square_facing_towards_the_right() -> String:
 
 func test_draw_squares_of_varying_sizes() -> String:
 	var polygons := turtle.get_polygons()
-	if polygons.empty():
+	if polygons.is_empty():
 		return tr("The turtle did not draw anything. Make sure your function calls move_forward(length) to move the turtle.")
 	for index in polygons.size():
 		var p = polygons[index]

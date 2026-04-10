@@ -15,7 +15,6 @@ var units: Dictionary: set = set_units
 var selected_units := []
 
 var _label_container := Control.new()
-@onready var turtle := $Turtle
 
 
 func _ready() -> void:
