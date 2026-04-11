@@ -75,9 +75,17 @@ func _ready() -> void:
 	errors_overlay.offset_bottom = -scroll_offsets.y
 	add_child(errors_overlay)
 
+	# clear internal flag and make sure they're on the bottom of the list
+	# so they consume mouse inputs
+	for child: Node in get_children(true):
+		if child is ScrollBar:
+			remove_child(child)
+			add_child(child)
+	
 	add_child(errors_overlay_message)
 	errors_overlay_message.set_as_top_level(true)
 	errors_overlay_message.hide()
+	
 
 	text_changed.connect(_on_text_changed)
 	draw.connect(_update_overlays)
