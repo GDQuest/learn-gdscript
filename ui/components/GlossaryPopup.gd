@@ -28,8 +28,10 @@ func _ready() -> void:
 func setup(term: String, text: String) -> void:
 	if not is_inside_tree():
 		await self.ready
+	_panel.show()
 	_title.text = term
 	_content.text = text
+	_panel.hide.call_deferred()
 
 
 # Places the panel and interaction area based on the current mouse position,
