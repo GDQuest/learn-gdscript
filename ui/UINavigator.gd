@@ -70,7 +70,7 @@ func _ready() -> void:
 		else:
 			if _lesson_index < 0 or _lesson_index >= course_index.get_lessons_count():
 				_lesson_index = 0
-			NavigationManager.navigate_to(course_index.get_lesson_path(_lesson_index))
+			NavigationManager.navigate_to("%s/%s" % [course_index.get_course_id(), course_index.get_lesson_slug(_lesson_index)])
 	else:
 		_navigate_to()
 
