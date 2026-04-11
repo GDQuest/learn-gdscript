@@ -1,7 +1,10 @@
 extends Node2D
 
-onready var _robots := [$Robots/RunningRobotFrameDelta, $Robots/RunningRobotFrame]
-onready var _timer := $Timer
+@export var _robot_frame_delta: Node2D
+@export var _robot_frame: Node2D
+@export var _timer: Timer
+
+@onready var _robots := [_robot_frame_delta, _robot_frame]
 
 
 func _ready() -> void:

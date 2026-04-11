@@ -6,59 +6,60 @@ const THEME_FONTS_ROOT := "res://ui/theme/fonts/"
 const COLOR_TEXT_DEFAULT := Color(0.960784, 0.980392, 0.980392)
 const COLOR_TEXT_LOWER_CONTRAST := Color(0.736288, 0.728113, 0.839844)
 
-onready var _theme = preload("res://ui/theme/gdscript_app_theme.tres")
+var _font_defaults := { }
+var _font_sizes := { }
 
-var _font_defaults := {}
+@onready var _theme: Theme = preload("res://ui/theme/gdscript_app_theme.tres")
 
 
 func _ready() -> void:
 	_cache_font_defaults()
-	
+
 	var current_profile := UserProfiles.get_profile()
 	scale_all_font_sizes(current_profile.font_size_scale, false)
 	set_lower_contrast(current_profile.lower_contrast, false)
 	set_dyslexia_font(current_profile.dyslexia_font, false)
 
 
+func get_default_font_size() -> int:
+	return _font_sizes[&"Label"][&"font_size"]
+
+
 func _cache_font_defaults() -> void:
 	_font_defaults.clear()
-	
-	var fs = Directory.new()
-	var error = fs.change_dir(THEME_FONTS_ROOT)
-	if error != OK:
-		printerr("Failed to open theme fonts directory at '%s': Error code %d" % [THEME_FONTS_ROOT, error])
+
+	var fs := DirAccess.open(THEME_FONTS_ROOT)
+	if not fs:
+		printerr("Failed to open theme fonts directory at '%s': Error code %d" % [THEME_FONTS_ROOT, DirAccess.get_open_error()])
 		return
-	
-	error = fs.list_dir_begin(true, true)
-	if error != OK:
-		printerr("Failed to read theme fonts directory at '%s': Error code %d" % [THEME_FONTS_ROOT, error])
-		return
-	
-	var current_file := fs.get_next() as String
-	while not current_file.empty():
-		if current_file.get_extension() != "tres":
-			current_file = fs.get_next()
-			continue
-		
-		var font_resource = ResourceLoader.load(THEME_FONTS_ROOT.plus_file(current_file)) as DynamicFont
+
+	for file in fs.get_files():
+		match file.get_extension():
+			"remap":
+				file = file.substr(0, file.length() - 6)
+			"tres":
+				pass
+			_:
+				continue
+
+		var font_resource := ResourceLoader.load(THEME_FONTS_ROOT.path_join(file)) as FontVariation
 		if not font_resource:
-			current_file = fs.get_next()
 			continue
-		
-		_font_defaults[font_resource] = {"size": font_resource.size, "font": font_resource.font_data.font_path}
-		current_file = fs.get_next()
+
+		_font_defaults[font_resource] = font_resource.base_font.resource_path
+
+	for type: StringName in _theme.get_font_size_type_list():
+		var sizes := { }
+		for font_size_name in _theme.get_font_size_list(type):
+			sizes[font_size_name] = _theme.get_font_size(font_size_name, type)
+		_font_sizes[type] = sizes
+	if not _font_sizes.has(&"Label"):
+		_font_sizes[&"Label"] = { &"font_size": _theme.default_font_size }
 
 
 func scale_all_font_sizes(size_scale: int, and_save: bool = true) -> void:
-	for font_resource in _font_defaults:
-		font_resource = font_resource as DynamicFont
-		if not font_resource:
-			continue
-		
-		var default_size = int(_font_defaults[font_resource]["size"])
-		# Each scale unit equals 2 points of font size.
-		font_resource.size = default_size + size_scale * 2
-	
+	_apply_font_sizes(size_scale, false)
+
 	if and_save:
 		var current_profile := UserProfiles.get_profile()
 		current_profile.font_size_scale = size_scale
@@ -78,25 +79,55 @@ func set_lower_contrast(lower_contrast: bool, and_save: bool = true) -> void:
 
 
 func set_dyslexia_font(dyslexia_font: bool, and_save: bool = true) -> void:
-	for font_resource in _font_defaults:
-		font_resource = font_resource as DynamicFont
-		if not font_resource:
-			continue
+	var current_profile := UserProfiles.get_profile()
+	apply_font_settings(current_profile.font_size_scale, dyslexia_font)
 
-		if dyslexia_font:
-			font_resource.size -= (font_resource.size * 0.25)
-			if "SourceCodePro" in font_resource.font_data.font_path:
-				font_resource.font_data = load("res://ui/theme/fonts/OpenDyslexicMono-Regular.otf")
-			elif "Regular" in font_resource.font_data.font_path:
-				font_resource.font_data = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
-			elif "Bold" in font_resource.font_data.font_path:
-				font_resource.font_data = load("res://ui/theme/fonts/OpenDyslexic-Bold.otf")
-			elif "Italic" in font_resource.font_data.font_path:
-				font_resource.font_data = load("res://ui/theme/fonts/OpenDyslexic-Italic.otf")
-		else:
-			font_resource.font_data = load(_font_defaults[font_resource]["font"])
-	
 	if and_save:
-		var current_profile := UserProfiles.get_profile()
 		current_profile.dyslexia_font = dyslexia_font
 		current_profile.save()
+
+
+# Applies font file swaps and all font sizes in a single pass.
+# Call this instead of scale_all_font_sizes + set_dyslexia_font when both change at once.
+func apply_font_settings(size_scale: int, use_dyslexia_font: bool) -> void:
+	if use_dyslexia_font:
+		var font_mono := load("res://ui/theme/fonts/OpenDyslexicMono-Regular.otf")
+		var font_regular := load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
+		var font_bold_italic := load("res://ui/theme/fonts/OpenDyslexic-Bold-Italic.otf")
+		var font_bold := load("res://ui/theme/fonts/OpenDyslexic-Bold.otf")
+		var font_italic := load("res://ui/theme/fonts/OpenDyslexic-Italic.otf")
+
+		for font_resource: FontVariation in _font_defaults:
+			if not font_resource:
+				continue
+			if "SourceCodePro" in font_resource.base_font.resource_path:
+				font_resource.base_font = font_mono
+			elif "Regular" in font_resource.base_font.resource_path:
+				font_resource.base_font = font_regular
+			elif "BoldItalic" in font_resource.base_font.resource_path:
+				font_resource.base_font = font_bold_italic
+			elif "Bold" in font_resource.base_font.resource_path:
+				font_resource.base_font = font_bold
+			elif "Italic" in font_resource.base_font.resource_path:
+				font_resource.base_font = font_italic
+	else:
+		for font_resource: FontVariation in _font_defaults:
+			if not font_resource:
+				continue
+			var font_defaults_path: String = _font_defaults[font_resource]
+			font_resource.base_font = load(font_defaults_path)
+
+	_apply_font_sizes(size_scale, use_dyslexia_font)
+
+
+func _apply_font_sizes(size_scale: int, use_dyslexia_font: bool) -> void:
+	var shrink := 0.25 if use_dyslexia_font else 0.0
+	for theme_type: StringName in _font_sizes:
+		var font_size_set := _font_sizes[theme_type] as Dictionary
+		for font_size_name: StringName in font_size_set:
+			var default_size: int = font_size_set[font_size_name]
+			var scaled_size := default_size + size_scale * 2
+			_theme.set_font_size(font_size_name, theme_type, ceili(scaled_size - scaled_size * shrink))
+	var default_theme_size: int = get_default_font_size()
+	var scaled_theme_size := default_theme_size + size_scale * 2
+	_theme.default_font_size = ceili(scaled_theme_size - scaled_theme_size * shrink)

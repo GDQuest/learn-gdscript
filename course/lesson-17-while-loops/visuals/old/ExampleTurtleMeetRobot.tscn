@@ -1,17 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://dojr0n22etiuq"]
 
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/common/turtle/DrawingTurtle.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=3]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://xvanlg3swj1g" path="res://course/common/turtle/DrawingTurtle.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="3"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
 var size := 40.0
 
-onready var _turtle: DrawingTurtle = $DrawingTurtle
-onready var _robot := $Robot
-onready var _robot_animation_tree := find_node(\"AnimationTree\")
+@export var _turtle: DrawingTurtle
+@export var _robot: Node2D
+@onready var _robot_animation_tree := find_child(\"AnimationTree\")
 
 func run():
 	_turtle.reset()
@@ -26,9 +26,9 @@ func run():
 	var rect: Rect2 = _turtle.get_rect()
 	_turtle.position = - rect.size / 2.0
 	
-	yield(_turtle, \"turtle_finished\")
+	await _turtle.turtle_finished
 	_robot_animation_tree.travel(\"damage\")
-	yield(_robot_animation_tree, \"animation_finished\")
+	await _robot_animation_tree.animation_finished
 	_robot_animation_tree.travel(\"idle\")
 
 
@@ -43,20 +43,14 @@ func draw_square():
 	_turtle.turn_right(90)
 "
 
-[node name="ExampleTurtleMeetRobot" type="PanelContainer"]
-margin_right = 658.0
-margin_bottom = 384.0
+[node name="ExampleTurtleMeetRobot" type="PanelContainer" unique_id=1641580690]
+offset_right = 658.0
+offset_bottom = 384.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 3 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 651.0
-margin_bottom = 377.0
-rect_min_size = Vector2( 0, 370 )
+[node name="RunnableCodeExample" parent="." unique_id=610665407 instance=ExtResource("3")]
+custom_minimum_size = Vector2(0, 370)
+layout_mode = 2
 gdscript_code = "func draw_wall():
 	draw_square()
 	jump(110, 0)
@@ -64,19 +58,11 @@ gdscript_code = "func draw_wall():
 	jump(110, 0)
 	draw_square()"
 
-[node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 240.0
-margin_bottom = 370.0
-
-[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-margin_right = 207.0
+[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" parent_id_path=PackedInt32Array(610665407, 1323725507) index="1" unique_id=1248061364]
 text = "draw_wall()"
 
-[node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
+[node name="GDScriptCode" parent="RunnableCodeExample" index="1" unique_id=175998401]
 visible = true
-margin_left = 244.0
-margin_right = 644.0
-margin_bottom = 370.0
 text = "func draw_wall():
 	draw_square()
 	jump(110, 0)
@@ -84,14 +70,16 @@ text = "func draw_wall():
 	jump(110, 0)
 	draw_square()"
 
-[node name="Meeting" type="Node2D" parent="RunnableCodeExample"]
-script = SubResource( 1 )
+[node name="Meeting" type="Node2D" parent="RunnableCodeExample" unique_id=1198646400 node_paths=PackedStringArray("_turtle", "_robot")]
+script = SubResource("1")
+_turtle = NodePath("DrawingTurtle")
+_robot = NodePath("Robot")
 
-[node name="Robot" parent="RunnableCodeExample/Meeting" instance=ExtResource( 1 )]
-position = Vector2( 0, -60 )
-scale = Vector2( 1.2, 1.2 )
+[node name="Robot" parent="RunnableCodeExample/Meeting" unique_id=1271106906 instance=ExtResource("1")]
+position = Vector2(0, -60)
+scale = Vector2(1.2, 1.2)
 
-[node name="DrawingTurtle" parent="RunnableCodeExample/Meeting" instance=ExtResource( 2 )]
-position = Vector2( 0, 25 )
+[node name="DrawingTurtle" parent="RunnableCodeExample/Meeting" unique_id=1426660806 instance=ExtResource("2")]
+position = Vector2(0, 25)
 
 [editable path="RunnableCodeExample"]

@@ -30,7 +30,7 @@ func test_inventory_has_correct_keys():
 
 	return tr(
 		"The inventory doesn't contain all the required items. Make sure you have '%s' as keys in your inventory dictionary."
-	) % PoolStringArray(desired_inventory.keys()).join("', '")
+	) % "', '".join(PackedStringArray(desired_inventory.keys()))
 
 
 func test_inventory_has_correct_values():
@@ -48,7 +48,7 @@ func test_inventory_has_correct_values():
 	else:
 		return tr(
 			"The inventory doesn't contain all the required items. Make sure you have '%s' as keys in your inventory dictionary."
-		) % PoolStringArray(desired_inventory.keys()).join("', '")
+		) % "', '".join(PackedStringArray(desired_inventory.keys()))
 
 	if not inventory_values_do_match:
 		return tr(

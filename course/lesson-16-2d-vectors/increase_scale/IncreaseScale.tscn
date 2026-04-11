@@ -1,15 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://s13dy0763fqp"]
 
-[ext_resource path="res://course/lesson-16-2d-vectors/increase_scale/IncreaseScale.gd" type="Script" id=1]
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
+[ext_resource type="Script" uid="uid://cqj5170mikcts" path="res://course/lesson-16-2d-vectors/increase_scale/IncreaseScale.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="2"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+[node name="IncreaseScale" unique_id=2113237850 instance=ExtResource("2")]
+script = ExtResource("1")
 
-[node name="IncreaseScale" instance=ExtResource( 2 )]
-script = ExtResource( 1 )
-
-[node name="AnimationTree" parent="." index="3"]
-parameters/playback = SubResource( 1 )
-
-[node name="Camera2D" type="Camera2D" parent="." index="4"]
-current = true
+[node name="Camera2D" type="Camera2D" parent="." index="4" unique_id=1539188421]

@@ -1,124 +1,121 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://dtvefdvy6gax0"]
 
-[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=1]
-[ext_resource path="res://course/lesson-16-2d-vectors/visuals/triangle.png" type="Texture" id=2]
+[ext_resource type="Texture2D" uid="uid://deb8pkjn6cdae" path="res://course/lesson-16-2d-vectors/visuals/triangle.png" id="2"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
-export var size := Vector2(300, 300)
+@export var _label: Label
+@export var _label_x: Label
+@export var _label_y: Label
+@export var _triangle_x: Sprite2D
+@export var _triangle_y: Sprite2D
+@export var _color_rect: ColorRect
+@export var _triangle_mouse: Sprite2D
+
+@export var size := Vector2(300, 300)
+
 var touch_down := Vector2.ZERO
 var vector :=- Vector2.ZERO
 
-onready var _label := find_node(\"Label\")
-onready var _label_x := find_node(\"LabelX\")
-onready var _label_y := find_node(\"LabelY\")
-onready var _triangle_x := find_node(\"TriangleX\")
-onready var _triangle_y := find_node(\"TriangleY\")
-onready var _color_rect := find_node(\"ColorRect\")
-onready var _triangle_mouse := find_node(\"TriangleMouse\")
-
 
 func _ready():
-	_color_rect.rect_size = size
-	_color_rect.rect_position = -size/2
-	_label_y.rect_position.y = size.y/2
-	_label_x.rect_position.x = size.x/2 + 10
+	_color_rect.size = size
+	_color_rect.position = -size/2
+	_label_y.position.y = size.y/2
+	_label_x.position.x = size.x/2 + 10
 	_triangle_x.position = Vector2(size.x/2, 0)
 	_triangle_y.position = Vector2(0, size.y/2)
-	update()
+	queue_redraw()
 
 
-func _process(delta: float) -> void:
-	vector = get_local_mouse_position().clamped(160)
+func _process(_delta: float) -> void:
+	vector = get_local_mouse_position().limit_length(160)
 	_triangle_mouse.position = vector
 	_triangle_mouse.rotation = Vector2.RIGHT.angle_to(vector)
 	_label.text = \"Vector2%s\" % [vector.round()]
-	update()
+	queue_redraw()
 
 
 func _draw():
-	draw_line(Vector2(0, -size.y/2), Vector2(0, size.y/2), Color.gray, 2, true)
-	draw_line(Vector2(-size.x/2, 0), Vector2(size.x/2, 0), Color.gray, 2, true)
-	draw_line(Vector2.ZERO, vector, Color.white, 2, true)
+	draw_line(Vector2(0, -size.y/2), Vector2(0, size.y/2), Color.GRAY, 2)
+	draw_line(Vector2(-size.x/2, 0), Vector2(size.x/2, 0), Color.GRAY, 2)
+	draw_line(Vector2.ZERO, vector, Color.WHITE, 2)
 	
 "
 
-[node name="VectorVisual" type="Node2D"]
+[node name="VectorVisual" type="Node2D" unique_id=1296238667]
 
-[node name="VectorVisual" type="Node2D" parent="."]
-script = SubResource( 1 )
+[node name="VectorVisual" type="Node2D" parent="." unique_id=642921031 node_paths=PackedStringArray("_label", "_label_x", "_label_y", "_triangle_x", "_triangle_y", "_color_rect", "_triangle_mouse")]
+script = SubResource("1")
+_label = NodePath("Label")
+_label_x = NodePath("LabelX")
+_label_y = NodePath("LabelY")
+_triangle_x = NodePath("TriangleX")
+_triangle_y = NodePath("TriangleY")
+_color_rect = NodePath("ColorRect")
+_triangle_mouse = NodePath("TriangleMouse")
 
-[node name="ColorRect" type="ColorRect" parent="VectorVisual"]
+[node name="ColorRect" type="ColorRect" parent="VectorVisual" unique_id=1537471873]
 visible = false
-modulate = Color( 1, 1, 1, 0.584314 )
-margin_left = -150.0
-margin_top = -150.0
-margin_right = 150.0
-margin_bottom = 150.0
+modulate = Color(1, 1, 1, 0.584314)
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Label" type="Label" parent="VectorVisual"]
-margin_left = 12.0
-margin_top = -149.0
-margin_right = 179.0
-margin_bottom = -121.0
-rect_min_size = Vector2( 150, 0 )
-custom_fonts/font = ExtResource( 1 )
+[node name="Label" type="Label" parent="VectorVisual" unique_id=1549705797]
+custom_minimum_size = Vector2(150, 0)
+offset_left = 12.0
+offset_top = -149.0
+offset_right = 179.0
+offset_bottom = -121.0
+theme_type_variation = &"LabelBoldText"
 text = "Vector2(100, 100)"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="LabelX" type="Label" parent="VectorVisual"]
+[node name="LabelX" type="Label" parent="VectorVisual" unique_id=1088780076]
+custom_minimum_size = Vector2(50, 0)
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 160.0
-margin_top = -14.0
-margin_right = 210.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 50, 0 )
-custom_fonts/font = ExtResource( 1 )
+offset_left = 160.0
+offset_top = -14.0
+offset_right = 210.0
+offset_bottom = 14.0
+theme_type_variation = &"LabelBoldText"
 text = "X"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="LabelY" type="Label" parent="VectorVisual"]
+[node name="LabelY" type="Label" parent="VectorVisual" unique_id=1453749389]
+custom_minimum_size = Vector2(50, 0)
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -25.0
-margin_top = 150.0
-margin_right = 25.0
-margin_bottom = 178.0
-rect_min_size = Vector2( 50, 0 )
-custom_fonts/font = ExtResource( 1 )
+offset_left = -25.0
+offset_top = 150.0
+offset_right = 25.0
+offset_bottom = 178.0
+theme_type_variation = &"LabelBoldText"
 text = "Y"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
-[node name="TriangleX" type="Sprite" parent="VectorVisual"]
-position = Vector2( 150, 0 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+[node name="TriangleX" type="Sprite2D" parent="VectorVisual" unique_id=76324547]
+position = Vector2(150, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2")
 
-[node name="TriangleY" type="Sprite" parent="VectorVisual"]
-position = Vector2( 0, 150 )
+[node name="TriangleY" type="Sprite2D" parent="VectorVisual" unique_id=1549479524]
+position = Vector2(0, 150)
 rotation = 1.5708
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2")
 
-[node name="TriangleMouse" type="Sprite" parent="VectorVisual"]
-position = Vector2( 54, 111 )
+[node name="TriangleMouse" type="Sprite2D" parent="VectorVisual" unique_id=20630281]
+position = Vector2(54, 111)
 rotation = 1.5708
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2")

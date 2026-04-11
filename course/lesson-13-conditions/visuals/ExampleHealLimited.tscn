@@ -1,102 +1,115 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene format=3 uid="uid://dxnhdghohxp4g"]
 
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=2]
-[ext_resource path="res://course/common/CustomHealthBar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://ui/components/RunnableCodeExampleDebugger.tscn" type="PackedScene" id=4]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dd2vjgj5yweq5" path="res://course/common/CustomHealthBar.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://b1on88gerd51a" path="res://ui/components/RunnableCodeExampleDebugger.tscn" id="4"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
 signal line_highlight_requested(line)
 
-export var start_health := 75
-export var max_health := 100
-export var health_gained = 50
+@export var _health_bar: ColorRect
+
+@export var start_health := 75
+@export var max_health := 100
+@export var health_gained = 50
 var health := start_health
 
-onready var _health_bar := find_node(\"HealthBar\")
-onready var _animation_tree := find_node(\"AnimationTree\")
+@onready var _animation_tree := find_child(\"AnimationTree\")
 
 
 func _ready() -> void:
-	yield(get_tree(), \"idle_frame\")
+	await get_tree().process_frame
 	reset()
 
 
 func reset() -> void:
 	health = start_health
-	_health_bar.set_health(health)
+	_health_bar.set_health(health) 
 
 
-func run() -> void:
+func run_coroutine(coroutine_controller: CoroutineController):
 	health = start_health
 	_health_bar.set_health(health)
 	emit_signal(\"line_highlight_requested\", 0)
-	yield()
+	await coroutine_controller.step_requested
 	
 	health += health_gained
 	_animation_tree.travel(\"heal\")
 	_health_bar.set_health(health)
 	emit_signal(\"line_highlight_requested\", 1)
-	yield()
+	await coroutine_controller.step_requested
 	
 	emit_signal(\"line_highlight_requested\", 2)
-	yield()
+	await coroutine_controller.step_requested
 	
 	if health > max_health:
 		health = max_health
 		_health_bar.set_health(health)
 		emit_signal(\"line_highlight_requested\", 3)
-		yield()
+		await coroutine_controller.step_requested
 	
 	_health_bar.set_health(health)
+	coroutine_controller.finished.emit()
 "
 
-[node name="ExampleShow" type="VBoxContainer"]
-margin_right = 1047.0
-margin_bottom = 298.0
+[node name="ExampleShow" type="VBoxContainer" unique_id=1013773244]
+offset_right = 1047.0
+offset_bottom = 298.0
 size_flags_horizontal = 3
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_right = 1047.0
-margin_bottom = 260.0
+[node name="RunnableCodeExample" parent="." unique_id=652420169 instance=ExtResource("1")]
+layout_mode = 2
 gdscript_code = "func heal(amount):
 	health += amount
 	if health > 100:
 		health = 100"
 
-[node name="Frame" parent="RunnableCodeExample" index="0"]
-margin_right = 515.0
-margin_bottom = 260.0
+[node name="PanelContainer" parent="RunnableCodeExample/Frame" parent_id_path=PackedInt32Array(652420169, 1694077977) index="0" unique_id=209141511]
+layout_mode = 1
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1"]
-margin_right = 182.0
+[node name="Sliders" parent="RunnableCodeExample/Frame" parent_id_path=PackedInt32Array(652420169, 1694077977) index="1" unique_id=133529752]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" parent="RunnableCodeExample/Frame" parent_id_path=PackedInt32Array(652420169, 1694077977) index="2" unique_id=1323725507]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 168.0
+offset_bottom = 40.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1" unique_id=1248061364]
 text = "heal(50)"
 
-[node name="StepButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="2"]
-margin_left = 190.0
-margin_right = 270.0
-
-[node name="GDScriptCode" parent="RunnableCodeExample" index="1"]
+[node name="GDScriptCode" parent="RunnableCodeExample" index="1" unique_id=175998401]
 visible = true
-margin_left = 531.0
-margin_right = 1047.0
-margin_bottom = 260.0
 text = "func heal(amount):
 	health += amount
 	if health > 100:
 		health = 100"
+syntax_highlighter = null
 
-[node name="HealRobot" parent="RunnableCodeExample" instance=ExtResource( 2 )]
-script = SubResource( 1 )
+[node name="HealRobot" parent="RunnableCodeExample" unique_id=1182116081 node_paths=PackedStringArray("_health_bar") instance=ExtResource("2")]
+script = SubResource("1")
+_health_bar = NodePath("HealthBar")
 
-[node name="HealthBar" parent="RunnableCodeExample/HealRobot" instance=ExtResource( 3 )]
+[node name="HealthBar" parent="RunnableCodeExample/HealRobot" unique_id=1140237310 instance=ExtResource("3")]
 
-[node name="RunnableCodeExampleDebugger" parent="." instance=ExtResource( 4 )]
-margin_top = 264.0
-margin_right = 1047.0
-margin_bottom = 330.0
-monitored_variables = [ "health" ]
+[node name="RunnableCodeExampleDebugger" parent="." unique_id=1312446814 instance=ExtResource("4")]
+layout_mode = 2
+monitored_variables = ["health"]
 
 [editable path="RunnableCodeExample"]

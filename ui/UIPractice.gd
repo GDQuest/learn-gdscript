@@ -1,7 +1,6 @@
-tool
+@tool
 class_name UIPractice
 extends UINavigatablePage
-
 
 signal test_student_code_completed
 
@@ -17,17 +16,38 @@ const PracticeHintScene := preload("screens/practice/PracticeHint.tscn")
 const PracticeListPopup := preload("components/popups/PracticeListPopup.gd")
 const PracticeDonePopup := preload("components/popups/PracticeDonePopup.gd")
 const PracticeLeaveUnfinishedPopup := preload("components/popups/PracticeLeaveUnfinishedPopup.gd")
-const documentation_resource: Resource = preload("res://course/Documentation.tres")
+const documentation_resource: Documentation = preload("res://course/Documentation.tres")
 
-var REGEX_DIVSION_BY_ZERO := RegEx.new()
+const BENIGN_CACHE_ERROR := 'Error while getting cache for script "".'
 
-export var test_practice: Resource
+static var REGEX_DIVSION_BY_ZERO := RegEx.create_from_string((r"[/%] *0"))
+static var REGEX_CLASS_NAME := RegEx.create_from_string(r"\s*class_name\s")
+static var REGEX_TOP_ANNOTATION := RegEx.create_from_string(r"\s*@")
+
+@export var lesson_test_practice: String
+@export_range(0, 1, 1, "or_greater") var test_practice: int
+@export var _layout_container: Control
+@export var _game_container: Container
+@export var _game_view: GameView
+@export var _output_console: OutputConsole
+@export var _output_anchors: Control
+@export var _solution_panel: Control
+@export var _use_solution_button: Button
+@export var _info_panel_anchors: Control
+@export var _info_panel: PracticeInfoPanel
+@export var _hints_container: Revealer
+@export var _practice_list: PracticeListPopup
+@export var _practice_done_popup: PracticeDonePopup
+@export var _practice_leave_unfinished_popup: PracticeLeaveUnfinishedPopup
+@export var _code_editor: CodeEditor
+@export var _solution_editor: SliceEditor
 
 var _practice: BBCodeParser.ParseNode
 var _practice_completed := false
 var _practice_solution_used := false
 
-var _script_slice: ScriptSlice setget _set_script_slice
+var _script_slice: ScriptSlice:
+	set = _set_script_slice
 var _tester: PracticeTester
 # If `true`, the text changed but was not saved.
 var _code_editor_is_dirty := false
@@ -45,34 +65,11 @@ var _current_scene: Node
 # Used to automate resetting transform and visibility to default in case the
 # student calls hide(), changes transform, etc. in their practice code.
 var _current_scene_reset_values := {
-	visible = null,
-	transform = null,
+	&"visible": null,
+	&"transform": null,
 }
 
-onready var _layout_container := $Margin/Layout as Control
-
-onready var _output_container := find_node("Output") as Control
-onready var _game_container := find_node("GameContainer") as Container
-onready var _game_view := _output_container.find_node("GameView") as GameView
-onready var _output_console := _output_container.find_node("Console") as OutputConsole
-
-onready var _output_anchors := $Margin/Layout/OutputAnchors as Control
-onready var _solution_panel := find_node("SolutionContainer") as Control
-onready var _solution_editor := _solution_panel.find_node("SliceEditor") as SliceEditor
-onready var _use_solution_button := _solution_panel.find_node("UseSolutionButton") as Button
-
-onready var _info_panel_anchors := $Margin/Layout/InfoPanelAnchors as Control
-onready var _info_panel := find_node("PracticeInfoPanel") as PracticeInfoPanel
-onready var _documentation_panel := find_node("DocumentationPanel") as RichTextLabel
-onready var _hints_container := _info_panel.hints_container as Revealer
-
-onready var _practice_list := find_node("PracticeListPopup") as PracticeListPopup
-onready var _practice_done_popup := find_node("PracticeDonePopup") as PracticeDonePopup
-onready var _practice_leave_unfinished_popup := find_node("PracticeLeaveUnfinishedPopup") as PracticeLeaveUnfinishedPopup
-
-onready var _code_editor := find_node("CodeEditor") as CodeEditor
-
-var _scene_tween: SceneTreeTween
+var _scene_tween: Tween
 
 
 func _init():
@@ -83,39 +80,44 @@ func _init():
 	_run_autotimer.wait_time = RUN_AUTOTIMER_DURATION
 	add_child(_run_autotimer)
 
-	_run_autotimer.connect("timeout", self, "_on_autotimer_timeout")
+	_run_autotimer.timeout.connect(_on_autotimer_timeout)
 
 	_on_init_set_javascript()
 
 
 func _ready() -> void:
+	super._ready()
+	
 	randomize()
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		return
 
-	_code_editor.connect("action_taken", self, "_on_code_editor_action_taken")
-	_code_editor.connect("text_changed", self, "_on_code_editor_text_changed")
-	_code_editor.connect("console_toggled", self, "_on_console_toggled")
-	_output_console.connect("reference_clicked", self, "_on_code_reference_clicked")
-	_use_solution_button.connect("pressed", self, "_on_use_solution_pressed")
+	_code_editor.action_taken.connect(_on_code_editor_action_taken)
+	_code_editor.text_changed.connect(_on_code_editor_text_changed)
+	_code_editor.console_toggled.connect(_on_console_toggled)
+	_output_console.reference_clicked.connect(_on_code_reference_clicked)
+	_use_solution_button.pressed.connect(_on_use_solution_pressed)
 
-	_info_panel.connect("list_requested", self, "_on_list_requested")
+	_info_panel.list_requested.connect(_on_list_requested)
 
-	_practice_done_popup.connect("accepted", self, "_on_next_requested")
+	_practice_done_popup.accepted.connect(_on_next_requested)
 
-	_practice_leave_unfinished_popup.connect("confirmed", self, "_accept_unload")
-	_practice_leave_unfinished_popup.connect("denied", self, "_deny_unload")
+	_practice_leave_unfinished_popup.confirmed.connect(_accept_unload)
+	_practice_leave_unfinished_popup.denied.connect(_deny_unload)
 
-	Events.connect("practice_run_completed", self, "_test_student_code")
+	Events.practice_run_completed.connect(_test_student_code)
 
 	_update_slidable_panels()
-	_layout_container.connect("resized", self, "_update_slidable_panels")
+	_layout_container.resized.connect(_update_slidable_panels)
 
 	_solution_panel.modulate.a = 0.0
-	_solution_panel.margin_left = _output_anchors.rect_size.x
+	_solution_panel.offset_left = _output_anchors.size.x
 
-#	if test_practice and get_parent() == get_tree().root:
-#		setup(test_practice, null, null)
+	if lesson_test_practice and get_parent() == get_tree().root:
+		var course_index: CourseIndex = CourseIndexPaths.get_course_index_instance()
+		var lesson := NavigationManager.get_navigation_resource(lesson_test_practice)
+		var practice := BBCodeUtils.get_lesson_practice(lesson, test_practice)
+		setup(practice, lesson, course_index)
 
 
 func _notification(what: int) -> void:
@@ -126,15 +128,15 @@ func _notification(what: int) -> void:
 
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
-	if mb and mb.button_index == BUTTON_LEFT and mb.pressed and get_focus_owner():
+	if mb and mb.button_index == MOUSE_BUTTON_LEFT and mb.pressed and get_viewport().gui_get_focus_owner():
 		# Makes clicks on the empty area to remove focus from various controls, specifically
 		# the code editor.
-		get_focus_owner().release_focus()
+		get_viewport().gui_get_focus_owner().release_focus()
 
 
 func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 	if not is_inside_tree():
-		yield(self, "ready")
+		await self.ready
 
 	_practice = practice
 	_practice_completed = false
@@ -143,8 +145,8 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 	var title := BBCodeUtils.get_practice_title(practice)
 	_info_panel.title_label.text = tr(title).capitalize()
 	var goal := BBCodeUtils.get_practice_goal(practice)
-	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(
-		TextUtils.tr_paragraph(goal)
+	_info_panel.goal_rich_text_label.text = TextUtils.bbcode_add_code_color(
+		TextUtils.tr_paragraph(goal),
 	)
 	var starting_code := BBCodeUtils.get_practice_starting_code(practice)
 	_code_editor.text = starting_code
@@ -152,22 +154,20 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 	_code_editor.update_cursor_position(starting_position.x, starting_position.y)
 
 	var hints := BBCodeUtils.get_practice_hints(practice)
-	_hints_container.visible = not hints.empty()
+	_hints_container.visible = not hints.is_empty()
 	var index := 0
 	for hint in hints:
-		var practice_hint: PracticeHint = PracticeHintScene.instance()
-		practice_hint.title = tr("Hint %s") % [String(index + 1).pad_zeros(1)]
-		practice_hint.bbcode_text = hint
+		var practice_hint: PracticeHint = PracticeHintScene.instantiate()
+		practice_hint.title = tr("Hint %s") % [str(index + 1).pad_zeros(1)]
+		practice_hint.text = hint
 		_hints_container.add_child(practice_hint)
 		index += 1
 
-	# TODO: Should probably avoid relying on content ID for getting paths.
-	var practice_id := BBCodeUtils.get_practice_id(practice)
-	var base_directory := practice_id.get_base_dir()
+	var base_directory := practice.bbcode_path.get_base_dir()
 
 	var script_path := BBCodeUtils.get_practice_script_slice_path(practice)
-	if script_path.is_rel_path():
-		script_path = base_directory.plus_file(script_path)
+	if script_path.is_relative_path():
+		script_path = base_directory.path_join(script_path)
 	if not script_path.begins_with("res://"):
 		script_path = "res://" + script_path
 	var slice_name := BBCodeUtils.get_practice_script_slice_name(practice)
@@ -182,10 +182,10 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 	_solution_editor.text = _script_slice.slice_text
 
 	var validator_path := BBCodeUtils.get_practice_validator_path(practice)
-	if validator_path.is_rel_path():
-		validator_path = base_directory.plus_file(validator_path)
+	if validator_path.is_relative_path():
+		validator_path = base_directory.path_join(validator_path)
 	_tester = (load(validator_path) as GDScript).new()
-	_tester.setup(_game_view.get_viewport(), _script_slice)
+	_tester.setup(_game_view.get_viewport_override(), _script_slice)
 
 	var documentation_tags := BBCodeUtils.get_practice_documentation(practice)
 	var documentation_reference := documentation_resource.get_references(documentation_tags)
@@ -197,6 +197,7 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 	_info_panel.display_tests(_tester.get_test_names())
 	_game_view.use_scene(_current_scene, _script_slice.get_viewport_size())
 
+	var practice_id := BBCodeUtils.get_practice_id(practice)
 	# In case we directly test a practice from the editor, we don't have access to the lesson.
 	if lesson and course_index:
 		_practice_list.clear_items()
@@ -208,7 +209,9 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 
 		var user_profile := UserProfiles.get_profile()
 		var completed_before = user_profile.is_lesson_practice_completed(
-			course_index.get_course_id(), lesson.bbcode_path, practice_id
+			course_index.get_course_id(),
+			lesson.bbcode_path,
+			practice_id,
 		)
 		if completed_before:
 			_info_panel.set_status_icon(_info_panel.Status.COMPLETED_BEFORE)
@@ -226,8 +229,8 @@ func _update_labels() -> void:
 	var title := BBCodeUtils.get_practice_title(_practice)
 	_info_panel.title_label.text = tr(title).capitalize()
 	var goal := BBCodeUtils.get_practice_goal(_practice)
-	_info_panel.goal_rich_text_label.bbcode_text = TextUtils.bbcode_add_code_color(
-		TextUtils.tr_paragraph(goal)
+	_info_panel.goal_rich_text_label.text = TextUtils.bbcode_add_code_color(
+		TextUtils.tr_paragraph(goal),
 	)
 
 	var index := 0
@@ -237,8 +240,8 @@ func _update_labels() -> void:
 		if not practice_hint:
 			continue
 
-		practice_hint.title = tr("Hint %s") % [String(index + 1).pad_zeros(1)]
-		practice_hint.bbcode_text = hints[index]
+		practice_hint.title = tr("Hint %s") % [str(index + 1).pad_zeros(1)]
+		practice_hint.text = hints[index]
 		index += 1
 
 	_info_panel.display_tests(_tester.get_test_names())
@@ -258,7 +261,7 @@ func _set_script_slice(new_slice: ScriptSlice) -> void:
 	if not scene:
 		push_error("Failed to load scene for script: " + _script_slice.script_path)
 		return
-	_current_scene = scene.instance()
+	_current_scene = scene.instantiate()
 	_current_scene_reset_values.visible = _current_scene.get("visible")
 	_current_scene_reset_values.transform = _current_scene.get("transform")
 
@@ -282,7 +285,6 @@ func _validate_and_run_student_code() -> void:
 	_script_slice.current_text = _code_editor.get_text()
 	var script_text := _script_slice.get_current_full_text()
 	var script_file_name := _script_slice.get_script_file_name()
-	var script_file_path := _script_slice.get_script_file_path().lstrip("res://")
 
 	# Mixed indentation is an error we cannot catch from the GDScript parser in
 	# some situations, so we manually look for it to help students understand the error.
@@ -318,7 +320,7 @@ func _validate_and_run_student_code() -> void:
 	if tokenizer.has_infinite_while_loop():
 		var error := ScriptError.new()
 		error.message = tr(
-			"You have a while loop that runs forever (while true) without a break statement. This will freeze the app."
+			"You have a while loop that runs forever (while true) without a break statement. This will freeze the app.",
 		)
 		error.severity = 1
 		error.code = GDQuestCodes.ErrorCode.INFINITE_WHILE_LOOP
@@ -326,12 +328,33 @@ func _validate_and_run_student_code() -> void:
 		_code_editor.unlock_editor()
 		return
 
-
-	var verifier := OfflineScriptVerifier.new(script_text)
+	var verifier_script := script_text
+	var script_is_desynced_by_one_line := false
+	
+	if not _has_class_name(verifier_script):
+		# GDScriptAnalyzer needs a path or class_name. As we're feeding code directly into the parser,
+		# we can't really have a path, so we need a class_name to fool it
+		var initial_insertion_character := _find_first_non_annotation_entry_point(verifier_script)
+		verifier_script = verifier_script.insert(initial_insertion_character, "class_name TEMP_UserScript\n")
+		script_is_desynced_by_one_line = true
+	
+	var verifier := OfflineScriptVerifier.new(verifier_script)
 	verifier.test()
 	var errors := verifier.errors
+	
+	if not errors.is_empty():
+		# GDScriptAnalyzer will complain the first time it parses the script from the verifier
+		# so we capture it here to ignore
+		for i in range(errors.size()-1, -1, -1):
+			var error: ScriptError = errors[i]
+			if error.message == BENIGN_CACHE_ERROR:
+				errors.remove_at(i)
 
-	if not errors.empty():
+	if not errors.is_empty():
+		if script_is_desynced_by_one_line:
+			for error: ScriptError in errors:
+				error.error_range.start.line -= 1
+				error.error_range.end.line -= 1
 		_code_editor.slice_editor.errors = errors
 
 		for index in errors.size():
@@ -340,7 +363,7 @@ func _validate_and_run_student_code() -> void:
 
 		var is_missing_parser_error: bool = (
 			errors.size() == 1
-			and OfflineScriptVerifier.check_error_is_missing_parser_error(errors[0])
+			and OfflineScriptVerifier.check_error_is_missing_parser_error(errors[0] as ScriptError)
 		)
 
 		if not is_missing_parser_error:
@@ -350,13 +373,13 @@ func _validate_and_run_student_code() -> void:
 	# Run student code
 	# Generate a runnable script, check for uncaught errors.
 	_code_editor.set_locked_message(tr("Running Your Code..."))
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 
 	script_text = MessageBus.replace_print_calls_in_script(script_file_name, script_text)
 
 	# Guard against infinite while loops
 	if "while " in script_text:
-		var modified_code := PoolStringArray()
+		var modified_code := PackedStringArray()
 		var guard_counter = 0
 		for line in script_text.split("\n"):
 			if "while " in line and not line.strip_edges(true, false).begins_with("#"):
@@ -365,22 +388,22 @@ func _validate_and_run_student_code() -> void:
 					indent += 1
 
 				var tabs := "\t".repeat(indent)
-				var guard_counter_varname = "__guard_counter" + str(guard_counter)
+				var guard_counter_varname := "__guard_counter" + str(guard_counter)
 				guard_counter += 1
 				modified_code.append(tabs + "var " + guard_counter_varname + " := 0")
 				modified_code.append(line)
 				modified_code.append(tabs + "\t" + guard_counter_varname + " += 1")
 				modified_code.append(
-					tabs + "\t" + "if " + guard_counter_varname + " > %s:" % MAX_WHILE_LOOP_ITERATIONS
+					tabs + "\t" + "if " + guard_counter_varname + " > %s:" % MAX_WHILE_LOOP_ITERATIONS,
 				)
 				modified_code.append(tabs + "\t\t" + "break")
 			else:
 				modified_code.append(line)
-		script_text = modified_code.join("\n")
+		script_text = "\n".join(modified_code)
 	elif REGEX_DIVSION_BY_ZERO.search(script_text):
 		var error := ScriptError.new()
 		error.message = tr(
-			'There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no "/ 0" or "% 0" in your code.'
+			'There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no "/ 0" or "% 0" in your code.',
 		)
 		error.severity = 1
 		error.code = GDQuestCodes.ErrorCode.INVALID_NO_CATCH
@@ -388,14 +411,14 @@ func _validate_and_run_student_code() -> void:
 		_code_editor.unlock_editor()
 		return
 
-	var script = GDScript.new()
+	var script := GDScript.new()
 	script.source_code = script_text
 
 	var script_is_valid = script.reload()
 	if script_is_valid != OK:
 		var error := ScriptError.new()
 		error.message = tr(
-			"Oh no! The script has an error, but the Script Verifier did not catch it"
+			"Oh no! The script has an error (code %s), but the Script Verifier did not catch it" % script_is_valid,
 		)
 		error.severity = 1
 		error.code = GDQuestCodes.ErrorCode.INVALID_NO_CATCH
@@ -429,7 +452,7 @@ func _test_student_code() -> void:
 
 	var result := _tester.run_tests()
 	_info_panel.set_tests_status(result, script_file_name)
-	yield(_info_panel, "tests_updated")
+	await _info_panel.tests_updated
 
 	# Show the end of practice popup.
 	if not _practice_completed and result.is_success():
@@ -458,26 +481,26 @@ func _reset_practice() -> void:
 
 	if _current_scene.has_method("reset"):
 		_current_scene.call("reset")
-		for property in _current_scene_reset_values:
+		for property: StringName in _current_scene_reset_values:
 			_current_scene.set(property, _current_scene_reset_values[property])
 
 
 func _update_slidable_panels() -> void:
 	# Wait a frame to make sure the new size has been applied.
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 
 	# We use _output_anchors for reference because it never leaves the screen, so we can rely on it
 	# to always report the target size for one third of the hbox.
 
 	# Update info panel.
-	_info_panel.rect_min_size = Vector2(_output_anchors.rect_size.x, 0)
-	_info_panel.set_anchors_and_margins_preset(Control.PRESET_WIDE, Control.PRESET_MODE_MINSIZE)
+	_info_panel.custom_minimum_size = Vector2(_output_anchors.size.x, 0)
+	_info_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE)
 
 	# Update solution panel.
-	_solution_panel.rect_min_size = Vector2(_output_anchors.rect_size.x, 0)
-	_solution_panel.set_anchors_and_margins_preset(Control.PRESET_WIDE, Control.PRESET_MODE_MINSIZE)
+	_solution_panel.custom_minimum_size = Vector2(_output_anchors.size.x, 0)
+	_solution_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE)
 	if not _is_solution_panel_open:
-		_solution_panel.margin_left = _output_anchors.rect_size.x
+		_solution_panel.offset_left = _output_anchors.size.x
 
 
 func _toggle_distraction_free_mode() -> void:
@@ -530,7 +553,7 @@ func _show_solution_panel() -> void:
 		_scene_tween.kill()
 	_scene_tween = create_tween().set_parallel()
 
-	_scene_tween.tween_property(_solution_panel, "margin_left", 0.0, SLIDE_TRANSITION_DURATION).from(_solution_panel.margin_left).set_trans(Tween.TRANS_SINE)
+	_scene_tween.tween_property(_solution_panel, "offset_left", 0.0, SLIDE_TRANSITION_DURATION).from(_solution_panel.offset_left).set_trans(Tween.TRANS_SINE)
 	_scene_tween.tween_property(_solution_panel, "modulate:a", 1.0, SLIDE_TRANSITION_DURATION).from(_solution_panel.modulate.a).set_ease(Tween.EASE_IN)
 
 
@@ -542,7 +565,7 @@ func _hide_solution_panel() -> void:
 		_scene_tween.kill()
 	_scene_tween = create_tween().set_parallel()
 
-	_scene_tween.tween_property(_solution_panel, "margin_left", _output_anchors.rect_size.x, SLIDE_TRANSITION_DURATION).from(_solution_panel.margin_left).set_trans(Tween.TRANS_SINE)
+	_scene_tween.tween_property(_solution_panel, "offset_left", _output_anchors.size.x, SLIDE_TRANSITION_DURATION).from(_solution_panel.offset_left).set_trans(Tween.TRANS_SINE)
 	_scene_tween.tween_property(_solution_panel, "modulate:a", 0.0, SLIDE_TRANSITION_DURATION - 0.25).from(_solution_panel.modulate.a).set_ease(Tween.EASE_IN).set_delay(0.15)
 
 
@@ -628,38 +651,65 @@ func _on_current_screen_unload_requested() -> void:
 # Updates all nodes with the given script. If a node path isn't valid, the node
 # will be silently skipped.
 func _update_nodes(script: GDScript, node_paths: Array) -> void:
-	for node_path in node_paths:
-		if node_path is NodePath or node_path is String:
-			var node = (
-				_current_scene.get_node_or_null(node_path)
-				if node_path != ""
-				else _current_scene
-			)
-			if node:
-				try_validate_and_replace_script(node, script)
+	for path in node_paths:
+		var node_path: NodePath
+		if path is NodePath:
+			node_path = path
+		elif path is String:
+			node_path = NodePath(path as String)
+		
+		var node = (
+			_current_scene.get_node_or_null(node_path)
+			if not node_path.is_empty()
+			else _current_scene
+		)
+		if node:
+			try_validate_and_replace_script(node as Node, script)
 
 
 # If a script is valid, sets it in the node and optionally calls _run()
 # @param node         Node                  any valid node
 # @param script       GDScript              A GDScript instance
 static func try_validate_and_replace_script(node: Node, script: GDScript) -> void:
-	if not script.can_instance():
+	if not script.can_instantiate():
 		var error_code := script.reload()
-		if not script.can_instance():
+		if not script.can_instantiate():
 			print("Script errored out (code %s); skipping replacement" % [error_code])
 			return
+
+	# save any @exported variables
+	var properties := _get_properties(node)
 
 	var parent = node.get_parent()
 	parent.remove_child(node)
 	node.request_ready()
 
 	node.set_script(script)
+	# restore @exported variables
+	_restore_properties(node, properties)
 
 	parent.call_deferred("add_child", node)
 
 	if node.has_method("_run"):
 		# warning-ignore:unsafe_method_access
 		node.call_deferred("_run")
+
+
+static func _get_properties(node: Node) -> Array[Dictionary]:
+	var properties := node.get_property_list().filter(func(prop: Dictionary) -> bool:
+		return (
+			prop.usage & (PropertyUsageFlags.PROPERTY_USAGE_STORAGE) != 0
+			and prop.usage & (PropertyUsageFlags.PROPERTY_USAGE_SCRIPT_VARIABLE) != 0
+		)
+	)
+	for property in properties:
+		property.value = node.get(property.name as StringName)
+	return properties
+
+
+static func _restore_properties(node: Node, properties: Array[Dictionary]) -> void:
+	for property in properties:
+		node.set(property.name as StringName, property.value)
 
 
 ###############################################################################
@@ -670,7 +720,7 @@ static func try_validate_and_replace_script(node: Node, script: GDScript) -> voi
 #
 
 # JS error event listener
-var _on_js_error_feedback_ref = JavaScript.create_callback(self, "_on_js_error_feedback")
+var _on_js_error_feedback_ref = JavaScriptBridge.create_callback(_on_js_error_feedback)
 
 
 # This will be called from Javascript
@@ -682,9 +732,24 @@ func _on_js_error_feedback(args):
 
 # Set the event listener
 func _on_init_set_javascript() -> void:
-	if OS.has_feature("JavaScript"):
-		var GDQUEST = JavaScript.get_interface("GDQUEST")
+	if OS.has_feature("web"):
+		var GDQUEST = JavaScriptBridge.get_interface("GDQUEST")
+		@warning_ignore("unsafe_method_access")
 		GDQUEST.events.onError.connect(_on_js_error_feedback_ref)
+
+
+func _has_class_name(source: String) -> bool:
+	return REGEX_CLASS_NAME.search(source) != null
+
+
+func _find_first_non_annotation_entry_point(source: String) -> int:
+	var lines := source.split("\n")
+	var character_count := 0
+	for i in lines.size():
+		if REGEX_TOP_ANNOTATION.search(lines[i]) == null:
+			break
+		character_count += lines[i].length() + 1
+	return character_count
 
 
 # Checks if the script text has mixed tabs and spaces in indentation.
@@ -693,7 +758,7 @@ func _check_for_mixed_indentation(text: String) -> int:
 	var lines := text.split("\n")
 	for line_number in range(lines.size()):
 		var line := lines[line_number]
-		if line.empty() or line.strip_edges() == "":
+		if line.is_empty() or line.strip_edges() == "":
 			continue
 
 		var has_space := false

@@ -1,41 +1,35 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://bc2arcrhct3ho"]
 
-[ext_resource path="res://ui/theme/codeeditor_locked_panel.tres" type="StyleBox" id=1]
-[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=2]
-[ext_resource path="res://ui/components/robot_tutor_running_code.svg" type="Texture" id=4]
-[ext_resource path="res://ui/components/LockedOverlay.gd" type="Script" id=5]
+[ext_resource type="StyleBox" path="res://ui/theme/codeeditor_locked_panel.tres" id="1"]
+[ext_resource type="Texture2D" uid="uid://bpyulvocwwwiw" path="res://ui/components/robot_tutor_running_code.svg" id="4"]
+[ext_resource type="Script" uid="uid://ci0h8jnoh0s5s" path="res://ui/components/LockedOverlay.gd" id="5"]
 
-[node name="LockedOverlay" type="Panel"]
-margin_right = 1920.0
-margin_bottom = 867.0
-custom_styles/panel = ExtResource( 1 )
-script = ExtResource( 5 )
+[node name="LockedOverlay" type="Panel" unique_id=1460602262 node_paths=PackedStringArray("_texture_rect")]
+offset_right = 1920.0
+offset_bottom = 867.0
+theme_override_styles/panel = ExtResource("1")
+script = ExtResource("5")
+_texture_rect = NodePath("Layout/TextureRect")
 
-[node name="Layout" type="VBoxContainer" parent="."]
+[node name="Layout" type="VBoxContainer" parent="." unique_id=735753240]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 32
+theme_override_constants/separation = 32
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Layout"]
-margin_left = 832.0
-margin_top = 274.0
-margin_right = 1088.0
-margin_bottom = 530.0
-rect_min_size = Vector2( 128, 128 )
+[node name="TextureRect" type="TextureRect" parent="Layout" unique_id=1145033910]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource( 4 )
+texture = ExtResource("4")
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="Layout"]
-margin_left = 660.0
-margin_top = 562.0
-margin_right = 1260.0
-margin_bottom = 593.0
-rect_min_size = Vector2( 600, 0 )
+[node name="Label" type="Label" parent="Layout" unique_id=811949906]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
 size_flags_horizontal = 4
-custom_colors/font_color = Color( 0.960784, 0.980392, 0.980392, 1 )
-custom_fonts/font = ExtResource( 2 )
-align = 1
-autowrap = true
+theme_type_variation = &"LabelTitle"
+theme_override_colors/font_color = Color(0.960784, 0.980392, 0.980392, 1)
+horizontal_alignment = 1

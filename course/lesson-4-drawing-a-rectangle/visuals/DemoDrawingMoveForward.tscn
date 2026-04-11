@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene format=3 uid="uid://vqfh8y8uyjvf"]
 
-[ext_resource path="res://course/common/turtle/DrawingTurtle.tscn" type="PackedScene" id=1]
+[ext_resource type="PackedScene" uid="uid://xvanlg3swj1g" path="res://course/common/turtle/DrawingTurtle.tscn" id="1"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
 var length := 200
 
-onready var _turtle: DrawingTurtle = $DrawingTurtle
+@onready var _turtle: DrawingTurtle = $DrawingTurtle
 
 
 func run() -> void:
@@ -21,7 +21,7 @@ func run() -> void:
 	_turtle.position = -rect.size / 2.0
 "
 
-[node name="DemoDrawingMoveForward" type="Node2D"]
-script = SubResource( 1 )
+[node name="DemoDrawingMoveForward" type="Node2D" unique_id=1105438396]
+script = SubResource("1")
 
-[node name="DrawingTurtle" parent="." instance=ExtResource( 1 )]
+[node name="DrawingTurtle" parent="." unique_id=545615301 instance=ExtResource("1")]

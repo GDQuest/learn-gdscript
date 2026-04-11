@@ -1,13 +1,13 @@
 extends Control
 
 
-onready var item_nodes := {
+@onready var item_nodes := {
 	"healing heart": $Margin/Column/Grid/HealingHeart,
 	"gems": $Margin/Column/Grid/Gems,
 	"sword": $Margin/Column/Grid/Sword,
 }
 
-onready var _grid := $Margin/Column/Grid as GridContainer
+@onready var _grid := $Margin/Column/Grid as GridContainer
 
 func _ready() -> void:
 	for node in item_nodes.values():
@@ -35,7 +35,7 @@ func run():
 func _run():
 	clear_drawing()
 	run()
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	Events.emit_signal("practice_run_completed")
 
 

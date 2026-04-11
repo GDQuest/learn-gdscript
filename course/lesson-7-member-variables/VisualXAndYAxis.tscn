@@ -1,28 +1,21 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene format=3 uid="uid://bwuuid2cuyela"]
 
-[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=1]
-[ext_resource path="res://course/lesson-7-member-variables/x-and-y-axes.svg" type="Texture" id=2]
+[ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="1"]
+[ext_resource type="Texture2D" uid="uid://3sry65vupgj1" path="res://course/lesson-7-member-variables/x-and-y-axes.svg" id="2"]
 
-[node name="PanelContainer" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
+[node name="PanelContainer" type="PanelContainer" unique_id=15574149]
+offset_right = 14.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
-custom_styles/panel = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme_override_styles/panel = ExtResource("1")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 248.0
-margin_bottom = 188.0
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1682091228]
+layout_mode = 2
 
-[node name="X-and-y-axes" type="TextureRect" parent="MarginContainer"]
-margin_right = 240.0
-margin_bottom = 180.0
-rect_min_size = Vector2( 240, 180 )
+[node name="X-and-y-axes" type="TextureRect" parent="MarginContainer" unique_id=2101778598]
+custom_minimum_size = Vector2(240, 180)
+layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource( 2 )
-expand = true
+texture = ExtResource("2")
+expand_mode = 1
 stretch_mode = 6

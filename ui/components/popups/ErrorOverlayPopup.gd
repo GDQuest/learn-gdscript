@@ -3,29 +3,26 @@
 class_name ErrorOverlayPopup
 extends MarginContainer
 
-export var exclusive := false setget set_exclusive
+@export var exclusive := false:
+	set = set_exclusive
+@export var _error_label: Label
+@export var _content_block: Control
+@export var _error_explanation_block: Revealer
+@export var _error_explanation_value: RichTextLabel
+@export var _error_suggestion_block: Revealer
+@export var _error_suggestion_value: RichTextLabel
+@export var _no_content_label: RichTextLabel
+@export var _exclusive_buttons: Control
+@export var _close_button: Button
 
-var error_code: int = -1 setget set_error_code
-var error_message: String setget set_error_message
+var error_code: int = -1:
+	set = set_error_code
+var error_message: String:
+	set = set_error_message
 
 var _current_message_source: Node
 var _error_explanation: String
 var _error_suggestion: String
-
-onready var _error_label := $MarginContainer/Column/ErrorLabel as Label
-onready var _content_block := $MarginContainer/Column/Content as Control
-onready var _error_explanation_block := $MarginContainer/Column/Content/ErrorExplanation as Revealer
-onready var _error_explanation_value := (
-	$MarginContainer/Column/Content/ErrorExplanation/Value as RichTextLabel
-)
-onready var _error_suggestion_block := $MarginContainer/Column/Content/ErrorSuggestion as Revealer
-onready var _error_suggestion_value := (
-	$MarginContainer/Column/Content/ErrorSuggestion/Value as RichTextLabel
-)
-onready var _no_content_label := $MarginContainer/Column/NoContent as RichTextLabel
-
-onready var _exclusive_buttons := $MarginContainer/Column/Buttons as Control
-onready var _close_button := $MarginContainer/Column/Buttons/CloseButton as Button
 
 
 func _ready() -> void:
@@ -33,9 +30,9 @@ func _ready() -> void:
 	_update_explanation()
 	_exclusive_buttons.visible = exclusive
 
-	_error_explanation_block.connect("expanded", self, "_on_revealer_opened", [_error_explanation_block])
-	_error_suggestion_block.connect("expanded", self, "_on_revealer_opened", [_error_suggestion_block])
-	_close_button.connect("pressed", self, "hide")
+	_error_explanation_block.expanded.connect(_on_revealer_opened.bind(_error_explanation_block))
+	_error_suggestion_block.expanded.connect(_on_revealer_opened.bind(_error_suggestion_block))
+	_close_button.pressed.connect(hide)
 	hide()
 
 
@@ -44,13 +41,13 @@ func _notification(what: int) -> void:
 		_update_explanation()
 
 
-func show_message(position: Vector2, code: int, message: String, message_source: Node) -> void:
+func show_message(new_position: Vector2, code: int, message: String, message_source: Node) -> void:
 	_current_message_source = message_source
 
 	set_error_code(code)
 	set_error_message(message)
 
-	rect_global_position = position
+	global_position = new_position
 	show()
 
 
@@ -87,7 +84,7 @@ func _update_explanation() -> void:
 	if not is_inside_tree():
 		return
 
-	if _error_explanation.empty() and _error_suggestion.empty():
+	if _error_explanation.is_empty() and _error_suggestion.is_empty():
 		_error_explanation_block.hide()
 		_error_suggestion_block.hide()
 		_content_block.hide()
@@ -97,12 +94,12 @@ func _update_explanation() -> void:
 		_error_explanation_block.hide()
 		_error_suggestion_block.hide()
 
-		if not _error_explanation.empty():
-			_error_explanation_value.bbcode_text = TextUtils.tr_paragraph(_error_explanation)
+		if not _error_explanation.is_empty():
+			_error_explanation_value.text = TextUtils.tr_paragraph(_error_explanation)
 			_error_explanation_block.show()
 
-		if not _error_suggestion.empty():
-			_error_suggestion_value.bbcode_text = TextUtils.tr_paragraph(_error_suggestion)
+		if not _error_suggestion.is_empty():
+			_error_suggestion_value.text = TextUtils.tr_paragraph(_error_suggestion)
 			_error_suggestion_block.show()
 
 		_content_block.show()

@@ -11,12 +11,14 @@ extends Panel
 const COLOR_TRANSPARENT := Color(1.0, 1.0, 1.0, 0.0)
 const ANIMATION_DURATION := 0.6
 
-export var max_border_width := 8.0 setget set_max_border_width
-export var border_width := 0.0 setget set_border_width
+@export var max_border_width := 8.0:
+	set = set_max_border_width
+@export var border_width := 0.0:
+	set = set_border_width
 
-onready var _border_style: StyleBoxFlat = get("custom_styles/panel")
+@onready var _border_style: StyleBoxFlat = get("theme_override_styles/panel")
 
-var _scene_tween: SceneTreeTween
+var _scene_tween: Tween
 
 
 func _ready() -> void:
@@ -28,10 +30,10 @@ func appear() -> void:
 	if _scene_tween:
 		_scene_tween.kill()
 	_scene_tween = create_tween().set_parallel()
-	_scene_tween.connect("finished", self, "_on_tween_completed")
-	
-	_scene_tween.tween_method(self, "set_border_width", 0.0, max_border_width, ANIMATION_DURATION).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
-	_scene_tween.tween_property(self, "self_modulate", Color.white, ANIMATION_DURATION / 2).from(COLOR_TRANSPARENT)
+	_scene_tween.finished.connect(_on_tween_completed)
+
+	_scene_tween.tween_method(set_border_width, 0.0, max_border_width, ANIMATION_DURATION).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+	_scene_tween.tween_property(self, "self_modulate", Color.WHITE, ANIMATION_DURATION / 2).from(COLOR_TRANSPARENT)
 	show()
 
 
@@ -39,10 +41,10 @@ func disappear() -> void:
 	if _scene_tween:
 		_scene_tween.kill()
 	_scene_tween = create_tween().set_parallel()
-	_scene_tween.connect("finished", self, "_on_tween_completed")
-	
+	_scene_tween.finished.connect(_on_tween_completed)
+
 	_scene_tween.tween_property(self, "border_width", 0.0, ANIMATION_DURATION).from(max_border_width).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
-	_scene_tween.tween_property(self, "self_modulate", COLOR_TRANSPARENT, ANIMATION_DURATION / 2).from(Color.white)
+	_scene_tween.tween_property(self, "self_modulate", COLOR_TRANSPARENT, ANIMATION_DURATION / 2).from(Color.WHITE)
 
 
 func set_max_border_width(new_width: float) -> void:

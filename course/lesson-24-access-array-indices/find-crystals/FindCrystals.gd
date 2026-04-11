@@ -2,9 +2,9 @@ extends CenterContainer
 
 var current_item: Node = null
 var used_items := []
-var used_items_names := PoolStringArray()
+var used_items_names := PackedStringArray()
 
-onready var grid_container := $GridContainer as GridContainer
+@onready var grid_container := $GridContainer as GridContainer
 
 
 func _ready() -> void:
@@ -27,9 +27,12 @@ func _ready() -> void:
 			child.texture = child.SWORD
 		elif i == second_item_index:
 			child.texture = child.SHIELD
-		child.connect("mouse_entered", self, "set_current_item", [child])
-		child.connect("mouse_exited", self, "set_current_item", [null])
-		child.connect("used", self, "_on_item_used")
+		if not child.mouse_entered.is_connected(set_current_item):
+			child.mouse_entered.connect(set_current_item.bind(child))
+		if not child.mouse_exited.is_connected(set_current_item):
+			child.mouse_exited.connect(set_current_item.bind(null))
+		if not child.used.is_connected(_on_item_used):
+			child.used.connect(_on_item_used)
 	if get_tree().get_current_scene() == self:
 		_run()
 
@@ -57,7 +60,7 @@ func _on_item_used() -> void:
 
 func _complete_run() -> void:
 	print("used items: %s"%[used_items_names])
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	Events.emit_signal("practice_run_completed")
 
 

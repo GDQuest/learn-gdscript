@@ -2,9 +2,8 @@
 #
 # Usage: override the test() function.
 class_name ScriptVerifier
-extends Reference
+extends RefCounted
 
-const ScriptError := preload("./ScriptError.gd")
 const WarningCode := GDScriptCodes.WarningCode
 const ErrorCode := GDScriptCodes.ErrorCode
 const GDQuestErrorCode := GDQuestCodes.ErrorCode
@@ -13,15 +12,15 @@ const GDQuestErrorCode := GDQuestCodes.ErrorCode
 # warnings
 var max_severity := 2
 
-
 # A list of error codes to ignore. All warnings are added automatically
 # (see _ready). This is similar to setting _max_severity to 1, but left here in
 # case we want more granularity
 var blacklist_codes := {
-	ErrorCode.INVALID_CLASS_DECLARATION: true
+	ErrorCode.INVALID_CLASS_DECLARATION: true,
 }
 
 var _new_script_text: String
+
 
 func _init(new_script_text: String) -> void:
 	for warning in WarningCode:
@@ -40,6 +39,6 @@ func test() -> void:
 # this will stop the running application if there's an error
 # in the script
 static func test_file(current_file_name: String) -> bool:
-	var test_file := load(current_file_name) as GDScript
-	var test_instance = test_file.new()
+	var current_test_file := load(current_file_name) as GDScript
+	var test_instance = current_test_file.new()
 	return test_instance != null

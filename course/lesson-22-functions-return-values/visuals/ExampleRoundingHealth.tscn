@@ -1,31 +1,32 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://cncs5sakpx803"]
 
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id="2"]
 script/source = "
-tool
+@tool
 extends RunnableCodeExample
 
 
 func _ready():
-	_scene_instance.health_slider = create_slider_for(\"health\", 0.0, 100.0, 0.1)
+	super._ready()
+	_scene_instance.health_slider = await create_slider_for(\"health\", 0.0, 100.0, 0.1)
 "
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id="3"]
 script/source = "extends PanelContainer
 
 var initial_health := 100.0
-var health := initial_health setget set_health
+var health := initial_health: set = set_health
 var health_slider: HSlider
 
-onready var label := $Label as Label
+@onready var label := $Label as Label
 
 
 func set_health(new_value: float):
 	health = new_value
 	if not label:
-		yield(self, \"ready\")
+		await self.ready
 	label.text = \"Health: %s\" % round(health)
 
 
@@ -34,32 +35,25 @@ func reset() -> void:
 	health_slider.value = initial_health
 "
 
-[node name="Example" type="PanelContainer"]
-margin_right = 771.0
-margin_bottom = 414.0
+[node name="Example" type="PanelContainer" unique_id=1067773785]
+offset_right = 771.0
+offset_bottom = 414.0
 size_flags_horizontal = 3
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 879.0
-margin_bottom = 407.0
-rect_min_size = Vector2( 600, 200 )
-script = SubResource( 2 )
+[node name="RunnableCodeExample" parent="." unique_id=253914018 instance=ExtResource("1")]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 2
+script = SubResource("2")
 gdscript_code = "var rounded_health = round(health)
 set_text(rounded_health)"
 
-[node name="PanelContainer" type="PanelContainer" parent="RunnableCodeExample"]
-margin_left = 672.0
-margin_right = 872.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 200, 100 )
-script = SubResource( 3 )
+[node name="PanelContainer" type="PanelContainer" parent="RunnableCodeExample" unique_id=108326951]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+script = SubResource("3")
 
-[node name="Label" type="Label" parent="RunnableCodeExample/PanelContainer"]
-margin_top = 186.0
-margin_right = 200.0
-margin_bottom = 214.0
+[node name="Label" type="Label" parent="RunnableCodeExample/PanelContainer" unique_id=1900966760]
+layout_mode = 2
 text = "Health: "
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -12,7 +12,7 @@ func _init() -> void:
 func test_draw_three_squares_of_200_pixels() -> String:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	var polygons := turtle.get_polygons()
-	if polygons.empty():
+	if polygons.is_empty():
 		return tr("Nothing drawn. Did you not call draw_square()?")
 
 	var count := polygons.size()
@@ -32,12 +32,12 @@ func test_draw_three_squares_of_200_pixels() -> String:
 		
 		if points.size() < target_polygon.size():
 			return(
-				tr("Shape number %s has too few corners! Did you change the draw_square() function?")
+				tr("Shape3D number %s has too few corners! Did you change the draw_square() function?")
 				% index
 			)
 		elif points.size() > target_polygon.size():
 			return(
-				tr("Shape number %s has too many corners! Did you change the draw_square() function?")
+				tr("Shape3D number %s has too many corners! Did you change the draw_square() function?")
 				% index
 			)
 		
@@ -48,7 +48,7 @@ func test_draw_three_squares_of_200_pixels() -> String:
 		points.sort()
 		if points != target_polygon:
 			return (
-				tr("Shape number %s is not a square of length 200 pixels. Did you change the draw_square() function?")
+				tr("Shape3D number %s is not a square of length 200 pixels. Did you change the draw_square() function?")
 				% index
 			)
 		index += 1

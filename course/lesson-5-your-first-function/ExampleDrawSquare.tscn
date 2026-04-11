@@ -1,26 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene format=3 uid="uid://biwqayk2ry6rf"]
 
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/lesson-5-your-first-function/ExampleTurtleSquare.tscn" type="PackedScene" id=2]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://course/lesson-5-your-first-function/ExampleTurtleSquare.tscn" id="2"]
 
-[node name="ExampleMoveAndRotate" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
+[node name="ExampleMoveAndRotate" type="PanelContainer" unique_id=173934850]
+offset_right = 14.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 651.0
-margin_bottom = 367.0
-rect_min_size = Vector2( 0, 360 )
-scene = ExtResource( 2 )
+[node name="RunnableCodeExample" parent="." unique_id=366453404 instance=ExtResource("1")]
+custom_minimum_size = Vector2(0, 360)
+layout_mode = 2
+scene = ExtResource("2")
+run_button_label = "draw_square()"
 gdscript_code = "func draw_square():
 	move_and_rotate()
 	move_and_rotate()
 	move_and_rotate()
 	move_and_rotate()"
-run_button_label = "draw_square()"

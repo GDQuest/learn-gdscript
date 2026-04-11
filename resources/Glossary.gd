@@ -6,20 +6,22 @@ var glossary_file := "res://course/glossary.csv"
 # Multiple keywords could point to the same definition, so we could use shared objects and map multiple keys to them.
 # Examples: call function and function call.
 # Dictionary mapping keywords or expressions to a definition.
-var _glossary := {}
+var _glossary := { }
 # Single regex to find all matching keywords in rich text labels. Used to detect
 # and wrap glossary entries in rich text labels.
 var _glossary_regex := RegEx.new()
 
+
 func _init() -> void:
 	setup()
 
+
 func setup() -> void:
 	_glossary = _parse_glossary_file(glossary_file)
-	var patterns := PoolStringArray()
-	for key in _glossary:
+	var patterns := PackedStringArray()
+	for key: String in _glossary:
 		patterns.append(key)
-	var terms_pattern := "(?:\\[ignore\\]\\w+)(*SKIP)(*F)|(%s)" % patterns.join("|")
+	var terms_pattern := "(?:\\[ignore\\]\\w+)(*SKIP)(*F)|(%s)" % "|".join(patterns)
 
 	_glossary_regex.compile(terms_pattern)
 
@@ -42,9 +44,8 @@ func get_match(keyword: String) -> Entry:
 # Parses the input CSV file and returns a dictionary mapping keywords to
 # glossary entries.
 func _parse_glossary_file(path: String) -> Dictionary:
-	var glossary := {}
-	var file := File.new()
-	file.open(path, file.READ)
+	var glossary := { }
+	var file := FileAccess.open(path, FileAccess.READ)
 	var _header := Array(file.get_csv_line())
 
 	while !file.eof_reached():
@@ -70,7 +71,8 @@ class Entry:
 	var plural_form: String
 	var explanation: String
 
+
 	func _init(csv_line: Array) -> void:
-		term = tr(csv_line[0]).capitalize()
-		plural_form = tr(csv_line[1])
-		explanation = TextUtils.tr_paragraph(csv_line[2])
+		term = tr(csv_line[0] as String).capitalize()
+		plural_form = tr(csv_line[1] as String)
+		explanation = TextUtils.tr_paragraph(csv_line[2] as String)

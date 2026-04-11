@@ -1,52 +1,28 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene format=3 uid="uid://c05ccnb4vdo2e"]
 
-[ext_resource path="res://course/common/GDScriptCodeExample.gd" type="Script" id=1]
-
-[node name="HBoxContainer" type="HBoxContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="HBoxContainer" type="HBoxContainer" unique_id=1099896765]
+offset_right = 40.0
+offset_bottom = 40.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="GDScriptCodeExample" type="TextEdit" parent="."]
-margin_right = 300.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 300, 80 )
+[node name="GDScriptCodeExample" type="CodeEdit" parent="." unique_id=398942480]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
 size_flags_horizontal = 3
 text = "call(\"show\")"
-readonly = true
-syntax_highlighting = true
-show_line_numbers = true
-draw_tabs = true
-draw_spaces = true
 context_menu_enabled = false
 shortcut_keys_enabled = false
-smooth_scrolling = true
-wrap_enabled = true
-caret_block_mode = true
 caret_blink = true
-script = ExtResource( 1 )
-min_size = Vector2( 300, 80 )
+draw_tabs = true
+draw_spaces = true
 
-[node name="GDScriptCodeExample2" type="TextEdit" parent="."]
-margin_left = 304.0
-margin_right = 604.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 300, 80 )
+[node name="GDScriptCodeExample2" type="CodeEdit" parent="." unique_id=1559195064]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
 size_flags_horizontal = 3
 text = "show()"
-readonly = true
-syntax_highlighting = true
-show_line_numbers = true
-draw_tabs = true
-draw_spaces = true
 context_menu_enabled = false
 shortcut_keys_enabled = false
-smooth_scrolling = true
-wrap_enabled = true
-caret_block_mode = true
 caret_blink = true
-script = ExtResource( 1 )
-min_size = Vector2( 300, 80 )
+draw_tabs = true
+draw_spaces = true

@@ -1,217 +1,161 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene format=3 uid="uid://dpi7388fmgj7g"]
 
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/components/popups/PracticeDonePopup.gd" type="Script" id=2]
-[ext_resource path="res://ui/theme/fonts/font_well_done_title.tres" type="DynamicFont" id=3]
-[ext_resource path="res://ui/theme/fonts/font_well_done_normal.tres" type="DynamicFont" id=4]
-[ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=5]
-[ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=6]
-[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=7]
-[ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=8]
-[ext_resource path="res://ui/screens/practice/gdquestboy_logo.png" type="Texture" id=9]
-[ext_resource path="res://ui/theme/focus_accent.tres" type="StyleBox" id=10]
-[ext_resource path="res://ui/screens/practice/gdquestboy_frame.tres" type="StyleBox" id=11]
-[ext_resource path="res://ui/theme/fonts/font_well_done_bold.tres" type="DynamicFont" id=12]
-[ext_resource path="res://ui/theme/button_outline_large_accent.tres" type="StyleBox" id=13]
+[ext_resource type="Script" uid="uid://d00fibhej2dlw" path="res://ui/components/popups/PracticeDonePopup.gd" id="2"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_hover.tres" id="5"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="6"]
+[ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="7"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="8"]
+[ext_resource type="Texture2D" uid="uid://c7fcakvm0lt82" path="res://ui/screens/practice/gdquestboy_logo.png" id="9"]
+[ext_resource type="StyleBox" path="res://ui/theme/focus_accent.tres" id="10"]
+[ext_resource type="StyleBox" uid="uid://dvsoekg7egexu" path="res://ui/screens/practice/gdquestboy_frame.tres" id="11"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_accent.tres" id="13"]
 
-[node name="PracticeDonePopup" type="ColorRect"]
+[node name="PracticeDonePopup" type="ColorRect" unique_id=1024515831]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
-color = Color( 0.0352941, 0.0392157, 0.129412, 0.627451 )
-script = ExtResource( 2 )
+color = Color(0.0352941, 0.0392157, 0.129412, 0.627451)
+script = ExtResource("2")
 
-[node name="Layout" type="HBoxContainer" parent="."]
+[node name="Layout" type="HBoxContainer" parent="." unique_id=1135519649]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -310.0
-margin_top = -202.5
-margin_right = 310.0
-margin_bottom = 202.5
-custom_constants/separation = 20
+offset_left = -310.0
+offset_top = -202.5
+offset_right = 310.0
+offset_bottom = 202.5
+theme_override_constants/separation = 20
 alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="WellDoneAnchors" type="Control" parent="Layout"]
-margin_right = 600.0
-margin_bottom = 405.0
-rect_min_size = Vector2( 600, 405 )
+[node name="WellDoneAnchors" type="Control" parent="Layout" unique_id=2002274768]
+custom_minimum_size = Vector2(600, 405)
+layout_mode = 2
 size_flags_vertical = 4
 
-[node name="PanelContainer" type="PanelContainer" parent="Layout/WellDoneAnchors"]
+[node name="PanelContainer" type="PanelContainer" parent="Layout/WellDoneAnchors" unique_id=274013096]
+custom_minimum_size = Vector2(600, 405)
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 600, 405 )
 
-[node name="Panel" type="Panel" parent="Layout/WellDoneAnchors/PanelContainer"]
-margin_right = 600.0
-margin_bottom = 405.0
-custom_styles/panel = ExtResource( 7 )
+[node name="Panel" type="Panel" parent="Layout/WellDoneAnchors/PanelContainer" unique_id=1570611424]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7")
 
-[node name="Layout" type="VBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer"]
-margin_right = 600.0
-margin_bottom = 405.0
-custom_constants/separation = 0
+[node name="Layout" type="VBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer" unique_id=942238380]
+layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="ProgressBar" type="ProgressBar" parent="Layout/WellDoneAnchors/PanelContainer/Layout"]
-margin_right = 600.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 0, 16 )
+[node name="ProgressBar" type="ProgressBar" parent="Layout/WellDoneAnchors/PanelContainer/Layout" unique_id=1515836152]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
 value = 100.0
-percent_visible = false
+show_percentage = false
 
-[node name="Margin" type="MarginContainer" parent="Layout/WellDoneAnchors/PanelContainer/Layout"]
-margin_top = 16.0
-margin_right = 600.0
-margin_bottom = 402.0
+[node name="Margin" type="MarginContainer" parent="Layout/WellDoneAnchors/PanelContainer/Layout" unique_id=1163014124]
+layout_mode = 2
 
-[node name="Column" type="VBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 580.0
-margin_bottom = 366.0
-custom_constants/separation = 20
+[node name="Column" type="VBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin" unique_id=846920340]
+layout_mode = 2
+theme_override_constants/separation = 20
 
-[node name="Spacer" type="Control" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column"]
-margin_right = 560.0
-margin_bottom = 8.0
-rect_min_size = Vector2( 400, 8 )
+[node name="Spacer" type="Control" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=117628068]
+custom_minimum_size = Vector2(400, 8)
+layout_mode = 2
 
-[node name="Title" type="Label" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column"]
-margin_top = 28.0
-margin_right = 560.0
-margin_bottom = 80.0
-custom_fonts/font = ExtResource( 3 )
+[node name="Title" type="Label" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=619585571]
+layout_mode = 2
+theme_type_variation = &"LabelWellDone"
 text = "Well done!"
-align = 1
+horizontal_alignment = 1
 
-[node name="Summary" type="Label" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column"]
-margin_top = 100.0
-margin_right = 560.0
-margin_bottom = 136.0
+[node name="Summary" type="Label" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=2006724527]
+layout_mode = 2
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 4 )
+theme_type_variation = &"LabelWellDoneNormal"
 text = "You completed the practice."
-align = 1
-autowrap = true
+horizontal_alignment = 1
 
-[node name="Summary2" type="RichTextLabel" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column"]
-margin_top = 156.0
-margin_right = 560.0
-margin_bottom = 230.0
+[node name="Summary2" type="RichTextLabel" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=1421384031]
+layout_mode = 2
 size_flags_vertical = 0
-custom_fonts/bold_font = ExtResource( 12 )
-custom_fonts/normal_font = ExtResource( 4 )
+theme_type_variation = &"RTSWellDone"
 bbcode_enabled = true
-bbcode_text = "[center][b]Stay[/b] and play around,
-or [b]continue[/b] the course.[/center]"
-text = "Stay and play around,
-or continue the course."
-fit_content_height = true
+text = "[b]Stay[/b] and play around,
+or [b]continue[/b] the course."
+fit_content = true
+horizontal_alignment = 1
 
-[node name="Spacer2" type="Control" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column"]
-margin_top = 250.0
-margin_right = 560.0
-margin_bottom = 258.0
-rect_min_size = Vector2( 400, 8 )
+[node name="Spacer2" type="Control" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=1518012346]
+custom_minimum_size = Vector2(400, 8)
+layout_mode = 2
 
-[node name="Buttons" type="HBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column"]
-margin_top = 278.0
-margin_right = 560.0
-margin_bottom = 346.0
+[node name="Buttons" type="HBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=1753084202]
+layout_mode = 2
 alignment = 1
 
-[node name="StayButton" type="Button" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column/Buttons"]
-margin_left = 72.0
-margin_right = 272.0
-margin_bottom = 68.0
-rect_min_size = Vector2( 200, 68 )
-focus_neighbour_left = NodePath(".")
-focus_neighbour_top = NodePath(".")
-focus_neighbour_right = NodePath("../MoveOnButton")
-focus_neighbour_bottom = NodePath(".")
+[node name="StayButton" type="Button" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column/Buttons" unique_id=485410225]
+custom_minimum_size = Vector2(200, 68)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../MoveOnButton")
+focus_neighbor_bottom = NodePath(".")
 focus_next = NodePath("../MoveOnButton")
 focus_previous = NodePath(".")
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 4
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/normal = ExtResource( 8 )
+theme_override_styles/normal = ExtResource("8")
+theme_override_styles/pressed = ExtResource("6")
+theme_override_styles/hover = ExtResource("5")
 text = "Stay"
 
-[node name="MoveOnButton" type="Button" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column/Buttons"]
-margin_left = 288.0
-margin_right = 488.0
-margin_bottom = 68.0
-rect_min_size = Vector2( 200, 68 )
-focus_neighbour_left = NodePath("../StayButton")
-focus_neighbour_top = NodePath(".")
-focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath(".")
+[node name="MoveOnButton" type="Button" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column/Buttons" unique_id=2063354505]
+custom_minimum_size = Vector2(200, 68)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_left = NodePath("../StayButton")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath("../StayButton")
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 4
-custom_colors/font_color_hover = Color( 0.239216, 1, 0.431373, 1 )
-custom_colors/font_color_pressed = Color( 0.239216, 1, 0.431373, 1 )
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 13 )
-custom_styles/focus = ExtResource( 10 )
-custom_styles/normal = ExtResource( 8 )
+theme_override_colors/font_pressed_color = Color(0.239216, 1, 0.431373, 1)
+theme_override_colors/font_hover_color = Color(0.239216, 1, 0.431373, 1)
+theme_override_styles/normal = ExtResource("8")
+theme_override_styles/pressed = ExtResource("13")
+theme_override_styles/hover = ExtResource("13")
+theme_override_styles/focus = ExtResource("10")
 text = "Continue"
 
-[node name="GameAnchors" type="Control" parent="Layout"]
-margin_left = 620.0
-margin_right = 620.0
-margin_bottom = 405.0
+[node name="GameAnchors" type="Control" parent="Layout" unique_id=770576928]
+layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="GameContainer" type="PanelContainer" parent="Layout/GameAnchors"]
+[node name="GameContainer" type="PanelContainer" parent="Layout/GameAnchors" unique_id=180677567]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = ExtResource( 11 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme_override_styles/panel = ExtResource("11")
 
-[node name="MarginContainer" type="MarginContainer" parent="Layout/GameAnchors/GameContainer"]
-margin_left = 38.0
-margin_top = 84.0
-margin_right = 249.0
-margin_bottom = 353.544
-custom_constants/margin_right = 0
-custom_constants/margin_top = 0
-custom_constants/margin_left = 0
-custom_constants/margin_bottom = 60
-__meta__ = {
-"_editor_description_": ""
-}
+[node name="MarginContainer" type="MarginContainer" parent="Layout/GameAnchors/GameContainer" unique_id=1590202541]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 60
 
-[node name="TextureRect" type="TextureRect" parent="Layout/GameAnchors/GameContainer/MarginContainer"]
-margin_right = 211.0
-margin_bottom = 209.0
-flip_v = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="TextureRect" type="TextureRect" parent="Layout/GameAnchors/GameContainer/MarginContainer" unique_id=308777983]
+layout_mode = 2
 
-[node name="Label" type="TextureRect" parent="Layout/GameAnchors/GameContainer"]
-margin_left = 38.0
-margin_top = 305.544
-margin_right = 249.0
-margin_bottom = 353.544
-rect_min_size = Vector2( 0, 48 )
+[node name="Label" type="TextureRect" parent="Layout/GameAnchors/GameContainer" unique_id=943128069]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
 size_flags_vertical = 8
-texture = ExtResource( 9 )
+texture = ExtResource("9")
 stretch_mode = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}

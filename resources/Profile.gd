@@ -9,43 +9,55 @@ const VALID_FRAMERATE_LIMITS := [0, 30, 60]
 const URL_GODOT_DOCS_REF = "ref=godot-docs"
 
 # General profile details
-export var player_name := ""
+@export var player_name := ""
 # Study progression (across multiple courses)
-export var study_progression := []
-export var last_started_lesson := {}
-export var last_visible_lesson_block := {}
-export var is_sponsored_profile := true
+@export var study_progression := []
+@export var last_started_lesson := { }
+@export var is_sponsored_profile := true
 
 # User settings
-export var language := "en"
+@export var language := "en"
 # Relative size adjustment of all fonts, in integer numbers.
-export var font_size_scale := 0
+@export var font_size_scale := 0
 # Lower contrast enabled
-export var lower_contrast := false
+@export var lower_contrast := false
 # Dyslexia Font enabled
-export var dyslexia_font := false
+@export var dyslexia_font := false
 # Sensitivity when scrolling with the mouse wheel or touchpad.
-export var scroll_sensitivity := 1.0 setget set_scroll_sensitivity
+@export var scroll_sensitivity := 1.0:
+	set = set_scroll_sensitivity
 # Target framerate for the application, to reduce update intensity on lower end devices.
-export var framerate_limit := 60 setget set_framerate_limit
+@export var framerate_limit := 60:
+	set = set_framerate_limit
+
+var _save_queued := false
 
 
 func _init() -> void:
 	study_progression = []
-	last_started_lesson = {}
+	last_started_lesson = { }
 
 	if OS.has_feature("JavaScript"):
-		var window := JavaScript.get_interface("window")
-		var browser_url : String = window.location.href
+		var window := JavaScriptBridge.get_interface("window")
+		@warning_ignore("unsafe_property_access")
+		var browser_url: String = window.location.href
 		is_sponsored_profile = browser_url.find(URL_GODOT_DOCS_REF) == -1
 
 
 func save() -> void:
-	if resource_path.empty():
+	if _save_queued:
+		return
+	_save_queued = true
+	_run_save.call_deferred()
+
+
+func _run_save() -> void:
+	if resource_path.is_empty():
 		push_error("Cannot save a file without a filename, set resource_path first.")
 		return
-	ResourceSaver.save(resource_path, self)
+	ResourceSaver.save(self, resource_path)
 	take_over_path(resource_path)
+	_save_queued = false
 
 
 func get_or_create_course(course_id: String) -> CourseProgress:
@@ -77,44 +89,6 @@ func get_or_create_lesson(course_id: String, lesson_id: String) -> LessonProgres
 	return lesson_progress
 
 
-func set_lesson_reading_block(course_id: String, lesson_id: String, block_id: String) -> void:
-	var lesson_progress := get_or_create_lesson(course_id, lesson_id)
-
-	# Mark the block as read, if it wasn't marked before.
-	if not lesson_progress.completed_blocks.has(block_id):
-		lesson_progress.completed_blocks.append(block_id)
-
-	# Set it as the last visible block to use it later to restore position on the page.
-	if not last_visible_lesson_block.has(course_id):
-		last_visible_lesson_block[course_id] = {}
-	last_visible_lesson_block[course_id][lesson_id] = block_id
-
-	save()
-
-
-func has_lesson_blocks_read(course_id: String, lesson_id: String) -> bool:
-	var lesson_progress := get_or_create_lesson(course_id, lesson_id)
-	return lesson_progress.completed_blocks.size() > 0
-
-
-func is_lesson_block_read(course_id: String, lesson_id: String, block_id: String) -> bool:
-	var lesson_progress := get_or_create_lesson(course_id, lesson_id)
-	return lesson_progress.completed_blocks.has(block_id)
-
-
-func get_last_visited_lesson_block(course_id: String, lesson_id: String) -> String:
-	# Ensure we have some data for the course and the lesson, if we didn't have it before.
-	var _course_progress := get_or_create_course(course_id)
-	var _lesson_progress := get_or_create_lesson(course_id, lesson_id)
-
-	if not last_visible_lesson_block.has(course_id):
-		return ""
-	if not last_visible_lesson_block[course_id].has(lesson_id):
-		return ""
-
-	return last_visible_lesson_block[course_id][lesson_id]
-
-
 func set_lesson_reading_completed(course_id: String, lesson_id: String, completed: bool) -> void:
 	var lesson_progress := get_or_create_lesson(course_id, lesson_id)
 	lesson_progress.completed_reading = completed
@@ -127,7 +101,10 @@ func is_lesson_reading_completed(course_id: String, lesson_id: String) -> bool:
 
 
 func set_lesson_quiz_completed(
-	course_id: String, lesson_id: String, quiz_id: String, completed: bool
+		course_id: String,
+		lesson_id: String,
+		quiz_id: String,
+		completed: bool,
 ) -> void:
 	var lesson_progress := get_or_create_lesson(course_id, lesson_id)
 
@@ -146,7 +123,10 @@ func is_lesson_quiz_completed(course_id: String, lesson_id: String, quiz_id: Str
 
 
 func set_lesson_practice_completed(
-	course_id: String, lesson_id: String, practice_id: String, completed: bool
+		course_id: String,
+		lesson_id: String,
+		practice_id: String,
+		completed: bool,
 ) -> void:
 	var lesson_progress := get_or_create_lesson(course_id, lesson_id)
 
@@ -181,7 +161,7 @@ func get_last_started_lesson(course_id: String) -> String:
 	if last_started_lesson.has(course_id):
 		lesson_id = last_started_lesson[course_id]
 
-	if lesson_id.empty():
+	if lesson_id.is_empty():
 		return ""
 
 	# Ensure we have some data for the lesson, if we didn't have it before.
@@ -192,9 +172,6 @@ func get_last_started_lesson(course_id: String) -> String:
 func reset_course_progress(course_id: String) -> void:
 	var course_progress := get_or_create_course(course_id)
 	course_progress.reset()
-
-	if last_visible_lesson_block.has(course_id):
-		last_visible_lesson_block.erase(course_id)
 
 	if last_started_lesson.has(course_id):
 		last_started_lesson.erase(course_id)
@@ -210,7 +187,7 @@ func set_scroll_sensitivity(amount: float) -> void:
 func set_framerate_limit(limit: int) -> void:
 	assert(
 		limit in VALID_FRAMERATE_LIMITS,
-		"The framerate limit must be one of: " + str(VALID_FRAMERATE_LIMITS)
+		"The framerate limit must be one of: " + str(VALID_FRAMERATE_LIMITS),
 	)
 	framerate_limit = limit
 	emit_signal("framerate_limit_changed", framerate_limit)

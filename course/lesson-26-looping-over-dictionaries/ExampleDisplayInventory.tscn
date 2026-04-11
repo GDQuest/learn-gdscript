@@ -1,17 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://j7iltpvchlso"]
 
-[ext_resource path="res://course/common/inventory/DictInventory.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
+[ext_resource type="PackedScene" uid="uid://c1yxaejn70xrh" path="res://course/common/inventory/DictInventory.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.0901961, 0.0941176, 0.188235, 1 )
-border_color = Color( 0.4, 0.384314, 0.564706, 1 )
+[sub_resource type="StyleBoxFlat" id="2"]
+bg_color = Color(0.0901961, 0.0941176, 0.188235, 1)
+border_color = Color(0.4, 0.384314, 0.564706, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends DictInventory
 
 func _ready() -> void:
@@ -23,26 +23,20 @@ func _ready() -> void:
 	update_display()
 "
 
-[node name="Panel" type="PanelContainer"]
-margin_right = 1047.0
-margin_bottom = 298.0
+[node name="Panel" type="PanelContainer" unique_id=2033299985]
+offset_right = 1047.0
+offset_bottom = 298.0
 size_flags_horizontal = 3
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1040.0
-margin_bottom = 387.0
-rect_min_size = Vector2( 0, 380 )
+[node name="RunnableCodeExample" parent="." unique_id=1428077858 instance=ExtResource("2")]
+custom_minimum_size = Vector2(0, 380)
+layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 5
 run_button_label = "run()"
 
-[node name="DictInventory" parent="RunnableCodeExample" instance=ExtResource( 1 )]
-margin_left = 831.0
-margin_top = 0.0
-margin_right = 1033.0
-margin_bottom = 380.0
+[node name="DictInventory" parent="RunnableCodeExample" unique_id=1548782827 instance=ExtResource("1")]
+layout_mode = 2
 size_flags_horizontal = 5
-custom_styles/panel = SubResource( 2 )
-script = SubResource( 1 )
+theme_override_styles/panel = SubResource("2")
+script = SubResource("1")

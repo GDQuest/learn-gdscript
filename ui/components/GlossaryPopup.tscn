@@ -1,63 +1,60 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://cwpkb454y13jm"]
 
-[ext_resource path="res://ui/components/GlossaryPopup.gd" type="Script" id=1]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
-[ext_resource path="res://ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=3]
-[ext_resource path="res://ui/theme/panel_darker_with_shadow.tres" type="StyleBox" id=4]
+[ext_resource type="Script" uid="uid://bmrywhp44ewj4" path="res://ui/components/GlossaryPopup.gd" id="1"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="2"]
+[ext_resource type="StyleBox" path="res://ui/theme/panel_darker_with_shadow.tres" id="4"]
 
-[node name="GlossaryPopup" type="CanvasLayer"]
+[node name="GlossaryPopup" type="CanvasLayer" unique_id=969137557 node_paths=PackedStringArray("_panel", "_interaction_area", "_title", "_content", "_timer")]
 layer = 2
-script = ExtResource( 1 )
+script = ExtResource("1")
+_panel = NodePath("Panel")
+_interaction_area = NodePath("InteractionArea")
+_title = NodePath("Panel/MarginContainer/Column/Title")
+_content = NodePath("Panel/MarginContainer/Column/Content")
+_timer = NodePath("Timer")
 
-[node name="Panel" type="PanelContainer" parent="."]
-margin_right = 580.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 580, 120 )
-theme = ExtResource( 2 )
-custom_styles/panel = ExtResource( 4 )
+[node name="Panel" type="PanelContainer" parent="." unique_id=1177708211]
+visible = false
+custom_minimum_size = Vector2(580, 120)
+offset_right = 580.0
+offset_bottom = 120.0
+theme = ExtResource("2")
+theme_override_styles/panel = ExtResource("4")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
-margin_right = 580.0
-margin_bottom = 120.0
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1768556909]
+layout_mode = 2
 mouse_filter = 2
 
-[node name="Column" type="VBoxContainer" parent="Panel/MarginContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 560.0
-margin_bottom = 100.0
+[node name="Column" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1566564526]
+layout_mode = 2
 mouse_filter = 2
-custom_constants/separation = 8
+theme_override_constants/separation = 8
 
-[node name="Title" type="Label" parent="Panel/MarginContainer/Column"]
-margin_right = 540.0
-margin_bottom = 28.0
-custom_colors/font_color = Color( 0.360784, 0.678431, 0.988235, 1 )
-custom_fonts/font = ExtResource( 3 )
+[node name="Title" type="Label" parent="Panel/MarginContainer/Column" unique_id=1740499122]
+layout_mode = 2
+theme_type_variation = &"LabelBoldText"
+theme_override_colors/font_color = Color(0.360784, 0.678431, 0.988235, 1)
 text = "Term"
-autowrap = true
 
-[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/Column"]
-margin_top = 36.0
-margin_right = 540.0
-margin_bottom = 36.0
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/Column" unique_id=1927065562]
+layout_mode = 2
 mouse_filter = 2
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 
-[node name="Content" type="RichTextLabel" parent="Panel/MarginContainer/Column"]
-margin_top = 44.0
-margin_right = 540.0
-margin_bottom = 73.0
+[node name="Content" type="RichTextLabel" parent="Panel/MarginContainer/Column" unique_id=1345731594]
+layout_mode = 2
 mouse_filter = 2
 bbcode_enabled = true
-bbcode_text = "Our error explanation."
 text = "Our error explanation."
-fit_content_height = true
+fit_content = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=855661795]
 wait_time = 0.5
 one_shot = true
 
-[node name="InteractionArea" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="InteractionArea" type="Control" parent="." unique_id=2062394503]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

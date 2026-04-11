@@ -18,7 +18,7 @@
 # translation, etc. Multiple raw messages can share the same code.
 #
 class_name GDScriptCodes
-extends Reference
+extends RefCounted
 
 # Codes start at 10000 to give some space for WarningCodes coming from the engine.
 enum ErrorCode {
@@ -273,7 +273,7 @@ const MESSAGE_DATABASE := [
 			["Expected else after ternary if."],
 			["Expected value after ternary else."],
 			["Expected string constant or identifier after '$' or '/'."],
-			["Path expected after $."],
+			["Path3D expected after $."],
 			["':' expected at end of line."],
 			["Expected ',' or ')'"],
 			["Expected ')' in expression"],
@@ -311,7 +311,7 @@ const MESSAGE_DATABASE := [
 			"Expected else after ternary if.",
 			"Expected value after ternary else.",
 			"Expected string constant or identifier after '$' or '/'.",
-			"Path expected after $.",
+			"Path3D expected after $.",
 			"':' expected at end of line.",
 			"Expected ',' or ')'",
 			"Expected ')' in expression",
@@ -341,7 +341,7 @@ const MESSAGE_DATABASE := [
 	},
 	{
 		"patterns": [
-			["Unknown character"]
+			["Unknown character"],
 		],
 		"raw": [
 			"Unknown character",
@@ -352,16 +352,13 @@ const MESSAGE_DATABASE := [
 		"patterns": [
 			["Expected", "after", "preload"],
 			["expected string constant as 'preload' argument."],
-			["Expected", "after", "yield"],
+			["Expected", "after", "await"],
 			["Expected", "after", "assert"],
 		],
 		"raw": [
 			"Expected '(' after 'preload'",
 			"Expected ')' after 'preload' path",
 			"expected string constant as 'preload' argument.",
-			'Expected "(" after "yield".',
-			'Expected "," after the first argument of "yield".',
-			'Expected ")" after the second argument of "yield".',
 			"Expected '(' after assert",
 		],
 		"code": ErrorCode.UNEXPECTED_CHARACTER_IN_KEYWORD,
@@ -522,7 +519,7 @@ const MESSAGE_DATABASE := [
 	},
 	{
 		"patterns": [
-			['"yield()" can only be used inside function blocks.'],
+			['"await" can only be used inside function blocks.'],
 			['"self" isn\'t allowed in a static function or constant expression.'],
 			[
 				'Expected "var", "onready", "remote", "master", "puppet", "sync", "remotesync", "mastersync", "puppetsync".',
@@ -540,7 +537,7 @@ const MESSAGE_DATABASE := [
 			['The "tool" keyword can only be present once per script.'],
 		],
 		"raw": [
-			'"yield()" can only be used inside function blocks.',
+			'"await" can only be used inside function blocks.',
 			'"self" isn\'t allowed in a static function or constant expression.',
 			'Expected "var", "onready", "remote", "master", "puppet", "sync", "remotesync", "mastersync", "puppetsync".',
 			'Expected "var".',
@@ -655,8 +652,6 @@ const MESSAGE_DATABASE := [
 			["Wrong number of arguments, expected 1 or 2"],
 			["The setter function needs to receive exactly 1 argument"],
 			["The getter function can't receive arguments"],
-			['The first argument of "yield()" must be an object.'],
-			['The second argument of "yield()" must be a string.'],
 			["Parser bug: binary operation without 2 arguments."],
 			["Parser bug: ternary operation without 3 arguments."],
 			["Parser bug: operation without enough arguments."],

@@ -10,7 +10,7 @@
 # You can probe the tested scene and script slice using the `_scene` and
 # `_slice` properties below.
 class_name PracticeTester
-extends Reference
+extends RefCounted
 
 # Reference to the tested scene. Use it to test the state of nodes in the scene.
 var _scene_root_viewport: Node
@@ -36,7 +36,7 @@ func run_tests() -> TestResult:
 	_code_lines.clear()
 	_prepare()
 
-	for method in _test_methods:
+	for method: StringName in _test_methods:
 		var test_name = _test_methods[method]
 
 		var error_message: String = call(method)
@@ -55,13 +55,14 @@ func _find_test_method_names() -> Dictionary:
 	var output := { }
 
 	var methods := []
-	for method in get_method_list():
-		if method.name.begins_with("test_"):
-			methods.append(method.name)
+	for method: Dictionary in get_method_list():
+		var method_name: StringName = method.name
+		if method_name.begins_with("test_"):
+			methods.append(method_name)
 
 	methods.sort()
 
-	for method in methods:
+	for method: StringName in methods:
 		output[method] = method.trim_prefix("test_").capitalize()
 
 	return output
@@ -85,9 +86,9 @@ func matches_code_line(target_lines: Array) -> bool:
 	if not _code_lines:
 		_code_lines = _slice.current_text.split("\n")
 
-	for line in _code_lines:
+	for line: String in _code_lines:
 		line = line.replace(" ", "").strip_edges().rstrip(";")
-		for match_pattern in target_lines:
+		for match_pattern: String in target_lines:
 			if line.match(match_pattern):
 				return true
 	return false
@@ -97,7 +98,7 @@ func matches_code_line(target_lines: Array) -> bool:
 # Uses RegEx to match lines.
 func matches_code_line_regex(regex_patterns: Array) -> bool:
 	var regexes = []
-	for pattern in regex_patterns:
+	for pattern: String in regex_patterns:
 		var regex := RegEx.new()
 		regex.compile(pattern)
 		regexes.append(regex)
@@ -105,8 +106,8 @@ func matches_code_line_regex(regex_patterns: Array) -> bool:
 	if not _code_lines:
 		_code_lines = _slice.current_text.split("\n")
 
-	for line in _code_lines:
-		for regex in regexes:
+	for line: String in _code_lines:
+		for regex: RegEx in regexes:
 			if regex.search(line):
 				return true
 	return false
@@ -119,4 +120,4 @@ class TestResult:
 
 
 	func is_success() -> bool:
-		return errors.empty()
+		return errors.is_empty()

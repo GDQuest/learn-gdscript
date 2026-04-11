@@ -3,9 +3,9 @@ extends Node2D
 
 signal cell_changed
 
-var cell := Vector2(0, 0) setget set_cell, get_cell
+var cell := Vector2(0, 0): get = get_cell, set = set_cell
 var cell_size := 96
-var grid_size_px := Vector2.ZERO setget set_grid_size_px
+var grid_size_px := Vector2.ZERO: set = set_grid_size_px
 
 
 func set_cell(new_cell: Vector2) -> void:

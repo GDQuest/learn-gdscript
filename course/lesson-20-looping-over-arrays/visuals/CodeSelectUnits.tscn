@@ -1,13 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene format=3 uid="uid://bjpbyxu0fpfbe"]
 
-[ext_resource path="res://course/common/GDScriptCodeExample.gd" type="Script" id=1]
+[ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_bdwjr"]
+[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_vqthv"]
 
-[node name="GDScriptCodeExample" type="TextEdit"]
+[node name="GDScriptCodeExample" type="CodeEdit" unique_id=1656619472]
+custom_minimum_size = Vector2(300, 300)
+anchors_preset = 10
 anchor_right = 1.0
-margin_right = -1620.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 300, 300 )
+offset_right = -1620.0
+offset_bottom = 300.0
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_vqthv")
 text = "var units = []
 var selected_units = []
 
@@ -16,19 +19,9 @@ func select_units(cells):
 		if cell in units:
 			selected_units.append(cell)
 	update()"
-readonly = true
-syntax_highlighting = true
-show_line_numbers = true
-draw_tabs = true
-draw_spaces = true
 context_menu_enabled = false
 shortcut_keys_enabled = false
-smooth_scrolling = true
-wrap_enabled = true
-caret_block_mode = true
 caret_blink = true
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-min_size = Vector2( 300, 300 )
+draw_tabs = true
+draw_spaces = true
+script = ExtResource("1_bdwjr")

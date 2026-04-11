@@ -9,37 +9,40 @@ const FRAMERATE_MAP := {
 	Framerates.NO_LIMIT: 0,
 }
 
-var _sample_default_font: DynamicFont
+@export var _panel: PanelContainer
+@export var _color_rect: ColorRect
+@export var _language_value: OptionButton
+@export var _font_size_value: HSlider
+@export var _font_size_sample: Label
+@export var _scroll_sensitivity_slider: HSlider
+@export var _framerate_settings_section: Control
+@export var _framerate_option: OptionButton
+@export var _lower_contrast: CheckBox
+@export var _dyslexia_font: CheckBox
+@export var _apply_button: Button
+@export var _cancel_button: Button
 
-onready var _panel := $PanelContainer as PanelContainer
-onready var _color_rect := $ColorRect as ColorRect
-onready var _language_value := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/Value as OptionButton
-onready var _font_size_value := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer/Value as HSlider
-onready var _font_size_sample := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer/SampleText as Label
-onready var _scroll_sensitivity_slider := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/ScrollSensitivitySetting/Value as HSlider
-onready var _framerate_option := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting/Value as OptionButton
-
-onready var _lower_contrast := $PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LowerContrasSetting/CheckBox as CheckBox
-onready var _dyslexia_font :=$PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSetting/CheckBox as CheckBox
-
-onready var _apply_button := $PanelContainer/Column/Margin/Column/Buttons/ApplyButton as Button
-onready var _cancel_button := $PanelContainer/Column/Margin/Column/Buttons/CancelButton as Button
+var _sample_default_font: FontVariation
 
 
 func _init() -> void:
 	# Store the initial state as is, so that we can preview it without being affected.
-	_sample_default_font = ResourceLoader.load("res://ui/theme/fonts/font_text.tres", "", true).duplicate()
+	_sample_default_font = ResourceLoader.load("res://ui/theme/fonts/font_text.tres", "", ResourceLoader.CACHE_MODE_IGNORE).duplicate()
 
 
 func _ready() -> void:
+	# TODO: Remove whenever https://github.com/godotengine/godot/issues/117875 is fixed
+	if OS.has_feature("web"):
+		_framerate_settings_section.hide()
+
 	_init_languages()
 	_init_values()
-	
-	_font_size_value.connect("value_changed", self, "_on_font_size_changed")
-	
-	_apply_button.connect("pressed", self, "_on_apply_settings")
-	_cancel_button.connect("pressed", self, "hide")
-	_panel.connect("visibility_changed", self, "_on_visibility_changed")
+
+	_font_size_value.value_changed.connect(_on_font_size_changed)
+
+	_apply_button.pressed.connect(_on_apply_settings)
+	_cancel_button.pressed.connect(hide)
+	_panel.visibility_changed.connect(_on_visibility_changed)
 
 
 func show() -> void:
@@ -54,62 +57,72 @@ func hide() -> void:
 
 func _init_languages() -> void:
 	_language_value.clear()
-	
+
 	var available_languages := TranslationManager.get_available_languages()
-	for language_data in available_languages:
+	for language_data: Dictionary in available_languages:
 		var item_index := _language_value.get_item_count()
-		
-		_language_value.add_item(language_data.name)
+		var language_name: String = language_data.name
+		_language_value.add_item(language_name)
 		_language_value.set_item_metadata(item_index, language_data.code)
 
 
 func _init_values() -> void:
 	var current_profile = UserProfiles.get_profile()
-	
+
 	for i in _language_value.get_item_count():
 		var language_code := str(_language_value.get_item_metadata(i))
 		if language_code == current_profile.language:
 			_language_value.select(i)
 			break
-	
+
 	_font_size_value.value = clamp(
-		int(current_profile.font_size_scale), _font_size_value.min_value, _font_size_value.max_value
+		current_profile.font_size_scale,
+		_font_size_value.min_value,
+		_font_size_value.max_value,
 	)
 	_scroll_sensitivity_slider.value = current_profile.scroll_sensitivity
 	_framerate_option.selected = FRAMERATE_MAP.values().find(current_profile.framerate_limit)
-	
-	_lower_contrast.pressed = current_profile.lower_contrast
-	_dyslexia_font.pressed = current_profile.dyslexia_font
+
+	_lower_contrast.button_pressed = current_profile.lower_contrast
+	_dyslexia_font.button_pressed = current_profile.dyslexia_font
 
 
 func _on_apply_settings() -> void:
 	var current_profile = UserProfiles.get_profile()
-	
+
 	var size_scale := int(_font_size_value.value)
-	ThemeManager.scale_all_font_sizes(size_scale)
-	
-	ThemeManager.set_lower_contrast(_lower_contrast.pressed)
-	ThemeManager.set_dyslexia_font(_dyslexia_font.pressed)
+	var dyslexia_font := _dyslexia_font.button_pressed
+	if size_scale != current_profile.font_size_scale or dyslexia_font != current_profile.dyslexia_font:
+		ThemeManager.apply_font_settings(size_scale, dyslexia_font)
+		current_profile.font_size_scale = size_scale
+		current_profile.dyslexia_font = dyslexia_font
+		current_profile.save()
+		Events.emit_signal("font_size_scale_changed", size_scale)
+
+	if _lower_contrast.button_pressed != current_profile.lower_contrast:
+		ThemeManager.set_lower_contrast(_lower_contrast.button_pressed)
 
 	current_profile.set_scroll_sensitivity(_scroll_sensitivity_slider.value)
-	current_profile.set_framerate_limit(FRAMERATE_MAP[_framerate_option.selected])
-	
+	current_profile.set_framerate_limit(FRAMERATE_MAP[_framerate_option.selected] as int)
+
 	var language_code := str(_language_value.get_item_metadata(_language_value.selected))
-	TranslationManager.set_language(language_code)
-	
-	var current_font = _font_size_sample.get_font("custom_fonts/font")
+	if language_code != TranslationManager.current_language:
+		TranslationManager.set_language(language_code)
+
+	var current_font := _font_size_sample.get_theme_font("font") as FontVariation
 	if current_profile.dyslexia_font:
-		current_font.font_data = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
-	_font_size_sample.add_font_override("font", current_font)
+		current_font.base_font = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
+	_font_size_sample.add_theme_font_override("font", current_font)
 
 
 func _on_font_size_changed(value: int) -> void:
 	var current_profile = UserProfiles.get_profile()
-	var font_override = _sample_default_font.duplicate() as DynamicFont
-	font_override.size += 2 * value
+	var font_override := _sample_default_font.duplicate() as FontVariation
+	var font_size := ThemeManager.get_default_font_size()
 	if current_profile.dyslexia_font:
-		font_override.font_data = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
-	_font_size_sample.add_font_override("font", font_override)
+		font_override.base_font = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
+	_font_size_sample.add_theme_font_override("font", font_override)
+	_font_size_sample.add_theme_font_size_override("font_size", font_size + value * 2)
 
 
 func _on_visibility_changed() -> void:

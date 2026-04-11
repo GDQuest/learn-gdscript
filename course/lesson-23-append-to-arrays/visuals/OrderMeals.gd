@@ -13,14 +13,14 @@ var _add_timer := Timer.new()
 
 var _wait_queue := []
 
-onready var _waiting_orders_box := $Row/Pending/VBoxContainer as VBoxContainer
-onready var _completed_orders_box := $Row/Done/VBoxContainer as VBoxContainer
+@onready var _waiting_orders_box := $Row/Pending/VBoxContainer as VBoxContainer
+@onready var _completed_orders_box := $Row/Done/VBoxContainer as VBoxContainer
 
 
 func _ready():
 	add_child(_add_timer)
 	_add_timer.wait_time = 1.0
-	_add_timer.connect("timeout", self, "add_order")
+	_add_timer.timeout.connect(add_order)
 
 
 func run():
@@ -30,13 +30,13 @@ func run():
 
 
 func add_order():
-	if _wait_queue.empty():
+	if _wait_queue.is_empty():
 		_add_timer.stop()
 		return
 	
 	var order = _wait_queue.pop_back()
 	var meal := Meal.new(order.name, order.time)
-	meal.connect("meal_ready", self, "_on_meal_ready")
+	meal.meal_ready.connect(_on_meal_ready)
 	waiting_orders.append(order.name)
 	_waiting_orders_box.add_child(meal)
 
@@ -46,7 +46,7 @@ func _on_meal_ready():
 	var order_name := "%s"%[completed_orders.back()]
 	var meal := Meal.new(order_name)
 	_completed_orders_box.add_child(meal)
-	if waiting_orders.empty():
+	if waiting_orders.is_empty():
 		_complete_run()
 
 
@@ -80,7 +80,7 @@ class Meal extends VBoxContainer:
 	signal meal_ready
 	
 	var progress := ProgressBar.new()
-	var scene_tween: SceneTreeTween
+	var scene_tween: Tween
 	var texture := TextureRect.new()
 	var time := 0.0
 	var _meal_is_ready := false
@@ -88,7 +88,7 @@ class Meal extends VBoxContainer:
 	func _init(init_text: String, init_time: float = 0) -> void:
 		var label := Label.new()
 		var container := HBoxContainer.new()
-		progress.percent_visible = false
+		progress.show_percentage = false
 		container.add_child(texture)
 		container.add_child(label)
 		add_child(container)
@@ -102,7 +102,7 @@ class Meal extends VBoxContainer:
 		scene_tween.tween_property(self, "modulate:a", 1.0, 1).from(0).set_ease(Tween.EASE_OUT)
 		if time > 0:
 			texture.texture = TEXTURE_UNCHECKED
-			scene_tween.connect("finished", self, "_on_tween_completed")
+			scene_tween.finished.connect(_on_tween_completed)
 			scene_tween.tween_property(progress, "value", 100.0, time).from(0.0)
 		else:
 			texture.texture = TEXTURE_CHECKED

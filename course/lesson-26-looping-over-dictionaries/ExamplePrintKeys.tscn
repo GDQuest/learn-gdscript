@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://co26e8j6mtm8c"]
 
-[ext_resource path="res://ui/components/OutputConsole.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=2]
+[ext_resource type="PackedScene" uid="uid://b0sm7ot8y7ae2" path="res://ui/components/OutputConsole.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends OutputConsole
 
 var inventory = {
@@ -21,20 +21,15 @@ func reset():
 	clear_messages()
 "
 
-[node name="Panel" type="PanelContainer"]
-margin_right = 1047.0
-margin_bottom = 298.0
+[node name="Panel" type="PanelContainer" unique_id=1377130111]
+offset_right = 1047.0
+offset_bottom = 298.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 2 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1040.0
-margin_bottom = 387.0
-rect_min_size = Vector2( 0, 380 )
+[node name="RunnableCodeExample" parent="." unique_id=923401956 instance=ExtResource("2")]
+custom_minimum_size = Vector2(0, 380)
+layout_mode = 2
+run_button_label = "run()"
 gdscript_code = "var inventory = {
 	\"healing heart\": 3,
 	\"gems\": 5,
@@ -44,12 +39,7 @@ gdscript_code = "var inventory = {
 func run():
 	for item_name in inventory.keys():
 		print(item_name)"
-run_button_label = "run()"
 
-[node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 924.0
-margin_right = 1033.0
-margin_bottom = 380.0
-script = SubResource( 1 )
+[node name="OutputConsole" parent="RunnableCodeExample" unique_id=696672640 instance=ExtResource("1")]
+layout_mode = 2
+script = SubResource("1")

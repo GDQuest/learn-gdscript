@@ -1,8 +1,7 @@
 extends Button
 
-
 func _ready() -> void:
-	connect("pressed", get_tree(), "quit")
-	
-	if OS.has_feature("JavaScript"):
+	pressed.connect(get_tree().quit)
+
+	if OS.has_feature("web"):
 		queue_free()

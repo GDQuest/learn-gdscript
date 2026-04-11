@@ -8,7 +8,7 @@
 # var error = ScriptError.new()
 # error.from_JSON(json_error)
 class_name ScriptError
-extends Reference
+extends RefCounted
 
 var error_range := ErrorRange.new()
 var message := ""
@@ -18,13 +18,17 @@ var code := 0
 
 func from_JSON(json: Dictionary) -> void:
 	if "message" in json:
-		message = String(json.message)
+		var json_message: String = json.message
+		message = str(json_message)
 	if "range" in json:
-		error_range.from_JSON(json.range)
+		var json_range: Dictionary = json.range
+		error_range.from_JSON(json_range)
 	if "severity" in json:
-		severity = int(json.severity)
+		var json_severity: int = json.severity
+		severity = int(json_severity)
 	if "code" in json:
-		code = _improve_error_code(json.code, message)
+		var json_code: int = json.code
+		code = _improve_error_code(json_code, message)
 
 
 func _improve_error_code(raw_code: int, raw_message: String) -> int:
@@ -35,7 +39,7 @@ func _improve_error_code(raw_code: int, raw_message: String) -> int:
 	# But if it's -1, try to remap the message to a new code using the GDScript codes database.
 	var remapped_code := -1
 	# Iterate through every record to find the one that has a matching pattern.
-	for record in GDScriptCodes.MESSAGE_DATABASE:
+	for record: Dictionary in GDScriptCodes.MESSAGE_DATABASE:
 		# First check if the record has a valid structure, just in case.
 		if not typeof(record) == TYPE_DICTIONARY:
 			continue
@@ -47,7 +51,7 @@ func _improve_error_code(raw_code: int, raw_message: String) -> int:
 		# Iterate through an array of match patterns to see if any of them matches our message
 		# completely.
 		var matched = false
-		for pattern in record.patterns:
+		for pattern: Array in record.patterns:
 			# Pattern must be an array of strings.
 			if not typeof(pattern) == TYPE_ARRAY:
 				continue
@@ -58,7 +62,7 @@ func _improve_error_code(raw_code: int, raw_message: String) -> int:
 			for i in pattern.size():
 				# If the substring does not match, exit early, this is not our match.
 				var substring := pattern[i] as String
-				var found = curr_message.find(substring)
+				var found := curr_message.find(substring)
 				if found == -1:
 					break
 
@@ -89,11 +93,15 @@ class ErrorRange:
 	var start := ErrorPosition.new()
 	var end := ErrorPosition.new()
 
+
 	func from_JSON(json: Dictionary) -> void:
 		if "start" in json:
-			start.from_JSON(json.start)
+			var json_start: Dictionary = json.start
+			start.from_JSON(json_start)
 		if "end" in json:
-			end.from_JSON(json.end)
+			var json_end: Dictionary = json.end
+			end.from_JSON(json_end)
+
 
 	func _to_string() -> String:
 		return "[%s-%s]" % [start, end]
@@ -103,11 +111,15 @@ class ErrorPosition:
 	var character := 0
 	var line := 0
 
+
 	func from_JSON(json: Dictionary) -> void:
 		if "character" in json:
-			character = int(json.character)
+			var json_character: int = json.character
+			character = int(json_character)
 		if "line" in json:
-			line = int(json.line)
+			var json_line: int = json.line
+			line = int(json_line)
+
 
 	func _to_string() -> String:
 		return "(%s:%s)" % [line, character]

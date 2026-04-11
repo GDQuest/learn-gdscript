@@ -1,30 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://cpytwbrj6u0ay"]
 
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=1]
-[ext_resource path="res://course/lesson-3-standing-on-shoulders-of-giants/make-visible/MakeCharacterVisible.gd" type="Script" id=4]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="1"]
+[ext_resource type="Script" uid="uid://by87fsagclbh3" path="res://course/lesson-3-standing-on-shoulders-of-giants/make-visible/MakeCharacterVisible.gd" id="4"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
-
-[node name="MakeCharacterVisible" instance=ExtResource( 1 )]
+[node name="MakeCharacterVisible" unique_id=725868670 instance=ExtResource("1")]
 visible = false
-script = ExtResource( 4 )
+script = ExtResource("4")
 
-[node name="AnimationPlayer" parent="." index="0"]
-autoplay = "saying_hi"
+[node name="AnimationPlayer" parent="." index="0" unique_id=1751687262]
+autoplay = &"saying_hi"
 
-[node name="RobotBody" parent="Pivot" index="0"]
-position = Vector2( 0, 0 )
-
-[node name="HandIceRight" parent="Pivot" index="1"]
-position = Vector2( -45, 30 )
-rotation = -0.918567
-
-[node name="HandIceLeft" parent="Pivot" index="2"]
-position = Vector2( 49, 25 )
-rotation = 0.737189
-
-[node name="Camera2D" type="Camera2D" parent="." index="2"]
-current = true
-
-[node name="AnimationTree" parent="." index="4"]
-parameters/playback = SubResource( 1 )
+[node name="Camera2D" type="Camera2D" parent="." index="2" unique_id=803081983]

@@ -1,28 +1,21 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene format=3 uid="uid://cfagtw74dk2rr"]
 
-[ext_resource path="res://course/common/GDScriptCodeExample.gd" type="Script" id=1]
+[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_e0fo4"]
+[ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_us326"]
 
-[node name="GDScriptCodeExample" type="TextEdit"]
+[node name="GDScriptCodeExample" type="CodeEdit" unique_id=2012333996]
+custom_minimum_size = Vector2(300, 140)
+anchors_preset = 10
 anchor_right = 1.0
-margin_right = -1620.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 300, 140 )
+offset_right = -1620.0
+offset_bottom = 140.0
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_e0fo4")
 text = "var numbers = [1, 2, 6, 7]
 var vectors_and_numbers = [Vector2(0, 0), Vector2(4, 3), 5, -1.0]"
-readonly = true
-syntax_highlighting = true
-show_line_numbers = true
-draw_tabs = true
-draw_spaces = true
 context_menu_enabled = false
 shortcut_keys_enabled = false
-smooth_scrolling = true
-wrap_enabled = true
-caret_block_mode = true
 caret_blink = true
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-min_size = Vector2( 300, 140 )
+draw_tabs = true
+draw_spaces = true
+script = ExtResource("1_us326")

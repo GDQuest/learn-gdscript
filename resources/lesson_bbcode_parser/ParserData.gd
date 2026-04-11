@@ -1,7 +1,7 @@
 # This script defines all of the supported tags in our lessons and some data
 # structures to help validate them. It's used by the BBCode parser.
 class_name BBCodeParserData
-extends Reference
+extends RefCounted
 
 # Basic Godot BBCode formatting tags that should be ignored by the parser
 # These are handled by Godot's RichTextLabel and don't need validation
@@ -11,7 +11,6 @@ enum Tag {
 	UNKNOWN,
 	LESSON,
 	TITLE,
-	CODEBLOCK,
 	VISUAL,
 	NOTE,
 	QUIZ_CHOICE,
@@ -31,51 +30,29 @@ enum Tag {
 	STRING,
 }
 
-
 var TAG_DEFINITIONS := {
-	Tag.LESSON:
-		TagDefinition.new("lesson", true, false, [], ["title"], [], []),
-	Tag.TITLE:
-		TagDefinition.new("title", true, false, [Tag.LESSON], [], [], []),
-	Tag.CODEBLOCK:
-		TagDefinition.new("codeblock", true, false, [Tag.LESSON], [], ["runnable"], []),
-	Tag.VISUAL:
-		TagDefinition.new("visual", false, true, [Tag.LESSON], ["path"], [], []),
-	Tag.NOTE:
-		TagDefinition.new("note", true, false, [Tag.LESSON], [], ["title"], []),
-	Tag.QUIZ_CHOICE:
-		TagDefinition.new("quiz_choice", true, false, [Tag.LESSON], ["question"], ["multiple", "shuffle"], [Tag.OPTION, Tag.EXPLANATION]),
-	Tag.QUIZ_INPUT:
-		TagDefinition.new("quiz_input", true, false, [Tag.LESSON], ["question", "answer"], [], [Tag.EXPLANATION]),
-	Tag.OPTION:
-		TagDefinition.new("option", true, false, [Tag.QUIZ_CHOICE], [], ["correct"], []),
-	Tag.HINT:
-		TagDefinition.new("hint", true, false, [Tag.QUIZ_CHOICE, Tag.QUIZ_INPUT, Tag.PRACTICE], [], [], []),
-	Tag.EXPLANATION:
-		TagDefinition.new("explanation", true, false, [Tag.QUIZ_CHOICE, Tag.QUIZ_INPUT], [], [], []),
-	Tag.PRACTICE:
-		TagDefinition.new("practice", true, false, [Tag.LESSON], ["id", "title"], [], [Tag.DESCRIPTION, Tag.GOAL, Tag.STARTING_CODE, Tag.VALIDATOR, Tag.SCRIPT_SLICE]),
-	Tag.DESCRIPTION:
-		TagDefinition.new("description", true, false, [Tag.PRACTICE], [], [], []),
-	Tag.GOAL:
-		TagDefinition.new("goal", true, false, [Tag.PRACTICE], [], [], []),
-	Tag.STARTING_CODE:
-		TagDefinition.new("starting_code", true, false, [Tag.PRACTICE], [], [], []),
-	Tag.CURSOR:
-		TagDefinition.new("cursor", false, true, [Tag.PRACTICE], [], ["line", "column"], []),
-	Tag.VALIDATOR:
-		TagDefinition.new("validator", false, true, [Tag.PRACTICE], ["path"], [], []),
-	Tag.SCRIPT_SLICE:
-		TagDefinition.new("script_slice", false, true, [Tag.PRACTICE], ["path"], ["name"], []),
-	Tag.DOCS:
-		TagDefinition.new("docs", true, false, [Tag.PRACTICE], [], [], []),
-	Tag.SEPARATOR:
-		TagDefinition.new("separator", false, true, [Tag.LESSON], [], [], []),
+	Tag.LESSON: TagDefinition.new("lesson", true, false, [], ["title"], [], []),
+	Tag.TITLE: TagDefinition.new("title", true, false, [Tag.LESSON], [], [], []),
+	Tag.VISUAL: TagDefinition.new("visual", false, true, [Tag.LESSON], ["path"], [], []),
+	Tag.NOTE: TagDefinition.new("note", true, false, [Tag.LESSON], [], ["title"], []),
+	Tag.QUIZ_CHOICE: TagDefinition.new("quiz_choice", true, false, [Tag.LESSON], ["question"], ["multiple", "shuffle"], [Tag.OPTION, Tag.EXPLANATION]),
+	Tag.QUIZ_INPUT: TagDefinition.new("quiz_input", true, false, [Tag.LESSON], ["question", "answer"], [], [Tag.EXPLANATION]),
+	Tag.OPTION: TagDefinition.new("option", true, false, [Tag.QUIZ_CHOICE], [], ["correct"], []),
+	Tag.HINT: TagDefinition.new("hint", true, false, [Tag.QUIZ_CHOICE, Tag.QUIZ_INPUT, Tag.PRACTICE], [], [], []),
+	Tag.EXPLANATION: TagDefinition.new("explanation", true, false, [Tag.QUIZ_CHOICE, Tag.QUIZ_INPUT], [], [], []),
+	Tag.PRACTICE: TagDefinition.new("practice", true, false, [Tag.LESSON], ["id", "title"], [], [Tag.DESCRIPTION, Tag.GOAL, Tag.STARTING_CODE, Tag.VALIDATOR, Tag.SCRIPT_SLICE]),
+	Tag.DESCRIPTION: TagDefinition.new("description", true, false, [Tag.PRACTICE], [], [], []),
+	Tag.GOAL: TagDefinition.new("goal", true, false, [Tag.PRACTICE], [], [], []),
+	Tag.STARTING_CODE: TagDefinition.new("starting_code", true, false, [Tag.PRACTICE], [], [], []),
+	Tag.CURSOR: TagDefinition.new("cursor", false, true, [Tag.PRACTICE], [], ["line", "column"], []),
+	Tag.VALIDATOR: TagDefinition.new("validator", false, true, [Tag.PRACTICE], ["path"], [], []),
+	Tag.SCRIPT_SLICE: TagDefinition.new("script_slice", false, true, [Tag.PRACTICE], ["path"], ["name"], []),
+	Tag.DOCS: TagDefinition.new("docs", true, false, [Tag.PRACTICE], [], [], []),
+	Tag.SEPARATOR: TagDefinition.new("separator", false, true, [Tag.LESSON], [], [], []),
 }
 
 const CONTENT_PRODUCING_TAGS := [
 	Tag.TITLE,
-	Tag.CODEBLOCK,
 	Tag.VISUAL,
 	Tag.NOTE,
 	Tag.QUIZ_CHOICE,
@@ -84,8 +61,8 @@ const CONTENT_PRODUCING_TAGS := [
 	Tag.SEPARATOR,
 ]
 
-var _tag_name_to_id := {}
-var _tag_id_to_name := {}
+var _tag_name_to_id := { }
+var _tag_id_to_name := { }
 
 
 func _init() -> void:
@@ -133,7 +110,7 @@ class TagDefinition:
 			p_valid_parents := [],
 			p_required_attrs := [],
 			p_optional_attrs := [],
-			p_required_children := []
+			p_required_children := [],
 	) -> void:
 		name = p_name
 		container = p_container

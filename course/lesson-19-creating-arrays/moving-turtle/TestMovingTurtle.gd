@@ -16,7 +16,7 @@ func test_path_is_contiguous() -> String:
 		return tr("No points found in variable turtle_path. Did you write Vector2 coordinates in the variable's array?")
 	var last_point := Vector2(0, 0)
 	var first_index := 1 if path.front() == Vector2.ZERO else 0
-	for point in path.slice(first_index, path.size() - 1):
+	for point in path.slice(first_index, path.size()):
 		if not is_equal_approx(last_point.distance_to(point), 1):
 			return tr("We found at least two points that are not next to one another. Did you forget some coordinates, or did you try to move the turtle diagonally?")
 		last_point = point

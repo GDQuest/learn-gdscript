@@ -16,7 +16,7 @@ func _prepare() -> void:
 func _compare(track_index: int) -> String:
 	var expected: Vector2 = expected_positions[track_index]
 	var tracks: Array = game_board.tracks
-	var track: Sprite = tracks[track_index]
+	var track: Sprite2D = tracks[track_index]
 	var received := track.position
 	if received.is_equal_approx(expected):
 		return ""
@@ -38,7 +38,7 @@ func test_third_track_is_well_positioned() -> String:
 func test_all_other_tracks_are_aligned_to_grid() -> String:
 	var tracks: Array = game_board.tracks
 	for i in tracks.size():
-		var track: Sprite = tracks[i]
+		var track: Sprite2D = tracks[i]
 		var x := int(track.position.x) % 32
 		var y := int(track.position.y) % 32
 		if (x + y) > 0:

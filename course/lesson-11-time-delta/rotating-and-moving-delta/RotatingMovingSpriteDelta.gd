@@ -1,10 +1,10 @@
 extends Node2D
 
-onready var camera_2d := $Camera2D
+@export var camera_2d: Camera2D
 
 func _ready() -> void:
 	set_process(false)
-	camera_2d.set_as_toplevel(true)
+	camera_2d.set_as_top_level(true)
 
 
 # EXPORT move_and_rotate

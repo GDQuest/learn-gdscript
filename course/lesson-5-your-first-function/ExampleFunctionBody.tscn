@@ -1,23 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene format=3 uid="uid://cf40uy27o2nps"]
 
-[ext_resource path="res://course/common/GDScriptCodeExample.tscn" type="PackedScene" id=1]
+[ext_resource type="PackedScene" uid="uid://doicj7hty5hyt" path="res://course/common/GDScriptCodeExample.tscn" id="1"]
 
-[node name="ExampleFunctionBody" type="PanelContainer"]
-margin_right = 288.0
-margin_bottom = 178.0
-rect_min_size = Vector2( 320, 200 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="ExampleFunctionBody" type="PanelContainer" unique_id=1658180022]
+custom_minimum_size = Vector2(320, 200)
+offset_right = 288.0
+offset_bottom = 178.0
 
-[node name="GDScriptCodeExample" parent="." instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 327.0
-margin_bottom = 207.0
-rect_min_size = Vector2( 320, 200 )
+[node name="GDScriptCodeExample" parent="." unique_id=816443967 instance=ExtResource("1")]
+custom_minimum_size = Vector2(320, 200)
+layout_mode = 2
 text = "func name():
 	instruction_1
 	instruction_2

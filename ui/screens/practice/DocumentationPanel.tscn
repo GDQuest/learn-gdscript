@@ -1,15 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene format=3 uid="uid://dnqd86kfhn5kf"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends RichTextLabel
 class_name DocumentationPanel
 
 
-export var documentation_resource: Resource setget set_documentation_resource
-var documentation_references := PoolStringArray()
+@export var documentation_resource: Resource: set = set_documentation_resource
+var documentation_references := PackedStringArray()
 
 func setup() -> void:
-	bbcode_text = get_documentation_resource().get_references_as_bbcode(documentation_references)
+	text = get_documentation_resource().get_references_as_bbcode(documentation_references)
 
 
 func set_documentation_resource(new_documentation_resource: Resource) -> void:
@@ -20,11 +20,9 @@ func get_documentation_resource() -> Documentation:
 	return documentation_resource as Documentation
 "
 
-[node name="DocumentationPanel" type="RichTextLabel"]
+[node name="DocumentationPanel" type="RichTextLabel" unique_id=304128443]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 bbcode_enabled = true
-script = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = SubResource("1")

@@ -1,13 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene format=3 uid="uid://d25feobicado5"]
 
-[ext_resource path="res://ui/screens/welcome_screen/FloatingStar.gd" type="Script" id=1]
-[ext_resource path="res://ui/screens/welcome_screen/star_white.png" type="Texture" id=2]
+[ext_resource type="Script" uid="uid://c2r5j2r63wwru" path="res://ui/screens/welcome_screen/FloatingStar.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://4drun2eydcqc" path="res://ui/screens/welcome_screen/star_white.png" id="2"]
 
-[node name="StarWhite" type="TextureRect"]
-margin_right = 38.0
-margin_bottom = 38.0
-texture = ExtResource( 2 )
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="StarWhite" type="TextureRect" unique_id=659599519]
+offset_right = 38.0
+offset_bottom = 38.0
+texture = ExtResource("2")
+script = ExtResource("1")

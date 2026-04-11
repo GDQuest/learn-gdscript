@@ -20,12 +20,12 @@ func test_used_append() -> String:
 
 func test_completed_orders_contain_all_elements() -> String:
 	# warning-ignore:unsafe_property_access
-	var current_orders := PoolStringArray(game_board.completed_orders)
+	var current_orders := PackedStringArray(game_board.completed_orders)
 
 	if current_orders.size() == 0:
 		return tr("the completed_orders array is empty. Are you sure you appended the elements?")
 	
-	var expected_orders := PoolStringArray()
+	var expected_orders := PackedStringArray()
 	
 	for i in WAIT_QUEUE.size():
 		var order = WAIT_QUEUE[-i-1]

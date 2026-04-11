@@ -1,29 +1,21 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene format=3 uid="uid://cq1fmsujgmlfm"]
 
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
-[ext_resource path="res://course/common/GDScriptCodeExample.gd" type="Script" id=2]
+[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_iota1"]
+[ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="2"]
 
-[node name="GDScriptCodeExample" type="TextEdit"]
+[node name="GDScriptCodeExample" type="CodeEdit" unique_id=443704643]
+custom_minimum_size = Vector2(300, 140)
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -1531.0
-margin_bottom = -940.0
-rect_min_size = Vector2( 300, 140 )
+offset_right = -1531.0
+offset_bottom = -940.0
 size_flags_horizontal = 3
-theme = ExtResource( 1 )
+theme_override_fonts/font = ExtResource("1_iota1")
 text = "var health = 100"
-readonly = true
-syntax_highlighting = true
-show_line_numbers = true
-draw_tabs = true
-draw_spaces = true
 context_menu_enabled = false
 shortcut_keys_enabled = false
-smooth_scrolling = true
-wrap_enabled = true
-caret_block_mode = true
 caret_blink = true
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+draw_tabs = true
+draw_spaces = true
+script = ExtResource("2")

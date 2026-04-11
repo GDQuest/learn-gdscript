@@ -1,83 +1,59 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene format=3 uid="uid://blhah8xmh0ggv"]
 
-[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=1]
-[ext_resource path="res://course/lesson-27-value-types/display-energy/DisplayingEnergy.gd" type="Script" id=2]
-[ext_resource path="res://course/lesson-27-value-types/display-energy/bar_bg_ninepatch.png" type="Texture" id=3]
-[ext_resource path="res://course/lesson-27-value-types/display-energy/lightning_bar_fill.png" type="Texture" id=4]
+[ext_resource type="Script" uid="uid://ixnwvqaio4cs" path="res://course/lesson-27-value-types/display-energy/DisplayingEnergy.gd" id="2"]
 
-[sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 4 )
-region_rect = Rect2( 0, 0, 194, 34 )
-margin_left = 8.0
-margin_right = 6.0
-margin_top = 7.0
-margin_bottom = 7.0
-
-[sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 120, 75 )
-margin_left = 10.0
-margin_right = 9.0
-margin_top = 11.0
-margin_bottom = 11.0
-
-[node name="Control" type="Control"]
+[node name="Control" type="Control" unique_id=909589122]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_vertical_guides_": [ -149.0 ]
-}
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_right = 474.0
-margin_bottom = 53.0
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2029924614]
+layout_mode = 0
+offset_right = 474.0
+offset_bottom = 53.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 474.0
-margin_bottom = 53.0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1358232121]
+layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
-margin_top = 11.0
-margin_right = 95.0
-margin_bottom = 42.0
-custom_fonts/font = ExtResource( 1 )
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=2047939295]
+layout_mode = 2
+theme_type_variation = &"LabelTitle"
 text = "Energy:"
 
-[node name="Bar" type="ProgressBar" parent="VBoxContainer/HBoxContainer"]
-margin_left = 99.0
-margin_right = 474.0
-margin_bottom = 53.0
-rect_min_size = Vector2( 0, 40 )
+[node name="Bar" type="ProgressBar" parent="VBoxContainer/HBoxContainer" unique_id=1890482366]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
 value = 80.0
-percent_visible = false
 
-[node name="EnergyLabel" type="Label" parent="VBoxContainer/HBoxContainer/Bar"]
+[node name="EnergyLabel" type="Label" parent="VBoxContainer/HBoxContainer/Bar" unique_id=275334850]
+layout_mode = 0
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 18.0
-margin_top = -16.0
-margin_right = 112.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 1 )
+offset_left = 18.0
+offset_top = -16.0
+offset_right = 112.0
+offset_bottom = 15.0
+theme_type_variation = &"LabelTitle"
 text = "?? / 100"
 
-[node name="Shadow" type="Label" parent="VBoxContainer/HBoxContainer/Bar/EnergyLabel"]
+[node name="Shadow" type="Label" parent="VBoxContainer/HBoxContainer/Bar/EnergyLabel" unique_id=1634650660]
 show_behind_parent = true
+layout_mode = 0
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_top = -13.0
-margin_right = 94.0
-margin_bottom = 18.0
-custom_colors/font_color = Color( 0.223529, 0.160784, 0.27451, 1 )
-custom_fonts/font = ExtResource( 1 )
+offset_top = -13.0
+offset_right = 94.0
+offset_bottom = 18.0
+theme_type_variation = &"LabelTitle"
+theme_override_colors/font_color = Color(0.223529, 0.160784, 0.27451, 1)
 text = "?? / 100"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 206, 21 )
-current = true
+[node name="Camera2D" type="Camera2D" parent="." unique_id=110536119]
+position = Vector2(206, 21)

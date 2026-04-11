@@ -1,20 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=3 uid="uid://kaep2eadsn0a"]
 
-[ext_resource path="res://course/lesson-13-conditions/limiting_health/LimitingHealth.gd" type="Script" id=1]
-[ext_resource path="res://course/common/CustomHealthBar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://course/common/Robot.tscn" type="PackedScene" id=4]
+[ext_resource type="Script" uid="uid://sblurxtcx5fg" path="res://course/lesson-13-conditions/limiting_health/LimitingHealth.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dd2vjgj5yweq5" path="res://course/common/CustomHealthBar.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="4"]
 
-[node name="LimitingHealth" type="CenterContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="LimitingHealth" type="CenterContainer" unique_id=1285593770 node_paths=PackedStringArray("_health_bar")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1")
+_health_bar = NodePath("Robot/CustomHealthBar")
 
-[node name="Robot" parent="." instance=ExtResource( 4 )]
+[node name="Robot" parent="." unique_id=1954791860 instance=ExtResource("4")]
 
-[node name="CustomHealthBar" parent="Robot" instance=ExtResource( 3 )]
+[node name="CustomHealthBar" parent="Robot" unique_id=1280364027 instance=ExtResource("3")]
 
-[node name="Camera2D" type="Camera2D" parent="Robot"]
-current = true
+[node name="Camera2D" type="Camera2D" parent="Robot" unique_id=774467765]

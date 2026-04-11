@@ -5,30 +5,29 @@ const LoadingScreen := preload("./LoadingScreen.gd")
 const ReportFormPopup := preload("./components/popups/ReportFormPopup.gd")
 const SettingsPopup := preload("./components/popups/SettingsPopup.gd")
 
-export var default_course_id := "learn_gdscript"
-export var default_course_path := "res://course/CourseLearnGDScriptIndex.gd"
+@export var default_course_id := "learn-gdscript"
+@export var _pages: Control
+@export var _loading_screen: LoadingScreen
+@export var _welcome_screen: WelcomeScreen
+@export var _course_screen: Control
+@export var _settings_popup: SettingsPopup
+@export var _report_form_popup: ReportFormPopup
 
 var _unloading_target: Control
 var _loading_target: Control
 var _course_navigator: UINavigator
 
-onready var _pages := $Pages as Control
-onready var _loading_screen := $Pages/LoadingScreen as LoadingScreen
-onready var _welcome_screen := $Pages/WelcomeScreen as WelcomeScreen
-onready var _settings_screen := $Pages/SettingsScreen as Control
-onready var _course_screen := $Pages/CourseScreen as Control
-
-onready var _settings_popup := $SettingsPopup as SettingsPopup
-onready var _report_form_popup := $ReportFormPopup as ReportFormPopup
-
 var _user_profile := UserProfiles.get_profile()
 
 
 func _init() -> void:
-	_update_framerate(_user_profile.framerate_limit)
-	_user_profile.connect("framerate_limit_changed", self, "_update_framerate")
-	OS.low_processor_usage_mode = true
-	OS.low_processor_usage_mode_sleep_usec = 20000
+	# TODO: Remove feature guard whenever https://github.com/godotengine/godot/issues/117875 is fixed
+	# also consider using Engine.max_fps instead when it's fixed
+	if not OS.has_feature("web"):
+		OS.low_processor_usage_mode = true
+		OS.low_processor_usage_mode_sleep_usec = 20000
+		_update_framerate(_user_profile.framerate_limit)
+		_user_profile.framerate_limit_changed.connect(_update_framerate)
 
 
 func _ready() -> void:
@@ -36,17 +35,19 @@ func _ready() -> void:
 	_report_form_popup.hide()
 	_update_welcome_button()
 
-	_loading_screen.connect("faded_in", self, "_on_loading_faded_in")
-	_loading_screen.connect("loading_finished", self, "_on_loading_finished")
-	_welcome_screen.connect("course_requested", self, "_on_course_requested")
+	_loading_screen.faded_in.connect(_on_loading_faded_in)
+	_loading_screen.loading_finished.connect(_on_loading_finished)
+	_welcome_screen.course_requested.connect(_on_course_requested)
 
-	Events.connect("report_form_requested", _report_form_popup, "show")
-	Events.connect("settings_requested", _settings_popup, "show")
-	Events.connect("course_completed", self, "_show_end_screen")
+	Events.report_form_requested.connect(_report_form_popup.show)
+	Events.settings_requested.connect(_settings_popup.show)
+	Events.course_completed.connect(_show_end_screen)
 
-	NavigationManager.connect("welcome_screen_navigation_requested", self, "_go_to_welcome_screen")
+	NavigationManager.welcome_screen_navigation_requested.connect(_go_to_welcome_screen)
 	# Needed to navigate back from the end screen to the outliner.
-	NavigationManager.connect("outliner_navigation_requested", _course_screen, "show")
+	NavigationManager.outliner_navigation_requested.connect(_course_screen.show)
+
+	await get_tree().process_frame
 
 	if NavigationManager.current_url != "":
 		_on_course_requested()
@@ -91,9 +92,9 @@ func _on_course_requested(force_outliner: bool = false) -> void:
 	start_loading(_course_screen)
 
 	_loading_screen.progress_value = 0.5
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 
-	if default_course_path.empty():
+	if default_course_id.is_empty():
 		# We completely failed, chief!
 		printerr("Missing the default course path, make sure to set it in the UICore scene.")
 		return
@@ -101,12 +102,12 @@ func _on_course_requested(force_outliner: bool = false) -> void:
 	# We don't preload this scene, nor the course resource, so that the initial load into the app
 	# is faster. Consider using ResourceLoader.load_interactive() for progress updates in the future.
 	var course_navigator_scene := load("res://ui/UINavigator.tscn") as PackedScene
-	_course_navigator = course_navigator_scene.instance()
-	_course_navigator.course_index = load(default_course_path).new() as CourseIndex
+	_course_navigator = course_navigator_scene.instantiate()
+	_course_navigator.course_index = CourseIndexPaths.get_course_index_instance(default_course_id)
 
 	var user_profile = UserProfiles.get_profile()
-	var lesson_id = user_profile.get_last_started_lesson(_course_navigator.course_index.get_course_id())
-	if not lesson_id.empty():
+	var lesson_id := user_profile.get_last_started_lesson(_course_navigator.course_index.get_course_id())
+	if not lesson_id.is_empty():
 		_course_navigator.set_start_from_lesson(lesson_id)
 
 	_course_navigator.load_into_outliner = force_outliner
@@ -130,13 +131,13 @@ func _on_loading_finished() -> void:
 func _show_end_screen(_course_index: CourseIndex) -> void:
 	var show_sponsored_screen := UserProfiles.get_profile().is_sponsored_profile
 
-	for page in _pages.get_children():
+	for page: Control in _pages.get_children():
 		page.hide()
 
 	if show_sponsored_screen:
-		get_tree().change_scene("res://ui/screens/end_screen/EndScreen.tscn")
+		get_tree().change_scene_to_file("res://ui/screens/end_screen/EndScreen.tscn")
 	else:
-		get_tree().change_scene("res://ui/screens/end_screen/SponsorlessEndScreen.tscn")
+		get_tree().change_scene_to_file("res://ui/screens/end_screen/SponsorlessEndScreen.tscn")
 
 
 func _go_to_welcome_screen() -> void:
@@ -149,15 +150,16 @@ func _go_to_welcome_screen() -> void:
 
 
 func _update_welcome_button() -> void:
-	if default_course_id.empty():
+	if default_course_id.is_empty():
 		return
 
 	var user_profile = UserProfiles.get_profile()
 	var lesson_id = user_profile.get_last_started_lesson(default_course_id)
-	_welcome_screen.set_button_continue(not lesson_id.empty())
+	_welcome_screen.set_button_continue(not lesson_id.is_empty())
 
 
 func _update_framerate(new_framerate: int) -> void:
 	if new_framerate == 0:
 		new_framerate = 1000
-	OS.low_processor_usage_mode_sleep_usec = 1_000_000 / new_framerate
+	# TODO: Consider using Engine.max_fps instead
+	OS.low_processor_usage_mode_sleep_usec = floori(1_000_000.0 / new_framerate)

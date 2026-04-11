@@ -1,110 +1,92 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene format=3 uid="uid://qap2kv8o04m6"]
 
-[ext_resource path="res://ui/theme/fonts/font_title_small.tres" type="DynamicFont" id=1]
-[ext_resource path="res://ui/theme/fonts/font_button_small.tres" type="DynamicFont" id=2]
-[ext_resource path="res://ui/theme/panel_darker.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=4]
-[ext_resource path="res://ui/screens/lesson/UIPracticeButton.gd" type="Script" id=5]
-[ext_resource path="res://ui/icons/checkmark_valid.svg" type="Texture" id=6]
-[ext_resource path="res://ui/theme/focus.tres" type="StyleBox" id=7]
-[ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=8]
-[ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=9]
-[ext_resource path="res://ui/theme/fonts/font_button.tres" type="DynamicFont" id=10]
-[ext_resource path="res://ui/theme/pill.tres" type="StyleBox" id=11]
-[ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=12]
+[ext_resource type="StyleBox" uid="uid://byx1m5sdpv2ns" path="res://ui/theme/panel_darker.tres" id="3"]
+[ext_resource type="Script" uid="uid://b6t32yqrdrppj" path="res://ui/screens/lesson/UIPracticeButton.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://botjmjx4xso5i" path="res://ui/icons/checkmark_valid.svg" id="6"]
+[ext_resource type="StyleBox" uid="uid://dojpxy1svgxi8" path="res://ui/theme/focus.tres" id="7"]
+[ext_resource type="StyleBox" uid="uid://dkeg6cbxbpnqe" path="res://ui/theme/button_outline_large_hover.tres" id="8"]
+[ext_resource type="StyleBox" uid="uid://bkqtmumr5t28" path="res://ui/theme/button_outline_large_pressed.tres" id="9"]
+[ext_resource type="StyleBox" uid="uid://dxgho6gnstasf" path="res://ui/theme/pill.tres" id="11"]
+[ext_resource type="StyleBox" uid="uid://b45mlqutqarjn" path="res://ui/theme/button_outline_large_normal.tres" id="12"]
 
-[node name="UIPracticeButton" type="PanelContainer"]
+[node name="UIPracticeButton" type="PanelContainer" unique_id=789411901 node_paths=PackedStringArray("visibility_notifier", "_title_label", "_next_pill_label", "_description_label", "_completed_before_icon", "_navigate_button", "_no_navigation_label")]
+anchors_preset = 10
 anchor_right = 1.0
-margin_bottom = 110.0
-theme = ExtResource( 4 )
-custom_styles/panel = ExtResource( 3 )
-script = ExtResource( 5 )
+offset_bottom = 110.0
+theme_override_styles/panel = ExtResource("3")
+script = ExtResource("5")
+visibility_notifier = NodePath("Margin/Row/NavigateButton/VisibleOnScreenEnabler2D")
+_title_label = NodePath("Margin/Row/Column/Row/Title")
+_next_pill_label = NodePath("Margin/Row/Column/Row/NextPill")
+_description_label = NodePath("Margin/Row/Column/Description")
+_completed_before_icon = NodePath("Margin/Row/Column/Row/CompletedBeforeIcon")
+_navigate_button = NodePath("Margin/Row/NavigateButton")
+_no_navigation_label = NodePath("Margin/Row/NoNavigationLabel")
 
-[node name="Margin" type="MarginContainer" parent="."]
-margin_right = 1920.0
-margin_bottom = 111.0
+[node name="Margin" type="MarginContainer" parent="." unique_id=449692410]
+layout_mode = 2
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Row" type="HBoxContainer" parent="Margin"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1900.0
-margin_bottom = 91.0
+[node name="Row" type="HBoxContainer" parent="Margin" unique_id=1151544454]
+layout_mode = 2
 
-[node name="Column" type="VBoxContainer" parent="Margin/Row"]
-margin_right = 1684.0
-margin_bottom = 71.0
+[node name="Column" type="VBoxContainer" parent="Margin/Row" unique_id=2118546318]
+layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Row" type="HBoxContainer" parent="Margin/Row/Column"]
-margin_right = 1684.0
-margin_bottom = 26.0
-custom_constants/separation = 8
+[node name="Row" type="HBoxContainer" parent="Margin/Row/Column" unique_id=507187610]
+layout_mode = 2
+theme_override_constants/separation = 8
 
-[node name="Title" type="Label" parent="Margin/Row/Column/Row"]
-margin_right = 137.0
-margin_bottom = 26.0
-custom_fonts/font = ExtResource( 1 )
+[node name="Title" type="Label" parent="Margin/Row/Column/Row" unique_id=1874089432]
+layout_mode = 2
+theme_type_variation = &"LabelSmallTitle"
 text = "Practice title"
 
-[node name="CompletedBeforeIcon" type="TextureRect" parent="Margin/Row/Column/Row"]
-modulate = Color( 0.239216, 1, 0.431373, 1 )
-margin_left = 145.0
-margin_right = 169.0
-margin_bottom = 26.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "You've already completed this practice before.
-You can give it another go if you want to test your skills!"
-texture = ExtResource( 6 )
-expand = true
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NextPill" type="Label" parent="Margin/Row/Column/Row"]
+[node name="CompletedBeforeIcon" type="TextureRect" parent="Margin/Row/Column/Row" unique_id=69542882]
 visible = false
-margin_left = 177.0
-margin_top = 1.0
-margin_right = 243.0
-margin_bottom = 24.0
-custom_fonts/font = ExtResource( 2 )
-custom_styles/normal = ExtResource( 11 )
+modulate = Color(0.239216, 1, 0.431373, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "You've already completed this practice before.
+You can give it another go if you want to test your skills!"
+texture = ExtResource("6")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="NextPill" type="Label" parent="Margin/Row/Column/Row" unique_id=1152479974]
+visible = false
+layout_mode = 2
+theme_type_variation = &"LabelSmallButton"
+theme_override_styles/normal = ExtResource("11")
 text = "next"
 
-[node name="Description" type="RichTextLabel" parent="Margin/Row/Column"]
-margin_top = 42.0
-margin_right = 1684.0
-margin_bottom = 71.0
+[node name="Description" type="RichTextLabel" parent="Margin/Row/Column" unique_id=114905804]
+layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
-fit_content_height = true
+fit_content = true
 
-[node name="NavigateButton" type="Button" parent="Margin/Row"]
-margin_left = 1700.0
-margin_top = 5.0
-margin_right = 1880.0
-margin_bottom = 65.0
-rect_min_size = Vector2( 180, 60 )
-hint_tooltip = "Open this practice."
-mouse_default_cursor_shape = 2
+[node name="NavigateButton" type="Button" parent="Margin/Row" unique_id=1579305854]
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 2
 size_flags_vertical = 4
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 9 )
-custom_styles/focus = ExtResource( 7 )
-custom_styles/normal = ExtResource( 12 )
+tooltip_text = "Open this practice."
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("12")
+theme_override_styles/pressed = ExtResource("9")
+theme_override_styles/hover = ExtResource("8")
+theme_override_styles/focus = ExtResource("7")
 text = "Practice"
 
-[node name="NoNavigationLabel" type="Label" parent="Margin/Row"]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Margin/Row/NavigateButton" unique_id=402497671]
+rect = Rect2(0, 0, 180, 60)
+enable_node_path = NodePath("../../../..")
+
+[node name="NoNavigationLabel" type="Label" parent="Margin/Row" unique_id=700834557]
 visible = false
-margin_left = 1721.0
-margin_top = 19.0
-margin_right = 1880.0
-margin_bottom = 50.0
-custom_colors/font_color = Color( 0.290196, 0.294118, 0.388235, 1 )
-custom_fonts/font = ExtResource( 10 )
+layout_mode = 2
+theme_type_variation = &"LabelSmallButton"
+theme_override_colors/font_color = Color(0.290196, 0.294118, 0.388235, 1)
 text = "You are here"

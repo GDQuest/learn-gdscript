@@ -1,54 +1,50 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene format=3 uid="uid://b5injtrhcv7kj"]
 
-[ext_resource path="res://ui/components/RunnableCodeExample.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ui/components/OutputConsole.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/components/RunnableCodeExampleDebugger.tscn" type="PackedScene" id=3]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://b0sm7ot8y7ae2" path="res://ui/components/OutputConsole.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://b1on88gerd51a" path="res://ui/components/RunnableCodeExampleDebugger.tscn" id="3"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends OutputConsole
 
-onready var element = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
+@onready var element = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
 
 
-func run():
+func run_coroutine(coroutine_controller: CoroutineController):
 	emit_signal(\"line_highlight_requested\", 0)
-	yield()
+	await coroutine_controller.step_requested
 	for i in [0, 1, 2]:
 		element = i
 		emit_signal(\"line_highlight_requested\", 1)
 		emit_signal(\"animate_arrow_requested\", [17 + 3*i,1], [5,7])
-		yield()
+		await coroutine_controller.step_requested
 		print_output([i])
 		emit_signal(\"line_highlight_requested\", 2)
-		yield()
+		await coroutine_controller.step_requested
+	coroutine_controller.finished.emit()
 
 
 func reset():
 	clear_messages()
-	element = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE"
+	element = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
+"
 
-[node name="Panel" type="VBoxContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
+[node name="Panel" type="VBoxContainer" unique_id=1947957460]
+offset_right = 14.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 
-[node name="RunnableCodeExample" parent="." instance=ExtResource( 1 )]
-margin_right = 781.0
-margin_bottom = 260.0
+[node name="RunnableCodeExample" parent="." unique_id=1239803416 instance=ExtResource("1")]
+layout_mode = 2
 gdscript_code = "func run():
 	for element in [0, 1, 2]:
 		print(element)"
 
-[node name="OutputConsole" parent="RunnableCodeExample" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 672.0
-margin_right = 781.0
-margin_bottom = 260.0
+[node name="OutputConsole" parent="RunnableCodeExample" unique_id=2026306363 instance=ExtResource("2")]
+layout_mode = 2
 size_flags_horizontal = 3
-script = SubResource( 1 )
+script = SubResource("1")
 
-[node name="RunnableCodeExampleDebugger" parent="." instance=ExtResource( 3 )]
-margin_top = 264.0
-margin_bottom = 330.0
-monitored_variables = [ "element" ]
+[node name="RunnableCodeExampleDebugger" parent="." unique_id=1957296423 instance=ExtResource("3")]
+layout_mode = 2
+monitored_variables = ["element"]

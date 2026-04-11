@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorScript
 
 const SOURCE_PATH := "res://tests/gdscript-error-list.txt"
@@ -7,18 +7,19 @@ const SOURCE_PATH := "res://tests/gdscript-error-list.txt"
 func _run():
 	print("[TEST] GDscript Error Codes")
 
-	var source_file := File.new()
-	var error = source_file.open(SOURCE_PATH, File.READ)
-	if error != OK:
-		printerr("Failed to load the source file at '%s': Error code %d." % [SOURCE_PATH, error])
+	var source_file := FileAccess.open(SOURCE_PATH, FileAccess.READ)
+	if source_file:
+		printerr("Failed to load the source file at '%s': Error code %d." % [SOURCE_PATH, FileAccess.get_open_error()])
 		return
 
-	var message_list := PoolStringArray()
+	var message_list := PackedStringArray()
 	source_file.seek(0)
-	while source_file.get_position() < source_file.get_len():
+	while source_file.get_position() < source_file.get_length():
 		var line = source_file.get_line()
-		var error_message = parse_json(line)
-		if not error_message.empty():
+		var test_json_conv = JSON.new()
+		test_json_conv.parse(line)
+		var error_message = test_json_conv.get_data()
+		if not error_message.is_empty():
 			message_list.append(error_message)
 	source_file.close()
 
@@ -45,7 +46,7 @@ func _run():
 
 		if not record.has("patterns") or not record.has("code"):
 			printerr(
-				"Invalid error database record %d: Doesn't have 'patterns' or 'code' field." % [i]
+				"Invalid error database record %d: Doesn't have 'patterns' or 'code' field." % [i],
 			)
 			continue
 		if not typeof(record.patterns) == TYPE_ARRAY or not typeof(record.code) == TYPE_INT:
@@ -115,7 +116,7 @@ func _run():
 		(
 			"- Duplicate matches: %d/%d"
 			% [total_messages - (unique_matched_messages + unmatched_messages), total_messages]
-		)
+		),
 	)
 
 	print()

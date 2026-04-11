@@ -1,299 +1,248 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene format=3 uid="uid://dcl81wj587ph8"]
 
-[ext_resource path="res://ui/components/popups/SettingsPopup.gd" type="Script" id=1]
-[ext_resource path="res://ui/theme/fonts/font_title.tres" type="DynamicFont" id=2]
-[ext_resource path="res://ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/theme/button_outline_large_normal.tres" type="StyleBox" id=4]
-[ext_resource path="res://ui/theme/panel_normal.tres" type="StyleBox" id=5]
-[ext_resource path="res://ui/theme/button_outline_large_accent.tres" type="StyleBox" id=6]
-[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=7]
-[ext_resource path="res://ui/theme/button_outline_large_hover.tres" type="StyleBox" id=8]
-[ext_resource path="res://ui/theme/focus_accent.tres" type="StyleBox" id=9]
+[ext_resource type="Script" uid="uid://clp346ybkc5c1" path="res://ui/components/popups/SettingsPopup.gd" id="1"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="3"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="4"]
+[ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="5"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_accent.tres" id="6"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="7"]
+[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_hover.tres" id="8"]
+[ext_resource type="StyleBox" path="res://ui/theme/focus_accent.tres" id="9"]
 
-[sub_resource type="StyleBoxEmpty" id=1]
+[sub_resource type="StyleBoxEmpty" id="2"]
 
-[sub_resource type="StyleBoxEmpty" id=2]
+[sub_resource type="StyleBoxEmpty" id="1"]
 
-[sub_resource type="InputEventAction" id=3]
-action = "close_settings"
+[sub_resource type="Shortcut" id="4"]
 
-[sub_resource type="ShortCut" id=4]
-shortcut = SubResource( 3 )
+[sub_resource type="Shortcut" id="6"]
 
-[sub_resource type="InputEventAction" id=5]
-action = "apply_settings"
-
-[sub_resource type="ShortCut" id=6]
-shortcut = SubResource( 5 )
-
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1461649153 node_paths=PackedStringArray("_panel", "_color_rect", "_language_value", "_font_size_value", "_font_size_sample", "_scroll_sensitivity_slider", "_framerate_settings_section", "_framerate_option", "_lower_contrast", "_dyslexia_font", "_apply_button", "_cancel_button")]
 layer = 2
-script = ExtResource( 1 )
+script = ExtResource("1")
+_panel = NodePath("PanelContainer")
+_color_rect = NodePath("ColorRect")
+_language_value = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/Value")
+_font_size_value = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer/Value")
+_font_size_sample = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer/SampleText")
+_scroll_sensitivity_slider = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/ScrollSensitivitySetting/Value")
+_framerate_settings_section = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting")
+_framerate_option = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting/Value")
+_lower_contrast = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LowerContrasSetting/CheckBox")
+_dyslexia_font = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSetting/CheckBox")
+_apply_button = NodePath("PanelContainer/Column/Margin/Column/Buttons/ApplyButton")
+_cancel_button = NodePath("PanelContainer/Column/Margin/Column/Buttons/CancelButton")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=659238751]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 7 )
-color = Color( 0.0352941, 0.0392157, 0.129412, 0.627451 )
+color = Color(0.0352941, 0.0392157, 0.129412, 0.627451)
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1769060238]
+custom_minimum_size = Vector2(720, 540)
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -360.0
-margin_top = -345.5
-margin_right = 360.0
-margin_bottom = 345.5
-rect_min_size = Vector2( 720, 540 )
-theme = ExtResource( 7 )
+offset_left = -360.0
+offset_top = -345.5
+offset_right = 360.0
+offset_bottom = 345.5
+theme = ExtResource("7")
 
-[node name="Panel" type="Panel" parent="PanelContainer"]
-margin_right = 720.0
-margin_bottom = 691.0
-custom_styles/panel = ExtResource( 5 )
+[node name="Panel" type="Panel" parent="PanelContainer" unique_id=1052317713]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("5")
 
-[node name="Column" type="VBoxContainer" parent="PanelContainer"]
-margin_right = 720.0
-margin_bottom = 691.0
-custom_constants/separation = 0
+[node name="Column" type="VBoxContainer" parent="PanelContainer" unique_id=338959222]
+layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Column"]
-margin_right = 720.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 0, 16 )
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Column" unique_id=958420921]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
 value = 100.0
-percent_visible = false
+show_percentage = false
 
-[node name="Margin" type="MarginContainer" parent="PanelContainer/Column"]
-margin_top = 16.0
-margin_right = 720.0
-margin_bottom = 691.0
+[node name="Margin" type="MarginContainer" parent="PanelContainer/Column" unique_id=737564488]
+layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Column" type="VBoxContainer" parent="PanelContainer/Column/Margin"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 700.0
-margin_bottom = 655.0
-custom_constants/separation = 12
+[node name="Column" type="VBoxContainer" parent="PanelContainer/Column/Margin" unique_id=999547959]
+layout_mode = 2
+theme_override_constants/separation = 12
 
-[node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column"]
-margin_right = 680.0
-margin_bottom = 31.0
-custom_fonts/font = ExtResource( 2 )
+[node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column" unique_id=1396300607]
+layout_mode = 2
+theme_type_variation = &"LabelTitle"
 text = "Configure the App"
-align = 1
+horizontal_alignment = 1
 
-[node name="Separator" type="HSeparator" parent="PanelContainer/Column/Margin/Column"]
-margin_left = 140.0
-margin_top = 43.0
-margin_right = 540.0
-margin_bottom = 51.0
-rect_min_size = Vector2( 400, 0 )
+[node name="Separator" type="HSeparator" parent="PanelContainer/Column/Margin/Column" unique_id=1298529597]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/Column/Margin/Column"]
-margin_top = 63.0
-margin_right = 680.0
-margin_bottom = 523.0
-rect_min_size = Vector2( 680, 460 )
-scroll_horizontal_enabled = false
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/Column/Margin/Column" unique_id=989922109]
+custom_minimum_size = Vector2(680, 460)
+layout_mode = 2
 
-[node name="Settings" type="VBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer"]
-margin_right = 650.0
-margin_bottom = 460.0
-rect_min_size = Vector2( 650, 460 )
+[node name="Settings" type="VBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer" unique_id=961246134]
+custom_minimum_size = Vector2(650, 460)
+layout_mode = 2
 size_flags_vertical = 3
-custom_constants/separation = 32
+theme_override_constants/separation = 32
 
-[node name="LanguageSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings"]
-margin_right = 650.0
-margin_bottom = 47.0
+[node name="LanguageSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=461239063]
+layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting"]
-margin_top = 9.0
-margin_right = 317.0
-margin_bottom = 37.0
+[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting" unique_id=478374928]
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Language"
 
-[node name="Value" type="OptionButton" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting"]
-margin_left = 333.0
-margin_right = 650.0
-margin_bottom = 47.0
-hint_tooltip = "Change the course's language. We plan to add other languages, but only English is available for now."
+[node name="Value" type="OptionButton" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting" unique_id=2054986385]
+layout_mode = 2
 size_flags_horizontal = 3
-text = "English"
+tooltip_text = "Change the course's language. We plan to add other languages, but only English is available for now."
 
-[node name="FontSizeSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings"]
-margin_top = 79.0
-margin_right = 650.0
-margin_bottom = 155.0
+[node name="FontSizeSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=1561891103]
+layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting"]
-margin_right = 317.0
-margin_bottom = 28.0
+[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting" unique_id=103478442]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Text Size"
 
-[node name="ValueContainer" type="VBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting"]
-margin_left = 333.0
-margin_right = 650.0
-margin_bottom = 76.0
+[node name="ValueContainer" type="VBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting" unique_id=2080703283]
+layout_mode = 2
 size_flags_horizontal = 3
-custom_constants/separation = 12
+theme_override_constants/separation = 12
 
-[node name="Value" type="HSlider" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer"]
-margin_right = 317.0
-margin_bottom = 24.0
-hint_tooltip = "Increase or lower the size of all text in the app."
+[node name="Value" type="HSlider" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer" unique_id=1194469808]
+layout_mode = 2
 size_flags_horizontal = 3
-custom_styles/grabber_area_highlight = SubResource( 1 )
-custom_styles/grabber_area = SubResource( 2 )
+tooltip_text = "Increase or lower the size of all text in the app."
+theme_override_styles/grabber_area = SubResource("2")
+theme_override_styles/grabber_area_highlight = SubResource("1")
 min_value = -2.0
 max_value = 7.0
 rounded = true
 tick_count = 3
 ticks_on_borders = true
 
-[node name="SampleText" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer"]
-margin_top = 36.0
-margin_right = 317.0
-margin_bottom = 76.0
-rect_min_size = Vector2( 0, 40 )
+[node name="SampleText" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer" unique_id=1424915237]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Sample text"
-align = 1
+horizontal_alignment = 1
 
-[node name="ScrollSensitivitySetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings"]
-margin_top = 187.0
-margin_right = 650.0
-margin_bottom = 215.0
+[node name="ScrollSensitivitySetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=1430833562]
+layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/ScrollSensitivitySetting"]
-margin_right = 317.0
-margin_bottom = 28.0
+[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/ScrollSensitivitySetting" unique_id=140885755]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Scroll sensitivity"
 
-[node name="Value" type="HSlider" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/ScrollSensitivitySetting"]
-margin_left = 333.0
-margin_right = 650.0
-margin_bottom = 24.0
-hint_tooltip = "Increase or lower the scrolling speed with the mouse wheel or the touchpad."
+[node name="Value" type="HSlider" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/ScrollSensitivitySetting" unique_id=403237300]
+layout_mode = 2
 size_flags_horizontal = 3
-custom_styles/grabber_area_highlight = SubResource( 1 )
-custom_styles/grabber_area = SubResource( 2 )
+tooltip_text = "Increase or lower the scrolling speed with the mouse wheel or the touchpad."
+theme_override_styles/grabber_area = SubResource("2")
+theme_override_styles/grabber_area_highlight = SubResource("1")
 max_value = 2.0
 step = 0.1
 value = 1.0
 tick_count = 2
 ticks_on_borders = true
 
-[node name="FramerateSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings"]
-margin_top = 247.0
-margin_right = 650.0
-margin_bottom = 294.0
+[node name="FramerateSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=332646761]
+layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting"]
-margin_right = 317.0
-margin_bottom = 28.0
+[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting" unique_id=347132921]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Framerate cap"
 
-[node name="Value" type="OptionButton" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting"]
-margin_left = 333.0
-margin_right = 650.0
-margin_bottom = 47.0
-hint_tooltip = "Limit the app's framerate. Lower values make the app use less resources, especially when running in the browser, but may feel less fluid."
+[node name="Value" type="OptionButton" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting" unique_id=365720388]
+layout_mode = 2
 size_flags_horizontal = 3
-text = "60 FPS"
-items = [ "60 FPS", null, false, 0, false, "30 FPS", null, false, 0, false, "No limit", null, false, 0, false ]
+tooltip_text = "Limit the app's framerate. Lower values make the app use less resources, especially when running in the browser, but may feel less fluid."
 selected = 0
+item_count = 3
+popup/item_0/text = "60 FPS"
+popup/item_0/id = 0
+popup/item_1/text = "30 FPS"
+popup/item_1/id = 0
+popup/item_2/text = "No Limit"
+popup/item_2/id = 0
 
-[node name="LowerContrasSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings"]
-margin_top = 326.0
-margin_right = 650.0
-margin_bottom = 374.0
-rect_pivot_offset = Vector2( -389, 116 )
+[node name="LowerContrasSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=708106770]
+layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LowerContrasSetting"]
-margin_right = 317.0
-margin_bottom = 28.0
+[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LowerContrasSetting" unique_id=392220164]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Lower contrast"
 
-[node name="CheckBox" type="CheckBox" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LowerContrasSetting"]
-margin_left = 333.0
-margin_right = 650.0
-margin_bottom = 48.0
-hint_tooltip = "Lower the text's brightness."
+[node name="CheckBox" type="CheckBox" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LowerContrasSetting" unique_id=1466834113]
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Lower the text's brightness."
 text = "Enabled"
 
-[node name="FontSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings"]
-margin_top = 406.0
-margin_right = 650.0
-margin_bottom = 454.0
-rect_pivot_offset = Vector2( -389, 116 )
+[node name="FontSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=1429478422]
+layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSetting"]
-margin_right = 317.0
-margin_bottom = 28.0
+[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSetting" unique_id=1858131240]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Dyslexia Font"
 
-[node name="CheckBox" type="CheckBox" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSetting"]
-margin_left = 333.0
-margin_right = 650.0
-margin_bottom = 48.0
-hint_tooltip = "Change the text style to make the text easier to read if you have dyslexia. This option is incompatible with languages like Chinese and Japanese."
+[node name="CheckBox" type="CheckBox" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSetting" unique_id=196531454]
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Change the text style to make the text easier to read if you have dyslexia. This option is incompatible with languages like Chinese and Japanese."
 text = "Enabled"
 
-[node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column"]
-margin_top = 535.0
-margin_right = 680.0
-margin_bottom = 555.0
-rect_min_size = Vector2( 400, 20 )
+[node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column" unique_id=472162055]
+custom_minimum_size = Vector2(400, 20)
+layout_mode = 2
 
-[node name="Buttons" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column"]
-margin_top = 567.0
-margin_right = 680.0
-margin_bottom = 635.0
+[node name="Buttons" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column" unique_id=989525314]
+layout_mode = 2
 alignment = 1
 
-[node name="CancelButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons"]
-margin_left = 132.0
-margin_right = 332.0
-margin_bottom = 68.0
-rect_min_size = Vector2( 200, 68 )
-mouse_default_cursor_shape = 2
+[node name="CancelButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons" unique_id=404171231]
+custom_minimum_size = Vector2(200, 68)
+layout_mode = 2
 size_flags_horizontal = 4
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/normal = ExtResource( 4 )
-shortcut = SubResource( 4 )
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = ExtResource("4")
+theme_override_styles/pressed = ExtResource("3")
+theme_override_styles/hover = ExtResource("8")
+shortcut = SubResource("4")
 text = "Close"
 
-[node name="ApplyButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons"]
-margin_left = 348.0
-margin_right = 548.0
-margin_bottom = 68.0
-rect_min_size = Vector2( 200, 68 )
-mouse_default_cursor_shape = 2
+[node name="ApplyButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons" unique_id=1074584283]
+custom_minimum_size = Vector2(200, 68)
+layout_mode = 2
 size_flags_horizontal = 4
-custom_colors/font_color_hover = Color( 0.239216, 1, 0.431373, 1 )
-custom_colors/font_color_pressed = Color( 0.239216, 1, 0.431373, 1 )
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 9 )
-custom_styles/normal = ExtResource( 4 )
-shortcut = SubResource( 6 )
+mouse_default_cursor_shape = 2
+theme_override_colors/font_pressed_color = Color(0.239216, 1, 0.431373, 1)
+theme_override_colors/font_hover_color = Color(0.239216, 1, 0.431373, 1)
+theme_override_styles/normal = ExtResource("4")
+theme_override_styles/pressed = ExtResource("6")
+theme_override_styles/hover = ExtResource("6")
+theme_override_styles/focus = ExtResource("9")
+shortcut = SubResource("6")
 text = "Apply"

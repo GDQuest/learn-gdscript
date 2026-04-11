@@ -43,7 +43,7 @@ func test_squares_are_all_100_by_100() -> String:
 	var index := 1
 	for p in _points:
 		if p != expected_rect:
-			return tr("Shape number %s is not a square of size 100 by 100.") % index
+			return tr("Shape3D number %s is not a square of size 100 by 100.") % index
 		index += 1
 	return ""
 

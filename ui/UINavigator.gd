@@ -7,9 +7,22 @@ signal return_to_welcome_screen_requested
 const CourseOutliner := preload("./screens/course_outliner/CourseOutliner.gd")
 const BreadCrumbs := preload("./components/BreadCrumbs.gd")
 const LessonDonePopup := preload("./components/popups/LessonDonePopup.gd")
+const SalePopup := preload("./components/SalePopup.gd")
 
 const SCREEN_TRANSITION_DURATION := 0.75
 const OUTLINER_TRANSITION_DURATION := 0.5
+
+@export var _home_button: Button
+@export var _outliner_button: Button
+@export var _back_button: Button
+@export var _breadcrumbs: BreadCrumbs
+@export var _settings_button: Button
+@export var _report_button: Button
+@export var _screen_container: Container
+@export var _course_outliner: CourseOutliner
+@export var _lesson_done_popup: LessonDonePopup
+@export var _sale_button: Button
+@export var _sale_popup: SalePopup
 
 var course_index: CourseIndex
 
@@ -19,57 +32,37 @@ var use_transitions := true
 var load_into_outliner := false
 
 var _screens_stack := []
-# Maps url strings to resource paths.
-var _matches := {}
 
 var _lesson_index := 0
 var _lesson_count: int = 0
-var _scene_tween: SceneTreeTween
-
-onready var _home_button := $Layout/Header/MarginContainer/HeaderContent/HomeButton as Button
-onready var _outliner_button := $Layout/Header/MarginContainer/HeaderContent/OutlinerButton as Button
-onready var _back_button := $Layout/Header/MarginContainer/HeaderContent/BackButton as Button
-onready var _breadcrumbs := $Layout/Header/MarginContainer/HeaderContent/BreadCrumbs as BreadCrumbs
-onready var _settings_button := $Layout/Header/MarginContainer/HeaderContent/SettingsButton as Button
-onready var _report_button := $Layout/Header/MarginContainer/HeaderContent/ReportButton as Button
-
-onready var _screen_container := $Layout/Content/ScreenContainer as Container
-onready var _course_outliner := $Layout/Content/CourseOutliner as CourseOutliner
-
-onready var _lesson_done_popup := $LessonDonePopup as LessonDonePopup
-
-
-onready var _sale_button := $Layout/Header/MarginContainer/HeaderContent/SaleButton as Button
-onready var _sale_popup := $SalePopup
-
+var _scene_tween: Tween
 
 
 func _ready() -> void:
 	_lesson_count = course_index.get_lessons_count()
 	_course_outliner.course_index = course_index
 
-	NavigationManager.connect("navigation_requested", self, "_navigate_to")
-	NavigationManager.connect("back_navigation_requested", self, "_navigate_back")
-	NavigationManager.connect("outliner_navigation_requested", self, "_navigate_to_outliner")
+	NavigationManager.navigation_requested.connect(_navigate_to)
+	NavigationManager.back_navigation_requested.connect(_navigate_back)
+	NavigationManager.outliner_navigation_requested.connect(_navigate_to_outliner)
 
+	Events.practice_next_requested.connect(_on_practice_next_requested)
+	Events.practice_previous_requested.connect(_on_practice_previous_requested)
+	Events.practice_requested.connect(_on_practice_requested)
 
-	Events.connect("practice_next_requested", self, "_on_practice_next_requested")
-	Events.connect("practice_previous_requested", self, "_on_practice_previous_requested")
-	Events.connect("practice_requested", self, "_on_practice_requested")
+	_lesson_done_popup.accepted.connect(_on_lesson_completed)
 
-	_lesson_done_popup.connect("accepted", self, "_on_lesson_completed")
+	_outliner_button.pressed.connect(NavigationManager.navigate_to_outliner)
+	_back_button.pressed.connect(NavigationManager.navigate_back)
+	_home_button.pressed.connect(NavigationManager.navigate_to_welcome_screen)
 
-	_outliner_button.connect("pressed", NavigationManager, "navigate_to_outliner")
-	_back_button.connect("pressed", NavigationManager, "navigate_back")
-	_home_button.connect("pressed", NavigationManager, "navigate_to_welcome_screen")
-
-	_settings_button.connect("pressed", Events, "emit_signal", ["settings_requested"])
-	_report_button.connect("pressed", Events, "emit_signal", ["report_form_requested"])
+	_settings_button.pressed.connect(Events.settings_requested.emit)
+	_report_button.pressed.connect(Events.report_form_requested.emit)
 
 	if not UserProfiles.get_profile().is_sponsored_profile or _sale_popup.is_sale_over():
 		_sale_button.hide()
 	else:
-		_sale_button.connect("pressed", _sale_popup, "show")
+		_sale_button.pressed.connect(_sale_popup.show)
 
 	if NavigationManager.current_url == "":
 		if load_into_outliner:
@@ -86,7 +79,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Workaround for a bug where pressing Left triggers ui_back in a popup even
 	# though the event is set to Ctrl+Alt+Left.
 	# warning-ignore:unsafe_property_access
-	if event.is_action_released("ui_back") and event.alt:
+	if event.is_action_released("ui_back") and (event as InputEventWithModifiers).alt_pressed:
 		NavigationManager.navigate_back()
 
 
@@ -120,14 +113,13 @@ func _navigate_back() -> void:
 	var next_screen: UINavigatablePage = _screens_stack.back()
 	_update_back_button(_screens_stack.size() < 2)
 
-	# warning-ignore:unsafe_method_access
-	var target = next_screen.get_screen_resource()
+	var target := next_screen.get_screen_resource()
 	_breadcrumbs.update_breadcrumbs(course_index, target)
 
 	next_screen.set_is_current_screen(true)
 
 	_transition_to(next_screen, current_screen, false)
-	yield(self, "transition_completed")
+	await self.transition_completed
 	current_screen.queue_free()
 
 
@@ -146,7 +138,7 @@ func _navigate_to_outliner() -> void:
 	if _scene_tween:
 		_scene_tween.kill()
 	_animate_outliner(true)
-	yield(_scene_tween, "finished")
+	await _scene_tween.finished
 
 	_screen_container.hide()
 
@@ -159,16 +151,15 @@ func _navigate_to() -> void:
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
 	var screen: UINavigatablePage
 	if target is BBCodeParser.ParseNode and target.tag == BBCodeParserData.Tag.PRACTICE:
-		var lesson = NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index))
+		var lesson := NavigationManager.get_navigation_resource(target.bbcode_path)
 
-		screen = preload("UIPractice.tscn").instance()
-		# warning-ignore:unsafe_method_access
-		screen.setup(target, lesson, course_index)
+		screen = preload("UIPractice.tscn").instantiate()
+		(screen as UIPractice).setup(target, lesson, course_index)
 	elif target.tag == BBCodeParserData.Tag.LESSON:
 		var lesson := target as BBCodeParser.ParseNode
-		screen = preload("UILesson.tscn").instance()
+		screen = preload("UILesson.tscn").instantiate()
 		# warning-ignore:unsafe_method_access
-		screen.setup(target, course_index)
+		(screen as UILesson).setup(target, course_index)
 
 		for i in course_index.get_lessons_count():
 			if course_index.get_lesson_path(i) == lesson.bbcode_path:
@@ -183,7 +174,7 @@ func _navigate_to() -> void:
 	_screen_container.show()
 	_breadcrumbs.update_breadcrumbs(course_index, target)
 
-	var has_previous_screen = not _screens_stack.empty()
+	var has_previous_screen = not _screens_stack.is_empty()
 	_screens_stack.push_back(screen)
 	screen.set_is_current_screen(true)
 	_back_button.show()
@@ -194,10 +185,10 @@ func _navigate_to() -> void:
 		var previous_screen: UINavigatablePage = _screens_stack[-2]
 		previous_screen.set_is_current_screen(false)
 		_transition_to(screen, previous_screen)
-		yield(self, "transition_completed")
+		await self.transition_completed
 
 	# Connect to RichTextLabel meta links to navigate to different scenes.
-	for node in get_tree().get_nodes_in_group("rich_text_label"):
+	for node: RichTextLabel in get_tree().get_nodes_in_group("rich_text_label"):
 		assert(node is RichTextLabel)
 		NavigationManager.connect_rich_text_node(node)
 
@@ -205,7 +196,7 @@ func _navigate_to() -> void:
 		if _scene_tween:
 			_scene_tween.kill()
 		_animate_outliner(false)
-		yield(_scene_tween, "finished")
+		await _scene_tween.finished
 
 	_course_outliner.hide()
 
@@ -238,8 +229,8 @@ func _on_practice_next_requested(practice: BBCodeParser.ParseNode) -> void:
 		var user_profile = UserProfiles.get_profile()
 		var lesson_progress = user_profile.get_or_create_lesson(course_index.get_course_id(), lesson_data.bbcode_path)
 		var total_practices := practice_count
-		var completed_practices = lesson_progress.get_completed_practices_count(lesson_data)
-		
+		var completed_practices := lesson_progress.get_completed_practices_count(lesson_data)
+
 		# Show a confirmation popup and optionally tell the user that the lesson is incomplete.
 		_lesson_done_popup.set_incomplete(completed_practices < total_practices)
 		_lesson_done_popup.popup_centered()
@@ -254,7 +245,7 @@ func _on_practice_previous_requested(practice: BBCodeParser.ParseNode) -> void:
 	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as BBCodeParser.ParseNode
 	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson_data)
 	var practice_id := BBCodeUtils.get_practice_id(practice)
-	
+
 	var index := -1
 	for i in practice_count:
 		var other_practice := BBCodeUtils.get_lesson_practice(lesson_data, i)
@@ -277,22 +268,11 @@ func _on_practice_previous_requested(practice: BBCodeParser.ParseNode) -> void:
 
 
 func _on_practice_requested(practice: BBCodeParser.ParseNode) -> void:
-	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as BBCodeParser.ParseNode
-	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson_data)
+	var lesson_path := course_index.get_lesson_slug(_lesson_index)
 	var practice_id := BBCodeUtils.get_practice_id(practice)
-	
-	var index := -1
-	for i in practice_count:
-		var other_practice := BBCodeUtils.get_lesson_practice(lesson_data, i)
-		var other_practice_id := BBCodeUtils.get_practice_id(other_practice)
-		if other_practice_id == practice_id:
-			index = i
-			break
-	# This practice is not in the current lesson, return early.
-	if index < 0:
-		return
+	var course_id := course_index.get_course_id()
 
-	NavigationManager.navigate_to(practice_id)
+	NavigationManager.navigate_to("#%s/%s/$%s" % [course_id, lesson_path, practice_id])
 
 
 func _on_lesson_completed() -> void:
@@ -324,7 +304,7 @@ func _transition_to(screen: Control, from_screen: Control = null, direction_in :
 			_screen_container.add_child(screen)
 		screen.show()
 
-		yield(get_tree(), "idle_frame")
+		await get_tree().process_frame
 		emit_signal("transition_completed")
 		return
 
@@ -335,15 +315,15 @@ func _transition_to(screen: Control, from_screen: Control = null, direction_in :
 	if from_screen:
 		from_screen.show()
 
-	var viewport_width := _screen_container.rect_size.x
+	var viewport_width := _screen_container.size.x
 	var direction := 1.0 if direction_in else -1.0
-	screen.rect_position.x = viewport_width * direction
+	screen.position.x = viewport_width * direction
 
 	_animate_screen(screen, 0.0)
 	if from_screen:
 		_animate_screen(from_screen, -viewport_width * direction)
 
-	yield(_scene_tween, "finished")
+	await _scene_tween.finished
 
 	if from_screen:
 		from_screen.hide()
@@ -355,7 +335,7 @@ func _transition_to(screen: Control, from_screen: Control = null, direction_in :
 func _animate_screen(screen: Control, to_position: float) -> void:
 	if not _scene_tween or not _scene_tween.is_valid():
 		_scene_tween = create_tween().set_parallel()
-	_scene_tween.tween_property(screen, "rect_position:x", to_position, SCREEN_TRANSITION_DURATION).from(screen.rect_position.x).set_trans(Tween.TRANS_CUBIC)
+	_scene_tween.tween_property(screen, "position:x", to_position, SCREEN_TRANSITION_DURATION).from(screen.position.x).set_trans(Tween.TRANS_CUBIC)
 
 
 func _animate_outliner(fade_in: bool) -> void:
@@ -370,7 +350,7 @@ func _clear_history_stack() -> void:
 		_screen_container.remove_child(child_node)
 		child_node.queue_free()
 	# Screens may be unloaded, so queue them for deletion from the stack as well.
-	for screen in _screens_stack:
+	for screen: Node in _screens_stack:
 		screen.queue_free()
 	_screens_stack.clear()
 
@@ -385,4 +365,4 @@ func _update_back_button(is_disabled: bool) -> void:
 		tooltip += " " + tr("(no previous history)")
 	else:
 		_back_button.mouse_default_cursor_shape = CURSOR_POINTING_HAND
-	_back_button.hint_tooltip = tooltip
+	_back_button.tooltip_text = tooltip

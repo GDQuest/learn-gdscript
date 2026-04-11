@@ -1,13 +1,8 @@
-[gd_resource type="DynamicFont" load_steps=3 format=2]
+[gd_resource type="FontVariation" format=3 uid="uid://buul432qy6di5"]
 
-[ext_resource path="res://ui/theme/fonts/NotoSansSC-Bold.ttf" type="DynamicFontData" id=2]
-
-[sub_resource type="DynamicFontData" id=1]
-font_path = "res://ui/theme/fonts/Montserrat-Bold.ttf"
+[ext_resource type="FontFile" uid="uid://bk64arns0bdbk" path="res://ui/theme/fonts/Montserrat-Bold.ttf" id="1_rf7wq"]
+[ext_resource type="FontFile" uid="uid://qqya62gjsiae" path="res://ui/theme/fonts/NotoSansSC-Bold.ttf" id="2"]
 
 [resource]
-size = 20
-use_mipmaps = true
-use_filter = true
-font_data = SubResource( 1 )
-fallback/0 = ExtResource( 2 )
+fallbacks = Array[Font]([ExtResource("2")])
+base_font = ExtResource("1_rf7wq")
