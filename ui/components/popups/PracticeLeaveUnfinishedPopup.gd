@@ -4,6 +4,12 @@ extends ColorRect
 signal confirmed
 signal denied
 
+@export var _root_container: Container
+@export var _title_label: Label
+@export var _message_content: RichTextLabel
+@export var _confirm_button: Button
+@export var _cancel_button: Button
+
 @export var title := "":
 	set = set_title
 @export var text_content := "":
@@ -11,16 +17,10 @@ signal denied
 @export var min_size := Vector2(200, 120):
 	set = set_min_size
 
-@onready var _root_container := $PanelContainer as Container
-@onready var _title_label := $PanelContainer/Column/Margin/Column/Title as Label
-@onready var _message_content := $PanelContainer/Column/Margin/Column/Message as RichTextLabel
-
-@onready var _confirm_button := $PanelContainer/Column/Margin/Column/Buttons/ConfirmButton as Button
-@onready var _cancel_button := $PanelContainer/Column/Margin/Column/Buttons/CancelButton as Button
-
 
 func _ready():
 	set_as_top_level(true)
+	show()
 	_root_container.custom_minimum_size = min_size
 	_root_container.size = _root_container.custom_minimum_size
 	_root_container.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
@@ -33,6 +33,7 @@ func _ready():
 
 	_cancel_button.pressed.connect(denied.emit)
 	_cancel_button.pressed.connect(hide)
+	hide.call_deferred()
 
 
 func _notification(what: int) -> void:
