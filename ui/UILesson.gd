@@ -239,7 +239,7 @@ func _open_glossary_popup(meta: String) -> void:
 		return
 	_glossary_popup.setup(entry.term, entry.explanation)
 	_glossary_popup.align_with_mouse.call_deferred(get_global_mouse_position())
-	_glossary_popup.appear()
+	_glossary_popup.appear.call_deferred()
 
 
 func _on_practice_first_visible() -> void:
