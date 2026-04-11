@@ -1,20 +1,25 @@
 [gd_scene format=3 uid="uid://cjxtbrqi3hoy4"]
 
 [ext_resource type="Script" uid="uid://cmcy46dsgw1yi" path="res://ui/components/popups/PracticeLeaveUnfinishedPopup.gd" id="1"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="3"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="4"]
-[ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="5"]
-[ext_resource type="StyleBox" path="res://ui/theme/focus_strict.tres" id="6"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_hover.tres" id="8"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_strict.tres" id="9"]
+[ext_resource type="StyleBox" uid="uid://bkqtmumr5t28" path="res://ui/theme/button_outline_large_pressed.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://b45mlqutqarjn" path="res://ui/theme/button_outline_large_normal.tres" id="4"]
+[ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/panel_normal.tres" id="5"]
+[ext_resource type="StyleBox" uid="uid://b4qikjol2x0l5" path="res://ui/theme/focus_strict.tres" id="6"]
+[ext_resource type="StyleBox" uid="uid://dkeg6cbxbpnqe" path="res://ui/theme/button_outline_large_hover.tres" id="8"]
+[ext_resource type="StyleBox" uid="uid://pn25sx7oc0ja" path="res://ui/theme/button_outline_large_strict.tres" id="9"]
 
-[node name="PracticeLeaveUnfinishedPopup" type="ColorRect" unique_id=2078082801]
+[node name="PracticeLeaveUnfinishedPopup" type="ColorRect" unique_id=2078082801 node_paths=PackedStringArray("_root_container", "_title_label", "_message_content", "_confirm_button", "_cancel_button")]
 top_level = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.0352941, 0.0392157, 0.129412, 0.627451)
 script = ExtResource("1")
+_root_container = NodePath("PanelContainer")
+_title_label = NodePath("PanelContainer/Column/Margin/Column/Title")
+_message_content = NodePath("PanelContainer/Column/Margin/Column/Message")
+_confirm_button = NodePath("PanelContainer/Column/Margin/Column/Buttons/ConfirmButton")
+_cancel_button = NodePath("PanelContainer/Column/Margin/Column/Buttons/CancelButton")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1492168215]
 custom_minimum_size = Vector2(200, 120)
