@@ -285,7 +285,7 @@ func _on_lesson_completed() -> void:
 		return
 
 	_clear_history_stack()
-	NavigationManager.navigate_to(course_index.get_lesson_path(_lesson_index))
+	NavigationManager.navigate_to("%s/%s" % [course_index.get_course_id(), course_index.get_lesson_slug(_lesson_index)])
 
 
 func _on_course_completed() -> void:
