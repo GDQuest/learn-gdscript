@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cm6r5g4lwpgbk"]
 
-[ext_resource type="StyleBox" path="res://ui/theme/outliner_background.tres" id="1"]
+[ext_resource type="StyleBox" uid="uid://cyrtg5hynek8" path="res://ui/theme/outliner_background.tres" id="1"]
 [ext_resource type="Script" uid="uid://c16nbcburnaek" path="res://ui/screens/course_outliner/CourseLessonList.gd" id="3"]
 [ext_resource type="Script" uid="uid://dmptnpr0crwmq" path="res://ui/components/SmoothScrollContainer.gd" id="4"]
 
@@ -13,6 +13,7 @@ script = ExtResource("3")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=856694061]
 layout_mode = 2
+horizontal_scroll_mode = 0
 script = ExtResource("4")
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer" unique_id=2072020418]
