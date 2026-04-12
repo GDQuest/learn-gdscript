@@ -144,13 +144,21 @@ const _LESSON_SLUG_ALIASES := {
 }
 
 var _inverted_lessons := {}
+# This stores the lesson numbers starting from lesson one and allows finding the
+# number of a lesson from its file path. This is used for displaying labels like
+# L1 for lesson 1 in the course outline, and also labels like L1.P2 for
+# practices.
+var _lesson_number_by_path := {}
 
 var practice_slugs := {}
 
 
 func _init() -> void:
+	var lesson_index := 1
 	for path in LESSONS.keys():
 		_inverted_lessons[LESSONS[path]] = path
+		_lesson_number_by_path[path] = lesson_index
+		lesson_index += 1
 
 
 func get_lessons_count() -> int:
@@ -176,10 +184,14 @@ func get_lesson_path_from_slug(slug: String) -> String:
 func get_lesson_slug(i: int) -> String:
 	var path := get_lesson_path(i)
 	return LESSONS[path]
-	
-	
+
+
 func get_lesson_slug_from_path(path: String) -> String:
 	return LESSONS[path]
+
+
+func get_lesson_number(lesson_path: String) -> int:
+	return _lesson_number_by_path.get(lesson_path, 0)
 
 
 func get_course_id() -> String:

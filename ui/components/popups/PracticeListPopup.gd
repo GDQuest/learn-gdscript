@@ -25,22 +25,13 @@ func clear_items() -> void:
 		child_node.queue_free()
 
 
-func add_item(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, course_index: CourseIndex, current: bool = false) -> void:
+func add_item(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_number: int, current: bool = false) -> void:
 	var button: UIPracticeButton = PracticeButtonScene.instantiate()
-	var practice_id := BBCodeUtils.get_practice_id(practice)
-	var practice_index := -1
-	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
-	for i in practice_count:
-		var other_practice := BBCodeUtils.get_lesson_practice(lesson, i)
-		var other_practice_id := BBCodeUtils.get_practice_id(other_practice)
-		if other_practice_id == practice_id:
-			practice_index = i
-			break
-	button.setup(practice, practice_index)
+	button.setup(practice, BBCodeUtils.get_practice_index(lesson, practice), lesson_number)
 
 	if course_index:
 		var user_profile := UserProfiles.get_profile()
-		button.completed_before = user_profile.is_lesson_practice_completed(course_index.get_course_id(), lesson.bbcode_path, practice_id)
+		button.completed_before = user_profile.is_lesson_practice_completed(course_index.get_course_id(), lesson.bbcode_path, BBCodeUtils.get_practice_id(practice))
 
 	if current:
 		button.navigation_disabled = true

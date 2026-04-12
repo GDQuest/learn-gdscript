@@ -82,6 +82,17 @@ static func get_lesson_practice(lesson: BBCodeParser.ParseNode, practice_index: 
 	return null
 
 
+static func get_practice_index(lesson: BBCodeParser.ParseNode, practice: BBCodeParser.ParseNode) -> int:
+	var practice_id := get_practice_id(practice)
+	var count := 0
+	for child in lesson.children:
+		if child is BBCodeParser.ParseNode and child.tag == BBCodeParserData.Tag.PRACTICE:
+			if get_practice_id(child) == practice_id:
+				return count
+			count += 1
+	return -1
+
+
 static func get_lesson_quiz_count(lesson: BBCodeParser.ParseNode) -> int:
 	var quiz_count := 0
 	for child in lesson.children:

@@ -10,6 +10,8 @@ var navigation_disabled := false:
 	set = set_navigation_disabled
 
 var _practice: BBCodeParser.ParseNode
+var _practice_index := 0
+var _lesson_number := 0
 
 @export var visibility_notifier: VisibleOnScreenNotifier2D
 @export var _title_label: Label
@@ -29,14 +31,17 @@ func _notification(what: int) -> void:
 		_update_labels()
 
 
-func setup(practice: BBCodeParser.ParseNode, practice_index: int) -> void:
+func setup(practice: BBCodeParser.ParseNode, practice_index: int, lesson_number: int) -> void:
+	assert(lesson_number > 0, "lesson_number must be a positive integer")
 	_practice = practice
+	_practice_index = practice_index
+	_lesson_number = lesson_number
 
 	if not is_inside_tree():
 		await self.ready
 
 	var title := BBCodeUtils.get_practice_title(practice)
-	_title_label.text = "%d. %s" % [practice_index + 1, tr(title).capitalize()]
+	_title_label.text = "L%d.P%d %s" % [lesson_number, practice_index + 1, tr(title).capitalize()]
 
 	var description := BBCodeUtils.get_practice_description(practice)
 	_description_label.text = TextUtils.tr_paragraph(description)
@@ -49,7 +54,7 @@ func _update_labels() -> void:
 		return
 
 	var title := BBCodeUtils.get_practice_title(_practice)
-	_title_label.text = tr(title).capitalize()
+	_title_label.text = "L%d.P%d %s" % [_lesson_number, _practice_index + 1, tr(title).capitalize()]
 	var description := BBCodeUtils.get_practice_description(_practice)
 	_description_label.text = TextUtils.tr_paragraph(description)
 

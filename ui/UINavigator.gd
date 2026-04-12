@@ -151,20 +151,21 @@ func _navigate_to() -> void:
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
 	var screen: UINavigatablePage
 	if target is BBCodeParser.ParseNode and target.tag == BBCodeParserData.Tag.PRACTICE:
-		var lesson := NavigationManager.get_navigation_resource(target.bbcode_path)
+		var lesson := NavigationManager.get_navigation_resource(target.bbcode_path) as BBCodeParser.ParseNode
+		# Lesson numbers start as 1, we subtract to get the corresponding array index.
+		var lesson_number := course_index.get_lesson_number(lesson.bbcode_path)
+		_lesson_index = lesson_number - 1
 
-		screen = preload("UIPractice.tscn").instantiate()
-		(screen as UIPractice).setup(target, lesson, course_index)
+		var ui_practice_screen: UIPractice = preload("UIPractice.tscn").instantiate()
+		screen = ui_practice_screen
+		ui_practice_screen.setup(target, lesson, course_index, lesson_number)
 	elif target.tag == BBCodeParserData.Tag.LESSON:
-		var lesson := target as BBCodeParser.ParseNode
-		screen = preload("UILesson.tscn").instantiate()
-		# warning-ignore:unsafe_method_access
-		(screen as UILesson).setup(target, course_index)
+		var lesson_number := course_index.get_lesson_number(target.bbcode_path)
+		_lesson_index = lesson_number - 1
 
-		for i in course_index.get_lessons_count():
-			if course_index.get_lesson_path(i) == lesson.bbcode_path:
-				_lesson_index = i
-				break
+		var ui_lesson_instance: UILesson = preload("UILesson.tscn").instantiate()
+		screen = ui_lesson_instance
+		ui_lesson_instance.setup(target, course_index, lesson_number)
 	else:
 		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
 		return

@@ -45,6 +45,8 @@ static var REGEX_TOP_ANNOTATION := RegEx.create_from_string(r"\s*@")
 var _practice: BBCodeParser.ParseNode
 var _practice_completed := false
 var _practice_solution_used := false
+var _lesson_number := 0
+var _practice_index := 0
 
 var _script_slice: ScriptSlice:
 	set = _set_script_slice
@@ -87,7 +89,7 @@ func _init():
 
 func _ready() -> void:
 	super._ready()
-	
+
 	randomize()
 	if Engine.is_editor_hint():
 		return
@@ -117,7 +119,8 @@ func _ready() -> void:
 		var course_index: CourseIndex = CourseIndexPaths.get_course_index_instance()
 		var lesson := NavigationManager.get_navigation_resource(lesson_test_practice)
 		var practice := BBCodeUtils.get_lesson_practice(lesson, test_practice)
-		setup(practice, lesson, course_index)
+		var lesson_number := course_index.get_lesson_number(lesson.bbcode_path)
+		setup(practice, lesson, course_index, lesson_number)
 
 
 func _notification(what: int) -> void:
@@ -134,16 +137,18 @@ func _gui_input(event: InputEvent) -> void:
 		get_viewport().gui_get_focus_owner().release_focus()
 
 
-func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
+func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_number: int) -> void:
 	if not is_inside_tree():
 		await self.ready
 
 	_practice = practice
 	_practice_completed = false
 	_practice_solution_used = false
+	_lesson_number = lesson_number
+	_practice_index = BBCodeUtils.get_practice_index(lesson, practice)
 
 	var title := BBCodeUtils.get_practice_title(practice)
-	_info_panel.title_label.text = tr(title).capitalize()
+	_info_panel.title_label.text = "L%d.P%d %s" % [lesson_number, _practice_index + 1, tr(title).capitalize()]
 	var goal := BBCodeUtils.get_practice_goal(practice)
 	_info_panel.goal_rich_text_label.text = TextUtils.bbcode_add_code_color(
 		TextUtils.tr_paragraph(goal),
@@ -197,15 +202,14 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 	_info_panel.display_tests(_tester.get_test_names())
 	_game_view.use_scene(_current_scene, _script_slice.get_viewport_size())
 
-	var practice_id := BBCodeUtils.get_practice_id(practice)
 	# In case we directly test a practice from the editor, we don't have access to the lesson.
 	if lesson and course_index:
 		_practice_list.clear_items()
 		var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
+		var practice_id := BBCodeUtils.get_practice_id(practice)
 		for i in practice_count:
 			var practice_data := BBCodeUtils.get_lesson_practice(lesson, i)
-			var other_practice_id := BBCodeUtils.get_practice_id(practice_data)
-			_practice_list.add_item(practice_data, lesson, course_index, other_practice_id == practice_id)
+			_practice_list.add_item(practice_data, lesson, course_index, lesson_number, BBCodeUtils.get_practice_id(practice_data) == practice_id)
 
 		var user_profile := UserProfiles.get_profile()
 		var completed_before = user_profile.is_lesson_practice_completed(
@@ -227,7 +231,7 @@ func _update_labels() -> void:
 		return
 
 	var title := BBCodeUtils.get_practice_title(_practice)
-	_info_panel.title_label.text = tr(title).capitalize()
+	_info_panel.title_label.text = "L%d.P%d %s" % [_lesson_number, _practice_index + 1, tr(title).capitalize()]
 	var goal := BBCodeUtils.get_practice_goal(_practice)
 	_info_panel.goal_rich_text_label.text = TextUtils.bbcode_add_code_color(
 		TextUtils.tr_paragraph(goal),
@@ -330,22 +334,22 @@ func _validate_and_run_student_code() -> void:
 
 	var verifier_script := script_text
 	var script_is_desynced_by_one_line := false
-	
+
 	if not _has_class_name(verifier_script):
 		# GDScriptAnalyzer needs a path or class_name. As we're feeding code directly into the parser,
 		# we can't really have a path, so we need a class_name to fool it
 		var initial_insertion_character := _find_first_non_annotation_entry_point(verifier_script)
 		verifier_script = verifier_script.insert(initial_insertion_character, "class_name TEMP_UserScript\n")
 		script_is_desynced_by_one_line = true
-	
+
 	var verifier := OfflineScriptVerifier.new(verifier_script)
 	verifier.test()
 	var errors := verifier.errors
-	
+
 	if not errors.is_empty():
 		# GDScriptAnalyzer will complain the first time it parses the script from the verifier
 		# so we capture it here to ignore
-		for i in range(errors.size()-1, -1, -1):
+		for i in range(errors.size() - 1, -1, -1):
 			var error: ScriptError = errors[i]
 			if error.message == BENIGN_CACHE_ERROR:
 				errors.remove_at(i)
@@ -657,7 +661,7 @@ func _update_nodes(script: GDScript, node_paths: Array) -> void:
 			node_path = path
 		elif path is String:
 			node_path = NodePath(path as String)
-		
+
 		var node = (
 			_current_scene.get_node_or_null(node_path)
 			if not node_path.is_empty()
@@ -696,11 +700,12 @@ static func try_validate_and_replace_script(node: Node, script: GDScript) -> voi
 
 
 static func _get_properties(node: Node) -> Array[Dictionary]:
-	var properties := node.get_property_list().filter(func(prop: Dictionary) -> bool:
-		return (
-			prop.usage & (PropertyUsageFlags.PROPERTY_USAGE_STORAGE) != 0
-			and prop.usage & (PropertyUsageFlags.PROPERTY_USAGE_SCRIPT_VARIABLE) != 0
-		)
+	var properties := node.get_property_list().filter(
+		func(prop: Dictionary) -> bool:
+			return (
+				prop.usage & (PropertyUsageFlags.PROPERTY_USAGE_STORAGE) != 0
+				and prop.usage & (PropertyUsageFlags.PROPERTY_USAGE_SCRIPT_VARIABLE) != 0
+			)
 	)
 	for property in properties:
 		property.value = node.get(property.name as StringName)
@@ -710,7 +715,6 @@ static func _get_properties(node: Node) -> Array[Dictionary]:
 static func _restore_properties(node: Node, properties: Array[Dictionary]) -> void:
 	for property in properties:
 		node.set(property.name as StringName, property.value)
-
 
 ###############################################################################
 #

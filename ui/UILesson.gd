@@ -55,19 +55,21 @@ func _ready() -> void:
 	if test_lesson and get_parent() == get_tree().root:
 		var _lesson_node := NavigationManager.get_navigation_resource(test_lesson)
 		var test_course_index: CourseIndex = CourseIndexPaths.get_course_index_instance()
-		setup(_lesson_node, test_course_index)
+		var lesson_number := test_course_index.get_lesson_number(_lesson_node.bbcode_path)
+		setup(_lesson_node, test_course_index, lesson_number)
 		for child: Control in _content_blocks.get_children():
 			child.show()
 		_practices_container.show()
 
 	_scroll_container.grab_focus()
 
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
 		_update_labels()
 
 
-func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
+func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_number: int) -> void:
 	if not is_inside_tree():
 		await self.ready
 
@@ -117,7 +119,6 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 					instance.quiz_passed.connect(Events.quiz_completed.emit.bind(child_node))
 					instance.quiz_passed.connect(_reveal_up_to_next_quiz)
 					instance.quiz_skipped.connect(_reveal_up_to_next_quiz)
-
 				BBCodeParserData.Tag.PRACTICE, BBCodeParserData.Tag.TITLE, BBCodeParserData.Tag.SEPARATOR:
 					# handled separately or used to enhance other tags. no processing
 					pass
@@ -135,7 +136,7 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex) -> void:
 		var practice := BBCodeUtils.get_lesson_practice(lesson, i)
 		var practice_id := BBCodeUtils.get_practice_id(practice)
 		var button: UIPracticeButton = PracticeButtonScene.instantiate()
-		button.setup(practice, i)
+		button.setup(practice, i, lesson_number)
 		if i == 0:
 			button.visibility_notifier.screen_entered.connect(_on_practice_first_visible)
 		if course_index:
