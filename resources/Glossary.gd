@@ -1,78 +1,77 @@
 class_name Glossary
 extends Resource
 
-var glossary_file := "res://course/glossary.csv"
+const GLOSSARY_FILE := "res://course/glossary.csv"
 
-# Multiple keywords could point to the same definition, so we could use shared objects and map multiple keys to them.
-# Examples: call function and function call.
-# Dictionary mapping keywords or expressions to a definition.
-var _glossary := { }
-# Single regex to find all matching keywords in rich text labels. Used to detect
-# and wrap glossary entries in rich text labels.
-var _glossary_regex := RegEx.new()
+# This dictionary holds the glossary entries keyed by raw lowercase English
+# keywords (both singular and plural). The keywords serve as the glossary
+# entries' unique IDs we can look up regardless of the language. They're the
+# same keys used in the bbcode in [glossary] tags.
+var _glossary := {}
 
 
 func _init() -> void:
-	setup()
-
-
-func setup() -> void:
-	_glossary = _parse_glossary_file(glossary_file)
-	var patterns := PackedStringArray()
-	for key: String in _glossary:
-		patterns.append(key)
-	var terms_pattern := "(?:\\[ignore\\]\\w+)(*SKIP)(*F)|(%s)" % "|".join(patterns)
-
-	_glossary_regex.compile(terms_pattern)
-
-
-func replace_matching_terms(text_bbcode: String) -> String:
-	return _glossary_regex.sub(text_bbcode, "[url=$1]$1[/url]", true).replace("[ignore]", "")
-
-
-func has(keyword: String) -> bool:
-	return keyword in _glossary
-
-
-func get_match(keyword: String) -> Entry:
-	var key := keyword.to_lower()
-	if not key in _glossary:
-		return null
-	return _glossary[keyword.to_lower()]
-
-
-# Parses the input CSV file and returns a dictionary mapping keywords to
-# glossary entries.
-func _parse_glossary_file(path: String) -> Dictionary:
-	var glossary := { }
-	var file := FileAccess.open(path, FileAccess.READ)
+	var file := FileAccess.open(GLOSSARY_FILE, FileAccess.READ)
 	var _header := Array(file.get_csv_line())
 
-	while !file.eof_reached():
+	while not file.eof_reached():
 		var csv_line := file.get_csv_line()
 		if not csv_line[0]:
 			break
 
-		var plural_form = tr(csv_line[1])
-		var keyword = tr(csv_line[0])
-		assert(not keyword in glossary, "Duplicate key %s in glossary." % keyword)
-		assert(not plural_form in glossary, "Duplicate key %s in glossary." % keyword)
+		var raw_singular: String = csv_line[0].to_lower()
+		var raw_plural: String = csv_line[1].to_lower()
+
+		assert(not raw_singular in _glossary, "Duplicate key '%s' in glossary." % raw_singular)
+		assert(raw_plural.is_empty() or not raw_plural in _glossary, "Duplicate key '%s' in glossary." % raw_plural)
+
 		var entry := Entry.new(csv_line)
-		if plural_form:
-			glossary[plural_form] = entry
-		glossary[keyword] = entry
+		_glossary[raw_singular] = entry
+		if not raw_plural.is_empty():
+			_glossary[raw_plural] = entry
 
 	file.close()
-	return glossary
+
+
+# Call this function after a language change to rebuild translated display
+# strings on all entries.
+func reload() -> void:
+	for entry: Entry in _glossary.values():
+		entry.rebuild_translations()
+
+
+func has(keyword: String) -> bool:
+	return keyword.to_lower() in _glossary
+
+
+func get_match(keyword: String) -> Entry:
+	return _glossary.get(keyword.to_lower(), null)
 
 
 class Entry:
-	var term: String
-	var plural_form: String
-	var explanation: String
+	# The fields below store the source English keywords loaded from the
+	# glossary data file.
+	var raw_singular := ""
+	var raw_plural := ""
+	var raw_explanation := ""
+
+	# These are the translated terms that get updated based on the selected
+	# language in the user settings. They get populated once on initialization
+	# and rebuilt on demand. The translations are then cached here.
+	# (Nathan) I used properties mostly because we can't return simple tuples.
+	var term := ""
+	var plural_form := ""
+	var explanation := ""
 
 
 	func _init(csv_line: Array) -> void:
-		term = tr(csv_line[0] as String).capitalize()
-		plural_form = tr(csv_line[1] as String)
-		explanation = TextUtils.tr_paragraph(csv_line[2] as String)
+		raw_singular = csv_line[0] as String
+		raw_plural = csv_line[1] as String
+		raw_explanation = csv_line[2] as String
+		rebuild_translations()
+
+
+	func rebuild_translations() -> void:
+		term = tr(raw_singular)
+		plural_form = tr(raw_plural)
+		explanation = TextUtils.tr_paragraph(raw_explanation)

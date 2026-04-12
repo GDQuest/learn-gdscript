@@ -3,10 +3,12 @@ extends RefCounted
 
 var _parser_data := BBCodeParserData.new()
 var _result: BBCodeParser.ParseResult
+var _glossary: Glossary
 
 
-func validate_tree(root: BBCodeParser.ParseNode, result: BBCodeParser.ParseResult) -> void:
+func validate_tree(root: BBCodeParser.ParseNode, result: BBCodeParser.ParseResult, glossary: Glossary) -> void:
 	_result = result
+	_glossary = glossary
 
 	var lesson_count := 0
 	var lesson_node: BBCodeParser.ParseNode = null
@@ -34,6 +36,7 @@ func validate_tree(root: BBCodeParser.ParseNode, result: BBCodeParser.ParseResul
 
 	if lesson_node:
 		_validate_node_children(lesson_node)
+		_validate_glossary_terms(lesson_node)
 
 
 func _validate_node_children(node: BBCodeParser.ParseNode) -> void:
@@ -43,7 +46,7 @@ func _validate_node_children(node: BBCodeParser.ParseNode) -> void:
 	var required_children: Array = tag_definition.required_children
 
 	if not required_children.is_empty():
-		var found_tags := { }
+		var found_tags := {}
 		for child in node.children:
 			if child is BBCodeParser.ParseNode:
 				found_tags[child.tag] = true
@@ -72,3 +75,14 @@ func _validate_node_children(node: BBCodeParser.ParseNode) -> void:
 	for child in node.children:
 		if child is BBCodeParser.ParseNode:
 			_validate_node_children(child as BBCodeParser.ParseNode)
+
+
+func _validate_glossary_terms(node: BBCodeParser.ParseNode) -> void:
+	if node.tag == _parser_data.Tag.GLOSSARY:
+		var term: String = node.attributes.get("term", "")
+		if not _glossary.has(term):
+			_result.add_error("Unknown glossary term '%s'" % term, node.line_number)
+
+	for child in node.children:
+		if child is BBCodeParser.ParseNode:
+			_validate_glossary_terms(child as BBCodeParser.ParseNode)

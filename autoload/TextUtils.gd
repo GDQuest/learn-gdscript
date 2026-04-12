@@ -35,6 +35,12 @@ var _REGEXES := { }
 # Intended to be used as a constant
 var _REGEX_REPLACE_MAP := { }
 
+var _glossary: Glossary = null
+
+
+func _ready() -> void:
+	get_glossary()
+
 
 func _init() -> void:
 	_REGEXES["code"] = RegEx.create_from_string(r"\[code\](.+?)\[\/code\]")
@@ -50,6 +56,19 @@ func _init() -> void:
 		"symbol": "[color=#%s]$symbol[/color]" % CodeEditorEnhancer.COLOR_MEMBER.to_html(false),
 		"string": "[color=#%s]$string[/color]" % CodeEditorEnhancer.COLOR_QUOTES.to_html(false),
 	}
+
+
+## Use this function to get the Glossary singleton. It gives access to glossary
+## terms.
+func get_glossary() -> Glossary:
+	if _glossary == null:
+		_glossary = Glossary.new()
+	return _glossary
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		get_glossary().reload()
 
 
 func bbcode_add_code_color(text := "") -> String:

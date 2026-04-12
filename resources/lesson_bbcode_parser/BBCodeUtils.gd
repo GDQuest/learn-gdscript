@@ -7,40 +7,38 @@ static var snake_case_regex := RegEx.create_from_string("(?<=[a-z])(?=[A-Z])|[^a
 static func get_lesson_block_count(lesson: BBCodeParser.ParseNode) -> int:
 	var child_count := 0
 	for child in lesson.children:
-		if child is String or (child is BBCodeParser.ParseNode and child.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS):
+		if child is BBCodeParser.ParseNode and child.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS:
 			child_count += 1
 	return child_count
 
 
 static func get_lesson_block_type(lesson: BBCodeParser.ParseNode, block_index: int) -> int:
 	var child = lesson.children[block_index]
-	if child is String:
-		return BBCodeParserData.Tag.STRING
 	if child is BBCodeParser.ParseNode and child.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS:
 		return child.tag
 	return BBCodeParserData.Tag.UNKNOWN
 
 
-static func get_lesson_text_block(lesson: BBCodeParser.ParseNode, block_index: int) -> String:
-	var child = lesson.children[block_index]
-	if child is String:
-		return child
-	return ""
-
-
 static func get_lesson_title_for_index(lesson: BBCodeParser.ParseNode, block_index: int) -> String:
-	# Work backwards from the content index to find the nearest title above the block
+	# Work backwards from the raw child index to find the nearest title above the block.
+	# Lesson children are now always ParseNodes — no raw strings.
 	for i: int in range(block_index, -1, -1):
 		var child: Variant = lesson.children[i]
 		if child is BBCodeParser.ParseNode:
-			var child_node: BBCodeParser.ParseNode = lesson.children[i]
+			var child_node: BBCodeParser.ParseNode = child
 			if child_node.tag == BBCodeParserData.Tag.TITLE:
 				return clean_text_content(_get_text_content(child_node, true))
-			# If a visual, quiz, separator or other block is encountered first, have no titles
-			if child.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS:
+			# Stop at any content-producing block other than PARAGRAPH and TITLE
+			if child_node.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS and child_node.tag != BBCodeParserData.Tag.PARAGRAPH:
 				break
-
 	return ""
+
+
+# Returns the fully resolved text of a PARAGRAPH node, including inline glossary tags.
+static func get_paragraph_text(paragraph: BBCodeParser.ParseNode) -> String:
+	return clean_text_content(_get_text_content(paragraph, true))
+
+
 
 
 static func get_note_title(note: BBCodeParser.ParseNode) -> String:
@@ -53,10 +51,6 @@ static func get_note_contents(note: BBCodeParser.ParseNode) -> String:
 
 static func get_visual_path(visual: BBCodeParser.ParseNode) -> String:
 	return visual.attributes.get("path", "")
-
-
-static func get_block_type(block: Variant) -> int:
-	return BBCodeParserData.Tag.STRING if block is String else block.tag if block is BBCodeParser.ParseNode else BBCodeParserData.Tag.UNKNOWN
 
 
 static func get_lesson_title(lesson: BBCodeParser.ParseNode) -> String:
@@ -118,7 +112,7 @@ static func get_practice_title(practice: BBCodeParser.ParseNode) -> String:
 
 static func get_practice_description(practice: BBCodeParser.ParseNode) -> String:
 	for child: BBCodeParser.ParseNode in practice.children:
-		if child is BBCodeParser.ParseNode and child.tag == BBCodeParserData.Tag.DESCRIPTION:
+		if child.tag == BBCodeParserData.Tag.DESCRIPTION:
 			return clean_text_content(_get_text_content(child, true))
 	return ""
 
@@ -272,25 +266,18 @@ static func _get_text_content(node: BBCodeParser.ParseNode, recurse: bool) -> St
 			text += child
 		elif child is BBCodeParser.ParseNode and recurse:
 			var child_node: BBCodeParser.ParseNode = child
-			text += _get_text_content(child_node, recurse)
+			if child_node.tag == BBCodeParserData.Tag.GLOSSARY:
+				var term: String = child_node.attributes.get("term", "")
+				var entry: Glossary.Entry = TextUtils.get_glossary().get_match(term)
+				if entry != null:
+					var is_plural := not entry.raw_plural.is_empty() and term == entry.raw_plural
+					text += "[url=%s]%s[/url]" % [term, entry.plural_form if is_plural else entry.term]
+				else:
+					text += term
+			else:
+				text += _get_text_content(child_node, recurse)
 	return text
 
 
 static func _to_snake_case(input_string: String, separator := "_") -> String:
 	return snake_case_regex.sub(input_string, " ", true).strip_edges().replace(" ", separator).to_lower()
-
-
-static func _to_kebab_case(input_string: String) -> String:
-	return _to_snake_case(input_string, "-")
-
-
-static func _strip_leading_trailing_newlines(text: String) -> String:
-	var start := 0
-	while start < text.length() and text[start] == "\n":
-		start += 1
-	var end := text.length() - 1
-	while end >= 0 and text[end] == "\n":
-		end -= 1
-	if start != 0 or end != text.length() - 1:
-		return text.substr(start, end - start + 1)
-	return text

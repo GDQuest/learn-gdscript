@@ -189,22 +189,57 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 
 	var stack := [root]
 	var accumulated_text := ""
+	# Tracks the currently open implicit PARAGRAPH node under a LESSON.
+	# Inline tags are appended to it instead of directly to LESSON.
+	# Cleared when a block-level tag is encountered.
+	var current_paragraph: ParseNode = null
 
 	for token in tokens:
 		var current: ParseNode = stack.back()
 
 		if token.type == TokenTypes.TAG_OPEN:
-			if accumulated_text.strip_edges() != "":
-				current.children.append(accumulated_text)
-			accumulated_text = ""
-
 			var token_tag: int = token.tag
 			var tag_definition := _parser_data.get_tag_definition(token_tag)
+
+			# When inside LESSON, text and inline tags go into an implicit
+			# PARAGRAPH. A block-level tag flushes and closes the current one.
+			if current.tag == _parser_data.Tag.LESSON:
+				# A tag is inline if PARAGRAPH is one of its valid parents.
+				var is_inline := tag_definition != null and _parser_data.Tag.PARAGRAPH in tag_definition.valid_parents
+				# Ensure a paragraph exists and put any accumulated text into
+				# it.
+				if is_inline or accumulated_text.strip_edges() != "":
+					if current_paragraph == null:
+						current_paragraph = ParseNode.new()
+						current_paragraph.tag = _parser_data.Tag.PARAGRAPH
+						current_paragraph.line_number = token.line_number
+						current_paragraph.bbcode_path = file_path
+						current.children.append(current_paragraph)
+					if accumulated_text != "":
+						current_paragraph.children.append(accumulated_text)
+						accumulated_text = ""
+				if is_inline:
+					var inline_node := ParseNode.new()
+					inline_node.tag = token_tag
+					inline_node.attributes = token.attributes
+					inline_node.line_number = token.line_number
+					inline_node.bbcode_path = file_path
+					current_paragraph.children.append(inline_node)
+					continue
+				else:
+					accumulated_text = ""
+					current_paragraph = null
+			else:
+				if accumulated_text.strip_edges() != "":
+					current.children.append(accumulated_text)
+				elif accumulated_text != "" and current.tag == _parser_data.Tag.STARTING_CODE:
+					current.children.append(accumulated_text)
+				accumulated_text = ""
+
 			if tag_definition == null:
-				var token_line_number: int = token.line_number
 				_result.add_error(
-					"No tag definition found for tag enum %d" % token.tag,
-					token_line_number,
+					"No tag definition found for tag enum %d" % token_tag,
+					token.line_number,
 				)
 				continue
 
@@ -213,26 +248,23 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 				var parent_names := []
 				for parent_current: int in valid_parents:
 					parent_names.append("[%s]" % _parser_data.get_tag_name(parent_current))
-				var current_tag: int = current.tag
-				var token_line_number: int = token.line_number
 				_result.add_error(
 					"Tag [%s] cannot appear inside [%s]. Valid parents: %s" % [
 						_parser_data.get_tag_name(token_tag),
-						_parser_data.get_tag_name(current_tag) if current.tag != _parser_data.Tag.UNKNOWN else "_root",
+						_parser_data.get_tag_name(current.tag) if current.tag != _parser_data.Tag.UNKNOWN else "_root",
 						", ".join(parent_names),
 					],
-					token_line_number,
+					token.line_number,
 				)
 
 			var node := ParseNode.new()
-			node.tag = token.tag
+			node.tag = token_tag
 			node.attributes = token.attributes
 			node.line_number = token.line_number
 			node.bbcode_path = file_path
 			current.children.append(node)
 
-			var _token_tag: int = token.tag
-			if _parser_data.is_container_tag(_token_tag):
+			if _parser_data.is_container_tag(token_tag):
 				stack.push_back(node)
 
 		elif token.type == TokenTypes.TAG_CLOSE:
@@ -243,30 +275,47 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 					current.children.append(accumulated_text)
 			accumulated_text = ""
 
+			# Closing any block tag may close the implicit paragraph.
+			current_paragraph = null
+
 			var token_tag: int = token.tag
 			var current_name := _parser_data.get_tag_name(current.tag) if current.tag != _parser_data.Tag.UNKNOWN else "_root"
 			var closing_name := _parser_data.get_tag_name(token_tag)
 
 			if current.tag == _parser_data.Tag.UNKNOWN:
-				var token_line_number: int = token.line_number
 				_result.add_error(
 					"Unexpected closing tag [/%s] with no matching opening tag" % closing_name,
-					token_line_number,
+					token.line_number,
 				)
 			elif current.tag != token.tag:
-				var token_line_number: int = token.line_number
 				_result.add_error(
-					"Mismatched closing tag: expected [/%s] but found [/%s]" % [
-						current_name,
-						closing_name,
-					],
-					token_line_number,
+					"Mismatched closing tag: expected [/%s] but found [/%s]" % [current_name, closing_name],
+					token.line_number,
 				)
 			else:
 				stack.pop_back()
 
 		elif token.type == TokenTypes.TEXT:
-			accumulated_text += token.text
+			# Inside LESSON, text accumulates and will be wrapped in a PARAGRAPH when flushed.
+			# Inside an open implicit PARAGRAPH (inline context), append directly.
+			if current.tag == _parser_data.Tag.LESSON and current_paragraph != null:
+				current_paragraph.children.append(token.text)
+			else:
+				accumulated_text += token.text
+
+	# Add any remaining text.
+	var current: ParseNode = stack.back()
+	if accumulated_text.strip_edges() != "":
+		if current.tag == _parser_data.Tag.LESSON:
+			if current_paragraph == null:
+				current_paragraph = ParseNode.new()
+				current_paragraph.tag = _parser_data.Tag.PARAGRAPH
+				current_paragraph.line_number = 0
+				current_paragraph.bbcode_path = file_path
+				current.children.append(current_paragraph)
+			current_paragraph.children.append(accumulated_text)
+		else:
+			current.children.append(accumulated_text)
 
 	if stack.size() > 1:
 		for current_index in range(1, stack.size()):

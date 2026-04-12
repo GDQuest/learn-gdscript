@@ -10,7 +10,7 @@ const ContentBlockScene := preload("screens/lesson/UIContentBlock.tscn")
 const QuizInputFieldScene := preload("screens/lesson/quizzes/UIQuizInputField.tscn")
 const QuizChoiceScene := preload("screens/lesson/quizzes/UIQuizChoice.tscn")
 const PracticeButtonScene := preload("screens/lesson/UIPracticeButton.tscn")
-const GDScriptCodeExampleScene := preload("res://course/common/GDScriptCodeExample.tscn")
+
 const GlossaryPopup := preload("res://ui/components/GlossaryPopup.gd")
 
 const AUTOSCROLL_PADDING := 20
@@ -30,8 +30,6 @@ signal lesson_displayed
 
 var _lesson: BBCodeParser.ParseNode
 var _course_index: CourseIndex
-# Resource used to highlight glossary entries in the lesson text.
-var _glossary: Glossary
 var _visible_index := -1
 var _quizzes_done := -1 # Start with -1 because we will always autoincrement at least once.
 var _quizz_count := 0
@@ -48,9 +46,6 @@ func _ready() -> void:
 	Events.font_size_scale_changed.connect(_update_content_container_width)
 	_update_content_container_width(UserProfiles.get_profile().font_size_scale)
 	_scroll_container.get_v_scroll_bar().value_changed.connect(_on_content_scrolled)
-	TranslationManager.translation_changed.connect(_on_translation_changed)
-
-	_glossary = load("res://course/glossary.tres")
 
 	if test_lesson and get_parent() == get_tree().root:
 		var _lesson_node := NavigationManager.get_navigation_resource(test_lesson)
@@ -78,57 +73,55 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 	_title.text = tr(BBCodeUtils.get_lesson_title(lesson))
 	var user_profile := UserProfiles.get_profile()
 
-	var content_block_count := BBCodeUtils.get_lesson_block_count(lesson)
-	for i in content_block_count:
-		var type := BBCodeUtils.get_lesson_block_type(lesson, i)
-		if type == BBCodeParserData.Tag.STRING:
-			var instance: UIContentBlock = ContentBlockScene.instantiate()
-			_content_blocks.add_child(instance)
-			var content: String = lesson.children[i]
-			var instance_name: String = BBCodeUtils._to_snake_case(content.substr(0, mini(content.length(), 30)))
-			instance.name = instance_name
-			instance.setup(content, lesson, i)
-			instance.hide()
-		else:
-			var child_node: BBCodeParser.ParseNode = lesson.children[i]
-			var node_type := child_node.tag
-			match node_type:
-				BBCodeParserData.Tag.QUIZ_CHOICE, BBCodeParserData.Tag.QUIZ_INPUT:
-					var scene := (
-						QuizChoiceScene if node_type == BBCodeParserData.Tag.QUIZ_CHOICE
-						else QuizInputFieldScene
+	var block_index := 0
+	for child_node: BBCodeParser.ParseNode in lesson.children:
+		var node_type := child_node.tag
+		match node_type:
+			BBCodeParserData.Tag.PARAGRAPH:
+				var instance: UIContentBlock = ContentBlockScene.instantiate()
+				_content_blocks.add_child(instance)
+				instance.setup(child_node, lesson, block_index)
+				instance.glossary_entry_clicked.connect(_open_glossary_popup)
+				instance.hide()
+				block_index += 1
+			BBCodeParserData.Tag.QUIZ_CHOICE, BBCodeParserData.Tag.QUIZ_INPUT:
+				var scene := (
+					QuizChoiceScene if node_type == BBCodeParserData.Tag.QUIZ_CHOICE
+					else QuizInputFieldScene
+				)
+				var instance: UIBaseQuiz = scene.instantiate()
+				var quiz_id := BBCodeUtils.get_quiz_id(child_node)
+				_content_blocks.add_child(instance)
+				instance.setup(child_node)
+				instance.hide()
+
+				var completed_before := false
+				if course_index:
+					completed_before = user_profile.is_lesson_quiz_completed(
+						course_index.get_course_id(),
+						lesson.bbcode_path,
+						quiz_id,
 					)
-					var instance: UIBaseQuiz = scene.instantiate()
-					var quiz_id := BBCodeUtils.get_quiz_id(child_node)
-					instance.name = quiz_id
+					if completed_before:
+						_quizzes_done += 1
+				instance.completed_before = completed_before
+
+				instance.quiz_passed.connect(Events.quiz_completed.emit.bind(child_node))
+				instance.quiz_passed.connect(_reveal_up_to_next_quiz)
+				instance.quiz_skipped.connect(_reveal_up_to_next_quiz)
+				block_index += 1
+			BBCodeParserData.Tag.PRACTICE, BBCodeParserData.Tag.TITLE, BBCodeParserData.Tag.SEPARATOR:
+				# handled separately or used to enhance other tags. no processing
+				block_index += 1
+			_:
+				# Handles the remaining content-producing tags: VISUAL and NOTE.
+				if child_node.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS:
+					var instance: UIContentBlock = ContentBlockScene.instantiate()
 					_content_blocks.add_child(instance)
-					instance.setup(child_node)
+					instance.setup(child_node, lesson, block_index)
+					instance.glossary_entry_clicked.connect(_open_glossary_popup)
 					instance.hide()
-
-					var completed_before := false
-					if course_index:
-						completed_before = user_profile.is_lesson_quiz_completed(
-							course_index.get_course_id(),
-							lesson.bbcode_path,
-							quiz_id,
-						)
-						if completed_before:
-							_quizzes_done += 1
-					instance.completed_before = completed_before
-
-					instance.quiz_passed.connect(Events.quiz_completed.emit.bind(child_node))
-					instance.quiz_passed.connect(_reveal_up_to_next_quiz)
-					instance.quiz_skipped.connect(_reveal_up_to_next_quiz)
-				BBCodeParserData.Tag.PRACTICE, BBCodeParserData.Tag.TITLE, BBCodeParserData.Tag.SEPARATOR:
-					# handled separately or used to enhance other tags. no processing
-					pass
-				_:
-					if child_node.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS:
-						var instance: UIContentBlock = ContentBlockScene.instantiate()
-						instance.name = "_generated_%s_%s" % [BBCodeParserData.Tag.keys()[child_node.tag], i]
-						_content_blocks.add_child(instance)
-						instance.setup(child_node, lesson, i)
-						instance.hide()
+					block_index += 1
 
 	var highlighted_next := false
 	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
@@ -162,16 +155,6 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 	# Wait until the lesson is considered loaded by the system, and then update the size of
 	# the scroll container and its content.
 	await Events.lesson_started
-
-	_underline_glossary_entries()
-
-
-func _underline_glossary_entries() -> void:
-	# Underline glossary entries
-	for rtl: RichTextLabel in get_tree().get_nodes_in_group("rich_text_label"):
-		rtl.text = _glossary.replace_matching_terms(rtl.text)
-		if not rtl.meta_clicked.is_connected(_open_glossary_popup):
-			rtl.meta_clicked.connect(_open_glossary_popup)
 
 
 func _update_labels() -> void:
@@ -229,13 +212,8 @@ func _update_content_container_width(new_font_scale: int) -> void:
 	_content_container.custom_minimum_size.x = _start_content_width * font_size_multiplier
 
 
-func _on_translation_changed() -> void:
-	_glossary.setup()
-	_underline_glossary_entries()
-
-
 func _open_glossary_popup(meta: String) -> void:
-	var entry: Glossary.Entry = _glossary.get_match(meta)
+	var entry: Glossary.Entry = TextUtils.get_glossary().get_match(meta)
 	if entry == null:
 		return
 	_glossary_popup.setup(entry.term, entry.explanation)

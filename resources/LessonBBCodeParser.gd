@@ -31,7 +31,7 @@ func parse_text(source: String, file_path: String) -> BBCodeParser.ParseResult:
 	if not result.errors.is_empty():
 		return result
 
-	_tree_validator.validate_tree(root, result)
+	_tree_validator.validate_tree(root, result, TextUtils.get_glossary())
 	if not result.errors.is_empty():
 		return result
 

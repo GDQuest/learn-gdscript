@@ -4,6 +4,8 @@
 class_name UIContentBlock
 extends MarginContainer
 
+signal glossary_entry_clicked(term: String)
+
 # Minimum width of the block before the visual content is hidden (doesn't apply to standalone visuals).
 const VISUAL_VISIBLE_MIN_WIDTH := 500.0
 
@@ -40,28 +42,26 @@ func setup(content_block, lesson: BBCodeParser.ParseNode, block_index: int) -> v
 	_content_block = content_block
 	_lesson = lesson
 	_block_index = block_index
-	if _content_block is String:
-		_content_block = BBCodeUtils.clean_text_content(_content_block as String)
-		var title := BBCodeUtils.get_lesson_title_for_index(lesson, block_index)
-		_content_header.visible = not title.is_empty()
-		_content_header.text = tr(title)
-	elif _content_block is BBCodeParser.ParseNode:
-		_content_header.visible = false
-		if _content_block.tag == BBCodeParserData.Tag.NOTE:
+
+	var node := _content_block as BBCodeParser.ParseNode
+	match node.tag:
+		BBCodeParserData.Tag.PARAGRAPH:
+			var title := BBCodeUtils.get_lesson_title_for_index(lesson, block_index)
+			_content_header.visible = not title.is_empty()
+			_content_header.text = tr(title)
+		BBCodeParserData.Tag.NOTE:
+			_content_header.visible = false
 			_make_revealer()
+		_:
+			_content_header.visible = false
 
-	var text_content := ""
-	if _content_block is String:
-		text_content = _content_block
-	elif _content_block is BBCodeParser.ParseNode and _content_block.tag == BBCodeParserData.Tag.NOTE:
-		text_content = BBCodeUtils.get_note_contents(_content_block as BBCodeParser.ParseNode)
-	_text_content.text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(text_content))
-	_text_content.visible = not text_content.is_empty()
+	_update_text_content()
+	_text_content.meta_clicked.connect(_on_text_meta_clicked)
 
-	if BBCodeUtils.get_block_type(_content_block) == BBCodeParserData.Tag.VISUAL:
+	if (_content_block as BBCodeParser.ParseNode).tag == BBCodeParserData.Tag.VISUAL:
 		_make_visual_element()
 
-	_content_separator.visible = _content_block is BBCodeParser.ParseNode and BBCodeUtils.get_block_type(_content_block) == BBCodeParserData.Tag.SEPARATOR
+	_content_separator.visible = (_content_block as BBCodeParser.ParseNode).tag == BBCodeParserData.Tag.SEPARATOR
 
 
 func _make_revealer() -> void:
@@ -127,25 +127,33 @@ func _update_labels() -> void:
 	if not _content_block:
 		return
 
-	if _content_block is String:
+	var node := _content_block as BBCodeParser.ParseNode
+	if node.tag == BBCodeParserData.Tag.PARAGRAPH:
 		var title := BBCodeUtils.get_lesson_title_for_index(_lesson, _block_index)
 		_content_header.visible = not title.is_empty()
 		_content_header.text = tr(title)
 
-	if _content_block is String:
-		var title := BBCodeUtils.get_lesson_title_for_index(_lesson, _block_index)
-		_content_header.text = tr(title)
-
-	var text_content := ""
-	if _content_block is String:
-		text_content = _content_block
-	elif _content_block is BBCodeParser.ParseNode and _content_block.tag == BBCodeParserData.Tag.NOTE:
-		text_content = BBCodeUtils.get_note_contents(_content_block as BBCodeParser.ParseNode)
-	_text_content.text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(text_content))
+	_update_text_content()
 
 	if _revealer_block:
 		var title := BBCodeUtils.get_note_title(_content_block as BBCodeParser.ParseNode)
 		_revealer_block.title = tr("Learn More") if title.is_empty() else tr(title)
+
+
+func _update_text_content() -> void:
+	var text_content := ""
+	var node := _content_block as BBCodeParser.ParseNode
+	match node.tag:
+		BBCodeParserData.Tag.PARAGRAPH:
+			text_content = BBCodeUtils.get_paragraph_text(node)
+		BBCodeParserData.Tag.NOTE:
+			text_content = BBCodeUtils.get_note_contents(node)
+	_text_content.text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(text_content))
+	_text_content.visible = not text_content.is_empty()
+
+
+func _on_text_meta_clicked(meta: String) -> void:
+	glossary_entry_clicked.emit(meta)
 
 
 func _on_resized() -> void:

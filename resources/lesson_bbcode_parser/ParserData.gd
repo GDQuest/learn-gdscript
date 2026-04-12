@@ -28,6 +28,8 @@ enum Tag {
 	DOCS,
 	SEPARATOR,
 	STRING,
+	GLOSSARY,
+	PARAGRAPH,
 }
 
 var TAG_DEFINITIONS := {
@@ -49,6 +51,8 @@ var TAG_DEFINITIONS := {
 	Tag.SCRIPT_SLICE: TagDefinition.new("script_slice", false, true, [Tag.PRACTICE], ["path"], ["name"], []),
 	Tag.DOCS: TagDefinition.new("docs", true, false, [Tag.PRACTICE], [], [], []),
 	Tag.SEPARATOR: TagDefinition.new("separator", false, true, [Tag.LESSON], [], [], []),
+	Tag.GLOSSARY: TagDefinition.new("glossary", false, true, [Tag.PARAGRAPH, Tag.GOAL, Tag.DESCRIPTION, Tag.HINT, Tag.EXPLANATION, Tag.OPTION, Tag.NOTE], ["term"], [], []),
+	Tag.PARAGRAPH: TagDefinition.new("paragraph", true, false, [Tag.LESSON], [], [], []),
 }
 
 const CONTENT_PRODUCING_TAGS := [
@@ -59,6 +63,7 @@ const CONTENT_PRODUCING_TAGS := [
 	Tag.QUIZ_INPUT,
 	Tag.PRACTICE,
 	Tag.SEPARATOR,
+	Tag.PARAGRAPH,
 ]
 
 var _tag_name_to_id := { }
