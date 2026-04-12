@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://isw5sjt67wn8" path="res://ui/screens/practice/PracticeInfoPanel.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://di4488a7ev4bi" path="res://ui/components/ScrollableTextBox.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://cvl6pxx3qb736" path="res://ui/components/Revealer.tscn" id="5"]
-[ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="6"]
-[ext_resource type="StyleBox" path="res://ui/theme/revealer_hints_panel.tres" id="7"]
+[ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/panel_normal.tres" id="6"]
+[ext_resource type="StyleBox" uid="uid://dm57ui8lq76ex" path="res://ui/theme/revealer_hints_panel.tres" id="7"]
 [ext_resource type="Script" uid="uid://dmptnpr0crwmq" path="res://ui/components/SmoothScrollContainer.gd" id="9"]
-[ext_resource type="StyleBox" path="res://ui/theme/practice_list_button.tres" id="10"]
+[ext_resource type="StyleBox" uid="uid://dq3ky7tiibvrx" path="res://ui/theme/practice_list_button.tres" id="10"]
 [ext_resource type="Texture2D" uid="uid://ckvual55dmiwg" path="res://ui/icons/practice_list.png" id="11"]
-[ext_resource type="StyleBox" path="res://ui/theme/practice_info_separator.tres" id="12"]
+[ext_resource type="StyleBox" uid="uid://onyjepq6j3f1" path="res://ui/theme/practice_info_separator.tres" id="12"]
 
 [node name="PracticeInfoPanel" type="PanelContainer" unique_id=909383675 node_paths=PackedStringArray("title_label", "_status_icon", "goal_rich_text_label", "hints_container", "_checks", "docs_container", "_docs_item_list", "_list_button")]
 anchors_preset = 15
@@ -60,7 +60,7 @@ modulate = Color(0.572549, 0.560784, 0.721569, 1)
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 4
 
 [node name="HSeparator" type="HSeparator" parent="LessonRequirements/Margin/Column" unique_id=561355916]
 layout_mode = 2
