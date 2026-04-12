@@ -102,7 +102,7 @@ func _test_lesson(lesson: BBCodeParser.ParseNode) -> bool:
 
 	ui_lesson.enable_integration_test_mode()
 
-	await ui_lesson.setup(lesson, _course_index)
+	await ui_lesson.setup(lesson, _course_index, _course_index.get_lesson_number(lesson.bbcode_path))
 
 	var displayed := false
 	var timed_out := false
@@ -162,7 +162,7 @@ func _test_practice(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.Parse
 
 	ui_practice.turn_on_test_mode()
 
-	await ui_practice.setup(practice, lesson, _course_index)
+	await ui_practice.setup(practice, lesson, _course_index, _course_index.get_lesson_number(lesson.bbcode_path))
 
 	var frames_waited := 0
 	while frames_waited < 5:

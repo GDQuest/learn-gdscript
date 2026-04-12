@@ -21,4 +21,4 @@ func _ready() -> void:
 
 	print("Found %d content blocks" % result.lesson.content_blocks.size())
 	print("Practices: %d" % result.lesson.practices.size())
-	ui_lesson.setup(result.lesson, null)
+	ui_lesson.setup(result.lesson, null, 1)

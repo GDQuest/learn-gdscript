@@ -29,7 +29,7 @@ var _lesson_cache := { }
 
 func _init() -> void:
 	CourseIndexPaths.build_all_practice_slugs.call_deferred()
-	
+
 	_parse_arguments()
 	if _js_available:
 		_on_init_setup_js.call_deferred()
@@ -136,22 +136,30 @@ func navigate_to_welcome_screen() -> void:
 	emit_signal("welcome_screen_navigation_requested")
 
 
+func navigate_to_lesson(course_id: String, lesson_slug: String) -> void:
+	navigate_to("%s/%s" % [course_id, lesson_slug])
+
+
+func navigate_to_practice(course_id: String, lesson_slug: String, practice_id: String) -> void:
+	navigate_to("#%s/%s/$%s" % [course_id, lesson_slug, practice_id])
+
+
 func navigate_to(metadata: String) -> void:
 	var regex_result := _url_normalization_regex.search(metadata)
 	if not regex_result:
 		regex_result = _slug_normalization_regex.search(metadata)
-	
+
 	if not regex_result:
 		push_error("`%s` is not a valid bbcode or slug path" % [metadata])
 		return
-	
+
 	var normalized := NormalizedUrl.new(regex_result)
-	
+
 	var course_index := CourseIndexPaths.get_course_index_instance(normalized.course_path)
 	if not course_index:
 		push_error("'%s' is not a valid course" % [normalized.course_path])
 		return
-	
+
 	# legacy slugs support
 	var legacy_path := normalized.lesson_path
 	var lesson_slug := course_index.get_real_slug_from_slug(legacy_path)
@@ -187,14 +195,14 @@ func get_navigation_resource(resource_id: String) -> BBCodeParser.ParseNode:
 		is_slug = true
 		normalized_url_groups = _slug_normalization_regex.search(resource_id)
 	var is_practice := not normalized_url_groups.get_string("practice").is_empty()
-	
+
 	var bbcode_path := resource_id
 	if is_practice:
 		bbcode_path = bbcode_path.left(-(normalized_url_groups.get_end("practice")-normalized_url_groups.get_start("practice")+1))
 	if is_slug:
 		var course_index := CourseIndexPaths.get_course_index_instance(normalized_url_groups.get_string("course"))
 		bbcode_path = course_index.get_lesson_path_from_slug(normalized_url_groups.get_string("lesson").trim_suffix("/"))
-	
+
 	var lesson_data: BBCodeParser.ParseNode = null
 	if _lesson_cache.has(bbcode_path):
 		lesson_data = _lesson_cache[bbcode_path]
@@ -358,7 +366,7 @@ class NormalizedUrl:
 		lesson_path = regex_result.get_string("lesson").trim_suffix("/")
 		practice_path = regex_result.get_string("practice").substr(1)
 		lesson_file = regex_result.get_string("lesson_file")
-		
+
 		if protocol in ["//", "/"]:
 			protocol = "res://"
 
