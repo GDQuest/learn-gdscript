@@ -101,17 +101,15 @@ Let's practice some [code]while[/code] loops, as they're useful to know. It's al
 Then, we'll move on to the safer [code]for[/code] loops in the following lesson.
 
 [practice id="moving-to-the-end-of-a-board" title="Moving to the end of a board"]
-[description]Use a while loop to have our robot move from the top of the board to the bottom.[/description]
+[description]Use a while loop to have the robot move from the top of the board to the bottom.[/description]
 [goal]
-Our robot has decided to stand at the top of the board.
+The robot has decided to stand at the top of the board and your job is to move it down to the bottom row. Complete the [code]move_to_bottom()[/code] function to do this.
 
-Complete the [code]move_to_bottom()[/code] function so the robot moves to the bottom of the board.
+We store the robot's position in a variable named [code]cell[/code]. The variable starts with the value [code]Vector2(2, 0)[/code], meaning the robot is in column 2, row 0 (row 0 is the top of the board).
 
-The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code].
+The board size is stored in a variable named [code]board_size[/code] that contains a [code]Vector2[/code] value.
 
-The robot's starting cell is [code]Vector2(2, 0)[/code].
-
-Make sure to use a [code]while[/code] loop so the function works for any board size.
+Use a [code]while[/code] loop to move the robot one step at a time so the function works for any board size.
 [/goal]
 [starting_code]
 func move_to_bottom():
@@ -120,9 +118,10 @@ func move_to_bottom():
 [cursor line="0" column="0"]
 [validator path="while_move/TestPracticeBoardWhile.gd"]
 [script_slice path="while_move/PracticeBoardWhile.gd" name="move_to_end"]
-[hint]You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards[/hint]
-[hint]To move the robot down, [code]cell.y[/code] needs to increase[/hint]
-[hint]Use [code]while cell.y < board_size.y - 1:[/code][/hint]
+[hint]On this board, rows go from top to bottom. Think about which part of [code]cell[/code] controls the row the robot is on.[/hint]
+[hint][code]cell.y[/code] is the robot's current row. To move the robot down one row, increase [code]cell.y[/code] by 1. Your [code]while[/code] loop should do this repeatedly until the robot reaches the last row.[/hint]
+[hint]The last row is [code]board_size.y - 1[/code], because rows are counted from 0.[/hint]
+[hint]Use [code]while cell.y < board_size.y - 1:[/code] as your loop condition, and increase [code]cell.y[/code] inside the loop.[/hint]
 [docs]board_size,cell[/docs]
 [/practice]
 [/lesson]
