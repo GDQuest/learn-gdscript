@@ -69,7 +69,7 @@ func _update_visuals() -> void:
 	if not is_inside_tree():
 		return
 
-	_prefix_label.text = "Lesson %d" % [lesson_index + 1]
+	_prefix_label.text = "L%d." % [lesson_index + 1]
 	_title_label.text = lesson_title
 	_progress_bar.value = completion
 	tooltip_text = lesson_title
