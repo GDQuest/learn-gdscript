@@ -2,7 +2,7 @@ class_name ConsoleArrowAnimation
 extends Node2D
 
 const LINE_COLOR := Color(1, 0.96, 0.25)
-const LINE_WIDTH := 3.0
+const LINE_WIDTH := 2.5
 const TWEEN_DURATION := 0.2
 
 @export var initial_point := Vector2.ZERO
@@ -24,7 +24,7 @@ func _ready():
 
 func _draw() -> void:
 	for rect: Rect2 in highlight_rects:
-		draw_rect(rect, LINE_COLOR, false, LINE_WIDTH) # true) TODOConverter3To4 Antialiasing argument is missing
+		draw_rect(rect, LINE_COLOR, false, LINE_WIDTH, true)
 
 	if _line_slice_limit > 0:
 		draw_polyline(_baked_line_points.slice(0, _line_slice_limit), LINE_COLOR, LINE_WIDTH, true)

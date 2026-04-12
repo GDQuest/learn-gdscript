@@ -429,11 +429,11 @@ func _on_arrow_animation(chars1: Array, chars2: Array) -> void:
 
 	var current_line := _gdscript_text_edit.get_caret_line()
 
-	var offset := Vector2i.ZERO
-	offset.x = floori(_gdscript_text_edit.position.x + 2)
+	var offset := Vector2.ZERO
+	offset.x = floori(_gdscript_text_edit.position.x - 2)
 
-	var rect1 := _gdscript_text_edit.get_rect_at_line_column(current_line, chars1[0] as int)
-	var rect2 := _gdscript_text_edit.get_rect_at_line_column(current_line, chars2[0] as int)
+	var rect1 := Rect2(_gdscript_text_edit.get_rect_at_line_column(current_line, (chars1[0] as int)+1))
+	var rect2 := Rect2(_gdscript_text_edit.get_rect_at_line_column(current_line, (chars2[0] as int)+1))
 
 	rect1.position += offset
 	rect2.position += offset
@@ -444,8 +444,8 @@ func _on_arrow_animation(chars1: Array, chars2: Array) -> void:
 	var rects := [rect1, rect2]
 
 	_console_arrow_animation.highlight_rects = rects
-	_console_arrow_animation.initial_point = rect1.position + Vector2i(floori(rect1.size.x / 2.0), -5)
-	_console_arrow_animation.end_point = rect2.position + Vector2i(floori(rect2.size.x / 2.0), -5)
+	_console_arrow_animation.initial_point = rect1.position + Vector2(floori(rect1.size.x / 2.0), -5)
+	_console_arrow_animation.end_point = rect2.position + Vector2(floori(rect2.size.x / 2.0), -5)
 	_console_arrow_animation.draw_curve()
 
 
