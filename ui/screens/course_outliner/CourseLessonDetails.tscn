@@ -5,7 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://cguhet6fdpmse" path="res://ui/theme/outliner_details_background.tres" id="6"]
 [ext_resource type="Texture2D" uid="uid://duytsuncyxp7n" path="res://ui/icons/checkmark_none.svg" id="9"]
 
-[node name="CourseLessonDetails" type="PanelContainer" unique_id=968761694 node_paths=PackedStringArray("_title_label", "_reading_stats_block", "_reading_stats_icon", "_quiz_stats_block", "_quiz_stats_value", "_practice_stats_block", "_practice_stats_value", "_goto_lesson_button")]
+[node name="CourseLessonDetails" type="PanelContainer" unique_id=968761694 node_paths=PackedStringArray("_title_label", "_reading_stats_icon", "_quiz_stats_block", "_quiz_stats_value", "_practice_stats_value", "_goto_lesson_button")]
 custom_minimum_size = Vector2(420, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,11 +13,9 @@ anchor_bottom = 1.0
 theme_override_styles/panel = ExtResource("6")
 script = ExtResource("5")
 _title_label = NodePath("MarginContainer/Layout/TitleLabel")
-_reading_stats_block = NodePath("MarginContainer/Layout/ReadingStats")
 _reading_stats_icon = NodePath("MarginContainer/Layout/ReadingStats/ValueIcon")
 _quiz_stats_block = NodePath("MarginContainer/Layout/QuizStats")
 _quiz_stats_value = NodePath("MarginContainer/Layout/QuizStats/ValueLabel")
-_practice_stats_block = NodePath("MarginContainer/Layout/PracticeStats")
 _practice_stats_value = NodePath("MarginContainer/Layout/PracticeStats/ValueLabel")
 _goto_lesson_button = NodePath("MarginContainer/Layout/Buttons/GoToButton")
 
@@ -28,12 +26,15 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/Layout" unique_id=1204099430]
-custom_minimum_size = Vector2(313, 70)
+custom_minimum_size = Vector2(313, 0)
 layout_mode = 2
 theme_type_variation = &"LabelTitle"
 text = "Lesson Title Goes Here"
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/Layout" unique_id=1702767215]
+layout_mode = 2
 
 [node name="ReadingStats" type="HBoxContainer" parent="MarginContainer/Layout" unique_id=1503084446]
 layout_mode = 2
@@ -60,6 +61,7 @@ size_flags_horizontal = 3
 text = "Quizzes completed"
 
 [node name="ValueLabel" type="Label" parent="MarginContainer/Layout/QuizStats" unique_id=1976243494]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelTitle"
@@ -75,6 +77,7 @@ size_flags_horizontal = 3
 text = "Practices completed"
 
 [node name="ValueLabel" type="Label" parent="MarginContainer/Layout/PracticeStats" unique_id=444174483]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelTitle"

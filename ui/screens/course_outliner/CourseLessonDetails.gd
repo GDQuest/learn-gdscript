@@ -58,19 +58,12 @@ func _update_visuals() -> void:
 	_title_label.text = BBCodeUtils.get_lesson_title(lesson)
 
 	var has_done_reading := false
-	if lesson_progress:
-		if lesson_progress.completed_reading:
-			_reading_stats_icon.texture = VALUE_CHECK_PASSED
-			_reading_stats_icon.modulate = VALUE_COLOR_PASSED
-			_reading_stats_icon.show()
-
-			has_done_reading = true
-		else:
-			_reading_stats_icon.hide()
-	else:
-		_reading_stats_icon.texture = VALUE_CHECK_NONE
-		_reading_stats_icon.modulate = VALUE_COLOR_NONE
-		_reading_stats_icon.show()
+	_reading_stats_icon.texture = VALUE_CHECK_NONE
+	_reading_stats_icon.modulate = VALUE_COLOR_NONE
+	if lesson_progress and lesson_progress.completed_reading:
+		_reading_stats_icon.texture = VALUE_CHECK_PASSED
+		_reading_stats_icon.modulate = VALUE_COLOR_PASSED
+		has_done_reading = true
 
 	var total_practices := BBCodeUtils.get_lesson_practice_count(lesson)
 	var completed_practices := 0
