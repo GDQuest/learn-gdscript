@@ -336,13 +336,14 @@ func _reset_monitored_variable_highlights():
 	if not _gdscript_text_edit.visible:
 		return
 
-	var h_scroll_bar: HScrollBar = null
-	for current_child in _gdscript_text_edit.get_children():
-		if current_child is HScrollBar:
-			h_scroll_bar = current_child
-			break
-	if h_scroll_bar != null:
-		h_scroll_bar.scrolling.connect(_on_HScrollBar_scrolling)
+	for current_child in _gdscript_text_edit.get_children(true):
+		if current_child is ScrollBar:
+			var scroll_bar := current_child as ScrollBar
+			
+			if not scroll_bar.value_changed.is_connected(_on_ScrollBar_scrolled):
+				scroll_bar.value_changed.connect(_on_ScrollBar_scrolled)
+			if not scroll_bar.scrolling.is_connected(_on_ScrollBar_scrolled):
+				scroll_bar.scrolling.connect(_on_ScrollBar_scrolled)
 
 	# Create widgets that underline a variable and display a variable's value
 	# when hovering with the mouse.
@@ -375,6 +376,9 @@ func _reset_monitored_variable_highlights():
 				last_column = result.x
 
 				var rect = _gdscript_text_edit.get_rect_at_line_column(last_line, last_column + 1)
+				if rect.position == Vector2i(-1, -1):
+					# is off screen
+					continue
 				rect.position += offset
 				rect.size.x = (rect.size.x * variable_name.length()) + 4
 
@@ -388,21 +392,9 @@ func _reset_monitored_variable_highlights():
 				_monitored_variable_highlights.append(monitored_variable)
 
 
-func _on_HScrollBar_scrolling() -> void:
-	# When scrolling horizontally, we need to recalculate the rectangle area in the code editor
-	# for each monitored variable. The monitored variable draws an underline that spans the
-	# variable it's highlighting, but when scrolling, this region changes, so we need to
-	# recalculate and update the highlight_rect for each monitored variable.
-	var offset := Vector2(_gdscript_text_edit.position.x, 0.0)
-
-	for monitored_variable: CodeExampleVariableUnderline in _monitored_variable_highlights:
-		var rect = _gdscript_text_edit.get_rect_at_line_column(
-			monitored_variable.highlight_line,
-			monitored_variable.highlight_column,
-		)
-		rect.position += offset
-		rect.size.x = (rect.size.x * monitored_variable.variable_name.length()) + 4
-		monitored_variable.highlight_rect = rect
+func _on_ScrollBar_scrolled(_value: float = 0.0) -> void:
+	_reset_monitored_variable_highlights()
+	return
 
 
 func _on_highlight_line(line_number: int) -> void:
