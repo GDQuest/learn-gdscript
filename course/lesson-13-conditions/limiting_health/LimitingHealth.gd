@@ -1,9 +1,7 @@
 extends CenterContainer
 
-
 @export var _health_bar: ColorRect
 
-var health = 20
 var _health_gained = 40
 var _max_health = 80
 
@@ -32,13 +30,15 @@ func _update_robot() -> void:
 	_animation_tree.travel("heal")
 	_health_bar.set_health(health)
 
-
 # EXPORT heal
+var health = 20
+
 func heal(amount):
 	health += amount
 	if health > 80:
 		health = 80
 # /EXPORT heal
+
 
 func get_produced_health_values() -> Array:
 	return _produced_health_values

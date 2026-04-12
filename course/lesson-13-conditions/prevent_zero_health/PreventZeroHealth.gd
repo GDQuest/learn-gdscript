@@ -2,7 +2,6 @@ extends Control
 
 @export var _health_bar: ColorRect
 
-var health = 20
 var _health_lost = 10
 var _max_health = 80
 
@@ -33,13 +32,15 @@ func _update_robot() -> void:
 	_animation_tree.travel("damage")
 	_health_bar.set_health(health)
 
-
 # EXPORT damage
+var health = 20
+
 func take_damage(amount):
 	health -= amount
 	if health < 0:
 		health = 0
 # /EXPORT damage
+
 
 func get_produced_health_values() -> Array:
 	return _produced_health_values

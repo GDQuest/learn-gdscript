@@ -105,23 +105,22 @@ The [code]else[/code] block will run whenever the condition above it isn't met.
 In the following practices, we'll use conditions and improve the way our character's health changes so it has limits.
 
 [practice id="using-comparisons" title="Using Comparisons"]
-[description]Comparing values allows us to make decisions in code. But there's something wrong with these statements..[/description]
+[description]Comparing values allows us to make decisions in code. But there's something wrong with these statements...[/description]
 [goal]
-This series of [code]if[/code] statements is all wrong. Change the comparisons so each comparison matches the instruction below it.
+Each [code]if[/code] statement below has a wrong comparison sign. Fix the comparison signs so every condition is [code]true[/code] and every [code]print()[/code] message runs.
 
-Keep the values and statements as they are; only change the comparison signs.
+Only change the comparison signs ([code]>[/code], [code]<[/code], [code]==[/code], [code]!=[/code]). Do not change the values or the messages.
 
-As a reminder, the comparison signs are:
-[code]
-> greater than
-< less than
-== equal to
-!= not equal to
-[/code]
+Here are the four comparison signs and what they mean:
 
-The line [code]health < 5:[/code] means "health is less than 5".
+[ul]
+[code]>[/code]  Greater than
+[code]<[/code]  Less than
+[code]==[/code] Equal to
+[code]!=[/code] Not equal to
+[/ul]
 
-Because [code]health = 100[/code], this is false so [code]print("health is greater than five.")[/code] won't run.
+For example, if [code]health[/code] is equal to [code]100[/code] and the message says "health is greater than five," the correct comparison is [code]health > 5[/code], because 100 is greater than 5. That makes the condition evaluate to [code]true[/code] and print the message.
 [/goal]
 [starting_code]
 func run():
@@ -142,53 +141,71 @@ func run():
 [cursor line="0" column="0"]
 [validator path="using_conditions/TestUsingConditions.gd"]
 [script_slice path="using_conditions/UsingConditions.gd" name="conditions"]
-[hint]Only alter the [code] > < == != [/code] symbols[/hint]
-[hint]The messages will only show if the comparisons are true[/hint]
+[hint]Read each [code]print()[/code] message carefully. The message tells you what the comparison should mean. Then pick the sign that matches best.[/hint]
+[hint]Remember: you only need to change the [code]>[/code], [code]<[/code], [code]==[/code], or [code]!=[/code] symbols. Do not change numbers or the [code]print()[/code] calls![/hint]
+[hint]For the last line, "not equal to seven" means you need the [code]!=[/code] sign: [code]health != 7[/code].[/hint]
 [/practice]
 
 [practice id="limiting-healing" title="Limiting Healing"]
 [description]As much as we might like, we don't want our robot to have too much health. Limit how much healing the robot can take.[/description]
 [goal]
-We have a heal function that adds an amount to the character's health.
+The [code]heal()[/code] function adds [code]amount[/code] to [code]health[/code]. But right now, health can increase forever, without limit! We want to stop it at [code]80[/code].
 
-Add to the function so the character's health is never greater than [code]80[/code].
+I've defined a [code]health[/code] variable for you with a starting value of [code]20[/code]. Your task is to add a condition inside [code]heal()[/code] so that health is never greater than [code]80[/code].
+
+To check your code, I will call the [code]heal()[/code] function twice, like this:
+
+[code]heal(40)[/code]
+[code]heal(40)[/code]
+
+After those two calls, [code]health[/code] should be equal to [code]80[/code].
 [/goal]
 [starting_code]
+var health = 20
+
 func heal(amount):
 	health += amount
 [/starting_code]
 [cursor line="0" column="0"]
 [validator path="limiting_health/TestLimitingHealth.gd"]
 [script_slice path="limiting_health/LimitingHealth.gd" name="heal"]
-[hint]You can use a condition to check if the health is above 80[/hint]
-[hint]You need to reset the health to 80 when the health value goes above 80[/hint]
-[hint]Use the line [code]if health > 80:[/code] to do this[/hint]
+[hint]The starting code already adds the amount to the [code]health[/code] variable: [code]health += amount[/code] is already there. You need to add a check [b]after[/b] it, otherwise the health will overshoot your limit.[/hint]
+[hint]Use [code]if health > 80:[/code] to detect when health went too high.[/hint]
+[hint]Inside that [code]if[/code] block, set health back to the limit: [code]health = 80[/code]. That's how you limit the value.[/hint]
 [docs]heal[/docs]
 [/practice]
 
 [practice id="preventing-health-from-going-below-zero" title="Preventing Health from Going Below Zero"]
 [description]Having a negative health value doesn't make a lot of sense. Make sure the robot's health can't go below zero.[/description]
 [goal]
-When the robot takes damage, its health can be negative.
+We want to display the health number on screen, like in many RPGs. But currently, the health can go below 0, which does not make sense. We want to stop at [code]0[/code].
 
-We might want to display the health number on screen, like in Japanese RPGs.
+Complete the [code]take_damage()[/code] function so it does two things:
 
-We don't want negative numbers. We want to stop at zero instead.
+1. Subtract [code]amount[/code] from [code]health[/code].
+2. If [code]health[/code] is below [code]0[/code] after that, set it back to [code]0[/code].
 
-Calling the function should reduce [code]health[/code] by [code]amount[/code].
+To check your code, I will call your [code]take_damage()[/code] function three times, like this:
 
-If [code]health[/code] goes below [code]0[/code], set it to [code]0[/code] again.
+[code]take_damage(10)[/code]
+[code]take_damage(10)[/code]
+[code]take_damage(10)[/code]
+
+After those three calls, [code]health[/code] should equal [code]0[/code], and not [code]-10[/code] or another value.
 [/goal]
 [starting_code]
+var health = 20
+
 func take_damage(amount):
-	
+
 [/starting_code]
 [cursor line="0" column="0"]
 [validator path="prevent_zero_health/TestPreventZeroHealth.gd"]
 [script_slice path="prevent_zero_health/PreventZeroHealth.gd" name="damage"]
-[hint]You can use a condition to check if the health goes below zero[/hint]
-[hint]You need to decrease health by the received amount[/hint]
-[hint]You need to reset the health to [code]0[/code] when the health value goes below [code]0[/code][/hint]
+[hint]Start by subtracting the damage: [code]health -= amount[/code]. This is how you apply damage.[/hint]
+[hint]To limit the health, after subtracting the amount, you need to add a condition and reset the health.[/hint]
+[hint]Here's how to write a condition to check if health went below zero: [code]if health < 0:[/code].[/hint]
+[hint]Inside the [code]if[/code] block, you can reset the health like this: [code]health = 0[/code].[/hint]
 [docs]take_damage[/docs]
 [/practice]
 [/lesson]
