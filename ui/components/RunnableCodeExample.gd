@@ -394,6 +394,8 @@ func _reset_monitored_variable_highlights():
 
 func _on_ScrollBar_scrolled(_value: float = 0.0) -> void:
 	_reset_monitored_variable_highlights()
+	if _last_chars:
+		_on_arrow_animation(_last_chars[0], _last_chars[1], true)
 	return
 
 
@@ -408,7 +410,12 @@ func _on_highlight_line(line_number: int) -> void:
 	_gdscript_text_edit.set_caret_line(line_number)
 
 
-func _on_arrow_animation(chars1: Array, chars2: Array) -> void:
+var _last_chars := []
+
+
+func _on_arrow_animation(chars1: Array, chars2: Array, immediate := false) -> void:
+	_last_chars = [chars1, chars2]
+	
 	# wait to see if script was interrupted
 	await get_tree().process_frame
 
@@ -421,24 +428,35 @@ func _on_arrow_animation(chars1: Array, chars2: Array) -> void:
 
 	var current_line := _gdscript_text_edit.get_caret_line()
 
-	var offset := Vector2.ZERO
+	var offset := Vector2i.ZERO
 	offset.x = floori(_gdscript_text_edit.position.x - 2)
 
-	var rect1 := Rect2(_gdscript_text_edit.get_rect_at_line_column(current_line, (chars1[0] as int)+1))
-	var rect2 := Rect2(_gdscript_text_edit.get_rect_at_line_column(current_line, (chars2[0] as int)+1))
+	var rect1 := Rect2i(_gdscript_text_edit.get_rect_at_line_column(current_line, (chars1[0] as int)+1))
+	var rect2 := Rect2i(_gdscript_text_edit.get_rect_at_line_column(current_line, (chars2[0] as int)+1))
+
+	if rect1.position == Vector2i(-1, -1) and rect2.position == Vector2i(-1, -1):
+		# fully off screen, don't draw anything
+		return
+	elif rect1.position == Vector2i(-1, -1):
+		# disappearing off the left side
+		rect1.position = Vector2i(floori(_gdscript_text_edit.size.x), rect2.position.y)
+	elif rect2.position == Vector2i(-1, -1):
+		rect2.position = Vector2i(0, rect1.position.y)
 
 	rect1.position += offset
 	rect2.position += offset
 
-	rect1.size.x = (rect1.size.x * chars1[1]) + 4
-	rect2.size.x = (rect2.size.x * chars2[1]) + 4
+	if rect1.size != Vector2i(0, 0):
+		rect1.size.x = (rect1.size.x * chars1[1]) + 4
+	if rect2.size != Vector2i(0, 0):
+		rect2.size.x = (rect2.size.x * chars2[1]) + 4
 
 	var rects := [rect1, rect2]
-
+	
 	_console_arrow_animation.highlight_rects = rects
-	_console_arrow_animation.initial_point = rect1.position + Vector2(floori(rect1.size.x / 2.0), -5)
-	_console_arrow_animation.end_point = rect2.position + Vector2(floori(rect2.size.x / 2.0), -5)
-	_console_arrow_animation.draw_curve()
+	_console_arrow_animation.initial_point = rect1.position + Vector2i(floori(rect1.size.x / 2.0), -5)
+	_console_arrow_animation.end_point = rect2.position + Vector2i(floori(rect2.size.x / 2.0), -5)
+	_console_arrow_animation.draw_curve(immediate)
 
 
 func _update_gdscript_text_edit_width(new_font_scale: int) -> void:

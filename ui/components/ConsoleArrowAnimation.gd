@@ -30,7 +30,7 @@ func _draw() -> void:
 		draw_polyline(_baked_line_points.slice(0, _line_slice_limit), LINE_COLOR, LINE_WIDTH, true)
 
 
-func draw_curve():
+func draw_curve(immediate: bool = false):
 	_line_slice_limit = 0
 
 	var curve := Curve2D.new()
@@ -43,10 +43,15 @@ func draw_curve():
 
 	if _scene_tween:
 		_scene_tween.kill()
-	_scene_tween = create_tween().set_parallel()
-	_scene_tween.finished.connect(_on_tween_completed)
-	_scene_tween.tween_method(_on_tween_step, 0, 1, TWEEN_DURATION)
-	_scene_tween.tween_property(self, "_line_slice_limit", _baked_line_points.size(), TWEEN_DURATION).from(0)
+	if immediate:
+		_line_slice_limit = _baked_line_points.size()
+		_on_tween_completed()
+		queue_redraw()
+	else:
+		_scene_tween = create_tween().set_parallel()
+		_scene_tween.finished.connect(_on_tween_completed)
+		_scene_tween.tween_method(_on_tween_step, 0.0, 1.0, TWEEN_DURATION)
+		_scene_tween.tween_property(self, "_line_slice_limit", _baked_line_points.size(), TWEEN_DURATION).from(0)
 
 
 func reset_curve():
