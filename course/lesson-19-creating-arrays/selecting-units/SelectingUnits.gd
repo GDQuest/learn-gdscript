@@ -65,7 +65,7 @@ func _draw() -> void:
 
 	for x in board_size.x:
 		for y in board_size.y:
-			var cell = Vector2(x, y)
+			var cell = Vector2i(x, y)
 			var label = Label.new()
 			if label_font != null:
 				label.add_theme_font_override("font", label_font)
