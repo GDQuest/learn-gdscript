@@ -29,7 +29,7 @@ const LOCALE_TO_LABEL := {
 	"es": "Español",
 	"ja": "日本語",
 	"it": "Italiano",
-	"pt_BR": "Portugés",
+	"pt_BR": "Português",
 	"zh_Hans": "中文",
 	"ru": "русский",
 	"de": "Deutsch",
