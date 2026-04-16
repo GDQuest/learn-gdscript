@@ -23,10 +23,10 @@ func update_breadcrumbs(course_index: CourseIndex, target: BBCodeParser.ParseNod
 
 
 func _rebuild_breadcrumbs() -> void:
+	_clear_navigation_nodes()
+	
 	if not _last_course_index or not _last_target:
 		return
-
-	_clear_navigation_nodes()
 
 	if _last_target is BBCodeParser.ParseNode and _last_target.tag == BBCodeParserData.Tag.LESSON:
 		var lesson := _last_target as BBCodeParser.ParseNode
@@ -46,23 +46,22 @@ func _rebuild_breadcrumbs() -> void:
 		if lesson_index >= 0:
 			node_text = "%s. %s" % [lesson_index + 1, tr(title)]
 
-		_create_navigation_node(node_text, "", true)
+		_create_navigation_node(node_text, null, "", true)
 		return
 
-	if _last_target is BBCodeParser.ParseNode and _last_target.tag == BBCodeParserData.Tag.PRACTICE:
+	elif _last_target is BBCodeParser.ParseNode and _last_target.tag == BBCodeParserData.Tag.PRACTICE:
 		var practice := _last_target as BBCodeParser.ParseNode
 		# TODO: Should probably avoid relying on content ID for getting paths.
+		
 		var practice_id := BBCodeUtils.get_practice_id(practice)
-		var lesson_path = practice_id.get_base_dir().path_join("lesson.bbcode")
 
-		var lesson: BBCodeParser.ParseNode
+		var lesson: BBCodeParser.ParseNode = practice.parent
 		var lesson_index := -1
 
 		var i := 0
 		for l in _last_course_index.get_lessons_count():
 			var lesson_data := NavigationManager.get_navigation_resource(_last_course_index.get_lesson_path(l)) as BBCodeParser.ParseNode
-			if lesson_data.bbcode_path == lesson_path:
-				lesson = lesson_data
+			if lesson_data.bbcode_path == lesson.bbcode_path:
 				lesson_index = i
 				break
 
@@ -71,7 +70,7 @@ func _rebuild_breadcrumbs() -> void:
 		if lesson and lesson_index >= 0:
 			var title := BBCodeUtils.get_lesson_title(lesson)
 			var lesson_text := "%d. %s" % [lesson_index + 1, tr(title)]
-			_create_navigation_node(lesson_text, lesson.bbcode_path)
+			_create_navigation_node(lesson_text, _last_course_index, lesson.bbcode_path)
 
 			var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
 			var practice_index := -1
@@ -83,7 +82,7 @@ func _rebuild_breadcrumbs() -> void:
 					break
 			var practice_title := BBCodeUtils.get_practice_title(practice)
 			var node_text: String = "%d. %s" % [practice_index + 1, tr(practice_title)]
-			_create_navigation_node(node_text, "", true)
+			_create_navigation_node(node_text, null, "", true)
 		return
 
 
@@ -93,7 +92,7 @@ func _clear_navigation_nodes() -> void:
 		child_node.queue_free()
 
 
-func _create_navigation_node(text: String, path: String = "", current: bool = false) -> void:
+func _create_navigation_node(text: String, course_index: CourseIndex, path: String = "", current: bool = false) -> void:
 	if get_child_count() > 0:
 		var separator := Label.new()
 		separator.text = "•"
@@ -117,7 +116,8 @@ func _create_navigation_node(text: String, path: String = "", current: bool = fa
 		navigation_node.add_theme_font_size_override("font_size", NODE_FONT_SIZE)
 		navigation_node.mouse_default_cursor_shape = CURSOR_POINTING_HAND
 		add_child(navigation_node)
-		navigation_node.pressed.connect(_on_navigation_pressed.bind(path))
+		var slug := "#%s/%s" % [course_index.get_course_id(), course_index.get_lesson_slug_from_path(path)]
+		navigation_node.pressed.connect(_on_navigation_pressed.bind(slug))
 
 
 func _on_navigation_pressed(path: String) -> void:

@@ -95,7 +95,7 @@ func confirm_unload() -> void:
 func navigate_back() -> void:
 	if _is_unload_confirmation_required():
 		_current_unload_type = UNLOAD_TYPE.BACK
-		emit_signal("last_screen_unload_requested")
+		last_screen_unload_requested.emit()
 		return
 
 	_navigate_back()
@@ -104,7 +104,7 @@ func navigate_back() -> void:
 func navigate_to_outliner() -> void:
 	if _is_unload_confirmation_required():
 		_current_unload_type = UNLOAD_TYPE.OUTLINER
-		emit_signal("all_screens_unload_requested")
+		all_screens_unload_requested.emit()
 		return
 
 	_navigate_to_outliner()
@@ -121,7 +121,7 @@ func _navigate_back() -> void:
 	history.remove_at(history.size() - 1)
 	_js_back()
 
-	emit_signal("back_navigation_requested")
+	back_navigation_requested.emit()
 
 
 func _navigate_to_outliner() -> void:
@@ -129,11 +129,11 @@ func _navigate_to_outliner() -> void:
 	history.resize(0)
 	_js_to_outliner()
 
-	emit_signal("outliner_navigation_requested")
+	outliner_navigation_requested.emit()
 
 
 func navigate_to_welcome_screen() -> void:
-	emit_signal("welcome_screen_navigation_requested")
+	welcome_screen_navigation_requested.emit()
 
 
 func navigate_to_lesson(course_id: String, lesson_slug: String) -> void:

@@ -214,6 +214,7 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 						current_paragraph.tag = _parser_data.Tag.PARAGRAPH
 						current_paragraph.line_number = token.line_number
 						current_paragraph.bbcode_path = file_path
+						current_paragraph.parent = current
 						current.children.append(current_paragraph)
 					if accumulated_text != "":
 						current_paragraph.children.append(accumulated_text)
@@ -224,6 +225,7 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 					inline_node.attributes = token.attributes
 					inline_node.line_number = token.line_number
 					inline_node.bbcode_path = file_path
+					inline_node.parent = current_paragraph
 					current_paragraph.children.append(inline_node)
 					continue
 				else:
@@ -262,6 +264,7 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 			node.attributes = token.attributes
 			node.line_number = token.line_number
 			node.bbcode_path = file_path
+			node.parent = current
 			current.children.append(node)
 
 			if _parser_data.is_container_tag(token_tag):
@@ -312,6 +315,7 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 				current_paragraph.tag = _parser_data.Tag.PARAGRAPH
 				current_paragraph.line_number = 0
 				current_paragraph.bbcode_path = file_path
+				current_paragraph.parent = current
 				current.children.append(current_paragraph)
 			current_paragraph.children.append(accumulated_text)
 		else:
@@ -348,6 +352,7 @@ class ParseNode:
 	var children := []
 	var line_number := -1
 	var bbcode_path: String
+	var parent: ParseNode
 
 
 class ParseError:

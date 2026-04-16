@@ -162,7 +162,7 @@ func _navigate_to() -> void:
 		var ui_practice_screen: UIPractice = preload("UIPractice.tscn").instantiate()
 		screen = ui_practice_screen
 		ui_practice_screen.setup(target, lesson, course_index, lesson_number)
-	elif target.tag == BBCodeParserData.Tag.LESSON:
+	elif target is BBCodeParser.ParseNode and target.tag == BBCodeParserData.Tag.LESSON:
 		var lesson_number := course_index.get_lesson_number(target.bbcode_path)
 		_lesson_index = lesson_number - 1
 
