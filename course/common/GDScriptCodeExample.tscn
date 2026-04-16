@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://doicj7hty5hyt"]
 
-[ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/panel_normal.tres" id="3"]
 [ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="3_l403w"]
+[ext_resource type="Script" uid="uid://28t36iv56iu2" path="res://ui/components/GDScriptCodeExample.gd" id="3_sh0af"]
 
 [node name="GDScriptCodeExample" type="CodeEdit" unique_id=450119196]
 custom_minimum_size = Vector2(600, 200)
@@ -13,7 +14,11 @@ offset_bottom = -880.0
 theme_override_styles/read_only = ExtResource("3")
 context_menu_enabled = false
 shortcut_keys_enabled = false
+scroll_smooth = true
+scroll_fit_content_width = true
 caret_blink = true
 syntax_highlighter = ExtResource("3_l403w")
 draw_tabs = true
 draw_spaces = true
+gutters_draw_line_numbers = true
+script = ExtResource("3_sh0af")
