@@ -67,41 +67,6 @@ gdscript_code = "func heal(amount):
 	if health > 100:
 		health = 100"
 
-[node name="PanelContainer" parent="RunnableCodeExample/Frame" parent_id_path=PackedInt32Array(652420169, 1694077977) index="0" unique_id=209141511]
-layout_mode = 1
-anchors_preset = 15
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sliders" parent="RunnableCodeExample/Frame" parent_id_path=PackedInt32Array(652420169, 1694077977) index="1" unique_id=133529752]
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="HBoxContainer" parent="RunnableCodeExample/Frame" parent_id_path=PackedInt32Array(652420169, 1694077977) index="2" unique_id=1323725507]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 168.0
-offset_bottom = 40.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" index="1" unique_id=1248061364]
-text = "heal(50)"
-
-[node name="GDScriptCode" parent="RunnableCodeExample" index="1" unique_id=175998401]
-visible = true
-text = "func heal(amount):
-	health += amount
-	if health > 100:
-		health = 100"
-syntax_highlighter = null
-
 [node name="HealRobot" parent="RunnableCodeExample" unique_id=1182116081 node_paths=PackedStringArray("_health_bar") instance=ExtResource("2")]
 script = SubResource("1")
 _health_bar = NodePath("HealthBar")
@@ -111,5 +76,3 @@ _health_bar = NodePath("HealthBar")
 [node name="RunnableCodeExampleDebugger" parent="." unique_id=1312446814 instance=ExtResource("4")]
 layout_mode = 2
 monitored_variables = ["health"]
-
-[editable path="RunnableCodeExample"]
