@@ -22,7 +22,7 @@ size_flags_horizontal = 3
 text = "# GDScript
 func take_damage(amount):
 	health -= amount
-	if health < 0:
+	if health <= 0:
 		die()"
 
 [node name="JavascriptCodeExample" type="CodeEdit" parent="." unique_id=608042472]
@@ -33,7 +33,7 @@ theme_override_styles/read_only = ExtResource("3")
 text = "// JavaScript
 function take_damage(amount) {
   health -= amount
-  if (health < 0) {
+  if (health <= 0) {
     die()
   }
 }"
@@ -48,7 +48,7 @@ theme_override_styles/read_only = ExtResource("3")
 text = "# Python
 def take_damage(amount):
     health -= amount
-    if health < 0:
+    if health <= 0:
         die()"
 draw_tabs = true
 gutters_draw_line_numbers = true
