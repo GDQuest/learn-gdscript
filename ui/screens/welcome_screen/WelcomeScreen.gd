@@ -9,6 +9,7 @@ signal course_requested(force_outliner)
 @export var _title_link_label: RichTextLabel
 @export var _anim_player: AnimationPlayer
 @export var _robot: Node2D
+@export var _gdquest_boy: Control
 
 @onready var _buttons_to_disable := [_settings_button, _outliner_button, _start_button, _quit_button]
 
@@ -33,10 +34,18 @@ func _ready() -> void:
 		_quit_button.queue_free()
 
 	_anim_player.animation_finished.connect(_on_animation_finished)
+	visibility_changed.connect(_on_welcome_screen_visibility_changed)
 
 
 func appear() -> void:
 	_anim_player.play("appear")
+
+
+func _on_welcome_screen_visibility_changed() -> void:
+	if not visible:
+		return
+	if _gdquest_boy.modulate.a < 1.0 and (_anim_player.current_animation != "appear" or not _anim_player.is_playing()):
+		appear()
 
 
 func set_button_continue(enable: bool = true) -> void:
