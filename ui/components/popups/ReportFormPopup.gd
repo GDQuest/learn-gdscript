@@ -34,8 +34,6 @@ func _on_meta_clicked(data) -> void:
 		var string_data: String = data
 		if string_data.begins_with("https://"):
 			OS.shell_open(string_data)
-		elif string_data == "download":
-			Log.download()
 
 
 func _notification(what: int) -> void:

@@ -54,31 +54,23 @@ func write(level: int, properties: Dictionary, message: String) -> void:
 		_log_lines.append(line)
 		return
 	var props = godot_dict_to_js_obj(properties)
+	@warning_ignore_start("unsafe_property_access")
+	@warning_ignore_start("unsafe_method_access")
 	match (level):
 		LEVEL.FATAL:
-			@warning_ignore("unsafe_property_access")
-			@warning_ignore("unsafe_method_access")
 			GDQUEST.log.fatal(props, message)
 		LEVEL.ERROR:
-			@warning_ignore("unsafe_property_access")
-			@warning_ignore("unsafe_method_access")
 			GDQUEST.log.error(props, message)
 		LEVEL.WARN:
-			@warning_ignore("unsafe_property_access")
-			@warning_ignore("unsafe_method_access")
 			GDQUEST.log.warn(props, message)
 		LEVEL.INFO:
-			@warning_ignore("unsafe_property_access")
-			@warning_ignore("unsafe_method_access")
 			GDQUEST.log.info(props, message)
 		LEVEL.DEBUG:
-			@warning_ignore("unsafe_property_access")
-			@warning_ignore("unsafe_method_access")
 			GDQUEST.log.debug(props, message)
 		_:
-			@warning_ignore("unsafe_property_access")
-			@warning_ignore("unsafe_method_access")
 			GDQUEST.log.trace(props, message)
+	@warning_ignore_restore("unsafe_property_access")
+	@warning_ignore_restore("unsafe_method_access")
 
 
 func trace(properties: Dictionary, message: String) -> void:
@@ -142,18 +134,18 @@ func trim_if_over_limit(max_kilo_bytes := 1000) -> bool:
 
 # Logs system info if the log is empty. Safe to call in all environments
 func log_system_info_if_log_is_empty(additional_data := { }) -> void:
+	@warning_ignore_start("unsafe_method_access")
+	@warning_ignore_start("unsafe_property_access")
 	if not _js_available:
 		if additional_data.size() > 0:
 			trace(additional_data, 'INIT')
 	elif additional_data.size() > 0:
 		var props = godot_dict_to_js_obj(additional_data)
-		@warning_ignore("unsafe_method_access")
-		@warning_ignore("unsafe_property_access")
 		GDQUEST.log.logSystemInfoIfLogIsEmpty(props)
 	else:
-		@warning_ignore("unsafe_method_access")
-		@warning_ignore("unsafe_property_access")
 		GDQUEST.log.logSystemInfoIfLogIsEmpty()
+	@warning_ignore_restore("unsafe_method_access")
+	@warning_ignore_restore("unsafe_property_access")
 
 
 func godot_dict_to_js_obj(properties: Dictionary):
@@ -177,7 +169,6 @@ func get_info() -> Dictionary:
 		"video_vendor": RenderingServer.get_video_adapter_vendor(),
 		"screen_size": DisplayServer.screen_get_size(),
 		"screen_dpi": DisplayServer.screen_get_dpi(),
-		"cores": OS.get_processor_count(),
 		"locale": OS.get_locale(),
 		"joypad": Input.get_joy_name(joypad_index) if is_joypad else "",
 	}

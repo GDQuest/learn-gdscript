@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dxc8hjg7r2d7w"]
 
 [ext_resource type="Script" uid="uid://bltsl5n1mk6ed" path="res://ui/components/popups/ReportFormPopup.gd" id="1"]
-[ext_resource type="StyleBox" path="res://ui/theme/focus_accent.tres" id="3"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="4"]
-[ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="5"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_accent.tres" id="6"]
+[ext_resource type="StyleBox" uid="uid://bsrxxsifsyu4k" path="res://ui/theme/focus_accent.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://b45mlqutqarjn" path="res://ui/theme/button_outline_large_normal.tres" id="4"]
+[ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/panel_normal.tres" id="5"]
+[ext_resource type="StyleBox" uid="uid://dhdt5bfr2nel5" path="res://ui/theme/button_outline_large_accent.tres" id="6"]
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="7"]
 
 [node name="ReportFormPopup" type="CanvasLayer" unique_id=1915005343]
@@ -67,33 +67,36 @@ size_flags_horizontal = 4
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "If you face an issue in the app, please click the link below to report it on GitHub:
+text = "Use the link below to report a bug or an error in a lesson on GitHub:
 
 [center][b][url=https://github.com/GDQuest/learn-gdscript/issues]GitHub.com > GDQuest > learn-gdscript > Issues[/url][/b][/center]
 
-On that page, you can report any issues, whether something's not working or there's an error in a lesson.
+[font=res://ui/theme/fonts/font_title.tres]Missing translations[/font]
 
-You can generate a log to help us identify the problem. To do so, click here: [b][url=download]generate error log[/url][/b].
+If some text in the app is not translated into your language, it is most likely because the translation for your language is incomplete. Our translations are maintained by volunteers and not every language is fully covered yet.
 
-Please drag and drop the generated file onto your issue on GitHub to attach it.
+If you want to help translate the app, you can find instructions on how to contribute on this page:
 
-[font=res://ui/theme/fonts/font_title.tres]What's GitHub[/font]
+[center][b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]GitHub.com > GDQuest > learn-gdscript-translations[/url][/b][/center]
 
-GitHub is an online platform to host and manage open-source projects like the GDScript Learn app. It helps developers organize their work and collaborate online.
+[font=res://ui/theme/fonts/font_title.tres]What is GitHub[/font]
 
-You can use GitHub to study the source code of many open projects, report issues, or even contribute code yourself.
+GitHub is a website where developers share and work on open-source projects. Open-source means the code is public and anyone can read it, report problems, or help improve it.
+
+This app is open-source, and we currently use GitHub to track bugs and improvements.
 
 [font=res://ui/theme/fonts/font_title.tres]How to report an issue[/font]
 
-1. Click the link above to get to the [i]GitHub Issues[/i] page.
-2. Click on the [i]New Issue[/i] button.
-3. Fill out the form to tell us more about your problem.
+1. Click the first link at the top of this page to go to the [i]GitHub Issues[/i] page.
+2. Use the search bar to verify that your issue has not been reported already.
+3. Click the [i]New Issue[/i] button.
+4. Fill out the form to describe what went wrong.
 
-You will need a GitHub account to do so.
+You will need a free GitHub account to do this.
 
-Please add as much relevant information as possible, such as the kind of device you're using to access the app, and maybe attach a screenshot or video clip showcasing the issue.
+Please include as much detail as you can, such as what device you are using and what you were doing when the problem happened. A screenshot also helps a lot.
 
-[center]Thank you for contributing to open source![/center]"
+[center]Thank you for helping make this app better.[/center]"
 
 [node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column" unique_id=673476989]
 custom_minimum_size = Vector2(400, 20)
