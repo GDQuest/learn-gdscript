@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://dcl81wj587ph8"]
 
 [ext_resource type="Script" uid="uid://clp346ybkc5c1" path="res://ui/components/popups/SettingsPopup.gd" id="1"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_pressed.tres" id="3"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_normal.tres" id="4"]
-[ext_resource type="StyleBox" path="res://ui/theme/panel_normal.tres" id="5"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_accent.tres" id="6"]
+[ext_resource type="StyleBox" uid="uid://bkqtmumr5t28" path="res://ui/theme/button_outline_large_pressed.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://b45mlqutqarjn" path="res://ui/theme/button_outline_large_normal.tres" id="4"]
+[ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/panel_normal.tres" id="5"]
+[ext_resource type="StyleBox" uid="uid://dhdt5bfr2nel5" path="res://ui/theme/button_outline_large_accent.tres" id="6"]
 [ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="7"]
-[ext_resource type="StyleBox" path="res://ui/theme/button_outline_large_hover.tres" id="8"]
-[ext_resource type="StyleBox" path="res://ui/theme/focus_accent.tres" id="9"]
+[ext_resource type="StyleBox" uid="uid://dkeg6cbxbpnqe" path="res://ui/theme/button_outline_large_hover.tres" id="8"]
+[ext_resource type="StyleBox" uid="uid://bsrxxsifsyu4k" path="res://ui/theme/focus_accent.tres" id="9"]
+[ext_resource type="PackedScene" uid="uid://bc84yi46l8qys" path="res://ui/components/popups/TranslationInfoPopup.tscn" id="10"]
+[ext_resource type="Texture2D" uid="uid://cx5pgbsm7s2qp" path="res://ui/icons/icon_report.png" id="11"]
 
 [sub_resource type="StyleBoxEmpty" id="2"]
 
@@ -17,11 +19,13 @@
 
 [sub_resource type="Shortcut" id="6"]
 
-[node name="CanvasLayer" type="CanvasLayer" unique_id=1461649153 node_paths=PackedStringArray("_panel", "_color_rect", "_language_value", "_font_size_value", "_font_size_sample", "_scroll_sensitivity_slider", "_framerate_settings_section", "_framerate_option", "_lower_contrast", "_dyslexia_font", "_apply_button", "_cancel_button")]
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1461649153 node_paths=PackedStringArray("_panel", "_color_rect", "_translation_info_button", "_translation_info_popup", "_language_value", "_font_size_value", "_font_size_sample", "_scroll_sensitivity_slider", "_framerate_settings_section", "_framerate_option", "_lower_contrast", "_dyslexia_font", "_apply_button", "_cancel_button")]
 layer = 2
 script = ExtResource("1")
 _panel = NodePath("PanelContainer")
 _color_rect = NodePath("ColorRect")
+_translation_info_button = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow/TranslationInfoButton")
+_translation_info_popup = NodePath("TranslationInfoPopup")
 _language_value = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/Value")
 _font_size_value = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer/Value")
 _font_size_sample = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer/SampleText")
@@ -98,15 +102,28 @@ theme_override_constants/separation = 32
 [node name="LanguageSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=461239063]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting" unique_id=478374928]
+[node name="LabelRow" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting" unique_id=561239064]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow" unique_id=478374928]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Language"
 
+[node name="TranslationInfoButton" type="Button" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow" unique_id=561239065]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+tooltip_text = "About community translations"
+mouse_default_cursor_shape = 2
+icon = ExtResource("11")
+flat = true
+
 [node name="Value" type="OptionButton" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting" unique_id=2054986385]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Change the course's language. We plan to add other languages, but only English is available for now."
+tooltip_text = "Change the course's language to one of the community-contributed ones."
 
 [node name="FontSizeSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=1561891103]
 layout_mode = 2
@@ -246,3 +263,5 @@ theme_override_styles/hover = ExtResource("6")
 theme_override_styles/focus = ExtResource("9")
 shortcut = SubResource("6")
 text = "Apply"
+
+[node name="TranslationInfoPopup" parent="." unique_id=1351951771 instance=ExtResource("10")]

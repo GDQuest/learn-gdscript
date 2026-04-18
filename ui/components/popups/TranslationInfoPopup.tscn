@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://bc84yi46l8qys"]
+
+[ext_resource type="Script" uid="uid://c2dngtpunftiu" path="res://ui/components/popups/TranslationInfoPopup.gd" id="1"]
+[ext_resource type="StyleBox" uid="uid://bsrxxsifsyu4k" path="res://ui/theme/focus_accent.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://b45mlqutqarjn" path="res://ui/theme/button_outline_large_normal.tres" id="4"]
+[ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/panel_normal.tres" id="5"]
+[ext_resource type="StyleBox" uid="uid://dhdt5bfr2nel5" path="res://ui/theme/button_outline_large_accent.tres" id="6"]
+[ext_resource type="Theme" uid="uid://b03mml1yyrchy" path="res://ui/theme/gdscript_app_theme.tres" id="7"]
+
+[node name="TranslationInfoPopup" type="CanvasLayer" unique_id=1738910436]
+layer = 10
+script = ExtResource("1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1071289052]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.0352941, 0.0392157, 0.129412, 0.627451)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1933627758]
+custom_minimum_size = Vector2(681, 480)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -430.0
+offset_top = -295.0
+offset_right = 430.0
+offset_bottom = 295.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7")
+
+[node name="Panel" type="Panel" parent="PanelContainer" unique_id=1643994035]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("5")
+
+[node name="Column" type="VBoxContainer" parent="PanelContainer" unique_id=1429450314]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Column" unique_id=1495605754]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+value = 100.0
+show_percentage = false
+
+[node name="Margin" type="MarginContainer" parent="PanelContainer/Column" unique_id=1947591665]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Column" type="VBoxContainer" parent="PanelContainer/Column/Margin" unique_id=60991072]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column" unique_id=1901395612]
+layout_mode = 2
+theme_type_variation = &"LabelTitle"
+text = "Community Translations"
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="PanelContainer/Column/Margin/Column" unique_id=1918899718]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Summary" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=315287741]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "The languages available in this app are translated by community volunteers. They are not officially supported, and some translations may be incomplete or missing entirely.
+
+If you see text that is still in English while using another language, this is expected. It means that part of the app has not been translated yet.
+
+If you want to help make the translations more complete, you are welcome to contribute. You can find instructions on how to do so here: [b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]How to contribute translations[/url][/b]
+
+Thank you to everyone who has contributed translations so far."
+
+[node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column" unique_id=624938975]
+custom_minimum_size = Vector2(400, 20)
+layout_mode = 2
+
+[node name="ConfirmButton" type="Button" parent="PanelContainer/Column/Margin/Column" unique_id=486121878]
+custom_minimum_size = Vector2(200, 68)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme_override_colors/font_pressed_color = Color(0.239216, 1, 0.431373, 1)
+theme_override_colors/font_hover_color = Color(0.239216, 1, 0.431373, 1)
+theme_override_styles/normal = ExtResource("4")
+theme_override_styles/pressed = ExtResource("6")
+theme_override_styles/hover = ExtResource("6")
+theme_override_styles/focus = ExtResource("3")
+text = "OK"

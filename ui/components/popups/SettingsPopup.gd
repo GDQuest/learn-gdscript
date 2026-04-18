@@ -11,6 +11,8 @@ const FRAMERATE_MAP := {
 
 @export var _panel: PanelContainer
 @export var _color_rect: ColorRect
+@export var _translation_info_button: Button
+@export var _translation_info_popup: CanvasLayer
 @export var _language_value: OptionButton
 @export var _font_size_value: HSlider
 @export var _font_size_sample: Label
@@ -38,6 +40,7 @@ func _ready() -> void:
 	_init_languages()
 	_init_values()
 
+	_translation_info_button.pressed.connect(_translation_info_popup.show)
 	_font_size_value.value_changed.connect(_on_font_size_changed)
 
 	_apply_button.pressed.connect(_on_apply_settings)
