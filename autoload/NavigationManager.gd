@@ -19,10 +19,10 @@ var arguments := { }
 
 var _current_unload_type := -1
 var _url_normalization_regex := RegExpGroup.compile(
-	r"^(?<prefix>user:\/\/|res:\/\/|\.*?\/+)#?(?<course>[^\/]+)\/(?<lesson>[^\/]+)\/?(?<lesson_file>[^\.]+\.[^\/]+)?\/?(?<practice>\$.*)?",
+	r"^(?<prefix>user:\/\/|res:\/\/|\.*?\/+)#?(?<course>[^\/]+)\/(?<lesson>[^\/]+)\/?(?<lesson_file>[^\.]+\.[^\/]+)?\/?(?<practice>.*)?",
 )
 var _slug_normalization_regex := RegExpGroup.compile(
-	r"^#?(?<course>[^\/]+)\/(?<lesson>[^\$]+)\/?(?<practice>\$.*)?",
+	r"^#?(?<course>[^\/]+)\/(?<lesson>[^\/]+)\/?(?<practice>.*)?",
 )
 var _lesson_cache := { }
 
@@ -141,7 +141,7 @@ func navigate_to_lesson(course_id: String, lesson_slug: String) -> void:
 
 
 func navigate_to_practice(course_id: String, lesson_slug: String, practice_id: String) -> void:
-	navigate_to("#%s/%s/$%s" % [course_id, lesson_slug, practice_id])
+	navigate_to("#%s/%s/%s" % [course_id, lesson_slug, practice_id])
 
 
 func navigate_to(metadata: String) -> void:
@@ -176,11 +176,11 @@ func navigate_to(metadata: String) -> void:
 
 	var effective_path := "%s/%s" % [course_index.get_course_id(), normalized.lesson_path]
 	if normalized.practice_path != "":
-		var practice := course_index.get_practice_from_slug("%s/$%s" % [normalized.lesson_path, normalized.practice_path])
+		var practice := course_index.get_practice_from_slug("%s/%s" % [normalized.lesson_path, normalized.practice_path])
 		if not practice is BBCodeParser.ParseNode:
 			push_error("'%s' does not have a practice at slug '%s'" % [lesson_path, normalized.practice_path])
 			return
-		effective_path += "/$%s" % [normalized.practice_path]
+		effective_path += "/%s" % [normalized.practice_path]
 
 	history.push_back(effective_path)
 	_push_javascript_state(effective_path)
@@ -364,7 +364,7 @@ class NormalizedUrl:
 		protocol = regex_result.get_string("prefix")
 		course_path = regex_result.get_string("course")
 		lesson_path = regex_result.get_string("lesson").trim_suffix("/")
-		practice_path = regex_result.get_string("practice").substr(1)
+		practice_path = regex_result.get_string("practice")
 		lesson_file = regex_result.get_string("lesson_file")
 
 		if protocol in ["//", "/"]:
@@ -376,7 +376,7 @@ class NormalizedUrl:
 		if lesson_file != "":
 			file_path += "/%s" % [lesson_file]
 		if with_practices and practice_path != "":
-			file_path += "/$%s" % [practice_path]
+			file_path += "/%s" % [practice_path]
 		return file_path
 
 
@@ -385,7 +385,7 @@ class NormalizedUrl:
 		if lesson_file != "":
 			url += "/%s" % [lesson_file]
 		if practice_path != "":
-			url += "/$%s" % [practice_path]
+			url += "/%s" % [practice_path]
 		return url
 
 
@@ -394,5 +394,5 @@ class NormalizedUrl:
 		if lesson_file != "":
 			string += "/%s" % [lesson_file]
 		if practice_path != "":
-			string += "/$%s" % [practice_path]
+			string += "/%s" % [practice_path]
 		return string
