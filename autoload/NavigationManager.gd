@@ -19,10 +19,10 @@ var arguments := { }
 
 var _current_unload_type := -1
 var _url_normalization_regex := RegExpGroup.compile(
-	r"^(?<prefix>user:\/\/|res:\/\/|\.*?\/+)#?(?<course>[^\/]+)\/(?<lesson>[^\/]+)\/?(?<lesson_file>[^\.]+\.[^\/]+)?\/?(?<practice>.*)?",
+	r"^(?<prefix>user:\/\/|res:\/\/|\.*?\/+)(?<course>[^\/]+)\/(?<lesson>[^\/]+)\/?(?<lesson_file>[^\.]+\.[^\/]+)?\/?(?<practice>.*)?",
 )
 var _slug_normalization_regex := RegExpGroup.compile(
-	r"^#?(?<course>[^\/]+)\/(?<lesson>[^\/]+)\/?(?<practice>.*)?",
+	r"^(?<course>[^\/]+)\/(?<lesson>[^\/]+)\/?(?<practice>.*)?",
 )
 var _lesson_cache := { }
 
@@ -141,7 +141,7 @@ func navigate_to_lesson(course_id: String, lesson_slug: String) -> void:
 
 
 func navigate_to_practice(course_id: String, lesson_slug: String, practice_id: String) -> void:
-	navigate_to("#%s/%s/%s" % [course_id, lesson_slug, practice_id])
+	navigate_to("%s/%s/%s" % [course_id, lesson_slug, practice_id])
 
 
 func navigate_to(metadata: String) -> void:
@@ -349,7 +349,7 @@ func _push_javascript_state(url: String) -> void:
 	if not _js_available:
 		return
 	@warning_ignore("unsafe_method_access")
-	_js_history.pushState(url, "", "#" + url)
+	_js_history.pushState(url, "", url)
 
 
 class NormalizedUrl:

@@ -116,7 +116,7 @@ func _create_navigation_node(text: String, course_index: CourseIndex, path: Stri
 		navigation_node.add_theme_font_size_override("font_size", NODE_FONT_SIZE)
 		navigation_node.mouse_default_cursor_shape = CURSOR_POINTING_HAND
 		add_child(navigation_node)
-		var slug := "#%s/%s" % [course_index.get_course_id(), course_index.get_lesson_slug_from_path(path)]
+		var slug := "%s/%s" % [course_index.get_course_id(), course_index.get_lesson_slug_from_path(path)]
 		navigation_node.pressed.connect(_on_navigation_pressed.bind(slug))
 
 

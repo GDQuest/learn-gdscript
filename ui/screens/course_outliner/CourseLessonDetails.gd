@@ -93,4 +93,4 @@ func _on_goto_lesson_pressed() -> void:
 	if not lesson:
 		return
 
-	NavigationManager.navigate_to("#%s/%s" % [course_index.get_course_id(), course_index.get_lesson_slug_from_path(lesson.bbcode_path)])
+	NavigationManager.navigate_to("%s/%s" % [course_index.get_course_id(), course_index.get_lesson_slug_from_path(lesson.bbcode_path)])
