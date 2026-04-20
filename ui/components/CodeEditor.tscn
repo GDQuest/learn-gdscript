@@ -7,10 +7,10 @@
 [ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="4_5pr65"]
 [ext_resource type="Texture2D" uid="uid://by0eaqjfb65e8" path="res://ui/icons/icon_error.png" id="5"]
 [ext_resource type="Script" uid="uid://5l4qy2udnwi0" path="res://ui/components/CodeEditor.gd" id="6"]
-[ext_resource type="StyleBox" path="res://ui/theme/panel_sliceeditor.tres" id="8"]
+[ext_resource type="StyleBox" uid="uid://bhh7fo3h6p5r5" path="res://ui/theme/panel_sliceeditor.tres" id="8"]
 [ext_resource type="Texture2D" uid="uid://bussox8vrhdqa" path="res://ui/icons/icon_console.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://do1uu4d3dn5ws" path="res://ui/icons/expand.png" id="10"]
-[ext_resource type="StyleBox" path="res://ui/theme/focus_outside_button.tres" id="11"]
+[ext_resource type="StyleBox" uid="uid://cx8newe767lyq" path="res://ui/theme/focus_outside_button.tres" id="11"]
 [ext_resource type="PackedScene" uid="uid://bc2arcrhct3ho" path="res://ui/components/LockedOverlay.tscn" id="14"]
 [ext_resource type="Texture2D" uid="uid://6f6bogy8tanx" path="res://ui/icons/icon_continue.png" id="17"]
 
@@ -124,9 +124,8 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Row" type="HBoxContainer" parent="Column/MarginContainer/Column" unique_id=576532577]
+[node name="Row" type="FlowContainer" parent="Column/MarginContainer/Column" unique_id=192673533]
 layout_mode = 2
-mouse_filter = 2
 alignment = 1
 
 [node name="RunButton" type="Button" parent="Column/MarginContainer/Column/Row" unique_id=1700535299]
@@ -165,7 +164,7 @@ shortcut_in_tooltip = false
 text = "Reset"
 icon = ExtResource("5")
 
-[node name="Row2" type="HBoxContainer" parent="Column/MarginContainer/Column" unique_id=1984292420]
+[node name="Row2" type="FlowContainer" parent="Column/MarginContainer/Column" unique_id=1147254265]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
