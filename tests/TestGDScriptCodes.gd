@@ -8,7 +8,7 @@ func _run():
 	print("[TEST] GDscript Error Codes")
 
 	var source_file := FileAccess.open(SOURCE_PATH, FileAccess.READ)
-	if source_file:
+	if not source_file:
 		printerr("Failed to load the source file at '%s': Error code %d." % [SOURCE_PATH, FileAccess.get_open_error()])
 		return
 
@@ -19,10 +19,12 @@ func _run():
 		var test_json_conv = JSON.new()
 		test_json_conv.parse(line)
 		var error_message = test_json_conv.get_data()
-		if not error_message.is_empty():
+		if error_message and not error_message.is_empty():
 			message_list.append(error_message)
+		else:
+			print("Issue on line %s: %s" % [line, test_json_conv.get_error_message()])
 	source_file.close()
-
+	
 	# Validity of the error database.
 	print()
 	print("Checking database validity...")
@@ -108,7 +110,7 @@ func _run():
 		elif matched_codes.size() == 1:
 			unique_matched_messages += 1
 		else:
-			printerr("Message '%s' matches multiple patterns: %s" % [raw_message, matched_codes])
+			printerr("Message '%s' matches multiple patterns: %s" % [raw_message, matched_codes.map(func(code): return GDScriptCodes.ErrorCode.keys()[code-10000])])
 
 	print("- Unmatched messages: %d/%d" % [unmatched_messages, total_messages])
 	print("- Unique matches: %d/%d" % [unique_matched_messages, total_messages])

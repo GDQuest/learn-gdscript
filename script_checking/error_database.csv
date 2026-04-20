@@ -1,34 +1,34 @@
-error_code,error_explanation,error_suggestion
-UNASSIGNED_VARIABLE,,
-UNASSIGNED_VARIABLE_OP_ASSIGN,,
-UNUSED_VARIABLE,,
-SHADOWED_VARIABLE,,
-UNUSED_CLASS_VARIABLE,,
-UNUSED_ARGUMENT,,
-UNREACHABLE_CODE,,
-STANDALONE_EXPRESSION,,
-VOID_ASSIGNMENT,,
-NARROWING_CONVERSION,,
-FUNCTION_MAY_YIELD,,
-VARIABLE_CONFLICTS_FUNCTION,,
-FUNCTION_CONFLICTS_VARIABLE,,
-FUNCTION_CONFLICTS_CONSTANT,,
-INCOMPATIBLE_TERNARY,,
-UNUSED_SIGNAL,,
-RETURN_VALUE_DISCARDED,,
-PROPERTY_USED_AS_FUNCTION,,
-CONSTANT_USED_AS_FUNCTION,,
-FUNCTION_USED_AS_PROPERTY,,
-INTEGER_DIVISION,,
-UNSAFE_PROPERTY_ACCESS,,
-UNSAFE_METHOD_ACCESS,,
-UNSAFE_CAST,,
-UNSAFE_CALL_ARGUMENT,,
-DEPRECATED_KEYWORD,,
-STANDALONE_TERNARY,,
-INVALID_OPERATOR_USAGE,,
-MISPLACED_STATIC_CALL,,
-IN_EXPECTED_AFTER_IDENTIFIER,"You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword.
+"error_code","error_explanation","error_suggestion"
+"UNASSIGNED_VARIABLE",,
+"UNASSIGNED_VARIABLE_OP_ASSIGN",,
+"UNUSED_VARIABLE",,
+"SHADOWED_VARIABLE",,
+"UNUSED_CLASS_VARIABLE",,
+"UNUSED_ARGUMENT",,
+"UNREACHABLE_CODE",,
+"STANDALONE_EXPRESSION",,
+"VOID_ASSIGNMENT",,
+"NARROWING_CONVERSION",,
+"FUNCTION_MAY_YIELD",,
+"VARIABLE_CONFLICTS_FUNCTION",,
+"FUNCTION_CONFLICTS_VARIABLE",,
+"FUNCTION_CONFLICTS_CONSTANT",,
+"INCOMPATIBLE_TERNARY",,
+"UNUSED_SIGNAL",,
+"RETURN_VALUE_DISCARDED",,
+"PROPERTY_USED_AS_FUNCTION",,
+"CONSTANT_USED_AS_FUNCTION",,
+"FUNCTION_USED_AS_PROPERTY",,
+"INTEGER_DIVISION",,
+"UNSAFE_PROPERTY_ACCESS",,
+"UNSAFE_METHOD_ACCESS",,
+"UNSAFE_CAST",,
+"UNSAFE_CALL_ARGUMENT",,
+"DEPRECATED_KEYWORD",,
+"STANDALONE_TERNARY",,
+"INVALID_OPERATOR_USAGE",,
+"MISPLACED_STATIC_CALL",,
+"IN_EXPECTED_AFTER_IDENTIFIER","You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword.
 
 In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid temporary variable name to assign values in each loop iteration. The loop creates a new variable with the desired name and assigns each element of the array to it.","To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces.
 
@@ -38,7 +38,7 @@ To access the [code]x[/code] sub-component of the variable, you need to do that 
 
 [code]for cell_position in cell_positions_array:
     cell_position.x += 1.0[/code]"
-ASSIGNING_TO_EXPRESSION,"You get this error when you try to assign a value to something that is not a variable.
+"ASSIGNING_TO_EXPRESSION","You get this error when you try to assign a value to something that is not a variable.
 
 You can only assign values to variables. You cannot assign values to function calls or calculations.
 
@@ -47,7 +47,7 @@ For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/co
 If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call.
 
 If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
-CANT_ASSIGN_TO_CONSTANT,"You get this error when you try to change the value of a constant.
+"CANT_ASSIGN_TO_CONSTANT","You get this error when you try to change the value of a constant.
 
 A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it.
 
@@ -57,7 +57,7 @@ Many constants are built into Godot and GDScript, and you cannot change them eit
 
 1. If the value should never change, or it comes from Godot, remove the line that tries to change it.
 2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
-SPACES_BEFORE_TABS,"You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line.
+"SPACES_BEFORE_TABS","You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line.
 
 In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character.
 
@@ -66,7 +66,7 @@ If you accidentally type a space before a tab, or a tab before a space, the comp
 Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference.
 
 Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
-CYCLIC_REFERENCE,"A cyclic reference is when a class references itself, directly or indirectly.
+"CYCLIC_REFERENCE","A cyclic reference is when a class references itself, directly or indirectly.
 
 It has two possible causes:
 
@@ -76,14 +76,14 @@ It has two possible causes:
 Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime.","Erase the type hint in the error line, and the problem should disappear.
 
 At GDQuest, when we face this error, we remove the type hints on lines causing cyclic references. It solves the problem in the vast majority of cases."
-INVALID_INDENTATION,"The indentation of your code (the number of tab characters at the start of the line) is incorrect.
+"INVALID_INDENTATION","The indentation of your code (the number of tab characters at the start of the line) is incorrect.
 
 You are missing one or more tabs, or you inserted too many.
 
 The computer uses those leading tab characters on code lines to know which lines of code are part of a code block, like a function.","If the line of code with the error is right after a line ending with a colon, like a function definition, you need one extra indent level compared to the previous line.
 
 In other words, your line should have one more leading tab character than the function definition."
-UNEXPECTED_CHARACTER,"You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code.
+"UNEXPECTED_CHARACTER","You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code.
 
 You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character.
 
@@ -92,7 +92,7 @@ Note that this error can appear [b]after[/b] the line causing it due to how the 
 If the error says ""expected,"" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else.
 
 If it says ""unterminated,"" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
-UNKNOWN_CHARACTER,"You get this error when you use a special character that GDScript doesn't recognize.
+"UNKNOWN_CHARACTER","You get this error when you use a special character that GDScript doesn't recognize.
 
 This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings).
 
@@ -101,11 +101,10 @@ This includes accented letters (like é, à, ñ), special symbols, or characters
 You can use accented characters inside text strings (between quotes), but not in the code itself.
 
 You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
-UNEXPECTED_CHARACTER_IN_KEYWORD,"This error tells you that you are missing a parenthesis (or sometimes a comma or a path).
+"UNEXPECTED_CHARACTER_IN_KEYWORD","This error tells you that you are missing a parenthesis (or sometimes a comma or a path).
 
 Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code].","To address the error, you want to add the missing opening parenthesis, the closing parenthesis, or the comma."
-UNEXPECTED_CHARACTER_IN_EXPORT_HINT,"This error tells you are missing some parenthesis, a comma, or some value in your export hint.",You need to read the error message and add the missing character or value it requests.
-MISPLACED_IDENTIFIER,"This error happens in several cases:
+"MISPLACED_IDENTIFIER","This error happens in several cases:
 
 1. You wrote an identifier (variable or function name) in the wrong place.
 2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name.
@@ -114,12 +113,12 @@ MISPLACED_IDENTIFIER,"This error happens in several cases:
 If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc.
 
 Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
-MISPLACED_TYPE_IDENTIFIER,"This error tells you that you are missing a type somewhere. A type can be [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], and many identifiers representing a data structure.
+"MISPLACED_TYPE_IDENTIFIER","This error tells you that you are missing a type somewhere. A type can be [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], and many identifiers representing a data structure.
 
 Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name.
 
 It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name.","To solve this, you need to write the name of the type after the colon, arrow (in the case of function return types), inside parentheses (for export types), or after the [code]as[/code] keyword."
-NONEXISTENT_IDENTIFIER,"The variable, function name, or class name you are trying to use does not exist.
+"NONEXISTENT_IDENTIFIER","The variable, function name, or class name you are trying to use does not exist.
 
 You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot.
 
@@ -128,38 +127,38 @@ The other cause for this error is that you didn't define the variable, function,
 If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error.
 
 If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
-MISPLACED_KEYWORD,"You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid.
+"MISPLACED_KEYWORD","You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid.
 
 The [code]continue[/code] keyword means ""jump to the next iteration of the loop."" And the [code]break[/code] keyword means ""end the loop right now and jump to the first line of code after the loop block.","If you wrote one of these keywords outside a loop, you need to remove it.
 
 If you are trying to use it inside a loop, your indentation is most likely at fault. You may need to insert one or more leading tab characters to the keyword."
-EXPECTED_CONSTANT_EXPRESSION,"When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant.
+"EXPECTED_CONSTANT_EXPRESSION","When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant.
 
 In other words, it wants something that can never change. This is why the computer will reject function calls and variables where it needs a constant expression.","You need to replace function calls or variables with a constant value like a whole number, decimal number, string, vector, a predefined array, etc.
 
 You can also use arithmetic operators like multiplications (*), additions (+), and so on."
-INVALID_CLASS_DECLARATION,"When defining a new class, you need to follow a specific pattern. You must write the name in plain text, starting with a letter.
+"INVALID_CLASS_DECLARATION","When defining a new class, you need to follow a specific pattern. You must write the name in plain text, starting with a letter.
 
 We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name.","To fix this error, replace whatever you put after the 'extends' or 'class_name' keyword by a name without spaces and starting with a capital letter.
 
 You can optionally use numbers in the name, but not in the first position."
-DUPLICATE_DECLARATION,"You are trying to define a function or variable that already exists; You can't do that.
+"DUPLICATE_DECLARATION","You are trying to define a function or variable that already exists; You can't do that.
 
 Perhaps the function or variable already exists in the current code file, but it may also be in a parent class that this GDScript code extends.","In the app, your code extends some built-in Godot code that's not visible to you.
 
 When that happens, you need to either rename your function or variable to one that will not collide with an existing one or remove this line of code."
-DUPLICATE_SIGNAL_DECLARATION,"You are trying to define a signal that already exists; You can't do that.
+"DUPLICATE_SIGNAL_DECLARATION","You are trying to define a signal that already exists; You can't do that.
 
 Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends.","In the app, your code extends some built-in Godot code that's not visible to you.
 
 When that happens, you need to either rename your signal to one that will not collide with an existing one or remove this line of code."
-SIGNATURE_MISMATCH,"The function you're trying to define exists in a parent class, so your definition overrides the parent class's function.
+"SIGNATURE_MISMATCH","The function you're trying to define exists in a parent class, so your definition overrides the parent class's function.
 
 When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class.
 
 For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class.","You need to check the parent class's function and its definition in the code reference. Then, you need to edit your function definition to have the same number and type of parameters as the parent class."
-INVALID_ARGUMENTS,This whole class of errors has to do with calling functions with either the wrong number of arguments or the wrong kind of argument. You will need to use the error message to see what is going wrong.,"You need to either remove, add, or change the values you're trying to pass to the function to solve this issue. To know exactly how many arguments you need, you need to check the code reference. It will show you the function definition and the mandatory arguments."
-TYPE_MISMATCH,"All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!
+"INVALID_ARGUMENTS","This whole class of errors has to do with calling functions with either the wrong number of arguments or the wrong kind of argument. You will need to use the error message to see what is going wrong.","You need to either remove, add, or change the values you're trying to pass to the function to solve this issue. To know exactly how many arguments you need, you need to check the code reference. It will show you the function definition and the mandatory arguments."
+"TYPE_MISMATCH","All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!
 
 When you make any operation, the computer compares the types you are using.
 
@@ -170,22 +169,22 @@ You'll need to read the error message to see what is not matching because there 
 If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic.
 
 If the computer talks about an invalid operand, then the issue is that the operation does not exist for the type you're trying to use. For example, while you can add two 2D vectors, you can't add a whole number or text to a 2D vector."
-TYPE_CANNOT_BE_INFERRED,"GDScript supports type inference. The computer will automatically recognize the type of value you are working with. In some cases, though, it can't figure it out.
+"TYPE_CANNOT_BE_INFERRED","GDScript supports type inference. The computer will automatically recognize the type of value you are working with. In some cases, though, it can't figure it out.
 
 When that happens, you need to specify the type yourself or remove type inference altogether for this variable.","The simplest way to solve this error is to remove types for this variable or this function's arguments. Otherwise, you can manually specify the value type after the colon.
 
 We recommend specifying the type whenever possible to reap the typing system's benefits."
-RETURN_VALUE_MISMATCH,"There is an issue with the return value of your function. There are two main cases here:
+"RETURN_VALUE_MISMATCH","There is an issue with the return value of your function. There are two main cases here:
 
 1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()').
 2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end.","When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that.
 
 When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
-INVALID_NO_CATCH,"Godot was unable to load your script, yet the language checker found nothing wrong.","Please click on the ""report"" button at the top and please let us know."
-RECURSIVE_FUNCTION,You called a function inside itself. This will loop forever.,"There are valid reasons for using recursive functions, but none of them are part of this course, so this cannot be a valid solution."
-INFINITE_WHILE_LOOP,"You wrote a while loop with a condition that is always true (like [code]while true:[/code] or [code]while(true):[/code]) without a [code]break[/code] statement inside it. This creates an infinite loop that will freeze your game.","To fix this, you need to either add a [code]break[/code] statement inside the loop so it can exit when a certain condition is met, or change the while loop condition to something that will become false. For example: [code]while position.x < 100: position.x -= 10[/code]."
-UNEXPECTED_EOL,"The computer reached the end of the line of code, but the line had a syntax error.
+"INVALID_NO_CATCH","Godot was unable to load your script, yet the language checker found nothing wrong.","Please click on the ""report"" button at the top and please let us know."
+"RECURSIVE_FUNCTION","You called a function inside itself. This will loop forever.","There are valid reasons for using recursive functions, but none of them are part of this course, so this cannot be a valid solution."
+"INFINITE_WHILE_LOOP","You wrote a while loop with a condition that is always true (like [code]while true:[/code] or [code]while(true):[/code]) without a [code]break[/code] statement inside it. This creates an infinite loop that will freeze your game.","To fix this, you need to either add a [code]break[/code] statement inside the loop so it can exit when a certain condition is met, or change the while loop condition to something that will become false. For example: [code]while position.x < 100: position.x -= 10[/code]."
+"UNEXPECTED_EOL","The computer reached the end of the line of code, but the line had a syntax error.
 The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote.","Double-check that you are not missing a quote character or that the quote character you used to start the string is the same as the one you used to close the string."
-CANT_GET_INDEX,"The sub-variable you are trying to access does not exist.","You probably have a typo in the name of the sub-variable that you are trying to access.
+"CANT_GET_INDEX","The sub-variable you are trying to access does not exist.","You probably have a typo in the name of the sub-variable that you are trying to access.
 
 Ensure that you don't have a capital letter where you should have a lowercase letter and vice versa."
