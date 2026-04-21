@@ -71,7 +71,6 @@ func _ready() -> void:
 			if _lesson_index < 0 or _lesson_index >= course_index.get_lessons_count():
 				_lesson_index = 0
 			NavigationManager.navigate_to_lesson(
-				course_index.get_course_id(),
 				course_index.get_lesson_slug(_lesson_index),
 			)
 	else:
@@ -243,7 +242,6 @@ func _on_practice_next_requested(practice: BBCodeParser.ParseNode) -> void:
 		var next_practice := BBCodeUtils.get_lesson_practice(lesson_data, index + 1)
 		var next_practice_id := BBCodeUtils.get_practice_id(next_practice)
 		NavigationManager.navigate_to_practice(
-			course_index.get_course_id(),
 			course_index.get_lesson_slug(_lesson_index),
 			next_practice_id,
 		)
@@ -273,7 +271,6 @@ func _on_practice_previous_requested(practice: BBCodeParser.ParseNode) -> void:
 		var previous_practice_id := BBCodeUtils.get_practice_id(previous_practice)
 		# Otherwise, go to the previous practice in the set.
 		NavigationManager.navigate_to_practice(
-			course_index.get_course_id(),
 			course_index.get_lesson_slug(_lesson_index),
 			previous_practice_id,
 		)
@@ -281,7 +278,6 @@ func _on_practice_previous_requested(practice: BBCodeParser.ParseNode) -> void:
 
 func _on_practice_requested(practice: BBCodeParser.ParseNode) -> void:
 	NavigationManager.navigate_to_practice(
-		course_index.get_course_id(),
 		course_index.get_lesson_slug(_lesson_index),
 		BBCodeUtils.get_practice_id(practice),
 	)
@@ -298,7 +294,6 @@ func _on_lesson_completed() -> void:
 
 	_clear_history_stack()
 	NavigationManager.navigate_to_lesson(
-		course_index.get_course_id(),
 		course_index.get_lesson_slug(_lesson_index),
 	)
 
