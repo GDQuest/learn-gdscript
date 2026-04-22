@@ -17,6 +17,7 @@
 # `_current_scope`, which makes it so every subsequent line gets appended to its
 # body
 class_name MiniGDScriptTokenizer
+extends GDScriptLocalAnalyzer
 
 const TOKEN_FUNC_DECLARATION := "function_declaration"
 const TOKEN_FUNC_CALL := "function_call"

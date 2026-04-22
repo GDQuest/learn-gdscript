@@ -303,12 +303,28 @@ func _validate_and_run_student_code() -> void:
 		MessageBus.print_script_error(error, script_file_name)
 		_code_editor.unlock_editor()
 		return
+	
+	var verifier_script := script_text
+	var script_is_desynced_by_one_line := false
+
+	if not _has_class_name(verifier_script):
+		# GDScriptAnalyzer needs a path or class_name. As we're feeding code directly into the parser,
+		# we can't really have a path, so we need a class_name to fool it
+		var initial_insertion_character := _find_first_non_annotation_entry_point(verifier_script)
+		verifier_script = verifier_script.insert(initial_insertion_character, "class_name TEMP_UserScript\n")
+		script_is_desynced_by_one_line = true
+
+	var verifier := OfflineScriptVerifier.new(verifier_script)
 
 	# Do local sanity checks for the script.
-	var tokenizer := MiniGDScriptTokenizer.new(script_text)
+	var analyzer: GDScriptLocalAnalyzer = null
+	if ClassDB.class_exists(OfflineScriptVerifier.PARSE_WRAPPER_CLASS):
+		analyzer = GDScriptASTAnalyzer.new(verifier.get_class_ast())
+	else:
+		analyzer = MiniGDScriptTokenizer.new(verifier_script)
 
 	# Check for recursive functions
-	var recursive_function := tokenizer.find_any_recursive_function()
+	var recursive_function := analyzer.find_any_recursive_function()
 	if recursive_function != "":
 		var error := ScriptError.new()
 		error.message = (
@@ -321,7 +337,7 @@ func _validate_and_run_student_code() -> void:
 		_code_editor.unlock_editor()
 		return
 	# Check for infinite while loops
-	if tokenizer.has_infinite_while_loop():
+	if analyzer.has_infinite_while_loop():
 		var error := ScriptError.new()
 		error.message = tr(
 			"You have a while loop that runs forever (while true) without a break statement. This will freeze the app.",
@@ -331,18 +347,7 @@ func _validate_and_run_student_code() -> void:
 		MessageBus.print_script_error(error, script_file_name)
 		_code_editor.unlock_editor()
 		return
-
-	var verifier_script := script_text
-	var script_is_desynced_by_one_line := false
-
-	if not _has_class_name(verifier_script):
-		# GDScriptAnalyzer needs a path or class_name. As we're feeding code directly into the parser,
-		# we can't really have a path, so we need a class_name to fool it
-		var initial_insertion_character := _find_first_non_annotation_entry_point(verifier_script)
-		verifier_script = verifier_script.insert(initial_insertion_character, "class_name TEMP_UserScript\n")
-		script_is_desynced_by_one_line = true
-
-	var verifier := OfflineScriptVerifier.new(verifier_script)
+	
 	verifier.test()
 	var errors := verifier.errors
 
