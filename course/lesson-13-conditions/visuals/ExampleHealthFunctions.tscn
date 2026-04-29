@@ -2,6 +2,7 @@
 
 [ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_p6hej"]
 [ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="2"]
+[ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="2_syhxk"]
 
 [node name="GDScriptCodeExample" type="CodeEdit" unique_id=622312861]
 custom_minimum_size = Vector2(600, 230)
@@ -19,7 +20,10 @@ func heal(amount):
 	health += amount"
 context_menu_enabled = false
 shortcut_keys_enabled = false
+scroll_smooth = true
 caret_blink = true
+syntax_highlighter = ExtResource("2_syhxk")
 draw_tabs = true
 draw_spaces = true
+gutters_draw_line_numbers = true
 script = ExtResource("2")

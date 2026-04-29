@@ -2,6 +2,7 @@
 
 [ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_7d8dx"]
 [ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_y4xqd"]
+[ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="2_b7rdl"]
 
 [node name="CodeAssignString" type="CodeEdit" unique_id=1155113230]
 custom_minimum_size = Vector2(300, 140)
@@ -15,7 +16,10 @@ text = "for number in range(3):
 	cell += Vector2(1, 1)"
 context_menu_enabled = false
 shortcut_keys_enabled = false
+scroll_smooth = true
 caret_blink = true
+syntax_highlighter = ExtResource("2_b7rdl")
 draw_tabs = true
 draw_spaces = true
+gutters_draw_line_numbers = true
 script = ExtResource("1_y4xqd")

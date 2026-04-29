@@ -3,6 +3,7 @@
 [ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_ltotu"]
 [ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/panel_normal.tres" id="2"]
 [ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="3"]
+[ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="3_o4b17"]
 
 [node name="ExampleRotateFunction" type="CodeEdit" unique_id=760756889]
 custom_minimum_size = Vector2(600, 120)
@@ -17,7 +18,10 @@ text = "func rotate(radians):
 	rotation = rotation + radians"
 context_menu_enabled = false
 shortcut_keys_enabled = false
+scroll_smooth = true
 caret_blink = true
+syntax_highlighter = ExtResource("3_o4b17")
 draw_tabs = true
 draw_spaces = true
+gutters_draw_line_numbers = true
 script = ExtResource("3")

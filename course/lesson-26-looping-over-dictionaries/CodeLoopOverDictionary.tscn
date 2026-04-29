@@ -2,6 +2,7 @@
 
 [ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_46f1v"]
 [ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_5686j"]
+[ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="2_cdjoa"]
 
 [node name="CodeExample" type="CodeEdit" unique_id=335898422]
 custom_minimum_size = Vector2(300, 150)
@@ -16,7 +17,10 @@ text = "func run():
 		print(item_name)"
 context_menu_enabled = false
 shortcut_keys_enabled = false
+scroll_smooth = true
 caret_blink = true
+syntax_highlighter = ExtResource("2_cdjoa")
 draw_tabs = true
 draw_spaces = true
+gutters_draw_line_numbers = true
 script = ExtResource("1_5686j")
