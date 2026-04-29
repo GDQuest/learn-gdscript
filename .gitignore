@@ -1,39 +1,45 @@
-# Generated files
-html_export/index.html
+# Godot-specific ignores.
 
-
-# Godot-specific ignores
 .godot/
 .import/
 export.cfg
 
-# Mono-specific ignores
 .mono/
 data_*/
 
-# Plugins used for development
-addons/editor_icon_previewer
-addons/godot-plugin-refresher
 
-# Exports
-build/**/
+# Allow-list of project addons.
+addons/*
+!addons/ColorPickerPresets
 
-# build artifacts
-course/**/*.lgd
-
-#custom downloaded templates
-templates/*
-???custom-templates.zip
-
-# Local user overrides
+# Local overrides.
 override.cfg
 
-# Python is used for some translation build scripts
+
+# Build artifacts and project exports.
+build/**/
+html_export/index.html
+course/**/*.lgd
+
+# Build system files.
 __pycache__/
 .venv
 
 
-# Downloaded build files
+# Dev tools.
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+
+# Extra ignores.
+
+# Custom templates.
+templates/*
+???custom-templates.zip
+
+# Downloaded build files.
 7z.so
 butler
 godot_server.x86_64
