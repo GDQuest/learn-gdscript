@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://doicj7hty5hyt"]
 
+[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_sh0af"]
 [ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/panel_normal.tres" id="3"]
 [ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="3_l403w"]
-[ext_resource type="Script" uid="uid://28t36iv56iu2" path="res://ui/components/GDScriptCodeExample.gd" id="3_sh0af"]
+[ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="3_sh0af"]
 
 [node name="GDScriptCodeExample" type="CodeEdit" unique_id=450119196]
 custom_minimum_size = Vector2(600, 200)
@@ -11,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -1264.0
 offset_bottom = -880.0
+theme_override_fonts/font = ExtResource("1_sh0af")
 theme_override_styles/read_only = ExtResource("3")
 context_menu_enabled = false
 shortcut_keys_enabled = false

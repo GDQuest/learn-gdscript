@@ -27,7 +27,7 @@ func setup(text: String, is_multiple_choice: bool) -> void:
 	_label.text = tr(_button_text)
 	_label.add_theme_font_override("font", OPTION_FONT)
 	_button.toggle_mode = true
-	_button.toggled.emit(_on_toggled)
+	_button.toggled.connect(_on_toggled)
 	if not is_multiple_choice:
 		_button.button_group = _group
 

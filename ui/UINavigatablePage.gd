@@ -13,7 +13,8 @@ var _is_current_screen := false
 
 
 func _ready() -> void:
-	NavigationManager.all_screens_unload_requested.connect(_on_all_screens_unload_requested)
+	if not Engine.is_editor_hint():
+		NavigationManager.all_screens_unload_requested.connect(_on_all_screens_unload_requested)
 
 
 func set_is_current_screen(value: bool) -> void:

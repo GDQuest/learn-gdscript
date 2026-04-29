@@ -45,9 +45,9 @@ var _current_coroutine: CoroutineController = null
 
 
 func _ready() -> void:
-	Events.font_size_scale_changed.connect(_on_Events_font_size_scale_changed)
-
 	if not Engine.is_editor_hint():
+		Events.font_size_scale_changed.connect(_on_Events_font_size_scale_changed)
+
 		_update_gdscript_text_edit_width(UserProfiles.get_profile().font_size_scale)
 
 	_run_button.pressed.connect(run)
@@ -236,7 +236,10 @@ func create_slider_for(
 	var label := Label.new()
 	var value_label := Label.new()
 	var slider := HSlider.new()
-	var property_value: float = _scene_instance.get(property_name)
+
+	var property_value: float = 0.0
+	if not Engine.is_editor_hint():
+		property_value = _scene_instance.get(property_name)
 
 	_sliders.add_child(box)
 	box.add_child(label)
@@ -249,6 +252,7 @@ func create_slider_for(
 	slider.value = property_value
 	slider.step = slider_step
 	slider.custom_minimum_size.x = 100.0
+	slider.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	slider.value_changed.connect(_set_instance_value.bind(property_name, value_label))
 	_set_instance_value(property_value, property_name, value_label)
 
@@ -294,7 +298,7 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	# Avoids overwriting text via yield(node, "ready").
 	await get_tree().process_frame
 
-	if _scene_instance.has_method("get_code"):
+	if not Engine.is_editor_hint() and _scene_instance.has_method("get_code"):
 		@warning_ignore("unsafe_method_access")
 		gdscript_code = _scene_instance.get_code(gdscript_code)
 		set_code(gdscript_code)
@@ -339,7 +343,7 @@ func _reset_monitored_variable_highlights():
 	for current_child in _gdscript_text_edit.get_children(true):
 		if current_child is ScrollBar:
 			var scroll_bar := current_child as ScrollBar
-			
+
 			if not scroll_bar.value_changed.is_connected(_on_ScrollBar_scrolled):
 				scroll_bar.value_changed.connect(_on_ScrollBar_scrolled)
 			if not scroll_bar.scrolling.is_connected(_on_ScrollBar_scrolled):
@@ -415,7 +419,7 @@ var _last_chars := []
 
 func _on_arrow_animation(chars1: Array, chars2: Array, immediate := false) -> void:
 	_last_chars = [chars1, chars2]
-	
+
 	# wait to see if script was interrupted
 	await get_tree().process_frame
 
@@ -452,7 +456,7 @@ func _on_arrow_animation(chars1: Array, chars2: Array, immediate := false) -> vo
 		rect2.size.x = (rect2.size.x * chars2[1]) + 4
 
 	var rects := [rect1, rect2]
-	
+
 	_console_arrow_animation.highlight_rects = rects
 	_console_arrow_animation.initial_point = rect1.position + Vector2i(floori(rect1.size.x / 2.0), -5)
 	_console_arrow_animation.end_point = rect2.position + Vector2i(floori(rect2.size.x / 2.0), -5)

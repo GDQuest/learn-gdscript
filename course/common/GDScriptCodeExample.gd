@@ -11,12 +11,14 @@ const CODE_FONT := "res://ui/theme/fonts/font_code.tres"
 func _ready() -> void:
 	if get_theme_font("font").resource_path != CODE_FONT:
 		add_theme_font_override("font", load(CODE_FONT) as FontVariation)
-	Events.font_size_scale_changed.connect(_update_size)
 	context_menu_enabled = false
 	shortcut_keys_enabled = false
 	wrap_mode = TextEdit.LINE_WRAPPING_NONE
 	CodeEditorEnhancer.enhance(self)
 	CodeEditorEnhancer.prevent_editable(self)
+
+	if not Engine.is_editor_hint():
+		Events.font_size_scale_changed.connect(_update_size)
 
 
 func set_min_size(new_size: Vector2) -> void:

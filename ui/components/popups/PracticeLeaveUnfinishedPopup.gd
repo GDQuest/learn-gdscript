@@ -19,10 +19,8 @@ signal denied
 
 
 func _ready():
-	set_as_top_level(true)
-	show()
 	_root_container.custom_minimum_size = min_size
-	_root_container.size = _root_container.custom_minimum_size
+	_root_container.reset_size()
 	_root_container.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
 
 	_title_label.text = tr(title)
@@ -33,7 +31,10 @@ func _ready():
 
 	_cancel_button.pressed.connect(denied.emit)
 	_cancel_button.pressed.connect(hide)
-	hide.call_deferred()
+
+	if not Engine.is_editor_hint():
+		set_as_top_level(true)
+		hide.call_deferred()
 
 
 func _notification(what: int) -> void:
