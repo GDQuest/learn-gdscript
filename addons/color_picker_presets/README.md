@@ -25,9 +25,9 @@ The addon:
 
 ## ✓ Install
 
-1. Make a new folder at `res://addons/ColorPickerPresets/`.
-1. Copy the contents of this repository into `res://addons/ColorPickerPresets/`.
-1. Replace `res://addons/ColorPickerPresets/presets.hex` with your prefered version.
+1. Make a new folder at `res://addons/color_picker_presets/`.
+1. Copy the contents of this repository into `res://addons/color_picker_presets/`.
+1. Replace `res://addons/color_picker_presets/presets.hex` with your preferred version.
 1. Enable the addon from `Project > Project Settings... > Plugins`.
 1. Profit.
 
