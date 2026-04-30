@@ -15,6 +15,7 @@ const GlossaryPopup := preload("res://ui/components/GlossaryPopup.gd")
 
 const AUTOSCROLL_PADDING := 20
 const AUTOSCROLL_DURATION := 0.24
+const HEADER_FONT := "res://ui/theme/fonts/font_lesson_heading.tres"
 
 const COLOR_NOTE := Color(0.14902, 0.776471, 0.968627)
 
@@ -36,6 +37,7 @@ var _visible_index := -1
 var _quizzes_done := -1 # Start with -1 because we will always autoincrement at least once.
 var _quizz_count := 0
 var _integration_test_mode := false
+var _previous_paragraph: RichTextLabel
 
 var _build_commands := {
 	BBCodeParserData.Tag.TITLE: _make_title,
@@ -89,8 +91,9 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 		var node_type := child_node.tag
 		if _build_commands.has(node_type):
 			var new_instance: CanvasItem = (_build_commands[node_type] as Callable).call(child_node, course_index, lesson, user_profile)
-			_content_blocks.add_child(new_instance)
-			new_instance.hide()
+			if new_instance and new_instance.get_parent() != _content_blocks:
+				_content_blocks.add_child(new_instance)
+				new_instance.hide()
 
 	var highlighted_next := false
 	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
@@ -191,14 +194,19 @@ func _open_glossary_popup(meta: String) -> void:
 
 
 func _make_paragraph(node: BBCodeParser.ParseNode, _target_course_index: CourseIndex, _target_lesson: BBCodeParser.ParseNode, _user_profile: Profile) -> CanvasItem:
-	var instance: RichTextLabel = RichTextLabel.new()
-	instance.fit_content = true
-	instance.scroll_active = false
-	instance.bbcode_enabled = true
-	var text_content := BBCodeUtils.get_paragraph_text(node)
-	instance.text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(text_content))
+	var instance: RichTextLabel = _previous_paragraph
+	if not _previous_paragraph:
+		instance = RichTextLabel.new()
+		instance.fit_content = true
+		instance.scroll_active = false
+		instance.bbcode_enabled = true
+		instance.selection_enabled = true
+		instance.meta_clicked.connect(_open_glossary_popup)
+		_previous_paragraph = instance
 	
-	instance.meta_clicked.connect(_open_glossary_popup)
+	var text_content := BBCodeUtils.get_paragraph_text(node)
+	instance.text += TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(text_content))
+	
 	return instance
 
 
@@ -214,14 +222,16 @@ func _make_note(node: BBCodeParser.ParseNode, _target_course_index: CourseIndex,
 
 	_content_blocks.add_child(revealer)
 	revealer.add_child(_make_paragraph(node, _course_index, _lesson, _user_profile))
+	_previous_paragraph = null
 	return revealer
 
 
 func _make_title(node: BBCodeParser.ParseNode, _target_course_index: CourseIndex, _target_lesson: BBCodeParser.ParseNode, _user_profile: Profile) -> CanvasItem:
-	var instance := Label.new()
+	var instance: RichTextLabel = _previous_paragraph
+	if _previous_paragraph == null:
+		instance = RichTextLabel.new()
 	var text_content := BBCodeUtils.get_paragraph_text(node)
-	instance.text = TextUtils.tr_paragraph(text_content)
-	instance.theme_type_variation = &"LabelLessonHeading"
+	instance.text += "\n\n[font size=28 name='%s']%s[/font]\n\n" % [HEADER_FONT, TextUtils.tr_paragraph(text_content)]
 	return instance
 
 
@@ -248,12 +258,17 @@ func _make_quiz(node: BBCodeParser.ParseNode, course_index: CourseIndex, lesson:
 	instance.quiz_passed.connect(Events.quiz_completed.emit.bind(node))
 	instance.quiz_passed.connect(_reveal_up_to_next_quiz)
 	instance.quiz_skipped.connect(_reveal_up_to_next_quiz)
+	_previous_paragraph = null
 	return instance
 
 
 func _make_separator(_node: BBCodeParser.ParseNode, _target_course_index: CourseIndex, _target_lesson: BBCodeParser.ParseNode, _user_profile: Profile) -> CanvasItem:
-	var instance := HSeparator.new()
-	return instance
+	if _previous_paragraph:
+		_previous_paragraph.text += "\n[hr]\n"
+		return _previous_paragraph
+	else:
+		var instance := HSeparator.new()
+		return instance
 
 
 func _make_visual(node: BBCodeParser.ParseNode, _target_course_index: CourseIndex, _target_lesson: BBCodeParser.ParseNode, _user_profile: Profile) -> CanvasItem:
@@ -290,6 +305,7 @@ func _make_visual(node: BBCodeParser.ParseNode, _target_course_index: CourseInde
 			),
 		)
 		return null
+	_previous_paragraph = null
 	return instance
 
 
