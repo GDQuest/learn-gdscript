@@ -9,6 +9,61 @@ func _init(student_class: GDClassNode) -> void:
 	_student_class = student_class
 
 
+func get_function_named(name: StringName) -> GDFunctionNode:
+	if _student_class.has_function(name):
+		return _student_class.get_member(name).get_as_function_node()
+	return null
+
+
+func get_function_parameter_name(function: GDFunctionNode, index: int) -> StringName:
+	if index >= function.get_parameters().size():
+		return &""
+	return function.get_parameters()[index].get_identifier().name
+
+
+func get_statement_call_named(function_node: GDFunctionNode, name: StringName, starting_from_index := 0) -> GDCallNode:
+	var statements := function_node.get_body().get_statements()
+	for i: int in range(starting_from_index, statements.size()):
+		var call_statement: GDCallNode = statements[i] as GDCallNode
+		if call_statement and call_statement.get_function_name() == name:
+			return call_statement
+	return null
+
+
+func statement_is_call_named(statement: GDNode, name: StringName) -> bool:
+	return statement.get_type() == GDNode.CALL and (statement as GDCallNode).get_function_name() == name
+
+
+func call_has_argument_identifier(call_node: GDCallNode, parameter_index: int, name: StringName = &"") -> bool:
+	var arguments := call_node.get_arguments()
+	if parameter_index >= arguments.size():
+		return false
+	var argument := arguments[parameter_index] as GDIdentifierNode
+	if not argument:
+		return false
+	return argument.get_name() == name if name else true
+
+
+func call_has_argument_x_operated_by_identifier(call_node: GDCallNode, parameter_index: int, operator: GDBinaryOpNode.OpType, operand: StringName, value: Variant) -> bool:
+	var arguments := call_node.get_arguments()
+	if parameter_index >= arguments.size():
+		return false
+	var argument := arguments[parameter_index] as GDBinaryOpNode
+	if not argument or argument.get_operation() != operator:
+		return false
+	var left := argument.get_left_operand()
+	var right := argument.get_right_operand()
+	var ident: GDIdentifierNode
+	var lit: GDLiteralNode
+	if left.get_type() == GDNode.IDENTIFIER:
+		ident = left
+		lit = right
+	else:
+		ident = right
+		lit = left
+	return ident.get_name() == operand and lit.get_value() == value
+
+
 func find_any_recursive_function() -> String:
 	var functions: Array[GDFunctionNode] = []
 	for member: GDMember in _student_class.get_members():
