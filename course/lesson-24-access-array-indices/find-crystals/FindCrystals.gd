@@ -61,7 +61,7 @@ func _on_item_used() -> void:
 func _complete_run() -> void:
 	print("used items: %s"%[used_items_names])
 	await get_tree().create_timer(0.5).timeout
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()
 
 
 func _use_item(item: Node) -> void:

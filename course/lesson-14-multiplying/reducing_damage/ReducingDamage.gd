@@ -12,7 +12,7 @@ var max_health = 100
 func take_damage(amount):
 	if level > 2:
 		amount *= 0.5
-	
+
 	health -= amount
 
 	if health < 0:
@@ -25,7 +25,7 @@ func _run():
 	_health_bar.set_health(health)
 	_animation_tree.travel("damage")
 	await get_tree().create_timer(0.5).timeout
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()
 
 
 func reset():

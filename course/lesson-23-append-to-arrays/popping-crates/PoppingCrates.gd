@@ -27,10 +27,10 @@ func _run() -> void:
 	run()
 	index = _initial_crates.size() -1
 	_pop_next()
-	
+
 
 func _complete_run() -> void:
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()
 
 func _pop_next():
 	if index < crates.size():
@@ -41,13 +41,13 @@ func _pop_next():
 		print("popping crate %s '%s'"%[index, crate_name])
 		crate.use()
 		index -= 1
-	
+
 
 func reset():
 	crates = _initial_crates.duplicate()
 	index =  _initial_crates.size()
 	_restore_next()
-	
+
 func _restore_next():
 	index -= 1
 	if index < 0:

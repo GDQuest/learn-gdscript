@@ -17,7 +17,7 @@ func _run() -> void:
 	heal(_healing)
 	_update_robot()
 	await get_tree().create_timer(1.0).timeout
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()
 
 
 func _update_robot() -> void:

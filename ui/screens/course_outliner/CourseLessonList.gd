@@ -51,4 +51,4 @@ func _on_item_selected(lesson_index: int) -> void:
 
 		item_node.is_selected = item_node.lesson_index == lesson_index
 
-	emit_signal("lesson_selected", lesson_index)
+	lesson_selected.emit(lesson_index)

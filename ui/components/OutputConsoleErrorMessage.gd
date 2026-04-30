@@ -82,13 +82,13 @@ func _update_visuals() -> void:
 func _location_row_gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
 	if mb and mb.button_index == MOUSE_BUTTON_LEFT and not mb.pressed:
-		emit_signal("show_code_requested", origin_file, origin_line, origin_char)
+		show_code_requested.emit(origin_file, origin_line, origin_char)
 
 
 func _external_label_gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
 	if mb and mb.button_index == MOUSE_BUTTON_LEFT and not mb.pressed:
-		emit_signal("external_explain_requested")
+		external_explain_requested.emit()
 
 
 func set_message_severity(value: int) -> void:
@@ -122,4 +122,4 @@ func set_origin_char(value: int) -> void:
 
 
 func _on_explain_pressed() -> void:
-	emit_signal("explain_error_requested", message_code, message_text)
+	explain_error_requested.emit(message_code, message_text)

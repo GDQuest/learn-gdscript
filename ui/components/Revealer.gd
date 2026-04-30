@@ -237,7 +237,7 @@ func set_is_expanded(value: bool) -> void:
 
 	is_expanded = value
 	if is_expanded:
-		emit_signal("expanded")
+		expanded.emit()
 
 	if is_inside_tree():
 		_toggle_button.button_pressed = is_expanded

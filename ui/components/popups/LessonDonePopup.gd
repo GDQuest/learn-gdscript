@@ -58,4 +58,4 @@ func popup_centered() -> void:
 
 func _on_button_pressed() -> void:
 	hide()
-	emit_signal("accepted")
+	accepted.emit()

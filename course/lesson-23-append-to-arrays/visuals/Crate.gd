@@ -48,7 +48,7 @@ func set_random_texture():
 
 func randomize_texture():
 	set_texture(textures[randi() % textures.size()])
-	
+
 func use() -> void:
 	anim_player.play("use")
 
@@ -67,11 +67,11 @@ func _on_animation_finished(animation_name: String) -> void:
 		return
 	if _animation_backwards:
 		_animation_backwards = false
-		emit_signal("restored")
+		restored.emit()
 		return
 	if hide_after_animation:
 		hide()
-	emit_signal("used")
+	used.emit()
 
 
 func set_texture(new_texture: Texture2D) -> void:
@@ -79,7 +79,7 @@ func set_texture(new_texture: Texture2D) -> void:
 	if not is_inside_tree():
 		await self.ready
 	texture_rect.texture = new_texture
-	
+
 func get_texture() -> Texture2D:
 	return texture
 

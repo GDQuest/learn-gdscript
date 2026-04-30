@@ -168,7 +168,7 @@ func step() -> void:
 		_current_coroutine.step_requested.emit()
 		if not _current_coroutine:
 			_gdscript_text_edit.highlight_current_line = false
-	emit_signal("code_updated")
+	code_updated.emit()
 
 
 func _finish_coroutine() -> void:
@@ -182,7 +182,7 @@ func reset() -> void:
 	if _scene_instance.has_method("reset"):
 		_scene_instance.call("reset")
 	_center_scene_instance()
-	emit_signal("code_updated")
+	code_updated.emit()
 
 
 func set_code(new_gdscript_code: String) -> void:
@@ -289,7 +289,7 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 		new_scene_instance.connect("animate_arrow_requested", _on_arrow_animation)
 
 	_scene_instance = new_scene_instance
-	emit_signal("scene_instance_set")
+	scene_instance_set.emit()
 	_scene_instance.show_behind_parent = true
 	_frame_container.add_child(_scene_instance)
 	_center_scene_instance()

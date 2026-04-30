@@ -69,7 +69,7 @@ func _animate_progress() -> void:
 
 	if _progress_bar.value == progress_value:
 		_state = State.IDLE
-		emit_signal("loading_finished")
+		loading_finished.emit()
 		return
 
 	if _scene_tween:
@@ -81,19 +81,19 @@ func _animate_progress() -> void:
 
 func _on_tween_finished() -> void:
 	if _state == State.FADING_IN:
-		emit_signal("faded_in")
+		faded_in.emit()
 
 		_state = State.IDLE
 		_animate_progress()
 	elif _state == State.FADING_OUT:
-		emit_signal("faded_out")
+		faded_out.emit()
 
 		_state = State.IDLE
 		visible = false
 
 	elif _state == State.LOADING:
 		if _progress_bar.value == _progress_bar.max_value:
-			emit_signal("loading_finished")
+			loading_finished.emit()
 
 		_state = State.IDLE
 		fade_out()

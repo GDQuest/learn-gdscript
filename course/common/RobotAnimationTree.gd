@@ -10,15 +10,11 @@ extends AnimationTree
 
 func _ready() -> void:
 	active = true
-	_animation_player.animation_finished.connect(_on_animation_finished)
+	_animation_player.animation_finished.connect(animation_finished.emit)
 
 
 func travel(animation_name: String) -> void:
 	_state_machine.travel(animation_name)
-
-
-func _on_animation_finished() -> void:
-	emit_signal("animation_finished")
 
 
 func get_current_animation() -> String:

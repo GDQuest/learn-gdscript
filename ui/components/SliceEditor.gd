@@ -81,11 +81,11 @@ func _ready() -> void:
 		if child is ScrollBar:
 			remove_child(child)
 			add_child(child)
-	
+
 	add_child(errors_overlay_message)
 	errors_overlay_message.set_as_top_level(true)
 	errors_overlay_message.hide()
-	
+
 
 	text_changed.connect(_on_text_changed)
 	draw.connect(_update_overlays)
@@ -210,8 +210,8 @@ func _on_text_changed() -> void:
 
 
 func _on_scrollbar_value_changed(value: float, direction: int) -> void:
-	var vec2 = Vector2(0, value) if direction == SCROLL_DIR.VERTICAL else Vector2(value, 0)
-	emit_signal("scroll_changed", vec2)
+	var vec2 := Vector2(0, value) if direction == SCROLL_DIR.VERTICAL else Vector2(value, 0)
+	scroll_changed.emit(vec2)
 
 
 # Recreates the overlays at the correct position after the underlying data has

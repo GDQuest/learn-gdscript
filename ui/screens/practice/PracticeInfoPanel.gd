@@ -100,7 +100,7 @@ func set_tests_status(test_result: PracticeTester.TestResult, script_file_name: 
 		else:
 			await checkmark.marking_finished
 
-	emit_signal("tests_updated")
+	tests_updated.emit()
 
 
 func set_title(new_title: String) -> void:

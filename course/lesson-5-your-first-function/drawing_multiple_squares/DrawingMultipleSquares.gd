@@ -36,4 +36,4 @@ func draw_three_squares():
 
 func _complete_run() -> void:
 	await get_tree().create_timer(0.5).timeout
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()

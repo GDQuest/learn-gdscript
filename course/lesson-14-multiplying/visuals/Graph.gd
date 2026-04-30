@@ -39,7 +39,7 @@ func _ready() -> void:
 	_line.line_2d.default_color = Color.WHITE
 	_line.line_end_moved.connect(_change_sprite_position)
 	add_child(_line)
-	
+
 	_last_point = _points[0] + _draw_offset
 
 
@@ -60,7 +60,7 @@ func reset() -> void:
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
-	
+
 	queue_redraw()
 
 
@@ -74,12 +74,12 @@ func _draw() -> void:
 
 	draw_line(Vector2.ZERO + draw_offset, Vector2(graph_size.x, 0) + draw_offset, COLOR_GREY, 4)
 	draw_line(Vector2.ZERO + draw_offset, Vector2(0, -graph_size.y) + draw_offset, COLOR_GREY, 4)
-	
+
 	for i in range(graph_size.x / axis_increments):
 		draw_circle(Vector2(axis_increments + i * axis_increments, 0) + draw_offset, 4, Color.WHITE)
 	for i in range(graph_size.y / axis_increments):
 		draw_circle(-Vector2(0, axis_increments + i * axis_increments) + draw_offset, 4, Color.WHITE)
-	
+
 	if _last_point != Vector2(0, 0):
 		draw_circle(_last_point, 4, Color.WHITE)
 
@@ -120,7 +120,7 @@ class Polygon:
 
 	func next() -> void:
 		if points.size() - _current_point_index < 2:
-			emit_signal("animation_finished")
+			animation_finished.emit()
 			return
 
 		var starting_point: Vector2 = points[_current_point_index]
@@ -147,7 +147,7 @@ class Polygon:
 		var new_points := _current_points
 		new_points.push_back(point)
 		line_2d.points = new_points
-		emit_signal("line_end_moved", point + position)
+		line_end_moved.emit(point + position)
 
 	# Returns the local bounds of the polygon. That is to say, it only takes the
 	# point into account in local space, but not the polygon's `position`.

@@ -66,7 +66,7 @@ We use special comment regions to mark the reference solution code. These region
 ```gdscript
 # EXPORT slice_name
 var test = 42
- 
+
 func run():
 	print(test)
 # /EXPORT slice_name
@@ -79,15 +79,15 @@ Here's an example from MakeCharacterVisible.gd:
 ```gdscript
 extends Node2D
 
-onready var _animation_tree := find_node("AnimationTree")
+@onready var _animation_tree := find_node("AnimationTree")
 
 func _ready():
     _animation_tree.travel("saying_hi")
 
 func _run():
     run()
-    yield(get_tree().create_timer(1.0), "timeout")
-    Events.emit_signal("practice_run_completed")
+    await get_tree().create_timer(1.0).timeout
+    Events.practice_run_completed.emit()
 
 # EXPORT show
 func run():

@@ -213,14 +213,14 @@ class ErrorOverlay:
 
 		if _hovered_region == -1 and not region_has_point == -1:
 			var reference_position = _lines[i].global_position
-			emit_signal("region_entered", reference_position)
+			region_entered.emit(reference_position)
 		elif not _hovered_region == -1 and region_has_point == -1:
-			emit_signal("region_exited")
+			region_exited.emit()
 		else:
-			emit_signal("region_exited")
+			region_exited.emit()
 
 			var reference_position = _lines[i].global_position
-			emit_signal("region_entered", reference_position)
+			region_entered.emit(reference_position)
 
 		_hovered_region = region_has_point
 		return true

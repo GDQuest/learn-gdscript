@@ -22,7 +22,7 @@ func reset_robot():
 func _run() -> void:
 	reset_robot()
 	await get_tree().create_timer(1).timeout
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()
 	_animation_tree.travel("saying_hi")
 
 func reset():

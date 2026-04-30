@@ -27,12 +27,12 @@ func remove_cells():
 
 
 func copy_cells():
-	
+
 	for cell_pos: Vector2i in tilemap.get_used_cells():
 		var cell := tilemap.get_cell_source_id(cell_pos)
 		var tile_alternative := tilemap.get_cell_alternative_tile(cell_pos)
 		var atlas_coords := tilemap.get_cell_atlas_coords(cell_pos)
-		
+
 		var sub_tilemap := TileMapLayer.new()
 		var is_not_in_position := false
 		if cell == 9:
@@ -41,7 +41,7 @@ func copy_cells():
 			is_not_in_position = true
 		sub_tilemap.tile_set = tilemap.tile_set
 		sub_tilemap.set_cell(Vector2i(0, 0), cell, atlas_coords, tile_alternative)
-		
+
 		var sprite := Sprite2D.new()
 		sprite.position = tilemap.map_to_local(cell_pos) - Vector2(tilemap.tile_set.tile_size/2)
 		if is_not_in_position:
@@ -75,7 +75,7 @@ func _realign_selected_sprites() -> void:
 
 func _complete_run() -> void:
 	await get_tree().create_timer(0.5).timeout
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()
 
 
 func _run():

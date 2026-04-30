@@ -4,7 +4,7 @@ extends Node2D
 
 func _ready():
 	await get_tree().create_timer(1.0).timeout
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()
 
 # EXPORT wrong_code
 func this_code_is_wrong():

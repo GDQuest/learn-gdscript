@@ -42,7 +42,7 @@ func _draw() -> void:
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
 	if mb and mb.button_index == MOUSE_BUTTON_LEFT and not mb.pressed:
-		emit_signal("selected")
+		selected.emit()
 
 
 func set_lesson_index(value: int) -> void:

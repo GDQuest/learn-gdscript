@@ -108,4 +108,4 @@ func _animate_margin(control: Control, margin_name: String, to_value: float, dur
 
 func _on_fade_out_completed() -> void:
 	hide()
-	emit_signal("accepted")
+	accepted.emit()

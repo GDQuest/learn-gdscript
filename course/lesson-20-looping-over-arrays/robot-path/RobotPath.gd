@@ -41,7 +41,7 @@ func _run():
 	run()
 	queue_redraw()
 	await robot.goal_reached
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()
 
 
 # Draws a board grid centered on the node + motion path

@@ -33,13 +33,13 @@ func _ready() -> void:
 func _run():
 	run()
 	await get_tree().create_timer(0.5).timeout
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()
 
 
 # EXPORT run
 func run():
-	# Note: Putting each vector on a 
-	# separate line is just for 
+	# Note: Putting each vector on a
+	# separate line is just for
 	# readability. It's optional.
 	select_units([
 		Vector2(1, 0),

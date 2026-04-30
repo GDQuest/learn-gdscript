@@ -149,7 +149,7 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 
 	if _integration_test_mode:
 		await get_tree().process_frame
-		emit_signal("lesson_displayed")
+		lesson_displayed.emit()
 		return
 
 	# Wait until the lesson is considered loaded by the system, and then update the size of

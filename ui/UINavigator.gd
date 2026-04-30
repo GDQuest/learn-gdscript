@@ -204,9 +204,9 @@ func _navigate_to() -> void:
 	_course_outliner.hide()
 
 	if target.tag == BBCodeParserData.Tag.PRACTICE:
-		Events.emit_signal("practice_started", target)
+		Events.practice_started.emit(target)
 	elif target.tag == BBCodeParserData.Tag.LESSON:
-		Events.emit_signal("lesson_started", target)
+		Events.lesson_started.emit(target)
 
 
 func _on_practice_next_requested(practice: BBCodeParser.ParseNode) -> void:
@@ -285,7 +285,7 @@ func _on_practice_requested(practice: BBCodeParser.ParseNode) -> void:
 
 func _on_lesson_completed() -> void:
 	var lesson := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as BBCodeParser.ParseNode
-	Events.emit_signal("lesson_completed", lesson)
+	Events.lesson_completed.emit(lesson)
 
 	_lesson_index += 1
 	if _lesson_index >= _lesson_count:
@@ -299,7 +299,7 @@ func _on_lesson_completed() -> void:
 
 
 func _on_course_completed() -> void:
-	Events.emit_signal("course_completed", course_index)
+	Events.course_completed.emit(course_index)
 	hide()
 
 
@@ -315,7 +315,7 @@ func _transition_to(screen: Control, from_screen: Control = null, direction_in :
 		screen.show()
 
 		await get_tree().process_frame
-		emit_signal("transition_completed")
+		transition_completed.emit()
 		return
 
 	if screen.get_parent() == null:
@@ -339,7 +339,7 @@ func _transition_to(screen: Control, from_screen: Control = null, direction_in :
 		from_screen.hide()
 		_screen_container.remove_child(from_screen)
 
-	emit_signal("transition_completed")
+	transition_completed.emit()
 
 
 func _animate_screen(screen: Control, to_position: float) -> void:

@@ -64,7 +64,7 @@ func scale_all_font_sizes(size_scale: int, and_save: bool = true) -> void:
 		var current_profile := UserProfiles.get_profile()
 		current_profile.font_size_scale = size_scale
 		current_profile.save()
-		Events.emit_signal("font_size_scale_changed", size_scale)
+		Events.font_size_scale_changed.emit(size_scale)
 
 
 func set_lower_contrast(lower_contrast: bool, and_save: bool = true) -> void:

@@ -16,7 +16,7 @@ func _run() -> void:
 		_label.text = "robot_name"
 	await get_tree().create_timer(1.0).timeout
 	_animation_tree.travel("saying_hi")
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()
 
 
 # EXPORT print_string

@@ -36,7 +36,7 @@ func _run():
 	clear_drawing()
 	run()
 	await get_tree().create_timer(0.5).timeout
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()
 
 
 func clear_drawing():

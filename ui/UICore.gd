@@ -63,7 +63,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		event.is_action_pressed("toggle_full_screen")
 		and not event.is_action_pressed("toggle_distraction_free_mode")
 	):
-		Events.emit_signal("fullscreen_toggled")
+		Events.fullscreen_toggled.emit()
 		accept_event()
 
 

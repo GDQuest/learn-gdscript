@@ -122,7 +122,7 @@ func _on_external_requested() -> void:
 
 
 func _on_code_requested(file_name: String, line: int, character: int) -> void:
-	emit_signal("reference_clicked", file_name, line, character)
+	reference_clicked.emit(file_name, line, character)
 
 
 func _on_explain_requested(error_code: int, error_message: String) -> void:

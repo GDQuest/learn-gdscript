@@ -56,11 +56,11 @@ func set_button_continue(enable: bool = true) -> void:
 
 
 func _on_outliner_pressed() -> void:
-	emit_signal("course_requested", true)
+	course_requested.emit(true)
 
 
 func _on_start_requested() -> void:
-	emit_signal("course_requested", false)
+	course_requested.emit(false)
 
 
 func _on_animation_finished(_anim_name: String) -> void:

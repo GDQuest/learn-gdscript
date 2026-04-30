@@ -173,15 +173,15 @@ func set_locked_message(message: String) -> void:
 
 func _on_text_changed() -> void:
 	_restore_button.disabled = false
-	emit_signal("text_changed", slice_editor.text)
+	text_changed.emit(slice_editor.text)
 
 
 func _on_restore_button_pressed() -> void:
 	set_text(_initial_text)
 	unlock_editor()
-	emit_signal("action_taken", ACTIONS.RESTORE)
+	action_taken.emit(ACTIONS.RESTORE)
 	_restore_button.disabled = true
 
 
 func _on_run_button_pressed() -> void:
-	emit_signal("action_taken", ACTIONS.RUN)
+	action_taken.emit(ACTIONS.RUN)

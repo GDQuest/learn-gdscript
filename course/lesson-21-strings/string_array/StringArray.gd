@@ -11,7 +11,7 @@ func _run() -> void:
 	_animation_queue.clear()
 	run()
 	play_combo()
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()
 
 # We use this internal queue because we need to yield between animations and
 # we can't have the student do that in their for loop at this stage.

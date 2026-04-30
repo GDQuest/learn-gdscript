@@ -23,7 +23,7 @@ func _run() -> void:
 	_robot.cell = cell
 	_update_label()
 	await get_tree().create_timer(0.5).timeout
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()
 
 
 # EXPORT move_to_end
@@ -36,7 +36,7 @@ func move_to_bottom():
 func reset() -> void:
 	_robot.cell = START_CELL
 	_update_label()
-	
+
 
 func _draw() -> void:
 	for x in range(board_size.x):
@@ -47,5 +47,5 @@ func _draw() -> void:
 func _update_label() -> void:
 	if not _label:
 		await self.ready
-	
+
 	_label.text = "cell = Vector2%s" % [_robot.cell]

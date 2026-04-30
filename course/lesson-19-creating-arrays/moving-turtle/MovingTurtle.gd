@@ -14,8 +14,8 @@ var board_size_px := cell_size * board_size
 var _label_container := Control.new()
 
 # EXPORT path
-# Note: Putting each vector on a 
-# separate line is just for 
+# Note: Putting each vector on a
+# separate line is just for
 # readability. It's optional.
 var turtle_path = [
 	Vector2(1, 0),
@@ -52,7 +52,7 @@ func _run():
 		path.append(calculate_cell_position(cell))
 	turtle.move(path)
 	await turtle.goal_reached
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()
 
 
 # Draws a board grid centered on the node

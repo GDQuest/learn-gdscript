@@ -463,7 +463,7 @@ func _test_student_code() -> void:
 		_practice_completed = true
 
 		if not _practice_solution_used:
-			Events.emit_signal("practice_completed", _practice)
+			Events.practice_completed.emit(_practice)
 
 		_practice_done_popup.show()
 		_practice_done_popup.fade_in(_game_container)
@@ -473,7 +473,7 @@ func _test_student_code() -> void:
 	if _practice_completed:
 		_code_editor.set_continue_allowed(true)
 
-	emit_signal("test_student_code_completed")
+	test_student_code_completed.emit()
 
 
 func _reset_practice() -> void:
@@ -625,14 +625,14 @@ func _on_previous_requested() -> void:
 	if not _practice:
 		return
 
-	Events.emit_signal("practice_previous_requested", _practice)
+	Events.practice_previous_requested.emit(_practice)
 
 
 func _on_next_requested() -> void:
 	if not _practice:
 		return
 
-	Events.emit_signal("practice_next_requested", _practice)
+	Events.practice_next_requested.emit(_practice)
 
 
 func _on_list_requested() -> void:
@@ -641,7 +641,7 @@ func _on_list_requested() -> void:
 
 func _on_autotimer_timeout() -> void:
 	if _run_tests_requested:
-		Events.emit_signal("practice_run_completed")
+		Events.practice_run_completed.emit()
 
 
 func _on_current_screen_unload_requested() -> void:

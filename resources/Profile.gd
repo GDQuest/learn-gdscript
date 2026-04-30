@@ -181,7 +181,7 @@ func reset_course_progress(course_id: String) -> void:
 
 func set_scroll_sensitivity(amount: float) -> void:
 	scroll_sensitivity = max(amount, 0.1)
-	emit_signal("scroll_sensitivity_changed", scroll_sensitivity)
+	scroll_sensitivity_changed.emit(scroll_sensitivity)
 
 
 func set_framerate_limit(limit: int) -> void:
@@ -190,4 +190,4 @@ func set_framerate_limit(limit: int) -> void:
 		"The framerate limit must be one of: " + str(VALID_FRAMERATE_LIMITS),
 	)
 	framerate_limit = limit
-	emit_signal("framerate_limit_changed", framerate_limit)
+	framerate_limit_changed.emit(framerate_limit)

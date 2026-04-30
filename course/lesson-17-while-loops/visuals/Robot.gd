@@ -12,7 +12,7 @@ func set_cell(new_cell: Vector2) -> void:
 	cell = new_cell
 	cell.x = min(cell.x, grid_size_px.x / cell_size - 1)
 	position = cell * cell_size + Vector2(cell_size/2, 12) - grid_size_px / 2.0
-	emit_signal("cell_changed")
+	cell_changed.emit()
 
 
 func get_cell() -> Vector2:

@@ -24,7 +24,7 @@ func _run():
 		level_up()
 		_animation_tree.travel("level")
 		await _animation_tree.animation_finished
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()
 
 func reset():
 	scale = Vector2.ONE

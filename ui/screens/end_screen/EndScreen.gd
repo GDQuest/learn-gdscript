@@ -24,7 +24,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_outliner_button_pressed() -> void:
-	NavigationManager.emit_signal("outliner_navigation_requested")
+	NavigationManager.outliner_navigation_requested.emit()
 	hide()
 
 

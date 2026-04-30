@@ -23,7 +23,7 @@ func run():
 	position.x = 100
 	position.y = 100
 	draw_rectangle(100, 100)
-	
+
 	position.x = 300
 	draw_rectangle(100, 100)
 
@@ -40,4 +40,4 @@ func _ready() -> void:
 
 func _complete_run() -> void:
 	await get_tree().create_timer(0.5).timeout
-	Events.emit_signal("practice_run_completed")
+	Events.practice_run_completed.emit()

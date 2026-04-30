@@ -155,7 +155,7 @@ func _show_answer(gave_correct_answer := true) -> void:
 	fade_tween.tween_property(_result_container, "modulate:a", 1.0, FADE_IN_TIME).from(0.0)
 
 	if gave_correct_answer:
-		emit_signal("quiz_passed")
+		quiz_passed.emit()
 	else:
 		if _quiz_data.get_answer_count() == 1:
 			_result_label.text = "The answer was:"
@@ -163,7 +163,7 @@ func _show_answer(gave_correct_answer := true) -> void:
 			_result_label.text = "The answers were:"
 		_correct_answer_label.show()
 		_correct_answer_label.text = _quiz_data.get_correct_answer_string()
-		emit_signal("quiz_skipped")
+		quiz_skipped.emit()
 
 
 func _change_rect_size_to(new_size: Vector2, instant := false) -> void:

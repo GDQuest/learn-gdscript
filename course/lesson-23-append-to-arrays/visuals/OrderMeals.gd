@@ -33,7 +33,7 @@ func add_order():
 	if _wait_queue.is_empty():
 		_add_timer.stop()
 		return
-	
+
 	var order = _wait_queue.pop_back()
 	var meal := Meal.new(order.name, order.time)
 	meal.meal_ready.connect(_on_meal_ready)
@@ -64,7 +64,7 @@ func reset():
 
 	for child in _waiting_orders_box.get_children():
 		child.queue_free()
-	
+
 	for child in _completed_orders_box.get_children():
 		child.queue_free()
 
@@ -78,13 +78,13 @@ class Meal extends VBoxContainer:
 	const TEXTURE_UNCHECKED := preload("res://ui/icons/checkbox_empty.png")
 	const TEXTURE_CHECKED := preload("res://ui/icons/checkbox_checked.png")
 	signal meal_ready
-	
+
 	var progress := ProgressBar.new()
 	var scene_tween: Tween
 	var texture := TextureRect.new()
 	var time := 0.0
 	var _meal_is_ready := false
-	
+
 	func _init(init_text: String, init_time: float = 0) -> void:
 		var label := Label.new()
 		var container := HBoxContainer.new()
@@ -114,6 +114,6 @@ class Meal extends VBoxContainer:
 			return
 		_meal_is_ready = true
 		texture.texture = TEXTURE_CHECKED
-		emit_signal("meal_ready")
+		meal_ready.emit()
 		scene_tween = create_tween()
 		scene_tween.tween_property(self, "modulate:a", 0.0, 1).from(modulate.a).set_ease(Tween.EASE_IN)

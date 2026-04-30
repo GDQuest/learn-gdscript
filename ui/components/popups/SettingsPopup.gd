@@ -100,7 +100,7 @@ func _on_apply_settings() -> void:
 		current_profile.font_size_scale = size_scale
 		current_profile.dyslexia_font = dyslexia_font
 		current_profile.save()
-		Events.emit_signal("font_size_scale_changed", size_scale)
+		Events.font_size_scale_changed.emit(size_scale)
 
 	if _lower_contrast.button_pressed != current_profile.lower_contrast:
 		ThemeManager.set_lower_contrast(_lower_contrast.button_pressed)
