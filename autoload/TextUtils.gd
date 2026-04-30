@@ -47,7 +47,7 @@ func _init() -> void:
 	_REGEXES["func"] = RegEx.create_from_string(r"(?<func>\bfunc\b)")
 	_REGEXES["number"] = RegEx.create_from_string(r"(?<number>-?\d+(\.\d+)?)")
 	_REGEXES["string"] = RegEx.create_from_string("(?<string>[\"'].+[\"'])")
-	_REGEXES["symbol"] = RegEx.create_from_string("(?<symbol>[a-zA-Z][a-zA-Z0-9_]+|[a-zA-Z])")
+	_REGEXES["symbol"] = RegEx.create_from_string("(?<symbol>[a-zA-Z_][a-zA-Z0-9_]+|[a-zA-Z])")
 	_REGEXES["format"] = RegEx.create_from_string("[\"\\-']?\\d+(\\.\\d+)?[\"']?|[\"'].+[\"']|[a-zA-Z0-9_]+")
 
 	_REGEX_REPLACE_MAP = {
