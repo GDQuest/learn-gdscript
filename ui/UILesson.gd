@@ -6,15 +6,17 @@
 class_name UILesson
 extends UINavigatablePage
 
-const ContentBlockScene := preload("screens/lesson/UIContentBlock.tscn")
 const QuizInputFieldScene := preload("screens/lesson/quizzes/UIQuizInputField.tscn")
 const QuizChoiceScene := preload("screens/lesson/quizzes/UIQuizChoice.tscn")
 const PracticeButtonScene := preload("screens/lesson/UIPracticeButton.tscn")
+const RevealerScene := preload("res://ui/components/Revealer.tscn")
 
 const GlossaryPopup := preload("res://ui/components/GlossaryPopup.gd")
 
 const AUTOSCROLL_PADDING := 20
 const AUTOSCROLL_DURATION := 0.24
+
+const COLOR_NOTE := Color(0.14902, 0.776471, 0.968627)
 
 @export var test_lesson: String
 @export var _scroll_container: ScrollContainer
@@ -35,7 +37,7 @@ var _quizzes_done := -1 # Start with -1 because we will always autoincrement at 
 var _quizz_count := 0
 var _integration_test_mode := false
 
-var _base_text_font_size := preload("res://ui/theme/fonts/font_text.tres").base_font.msdf_size
+var _base_text_font_size: int = preload("res://ui/theme/fonts/font_text.tres").base_font.msdf_size
 
 @onready var _start_content_width := _content_container.size.x
 
@@ -73,17 +75,40 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 	_title.text = tr(BBCodeUtils.get_lesson_title(lesson))
 	var user_profile := UserProfiles.get_profile()
 
-	var block_index := 0
 	for child_node: BBCodeParser.ParseNode in lesson.children:
 		var node_type := child_node.tag
 		match node_type:
-			BBCodeParserData.Tag.PARAGRAPH:
-				var instance: UIContentBlock = ContentBlockScene.instantiate()
+			BBCodeParserData.Tag.TITLE:
+				var instance := Label.new()
 				_content_blocks.add_child(instance)
-				instance.setup(child_node, lesson, block_index)
-				instance.glossary_entry_clicked.connect(_open_glossary_popup)
+				var text_content := BBCodeUtils.get_paragraph_text(child_node)
+				instance.text = TextUtils.tr_paragraph(text_content)
+				instance.theme_type_variation = &"LabelLessonHeading"
+			BBCodeParserData.Tag.NOTE, BBCodeParserData.Tag.PARAGRAPH:
+				var instance: RichTextLabel = RichTextLabel.new()
+				instance.fit_content = true
+				instance.scroll_active = false
+				instance.bbcode_enabled = true
+				var text_content := BBCodeUtils.get_paragraph_text(child_node)
+				instance.text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(text_content))
+				
+				instance.meta_clicked.connect(_open_glossary_popup)
+				
+				if node_type == BBCodeParserData.Tag.NOTE:
+					var revealer := RevealerScene.instantiate() as Revealer
+					revealer.title_panel = preload("res://ui/theme/styles/revealer_notes_title.tres")
+					revealer.title_panel_expanded = preload("res://ui/theme/styles/revealer_notes_title_expanded.tres")
+					revealer.content_panel = preload("res://ui/theme/styles/revealer_notes_panel.tres")
+
+					revealer.title_font_color = COLOR_NOTE
+					var title := BBCodeUtils.get_note_title(child_node)
+					revealer.title = tr("Learn More") if title.is_empty() else tr(title)
+
+					_content_blocks.add_child(revealer)
+					revealer.add_child(instance)
+				else:
+					_content_blocks.add_child(instance)
 				instance.hide()
-				block_index += 1
 			BBCodeParserData.Tag.QUIZ_CHOICE, BBCodeParserData.Tag.QUIZ_INPUT:
 				var scene := (
 					QuizChoiceScene if node_type == BBCodeParserData.Tag.QUIZ_CHOICE
@@ -109,19 +134,45 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 				instance.quiz_passed.connect(Events.quiz_completed.emit.bind(child_node))
 				instance.quiz_passed.connect(_reveal_up_to_next_quiz)
 				instance.quiz_skipped.connect(_reveal_up_to_next_quiz)
-				block_index += 1
-			BBCodeParserData.Tag.PRACTICE, BBCodeParserData.Tag.TITLE, BBCodeParserData.Tag.SEPARATOR:
+			BBCodeParserData.Tag.PRACTICE, BBCodeParserData.Tag.SEPARATOR:
 				# handled separately or used to enhance other tags. no processing
-				block_index += 1
-			_:
-				# Handles the remaining content-producing tags: VISUAL and NOTE.
-				if child_node.tag in BBCodeParserData.CONTENT_PRODUCING_TAGS:
-					var instance: UIContentBlock = ContentBlockScene.instantiate()
-					_content_blocks.add_child(instance)
-					instance.setup(child_node, lesson, block_index)
-					instance.glossary_entry_clicked.connect(_open_glossary_popup)
-					instance.hide()
-					block_index += 1
+				pass
+			BBCodeParserData.Tag.VISUAL:
+				var instance: CanvasItem = null
+				var path := BBCodeUtils.get_visual_path(child_node)
+				if path.is_empty():
+					continue
+
+				# If the path isn't absolute, we try to load the file from the current directory
+				if path.is_relative_path():
+					path = (child_node.bbcode_path as String).get_base_dir().path_join(path)
+				var resource := load(path)
+				if not resource:
+					printerr(
+						(
+							"ContentBlock visual element is not a valid resource. From path: "
+							+ path
+						),
+					)
+					return
+
+				if resource is Texture2D:
+					var texture_rect := TextureRect.new()
+					instance = texture_rect
+					texture_rect.texture = resource
+				elif resource is PackedScene:
+					instance = (resource as PackedScene).instantiate()
+				else:
+					printerr(
+						(
+							"ContentBlock visual element is not a Texture2D or a PackedScene. Loaded type: "
+							+ resource.get_class() + " From path: "
+							+ path
+						),
+					)
+					continue
+				_content_blocks.add_child(instance)
+				instance.hide()
 
 	var highlighted_next := false
 	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
