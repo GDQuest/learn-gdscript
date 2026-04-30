@@ -84,6 +84,7 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 				var text_content := BBCodeUtils.get_paragraph_text(child_node)
 				instance.text = TextUtils.tr_paragraph(text_content)
 				instance.theme_type_variation = &"LabelLessonHeading"
+				instance.hide()
 			BBCodeParserData.Tag.NOTE, BBCodeParserData.Tag.PARAGRAPH:
 				var instance: RichTextLabel = RichTextLabel.new()
 				instance.fit_content = true
@@ -106,9 +107,10 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 
 					_content_blocks.add_child(revealer)
 					revealer.add_child(instance)
+					revealer.hide()
 				else:
 					_content_blocks.add_child(instance)
-				instance.hide()
+					instance.hide()
 			BBCodeParserData.Tag.QUIZ_CHOICE, BBCodeParserData.Tag.QUIZ_INPUT:
 				var scene := (
 					QuizChoiceScene if node_type == BBCodeParserData.Tag.QUIZ_CHOICE
@@ -134,9 +136,10 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 				instance.quiz_passed.connect(Events.quiz_completed.emit.bind(child_node))
 				instance.quiz_passed.connect(_reveal_up_to_next_quiz)
 				instance.quiz_skipped.connect(_reveal_up_to_next_quiz)
-			BBCodeParserData.Tag.PRACTICE, BBCodeParserData.Tag.SEPARATOR:
-				# handled separately or used to enhance other tags. no processing
-				pass
+			BBCodeParserData.Tag.SEPARATOR:
+				var instance := HSeparator.new()
+				_content_blocks.add_child(instance)
+				instance.hide()
 			BBCodeParserData.Tag.VISUAL:
 				var instance: CanvasItem = null
 				var path := BBCodeUtils.get_visual_path(child_node)
@@ -173,6 +176,9 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 					continue
 				_content_blocks.add_child(instance)
 				instance.hide()
+			_: # like PRACTICE
+				# handled separately. no processing
+				pass
 
 	var highlighted_next := false
 	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
