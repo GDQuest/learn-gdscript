@@ -1,7 +1,7 @@
 # Adds smooth scrolling support to vertical ScrollContainer nodes.
 #
 # This works by moving a direct child of the container. See `_content`.
-@icon("smooth_scroll_container_icon.svg")
+@icon("res://ui/assets/nodes/smooth_scroll_container.svg")
 class_name SmoothScrollContainer
 extends ScrollContainer
 

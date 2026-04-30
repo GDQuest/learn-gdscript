@@ -1,6 +1,6 @@
 extends Panel
 
-const TEXTURE_PROCESSING := preload("robot_tutor_running_code.svg")
+const TEXTURE_PROCESSING := preload("res://ui/assets/robot_tutor_running_code.svg")
 
 @export var _texture_rect: TextureRect
 

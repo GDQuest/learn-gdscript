@@ -1,5 +1,5 @@
 @tool
-@icon("./Revealer.svg")
+@icon("res://ui/assets/nodes/revealer.svg")
 class_name Revealer
 extends Container
 
