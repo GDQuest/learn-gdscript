@@ -6,10 +6,10 @@ signal confirmed
 
 const STRICT_COLOR := Color(1, 0.094118, 0.321569)
 const NORMAL_COLOR := Color(0.239216, 1, 0.431373)
-const STRICT_STYLEBOX := preload("res://ui/theme/button_outline_large_strict.tres")
-const NORMAL_STYLEBOX := preload("res://ui/theme/button_outline_large_accent.tres")
-const STRICT_FOCUS_STYLEBOX := preload("res://ui/theme/focus_strict.tres")
-const NORMAL_FOCUS_STYLEBOX := preload("res://ui/theme/focus_accent.tres")
+const STRICT_STYLEBOX := preload("res://ui/theme/styles/button_outline_large_strict.tres")
+const NORMAL_STYLEBOX := preload("res://ui/theme/styles/button_outline_large_accent.tres")
+const STRICT_FOCUS_STYLEBOX := preload("res://ui/theme/styles/focus_strict.tres")
+const NORMAL_FOCUS_STYLEBOX := preload("res://ui/theme/styles/focus_accent.tres")
 
 @export var title := "":
 	set = set_title

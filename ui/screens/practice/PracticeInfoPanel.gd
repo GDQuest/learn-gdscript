@@ -7,8 +7,8 @@ signal list_requested
 
 enum Status { NONE, COMPLETED_BEFORE, SOLUTION_USED }
 
-const STATUS_ICON_COMPLETED_BEFORE := preload("res://ui/icons/checkmark_valid.svg")
-const STATUS_ICON_SOLUTION_USED := preload("res://ui/icons/checkmark_invalid.svg")
+const STATUS_ICON_COMPLETED_BEFORE := preload("res://ui/assets/icons/checkmark_valid.svg")
+const STATUS_ICON_SOLUTION_USED := preload("res://ui/assets/icons/checkmark_invalid.svg")
 
 const QueryResult := Documentation.QueryResult
 const TestDisplayScene = preload("PracticeTestDisplay.tscn")

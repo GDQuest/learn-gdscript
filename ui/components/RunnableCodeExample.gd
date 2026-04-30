@@ -12,7 +12,7 @@ const CodeExampleVariableUnderlineScene := preload("res://ui/components/CodeExam
 
 const ERROR_NO_RUN_FUNCTION := "Scene %s doesn't have a run() function. The Run button won't work."
 const ERROR_MULTIPLE_RUN_FUNCTION := "Scene %s has both run() and run_coroutine() functions. It must only have one. The Run button won't work."
-const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/hslider_grabber_highlight.tres")
+const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/styles/hslider_grabber_highlight.tres")
 
 @export var _gdscript_text_edit: CodeEdit
 @export var _run_button: Button

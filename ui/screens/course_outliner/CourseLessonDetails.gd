@@ -1,7 +1,7 @@
 extends PanelContainer
 
-const VALUE_CHECK_NONE := preload("res://ui/icons/checkmark_none.svg")
-const VALUE_CHECK_PASSED := preload("res://ui/icons/checkmark_valid.svg")
+const VALUE_CHECK_NONE := preload("res://ui/assets/icons/checkmark_none.svg")
+const VALUE_CHECK_PASSED := preload("res://ui/assets/icons/checkmark_valid.svg")
 const VALUE_COLOR_NONE := Color(0.290196, 0.294118, 0.388235)
 const VALUE_COLOR_PASSED := Color(0.239216, 1, 0.431373)
 

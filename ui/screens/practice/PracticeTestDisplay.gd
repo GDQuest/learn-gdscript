@@ -71,16 +71,16 @@ func set_status(new_status: int) -> void:
 
 	match status:
 		Status.PASSED:
-			_icon.texture = preload("res://ui/icons/checkmark_valid.svg")
+			_icon.texture = preload("res://ui/assets/icons/checkmark_valid.svg")
 			modulate = COLOR_PASSED
 		Status.FAILED:
-			_icon.texture = preload("res://ui/icons/checkmark_invalid.svg")
+			_icon.texture = preload("res://ui/assets/icons/checkmark_invalid.svg")
 			modulate = COLOR_FAILED
 		Status.PENDING:
-			_icon.texture = preload("res://ui/icons/checkmark_none.svg")
+			_icon.texture = preload("res://ui/assets/icons/checkmark_none.svg")
 			modulate = COLOR_PENDING
 		_:
-			_icon.texture = preload("res://ui/icons/checkmark_none.svg")
+			_icon.texture = preload("res://ui/assets/icons/checkmark_none.svg")
 			modulate = COLOR_IDLE
 
 

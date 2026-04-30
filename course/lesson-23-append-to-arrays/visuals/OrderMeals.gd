@@ -75,8 +75,8 @@ func _complete_run() -> void:
 
 class Meal extends VBoxContainer:
 
-	const TEXTURE_UNCHECKED := preload("res://ui/icons/checkbox_empty.png")
-	const TEXTURE_CHECKED := preload("res://ui/icons/checkbox_checked.png")
+	const TEXTURE_UNCHECKED := preload("res://ui/assets/icons/checkbox_empty.png")
+	const TEXTURE_CHECKED := preload("res://ui/assets/icons/checkbox_checked.png")
 	signal meal_ready
 
 	var progress := ProgressBar.new()

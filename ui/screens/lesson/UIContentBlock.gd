@@ -66,9 +66,9 @@ func setup(content_block, lesson: BBCodeParser.ParseNode, block_index: int) -> v
 
 func _make_revealer() -> void:
 	var revealer := RevealerScene.instantiate() as Revealer
-	revealer.title_panel = preload("res://ui/theme/revealer_notes_title.tres")
-	revealer.title_panel_expanded = preload("res://ui/theme/revealer_notes_title_expanded.tres")
-	revealer.content_panel = preload("res://ui/theme/revealer_notes_panel.tres")
+	revealer.title_panel = preload("res://ui/theme/styles/revealer_notes_title.tres")
+	revealer.title_panel_expanded = preload("res://ui/theme/styles/revealer_notes_title_expanded.tres")
+	revealer.content_panel = preload("res://ui/theme/styles/revealer_notes_panel.tres")
 
 	revealer.title_font_color = COLOR_NOTE
 	var title := BBCodeUtils.get_note_title(_content_block as BBCodeParser.ParseNode)

@@ -1,7 +1,7 @@
 extends PanelContainer
 
-const HOVER_STYLE := preload("res://ui/theme/outliner_item_hover.tres")
-const SELECTED_STYLE := preload("res://ui/theme/outliner_item_selected.tres")
+const HOVER_STYLE := preload("res://ui/theme/styles/outliner_item_hover.tres")
+const SELECTED_STYLE := preload("res://ui/theme/styles/outliner_item_selected.tres")
 
 signal selected()
 

@@ -15,8 +15,8 @@ const ACTIONS := {
 	"DFMODE": "dfmode",
 }
 
-const EDITOR_EXPAND_ICON := preload("res://ui/icons/expand.png")
-const EDITOR_COLLAPSE_ICON := preload("res://ui/icons/collapse.png")
+const EDITOR_EXPAND_ICON := preload("res://ui/assets/icons/expand.png")
+const EDITOR_COLLAPSE_ICON := preload("res://ui/assets/icons/collapse.png")
 
 @export var text := "":
 	get = get_text, set = set_text # (String, MULTILINE)

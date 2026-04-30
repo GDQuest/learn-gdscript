@@ -4,9 +4,9 @@ extends PanelContainer
 signal quiz_passed
 signal quiz_skipped
 
-const ERROR_OUTLINE := preload("res://ui/theme/quiz_outline_error.tres")
-const PASSED_OUTLINE := preload("res://ui/theme/quiz_outline_passed.tres")
-const NEUTRAL_OUTLINE := preload("res://ui/theme/quiz_outline_neutral.tres")
+const ERROR_OUTLINE := preload("res://ui/theme/styles/quiz_outline_error.tres")
+const PASSED_OUTLINE := preload("res://ui/theme/styles/quiz_outline_passed.tres")
+const NEUTRAL_OUTLINE := preload("res://ui/theme/styles/quiz_outline_neutral.tres")
 
 const OUTLINE_FLASH_DURATION := 0.8
 const OUTLINE_FLASH_DELAY := 0.75

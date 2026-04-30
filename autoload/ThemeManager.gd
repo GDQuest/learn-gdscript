@@ -1,6 +1,5 @@
 extends Node
 
-const THEME_ROOT := "res://ui/theme/"
 const THEME_FONTS_ROOT := "res://ui/theme/fonts/"
 
 const COLOR_TEXT_DEFAULT := Color(0.960784, 0.980392, 0.980392)
@@ -9,7 +8,7 @@ const COLOR_TEXT_LOWER_CONTRAST := Color(0.736288, 0.728113, 0.839844)
 var _font_defaults := { }
 var _font_sizes := { }
 
-@onready var _theme: Theme = preload("res://ui/theme/gdscript_app_theme.tres")
+@onready var _theme: Theme = preload("res://ui/theme/project_theme.tres")
 
 
 func _ready() -> void:
@@ -91,11 +90,11 @@ func set_dyslexia_font(dyslexia_font: bool, and_save: bool = true) -> void:
 # Call this instead of scale_all_font_sizes + set_dyslexia_font when both change at once.
 func apply_font_settings(size_scale: int, use_dyslexia_font: bool) -> void:
 	if use_dyslexia_font:
-		var font_mono := load("res://ui/theme/fonts/OpenDyslexicMono-Regular.otf")
-		var font_regular := load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
-		var font_bold_italic := load("res://ui/theme/fonts/OpenDyslexic-Bold-Italic.otf")
-		var font_bold := load("res://ui/theme/fonts/OpenDyslexic-Bold.otf")
-		var font_italic := load("res://ui/theme/fonts/OpenDyslexic-Italic.otf")
+		var font_mono := load("res://ui/assets/fonts/OpenDyslexicMono-Regular.otf")
+		var font_regular := load("res://ui/assets/fonts/OpenDyslexic-Regular.otf")
+		var font_bold_italic := load("res://ui/assets/fonts/OpenDyslexic-Bold-Italic.otf")
+		var font_bold := load("res://ui/assets/fonts/OpenDyslexic-Bold.otf")
+		var font_italic := load("res://ui/assets/fonts/OpenDyslexic-Italic.otf")
 
 		for font_resource: FontVariation in _font_defaults:
 			if not font_resource:

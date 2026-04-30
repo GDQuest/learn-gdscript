@@ -114,7 +114,7 @@ func _on_apply_settings() -> void:
 
 	var current_font := _font_size_sample.get_theme_font("font") as FontVariation
 	if current_profile.dyslexia_font:
-		current_font.base_font = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
+		current_font.base_font = load("res://ui/assets/fonts/OpenDyslexic-Regular.otf")
 	_font_size_sample.add_theme_font_override("font", current_font)
 
 
@@ -123,7 +123,7 @@ func _on_font_size_changed(value: int) -> void:
 	var font_override := _sample_default_font.duplicate() as FontVariation
 	var font_size := ThemeManager.get_default_font_size()
 	if current_profile.dyslexia_font:
-		font_override.base_font = load("res://ui/theme/fonts/OpenDyslexic-Regular.otf")
+		font_override.base_font = load("res://ui/assets/fonts/OpenDyslexic-Regular.otf")
 	_font_size_sample.add_theme_font_override("font", font_override)
 	_font_size_sample.add_theme_font_size_override("font_size", font_size + value * 2)
 
