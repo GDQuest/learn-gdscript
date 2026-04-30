@@ -1,70 +1,58 @@
+## Lesson progress data, used for tracking and serialization.
 class_name LessonProgress
 extends Resource
 
-# Lesson resource identifier.
-@export var lesson_id := ""
-# Set when the user got to the bottom of the lesson and clicked on any practice.
-@export var completed_reading := false
-# Identifiers of completed quiz resources.
-@export var completed_quizzes := [] # Array of String
-# Identifiers of completed practice resources.
-@export var completed_practices := [] # Array of String
+## Lesson resource identifier.
+@export var lesson_id: String = ""
+## Flag that indicates that the user got to the bottom of the lesson and clicked on any practice.
+@export var completed_reading: bool = false
+## Identifiers of completed quiz resources.
+@export var completed_quizzes: Array[String] = []
+## Identifiers of completed practice resources.
+@export var completed_practices: Array[String] = []
 
 
-func _init() -> void:
-	completed_quizzes = []
-	completed_practices = []
-
-
+## Returns the number of completed quizzes for the given [param lesson].
 func get_completed_quizzes_count(lesson: BBCodeParser.ParseNode) -> int:
 	var quiz_count := BBCodeUtils.get_lesson_quiz_count(lesson)
 	var completed := 0
 
 	# We collect them beforehand so that we can clear the list as we go and ensure only
 	# unique entries are counted.
-	var available_quizzes := []
+	var available_quizzes: Array[String] = []
 	for i in quiz_count:
 		var quiz := BBCodeUtils.get_lesson_quiz(lesson, i)
 		var quiz_id := BBCodeUtils.get_quiz_id(quiz)
-		available_quizzes.append(quiz_id)
+		available_quizzes.push_back(quiz_id)
 
-	for quiz_id: Variant in completed_quizzes:
-		var matched_id := ""
+	for quiz_id in completed_quizzes:
+		if not available_quizzes.has(quiz_id):
+			continue
 
-		for quiz_path in available_quizzes:
-			if quiz_path == str(quiz_id): # Can be an int from old pre-beta versions.
-				matched_id = quiz_path
-				break
-
-		if not matched_id.is_empty():
-			available_quizzes.erase(matched_id)
-			completed += 1
+		available_quizzes.erase(quiz_id)
+		completed += 1
 
 	return completed
 
 
+## Returns the number of completed practices for the given [param lesson].
 func get_completed_practices_count(lesson: BBCodeParser.ParseNode) -> int:
 	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
 	var completed := 0
 
 	# We collect them beforehand so that we can clear the list as we go and ensure only
 	# unique entries are counted.
-	var available_practices := []
+	var available_practices: Array[String] = []
 	for i in practice_count:
 		var practice := BBCodeUtils.get_lesson_practice(lesson, i)
 		var practice_id := BBCodeUtils.get_practice_id(practice)
-		available_practices.append(practice_id)
+		available_practices.push_back(practice_id)
 
 	for practice_id in completed_practices:
-		var matched_id := ""
+		if not available_practices.has(practice_id):
+			continue
 
-		for practice_path in available_practices:
-			if practice_path == practice_id:
-				matched_id = practice_path
-				break
-
-		if not matched_id.is_empty():
-			available_practices.erase(matched_id)
-			completed += 1
+		available_practices.erase(practice_id)
+		completed += 1
 
 	return completed
