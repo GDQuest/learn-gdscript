@@ -37,20 +37,8 @@ func get_profile(profile_name: String = current_player) -> Profile:
 		user_profile.player_name = profile_name
 
 		_loaded_profile = user_profile
-		Log.info(
-			{
-				"profileName": profile_name,
-			},
-			"created profile",
-		)
 		return user_profile
 
-	Log.info(
-		{
-			"profileName": profile_name,
-		},
-		"loaded profile",
-	)
 	_loaded_profile = ResourceLoader.load(file_path) as Profile
 	return _loaded_profile
 
