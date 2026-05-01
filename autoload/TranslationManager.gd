@@ -8,20 +8,20 @@ const PO_EXTENSION := "po"
 const DEFAULT_LOCALE := "en"
 const SUPPORTED_LOCALES := [
 	"en",
-	"fr",
-	"es",
-	"ja",
-	"it",
-	"pt_BR",
-	"zh_Hans",
-	"ru",
-	"de",
-	"tr",
-	"nl",
-	"uk",
-	"zh_Hant",
-	"cs",
 	"da",
+	"es",
+	# "fr",
+	# "ja",
+	# "it",
+	# "pt_BR",
+	# "zh_Hans",
+	# "ru",
+	# "de",
+	# "tr",
+	# "nl",
+	# "uk",
+	# "zh_Hant",
+	# "cs",
 ]
 
 const LOCALE_TO_LABEL := {
