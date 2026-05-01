@@ -67,8 +67,12 @@ func set_error_code(value: int) -> void:
 	error_code = value
 
 	var message_details := GDScriptErrorDatabase.get_message(error_code)
-	_error_explanation = message_details.explanation
-	_error_suggestion = message_details.suggestion
+	if message_details:
+		_error_explanation = message_details.explanation
+		_error_suggestion = message_details.suggestion
+	else:
+		_error_explanation = ""
+		_error_suggestion = ""
 
 	_update_explanation()
 

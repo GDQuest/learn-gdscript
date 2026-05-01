@@ -6,5 +6,10 @@ extends MarginContainer
 
 func _ready() -> void:
 	var message := GDScriptErrorDatabase.get_message(GDScriptCodes.ErrorCode.DUPLICATE_DECLARATION)
-	explanation.text = TextUtils.tr_paragraph(message.explanation)
-	suggestion.text = TextUtils.tr_paragraph(message.suggestion)
+
+	if message:
+		explanation.text = TextUtils.tr_paragraph(message.explanation)
+		suggestion.text = TextUtils.tr_paragraph(message.suggestion)
+	else:
+		explanation.text = ""
+		suggestion.text = ""
