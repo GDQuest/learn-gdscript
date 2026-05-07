@@ -1,18 +1,41 @@
 extends PracticeTester
 
 var first_node: Node2D
+var _checker: GDScriptErrorChecker
+var _analyzer: GDScriptASTAnalyzer
 
 
 func _prepare() -> void:
 	first_node = _scene_root_viewport.get_child(0)
+	
+	_checker = GDScriptErrorChecker.new()
+	_checker.set_source(_slice.current_text)
+	var root := _checker.get_root_parse_node()
+	_analyzer = GDScriptASTAnalyzer.new(root)
 
 
 func test_use_a_vector_to_increase_scale() -> String:
-	var regex = RegEx.new()
-	regex.compile("scale\\s*\\+.*Vector2|scale\\s*\\-.*Vector2|Vector2.*\\+.*scale")
-	var result = regex.search(_slice.current_text)
-	if not result:
+	var level_up_function := _analyzer.get_function_named("level_up")
+	
+	if not GDExpr.suite(
+		GDExpr.any_of(
+			GDExpr.assignment(
+				GDExpr.identifier("scale"),
+				GDExpr.literal(Vector2(0.2, 0.2), true),
+				GDAssignmentNode.OP_MULTIPLICATION
+			),
+			GDExpr.assignment(
+				GDExpr.identifier("scale"),
+				GDExpr.bin_op(
+					GDExpr.identifier("scale"),
+					GDExpr.literal(Vector2(0.2, 0.2), true),
+					GDBinaryOpNode.OP_MULTIPLICATION
+				)
+			)
+		)
+	).matches(level_up_function):
 		return tr("It looks like the scale isn't increasing by some vector. Did you add a vector to scale?")
+	
 	return ""
 
 

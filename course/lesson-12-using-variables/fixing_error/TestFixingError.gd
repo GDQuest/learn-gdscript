@@ -67,9 +67,12 @@ func test_angular_speed_is_used_in_setter_function() -> String:
 	if not setter:
 		return tr("The 'set_angular_speed(new_angular_speed)' function is missing; did you remove it?")
 	
-	var assignment_call := _analyzer.get_statement_assignment(setter, "angular_speed")
-	
-	if not assignment_call or not GDExpr.assignment(GDExpr.identifier("angular_speed"), GDExpr.identifier("new_angular_speed")).matches(assignment_call):
+	if not GDExpr.suite(
+		GDExpr.assignment(
+			GDExpr.identifier("angular_speed"),
+			GDExpr.identifier("new_angular_speed")
+		)
+	).matches(setter):
 		return tr("The set_angular_speed() function doesn't seem to use the angular_speed variable.")
 	
 	return ""

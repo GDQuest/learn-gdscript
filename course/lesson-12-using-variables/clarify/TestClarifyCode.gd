@@ -39,11 +39,15 @@ func test_angular_speed_is_used_in_process_function() -> String:
 	if not process:
 		return tr("The '_process(delta)' function is missing; did you remove it?")
 	
-	var rotate_call := _analyzer.get_statement_call_named(process, "rotate")
-	if not rotate_call:
-		return tr("Did you use rotate() to make the sprite rotate?")
-	
-	if not GDExpr.function_call("rotate", GDExpr.multiply(GDExpr.identifier("angular_speed"), GDExpr.identifier("delta"))).matches(rotate_call):
+	if not GDExpr.suite(
+		GDExpr.function_call(
+			"rotate",
+			GDExpr.multiply(
+				GDExpr.identifier("angular_speed"),
+				GDExpr.identifier("delta")
+			)
+		)
+	).matches(process):
 		return tr("The rotate() call must multiply angular_speed by delta (e.g. rotate(angular_speed * delta)).")
 	
 	return ""

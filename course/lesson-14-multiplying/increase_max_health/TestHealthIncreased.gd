@@ -18,24 +18,29 @@ func _prepare():
 func test_addition_is_used_to_increase_level() -> String:
 	var level_up_function := _analyzer.get_function_named("level_up")
 	
-	if (
-		# level += 1
-		not GDExpr.suite(GDExpr.assignment(GDExpr.identifier("level"), GDExpr.literal(1), GDAssignmentNode.Operation.OP_ADDITION)).matches(level_up_function) and
-		# level = level + 1
-		not GDExpr.suite(GDExpr.assignment(GDExpr.identifier("level"), GDExpr.bin_op(GDExpr.identifier("level"), GDExpr.literal(1), GDBinaryOpNode.OpType.OP_ADDITION, false))).matches(level_up_function)
-	):
+	if not GDExpr.suite(
+		GDExpr.any_of(
+			# level += 1
+			GDExpr.assignment(GDExpr.identifier("level"), GDExpr.literal(1), GDAssignmentNode.Operation.OP_ADDITION),
+			# level = level + 1
+			GDExpr.assignment(GDExpr.identifier("level"), GDExpr.bin_op(GDExpr.identifier("level"), GDExpr.literal(1), GDBinaryOpNode.OpType.OP_ADDITION, false))
+		)
+	).matches(level_up_function):
 		return tr("It looks like level isn't increasing every level. Did you add 1 to it?")
+	
 	return ""
 
 
 func test_multiplication_is_used_to_increase_max_health() -> String:
 	var level_up_function := _analyzer.get_function_named("level_up")
 	
-	if (
-		# max_health *= 1.1
-		not GDExpr.suite(GDExpr.assignment(GDExpr.identifier("max_health"), GDExpr.literal(1.1), GDAssignmentNode.Operation.OP_MULTIPLICATION)).matches(level_up_function) and
-		# max_health = max_health * 1.1
-		not GDExpr.suite(GDExpr.assignment(GDExpr.identifier("max_health"), GDExpr.multiply(GDExpr.identifier("max_health"), GDExpr.literal(1.1)))).matches(level_up_function)
+	if not GDExpr.suite(
+		GDExpr.any_of(
+			# max_health *= 1.1
+			not GDExpr.suite(GDExpr.assignment(GDExpr.identifier("max_health"), GDExpr.literal(1.1), GDAssignmentNode.Operation.OP_MULTIPLICATION)).matches(level_up_function),
+			# max_health = max_health * 1.1
+			not GDExpr.suite(GDExpr.assignment(GDExpr.identifier("max_health"), GDExpr.multiply(GDExpr.identifier("max_health"), GDExpr.literal(1.1)))).matches(level_up_function)
+		)
 	):
 		tr("It looks like max_health isn't increasing exponentially. Did you multiply it by a value greater than 1?")
 	return ""

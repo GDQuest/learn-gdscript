@@ -1,17 +1,24 @@
 ## Expressions that are used to match against the parser's nodes
 ## e.g.
-## [code]
-## if not GDExpr.function_call("rotate",
-##			GDExpr.multiply(GDExpr.literal(2.0), GDExpr.identifier(process_delta_name))
-##	).matches(rotate_call):
-##		print("Does not match 'rotate(2 * delta)'")
-## [/code]
+## [codeblock]
+## var process := _analyzer.get_function_named("_process")
+## if not GDExpr.suite(
+## 		GDExpr.function_call(
+## 			"rotate",
+## 			GDExpr.multiply(
+## 				GDExpr.literal(2.0),
+## 				GDExpr.identifier(process_delta_name)
+## 			)
+## 		)
+## 	).matches(process):
+## 		return tr("The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * delta).")
+## [/codeblock]
 @abstract
 class_name GDExpr
 extends RefCounted
 
 
-## Will return true if the expression and any sub-expression it depends match against a node and its children
+## Will return true if the expression and any sub-expression it depends on match against a GDNode and its children
 @abstract
 func matches(node: GDNode) -> bool
 
@@ -36,6 +43,11 @@ static func identifier(name: String, as_regex := false) -> GDIdentifierExpr:
 	return new_expr
 
 
+## Creates an expresion that will match any GDIdentifierNode
+static func any_identifier() -> GDIdentifierExpr:
+	return GDIdentifierExpr.new(".*", true)
+
+
 ## Creates an expression that will match a GDNode to a literal.
 ## If approx_equal is true, will use is_equal_approx, otherwise ==
 ## If ignore_value is true, will match with any literal node
@@ -50,11 +62,14 @@ static func assignment(assignee: GDExpr, assignment_expr: GDExpr, operation: GDA
 	return new_expr
 
 
+## Creates an expression that will match a GDIfNode and its contents
+## Providing either true/false blocks is optional, if you're only checking the condition
 static func if_block(condition: GDExpr, truth_block: GDExpr = null, false_block: GDExpr = null) -> GDIfExpr:
 	var new_expr := GDIfExpr.new(condition, truth_block, false_block)
 	return new_expr
 
 
+## Creates an expression that will match any GDNode that contains a single GDSuiteNode
 static func suite(...statements) -> GDSuiteExpr:
 	var new_expr := GDSuiteExpr.new(statements as Array)
 	return new_expr
@@ -65,6 +80,7 @@ static func any() -> GDAnyExpr:
 	return GDAnyExpr.new()
 
 
+## Creates an expression that will match one or more of the provided expressions
 static func any_of(...expressions) -> GDAnyOfExpr:
 	return GDAnyOfExpr.new(expressions as Array)
 

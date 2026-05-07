@@ -51,39 +51,48 @@ func test_movement_is_time_dependent() -> String:
 
 
 func test_movement_speed_is_correct() -> String:
-	var used_vars := false
-	
 	var process := _analyzer.get_function_named("_process")
 	if not process:
-		return tr("The '_process(delta)' function is missing; did you remove it?")
+		return tr("The _process function is missing; did you remove it?")
 	
-	var process_delta_name := _analyzer.get_function_parameter_name(process, 0)
-	
-	var rotate_call := _analyzer.get_statement_call_named(process, "rotate")
-	if not rotate_call:
-		return tr("Did you use rotate() to make the sprite rotate?")
-	
-	if not GDExpr.function_call("rotate",
-			GDExpr.multiply(GDExpr.literal(2.0), GDExpr.identifier(process_delta_name))
-	).matches(rotate_call):
-		if GDExpr.function_call("rotate", GDExpr.identifier(".*?", true)).matches(rotate_call):
-			used_vars = true
-		else:
-			return tr("The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * delta).")
-	
-	var move_call := _analyzer.get_statement_call_named(process, "move_local_x")
-	if not move_call:
-		return tr("Did you use move_local_x() to make the sprite move locally?")
-	
-	if not GDExpr.function_call("move_local_x", GDExpr.multiply(GDExpr.literal(100.0), GDExpr.identifier(process_delta_name))).matches(move_call):
-		if GDExpr.function_call("move_local_x", GDExpr.identifier(".*?", true)).matches(rotate_call):
-			used_vars = true
-		else:
-			return tr("The movement speed is not right. The robot should move 100 pixels per second. Make sure the call looks like this: move_local_x(100 * delta).")
-	
-	if used_vars:
+	if GDExpr.suite(
+		GDExpr.any_of(
+			GDExpr.function_call(
+				"rotate",
+				GDExpr.any_identifier()
+			),
+			GDExpr.function_call(
+				"move_local_x",
+				GDExpr.any_identifier()
+			)
+		)
+	).matches(process):
 		return tr("It looks like you stored values in variables before passing them to the functions.") + " " + \
 				tr("That works in GDScript, but we cannot check the values automatically here.") + " " + \
 				tr("Please write the values directly inside the function calls, like this: rotate(2 * delta) and move_local_x(100 * delta).")
+	
+	var process_delta_name := _analyzer.get_function_parameter_name(process, 0)
+	
+	if not GDExpr.suite(
+		GDExpr.function_call(
+			"rotate",
+			GDExpr.multiply(
+				GDExpr.literal(2.0),
+				GDExpr.identifier(process_delta_name)
+			)
+		)
+	).matches(process):
+		return tr("The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * delta).")
+	
+	if not GDExpr.suite(
+		GDExpr.function_call(
+			"move_local_x",
+			GDExpr.multiply(
+				GDExpr.literal(100.0),
+				GDExpr.identifier(process_delta_name)
+			)
+		)
+	).matches(process):
+			return tr("The movement speed is not right. The robot should move 100 pixels per second. Make sure the call looks like this: move_local_x(100 * delta).")
 	
 	return ""
