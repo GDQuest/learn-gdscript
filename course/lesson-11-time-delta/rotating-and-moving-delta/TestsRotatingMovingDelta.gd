@@ -2,11 +2,18 @@ extends PracticeTester
 
 var _robot: Node2D
 var _lines: PackedStringArray
+var _checker: GDScriptErrorChecker
+var _analyzer: GDScriptASTAnalyzer
 
 
 func _prepare() -> void:
 	_robot = _scene_root_viewport.get_child(0).get_node("Robot")
 	_lines = []
+	
+	_checker = GDScriptErrorChecker.new()
+	_checker.set_source(_slice.current_text)
+	var root := _checker.get_root_parse_node()
+	_analyzer = GDScriptASTAnalyzer.new(root)
 
 	var index := 0
 	for line in _slice.current_text.split("\n"):
@@ -44,48 +51,39 @@ func test_movement_is_time_dependent() -> String:
 
 
 func test_movement_speed_is_correct() -> String:
-	var checker := GDScriptErrorChecker.new()
-	checker.set_source(_slice.current_text)
-	var root := checker.get_root_parse_node()
-	
 	var used_vars := false
-	var has_correct_rotate := true
-	var has_correct_move := true
 	
-	var analyzer := GDScriptASTAnalyzer.new(root)
-	
-	var process := analyzer.get_function_named("_process")
+	var process := _analyzer.get_function_named("_process")
 	if not process:
 		return tr("The '_process(delta)' function is missing; did you remove it?")
 	
-	var process_delta_name := analyzer.get_function_parameter_name(process, 0)
+	var process_delta_name := _analyzer.get_function_parameter_name(process, 0)
 	
-	var rotate_call := analyzer.get_statement_call_named(process, "rotate")
+	var rotate_call := _analyzer.get_statement_call_named(process, "rotate")
 	if not rotate_call:
 		return tr("Did you use rotate() to make the sprite rotate?")
 	
-	if analyzer.call_has_argument_identifier(rotate_call, 0):
-		used_vars = true
-	elif not analyzer.call_has_argument_x_operated_by_identifier(rotate_call, 0, GDBinaryOpNode.OP_MULTIPLICATION, process_delta_name, 2.0):
-		has_correct_rotate = false
-
-	var move_call := analyzer.get_statement_call_named(process, "move_local_x")
+	if not GDExpr.function_call("rotate",
+			GDExpr.multiply(GDExpr.literal(2.0), GDExpr.identifier(process_delta_name))
+	).matches(rotate_call):
+		if GDExpr.function_call("rotate", GDExpr.identifier(".*?", true)).matches(rotate_call):
+			used_vars = true
+		else:
+			return tr("The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * delta).")
+	
+	var move_call := _analyzer.get_statement_call_named(process, "move_local_x")
 	if not move_call:
 		return tr("Did you use move_local_x() to make the sprite move locally?")
 	
-	if analyzer.call_has_argument_identifier(move_call, 0):
-		used_vars = true
-	elif not analyzer.call_has_argument_x_operated_by_identifier(move_call, 0, GDBinaryOpNode.OP_MULTIPLICATION, process_delta_name, 100.0):
-		has_correct_move = false
+	if not GDExpr.function_call("move_local_x", GDExpr.multiply(GDExpr.literal(100.0), GDExpr.identifier(process_delta_name))).matches(move_call):
+		if GDExpr.function_call("move_local_x", GDExpr.identifier(".*?", true)).matches(rotate_call):
+			used_vars = true
+		else:
+			return tr("The movement speed is not right. The robot should move 100 pixels per second. Make sure the call looks like this: move_local_x(100 * delta).")
 	
 	if used_vars:
 		return tr("It looks like you stored values in variables before passing them to the functions.") + " " + \
 				tr("That works in GDScript, but we cannot check the values automatically here.") + " " + \
 				tr("Please write the values directly inside the function calls, like this: rotate(2 * delta) and move_local_x(100 * delta).")
-	
-	if not has_correct_rotate:
-		return tr("The movement speed is not right. The robot should move 100 pixels per second. Make sure the call looks like this: move_local_x(100 * delta).")
-	if not has_correct_move:
-		return tr("The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * delta).")
 	
 	return ""

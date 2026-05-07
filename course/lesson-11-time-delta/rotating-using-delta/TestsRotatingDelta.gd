@@ -3,12 +3,19 @@ extends PracticeTester
 var _robot: Node2D
 var _body: String
 var _has_proper_body: bool
+var _checker: GDScriptErrorChecker
+var _analyzer: GDScriptASTAnalyzer
 
 
 func _prepare() -> void:
 	_robot = _scene_root_viewport.get_child(0).get_node("Robot")
 	_body = ""
 	_has_proper_body = true
+
+	_checker = GDScriptErrorChecker.new()
+	_checker.set_source(_slice.current_text)
+	var root := _checker.get_root_parse_node()
+	_analyzer = GDScriptASTAnalyzer.new(root)
 
 	for line in _slice.current_text.split("\n"):
 		line = line.strip_edges()
@@ -35,26 +42,27 @@ func test_rotating_character_is_time_dependent() -> String:
 
 
 func test_rotation_speed_is_2_radians_per_second() -> String:
-	if not _has_proper_body:
-		var regex_has_two := RegEx.new()
-		regex_has_two.compile("rotate\\s*\\(\\s*(?:2(?:\\.0+)?\\s*\\*\\s*delta|delta\\s*\\*\\s*2(?:\\.0+)?)\\s*\\)")
-
-		var has_two: bool = regex_has_two.search(_body) != null
-		if not has_two:
-			var var_regex := RegEx.new()
-			var_regex.compile("^var\\w*=")
-			var uses_variable := false
-			for line in _slice.current_text.split("\n"):
-				var stripped := line.strip_edges().replace(" ", "")
-				uses_variable = uses_variable or (var_regex.search(stripped) != null and ("2" in stripped or "2.0" in stripped) and "delta" in stripped)
-			if uses_variable:
-				return tr("It looks like you stored the value in a variable before using it.") + " " + \
-						tr("That's valid, but we can't check the value automatically.") + " " + \
-						tr("Please write it directly in the function call: rotate(2 * delta).")
-			return tr("The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * delta).")
-
-		var has_multiplication_sign := _body.rfind("*") > 0
-		if not has_multiplication_sign:
+	var process := _analyzer.get_function_named("_process")
+	if not process:
+		return tr("The '_process(delta)' function is missing; did you remove it?")
+	
+	var rotate_call := _analyzer.get_statement_call_named(process, "rotate")
+	if not rotate_call:
+		return tr("Did you use rotate() to make the sprite rotate?")
+	
+	var process_delta_name := _analyzer.get_function_parameter_name(process, 0)
+	
+	if not GDExpr.function_call("rotate",
+			GDExpr.multiply(GDExpr.literal(2.0), GDExpr.identifier(process_delta_name))
+	).matches(rotate_call):
+		if GDExpr.function_call("rotate", GDExpr.identifier(".*?", true)).matches(rotate_call):
+			return tr("It looks like you stored the value in a variable before using it.") + " " + \
+				tr("That's valid, but we can't check the value automatically.") + " " + \
+				tr("Please write it directly in the function call: rotate(2 * delta).")
+		elif GDExpr.function_call("rotate", GDExpr.literal(2.0)).matches(rotate_call):
 			return tr("It looks like delta is not being multiplied.") + \
 					tr("You need to use the * sign to multiply the speed by delta inside the parentheses, like this: rotate(2 * delta).")
+		else:
+			return tr("The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * delta).")
+	
 	return ""

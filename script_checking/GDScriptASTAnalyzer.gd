@@ -15,10 +15,29 @@ func get_function_named(name: StringName) -> GDFunctionNode:
 	return null
 
 
+func get_var_named(name: StringName) -> GDVariableNode:
+	if _student_class.has_member(name):
+		var member := _student_class.get_member(name)
+		if member.get_type() == GDNode.VARIABLE:
+			return member.get_as_signal_variable_node()
+	return null
+
+
 func get_function_parameter_name(function: GDFunctionNode, index: int) -> StringName:
 	if index >= function.get_parameters().size():
 		return &""
 	return function.get_parameters()[index].get_identifier().name
+
+
+func get_statement_assignment(function_node: GDFunctionNode, assignee: StringName, starting_from_index := 0) -> GDAssignmentNode:
+	var statements := function_node.get_body().get_statements()
+	for i: int in range(starting_from_index, statements.size()):
+		var assign_statement: GDAssignmentNode = statements[i] as GDAssignmentNode
+		if assign_statement:
+			var assignee_node := assign_statement.get_assignee() as GDIdentifierNode
+			if assignee_node and assignee_node.name == assignee:
+				return assign_statement
+	return null
 
 
 func get_statement_call_named(function_node: GDFunctionNode, name: StringName, starting_from_index := 0) -> GDCallNode:
@@ -30,38 +49,13 @@ func get_statement_call_named(function_node: GDFunctionNode, name: StringName, s
 	return null
 
 
-func statement_is_call_named(statement: GDNode, name: StringName) -> bool:
-	return statement.get_type() == GDNode.CALL and (statement as GDCallNode).get_function_name() == name
-
-
-func call_has_argument_identifier(call_node: GDCallNode, parameter_index: int, name: StringName = &"") -> bool:
-	var arguments := call_node.get_arguments()
-	if parameter_index >= arguments.size():
-		return false
-	var argument := arguments[parameter_index] as GDIdentifierNode
-	if not argument:
-		return false
-	return argument.get_name() == name if name else true
-
-
-func call_has_argument_x_operated_by_identifier(call_node: GDCallNode, parameter_index: int, operator: GDBinaryOpNode.OpType, operand: StringName, value: Variant) -> bool:
-	var arguments := call_node.get_arguments()
-	if parameter_index >= arguments.size():
-		return false
-	var argument := arguments[parameter_index] as GDBinaryOpNode
-	if not argument or argument.get_operation() != operator:
-		return false
-	var left := argument.get_left_operand()
-	var right := argument.get_right_operand()
-	var ident: GDIdentifierNode
-	var lit: GDLiteralNode
-	if left.get_type() == GDNode.IDENTIFIER:
-		ident = left
-		lit = right
-	else:
-		ident = right
-		lit = left
-	return ident.get_name() == operand and lit.get_value() == value
+func get_local_var_named(function_node: GDFunctionNode, name: StringName, starting_from_index := 0) -> GDVariableNode:
+	var statements := function_node.get_body().get_statements()
+	for i: int in range(starting_from_index, statements.size()):
+		var var_statement := statements[i] as GDVariableNode
+		if var_statement and var_statement.get_identifier().name == name:
+			return var_statement
+	return null
 
 
 func find_any_recursive_function() -> String:

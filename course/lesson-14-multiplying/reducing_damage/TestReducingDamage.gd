@@ -7,6 +7,9 @@ var first_node: Node2D
 var damage_taken_at_level_2 = -1
 var damage_taken_at_level_3 = -1
 
+var _checker: GDScriptErrorChecker
+var _analyzer: GDScriptASTAnalyzer
+
 func _prepare():
 	first_node = _scene_root_viewport.get_child(0)
 	
@@ -22,12 +25,50 @@ func _prepare():
 	var health_after_2 = first_node.health
 	damage_taken_at_level_3 = health_before_2 - health_after_2
 
+	_checker = GDScriptErrorChecker.new()
+	_checker.set_source(_slice.current_text)
+	var root := _checker.get_root_parse_node()
+	_analyzer = GDScriptASTAnalyzer.new(root)
+
 
 func test_multiplication_is_used_to_reduce_damage_amount() -> String:
-	var regex = RegEx.new()
-	regex.compile("amount\\s*\\*|\\*\\s*amount")
-	var result = regex.search(_slice.current_text)
-	if not result:
+	var take_damage_function := _analyzer.get_function_named("take_damage")
+	
+	if not take_damage_function:
+		return tr("It looks like the take_damage function is missing; did you remove it?")
+
+	var parameter_name := _analyzer.get_function_parameter_name(take_damage_function, 0)
+
+	if not GDExpr.suite(
+		GDExpr.if_block(
+			# condition: level > 2
+			GDExpr.bin_op(
+				GDExpr.identifier("level"),
+				GDExpr.literal(2),
+				GDBinaryOpNode.OpType.OP_COMP_GREATER
+			),
+			# truth block
+			GDExpr.suite(
+				# at least one of
+				GDExpr.any_of(
+					# amount *= 0.5
+					GDExpr.assignment(
+						GDExpr.identifier(parameter_name),
+						GDExpr.literal(0.5),
+						GDAssignmentNode.Operation.OP_MULTIPLICATION
+					),
+					# amount = amount * 0.5
+					GDExpr.assignment(
+						GDExpr.identifier(parameter_name),
+						GDExpr.multiply(
+							GDExpr.identifier(parameter_name),
+							GDExpr.literal(0.5)
+						)
+					)
+				)
+			)
+		)
+	).matches(take_damage_function):
 		return tr("It looks like amount isn't reduced by a percentage. Did you multiply it by a value less than 1?")
 	return ""
 

@@ -1,50 +1,76 @@
 extends PracticeTester
 
-var ANSWERS = [
-	"health\\s*>\\s*5",
-	"1\\s*<\\s*health",
-	"health\\s*==\\s*health",
-	"health\\s*!=\\s*7"
-]
 
-const STATEMENTS = [
-	"health is greater than five.",
-	"One is less than health.",
-	"health is equal to health",
-	"health is not equal to seven."
-]
+var _checker: GDScriptErrorChecker
+var _analyzer: GDScriptASTAnalyzer
+
+
+func _prepare() -> void:
+	_checker = GDScriptErrorChecker.new()
+	_checker.set_source(_slice.current_text)
+	var root := _checker.get_root_parse_node()
+	_analyzer = GDScriptASTAnalyzer.new(root)
+
 
 func test_statement_1_is_true() -> String:
-	var regex = RegEx.new()
-	regex.compile(ANSWERS[0] + "\\s*\\:\\s*.*" + STATEMENTS[0])
-	var result = regex.search(_slice.current_text)
-	if not result:
+	var run_function := _analyzer.get_function_named("run")
+	
+	if not GDExpr.suite(
+		GDExpr.if_block(
+			GDExpr.bin_op(
+				GDExpr.identifier("health"),
+				GDExpr.literal(5),
+				GDBinaryOpNode.OP_COMP_GREATER
+			)
+		)
+	).matches(run_function):
 		return tr("The first comparison is not correct. Did you use the right comparison?")
 	return ""
 
 
 func test_statement_2_is_true() -> String:
-	var regex = RegEx.new()
-	regex.compile(ANSWERS[1] + "\\s*\\:\\s*.*" + STATEMENTS[1])
-	var result = regex.search(_slice.current_text)
-	if not result:
+	var run_function := _analyzer.get_function_named("run")
+	
+	if not GDExpr.suite(
+		GDExpr.if_block(
+			GDExpr.bin_op(
+				GDExpr.literal(1),
+				GDExpr.identifier("health"), 
+				GDBinaryOpNode.OP_COMP_LESS
+			)
+		)
+	).matches(run_function):
 		return tr("The second comparison is not correct. Did you use the right comparison?")
 	return ""
 
 
 func test_statement_3_is_true() -> String:
-	var regex = RegEx.new()
-	regex.compile(ANSWERS[2] + "\\s*\\:\\s*.*" + STATEMENTS[2])
-	var result = regex.search(_slice.current_text)
-	if not result:
+	var run_function := _analyzer.get_function_named("run")
+	
+	if not GDExpr.suite(
+		GDExpr.if_block(
+			GDExpr.bin_op(
+				GDExpr.identifier("health"),
+				 GDExpr.identifier("health"),
+				 GDBinaryOpNode.OP_COMP_EQUAL
+			)
+		)
+	).matches(run_function):
 		return tr("The third comparison is not correct. Did you use the right comparison?")
 	return ""
 
 
 func test_statement_4_is_true() -> String:
-	var regex = RegEx.new()
-	regex.compile(ANSWERS[3] + "\\s*\\:\\s*.*" + STATEMENTS[3])
-	var result = regex.search(_slice.current_text)
-	if not result:
+	var run_function := _analyzer.get_function_named("run")
+	
+	if not GDExpr.suite(
+		GDExpr.if_block(
+			GDExpr.bin_op(
+				GDExpr.identifier("health"),
+				GDExpr.literal(7),
+				GDBinaryOpNode.OP_COMP_NOT_EQUAL
+			)
+		)
+	).matches(run_function):
 		return tr("The fourth comparison is not correct. Did you use the right comparison?")
 	return ""
