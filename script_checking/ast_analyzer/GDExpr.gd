@@ -95,6 +95,80 @@ static func function_call(name: StringName, ...arguments) -> GDCallExpr:
 	return new_expr
 
 
+static func for_loop(loop_variable: GDIdentifierExpr = null, list: GDExpr = null, body: GDSuiteExpr = null) -> GDForExpr:
+	return GDForExpr.new(loop_variable, list, body)
+
+
+static func captured_identifier(name: StringName, captures: Dictionary) -> GDCaptureExpr:
+	return GDCaptureExpr.new(name, captures)
+
+
+static func array(elements: Array) -> GDArrayExpr:
+	var new_elements: Array[GDExpr] = []
+	for element in elements:
+		assert(element is GDExpr, "Can only accept GDExpr elements")
+		new_elements.push_back(element)
+	return GDArrayExpr.new(new_elements)
+
+
+class GDArrayExpr extends GDExpr:
+	var _elements: Array[GDExpr]
+	
+	
+	func _init(elements: Array[GDExpr]) -> void:
+		_elements = elements
+	
+
+	func matches(node: GDNode) -> bool:
+		if node.get_type() != GDNode.ARRAY:
+			return false
+		var array_node := node as GDArrayNode
+		var elements := array_node.get_elements()
+		if elements.size() < _elements.size():
+			return false
+		for i in _elements.size():
+			if not _elements[i].matches(elements[i]):
+				return false
+		return true
+
+
+class GDCaptureExpr extends GDIdentifierExpr:
+	func _init(name: StringName, captures: Dictionary) -> void:
+		_name = name
+		_captures = captures
+	
+	
+	func matches(node: GDNode) -> bool:
+		if node.get_type() != GDNode.IDENTIFIER:
+			return false
+		var ident_node := node as GDIdentifierNode
+		return ident_node.name == _captures[_name]
+
+
+class GDForExpr extends GDExpr:
+	var _loop_variable: GDExpr
+	var _body: GDExpr
+	var _list: GDExpr
+	
+	func _init(loop_variable: GDIdentifierExpr = null, list: GDExpr = null, body: GDSuiteExpr = null) -> void:
+		_loop_variable = loop_variable
+		_body = body
+		_list = list
+	
+	
+	func matches(node: GDNode) -> bool:
+		if node.get_type() != GDNode.FOR:
+			return false
+		var for_node := node as GDForNode
+		if (
+			(_loop_variable and not _loop_variable.matches(for_node.get_variable())) or
+			(_list and not _list.matches(for_node.get_list())) or
+			(_body and not _body.matches(for_node.get_loop()))
+		):
+			return false
+		return true
+
+
 class GDAnyOfExpr extends GDExpr:
 	var _expressions: Array[GDExpr] = []
 	
@@ -256,13 +330,17 @@ class GDLiteralExpr extends GDExpr:
 				return (_value as Vector3).is_equal_approx(lit_node.get_value() as Vector3)
 			elif _value is Vector4 and lit_node.get_value() is Vector4:
 				return (_value as Vector4).is_equal_approx(lit_node.get_value() as Vector4)
-		return lit_node.value == _value
+		var value: Variant = lit_node.value
+		return value == _value
 
 
 class GDIdentifierExpr extends GDExpr:
 	var _name: String
 	var _regex: RegEx = null
-	
+	var _do_capture := false
+	var _capture_name: StringName
+	var _captures: Dictionary
+
 	func _init(name: String, use_regex: bool) -> void:
 		_name = name
 		if use_regex:
@@ -274,10 +352,22 @@ class GDIdentifierExpr extends GDExpr:
 			return false
 		
 		var ident_node := node as GDIdentifierNode
+		var does_match := false
 		if _regex:
-			return _regex.search(ident_node.name) != null
+			does_match = _regex.search(ident_node.name) != null
 		else:
-			return ident_node.name == _name
+			does_match = ident_node.name == _name
+		if _do_capture:
+			_captures[_capture_name] = ident_node.name
+		return does_match
+
+
+	func capture(name: StringName, captures: Dictionary) -> GDIdentifierExpr:
+		_capture_name = name
+		_captures = captures
+		_captures[_capture_name] = &""
+		_do_capture = true
+		return self
 
 
 class GDBinaryOpExpr extends GDExpr:
