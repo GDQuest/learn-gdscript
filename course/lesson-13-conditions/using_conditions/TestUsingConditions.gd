@@ -1,17 +1,6 @@
 extends PracticeTester
 
 
-var _checker: GDScriptErrorChecker
-var _analyzer: GDScriptASTAnalyzer
-
-
-func _prepare() -> void:
-	_checker = GDScriptErrorChecker.new()
-	_checker.set_source(_slice.current_text)
-	var root := _checker.get_root_parse_node()
-	_analyzer = GDScriptASTAnalyzer.new(root)
-
-
 func test_statement_1_is_true() -> String:
 	var run_function := _analyzer.get_function_named("run")
 	

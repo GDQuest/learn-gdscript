@@ -3,18 +3,10 @@ extends PracticeTester
 var first_node: Node2D
 var health := 0
 
-var _checker: GDScriptErrorChecker
-var _analyzer: GDScriptASTAnalyzer
-
 
 func _prepare() -> void:
 	first_node = _scene_root_viewport.get_child(0)
 	health = first_node.health
-
-	_checker = GDScriptErrorChecker.new()
-	_checker.set_source(_slice.current_text)
-	var root := _checker.get_root_parse_node()
-	_analyzer = GDScriptASTAnalyzer.new(root)
 
 
 func test_robot_takes_the_right_amount_of_damage() -> String:

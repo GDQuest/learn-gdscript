@@ -7,8 +7,6 @@ var first_node: Node2D
 var damage_taken_at_level_2 = -1
 var damage_taken_at_level_3 = -1
 
-var _checker: GDScriptErrorChecker
-var _analyzer: GDScriptASTAnalyzer
 
 func _prepare():
 	first_node = _scene_root_viewport.get_child(0)
@@ -24,11 +22,6 @@ func _prepare():
 	first_node.take_damage(TEST_DAMAGE)
 	var health_after_2 = first_node.health
 	damage_taken_at_level_3 = health_before_2 - health_after_2
-
-	_checker = GDScriptErrorChecker.new()
-	_checker.set_source(_slice.current_text)
-	var root := _checker.get_root_parse_node()
-	_analyzer = GDScriptASTAnalyzer.new(root)
 
 
 func test_multiplication_is_used_to_reduce_damage_amount() -> String:

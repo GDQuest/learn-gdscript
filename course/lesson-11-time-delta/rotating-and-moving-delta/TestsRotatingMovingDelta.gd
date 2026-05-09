@@ -2,18 +2,11 @@ extends PracticeTester
 
 var _robot: Node2D
 var _lines: PackedStringArray
-var _checker: GDScriptErrorChecker
-var _analyzer: GDScriptASTAnalyzer
 
 
 func _prepare() -> void:
 	_robot = _scene_root_viewport.get_child(0).get_node("Robot")
 	_lines = []
-	
-	_checker = GDScriptErrorChecker.new()
-	_checker.set_source(_slice.current_text)
-	var root := _checker.get_root_parse_node()
-	_analyzer = GDScriptASTAnalyzer.new(root)
 
 	var index := 0
 	for line in _slice.current_text.split("\n"):
@@ -71,28 +64,39 @@ func test_movement_speed_is_correct() -> String:
 				tr("That works in GDScript, but we cannot check the values automatically here.") + " " + \
 				tr("Please write the values directly inside the function calls, like this: rotate(2 * delta) and move_local_x(100 * delta).")
 	
-	var process_delta_name := _analyzer.get_function_parameter_name(process, 0)
-	
-	if not GDExpr.suite(
-		GDExpr.function_call(
-			"rotate",
-			GDExpr.multiply(
-				GDExpr.literal(2.0),
-				GDExpr.identifier(process_delta_name)
+	var captures := {}
+	if not GDExpr.function(
+		"_process",
+		GDExpr.suite(
+			GDExpr.function_call(
+				"rotate",
+				GDExpr.multiply(
+					GDExpr.literal(2.0),
+					GDExpr.captured_identifier("delta", captures)
+				)
 			)
+		),
+		GDExpr.parameter(
+			GDExpr.any_identifier().capture("delta", captures)
 		)
 	).matches(process):
-		return tr("The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * delta).")
+		return tr("The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * %s)." % [captures.delta])
 	
-	if not GDExpr.suite(
-		GDExpr.function_call(
-			"move_local_x",
-			GDExpr.multiply(
-				GDExpr.literal(100.0),
-				GDExpr.identifier(process_delta_name)
+	if not GDExpr.function(
+		"_process",
+		GDExpr.suite(
+			GDExpr.function_call(
+				"move_local_x",
+				GDExpr.multiply(
+					GDExpr.literal(100.0),
+					GDExpr.captured_identifier("delta", captures)
+				)
 			)
+		),
+		GDExpr.parameter(
+			GDExpr.any_identifier().capture("delta", captures)
 		)
 	).matches(process):
-			return tr("The movement speed is not right. The robot should move 100 pixels per second. Make sure the call looks like this: move_local_x(100 * delta).")
+			return tr("The movement speed is not right. The robot should move 100 pixels per second. Make sure the call looks like this: move_local_x(100 * %s)." % [captures.delta])
 	
 	return ""

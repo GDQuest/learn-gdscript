@@ -2,17 +2,9 @@ extends PracticeTester
 
 var first_node: Node2D
 
-var _checker: GDScriptErrorChecker
-var _analyzer: GDScriptASTAnalyzer
-
 
 func _prepare():
 	first_node = _scene_root_viewport.get_child(0)
-	
-	_checker = GDScriptErrorChecker.new()
-	_checker.set_source(_slice.current_text)
-	var root := _checker.get_root_parse_node()
-	_analyzer = GDScriptASTAnalyzer.new(root)
 
 
 func test_addition_is_used_to_increase_level() -> String:

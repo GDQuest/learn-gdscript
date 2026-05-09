@@ -2,17 +2,10 @@ extends PracticeTester
 
 var desired_combo = ["jab", "jab", "uppercut"]
 var robot: Node2D
-var _checker: GDScriptErrorChecker
-var _analyzer: GDScriptASTAnalyzer
 
 
 func _prepare() -> void:
 	robot = _scene_root_viewport.get_child(0)
-
-	_checker = GDScriptErrorChecker.new()
-	_checker.set_source(_slice.current_text)
-	var root := _checker.get_root_parse_node()
-	_analyzer = GDScriptASTAnalyzer.new(root)
 
 
 func test_use_for_loop() -> String:
@@ -74,13 +67,14 @@ func test_robot_combo_is_correct() -> String:
 
 	var run_function := _analyzer.get_function_named("run")
 	var combo_var := _analyzer.get_local_var_named(run_function, "combo")
-	var initializer := combo_var.get_initializer()
+	if combo_var:
+		var initializer := combo_var.get_initializer()
 
-	if GDExpr.array(
-		desired_combo.map(
-			func(animation_name: String) -> GDExpr: return GDExpr.literal(animation_name)
-		)
-	).matches(initializer):
-		return ""
+		if GDExpr.array(
+			desired_combo.map(
+				func(animation_name: String) -> GDExpr: return GDExpr.literal(animation_name)
+			)
+		).matches(initializer):
+			return ""
 	
 	return tr("The combo isn't correct. Did you use the right actions in the right order?")

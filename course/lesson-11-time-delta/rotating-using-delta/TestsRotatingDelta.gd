@@ -3,19 +3,12 @@ extends PracticeTester
 var _robot: Node2D
 var _body: String
 var _has_proper_body: bool
-var _checker: GDScriptErrorChecker
-var _analyzer: GDScriptASTAnalyzer
 
 
 func _prepare() -> void:
 	_robot = _scene_root_viewport.get_child(0).get_node("Robot")
 	_body = ""
 	_has_proper_body = true
-
-	_checker = GDScriptErrorChecker.new()
-	_checker.set_source(_slice.current_text)
-	var root := _checker.get_root_parse_node()
-	_analyzer = GDScriptASTAnalyzer.new(root)
 
 	for line in _slice.current_text.split("\n"):
 		line = line.strip_edges()

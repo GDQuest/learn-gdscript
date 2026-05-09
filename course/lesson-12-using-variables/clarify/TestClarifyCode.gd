@@ -2,8 +2,6 @@ extends PracticeTester
 
 var robot: Node2D
 var has_angular_speed_prop := false
-var _checker: GDScriptErrorChecker
-var _analyzer: GDScriptASTAnalyzer
 
 
 func _prepare():
@@ -13,10 +11,6 @@ func _prepare():
 		if property.name == "angular_speed":
 			has_angular_speed_prop = true
 			break
-	_checker = GDScriptErrorChecker.new()
-	_checker.set_source(_slice.current_text)
-	var root := _checker.get_root_parse_node()
-	_analyzer = GDScriptASTAnalyzer.new(root)
 
 
 func test_angular_speed_variable_is_script_wide() -> String:

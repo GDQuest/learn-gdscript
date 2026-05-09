@@ -18,6 +18,8 @@ var _scene_root_viewport: Node
 var _slice: ScriptSlice
 var _test_methods := _find_test_method_names()
 var _code_lines := []
+var _checker: GDScriptErrorChecker
+var _analyzer: GDScriptASTAnalyzer
 
 
 # We're not using _init() because it doesn't work unless you define it and call the parent's constructor in child classes. It would add boilerplate to every PracticeTester script.
@@ -30,10 +32,18 @@ func get_test_names() -> Array:
 	return _test_methods.values()
 
 
+func _update_analyzer() -> void:
+	_checker = GDScriptErrorChecker.new()
+	_checker.set_source(_slice.current_text)
+	var root := _checker.get_root_parse_node()
+	_analyzer = GDScriptASTAnalyzer.new(root)
+
+
 func run_tests() -> TestResult:
 	var result := TestResult.new()
 
 	_code_lines.clear()
+	_update_analyzer()
 	_prepare()
 
 	for method: StringName in _test_methods:

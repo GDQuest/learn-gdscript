@@ -2,22 +2,22 @@ class_name GDScriptASTAnalyzer
 extends GDScriptLocalAnalyzer
 
 
-var _student_class: GDClassNode
+var root: GDClassNode
 
 
 func _init(student_class: GDClassNode) -> void:
-	_student_class = student_class
+	root = student_class
 
 
 func get_function_named(name: StringName) -> GDFunctionNode:
-	if _student_class.has_function(name):
-		return _student_class.get_member(name).get_as_function_node()
+	if root.has_function(name):
+		return root.get_member(name).get_as_function_node()
 	return null
 
 
 func get_var_named(name: StringName) -> GDVariableNode:
-	if _student_class.has_member(name):
-		var member := _student_class.get_member(name)
+	if root.has_member(name):
+		var member := root.get_member(name)
 		if member.get_type() == GDNode.VARIABLE:
 			return member.get_as_signal_variable_node()
 	return null
@@ -60,7 +60,7 @@ func get_local_var_named(function_node: GDFunctionNode, name: StringName, starti
 
 func find_any_recursive_function() -> String:
 	var functions: Array[GDFunctionNode] = []
-	for member: GDMember in _student_class.get_members():
+	for member: GDMember in root.get_members():
 		if member.get_type() != GDMember.FUNCTION:
 			continue
 		functions.push_back(member.get_as_function_node())
@@ -77,7 +77,7 @@ func find_any_recursive_function() -> String:
 
 func has_infinite_while_loop() -> bool:
 	var functions: Array[GDFunctionNode] = []
-	for member: GDMember in _student_class.get_members():
+	for member: GDMember in root.get_members():
 		if member.get_type() != GDMember.FUNCTION:
 			continue
 		functions.push_back(member.get_as_function_node())
