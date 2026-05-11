@@ -98,5 +98,4 @@ func test_movement_speed_is_correct() -> String:
 		)
 	).matches(process):
 			return tr("The movement speed is not right. The robot should move 100 pixels per second. Make sure the call looks like this: move_local_x(100 * %s)." % [captures.delta])
-	
 	return ""

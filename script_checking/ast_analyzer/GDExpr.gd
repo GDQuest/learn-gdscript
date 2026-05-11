@@ -79,8 +79,24 @@ static func if_block(condition: GDExpr, truth_block: GDExpr = null, false_block:
 
 
 ## Creates an expression that will match any GDNode that contains a single GDSuiteNode
+## Accepts one of:[br]
+## - SUITE: Directly access suite[br]
+## - FUNCTION: A function's body[br]
+## - FOR: The loop's body[br]
+## - WHILE: The loop's body[br]
+## - IDENTIFIER: The suite the identifier is part of[br]
+## - IF: The true block[br]
+## - MATCH_BRANCH: The block for the branch[br]
+## The order the statements appear is not importance, so long as they appear.
+## If the order matters, use [method strict_suite].
 static func suite(...statements) -> GDSuiteExpr:
-	var new_expr := GDSuiteExpr.new(statements as Array)
+	var new_expr := GDSuiteExpr.new(statements as Array, false)
+	return new_expr
+
+
+## As [method suite], but every statement is guaranteed to be positioned relative to the expressions' order.
+static func strict_suite(...statements) -> GDSuiteExpr:
+	var new_expr := GDSuiteExpr.new(statements as Array, true)
 	return new_expr
 
 
