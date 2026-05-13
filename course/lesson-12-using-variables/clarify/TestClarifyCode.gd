@@ -29,9 +29,19 @@ func test_angular_speed_has_value_of_4() -> String:
 
 
 func test_angular_speed_is_used_in_process_function() -> String:
-	var regex = RegEx.new()
-	regex.compile("rotate\\([^)]*(?:angular_speed\\s*\\*\\s*delta|delta\\s*\\*\\s*angular_speed)")
-	var result = regex.search(_slice.current_text)
-	if not result:
+	var process := _analyzer.get_function_named("_process")
+	if not process:
+		return tr("The '_process(delta)' function is missing; did you remove it?")
+	
+	if not GDExpr.suite(
+		GDExpr.function_call(
+			"rotate",
+			GDExpr.multiply(
+				GDExpr.identifier("angular_speed"),
+				GDExpr.identifier("delta")
+			)
+		)
+	).matches(process):
 		return tr("The rotate() call must multiply angular_speed by delta (e.g. rotate(angular_speed * delta)).")
+	
 	return ""

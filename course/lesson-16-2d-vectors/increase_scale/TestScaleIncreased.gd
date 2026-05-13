@@ -8,11 +8,27 @@ func _prepare() -> void:
 
 
 func test_use_a_vector_to_increase_scale() -> String:
-	var regex = RegEx.new()
-	regex.compile("scale\\s*\\+.*Vector2|scale\\s*\\-.*Vector2|Vector2.*\\+.*scale")
-	var result = regex.search(_slice.current_text)
-	if not result:
+	var level_up_function := _analyzer.get_function_named("level_up")
+	
+	if not GDExpr.suite(
+		GDExpr.any_of(
+			GDExpr.assignment(
+				GDExpr.identifier("scale"),
+				GDExpr.literal(Vector2(0.2, 0.2), true),
+				GDAssignmentNode.OP_MULTIPLICATION
+			),
+			GDExpr.assignment(
+				GDExpr.identifier("scale"),
+				GDExpr.bin_op(
+					GDExpr.identifier("scale"),
+					GDExpr.literal(Vector2(0.2, 0.2), true),
+					GDBinaryOpNode.OP_MULTIPLICATION
+				)
+			)
+		)
+	).matches(level_up_function):
 		return tr("It looks like the scale isn't increasing by some vector. Did you add a vector to scale?")
+	
 	return ""
 
 

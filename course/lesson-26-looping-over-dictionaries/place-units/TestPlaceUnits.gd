@@ -23,12 +23,13 @@ func test_all_units_are_displayed():
 
 
 func test_code_uses_a_for_loop():
-	var loops_over_inventory := false
-	for line in _slice.current_text.split("\n"):
-		if "for" in line and "units" in line:
-			loops_over_inventory = true
-			break
-
-	if not loops_over_inventory:
+	var run_function := _analyzer.get_function_named("run")
+	
+	if not GDExpr.suite(
+		GDExpr.for_loop(
+			GDExpr.any_identifier(),
+			GDExpr.identifier("units")
+		)
+	).matches(run_function):
 		return tr("Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!")
 	return ""

@@ -2,25 +2,39 @@ extends PracticeTester
 
 var first_node: Node2D
 
+
 func _prepare():
 	first_node = _scene_root_viewport.get_child(0)
 
 
 func test_addition_is_used_to_increase_level() -> String:
-	var regex = RegEx.new()
-	regex.compile("level\\s*\\+|\\+\\s*level")
-	var result = regex.search(_slice.current_text)
-	if not result:
+	var level_up_function := _analyzer.get_function_named("level_up")
+	
+	if not GDExpr.suite(
+		GDExpr.any_of(
+			# level += 1
+			GDExpr.assignment(GDExpr.identifier("level"), GDExpr.literal(1), GDAssignmentNode.Operation.OP_ADDITION),
+			# level = level + 1
+			GDExpr.assignment(GDExpr.identifier("level"), GDExpr.bin_op(GDExpr.identifier("level"), GDExpr.literal(1), GDBinaryOpNode.OpType.OP_ADDITION, false))
+		)
+	).matches(level_up_function):
 		return tr("It looks like level isn't increasing every level. Did you add 1 to it?")
+	
 	return ""
 
 
 func test_multiplication_is_used_to_increase_max_health() -> String:
-	var regex = RegEx.new()
-	regex.compile("max_health\\s*\\*|\\*\\s*max_health")
-	var result = regex.search(_slice.current_text)
-	if not result:
-		return tr("It looks like max_health isn't increasing exponentially. Did you multiply it by a value greater than 1?")
+	var level_up_function := _analyzer.get_function_named("level_up")
+	
+	if not GDExpr.suite(
+		GDExpr.any_of(
+			# max_health *= 1.1
+			not GDExpr.suite(GDExpr.assignment(GDExpr.identifier("max_health"), GDExpr.literal(1.1), GDAssignmentNode.Operation.OP_MULTIPLICATION)).matches(level_up_function),
+			# max_health = max_health * 1.1
+			not GDExpr.suite(GDExpr.assignment(GDExpr.identifier("max_health"), GDExpr.multiply(GDExpr.identifier("max_health"), GDExpr.literal(1.1)))).matches(level_up_function)
+		)
+	):
+		tr("It looks like max_health isn't increasing exponentially. Did you multiply it by a value greater than 1?")
 	return ""
 
 

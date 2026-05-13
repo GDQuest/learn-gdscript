@@ -15,6 +15,7 @@ const PARSE_WRAPPER_CLASS := "GDScriptErrorChecker"
 
 # Array[ScriptError]
 var errors := []
+var _wrap_instance: RefCounted
 
 
 func _init(new_script_text: String) -> void:
@@ -23,25 +24,23 @@ func _init(new_script_text: String) -> void:
 
 
 func test() -> void:
-	if ClassDB.class_exists(PARSE_WRAPPER_CLASS):
-		var wrap_instance: RefCounted = ClassDB.instantiate(PARSE_WRAPPER_CLASS)
+	_update_instance_if_missing()
+	if _wrap_instance:
 		@warning_ignore("unsafe_method_access")
-		wrap_instance.set_source(_new_script_text)
-		@warning_ignore("unsafe_method_access")
-		if wrap_instance.has_errors():
+		if _wrap_instance.has_errors():
 			errors = []
 			var lines := _new_script_text.split("\n")
 			@warning_ignore("unsafe_method_access")
-			for i: int in wrap_instance.get_error_count():
+			for i: int in _wrap_instance.get_error_count():
 				@warning_ignore("unsafe_method_access")
-				var error_line: int = wrap_instance.get_error_line(i)
+				var error_line: int = _wrap_instance.get_error_line(i)
 				@warning_ignore("unsafe_method_access")
 				error_line = clampi(error_line - 1, 0, lines.size()-1)
 				var line_text := lines[error_line]
 				@warning_ignore("unsafe_method_access")
 				var error_data := make_error_from_data(
 					1,
-					wrap_instance.get_error(i) as String,
+					_wrap_instance.get_error(i) as String,
 					"gdscript",
 					-1,
 					error_line,
@@ -56,6 +55,21 @@ func test() -> void:
 		var error := make_error_no_parser_wrapper_class()
 		errors = [error]
 		return
+
+
+func _update_instance_if_missing() -> void:
+	if _wrap_instance == null and ClassDB.class_exists(PARSE_WRAPPER_CLASS):
+		_wrap_instance = ClassDB.instantiate(PARSE_WRAPPER_CLASS)
+		@warning_ignore("unsafe_method_access")
+		_wrap_instance.set_source(_new_script_text)
+
+
+func get_class_ast() -> RefCounted:
+	_update_instance_if_missing()
+	if _wrap_instance:
+		@warning_ignore("unsafe_method_access")
+		return _wrap_instance.get_root_parse_node()
+	return null
 
 
 static func make_error_no_parser_wrapper_class() -> ScriptError:

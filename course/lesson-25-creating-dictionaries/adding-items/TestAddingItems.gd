@@ -30,9 +30,48 @@ func test_add_item_function_works_as_intended():
 
 
 func test_add_item_function_uses_addition() -> String:
-	var regex = RegEx.new()
-	regex.compile("inventory.*\\+")
-	var result = regex.search(_slice.current_text)
-	if not result:
-		return tr("It doesn't look like you're adding amount to the value in the inventory dictionary.")
+	var add_item_function := _analyzer.get_function_named("add_item")
+	
+	var captures := {}
+	# func add_item(item_name, amount)
+	if not GDExpr.function(
+		&"add_item",
+		GDExpr.suite(
+			GDExpr.any_of(
+				# inventory[item_name] += amount
+				GDExpr.assignment(
+					GDExpr.subscript(
+						GDExpr.identifier("inventory"),
+						GDExpr.captured_identifier("item_name", captures)
+					),
+					GDExpr.captured_identifier("amount", captures),
+					GDAssignmentNode.OP_ADDITION
+				),
+				# inventory[item_name] = inventory[item_name] + amount
+				GDExpr.assignment(
+					GDExpr.subscript(
+						GDExpr.identifier("inventory"),
+						GDExpr.captured_identifier("item_name", captures)
+					),
+					GDExpr.bin_op(
+						GDExpr.subscript(
+							GDExpr.identifier("inventory"),
+							GDExpr.captured_identifier("item_name", captures),
+						),
+						GDExpr.captured_identifier("amount", captures),
+						GDBinaryOpNode.OP_ADDITION,
+						false,
+					),
+				)
+			)
+		),
+		GDExpr.parameter(
+			GDExpr.any_identifier().capture("item_name", captures)
+		),
+		GDExpr.parameter(
+			GDExpr.any_identifier().capture("amount", captures)
+		)
+	).matches(add_item_function):
+		return tr("It doesn't look like you're adding '%s' to the value in the inventory dictionary." % [captures.amount])
+	
 	return ""

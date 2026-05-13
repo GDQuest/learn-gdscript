@@ -44,29 +44,58 @@ func test_movement_is_time_dependent() -> String:
 
 
 func test_movement_speed_is_correct() -> String:
-	var has_correct_rotation := matches_code_line_regex(
-		["rotate\\s*\\(\\s*(?:2(?:\\.0+)?\\s*\\*\\s*delta|delta\\s*\\*\\s*2(?:\\.0+)?)\\s*\\)"],
-	)
-	var has_correct_speed := matches_code_line_regex(
-		["move_local_x\\s*\\(\\s*(?:100(?:\\.0+)?\\s*\\*\\s*delta|delta\\s*\\*\\s*100(?:\\.0+)?)\\s*(?:,\\s*(?:true|false)\\s*)?\\)"],
-	)
-
-	if not has_correct_rotation or not has_correct_speed:
-		var var_regex := RegEx.new()
-		var_regex.compile("^var\\w*=")
-		var has_rotation_var := false
-		var has_speed_var := false
-		for line in _lines:
-			if not var_regex.search(line):
-				continue
-			has_rotation_var = has_rotation_var or (("2" in line or "2.0" in line) and "delta" in line)
-			has_speed_var = has_speed_var or (("100" in line or "100.0" in line) and "delta" in line)
-		if has_rotation_var or has_speed_var:
-			return tr("It looks like you stored values in variables before passing them to the functions.") + " " + \
-					tr("That works in GDScript, but we cannot check the values automatically here.") + " " + \
-					tr("Please write the values directly inside the function calls, like this: rotate(2 * delta) and move_local_x(100 * delta).")
-	if not has_correct_rotation:
-		return tr("The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * delta).")
-	elif not has_correct_speed:
-		return tr("The movement speed is not right. The robot should move 100 pixels per second. Make sure the call looks like this: move_local_x(100 * delta).")
+	var process := _analyzer.get_function_named("_process")
+	if not process:
+		return tr("The _process function is missing; did you remove it?")
+	
+	if GDExpr.suite(
+		GDExpr.any_of(
+			GDExpr.function_call(
+				"rotate",
+				GDExpr.any_identifier()
+			),
+			GDExpr.function_call(
+				"move_local_x",
+				GDExpr.any_identifier()
+			)
+		)
+	).matches(process):
+		return tr("It looks like you stored values in variables before passing them to the functions.") + " " + \
+				tr("That works in GDScript, but we cannot check the values automatically here.") + " " + \
+				tr("Please write the values directly inside the function calls, like this: rotate(2 * delta) and move_local_x(100 * delta).")
+	
+	var captures := {}
+	if not GDExpr.function(
+		"_process",
+		GDExpr.suite(
+			GDExpr.function_call(
+				"rotate",
+				GDExpr.multiply(
+					GDExpr.literal(2.0),
+					GDExpr.captured_identifier("delta", captures)
+				)
+			)
+		),
+		GDExpr.parameter(
+			GDExpr.any_identifier().capture("delta", captures)
+		)
+	).matches(process):
+		return tr("The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * %s)." % [captures.delta])
+	
+	if not GDExpr.function(
+		"_process",
+		GDExpr.suite(
+			GDExpr.function_call(
+				"move_local_x",
+				GDExpr.multiply(
+					GDExpr.literal(100.0),
+					GDExpr.captured_identifier("delta", captures)
+				)
+			)
+		),
+		GDExpr.parameter(
+			GDExpr.any_identifier().capture("delta", captures)
+		)
+	).matches(process):
+			return tr("The movement speed is not right. The robot should move 100 pixels per second. Make sure the call looks like this: move_local_x(100 * %s)." % [captures.delta])
 	return ""
