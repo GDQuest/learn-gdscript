@@ -3,6 +3,7 @@
 # used regex for parsing the tags and attributes because this offloads work to
 # the engine, but regex parsing is always a bit limiting. We can later rewrite
 # it as a scanner parser if we need to make it more lenient.
+@tool
 class_name BBCodeParser
 extends RefCounted
 

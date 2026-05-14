@@ -1,5 +1,6 @@
 # This script defines all of the supported tags in our lessons and some data
 # structures to help validate them. It's used by the BBCode parser.
+@tool
 class_name BBCodeParserData
 extends RefCounted
 

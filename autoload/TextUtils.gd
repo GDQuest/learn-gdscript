@@ -1,3 +1,4 @@
+@tool
 extends Node
 
 # Maps type indices to their string representation.
