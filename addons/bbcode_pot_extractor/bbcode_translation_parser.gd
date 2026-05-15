@@ -8,6 +8,8 @@ static var GLOSSARY_RE := RegEx.create_from_string(r"\[url=(?!http)[^\]]+\]([^\[
 func _parse_file(path: String) -> Array[PackedStringArray]:
 	var parser := LessonBBCodeParser.new()
 	
+	var raw_lines := FileAccess.open(path, FileAccess.READ).get_as_text().split("\n")
+	
 	var result := parser.parse_file(path)
 	if not result.is_success():
 		push_error("Failed to parse BBCode for '%s':\n%s" % [path, result.get_all_messages()])
@@ -20,6 +22,8 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 	var current_paragraph := ""
 	
 	var stack := [lesson_root]
+	var practice_idx := 0
+	var quiz_idx := 0
 	while not stack.is_empty():
 		var current = stack.pop_front()
 		if "children" in current:
@@ -30,33 +34,87 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 					ret.append(PackedStringArray([BBCodeUtils.get_lesson_title(current), "lesson.title", "", "", current.line_number]))
 				BBCodeParserData.Tag.PARAGRAPH:
 					var glossary_results := []
-					var raw_string := _fix_glossary_entries(BBCodeUtils.get_paragraph_text(current), glossary_results)
-					ret.append(PackedStringArray([raw_string, "", "", ('The "term" in [glossary term="<term>"] should be translated') if glossary_results[0] else "", current.line_number]))
+					var raw_string := BBCodeUtils.get_paragraph_text(current)
+					var lines := _get_lines(raw_string)
+					for i in lines.size():
+						var line := lines[i]
+						line = _fix_glossary_entries(line, glossary_results)
+						ret.append(PackedStringArray([line, "text", "", ('The "term" in [glossary term="<term>"] should be translated') if glossary_results[0] else "", _find_line_number(raw_lines, line)]))
 				BBCodeParserData.Tag.TITLE:
-					ret.append(PackedStringArray([BBCodeUtils.get_paragraph_text(current), "lesson.heading", "", "", current.line_number]))
+					ret.append(PackedStringArray([BBCodeUtils.get_paragraph_text(current), "heading", "", "", current.line_number]))
 				BBCodeParserData.Tag.QUIZ_CHOICE, BBCodeParserData.Tag.QUIZ_INPUT:
 					var data := BBCodeUtils.get_quiz_data(current)
-					ret.append(PackedStringArray([data.question, "quiz.question", "", "", current.line_number]))
+					ret.append(PackedStringArray([data.question, "quiz.%s.question" % [quiz_idx], "", "", current.line_number]))
+					
+					var lines := _get_lines(data.content)
+					for line in lines:
+						ret.append(PackedStringArray([line, "quiz.%s.content" % [quiz_idx], "", "", current.line_number]))
+					
+					lines = _get_lines(data.explanation)
+					for line in lines:
+						ret.append(PackedStringArray([line, "quiz.%s..explanation" % [quiz_idx], "", "", current.line_number]))
+					
 					for i in data.answers.size():
-						ret.append(PackedStringArray([data.answers[i], "quiz.answer.%s%s" % [i, ".correct" if data.valid_answers.has(data.answers[i]) else ""], "", "", current.line_number]))
-					ret.append(PackedStringArray([data.explanation, "quiz.explanation", "", "", current.line_number]))
-					ret.append(PackedStringArray([data.content, "quiz.content", "", "", current.line_number]))
+						ret.append(PackedStringArray([data.answers[i], "quiz.%s.answer%s" % [quiz_idx, ".valid" if data.valid_answers.has(data.answers[i]) else ""], "", "", current.line_number]))
+					
+					quiz_idx += 1
 				BBCodeParserData.Tag.NOTE:
 					var title := BBCodeUtils.get_note_title(current)
 					ret.append(PackedStringArray([title, "note.title", "", "", current.line_number]))
 					var contents := BBCodeUtils.get_note_contents(current)
-					ret.append(PackedStringArray([contents, "note.contents", "", "", current.line_number]))
+					var lines := _get_lines(contents)
+					for line in lines:
+						ret.append(PackedStringArray([line, "note.text", "", "", _find_line_number(raw_lines, line)]))
 				BBCodeParserData.Tag.PRACTICE:
 					var title := BBCodeUtils.get_practice_title(current)
-					ret.append(PackedStringArray([title, "practice.title", "", "", current.line_number]))
-					var description := BBCodeUtils.get_practice_description(current)
-					ret.append(PackedStringArray([description, "practice.description", "", "", current.line_number]))
+					ret.append(PackedStringArray([title, "practice.%s.title" % [practice_idx], "", "", current.line_number]))
+					
 					var goal := BBCodeUtils.get_practice_goal(current)
-					ret.append(PackedStringArray([goal, "practice.goal", "", "", current.line_number]))
+					var lines := _get_lines(goal)
+					for line in lines:
+						ret.append(PackedStringArray([line, "practice.%s.goal" % [practice_idx], "", "", current.line_number]))
+					
+					var description := BBCodeUtils.get_practice_description(current)
+					ret.append(PackedStringArray([description, "practice.%s.description" % [practice_idx], "", "", current.line_number]))
+					
 					var hints := BBCodeUtils.get_practice_hints(current)
 					for i in hints.size():
-						ret.append(PackedStringArray([hints[i], "practice.hint.%s" % [i], "", "", current.line_number]))
+						ret.append(PackedStringArray([hints[i], "practice.%s.hint" % [practice_idx], "", "", current.line_number]))
+						
+					practice_idx += 1
 	
+	return ret
+
+
+func _find_line_number(raw_lines: PackedStringArray, line: String) -> int:
+	for i in raw_lines.size():
+		if raw_lines[i] == line:
+			return i
+	return -1
+
+
+func _get_lines(text_block: String, join_lists := true, join_codeblocks := true) -> PackedStringArray:
+	var raw_lines := text_block.split("\n", false)
+	var ret := PackedStringArray()
+	var in_codeblock := false
+	var current_line := ""
+	for line in raw_lines:
+		if "[code]" in line:
+			current_line = line
+			in_codeblock = true
+			continue
+		if "[/code]" in line:
+			current_line += "\n" + line
+			ret.push_back(current_line)
+			in_codeblock = false
+			continue
+		
+		if in_codeblock:
+			current_line += "\n" + line
+		else:
+			current_line = line
+		if not in_codeblock:
+			ret.push_back(current_line)
 	return ret
 
 

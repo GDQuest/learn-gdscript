@@ -221,6 +221,7 @@ func _make_note(node: BBCodeParser.ParseNode, _target_course_index: CourseIndex,
 	revealer.title = tr("Learn More") if title.is_empty() else tr(title)
 
 	_content_blocks.add_child(revealer)
+	_previous_paragraph = null
 	revealer.add_child(_make_paragraph(node, _course_index, _lesson, _user_profile))
 	_previous_paragraph = null
 	return revealer

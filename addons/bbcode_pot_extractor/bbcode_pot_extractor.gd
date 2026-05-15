@@ -11,13 +11,13 @@ var _bbcode_parser := BBCODE_TRANSLATION_PARSER.new()
 func _enter_tree() -> void:
 	add_translation_parser_plugin(_bbcode_parser)
 	
-	add_tool_menu_item("Generate Course POTs", _generate_course_pot)
+	add_tool_menu_item("Generate Course POT", _generate_course_pot)
 
 
 func _exit_tree() -> void:
 	remove_translation_parser_plugin(_bbcode_parser)
 	
-	remove_tool_menu_item("Generate Course POTs")
+	remove_tool_menu_item("Generate Course POT")
 
 
 func _generate_course_pot() -> void:
