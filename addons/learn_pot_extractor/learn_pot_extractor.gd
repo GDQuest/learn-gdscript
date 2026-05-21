@@ -11,6 +11,13 @@ const BBCODE_TRANSLATION_PARSER := preload("bbcode_translation_parser.gd")
 const CSV_TRANSLATION_PARSER := preload("error_code_pot_extractor.gd")
 const ENGINE_CALLER := preload("engine_caller.gd")
 
+static var POT_PATTERN := RegEx.create_from_string(
+	r'(?<comment>(#[:\.] [^\n]+\n)+)?' +
+	r'(?<ctxt>msgctxt "(?:\\.|[^"\\])*"\n)?' +
+	r'(?<id>msgid (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))' +
+	r'(?<str>msgstr (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))'
+)
+
 var _bbcode_parser := BBCODE_TRANSLATION_PARSER.new()
 var _error_code_parser := CSV_TRANSLATION_PARSER.new()
 var _current_pots: PackedStringArray
@@ -25,6 +32,7 @@ func _enter_tree() -> void:
 	add_tool_menu_item("Generate Application POT", _generate_application_pot)
 	add_tool_menu_item("Generate Error Database POT", _generate_error_database_pot)
 	add_tool_menu_item("Slipstream Existing Translations", _slipstream_existing_translations)
+	add_tool_menu_item("Generate All POT files", _generate_all_pot_files)
 
 
 func _exit_tree() -> void:
@@ -35,6 +43,14 @@ func _exit_tree() -> void:
 	remove_tool_menu_item("Generate Application POT")
 	remove_tool_menu_item("Generate Error Database POT")
 	remove_tool_menu_item("Slipstream Existing Translations")
+	remove_tool_menu_item("Generate All POT files")
+
+
+func _generate_all_pot_files() -> void:
+	await _generate_course_pot()
+	await _generate_application_pot()
+	await _generate_error_database_pot()
+	await _slipstream_existing_translations()
 
 
 func _slipstream_existing_translations() -> void:
@@ -50,17 +66,11 @@ func _slipstream_existing_translations() -> void:
 	var first_entry_idx := course_pot.find("#: ")
 	var course_header := course_pot.substr(0, first_entry_idx-1)
 	
-	var pot_pattern := RegEx.create_from_string(
-		r'(?<comment>(#: [^\n]+\n)+)?' +
-		r'(?<ctxt>msgctxt "(?:\\.|[^"\\])*"\n)?' +
-		r'(?<id>msgid (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))' +
-		r'(?<str>msgstr (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))'
-	)
 	var course_blocks := []
 	
 	var missing_strings_report := []
 	
-	var results := pot_pattern.search_all(course_pot, first_entry_idx)
+	var results := POT_PATTERN.search_all(course_pot, first_entry_idx)
 	for result in results:
 		var comments := _parse_course_comment(result)
 		var context := result.get_string("ctxt").substr(9, result.get_string("ctxt").length()-11)
@@ -74,13 +84,16 @@ func _slipstream_existing_translations() -> void:
 		
 		missing_strings_report.append("## %s ##" % [lang])
 		
+		var lesson_files := []
 		for file in DirAccess.get_files_at("res://i18n/%s" % [lang]):
 			if not file.begins_with("lesson-") or file.get_extension() != "po":
 				continue
-				
-			var lesson_text := FileAccess.open("res://i18n/%s/%s" % [lang, file], FileAccess.READ).get_as_text()
+			lesson_files.push_back("res://i18n/%s/%s" % [lang, file])
+		
+		for file in lesson_files:
+			var lesson_text := FileAccess.open(file, FileAccess.READ).get_as_text()
 			first_entry_idx = lesson_text.find("#: ")
-			var lesson_matches := pot_pattern.search_all(lesson_text, first_entry_idx)
+			var lesson_matches := POT_PATTERN.search_all(lesson_text, first_entry_idx)
 			
 			for lesson_match in lesson_matches:
 				var lesson_id := _parse_course_string(lesson_match, true)
@@ -90,24 +103,51 @@ func _slipstream_existing_translations() -> void:
 				)
 				if course_idx > -1:
 					course_blocks[course_idx][lang] = _parse_course_string(lesson_match, false)
-				else:
-					missing_strings_report.append("%s\n" % lesson_id)
 	
-		var lang_course := [course_header.replace("LANGUAGE", TranslationServer.get_language_name(lang))]
+		var lang_course := [course_header.replace("LANGUAGE", TranslationServer.get_language_name(lang)) + '"Language: %s\\n"' % [lang], ""]
 		for block: Dictionary in course_blocks:
-				for source: Dictionary in block.comments.sources:
-					lang_course.append("#: %s:%s" % [source.lesson, source.line_number])
 				if block.comments.comments:
 					for comment: String in block.comments.comments:
-						lang_course.append("#: %s" % [comment])
-				lang_course.append('msgctxt "%s"' % [block.context])
+						lang_course.append("#. %s" % [comment])
+				
+				if not block.comments.sources.is_empty():
+					var source_line := "#: %s" % [" ".join(block.comments.sources.map(func(source: Dictionary) -> String:
+						return "%s:%s" % [source.lesson, source.line_number]
+					))]
+					lang_course.append(source_line)
+				
+				if block.context:
+					lang_course.append('msgctxt "%s"' % [block.context])
 				lang_course.append('msgid %s' % [_wrap_and_quoted_string(block.id)])
 				lang_course.append('msgstr %s' % [_wrap_and_quoted_string(block.get(lang, ""))])
 				lang_course.append("")
 		FileAccess.open("res://i18n/course.%s.po" % [lang], FileAccess.WRITE).store_string("\n".join(lang_course))
+		_update_missing_strings("res://i18n/course.%s.po" % [lang], missing_strings_report)
+		
 	FileAccess.open("res://i18n/missing_string_ids.txt", FileAccess.WRITE).store_string("\n".join(missing_strings_report))
 	print("Done")
 	_running = false
+
+
+func _update_missing_strings(po_file: String, missing_strings_report: Array) -> void:
+	var po_text := FileAccess.open(po_file, FileAccess.READ).get_as_text()
+	
+	var course_blocks := []
+	var results := POT_PATTERN.search_all(po_text)
+	
+	var missing_strings := []
+	
+	for result in results:
+		var msgstr := _parse_course_string(result, false)
+		if msgstr == "":
+			missing_strings.append_array([_parse_course_string(result, true), ""])
+	
+	var total_string_count := results.size()
+	var missing_string_count := floori(missing_strings.size()/2.0)
+	var available_strings := total_string_count - missing_string_count
+	var t := (float(available_strings) / float(total_string_count))*100.0
+	missing_strings_report.append_array(["%s / %s (%.0f%%)" % [available_strings, total_string_count, t], ""])
+	missing_strings_report.append_array(missing_strings)
 
 
 func _wrap_and_quoted_string(s: String) -> String:
