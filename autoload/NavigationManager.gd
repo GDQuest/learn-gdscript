@@ -211,6 +211,8 @@ func get_navigation_resource(resource_id: String) -> BBCodeParser.ParseNode:
 			return null
 		if TranslationManager.current_language != "en":
 			effective_bbcode = "%s.%s.%s" % [bbcode_path.get_basename(), TranslationManager.current_language, bbcode_path.get_extension()]
+			if not FileAccess.file_exists(effective_bbcode):
+				effective_bbcode = bbcode_path
 		var result := _parser.parse_file(effective_bbcode)
 
 		if result.errors:
