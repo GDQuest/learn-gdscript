@@ -148,7 +148,7 @@ func _update_documentation() -> void:
 			var docs_item := template_label.duplicate() as RichTextLabel
 			docs_item.text = (
 				"• [code]%s[/code]\n  %s"
-				% [doc_spec.to_bbcode(), TextUtils.tr_paragraph(doc_spec.explanation)]
+				% [doc_spec.to_bbcode(), TextUtils.paragraph(doc_spec.explanation)]
 			)
 			_docs_item_list.add_child(docs_item)
 
@@ -164,7 +164,7 @@ func _update_documentation() -> void:
 			var docs_item := template_label.duplicate() as RichTextLabel
 			docs_item.text = (
 				"• [code]%s[/code]\n  %s"
-				% [doc_spec.to_bbcode(), TextUtils.tr_paragraph(doc_spec.explanation)]
+				% [doc_spec.to_bbcode(), TextUtils.paragraph(doc_spec.explanation)]
 			)
 			_docs_item_list.add_child(docs_item)
 

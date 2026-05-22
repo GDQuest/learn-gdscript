@@ -44,7 +44,7 @@ func setup(practice: BBCodeParser.ParseNode, practice_index: int, lesson_number:
 	_title_label.text = "L%d.P%d %s" % [lesson_number, practice_index + 1, tr(title).capitalize()]
 
 	var description := BBCodeUtils.get_practice_description(practice)
-	_description_label.text = TextUtils.tr_paragraph(description)
+	_description_label.text = TextUtils.paragraph(description)
 	_description_label.visible = not description.is_empty()
 	_navigate_button.pressed.connect(Events.practice_requested.emit.bind(_practice))
 
@@ -56,7 +56,7 @@ func _update_labels() -> void:
 	var title := BBCodeUtils.get_practice_title(_practice)
 	_title_label.text = "L%d.P%d %s" % [_lesson_number, _practice_index + 1, tr(title).capitalize()]
 	var description := BBCodeUtils.get_practice_description(_practice)
-	_description_label.text = TextUtils.tr_paragraph(description)
+	_description_label.text = TextUtils.paragraph(description)
 
 
 func set_completed_before(value: bool) -> void:

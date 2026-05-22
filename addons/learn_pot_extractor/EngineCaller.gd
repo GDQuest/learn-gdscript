@@ -1,3 +1,4 @@
+@tool
 ## Extracts C++-only functions via their signals or bound call("") methods in exposed dialogs or controls
 extends RefCounted
 

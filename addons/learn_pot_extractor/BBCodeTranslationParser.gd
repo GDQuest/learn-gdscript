@@ -2,7 +2,7 @@
 extends EditorTranslationParserPlugin
 
 
-static var GLOSSARY_RE := RegEx.create_from_string(r"\[url=(?!http)[^\]]+\]([^\[]+)\[\/url\]")
+const SHARED := preload("Shared.gd")
 
 
 func _parse_file(path: String) -> Array[PackedStringArray]:
@@ -38,8 +38,8 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 					var lines := _get_lines(raw_string)
 					for i in lines.size():
 						var line := lines[i]
-						line = _fix_glossary_entries(line, glossary_results)
-						ret.append(PackedStringArray([line, "text", "", ('The "term" in [glossary term="<term>"] should be translated') if glossary_results[0] else "", current.line_number + i]))
+						line = SHARED.fix_glossary_entries(line, glossary_results)
+						ret.append(PackedStringArray([line, "text", "", ('The "term" in [glossary term="<term>"] should NOT be translated here') if glossary_results[0] else "", current.line_number + i]))
 				BBCodeParserData.Tag.TITLE:
 					ret.append(PackedStringArray([BBCodeUtils.get_paragraph_text(current), "heading", "", "", current.line_number]))
 				BBCodeParserData.Tag.QUIZ_CHOICE, BBCodeParserData.Tag.QUIZ_INPUT:
@@ -76,7 +76,9 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 						ret.append(PackedStringArray([lines[i], "practice.%s.goal" % [practice_idx], "", "", current.line_number]))
 					
 					var description := BBCodeUtils.get_practice_description(current)
-					ret.append(PackedStringArray([description, "practice.%s.description" % [practice_idx], "", "", current.line_number]))
+					lines = _get_lines(description)
+					for i in lines.size():
+						ret.append(PackedStringArray([lines[i], "practice.%s.description" % [practice_idx], "", "", current.line_number + i]))
 					
 					var hints := BBCodeUtils.get_practice_hints(current)
 					for i in hints.size():
@@ -124,15 +126,7 @@ func _get_lines(text_block: String) -> PackedStringArray:
 	return ret
 
 
-func _fix_glossary_entries(raw_string: String, out_did_find: Array) -> String:
-	var finds := GLOSSARY_RE.search_all(raw_string)
-	out_did_find.resize(1)
-	out_did_find[0] = not finds.is_empty()
-	
-	for i in range(finds.size()-1, -1, -1):
-		var find: RegExMatch = finds[i]
-		raw_string = raw_string.substr(0, find.get_start()) + '[glossary term="%s"]' % [find.get_string(1)] + raw_string.substr(find.get_end())
-	return raw_string
+
 
 
 func _get_recognized_extensions() -> PackedStringArray:

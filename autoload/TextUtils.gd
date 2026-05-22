@@ -174,6 +174,28 @@ func tr_paragraph(text: String) -> String:
 	return "\n\n".join(translated_paragraphs)
 
 
+func paragraph(text: String) -> String:
+	if text.is_empty():
+		return text
+
+	# Normalize line endings first (Windows CRLF to LF) to avoid edge cases on
+	# Windows in particular.
+	var normalized := text.replace("\r\n", "\n")
+	var paragraphs := normalized.split("\n\n")
+	if paragraphs.size() <= 1:
+		return normalized
+
+	var parsed_paragraphs := PackedStringArray()
+	for paragraph in paragraphs:
+		var trimmed: String = paragraph.strip_edges()
+		if trimmed.is_empty():
+			parsed_paragraphs.append("")
+		else:
+			parsed_paragraphs.append(trimmed)
+
+	return "\n\n".join(parsed_paragraphs)
+
+
 # Call this function to ensure that changes to the formatter don't change color highlighting.
 func _test_formatting() -> void:
 	var color_number := CodeEditorEnhancer.COLOR_NUMBERS.to_html(false)

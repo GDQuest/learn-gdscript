@@ -186,6 +186,8 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 	var root := ParseNode.new()
 	root.tag = _parser_data.Tag.UNKNOWN
 	root.line_number = 0
+	if file_path.get_file().get_basename().count(".") > 0:
+		file_path = "%s.%s" % [file_path.get_basename().substr(0, file_path.get_basename().rfind(".")), file_path.get_extension()]
 	root.bbcode_path = file_path
 
 	var stack := [root]

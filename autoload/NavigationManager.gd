@@ -206,23 +206,27 @@ func get_navigation_resource(resource_id: String) -> BBCodeParser.ParseNode:
 		lesson_data = _lesson_cache[bbcode_path]
 	else:
 		var _parser := LessonBBCodeParser.new()
+		var effective_bbcode := bbcode_path
 		if not FileAccess.file_exists(bbcode_path):
 			return null
-		var result := _parser.parse_file(bbcode_path)
+		if TranslationManager.current_language != "en":
+			effective_bbcode = "%s.%s.%s" % [bbcode_path.get_basename(), TranslationManager.current_language, bbcode_path.get_extension()]
+		var result := _parser.parse_file(effective_bbcode)
 
 		if result.errors:
-			push_error("NavigationManager.gd:get_navigation_resource(): Parse errors when loading lesson from bbcode file %s:" % bbcode_path)
+			push_error("NavigationManager.gd:get_navigation_resource(): Parse errors when loading lesson from bbcode file %s:" % effective_bbcode)
 			for error: BBCodeParser.ParseError in result.errors:
 				push_error("  " + error.format())
 			return null
 
 		if result.warnings:
-			print("NavigationManager.gd:get_navigation_resource(): Parse warnings when loading lesson from bbcode file %s:" % bbcode_path)
+			print("NavigationManager.gd:get_navigation_resource(): Parse warnings when loading lesson from bbcode file %s:" % effective_bbcode)
 			for warning: BBCodeParser.ParseError in result.warnings:
 				print("  ", warning.format())
 
 		lesson_data = result.root.children[0]
-		_lesson_cache[bbcode_path] = lesson_data
+		#if not skip_cache:
+		_lesson_cache[effective_bbcode] = lesson_data
 
 	if is_practice:
 		var lesson_slug := course_index.get_lesson_slug_from_path(bbcode_path)

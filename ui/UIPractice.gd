@@ -148,10 +148,10 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 	_practice_index = BBCodeUtils.get_practice_index(lesson, practice)
 
 	var title := BBCodeUtils.get_practice_title(practice)
-	_info_panel.title_label.text = "L%d.P%d %s" % [lesson_number, _practice_index + 1, tr(title).capitalize()]
+	_info_panel.title_label.text = "L%d.P%d %s" % [lesson_number, _practice_index + 1, title.capitalize()]
 	var goal := BBCodeUtils.get_practice_goal(practice)
 	_info_panel.goal_rich_text_label.text = TextUtils.bbcode_add_code_color(
-		TextUtils.tr_paragraph(goal),
+		TextUtils.paragraph(goal),
 	)
 	var starting_code := BBCodeUtils.get_practice_starting_code(practice)
 	_code_editor.text = starting_code
@@ -231,10 +231,10 @@ func _update_labels() -> void:
 		return
 
 	var title := BBCodeUtils.get_practice_title(_practice)
-	_info_panel.title_label.text = "L%d.P%d %s" % [_lesson_number, _practice_index + 1, tr(title).capitalize()]
+	_info_panel.title_label.text = "L%d.P%d %s" % [_lesson_number, _practice_index + 1, title.capitalize()]
 	var goal := BBCodeUtils.get_practice_goal(_practice)
 	_info_panel.goal_rich_text_label.text = TextUtils.bbcode_add_code_color(
-		TextUtils.tr_paragraph(goal),
+		TextUtils.paragraph(goal),
 	)
 
 	var index := 0
@@ -244,7 +244,7 @@ func _update_labels() -> void:
 		if not practice_hint:
 			continue
 
-		practice_hint.title = tr("Hint %s") % [str(index + 1).pad_zeros(1)]
+		practice_hint.title = "Hint %s" % [str(index + 1).pad_zeros(1)]
 		practice_hint.text = hints[index]
 		index += 1
 

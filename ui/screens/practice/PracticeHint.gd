@@ -31,4 +31,4 @@ func _update_rtl_text() -> void:
 	if Engine.is_editor_hint():
 		_rich_text_label.text = text
 	else:
-		_rich_text_label.text = TextUtils.tr_paragraph(text)
+		_rich_text_label.text = TextUtils.paragraph(text)

@@ -72,15 +72,15 @@ func setup(quiz: BBCodeParser.ParseNode) -> void:
 		await self.ready
 
 	var question: String = _quiz_data.question
-	_question.text = "[b]" + tr(question) + "[/b]"
+	_question.text = "[b]" + question + "[/b]"
 
 	var content: String = _quiz_data.content
 	_content.visible = not content.is_empty()
-	_content.text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(content))
+	_content.text = TextUtils.bbcode_add_code_color(TextUtils.paragraph(content))
 
 	var explanation: String = _quiz_data.explanation
 	_explanation.visible = not explanation.is_empty()
-	_explanation.text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(explanation))
+	_explanation.text = TextUtils.bbcode_add_code_color(TextUtils.paragraph(explanation))
 
 
 func set_completed_before(value: bool) -> void:
@@ -95,12 +95,12 @@ func _update_labels() -> void:
 		return
 
 	var question := _quiz_data.question
-	_question.text = "[b]" + tr(question) + "[/b]"
+	_question.text = "[b]" + question + "[/b]"
 
 	var content_bbcode := _quiz_data.content
-	_content.text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(content_bbcode))
+	_content.text = TextUtils.bbcode_add_code_color(TextUtils.paragraph(content_bbcode))
 	var explanation_bbcode := _quiz_data.explanation
-	_explanation.text = TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(explanation_bbcode))
+	_explanation.text = TextUtils.bbcode_add_code_color(TextUtils.paragraph(explanation_bbcode))
 
 
 # Virtual

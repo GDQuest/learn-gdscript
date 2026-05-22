@@ -84,7 +84,7 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 
 	_lesson = lesson
 	_course_index = course_index
-	_title.text = tr(BBCodeUtils.get_lesson_title(lesson))
+	_title.text = BBCodeUtils.get_lesson_title(lesson)
 	var user_profile := UserProfiles.get_profile()
 
 	for child_node: BBCodeParser.ParseNode in lesson.children:
@@ -134,7 +134,7 @@ func _update_labels() -> void:
 		return
 
 	var title := BBCodeUtils.get_lesson_title(_lesson)
-	_title.text = tr(title)
+	_title.text = title
 
 
 func get_screen_resource() -> BBCodeParser.ParseNode:
@@ -205,7 +205,7 @@ func _make_paragraph(node: BBCodeParser.ParseNode, _target_course_index: CourseI
 		_previous_paragraph = instance
 	
 	var text_content := BBCodeUtils.get_paragraph_text(node)
-	instance.text += TextUtils.bbcode_add_code_color(TextUtils.tr_paragraph(text_content))
+	instance.text += TextUtils.bbcode_add_code_color(TextUtils.paragraph(text_content))
 	
 	return instance
 
@@ -218,7 +218,7 @@ func _make_note(node: BBCodeParser.ParseNode, _target_course_index: CourseIndex,
 
 	revealer.title_font_color = COLOR_NOTE
 	var title := BBCodeUtils.get_note_title(node)
-	revealer.title = tr("Learn More") if title.is_empty() else tr(title)
+	revealer.title = tr("Learn More") if title.is_empty() else title
 
 	_content_blocks.add_child(revealer)
 	_previous_paragraph = null
@@ -232,7 +232,7 @@ func _make_title(node: BBCodeParser.ParseNode, _target_course_index: CourseIndex
 	if _previous_paragraph == null:
 		instance = RichTextLabel.new()
 	var text_content := BBCodeUtils.get_paragraph_text(node)
-	instance.text += "\n\n[font size=28 name='%s']%s[/font]\n\n" % [HEADER_FONT, TextUtils.tr_paragraph(text_content)]
+	instance.text += "\n\n[font size=28 name='%s']%s[/font]\n\n" % [HEADER_FONT, TextUtils.paragraph(text_content)]
 	return instance
 
 
