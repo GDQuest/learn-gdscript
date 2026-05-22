@@ -7,6 +7,13 @@ func _prepare():
 	first_node = _scene_root_viewport.get_child(0)
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Addition Is Used To Increase Level"), tr(""), test_addition_is_used_to_increase_level))
+	checks.append(Check.new(tr("Multiplication Is Used To Increase Max Health"), tr(""), test_multiplication_is_used_to_increase_max_health))
+	checks.append(Check.new(tr("Level Is The Correct Value"), tr(""), test_level_is_the_correct_value))
+	checks.append(Check.new(tr("Max Health Is The Correct Value"), tr(""), test_max_health_is_the_correct_value))
+
+
 func test_addition_is_used_to_increase_level() -> String:
 	var level_up_function := _analyzer.get_function_named("level_up")
 	
@@ -50,3 +57,4 @@ func test_max_health_is_the_correct_value() -> String:
 	if is_equal_approx(max_health_value, 121):
 		return ""
 	return tr("Max health variable's value is %s; It should be 121 after levelling up twice.") % max_health_value
+

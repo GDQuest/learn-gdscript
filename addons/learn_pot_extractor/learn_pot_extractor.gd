@@ -1,3 +1,5 @@
+
+
 @tool
 extends EditorPlugin
 
@@ -12,7 +14,7 @@ const CSV_TRANSLATION_PARSER := preload("error_code_pot_extractor.gd")
 const ENGINE_CALLER := preload("engine_caller.gd")
 
 static var POT_PATTERN := RegEx.create_from_string(
-	r'(?<comment>(#[:\.] [^\n]+\n)+)?' +
+	r'(?<comment>(?:#[^\n]+\n)+)?' +
 	r'(?<ctxt>msgctxt "(?:\\.|[^"\\])*"\n)?' +
 	r'(?<id>msgid (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))' +
 	r'(?<str>msgstr (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))'
@@ -174,7 +176,7 @@ func _parse_course_comment(target: RegExMatch) -> Dictionary:
 			var line_number := comment.substr(line_number_idx+1).to_int()
 			result.sources.push_back({"lesson": path, "line_number": line_number})
 		else:
-			result.comments.push_back(comment.substr(3))
+			result.comments.push_back(comment.substr(2 if comment.begins_with("# ") else 3))
 	
 	return result
 

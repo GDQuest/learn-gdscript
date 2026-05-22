@@ -19,6 +19,8 @@ var status: int = Status.IDLE:
 	set = set_status
 var title := "":
 	set = set_title
+var tooltip := "":
+	set = set_tooltip
 
 @onready var _icon := $IconAnchors/Icon as TextureRect
 @onready var _label := $Label as Label
@@ -61,6 +63,13 @@ func set_title(new_title: String) -> void:
 	if not is_inside_tree():
 		await self.ready
 	_label.text = new_title
+
+
+func set_tooltip(new_tooltip: String) -> void:
+	tooltip = new_tooltip
+	if not is_inside_tree():
+		await self.ready
+	_label.tooltip_text = new_tooltip
 
 
 func set_status(new_status: int) -> void:

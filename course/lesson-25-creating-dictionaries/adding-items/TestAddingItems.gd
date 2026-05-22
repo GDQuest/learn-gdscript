@@ -12,6 +12,11 @@ func _prepare() -> void:
 	inventory = _scene_root_viewport.get_child(0)
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Add Item Function Works As Intended"), tr(""), test_add_item_function_works_as_intended))
+	checks.append(Check.new(tr("Add Item Function Uses Addition"), tr(""), test_add_item_function_uses_addition))
+
+
 func test_add_item_function_works_as_intended():
 	var source: Dictionary = inventory.get("inventory")
 	var inventories_match := source.has_all(desired_inventory.keys())
@@ -75,3 +80,4 @@ func test_add_item_function_uses_addition() -> String:
 		return tr("It doesn't look like you're adding '%s' to the value in the inventory dictionary." % [captures.amount])
 	
 	return ""
+

@@ -76,6 +76,13 @@ func _prepare():
 			success_list.append(varname)
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Whole Number Has Correct Value"), tr(""), test_whole_number_has_correct_value))
+	checks.append(Check.new(tr("Text Has Correct Value"), tr(""), test_text_has_correct_value))
+	checks.append(Check.new(tr("Vector Has Correct Value"), tr(""), test_vector_has_correct_value))
+	checks.append(Check.new(tr("Decimal Number Has Correct Value"), tr(""), test_decimal_number_has_correct_value))
+
+
 func test_whole_number_has_correct_value() -> String:
 	if not "whole_number" in correct_type_list:
 		return tr("It looks like you changed the type hint of 'whole_number'. The type should stay 'int'. Only change the value after the '=' sign.")
@@ -106,3 +113,4 @@ func test_decimal_number_has_correct_value() -> String:
 	if not "decimal_number" in success_list:
 		return tr("The value of 'decimal_number' does not match its type hint (float). Change the value after '=' to a decimal number with a decimal point, for example: 3.14")
 	return ""
+

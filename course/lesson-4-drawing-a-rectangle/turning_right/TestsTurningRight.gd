@@ -7,6 +7,10 @@ func _init() -> void:
 	target_polygon.sort()
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Draw Corner Of 200 By 200"), tr(""), test_draw_corner_of_200_by_200))
+
+
 func test_draw_corner_of_200_by_200() -> String:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	var polygons := turtle.get_polygons()
@@ -24,3 +28,4 @@ func test_draw_corner_of_200_by_200() -> String:
 		return tr("The drawn shape is not a corner connected by two lines of length 200.")
 
 	return ""
+

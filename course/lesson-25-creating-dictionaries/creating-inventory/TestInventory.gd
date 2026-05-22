@@ -13,6 +13,11 @@ func _prepare() -> void:
 	inventory = _scene_root_viewport.get_child(0)
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Inventory Has Correct Keys"), tr(""), test_inventory_has_correct_keys))
+	checks.append(Check.new(tr("Inventory Has Correct Values"), tr(""), test_inventory_has_correct_values))
+
+
 func test_inventory_has_correct_keys():
 	var source: Dictionary = inventory.get("inventory")
 
@@ -57,3 +62,4 @@ func test_inventory_has_correct_values():
 
 	else:
 		return ""
+

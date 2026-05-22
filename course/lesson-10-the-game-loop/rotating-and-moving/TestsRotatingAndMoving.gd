@@ -12,6 +12,10 @@ func _prepare() -> void:
 			lines.push_back(line)
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Character Is Moving In A Circle Clockwise"), tr(""), test_character_is_moving_in_a_circle_clockwise))
+
+
 func test_character_is_moving_in_a_circle_clockwise() -> String:
 	if not matches_code_line(["rotate(*)"]):
 		return tr("Did you use rotate() to make the sprite rotate?")
@@ -23,3 +27,4 @@ func test_character_is_moving_in_a_circle_clockwise() -> String:
 	elif is_equal_approx(robot.position.x, 300.0):
 		return tr("The character didn't move as expected.")
 	return ""
+

@@ -13,6 +13,12 @@ func _prepare():
 			break
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Angular Speed Variable Is Script Wide"), tr(""), test_angular_speed_variable_is_script_wide))
+	checks.append(Check.new(tr("Angular Speed Has Value Of 4"), tr(""), test_angular_speed_has_value_of_4))
+	checks.append(Check.new(tr("Angular Speed Is Used In Process Function"), tr(""), test_angular_speed_is_used_in_process_function))
+
+
 func test_angular_speed_variable_is_script_wide() -> String:
 	if not has_angular_speed_prop:
 		return tr("The angular_speed isn't script-wide. Did you define it outside of the function?")
@@ -45,3 +51,4 @@ func test_angular_speed_is_used_in_process_function() -> String:
 		return tr("The rotate() call must multiply angular_speed by delta (e.g. rotate(angular_speed * delta)).")
 	
 	return ""
+

@@ -18,6 +18,10 @@ func _init() -> void:
 		rect.sort()
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Draw Rectangles Of Varying Sizes"), tr(""), test_draw_rectangles_of_varying_sizes))
+
+
 func test_draw_rectangles_of_varying_sizes() -> String:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	var polygons := turtle.get_polygons()
@@ -42,3 +46,4 @@ func test_draw_rectangles_of_varying_sizes() -> String:
 		elif points != expected_rects[index]:
 			return tr("The drawn shapes don't have the expected length and height. Did you forget to use the length and height parameter?")
 	return ""
+

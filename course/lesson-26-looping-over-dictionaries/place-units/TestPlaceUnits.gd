@@ -7,6 +7,11 @@ func _prepare() -> void:
 	grid = _scene_root_viewport.get_child(0)
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("All Units Are Displayed"), tr(""), test_all_units_are_displayed))
+	checks.append(Check.new(tr("Code Uses A For Loop"), tr(""), test_code_uses_a_for_loop))
+
+
 func test_all_units_are_displayed():
 	var displayed: Dictionary = grid.get_displayed_units_info()
 	var source: Dictionary = grid.get("units")
@@ -33,3 +38,4 @@ func test_code_uses_a_for_loop():
 	).matches(run_function):
 		return tr("Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!")
 	return ""
+

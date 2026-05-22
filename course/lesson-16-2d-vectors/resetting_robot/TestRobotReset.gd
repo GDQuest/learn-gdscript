@@ -7,6 +7,12 @@ func _prepare() -> void:
 	robot = _scene_root_viewport.get_child(0)
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Use Vector 2 To Reset Robot"), tr(""), test_use_vector2_to_reset_robot))
+	checks.append(Check.new(tr("Robot Scale Is Reset"), tr(""), test_robot_scale_is_reset))
+	checks.append(Check.new(tr("Robot Position Is Reset"), tr(""), test_robot_position_is_reset))
+
+
 func test_use_vector2_to_reset_robot() -> String:
 	# Find all Vector2 variable declarations in the student's code.
 	# We need to track these because students might assign Vector2 values to variables
@@ -78,3 +84,4 @@ func test_robot_position_is_reset() -> String:
 	if position.is_equal_approx(Vector2.ZERO):
 		return ""
 	return tr("position's value is %s; It should be (0.0, 0.0) after resetting.") % [position]
+

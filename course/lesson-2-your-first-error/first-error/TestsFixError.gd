@@ -1,5 +1,9 @@
 extends PracticeTester
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Remove Errors"), tr(""), test_remove_errors))
+
+
 func test_remove_errors() -> String:
 	for line in _slice.get_slice_text():
 		if "#" in line:

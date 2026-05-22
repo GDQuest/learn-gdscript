@@ -38,6 +38,13 @@ func _prepare():
 # No need to return translation strings or detailed error messages because wrong
 # types will lead to GDScript type errors and the following checks won't even
 # run.
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Vector Has Correct Hint"), tr(""), test_vector_has_correct_hint))
+	checks.append(Check.new(tr("Text Has Correct Hint"), tr(""), test_text_has_correct_hint))
+	checks.append(Check.new(tr("Whole Number Has Correct Hint"), tr(""), test_whole_number_has_correct_hint))
+	checks.append(Check.new(tr("Decimal Number Has Correct Hint"), tr(""), test_decimal_number_has_correct_hint))
+
+
 func test_vector_has_correct_hint() -> String:
 	if not "vector" in success_list:
 		return "Error"
@@ -60,3 +67,4 @@ func test_decimal_number_has_correct_hint() -> String:
 	if not "decimal_number" in success_list:
 		return "Error"
 	return ""
+

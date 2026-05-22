@@ -46,9 +46,11 @@ func display_tests(info: Array) -> void:
 		check.queue_free()
 		check = _checks.get_contents().pop_back()
 
-	for test: String in info:
+	for test: Dictionary in info:
 		var instance: PracticeTestDisplay = TestDisplayScene.instantiate()
-		instance.title = tr(test)
+		instance.title = tr(test.description as String)
+		if test.tooltip:
+			instance.tooltip = tr(test.tooltip as String)
 		_checks.add_child(instance)
 
 

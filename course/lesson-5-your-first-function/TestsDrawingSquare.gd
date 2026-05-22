@@ -7,6 +7,10 @@ func _init() -> void:
 	target_polygon.sort()
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Draw Square Of 200 Pixels"), tr(""), test_draw_square_of_200_pixels))
+
+
 func test_draw_square_of_200_pixels() -> String:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	var polygons := turtle.get_polygons()

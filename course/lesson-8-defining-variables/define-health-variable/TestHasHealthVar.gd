@@ -11,6 +11,11 @@ func _prepare():
 			has_health_prop = true
 			break
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Has Health Variable"), tr(""), test_has_health_variable))
+	checks.append(Check.new(tr("Health Has Value Of 100"), tr(""), test_health_has_value_of_100))
+
+
 func test_has_health_variable() -> String:
 	if not has_health_prop:
 		return tr("The health variable doesn't exist. Did you define it with the var keyword?")
@@ -29,3 +34,4 @@ func test_health_has_value_of_100() -> String:
 	if health_value == 100:
 		return ""
 	return tr("Health variable's value is %s; It should be 100.") % health_value
+

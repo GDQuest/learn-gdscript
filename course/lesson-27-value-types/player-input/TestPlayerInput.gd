@@ -9,6 +9,11 @@ func _prepare():
 	count = node.get("item_count")
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Item Count Is Int"), tr(""), test_item_count_is_int))
+	checks.append(Check.new(tr("Item Count Matches Player Input"), tr(""), test_item_count_matches_player_input))
+
+
 func test_item_count_is_int() -> String:
 	if not count is int:
 		return tr(
@@ -34,3 +39,4 @@ func test_item_count_matches_player_input() -> String:
 			)
 		)
 	return ""
+

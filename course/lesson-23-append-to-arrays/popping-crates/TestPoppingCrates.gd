@@ -6,6 +6,12 @@ func _prepare() -> void:
 	game_board = _scene_root_viewport.get_child(0)
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Used Pop Back"), tr(""), test_used_pop_back))
+	checks.append(Check.new(tr("Used While Loop"), tr(""), test_used_while_loop))
+	checks.append(Check.new(tr("Crates Array Is Empty"), tr(""), test_crates_array_is_empty))
+
+
 func test_used_pop_back() -> String:
 	if not "pop_back()" in _slice.current_text:
 		return tr("We found no call to the pop_back() function. Did you forget to call it?")
@@ -22,3 +28,4 @@ func test_crates_array_is_empty() -> String:
 	if crates_size != 0:
 		return tr("The crate array is not empty")
 	return ""
+

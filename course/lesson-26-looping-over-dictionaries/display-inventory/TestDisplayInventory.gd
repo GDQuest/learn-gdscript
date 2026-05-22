@@ -7,6 +7,11 @@ func _prepare() -> void:
 	inventory = _scene_root_viewport.get_child(0)
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("All Items Are Displayed"), tr(""), test_all_items_are_displayed))
+	checks.append(Check.new(tr("Code Uses A For Loop"), tr(""), test_code_uses_a_for_loop))
+
+
 func test_all_items_are_displayed():
 	var displayed: Dictionary = inventory.get_displayed_items_info()
 	var source: Dictionary = inventory.get("inventory")
@@ -35,3 +40,4 @@ func test_code_uses_a_for_loop():
 		return tr("Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!")
 	
 	return ""
+

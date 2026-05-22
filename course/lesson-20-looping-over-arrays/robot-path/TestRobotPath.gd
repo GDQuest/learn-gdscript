@@ -13,6 +13,11 @@ func _prepare() -> void:
 	path_robot = robot.points
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Robot Moves Along Blue Path"), tr(""), test_robot_moves_along_blue_path))
+	checks.append(Check.new(tr("Code Uses Move To"), tr(""), test_code_uses_move_to))
+
+
 func test_robot_moves_along_blue_path() -> String:
 	if game_board.EXPECTED_PATH != path_source:
 		return tr("The robot's path changed. Did you change the robot_path array?")
@@ -38,3 +43,4 @@ func test_code_uses_move_to() -> String:
 	if not "robot.move_to(" in _slice.current_text:
 		return tr("We found no call to the robot's move_to() function. Did you forget to call it?")
 	return ""
+

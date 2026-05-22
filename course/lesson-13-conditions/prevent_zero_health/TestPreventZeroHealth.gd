@@ -9,6 +9,12 @@ func _prepare():
 	first_node = _scene_root_viewport.get_child(0)
 	health = first_node.health
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Health Reaches Zero"), tr(""), test_health_reaches_zero))
+	checks.append(Check.new(tr("Health Does Not Go Below Zero"), tr(""), test_health_does_not_go_below_zero))
+	checks.append(Check.new(tr("Health Takes Different Values"), tr(""), test_health_takes_different_values))
+
+
 func test_health_reaches_zero() -> String:
 	if health > 0:
 		return tr("The health stays above 0 when we damage the character a lot. Did you set the health to 0 when that happens?")
@@ -25,3 +31,4 @@ func test_health_takes_different_values() -> String:
 	if first_node.get_produced_health_values() != _expected_health_values:
 		return tr("When damaging the character three times by 10 points, the health should go down to 10, then 0. Instead, we got %s.\nAre you using the amount parameter?") % [first_node.get_produced_health_values()]
 	return ""
+

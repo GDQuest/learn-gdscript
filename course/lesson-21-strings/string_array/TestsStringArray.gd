@@ -8,6 +8,11 @@ func _prepare() -> void:
 	robot = _scene_root_viewport.get_child(0)
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Use For Loop"), tr(""), test_use_for_loop))
+	checks.append(Check.new(tr("Robot Combo Is Correct"), tr(""), test_robot_combo_is_correct))
+
+
 func test_use_for_loop() -> String:
 	var run_function := _analyzer.get_function_named("run")
 	
@@ -78,3 +83,4 @@ func test_robot_combo_is_correct() -> String:
 			return ""
 	
 	return tr("The combo isn't correct. Did you use the right actions in the right order?")
+

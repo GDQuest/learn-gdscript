@@ -32,6 +32,13 @@ func _clean_up() -> void:
 	_polygons.clear()
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Use For Loop"), tr(""), test_use_for_loop))
+	checks.append(Check.new(tr("Draw Three Squares"), tr(""), test_draw_three_squares))
+	checks.append(Check.new(tr("Squares Are All 100 By 100"), tr(""), test_squares_are_all_100_by_100))
+	checks.append(Check.new(tr("Shapes Are 100 Pixels Apart"), tr(""), test_shapes_are_100_pixels_apart))
+
+
 func test_use_for_loop() -> String:
 	if not "for" in _slice.current_text:
 		return tr("Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!")
@@ -73,3 +80,4 @@ func test_shapes_are_100_pixels_apart() -> String:
 	if not is_equal_approx(first_to_second, 200.0) or not is_equal_approx(second_to_third, 200.0):
 		return tr("Shapes are not separated by 100 pixels on the X axis.")
 	return ""
+

@@ -24,6 +24,11 @@ func _prepare():
 	damage_taken_at_level_3 = health_before_2 - health_after_2
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Multiplication Is Used To Reduce Damage Amount"), tr(""), test_multiplication_is_used_to_reduce_damage_amount))
+	checks.append(Check.new(tr("Damage Amount Is Correct Value"), tr(""), test_damage_amount_is_correct_value))
+
+
 func test_multiplication_is_used_to_reduce_damage_amount() -> String:
 	var take_damage_function := _analyzer.get_function_named("take_damage")
 	
@@ -76,3 +81,4 @@ func test_damage_amount_is_correct_value() -> String:
 		else:
 			return tr("The character appears to be taking 0 damage when its level is less than 3. Did you subtract the amount to health when the level is less than 3?")
 	return ""
+

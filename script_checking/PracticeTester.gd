@@ -9,6 +9,7 @@
 #
 # You can probe the tested scene and script slice using the `_scene` and
 # `_slice` properties below.
+@abstract
 class_name PracticeTester
 extends RefCounted
 
@@ -16,20 +17,27 @@ extends RefCounted
 var _scene_root_viewport: Node
 # Reference to the edited script slice. Use it to look at the user's code.
 var _slice: ScriptSlice
-var _test_methods := _find_test_method_names()
 var _code_lines := []
 var _checker: GDScriptErrorChecker
 var _analyzer: GDScriptASTAnalyzer
+var _checks: Array[Check]
 
 
 # We're not using _init() because it doesn't work unless you define it and call the parent's constructor in child classes. It would add boilerplate to every PracticeTester script.
 func setup(scene_root: Node, slice: ScriptSlice) -> void:
 	_slice = slice
 	_scene_root_viewport = scene_root
+	_checks = []
+	_define(_checks)
+
+
+@abstract
+## All practice testers should define their tests by appending them to the checks array
+func _define(checks: Array[Check]) -> void
 
 
 func get_test_names() -> Array:
-	return _test_methods.values()
+	return _checks.map(func (check: Check) -> Dictionary: return {"description": check._description, "tooltip": check._tooltip})
 
 
 func _update_analyzer() -> void:
@@ -46,15 +54,13 @@ func run_tests() -> TestResult:
 	_update_analyzer()
 	_prepare()
 
-	for method: StringName in _test_methods:
-		var test_name = _test_methods[method]
-
-		var error_message: String = call(method)
+	for check in _checks:
+		var error_message: String = check._checker.call()
 		if error_message != "":
-			result.errors[test_name] = error_message
+			result.errors[check._description] = error_message
 		else:
 			# We pass the test name to display it in the interface.
-			result.passed_tests.push_back(_test_methods[method])
+			result.passed_tests.push_back(check._description)
 
 	_clean_up()
 
@@ -131,3 +137,14 @@ class TestResult:
 
 	func is_success() -> bool:
 		return errors.is_empty()
+
+
+class Check:
+	var _description := ""
+	var _tooltip := ""
+	var _checker: Callable
+	
+	func _init(description: String, tooltip: String, checker: Callable) -> void:
+		_description = description
+		_tooltip = tooltip
+		_checker = checker

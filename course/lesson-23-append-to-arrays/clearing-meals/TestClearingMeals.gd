@@ -7,6 +7,12 @@ func _prepare() -> void:
 	game_board = _scene_root_viewport.get_child(0)
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Used Pop Front"), tr(""), test_used_pop_front))
+	checks.append(Check.new(tr("Used Append"), tr(""), test_used_append))
+	checks.append(Check.new(tr("Completed Orders Contain All Elements"), tr(""), test_completed_orders_contain_all_elements))
+
+
 func test_used_pop_front() -> String:
 	if not "waiting_orders.pop_front" in _slice.current_text:
 		return tr("We found no call to the pop_front() function. Did you forget to call it?")
@@ -34,3 +40,4 @@ func test_completed_orders_contain_all_elements() -> String:
 		return tr("we were expecting %s, but got %s instead")%[expected_orders, current_orders]
 	return ""
 	
+

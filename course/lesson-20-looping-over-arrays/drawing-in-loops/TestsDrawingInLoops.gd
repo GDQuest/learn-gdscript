@@ -33,6 +33,11 @@ func _prepare() -> void:
 	count = polygons.size()
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Rectangles Have The Correct Size"), tr(""), test_rectangles_have_the_correct_size))
+	checks.append(Check.new(tr("Rectangles Do Not Overlap"), tr(""), test_rectangles_do_not_overlap))
+
+
 func test_rectangles_have_the_correct_size() -> String:
 	if count != expected_rects.size():
 		return tr("We expected 4 polygons, but you drew %s instead.") % count
@@ -53,3 +58,4 @@ func test_rectangles_do_not_overlap() -> String:
 			return tr("At least two drawn shape intersect. Did you pass arguments big enough to the jump() function?")
 		last_polygon = polygons[index]
 	return ""
+

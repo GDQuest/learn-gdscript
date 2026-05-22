@@ -11,6 +11,10 @@ func _prepare() -> void:
 		if not line.is_empty():
 			lines.push_back(line)
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Character Is Rotating Clockwise"), tr(""), test_character_is_rotating_clockwise))
+
+
 func test_character_is_rotating_clockwise() -> String:
 	var has_rotate := false
 	for line in lines:
@@ -23,3 +27,4 @@ func test_character_is_rotating_clockwise() -> String:
 	if robot.rotation < 0.0:
 		return tr("The robot is turning in the wrong direction!")
 	return ""
+

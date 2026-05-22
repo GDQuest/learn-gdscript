@@ -16,6 +16,12 @@ func _prepare() -> void:
 		index += 1
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Moving In A Circle"), tr(""), test_moving_in_a_circle))
+	checks.append(Check.new(tr("Movement Is Time Dependent"), tr(""), test_movement_is_time_dependent))
+	checks.append(Check.new(tr("Movement Speed Is Correct"), tr(""), test_movement_speed_is_correct))
+
+
 func test_moving_in_a_circle() -> String:
 	var has_rotate := false
 	var has_move_local := false
@@ -99,3 +105,4 @@ func test_movement_speed_is_correct() -> String:
 	).matches(process):
 			return tr("The movement speed is not right. The robot should move 100 pixels per second. Make sure the call looks like this: move_local_x(100 * %s)." % [captures.delta])
 	return ""
+

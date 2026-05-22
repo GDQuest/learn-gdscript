@@ -7,6 +7,11 @@ func _prepare():
 	first_node = _scene_root_viewport.get_child(0)
 	health = first_node.health
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Robot Heals The Right Amount"), tr(""), test_robot_heals_the_right_amount))
+	checks.append(Check.new(tr("Heal Function Uses Addition"), tr(""), test_heal_function_uses_addition))
+
+
 func test_robot_heals_the_right_amount() -> String:
 	if health < 50:
 		return tr("The robot's health decreased instead of increasing. Did you add the amount to health?")
@@ -23,3 +28,4 @@ func test_heal_function_uses_addition() -> String:
 	if not result:
 		return tr("It doesn't look like you're adding anything to health.")
 	return ""
+

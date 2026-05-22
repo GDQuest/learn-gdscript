@@ -7,6 +7,11 @@ func _prepare() -> void:
 	first_node = _scene_root_viewport.get_child(0)
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Use A Vector To Increase Scale"), tr(""), test_use_a_vector_to_increase_scale))
+	checks.append(Check.new(tr("Correct Scale After 2 Levels"), tr(""), test_correct_scale_after_2_levels))
+
+
 func test_use_a_vector_to_increase_scale() -> String:
 	var level_up_function := _analyzer.get_function_named("level_up")
 	
@@ -38,3 +43,4 @@ func test_correct_scale_after_2_levels() -> String:
 		return ""
 
 	return tr("scale's value is %s; It should be (1.4, 1.4) after levelling up 2 times.") % scale
+

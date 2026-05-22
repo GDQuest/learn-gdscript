@@ -1,6 +1,13 @@
 extends PracticeTester
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Statement 1 Is True"), tr(""), test_statement_1_is_true))
+	checks.append(Check.new(tr("Statement 2 Is True"), tr(""), test_statement_2_is_true))
+	checks.append(Check.new(tr("Statement 3 Is True"), tr(""), test_statement_3_is_true))
+	checks.append(Check.new(tr("Statement 4 Is True"), tr(""), test_statement_4_is_true))
+
+
 func test_statement_1_is_true() -> String:
 	var run_function := _analyzer.get_function_named("run")
 	
@@ -63,3 +70,4 @@ func test_statement_4_is_true() -> String:
 	).matches(run_function):
 		return tr("The fourth comparison is not correct. Did you use the right comparison?")
 	return ""
+

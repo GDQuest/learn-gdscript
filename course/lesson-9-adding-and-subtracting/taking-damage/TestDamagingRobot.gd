@@ -9,6 +9,11 @@ func _prepare() -> void:
 	health = first_node.health
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Robot Takes The Right Amount Of Damage"), tr(""), test_robot_takes_the_right_amount_of_damage))
+	checks.append(Check.new(tr("Subtract Amount From Health"), tr(""), test_subtract_amount_from_health))
+
+
 func test_robot_takes_the_right_amount_of_damage() -> String:
 	if health > 100:
 		return tr("The health goes above 100 when we damage the robot. Did you subract amount from health?")
@@ -46,3 +51,4 @@ func test_subtract_amount_from_health() -> String:
 		return tr("It doesn't look like you're subtracting amount from health.")
 	
 	return ""
+

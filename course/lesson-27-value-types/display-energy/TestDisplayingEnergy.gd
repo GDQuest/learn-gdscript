@@ -7,6 +7,10 @@ func _prepare():
 	node = _scene_root_viewport.get_child(0)
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Displayed Energy Matches Energy Value"), tr(""), test_displayed_energy_matches_energy_value))
+
+
 func test_displayed_energy_matches_energy_value() -> String:
 	var energy = node.get("energy")
 	if not energy is int:
@@ -16,3 +20,4 @@ func test_displayed_energy_matches_energy_value() -> String:
 	if node.energy_label.text != expected:
 		return tr("The value of the energy variable does not match the displayed text. Did you call the str() function?")
 	return ""
+

@@ -11,6 +11,10 @@ func _init() -> void:
 		rect.sort()
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Draw Corners Of Varying Sizes And Angles"), tr(""), test_draw_corners_of_varying_sizes_and_angles))
+
+
 func test_draw_corners_of_varying_sizes_and_angles() -> String:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	var polygons := turtle.get_polygons()
@@ -30,3 +34,4 @@ func test_draw_corners_of_varying_sizes_and_angles() -> String:
 			return tr("The drawn corner doesn't match the expected corner. Are you not using the angle parameter in your code?")
 
 	return ""
+

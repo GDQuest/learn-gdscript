@@ -11,6 +11,11 @@ func _prepare() -> void:
 	game_board = _scene_root_viewport.get_child(0)
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Correct Items Have Been Picked"), tr(""), test_correct_items_have_been_picked))
+	checks.append(Check.new(tr("Picked Correct Item Amount"), tr(""), test_picked_correct_item_amount))
+
+
 func test_correct_items_have_been_picked() -> String:
 	var received = game_board.used_items_names
 	for expected in permutations:
@@ -24,3 +29,4 @@ func test_picked_correct_item_amount() -> String:
 	if received.size() != 2:
 		return "We expected 2 items to be picked. Instead, we got %s."%[received.size()]
 	return ""
+

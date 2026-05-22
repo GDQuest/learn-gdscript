@@ -19,6 +19,11 @@ func _prepare() -> void:
 		_has_proper_body = _body.replace(" ", "") in ["rotate(delta*2)", "rotate(2*delta)"]
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Rotating Character Is Time Dependent"), tr(""), test_rotating_character_is_time_dependent))
+	checks.append(Check.new(tr("Rotation Speed Is 2 Radians Per Second"), tr(""), test_rotation_speed_is_2_radians_per_second))
+
+
 func test_rotating_character_is_time_dependent() -> String:
 	if not _has_proper_body:
 		var has_delta := _body.rfind("delta") > 0
@@ -71,3 +76,4 @@ func test_rotation_speed_is_2_radians_per_second() -> String:
 	).matches(process):
 		return tr("The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * delta).")
 	return ""
+

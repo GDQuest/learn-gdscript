@@ -7,6 +7,10 @@ func _init() -> void:
 	target_polygon.sort()
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Draw Rectangle Of 200 By 120"), tr(""), test_draw_rectangle_of_200_by_120))
+
+
 func test_draw_rectangle_of_200_by_120() -> String:
 	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
 	var polygons := turtle.get_polygons()
@@ -24,3 +28,4 @@ func test_draw_rectangle_of_200_by_120() -> String:
 		return tr("The drawn shape is not a rectangle with a width of 200 and a length of 120.")
 
 	return ""
+

@@ -12,6 +12,10 @@ func cell_to_world(cell: Vector2) -> Vector2:
 	return cell * cell_size
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Function Maps Cell To World Coordinates"), tr(""), test_function_maps_cell_to_world_coordinates))
+
+
 func test_function_maps_cell_to_world_coordinates() -> String:
 	if not node.has_method("convert_to_world_coordinates"):
 		return tr("Function convert_to_world_coordinates() does not exist. Did you make a typo or not define it?")
@@ -26,3 +30,4 @@ func test_function_maps_cell_to_world_coordinates() -> String:
 			return tr("When converting cell %s to world coordinates, we got %s, but we expected %s.") % [cell, student_result, expected]
 
 	return ""
+

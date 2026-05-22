@@ -13,6 +13,10 @@ func _prepare() -> void:
 			break
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Robot Name Is A String"), tr(""), test_robot_name_is_a_string))
+
+
 func test_robot_name_is_a_string() -> String:
 	if not has_name_prop:
 		return tr("The robot_name variable doesn't exist.")
@@ -23,3 +27,4 @@ func test_robot_name_is_a_string() -> String:
 	elif not value is String:
 		return tr("The robot_name isn't a string. Did you add quotes around the value?")
 	return ""
+

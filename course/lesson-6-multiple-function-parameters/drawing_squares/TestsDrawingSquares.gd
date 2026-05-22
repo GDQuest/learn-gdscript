@@ -17,6 +17,12 @@ func _prepare():
 	turtle = _scene_root_viewport.get_child(0)
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Turtle Ends Facing Towards The Right"), tr(""), test_turtle_ends_facing_towards_the_right))
+	checks.append(Check.new(tr("Turtle Starts Each Square Facing Towards The Right"), tr(""), test_turtle_starts_each_square_facing_towards_the_right))
+	checks.append(Check.new(tr("Draw Squares Of Varying Sizes"), tr(""), test_draw_squares_of_varying_sizes))
+
+
 func test_turtle_ends_facing_towards_the_right() -> String:
 	if turtle.get_polygons().is_empty():
 		return tr("The turtle did not draw anything. Make sure your function calls move_forward(length) to move the turtle.")
@@ -64,3 +70,4 @@ func test_draw_squares_of_varying_sizes() -> String:
 				"The shape is not a square or not turned in the expected direction. Did you use 90 degree angles when calling turn_right()?"
 			)
 	return ""
+

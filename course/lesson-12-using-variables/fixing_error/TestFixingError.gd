@@ -13,6 +13,14 @@ func _prepare():
 			break
 
 
+func _define(checks: Array[Check]) -> void:
+	checks.append(Check.new(tr("Has Angular Speed Variable"), tr(""), test_has_angular_speed_variable))
+	checks.append(Check.new(tr("Angular Speed Has Value Of 4"), tr(""), test_angular_speed_has_value_of_4))
+	checks.append(Check.new(tr("Angular Speed Is Used In Process Function"), tr(""), test_angular_speed_is_used_in_process_function))
+	checks.append(Check.new(tr("Each Function Uses The Same Variable"), tr(""), test_each_function_uses_the_same_variable))
+	checks.append(Check.new(tr("Angular Speed Is Used In Setter Function"), tr(""), test_angular_speed_is_used_in_setter_function))
+
+
 func test_has_angular_speed_variable() -> String:
 	if not has_angular_speed_prop:
 		return tr("The angular_speed variable doesn't exist. Did you define it with the var keyword?")
@@ -70,3 +78,4 @@ func test_angular_speed_is_used_in_setter_function() -> String:
 		return tr("The set_angular_speed() function doesn't seem to use the angular_speed variable.")
 	
 	return ""
+
