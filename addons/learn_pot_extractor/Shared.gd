@@ -11,10 +11,13 @@ static var POT_PATTERN := RegEx.create_from_string(
 )
 
 
-static func build_tr_blocks(po_file: String) -> Array[Dictionary]:
+static func build_tr_blocks(po_file: String, skip_header := true) -> Array[Dictionary]:
 	var po_text := FileAccess.open(po_file, FileAccess.READ).get_as_text()
+	
+	var start_index := (po_text.find("\n\n")+2) if skip_header else 0
+	
 	var tr_blocks: Array[Dictionary] = []
-	tr_blocks.append_array(POT_PATTERN.search_all(po_text).map(func(block_match: RegExMatch) -> Dictionary:
+	tr_blocks.append_array(POT_PATTERN.search_all(po_text, start_index).map(func(block_match: RegExMatch) -> Dictionary:
 		return {
 			"comments": _parse_course_comment(block_match),
 			"ctxt": block_match.get_string("ctxt").substr(9, block_match.get_string("ctxt").length()-11),
@@ -22,7 +25,25 @@ static func build_tr_blocks(po_file: String) -> Array[Dictionary]:
 			"str": _parse_course_string(block_match, false)
 		}
 	))
+	var duplicate_blocks := []
+	for block in tr_blocks:
+		if block in duplicate_blocks:
+			continue
+		for other_block in tr_blocks:
+			if other_block == block:
+				continue
+			if block.id == other_block.id:
+				block.comments.sources.append_array(other_block.comments.sources)
+				duplicate_blocks.push_back(other_block)
+	for duplicate in duplicate_blocks:
+		tr_blocks.erase(duplicate)
 	return tr_blocks
+
+
+static func get_header(po_file: String) -> String:
+	var po_text := FileAccess.open(po_file, FileAccess.READ).get_as_text()
+	var start_index := po_text.find("\n\n")
+	return po_text.substr(0, start_index)
 
 
 static func _parse_course_comment(target: RegExMatch) -> Dictionary:

@@ -31,6 +31,7 @@ func _enter_tree() -> void:
 	menu_entries["Slipstream Existing Translations"] = _slipstream_existing_translations
 	menu_entries["Generate All POT files"] = _generate_all_pot_files
 	menu_entries["Build Translated Lessons"] = _build_translated_lessons
+	menu_entries["Handle Unique Strings"] = _handle_unique_strings
 	
 	var submenu := PopupMenu.new()
 	for entry in menu_entries:
@@ -38,7 +39,6 @@ func _enter_tree() -> void:
 	submenu.index_pressed.connect(func(idx: int) -> void:
 		menu_entries.values()[idx].call())
 	add_tool_submenu_item("i18n Tools", submenu)
-	
 
 
 func _exit_tree() -> void:
@@ -46,6 +46,71 @@ func _exit_tree() -> void:
 	remove_translation_parser_plugin(_error_code_parser)
 	
 	remove_tool_menu_item("i18n Tools")
+
+
+func _handle_unique_strings() -> void:
+	var course_blocks := SHARED.build_tr_blocks("res://i18n/course.pot")
+	
+	var course_association := {
+		"course/lesson-1-what-code-is-like/lesson.bbcode":"lesson-1-what-code-is-like.po"
+	}
+	
+	var id_swaps := {}
+	for block in course_blocks:
+		var glossary_re := RegEx.create_from_string(r'\[glossary term=\\"(?<term>[^"]+)\\"\]')
+		var matches := glossary_re.search_all(block.id)
+		if matches.is_empty():
+			continue
+		
+		var associated_file: String = block.comments.sources[0].lesson
+		associated_file = "%s.po" % [associated_file.get_base_dir().get_file()]
+		
+		var blockless := glossary_re.sub(block.id, "$term", true)
+		var coded := glossary_re.sub(block.id, "[code]$term[/code]", true)
+		var italicized := glossary_re.sub(block.id, "[i]$term[/i]", true)
+		var file_swaps := id_swaps.get_or_add(associated_file, {})
+		file_swaps[blockless] = block.id
+		file_swaps[coded] = block.id
+		file_swaps[italicized] = block.id
+	
+	for lang in DirAccess.get_directories_at("res://i18n"):
+		for file in id_swaps:
+			var blocks := SHARED.build_tr_blocks("res://i18n/%s/%s" % [lang, file])
+			
+			var header := SHARED.get_header("res://i18n/%s/%s" % [lang, file])
+			for swap in id_swaps[file]:
+				for block in blocks:
+					block.id = block.id.replace("  \\n", "\\n")
+					if block.id == swap:
+						block.id = id_swaps[file][swap]
+			var new_file_builder := [header, ""]
+			for block in blocks:
+				if block.comments:
+					for comment in block.comments.comments:
+						new_file_builder.append("#. %s" % comment)
+					for source in block.comments.sources:
+						new_file_builder.append("#: %s:%s" % [source.lesson, source.line_number])
+					if block.ctxt:
+						new_file_builder.append('msgctxt "%s"' % [block.ctxt])
+					if "\\n" in block.id:
+						new_file_builder.append('msgid ""')
+						var lines := (block.id as String).split("\\n")
+						for i in lines.size():
+							var line := lines[i]
+							new_file_builder.append('"%s%s"' % [line, "\\n" if i < lines.size()-1 else ""])
+					else:
+						new_file_builder.append('msgid "%s"' % [block.id])
+					if "\\n" in block.str:
+						new_file_builder.append('msgstr ""')
+						var lines := (block.str as String).split("\\n")
+						for line in lines:
+							new_file_builder.append('"%s\\n"' % [line])
+					else:
+						new_file_builder.append('msgstr "%s"' % [block.str])
+				new_file_builder.append("")
+			FileAccess.open("res://i18n/%s/%s" % [lang, file], FileAccess.WRITE).store_string("\n".join(new_file_builder))
+			var global_path := ProjectSettings.globalize_path("res://i18n/%s/%s" % [lang, file])
+			OS.execute("msgcat", [global_path, "-o", global_path])
 
 
 func _generate_all_pot_files() -> void:
@@ -145,6 +210,8 @@ func _update_missing_strings(po_file: String, missing_strings_report: Array) -> 
 	
 	for block in course_blocks:
 		if block.str == "":
+			if block.comments and block.comments.sources:
+				missing_strings.append_array(block.comments.sources.map(func(source: Dictionary) -> String: return source.lesson))
 			missing_strings.append_array([block.id, ""])
 	
 	var total_string_count := course_blocks.size()
