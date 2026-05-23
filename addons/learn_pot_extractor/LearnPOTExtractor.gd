@@ -32,6 +32,7 @@ func _enter_tree() -> void:
 	menu_entries["Generate All POT files"] = _generate_all_pot_files
 	menu_entries["Build Translated Lessons"] = _build_translated_lessons
 	menu_entries["Handle Unique Strings"] = _handle_unique_strings
+	menu_entries["One Step Test"] = _one_step_test
 	
 	var submenu := PopupMenu.new()
 	for entry in menu_entries:
@@ -48,12 +49,14 @@ func _exit_tree() -> void:
 	remove_tool_menu_item("i18n Tools")
 
 
+func _one_step_test() -> void:
+	await _generate_course_pot()
+	await _handle_unique_strings()
+	await _slipstream_existing_translations()
+
+
 func _handle_unique_strings() -> void:
 	var course_blocks := SHARED.build_tr_blocks("res://i18n/course.pot")
-	
-	var course_association := {
-		"course/lesson-1-what-code-is-like/lesson.bbcode":"lesson-1-what-code-is-like.po"
-	}
 	
 	var id_swaps := {}
 	for block in course_blocks:
@@ -81,6 +84,8 @@ func _handle_unique_strings() -> void:
 			for swap in id_swaps[file]:
 				for block in blocks:
 					block.id = block.id.replace("  \\n", "\\n")
+					block.id = block.id.strip_edges()
+					block.str = block.str.strip_edges()
 					if block.id == swap:
 						block.id = id_swaps[file][swap]
 			var new_file_builder := [header, ""]
@@ -142,6 +147,40 @@ func _build_translated_lessons() -> void:
 
 
 func _slipstream_existing_translations() -> void:
+	var global_course := ProjectSettings.globalize_path("res://i18n/course.pot")
+	var global_app := ProjectSettings.globalize_path("res://i18n/application.pot")
+	var global_error_path := ProjectSettings.globalize_path("res://i18n/error_database.pot")
+	
+	for lang in DirAccess.get_directories_at("res://i18n"):
+		print("Processing %s..." % [lang])
+		await get_tree().process_frame
+		
+		var global_lang_course := ProjectSettings.globalize_path("res://i18n/%s/course.po" % [lang])
+		var global_lang_app := ProjectSettings.globalize_path("res://i18n/%s/n_application.po" % [lang])
+		var global_lang_error := ProjectSettings.globalize_path("res://i18n/%s/n_error_database.po" % [lang])
+		
+		var source := global_course
+		var target := global_lang_course
+		
+		for file in DirAccess.get_files_at("res://i18n/%s" % [lang]):
+			if file.get_extension() != "po" or not file.begins_with("lesson-"):
+				continue
+			var global_lesson := ProjectSettings.globalize_path("res://i18n/%s/%s" % [lang, file])
+			OS.execute("msgmerge", ["--no-wrap", "-o", target, global_lesson, source])
+			source = global_lang_course
+		OS.execute("msgcat", ["--no-wrap", "--unique", global_lang_course])
+
+		var global_og_lang_app := ProjectSettings.globalize_path("res://i18n/%s/application.po" % [lang])
+		OS.execute("msgmerge", ["--no-wrap", "-o", global_lang_app, global_og_lang_app, global_app])
+		OS.execute("msgcat", ["--no-wrap", "--unique", global_lang_app])
+		
+		var global_og_lang_error := ProjectSettings.globalize_path("res://i18n/%s/error_database.po" % [lang])
+		OS.execute("msgmerge", ["--no-wrap", "-o", global_lang_error, global_og_lang_error, global_error_path])
+		OS.execute("msgcat", ["--no-wrap", "--unique", global_lang_error])
+	print("Done")
+
+
+func _slipstream_existing_translations_manual() -> void:
 	if not FileAccess.file_exists("res://i18n/course.pot"):
 		print("Course pot not created yet")
 		return
@@ -158,6 +197,19 @@ func _slipstream_existing_translations() -> void:
 	
 	var course_blocks := SHARED.build_tr_blocks("res://i18n/course.pot")
 	
+	var exact_lookup := {}
+	var normalized_lookup := {}
+	var len_buckets := {}
+	
+	for i in course_blocks.size():
+		var block := course_blocks[i]
+		exact_lookup[block.id] = i
+		normalized_lookup[block.normalized_id] = i
+		
+		var len: int = block.normalized_id.length()
+		var bucket: Array = len_buckets.get_or_add(len, [])
+		bucket.push_back(i)
+	
 	for lang in DirAccess.get_directories_at("res://i18n/"):
 		print("Processing %s..." % [lang])
 		await get_tree().process_frame
@@ -170,19 +222,50 @@ func _slipstream_existing_translations() -> void:
 				continue
 			lesson_files.push_back("res://i18n/%s/%s" % [lang, file])
 		
+		var tr_collections := {}
 		for file in lesson_files:
-			var lesson_blocks := SHARED.build_tr_blocks(file)
+			tr_collections[file] = SHARED.build_tr_blocks(file)
+		
+		for file in lesson_files:
+			var lesson_blocks: Array[Dictionary] = tr_collections[file]
 			for lesson_block in lesson_blocks:
-				var course_idx := course_blocks.find_custom(func(block: Dictionary) -> bool:
-					return block.id == lesson_block.id
-				)
+				var course_idx := exact_lookup.get(lesson_block.id, -1)
+				var fuzzy_match := false
+				
+				if course_idx == -1:
+					fuzzy_match = true
+					course_idx = normalized_lookup.get(lesson_block.normalized_id, -1)
+				
+				if course_idx == -1:
+					var candidates := []
+					var lesson_id_length: int = lesson_block.normalized_id.length()
+					for len in range(lesson_id_length - 20, lesson_id_length + 21):
+						if len_buckets.has(len):
+							candidates.append_array(len_buckets[len])
+				
+					var best_idx := -1
+					var best_score := 0.0
+					for idx in candidates:
+						var score := SHARED.get_token_similarity(course_blocks[idx].normalized_id, lesson_block.normalized_id, false)
+						
+						if score > best_score:
+							best_idx = idx
+							best_score = score
+					
+						if best_score > 0.9:
+							course_idx = best_idx
+				
 				if course_idx > -1:
-					course_blocks[course_idx][lang] = lesson_block.str
-			
+					course_blocks[course_idx][lang] = {"str": lesson_block.str, "comments": []}
+					if fuzzy_match:
+						course_blocks[course_idx][lang].comments.push_back("fuzzy")
+		
 		var lang_course := [course_header.replace("LANGUAGE", TranslationServer.get_language_name(lang)) + '"Language: %s\\n"' % [lang], ""]
 		for block: Dictionary in course_blocks:
+				var lang_block := block.get(lang, {"str": "", "comments": []})
+				
 				if block.comments.comments:
-					for comment: String in block.comments.comments:
+					for comment: String in block.comments.comments + lang_block.comments:
 						lang_course.append("#. %s" % [comment])
 				
 				if not block.comments.sources.is_empty():
@@ -194,10 +277,11 @@ func _slipstream_existing_translations() -> void:
 				if block.ctxt:
 					lang_course.append('msgctxt "%s"' % [block.ctxt])
 				lang_course.append('msgid %s' % [_wrap_and_quoted_string(block.id)])
-				lang_course.append('msgstr %s' % [_wrap_and_quoted_string(block.get(lang, ""))])
+				lang_course.append('msgstr %s' % [_wrap_and_quoted_string(lang_block.str)])
 				lang_course.append("")
 		FileAccess.open("res://i18n/course.%s.po" % [lang], FileAccess.WRITE).store_string("\n".join(lang_course))
 		_update_missing_strings("res://i18n/course.%s.po" % [lang], missing_strings_report)
+		break
 		
 	FileAccess.open("res://i18n/missing_string_ids.txt", FileAccess.WRITE).store_string("\n".join(missing_strings_report))
 	print("Done")
@@ -209,7 +293,7 @@ func _update_missing_strings(po_file: String, missing_strings_report: Array) -> 
 	var missing_strings := []
 	
 	for block in course_blocks:
-		if block.str == "":
+		if block.str == "" and not "hint" in block.ctxt:
 			if block.comments and block.comments.sources:
 				missing_strings.append_array(block.comments.sources.map(func(source: Dictionary) -> String: return source.lesson))
 			missing_strings.append_array([block.id, ""])
