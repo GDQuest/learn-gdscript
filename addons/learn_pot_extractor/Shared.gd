@@ -11,10 +11,15 @@ static var POT_PATTERN := RegEx.create_from_string(
 )
 
 
-static func build_tr_blocks(po_file: String, skip_header := true) -> Array[Dictionary]:
+static func build_tr_blocks(po_file: String, skip_header := true, out_header: Array = []) -> Array[Dictionary]:
 	var po_text := FileAccess.open(po_file, FileAccess.READ).get_as_text()
 	
-	var start_index := (po_text.find("\n\n")+2) if skip_header else 0
+	var start_index := (po_text.find("\n\n")+2)
+	var header := po_text.substr(0, start_index)
+	start_index = start_index if skip_header else 0
+	if out_header.size() < 1:
+		out_header.resize(1)
+	out_header[0] = header
 	
 	var tr_blocks: Array[Dictionary] = []
 	tr_blocks.append_array(POT_PATTERN.search_all(po_text, start_index).map(func(block_match: RegExMatch) -> Dictionary:
@@ -39,6 +44,37 @@ static func build_tr_blocks(po_file: String, skip_header := true) -> Array[Dicti
 	for duplicate in duplicate_blocks:
 		tr_blocks.erase(duplicate)
 	return tr_blocks
+
+
+static func write_from_tr_blocks(po_file: String, header: String, blocks: Array[Dictionary]) -> void:
+	var lines := [header]
+	
+	for block in blocks:
+		for comment in block.comments.comments:
+			if comment == "fuzzy":
+				lines.append("#, fuzzy")
+			else:
+				lines.append("#. %s" % [comment])
+		for source in block.comments.sources:
+			lines.append("#: %s:%s" % [source.lesson, source.line_number])
+		
+		if block.ctxt:
+			lines.append('msgctxt "%s"' % [block.ctxt])
+		
+		lines.append_array(_get_text_for_block(block, "id"))
+		lines.append_array(_get_text_for_block(block, "str"))
+		lines.append("")
+		
+	var file := FileAccess.open(po_file, FileAccess.WRITE)
+	file.store_string("\n".join(lines))
+
+
+static func _get_text_for_block(block: Dictionary, suffix: String) -> PackedStringArray:
+	if "\\n" in block[suffix]:
+		var lines := ['msg%s ""' % suffix]
+		lines.append_array(Array(block[suffix].split("\\n")).map(func(line: String) -> String: return '"%s\\n"' % [line]))
+		return lines
+	return ['msg%s "%s"' % [suffix, block[suffix]]]
 
 
 static func get_header(po_file: String) -> String:

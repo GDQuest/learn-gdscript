@@ -29,6 +29,7 @@ func _enter_tree() -> void:
 	menu_entries["Generate Application POT"] = _generate_application_pot
 	menu_entries["Generate Error Database POT"] = _generate_error_database_pot
 	menu_entries["Slipstream Existing Translations"] = _slipstream_existing_translations
+	menu_entries["Generate Missing Strings Repeort"] = _update_missing_strings
 	menu_entries["Generate All POT files"] = _generate_all_pot_files
 	menu_entries["Build Translated Lessons"] = _build_translated_lessons
 	menu_entries["Handle Unique Strings"] = _handle_unique_strings
@@ -132,15 +133,32 @@ func _build_translated_lessons() -> void:
 	
 	var lesson_files := []
 	var stack := ["res://course"]
+	
+	print("Building translation block set...")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	
+	var tr_blocks_set := {}
+	for lang in DirAccess.get_directories_at("res://i18n/"):
+		var tr_blocks := SHARED.build_tr_blocks("res://i18n/%s/course.po" % [lang])
+		tr_blocks_set[lang] = tr_blocks
+	
 	while not stack.is_empty():
 		var current := stack.pop_front()
 		stack.append_array(Array(DirAccess.get_directories_at(current)).map(func(dir: String) -> String: return current.path_join(dir)))
 		var files := Array(DirAccess.get_files_at(current)).filter(func(file: String) -> bool: return file.get_file() == "lesson.bbcode").map(func(file: String) -> String: return current.path_join(file))
 		for file: String in files:
+			var translation_reports := {}
+			
 			print("Processing %s..." % [file.get_base_dir().get_basename()])
 			await get_tree().process_frame
 			for lang in DirAccess.get_directories_at("res://i18n/"):
-				LESSON_BUILDER.build_translated_lesson(file, lang)
+				var lesson_report := {"count": 0, "total": 0}
+				translation_reports[lang] = lesson_report
+				LESSON_BUILDER.build_translated_lesson(file, lang, tr_blocks_set[lang], lesson_report)
+				lesson_report["percent"] = float(lesson_report.count) / float(lesson_report.total)
+			
+			FileAccess.open(file.get_basename() + ".meta", FileAccess.WRITE).store_string(JSON.stringify(translation_reports, "\t"))
 	
 	_building_translated_running = false
 	print("Done")
@@ -153,6 +171,7 @@ func _slipstream_existing_translations() -> void:
 	
 	for lang in DirAccess.get_directories_at("res://i18n"):
 		print("Processing %s..." % [lang])
+		await get_tree().process_frame
 		await get_tree().process_frame
 		
 		var global_lang_course := ProjectSettings.globalize_path("res://i18n/%s/course.po" % [lang])
@@ -168,142 +187,34 @@ func _slipstream_existing_translations() -> void:
 			var global_lesson := ProjectSettings.globalize_path("res://i18n/%s/%s" % [lang, file])
 			OS.execute("msgmerge", ["--no-wrap", "-o", target, global_lesson, source])
 			source = global_lang_course
-		OS.execute("msgcat", ["--no-wrap", "--unique", global_lang_course])
-
+		
 		var global_og_lang_app := ProjectSettings.globalize_path("res://i18n/%s/application.po" % [lang])
 		OS.execute("msgmerge", ["--no-wrap", "-o", global_lang_app, global_og_lang_app, global_app])
-		OS.execute("msgcat", ["--no-wrap", "--unique", global_lang_app])
 		
 		var global_og_lang_error := ProjectSettings.globalize_path("res://i18n/%s/error_database.po" % [lang])
 		OS.execute("msgmerge", ["--no-wrap", "-o", global_lang_error, global_og_lang_error, global_error_path])
-		OS.execute("msgcat", ["--no-wrap", "--unique", global_lang_error])
 	print("Done")
 
 
-func _slipstream_existing_translations_manual() -> void:
-	if not FileAccess.file_exists("res://i18n/course.pot"):
-		print("Course pot not created yet")
-		return
-	
-	if _slipstream_running:
-		return
-	_slipstream_running = true
-	
-	var course_pot := FileAccess.open("res://i18n/course.pot", FileAccess.READ).get_as_text()
-	var first_entry_idx := course_pot.find("#: ")
-	var course_header := course_pot.substr(0, first_entry_idx-1)
-	
-	var missing_strings_report := []
-	
-	var course_blocks := SHARED.build_tr_blocks("res://i18n/course.pot")
-	
-	var exact_lookup := {}
-	var normalized_lookup := {}
-	var len_buckets := {}
-	
-	for i in course_blocks.size():
-		var block := course_blocks[i]
-		exact_lookup[block.id] = i
-		normalized_lookup[block.normalized_id] = i
-		
-		var len: int = block.normalized_id.length()
-		var bucket: Array = len_buckets.get_or_add(len, [])
-		bucket.push_back(i)
-	
-	for lang in DirAccess.get_directories_at("res://i18n/"):
-		print("Processing %s..." % [lang])
-		await get_tree().process_frame
-		
-		missing_strings_report.append("## %s ##" % [lang])
-		
-		var lesson_files := []
-		for file in DirAccess.get_files_at("res://i18n/%s" % [lang]):
-			if not file.begins_with("lesson-") or file.get_extension() != "po":
-				continue
-			lesson_files.push_back("res://i18n/%s/%s" % [lang, file])
-		
-		var tr_collections := {}
-		for file in lesson_files:
-			tr_collections[file] = SHARED.build_tr_blocks(file)
-		
-		for file in lesson_files:
-			var lesson_blocks: Array[Dictionary] = tr_collections[file]
-			for lesson_block in lesson_blocks:
-				var course_idx := exact_lookup.get(lesson_block.id, -1)
-				var fuzzy_match := false
-				
-				if course_idx == -1:
-					fuzzy_match = true
-					course_idx = normalized_lookup.get(lesson_block.normalized_id, -1)
-				
-				if course_idx == -1:
-					var candidates := []
-					var lesson_id_length: int = lesson_block.normalized_id.length()
-					for len in range(lesson_id_length - 20, lesson_id_length + 21):
-						if len_buckets.has(len):
-							candidates.append_array(len_buckets[len])
-				
-					var best_idx := -1
-					var best_score := 0.0
-					for idx in candidates:
-						var score := SHARED.get_token_similarity(course_blocks[idx].normalized_id, lesson_block.normalized_id, false)
-						
-						if score > best_score:
-							best_idx = idx
-							best_score = score
-					
-						if best_score > 0.9:
-							course_idx = best_idx
-				
-				if course_idx > -1:
-					course_blocks[course_idx][lang] = {"str": lesson_block.str, "comments": []}
-					if fuzzy_match:
-						course_blocks[course_idx][lang].comments.push_back("fuzzy")
-		
-		var lang_course := [course_header.replace("LANGUAGE", TranslationServer.get_language_name(lang)) + '"Language: %s\\n"' % [lang], ""]
-		for block: Dictionary in course_blocks:
-				var lang_block := block.get(lang, {"str": "", "comments": []})
-				
-				if block.comments.comments:
-					for comment: String in block.comments.comments + lang_block.comments:
-						lang_course.append("#. %s" % [comment])
-				
-				if not block.comments.sources.is_empty():
-					var source_line := "#: %s" % [" ".join(block.comments.sources.map(func(source: Dictionary) -> String:
-						return "%s:%s" % [source.lesson, source.line_number]
-					))]
-					lang_course.append(source_line)
-				
-				if block.ctxt:
-					lang_course.append('msgctxt "%s"' % [block.ctxt])
-				lang_course.append('msgid %s' % [_wrap_and_quoted_string(block.id)])
-				lang_course.append('msgstr %s' % [_wrap_and_quoted_string(lang_block.str)])
-				lang_course.append("")
-		FileAccess.open("res://i18n/course.%s.po" % [lang], FileAccess.WRITE).store_string("\n".join(lang_course))
-		_update_missing_strings("res://i18n/course.%s.po" % [lang], missing_strings_report)
-		break
-		
-	FileAccess.open("res://i18n/missing_string_ids.txt", FileAccess.WRITE).store_string("\n".join(missing_strings_report))
-	print("Done")
-	_slipstream_running = false
-
-
-func _update_missing_strings(po_file: String, missing_strings_report: Array) -> void:
-	var course_blocks := SHARED.build_tr_blocks(po_file)
+func _update_missing_strings() -> void:
 	var missing_strings := []
 	
-	for block in course_blocks:
-		if block.str == "" and not "hint" in block.ctxt:
-			if block.comments and block.comments.sources:
-				missing_strings.append_array(block.comments.sources.map(func(source: Dictionary) -> String: return source.lesson))
-			missing_strings.append_array([block.id, ""])
+	for lang in DirAccess.get_directories_at("res://i18n"):
+		print("Processing %s..." % [lang])
+		await get_tree().process_frame
+		await get_tree().process_frame
+		
+		missing_strings.append_array(["## %s ##" % lang, ""])
+		
+		var course_blocks := SHARED.build_tr_blocks("res://i18n/%s/course.po" % lang)
+		for block in course_blocks:
+			if block.str == "" and not "hint" in block.ctxt and not "Unused or replaced" in block.comments.comments:
+				if block.comments and block.comments.sources:
+					missing_strings.append_array(block.comments.sources.map(func(source: Dictionary) -> String: return source.lesson))
+				missing_strings.append_array([block.id, ""])
 	
-	var total_string_count := course_blocks.size()
-	var missing_string_count := floori(missing_strings.size()/2.0)
-	var available_strings := total_string_count - missing_string_count
-	var t := (float(available_strings) / float(total_string_count))*100.0
-	missing_strings_report.append_array(["%s / %s (%.0f%%)" % [available_strings, total_string_count, t], ""])
-	missing_strings_report.append_array(missing_strings)
+	FileAccess.open("res://i18n/missing_strings.txt", FileAccess.WRITE).store_string("\n".join(missing_strings))
+	print("Done")
 
 
 func _wrap_and_quoted_string(s: String) -> String:
