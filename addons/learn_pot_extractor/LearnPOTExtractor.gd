@@ -6,15 +6,17 @@ const COURSE_POT_PATH := "res://i18n/course.pot"
 const APPLICATION_POT_PATH := "res://i18n/application.pot"
 const ERROR_POT_PATH := "res://i18n/error_database.pot"
 const ERROR_DATABASE := "res://script_checking/error_database.csv"
+const GLOSSARY_PATH := "res://course/glossary.csv"
+const GLOSSARY_POT_PATH := "res://i18n/glossary.pot"
 
 const BBCODE_TRANSLATION_PARSER := preload("BBCodeTranslationParser.gd")
-const CSV_TRANSLATION_PARSER := preload("ErrorCodeExtractor.gd")
+const CSV_TRANSLATION_PARSER := preload("LearnCSVExtractor.gd")
 const LESSON_BUILDER := preload("TranslatedLessonBuilder.gd")
 const ENGINE_CALLER := preload("EngineCaller.gd")
 const SHARED := preload("Shared.gd")
 
 var _bbcode_parser := BBCODE_TRANSLATION_PARSER.new()
-var _error_code_parser := CSV_TRANSLATION_PARSER.new()
+var _csv_parser := CSV_TRANSLATION_PARSER.new()
 var _current_pots: PackedStringArray
 var _slipstream_running := false
 var _building_translated_running := false
@@ -22,12 +24,13 @@ var _building_translated_running := false
 
 func _enter_tree() -> void:
 	add_translation_parser_plugin(_bbcode_parser)
-	add_translation_parser_plugin(_error_code_parser)
+	add_translation_parser_plugin(_csv_parser)
 	
 	var menu_entries := {}
 	menu_entries["Generate Course POT"] = _generate_course_pot
 	menu_entries["Generate Application POT"] = _generate_application_pot
 	menu_entries["Generate Error Database POT"] = _generate_error_database_pot
+	menu_entries["Generate Glossary POT"] = _generate_glossary_pot
 	menu_entries["Slipstream Existing Translations"] = _slipstream_existing_translations
 	menu_entries["Generate Missing Strings Repeort"] = _update_missing_strings
 	menu_entries["Generate All POT files"] = _generate_all_pot_files
@@ -45,7 +48,7 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 	remove_translation_parser_plugin(_bbcode_parser)
-	remove_translation_parser_plugin(_error_code_parser)
+	remove_translation_parser_plugin(_csv_parser)
 	
 	remove_tool_menu_item("i18n Tools")
 
@@ -123,6 +126,7 @@ func _generate_all_pot_files() -> void:
 	await _generate_course_pot()
 	await _generate_application_pot()
 	await _generate_error_database_pot()
+	await _generate_glossary_pot()
 	await _slipstream_existing_translations()
 
 
@@ -168,6 +172,7 @@ func _slipstream_existing_translations() -> void:
 	var global_course := ProjectSettings.globalize_path("res://i18n/course.pot")
 	var global_app := ProjectSettings.globalize_path("res://i18n/application.pot")
 	var global_error_path := ProjectSettings.globalize_path("res://i18n/error_database.pot")
+	var global_glossary_path := ProjectSettings.globalize_path("res://i18n/glossary.pot")
 	
 	for lang in DirAccess.get_directories_at("res://i18n"):
 		print("Processing %s..." % [lang])
@@ -177,6 +182,7 @@ func _slipstream_existing_translations() -> void:
 		var global_lang_course := ProjectSettings.globalize_path("res://i18n/%s/course.po" % [lang])
 		var global_lang_app := ProjectSettings.globalize_path("res://i18n/%s/n_application.po" % [lang])
 		var global_lang_error := ProjectSettings.globalize_path("res://i18n/%s/n_error_database.po" % [lang])
+		var global_lang_glossary := ProjectSettings.globalize_path("res://i18n/%s/glossary.po" % [lang])
 		
 		var source := global_course
 		var target := global_lang_course
@@ -193,6 +199,9 @@ func _slipstream_existing_translations() -> void:
 		
 		var global_og_lang_error := ProjectSettings.globalize_path("res://i18n/%s/error_database.po" % [lang])
 		OS.execute("msgmerge", ["--no-wrap", "-o", global_lang_error, global_og_lang_error, global_error_path])
+		
+		var global_og_lang_glossary := ProjectSettings.globalize_path("res://i18n/%s/glossary_database.po" % [lang])
+		OS.execute("msgmerge", ["--no-wrap", "-o", global_lang_glossary, global_og_lang_glossary, global_glossary_path])
 	print("Done")
 
 
@@ -231,6 +240,7 @@ func _wrap_and_quoted_string(s: String) -> String:
 
 
 func _generate_error_database_pot() -> void:
+	_csv_parser.extract_for(CSV_TRANSLATION_PARSER.CsvType.ERROR_DATABASE)
 	await _set_pot_files([ERROR_DATABASE])
 	
 	var last_modified_time := 0
@@ -246,6 +256,27 @@ func _generate_error_database_pot() -> void:
 			print("Failed to generate file at %s" % [ERROR_POT_PATH])
 	else:
 		print("Failed to generate file at %s" % [ERROR_POT_PATH])
+	
+	_recover_pot_files()
+
+
+func _generate_glossary_pot() -> void:
+	_csv_parser.extract_for(CSV_TRANSLATION_PARSER.CsvType.GLOSSARY)
+	await _set_pot_files([GLOSSARY_PATH])
+	
+	var last_modified_time := 0
+	if FileAccess.file_exists(GLOSSARY_POT_PATH):
+		last_modified_time = FileAccess.get_modified_time(GLOSSARY_POT_PATH)
+	
+	ENGINE_CALLER.template_generate(GLOSSARY_POT_PATH)
+	
+	if FileAccess.file_exists(GLOSSARY_POT_PATH):
+		if last_modified_time == 0 or (last_modified_time > 0 and FileAccess.get_modified_time(GLOSSARY_POT_PATH) > last_modified_time):
+			print("Generated file at %s" % [GLOSSARY_POT_PATH])
+		else:
+			print("Failed to generate file at %s" % [GLOSSARY_POT_PATH])
+	else:
+		print("Failed to generate file at %s" % [GLOSSARY_POT_PATH])
 	
 	_recover_pot_files()
 
