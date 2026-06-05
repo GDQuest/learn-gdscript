@@ -1,3 +1,4 @@
+@tool
 extends EditorExportPlugin
 
 const SHARED := preload("Shared.gd")

@@ -9,6 +9,10 @@ static var POT_PATTERN := RegEx.create_from_string(
 	r'(?<id>msgid (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))' +
 	r'(?<str>msgstr (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))'
 )
+static var GLOSSARY_TERM_RE := RegEx.create_from_string(r'\[glossary term=\\"([^\\]+)\\"\]')
+static var TAG_RE := RegEx.create_from_string(r'\[[^\[]+\]([^\[]+)\[[^\[]+\]')
+static var SPACE_NEWLINE_RE := RegEx.create_from_string(r'\s+\\n')
+static var WHITESPACE_RE := RegEx.create_from_string(r'\s+')
 
 
 static func build_tr_blocks(po_file: String, skip_header := true, out_header: Array = []) -> Array[Dictionary]:
@@ -135,12 +139,6 @@ static func get_similarity(a: String, b: String, normalize := true) -> float:
 	
 	var lev := levenshtein(a, b)
 	return 1.0 - float(lev)/maxf(a.length(), b.length())
-
-
-static var GLOSSARY_TERM_RE := RegEx.create_from_string(r'\[glossary term=\\"([^\\]+)\\"\]')
-static var TAG_RE := RegEx.create_from_string(r'\[[^\[]+\]([^\[]+)\[[^\[]+\]')
-static var SPACE_NEWLINE_RE := RegEx.create_from_string(r'\s+\\n')
-static var WHITESPACE_RE := RegEx.create_from_string(r'\s+')
 
 
 static func normalize(s: String) -> String:
