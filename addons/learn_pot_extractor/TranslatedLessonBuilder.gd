@@ -4,7 +4,7 @@ extends RefCounted
 const SHARED := preload("Shared.gd")
 
 
-static func build_translated_lesson(lesson_bbcode_path: String, lang: String, tr_blocks: Array[Dictionary], translation_report: Dictionary) -> void:
+static func build_translated_lesson(lesson_bbcode_path: String, lang: String, tr_blocks: Array[Dictionary], translation_report: Dictionary) -> String:
 	var parser := LessonBBCodeParser.new()
 	var result := parser.parse_file(lesson_bbcode_path)
 	
@@ -37,8 +37,7 @@ static func build_translated_lesson(lesson_bbcode_path: String, lang: String, tr
 	
 	lesson_builder.append("[/lesson]")
 	
-	var new_path := "%s.%s.bbcode" % [lesson_bbcode_path.get_basename(), lang]
-	FileAccess.open(new_path, FileAccess.WRITE).store_string("\n".join(lesson_builder))
+	return "\n".join(lesson_builder)
 
 
 static func _build_lesson_tag(str_builder: Array[String], lesson: BBCodeParser.ParseNode, tr_blocks: Array[Dictionary], translation_report: Dictionary) -> void:

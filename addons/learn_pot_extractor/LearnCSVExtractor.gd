@@ -1,48 +1,34 @@
 @tool
 extends EditorTranslationParserPlugin
 
+const ERROR_DATABASE := "res://script_checking/error_database.csv"
+const GLOSSARY := "res://course/glossary.csv"
+const DOCUMENTATION := "res://course/documentation.csv"
 
-enum CsvType {
-	ERROR_DATABASE,
-	GLOSSARY,
+
+static var _extraction_data := {
+	ERROR_DATABASE: ExtractionData.new(3, 0, true, ExtractionTranslationData.new(1, "explanation"), ExtractionTranslationData.new(2, "suggestion")),
+	GLOSSARY: ExtractionData.new(3, 0, true, ExtractionTranslationData.new(2, "explanation")),
+	DOCUMENTATION: ExtractionData.new(6, 0, true, ExtractionTranslationData.new(3, "explanation"))
 }
-
-var _extraction_data: ExtractionData = null
-
-func extract_for(type: CsvType) -> void:
-	match type:
-		CsvType.ERROR_DATABASE:
-			_extraction_data = ExtractionData.new(
-				3,
-				0,
-				true,
-				ExtractionTranslationData.new(1, "explanation"),
-				ExtractionTranslationData.new(2, "suggestion")
-			)
-		CsvType.GLOSSARY:
-			_extraction_data = ExtractionData.new(
-				3,
-				0,
-				true,
-				ExtractionTranslationData.new(2, "explanation")
-			)
-		_:
-			_extraction_data = null
 
 
 func _parse_file(path: String) -> Array[PackedStringArray]:
-	if not _extraction_data:
+	if not path in _extraction_data:
+		push_warning("No data for CSV '%s' in CSV Extractor" % path)
 		return []
+	
+	var extraction_data: ExtractionData = _extraction_data[path]
 	
 	var csv_text := FileAccess.open(path, FileAccess.READ).get_as_text()
 
 	var lines := csv_text.split("\n")
 	var blocks := []
-	for l in range(1 if _extraction_data._has_header else 0, lines.size()):
+	for l in range(1 if extraction_data._has_header else 0, lines.size()):
 		var line_text := lines[l]
 		var column_texts := PackedStringArray()
 		
-		var total_columns := _extraction_data._total_columns
+		var total_columns := extraction_data._total_columns
 		column_texts.resize(total_columns)
 		
 		for i in total_columns:
@@ -74,9 +60,9 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 	var ret: Array[PackedStringArray]
 
 	for block: PackedStringArray in blocks:
-		for data: ExtractionTranslationData in _extraction_data._translations:
+		for data: ExtractionTranslationData in extraction_data._translations:
 			var prefix := ""
-			if _extraction_data._prefix_column >= 0:
+			if extraction_data._prefix_column >= 0:
 				prefix = block[0]
 			ret.push_back(PackedStringArray([block[data._column], "%s%s" % [("%s." % prefix if prefix else ""), data._suffix]]))
 	
