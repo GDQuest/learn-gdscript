@@ -8,246 +8,259 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2022-06-12 11:07+0200\n"
-"PO-Revision-Date: 2024-10-11 01:19+0000\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2026-02-03 15:01+0000\n"
 "Last-Translator: Yılmaz Durmaz <yilmaz_durmaz@hotmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-23-append-to-arrays/tr/>\n"
 "Language: tr\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/learn-"
-"gdscript-from-zero/lesson-23-append-to-arrays/tr/>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.16-dev\n"
 "Generated-By: Babel 2.10.3\n"
 
 #: course/lesson-23-append-to-arrays/lesson.tres:13
 msgid ""
 "In previous lessons, you learned how to create arrays to store lists of "
-"values and how to loop over them. It's nice, but you won't go far with "
-"only that."
+"values and how to loop over them. That's useful, but arrays can do much more."
 msgstr ""
 "Önceki derslerde, değer listelerini saklamak için diziler oluşturmayı ve "
-"bunlar üzerinde nasıl döngü yapacağınızı öğrendiniz. Bu güzel, ancak "
-"sadece bununla çok fazla ileri gidemezsiniz."
+"bunlar üzerinde nasıl döngü yapacağınızı öğrendiniz. Bu yararlıdır, ancak "
+"diziler çok daha fazlasını yapabilir."
 
+#, fuzzy
 msgid ""
-"The real strength of arrays is that you can add and remove values from "
-"them at any time. It allows you to [i]queue[/i] or [i]stack[/i] data."
+"The real strength of GDScript arrays is that you can add and remove values "
+"from them at any time. This lets you build waiting lines of data or piles of "
+"data. We call these [i]queues[/i] and [i]stacks[/i], respectively. We'll see "
+"what that means in this lesson."
 msgstr ""
 "Dizilerin gerçek gücü, onlara istediğiniz zaman değer ekleyip "
-"çıkarabilmenizdir. Bu sayede [i]arkasına ekleme[/i] (queue) veya "
-"[i]üstüste yığma[/i] (stack) şeklinde veri ekleyebilirsiniz."
+"çıkarabilmenizdir. Bu sayede [i]arkasına ekleme[/i] (queue) veya [i]üstüste "
+"yığma[/i] (stack) şeklinde veri ekleyebilirsiniz."
 
 #: course/lesson-23-append-to-arrays/lesson.tres:25
-msgid "For now, let's take another example."
-msgstr "Şimdilik, hadi başka bir örneği ele alalım."
+msgid "Let's look at a concrete example."
+msgstr "Somut bir örneğe bakalım."
 
 #: course/lesson-23-append-to-arrays/lesson.tres:33
 msgid "Tracking orders in a restaurant management game"
 msgstr "Bir lokanta yönetimi oyununda siparişleri takip etmek"
 
 #: course/lesson-23-append-to-arrays/lesson.tres:35
+#, fuzzy
 msgid ""
-"You're making a restaurant management game where customers place orders, "
-"and you need to handle them as they come."
+"You're making a restaurant management game where customers place orders, and "
+"you need to handle them one by one."
 msgstr ""
 "Müşterilerin sipariş verdiği bir lokanta yönetimi oyunu yapıyorsunuz, ve "
 "siparişler geldikçe onlarla ilgilenmeniz gerekiyor."
 
+#, fuzzy
 msgid ""
-"In this game, customers order meals that end up in a queue. You need to "
-"prepare them in the kitchen."
+"In the example below, customers order meals that end up in a waiting line (a "
+"queue). You need to prepare them in the kitchen. We simulate orders arriving "
+"and getting completed over time."
 msgstr ""
-"Bu oyunda, müşterilerin verdikleri yemek siparişleri bir sıraya alınıyor."
-" Onları mutfakta hazırlamanız gerekiyor."
+"Bu oyunda, müşterilerin verdikleri yemek siparişleri bir sıraya alınıyor. "
+"Onları mutfakta hazırlamanız gerekiyor."
 
-msgid ""
-"In this example, we simulate orders arriving and getting completed over "
-"time."
-msgstr ""
-"Bu örnekte, zaman içinde gelen ve tamamlanan siparişlerin benzeşimini "
-"yapıyoruz (simülasyon)."
-
-#: course/lesson-23-append-to-arrays/lesson.tres:59
+#: course/lesson-23-append-to-arrays/lesson.tres:57
 msgid "How do you keep track of pending and completed orders? With an array!"
-msgstr "Bekleyen ve tamamlanan siparişleri nasıl takip edersiniz? Bir dizi ile!"
+msgstr ""
+"Bekleyen ve tamamlanan siparişleri nasıl takip edersiniz? Bir dizi ile!"
 
+#, fuzzy
 msgid ""
-"When a customer purchases a meal, you want to [i]append[/i] it to the "
-"array. Then, as you complete a meal in the kitchen and serve it, you want"
-" to remove it from the array."
+"When a customer purchases a meal, you want to [i]append[/i] (add) it to the "
+"array. Then, as you complete a meal in the kitchen and serve it, you want to "
+"remove it from the array."
 msgstr ""
 "Bir müşteri bir yemek satın aldığında, yemeği diziye [i]eklemek[/i] "
-"istersiniz. Daha sonra, mutfakta bir yemeği tamamlayıp servis edince, onu"
-" diziden [i]çıkarmak[/i] istersiniz."
+"istersiniz. Daha sonra, mutfakta bir yemeği tamamlayıp servis edince, onu "
+"diziden [i]çıkarmak[/i] istersiniz."
 
 msgid ""
-"You can do that with the [code]append()[/code] and the "
-"[code]pop_front()[/code] functions of the array, respectively."
+"You can use the [code]append()[/code] function to add values at the end of "
+"an array. To remove values from the start, you can use the [code]pop_front()"
+"[/code] function. We call it \"pop\" because the value jumps out of the "
+"array."
 msgstr ""
-"Bunu sırasıyla dizinin [code]append()[/code] (arkaya_ekle) ve "
-"[code]pop_front()[/code] (çıkart_baştaki) fonksiyonları ile "
-"yapabilirsiniz."
+"Bir dizinin sonuna değerler eklemek için [code]append()[/code] işlevini "
+"kullanabilirsiniz. Değerleri ilk baştan kaldırmak için [code]pop_front()[/"
+"code] (öndekini hoplat) işlevini kullanabilirsiniz. Buna, değer diziden "
+"dışarı çıktığı için \"pop\" diyoruz."
 
 msgid ""
-"Try to read the code below before moving on. Don't worry if not "
-"everything makes sense, as we'll break it all down."
+"Try to read the code below before moving on. Don't worry if not everything "
+"makes sense, as we'll break it all down."
 msgstr ""
 "Devam etmeden önce aşağıdaki kodu okumaya çalışın. Her şey mantıklı "
 "gelmiyorsa endişelenmeyin, çünkü hepsini açıklayacağız."
 
-#: course/lesson-23-append-to-arrays/lesson.tres:85
+#: course/lesson-23-append-to-arrays/lesson.tres:83
+#, fuzzy
 msgid ""
-"Notice how we call some functions by writing a dot after a variable name."
-" Like a given value type can have sub-variables, it can also have its own"
-" functions."
+"Notice how we call some functions by writing a dot after a variable name. "
+"Just like some values have variables you can access with a dot (like the "
+"[code]x[/code] variable in [code]position.x[/code]), they can also have "
+"their own functions."
 msgstr ""
 "Farkettiyseniz bazı fonksiyonları, değişken adından sonra nokta yazarak "
-"çağırıyoruz. Belirli bir değer tipinin alt-değişkenleri olabileceği gibi,"
-" kendi fonksiyonları da olabilir."
+"çağırıyoruz. Belirli bir değer tipinin alt-değişkenleri olabileceği gibi, "
+"kendi fonksiyonları da olabilir."
 
+#, fuzzy
 msgid ""
-"Functions like [code]append()[/code] and [code]pop_front()[/code] only "
-"exist on arrays. That's why to call them, we need to access it from the "
-"array using the dot: [code]array.append()[/code]."
+"Functions like [code]append()[/code] and [code]pop_front()[/code] only exist "
+"on arrays. To call them, we need to write the array name, then a dot, then "
+"the function: [code]array_name.append()[/code]."
 msgstr ""
-"[code]append()[/code] ve [code]pop_front()[/code] gibi fonksiyonlar "
-"sadece diziler üzerinde mevcuttur. Bu yüzden, onları çağırmak için nokta "
-"kullanarak dizi üzerinden erişmemiz gerekir: [code]array.append()[/code]."
+"[code]append()[/code] ve [code]pop_front()[/code] gibi fonksiyonlar sadece "
+"diziler üzerinde mevcuttur. Bu yüzden, onları çağırmak için nokta kullanarak "
+"dizi üzerinden erişmemiz gerekir: [code]array.append()[/code]."
 
-#: course/lesson-23-append-to-arrays/lesson.tres:97
-msgid "Let's break down the code."
-msgstr "Hadi kodu parçalarına ayıralım."
-
+#: course/lesson-23-append-to-arrays/lesson.tres:95
+#, fuzzy
 msgid ""
-"We queue orders in the [code]waiting_orders[/code] array by appending "
-"them to the array."
+"Let's break down the code. We add orders to the [code]waiting_orders[/code] "
+"array by appending them."
 msgstr ""
 "Siparişleri [code]waiting_orders[/code] (bekleniyor_sipariş) dizisine "
 "ekleyerek sıraya koyuyoruz."
 
-#: course/lesson-23-append-to-arrays/lesson.tres:119
+#: course/lesson-23-append-to-arrays/lesson.tres:115
 msgid ""
-"We can use a string to represent a meal when calling the "
-"[code]add_order()[/code] function."
+"We can use a string to represent a meal when calling the [code]add_order()[/"
+"code] function."
 msgstr ""
-"[code]add_order()[/code] (ekle_sipariş) fonksiyonunu çağırırken, bir "
-"yemeği temsil etmesi için bir dize kullanabiliriz."
+"[code]add_order()[/code] (ekle_sipariş) fonksiyonunu çağırırken, bir yemeği "
+"temsil etmesi için bir dize kullanabiliriz."
 
-#: course/lesson-23-append-to-arrays/lesson.tres:139
+#: course/lesson-23-append-to-arrays/lesson.tres:135
 msgid ""
-"When completing an order, we remove it from the "
-"[code]waiting_orders[/code] array by calling its [code]pop_front()[/code]"
-" function. This function gives us the order back, which allows us to "
-"assign it to a temporary variable."
+"When completing an order, we remove it from the [code]waiting_orders[/code] "
+"array by calling its [code]pop_front()[/code] function. This function gives "
+"us the order back, which allows us to assign it to a temporary variable."
 msgstr ""
-"Bir siparişi tamamlarken, [code]pop_front()[/code] fonksiyonunu çağırarak"
-" onu [code]waiting_orders[/code] dizisinden kaldırırız. Bu fonksiyon bize"
-" siparişi geri verir, bu da onu geçici bir değişkene atamamızı sağlar."
+"Bir siparişi tamamlarken, [code]pop_front()[/code] fonksiyonunu çağırarak "
+"onu [code]waiting_orders[/code] dizisinden kaldırırız. Bu fonksiyon bize "
+"siparişi geri verir, bu da onu geçici bir değişkene atamamızı sağlar."
 
-#: course/lesson-23-append-to-arrays/lesson.tres:159
-msgid "We can then append the order to our [code]completed_orders[/code] array."
-msgstr ""
-"Daha sonra siparişi [code]completed_orders[/code] (tamamlanan_siparişler)"
-" dizimize ekleyebiliriz."
-
-#: course/lesson-23-append-to-arrays/lesson.tres:179
+#: course/lesson-23-append-to-arrays/lesson.tres:155
 msgid ""
-"We call arrays like [code]waiting_orders[/code] a [i]queue[/i]: the first"
-" element we append to the array is the first one we remove."
+"We can then append the order to our [code]completed_orders[/code] array."
+msgstr ""
+"Daha sonra siparişi [code]completed_orders[/code] (tamamlanan_siparişler) "
+"dizimize ekleyebiliriz."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:175
+#, fuzzy
+msgid ""
+"When we use an array this way, we call it a [i]queue[/i]: the first element "
+"we add to the array is the first one we remove. It's like a waiting line at "
+"a store."
 msgstr ""
 "[code]waiting_orders[/code] gibi dizilere bir [i]queue[/i] (sıra) ismini "
 "veriyoruz: diziye eklediğimiz ilk eleman, çıkardığımız ilk elemandır."
 
-#: course/lesson-23-append-to-arrays/lesson.tres:187
+#: course/lesson-23-append-to-arrays/lesson.tres:183
 msgid "What does #... mean?"
 msgstr "#... ne anlama geliyor?"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:189
+#: course/lesson-23-append-to-arrays/lesson.tres:185
+#, fuzzy
 msgid ""
-"We write [code]#...[/code] to represent ellipses in the code. It means "
-"\"we're completing the function's code.\" We use that to break down code "
-"examples and make them easier to learn from."
+"We write [code]#...[/code] to show that there is more code here. The three "
+"dots mean \"we are not showing all the code.\" We use this to break down "
+"code examples and make them easier to learn from."
 msgstr ""
 "Koddaki boşlukları temsil etmek için [code]#...[/code] yazıyoruz. Bu, "
 "\"fonksiyonun kodunu tamamlıyoruz\" anlamına gelir. Bunu kod örneklerini "
-"parçalamak ve öğrenmeyi kolaylaştırmak için kullanırız. (burada, daha "
-"önce verdiğimiz parçaya ekleme yapıyoruz)."
+"parçalamak ve öğrenmeyi kolaylaştırmak için kullanırız. (burada, daha önce "
+"verdiğimiz parçaya ekleme yapıyoruz)."
 
+#, fuzzy
 msgid ""
-"The hash sign itself marks the start of a code comment. It's a line the "
-"computer will ignore, which is why it typically appears in grey."
+"The hash sign ([code]#[/code]) marks the start of a code comment. It's a "
+"line the computer will ignore, which is why it typically appears in grey."
 msgstr ""
 "Kare işaretinin kendisi, bir kod yorumunun başlangıcını işaret eder. "
 "Bilgisayarın görmezden geleceği bir satırdır, bu yüzden genellikle gri "
 "renkte görünür."
 
-#: course/lesson-23-append-to-arrays/lesson.tres:199
+#: course/lesson-23-append-to-arrays/lesson.tres:195
 msgid "Using arrays as stacks"
 msgstr "Dizileri, yığınlar olarak kullanmak"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:201
+#: course/lesson-23-append-to-arrays/lesson.tres:197
 msgid "Another common use of arrays is [i]stacks[/i] of data."
 msgstr ""
-"Dizilerin bir diğer yaygın kullanımı veriyi [i]yığın[/i] yapmak "
-"şeklindedir."
+"Dizilerin bir diğer yaygın kullanımı veriyi [i]yığın[/i] yapmak şeklindedir."
 
 msgid ""
 "Take a factory management game where you need to retrieve materials from "
-"stacks of crates. They arrive at the factory piled up vertically, and you"
-" need to take them from top to bottom."
+"stacks of crates. They arrive at the factory piled up vertically, and you "
+"need to take them from top to bottom."
 msgstr ""
-"Yığın halindeki sandıklardan malzeme almanız gereken bir fabrika yönetimi"
-" oyununu ele alalım. Fabrikaya dikey olarak üst üste yığılmış olarak "
-"gelirler ve onları yukarıdan aşağıya doğru almanız gerekir."
+"Yığın halindeki sandıklardan malzeme almanız gereken bir fabrika yönetimi "
+"oyununu ele alalım. Fabrikaya dikey olarak üst üste yığılmış olarak gelirler "
+"ve onları yukarıdan aşağıya doğru almanız gerekir."
 
-#: course/lesson-23-append-to-arrays/lesson.tres:223
+#: course/lesson-23-append-to-arrays/lesson.tres:219
 msgid ""
 "To take a crate from the back of the array, this time, we use the "
 "[code]pop_back()[/code] array function."
 msgstr ""
-"Dizinin arkasındaki bir sandığı almak için, bu kez "
-"[code]pop_back()[/code] (çıkar_arkadaki) dizi fonksiyonunu kullanıyoruz."
+"Dizinin arkasındaki bir sandığı almak için, bu kez [code]pop_back()[/code] "
+"(çıkar_arkadaki) dizi fonksiyonunu kullanıyoruz."
 
 msgid ""
-"This function removes (pops) the last value from the array and returns it"
-" to you."
+"This function removes (pops) the last value from the array and returns it to "
+"you."
 msgstr "Bu fonksiyon dizideki son değeri çıkarır ve size geri döndürür."
 
 msgid ""
-"Here we pop the last value of the array and print what's left of the "
-"array to demonstrate how the array gets smaller."
+"Here we pop the last value of the array and print what's left of the array "
+"to demonstrate how the array gets smaller."
 msgstr ""
-"Burada dizinin son değerini atıyoruz ve dizinin küçüldüğünü göstermek "
-"için diziden kalanları yazdırıyoruz."
+"Burada dizinin son değerini atıyoruz ve dizinin küçüldüğünü göstermek için "
+"diziden kalanları yazdırıyoruz."
 
-#: course/lesson-23-append-to-arrays/lesson.tres:247
+#: course/lesson-23-append-to-arrays/lesson.tres:243
+#, fuzzy
 msgid ""
-"Like [code]pop_front()[/code], the function returns the value removed "
-"from the array. You will often store that value in a variable."
+"Like [code]pop_front()[/code], the function returns the value removed from "
+"the array. You will often store that value in a variable. This value could "
+"be the crate's content, which you can then use to give resources to the "
+"player."
 msgstr ""
 "[code]pop_front()[/code] gibi, bu fonksiyon da diziden kaldırılan değeri "
 "döndürür. Bu değeri genellikle bir değişkende saklarsınız."
 
 msgid ""
-"The value in question could be the crate's content, which you can then "
-"use to give resources to the player."
+"When we use an array this way, we call it a [i]stack[/i]: the last element "
+"we add is the first one we remove. It's like a pile of plates where you take "
+"from the top."
 msgstr ""
-"Söz konusu değer, daha sonra oyuncuya kaynak vermek için "
-"kullanabileceğiniz bir sandığın içeriği olabilir."
+"Bir diziyi bu şekilde kullandığımızda, buna [i]yığın[/i] diyoruz: "
+"eklediğimiz son öğe, çıkardığımız ilk öğedir. Bu, en üstten aldığınız bir "
+"tabak yığını gibidir."
 
 msgid ""
 "In the following practices, you will use the [code]append()[/code], "
 "[code]pop_front()[/code], and [code]pop_back()[/code] array functions."
 msgstr ""
-"Sıradaki alıştırmalarda, [code]append()[/code], [code]pop_front()[/code],"
-" ve [code]pop_back()[/code] dizi fonksiyonlarını kullanacaksınız."
+"Sıradaki alıştırmalarda, [code]append()[/code], [code]pop_front()[/code], ve "
+"[code]pop_back()[/code] dizi fonksiyonlarını kullanacaksınız."
 
-#: course/lesson-23-append-to-arrays/lesson.tres:259
+#: course/lesson-23-append-to-arrays/lesson.tres:255
 msgid "Completing orders"
 msgstr "Siparişleri tamamlamak"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:260
+#: course/lesson-23-append-to-arrays/lesson.tres:256
 msgid "The [code]waiting_orders[/code] array will be filled over time."
 msgstr ""
 "[code]waiting_orders[/code] (bekleniyor_siparişler) dizisi zaman içinde "
@@ -255,77 +268,108 @@ msgstr ""
 
 msgid ""
 "Your job is to move orders from the waiting list to the "
-"[code]completed_orders[/code] list using the array's "
-"[code]append()[/code] and [code]pop_front()[/code] functions."
+"[code]completed_orders[/code] list using the array's [code]append()[/code] "
+"and [code]pop_front()[/code] functions."
 msgstr ""
-"Göreviniz, dizinin [code]append()[/code] (ekle_arkaya) ve "
-"[code]pop_front()[/code] (çıkar_öndeki) fonksiyonlarını kullanarak "
-"siparişleri bekleme listesinden alıp [code]completed_orders[/code] "
-"(tamamlanan_siparişler) listesine taşımaktır."
+"Göreviniz, dizinin [code]append()[/code] (ekle_arkaya) ve [code]pop_front()[/"
+"code] (çıkar_öndeki) fonksiyonlarını kullanarak siparişleri bekleme "
+"listesinden alıp [code]completed_orders[/code] (tamamlanan_siparişler) "
+"listesine taşımaktır."
 
 msgid ""
 "Remember that the array's [code]pop_front()[/code] function returns the "
-"popped value, which allows you to store it in a variable and then pass it"
-" to another function."
+"popped value, which allows you to store it in a variable and then pass it to "
+"another function."
 msgstr ""
 "Dizinin [code]pop_front()[/code] fonksiyonunun çıkarılan değeri geri "
-"döndürdüğünü unutmayın, bu da onu bir değişkende saklamanıza ve daha "
-"sonra başka bir fonksiyona aktarmanıza olanak tanır."
+"döndürdüğünü unutmayın, bu da onu bir değişkende saklamanıza ve daha sonra "
+"başka bir fonksiyona aktarmanıza olanak tanır."
 
-#: course/lesson-23-append-to-arrays/lesson.tres:277
+#: course/lesson-23-append-to-arrays/lesson.tres:274
 msgid ""
-"Orders are piling up in the kitchen, and we need to clear them fast using"
-" the array's [code]pop_front()[/code] function."
+"Orders are piling up in the kitchen, and we need to clear them fast using "
+"the array's [code]pop_front()[/code] function."
 msgstr ""
 "Siparişler mutfakta birikiyor, ve dizinin [code]pop_front()[/code] "
 "fonksiyonunu kullanarak bunları hızlı bir şekilde temizlememiz gerekiyor."
 
-#: course/lesson-23-append-to-arrays/lesson.tres:282
+#: course/lesson-23-append-to-arrays/lesson.tres:279
 msgid "Clearing up the crates"
 msgstr "Sandıkları düzenlemek"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:283
+#: course/lesson-23-append-to-arrays/lesson.tres:280
 msgid ""
-"Crates are piling up on the platform. Move them out of the way by popping"
-" them from the [code]crates[/code] array."
+"Crates are piling up on the platform. Move them out of the way by popping "
+"them from the [code]crates[/code] array."
 msgstr ""
 "Sandıklar birikmeye başladı. Onları [code]crates[/code] (sandıklar) "
 "dizisinden kaldırıp yolu temizleyin."
 
 msgid ""
-"You need to remove them from top to bottom using the array's "
-"[code]pop_back()[/code] function."
+"You need to remove them from top to bottom using the array's [code]pop_back()"
+"[/code] function."
 msgstr ""
-"Dizinin [code]pop_back()[/code] fonksiyonunu kullanarak bunları yukarıdan"
-" aşağıya doğru kaldırmanız gerekir."
+"Dizinin [code]pop_back()[/code] fonksiyonunu kullanarak bunları yukarıdan "
+"aşağıya doğru kaldırmanız gerekir."
 
 msgid "Your code should remove all the crates in the array using a while loop."
-msgstr "Kodunuz, bir while döngüsü kullanarak dizideki tüm kasaları kaldırmalıdır."
-
-msgid ""
-"[b]Careful![/b] if you run a while loop carelessly, you can lock the "
-"software."
 msgstr ""
-"[b]Dikkatli olun![/b] while döngüsünü dikkatsizce çalıştırırsanız "
-"yazılımı kilitleyebilirsiniz."
+"Kodunuz, bir while döngüsü kullanarak dizideki tüm kasaları kaldırmalıdır."
 
+#, fuzzy
 msgid ""
-"You can check if the [code]crates[/code] array still contains values by "
-"writing [code]while crates:[/code]"
+"[b]Careful![/b] If you write the while loop incorrectly, you can freeze the "
+"program."
 msgstr ""
-"[code]crates[/code] dizisinin içinde, hala bir değer olup olmadığını "
-"(yani boş olmadığını) [code]while crates:[/code] yazarak kontrol "
-"edebilirsiniz"
+"[b]Dikkatli olun![/b] while döngüsünü dikkatsizce çalıştırırsanız yazılımı "
+"kilitleyebilirsiniz."
 
-#: course/lesson-23-append-to-arrays/lesson.tres:303
 msgid ""
-"Crates are piling up on the platform. Move them out of the way by popping"
-" them from their array."
+"You can check if the [code]crates[/code] array still has values by writing "
+"[code]while crates:[/code]. This works because an empty array counts as "
+"[code]false[/code], and an array with items counts as [code]true[/code]."
+msgstr ""
+"[code]while crates:[/code] yazarak [code]crates[/code] dizisinin hala "
+"değerler içerip içermediğini (yani boş olmadığını) kontrol edebilirsiniz. "
+"Bu, boş bir dizi [code]false[/code] olarak, ve öğeler içeren bir dizi ise "
+"[code]true[/code] olarak sayıldığı için işe yarar."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:301
+msgid ""
+"Crates are piling up on the platform. Move them out of the way by popping "
+"them from their array."
 msgstr ""
 "Sandıklar birikmeye başladı. Onları dizildikleri yerden kaldırıp yoldan "
 "çekin."
 
-#: course/lesson-23-append-to-arrays/lesson.tres:307
+#: course/lesson-23-append-to-arrays/lesson.tres:305
 msgid "Appending and popping values from arrays"
 msgstr "Dizilere değer eklemek ve dizilerden değer çıkarmak"
 
+#~ msgid "For now, let's take another example."
+#~ msgstr "Şimdilik, hadi başka bir örneği ele alalım."
+
+#~ msgid ""
+#~ "In this example, we simulate orders arriving and getting completed over "
+#~ "time."
+#~ msgstr ""
+#~ "Bu örnekte, zaman içinde gelen ve tamamlanan siparişlerin benzeşimini "
+#~ "yapıyoruz (simülasyon)."
+
+#~ msgid ""
+#~ "You can do that with the [code]append()[/code] and the [code]pop_front()[/"
+#~ "code] functions of the array, respectively."
+#~ msgstr ""
+#~ "Bunu sırasıyla dizinin [code]append()[/code] (arkaya_ekle) ve "
+#~ "[code]pop_front()[/code] (çıkart_baştaki) fonksiyonları ile "
+#~ "yapabilirsiniz."
+
+#~ msgid "Let's break down the code."
+#~ msgstr "Hadi kodu parçalarına ayıralım."
+
+#~ msgid ""
+#~ "The value in question could be the crate's content, which you can then "
+#~ "use to give resources to the player."
+#~ msgstr ""
+#~ "Söz konusu değer, daha sonra oyuncuya kaynak vermek için "
+#~ "kullanabileceğiniz bir sandığın içeriği olabilir."

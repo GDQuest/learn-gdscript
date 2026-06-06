@@ -8,26 +8,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2022-03-26 17:50+0100\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
 "PO-Revision-Date: 2024-03-31 09:14+0000\n"
 "Last-Translator: cyochot <k97un9ri@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-25-creating-dictionaries/ja/>\n"
 "Language: ja\n"
-"Language-Team: Japanese <https://hosted.weblate.org/projects/learn-"
-"gdscript-from-zero/lesson-25-creating-dictionaries/ja/>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.10.3\n"
 
 #: course/lesson-25-creating-dictionaries/lesson.tres:14
 msgid "In the last lesson, we used an array to represent a player's inventory."
-msgstr "前回のレッスンでは、配列を使用してプレイヤーのインベントリを表現しました。"
+msgstr ""
+"前回のレッスンでは、配列を使用してプレイヤーのインベントリを表現しました。"
 
 msgid ""
-"With just an array of item names, though, we can't easily keep track of "
-"the amount of each item."
-msgstr "ただし、アイテム名の配列だけでは、各アイテムの量を簡単に追跡することはできません。"
+"With just an array of item names, though, we can't easily keep track of the "
+"amount of each item."
+msgstr ""
+"ただし、アイテム名の配列だけでは、各アイテムの量を簡単に追跡することはできま"
+"せん。"
 
 msgid ""
 "Instead, we can bundle the item names and amounts into a single "
@@ -35,22 +38,25 @@ msgid ""
 msgstr "代わりに、項目名と金額を 1 つの[i]辞書[/i]にまとめることができます。"
 
 msgid ""
-"A dictionary is a data structure that allows you to map pairs of values. "
-"In the pair, we call the first value a [i]key[/i] as we use it to access "
-"the second."
+"A dictionary is a data structure that allows you to map pairs of values. In "
+"the pair, we call the first value a [i]key[/i] as we use it to access the "
+"second."
 msgstr ""
-"ディクショナリは、値のペアをマッピングできるデータ構造です。ペアでは、最初の値を[i]キー[/i]と呼び、それを使用して 2 "
-"番目の値にアクセスします。"
+"ディクショナリは、値のペアをマッピングできるデータ構造です。ペアでは、最初の"
+"値を[i]キー[/i]と呼び、それを使用して 2 番目の値にアクセスします。"
 
 msgid ""
-"In other words, a dictionary has a list of [i]keys[/i], and each key "
-"points to a [i]value[/i]."
-msgstr "つまり、辞書には[i]キー[/i]のリストがあり、各キーは[i]値[/i]を指します。"
+"In other words, a dictionary has a list of [i]keys[/i], and each key points "
+"to a [i]value[/i]."
+msgstr ""
+"つまり、辞書には[i]キー[/i]のリストがあり、各キーは[i]値[/i]を指します。"
 
 msgid ""
-"To define a dictionary, we use curly brackets. A colon separates each key"
-" and its value. A comma separates each key and value pair."
-msgstr "辞書を定義するには、中括弧を使用します。コロンは、各キーとその値を区切ります。各キーと値のペアはコンマで区切られます。"
+"To define a dictionary, we use curly brackets. A colon separates each key "
+"and its value. A comma separates each key and value pair."
+msgstr ""
+"辞書を定義するには、中括弧を使用します。コロンは、各キーとその値を区切りま"
+"す。各キーと値のペアはコンマで区切られます。"
 
 #: course/lesson-25-creating-dictionaries/lesson.tres:42
 msgid "Dictionaries can hold any values"
@@ -61,22 +67,29 @@ msgid "Dictionaries can map about any value to any other value."
 msgstr "辞書は、任意の値を他の任意の値にマップできます。"
 
 msgid ""
-"For example, we can use the name of an item as a key and the amount as "
-"the corresponding value. This makes dictionaries excellent for keeping "
-"track of a player's inventory."
-msgstr "たとえば、アイテムの名前をキーとして使用し、金額を対応する値として使用できます。これにより、辞書はプレイヤーのインベントリを追跡するのに最適です。"
+"For example, we can use the name of an item as a key and the amount as the "
+"corresponding value. This makes dictionaries excellent for keeping track of "
+"a player's inventory."
+msgstr ""
+"たとえば、アイテムの名前をキーとして使用し、金額を対応する値として使用できま"
+"す。これにより、辞書はプレイヤーのインベントリを追跡するのに最適です。"
 
 #: course/lesson-25-creating-dictionaries/lesson.tres:66
 msgid ""
 "Here we matched the name (a string) to the amount (a number). But a key "
 "could be a string, a number, or even a vector!"
-msgstr "ここでは、名前(文字列)と金額(数値)を一致させました。しかし、キーは文字列、数値、またはベクトルである可能性があります！"
+msgstr ""
+"ここでは、名前(文字列)と金額(数値)を一致させました。しかし、キーは文字列、数"
+"値、またはベクトルである可能性があります！"
 
 msgid ""
-"Although we can have all of these different keys, keep in mind that every"
-" key has to be [i]unique[/i]. That means we [i]couldn't[/i] have a "
-"dictionary like the following."
-msgstr "これらすべての異なるキーを使用できますが、すべてのキーは[i]一意[/i]である必要があることに注意してください。つまり、次のような辞書は作成[i]できませんでした[/i]。"
+"Although we can have all of these different keys, keep in mind that every "
+"key has to be [i]unique[/i]. That means we [i]couldn't[/i] have a dictionary "
+"like the following."
+msgstr ""
+"これらすべての異なるキーを使用できますが、すべてのキーは[i]一意[/i]である必要"
+"があることに注意してください。つまり、次のような辞書は作成[i]できませんでした"
+"[/i]。"
 
 #: course/lesson-25-creating-dictionaries/lesson.tres:88
 msgid "We would get the following error."
@@ -93,15 +106,15 @@ msgid ""
 msgstr "キー[code]\"healing heart\"[/code]は辞書に[b]2回[/b]登場します。"
 
 msgid ""
-"In the above example, Godot wouldn't know whether to return "
-"[code]3[/code] or [code]8[/code] when using [code]inventory[\"healing "
-"heart\"][/code]. This is why keys need to be unique."
+"In the above example, Godot wouldn't know whether to return [code]3[/code] "
+"or [code]8[/code] when using [code]inventory[\"healing heart\"][/code]. This "
+"is why keys need to be unique."
 msgstr ""
-"上記の例では、Godotは[code]inventory[\"healing heart\"][/code]を使用するときに[code]3 "
-"[/code]または[code] 8 [/code]を返すかどうかを知りません。これが、キーが一意である必要がある理由です。"
+"上記の例では、Godotは[code]inventory[\"healing heart\"][/code]を使用するとき"
+"に[code]3 [/code]または[code] 8 [/code]を返すかどうかを知りません。これが、"
+"キーが一意である必要がある理由です。"
 
 #: course/lesson-25-creating-dictionaries/lesson.tres:112
-#: course/lesson-25-creating-dictionaries/lesson.tres:113
 msgid "\"healing heart\""
 msgstr "「体力回復」"
 
@@ -119,31 +132,41 @@ msgstr "辞書の内部でのしくみ"
 
 #: course/lesson-25-creating-dictionaries/lesson.tres:122
 msgid ""
-"Dictionaries are also called mappings or [i]associative arrays[/i]. Under"
-" the hood, they use arrays and several functions to efficiently store and"
-" retrieve values across arrays."
-msgstr "辞書は、マッピングまたは[i]連想配列[/i]とも呼ばれます。内部的には、配列といくつかの関数を使用して、配列間で値を効率的に格納および取得します。"
+"Dictionaries are also called mappings or [i]associative arrays[/i]. Under "
+"the hood, they use arrays and several functions to efficiently store and "
+"retrieve values across arrays."
+msgstr ""
+"辞書は、マッピングまたは[i]連想配列[/i]とも呼ばれます。内部的には、配列といく"
+"つかの関数を使用して、配列間で値を効率的に格納および取得します。"
 
 msgid ""
-"Precisely, dictionaries use a [i]hashing algorithm[/i]. Hashing "
-"algorithms convert one value into another."
-msgstr "正確には、辞書は [i]ハッシュアルゴリズム[/i]を使用します。ハッシュアルゴリズムは、ある値を別の値に変換します。"
+"Precisely, dictionaries use a [i]hashing algorithm[/i]. Hashing algorithms "
+"convert one value into another."
+msgstr ""
+"正確には、辞書は [i]ハッシュアルゴリズム[/i]を使用します。ハッシュアルゴリズ"
+"ムは、ある値を別の値に変換します。"
 
 msgid ""
-"In this case, hashing consists of converting a given key into a unique "
-"whole number. The dictionary then uses that number as an array's index!"
-msgstr "この場合、ハッシュは、特定のキーを一意の整数に変換することで構成されます。辞書は、その数値を配列のインデックスとして使用します。"
+"In this case, hashing consists of converting a given key into a unique whole "
+"number. The dictionary then uses that number as an array's index!"
+msgstr ""
+"この場合、ハッシュは、特定のキーを一意の整数に変換することで構成されます。辞"
+"書は、その数値を配列のインデックスとして使用します。"
 
 msgid ""
-"That's how a dictionary works: when you give it a key, it converts it "
-"into a unique index and uses that index to retrieve the corresponding "
-"value in the computer's memory."
-msgstr "辞書は、キーを与えると、それを一意のインデックスに変換し、そのインデックスを使用してコンピューターのメモリ内の対応する値を取得します。"
+"That's how a dictionary works: when you give it a key, it converts it into a "
+"unique index and uses that index to retrieve the corresponding value in the "
+"computer's memory."
+msgstr ""
+"辞書は、キーを与えると、それを一意のインデックスに変換し、そのインデックスを"
+"使用してコンピューターのメモリ内の対応する値を取得します。"
 
 msgid ""
-"That's also why you can't have the same key twice: it would map to the "
-"same array index, causing you to overwrite an existing value."
-msgstr "また、同じキーを 2 回持つことができないのもそのためです: 同じ配列インデックスにマップされ、既存の値を上書きしてしまいます。"
+"That's also why you can't have the same key twice: it would map to the same "
+"array index, causing you to overwrite an existing value."
+msgstr ""
+"また、同じキーを 2 回持つことができないのもそのためです: 同じ配列インデックス"
+"にマップされ、既存の値を上書きしてしまいます。"
 
 #: course/lesson-25-creating-dictionaries/lesson.tres:138
 msgid "Accessing values"
@@ -151,8 +174,8 @@ msgstr "値へのアクセス"
 
 #: course/lesson-25-creating-dictionaries/lesson.tres:140
 msgid ""
-"We access the value of keys by writing the dictionary name, with the key "
-"in between square brackets."
+"We access the value of keys by writing the dictionary name, with the key in "
+"between square brackets."
 msgstr "キーの値にアクセスするには、辞書名を書き、キーを角括弧で囲みます。"
 
 #: course/lesson-25-creating-dictionaries/lesson.tres:168
@@ -160,18 +183,20 @@ msgid "How would you access how many gems the player has?"
 msgstr "プレイヤーが持っている宝石の数にどのようにアクセスしますか?"
 
 #: course/lesson-25-creating-dictionaries/lesson.tres:171
-msgid "We need to make sure the key is the same as we defined in the dictionary."
+msgid ""
+"We need to make sure the key is the same as we defined in the dictionary."
 msgstr "キーが辞書で定義したものと同じであることを確認する必要があります。"
 
-msgid "In our case, [code]var item_count = inventory[\"gems\"][/code] is correct."
-msgstr "私たちの場合、[code]var item_count = inventory[\"gems\"][/code]が正しいです。"
+msgid ""
+"In our case, [code]var item_count = inventory[\"gems\"][/code] is correct."
+msgstr ""
+"私たちの場合、[code]var item_count = inventory[\"gems\"][/code]が正しいです。"
 
 #: course/lesson-25-creating-dictionaries/lesson.tres:174
 msgid "var item_count = inventory[\"gem\"]"
 msgstr "var item_count = inventory[\"gem\"]"
 
 #: course/lesson-25-creating-dictionaries/lesson.tres:174
-#: course/lesson-25-creating-dictionaries/lesson.tres:175
 msgid "var item_count = inventory[\"gems\"]"
 msgstr "var item_count = inventory[\"gems\"]"
 
@@ -185,15 +210,19 @@ msgstr "値の変更"
 
 #: course/lesson-25-creating-dictionaries/lesson.tres:184
 msgid ""
-"We can also change values directly, which is useful in our case for "
-"adding or removing items from the player's inventory."
-msgstr "値を直接変更することもでき、プレイヤーのインベントリにアイテムを追加または削除する場合に便利です。"
+"We can also change values directly, which is useful in our case for adding "
+"or removing items from the player's inventory."
+msgstr ""
+"値を直接変更することもでき、プレイヤーのインベントリにアイテムを追加または削"
+"除する場合に便利です。"
 
 #: course/lesson-25-creating-dictionaries/lesson.tres:214
 msgid ""
 "In the following practices, we'll use a dictionary to create a player "
 "inventory and create a function to change the value of items."
-msgstr "次の演習では、辞書を使用してプレイヤーインベントリを作成し、アイテムの値を変更する関数を作成します。"
+msgstr ""
+"次の演習では、辞書を使用してプレイヤーインベントリを作成し、アイテムの値を変"
+"更する関数を作成します。"
 
 #: course/lesson-25-creating-dictionaries/lesson.tres:222
 msgid "Creating an inventory using a dictionary"
@@ -206,11 +235,13 @@ msgstr "プレイヤーにいくつかのアイテムを渡しましょう。"
 msgid ""
 "We use a dictionary for the player's inventory. We defined the "
 "[code]inventory[/code] variable for you, but it contains no items yet."
-msgstr "プレイヤーのインベントリには辞書を使用します。[code]inventory[/code] 変数を定義しましたが、まだアイテムは含まれていません。"
+msgstr ""
+"プレイヤーのインベントリには辞書を使用します。[code]inventory[/code] 変数を定"
+"義しましたが、まだアイテムは含まれていません。"
 
 msgid ""
-"Give the player the following items by adding the correct keys and values"
-" to the dictionary:"
+"Give the player the following items by adding the correct keys and values to "
+"the dictionary:"
 msgstr "辞書に正しいキーと値を追加して、プレーヤーに次の項目を与えます。"
 
 msgid ""
@@ -225,43 +256,53 @@ msgstr ""
 msgid "The keys should be text strings, and the values whole numbers."
 msgstr "キーはテキスト文字列で、値は整数である必要があります。"
 
-#: course/lesson-25-creating-dictionaries/lesson.tres:244
+#: course/lesson-25-creating-dictionaries/lesson.tres:245
 msgid ""
 "Collecting items is fun, but we need a good way to store them. Write a "
 "dictionary to display the player's items."
-msgstr "アイテムを集めるのは楽しいですが、アイテムを保管するための良い方法が必要です。プレイヤーのアイテムを表示する辞書を記述します。"
+msgstr ""
+"アイテムを集めるのは楽しいですが、アイテムを保管するための良い方法が必要で"
+"す。プレイヤーのアイテムを表示する辞書を記述します。"
 
-#: course/lesson-25-creating-dictionaries/lesson.tres:249
+#: course/lesson-25-creating-dictionaries/lesson.tres:250
 msgid "Increasing item counts"
 msgstr "アイテム数の増加"
 
-#: course/lesson-25-creating-dictionaries/lesson.tres:250
+#: course/lesson-25-creating-dictionaries/lesson.tres:251
 msgid ""
 "We want to change the item counts in the player's inventory whenever the "
 "player picks up or uses an item."
-msgstr "プレイヤーがアイテムを拾ったり使用したりするたびに、プレイヤーのインベントリ内のアイテム数を変更したいと考えています。"
+msgstr ""
+"プレイヤーがアイテムを拾ったり使用したりするたびに、プレイヤーのインベントリ"
+"内のアイテム数を変更したいと考えています。"
 
 msgid "We've started the [code]add_item()[/code] function for you."
 msgstr "[code]add_item()[/code]関数を開始しました。"
 
 msgid ""
-"The [code]inventory[/code] dictionary should use the "
-"[code]item_name[/code] parameter as the key to access its values, and we "
-"should increase the value by [code]amount[/code]."
-msgstr "[code]inventory[/code]辞書は、その値にアクセスするためのキーとして[code]item_name[/code]パラメータを使用する必要があり、値を[code]amount[/code]だけ増やす必要があります。"
+"The [code]inventory[/code] dictionary should use the [code]item_name[/code] "
+"parameter as the key to access its values, and we should increase the value "
+"by [code]amount[/code]."
+msgstr ""
+"[code]inventory[/code]辞書は、その値にアクセスするためのキーとして"
+"[code]item_name[/code]パラメータを使用する必要があり、値を[code]amount[/code]"
+"だけ増やす必要があります。"
 
 msgid ""
-"To test this practice, we'll use your [code]add_item()[/code] function to"
-" increase the item count of Healing Heart, Gems, and Sword."
-msgstr "この方法をテストするために、[code]add_item()[/code]関数を使用して、体力回復、宝石、剣のアイテム数を増やします。"
+"To test this practice, we'll use your [code]add_item()[/code] function to "
+"increase the item count of Healing Heart, Gems, and Sword."
+msgstr ""
+"この方法をテストするために、[code]add_item()[/code]関数を使用して、体力回復、"
+"宝石、剣のアイテム数を増やします。"
 
-#: course/lesson-25-creating-dictionaries/lesson.tres:266
+#: course/lesson-25-creating-dictionaries/lesson.tres:268
 msgid ""
 "The player might walk over a pick-up or find something in a chest, so we "
 "need a way to change the item counts in our inventory."
-msgstr "プレイヤーが拾った場所を歩いたり、チェストの中に何かを見つけたりする可能性があるため、インベントリのアイテム数を変更する方法が必要です。"
+msgstr ""
+"プレイヤーが拾った場所を歩いたり、チェストの中に何かを見つけたりする可能性が"
+"あるため、インベントリのアイテム数を変更する方法が必要です。"
 
-#: course/lesson-25-creating-dictionaries/lesson.tres:270
+#: course/lesson-25-creating-dictionaries/lesson.tres:272
 msgid "Creating Dictionaries"
 msgstr "辞書の作成"
-

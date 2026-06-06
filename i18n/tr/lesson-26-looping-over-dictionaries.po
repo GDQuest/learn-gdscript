@@ -8,27 +8,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2023-10-06 07:34+0200\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
 "PO-Revision-Date: 2024-10-11 01:19+0000\n"
 "Last-Translator: Yılmaz Durmaz <yilmaz_durmaz@hotmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-26-looping-over-dictionaries/tr/>\n"
 "Language: tr\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/learn-"
-"gdscript-from-zero/lesson-26-looping-over-dictionaries/tr/>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.10.3\n"
 
 #: course/lesson-26-looping-over-dictionaries/lesson.tres:13
 msgid ""
-"Like with arrays, you can loop over dictionaries. You can loop over both "
-"their keys and values."
+"You can loop over dictionaries, just like you learned to loop over arrays. "
+"When you loop over a dictionary, you get its keys one by one. You can then "
+"use each key to get its value."
 msgstr ""
-"Dizilerde olduğu gibi, sözlükler üzerinde de döngü oluşturabilirsiniz. "
-"Hem anahtarların hem de değerlerin üzerinde döngü oluşturabilirsiniz."
 
-msgid "Let's see how it works with two examples."
+#, fuzzy
+msgid "Let's see how this works with two examples."
 msgstr "İki örnekle nasıl çalıştığını görelim."
 
 #: course/lesson-26-looping-over-dictionaries/lesson.tres:23
@@ -36,110 +36,124 @@ msgid "Displaying an inventory's content"
 msgstr "Bir envanterin içeriğini görüntülemek"
 
 #: course/lesson-26-looping-over-dictionaries/lesson.tres:25
+#, fuzzy
 msgid ""
-"To display the player's inventory, you need to know what it contains. You"
-" need the name and amount of each object."
+"To display the player's inventory, you need to know what it contains: the "
+"name and amount of each item."
 msgstr ""
-"Oyuncunun envanterini görüntülemek için, neleri içerdiğini bilmeniz "
-"gerekir. Her nesnenin adına ve miktarına ihtiyacınız vardır."
+"Oyuncunun envanterini görüntülemek için, neleri içerdiğini bilmeniz gerekir. "
+"Her nesnenin adına ve miktarına ihtiyacınız vardır."
 
+#, fuzzy
 msgid ""
-"And from code, you can only achieve that by looping over the whole "
-"dictionary and processing key-value pairs one by one."
+"To do this, you loop over the dictionary and process each key-value pair one "
+"at a time."
 msgstr ""
 "Ve kodunuzun içinde, bunu yalnızca sözlüğün tamamı üzerinde döngü "
-"oluşturarak, ve anahtar-değer çiftlerini tek tek işleyerek "
-"başarabilirsiniz."
+"oluşturarak, ve anahtar-değer çiftlerini tek tek işleyerek başarabilirsiniz."
 
+#, fuzzy
 msgid ""
-"To get the list of keys in the dictionary, you can call its "
-"[code]keys()[/code] member function."
+"You can get the list of all the keys in a dictionary by calling its "
+"[code]keys()[/code] function."
 msgstr ""
 "Sözlükteki anahtarların listesini almak için [code]keys()[/code] "
 "(anahtarlar) üye fonksiyonunu çağırabilirsiniz."
 
 #: course/lesson-26-looping-over-dictionaries/lesson.tres:49
-msgid "But it's something we do so much that you don't need to call the function."
-msgstr ""
-"Ancak bu o kadar çok yaptığımız bir şey ki, bu fonksiyonu çağırmanıza "
-"gerek yok."
-
 msgid ""
-"Instead, you can directly [ignore]type the variable name in a "
-"[code]for[/code] loop after the [code]in[/code] keyword. The language "
-"understands that you implicitly want to loop over the dictionary's keys."
+"Looping over dictionary keys is so common that GDScript gives you a shortcut."
 msgstr ""
-"Bunun yerine, [code]for[/code] döngüsünde, [code]in[/code] (içinde) "
-"anahtar sözcüğünden sonra doğrudan değişkenin adını yazabilirsiniz. Dil, "
-"dolaylı olarak sözlüğün anahtarları üzerinde döngü yapmak istediğinizi "
-"anlar."
+
+#, fuzzy
+msgid ""
+"You can write the dictionary variable name directly after the [code]in[/"
+"code] keyword in a [code]for[/code] loop. GDScript automatically loops over "
+"the dictionary's keys."
+msgstr ""
+"Bunun yerine, [code]for[/code] döngüsünde, [code]in[/code] (içinde) anahtar "
+"sözcüğünden sonra doğrudan değişkenin adını yazabilirsiniz. Dil, dolaylı "
+"olarak sözlüğün anahtarları üzerinde döngü yapmak istediğinizi anlar."
 
 #: course/lesson-26-looping-over-dictionaries/lesson.tres:71
 msgid ""
-"You can get the values with the syntax [code]dictionary[key][/code] as "
-"you learned in the previous lesson."
+"Remember: the name after the [code]for[/code] keyword is a variable name you "
+"choose yourself. You could call it [code]item_name[/code], [code]item[/"
+"code], [code]key[/code], or anything else. This variable holds one key at a "
+"time as the loop runs."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"You can get each value with the syntax [code]dictionary[key][/code], as you "
+"learned in the previous lesson."
 msgstr ""
 "Önceki derste öğrendiğiniz gibi [code]sözlük_değişkeni[anahtar][/code] "
 "sözdizimi ile değerleri alabilirsiniz."
 
+#, fuzzy
 msgid ""
-"We can loop over the inventory keys, get the corresponding values, and "
-"display all that information in the user interface."
+"So we can loop over the inventory keys, get their values, and display that "
+"information on screen."
 msgstr ""
 "Envanter anahtarları üzerinde döngü yapabilir, karşılık gelen değerleri "
 "alabilir, ve tüm bu bilgileri kullanıcı arayüzünde görüntüleyebiliriz."
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:103
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:105
+#, fuzzy
 msgid ""
-"Instead of printing the key-value pairs to the output console, we can "
-"code and call a dedicated function that displays items in the user "
-"interface."
+"Instead of printing the key-value pairs to the output console, we can write "
+"and call a function that displays items on the screen."
 msgstr ""
 "Anahtar-değer çiftlerini çıktı penceresine yazdırmak yerine, bu öğeleri "
-"kullanıcı arayüzünde görüntüleyen özel bir fonksiyon kodlayıp "
-"çağırabiliriz."
+"kullanıcı arayüzünde görüntüleyen özel bir fonksiyon kodlayıp çağırabiliriz."
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:131
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:133
 msgid "Mapping grid cells to units"
 msgstr "Izgara hücrelerini birimlere eşlemek"
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:133
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:135
+#, fuzzy
 msgid ""
-"We can also use a dictionary to map units to their position on a game "
-"board."
+"You can also use a dictionary to store which units are at which positions on "
+"a game board."
 msgstr ""
 "Birimleri, bir oyun tahtasındaki konumlarına eşlemek için bir sözlük de "
 "kullanabiliriz."
 
+#, fuzzy
 msgid ""
-"That's how you'd typically code a board game, a grid-based RPG, or a "
+"This is how you'd typically code a board game, a grid-based RPG, or a "
 "tactical RPG."
 msgstr ""
-"Genellikle bir masa oyununu, ızgara tabanlı bir RPG'yi, veya taktiksel "
-"bir RPG'yi bu şekilde kodlarsınız."
+"Genellikle bir masa oyununu, ızgara tabanlı bir RPG'yi, veya taktiksel bir "
+"RPG'yi bu şekilde kodlarsınız."
 
+#, fuzzy
 msgid ""
-"While we focused on [code]String[/code] keys so far, GDScript "
-"dictionaries accept any value type as a key, allowing you to map anything"
-" to anything."
+"So far, we used [code]String[/code] keys. But GDScript dictionaries can use "
+"any type as a key. In this example, we use [code]Vector2[/code] values as "
+"keys to represent grid positions."
 msgstr ""
-"Şimdiye kadar dize tipinde ([code]String[/code]) anahtarlarına odaklanmış"
-" olsak ta, GDScript sözlükleri herhangi bir değer tipini anahtar olarak "
-"kabul edebilir, ve herhangi bir şeyi herhangi başka bir şeyle eşlemenize "
-"olanak tanır."
+"Şimdiye kadar dize tipinde ([code]String[/code]) anahtarlarına odaklanmış "
+"olsak ta, GDScript sözlükleri herhangi bir değer tipini anahtar olarak kabul "
+"edebilir, ve herhangi bir şeyi herhangi başka bir şeyle eşlemenize olanak "
+"tanır."
 
-msgid "The only limitation is that every key must be unique."
+#, fuzzy
+msgid "The only rule is that every key in a dictionary must be unique."
 msgstr "Tek sınırlama, her anahtarın benzersiz olması gerektiğidir."
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:159
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:161
+#, fuzzy
 msgid ""
-"Using a [code]for[/code] loop, you can use the key-value pairs to place "
-"units on the board at the start of a game."
+"With a [code]for[/code] loop, you can place all the units on the board when "
+"a game starts."
 msgstr ""
 "Oyunun başında birimleri tahtaya yerleştirmek için, [code]for[/code] "
 "döngüsünü ile anahtar-değer çiftlerini kullanabilirsiniz."
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:189
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:191
 msgid ""
 "In the following practices, you will loop over dictionaries and process "
 "their content."
@@ -147,72 +161,88 @@ msgstr ""
 "Sıradaki alıştırmalarda, sözlükler üzerinde döngü oluşturacak ve "
 "içeriklerini işleyeceksiniz."
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:197
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:199
 msgid "Displaying the inventory"
 msgstr "Envanteri görüntülemek"
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:198
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:200
+#, fuzzy
 msgid ""
-"We use a dictionary to represent the player's inventory in this game. The"
-" dictionary keys are the name of items, and they map to the number of "
-"items that the player owns."
+"We use a dictionary to store the player's inventory. The keys are item "
+"names, and the values are how many of each item the player has."
 msgstr ""
-"Bu oyunda, oyuncunun envanterini temsil etmek için bir sözlük "
-"kullanıyoruz (inventory). Sözlüğün anahtarları öğelerin isimleridir ve "
-"oyuncunun sahip olduğu öğe sayılarıyla eşlenir."
+"Bu oyunda, oyuncunun envanterini temsil etmek için bir sözlük kullanıyoruz "
+"(inventory). Sözlüğün anahtarları öğelerin isimleridir ve oyuncunun sahip "
+"olduğu öğe sayılarıyla eşlenir."
 
-msgid ""
-"You need to loop over the dictionary and display the name and amount of "
-"every item in the inventory."
+#, fuzzy
+msgid "Loop over the dictionary and display every item in the inventory."
 msgstr ""
 "Sözlüğün üzerinde döngü yapmanız ve envanterdeki her öğenin adını ve "
 "miktarını görüntülemeniz gerekiyor."
 
+#, fuzzy
 msgid ""
-"To do so, call the [code]display_item()[/code] function. It takes two "
+"Call the [code]display_item()[/code] function for each item. It takes two "
 "arguments: the item name and the amount."
 msgstr ""
-"Bunu yapmak için [code]display_item()[/code] (görüntüle_öğe) fonksiyonunu"
-" çağırın. Bu fonksiyon iki girdi değişkeni gerektirir: öğenin ismi ve "
-"miktarı."
+"Bunu yapmak için [code]display_item()[/code] (görüntüle_öğe) fonksiyonunu "
+"çağırın. Bu fonksiyon iki girdi değişkeni gerektirir: öğenin ismi ve miktarı."
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:218
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:221
+#, fuzzy
 msgid ""
-"We need to display the player's inventory on the screen but lack the code"
-" to do so. Use a loop to display every item."
+"The player's inventory needs to appear on screen. Use a loop to display "
+"every item."
 msgstr ""
-"Oyuncunun envanterini ekranda göstermemiz gerekiyor, ancak bunu yapmak "
-"için kodumuz yok. Her öğeyi görüntülemek için bir döngü kullanın."
+"Oyuncunun envanterini ekranda göstermemiz gerekiyor, ancak bunu yapmak için "
+"kodumuz yok. Her öğeyi görüntülemek için bir döngü kullanın."
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:223
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:226
 msgid "Placing units on the board"
 msgstr "Birimleri tahtaya yerleştirmek"
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:224
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:227
+#, fuzzy
 msgid ""
-"We have a dictionary named [code]units[/code] that maps a cell position "
-"on the grid to a unit to put there."
+"We have a dictionary named [code]units[/code]. It maps cell positions on the "
+"grid to the type of unit at that position."
 msgstr ""
-"[code]units[/code] adında (birimler), ızgaradaki bir hücre konumunu, "
-"oraya koyacağımız bir birimle eşleyen bir sözlüğümüz var."
+"[code]units[/code] adında (birimler), ızgaradaki bir hücre konumunu, oraya "
+"koyacağımız bir birimle eşleyen bir sözlüğümüz var."
 
+#, fuzzy
 msgid ""
-"Using a for loop and the [code]place_unit()[/code] function, place every "
-"unit in the units dictionary at the desired position on the game board."
+"Use a for loop to place every unit on the game board. Call the "
+"[code]place_unit()[/code] function for each unit. It takes two arguments: "
+"first the cell position, then the unit type."
 msgstr ""
-"Bir for döngüsü ve [code]place_unit()[/code] (yerleştir_birim) "
-"fonksiyonunu kullanarak, birimler sözlüğündeki her birimi oyun tahtasında"
-" istenen konuma yerleştirin."
+"Bir for döngüsü ve [code]place_unit()[/code] (yerleştir_birim) fonksiyonunu "
+"kullanarak, birimler sözlüğündeki her birimi oyun tahtasında istenen konuma "
+"yerleştirin."
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:242
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:246
+#, fuzzy
 msgid ""
-"We want to populate our game board with units at the start of every "
-"battle. Loop over the dictionary to place units on the board."
+"At the start of each battle, units need to appear on the game board. Loop "
+"over the dictionary to place them."
 msgstr ""
 "Her savaşın başında, oyun tahtamızı birimlerle doldurmak istiyoruz. "
 "Birimleri tahtaya yerleştirmek için sözlüğün üzerinde döngü yapın."
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:246
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:250
 msgid "Looping over dictionaries"
 msgstr "Sözlükler üzerinde döngü kurmak"
 
+#~ msgid ""
+#~ "Like with arrays, you can loop over dictionaries. You can loop over both "
+#~ "their keys and values."
+#~ msgstr ""
+#~ "Dizilerde olduğu gibi, sözlükler üzerinde de döngü oluşturabilirsiniz. "
+#~ "Hem anahtarların hem de değerlerin üzerinde döngü oluşturabilirsiniz."
+
+#~ msgid ""
+#~ "But it's something we do so much that you don't need to call the function."
+#~ msgstr ""
+#~ "Ancak bu o kadar çok yaptığımız bir şey ki, bu fonksiyonu çağırmanıza "
+#~ "gerek yok."

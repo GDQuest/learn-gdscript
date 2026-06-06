@@ -8,61 +8,64 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2025-06-14 15:02+0200\n"
-"PO-Revision-Date: 2024-03-31 09:14+0000\n"
-"Last-Translator: cyochot <k97un9ri@gmail.com>\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2026-03-20 09:09+0000\n"
+"Last-Translator: c3974 <148695293+c3974@users.noreply.github.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/error-explanations/ja/>\n"
 "Language: ja\n"
-"Language-Team: Japanese <https://hosted.weblate.org/projects/learn-"
-"gdscript-from-zero/error-explanations/ja/>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.17-dev\n"
 "Generated-By: Babel 2.10.3\n"
 
 #. Reference: IN_EXPECTED_AFTER_IDENTIFIER
 #: script_checking/error_database.csv:40
 msgid ""
-"You get this error when the name between the [code]for[/code] and "
-"[code]in[/code] is not a valid variable name, or you are missing the "
-"[code]in[/code] keyword."
+"You get this error when the name between the [code]for[/code] and [code]in[/"
+"code] is not a valid variable name, or you are missing the [code]in[/code] "
+"keyword."
 msgstr ""
-"[code]for[/code] と [code]in[/code] の間の名前が有効な変数名ではない場合、または [code]in[/code]"
-" キーワードが欠落している場合に、このエラーが発生します。"
+"[code]for[/code] と [code]in[/code] の間の名前が有効な変数名ではない場合、ま"
+"たは [code]in[/code] キーワードが欠落している場合に、このエラーが発生します。"
 
 msgid ""
-"In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a "
-"valid temporary variable name to assign values in each loop iteration. "
-"The loop creates a new variable with the desired name and assigns each "
-"element of the array to it."
+"In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid "
+"temporary variable name to assign values in each loop iteration. The loop "
+"creates a new variable with the desired name and assigns each element of the "
+"array to it."
 msgstr ""
-"[code]for[/code] ループの、[code]in[/code] "
-"キーワードでは、各ループ反復で値を割り当てるための有効な一時変数名のみを受け入れます。 "
-"このループは、必要な名前を持つ新しい変数を作成し、配列の各要素をそれに割り当てます。"
+"[code]for[/code] ループの、[code]in[/code] キーワードでは、各ループ反復で値を"
+"割り当てるための有効な一時変数名のみを受け入れます。 このループは、必要な名前"
+"を持つ新しい変数を作成し、配列の各要素をそれに割り当てます。"
 
 #. Reference: IN_EXPECTED_AFTER_IDENTIFIER
 #: script_checking/error_database.csv:40
 msgid ""
-"To fix this error, you need to ensure that the name between the "
-"[code]for[/code] and [code]in[/code] keywords is a valid variable name "
-"with no punctuation or spaces."
+"To fix this error, you need to ensure that the name between the [code]for[/"
+"code] and [code]in[/code] keywords is a valid variable name with no "
+"punctuation or spaces."
 msgstr ""
-"このエラーを修正するには、[code]for[/code] キーワードと [code]in[/code] "
-"キーワードの間の名前が、句読点やスペースのない有効な変数名であることを確認する必要があります。"
+"このエラーを修正するには、[code]for[/code] キーワードと [code]in[/code] キー"
+"ワードの間の名前が、句読点やスペースのない有効な変数名であることを確認する必"
+"要があります。"
 
 msgid ""
 "For example, this code is invalid: [code]for cell_position.x in "
-"cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a"
-" valid variable name."
+"cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a "
+"valid variable name."
 msgstr ""
-"たとえば、次のコードは無効です: [code]for cell_position.x in "
-"cell_positions_array:[/code]。[code]cell_position.x[/code] "
-"は有効な変数名ではないためです。"
+"たとえば、[code]cell_position.x[/code] は有効な変数名ではないため、[code]for "
+"cell_position.x in cell_positions_array:[/code] は無効なコードです。"
 
 msgid ""
-"To access the [code]x[/code] sub-component of the variable, you need to "
-"do that inside of the loop's body:"
-msgstr "変数の [code]x[/code] サブコンポーネントにアクセスするには、ループ本体内でそれを行う必要があります。"
+"To access the [code]x[/code] sub-component of the variable, you need to do "
+"that inside of the loop's body:"
+msgstr ""
+"変数の [code]x[/code] サブコンポーネントにアクセスするには、ループ本体内でそ"
+"れを行う必要があります。"
 
 msgid ""
 "[code]for cell_position in cell_positions_array:\n"
@@ -72,40 +75,153 @@ msgstr ""
 "    cell_position.x += 1.0[/code]"
 
 #. Reference: ASSIGNING_TO_EXPRESSION
-#: script_checking/error_database.csv:47
+#: script_checking/error_database.csv:49
 msgid ""
-"If you get this error, you are most likely trying to assign a value to "
-"something other than a variable, which is impossible. You can only assign"
-" values to variables."
-msgstr "このエラーが発生した場合は、変数以外のものに値を代入しようとしている可能性が高く、これは不可能です。 変数には値のみを代入できます。"
+"You get this error when you try to assign a value to something that is not a "
+"variable."
+msgstr "変数ではないものに値を代入しようとするとこのエラーが発生します。"
 
 msgid ""
-"Another possibility is that you want to check for equality in a condition"
-" but wrote a single = instead of ==."
-msgstr "もう 1 つの可能性としては、条件内の等しいかどうかをチェックしたいが、== の代わりに単一の = を記述したということです。"
+"You can only assign values to variables. You cannot assign values to "
+"function calls or calculations."
+msgstr ""
+"値を代入できるのは変数だけです。関数呼び出しや計算結果に値を代入することはで"
+"きません。"
+
+msgid ""
+"For example, you cannot write [code]randi() = 5[/code] because [code]randi()"
+"[/code] is a function call, not a variable."
+msgstr ""
+"たとえば、[code]randi()[/code] は関数呼び出しであり変数ではないため"
+"、[code]randi() = 5[/code] と書くことはできません。"
 
 #. Reference: ASSIGNING_TO_EXPRESSION
-#: script_checking/error_database.csv:47
+#: script_checking/error_database.csv:49
 msgid ""
-"If you want to assign a value to a variable, double-check that what you "
-"have on the left side of the = sign is a variable and not a function."
-msgstr "変数に値を代入する場合は、「=」 記号の左側にあるものが関数ではなく変数であることを再確認してください。"
+"Check what you wrote on the left side of the equal sign (=). Make sure it is "
+"a variable name."
+msgstr ""
+"等号（=）の左側に書いたものを確認してください。それが変数名であることを確認し"
+"てください。"
 
 msgid ""
-"You also need to ensure the syntax is correct. For example, there "
-"shouldn't be parentheses on the left side of the equal sign."
-msgstr "構文が正しいことも確認する必要があります。 たとえば、等号の左側に括弧があってはなりません。"
+"If you see parentheses () on the left side, you might be trying to assign to "
+"a function call. Remove the parentheses and the function call."
+msgstr ""
+"左側に括弧（）がある場合、関数呼び出しに代入しようとしている可能性があります"
+"。括弧と関数呼び出しを削除してください。"
 
 msgid ""
-"In the case of a condition, ensure that you are using two equal signs to "
-"check for equality (==)."
-msgstr "条件の場合は、等号 「==」をチェックするために 2 つの等号を使用していることを確認してください。"
+"If you are trying to check if two values are equal in a condition, use two "
+"equal signs (==) instead of one (=)."
+msgstr ""
+"条件式で2つの値が等しいかどうかを確認する場合は、等号（=）を1つではなく2つ"
+"（==）使用してください。"
+
+#. Reference: CANT_ASSIGN_TO_CONSTANT
+#: script_checking/error_database.csv:59
+msgid "You get this error when you try to change the value of a constant."
+msgstr "定数の値を変更しようとするとこのエラーが発生します。"
+
+msgid ""
+"A constant is a name that holds a value that cannot change. It's like a "
+"variable, but once you set its value, you cannot replace it."
+msgstr ""
+"定数とは、変更できない値を保持する名前です。変数に似ていますが、一度値を設定"
+"するとそれを置き換えることはできません。"
+
+msgid ""
+"For example, if you write [code]const MAX_SPEED = 100[/code], you cannot "
+"later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code]."
+msgstr ""
+"たとえば、[code]const MAX_SPEED = 100[/code] と書いた場合、後から "
+"[code]MAX_SPEED = 200[/code] や [code]MAX_SPEED += 50[/code] と書くことはでき"
+"ません。"
+
+msgid ""
+"Many constants are built into Godot and GDScript, and you cannot change them "
+"either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI "
+"= 3[/code]. Constant names usually use capital letters."
+msgstr ""
+"多くの定数はGodotとGDScriptに組み込まれており、それらも変更できません。たとえ"
+"ば、[code]Vector2 = 5[/code] や [code]PI = 3[/code] と書くことはできません。"
+"定数名は通常、大文字で表記されます。"
+
+#. Reference: CANT_ASSIGN_TO_CONSTANT
+#: script_checking/error_database.csv:59
+msgid ""
+"Look at what you are trying to change. If it is a constant (defined with the "
+"[code]const[/code] keyword or built into Godot), you have two options:"
+msgstr ""
+"変更しようとしているものを確認してください。それが定数（[code]const[/code] "
+"キーワードで定義されているか、Godotに組み込まれているもの）である場合、2つの"
+"選択肢があります："
+
+msgid ""
+"1. If the value should never change, or it comes from Godot, remove the line "
+"that tries to change it.\n"
+"2. If the value needs to change, use [code]var[/code] instead of "
+"[code]const[/code] when you first create it."
+msgstr ""
+"1. 値が変わるべきでない場合、またはGodotによって提供されている値である場合は"
+"、それを変更しようとしている行を削除してください。\n"
+"2. 値を変更する必要がある場合は、最初に作成するときに [code]const[/code] の代"
+"わりに [code]var[/code] を使用してください。"
+
+#. Reference: SPACES_BEFORE_TABS
+#: script_checking/error_database.csv:68
+msgid ""
+"You get this error when you mix spaces and tabs in your indentation. This "
+"happens when you have a space before a tab, or a tab before a space at the "
+"start of a line."
+msgstr ""
+"インデントにスペースとタブを混在させるとこのエラーが発生します。これは、行の"
+"先頭でスペースの後にタブが来る場合、またはタブの後にスペースが来る場合に発生"
+"します。"
+
+msgid ""
+"In GDScript, you must use only tabs (not spaces) to indent your code. When "
+"you press the Tab key on your keyboard, it creates a tab character."
+msgstr ""
+"GDScriptでは、コードのインデントにタブのみを使用する必要があります（スペース"
+"は使用できません）。キーボードのTabキーを押すと、タブ文字が作成されます。"
+
+msgid ""
+"If you accidentally type a space before a tab, or a tab before a space, the "
+"computer gets confused about your code's indentation."
+msgstr ""
+"誤ってタブの前にスペースを入力したり、スペースの前にタブを入力したりすると、"
+"コンピューターがコードのインデントを正しく認識できなくなります。"
+
+#. Reference: SPACES_BEFORE_TABS
+#: script_checking/error_database.csv:68
+msgid ""
+"To fix this error, go to the line mentioned in the error message. Delete any "
+"space characters at the very beginning of the line, and remove any spaces "
+"that appear after your tab characters."
+msgstr ""
+"このエラーを修正するには、エラーメッセージに記載されている行に移動してくださ"
+"い。行の先頭にあるスペース文字を削除し、タブ文字の後に続くスペースも削除して"
+"ください。"
+
+msgid ""
+"Tab characters look like an arrow pointing at a vertical line in your code: "
+"⇥. Spaces look like centered dots: ·. Look closely to spot the difference."
+msgstr ""
+"タブ文字はコード内で縦線に向かう矢印のように表示されます：⇥。スペースは中央に"
+"点として表示されます：·。違いをよく見て確認してください。"
+
+msgid ""
+"Then, make sure the line starts with only tab characters for indentation, "
+"with no spaces mixed in."
+msgstr ""
+"その後、インデントにタブ文字のみが使用されており、スペースが混在していないこ"
+"とを確認してください。"
 
 #. Reference: CYCLIC_REFERENCE
-#: script_checking/error_database.csv:57
+#: script_checking/error_database.csv:78
 msgid ""
-"A cyclic reference is when a class references itself, directly or "
-"indirectly."
+"A cyclic reference is when a class references itself, directly or indirectly."
 msgstr "循環参照とは、クラスが直接的または間接的にそれ自体を参照することです。"
 
 msgid "It has two possible causes:"
@@ -113,559 +229,761 @@ msgstr "考えられる原因は次の 2 つです。"
 
 msgid ""
 "1. You used the class name in the class itself.\n"
-"2. Your code refers to another class that refers to this class, causing "
-"an endless reference cycle."
+"2. Your code refers to another class that refers to this class, causing an "
+"endless reference cycle."
 msgstr ""
 "1. クラス自体でクラス名を使用しました。\n"
-"2. コードがこのクラスを参照する別のクラスを参照しているため、無限の参照サイクルが発生します。"
+"2. コードがこのクラスを参照する別のクラスを参照しているため、無限の参照サイク"
+"ルが発生します。"
 
 msgid ""
-"Either way, due to how GDScript works in Godot 3, unfortunately,you "
-"cannot do this. Godot 4 should solve this problem, but you need to work "
-"around it in the meantime."
+"Either way, due to how GDScript works in Godot 3, unfortunately,you cannot "
+"do this. Godot 4 should solve this problem, but you need to work around it "
+"in the meantime."
 msgstr ""
-"いずれにせよ、Godot 3 での GDScript の動作方法により、残念ながらこれを行うことはできません。 Godot 4 "
-"ではこの問題は解決されるはずですが、それまでの間は回避する必要があります。"
+"いずれにせよ、Godot 3 での GDScript の動作方法により、残念ながらこれを行うこ"
+"とはできません。 Godot 4 ではこの問題は解決されるはずですが、それまでの間は回"
+"避する必要があります。"
 
 #. Reference: CYCLIC_REFERENCE
-#: script_checking/error_database.csv:57
-msgid "Erase the type hint in the error line, and the problem should disappear."
+#: script_checking/error_database.csv:78
+msgid ""
+"Erase the type hint in the error line, and the problem should disappear."
 msgstr "エラー行のタイプヒントを消去すると、問題は解消されるはずです。"
 
 msgid ""
 "At GDQuest, when we face this error, we remove the type hints on lines "
 "causing cyclic references. It solves the problem in the vast majority of "
 "cases."
-msgstr "GDQuest では、このエラーが発生した場合、循環参照を引き起こしている行の型ヒントを削除します。 ほとんどの場合、これで問題は解決します。"
+msgstr ""
+"GDQuest では、このエラーが発生した場合、循環参照を引き起こしている行の型ヒン"
+"トを削除します。 ほとんどの場合、これで問題は解決します。"
 
 #. Reference: INVALID_INDENTATION
-#: script_checking/error_database.csv:64
+#: script_checking/error_database.csv:85
 msgid ""
-"The indentation of your code (the number of tab characters at the start "
-"of the line) is incorrect."
+"The indentation of your code (the number of tab characters at the start of "
+"the line) is incorrect."
 msgstr "コードのインデント (行頭のtab文字の数) が正しくありません。"
 
 msgid "You are missing one or more tabs, or you inserted too many."
 msgstr "1 つ以上のタブが欠落しているか、挿入したtabが多すぎます。"
 
 msgid ""
-"The computer uses those leading tab characters on code lines to know "
-"which lines of code are part of a code block, like a function."
-msgstr "コンピューターは、コード行の先頭のtab文字を使用して、コードのどの行が関数などのコード ブロックの一部であるかを認識します。"
+"The computer uses those leading tab characters on code lines to know which "
+"lines of code are part of a code block, like a function."
+msgstr ""
+"コンピューターは、コード行の先頭のtab文字を使用して、コードのどの行が関数など"
+"のコード ブロックの一部であるかを認識します。"
 
 #. Reference: INVALID_INDENTATION
-#: script_checking/error_database.csv:64
+#: script_checking/error_database.csv:85
 msgid ""
 "If the line of code with the error is right after a line ending with a "
-"colon, like a function definition, you need one extra indent level "
-"compared to the previous line."
-msgstr "関数定義など、エラーのあるコード行がコロンで終わる行の直後にある場合は、前の行と比較してインデント レベルを 1 つ増やす必要があります。"
+"colon, like a function definition, you need one extra indent level compared "
+"to the previous line."
+msgstr ""
+"関数定義など、エラーのあるコード行がコロンで終わる行の直後にある場合は、前の"
+"行と比較してインデント レベルを 1 つ増やす必要があります。"
 
 msgid ""
-"In other words, your line should have one more leading tab character than"
-" the function definition."
+"In other words, your line should have one more leading tab character than "
+"the function definition."
 msgstr "つまり、行の先頭には関数定義よりも 1 つ多くのtab文字が必要です。"
 
 #. Reference: UNEXPECTED_CHARACTER
-#: script_checking/error_database.csv:73
+#: script_checking/error_database.csv:94
 msgid ""
-"You get this error when you wrote something that is syntactically "
-"invalid, or you are missing something to complete this line or previous "
-"lines of code."
-msgstr "このエラーは、構文的に無効な内容を記述した場合、またはコードのこの行または前の行を完了するためのものが不足している場合に発生します。"
+"You get this error when you wrote something that is syntactically invalid, "
+"or you are missing something to complete this line or previous lines of code."
+msgstr ""
+"このエラーは、構文的に無効な内容を記述した場合、またはコードのこの行または前"
+"の行を完了するためのものが不足している場合に発生します。"
 
 msgid ""
-"You need to be extremely precise when you write code for the computer. "
-"This kind of error is easy to get as all it takes is one wrong character."
-msgstr "コンピューター用のコードを記述するときは、非常に正確である必要があります。 この種のエラーは、1 文字間違っているだけで済むため、簡単に発生します。"
+"You need to be extremely precise when you write code for the computer. This "
+"kind of error is easy to get as all it takes is one wrong character."
+msgstr ""
+"コンピューター用のコードを記述するときは、非常に正確である必要があります。 こ"
+"の種のエラーは、1 文字間違っているだけで済むため、簡単に発生します。"
 
 msgid ""
-"Note that this error can appear [b]after[/b] the line causing it due to "
-"how the computer reads and analyzes your code."
-msgstr "このエラーは、コンピュータがコードを読み取って分析する方法によって、原因となった行の[b]後[/b]に表示される場合があることに注意してください。"
+"Note that this error can appear [b]after[/b] the line causing it due to how "
+"the computer reads and analyzes your code."
+msgstr ""
+"このエラーは、コンピュータがコードを読み取って分析する方法によって、原因と"
+"なった行の[b]後[/b]に表示される場合があることに注意してください。"
 
 #. Reference: UNEXPECTED_CHARACTER
-#: script_checking/error_database.csv:73
+#: script_checking/error_database.csv:94
 msgid ""
-"The way to solve this kind of error is highly contextual. The error "
-"message should tell you which character or element it's missing."
-msgstr "この種のエラーを解決する方法は、状況に応じて大きく異なります。 エラー メッセージには、どの文字または要素が欠落しているかが示されます。"
+"The way to solve this kind of error is highly contextual. The error message "
+"should tell you which character or element it's missing."
+msgstr ""
+"この種のエラーを解決する方法は、状況に応じて大きく異なります。 エラー メッ"
+"セージには、どの文字または要素が欠落しているかが示されます。"
 
 msgid ""
-"If the error says \"expected,\" then you're likely missing something in "
-"one of the [b]previous[/b] code lines. It could be a punctuation mark, a "
+"If the error says \"expected,\" then you're likely missing something in one "
+"of the [b]previous[/b] code lines. It could be a punctuation mark, a "
 "parenthesis, or something else."
 msgstr ""
-"エラーに「expected(予想通り)」と表示されている場合は、[b]前の[/b]コード行のいずれかに何かが欠けている可能性があります。 "
-"句読点、括弧、またはその他のものである可能性があります。"
+"エラーに「expected(予想通り)」と表示されている場合は、[b]前の[/b]コード行のい"
+"ずれかに何かが欠けている可能性があります。 句読点、括弧、またはその他のもので"
+"ある可能性があります。"
 
 msgid ""
-"If it says \"unterminated,\" you are missing some character at the end of"
-" an expression, like a closing bracket. In this case, it most likely "
-"comes from the line with the error."
+"If it says \"unterminated,\" you are missing some character at the end of an "
+"expression, like a closing bracket. In this case, it most likely comes from "
+"the line with the error."
 msgstr ""
-"「unterminated(終了していない)」と表示されている場合は、右括弧など、式の末尾の文字が欠落しています。 "
-"この場合、エラーが発生した行から発生している可能性が高くなります。"
+"「unterminated(終了していない)」と表示されている場合は、右括弧など、式の末尾"
+"の文字が欠落しています。 この場合、エラーが発生した行から発生している可能性が"
+"高くなります。"
+
+#. Reference: UNKNOWN_CHARACTER
+#: script_checking/error_database.csv:103
+msgid ""
+"You get this error when you use a special character that GDScript doesn't "
+"recognize."
+msgstr ""
+
+msgid ""
+"This includes accented letters (like é, à, ñ), special symbols, or "
+"characters from non-Latin alphabets in your code instructions (not in "
+"strings)."
+msgstr ""
+
+msgid ""
+"[b]Note:[/b] Godot 4 supports special and non-Latin characters in code "
+"(Unicode characters), but this app is built with Godot 3, which does not."
+msgstr ""
+
+#. Reference: UNKNOWN_CHARACTER
+#: script_checking/error_database.csv:103
+msgid ""
+"To fix this error, remove any accented letters or special characters from "
+"your variable names, function names, and other code elements."
+msgstr ""
+
+msgid ""
+"You can use accented characters inside text strings (between quotes), but "
+"not in the code itself."
+msgstr ""
+
+msgid ""
+"You can replace accented letters with their non-accented equivalents. For "
+"example, change [code]café[/code] to [code]cafe[/code]."
+msgstr ""
 
 #. Reference: UNEXPECTED_CHARACTER_IN_KEYWORD
-#: script_checking/error_database.csv:76
+#: script_checking/error_database.csv:106
 msgid ""
 "This error tells you that you are missing a parenthesis (or sometimes a "
 "comma or a path)."
-msgstr "このエラーは、括弧 (場合によってはカンマやパス) が欠落していることを示します。"
+msgstr ""
+"このエラーは、括弧 (場合によってはカンマやパス) が欠落していることを示しま"
+"す。"
 
 msgid ""
-"Three keywords in GDScript work like function calls and require "
-"parentheses: [code]yield()[/code], [code]preload()[/code], and "
-"[code]assert()[/code]."
+"Three keywords in GDScript work like function calls and require parentheses: "
+"[code]yield()[/code], [code]preload()[/code], and [code]assert()[/code]."
 msgstr ""
 "GDScript の 3 つのキーワードは関数呼び出しのように機能し、括弧が必要です: "
 "[code]yield()[/code]、[code]preload()[/code]、および [code]assert()[/code]。"
 
 #. Reference: UNEXPECTED_CHARACTER_IN_KEYWORD
-#: script_checking/error_database.csv:76
+#: script_checking/error_database.csv:106
 msgid ""
-"To address the error, you want to add the missing opening parenthesis, "
-"the closing parenthesis, or the comma."
-msgstr "このエラーに対処するには、欠落している開き括弧、閉じ括弧、またはコンマを追加します。"
+"To address the error, you want to add the missing opening parenthesis, the "
+"closing parenthesis, or the comma."
+msgstr ""
+"このエラーに対処するには、欠落している開き括弧、閉じ括弧、またはコンマを追加"
+"します。"
 
 #. Reference: UNEXPECTED_CHARACTER_IN_EXPORT_HINT
-#: script_checking/error_database.csv:77
+#: script_checking/error_database.csv:107
 msgid ""
-"This error tells you are missing some parenthesis, a comma, or some value"
-" in your export hint."
-msgstr "このエラーは、エクスポート ヒントに括弧、カンマ、または値が欠落していることを示します。"
+"This error tells you are missing some parenthesis, a comma, or some value in "
+"your export hint."
+msgstr ""
+"このエラーは、エクスポート ヒントに括弧、カンマ、または値が欠落していることを"
+"示します。"
 
 #. Reference: UNEXPECTED_CHARACTER_IN_EXPORT_HINT
-#: script_checking/error_database.csv:77
+#: script_checking/error_database.csv:107
 msgid ""
-"You need to read the error message and add the missing character or value"
-" it requests."
-msgstr "エラー メッセージを読み、不足している文字または要求されている値を追加する必要があります。"
+"You need to read the error message and add the missing character or value it "
+"requests."
+msgstr ""
+"エラー メッセージを読み、不足している文字または要求されている値を追加する必要"
+"があります。"
 
 #. Reference: MISPLACED_IDENTIFIER
-#: script_checking/error_database.csv:86
+#: script_checking/error_database.csv:116
 msgid "This error happens in several cases:"
 msgstr "このエラーはいくつかの場合に発生します。"
 
 msgid ""
-"1. You wrote an identifier (variable or function name) in the wrong "
-"place.\n"
-"2. You wrote a keyword like [code]var[/code], [code]func[/code], "
-"[code]for[/code], or [code]signal[/code], and you did not follow it by a "
-"name.\n"
+"1. You wrote an identifier (variable or function name) in the wrong place.\n"
+"2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/"
+"code], or [code]signal[/code], and you did not follow it by a name.\n"
 "3. You wrote a function definition but forgot the parentheses before the "
 "colon."
 msgstr ""
 "1. 識別子（変数名または関数名）を間違った場所に記述しました。\n"
-"2. "
-"[code]var[/code]、[code]func[/code]、[code]for[/code]、[code]signal[/code] "
-"などのキーワードを書き、その後に名前を付けなかった。\n"
+"2. [code]var[/code]、[code]func[/code]、[code]for[/code]、[code]signal[/"
+"code] などのキーワードを書き、その後に名前を付けなかった。\n"
 "3. 関数定義を書きましたが、コロンの前の括弧を忘れました。"
 
 #. Reference: MISPLACED_IDENTIFIER
-#: script_checking/error_database.csv:86
+#: script_checking/error_database.csv:116
 msgid ""
-"If the error tells you it expected something, you likely forgot to write "
-"a name after a keyword like [code]var[/code], [code]func[/code], "
-"[code]for[/code], or [code]signal[/code], making your code invalid. Or "
-"you forgot parentheses in a function definition. You can address the "
-"error by adding the missing name or parentheses."
-msgstr "もしエラーが何かを期待していたと言うのであれば、[code]var[/code]、[code]func[/code]、[code]for[/code]、[code]signal[/code]のようなキーワードの後に名前を書き忘れていて、コードが無効になっている可能性があります。あるいは、関数の定義で括弧を忘れてしまった。不足している名前や括弧を追加することで、エラーに対処できます。"
+"If the error tells you it expected something, you likely forgot to write a "
+"name after a keyword like [code]var[/code], [code]func[/code], [code]for[/"
+"code], or [code]signal[/code], making your code invalid. Or you forgot "
+"parentheses in a function definition. You can address the error by adding "
+"the missing name or parentheses."
+msgstr ""
+"もしエラーが何かを期待していたと言うのであれば、[code]var[/code]、"
+"[code]func[/code]、[code]for[/code]、[code]signal[/code]のようなキーワードの"
+"後に名前を書き忘れていて、コードが無効になっている可能性があります。あるい"
+"は、関数の定義で括弧を忘れてしまった。不足している名前や括弧を追加すること"
+"で、エラーに対処できます。"
 
 msgid ""
-"If the error says you have something unexpected, you are likely missing a"
-" keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc."
-msgstr "エラーに「予期しないものがある」と書かれている場合は、[code]var[/code]、[code]func[/code]、[code]for[/code]などのキーワードが欠けている可能性が高い。"
+"If the error says you have something unexpected, you are likely missing a "
+"keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc."
+msgstr ""
+"エラーに「予期しないものがある」と書かれている場合は、[code]var[/code]、"
+"[code]func[/code]、[code]for[/code]などのキーワードが欠けている可能性が高い。"
 
 msgid ""
 "Another possibility is that you need to write a colon at the end of a "
 "function definition, [code]for[/code] loop, or a line starting with "
 "[code]if[/code], [code]elif[/code], or [code]else[/code]."
-msgstr "もう一つの可能性は、関数定義、[code]for[/code]ループ、または[code]if[/code]、[code]elif[/code]、[code]else[/code]で始まる行の最後にコロンを書く必要があることです。"
+msgstr ""
+"もう一つの可能性は、関数定義、[code]for[/code]ループ、または[code]if[/code]、"
+"[code]elif[/code]、[code]else[/code]で始まる行の最後にコロンを書く必要がある"
+"ことです。"
 
 #. Reference: MISPLACED_TYPE_IDENTIFIER
-#: script_checking/error_database.csv:91
+#: script_checking/error_database.csv:121
 msgid ""
-"This error tells you that you are missing a type somewhere. A type can be"
-" [code]int[/code], [code]float[/code], [code]String[/code], "
-"[code]Array[/code], [code]Vector2[/code], and many identifiers "
-"representing a data structure."
-msgstr "このエラーは、どこかに型がないことを示しています。型には、[code]int[/code]、[code]float[/code]、[code]String[/code]、[code]Array[/code]、[code]Vector2[/code]、その他データ構造を表す多くの識別子があります。"
+"This error tells you that you are missing a type somewhere. A type can be "
+"[code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/"
+"code], [code]Vector2[/code], and many identifiers representing a data "
+"structure."
+msgstr ""
+"このエラーは、どこかに型がないことを示しています。型には、[code]int[/code]、"
+"[code]float[/code]、[code]String[/code]、[code]Array[/code]、[code]Vector2[/"
+"code]、その他データ構造を表す多くの識別子があります。"
 
 msgid ""
-"Most of the time, this error occurs when you wrote a colon after a "
-"variable name but did not follow it with a type name."
-msgstr "ほとんどの場合、このエラーは変数名の後にコロンを書き、その後に型名を書かなかった場合に発生します。"
+"Most of the time, this error occurs when you wrote a colon after a variable "
+"name but did not follow it with a type name."
+msgstr ""
+"ほとんどの場合、このエラーは変数名の後にコロンを書き、その後に型名を書かな"
+"かった場合に発生します。"
 
 msgid ""
 "It also occurs when you write an arrow ([code]->[/code]) after the "
-"parentheses of a function definition but do not follow it with a type "
-"name."
-msgstr "また、関数定義の括弧の後に矢印（[code]->[/code]）を書き、その後に型名を記述しなかった場合にも発生します。"
+"parentheses of a function definition but do not follow it with a type name."
+msgstr ""
+"また、関数定義の括弧の後に矢印（[code]->[/code]）を書き、その後に型名を記述し"
+"なかった場合にも発生します。"
 
 #. Reference: MISPLACED_TYPE_IDENTIFIER
-#: script_checking/error_database.csv:91
+#: script_checking/error_database.csv:121
 msgid ""
-"To solve this, you need to write the name of the type after the colon, "
-"arrow (in the case of function return types), inside parentheses (for "
-"export types), or after the [code]as[/code] keyword."
-msgstr "これを解決するには、コロンの後、矢印の後（関数のリターン型の場合）、括弧の中（エクスポート型の場合）、または[code]as[/code]キーワードの後に型名を書く必要がある。"
+"To solve this, you need to write the name of the type after the colon, arrow "
+"(in the case of function return types), inside parentheses (for export "
+"types), or after the [code]as[/code] keyword."
+msgstr ""
+"これを解決するには、コロンの後、矢印の後（関数のリターン型の場合）、括弧の中"
+"（エクスポート型の場合）、または[code]as[/code]キーワードの後に型名を書く必要"
+"がある。"
 
 #. Reference: NONEXISTENT_IDENTIFIER
-#: script_checking/error_database.csv:100
+#: script_checking/error_database.csv:130
 msgid ""
-"The variable, function name, or class name you are trying to use does not"
-" exist."
+"The variable, function name, or class name you are trying to use does not "
+"exist."
 msgstr "使用しようとしている変数名、関数名、またはクラス名が存在しません。"
 
 msgid ""
 "You most often get this error when you make typos. Maybe you swapped two "
 "letters, forgot a letter... sometimes, it's hard to spot."
-msgstr "このエラーは、タイプミスをしたときによく出ます。2文字を入れ替えてしまったり、1文字忘れてしまったり......見つけるのが難しいこともあります。"
+msgstr ""
+"このエラーは、タイプミスをしたときによく出ます。2文字を入れ替えてしまったり、"
+"1文字忘れてしまったり......見つけるのが難しいこともあります。"
 
 msgid ""
 "The other cause for this error is that you didn't define the variable, "
 "function, or class you're trying to access."
-msgstr "このエラーのもう一つの原因は、アクセスしようとしている変数、関数、クラスを定義していないことです。"
+msgstr ""
+"このエラーのもう一つの原因は、アクセスしようとしている変数、関数、クラスを定"
+"義していないことです。"
 
 #. Reference: NONEXISTENT_IDENTIFIER
-#: script_checking/error_database.csv:100
+#: script_checking/error_database.csv:130
 msgid "To solve this error, triple-check that there is no typo in the line."
-msgstr "このエラーを解決するには、その行にタイプミスがないかをトリプルチェックしてください。"
+msgstr ""
+"このエラーを解決するには、その行にタイプミスがないかをトリプルチェックしてく"
+"ださい。"
 
 msgid ""
-"If you can, try to go to the variable or function definition, double-"
-"click the name, copy it, and paste it where you see the error."
-msgstr "可能であれば、変数や関数の定義に移動し、名前をダブルクリックしてコピーし、エラーのある場所に貼り付けてみてください。"
+"If you can, try to go to the variable or function definition, double-click "
+"the name, copy it, and paste it where you see the error."
+msgstr ""
+"可能であれば、変数や関数の定義に移動し、名前をダブルクリックしてコピーし、エ"
+"ラーのある場所に貼り付けてみてください。"
 
 msgid ""
 "If you don't see any typo, then you need to ensure that you defined the "
 "variable, function, or class you are referring to."
-msgstr "タイプミスが見当たらない場合は、参照している変数、関数、クラスを確実に定義する必要があります。"
-
-#. Reference: MISPLACED_KEYWORD
-#: script_checking/error_database.csv:105
-msgid ""
-"You can only use keywords like [code]break[/code] or "
-"[code]continue[/code] in a loop. Outside a loop, they are invalid."
-msgstr "[code]break[/code]や[code]continue[/code]のようなキーワードはループの中でしか使えない。ループの外では、これらは無効です。"
-
-msgid ""
-"The [code]continue[/code] keyword means \"jump to the next iteration of "
-"the loop.\" And the [code]break[/code] keyword means \"end the loop right"
-" now and jump to the first line of code after the loop block."
 msgstr ""
-"[code]continue[/code]キーワードは、\"ループの次の繰り返しにジャンプする "
-"\"という意味です。そして、[code]break[/code]キーワードは、「今すぐループを終了し、ループブロックの後のコードの最初の行にジャンプする」という意味です。"
+"タイプミスが見当たらない場合は、参照している変数、関数、クラスを確実に定義す"
+"る必要があります。"
 
 #. Reference: MISPLACED_KEYWORD
-#: script_checking/error_database.csv:105
-msgid "If you wrote one of these keywords outside a loop, you need to remove it."
-msgstr "もしこれらのキーワードをループの外に書いたのなら、それを削除する必要がある。"
+#: script_checking/error_database.csv:135
+msgid ""
+"You can only use keywords like [code]break[/code] or [code]continue[/code] "
+"in a loop. Outside a loop, they are invalid."
+msgstr ""
+"[code]break[/code]や[code]continue[/code]のようなキーワードはループの中でしか"
+"使えない。ループの外では、これらは無効です。"
 
 msgid ""
-"If you are trying to use it inside a loop, your indentation is most "
-"likely at fault. You may need to insert one or more leading tab "
-"characters to the keyword."
-msgstr "ループの中で使おうとしている場合は、インデントに問題がある可能性が高い。キーワードの先頭に1つ以上のタブ文字を挿入する必要があるかもしれません。"
+"The [code]continue[/code] keyword means \"jump to the next iteration of the "
+"loop.\" And the [code]break[/code] keyword means \"end the loop right now "
+"and jump to the first line of code after the loop block."
+msgstr ""
+"[code]continue[/code]キーワードは、\"ループの次の繰り返しにジャンプする \"と"
+"いう意味です。そして、[code]break[/code]キーワードは、「今すぐループを終了"
+"し、ループブロックの後のコードの最初の行にジャンプする」という意味です。"
+
+#. Reference: MISPLACED_KEYWORD
+#: script_checking/error_database.csv:135
+msgid ""
+"If you wrote one of these keywords outside a loop, you need to remove it."
+msgstr ""
+"もしこれらのキーワードをループの外に書いたのなら、それを削除する必要がある。"
+
+msgid ""
+"If you are trying to use it inside a loop, your indentation is most likely "
+"at fault. You may need to insert one or more leading tab characters to the "
+"keyword."
+msgstr ""
+"ループの中で使おうとしている場合は、インデントに問題がある可能性が高い。キー"
+"ワードの先頭に1つ以上のタブ文字を挿入する必要があるかもしれません。"
 
 #. Reference: EXPECTED_CONSTANT_EXPRESSION
-#: script_checking/error_database.csv:110
+#: script_checking/error_database.csv:140
 msgid ""
 "When the computer talks about a constant expression, it expects a fixed "
 "value, a fixed calculation, or the name of an existing constant."
-msgstr "コンピュータが定数式について語るとき、固定値、固定計算、あるいは既存の定数の名前を期待している。"
+msgstr ""
+"コンピュータが定数式について語るとき、固定値、固定計算、あるいは既存の定数の"
+"名前を期待している。"
 
 msgid ""
-"In other words, it wants something that can never change. This is why the"
-" computer will reject function calls and variables where it needs a "
-"constant expression."
-msgstr "言い換えれば、決して変化しないものを求めているのだ。コンピュータが定数式を必要とする関数呼び出しや変数を拒否するのはこのためです。"
+"In other words, it wants something that can never change. This is why the "
+"computer will reject function calls and variables where it needs a constant "
+"expression."
+msgstr ""
+"言い換えれば、決して変化しないものを求めているのだ。コンピュータが定数式を必"
+"要とする関数呼び出しや変数を拒否するのはこのためです。"
 
 #. Reference: EXPECTED_CONSTANT_EXPRESSION
-#: script_checking/error_database.csv:110
+#: script_checking/error_database.csv:140
 msgid ""
-"You need to replace function calls or variables with a constant value "
-"like a whole number, decimal number, string, vector, a predefined array, "
-"etc."
-msgstr "関数呼び出しや変数を、整数、10進数、文字列、ベクトル、定義済み配列などの定数値に置き換える必要がある。"
+"You need to replace function calls or variables with a constant value like a "
+"whole number, decimal number, string, vector, a predefined array, etc."
+msgstr ""
+"関数呼び出しや変数を、整数、10進数、文字列、ベクトル、定義済み配列などの定数"
+"値に置き換える必要がある。"
 
 msgid ""
-"You can also use arithmetic operators like multiplications (*), additions"
-" (+), and so on."
+"You can also use arithmetic operators like multiplications (*), additions "
+"(+), and so on."
 msgstr "乗算（*）や加算（+）などの算術演算子も使用できます。"
 
 #. Reference: INVALID_CLASS_DECLARATION
-#: script_checking/error_database.csv:115
+#: script_checking/error_database.csv:145
 msgid ""
-"When defining a new class, you need to follow a specific pattern. You "
-"must write the name in plain text, starting with a letter."
-msgstr "新しいクラスを定義するときは、特定のパターンに従わなければならない。クラス名は文字で始まるプレーンテキストで書かなければなりません。"
+"When defining a new class, you need to follow a specific pattern. You must "
+"write the name in plain text, starting with a letter."
+msgstr ""
+"新しいクラスを定義するときは、特定のパターンに従わなければならない。クラス名"
+"は文字で始まるプレーンテキストで書かなければなりません。"
 
 msgid ""
-"We typically write class names in PascalCase: with a capital letter at "
-"the start of every word that composes the class name."
-msgstr "通常、クラス名はPascalCaseで書きます。クラス名を構成するすべての単語の先頭に大文字をつけます。"
+"We typically write class names in PascalCase: with a capital letter at the "
+"start of every word that composes the class name."
+msgstr ""
+"通常、クラス名はPascalCaseで書きます。クラス名を構成するすべての単語の先頭に"
+"大文字をつけます。"
 
 #. Reference: INVALID_CLASS_DECLARATION
-#: script_checking/error_database.csv:115
+#: script_checking/error_database.csv:145
 msgid ""
 "To fix this error, replace whatever you put after the 'extends' or "
-"'class_name' keyword by a name without spaces and starting with a capital"
-" letter."
-msgstr "このエラーを修正するには、'extends'または'class_name'キーワードの後に付ける名前を、スペースを含まず大文字で始まる名前に置き換えてください。"
+"'class_name' keyword by a name without spaces and starting with a capital "
+"letter."
+msgstr ""
+"このエラーを修正するには、'extends'または'class_name'キーワードの後に付ける名"
+"前を、スペースを含まず大文字で始まる名前に置き換えてください。"
 
-msgid "You can optionally use numbers in the name, but not in the first position."
-msgstr "名前に数字を使用することもできますが、最初の位置には使用しないでください。"
+msgid ""
+"You can optionally use numbers in the name, but not in the first position."
+msgstr ""
+"名前に数字を使用することもできますが、最初の位置には使用しないでください。"
 
 #. Reference: DUPLICATE_DECLARATION
-#: script_checking/error_database.csv:120
+#: script_checking/error_database.csv:150
 msgid ""
 "You are trying to define a function or variable that already exists; You "
 "can't do that."
 msgstr "既に存在する関数や変数を定義しようとしています。"
 
 msgid ""
-"Perhaps the function or variable already exists in the current code file,"
-" but it may also be in a parent class that this GDScript code extends."
+"Perhaps the function or variable already exists in the current code file, "
+"but it may also be in a parent class that this GDScript code extends."
 msgstr ""
-"おそらく、その関数や変数は現在のコードファイルに既に存在していますが、この GDScript "
-"コードが継承している親クラスにも存在している可能性があります。"
+"おそらく、その関数や変数は現在のコードファイルに既に存在していますが、この "
+"GDScript コードが継承している親クラスにも存在している可能性があります。"
 
 #. Reference: DUPLICATE_DECLARATION
-#: script_checking/error_database.csv:120
+#: script_checking/error_database.csv:150
 msgid ""
-"In the app, your code extends some built-in Godot code that's not visible"
-" to you."
-msgstr "アプリの中で、あなたのコードが、あなたには見えない組み込みのGodotコードを拡張しています。"
+"In the app, your code extends some built-in Godot code that's not visible to "
+"you."
+msgstr ""
+"アプリの中で、あなたのコードが、あなたには見えない組み込みのGodotコードを拡張"
+"しています。"
 
 msgid ""
-"When that happens, you need to either rename your function or variable to"
-" one that will not collide with an existing one or remove this line of "
-"code."
-msgstr "そのような場合は、関数名や変数名を既存のものと衝突しないものに変更するか、このコード行を削除する必要があります。"
+"When that happens, you need to either rename your function or variable to "
+"one that will not collide with an existing one or remove this line of code."
+msgstr ""
+"そのような場合は、関数名や変数名を既存のものと衝突しないものに変更するか、こ"
+"のコード行を削除する必要があります。"
 
 #. Reference: DUPLICATE_SIGNAL_DECLARATION
-#: script_checking/error_database.csv:125
-msgid "You are trying to define a signal that already exists; You can't do that."
+#: script_checking/error_database.csv:155
+msgid ""
+"You are trying to define a signal that already exists; You can't do that."
 msgstr "すでに存在するシグナルを定義しようとしています。"
 
 msgid ""
-"Perhaps the signal already exists in the current code file, but it may "
-"also be in a parent class that this GDScript code extends."
-msgstr "おそらく、そのシグナルは現在のコードファイルに既に存在していますが、このGDScriptコードが継承している親クラスにも存在している可能性があります。"
+"Perhaps the signal already exists in the current code file, but it may also "
+"be in a parent class that this GDScript code extends."
+msgstr ""
+"おそらく、そのシグナルは現在のコードファイルに既に存在していますが、この"
+"GDScriptコードが継承している親クラスにも存在している可能性があります。"
 
 msgid ""
-"When that happens, you need to either rename your signal to one that will"
-" not collide with an existing one or remove this line of code."
-msgstr "そのような場合は、既存のシグナルと衝突しないようにシグナル名を変更するか、このコード行を削除する必要があります。"
+"When that happens, you need to either rename your signal to one that will "
+"not collide with an existing one or remove this line of code."
+msgstr ""
+"そのような場合は、既存のシグナルと衝突しないようにシグナル名を変更するか、こ"
+"のコード行を削除する必要があります。"
 
 #. Reference: SIGNATURE_MISMATCH
-#: script_checking/error_database.csv:130
+#: script_checking/error_database.csv:160
 msgid ""
 "The function you're trying to define exists in a parent class, so your "
 "definition overrides the parent class's function."
-msgstr "定義しようとしている関数は親クラスに存在するので、定義した関数は親クラスの関数をオーバーライドします。"
+msgstr ""
+"定義しようとしている関数は親クラスに存在するので、定義した関数は親クラスの関"
+"数をオーバーライドします。"
 
 msgid ""
-"When you override a parent class's function, the new function must match "
-"the parent. The new function should have the same number and type of "
-"parameters as the parent class."
-msgstr "親クラスの関数をオーバーライドする場合、新しい関数は親クラスと一致しなければなりません。新しい関数は、親クラスと同じ数と型のパラメータを持つ必要があります。"
+"When you override a parent class's function, the new function must match the "
+"parent. The new function should have the same number and type of parameters "
+"as the parent class."
+msgstr ""
+"親クラスの関数をオーバーライドする場合、新しい関数は親クラスと一致しなければ"
+"なりません。新しい関数は、親クラスと同じ数と型のパラメータを持つ必要がありま"
+"す。"
 
 msgid ""
 "For example, if the parent has two arguments, you need your new function "
 "also to have two arguments. If you use type hints in your function "
 "definitions, the argument types must match the parent class."
-msgstr "例えば、親クラスが2つの引数を持つ場合、新しい関数も2つの引数を持つ必要があります。関数定義で型ヒントを使用する場合、引数の型は親クラスと一致していなければなりません。"
+msgstr ""
+"例えば、親クラスが2つの引数を持つ場合、新しい関数も2つの引数を持つ必要があり"
+"ます。関数定義で型ヒントを使用する場合、引数の型は親クラスと一致していなけれ"
+"ばなりません。"
 
 #. Reference: SIGNATURE_MISMATCH
-#: script_checking/error_database.csv:130
+#: script_checking/error_database.csv:160
 msgid ""
-"You need to check the parent class's function and its definition in the "
-"code reference. Then, you need to edit your function definition to have "
-"the same number and type of parameters as the parent class."
-msgstr "親クラスの関数とその定義をコード・リファレンスで確認する必要がある。そして、親クラスと同じ数と種類のパラメータを持つように、関数定義を編集する必要があります。"
+"You need to check the parent class's function and its definition in the code "
+"reference. Then, you need to edit your function definition to have the same "
+"number and type of parameters as the parent class."
+msgstr ""
+"親クラスの関数とその定義をコード・リファレンスで確認する必要がある。そして、"
+"親クラスと同じ数と種類のパラメータを持つように、関数定義を編集する必要があり"
+"ます。"
 
 #. Reference: INVALID_ARGUMENTS
-#: script_checking/error_database.csv:131
+#: script_checking/error_database.csv:161
 msgid ""
-"This whole class of errors has to do with calling functions with either "
-"the wrong number of arguments or the wrong kind of argument. You will "
-"need to use the error message to see what is going wrong."
-msgstr "このクラスのエラーは、間違った数の引数や間違った種類の引数で関数を呼び出すことに関係しています。何が間違っているのかを確認するには、エラーメッセージを使用する必要があります。"
+"This whole class of errors has to do with calling functions with either the "
+"wrong number of arguments or the wrong kind of argument. You will need to "
+"use the error message to see what is going wrong."
+msgstr ""
+"このクラスのエラーは、間違った数の引数や間違った種類の引数で関数を呼び出すこ"
+"とに関係しています。何が間違っているのかを確認するには、エラーメッセージを使"
+"用する必要があります。"
 
 #. Reference: INVALID_ARGUMENTS
-#: script_checking/error_database.csv:131
+#: script_checking/error_database.csv:161
 msgid ""
-"You need to either remove, add, or change the values you're trying to "
-"pass to the function to solve this issue. To know exactly how many "
-"arguments you need, you need to check the code reference. It will show "
-"you the function definition and the mandatory arguments."
-msgstr "この問題を解決するには、関数に渡そうとしている値を削除するか、追加するか、変更する必要がある。必要な引数の数を正確に知るには、コード・リファレンスをチェックする必要がある。関数の定義と必須の引数が表示されます。"
+"You need to either remove, add, or change the values you're trying to pass "
+"to the function to solve this issue. To know exactly how many arguments you "
+"need, you need to check the code reference. It will show you the function "
+"definition and the mandatory arguments."
+msgstr ""
+"この問題を解決するには、関数に渡そうとしている値を削除するか、追加するか、変"
+"更する必要がある。必要な引数の数を正確に知るには、コード・リファレンスを"
+"チェックする必要がある。関数の定義と必須の引数が表示されます。"
 
 #. Reference: TYPE_MISMATCH
-#: script_checking/error_database.csv:142
+#: script_checking/error_database.csv:172
 msgid ""
-"All the values in your code have a specific type. That type can be a "
-"whole number (int), a decimal number (float), text (String), and so on. "
-"There are tons of possible types, and you can even define your own!"
-msgstr "コード内のすべての値には特定の型があります。その型には整数（int）、小数（float）、テキスト（String）などがある。可能な型は大量にあり、自分で定義することもできる！"
+"All the values in your code have a specific type. That type can be a whole "
+"number (int), a decimal number (float), text (String), and so on. There are "
+"tons of possible types, and you can even define your own!"
+msgstr ""
+"コード内のすべての値には特定の型があります。その型には整数（int）、小数"
+"（float）、テキスト（String）などがある。可能な型は大量にあり、自分で定義する"
+"こともできる！"
 
 msgid ""
-"When you make any operation, the computer compares the types you are "
-"using."
+"When you make any operation, the computer compares the types you are using."
 msgstr "演算を行う際、コンピュータは使用している型を比較します。"
 
 msgid ""
 "Some types are compatible, and some are not. For example, you cannot "
-"directly add a whole number to a text string. You first need to convert "
-"the number into text."
-msgstr "互換性のある型もあれば、そうでない型もある。例えば、テキスト文字列に直接整数を加えることはできません。まず数値をテキストに変換する必要があります。"
+"directly add a whole number to a text string. You first need to convert the "
+"number into text."
+msgstr ""
+"互換性のある型もあれば、そうでない型もある。例えば、テキスト文字列に直接整数"
+"を加えることはできません。まず数値をテキストに変換する必要があります。"
 
 msgid ""
-"You'll need to read the error message to see what is not matching because"
-" there are many possible cases."
+"You'll need to read the error message to see what is not matching because "
+"there are many possible cases."
 msgstr "エラーメッセージを読んで、何が一致しないのかを確認する必要があります。"
 
 #. Reference: TYPE_MISMATCH
-#: script_checking/error_database.csv:142
+#: script_checking/error_database.csv:172
 msgid ""
-"If the error mentions the assigned value type not matching the variable, "
-"the problem is on the right side of the equal sign (=)."
-msgstr "代入された値の型が変数と一致しないというエラーの場合、問題は等号（=）の右側にある。"
+"If the error mentions the assigned value type not matching the variable, the "
+"problem is on the right side of the equal sign (=)."
+msgstr ""
+"代入された値の型が変数と一致しないというエラーの場合、問題は等号（=）の右側に"
+"ある。"
 
 msgid ""
-"If the error talks about the return type not matching the function, then "
-"it is the value after the return keyword that is problematic."
-msgstr "戻り値の型が関数と一致しないというエラーの場合は、returnキーワードの後の値に問題があります。"
+"If the error talks about the return type not matching the function, then it "
+"is the value after the return keyword that is problematic."
+msgstr ""
+"戻り値の型が関数と一致しないというエラーの場合は、returnキーワードの後の値に"
+"問題があります。"
 
 msgid ""
-"If the computer talks about an invalid operand, then the issue is that "
-"the operation does not exist for the type you're trying to use. For "
-"example, while you can add two 2D vectors, you can't add a whole number "
-"or text to a 2D vector."
-msgstr "コンピュータがオペランドが無効だと言っている場合は、使おうとしている型にその演算が存在しないことが問題なのです。例えば、2つの2Dベクトルを加算することはできますが、整数やテキストを2Dベクトルに加算することはできません。"
+"If the computer talks about an invalid operand, then the issue is that the "
+"operation does not exist for the type you're trying to use. For example, "
+"while you can add two 2D vectors, you can't add a whole number or text to a "
+"2D vector."
+msgstr ""
+"コンピュータがオペランドが無効だと言っている場合は、使おうとしている型にその"
+"演算が存在しないことが問題なのです。例えば、2つの2Dベクトルを加算することはで"
+"きますが、整数やテキストを2Dベクトルに加算することはできません。"
 
 #. Reference: TYPE_CANNOT_BE_INFERRED
-#: script_checking/error_database.csv:147
+#: script_checking/error_database.csv:177
 msgid ""
-"GDScript supports type inference. The computer will automatically "
-"recognize the type of value you are working with. In some cases, though, "
-"it can't figure it out."
+"GDScript supports type inference. The computer will automatically recognize "
+"the type of value you are working with. In some cases, though, it can't "
+"figure it out."
 msgstr ""
-"GDScript "
-"は型推論をサポートしています。コンピュータは、あなたが扱っている値の型を自動的に認識します。しかし、場合によっては認識できないこともあります。"
+"GDScript は型推論をサポートしています。コンピュータは、あなたが扱っている値の"
+"型を自動的に認識します。しかし、場合によっては認識できないこともあります。"
 
 msgid ""
 "When that happens, you need to specify the type yourself or remove type "
 "inference altogether for this variable."
-msgstr "そのような場合は、自分で型を指定するか、この変数の型推論を完全に削除する必要があります。"
+msgstr ""
+"そのような場合は、自分で型を指定するか、この変数の型推論を完全に削除する必要"
+"があります。"
 
 #. Reference: TYPE_CANNOT_BE_INFERRED
-#: script_checking/error_database.csv:147
+#: script_checking/error_database.csv:177
 msgid ""
-"The simplest way to solve this error is to remove types for this variable"
-" or this function's arguments. Otherwise, you can manually specify the "
-"value type after the colon."
-msgstr "このエラーを解決する最も簡単な方法は、この変数またはこの関数の引数の型を削除することである。そうでなければ、コロンの後に値の型を手動で指定します。"
+"The simplest way to solve this error is to remove types for this variable or "
+"this function's arguments. Otherwise, you can manually specify the value "
+"type after the colon."
+msgstr ""
+"このエラーを解決する最も簡単な方法は、この変数またはこの関数の引数の型を削除"
+"することである。そうでなければ、コロンの後に値の型を手動で指定します。"
 
 msgid ""
 "We recommend specifying the type whenever possible to reap the typing "
 "system's benefits."
-msgstr "型付けシステムのメリットを享受するために、可能な限り型を指定することをお勧めします。"
+msgstr ""
+"型付けシステムのメリットを享受するために、可能な限り型を指定することをお勧め"
+"します。"
 
 #. Reference: RETURN_VALUE_MISMATCH
-#: script_checking/error_database.csv:153
+#: script_checking/error_database.csv:183
 msgid ""
-"There is an issue with the return value of your function. There are two "
-"main cases here:"
+"There is an issue with the return value of your function. There are two main "
+"cases here:"
 msgstr "関数の戻り値に問題があります。ここには主に2つのケースがあります。"
 
 msgid ""
-"1. Your function is a void function, thus it should not return a value. "
-"This includes functions with the '-> void' syntax and class constructors "
+"1. Your function is a void function, thus it should not return a value. This "
+"includes functions with the '-> void' syntax and class constructors "
 "('_init()').\n"
-"2. You specified a return type for your function, but you are not "
-"returning a value in all possible branches (if, elif, and else blocks) or"
-" at the end."
+"2. You specified a return type for your function, but you are not returning "
+"a value in all possible branches (if, elif, and else blocks) or at the end."
 msgstr ""
-"1.関数がvoid関数であり、値を返してはならない。これには、'-> void' 構文を持つ関数やクラス・コンストラクタ "
-"('_init()')が含まれます。\n"
-"2. 関数に戻り値の型を指定したが、すべての可能な分岐（if、elif、elseブロック）または最後に値を返していない。"
+"1.関数がvoid関数であり、値を返してはならない。これには、'-> void' 構文を持つ"
+"関数やクラス・コンストラクタ ('_init()')が含まれます。\n"
+"2. 関数に戻り値の型を指定したが、すべての可能な分岐（if、elif、elseブロック）"
+"または最後に値を返していない。"
 
 #. Reference: RETURN_VALUE_MISMATCH
-#: script_checking/error_database.csv:153
+#: script_checking/error_database.csv:183
 msgid ""
-"When your function is 'void', you should never return a value. You can "
-"use the 'return' keyword to end the function early, but you should never "
-"write anything after that."
-msgstr "関数が'void'の場合、決して値を返してはならない。'return'キーワードを使って関数を早めに終了させることはできますが、その後に何かを書いてはいけません。"
+"When your function is 'void', you should never return a value. You can use "
+"the 'return' keyword to end the function early, but you should never write "
+"anything after that."
+msgstr ""
+"関数が'void'の場合、決して値を返してはならない。'return'キーワードを使って関"
+"数を早めに終了させることはできますが、その後に何かを書いてはいけません。"
 
 msgid ""
-"When you use a return type, you must always return something at the end "
-"of the function or in every branch (if, elif, and else block) of the "
-"function."
-msgstr "return型を使う場合は、関数の最後か、関数のすべての分岐（if、elif、elseブロック）で必ず何かを返さなければなりません。"
-
-#. Reference: INVALID_NO_CATCH
-#: script_checking/error_database.csv:154
-msgid ""
-"Godot was unable to load your script, yet the language checker found "
-"nothing wrong."
-msgstr "Godotはあなたのスクリプトを読み込めませんでしたが、言語チェッカーは何も問題を発見しませんでした。"
+"When you use a return type, you must always return something at the end of "
+"the function or in every branch (if, elif, and else block) of the function."
+msgstr ""
+"return型を使う場合は、関数の最後か、関数のすべての分岐（if、elif、elseブロッ"
+"ク）で必ず何かを返さなければなりません。"
 
 #. Reference: INVALID_NO_CATCH
-#: script_checking/error_database.csv:154
-msgid "Please click on the \"report\" button at the top and please let us know."
+#: script_checking/error_database.csv:184
+msgid ""
+"Godot was unable to load your script, yet the language checker found nothing "
+"wrong."
+msgstr ""
+"Godotはあなたのスクリプトを読み込めませんでしたが、言語チェッカーは何も問題を"
+"発見しませんでした。"
+
+#. Reference: INVALID_NO_CATCH
+#: script_checking/error_database.csv:184
+msgid ""
+"Please click on the \"report\" button at the top and please let us know."
 msgstr "上部の \"報告 \"ボタンをクリックして、お知らせください。"
 
 #. Reference: RECURSIVE_FUNCTION
-#: script_checking/error_database.csv:155
+#: script_checking/error_database.csv:185
 msgid "You called a function inside itself. This will loop forever."
 msgstr "あなたは自分自身の中に関数を呼び出した。これは永遠にループする。"
 
 #. Reference: RECURSIVE_FUNCTION
-#: script_checking/error_database.csv:155
+#: script_checking/error_database.csv:185
 msgid ""
-"There are valid reasons for using recursive functions, but none of them "
-"are part of this course, so this cannot be a valid solution."
-msgstr "再帰関数を使用する正当な理由はありますが、それらはいずれもこのコースの一部ではないため、これは有効な解決策とはなりません。"
-
-#. Reference: UNEXPECTED_EOL
-#: script_checking/error_database.csv:157
-msgid ""
-"The computer reached the end of the line of code, but the line had a "
-"syntax error.\n"
-"The most common case is when you forget to close a string: you have "
-"opening quotes, but you forget to add a matching closing quote."
+"There are valid reasons for using recursive functions, but none of them are "
+"part of this course, so this cannot be a valid solution."
 msgstr ""
-"コンピューターはコード行の終わりに到達しましたが、その行に構文エラーがありました。\n"
-"最も一般的なケースは、文字列を閉じるのを忘れた場合です。開始引用符はあるものの、対応する終了引用符を追加するのを忘れています。"
+"再帰関数を使用する正当な理由はありますが、それらはいずれもこのコースの一部で"
+"はないため、これは有効な解決策とはなりません。"
+
+#. Reference: INFINITE_WHILE_LOOP
+#: script_checking/error_database.csv:186
+msgid ""
+"You wrote a while loop with a condition that is always true (like "
+"[code]while true:[/code] or [code]while(true):[/code]) without a "
+"[code]break[/code] statement inside it. This creates an infinite loop that "
+"will freeze your game."
+msgstr ""
+
+#. Reference: INFINITE_WHILE_LOOP
+#: script_checking/error_database.csv:186
+msgid ""
+"To fix this, you need to either add a [code]break[/code] statement inside "
+"the loop so it can exit when a certain condition is met, or change the while "
+"loop condition to something that will become false. For example: [code]while "
+"position.x < 100: position.x -= 10[/code]."
+msgstr ""
 
 #. Reference: UNEXPECTED_EOL
-#: script_checking/error_database.csv:157
+#: script_checking/error_database.csv:188
 msgid ""
-"Double-check that you are not missing a quote character or that the quote"
-" character you used to start the string is the same as the one you used "
-"to close the string."
-msgstr "引用符が抜けていないか、文字列の開始に使用した引用文字が文字列の終了に使用したものと同じであることを再確認してください。"
+"The computer reached the end of the line of code, but the line had a syntax "
+"error.\n"
+"The most common case is when you forget to close a string: you have opening "
+"quotes, but you forget to add a matching closing quote."
+msgstr ""
+"コンピューターはコード行の終わりに到達しましたが、その行に構文エラーがありま"
+"した。\n"
+"最も一般的なケースは、文字列を閉じるのを忘れた場合です。開始引用符はあるもの"
+"の、対応する終了引用符を追加するのを忘れています。"
+
+#. Reference: UNEXPECTED_EOL
+#: script_checking/error_database.csv:188
+msgid ""
+"Double-check that you are not missing a quote character or that the quote "
+"character you used to start the string is the same as the one you used to "
+"close the string."
+msgstr ""
+"引用符が抜けていないか、文字列の開始に使用した引用文字が文字列の終了に使用し"
+"たものと同じであることを再確認してください。"
 
 #. Reference: CANT_GET_INDEX
-#: script_checking/error_database.csv:160
+#: script_checking/error_database.csv:191
 msgid "The sub-variable you are trying to access does not exist."
 msgstr "アクセスしようとしているサブ変数は存在しません。"
 
 #. Reference: CANT_GET_INDEX
-#: script_checking/error_database.csv:160
+#: script_checking/error_database.csv:191
 msgid ""
-"You probably have a typo in the name of the sub-variable that you are "
-"trying to access."
-msgstr "おそらく、アクセスしようとしているサブ変数の名前にタイプミスがあると思われます。"
+"You probably have a typo in the name of the sub-variable that you are trying "
+"to access."
+msgstr ""
+"おそらく、アクセスしようとしているサブ変数の名前にタイプミスがあると思われま"
+"す。"
 
 msgid ""
 "Ensure that you don't have a capital letter where you should have a "
 "lowercase letter and vice versa."
-msgstr "小文字を使用する必要がある場所に大文字が使用されていないこと、またはその逆のことを確認してください。"
+msgstr ""
+"小文字を使用する必要がある場所に大文字が使用されていないこと、またはその逆の"
+"ことを確認してください。"
 
+#~ msgid ""
+#~ "If you want to assign a value to a variable, double-check that what you "
+#~ "have on the left side of the = sign is a variable and not a function."
+#~ msgstr ""
+#~ "変数に値を代入する場合は、「=」 記号の左側にあるものが関数ではなく変数であ"
+#~ "ることを再確認してください。"
+
+#~ msgid ""
+#~ "You also need to ensure the syntax is correct. For example, there "
+#~ "shouldn't be parentheses on the left side of the equal sign."
+#~ msgstr ""
+#~ "構文が正しいことも確認する必要があります。 たとえば、等号の左側に括弧が"
+#~ "あってはなりません。"
+
+#~ msgid ""
+#~ "In the case of a condition, ensure that you are using two equal signs to "
+#~ "check for equality (==)."
+#~ msgstr ""
+#~ "条件の場合は、等号 「==」をチェックするために 2 つの等号を使用していること"
+#~ "を確認してください。"

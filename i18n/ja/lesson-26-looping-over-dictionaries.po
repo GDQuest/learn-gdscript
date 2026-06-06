@@ -8,25 +8,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2023-10-06 07:34+0200\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
 "PO-Revision-Date: 2024-03-31 09:14+0000\n"
 "Last-Translator: cyochot <k97un9ri@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-26-looping-over-dictionaries/ja/>\n"
 "Language: ja\n"
-"Language-Team: Japanese <https://hosted.weblate.org/projects/learn-"
-"gdscript-from-zero/lesson-26-looping-over-dictionaries/ja/>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.10.3\n"
 
 #: course/lesson-26-looping-over-dictionaries/lesson.tres:13
 msgid ""
-"Like with arrays, you can loop over dictionaries. You can loop over both "
-"their keys and values."
-msgstr "配列と同様に、辞書をループできます。キーと値の両方をループできます。"
+"You can loop over dictionaries, just like you learned to loop over arrays. "
+"When you loop over a dictionary, you get its keys one by one. You can then "
+"use each key to get its value."
+msgstr ""
 
-msgid "Let's see how it works with two examples."
+#, fuzzy
+msgid "Let's see how this works with two examples."
 msgstr "2つの例でどのように機能するか見てみましょう。"
 
 #: course/lesson-26-looping-over-dictionaries/lesson.tres:23
@@ -34,136 +36,207 @@ msgid "Displaying an inventory's content"
 msgstr "インベントリーのコンテンツの表示"
 
 #: course/lesson-26-looping-over-dictionaries/lesson.tres:25
+#, fuzzy
 msgid ""
-"To display the player's inventory, you need to know what it contains. You"
-" need the name and amount of each object."
-msgstr "プレイヤーのインベントリを表示するには、そのインベントリに何が含まれているかを知る必要があります。各オブジェクトの名前と金額が必要です。"
+"To display the player's inventory, you need to know what it contains: the "
+"name and amount of each item."
+msgstr ""
+"プレイヤーのインベントリを表示するには、そのインベントリに何が含まれているか"
+"を知る必要があります。各オブジェクトの名前と金額が必要です。"
 
+#, fuzzy
 msgid ""
-"And from code, you can only achieve that by looping over the whole "
-"dictionary and processing key-value pairs one by one."
-msgstr "また、コードからは、辞書全体をループし、キーと値のペアを 1 つずつ処理することによってのみ、これを実現することができます。"
+"To do this, you loop over the dictionary and process each key-value pair one "
+"at a time."
+msgstr ""
+"また、コードからは、辞書全体をループし、キーと値のペアを 1 つずつ処理すること"
+"によってのみ、これを実現することができます。"
 
+#, fuzzy
 msgid ""
-"To get the list of keys in the dictionary, you can call its "
-"[code]keys()[/code] member function."
-msgstr "辞書内のキーのリストを取得するには、その [code]keys()[/code] メンバー関数を呼び出します。"
+"You can get the list of all the keys in a dictionary by calling its "
+"[code]keys()[/code] function."
+msgstr ""
+"辞書内のキーのリストを取得するには、その [code]keys()[/code] メンバー関数を呼"
+"び出します。"
 
 #: course/lesson-26-looping-over-dictionaries/lesson.tres:49
-msgid "But it's something we do so much that you don't need to call the function."
-msgstr "しかし、これは私たちが行うことなので、関数を呼び出す必要はありません。"
-
 msgid ""
-"Instead, you can directly [ignore]type the variable name in a "
-"[code]for[/code] loop after the [code]in[/code] keyword. The language "
-"understands that you implicitly want to loop over the dictionary's keys."
-msgstr "代わりに、[code]in[/code]キーワードの後に[code]for[/code]ループで変数名を直接[無視]入力できます。言語は、辞書のキーを暗黙的にループする必要があることを理解します。"
+"Looping over dictionary keys is so common that GDScript gives you a shortcut."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"You can write the dictionary variable name directly after the [code]in[/"
+"code] keyword in a [code]for[/code] loop. GDScript automatically loops over "
+"the dictionary's keys."
+msgstr ""
+"代わりに、[code]in[/code]キーワードの後に[code]for[/code]ループで変数名を直接"
+"[無視]入力できます。言語は、辞書のキーを暗黙的にループする必要があることを理"
+"解します。"
 
 #: course/lesson-26-looping-over-dictionaries/lesson.tres:71
 msgid ""
-"You can get the values with the syntax [code]dictionary[key][/code] as "
-"you learned in the previous lesson."
-msgstr "前のレッスンで学習したように、構文 [code]dictionary[key][/code] を使用して値を取得できます。"
+"Remember: the name after the [code]for[/code] keyword is a variable name you "
+"choose yourself. You could call it [code]item_name[/code], [code]item[/"
+"code], [code]key[/code], or anything else. This variable holds one key at a "
+"time as the loop runs."
+msgstr ""
 
+#, fuzzy
 msgid ""
-"We can loop over the inventory keys, get the corresponding values, and "
-"display all that information in the user interface."
-msgstr "インベントリ キーをループし、対応する値を取得して、そのすべての情報をユーザー インターフェイスに表示できます。"
+"You can get each value with the syntax [code]dictionary[key][/code], as you "
+"learned in the previous lesson."
+msgstr ""
+"前のレッスンで学習したように、構文 [code]dictionary[key][/code] を使用して値"
+"を取得できます。"
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:103
+#, fuzzy
 msgid ""
-"Instead of printing the key-value pairs to the output console, we can "
-"code and call a dedicated function that displays items in the user "
-"interface."
-msgstr "キーと値のペアを出力コンソールに出力する代わりに、ユーザー インターフェイスに項目を表示する専用の関数をコーディングして呼び出すことができます。"
+"So we can loop over the inventory keys, get their values, and display that "
+"information on screen."
+msgstr ""
+"インベントリ キーをループし、対応する値を取得して、そのすべての情報をユー"
+"ザー インターフェイスに表示できます。"
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:131
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:105
+#, fuzzy
+msgid ""
+"Instead of printing the key-value pairs to the output console, we can write "
+"and call a function that displays items on the screen."
+msgstr ""
+"キーと値のペアを出力コンソールに出力する代わりに、ユーザー インターフェイスに"
+"項目を表示する専用の関数をコーディングして呼び出すことができます。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:133
 msgid "Mapping grid cells to units"
 msgstr "グリッドセルを単位にマッピングする"
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:133
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:135
+#, fuzzy
 msgid ""
-"We can also use a dictionary to map units to their position on a game "
-"board."
-msgstr "辞書を使用して、ユニットをゲームボード上の位置にマッピングすることもできます。"
+"You can also use a dictionary to store which units are at which positions on "
+"a game board."
+msgstr ""
+"辞書を使用して、ユニットをゲームボード上の位置にマッピングすることもできま"
+"す。"
 
+#, fuzzy
 msgid ""
-"That's how you'd typically code a board game, a grid-based RPG, or a "
+"This is how you'd typically code a board game, a grid-based RPG, or a "
 "tactical RPG."
-msgstr "これは、ボードゲーム、グリッドベースのRPG、または戦術RPGの一般的なコーディング方法です。"
+msgstr ""
+"これは、ボードゲーム、グリッドベースのRPG、または戦術RPGの一般的なコーディン"
+"グ方法です。"
 
+#, fuzzy
 msgid ""
-"While we focused on [code]String[/code] keys so far, GDScript "
-"dictionaries accept any value type as a key, allowing you to map anything"
-" to anything."
-msgstr "ここまでは[code]String[/code]キーに焦点を当ててきましたが、GDScript辞書は任意の値型をキーとして受け入れ、あらゆるものを何にでもマッピングすることができます。"
+"So far, we used [code]String[/code] keys. But GDScript dictionaries can use "
+"any type as a key. In this example, we use [code]Vector2[/code] values as "
+"keys to represent grid positions."
+msgstr ""
+"ここまでは[code]String[/code]キーに焦点を当ててきましたが、GDScript辞書は任意"
+"の値型をキーとして受け入れ、あらゆるものを何にでもマッピングすることができま"
+"す。"
 
-msgid "The only limitation is that every key must be unique."
+#, fuzzy
+msgid "The only rule is that every key in a dictionary must be unique."
 msgstr "唯一の制限は、すべてのキーが一意でなければならないことです。"
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:159
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:161
+#, fuzzy
 msgid ""
-"Using a [code]for[/code] loop, you can use the key-value pairs to place "
-"units on the board at the start of a game."
-msgstr "[code]for[/code] ループを使用すると、キーと値のペアを使用して、ゲームの開始時にボード上にユニットを配置できます。"
+"With a [code]for[/code] loop, you can place all the units on the board when "
+"a game starts."
+msgstr ""
+"[code]for[/code] ループを使用すると、キーと値のペアを使用して、ゲームの開始時"
+"にボード上にユニットを配置できます。"
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:189
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:191
 msgid ""
 "In the following practices, you will loop over dictionaries and process "
 "their content."
 msgstr "次の演習では、辞書をループ処理し、その内容を処理します。"
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:197
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:199
 msgid "Displaying the inventory"
 msgstr "インベントリの照会"
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:198
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:200
+#, fuzzy
 msgid ""
-"We use a dictionary to represent the player's inventory in this game. The"
-" dictionary keys are the name of items, and they map to the number of "
-"items that the player owns."
-msgstr "このゲームでは、プレイヤーのインベントリを表すために辞書を使用します。辞書キーはアイテムの名前であり、プレイヤーが所有するアイテムの数にマッピングされます。"
+"We use a dictionary to store the player's inventory. The keys are item "
+"names, and the values are how many of each item the player has."
+msgstr ""
+"このゲームでは、プレイヤーのインベントリを表すために辞書を使用します。辞書"
+"キーはアイテムの名前であり、プレイヤーが所有するアイテムの数にマッピングされ"
+"ます。"
 
-msgid ""
-"You need to loop over the dictionary and display the name and amount of "
-"every item in the inventory."
-msgstr "辞書をループして、インベントリ内のすべてのアイテムの名前と量を表示する必要があります。"
+#, fuzzy
+msgid "Loop over the dictionary and display every item in the inventory."
+msgstr ""
+"辞書をループして、インベントリ内のすべてのアイテムの名前と量を表示する必要が"
+"あります。"
 
+#, fuzzy
 msgid ""
-"To do so, call the [code]display_item()[/code] function. It takes two "
+"Call the [code]display_item()[/code] function for each item. It takes two "
 "arguments: the item name and the amount."
-msgstr "これを行うには、[code]display_item()[/code] 関数を呼び出します。アイテム名と金額の 2 つの引数を取ります。"
+msgstr ""
+"これを行うには、[code]display_item()[/code] 関数を呼び出します。アイテム名と"
+"金額の 2 つの引数を取ります。"
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:218
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:221
+#, fuzzy
 msgid ""
-"We need to display the player's inventory on the screen but lack the code"
-" to do so. Use a loop to display every item."
-msgstr "プレイヤーのインベントリを画面に表示する必要がありますが、そのためのコードがありません。ループを使用して、すべての項目を表示します。"
+"The player's inventory needs to appear on screen. Use a loop to display "
+"every item."
+msgstr ""
+"プレイヤーのインベントリを画面に表示する必要がありますが、そのためのコードが"
+"ありません。ループを使用して、すべての項目を表示します。"
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:223
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:226
 msgid "Placing units on the board"
 msgstr "ボードへのユニットの配置"
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:224
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:227
+#, fuzzy
 msgid ""
-"We have a dictionary named [code]units[/code] that maps a cell position "
-"on the grid to a unit to put there."
-msgstr "グリッド上のセルの位置をそこに配置する単位にマッピングする[code]units[/code]という名前の辞書があります。"
-
-msgid ""
-"Using a for loop and the [code]place_unit()[/code] function, place every "
-"unit in the units dictionary at the desired position on the game board."
+"We have a dictionary named [code]units[/code]. It maps cell positions on the "
+"grid to the type of unit at that position."
 msgstr ""
-"for ループと [code]place_unit()[/code] 関数を使用して、単位辞書内のすべてのユニットをゲーム "
-"ボード上の目的の位置に配置します。"
+"グリッド上のセルの位置をそこに配置する単位にマッピングする[code]units[/code]"
+"という名前の辞書があります。"
 
-#: course/lesson-26-looping-over-dictionaries/lesson.tres:242
+#, fuzzy
 msgid ""
-"We want to populate our game board with units at the start of every "
-"battle. Loop over the dictionary to place units on the board."
-msgstr "すべての戦闘の開始時にゲームボードにユニットを配置したいと考えています。辞書をループして、ボードにユニットを配置します。"
+"Use a for loop to place every unit on the game board. Call the "
+"[code]place_unit()[/code] function for each unit. It takes two arguments: "
+"first the cell position, then the unit type."
+msgstr ""
+"for ループと [code]place_unit()[/code] 関数を使用して、単位辞書内のすべてのユ"
+"ニットをゲーム ボード上の目的の位置に配置します。"
 
 #: course/lesson-26-looping-over-dictionaries/lesson.tres:246
+#, fuzzy
+msgid ""
+"At the start of each battle, units need to appear on the game board. Loop "
+"over the dictionary to place them."
+msgstr ""
+"すべての戦闘の開始時にゲームボードにユニットを配置したいと考えています。辞書"
+"をループして、ボードにユニットを配置します。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:250
 msgid "Looping over dictionaries"
 msgstr "辞書のループ"
 
+#~ msgid ""
+#~ "Like with arrays, you can loop over dictionaries. You can loop over both "
+#~ "their keys and values."
+#~ msgstr ""
+#~ "配列と同様に、辞書をループできます。キーと値の両方をループできます。"
+
+#~ msgid ""
+#~ "But it's something we do so much that you don't need to call the function."
+#~ msgstr ""
+#~ "しかし、これは私たちが行うことなので、関数を呼び出す必要はありません。"

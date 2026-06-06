@@ -8,34 +8,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2023-05-16 09:25+0200\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
 "PO-Revision-Date: 2023-09-01 23:07+0000\n"
 "Last-Translator: gsomgsom <zhelneen@yandex.ru>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-21-strings/ru/>\n"
 "Language: ru\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/learn-"
-"gdscript-from-zero/lesson-21-strings/ru/>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.10.3\n"
 
 #: course/lesson-21-strings/lesson.tres:14
 msgid ""
-"Throughout this course, we've mostly stored numbers in variables. But "
-"what if we wanted to store a player's name?"
+"Throughout this course, we've mostly stored numbers in variables. But what "
+"if we wanted to store a player's name?"
 msgstr ""
-"На протяжении курса мы в хранили множество чисел в переменных. Но что "
-"если мы захотим хранить имя игрока?"
+"На протяжении курса мы в хранили множество чисел в переменных. Но что если "
+"мы захотим хранить имя игрока?"
 
 msgid "This is where strings help us."
 msgstr "Здесь нам помогут строки."
 
 msgid ""
-"Strings are instrumental in games and applications. We use them to "
-"display information such as the description of a spell or the name of a "
-"character."
+"Strings are instrumental in games and applications. We use them to display "
+"information such as the description of a spell or the name of a character."
 msgstr ""
 "Строки играют важную роль в играх приложениях. Мы используем их для "
 "отображения такой информации, как описание заклинания или имя персонажа."
@@ -47,13 +46,12 @@ msgstr "Что такое строки"
 #: course/lesson-21-strings/lesson.tres:38
 msgid ""
 "A [code]String[/code] is a value type which holds text. To create a "
-"[code]String[/code], you write text wrapped in quotation marks "
-"([code]\"\"[/code]). For example: [code]\"This is a text string.\"[/code]"
+"[code]String[/code], you write text wrapped in quotation marks ([code]\"\"[/"
+"code]). For example: [code]\"This is a text string.\"[/code]"
 msgstr ""
-"[code]String[/code] (строка) — это тип значения для хранения текста. "
-"Чтобы создать [code]String[/code], вам нужно написать текст, заключённый "
-"в кавычки ([code]\"\"[/code]). Например: [code]\"Это строка "
-"текста.\"[/code]"
+"[code]String[/code] (строка) — это тип значения для хранения текста. Чтобы "
+"создать [code]String[/code], вам нужно написать текст, заключённый в кавычки "
+"([code]\"\"[/code]). Например: [code]\"Это строка текста.\"[/code]"
 
 msgid ""
 "The quotation marks differentiate strings from other value types and "
@@ -61,13 +59,14 @@ msgid ""
 msgstr "Кавычки отличают строки от других типов значений и имён функций."
 
 msgid "You may remember we've used strings before in previous lessons."
-msgstr "Возможно, вы помните, что мы уже использовали строки в предыдущих уроках."
+msgstr ""
+"Возможно, вы помните, что мы уже использовали строки в предыдущих уроках."
 
 #: course/lesson-21-strings/lesson.tres:62
 msgid ""
 "Under the hood, strings are arrays of characters. In fact, we can use a "
-"[code]for[/code] loop to loop through the characters of a "
-"[code]String[/code] as we would with any other array."
+"[code]for[/code] loop to loop through the characters of a [code]String[/"
+"code] as we would with any other array."
 msgstr ""
 "Под капотом, строки — это массивы символов. Фактически, мы можем "
 "использовать цикл [code]for[/code] для перебора символов значения "
@@ -82,8 +81,8 @@ msgid "[code]\"1\"[/code] and [code]\"name\"[/code] are strings."
 msgstr "[code]\"1\"[/code] и [code]\"name\"[/code] — это строки."
 
 msgid ""
-"[code]\"1\"[/code] only contains a character and [i]doesn't[/i] represent"
-" the number [code]1[/code]."
+"[code]\"1\"[/code] only contains a character and [i]doesn't[/i] represent "
+"the number [code]1[/code]."
 msgstr ""
 "[code]\"1\"[/code] содержит один символ и [i]не[/i] представляет число "
 "[code]1[/code]."
@@ -96,12 +95,10 @@ msgid "1"
 msgstr "1"
 
 #: course/lesson-21-strings/lesson.tres:88
-#: course/lesson-21-strings/lesson.tres:89
 msgid "\"1\""
 msgstr "\"1\""
 
 #: course/lesson-21-strings/lesson.tres:88
-#: course/lesson-21-strings/lesson.tres:89
 msgid "\"name\""
 msgstr "\"name\""
 
@@ -111,20 +108,20 @@ msgstr "Почему мы используем строки"
 
 #: course/lesson-21-strings/lesson.tres:118
 msgid ""
-"Every piece of text you see in this app is a string that Godot is "
-"displaying for us."
+"Every piece of text you see in this app is a string that Godot is displaying "
+"for us."
 msgstr ""
-"Каждый фрагмент текста, который вы видите в этом приложении, — это "
-"строка, которую Godot отображает для нас."
+"Каждый фрагмент текста, который вы видите в этом приложении, — это строка, "
+"которую Godot отображает для нас."
 
 msgid ""
 "Much like how [code]Vector2[/code] variables make calculations easier, "
-"[code]string[/code] variables come with many helper functions and tricks "
-"we can use."
+"[code]string[/code] variables come with many helper functions and tricks we "
+"can use."
 msgstr ""
 "Подобно тому, как переменные [code]Vector2[/code] облегчают вычисления, "
-"переменные типа [code]String[/code] имеют множество вспомогательных "
-"функций и особенностей, которые мы можем использовать."
+"переменные типа [code]String[/code] имеют множество вспомогательных функций "
+"и особенностей, которые мы можем использовать."
 
 msgid ""
 "We can use arrays to store strings too. This is useful for chaining "
@@ -137,11 +134,11 @@ msgstr ""
 
 #: course/lesson-21-strings/lesson.tres:142
 msgid ""
-"In the next few practices, we'll use strings in combination with "
-"different concepts from earlier lessons."
+"In the next few practices, we'll use strings in combination with different "
+"concepts from earlier lessons."
 msgstr ""
-"В следующих упражнениях мы будем использовать строки в комбинации с "
-"разными концепциями из прошлых уроков."
+"В следующих упражнениях мы будем использовать строки в комбинации с разными "
+"концепциями из прошлых уроков."
 
 #: course/lesson-21-strings/lesson.tres:150
 msgid "Creating string variables"
@@ -156,27 +153,28 @@ msgstr ""
 "[code]robot_name[/code]."
 
 msgid ""
-"Change the [code]robot_name[/code] variable so that it's a string "
-"instead. You can give it any name you'd like."
+"Change the [code]robot_name[/code] variable so that it's a string instead. "
+"You can give it any name you'd like."
 msgstr ""
-"Измените значение переменной [code]robot_name[/code] на строковое. Вы "
-"можете дать роботу любое имя, которое вам нравится."
+"Измените значение переменной [code]robot_name[/code] на строковое. Вы можете "
+"дать роботу любое имя, которое вам нравится."
 
-#: course/lesson-21-strings/lesson.tres:163
+#: course/lesson-21-strings/lesson.tres:165
 msgid "Give the robot a readable name using a string stored in a variable."
-msgstr "Дайте роботу читабельное имя используя строку, сохранённую в переменной."
+msgstr ""
+"Дайте роботу читабельное имя используя строку, сохранённую в переменной."
 
-#: course/lesson-21-strings/lesson.tres:168
+#: course/lesson-21-strings/lesson.tres:170
 msgid "Using an array of strings to play a combo"
 msgstr "Использование массива строк для выполнения комбо"
 
-#: course/lesson-21-strings/lesson.tres:169
+#: course/lesson-21-strings/lesson.tres:171
 msgid ""
-"In this practice, we'll chain together animations using an array of "
-"strings. You might find such combinations in fighting games."
+"In this practice, we'll chain together animations using an array of strings. "
+"You might find such combinations in fighting games."
 msgstr ""
-"В этом упражнении мы объединим анимации вместе, при помощи массива строк."
-" Вы можете встретить такие комбинации в играх — файтингах."
+"В этом упражнении мы объединим анимации вместе, при помощи массива строк. Вы "
+"можете встретить такие комбинации в играх — файтингах."
 
 msgid "The robot has the following animation names:"
 msgstr "Робот имеет несколько именованных анимаций:"
@@ -192,8 +190,8 @@ msgid "Populate the combo array with animation names as strings."
 msgstr "Заполните массив комбинации строковыми именами анимаций."
 
 msgid ""
-"Then, for each action in the array, call the "
-"[code]play_animation()[/code] function to play them."
+"Then, for each action in the array, call the [code]play_animation()[/code] "
+"function to play them."
 msgstr ""
 "Затем, для каждого действия в массиве, вызовите функцию "
 "[code]play_animation()[/code] для их запуска."
@@ -205,11 +203,10 @@ msgstr ""
 "Массив должен содержать три значения, так робот совершает три атаки: два "
 "удара (jab), за которыми следует один апперкот (uppercut)."
 
-#: course/lesson-21-strings/lesson.tres:190
+#: course/lesson-21-strings/lesson.tres:193
 msgid "Define an array of strings to unleash a powerful combo."
 msgstr "Определите массив строк для выполнения мощного комбо."
 
-#: course/lesson-21-strings/lesson.tres:194
+#: course/lesson-21-strings/lesson.tres:197
 msgid "Strings"
 msgstr "Строки"
-

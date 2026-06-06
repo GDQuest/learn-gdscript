@@ -8,257 +8,322 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2022-06-12 11:07+0200\n"
-"PO-Revision-Date: 2024-02-24 14:02+0000\n"
-"Last-Translator: 二中 <worigoule@gmail.com>\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2026-05-24 08:11+0000\n"
+"Last-Translator: 2dengyu2 <649355204@qq.com>\n"
+"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
+"projects/learn-gdscript-from-zero/lesson-23-append-to-arrays/zh_Hans/>\n"
 "Language: zh_Hans\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects"
-"/learn-gdscript-from-zero/lesson-23-append-to-arrays/zh_Hans/>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 "Generated-By: Babel 2.10.3\n"
 
 #: course/lesson-23-append-to-arrays/lesson.tres:13
 msgid ""
 "In previous lessons, you learned how to create arrays to store lists of "
-"values and how to loop over them. It's nice, but you won't go far with "
-"only that."
-msgstr "在之前的课程中，你学了如何创建数组来存储一系列的值，以及如何循环遍历数组。 数组很棒，但是只会这点皮毛不能帮到你太多。"
+"values and how to loop over them. That's useful, but arrays can do much more."
+msgstr ""
+"在之前的课程中，你学习了如何创建数组来存储多个值，以及如何遍历数组。这很有用"
+"，但数组的功能远不止于此。"
 
 msgid ""
-"The real strength of arrays is that you can add and remove values from "
-"them at any time. It allows you to [i]queue[/i] or [i]stack[/i] data."
-msgstr "数组的真正优势在于，可以随时在其中添加或删除值。 允许你对数据进行 [i]queue[/i] （队列）或 [i]stack[/i] （堆栈）操作。"
+"The real strength of GDScript arrays is that you can add and remove values "
+"from them at any time. This lets you build waiting lines of data or piles of "
+"data. We call these [i]queues[/i] and [i]stacks[/i], respectively. We'll see "
+"what that means in this lesson."
+msgstr ""
+"GDScript数组的真正强大之处在于，你可以随时向其中添加或从中移除值。这使你能够"
+"构建数据队列或数据堆。我们分别称之为[i]队列[/i]（queue）和[i]堆栈[/i]（stack"
+"）。在本课中，我们将了解这些术语的含义。"
 
 #: course/lesson-23-append-to-arrays/lesson.tres:25
-msgid "For now, let's take another example."
-msgstr "现在，让我们再举一个例子。"
+msgid "Let's look at a concrete example."
+msgstr "让我们来看一个具体的例子。"
 
 #: course/lesson-23-append-to-arrays/lesson.tres:33
 msgid "Tracking orders in a restaurant management game"
-msgstr "在餐厅管理游戏中跟踪订单顺序"
+msgstr "在餐厅管理游戏中追踪订单"
 
 #: course/lesson-23-append-to-arrays/lesson.tres:35
 msgid ""
-"You're making a restaurant management game where customers place orders, "
-"and you need to handle them as they come."
-msgstr "假设你正在制作一个餐厅管理游戏，顾客在餐厅下单了食物，你需要在出餐时候送过去。"
+"You're making a restaurant management game where customers place orders, and "
+"you need to handle them one by one."
+msgstr "假设你在做一个餐厅管理游戏，顾客们会下单，而你需要逐一处理这些订单。"
 
 msgid ""
-"In this game, customers order meals that end up in a queue. You need to "
-"prepare them in the kitchen."
-msgstr "在这个游戏中，顾客点餐完了会排成长队等待。 你需要在厨房里准备他们的食物。"
+"In the example below, customers order meals that end up in a waiting line (a "
+"queue). You need to prepare them in the kitchen. We simulate orders arriving "
+"and getting completed over time."
+msgstr ""
+"在下面的例子中，顾客点餐后，订单会排成一条等候队列。你需要在厨房里备餐。我们"
+"模拟的是订单不断到来、然后逐一完成的过程。"
 
-msgid ""
-"In this example, we simulate orders arriving and getting completed over "
-"time."
-msgstr "这个例子中，我们模拟了一种订单模式，按时间推移会出现订单，紧接着会被完成。"
-
-#: course/lesson-23-append-to-arrays/lesson.tres:59
+#: course/lesson-23-append-to-arrays/lesson.tres:57
 msgid "How do you keep track of pending and completed orders? With an array!"
-msgstr "该怎样跟踪待处理和已完成的订单？用上数组！"
+msgstr "如何追踪待处理和已完成的订单？使用数组！"
 
 msgid ""
-"When a customer purchases a meal, you want to [i]append[/i] it to the "
-"array. Then, as you complete a meal in the kitchen and serve it, you want"
-" to remove it from the array."
-msgstr "当客户购买餐点时，你得将它 [i]追加[/i] 到数组中（append）。 然后，当你在厨房完成一餐并出餐时，需要将其从数组中移除。"
-
-msgid ""
-"You can do that with the [code]append()[/code] and the "
-"[code]pop_front()[/code] functions of the array, respectively."
+"When a customer purchases a meal, you want to [i]append[/i] (add) it to the "
+"array. Then, as you complete a meal in the kitchen and serve it, you want to "
+"remove it from the array."
 msgstr ""
-"你可以分别使用数组的 [code]append()[/code] （列尾追加）和 "
-"[code]pop_front()[/code]（首格出列）函数来做到这一点。"
+"顾客购买餐点时，你需要将它[i]append[/i]（追加）到数组中。然后，当你在厨房完成"
+"一道菜并端上桌时，就需要把它从数组中移除。"
 
 msgid ""
-"Try to read the code below before moving on. Don't worry if not "
-"everything makes sense, as we'll break it all down."
-msgstr "在继续之前，先试试看阅读下面的代码。 如果不能一下就看懂，请不要担心，因为我们会分开讲解。"
-
-#: course/lesson-23-append-to-arrays/lesson.tres:85
-msgid ""
-"Notice how we call some functions by writing a dot after a variable name."
-" Like a given value type can have sub-variables, it can also have its own"
-" functions."
-msgstr "注意，在变量名后写一个点可以调用一些函数。 就像给定的值类型可以有子变量一样，它也可以有自己的函数。"
-
-msgid ""
-"Functions like [code]append()[/code] and [code]pop_front()[/code] only "
-"exist on arrays. That's why to call them, we need to access it from the "
-"array using the dot: [code]array.append()[/code]."
+"You can use the [code]append()[/code] function to add values at the end of "
+"an array. To remove values from the start, you can use the [code]pop_front()"
+"[/code] function. We call it \"pop\" because the value jumps out of the "
+"array."
 msgstr ""
-"[code]append()[/code] 和 [code]pop_front()[/code] 之类的函数只存在于数组中。 "
-"调用它们就是为了处理数组，我们得用点才能从数组中访问到：[code]array.append()[/code]。"
-
-#: course/lesson-23-append-to-arrays/lesson.tres:97
-msgid "Let's break down the code."
-msgstr "让我们来一步步分解代码。"
+"你可以用 [code]append()[/code] 函数在数组末尾添加值。要从数组开头移除值，可以"
+"用 [code]pop_front()[/code] 函数。之所以叫 \"pop\"，是因为值会从数组中弹出来"
+"。"
 
 msgid ""
-"We queue orders in the [code]waiting_orders[/code] array by appending "
-"them to the array."
-msgstr "我们让订单在 [code]waiting_orders[/code] （候餐）数组中排好队，用到了“追加（append）到数组”的方式。"
-
-#: course/lesson-23-append-to-arrays/lesson.tres:119
-msgid ""
-"We can use a string to represent a meal when calling the "
-"[code]add_order()[/code] function."
-msgstr "在调用 [code]add_order()[/code] （追加订单）函数时，可以用字符串来表示某一顿饭。"
-
-#: course/lesson-23-append-to-arrays/lesson.tres:139
-msgid ""
-"When completing an order, we remove it from the "
-"[code]waiting_orders[/code] array by calling its [code]pop_front()[/code]"
-" function. This function gives us the order back, which allows us to "
-"assign it to a temporary variable."
+"Try to read the code below before moving on. Don't worry if not everything "
+"makes sense, as we'll break it all down."
 msgstr ""
-"订单完成后，通过调用数组的 [code]pop_front()[/code] 函数，将它从 [code]waiting_orders[/code]"
-" 数组中移除。 该函数会将这个移除的订单作为参数返回，这样就可以把它分配给一个临时变量。"
+"在继续之前，先试着读一下下面的代码。如果一时不能完全理解也别担心，我们会逐一"
+"拆解。"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:159
-msgid "We can then append the order to our [code]completed_orders[/code] array."
-msgstr "然后就可以将这个订单追加到我们的 [code]completed_orders[/code] （已经完成的订单）数组中。"
-
-#: course/lesson-23-append-to-arrays/lesson.tres:179
+#: course/lesson-23-append-to-arrays/lesson.tres:83
 msgid ""
-"We call arrays like [code]waiting_orders[/code] a [i]queue[/i]: the first"
-" element we append to the array is the first one we remove."
+"Notice how we call some functions by writing a dot after a variable name. "
+"Just like some values have variables you can access with a dot (like the "
+"[code]x[/code] variable in [code]position.x[/code]), they can also have "
+"their own functions."
 msgstr ""
-"我们将类似 [code]waiting_orders[/code] 这样的数组称为 "
-"[i]queue[/i]（队列）：最早被追加进数组的，会被第一个移除。"
+"注意，有些函数是通过在变量名后面加点号（.）来调用的。就像某些值带有可以通过点"
+"号访问的子变量（比如 [code]position.x[/code] 中的 [code]x[/code]），它们也可"
+"以拥有自己的函数。"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:187
+msgid ""
+"Functions like [code]append()[/code] and [code]pop_front()[/code] only exist "
+"on arrays. To call them, we need to write the array name, then a dot, then "
+"the function: [code]array_name.append()[/code]."
+msgstr ""
+"像 [code]append()[/code] 和 [code]pop_front()[/code] 这样的函数只属于数组。要"
+"调用它们，需要先写数组名，然后加一个点号，再写函数名：[code]array_name.append"
+"()[/code]。"
+
+#: course/lesson-23-append-to-arrays/lesson.tres:95
+msgid ""
+"Let's break down the code. We add orders to the [code]waiting_orders[/code] "
+"array by appending them."
+msgstr ""
+"我们来拆解一下代码。我们通过追加的方式，把订单添加到 [code]waiting_orders[/"
+"code] 数组中。"
+
+#: course/lesson-23-append-to-arrays/lesson.tres:115
+msgid ""
+"We can use a string to represent a meal when calling the [code]add_order()[/"
+"code] function."
+msgstr "在调用 [code]add_order()[/code] 函数时，我们可以用字符串来表示一道菜品。"
+
+#: course/lesson-23-append-to-arrays/lesson.tres:135
+msgid ""
+"When completing an order, we remove it from the [code]waiting_orders[/code] "
+"array by calling its [code]pop_front()[/code] function. This function gives "
+"us the order back, which allows us to assign it to a temporary variable."
+msgstr ""
+"完成一份订单时，我们调用 [code]waiting_orders[/code] 数组的 [code]pop_front()"
+"[/code] 函数，将订单从数组中移除。这个函数会把那份订单返回给我们，这样我们就"
+"可以把它赋给一个临时变量。"
+
+#: course/lesson-23-append-to-arrays/lesson.tres:155
+msgid ""
+"We can then append the order to our [code]completed_orders[/code] array."
+msgstr "然后我们就可以把这份订单追加到 [code]completed_orders[/code] 数组中。"
+
+#: course/lesson-23-append-to-arrays/lesson.tres:175
+msgid ""
+"When we use an array this way, we call it a [i]queue[/i]: the first element "
+"we add to the array is the first one we remove. It's like a waiting line at "
+"a store."
+msgstr ""
+"以这种方式使用数组时，我们称之为[i]队列[/i]（queue）：最先加入数组的元素会最"
+"先被移除。就像商店里的排队队伍一样。"
+
+#: course/lesson-23-append-to-arrays/lesson.tres:183
 msgid "What does #... mean?"
-msgstr "这里的#...是什么意思？"
+msgstr "#... 是什么意思？"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:189
+#: course/lesson-23-append-to-arrays/lesson.tres:185
 msgid ""
-"We write [code]#...[/code] to represent ellipses in the code. It means "
-"\"we're completing the function's code.\" We use that to break down code "
-"examples and make them easier to learn from."
-msgstr "我们用 [code]#...[/code] 来表示代码中的省略部分。 代表“假设这块函数的功能是写完了的”。 用它来分解代码示例，更便于学习。"
+"We write [code]#...[/code] to show that there is more code here. The three "
+"dots mean \"we are not showing all the code.\" We use this to break down "
+"code examples and make them easier to learn from."
+msgstr ""
+"我们写 [code]#...[/code] 来表示此处还有更多代码。三个点号的意思是「我们没有展"
+"示全部代码」。我们用它来拆解代码示例，让代码更容易学习。"
 
 msgid ""
-"The hash sign itself marks the start of a code comment. It's a line the "
-"computer will ignore, which is why it typically appears in grey."
-msgstr "#井号本身标志着“代码注释”的开始。 #号后面一整行会被计算机忽略，这就是它通常显示为灰色的原因。"
+"The hash sign ([code]#[/code]) marks the start of a code comment. It's a "
+"line the computer will ignore, which is why it typically appears in grey."
+msgstr ""
+"井号（[code]#[/code]）标志着一行代码注释的开始。井号后面的一整行内容都会被计"
+"算机忽略，这也是为什么注释通常显示为灰色。"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:199
+#: course/lesson-23-append-to-arrays/lesson.tres:195
 msgid "Using arrays as stacks"
-msgstr "使用数组实现堆栈（stack）"
+msgstr "把数组用作堆栈"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:201
+#: course/lesson-23-append-to-arrays/lesson.tres:197
 msgid "Another common use of arrays is [i]stacks[/i] of data."
-msgstr "数组的另一个常见用途是对数据进行 [i]堆栈[/i]（stack）处理。"
+msgstr "数组的另一个常见用途是数据的[i]堆栈[/i]（stack）。"
 
 msgid ""
 "Take a factory management game where you need to retrieve materials from "
-"stacks of crates. They arrive at the factory piled up vertically, and you"
-" need to take them from top to bottom."
-msgstr "假设有一个工厂管理游戏，需要你从垒起来的板条箱中取回原材料。 箱子到达工厂时是垂直堆积起来的，需要你将它们从上到下拿走。"
+"stacks of crates. They arrive at the factory piled up vertically, and you "
+"need to take them from top to bottom."
+msgstr ""
+"以一个工厂管理游戏为例，你需要从一摞摞箱子中取出材料。箱子到达工厂时会垂直堆"
+"叠起来，你需要从上往下取用。"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:223
+#: course/lesson-23-append-to-arrays/lesson.tres:219
 msgid ""
 "To take a crate from the back of the array, this time, we use the "
 "[code]pop_back()[/code] array function."
-msgstr "为了从箱子数组的尾部取出一个箱子，这次，要用到数组函数 [code]pop_back()[/code] （尾部出列）。"
+msgstr "这次，要从数组尾部取出一个箱子，我们用 [code]pop_back()[/code] 这个数组函数。"
 
 msgid ""
-"This function removes (pops) the last value from the array and returns it"
-" to you."
-msgstr "此函数从数组中删除（弹出）最后一个值并将其作为参数返回。"
+"This function removes (pops) the last value from the array and returns it to "
+"you."
+msgstr "这个函数会从数组中移除（弹出）最后一个值，并把它返回给你。"
 
 msgid ""
-"Here we pop the last value of the array and print what's left of the "
-"array to demonstrate how the array gets smaller."
-msgstr "在这里，我们弹出数组的最后一个值，然后打印出数组的剩余部分，以演示数组是如何变小的。"
+"Here we pop the last value of the array and print what's left of the array "
+"to demonstrate how the array gets smaller."
+msgstr ""
+"这里我们弹出数组的最后一个值，然后打印数组中剩余的部分，演示数组是如何逐渐变"
+"小的。"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:247
+#: course/lesson-23-append-to-arrays/lesson.tres:243
 msgid ""
-"Like [code]pop_front()[/code], the function returns the value removed "
-"from the array. You will often store that value in a variable."
-msgstr "与 [code]pop_front()[/code] 一样，该函数会将从数组中删除的值返回。 通常需要将该值存储在某个变量中。"
+"Like [code]pop_front()[/code], the function returns the value removed from "
+"the array. You will often store that value in a variable. This value could "
+"be the crate's content, which you can then use to give resources to the "
+"player."
+msgstr ""
+"和 [code]pop_front()[/code] 一样，该函数会返回从数组中移除的那个值。你通常会"
+"把这个值存到一个变量中。这个值可以是箱子里的内容物，然后你就可以用它来为玩家"
+"提供资源。"
 
 msgid ""
-"The value in question could be the crate's content, which you can then "
-"use to give resources to the player."
-msgstr "函数找到的值可以是箱子里装的具体的内容，然后你就可以使用这个栈来为玩家提供资源。"
+"When we use an array this way, we call it a [i]stack[/i]: the last element "
+"we add is the first one we remove. It's like a pile of plates where you take "
+"from the top."
+msgstr ""
+"以这种方式使用数组时，我们称之为[i]堆栈[/i]（stack）：最后加入的元素会最先被"
+"移除。就像一摞盘子，你总是从最上面开始拿。"
 
 msgid ""
 "In the following practices, you will use the [code]append()[/code], "
 "[code]pop_front()[/code], and [code]pop_back()[/code] array functions."
 msgstr ""
-"在以下练习中，你会用到数组的 [code]append()[/code]、[code]pop_front()[/code] 和 "
-"[code]pop_back()[/code] 函数。"
+"在接下来的练习中，你会用到 [code]append()[/code]、[code]pop_front()[/code] "
+"和 [code]pop_back()[/code] 这三个数组函数。"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:259
+#: course/lesson-23-append-to-arrays/lesson.tres:255
 msgid "Completing orders"
 msgstr "完成订单"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:260
+#: course/lesson-23-append-to-arrays/lesson.tres:256
 msgid "The [code]waiting_orders[/code] array will be filled over time."
-msgstr "[code]waiting_orders[/code] 数组将随着时间的推移而被塞满订单。"
+msgstr "[code]waiting_orders[/code] 数组会随着时间的推移逐渐被填满。"
 
 msgid ""
 "Your job is to move orders from the waiting list to the "
-"[code]completed_orders[/code] list using the array's "
-"[code]append()[/code] and [code]pop_front()[/code] functions."
+"[code]completed_orders[/code] list using the array's [code]append()[/code] "
+"and [code]pop_front()[/code] functions."
 msgstr ""
-"你的工作是使用数组的 [code]append()[/code] 和 [code]pop_front()[/code] "
-"函数将订单从等待列表（waiting_orders）移动到列表 [code]completed_orders[/code] 。"
+"你的任务是使用数组的 [code]append()[/code] 和 [code]pop_front()[/code] 函数，"
+"把订单从等候列表转移到 [code]completed_orders[/code] 列表中。"
 
 msgid ""
 "Remember that the array's [code]pop_front()[/code] function returns the "
-"popped value, which allows you to store it in a variable and then pass it"
-" to another function."
-msgstr "请记住，数组的 [code]pop_front()[/code] 函数会返回弹出的值，允许你将其存储在变量中，然后就可以传递给其他的函数。"
+"popped value, which allows you to store it in a variable and then pass it to "
+"another function."
+msgstr ""
+"请记住，数组的 [code]pop_front()[/code] 函数会返回被弹出的值，这意味着你可以"
+"把它存到变量里，再传递给其他函数。"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:277
+#: course/lesson-23-append-to-arrays/lesson.tres:274
 msgid ""
-"Orders are piling up in the kitchen, and we need to clear them fast using"
-" the array's [code]pop_front()[/code] function."
-msgstr "厨房里的订单堆积如山，我们需要使用数组的 [code]pop_front()[/code] 函数快速清除它们。"
+"Orders are piling up in the kitchen, and we need to clear them fast using "
+"the array's [code]pop_front()[/code] function."
+msgstr ""
+"厨房里的订单越堆越多，我们需要用数组的 [code]pop_front()[/code] 函数尽快处理"
+"掉它们。"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:282
+#: course/lesson-23-append-to-arrays/lesson.tres:279
 msgid "Clearing up the crates"
 msgstr "清理箱子"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:283
+#: course/lesson-23-append-to-arrays/lesson.tres:280
 msgid ""
-"Crates are piling up on the platform. Move them out of the way by popping"
-" them from the [code]crates[/code] array."
-msgstr "板条箱在平台上堆积如山。 从 [code] crates[/code]（箱子）数组中弹出它们，将它们移走。"
+"Crates are piling up on the platform. Move them out of the way by popping "
+"them from the [code]crates[/code] array."
+msgstr "箱子在平台上越堆越多。从 [code]crates[/code] 数组中把它们弹出来，腾出空间。"
 
 msgid ""
-"You need to remove them from top to bottom using the array's "
-"[code]pop_back()[/code] function."
-msgstr "你需要用到数组的 [code]pop_back()[/code] 函数，从上到下地删除它们。"
+"You need to remove them from top to bottom using the array's [code]pop_back()"
+"[/code] function."
+msgstr "你需要用数组的 [code]pop_back()[/code] 函数，从上到下依次移除它们。"
 
 msgid "Your code should remove all the crates in the array using a while loop."
-msgstr "你的代码要用 while 循环依次删除数组中所有的箱子。"
+msgstr "你的代码应该用 while 循环来移除数组中所有的箱子。"
 
 msgid ""
-"[b]Careful![/b] if you run a while loop carelessly, you can lock the "
-"software."
-msgstr "[b]当心！[/b]如果你不小心搞出了while死循环，搞不好会让这个软件宕机噢。"
+"[b]Careful![/b] If you write the while loop incorrectly, you can freeze the "
+"program."
+msgstr "[b]小心！[/b]如果 while 循环写错了，可能会导致程序卡死。"
 
 msgid ""
-"You can check if the [code]crates[/code] array still contains values by "
-"writing [code]while crates:[/code]"
+"You can check if the [code]crates[/code] array still has values by writing "
+"[code]while crates:[/code]. This works because an empty array counts as "
+"[code]false[/code], and an array with items counts as [code]true[/code]."
 msgstr ""
-"通过写[code]while "
-"crates:[/code]，可以检查到[code]crates[/code]数组中是否还含有值（意思是说空数组会返回false，还有东西会返回true）"
+"你可以通过写 [code]while crates:[/code] 来检查 [code]crates[/code] 数组是否还"
+"有值。之所以可以这样做，是因为空数组被视为 [code]false[/code]，而有内容的数组"
+"被视为 [code]true[/code]。"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:303
+#: course/lesson-23-append-to-arrays/lesson.tres:301
 msgid ""
-"Crates are piling up on the platform. Move them out of the way by popping"
-" them from their array."
-msgstr "地上的板条箱堆积如山。将它们从数组中弹出，将它们移走。"
+"Crates are piling up on the platform. Move them out of the way by popping "
+"them from their array."
+msgstr "箱子在平台上越堆越多。从数组中把它们弹出来，腾出空间。"
 
-#: course/lesson-23-append-to-arrays/lesson.tres:307
+#: course/lesson-23-append-to-arrays/lesson.tres:305
 msgid "Appending and popping values from arrays"
-msgstr "从数组中追加或弹出值"
+msgstr "从数组中追加和弹出值"
 
+#~ msgid "For now, let's take another example."
+#~ msgstr "现在，让我们再举一个例子。"
+
+#~ msgid ""
+#~ "In this example, we simulate orders arriving and getting completed over "
+#~ "time."
+#~ msgstr ""
+#~ "这个例子中，我们模拟了一种订单模式，按时间推移会出现订单，紧接着会被完成。"
+
+#~ msgid ""
+#~ "You can do that with the [code]append()[/code] and the [code]pop_front()[/"
+#~ "code] functions of the array, respectively."
+#~ msgstr ""
+#~ "你可以分别使用数组的 [code]append()[/code] （列尾追加）和 "
+#~ "[code]pop_front()[/code]（首格出列）函数来做到这一点。"
+
+#~ msgid "Let's break down the code."
+#~ msgstr "让我们来一步步分解代码。"
+
+#~ msgid ""
+#~ "The value in question could be the crate's content, which you can then "
+#~ "use to give resources to the player."
+#~ msgstr ""
+#~ "函数找到的值可以是箱子里装的具体的内容，然后你就可以使用这个栈来为玩家提供"
+#~ "资源。"
