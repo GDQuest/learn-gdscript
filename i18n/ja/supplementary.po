@@ -20,6 +20,7 @@ msgstr ""
 "X-Generator: Weblate 5.17-dev\n"
 "Generated-By: Babel 2.10.3\n"
 
+
 #: script_checking/error_database.csv
 msgid "error_explanation"
 msgstr ""
@@ -49,11 +50,10 @@ msgid "To access the [code]x[/code] sub-component of the variable, you need to d
 msgstr "変数の [code]x[/code] サブコンポーネントにアクセスするには、ループ本体内でそれを行う必要があります。"
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "[code]for cell_position in cell_positions_array:"
 msgstr ""
 "[code]for cell_position in cell_positions_array:\n"
-"    cell_position.x += 1.0[/code]"
+"    cell_position.x += 1.0[/code]\n"
 
 #: script_checking/error_database.csv
 msgid "    cell_position.x += 1.0[/code]"
@@ -104,18 +104,16 @@ msgid "Look at what you are trying to change. If it is a constant (defined with 
 msgstr "変更しようとしているものを確認してください。それが定数（[code]const[/code] キーワードで定義されているか、Godotに組み込まれているもの）である場合、2つの選択肢があります："
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "1. If the value should never change, or it comes from Godot, remove the line that tries to change it."
 msgstr ""
 "1. 値が変わるべきでない場合、またはGodotによって提供されている値である場合は、それを変更しようとしている行を削除してください。\n"
-"2. 値を変更する必要がある場合は、最初に作成するときに [code]const[/code] の代わりに [code]var[/code] を使用してください。"
+"2. 値を変更する必要がある場合は、最初に作成するときに [code]const[/code] の代わりに [code]var[/code] を使用してください。\n"
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
 msgstr ""
 "1. 値が変わるべきでない場合、またはGodotによって提供されている値である場合は、それを変更しようとしている行を削除してください。\n"
-"2. 値を変更する必要がある場合は、最初に作成するときに [code]const[/code] の代わりに [code]var[/code] を使用してください。"
+"2. 値を変更する必要がある場合は、最初に作成するときに [code]const[/code] の代わりに [code]var[/code] を使用してください。\n"
 
 #: script_checking/error_database.csv
 msgid "You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line."
@@ -154,11 +152,10 @@ msgid "1. You used the class name in the class itself."
 msgstr ""
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
 msgstr ""
 "1. クラス自体でクラス名を使用しました。\n"
-"2. コードがこのクラスを参照する別のクラスを参照しているため、無限の参照サイクルが発生します。"
+"2. コードがこのクラスを参照する別のクラスを参照しているため、無限の参照サイクルが発生します。\n"
 
 #: script_checking/error_database.csv
 msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
@@ -261,12 +258,11 @@ msgid "1. You wrote an identifier (variable or function name) in the wrong place
 msgstr ""
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
 msgstr ""
 "1. 識別子（変数名または関数名）を間違った場所に記述しました。\n"
 "2. [code]var[/code]、[code]func[/code]、[code]for[/code]、[code]signal[/code] などのキーワードを書き、その後に名前を付けなかった。\n"
-"3. 関数定義を書きましたが、コロンの前の括弧を忘れました。"
+"3. 関数定義を書きましたが、コロンの前の括弧を忘れました。\n"
 
 #: script_checking/error_database.csv
 msgid "3. You wrote a function definition but forgot the parentheses before the colon."
@@ -473,18 +469,16 @@ msgid "There is an issue with the return value of your function. There are two m
 msgstr "関数の戻り値に問題があります。ここには主に2つのケースがあります。"
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
 msgstr ""
 "1.関数がvoid関数であり、値を返してはならない。これには、'-> void' 構文を持つ関数やクラス・コンストラクタ ('_init()')が含まれます。\n"
-"2. 関数に戻り値の型を指定したが、すべての可能な分岐（if、elif、elseブロック）または最後に値を返していない。"
+"2. 関数に戻り値の型を指定したが、すべての可能な分岐（if、elif、elseブロック）または最後に値を返していない。\n"
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
 msgstr ""
 "1.関数がvoid関数であり、値を返してはならない。これには、'-> void' 構文を持つ関数やクラス・コンストラクタ ('_init()')が含まれます。\n"
-"2. 関数に戻り値の型を指定したが、すべての可能な分岐（if、elif、elseブロック）または最後に値を返していない。"
+"2. 関数に戻り値の型を指定したが、すべての可能な分岐（if、elif、elseブロック）または最後に値を返していない。\n"
 
 #: script_checking/error_database.csv
 msgid "When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that."
@@ -523,11 +517,10 @@ msgid "The computer reached the end of the line of code, but the line had a synt
 msgstr ""
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
 msgstr ""
 "コンピューターはコード行の終わりに到達しましたが、その行に構文エラーがありました。\n"
-"最も一般的なケースは、文字列を閉じるのを忘れた場合です。開始引用符はあるものの、対応する終了引用符を追加するのを忘れています。"
+"最も一般的なケースは、文字列を閉じるのを忘れた場合です。開始引用符はあるものの、対応する終了引用符を追加するのを忘れています。\n"
 
 #: script_checking/error_database.csv
 msgid "Double-check that you are not missing a quote character or that the quote character you used to start the string is the same as the one you used to close the string."
@@ -546,7 +539,6 @@ msgid "Ensure that you don't have a capital letter where you should have a lower
 msgstr "小文字を使用する必要がある場所に大文字が使用されていないこと、またはその逆のことを確認してください。"
 
 #: course/glossary.csv course/documentation.csv
-#, fuzzy
 msgid "explanation"
 msgstr "反復"
 
@@ -619,22 +611,18 @@ msgid "Vectors can seem daunting at first because they are pretty abstract, but 
 msgstr "ベクトルはかなり抽象的であるため、ちょっと難しく思えるかもしれません。でも後で分かりますがコードはとてもシンプルになります。"
 
 #: course/glossary.csv
-#, fuzzy
 msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument."
 msgstr "引数とは関数を呼び出すときに渡す値です。 たとえば[code]rotate(0.5)[/code]の呼び出しでは、括弧内の値[code]0.5[/code]は引数です。"
 
 #: course/glossary.csv
-#, fuzzy
 msgid "A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional."
 msgstr "関数は引数なし、もしくは1つから複数の引数を受け取ることができます。 引数は必須またはオプションにすることができます。"
 
 #: course/glossary.csv
-#, fuzzy
 msgid "When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]"
 msgstr "関数が複数の引数を受け取る場合は、次の関数呼び出しのように、値をカンマで区切ります： [code]jump(50,100)[/code]のようにします。"
 
 #: course/glossary.csv
-#, fuzzy
 msgid "When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i]."
 msgstr "関数を[i]呼び出す[/i]ときは、括弧内に渡される[i]引数[/i]の値に名前を付けます。"
 
@@ -647,7 +635,6 @@ msgid "[code]func move_to_position(x, y):[/code]"
 msgstr ""
 
 #: course/glossary.csv
-#, fuzzy
 msgid "In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
 msgstr "関数定義を作成する時の、関数の[i]パラメーター[/i]について説明します。 次の例では、名前[code]x[/code]と[code]y[/code]は[i]パラメータ[/i]です。"
 
@@ -824,7 +811,6 @@ msgid "The position of the entity on the vertical axis."
 msgstr "縦軸のエンティティの位置。"
 
 #: course/documentation.csv
-#, fuzzy
 msgid " Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false, normalizes the movement."
 msgstr "ノードの X 座標を [code]Node._process[/code] の [code]delta[/code] にもとづいて局所変換します。もし [code]scaled[/code] が false なら、移動量を正規化します。"
 
@@ -846,174 +832,3 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
-
-#~ msgid "This error tells you are missing some parenthesis, a comma, or some value in your export hint."
-#~ msgstr "このエラーは、エクスポート ヒントに括弧、カンマ、または値が欠落していることを示します。"
-
-#~ msgid "You need to read the error message and add the missing character or value it requests."
-#~ msgstr "エラー メッセージを読み、不足している文字または要求されている値を追加する必要があります。"
-
-#~ msgid "member function"
-#~ msgstr "メンバ関数"
-
-#~ msgid "member functions"
-#~ msgstr "メンバ関数"
-
-#~ msgid "member variable"
-#~ msgstr "メンバ変数"
-
-#~ msgid "member variables"
-#~ msgstr "メンバ変数"
-
-#~ msgid "parameter"
-#~ msgstr "パラメータ"
-
-#~ msgid "parameters"
-#~ msgstr "パラメータ"
-
-#~ msgid "radian"
-#~ msgstr "ラジアン"
-
-#~ msgid "radians"
-#~ msgstr "ラジアン"
-
-#~ msgid "type"
-#~ msgstr "型"
-
-#~ msgid "types"
-#~ msgstr "型"
-
-#~ msgid "iterations"
-#~ msgstr "反復"
-
-#~ msgid "vector"
-#~ msgstr "ベクトル"
-
-#~ msgid "vectors"
-#~ msgstr "ベクトル"
-
-#~ msgid "argument"
-#~ msgstr "引数"
-
-#~ msgid "arguments"
-#~ msgstr "引数"
-
-#~ msgid "array"
-#~ msgstr "配列"
-
-#~ msgid "arrays"
-#~ msgstr "配列"
-
-#~ msgid "assign"
-#~ msgstr "代入"
-
-#~ msgid "dictionary"
-#~ msgstr "辞書"
-
-#~ msgid "dictionaries"
-#~ msgstr "辞書"
-
-#~ msgid "for loop"
-#~ msgstr "forループ"
-
-#~ msgid "for loops"
-#~ msgstr "forループ"
-
-#~ msgid "function"
-#~ msgstr "関数"
-
-#~ msgid "functions"
-#~ msgstr "関数"
-
-#~ msgid "increment"
-#~ msgstr "インクリメント"
-
-#~ msgid "increments"
-#~ msgstr "インクリメント"
-
-#~ msgid "instruction"
-#~ msgstr "命令"
-
-#~ msgid "instructions"
-#~ msgstr "命令"
-
-#~ msgid "variable"
-#~ msgstr "変数"
-
-#~ msgid "variables"
-#~ msgstr "変数"
-
-#~ msgid "while loop"
-#~ msgstr "whileループ"
-
-#~ msgid "while loops"
-#~ msgstr "whileループ"
-
-#~ msgid "body"
-#~ msgstr "体"
-
-#~ msgid "return"
-#~ msgstr "戻る"
-
-#~ msgid "library"
-#~ msgstr "ライブラリ"
-
-#~ msgid "libraries"
-#~ msgstr "ライブラリ"
-
-#~ msgid "sprite"
-#~ msgstr "スプライト"
-
-#~ msgid "sprites"
-#~ msgstr "スプライト"
-
-#~ msgid "The cell position of the robot on the board. [code]Vector2(0, 0)[/code] is the square cell in the top left of the board."
-#~ msgstr "ボード上のロボットのセル位置。[code]Vector2(0, 0)[/code] はボードの左上の四角形セル。"
-
-#~ msgid "Creates a list of numbers from [code]0[/code] to [code]length - 1[/code]."
-#~ msgstr "[code]0[/code] から [code]length - 1[/code] までの数のリストを作ります。"
-
-#~ msgid "Orders the robot to play an animation."
-#~ msgstr "ロボットにアニメーションを再生するよう命令します。"
-
-#~ msgid "Selects units in the cell coordinates passed as the function's argument."
-#~ msgstr "関数の引数として与えられるセル座標の単位を選びます。"
-
-#~ msgid "Queues a move animation towards the target cell."
-#~ msgstr "目標セルへの動作アニメーションをキューに入れます。"
-
-#~ msgid "Adds the value passed as an argument at the back of the array."
-#~ msgstr "引数として与えられた値を配列の最後に追加します。"
-
-#~ msgid "Removes the first value from the array and returns it."
-#~ msgstr "配列から最初の値を取り除き、それを返します。"
-
-#~ msgid "Removes the last value from the array and returns it."
-#~ msgstr "配列から最後の値を取り除き、それを返します。"
-
-#~ msgid "Returns the argument converted into a [code]String[/code]. Works with the majority of value types."
-#~ msgstr "引数を[code]String[/code]に変換して返します。大部分の値型で動きます。"
-
-#~ msgid "Returns the argument converted into an [code]int[/code] (whole number) [i]if possible[/i]. Supports converting decimal numbers, strings, and booleans. Useful to convert player text input into numbers."
-#~ msgstr "引数を[i]可能なら[/i][code]int[/code]（整数）に変換して返します。小数、文字列、真偽値をサポートしています。プレイヤーのテキスト入力を数値に変換するのに便利です。"
-
-#~ msgid "Creates a new unit matching the type parameter and places it at the desired cell position on the game grid."
-#~ msgstr "型パラメーターにマッチする新しい単位を作成し、それをゲームグリッドの望んだセルの位置に配置にします。"
-
-#~ msgid "Creates a new item and displays it in the inventory."
-#~ msgstr "新しいアイテムを作成し、それをインベントリに表示します。"
-
-#~ msgid "Increases the item count by amount."
-#~ msgstr "アイテムの個数を増やします。"
-
-#~ msgid "Realigns the train track with the path. Select a train track in the tracks array by index to pass it as an argument."
-#~ msgstr "列車の軌道をパスに合わせ直す。引数として渡すために、tracks 配列の列車トラックをインデックスで選択します。"
-
-#~ msgid "If you want to assign a value to a variable, double-check that what you have on the left side of the = sign is a variable and not a function."
-#~ msgstr "変数に値を代入する場合は、「=」 記号の左側にあるものが関数ではなく変数であることを再確認してください。"
-
-#~ msgid "You also need to ensure the syntax is correct. For example, there shouldn't be parentheses on the left side of the equal sign."
-#~ msgstr "構文が正しいことも確認する必要があります。 たとえば、等号の左側に括弧があってはなりません。"
-
-#~ msgid "In the case of a condition, ensure that you are using two equal signs to check for equality (==)."
-#~ msgstr "条件の場合は、等号 「==」をチェックするために 2 つの等号を使用していることを確認してください。"

@@ -71,7 +71,7 @@ static func write_from_tr_blocks(po_file: String, header: String, blocks: Array[
 				lines.append("#. %s" % [comment])
 		for source in block.comments.sources:
 			if source.lesson:
-				lines.append("#: %s%s" % [source.lesson, ":%s" % [source.line_number] if source.lesson.get_extension() != "tscn" else ""])
+				lines.append("#: %s%s" % [source.lesson, ":%s" % [source.line_number] if not source.lesson.get_extension() in ["csv", "tscn"] else ""])
 		
 		if append_fuzzy:
 			lines.append("#, fuzzy")

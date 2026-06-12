@@ -19,6 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.10.3\n"
 
+
 #: script_checking/error_database.csv
 msgid "error_explanation"
 msgstr ""
@@ -48,18 +49,16 @@ msgid "To access the [code]x[/code] sub-component of the variable, you need to d
 msgstr "Om toegang te krijgen tot het onderdeel [code]x[/code] van de variabele, moet je dat binnen de lus doen:"
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "[code]for cell_position in cell_positions_array:"
 msgstr ""
 "[code]for cell_position in cell_positions_array:\n"
-"    cell_position.x += 1.0[/code]"
+"    cell_position.x += 1.0[/code]\n"
 
 #: script_checking/error_database.csv
 msgid "    cell_position.x += 1.0[/code]"
 msgstr ""
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "You get this error when you try to assign a value to something that is not a variable."
 msgstr "Als je deze foutmelding krijgt, probeer je waarschijnlijk een waarde toe te wijzen aan iets anders dan een variabele, wat onmogelijk is. Je kunt alleen waarden toewijzen aan variabelen."
 
@@ -80,7 +79,6 @@ msgid "If you see parentheses () on the left side, you might be trying to assign
 msgstr ""
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
 msgstr "Een andere mogelijkheid is dat je wilt controleren op gelijkheid in een conditie, maar een enkele = hebt geschreven in plaats van ==."
 
@@ -149,11 +147,10 @@ msgid "1. You used the class name in the class itself."
 msgstr ""
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
 msgstr ""
 "1. Je hebt de klassenaam gebruikt in de klasse zelf.\n"
-"2. Je code verwijst naar een andere klasse die naar deze klasse verwijst, wat een eindeloze verwijzingscyclus veroorzaakt."
+"2. Je code verwijst naar een andere klasse die naar deze klasse verwijst, wat een eindeloze verwijzingscyclus veroorzaakt.\n"
 
 #: script_checking/error_database.csv
 msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
@@ -256,12 +253,11 @@ msgid "1. You wrote an identifier (variable or function name) in the wrong place
 msgstr ""
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
 msgstr ""
 "1. Je hebt een identifier (variabele of functienaam) op de verkeerde plaats geschreven.\n"
 "2. Je hebt een sleutelwoord geschreven zoals [code]var[/code], [code]func[/code], [code]for[/code], of [code]signal[/code], en je hebt er geen naam achter gezet.\n"
-"3. Je hebt een functiedefinitie geschreven maar bent de haakjes voor de dubbele punt vergeten."
+"3. Je hebt een functiedefinitie geschreven maar bent de haakjes voor de dubbele punt vergeten.\n"
 
 #: script_checking/error_database.csv
 msgid "3. You wrote a function definition but forgot the parentheses before the colon."
@@ -468,18 +464,16 @@ msgid "There is an issue with the return value of your function. There are two m
 msgstr "Er is een probleem met de teruggavewaarde van je functie. Er zijn hier twee belangrijke gevallen:"
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
 msgstr ""
 "1. Je functie is een void-functie en zou dus geen waarde moeten teruggeven. Dit geldt ook voor functies met de vorm '-> void' en klasseconstructors ('_init()').\n"
-"2. Je hebt een teruggavetype opgegeven voor je functie, maar je geeft geen waarde terug in alle mogelijke vertakkingen (if-, elif- en else-blokken) of aan het einde."
+"2. Je hebt een teruggavetype opgegeven voor je functie, maar je geeft geen waarde terug in alle mogelijke vertakkingen (if-, elif- en else-blokken) of aan het einde.\n"
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
 msgstr ""
 "1. Je functie is een void-functie en zou dus geen waarde moeten teruggeven. Dit geldt ook voor functies met de vorm '-> void' en klasseconstructors ('_init()').\n"
-"2. Je hebt een teruggavetype opgegeven voor je functie, maar je geeft geen waarde terug in alle mogelijke vertakkingen (if-, elif- en else-blokken) of aan het einde."
+"2. Je hebt een teruggavetype opgegeven voor je functie, maar je geeft geen waarde terug in alle mogelijke vertakkingen (if-, elif- en else-blokken) of aan het einde.\n"
 
 #: script_checking/error_database.csv
 msgid "When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that."
@@ -518,11 +512,10 @@ msgid "The computer reached the end of the line of code, but the line had a synt
 msgstr ""
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
 msgstr ""
 "De computer heeft het einde van de regel code bereikt, maar de regel had een vormfout.\n"
-"Het meest voorkomende geval is wanneer je vergeet een string te sluiten: je hebt openende aanhalingstekens, maar je vergeet de bijpassende sluitende aanhalingstekens toe te voegen."
+"Het meest voorkomende geval is wanneer je vergeet een string te sluiten: je hebt openende aanhalingstekens, maar je vergeet de bijpassende sluitende aanhalingstekens toe te voegen.\n"
 
 #: script_checking/error_database.csv
 msgid "Double-check that you are not missing a quote character or that the quote character you used to start the string is the same as the one you used to close the string."
@@ -541,7 +534,6 @@ msgid "Ensure that you don't have a capital letter where you should have a lower
 msgstr "Zorg ervoor dat je geen hoofdletter hebt waar je een kleine letter zou moeten hebben en andersom."
 
 #: course/glossary.csv course/documentation.csv
-#, fuzzy
 msgid "explanation"
 msgstr "iteratie"
 
@@ -614,22 +606,18 @@ msgid "Vectors can seem daunting at first because they are pretty abstract, but 
 msgstr "Vectoren kunnen in het begin ontmoedigend lijken omdat ze vrij abstract zijn, maar zoals je zult zien, vereenvoudigen ze code enorm."
 
 #: course/glossary.csv
-#, fuzzy
 msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument."
 msgstr "Een argument is een waarde die je aan een functie meegeeft wanneer je de functie aanroept. Bijvoorbeeld, in de aanroep [code]rotate(0.5)[/code] is de waarde [code]0.5[/code] tussen de haakjes een argument."
 
 #: course/glossary.csv
-#, fuzzy
 msgid "A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional."
 msgstr "Een functie kan geen argumenten, één argument of meerdere argumenten ontvangen. Argumenten kunnen verplicht of optioneel zijn."
 
 #: course/glossary.csv
-#, fuzzy
 msgid "When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]"
 msgstr "Als een functie meerdere argumenten krijgt, scheid je de waarden met komma's, zoals in deze functieaanroep: [code]jump(50, 100)[/code]"
 
 #: course/glossary.csv
-#, fuzzy
 msgid "When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i]."
 msgstr "Wanneer je een functie [i]aanroept[/i], noemen we de waarden tussen haakjes [i]argumenten[/i]."
 
@@ -642,7 +630,6 @@ msgid "[code]func move_to_position(x, y):[/code]"
 msgstr ""
 
 #: course/glossary.csv
-#, fuzzy
 msgid "In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
 msgstr "Wanneer we echter een functiedefinitie schrijven, spreken we van [i]parameters[/i]. In het volgende voorbeeld zijn de namen [code]x[/code] en [code]y[/code] [i]parameters[/i]."
 
@@ -819,7 +806,6 @@ msgid "The position of the entity on the vertical axis."
 msgstr "De positie van het object langs de verticale as."
 
 #: course/documentation.csv
-#, fuzzy
 msgid " Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false, normalizes the movement."
 msgstr "Past een lokale verplaatsing toe langs de X-as van de knoop gebaseerd op de [code]delta[/code] van Node._process[/code]. Als [code]scaled[/code] [code]false[/code] is, wordt de beweging genormaliseerd."
 
@@ -841,171 +827,3 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
-
-#~ msgid "If you want to assign a value to a variable, double-check that what you have on the left side of the = sign is a variable and not a function."
-#~ msgstr "Als je een waarde wilt toewijzen aan een variabele, controleer dan of wat je aan de linkerkant van het = teken hebt staan een variabele is en geen functie."
-
-#~ msgid "You also need to ensure the syntax is correct. For example, there shouldn't be parentheses on the left side of the equal sign."
-#~ msgstr "Zorg er ook voor dat de vorm correct is. Er mogen bijvoorbeeld geen haakjes staan aan de linkerkant van het gelijkheidsteken."
-
-#~ msgid "In the case of a condition, ensure that you are using two equal signs to check for equality (==)."
-#~ msgstr "In het geval van een conditie, moet je ervoor zorgen dat je twee gelijkheidstekens gebruikt om te controleren op gelijkheid (==)."
-
-#~ msgid "This error tells you are missing some parenthesis, a comma, or some value in your export hint."
-#~ msgstr "Deze foutmelding vertelt je dat er haakjes, komma's of andere waarden ontbreken in je exporthint."
-
-#~ msgid "You need to read the error message and add the missing character or value it requests."
-#~ msgstr "Je moet de foutmelding lezen en het ontbrekende teken of de waarde waar het om vraagt toevoegen."
-
-#~ msgid "member function"
-#~ msgstr "lidfunctie"
-
-#~ msgid "member functions"
-#~ msgstr "lidfuncties"
-
-#~ msgid "member variable"
-#~ msgstr "lidvariabele"
-
-#~ msgid "member variables"
-#~ msgstr "lidvariabelen"
-
-#~ msgid "parameter"
-#~ msgstr "parameter"
-
-#~ msgid "parameters"
-#~ msgstr "parameters"
-
-#~ msgid "radian"
-#~ msgstr "radiaal"
-
-#~ msgid "radians"
-#~ msgstr "radialen"
-
-#~ msgid "type"
-#~ msgstr "type"
-
-#~ msgid "types"
-#~ msgstr "types"
-
-#~ msgid "iterations"
-#~ msgstr "iteraties"
-
-#~ msgid "vector"
-#~ msgstr "vector"
-
-#~ msgid "vectors"
-#~ msgstr "vectoren"
-
-#~ msgid "argument"
-#~ msgstr "argument"
-
-#~ msgid "arguments"
-#~ msgstr "argumenten"
-
-#~ msgid "array"
-#~ msgstr "array"
-
-#~ msgid "arrays"
-#~ msgstr "arrays"
-
-#~ msgid "assign"
-#~ msgstr "toewijzen"
-
-#~ msgid "dictionary"
-#~ msgstr "dictionary"
-
-#~ msgid "dictionaries"
-#~ msgstr "dictionaries"
-
-#~ msgid "for loop"
-#~ msgstr "for-lus"
-
-#~ msgid "for loops"
-#~ msgstr "for-lussen"
-
-#~ msgid "function"
-#~ msgstr "functie"
-
-#~ msgid "functions"
-#~ msgstr "functies"
-
-#~ msgid "increment"
-#~ msgstr "verhoging"
-
-#~ msgid "increments"
-#~ msgstr "verhogingen"
-
-#~ msgid "instruction"
-#~ msgstr "instructie"
-
-#~ msgid "instructions"
-#~ msgstr "instructies"
-
-#~ msgid "variable"
-#~ msgstr "variabele"
-
-#~ msgid "variables"
-#~ msgstr "variabelen"
-
-#~ msgid "while loop"
-#~ msgstr "while-lus"
-
-#~ msgid "while loops"
-#~ msgstr "while-lussen"
-
-#~ msgid "body"
-#~ msgstr "inhoud"
-
-#~ msgid "return"
-#~ msgstr "teruggeven"
-
-#~ msgid "library"
-#~ msgstr "bibliotheek"
-
-#~ msgid "libraries"
-#~ msgstr "bibliotheken"
-
-#~ msgid "sprite"
-#~ msgstr "sprite"
-
-#~ msgid "sprites"
-#~ msgstr "sprites"
-
-#~ msgid "The cell position of the robot on the board. [code]Vector2(0, 0)[/code] is the square cell in the top left of the board."
-#~ msgstr "De celpositie van de robot op het bord. [code]Vector2(0, 0)[/code] is de vierkante cel linksboven op het bord."
-
-#~ msgid "Creates a list of numbers from [code]0[/code] to [code]length - 1[/code]."
-#~ msgstr "Maakt een lijst met getallen van [code]0[/code] tot en met [code]length- 1[/code]."
-
-#~ msgid "Orders the robot to play an animation."
-#~ msgstr "Geeft de robot de opdracht om een animatie af te spelen."
-
-#~ msgid "Selects units in the cell coordinates passed as the function's argument."
-#~ msgstr "Selecteert spelstukken in de celcoördinaten die als argument aan de functie zijn doorgegeven."
-
-#~ msgid "Queues a move animation towards the target cell."
-#~ msgstr "Zet een bewegingsanimatie naar de doelcel in de wachtrij."
-
-#~ msgid "Adds the value passed as an argument at the back of the array."
-#~ msgstr "Voegt de waarde die als argument is meegegeven toe aan de achterkant van de array."
-
-#~ msgid "Removes the first value from the array and returns it."
-#~ msgstr "Verwijdert de eerste waarde uit de array en geeft deze terug."
-
-#~ msgid "Removes the last value from the array and returns it."
-#~ msgstr "Verwijdert de laatste waarde uit de array en geeft deze terug."
-
-#~ msgid "Returns the argument converted into a [code]String[/code]. Works with the majority of value types."
-#~ msgstr "Geeft als resultaat het argument omgezet in een [code]String[/code]. Werkt met de meeste waardentypes."
-
-#~ msgid "Returns the argument converted into an [code]int[/code] (whole number) [i]if possible[/i]. Supports converting decimal numbers, strings, and booleans. Useful to convert player text input into numbers."
-#~ msgstr "Geeft als resultaat het argument omgezet in een [code]int[/code] (geheel getal), [i]indien mogelijk[/i]. Biedt de mogelijkheid om kommagetallen, strings en booleans om te zetten. Nuttig om tekstinvoer van spelers om te zetten in getallen."
-
-#~ msgid "Creates a new unit matching the type parameter and places it at the desired cell position on the game grid."
-#~ msgstr "Creëert een nieuw spelstuk dat overeenkomt met de typeparameter en plaatst deze op de gewenste celpositie op het spelraster."
-
-#~ msgid "Creates a new item and displays it in the inventory."
-#~ msgstr "Maakt een nieuw voorwerp aan en geeft het weer in de inventaris."
-
-#~ msgid "Increases the item count by amount."
-#~ msgstr "Verhoogt het aantal voorwerpen met een aantal."
