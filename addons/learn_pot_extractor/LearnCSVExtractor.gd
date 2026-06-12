@@ -64,7 +64,7 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 			var prefix := ""
 			if extraction_data._prefix_column >= 0:
 				prefix = block[0]
-			ret.push_back(PackedStringArray([block[data._column], "%s%s" % [("%s." % prefix if prefix else ""), data._suffix]]))
+			ret.push_back(PackedStringArray([block[data._column]]))
 	
 	return ret
 

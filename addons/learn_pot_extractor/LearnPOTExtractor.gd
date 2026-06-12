@@ -55,6 +55,10 @@ func _generate_all_pot_files() -> void:
 	await _generate_course_pot()
 	await _generate_application_pot()
 	await _generate_supplemantary_pots()
+
+
+# ⚠ Only use if you know what you're doing ⚠
+func _slipstream_and_clean() -> void:
 	await _slipstream_existing_translations()
 	await _wipe_old_translations()
 
@@ -112,42 +116,48 @@ func _build_translated_lessons() -> void:
 
 
 func _slipstream_existing_translations() -> void:
+	var global_base_dir := ProjectSettings.globalize_path("res://i18n")
+	
 	var global_course := ProjectSettings.globalize_path(COURSE_POT_PATH)
 	var global_app := ProjectSettings.globalize_path(APPLICATION_POT_PATH)
 	var global_supp := ProjectSettings.globalize_path(SUPPLEMENTARY_POT_PATH)
 	
-	for lang in DirAccess.get_directories_at("res://i18n"):
+	for lang in DirAccess.get_directories_at(global_base_dir):
 		print("Processing %s..." % [lang])
 		await get_tree().process_frame
 		await get_tree().process_frame
 		
-		var global_lang_course := ProjectSettings.globalize_path("res://i18n/%s/course.po" % [lang])
-		var global_lang_app := ProjectSettings.globalize_path("res://i18n/%s/n_application.po" % [lang])
-		var global_lang_supp := ProjectSettings.globalize_path("res://i18n/%s/supplementary.po" % [lang])
+		var global_lang_course := "%s/%s/course.po" % [global_base_dir, lang]
+		var global_lang_app := "%s/%s/n_application.po" % [global_base_dir, lang]
+		var global_lang_supp := "%s/%s/supplementary.po" % [global_base_dir, lang]
 		
-		var source := global_course
+		var template := global_course
 		var target := global_lang_course
 		
-		for file in DirAccess.get_files_at("res://i18n/%s" % [lang]):
-			if file.get_extension() != "po" or not file.begins_with("lesson-"):
-				continue
-			var global_lesson := ProjectSettings.globalize_path("res://i18n/%s/%s" % [lang, file])
-			OS.execute("msgmerge", ["--no-wrap", "-o", target, global_lesson, source])
-			source = global_lang_course
+		var sources := Array(DirAccess.get_files_at("%s/%s" % [global_base_dir, lang])).filter(func(file: String) -> bool:
+			return file.get_extension() == "po" and file.begins_with("lesson-")
+		).map(func(file: String) -> String:
+			return "%s/%s/%s" % [global_base_dir, lang, file]
+		)
 		
-		var global_og_lang_app := ProjectSettings.globalize_path("res://i18n/%s/application.po" % [lang])
+		var temp_combined := "%s/%s/combined.po" % [global_base_dir, lang]
+		OS.execute("msgcat", ["--no-wrap", "--use-first"] + sources + ["-o", temp_combined])
+		OS.execute("msgmerge", ["--no-wrap", temp_combined, template, "-o", target])
+		
+		var global_og_lang_app := "%s/%s/application.po" % [global_base_dir, lang]
 		OS.execute("msgmerge", ["--no-wrap", "-o", global_lang_app, global_og_lang_app, global_app])
 		
-		var global_og_lang_error := ProjectSettings.globalize_path("res://i18n/%s/error_database.po" % [lang])
-		var global_og_lang_glossary := ProjectSettings.globalize_path("res://i18n/%s/glossary_database.po" % [lang])
-		var global_og_lang_doc := ProjectSettings.globalize_path("res://i18n/%s/classref_database.po" % [lang])
+		var global_og_lang_error := "%s/%s/error_database.po" % [global_base_dir, lang]
+		var global_og_lang_glossary := "%s/%s/glossary_database.po" % [global_base_dir, lang]
+		var global_og_lang_doc := "%s/%s/classref_database.po" % [global_base_dir, lang]
 		
-		source = global_supp
+		sources = [global_og_lang_error, global_og_lang_glossary, global_og_lang_doc]
+		template = global_supp
 		target = global_lang_supp
-		for supplementary_file: String in [global_og_lang_error, global_og_lang_glossary, global_og_lang_doc]:
-			OS.execute("msgmerge", ["--no-wrap", "-o", target, supplementary_file, source])
-			source = global_lang_supp
 		
+		OS.execute("msgcat", ["--no-wrap", "--use-first"] + sources + ["-o", temp_combined])
+		OS.execute("msgmerge", ["--no-wrap", temp_combined, template, "-o", target])
+	
 	print("Done")
 
 
