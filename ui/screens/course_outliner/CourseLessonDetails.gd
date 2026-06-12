@@ -11,6 +11,8 @@ const VALUE_COLOR_PASSED := Color(0.239216, 1, 0.431373)
 @export var _quiz_stats_value: Label
 @export var _practice_stats_value: Label
 @export var _goto_lesson_button: Button
+@export var _translation_stats_block: Control
+@export var _translation_stats_value: Label
 
 var course_index: CourseIndex:
 	set = set_course_index
@@ -50,12 +52,22 @@ func set_has_started(value: bool) -> void:
 
 
 func _update_visuals() -> void:
+	if TranslationManager.current_language == "en":
+		_translation_stats_block.hide()
+	else:
+		_translation_stats_block.show()
+	
 	if not is_inside_tree():
 		return
 	if not lesson:
 		return
 
 	_title_label.text = BBCodeUtils.get_lesson_title(lesson)
+	if TranslationManager.current_language == "en":
+		_translation_stats_value.text = "100%"
+	else:
+		var translation_percentage: float = TranslationManager.lesson_tr_data[lesson.bbcode_path][TranslationManager.current_language]["percent"]
+		_translation_stats_value.text = "%d%%" % [floori(translation_percentage * 100)]
 
 	var has_done_reading := false
 	_reading_stats_icon.texture = VALUE_CHECK_NONE

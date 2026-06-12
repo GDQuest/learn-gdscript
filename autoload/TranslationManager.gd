@@ -6,23 +6,6 @@ const I18N_ROOT := "res://i18n"
 const PO_EXTENSION := "po"
 # OS.get_locale() is available, if we want to guess the language based on the OS setting.
 const DEFAULT_LOCALE := "en"
-const SUPPORTED_LOCALES := [
-	"en",
-	"da",
-	"es",
-	# "fr",
-	# "ja",
-	# "it",
-	# "pt_BR",
-	# "zh_Hans",
-	# "ru",
-	# "de",
-	# "tr",
-	# "nl",
-	# "uk",
-	# "zh_Hant",
-	# "cs",
-]
 
 const LOCALE_TO_LABEL := {
 	"fr": "Français",
@@ -41,6 +24,11 @@ const LOCALE_TO_LABEL := {
 	"da": "Dansk",
 }
 
+const COMPLETENESS_THRESHOLD := 0.85
+
+var overall_tr_progress := { "en": 1.0 }
+var lesson_tr_data := {}
+
 var current_language := DEFAULT_LOCALE:
 	set = set_language
 
@@ -50,12 +38,33 @@ var _loaded_translations := []
 func _ready() -> void:
 	var current_profile := UserProfiles.get_profile()
 	set_language(current_profile.language)
+	
+	_update_language_completeness()
+
+
+func _update_language_completeness() -> void:
+	for lesson in DirAccess.get_directories_at("res://course"):
+		var meta_file := "res://course/%s/lesson.meta" % lesson
+		if FileAccess.file_exists(meta_file):
+			var meta_text := FileAccess.open(meta_file, FileAccess.READ).get_as_text()
+			lesson_tr_data["res://course/%s/lesson.bbcode" % [lesson]] = JSON.parse_string(meta_text)
+	
+	for lesson in lesson_tr_data:
+		for lang in lesson_tr_data[lesson]:
+			var percent: float = lesson_tr_data[lesson][lang]["percent"]
+			var current: float = overall_tr_progress.get_or_add(lang, 0.0)
+			overall_tr_progress[lang] = current + percent/lesson_tr_data.size()
 
 
 func get_available_languages() -> Array:
 	var languages := []
 
-	for locale_code: String in SUPPORTED_LOCALES:
+	for locale_code: String in overall_tr_progress:
+		var completeness: float = overall_tr_progress[locale_code]
+		
+		if completeness < COMPLETENESS_THRESHOLD:
+			continue
+		
 		var language_name: String = LOCALE_TO_LABEL.get(locale_code, "")
 		if language_name == "":
 			language_name = TranslationServer.get_locale_name(locale_code)
