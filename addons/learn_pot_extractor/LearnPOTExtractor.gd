@@ -55,7 +55,6 @@ func _generate_all_pot_files() -> void:
 	await _generate_course_pot()
 	await _generate_application_pot()
 	await _generate_supplemantary_pots()
-	await _slipstream_and_clean()
 
 
 # ⚠ Only use if you know what you're doing ⚠
@@ -65,7 +64,7 @@ func _slipstream_and_clean() -> void:
 
 
 func _wipe_old_translations() -> void:
-	var global_base_dir := ProjectSettings.globalize_path("res://i18n")
+	var global_base_dir := "/home/razoric/Documents/projects/learn-gdscript-translations" # ProjectSettings.globalize_path("res://i18n")
 	
 	for lang in DirAccess.get_directories_at(global_base_dir):
 		if lang == "images":
@@ -121,7 +120,7 @@ func _build_translated_lessons() -> void:
 
 
 func _slipstream_existing_translations() -> void:
-	var global_base_dir := ProjectSettings.globalize_path("res://i18n")
+	var global_base_dir := "/home/razoric/Documents/projects/learn-gdscript-translations" # ProjectSettings.globalize_path("res://i18n")
 	
 	var global_course := ProjectSettings.globalize_path(COURSE_POT_PATH)
 	var global_app := ProjectSettings.globalize_path(APPLICATION_POT_PATH)
