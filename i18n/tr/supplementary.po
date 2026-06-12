@@ -21,450 +21,323 @@ msgstr ""
 "Generated-By: Babel 2.10.3\n"
 
 #: script_checking/error_database.csv
-msgid "You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword."
-msgstr "Bu hatayı alıyorsanız, [code]for[/code] ve [code]in[/code] arasındaki isim geçerli bir değişken ismi değildir, ya da [code]in[/code] kelimesini unutmuşsunuzdur."
+msgid "error_explanation"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "error_suggestion"
+msgstr ""
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid " the [code]in[/code] keyword only accepts a valid temporary variable name to assign values in each loop iteration. The loop creates a new variable with the desired name and assigns each element of the array to it.\""
+msgid ""
+"You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword.\n"
+"\n"
+"In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid temporary variable name to assign values in each loop iteration. The loop creates a new variable with the desired name and assigns each element of the array to it."
 msgstr "Bir [code]for[/code] döngüsünde, döngünün her bir yinelemesinde kullanmak için, [code]in[/code] kelimesi sadece geçici değişken isimlerini kabul eder. Bu şekilde döngü, istenilen isimde yeni bir değişken oluşturur ve dizinin öğelerini tek tek buna atama yapar."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid "To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces"
-msgstr "Bu hatayı düzeltmek için, [code]for[/code] ve [code]in[/code] kelimeleri arasına, içinde noktalama işareti ya da boşluk bulunmayan geçerli bir değişken ismi girdiğinizden emin olmalısınız."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name."
-msgstr "Örneğin, bu kod hatalıdır: [code]for cell_position.x in cell_positions_array:[/code]. Çünkü [code]cell_position.x[/code] geçerli bir değişken ismi değildir."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " you need to do that inside of the loop's body:"
-msgstr "Bir değişkenin [code]x[/code] alt-elemanına erişmek için, bunu döngünün içerisinde aşağıdaki gibi kullanmalısınız:"
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid "[code]for cell_position in cell_positions_array:"
-msgstr ""
-"[code]for cell_position in cell_positions_array: # \"for hücre_konumu in hücre_konumları_disizi\" anlamında\n"
+msgid ""
+"To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces.\n"
+"\n"
+"For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name.\n"
+"\n"
+"To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:\n"
+"\n"
+"[code]for cell_position in cell_positions_array:\n"
 "    cell_position.x += 1.0[/code]"
-
-#: script_checking/error_database.csv
-msgid "    cell_position.x += 1.0[/code]\""
 msgstr ""
 
 #: script_checking/error_database.csv
-msgid "You get this error when you try to assign a value to something that is not a variable."
-msgstr "Bu hatayı, değişken olmayan bir şeye değer atamaya çalıştığınızda alırsınız."
-
-#: script_checking/error_database.csv
-msgid "You can only assign values to variables. You cannot assign values to function calls or calculations."
-msgstr "Yalnızca değişkenlere değer atayabilirsiniz. Fonksiyon çağrılarına veya hesaplamalara değer atayamazsınız."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call"
-msgstr "Örneğin, [code]randi() = 5[/code] yazamazsınız çünkü [code]randi()[/code] bir değişken değil, bir fonksiyon çağrısıdır."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " not a variable.\",\"Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name."
-msgstr "Eşittir işaretinin (=) sol tarafına yazdıklarınızı kontrol edin. Bunun bir değişken adı olduğundan emin olun."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " you might be trying to assign to a function call. Remove the parentheses and the function call."
-msgstr "Sol tarafta parantez () görüyorsanız, bir fonksiyon çağrısına atama yapmaya çalışıyor olabilirsiniz. Parantezleri ve fonksiyon çağrısını kaldırın."
-
-#: script_checking/error_database.csv
-msgid " use two equal signs (==) instead of one (=).\""
+msgid ""
+"You get this error when you try to assign a value to something that is not a variable.\n"
+"\n"
+"You can only assign values to variables. You cannot assign values to function calls or calculations.\n"
+"\n"
+"For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call, not a variable."
 msgstr ""
 
 #: script_checking/error_database.csv
-msgid "You get this error when you try to change the value of a constant."
-msgstr "Bu hata ile, bir sabitin değerini değiştirmeye çalıştığınızda karşılaşırsınız."
-
-#: script_checking/error_database.csv
-msgid " but once you set its value"
+msgid ""
+"Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name.\n"
+"\n"
+"If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call.\n"
+"\n"
+"If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
 msgstr ""
 
 #: script_checking/error_database.csv
-msgid " you cannot replace it."
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid " if you write [code]const MAX_SPEED = 100[/code]"
+msgid ""
+"You get this error when you try to change the value of a constant.\n"
+"\n"
+"A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it.\n"
+"\n"
+"For example, if you write [code]const MAX_SPEED = 100[/code], you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code].\n"
+"\n"
+"Many constants are built into Godot and GDScript, and you cannot change them either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters."
 msgstr ""
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid " you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code]."
-msgstr "Örneğin, [code]const MAX_SPEED = 100[/code] yazarsanız, daha sonra [code]MAX_SPEED = 200[/code] veya [code]MAX_SPEED += 50[/code] yazamazsınız."
+msgid ""
+"Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:\n"
+"\n"
+"1. If the value should never change, or it comes from Godot, remove the line that tries to change it.\n"
+"2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
+msgstr ""
+"1. Eğer değer asla değişmemeliyse, veya Godot'dan geliyorsa, onu değiştirmeye çalışan satırı kaldırın.\n"
+"2. Eğer değerin değişmesi gerekiyorsa, onu ilk oluşturduğunuzda [code]const[/code] yerine [code]var[/code] kullanın."
 
 #: script_checking/error_database.csv
-msgid " and you cannot change them either. For instance"
+msgid ""
+"You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line.\n"
+"\n"
+"In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character.\n"
+"\n"
+"If you accidentally type a space before a tab, or a tab before a space, the computer gets confused about your code's indentation."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid ""
+"To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters.\n"
+"\n"
+"Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference.\n"
+"\n"
+"Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid ""
+"A cyclic reference is when a class references itself, directly or indirectly.\n"
+"\n"
+"It has two possible causes:\n"
+"\n"
+"1. You used the class name in the class itself.\n"
+"2. Your code refers to another class that refers to this class, causing an endless reference cycle.\n"
+"\n"
+"Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
 msgstr ""
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid " you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters.\",\"Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:"
-msgstr "Neyi değiştirmeye çalıştığınıza bir bakın. Eğer bu bir sabitse ([code]const[/code] anahtar kelimesiyle tanımlanan, veya Godot'nun yerleşik parçası), iki seçeneğiniz vardır:"
-
-#: script_checking/error_database.csv
-msgid " or it comes from Godot"
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid " remove the line that tries to change it."
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid " use [code]var[/code] instead of [code]const[/code] when you first create it.\""
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid "You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line."
-msgstr "Bu hatayı, girintilerinizde boşluk ve sekmeleri karıştırdığınızda alırsınız. Bu, satırın başında bir sekmeden önce boşluk veya bir boşluktan önce sekme olduğunda meydana gelir."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard"
-msgstr "GDScript'te, kodunuzu girintilemek için yalnızca sekmeler (boşluklar değil) kullanmalısınız. Klavyenizdeki Tab tuşuna bastığınızda, bir sekme karakteri oluşturulur."
-
-#: script_checking/error_database.csv
-msgid " it creates a tab character."
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid " or a tab before a space"
-msgstr ""
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " the computer gets confused about your code's indentation.\",\"To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters."
-msgstr "Bu hatayı düzeltmek için, hata mesajında belirtilen satıra gidin. Önce satırın en başında bulunan tüm boşluk karakterlerini silin, ve sonra sekme karakterlerinden sonra görünen tüm boşlukları kaldırın."
-
-#: script_checking/error_database.csv
-msgid "Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference."
-msgstr "Sekme karakterleri, kodunuzda dikey bir çizgiye yönelen ok gibi görünür: ⇥. Boşluklar ise ortalanmış noktalar gibi görünür: ·. Farkı görmek için yakından bakın."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " make sure the line starts with only tab characters for indentation"
-msgstr "Ardından, satırın girintileme için yalnızca sekme karakterleriyle başladığından ve aralarında boşluk bulunmadığından emin olun."
-
-#: script_checking/error_database.csv
-msgid " with no spaces mixed in.\""
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid "A cyclic reference is when a class references itself, directly or indirectly."
-msgstr "Dönüşsel bir başvuru, bir sınıfın doğrudan ya da dolaylı bir şekilde kendisine başvuru yapmasıdır."
-
-#: script_checking/error_database.csv
-msgid "It has two possible causes:"
-msgstr "İki olası sebebi vardır:"
-
-#: script_checking/error_database.csv
-msgid "1. You used the class name in the class itself."
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid " causing an endless reference cycle."
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid " due to how GDScript works in Godot 3"
-msgstr ""
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime.\",\"Erase the type hint in the error line, and the problem should disappear."
-msgstr "Her iki durumda da GDScript'in Godot 3 içinde çalışma şeklinden dolayı, bunu yapamazsınız. Godot 4 bunu belki çözecektir, ama şimdilik sorunu başka şekilde çözmeye çalışmalısınız."
-
-#: script_checking/error_database.csv
-msgid " when we face this error"
-msgstr ""
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " we remove the type hints on lines causing cyclic references. It solves the problem in the vast majority of cases.\""
+msgid ""
+"Erase the type hint in the error line, and the problem should disappear.\n"
+"\n"
+"At GDQuest, when we face this error, we remove the type hints on lines causing cyclic references. It solves the problem in the vast majority of cases."
 msgstr "GDQuest'te, bir sorunla karşılaştığımızda, dönüşsel başvuruya sebep olan tip tanımlarını sileriz. Sorunlarımızın büyük çoğunluğu bu şekilde çözülüyor."
 
 #: script_checking/error_database.csv
-msgid "The indentation of your code (the number of tab characters at the start of the line) is incorrect."
-msgstr "Kodunun girinti miktarı yanlış (satır başındaki sekme karakterlerinin sayısı)."
+#, fuzzy
+msgid ""
+"The indentation of your code (the number of tab characters at the start of the line) is incorrect.\n"
+"\n"
+"You are missing one or more tabs, or you inserted too many.\n"
+"\n"
+"The computer uses those leading tab characters on code lines to know which lines of code are part of a code block, like a function."
+msgstr "Bilgisayar, kod satırlarının başındaki bu sekme karakterlerini kullanarak, hangi satırların yazdığınız kodun (mesela fonksiyonun) gövdesine ait olduğunu anlamaya çalışır."
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid " or you inserted too many."
-msgstr "Bir ya da daha fazla sekme karakteri eksik, ya da çok fazla kullandınız."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " like a function.\""
-msgstr "fonksiyon"
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid "If the line of code with the error is right after a line ending with a colon, like a function definition, you need one extra indent level compared to the previous line"
+msgid ""
+"If the line of code with the error is right after a line ending with a colon, like a function definition, you need one extra indent level compared to the previous line.\n"
+"\n"
+"In other words, your line should have one more leading tab character than the function definition."
 msgstr "Eğer hata kodunun gösterdiği satır, iki nokta üst üste ile biten bir satırdan sonra ise (mesela bir fonksiyon tanımı gibi), önceki satırdan bir seviye içeriye girinti yapmanız gerekir."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid " your line should have one more leading tab character than the function definition.\""
-msgstr "Başka bir deyişle, kodu yazdığınız satıra, fonksiyon tanımı satırından bir tane daha fazla sekme karakteri koymalısınız."
+msgid ""
+"You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code.\n"
+"\n"
+"You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character.\n"
+"\n"
+"Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code."
+msgstr ""
 
 #: script_checking/error_database.csv
-msgid "You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code."
-msgstr "Bu hatayı alıyorsanız, yazım kurallarına uymayan bir şey yazmışsınızdır, ya da bu satırdaki veya önceki satırdan devam eden kodu tamamlamak için gereken bir şey eksiktir."
+msgid ""
+"The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing.\n"
+"\n"
+"If the error says \"expected,\" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else.\n"
+"\n"
+"If it says \"unterminated,\" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
+msgstr ""
 
 #: script_checking/error_database.csv
-msgid "You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character."
-msgstr "Bilgisayar için bir kod yazarken son derece kesin olmalısınız. Bu tarz bir hatayı almak çok kolaydır, çünkü tek gereken bir tane hatalı karakterdir."
+msgid ""
+"You get this error when you use a special character that GDScript doesn't recognize.\n"
+"\n"
+"This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings).\n"
+"\n"
+"[b]Note:[/b] Godot 4 supports special and non-Latin characters in code (Unicode characters), but this app is built with Godot 3, which does not."
+msgstr ""
 
 #: script_checking/error_database.csv
-msgid "The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing."
-msgstr "Böyle bir hatanın çözümü büyük oranda içeriğe bağlıdır. Hata mesajı size, hangi karakter ya da öğenin eksik olduğunu söylüyor olmalıdır."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else"
-msgstr "Eğer hata \"expected\" (beklenen) diyorsa, [b]önceki[/b] satırların birinde bir şeyleri atlamış olmalısınız. Bir noktalama işareti, bir parantez, ya da başka bir şey."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
-msgstr "Eğer \"unterminated\" (sonlandırılmadı) diyorsa, bir ifadenin sonunda olması gereken bir karakteri unutmuşsunuzdur (mesela kapalı parantez). Bu durumda, sorun genelde hata mesajında verilen satırdadır."
-
-#: script_checking/error_database.csv
-msgid "You get this error when you use a special character that GDScript doesn't recognize."
-msgstr "GDScript'in tanımadığı özel bir karakter kullandığınızda bu hata mesajı görüntülenir."
-
-#: script_checking/error_database.csv
-msgid " à"
+msgid ""
+"To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements.\n"
+"\n"
+"You can use accented characters inside text strings (between quotes), but not in the code itself.\n"
+"\n"
+"You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
 msgstr ""
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid " ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings)."
-msgstr "Buna, kod talimatlarınızda (dizelerde değil) bulunan aksanlı harfler (é, à, ñ gibi), özel semboller, veya Latin alfabesi dışındaki karakterler dahildir."
+msgid ""
+"This error tells you that you are missing a parenthesis (or sometimes a comma or a path).\n"
+"\n"
+"Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code]."
+msgstr "GDScript'te üç tane kelime fonksiyon çağrısı gibi çalışır ve paranteze ihtiyaç duyar: [code]yield()[/code], [code]preload()[/code], ve [code]assert()[/code]."
 
 #: script_checking/error_database.csv
-msgid " but this app is built with Godot 3"
-msgstr ""
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " which does not.\",\"To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements."
-msgstr "Bu hatayı düzeltmek için, değişken adlarından, fonksiyon adlarından ve diğer kod öğelerinden aksanlı harfleri veya özel karakterleri kaldırın."
-
-#: script_checking/error_database.csv
-msgid " but not in the code itself."
-msgstr ""
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " change [code]café[/code] to [code]cafe[/code].\""
-msgstr "[code]0[/code] ile [code]length- 1[/code] (uzunluk - 1) arasında bir sayı listesi oluşturur."
-
-#: script_checking/error_database.csv
-msgid "This error tells you that you are missing a parenthesis (or sometimes a comma or a path)."
-msgstr "Bu hata, bir parantezi (ya da virgülü veya bir yolu) eksik yazdığınızı söyler."
-
-#: script_checking/error_database.csv
-msgid " [code]preload()[/code]"
-msgstr ""
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " and [code]assert()[/code].\",\"To address the error, you want to add the missing opening parenthesis, the closing parenthesis, or the comma.\""
+msgid "To address the error, you want to add the missing opening parenthesis, the closing parenthesis, or the comma."
 msgstr "Bu hatayı gidermek için, eksik olan açık parantezi, kapalı parantezi, ya da virgülü eklemek isteyebilirsiniz."
 
 #: script_checking/error_database.csv
-msgid "This error happens in several cases:"
-msgstr "Bu hata birkaç farklı durumda oluşabilir:"
-
-#: script_checking/error_database.csv
-msgid "1. You wrote an identifier (variable or function name) in the wrong place."
+#, fuzzy
+msgid ""
+"This error happens in several cases:\n"
+"\n"
+"1. You wrote an identifier (variable or function name) in the wrong place.\n"
+"2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name.\n"
+"3. You wrote a function definition but forgot the parentheses before the colon."
 msgstr ""
+"1. Bir tanımlayıcıyı (değişken ya da fonksiyon ismi) yanlış yerde kullandınız.\n"
+"2. [code]var[/code], [code]func[/code], [code]for[/code], ya da [code]signal[/code] gibi bir anahtar kelime yazdınız, ama bunun devamına bir isim eklemediniz.\n"
+"3. Bir fonksiyon tanımı yazdınız ama iki nokta üst üste 'den önceki parantezleri eklemediniz."
 
 #: script_checking/error_database.csv
-msgid " [code]func[/code]"
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid " [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid "If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses."
+#, fuzzy
+msgid ""
+"If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses.\n"
+"\n"
+"If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc.\n"
+"\n"
+"Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
 msgstr "Eğer bir hata size bir şey beklediğini (expected) söylüyorsa, [code]var[/code], [code]func[/code], [code]for[/code], ya da [code]signal[/code] gibi bir anahtar kelimeden sonra bir isim yazmayı unuttuğunuz için kod geçersiz hale gelmiştir. Ya da fonksiyon tanımlarken parantezleri unutmuşsunuzdur. Eksik olan ismi ya da parantezleri ekleyerek hatayı giderebilirsiniz."
 
 #: script_checking/error_database.csv
-msgid " you are likely missing a keyword like [code]var[/code]"
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid " [code]func[/code], [code]for[/code], etc."
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid " [code]for[/code] loop"
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid " or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code].\""
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid "This error tells you that you are missing a type somewhere. A type can be [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], and many identifiers representing a data structure."
+#, fuzzy
+msgid ""
+"This error tells you that you are missing a type somewhere. A type can be [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], and many identifiers representing a data structure.\n"
+"\n"
+"Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name.\n"
+"\n"
+"It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name."
 msgstr "Bu hata, bir yerlerde bir tip tanımını unuttuğunuzu söyler. Bir tip, [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], ve bunlar gibi veri yapılarını temsil eden daha pek çok tanımlayıcı olabilir."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid " this error occurs when you wrote a colon after a variable name but did not follow it with a type name."
-msgstr "Çoğunlukla, bu hatayı aldığınızda, bir değişken isminden sonra iki nokta üst üste yazmış, ama bunun devamında bir tip ismi belirtmemişsinizdir."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid "To solve this, you need to write the name of the type after the colon, arrow (in the case of function return types), inside parentheses (for export types), or after the [code]as[/code] keyword.\""
+msgid "To solve this, you need to write the name of the type after the colon, arrow (in the case of function return types), inside parentheses (for export types), or after the [code]as[/code] keyword."
 msgstr "Bunu çözmek için, iki nokta üst üste ve ok 'tan (fonksiyon bir dönüş tipine sahipse) sonra, parantezlerin içinde (dışa aktarım -export- tipleri için), veya [code]as[/code] anahtar kelimesinden sonra, ilgili tip ismini yazmalısınız."
 
 #: script_checking/error_database.csv
-msgid "The variable, function name, or class name you are trying to use does not exist."
-msgstr "Kullanmaya çalıştığınız değişken ismi, fonksiyon ismi veya sınıf ismi tanımlı değil."
-
-#: script_checking/error_database.csv
-msgid " forgot a letter... sometimes"
+msgid ""
+"The variable, function name, or class name you are trying to use does not exist.\n"
+"\n"
+"You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot.\n"
+"\n"
+"The other cause for this error is that you didn't define the variable, function, or class you're trying to access."
 msgstr ""
 
 #: script_checking/error_database.csv
-msgid " it's hard to spot."
+msgid ""
+"To solve this error, triple-check that there is no typo in the line.\n"
+"\n"
+"If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error.\n"
+"\n"
+"If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
 msgstr ""
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid " function"
-msgstr "fonksiyon"
+msgid ""
+"You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid.\n"
+"\n"
+"The [code]continue[/code] keyword means \"jump to the next iteration of the loop.\" And the [code]break[/code] keyword means \"end the loop right now and jump to the first line of code after the loop block."
+msgstr "[code]continue[/code] anahtar kelimesi \"döngünün sonraki yinelemesine sıçra\" anlamına gelir. Ve [code]break[/code] anahtar kelimesi \"döngüyü hemen şimdi bitir ve döngü gövdesinin bittiği ilk satıra zıpla\" anlamındadır."
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid " or class you're trying to access.\",\"To solve this error, triple-check that there is no typo in the line."
-msgstr "Bu hatayı çözmek için, tüm satırları yazım hataları için üç kere kontrol etmelisiniz."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " try to go to the variable or function definition"
-msgstr "Bir alınan değişken (parametre), bir fonksiyonun tanımının parçası olarak oluşturulan bir değişkendir."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " double-click the name, copy it, and paste it where you see the error."
-msgstr "Mümkünse, ilgili değişken ya da fonksiyon tanımına gidin, ismine çift tıklayın, kopyalayın ve hatayı daha iyi görebileceğiniz boş bir alana yapıştırın."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " then you need to ensure that you defined the variable"
-msgstr "Eğer bir yazım hatası göremiyorsanız, ilgili değişkeni, fonksiyonu, ya da sınıfı tanımladığınızdan emin olmalısınız."
-
-#: script_checking/error_database.csv
-msgid " function, or class you are referring to.\""
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid "You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid."
-msgstr "[code]break[/code] veya [code]continue[/code] gibi bazı anahtar kelimeleri sadece bir döngünün içinde kullanabilirsiniz. Bunlar döngü dışında geçersizdir."
-
-#: script_checking/error_database.csv
-msgid "If you wrote one of these keywords outside a loop, you need to remove it."
-msgstr "Eğer bu anahtar kelimelerden birini döngü dışında yazmışsanız, hemen kaldırmanız gerekiyor."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " your indentation is most likely at fault. You may need to insert one or more leading tab characters to the keyword.\""
+msgid ""
+"If you wrote one of these keywords outside a loop, you need to remove it.\n"
+"\n"
+"If you are trying to use it inside a loop, your indentation is most likely at fault. You may need to insert one or more leading tab characters to the keyword."
 msgstr "Eğer zaten döngü içinde kullandıysanız, bu durumda kodun girinti miktarı hatalıdır. Kelimenin olduğu satırın başına bir ya da iki tane daha sekme karakteri eklemelisiniz."
 
 #: script_checking/error_database.csv
-msgid "When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant."
-msgstr "Bilgisayar size sabit bir ifadeden bahsediyorsa (constant), sizden sabitlenmiş bir değer, sabit bir hesaplama, ya da var olan bir sabitin ismini istiyor demektir."
-
-#: script_checking/error_database.csv
 #, fuzzy
-msgid " it wants something that can never change. This is why the computer will reject function calls and variables where it needs a constant expression.\""
+msgid ""
+"When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant.\n"
+"\n"
+"In other words, it wants something that can never change. This is why the computer will reject function calls and variables where it needs a constant expression."
 msgstr "Diğer bir deyişle, hiç değişmeyecek bir şey istiyor demektir. Bilgisayarın, sabit ifadeler beklediği fonksiyon çağrıları ya da değişkenleri geri çevirme sebebi bundandır."
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid "You need to replace function calls or variables with a constant value like a whole number, decimal number, string, vector, a predefined array, etc"
+msgid ""
+"You need to replace function calls or variables with a constant value like a whole number, decimal number, string, vector, a predefined array, etc.\n"
+"\n"
+"You can also use arithmetic operators like multiplications (*), additions (+), and so on."
 msgstr "Fonksiyon çağrısını ya da değişkenlerini şunlar gibi sabit değerlerle değiştirmelisiniz: bir tam sayı, ondalıklı sayı, dize, vektör, ön tanımlı dizi, vb."
 
 #: script_checking/error_database.csv
-msgid " additions (+)"
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid " and so on.\""
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid "When defining a new class, you need to follow a specific pattern. You must write the name in plain text, starting with a letter."
+#, fuzzy
+msgid ""
+"When defining a new class, you need to follow a specific pattern. You must write the name in plain text, starting with a letter.\n"
+"\n"
+"We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name."
 msgstr "Yeni bir sınıf tanımlarken, belirli bir kalıbı takip etmelisiniz. Bir harf ile başlayan düz yazı bir isim yazmalısınız."
 
 #: script_checking/error_database.csv
-msgid "To fix this error, replace whatever you put after the 'extends' or 'class_name' keyword by a name without spaces and starting with a capital letter."
+#, fuzzy
+msgid ""
+"To fix this error, replace whatever you put after the 'extends' or 'class_name' keyword by a name without spaces and starting with a capital letter.\n"
+"\n"
+"You can optionally use numbers in the name, but not in the first position."
 msgstr "Bu hatayı düzeltmek için, 'extends' ya da 'class_name' anahtar kelimelerinden sonra her ne yazdıysanız, ilk harfi büyük olan ve boşluk içermeyen bir isimle değiştirmelisiniz."
 
 #: script_checking/error_database.csv
-msgid " but not in the first position.\""
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid "You are trying to define a function or variable that already exists; You can't do that."
-msgstr "Zaten var olan bir fonksiyon ya da değişkeni tanımlamaya çalışıyorsunuz. Bunu yapamazsınız."
+#, fuzzy
+msgid ""
+"You are trying to define a function or variable that already exists; You can't do that.\n"
+"\n"
+"Perhaps the function or variable already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
+msgstr "Bu aktif kod dosyasında bulunan bir fonksiyon ya da değişken, belki de bu GDScript kodunun içe aktarıp genişlettiği (extends) ana sınıfın içerisinde de tanımlanmıştır."
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid " but it may also be in a parent class that this GDScript code extends.\""
+msgid ""
+"In the app, your code extends some built-in Godot code that's not visible to you.\n"
+"\n"
+"When that happens, you need to either rename your function or variable to one that will not collide with an existing one or remove this line of code."
+msgstr "Bu olduğunda, yazdığınız fonksiyon ya da değişken ismini, var olanlarla çakışmayacak şekilde değiştirmeli veya bu kod satırını tamamen silmelisiniz."
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid ""
+"You are trying to define a signal that already exists; You can't do that.\n"
+"\n"
+"Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
 msgstr "Yazdığınız kod dosyasındaki bu sinyal, belki de bu GDScript kodunun içe aktarıp genişlettiği (extends) ana sınıfta da vardır."
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid "In the app, your code extends some built-in Godot code that's not visible to you"
-msgstr "Uygulama içinde yazdığınız kodlar, sizin göremediğiniz ama Godot içinde gömülü gelen bazı kodları içe aktarıp genişletir (extends)."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " you need to either rename your function or variable to one that will not collide with an existing one or remove this line of code.\""
-msgstr "Bu olduğunda, yazdığınız fonksiyon ya da değişken ismini, var olanlarla çakışmayacak şekilde değiştirmeli veya bu kod satırını tamamen silmelisiniz."
-
-#: script_checking/error_database.csv
-msgid "You are trying to define a signal that already exists; You can't do that."
-msgstr "Zaten var olan bir sinyali (signal) yeniden tanımlamaya çalışıyorsunuz. Bunu yapamazsınız."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " you need to either rename your signal to one that will not collide with an existing one or remove this line of code.\""
+msgid ""
+"In the app, your code extends some built-in Godot code that's not visible to you.\n"
+"\n"
+"When that happens, you need to either rename your signal to one that will not collide with an existing one or remove this line of code."
 msgstr "Bu olduğunda, yazdığınız fonksiyon ya da değişken ismini, var olanlarla çakışmayacak şekilde değiştirmeli ya da bu kod satırını tamamen silmelisiniz."
 
 #: script_checking/error_database.csv
-msgid "The function you're trying to define exists in a parent class, so your definition overrides the parent class's function."
-msgstr "Tanımlamaya çalıştığınız fonksiyon, ana sınıfın içinde zaten tanımlı durumda, yani sizin tanımlamanız ana sınıftaki fonksiyonun üzerine yazıyor."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " the new function must match the parent. The new function should have the same number and type of parameters as the parent class."
-msgstr "Ana sınıfın bir fonksiyonunun üzerine yazacaksanız, yeni fonksiyon ana sınıftaki ile eşdeğer olmalıdır. Yeni fonksiyonun parametrelerinin sayısı ve tipleri, ana sınıfın fonksiyonu ile aynı olmalıdır."
-
-#: script_checking/error_database.csv
-msgid " if the parent has two arguments"
+msgid ""
+"The function you're trying to define exists in a parent class, so your definition overrides the parent class's function.\n"
+"\n"
+"When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class.\n"
+"\n"
+"For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class."
 msgstr ""
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid " you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class.\",\"You need to check the parent class's function and its definition in the code reference. Then, you need to edit your function definition to have the same number and type of parameters as the parent class.\""
+msgid "You need to check the parent class's function and its definition in the code reference. Then, you need to edit your function definition to have the same number and type of parameters as the parent class."
 msgstr "Ana sınıfın fonksiyonunu ve nasıl tanımlandığını, kod başvuru kaynaklarından kontrol etmelisiniz. Sonra, fonksiyon tanımını, girdi değişkenlerinin sayılarını ve tiplerini ana sınıftaki ile aynı olacak şekilde yeniden düzenlemelisiniz."
 
 #: script_checking/error_database.csv
@@ -476,92 +349,67 @@ msgid "You need to either remove, add, or change the values you're trying to pas
 msgstr "Bunu çözmek için, ya fonksiyona gönderdiğiniz değişkenlere ekleme yapmalı, ya bunlardan birkaçını çıkarmalı, ya da bunların değerlerini değiştirmelisiniz. Tam olarak kaç tane girdi değişkeni gerektiğini görmek için kod başvuru kaynaklarına bakmanız gerekiyor. Bunlar size fonksiyonun nasıl tanımlandığını ve gerekli olan girdi değişkenlerini gösterecektir."
 
 #: script_checking/error_database.csv
-msgid "All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!"
-msgstr "Kodunuzdaki bütün değerler, belirli bir tipe sahiptir. Bunlar bir tam sayı (int), bir ondalık sayı (float), bir dize (String), ve benzeri olabilirler. Mümkün olan tonlarca farklı tip var, ve dahası kendiniz yeni bir tip tanımlayabilirsiniz!"
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " the computer compares the types you are using."
-msgstr "Bir işlem yaptığınızda, bilgisayar kullandığınız bu tipleri karşılaştırır."
-
-#: script_checking/error_database.csv
-msgid " and some are not. For example"
+msgid ""
+"All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!\n"
+"\n"
+"When you make any operation, the computer compares the types you are using.\n"
+"\n"
+"Some types are compatible, and some are not. For example, you cannot directly add a whole number to a text string. You first need to convert the number into text.\n"
+"\n"
+"You'll need to read the error message to see what is not matching because there are many possible cases."
 msgstr ""
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid " you cannot directly add a whole number to a text string. You first need to convert the number into text."
-msgstr "Bazı tipler uyumludur, bazıları uyumsuz. Örnek olarak, bir tam sayı ile bir dizeyi doğrudan toplayamazsınız. İlk önce sayıyı bir dizeye çevirmeniz gerekir."
-
-#: script_checking/error_database.csv
-msgid "If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=)."
-msgstr "Eğer hata, atamaya çalıştığınız değerin, değişken ile uyuşmadığını söylüyorsa (value type), sorun eşitlik (=) işaretinin sağ tarafındadır."
+msgid ""
+"If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=).\n"
+"\n"
+"If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic.\n"
+"\n"
+"If the computer talks about an invalid operand, then the issue is that the operation does not exist for the type you're trying to use. For example, while you can add two 2D vectors, you can't add a whole number or text to a 2D vector."
+msgstr "Eğer bilgisayar, geçersiz bir işlenen (operand) var diyorsa, böyle bir işlemin kullanmaya çalıştığınız tip için tanımlı olmadığı anlamındadır. Örneğin, iki tane 2D vektörü birbirine ekleyebilirken, bir 2D vektörü ile bir sayıyı ya da yazıyı toplayamazsınız."
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid " then it is the value after the return keyword that is problematic."
-msgstr "Eğer hata, geri dönüş tipinin fonksiyon ile uyuşmadığını söylerse (return type), bu durumda sorun \"return\" anahtar kelimesinden sonra yazılan değerdedir."
-
-#: script_checking/error_database.csv
-msgid " then the issue is that the operation does not exist for the type you're trying to use. For example"
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid " while you can add two 2D vectors, you can't add a whole number or text to a 2D vector.\""
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid "GDScript supports type inference. The computer will automatically recognize the type of value you are working with. In some cases, though, it can't figure it out."
+msgid ""
+"GDScript supports type inference. The computer will automatically recognize the type of value you are working with. In some cases, though, it can't figure it out.\n"
+"\n"
+"When that happens, you need to specify the type yourself or remove type inference altogether for this variable."
 msgstr "GDScript, tip çıkarımı yapabilir. Bilgisayar, üzerinde çalıştığınız değer tipini kendiliğinden tanıyabilir. Yine de bazı durumlarda bunu başaramaz."
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid " you need to specify the type yourself or remove type inference altogether for this variable.\""
-msgstr "Bu olduğunda, ilgili tip tanımını kendiniz yapabilir veya bu değişken için tip çıkarımını tümüyle kaldırabilirsiniz."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid "The simplest way to solve this error is to remove types for this variable or this function's arguments. Otherwise, you can manually specify the value type after the colon"
+msgid ""
+"The simplest way to solve this error is to remove types for this variable or this function's arguments. Otherwise, you can manually specify the value type after the colon.\n"
+"\n"
+"We recommend specifying the type whenever possible to reap the typing system's benefits."
 msgstr "Bu hatayı çözmenin en kolay yolu, bu değişkenden ya da fonksiyonun girdi değişkenlerinden tipleri kaldırmak. Aksi durumda, iki nokta üst üsteden sonra tip değerini elle girerek tanımlamalısınız."
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid "We recommend specifying the type whenever possible to reap the typing system's benefits.\""
-msgstr "Tip sisteminin nimetlerinden yararlanmak için, mümkün olduğu kadar tipleri belirtmenizi tavsiye ediyoruz."
-
-#: script_checking/error_database.csv
-msgid "There is an issue with the return value of your function. There are two main cases here:"
-msgstr "Fonksiyonunuzun dönüş değerinde bir sorun var. Burada iki durum söz konusu:"
-
-#: script_checking/error_database.csv
-msgid " thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
+msgid ""
+"There is an issue with the return value of your function. There are two main cases here:\n"
+"\n"
+"1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()').\n"
+"2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
 msgstr ""
-
-#: script_checking/error_database.csv
-msgid " but you are not returning a value in all possible branches (if"
-msgstr ""
+"1. Fonksiyonunuz bir boş (void) fonksiyondur ve herhangi bir değer döndürmemelidir. Bu tip fonksiyonlar, '-> void' söz dizimiyle tanımlanan fonksiyonlar ve sınıf yapıcılarıdır ('_init()').\n"
+"2. Fonksiyonunuz için bir dönüş tipi tanımladınız, ama gerekli tüm kollardan (if, elif ve else kalıpları) ya da en son satırdan bir değer geri döndürmüyorsunuz."
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid " elif, and else blocks) or at the end.\",\"When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that."
+msgid ""
+"When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that.\n"
+"\n"
+"When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
 msgstr "Fonksiyonunuz 'void' ise (boş), geriye bir değer döndürmemelisiniz. 'return' anahtar kelimesini, fonksiyonu erken sonlandırmak için kullanabilirsiniz, ama bunun arkasına hiçbir şey yazmamalısınız."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid " you must always return something at the end of the function or in every branch (if"
-msgstr "Bir dönüş tipi kullanıyorsanız, ya fonksiyon bitiminde ya da fonksiyonun her bir kolunda (if, elif, and else) aynı şekilde dönüş yapmalısınız."
-
-#: script_checking/error_database.csv
-msgid " elif, and else block) of the function.\""
-msgstr ""
 
 #: script_checking/error_database.csv
 msgid "Godot was unable to load your script, yet the language checker found nothing wrong."
 msgstr "Godot, betik dosyanızı yüklemeyi başaramadı, ama yine de dil kontrolcüsü herhangi bir sorun tespit edemedi."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid "Please click on the \"\"report\"\" button at the top and please let us know."
+msgid "Please click on the \"report\" button at the top and please let us know."
 msgstr "Lütfen yukarıdaki \"bildir\" düğmesine tıklayın ve bunu bize haber verin."
 
 #: script_checking/error_database.csv
@@ -581,12 +429,12 @@ msgid "To fix this, you need to either add a [code]break[/code] statement inside
 msgstr "Bunu düzeltmek için, ya döngünün içine [code]break[/code] ifadesini ekleyerek belirli bir koşul sağlandığında döngünün sonlanmasını sağlamalısınız, ya da while döngüsünün koşulunu sonradan değişip yanlış (false) olacak şekilde değiştirmeniz gerekir. Örneğin: [code]while position.x < 100: position.x -= 10[/code]."
 
 #: script_checking/error_database.csv
-msgid "The computer reached the end of the line of code, but the line had a syntax error."
+msgid ""
+"The computer reached the end of the line of code, but the line had a syntax error.\n"
+"The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
 msgstr ""
-
-#: script_checking/error_database.csv
-msgid " but you forget to add a matching closing quote.\""
-msgstr ""
+"Bilgisayar, kodun son satırına ulaştı, ama bu satırda bir yazım hatası var.\n"
+"En yaygın durum, yukarıda bir yerlerde bir dizeyi kapatmayı unutmanızdır: başlangıç tırnak işaretini koyarsınız, ama karşılık gelen kapanış tırnağını unutursunuz."
 
 #: script_checking/error_database.csv
 msgid "Double-check that you are not missing a quote character or that the quote character you used to start the string is the same as the one you used to close the string."
@@ -598,204 +446,139 @@ msgstr "Kullanmaya çalıştığınız alt-değişken tanımlı değil."
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid "You probably have a typo in the name of the sub-variable that you are trying to access"
-msgstr "Muhtemelen, kullanmaya çalıştığınız alt-değişkenin isminde bir yazım hatası yaptınız."
-
-#: script_checking/error_database.csv
-#, fuzzy
-msgid "Ensure that you don't have a capital letter where you should have a lowercase letter and vice versa.\""
+msgid ""
+"You probably have a typo in the name of the sub-variable that you are trying to access.\n"
+"\n"
+"Ensure that you don't have a capital letter where you should have a lowercase letter and vice versa."
 msgstr "Küçük harf kullanmanız gereken yerde büyük harf kullanmadığınıza emin olun, ya da tam tersi."
 
-#: course/glossary.csv
+#: course/glossary.csv course/documentation.csv
 #, fuzzy
-msgid "Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods"
-msgstr "Üye fonksiyonlar, diziler (array), dizeler (string), ve sözlükler (dictionary) gibi belirli bir değer tipine bağlanmış fonksiyonlardır. Bunlara ayrıca metotlar da denilir."
+msgid "explanation"
+msgstr "yineleme"
 
 #: course/glossary.csv
-#, fuzzy
-msgid " arrays have member functions like [code]array.append()[/code]."
-msgstr "Örneğin, dizilerin [code]array.append()[/code] (arkaya ekleme) gibi üye fonksiyonları vardır."
-
-#: course/glossary.csv
-msgid " as shown above.\""
+msgid ""
+"Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods.\n"
+"\n"
+"For example, arrays have member functions like [code]array.append()[/code].\n"
+"\n"
+"You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
 msgstr ""
 
 #: course/glossary.csv
 #, fuzzy
-msgid "Member variables are variables attached to a specific value type, like a vector's [code]x[/code] and [code]y[/code] sub-variables. We also call them [i]properties[/i] or [i]fields[/i] of the vector"
+msgid ""
+"Member variables are variables attached to a specific value type, like a vector's [code]x[/code] and [code]y[/code] sub-variables. We also call them [i]properties[/i] or [i]fields[/i] of the vector.\n"
+"\n"
+"To access a member variable, you must first write the value's name followed by the access operator ([code].[/code]). For example, [code]position.x[/code]."
 msgstr "Üye değişkenler, belirli bir değer tipine bağlanmış değişkenlerdir; örneğin bir vektörün (vector) [code]x[/code] ve [code]y[/code] alt-değişkenleri gibi. Bunları ayrıca değer tipinin, mesela vektörün, [i]özellikleri[/i] veya [i]alanları[/i] olarak da isimlendiririz."
 
 #: course/glossary.csv
 #, fuzzy
-msgid " [code]position.x[/code].\""
-msgstr "[code]func move_to_position(x, y):[/code]"
-
-#: course/glossary.csv
-#, fuzzy
-msgid "A parameter is a variable you create as part of a function definition"
-msgstr "Bir alınan değişken (parametre), bir fonksiyonun tanımının parçası olarak oluşturulan bir değişkendir."
-
-#: course/glossary.csv
-#, fuzzy
-msgid "It allows you to reuse the function more by having values that vary in the function's body.\""
+msgid ""
+"A parameter is a variable you create as part of a function definition.\n"
+"\n"
+"It allows you to reuse the function more by having values that vary in the function's body."
 msgstr "Bu bize, fonksiyon içinde değişebilen farklı değerler ile fonksiyonu farklı şekillerde yeniden kullanmamızı sağlar."
 
 #: course/glossary.csv
-#, fuzzy
-msgid "A radian is a unit of measurement of angles based on the circle's circumference"
-msgstr "Bir radyan, bir dairenin çevresini temel alan bir açı ölçme birimidir."
-
-#: course/glossary.csv
-msgid " and especially in games, radians are common."
+msgid ""
+"A radian is a unit of measurement of angles based on the circle's circumference.\n"
+"\n"
+"We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common.\n"
+"\n"
+"An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
 msgstr ""
 
 #: course/glossary.csv
 #, fuzzy
-msgid "An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees.\""
-msgstr "[code]2 * PI[/code] radyanlık bir açı 360 dereceye karşılık gelir. Ve [code]PI[/code] radyanlık açı da 180 derecedir."
-
-#: course/glossary.csv
-#, fuzzy
-msgid "In computer programming, a type is the class of a value. For example, whole numbers like [code]3[/code], [code]11[/code], and [code]255462[/code] are all of type [code]int[/code] (short for integer)"
+msgid ""
+"In computer programming, a type is the class of a value. For example, whole numbers like [code]3[/code], [code]11[/code], and [code]255462[/code] are all of type [code]int[/code] (short for integer).\n"
+"\n"
+"The computer uses types to determine which operations are valid between two values and when they're undefined."
 msgstr "Bilgisayar programcılığında bir tip, bir değerin sınıfıdır. Mesela, [code]3[/code], [code]11[/code], ve [code]255462[/code] gibi tam sayıların hepsi [code]int[/code] (integer'ın kısaltması) tipindedir."
 
 #: course/glossary.csv
 #, fuzzy
-msgid "The computer uses types to determine which operations are valid between two values and when they're undefined.\""
-msgstr "Bilgisayarlar, iki değer arasında hangi işlemlerin geçerli olduğunu ve bunların ne zaman tanımsız olduğunu belirlerken tipleri kullanır."
-
-#: course/glossary.csv
-#, fuzzy
-msgid "In computer code, an iteration is one repetition of some process or code. We typically use the term with loops, where one iteration is one run of the loop's code"
+msgid ""
+"In computer code, an iteration is one repetition of some process or code. We typically use the term with loops, where one iteration is one run of the loop's code.\n"
+"\n"
+"When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
 msgstr "Bilgisayar kodunda bir yineleme, bir işlem ya da kodun bir kere tekrarlamasıdır. Bu terimi genellikle döngülerde kullanırız; bir yineleme döngüdeki kodun bir kere çalışmasıdır."
 
 #: course/glossary.csv
-#, fuzzy
-msgid " an iteration can mean a full pass of the algorithm on a data set.\""
-msgstr "Algoritmalardan bahsederken ise, bir yineleme, bir veri kümesi üzerinde algoritmanın bir tam geçiş yapması anlamını taşıyabilir."
-
-#: course/glossary.csv
-#, fuzzy
-msgid "In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers"
-msgstr "Matematikte, bir vektör (vector) bir numara listesidir. Oyunlarda, genellikle 2B ve 3B vektörleri kullanırız; yani iki ve üç numaradan oluşan listeler."
-
-#: course/glossary.csv
-#, fuzzy
-msgid " you can use a vector to represent the direction and speed at which a character or a vehicle moves."
-msgstr "Bunları, yön ve büyüklüğü ya da uzaysal yoğunluğu betimlemek için kullanırız. Örneğin, bir karakter ya da aracın hareket yönünü ve hızını betimlerken bir vektör kullanırız."
-
-#: course/glossary.csv
-msgid " they'll simplify code tremendously.\""
+msgid ""
+"In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers.\n"
+"\n"
+"We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves.\n"
+"\n"
+"Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
 msgstr ""
 
 #: course/glossary.csv
-#, fuzzy
-msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument"
-msgstr "Bir girilen değişken (argüman), bir fonksiyonu çağırırken, fonksiyona girdiğiniz değerlerdir. Örneğin, [code]rotate(0.5)[/code] çağırmasında, parantez içindeki [code]0.5[/code] değeri bir girilen değişkendir."
-
-#: course/glossary.csv
-#, fuzzy
-msgid " or multiple arguments. Arguments can be required or optional."
-msgstr "Bir fonksiyon hiçbir değer almayabileceği gibi, tek bir değer ya da çoklu değerler de alabilir. Girilen değişkenler zorunlu ya da isteğe bağlı olabilirler."
-
-#: course/glossary.csv
-msgid " 100)[/code]"
+msgid ""
+"An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument.\n"
+"\n"
+"A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional.\n"
+"\n"
+"When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]\n"
+"\n"
+"When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i].\n"
+"\n"
+"But when you [i]write[/i] a function definition, we call them [i]parameters[/i] instead. Here's an example:\n"
+"\n"
+"[code]func move_to_position(x, y):[/code]\n"
+"\n"
+"In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
 msgstr ""
 
 #: course/glossary.csv
-#, fuzzy
-msgid " we call the values in parentheses [i]arguments[/i]."
-msgstr "Bir fonksiyonu [i]çağırırken[/i], parantez içine girdiğimiz değerlere [i]girilen değişken (argüman)[/i] ismini veriyoruz."
-
-#: course/glossary.csv
-#, fuzzy
-msgid " we call them [i]parameters[/i] instead. Here's an example:"
-msgstr "Ancak bir fonksiyon tanımı [i]yazarken[/i], bunlara [i]alınan değişkenler (parametre)[/i] diyoruz. İşte bir örnek:"
-
-#: course/glossary.csv
-msgid " y):[/code]"
+msgid ""
+"An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value.\n"
+"\n"
+"To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]\n"
+"\n"
+"In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere.\n"
+"\n"
+"Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
 msgstr ""
-
-#: course/glossary.csv
-#, fuzzy
-msgid " [code]x[/code] and [code]y[/code] are [i]parameters[/i].\""
-msgstr "Bu fonksiyon tanımında, [code]x[/code] ve [code]y[/code] [i]alınan değişken (parametre)[/i]'lerdir."
-
-#: course/glossary.csv
-#, fuzzy
-msgid "An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value"
-msgstr "Bir dizi, bir değerler listesidir. GDScript'te, diziler [i]herhangi[/i] bir değer tipini taşıyabilirler."
-
-#: course/glossary.csv
-msgid " 2, 3][/code]"
-msgstr ""
-
-#: course/glossary.csv
-#, fuzzy
-msgid " lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere."
-msgstr "Oyunlarda, dizileri sürekli kullanırız; bir takımdaki karakterleri listelemek, envanterdeki öğelerin listesini tutmak, oyuncunun kilidini açtığı büyülerin listesini saklamak ve örnekler uzar gider. Bunlar her yerdeler."
-
-#: course/glossary.csv
-#, fuzzy
-msgid "Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language.\""
-msgstr "Diziler, bilgisayar programcılığının en temel değer tiplerinden biridir. Dizileri, belki de her tür programlama dilinde bulabilirsiniz."
 
 #: course/glossary.csv
 msgid "Assigning a value to a variable means that you store a value inside the variable. You do this with the equal sign ([code]=[/code])."
 msgstr "Bir değeri bir değişkene atamak demek, bu değeri değişkenin içinde tutmak demektir. Bunun için eşitlik işareti ([code]=[/code]) kullanırsınız."
 
 #: course/glossary.csv
-#, fuzzy
-msgid "A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value"
-msgstr "Bir sözlük, verilen değerleri, anahtar-değer çifti şeklinde haritalayan veri yapılarıdır. Bir sözlüğe bir anahtar verdiğinizde, karşılık olarak size, eşleşen değeri bulup geri döndürür."
+msgid ""
+"A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value.\n"
+"\n"
+"In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game.\n"
+"\n"
+"You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database.\n"
+"\n"
+"Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
+msgstr ""
+
+#: course/glossary.csv
+msgid ""
+"A for loop instructs the computer to repeat a set of instructions once for each value in an array.\n"
+"\n"
+"In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body.\n"
+"\n"
+"For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met.\n"
+"\n"
+"We recommend favoring for loops when you can. They're safer and easier to use than while loops."
+msgstr ""
 
 #: course/glossary.csv
 #, fuzzy
-msgid " but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game."
-msgstr "GDScript'te, anahtarlar birçok şey olabilir. Genellikle yazı dizeleri ya da numaralar kullanırız, ama bununla sınırlı değilsiniz. Bir [code]Vector2[/code] de geçerli anahtar olabilir; ızgara-temelli bir oyunda, bir ızgara hücresini bir birime ya da bir öğeye haritalamak oldukça kullanışlı olur."
-
-#: course/glossary.csv
-#, fuzzy
-msgid " we could use them to associate an equipment's name with its weapon stats in a database."
-msgstr "Oyunlarınızda veri parçalarını ilişkilendirmek için sözlükleri sıklıkla kullanacaksınız. Örneğin, bir ekipmanın adını, onun veri tabanındaki silah bilgileri ile ilişkilendirmek için kullanabiliriz."
-
-#: course/glossary.csv
-#, fuzzy
-msgid " they are a fundamental data type that you will see in many programming languages and use a lot.\""
-msgstr "Sözlükler, diziler gibi, birçok programlama dilinde görebileceğiniz ve sıklıkla kullanacağınız en temel veri tiplerinden biridir."
-
-#: course/glossary.csv
-#, fuzzy
-msgid "A for loop instructs the computer to repeat a set of instructions once for each value in an array"
-msgstr "Bir \"for\" döngüsü, bilgisayara, bir dizinin içindeki her bir değer için bir kere olmak üzere, bir talimat setini yinelemesini emreder."
-
-#: course/glossary.csv
-#, fuzzy
-msgid " the compiler extracts one value from the array and gives you access to it in the loop's body."
-msgstr "Her bir döngü yinelemesinde, derleyici, diziden bir değer çeker ve döngü içerisinde buna erişmeyi sağlar."
-
-#: course/glossary.csv
-msgid "For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met."
-msgstr "\"for\" döngüleri, kodu belli bir sayıda çalıştırır; dizideki her bir değer için bir kere. Bu döngü tipi, belli bir şart sağlanana kadar tekrar eden \"while\" döngüsünden farklıdır."
-
-#: course/glossary.csv
-#, fuzzy
-msgid "We recommend favoring for loops when you can. They're safer and easier to use than while loops.\""
-msgstr "Mümkün oldukça \"for\" döngülerini tercih etmenizi öneririz. Hem daha güvenli hem de kullanımı \"while\" döngülerinden kolaydır."
-
-#: course/glossary.csv
-#, fuzzy
-msgid "A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains"
-msgstr "Bir fonksiyon, bir isim altında topladığınız gruplanmış kod talimatlarıdır. Bir fonksiyon bir kez tanımladığınızda, içindeki tüm talimatları çalıştırmak için ne zaman isterseniz çağırabilirsiniz."
-
-#: course/glossary.csv
-msgid "You can modify a function's behavior with parameters. Parameters are variable names that you write in the function definition. You can then use them in the function's body to make your code adapt to different cases."
+msgid ""
+"A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains.\n"
+"\n"
+"You can modify a function's behavior with parameters. Parameters are variable names that you write in the function definition. You can then use them in the function's body to make your code adapt to different cases.\n"
+"\n"
+"Also, functions can optionally return a value to the code calling it."
 msgstr "Bir fonksiyonun davranışını, alınan değişkenler (parametreler) ile değiştirebilirsiniz. Bunlar fonksiyon tanımında yazdığınız değişken isimleridir. Bunları fonksiyon içerisinde, kodunuzu farklı durumlara uyarlamak için kullanabilirsiniz."
-
-#: course/glossary.csv
-#, fuzzy
-msgid " functions can optionally return a value to the code calling it.\""
-msgstr "Ayrıca fonksiyonlar, isteğe bağlı olarak, geriye değer de döndürebilirler."
 
 #: course/glossary.csv
 msgid "An increment is the amount by which a value changes in your code."
@@ -803,55 +586,35 @@ msgstr "Bir artış, kodunuzdaki bir değerin değişme miktarıdır."
 
 #: course/glossary.csv
 #, fuzzy
-msgid "In computer programming, instructions are a single operation the computer recognizes and can execute"
+msgid ""
+"In computer programming, instructions are a single operation the computer recognizes and can execute.\n"
+"\n"
+"For example, a function call, an addition, or assigning a value to a variable."
 msgstr "Bilgisayar programcılığında, talimatlar, bilgisayarın tanıdığı ve çalıştırabileceği tekil işlemlerdir."
 
 #: course/glossary.csv
-#, fuzzy
-msgid " an addition, or assigning a value to a variable.\""
-msgstr "Örneğin, bir fonksiyon çağırma, toplama işlemi yapma, ya da bir değişkene değer atamak gibi."
-
-#: course/glossary.csv
-#, fuzzy
-msgid "Variables are a tool to give a name to values you want to store in your code and change over time"
-msgstr "Değişkenler, kodunuzun içinde saklamak istediğiniz ve zamanla değişebilen değerlere isim vermeye yarayan araçlardır."
-
-#: course/glossary.csv
-#, fuzzy
-msgid " you want it to go down. When healing, you want the health to go back up."
-msgstr "Örneğin, bir karakterin sağlığı gibi: karakter hasar aldığı zaman, sağlığının azalmasını istersiniz. İyileşmesi durumunda, sağlığının tekrar artmasını istersiniz."
-
-#: course/glossary.csv
-msgid "You can create a variable named [code]health[/code] to represent the health."
-msgstr "Sağlığı temsil etmesi için [code]health[/code](sağlık) isminde bir değişken oluşturabilirsiniz."
-
-#: course/glossary.csv
-#, fuzzy
-msgid " the computer will fetch the corresponding value in its memory for you."
-msgstr "Bundan sonra kodunuzda, ne zaman klavyeden [code]health[/code] yazarsanız, bilgisayar hafızasında karşılık gelen değeri sizin için bulup getirecektir."
-
-#: course/glossary.csv
-msgid " in that case, a new value.\""
+msgid ""
+"Variables are a tool to give a name to values you want to store in your code and change over time.\n"
+"\n"
+"For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up.\n"
+"\n"
+"You can create a variable named [code]health[/code] to represent the health.\n"
+"\n"
+"Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you.\n"
+"\n"
+"Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
 msgstr ""
 
 #: course/glossary.csv
-#, fuzzy
-msgid "A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running"
-msgstr "Bir \"while\" döngüsü bilgisayara, bir şarta bağlı olarak kodu sürekli çalıştırmasını emreder. Eğer şart geçerli ise, döngü sonsuza kadar çalışır."
-
-#: course/glossary.csv
-#, fuzzy
-msgid " you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong."
-msgstr "\"while\" döngülerini kodlarken dikkatli olmanız gerekir: eğer şartı yanlış seçerseniz, döngü sonsuza kadar çalışır ve bilgisayarınız donar."
-
-#: course/glossary.csv
-msgid "That's why we recommend using the safer for loop whenever you can."
-msgstr "Mümkün olduğunca daha güvenli olan \"for\" döngüsünü kullanmanızı önerme sebebimiz bu yüzdendir."
-
-#: course/glossary.csv
-#, fuzzy
-msgid " like processing files, processing computer code, or for powerful algorithms.\""
-msgstr "Yine de \"while\" döngülerini kullanmanın çok gerekli olduğu durumlar da vardır; dosyaları işlemek, bilgisayar kodu işletmek, ya da güçlü algoritmalar yazmak."
+msgid ""
+"A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running.\n"
+"\n"
+"When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong.\n"
+"\n"
+"That's why we recommend using the safer for loop whenever you can.\n"
+"\n"
+"However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
+msgstr ""
 
 #: course/glossary.csv
 msgid "We talk about a loop or a function's body to refer to the lines of code that are part of the loop or function."
@@ -859,12 +622,11 @@ msgstr "Bir döngüden ya da bir fonksiyon'un içinden (gövdesinden) bahsederke
 
 #: course/glossary.csv
 #, fuzzy
-msgid "Returning a value is the process of sending a value to the place where you call a function"
-msgstr "Bir değeri geri döndürmek, bir fonksiyonu çağırdığınız noktaya bir değer döndürme işlemidir."
-
-#: course/glossary.csv
-msgid " for example: [code]return -1[/code].\""
-msgstr ""
+msgid ""
+"Returning a value is the process of sending a value to the place where you call a function.\n"
+"\n"
+"It happens when a function uses the [code]return[/code] keyword followed by a value, for example: [code]return -1[/code]."
+msgstr "Bunun için bir fonksiyon [code]return[/code] kelimesinden hemen sonra bir değer kullanır; örneğin [code]return -1[/code] gibi."
 
 #: course/glossary.csv
 msgid "A collection of valuable and reusable code bundled together by other programmers to save you time. All programmers use code libraries."
@@ -916,7 +678,7 @@ msgstr "Varlığın dikey eksen üzerindeki konumu."
 
 #: course/documentation.csv
 #, fuzzy
-msgid " \"Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false"
+msgid " Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false, normalizes the movement."
 msgstr "[code]Node._process[/code]'in [code]delta[/code]'sını temel alarak, düğümün X eksenine yerel bir yer değiştirme uygular. [code]scaled[/code] (ölçekli) değeri false ise, hareketi normalize eder."
 
 #: course/documentation.csv
@@ -924,82 +686,95 @@ msgid "Stores how many cells make up the width ([code]board_size.x[/code]) and h
 msgstr "Tahtanın genişliğini ([code]board_size.x[/code]) ve yüksekliğini ([code]board_size.y[/code]) oluşturan hücrelerin kaç tane olduğunu depolar."
 
 #: course/documentation.csv
-msgid "The cell position of the robot on the board. [code]Vector2(0, 0)[/code] is the square cell in the top left of the board."
-msgstr "Robotun tahta üzerindeki hücre konumu. [code]Vector2(0, 0)[/code], tahtanın sol üst köşesindeki kare hücredir."
+msgid "any"
+msgstr ""
 
 #: course/documentation.csv
-msgid "Creates a list of numbers from [code]0[/code] to [code]length - 1[/code]."
-msgstr "[code]0[/code] ile [code]length- 1[/code] (uzunluk - 1) arasında bir sayı listesi oluşturur."
+msgid "String"
+msgstr ""
 
 #: course/documentation.csv
-msgid "Orders the robot to play an animation."
-msgstr "Robota bir animasyon oynatmasını emreder."
-
-#: course/documentation.csv
-msgid "Selects units in the cell coordinates passed as the function's argument."
-msgstr "Fonksiyona girdi değişkeni olarak gönderilen hücre koordinatlarındaki birimleri seçer."
-
-#: course/documentation.csv
-msgid "Queues a move animation towards the target cell."
-msgstr "Hedef hücreye doğru bir hareket animasyonunu sıraya ekler."
-
-#: course/documentation.csv
-msgid "Adds the value passed as an argument at the back of the array."
-msgstr "Girdi değişkeni olarak gönderilen değeri, dizinin (array) sonuna ekler."
-
-#: course/documentation.csv
-msgid "Removes the first value from the array and returns it."
-msgstr "Dizideki ilk değeri diziden çıkarır ve bu değeri geri döndürür."
-
-#: course/documentation.csv
-msgid "Removes the last value from the array and returns it."
-msgstr "Dizideki son değeri diziden çıkarır ve bu değeri geri döndürür."
-
-#: course/documentation.csv
-msgid "Returns the argument converted into a [code]String[/code]. Works with the majority of value types."
-msgstr "Girdi değişkenini [code]String[/code] (dize) haline dönüştürüp geri döndürür. Değer tiplerinin çoğunluğunda işe yarar."
-
-#: course/documentation.csv
-msgid "Returns the argument converted into an [code]int[/code] (whole number) [i]if possible[/i]. Supports converting decimal numbers, strings, and booleans. Useful to convert player text input into numbers."
-msgstr "Girdi değişkenini, [i]eğer mümkünse[/i], bir [code]int[/code] (tam sayı) olarak dönüştürüp geri döndürür. Ondalık sayıları, dizeleri, ve mantıksalları dönüştürmeyi destekler. Oyuncudan gelen yazı girdilerini sayılara dönüştürmek için kullanışlıdır."
-
-#: course/documentation.csv
-msgid "Creates a new unit matching the type parameter and places it at the desired cell position on the game grid."
-msgstr "Girilen birim tipine uygun yeni bir birim oluşturur ve bunu oyun ızgarası (grid) üzerinde istenilen hücre konumuna yerleştirir."
-
-#: course/documentation.csv
-msgid "Creates a new item and displays it in the inventory."
-msgstr "Yeni bir öğe oluşturur ve bunu envanter içinde gösterir."
-
-#: course/documentation.csv
-msgid "Increases the item count by amount."
-msgstr "Öğe sayısını girilen değer kadar arttırır."
-
-#: course/documentation.csv
-msgid "Realigns the train track with the path. Select a train track in the tracks array by index to pass it as an argument."
-msgstr "Tren rayını yol ile yeniden hizalar. Girdi değişkeni olarak geçirmek için, raylar dizisindeki bir tren rayını indeksine göre seçin."
+msgid "int"
+msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
 
+#~ msgid "You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword."
+#~ msgstr "Bu hatayı alıyorsanız, [code]for[/code] ve [code]in[/code] arasındaki isim geçerli bir değişken ismi değildir, ya da [code]in[/code] kelimesini unutmuşsunuzdur."
+
+#~ msgid "To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces."
+#~ msgstr "Bu hatayı düzeltmek için, [code]for[/code] ve [code]in[/code] kelimeleri arasına, içinde noktalama işareti ya da boşluk bulunmayan geçerli bir değişken ismi girdiğinizden emin olmalısınız."
+
+#~ msgid "For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name."
+#~ msgstr "Örneğin, bu kod hatalıdır: [code]for cell_position.x in cell_positions_array:[/code]. Çünkü [code]cell_position.x[/code] geçerli bir değişken ismi değildir."
+
+#~ msgid "To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:"
+#~ msgstr "Bir değişkenin [code]x[/code] alt-elemanına erişmek için, bunu döngünün içerisinde aşağıdaki gibi kullanmalısınız:"
+
+#~ msgid ""
+#~ "[code]for cell_position in cell_positions_array:\n"
+#~ "    cell_position.x += 1.0[/code]"
+#~ msgstr ""
+#~ "[code]for cell_position in cell_positions_array: # \"for hücre_konumu in hücre_konumları_disizi\" anlamında\n"
+#~ "    cell_position.x += 1.0[/code]"
+
+#~ msgid "You get this error when you try to assign a value to something that is not a variable."
+#~ msgstr "Bu hatayı, değişken olmayan bir şeye değer atamaya çalıştığınızda alırsınız."
+
+#~ msgid "You can only assign values to variables. You cannot assign values to function calls or calculations."
+#~ msgstr "Yalnızca değişkenlere değer atayabilirsiniz. Fonksiyon çağrılarına veya hesaplamalara değer atayamazsınız."
+
+#~ msgid "For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call, not a variable."
+#~ msgstr "Örneğin, [code]randi() = 5[/code] yazamazsınız çünkü [code]randi()[/code] bir değişken değil, bir fonksiyon çağrısıdır."
+
+#~ msgid "Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name."
+#~ msgstr "Eşittir işaretinin (=) sol tarafına yazdıklarınızı kontrol edin. Bunun bir değişken adı olduğundan emin olun."
+
+#~ msgid "If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call."
+#~ msgstr "Sol tarafta parantez () görüyorsanız, bir fonksiyon çağrısına atama yapmaya çalışıyor olabilirsiniz. Parantezleri ve fonksiyon çağrısını kaldırın."
+
 #~ msgid "If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
 #~ msgstr "Bir koşulda iki değerin eşit olup olmadığını kontrol etmek istiyorsanız, bir tane eşittir (=) yerine iki tane eşittir işareti (==) kullanın."
+
+#~ msgid "You get this error when you try to change the value of a constant."
+#~ msgstr "Bu hata ile, bir sabitin değerini değiştirmeye çalıştığınızda karşılaşırsınız."
 
 #~ msgid "A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it."
 #~ msgstr "Bir sabit, değişmeyecek bir değeri tutan bir isimdir. Değişken gibidir, ancak değerini belirledikten sonra değiştiremezsiniz."
 
+#~ msgid "For example, if you write [code]const MAX_SPEED = 100[/code], you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code]."
+#~ msgstr "Örneğin, [code]const MAX_SPEED = 100[/code] yazarsanız, daha sonra [code]MAX_SPEED = 200[/code] veya [code]MAX_SPEED += 50[/code] yazamazsınız."
+
 #~ msgid "Many constants are built into Godot and GDScript, and you cannot change them either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters."
 #~ msgstr "Godot ve GDScript'te yerleşik olarak birçok sabit değer bulunur ve bunları da değiştiremezsiniz. Örneğin, [code]Vector2 = 5[/code] veya [code]PI = 3[/code] yazamazsınız. Sabitlerin isimleri genellikle büyük harflerle yazılır."
 
-#~ msgid ""
-#~ "1. If the value should never change, or it comes from Godot, remove the line that tries to change it.\n"
-#~ "2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
-#~ msgstr ""
-#~ "1. Eğer değer asla değişmemeliyse, veya Godot'dan geliyorsa, onu değiştirmeye çalışan satırı kaldırın.\n"
-#~ "2. Eğer değerin değişmesi gerekiyorsa, onu ilk oluşturduğunuzda [code]const[/code] yerine [code]var[/code] kullanın."
+#~ msgid "Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:"
+#~ msgstr "Neyi değiştirmeye çalıştığınıza bir bakın. Eğer bu bir sabitse ([code]const[/code] anahtar kelimesiyle tanımlanan, veya Godot'nun yerleşik parçası), iki seçeneğiniz vardır:"
+
+#~ msgid "You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line."
+#~ msgstr "Bu hatayı, girintilerinizde boşluk ve sekmeleri karıştırdığınızda alırsınız. Bu, satırın başında bir sekmeden önce boşluk veya bir boşluktan önce sekme olduğunda meydana gelir."
+
+#~ msgid "In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character."
+#~ msgstr "GDScript'te, kodunuzu girintilemek için yalnızca sekmeler (boşluklar değil) kullanmalısınız. Klavyenizdeki Tab tuşuna bastığınızda, bir sekme karakteri oluşturulur."
 
 #~ msgid "If you accidentally type a space before a tab, or a tab before a space, the computer gets confused about your code's indentation."
 #~ msgstr "Eğer yanlışlıkla sekmeden önce boşluk, veya boşluktan önce sekme yazarsanız, kodunuzun girintisi konusunda bilgisayarın kafası karışır."
+
+#~ msgid "To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters."
+#~ msgstr "Bu hatayı düzeltmek için, hata mesajında belirtilen satıra gidin. Önce satırın en başında bulunan tüm boşluk karakterlerini silin, ve sonra sekme karakterlerinden sonra görünen tüm boşlukları kaldırın."
+
+#~ msgid "Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference."
+#~ msgstr "Sekme karakterleri, kodunuzda dikey bir çizgiye yönelen ok gibi görünür: ⇥. Boşluklar ise ortalanmış noktalar gibi görünür: ·. Farkı görmek için yakından bakın."
+
+#~ msgid "Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
+#~ msgstr "Ardından, satırın girintileme için yalnızca sekme karakterleriyle başladığından ve aralarında boşluk bulunmadığından emin olun."
+
+#~ msgid "A cyclic reference is when a class references itself, directly or indirectly."
+#~ msgstr "Dönüşsel bir başvuru, bir sınıfın doğrudan ya da dolaylı bir şekilde kendisine başvuru yapmasıdır."
+
+#~ msgid "It has two possible causes:"
+#~ msgstr "İki olası sebebi vardır:"
 
 #~ msgid ""
 #~ "1. You used the class name in the class itself.\n"
@@ -1008,17 +783,50 @@ msgstr ""
 #~ "1. Sınıfın ismini, sınıfın kendi içinde kullanmışsınızdır.\n"
 #~ "2. Sınıfın içinde kullandığınız başka bir sınıf, tekrardan bu sınıfa başvuru yapıyordur, bu şekilde sonu olmayan bir başvuru döngüsüne sebep oluyordur."
 
+#~ msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
+#~ msgstr "Her iki durumda da GDScript'in Godot 3 içinde çalışma şeklinden dolayı, bunu yapamazsınız. Godot 4 bunu belki çözecektir, ama şimdilik sorunu başka şekilde çözmeye çalışmalısınız."
+
 #~ msgid "Erase the type hint in the error line, and the problem should disappear."
 #~ msgstr "Hatada belirtilen satırdaki tipi silerseniz, sorunun düzelmesi gerekir."
 
-#~ msgid "The computer uses those leading tab characters on code lines to know which lines of code are part of a code block, like a function."
-#~ msgstr "Bilgisayar, kod satırlarının başındaki bu sekme karakterlerini kullanarak, hangi satırların yazdığınız kodun (mesela fonksiyonun) gövdesine ait olduğunu anlamaya çalışır."
+#~ msgid "The indentation of your code (the number of tab characters at the start of the line) is incorrect."
+#~ msgstr "Kodunun girinti miktarı yanlış (satır başındaki sekme karakterlerinin sayısı)."
+
+#~ msgid "You are missing one or more tabs, or you inserted too many."
+#~ msgstr "Bir ya da daha fazla sekme karakteri eksik, ya da çok fazla kullandınız."
+
+#~ msgid "In other words, your line should have one more leading tab character than the function definition."
+#~ msgstr "Başka bir deyişle, kodu yazdığınız satıra, fonksiyon tanımı satırından bir tane daha fazla sekme karakteri koymalısınız."
+
+#~ msgid "You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code."
+#~ msgstr "Bu hatayı alıyorsanız, yazım kurallarına uymayan bir şey yazmışsınızdır, ya da bu satırdaki veya önceki satırdan devam eden kodu tamamlamak için gereken bir şey eksiktir."
+
+#~ msgid "You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character."
+#~ msgstr "Bilgisayar için bir kod yazarken son derece kesin olmalısınız. Bu tarz bir hatayı almak çok kolaydır, çünkü tek gereken bir tane hatalı karakterdir."
 
 #~ msgid "Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code."
 #~ msgstr "Ayrıca şuna dikkat edin: bu hata, sebebi olan kod satırından [b]sonra[/b] geliyormuş gibi görünebilir, çünkü bilgisayar yazdığınız kodu bu şekilde okuyup analiz eder."
 
+#~ msgid "The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing."
+#~ msgstr "Böyle bir hatanın çözümü büyük oranda içeriğe bağlıdır. Hata mesajı size, hangi karakter ya da öğenin eksik olduğunu söylüyor olmalıdır."
+
+#~ msgid "If the error says \"expected,\" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else."
+#~ msgstr "Eğer hata \"expected\" (beklenen) diyorsa, [b]önceki[/b] satırların birinde bir şeyleri atlamış olmalısınız. Bir noktalama işareti, bir parantez, ya da başka bir şey."
+
+#~ msgid "If it says \"unterminated,\" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
+#~ msgstr "Eğer \"unterminated\" (sonlandırılmadı) diyorsa, bir ifadenin sonunda olması gereken bir karakteri unutmuşsunuzdur (mesela kapalı parantez). Bu durumda, sorun genelde hata mesajında verilen satırdadır."
+
+#~ msgid "You get this error when you use a special character that GDScript doesn't recognize."
+#~ msgstr "GDScript'in tanımadığı özel bir karakter kullandığınızda bu hata mesajı görüntülenir."
+
+#~ msgid "This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings)."
+#~ msgstr "Buna, kod talimatlarınızda (dizelerde değil) bulunan aksanlı harfler (é, à, ñ gibi), özel semboller, veya Latin alfabesi dışındaki karakterler dahildir."
+
 #~ msgid "[b]Note:[/b] Godot 4 supports special and non-Latin characters in code (Unicode characters), but this app is built with Godot 3, which does not."
 #~ msgstr "[b]Not:[/b] Godot 4, kod içinde özel ve Latin alfabesi dışında kalan karakterleri (Unicode karakterleri) destekler, ancak bu uygulama bunu desteklemeyen Godot 3 ile oluşturulmuştur."
+
+#~ msgid "To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements."
+#~ msgstr "Bu hatayı düzeltmek için, değişken adlarından, fonksiyon adlarından ve diğer kod öğelerinden aksanlı harfleri veya özel karakterleri kaldırın."
 
 #~ msgid "You can use accented characters inside text strings (between quotes), but not in the code itself."
 #~ msgstr "Aksanlı karakterleri metin dizeleri içinde (tırnak işaretleri arasında) kullanabilirsiniz, ancak kodun içinde kullanamazsınız."
@@ -1026,8 +834,8 @@ msgstr ""
 #~ msgid "You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
 #~ msgstr "Aksanlı harfleri aksansız harflerle değiştirebilirsiniz. Örneğin, [code]café[/code] ifadesini [code]cafe[/code] olarak değiştirin."
 
-#~ msgid "Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code]."
-#~ msgstr "GDScript'te üç tane kelime fonksiyon çağrısı gibi çalışır ve paranteze ihtiyaç duyar: [code]yield()[/code], [code]preload()[/code], ve [code]assert()[/code]."
+#~ msgid "This error tells you that you are missing a parenthesis (or sometimes a comma or a path)."
+#~ msgstr "Bu hata, bir parantezi (ya da virgülü veya bir yolu) eksik yazdığınızı söyler."
 
 #~ msgid "This error tells you are missing some parenthesis, a comma, or some value in your export hint."
 #~ msgstr "Bu hata, birkaç parantezi, bir virgülü, ya da dışa aktarım (export) ipucundaki bir değeri unuttuğunuzu söyler."
@@ -1035,14 +843,8 @@ msgstr ""
 #~ msgid "You need to read the error message and add the missing character or value it requests."
 #~ msgstr "Hata mesajını okumalı ve size söylediği eksik olan karakteri ya da değeri eklemelisiniz."
 
-#~ msgid ""
-#~ "1. You wrote an identifier (variable or function name) in the wrong place.\n"
-#~ "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name.\n"
-#~ "3. You wrote a function definition but forgot the parentheses before the colon."
-#~ msgstr ""
-#~ "1. Bir tanımlayıcıyı (değişken ya da fonksiyon ismi) yanlış yerde kullandınız.\n"
-#~ "2. [code]var[/code], [code]func[/code], [code]for[/code], ya da [code]signal[/code] gibi bir anahtar kelime yazdınız, ama bunun devamına bir isim eklemediniz.\n"
-#~ "3. Bir fonksiyon tanımı yazdınız ama iki nokta üst üste 'den önceki parantezleri eklemediniz."
+#~ msgid "This error happens in several cases:"
+#~ msgstr "Bu hata birkaç farklı durumda oluşabilir:"
 
 #~ msgid "If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc."
 #~ msgstr "Eğer hata size beklenmedik bir şey yaptığınızı söylerse (unexpected), [code]var[/code], [code]func[/code], [code]for[/code] gibi bir anahtar bir kelimeyi unutmuşsunuzdur."
@@ -1050,8 +852,14 @@ msgstr ""
 #~ msgid "Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
 #~ msgstr "Bir diğer olasılık ise, şunları yazarken en sonda iki nokta üst üste eklemenizin gerekmesidir: fonksiyon tanımlarken, ya da [code]for[/code] döngüsü, [code]if[/code], [code]elif[/code], veya [code]else[/code] ile başlayan satırlarda."
 
+#~ msgid "Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name."
+#~ msgstr "Çoğunlukla, bu hatayı aldığınızda, bir değişken isminden sonra iki nokta üst üste yazmış, ama bunun devamında bir tip ismi belirtmemişsinizdir."
+
 #~ msgid "It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name."
 #~ msgstr "Bu durum ayrıca, fonksiyon tanımlarken parantezden sonra bir ok ([code]->[/code]) yazmış ama bunu bir tip ismi ile bitirmemiş olduğunuzda ortaya çıkar (fonksiyonun dönüş tipi)."
+
+#~ msgid "The variable, function name, or class name you are trying to use does not exist."
+#~ msgstr "Kullanmaya çalıştığınız değişken ismi, fonksiyon ismi veya sınıf ismi tanımlı değil."
 
 #~ msgid "You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot."
 #~ msgstr "Bu hatayı aldığınızda genellikle yazım hatası yapmışsınızdır. Belki iki harfin yerini karıştırdınız, ya da bir harfi unuttunuz... bunu fark etmek çoğunlukla zordur."
@@ -1059,8 +867,23 @@ msgstr ""
 #~ msgid "The other cause for this error is that you didn't define the variable, function, or class you're trying to access."
 #~ msgstr "Bu hatanın bir diğer sebebi de erişmeye çalıştığınız değişkeni, fonksiyonu, ya da sınıfı tanımlamamış olmanızdır."
 
-#~ msgid "The [code]continue[/code] keyword means \"jump to the next iteration of the loop.\" And the [code]break[/code] keyword means \"end the loop right now and jump to the first line of code after the loop block."
-#~ msgstr "[code]continue[/code] anahtar kelimesi \"döngünün sonraki yinelemesine sıçra\" anlamına gelir. Ve [code]break[/code] anahtar kelimesi \"döngüyü hemen şimdi bitir ve döngü gövdesinin bittiği ilk satıra zıpla\" anlamındadır."
+#~ msgid "To solve this error, triple-check that there is no typo in the line."
+#~ msgstr "Bu hatayı çözmek için, tüm satırları yazım hataları için üç kere kontrol etmelisiniz."
+
+#~ msgid "If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error."
+#~ msgstr "Mümkünse, ilgili değişken ya da fonksiyon tanımına gidin, ismine çift tıklayın, kopyalayın ve hatayı daha iyi görebileceğiniz boş bir alana yapıştırın."
+
+#~ msgid "If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
+#~ msgstr "Eğer bir yazım hatası göremiyorsanız, ilgili değişkeni, fonksiyonu, ya da sınıfı tanımladığınızdan emin olmalısınız."
+
+#~ msgid "You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid."
+#~ msgstr "[code]break[/code] veya [code]continue[/code] gibi bazı anahtar kelimeleri sadece bir döngünün içinde kullanabilirsiniz. Bunlar döngü dışında geçersizdir."
+
+#~ msgid "If you wrote one of these keywords outside a loop, you need to remove it."
+#~ msgstr "Eğer bu anahtar kelimelerden birini döngü dışında yazmışsanız, hemen kaldırmanız gerekiyor."
+
+#~ msgid "When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant."
+#~ msgstr "Bilgisayar size sabit bir ifadeden bahsediyorsa (constant), sizden sabitlenmiş bir değer, sabit bir hesaplama, ya da var olan bir sabitin ismini istiyor demektir."
 
 #~ msgid "You can also use arithmetic operators like multiplications (*), additions (+), and so on."
 #~ msgstr "Bunlarla çarpma (*), toplama (+) ve benzeri aritmetik işlemleri de kullanabilirsiniz."
@@ -1071,37 +894,68 @@ msgstr ""
 #~ msgid "You can optionally use numbers in the name, but not in the first position."
 #~ msgstr "İsteğe bağlı olarak ismin içinde numaralar kullanabilirsiniz, ama kesinlikle ilk başta olmasınlar (bir harf ile başlamalı)."
 
-#~ msgid "Perhaps the function or variable already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
-#~ msgstr "Bu aktif kod dosyasında bulunan bir fonksiyon ya da değişken, belki de bu GDScript kodunun içe aktarıp genişlettiği (extends) ana sınıfın içerisinde de tanımlanmıştır."
+#~ msgid "You are trying to define a function or variable that already exists; You can't do that."
+#~ msgstr "Zaten var olan bir fonksiyon ya da değişkeni tanımlamaya çalışıyorsunuz. Bunu yapamazsınız."
+
+#~ msgid "In the app, your code extends some built-in Godot code that's not visible to you."
+#~ msgstr "Uygulama içinde yazdığınız kodlar, sizin göremediğiniz ama Godot içinde gömülü gelen bazı kodları içe aktarıp genişletir (extends)."
+
+#~ msgid "You are trying to define a signal that already exists; You can't do that."
+#~ msgstr "Zaten var olan bir sinyali (signal) yeniden tanımlamaya çalışıyorsunuz. Bunu yapamazsınız."
+
+#~ msgid "The function you're trying to define exists in a parent class, so your definition overrides the parent class's function."
+#~ msgstr "Tanımlamaya çalıştığınız fonksiyon, ana sınıfın içinde zaten tanımlı durumda, yani sizin tanımlamanız ana sınıftaki fonksiyonun üzerine yazıyor."
+
+#~ msgid "When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class."
+#~ msgstr "Ana sınıfın bir fonksiyonunun üzerine yazacaksanız, yeni fonksiyon ana sınıftaki ile eşdeğer olmalıdır. Yeni fonksiyonun parametrelerinin sayısı ve tipleri, ana sınıfın fonksiyonu ile aynı olmalıdır."
 
 #~ msgid "For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class."
 #~ msgstr "Örneğin, ana sınıfta iki tane girilen değer varsa, sizin fonksiyonunuz da iki girilen değişken kullanmalıdır. Fonksiyon tanımında tip belirteçleri kullanıyorsanız, girdi değişkenleri ana sınıftakilerle aynı tipte olmalıdır."
 
+#~ msgid "All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!"
+#~ msgstr "Kodunuzdaki bütün değerler, belirli bir tipe sahiptir. Bunlar bir tam sayı (int), bir ondalık sayı (float), bir dize (String), ve benzeri olabilirler. Mümkün olan tonlarca farklı tip var, ve dahası kendiniz yeni bir tip tanımlayabilirsiniz!"
+
+#~ msgid "When you make any operation, the computer compares the types you are using."
+#~ msgstr "Bir işlem yaptığınızda, bilgisayar kullandığınız bu tipleri karşılaştırır."
+
+#~ msgid "Some types are compatible, and some are not. For example, you cannot directly add a whole number to a text string. You first need to convert the number into text."
+#~ msgstr "Bazı tipler uyumludur, bazıları uyumsuz. Örnek olarak, bir tam sayı ile bir dizeyi doğrudan toplayamazsınız. İlk önce sayıyı bir dizeye çevirmeniz gerekir."
+
 #~ msgid "You'll need to read the error message to see what is not matching because there are many possible cases."
 #~ msgstr "Bu konuda o kadar çok olasılık var ki, nelerin uyuşmadığını görmek için hata mesajını okumanız gerekiyor."
 
-#~ msgid "If the computer talks about an invalid operand, then the issue is that the operation does not exist for the type you're trying to use. For example, while you can add two 2D vectors, you can't add a whole number or text to a 2D vector."
-#~ msgstr "Eğer bilgisayar, geçersiz bir işlenen (operand) var diyorsa, böyle bir işlemin kullanmaya çalıştığınız tip için tanımlı olmadığı anlamındadır. Örneğin, iki tane 2D vektörü birbirine ekleyebilirken, bir 2D vektörü ile bir sayıyı ya da yazıyı toplayamazsınız."
+#~ msgid "If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=)."
+#~ msgstr "Eğer hata, atamaya çalıştığınız değerin, değişken ile uyuşmadığını söylüyorsa (value type), sorun eşitlik (=) işaretinin sağ tarafındadır."
 
-#~ msgid ""
-#~ "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()').\n"
-#~ "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
-#~ msgstr ""
-#~ "1. Fonksiyonunuz bir boş (void) fonksiyondur ve herhangi bir değer döndürmemelidir. Bu tip fonksiyonlar, '-> void' söz dizimiyle tanımlanan fonksiyonlar ve sınıf yapıcılarıdır ('_init()').\n"
-#~ "2. Fonksiyonunuz için bir dönüş tipi tanımladınız, ama gerekli tüm kollardan (if, elif ve else kalıpları) ya da en son satırdan bir değer geri döndürmüyorsunuz."
+#~ msgid "If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic."
+#~ msgstr "Eğer hata, geri dönüş tipinin fonksiyon ile uyuşmadığını söylerse (return type), bu durumda sorun \"return\" anahtar kelimesinden sonra yazılan değerdedir."
 
-#~ msgid ""
-#~ "The computer reached the end of the line of code, but the line had a syntax error.\n"
-#~ "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
-#~ msgstr ""
-#~ "Bilgisayar, kodun son satırına ulaştı, ama bu satırda bir yazım hatası var.\n"
-#~ "En yaygın durum, yukarıda bir yerlerde bir dizeyi kapatmayı unutmanızdır: başlangıç tırnak işaretini koyarsınız, ama karşılık gelen kapanış tırnağını unutursunuz."
+#~ msgid "When that happens, you need to specify the type yourself or remove type inference altogether for this variable."
+#~ msgstr "Bu olduğunda, ilgili tip tanımını kendiniz yapabilir veya bu değişken için tip çıkarımını tümüyle kaldırabilirsiniz."
+
+#~ msgid "We recommend specifying the type whenever possible to reap the typing system's benefits."
+#~ msgstr "Tip sisteminin nimetlerinden yararlanmak için, mümkün olduğu kadar tipleri belirtmenizi tavsiye ediyoruz."
+
+#~ msgid "There is an issue with the return value of your function. There are two main cases here:"
+#~ msgstr "Fonksiyonunuzun dönüş değerinde bir sorun var. Burada iki durum söz konusu:"
+
+#~ msgid "When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
+#~ msgstr "Bir dönüş tipi kullanıyorsanız, ya fonksiyon bitiminde ya da fonksiyonun her bir kolunda (if, elif, and else) aynı şekilde dönüş yapmalısınız."
+
+#~ msgid "You probably have a typo in the name of the sub-variable that you are trying to access."
+#~ msgstr "Muhtemelen, kullanmaya çalıştığınız alt-değişkenin isminde bir yazım hatası yaptınız."
 
 #~ msgid "member function"
 #~ msgstr "üye fonksiyon"
 
 #~ msgid "member functions"
 #~ msgstr "üye fonksiyonlar"
+
+#~ msgid "Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods."
+#~ msgstr "Üye fonksiyonlar, diziler (array), dizeler (string), ve sözlükler (dictionary) gibi belirli bir değer tipine bağlanmış fonksiyonlardır. Bunlara ayrıca metotlar da denilir."
+
+#~ msgid "For example, arrays have member functions like [code]array.append()[/code]."
+#~ msgstr "Örneğin, dizilerin [code]array.append()[/code] (arkaya ekleme) gibi üye fonksiyonları vardır."
 
 #~ msgid "You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
 #~ msgstr "Böyle bir fonksiyonu çalıştırmak için, mesela bir dizi üzerinden erişirken, yukarıda görüldüğü gibi bir erişim işleci kullanmalısınız ([code].[/code], nokta işareti)."
@@ -1121,14 +975,23 @@ msgstr ""
 #~ msgid "parameters"
 #~ msgstr "alınan değişkenler, parametreler"
 
+#~ msgid "A parameter is a variable you create as part of a function definition."
+#~ msgstr "Bir alınan değişken (parametre), bir fonksiyonun tanımının parçası olarak oluşturulan bir değişkendir."
+
 #~ msgid "radian"
 #~ msgstr "radyan"
 
 #~ msgid "radians"
 #~ msgstr "radyan"
 
+#~ msgid "A radian is a unit of measurement of angles based on the circle's circumference."
+#~ msgstr "Bir radyan, bir dairenin çevresini temel alan bir açı ölçme birimidir."
+
 #~ msgid "We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common."
 #~ msgstr "Günlük hayatımızda daha çok \"derece\" kullanmaya meyilliyiz, ama bilgisayar programcılığında ve özellikle oyunlarda, radyan daha yaygındır."
+
+#~ msgid "An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
+#~ msgstr "[code]2 * PI[/code] radyanlık bir açı 360 dereceye karşılık gelir. Ve [code]PI[/code] radyanlık açı da 180 derecedir."
 
 #~ msgid "type"
 #~ msgstr "tip"
@@ -1136,17 +999,26 @@ msgstr ""
 #~ msgid "types"
 #~ msgstr "tipler"
 
-#~ msgid "iteration"
-#~ msgstr "yineleme"
+#~ msgid "The computer uses types to determine which operations are valid between two values and when they're undefined."
+#~ msgstr "Bilgisayarlar, iki değer arasında hangi işlemlerin geçerli olduğunu ve bunların ne zaman tanımsız olduğunu belirlerken tipleri kullanır."
 
 #~ msgid "iterations"
 #~ msgstr "yinelemeler"
+
+#~ msgid "When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
+#~ msgstr "Algoritmalardan bahsederken ise, bir yineleme, bir veri kümesi üzerinde algoritmanın bir tam geçiş yapması anlamını taşıyabilir."
 
 #~ msgid "vector"
 #~ msgstr "vektör"
 
 #~ msgid "vectors"
 #~ msgstr "vektörler"
+
+#~ msgid "In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers."
+#~ msgstr "Matematikte, bir vektör (vector) bir numara listesidir. Oyunlarda, genellikle 2B ve 3B vektörleri kullanırız; yani iki ve üç numaradan oluşan listeler."
+
+#~ msgid "We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves."
+#~ msgstr "Bunları, yön ve büyüklüğü ya da uzaysal yoğunluğu betimlemek için kullanırız. Örneğin, bir karakter ya da aracın hareket yönünü ve hızını betimlerken bir vektör kullanırız."
 
 #~ msgid "Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
 #~ msgstr "Vektörler, oldukça soyut olduklarından, ilk başta biraz caydırıcı olabilirler, ama ilerde göreceğiniz gibi, kodumuzu dehşet seviyede basitleştirirler."
@@ -1157,8 +1029,26 @@ msgstr ""
 #~ msgid "arguments"
 #~ msgstr "girilen değişkenler, girdi değişkenleri, argümanlar"
 
+#~ msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument."
+#~ msgstr "Bir girilen değişken (argüman), bir fonksiyonu çağırırken, fonksiyona girdiğiniz değerlerdir. Örneğin, [code]rotate(0.5)[/code] çağırmasında, parantez içindeki [code]0.5[/code] değeri bir girilen değişkendir."
+
+#~ msgid "A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional."
+#~ msgstr "Bir fonksiyon hiçbir değer almayabileceği gibi, tek bir değer ya da çoklu değerler de alabilir. Girilen değişkenler zorunlu ya da isteğe bağlı olabilirler."
+
 #~ msgid "When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]"
 #~ msgstr "Bir fonksiyon çoklu değerler bekliyorsa, değerleri virgül ile ayırmalısınız. İşte bir örnek: [code]jump(50, 100)[/code]"
+
+#~ msgid "When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i]."
+#~ msgstr "Bir fonksiyonu [i]çağırırken[/i], parantez içine girdiğimiz değerlere [i]girilen değişken (argüman)[/i] ismini veriyoruz."
+
+#~ msgid "But when you [i]write[/i] a function definition, we call them [i]parameters[/i] instead. Here's an example:"
+#~ msgstr "Ancak bir fonksiyon tanımı [i]yazarken[/i], bunlara [i]alınan değişkenler (parametre)[/i] diyoruz. İşte bir örnek:"
+
+#~ msgid "[code]func move_to_position(x, y):[/code]"
+#~ msgstr "[code]func move_to_position(x, y):[/code]"
+
+#~ msgid "In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
+#~ msgstr "Bu fonksiyon tanımında, [code]x[/code] ve [code]y[/code] [i]alınan değişken (parametre)[/i]'lerdir."
 
 #~ msgid "array"
 #~ msgstr "dizi"
@@ -1166,8 +1056,17 @@ msgstr ""
 #~ msgid "arrays"
 #~ msgstr "diziler"
 
+#~ msgid "An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value."
+#~ msgstr "Bir dizi, bir değerler listesidir. GDScript'te, diziler [i]herhangi[/i] bir değer tipini taşıyabilirler."
+
 #~ msgid "To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]"
 #~ msgstr "Bir dizi oluşturmak için, köşeli parantez içinde virgülle-ayrılmış değerler yazarsınız: [code]var three_numbers = [1, 2, 3][/code]"
+
+#~ msgid "In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere."
+#~ msgstr "Oyunlarda, dizileri sürekli kullanırız; bir takımdaki karakterleri listelemek, envanterdeki öğelerin listesini tutmak, oyuncunun kilidini açtığı büyülerin listesini saklamak ve örnekler uzar gider. Bunlar her yerdeler."
+
+#~ msgid "Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
+#~ msgstr "Diziler, bilgisayar programcılığının en temel değer tiplerinden biridir. Dizileri, belki de her tür programlama dilinde bulabilirsiniz."
 
 #~ msgid "assign"
 #~ msgstr "atama"
@@ -1178,14 +1077,47 @@ msgstr ""
 #~ msgid "dictionaries"
 #~ msgstr "sözlükler"
 
+#~ msgid "A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value."
+#~ msgstr "Bir sözlük, verilen değerleri, anahtar-değer çifti şeklinde haritalayan veri yapılarıdır. Bir sözlüğe bir anahtar verdiğinizde, karşılık olarak size, eşleşen değeri bulup geri döndürür."
+
+#~ msgid "In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game."
+#~ msgstr "GDScript'te, anahtarlar birçok şey olabilir. Genellikle yazı dizeleri ya da numaralar kullanırız, ama bununla sınırlı değilsiniz. Bir [code]Vector2[/code] de geçerli anahtar olabilir; ızgara-temelli bir oyunda, bir ızgara hücresini bir birime ya da bir öğeye haritalamak oldukça kullanışlı olur."
+
+#~ msgid "You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database."
+#~ msgstr "Oyunlarınızda veri parçalarını ilişkilendirmek için sözlükleri sıklıkla kullanacaksınız. Örneğin, bir ekipmanın adını, onun veri tabanındaki silah bilgileri ile ilişkilendirmek için kullanabiliriz."
+
+#~ msgid "Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
+#~ msgstr "Sözlükler, diziler gibi, birçok programlama dilinde görebileceğiniz ve sıklıkla kullanacağınız en temel veri tiplerinden biridir."
+
 #~ msgid "for loop"
 #~ msgstr "for döngüsü"
 
 #~ msgid "for loops"
 #~ msgstr "for döngüleri"
 
+#~ msgid "A for loop instructs the computer to repeat a set of instructions once for each value in an array."
+#~ msgstr "Bir \"for\" döngüsü, bilgisayara, bir dizinin içindeki her bir değer için bir kere olmak üzere, bir talimat setini yinelemesini emreder."
+
+#~ msgid "In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body."
+#~ msgstr "Her bir döngü yinelemesinde, derleyici, diziden bir değer çeker ve döngü içerisinde buna erişmeyi sağlar."
+
+#~ msgid "For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met."
+#~ msgstr "\"for\" döngüleri, kodu belli bir sayıda çalıştırır; dizideki her bir değer için bir kere. Bu döngü tipi, belli bir şart sağlanana kadar tekrar eden \"while\" döngüsünden farklıdır."
+
+#~ msgid "We recommend favoring for loops when you can. They're safer and easier to use than while loops."
+#~ msgstr "Mümkün oldukça \"for\" döngülerini tercih etmenizi öneririz. Hem daha güvenli hem de kullanımı \"while\" döngülerinden kolaydır."
+
+#~ msgid "function"
+#~ msgstr "fonksiyon"
+
 #~ msgid "functions"
 #~ msgstr "fonksiyonlar"
+
+#~ msgid "A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains."
+#~ msgstr "Bir fonksiyon, bir isim altında topladığınız gruplanmış kod talimatlarıdır. Bir fonksiyon bir kez tanımladığınızda, içindeki tüm talimatları çalıştırmak için ne zaman isterseniz çağırabilirsiniz."
+
+#~ msgid "Also, functions can optionally return a value to the code calling it."
+#~ msgstr "Ayrıca fonksiyonlar, isteğe bağlı olarak, geriye değer de döndürebilirler."
 
 #~ msgid "increment"
 #~ msgstr "artış"
@@ -1199,11 +1131,26 @@ msgstr ""
 #~ msgid "instructions"
 #~ msgstr "talimatlar"
 
+#~ msgid "For example, a function call, an addition, or assigning a value to a variable."
+#~ msgstr "Örneğin, bir fonksiyon çağırma, toplama işlemi yapma, ya da bir değişkene değer atamak gibi."
+
 #~ msgid "variable"
 #~ msgstr "değişken"
 
 #~ msgid "variables"
 #~ msgstr "değişkenler"
+
+#~ msgid "Variables are a tool to give a name to values you want to store in your code and change over time."
+#~ msgstr "Değişkenler, kodunuzun içinde saklamak istediğiniz ve zamanla değişebilen değerlere isim vermeye yarayan araçlardır."
+
+#~ msgid "For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up."
+#~ msgstr "Örneğin, bir karakterin sağlığı gibi: karakter hasar aldığı zaman, sağlığının azalmasını istersiniz. İyileşmesi durumunda, sağlığının tekrar artmasını istersiniz."
+
+#~ msgid "You can create a variable named [code]health[/code] to represent the health."
+#~ msgstr "Sağlığı temsil etmesi için [code]health[/code](sağlık) isminde bir değişken oluşturabilirsiniz."
+
+#~ msgid "Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you."
+#~ msgstr "Bundan sonra kodunuzda, ne zaman klavyeden [code]health[/code] yazarsanız, bilgisayar hafızasında karşılık gelen değeri sizin için bulup getirecektir."
 
 #~ msgid "Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
 #~ msgstr "Değişkenler, süper marketlerdeki ürün etiketlerine biraz benzer. Bir değere iliştirdiğimiz isimlerdir. Herhangi bir zamanda, etiketi çıkartıp başka bir ürüne, ya da bu durumda yeni bir değere, yapıştırabilirsiniz."
@@ -1214,14 +1161,26 @@ msgstr ""
 #~ msgid "while loops"
 #~ msgstr "while döngüleri"
 
+#~ msgid "A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running."
+#~ msgstr "Bir \"while\" döngüsü bilgisayara, bir şarta bağlı olarak kodu sürekli çalıştırmasını emreder. Eğer şart geçerli ise, döngü sonsuza kadar çalışır."
+
+#~ msgid "When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong."
+#~ msgstr "\"while\" döngülerini kodlarken dikkatli olmanız gerekir: eğer şartı yanlış seçerseniz, döngü sonsuza kadar çalışır ve bilgisayarınız donar."
+
+#~ msgid "That's why we recommend using the safer for loop whenever you can."
+#~ msgstr "Mümkün olduğunca daha güvenli olan \"for\" döngüsünü kullanmanızı önerme sebebimiz bu yüzdendir."
+
+#~ msgid "However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
+#~ msgstr "Yine de \"while\" döngülerini kullanmanın çok gerekli olduğu durumlar da vardır; dosyaları işlemek, bilgisayar kodu işletmek, ya da güçlü algoritmalar yazmak."
+
 #~ msgid "body"
 #~ msgstr "gövde"
 
 #~ msgid "return"
 #~ msgstr "geri döndürme (return)"
 
-#~ msgid "It happens when a function uses the [code]return[/code] keyword followed by a value, for example: [code]return -1[/code]."
-#~ msgstr "Bunun için bir fonksiyon [code]return[/code] kelimesinden hemen sonra bir değer kullanır; örneğin [code]return -1[/code] gibi."
+#~ msgid "Returning a value is the process of sending a value to the place where you call a function."
+#~ msgstr "Bir değeri geri döndürmek, bir fonksiyonu çağırdığınız noktaya bir değer döndürme işlemidir."
 
 #~ msgid "library"
 #~ msgstr "kütüphane"
@@ -1234,6 +1193,48 @@ msgstr ""
 
 #~ msgid "sprites"
 #~ msgstr "grafik öğeler"
+
+#~ msgid "The cell position of the robot on the board. [code]Vector2(0, 0)[/code] is the square cell in the top left of the board."
+#~ msgstr "Robotun tahta üzerindeki hücre konumu. [code]Vector2(0, 0)[/code], tahtanın sol üst köşesindeki kare hücredir."
+
+#~ msgid "Creates a list of numbers from [code]0[/code] to [code]length - 1[/code]."
+#~ msgstr "[code]0[/code] ile [code]length- 1[/code] (uzunluk - 1) arasında bir sayı listesi oluşturur."
+
+#~ msgid "Orders the robot to play an animation."
+#~ msgstr "Robota bir animasyon oynatmasını emreder."
+
+#~ msgid "Selects units in the cell coordinates passed as the function's argument."
+#~ msgstr "Fonksiyona girdi değişkeni olarak gönderilen hücre koordinatlarındaki birimleri seçer."
+
+#~ msgid "Queues a move animation towards the target cell."
+#~ msgstr "Hedef hücreye doğru bir hareket animasyonunu sıraya ekler."
+
+#~ msgid "Adds the value passed as an argument at the back of the array."
+#~ msgstr "Girdi değişkeni olarak gönderilen değeri, dizinin (array) sonuna ekler."
+
+#~ msgid "Removes the first value from the array and returns it."
+#~ msgstr "Dizideki ilk değeri diziden çıkarır ve bu değeri geri döndürür."
+
+#~ msgid "Removes the last value from the array and returns it."
+#~ msgstr "Dizideki son değeri diziden çıkarır ve bu değeri geri döndürür."
+
+#~ msgid "Returns the argument converted into a [code]String[/code]. Works with the majority of value types."
+#~ msgstr "Girdi değişkenini [code]String[/code] (dize) haline dönüştürüp geri döndürür. Değer tiplerinin çoğunluğunda işe yarar."
+
+#~ msgid "Returns the argument converted into an [code]int[/code] (whole number) [i]if possible[/i]. Supports converting decimal numbers, strings, and booleans. Useful to convert player text input into numbers."
+#~ msgstr "Girdi değişkenini, [i]eğer mümkünse[/i], bir [code]int[/code] (tam sayı) olarak dönüştürüp geri döndürür. Ondalık sayıları, dizeleri, ve mantıksalları dönüştürmeyi destekler. Oyuncudan gelen yazı girdilerini sayılara dönüştürmek için kullanışlıdır."
+
+#~ msgid "Creates a new unit matching the type parameter and places it at the desired cell position on the game grid."
+#~ msgstr "Girilen birim tipine uygun yeni bir birim oluşturur ve bunu oyun ızgarası (grid) üzerinde istenilen hücre konumuna yerleştirir."
+
+#~ msgid "Creates a new item and displays it in the inventory."
+#~ msgstr "Yeni bir öğe oluşturur ve bunu envanter içinde gösterir."
+
+#~ msgid "Increases the item count by amount."
+#~ msgstr "Öğe sayısını girilen değer kadar arttırır."
+
+#~ msgid "Realigns the train track with the path. Select a train track in the tracks array by index to pass it as an argument."
+#~ msgstr "Tren rayını yol ile yeniden hizalar. Girdi değişkeni olarak geçirmek için, raylar dizisindeki bir tren rayını indeksine göre seçin."
 
 #~ msgid "If you want to assign a value to a variable, double-check that what you have on the left side of the = sign is a variable and not a function."
 #~ msgstr "Eğer bir değişkene değer atamak istiyorsanız, \"=\" işaretinin sol tarafına bir fonksiyon (ya da değer) yazmak yerine bir değişken ismi yazdığınızı iki kere kontrol etmelisiniz."

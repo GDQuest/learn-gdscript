@@ -20,52 +20,17 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 	
 	var extraction_data: ExtractionData = _extraction_data[path]
 	
-	var csv_text := FileAccess.open(path, FileAccess.READ).get_as_text()
-
-	var lines := csv_text.split("\n")
+	var csv_file := FileAccess.open(path, FileAccess.READ)
 	var blocks := []
-	for l in range(1 if extraction_data._has_header else 0, lines.size()):
-		var line_text := lines[l]
-		var column_texts := PackedStringArray()
-		
-		var total_columns := extraction_data._total_columns
-		column_texts.resize(total_columns)
-		
-		for i in total_columns:
-			var start_idx := 0
-			var next_comma_idx := -1
-			var next_entry_idx := -1
-			
-			if line_text.begins_with('"'):
-				start_idx = 1
-				if i < total_columns-1:
-					next_comma_idx = line_text.find('",')
-					next_entry_idx = next_comma_idx+2
-				else:
-					next_comma_idx = line_text.length()-start_idx
-					next_entry_idx = 0
-			else:
-				if i < total_columns-1:
-					next_comma_idx = line_text.find(",")
-					next_entry_idx = next_comma_idx+1
-				else:
-					next_comma_idx = line_text.length()-start_idx
-					next_entry_idx = 0
-			
-			column_texts[i] = line_text.substr(start_idx, next_comma_idx - start_idx)
-			line_text = line_text.substr(next_entry_idx)
-		
-		blocks.push_back(column_texts)
+	while not csv_file.eof_reached():
+		blocks.append_array(csv_file.get_csv_line())
 	
-	var ret: Array[PackedStringArray]
-
-	for block: PackedStringArray in blocks:
+	var ret: Array[PackedStringArray] = []
+	for l in range(0, blocks.size(), extraction_data._total_columns):
 		for data: ExtractionTranslationData in extraction_data._translations:
-			var prefix := ""
-			if extraction_data._prefix_column >= 0:
-				prefix = block[0]
-			ret.push_back(PackedStringArray([block[data._column]]))
-	
+			if l + data._column < blocks.size():
+				ret.push_back(PackedStringArray([blocks[l + data._column]]))
+		
 	return ret
 
 

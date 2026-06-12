@@ -12,7 +12,7 @@ const DOCUMENTATION_PATH := "res://course/documentation.csv"
 const SUPPLEMENTARY_POT_PATH := "res://i18n/supplementary.pot"
 
 const BBCODE_TRANSLATION_PARSER := preload("BBCodeTranslationParser.gd")
-const CSV_TRANSLATION_PARSER := preload("LearnCSVExtractor.gd")
+const CSV_TRANSLATION_PARSER := preload("CSVTranslationParser.gd")
 const LESSON_BUILDER := preload("TranslatedLessonBuilder.gd")
 const ENGINE_CALLER := preload("EngineCaller.gd")
 const SHARED := preload("Shared.gd")
@@ -55,6 +55,7 @@ func _generate_all_pot_files() -> void:
 	await _generate_course_pot()
 	await _generate_application_pot()
 	await _generate_supplemantary_pots()
+	await _slipstream_and_clean()
 
 
 # ⚠ Only use if you know what you're doing ⚠
