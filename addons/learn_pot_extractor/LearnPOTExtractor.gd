@@ -64,14 +64,18 @@ func _slipstream_and_clean() -> void:
 
 
 func _wipe_old_translations() -> void:
-	for lang in DirAccess.get_directories_at("res://i18n"):
-		for file in DirAccess.get_files_at("res://i18n/%s" % [lang]):
+	var global_base_dir := ProjectSettings.globalize_path("res://i18n")
+	
+	for lang in DirAccess.get_directories_at(global_base_dir):
+		if lang == "images":
+			continue
+		for file in DirAccess.get_files_at("%s/%s" % [global_base_dir, lang]):
 			if file.get_extension() != "po":
 				continue
 			
 			if not file.get_basename() in ["n_application", "course", "supplementary"]:
-				DirAccess.remove_absolute("res://i18n/%s/%s" % [lang, file])
-		DirAccess.rename_absolute("res://i18n/%s/n_application.po" % lang, "res://i18n/%s/application.po" % lang)
+				DirAccess.remove_absolute("%s/%s/%s" % [global_base_dir, lang, file])
+		DirAccess.rename_absolute("%s/%s/n_application.po" % [global_base_dir, lang], "%s/%s/application.po" % [global_base_dir, lang])
 
 
 func _build_translated_lessons() -> void:
@@ -123,6 +127,9 @@ func _slipstream_existing_translations() -> void:
 	var global_supp := ProjectSettings.globalize_path(SUPPLEMENTARY_POT_PATH)
 	
 	for lang in DirAccess.get_directories_at(global_base_dir):
+		if lang == "images":
+			continue
+		
 		print("Processing %s..." % [lang])
 		await get_tree().process_frame
 		await get_tree().process_frame
