@@ -94,6 +94,19 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 						
 					practice_idx += 1
 	
+	for i in range(ret.size()-1, -1, -1):
+		var id := ret[i][0]
+		if (
+			id.is_valid_int() or
+			id.is_valid_float()
+		):
+			ret.remove_at(i)
+			continue
+		
+		if id.begins_with("[code]"):
+			if id.find("[/code]", 6) == id.length()-7:
+				ret.remove_at(i)
+	
 	return ret
 
 
