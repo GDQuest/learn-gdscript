@@ -55,6 +55,7 @@ func _generate_all_pot_files() -> void:
 	await _generate_course_pot()
 	await _generate_application_pot()
 	await _generate_supplemantary_pots()
+	await _slipstream_and_clean()
 
 
 # ⚠ Only use if you know what you're doing ⚠
@@ -153,6 +154,21 @@ func _slipstream_existing_translations() -> void:
 		
 		var global_og_lang_app := "%s/%s/application.po" % [global_base_dir, lang]
 		OS.execute("msgmerge", ["--no-wrap", "-o", global_lang_app, global_og_lang_app, global_app])
+		
+		
+		# post process to match old format, since godot handles linebroken paragraphs whole
+		var header := []
+		var tr_blocks := SHARED.build_tr_blocks(global_lang_app, true, header)
+		var unsure_tr_blocks := SHARED.get_unsure_tr_blocks(global_lang_app)
+		
+		for i in range(unsure_tr_blocks.size()-1, -1, -1):
+			var unsure_block: Dictionary = unsure_tr_blocks[i]
+			for block in tr_blocks:
+				if unsure_block.id in block.id and "\\n" in block.id:
+					block.comments.comments.erase("fuzzy")
+					block.str = "%s\\n\\n%s" % [unsure_block.str, block.str]
+		
+		SHARED.write_from_tr_blocks(global_lang_app, "\n".join(header), tr_blocks)
 		
 		var global_og_lang_error := "%s/%s/error_database.po" % [global_base_dir, lang]
 		var global_og_lang_glossary := "%s/%s/glossary_database.po" % [global_base_dir, lang]

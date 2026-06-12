@@ -9,13 +9,22 @@ static var POT_PATTERN := RegEx.create_from_string(
 	r'(?<id>msgid (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))' +
 	r'(?<str>msgstr (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))'
 )
+
+static var UNSURE_POT_PATTERN := RegEx.create_from_string(
+	r'(?<id>#~ msgid (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))' +
+	r'(?<str>#~ msgstr (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))'
+)
 static var GLOSSARY_TERM_RE := RegEx.create_from_string(r'\[glossary term=\\"([^\\]+)\\"\]')
 static var TAG_RE := RegEx.create_from_string(r'\[[^\[]+\]([^\[]+)\[[^\[]+\]')
 static var SPACE_NEWLINE_RE := RegEx.create_from_string(r'\s+\\n')
 static var WHITESPACE_RE := RegEx.create_from_string(r'\s+')
 
 
-static func build_tr_blocks(po_file: String, skip_header := true, out_header: Array = []) -> Array[Dictionary]:
+static func get_unsure_tr_blocks(po_file: String, skip_header := true, out_header: Array = []) -> Array[Dictionary]:
+	return build_tr_blocks(po_file, skip_header, out_header, UNSURE_POT_PATTERN, 3)
+
+
+static func build_tr_blocks(po_file: String, skip_header := true, out_header: Array = [], target_regex := POT_PATTERN, prefix_offset := 0) -> Array[Dictionary]:
 	var po_text := FileAccess.open(po_file, FileAccess.READ).get_as_text()
 	
 	var start_index := (po_text.find("\n\n")+2)
@@ -26,13 +35,13 @@ static func build_tr_blocks(po_file: String, skip_header := true, out_header: Ar
 	out_header[0] = header
 	
 	var tr_blocks: Array[Dictionary] = []
-	tr_blocks.append_array(POT_PATTERN.search_all(po_text, start_index).map(func(block_match: RegExMatch) -> Dictionary:
+	tr_blocks.append_array(target_regex.search_all(po_text, start_index).map(func(block_match: RegExMatch) -> Dictionary:
 		return {
 			"comments": _parse_course_comment(block_match),
-			"ctxt": block_match.get_string("ctxt").substr(9, block_match.get_string("ctxt").length()-11),
-			"id": _parse_course_string(block_match, true),
-			"normalized_id": normalize(_parse_course_string(block_match, true)),
-			"str": _parse_course_string(block_match, false)
+			"ctxt": block_match.get_string("ctxt").substr(9 + prefix_offset, block_match.get_string("ctxt").length()-(11 + prefix_offset)),
+			"id": _parse_course_string(block_match, true, prefix_offset),
+			"normalized_id": normalize(_parse_course_string(block_match, true, prefix_offset)),
+			"str": _parse_course_string(block_match, false, prefix_offset)
 		}
 	))
 	var duplicate_blocks := []
@@ -54,13 +63,18 @@ static func write_from_tr_blocks(po_file: String, header: String, blocks: Array[
 	var lines := [header]
 	
 	for block in blocks:
+		var append_fuzzy := false
 		for comment in block.comments.comments:
 			if comment == "fuzzy":
-				lines.append("#, fuzzy")
+				append_fuzzy = true
 			else:
 				lines.append("#. %s" % [comment])
 		for source in block.comments.sources:
-			lines.append("#: %s:%s" % [source.lesson, source.line_number])
+			if source.lesson:
+				lines.append("#: %s%s" % [source.lesson, ":%s" % [source.line_number] if source.lesson.get_extension() != "tscn" else ""])
+		
+		if append_fuzzy:
+			lines.append("#, fuzzy")
 		
 		if block.ctxt:
 			lines.append('msgctxt "%s"' % [block.ctxt])
@@ -92,10 +106,13 @@ static func _parse_course_comment(target: RegExMatch) -> Dictionary:
 	
 	var comments := target.get_string("comment").split("\n", false)
 	for comment in comments:
-		if comment.begins_with("#: course/"):
+		if comment.begins_with("#: "):
 			var line_number_idx := comment.rfind(":")
-			var path := comment.substr(3, line_number_idx - 3)
-			var line_number := comment.substr(line_number_idx+1).to_int()
+			var has_line_number := comment.count(":") > 1
+			var path := comment.substr(3, (line_number_idx - 3) if has_line_number else -1)
+			var line_number := 0
+			if has_line_number:
+				line_number = comment.substr(line_number_idx+1).to_int()
 			(result.sources as Array).push_back({"lesson": path, "line_number": line_number})
 		else:
 			(result.comments as Array).push_back(comment.substr(2 if comment.begins_with("# ") else 3))
@@ -103,7 +120,7 @@ static func _parse_course_comment(target: RegExMatch) -> Dictionary:
 	return result
 
 
-static func _parse_course_string(target: RegExMatch, is_id: bool) -> String:
+static func _parse_course_string(target: RegExMatch, is_id: bool, prefix_offset := 0) -> String:
 	var id := target.get_string("id" if is_id else "str")
 
 	var result := ""
@@ -112,11 +129,11 @@ static func _parse_course_string(target: RegExMatch, is_id: bool) -> String:
 		var lines := id.split("\n").slice(1)
 		for line in lines:
 			if not line.ends_with('\n"'):
-				result += line.substr(1, line.length()-2)
+				result += line.substr(1, line.length()-(2 + prefix_offset))
 			else:
-				result += line.substr(1, line.length()-2) + "\n"
+				result += line.substr(1, line.length()-(2 + prefix_offset)) + "\n"
 	else:
-		result = id.substr(7 + (0 if is_id else 1), id.length()-(9 + (0 if is_id else 1)))
+		result = id.substr(7 + (0 if is_id else 1) + prefix_offset, id.length()-(9 + (0 if is_id else 1) + prefix_offset))
 	
 	return result
 
