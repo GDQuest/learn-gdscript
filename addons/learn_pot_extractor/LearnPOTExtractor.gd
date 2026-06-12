@@ -55,7 +55,6 @@ func _generate_all_pot_files() -> void:
 	await _generate_course_pot()
 	await _generate_application_pot()
 	await _generate_supplemantary_pots()
-	await _slipstream_and_clean()
 
 
 # ⚠ Only use if you know what you're doing ⚠
