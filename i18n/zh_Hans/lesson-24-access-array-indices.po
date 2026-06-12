@@ -1,0 +1,248 @@
+# Chinese (Simplified) translations for Learn GDScript From.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2026-05-24 08:11+0000\n"
+"Last-Translator: 2dengyu2 <649355204@qq.com>\n"
+"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
+"projects/learn-gdscript-from-zero/lesson-24-access-array-indices/zh_Hans/>\n"
+"Language: zh_Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2026.6.dev0\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-24-access-array-indices/lesson.tres:14
+msgid ""
+"You learned to loop over all the values in an array using the [code]for[/"
+"code] keyword."
+msgstr "你已经学会了使用 [code]for[/code] 关键字来遍历数组中的所有值。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:34
+msgid ""
+"But what if you need to access the third item in the player's inventory? The "
+"tenth item?"
+msgstr "但如果需要访问玩家背包里的第三件物品呢？第十件呢？"
+
+msgid ""
+"There's a dedicated notation to access one element in an array by index."
+msgstr "有一种专用符号，可以通过索引来访问数组中的某个元素。"
+
+msgid "To do so, you use square brackets with a number inside the brackets."
+msgstr "要做到这一点，你需要使用方括号，并在方括号内输入数字。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:58
+msgid "Index zero is the [i]first[/i] element in the array."
+msgstr "索引 0 是数组中的 [i]第一个[/i] 元素。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:78
+msgid "Index one is the [i]second[/i] element in the array, and so on."
+msgstr "索引 1 是数组中的 [i]第二个[/i] 元素，以此类推。"
+
+msgid ""
+"You would access the [i]fourth[/i] element in the [code]inventory[/code] "
+"array like so."
+msgstr "访问 [code]inventory[/code] 数组中的 [i]第四个[/i] 元素，像这样写就行。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:98
+msgid ""
+"How would you access the [i]third[/i] item in the [code]inventory[/code] "
+"array?"
+msgstr "如何访问 [code]inventory[/code] 数组中的 [i]第三[/i] 件物品？"
+
+#: course/lesson-24-access-array-indices/lesson.tres:101
+msgid ""
+"Indices start at zero, so the index of the [i]third[/i] item is [code]2[/"
+"code]. That's why you need to write [code]inventory[2][/code]."
+msgstr ""
+"索引从 0 开始，所以 [i]第三[/i] 件物品的索引是 [code]2[/code]。这就是为什么你"
+"要写 [code]inventory[2][/code]。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:102
+msgid "inventory[2]"
+msgstr "inventory[2]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:102
+msgid "inventory[3]"
+msgstr "inventory[3]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:110
+msgid "Accessing the last values with negative indices"
+msgstr "用负索引访问末尾的元素"
+
+#: course/lesson-24-access-array-indices/lesson.tres:112
+msgid ""
+"What if you want to access the last or second-before-last item in the "
+"[code]inventory[/code]?"
+msgstr "如果想访问 [code]inventory[/code] 中最后一件物品或倒数第二件物品呢？"
+
+msgid ""
+"In that case, you can use negative indices. If you write [code]-1[/code] in "
+"the brackets, you will get the last item in the array. You will get the "
+"second-to-last item if you write [code]-2[/code]."
+msgstr ""
+"这种情况下，你可以使用负索引。在方括号中写 [code]-1[/code]，就能拿到数组的最"
+"后一件物品。写 [code]-2[/code]，就是倒数第二件物品。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:134
+msgid ""
+"That's very convenient when you need to quickly access elements from the end "
+"of the list."
+msgstr "需要快速访问列表末尾的元素时，这会非常方便。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:142
+msgid "How would you access the third-to-last item in the inventory array?"
+msgstr "如何访问 inventory 数组中的倒数第三件物品？"
+
+#: course/lesson-24-access-array-indices/lesson.tres:145
+msgid ""
+"When using negative indices, [code]-1[/code] means the [i]last[/i] element "
+"in the array. Index [code]-2[/code] will be the second-to-last, thus "
+"[code]-3[/code] will be the third-to-last."
+msgstr ""
+"使用负索引时，[code]-1[/code] 表示数组中的 [i]最后一个[/i] 元素。索引 [code]-"
+"2[/code] 是倒数第二个，[code]-3[/code] 是倒数第三个。"
+
+msgid ""
+"It can be little confusing as it seems to work differently from positive "
+"indices. However, it's because there's no difference between index [code]0[/"
+"code] and [code]-0[/code]: they both point to the first item in the array."
+msgstr ""
+"这可能让人有点困惑，因为负索引似乎和正索引的规则不一样。但其实是合理的，因为"
+"索引 [code]0[/code] 和 [code]-0[/code] 没有区别：它们都指向数组的第一项。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:148
+msgid "inventory[-3]"
+msgstr "inventory[-3]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:148
+msgid "inventory[-2]"
+msgstr "inventory[-2]"
+
+#: course/lesson-24-access-array-indices/lesson.tres:156
+msgid "You can't access non-existent indices"
+msgstr "你不能访问不存在的索引"
+
+#: course/lesson-24-access-array-indices/lesson.tres:158
+msgid ""
+"There's a catch with this syntax: if you try to access an index that does "
+"not exist, you will get an error. You have to be careful always to access "
+"existing elements in the array."
+msgstr ""
+"这种写法有一个陷阱：如果尝试访问一个不存在的索引，就会得到一个错误。你必须小"
+"心，始终只访问数组中实际存在的元素。"
+
+msgid ""
+"There are a couple of ways you can check for valid indices. One of them is "
+"checking the array's size."
+msgstr "有几种方法可以检查索引是否有效。其中之一是检查数组的大小。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:170
+msgid "[b]Checking the size of the array[/b]"
+msgstr "[b]检查数组的大小[/b]"
+
+msgid ""
+"Arrays come with a member function named [code]size()[/code]. You can call "
+"it on the array anytime to know its [i]current[/i] size."
+msgstr ""
+"数组自带一个名为 [code]size()[/code] 的成员函数。你可以随时在数组上调用它，来"
+"获取数组 [i]当前[/i] 的大小。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:192
+msgid ""
+"The maximum index you can access in an array is [code]array.size() - 1[/"
+"code]: it's the last item in the array."
+msgstr "你能访问的最大索引是 [code]array.size() - 1[/code]，它指向数组的最后一项。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:212
+msgid ""
+"In the following practices, you will use array indices to realign train "
+"tracks and grab the correct item in an inventory."
+msgstr ""
+"在接下来的练习中，你会用到数组索引来重新对齐火车轨道，以及从背包中取出正确的"
+"物品。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:220
+msgid "Using the right items"
+msgstr "使用正确的物品"
+
+#: course/lesson-24-access-array-indices/lesson.tres:221
+msgid ""
+"In our game, the player has an inventory that works as an array under the "
+"hood."
+msgstr "在我们的游戏中，玩家的背包在底层其实就是一个数组。"
+
+msgid ""
+"The player knows they have a sword and a shield somewhere in their "
+"inventory, but they don't remember exactly where."
+msgstr "玩家知道自己背包里某处有一把剑和一个盾牌，但不记得具体放在哪里了。"
+
+msgid ""
+"You can see the inventory drawn on the right, along with the index of each "
+"item in the inventory."
+msgstr "你可以在右边看到背包的图示，每个物品旁边都标注了它在数组中的索引。"
+
+msgid ""
+"Your task is to find one sword and one shield in the array using their "
+"index, then call [code]use_item()[/code] on each of them so the player can "
+"equip those items."
+msgstr ""
+"你的任务是，用索引在数组中找到一把剑和一个盾牌，然后分别对它们调用 "
+"[code]use_item()[/code]，让玩家装备上这些物品。"
+
+msgid ""
+"For example, if the first item in the array is what you need, you would call "
+"[code]use_item(inventory[0])[/code]."
+msgstr ""
+"例如，如果数组中的第一个物品正好是你需要的，你就应该调用 [code]use_item"
+"(inventory[0])[/code]。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:242
+msgid ""
+"Find the right items to use in the player's inventory, using their index."
+msgstr "用索引在玩家背包中找到正确的物品并使用。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:247
+msgid "Realigning the train tracks"
+msgstr "重新对齐火车轨道"
+
+#: course/lesson-24-access-array-indices/lesson.tres:248
+msgid ""
+"We have train tracks broken down into little chunks in our game. We use them "
+"to make modular tracks and draw circuits of all shapes and sizes."
+msgstr ""
+"在我们的游戏中，火车轨道被分解成一个个小段。我们用它们来拼出各种形状和尺寸的"
+"轨道线路。"
+
+msgid ""
+"However, several chunks are misaligned. You need to find them in the "
+"[code]tracks[/code] array and pass them to the [code]align()[/code] function."
+msgstr ""
+"不过，有几段轨道现在没有对齐。你需要在 [code]tracks[/code] 数组中找到它们，并"
+"传给 [code]align()[/code] 函数。"
+
+msgid "To do so, you need to access the array by index."
+msgstr "为此，你需要通过索引来访问数组。"
+
+msgid ""
+"This time, though, you need to access them with [i]negative indices[/i]."
+msgstr "但这次，你需要用 [i]负索引[/i] 来访问它们。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:267
+msgid ""
+"Some chunks of our train tracks are misaligned, and the train can't pass. "
+"Find the faulty pieces and realign them."
+msgstr "有几段火车轨道错位了，火车无法通过。找出有问题的轨道片段，重新对齐它们。"
+
+#: course/lesson-24-access-array-indices/lesson.tres:271
+msgid "Accessing values in arrays"
+msgstr "访问数组中的值"

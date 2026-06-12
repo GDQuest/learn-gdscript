@@ -1,0 +1,340 @@
+# Portuguese translations for Learn GDScript From.
+# Copyright (C) 2023 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2026-06-06 19:01+0000\n"
+"Last-Translator: ssantos <ssantos@web.de>\n"
+"Language-Team: Portuguese <https://hosted.weblate.org/projects/learn-"
+"gdscript-from-zero/lesson-17-while-loops/pt/>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.6\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-17-while-loops/lesson.tres:14
+msgid ""
+"You've seen that you can use functions to [i]reuse[/i] code. In this lesson, "
+"you'll learn about [b]loops[/b]. Loops help you [i]repeat[/i] code."
+msgstr ""
+"Viu que pode usar funções para [i]reutilizar[/i] código. Nessa lição, vai "
+"aprender sobre [b]loops[/b]. Loops ajudam-lo a [i]repetir[/i] código."
+
+msgid ""
+"To illustrate how loops work, let's take a game board split into a grid."
+msgstr ""
+"Para ilustrar como os loops funcionam, vamos escolher um jogo de tabuleiro "
+"dividido numa grade."
+
+msgid ""
+"Our robot can move to neighboring cells by changing a [code]Vector2[/code] "
+"variable named [code]cell[/code]. It represents the current cell the robot "
+"is in."
+msgstr ""
+"O nosso robô pode mover para células vizinhas a alterar uma variável do tipo "
+"[code]Vector2[/code] chamada [code]cell[/code]. Ela representa a célula "
+"atual em que o nosso robô se encontra."
+
+msgid "When we increase [code]cell.x[/code], the robot moves to the right."
+msgstr "Quando aumentamos [code]cell.x[/code], o robô move-se para a direita."
+
+msgid ""
+"Note that we delay the robot's movement in the app to help you visualize how "
+"it moves. The following code would normally move the robot instantly."
+msgstr ""
+"Observe que atrasamos o movimento do robô aqui na app para o ajudar a "
+"visualizar como ele move. Normalmente, o código a seguir moveria o robô "
+"instantaneamente."
+
+#: course/lesson-17-while-loops/lesson.tres:42
+msgid "We can move diagonally by adding a [code]Vector2[/code] directly."
+msgstr ""
+"Podemos mover na diagonal a adicionar um [code]Vector2[/code] diretamente."
+
+#: course/lesson-17-while-loops/lesson.tres:62
+msgid ""
+"The above code works for a pre-defined board with a size of [code]Vector2(3, "
+"3)[/code], but the [code]move_to_end()[/code] function wouldn't work if the "
+"size of the board was different."
+msgstr ""
+"O código acima funciona para um tabuleiro pré-definido com um tamanho de "
+"[code]Vector2(3, 3)[/code], mas a função [code]move_to_end()[/code] não "
+"funcionaria se o tamanho do placa fosse diferente."
+
+msgid "The robot would either stop before the end or go too far."
+msgstr "O robô pararia antes do final ou iria longe demais."
+
+msgid ""
+"To implement a general solution for all board sizes, we can repeat the "
+"robot's movement until it gets to the end."
+msgstr ""
+"Para implementar uma solução geral para todos os tamanhos de tabuleiro, "
+"podemos repetir o movimento do robô até ele chegar no final."
+
+msgid "For code that repeats, we can use [i]loops[/i]."
+msgstr "Para código que se repete, podemos usar [i]loops[/i]."
+
+#: course/lesson-17-while-loops/lesson.tres:76
+msgid "Using while loops to repeat code"
+msgstr "Usar loops de while para repetir código"
+
+#: course/lesson-17-while-loops/lesson.tres:78
+msgid ""
+"You can use a [code]while[/code] loop to make the computer repeat a block of "
+"code until you meet a specific condition or decide to break from the loop."
+msgstr ""
+"Pode usar um loop [code]while[/code] para fazer o computador repetir um "
+"bloco de código até que condiz com a uma condição específica ou decide de "
+"sair do loop."
+
+msgid "Here's how we use a [code]while[/code] loop."
+msgstr "Veja como usamos um loop de [code]while[/code]."
+
+#: course/lesson-17-while-loops/lesson.tres:100
+msgid ""
+"We use the variable [code]number[/code] to keep track of how many loops the "
+"[code]while[/code] loop completes."
+msgstr ""
+"Usamos a variável [code]number[/code] para controlar quantos vezes o loop "
+"[code]while[/code] completa."
+
+msgid ""
+"Each time we go through the [code]while[/code] loop, we add [code]1[/code] "
+"to [code]number[/code]."
+msgstr ""
+"Cada vez que passamos pelo loop [code]while[/code], adicionamos [code]1[/"
+"code] na variável [code]number[/code]."
+
+msgid ""
+"The [code]while[/code] loop keeps running for as long as the condition is "
+"true. In this case, it keeps running while [code]number[/code] is less than "
+"[code]4[/code]."
+msgstr ""
+"O loop [code]while[/code] continua executando aquele bloco de código "
+"enquanto a condição for verdadeira (while significa \"enquanto\" em Inglês). "
+"Nesse caso, ele continua executando enquanto a variável [code]number[/code] "
+"for menor que [code]4[/code]."
+
+msgid ""
+"You can see that the following code is executed four times in the console."
+msgstr ""
+"Pode ver que o código a seguir é executado quatro vezes no console de saída."
+
+#: course/lesson-17-while-loops/lesson.tres:126
+msgid "Let's apply this to our [code]move_to_end()[/code] function."
+msgstr "Vamos aplicar isto na nossa função [code]move_to_end()[/code]."
+
+msgid ""
+"This time, we compare the number of loops to the board's width. We go "
+"through the loop until we reach the width of the board."
+msgstr ""
+"Dessa vez, comparamos o número de loops com a largura do tabuleiro. "
+"Continuamos no loop até chegarmos na largura do tabuleiro."
+
+msgid ""
+"Note that we move the robot until its position is one less than the board's "
+"width because we are counting tiles from [code]0[/code]."
+msgstr ""
+"Observe que movemos o robô até que a sua posição seja um a menos que a "
+"largura do tabuleiro, já que começamos a contar do [code]0[/code]."
+
+msgid ""
+"A board of [code]3[/code] by [code]3[/code] cells would have cell "
+"coordinates going from [code]0[/code] to [code]2[/code] on both the X and Y "
+"axes."
+msgstr ""
+"Um tabuleiro de células [code]3[/code] por [code]3[/code] irá ter as "
+"coordenadas das células a ir de [code]0[/code] a [code]2[/code] em ambos os "
+"eixos X e Y."
+
+#: course/lesson-17-while-loops/lesson.tres:160
+msgid "While loops can cause issues"
+msgstr "Loops while podem causar problemas"
+
+#: course/lesson-17-while-loops/lesson.tres:162
+msgid ""
+"If you're not careful, your [code]while[/code] loop can run infinitely. In "
+"that case, the application will freeze."
+msgstr ""
+"Se não tomar cuidado, o seu loop [code]while[/code] pode ser executado "
+"infinitamente. Nesse caso, a aplicação irá travar."
+
+msgid "Take a look at this code example."
+msgstr "Dê uma olhada neste código de exemplo."
+
+#: course/lesson-17-while-loops/lesson.tres:182
+msgid "What would happen if the computer tried to run the code above?"
+msgstr "O que aconteceria se o computador tentasse executar o código acima?"
+
+#: course/lesson-17-while-loops/lesson.tres:185
+msgid ""
+"Because we don't increment [code]number[/code] within the [code]while[/code] "
+"loop, it always stays at [code]0[/code]."
+msgstr ""
+"Como não incrementamos a variável [code]number[/code] dentro do loop "
+"[code]while[/code], ela sempre fica em [code]0[/code]."
+
+msgid ""
+"As a result, the number is always lower than [code]10[/code], so we never "
+"break out of the loop."
+msgstr ""
+"Como resultado, o número na variável é sempre menor que [code]10[/code], "
+"então nunca vamos sair do loop."
+
+msgid ""
+"Since there's no way to exit the [code]while[/code] loop, the computer will "
+"attempt to draw squares infinitely, which will freeze the program."
+msgstr ""
+"Como não há como sair do loop [code]while[/code], o computador vai tentar "
+"desenhar quadrados infinitamente, o que vai fazer o programa congelar."
+
+msgid ""
+"When programs stop responding on your computer, it's often due to an "
+"infinite loop!"
+msgstr ""
+"Quando os programas param de responder no seu computador, geralmente é "
+"devido a um loop infinito!"
+
+#: course/lesson-17-while-loops/lesson.tres:192
+msgid "It would draw squares infinitely until the program is terminated"
+msgstr ""
+"Ele desenharia quadrados infinitamente até que o programa fosse forçado a "
+"terminar"
+
+#: course/lesson-17-while-loops/lesson.tres:192
+msgid "It would draw 10 squares"
+msgstr "desenharia 10 quadrados"
+
+#: course/lesson-17-while-loops/lesson.tres:192
+msgid "It would draw 20 squares"
+msgstr "desenharia 20 quadrados"
+
+#: course/lesson-17-while-loops/lesson.tres:200
+msgid "When to use while loops"
+msgstr "Quando usar loops while"
+
+#: course/lesson-17-while-loops/lesson.tres:202
+msgid ""
+"At first, you will not need [code]while[/code] loops often. Even the code we "
+"show here has more efficient alternatives."
+msgstr ""
+"A princípio, não vai precisar de usar loops [code]while[/code] com muita "
+"frequência. Até o código que mostramos aqui tem alternativas mais eficientes."
+
+msgid ""
+"Also, there's a safer kind of loop, [code]for[/code] loops, which we'll look "
+"at in the next lesson."
+msgstr ""
+"Além disso, há um tipo de loop mais seguro, loops [code]for[/code], que "
+"veremos na próxima lição."
+
+msgid ""
+"Yet, [code]while[/code] loops have important intermediate to advanced-level "
+"uses, so you at least need to know they exist and how to use them."
+msgstr ""
+"No entanto, os loops [code]while[/code] têm usos intermediários a avançados "
+"importantes, portanto, precisa pelo menos saber que existem e como usá-los."
+
+msgid ""
+"We use [code]while[/code] loops every time we need to loop an unknown number "
+"of times."
+msgstr ""
+"Usamos loops [code]while[/code] toda vez que precisamos repetir algum bloco "
+"de código por uma quantidade indeterminada de vezes."
+
+msgid ""
+"For example, games run in a loop that typically generates sixty images per "
+"second until the user closes the game. This is possible thanks to "
+"[code]while[/code] loops."
+msgstr ""
+"Por exemplo, os jogos são executados num loop que normalmente gera 60 "
+"imagens por segundo até que o utilizador feche o jogo. Isso é possível "
+"graças aos loops [code]while[/code]."
+
+msgid "There are other good uses for [code]while[/code] loops:"
+msgstr "Existem outros usos bons para o loop de [code]while[/code]:"
+
+msgid ""
+"- Reading and processing a file, like a text document, line by line.\n"
+"- Processing a constant stream of data, like someone recording audio with a "
+"microphone.\n"
+"- Reading code and converting it into instructions the computer "
+"understands.\n"
+"- Various intermediate to advanced-level algorithms, like finding paths "
+"around a map for AI."
+msgstr ""
+"- Ler e processar um ficheiro, como um ficheiro de texto por exemplo, linha "
+"por linha.\n"
+"- Processar um fluxo constante de dados, como alguém a gravar áudio com um "
+"microfone.\n"
+"- Ler código e convertê-lo em instruções que o computador entenda.\n"
+"- Vários algoritmos de nível intermediário a avançado, como encontrar "
+"caminhos à volta de um mapa para Inteligência Artificial."
+
+#: course/lesson-17-while-loops/lesson.tres:227
+msgid ""
+"Let's practice some [code]while[/code] loops, as they're useful to know. "
+"It's also an excellent opportunity to practice 2D vectors."
+msgstr ""
+"Vamos praticar loops de [code]while[/code] rapidamente, pois são úteis de os "
+"conhecer. É também uma excelente oportunidade de praticar vetores 2D."
+
+msgid ""
+"Then, we'll move on to the safer [code]for[/code] loops in the following "
+"lesson."
+msgstr ""
+"Depois, passaremos para os loops de [code]for[/code], que são mais seguros "
+"de usar, na lição a seguir."
+
+#: course/lesson-17-while-loops/lesson.tres:237
+msgid "Moving to the end of a board"
+msgstr "Mover para o final de um tabuleiro"
+
+#: course/lesson-17-while-loops/lesson.tres:238
+msgid "Our robot has decided to stand at the top of the board."
+msgstr "O nosso robô decidiu ficar na parte de cima do tabuleiro."
+
+msgid ""
+"Complete the [code]move_to_bottom()[/code] function so the robot moves to "
+"the bottom of the board."
+msgstr ""
+"Complete a função [code]move_to_bottom()[/code] para que o robô se mova para "
+"a parte inferior do tabuleiro."
+
+msgid ""
+"The board size is determined by the [code]Vector2[/code] variable named "
+"[code]board_size[/code]."
+msgstr ""
+"O tamanho do tabuleiro é determinado pela variável de tipo [code]Vector2[/"
+"code] nomeada como [code]board_size[/code] (tamanho do tabuleiro)."
+
+msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
+msgstr "A célula inicial do robô é [code]Vector2(2, 0)[/code]."
+
+msgid ""
+"Make sure to use a [code]while[/code] loop so the function works for any "
+"board size."
+msgstr ""
+"Certifique-se de usar um loop [code]while[/code] para que a função funcione "
+"para qualquer tamanho de tabuleiro."
+
+#: course/lesson-17-while-loops/lesson.tres:257
+msgid ""
+"Use a while loop to have our robot move from the top of the board to the "
+"bottom."
+msgstr ""
+"Use um loop while para que nosso robô se mova da parte superior do tabuleiro "
+"para a parte inferior."
+
+#: course/lesson-17-while-loops/lesson.tres:261
+msgid "Introduction to While Loops"
+msgstr "Introdução aos loops de while"

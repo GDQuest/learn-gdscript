@@ -1,0 +1,363 @@
+# Danish translations for Learn GDScript From.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2026-02-20 16:09+0000\n"
+"Last-Translator: Jeppe Nellemann <jepnel@proton.me>\n"
+"Language-Team: Danish <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-23-append-to-arrays/da/>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.16.1-dev\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-23-append-to-arrays/lesson.tres:13
+msgid ""
+"In previous lessons, you learned how to create arrays to store lists of "
+"values and how to loop over them. That's useful, but arrays can do much more."
+msgstr ""
+"I tidligere lektioner lærte du, hvordan man opretter arrays til at gemme "
+"lister over værdier, og hvordan man looper over dem. Det er nyttigt, men "
+"arrays kan gøre meget mere."
+
+msgid ""
+"The real strength of GDScript arrays is that you can add and remove values "
+"from them at any time. This lets you build waiting lines of data or piles of "
+"data. We call these [i]queues[/i] and [i]stacks[/i], respectively. We'll see "
+"what that means in this lesson."
+msgstr ""
+"Den virkelige styrke ved GDScript-arrays er, at du kan tilføje og fjerne "
+"værdier fra dem når som helst. Dette giver dig mulighed for at opbygge "
+"ventelinjer med data eller stakke af data. Vi kalder disse henholdsvis "
+"[i]køer[/i] og [i]stakke[/i]. Vi vil se på, hvad det betyder i denne lektion."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:25
+msgid "Let's look at a concrete example."
+msgstr "Lad os se på et konkret eksempel."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:33
+msgid "Tracking orders in a restaurant management game"
+msgstr "Holde styr på ordrer i et restaurantstyrings spil"
+
+#: course/lesson-23-append-to-arrays/lesson.tres:35
+msgid ""
+"You're making a restaurant management game where customers place orders, and "
+"you need to handle them one by one."
+msgstr ""
+"Du laver et restaurantstyringsspil, hvor kunderne afgiver ordrer, og du skal "
+"håndtere dem én efter én."
+
+msgid ""
+"In the example below, customers order meals that end up in a waiting line (a "
+"queue). You need to prepare them in the kitchen. We simulate orders arriving "
+"and getting completed over time."
+msgstr ""
+"I eksemplet nedenfor bestiller kunder måltider, der ender i kø. Du skal "
+"tilberede dem i køkkenet. Vi simulerer, at ordrer ankommer og bliver "
+"færdiggjort over tid."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:57
+msgid "How do you keep track of pending and completed orders? With an array!"
+msgstr "Hvordan holder du styr på ventende og afsluttede ordrer? Med et array!"
+
+msgid ""
+"When a customer purchases a meal, you want to [i]append[/i] (add) it to the "
+"array. Then, as you complete a meal in the kitchen and serve it, you want to "
+"remove it from the array."
+msgstr ""
+"Når en kunde køber et måltid, skal du [i]tilføje[/i] det til arrayet. Når du "
+"derefter færdiggør et måltid i køkkenet og serverer det, skal du fjerne det "
+"fra arrayet."
+
+msgid ""
+"You can use the [code]append()[/code] function to add values at the end of "
+"an array. To remove values from the start, you can use the [code]pop_front()"
+"[/code] function. We call it \"pop\" because the value jumps out of the "
+"array."
+msgstr ""
+"Du kan bruge funktionen [code]append()[/code] til at tilføje værdier i "
+"slutningen af et array. For at fjerne værdier fra starten kan du bruge "
+"funktionen [code]pop_front()[/code]. Vi kalder det \"pop\", fordi værdien "
+"springer ud af arrayet."
+
+msgid ""
+"Try to read the code below before moving on. Don't worry if not everything "
+"makes sense, as we'll break it all down."
+msgstr ""
+"Prøv at læse koden nedenfor, før du går videre. Bare rolig, hvis ikke alt "
+"giver mening, da vi vil gennemgå det hele."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:83
+msgid ""
+"Notice how we call some functions by writing a dot after a variable name. "
+"Just like some values have variables you can access with a dot (like the "
+"[code]x[/code] variable in [code]position.x[/code]), they can also have "
+"their own functions."
+msgstr ""
+"Bemærk hvordan vi kalder nogle funktioner ved at skrive et punktum efter et "
+"variabelnavn. Ligesom nogle værdier har variabler du kan tilgå med et "
+"punktum (som variablen [code]x[/code] i [code]position.x[/code]), kan de "
+"også have deres egne funktioner."
+
+msgid ""
+"Functions like [code]append()[/code] and [code]pop_front()[/code] only exist "
+"on arrays. To call them, we need to write the array name, then a dot, then "
+"the function: [code]array_name.append()[/code]."
+msgstr ""
+"Funktioner som [code]append()[/code] og [code]pop_front()[/code] findes kun "
+"på arrays. For at kalde dem skal vi skrive arraynavnet, derefter et punktum "
+"og derefter funktionen: [code]array_name.append()[/code]."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:95
+msgid ""
+"Let's break down the code. We add orders to the [code]waiting_orders[/code] "
+"array by appending them."
+msgstr ""
+"Lad os gennemgå koden. Vi tilføjer ordrer til [code]waiting_orders[/code] "
+"arrayet ved at \"appende\" dem."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:115
+msgid ""
+"We can use a string to represent a meal when calling the [code]add_order()[/"
+"code] function."
+msgstr ""
+"Vi kan bruge en streng til at repræsentere et måltid, når vi kalder "
+"funktionen [code]add_order()[/code]."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:135
+msgid ""
+"When completing an order, we remove it from the [code]waiting_orders[/code] "
+"array by calling its [code]pop_front()[/code] function. This function gives "
+"us the order back, which allows us to assign it to a temporary variable."
+msgstr ""
+"Når vi fuldfører en ordre, fjerner vi den fra [code]waiting_orders[/code]-"
+"arrayet ved at kalde dens [code]pop_front()[/code]-funktion. Denne funktion "
+"giver os ordren tilbage, hvilket giver os mulighed for at tildele den til en "
+"midlertidig variabel."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:155
+msgid ""
+"We can then append the order to our [code]completed_orders[/code] array."
+msgstr ""
+"Vi kan derefter tilføje ordren til vores [code]completed_orders[/code] array."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:175
+msgid ""
+"When we use an array this way, we call it a [i]queue[/i]: the first element "
+"we add to the array is the first one we remove. It's like a waiting line at "
+"a store."
+msgstr ""
+"Når vi bruger et array på denne måde, kalder vi det en [i]kø[/i]: det første "
+"element, vi tilføjer til arrayet, er det første, vi fjerner. Det er ligesom "
+"en ventekø i en butik."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:183
+msgid "What does #... mean?"
+msgstr "Hvad betyder #... ?"
+
+#: course/lesson-23-append-to-arrays/lesson.tres:185
+msgid ""
+"We write [code]#...[/code] to show that there is more code here. The three "
+"dots mean \"we are not showing all the code.\" We use this to break down "
+"code examples and make them easier to learn from."
+msgstr ""
+"Vi skriver [kode]#...[/kode] for at vise, at der er mere kode her. De tre "
+"prikker betyder \"vi viser ikke al koden.\" Vi bruger dette til at opdele "
+"kodeeksempler og gøre dem nemmere at lære af."
+
+msgid ""
+"The hash sign ([code]#[/code]) marks the start of a code comment. It's a "
+"line the computer will ignore, which is why it typically appears in grey."
+msgstr ""
+"Hash-tegnet ([code]#[/code]) markerer starten på en kodekommentar. Det er en "
+"linje, som computeren ignorerer, hvilket er grunden til, at den typisk vises "
+"med gråt."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:195
+msgid "Using arrays as stacks"
+msgstr "Brug af arrays som stakke"
+
+#: course/lesson-23-append-to-arrays/lesson.tres:197
+msgid "Another common use of arrays is [i]stacks[/i] of data."
+msgstr "En anden almindelig brug af arrays er [i]stakke[/i] af data."
+
+msgid ""
+"Take a factory management game where you need to retrieve materials from "
+"stacks of crates. They arrive at the factory piled up vertically, and you "
+"need to take them from top to bottom."
+msgstr ""
+"Tag et fabriksstyringsspil, hvor du skal hente materialer fra stakke af "
+"kasser. De ankommer til fabrikken stablet lodret op, og du skal flytte dem "
+"fra top til bund."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:219
+msgid ""
+"To take a crate from the back of the array, this time, we use the "
+"[code]pop_back()[/code] array function."
+msgstr ""
+"For at tage en kasse fra bagenden af arrayet bruger vi denne gang "
+"arrayfunktionen [code]pop_back()[/code]."
+
+msgid ""
+"This function removes (pops) the last value from the array and returns it to "
+"you."
+msgstr ""
+"Denne funktion fjerner (pop-er) den sidste værdi fra arrayet og returnerer "
+"den til dig."
+
+msgid ""
+"Here we pop the last value of the array and print what's left of the array "
+"to demonstrate how the array gets smaller."
+msgstr ""
+"Her pop-er vi den sidste værdi i arrayet og udskriver det, der er tilbage af "
+"arrayet, for at demonstrere, hvordan arrayet bliver mindre."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:243
+msgid ""
+"Like [code]pop_front()[/code], the function returns the value removed from "
+"the array. You will often store that value in a variable. This value could "
+"be the crate's content, which you can then use to give resources to the "
+"player."
+msgstr ""
+"Ligesom [code]pop_front()[/code] returnerer funktionen den værdi, der er "
+"fjernet fra arrayet. Du gemmer ofte denne værdi i en variabel. Denne værdi "
+"kan være kassens indhold, som du derefter kan bruge til at give ressourcer "
+"til spilleren."
+
+msgid ""
+"When we use an array this way, we call it a [i]stack[/i]: the last element "
+"we add is the first one we remove. It's like a pile of plates where you take "
+"from the top."
+msgstr ""
+"Når vi bruger et array på denne måde, kalder vi det en [i]stak[/i]: det "
+"sidste element, vi tilføjer, er det første, vi fjerner. Det er som en bunke "
+"plader, hvor man tager fra toppen."
+
+msgid ""
+"In the following practices, you will use the [code]append()[/code], "
+"[code]pop_front()[/code], and [code]pop_back()[/code] array functions."
+msgstr ""
+"I de følgende øvelser vil du bruge arrayfunktionerne [code]append()[/code], "
+"[code]pop_front()[/code] og [code]pop_back()[/code]."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:255
+msgid "Completing orders"
+msgstr "Færdiggørelse af ordrer"
+
+#: course/lesson-23-append-to-arrays/lesson.tres:256
+msgid "The [code]waiting_orders[/code] array will be filled over time."
+msgstr "Arrayet [code]waiting_orders[/code] vil blive udfyldt over tid."
+
+msgid ""
+"Your job is to move orders from the waiting list to the "
+"[code]completed_orders[/code] list using the array's [code]append()[/code] "
+"and [code]pop_front()[/code] functions."
+msgstr ""
+"Din opgave er at flytte ordrer fra ventelisten til listen "
+"[code]completed_orders[/code] ved hjælp af arrayets funktioner [code]append()"
+"[/code] og [code]pop_front()[/code]."
+
+msgid ""
+"Remember that the array's [code]pop_front()[/code] function returns the "
+"popped value, which allows you to store it in a variable and then pass it to "
+"another function."
+msgstr ""
+"Husk, at arrayets funktion [code]pop_front()[/code] returnerer den udfyldte "
+"værdi, hvilket giver dig mulighed for at gemme den i en variabel og derefter "
+"sende den til en anden funktion."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:274
+msgid ""
+"Orders are piling up in the kitchen, and we need to clear them fast using "
+"the array's [code]pop_front()[/code] function."
+msgstr ""
+"Ordrerne hober sig op i køkkenet, og vi er nødt til at få dem klaret hurtigt "
+"ved hjælp af arrayets [code]pop_front()[/code] funktion."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:279
+msgid "Clearing up the crates"
+msgstr "Rydder op i kasserne"
+
+#: course/lesson-23-append-to-arrays/lesson.tres:280
+msgid ""
+"Crates are piling up on the platform. Move them out of the way by popping "
+"them from the [code]crates[/code] array."
+msgstr ""
+"Kasser hober sig op på platformen. Flyt dem ud af vejen ved at poppe dem op "
+"fra [code]crates[/code]-arrayet."
+
+msgid ""
+"You need to remove them from top to bottom using the array's [code]pop_back()"
+"[/code] function."
+msgstr ""
+"Du skal fjerne dem fra top til bund ved hjælp af arrayets [code]pop_back()[/"
+"code]-funktion."
+
+msgid "Your code should remove all the crates in the array using a while loop."
+msgstr ""
+"Din kode bør fjerne alle kasserne i arrayet ved hjælp af en while-løkke."
+
+msgid ""
+"[b]Careful![/b] If you write the while loop incorrectly, you can freeze the "
+"program."
+msgstr ""
+"[b]Pas på![/b] Hvis du skriver while-løkken forkert, kan du fryse programmet."
+
+msgid ""
+"You can check if the [code]crates[/code] array still has values by writing "
+"[code]while crates:[/code]. This works because an empty array counts as "
+"[code]false[/code], and an array with items counts as [code]true[/code]."
+msgstr ""
+"Du kan tjekke om [code]crates[/code]-arrayet stadig har værdier ved at "
+"skrive [code]while crates:[/code]. Dette fungerer, fordi et tomt array "
+"tæller som [code]false[/code], og et array med elementer tæller som "
+"[code]true[/code]."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:301
+msgid ""
+"Crates are piling up on the platform. Move them out of the way by popping "
+"them from their array."
+msgstr ""
+"Kasser hober sig op på platformen. Flyt dem ud af vejen ved at poppe dem ud "
+"af deres array."
+
+#: course/lesson-23-append-to-arrays/lesson.tres:305
+msgid "Appending and popping values from arrays"
+msgstr "Tilføjelse og fjernelse af værdier fra arrays"
+
+#~ msgid "For now, let's take another example."
+#~ msgstr "Lad os nu tage et andet eksempel."
+
+#~ msgid ""
+#~ "In this example, we simulate orders arriving and getting completed over "
+#~ "time."
+#~ msgstr ""
+#~ "I dette eksempel simulerer vi ordrer, der ankommer og bliver færdiggjort "
+#~ "over tid."
+
+#~ msgid ""
+#~ "You can do that with the [code]append()[/code] and the [code]pop_front()[/"
+#~ "code] functions of the array, respectively."
+#~ msgstr ""
+#~ "Det kan du gøre med henholdsvis funktionerne [code]append()[/code] og "
+#~ "[code]pop_front()[/code] på arrayet."
+
+#~ msgid "Let's break down the code."
+#~ msgstr "Lad os gennemgå koden."
+
+#~ msgid ""
+#~ "The value in question could be the crate's content, which you can then "
+#~ "use to give resources to the player."
+#~ msgstr ""
+#~ "Den pågældende værdi kan være kassens indhold, som du derefter kan bruge "
+#~ "til at give ressourcer til spilleren."

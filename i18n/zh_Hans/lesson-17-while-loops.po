@@ -1,0 +1,309 @@
+# Chinese (Simplified) translations for Learn GDScript From.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2026-02-22 19:09+0000\n"
+"Last-Translator: xtxt-mas <3283445231@qq.com>\n"
+"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
+"projects/learn-gdscript-from-zero/lesson-17-while-loops/zh_Hans/>\n"
+"Language: zh_Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.16.1-dev\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-17-while-loops/lesson.tres:14
+msgid ""
+"You've seen that you can use functions to [i]reuse[/i] code. In this lesson, "
+"you'll learn about [b]loops[/b]. Loops help you [i]repeat[/i] code."
+msgstr ""
+"你已经看过可以使用函数来[i]复用[/i]代码。在本课中，你将了解 [b]循环[/b]"
+"（loops）。循环帮助你[i]重复执行[/i]代码。"
+
+msgid ""
+"To illustrate how loops work, let's take a game board split into a grid."
+msgstr "为了说明循环是如何工作的，让我们将游戏场景分成小格子。"
+
+msgid ""
+"Our robot can move to neighboring cells by changing a [code]Vector2[/code] "
+"variable named [code]cell[/code]. It represents the current cell the robot "
+"is in."
+msgstr ""
+"我们的机器人可以通过更改名为 [code]cell[/code] （格子）的 [code]Vector2[/"
+"code] 变量移动到相邻单元格。"
+
+msgid "When we increase [code]cell.x[/code], the robot moves to the right."
+msgstr "当我们增加 [code]cell.x[/code] 时，机器人向右移动。"
+
+msgid ""
+"Note that we delay the robot's movement in the app to help you visualize how "
+"it moves. The following code would normally move the robot instantly."
+msgstr ""
+"请注意，我们给在这里的机器人的移动施加了一个延迟，以帮助你直观地了解它的移动"
+"方式。通常情况下，以下代码会瞬间完成移动。"
+
+#: course/lesson-17-while-loops/lesson.tres:42
+msgid "We can move diagonally by adding a [code]Vector2[/code] directly."
+msgstr "要沿对角线移动，可以直接加上一个 [code]Vector2[/code] 。"
+
+#: course/lesson-17-while-loops/lesson.tres:62
+msgid ""
+"The above code works for a pre-defined board with a size of [code]Vector2(3, "
+"3)[/code], but the [code]move_to_end()[/code] function wouldn't work if the "
+"size of the board was different."
+msgstr ""
+"上面的代码适用于一个定义好的大小为 [code]Vector2(3, 3)[/code] 的格子，但对于"
+"不同大小的格子来说，函数[code]move_to_end()[/code]（走到底）是行不通的。"
+
+msgid "The robot would either stop before the end or go too far."
+msgstr "机器人要么在终点前停止，要么走得太远。"
+
+msgid ""
+"To implement a general solution for all board sizes, we can repeat the "
+"robot's movement until it gets to the end."
+msgstr ""
+"为了实现适用于各种尺寸的通用解决方案，我们可以让机器人的运动反复进行，直到它"
+"到达终点。"
+
+msgid "For code that repeats, we can use [i]loops[/i]."
+msgstr "对于反复执行的代码，我们可以使用 [i]循环[/i]（loops）。"
+
+#: course/lesson-17-while-loops/lesson.tres:76
+msgid "Using while loops to repeat code"
+msgstr "使用 while 循环反复执行代码"
+
+#: course/lesson-17-while-loops/lesson.tres:78
+msgid ""
+"You can use a [code]while[/code] loop to make the computer repeat a block of "
+"code until you meet a specific condition or decide to break from the loop."
+msgstr ""
+"你可以用 [code]while[/code] 循环让计算机反复执行一段代码，直到满足特定条件或"
+"中途决定退出循环。"
+
+msgid "Here's how we use a [code]while[/code] loop."
+msgstr "下面是 [code]while[/code] 循环的使用方法。"
+
+#: course/lesson-17-while-loops/lesson.tres:100
+msgid ""
+"We use the variable [code]number[/code] to keep track of how many loops the "
+"[code]while[/code] loop completes."
+msgstr ""
+"我们使用变量 [code]number[/code]（数量） 来跟踪 [code]while[/code] 循环完成了"
+"多少次循环。"
+
+msgid ""
+"Each time we go through the [code]while[/code] loop, we add [code]1[/code] "
+"to [code]number[/code]."
+msgstr ""
+"每轮执行 [code]while[/code] 循环时，我们将 [code]number[/code] 加上 [code]1[/"
+"code]。"
+
+msgid ""
+"The [code]while[/code] loop keeps running for as long as the condition is "
+"true. In this case, it keeps running while [code]number[/code] is less than "
+"[code]4[/code]."
+msgstr ""
+"只要条件为真，[code]while[/code] 循环就会一直运行。在这种情况下，它会在 "
+"[code]number[/code] 小于 [code]4[/code] 时持续执行。"
+
+msgid ""
+"You can see that the following code is executed four times in the console."
+msgstr "可以看到以下代码在控制台中执行了四次。"
+
+#: course/lesson-17-while-loops/lesson.tres:126
+msgid "Let's apply this to our [code]move_to_end()[/code] function."
+msgstr "让我们将其应用于我们的 [code]move_to_end()[/code] 函数。"
+
+msgid ""
+"This time, we compare the number of loops to the board's width. We go "
+"through the loop until we reach the width of the board."
+msgstr ""
+"这一次，我们将循环次数与格子图的宽度（有多少格）进行比较。我们遍历循环，直到"
+"循环次数达到了格子数次。"
+
+msgid ""
+"Note that we move the robot until its position is one less than the board's "
+"width because we are counting tiles from [code]0[/code]."
+msgstr ""
+"注意，我们移动到终点的位置比格子数小一，这是因为我们是从 [code]0[/code] 开始"
+"计数的。"
+
+msgid ""
+"A board of [code]3[/code] by [code]3[/code] cells would have cell "
+"coordinates going from [code]0[/code] to [code]2[/code] on both the X and Y "
+"axes."
+msgstr ""
+"一个 [code]3[/code] x [code]3[/code] 的格子板的话，坐标会分别沿X轴和Y轴从 "
+"[code]0[/code] 记到 [code]2[/code] 。"
+
+#: course/lesson-17-while-loops/lesson.tres:160
+msgid "While loops can cause issues"
+msgstr "While循环可能会导致问题"
+
+#: course/lesson-17-while-loops/lesson.tres:162
+msgid ""
+"If you're not careful, your [code]while[/code] loop can run infinitely. In "
+"that case, the application will freeze."
+msgstr ""
+"如果你粗心大意，你的 [code]while[/code] 循环可能会无限运行。在这种情况下，应"
+"用程序会卡死。"
+
+msgid "Take a look at this code example."
+msgstr "看看这个代码示例。"
+
+#: course/lesson-17-while-loops/lesson.tres:182
+msgid "What would happen if the computer tried to run the code above?"
+msgstr "如果计算机试图运行上面的代码会发生什么？"
+
+#: course/lesson-17-while-loops/lesson.tres:185
+msgid ""
+"Because we don't increment [code]number[/code] within the [code]while[/code] "
+"loop, it always stays at [code]0[/code]."
+msgstr ""
+"因为我们没有在 [code]while[/code] 循环中让 [code]number[/code] 增加，所以它始"
+"终保持在 [code]0[/code]。"
+
+msgid ""
+"As a result, the number is always lower than [code]10[/code], so we never "
+"break out of the loop."
+msgstr "结果，这个数字总是小于[code]10[/code]，所以我们永远不会跳出循环。"
+
+msgid ""
+"Since there's no way to exit the [code]while[/code] loop, the computer will "
+"attempt to draw squares infinitely, which will freeze the program."
+msgstr ""
+"由于无法退出 [code]while[/code] 循环，计算机将无限次地尝试绘制正方形，这会卡"
+"死程序。"
+
+msgid ""
+"When programs stop responding on your computer, it's often due to an "
+"infinite loop!"
+msgstr "当你的计算机上的程序停止响应时，通常是死循环造成的！"
+
+#: course/lesson-17-while-loops/lesson.tres:192
+msgid "It would draw squares infinitely until the program is terminated"
+msgstr "它会无限次地绘制正方形，直到程序被终止"
+
+#: course/lesson-17-while-loops/lesson.tres:192
+msgid "It would draw 10 squares"
+msgstr "它会画10个正方形"
+
+#: course/lesson-17-while-loops/lesson.tres:192
+msgid "It would draw 20 squares"
+msgstr "它会画20个正方形"
+
+#: course/lesson-17-while-loops/lesson.tres:200
+msgid "When to use while loops"
+msgstr "何时使用 while 循环"
+
+#: course/lesson-17-while-loops/lesson.tres:202
+msgid ""
+"At first, you will not need [code]while[/code] loops often. Even the code we "
+"show here has more efficient alternatives."
+msgstr ""
+"刚开始学的时候，不太需要经常使用 [code]while[/code] 循环。甚至我们在这里展示"
+"的代码也有更高效的替代方案。"
+
+msgid ""
+"Also, there's a safer kind of loop, [code]for[/code] loops, which we'll look "
+"at in the next lesson."
+msgstr ""
+"不仅如此，还有一种更稳妥的循环，[code]for[/code] 循环，我们将在下一课中介绍。"
+
+msgid ""
+"Yet, [code]while[/code] loops have important intermediate to advanced-level "
+"uses, so you at least need to know they exist and how to use them."
+msgstr ""
+"但是，[code]while[/code] 循环在中到高级的情况中有重要用途，因此你至少需要知道"
+"有这么回事儿，以及如何使用它。"
+
+msgid ""
+"We use [code]while[/code] loops every time we need to loop an unknown number "
+"of times."
+msgstr "每当我们需要循环的次数未知时，我们都会使用 [code]while[/code] 循环。"
+
+msgid ""
+"For example, games run in a loop that typically generates sixty images per "
+"second until the user closes the game. This is possible thanks to "
+"[code]while[/code] loops."
+msgstr ""
+"例如，游戏以循环的形式运行，在关闭游戏前，通常每秒都会生成 60 张图像。这要归"
+"功于 [code]while[/code] 循环。"
+
+msgid "There are other good uses for [code]while[/code] loops:"
+msgstr "[code]while[/code] 循环还有很多其他好用途："
+
+msgid ""
+"- Reading and processing a file, like a text document, line by line.\n"
+"- Processing a constant stream of data, like someone recording audio with a "
+"microphone.\n"
+"- Reading code and converting it into instructions the computer "
+"understands.\n"
+"- Various intermediate to advanced-level algorithms, like finding paths "
+"around a map for AI."
+msgstr ""
+"- 逐行读取和处理文件，如一行一行处理文本文档。\n"
+"- 处理源源不断的数据流，例如用麦克风录制音频。\n"
+"- 解读代码并将其转换为计算机可以理解的指令。\n"
+"- 各种中到高级的算法，例如为围绕一个地图为 AI 寻找路径。"
+
+#: course/lesson-17-while-loops/lesson.tres:227
+msgid ""
+"Let's practice some [code]while[/code] loops, as they're useful to know. "
+"It's also an excellent opportunity to practice 2D vectors."
+msgstr ""
+"让我们练习写一些 [code]while[/code] 循环，了解它们很有用。这也是练习 2D 向量"
+"（2D vectors）的绝佳机会。"
+
+msgid ""
+"Then, we'll move on to the safer [code]for[/code] loops in the following "
+"lesson."
+msgstr "在这之后，下一课我们会继续学习更安全的 [code]for[/code] 循环。"
+
+#: course/lesson-17-while-loops/lesson.tres:237
+msgid "Moving to the end of a board"
+msgstr "移动到格子棋盘的终点"
+
+#: course/lesson-17-while-loops/lesson.tres:238
+msgid "Our robot has decided to stand at the top of the board."
+msgstr "我们的机器人决定站在棋盘的顶端。"
+
+msgid ""
+"Complete the [code]move_to_bottom()[/code] function so the robot moves to "
+"the bottom of the board."
+msgstr "写好 [code]move_to_bottom()[/code] 函数，使机器人移动到棋盘底部。"
+
+#, fuzzy
+msgid ""
+"The board size is determined by the [code]Vector2[/code] variable named "
+"[code]board_size[/code]."
+msgstr ""
+"棋盘大小由变量 [code]Vector2[/code] [code]board_size[/code]（棋盘大小） 决"
+"定。"
+
+msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
+msgstr "机器人的起始单元是 [code]Vector2(2, 0)[/code]。"
+
+msgid ""
+"Make sure to use a [code]while[/code] loop so the function works for any "
+"board size."
+msgstr "确保用到了 [code]while[/code] 循环，以便该函数适用于任何尺寸的棋盘。"
+
+#: course/lesson-17-while-loops/lesson.tres:257
+msgid ""
+"Use a while loop to have our robot move from the top of the board to the "
+"bottom."
+msgstr "用 while 循环让机器人从棋盘的顶部移动到底部。"
+
+#: course/lesson-17-while-loops/lesson.tres:261
+msgid "Introduction to While Loops"
+msgstr "While循环入门"

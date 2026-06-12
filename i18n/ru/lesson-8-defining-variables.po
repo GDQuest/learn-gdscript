@@ -1,0 +1,342 @@
+# Russian translations for Learn GDScript From.
+# Copyright (C) 2023 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2026-06-05 13:01+0000\n"
+"Last-Translator: Hosted Weblate user 153466 <gyfugood51@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-8-defining-variables/ru/>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 2026.6\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-8-defining-variables/lesson.tres:13
+msgid ""
+"In the previous lesson, you used a predefined member variable named "
+"[code]position[/code]."
+msgstr ""
+"В предыдущем уроке вы использовали предопределенное свойство с именем "
+"[code]position[/code]."
+
+msgid "In your projects, you will need to define your own variables."
+msgstr "В своих проектах вам придётся определять собственные переменные."
+
+msgid "Imagine that you need to track the player's health in your game."
+msgstr "Представьте, что вам нужно отслеживать здоровье игрока в вашей игре."
+
+msgid ""
+"They may start with [code]5[/code] health points. When taking a hit, the "
+"health should go down to [code]4[/code]. After another hit, it should be "
+"[code]3[/code]. And so on."
+msgstr ""
+"Он может начать с [code]5[/code] очками здоровья. При получении удара "
+"здоровье должно уменьшиться до [code]4[/code]. После ещё одного удара оно "
+"должно стать равно [code]3[/code]. И так далее."
+
+msgid ""
+"To keep track of that, you can create a variable named [code]health[/code] "
+"to which you add and subtract points."
+msgstr ""
+"Чтобы следить за этим, можно создать переменную с именем [code]health[/"
+"code], к которой можно прибавлять и отнимать очки."
+
+msgid ""
+"The example below introduces the [code]print()[/code] function, which "
+"outputs its argument to the output box on the left."
+msgstr ""
+"В примере ниже представлена функция [code]print()[/code], которая выводит "
+"значение параметра в поле вывода слева."
+
+msgid ""
+"Click the [i]run()[/i] button to instantly run the entire function, and "
+"click the [i]step[/i] button to execute lines of code one by one."
+msgstr ""
+"Нажмите кнопку [i]run()[/i], чтобы мгновенно запустить всю функцию, и "
+"нажмите кнопку [i]шаг[/i], чтобы выполнить строки кода одну за другой."
+
+msgid ""
+"The [i]Debugger[/i] panel at the bottom shows the current value of the "
+"[code]health[/code] variable."
+msgstr ""
+"Панель [i]Отладчик[/i] внизу показывает текущее значение переменной "
+"[code]health[/code]."
+
+#: course/lesson-8-defining-variables/lesson.tres:47
+msgid ""
+"After executing the first two lines of code, you will have a health variable "
+"storing a value of [code]4[/code]."
+msgstr ""
+"После выполнения первых двух строк тела функции вы получите переменную "
+"health, хранящую значение [code]4[/code]."
+
+msgid ""
+"Below, we'll break down how you define new variables and explain the "
+"[code]print()[/code] function."
+msgstr ""
+"Ниже мы разберем, как определять новые переменные, и объясним функцию "
+"[code]print()[/code]."
+
+#: course/lesson-8-defining-variables/lesson.tres:57
+msgid "Defining a variable"
+msgstr "Определение переменной"
+
+#: course/lesson-8-defining-variables/lesson.tres:59
+msgid ""
+"To use a variable, you must first define it so the computer registers its "
+"name."
+msgstr ""
+"Чтобы использовать переменную, вы должны сначала определить её, чтобы "
+"компьютер зарегистрировал её имя."
+
+msgid ""
+"To do so, you start a line of code with the [code]var[/code] keyword "
+"followed by your desired variable name. Like [code]func[/code] stands for "
+"[i]function[/i], [code]var[/code] stands for [i]variable[/i]."
+msgstr ""
+"Для этого нужно начать строку кода с ключевого слова [code]var[/code], и "
+"продолжить её подходящим именем переменной. Так же, как [code]func[/code] "
+"обозначает [i]функцию[/i], [code]var[/code] обозначает [i]переменную[/i]."
+
+msgid ""
+"Variables are case-sensitive, which means [code]health[/code] and "
+"[code]Health[/code] are technically different variables. Be careful to use "
+"the same capitalization wherever you refer to the same variable, or you "
+"could be reading or writing to a different variable."
+msgstr ""
+"Переменные чувствительны к регистру, что означает, что [code]health[/code] и "
+"[code]Health[/code] технически разные переменные. Будьте осторожны и "
+"используйте одну и ту же заглавную букву везде, где вы ссылаетесь на одну и "
+"ту же переменную, иначе вы можете читать или писать в другую переменную."
+
+msgid ""
+"The following line defines a [code]health[/code] variable pointing to no "
+"value. You can think of it as creating a product label you have yet to stick "
+"onto something."
+msgstr ""
+"Следующая строка определяет переменную [code]health[/code], не указывающую "
+"ни на какое значение. Вы можете думать об этом как о создании этикетки "
+"продукта, которую вам еще предстоит наклеить на что-то."
+
+#: course/lesson-8-defining-variables/lesson.tres:85
+msgid ""
+"Like with functions, a member variable's name must be unique inside a given "
+"code file. Creating two variables next to each other with the same name will "
+"cause an error."
+msgstr ""
+"Как и в случае с функциями, имя свойства должно быть уникальным в пределах "
+"данного файла кода. Создание двух переменных рядом друг с другом с "
+"одинаковым именем приведёт к ошибке."
+
+#: course/lesson-8-defining-variables/lesson.tres:105
+msgid ""
+"To use a variable, you want to assign it a starting value. You can do so "
+"using the equal sign (=)."
+msgstr ""
+"Чтобы использовать переменную, необходимо присвоить ей начальное значение. "
+"Это можно сделать с помощью знака равенства (=)."
+
+msgid ""
+"This code assigns the value [code]100[/code] to a new variable named "
+"[code]health[/code]."
+msgstr ""
+"Этот код присваивает значение [code]100[/code] новой переменной с именем "
+"[code]health[/code]."
+
+#: course/lesson-8-defining-variables/lesson.tres:127
+msgid ""
+"After defining your variable, you can access its value by writing the "
+"variable's name."
+msgstr ""
+"После определения переменной вы можете получить доступ к её значению, для "
+"этого просто напишите имя переменной."
+
+#: course/lesson-8-defining-variables/lesson.tres:147
+msgid ""
+"The code above will display the number [code]100[/code] to some output "
+"window."
+msgstr "Приведенный выше код выведет число [code]100[/code] в окно вывода."
+
+msgid ""
+"Notice we don't use the [code]var[/code] keyword anymore as we only need it "
+"to [i]define[/i] a variable."
+msgstr ""
+"Обратите внимание, что мы больше не используем ключевое слово [code]var[/"
+"code], поскольку оно нужно только для того, чтобы [i]определить[/i] "
+"переменную."
+
+msgid ""
+"Also, once you define a variable, you can change its value anytime with the "
+"equal sign."
+msgstr ""
+"Кроме того, определив переменную, вы можете в любой момент изменить её "
+"значение с помощью знака равенства."
+
+#: course/lesson-8-defining-variables/lesson.tres:169
+msgid "About the print function"
+msgstr "О функции print"
+
+#: course/lesson-8-defining-variables/lesson.tres:171
+msgid ""
+"The [code]print()[/code] function is generally the first function you learn "
+"in academic programming courses."
+msgstr ""
+"Функция [code]print()[/code] обычно является первой функцией, которую вы "
+"изучаете на академических курсах программирования."
+
+msgid ""
+"It sends (\"prints\") the message or value you give it to some output "
+"window, often a black window with plain white text."
+msgstr ""
+"Она отправляет (\"печатает\") сообщение или значение, которое вы ей "
+"передаете, в некоторое окно вывода, часто представленное в виде чёрного окна "
+"с белым текстом."
+
+#: course/lesson-8-defining-variables/lesson.tres:183
+msgid ""
+"Programmers often use [code]print()[/code] to quickly check the value of "
+"their variables when their game runs."
+msgstr ""
+"Программисты часто используют [code]print()[/code] для быстрой проверки "
+"значения переменных при запуске игры."
+
+msgid ""
+"In the app, we made a special output window that captures calls to "
+"[code]print()[/code] and displays a card to make it friendlier for you."
+msgstr ""
+"В приложении мы сделали специальное окно вывода, которое перехватывает "
+"вызовы [code]print()[/code] и отображает результат выполнения на карточке, "
+"чтобы сделать его более дружелюбным для вас."
+
+#: course/lesson-8-defining-variables/lesson.tres:205
+msgid ""
+"Here, the verb [i]print[/i] means \"to send information to display on the "
+"screen.\""
+msgstr ""
+"Здесь глагол [i]print[/i] означает \"отправить информацию для отображения на "
+"экране.\""
+
+msgid ""
+"The function \"prints\" things on your computer display; It does not relate "
+"to printers."
+msgstr ""
+"Функция \"печатает\" вещи на дисплее компьютера; она не относится к "
+"принтерам."
+
+#: course/lesson-8-defining-variables/lesson.tres:215
+msgid "Variables are like labels"
+msgstr "Переменные похожи на метки"
+
+#: course/lesson-8-defining-variables/lesson.tres:217
+msgid "As we hinted above, in GDScript, variables work a bit like labels."
+msgstr ""
+"Как мы обозначили выше, по принципу работы переменные в GDScript немного "
+"похожи на метки."
+
+msgid ""
+"Assigning a value to a variable is like taking your label (the variable) and "
+"sticking it onto some item (the value)."
+msgstr ""
+"Присвоить значение переменной — это все равно что взять ярлык (переменную) и "
+"наклеить его на какой-либо предмет (значение)."
+
+#: course/lesson-8-defining-variables/lesson.tres:229
+msgid ""
+"Like a supermarket has a database of product labels, the computer keeps a "
+"list of all variables in your code."
+msgstr ""
+"Как в супермаркете есть база данных этикеток товаров, так и компьютер хранит "
+"список всех переменных в вашем коде."
+
+msgid "Given the variable name, the computer can look up the attached value."
+msgstr ""
+"Используя заданное имя переменной, компьютер может найти прикреплённое к ней "
+"значение."
+
+msgid ""
+"It has an important consequence. In GDScript, you can stick that label to "
+"any other value."
+msgstr ""
+"Из этого вытекает важное следствие — в GDScript вы можете приклеить эту "
+"метку к любому другому значению."
+
+#: course/lesson-8-defining-variables/lesson.tres:253
+msgid ""
+"The above code is like taking a label from the appropriate item and sticking "
+"it to the wrong thing:"
+msgstr ""
+"Приведенный выше код похож на то, как если бы вы взяли ярлык с подходящего "
+"элемента и приклеили его к неправильному:"
+
+msgid ""
+"- At line 2, the [code]health[/code] variable holds a number.\n"
+"- From line 3, [code]health[/code] holds text."
+msgstr ""
+"- В строке 2 переменная [code]health[/code] содержит число.\n"
+"- После выполнения строки 3, переменная [code]health[/code] будет содержать "
+"текст."
+
+msgid ""
+"The computer will let you do that! The code's syntax and \"grammar\" are "
+"correct, but it's not good."
+msgstr ""
+"Компьютер позволит вам так сделать! Синтаксис и \"грамматика\" кода "
+"правильные, но делать так — плохо."
+
+msgid ""
+"Variable names should describe the value they contain, so a [code]health[/"
+"code] variable with a text value will confuse your future self and other "
+"coders. It can also cause errors in your game."
+msgstr ""
+"Имена переменных должны описывать содержащееся в них значение, поэтому "
+"переменная [code]health[/code] с текстовым значением запутает вас и других "
+"программистов в будущем. Это также может вызвать ошибки в вашей игре."
+
+msgid ""
+"Later on, we'll see how to avoid this issue with [i]variable types[/i]. For "
+"now, let's practice creating variables!"
+msgstr ""
+"Позже мы увидим, как избежать этой проблемы с помощью [i]типов переменных[/"
+"i]. А пока давайте попрактикуемся в создании переменных!"
+
+#: course/lesson-8-defining-variables/lesson.tres:270
+msgid "Define a health variable"
+msgstr "Определите переменную здоровья"
+
+#: course/lesson-8-defining-variables/lesson.tres:271
+msgid ""
+"Define a variable named [code]health[/code] with a starting value of "
+"[code]100[/code]."
+msgstr ""
+"Определите переменную здоровья с именем [code]health[/code] и начальным "
+"значением [code]100[/code]."
+
+msgid ""
+"You can define variables inside or outside functions. In this practice, you "
+"shouldn't create a function."
+msgstr ""
+"Вы можете определять переменные внутри или снаружи функций. В данном "
+"упражнении функцию создавать не нужно."
+
+#: course/lesson-8-defining-variables/lesson.tres:283
+msgid ""
+"In this practice, you'll define your first variable and give it a specific "
+"starting value."
+msgstr ""
+"В этом упражнении вы определите свою первую переменную и зададите ей "
+"конкретное начальное значение."
+
+#: course/lesson-8-defining-variables/lesson.tres:287
+msgid "Defining Your Own Variables"
+msgstr "Определение собственных переменных"

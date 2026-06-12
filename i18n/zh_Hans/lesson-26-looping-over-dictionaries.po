@@ -1,0 +1,229 @@
+# Chinese (Simplified) translations for Learn GDScript From.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2026-05-19 06:11+0000\n"
+"Last-Translator: Jared <1194331986@qq.com>\n"
+"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
+"projects/learn-gdscript-from-zero/lesson-26-looping-over-dictionaries/"
+"zh_Hans/>\n"
+"Language: zh_Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2026.6.dev0\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:13
+msgid ""
+"You can loop over dictionaries, just like you learned to loop over arrays. "
+"When you loop over a dictionary, you get its keys one by one. You can then "
+"use each key to get its value."
+msgstr ""
+"你可以遍历字典，就像你学过遍历数组一样。当你在字典上循环时，你会一个接一个地"
+"得到它的键。然后可以使用每个键来获取它的值。"
+
+#, fuzzy
+msgid "Let's see how this works with two examples."
+msgstr "让我们通过两个示例来看看它是如何工作的。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:23
+msgid "Displaying an inventory's content"
+msgstr "显示背包中的内容"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:25
+msgid ""
+"To display the player's inventory, you need to know what it contains: the "
+"name and amount of each item."
+msgstr "要显示玩家的背包，你得知道里面有什么：每个物品的名称和数量。"
+
+msgid ""
+"To do this, you loop over the dictionary and process each key-value pair one "
+"at a time."
+msgstr "要做到这一点，你只能遍历整个字典，并逐个处理键值对。"
+
+msgid ""
+"You can get the list of all the keys in a dictionary by calling its "
+"[code]keys()[/code] function."
+msgstr ""
+"你可以通过调用字典的 [code]keys()[/code] 函数来要获取字典中所有键（key）的列"
+"表。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:49
+msgid ""
+"Looping over dictionary keys is so common that GDScript gives you a shortcut."
+msgstr "遍历字典键是非常常见的，因此GDScript为您提供了一个快捷方式。"
+
+#, fuzzy
+msgid ""
+"You can write the dictionary variable name directly after the [code]in[/"
+"code] keyword in a [code]for[/code] loop. GDScript automatically loops over "
+"the dictionary's keys."
+msgstr ""
+"相反，可以在[code]for[/code] 循环的 [code]in[/code] 关键字之后直接键入变量名"
+"称（如下）。编程语言懂你在暗示想要遍历字典的键。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:71
+msgid ""
+"Remember: the name after the [code]for[/code] keyword is a variable name you "
+"choose yourself. You could call it [code]item_name[/code], [code]item[/"
+"code], [code]key[/code], or anything else. This variable holds one key at a "
+"time as the loop runs."
+msgstr ""
+"记住：[/code]关键字的[code]后面的名称是您自己选择的变量名。你可以称之"
+"为[code]项目_名称[/code]、[code]项[/code]、[code]键[/code]或其他任何内容。这"
+"个变量在循环运行时一次保存一个键。"
+
+#, fuzzy
+msgid ""
+"You can get each value with the syntax [code]dictionary[key][/code], as you "
+"learned in the previous lesson."
+msgstr ""
+"你可以用上一课中学到的语法 [code]dictionary[key][/code] 来获取键对应的值。"
+
+#, fuzzy
+msgid ""
+"So we can loop over the inventory keys, get their values, and display that "
+"information on screen."
+msgstr ""
+"我们可以遍历字典inventory的所有键，获取对应的值，并在用户界面中显示所有这些信"
+"息。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:105
+#, fuzzy
+msgid ""
+"Instead of printing the key-value pairs to the output console, we can write "
+"and call a function that displays items on the screen."
+msgstr ""
+"与其将键值对打印到输出控制台，我们可以更进一步，编写专门的函数，用来将物品和"
+"数量展示在游戏的UI（User Interface）上。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:133
+msgid "Mapping grid cells to units"
+msgstr "将网格上的位置和单位联系起来"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:135
+#, fuzzy
+msgid ""
+"You can also use a dictionary to store which units are at which positions on "
+"a game board."
+msgstr "在棋盘网格上，用字典还可以将单位和他们所在的位置用映射关系联系起来。"
+
+#, fuzzy
+msgid ""
+"This is how you'd typically code a board game, a grid-based RPG, or a "
+"tactical RPG."
+msgstr "通常，这是编写棋盘游戏、或者基于网格的RPG、战术RPG游戏的方式。"
+
+#, fuzzy
+msgid ""
+"So far, we used [code]String[/code] keys. But GDScript dictionaries can use "
+"any type as a key. In this example, we use [code]Vector2[/code] values as "
+"keys to represent grid positions."
+msgstr ""
+"虽然现目前我们主要用的是[code]String[/code]（字符串）键，但 GDScript 的字典接"
+"受任何值类型的键，任何类型的键都可以映射给任何类型的值。"
+
+#, fuzzy
+msgid "The only rule is that every key in a dictionary must be unique."
+msgstr "唯一的限制是，每个键都必须是唯一的。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:161
+#, fuzzy
+msgid ""
+"With a [code]for[/code] loop, you can place all the units on the board when "
+"a game starts."
+msgstr ""
+"使用 [code]for[/code] 循环和键值对，可以在游戏开始时将单位放置在棋盘上。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:191
+msgid ""
+"In the following practices, you will loop over dictionaries and process "
+"their content."
+msgstr "在下面的练习中，你需要遍历字典并处理其中的内容。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:199
+msgid "Displaying the inventory"
+msgstr "显示背包的内容"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:200
+#, fuzzy
+msgid ""
+"We use a dictionary to store the player's inventory. The keys are item "
+"names, and the values are how many of each item the player has."
+msgstr ""
+"我们使用字典来代表玩家在这个游戏中的背包库存。字典的键是物品的名称，映射的值"
+"是玩家拥有的对应物品的数量。"
+
+#, fuzzy
+msgid "Loop over the dictionary and display every item in the inventory."
+msgstr "你的任务是遍历字典并显示背包中每个物品的名称和数量。"
+
+#, fuzzy
+msgid ""
+"Call the [code]display_item()[/code] function for each item. It takes two "
+"arguments: the item name and the amount."
+msgstr ""
+"为此，请调用 [code]display_item()[/code]（显示物品）函数。它有两个参数：物品"
+"名称和数量。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:221
+#, fuzzy
+msgid ""
+"The player's inventory needs to appear on screen. Use a loop to display "
+"every item."
+msgstr ""
+"我们需要在屏幕上显示玩家有什么物品，但是现在缺少能执行此操作的代码。用循环代"
+"码显示出每个物品。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:226
+msgid "Placing units on the board"
+msgstr "将单元放置在棋盘上"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:227
+#, fuzzy
+msgid ""
+"We have a dictionary named [code]units[/code]. It maps cell positions on the "
+"grid to the type of unit at that position."
+msgstr ""
+"我们有一个名为[code]units[/code]（单元）的字典，它将网格上的一个位置和要放在"
+"那里的单位映射起来。"
+
+#, fuzzy
+msgid ""
+"Use a for loop to place every unit on the game board. Call the "
+"[code]place_unit()[/code] function for each unit. It takes two arguments: "
+"first the cell position, then the unit type."
+msgstr ""
+"使用 for 循环和 [code]place_unit()[/code]（放置单位）函数，将units字典中的所"
+"有单位放置在游戏棋盘上正确的位置是上。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:246
+#, fuzzy
+msgid ""
+"At the start of each battle, units need to appear on the game board. Loop "
+"over the dictionary to place them."
+msgstr ""
+"我们想在每场战斗开始时用单位填充我们的游戏棋盘。 循环遍历字典以将单位放置在棋"
+"盘上。"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:250
+msgid "Looping over dictionaries"
+msgstr "用循环遍历字典"
+
+#~ msgid ""
+#~ "Like with arrays, you can loop over dictionaries. You can loop over both "
+#~ "their keys and values."
+#~ msgstr "和数组一样，你能够遍历字典。 遍历它的key（键，关键）和对应的值。"
+
+#~ msgid ""
+#~ "But it's something we do so much that you don't need to call the function."
+#~ msgstr "但这个功能我们用的太频繁了，以至于现在都不需要调用该函数。"

@@ -1,0 +1,240 @@
+# Portuguese (Brazil) translations for Learn GDScript From.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2026-05-13 20:11+0000\n"
+"Last-Translator: Artur Alves Coqueiro <arturalvescoqueiro@proton.me>\n"
+"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
+"learn-gdscript-from-zero/lesson-26-looping-over-dictionaries/pt_BR/>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2026.5.dev0\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:13
+msgid ""
+"You can loop over dictionaries, just like you learned to loop over arrays. "
+"When you loop over a dictionary, you get its keys one by one. You can then "
+"use each key to get its value."
+msgstr ""
+"Você pode iterar sobre dicionários, assim como aprendeu a iterar sobre "
+"arrays. Quando você itera sobre um dicionário, obtém suas chaves uma por "
+"uma. Depois, você pode usar cada chave para obter seu valor."
+
+msgid "Let's see how this works with two examples."
+msgstr "Vamos ver como funciona com dois exemplos."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:23
+msgid "Displaying an inventory's content"
+msgstr "Exibindo o conteúdo de um inventário"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:25
+msgid ""
+"To display the player's inventory, you need to know what it contains: the "
+"name and amount of each item."
+msgstr ""
+"Para exibir o inventário do jogador, você precisa saber o que esse "
+"inventário contém : O nome e quantidade de cada item."
+
+msgid ""
+"To do this, you loop over the dictionary and process each key-value pair one "
+"at a time."
+msgstr ""
+"Para fazer isso, você tem que iterar sobre o dicionário e processar cada par "
+"de valor-chave um por um."
+
+msgid ""
+"You can get the list of all the keys in a dictionary by calling its "
+"[code]keys()[/code] function."
+msgstr ""
+"Você pode receber a lista de todas as chaves em um dicionário chamando a "
+"função [code]keys()[/code] (\"keys\" significa \"chaves\" em inglês)."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:49
+msgid ""
+"Looping over dictionary keys is so common that GDScript gives you a shortcut."
+msgstr ""
+"Iterar sobre as chaves de um dicionário é muito comum que até mesmo o "
+"GDScript te dá um atalho."
+
+msgid ""
+"You can write the dictionary variable name directly after the [code]in[/"
+"code] keyword in a [code]for[/code] loop. GDScript automatically loops over "
+"the dictionary's keys."
+msgstr ""
+"Você pode escrever o nome do dicionário diretamente depois da palavra-chave "
+"[code]in[/code] (\"in\" significa \"em\") em um loop. GDScript "
+"automaticamente itera sobre as chaves de um dicionário."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:71
+msgid ""
+"Remember: the name after the [code]for[/code] keyword is a variable name you "
+"choose yourself. You could call it [code]item_name[/code], [code]item[/"
+"code], [code]key[/code], or anything else. This variable holds one key at a "
+"time as the loop runs."
+msgstr ""
+"Lembre-se : O nome depois da palavra-chave [code]for[/code] é o nome da "
+"variável que você escolheu. Você poderia chamá-la de [code]nome_do_item[/"
+"code], [code]item[/code], [code]chave[/code], ou qualquer outra coisa. Esta "
+"variável guarda um item a cada vez que o loop roda."
+
+msgid ""
+"You can get each value with the syntax [code]dictionary[key][/code], as you "
+"learned in the previous lesson."
+msgstr ""
+"Você pode obter cada um dos valores com a sintaxe [code]dictionary[chave][/"
+"code] conforme você aprendeu na lição anterior."
+
+msgid ""
+"So we can loop over the inventory keys, get their values, and display that "
+"information on screen."
+msgstr ""
+"Podemos percorrer as chaves de inventário, obter os valores correspondentes "
+"e exibir todas essas informações na interface do usuário."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:105
+msgid ""
+"Instead of printing the key-value pairs to the output console, we can write "
+"and call a function that displays items on the screen."
+msgstr ""
+"Ao invés de imprimir os pares de chave-valor no console de saída, podemos "
+"programar e chamar uma função que mostra itens na tela."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:133
+msgid "Mapping grid cells to units"
+msgstr "Mapeando células de grid para unidades"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:135
+msgid ""
+"You can also use a dictionary to store which units are at which positions on "
+"a game board."
+msgstr ""
+"Também podemos usar um dicionário para mapear as posições de unidades em um "
+"tabuleiro."
+
+msgid ""
+"This is how you'd typically code a board game, a grid-based RPG, or a "
+"tactical RPG."
+msgstr ""
+"É assim que você normalmente programa um jogo de tabuleiro, um RPG baseado "
+"em grid ou um RPG tático."
+
+#, fuzzy
+msgid ""
+"So far, we used [code]String[/code] keys. But GDScript dictionaries can use "
+"any type as a key. In this example, we use [code]Vector2[/code] values as "
+"keys to represent grid positions."
+msgstr ""
+"Enquanto nos concentramos em chaves [code]String[/code] até agora, os "
+"dicionários em GDScript aceitam qualquer tipo de valor como chave, "
+"permitindo que você mapeie qualquer coisa para qualquer coisa."
+
+msgid "The only rule is that every key in a dictionary must be unique."
+msgstr "A única regra é que cada chave deve ser única."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:161
+msgid ""
+"With a [code]for[/code] loop, you can place all the units on the board when "
+"a game starts."
+msgstr ""
+"Usando um loop [code]for[/code], você pode colocar todas as unidades no "
+"tabuleiro no início de um jogo."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:191
+msgid ""
+"In the following practices, you will loop over dictionaries and process "
+"their content."
+msgstr ""
+"Nas práticas a seguir, você vai fazer um loop nos dicionários e processar "
+"seu conteúdo."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:199
+msgid "Displaying the inventory"
+msgstr "Mostrando o inventário"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:200
+msgid ""
+"We use a dictionary to store the player's inventory. The keys are item "
+"names, and the values are how many of each item the player has."
+msgstr ""
+"Usamos um dicionário para representar o inventário do jogador nesse jogo. As "
+"chaves do dicionário representam o nome dos itens e os valores representam a "
+"quantidade de itens que o jogador possui."
+
+msgid "Loop over the dictionary and display every item in the inventory."
+msgstr ""
+"Você precisa percorrer o dicionário com um loop e exibir o nome e a "
+"quantidade de cada item no inventário."
+
+msgid ""
+"Call the [code]display_item()[/code] function for each item. It takes two "
+"arguments: the item name and the amount."
+msgstr ""
+"Chame a função [code]display_item()[/code] (\"display item\" significa "
+"\"mostrar item\" em inglês) para cada item. São necessários dois argumentos: "
+"o nome do item e a quantidade."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:221
+#, fuzzy
+msgid ""
+"The player's inventory needs to appear on screen. Use a loop to display "
+"every item."
+msgstr ""
+"Precisamos exibir o inventário do jogador na tela, mas não temos o código "
+"para isso. Use um loop para exibir cada item."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:226
+msgid "Placing units on the board"
+msgstr "Colocando unidades no tabuleiro"
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:227
+#, fuzzy
+msgid ""
+"We have a dictionary named [code]units[/code]. It maps cell positions on the "
+"grid to the type of unit at that position."
+msgstr ""
+"Temos um dicionário chamado [code]units[/code] que mapeia uma posição de "
+"célula no grid para uma unidade a ser colocada lá."
+
+#, fuzzy
+msgid ""
+"Use a for loop to place every unit on the game board. Call the "
+"[code]place_unit()[/code] function for each unit. It takes two arguments: "
+"first the cell position, then the unit type."
+msgstr ""
+"Usando um loop for e a função [code]place_unit()[/code], coloque cada "
+"unidade no dicionário units na posição desejada no tabuleiro do jogo."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:246
+msgid ""
+"At the start of each battle, units need to appear on the game board. Loop "
+"over the dictionary to place them."
+msgstr ""
+"Queremos preencher nosso tabuleiro de jogo com unidades no início de cada "
+"batalha. Faça um loop sobre o dicionário para colocar as unidades no "
+"tabuleiro."
+
+#: course/lesson-26-looping-over-dictionaries/lesson.tres:250
+msgid "Looping over dictionaries"
+msgstr "Loop em dicionários"
+
+#~ msgid ""
+#~ "Like with arrays, you can loop over dictionaries. You can loop over both "
+#~ "their keys and values."
+#~ msgstr ""
+#~ "Assim como com os arrays, você pode fazer um loop sobre os dicionários. "
+#~ "Você pode fazer um loop sobre suas chaves e valores."
+
+#~ msgid ""
+#~ "But it's something we do so much that you don't need to call the function."
+#~ msgstr "Mas é algo que fazemos tanto que você não precisa chamar a função."
