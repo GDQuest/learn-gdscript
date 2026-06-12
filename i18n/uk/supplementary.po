@@ -29,163 +29,223 @@ msgid "error_suggestion"
 msgstr ""
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword.\n"
-"\n"
-"In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid temporary variable name to assign values in each loop iteration. The loop creates a new variable with the desired name and assigns each element of the array to it."
+msgid "You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword."
+msgstr "Ця помилка виникає, коли назва між [code]for[/code] і [code]in[/code] не є допустимою назвою змінної або відсутнє ключове слово [code]in[/code]."
+
+#: script_checking/error_database.csv
+msgid "In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid temporary variable name to assign values in each loop iteration. The loop creates a new variable with the desired name and assigns each element of the array to it."
 msgstr "У циклі [code]for[/code] ключове слово [code]in[/code] приймає лише допустиму назву тимчасової змінної для присвоєння значень кожної ітерації циклу. Цикл створює нову змінну з вибраною назвою і присвоює їй кожен елемент масиву."
 
 #: script_checking/error_database.csv
-msgid ""
-"To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces.\n"
-"\n"
-"For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name.\n"
-"\n"
-"To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:\n"
-"\n"
-"[code]for cell_position in cell_positions_array:\n"
-"    cell_position.x += 1.0[/code]"
-msgstr ""
+msgid "To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces."
+msgstr "Щоб виправити цю помилку, слід переконатися, що між ключовими словами [code]for[/code] і [code]in[/code] зазначено допустиму назву змінної без розділових знаків і пропусків."
 
 #: script_checking/error_database.csv
-msgid ""
-"You get this error when you try to assign a value to something that is not a variable.\n"
-"\n"
-"You can only assign values to variables. You cannot assign values to function calls or calculations.\n"
-"\n"
-"For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call, not a variable."
-msgstr ""
+msgid "For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name."
+msgstr "Наприклад, цей код хибний: [code]for cell_position.x in cell_positions_array:[/code], оскільки [code]cell_position.x[/code] не є допустимою назвою змінної."
 
 #: script_checking/error_database.csv
-msgid ""
-"Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name.\n"
-"\n"
-"If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call.\n"
-"\n"
-"If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid ""
-"You get this error when you try to change the value of a constant.\n"
-"\n"
-"A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it.\n"
-"\n"
-"For example, if you write [code]const MAX_SPEED = 100[/code], you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code].\n"
-"\n"
-"Many constants are built into Godot and GDScript, and you cannot change them either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters."
-msgstr ""
+msgid "To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:"
+msgstr "Щоб отримати доступ до підкомпонента [code]x[/code] змінної, слід зробити це всередині тіла циклу:"
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid ""
-"Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:\n"
-"\n"
-"1. If the value should never change, or it comes from Godot, remove the line that tries to change it.\n"
-"2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
+msgid "[code]for cell_position in cell_positions_array:"
+msgstr ""
+"[code]for cell_position in cell_positions_array:\n"
+"    cell_position.x += 1.0[/code]"
+
+#: script_checking/error_database.csv
+msgid "    cell_position.x += 1.0[/code]"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You get this error when you try to assign a value to something that is not a variable."
+msgstr "Якщо ви отримуєте цю помилку, ви, найпевніш, намагаєтеся надати значення не змінній, а чомусь іншому, що неможливо. Ви можете надавати значення лише змінним."
+
+#: script_checking/error_database.csv
+msgid "You can only assign values to variables. You cannot assign values to function calls or calculations."
+msgstr "Ви можете присвоювати значення тільки змінним. Ви не можете присвоювати значення викликам функцій або обчисленням."
+
+#: script_checking/error_database.csv
+msgid "For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call, not a variable."
+msgstr "Наприклад, ви не можете написати [code]randi() = 5[/code], оскільки [code]randi()[/code] є викликом функції, а не змінною."
+
+#: script_checking/error_database.csv
+msgid "Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name."
+msgstr "Перевірте, що ви написали зліва від знака рівності (=). Переконайтеся, що це ім'я змінної."
+
+#: script_checking/error_database.csv
+msgid "If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call."
+msgstr "Якщо ви бачите дужки () зліва, можливо, ви намагаєтеся присвоїти значення виклику функції. Видаліть дужки та виклик функції."
+
+#: script_checking/error_database.csv
+msgid "If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
+msgstr "Якщо ви намагаєтеся перевірити, чи два значення є рівними в умові, використовуйте два знаки рівності (==) замість одного (=)."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you try to change the value of a constant."
+msgstr "Ця помилка виникає, коли ви намагаєтеся змінити значення константи."
+
+#: script_checking/error_database.csv
+msgid "A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it."
+msgstr "Константа — це ім'я, яке містить значення, яке не може змінюватися. Це схоже на змінну, але після встановлення значення його неможливо замінити."
+
+#: script_checking/error_database.csv
+msgid "For example, if you write [code]const MAX_SPEED = 100[/code], you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code]."
+msgstr "Наприклад, якщо ви напишете [code]const MAX_SPEED = 100[/code], ви не зможете пізніше написати [code]MAX_SPEED = 200[/code] або [code]MAX_SPEED += 50[/code]."
+
+#: script_checking/error_database.csv
+msgid "Many constants are built into Godot and GDScript, and you cannot change them either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters."
+msgstr "У Godot і GDScript вбудовано багато констант, і ви також не можете їх змінювати. Наприклад, ви не можете написати [code]Vector2 = 5[/code] або [code]PI = 3[/code]. Імена констант зазвичай пишуться великими літерами."
+
+#: script_checking/error_database.csv
+msgid "Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:"
+msgstr "Подивіться, що ви намагаєтеся змінити. Якщо це константа (визначена за допомогою ключового слова [code]const[/code] або вбудована в Godot), у вас є два варіанти:"
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "1. If the value should never change, or it comes from Godot, remove the line that tries to change it."
 msgstr ""
 "1. Якщо значення ніколи не повинно змінюватися або воно походить від Godot, видаліть рядок, який намагається його змінити.\n"
 "2. Якщо значення потрібно змінити, використовуйте [code]var[/code] замість [code]const[/code] під час його першого створення."
 
 #: script_checking/error_database.csv
-msgid ""
-"You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line.\n"
-"\n"
-"In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character.\n"
-"\n"
-"If you accidentally type a space before a tab, or a tab before a space, the computer gets confused about your code's indentation."
+#, fuzzy
+msgid "2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
 msgstr ""
+"1. Якщо значення ніколи не повинно змінюватися або воно походить від Godot, видаліть рядок, який намагається його змінити.\n"
+"2. Якщо значення потрібно змінити, використовуйте [code]var[/code] замість [code]const[/code] під час його першого створення."
 
 #: script_checking/error_database.csv
-msgid ""
-"To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters.\n"
-"\n"
-"Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference.\n"
-"\n"
-"Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
-msgstr ""
+msgid "You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line."
+msgstr "Ця помилка виникає, коли ви змішуєте пробіли та табуляції у відступах. Це трапляється, коли перед табуляцією стоїть пробіл або перед пробілом на початку рядка стоїть табуляція."
 
 #: script_checking/error_database.csv
-msgid ""
-"A cyclic reference is when a class references itself, directly or indirectly.\n"
-"\n"
-"It has two possible causes:\n"
-"\n"
-"1. You used the class name in the class itself.\n"
-"2. Your code refers to another class that refers to this class, causing an endless reference cycle.\n"
-"\n"
-"Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
+msgid "In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character."
+msgstr "У GDScript для відступу коду слід використовувати тільки табуляцію (а не пробіли). При натисканні клавіші Tab на клавіатурі створюється символ табуляції."
+
+#: script_checking/error_database.csv
+msgid "If you accidentally type a space before a tab, or a tab before a space, the computer gets confused about your code's indentation."
+msgstr "Якщо ви випадково введете пробіл перед табуляцією або табуляцію перед пробілом, комп'ютер не зможе розпізнати відступ у вашому коді."
+
+#: script_checking/error_database.csv
+msgid "To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters."
+msgstr "Щоб виправити цю помилку, перейдіть до рядка, зазначеного в повідомленні про помилку. Видаліть усі пробіли на самому початку рядка та видаліть усі пробіли, що з'являються після символів табуляції."
+
+#: script_checking/error_database.csv
+msgid "Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference."
+msgstr "Символи табуляції виглядають як стрілка, що вказує на вертикальну лінію у вашому коді: ⇥. Пробіли виглядають як вирівняні по центру крапки: ·. Придивіться уважно, щоб помітити різницю."
+
+#: script_checking/error_database.csv
+msgid "Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
+msgstr "Потім переконайтеся, що рядок починається тільки з символів табуляції для відступу, без пробілів."
+
+#: script_checking/error_database.csv
+msgid "A cyclic reference is when a class references itself, directly or indirectly."
+msgstr "Циклічне посилання — це коли клас прямо чи опосередковано посилається сам на себе."
+
+#: script_checking/error_database.csv
+msgid "It has two possible causes:"
+msgstr "Воно має дві можливі причини:"
+
+#: script_checking/error_database.csv
+msgid "1. You used the class name in the class itself."
 msgstr ""
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid ""
-"Erase the type hint in the error line, and the problem should disappear.\n"
-"\n"
-"At GDQuest, when we face this error, we remove the type hints on lines causing cyclic references. It solves the problem in the vast majority of cases."
+msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
+msgstr ""
+"1. Ви використали назву класу в самому класі.\n"
+"2. Ваш код посилається на інший клас, який посилається на цей клас, викликаючи нескінченний цикл посилань."
+
+#: script_checking/error_database.csv
+msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
+msgstr "У будь-якому разі, за внутрішніми правилами GDScript у Godot 3, використовувати циклічні посилання не можна. Godot 4 має розв'язати цю проблему, але поки що вам слід її обійти."
+
+#: script_checking/error_database.csv
+msgid "Erase the type hint in the error line, and the problem should disappear."
+msgstr "Зітріть позначку типу змінної у рядку з помилкою, і проблема має зникнути."
+
+#: script_checking/error_database.csv
+msgid "At GDQuest, when we face this error, we remove the type hints on lines causing cyclic references. It solves the problem in the vast majority of cases."
 msgstr "В GDQuest, коли ми стикаємося з цією помилкою, ми видаляємо позначення типів змінних у рядках, що спричиняють циклічні посилання. Це розв'язує проблему в переважній більшості випадків."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"The indentation of your code (the number of tab characters at the start of the line) is incorrect.\n"
-"\n"
-"You are missing one or more tabs, or you inserted too many.\n"
-"\n"
-"The computer uses those leading tab characters on code lines to know which lines of code are part of a code block, like a function."
+msgid "The indentation of your code (the number of tab characters at the start of the line) is incorrect."
+msgstr "Відступи у коді (кількість символів табуляції на початку рядка) неправильні."
+
+#: script_checking/error_database.csv
+msgid "You are missing one or more tabs, or you inserted too many."
+msgstr "Не вистачає однієї чи кількох табуляцій, або ви вставили їх надто багато."
+
+#: script_checking/error_database.csv
+msgid "The computer uses those leading tab characters on code lines to know which lines of code are part of a code block, like a function."
 msgstr "Комп'ютер використовує ці символи, щоб розпізнати, до якого блоку, наприклад, функції, належать рядки коду."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"If the line of code with the error is right after a line ending with a colon, like a function definition, you need one extra indent level compared to the previous line.\n"
-"\n"
-"In other words, your line should have one more leading tab character than the function definition."
+msgid "If the line of code with the error is right after a line ending with a colon, like a function definition, you need one extra indent level compared to the previous line."
 msgstr "Якщо рядок коду з помилкою розташований зразу після рядка, що закінчується двокрапкою, як у визначенні функції, потрібно поставити код у рядку на наступний рівень відступу порівняно з попереднім рядком."
 
 #: script_checking/error_database.csv
-msgid ""
-"You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code.\n"
-"\n"
-"You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character.\n"
-"\n"
-"Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code."
-msgstr ""
+msgid "In other words, your line should have one more leading tab character than the function definition."
+msgstr "Іншими словами, на початку вашого рядка має бути на один символ табуляції більше, ніж у заголовку функції."
 
 #: script_checking/error_database.csv
-msgid ""
-"The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing.\n"
-"\n"
-"If the error says \"expected,\" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else.\n"
-"\n"
-"If it says \"unterminated,\" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
-msgstr ""
+msgid "You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code."
+msgstr "Ви отримуєте цю помилку, коли написали щось синтаксично неприпустиме або вам чогось бракує для завершення цього рядка чи попередніх рядків коду."
 
 #: script_checking/error_database.csv
-msgid ""
-"You get this error when you use a special character that GDScript doesn't recognize.\n"
-"\n"
-"This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings).\n"
-"\n"
-"[b]Note:[/b] Godot 4 supports special and non-Latin characters in code (Unicode characters), but this app is built with Godot 3, which does not."
-msgstr ""
+msgid "You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character."
+msgstr "Слід бути гранично точним, коли ви пишете код для комп'ютера. Таку помилку легко отримати, оскільки до неї приводить навіть один неправильний символ."
 
 #: script_checking/error_database.csv
-msgid ""
-"To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements.\n"
-"\n"
-"You can use accented characters inside text strings (between quotes), but not in the code itself.\n"
-"\n"
-"You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
-msgstr ""
+msgid "Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code."
+msgstr "Зверніть увагу, що ця помилка може виникнути [b]після[/b] рядка, що викликає її, через особливості того, як комп'ютер читає та аналізує ваш код."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"This error tells you that you are missing a parenthesis (or sometimes a comma or a path).\n"
-"\n"
-"Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code]."
+msgid "The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing."
+msgstr "Спосіб усунення таких помилок значною мірою залежить від контексту. У повідомленні про помилку має бути зазначено, який символ або елемент відсутній."
+
+#: script_checking/error_database.csv
+msgid "If the error says \"expected,\" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else."
+msgstr "Якщо у повідомленні про помилку написано «очікується» (\"expected\"), найпевніше, ви щось пропустили в одному з [b]попередніх[/b] рядків коду. Це може бути розділовий знак, дужка або щось ще."
+
+#: script_checking/error_database.csv
+msgid "If it says \"unterminated,\" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
+msgstr "Якщо в повідомленні написано «незавершений» (\"unterminated\"), значить бракує якогось символу в кінці виразу, наприклад, закривної дужки. В такому разі проблему, найпевніше, спричинив рядок із помилкою."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you use a special character that GDScript doesn't recognize."
+msgstr "Ця помилка виникає, коли ви використовуєте спеціальний символ, який GDScript не розпізнає."
+
+#: script_checking/error_database.csv
+msgid "This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings)."
+msgstr "Сюди входять літери з діакритичними знаками (наприклад, é, à, ñ), спеціальні символи або символи з нелатинських алфавітів у ваших інструкціях коду (не в рядках)."
+
+#: script_checking/error_database.csv
+msgid "[b]Note:[/b] Godot 4 supports special and non-Latin characters in code (Unicode characters), but this app is built with Godot 3, which does not."
+msgstr "[b]Примітка:[/b] Godot 4 підтримує спеціальні та нелатинські символи в коді (символи Unicode), але ця програма створена на базі Godot 3, який цього не підтримує."
+
+#: script_checking/error_database.csv
+msgid "To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements."
+msgstr "Щоб виправити цю помилку, видаліть усі літери з діакритичними знаками або спеціальні символи з імен змінних, імен функцій та інших елементів коду."
+
+#: script_checking/error_database.csv
+msgid "You can use accented characters inside text strings (between quotes), but not in the code itself."
+msgstr "Ви можете використовувати символи з діакритичними знаками всередині текстових рядків (між лапками), але не в самому коді."
+
+#: script_checking/error_database.csv
+msgid "You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
+msgstr "Ви можете замінити літери з діакритичними знаками на їхні еквіваленти без діакритичних знаків. Наприклад, змініть [code]café[/code] на [code]cafe[/code]."
+
+#: script_checking/error_database.csv
+msgid "This error tells you that you are missing a parenthesis (or sometimes a comma or a path)."
+msgstr "Ця помилка повідомляє про те, що у вас відсутня дужка (іноді - кома або шлях)."
+
+#: script_checking/error_database.csv
+msgid "Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code]."
 msgstr "Три ключові слова в GDScript працюють як виклики функцій і вимагають круглих дужок: [code]yield()[/code], [code]preload()[/code] і [code]assert()[/code]."
 
 #: script_checking/error_database.csv
@@ -193,148 +253,164 @@ msgid "To address the error, you want to add the missing opening parenthesis, th
 msgstr "Щоб усунути помилку, вам слід додати відсутню відкривну чи закривну круглу дужку або кому."
 
 #: script_checking/error_database.csv
+msgid "This error happens in several cases:"
+msgstr "Ця помилка виникає у кількох випадках:"
+
+#: script_checking/error_database.csv
+msgid "1. You wrote an identifier (variable or function name) in the wrong place."
+msgstr ""
+
+#: script_checking/error_database.csv
 #, fuzzy
-msgid ""
-"This error happens in several cases:\n"
-"\n"
-"1. You wrote an identifier (variable or function name) in the wrong place.\n"
-"2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name.\n"
-"3. You wrote a function definition but forgot the parentheses before the colon."
+msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
 msgstr ""
 "1. Ви написали ідентифікатор (назву змінної або функції) в неправильному місці.\n"
 "2. Ви написали ключове слово на зразок [code]var[/code], [code]func[/code], [code]for[/code] або [code]signal[/code], але не написали після нього назву.\n"
 "3. Ви написали визначення функції, але забули поставити перед двокрапкою круглі дужки."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses.\n"
-"\n"
-"If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc.\n"
-"\n"
-"Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
+msgid "3. You wrote a function definition but forgot the parentheses before the colon."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses."
 msgstr "Якщо в описі помилки сказано, що щось очікувалося (expected), то ви, найпевніше, забули написати назву після ключового слова, такого як [code]var[/code], [code]func[/code], [code]for[/code] або [code]signal[/code], що робить ваш код неробочим, або забули круглі дужки у визначенні функції. Ви можете усунути помилку, додавши відсутню назву або круглі дужки."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"This error tells you that you are missing a type somewhere. A type can be [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], and many identifiers representing a data structure.\n"
-"\n"
-"Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name.\n"
-"\n"
-"It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name."
+msgid "If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc."
+msgstr "Якщо в описі помилки сказано, що код має щось несподіване (unexpected), ймовірно, десь бракує ключового слова, такого як [code]var[/code], [code]func[/code], [code]for[/code] тощо."
+
+#: script_checking/error_database.csv
+msgid "Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
+msgstr "Інша причина може бути в тому, що потрібно написати двокрапку в кінці визначення функції, циклу [code]for[/code] або рядка, який починається з [code]if[/code], [code]elif[/code] чи [code]else[/code]."
+
+#: script_checking/error_database.csv
+msgid "This error tells you that you are missing a type somewhere. A type can be [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], and many identifiers representing a data structure."
 msgstr "Ця помилка означає, що ви десь пропустили визначення типу. Тип може бути позначений [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code] та іншими ідентифікаторами, які представляють структуру даних."
+
+#: script_checking/error_database.csv
+msgid "Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name."
+msgstr "Здебільшого ця помилка виникає, коли ви написали двокрапку після назви змінної, але не вказали після неї назву типу."
+
+#: script_checking/error_database.csv
+msgid "It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name."
+msgstr "Також, таке трапляється, якщо написати стрілку ([code]->[/code]) після круглих дужок визначення функції, але не вказати після неї назву типу."
 
 #: script_checking/error_database.csv
 msgid "To solve this, you need to write the name of the type after the colon, arrow (in the case of function return types), inside parentheses (for export types), or after the [code]as[/code] keyword."
 msgstr "Щоб розв'язати цю проблему, потрібно написати назву типу після двокрапки, стрілки (в разі типів, які повертає функція), усередині круглих дужок (для типів експорту) або після ключового слова [code]as[/code]."
 
 #: script_checking/error_database.csv
-msgid ""
-"The variable, function name, or class name you are trying to use does not exist.\n"
-"\n"
-"You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot.\n"
-"\n"
-"The other cause for this error is that you didn't define the variable, function, or class you're trying to access."
-msgstr ""
+msgid "The variable, function name, or class name you are trying to use does not exist."
+msgstr "Змінна, назва функції або назва класу, яку ви намагаєтеся використати, не існує."
 
 #: script_checking/error_database.csv
-msgid ""
-"To solve this error, triple-check that there is no typo in the line.\n"
-"\n"
-"If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error.\n"
-"\n"
-"If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
-msgstr ""
+msgid "You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot."
+msgstr "Найчастіше ця помилка свідчить про хибодрук. Можливо, ви поміняли місцями дві літери, пропустили літеру... іноді це складно помітити."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid.\n"
-"\n"
-"The [code]continue[/code] keyword means \"jump to the next iteration of the loop.\" And the [code]break[/code] keyword means \"end the loop right now and jump to the first line of code after the loop block."
+msgid "The other cause for this error is that you didn't define the variable, function, or class you're trying to access."
+msgstr "Інша причина цієї помилки в тому, що ви не визначили змінну, функцію або клас, до яких намагаєтеся отримати доступ."
+
+#: script_checking/error_database.csv
+msgid "To solve this error, triple-check that there is no typo in the line."
+msgstr "Щоб усунути цю помилку, уважно перевірте, чи немає в рядку хибодруку."
+
+#: script_checking/error_database.csv
+msgid "If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error."
+msgstr "Якщо можете, спробуйте перейти до визначення змінної або функції, двічі клацніть на назві, скопіюйте її і вставте туди, де ви бачите помилку."
+
+#: script_checking/error_database.csv
+msgid "If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
+msgstr "Якщо ви не бачите жодних хибодруків, слід переконатися, що ви визначили змінну, функцію або клас, на який посилаєтеся."
+
+#: script_checking/error_database.csv
+msgid "You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid."
+msgstr "Такі ключові слова як [code]break[/code] або [code]continue[/code] можна використовувати лише в циклі. Поза циклом вони неприпустимі."
+
+#: script_checking/error_database.csv
+msgid "The [code]continue[/code] keyword means \"jump to the next iteration of the loop.\" And the [code]break[/code] keyword means \"end the loop right now and jump to the first line of code after the loop block."
 msgstr "Ключове слово [code]continue[/code] означає «перейти до наступної ітерації циклу». А ключове слово [code]break[/code] означає «закінчити цикл прямо зараз і перейти до першого рядка коду після блоку циклу»."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"If you wrote one of these keywords outside a loop, you need to remove it.\n"
-"\n"
-"If you are trying to use it inside a loop, your indentation is most likely at fault. You may need to insert one or more leading tab characters to the keyword."
+msgid "If you wrote one of these keywords outside a loop, you need to remove it."
+msgstr "Якщо ви написали одне з цих ключових слів поза циклом, потрібно видалити це слово."
+
+#: script_checking/error_database.csv
+msgid "If you are trying to use it inside a loop, your indentation is most likely at fault. You may need to insert one or more leading tab characters to the keyword."
 msgstr "Якщо ви намагаєтеся використати ключове слово всередині циклу, найпевніше, рядок має неправильний відступ. Можливо, перед ключовим словом потрібно вставити один або кілька символів табуляції."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant.\n"
-"\n"
-"In other words, it wants something that can never change. This is why the computer will reject function calls and variables where it needs a constant expression."
+msgid "When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant."
+msgstr "Коли комп'ютер повідомляє про сталий вираз (constant expression), він очікує незмінне значення, незмінне обчислення чи назву константи, яка існує."
+
+#: script_checking/error_database.csv
+msgid "In other words, it wants something that can never change. This is why the computer will reject function calls and variables where it needs a constant expression."
 msgstr "Іншими словами, він хоче щось таке, що ніколи не зміниться. Ось чому комп'ютер відхилятиме виклики функцій і змінних там, де йому потрібен сталий вираз."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You need to replace function calls or variables with a constant value like a whole number, decimal number, string, vector, a predefined array, etc.\n"
-"\n"
-"You can also use arithmetic operators like multiplications (*), additions (+), and so on."
+msgid "You need to replace function calls or variables with a constant value like a whole number, decimal number, string, vector, a predefined array, etc."
 msgstr "Треба замінити виклики функцій або змінні сталим значенням, наприклад, цілим числом, десятковим дробом, рядком, вектором, передвизначеним масивом тощо."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"When defining a new class, you need to follow a specific pattern. You must write the name in plain text, starting with a letter.\n"
-"\n"
-"We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name."
+msgid "You can also use arithmetic operators like multiplications (*), additions (+), and so on."
+msgstr "Також можете використовувати арифметичні оператори, такі як множення (*), додавання (+) тощо."
+
+#: script_checking/error_database.csv
+msgid "When defining a new class, you need to follow a specific pattern. You must write the name in plain text, starting with a letter."
 msgstr "Визначаючи новий клас вам слід дотримуватися певного шаблону. Назву слід писати звичайним текстом, починаючи з літери."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"To fix this error, replace whatever you put after the 'extends' or 'class_name' keyword by a name without spaces and starting with a capital letter.\n"
-"\n"
-"You can optionally use numbers in the name, but not in the first position."
+msgid "We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name."
+msgstr "Зазвичай ми пишемо назви класів у стилі PascalCase: з великої букви на початку кожного слова, з яких складено назву класу."
+
+#: script_checking/error_database.csv
+msgid "To fix this error, replace whatever you put after the 'extends' or 'class_name' keyword by a name without spaces and starting with a capital letter."
 msgstr "Щоб виправити цю помилку, замініть все, що ви помістили після ключових слів «extends» або «class_name» назвою без пропусків, що починається з великої літери."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You are trying to define a function or variable that already exists; You can't do that.\n"
-"\n"
-"Perhaps the function or variable already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
+msgid "You can optionally use numbers in the name, but not in the first position."
+msgstr "За бажанням ви можете використовувати в назві цифри, але не як перший символ."
+
+#: script_checking/error_database.csv
+msgid "You are trying to define a function or variable that already exists; You can't do that."
+msgstr "Ви намагаєтесь визначити функцію або змінну, яка вже існує. Цього робити не можна."
+
+#: script_checking/error_database.csv
+msgid "Perhaps the function or variable already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
 msgstr "Можливо, функція або змінна вже існує в поточному файлі коду, або в батьківському класі, від якого успадковано поточний файл."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"In the app, your code extends some built-in Godot code that's not visible to you.\n"
-"\n"
-"When that happens, you need to either rename your function or variable to one that will not collide with an existing one or remove this line of code."
+msgid "In the app, your code extends some built-in Godot code that's not visible to you."
+msgstr "У застосунку ваш код успадковує деякий вбудований код Godot, якого вам не видно."
+
+#: script_checking/error_database.csv
+msgid "When that happens, you need to either rename your function or variable to one that will not collide with an existing one or remove this line of code."
 msgstr "Для виправлення помилки вам потрібно або перейменувати свою функцію чи змінну так, щоб вона не конфліктувала з наявною, або видалити цей рядок коду."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You are trying to define a signal that already exists; You can't do that.\n"
-"\n"
-"Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
+msgid "You are trying to define a signal that already exists; You can't do that."
+msgstr "Ви намагаєтесь визначити сигнал, який вже існує. Цього робити не можна."
+
+#: script_checking/error_database.csv
+msgid "Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
 msgstr "Можливо, сигнал вже існує в поточному файлі коду, або у батьківському класі, від якого успадковано поточний файл."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"In the app, your code extends some built-in Godot code that's not visible to you.\n"
-"\n"
-"When that happens, you need to either rename your signal to one that will not collide with an existing one or remove this line of code."
+msgid "When that happens, you need to either rename your signal to one that will not collide with an existing one or remove this line of code."
 msgstr "Для виправлення помилки потрібно або перейменувати свій сигнал так, щоб він не конфліктував з наявним, або видалити цей рядок коду."
 
 #: script_checking/error_database.csv
-msgid ""
-"The function you're trying to define exists in a parent class, so your definition overrides the parent class's function.\n"
-"\n"
-"When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class.\n"
-"\n"
-"For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class."
-msgstr ""
+msgid "The function you're trying to define exists in a parent class, so your definition overrides the parent class's function."
+msgstr "Функція, яку ви намагаєтеся визначити, існує у батьківському класі, тому ваше визначення перевизначає функцію батьківського класу."
+
+#: script_checking/error_database.csv
+msgid "When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class."
+msgstr "Коли ви перевизначаєте функцію батьківського класу, сигнатура нової функції повинна відповідати батьківській сигнатурі. Це означає, що кількість і типи параметрів у ній повинні бути такими ж, як і у функції батьківського класу."
+
+#: script_checking/error_database.csv
+msgid "For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class."
+msgstr "Наприклад, якщо батьківський елемент має два аргументи, вам потрібно, щоб ваша нова функція також мала два аргументи. Якщо ви використовуєте позначення типів змінних у визначеннях функцій, типи аргументів повинні відповідати типу в батьківському класі."
 
 #: script_checking/error_database.csv
 msgid "You need to check the parent class's function and its definition in the code reference. Then, you need to edit your function definition to have the same number and type of parameters as the parent class."
@@ -349,60 +425,74 @@ msgid "You need to either remove, add, or change the values you're trying to pas
 msgstr "Щоб вирішити цю проблему, потрібно видалити, додати, або змінити значення, які ви намагаєтеся передати функції. Інформацію про те, які аргументи приймає функція, можна знайти у довіднику. У ньому ви побачите визначення функції та обов'язкові аргументи."
 
 #: script_checking/error_database.csv
-msgid ""
-"All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!\n"
-"\n"
-"When you make any operation, the computer compares the types you are using.\n"
-"\n"
-"Some types are compatible, and some are not. For example, you cannot directly add a whole number to a text string. You first need to convert the number into text.\n"
-"\n"
-"You'll need to read the error message to see what is not matching because there are many possible cases."
-msgstr ""
+msgid "All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!"
+msgstr "Кожне значення у вашому коді має певний тип. Цей тип може бути цілим числом (int), десятковим дробом (float), текстом (String) тощо. Існує безліч можливих типів, і ви можете навіть визначати свої власні!"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=).\n"
-"\n"
-"If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic.\n"
-"\n"
-"If the computer talks about an invalid operand, then the issue is that the operation does not exist for the type you're trying to use. For example, while you can add two 2D vectors, you can't add a whole number or text to a 2D vector."
+msgid "When you make any operation, the computer compares the types you are using."
+msgstr "Коли ви виконуєте якусь операцію, комп'ютер порівнює типи, які використовуєте ви."
+
+#: script_checking/error_database.csv
+msgid "Some types are compatible, and some are not. For example, you cannot directly add a whole number to a text string. You first need to convert the number into text."
+msgstr "Деякі типи сумісні, а деякі ні. Наприклад, ви не можете безпосередньо додати ціле число до текстового рядка. Спочатку потрібно перетворити число на текст."
+
+#: script_checking/error_database.csv
+msgid "You'll need to read the error message to see what is not matching because there are many possible cases."
+msgstr "Щоб зрозуміти, які саме типи не відповідають один одному, слід прочитати повідомлення про помилку, оскільки є багато варіантів."
+
+#: script_checking/error_database.csv
+msgid "If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=)."
+msgstr "Якщо в описі йдеться про те, що тип значення, яке присвоюється, не відповідає типу змінної, проблема міститься праворуч від знака рівності (=)."
+
+#: script_checking/error_database.csv
+msgid "If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic."
+msgstr "Якщо сказано, що тип значення, яке повертається, не відповідає типу, який функція повертає, — проблема у значенні після ключового слова return."
+
+#: script_checking/error_database.csv
+msgid "If the computer talks about an invalid operand, then the issue is that the operation does not exist for the type you're trying to use. For example, while you can add two 2D vectors, you can't add a whole number or text to a 2D vector."
 msgstr "Якщо повідомлено про неприпустимий операнд — проблема в тому, що операція незастосовна до типу, який ви намагаєтеся використати. Наприклад, хоча ви можете додати два 2D-вектори, ви не можете додати до 2D-вектора ціле число або текст."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"GDScript supports type inference. The computer will automatically recognize the type of value you are working with. In some cases, though, it can't figure it out.\n"
-"\n"
-"When that happens, you need to specify the type yourself or remove type inference altogether for this variable."
+msgid "GDScript supports type inference. The computer will automatically recognize the type of value you are working with. In some cases, though, it can't figure it out."
 msgstr "GDScript підтримує автоматичне визначення типу. Комп'ютер автоматично розпізнає тип значення, з яким ви працюєте, однак у деяких випадках він не може цього зробити."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"The simplest way to solve this error is to remove types for this variable or this function's arguments. Otherwise, you can manually specify the value type after the colon.\n"
-"\n"
-"We recommend specifying the type whenever possible to reap the typing system's benefits."
+msgid "When that happens, you need to specify the type yourself or remove type inference altogether for this variable."
+msgstr "У таких ситуаціях потрібно вказати тип самостійно або взагалі прибрати автовизначення типу для цієї змінної."
+
+#: script_checking/error_database.csv
+msgid "The simplest way to solve this error is to remove types for this variable or this function's arguments. Otherwise, you can manually specify the value type after the colon."
 msgstr "Найпростіший спосіб усунути цю помилку – видалити типи для цієї змінної чи аргументів цієї функції. Також можна вручну вказати тип значення після двокрапки."
 
 #: script_checking/error_database.csv
+msgid "We recommend specifying the type whenever possible to reap the typing system's benefits."
+msgstr "Ми радимо вказувати тип щоразу, коли це можливо, щоб скористатися перевагами системи типізації."
+
+#: script_checking/error_database.csv
+msgid "There is an issue with the return value of your function. There are two main cases here:"
+msgstr "Виникла проблема зі значенням, яке повертає ваша функція. Можливі два випадки:"
+
+#: script_checking/error_database.csv
 #, fuzzy
-msgid ""
-"There is an issue with the return value of your function. There are two main cases here:\n"
-"\n"
-"1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()').\n"
-"2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
+msgid "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
 msgstr ""
 "1. Ваша функція повертає значення типу void, тому вона не може повертати значення. Сюди входять функції зі синтаксисом. «-> void» і конструктори класів («_init()»).\n"
 "2. Ви вказали тип значення, яке повертає ваша функція, але повертаєте значення не у всіх можливих гілках (блоки if, elif та else, або кінець функції)."
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid ""
-"When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that.\n"
-"\n"
-"When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
+msgid "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
+msgstr ""
+"1. Ваша функція повертає значення типу void, тому вона не може повертати значення. Сюди входять функції зі синтаксисом. «-> void» і конструктори класів («_init()»).\n"
+"2. Ви вказали тип значення, яке повертає ваша функція, але повертаєте значення не у всіх можливих гілках (блоки if, elif та else, або кінець функції)."
+
+#: script_checking/error_database.csv
+msgid "When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that."
 msgstr "Якщо ваша функція повертає значення типу «void», ви не маєте повертати значення. Ви можете використати ключове слово «return», для дострокового завершення функції, але писати щось після цього ключового слова не слід."
+
+#: script_checking/error_database.csv
+msgid "When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
+msgstr "Коли ви зазначаєте тип, що повертається, ви завжди повинні повертати щось в кінці функції або в кожній гілці (блоки if, elif та else) функції."
 
 #: script_checking/error_database.csv
 msgid "Godot was unable to load your script, yet the language checker found nothing wrong."
@@ -429,9 +519,12 @@ msgid "To fix this, you need to either add a [code]break[/code] statement inside
 msgstr "Щоб виправити це, потрібно або додати оператор [code]break[/code] всередині циклу, щоб він міг вийти при виконанні певної умови, або змінити умову циклу while на таку, яка стане хибною. Наприклад: [code]while position.x < 100: position.x -= 10[/code]."
 
 #: script_checking/error_database.csv
-msgid ""
-"The computer reached the end of the line of code, but the line had a syntax error.\n"
-"The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
+msgid "The computer reached the end of the line of code, but the line had a syntax error."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
 msgstr ""
 "Комп'ютер досяг кінця рядка коду, але в цьому рядку була синтаксична помилка.\n"
 "Найпоширеніший випадок — коли ви забули закрити рядок: у вас є відкривні лапки, але ви забули додати відповідні закривні лапки."
@@ -445,11 +538,11 @@ msgid "The sub-variable you are trying to access does not exist."
 msgstr "Підзмінна, до якої ви намагаєтеся отримати доступ, не існує."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You probably have a typo in the name of the sub-variable that you are trying to access.\n"
-"\n"
-"Ensure that you don't have a capital letter where you should have a lowercase letter and vice versa."
+msgid "You probably have a typo in the name of the sub-variable that you are trying to access."
+msgstr "Ймовірно, у вас хибодрук у назві підзмінної, до якої ви намагаєтеся отримати доступ."
+
+#: script_checking/error_database.csv
+msgid "Ensure that you don't have a capital letter where you should have a lowercase letter and vice versa."
 msgstr "Переконайтесь, що у вас немає великої букви там, де має бути мала, і навпаки."
 
 #: course/glossary.csv course/documentation.csv
@@ -458,174 +551,223 @@ msgid "explanation"
 msgstr "ітерація"
 
 #: course/glossary.csv
-msgid ""
-"Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods.\n"
-"\n"
-"For example, arrays have member functions like [code]array.append()[/code].\n"
-"\n"
-"You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
-msgstr ""
+msgid "Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods."
+msgstr "Функції-члени — це функції, прив'язані до певного типу значень, наприклад, масивів, рядків або словників. Ми також називаємо їх методами."
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"Member variables are variables attached to a specific value type, like a vector's [code]x[/code] and [code]y[/code] sub-variables. We also call them [i]properties[/i] or [i]fields[/i] of the vector.\n"
-"\n"
-"To access a member variable, you must first write the value's name followed by the access operator ([code].[/code]). For example, [code]position.x[/code]."
+msgid "For example, arrays have member functions like [code]array.append()[/code]."
+msgstr "Наприклад, масиви мають функцію-член [code]array.append()[/code]."
+
+#: course/glossary.csv
+msgid "You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
+msgstr "Ви можете викликати функцію тільки для масиву, використовуючи оператор доступу до членів ([code].[/code]), як показано вище."
+
+#: course/glossary.csv
+msgid "Member variables are variables attached to a specific value type, like a vector's [code]x[/code] and [code]y[/code] sub-variables. We also call them [i]properties[/i] or [i]fields[/i] of the vector."
 msgstr "Змінні-члени - це змінні, прив'язані до певного типу значення, наприклад, вектор має вкладені змінні [code]x[/code] і [code]y[/code]. Ми також називаємо їх [i]властивостями[/i] або [i]полями[/i] вектора."
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"A parameter is a variable you create as part of a function definition.\n"
-"\n"
-"It allows you to reuse the function more by having values that vary in the function's body."
+msgid "To access a member variable, you must first write the value's name followed by the access operator ([code].[/code]). For example, [code]position.x[/code]."
+msgstr "Щоб отримати доступ до змінної члена, ви повинні записати назву значення, а потім оператор доступу ([code].[/code]). Наприклад, [code]position.x[/code]."
+
+#: course/glossary.csv
+msgid "A parameter is a variable you create as part of a function definition."
+msgstr "Параметр — це змінна, яку ви створюєте як частину визначення функції."
+
+#: course/glossary.csv
+msgid "It allows you to reuse the function more by having values that vary in the function's body."
 msgstr "Він дає змогу повторно використовувати функцію, підставляючи в її тіло різні значення."
 
 #: course/glossary.csv
-msgid ""
-"A radian is a unit of measurement of angles based on the circle's circumference.\n"
-"\n"
-"We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common.\n"
-"\n"
-"An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
-msgstr ""
+msgid "A radian is a unit of measurement of angles based on the circle's circumference."
+msgstr "Радіан — це одиниця вимірювання кутів, заснована на довжині кола."
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"In computer programming, a type is the class of a value. For example, whole numbers like [code]3[/code], [code]11[/code], and [code]255462[/code] are all of type [code]int[/code] (short for integer).\n"
-"\n"
-"The computer uses types to determine which operations are valid between two values and when they're undefined."
+msgid "We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common."
+msgstr "У повсякденному житті ми частіше використовуємо градуси, але в комп'ютерному програмуванні, особливо в іграх, зазвичай використовують радіани."
+
+#: course/glossary.csv
+msgid "An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
+msgstr "Кут [code]2 * PI[/code] радіан відповідає 360 градусам. А кут [code]PI[/code] радіан відповідає 180 градусам."
+
+#: course/glossary.csv
+msgid "In computer programming, a type is the class of a value. For example, whole numbers like [code]3[/code], [code]11[/code], and [code]255462[/code] are all of type [code]int[/code] (short for integer)."
 msgstr "У комп'ютерному програмуванні тип — це клас значень. Наприклад, цілі числа [code]3[/code], [code]11[/code] і [code]255462[/code] — мають тип [code]int[/code] (скорочення від integer)."
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"In computer code, an iteration is one repetition of some process or code. We typically use the term with loops, where one iteration is one run of the loop's code.\n"
-"\n"
-"When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
+msgid "The computer uses types to determine which operations are valid between two values and when they're undefined."
+msgstr "Комп'ютер використовує типи, щоб визначити, які операції допустимі між двома значеннями, а коли вони не визначені."
+
+#: course/glossary.csv
+msgid "In computer code, an iteration is one repetition of some process or code. We typically use the term with loops, where one iteration is one run of the loop's code."
 msgstr "У комп'ютерному коді ітерація — одне повторення деякого процесу чи коду. Зазвичай ми використовуємо термін ітерація до циклів, де одна ітерація – це одне виконання коду циклу."
 
 #: course/glossary.csv
-msgid ""
-"In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers.\n"
-"\n"
-"We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves.\n"
-"\n"
-"Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
-msgstr ""
+msgid "When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
+msgstr "Коли йдеться про алгоритми, ітерація може означати повний прохід алгоритму через набір даних."
 
 #: course/glossary.csv
-msgid ""
-"An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument.\n"
-"\n"
-"A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional.\n"
-"\n"
-"When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]\n"
-"\n"
-"When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i].\n"
-"\n"
-"But when you [i]write[/i] a function definition, we call them [i]parameters[/i] instead. Here's an example:\n"
-"\n"
-"[code]func move_to_position(x, y):[/code]\n"
-"\n"
-"In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
-msgstr ""
+msgid "In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers."
+msgstr "У математиці вектор – це набір чисел. В іграх ми часто використовуємо 2D та 3D вектори: відповідно, набори з двох та трьох чисел."
 
 #: course/glossary.csv
-msgid ""
-"An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value.\n"
-"\n"
-"To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]\n"
-"\n"
-"In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere.\n"
-"\n"
-"Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
-msgstr ""
+msgid "We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves."
+msgstr "Ми використовуємо вектори для подання напрямку та величини чи інтенсивності у просторі. Наприклад, ви можете використовувати вектор для подання напрямку та швидкості, з якою рухається персонаж або транспортний засіб."
+
+#: course/glossary.csv
+msgid "Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
+msgstr "Спочатку вектори можуть видатися складними, тому що вони є досить абстрактними, але надалі ви побачите, що вони значно спрощують код."
+
+#: course/glossary.csv
+msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument."
+msgstr "Аргумент — це значення, яке ви передаєте у функцію під час її виклику. Наприклад, у виклику [code]rotate(0.5)[/code] значення [code]0.5[/code] у круглих дужках є аргументом."
+
+#: course/glossary.csv
+msgid "A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional."
+msgstr "Функція може не приймати жодних аргументів, приймати один або кілька аргументів. Аргументи можуть бути обов'язковими чи необов'язковими."
+
+#: course/glossary.csv
+msgid "When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]"
+msgstr "Коли функція приймає кілька аргументів, відокремлюйте їхні значення комами, як у цьому прикладі: [code]jump(50, 100)[/code]"
+
+#: course/glossary.csv
+msgid "When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i]."
+msgstr "Коли ви [i]викликаєте[/i] функцію, значення в дужках ми називаємо [i]аргументами[/i]."
+
+#: course/glossary.csv
+msgid "But when you [i]write[/i] a function definition, we call them [i]parameters[/i] instead. Here's an example:"
+msgstr "Але коли ви [i]пишете[/i] визначення функції, ми називаємо їх [i]параметрами[/i]. Ось приклад:"
+
+#: course/glossary.csv
+msgid "[code]func move_to_position(x, y):[/code]"
+msgstr "[code]func move_to_position(x, y):[/code]"
+
+#: course/glossary.csv
+msgid "In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
+msgstr "У цьому визначенні функції [code]x[/code] та [code]y[/code] є [i]параметрами[/i]."
+
+#: course/glossary.csv
+msgid "An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value."
+msgstr "Масив — це набір значень. У GDScript масиви можуть містити значення [i]будь-яких[/i] типів."
+
+#: course/glossary.csv
+msgid "To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]"
+msgstr "Щоб створити масив, потрібно записати значення через кому в квадратних дужках: [code]var three_numbers = [1, 2, 3][/code]"
+
+#: course/glossary.csv
+msgid "In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere."
+msgstr "В іграх ми постійно використовуємо масиви для зберігання списків персонажів у групі, списків предметів у інвентарі, списків заклинань, розблокованих гравцем тощо. Вони всюди."
+
+#: course/glossary.csv
+msgid "Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
+msgstr "Масиви — це фундаментальний тип значень у комп'ютерному програмуванні. Ви зустрінете масиви практично в будь-якій мові програмування."
 
 #: course/glossary.csv
 msgid "Assigning a value to a variable means that you store a value inside the variable. You do this with the equal sign ([code]=[/code])."
 msgstr "Присвоєння значення змінній означає, що ви зберігаєте значення всередині змінної. Щоб виконати цю операцію, слід використати знак рівності ([code]=[/code])."
 
 #: course/glossary.csv
-msgid ""
-"A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value.\n"
-"\n"
-"In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game.\n"
-"\n"
-"You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database.\n"
-"\n"
-"Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
-msgstr ""
+msgid "A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value."
+msgstr "Словник — це структура даних, яка зіставляє значення за допомогою пар ключ-значення. Коли ви даєте словнику ключ, він знаходить та повертає вам відповідне значення."
 
 #: course/glossary.csv
-msgid ""
-"A for loop instructs the computer to repeat a set of instructions once for each value in an array.\n"
-"\n"
-"In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body.\n"
-"\n"
-"For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met.\n"
-"\n"
-"We recommend favoring for loops when you can. They're safer and easier to use than while loops."
-msgstr ""
+msgid "In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game."
+msgstr "В GDScript ключі можуть бути різними. Ми часто використовуємо текстові рядки або числа, але ви не обмежені лише рядками та числами. Наприклад, якщо в якщо грі використовується сітка, то ключем може бути [code]Vector2[/code], який зручний для зіставлення комірки сітки з юнітом або іншим елементом гри."
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains.\n"
-"\n"
-"You can modify a function's behavior with parameters. Parameters are variable names that you write in the function definition. You can then use them in the function's body to make your code adapt to different cases.\n"
-"\n"
-"Also, functions can optionally return a value to the code calling it."
+msgid "You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database."
+msgstr "Ви часто будете використовувати словники для зіставлення фрагментів даних у своїх іграх. Наприклад, ви можете використати словник, щоб зв'язати назву спорядження з його характеристиками в базі даних."
+
+#: course/glossary.csv
+msgid "Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
+msgstr "Як і масиви, словники є фундаментальним типом даних, який ви зустрінете в багатьох мовах програмування і часто будете використовувати."
+
+#: course/glossary.csv
+msgid "A for loop instructs the computer to repeat a set of instructions once for each value in an array."
+msgstr "Цикл for вказує комп'ютеру повторити набір інструкцій один раз для кожного значення масиву."
+
+#: course/glossary.csv
+msgid "In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body."
+msgstr "На кожній ітерації циклу компілятор отримує одне значення з масиву і надає вам доступ до нього в тілі циклу.."
+
+#: course/glossary.csv
+msgid "For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met."
+msgstr "Цикли for запускають код обмежену кількість разів: по одному на кожне значення масиву. Цим цикли for відрізняються від циклів while, які продовжують повторювати код доти, доки не буде виконано умову."
+
+#: course/glossary.csv
+msgid "We recommend favoring for loops when you can. They're safer and easier to use than while loops."
+msgstr "Ми радимо надавати перевагу циклам for завжди, коли це можливо. Цикли for безпечніші та простіші у використанні, ніж цикли while."
+
+#: course/glossary.csv
+msgid "A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains."
+msgstr "Функція – це група інструкцій коду, якій ви даєте назву. Коли ви визначили функцію, ви можете викликати її в будь-який час, щоб виконати всі інструкції, які вона містить."
+
+#: course/glossary.csv
+msgid "You can modify a function's behavior with parameters. Parameters are variable names that you write in the function definition. You can then use them in the function's body to make your code adapt to different cases."
 msgstr "Ви можете змінювати поведінку функції за допомогою параметрів. Параметри - це назви змінних, які ви пишете у визначенні функції. Ви можете використовувати їх у тілі функції, щоб адаптувати код до різних випадків."
+
+#: course/glossary.csv
+msgid "Also, functions can optionally return a value to the code calling it."
+msgstr "Крім того, функції можуть повертати значення в код, який їх викликав."
 
 #: course/glossary.csv
 msgid "An increment is the amount by which a value changes in your code."
 msgstr "Інкремент — це величина, на яку змінюється значення у вашому коді."
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"In computer programming, instructions are a single operation the computer recognizes and can execute.\n"
-"\n"
-"For example, a function call, an addition, or assigning a value to a variable."
+msgid "In computer programming, instructions are a single operation the computer recognizes and can execute."
 msgstr "У комп'ютерному програмуванні інструкція - це одна дія, яку комп'ютер розпізнає і може виконати."
 
 #: course/glossary.csv
-msgid ""
-"Variables are a tool to give a name to values you want to store in your code and change over time.\n"
-"\n"
-"For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up.\n"
-"\n"
-"You can create a variable named [code]health[/code] to represent the health.\n"
-"\n"
-"Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you.\n"
-"\n"
-"Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
-msgstr ""
+msgid "For example, a function call, an addition, or assigning a value to a variable."
+msgstr "Наприклад, виклик функції, додавання або надання значення змінній."
 
 #: course/glossary.csv
-msgid ""
-"A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running.\n"
-"\n"
-"When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong.\n"
-"\n"
-"That's why we recommend using the safer for loop whenever you can.\n"
-"\n"
-"However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
-msgstr ""
+msgid "Variables are a tool to give a name to values you want to store in your code and change over time."
+msgstr "Змінні — це засіб для надання назв значенням, які ви хочете мати у своєму коді та змінювати з часом."
+
+#: course/glossary.csv
+msgid "For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up."
+msgstr "Наприклад, здоров'я персонажа: коли персонаж отримує удар, ви хочете, щоб здоров'я знизилося. Коли він лікується, ви хочете, щоб здоров'я відновилося."
+
+#: course/glossary.csv
+msgid "You can create a variable named [code]health[/code] to represent the health."
+msgstr "Ви можете створити змінну з назвою [code]health[/code], яка буде позначати стан здоров'я."
+
+#: course/glossary.csv
+msgid "Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you."
+msgstr "Потім щоразу, коли ви пишете ключове слово [code]health[/code] у своєму коді, комп'ютер діставатиме вам відповідне значення із пам'яті."
+
+#: course/glossary.csv
+msgid "Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
+msgstr "Змінні працюють подібно до етикеток товарів у супермаркеті. Це назви, якими ви позначаєте якесь значення. У будь-який момент ви можете взяти етикетку та наклеїти її на новий товар або, в цьому випадку, на нове значення в коді."
+
+#: course/glossary.csv
+msgid "A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running."
+msgstr "Цикл while спонукає комп'ютер продовжувати виконання коду, виходячи з умови. Поки умова істинна, цикл продовжує виконуватись."
+
+#: course/glossary.csv
+msgid "When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong."
+msgstr "При написанні циклів while будьте уважні: якщо ви неправильно виберете умову, вони можуть виконуватися нескінченно і призведуть до нескінченного зависання."
+
+#: course/glossary.csv
+msgid "That's why we recommend using the safer for loop whenever you can."
+msgstr "Ось чому ми радимо завжди, коли це можливо, використовувати безпечніший цикл for."
+
+#: course/glossary.csv
+msgid "However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
+msgstr "Однак все ще існують особливі випадки, коли ми використовуємо цикли while, наприклад, для опрацювання файлів, опрацювання комп'ютерного коду або для потужних алгоритмів."
 
 #: course/glossary.csv
 msgid "We talk about a loop or a function's body to refer to the lines of code that are part of the loop or function."
 msgstr "Тілом циклу або функції ми називаємо рядки коду, які є частиною циклу або функції."
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"Returning a value is the process of sending a value to the place where you call a function.\n"
-"\n"
-"It happens when a function uses the [code]return[/code] keyword followed by a value, for example: [code]return -1[/code]."
+msgid "Returning a value is the process of sending a value to the place where you call a function."
+msgstr "Повернення значення — це процес надсилання значення в місце, звідки ви викликали функцію."
+
+#: course/glossary.csv
+msgid "It happens when a function uses the [code]return[/code] keyword followed by a value, for example: [code]return -1[/code]."
 msgstr "Повернення відбувається, коли у функції використано ключове слово [code]return[/code] із зазначеним після нього значенням, наприклад: [code]return -1[/code]."
 
 #: course/glossary.csv
@@ -700,250 +842,11 @@ msgstr ""
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
 
-#~ msgid "You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword."
-#~ msgstr "Ця помилка виникає, коли назва між [code]for[/code] і [code]in[/code] не є допустимою назвою змінної або відсутнє ключове слово [code]in[/code]."
-
-#~ msgid "To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces."
-#~ msgstr "Щоб виправити цю помилку, слід переконатися, що між ключовими словами [code]for[/code] і [code]in[/code] зазначено допустиму назву змінної без розділових знаків і пропусків."
-
-#~ msgid "For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name."
-#~ msgstr "Наприклад, цей код хибний: [code]for cell_position.x in cell_positions_array:[/code], оскільки [code]cell_position.x[/code] не є допустимою назвою змінної."
-
-#~ msgid "To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:"
-#~ msgstr "Щоб отримати доступ до підкомпонента [code]x[/code] змінної, слід зробити це всередині тіла циклу:"
-
-#~ msgid ""
-#~ "[code]for cell_position in cell_positions_array:\n"
-#~ "    cell_position.x += 1.0[/code]"
-#~ msgstr ""
-#~ "[code]for cell_position in cell_positions_array:\n"
-#~ "    cell_position.x += 1.0[/code]"
-
-#~ msgid "You get this error when you try to assign a value to something that is not a variable."
-#~ msgstr "Якщо ви отримуєте цю помилку, ви, найпевніш, намагаєтеся надати значення не змінній, а чомусь іншому, що неможливо. Ви можете надавати значення лише змінним."
-
-#~ msgid "You can only assign values to variables. You cannot assign values to function calls or calculations."
-#~ msgstr "Ви можете присвоювати значення тільки змінним. Ви не можете присвоювати значення викликам функцій або обчисленням."
-
-#~ msgid "For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call, not a variable."
-#~ msgstr "Наприклад, ви не можете написати [code]randi() = 5[/code], оскільки [code]randi()[/code] є викликом функції, а не змінною."
-
-#~ msgid "Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name."
-#~ msgstr "Перевірте, що ви написали зліва від знака рівності (=). Переконайтеся, що це ім'я змінної."
-
-#~ msgid "If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call."
-#~ msgstr "Якщо ви бачите дужки () зліва, можливо, ви намагаєтеся присвоїти значення виклику функції. Видаліть дужки та виклик функції."
-
-#~ msgid "If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
-#~ msgstr "Якщо ви намагаєтеся перевірити, чи два значення є рівними в умові, використовуйте два знаки рівності (==) замість одного (=)."
-
-#~ msgid "You get this error when you try to change the value of a constant."
-#~ msgstr "Ця помилка виникає, коли ви намагаєтеся змінити значення константи."
-
-#~ msgid "A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it."
-#~ msgstr "Константа — це ім'я, яке містить значення, яке не може змінюватися. Це схоже на змінну, але після встановлення значення його неможливо замінити."
-
-#~ msgid "For example, if you write [code]const MAX_SPEED = 100[/code], you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code]."
-#~ msgstr "Наприклад, якщо ви напишете [code]const MAX_SPEED = 100[/code], ви не зможете пізніше написати [code]MAX_SPEED = 200[/code] або [code]MAX_SPEED += 50[/code]."
-
-#~ msgid "Many constants are built into Godot and GDScript, and you cannot change them either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters."
-#~ msgstr "У Godot і GDScript вбудовано багато констант, і ви також не можете їх змінювати. Наприклад, ви не можете написати [code]Vector2 = 5[/code] або [code]PI = 3[/code]. Імена констант зазвичай пишуться великими літерами."
-
-#~ msgid "Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:"
-#~ msgstr "Подивіться, що ви намагаєтеся змінити. Якщо це константа (визначена за допомогою ключового слова [code]const[/code] або вбудована в Godot), у вас є два варіанти:"
-
-#~ msgid "You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line."
-#~ msgstr "Ця помилка виникає, коли ви змішуєте пробіли та табуляції у відступах. Це трапляється, коли перед табуляцією стоїть пробіл або перед пробілом на початку рядка стоїть табуляція."
-
-#~ msgid "In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character."
-#~ msgstr "У GDScript для відступу коду слід використовувати тільки табуляцію (а не пробіли). При натисканні клавіші Tab на клавіатурі створюється символ табуляції."
-
-#~ msgid "If you accidentally type a space before a tab, or a tab before a space, the computer gets confused about your code's indentation."
-#~ msgstr "Якщо ви випадково введете пробіл перед табуляцією або табуляцію перед пробілом, комп'ютер не зможе розпізнати відступ у вашому коді."
-
-#~ msgid "To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters."
-#~ msgstr "Щоб виправити цю помилку, перейдіть до рядка, зазначеного в повідомленні про помилку. Видаліть усі пробіли на самому початку рядка та видаліть усі пробіли, що з'являються після символів табуляції."
-
-#~ msgid "Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference."
-#~ msgstr "Символи табуляції виглядають як стрілка, що вказує на вертикальну лінію у вашому коді: ⇥. Пробіли виглядають як вирівняні по центру крапки: ·. Придивіться уважно, щоб помітити різницю."
-
-#~ msgid "Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
-#~ msgstr "Потім переконайтеся, що рядок починається тільки з символів табуляції для відступу, без пробілів."
-
-#~ msgid "A cyclic reference is when a class references itself, directly or indirectly."
-#~ msgstr "Циклічне посилання — це коли клас прямо чи опосередковано посилається сам на себе."
-
-#~ msgid "It has two possible causes:"
-#~ msgstr "Воно має дві можливі причини:"
-
-#~ msgid ""
-#~ "1. You used the class name in the class itself.\n"
-#~ "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
-#~ msgstr ""
-#~ "1. Ви використали назву класу в самому класі.\n"
-#~ "2. Ваш код посилається на інший клас, який посилається на цей клас, викликаючи нескінченний цикл посилань."
-
-#~ msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
-#~ msgstr "У будь-якому разі, за внутрішніми правилами GDScript у Godot 3, використовувати циклічні посилання не можна. Godot 4 має розв'язати цю проблему, але поки що вам слід її обійти."
-
-#~ msgid "Erase the type hint in the error line, and the problem should disappear."
-#~ msgstr "Зітріть позначку типу змінної у рядку з помилкою, і проблема має зникнути."
-
-#~ msgid "The indentation of your code (the number of tab characters at the start of the line) is incorrect."
-#~ msgstr "Відступи у коді (кількість символів табуляції на початку рядка) неправильні."
-
-#~ msgid "You are missing one or more tabs, or you inserted too many."
-#~ msgstr "Не вистачає однієї чи кількох табуляцій, або ви вставили їх надто багато."
-
-#~ msgid "In other words, your line should have one more leading tab character than the function definition."
-#~ msgstr "Іншими словами, на початку вашого рядка має бути на один символ табуляції більше, ніж у заголовку функції."
-
-#~ msgid "You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code."
-#~ msgstr "Ви отримуєте цю помилку, коли написали щось синтаксично неприпустиме або вам чогось бракує для завершення цього рядка чи попередніх рядків коду."
-
-#~ msgid "You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character."
-#~ msgstr "Слід бути гранично точним, коли ви пишете код для комп'ютера. Таку помилку легко отримати, оскільки до неї приводить навіть один неправильний символ."
-
-#~ msgid "Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code."
-#~ msgstr "Зверніть увагу, що ця помилка може виникнути [b]після[/b] рядка, що викликає її, через особливості того, як комп'ютер читає та аналізує ваш код."
-
-#~ msgid "The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing."
-#~ msgstr "Спосіб усунення таких помилок значною мірою залежить від контексту. У повідомленні про помилку має бути зазначено, який символ або елемент відсутній."
-
-#~ msgid "If the error says \"expected,\" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else."
-#~ msgstr "Якщо у повідомленні про помилку написано «очікується» (\"expected\"), найпевніше, ви щось пропустили в одному з [b]попередніх[/b] рядків коду. Це може бути розділовий знак, дужка або щось ще."
-
-#~ msgid "If it says \"unterminated,\" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
-#~ msgstr "Якщо в повідомленні написано «незавершений» (\"unterminated\"), значить бракує якогось символу в кінці виразу, наприклад, закривної дужки. В такому разі проблему, найпевніше, спричинив рядок із помилкою."
-
-#~ msgid "You get this error when you use a special character that GDScript doesn't recognize."
-#~ msgstr "Ця помилка виникає, коли ви використовуєте спеціальний символ, який GDScript не розпізнає."
-
-#~ msgid "This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings)."
-#~ msgstr "Сюди входять літери з діакритичними знаками (наприклад, é, à, ñ), спеціальні символи або символи з нелатинських алфавітів у ваших інструкціях коду (не в рядках)."
-
-#~ msgid "[b]Note:[/b] Godot 4 supports special and non-Latin characters in code (Unicode characters), but this app is built with Godot 3, which does not."
-#~ msgstr "[b]Примітка:[/b] Godot 4 підтримує спеціальні та нелатинські символи в коді (символи Unicode), але ця програма створена на базі Godot 3, який цього не підтримує."
-
-#~ msgid "To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements."
-#~ msgstr "Щоб виправити цю помилку, видаліть усі літери з діакритичними знаками або спеціальні символи з імен змінних, імен функцій та інших елементів коду."
-
-#~ msgid "You can use accented characters inside text strings (between quotes), but not in the code itself."
-#~ msgstr "Ви можете використовувати символи з діакритичними знаками всередині текстових рядків (між лапками), але не в самому коді."
-
-#~ msgid "You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
-#~ msgstr "Ви можете замінити літери з діакритичними знаками на їхні еквіваленти без діакритичних знаків. Наприклад, змініть [code]café[/code] на [code]cafe[/code]."
-
-#~ msgid "This error tells you that you are missing a parenthesis (or sometimes a comma or a path)."
-#~ msgstr "Ця помилка повідомляє про те, що у вас відсутня дужка (іноді - кома або шлях)."
-
 #~ msgid "This error tells you are missing some parenthesis, a comma, or some value in your export hint."
 #~ msgstr "Ця помилка повідомляє про те, що у вашому описі параметрів експорту змінної відсутні якісь круглі дужки, кома або якесь значення."
 
 #~ msgid "You need to read the error message and add the missing character or value it requests."
 #~ msgstr "Вам потрібно прочитати повідомлення про помилку та додати відсутній символ або значення, про яке йдеться."
-
-#~ msgid "This error happens in several cases:"
-#~ msgstr "Ця помилка виникає у кількох випадках:"
-
-#~ msgid "If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc."
-#~ msgstr "Якщо в описі помилки сказано, що код має щось несподіване (unexpected), ймовірно, десь бракує ключового слова, такого як [code]var[/code], [code]func[/code], [code]for[/code] тощо."
-
-#~ msgid "Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
-#~ msgstr "Інша причина може бути в тому, що потрібно написати двокрапку в кінці визначення функції, циклу [code]for[/code] або рядка, який починається з [code]if[/code], [code]elif[/code] чи [code]else[/code]."
-
-#~ msgid "Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name."
-#~ msgstr "Здебільшого ця помилка виникає, коли ви написали двокрапку після назви змінної, але не вказали після неї назву типу."
-
-#~ msgid "It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name."
-#~ msgstr "Також, таке трапляється, якщо написати стрілку ([code]->[/code]) після круглих дужок визначення функції, але не вказати після неї назву типу."
-
-#~ msgid "The variable, function name, or class name you are trying to use does not exist."
-#~ msgstr "Змінна, назва функції або назва класу, яку ви намагаєтеся використати, не існує."
-
-#~ msgid "You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot."
-#~ msgstr "Найчастіше ця помилка свідчить про хибодрук. Можливо, ви поміняли місцями дві літери, пропустили літеру... іноді це складно помітити."
-
-#~ msgid "The other cause for this error is that you didn't define the variable, function, or class you're trying to access."
-#~ msgstr "Інша причина цієї помилки в тому, що ви не визначили змінну, функцію або клас, до яких намагаєтеся отримати доступ."
-
-#~ msgid "To solve this error, triple-check that there is no typo in the line."
-#~ msgstr "Щоб усунути цю помилку, уважно перевірте, чи немає в рядку хибодруку."
-
-#~ msgid "If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error."
-#~ msgstr "Якщо можете, спробуйте перейти до визначення змінної або функції, двічі клацніть на назві, скопіюйте її і вставте туди, де ви бачите помилку."
-
-#~ msgid "If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
-#~ msgstr "Якщо ви не бачите жодних хибодруків, слід переконатися, що ви визначили змінну, функцію або клас, на який посилаєтеся."
-
-#~ msgid "You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid."
-#~ msgstr "Такі ключові слова як [code]break[/code] або [code]continue[/code] можна використовувати лише в циклі. Поза циклом вони неприпустимі."
-
-#~ msgid "If you wrote one of these keywords outside a loop, you need to remove it."
-#~ msgstr "Якщо ви написали одне з цих ключових слів поза циклом, потрібно видалити це слово."
-
-#~ msgid "When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant."
-#~ msgstr "Коли комп'ютер повідомляє про сталий вираз (constant expression), він очікує незмінне значення, незмінне обчислення чи назву константи, яка існує."
-
-#~ msgid "You can also use arithmetic operators like multiplications (*), additions (+), and so on."
-#~ msgstr "Також можете використовувати арифметичні оператори, такі як множення (*), додавання (+) тощо."
-
-#~ msgid "We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name."
-#~ msgstr "Зазвичай ми пишемо назви класів у стилі PascalCase: з великої букви на початку кожного слова, з яких складено назву класу."
-
-#~ msgid "You can optionally use numbers in the name, but not in the first position."
-#~ msgstr "За бажанням ви можете використовувати в назві цифри, але не як перший символ."
-
-#~ msgid "You are trying to define a function or variable that already exists; You can't do that."
-#~ msgstr "Ви намагаєтесь визначити функцію або змінну, яка вже існує. Цього робити не можна."
-
-#~ msgid "In the app, your code extends some built-in Godot code that's not visible to you."
-#~ msgstr "У застосунку ваш код успадковує деякий вбудований код Godot, якого вам не видно."
-
-#~ msgid "You are trying to define a signal that already exists; You can't do that."
-#~ msgstr "Ви намагаєтесь визначити сигнал, який вже існує. Цього робити не можна."
-
-#~ msgid "The function you're trying to define exists in a parent class, so your definition overrides the parent class's function."
-#~ msgstr "Функція, яку ви намагаєтеся визначити, існує у батьківському класі, тому ваше визначення перевизначає функцію батьківського класу."
-
-#~ msgid "When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class."
-#~ msgstr "Коли ви перевизначаєте функцію батьківського класу, сигнатура нової функції повинна відповідати батьківській сигнатурі. Це означає, що кількість і типи параметрів у ній повинні бути такими ж, як і у функції батьківського класу."
-
-#~ msgid "For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class."
-#~ msgstr "Наприклад, якщо батьківський елемент має два аргументи, вам потрібно, щоб ваша нова функція також мала два аргументи. Якщо ви використовуєте позначення типів змінних у визначеннях функцій, типи аргументів повинні відповідати типу в батьківському класі."
-
-#~ msgid "All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!"
-#~ msgstr "Кожне значення у вашому коді має певний тип. Цей тип може бути цілим числом (int), десятковим дробом (float), текстом (String) тощо. Існує безліч можливих типів, і ви можете навіть визначати свої власні!"
-
-#~ msgid "When you make any operation, the computer compares the types you are using."
-#~ msgstr "Коли ви виконуєте якусь операцію, комп'ютер порівнює типи, які використовуєте ви."
-
-#~ msgid "Some types are compatible, and some are not. For example, you cannot directly add a whole number to a text string. You first need to convert the number into text."
-#~ msgstr "Деякі типи сумісні, а деякі ні. Наприклад, ви не можете безпосередньо додати ціле число до текстового рядка. Спочатку потрібно перетворити число на текст."
-
-#~ msgid "You'll need to read the error message to see what is not matching because there are many possible cases."
-#~ msgstr "Щоб зрозуміти, які саме типи не відповідають один одному, слід прочитати повідомлення про помилку, оскільки є багато варіантів."
-
-#~ msgid "If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=)."
-#~ msgstr "Якщо в описі йдеться про те, що тип значення, яке присвоюється, не відповідає типу змінної, проблема міститься праворуч від знака рівності (=)."
-
-#~ msgid "If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic."
-#~ msgstr "Якщо сказано, що тип значення, яке повертається, не відповідає типу, який функція повертає, — проблема у значенні після ключового слова return."
-
-#~ msgid "When that happens, you need to specify the type yourself or remove type inference altogether for this variable."
-#~ msgstr "У таких ситуаціях потрібно вказати тип самостійно або взагалі прибрати автовизначення типу для цієї змінної."
-
-#~ msgid "We recommend specifying the type whenever possible to reap the typing system's benefits."
-#~ msgstr "Ми радимо вказувати тип щоразу, коли це можливо, щоб скористатися перевагами системи типізації."
-
-#~ msgid "There is an issue with the return value of your function. There are two main cases here:"
-#~ msgstr "Виникла проблема зі значенням, яке повертає ваша функція. Можливі два випадки:"
-
-#~ msgid "When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
-#~ msgstr "Коли ви зазначаєте тип, що повертається, ви завжди повинні повертати щось в кінці функції або в кожній гілці (блоки if, elif та else) функції."
-
-#~ msgid "You probably have a typo in the name of the sub-variable that you are trying to access."
-#~ msgstr "Ймовірно, у вас хибодрук у назві підзмінної, до якої ви намагаєтеся отримати доступ."
 
 #~ msgid "member function"
 #~ msgstr "функція-член"
@@ -951,23 +854,11 @@ msgstr ""
 #~ msgid "member functions"
 #~ msgstr "функції-члени"
 
-#~ msgid "Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods."
-#~ msgstr "Функції-члени — це функції, прив'язані до певного типу значень, наприклад, масивів, рядків або словників. Ми також називаємо їх методами."
-
-#~ msgid "For example, arrays have member functions like [code]array.append()[/code]."
-#~ msgstr "Наприклад, масиви мають функцію-член [code]array.append()[/code]."
-
-#~ msgid "You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
-#~ msgstr "Ви можете викликати функцію тільки для масиву, використовуючи оператор доступу до членів ([code].[/code]), як показано вище."
-
 #~ msgid "member variable"
 #~ msgstr "змінна-член"
 
 #~ msgid "member variables"
 #~ msgstr "змінні-члени"
-
-#~ msgid "To access a member variable, you must first write the value's name followed by the access operator ([code].[/code]). For example, [code]position.x[/code]."
-#~ msgstr "Щоб отримати доступ до змінної члена, ви повинні записати назву значення, а потім оператор доступу ([code].[/code]). Наприклад, [code]position.x[/code]."
 
 #~ msgid "parameter"
 #~ msgstr "параметр"
@@ -975,23 +866,11 @@ msgstr ""
 #~ msgid "parameters"
 #~ msgstr "параметри"
 
-#~ msgid "A parameter is a variable you create as part of a function definition."
-#~ msgstr "Параметр — це змінна, яку ви створюєте як частину визначення функції."
-
 #~ msgid "radian"
 #~ msgstr "радіан"
 
 #~ msgid "radians"
 #~ msgstr "радіани"
-
-#~ msgid "A radian is a unit of measurement of angles based on the circle's circumference."
-#~ msgstr "Радіан — це одиниця вимірювання кутів, заснована на довжині кола."
-
-#~ msgid "We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common."
-#~ msgstr "У повсякденному житті ми частіше використовуємо градуси, але в комп'ютерному програмуванні, особливо в іграх, зазвичай використовують радіани."
-
-#~ msgid "An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
-#~ msgstr "Кут [code]2 * PI[/code] радіан відповідає 360 градусам. А кут [code]PI[/code] радіан відповідає 180 градусам."
 
 #~ msgid "type"
 #~ msgstr "тип"
@@ -999,14 +878,8 @@ msgstr ""
 #~ msgid "types"
 #~ msgstr "типи"
 
-#~ msgid "The computer uses types to determine which operations are valid between two values and when they're undefined."
-#~ msgstr "Комп'ютер використовує типи, щоб визначити, які операції допустимі між двома значеннями, а коли вони не визначені."
-
 #~ msgid "iterations"
 #~ msgstr "ітерації"
-
-#~ msgid "When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
-#~ msgstr "Коли йдеться про алгоритми, ітерація може означати повний прохід алгоритму через набір даних."
 
 #~ msgid "vector"
 #~ msgstr "вектор"
@@ -1014,59 +887,17 @@ msgstr ""
 #~ msgid "vectors"
 #~ msgstr "вектори"
 
-#~ msgid "In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers."
-#~ msgstr "У математиці вектор – це набір чисел. В іграх ми часто використовуємо 2D та 3D вектори: відповідно, набори з двох та трьох чисел."
-
-#~ msgid "We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves."
-#~ msgstr "Ми використовуємо вектори для подання напрямку та величини чи інтенсивності у просторі. Наприклад, ви можете використовувати вектор для подання напрямку та швидкості, з якою рухається персонаж або транспортний засіб."
-
-#~ msgid "Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
-#~ msgstr "Спочатку вектори можуть видатися складними, тому що вони є досить абстрактними, але надалі ви побачите, що вони значно спрощують код."
-
 #~ msgid "argument"
 #~ msgstr "аргумент"
 
 #~ msgid "arguments"
 #~ msgstr "аргументи"
 
-#~ msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument."
-#~ msgstr "Аргумент — це значення, яке ви передаєте у функцію під час її виклику. Наприклад, у виклику [code]rotate(0.5)[/code] значення [code]0.5[/code] у круглих дужках є аргументом."
-
-#~ msgid "A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional."
-#~ msgstr "Функція може не приймати жодних аргументів, приймати один або кілька аргументів. Аргументи можуть бути обов'язковими чи необов'язковими."
-
-#~ msgid "When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]"
-#~ msgstr "Коли функція приймає кілька аргументів, відокремлюйте їхні значення комами, як у цьому прикладі: [code]jump(50, 100)[/code]"
-
-#~ msgid "When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i]."
-#~ msgstr "Коли ви [i]викликаєте[/i] функцію, значення в дужках ми називаємо [i]аргументами[/i]."
-
-#~ msgid "But when you [i]write[/i] a function definition, we call them [i]parameters[/i] instead. Here's an example:"
-#~ msgstr "Але коли ви [i]пишете[/i] визначення функції, ми називаємо їх [i]параметрами[/i]. Ось приклад:"
-
-#~ msgid "[code]func move_to_position(x, y):[/code]"
-#~ msgstr "[code]func move_to_position(x, y):[/code]"
-
-#~ msgid "In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
-#~ msgstr "У цьому визначенні функції [code]x[/code] та [code]y[/code] є [i]параметрами[/i]."
-
 #~ msgid "array"
 #~ msgstr "масив"
 
 #~ msgid "arrays"
 #~ msgstr "масиви"
-
-#~ msgid "An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value."
-#~ msgstr "Масив — це набір значень. У GDScript масиви можуть містити значення [i]будь-яких[/i] типів."
-
-#~ msgid "To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]"
-#~ msgstr "Щоб створити масив, потрібно записати значення через кому в квадратних дужках: [code]var three_numbers = [1, 2, 3][/code]"
-
-#~ msgid "In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere."
-#~ msgstr "В іграх ми постійно використовуємо масиви для зберігання списків персонажів у групі, списків предметів у інвентарі, списків заклинань, розблокованих гравцем тощо. Вони всюди."
-
-#~ msgid "Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
-#~ msgstr "Масиви — це фундаментальний тип значень у комп'ютерному програмуванні. Ви зустрінете масиви практично в будь-якій мові програмування."
 
 #~ msgid "assign"
 #~ msgstr "присвоювання"
@@ -1077,47 +908,17 @@ msgstr ""
 #~ msgid "dictionaries"
 #~ msgstr "словники"
 
-#~ msgid "A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value."
-#~ msgstr "Словник — це структура даних, яка зіставляє значення за допомогою пар ключ-значення. Коли ви даєте словнику ключ, він знаходить та повертає вам відповідне значення."
-
-#~ msgid "In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game."
-#~ msgstr "В GDScript ключі можуть бути різними. Ми часто використовуємо текстові рядки або числа, але ви не обмежені лише рядками та числами. Наприклад, якщо в якщо грі використовується сітка, то ключем може бути [code]Vector2[/code], який зручний для зіставлення комірки сітки з юнітом або іншим елементом гри."
-
-#~ msgid "You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database."
-#~ msgstr "Ви часто будете використовувати словники для зіставлення фрагментів даних у своїх іграх. Наприклад, ви можете використати словник, щоб зв'язати назву спорядження з його характеристиками в базі даних."
-
-#~ msgid "Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
-#~ msgstr "Як і масиви, словники є фундаментальним типом даних, який ви зустрінете в багатьох мовах програмування і часто будете використовувати."
-
 #~ msgid "for loop"
 #~ msgstr "цикл for"
 
 #~ msgid "for loops"
 #~ msgstr "цикли for"
 
-#~ msgid "A for loop instructs the computer to repeat a set of instructions once for each value in an array."
-#~ msgstr "Цикл for вказує комп'ютеру повторити набір інструкцій один раз для кожного значення масиву."
-
-#~ msgid "In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body."
-#~ msgstr "На кожній ітерації циклу компілятор отримує одне значення з масиву і надає вам доступ до нього в тілі циклу.."
-
-#~ msgid "For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met."
-#~ msgstr "Цикли for запускають код обмежену кількість разів: по одному на кожне значення масиву. Цим цикли for відрізняються від циклів while, які продовжують повторювати код доти, доки не буде виконано умову."
-
-#~ msgid "We recommend favoring for loops when you can. They're safer and easier to use than while loops."
-#~ msgstr "Ми радимо надавати перевагу циклам for завжди, коли це можливо. Цикли for безпечніші та простіші у використанні, ніж цикли while."
-
 #~ msgid "function"
 #~ msgstr "функція"
 
 #~ msgid "functions"
 #~ msgstr "функції"
-
-#~ msgid "A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains."
-#~ msgstr "Функція – це група інструкцій коду, якій ви даєте назву. Коли ви визначили функцію, ви можете викликати її в будь-який час, щоб виконати всі інструкції, які вона містить."
-
-#~ msgid "Also, functions can optionally return a value to the code calling it."
-#~ msgstr "Крім того, функції можуть повертати значення в код, який їх викликав."
 
 #~ msgid "increment"
 #~ msgstr "інкремент"
@@ -1131,29 +932,11 @@ msgstr ""
 #~ msgid "instructions"
 #~ msgstr "інструкції"
 
-#~ msgid "For example, a function call, an addition, or assigning a value to a variable."
-#~ msgstr "Наприклад, виклик функції, додавання або надання значення змінній."
-
 #~ msgid "variable"
 #~ msgstr "змінна"
 
 #~ msgid "variables"
 #~ msgstr "змінні"
-
-#~ msgid "Variables are a tool to give a name to values you want to store in your code and change over time."
-#~ msgstr "Змінні — це засіб для надання назв значенням, які ви хочете мати у своєму коді та змінювати з часом."
-
-#~ msgid "For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up."
-#~ msgstr "Наприклад, здоров'я персонажа: коли персонаж отримує удар, ви хочете, щоб здоров'я знизилося. Коли він лікується, ви хочете, щоб здоров'я відновилося."
-
-#~ msgid "You can create a variable named [code]health[/code] to represent the health."
-#~ msgstr "Ви можете створити змінну з назвою [code]health[/code], яка буде позначати стан здоров'я."
-
-#~ msgid "Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you."
-#~ msgstr "Потім щоразу, коли ви пишете ключове слово [code]health[/code] у своєму коді, комп'ютер діставатиме вам відповідне значення із пам'яті."
-
-#~ msgid "Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
-#~ msgstr "Змінні працюють подібно до етикеток товарів у супермаркеті. Це назви, якими ви позначаєте якесь значення. У будь-який момент ви можете взяти етикетку та наклеїти її на новий товар або, в цьому випадку, на нове значення в коді."
 
 #~ msgid "while loop"
 #~ msgstr "цикл while"
@@ -1161,26 +944,11 @@ msgstr ""
 #~ msgid "while loops"
 #~ msgstr "цикли while"
 
-#~ msgid "A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running."
-#~ msgstr "Цикл while спонукає комп'ютер продовжувати виконання коду, виходячи з умови. Поки умова істинна, цикл продовжує виконуватись."
-
-#~ msgid "When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong."
-#~ msgstr "При написанні циклів while будьте уважні: якщо ви неправильно виберете умову, вони можуть виконуватися нескінченно і призведуть до нескінченного зависання."
-
-#~ msgid "That's why we recommend using the safer for loop whenever you can."
-#~ msgstr "Ось чому ми радимо завжди, коли це можливо, використовувати безпечніший цикл for."
-
-#~ msgid "However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
-#~ msgstr "Однак все ще існують особливі випадки, коли ми використовуємо цикли while, наприклад, для опрацювання файлів, опрацювання комп'ютерного коду або для потужних алгоритмів."
-
 #~ msgid "body"
 #~ msgstr "тіло"
 
 #~ msgid "return"
 #~ msgstr "повернення"
-
-#~ msgid "Returning a value is the process of sending a value to the place where you call a function."
-#~ msgstr "Повернення значення — це процес надсилання значення в місце, звідки ви викликали функцію."
 
 #~ msgid "library"
 #~ msgstr "бібліотека"

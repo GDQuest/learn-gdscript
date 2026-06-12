@@ -29,163 +29,223 @@ msgid "error_suggestion"
 msgstr ""
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword.\n"
-"\n"
-"In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid temporary variable name to assign values in each loop iteration. The loop creates a new variable with the desired name and assigns each element of the array to it."
+msgid "You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword."
+msgstr "Du får denne fejl, når navnet mellem [code]for[/code] og [code]in[/code] ikke er et gyldigt variabel navn, eller du mangler [code]in[/code] nøgleord."
+
+#: script_checking/error_database.csv
+msgid "In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid temporary variable name to assign values in each loop iteration. The loop creates a new variable with the desired name and assigns each element of the array to it."
 msgstr "I et [code]for[/code] loop accepterer [code]in[/code] kun et gyldigt midlertidig variabelt navn for at tildele værdier i hver løkke iteration. Løkken laver en ny variabel med det ønskede navn og tildeler hvert element af arrayet til det."
 
 #: script_checking/error_database.csv
-msgid ""
-"To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces.\n"
-"\n"
-"For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name.\n"
-"\n"
-"To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:\n"
-"\n"
-"[code]for cell_position in cell_positions_array:\n"
-"    cell_position.x += 1.0[/code]"
-msgstr ""
+msgid "To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces."
+msgstr "For at rette denne fejl, skal du sikre, at navnet mellem [code]for[/code] og [code]in[/code] nøgleord er et gyldigt variabel navn uden punktum eller mellemrum."
 
 #: script_checking/error_database.csv
-msgid ""
-"You get this error when you try to assign a value to something that is not a variable.\n"
-"\n"
-"You can only assign values to variables. You cannot assign values to function calls or calculations.\n"
-"\n"
-"For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call, not a variable."
-msgstr ""
+msgid "For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name."
+msgstr "For eksempel er denne kode ugyldig: [code]for cell_position.x in cell_positions_array:[/code], fordi [code]cell_position.x[/code] ikke er et gyldigt variabel navn."
 
 #: script_checking/error_database.csv
-msgid ""
-"Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name.\n"
-"\n"
-"If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call.\n"
-"\n"
-"If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid ""
-"You get this error when you try to change the value of a constant.\n"
-"\n"
-"A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it.\n"
-"\n"
-"For example, if you write [code]const MAX_SPEED = 100[/code], you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code].\n"
-"\n"
-"Many constants are built into Godot and GDScript, and you cannot change them either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters."
-msgstr ""
+msgid "To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:"
+msgstr "For at få adgang til [code]x[/code] underkomponenten af variablen skal du gøre det inde i sløjfens krop:"
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid ""
-"Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:\n"
-"\n"
-"1. If the value should never change, or it comes from Godot, remove the line that tries to change it.\n"
-"2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
+msgid "[code]for cell_position in cell_positions_array:"
+msgstr ""
+"[code]for cell_position in cell_positions_array:\n"
+"    cell_position.x += 1.0[/code]"
+
+#: script_checking/error_database.csv
+msgid "    cell_position.x += 1.0[/code]"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You get this error when you try to assign a value to something that is not a variable."
+msgstr "Du får denne fejl, når du forsøger at tildele en værdi til noget, der ikke er en variabel."
+
+#: script_checking/error_database.csv
+msgid "You can only assign values to variables. You cannot assign values to function calls or calculations."
+msgstr "Du kan kun tildele værdier til variabler. Du kan ikke tildele værdier til funktionskald eller beregninger."
+
+#: script_checking/error_database.csv
+msgid "For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call, not a variable."
+msgstr "For eksempel kan du ikke skrive [code]randi() = 5[/code] fordi [code]randi()[/code] er et funktionskald, ikke en variabel."
+
+#: script_checking/error_database.csv
+msgid "Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name."
+msgstr "Tjek hvad du skrev på venstre side af lighedstegnet (=). Sørg for at det er et variabelnavn."
+
+#: script_checking/error_database.csv
+msgid "If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call."
+msgstr "Hvis du ser parenteser () i venstre side, forsøger du muligvis at tildele til et funktionskald. Fjern parenteserne og funktionskaldet."
+
+#: script_checking/error_database.csv
+msgid "If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
+msgstr "Hvis du prøver at kontrollere, om to værdier er ens i en betingelse, skal du bruge to lighedstegn (==) i stedet for ét (=)."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you try to change the value of a constant."
+msgstr "Du får denne fejl, når du forsøger at ændre værdien af en konstant."
+
+#: script_checking/error_database.csv
+msgid "A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it."
+msgstr "En konstant er et navn, der indeholder en værdi, som ikke kan ændres. Det er ligesom en variabel, men når du først har angivet dens værdi, kan du ikke erstatte den."
+
+#: script_checking/error_database.csv
+msgid "For example, if you write [code]const MAX_SPEED = 100[/code], you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code]."
+msgstr "Hvis du for eksempel skriver [code]const MAX_SPEED = 100[/code], kan du ikke senere skrive [code]MAX_SPEED = 200[/code] eller [code]MAX_SPEED += 50[/code]."
+
+#: script_checking/error_database.csv
+msgid "Many constants are built into Godot and GDScript, and you cannot change them either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters."
+msgstr "Mange konstanter er indbygget i Godot og GDScript, og du kan heller ikke ændre dem. For eksempel kan du ikke skrive [code]Vector2 = 5[/code] eller [code]PI = 3[/code]. Konstantnavne bruger normalt store bogstaver."
+
+#: script_checking/error_database.csv
+msgid "Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:"
+msgstr "Se på, hvad du prøver at ændre. Hvis det er en konstant (defineret med nøgleordet [code]const[/code] eller indbygget i Godot), har du to muligheder:"
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "1. If the value should never change, or it comes from Godot, remove the line that tries to change it."
 msgstr ""
 "1. Hvis værdien aldrig skal ændres, eller hvis den kommer fra Godot, skal du fjerne den linje, der forsøger at ændre den.\n"
 "2. Hvis værdien skal ændres, skal du bruge [code]var[/code] i stedet for [code]const[/code], når du opretter den første gang."
 
 #: script_checking/error_database.csv
-msgid ""
-"You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line.\n"
-"\n"
-"In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character.\n"
-"\n"
-"If you accidentally type a space before a tab, or a tab before a space, the computer gets confused about your code's indentation."
+#, fuzzy
+msgid "2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
 msgstr ""
+"1. Hvis værdien aldrig skal ændres, eller hvis den kommer fra Godot, skal du fjerne den linje, der forsøger at ændre den.\n"
+"2. Hvis værdien skal ændres, skal du bruge [code]var[/code] i stedet for [code]const[/code], når du opretter den første gang."
 
 #: script_checking/error_database.csv
-msgid ""
-"To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters.\n"
-"\n"
-"Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference.\n"
-"\n"
-"Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
-msgstr ""
+msgid "You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line."
+msgstr "Du får denne fejl, når du blander mellemrum og tabulatorer i din indrykning. Dette sker, når du har et mellemrum før en tabulator eller en tabulator før et mellemrum i starten af en linje."
 
 #: script_checking/error_database.csv
-msgid ""
-"A cyclic reference is when a class references itself, directly or indirectly.\n"
-"\n"
-"It has two possible causes:\n"
-"\n"
-"1. You used the class name in the class itself.\n"
-"2. Your code refers to another class that refers to this class, causing an endless reference cycle.\n"
-"\n"
-"Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
+msgid "In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character."
+msgstr "I GDScript må du kun bruge tabulatorer (ikke mellemrum) til at indrykke din kode. Når du trykker på Tab-tasten på tastaturet, oprettes der et tabulatortegn."
+
+#: script_checking/error_database.csv
+msgid "If you accidentally type a space before a tab, or a tab before a space, the computer gets confused about your code's indentation."
+msgstr "Hvis du ved et uheld skriver et mellemrum før en tabulator, eller en tabulator før et mellemrum, bliver computeren forvirret over din kodes indrykning."
+
+#: script_checking/error_database.csv
+msgid "To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters."
+msgstr "For at rette denne fejl skal du gå til den linje, der er nævnt i fejlmeddelelsen. Slet alle mellemrumstegn i starten af linjen, og fjern alle mellemrum, der vises efter dine tabulatortegn."
+
+#: script_checking/error_database.csv
+msgid "Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference."
+msgstr "Tabulatortegn ligner en pil, der peger på en lodret linje i din kode: ⇥. Mellemrum ligner centrerede prikker: ·. Se nøje for at finde forskellen."
+
+#: script_checking/error_database.csv
+msgid "Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
+msgstr "Sørg derefter for, at linjen kun starter med tabulatortegn til indrykning, uden mellemrum."
+
+#: script_checking/error_database.csv
+msgid "A cyclic reference is when a class references itself, directly or indirectly."
+msgstr "En cyklisk reference er, når en klasse refererer til sig selv, direkte eller indirekte."
+
+#: script_checking/error_database.csv
+msgid "It has two possible causes:"
+msgstr "Det har to mulige årsager:"
+
+#: script_checking/error_database.csv
+msgid "1. You used the class name in the class itself."
 msgstr ""
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid ""
-"Erase the type hint in the error line, and the problem should disappear.\n"
-"\n"
-"At GDQuest, when we face this error, we remove the type hints on lines causing cyclic references. It solves the problem in the vast majority of cases."
+msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
+msgstr ""
+"1. Du brugte klassenavnet i selve klassen.\n"
+"2. Din kode refererer til en anden klasse, der refererer til denne klasse, hvilket forårsager en uendelig referencecyklus."
+
+#: script_checking/error_database.csv
+msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
+msgstr "Uanset hvad, på grund af hvordan GDScript fungerer i Godot 3, kan du desværre ikke gøre dette. Godot 4 burde løse dette problem, men du er nødt til at arbejde omkring det i mellemtiden."
+
+#: script_checking/error_database.csv
+msgid "Erase the type hint in the error line, and the problem should disappear."
+msgstr "Slet typehintet i fejllinjen, og problemet burde forsvinde."
+
+#: script_checking/error_database.csv
+msgid "At GDQuest, when we face this error, we remove the type hints on lines causing cyclic references. It solves the problem in the vast majority of cases."
 msgstr "Når vi hos GDQuest støder på denne fejl, fjerner vi typehintene på linjer, der forårsager cykliske referencer. Det løser problemet i langt de fleste tilfælde."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"The indentation of your code (the number of tab characters at the start of the line) is incorrect.\n"
-"\n"
-"You are missing one or more tabs, or you inserted too many.\n"
-"\n"
-"The computer uses those leading tab characters on code lines to know which lines of code are part of a code block, like a function."
+msgid "The indentation of your code (the number of tab characters at the start of the line) is incorrect."
+msgstr "Indrykningen af din kode (antallet af tabulatortegn i starten af linjen) er forkert."
+
+#: script_checking/error_database.csv
+msgid "You are missing one or more tabs, or you inserted too many."
+msgstr "Du mangler en eller flere tabulatorer, eller du har indsat for mange."
+
+#: script_checking/error_database.csv
+msgid "The computer uses those leading tab characters on code lines to know which lines of code are part of a code block, like a function."
 msgstr "Computeren bruger de indledende tabulatortegn på kodelinjer til at vide, hvilke kodelinjer der er en del af en kodeblok, f.eks. en funktion."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"If the line of code with the error is right after a line ending with a colon, like a function definition, you need one extra indent level compared to the previous line.\n"
-"\n"
-"In other words, your line should have one more leading tab character than the function definition."
+msgid "If the line of code with the error is right after a line ending with a colon, like a function definition, you need one extra indent level compared to the previous line."
 msgstr "Hvis kodelinjen med fejlen er lige efter en linje, der slutter med et kolon, f.eks. en funktionsdefinition, skal du bruge et ekstra indrykningsniveau i forhold til den foregående linje."
 
 #: script_checking/error_database.csv
-msgid ""
-"You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code.\n"
-"\n"
-"You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character.\n"
-"\n"
-"Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code."
-msgstr ""
+msgid "In other words, your line should have one more leading tab character than the function definition."
+msgstr "Med andre ord skal din linje have et indledende tabulatortegn mere end funktionsdefinitionen."
 
 #: script_checking/error_database.csv
-msgid ""
-"The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing.\n"
-"\n"
-"If the error says \"expected,\" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else.\n"
-"\n"
-"If it says \"unterminated,\" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
-msgstr ""
+msgid "You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code."
+msgstr "Du får denne fejl, når du har skrevet noget, der er syntaktisk ugyldigt, eller du mangler noget for at fuldføre denne linje eller foregående linjer kode."
 
 #: script_checking/error_database.csv
-msgid ""
-"You get this error when you use a special character that GDScript doesn't recognize.\n"
-"\n"
-"This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings).\n"
-"\n"
-"[b]Note:[/b] Godot 4 supports special and non-Latin characters in code (Unicode characters), but this app is built with Godot 3, which does not."
-msgstr ""
+msgid "You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character."
+msgstr "Du skal være ekstremt præcis, når du skriver kode til computeren. Denne type fejl er let at få, da alt, hvad der kræves, er ét forkert tegn."
 
 #: script_checking/error_database.csv
-msgid ""
-"To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements.\n"
-"\n"
-"You can use accented characters inside text strings (between quotes), but not in the code itself.\n"
-"\n"
-"You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
-msgstr ""
+msgid "Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code."
+msgstr "Bemærk, at denne fejl kan vises [b]efter[/b] den linje, der forårsager den, på grund af den måde, computeren læser og analyserer din kode på."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"This error tells you that you are missing a parenthesis (or sometimes a comma or a path).\n"
-"\n"
-"Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code]."
+msgid "The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing."
+msgstr "Løsningen på denne type fejl er meget kontekstafhængig. Fejlmeddelelsen bør fortælle dig, hvilket tegn eller element der mangler."
+
+#: script_checking/error_database.csv
+msgid "If the error says \"expected,\" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else."
+msgstr "Hvis fejlen siger \"forventet\", mangler du sandsynligvis noget i en af de [b]forrige[/b] kodelinjer. Det kan være et tegnsætningstegn, en parentes eller noget andet."
+
+#: script_checking/error_database.csv
+msgid "If it says \"unterminated,\" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
+msgstr "Hvis der står \"uafsluttet\", mangler du et tegn i slutningen af et udtryk, f.eks. en afsluttende parentes. I dette tilfælde kommer det højst sandsynligt fra linjen med fejlen."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you use a special character that GDScript doesn't recognize."
+msgstr "Du får denne fejl, når du bruger et specialtegn, som GDScript ikke genkender."
+
+#: script_checking/error_database.csv
+msgid "This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings)."
+msgstr "Dette inkluderer bogstaver med accent (som é, à, ñ), specialsymboler eller tegn fra ikke-latinske alfabeter i dine kodeinstruktioner (ikke i strenge)."
+
+#: script_checking/error_database.csv
+msgid "[b]Note:[/b] Godot 4 supports special and non-Latin characters in code (Unicode characters), but this app is built with Godot 3, which does not."
+msgstr "[b]Bemærk:[/b] Godot 4 understøtter specialtegn og ikke-latinske tegn i kode (Unicode-tegn), men denne app er bygget med Godot 3, som ikke gør det."
+
+#: script_checking/error_database.csv
+msgid "To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements."
+msgstr "For at rette denne fejl skal du fjerne alle accenttegn eller specialtegn fra dine variabelnavne, funktionsnavne og andre kodeelementer."
+
+#: script_checking/error_database.csv
+msgid "You can use accented characters inside text strings (between quotes), but not in the code itself."
+msgstr "Du kan bruge accenttegn i tekststrenge (mellem anførselstegn), men ikke i selve koden."
+
+#: script_checking/error_database.csv
+msgid "You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
+msgstr "Du kan erstatte bogstaver med accent med deres tilsvarende bogstaver uden accent. For eksempel, ændr [code]café[/code] til [code]cafe[/code]."
+
+#: script_checking/error_database.csv
+msgid "This error tells you that you are missing a parenthesis (or sometimes a comma or a path)."
+msgstr "Denne fejl fortæller dig, at du mangler en parentes (eller nogle gange et komma eller en sti)."
+
+#: script_checking/error_database.csv
+msgid "Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code]."
 msgstr "Tre nøgleord i GDScript fungerer som funktionskald og kræver parenteser: [code]yield()[/code], [code]preload()[/code] og [code]assert()[/code]."
 
 #: script_checking/error_database.csv
@@ -193,148 +253,164 @@ msgid "To address the error, you want to add the missing opening parenthesis, th
 msgstr "For at rette fejlen skal du tilføje den manglende indledende parentes, den afsluttende parentes eller kommaet."
 
 #: script_checking/error_database.csv
+msgid "This error happens in several cases:"
+msgstr "Denne fejl opstår i flere tilfælde:"
+
+#: script_checking/error_database.csv
+msgid "1. You wrote an identifier (variable or function name) in the wrong place."
+msgstr ""
+
+#: script_checking/error_database.csv
 #, fuzzy
-msgid ""
-"This error happens in several cases:\n"
-"\n"
-"1. You wrote an identifier (variable or function name) in the wrong place.\n"
-"2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name.\n"
-"3. You wrote a function definition but forgot the parentheses before the colon."
+msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
 msgstr ""
 "1. Du skrev en identifikator (variabel- eller funktionsnavn) det forkerte sted.\n"
 "2. Du skrev et nøgleord som [code]var[/code], [code]func[/code], [code]for[/code] eller [code]signal[/code], og du efterfulgte det ikke af et navn.\n"
 "3. Du skrev en funktionsdefinition, men glemte parenteserne før kolonet."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses.\n"
-"\n"
-"If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc.\n"
-"\n"
-"Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
+msgid "3. You wrote a function definition but forgot the parentheses before the colon."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses."
 msgstr "Hvis fejlen fortæller dig, at den forventede noget, har du sandsynligvis glemt at skrive et navn efter et nøgleord som [code]var[/code], [code]func[/code], [code]for[/code] eller [code]signal[/code], hvilket gør din kode ugyldig. Eller du har glemt parenteser i en funktionsdefinition. Du kan løse fejlen ved at tilføje det manglende navn eller de manglende parenteser."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"This error tells you that you are missing a type somewhere. A type can be [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], and many identifiers representing a data structure.\n"
-"\n"
-"Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name.\n"
-"\n"
-"It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name."
+msgid "If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc."
+msgstr "Hvis fejlen siger, at du har noget uventet, mangler du sandsynligvis et nøgleord som [code]var[/code], [code]func[/code], [code]for[/code] osv."
+
+#: script_checking/error_database.csv
+msgid "Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
+msgstr "En anden mulighed er, at du skal skrive et kolon i slutningen af en funktionsdefinition, en [code]for[/code]-løkke eller en linje, der starter med [code]if[/code], [code]elif[/code] eller [code]else[/code]."
+
+#: script_checking/error_database.csv
+msgid "This error tells you that you are missing a type somewhere. A type can be [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], and many identifiers representing a data structure."
 msgstr "Denne fejl fortæller dig, at du mangler en type et sted. En type kan være [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code] og mange identifikatorer, der repræsenterer en datastruktur."
+
+#: script_checking/error_database.csv
+msgid "Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name."
+msgstr "Denne fejl opstår oftest, når du har skrevet et kolon efter et variabelnavn, men ikke efterfulgt det af et typenavn."
+
+#: script_checking/error_database.csv
+msgid "It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name."
+msgstr "Den opstår også, når du skriver en pil ([code]->[/code]) efter parenteserne i en funktionsdefinition, men ikke efterfulgt den af et typenavn."
 
 #: script_checking/error_database.csv
 msgid "To solve this, you need to write the name of the type after the colon, arrow (in the case of function return types), inside parentheses (for export types), or after the [code]as[/code] keyword."
 msgstr "For at løse dette skal du skrive navnet på typen efter kolon, pil (i tilfælde af funktionsreturtyper), i parenteser (for eksporttyper) eller efter nøgleordet [code]as[/code]."
 
 #: script_checking/error_database.csv
-msgid ""
-"The variable, function name, or class name you are trying to use does not exist.\n"
-"\n"
-"You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot.\n"
-"\n"
-"The other cause for this error is that you didn't define the variable, function, or class you're trying to access."
-msgstr ""
+msgid "The variable, function name, or class name you are trying to use does not exist."
+msgstr "Variablen, funktionsnavnet eller klassenavnet, du prøver at bruge, findes ikke."
 
 #: script_checking/error_database.csv
-msgid ""
-"To solve this error, triple-check that there is no typo in the line.\n"
-"\n"
-"If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error.\n"
-"\n"
-"If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
-msgstr ""
+msgid "You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot."
+msgstr "Du får oftest denne fejl, når du laver stavefejl. Måske har du byttet om på to bogstaver, glemt et bogstav... nogle gange er det svært at få øje på."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid.\n"
-"\n"
-"The [code]continue[/code] keyword means \"jump to the next iteration of the loop.\" And the [code]break[/code] keyword means \"end the loop right now and jump to the first line of code after the loop block."
+msgid "The other cause for this error is that you didn't define the variable, function, or class you're trying to access."
+msgstr "Den anden årsag til denne fejl er, at du ikke har defineret den variabel, funktion eller klasse, du prøver at få adgang til."
+
+#: script_checking/error_database.csv
+msgid "To solve this error, triple-check that there is no typo in the line."
+msgstr "For at løse denne fejl skal du tredobbelt kontrollere, at der ikke er nogen tastefejl i linjen."
+
+#: script_checking/error_database.csv
+msgid "If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error."
+msgstr "Hvis du kan, så prøv at gå til definitionen af variablen eller funktionen, dobbeltklik på navnet, kopier det og indsæt det, hvor du ser fejlen."
+
+#: script_checking/error_database.csv
+msgid "If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
+msgstr "Hvis du ikke ser nogen tastefejl, skal du sørge for at have defineret den variabel, funktion eller klasse, du refererer til."
+
+#: script_checking/error_database.csv
+msgid "You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid."
+msgstr "Du kan kun bruge nøgleord som [code]break[/code] eller [code]continue[/code] i et loop. Uden for et loop er de ugyldige."
+
+#: script_checking/error_database.csv
+msgid "The [code]continue[/code] keyword means \"jump to the next iteration of the loop.\" And the [code]break[/code] keyword means \"end the loop right now and jump to the first line of code after the loop block."
 msgstr "Nøgleordet [code]continue[/code] betyder \"hop til den næste iteration af loopet\". Og nøgleordet [code]break[/code] betyder \"afslut loopet lige nu og hop til den første kodelinje efter loopblokken\"."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"If you wrote one of these keywords outside a loop, you need to remove it.\n"
-"\n"
-"If you are trying to use it inside a loop, your indentation is most likely at fault. You may need to insert one or more leading tab characters to the keyword."
+msgid "If you wrote one of these keywords outside a loop, you need to remove it."
+msgstr "Hvis du skrev et af disse nøgleord uden for en løkke, skal du fjerne det."
+
+#: script_checking/error_database.csv
+msgid "If you are trying to use it inside a loop, your indentation is most likely at fault. You may need to insert one or more leading tab characters to the keyword."
 msgstr "Hvis du prøver at bruge det i en løkke, er det højst sandsynligt din indrykning, der er skyld i problemet. Du skal muligvis indsætte et eller flere indledende tabulatortegn før nøgleordet."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant.\n"
-"\n"
-"In other words, it wants something that can never change. This is why the computer will reject function calls and variables where it needs a constant expression."
+msgid "When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant."
+msgstr "Når computeren taler om et konstant udtryk, forventer den en fast værdi, en fast beregning eller navnet på en eksisterende konstant."
+
+#: script_checking/error_database.csv
+msgid "In other words, it wants something that can never change. This is why the computer will reject function calls and variables where it needs a constant expression."
 msgstr "Med andre ord ønsker den noget, der aldrig kan ændre sig. Det er derfor, computeren vil afvise funktionskald og variabler, hvor den har brug for et konstant udtryk."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You need to replace function calls or variables with a constant value like a whole number, decimal number, string, vector, a predefined array, etc.\n"
-"\n"
-"You can also use arithmetic operators like multiplications (*), additions (+), and so on."
+msgid "You need to replace function calls or variables with a constant value like a whole number, decimal number, string, vector, a predefined array, etc."
 msgstr "Du skal erstatte funktionskald eller variabler med en konstant værdi, som et helt tal, et decimaltal, en streng, en vektor, et foruddefineret array osv."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"When defining a new class, you need to follow a specific pattern. You must write the name in plain text, starting with a letter.\n"
-"\n"
-"We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name."
+msgid "You can also use arithmetic operators like multiplications (*), additions (+), and so on."
+msgstr "Du kan også bruge aritmetiske operatorer som multiplikationer (*), additioner (+) osv."
+
+#: script_checking/error_database.csv
+msgid "When defining a new class, you need to follow a specific pattern. You must write the name in plain text, starting with a letter."
 msgstr "Når du definerer en ny klasse, skal du følge et specifikt mønster. Du skal skrive navnet i almindelig tekst, startende med et bogstav."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"To fix this error, replace whatever you put after the 'extends' or 'class_name' keyword by a name without spaces and starting with a capital letter.\n"
-"\n"
-"You can optionally use numbers in the name, but not in the first position."
+msgid "We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name."
+msgstr "Vi skriver typisk klassenavne i PascalCase: med et stort bogstav i starten af hvert ord, der udgør klassenavnet."
+
+#: script_checking/error_database.csv
+msgid "To fix this error, replace whatever you put after the 'extends' or 'class_name' keyword by a name without spaces and starting with a capital letter."
 msgstr "For at rette denne fejl skal du erstatte det, du har angivet efter nøgleordet 'extends' eller 'class_name', med et navn uden mellemrum, der starter med et stort bogstav."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You are trying to define a function or variable that already exists; You can't do that.\n"
-"\n"
-"Perhaps the function or variable already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
+msgid "You can optionally use numbers in the name, but not in the first position."
+msgstr "Du kan eventuelt bruge tal i navnet, men ikke på første position."
+
+#: script_checking/error_database.csv
+msgid "You are trying to define a function or variable that already exists; You can't do that."
+msgstr "Du forsøger at definere en funktion eller variabel, der allerede findes; Det kan du ikke."
+
+#: script_checking/error_database.csv
+msgid "Perhaps the function or variable already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
 msgstr "Måske findes funktionen eller variablen allerede i den aktuelle kodefil, men den kan også være i en overordnet klasse, som denne GDScript-kode udvider."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"In the app, your code extends some built-in Godot code that's not visible to you.\n"
-"\n"
-"When that happens, you need to either rename your function or variable to one that will not collide with an existing one or remove this line of code."
+msgid "In the app, your code extends some built-in Godot code that's not visible to you."
+msgstr "I appen udvider din kode noget indbygget Godot-kode, som du ikke kan se."
+
+#: script_checking/error_database.csv
+msgid "When that happens, you need to either rename your function or variable to one that will not collide with an existing one or remove this line of code."
 msgstr "Når det sker, skal du enten omdøbe din funktion eller variabel til en, der ikke kolliderer med en eksisterende, eller fjerne denne kodelinje."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You are trying to define a signal that already exists; You can't do that.\n"
-"\n"
-"Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
+msgid "You are trying to define a signal that already exists; You can't do that."
+msgstr "Du prøver at definere et signal, der allerede findes. Det kan du ikke."
+
+#: script_checking/error_database.csv
+msgid "Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
 msgstr "Måske findes signalet allerede i den aktuelle kodefil, men det kan også være i en overordnet klasse, som denne GDScript-kode udvider."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"In the app, your code extends some built-in Godot code that's not visible to you.\n"
-"\n"
-"When that happens, you need to either rename your signal to one that will not collide with an existing one or remove this line of code."
+msgid "When that happens, you need to either rename your signal to one that will not collide with an existing one or remove this line of code."
 msgstr "Når det sker, skal du enten omdøbe dit signal til et, der ikke kolliderer med et eksisterende signal, eller fjerne denne kodelinje."
 
 #: script_checking/error_database.csv
-msgid ""
-"The function you're trying to define exists in a parent class, so your definition overrides the parent class's function.\n"
-"\n"
-"When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class.\n"
-"\n"
-"For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class."
-msgstr ""
+msgid "The function you're trying to define exists in a parent class, so your definition overrides the parent class's function."
+msgstr "Den funktion, du forsøger at definere, findes i en overordnede klasse, så din definition overskriver den overordnede klasses funktion."
+
+#: script_checking/error_database.csv
+msgid "When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class."
+msgstr "Når du overskriver en overordnede klasses funktion, skal den nye funktion matche den overordnede. Den nye funktion skal have samme antal og type parametre som den overordnede klasse."
+
+#: script_checking/error_database.csv
+msgid "For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class."
+msgstr "For eksempel, hvis den overordnede har to argumenter, skal din nye funktion også have to argumenter. Hvis du bruger typehints i dine funktionsdefinitioner, skal argumenttyperne matche den overordnede klasse."
 
 #: script_checking/error_database.csv
 msgid "You need to check the parent class's function and its definition in the code reference. Then, you need to edit your function definition to have the same number and type of parameters as the parent class."
@@ -349,60 +425,74 @@ msgid "You need to either remove, add, or change the values you're trying to pas
 msgstr "Du skal enten fjerne, tilføje eller ændre de værdier, du prøver at videregive til funktionen, for at løse dette problem. For at vide præcis, hvor mange argumenter du har brug for, skal du tjekke kodereferencen. Den viser dig funktionsdefinitionen og de obligatoriske argumenter."
 
 #: script_checking/error_database.csv
-msgid ""
-"All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!\n"
-"\n"
-"When you make any operation, the computer compares the types you are using.\n"
-"\n"
-"Some types are compatible, and some are not. For example, you cannot directly add a whole number to a text string. You first need to convert the number into text.\n"
-"\n"
-"You'll need to read the error message to see what is not matching because there are many possible cases."
-msgstr ""
+msgid "All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!"
+msgstr "Alle værdierne i din kode har en specifik type. Denne type kan være et helt tal (int), et decimaltal (float), tekst (String) osv. Der er tonsvis af mulige typer, og du kan endda definere dine egne!"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=).\n"
-"\n"
-"If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic.\n"
-"\n"
-"If the computer talks about an invalid operand, then the issue is that the operation does not exist for the type you're trying to use. For example, while you can add two 2D vectors, you can't add a whole number or text to a 2D vector."
+msgid "When you make any operation, the computer compares the types you are using."
+msgstr "Når du udfører en handling, sammenligner computeren de typer, du bruger."
+
+#: script_checking/error_database.csv
+msgid "Some types are compatible, and some are not. For example, you cannot directly add a whole number to a text string. You first need to convert the number into text."
+msgstr "Nogle typer er kompatible, og andre er ikke. For eksempel kan du ikke direkte tilføje et helt tal til en tekststreng. Du skal først konvertere tallet til tekst."
+
+#: script_checking/error_database.csv
+msgid "You'll need to read the error message to see what is not matching because there are many possible cases."
+msgstr "Du skal læse fejlmeddelelsen for at se, hvad der ikke matcher, fordi der er mange mulige tilfælde."
+
+#: script_checking/error_database.csv
+msgid "If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=)."
+msgstr "Hvis fejlen nævner, at den tildelte værditype ikke matcher variablen, ligger problemet på højre side af lighedstegnet (=)."
+
+#: script_checking/error_database.csv
+msgid "If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic."
+msgstr "Hvis fejlen angiver, at returtypen ikke matcher funktionen, er det værdien efter return nøgleordet, der er problematisk."
+
+#: script_checking/error_database.csv
+msgid "If the computer talks about an invalid operand, then the issue is that the operation does not exist for the type you're trying to use. For example, while you can add two 2D vectors, you can't add a whole number or text to a 2D vector."
 msgstr "Hvis computeren angiver en ugyldig operand, er problemet, at operationen ikke findes for den type, du forsøger at bruge. For eksempel, selvom du kan addere to 2D-vektorer, kan du ikke addere et helt tal eller tekst til en 2D-vektor."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"GDScript supports type inference. The computer will automatically recognize the type of value you are working with. In some cases, though, it can't figure it out.\n"
-"\n"
-"When that happens, you need to specify the type yourself or remove type inference altogether for this variable."
+msgid "GDScript supports type inference. The computer will automatically recognize the type of value you are working with. In some cases, though, it can't figure it out."
 msgstr "GDScript understøtter typeinferens. Computeren genkender automatisk den type værdi, du arbejder med. I nogle tilfælde kan den dog ikke finde ud af det."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"The simplest way to solve this error is to remove types for this variable or this function's arguments. Otherwise, you can manually specify the value type after the colon.\n"
-"\n"
-"We recommend specifying the type whenever possible to reap the typing system's benefits."
+msgid "When that happens, you need to specify the type yourself or remove type inference altogether for this variable."
+msgstr "Når det sker, skal du selv angive typen eller helt fjerne typeinferens for denne variabel."
+
+#: script_checking/error_database.csv
+msgid "The simplest way to solve this error is to remove types for this variable or this function's arguments. Otherwise, you can manually specify the value type after the colon."
 msgstr "Den enkleste måde at løse denne fejl på er at fjerne typer for denne variabel eller denne funktions argumenter. Ellers kan du manuelt angive værditypen efter kolon."
 
 #: script_checking/error_database.csv
+msgid "We recommend specifying the type whenever possible to reap the typing system's benefits."
+msgstr "Vi anbefaler at angive typen, når det er muligt, for at høste fordelene ved maskinskrivningssystemet."
+
+#: script_checking/error_database.csv
+msgid "There is an issue with the return value of your function. There are two main cases here:"
+msgstr "Der er et problem med returværdien af din funktion. Der er to hovedtilfælde her:"
+
+#: script_checking/error_database.csv
 #, fuzzy
-msgid ""
-"There is an issue with the return value of your function. There are two main cases here:\n"
-"\n"
-"1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()').\n"
-"2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
+msgid "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
 msgstr ""
 "1. Din funktion er en void-funktion, og derfor bør den ikke returnere en værdi. Dette inkluderer funktioner med syntaksen '-> void' og klassekonstruktører ('_init()').\n"
 "2. Du har angivet en returtype for din funktion, men du returnerer ikke en værdi i alle mulige grene (if, elif og else-blokke) eller i slutningen."
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid ""
-"When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that.\n"
-"\n"
-"When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
+msgid "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
+msgstr ""
+"1. Din funktion er en void-funktion, og derfor bør den ikke returnere en værdi. Dette inkluderer funktioner med syntaksen '-> void' og klassekonstruktører ('_init()').\n"
+"2. Du har angivet en returtype for din funktion, men du returnerer ikke en værdi i alle mulige grene (if, elif og else-blokke) eller i slutningen."
+
+#: script_checking/error_database.csv
+msgid "When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that."
 msgstr "Når din funktion er 'void', bør du aldrig returnere en værdi. Du kan bruge nøgleordet 'return' til at afslutte funktionen tidligt, men du bør aldrig skrive noget efter det."
+
+#: script_checking/error_database.csv
+msgid "When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
+msgstr "Når du bruger en returtype, skal du altid returnere noget i slutningen af funktionen eller i hver gren (if, elif og else-blok) af funktionen."
 
 #: script_checking/error_database.csv
 msgid "Godot was unable to load your script, yet the language checker found nothing wrong."
@@ -429,9 +519,12 @@ msgid "To fix this, you need to either add a [code]break[/code] statement inside
 msgstr "For at løse dette skal du enten tilføje en [code]break[/code]-sætning i løkken, så den kan afsluttes, når en bestemt betingelse er opfyldt, eller ændre while-løkkebetingelsen til noget, der bliver falsk. For eksempel: [code]while position.x < 100: position.x -= 10[/code]."
 
 #: script_checking/error_database.csv
-msgid ""
-"The computer reached the end of the line of code, but the line had a syntax error.\n"
-"The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
+msgid "The computer reached the end of the line of code, but the line had a syntax error."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
 msgstr ""
 "Computeren nåede slutningen af kodelinjen, men linjen havde en syntaksfejl.\n"
 "Det mest almindelige tilfælde er, når man glemmer at afslutte en streng: man har indledende anførselstegn, men man glemmer at tilføje et matchende afsluttende anførselstegn."
@@ -445,11 +538,11 @@ msgid "The sub-variable you are trying to access does not exist."
 msgstr "Den undervariabel, du forsøger at tilgå, findes ikke."
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You probably have a typo in the name of the sub-variable that you are trying to access.\n"
-"\n"
-"Ensure that you don't have a capital letter where you should have a lowercase letter and vice versa."
+msgid "You probably have a typo in the name of the sub-variable that you are trying to access."
+msgstr "Du har sandsynligvis en tastefejl i navnet på den undervariabel, du prøver at tilgå."
+
+#: script_checking/error_database.csv
+msgid "Ensure that you don't have a capital letter where you should have a lowercase letter and vice versa."
 msgstr "Sørg for, at du ikke har et stort bogstav, hvor du burde have et lille bogstav, og omvendt."
 
 #: course/glossary.csv course/documentation.csv
@@ -458,174 +551,223 @@ msgid "explanation"
 msgstr "iteration"
 
 #: course/glossary.csv
-msgid ""
-"Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods.\n"
-"\n"
-"For example, arrays have member functions like [code]array.append()[/code].\n"
-"\n"
-"You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
-msgstr ""
+msgid "Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods."
+msgstr "Medlemsfunktioner er funktioner der knyttet til en bestemt værditype, som arrays, strenge eller ordbøger. Vi kalder også dem metoder."
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"Member variables are variables attached to a specific value type, like a vector's [code]x[/code] and [code]y[/code] sub-variables. We also call them [i]properties[/i] or [i]fields[/i] of the vector.\n"
-"\n"
-"To access a member variable, you must first write the value's name followed by the access operator ([code].[/code]). For example, [code]position.x[/code]."
+msgid "For example, arrays have member functions like [code]array.append()[/code]."
+msgstr "For eksempel har arrays medlemsfunktioner som [code]array.append()[/code]."
+
+#: course/glossary.csv
+msgid "You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
+msgstr "Du kan kun kalde funktionen på et array, ved hjælp af adgangs \"operatoren\" ([code].[/code]) for at få adgang til den, som vist ovenfor."
+
+#: course/glossary.csv
+msgid "Member variables are variables attached to a specific value type, like a vector's [code]x[/code] and [code]y[/code] sub-variables. We also call them [i]properties[/i] or [i]fields[/i] of the vector."
 msgstr "Medlemsvariabler er variabler knyttet til en bestemt værditype, såsom en vektors [code]x[/code] og [code]y[/code] undervariabler. Vi kalder dem også for [i]egenskaber[/i] eller [i]felter[/i] af vektoren."
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"A parameter is a variable you create as part of a function definition.\n"
-"\n"
-"It allows you to reuse the function more by having values that vary in the function's body."
+msgid "To access a member variable, you must first write the value's name followed by the access operator ([code].[/code]). For example, [code]position.x[/code]."
+msgstr "For at få adgang til en medlemsvariabel skal du først skrive værdiens navn efterfulgt af adgangsoperatoren ([code].[/code]). For eksempel [code]position.x[/code]."
+
+#: course/glossary.csv
+msgid "A parameter is a variable you create as part of a function definition."
+msgstr "En parameter er en variabel, du opretter som en del af en funktionsdefinition."
+
+#: course/glossary.csv
+msgid "It allows you to reuse the function more by having values that vary in the function's body."
 msgstr "Den giver dig mulighed for at genbruge funktionen flere steder ved at have værdier, der varierer i funktionens krop."
 
 #: course/glossary.csv
-msgid ""
-"A radian is a unit of measurement of angles based on the circle's circumference.\n"
-"\n"
-"We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common.\n"
-"\n"
-"An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
-msgstr ""
+msgid "A radian is a unit of measurement of angles based on the circle's circumference."
+msgstr "En radian er en måleenhed for vinkler baseret på cirklens omkreds."
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"In computer programming, a type is the class of a value. For example, whole numbers like [code]3[/code], [code]11[/code], and [code]255462[/code] are all of type [code]int[/code] (short for integer).\n"
-"\n"
-"The computer uses types to determine which operations are valid between two values and when they're undefined."
+msgid "We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common."
+msgstr "Vi bruger ofte grader i vores dagligdag, men i computerprogrammering, og især i spil, er radianer almindelige."
+
+#: course/glossary.csv
+msgid "An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
+msgstr "En vinkel på [code]2 * PI[/code] radianer svarer til 360 grader. Og en vinkel på [code]PI[/code] radianer svarer til 180 grader."
+
+#: course/glossary.csv
+msgid "In computer programming, a type is the class of a value. For example, whole numbers like [code]3[/code], [code]11[/code], and [code]255462[/code] are all of type [code]int[/code] (short for integer)."
 msgstr "I computerprogrammering er en type, klassen af en værdi. For eksempel er hele tal som [code]3[/code], [code]11[/code] og [code]255462[/code] alle af typen [code]int[/code] (forkortelse for heltal)."
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"In computer code, an iteration is one repetition of some process or code. We typically use the term with loops, where one iteration is one run of the loop's code.\n"
-"\n"
-"When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
+msgid "The computer uses types to determine which operations are valid between two values and when they're undefined."
+msgstr "Computeren bruger typer til at bestemme, hvilke operationer der er gyldige mellem to værdier, og hvornår de er udefinerede."
+
+#: course/glossary.csv
+msgid "In computer code, an iteration is one repetition of some process or code. We typically use the term with loops, where one iteration is one run of the loop's code."
 msgstr "I computerkode er en iteration én gentagelse af en proces eller kode. Vi bruger typisk udtrykket med løkker, hvor én iteration er én kørsel af løkkens kode."
 
 #: course/glossary.csv
-msgid ""
-"In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers.\n"
-"\n"
-"We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves.\n"
-"\n"
-"Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
-msgstr ""
+msgid "When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
+msgstr "Når man taler om algoritmer, kan en iteration betyde en fuld gennemgang af algoritmen på et datasæt."
 
 #: course/glossary.csv
-msgid ""
-"An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument.\n"
-"\n"
-"A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional.\n"
-"\n"
-"When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]\n"
-"\n"
-"When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i].\n"
-"\n"
-"But when you [i]write[/i] a function definition, we call them [i]parameters[/i] instead. Here's an example:\n"
-"\n"
-"[code]func move_to_position(x, y):[/code]\n"
-"\n"
-"In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
-msgstr ""
+msgid "In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers."
+msgstr "I matematik er en vektor en liste af tal. I spil bruger vi ofte 2D- og 3D-vektorer: henholdsvis lister af to og tre tal."
 
 #: course/glossary.csv
-msgid ""
-"An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value.\n"
-"\n"
-"To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]\n"
-"\n"
-"In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere.\n"
-"\n"
-"Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
-msgstr ""
+msgid "We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves."
+msgstr "Vi bruger det til at repræsentere en retning og størrelse eller intensitet i rummet. For eksempel kan du bruge en vektor til at repræsentere den retning og hastighed, hvormed en figur eller et køretøj bevæger sig."
+
+#: course/glossary.csv
+msgid "Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
+msgstr "Vektorer kan virke skræmmende i starten, fordi de er ret abstrakte, men som du vil se, forenkler de kode enormt."
+
+#: course/glossary.csv
+msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument."
+msgstr "Et argument er en værdi, du sender til en funktion, når du kalder den. For eksempel, i funktionskaldet [code]rotate(0.5)[/code], er værdien [code]0.5[/code] i parentesen et argument."
+
+#: course/glossary.csv
+msgid "A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional."
+msgstr "En funktion kan tage ingen argumenter, ét argument eller flere argumenter. Argumenter kan være obligatoriske eller valgfrie."
+
+#: course/glossary.csv
+msgid "When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]"
+msgstr "Når en funktion kræver flere argumenter, adskiller du dem med kommaer. Her er et eksempel: [code]jump(50, 100)[/code]"
+
+#: course/glossary.csv
+msgid "When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i]."
+msgstr "Når du [i]kalder[/i] en funktion, kalder vi værdierne i parentes for [i]argumenter[/i]."
+
+#: course/glossary.csv
+msgid "But when you [i]write[/i] a function definition, we call them [i]parameters[/i] instead. Here's an example:"
+msgstr "Men når du [i]skriver[/i] en funktionsdefinition, kalder vi dem i stedet for [i]parametre[/i]. Her er et eksempel:"
+
+#: course/glossary.csv
+msgid "[code]func move_to_position(x, y):[/code]"
+msgstr "[code]func move_to_position(x, y):[/code]"
+
+#: course/glossary.csv
+msgid "In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
+msgstr "I denne funktionsdefinition er [code]x[/code] og [code]y[/code] [i]parametre[/i]."
+
+#: course/glossary.csv
+msgid "An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value."
+msgstr "Et array er en liste over værdier. I GDScript kan arrays indeholde [i]enhver[/i] type værdi."
+
+#: course/glossary.csv
+msgid "To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]"
+msgstr "For at oprette et array skriver du kommaseparerede værdier i firkantede parenteser: [code]var three_numbers = [1, 2, 3][/code]"
+
+#: course/glossary.csv
+msgid "In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere."
+msgstr "I spil bruger vi arrays hele tiden til at gemme lister over karakterer i en gruppe, lister over genstande i lager, lister over trylleformularer, som spilleren har låst op, og så videre. De er overalt."
+
+#: course/glossary.csv
+msgid "Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
+msgstr "Arrays er en fundamental værditype i computerprogrammering. Du finder arrays i stort set alle programmeringssprog."
 
 #: course/glossary.csv
 msgid "Assigning a value to a variable means that you store a value inside the variable. You do this with the equal sign ([code]=[/code])."
 msgstr "At tildele en værdi til en variabel betyder, at du gemmer en værdi inde i variablen. Du gør dette med lighedstegnet ([code]=[/code])."
 
 #: course/glossary.csv
-msgid ""
-"A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value.\n"
-"\n"
-"In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game.\n"
-"\n"
-"You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database.\n"
-"\n"
-"Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
-msgstr ""
+msgid "A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value."
+msgstr "En ordbog er en datastruktur, der knytter værdier til nøgle-værdi-par. Når du giver ordbogen en nøgle, finder den og giver dig den tilsvarende værdi tilbage."
 
 #: course/glossary.csv
-msgid ""
-"A for loop instructs the computer to repeat a set of instructions once for each value in an array.\n"
-"\n"
-"In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body.\n"
-"\n"
-"For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met.\n"
-"\n"
-"We recommend favoring for loops when you can. They're safer and easier to use than while loops."
-msgstr ""
+msgid "In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game."
+msgstr "I GDScript kan nøgler være mange ting. Vi bruger ofte tekststrenge eller tal, men du er ikke begrænset til det. En [code]Vector2[/code] kan også være en gyldig nøgle, hvilket er praktisk til at knytte en gittercelle til en enhed eller en genstand i et gitterbaseret spil."
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains.\n"
-"\n"
-"You can modify a function's behavior with parameters. Parameters are variable names that you write in the function definition. You can then use them in the function's body to make your code adapt to different cases.\n"
-"\n"
-"Also, functions can optionally return a value to the code calling it."
+msgid "You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database."
+msgstr "Du vil ofte bruge ordbøger til at knytte databits i dine spil. For eksempel kunne vi bruge dem til at knytte et udstyrs navn til dets våbenstatistik i en database."
+
+#: course/glossary.csv
+msgid "Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
+msgstr "Ligesom arrays er de en grundlæggende datatype, som du vil se i mange programmeringssprog og bruge meget."
+
+#: course/glossary.csv
+msgid "A for loop instructs the computer to repeat a set of instructions once for each value in an array."
+msgstr "En for-løkke instruerer computeren til at gentage et sæt instruktioner én gang for hver værdi i et array."
+
+#: course/glossary.csv
+msgid "In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body."
+msgstr "I hver løkke-iteration udtrækker compileren én værdi fra arrayet og giver dig adgang til den i løkkens krop."
+
+#: course/glossary.csv
+msgid "For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met."
+msgstr "For-løkker køre kode et begrænset antal gange: én pr. værdi i arrayet. Det er forskelligt fra while-løkker, der bliver ved med at gentage kode, indtil en betingelse er opfyldt."
+
+#: course/glossary.csv
+msgid "We recommend favoring for loops when you can. They're safer and easier to use than while loops."
+msgstr "Vi anbefaler at foretrække for-løkker, når du kan. De er sikrere og nemmere at bruge end while-løkker."
+
+#: course/glossary.csv
+msgid "A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains."
+msgstr "En funktion er en gruppe kodeinstruktioner, du giver et navn. Når du definerer en funktion, kan du til enhver tid kalde den for at køre alle de instruktioner, den indeholder."
+
+#: course/glossary.csv
+msgid "You can modify a function's behavior with parameters. Parameters are variable names that you write in the function definition. You can then use them in the function's body to make your code adapt to different cases."
 msgstr "Du kan ændre en funktions adfærd med parametre. Parametre er variabelnavne, som du skriver i funktionsdefinitionen. Du kan derefter bruge dem i funktionens krop for at tilpasse din kode til forskellige tilfælde."
+
+#: course/glossary.csv
+msgid "Also, functions can optionally return a value to the code calling it."
+msgstr "Funktioner kan også valgfrit returnere en værdi til den kode, der kalder den."
 
 #: course/glossary.csv
 msgid "An increment is the amount by which a value changes in your code."
 msgstr "En forøgelse er den mængde, som en værdi ændres med i din kode."
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"In computer programming, instructions are a single operation the computer recognizes and can execute.\n"
-"\n"
-"For example, a function call, an addition, or assigning a value to a variable."
+msgid "In computer programming, instructions are a single operation the computer recognizes and can execute."
 msgstr "I computerprogrammering er instruktioner en enkelt operation, som computeren genkender og kan udføre."
 
 #: course/glossary.csv
-msgid ""
-"Variables are a tool to give a name to values you want to store in your code and change over time.\n"
-"\n"
-"For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up.\n"
-"\n"
-"You can create a variable named [code]health[/code] to represent the health.\n"
-"\n"
-"Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you.\n"
-"\n"
-"Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
-msgstr ""
+msgid "For example, a function call, an addition, or assigning a value to a variable."
+msgstr "For eksempel et funktionskald, en addition eller tildeling af en værdi til en variabel."
 
 #: course/glossary.csv
-msgid ""
-"A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running.\n"
-"\n"
-"When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong.\n"
-"\n"
-"That's why we recommend using the safer for loop whenever you can.\n"
-"\n"
-"However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
-msgstr ""
+msgid "Variables are a tool to give a name to values you want to store in your code and change over time."
+msgstr "Variabler er et værktøj til at give et navn til værdier, du vil gemme i din kode, og som ændrer sig over tid."
+
+#: course/glossary.csv
+msgid "For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up."
+msgstr "For eksempel en figurs liv: Når figuren bliver ramt, skal den falde. Når den heler, skal livet stige igen."
+
+#: course/glossary.csv
+msgid "You can create a variable named [code]health[/code] to represent the health."
+msgstr "Du kan oprette en variabel med navnet [code]health[/code] for at repræsentere livet."
+
+#: course/glossary.csv
+msgid "Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you."
+msgstr "Hver gang du skriver nøgleordet [code]health[/code] i din kode, henter computeren den tilsvarende værdi i sin hukommelse for dig."
+
+#: course/glossary.csv
+msgid "Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
+msgstr "Variabler fungerer lidt ligesom produktetiketter i et supermarked. De er navne, som du knytter til en værdi. Du kan til enhver tid tage etiketten og sætte den på et nyt produkt eller i så fald en ny værdi."
+
+#: course/glossary.csv
+msgid "A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running."
+msgstr "En while-løkke instruerer computeren til at fortsætte med at køre kode baseret på en betingelse. Mens betingelsen er sand, fortsætter løkken med at køre."
+
+#: course/glossary.csv
+msgid "When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong."
+msgstr "Når du koder while-løkker, skal du være forsigtig: de vil fortsætte med at køre uendeligt og fryse dit spil, hvis du får betingelsen forkert."
+
+#: course/glossary.csv
+msgid "That's why we recommend using the safer for loop whenever you can."
+msgstr "Derfor anbefaler vi at bruge den mere sikre for-løkken, når du kan."
+
+#: course/glossary.csv
+msgid "However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
+msgstr "Der er dog stadig vigtige tilfælde, hvor vi bruger while-løkker, f.eks. til behandling af filer, behandling af computerkode eller til kraftfulde algoritmer."
 
 #: course/glossary.csv
 msgid "We talk about a loop or a function's body to refer to the lines of code that are part of the loop or function."
 msgstr "Vi taler om en løkke eller en funktions krop til at henvise til de kodelinjer, der er en del af løkken eller funktionen."
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"Returning a value is the process of sending a value to the place where you call a function.\n"
-"\n"
-"It happens when a function uses the [code]return[/code] keyword followed by a value, for example: [code]return -1[/code]."
+msgid "Returning a value is the process of sending a value to the place where you call a function."
+msgstr "At returnere en værdi er processen med at sende en værdi til det sted, hvor du kalder en funktion."
+
+#: course/glossary.csv
+msgid "It happens when a function uses the [code]return[/code] keyword followed by a value, for example: [code]return -1[/code]."
 msgstr "Det sker, når en funktion bruger nøgleordet [code]return[/code] efterfulgt af en værdi, for eksempel: [code]return -1[/code]."
 
 #: course/glossary.csv
@@ -700,250 +842,11 @@ msgstr ""
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
 
-#~ msgid "You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword."
-#~ msgstr "Du får denne fejl, når navnet mellem [code]for[/code] og [code]in[/code] ikke er et gyldigt variabel navn, eller du mangler [code]in[/code] nøgleord."
-
-#~ msgid "To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces."
-#~ msgstr "For at rette denne fejl, skal du sikre, at navnet mellem [code]for[/code] og [code]in[/code] nøgleord er et gyldigt variabel navn uden punktum eller mellemrum."
-
-#~ msgid "For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name."
-#~ msgstr "For eksempel er denne kode ugyldig: [code]for cell_position.x in cell_positions_array:[/code], fordi [code]cell_position.x[/code] ikke er et gyldigt variabel navn."
-
-#~ msgid "To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:"
-#~ msgstr "For at få adgang til [code]x[/code] underkomponenten af variablen skal du gøre det inde i sløjfens krop:"
-
-#~ msgid ""
-#~ "[code]for cell_position in cell_positions_array:\n"
-#~ "    cell_position.x += 1.0[/code]"
-#~ msgstr ""
-#~ "[code]for cell_position in cell_positions_array:\n"
-#~ "    cell_position.x += 1.0[/code]"
-
-#~ msgid "You get this error when you try to assign a value to something that is not a variable."
-#~ msgstr "Du får denne fejl, når du forsøger at tildele en værdi til noget, der ikke er en variabel."
-
-#~ msgid "You can only assign values to variables. You cannot assign values to function calls or calculations."
-#~ msgstr "Du kan kun tildele værdier til variabler. Du kan ikke tildele værdier til funktionskald eller beregninger."
-
-#~ msgid "For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call, not a variable."
-#~ msgstr "For eksempel kan du ikke skrive [code]randi() = 5[/code] fordi [code]randi()[/code] er et funktionskald, ikke en variabel."
-
-#~ msgid "Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name."
-#~ msgstr "Tjek hvad du skrev på venstre side af lighedstegnet (=). Sørg for at det er et variabelnavn."
-
-#~ msgid "If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call."
-#~ msgstr "Hvis du ser parenteser () i venstre side, forsøger du muligvis at tildele til et funktionskald. Fjern parenteserne og funktionskaldet."
-
-#~ msgid "If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
-#~ msgstr "Hvis du prøver at kontrollere, om to værdier er ens i en betingelse, skal du bruge to lighedstegn (==) i stedet for ét (=)."
-
-#~ msgid "You get this error when you try to change the value of a constant."
-#~ msgstr "Du får denne fejl, når du forsøger at ændre værdien af en konstant."
-
-#~ msgid "A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it."
-#~ msgstr "En konstant er et navn, der indeholder en værdi, som ikke kan ændres. Det er ligesom en variabel, men når du først har angivet dens værdi, kan du ikke erstatte den."
-
-#~ msgid "For example, if you write [code]const MAX_SPEED = 100[/code], you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code]."
-#~ msgstr "Hvis du for eksempel skriver [code]const MAX_SPEED = 100[/code], kan du ikke senere skrive [code]MAX_SPEED = 200[/code] eller [code]MAX_SPEED += 50[/code]."
-
-#~ msgid "Many constants are built into Godot and GDScript, and you cannot change them either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters."
-#~ msgstr "Mange konstanter er indbygget i Godot og GDScript, og du kan heller ikke ændre dem. For eksempel kan du ikke skrive [code]Vector2 = 5[/code] eller [code]PI = 3[/code]. Konstantnavne bruger normalt store bogstaver."
-
-#~ msgid "Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:"
-#~ msgstr "Se på, hvad du prøver at ændre. Hvis det er en konstant (defineret med nøgleordet [code]const[/code] eller indbygget i Godot), har du to muligheder:"
-
-#~ msgid "You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line."
-#~ msgstr "Du får denne fejl, når du blander mellemrum og tabulatorer i din indrykning. Dette sker, når du har et mellemrum før en tabulator eller en tabulator før et mellemrum i starten af en linje."
-
-#~ msgid "In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character."
-#~ msgstr "I GDScript må du kun bruge tabulatorer (ikke mellemrum) til at indrykke din kode. Når du trykker på Tab-tasten på tastaturet, oprettes der et tabulatortegn."
-
-#~ msgid "If you accidentally type a space before a tab, or a tab before a space, the computer gets confused about your code's indentation."
-#~ msgstr "Hvis du ved et uheld skriver et mellemrum før en tabulator, eller en tabulator før et mellemrum, bliver computeren forvirret over din kodes indrykning."
-
-#~ msgid "To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters."
-#~ msgstr "For at rette denne fejl skal du gå til den linje, der er nævnt i fejlmeddelelsen. Slet alle mellemrumstegn i starten af linjen, og fjern alle mellemrum, der vises efter dine tabulatortegn."
-
-#~ msgid "Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference."
-#~ msgstr "Tabulatortegn ligner en pil, der peger på en lodret linje i din kode: ⇥. Mellemrum ligner centrerede prikker: ·. Se nøje for at finde forskellen."
-
-#~ msgid "Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
-#~ msgstr "Sørg derefter for, at linjen kun starter med tabulatortegn til indrykning, uden mellemrum."
-
-#~ msgid "A cyclic reference is when a class references itself, directly or indirectly."
-#~ msgstr "En cyklisk reference er, når en klasse refererer til sig selv, direkte eller indirekte."
-
-#~ msgid "It has two possible causes:"
-#~ msgstr "Det har to mulige årsager:"
-
-#~ msgid ""
-#~ "1. You used the class name in the class itself.\n"
-#~ "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
-#~ msgstr ""
-#~ "1. Du brugte klassenavnet i selve klassen.\n"
-#~ "2. Din kode refererer til en anden klasse, der refererer til denne klasse, hvilket forårsager en uendelig referencecyklus."
-
-#~ msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
-#~ msgstr "Uanset hvad, på grund af hvordan GDScript fungerer i Godot 3, kan du desværre ikke gøre dette. Godot 4 burde løse dette problem, men du er nødt til at arbejde omkring det i mellemtiden."
-
-#~ msgid "Erase the type hint in the error line, and the problem should disappear."
-#~ msgstr "Slet typehintet i fejllinjen, og problemet burde forsvinde."
-
-#~ msgid "The indentation of your code (the number of tab characters at the start of the line) is incorrect."
-#~ msgstr "Indrykningen af din kode (antallet af tabulatortegn i starten af linjen) er forkert."
-
-#~ msgid "You are missing one or more tabs, or you inserted too many."
-#~ msgstr "Du mangler en eller flere tabulatorer, eller du har indsat for mange."
-
-#~ msgid "In other words, your line should have one more leading tab character than the function definition."
-#~ msgstr "Med andre ord skal din linje have et indledende tabulatortegn mere end funktionsdefinitionen."
-
-#~ msgid "You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code."
-#~ msgstr "Du får denne fejl, når du har skrevet noget, der er syntaktisk ugyldigt, eller du mangler noget for at fuldføre denne linje eller foregående linjer kode."
-
-#~ msgid "You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character."
-#~ msgstr "Du skal være ekstremt præcis, når du skriver kode til computeren. Denne type fejl er let at få, da alt, hvad der kræves, er ét forkert tegn."
-
-#~ msgid "Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code."
-#~ msgstr "Bemærk, at denne fejl kan vises [b]efter[/b] den linje, der forårsager den, på grund af den måde, computeren læser og analyserer din kode på."
-
-#~ msgid "The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing."
-#~ msgstr "Løsningen på denne type fejl er meget kontekstafhængig. Fejlmeddelelsen bør fortælle dig, hvilket tegn eller element der mangler."
-
-#~ msgid "If the error says \"expected,\" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else."
-#~ msgstr "Hvis fejlen siger \"forventet\", mangler du sandsynligvis noget i en af de [b]forrige[/b] kodelinjer. Det kan være et tegnsætningstegn, en parentes eller noget andet."
-
-#~ msgid "If it says \"unterminated,\" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
-#~ msgstr "Hvis der står \"uafsluttet\", mangler du et tegn i slutningen af et udtryk, f.eks. en afsluttende parentes. I dette tilfælde kommer det højst sandsynligt fra linjen med fejlen."
-
-#~ msgid "You get this error when you use a special character that GDScript doesn't recognize."
-#~ msgstr "Du får denne fejl, når du bruger et specialtegn, som GDScript ikke genkender."
-
-#~ msgid "This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings)."
-#~ msgstr "Dette inkluderer bogstaver med accent (som é, à, ñ), specialsymboler eller tegn fra ikke-latinske alfabeter i dine kodeinstruktioner (ikke i strenge)."
-
-#~ msgid "[b]Note:[/b] Godot 4 supports special and non-Latin characters in code (Unicode characters), but this app is built with Godot 3, which does not."
-#~ msgstr "[b]Bemærk:[/b] Godot 4 understøtter specialtegn og ikke-latinske tegn i kode (Unicode-tegn), men denne app er bygget med Godot 3, som ikke gør det."
-
-#~ msgid "To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements."
-#~ msgstr "For at rette denne fejl skal du fjerne alle accenttegn eller specialtegn fra dine variabelnavne, funktionsnavne og andre kodeelementer."
-
-#~ msgid "You can use accented characters inside text strings (between quotes), but not in the code itself."
-#~ msgstr "Du kan bruge accenttegn i tekststrenge (mellem anførselstegn), men ikke i selve koden."
-
-#~ msgid "You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
-#~ msgstr "Du kan erstatte bogstaver med accent med deres tilsvarende bogstaver uden accent. For eksempel, ændr [code]café[/code] til [code]cafe[/code]."
-
-#~ msgid "This error tells you that you are missing a parenthesis (or sometimes a comma or a path)."
-#~ msgstr "Denne fejl fortæller dig, at du mangler en parentes (eller nogle gange et komma eller en sti)."
-
 #~ msgid "This error tells you are missing some parenthesis, a comma, or some value in your export hint."
 #~ msgstr "Denne fejl fortæller, at du mangler en parentes, et komma eller en værdi i dit eksporthint."
 
 #~ msgid "You need to read the error message and add the missing character or value it requests."
 #~ msgstr "Du skal læse fejlmeddelelsen og tilføje det manglende tegn eller den manglende værdi, den anmoder om."
-
-#~ msgid "This error happens in several cases:"
-#~ msgstr "Denne fejl opstår i flere tilfælde:"
-
-#~ msgid "If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc."
-#~ msgstr "Hvis fejlen siger, at du har noget uventet, mangler du sandsynligvis et nøgleord som [code]var[/code], [code]func[/code], [code]for[/code] osv."
-
-#~ msgid "Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
-#~ msgstr "En anden mulighed er, at du skal skrive et kolon i slutningen af en funktionsdefinition, en [code]for[/code]-løkke eller en linje, der starter med [code]if[/code], [code]elif[/code] eller [code]else[/code]."
-
-#~ msgid "Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name."
-#~ msgstr "Denne fejl opstår oftest, når du har skrevet et kolon efter et variabelnavn, men ikke efterfulgt det af et typenavn."
-
-#~ msgid "It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name."
-#~ msgstr "Den opstår også, når du skriver en pil ([code]->[/code]) efter parenteserne i en funktionsdefinition, men ikke efterfulgt den af et typenavn."
-
-#~ msgid "The variable, function name, or class name you are trying to use does not exist."
-#~ msgstr "Variablen, funktionsnavnet eller klassenavnet, du prøver at bruge, findes ikke."
-
-#~ msgid "You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot."
-#~ msgstr "Du får oftest denne fejl, når du laver stavefejl. Måske har du byttet om på to bogstaver, glemt et bogstav... nogle gange er det svært at få øje på."
-
-#~ msgid "The other cause for this error is that you didn't define the variable, function, or class you're trying to access."
-#~ msgstr "Den anden årsag til denne fejl er, at du ikke har defineret den variabel, funktion eller klasse, du prøver at få adgang til."
-
-#~ msgid "To solve this error, triple-check that there is no typo in the line."
-#~ msgstr "For at løse denne fejl skal du tredobbelt kontrollere, at der ikke er nogen tastefejl i linjen."
-
-#~ msgid "If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error."
-#~ msgstr "Hvis du kan, så prøv at gå til definitionen af variablen eller funktionen, dobbeltklik på navnet, kopier det og indsæt det, hvor du ser fejlen."
-
-#~ msgid "If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
-#~ msgstr "Hvis du ikke ser nogen tastefejl, skal du sørge for at have defineret den variabel, funktion eller klasse, du refererer til."
-
-#~ msgid "You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid."
-#~ msgstr "Du kan kun bruge nøgleord som [code]break[/code] eller [code]continue[/code] i et loop. Uden for et loop er de ugyldige."
-
-#~ msgid "If you wrote one of these keywords outside a loop, you need to remove it."
-#~ msgstr "Hvis du skrev et af disse nøgleord uden for en løkke, skal du fjerne det."
-
-#~ msgid "When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant."
-#~ msgstr "Når computeren taler om et konstant udtryk, forventer den en fast værdi, en fast beregning eller navnet på en eksisterende konstant."
-
-#~ msgid "You can also use arithmetic operators like multiplications (*), additions (+), and so on."
-#~ msgstr "Du kan også bruge aritmetiske operatorer som multiplikationer (*), additioner (+) osv."
-
-#~ msgid "We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name."
-#~ msgstr "Vi skriver typisk klassenavne i PascalCase: med et stort bogstav i starten af hvert ord, der udgør klassenavnet."
-
-#~ msgid "You can optionally use numbers in the name, but not in the first position."
-#~ msgstr "Du kan eventuelt bruge tal i navnet, men ikke på første position."
-
-#~ msgid "You are trying to define a function or variable that already exists; You can't do that."
-#~ msgstr "Du forsøger at definere en funktion eller variabel, der allerede findes; Det kan du ikke."
-
-#~ msgid "In the app, your code extends some built-in Godot code that's not visible to you."
-#~ msgstr "I appen udvider din kode noget indbygget Godot-kode, som du ikke kan se."
-
-#~ msgid "You are trying to define a signal that already exists; You can't do that."
-#~ msgstr "Du prøver at definere et signal, der allerede findes. Det kan du ikke."
-
-#~ msgid "The function you're trying to define exists in a parent class, so your definition overrides the parent class's function."
-#~ msgstr "Den funktion, du forsøger at definere, findes i en overordnede klasse, så din definition overskriver den overordnede klasses funktion."
-
-#~ msgid "When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class."
-#~ msgstr "Når du overskriver en overordnede klasses funktion, skal den nye funktion matche den overordnede. Den nye funktion skal have samme antal og type parametre som den overordnede klasse."
-
-#~ msgid "For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class."
-#~ msgstr "For eksempel, hvis den overordnede har to argumenter, skal din nye funktion også have to argumenter. Hvis du bruger typehints i dine funktionsdefinitioner, skal argumenttyperne matche den overordnede klasse."
-
-#~ msgid "All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!"
-#~ msgstr "Alle værdierne i din kode har en specifik type. Denne type kan være et helt tal (int), et decimaltal (float), tekst (String) osv. Der er tonsvis af mulige typer, og du kan endda definere dine egne!"
-
-#~ msgid "When you make any operation, the computer compares the types you are using."
-#~ msgstr "Når du udfører en handling, sammenligner computeren de typer, du bruger."
-
-#~ msgid "Some types are compatible, and some are not. For example, you cannot directly add a whole number to a text string. You first need to convert the number into text."
-#~ msgstr "Nogle typer er kompatible, og andre er ikke. For eksempel kan du ikke direkte tilføje et helt tal til en tekststreng. Du skal først konvertere tallet til tekst."
-
-#~ msgid "You'll need to read the error message to see what is not matching because there are many possible cases."
-#~ msgstr "Du skal læse fejlmeddelelsen for at se, hvad der ikke matcher, fordi der er mange mulige tilfælde."
-
-#~ msgid "If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=)."
-#~ msgstr "Hvis fejlen nævner, at den tildelte værditype ikke matcher variablen, ligger problemet på højre side af lighedstegnet (=)."
-
-#~ msgid "If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic."
-#~ msgstr "Hvis fejlen angiver, at returtypen ikke matcher funktionen, er det værdien efter return nøgleordet, der er problematisk."
-
-#~ msgid "When that happens, you need to specify the type yourself or remove type inference altogether for this variable."
-#~ msgstr "Når det sker, skal du selv angive typen eller helt fjerne typeinferens for denne variabel."
-
-#~ msgid "We recommend specifying the type whenever possible to reap the typing system's benefits."
-#~ msgstr "Vi anbefaler at angive typen, når det er muligt, for at høste fordelene ved maskinskrivningssystemet."
-
-#~ msgid "There is an issue with the return value of your function. There are two main cases here:"
-#~ msgstr "Der er et problem med returværdien af din funktion. Der er to hovedtilfælde her:"
-
-#~ msgid "When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
-#~ msgstr "Når du bruger en returtype, skal du altid returnere noget i slutningen af funktionen eller i hver gren (if, elif og else-blok) af funktionen."
-
-#~ msgid "You probably have a typo in the name of the sub-variable that you are trying to access."
-#~ msgstr "Du har sandsynligvis en tastefejl i navnet på den undervariabel, du prøver at tilgå."
 
 #~ msgid "member function"
 #~ msgstr "medlemsfunktion"
@@ -951,23 +854,11 @@ msgstr ""
 #~ msgid "member functions"
 #~ msgstr "medlemsfunktioner"
 
-#~ msgid "Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods."
-#~ msgstr "Medlemsfunktioner er funktioner der knyttet til en bestemt værditype, som arrays, strenge eller ordbøger. Vi kalder også dem metoder."
-
-#~ msgid "For example, arrays have member functions like [code]array.append()[/code]."
-#~ msgstr "For eksempel har arrays medlemsfunktioner som [code]array.append()[/code]."
-
-#~ msgid "You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
-#~ msgstr "Du kan kun kalde funktionen på et array, ved hjælp af adgangs \"operatoren\" ([code].[/code]) for at få adgang til den, som vist ovenfor."
-
 #~ msgid "member variable"
 #~ msgstr "medlemsvariabel"
 
 #~ msgid "member variables"
 #~ msgstr "medlemsvariabler"
-
-#~ msgid "To access a member variable, you must first write the value's name followed by the access operator ([code].[/code]). For example, [code]position.x[/code]."
-#~ msgstr "For at få adgang til en medlemsvariabel skal du først skrive værdiens navn efterfulgt af adgangsoperatoren ([code].[/code]). For eksempel [code]position.x[/code]."
 
 #~ msgid "parameter"
 #~ msgstr "parameter"
@@ -975,23 +866,11 @@ msgstr ""
 #~ msgid "parameters"
 #~ msgstr "parametre"
 
-#~ msgid "A parameter is a variable you create as part of a function definition."
-#~ msgstr "En parameter er en variabel, du opretter som en del af en funktionsdefinition."
-
 #~ msgid "radian"
 #~ msgstr "radian"
 
 #~ msgid "radians"
 #~ msgstr "radianer"
-
-#~ msgid "A radian is a unit of measurement of angles based on the circle's circumference."
-#~ msgstr "En radian er en måleenhed for vinkler baseret på cirklens omkreds."
-
-#~ msgid "We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common."
-#~ msgstr "Vi bruger ofte grader i vores dagligdag, men i computerprogrammering, og især i spil, er radianer almindelige."
-
-#~ msgid "An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
-#~ msgstr "En vinkel på [code]2 * PI[/code] radianer svarer til 360 grader. Og en vinkel på [code]PI[/code] radianer svarer til 180 grader."
 
 #~ msgid "type"
 #~ msgstr "type"
@@ -999,14 +878,8 @@ msgstr ""
 #~ msgid "types"
 #~ msgstr "typer"
 
-#~ msgid "The computer uses types to determine which operations are valid between two values and when they're undefined."
-#~ msgstr "Computeren bruger typer til at bestemme, hvilke operationer der er gyldige mellem to værdier, og hvornår de er udefinerede."
-
 #~ msgid "iterations"
 #~ msgstr "iterationer"
-
-#~ msgid "When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
-#~ msgstr "Når man taler om algoritmer, kan en iteration betyde en fuld gennemgang af algoritmen på et datasæt."
 
 #~ msgid "vector"
 #~ msgstr "vektor"
@@ -1014,59 +887,17 @@ msgstr ""
 #~ msgid "vectors"
 #~ msgstr "vektorer"
 
-#~ msgid "In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers."
-#~ msgstr "I matematik er en vektor en liste af tal. I spil bruger vi ofte 2D- og 3D-vektorer: henholdsvis lister af to og tre tal."
-
-#~ msgid "We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves."
-#~ msgstr "Vi bruger det til at repræsentere en retning og størrelse eller intensitet i rummet. For eksempel kan du bruge en vektor til at repræsentere den retning og hastighed, hvormed en figur eller et køretøj bevæger sig."
-
-#~ msgid "Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
-#~ msgstr "Vektorer kan virke skræmmende i starten, fordi de er ret abstrakte, men som du vil se, forenkler de kode enormt."
-
 #~ msgid "argument"
 #~ msgstr "argument"
 
 #~ msgid "arguments"
 #~ msgstr "argumenter"
 
-#~ msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument."
-#~ msgstr "Et argument er en værdi, du sender til en funktion, når du kalder den. For eksempel, i funktionskaldet [code]rotate(0.5)[/code], er værdien [code]0.5[/code] i parentesen et argument."
-
-#~ msgid "A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional."
-#~ msgstr "En funktion kan tage ingen argumenter, ét argument eller flere argumenter. Argumenter kan være obligatoriske eller valgfrie."
-
-#~ msgid "When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]"
-#~ msgstr "Når en funktion kræver flere argumenter, adskiller du dem med kommaer. Her er et eksempel: [code]jump(50, 100)[/code]"
-
-#~ msgid "When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i]."
-#~ msgstr "Når du [i]kalder[/i] en funktion, kalder vi værdierne i parentes for [i]argumenter[/i]."
-
-#~ msgid "But when you [i]write[/i] a function definition, we call them [i]parameters[/i] instead. Here's an example:"
-#~ msgstr "Men når du [i]skriver[/i] en funktionsdefinition, kalder vi dem i stedet for [i]parametre[/i]. Her er et eksempel:"
-
-#~ msgid "[code]func move_to_position(x, y):[/code]"
-#~ msgstr "[code]func move_to_position(x, y):[/code]"
-
-#~ msgid "In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
-#~ msgstr "I denne funktionsdefinition er [code]x[/code] og [code]y[/code] [i]parametre[/i]."
-
 #~ msgid "array"
 #~ msgstr "array"
 
 #~ msgid "arrays"
 #~ msgstr "arrays"
-
-#~ msgid "An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value."
-#~ msgstr "Et array er en liste over værdier. I GDScript kan arrays indeholde [i]enhver[/i] type værdi."
-
-#~ msgid "To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]"
-#~ msgstr "For at oprette et array skriver du kommaseparerede værdier i firkantede parenteser: [code]var three_numbers = [1, 2, 3][/code]"
-
-#~ msgid "In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere."
-#~ msgstr "I spil bruger vi arrays hele tiden til at gemme lister over karakterer i en gruppe, lister over genstande i lager, lister over trylleformularer, som spilleren har låst op, og så videre. De er overalt."
-
-#~ msgid "Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
-#~ msgstr "Arrays er en fundamental værditype i computerprogrammering. Du finder arrays i stort set alle programmeringssprog."
 
 #~ msgid "assign"
 #~ msgstr "tildel"
@@ -1077,47 +908,17 @@ msgstr ""
 #~ msgid "dictionaries"
 #~ msgstr "ordbøger"
 
-#~ msgid "A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value."
-#~ msgstr "En ordbog er en datastruktur, der knytter værdier til nøgle-værdi-par. Når du giver ordbogen en nøgle, finder den og giver dig den tilsvarende værdi tilbage."
-
-#~ msgid "In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game."
-#~ msgstr "I GDScript kan nøgler være mange ting. Vi bruger ofte tekststrenge eller tal, men du er ikke begrænset til det. En [code]Vector2[/code] kan også være en gyldig nøgle, hvilket er praktisk til at knytte en gittercelle til en enhed eller en genstand i et gitterbaseret spil."
-
-#~ msgid "You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database."
-#~ msgstr "Du vil ofte bruge ordbøger til at knytte databits i dine spil. For eksempel kunne vi bruge dem til at knytte et udstyrs navn til dets våbenstatistik i en database."
-
-#~ msgid "Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
-#~ msgstr "Ligesom arrays er de en grundlæggende datatype, som du vil se i mange programmeringssprog og bruge meget."
-
 #~ msgid "for loop"
 #~ msgstr "for-løkke"
 
 #~ msgid "for loops"
 #~ msgstr "for-løkker"
 
-#~ msgid "A for loop instructs the computer to repeat a set of instructions once for each value in an array."
-#~ msgstr "En for-løkke instruerer computeren til at gentage et sæt instruktioner én gang for hver værdi i et array."
-
-#~ msgid "In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body."
-#~ msgstr "I hver løkke-iteration udtrækker compileren én værdi fra arrayet og giver dig adgang til den i løkkens krop."
-
-#~ msgid "For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met."
-#~ msgstr "For-løkker køre kode et begrænset antal gange: én pr. værdi i arrayet. Det er forskelligt fra while-løkker, der bliver ved med at gentage kode, indtil en betingelse er opfyldt."
-
-#~ msgid "We recommend favoring for loops when you can. They're safer and easier to use than while loops."
-#~ msgstr "Vi anbefaler at foretrække for-løkker, når du kan. De er sikrere og nemmere at bruge end while-løkker."
-
 #~ msgid "function"
 #~ msgstr "funktion"
 
 #~ msgid "functions"
 #~ msgstr "funktioner"
-
-#~ msgid "A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains."
-#~ msgstr "En funktion er en gruppe kodeinstruktioner, du giver et navn. Når du definerer en funktion, kan du til enhver tid kalde den for at køre alle de instruktioner, den indeholder."
-
-#~ msgid "Also, functions can optionally return a value to the code calling it."
-#~ msgstr "Funktioner kan også valgfrit returnere en værdi til den kode, der kalder den."
 
 #~ msgid "increment"
 #~ msgstr "forøgelse"
@@ -1131,29 +932,11 @@ msgstr ""
 #~ msgid "instructions"
 #~ msgstr "instruktioner"
 
-#~ msgid "For example, a function call, an addition, or assigning a value to a variable."
-#~ msgstr "For eksempel et funktionskald, en addition eller tildeling af en værdi til en variabel."
-
 #~ msgid "variable"
 #~ msgstr "variabel"
 
 #~ msgid "variables"
 #~ msgstr "variabler"
-
-#~ msgid "Variables are a tool to give a name to values you want to store in your code and change over time."
-#~ msgstr "Variabler er et værktøj til at give et navn til værdier, du vil gemme i din kode, og som ændrer sig over tid."
-
-#~ msgid "For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up."
-#~ msgstr "For eksempel en figurs liv: Når figuren bliver ramt, skal den falde. Når den heler, skal livet stige igen."
-
-#~ msgid "You can create a variable named [code]health[/code] to represent the health."
-#~ msgstr "Du kan oprette en variabel med navnet [code]health[/code] for at repræsentere livet."
-
-#~ msgid "Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you."
-#~ msgstr "Hver gang du skriver nøgleordet [code]health[/code] i din kode, henter computeren den tilsvarende værdi i sin hukommelse for dig."
-
-#~ msgid "Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
-#~ msgstr "Variabler fungerer lidt ligesom produktetiketter i et supermarked. De er navne, som du knytter til en værdi. Du kan til enhver tid tage etiketten og sætte den på et nyt produkt eller i så fald en ny værdi."
 
 #~ msgid "while loop"
 #~ msgstr "while-løkke"
@@ -1161,26 +944,11 @@ msgstr ""
 #~ msgid "while loops"
 #~ msgstr "while-løkker"
 
-#~ msgid "A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running."
-#~ msgstr "En while-løkke instruerer computeren til at fortsætte med at køre kode baseret på en betingelse. Mens betingelsen er sand, fortsætter løkken med at køre."
-
-#~ msgid "When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong."
-#~ msgstr "Når du koder while-løkker, skal du være forsigtig: de vil fortsætte med at køre uendeligt og fryse dit spil, hvis du får betingelsen forkert."
-
-#~ msgid "That's why we recommend using the safer for loop whenever you can."
-#~ msgstr "Derfor anbefaler vi at bruge den mere sikre for-løkken, når du kan."
-
-#~ msgid "However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
-#~ msgstr "Der er dog stadig vigtige tilfælde, hvor vi bruger while-løkker, f.eks. til behandling af filer, behandling af computerkode eller til kraftfulde algoritmer."
-
 #~ msgid "body"
 #~ msgstr "krop"
 
 #~ msgid "return"
 #~ msgstr "returnering"
-
-#~ msgid "Returning a value is the process of sending a value to the place where you call a function."
-#~ msgstr "At returnere en værdi er processen med at sende en værdi til det sted, hvor du kalder en funktion."
 
 #~ msgid "library"
 #~ msgstr "bibliotek"

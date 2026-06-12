@@ -29,7 +29,11 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 	for l in range(0, blocks.size(), extraction_data._total_columns):
 		for data: ExtractionTranslationData in extraction_data._translations:
 			if l + data._column < blocks.size():
-				ret.push_back(PackedStringArray([blocks[l + data._column]]))
+				var text_block: String = blocks[l + data._column]
+				
+				var lines := text_block.split("\n", false)
+				for line in lines:
+					ret.append(PackedStringArray([line]))
 		
 	return ret
 

@@ -28,160 +28,219 @@ msgid "error_suggestion"
 msgstr ""
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword.\n"
-"\n"
-"In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid temporary variable name to assign values in each loop iteration. The loop creates a new variable with the desired name and assigns each element of the array to it."
+msgid "You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword."
+msgstr "當 [code]for[/code] 和 [code]in[/code] 之間的名稱不是有效的變數名稱，或是你遺漏了 [code]in[/code] 關鍵字時，會出現這個錯誤。"
+
+#: script_checking/error_database.csv
+msgid "In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid temporary variable name to assign values in each loop iteration. The loop creates a new variable with the desired name and assigns each element of the array to it."
 msgstr "在 [code]for[/code] 迴圈中， [code]in[/code] 關鍵字只接受一個有效的臨時變數名稱，並將每次迴圈的值指定給該變數。這個迴圈會創建一個新的變數並將陣列中的每個元素依照順序指定給它。"
 
 #: script_checking/error_database.csv
-msgid ""
-"To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces.\n"
-"\n"
-"For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name.\n"
-"\n"
-"To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:\n"
-"\n"
+msgid "To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces."
+msgstr "要修正這個錯誤，你需要確保 [code]for[/code] 和 [code]in[/code] 之間的名稱是有效的變數名稱，且不包含標點符號或空格。"
+
+#: script_checking/error_database.csv
+msgid "For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name."
+msgstr "例如，這段程式碼是無效的：[code]for cell_position.x in cell_positions_array:[/code]，因為 [code]cell_position.x[/code] 不是有效的變數名稱。"
+
+#: script_checking/error_database.csv
+msgid "To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:"
+msgstr "若要訪問變數的 [code]x[/code] 子組件，你需要將這個操作放在迴圈的內容區塊內："
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "[code]for cell_position in cell_positions_array:"
+msgstr ""
 "[code]for cell_position in cell_positions_array:\n"
 "    cell_position.x += 1.0[/code]"
-msgstr ""
 
 #: script_checking/error_database.csv
-msgid ""
-"You get this error when you try to assign a value to something that is not a variable.\n"
-"\n"
-"You can only assign values to variables. You cannot assign values to function calls or calculations.\n"
-"\n"
-"For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call, not a variable."
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid ""
-"Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name.\n"
-"\n"
-"If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call.\n"
-"\n"
-"If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid ""
-"You get this error when you try to change the value of a constant.\n"
-"\n"
-"A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it.\n"
-"\n"
-"For example, if you write [code]const MAX_SPEED = 100[/code], you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code].\n"
-"\n"
-"Many constants are built into Godot and GDScript, and you cannot change them either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters."
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid ""
-"Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:\n"
-"\n"
-"1. If the value should never change, or it comes from Godot, remove the line that tries to change it.\n"
-"2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid ""
-"You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line.\n"
-"\n"
-"In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character.\n"
-"\n"
-"If you accidentally type a space before a tab, or a tab before a space, the computer gets confused about your code's indentation."
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid ""
-"To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters.\n"
-"\n"
-"Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference.\n"
-"\n"
-"Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
-msgstr ""
-
-#: script_checking/error_database.csv
-msgid ""
-"A cyclic reference is when a class references itself, directly or indirectly.\n"
-"\n"
-"It has two possible causes:\n"
-"\n"
-"1. You used the class name in the class itself.\n"
-"2. Your code refers to another class that refers to this class, causing an endless reference cycle.\n"
-"\n"
-"Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
+msgid "    cell_position.x += 1.0[/code]"
 msgstr ""
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid ""
-"Erase the type hint in the error line, and the problem should disappear.\n"
-"\n"
-"At GDQuest, when we face this error, we remove the type hints on lines causing cyclic references. It solves the problem in the vast majority of cases."
+msgid "You get this error when you try to assign a value to something that is not a variable."
+msgstr "如果你遇到這個錯誤，很可能是你正在嘗試將值指定給不是變數的東西，這是無法實現的。你只能將值指定給變數。"
+
+#: script_checking/error_database.csv
+msgid "You can only assign values to variables. You cannot assign values to function calls or calculations."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call, not a variable."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
+msgstr "另一個可能性是，你想要在條件判斷中檢查相等性，但錯誤地寫成單個 [code]=[/code] 而不是 [code]==[/code]。"
+
+#: script_checking/error_database.csv
+msgid "You get this error when you try to change the value of a constant."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, if you write [code]const MAX_SPEED = 100[/code], you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Many constants are built into Godot and GDScript, and you cannot change them either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "1. If the value should never change, or it comes from Godot, remove the line that tries to change it."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you accidentally type a space before a tab, or a tab before a space, the computer gets confused about your code's indentation."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "A cyclic reference is when a class references itself, directly or indirectly."
+msgstr "循環引用是指一個類別直接或間接地引用自身。"
+
+#: script_checking/error_database.csv
+msgid "It has two possible causes:"
+msgstr "這可能有兩個原因："
+
+#: script_checking/error_database.csv
+msgid "1. You used the class name in the class itself."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
+msgstr ""
+"1. 你在類別內部使用了類別自己。\n"
+"2. 你的程式碼引用了另一個類別，而該類別又引用了這個類別，造成無限循環引用。"
+
+#: script_checking/error_database.csv
+msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
+msgstr "無論哪種情況，由於 GDScript 在 Godot 3 的運作方式，不幸的是，這是無法實現的。Godot 4 應該能解決這個問題，但目前你需要找到替代方法。"
+
+#: script_checking/error_database.csv
+msgid "Erase the type hint in the error line, and the problem should disappear."
+msgstr "刪除錯誤行中的類型提示，問題應該就會消失。"
+
+#: script_checking/error_database.csv
+msgid "At GDQuest, when we face this error, we remove the type hints on lines causing cyclic references. It solves the problem in the vast majority of cases."
 msgstr "在 GDQuest，當我們遇到這個錯誤時，我們會刪除導致循環引用的行上的類型提示。這樣做在大多數情況下能解決問題。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"The indentation of your code (the number of tab characters at the start of the line) is incorrect.\n"
-"\n"
-"You are missing one or more tabs, or you inserted too many.\n"
-"\n"
-"The computer uses those leading tab characters on code lines to know which lines of code are part of a code block, like a function."
+msgid "The indentation of your code (the number of tab characters at the start of the line) is incorrect."
+msgstr "你的程式碼縮排（行首的 tab 字符數量）不正確。"
+
+#: script_checking/error_database.csv
+msgid "You are missing one or more tabs, or you inserted too many."
+msgstr "你可能遺漏了一個或多個 tab，或者插入了太多。"
+
+#: script_checking/error_database.csv
+msgid "The computer uses those leading tab characters on code lines to know which lines of code are part of a code block, like a function."
 msgstr "電腦利用這些行首的 tab 字符來識別程式碼行是否屬於某個程式區塊，例如一個函式。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"If the line of code with the error is right after a line ending with a colon, like a function definition, you need one extra indent level compared to the previous line.\n"
-"\n"
-"In other words, your line should have one more leading tab character than the function definition."
+msgid "If the line of code with the error is right after a line ending with a colon, like a function definition, you need one extra indent level compared to the previous line."
 msgstr "如果出錯的程式碼行緊接在以冒號結尾的行之後，例如函式定義，你需要比上一行多一級縮排。"
 
 #: script_checking/error_database.csv
-msgid ""
-"You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code.\n"
-"\n"
-"You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character.\n"
-"\n"
-"Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code."
+msgid "In other words, your line should have one more leading tab character than the function definition."
+msgstr "換句話說，這行程式碼的縮排應該比函式定義多一個 tab 字符。"
+
+#: script_checking/error_database.csv
+msgid "You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code."
+msgstr "當你寫了語法不正確的程式碼，或者你遺漏了某些內容來完成這行或前面的程式碼時，會出現這個錯誤。"
+
+#: script_checking/error_database.csv
+msgid "You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character."
+msgstr "當你為電腦編寫程式碼時，需要極為精確。這類錯誤很容易出現，因為只要有一個錯誤的字符，就會發生。"
+
+#: script_checking/error_database.csv
+msgid "Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code."
+msgstr "請注意，由於電腦讀取和分析程式碼的方式，這個錯誤可能會出現在 [b]造成錯誤的行之後[/b]。"
+
+#: script_checking/error_database.csv
+msgid "The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing."
+msgstr "解決這類錯誤的方法非常具有上下文依賴性。錯誤訊息應該會告訴你缺少的是哪個字符或元素。"
+
+#: script_checking/error_database.csv
+msgid "If the error says \"expected,\" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else."
+msgstr "如果錯誤訊息說「expected」（預期），那麼你很可能在 [b]前面的[/b] 程式碼行中遺漏了某些東西。可能是標點符號、括號或其他東西。"
+
+#: script_checking/error_database.csv
+msgid "If it says \"unterminated,\" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
+msgstr "如果錯誤訊息說「unterminated」（未結束），那麼你缺少的是表達式結尾處的某個字符，例如閉合括號。在這種情況下，錯誤通常來自於有錯誤的那一行。"
+
+#: script_checking/error_database.csv
+msgid "You get this error when you use a special character that GDScript doesn't recognize."
 msgstr ""
 
 #: script_checking/error_database.csv
-msgid ""
-"The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing.\n"
-"\n"
-"If the error says \"expected,\" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else.\n"
-"\n"
-"If it says \"unterminated,\" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
+msgid "This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings)."
 msgstr ""
 
 #: script_checking/error_database.csv
-msgid ""
-"You get this error when you use a special character that GDScript doesn't recognize.\n"
-"\n"
-"This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings).\n"
-"\n"
-"[b]Note:[/b] Godot 4 supports special and non-Latin characters in code (Unicode characters), but this app is built with Godot 3, which does not."
+msgid "[b]Note:[/b] Godot 4 supports special and non-Latin characters in code (Unicode characters), but this app is built with Godot 3, which does not."
 msgstr ""
 
 #: script_checking/error_database.csv
-msgid ""
-"To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements.\n"
-"\n"
-"You can use accented characters inside text strings (between quotes), but not in the code itself.\n"
-"\n"
-"You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
+msgid "To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements."
 msgstr ""
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"This error tells you that you are missing a parenthesis (or sometimes a comma or a path).\n"
-"\n"
-"Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code]."
+msgid "You can use accented characters inside text strings (between quotes), but not in the code itself."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "This error tells you that you are missing a parenthesis (or sometimes a comma or a path)."
+msgstr "這個錯誤告訴你缺少了一個括號（有時是逗號或路徑）。"
+
+#: script_checking/error_database.csv
+msgid "Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code]."
 msgstr "在 GDScript 中，有三個關鍵字像函式呼叫一樣，並需要括號： [code]yield()[/code], [code]preload()[/code] 和 [code]assert()[/code]。"
 
 #: script_checking/error_database.csv
@@ -189,148 +248,164 @@ msgid "To address the error, you want to add the missing opening parenthesis, th
 msgstr "要解決這個錯誤，你需要添加缺失的開括號、閉括號或逗號。"
 
 #: script_checking/error_database.csv
+msgid "This error happens in several cases:"
+msgstr "這個錯誤發生在幾種情況下："
+
+#: script_checking/error_database.csv
+msgid "1. You wrote an identifier (variable or function name) in the wrong place."
+msgstr ""
+
+#: script_checking/error_database.csv
 #, fuzzy
-msgid ""
-"This error happens in several cases:\n"
-"\n"
-"1. You wrote an identifier (variable or function name) in the wrong place.\n"
-"2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name.\n"
-"3. You wrote a function definition but forgot the parentheses before the colon."
+msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
 msgstr ""
 "1. 你把識別符（變數或函式名稱）寫錯位置。\n"
 "2. 你寫了像 [code]var[/code], [code]func[/code], [code]for[/code] 或 [code]signal[/code] 這樣的關鍵字，但後面沒有接名稱。\n"
 "3. 你寫了函式定義，但忘記在冒號之前加上括號。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses.\n"
-"\n"
-"If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc.\n"
-"\n"
-"Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
+msgid "3. You wrote a function definition but forgot the parentheses before the colon."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses."
 msgstr "如果錯誤告訴你預期某個東西，你很可能在 [code]var[/code], [code]func[/code], [code]for[/code] 或 [code]signal[/code] 等關鍵字後面忘了寫名稱，導致程式碼無效。或者你忘記了函式定義中的括號。你可以通過添加缺少的名稱或括號來解決這個錯誤。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"This error tells you that you are missing a type somewhere. A type can be [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], and many identifiers representing a data structure.\n"
-"\n"
-"Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name.\n"
-"\n"
-"It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name."
+msgid "If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc."
+msgstr "如果錯誤告訴你有意外情況，那麼你很可能漏寫了像 [code]var[/code]、[code]func[/code]、[code]for[/code] 等關鍵字。"
+
+#: script_checking/error_database.csv
+msgid "Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
+msgstr "另一種可能是，你需要在函式定義、[code]for[/code] 迴圈，或以 [code]if[/code]、[code]elif[/code] 或 [code]else[/code] 開頭的條件語句後加上冒號。"
+
+#: script_checking/error_database.csv
+msgid "This error tells you that you are missing a type somewhere. A type can be [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], and many identifiers representing a data structure."
 msgstr "這個錯誤告訴你缺少某個類型。類型可以是 [code]int[/code]、[code]float[/code]、[code]String[/code]、[code]Array[/code]、[code]Vector2[/code]，以及許多代表資料結構的識別符。"
+
+#: script_checking/error_database.csv
+msgid "Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name."
+msgstr "大多數情況下，這個錯誤發生在你在變數名稱後寫了冒號，但沒有加上類型名稱時。"
+
+#: script_checking/error_database.csv
+msgid "It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name."
+msgstr "它也會發生在你在函式定義的括號後寫了箭頭（[code]->[/code]），但沒有加上類型名稱時。"
 
 #: script_checking/error_database.csv
 msgid "To solve this, you need to write the name of the type after the colon, arrow (in the case of function return types), inside parentheses (for export types), or after the [code]as[/code] keyword."
 msgstr "為了解決這個問題，你需要在冒號、箭頭（對於函式回傳類型的情況下）、括號內（對於導出類型）或 [code]as[/code] 關鍵字後編寫類型名稱。"
 
 #: script_checking/error_database.csv
-msgid ""
-"The variable, function name, or class name you are trying to use does not exist.\n"
-"\n"
-"You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot.\n"
-"\n"
-"The other cause for this error is that you didn't define the variable, function, or class you're trying to access."
-msgstr ""
+msgid "The variable, function name, or class name you are trying to use does not exist."
+msgstr "你嘗試使用的變數、函式名稱或類別名稱不存在。"
 
 #: script_checking/error_database.csv
-msgid ""
-"To solve this error, triple-check that there is no typo in the line.\n"
-"\n"
-"If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error.\n"
-"\n"
-"If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
-msgstr ""
+msgid "You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot."
+msgstr "當你打錯字時，通常會出現這個錯誤。也許你交換了兩個字母、忘了寫一個字母……有時候很難發現。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid.\n"
-"\n"
-"The [code]continue[/code] keyword means \"jump to the next iteration of the loop.\" And the [code]break[/code] keyword means \"end the loop right now and jump to the first line of code after the loop block."
+msgid "The other cause for this error is that you didn't define the variable, function, or class you're trying to access."
+msgstr "這個錯誤的另一個原因是你沒有定義你正在嘗試存取的變數、函式或類別。"
+
+#: script_checking/error_database.csv
+msgid "To solve this error, triple-check that there is no typo in the line."
+msgstr "要解決這個錯誤，請三次檢查該行，確保沒有打錯字。"
+
+#: script_checking/error_database.csv
+msgid "If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error."
+msgstr "如果可以，嘗試跳轉到變數或函式的定義，雙擊名稱，複製並將其貼到出錯的地方。"
+
+#: script_checking/error_database.csv
+msgid "If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
+msgstr "如果你確認沒有打錯字，那麼你需要確保已經定義了你所引用的變數、函式或類別。"
+
+#: script_checking/error_database.csv
+msgid "You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid."
+msgstr "你只能在迴圈中使用像是 [code]break[/code] 或 [code]continue[/code] 這樣的關鍵字。若在迴圈外使用，會是無效的。"
+
+#: script_checking/error_database.csv
+msgid "The [code]continue[/code] keyword means \"jump to the next iteration of the loop.\" And the [code]break[/code] keyword means \"end the loop right now and jump to the first line of code after the loop block."
 msgstr "[code]continue[/code] 關鍵字的意思是「跳到下一次的迴圈執行」。而 [code]break[/code] 關鍵字則表示「立即結束這個迴圈，並跳到迴圈區塊之後的第一行程式碼」。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"If you wrote one of these keywords outside a loop, you need to remove it.\n"
-"\n"
-"If you are trying to use it inside a loop, your indentation is most likely at fault. You may need to insert one or more leading tab characters to the keyword."
+msgid "If you wrote one of these keywords outside a loop, you need to remove it."
+msgstr "如果你在迴圈外寫了其中一個關鍵字，則需要將其刪除。"
+
+#: script_checking/error_database.csv
+msgid "If you are trying to use it inside a loop, your indentation is most likely at fault. You may need to insert one or more leading tab characters to the keyword."
 msgstr "如果你是想在迴圈內使用該關鍵字，最有可能的問題是縮排錯誤。你可能需要在該關鍵字前插入一個或多個縮排的制表符（tab）。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant.\n"
-"\n"
-"In other words, it wants something that can never change. This is why the computer will reject function calls and variables where it needs a constant expression."
+msgid "When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant."
+msgstr "當電腦提到「常數運算式」（constant expression）時，它指的是固定的數值、固定的計算結果，或是已定義的常數名稱。"
+
+#: script_checking/error_database.csv
+msgid "In other words, it wants something that can never change. This is why the computer will reject function calls and variables where it needs a constant expression."
 msgstr "換句話說，電腦需要的是一個不會改變的內容。因此，在需要常數運算式的地方，如果您使用了函式呼叫或變數，電腦就會拒絕，因為這些值可能會變動。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You need to replace function calls or variables with a constant value like a whole number, decimal number, string, vector, a predefined array, etc.\n"
-"\n"
-"You can also use arithmetic operators like multiplications (*), additions (+), and so on."
+msgid "You need to replace function calls or variables with a constant value like a whole number, decimal number, string, vector, a predefined array, etc."
 msgstr "您需要將函式呼叫或變數替換為常數值，例如整數、浮點數、字串、向量、預先定義的陣列等等。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"When defining a new class, you need to follow a specific pattern. You must write the name in plain text, starting with a letter.\n"
-"\n"
-"We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name."
+msgid "You can also use arithmetic operators like multiplications (*), additions (+), and so on."
+msgstr "您也可以使用算術運算子，例如乘法（*）、加法（+）等等。"
+
+#: script_checking/error_database.csv
+msgid "When defining a new class, you need to follow a specific pattern. You must write the name in plain text, starting with a letter."
 msgstr "當定義一個新類別時，您需要遵循特定的模式。類別名稱必須以字母開頭，並且使用純文字編寫。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"To fix this error, replace whatever you put after the 'extends' or 'class_name' keyword by a name without spaces and starting with a capital letter.\n"
-"\n"
-"You can optionally use numbers in the name, but not in the first position."
+msgid "We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name."
+msgstr "我們通常使用 PascalCase 來書寫類別名稱：每個單字的首字母皆大寫。"
+
+#: script_checking/error_database.csv
+msgid "To fix this error, replace whatever you put after the 'extends' or 'class_name' keyword by a name without spaces and starting with a capital letter."
 msgstr "要修正這個錯誤，請將 'extends' 或 'class_name' 關鍵字後面所寫的名稱，替換為不包含空格並且以大寫字母開頭的名稱。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You are trying to define a function or variable that already exists; You can't do that.\n"
-"\n"
-"Perhaps the function or variable already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
+msgid "You can optionally use numbers in the name, but not in the first position."
+msgstr "您可以選擇在名稱中使用數字，但不能將數字放在名稱的第一個位置。"
+
+#: script_checking/error_database.csv
+msgid "You are trying to define a function or variable that already exists; You can't do that."
+msgstr "您正嘗試定義一個已經存在的函式或變數；這樣是不可行的。"
+
+#: script_checking/error_database.csv
+msgid "Perhaps the function or variable already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
 msgstr "這個函式或變數可能已經存在於當前的程式碼檔案中，也有可能是存在於此 GDScript 程式碼所繼承的父類別中。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"In the app, your code extends some built-in Godot code that's not visible to you.\n"
-"\n"
-"When that happens, you need to either rename your function or variable to one that will not collide with an existing one or remove this line of code."
+msgid "In the app, your code extends some built-in Godot code that's not visible to you."
+msgstr "在應用程式中，您的程式碼擴展了某些內建的 Godot 程式碼，而這些程式碼對您是不可見的。"
+
+#: script_checking/error_database.csv
+msgid "When that happens, you need to either rename your function or variable to one that will not collide with an existing one or remove this line of code."
 msgstr "當發生這種情況時，您需要將您的函式或變數重新命名為不會與現有名稱衝突的名稱，或者移除這行程式碼。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You are trying to define a signal that already exists; You can't do that.\n"
-"\n"
-"Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
+msgid "You are trying to define a signal that already exists; You can't do that."
+msgstr "您正嘗試定義一個已經存在的訊號；這樣是不可行的。"
+
+#: script_checking/error_database.csv
+msgid "Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
 msgstr "這個訊號可能已經存在於當前的程式碼檔案中，也有可能是存在於此 GDScript 程式碼所繼承的父類別中。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"In the app, your code extends some built-in Godot code that's not visible to you.\n"
-"\n"
-"When that happens, you need to either rename your signal to one that will not collide with an existing one or remove this line of code."
+msgid "When that happens, you need to either rename your signal to one that will not collide with an existing one or remove this line of code."
 msgstr "當發生這種情況時，您需要將訊號重新命名為不會與現有名稱衝突的名稱，或是移除這行程式碼。"
 
 #: script_checking/error_database.csv
-msgid ""
-"The function you're trying to define exists in a parent class, so your definition overrides the parent class's function.\n"
-"\n"
-"When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class.\n"
-"\n"
-"For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class."
-msgstr ""
+msgid "The function you're trying to define exists in a parent class, so your definition overrides the parent class's function."
+msgstr "您嘗試定義的函式已經存在於父類別中，因此您的定義會覆蓋父類別的函式。"
+
+#: script_checking/error_database.csv
+msgid "When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class."
+msgstr "當您覆寫（override）父類別的函式時，新函式必須與父類別的函式匹配。新函式的參數數量與類型都必須與父類別相同。"
+
+#: script_checking/error_database.csv
+msgid "For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class."
+msgstr "舉例來說，如果父類別的函式有兩個參數，您的新函式也必須有兩個參數。若您的函式定義使用了型別註記（type hints），則參數的型別必須與父類別一致。"
 
 #: script_checking/error_database.csv
 msgid "You need to check the parent class's function and its definition in the code reference. Then, you need to edit your function definition to have the same number and type of parameters as the parent class."
@@ -345,60 +420,74 @@ msgid "You need to either remove, add, or change the values you're trying to pas
 msgstr "您需要刪除、添加或修改傳遞給函式的參數值，才能解決這個問題。要確定正確的參數數量，請查閱程式碼文件中的函式定義，它會顯示該函式所需的必要參數。"
 
 #: script_checking/error_database.csv
-msgid ""
-"All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!\n"
-"\n"
-"When you make any operation, the computer compares the types you are using.\n"
-"\n"
-"Some types are compatible, and some are not. For example, you cannot directly add a whole number to a text string. You first need to convert the number into text.\n"
-"\n"
-"You'll need to read the error message to see what is not matching because there are many possible cases."
-msgstr ""
+msgid "All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!"
+msgstr "程式碼中的所有數值都有特定的型別，例如整數（int）、小數（float）、文字（String）等。此外，還有許多其他型別，甚至可以自訂型別！"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=).\n"
-"\n"
-"If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic.\n"
-"\n"
-"If the computer talks about an invalid operand, then the issue is that the operation does not exist for the type you're trying to use. For example, while you can add two 2D vectors, you can't add a whole number or text to a 2D vector."
+msgid "When you make any operation, the computer compares the types you are using."
+msgstr "當您執行某些運算時，電腦會檢查所使用的型別是否相容。"
+
+#: script_checking/error_database.csv
+msgid "Some types are compatible, and some are not. For example, you cannot directly add a whole number to a text string. You first need to convert the number into text."
+msgstr "某些型別可以互相運算，但有些則不行。例如，您無法直接將整數與文字字串相加，必須先將數字轉換為文字格式。"
+
+#: script_checking/error_database.csv
+msgid "You'll need to read the error message to see what is not matching because there are many possible cases."
+msgstr "由於可能出現多種型別錯誤，您需要仔細閱讀錯誤訊息，以確認哪個型別不匹配，然後進行適當的轉換或調整。"
+
+#: script_checking/error_database.csv
+msgid "If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=)."
+msgstr "如果錯誤提到指派的值類型與變數不匹配，問題通常出現在等號（=）右側的值。"
+
+#: script_checking/error_database.csv
+msgid "If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic."
+msgstr "如果錯誤與函式的回傳類型不匹配，那麼問題出在 return 關鍵字後面的值。"
+
+#: script_checking/error_database.csv
+msgid "If the computer talks about an invalid operand, then the issue is that the operation does not exist for the type you're trying to use. For example, while you can add two 2D vectors, you can't add a whole number or text to a 2D vector."
 msgstr "如果系統提示無效的運算元，代表你嘗試執行的運算不適用於該類型。例如，雖然可以相加兩個 2D 向量，但無法將整數或文字加到 2D 向量上。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"GDScript supports type inference. The computer will automatically recognize the type of value you are working with. In some cases, though, it can't figure it out.\n"
-"\n"
-"When that happens, you need to specify the type yourself or remove type inference altogether for this variable."
+msgid "GDScript supports type inference. The computer will automatically recognize the type of value you are working with. In some cases, though, it can't figure it out."
 msgstr "GDScript 支援類型推斷。系統會自動辨識你正在使用的值的類型。不過，在某些情況下，它無法推斷出來。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"The simplest way to solve this error is to remove types for this variable or this function's arguments. Otherwise, you can manually specify the value type after the colon.\n"
-"\n"
-"We recommend specifying the type whenever possible to reap the typing system's benefits."
+msgid "When that happens, you need to specify the type yourself or remove type inference altogether for this variable."
+msgstr "當這種情況發生時，你需要自己指定該變數的類型，或者移除該變數的類型推斷。"
+
+#: script_checking/error_database.csv
+msgid "The simplest way to solve this error is to remove types for this variable or this function's arguments. Otherwise, you can manually specify the value type after the colon."
 msgstr "解決這個錯誤最簡單的方法是移除這個變數或函式參數的類型。否則，你可以在冒號後手動指定值的類型。"
 
 #: script_checking/error_database.csv
+msgid "We recommend specifying the type whenever possible to reap the typing system's benefits."
+msgstr "我們建議盡可能指定類型，以充分利用類型系統的好處。"
+
+#: script_checking/error_database.csv
+msgid "There is an issue with the return value of your function. There are two main cases here:"
+msgstr "你的函式回傳值有問題，這裡有兩個主要情況："
+
+#: script_checking/error_database.csv
 #, fuzzy
-msgid ""
-"There is an issue with the return value of your function. There are two main cases here:\n"
-"\n"
-"1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()').\n"
-"2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
+msgid "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
 msgstr ""
 "1. 你的函式是無回傳值函式，因此不應該回傳任何值。這包括使用 '-> void' 語法的函式和類別建構子（'_init()'）。\n"
 "2. 你為函式指定了回傳類型，但在所有可能的分支（if、elif 和 else 區塊）或最後並沒有回傳值。"
 
 #: script_checking/error_database.csv
 #, fuzzy
-msgid ""
-"When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that.\n"
-"\n"
-"When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
+msgid "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
+msgstr ""
+"1. 你的函式是無回傳值函式，因此不應該回傳任何值。這包括使用 '-> void' 語法的函式和類別建構子（'_init()'）。\n"
+"2. 你為函式指定了回傳類型，但在所有可能的分支（if、elif 和 else 區塊）或最後並沒有回傳值。"
+
+#: script_checking/error_database.csv
+msgid "When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that."
 msgstr "當你的函式是「無回傳（void））」時，絕對不應該回傳任何值。你可以使用 return 關鍵字提前結束函式，但在 return 之後不應該再寫任何東西。"
+
+#: script_checking/error_database.csv
+msgid "When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
+msgstr "當你使用回傳類型時，必須在函式的結尾或每個分支（if、elif 和 else 區塊）中都回傳某個值。"
 
 #: script_checking/error_database.csv
 msgid "Godot was unable to load your script, yet the language checker found nothing wrong."
@@ -425,9 +514,12 @@ msgid "To fix this, you need to either add a [code]break[/code] statement inside
 msgstr ""
 
 #: script_checking/error_database.csv
-msgid ""
-"The computer reached the end of the line of code, but the line had a syntax error.\n"
-"The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
+msgid "The computer reached the end of the line of code, but the line had a syntax error."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
 msgstr ""
 "系統已經到達程式碼的結尾，但該行存在語法錯誤。\n"
 "最常見的情況是你忘記閉合字串：你有開啟的引號，但忘記加上匹配的閉合引號。"
@@ -441,11 +533,11 @@ msgid "The sub-variable you are trying to access does not exist."
 msgstr "你嘗試存取的子變數並不存在。"
 
 #: script_checking/error_database.csv
-#, fuzzy
-msgid ""
-"You probably have a typo in the name of the sub-variable that you are trying to access.\n"
-"\n"
-"Ensure that you don't have a capital letter where you should have a lowercase letter and vice versa."
+msgid "You probably have a typo in the name of the sub-variable that you are trying to access."
+msgstr "你可能在嘗試存取的子變數名稱上有拼字錯誤。"
+
+#: script_checking/error_database.csv
+msgid "Ensure that you don't have a capital letter where you should have a lowercase letter and vice versa."
 msgstr "請確保大小寫正確，避免該出現大寫字母的地方用到了小寫字母，或是反之。"
 
 #: course/glossary.csv course/documentation.csv
@@ -454,174 +546,228 @@ msgid "explanation"
 msgstr "迭代"
 
 #: course/glossary.csv
-msgid ""
-"Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods.\n"
-"\n"
-"For example, arrays have member functions like [code]array.append()[/code].\n"
-"\n"
-"You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
-msgstr ""
+msgid "Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods."
+msgstr "成員函式是附加在特定值類型上的函式，例如陣列、字串或字典。我們也稱它們為方法(method)。"
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"Member variables are variables attached to a specific value type, like a vector's [code]x[/code] and [code]y[/code] sub-variables. We also call them [i]properties[/i] or [i]fields[/i] of the vector.\n"
-"\n"
-"To access a member variable, you must first write the value's name followed by the access operator ([code].[/code]). For example, [code]position.x[/code]."
+msgid "For example, arrays have member functions like [code]array.append()[/code]."
+msgstr "例如，陣列有像是 [code]array.append()[/code] 這樣的成員函式。"
+
+#: course/glossary.csv
+msgid "You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
+msgstr "你只能在陣列上呼叫這些函式，並使用存取運算子（[code].[/code]）來存取它，如上所示。"
+
+#: course/glossary.csv
+msgid "Member variables are variables attached to a specific value type, like a vector's [code]x[/code] and [code]y[/code] sub-variables. We also call them [i]properties[/i] or [i]fields[/i] of the vector."
 msgstr "成員變數是附加在特定值類型上的變數，例如向量的 [code]x[/code] 和 [code]y[/code] 子變數。我們也稱它們為向量的[b]屬性[/b]或[b]欄位[/b]。"
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"A parameter is a variable you create as part of a function definition.\n"
-"\n"
-"It allows you to reuse the function more by having values that vary in the function's body."
+msgid "To access a member variable, you must first write the value's name followed by the access operator ([code].[/code]). For example, [code]position.x[/code]."
+msgstr "要存取成員變數，必須先寫出值的名稱，接著使用存取運算子（[code].[/code]）。例如，[code]position.x[/code]。"
+
+#: course/glossary.csv
+msgid "A parameter is a variable you create as part of a function definition."
+msgstr "參數是你在函式定義中創建的變數。"
+
+#: course/glossary.csv
+msgid "It allows you to reuse the function more by having values that vary in the function's body."
 msgstr "它讓你可以透過在函式內部使用不同的值來重複使用該函式。"
 
 #: course/glossary.csv
-msgid ""
-"A radian is a unit of measurement of angles based on the circle's circumference.\n"
-"\n"
-"We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common.\n"
-"\n"
-"An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
-msgstr ""
+msgid "A radian is a unit of measurement of angles based on the circle's circumference."
+msgstr "弧度是根據圓周長來測量角度的單位。"
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"In computer programming, a type is the class of a value. For example, whole numbers like [code]3[/code], [code]11[/code], and [code]255462[/code] are all of type [code]int[/code] (short for integer).\n"
-"\n"
-"The computer uses types to determine which operations are valid between two values and when they're undefined."
+msgid "We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common."
+msgstr "我們在日常生活中比較常使用度數，但在程式設計，尤其是遊戲開發中，弧度更為常見。"
+
+#: course/glossary.csv
+msgid "An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
+msgstr "[code]2 * PI[/code] 弧度等於 360 度，而 [code]PI[/code] 弧度等於 180 度。"
+
+#: course/glossary.csv
+msgid "In computer programming, a type is the class of a value. For example, whole numbers like [code]3[/code], [code]11[/code], and [code]255462[/code] are all of type [code]int[/code] (short for integer)."
 msgstr "在程式設計中，類型是值的類別。例如像 [code]3[/code]、[code]11[/code] 和 [code]255462[/code] 這些整數都是 [code]int[/code](整數 integer 縮寫)。"
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"In computer code, an iteration is one repetition of some process or code. We typically use the term with loops, where one iteration is one run of the loop's code.\n"
-"\n"
-"When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
+msgid "The computer uses types to determine which operations are valid between two values and when they're undefined."
+msgstr "電腦透過類型來判斷兩個值之間哪些運算是有效的，哪些是未定義的。"
+
+#: course/glossary.csv
+msgid "In computer code, an iteration is one repetition of some process or code. We typically use the term with loops, where one iteration is one run of the loop's code."
 msgstr "在程式碼中，迭代是某個過程或程式碼的一次重複。我們通常在迴圈中使用這個術語，其中一次迭代就是迴圈程式碼的一次執行。"
 
 #: course/glossary.csv
-msgid ""
-"In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers.\n"
-"\n"
-"We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves.\n"
-"\n"
-"Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
+msgid "When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
+msgstr "在討論算法時，迭代可以指算法對資料集的完整處理一次。"
+
+#: course/glossary.csv
+msgid "In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers."
+msgstr "在數學中，向量是數字的列表。在遊戲中，我們常使用 2D 和 3D 向量，分別是兩個和三個數字的列表。"
+
+#: course/glossary.csv
+msgid "We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves."
+msgstr "我們用向量來表示空間中的方向和大小或強度。例如，你可以使用向量來表示角色或交通工具移動的方向和速度。"
+
+#: course/glossary.csv
+msgid "Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
+msgstr "向量一開始看起來可能有些令人生畏，因為它們相當抽象，但如你所見，它們會大大簡化程式碼。"
+
+#: course/glossary.csv
+#, fuzzy
+msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument."
+msgstr "引數是你在呼叫函式時傳遞給函式的值。例如，在呼叫 [code]rotate(0.5)[/code] 時，括號中的值 [code]0.5[/code] 就是引數。"
+
+#: course/glossary.csv
+#, fuzzy
+msgid "A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional."
+msgstr "函式可以接收零個、一个或多個引數。引數可以是必要的，也可以是選擇性的。"
+
+#: course/glossary.csv
+#, fuzzy
+msgid "When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]"
+msgstr "當一個函式接受多個引數時，你可以用逗號將值分開，就像這個函式呼叫：[code]jump(50, 100)[/code]。"
+
+#: course/glossary.csv
+#, fuzzy
+msgid "When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i]."
+msgstr "當[b]呼叫[/b]函式時，我們稱傳遞進括號中的值為 [ i]引數[/b]。"
+
+#: course/glossary.csv
+msgid "But when you [i]write[/i] a function definition, we call them [i]parameters[/i] instead. Here's an example:"
 msgstr ""
 
 #: course/glossary.csv
-msgid ""
-"An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument.\n"
-"\n"
-"A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional.\n"
-"\n"
-"When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]\n"
-"\n"
-"When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i].\n"
-"\n"
-"But when you [i]write[/i] a function definition, we call them [i]parameters[/i] instead. Here's an example:\n"
-"\n"
-"[code]func move_to_position(x, y):[/code]\n"
-"\n"
-"In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
+msgid "[code]func move_to_position(x, y):[/code]"
 msgstr ""
 
 #: course/glossary.csv
-msgid ""
-"An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value.\n"
-"\n"
-"To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]\n"
-"\n"
-"In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere.\n"
-"\n"
-"Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
-msgstr ""
+#, fuzzy
+msgid "In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
+msgstr "然而，在寫函式定義時，我們討論的是函式[b]參數（parameters）[/b]。在以下範例中，[code]x[/code] 和 [code]y[/code] 是[b]參數[/b]。"
+
+#: course/glossary.csv
+msgid "An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value."
+msgstr "陣列是值的列表。在 GDScript 中，陣列可以包含[b]任何[/b]類型的值。"
+
+#: course/glossary.csv
+msgid "To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]"
+msgstr "要創建陣列，你可以在方括號中寫下用逗號分隔的值：[code]var three_numbers = [1, 2, 3][/code]"
+
+#: course/glossary.csv
+msgid "In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere."
+msgstr "在遊戲中，我們經常使用陣列來儲存角色隊伍的列表、背包中的物品列表、玩家解鎖的魔法列表等等。它們無處不在。"
+
+#: course/glossary.csv
+msgid "Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
+msgstr "陣列是程式設計中一個基本的值類型。你幾乎會在任何程式語言中找到陣列。"
 
 #: course/glossary.csv
 msgid "Assigning a value to a variable means that you store a value inside the variable. You do this with the equal sign ([code]=[/code])."
 msgstr "將值指派給變數意味著將一個值儲存在該變數中。你可以使用等號（[code]=[/code]）來進行指派。"
 
 #: course/glossary.csv
-msgid ""
-"A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value.\n"
-"\n"
-"In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game.\n"
-"\n"
-"You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database.\n"
-"\n"
-"Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
-msgstr ""
+msgid "A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value."
+msgstr "字典是一種資料結構，透過鍵值對來映射值。當你提供字典一個鍵時，它會找到並回傳對應的值。"
 
 #: course/glossary.csv
-msgid ""
-"A for loop instructs the computer to repeat a set of instructions once for each value in an array.\n"
-"\n"
-"In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body.\n"
-"\n"
-"For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met.\n"
-"\n"
-"We recommend favoring for loops when you can. They're safer and easier to use than while loops."
-msgstr ""
+msgid "In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game."
+msgstr "在 GDScript 中，鍵可以是許多不同的東西。我們常使用文字字串或數字，但不僅限於這些。像是 [code]Vector2[/code] 也可以作為有效的鍵，這在將格子座標映射到單位或在基於格子的遊戲中映射物品時非常有用。"
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains.\n"
-"\n"
-"You can modify a function's behavior with parameters. Parameters are variable names that you write in the function definition. You can then use them in the function's body to make your code adapt to different cases.\n"
-"\n"
-"Also, functions can optionally return a value to the code calling it."
+msgid "You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database."
+msgstr "你會經常在遊戲中使用字典來關聯資料。例如，我們可以用它來將裝備的名稱與其武器數值在資料庫中對應起來。"
+
+#: course/glossary.csv
+msgid "Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
+msgstr "像陣列一樣，字典是程式語言中一個基本的資料型別，你會在許多程式語言中看到並大量使用它。"
+
+#: course/glossary.csv
+msgid "A for loop instructs the computer to repeat a set of instructions once for each value in an array."
+msgstr "for 迴圈指示電腦對陣列中的每個值重複執行一組指令一次。"
+
+#: course/glossary.csv
+msgid "In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body."
+msgstr "在每次迴圈迭代中，編譯器會從陣列中提取一個值並讓你在迴圈的主體中使用它。"
+
+#: course/glossary.csv
+msgid "For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met."
+msgstr "for 迴圈執行程式碼的次數是有限的：每個陣列中的值執行一次。這與 while 迴圈不同，後者會一直重複程式碼直到符合條件為止。"
+
+#: course/glossary.csv
+msgid "We recommend favoring for loops when you can. They're safer and easier to use than while loops."
+msgstr "我們建議在可能的情況下使用 for 迴圈。它比 while 迴圈更安全且更容易使用。"
+
+#: course/glossary.csv
+msgid "A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains."
+msgstr "函式是你為一組程式碼指令指定的名稱。當你定義一個函式後，你可以隨時呼叫它來執行其中所有的指令。"
+
+#: course/glossary.csv
+msgid "You can modify a function's behavior with parameters. Parameters are variable names that you write in the function definition. You can then use them in the function's body to make your code adapt to different cases."
 msgstr "你可以透過參數來修改函式的行為。參數是你在函式定義中寫的變數名稱，然後你可以在函式的主體中使用它們，使程式碼能夠適應不同的情況。"
+
+#: course/glossary.csv
+msgid "Also, functions can optionally return a value to the code calling it."
+msgstr "此外，函式也可以選擇性地將一個值回傳給呼叫它的程式碼。"
 
 #: course/glossary.csv
 msgid "An increment is the amount by which a value changes in your code."
 msgstr "遞增是指程式碼中一個值變動的量。"
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"In computer programming, instructions are a single operation the computer recognizes and can execute.\n"
-"\n"
-"For example, a function call, an addition, or assigning a value to a variable."
+msgid "In computer programming, instructions are a single operation the computer recognizes and can execute."
 msgstr "在程式設計中，指令是電腦可以識別並執行的單一操作。"
 
 #: course/glossary.csv
-msgid ""
-"Variables are a tool to give a name to values you want to store in your code and change over time.\n"
-"\n"
-"For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up.\n"
-"\n"
-"You can create a variable named [code]health[/code] to represent the health.\n"
-"\n"
-"Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you.\n"
-"\n"
-"Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
-msgstr ""
+msgid "For example, a function call, an addition, or assigning a value to a variable."
+msgstr "例如函式呼叫、加法運算、或是將值指派給變數。"
 
 #: course/glossary.csv
-msgid ""
-"A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running.\n"
-"\n"
-"When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong.\n"
-"\n"
-"That's why we recommend using the safer for loop whenever you can.\n"
-"\n"
-"However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
-msgstr ""
+msgid "Variables are a tool to give a name to values you want to store in your code and change over time."
+msgstr "變數是一種工具，用來為你想要在程式中儲存並隨時間變動的值取的名字。"
+
+#: course/glossary.csv
+msgid "For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up."
+msgstr "例如，角色的生命值：當角色受到攻擊時，你希望它下降；當治療時，你希望生命值回升。"
+
+#: course/glossary.csv
+msgid "You can create a variable named [code]health[/code] to represent the health."
+msgstr "你可以創建一個名為 [code]health[/code] 的變數來表示生命值。"
+
+#: course/glossary.csv
+msgid "Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you."
+msgstr "然後，每當你在程式碼中寫下關鍵字 [code]health[/code] 時，電腦就會從記憶體中抓取對應的值。"
+
+#: course/glossary.csv
+msgid "Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
+msgstr "變數有點像超市中的產品標籤。它們是你附加在某個值上的名稱。任何時候，你都可以將標籤取下並貼到新的產品上，或者在這個情況就是貼到新的值上。"
+
+#: course/glossary.csv
+msgid "A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running."
+msgstr "while 迴圈指示電腦根據條件繼續執行程式碼。當條件為真時，迴圈會繼續執行。"
+
+#: course/glossary.csv
+msgid "When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong."
+msgstr "在編寫 while 迴圈時，你必須小心：如果條件設定錯誤，迴圈會無限執行並凍結遊戲。"
+
+#: course/glossary.csv
+msgid "That's why we recommend using the safer for loop whenever you can."
+msgstr "因此，我們建議在可能的情況下使用更安全的 for 迴圈。"
+
+#: course/glossary.csv
+msgid "However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
+msgstr "然而，仍然有一些必要的情況需要使用 while 迴圈，例如處理檔案、處理電腦程式碼或用於強大的算法。"
 
 #: course/glossary.csv
 msgid "We talk about a loop or a function's body to refer to the lines of code that are part of the loop or function."
 msgstr "我們提到迴圈或函式的主體（body）是指那些屬於該迴圈或函式的程式碼行。"
 
 #: course/glossary.csv
-#, fuzzy
-msgid ""
-"Returning a value is the process of sending a value to the place where you call a function.\n"
-"\n"
-"It happens when a function uses the [code]return[/code] keyword followed by a value, for example: [code]return -1[/code]."
+msgid "Returning a value is the process of sending a value to the place where you call a function."
+msgstr "回傳值是將一個值傳送到呼叫函式的地方的過程。"
+
+#: course/glossary.csv
+msgid "It happens when a function uses the [code]return[/code] keyword followed by a value, for example: [code]return -1[/code]."
 msgstr "當函式使用 [code]return[/code] 關鍵字後面加上一個值時，就會發生回傳，例如：[code]return -1[/code]。"
 
 #: course/glossary.csv
@@ -696,31 +842,6 @@ msgstr ""
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
 
-#~ msgid "You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword."
-#~ msgstr "當 [code]for[/code] 和 [code]in[/code] 之間的名稱不是有效的變數名稱，或是你遺漏了 [code]in[/code] 關鍵字時，會出現這個錯誤。"
-
-#~ msgid "To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces."
-#~ msgstr "要修正這個錯誤，你需要確保 [code]for[/code] 和 [code]in[/code] 之間的名稱是有效的變數名稱，且不包含標點符號或空格。"
-
-#~ msgid "For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name."
-#~ msgstr "例如，這段程式碼是無效的：[code]for cell_position.x in cell_positions_array:[/code]，因為 [code]cell_position.x[/code] 不是有效的變數名稱。"
-
-#~ msgid "To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:"
-#~ msgstr "若要訪問變數的 [code]x[/code] 子組件，你需要將這個操作放在迴圈的內容區塊內："
-
-#~ msgid ""
-#~ "[code]for cell_position in cell_positions_array:\n"
-#~ "    cell_position.x += 1.0[/code]"
-#~ msgstr ""
-#~ "[code]for cell_position in cell_positions_array:\n"
-#~ "    cell_position.x += 1.0[/code]"
-
-#~ msgid "If you get this error, you are most likely trying to assign a value to something other than a variable, which is impossible. You can only assign values to variables."
-#~ msgstr "如果你遇到這個錯誤，很可能是你正在嘗試將值指定給不是變數的東西，這是無法實現的。你只能將值指定給變數。"
-
-#~ msgid "Another possibility is that you want to check for equality in a condition but wrote a single = instead of ==."
-#~ msgstr "另一個可能性是，你想要在條件判斷中檢查相等性，但錯誤地寫成單個 [code]=[/code] 而不是 [code]==[/code]。"
-
 #~ msgid "If you want to assign a value to a variable, double-check that what you have on the left side of the = sign is a variable and not a function."
 #~ msgstr "如果你想將值指定給變數，請再次確認＝符號左邊的是變數，而不是函數。"
 
@@ -730,162 +851,11 @@ msgstr ""
 #~ msgid "In the case of a condition, ensure that you are using two equal signs to check for equality (==)."
 #~ msgstr "在條件判斷中，確保你使用的是兩個等號來檢查是否相等 (==)。"
 
-#~ msgid "A cyclic reference is when a class references itself, directly or indirectly."
-#~ msgstr "循環引用是指一個類別直接或間接地引用自身。"
-
-#~ msgid "It has two possible causes:"
-#~ msgstr "這可能有兩個原因："
-
-#~ msgid ""
-#~ "1. You used the class name in the class itself.\n"
-#~ "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
-#~ msgstr ""
-#~ "1. 你在類別內部使用了類別自己。\n"
-#~ "2. 你的程式碼引用了另一個類別，而該類別又引用了這個類別，造成無限循環引用。"
-
-#~ msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
-#~ msgstr "無論哪種情況，由於 GDScript 在 Godot 3 的運作方式，不幸的是，這是無法實現的。Godot 4 應該能解決這個問題，但目前你需要找到替代方法。"
-
-#~ msgid "Erase the type hint in the error line, and the problem should disappear."
-#~ msgstr "刪除錯誤行中的類型提示，問題應該就會消失。"
-
-#~ msgid "The indentation of your code (the number of tab characters at the start of the line) is incorrect."
-#~ msgstr "你的程式碼縮排（行首的 tab 字符數量）不正確。"
-
-#~ msgid "You are missing one or more tabs, or you inserted too many."
-#~ msgstr "你可能遺漏了一個或多個 tab，或者插入了太多。"
-
-#~ msgid "In other words, your line should have one more leading tab character than the function definition."
-#~ msgstr "換句話說，這行程式碼的縮排應該比函式定義多一個 tab 字符。"
-
-#~ msgid "You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code."
-#~ msgstr "當你寫了語法不正確的程式碼，或者你遺漏了某些內容來完成這行或前面的程式碼時，會出現這個錯誤。"
-
-#~ msgid "You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character."
-#~ msgstr "當你為電腦編寫程式碼時，需要極為精確。這類錯誤很容易出現，因為只要有一個錯誤的字符，就會發生。"
-
-#~ msgid "Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code."
-#~ msgstr "請注意，由於電腦讀取和分析程式碼的方式，這個錯誤可能會出現在 [b]造成錯誤的行之後[/b]。"
-
-#~ msgid "The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing."
-#~ msgstr "解決這類錯誤的方法非常具有上下文依賴性。錯誤訊息應該會告訴你缺少的是哪個字符或元素。"
-
-#~ msgid "If the error says \"expected,\" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else."
-#~ msgstr "如果錯誤訊息說「expected」（預期），那麼你很可能在 [b]前面的[/b] 程式碼行中遺漏了某些東西。可能是標點符號、括號或其他東西。"
-
-#~ msgid "If it says \"unterminated,\" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
-#~ msgstr "如果錯誤訊息說「unterminated」（未結束），那麼你缺少的是表達式結尾處的某個字符，例如閉合括號。在這種情況下，錯誤通常來自於有錯誤的那一行。"
-
-#~ msgid "This error tells you that you are missing a parenthesis (or sometimes a comma or a path)."
-#~ msgstr "這個錯誤告訴你缺少了一個括號（有時是逗號或路徑）。"
-
 #~ msgid "This error tells you are missing some parenthesis, a comma, or some value in your export hint."
 #~ msgstr "這個錯誤告訴你在導出提示中缺少了某個括號、逗號或某個值。"
 
 #~ msgid "You need to read the error message and add the missing character or value it requests."
 #~ msgstr "你需要閱讀錯誤訊息，並根據它的要求添加缺少的字符或值。"
-
-#~ msgid "This error happens in several cases:"
-#~ msgstr "這個錯誤發生在幾種情況下："
-
-#~ msgid "If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc."
-#~ msgstr "如果錯誤告訴你有意外情況，那麼你很可能漏寫了像 [code]var[/code]、[code]func[/code]、[code]for[/code] 等關鍵字。"
-
-#~ msgid "Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
-#~ msgstr "另一種可能是，你需要在函式定義、[code]for[/code] 迴圈，或以 [code]if[/code]、[code]elif[/code] 或 [code]else[/code] 開頭的條件語句後加上冒號。"
-
-#~ msgid "Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name."
-#~ msgstr "大多數情況下，這個錯誤發生在你在變數名稱後寫了冒號，但沒有加上類型名稱時。"
-
-#~ msgid "It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name."
-#~ msgstr "它也會發生在你在函式定義的括號後寫了箭頭（[code]->[/code]），但沒有加上類型名稱時。"
-
-#~ msgid "The variable, function name, or class name you are trying to use does not exist."
-#~ msgstr "你嘗試使用的變數、函式名稱或類別名稱不存在。"
-
-#~ msgid "You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot."
-#~ msgstr "當你打錯字時，通常會出現這個錯誤。也許你交換了兩個字母、忘了寫一個字母……有時候很難發現。"
-
-#~ msgid "The other cause for this error is that you didn't define the variable, function, or class you're trying to access."
-#~ msgstr "這個錯誤的另一個原因是你沒有定義你正在嘗試存取的變數、函式或類別。"
-
-#~ msgid "To solve this error, triple-check that there is no typo in the line."
-#~ msgstr "要解決這個錯誤，請三次檢查該行，確保沒有打錯字。"
-
-#~ msgid "If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error."
-#~ msgstr "如果可以，嘗試跳轉到變數或函式的定義，雙擊名稱，複製並將其貼到出錯的地方。"
-
-#~ msgid "If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
-#~ msgstr "如果你確認沒有打錯字，那麼你需要確保已經定義了你所引用的變數、函式或類別。"
-
-#~ msgid "You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid."
-#~ msgstr "你只能在迴圈中使用像是 [code]break[/code] 或 [code]continue[/code] 這樣的關鍵字。若在迴圈外使用，會是無效的。"
-
-#~ msgid "If you wrote one of these keywords outside a loop, you need to remove it."
-#~ msgstr "如果你在迴圈外寫了其中一個關鍵字，則需要將其刪除。"
-
-#~ msgid "When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant."
-#~ msgstr "當電腦提到「常數運算式」（constant expression）時，它指的是固定的數值、固定的計算結果，或是已定義的常數名稱。"
-
-#~ msgid "You can also use arithmetic operators like multiplications (*), additions (+), and so on."
-#~ msgstr "您也可以使用算術運算子，例如乘法（*）、加法（+）等等。"
-
-#~ msgid "We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name."
-#~ msgstr "我們通常使用 PascalCase 來書寫類別名稱：每個單字的首字母皆大寫。"
-
-#~ msgid "You can optionally use numbers in the name, but not in the first position."
-#~ msgstr "您可以選擇在名稱中使用數字，但不能將數字放在名稱的第一個位置。"
-
-#~ msgid "You are trying to define a function or variable that already exists; You can't do that."
-#~ msgstr "您正嘗試定義一個已經存在的函式或變數；這樣是不可行的。"
-
-#~ msgid "In the app, your code extends some built-in Godot code that's not visible to you."
-#~ msgstr "在應用程式中，您的程式碼擴展了某些內建的 Godot 程式碼，而這些程式碼對您是不可見的。"
-
-#~ msgid "You are trying to define a signal that already exists; You can't do that."
-#~ msgstr "您正嘗試定義一個已經存在的訊號；這樣是不可行的。"
-
-#~ msgid "The function you're trying to define exists in a parent class, so your definition overrides the parent class's function."
-#~ msgstr "您嘗試定義的函式已經存在於父類別中，因此您的定義會覆蓋父類別的函式。"
-
-#~ msgid "When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class."
-#~ msgstr "當您覆寫（override）父類別的函式時，新函式必須與父類別的函式匹配。新函式的參數數量與類型都必須與父類別相同。"
-
-#~ msgid "For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class."
-#~ msgstr "舉例來說，如果父類別的函式有兩個參數，您的新函式也必須有兩個參數。若您的函式定義使用了型別註記（type hints），則參數的型別必須與父類別一致。"
-
-#~ msgid "All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!"
-#~ msgstr "程式碼中的所有數值都有特定的型別，例如整數（int）、小數（float）、文字（String）等。此外，還有許多其他型別，甚至可以自訂型別！"
-
-#~ msgid "When you make any operation, the computer compares the types you are using."
-#~ msgstr "當您執行某些運算時，電腦會檢查所使用的型別是否相容。"
-
-#~ msgid "Some types are compatible, and some are not. For example, you cannot directly add a whole number to a text string. You first need to convert the number into text."
-#~ msgstr "某些型別可以互相運算，但有些則不行。例如，您無法直接將整數與文字字串相加，必須先將數字轉換為文字格式。"
-
-#~ msgid "You'll need to read the error message to see what is not matching because there are many possible cases."
-#~ msgstr "由於可能出現多種型別錯誤，您需要仔細閱讀錯誤訊息，以確認哪個型別不匹配，然後進行適當的轉換或調整。"
-
-#~ msgid "If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=)."
-#~ msgstr "如果錯誤提到指派的值類型與變數不匹配，問題通常出現在等號（=）右側的值。"
-
-#~ msgid "If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic."
-#~ msgstr "如果錯誤與函式的回傳類型不匹配，那麼問題出在 return 關鍵字後面的值。"
-
-#~ msgid "When that happens, you need to specify the type yourself or remove type inference altogether for this variable."
-#~ msgstr "當這種情況發生時，你需要自己指定該變數的類型，或者移除該變數的類型推斷。"
-
-#~ msgid "We recommend specifying the type whenever possible to reap the typing system's benefits."
-#~ msgstr "我們建議盡可能指定類型，以充分利用類型系統的好處。"
-
-#~ msgid "There is an issue with the return value of your function. There are two main cases here:"
-#~ msgstr "你的函式回傳值有問題，這裡有兩個主要情況："
-
-#~ msgid "When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
-#~ msgstr "當你使用回傳類型時，必須在函式的結尾或每個分支（if、elif 和 else 區塊）中都回傳某個值。"
-
-#~ msgid "You probably have a typo in the name of the sub-variable that you are trying to access."
-#~ msgstr "你可能在嘗試存取的子變數名稱上有拼字錯誤。"
 
 #~ msgid "member function"
 #~ msgstr "成員函式"
@@ -893,23 +863,11 @@ msgstr ""
 #~ msgid "member functions"
 #~ msgstr "成員函式"
 
-#~ msgid "Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods."
-#~ msgstr "成員函式是附加在特定值類型上的函式，例如陣列、字串或字典。我們也稱它們為方法(method)。"
-
-#~ msgid "For example, arrays have member functions like [code]array.append()[/code]."
-#~ msgstr "例如，陣列有像是 [code]array.append()[/code] 這樣的成員函式。"
-
-#~ msgid "You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
-#~ msgstr "你只能在陣列上呼叫這些函式，並使用存取運算子（[code].[/code]）來存取它，如上所示。"
-
 #~ msgid "member variable"
 #~ msgstr "成員變數"
 
 #~ msgid "member variables"
 #~ msgstr "成員變數"
-
-#~ msgid "To access a member variable, you must first write the value's name followed by the access operator ([code].[/code]). For example, [code]position.x[/code]."
-#~ msgstr "要存取成員變數，必須先寫出值的名稱，接著使用存取運算子（[code].[/code]）。例如，[code]position.x[/code]。"
 
 #~ msgid "parameter"
 #~ msgstr "參數"
@@ -917,23 +875,11 @@ msgstr ""
 #~ msgid "parameters"
 #~ msgstr "參數"
 
-#~ msgid "A parameter is a variable you create as part of a function definition."
-#~ msgstr "參數是你在函式定義中創建的變數。"
-
 #~ msgid "radian"
 #~ msgstr "弧度"
 
 #~ msgid "radians"
 #~ msgstr "弧度"
-
-#~ msgid "A radian is a unit of measurement of angles based on the circle's circumference."
-#~ msgstr "弧度是根據圓周長來測量角度的單位。"
-
-#~ msgid "We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common."
-#~ msgstr "我們在日常生活中比較常使用度數，但在程式設計，尤其是遊戲開發中，弧度更為常見。"
-
-#~ msgid "An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
-#~ msgstr "[code]2 * PI[/code] 弧度等於 360 度，而 [code]PI[/code] 弧度等於 180 度。"
 
 #~ msgid "type"
 #~ msgstr "類型"
@@ -941,14 +887,8 @@ msgstr ""
 #~ msgid "types"
 #~ msgstr "類型"
 
-#~ msgid "The computer uses types to determine which operations are valid between two values and when they're undefined."
-#~ msgstr "電腦透過類型來判斷兩個值之間哪些運算是有效的，哪些是未定義的。"
-
 #~ msgid "iterations"
 #~ msgstr "迭代"
-
-#~ msgid "When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
-#~ msgstr "在討論算法時，迭代可以指算法對資料集的完整處理一次。"
 
 #~ msgid "vector"
 #~ msgstr "向量"
@@ -956,53 +896,17 @@ msgstr ""
 #~ msgid "vectors"
 #~ msgstr "向量"
 
-#~ msgid "In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers."
-#~ msgstr "在數學中，向量是數字的列表。在遊戲中，我們常使用 2D 和 3D 向量，分別是兩個和三個數字的列表。"
-
-#~ msgid "We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves."
-#~ msgstr "我們用向量來表示空間中的方向和大小或強度。例如，你可以使用向量來表示角色或交通工具移動的方向和速度。"
-
-#~ msgid "Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
-#~ msgstr "向量一開始看起來可能有些令人生畏，因為它們相當抽象，但如你所見，它們會大大簡化程式碼。"
-
 #~ msgid "argument"
 #~ msgstr "引數（argument）"
 
 #~ msgid "arguments"
 #~ msgstr "引數（argument）"
 
-#~ msgid "An argument is a value that you pass to a function when calling the function. For example, in the call [code]rotate(0.5)[/code], the value [code]0.5[/code] in the parentheses is an argument."
-#~ msgstr "引數是你在呼叫函式時傳遞給函式的值。例如，在呼叫 [code]rotate(0.5)[/code] 時，括號中的值 [code]0.5[/code] 就是引數。"
-
-#~ msgid "A function can receive no arguments, one argument, or multiple arguments. Arguments can be mandatory or optional."
-#~ msgstr "函式可以接收零個、一个或多個引數。引數可以是必要的，也可以是選擇性的。"
-
-#~ msgid "When a function takes multiple arguments, you separate the values with commas, like in this function call: [code]jump(50, 100)[/code]"
-#~ msgstr "當一個函式接受多個引數時，你可以用逗號將值分開，就像這個函式呼叫：[code]jump(50, 100)[/code]。"
-
-#~ msgid "When [i]calling[/i] a function, we name the values passed in parentheses [i]arguments[/i]."
-#~ msgstr "當[b]呼叫[/b]函式時，我們稱傳遞進括號中的值為 [ i]引數[/b]。"
-
-#~ msgid "When writing a function definition, however, we talk about function [i]parameters[/i]. In the following example, the names [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
-#~ msgstr "然而，在寫函式定義時，我們討論的是函式[b]參數（parameters）[/b]。在以下範例中，[code]x[/code] 和 [code]y[/code] 是[b]參數[/b]。"
-
 #~ msgid "array"
 #~ msgstr "陣列"
 
 #~ msgid "arrays"
 #~ msgstr "陣列"
-
-#~ msgid "An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value."
-#~ msgstr "陣列是值的列表。在 GDScript 中，陣列可以包含[b]任何[/b]類型的值。"
-
-#~ msgid "To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]"
-#~ msgstr "要創建陣列，你可以在方括號中寫下用逗號分隔的值：[code]var three_numbers = [1, 2, 3][/code]"
-
-#~ msgid "In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere."
-#~ msgstr "在遊戲中，我們經常使用陣列來儲存角色隊伍的列表、背包中的物品列表、玩家解鎖的魔法列表等等。它們無處不在。"
-
-#~ msgid "Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
-#~ msgstr "陣列是程式設計中一個基本的值類型。你幾乎會在任何程式語言中找到陣列。"
 
 #~ msgid "assign"
 #~ msgstr "指派"
@@ -1013,47 +917,17 @@ msgstr ""
 #~ msgid "dictionaries"
 #~ msgstr "字典"
 
-#~ msgid "A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value."
-#~ msgstr "字典是一種資料結構，透過鍵值對來映射值。當你提供字典一個鍵時，它會找到並回傳對應的值。"
-
-#~ msgid "In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game."
-#~ msgstr "在 GDScript 中，鍵可以是許多不同的東西。我們常使用文字字串或數字，但不僅限於這些。像是 [code]Vector2[/code] 也可以作為有效的鍵，這在將格子座標映射到單位或在基於格子的遊戲中映射物品時非常有用。"
-
-#~ msgid "You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database."
-#~ msgstr "你會經常在遊戲中使用字典來關聯資料。例如，我們可以用它來將裝備的名稱與其武器數值在資料庫中對應起來。"
-
-#~ msgid "Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
-#~ msgstr "像陣列一樣，字典是程式語言中一個基本的資料型別，你會在許多程式語言中看到並大量使用它。"
-
 #~ msgid "for loop"
 #~ msgstr "for 迴圈"
 
 #~ msgid "for loops"
 #~ msgstr "for 迴圈"
 
-#~ msgid "A for loop instructs the computer to repeat a set of instructions once for each value in an array."
-#~ msgstr "for 迴圈指示電腦對陣列中的每個值重複執行一組指令一次。"
-
-#~ msgid "In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body."
-#~ msgstr "在每次迴圈迭代中，編譯器會從陣列中提取一個值並讓你在迴圈的主體中使用它。"
-
-#~ msgid "For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met."
-#~ msgstr "for 迴圈執行程式碼的次數是有限的：每個陣列中的值執行一次。這與 while 迴圈不同，後者會一直重複程式碼直到符合條件為止。"
-
-#~ msgid "We recommend favoring for loops when you can. They're safer and easier to use than while loops."
-#~ msgstr "我們建議在可能的情況下使用 for 迴圈。它比 while 迴圈更安全且更容易使用。"
-
 #~ msgid "function"
 #~ msgstr "函式"
 
 #~ msgid "functions"
 #~ msgstr "函式"
-
-#~ msgid "A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains."
-#~ msgstr "函式是你為一組程式碼指令指定的名稱。當你定義一個函式後，你可以隨時呼叫它來執行其中所有的指令。"
-
-#~ msgid "Also, functions can optionally return a value to the code calling it."
-#~ msgstr "此外，函式也可以選擇性地將一個值回傳給呼叫它的程式碼。"
 
 #~ msgid "increment"
 #~ msgstr "遞增"
@@ -1067,29 +941,11 @@ msgstr ""
 #~ msgid "instructions"
 #~ msgstr "指令"
 
-#~ msgid "For example, a function call, an addition, or assigning a value to a variable."
-#~ msgstr "例如函式呼叫、加法運算、或是將值指派給變數。"
-
 #~ msgid "variable"
 #~ msgstr "變數"
 
 #~ msgid "variables"
 #~ msgstr "變數"
-
-#~ msgid "Variables are a tool to give a name to values you want to store in your code and change over time."
-#~ msgstr "變數是一種工具，用來為你想要在程式中儲存並隨時間變動的值取的名字。"
-
-#~ msgid "For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up."
-#~ msgstr "例如，角色的生命值：當角色受到攻擊時，你希望它下降；當治療時，你希望生命值回升。"
-
-#~ msgid "You can create a variable named [code]health[/code] to represent the health."
-#~ msgstr "你可以創建一個名為 [code]health[/code] 的變數來表示生命值。"
-
-#~ msgid "Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you."
-#~ msgstr "然後，每當你在程式碼中寫下關鍵字 [code]health[/code] 時，電腦就會從記憶體中抓取對應的值。"
-
-#~ msgid "Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
-#~ msgstr "變數有點像超市中的產品標籤。它們是你附加在某個值上的名稱。任何時候，你都可以將標籤取下並貼到新的產品上，或者在這個情況就是貼到新的值上。"
 
 #~ msgid "while loop"
 #~ msgstr "while 迴圈"
@@ -1097,26 +953,11 @@ msgstr ""
 #~ msgid "while loops"
 #~ msgstr "while 迴圈"
 
-#~ msgid "A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running."
-#~ msgstr "while 迴圈指示電腦根據條件繼續執行程式碼。當條件為真時，迴圈會繼續執行。"
-
-#~ msgid "When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong."
-#~ msgstr "在編寫 while 迴圈時，你必須小心：如果條件設定錯誤，迴圈會無限執行並凍結遊戲。"
-
-#~ msgid "That's why we recommend using the safer for loop whenever you can."
-#~ msgstr "因此，我們建議在可能的情況下使用更安全的 for 迴圈。"
-
-#~ msgid "However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
-#~ msgstr "然而，仍然有一些必要的情況需要使用 while 迴圈，例如處理檔案、處理電腦程式碼或用於強大的算法。"
-
 #~ msgid "body"
 #~ msgstr "主體（body）"
 
 #~ msgid "return"
 #~ msgstr "回傳（return）"
-
-#~ msgid "Returning a value is the process of sending a value to the place where you call a function."
-#~ msgstr "回傳值是將一個值傳送到呼叫函式的地方的過程。"
 
 #~ msgid "library"
 #~ msgstr "函式庫（library）"
