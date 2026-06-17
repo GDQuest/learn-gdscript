@@ -1,0 +1,272 @@
+# Korean translations for Learn GDScript From.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2024-07-07 09:09+0000\n"
+"Last-Translator: Godoto <ineovide@gmail.com>\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-17-while-loops/ko/>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-17-while-loops/lesson.tres:14
+msgid ""
+"You've seen that you can use functions to [i]reuse[/i] code. In this lesson, "
+"you'll learn about [b]loops[/b]. Loops help you [i]repeat[/i] code."
+msgstr ""
+"함수를 사용하여 코드를 [i]재사용[/i]할 수 있다는 것을 보았습니다. 이번 수업에"
+"서는 [b]반복문[/b]에 대해 배울 것입니다. 반복문은 코드를 [i]반복[/i]하는 데 "
+"도움이 됩니다."
+
+msgid ""
+"To illustrate how loops work, let's take a game board split into a grid."
+msgstr ""
+"반복문이 어떻게 작동하는지 설명하기 위해, 격자로 나누어진 게임 보드를 예로 들"
+"어보겠습니다."
+
+msgid ""
+"Our robot can move to neighboring cells by changing a [code]Vector2[/code] "
+"variable named [code]cell[/code]. It represents the current cell the robot "
+"is in."
+msgstr ""
+"우리의 로봇은 [code]Vector2[/code] 변수인 [code]cell[/code]을 변경하여 이웃"
+"한 셀로 이동할 수 있습니다. 이 변수는 로봇이 현재 있는 셀을 나타냅니다."
+
+msgid "When we increase [code]cell.x[/code], the robot moves to the right."
+msgstr "[code]cell.x[/code]를 증가시키면 로봇은 오른쪽으로 이동합니다."
+
+msgid ""
+"Note that we delay the robot's movement in the app to help you visualize how "
+"it moves. The following code would normally move the robot instantly."
+msgstr ""
+"로봇의 움직임을 시각화할 수 있도록 앱에서 로봇의 움직임을 지연시킵니다. 다음 "
+"코드는 원래 로봇을 즉시 이동시킵니다."
+
+#: course/lesson-17-while-loops/lesson.tres:42
+msgid "We can move diagonally by adding a [code]Vector2[/code] directly."
+msgstr ""
+"우리는 [code]Vector2[/code]를 직접 더하여 대각선으로 이동할 수 있습니다."
+
+#: course/lesson-17-while-loops/lesson.tres:62
+msgid ""
+"The above code works for a pre-defined board with a size of [code]Vector2(3, "
+"3)[/code], but the [code]move_to_end()[/code] function wouldn't work if the "
+"size of the board was different."
+msgstr ""
+
+msgid "The robot would either stop before the end or go too far."
+msgstr ""
+
+msgid ""
+"To implement a general solution for all board sizes, we can repeat the "
+"robot's movement until it gets to the end."
+msgstr ""
+
+msgid "For code that repeats, we can use [i]loops[/i]."
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:76
+msgid "Using while loops to repeat code"
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:78
+msgid ""
+"You can use a [code]while[/code] loop to make the computer repeat a block of "
+"code until you meet a specific condition or decide to break from the loop."
+msgstr ""
+
+msgid "Here's how we use a [code]while[/code] loop."
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:100
+msgid ""
+"We use the variable [code]number[/code] to keep track of how many loops the "
+"[code]while[/code] loop completes."
+msgstr ""
+
+msgid ""
+"Each time we go through the [code]while[/code] loop, we add [code]1[/code] "
+"to [code]number[/code]."
+msgstr ""
+
+msgid ""
+"The [code]while[/code] loop keeps running for as long as the condition is "
+"true. In this case, it keeps running while [code]number[/code] is less than "
+"[code]4[/code]."
+msgstr ""
+
+msgid ""
+"You can see that the following code is executed four times in the console."
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:126
+msgid "Let's apply this to our [code]move_to_end()[/code] function."
+msgstr ""
+
+msgid ""
+"This time, we compare the number of loops to the board's width. We go "
+"through the loop until we reach the width of the board."
+msgstr ""
+
+msgid ""
+"Note that we move the robot until its position is one less than the board's "
+"width because we are counting tiles from [code]0[/code]."
+msgstr ""
+
+msgid ""
+"A board of [code]3[/code] by [code]3[/code] cells would have cell "
+"coordinates going from [code]0[/code] to [code]2[/code] on both the X and Y "
+"axes."
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:160
+msgid "While loops can cause issues"
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:162
+msgid ""
+"If you're not careful, your [code]while[/code] loop can run infinitely. In "
+"that case, the application will freeze."
+msgstr ""
+
+msgid "Take a look at this code example."
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:182
+msgid "What would happen if the computer tried to run the code above?"
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:185
+msgid ""
+"Because we don't increment [code]number[/code] within the [code]while[/code] "
+"loop, it always stays at [code]0[/code]."
+msgstr ""
+
+msgid ""
+"As a result, the number is always lower than [code]10[/code], so we never "
+"break out of the loop."
+msgstr ""
+
+msgid ""
+"Since there's no way to exit the [code]while[/code] loop, the computer will "
+"attempt to draw squares infinitely, which will freeze the program."
+msgstr ""
+
+msgid ""
+"When programs stop responding on your computer, it's often due to an "
+"infinite loop!"
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:192
+msgid "It would draw squares infinitely until the program is terminated"
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:192
+msgid "It would draw 10 squares"
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:192
+msgid "It would draw 20 squares"
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:200
+msgid "When to use while loops"
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:202
+msgid ""
+"At first, you will not need [code]while[/code] loops often. Even the code we "
+"show here has more efficient alternatives."
+msgstr ""
+
+msgid ""
+"Also, there's a safer kind of loop, [code]for[/code] loops, which we'll look "
+"at in the next lesson."
+msgstr ""
+
+msgid ""
+"Yet, [code]while[/code] loops have important intermediate to advanced-level "
+"uses, so you at least need to know they exist and how to use them."
+msgstr ""
+
+msgid ""
+"We use [code]while[/code] loops every time we need to loop an unknown number "
+"of times."
+msgstr ""
+
+msgid ""
+"For example, games run in a loop that typically generates sixty images per "
+"second until the user closes the game. This is possible thanks to "
+"[code]while[/code] loops."
+msgstr ""
+
+msgid "There are other good uses for [code]while[/code] loops:"
+msgstr ""
+
+msgid ""
+"- Reading and processing a file, like a text document, line by line.\n"
+"- Processing a constant stream of data, like someone recording audio with a "
+"microphone.\n"
+"- Reading code and converting it into instructions the computer "
+"understands.\n"
+"- Various intermediate to advanced-level algorithms, like finding paths "
+"around a map for AI."
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:227
+msgid ""
+"Let's practice some [code]while[/code] loops, as they're useful to know. "
+"It's also an excellent opportunity to practice 2D vectors."
+msgstr ""
+
+msgid ""
+"Then, we'll move on to the safer [code]for[/code] loops in the following "
+"lesson."
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:237
+msgid "Moving to the end of a board"
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:238
+msgid "Our robot has decided to stand at the top of the board."
+msgstr ""
+
+msgid ""
+"Complete the [code]move_to_bottom()[/code] function so the robot moves to "
+"the bottom of the board."
+msgstr ""
+
+msgid ""
+"The board size is determined by the [code]Vector2[/code] variable named "
+"[code]board_size[/code]."
+msgstr ""
+
+msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
+msgstr ""
+
+msgid ""
+"Make sure to use a [code]while[/code] loop so the function works for any "
+"board size."
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:257
+msgid ""
+"Use a while loop to have our robot move from the top of the board to the "
+"bottom."
+msgstr ""
+
+#: course/lesson-17-while-loops/lesson.tres:261
+msgid "Introduction to While Loops"
+msgstr ""

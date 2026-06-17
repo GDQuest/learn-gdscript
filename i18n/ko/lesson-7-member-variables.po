@@ -1,0 +1,350 @@
+# Korean translations for Learn GDScript From.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2024-07-07 09:09+0000\n"
+"Last-Translator: Godoto <ineovide@gmail.com>\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-7-member-variables/ko/>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-7-member-variables/lesson.tres:14
+msgid "In this lesson, we take a first look at variables."
+msgstr "이 수업에서는 변수에 대해 처음으로 살펴봅니다."
+
+msgid "In games, you need to keep track of many values that change over time:"
+msgstr "게임에서는 시간이 지남에 따라 변하는 많은 값을 추적해야 합니다:"
+
+msgid ""
+"- The player's score.\n"
+"- Every character or enemy's health.\n"
+"- The last checkpoint."
+msgstr ""
+"- 플레이어의 점수.\n"
+"- 모든 캐릭터나 적의 체력.\n"
+"- 마지막 체크포인트."
+
+msgid "And so much more. You need to store, retrieve, and update those values."
+msgstr ""
+"그리고 그 외에도 많은 것들이 있습니다. 이러한 값을 저장하고, 검색하고, 업데이"
+"트해야 합니다."
+
+msgid ""
+"We call those values [i]variables[/i]. Variables are labels you use to keep "
+"track of values that vary over time. Here's an example of a variable "
+"tracking a character or monster's health."
+msgstr ""
+"이러한 값을 우리는 [i]변수[/i]라고 부릅니다. 변수는 시간이 지남에 따라 변하"
+"는 값을 추적하기 위해 사용하는 레이블입니다. 캐릭터나 몬스터의 체력을 추적하"
+"는 변수의 예는 다음과 같습니다."
+
+#: course/lesson-7-member-variables/lesson.tres:44
+msgid ""
+"The line above defines a new variable named [code]health[/code] and assigns "
+"it a starting value of [code]100[/code] (that's what the equal sign does, "
+"more on that below)."
+msgstr ""
+"위의 줄은 [code]health[/code]라는 새로운 변수를 정의하고 시작 값으로 "
+"[code]100[/code]을 할당합니다 (등호가 하는 일이 바로 이것입니다. 이에 대해서"
+"는 아래에서 더 자세히 설명하겠습니다)."
+
+msgid ""
+"Function parameters, which you saw in the previous lesson, are another "
+"example of variables."
+msgstr "이전 수업에서 본 함수 매개변수도 또 다른 예로 들 수 있는 변수입니다."
+
+#: course/lesson-7-member-variables/lesson.tres:56
+msgid ""
+"In this lesson, we start using variables built into Godot. They're a "
+"particular kind called [i]member variables[/i]."
+msgstr ""
+
+msgid ""
+"Member variables are values attached to a game entity. They're useful "
+"properties like the [code]position[/code], [code]rotation[/code], and "
+"[code]scale[/code] of a character."
+msgstr ""
+
+msgid ""
+"In a previous lesson, we saw how we could use the [code]rotate()[/code] "
+"function to rotate our character."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:80
+msgid ""
+"This function increases or decreases the value of the entity's "
+"[code]rotation[/code] member variable."
+msgstr ""
+
+msgid ""
+"Say we want to reset the rotation to [code]0[/code] and make the character "
+"upright. Using the [code]rotate()[/code] function can prove difficult: you "
+"need to know the character's exact current angle to cancel it out."
+msgstr ""
+
+msgid "It's much easier to use the member variable rather than the function."
+msgstr ""
+
+msgid ""
+"The following code assigns the value [code]0[/code] to the character's "
+"rotation, resetting its angle and making it upright."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:106
+msgid ""
+"Notice how we use the equal sign ([code]=[/code]) to change the value of a "
+"variable."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:114
+msgid "What's a variable?"
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:117
+msgid "Variables are labels you use to access values that change over time."
+msgstr ""
+
+msgid ""
+"You can also use them to put a name on a value you want to reuse throughout "
+"your code. It makes your code easier to read and to change."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:120
+msgid "A label you use to keep track of a value that can change."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:120
+msgid "A function that varies over time."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:120
+msgid "A decimal number."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:128
+msgid "Accessing sub-variables with the dot"
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:130
+msgid ""
+"In video games, you will see many member variables that have sub-values."
+msgstr ""
+
+msgid ""
+"For example, the [code]position[/code] we mentioned has two coordinates: "
+"[code]x[/code] and [code]y[/code]."
+msgstr ""
+
+msgid ""
+"It's the same for the [code]scale[/code]: it has [code]x[/code] and [code]y[/"
+"code] sub-variables. They respectively control the horizontal and vertical "
+"size of the game entity."
+msgstr ""
+
+msgid ""
+"To access those X and Y sub-components, you add a dot (\".\") after the "
+"variable name."
+msgstr ""
+
+msgid ""
+"The code below places the entity at [code]200[/code] pixels on the x-axis "
+"and [code]250[/code] pixels on the y-axis."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:158
+msgid ""
+"Notice how we use the equal sign (\"=\") to assign the numbers on the right "
+"to the sub-variables on the left."
+msgstr ""
+
+msgid ""
+"Unlike in maths, in computer programming, the equal sign (\"=\") does not "
+"mean \"is equal to.\""
+msgstr ""
+
+msgid ""
+"Instead, it means \"assign the result of the expression on the right to the "
+"variable on the left\". We assign values so often in code that we prefer to "
+"reserve the equal sign for that."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:170
+msgid "In games, the Y-axis is positive going down"
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:172
+msgid ""
+"Note that in games, assuming your character's position starts at (0, 0), the "
+"code above moves the entity [code]200[/code] pixels to the right and "
+"[code]250[/code] pixels down."
+msgstr ""
+
+msgid "In math, the y-axis is generally positive going up by convention."
+msgstr ""
+
+msgid ""
+"The convention is the [i]opposite[/i] in video games and many computer "
+"applications: the y-axis is positive going down."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:194
+msgid "Why does the Y-axis point downwards?"
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:196
+msgid ""
+"This may be confusing if you only saw the y-axis pointing up in math "
+"classes. However, in math, axes go in any direction. They don't even have to "
+"be perpendicular."
+msgstr ""
+
+msgid ""
+"On the computer, the position (0, 0) happens to correspond to the top-left "
+"of your computer screen. It then makes sense for coordinates to be positive "
+"when going towards the bottom-right corner."
+msgstr ""
+
+msgid ""
+"This leads to another question: why is position zero the top left of the "
+"screen? This is due to computer and TV displays history: they would "
+"calculate and display pixels starting from the top left corner and moving "
+"towards the bottom right corner."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:210
+msgid ""
+"Let's look at one last example before moving on to the practice. The "
+"following code makes the character 1.5 times its starting size."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:228
+msgid "How do you access sub-variables?"
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:229
+msgid ""
+"Variables often hold sub-values, like the [code]position[/code] has two sub-"
+"variables: [code]x[/code] and [code]y[/code]. How would you access the "
+"[code]x[/code], for example?"
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:231
+msgid ""
+"To access a sub-variable, you need to write a dot between the parent "
+"variable name and the sub-variable name."
+msgstr ""
+
+msgid ""
+"For example, to access the [code]x[/code] sub-variable of the "
+"[code]position[/code] variable, you'll write [code]position.x[/code]."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:234
+msgid "You write a dot (\".\") between the variable and the sub-variable name."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:234
+msgid ""
+"You write an arrow (\"->\") between the variable and the sub-variable name."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:234
+msgid ""
+"You write a slash (\"/\") between the variable and the sub-variable name."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:244
+msgid ""
+"In a future lesson, we'll explain why and how those variables have sub-"
+"variables."
+msgstr ""
+
+msgid "For now, just know you can use the dot to access them."
+msgstr ""
+
+msgid ""
+"We'll tell you which variables have sub-components and what their names are."
+msgstr ""
+
+msgid ""
+"In the next lessons, you'll create your own variables and do operations on "
+"them to add or remove [code]score[/code], [code]health[/code], you name it."
+msgstr ""
+
+msgid "For now, let's practice accessing variables."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:260
+msgid "Draw a rectangle at a precise position"
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:261
+msgid ""
+"Draw a rectangle of 200 by 120 pixels at the X position of 120 pixels and Y "
+"position of 100 pixels."
+msgstr ""
+
+msgid ""
+"You need to replace the numbers in the code editor to draw the correct "
+"rectangle."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:276
+msgid ""
+"Use the position member variable and its sub-variables to change the "
+"rectangle's position."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:281
+msgid "Draw squares at different positions"
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:282
+msgid ""
+"Draw three squares of size 100 by 100 that are 100 pixels apart on the "
+"horizontal axis. In other words, there should be a 100-pixel gap between two "
+"squares."
+msgstr ""
+
+msgid ""
+"You should draw the squares starting at the position (100, 100). This means "
+"you should position the first square at 100 on the X axis and 100 on the Y "
+"axis."
+msgstr ""
+
+msgid ""
+"Remember you need to use the equal sign ([code]=[/code]) to change the value "
+"of a variable, like the turtle's position."
+msgstr ""
+
+msgid ""
+"Write your code inside the [code]run()[/code] function so the computer can "
+"recognize it."
+msgstr ""
+
+msgid ""
+"Use the provided [code]draw_rectangle()[/code] function to draw each square."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:301
+msgid ""
+"Now you can place and draw one shape, but how about drawing several? In this "
+"practice, you'll place three squares side by side to really get the hang of "
+"properties."
+msgstr ""
+
+#: course/lesson-7-member-variables/lesson.tres:305
+msgid "Introduction to Member Variables"
+msgstr ""

@@ -1,0 +1,266 @@
+# Korean translations for Learn GDScript From.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2024-07-07 09:09+0000\n"
+"Last-Translator: Godoto <ineovide@gmail.com>\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-18-for-loops/ko/>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-18-for-loops/lesson.tres:14
+#, fuzzy
+msgid ""
+"In the last lesson, we looked at [code]while[/code] loops. We found they "
+"were useful if we don't know how many times we should repeat code. But "
+"[code]while[/code] loops can result in infinite loops if we're not careful."
+msgstr ""
+"지난 수업에서 우리는 [code]while[/code] 루프를 살펴보았습니다. 이 루프는 코"
+"드 반복 횟수를 알 수 없을 때 유용하다는 것을 알게 되었습니다."
+
+#, fuzzy
+msgid ""
+"For example, the loop below never ends because we never increment "
+"[code]number[/code]."
+msgstr ""
+"아래의 루프는 [code]number[/code]를 증가시키지 않기 때문에 절대 끝나지 않습니"
+"다."
+
+#: course/lesson-18-for-loops/lesson.tres:36
+#, fuzzy
+msgid ""
+"There's a safer and easier kind of loop: the [code]for[/code] loop. We'll "
+"look at it in this lesson."
+msgstr ""
+"더 안전하고 종종 더 쉬운 종류의 루프가 있습니다: [code]for[/code] 루프입니다."
+
+#, fuzzy
+msgid ""
+"Unlike [code]while[/code] loops, [code]for[/code] loops don't run forever, "
+"so you're much less likely to get infinite loop bugs in your game. [b]We "
+"recommend using for loops instead of while loops because of this[/b]."
+msgstr ""
+"[code]while[/code] 루프와 달리, [code]for[/code] 루프는 무한히 실행되지 않으"
+"므로 게임에서 버그가 발생할 가능성이 훨씬 적습니다. [b]이 때문에 for 루프를 "
+"while 루프보다 선호하는 것을 권장합니다[/b]."
+
+#, fuzzy
+msgid ""
+"In this example, I changed the code above to use a [code]for[/code] loop "
+"instead. The loop below will change the [code]cell[/code] three times."
+msgstr "위의 코드를 [code]for[/code] 루프를 사용하도록 변경해 봅시다."
+
+#: course/lesson-18-for-loops/lesson.tres:60
+msgid "Let's explain what's going on here."
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:68
+msgid "The range() function"
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:70
+msgid ""
+"Godot has the helper function [code]range()[/code]. Calling [code]range(n)[/"
+"code] creates a list of numbers from [code]0[/code] to [code]n - 1[/code]."
+msgstr ""
+
+msgid ""
+"So calling [code]range(3)[/code] outputs the list of numbers [code][0, 1, 2]"
+"[/code], and [code]range(5)[/code] outputs [code][0, 1, 2, 3, 4][/code]."
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:80
+msgid "What list of numbers would range(6) create?"
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:81
+msgid "What would [code]print(range(6))[/code] print to the console?"
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:83
+msgid ""
+"The function [code]range(n)[/code] creates a list of numbers from [code]0[/"
+"code] to [code]n - 1[/code]. The output list will start with [code]0[/code] "
+"and end with [code]5[/code]."
+msgstr ""
+
+msgid ""
+"So calling [code]range(6)[/code] will output a list of six numbers which are "
+"[code][0, 1, 2, 3, 4, 5][/code]."
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:87
+msgid "[0, 1, 2, 3, 4, 5]"
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:87
+msgid "[1, 2, 3, 4, 5, 6]"
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:87
+msgid "[0, 1, 2, 3, 4, 5, 6]"
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:95
+msgid "How for loops work"
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:97
+msgid ""
+"In a [code]for[/code] loop, the computer takes each value inside a list, "
+"stores it in a temporary variable, and executes the code in the loop once "
+"per value."
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:117
+msgid ""
+"In the above example, for each item in the list [code][0, 1, 2][/code], "
+"Godot sets [code]number[/code] to the item, then executes the code in the "
+"[code]for[/code] loop."
+msgstr ""
+
+msgid ""
+"We'll explain arrays more thoroughly in the next lesson, but notice that "
+"[code]number[/code] is just a temporary variable. You create it when "
+"defining the loop, and the loop takes care of changing its value. Also, you "
+"can name this variable anything you want."
+msgstr ""
+
+msgid "This code behaves the same as the previous example:"
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:141
+msgid ""
+"In both examples, we print the value of the temporary variable we created: "
+"[code]number[/code] in the first example and [code]element[/code] in the "
+"second."
+msgstr ""
+
+msgid ""
+"As Godot moves through the loop, it assigns each value of the array to that "
+"variable. First, it sets the variable to [code]0[/code], then to [code]1[/"
+"code], and finally, to [code]2[/code]."
+msgstr ""
+
+msgid ""
+"We can break down the instructions the loop runs. You can see how a loop is "
+"a shortcut to code that otherwise gets very long."
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:165
+msgid ""
+"We can put whatever code we like in the loop's code block, including other "
+"function calls like [code]draw_rectangle()[/code]."
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:173
+msgid "Using a for loop instead of a while loop"
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:175
+msgid ""
+"Here's our old [code]move_to_end()[/code] function which used a [code]while[/"
+"code] loop."
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:195
+msgid ""
+"If we use a [code]for[/code] loop instead, the code becomes a little simpler."
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:215
+msgid ""
+"With the [code]for[/code] loop, we check the board's width first. Then we "
+"move the robot that many times. This is simpler than checking if the robot "
+"reached the end of the board over and over."
+msgstr ""
+
+msgid "The function still works the same way. You can run it below."
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:237
+msgid ""
+"In the practices, we'll use [code]for[/code] loops in different ways to get "
+"you used to using them."
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:245
+msgid "Using a for loop to move to the end of the board"
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:246
+msgid "Once again, the robot has decided to stand at the top of the board."
+msgstr ""
+
+msgid ""
+"This time, use a [code]for[/code] loop in the [code]move_to_bottom()[/code] "
+"function to have it move to the bottom of the board."
+msgstr ""
+
+msgid ""
+"The board size is determined by the [code]Vector2[/code] variable named "
+"[code]board_size[/code]."
+msgstr ""
+
+msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:263
+msgid ""
+"Use a for loop to have our robot move from the top of the board to the "
+"bottom."
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:268
+msgid "Improving code with a for loop"
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:269
+msgid ""
+"Use a [code]for[/code] loop to remove the duplicate code in the [code]run()[/"
+"code] function."
+msgstr ""
+
+msgid "In this practice, we revisit the turtle and drawing rectangles."
+msgstr ""
+
+msgid ""
+"With our new knowledge of [code]for[/code] loops, we can condense this code "
+"to take up less space and make it easier to modify."
+msgstr ""
+
+msgid ""
+"The turtle should draw three squares in a horizontal line. The squares "
+"should be 100 pixels apart."
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:293
+msgid ""
+"In the past we had to copy and paste code to draw multiple rectangles. Let's "
+"revisit previous code and improve it with a for loop."
+msgstr ""
+
+#: course/lesson-18-for-loops/lesson.tres:297
+msgid "Introduction to For Loops"
+msgstr ""
+
+#~ msgid "However, they could result in infinite loops if we're not careful."
+#~ msgstr "그러나 주의하지 않으면 무한 루프가 발생할 수 있습니다."
+
+#~ msgid "We'll look at it in this lesson."
+#~ msgstr "이번 레슨에서 그것을 살펴보겠습니다."
+
+#~ msgid "The loop below will change the [code]cell[/code] three times."
+#~ msgstr "아래의 루프는 [code]cell[/code]을 세 번 변경할 것입니다."

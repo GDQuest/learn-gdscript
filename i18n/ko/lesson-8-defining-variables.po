@@ -1,0 +1,271 @@
+# Korean translations for Learn GDScript From.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2024-07-07 09:09+0000\n"
+"Last-Translator: Godoto <ineovide@gmail.com>\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/learn-gdscript-"
+"from-zero/lesson-8-defining-variables/ko/>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: course/lesson-8-defining-variables/lesson.tres:13
+msgid ""
+"In the previous lesson, you used a predefined member variable named "
+"[code]position[/code]."
+msgstr ""
+"이전 수업에서 [code]position[/code]이라는 미리 정의된 멤버 변수를 사용했습니"
+"다."
+
+msgid "In your projects, you will need to define your own variables."
+msgstr "프로젝트에서는 직접 변수를 정의해야 합니다."
+
+msgid "Imagine that you need to track the player's health in your game."
+msgstr "게임에서 플레이어의 체력을 추적해야 한다고 가정해 봅시다."
+
+msgid ""
+"They may start with [code]5[/code] health points. When taking a hit, the "
+"health should go down to [code]4[/code]. After another hit, it should be "
+"[code]3[/code]. And so on."
+msgstr ""
+"플레이어는 처음에 [code]5[/code]의 체력 포인트로 시작합니다. 공격을 받으면 체"
+"력이 [code]4[/code]로 줄어듭니다. 또 다른 공격을 받으면 [code]3[/code]가 됩니"
+"다. 이런 식으로 계속됩니다."
+
+msgid ""
+"To keep track of that, you can create a variable named [code]health[/code] "
+"to which you add and subtract points."
+msgstr ""
+"이를 추적하기 위해 [code]health[/code]라는 변수를 만들어 포인트를 더하거나 "
+"뺄 수 있습니다."
+
+msgid ""
+"The example below introduces the [code]print()[/code] function, which "
+"outputs its argument to the output box on the left."
+msgstr ""
+"아래 예제는 인수를 출력 상자에 출력하는 [code]print()[/code] 함수를 소개합니"
+"다."
+
+msgid ""
+"Click the [i]run()[/i] button to instantly run the entire function, and "
+"click the [i]step[/i] button to execute lines of code one by one."
+msgstr ""
+"[i]run()[/i] 버튼을 클릭하면 전체 함수를 즉시 실행할 수 있고, [i]step[/i] 버"
+"튼을 클릭하면 코드를 한 줄씩 실행할 수 있습니다."
+
+msgid ""
+"The [i]Debugger[/i] panel at the bottom shows the current value of the "
+"[code]health[/code] variable."
+msgstr ""
+"[i]Debugger[/i] 패널은 [code]health[/code] 변수의 현재 값을 보여줍니다."
+
+#: course/lesson-8-defining-variables/lesson.tres:47
+msgid ""
+"After executing the first two lines of code, you will have a health variable "
+"storing a value of [code]4[/code]."
+msgstr ""
+"첫 두 줄의 코드를 실행한 후, [code]4[/code] 값을 저장하는 health 변수가 생깁"
+"니다."
+
+msgid ""
+"Below, we'll break down how you define new variables and explain the "
+"[code]print()[/code] function."
+msgstr ""
+"아래에서는 새로운 변수를 정의하는 방법과 [code]print()[/code] 함수에 대해 설"
+"명하겠습니다."
+
+#: course/lesson-8-defining-variables/lesson.tres:57
+msgid "Defining a variable"
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:59
+msgid ""
+"To use a variable, you must first define it so the computer registers its "
+"name."
+msgstr ""
+
+msgid ""
+"To do so, you start a line of code with the [code]var[/code] keyword "
+"followed by your desired variable name. Like [code]func[/code] stands for "
+"[i]function[/i], [code]var[/code] stands for [i]variable[/i]."
+msgstr ""
+
+msgid ""
+"Variables are case-sensitive, which means [code]health[/code] and "
+"[code]Health[/code] are technically different variables. Be careful to use "
+"the same capitalization wherever you refer to the same variable, or you "
+"could be reading or writing to a different variable."
+msgstr ""
+
+msgid ""
+"The following line defines a [code]health[/code] variable pointing to no "
+"value. You can think of it as creating a product label you have yet to stick "
+"onto something."
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:85
+msgid ""
+"Like with functions, a member variable's name must be unique inside a given "
+"code file. Creating two variables next to each other with the same name will "
+"cause an error."
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:105
+msgid ""
+"To use a variable, you want to assign it a starting value. You can do so "
+"using the equal sign (=)."
+msgstr ""
+
+msgid ""
+"This code assigns the value [code]100[/code] to a new variable named "
+"[code]health[/code]."
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:127
+msgid ""
+"After defining your variable, you can access its value by writing the "
+"variable's name."
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:147
+msgid ""
+"The code above will display the number [code]100[/code] to some output "
+"window."
+msgstr ""
+
+msgid ""
+"Notice we don't use the [code]var[/code] keyword anymore as we only need it "
+"to [i]define[/i] a variable."
+msgstr ""
+
+msgid ""
+"Also, once you define a variable, you can change its value anytime with the "
+"equal sign."
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:169
+msgid "About the print function"
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:171
+msgid ""
+"The [code]print()[/code] function is generally the first function you learn "
+"in academic programming courses."
+msgstr ""
+
+msgid ""
+"It sends (\"prints\") the message or value you give it to some output "
+"window, often a black window with plain white text."
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:183
+msgid ""
+"Programmers often use [code]print()[/code] to quickly check the value of "
+"their variables when their game runs."
+msgstr ""
+
+msgid ""
+"In the app, we made a special output window that captures calls to "
+"[code]print()[/code] and displays a card to make it friendlier for you."
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:205
+msgid ""
+"Here, the verb [i]print[/i] means \"to send information to display on the "
+"screen.\""
+msgstr ""
+
+msgid ""
+"The function \"prints\" things on your computer display; It does not relate "
+"to printers."
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:215
+msgid "Variables are like labels"
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:217
+msgid "As we hinted above, in GDScript, variables work a bit like labels."
+msgstr ""
+
+msgid ""
+"Assigning a value to a variable is like taking your label (the variable) and "
+"sticking it onto some item (the value)."
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:229
+msgid ""
+"Like a supermarket has a database of product labels, the computer keeps a "
+"list of all variables in your code."
+msgstr ""
+
+msgid "Given the variable name, the computer can look up the attached value."
+msgstr ""
+
+msgid ""
+"It has an important consequence. In GDScript, you can stick that label to "
+"any other value."
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:253
+msgid ""
+"The above code is like taking a label from the appropriate item and sticking "
+"it to the wrong thing:"
+msgstr ""
+
+msgid ""
+"- At line 2, the [code]health[/code] variable holds a number.\n"
+"- From line 3, [code]health[/code] holds text."
+msgstr ""
+
+msgid ""
+"The computer will let you do that! The code's syntax and \"grammar\" are "
+"correct, but it's not good."
+msgstr ""
+
+msgid ""
+"Variable names should describe the value they contain, so a [code]health[/"
+"code] variable with a text value will confuse your future self and other "
+"coders. It can also cause errors in your game."
+msgstr ""
+
+msgid ""
+"Later on, we'll see how to avoid this issue with [i]variable types[/i]. For "
+"now, let's practice creating variables!"
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:270
+msgid "Define a health variable"
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:271
+msgid ""
+"Define a variable named [code]health[/code] with a starting value of "
+"[code]100[/code]."
+msgstr ""
+
+msgid ""
+"You can define variables inside or outside functions. In this practice, you "
+"shouldn't create a function."
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:283
+msgid ""
+"In this practice, you'll define your first variable and give it a specific "
+"starting value."
+msgstr ""
+
+#: course/lesson-8-defining-variables/lesson.tres:287
+msgid "Defining Your Own Variables"
+msgstr ""
