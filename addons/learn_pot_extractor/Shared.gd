@@ -40,7 +40,6 @@ static func build_tr_blocks(po_file: String, skip_header := true, out_header: Ar
 			"comments": _parse_course_comment(block_match),
 			"ctxt": block_match.get_string("ctxt").substr(9 + prefix_offset, block_match.get_string("ctxt").length()-(11 + prefix_offset)),
 			"id": _parse_course_string(block_match, true, prefix_offset),
-			"normalized_id": normalize(_parse_course_string(block_match, true, prefix_offset)),
 			"str": _parse_course_string(block_match, false, prefix_offset)
 		}
 	))
@@ -90,7 +89,9 @@ static func write_from_tr_blocks(po_file: String, header: String, blocks: Array[
 static func _get_text_for_block(block: Dictionary, suffix: String) -> PackedStringArray:
 	if "\\n" in block[suffix]:
 		var lines := ['msg%s ""' % suffix]
-		lines.append_array(Array(block[suffix].split("\\n")).map(func(line: String) -> String: return '"%s\\n"' % [line]))
+		var outbound_lines: PackedStringArray = block[suffix].split("\\n")
+		for i in outbound_lines.size():
+			lines.append('"%s%s"' % [outbound_lines[i], "\\n" if i < outbound_lines.size()-1 else ""])
 		return lines
 	return ['msg%s "%s"' % [suffix, block[suffix]]]
 
@@ -135,7 +136,7 @@ static func _parse_course_string(target: RegExMatch, is_id: bool, prefix_offset 
 	else:
 		result = id.substr(7 + (0 if is_id else 1) + prefix_offset, id.length()-(9 + (0 if is_id else 1) + prefix_offset))
 	
-	return result
+	return result.strip_edges()
 
 
 static func fix_glossary_entries(raw_string: String, out_did_find: Array) -> String:
@@ -147,83 +148,3 @@ static func fix_glossary_entries(raw_string: String, out_did_find: Array) -> Str
 		var find: RegExMatch = finds[i]
 		raw_string = raw_string.substr(0, find.get_start()) + '[glossary term="%s"]' % [find.get_string(1)] + raw_string.substr(find.get_end())
 	return raw_string
-
-
-static func get_similarity(a: String, b: String, normalize := true) -> float:
-	if normalize:
-		a = normalize(a)
-		b = normalize(b)
-	
-	var lev := levenshtein(a, b)
-	return 1.0 - float(lev)/maxf(a.length(), b.length())
-
-
-static func normalize(s: String) -> String:
-	s = s.to_lower()
-	
-	s = GLOSSARY_TERM_RE.sub(s, "$1", true)
-	s = TAG_RE.sub(s, "$1", true)
-	s = SPACE_NEWLINE_RE.sub(s, "\\n", true)
-	s = WHITESPACE_RE.sub(s.strip_edges(), " ", true)
-	
-	return s
-
-
-static func get_token_similarity(a: String, b: String, normalize: bool = true) -> float:
-	if normalize:
-		a = normalize(a)
-		b = normalize(b)
-	
-	var set_a := {}
-	for word in a.split(" ", false):
-		set_a[word] = true
-	
-	var set_b := {}
-	for word in b.split(" ", false):
-		set_b[word] = true
-	
-	var overlap := 0
-	for word in set_a:
-		if set_b.has(word):
-			overlap += 1
-			
-	return float(overlap) / maxf(set_a.size(), set_b.size())
-
-
-static var lev_prev := PackedInt32Array()
-static var lev_curr := PackedInt32Array()
-
-static func levenshtein(a: String, b: String) -> int:
-	if a.length() < b.length():
-		var tmp := a
-		a = b
-		b = tmp
-
-	var a_len := a.length()
-	var b_len := b.length()
-
-	lev_prev.resize(b_len + 1)
-	lev_curr.resize(b_len + 1)
-
-	# init first row
-	for j in range(b_len + 1):
-		lev_prev[j] = j
-
-	for i in range(1, a_len + 1):
-		lev_curr[0] = i
-
-		for j in range(1, b_len + 1):
-			var cost := 0 if a[i - 1] == b[j - 1] else 1
-
-			lev_curr[j] = min(
-				lev_prev[j] + 1,        # deletion
-				lev_curr[j - 1] + 1,    # insertion
-				lev_prev[j - 1] + cost  # substitution
-			)
-
-		# swap rows
-		var tmp := lev_prev
-		lev_prev = lev_curr
-		lev_curr = tmp
-
-	return lev_prev[b_len]

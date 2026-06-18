@@ -20,7 +20,6 @@ msgstr ""
 "X-Generator: Weblate 5.16-dev\n"
 "Generated-By: Babel 2.10.3\n"
 
-
 #: script_checking/error_database.csv
 msgid "error_explanation"
 msgstr ""
@@ -50,10 +49,11 @@ msgid "To access the [code]x[/code] sub-component of the variable, you need to d
 msgstr "Щоб отримати доступ до підкомпонента [code]x[/code] змінної, слід зробити це всередині тіла циклу:"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "[code]for cell_position in cell_positions_array:"
 msgstr ""
 "[code]for cell_position in cell_positions_array:\n"
-"    cell_position.x += 1.0[/code]\n"
+"    cell_position.x += 1.0[/code]"
 
 #: script_checking/error_database.csv
 msgid "    cell_position.x += 1.0[/code]"
@@ -104,16 +104,18 @@ msgid "Look at what you are trying to change. If it is a constant (defined with 
 msgstr "Подивіться, що ви намагаєтеся змінити. Якщо це константа (визначена за допомогою ключового слова [code]const[/code] або вбудована в Godot), у вас є два варіанти:"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "1. If the value should never change, or it comes from Godot, remove the line that tries to change it."
 msgstr ""
 "1. Якщо значення ніколи не повинно змінюватися або воно походить від Godot, видаліть рядок, який намагається його змінити.\n"
-"2. Якщо значення потрібно змінити, використовуйте [code]var[/code] замість [code]const[/code] під час його першого створення.\n"
+"2. Якщо значення потрібно змінити, використовуйте [code]var[/code] замість [code]const[/code] під час його першого створення."
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
 msgstr ""
 "1. Якщо значення ніколи не повинно змінюватися або воно походить від Godot, видаліть рядок, який намагається його змінити.\n"
-"2. Якщо значення потрібно змінити, використовуйте [code]var[/code] замість [code]const[/code] під час його першого створення.\n"
+"2. Якщо значення потрібно змінити, використовуйте [code]var[/code] замість [code]const[/code] під час його першого створення."
 
 #: script_checking/error_database.csv
 msgid "You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line."
@@ -152,10 +154,11 @@ msgid "1. You used the class name in the class itself."
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
 msgstr ""
 "1. Ви використали назву класу в самому класі.\n"
-"2. Ваш код посилається на інший клас, який посилається на цей клас, викликаючи нескінченний цикл посилань.\n"
+"2. Ваш код посилається на інший клас, який посилається на цей клас, викликаючи нескінченний цикл посилань."
 
 #: script_checking/error_database.csv
 msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
@@ -258,11 +261,12 @@ msgid "1. You wrote an identifier (variable or function name) in the wrong place
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
 msgstr ""
 "1. Ви написали ідентифікатор (назву змінної або функції) в неправильному місці.\n"
 "2. Ви написали ключове слово на зразок [code]var[/code], [code]func[/code], [code]for[/code] або [code]signal[/code], але не написали після нього назву.\n"
-"3. Ви написали визначення функції, але забули поставити перед двокрапкою круглі дужки.\n"
+"3. Ви написали визначення функції, але забули поставити перед двокрапкою круглі дужки."
 
 #: script_checking/error_database.csv
 msgid "3. You wrote a function definition but forgot the parentheses before the colon."
@@ -469,16 +473,18 @@ msgid "There is an issue with the return value of your function. There are two m
 msgstr "Виникла проблема зі значенням, яке повертає ваша функція. Можливі два випадки:"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
 msgstr ""
 "1. Ваша функція повертає значення типу void, тому вона не може повертати значення. Сюди входять функції зі синтаксисом. «-> void» і конструктори класів («_init()»).\n"
-"2. Ви вказали тип значення, яке повертає ваша функція, але повертаєте значення не у всіх можливих гілках (блоки if, elif та else, або кінець функції).\n"
+"2. Ви вказали тип значення, яке повертає ваша функція, але повертаєте значення не у всіх можливих гілках (блоки if, elif та else, або кінець функції)."
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
 msgstr ""
 "1. Ваша функція повертає значення типу void, тому вона не може повертати значення. Сюди входять функції зі синтаксисом. «-> void» і конструктори класів («_init()»).\n"
-"2. Ви вказали тип значення, яке повертає ваша функція, але повертаєте значення не у всіх можливих гілках (блоки if, elif та else, або кінець функції).\n"
+"2. Ви вказали тип значення, яке повертає ваша функція, але повертаєте значення не у всіх можливих гілках (блоки if, elif та else, або кінець функції)."
 
 #: script_checking/error_database.csv
 msgid "When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that."
@@ -517,10 +523,11 @@ msgid "The computer reached the end of the line of code, but the line had a synt
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
 msgstr ""
 "Комп'ютер досяг кінця рядка коду, але в цьому рядку була синтаксична помилка.\n"
-"Найпоширеніший випадок — коли ви забули закрити рядок: у вас є відкривні лапки, але ви забули додати відповідні закривні лапки.\n"
+"Найпоширеніший випадок — коли ви забули закрити рядок: у вас є відкривні лапки, але ви забули додати відповідні закривні лапки."
 
 #: script_checking/error_database.csv
 msgid "Double-check that you are not missing a quote character or that the quote character you used to start the string is the same as the one you used to close the string."
@@ -539,6 +546,7 @@ msgid "Ensure that you don't have a capital letter where you should have a lower
 msgstr "Переконайтесь, що у вас немає великої букви там, де має бути мала, і навпаки."
 
 #: course/glossary.csv course/documentation.csv
+#, fuzzy
 msgid "explanation"
 msgstr "ітерація"
 
@@ -811,6 +819,7 @@ msgid "The position of the entity on the vertical axis."
 msgstr "Положення об'єкта на вертикальній осі."
 
 #: course/documentation.csv
+#, fuzzy
 msgid " Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false, normalizes the movement."
 msgstr "Застосовує локальне перетворення на осі X вузла на основі [code]Node._process delta[/code]. Якщо [code]scaled[/code] має значення false, нормалізує рух."
 
@@ -832,3 +841,174 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid "This error tells you are missing some parenthesis, a comma, or some value in your export hint."
+#~ msgstr "Ця помилка повідомляє про те, що у вашому описі параметрів експорту змінної відсутні якісь круглі дужки, кома або якесь значення."
+
+#~ msgid "You need to read the error message and add the missing character or value it requests."
+#~ msgstr "Вам потрібно прочитати повідомлення про помилку та додати відсутній символ або значення, про яке йдеться."
+
+#~ msgid "member function"
+#~ msgstr "функція-член"
+
+#~ msgid "member functions"
+#~ msgstr "функції-члени"
+
+#~ msgid "member variable"
+#~ msgstr "змінна-член"
+
+#~ msgid "member variables"
+#~ msgstr "змінні-члени"
+
+#~ msgid "parameter"
+#~ msgstr "параметр"
+
+#~ msgid "parameters"
+#~ msgstr "параметри"
+
+#~ msgid "radian"
+#~ msgstr "радіан"
+
+#~ msgid "radians"
+#~ msgstr "радіани"
+
+#~ msgid "type"
+#~ msgstr "тип"
+
+#~ msgid "types"
+#~ msgstr "типи"
+
+#~ msgid "iterations"
+#~ msgstr "ітерації"
+
+#~ msgid "vector"
+#~ msgstr "вектор"
+
+#~ msgid "vectors"
+#~ msgstr "вектори"
+
+#~ msgid "argument"
+#~ msgstr "аргумент"
+
+#~ msgid "arguments"
+#~ msgstr "аргументи"
+
+#~ msgid "array"
+#~ msgstr "масив"
+
+#~ msgid "arrays"
+#~ msgstr "масиви"
+
+#~ msgid "assign"
+#~ msgstr "присвоювання"
+
+#~ msgid "dictionary"
+#~ msgstr "словник"
+
+#~ msgid "dictionaries"
+#~ msgstr "словники"
+
+#~ msgid "for loop"
+#~ msgstr "цикл for"
+
+#~ msgid "for loops"
+#~ msgstr "цикли for"
+
+#~ msgid "function"
+#~ msgstr "функція"
+
+#~ msgid "functions"
+#~ msgstr "функції"
+
+#~ msgid "increment"
+#~ msgstr "інкремент"
+
+#~ msgid "increments"
+#~ msgstr "інкременти"
+
+#~ msgid "instruction"
+#~ msgstr "інструкція"
+
+#~ msgid "instructions"
+#~ msgstr "інструкції"
+
+#~ msgid "variable"
+#~ msgstr "змінна"
+
+#~ msgid "variables"
+#~ msgstr "змінні"
+
+#~ msgid "while loop"
+#~ msgstr "цикл while"
+
+#~ msgid "while loops"
+#~ msgstr "цикли while"
+
+#~ msgid "body"
+#~ msgstr "тіло"
+
+#~ msgid "return"
+#~ msgstr "повернення"
+
+#~ msgid "library"
+#~ msgstr "бібліотека"
+
+#~ msgid "libraries"
+#~ msgstr "бібліотеки"
+
+#~ msgid "sprite"
+#~ msgstr "спрайт"
+
+#~ msgid "sprites"
+#~ msgstr "спрайти"
+
+#~ msgid "The cell position of the robot on the board. [code]Vector2(0, 0)[/code] is the square cell in the top left of the board."
+#~ msgstr "Положення комірки з роботом на дошці. [code]Vector2(0, 0)[/code] — це квадратна комірка в лівому верхньому кутку дошки."
+
+#~ msgid "Creates a list of numbers from [code]0[/code] to [code]length - 1[/code]."
+#~ msgstr "Створює список чисел від [code]0[/code] до [code]length - 1[/code]."
+
+#~ msgid "Orders the robot to play an animation."
+#~ msgstr "Наказує роботу відтворити анімацію."
+
+#~ msgid "Selects units in the cell coordinates passed as the function's argument."
+#~ msgstr "Вибирає юнітів у комірці, координати якої дорівнюють аргументам функції."
+
+#~ msgid "Queues a move animation towards the target cell."
+#~ msgstr "Ставить у чергу анімацію руху до цільової комірки."
+
+#~ msgid "Adds the value passed as an argument at the back of the array."
+#~ msgstr "Додає значення, передане як аргумент, наприкінці масиву."
+
+#~ msgid "Removes the first value from the array and returns it."
+#~ msgstr "Вилучає перше значення з масиву та повертає його."
+
+#~ msgid "Removes the last value from the array and returns it."
+#~ msgstr "Вилучає останнє значення з масиву та повертає його."
+
+#~ msgid "Returns the argument converted into a [code]String[/code]. Works with the majority of value types."
+#~ msgstr "Повертає аргумент, перетворений на рядок [code]String[/code]. Працює зі значеннями більшості типів."
+
+#~ msgid "Returns the argument converted into an [code]int[/code] (whole number) [i]if possible[/i]. Supports converting decimal numbers, strings, and booleans. Useful to convert player text input into numbers."
+#~ msgstr "Повертає аргумент, перетворений на [code]int[/code] (ціле число) [i]якщо таке перетворення можливе[/i]. Підтримує перетворення десяткових дробів, рядків та логічних значень. Корисно для перетворення тексту, введеного гравцем, на числа."
+
+#~ msgid "Creates a new unit matching the type parameter and places it at the desired cell position on the game grid."
+#~ msgstr "Створює новий юніт, відповідний параметру типу, і поміщає його в потрібну комірку ігрової сітки."
+
+#~ msgid "Creates a new item and displays it in the inventory."
+#~ msgstr "Створює новий предмет та показує його в інвентарі."
+
+#~ msgid "Increases the item count by amount."
+#~ msgstr "Збільшує кількість предметів на amount."
+
+#~ msgid "Realigns the train track with the path. Select a train track in the tracks array by index to pass it as an argument."
+#~ msgstr "Вирівнює залізничну колію зі шляхом. Виберіть залізничну колію в масиві tracks за індексом, щоб передати її як аргумент."
+
+#~ msgid "If you want to assign a value to a variable, double-check that what you have on the left side of the = sign is a variable and not a function."
+#~ msgstr "Якщо ви хочете надати значення змінній, двічі перевірте, що ліворуч від знака = зазначено змінну, а не функцію."
+
+#~ msgid "You also need to ensure the syntax is correct. For example, there shouldn't be parentheses on the left side of the equal sign."
+#~ msgstr "Також необхідно переконатись у правильності синтаксису. Наприклад, ліворуч від знака рівності не повинно бути круглих дужок."
+
+#~ msgid "In the case of a condition, ensure that you are using two equal signs to check for equality (==)."
+#~ msgstr "Якщо ж це умова, то переконайтеся, що для перевірки рівності використано два знаки дорівнює (==)."

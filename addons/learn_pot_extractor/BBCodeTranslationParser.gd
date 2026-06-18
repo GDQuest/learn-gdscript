@@ -1,7 +1,7 @@
 @tool
 extends EditorTranslationParserPlugin
 
-
+static var PURE_NUMBERS_RE := RegEx.create_from_string("[^a-zA-Z]+")
 const SHARED := preload("Shared.gd")
 
 
@@ -31,7 +31,7 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 		if typeof(current) == TYPE_OBJECT and "tag" in current:
 			match current.tag:
 				BBCodeParserData.Tag.LESSON:
-					ret.append(PackedStringArray([BBCodeUtils.get_lesson_title(current), "", "", "", current.line_number]))
+					ret.append(PackedStringArray([BBCodeUtils.get_lesson_title(current), "", "", "Lesson header", current.line_number]))
 				BBCodeParserData.Tag.PARAGRAPH:
 					var glossary_results := []
 					var raw_string := BBCodeUtils.get_paragraph_text(current)
@@ -41,56 +41,56 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 						line = SHARED.fix_glossary_entries(line, glossary_results)
 						ret.append(PackedStringArray([line, "", "", ('The "term" in [glossary term="<term>"] should NOT be translated here') if glossary_results[0] else "", current.line_number + i]))
 				BBCodeParserData.Tag.TITLE:
-					ret.append(PackedStringArray([BBCodeUtils.get_paragraph_text(current), "", "", "", current.line_number]))
+					ret.append(PackedStringArray([BBCodeUtils.get_paragraph_text(current), "", "", "Heading", current.line_number]))
 				BBCodeParserData.Tag.QUIZ_CHOICE, BBCodeParserData.Tag.QUIZ_INPUT:
 					var data := BBCodeUtils.get_quiz_data(current)
-					ret.append(PackedStringArray([data.question, "", "", "", current.line_number]))
+					ret.append(PackedStringArray([data.question, "", "", "Quiz question", current.line_number]))
 					
 					var lines := _get_lines(data.content)
 					var glossary_results := []
 					for line in lines:
 						line = SHARED.fix_glossary_entries(line, glossary_results)
-						ret.append(PackedStringArray([line, "", "", 'The "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "", current.line_number]))
+						ret.append(PackedStringArray([line, "", "", 'Quiz\nThe "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "Quiz content", current.line_number]))
 					
 					lines = _get_lines(data.explanation)
 					for line in lines:
 						line = SHARED.fix_glossary_entries(line, glossary_results)
-						ret.append(PackedStringArray([line, "", "", 'The "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "", current.line_number]))
+						ret.append(PackedStringArray([line, "", "", 'Quiz\nThe "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "Quiz explanation", current.line_number]))
 					
 					for i in data.answers.size():
-						ret.append(PackedStringArray([data.answers[i], "", "", "", current.line_number]))
+						ret.append(PackedStringArray([data.answers[i], "", "", "Quiz answer", current.line_number]))
 					
 					quiz_idx += 1
 				BBCodeParserData.Tag.NOTE:
 					var title := BBCodeUtils.get_note_title(current)
-					ret.append(PackedStringArray([title, "", "", "", current.line_number]))
+					ret.append(PackedStringArray([title, "", "", "Note title", current.line_number]))
 					var contents := BBCodeUtils.get_note_contents(current)
 					var lines := _get_lines(contents)
 					var glossary_results := []
 					for i in lines.size():
 						var line := lines[i]
 						line = SHARED.fix_glossary_entries(line, glossary_results)
-						ret.append(PackedStringArray([line, "", "", 'The "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "", current.line_number + i + 1]))
+						ret.append(PackedStringArray([line, "", "", 'Note content\nThe "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "Note content", current.line_number + i + 1]))
 				BBCodeParserData.Tag.PRACTICE:
 					var title := BBCodeUtils.get_practice_title(current)
-					ret.append(PackedStringArray([title, "", "", "", current.line_number]))
+					ret.append(PackedStringArray([title, "", "", "Practice title", current.line_number]))
 					
 					var goal := BBCodeUtils.get_practice_goal(current)
 					var glossary_results := []
 					var lines := _get_lines(goal)
 					for i in lines.size():
 						var line := SHARED.fix_glossary_entries(lines[i], glossary_results)
-						ret.append(PackedStringArray([line, "", "", 'The "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "", current.line_number]))
+						ret.append(PackedStringArray([line, "", "", 'Practice goal\nThe "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "Practice goal", current.line_number]))
 					
 					var description := BBCodeUtils.get_practice_description(current)
 					lines = _get_lines(description)
 					for i in lines.size():
 						var line := SHARED.fix_glossary_entries(lines[i], glossary_results)
-						ret.append(PackedStringArray([line, "", "", 'The "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "", current.line_number + i]))
+						ret.append(PackedStringArray([line, "", "", 'Practice description\nThe "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "Practice description", current.line_number + i]))
 					
 					var hints := BBCodeUtils.get_practice_hints(current)
 					for i in hints.size():
-						ret.append(PackedStringArray([hints[i], "", "", "", current.line_number]))
+						ret.append(PackedStringArray([hints[i], "", "", "Practice hint", current.line_number]))
 						
 					practice_idx += 1
 	
@@ -118,32 +118,27 @@ func _find_line_number(raw_lines: PackedStringArray, line: String) -> int:
 
 
 func _get_lines(text_block: String) -> PackedStringArray:
-	var raw_lines := text_block.split("\n", false)
+	var raw_lines := text_block.split("\n", true)
 	var ret := PackedStringArray()
 	var current_line := ""
 	var i := 0
-	while i < raw_lines.size():
-		if "[code]" in raw_lines[i] and not "[/code]" in raw_lines[i]:
-			current_line = raw_lines[i]
-			i += 1
-			while not "[/code]" in raw_lines[i]:
-				current_line += "\n" + raw_lines[i]
-				i += 1
-			current_line += "\n" + raw_lines[i]
-			ret.push_back(current_line)
-			i += 1
-			continue
-		if raw_lines[i].begins_with("- "):
-			current_line = raw_lines[i]
-			i += 1
-			while i < raw_lines.size() and raw_lines[i].begins_with("- "):
-				current_line += "\n" + raw_lines[i]
-				i += 1
-			ret.push_back(current_line)
-			continue
-		
-		ret.push_back(raw_lines[i])
-		i += 1
+
+	# chunk lines separated by blank lines
+	var result := []
+	var current := []
+	
+	for line: String in raw_lines:
+		if line == "":
+			result.append(current)
+			current = []
+		else:
+			current.append(line)
+	result.append(current)
+	
+	ret.clear()
+	for chunk in result:
+		ret.append("\n".join(chunk))
+	
 	return ret
 
 

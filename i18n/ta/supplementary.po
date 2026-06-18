@@ -20,7 +20,6 @@ msgstr ""
 "X-Generator: Weblate 5.17-dev\n"
 "Generated-By: Babel 2.10.3\n"
 
-
 #: script_checking/error_database.csv
 msgid "error_explanation"
 msgstr ""
@@ -50,10 +49,11 @@ msgid "To access the [code]x[/code] sub-component of the variable, you need to d
 msgstr "மாறியின் [குறியீடு] ஃச் [/குறியீடு] துணைக் கூறுகளை அணுக, நீங்கள் அதை வளையத்தின் உடலின் உள்ளே செய்ய வேண்டும்:"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "[code]for cell_position in cell_positions_array:"
 msgstr ""
 "[குறியீடு] செல்_போசிசன்களில் செல்_போசிசன்களில்_ஆரேயில்:\n"
-" Cell_Position.x += 1.0 [/குறியீடு]\n"
+" Cell_Position.x += 1.0 [/குறியீடு]"
 
 #: script_checking/error_database.csv
 msgid "    cell_position.x += 1.0[/code]"
@@ -104,16 +104,18 @@ msgid "Look at what you are trying to change. If it is a constant (defined with 
 msgstr "நீங்கள் எதை மாற்ற முயற்சிக்கிறீர்கள் என்று பாருங்கள். இது ஒரு மாறிலியாக இருந்தால் ([code]const[/code] முக்கிய சொல்லுடன் வரையறுக்கப்பட்டால் அல்லது கோடாட்டில் கட்டமைக்கப்பட்டிருந்தால், உங்களுக்கு இரண்டு விருப்பங்கள் உள்ளன:"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "1. If the value should never change, or it comes from Godot, remove the line that tries to change it."
 msgstr ""
 "1. மதிப்பு ஒருபோதும் மாறக்கூடாது, அல்லது அது Godot இலிருந்து வந்தால், அதை மாற்ற முயற்சிக்கும் வரியை அகற்றவும். \n"
-"2. மதிப்பை மாற்ற வேண்டும் என்றால், முதலில் உருவாக்கும்போது [code]const[/code] என்பதற்குப் பதிலாக [code]var[/code] ஐப் பயன்படுத்தவும்.\n"
+"2. மதிப்பை மாற்ற வேண்டும் என்றால், முதலில் உருவாக்கும்போது [code]const[/code] என்பதற்குப் பதிலாக [code]var[/code] ஐப் பயன்படுத்தவும்."
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
 msgstr ""
 "1. மதிப்பு ஒருபோதும் மாறக்கூடாது, அல்லது அது Godot இலிருந்து வந்தால், அதை மாற்ற முயற்சிக்கும் வரியை அகற்றவும். \n"
-"2. மதிப்பை மாற்ற வேண்டும் என்றால், முதலில் உருவாக்கும்போது [code]const[/code] என்பதற்குப் பதிலாக [code]var[/code] ஐப் பயன்படுத்தவும்.\n"
+"2. மதிப்பை மாற்ற வேண்டும் என்றால், முதலில் உருவாக்கும்போது [code]const[/code] என்பதற்குப் பதிலாக [code]var[/code] ஐப் பயன்படுத்தவும்."
 
 #: script_checking/error_database.csv
 msgid "You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line."
@@ -152,10 +154,11 @@ msgid "1. You used the class name in the class itself."
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
 msgstr ""
 "1. நீங்கள் வகுப்பில் வகுப்பு பெயரைப் பயன்படுத்தினீர்கள்.\n"
-" 2. உங்கள் குறியீடு இந்த வகுப்பைக் குறிக்கும் மற்றொரு வகுப்பைக் குறிக்கிறது, இது முடிவற்ற குறிப்பு சுழற்சியை ஏற்படுத்துகிறது.\n"
+" 2. உங்கள் குறியீடு இந்த வகுப்பைக் குறிக்கும் மற்றொரு வகுப்பைக் குறிக்கிறது, இது முடிவற்ற குறிப்பு சுழற்சியை ஏற்படுத்துகிறது."
 
 #: script_checking/error_database.csv
 msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
@@ -258,11 +261,12 @@ msgid "1. You wrote an identifier (variable or function name) in the wrong place
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
 msgstr ""
 "1. நீங்கள் தவறான இடத்தில் ஒரு அடையாளங்காட்டி (மாறி அல்லது செயல்பாட்டு பெயர்) எழுதியுள்ளீர்கள்.\n"
 " 2. [code] var [/code], [code] func [/code], [code] for[/code], அல்லது [code] signal [/code] போன்ற ஒரு முக்கிய சொல்லை நீங்கள் எழுதினீர்கள், நீங்கள் அதைப் பின்பற்றவில்லை ஒரு பெயரால்.\n"
-" 3. நீங்கள் ஒரு செயல்பாட்டு வரையறையை எழுதியுள்ளீர்கள், ஆனால் பெருங்குடலுக்கு முன் அடைப்புக்குறிகளை மறந்துவிட்டீர்கள்.\n"
+" 3. நீங்கள் ஒரு செயல்பாட்டு வரையறையை எழுதியுள்ளீர்கள், ஆனால் பெருங்குடலுக்கு முன் அடைப்புக்குறிகளை மறந்துவிட்டீர்கள்."
 
 #: script_checking/error_database.csv
 msgid "3. You wrote a function definition but forgot the parentheses before the colon."
@@ -469,16 +473,18 @@ msgid "There is an issue with the return value of your function. There are two m
 msgstr "உங்கள் செயல்பாட்டின் வருவாய் மதிப்பில் சிக்கல் உள்ளது. இங்கே இரண்டு முக்கிய வழக்குகள் உள்ளன:"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
 msgstr ""
 "1. உங்கள் செயல்பாடு ஒரு வெற்றிட செயல்பாடு, இதனால் அது ஒரு மதிப்பைத் தரக் கூடாது. இதில் '-> வெற்றிட' தொடரியல் மற்றும் வகுப்பு கட்டமைப்பாளர்கள் ('_init ()') உடன் செயல்பாடுகள் அடங்கும்.\n"
-" 2. உங்கள் செயல்பாட்டிற்கான வருவாய் வகையை நீங்கள் குறிப்பிட்டுள்ளீர்கள், ஆனால் சாத்தியமான அனைத்து கிளைகளிலும் (if, elif, மற்றும் வேறு தொகுதிகள்) அல்லது இறுதியில் ஒரு மதிப்பை நீங்கள் திருப்பித் தரவில்லை.\n"
+" 2. உங்கள் செயல்பாட்டிற்கான வருவாய் வகையை நீங்கள் குறிப்பிட்டுள்ளீர்கள், ஆனால் சாத்தியமான அனைத்து கிளைகளிலும் (if, elif, மற்றும் வேறு தொகுதிகள்) அல்லது இறுதியில் ஒரு மதிப்பை நீங்கள் திருப்பித் தரவில்லை."
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
 msgstr ""
 "1. உங்கள் செயல்பாடு ஒரு வெற்றிட செயல்பாடு, இதனால் அது ஒரு மதிப்பைத் தரக் கூடாது. இதில் '-> வெற்றிட' தொடரியல் மற்றும் வகுப்பு கட்டமைப்பாளர்கள் ('_init ()') உடன் செயல்பாடுகள் அடங்கும்.\n"
-" 2. உங்கள் செயல்பாட்டிற்கான வருவாய் வகையை நீங்கள் குறிப்பிட்டுள்ளீர்கள், ஆனால் சாத்தியமான அனைத்து கிளைகளிலும் (if, elif, மற்றும் வேறு தொகுதிகள்) அல்லது இறுதியில் ஒரு மதிப்பை நீங்கள் திருப்பித் தரவில்லை.\n"
+" 2. உங்கள் செயல்பாட்டிற்கான வருவாய் வகையை நீங்கள் குறிப்பிட்டுள்ளீர்கள், ஆனால் சாத்தியமான அனைத்து கிளைகளிலும் (if, elif, மற்றும் வேறு தொகுதிகள்) அல்லது இறுதியில் ஒரு மதிப்பை நீங்கள் திருப்பித் தரவில்லை."
 
 #: script_checking/error_database.csv
 msgid "When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that."
@@ -517,10 +523,11 @@ msgid "The computer reached the end of the line of code, but the line had a synt
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
 msgstr ""
 "கணினி குறியீட்டின் முடிவை அடைந்தது, ஆனால் வரியில் ஒரு தொடரியல் பிழை இருந்தது.\n"
-" நீங்கள் ஒரு சரத்தை மூட மறந்துவிடும்போது மிகவும் பொதுவான வழக்கு: நீங்கள் தொடக்க மேற்கோள்களைக் கொண்டிருக்கிறீர்கள், ஆனால் பொருந்தக்கூடிய இறுதி மேற்கோளைச் சேர்க்க மறந்துவிட்டீர்கள்.\n"
+" நீங்கள் ஒரு சரத்தை மூட மறந்துவிடும்போது மிகவும் பொதுவான வழக்கு: நீங்கள் தொடக்க மேற்கோள்களைக் கொண்டிருக்கிறீர்கள், ஆனால் பொருந்தக்கூடிய இறுதி மேற்கோளைச் சேர்க்க மறந்துவிட்டீர்கள்."
 
 #: script_checking/error_database.csv
 msgid "Double-check that you are not missing a quote character or that the quote character you used to start the string is the same as the one you used to close the string."
@@ -539,6 +546,7 @@ msgid "Ensure that you don't have a capital letter where you should have a lower
 msgstr "உங்களிடம் ஒரு சிறிய கடிதம் இல்லை என்பதை உறுதிப்படுத்திக் கொள்ளுங்கள், அங்கு உங்களிடம் சிறிய எழுத்து இருக்க வேண்டும், நேர்மாறாகவும்."
 
 #: course/glossary.csv course/documentation.csv
+#, fuzzy
 msgid "explanation"
 msgstr "மறுசெய்கை"
 
@@ -611,18 +619,22 @@ msgid "Vectors can seem daunting at first because they are pretty abstract, but 
 msgstr "திசையன்கள் முதலில் அச்சுறுத்தலாகத் தோன்றலாம், ஏனெனில் அவை மிகவும் சுருக்கமானவை, ஆனால் நீங்கள் பார்ப்பது போல், அவை குறியீட்டை பெரிதும் எளிதாக்கும்."
 
 #: course/glossary.csv
+#, fuzzy
 msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument."
 msgstr "ஒரு உரையாடல் என்பது செயல்பாட்டை அழைக்கும் போது நீங்கள் ஒரு செயல்பாட்டிற்கு அனுப்பும் மதிப்பு. எடுத்துக்காட்டாக, [குறியீடு] சுழற்றும் (0.5) [/குறியீடு] என்ற அழைப்பில், அடைப்புக்குறிக்குள் மதிப்பு [குறியீடு] 0.5 [/குறியீடு] ஒரு வாதமாகும்."
 
 #: course/glossary.csv
+#, fuzzy
 msgid "A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional."
 msgstr "ஒரு செயல்பாடு எந்த வாதங்களும், ஒரு வாதமும் அல்லது பல வாதங்களையும் பெற முடியாது. வாதங்கள் கட்டாயமாகவோ அல்லது விருப்பமாகவோ இருக்கலாம்."
 
 #: course/glossary.csv
+#, fuzzy
 msgid "When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]"
 msgstr "ஒரு செயல்பாடு பல வாதங்களை எடுக்கும்போது, இந்த செயல்பாட்டு அழைப்பைப் போலவே மதிப்புகளை நீங்கள் காற்புள்ளியுடன் பிரிக்கிறீர்கள்: [குறியீடு] சம்ப் (50, 100) [/குறியீடு]"
 
 #: course/glossary.csv
+#, fuzzy
 msgid "When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i]."
 msgstr "[நான்] ஒரு செயல்பாட்டை அழைக்கும்போது, அடைப்புக்குறிக்குள் அனுப்பப்பட்ட மதிப்புகளை [i] வாதங்கள் [/i] என்று பெயரிடுகிறோம்."
 
@@ -635,6 +647,7 @@ msgid "[code]func move_to_position(x, y):[/code]"
 msgstr ""
 
 #: course/glossary.csv
+#, fuzzy
 msgid "In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
 msgstr "இருப்பினும், ஒரு செயல்பாட்டு வரையறையை எழுதும் போது, செயல்பாடு [i] அளவுருக்கள் [/i] பற்றி பேசுகிறோம். பின்வரும் எடுத்துக்காட்டில், பெயர்கள் [குறியீடு] ஃச் [/குறியீடு] மற்றும் [குறியீடு] ஒய் [/குறியீடு] [i] அளவுருக்கள் [/i]."
 
@@ -811,6 +824,7 @@ msgid "The position of the entity on the vertical axis."
 msgstr "செங்குத்து அச்சில் நிறுவனத்தின் நிலை."
 
 #: course/documentation.csv
+#, fuzzy
 msgid " Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false, normalizes the movement."
 msgstr "[குறியீடு] முனையின் அடிப்படையில் முனையின் ஃச் அச்சில் உள்ளக மொழிபெயர்ப்பைப் பயன்படுத்துகிறது. [குறியீடு] அளவிடப்பட்ட [/குறியீடு] தவறானது என்றால், இயக்கத்தை இயல்பாக்குகிறது."
 
@@ -832,3 +846,174 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid "This error tells you are missing some parenthesis, a comma, or some value in your export hint."
+#~ msgstr "இந்த பிழை உங்கள் ஏற்றுமதி குறிப்பில் சில அடைப்புக்குறிப்புகள், ஒரு கமா அல்லது சில மதிப்பைக் காணவில்லை என்று கூறுகிறது."
+
+#~ msgid "You need to read the error message and add the missing character or value it requests."
+#~ msgstr "நீங்கள் பிழை செய்தியைப் படித்து, காணாமல் போன எழுத்து அல்லது மதிப்பைக் கோருகிறீர்கள்."
+
+#~ msgid "member function"
+#~ msgstr "உறுப்பினர் செயல்பாடு"
+
+#~ msgid "member functions"
+#~ msgstr "உறுப்பினர் செயல்பாடுகள்"
+
+#~ msgid "member variable"
+#~ msgstr "உறுப்பினர் மாறி"
+
+#~ msgid "member variables"
+#~ msgstr "உறுப்பினர் மாறிகள்"
+
+#~ msgid "parameter"
+#~ msgstr "கூறளவு"
+
+#~ msgid "parameters"
+#~ msgstr "அளவுருக்கள்"
+
+#~ msgid "radian"
+#~ msgstr "ஆரகம்"
+
+#~ msgid "radians"
+#~ msgstr "ரேடியன்கள்"
+
+#~ msgid "type"
+#~ msgstr "வகை"
+
+#~ msgid "types"
+#~ msgstr "வகைகள்"
+
+#~ msgid "iterations"
+#~ msgstr "மறு செய்கைகள்"
+
+#~ msgid "vector"
+#~ msgstr "திசையன்"
+
+#~ msgid "vectors"
+#~ msgstr "திசையன்கள்"
+
+#~ msgid "argument"
+#~ msgstr "உரையாடல்"
+
+#~ msgid "arguments"
+#~ msgstr "வாதங்கள்"
+
+#~ msgid "array"
+#~ msgstr "வரிசை"
+
+#~ msgid "arrays"
+#~ msgstr "வரிசைகள்"
+
+#~ msgid "assign"
+#~ msgstr "ஒதுக்க"
+
+#~ msgid "dictionary"
+#~ msgstr "அகராதி"
+
+#~ msgid "dictionaries"
+#~ msgstr "அகராதிகள்"
+
+#~ msgid "for loop"
+#~ msgstr "வளையத்திற்கு"
+
+#~ msgid "for loops"
+#~ msgstr "சுழல்களுக்கு"
+
+#~ msgid "function"
+#~ msgstr "சார்பு"
+
+#~ msgid "functions"
+#~ msgstr "செயல்பாடுகள்"
+
+#~ msgid "increment"
+#~ msgstr "அதிகரிப்பு"
+
+#~ msgid "increments"
+#~ msgstr "அதிகரிப்புகள்"
+
+#~ msgid "instruction"
+#~ msgstr "வழிமுறைகள்"
+
+#~ msgid "instructions"
+#~ msgstr "வழிமுறைகள்"
+
+#~ msgid "variable"
+#~ msgstr "மாறக்கூடிய"
+
+#~ msgid "variables"
+#~ msgstr "மாறிகள்"
+
+#~ msgid "while loop"
+#~ msgstr "லூப் போது"
+
+#~ msgid "while loops"
+#~ msgstr "சுழல்கள் போது"
+
+#~ msgid "body"
+#~ msgstr "உடல்"
+
+#~ msgid "return"
+#~ msgstr "திரும்ப"
+
+#~ msgid "library"
+#~ msgstr "நூலகம்"
+
+#~ msgid "libraries"
+#~ msgstr "நூலகங்கள்"
+
+#~ msgid "sprite"
+#~ msgstr "ச்பிரிட்"
+
+#~ msgid "sprites"
+#~ msgstr "உருவங்கள்"
+
+#~ msgid "The cell position of the robot on the board. [code]Vector2(0, 0)[/code] is the square cell in the top left of the board."
+#~ msgstr "போர்டில் ரோபோவின் செல் நிலை. [குறியீடு] வெக்டர் 2 (0, 0) [/குறியீடு] என்பது பலகையின் மேல் இடதுபுறத்தில் உள்ள சதுர கலமாகும்."
+
+#~ msgid "Creates a list of numbers from [code]0[/code] to [code]length - 1[/code]."
+#~ msgstr "[குறியீடு] 0 [/குறியீடு] முதல் [குறியீடு] நீளம் - 1 [/குறியீடு] வரை எண்களின் பட்டியலை உருவாக்குகிறது."
+
+#~ msgid "Orders the robot to play an animation."
+#~ msgstr "அனிமேசன் விளையாட ரோபோவை ஆர்டர் செய்கிறது."
+
+#~ msgid "Selects units in the cell coordinates passed as the function's argument."
+#~ msgstr "செயல்பாட்டின் வாதமாக நிறைவேற்றப்பட்ட செல் ஒருங்கிணைப்புகளில் உள்ள அலகுகளைத் தேர்ந்தெடுக்கிறது."
+
+#~ msgid "Queues a move animation towards the target cell."
+#~ msgstr "இலக்கு கலத்தை நோக்கி ஒரு நகர்வு அனிமேசனை வரிசைப்படுத்துகிறது."
+
+#~ msgid "Adds the value passed as an argument at the back of the array."
+#~ msgstr "வரிசையின் பின்புறத்தில் ஒரு வாதமாக அனுப்பப்பட்ட மதிப்பை சேர்க்கிறது."
+
+#~ msgid "Removes the first value from the array and returns it."
+#~ msgstr "வரிசையிலிருந்து முதல் மதிப்பை நீக்கி அதைத் தருகிறது."
+
+#~ msgid "Removes the last value from the array and returns it."
+#~ msgstr "வரிசையிலிருந்து கடைசி மதிப்பை நீக்கி அதைத் தருகிறது."
+
+#~ msgid "Returns the argument converted into a [code]String[/code]. Works with the majority of value types."
+#~ msgstr "[குறியீடு] சரம் [/குறியீடு] ஆக மாற்றப்பட்ட வாதத்தை வழங்குகிறது. பெரும்பாலான மதிப்பு வகைகளுடன் வேலை செய்கிறது."
+
+#~ msgid "Returns the argument converted into an [code]int[/code] (whole number) [i]if possible[/i]. Supports converting decimal numbers, strings, and booleans. Useful to convert player text input into numbers."
+#~ msgstr "முடிந்தால் [/i] [/i] ஆக மாற்றப்பட்ட வாதத்தை ஒரு [குறியீடு] int [/code] (முழு எண்) ஆக மாற்றுகிறது. தசம எண்கள், சரங்கள் மற்றும் பூலியர்களை மாற்றுவதை ஆதரிக்கிறது. பிளேயர் உரை உள்ளீட்டை எண்களாக மாற்ற பயனுள்ளதாக இருக்கும்."
+
+#~ msgid "Creates a new unit matching the type parameter and places it at the desired cell position on the game grid."
+#~ msgstr "வகை அளவுருவுடன் பொருந்தக்கூடிய புதிய அலகு உருவாக்கி, அதை விளையாட்டு கட்டத்தில் விரும்பிய செல் நிலையில் வைக்கிறது."
+
+#~ msgid "Creates a new item and displays it in the inventory."
+#~ msgstr "ஒரு புதிய உருப்படியை உருவாக்கி அதை சரக்குகளில் காண்பிக்கும்."
+
+#~ msgid "Increases the item count by amount."
+#~ msgstr "உருப்படி எண்ணிக்கையை அளவு அதிகரிக்கிறது."
+
+#~ msgid "Realigns the train track with the path. Select a train track in the tracks array by index to pass it as an argument."
+#~ msgstr "ரயில் பாதையைப் பாதையுடன் சீரமைக்கிறது. ஒரு வாதமாக அனுப்ப, தடங்கள் வரிசையில் ஒரு ரயில் பாதையை அட்டவணையின்படி தேர்ந்தெடு."
+
+#~ msgid "If you want to assign a value to a variable, double-check that what you have on the left side of the = sign is a variable and not a function."
+#~ msgstr "நீங்கள் ஒரு மாறிக்கு ஒரு மதிப்பை ஒதுக்க விரும்பினால், = அடையாளத்தின் இடது பக்கத்தில் நீங்கள் வைத்திருப்பது ஒரு மாறி மற்றும் ஒரு செயல்பாடு அல்ல என்பதை இருமுறை சரிபார்க்கவும்."
+
+#~ msgid "You also need to ensure the syntax is correct. For example, there shouldn't be parentheses on the left side of the equal sign."
+#~ msgstr "தொடரியல் சரியானது என்பதை நீங்கள் உறுதிப்படுத்த வேண்டும். எடுத்துக்காட்டாக, சம அடையாளத்தின் இடது பக்கத்தில் அடைப்புக்குறிப்புகள் இருக்கக்கூடாது."
+
+#~ msgid "In the case of a condition, ensure that you are using two equal signs to check for equality (==)."
+#~ msgstr "ஒரு நிபந்தனையின் விசயத்தில், சமத்துவத்தை (==) சரிபார்க்க நீங்கள் இரண்டு சம அறிகுறிகளைப் பயன்படுத்துகிறீர்கள் என்பதை உறுதிப்படுத்தவும்."

@@ -19,7 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
 "Generated-By: Babel 2.10.3\n"
 
-
 #: script_checking/error_database.csv
 msgid "error_explanation"
 msgstr ""
@@ -49,16 +48,18 @@ msgid "To access the [code]x[/code] sub-component of the variable, you need to d
 msgstr "Chcete-li získat přístup k [code]x[/code] dílčí komponentě proměnné, musíte to udělat uvnitř těla smyčky:"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "[code]for cell_position in cell_positions_array:"
 msgstr ""
 "[code]for cell_position in cell_positions_array:\n"
-"    cell_position.x += 1.0[/code]\n"
+"    cell_position.x += 1.0[/code]"
 
 #: script_checking/error_database.csv
 msgid "    cell_position.x += 1.0[/code]"
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "You get this error when you try to assign a value to something that is not a variable."
 msgstr "Pokud dojde k této chybě, pravděpodobně se pokoušíte přiřadit hodnotu něčemu jinému než proměnné, což není možné. Hodnoty lze přiřazovat pouze proměnným."
 
@@ -79,6 +80,7 @@ msgid "If you see parentheses () on the left side, you might be trying to assign
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
 msgstr "Další možností je, že chcete zkontrolovat rovnost v podmínce, ale místo = instead of ==."
 
@@ -147,10 +149,11 @@ msgid "1. You used the class name in the class itself."
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
 msgstr ""
 "1. Název třídy jste použili v samotné třídě.\n"
-"2. Váš kód odkazuje na jinou třídu, která odkazuje na tuto třídu, což způsobuje nekonečný referenční cyklus.\n"
+"2. Váš kód odkazuje na jinou třídu, která odkazuje na tuto třídu, což způsobuje nekonečný referenční cyklus."
 
 #: script_checking/error_database.csv
 msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
@@ -253,11 +256,12 @@ msgid "1. You wrote an identifier (variable or function name) in the wrong place
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
 msgstr ""
 "1. Zapsali jste identifikátor (název proměnné nebo funkce) na špatné místo.\n"
 "2. Napsali jste klíčové slovo jako [code]var[/code], [code]func[/code], [code]for[/code] nebo [code]signal[/code] a nenásledoval za ním název.\n"
-"3. Napsali jste definici funkce, ale zapomněli jste na závorky před dvojtečkou.\n"
+"3. Napsali jste definici funkce, ale zapomněli jste na závorky před dvojtečkou."
 
 #: script_checking/error_database.csv
 msgid "3. You wrote a function definition but forgot the parentheses before the colon."
@@ -464,16 +468,18 @@ msgid "There is an issue with the return value of your function. There are two m
 msgstr "V návratové hodnotě vaší funkce je problém. Existují dva hlavní případy:"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
 msgstr ""
 "1. Vaše funkce je funkce void, neměla by tedy vracet žádnou hodnotu. To zahrnuje funkce se syntaxí '-> void' a konstruktory tříd ('_init()').\n"
-"2. Zadali jste návratový typ funkce, ale nevracíte hodnotu ve všech možných větvích (bloky if, elif a else) nebo na konci.\n"
+"2. Zadali jste návratový typ funkce, ale nevracíte hodnotu ve všech možných větvích (bloky if, elif a else) nebo na konci."
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
 msgstr ""
 "1. Vaše funkce je funkce void, neměla by tedy vracet žádnou hodnotu. To zahrnuje funkce se syntaxí '-> void' a konstruktory tříd ('_init()').\n"
-"2. Zadali jste návratový typ funkce, ale nevracíte hodnotu ve všech možných větvích (bloky if, elif a else) nebo na konci.\n"
+"2. Zadali jste návratový typ funkce, ale nevracíte hodnotu ve všech možných větvích (bloky if, elif a else) nebo na konci."
 
 #: script_checking/error_database.csv
 msgid "When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that."
@@ -512,10 +518,11 @@ msgid "The computer reached the end of the line of code, but the line had a synt
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
 msgstr ""
 "Počítač došel na konec řádku kódu, ale řádek obsahoval syntaktickou chybu.\n"
-"Nejčastějším případem je, když zapomenete uzavřít řetězec: máte otevírací uvozovky, ale zapomenete přidat odpovídající uzavírací uvozovky.\n"
+"Nejčastějším případem je, když zapomenete uzavřít řetězec: máte otevírací uvozovky, ale zapomenete přidat odpovídající uzavírací uvozovky."
 
 #: script_checking/error_database.csv
 msgid "Double-check that you are not missing a quote character or that the quote character you used to start the string is the same as the one you used to close the string."
@@ -534,6 +541,7 @@ msgid "Ensure that you don't have a capital letter where you should have a lower
 msgstr "Ujistěte se, že nemáte velké písmeno tam, kde byste měli mít malé písmeno, a naopak."
 
 #: course/glossary.csv course/documentation.csv
+#, fuzzy
 msgid "explanation"
 msgstr "iterace"
 
@@ -606,18 +614,22 @@ msgid "Vectors can seem daunting at first because they are pretty abstract, but 
 msgstr "Vektory se mohou na první pohled zdát skličující, protože jsou dost abstraktní, ale jak uvidíte, ohromně zjednoduší kód."
 
 #: course/glossary.csv
+#, fuzzy
 msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument."
 msgstr "Argument je hodnota, kterou předáváte funkci při jejím volání. Například ve volání [code]rotate(0,5)[/code] je argumentem hodnota [code]0,5[/code] v závorce."
 
 #: course/glossary.csv
+#, fuzzy
 msgid "A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional."
 msgstr "Funkce může přijímat žádné argumenty, jeden argument nebo více argumentů. Argumenty mohou být povinné nebo nepovinné."
 
 #: course/glossary.csv
+#, fuzzy
 msgid "When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]"
 msgstr "Pokud funkce přijímá více argumentů, oddělujete hodnoty čárkami, jako v tomto volání funkce: [code]jump(50, 100)[/code]."
 
 #: course/glossary.csv
+#, fuzzy
 msgid "When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i]."
 msgstr "Při [i]volání[/i] funkce pojmenováváme předávané hodnoty v závorkách [i]argumenty[/i]."
 
@@ -630,6 +642,7 @@ msgid "[code]func move_to_position(x, y):[/code]"
 msgstr ""
 
 #: course/glossary.csv
+#, fuzzy
 msgid "In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
 msgstr "Při psaní definice funkce však hovoříme o parametrech funkce [i]parametry[/i]. V následujícím příkladu jsou názvy [code]x[/code] a [code]y[/code] [i]parametry[/i]."
 
@@ -806,6 +819,7 @@ msgid "The position of the entity on the vertical axis."
 msgstr "Poloha entity na svislé ose."
 
 #: course/documentation.csv
+#, fuzzy
 msgid " Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false, normalizes the movement."
 msgstr "Aplikuje lokální translaci na ose X uzlu na základě [code]Node._process[/code]'s [code]delta[/code]. Pokud [code]scaled[/code] je false, normalizuje pohyb."
 
@@ -827,3 +841,171 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid "If you want to assign a value to a variable, double-check that what you have on the left side of the = sign is a variable and not a function."
+#~ msgstr "Pokud chcete proměnné přiřadit hodnotu, zkontrolujte dvakrát, že to co máte na levé straně znaku =, je proměnná, a ne funkce."
+
+#~ msgid "You also need to ensure the syntax is correct. For example, there shouldn't be parentheses on the left side of the equal sign."
+#~ msgstr "Je také třeba zajistit správnou syntaxi. Například na levé straně znaku rovnosti by neměly být závorky."
+
+#~ msgid "In the case of a condition, ensure that you are using two equal signs to check for equality (==)."
+#~ msgstr "V případě podmínky se ujistěte, že používáte dvě znaménka rovnosti pro kontrolu rovnosti (==)."
+
+#~ msgid "This error tells you are missing some parenthesis, a comma, or some value in your export hint."
+#~ msgstr "Tato chyba vás informuje o tom, že v nápovědě k exportu chybí závorka, čárka nebo nějaká hodnota."
+
+#~ msgid "You need to read the error message and add the missing character or value it requests."
+#~ msgstr "Musíte si přečíst chybovou zprávu a doplnit chybějící znak nebo hodnotu, kterou požaduje."
+
+#~ msgid "member function"
+#~ msgstr "členská funkce"
+
+#~ msgid "member functions"
+#~ msgstr "členské funkce"
+
+#~ msgid "member variable"
+#~ msgstr "členská proměnná"
+
+#~ msgid "member variables"
+#~ msgstr "členské proměnné"
+
+#~ msgid "parameter"
+#~ msgstr "parametr"
+
+#~ msgid "parameters"
+#~ msgstr "parametry"
+
+#~ msgid "radian"
+#~ msgstr "radián"
+
+#~ msgid "radians"
+#~ msgstr "radiánů"
+
+#~ msgid "type"
+#~ msgstr "typ"
+
+#~ msgid "types"
+#~ msgstr "typy"
+
+#~ msgid "iterations"
+#~ msgstr "iterací"
+
+#~ msgid "vector"
+#~ msgstr "vektor"
+
+#~ msgid "vectors"
+#~ msgstr "vektory"
+
+#~ msgid "argument"
+#~ msgstr "argument"
+
+#~ msgid "arguments"
+#~ msgstr "argumenty"
+
+#~ msgid "array"
+#~ msgstr "pole"
+
+#~ msgid "arrays"
+#~ msgstr "pole"
+
+#~ msgid "assign"
+#~ msgstr "přiřadit"
+
+#~ msgid "dictionary"
+#~ msgstr "slovník"
+
+#~ msgid "dictionaries"
+#~ msgstr "slovníky"
+
+#~ msgid "for loop"
+#~ msgstr "smyčka for"
+
+#~ msgid "for loops"
+#~ msgstr "smyčky for"
+
+#~ msgid "function"
+#~ msgstr "funkce"
+
+#~ msgid "functions"
+#~ msgstr "funkcí"
+
+#~ msgid "increment"
+#~ msgstr "přírůstek"
+
+#~ msgid "increments"
+#~ msgstr "přírůstky"
+
+#~ msgid "instruction"
+#~ msgstr "instrukce"
+
+#~ msgid "instructions"
+#~ msgstr "instrukce"
+
+#~ msgid "variable"
+#~ msgstr "proměnná"
+
+#~ msgid "variables"
+#~ msgstr "proměnné"
+
+#~ msgid "while loop"
+#~ msgstr "smyčka while"
+
+#~ msgid "while loops"
+#~ msgstr "smyčky while"
+
+#~ msgid "body"
+#~ msgstr "tělo"
+
+#~ msgid "return"
+#~ msgstr "return"
+
+#~ msgid "library"
+#~ msgstr "knihovna"
+
+#~ msgid "libraries"
+#~ msgstr "knihovny"
+
+#~ msgid "sprite"
+#~ msgstr "sprite"
+
+#~ msgid "sprites"
+#~ msgstr "sprity"
+
+#~ msgid "The cell position of the robot on the board. [code]Vector2(0, 0)[/code] is the square cell in the top left of the board."
+#~ msgstr "Poloha buňky robota na desce. [code] Vector2(0, 0)[/code] je čtvercová buňka v levém horním rohu desky."
+
+#~ msgid "Creates a list of numbers from [code]0[/code] to [code]length - 1[/code]."
+#~ msgstr "Vytvoří seznam čísel od [code]0[/code] do [code]length - 1[/code]."
+
+#~ msgid "Orders the robot to play an animation."
+#~ msgstr "Přikáže robotovi přehrát animaci."
+
+#~ msgid "Selects units in the cell coordinates passed as the function's argument."
+#~ msgstr "Vybere jednotky v souřadnicích buňky předaných jako argument funkce."
+
+#~ msgid "Queues a move animation towards the target cell."
+#~ msgstr "Zařadí do fronty animaci pohybu směrem k cílové buňce."
+
+#~ msgid "Adds the value passed as an argument at the back of the array."
+#~ msgstr "Přidá hodnotu předanou jako argument na konec pole."
+
+#~ msgid "Removes the first value from the array and returns it."
+#~ msgstr "Odebere první hodnotu z pole a vrátí ji."
+
+#~ msgid "Removes the last value from the array and returns it."
+#~ msgstr "Odebere poslední hodnotu z pole a vrátí ji."
+
+#~ msgid "Returns the argument converted into a [code]String[/code]. Works with the majority of value types."
+#~ msgstr "Vrátí argument převedený na [code]String[/code]. Pracuje s hodnotami většiny typů."
+
+#~ msgid "Returns the argument converted into an [code]int[/code] (whole number) [i]if possible[/i]. Supports converting decimal numbers, strings, and booleans. Useful to convert player text input into numbers."
+#~ msgstr "Vrátí argument převedený na [code]int[/code] (celé číslo) [i]pokud je to možné[/i]. Podporuje převod desetinných čísel, řetězců a booleanů. Užitečné pro převod textového vstupu hráče na čísla."
+
+#~ msgid "Creates a new unit matching the type parameter and places it at the desired cell position on the game grid."
+#~ msgstr "Vytvoří novou jednotku odpovídající parametru type a umístí ji na požadovanou pozici buňky v herní mřížce."
+
+#~ msgid "Creates a new item and displays it in the inventory."
+#~ msgstr "Vytvoří novou položku a zobrazí ji v inventáři."
+
+#~ msgid "Increases the item count by amount."
+#~ msgstr "Zvýší počet položek o množství."

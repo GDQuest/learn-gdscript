@@ -19,7 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.10.3\n"
 
-
 #: script_checking/error_database.csv
 msgid "error_explanation"
 msgstr ""
@@ -49,16 +48,18 @@ msgid "To access the [code]x[/code] sub-component of the variable, you need to d
 msgstr "若要訪問變數的 [code]x[/code] 子組件，你需要將這個操作放在迴圈的內容區塊內："
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "[code]for cell_position in cell_positions_array:"
 msgstr ""
 "[code]for cell_position in cell_positions_array:\n"
-"    cell_position.x += 1.0[/code]\n"
+"    cell_position.x += 1.0[/code]"
 
 #: script_checking/error_database.csv
 msgid "    cell_position.x += 1.0[/code]"
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "You get this error when you try to assign a value to something that is not a variable."
 msgstr "如果你遇到這個錯誤，很可能是你正在嘗試將值指定給不是變數的東西，這是無法實現的。你只能將值指定給變數。"
 
@@ -79,6 +80,7 @@ msgid "If you see parentheses () on the left side, you might be trying to assign
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
 msgstr "另一個可能性是，你想要在條件判斷中檢查相等性，但錯誤地寫成單個 [code]=[/code] 而不是 [code]==[/code]。"
 
@@ -147,10 +149,11 @@ msgid "1. You used the class name in the class itself."
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
 msgstr ""
 "1. 你在類別內部使用了類別自己。\n"
-"2. 你的程式碼引用了另一個類別，而該類別又引用了這個類別，造成無限循環引用。\n"
+"2. 你的程式碼引用了另一個類別，而該類別又引用了這個類別，造成無限循環引用。"
 
 #: script_checking/error_database.csv
 msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
@@ -253,11 +256,12 @@ msgid "1. You wrote an identifier (variable or function name) in the wrong place
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
 msgstr ""
 "1. 你把識別符（變數或函式名稱）寫錯位置。\n"
 "2. 你寫了像 [code]var[/code], [code]func[/code], [code]for[/code] 或 [code]signal[/code] 這樣的關鍵字，但後面沒有接名稱。\n"
-"3. 你寫了函式定義，但忘記在冒號之前加上括號。\n"
+"3. 你寫了函式定義，但忘記在冒號之前加上括號。"
 
 #: script_checking/error_database.csv
 msgid "3. You wrote a function definition but forgot the parentheses before the colon."
@@ -464,16 +468,18 @@ msgid "There is an issue with the return value of your function. There are two m
 msgstr "你的函式回傳值有問題，這裡有兩個主要情況："
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
 msgstr ""
 "1. 你的函式是無回傳值函式，因此不應該回傳任何值。這包括使用 '-> void' 語法的函式和類別建構子（'_init()'）。\n"
-"2. 你為函式指定了回傳類型，但在所有可能的分支（if、elif 和 else 區塊）或最後並沒有回傳值。\n"
+"2. 你為函式指定了回傳類型，但在所有可能的分支（if、elif 和 else 區塊）或最後並沒有回傳值。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
 msgstr ""
 "1. 你的函式是無回傳值函式，因此不應該回傳任何值。這包括使用 '-> void' 語法的函式和類別建構子（'_init()'）。\n"
-"2. 你為函式指定了回傳類型，但在所有可能的分支（if、elif 和 else 區塊）或最後並沒有回傳值。\n"
+"2. 你為函式指定了回傳類型，但在所有可能的分支（if、elif 和 else 區塊）或最後並沒有回傳值。"
 
 #: script_checking/error_database.csv
 msgid "When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that."
@@ -512,10 +518,11 @@ msgid "The computer reached the end of the line of code, but the line had a synt
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
 msgstr ""
 "系統已經到達程式碼的結尾，但該行存在語法錯誤。\n"
-"最常見的情況是你忘記閉合字串：你有開啟的引號，但忘記加上匹配的閉合引號。\n"
+"最常見的情況是你忘記閉合字串：你有開啟的引號，但忘記加上匹配的閉合引號。"
 
 #: script_checking/error_database.csv
 msgid "Double-check that you are not missing a quote character or that the quote character you used to start the string is the same as the one you used to close the string."
@@ -534,6 +541,7 @@ msgid "Ensure that you don't have a capital letter where you should have a lower
 msgstr "請確保大小寫正確，避免該出現大寫字母的地方用到了小寫字母，或是反之。"
 
 #: course/glossary.csv course/documentation.csv
+#, fuzzy
 msgid "explanation"
 msgstr "迭代"
 
@@ -606,18 +614,22 @@ msgid "Vectors can seem daunting at first because they are pretty abstract, but 
 msgstr "向量一開始看起來可能有些令人生畏，因為它們相當抽象，但如你所見，它們會大大簡化程式碼。"
 
 #: course/glossary.csv
+#, fuzzy
 msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument."
 msgstr "引數是你在呼叫函式時傳遞給函式的值。例如，在呼叫 [code]rotate(0.5)[/code] 時，括號中的值 [code]0.5[/code] 就是引數。"
 
 #: course/glossary.csv
+#, fuzzy
 msgid "A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional."
 msgstr "函式可以接收零個、一个或多個引數。引數可以是必要的，也可以是選擇性的。"
 
 #: course/glossary.csv
+#, fuzzy
 msgid "When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]"
 msgstr "當一個函式接受多個引數時，你可以用逗號將值分開，就像這個函式呼叫：[code]jump(50, 100)[/code]。"
 
 #: course/glossary.csv
+#, fuzzy
 msgid "When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i]."
 msgstr "當[b]呼叫[/b]函式時，我們稱傳遞進括號中的值為 [ i]引數[/b]。"
 
@@ -630,6 +642,7 @@ msgid "[code]func move_to_position(x, y):[/code]"
 msgstr ""
 
 #: course/glossary.csv
+#, fuzzy
 msgid "In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
 msgstr "然而，在寫函式定義時，我們討論的是函式[b]參數（parameters）[/b]。在以下範例中，[code]x[/code] 和 [code]y[/code] 是[b]參數[/b]。"
 
@@ -806,6 +819,7 @@ msgid "The position of the entity on the vertical axis."
 msgstr "該實體在縱軸上的位置。"
 
 #: course/documentation.csv
+#, fuzzy
 msgid " Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false, normalizes the movement."
 msgstr "根據 [code]Node._process[/code] 的 [code]delta[/code]，在該節點的 X 軸上套用本地平移。如果 [code]scaled[/code] 為假，那麼移動會進行正規化。"
 
@@ -827,3 +841,171 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid "If you want to assign a value to a variable, double-check that what you have on the left side of the = sign is a variable and not a function."
+#~ msgstr "如果你想將值指定給變數，請再次確認＝符號左邊的是變數，而不是函數。"
+
+#~ msgid "You also need to ensure the syntax is correct. For example, there shouldn't be parentheses on the left side of the equal sign."
+#~ msgstr "你還需要確保語法正確。例如，等號左邊不應該有括號。"
+
+#~ msgid "In the case of a condition, ensure that you are using two equal signs to check for equality (==)."
+#~ msgstr "在條件判斷中，確保你使用的是兩個等號來檢查是否相等 (==)。"
+
+#~ msgid "This error tells you are missing some parenthesis, a comma, or some value in your export hint."
+#~ msgstr "這個錯誤告訴你在導出提示中缺少了某個括號、逗號或某個值。"
+
+#~ msgid "You need to read the error message and add the missing character or value it requests."
+#~ msgstr "你需要閱讀錯誤訊息，並根據它的要求添加缺少的字符或值。"
+
+#~ msgid "member function"
+#~ msgstr "成員函式"
+
+#~ msgid "member functions"
+#~ msgstr "成員函式"
+
+#~ msgid "member variable"
+#~ msgstr "成員變數"
+
+#~ msgid "member variables"
+#~ msgstr "成員變數"
+
+#~ msgid "parameter"
+#~ msgstr "參數"
+
+#~ msgid "parameters"
+#~ msgstr "參數"
+
+#~ msgid "radian"
+#~ msgstr "弧度"
+
+#~ msgid "radians"
+#~ msgstr "弧度"
+
+#~ msgid "type"
+#~ msgstr "類型"
+
+#~ msgid "types"
+#~ msgstr "類型"
+
+#~ msgid "iterations"
+#~ msgstr "迭代"
+
+#~ msgid "vector"
+#~ msgstr "向量"
+
+#~ msgid "vectors"
+#~ msgstr "向量"
+
+#~ msgid "argument"
+#~ msgstr "引數（argument）"
+
+#~ msgid "arguments"
+#~ msgstr "引數（argument）"
+
+#~ msgid "array"
+#~ msgstr "陣列"
+
+#~ msgid "arrays"
+#~ msgstr "陣列"
+
+#~ msgid "assign"
+#~ msgstr "指派"
+
+#~ msgid "dictionary"
+#~ msgstr "字典"
+
+#~ msgid "dictionaries"
+#~ msgstr "字典"
+
+#~ msgid "for loop"
+#~ msgstr "for 迴圈"
+
+#~ msgid "for loops"
+#~ msgstr "for 迴圈"
+
+#~ msgid "function"
+#~ msgstr "函式"
+
+#~ msgid "functions"
+#~ msgstr "函式"
+
+#~ msgid "increment"
+#~ msgstr "遞增"
+
+#~ msgid "increments"
+#~ msgstr "遞增"
+
+#~ msgid "instruction"
+#~ msgstr "指令"
+
+#~ msgid "instructions"
+#~ msgstr "指令"
+
+#~ msgid "variable"
+#~ msgstr "變數"
+
+#~ msgid "variables"
+#~ msgstr "變數"
+
+#~ msgid "while loop"
+#~ msgstr "while 迴圈"
+
+#~ msgid "while loops"
+#~ msgstr "while 迴圈"
+
+#~ msgid "body"
+#~ msgstr "主體（body）"
+
+#~ msgid "return"
+#~ msgstr "回傳（return）"
+
+#~ msgid "library"
+#~ msgstr "函式庫（library）"
+
+#~ msgid "libraries"
+#~ msgstr "函式庫（libraries）"
+
+#~ msgid "sprite"
+#~ msgstr "精靈（sprite）"
+
+#~ msgid "sprites"
+#~ msgstr "精靈（sprites）"
+
+#~ msgid "The cell position of the robot on the board. [code]Vector2(0, 0)[/code] is the square cell in the top left of the board."
+#~ msgstr "機器人在棋盤上所在的儲存格位置。[code]Vector2(0, 0)[/code] 為棋盤左上角的正方形儲存格。"
+
+#~ msgid "Creates a list of numbers from [code]0[/code] to [code]length - 1[/code]."
+#~ msgstr "創建從 [code]0[/code] 到 [code]length - 1[/code] 之間的數字清單。"
+
+#~ msgid "Orders the robot to play an animation."
+#~ msgstr "命令機器人播放動畫。"
+
+#~ msgid "Selects units in the cell coordinates passed as the function's argument."
+#~ msgstr "選擇作為函式參數傳入的儲存格座標上的單位。"
+
+#~ msgid "Queues a move animation towards the target cell."
+#~ msgstr "將移動到目標儲存格的動畫加入佇列。"
+
+#~ msgid "Adds the value passed as an argument at the back of the array."
+#~ msgstr "將作為參數傳入的值新增到該陣列的末尾。"
+
+#~ msgid "Removes the first value from the array and returns it."
+#~ msgstr "刪除該陣列中的第一個值，並將其返回。"
+
+#~ msgid "Removes the last value from the array and returns it."
+#~ msgstr "刪除該陣列中的最後一個值，並將其返回。"
+
+#~ msgid "Returns the argument converted into a [code]String[/code]. Works with the majority of value types."
+#~ msgstr "返回轉換為 [code]String[/code] 後的參數。支援大部分數值型別。"
+
+#~ msgid "Returns the argument converted into an [code]int[/code] (whole number) [i]if possible[/i]. Supports converting decimal numbers, strings, and booleans. Useful to convert player text input into numbers."
+#~ msgstr "[b]如果可能[/b]，返回轉換為 [code]int[/code]（整數）後的參數。支援轉換小數、字串、布林值。可用於將玩家輸入的文字轉換為數位。"
+
+#~ msgid "Creates a new unit matching the type parameter and places it at the desired cell position on the game grid."
+#~ msgstr "新建一個單位，與類型參數相匹配，放置於遊戲網格內所需的儲存格位置上。"
+
+#~ msgid "Creates a new item and displays it in the inventory."
+#~ msgstr "新建一個道具並在背包中顯示。"
+
+#~ msgid "Increases the item count by amount."
+#~ msgstr "增加指定數量的道具。"

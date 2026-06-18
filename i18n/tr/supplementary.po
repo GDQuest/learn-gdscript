@@ -20,7 +20,6 @@ msgstr ""
 "X-Generator: Weblate 5.16-dev\n"
 "Generated-By: Babel 2.10.3\n"
 
-
 #: script_checking/error_database.csv
 msgid "error_explanation"
 msgstr ""
@@ -50,10 +49,11 @@ msgid "To access the [code]x[/code] sub-component of the variable, you need to d
 msgstr "Bir değişkenin [code]x[/code] alt-elemanına erişmek için, bunu döngünün içerisinde aşağıdaki gibi kullanmalısınız:"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "[code]for cell_position in cell_positions_array:"
 msgstr ""
 "[code]for cell_position in cell_positions_array: # \"for hücre_konumu in hücre_konumları_disizi\" anlamında\n"
-"    cell_position.x += 1.0[/code]\n"
+"    cell_position.x += 1.0[/code]"
 
 #: script_checking/error_database.csv
 msgid "    cell_position.x += 1.0[/code]"
@@ -104,16 +104,18 @@ msgid "Look at what you are trying to change. If it is a constant (defined with 
 msgstr "Neyi değiştirmeye çalıştığınıza bir bakın. Eğer bu bir sabitse ([code]const[/code] anahtar kelimesiyle tanımlanan, veya Godot'nun yerleşik parçası), iki seçeneğiniz vardır:"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "1. If the value should never change, or it comes from Godot, remove the line that tries to change it."
 msgstr ""
 "1. Eğer değer asla değişmemeliyse, veya Godot'dan geliyorsa, onu değiştirmeye çalışan satırı kaldırın.\n"
-"2. Eğer değerin değişmesi gerekiyorsa, onu ilk oluşturduğunuzda [code]const[/code] yerine [code]var[/code] kullanın.\n"
+"2. Eğer değerin değişmesi gerekiyorsa, onu ilk oluşturduğunuzda [code]const[/code] yerine [code]var[/code] kullanın."
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
 msgstr ""
 "1. Eğer değer asla değişmemeliyse, veya Godot'dan geliyorsa, onu değiştirmeye çalışan satırı kaldırın.\n"
-"2. Eğer değerin değişmesi gerekiyorsa, onu ilk oluşturduğunuzda [code]const[/code] yerine [code]var[/code] kullanın.\n"
+"2. Eğer değerin değişmesi gerekiyorsa, onu ilk oluşturduğunuzda [code]const[/code] yerine [code]var[/code] kullanın."
 
 #: script_checking/error_database.csv
 msgid "You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line."
@@ -152,10 +154,11 @@ msgid "1. You used the class name in the class itself."
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
 msgstr ""
 "1. Sınıfın ismini, sınıfın kendi içinde kullanmışsınızdır.\n"
-"2. Sınıfın içinde kullandığınız başka bir sınıf, tekrardan bu sınıfa başvuru yapıyordur, bu şekilde sonu olmayan bir başvuru döngüsüne sebep oluyordur.\n"
+"2. Sınıfın içinde kullandığınız başka bir sınıf, tekrardan bu sınıfa başvuru yapıyordur, bu şekilde sonu olmayan bir başvuru döngüsüne sebep oluyordur."
 
 #: script_checking/error_database.csv
 msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
@@ -258,11 +261,12 @@ msgid "1. You wrote an identifier (variable or function name) in the wrong place
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
 msgstr ""
 "1. Bir tanımlayıcıyı (değişken ya da fonksiyon ismi) yanlış yerde kullandınız.\n"
 "2. [code]var[/code], [code]func[/code], [code]for[/code], ya da [code]signal[/code] gibi bir anahtar kelime yazdınız, ama bunun devamına bir isim eklemediniz.\n"
-"3. Bir fonksiyon tanımı yazdınız ama iki nokta üst üste 'den önceki parantezleri eklemediniz.\n"
+"3. Bir fonksiyon tanımı yazdınız ama iki nokta üst üste 'den önceki parantezleri eklemediniz."
 
 #: script_checking/error_database.csv
 msgid "3. You wrote a function definition but forgot the parentheses before the colon."
@@ -469,16 +473,18 @@ msgid "There is an issue with the return value of your function. There are two m
 msgstr "Fonksiyonunuzun dönüş değerinde bir sorun var. Burada iki durum söz konusu:"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
 msgstr ""
 "1. Fonksiyonunuz bir boş (void) fonksiyondur ve herhangi bir değer döndürmemelidir. Bu tip fonksiyonlar, '-> void' söz dizimiyle tanımlanan fonksiyonlar ve sınıf yapıcılarıdır ('_init()').\n"
-"2. Fonksiyonunuz için bir dönüş tipi tanımladınız, ama gerekli tüm kollardan (if, elif ve else kalıpları) ya da en son satırdan bir değer geri döndürmüyorsunuz.\n"
+"2. Fonksiyonunuz için bir dönüş tipi tanımladınız, ama gerekli tüm kollardan (if, elif ve else kalıpları) ya da en son satırdan bir değer geri döndürmüyorsunuz."
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
 msgstr ""
 "1. Fonksiyonunuz bir boş (void) fonksiyondur ve herhangi bir değer döndürmemelidir. Bu tip fonksiyonlar, '-> void' söz dizimiyle tanımlanan fonksiyonlar ve sınıf yapıcılarıdır ('_init()').\n"
-"2. Fonksiyonunuz için bir dönüş tipi tanımladınız, ama gerekli tüm kollardan (if, elif ve else kalıpları) ya da en son satırdan bir değer geri döndürmüyorsunuz.\n"
+"2. Fonksiyonunuz için bir dönüş tipi tanımladınız, ama gerekli tüm kollardan (if, elif ve else kalıpları) ya da en son satırdan bir değer geri döndürmüyorsunuz."
 
 #: script_checking/error_database.csv
 msgid "When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that."
@@ -517,10 +523,11 @@ msgid "The computer reached the end of the line of code, but the line had a synt
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
 msgstr ""
 "Bilgisayar, kodun son satırına ulaştı, ama bu satırda bir yazım hatası var.\n"
-"En yaygın durum, yukarıda bir yerlerde bir dizeyi kapatmayı unutmanızdır: başlangıç tırnak işaretini koyarsınız, ama karşılık gelen kapanış tırnağını unutursunuz.\n"
+"En yaygın durum, yukarıda bir yerlerde bir dizeyi kapatmayı unutmanızdır: başlangıç tırnak işaretini koyarsınız, ama karşılık gelen kapanış tırnağını unutursunuz."
 
 #: script_checking/error_database.csv
 msgid "Double-check that you are not missing a quote character or that the quote character you used to start the string is the same as the one you used to close the string."
@@ -539,6 +546,7 @@ msgid "Ensure that you don't have a capital letter where you should have a lower
 msgstr "Küçük harf kullanmanız gereken yerde büyük harf kullanmadığınıza emin olun, ya da tam tersi."
 
 #: course/glossary.csv course/documentation.csv
+#, fuzzy
 msgid "explanation"
 msgstr "yineleme"
 
@@ -811,6 +819,7 @@ msgid "The position of the entity on the vertical axis."
 msgstr "Varlığın dikey eksen üzerindeki konumu."
 
 #: course/documentation.csv
+#, fuzzy
 msgid " Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false, normalizes the movement."
 msgstr "[code]Node._process[/code]'in [code]delta[/code]'sını temel alarak, düğümün X eksenine yerel bir yer değiştirme uygular. [code]scaled[/code] (ölçekli) değeri false ise, hareketi normalize eder."
 
@@ -832,3 +841,174 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid "This error tells you are missing some parenthesis, a comma, or some value in your export hint."
+#~ msgstr "Bu hata, birkaç parantezi, bir virgülü, ya da dışa aktarım (export) ipucundaki bir değeri unuttuğunuzu söyler."
+
+#~ msgid "You need to read the error message and add the missing character or value it requests."
+#~ msgstr "Hata mesajını okumalı ve size söylediği eksik olan karakteri ya da değeri eklemelisiniz."
+
+#~ msgid "member function"
+#~ msgstr "üye fonksiyon"
+
+#~ msgid "member functions"
+#~ msgstr "üye fonksiyonlar"
+
+#~ msgid "member variable"
+#~ msgstr "üye değişken"
+
+#~ msgid "member variables"
+#~ msgstr "üye değişkenler"
+
+#~ msgid "parameter"
+#~ msgstr "alınan değişken, parametre"
+
+#~ msgid "parameters"
+#~ msgstr "alınan değişkenler, parametreler"
+
+#~ msgid "radian"
+#~ msgstr "radyan"
+
+#~ msgid "radians"
+#~ msgstr "radyan"
+
+#~ msgid "type"
+#~ msgstr "tip"
+
+#~ msgid "types"
+#~ msgstr "tipler"
+
+#~ msgid "iterations"
+#~ msgstr "yinelemeler"
+
+#~ msgid "vector"
+#~ msgstr "vektör"
+
+#~ msgid "vectors"
+#~ msgstr "vektörler"
+
+#~ msgid "argument"
+#~ msgstr "girilen değişken, girdi değişkeni, argüman"
+
+#~ msgid "arguments"
+#~ msgstr "girilen değişkenler, girdi değişkenleri, argümanlar"
+
+#~ msgid "array"
+#~ msgstr "dizi"
+
+#~ msgid "arrays"
+#~ msgstr "diziler"
+
+#~ msgid "assign"
+#~ msgstr "atama"
+
+#~ msgid "dictionary"
+#~ msgstr "sözlük"
+
+#~ msgid "dictionaries"
+#~ msgstr "sözlükler"
+
+#~ msgid "for loop"
+#~ msgstr "for döngüsü"
+
+#~ msgid "for loops"
+#~ msgstr "for döngüleri"
+
+#~ msgid "function"
+#~ msgstr "fonksiyon"
+
+#~ msgid "functions"
+#~ msgstr "fonksiyonlar"
+
+#~ msgid "increment"
+#~ msgstr "artış"
+
+#~ msgid "increments"
+#~ msgstr "artışlar"
+
+#~ msgid "instruction"
+#~ msgstr "talimat"
+
+#~ msgid "instructions"
+#~ msgstr "talimatlar"
+
+#~ msgid "variable"
+#~ msgstr "değişken"
+
+#~ msgid "variables"
+#~ msgstr "değişkenler"
+
+#~ msgid "while loop"
+#~ msgstr "while döngüsü"
+
+#~ msgid "while loops"
+#~ msgstr "while döngüleri"
+
+#~ msgid "body"
+#~ msgstr "gövde"
+
+#~ msgid "return"
+#~ msgstr "geri döndürme (return)"
+
+#~ msgid "library"
+#~ msgstr "kütüphane"
+
+#~ msgid "libraries"
+#~ msgstr "kütüphaneler"
+
+#~ msgid "sprite"
+#~ msgstr "grafik öğe"
+
+#~ msgid "sprites"
+#~ msgstr "grafik öğeler"
+
+#~ msgid "The cell position of the robot on the board. [code]Vector2(0, 0)[/code] is the square cell in the top left of the board."
+#~ msgstr "Robotun tahta üzerindeki hücre konumu. [code]Vector2(0, 0)[/code], tahtanın sol üst köşesindeki kare hücredir."
+
+#~ msgid "Creates a list of numbers from [code]0[/code] to [code]length - 1[/code]."
+#~ msgstr "[code]0[/code] ile [code]length- 1[/code] (uzunluk - 1) arasında bir sayı listesi oluşturur."
+
+#~ msgid "Orders the robot to play an animation."
+#~ msgstr "Robota bir animasyon oynatmasını emreder."
+
+#~ msgid "Selects units in the cell coordinates passed as the function's argument."
+#~ msgstr "Fonksiyona girdi değişkeni olarak gönderilen hücre koordinatlarındaki birimleri seçer."
+
+#~ msgid "Queues a move animation towards the target cell."
+#~ msgstr "Hedef hücreye doğru bir hareket animasyonunu sıraya ekler."
+
+#~ msgid "Adds the value passed as an argument at the back of the array."
+#~ msgstr "Girdi değişkeni olarak gönderilen değeri, dizinin (array) sonuna ekler."
+
+#~ msgid "Removes the first value from the array and returns it."
+#~ msgstr "Dizideki ilk değeri diziden çıkarır ve bu değeri geri döndürür."
+
+#~ msgid "Removes the last value from the array and returns it."
+#~ msgstr "Dizideki son değeri diziden çıkarır ve bu değeri geri döndürür."
+
+#~ msgid "Returns the argument converted into a [code]String[/code]. Works with the majority of value types."
+#~ msgstr "Girdi değişkenini [code]String[/code] (dize) haline dönüştürüp geri döndürür. Değer tiplerinin çoğunluğunda işe yarar."
+
+#~ msgid "Returns the argument converted into an [code]int[/code] (whole number) [i]if possible[/i]. Supports converting decimal numbers, strings, and booleans. Useful to convert player text input into numbers."
+#~ msgstr "Girdi değişkenini, [i]eğer mümkünse[/i], bir [code]int[/code] (tam sayı) olarak dönüştürüp geri döndürür. Ondalık sayıları, dizeleri, ve mantıksalları dönüştürmeyi destekler. Oyuncudan gelen yazı girdilerini sayılara dönüştürmek için kullanışlıdır."
+
+#~ msgid "Creates a new unit matching the type parameter and places it at the desired cell position on the game grid."
+#~ msgstr "Girilen birim tipine uygun yeni bir birim oluşturur ve bunu oyun ızgarası (grid) üzerinde istenilen hücre konumuna yerleştirir."
+
+#~ msgid "Creates a new item and displays it in the inventory."
+#~ msgstr "Yeni bir öğe oluşturur ve bunu envanter içinde gösterir."
+
+#~ msgid "Increases the item count by amount."
+#~ msgstr "Öğe sayısını girilen değer kadar arttırır."
+
+#~ msgid "Realigns the train track with the path. Select a train track in the tracks array by index to pass it as an argument."
+#~ msgstr "Tren rayını yol ile yeniden hizalar. Girdi değişkeni olarak geçirmek için, raylar dizisindeki bir tren rayını indeksine göre seçin."
+
+#~ msgid "If you want to assign a value to a variable, double-check that what you have on the left side of the = sign is a variable and not a function."
+#~ msgstr "Eğer bir değişkene değer atamak istiyorsanız, \"=\" işaretinin sol tarafına bir fonksiyon (ya da değer) yazmak yerine bir değişken ismi yazdığınızı iki kere kontrol etmelisiniz."
+
+#~ msgid "You also need to ensure the syntax is correct. For example, there shouldn't be parentheses on the left side of the equal sign."
+#~ msgstr "Ayrıca doğru şekilde yazdığınızdan da emin olmalısınız. Örneğin, eşitliğin sol tarafında parantezler olmamalıdır."
+
+#~ msgid "In the case of a condition, ensure that you are using two equal signs to check for equality (==)."
+#~ msgstr "Bir koşul yazıyorsanız, iki tane eşittir işareti (==) kullandığınızdan emin olmalısınız."

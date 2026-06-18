@@ -1,6 +1,7 @@
 @tool
 extends EditorPlugin
 
+
 const POT_FILES_PATH := "internationalization/locale/translations_pot_files"
 const COURSE_POT_PATH := "res://i18n/course.pot"
 
@@ -24,6 +25,7 @@ var _export_plugin := EXPORT_STEP.new()
 var _current_pots: PackedStringArray
 var _slipstream_running := false
 var _building_translated_running := false
+var _target_path := ""
 
 
 func _enter_tree() -> void:
@@ -52,9 +54,12 @@ func _exit_tree() -> void:
 
 
 func _generate_all_pot_files() -> void:
+	_target_path = ProjectSettings.globalize_path("res://i18n")
+	
 	await _generate_course_pot()
 	await _generate_application_pot()
 	await _generate_supplemantary_pots()
+	await _slipstream_and_clean()
 
 
 # ⚠ Only use if you know what you're doing ⚠
@@ -64,7 +69,7 @@ func _slipstream_and_clean() -> void:
 
 
 func _wipe_old_translations() -> void:
-	var global_base_dir := ProjectSettings.globalize_path("res://i18n")
+	var global_base_dir := _target_path
 	
 	for lang in DirAccess.get_directories_at(global_base_dir):
 		if lang == "images":
@@ -120,7 +125,7 @@ func _build_translated_lessons() -> void:
 
 
 func _slipstream_existing_translations() -> void:
-	var global_base_dir := ProjectSettings.globalize_path("res://i18n")
+	var global_base_dir := _target_path
 	
 	var global_course := ProjectSettings.globalize_path(COURSE_POT_PATH)
 	var global_app := ProjectSettings.globalize_path(APPLICATION_POT_PATH)
@@ -147,9 +152,9 @@ func _slipstream_existing_translations() -> void:
 			return "%s/%s/%s" % [global_base_dir, lang, file]
 		)
 		
-		var temp_combined := "%s/%s/combined.po" % [global_base_dir, lang]
-		OS.execute("msgcat", ["--no-wrap", "--use-first"] + sources + ["-o", temp_combined])
-		OS.execute("msgmerge", ["--no-wrap", temp_combined, template, "-o", target])
+		var temp_combined_course := "%s/%s/combined_course.po" % [global_base_dir, lang]
+		OS.execute("msgcat", ["--no-wrap", "--use-first"] + sources + ["-o", temp_combined_course])
+		OS.execute("msgmerge", ["--no-wrap", temp_combined_course, template, "-o", target])
 		
 		var global_og_lang_app := "%s/%s/application.po" % [global_base_dir, lang]
 		OS.execute("msgmerge", ["--no-wrap", "-o", global_lang_app, global_og_lang_app, global_app])
@@ -177,8 +182,9 @@ func _slipstream_existing_translations() -> void:
 		template = global_supp
 		target = global_lang_supp
 		
-		OS.execute("msgcat", ["--no-wrap", "--use-first"] + sources + ["-o", temp_combined])
-		OS.execute("msgmerge", ["--no-wrap", temp_combined, template, "-o", target])
+		var temp_combined_doc := "%s/%s/combined_docs.po" % [global_base_dir, lang]
+		OS.execute("msgcat", ["--no-wrap", "--use-first"] + sources + ["-o", temp_combined_doc])
+		OS.execute("msgmerge", ["--no-wrap", temp_combined_doc, template, "-o", target])
 	
 	print("Done")
 
