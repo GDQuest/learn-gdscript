@@ -24,7 +24,7 @@ const LOCALE_TO_LABEL := {
 	"da": "Dansk",
 }
 
-const COMPLETENESS_THRESHOLD := 0.85
+const COMPLETENESS_THRESHOLD := 0.80
 
 var overall_tr_progress := { "en": 1.0 }
 var lesson_tr_data := {}
