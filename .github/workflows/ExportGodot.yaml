@@ -11,6 +11,9 @@ on:
       - release
       - staging
 
+permissions:
+  contents: write
+
 env:
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
   ITCHIO_USERNAME: ${{ secrets.ITCHIO_USERNAME }}
