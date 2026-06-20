@@ -103,7 +103,7 @@ jobs:
           retention-days: ${{ matrix.platform == 'osx' && 30 || 90 }}
 
       - name: Upload desktop builds to GitHub Releases
-        if: matrix.release_tag != ''
+        if: matrix.release_tag != '' && startsWith(github.ref, 'refs/tags/')
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
