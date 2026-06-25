@@ -212,8 +212,11 @@ class QuizData:
 
 
 static func get_quiz_id(quiz: BBCodeParser.ParseNode) -> String:
-	var quiz_attributes_question: String = quiz.attributes.get("question", "")
-	return _to_snake_case(quiz_attributes_question)
+	var quiz_attributes_id: String = quiz.attributes.get("en_id", "")
+	# should only be available in translated lessons
+	if not quiz_attributes_id:
+		quiz_attributes_id = quiz.attributes.get("question", "")
+	return _to_snake_case(quiz_attributes_id)
 
 
 static func get_quiz_data(quiz: BBCodeParser.ParseNode) -> QuizData:

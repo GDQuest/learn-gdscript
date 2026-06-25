@@ -24,7 +24,7 @@ const LOCALE_TO_LABEL := {
 	"da": "Dansk",
 }
 
-const COMPLETENESS_THRESHOLD := 0.85
+const COMPLETENESS_THRESHOLD := 0.8
 
 var overall_tr_progress := { "en": 1.0 }
 var lesson_tr_data := {}
@@ -47,13 +47,22 @@ func _update_language_completeness() -> void:
 		var meta_file := "res://course/%s/lesson.meta" % lesson
 		if FileAccess.file_exists(meta_file):
 			var meta_text := FileAccess.open(meta_file, FileAccess.READ).get_as_text()
-			lesson_tr_data["res://course/%s/lesson.bbcode" % [lesson]] = JSON.parse_string(meta_text)
+			var lesson_data: Dictionary = JSON.parse_string(meta_text)
+			lesson_tr_data["res://course/%s/lesson.bbcode" % [lesson]] = lesson_data
 	
+	var total := 0
+	for lesson in lesson_tr_data:
+		@warning_ignore("unsafe_method_access")
+		total += lesson_tr_data[lesson].values()[0]["total"]
+	
+	var counts := {}
 	for lesson in lesson_tr_data:
 		for lang in lesson_tr_data[lesson]:
-			var percent: float = lesson_tr_data[lesson][lang]["percent"]
-			var current: float = overall_tr_progress.get_or_add(lang, 0.0)
-			overall_tr_progress[lang] = current + percent/lesson_tr_data.size()
+			var current: int = counts.get_or_add(lang, 0)
+			counts[lang] = current + lesson_tr_data[lesson][lang]["count"]
+	
+	for lang in counts:
+		overall_tr_progress[lang] = counts[lang] / total
 
 
 func get_available_languages() -> Array:

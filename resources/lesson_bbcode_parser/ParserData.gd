@@ -38,7 +38,7 @@ var TAG_DEFINITIONS := {
 	Tag.TITLE: TagDefinition.new("title", true, false, [Tag.LESSON], [], [], []),
 	Tag.VISUAL: TagDefinition.new("visual", false, true, [Tag.LESSON], ["path"], [], []),
 	Tag.NOTE: TagDefinition.new("note", true, false, [Tag.LESSON], [], ["title"], []),
-	Tag.QUIZ_CHOICE: TagDefinition.new("quiz_choice", true, false, [Tag.LESSON], ["question"], ["multiple", "shuffle"], [Tag.OPTION, Tag.EXPLANATION]),
+	Tag.QUIZ_CHOICE: TagDefinition.new("quiz_choice", true, false, [Tag.LESSON], ["question"], ["multiple", "shuffle", "en_id"], [Tag.OPTION, Tag.EXPLANATION]),
 	Tag.QUIZ_INPUT: TagDefinition.new("quiz_input", true, false, [Tag.LESSON], ["question", "answer"], [], [Tag.EXPLANATION]),
 	Tag.OPTION: TagDefinition.new("option", true, false, [Tag.QUIZ_CHOICE], [], ["correct"], []),
 	Tag.HINT: TagDefinition.new("hint", true, false, [Tag.QUIZ_CHOICE, Tag.QUIZ_INPUT, Tag.PRACTICE], [], [], []),

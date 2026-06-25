@@ -39,6 +39,10 @@ func _init() -> void:
 			navigate_to.call_deferred(initial_url)
 
 
+func _ready() -> void:
+	TranslationManager.translation_changed.connect(_on_translation_changed)
+
+
 func _parse_arguments() -> void:
 	arguments = { }
 	for argument in OS.get_cmdline_args():
@@ -268,6 +272,11 @@ func set_current_url(_new_url: String) -> void:
 
 func get_current_url() -> String:
 	return get_history(1)
+
+
+func _on_translation_changed() -> void:
+	_lesson_cache.clear()
+
 
 ###############################################################################
 #

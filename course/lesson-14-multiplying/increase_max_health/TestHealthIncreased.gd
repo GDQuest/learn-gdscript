@@ -36,11 +36,11 @@ func test_multiplication_is_used_to_increase_max_health() -> String:
 	if not GDExpr.suite(
 		GDExpr.any_of(
 			# max_health *= 1.1
-			not GDExpr.suite(GDExpr.assignment(GDExpr.identifier("max_health"), GDExpr.literal(1.1), GDAssignmentNode.Operation.OP_MULTIPLICATION)).matches(level_up_function),
+			GDExpr.suite(GDExpr.assignment(GDExpr.identifier("max_health"), GDExpr.literal(1.1), GDAssignmentNode.Operation.OP_MULTIPLICATION)),
 			# max_health = max_health * 1.1
-			not GDExpr.suite(GDExpr.assignment(GDExpr.identifier("max_health"), GDExpr.multiply(GDExpr.identifier("max_health"), GDExpr.literal(1.1)))).matches(level_up_function)
+			GDExpr.suite(GDExpr.assignment(GDExpr.identifier("max_health"), GDExpr.multiply(GDExpr.identifier("max_health"), GDExpr.literal(1.1))))
 		)
-	):
+	).matches(level_up_function):
 		tr("It looks like max_health isn't increasing exponentially. Did you multiply it by a value greater than 1?")
 	return ""
 
@@ -57,4 +57,3 @@ func test_max_health_is_the_correct_value() -> String:
 	if is_equal_approx(max_health_value, 121):
 		return ""
 	return tr("Max health variable's value is %s; It should be 121 after levelling up twice.") % max_health_value
-

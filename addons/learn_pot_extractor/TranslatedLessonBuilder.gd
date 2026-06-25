@@ -59,36 +59,35 @@ static func _build_note_tag(str_builder: Array[String], note: BBCodeParser.Parse
 	for i in note_lines.size():
 		var line: String = note_lines[i]
 		str_builder.append(_tr(line, tr_blocks, translation_report))
-		if i < note_lines.size()-1:
-			str_builder.append("")
 	
 	str_builder.append_array(["[/note]", ""])
 
 
 static func _build_quiz_choice_tag(str_builder: Array[String], quiz: BBCodeParser.ParseNode, tr_blocks: Array[Dictionary], translation_report: Dictionary) -> void:
 	var quiz_data := BBCodeUtils.get_quiz_data(quiz)
-	str_builder.append('[quiz_choice question="%s" multiple="%s" shuffle="%s"]' % [_tr(quiz_data.question.replace('"', r'\"'), tr_blocks, translation_report), quiz_data.multiple, quiz_data.shuffle])
+	str_builder.append('[quiz_choice question="%s" multiple="%s" shuffle="%s" en_id="%s"]' % [
+		_tr(quiz_data.question.replace('"', r'\"'), tr_blocks, translation_report),
+		quiz_data.multiple, 
+		quiz_data.shuffle,
+		BBCodeUtils.get_quiz_id(quiz)
+	])
 	
 	var quiz_content_lines := _get_lines(quiz_data.content)
 	for i in quiz_content_lines.size():
 		var line := quiz_content_lines[i]
 		str_builder.append(_tr(line, tr_blocks, translation_report))
-		if i < quiz_content_lines.size()-1:
-			str_builder.append("")
 	
 	for answer: String in quiz_data.answers:
 		str_builder.append("[option%s]%s[/option]" % [" correct" if quiz_data.valid_answers.has(answer) else "", _tr(answer, tr_blocks, translation_report)])
 	
 	var explanation_lines := _get_lines(quiz_data.explanation)
-	if explanation_lines.size() == 0:
+	if explanation_lines.size() == 1:
 		str_builder.append("[explanation]%s[/explanation]" % [_tr(explanation_lines[0], tr_blocks, translation_report)])
 	else:
 		str_builder.append("[explanation]")
 		for i in explanation_lines.size():
 			var line := explanation_lines[i]
 			str_builder.append(_tr(line, tr_blocks, translation_report))
-			if i < explanation_lines.size()-1:
-				str_builder.append("")
 		str_builder.append("[/explanation]")
 	
 	str_builder.append_array(["[/quiz_choice]", ""])
@@ -100,8 +99,6 @@ static func _build_text(str_builder: Array[String], text_node: BBCodeParser.Pars
 	for i in lines.size():
 		var line := lines[i]
 		str_builder.append(_tr(SHARED.fix_glossary_entries(line, []), tr_blocks, translation_report))
-		if i < lines.size()-1:
-			str_builder.append("")
 	str_builder.append("")
 
 
@@ -116,8 +113,6 @@ static func _build_practice_tag(str_builder: Array[String], practice: BBCodePars
 		for i in description_lines.size():
 			var line := description_lines[i]
 			str_builder.append(_tr(line, tr_blocks, translation_report))
-			if i < description_lines.size()-1:
-				str_builder.append("")
 		str_builder.append("[/description]")
 	
 	var goal_lines := _get_lines(BBCodeUtils.get_practice_goal(practice))
@@ -128,8 +123,6 @@ static func _build_practice_tag(str_builder: Array[String], practice: BBCodePars
 		for i in goal_lines.size():
 			var line := goal_lines[i]
 			str_builder.append(_tr(line, tr_blocks, translation_report))
-			if i < goal_lines.size()-1:
-				str_builder.append("")
 		str_builder.append("[/goal]")
 	
 	var code_lines := BBCodeUtils.get_practice_starting_code(practice).split("\n")
@@ -157,6 +150,8 @@ static func _build_practice_tag(str_builder: Array[String], practice: BBCodePars
 
 
 static func _tr(original: String, tr_blocks: Array[Dictionary], translation_report: Dictionary) -> String:
+	if not original:
+		return original
 	var idx := tr_blocks.find_custom(func(block: Dictionary) -> bool:
 		return block.id == original
 	)
@@ -168,30 +163,11 @@ static func _tr(original: String, tr_blocks: Array[Dictionary], translation_repo
 
 
 static func _get_lines(text_block: String) -> PackedStringArray:
-	var raw_lines := text_block.split("\n", false)
+	var raw_lines := text_block.split("\n", true)
 	var ret := PackedStringArray()
 	var current_line := ""
 	var i := 0
 	while i < raw_lines.size():
-		if "[code]" in raw_lines[i] and not "[/code]" in raw_lines[i]:
-			current_line = raw_lines[i]
-			i += 1
-			while not "[/code]" in raw_lines[i]:
-				current_line += "\n" + raw_lines[i]
-				i += 1
-			current_line += "\n" + raw_lines[i]
-			ret.push_back(current_line)
-			i += 1
-			continue
-		if raw_lines[i].begins_with("- "):
-			current_line = raw_lines[i]
-			i += 1
-			while i < raw_lines.size() and raw_lines[i].begins_with("- "):
-				current_line += "\n" + raw_lines[i]
-				i += 1
-			ret.push_back(current_line)
-			continue
-		
 		ret.push_back(raw_lines[i])
 		i += 1
 	return ret
