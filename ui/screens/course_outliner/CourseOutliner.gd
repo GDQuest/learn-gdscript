@@ -67,7 +67,7 @@ func _update_outliner_index() -> void:
 		)
 
 		var completion := _calculate_lesson_completion(lesson_data, lesson_progress)
-		_lesson_list.add_item(lesson_index, BBCodeUtils.get_lesson_title(lesson_data), completion)
+		_lesson_list.add_item(lesson_data, lesson_index, BBCodeUtils.get_lesson_title(lesson_data), completion)
 
 		if not _last_selected_lesson.is_empty() and lesson_data.bbcode_path == _last_selected_lesson:
 			_reselect_index = lesson_index

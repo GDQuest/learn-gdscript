@@ -13,6 +13,7 @@ const VALUE_COLOR_PASSED := Color(0.239216, 1, 0.431373)
 @export var _goto_lesson_button: Button
 @export var _translation_stats_block: Control
 @export var _translation_stats_value: Label
+@export var _contributions_link: RichTextLabel
 
 var course_index: CourseIndex:
 	set = set_course_index
@@ -28,7 +29,6 @@ func _ready() -> void:
 	_update_visuals()
 
 	_goto_lesson_button.pressed.connect(_on_goto_lesson_pressed)
-	_goto_lesson_button.grab_focus()
 
 
 func set_lesson(value: BBCodeParser.ParseNode) -> void:
@@ -65,10 +65,17 @@ func _update_visuals() -> void:
 	_title_label.text = BBCodeUtils.get_lesson_title(lesson)
 	if TranslationManager.current_language == "en":
 		_translation_stats_value.text = "100%"
+		_goto_lesson_button.disabled = false
+		_goto_lesson_button.grab_focus()
 	else:
 		var translation_percentage: float = TranslationManager.lesson_tr_data[lesson.bbcode_path][TranslationManager.current_language]["percent"]
 		_translation_stats_value.text = "%d%%" % [floori(translation_percentage * 100)]
-
+		_contributions_link.visible = translation_percentage < 1.0
+		_contributions_link.meta_clicked.connect(_on_meta_clicked)
+		_goto_lesson_button.disabled = translation_percentage < 1.0
+		if translation_percentage >= 1.0:
+			_goto_lesson_button.grab_focus()
+	
 	var has_done_reading := false
 	_reading_stats_icon.texture = VALUE_CHECK_NONE
 	_reading_stats_icon.modulate = VALUE_COLOR_NONE
@@ -99,6 +106,13 @@ func _update_visuals() -> void:
 		_goto_lesson_button.text = tr("Continue Lesson")
 	else:
 		_goto_lesson_button.text = tr("Start Lesson")
+
+
+func _on_meta_clicked(data) -> void:
+	if typeof(data) == TYPE_STRING:
+		var string_data: String = data
+		if string_data.begins_with("https://"):
+			OS.shell_open(string_data)
 
 
 func _on_goto_lesson_pressed() -> void:

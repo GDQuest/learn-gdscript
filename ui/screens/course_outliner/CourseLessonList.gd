@@ -14,7 +14,7 @@ func _ready() -> void:
 	_scroll_container.grab_focus()
 
 
-func add_item(lesson_index: int, lesson_title: String, completion: int) -> void:
+func add_item(lesson: BBCodeParser.ParseNode, lesson_index: int, lesson_title: String, completion: int) -> void:
 	var item_node := CourseLessonItemScene.instantiate() as CourseLessonItem
 	item_node.lesson_index = lesson_index
 	item_node.lesson_title = lesson_title
@@ -22,6 +22,11 @@ func add_item(lesson_index: int, lesson_title: String, completion: int) -> void:
 
 	_lesson_items.add_child(item_node)
 	item_node.selected.connect(_on_item_selected.bind(lesson_index))
+	
+	if TranslationManager.current_language != "en":
+		var completeness := TranslationManager.get_translation_completeness(lesson.bbcode_path)
+		if completeness < 1.0:
+			item_node.modulate = Color(0.33, 0.33, 0.33, 1.0)
 
 
 func clear() -> void:

@@ -88,6 +88,13 @@ func get_available_languages() -> Array:
 	return languages
 
 
+func get_translation_completeness(lesson_path: String) -> float:
+	if not lesson_path in lesson_tr_data:
+		return 0.0
+	var lang_data: Dictionary = (lesson_tr_data[lesson_path] as Dictionary).get(current_language, {})
+	return lang_data.get("count", 0.0) / lang_data.get("total", 1.0)
+
+
 func set_language(language_code: String) -> void:
 	if current_language == language_code:
 		return

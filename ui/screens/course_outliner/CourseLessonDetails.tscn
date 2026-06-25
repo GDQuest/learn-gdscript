@@ -5,7 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://cguhet6fdpmse" path="res://ui/theme/styles/outliner_details_background.tres" id="6"]
 [ext_resource type="Texture2D" uid="uid://duytsuncyxp7n" path="res://ui/assets/icons/checkmark_none.svg" id="9"]
 
-[node name="CourseLessonDetails" type="PanelContainer" unique_id=968761694 node_paths=PackedStringArray("_title_label", "_reading_stats_icon", "_quiz_stats_block", "_quiz_stats_value", "_practice_stats_value", "_goto_lesson_button", "_translation_stats_block", "_translation_stats_value")]
+[node name="CourseLessonDetails" type="PanelContainer" unique_id=968761694 node_paths=PackedStringArray("_title_label", "_reading_stats_icon", "_quiz_stats_block", "_quiz_stats_value", "_practice_stats_value", "_goto_lesson_button", "_translation_stats_block", "_translation_stats_value", "_contributions_link")]
 custom_minimum_size = Vector2(420, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,7 +19,8 @@ _quiz_stats_value = NodePath("MarginContainer/Layout/QuizStats/ValueLabel")
 _practice_stats_value = NodePath("MarginContainer/Layout/PracticeStats/ValueLabel")
 _goto_lesson_button = NodePath("MarginContainer/Layout/Buttons/GoToButton")
 _translation_stats_block = NodePath("MarginContainer/Layout/TranslationStats")
-_translation_stats_value = NodePath("MarginContainer/Layout/TranslationStats/ValueLabel")
+_translation_stats_value = NodePath("MarginContainer/Layout/TranslationStats/TranslationStatsLabel/ValueLabel")
+_contributions_link = NodePath("MarginContainer/Layout/TranslationStats/ContributionsLink")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=578601062]
 layout_mode = 2
@@ -86,21 +87,30 @@ theme_type_variation = &"LabelTitle"
 text = "0 / 0"
 horizontal_alignment = 2
 
-[node name="TranslationStats" type="HBoxContainer" parent="MarginContainer/Layout" unique_id=306373396]
+[node name="TranslationStats" type="VBoxContainer" parent="MarginContainer/Layout" unique_id=56257249]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/Layout/TranslationStats" unique_id=1802908943]
+[node name="TranslationStatsLabel" type="HBoxContainer" parent="MarginContainer/Layout/TranslationStats" unique_id=306373396]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Layout/TranslationStats/TranslationStatsLabel" unique_id=1802908943]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Amount of Translated Text"
 
-[node name="ValueLabel" type="Label" parent="MarginContainer/Layout/TranslationStats" unique_id=728872830]
+[node name="ValueLabel" type="Label" parent="MarginContainer/Layout/TranslationStats/TranslationStatsLabel" unique_id=728872830]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelTitle"
 text = "0%"
 horizontal_alignment = 2
+
+[node name="ContributionsLink" type="RichTextLabel" parent="MarginContainer/Layout/TranslationStats" unique_id=1916161291]
+layout_mode = 2
+bbcode_enabled = true
+text = "	[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]How to contribute translations[/url][/b]"
+fit_content = true
 
 [node name="Spacer" type="Control" parent="MarginContainer/Layout" unique_id=851686280]
 layout_mode = 2
