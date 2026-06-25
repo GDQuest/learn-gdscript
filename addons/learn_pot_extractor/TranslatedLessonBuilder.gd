@@ -59,6 +59,8 @@ static func _build_note_tag(str_builder: Array[String], note: BBCodeParser.Parse
 	for i in note_lines.size():
 		var line: String = note_lines[i]
 		str_builder.append(_tr(line, tr_blocks, translation_report))
+		if i < note_lines.size()-1:
+			str_builder.append("")
 	
 	str_builder.append_array(["[/note]", ""])
 
@@ -76,6 +78,8 @@ static func _build_quiz_choice_tag(str_builder: Array[String], quiz: BBCodeParse
 	for i in quiz_content_lines.size():
 		var line := quiz_content_lines[i]
 		str_builder.append(_tr(line, tr_blocks, translation_report))
+		if i < quiz_content_lines.size()-1:
+			str_builder.append("")
 	
 	for answer: String in quiz_data.answers:
 		str_builder.append("[option%s]%s[/option]" % [" correct" if quiz_data.valid_answers.has(answer) else "", _tr(answer, tr_blocks, translation_report)])
@@ -88,6 +92,8 @@ static func _build_quiz_choice_tag(str_builder: Array[String], quiz: BBCodeParse
 		for i in explanation_lines.size():
 			var line := explanation_lines[i]
 			str_builder.append(_tr(line, tr_blocks, translation_report))
+			if i < explanation_lines.size()-1:
+				str_builder.append("")
 		str_builder.append("[/explanation]")
 	
 	str_builder.append_array(["[/quiz_choice]", ""])
@@ -99,6 +105,8 @@ static func _build_text(str_builder: Array[String], text_node: BBCodeParser.Pars
 	for i in lines.size():
 		var line := lines[i]
 		str_builder.append(_tr(SHARED.fix_glossary_entries(line, []), tr_blocks, translation_report))
+		if i < lines.size()-1:
+			str_builder.append("")
 	str_builder.append("")
 
 
@@ -123,6 +131,8 @@ static func _build_practice_tag(str_builder: Array[String], practice: BBCodePars
 		for i in goal_lines.size():
 			var line := goal_lines[i]
 			str_builder.append(_tr(line, tr_blocks, translation_report))
+			if i < goal_lines.size()-1:
+				str_builder.append("")
 		str_builder.append("[/goal]")
 	
 	var code_lines := BBCodeUtils.get_practice_starting_code(practice).split("\n")
@@ -152,13 +162,14 @@ static func _build_practice_tag(str_builder: Array[String], practice: BBCodePars
 static func _tr(original: String, tr_blocks: Array[Dictionary], translation_report: Dictionary) -> String:
 	if not original:
 		return original
+	var original_id: String = original.replace('"', r'\"').replace("\n", r"\n")
 	var idx := tr_blocks.find_custom(func(block: Dictionary) -> bool:
-		return block.id == original
+		return block.id == original_id
 	)
 	translation_report.total += 1
 	if idx > -1 and tr_blocks[idx].str:
 		translation_report.count += 1
-		return tr_blocks[idx].str
+		return tr_blocks[idx].str.replace(r"\n", "\n")
 	return original
 
 
@@ -167,7 +178,26 @@ static func _get_lines(text_block: String) -> PackedStringArray:
 	var ret := PackedStringArray()
 	var current_line := ""
 	var i := 0
-	while i < raw_lines.size():
-		ret.push_back(raw_lines[i])
-		i += 1
+	var all_blanks := true
+
+	# chunk lines separated by blank lines
+	var result := []
+	var current := []
+	
+	for line: String in raw_lines:
+		if line == "":
+			result.append(current)
+			current = []
+		else:
+			all_blanks = false
+			current.append(line)
+	result.append(current)
+	
+	ret.clear()
+	for chunk in result:
+		ret.append("\n".join(chunk))
+	
+	if all_blanks:
+		return []
+	
 	return ret
