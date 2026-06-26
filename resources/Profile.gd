@@ -36,6 +36,8 @@ const URL_GODOT_DOCS_REF := "ref=godot-docs"
 ## Target framerate for the application, to reduce update intensity on lower end devices.
 @export_range(0, 240, 10, "or_greater") var framerate_limit: int = 60:
 	set = set_framerate_limit
+## Flag that allows only partially translated lessons to still be accessed
+@export var access_incomplete_translations := false
 
 var _save_queued := false
 
@@ -194,6 +196,10 @@ func reset_course_progress(course_id: String) -> void:
 func set_scroll_sensitivity(amount: float) -> void:
 	scroll_sensitivity = maxf(amount, 0.1)
 	scroll_sensitivity_changed.emit(scroll_sensitivity)
+
+
+func set_access_incomplete_translations(allow_access: bool) -> void:
+	access_incomplete_translations = allow_access
 
 
 func set_framerate_limit(limit: int) -> void:

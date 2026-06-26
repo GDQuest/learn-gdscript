@@ -18,7 +18,7 @@
 
 [sub_resource type="Shortcut" id="6"]
 
-[node name="CanvasLayer" type="CanvasLayer" unique_id=1461649153 node_paths=PackedStringArray("_panel", "_color_rect", "_translation_info_button", "_translation_info_popup", "_language_value", "_font_size_value", "_font_size_sample", "_scroll_sensitivity_slider", "_framerate_settings_section", "_framerate_option", "_lower_contrast", "_dyslexia_font", "_apply_button", "_cancel_button")]
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1461649153 node_paths=PackedStringArray("_panel", "_color_rect", "_translation_info_button", "_translation_info_popup", "_language_value", "_incomplete_tr_section", "_incomplete_tr_access", "_font_size_value", "_font_size_sample", "_scroll_sensitivity_slider", "_framerate_settings_section", "_framerate_option", "_lower_contrast", "_dyslexia_font", "_apply_button", "_cancel_button")]
 layer = 2
 script = ExtResource("1")
 _panel = NodePath("PanelContainer")
@@ -26,6 +26,8 @@ _color_rect = NodePath("ColorRect")
 _translation_info_button = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow/TranslationInfoButton")
 _translation_info_popup = NodePath("TranslationInfoPopup")
 _language_value = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/Value")
+_incomplete_tr_section = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/IncompleteTRAccessSettings")
+_incomplete_tr_access = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/IncompleteTRAccessSettings/Value")
 _font_size_value = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer/Value")
 _font_size_sample = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer/SampleText")
 _scroll_sensitivity_slider = NodePath("PanelContainer/Column/Margin/Column/ScrollContainer/Settings/ScrollSensitivitySetting/Value")
@@ -122,6 +124,21 @@ flat = true
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Change the course's language to one of the community-contributed ones."
+
+[node name="IncompleteTRAccessSettings" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=533251402]
+layout_mode = 2
+
+[node name="LabelRow" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/IncompleteTRAccessSettings" unique_id=659497095]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/IncompleteTRAccessSettings/LabelRow" unique_id=192092239]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Allow Incomplete Translations"
+
+[node name="Value" type="CheckBox" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/IncompleteTRAccessSettings" unique_id=7980529]
+layout_mode = 2
 
 [node name="FontSizeSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=1561891103]
 layout_mode = 2
@@ -263,3 +280,4 @@ shortcut = SubResource("6")
 text = "Apply"
 
 [node name="TranslationInfoPopup" parent="." unique_id=1351951771 instance=ExtResource("10")]
+visible = false

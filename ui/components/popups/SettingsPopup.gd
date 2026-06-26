@@ -14,6 +14,7 @@ const FRAMERATE_MAP := {
 @export var _translation_info_button: Button
 @export var _translation_info_popup: CanvasLayer
 @export var _language_value: OptionButton
+@export var _incomplete_tr_access: CheckBox
 @export var _font_size_value: HSlider
 @export var _font_size_sample: Label
 @export var _scroll_sensitivity_slider: HSlider
@@ -88,6 +89,8 @@ func _init_values() -> void:
 
 	_lower_contrast.button_pressed = current_profile.lower_contrast
 	_dyslexia_font.button_pressed = current_profile.dyslexia_font
+	
+	_incomplete_tr_access.button_pressed = current_profile.access_incomplete_translations
 
 
 func _on_apply_settings() -> void:
@@ -116,6 +119,8 @@ func _on_apply_settings() -> void:
 	if current_profile.dyslexia_font:
 		current_font.base_font = load("res://ui/assets/fonts/OpenDyslexic-Regular.otf")
 	_font_size_sample.add_theme_font_override("font", current_font)
+	
+	current_profile.set_access_incomplete_translations(_incomplete_tr_access.button_pressed)
 
 
 func _on_font_size_changed(value: int) -> void:

@@ -23,9 +23,11 @@ func add_item(lesson: BBCodeParser.ParseNode, lesson_index: int, lesson_title: S
 	_lesson_items.add_child(item_node)
 	item_node.selected.connect(_on_item_selected.bind(lesson_index))
 	
+	var current_profile := UserProfiles.get_profile()
+	
 	if TranslationManager.current_language != "en":
 		var completeness := TranslationManager.get_translation_completeness(lesson.bbcode_path)
-		if completeness < 1.0:
+		if completeness < 1.0 and not current_profile.access_incomplete_translations:
 			item_node.modulate = Color(0.33, 0.33, 0.33, 1.0)
 
 
