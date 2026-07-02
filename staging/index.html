@@ -57,10 +57,36 @@
     </div>
     <script type="text/javascript" src="index.js"></script>
     <script type="text/javascript">
-      const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":36039500,"index.wasm":28325110},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+      const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":36040380,"index.wasm":28325110},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
       const GDQUEST_ENVIRONMENT = {};
     </script>
     <script type="text/javascript" src="bootstrap.js"></script>
+
+    <!-- --- MOBILE KEYBOARD PASS-THROUGH PATCH --- -->
+    <script type="text/javascript">
+      (function() {
+        // We use a passive listener on the window to catch keys as they happen
+        window.addEventListener('keydown', function(event) {
+          // If our GDScript code callback bridge is initialized on the window
+          if (window.godotMobileCallback) {
+            let keyToSend = event.key;
+            
+            if (keyToSend) {
+              // Fire the character across the bridge to codeeditor.gd
+              window.godotMobileCallback(keyToSend);
+              
+              // Prevent standard arrow-key browser scrolling while typing in the box
+              if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(keyToSend) > -1) {
+                event.preventDefault();
+              }
+            }
+          }
+        }, true); // The 'true' capture flag intercepts the event before the WebGL canvas breaks it
+      })();
+    </script>
+    <!-- --- END PATCH --- -->
+
   </body>
 </html>
+
 
