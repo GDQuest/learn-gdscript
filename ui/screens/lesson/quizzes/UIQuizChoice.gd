@@ -33,6 +33,15 @@ func setup(quiz: BBCodeParser.ParseNode) -> void:
 		_choices.add_child(button)
 
 
+func _update_margins() -> void:
+	var use_margin := &"margin_right" if TranslationManager.current_translation_is_rtl() else &"margin_left"
+	var discard_margin := &"margin_left" if TranslationManager.current_translation_is_rtl() else &"margin_right"
+	for answer: QuizAnswerButton in _choices.get_children():
+		var margin: int = maxi(answer.label_container.get_theme_constant(&"margin_left"), answer.label_container.get_theme_constant(&"margin_right"))
+		answer.label_container.add_theme_constant_override(use_margin, margin)
+		answer.label_container.remove_theme_constant_override(discard_margin)
+
+
 # Returns an array of indices of selected answers
 func _get_answers() -> Array:
 	var answers := []

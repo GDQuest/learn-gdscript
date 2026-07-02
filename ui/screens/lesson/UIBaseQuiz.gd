@@ -81,6 +81,8 @@ func setup(quiz: BBCodeParser.ParseNode) -> void:
 	var explanation: String = _quiz_data.explanation
 	_explanation.visible = not explanation.is_empty()
 	_explanation.text = TextUtils.bbcode_add_code_color(TextUtils.paragraph(explanation))
+	
+	_update_margins.call_deferred()
 
 
 func set_completed_before(value: bool) -> void:
@@ -101,11 +103,17 @@ func _update_labels() -> void:
 	_content.text = TextUtils.bbcode_add_code_color(TextUtils.paragraph(content_bbcode))
 	var explanation_bbcode := _quiz_data.explanation
 	_explanation.text = TextUtils.bbcode_add_code_color(TextUtils.paragraph(explanation_bbcode))
+	
+	_update_margins.call_deferred()
 
 
 # Virtual
 func _get_answers() -> Array:
 	return []
+
+
+func _update_margins() -> void:
+	pass
 
 
 func _test_answer() -> void:
@@ -189,8 +197,12 @@ func _on_item_rect_changed() -> void:
 
 	if _choice_container.size.x < size.x:
 		_choice_container.size.x = size.x
+		_choice_container.offset_left = 0
+		_choice_container.offset_right = size.x
 	if _result_container.size.x < size.x:
 		_result_container.size.x = size.x
+		_result_container.offset_left = 0
+		_result_container.offset_right = size.x
 
 
 func _on_help_label_visibility_changed() -> void:
