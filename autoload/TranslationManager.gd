@@ -22,7 +22,21 @@ const LOCALE_TO_LABEL := {
 	"zh_Hant": "繁體中文",
 	"cs": "Čeština",
 	"da": "Dansk",
+	"ar": "عربي",
 }
+
+const RTL_LOCALES := [
+	"ar",
+	"he",
+	"fa",
+	"ur",
+	"ps",
+	"ckb",
+	"dv",
+	"syr",
+	"nqo",
+	"yi"
+]
 
 const COMPLETENESS_THRESHOLD := 0.8
 
@@ -93,6 +107,10 @@ func get_translation_completeness(lesson_path: String) -> float:
 		return 0.0
 	var lang_data: Dictionary = (lesson_tr_data[lesson_path] as Dictionary).get(current_language, {})
 	return lang_data.get("count", 0.0) / lang_data.get("total", 1.0)
+
+
+func current_translation_is_rtl() -> bool:
+	return current_language in RTL_LOCALES
 
 
 func set_language(language_code: String) -> void:

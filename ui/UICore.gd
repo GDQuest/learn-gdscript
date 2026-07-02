@@ -46,6 +46,8 @@ func _ready() -> void:
 	NavigationManager.welcome_screen_navigation_requested.connect(_go_to_welcome_screen)
 	# Needed to navigate back from the end screen to the outliner.
 	NavigationManager.outliner_navigation_requested.connect(_course_screen.show)
+	
+	TranslationManager.translation_changed.connect(_on_translation_changed)
 
 	await get_tree().process_frame
 
@@ -163,3 +165,10 @@ func _update_framerate(new_framerate: int) -> void:
 		new_framerate = 1000
 	# TODO: Consider using Engine.max_fps instead
 	OS.low_processor_usage_mode_sleep_usec = floori(1_000_000.0 / new_framerate)
+
+
+func _on_translation_changed() -> void:
+	if TranslationManager.current_translation_is_rtl():
+		layout_direction = Control.LAYOUT_DIRECTION_RTL
+	else:
+		layout_direction = Control.LAYOUT_DIRECTION_INHERITED
