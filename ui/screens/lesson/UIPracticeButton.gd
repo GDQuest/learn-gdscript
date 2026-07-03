@@ -53,10 +53,14 @@ func _update_labels() -> void:
 	if not _practice:
 		return
 
+	var rtl := TranslationManager.current_translation_is_rtl()
+
 	var title := BBCodeUtils.get_practice_title(_practice)
 	_title_label.text = "L%d.P%d %s" % [_lesson_number, _practice_index + 1, tr(title).capitalize()]
+	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 	var description := BBCodeUtils.get_practice_description(_practice)
 	_description_label.text = TextUtils.paragraph(description)
+	_description_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 
 
 func set_completed_before(value: bool) -> void:

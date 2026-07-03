@@ -96,13 +96,18 @@ func _update_labels() -> void:
 	if not _quiz:
 		return
 
+	var rtl := TranslationManager.current_translation_is_rtl()
+	
 	var question := _quiz_data.question
 	_question.text = "[b]" + question + "[/b]"
+	_question.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 
 	var content_bbcode := _quiz_data.content
 	_content.text = TextUtils.bbcode_add_code_color(TextUtils.paragraph(content_bbcode))
+	_content.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 	var explanation_bbcode := _quiz_data.explanation
 	_explanation.text = TextUtils.bbcode_add_code_color(TextUtils.paragraph(explanation_bbcode))
+	_explanation.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 	
 	_update_margins.call_deferred()
 

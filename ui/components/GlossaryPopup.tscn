@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cwpkb454y13jm"]
 
 [ext_resource type="Script" uid="uid://bmrywhp44ewj4" path="res://ui/components/GlossaryPopup.gd" id="1"]
+[ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="3_rj0to"]
 [ext_resource type="StyleBox" uid="uid://dgiyebkd2yyrw" path="res://ui/theme/styles/panel_darker_with_shadow.tres" id="4"]
 
 [node name="GlossaryPopup" type="CanvasLayer" unique_id=969137557 node_paths=PackedStringArray("_panel", "_interaction_area", "_title", "_content", "_timer")]
@@ -39,12 +40,14 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="Content" type="RichTextLabel" parent="Panel/MarginContainer/Column" unique_id=1345731594]
+[node name="Content" type="RichTextLabel" parent="Panel/MarginContainer/Column" unique_id=1260183715]
 layout_mode = 2
 mouse_filter = 2
 bbcode_enabled = true
 text = "Our error explanation."
 fit_content = true
+script = ExtResource("3_rj0to")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="Timer" type="Timer" parent="." unique_id=855661795]
 wait_time = 0.5

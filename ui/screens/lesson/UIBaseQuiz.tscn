@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://076jcmgwamwb"]
 
 [ext_resource type="StyleBox" uid="uid://byx1m5sdpv2ns" path="res://ui/theme/styles/panel_darker.tres" id="3"]
+[ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="3_0px14"]
 [ext_resource type="Texture2D" uid="uid://botjmjx4xso5i" path="res://ui/assets/icons/checkmark_valid.svg" id="5"]
 [ext_resource type="Script" uid="uid://canpc1deciatk" path="res://ui/screens/lesson/UIBaseQuiz.gd" id="6"]
 [ext_resource type="StyleBox" uid="uid://db7lq6jykr8mv" path="res://ui/theme/styles/button_outline_normal.tres" id="7"]
@@ -47,7 +48,7 @@ layout_mode = 2
 [node name="QuizHeader" type="HBoxContainer" parent="ClipContentBoundary/ChoiceContainer/ChoiceView" unique_id=1071973747]
 layout_mode = 2
 
-[node name="Question" type="RichTextLabel" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader" unique_id=595174536]
+[node name="Question" type="RichTextLabel" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader" unique_id=2123687072]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -56,6 +57,8 @@ text = "Question"
 fit_content = true
 scroll_active = false
 meta_underlined = false
+script = ExtResource("3_0px14")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="CompletedBeforeIcon" type="TextureRect" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader" unique_id=1174371104]
 modulate = Color(1, 1, 1, 0.235294)
@@ -67,12 +70,14 @@ texture = ExtResource("5")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Content" type="RichTextLabel" parent="ClipContentBoundary/ChoiceContainer/ChoiceView" unique_id=785271005]
+[node name="Content" type="RichTextLabel" parent="ClipContentBoundary/ChoiceContainer/ChoiceView" unique_id=1883120620]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
 text = "Explanation"
 fit_content = true
+script = ExtResource("3_0px14")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="Answers" type="VBoxContainer" parent="ClipContentBoundary/ChoiceContainer/ChoiceView" unique_id=278723037]
 layout_mode = 2
@@ -138,9 +143,11 @@ theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
 text = "Answers here"
 autowrap_mode = 3
 
-[node name="Explanation" type="RichTextLabel" parent="ClipContentBoundary/ResultContainer/ResultView" unique_id=1244972795]
+[node name="Explanation" type="RichTextLabel" parent="ClipContentBoundary/ResultContainer/ResultView" unique_id=601495328]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
 text = "Explanation"
 fit_content = true
+script = ExtResource("3_0px14")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"

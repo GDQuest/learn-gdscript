@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://bj7mumgvm7xjf"]
 
 [ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/styles/panel_normal.tres" id="2"]
+[ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="2_k2qp0"]
 
 [node name="ErrorExample" type="Panel" unique_id=1849908824]
 custom_minimum_size = Vector2(460, 80)
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("2")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=648218814]
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=554068674]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 0
 anchor_right = 1.0
@@ -15,9 +16,11 @@ anchor_bottom = 1.0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = -16.0
-offset_bottom = -16.0
+offset_bottom = -10.0
 theme_type_variation = &"RTLCode"
 bbcode_enabled = true
 text = "The function \"move\" already exists in this class (at line 22)."
 fit_content = true
 scroll_active = false
+script = ExtResource("2_k2qp0")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"

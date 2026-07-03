@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://df3462xq6itnd" path="res://ui/components/QuitButton.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://cyursex2o2fep" path="res://ui/components/FullScreenButton.tscn" id="7"]
 [ext_resource type="StyleBox" uid="uid://dgukv5xaa8adc" path="res://ui/theme/styles/panel_breadcrumbs.tres" id="8"]
+[ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="8_31trm"]
 [ext_resource type="Script" uid="uid://dmptnpr0crwmq" path="res://ui/components/SmoothScrollContainer.gd" id="9"]
 [ext_resource type="Texture2D" uid="uid://els4t00fq2ri" path="res://ui/screens/end_screen/assets/illustration.png" id="10"]
 [ext_resource type="Texture2D" uid="uid://b2h3smb6gipdy" path="res://ui/assets/icons/navigation_outliner.png" id="11"]
@@ -184,26 +185,30 @@ layout_mode = 2
 theme_type_variation = &"LabelTitle"
 text = "Congratulations!"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column" unique_id=448622616]
+[node name="RichTextLabel" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column" unique_id=781735278]
 layout_mode = 2
 bbcode_enabled = true
 text = "You completed Learn GDScript From Zero. You now have the basics you need to make games with the Godot game engine.
 
 You can keep learning with the free series Getting Started with Godot."
 fit_content = true
+script = ExtResource("8_31trm")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="Label4" type="Label" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column" unique_id=2040361780]
 layout_mode = 2
 theme_type_variation = &"LabelTitle"
 text = "This is an Open-Source project!"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column" unique_id=1330755751]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Layout/PanelContainer/Sky/Control/Panel/Margin/ScrollContainer/Column" unique_id=592027266]
 layout_mode = 2
 bbcode_enabled = true
 text = "Like Godot, this app and course is free and open-source. 
 
 You can find the app's source code and contribute translations here: Learn GDScript From Zero (Github repository)."
 fit_content = true
+script = ExtResource("8_31trm")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="Control2" type="Control" parent="Layout/PanelContainer/Sky" unique_id=1249369151]
 clip_contents = true

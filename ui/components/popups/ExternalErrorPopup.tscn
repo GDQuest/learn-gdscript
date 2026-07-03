@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dqiirjrheybdv" path="res://ui/components/popups/ExternalErrorPopup.gd" id="1"]
 [ext_resource type="StyleBox" uid="uid://bsrxxsifsyu4k" path="res://ui/theme/styles/focus_accent.tres" id="3"]
+[ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="3_to5l2"]
 [ext_resource type="StyleBox" uid="uid://b45mlqutqarjn" path="res://ui/theme/styles/button_outline_large_normal.tres" id="4"]
 [ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/styles/panel_normal.tres" id="5"]
 [ext_resource type="StyleBox" uid="uid://dhdt5bfr2nel5" path="res://ui/theme/styles/button_outline_large_accent.tres" id="6"]
@@ -58,7 +59,7 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Message" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=378013544]
+[node name="Message" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=1598486527]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -67,6 +68,8 @@ text = "Lessons in this course are designed so you only need to edit the [b]impo
 This means that sometimes changes you make can affect code you have no control over. But don't worry, you can still fix all the issues yourself with the code you [b]can[/b] edit!
 
 [i]This is like how game engines work too.[/i] There is a lot of hidden code that they execute to ensure your project runs smoothly. And yet, an error in your scripts can break them. We'll try to explain how to address each individual error that you face. Quick, click the [b]Explain[/b] button next to the error message!"
+script = ExtResource("3_to5l2")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column" unique_id=772360864]
 custom_minimum_size = Vector2(400, 20)

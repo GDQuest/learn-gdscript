@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dnix44no1xkey"]
 
 [ext_resource type="Script" uid="uid://dq0hubbnj6nws" path="res://ui/components/popups/ErrorOverlayPopup.gd" id="2"]
+[ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="4_w5n2w"]
 [ext_resource type="PackedScene" uid="uid://cvl6pxx3qb736" path="res://ui/components/Revealer.tscn" id="5"]
 [ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/styles/panel_normal.tres" id="6"]
 [ext_resource type="StyleBox" uid="uid://b45mlqutqarjn" path="res://ui/theme/styles/button_outline_large_normal.tres" id="8"]
@@ -58,24 +59,28 @@ layout_mode = 2
 title = "Why this happens"
 is_expanded = true
 
-[node name="Value" type="RichTextLabel" parent="MarginContainer/Column/Content/ErrorExplanation" unique_id=564563128]
+[node name="Value" type="RichTextLabel" parent="MarginContainer/Column/Content/ErrorExplanation" unique_id=409994892]
 layout_mode = 2
 bbcode_enabled = true
 text = "Our error explanation."
 fit_content = true
+script = ExtResource("4_w5n2w")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="ErrorSuggestion" parent="MarginContainer/Column/Content" unique_id=430840361 instance=ExtResource("5")]
 layout_mode = 2
 title = "How to fix this"
 
-[node name="Value" type="RichTextLabel" parent="MarginContainer/Column/Content/ErrorSuggestion" unique_id=417247627]
+[node name="Value" type="RichTextLabel" parent="MarginContainer/Column/Content/ErrorSuggestion" unique_id=944217577]
 visible = false
 layout_mode = 2
 bbcode_enabled = true
 text = "Our suggestion on how to fix it."
 fit_content = true
+script = ExtResource("4_w5n2w")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
-[node name="NoContent" type="RichTextLabel" parent="MarginContainer/Column" unique_id=1738366945]
+[node name="NoContent" type="RichTextLabel" parent="MarginContainer/Column" unique_id=799313833]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -85,6 +90,8 @@ text = "Sorry, we don't have this particular error message covered yet!
 Please, use the Report button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.
 
 Thank you!"
+script = ExtResource("4_w5n2w")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="Buttons" type="HBoxContainer" parent="MarginContainer/Column" unique_id=604373675]
 visible = false

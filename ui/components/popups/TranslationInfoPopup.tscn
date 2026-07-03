@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c2dngtpunftiu" path="res://ui/components/popups/TranslationInfoPopup.gd" id="1"]
 [ext_resource type="StyleBox" uid="uid://bsrxxsifsyu4k" path="res://ui/theme/styles/focus_accent.tres" id="3"]
+[ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="3_lrje5"]
 [ext_resource type="StyleBox" uid="uid://b45mlqutqarjn" path="res://ui/theme/styles/button_outline_large_normal.tres" id="4"]
 [ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/styles/panel_normal.tres" id="5"]
 [ext_resource type="StyleBox" uid="uid://dhdt5bfr2nel5" path="res://ui/theme/styles/button_outline_large_accent.tres" id="6"]
@@ -63,7 +64,7 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Summary" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=315287741]
+[node name="Summary" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=248459794]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -74,6 +75,8 @@ If you see text that is still in English while using another language, this is e
 If you want to help make the translations more complete, you are welcome to contribute. You can find instructions on how to do so here: [b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]How to contribute translations[/url][/b]
 
 Thank you to everyone who has contributed translations so far."
+script = ExtResource("3_lrje5")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column" unique_id=624938975]
 custom_minimum_size = Vector2(400, 20)

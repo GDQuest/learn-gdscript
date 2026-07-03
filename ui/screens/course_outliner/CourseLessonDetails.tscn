@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dcf1t6y5lr4oe"]
 
 [ext_resource type="PackedScene" uid="uid://8kodes3p33hf" path="res://ui/components/BigGreenButton.tscn" id="2"]
+[ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="4_ndklc"]
 [ext_resource type="Script" uid="uid://be72qp6w64w2l" path="res://ui/screens/course_outliner/CourseLessonDetails.gd" id="5"]
 [ext_resource type="StyleBox" uid="uid://cguhet6fdpmse" path="res://ui/theme/styles/outliner_details_background.tres" id="6"]
 [ext_resource type="Texture2D" uid="uid://duytsuncyxp7n" path="res://ui/assets/icons/checkmark_none.svg" id="9"]
@@ -106,11 +107,13 @@ theme_type_variation = &"LabelTitle"
 text = "0%"
 horizontal_alignment = 2
 
-[node name="ContributionsLink" type="RichTextLabel" parent="MarginContainer/Layout/TranslationStats" unique_id=1916161291]
+[node name="ContributionsLink" type="RichTextLabel" parent="MarginContainer/Layout/TranslationStats" unique_id=955950389]
 layout_mode = 2
 bbcode_enabled = true
 text = "	[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]How to contribute translations[/url][/b]"
 fit_content = true
+script = ExtResource("4_ndklc")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="Spacer" type="Control" parent="MarginContainer/Layout" unique_id=851686280]
 layout_mode = 2

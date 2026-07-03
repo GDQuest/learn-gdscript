@@ -40,6 +40,7 @@ func _notification(what: int) -> void:
 
 
 func display_tests(info: Array) -> void:
+	var rtl := TranslationManager.current_translation_is_rtl()
 	var check: Node = _checks.get_contents().pop_back()
 	while check:
 		_checks.remove_child(check)

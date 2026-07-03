@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://250i3m14c23m" path="res://ui/components/popups/ConfirmPopup.gd" id="1"]
 [ext_resource type="StyleBox" uid="uid://bkqtmumr5t28" path="res://ui/theme/styles/button_outline_large_pressed.tres" id="3"]
+[ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="3_8rvbl"]
 [ext_resource type="StyleBox" uid="uid://b45mlqutqarjn" path="res://ui/theme/styles/button_outline_large_normal.tres" id="4"]
 [ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/styles/panel_normal.tres" id="5"]
 [ext_resource type="StyleBox" uid="uid://dkeg6cbxbpnqe" path="res://ui/theme/styles/button_outline_large_hover.tres" id="6"]
@@ -23,10 +24,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -202.0
-offset_top = -89.5
-offset_right = 202.0
-offset_bottom = 89.5
+offset_left = -228.0
+offset_top = -126.0
+offset_right = 228.0
+offset_bottom = 126.0
 
 [node name="Panel" type="Panel" parent="PanelContainer" unique_id=820301940]
 layout_mode = 2
@@ -60,11 +61,13 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Message" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=1247922643]
+[node name="Message" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=1185727900]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
 fit_content = true
+script = ExtResource("3_8rvbl")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column" unique_id=1185924261]
 custom_minimum_size = Vector2(400, 20)

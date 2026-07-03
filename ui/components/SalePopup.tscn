@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bwru6nawsn8l6"]
 
 [ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/styles/panel_normal.tres" id="2"]
+[ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="3_wck5i"]
 [ext_resource type="Script" uid="uid://boolh00osexat" path="res://ui/components/SalePopup.gd" id="7"]
 
 [sub_resource type="StyleBoxFlat" id="3"]
@@ -91,7 +92,7 @@ layout_mode = 2
 theme_type_variation = &"LabelWellDone"
 horizontal_alignment = 1
 
-[node name="Summary" type="RichTextLabel" parent="PanelContainer/Layout/Margin/Column" unique_id=567233839]
+[node name="Summary" type="RichTextLabel" parent="PanelContainer/Layout/Margin/Column" unique_id=1081432457]
 layout_mode = 2
 size_flags_vertical = 0
 theme_type_variation = &"RTSWellDone"
@@ -100,6 +101,8 @@ text = "Get [b]50%[/b] off on all our Godot courses with the
 coupon code [b]DISCOUNT50[/b]"
 fit_content = true
 horizontal_alignment = 1
+script = ExtResource("3_wck5i")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="TimeLeftLabel" type="Label" parent="PanelContainer/Layout/Margin/Column" unique_id=1879615245]
 layout_mode = 2

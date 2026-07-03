@@ -2,6 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://byx1m5sdpv2ns" path="res://ui/theme/styles/panel_darker.tres" id="3"]
 [ext_resource type="Script" uid="uid://b6t32yqrdrppj" path="res://ui/screens/lesson/UIPracticeButton.gd" id="5"]
+[ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="5_jcm7q"]
 [ext_resource type="Texture2D" uid="uid://botjmjx4xso5i" path="res://ui/assets/icons/checkmark_valid.svg" id="6"]
 [ext_resource type="StyleBox" uid="uid://dojpxy1svgxi8" path="res://ui/theme/styles/focus.tres" id="7"]
 [ext_resource type="StyleBox" uid="uid://dkeg6cbxbpnqe" path="res://ui/theme/styles/button_outline_large_hover.tres" id="8"]
@@ -62,11 +63,13 @@ theme_type_variation = &"LabelSmallButton"
 theme_override_styles/normal = ExtResource("11")
 text = "next"
 
-[node name="Description" type="RichTextLabel" parent="Margin/Row/Column" unique_id=114905804]
+[node name="Description" type="RichTextLabel" parent="Margin/Row/Column" unique_id=1441316266]
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
 fit_content = true
+script = ExtResource("5_jcm7q")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="NavigateButton" type="Button" parent="Margin/Row" unique_id=1579305854]
 custom_minimum_size = Vector2(180, 60)

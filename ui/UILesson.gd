@@ -132,7 +132,7 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 func _update_labels() -> void:
 	if not _lesson:
 		return
-
+		
 	var title := BBCodeUtils.get_lesson_title(_lesson)
 	_title.text = title
 
@@ -196,7 +196,7 @@ func _open_glossary_popup(meta: String) -> void:
 func _make_paragraph(node: BBCodeParser.ParseNode, _target_course_index: CourseIndex, _target_lesson: BBCodeParser.ParseNode, _user_profile: Profile) -> CanvasItem:
 	var instance: RichTextLabel = _previous_paragraph
 	if not _previous_paragraph:
-		instance = RichTextLabel.new()
+		instance = RichTextLabelRTL.new()
 		instance.fit_content = true
 		instance.scroll_active = false
 		instance.bbcode_enabled = true

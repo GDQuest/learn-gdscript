@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bltsl5n1mk6ed" path="res://ui/components/popups/ReportFormPopup.gd" id="1"]
 [ext_resource type="StyleBox" uid="uid://bsrxxsifsyu4k" path="res://ui/theme/styles/focus_accent.tres" id="3"]
+[ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="3_0eu3i"]
 [ext_resource type="StyleBox" uid="uid://b45mlqutqarjn" path="res://ui/theme/styles/button_outline_large_normal.tres" id="4"]
 [ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/styles/panel_normal.tres" id="5"]
 [ext_resource type="StyleBox" uid="uid://dhdt5bfr2nel5" path="res://ui/theme/styles/button_outline_large_accent.tres" id="6"]
@@ -61,7 +62,7 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Summary" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=1667989134]
+[node name="Summary" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=304810394]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -91,6 +92,8 @@ You will need a free GitHub account to do this.
 Please include as much detail as you can, such as what device you are using and what you were doing when the problem happened. A screenshot also helps a lot.
 
 [center]Thank you for helping make this app better.[/center]"
+script = ExtResource("3_0eu3i")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column" unique_id=673476989]
 custom_minimum_size = Vector2(400, 20)

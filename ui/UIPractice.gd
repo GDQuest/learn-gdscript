@@ -229,13 +229,17 @@ func turn_on_test_mode() -> void:
 func _update_labels() -> void:
 	if not _practice:
 		return
+	
+	var rtl := TranslationManager.current_translation_is_rtl()
 
 	var title := BBCodeUtils.get_practice_title(_practice)
 	_info_panel.title_label.text = "L%d.P%d %s" % [_lesson_number, _practice_index + 1, title.capitalize()]
+	_info_panel.title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 	var goal := BBCodeUtils.get_practice_goal(_practice)
 	_info_panel.goal_rich_text_label.text = TextUtils.bbcode_add_code_color(
 		TextUtils.paragraph(goal),
 	)
+	_info_panel.goal_rich_text_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 
 	var index := 0
 	var hints := BBCodeUtils.get_practice_hints(_practice)
@@ -245,7 +249,9 @@ func _update_labels() -> void:
 			continue
 
 		practice_hint.title = "Hint %s" % [str(index + 1).pad_zeros(1)]
+		practice_hint.title.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 		practice_hint.text = hints[index]
+		practice_hint.text.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 		index += 1
 
 	_info_panel.display_tests(_tester.get_test_names())

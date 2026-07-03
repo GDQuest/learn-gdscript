@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dv2yg0u2clsic"]
 
 [ext_resource type="Script" uid="uid://cu3u7q225brob" path="res://ui/components/popups/LessonDonePopup.gd" id="2"]
+[ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="3_5aago"]
 [ext_resource type="StyleBox" uid="uid://dkeg6cbxbpnqe" path="res://ui/theme/styles/button_outline_large_hover.tres" id="5"]
 [ext_resource type="StyleBox" uid="uid://bkqtmumr5t28" path="res://ui/theme/styles/button_outline_large_pressed.tres" id="6"]
 [ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/styles/panel_normal.tres" id="7"]
@@ -139,7 +140,7 @@ text = "But there are still some practices
 that you've skipped."
 horizontal_alignment = 1
 
-[node name="Summary" type="RichTextLabel" parent="PanelContainer/Layout/Margin/Column" unique_id=1604016]
+[node name="Summary" type="RichTextLabel" parent="PanelContainer/Layout/Margin/Column" unique_id=928140916]
 layout_mode = 2
 size_flags_vertical = 0
 theme_type_variation = &"RTSWellDone"
@@ -148,6 +149,8 @@ text = "[b]Stay[/b] and revisit the study material,
 or [b]continue[/b] the course."
 fit_content = true
 horizontal_alignment = 1
+script = ExtResource("3_5aago")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="Spacer2" type="Control" parent="PanelContainer/Layout/Margin/Column" unique_id=1200367796]
 custom_minimum_size = Vector2(400, 8)

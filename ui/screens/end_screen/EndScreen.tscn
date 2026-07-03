@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://df3462xq6itnd" path="res://ui/components/QuitButton.tscn" id="5"]
 [ext_resource type="Script" uid="uid://cp5fcgulimpd0" path="res://ui/screens/end_screen/EndScreen.gd" id="6"]
 [ext_resource type="PackedScene" uid="uid://cyursex2o2fep" path="res://ui/components/FullScreenButton.tscn" id="7"]
+[ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="7_8bien"]
 [ext_resource type="StyleBox" uid="uid://dgukv5xaa8adc" path="res://ui/theme/styles/panel_breadcrumbs.tres" id="8"]
 [ext_resource type="Texture2D" uid="uid://d20b7oun104lw" path="res://ui/screens/end_screen/thumbnails/node-essentials-godot-4.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://b6xnn35lq017q" path="res://ui/screens/end_screen/thumbnails/learn-3d-gamedev-godot-4.png" id="10"]
@@ -356,12 +357,14 @@ text = "• Retention and skill acquisition is slow and limited."
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer2/VBoxContainer" unique_id=149641221]
+[node name="RichTextLabel3" type="RichTextLabel" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer2/VBoxContainer" unique_id=262521270]
 layout_mode = 2
 theme_type_variation = &"RTLEndScreenText"
 bbcode_enabled = true
 text = "We make our fair share of [b][color=#ebc3ff][url=https://www.youtube.com/@Gdquest/videos]free tutorials[/url][/color][/b]. They will come in very handy once you start making games on your own. But to get started, we really recommend you learn how to think like a game developer using [b][color=#ebc3ff][url=https://school.gdquest.com/godot-4-early-access]courses[/url][/color][/b]."
 fit_content = true
+script = ExtResource("7_8bien")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Layout/CenterRow/Panel/Margin/Column" unique_id=267150966]
 layout_mode = 2
@@ -390,7 +393,7 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="RichTextLabel4" type="RichTextLabel" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer3" unique_id=1905916880]
+[node name="RichTextLabel4" type="RichTextLabel" parent="Layout/CenterRow/Panel/Margin/Column/VBoxContainer3" unique_id=391983129]
 layout_mode = 2
 theme_type_variation = &"RTLEndScreenText"
 bbcode_enabled = true
@@ -398,6 +401,8 @@ text = "At GDQuest, we’re educators at heart. We believe in applied study and 
 
 That’s the reason we made this app. It is in fact part of our beginner course [b][color=#ebc3ff][url=https://school.gdquest.com/products/bundle_learn_gamedev_godot_4]Learn Gamedev From Zero with Godot[/url][/color][/b]."
 fit_content = true
+script = ExtResource("7_8bien")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="Control3" type="Control" parent="Layout/CenterRow/Panel/Margin/Column" unique_id=2058659885]
 layout_mode = 2
