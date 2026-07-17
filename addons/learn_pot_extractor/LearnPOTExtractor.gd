@@ -29,6 +29,11 @@ var _slipstream_running := false
 var _building_translated_running := false
 var _target_path := ""
 
+# Hash set of filepaths we do not want to even try parsing when building POT files
+var _black_list := {
+	
+}
+
 
 func _enter_tree() -> void:
 	add_translation_parser_plugin(_bbcode_parser)
@@ -254,6 +259,8 @@ func _get_all_tscns_with_labels(root: String, out_files: Array) -> void:
 	out_files.append_array(Array(dir.get_files()).filter(func(filename: String) -> bool:
 		if filename.get_extension() != "tscn":
 			return false
+		if root.path_join(filename) in _black_list:
+			return false
 		var packed_scene := load(root.path_join(filename)) as PackedScene
 		var state := packed_scene.get_state()
 		for i in state.get_node_count():
@@ -275,6 +282,8 @@ func _get_all_gdscript_with_tr(root: String, out_files: Array) -> void:
 	var dir := DirAccess.open(root)
 	out_files.append_array(Array(dir.get_files()).filter(func(filename: String) -> bool:
 		if filename.get_extension() != "gd":
+			return false
+		if root.path_join(filename) in _black_list:
 			return false
 		var text := FileAccess.open(root.path_join(filename), FileAccess.READ).get_as_text()
 		if not tr_re.search(text):
