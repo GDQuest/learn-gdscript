@@ -14,6 +14,7 @@ const SUPPLEMENTARY_POT_PATH := "res://i18n/supplementary.pot"
 
 const BBCODE_TRANSLATION_PARSER := preload("BBCodeTranslationParser.gd")
 const CSV_TRANSLATION_PARSER := preload("CSVTranslationParser.gd")
+const TSCN_TRANSLATION_PARSER := preload("TSCNTranslationParser.gd")
 const LESSON_BUILDER := preload("TranslatedLessonBuilder.gd")
 const ENGINE_CALLER := preload("EngineCaller.gd")
 const SHARED := preload("Shared.gd")
@@ -21,6 +22,7 @@ const EXPORT_STEP := preload("TranslatedLessonExportStep.gd")
 
 var _bbcode_parser := BBCODE_TRANSLATION_PARSER.new()
 var _csv_parser := CSV_TRANSLATION_PARSER.new()
+var _tscn_parser := TSCN_TRANSLATION_PARSER.new()
 var _export_plugin := EXPORT_STEP.new()
 var _current_pots: PackedStringArray
 var _slipstream_running := false
@@ -31,6 +33,7 @@ var _target_path := ""
 func _enter_tree() -> void:
 	add_translation_parser_plugin(_bbcode_parser)
 	add_translation_parser_plugin(_csv_parser)
+	add_translation_parser_plugin(_tscn_parser)
 	add_export_plugin(_export_plugin)
 	
 	var menu_entries := {}
@@ -48,6 +51,7 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	remove_translation_parser_plugin(_bbcode_parser)
 	remove_translation_parser_plugin(_csv_parser)
+	remove_translation_parser_plugin(_tscn_parser)
 	remove_export_plugin(_export_plugin)
 	
 	remove_tool_menu_item("i18n Tools")
@@ -253,8 +257,8 @@ func _get_all_tscns_with_labels(root: String, out_files: Array) -> void:
 		var packed_scene := load(root.path_join(filename)) as PackedScene
 		var state := packed_scene.get_state()
 		for i in state.get_node_count():
-			match state.get_node_type(i):
-				&"Label", &"RichTextLabel", &"Button":
+			for j in state.get_node_property_count(i):
+				if _tscn_parser.match_property(state.get_node_property_name(i, j), state.get_node_type(i)):
 					return true
 		return false
 	).map(func(filename: String) -> String:
