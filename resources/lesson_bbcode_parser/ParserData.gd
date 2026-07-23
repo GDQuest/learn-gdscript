@@ -31,21 +31,22 @@ enum Tag {
 	STRING,
 	GLOSSARY,
 	PARAGRAPH,
+	TR,
 }
 
 var TAG_DEFINITIONS := {
-	Tag.LESSON: TagDefinition.new("lesson", true, false, [], ["title"], [], []),
-	Tag.TITLE: TagDefinition.new("title", true, false, [Tag.LESSON], [], [], []),
+	Tag.LESSON: TagDefinition.new("lesson", true, false, [], ["title"], ["tr"], []),
+	Tag.TITLE: TagDefinition.new("title", true, false, [Tag.LESSON], [], ["tr"], []),
 	Tag.VISUAL: TagDefinition.new("visual", false, true, [Tag.LESSON], ["path"], [], []),
-	Tag.NOTE: TagDefinition.new("note", true, false, [Tag.LESSON], [], ["title"], []),
-	Tag.QUIZ_CHOICE: TagDefinition.new("quiz_choice", true, false, [Tag.LESSON], ["question"], ["multiple", "shuffle", "en_id"], [Tag.OPTION, Tag.EXPLANATION]),
-	Tag.QUIZ_INPUT: TagDefinition.new("quiz_input", true, false, [Tag.LESSON], ["question", "answer"], [], [Tag.EXPLANATION]),
-	Tag.OPTION: TagDefinition.new("option", true, false, [Tag.QUIZ_CHOICE], [], ["correct"], []),
-	Tag.HINT: TagDefinition.new("hint", true, false, [Tag.QUIZ_CHOICE, Tag.QUIZ_INPUT, Tag.PRACTICE], [], [], []),
-	Tag.EXPLANATION: TagDefinition.new("explanation", true, false, [Tag.QUIZ_CHOICE, Tag.QUIZ_INPUT], [], [], []),
-	Tag.PRACTICE: TagDefinition.new("practice", true, false, [Tag.LESSON], ["id", "title"], [], [Tag.DESCRIPTION, Tag.GOAL, Tag.STARTING_CODE, Tag.VALIDATOR, Tag.SCRIPT_SLICE]),
-	Tag.DESCRIPTION: TagDefinition.new("description", true, false, [Tag.PRACTICE], [], [], []),
-	Tag.GOAL: TagDefinition.new("goal", true, false, [Tag.PRACTICE], [], [], []),
+	Tag.NOTE: TagDefinition.new("note", true, false, [Tag.LESSON], [], ["title", "tr"], []),
+	Tag.QUIZ_CHOICE: TagDefinition.new("quiz_choice", true, false, [Tag.LESSON], ["question"], ["multiple", "shuffle", "en_id", "tr"], [Tag.OPTION, Tag.EXPLANATION]),
+	Tag.QUIZ_INPUT: TagDefinition.new("quiz_input", true, false, [Tag.LESSON], ["question", "answer"], ["tr"], [Tag.EXPLANATION]),
+	Tag.OPTION: TagDefinition.new("option", true, false, [Tag.QUIZ_CHOICE], [], ["correct", "tr"], []),
+	Tag.HINT: TagDefinition.new("hint", true, false, [Tag.QUIZ_CHOICE, Tag.QUIZ_INPUT, Tag.PRACTICE], [], ["tr"], []),
+	Tag.EXPLANATION: TagDefinition.new("explanation", true, false, [Tag.QUIZ_CHOICE, Tag.QUIZ_INPUT], [], ["tr"], []),
+	Tag.PRACTICE: TagDefinition.new("practice", true, false, [Tag.LESSON], ["id", "title"], ["tr"], [Tag.DESCRIPTION, Tag.GOAL, Tag.STARTING_CODE, Tag.VALIDATOR, Tag.SCRIPT_SLICE]),
+	Tag.DESCRIPTION: TagDefinition.new("description", true, false, [Tag.PRACTICE], [], ["tr"], []),
+	Tag.GOAL: TagDefinition.new("goal", true, false, [Tag.PRACTICE], [], ["tr"], []),
 	Tag.STARTING_CODE: TagDefinition.new("starting_code", true, false, [Tag.PRACTICE], [], [], []),
 	Tag.CURSOR: TagDefinition.new("cursor", false, true, [Tag.PRACTICE], [], ["line", "column"], []),
 	Tag.VALIDATOR: TagDefinition.new("validator", false, true, [Tag.PRACTICE], ["path"], [], []),
@@ -54,6 +55,7 @@ var TAG_DEFINITIONS := {
 	Tag.SEPARATOR: TagDefinition.new("separator", false, true, [Tag.LESSON], [], [], []),
 	Tag.GLOSSARY: TagDefinition.new("glossary", false, true, [Tag.PARAGRAPH, Tag.GOAL, Tag.DESCRIPTION, Tag.HINT, Tag.EXPLANATION, Tag.OPTION, Tag.NOTE], ["term"], [], []),
 	Tag.PARAGRAPH: TagDefinition.new("paragraph", true, false, [Tag.LESSON], [], [], []),
+	Tag.TR: TagDefinition.new("tr", false, true, [Tag.LESSON, Tag.QUIZ_CHOICE, Tag.QUIZ_INPUT, Tag.NOTE], [], [])
 }
 
 const CONTENT_PRODUCING_TAGS := [

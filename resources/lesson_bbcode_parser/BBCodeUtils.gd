@@ -82,7 +82,7 @@ static func get_practice_index(lesson: BBCodeParser.ParseNode, practice: BBCodeP
 	var count := 0
 	for child in lesson.children:
 		if child is BBCodeParser.ParseNode and child.tag == BBCodeParserData.Tag.PRACTICE:
-			if get_practice_id(child) == practice_id:
+			if get_practice_id(child as BBCodeParser.ParseNode) == practice_id:
 				return count
 			count += 1
 	return -1
@@ -185,9 +185,13 @@ static func get_practice_id(practice: BBCodeParser.ParseNode) -> String:
 class QuizData:
 	var tag: int = BBCodeParserData.Tag.UNKNOWN
 	var question := ""
+	var question_tr := ""
 	var content := ""
+	var content_tr := ""
 	var explanation := ""
+	var explanation_tr := ""
 	var answers := []
+	var answers_tr := []
 	var valid_answers := []
 	var shuffle := false
 	var multiple := false
@@ -223,9 +227,12 @@ static func get_quiz_data(quiz: BBCodeParser.ParseNode) -> QuizData:
 	var data := QuizData.new()
 	data.tag = quiz.tag
 	data.question = quiz.attributes.get("question", "")
+	data.question_tr = quiz.attributes.get("tr", "")
 	data.shuffle = quiz.attributes.get("shuffle", "false") == "true"
 	data.multiple = quiz.attributes.get("multiple", "false") == "true"
 	data.content = clean_text_content(_get_text_content(quiz, false))
+	data.content_tr = get_comments(quiz)
+	
 
 	if quiz.tag == BBCodeParserData.Tag.QUIZ_INPUT:
 		var quiz_attributes_answer: String = quiz.attributes.get("answer", "")
@@ -237,9 +244,11 @@ static func get_quiz_data(quiz: BBCodeParser.ParseNode) -> QuizData:
 			match child.tag:
 				BBCodeParserData.Tag.EXPLANATION:
 					data.explanation = clean_text_content(_get_text_content(child_node, true))
+					data.explanation_tr = child_node.attributes.get("tr", "")
 				BBCodeParserData.Tag.OPTION:
 					var answer: String = clean_text_content(_get_text_content(child_node, true))
 					data.answers.push_back(answer)
+					data.answers_tr.push_back(child_node.attributes.get("tr", ""))
 					var child_attributes_correct: bool = child_node.attributes.get("correct", false)
 					if child_attributes_correct:
 						data.valid_answers.push_back(answer)
@@ -261,6 +270,16 @@ static func clean_text_content(text: String) -> String:
 		cleaned_lines.append(line)
 		is_previous_line_blank = is_blank
 	return "\n".join(PackedStringArray(cleaned_lines))
+
+
+static func get_comments(node: BBCodeParser.ParseNode) -> String:
+	var comments := []
+	
+	for child in node.children:
+		if child is BBCodeParser.ParseNode and child.tag == BBCodeParserData.Tag.TR:
+			comments.append((child as BBCodeParser.ParseNode).attributes.get("note", ""))
+	
+	return "\n".join(comments)
 
 
 static func _get_text_content(node: BBCodeParser.ParseNode, recurse: bool) -> String:

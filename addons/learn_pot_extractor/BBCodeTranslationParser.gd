@@ -5,6 +5,7 @@ static var PURE_NUMBERS_RE := RegEx.create_from_string("[^a-zA-Z]+")
 const SHARED := preload("Shared.gd")
 
 
+
 func _parse_file(path: String) -> Array[PackedStringArray]:
 	var parser := LessonBBCodeParser.new()
 	
@@ -14,24 +15,21 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 	if not result.is_success():
 		push_error("Failed to parse BBCode for '%s':\n%s" % [path, result.get_all_messages()])
 		return []
-	var lesson_root := result.root
+	var lesson_root: BBCodeParser.ParseNode = result.root.children[0]
 	
 	# msgid, msgctxt, msgid_plural, comment, source_line
 	var ret: Array[PackedStringArray]
 	
 	var current_paragraph := ""
 	
-	var stack := [lesson_root]
 	var practice_idx := 0
 	var quiz_idx := 0
-	while not stack.is_empty():
-		var current = stack.pop_front()
-		if "children" in current:
-			stack.append_array(current.children)
+	var previous_comments := []
+	ret.append(PackedStringArray([BBCodeUtils.get_lesson_title(lesson_root), "", "", _build_comment(lesson_root, "Lesson header"), lesson_root.line_number]))
+	
+	for current in lesson_root.children:
 		if typeof(current) == TYPE_OBJECT and "tag" in current:
 			match current.tag:
-				BBCodeParserData.Tag.LESSON:
-					ret.append(PackedStringArray([BBCodeUtils.get_lesson_title(current), "", "", "Lesson header", current.line_number]))
 				BBCodeParserData.Tag.PARAGRAPH:
 					var glossary_results := []
 					var raw_string := BBCodeUtils.get_paragraph_text(current)
@@ -39,60 +37,68 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 					for i in lines.size():
 						var line := lines[i]
 						line = SHARED.fix_glossary_entries(line, glossary_results)
-						ret.append(PackedStringArray([line, "", "", ('The "term" in [glossary term="<term>"] should NOT be translated here') if glossary_results[0] else "", current.line_number + i]))
+						ret.append(PackedStringArray([line, "", "", _build_text_comment("\n".join(previous_comments), ('The "term" in [glossary term="<term>"] should NOT be translated here') if glossary_results[0] else ""), current.line_number + i]))
+					previous_comments.clear()
 				BBCodeParserData.Tag.TITLE:
-					ret.append(PackedStringArray([BBCodeUtils.get_paragraph_text(current), "", "", "Heading", current.line_number]))
+					ret.append(PackedStringArray([BBCodeUtils.get_paragraph_text(current), "", "", _build_comment(current, "Heading"), current.line_number]))
 				BBCodeParserData.Tag.QUIZ_CHOICE, BBCodeParserData.Tag.QUIZ_INPUT:
 					var data := BBCodeUtils.get_quiz_data(current)
-					ret.append(PackedStringArray([data.question, "", "", "Quiz question", current.line_number]))
+					ret.append(PackedStringArray([data.question, "", "", _build_text_comment(data.question_tr, "Quiz question"), current.line_number]))
 					
 					var lines := _get_lines(data.content)
 					var glossary_results := []
 					for line in lines:
 						line = SHARED.fix_glossary_entries(line, glossary_results)
-						ret.append(PackedStringArray([line, "", "", 'Quiz\nThe "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "Quiz content", current.line_number]))
+						ret.append(PackedStringArray([line, "", "", _build_text_comment(data.content_tr, 'Quiz\nThe "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "Quiz content"), current.line_number]))
 					
 					lines = _get_lines(data.explanation)
 					for line in lines:
 						line = SHARED.fix_glossary_entries(line, glossary_results)
-						ret.append(PackedStringArray([line, "", "", 'Quiz\nThe "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "Quiz explanation", current.line_number]))
+						ret.append(PackedStringArray([line, "", "", _build_text_comment(data.explanation_tr, 'Quiz\nThe "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "Quiz explanation"), current.line_number]))
 					
 					for i in data.answers.size():
-						ret.append(PackedStringArray([data.answers[i], "", "", "Quiz answer", current.line_number]))
+						ret.append(PackedStringArray([data.answers[i], "", "", _build_text_comment(data.answers_tr[i], "Quiz answer"), current.line_number]))
 					
 					quiz_idx += 1
 				BBCodeParserData.Tag.NOTE:
 					var title := BBCodeUtils.get_note_title(current)
-					ret.append(PackedStringArray([title, "", "", "Note title", current.line_number]))
+					ret.append(PackedStringArray([title, "", "", _build_comment(current, "Note title"), current.line_number]))
 					var contents := BBCodeUtils.get_note_contents(current)
 					var lines := _get_lines(contents)
+					var comments: Array = current.children.filter(func(n) -> bool: return n is BBCodeParser.ParseNode and n.tag == BBCodeParserData.Tag.TR).map(func(n: BBCodeParser.ParseNode) -> String: return n.attributes.get("note", ""))
 					var glossary_results := []
 					for i in lines.size():
 						var line := lines[i]
 						line = SHARED.fix_glossary_entries(line, glossary_results)
-						ret.append(PackedStringArray([line, "", "", 'Note content\nThe "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "Note content", current.line_number + i + 1]))
+						ret.append(PackedStringArray([line, "", "", _build_text_comment("\n".join(comments), 'Note content\nThe "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "Note content"), current.line_number + i + 1]))
+					previous_comments.clear()
 				BBCodeParserData.Tag.PRACTICE:
 					var title := BBCodeUtils.get_practice_title(current)
-					ret.append(PackedStringArray([title, "", "", "Practice title", current.line_number]))
+					ret.append(PackedStringArray([title, "", "", _build_comment(current, "Practice title"), current.line_number]))
 					
 					var goal := BBCodeUtils.get_practice_goal(current)
 					var glossary_results := []
 					var lines := _get_lines(goal)
+					var goal_node: BBCodeParser.ParseNode = current.children.filter(func(n: BBCodeParser.ParseNode) -> bool: return n.tag == BBCodeParserData.Tag.GOAL).front()
 					for i in lines.size():
 						var line := SHARED.fix_glossary_entries(lines[i], glossary_results)
-						ret.append(PackedStringArray([line, "", "", 'Practice goal\nThe "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "Practice goal", current.line_number]))
+						ret.append(PackedStringArray([line, "", "", _build_comment(goal_node, 'Practice goal\nThe "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "Practice goal"), current.line_number]))
 					
 					var description := BBCodeUtils.get_practice_description(current)
 					lines = _get_lines(description)
+					var description_node: BBCodeParser.ParseNode = current.children.filter(func(n: BBCodeParser.ParseNode) -> bool: return n.tag == BBCodeParserData.Tag.DESCRIPTION).front()
 					for i in lines.size():
 						var line := SHARED.fix_glossary_entries(lines[i], glossary_results)
-						ret.append(PackedStringArray([line, "", "", 'Practice description\nThe "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "Practice description", current.line_number + i]))
+						ret.append(PackedStringArray([line, "", "", _build_comment(description_node, 'Practice description\nThe "term" in [glossary term="<term>"] should NOT be translated here' if glossary_results[0] else "Practice description"), current.line_number + i]))
 					
 					var hints := BBCodeUtils.get_practice_hints(current)
+					var hint_nodes: Array = current.children.filter(func(n: BBCodeParser.ParseNode) -> bool: return n.tag == BBCodeParserData.Tag.HINT)
 					for i in hints.size():
-						ret.append(PackedStringArray([hints[i], "", "", "Practice hint", current.line_number]))
+						ret.append(PackedStringArray([hints[i], "", "", _build_comment(hint_nodes[i], "Practice hint"), current.line_number]))
 						
 					practice_idx += 1
+				BBCodeParserData.Tag.TR:
+					previous_comments.append(current.attributes.get("note", ""))
 	
 	for i in range(ret.size()-1, -1, -1):
 		var id := ret[i][0]
@@ -140,6 +146,19 @@ func _get_lines(text_block: String) -> PackedStringArray:
 		ret.append("\n".join(chunk))
 	
 	return ret
+
+
+func _build_comment(node: BBCodeParser.ParseNode, base_comment: String = "") -> String:
+	return _build_text_comment(node.attributes.get("tr", ""), base_comment)
+
+
+func _build_text_comment(context_comment: String, base_comment: String = "") -> String:
+	var comments := []
+	if base_comment:
+		comments.append(base_comment)
+	if context_comment:
+		comments.append(context_comment)
+	return "\n".join(comments)
 
 
 func _get_recognized_extensions() -> PackedStringArray:
