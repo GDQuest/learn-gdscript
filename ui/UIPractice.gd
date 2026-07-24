@@ -244,14 +244,14 @@ func _update_labels() -> void:
 	var index := 0
 	var hints := BBCodeUtils.get_practice_hints(_practice)
 	for child_node in _hints_container.get_children():
-		var practice_hint = child_node as PracticeHint
+		var practice_hint := child_node as PracticeHint
 		if not practice_hint:
 			continue
 
 		practice_hint.title = "Hint %s" % [str(index + 1).pad_zeros(1)]
-		practice_hint.title.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
+		practice_hint.rich_text_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 		practice_hint.text = hints[index]
-		practice_hint.text.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
+		practice_hint.rich_text_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 		index += 1
 
 	_info_panel.display_tests(_tester.get_test_names())

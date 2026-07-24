@@ -5,7 +5,7 @@ extends Revealer
 @export var text: String:
 	set = set_bbcode_text
 
-@export var _rich_text_label: RichTextLabel
+@export var rich_text_label: RichTextLabel
 
 
 func _ready() -> void:
@@ -29,6 +29,6 @@ func _update_rtl_text() -> void:
 		return
 
 	if Engine.is_editor_hint():
-		_rich_text_label.text = text
+		rich_text_label.text = text
 	else:
-		_rich_text_label.text = TextUtils.paragraph(text)
+		rich_text_label.text = TextUtils.paragraph(text)
