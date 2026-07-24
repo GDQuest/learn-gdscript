@@ -101,8 +101,7 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 ## Builds and adds the lesson's visual content and UI elements (paragraphs,
 ## notes, quizzes, practice buttons) to the scene tree from a parsed BBCode
 ## node.
-func _build_and_display_content(lesson: BBCodeParser.ParseNode, lesson_number:
-int) -> void:
+func _build_and_display_content(lesson: BBCodeParser.ParseNode, lesson_number: int) -> void:
 	var user_profile := _user_profile_at_setup_time
 
 	_previous_paragraph = null
@@ -176,7 +175,7 @@ func _clear_display_and_state() -> void:
 func _update_labels() -> void:
 	if not _lesson:
 		return
-		
+
 	var title := BBCodeUtils.get_lesson_title(_lesson)
 	_title.text = title
 
@@ -222,8 +221,7 @@ func _on_content_scrolled(_value: float) -> void:
 
 func _update_content_container_width(new_font_scale: int) -> void:
 	var font_size_multiplier := (
-		float(_base_text_font_size + new_font_scale * 2)
-		/ _base_text_font_size
+		float(_base_text_font_size + new_font_scale * 2) / _base_text_font_size
 	)
 	_content_container.custom_minimum_size.x = _start_content_width * font_size_multiplier
 
@@ -237,7 +235,12 @@ func _open_glossary_popup(meta: String) -> void:
 	_glossary_popup.appear.call_deferred()
 
 
-func _make_paragraph(node: BBCodeParser.ParseNode, _target_course_index: CourseIndex, _target_lesson: BBCodeParser.ParseNode, _user_profile: Profile) -> CanvasItem:
+func _make_paragraph(
+	node: BBCodeParser.ParseNode,
+	_target_course_index: CourseIndex,
+	_target_lesson: BBCodeParser.ParseNode,
+	_user_profile: Profile,
+) -> CanvasItem:
 	var instance: RichTextLabel = _previous_paragraph
 	if not _previous_paragraph:
 		instance = RichTextLabelRTL.new()
@@ -247,17 +250,24 @@ func _make_paragraph(node: BBCodeParser.ParseNode, _target_course_index: CourseI
 		instance.selection_enabled = true
 		instance.meta_clicked.connect(_open_glossary_popup)
 		_previous_paragraph = instance
-	
+
 	var text_content := BBCodeUtils.get_paragraph_text(node)
 	instance.text += TextUtils.bbcode_add_code_color(TextUtils.paragraph(text_content))
-	
+
 	return instance
 
 
-func _make_note(node: BBCodeParser.ParseNode, _target_course_index: CourseIndex, _target_lesson: BBCodeParser.ParseNode, _user_profile: Profile) -> CanvasItem:
+func _make_note(
+	node: BBCodeParser.ParseNode,
+	_target_course_index: CourseIndex,
+	_target_lesson: BBCodeParser.ParseNode,
+	_user_profile: Profile,
+) -> CanvasItem:
 	var revealer := RevealerScene.instantiate() as Revealer
 	revealer.title_panel = preload("res://ui/theme/styles/revealer_notes_title.tres")
-	revealer.title_panel_expanded = preload("res://ui/theme/styles/revealer_notes_title_expanded.tres")
+	revealer.title_panel_expanded = preload(
+		"res://ui/theme/styles/revealer_notes_title_expanded.tres"
+	)
 	revealer.content_panel = preload("res://ui/theme/styles/revealer_notes_panel.tres")
 
 	revealer.title_font_color = COLOR_NOTE
@@ -270,18 +280,32 @@ func _make_note(node: BBCodeParser.ParseNode, _target_course_index: CourseIndex,
 	return revealer
 
 
-func _make_title(node: BBCodeParser.ParseNode, _target_course_index: CourseIndex, _target_lesson: BBCodeParser.ParseNode, _user_profile: Profile) -> CanvasItem:
+func _make_title(
+	node: BBCodeParser.ParseNode,
+	_target_course_index: CourseIndex,
+	_target_lesson: BBCodeParser.ParseNode,
+	_user_profile: Profile,
+) -> CanvasItem:
 	var instance: RichTextLabel = _previous_paragraph
 	if _previous_paragraph == null:
 		instance = RichTextLabel.new()
 	var text_content := BBCodeUtils.get_paragraph_text(node)
-	instance.text += "\n\n[font size=28 name='%s']%s[/font]\n\n" % [HEADER_FONT, TextUtils.paragraph(text_content)]
+	instance.text += "\n\n[font size=28 name='%s']%s[/font]\n\n" % [
+		HEADER_FONT,
+		TextUtils.paragraph(text_content),
+	]
 	return instance
 
 
-func _make_quiz(node: BBCodeParser.ParseNode, course_index: CourseIndex, lesson: BBCodeParser.ParseNode, user_profile: Profile) -> CanvasItem:
+func _make_quiz(
+	node: BBCodeParser.ParseNode,
+	course_index: CourseIndex,
+	lesson: BBCodeParser.ParseNode,
+	user_profile: Profile,
+) -> CanvasItem:
 	var scene := (
-		QuizChoiceScene if node.tag == BBCodeParserData.Tag.QUIZ_CHOICE
+		QuizChoiceScene
+		if node.tag == BBCodeParserData.Tag.QUIZ_CHOICE
 		else QuizInputFieldScene
 	)
 	var instance: UIBaseQuiz = scene.instantiate()
@@ -306,7 +330,12 @@ func _make_quiz(node: BBCodeParser.ParseNode, course_index: CourseIndex, lesson:
 	return instance
 
 
-func _make_separator(_node: BBCodeParser.ParseNode, _target_course_index: CourseIndex, _target_lesson: BBCodeParser.ParseNode, _user_profile: Profile) -> CanvasItem:
+func _make_separator(
+	_node: BBCodeParser.ParseNode,
+	_target_course_index: CourseIndex,
+	_target_lesson: BBCodeParser.ParseNode,
+	_user_profile: Profile,
+) -> CanvasItem:
 	if _previous_paragraph:
 		_previous_paragraph.text += "\n[hr]\n"
 		return _previous_paragraph
@@ -315,7 +344,12 @@ func _make_separator(_node: BBCodeParser.ParseNode, _target_course_index: Course
 		return instance
 
 
-func _make_visual(node: BBCodeParser.ParseNode, _target_course_index: CourseIndex, _target_lesson: BBCodeParser.ParseNode, _user_profile: Profile) -> CanvasItem:
+func _make_visual(
+	node: BBCodeParser.ParseNode,
+	_target_course_index: CourseIndex,
+	_target_lesson: BBCodeParser.ParseNode,
+	_user_profile: Profile,
+) -> CanvasItem:
 	var instance: CanvasItem = null
 	var path := BBCodeUtils.get_visual_path(node)
 	if path.is_empty():
@@ -326,12 +360,7 @@ func _make_visual(node: BBCodeParser.ParseNode, _target_course_index: CourseInde
 		path = (node.bbcode_path as String).get_base_dir().path_join(path)
 	var resource := load(path)
 	if not resource:
-		printerr(
-			(
-				"ContentBlock visual element is not a valid resource. From path: "
-				+ path
-			),
-		)
+		printerr(("ContentBlock visual element is not a valid resource. From path: " + path))
 		return
 
 	if resource is Texture2D:
@@ -344,8 +373,7 @@ func _make_visual(node: BBCodeParser.ParseNode, _target_course_index: CourseInde
 		printerr(
 			(
 				"ContentBlock visual element is not a Texture2D or a PackedScene. Loaded type: "
-				+ resource.get_class() + " From path: "
-				+ path
+				+ resource.get_class() + " From path: " + path
 			),
 		)
 		return null
