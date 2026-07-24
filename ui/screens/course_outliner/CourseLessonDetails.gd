@@ -73,7 +73,8 @@ func _update_visuals() -> void:
 		
 		_translation_stats_value.text = "%d%%" % [floori(translation_percentage * 100)]
 		_contributions_link.visible = translation_percentage < 1.0
-		_contributions_link.meta_clicked.connect(_on_meta_clicked)
+		if not _contributions_link.meta_clicked.is_connected(_on_meta_clicked):
+			_contributions_link.meta_clicked.connect(_on_meta_clicked)
 		_goto_lesson_button.disabled = translation_percentage < 1.0 and not current_profile.access_incomplete_translations
 		if translation_percentage >= 1.0 or current_profile.access_incomplete_translations:
 			_goto_lesson_button.grab_focus()

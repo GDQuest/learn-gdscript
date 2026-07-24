@@ -27,6 +27,7 @@ func _ready() -> void:
 	Events.practice_completed.connect(_on_practice_completed)
 	Events.lesson_completed.connect(_on_lesson_completed)
 	Events.course_completed.connect(_on_course_completed)
+	TranslationManager.translation_changed.connect(_update_outliner_index)
 
 	_lesson_list.lesson_selected.connect(_on_lesson_selected)
 	_reset_button.pressed.connect(_on_reset_requested)

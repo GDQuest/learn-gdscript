@@ -39,6 +39,8 @@ var _quizz_count := 0
 var _integration_test_mode := false
 var _previous_paragraph: RichTextLabel
 
+var _user_profile_at_setup_time: Profile
+
 var _build_commands := {
 	BBCodeParserData.Tag.TITLE: _make_title,
 	BBCodeParserData.Tag.PARAGRAPH: _make_paragraph,
@@ -60,6 +62,7 @@ func _ready() -> void:
 	Events.font_size_scale_changed.connect(_update_content_container_width)
 	_update_content_container_width(UserProfiles.get_profile().font_size_scale)
 	_scroll_container.get_v_scroll_bar().value_changed.connect(_on_content_scrolled)
+	TranslationManager.translation_changed.connect(_on_translation_changed)
 
 	if test_lesson and get_parent() == get_tree().root:
 		var _lesson_node := NavigationManager.get_navigation_resource(test_lesson)
@@ -85,12 +88,33 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 	_lesson = lesson
 	_course_index = course_index
 	_title.text = BBCodeUtils.get_lesson_title(lesson)
-	var user_profile := UserProfiles.get_profile()
+	_user_profile_at_setup_time = UserProfiles.get_profile()
 
+	_build_and_display_content(lesson, lesson_number)
+
+	if _integration_test_mode:
+		await get_tree().process_frame
+		lesson_displayed.emit()
+		return
+
+
+## Builds and adds the lesson's visual content and UI elements (paragraphs,
+## notes, quizzes, practice buttons) to the scene tree from a parsed BBCode
+## node.
+func _build_and_display_content(lesson: BBCodeParser.ParseNode, lesson_number:
+int) -> void:
+	var user_profile := _user_profile_at_setup_time
+
+	_previous_paragraph = null
 	for child_node: BBCodeParser.ParseNode in lesson.children:
 		var node_type := child_node.tag
 		if _build_commands.has(node_type):
-			var new_instance: CanvasItem = (_build_commands[node_type] as Callable).call(child_node, course_index, lesson, user_profile)
+			var new_instance: CanvasItem = (_build_commands[node_type] as Callable).call(
+				child_node,
+				_course_index,
+				lesson,
+				user_profile,
+			)
 			if new_instance and new_instance.get_parent() != _content_blocks:
 				_content_blocks.add_child(new_instance)
 				new_instance.hide()
@@ -104,9 +128,9 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 		button.setup(practice, i, lesson_number)
 		if i == 0:
 			button.visibility_notifier.screen_entered.connect(_on_practice_first_visible)
-		if course_index:
+		if _course_index:
 			button.completed_before = user_profile.is_lesson_practice_completed(
-				course_index.get_course_id(),
+				_course_index.get_course_id(),
 				lesson.bbcode_path,
 				practice_id,
 			)
@@ -119,14 +143,34 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 	_quizz_count = BBCodeUtils.get_lesson_quiz_count(lesson)
 	_reveal_up_to_next_quiz()
 
-	if _integration_test_mode:
-		await get_tree().process_frame
-		lesson_displayed.emit()
+
+## Re-parses the lesson BBCode in the newly selected language and
+## rebuilds the entire content view in the new language.
+func _on_translation_changed() -> void:
+	if not _lesson or not _course_index:
 		return
 
-	# Wait until the lesson is considered loaded by the system, and then update the size of
-	# the scroll container and its content.
-	await Events.lesson_started
+	var lesson_number: int = _course_index.get_lesson_number(_lesson.bbcode_path)
+
+	var new_lesson := NavigationManager.get_navigation_resource(_lesson.bbcode_path) as BBCodeParser.ParseNode
+	if not new_lesson:
+		return
+
+	_clear_display_and_state()
+	_build_and_display_content(new_lesson, lesson_number)
+
+
+func _clear_display_and_state() -> void:
+	for child: Control in _content_blocks.get_children():
+		_content_blocks.remove_child(child)
+		child.queue_free()
+	for child: Control in _practices_container.get_children():
+		_practices_container.remove_child(child)
+		child.queue_free()
+
+	_previous_paragraph = null
+	_quizzes_done = -1
+	_visible_index = -1
 
 
 func _update_labels() -> void:
