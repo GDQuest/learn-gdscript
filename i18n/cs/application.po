@@ -3,22 +3,33 @@
 # This file is distributed under the same license as the Learn GDScript From
 # project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2025-06-14 15:02+0200\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
 "PO-Revision-Date: 2024-09-10 09:35+0000\n"
 "Last-Translator: ebor <ebor@post.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/learn-gdscript-from-zero/application/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
 "Generated-By: Babel 2.10.3\n"
 
+#: course/common/inventory/DictItem.tscn
+#: course/lesson-23-append-to-arrays/visuals/Crate.tscn
+#: course/lesson-24-access-array-indices/visuals/inventory/Item.tscn
+#: course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.tscn
+#, fuzzy
+msgid "0"
+msgstr "0%"
+
+#: course/lesson-21-strings/visuals/RobotWithNumberName.tscn
+msgid "70801"
+msgstr ""
 
 #: course/common/CustomHealthBar.tscn
 msgid "health = 100"
@@ -32,14 +43,6 @@ msgstr ""
 #: course/common/inventory/DictItem.tscn
 msgid "healing heart"
 msgstr ""
-
-#: course/common/inventory/DictItem.tscn
-#: course/lesson-23-append-to-arrays/visuals/Crate.tscn
-#: course/lesson-24-access-array-indices/visuals/inventory/Item.tscn
-#: course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.tscn
-#, fuzzy
-msgid "0"
-msgstr "0%"
 
 #: course/lesson-11-time-delta/visuals/DemoRotatingSpriteFrame.tscn
 #: course/lesson-11-time-delta/visuals/DemoRotatingTime.tscn
@@ -156,10 +159,6 @@ msgstr ""
 
 #: course/lesson-21-strings/visuals/RobotToolTip.tscn
 msgid "Hover over the Robot to learn more"
-msgstr ""
-
-#: course/lesson-21-strings/visuals/RobotWithNumberName.tscn
-msgid "70801"
 msgstr ""
 
 #: course/lesson-21-strings/visuals/RobotWithRegularName.tscn
@@ -427,7 +426,8 @@ msgstr "Pozastaveno"
 msgid "Term"
 msgstr "Termín"
 
-#: ui/components/GlossaryPopup.tscn ui/components/popups/ErrorOverlayPopup.tscn
+#: ui/components/GlossaryPopup.tscn
+#: ui/components/popups/ErrorOverlayPopup.tscn
 msgid "Our error explanation."
 msgstr "Naše vysvětlení chyby."
 
@@ -495,6 +495,7 @@ msgstr ""
 "kuponem [b]SLEVA50[/b][/center]"
 
 #: ui/components/SalePopup.tscn
+#, fuzzy
 msgid "Only until"
 msgstr "Pouze dokud"
 
@@ -644,7 +645,6 @@ msgid ""
 msgstr ""
 "[font=res://ui/theme/fonts/font_title.tres] Jak nahlásit problém[/font]\n"
 "\n"
-""
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Configure the App"
@@ -660,6 +660,10 @@ msgstr ""
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Change the course's language to one of the community-contributed ones."
+msgstr ""
+
+#: ui/components/popups/SettingsPopup.tscn
+msgid "Allow Incomplete Translations"
 msgstr ""
 
 #: ui/components/popups/SettingsPopup.tscn
@@ -771,7 +775,12 @@ msgid "0%"
 msgstr "0%"
 
 #: ui/screens/course_outliner/CourseLessonDetails.tscn
-#: ui/screens/course_outliner/CourseLessonDetails.gd:101
+#, fuzzy
+msgid "\t[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]How to contribute translations[/url][/b]"
+msgstr "[center] [b] [url=https://github.com/GDQuest/learn-gdscript/issues]GitHub.com > GDQuest > learn-gdscript > Issues[/url][/b][/center]"
+
+#: ui/screens/course_outliner/CourseLessonDetails.tscn
+#: ui/screens/course_outliner/CourseLessonDetails.gd:110
 msgid "Start Lesson"
 msgstr "Spustit lekci"
 
@@ -784,6 +793,7 @@ msgid "Lesson Title"
 msgstr "Název lekce"
 
 #: ui/screens/course_outliner/CourseOutliner.tscn
+#, fuzzy
 msgid "Course Index -"
 msgstr "Index kurzu -"
 
@@ -2148,7 +2158,6 @@ msgstr "Dozvědět se více"
 msgid ""
 "\n"
 "[hr]\n"
-""
 msgstr ""
 
 #: ui/UINavigator.gd:375
@@ -2159,27 +2168,27 @@ msgstr "(žádná předchozí historie)"
 msgid "Hint %s"
 msgstr "Tip %s"
 
-#: ui/UIPractice.gd:279
+#: ui/UIPractice.gd:285
 msgid "Validating Your Code..."
 msgstr "Ověřování kódu..."
 
-#: ui/UIPractice.gd:331
+#: ui/UIPractice.gd:337
 msgid "The function `%s` calls itself, this creates an infinite loop"
 msgstr "Funkce `%s` volá sama sebe, což vytváří nekonečnou smyčku"
 
-#: ui/UIPractice.gd:342
+#: ui/UIPractice.gd:348
 msgid "You have a while loop that runs forever (while true) without a break statement. This will freeze the app."
 msgstr ""
 
-#: ui/UIPractice.gd:384
+#: ui/UIPractice.gd:390
 msgid "Running Your Code..."
 msgstr "Probíhá spouštění kódu..."
 
-#: ui/UIPractice.gd:414
+#: ui/UIPractice.gd:420
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "Ve vašem kódu je dělení nulou. V kódu nelze dělit nulou. Ujistěte se, že v kódu nemáte znaky \"/ 0\" nebo \"% 0\"."
 
-#: ui/UIPractice.gd:459
+#: ui/UIPractice.gd:465
 msgid "Running Tests..."
 msgstr "Probíhají testy..."
 
@@ -2191,11 +2200,11 @@ msgstr ""
 msgid "100%"
 msgstr ""
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:97
+#: ui/screens/course_outliner/CourseLessonDetails.gd:106
 msgid "Open Lesson"
 msgstr "Otevřít lekci"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:99
+#: ui/screens/course_outliner/CourseLessonDetails.gd:108
 msgid "Continue Lesson"
 msgstr "Pokračovat v lekci"
 
@@ -2211,20 +2220,20 @@ msgstr "Pro tuto odpověď musíte zadat celé číslo. Například: 42"
 msgid "You need to type a decimal for this answer. Use a \".\" to separate the decimal part. Example: 3.14"
 msgstr "Pro tuto odpověď musíte zadat desetinné číslo. Použijte \".\" k oddělení desetinné části. Například: 3.14"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:144
+#: ui/screens/practice/PracticeInfoPanel.gd:145
 msgid "Method descriptions"
 msgstr "Popisy metod"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:160
+#: ui/screens/practice/PracticeInfoPanel.gd:161
 msgid "Property descriptions"
 msgstr "Popisy Vlastností"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:188
+#: ui/screens/practice/PracticeInfoPanel.gd:189
 #, fuzzy
 msgid "You've completed this practice before."
 msgstr "Cvičení jste dokončili."
 
-#: ui/screens/practice/PracticeInfoPanel.gd:192
+#: ui/screens/practice/PracticeInfoPanel.gd:193
 msgid ""
 "You've used the provided solution.\n"
 "This practice will not count towards your course progress."

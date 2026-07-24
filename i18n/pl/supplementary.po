@@ -1,0 +1,834 @@
+# Polish translations for Learn GDScript From.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2025-09-03 13:02+0000\n"
+"Last-Translator: Tomasz Sosnowski <Ezmert@protonmail.ch>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/learn-gdscript-from-zero/error-explanations/pl/>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: script_checking/error_database.csv
+msgid "error_explanation"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "error_suggestion"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword."
+msgstr "Bład ten występuje kiedy nazwa pomiędzy [code]for[/code] i [code]in[/code] nie jest prawidłową nazwą zmiennej, albo kiedy brakuje słowa kluczowego [code]in[/code]."
+
+#: script_checking/error_database.csv
+msgid "In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid temporary variable name to assign values in each loop iteration. The loop creates a new variable with the desired name and assigns each element of the array to it."
+msgstr "W pętli for [code]for[/code], słowo kluczowe [code]in[/code] akceptuje tylko tymczasową nazwę zmiennej do przypisywania wartości poprzez każdą iterację pętlin. Pętla tworzy nową zmienną z podaną nazwą i przypisuje każdy element tablicy do niej."
+
+#: script_checking/error_database.csv
+msgid "To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces."
+msgstr "Aby naprawić ten błąd, musisz upewnić się, że nazwa pomiędzy słowami kluczowymi \\[code]for\\[/code] i \\[code]in\\[/code] jest prawidłową nazwą zmiennej — bez znaków interpunkcyjnych ani spacji."
+
+#: script_checking/error_database.csv
+msgid "For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name."
+msgstr "Na przykład ten kod jest nieprawidłowy: [code]for cell\\_position.x in cell\\_positions\\_array:[/code] ponieważ \\[code]cell\\_position.x\\[/code] nie jest poprawną nazwą zmiennej."
+
+#: script_checking/error_database.csv
+msgid "To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:"
+msgstr "Aby uzyskać dostęp do składowej \\[code]x\\[/code] zmiennej, musisz to zrobić wewnątrz ciała pętli:"
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "[code]for cell_position in cell_positions_array:"
+msgstr ""
+"[code]for cell_position in cell_positions_array:\n"
+"\tcell_position.x += 1.0[/code]"
+
+#: script_checking/error_database.csv
+msgid "    cell_position.x += 1.0[/code]"
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "You get this error when you try to assign a value to something that is not a variable."
+msgstr "Jeśli pojawi się ten błąd, najprawdopodobniej próbujesz przypisać wartość do czegoś innego niż zmienna, co jest niemożliwe. Wartości można przypisywać tylko do zmiennych."
+
+#: script_checking/error_database.csv
+msgid "You can only assign values to variables. You cannot assign values to function calls or calculations."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call, not a variable."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
+msgstr "Inna możliwość to sytuacja, w której chcesz sprawdzić równość w warunku, ale zamiast \\[code]==\\[/code] wpisałeś pojedynczy znak \\[code]=\\[/code]."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you try to change the value of a constant."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, if you write [code]const MAX_SPEED = 100[/code], you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Many constants are built into Godot and GDScript, and you cannot change them either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "1. If the value should never change, or it comes from Godot, remove the line that tries to change it."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you accidentally type a space before a tab, or a tab before a space, the computer gets confused about your code's indentation."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "A cyclic reference is when a class references itself, directly or indirectly."
+msgstr "Odwołanie cykliczne ma miejsce wtedy, gdy klasa odwołuje się do samej siebie, bezpośrednio lub pośrednio."
+
+#: script_checking/error_database.csv
+msgid "It has two possible causes:"
+msgstr "Istnieją dwie przyczyny takiego stanu:"
+
+#: script_checking/error_database.csv
+msgid "1. You used the class name in the class itself."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
+msgstr ""
+"1. Użyłeś nazwy klasy w samej klasie.\n"
+"2. Twój kod odnosi się do innej klasy, która odwołuje się do tej klasy, powodując niekończący się cykl referencyjny."
+
+#: script_checking/error_database.csv
+msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
+msgstr "Tak czy inaczej, ze względu na sposób działania GDScript w Godot 3 niestety nie możesz tego zrobić. Godot 4 powinien rozwiązać ten problem, jednak na ten moment musisz go obejść."
+
+#: script_checking/error_database.csv
+msgid "Erase the type hint in the error line, and the problem should disappear."
+msgstr "Usuń podpowiedź typu w linii z błędem, a problem powinien zniknąć."
+
+#: script_checking/error_database.csv
+msgid "At GDQuest, when we face this error, we remove the type hints on lines causing cyclic references. It solves the problem in the vast majority of cases."
+msgstr "W GDQuest, gdy napotykamy ten błąd, usuwamy podpowiedzi typów w liniach powodujących cykliczne odwołania. Rozwiązuje to problem w zdecydowanej większości przypadków."
+
+#: script_checking/error_database.csv
+msgid "The indentation of your code (the number of tab characters at the start of the line) is incorrect."
+msgstr "Wcięcia w twoim kodzie (ilość znaków tabulacji na początku wierszy) nie są prawidłowe."
+
+#: script_checking/error_database.csv
+msgid "You are missing one or more tabs, or you inserted too many."
+msgstr "Brakuje jednego lub większej ilości TABów lub też wstawiono ich za dużo."
+
+#: script_checking/error_database.csv
+msgid "The computer uses those leading tab characters on code lines to know which lines of code are part of a code block, like a function."
+msgstr "Komputer używa wiodących znaków tabulacji w wierszach kodu, aby wiedzieć, które wiersze kodu są częścią którego bloku kodu, jak tego odpowiadającego za ciało funkcji."
+
+#: script_checking/error_database.csv
+msgid "If the line of code with the error is right after a line ending with a colon, like a function definition, you need one extra indent level compared to the previous line."
+msgstr "Jeśli linia kodu z błędem znajduje się zaraz po linii kończącej się dwukropkiem, na przykład po definicji funkcji, potrzebujesz dodatkowego poziomu wcięcia w porównaniu z poprzednią linią."
+
+#: script_checking/error_database.csv
+msgid "In other words, your line should have one more leading tab character than the function definition."
+msgstr "Innymi słowy, twoja linia powinna mieć jeden dodatkowy znak tabulacji na początku w stosunku do definicji funkcji."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code."
+msgstr "Otrzymujesz ten błąd, gdy napisałeś coś, co jest składniowo niepoprawne, lub gdy czegoś brakuje, aby ukończyć tę linię lub poprzednie linie kodu."
+
+#: script_checking/error_database.csv
+msgid "You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character."
+msgstr "Musisz być niezwykle precyzyjny, pisząc kod dla komputera. Tego rodzaju błąd łatwo popełnić, bo wystarczy jeden niewłaściwy znak."
+
+#: script_checking/error_database.csv
+msgid "Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code."
+msgstr "Zauważ, że ten błąd może pojawić się po linii, która go faktycznie powoduje, ze względu na sposób, w jaki komputer czyta i analizuje twój kod."
+
+#: script_checking/error_database.csv
+msgid "The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing."
+msgstr "Sposób rozwiązania tego rodzaju błędu zależy mocno od kontekstu. Komunikat błędu powinien powiedzieć, którego znaku lub elementu brakuje."
+
+#: script_checking/error_database.csv
+msgid "If the error says \"expected,\" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else."
+msgstr "Jeśli błąd mówi „expected” (oczekiwano), to najprawdopodobniej czegoś brakuje w jednej z [b]poprzednich[/b] linii kodu. Może to być znak interpunkcyjny, nawias lub coś innego."
+
+#: script_checking/error_database.csv
+msgid "If it says \"unterminated,\" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
+msgstr "Jeśli mówi „unterminated” (niezamknięty), brakuje jakiegoś znaku na końcu wyrażenia, np. zamykającego nawiasu. W takim przypadku najczęściej problem pochodzi z linii wskazanej w błędzie."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you use a special character that GDScript doesn't recognize."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings)."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "[b]Note:[/b] Godot 4 supports special and non-Latin characters in code (Unicode characters), but this app is built with Godot 3, which does not."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You can use accented characters inside text strings (between quotes), but not in the code itself."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "This error tells you that you are missing a parenthesis (or sometimes a comma or a path)."
+msgstr "Ten błąd informuje o braku nawiasu (czasem również przecinka lub ścieżki)."
+
+#: script_checking/error_database.csv
+msgid "Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code]."
+msgstr "Trzy słowa kluczowe w GDScript działają jak wywołania funkcji i wymagają nawiasów: [code]yield()[/code], [code]preload()[/code] i [code]assert()[/code]."
+
+#: script_checking/error_database.csv
+msgid "To address the error, you want to add the missing opening parenthesis, the closing parenthesis, or the comma."
+msgstr "Aby naprawić błąd, dodaj brakujący nawias otwierający, nawias zamykający lub przecinek."
+
+#: script_checking/error_database.csv
+msgid "This error happens in several cases:"
+msgstr "Błąd ten występuje w kilku przypadkach:"
+
+#: script_checking/error_database.csv
+msgid "1. You wrote an identifier (variable or function name) in the wrong place."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
+msgstr ""
+"1. Zapisałeś identyfikator (nazwę zmiennej lub funkcji) w niewłaściwym miejscu.\n"
+"2. Użyłeś słowa kluczowego, jak [code]var[/code], [code]func[/code], [code]for[/code] lub [code]signal[/code], jednak nie dodałeś po nim nazwy.\n"
+"3. Utworzyłeś definicję funkcji, jednak zapomniałeś nawiasów przed dwukropkiem."
+
+#: script_checking/error_database.csv
+msgid "3. You wrote a function definition but forgot the parentheses before the colon."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "This error tells you that you are missing a type somewhere. A type can be [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], and many identifiers representing a data structure."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To solve this, you need to write the name of the type after the colon, arrow (in the case of function return types), inside parentheses (for export types), or after the [code]as[/code] keyword."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The variable, function name, or class name you are trying to use does not exist."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The other cause for this error is that you didn't define the variable, function, or class you're trying to access."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To solve this error, triple-check that there is no typo in the line."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The [code]continue[/code] keyword means \"jump to the next iteration of the loop.\" And the [code]break[/code] keyword means \"end the loop right now and jump to the first line of code after the loop block."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you wrote one of these keywords outside a loop, you need to remove it."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you are trying to use it inside a loop, your indentation is most likely at fault. You may need to insert one or more leading tab characters to the keyword."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "In other words, it wants something that can never change. This is why the computer will reject function calls and variables where it needs a constant expression."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You need to replace function calls or variables with a constant value like a whole number, decimal number, string, vector, a predefined array, etc."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You can also use arithmetic operators like multiplications (*), additions (+), and so on."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "When defining a new class, you need to follow a specific pattern. You must write the name in plain text, starting with a letter."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To fix this error, replace whatever you put after the 'extends' or 'class_name' keyword by a name without spaces and starting with a capital letter."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You can optionally use numbers in the name, but not in the first position."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You are trying to define a function or variable that already exists; You can't do that."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Perhaps the function or variable already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "In the app, your code extends some built-in Godot code that's not visible to you."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "When that happens, you need to either rename your function or variable to one that will not collide with an existing one or remove this line of code."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You are trying to define a signal that already exists; You can't do that."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "When that happens, you need to either rename your signal to one that will not collide with an existing one or remove this line of code."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The function you're trying to define exists in a parent class, so your definition overrides the parent class's function."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You need to check the parent class's function and its definition in the code reference. Then, you need to edit your function definition to have the same number and type of parameters as the parent class."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "This whole class of errors has to do with calling functions with either the wrong number of arguments or the wrong kind of argument. You will need to use the error message to see what is going wrong."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You need to either remove, add, or change the values you're trying to pass to the function to solve this issue. To know exactly how many arguments you need, you need to check the code reference. It will show you the function definition and the mandatory arguments."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "When you make any operation, the computer compares the types you are using."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Some types are compatible, and some are not. For example, you cannot directly add a whole number to a text string. You first need to convert the number into text."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You'll need to read the error message to see what is not matching because there are many possible cases."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=)."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If the computer talks about an invalid operand, then the issue is that the operation does not exist for the type you're trying to use. For example, while you can add two 2D vectors, you can't add a whole number or text to a 2D vector."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "GDScript supports type inference. The computer will automatically recognize the type of value you are working with. In some cases, though, it can't figure it out."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "When that happens, you need to specify the type yourself or remove type inference altogether for this variable."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The simplest way to solve this error is to remove types for this variable or this function's arguments. Otherwise, you can manually specify the value type after the colon."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "We recommend specifying the type whenever possible to reap the typing system's benefits."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "There is an issue with the return value of your function. There are two main cases here:"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Godot was unable to load your script, yet the language checker found nothing wrong."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Please click on the \"report\" button at the top and please let us know."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You called a function inside itself. This will loop forever."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "There are valid reasons for using recursive functions, but none of them are part of this course, so this cannot be a valid solution."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You wrote a while loop with a condition that is always true (like [code]while true:[/code] or [code]while(true):[/code]) without a [code]break[/code] statement inside it. This creates an infinite loop that will freeze your game."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To fix this, you need to either add a [code]break[/code] statement inside the loop so it can exit when a certain condition is met, or change the while loop condition to something that will become false. For example: [code]while position.x < 100: position.x -= 10[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The computer reached the end of the line of code, but the line had a syntax error."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Double-check that you are not missing a quote character or that the quote character you used to start the string is the same as the one you used to close the string."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The sub-variable you are trying to access does not exist."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You probably have a typo in the name of the sub-variable that you are trying to access."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Ensure that you don't have a capital letter where you should have a lowercase letter and vice versa."
+msgstr ""
+
+#: course/glossary.csv course/documentation.csv
+#, fuzzy
+msgid "explanation"
+msgstr "iteracja"
+
+#: course/glossary.csv
+msgid "Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods."
+msgstr "Funkcje składowe są to funkcje dołączone do określonego typu wartości, jak tablice, ciągi lub słowniki. Nazywamy je również metodami."
+
+#: course/glossary.csv
+msgid "For example, arrays have member functions like [code]array.append()[/code]."
+msgstr "Przykładowo tablice mają funkcje składowe, takie jak [code]array.append()[/code]."
+
+#: course/glossary.csv
+msgid "You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
+msgstr "Funkcje można wywołać tylko w tablicy, używając operatora dostępu ([code].[/code]), aby uzyskać do nich dostęp tak, jak to pokazano powyżej."
+
+#: course/glossary.csv
+msgid "Member variables are variables attached to a specific value type, like a vector's [code]x[/code] and [code]y[/code] sub-variables. We also call them [i]properties[/i] or [i]fields[/i] of the vector."
+msgstr "Zmienne składowe to zmienne dołączone do określonego typu wartości, takie jak podzmienne wektora [code]x[/code] i [code]y[/code] . Nazywamy je również [i]właściwościami[/i] lub [i]polami[/i] wektora."
+
+#: course/glossary.csv
+msgid "To access a member variable, you must first write the value's name followed by the access operator ([code].[/code]). For example, [code]position.x[/code]."
+msgstr "Aby uzyskać dostęp do zmiennej składowej, należy najpierw wpisać nazwę wartości, po której następuje operator dostępu ([code].[/code]). Przykładowo: [code]position.x[/code]."
+
+#: course/glossary.csv
+msgid "A parameter is a variable you create as part of a function definition."
+msgstr "Parametr to zmienna, którą tworzysz jako część definicji funkcji."
+
+#: course/glossary.csv
+msgid "It allows you to reuse the function more by having values that vary in the function's body."
+msgstr "Pozwala ona na częstsze ponowne wykorzystanie tej samej funkcji dzięki podawaniu wartościom, które zmieniają się wewnątrz funkcji."
+
+#: course/glossary.csv
+msgid "A radian is a unit of measurement of angles based on the circle's circumference."
+msgstr "Radian to jednostka miary kątów oparta na obwodzie koła."
+
+#: course/glossary.csv
+msgid "We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common."
+msgstr "W codziennym życiu do mierzenia kątów częściej używamy stopni, jednak w programowaniu komputerowym, a zwłaszcza w grach, to właśnie radiany są powszechnie wykorzystywane."
+
+#: course/glossary.csv
+msgid "An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
+msgstr "Kąt [code]2 * PI[/code] radianów odpowiada 360 stopniom. Kąt [code]PI[/code] radianów odpowiada 180 stopniom."
+
+#: course/glossary.csv
+msgid "In computer programming, a type is the class of a value. For example, whole numbers like [code]3[/code], [code]11[/code], and [code]255462[/code] are all of type [code]int[/code] (short for integer)."
+msgstr "W programowaniu komputerowym typ jest klasą wartości. Na przykład liczby całkowite, takie jak [code]3[/code], [code]11[/code], czy [code]255462[/code] odpowiadają typowi [code]int[/code] (to skrót od integer, co w języku angielskim oznacza liczbę całkowitą)."
+
+#: course/glossary.csv
+msgid "The computer uses types to determine which operations are valid between two values and when they're undefined."
+msgstr "Komputer używa typów do określenia, które z operacji są prawidłowe pomiędzy dwiema wartościami i kiedy są niezdefiniowane."
+
+#: course/glossary.csv
+msgid "In computer code, an iteration is one repetition of some process or code. We typically use the term with loops, where one iteration is one run of the loop's code."
+msgstr "W kodzie komputerowym iteracja jest jednym powtórzeniem jakiegoś procesu lub kodu. Tego terminu używamy zazwyczaj z pętlami, gdzie jedna iteracja jest jednym przejściem kodu znajdującego się wewnątrz pętli."
+
+#: course/glossary.csv
+msgid "When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
+msgstr "Mówiąc o algorytmach, iteracja może oznaczać pełne przejście algorytmu po zbiorze danych."
+
+#: course/glossary.csv
+msgid "In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers."
+msgstr "W matematyce wektory są listą liczb. W grach często używamy wektorów 2D i 3D: odpowiednio one listom dwu- i trzyliczbowym."
+
+#: course/glossary.csv
+msgid "We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves."
+msgstr "Liczb tych używamy tego do reprezentowania kierunku i wielkości lub intensywności w przestrzeni. Dla przykładu: możesz użyć wektora do reprezentowania kierunku i prędkości, z jaką porusza się postać lub pojazd."
+
+#: course/glossary.csv
+msgid "Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
+msgstr "Wektory mogą początkowo wydawać się dość skomplikowaną jednostką, ponieważ są dość abstrakcyjne, jednak szybko zobaczysz, że znacznie uproszczają kod."
+
+#: course/glossary.csv
+#, fuzzy
+msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument."
+msgstr "Argument to wartość, którą przekazujesz do funkcji podczas jej wywoływania. Na przykład w wywołaniu [code]rotate(0.5)[/code] argumentem jest znajdująca się w nawiasach wartość [code]0.5[/code]."
+
+#: course/glossary.csv
+#, fuzzy
+msgid "A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional."
+msgstr "Funkcja może nie otrzymać żadnych argumentów, otrzymywać jeden argument lub wiele argumentów. Argumenty mogą być obowiązkowe lub opcjonalne."
+
+#: course/glossary.csv
+#, fuzzy
+msgid "When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]"
+msgstr "Gdy funkcja przyjmuje wiele argumentów, oddzielasz wartości przecinkami, tak jak w tym wywołaniu funkcji: [code]jump(50, 100)[/code]"
+
+#: course/glossary.csv
+#, fuzzy
+msgid "When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i]."
+msgstr "Gdy [i]wywołujemy[/i] funkcję, nazywamy wartości podane w nawiasach [i]argumentami[/i]."
+
+#: course/glossary.csv
+msgid "But when you [i]write[/i] a function definition, we call them [i]parameters[/i] instead. Here's an example:"
+msgstr ""
+
+#: course/glossary.csv
+msgid "[code]func move_to_position(x, y):[/code]"
+msgstr ""
+
+#: course/glossary.csv
+#, fuzzy
+msgid "In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
+msgstr "Jednak w wypadku tworzenia definicji funkcji, mówimy już o [i]parametrach[/i] funkcji. W poniższym przykładzie nazwy [code]x[/code] i [code]y[/code] są [i]parametrami[/i]."
+
+#: course/glossary.csv
+msgid "An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value."
+msgstr "Tablica jest to lista wartości. W języku GDScript tablice mogą zawierać [i]dowolne[/i] typy wartości."
+
+#: course/glossary.csv
+msgid "To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]"
+msgstr "Aby utworzyć tablicę, wpisujesz wartości oddzielone przecinkami w nawiasach kwadratowych: : [code]var three_numbers = [1, 2, 3][/code]"
+
+#: course/glossary.csv
+msgid "In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere."
+msgstr "W grach przez cały czas używamy tablic do przechowywania listy postaci w drużynie, listy przedmiotów w ekwipunku, listy zaklęć odblokowanych przez gracza i tak dalej. Są wszędzie."
+
+#: course/glossary.csv
+msgid "Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
+msgstr "Tablice są podstawowym typem wartości w programowaniu komputerowym. Znajdziesz je w prawie każdym języku programowania."
+
+#: course/glossary.csv
+msgid "Assigning a value to a variable means that you store a value inside the variable. You do this with the equal sign ([code]=[/code])."
+msgstr "Przypisanie wartości do zmiennej oznacza, że do wnętrza zmiennej [i]wkładasz[/i] daną wartość. Robisz to wykorzystując znak równości ([code]=[/code])."
+
+#: course/glossary.csv
+msgid "A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value."
+msgstr "Słownik (dictionary) to struktura danych, która mapuje wartości w pary klucz-wartość. Kiedy nadasz słownikowi klucz, znajdzie on i zwróci ci odpowiadającą mu wartość."
+
+#: course/glossary.csv
+msgid "In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game."
+msgstr "W języku GDScript klucze mogą być wieloma rzeczami. Często używać będziemy ciągów tekstowych lub liczb, ale nie musimy się do tego ograniczać. Prawidłowym kluczem może być [code]Vector2[/code], który jest przydatny do mapowania komórek siatki dla obiektów lub przedmiotów w grach opartych na siatce (tzw. grid-based games)."
+
+#: course/glossary.csv
+msgid "You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database."
+msgstr "Często będziesz używać słowników do kojarzenia bitów danych w swoich grach. Przykładowo: możemy ich użyć do powiązania nazwy sprzętu ze statystykami broni w bazie danych."
+
+#: course/glossary.csv
+msgid "Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
+msgstr "Podobnie jak tablice, słowniki są podstawowym typem danych, który zobaczysz w wielu językach programowania i będziesz go często używał."
+
+#: course/glossary.csv
+msgid "A for loop instructs the computer to repeat a set of instructions once for each value in an array."
+msgstr "Pętla for instruuje komputer do powtarzania zestaw instrukcji po jednym razie dla każdej z wartości w tablicy."
+
+#: course/glossary.csv
+msgid "In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body."
+msgstr "W każdej iteracji pętli kompilator wyodrębnia jedną wartość z tablicy i daje do niej dostęp wartościom w ciele pętli."
+
+#: course/glossary.csv
+msgid "For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met."
+msgstr "W przypadku pętli uruchamiamy kod ograniczoną liczbę razy: jeden raz na wartość w tablicy. To odróżnia pętle for od pętli while, która powtarza kod, dopóki jej warunek nie zostanie spełniony."
+
+#: course/glossary.csv
+msgid "We recommend favoring for loops when you can. They're safer and easier to use than while loops."
+msgstr "Zalecamy preferowanie pętli for, kiedy tylko jest to możliwe. Są bezpieczniejsze i łatwiejsze w użyciu od pętli while."
+
+#: course/glossary.csv
+msgid "A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains."
+msgstr "Funkcja jest to grupa instrukcji kodu, której nadajesz nazwę. Kiedy definiujesz funkcję, w późniejszym czasie możesz ją wywołać w dowolnym momencie, aby uruchomić wszystkie zawarte w niej instrukcje."
+
+#: course/glossary.csv
+msgid "You can modify a function's behavior with parameters. Parameters are variable names that you write in the function definition. You can then use them in the function's body to make your code adapt to different cases."
+msgstr "Możesz modyfikować zachowanie funkcji za pomocą parametrów. Parametry to nazwy zmiennych, które wpisujesz w definicji funkcji. Możesz następnie użyć ich w ciele funkcji, aby dostosować swój kod do różnych przypadków."
+
+#: course/glossary.csv
+msgid "Also, functions can optionally return a value to the code calling it."
+msgstr "Ponadto funkcje mogą opcjonalnie zwracać wartość do kodu, który ją wywołuje."
+
+#: course/glossary.csv
+msgid "An increment is the amount by which a value changes in your code."
+msgstr "Inkrementacja (przyrost) to wielkość, o którą zmienia się dana wartość w kodzie."
+
+#: course/glossary.csv
+msgid "In computer programming, instructions are a single operation the computer recognizes and can execute."
+msgstr "W programowaniu komputerowym instrukcje są pojedynczymi operacjami, które komputer rozpoznaje i może wykonać."
+
+#: course/glossary.csv
+msgid "For example, a function call, an addition, or assigning a value to a variable."
+msgstr "Będzie to na przykład wywołanie funkcji, czy dodanie lub przypisanie wartości do zmiennej."
+
+#: course/glossary.csv
+msgid "Variables are a tool to give a name to values you want to store in your code and change over time."
+msgstr "Zmienne są narzędziem służącym do nadawania wartościom nazw, które chcemy przechowywać w kodzie i zmieniać w czasie."
+
+#: course/glossary.csv
+msgid "For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up."
+msgstr "Dla przykłady weźmy zdrowie postaci: gdy postać otrzyma cios, będziemy chcieli, aby jego wartość spadła. Podczas leczenia natomiast, aby znowu wróciło do normy."
+
+#: course/glossary.csv
+msgid "You can create a variable named [code]health[/code] to represent the health."
+msgstr "Dla tego celu możemy utworzyć zmienną o nazwie [code]health[/code], która reprezentować będzie zdrowie."
+
+#: course/glossary.csv
+msgid "Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you."
+msgstr "Dzięki temu za każdym razem, gdy w kodzie wpisane zostanie słowo kluczowe [code]health[/code], komputer pobierze odpowiednią wartość ze swojej pamięci."
+
+#: course/glossary.csv
+msgid "Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
+msgstr "Zmienne działają trochę jak etykiety produktów w supermarkecie. Są to nazwy, które przypisujesz do jakiejś wartości. W każdej chwili możesz wziąć etykietę i nakleić ją na nowy produkt lub, w naszym przypadku, nową wartość."
+
+#: course/glossary.csv
+msgid "A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running."
+msgstr "Pętla while instruuje komputer to wykonywania kod w kółko w oparciu o podany warunek. Dopóki warunek będzie spełniony, pętla będzie działać."
+
+#: course/glossary.csv
+msgid "When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong."
+msgstr "Podczas używania pętli while musisz być bardzo ostrożny: pętle te mogą działać w nieskończoność i zfreezować grę, jeśli podany w nich warunek nie będzie prawidłowy."
+
+#: course/glossary.csv
+msgid "That's why we recommend using the safer for loop whenever you can."
+msgstr "Jest to powód, dla którego zalecamy używanie bezpieczniejszej pętli for kiedy tylko jest to możliwe."
+
+#: course/glossary.csv
+msgid "However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
+msgstr "Nadal jednak znajdą się istotne przypadki, w których wymagane będzie użycie pętli while, jak przetwarzanie plików, przetwarzanie kodu komputerowego czy dla co potężniejszych algorytmów."
+
+#: course/glossary.csv
+msgid "We talk about a loop or a function's body to refer to the lines of code that are part of the loop or function."
+msgstr "Mówiąc o pętli lub ciele funkcji odnosimy się do wierszy kodu, które są częścią danej pętli lub funkcji (jej treścią)."
+
+#: course/glossary.csv
+msgid "Returning a value is the process of sending a value to the place where you call a function."
+msgstr "Zwracanie wartości to proces wysyłania wartości do miejsca, w którym wywołana została funkcja."
+
+#: course/glossary.csv
+msgid "It happens when a function uses the [code]return[/code] keyword followed by a value, for example: [code]return -1[/code]."
+msgstr "Dzieje się to w przypadku wykorzystywania przez funkcję słowa kluczowego [code]return[/code], po którym następuje wartość, na przykład: [code]return -1[/code]."
+
+#: course/glossary.csv
+msgid "A collection of valuable and reusable code bundled together by other programmers to save you time. All programmers use code libraries."
+msgstr "Zbiór cennego kodu wielokrotnego użytku stworzonego wspólnymi siłami przez innych programistów w celu zaoszczędzenia twojego czasu. Wszyscy programiści używają bibliotek."
+
+#: course/glossary.csv
+msgid "In computer graphics, a sprite is an image you display on the screen. We generally use this word to talk about moving images, like a character, a monster, or an item falling on the ground."
+msgstr "W grafice komputerowej sprite jest to obraz, który wyświetlasz na ekranie. Zwykle używamy tego słowa, gdy mówimy o ruchomych obrazach, takich jak postacie, potwory lub przedmioty spadające na ziemię."
+
+#: course/documentation.csv
+msgid "shows the current scene"
+msgstr "pokazuje obecną scenę"
+
+#: course/documentation.csv
+msgid "hides the current scene"
+msgstr "ukrywa obecną scenę"
+
+#: course/documentation.csv
+msgid "Applies a rotation to the node, in radians, starting from its current rotation."
+msgstr "Stosuje obrót węzła w radianach, zaczynając od jego bieżącego obrotu."
+
+#: course/documentation.csv
+msgid "Moves the turtle in the direction it's facing by some pixels."
+msgstr "Przemieszcza żółwia w kierunku, w którym jest zwrócony, o kilka pikseli."
+
+#: course/documentation.csv
+msgid "Rotates the turtle to the right by some degrees."
+msgstr "Obraca żółwia w prawo o kilka stopni."
+
+#: course/documentation.csv
+msgid "Rotates the turtle to the left by some degrees."
+msgstr "Obraca żółwia w lewo o kilka stopni."
+
+#: course/documentation.csv
+msgid "Offsets the turtle's position by the given x and y amounts of pixels."
+msgstr "Przesuwa pozycję żółwia o określoną liczbę pikseli w osiach x i y."
+
+#: course/documentation.csv
+msgid "Makes the turtle draw a rectangle starting at its current position."
+msgstr "Sprawia, że żółw rysuje prostokąt, zaczynając od jego aktualnej pozycji."
+
+#: course/documentation.csv
+msgid "The position of the entity on the horizontal axis."
+msgstr "Pozycja jednostki na osi poziomej."
+
+#: course/documentation.csv
+msgid "The position of the entity on the vertical axis."
+msgstr "Pozycja jednostki na osi pionowej."
+
+#: course/documentation.csv
+#, fuzzy
+msgid " Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false, normalizes the movement."
+msgstr "Stosuje lokalną translację na osi X węzła na podstawie wartości [code]delta[/code]'y [code]Node._process[/code]'u. Jeśli [code]scaled[/code](skalowanie) ma wartość fałsz, normalizuje ruch."
+
+#: course/documentation.csv
+msgid "Stores how many cells make up the width ([code]board_size.x[/code]) and height ([code]board_size.y[/code]) of the board."
+msgstr "Przechowuje ilość komórek składających się na szerokość ([code]board_size.x[/code]) i wysokość ([code]board_size.y[/code]) tablicy."
+
+#: course/documentation.csv
+msgid "any"
+msgstr ""
+
+#: course/documentation.csv
+msgid "String"
+msgstr ""
+
+#: course/documentation.csv
+msgid "int"
+msgstr ""
+
+msgid "Learn to Code From Zero with Godot"
+msgstr ""

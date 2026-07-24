@@ -1,0 +1,835 @@
+# Hungarian translations for Learn GDScript From.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2022-06-13 17:18+0000\n"
+"Last-Translator: sztrovacsek <sztrovacsek@protonmail.com>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/learn-gdscript-from-zero/error-explanations/hu/>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: script_checking/error_database.csv
+msgid "error_explanation"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "error_suggestion"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid temporary variable name to assign values in each loop iteration. The loop creates a new variable with the desired name and assigns each element of the array to it."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "[code]for cell_position in cell_positions_array:"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "    cell_position.x += 1.0[/code]"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You get this error when you try to assign a value to something that is not a variable."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You can only assign values to variables. You cannot assign values to function calls or calculations."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call, not a variable."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You get this error when you try to change the value of a constant."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, if you write [code]const MAX_SPEED = 100[/code], you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Many constants are built into Godot and GDScript, and you cannot change them either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "1. If the value should never change, or it comes from Godot, remove the line that tries to change it."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you accidentally type a space before a tab, or a tab before a space, the computer gets confused about your code's indentation."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "A cyclic reference is when a class references itself, directly or indirectly."
+msgstr "A körkörös hivatkozás az, amikor egy osztály saját magát hívja közvetett vagy közvetlen módon."
+
+#: script_checking/error_database.csv
+msgid "It has two possible causes:"
+msgstr "Két lehetséges oka van:"
+
+#: script_checking/error_database.csv
+msgid "1. You used the class name in the class itself."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
+msgstr ""
+"1. Az osztály nevét használtad az osztályon belül.\n"
+"2. A kódod egy másik osztályra hivatkozik, ami viszont erre az osztályra hivatkozik, így egy végtelen referencia kör jön létre."
+
+#: script_checking/error_database.csv
+msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
+msgstr "Akármelyik lehetőség is áll fenn, ahogy a GDScript működik a Godot 3-ban, sajnos, ilyet nem csinálhatsz. A Godot 4 megoldást kínálhat erre a problémára, de addig más megoldást kell keresned."
+
+#: script_checking/error_database.csv
+msgid "Erase the type hint in the error line, and the problem should disappear."
+msgstr "Töröld a típus meghatározást a hibás sorból, és a problémának meg kell oldódnia."
+
+#: script_checking/error_database.csv
+msgid "At GDQuest, when we face this error, we remove the type hints on lines causing cyclic references. It solves the problem in the vast majority of cases."
+msgstr "A GDQuestnél, ha ebbe a hibába futunk, töröljük a típus meghatározást a körkörös hivatkozást okozó sorokból. A legtöbb esetben ez megoldja a problémát."
+
+#: script_checking/error_database.csv
+msgid "The indentation of your code (the number of tab characters at the start of the line) is incorrect."
+msgstr "Nem jó a behúzás a kódodban (a tabok száma a sorok elején)."
+
+#: script_checking/error_database.csv
+msgid "You are missing one or more tabs, or you inserted too many."
+msgstr "Vagy hiányzik egy vagy több tab, vagy pedig túl sok van."
+
+#: script_checking/error_database.csv
+msgid "The computer uses those leading tab characters on code lines to know which lines of code are part of a code block, like a function."
+msgstr "A számítógép arra használja azokat a tabokat a sorok elején, hogy tudja melyik kódblokkhoz (pl. függvény) mely sorok tartoznak."
+
+#: script_checking/error_database.csv
+msgid "If the line of code with the error is right after a line ending with a colon, like a function definition, you need one extra indent level compared to the previous line."
+msgstr "Ha a hibás sor közvetlenül egy olyan után van, ami kettőspontra végződik, akkor az előző sorhoz képest egy tabbal beljebb kell kezdeni."
+
+#: script_checking/error_database.csv
+msgid "In other words, your line should have one more leading tab character than the function definition."
+msgstr "Más szóval, a sorodnak eggyel több tabbal kell kezdődni, mint a függvénynek, ami tartalmazza."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code."
+msgstr "Akkor kapod ezt a hibaüzenetet, ha szintaktikai hibát vétesz, vagy ha kihagysz valamit, amivel befejeznéd ezt vagy az előző sort."
+
+#: script_checking/error_database.csv
+msgid "You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character."
+msgstr "Nagyon pontosnak kell lenned, ha kódot írsz a számítógépen. Nagyon könnyű belefutni ebbe a hibába, mert elég hozzá egyetlen elütés is."
+
+#: script_checking/error_database.csv
+msgid "Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code."
+msgstr "Vedd észre, hogy ez a hiba megjelenhet azután a sor [b]után[/b] is, ami okozza, mert a számítógép így olvassa és dolgozza fel a kódot."
+
+#: script_checking/error_database.csv
+msgid "The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing."
+msgstr "Ennek a problémának a megoldása eléggé környezetfüggő. A hibaüzenet el kéne, hogy árulja, melyik karakter, vagy elem hiányzik."
+
+#: script_checking/error_database.csv
+msgid "If the error says \"expected,\" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else."
+msgstr "Ha az üzenet azt mondja \"expected\", akkor valószíűleg kihagytál valamit az [b]előző[/b] sor(ok)ban. Lehet írásjel, zárójel, vagy valami más."
+
+#: script_checking/error_database.csv
+msgid "If it says \"unterminated,\" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
+msgstr "Ha azt írja \"unterminated\", akkor a kifejezés végéről hiányzik valami, pl. egy csukó zárójel. Ebben az esetben, valószínűleg abban a sorban lesz a hiba, ahol jelzi."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you use a special character that GDScript doesn't recognize."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings)."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "[b]Note:[/b] Godot 4 supports special and non-Latin characters in code (Unicode characters), but this app is built with Godot 3, which does not."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You can use accented characters inside text strings (between quotes), but not in the code itself."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "This error tells you that you are missing a parenthesis (or sometimes a comma or a path)."
+msgstr "Ez a hiba azt jelenti, hogy hiányzik egy zárójel (vagy néha egy vessző, vagy egy útvonal)."
+
+#: script_checking/error_database.csv
+msgid "Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code]."
+msgstr "A GDScriptben van három kulcsszó, ami függvényként működik, és szüksége van zárójelre: [code]yield()[/code], [code]preload()[/code], és [code]assert()[/code]."
+
+#: script_checking/error_database.csv
+msgid "To address the error, you want to add the missing opening parenthesis, the closing parenthesis, or the comma."
+msgstr "A hiba javításához add meg a nyitó/csukó zárójelet, vagy vesszőt."
+
+#: script_checking/error_database.csv
+msgid "This error happens in several cases:"
+msgstr "Ennek a hibának több oka is lehet:"
+
+#: script_checking/error_database.csv
+msgid "1. You wrote an identifier (variable or function name) in the wrong place."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
+msgstr ""
+"1. Rossz helyre írtál egy azonosítót (változó vagy függvénynév).\n"
+"2. Használtad a [code]var[/code], [code]func[/code], [code]for[/code], vagy [code]signal[/code] kulcsszavak egyikét, de nem adtál meg nevet.\n"
+"3. Definiáltál egy függvényt, de lefelejtetted a zárójeleket a kettőspont előtt."
+
+#: script_checking/error_database.csv
+msgid "3. You wrote a function definition but forgot the parentheses before the colon."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses."
+msgstr "Ha hiba az, hogy \"expected\", akkor valószínűleg elfelejtettél nevet írni a [code]var[/code], [code]func[/code], [code]for[/code], vagy [code]signal[/code] kulcsszavak valamelyike után, ezzel érvénytelenné téve a kódod. Vagy lehagytad a zárójelet a függvényhíváskor. Kijavíthatod a hibát, ha pótolod ezeket."
+
+#: script_checking/error_database.csv
+msgid "If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc."
+msgstr "Ha a hiba szerint valami \"unexpected\", akkor valószínűleg lehagytad a [code]var[/code], [code]func[/code], [code]for[/code], stb kulcsszavak valamelyikét."
+
+#: script_checking/error_database.csv
+msgid "Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
+msgstr "Egy másik lehetőség, hogy tenned kell egy kettőspontot a függvény definíció, [code]for[/code] ciklus, vagy pedig egy [code]if[/code], [code]elif[/code], vagy [code]else[/code] kulcsszóval kezdődő sor végére."
+
+#: script_checking/error_database.csv
+msgid "This error tells you that you are missing a type somewhere. A type can be [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], and many identifiers representing a data structure."
+msgstr "Ez a hiba azt jelenti, hogy valahol nem adtál meg típust. A típus lehet [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], és még sok más, ami valamilyen adatstruktúrát jelöl."
+
+#: script_checking/error_database.csv
+msgid "Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name."
+msgstr "A legtöbb esetben akkor jön elő, ha tettél egy kettőspontot egy változó neve után, de nem írtál utána típust."
+
+#: script_checking/error_database.csv
+msgid "It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name."
+msgstr "Akkor is előjön, ha egy nyilat ([code]->[/code]) raksz a függvény definíció zárójele után, de nem követed azt típus megadással."
+
+#: script_checking/error_database.csv
+msgid "To solve this, you need to write the name of the type after the colon, arrow (in the case of function return types), inside parentheses (for export types), or after the [code]as[/code] keyword."
+msgstr "A javításhoz add meg a típust a kettőspont vagy nyíl (függvény visszatérési típus esetén) után, zárójelben (export típus), vagy az [code]as[/code] kulcsszó után."
+
+#: script_checking/error_database.csv
+msgid "The variable, function name, or class name you are trying to use does not exist."
+msgstr "A változó, függvény vagy osztály, amire hivatkozol, nem létezik."
+
+#: script_checking/error_database.csv
+msgid "You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot."
+msgstr "Legtöbbször akkor jön elő ez a hiba, ha elírtál valamit. Talán megcseréltél két betűt, vagy kihagytál egyet... néha nehéz észrevenni."
+
+#: script_checking/error_database.csv
+msgid "The other cause for this error is that you didn't define the variable, function, or class you're trying to access."
+msgstr "A másik ok az lehet, hogy még nem hoztad létre a változót, függvényt vagy osztályt, amit el szeretnél érni."
+
+#: script_checking/error_database.csv
+msgid "To solve this error, triple-check that there is no typo in the line."
+msgstr "Hogy kijavítsd ezt a hibád, ellenőrizd többször is, hogy nincs-e elírás az adott sorban."
+
+#: script_checking/error_database.csv
+msgid "If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error."
+msgstr "Ha lehetséges, menj a változó vagy függvény deklarációhoz, jelöld ki, másold majd illeszd be a hibás sorba."
+
+#: script_checking/error_database.csv
+msgid "If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
+msgstr "Ha nem látsz semmi elírást, győzödj meg róla, hogy definiáltad-e egyáltalán a változót, függvényt vagy osztályt, amire hivatkozol."
+
+#: script_checking/error_database.csv
+msgid "You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid."
+msgstr "A [code]break[/code] vagy [code]continue[/code] kulcsszavakat csak ciklusokban használhatod. A cikluson kívül érvénytelenek."
+
+#: script_checking/error_database.csv
+msgid "The [code]continue[/code] keyword means \"jump to the next iteration of the loop.\" And the [code]break[/code] keyword means \"end the loop right now and jump to the first line of code after the loop block."
+msgstr "A [code]continue[/code] azt jelenti, hogy \"ugorj a ciklus következő iterációjára.\" A [code]break[/code] pedig azt, hogy \"azonnal fejezd be a ciklust és ugorj a ciklus utáni első sorra\"."
+
+#: script_checking/error_database.csv
+msgid "If you wrote one of these keywords outside a loop, you need to remove it."
+msgstr "Ha valamelyik kulcsszót a cikluson kívülre írtad, akkor töröld onnan."
+
+#: script_checking/error_database.csv
+msgid "If you are trying to use it inside a loop, your indentation is most likely at fault. You may need to insert one or more leading tab characters to the keyword."
+msgstr "Ha cikluson belül próbálod használni, akkor valószínűleg a behúzással lesz probléma. Lehet, hogy egy vagy több tab karakterre lesz szükséged a kulcsszó előtt."
+
+#: script_checking/error_database.csv
+msgid "When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant."
+msgstr "Ha \"constant expression\"-ről beszél a számítógép, akkor egy fix értékre, számításra vagy egy már létező konstans nevére számít."
+
+#: script_checking/error_database.csv
+msgid "In other words, it wants something that can never change. This is why the computer will reject function calls and variables where it needs a constant expression."
+msgstr "Más szavakkal, valami olyasmit vár, ami soha nem változhat. Ezért nem fogad el a számítógép függvényt vagy változót ott, ahol konstansra van szüksége."
+
+#: script_checking/error_database.csv
+msgid "You need to replace function calls or variables with a constant value like a whole number, decimal number, string, vector, a predefined array, etc."
+msgstr "A függvények vagy változók helyett egy konstans kell használnod, például: egész szám, tört szám, string, vector, előre definiált tömb, stb."
+
+#: script_checking/error_database.csv
+msgid "You can also use arithmetic operators like multiplications (*), additions (+), and so on."
+msgstr "Használhatsz műveleti jeleket is, mint például szorzás (*) vagy összeadás (+)."
+
+#: script_checking/error_database.csv
+msgid "When defining a new class, you need to follow a specific pattern. You must write the name in plain text, starting with a letter."
+msgstr "Osztály létrehozásánál egy bizonyos mintát kell követned. Egyszerű szövegként kell megadni a nevet, betűvel kezdve."
+
+#: script_checking/error_database.csv
+msgid "We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name."
+msgstr "Az osztályneveket általában PascalCase-ben írjuk: az osztály nevét alkotó szavak mind nagybetűvel kezdődnek."
+
+#: script_checking/error_database.csv
+msgid "To fix this error, replace whatever you put after the 'extends' or 'class_name' keyword by a name without spaces and starting with a capital letter."
+msgstr "A javításhoz, cseréld le ami az \"extends\" vagy a \"class_name\" után van, egy olyan névre, ami nem tartalmaz szóközöket és nagybetűvel kezdődik."
+
+#: script_checking/error_database.csv
+msgid "You can optionally use numbers in the name, but not in the first position."
+msgstr "Használhatsz számokat is a névben, de nem kezdheted azzal."
+
+#: script_checking/error_database.csv
+msgid "You are trying to define a function or variable that already exists; You can't do that."
+msgstr "Egy olyan függvényt vagy változót próbálsz meg létrehozni, ami már létezik. Ilyet nem lehet."
+
+#: script_checking/error_database.csv
+msgid "Perhaps the function or variable already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
+msgstr "Lehet, hogy az a függvény már létezik az aktuális script fájlban, vagy egy szülő osztályban, amiből ez a script leszármazik."
+
+#: script_checking/error_database.csv
+msgid "In the app, your code extends some built-in Godot code that's not visible to you."
+msgstr "Az alkalmazásban a kódod olyan GDScript kódra is épül, ami számodra nem látható."
+
+#: script_checking/error_database.csv
+msgid "When that happens, you need to either rename your function or variable to one that will not collide with an existing one or remove this line of code."
+msgstr "Amikor ez történik, akkor át kell nevezned a függvényt vagy változót valami olyanra, ami nem egyezik meg egy már létezővel, vagy törölnöd kell azt a sort."
+
+#: script_checking/error_database.csv
+msgid "You are trying to define a signal that already exists; You can't do that."
+msgstr "Egy már létező signalt próbálsz létrehozni. Ez nem megengedett."
+
+#: script_checking/error_database.csv
+msgid "Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
+msgstr "Lehet, hogy a signal már létezik az aktuális kódban, de lehet, hogy egy szülő osztályban van, amiből a GDScript kód leszármazik."
+
+#: script_checking/error_database.csv
+msgid "When that happens, you need to either rename your signal to one that will not collide with an existing one or remove this line of code."
+msgstr "Ha ez történik, akkor olyan nevet kell adnod a signalnak, amilyen még nem szerepel a kódban, vagy törölnöd kell azt."
+
+#: script_checking/error_database.csv
+msgid "The function you're trying to define exists in a parent class, so your definition overrides the parent class's function."
+msgstr "A függvény, amit létre akarsz hozni, már létezik egy szülő osztályban, szóval a deklarációd felülírja a szülő osztályban lévő függvényt."
+
+#: script_checking/error_database.csv
+msgid "When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class."
+msgstr "Ha felülírod a szülő osztályban lévő függvényt, az új függvények meg kell egyeznie vele. Az új függvény paramétereinek száma és típusa meg kell, hogy ezzen a szülő osztályéval."
+
+#: script_checking/error_database.csv
+msgid "For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class."
+msgstr "Például, ha a szülőnek két argumentuma van, akkor az új függvényednek is két argumentummal kell rendelkeznie. Ha használsz típusmeghatározást a szülő osztályban, akkor az argumentumok típusának meg kell egyeznie azzal."
+
+#: script_checking/error_database.csv
+msgid "You need to check the parent class's function and its definition in the code reference. Then, you need to edit your function definition to have the same number and type of parameters as the parent class."
+msgstr "Ellenőrizned kell a szülő osztályban lévő függvényt és annak deklarációját a kódban. Ezután módosítanod kell a saját függvény deklarációd, hogy azonos típusú és számú argumentummal rendelkezze, mint a szülő."
+
+#: script_checking/error_database.csv
+msgid "This whole class of errors has to do with calling functions with either the wrong number of arguments or the wrong kind of argument. You will need to use the error message to see what is going wrong."
+msgstr "Az összes ilyen típusú hiba arra utal, hogy nem megfelelő számú vagy típusú argumentumot adtál meg. A hibaüzenetet kell használnod, hogy kiderítsd, pontosan mi a baj."
+
+#: script_checking/error_database.csv
+msgid "You need to either remove, add, or change the values you're trying to pass to the function to solve this issue. To know exactly how many arguments you need, you need to check the code reference. It will show you the function definition and the mandatory arguments."
+msgstr "Ahhoz, hogy javítsd ezt a hibát, lehet, hogy törölnöd, hozzádnod vagy módosítanod kell az értékeket, amelyeket a függvénynek próbálsz meg átadni. Ahhoz, hogy megtudd pontosan hány argumentumra van szükséged, meg kell nézned a kódot. Ez megmutatja neked a függvény deklarációt és a szükséges argumentumokat."
+
+#: script_checking/error_database.csv
+msgid "All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!"
+msgstr "A kódban minden értéknek van egy egyedi típusa. Ez lehet egész szám (int), törtszám (float), szöveg (String), stb. Rengetegféle típus létezik, sőt sajátot is létrehozhatsz!"
+
+#: script_checking/error_database.csv
+msgid "When you make any operation, the computer compares the types you are using."
+msgstr "Ha valamilyen műveletet hajtasz végre, a számítógép összehasonlítja a típusokat, amiket használsz."
+
+#: script_checking/error_database.csv
+msgid "Some types are compatible, and some are not. For example, you cannot directly add a whole number to a text string. You first need to convert the number into text."
+msgstr "Néhány típus kompatibilis, mások viszont nem. Példáül, nem adhatsz egy egész számot egy szöveghez. Először szöveggé kell konvertálnod a számot."
+
+#: script_checking/error_database.csv
+msgid "You'll need to read the error message to see what is not matching because there are many possible cases."
+msgstr "El kell olvasnod hibaüzenetet, hogy lásd, pontosan mi a probléma, mert sokféle eset lehetséges."
+
+#: script_checking/error_database.csv
+msgid "If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=)."
+msgstr "Ha a hibaüzenet szerint a megadott érték nem egyezik meg a változó típusával, akkor a hiba az egyenlőség jel (=) jobb oldalán van."
+
+#: script_checking/error_database.csv
+msgid "If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic."
+msgstr "Ha a hibaüzenet szerint a visszatérési érték típusa nem egyezik meg a függvényével, akkor a baj a [code]return[/code] kulcsszó után van."
+
+#: script_checking/error_database.csv
+msgid "If the computer talks about an invalid operand, then the issue is that the operation does not exist for the type you're trying to use. For example, while you can add two 2D vectors, you can't add a whole number or text to a 2D vector."
+msgstr "Ha a számítógép érvénytelen műveletről beszél, akkor a művelet, amit végre akarsz hajtani, nem létezik az adott típushoz, amit épp használsz. Például, két 2 dimenziós vektort összeadhatsz egymással, de egy egész számmal vagy szöveggel már nem."
+
+#: script_checking/error_database.csv
+msgid "GDScript supports type inference. The computer will automatically recognize the type of value you are working with. In some cases, though, it can't figure it out."
+msgstr "A GDScript képes a típus kikövetkeztetésére. A számítógép legtöbb esetben automatikusan felismeri a változó típusát, amivel dolgozol. Néhány esetben azonban erre nem képes."
+
+#: script_checking/error_database.csv
+msgid "When that happens, you need to specify the type yourself or remove type inference altogether for this variable."
+msgstr "Ha ez történik, akkor neked kell megadnod a típust, vagy épp el kell hagynod a típus megadást."
+
+#: script_checking/error_database.csv
+msgid "The simplest way to solve this error is to remove types for this variable or this function's arguments. Otherwise, you can manually specify the value type after the colon."
+msgstr "Ennek a hibának a legegyszerűbb megoldása, ha eltávolítod a típusokat az adott változóhoz, vagy függvény argumentumhoz. Vagy, megadhatod te magad is a típust a változó neve után kettősponttal. Példa: [code]var health : int[/code]"
+
+#: script_checking/error_database.csv
+msgid "We recommend specifying the type whenever possible to reap the typing system's benefits."
+msgstr "Ajánlott a típust minden esetben megadni, amikor csak lehetséges, hogy élvezhessük a típusok előnyeit."
+
+#: script_checking/error_database.csv
+msgid "There is an issue with the return value of your function. There are two main cases here:"
+msgstr "Valami baj van a függvényed visszatérési értékével. Ennek két fő oka lehet:"
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
+msgstr ""
+"1. A függvényed void, így nem kéne visszatérnie semmilyen értékkel. Ide tartoznak a '-> void' kulcsszóval ellátott függvények és a beépített osztályok ('_init()').\n"
+"2. Megadtál egy visszatérési típust, de nem adsz meg visszatérési értéket minden elágazásnál (if, elif, és else blokkok) vagy a függvény végén."
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
+msgstr ""
+"1. A függvényed void, így nem kéne visszatérnie semmilyen értékkel. Ide tartoznak a '-> void' kulcsszóval ellátott függvények és a beépített osztályok ('_init()').\n"
+"2. Megadtál egy visszatérési típust, de nem adsz meg visszatérési értéket minden elágazásnál (if, elif, és else blokkok) vagy a függvény végén."
+
+#: script_checking/error_database.csv
+msgid "When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that."
+msgstr "Ha 'void' függvényed van, soha ne adj meg visszatérési értéket. Használhatod a 'return' kulcsszót, hogy rendesen lezárd a függvényt, de soha ne írj utána semmit."
+
+#: script_checking/error_database.csv
+msgid "When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
+msgstr "Ha megadsz visszatérési típust, akkor minden esetben vissza kell térned valamilyen értékkel, minden elágazásnál (if, elif, és else blokkok) vagy a függvény végén."
+
+#: script_checking/error_database.csv
+msgid "Godot was unable to load your script, yet the language checker found nothing wrong."
+msgstr "A Godot nem tudta betölteni a szkripted, a nyelv ellenőrző mégsem talált semmilyen hibát."
+
+#: script_checking/error_database.csv
+msgid "Please click on the \"report\" button at the top and please let us know."
+msgstr "Kérjük kattints a \"hibajelzés\" gombra, és tudasd velünk."
+
+#: script_checking/error_database.csv
+msgid "You called a function inside itself. This will loop forever."
+msgstr "Saját magában hívtál egy függvényt. Ez végtelen ciklust eredményez."
+
+#: script_checking/error_database.csv
+msgid "There are valid reasons for using recursive functions, but none of them are part of this course, so this cannot be a valid solution."
+msgstr "Vannak olyan esetek, amikor rekurzív függvényekre van szükség, de azok nem részei ennek a kurzusnak, szóval ez nem lehet a helyes megoldás."
+
+#: script_checking/error_database.csv
+msgid "You wrote a while loop with a condition that is always true (like [code]while true:[/code] or [code]while(true):[/code]) without a [code]break[/code] statement inside it. This creates an infinite loop that will freeze your game."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To fix this, you need to either add a [code]break[/code] statement inside the loop so it can exit when a certain condition is met, or change the while loop condition to something that will become false. For example: [code]while position.x < 100: position.x -= 10[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The computer reached the end of the line of code, but the line had a syntax error."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Double-check that you are not missing a quote character or that the quote character you used to start the string is the same as the one you used to close the string."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The sub-variable you are trying to access does not exist."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You probably have a typo in the name of the sub-variable that you are trying to access."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Ensure that you don't have a capital letter where you should have a lowercase letter and vice versa."
+msgstr ""
+
+#: course/glossary.csv course/documentation.csv
+#, fuzzy
+msgid "explanation"
+msgstr "iteráció"
+
+#: course/glossary.csv
+msgid "Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods."
+msgstr "A tagfüggvény olyan függvény, ami egy specifikus változó típushoz van kötve, például tömb, string, vagy könyvtár. Metódusnak is hívják."
+
+#: course/glossary.csv
+msgid "For example, arrays have member functions like [code]array.append()[/code]."
+msgstr "Példa egy tömb tagfüggvényre: [code]array.append()[/code]."
+
+#: course/glossary.csv
+msgid "You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
+msgstr "Csak akkor lehet hívni a függvényt a tömbön, ha [code].[/code]-tal hozzákapcsoljuk, ahogy fent is látható."
+
+#: course/glossary.csv
+msgid "Member variables are variables attached to a specific value type, like a vector's [code]x[/code] and [code]y[/code] sub-variables. We also call them [i]properties[/i] or [i]fields[/i] of the vector."
+msgstr "A tagváltozó olyan változó, ami egy adott változó típushoz van kötve, mint például a vektor [code]x[/code] és [code]y[/code] részváltozói. A vektor [i]tulajdonságainak[/i] vagy [i]mezőinek[/i] is hívjuk őket."
+
+#: course/glossary.csv
+msgid "To access a member variable, you must first write the value's name followed by the access operator ([code].[/code]). For example, [code]position.x[/code]."
+msgstr "Ahhoz, hogy elérd a tagváltozókat, először ki kell írni a változót nevét, majd egy [code].[/code]-ot. Például: [code]position.x[/code]."
+
+#: course/glossary.csv
+msgid "A parameter is a variable you create as part of a function definition."
+msgstr "A paraméter egy olyan változó, amit függvény deklarálásakor hozol létre."
+
+#: course/glossary.csv
+msgid "It allows you to reuse the function more by having values that vary in the function's body."
+msgstr "Ez lehetővé teszi, hogy többször is felhasználd a függvényt, azoknak változóknak köszönhetően, melyeknek az értéke változhat a függvénytörzsben."
+
+#: course/glossary.csv
+msgid "A radian is a unit of measurement of angles based on the circle's circumference."
+msgstr "A radián egy mértékegység a szögeg mérésére, ami a kör kerületét veszi alapul."
+
+#: course/glossary.csv
+msgid "We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common."
+msgstr "A hétköznapi életben általában fokot használunk, de a programozásban, és különösen a játék programozásban, a radián elég gyakori."
+
+#: course/glossary.csv
+msgid "An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
+msgstr "A radián [code]2 * PI[/code] az 360 fok. A [code]PI[/code] pedig 180 foknak felel meg."
+
+#: course/glossary.csv
+msgid "In computer programming, a type is the class of a value. For example, whole numbers like [code]3[/code], [code]11[/code], and [code]255462[/code] are all of type [code]int[/code] (short for integer)."
+msgstr "A programozásban a típus az egy változónak a fajtája. például, az egész számok, mint a [code]3[/code], [code]11[/code], és [code]255462[/code] mind [code]int[/code] (vagy integer) típusúak."
+
+#: course/glossary.csv
+msgid "The computer uses types to determine which operations are valid between two values and when they're undefined."
+msgstr "A számítógép a típusokat használja, hogy eldöntse milyen műveleteket hajthat végre két változó közt és azok mikor értelmezhetetlenek."
+
+#: course/glossary.csv
+msgid "In computer code, an iteration is one repetition of some process or code. We typically use the term with loops, where one iteration is one run of the loop's code."
+msgstr "A programozásban az iteráció, egy adott folyamatnak vagy kódnak az egyszeri végrehajtása. Általában ciklusoknál használjuk, ahol egy iteráció, a ciklus kódjának egyszeri lefutását jelenti."
+
+#: course/glossary.csv
+msgid "When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
+msgstr "Ha algoritmusokról beszélünk, akkor az iteráció jelentheti az algoritmus teljes lefutását az adathalmazon."
+
+#: course/glossary.csv
+msgid "In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers."
+msgstr "A matematikában a vektor egy számokból álló lista. Játékokban gyakran használunk 2 vagy 3 dimenzós vektorokat: ezek 2 vagy 3 számos listákat jelentenek"
+
+#: course/glossary.csv
+msgid "We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves."
+msgstr "Arra használjuk, hogy irányt és méretet adjunk meg, vagy intenzitást a térben. Például használhatod a vektorokat arra, hogy megadd egy karakter vagy jármű irányát és sebességét."
+
+#: course/glossary.csv
+msgid "Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
+msgstr "A vektorok talán bonyolultnak tűnnek elsőre, mert elég absztraktak, de amint látni fogod, jelentősen leegyszerűsítik a kódot."
+
+#: course/glossary.csv
+#, fuzzy
+msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument."
+msgstr "Az argumentum egy olyan változó, amit a függvénynek adsz át, amikor hívod azt. Például, a [code]rotate(0.5)[/code] függvényben, a [code]0.5[/code] az argumentum."
+
+#: course/glossary.csv
+#, fuzzy
+msgid "A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional."
+msgstr "Egy függvénynek lehet 0, 1 vagy több argumentuma is. Az argumentum lehet kötelező, vagy opcionális."
+
+#: course/glossary.csv
+#, fuzzy
+msgid "When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]"
+msgstr "Ha egy függvény több argumentumot is fogad, akkor az értékeket \",\"-vel választjuk el, ahogy itt is látható: [code]jump(50, 100)[/code]"
+
+#: course/glossary.csv
+#, fuzzy
+msgid "When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i]."
+msgstr "Amikor [i]hívjuk[/i] a függvényt, a zárójelben lévő értékeket [i]argumentumnak[/i] nevezzük."
+
+#: course/glossary.csv
+msgid "But when you [i]write[/i] a function definition, we call them [i]parameters[/i] instead. Here's an example:"
+msgstr ""
+
+#: course/glossary.csv
+msgid "[code]func move_to_position(x, y):[/code]"
+msgstr ""
+
+#: course/glossary.csv
+#, fuzzy
+msgid "In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
+msgstr "Azonban amikor definiáljuk azt, akkor függvény [i]paraméterekről[/i] beszélünk. A következő példában az [code]x[/code] és [code]y[/code] egy-egy [i]paraméter[/i]."
+
+#: course/glossary.csv
+msgid "An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value."
+msgstr "A tömb egy változókat tartalmazó lista. A GDScriptben [i]bármilyen[/i] típusú értéket tartalmazhatnak."
+
+#: course/glossary.csv
+msgid "To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]"
+msgstr "Tömb létrehozásához, az adatokat szögletes zárójelben add meg, \",\"-vel elválasztva: [code]var three_numbers = [1, 2, 3][/code]"
+
+#: course/glossary.csv
+msgid "In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere."
+msgstr "A játékokban állandóan használjuk a tömböket: karakterek egy csapatban, tárgyak az eszköztáradban, feloldott varázslatok, stb. Mindenhol ott vannak."
+
+#: course/glossary.csv
+msgid "Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
+msgstr "A tömbök alapvető fontosságúak a programozásban. Gyakorlatilag minden programnyelvben találkozhatsz velük."
+
+#: course/glossary.csv
+msgid "Assigning a value to a variable means that you store a value inside the variable. You do this with the equal sign ([code]=[/code])."
+msgstr "Az érték hozzárendelése egy változóhoz azt jelent, hogy abban a változóban tárolod az értéket. Ezt az [code]=[/code] jellel lehet megtenni."
+
+#: course/glossary.csv
+msgid "A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value."
+msgstr "A könyvtár egy olyan adatstruktúra, ami az értékeket, kulcs-érték párokká alakítja. Ha megadsz aegy kulcsot a könyvtárban, az a hozzá tartozó értéket fogja visszaadni."
+
+#: course/glossary.csv
+msgid "In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game."
+msgstr "A GDScriptben sokféle kulcs lehet. Leggyajrabban szavakat vagy számokat használunk, de nem kell ehhez ragaszkodni. Egy [code]Vector2[/code] is lehet érvényes kulcs, ami jól jön, ha egy mezőt kell egy egységhez vagy egy tárgyhoz rendelni, egy mezőkre osztott játékban."
+
+#: course/glossary.csv
+msgid "You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database."
+msgstr "Gyakran használhatsz könyvtárakat, hogy összekapcsolj adatokat a játékodban. Például, használhatjuk arra, hogy összekapcsoljuk egy fegyver nevét, a hozzá tartozó értékekkel."
+
+#: course/glossary.csv
+msgid "Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
+msgstr "A tömbökhöz hasonlóan, ezek is alapvető adat típusok, amelyekkel a legtöbb programnyelvben találkozhatsz, és gyakran fogsz használni."
+
+#: course/glossary.csv
+msgid "A for loop instructs the computer to repeat a set of instructions once for each value in an array."
+msgstr "A for ciklus utasítja a számítógépet, hogy ismételjen egy utasításkészletet, annyiszor, ahány elem van a tömbben."
+
+#: course/glossary.csv
+msgid "In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body."
+msgstr "A ciklus minden egyes iterációjában, a compiler \"kivesz\" egy elemet a tömbből és elérhetővé teszi számodra a ciklus törzsében."
+
+#: course/glossary.csv
+msgid "For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met."
+msgstr "A for ciklus csak meghatározott alkalommal hajtódik végre: ahány elemű a tömb. Nem úgy, mint a while ciklus, ami addig ismétlődik, amíg nem teljesül egy feltétel."
+
+#: course/glossary.csv
+msgid "We recommend favoring for loops when you can. They're safer and easier to use than while loops."
+msgstr "Azt ajánljuk, hogy, ha teheted, akkor a for ciklusokat részesítsd előnyben. Biztonságosabbak, és egyszerűbb a használatuk, mint a while ciklusoké.."
+
+#: course/glossary.csv
+msgid "A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains."
+msgstr "A függvény az utasítások egy névvel ellátott csoportját jelenti. Ha létrhozol egy függvényt, azt akármikor hívhatod, hogy a benne lévő utasításokat végrehajtsd."
+
+#: course/glossary.csv
+msgid "You can modify a function's behavior with parameters. Parameters are variable names that you write in the function definition. You can then use them in the function's body to make your code adapt to different cases."
+msgstr "Paraméterekkel módosíthatod a függvény működését. A paraméterek olyan változók, amelyek a függvény létrehozásánál adhatsz meg. Ezután használhatod őket a függvény törzsében, hogy a kódod alkalmazkodjon a különböző helyzetekhez."
+
+#: course/glossary.csv
+msgid "Also, functions can optionally return a value to the code calling it."
+msgstr "Továbbá, a függvények visszatérhetnek egy értékkel abba a kódba, ahonnan hívva lettek."
+
+#: course/glossary.csv
+msgid "An increment is the amount by which a value changes in your code."
+msgstr "A növekedés az az érték, amellyel változik az érték a kódban."
+
+#: course/glossary.csv
+msgid "In computer programming, instructions are a single operation the computer recognizes and can execute."
+msgstr "A programozásban a művelet a legegyszerűbb kifejezés, amit a számítógép felismer és végrehajt"
+
+#: course/glossary.csv
+msgid "For example, a function call, an addition, or assigning a value to a variable."
+msgstr "Példál, egy függvény hívása, összeadás, vagy érték hozzárendelése egy változóhoz."
+
+#: course/glossary.csv
+msgid "Variables are a tool to give a name to values you want to store in your code and change over time."
+msgstr "A változók arra vannak, hogy nevet adhass az értékeknek, amelyeket használni vagy módosítani szeretnél a kódodban."
+
+#: course/glossary.csv
+msgid "For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up."
+msgstr "Például, egy karakter életereje: ha sebzés éri a karaktert, lejjeb akarod vinni. Ha gyógyul, akkor pedig feljebb."
+
+#: course/glossary.csv
+msgid "You can create a variable named [code]health[/code] to represent the health."
+msgstr "Készíthetsz egy [code]health[/code] nevű változót, hogy ez reprezentálja az életerőt."
+
+#: course/glossary.csv
+msgid "Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you."
+msgstr "Ezután, mindig amikor a [code]health[/code]-re hivatkozol a kódodban, a számítógép a hozzá tartozó értéket fogja elővenni."
+
+#: course/glossary.csv
+msgid "Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
+msgstr "A változók hasonlóak, mint az címkék a szupermarketekben. Nevek, amelyekhez valamilyen értéket rendelsz. Bármikor megfoghatod a címkét és átteheted egy másik termékre, vagy, mint a fenti példában, új értéket adhatsz meg."
+
+#: course/glossary.csv
+msgid "A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running."
+msgstr "A while ciklus arra utasítja a számítógépet, hogy feltételtől függően folymatosan hajtsa végre az utasításokat. Amíg a feltétel igaz, addig fut a ciklus."
+
+#: course/glossary.csv
+msgid "When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong."
+msgstr "While ciklus használatánál oda kell figyelni: ha rossz feltételt adsz meg, akkor soha nem állnak meg és lefagyaszthatják a játékod."
+
+#: course/glossary.csv
+msgid "That's why we recommend using the safer for loop whenever you can."
+msgstr "Ezért ajánljik, hogy , ha csak teheted, használd a biztonságos for ciklust."
+
+#: course/glossary.csv
+msgid "However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
+msgstr "Azonban, vannak olyan esetek, amikor mégis a while ciklust használjuk, például fájlműveletek, kódfeldolgozás, vagy komplexebb algoritmusok."
+
+#: course/glossary.csv
+msgid "We talk about a loop or a function's body to refer to the lines of code that are part of the loop or function."
+msgstr "Ciklus-, vagy függvénytörzsről akkor beszélünk, ha az azokat alkotó kódsorokról van szó."
+
+#: course/glossary.csv
+msgid "Returning a value is the process of sending a value to the place where you call a function."
+msgstr "Érték visszatéréséről akkor beszélünk, ha azt arra a helyre küldjük, ahonnan hívva lett a függvény."
+
+#: course/glossary.csv
+msgid "It happens when a function uses the [code]return[/code] keyword followed by a value, for example: [code]return -1[/code]."
+msgstr "Ezt a [code]return[/code] kulcsszóval majd az azt követő értékkel tehetjük meg. Például: [code]return -1[/code]."
+
+#: course/glossary.csv
+msgid "A collection of valuable and reusable code bundled together by other programmers to save you time. All programmers use code libraries."
+msgstr "Értékes és többször használható kódgyűjtemények, melyeket más programozók gyúrtak egybe, hogy neked időt takarítsanak meg. Minden programozó használ könyvtárakat."
+
+#: course/glossary.csv
+msgid "In computer graphics, a sprite is an image you display on the screen. We generally use this word to talk about moving images, like a character, a monster, or an item falling on the ground."
+msgstr "A számítógépes grafikában a sprite egy kép, amit megjelenítesz a képernyőn. Általában olyan képekre használjuk, amik mozognak, például egy karakter, egy szörny vagy egy tárgy, ami leeseik a földre."
+
+#: course/documentation.csv
+msgid "shows the current scene"
+msgstr "megjeleníti az aktuális scene-t"
+
+#: course/documentation.csv
+msgid "hides the current scene"
+msgstr "elrejti az aktuális scene-t"
+
+#: course/documentation.csv
+msgid "Applies a rotation to the node, in radians, starting from its current rotation."
+msgstr "Elforgatja a node-ot a jelenlegi helyzetéhez képest, a radiánban megadott értékkel."
+
+#: course/documentation.csv
+msgid "Moves the turtle in the direction it's facing by some pixels."
+msgstr "Elmozdítja a teknőst valahány pixellel, abba az irányba, amerre néz."
+
+#: course/documentation.csv
+msgid "Rotates the turtle to the right by some degrees."
+msgstr "Jobbra fordítja a teknőst valahány fokkal."
+
+#: course/documentation.csv
+msgid "Rotates the turtle to the left by some degrees."
+msgstr "Balra fordítja a teknőst valahány fokkal."
+
+#: course/documentation.csv
+msgid "Offsets the turtle's position by the given x and y amounts of pixels."
+msgstr "Elcsúsztatja a teknős pozícióját a megadott x és y értékű pixellel."
+
+#: course/documentation.csv
+msgid "Makes the turtle draw a rectangle starting at its current position."
+msgstr "Rajzoltat egy négyzetet a teknőssel, a jelenlegi pozíciójából kiindulva."
+
+#: course/documentation.csv
+msgid "The position of the entity on the horizontal axis."
+msgstr "A dolog pozíciója a vízszintes tengelyen."
+
+#: course/documentation.csv
+msgid "The position of the entity on the vertical axis."
+msgstr "A dolog pozíciója a függőleges tengelyen."
+
+#: course/documentation.csv
+#, fuzzy
+msgid " Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false, normalizes the movement."
+msgstr "A lokális X tengelyen történő elmozdítás, ami a [code]Node._process[/code] [code]delta[/code] értékén alapul. Ha a [code]scaled[/code] változó értéke hamis, normalizálja a mozgást."
+
+#: course/documentation.csv
+msgid "Stores how many cells make up the width ([code]board_size.x[/code]) and height ([code]board_size.y[/code]) of the board."
+msgstr "Tárolja, hogy hány mező széles ([code]board_size.x[/code]) és magas ([code]board_size.y[/code]) a tábla."
+
+#: course/documentation.csv
+msgid "any"
+msgstr ""
+
+#: course/documentation.csv
+msgid "String"
+msgstr ""
+
+#: course/documentation.csv
+msgid "int"
+msgstr ""
+
+msgid "Learn to Code From Zero with Godot"
+msgstr ""

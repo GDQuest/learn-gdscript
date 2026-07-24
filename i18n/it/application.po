@@ -3,22 +3,34 @@
 # This file is distributed under the same license as the Learn GDScript From
 # project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
-"POT-Creation-Date: 2025-06-14 15:02+0200\n"
-"PO-Revision-Date: 2023-05-17 09:52+0000\n"
-"Last-Translator: Riccardo Santangelo <s.burns@live.it>\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2026-06-12 23:13+0000\n"
+"Last-Translator: \"Pierluigi U.\" <2muchpi@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/learn-gdscript-from-zero/application/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Generated-By: Babel 2.10.3\n"
+"X-Generator: Weblate 2026.7.dev0\n"
 
+#: course/common/inventory/DictItem.tscn
+#: course/lesson-23-append-to-arrays/visuals/Crate.tscn
+#: course/lesson-24-access-array-indices/visuals/inventory/Item.tscn
+#: course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.tscn
+#, fuzzy
+msgid "0"
+msgstr "0%"
+
+#: course/lesson-21-strings/visuals/RobotWithNumberName.tscn
+msgid "70801"
+msgstr ""
 
 #: course/common/CustomHealthBar.tscn
 msgid "health = 100"
@@ -32,14 +44,6 @@ msgstr ""
 #: course/common/inventory/DictItem.tscn
 msgid "healing heart"
 msgstr ""
-
-#: course/common/inventory/DictItem.tscn
-#: course/lesson-23-append-to-arrays/visuals/Crate.tscn
-#: course/lesson-24-access-array-indices/visuals/inventory/Item.tscn
-#: course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.tscn
-#, fuzzy
-msgid "0"
-msgstr "0%"
 
 #: course/lesson-11-time-delta/visuals/DemoRotatingSpriteFrame.tscn
 #: course/lesson-11-time-delta/visuals/DemoRotatingTime.tscn
@@ -156,10 +160,6 @@ msgstr ""
 
 #: course/lesson-21-strings/visuals/RobotToolTip.tscn
 msgid "Hover over the Robot to learn more"
-msgstr ""
-
-#: course/lesson-21-strings/visuals/RobotWithNumberName.tscn
-msgid "70801"
 msgstr ""
 
 #: course/lesson-21-strings/visuals/RobotWithRegularName.tscn
@@ -397,7 +397,7 @@ msgstr "Risultato"
 #: ui/components/CodeEditor.tscn
 #, fuzzy
 msgid "Continue the course."
-msgstr "Continua Lezione"
+msgstr "Impara con i corsi"
 
 #: ui/components/CodeEditor.tscn ui/components/popups/LessonDonePopup.tscn
 #: ui/components/popups/PracticeDonePopup.tscn
@@ -417,7 +417,7 @@ msgstr ""
 
 #: ui/components/GDQuestCreditsLabel.tscn
 msgid "Learn GDScript From Zero is an open source project by [color=#FFD500][url=https://www.gdquest.com/]GDQUEST.COM[/url][/color]"
-msgstr ""
+msgstr "Learn GDScript From Zero è un progetto open source di [color=#FFD500][url=https://www.gdquest.com/]GDQUEST.COM[/url][/color]"
 
 #: ui/components/GameView.tscn
 msgid "Paused"
@@ -427,7 +427,8 @@ msgstr "In Pausa"
 msgid "Term"
 msgstr "Termine"
 
-#: ui/components/GlossaryPopup.tscn ui/components/popups/ErrorOverlayPopup.tscn
+#: ui/components/GlossaryPopup.tscn
+#: ui/components/popups/ErrorOverlayPopup.tscn
 msgid "Our error explanation."
 msgstr "Nostra spiegazione dell'errore."
 
@@ -495,6 +496,7 @@ msgstr ""
 "codice coupon [b]SCONTO50[/b][/center]"
 
 #: ui/components/SalePopup.tscn
+#, fuzzy
 msgid "Only until"
 msgstr "Solo finché"
 
@@ -644,7 +646,6 @@ msgid ""
 msgstr ""
 "[font=res://ui/theme/fonts/font_title.tres]Come segnalare un problema[/font]\n"
 "\n"
-""
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Configure the App"
@@ -660,6 +661,10 @@ msgstr ""
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Change the course's language to one of the community-contributed ones."
+msgstr ""
+
+#: ui/components/popups/SettingsPopup.tscn
+msgid "Allow Incomplete Translations"
 msgstr ""
 
 #: ui/components/popups/SettingsPopup.tscn
@@ -716,7 +721,7 @@ msgstr ""
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Dyslexia Font"
-msgstr ""
+msgstr "Carattere per dislessici"
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Change the text style to make the text easier to read if you have dyslexia. This option is incompatible with languages like Chinese and Japanese."
@@ -771,7 +776,12 @@ msgid "0%"
 msgstr "0%"
 
 #: ui/screens/course_outliner/CourseLessonDetails.tscn
-#: ui/screens/course_outliner/CourseLessonDetails.gd:101
+#, fuzzy
+msgid "\t[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]How to contribute translations[/url][/b]"
+msgstr "[center][b][url=https://github.com/GDQuest/learn-gdscript/issues]GitHub.com > GDQuest > learn-gdscript > Issues(Problemi)[/url][/b][/center]"
+
+#: ui/screens/course_outliner/CourseLessonDetails.tscn
+#: ui/screens/course_outliner/CourseLessonDetails.gd:110
 msgid "Start Lesson"
 msgstr "Inizia Lezione"
 
@@ -784,6 +794,7 @@ msgid "Lesson Title"
 msgstr "Titolo Lezione"
 
 #: ui/screens/course_outliner/CourseOutliner.tscn
+#, fuzzy
 msgid "Course Index -"
 msgstr "Indice Corso -"
 
@@ -801,55 +812,55 @@ msgstr "Conferma Azzeramento Progresso"
 
 #: ui/screens/end_screen/CourseThumbnail.tscn
 msgid "Early Access release: 2024/01/30"
-msgstr ""
+msgstr "Data di uscita in accesso anticipato: 30/01/2024"
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "YOU MADE IT!"
-msgstr ""
+msgstr "CE L'HAI FATTA!"
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "Not only did you learn the foundations of coding, you’re a big step closer to making your own games."
-msgstr ""
+msgstr "Non solo hai imparato le basi della programmazione, ma sei anche un passo più vicino alla creazione dei tuoi giochi."
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "Don't stop here..."
-msgstr ""
+msgstr "Non fermarti qui..."
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "The fun stuff starts now!"
-msgstr ""
+msgstr "La parte divertente inizia ora!"
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "There are 2 pathways learners traditionally take from here:"
-msgstr ""
+msgstr "Tradizionalmente, da qui in avanti gli studenti intraprendono due percorsi:"
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "Following video tutorials"
-msgstr ""
+msgstr "Seguire i video tutorial"
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "They’re a great way to pick up specific game mechanics but they’re not as effective when you’re trying to learn new skills from the ground up."
-msgstr ""
+msgstr "Sono un ottimo modo per apprendere meccaniche di gioco specifiche, ma non sono altrettanto efficaci quando si cerca di imparare nuove abilità partendo da zero."
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "• There’s no clear learning path."
-msgstr ""
+msgstr "• Non esiste un percorso di apprendimento ben definito."
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "• Retention and skill acquisition is slow and limited."
-msgstr ""
+msgstr "• La memorizzazione e l'acquisizione di competenze sono lente e limitate."
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "We make our fair share of [b][color=#ebc3ff][url=https://www.youtube.com/@Gdquest/videos]free tutorials[/url][/color][/b]. They will come in very handy once you start making games on your own. But to get started, we really recommend you learn how to think like a game developer using [b][color=#ebc3ff][url=https://school.gdquest.com/godot-4-early-access]courses[/url][/color][/b]."
-msgstr ""
+msgstr "Realizziamo un buon numero di [b][color=#ebc3ff][url=https://www.youtube.com/@Gdquest/videos]tutorial gratuiti[/url][/color][/b]. Ti saranno molto utili quando inizierai a creare giochi per conto tuo. Ma per iniziare ti consigliamo di imparare come pensare come uno sviluppatore di videogiochi utilizzando i [b][color=#ebc3ff][url=https://school.gdquest.com/godot-4-early-access]courses[/url][/color][/b]."
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "Learning with courses"
-msgstr ""
+msgstr "Impara con i corsi"
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "Note that most available courses online are actually premium series of video tutorials. The problem of retaining information and acquiring real skills unfortunately still applies to them."
-msgstr ""
+msgstr "Nota che la maggior parte dei corsi disponibili online sono in realtà serie di video tutorial a pagamento. Il problema della memorizzazione delle informazioni e dell'acquisizione di competenze reali persiste anche in questi casi."
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid ""
@@ -857,34 +868,38 @@ msgid ""
 "\n"
 "That’s the reason we made this app. It is in fact part of our beginner course [b][color=#ebc3ff][url=https://school.gdquest.com/products/bundle_learn_gamedev_godot_4]Learn Gamedev From Zero with Godot[/url][/color][/b]."
 msgstr ""
+"Noi di GDQuest siamo educatori nell'anima. Crediamo nello studio applicato e siamo convinti che non debba essere noioso. Quando l'insegnamento è svolto correttamente, la maggior parte delle persone apprezza molto la sensazione di progredire!\n"
+"\n"
+"Per questa ragione abbiamo creato questa app. Questo è inffati parte del nostro corso per principianti [b][color=#ebc3ff][url=https://school.gdquest.com/products/bundle_learn_gamedev_godot_4]Learn Gamedev From Zero with Godot[/url][/color][/b]."
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "LEARN GAMEDEV WITH GODOT"
-msgstr ""
+msgstr "IMPARA A SVILUPPARE VIDEOGIOCHI CON GODOT"
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "Now available"
-msgstr ""
+msgstr "Ora disponibili"
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "for preorders"
-msgstr ""
+msgstr "in preordine"
 
 #: ui/screens/end_screen/EndScreen.tscn
+#, fuzzy
 msgid "To order"
-msgstr ""
+msgstr "in preordine"
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "Godot 4 courses!!"
-msgstr ""
+msgstr "corsi per Godot 4!!"
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "Teaching gamedev in the classroom?"
-msgstr ""
+msgstr "Insegnare lo sviluppo di videogiochi in classe?"
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid "Get in touch"
-msgstr ""
+msgstr "Contattaci"
 
 #: ui/screens/end_screen/SponsorlessEndScreen.tscn
 msgid "Congratulations!"
@@ -1032,8 +1047,9 @@ msgid "QUIT"
 msgstr "ESCI"
 
 #: ui/screens/welcome_screen/WelcomeScreen.tscn
+#, fuzzy
 msgid "An open source project by GDQuest.com"
-msgstr ""
+msgstr "Un progetto open source di [url=https://www.gdquest.com/]GDQuest.com[/url]"
 
 #: course/lesson-1-what-code-is-like/first_practice/TestsWhatCodeIsLike.gd:5
 msgid "Run The Code"
@@ -2144,7 +2160,6 @@ msgstr "Impara Di Più"
 msgid ""
 "\n"
 "[hr]\n"
-""
 msgstr ""
 
 #: ui/UINavigator.gd:375
@@ -2155,27 +2170,27 @@ msgstr "(nessuna cronologia)"
 msgid "Hint %s"
 msgstr "Suggerimento %s"
 
-#: ui/UIPractice.gd:279
+#: ui/UIPractice.gd:285
 msgid "Validating Your Code..."
 msgstr "Verificando Il Tuo Codice..."
 
-#: ui/UIPractice.gd:331
+#: ui/UIPractice.gd:337
 msgid "The function `%s` calls itself, this creates an infinite loop"
 msgstr "La funzione `%s` chiama se stessa, creando un ciclo infinito"
 
-#: ui/UIPractice.gd:342
+#: ui/UIPractice.gd:348
 msgid "You have a while loop that runs forever (while true) without a break statement. This will freeze the app."
-msgstr ""
+msgstr "Hai un ciclo while che non termina mai (while true) senza un'istruzione break. Questo farà bloccare l'app."
 
-#: ui/UIPractice.gd:384
+#: ui/UIPractice.gd:390
 msgid "Running Your Code..."
 msgstr "Eseguendo Il Tuo Codice..."
 
-#: ui/UIPractice.gd:414
+#: ui/UIPractice.gd:420
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "Nel codice è presente una divisione per zero. Nel codice non è possibile dividere per zero. Assicurati di non avere \"/ 0\" o \"% 0\" nel tuo codice."
 
-#: ui/UIPractice.gd:459
+#: ui/UIPractice.gd:465
 msgid "Running Tests..."
 msgstr "Svolgendo Prove..."
 
@@ -2187,11 +2202,11 @@ msgstr ""
 msgid "100%"
 msgstr ""
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:97
+#: ui/screens/course_outliner/CourseLessonDetails.gd:106
 msgid "Open Lesson"
 msgstr "Apri Lezione"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:99
+#: ui/screens/course_outliner/CourseLessonDetails.gd:108
 msgid "Continue Lesson"
 msgstr "Continua Lezione"
 
@@ -2207,20 +2222,20 @@ msgstr "Devi inserire un numero intero per questa risposta. Esempio:42"
 msgid "You need to type a decimal for this answer. Use a \".\" to separate the decimal part. Example: 3.14"
 msgstr "Devi inserire un numero decimale per questa risposta. Usa \".\" per separare la parte decimale. Esempio: 3.14"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:144
+#: ui/screens/practice/PracticeInfoPanel.gd:145
 msgid "Method descriptions"
 msgstr "Descrizioni delle funzioni"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:160
+#: ui/screens/practice/PracticeInfoPanel.gd:161
 msgid "Property descriptions"
 msgstr "Descrizioni delle proprietà"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:188
+#: ui/screens/practice/PracticeInfoPanel.gd:189
 #, fuzzy
 msgid "You've completed this practice before."
 msgstr "Hai completato la pratica."
 
-#: ui/screens/practice/PracticeInfoPanel.gd:192
+#: ui/screens/practice/PracticeInfoPanel.gd:193
 msgid ""
 "You've used the provided solution.\n"
 "This practice will not count towards your course progress."

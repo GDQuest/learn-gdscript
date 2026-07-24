@@ -1,0 +1,843 @@
+# Persian translations for Learn GDScript From.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2024-12-29 00:21+0000\n"
+"Last-Translator: Atur <aturaseman9@gmail.com>\n"
+"Language-Team: Persian <https://hosted.weblate.org/projects/learn-gdscript-from-zero/error-explanations/fa/>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: script_checking/error_database.csv
+msgid "error_explanation"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "error_suggestion"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword."
+msgstr "زمانی این خطا را می‌گیرید که نام میان [code]for[/code] و [code]in[/code] یک نام متغیر معتبر نباشد، یا که کلیدواژه‌ی [code]in[/code] را از جا می‌اندازید."
+
+#: script_checking/error_database.csv
+msgid "In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid temporary variable name to assign values in each loop iteration. The loop creates a new variable with the desired name and assigns each element of the array to it."
+msgstr "در یک چرخه‌ی [code]for[/code]، کلیدواژه‌ی [code]in[/code] تنها یک نام متغیر گذرای *معتبر* را برای واگذاشتن ارزش در هر تکرار از چرخه می‌پذیرد. چرخه یک متغیر نو با نام خواسته‌شده ساخته و هر درایه از آرایه را به آن می‌واگذارد."
+
+#: script_checking/error_database.csv
+msgid "To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces."
+msgstr "برای درست کردن این خطا، نیاز دارید از معتبر بودن نام متغیر و نبود فاصله یا نقطه‌گذاری میان کلیدواژه‌های [code]for[/code] و [code]in[/code] مطمئن شوید."
+
+#: script_checking/error_database.csv
+msgid "For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name."
+msgstr "برای نمونه، این کد نامعتبر است: [code]for cell_position.x in cell_positions_array:[/code] چرا که [code]cell_position.x[/code] یک نام متغیر معتبر نیست."
+
+#: script_checking/error_database.csv
+msgid "To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:"
+msgstr "برای دسترسی به زیرمولفه‌ی متغیر [code]x[/code]، نیاز دارید تا آن را درون بدن چرخه بینجامید:"
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "[code]for cell_position in cell_positions_array:"
+msgstr ""
+"[code]for cell_position in cell_positions_array:\n"
+"· · · ·cell_position.x += 1.0[/code]"
+
+#: script_checking/error_database.csv
+msgid "    cell_position.x += 1.0[/code]"
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "You get this error when you try to assign a value to something that is not a variable."
+msgstr "اگر این خطا را گرفتید، به احتمال بالایی کوشیدید تا ارزشی را به چیزی جز متغیر واگذارید، که نشدنی است. تنها می‌توانید ارزش در متغیرها واگذارید."
+
+#: script_checking/error_database.csv
+msgid "You can only assign values to variables. You cannot assign values to function calls or calculations."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call, not a variable."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
+msgstr "امکان دیگر این است که می‌خواهید برابری یک شرط را بررسی کنید ولی بجای == تنها یک = نوشتید."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you try to change the value of a constant."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, if you write [code]const MAX_SPEED = 100[/code], you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Many constants are built into Godot and GDScript, and you cannot change them either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "1. If the value should never change, or it comes from Godot, remove the line that tries to change it."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you accidentally type a space before a tab, or a tab before a space, the computer gets confused about your code's indentation."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "A cyclic reference is when a class references itself, directly or indirectly."
+msgstr "بازبرد چرخه‌ای به زمانی گفته می‌شود که یک کلاس خودش را مستقیم یا نامستقیم بازبرد کند."
+
+#: script_checking/error_database.csv
+msgid "It has two possible causes:"
+msgstr "می‌تواند دو دلیل داشته باشد:"
+
+#: script_checking/error_database.csv
+msgid "1. You used the class name in the class itself."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
+msgstr ""
+"۱. شما نام کلاس را در خود آن به‌کار بردید.\n"
+"۲. کد شما کلاسی را بازبرد می‌کند که این کلاس به دست آن بازبرد شده است، که باعث رخ دادن یک بازبرد چرخه‌ای می‌شود."
+
+#: script_checking/error_database.csv
+msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
+msgstr "در هر گونه، بخاطر گونه‌ای که جی.دی.اسکریپت در گودوت ۳ کار می‌کند، شوربختانه، نمی‌توانید چنین کنید. گودوت ۴ احتمالا این مشکل را حل می‌کند، ولی نیاز دارید تا آن زمان این را دور بزنید."
+
+#: script_checking/error_database.csv
+msgid "Erase the type hint in the error line, and the problem should disappear."
+msgstr "راهنمایی گونه را در خط خطا پاک کنید، تا احتمالا مشکل از میان برود."
+
+#: script_checking/error_database.csv
+msgid "At GDQuest, when we face this error, we remove the type hints on lines causing cyclic references. It solves the problem in the vast majority of cases."
+msgstr "در جی.دی.کوئِست، زمانی که این خطا رخ می‌دهد، راهنمایی‌های گونه‌ای که باعث بازبرد چرخه‌ای می‌شوند را می‌زداییم. بیشتر زمان‌ها مشکل را حل می‌کند."
+
+#: script_checking/error_database.csv
+msgid "The indentation of your code (the number of tab characters at the start of the line) is incorrect."
+msgstr "تورفتگی کد شما (شمار نویسه‌های تَب (tab) در آغاز خط) نادرست است."
+
+#: script_checking/error_database.csv
+msgid "You are missing one or more tabs, or you inserted too many."
+msgstr "یک یا چند تَب را از جا انداختید، یا بیش از اندازه جایگذاشتید."
+
+#: script_checking/error_database.csv
+msgid "The computer uses those leading tab characters on code lines to know which lines of code are part of a code block, like a function."
+msgstr "رایانه آن نویسه‌های تَب روی خط‌های کد را برای دانستن اینکه کدام خط‌ها بخشی از یک گروه کدی‌اند به‌کار می‌برد، مانند یک تابع."
+
+#: script_checking/error_database.csv
+msgid "If the line of code with the error is right after a line ending with a colon, like a function definition, you need one extra indent level compared to the previous line."
+msgstr "اگر خط کد دارای خطا دقیقا پس از یک خط پایانیده با دونقطه (:)، مانند یک تعریف تابع باشد، شما به یک پله تورفتگی بیشتر از خط پیشین نیازمندید."
+
+#: script_checking/error_database.csv
+msgid "In other words, your line should have one more leading tab character than the function definition."
+msgstr "به زبانی دیگر، خط شما باید یک نویسه‌ی تَب بیشتر از تعریف تابع داشته باشد."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code."
+msgstr "زمانی این خطا را می‌گیرید که نوشته‌ی شما از نگاه نحو و سینتَکس نامعتبر باشد، یا چیزی را برای کامل کردن این خط یا خط‌های پیشین کد از جا انداخته‌اید."
+
+#: script_checking/error_database.csv
+msgid "You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character."
+msgstr "هنگام کدنویسی برای رایانه باید بسیار دقیق باشید. گرفتن اینگونه خطا‌ها آسان است، چرا که تنها نیازش برای رخ دادن یک نویسه‌ی نادرست است."
+
+#: script_checking/error_database.csv
+msgid "Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code."
+msgstr "به یاد داشته باشید که این خطا بخاطر شیوه‌ای که رایانه کد شما را می‌خواند و می‌واکاود می‌تواند [b]پس از[/b] خطی که باعث آن شده است نمایان شود."
+
+#: script_checking/error_database.csv
+msgid "The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing."
+msgstr "شیوه‌ی چاره‌گشایی اینگونه خطا‌ها بسیار وابسته به بافتار است. پیام خطا باید به شما بگوید که کدام نویسه یا درایه از جا افتاده است."
+
+#: script_checking/error_database.csv
+msgid "If the error says \"expected,\" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else."
+msgstr "اگر خطا می‌گوید «,expected» (مورد انتظار) به این معنا است که شما چیزی از خط‌های کد [b]پیشین[/b] را از جا انداخته‌اید. می‌تواند یک نشانه‌ی نقطه‌گذاری، کمانک یا چیز دیگری باشد."
+
+#: script_checking/error_database.csv
+msgid "If it says \"unterminated,\" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
+msgstr "اگر می‌گوید «,unterminated» (نافرجام) به این معنا است که شما نویسه‌ای مانند کمانک را در پایان یک گزاره از جا انداخته‌اید. در این حالت به احتمال بسیار از خط دارای خطا می‌آید."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you use a special character that GDScript doesn't recognize."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings)."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "[b]Note:[/b] Godot 4 supports special and non-Latin characters in code (Unicode characters), but this app is built with Godot 3, which does not."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You can use accented characters inside text strings (between quotes), but not in the code itself."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "This error tells you that you are missing a parenthesis (or sometimes a comma or a path)."
+msgstr "این خطا به شما می‌گوید که یک کمانک (یا گاهی یک ویرگول (,) یا مسیر) را از جا انداخته‌اید."
+
+#: script_checking/error_database.csv
+msgid "Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code]."
+msgstr "سه کلیدواژه در جی.دی.اسکریپت مانند فراخوان‌های تابع کار کرده و به کمانک نیازمندند: [code]yield()[/code]، [code]preload()[/code] و [code]assert()[/code]."
+
+#: script_checking/error_database.csv
+msgid "To address the error, you want to add the missing opening parenthesis, the closing parenthesis, or the comma."
+msgstr "برای رسیدگی به این خطا، باید ویرگول (,) یا کمانک‌هایی که از جا انداختید را بیفزایید."
+
+#: script_checking/error_database.csv
+msgid "This error happens in several cases:"
+msgstr "این خطا در چند حالت رخ می‌دهد:"
+
+#: script_checking/error_database.csv
+msgid "1. You wrote an identifier (variable or function name) in the wrong place."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
+msgstr ""
+"۱. شما یک شناسه (نام متغیر یا تابع) را در جای نادرست نوشتید.\n"
+"۲. شما یک کلیدواژه مانند [code]var[/code]، [code]func[/code]، [code]for[/code] یا [code]signal[/code] نوشتید و روبه‌روی آن نامی ننوشتید.\n"
+"۳.شما یک تعریف تابع نوشتید ولی فراموش کردید که پیش از ویرگول (,) کمانک بگذارید."
+
+#: script_checking/error_database.csv
+msgid "3. You wrote a function definition but forgot the parentheses before the colon."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses."
+msgstr "اگر خطا به شما می‌گوید که انتظار چیزی را داشت، احتمالا فراموش کردید پس از کلیدواژه‌هایی همچون [code]var[/code]، [code]func[/code]، [code]for[/code] یا [code]signal[/code] یک نام بنویسید، که کدتان را نامعتبر می‌کند. یا فراموش کردید پس از تعریف تابعی کمانک بگذارید. می‌توانید با افزودن نام یا کمانک‌های ازجاانداخته به این خطا رسیدگی کنید."
+
+#: script_checking/error_database.csv
+msgid "If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc."
+msgstr "اگر خطا به شما می‌گوید که چیز بیرون از انتظاری دارید، احتمالا کلیدواژه‌ای همچون [code]var[/code]، [code]func[/code]، [code]for[/code] و... را از جا انداخته‌اید."
+
+#: script_checking/error_database.csv
+msgid "Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
+msgstr "یا اینکه نیاز دارید پس از تعریف یک تابع، چرخه‌ی [code]for[/code] یا خطی آغازشده با [code]if[/code]، [code]elif[/code] یا [code]else[/code] یک دونقطه (:) بنویسید."
+
+#: script_checking/error_database.csv
+msgid "This error tells you that you are missing a type somewhere. A type can be [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], and many identifiers representing a data structure."
+msgstr "این خطا به شما می‌گوید که یک گونه را از جا انداخته‌اید. یک گونه می‌تواند [code]int[/code]، [code]float[/code]، [code]String[/code]، [code]Array[/code]، [code]Vector2[/code] و شناسه‌های بسیاری که یک ساختار داده را نمایش می‌دهند باشد."
+
+#: script_checking/error_database.csv
+msgid "Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name."
+msgstr "بیشتر زمان‌ها، این خطا هنگامی رخ می‌دهد که شما یک دونقطه پس از نام متغیر نوشته‌اید ولی آن را با یک نام گونه دنبال نکردید."
+
+#: script_checking/error_database.csv
+msgid "It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name."
+msgstr "همچنین زمانی که پس از کمانک‌های تعریف تابعی، یک پیکان ([code]->[/code]) می‌نویسید ولی آن را با یک نام گونه دنبال نمی‌کنید نیز رخ می‌دهد."
+
+#: script_checking/error_database.csv
+msgid "To solve this, you need to write the name of the type after the colon, arrow (in the case of function return types), inside parentheses (for export types), or after the [code]as[/code] keyword."
+msgstr "برای حل کردن این، باید نام گونه را پس از دونقطه، پیکان (برای گونه‌های برگشتی تابع)، درون کمانک‌ها (برای گونه‌های برون‌برد) یا پس از کلید‌واژه‌ی [code]as[/code] بنویسید."
+
+#: script_checking/error_database.csv
+msgid "The variable, function name, or class name you are trying to use does not exist."
+msgstr "نام متغیر، تابع یا کلاسی که شما در کوشش بکارگیری آن‌اید وجود ندارد."
+
+#: script_checking/error_database.csv
+msgid "You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot."
+msgstr "بیشتر زمان‌ها این خطا را بخاطر اشتباه‌های نوشتاری خواهید گرفت. شاید دو وات (حرف) را جای یکدیگر نوشتید یا یکی را فراموش کردید... گاهی، یافتن آن سخت است."
+
+#: script_checking/error_database.csv
+msgid "The other cause for this error is that you didn't define the variable, function, or class you're trying to access."
+msgstr "دلیل دیگر این خطا این است که متغیر، تابع یا کلاسی که در کوشش دسترسی به آن‌اید را تعریف نکرده‌اید."
+
+#: script_checking/error_database.csv
+msgid "To solve this error, triple-check that there is no typo in the line."
+msgstr "برای حل کردن این خطا، دوباره از نبود اشتباه نوشتاری در خط مطمئن شوید."
+
+#: script_checking/error_database.csv
+msgid "If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error."
+msgstr "اگر می‌توانید،‌ برای رفتن به تعریف تابع یا متغیر بکوشید، نام را دوباره بررسی کرده، روگرفت کنید، و آن را در جایی که خطا را می‌بینید، بچسبانید."
+
+#: script_checking/error_database.csv
+msgid "If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
+msgstr "اگر هیچ اشتباه نوشتاری نمی‌بینید، باید مطمئن شوید که متغیر، تابع یا کلاسی که بازبرد می‌کنید را تعریف کرده‌اید."
+
+#: script_checking/error_database.csv
+msgid "You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid."
+msgstr "درون یک چرخه تنها می‌توانید کلیدواژه‌هایی مانند [code]break[/code] یا [code]continue[/code] را به‌کار ببرید. بیرون از چرخه، نامعتبرند."
+
+#: script_checking/error_database.csv
+msgid "The [code]continue[/code] keyword means \"jump to the next iteration of the loop.\" And the [code]break[/code] keyword means \"end the loop right now and jump to the first line of code after the loop block."
+msgstr "کلیدواژه‌ی [code]continue[/code] به معنای «پرش به تکرار بعدی چرخه» و کلیدواژه‌ی [code]break[/code] به معنای «در لحظه پایان دادن چرخه و پرش به نخستین خط کد پس از گروه کدی چرخه» می‌باشد."
+
+#: script_checking/error_database.csv
+msgid "If you wrote one of these keywords outside a loop, you need to remove it."
+msgstr "اگر یکی از این کلیدواژه‌ها را بیرون از یک چرخه نوشتید، باید آن را بزدایید."
+
+#: script_checking/error_database.csv
+msgid "If you are trying to use it inside a loop, your indentation is most likely at fault. You may need to insert one or more leading tab characters to the keyword."
+msgstr "اگر دارید می‌کوشید آن را در یک چرخه به‌کار بگیرید، پس به احتمال فراوان تورفتگی‌های شما دارای مشکل‌اند. شاید نیاز به جایگذاری یک یا چند نویسه‌ی تَب (tab) در کلیدواژه داشته باشید."
+
+#: script_checking/error_database.csv
+msgid "When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant."
+msgstr "هنگامی که رایانه درباره‌ی یک گزاره‌ی ثابت سخن می‌گوید، انتظار یک ارزش ایستا، یک برآورد ایستا یا نام یک ثابت موجود را دارد."
+
+#: script_checking/error_database.csv
+msgid "In other words, it wants something that can never change. This is why the computer will reject function calls and variables where it needs a constant expression."
+msgstr "به زبانی دیگر، چیزی می‌خواهد که هرگز نتوانید دگرگون کنید. دلیل نپذیرفتن فراخوان‌های تابع و متغیرهایی که نیاز به یک گزاره‌ی ثابت دارند به دست رایانه همین است."
+
+#: script_checking/error_database.csv
+msgid "You need to replace function calls or variables with a constant value like a whole number, decimal number, string, vector, a predefined array, etc."
+msgstr "شما نیاز دارید تا فراخوان تابع‌ها یا متغیرها را با یک ارزش ثابت مانند یک عدد صحیح، عدد اعشاری، رشته، بُردار، آرایه‌ی از پیش تعریف‌شده و... جایگزین کنید."
+
+#: script_checking/error_database.csv
+msgid "You can also use arithmetic operators like multiplications (*), additions (+), and so on."
+msgstr "همچنین می‌توانید عملگرهای حسابی مانند ضرب (*)، جمع (+) و... را به‌کار بگیرید."
+
+#: script_checking/error_database.csv
+msgid "When defining a new class, you need to follow a specific pattern. You must write the name in plain text, starting with a letter."
+msgstr "هنگام تعریف یک کلاس نو، باید یک الگوی مشخص را دنبال کنید. باید نام را در متن اصلی آغازشده با یک وات (حرف) بنویسید."
+
+#: script_checking/error_database.csv
+msgid "We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name."
+msgstr "ما بیشتر زمان‌ها نام کلاس‌ها را با پاسکال‌کِیس می‌نویسیم: با یک وات بزرگ در آغاز هر واژه‌ای که نام کلاس را می‌سازد."
+
+#: script_checking/error_database.csv
+msgid "To fix this error, replace whatever you put after the 'extends' or 'class_name' keyword by a name without spaces and starting with a capital letter."
+msgstr "برای درست کردن این خطا، هر چیزی که پس از کلید‌واژه‌ی «extends» یا «class_name» گذاشتید را با یک نام بی‌فاصله و آغازشده با یک وات (حرف) بزرگ جایگزین کنید."
+
+#: script_checking/error_database.csv
+msgid "You can optionally use numbers in the name, but not in the first position."
+msgstr "اگر بخواهید می‌توانید در نام شماره هم بگذارید، ولی نه بعنوان نخستین نویسه."
+
+#: script_checking/error_database.csv
+msgid "You are trying to define a function or variable that already exists; You can't do that."
+msgstr "اگر در کوشش تعریف یک تابع یا متغیر از پیش موجودید؛ نمی‌توانید بینجامید."
+
+#: script_checking/error_database.csv
+msgid "Perhaps the function or variable already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
+msgstr "شاید تابع یا متغیر هم‌اکنون در پرونده‌ی کد کنونی هست، شاید هم در کلاس سرپرستی که این کد جی.دی.اسکریپت از آن ارث می‌برد، حاضر باشد."
+
+#: script_checking/error_database.csv
+msgid "In the app, your code extends some built-in Godot code that's not visible to you."
+msgstr "درون برنامه، کد شما از چند کد درون‌ساخته‌ی گودوت ارث می‌برد که شما آنها را نمی‌بینید."
+
+#: script_checking/error_database.csv
+msgid "When that happens, you need to either rename your function or variable to one that will not collide with an existing one or remove this line of code."
+msgstr "هنگام رخ دادن آن، باید تابع یا متغیر خود را به نامی که با دیگر نام‌های موجود برخورد نداشته باشد بازنامگذارید، یا این خط را از کد بزدایید."
+
+#: script_checking/error_database.csv
+msgid "You are trying to define a signal that already exists; You can't do that."
+msgstr "اگر در کوشش تعریف یک سیگنال از پیش موجودید: نمی‌توانید بینجامید."
+
+#: script_checking/error_database.csv
+msgid "Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
+msgstr "شاید سیگنال هم‌اکنون در پرونده‌ی کد کنونی هست، شاید هم در کلاس سرپرستی که این کد جی.دی.اسکریپت از آن ارث می‌برد، حاضر باشد."
+
+#: script_checking/error_database.csv
+msgid "When that happens, you need to either rename your signal to one that will not collide with an existing one or remove this line of code."
+msgstr "هنگام رخ دادن آن، باید سیگنال خود را به نامی که با دیگر نام‌های موجود برخورد نداشته باشد بازنامگذارید، یا این خط را از کد بزدایید."
+
+#: script_checking/error_database.csv
+msgid "The function you're trying to define exists in a parent class, so your definition overrides the parent class's function."
+msgstr "تابعی که در کوشش تعریف آن‌اید در یک کلاس سرپرست هست، پس تعریف شما تابع کلاس سرپرست را بازنویسی می‌کند."
+
+#: script_checking/error_database.csv
+msgid "When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class."
+msgstr "هنگامی که تابع کلاس سرپرستی را بازمی‌نویسید، تابع نو باید با سرپرست مطابقت داشته باشد. تابع نو باید گونه‌ی یکسان و شمار یکسانی از پارامترهای کلاس سرپرست را دارا باشد."
+
+#: script_checking/error_database.csv
+msgid "For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class."
+msgstr "برای نمونه، اگر سرپرست دو آرگومان دارد، تابع نو شما نیز باید دو آرگومان داشته باشد. اگر راهنمایی گونه در تعریف تابع‌هایتان به‌کار می‌برید، گونه‌های آرگومان‌ها باید با کلاس سرپرست مطابقت داشته باشند."
+
+#: script_checking/error_database.csv
+msgid "You need to check the parent class's function and its definition in the code reference. Then, you need to edit your function definition to have the same number and type of parameters as the parent class."
+msgstr "باید تابع کلاس سرپرست و تعریف آن در بازبرد کد را بررسی کنید. سپس، باید تعریف تابع خود را بویرایید تا همان اندازه و گونه‌های پارامتر کلاس سرپرست را داشته باشد."
+
+#: script_checking/error_database.csv
+msgid "This whole class of errors has to do with calling functions with either the wrong number of arguments or the wrong kind of argument. You will need to use the error message to see what is going wrong."
+msgstr "همه‌ی خطاهای این کلاس مربوط به فراخواندن تابع‌ها با شمار نادرستی از آرگومان‌ها یا گونهٔ نادرستی از آرگومان می‌باشد. باید پیام خطا را برای فهمیدن وضعیت به‌کار ببرید."
+
+#: script_checking/error_database.csv
+msgid "You need to either remove, add, or change the values you're trying to pass to the function to solve this issue. To know exactly how many arguments you need, you need to check the code reference. It will show you the function definition and the mandatory arguments."
+msgstr "برای حل کردن این مشکل، باید ارزشی که در کوشش دادن آن به تابع‌اید را بزدایید، دگرگون کنید یا به شمار آن بیفزایید. برای دانستن اینکه چند آرگومان نیاز دارید، باید بازبرد کد را بررسی کنید. تعریف تابع و آرگومان‌های الزامی را به شما نشان خواهد داد."
+
+#: script_checking/error_database.csv
+msgid "All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!"
+msgstr "همه‌ی ارزش‌های درون کد شما دارای گونه‌ای ویژه‌اند. آن گونه می‌تواند یک شماره‌ی صحیح (int)، شماره‌ی اعشاری (float)، نوشتار (string) و... باشد. گونه‌های شدنی بسیاری هستند، حتا می‌توانید گونه‌های خودتان هم تعریف کنید!"
+
+#: script_checking/error_database.csv
+msgid "When you make any operation, the computer compares the types you are using."
+msgstr "هنگامی که هرگونه عملیاتی را انجام می‌دهید، رایانه گونه‌هایی که به‌کار می‌برید را مقایسه می‌کند."
+
+#: script_checking/error_database.csv
+msgid "Some types are compatible, and some are not. For example, you cannot directly add a whole number to a text string. You first need to convert the number into text."
+msgstr "برخی گونه‌ها سازگارند و برخی ناسازگار. برای نمونه، نمی‌توانید یک شماره‌ی صحیح را به یک رشته‌ی نوشتاری بیفزایید. نخست باید شماره را به نوشتار تبدیل کنید."
+
+#: script_checking/error_database.csv
+msgid "You'll need to read the error message to see what is not matching because there are many possible cases."
+msgstr "باید برای دیدن چیزی که مطابقت ندارد پیام خطا را بخوانید، چون حالت‌های شدنی بسیاری هست."
+
+#: script_checking/error_database.csv
+msgid "If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=)."
+msgstr "اگر خطا به یکی نبودن گونهٔ ارزش واگذاشته با متغیر اشاره دارد، اشکال در پهلوی راست نشانهٔ برابر (=) است."
+
+#: script_checking/error_database.csv
+msgid "If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic."
+msgstr "اگر خطا به یکی نبودن گونهٔ برگشت با تابع اشاره دارد، اشکال از ارزشی‌ست که پس از کلیدواژهٔ برگشت (return) آمده است."
+
+#: script_checking/error_database.csv
+msgid "If the computer talks about an invalid operand, then the issue is that the operation does not exist for the type you're trying to use. For example, while you can add two 2D vectors, you can't add a whole number or text to a 2D vector."
+msgstr "اگر رایانه دربارهٔ یک عملوند (operand) می‌گوید، به این معنا است که عملیات برای گونه‌ای که در کوشش به کار بردن آن‌اید وجود ندارد. برای نمونه، با اینکه می‌توانید دو بردار دوبعدی را به هم بیفزایید، نمی‌توانید یک شمارهٔ صحیح را به یک نوشتار یا بردار دوبعدی بیفزایید."
+
+#: script_checking/error_database.csv
+msgid "GDScript supports type inference. The computer will automatically recognize the type of value you are working with. In some cases, though, it can't figure it out."
+msgstr "جی.دی.اسکریپت از استنباط گونه پشتیبانی می‌کند. رایانه به شیوهٔ خودکار گونهٔ ارزشی که با آن کار می‌کنید را خواهد شناخت. با این همه، گاهی، نمی‌تواند چنین کند."
+
+#: script_checking/error_database.csv
+msgid "When that happens, you need to specify the type yourself or remove type inference altogether for this variable."
+msgstr "هنگامی نتواند، نیاز دارید تا گونه را خودتان تعیین کنید یا استنباط گونه را تماما برای این متغیر بزدایید."
+
+#: script_checking/error_database.csv
+msgid "The simplest way to solve this error is to remove types for this variable or this function's arguments. Otherwise, you can manually specify the value type after the colon."
+msgstr "ساده‌ترین راه برای حل کردن این خطا زدودن گونه‌ها برای آرگومان‌های این متغیر یا تابع است. وگرنه، می‌توانید به روش دستی گونهٔ ارزش را پس از دونقطه تعیین کنید."
+
+#: script_checking/error_database.csv
+msgid "We recommend specifying the type whenever possible to reap the typing system's benefits."
+msgstr "ما تعیین کردن گونه را هرجایی که شدنی‌ست، برای بهره‌وری از همهٔ توانایی‌های سامانهٔ تایپ را پیشنهاد می‌کنیم."
+
+#: script_checking/error_database.csv
+msgid "There is an issue with the return value of your function. There are two main cases here:"
+msgstr "خطایی در ارزش برگشتی تابع شما هست. می‌تواند دو دلیل داشته باشد:"
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
+msgstr ""
+"۱. تابع شما از گونهٔ ووید (void) است، بنابراین نباید ارزشی را برگرداند. تابع‌هایی که دارای نحو «-> void» و سازنده‌های کلاس ('_init()')اند را در بر می‌گیرد.\n"
+"۲. گونهٔ برگشتی‌ای برای تابع خود تعیین کردید، ولی دارید ارزشی در همهٔ شاخه‌های ممکن (آجرهای if، else و elif) یا در پایان را برنمی‌گردانید."
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
+msgstr ""
+"۱. تابع شما از گونهٔ ووید (void) است، بنابراین نباید ارزشی را برگرداند. تابع‌هایی که دارای نحو «-> void» و سازنده‌های کلاس ('_init()')اند را در بر می‌گیرد.\n"
+"۲. گونهٔ برگشتی‌ای برای تابع خود تعیین کردید، ولی دارید ارزشی در همهٔ شاخه‌های ممکن (آجرهای if، else و elif) یا در پایان را برنمی‌گردانید."
+
+#: script_checking/error_database.csv
+msgid "When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that."
+msgstr "هنگامی که تابع‌تان «void» است، هرگز نباید ارزشی را برگردانید. می‌توانید کلید‌واژهٔ «return» را برای پایان دادن زودهنگام به تابع به کار ببرید. ولی هرگز نباید چیزی پس از آن بنویسید."
+
+#: script_checking/error_database.csv
+msgid "When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
+msgstr "هنگامی که گونهٔ برگشتی‌ای را به کار می‌برید، باید همیشه چیزی را در پایان تابع یا در هر شاخهٔ (آجرهای if، elif و else) تابع برگردانید."
+
+#: script_checking/error_database.csv
+msgid "Godot was unable to load your script, yet the language checker found nothing wrong."
+msgstr "گودوت در بار کردن اسکریپت شما ناتوان بود، با این همه، وارس زبان چیز نادرستی نیافت."
+
+#: script_checking/error_database.csv
+msgid "Please click on the \"report\" button at the top and please let us know."
+msgstr "خواهشمندیم روی دکمه‌‌ی «گزارش» در بالا کلیک کرده و ما را در جریان بگذارید."
+
+#: script_checking/error_database.csv
+msgid "You called a function inside itself. This will loop forever."
+msgstr "شما یک تابع را درون خودش فراخواندید. این چرخه‌ای بی‌پایان خواهد بود."
+
+#: script_checking/error_database.csv
+msgid "There are valid reasons for using recursive functions, but none of them are part of this course, so this cannot be a valid solution."
+msgstr "دلیل‌های معتبری برای به‌کارگیری تابع‌های بازگشتی هست، ولی هیچکدام‌شان پاره‌ای از این دوره نیستند، پس این نمی‌تواند راه حل معتبری باشد."
+
+#: script_checking/error_database.csv
+msgid "You wrote a while loop with a condition that is always true (like [code]while true:[/code] or [code]while(true):[/code]) without a [code]break[/code] statement inside it. This creates an infinite loop that will freeze your game."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To fix this, you need to either add a [code]break[/code] statement inside the loop so it can exit when a certain condition is met, or change the while loop condition to something that will become false. For example: [code]while position.x < 100: position.x -= 10[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The computer reached the end of the line of code, but the line had a syntax error."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
+msgstr ""
+"رایانه به آخرین خط کد رسید،‌ ولی خط دارای یک خطای نحوی بود.\n"
+"به احتمال فراوان فراموش کردید رشته‌ای را ببندید: گفتاورد باز دارید، ولی یادتان رفت که یک گفتاورد بسته مطابق با آن بیفزایید."
+
+#: script_checking/error_database.csv
+msgid "Double-check that you are not missing a quote character or that the quote character you used to start the string is the same as the one you used to close the string."
+msgstr "دوباره بررسی کنید که نویسهٔ گفتاوردی را از جا نینداخته‌اید یا نویسهٔ گفتاوردی که برای آغازیدن رشته به کار بردید با آنی که برای پایان دادن به کار بردید یکسان است."
+
+#: script_checking/error_database.csv
+msgid "The sub-variable you are trying to access does not exist."
+msgstr "زیرمتغیری که در کوشش دسترسی به آن‌اید وجود ندارد."
+
+#: script_checking/error_database.csv
+msgid "You probably have a typo in the name of the sub-variable that you are trying to access."
+msgstr "احتمالا در نام زیرمتغیری که در کوشش دسترسی به آن‌اید نادرستی نگارشی‌ای هست."
+
+#: script_checking/error_database.csv
+msgid "Ensure that you don't have a capital letter where you should have a lowercase letter and vice versa."
+msgstr "مطمئن شوید جایی که باید وات (حرف) کوچک داشته باشید، وات بزرگ و جایی که وات بزرگ نیاز دارید وات کوچک ندارید."
+
+#: course/glossary.csv course/documentation.csv
+#, fuzzy
+msgid "explanation"
+msgstr "تکرار"
+
+#: course/glossary.csv
+msgid "Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods."
+msgstr "تابع‌های عضو تابع‌هایی‌اند که به یک گونهٔ ارزش معین پیوست خورده‌اند، مانند آرایه‌ها، رشته‌ها یا دیکشنری‌ها. به آنها روش یا مِتُد نیز گفته می‌شود."
+
+#: course/glossary.csv
+msgid "For example, arrays have member functions like [code]array.append()[/code]."
+msgstr "برای نمونه، آرایه‌ها تابع‌های عضوی مانند [code]array.append()[/code] دارند."
+
+#: course/glossary.csv
+msgid "You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
+msgstr "تابع را تنها می‌توان روی آرایه‌ها و با به‌کارگیری عملگر دسترسی ([code].[/code]) برای دسترسی به آن، همانگونه که در بالا می‌بینید فراخواند."
+
+#: course/glossary.csv
+msgid "Member variables are variables attached to a specific value type, like a vector's [code]x[/code] and [code]y[/code] sub-variables. We also call them [i]properties[/i] or [i]fields[/i] of the vector."
+msgstr "متغیرهای عضو متغیرهایی‌اند که به یک گونهٔ ارزش معین پیوست خورده‌اند، مانند زیرمتغیرهای [code]x[/code] و [code]y[/code] بردارها. به آنها [i]ویژگی[/i] یا [i]میدان[/i] بردار نیز گفته می‌شود."
+
+#: course/glossary.csv
+msgid "To access a member variable, you must first write the value's name followed by the access operator ([code].[/code]). For example, [code]position.x[/code]."
+msgstr "برای دسترسی به متغیرهای عضو، باید نخست نام ارزش را نوشته و آن را با عملگر دسترسی([code].[/code]) دنبال کنید. برای نمونه، [code]position.x[/code]."
+
+#: course/glossary.csv
+msgid "A parameter is a variable you create as part of a function definition."
+msgstr "پارامترها متغیری‌اند که آن را بعنوان پاره‌ای از تعریف تابع‌ها می‌سازید."
+
+#: course/glossary.csv
+msgid "It allows you to reuse the function more by having values that vary in the function's body."
+msgstr "به شما اجازه می‌دهند تا تابع را بخاطر داشتن ارزش‌هایی که در بدن تابع تفاوت دارند، چندین بار به کار ببرید."
+
+#: course/glossary.csv
+msgid "A radian is a unit of measurement of angles based on the circle's circumference."
+msgstr "رادیان یکای سنجش زاویه‌ها بر پایهٔ محیط دایره است."
+
+#: course/glossary.csv
+msgid "We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common."
+msgstr "ما در زندگی روزانه بیشتر درجه را به کار می‌بریم، ولی در برنامه‌نویسی رایانه‌ای، به‌ویژه در بازی‌ها، رادیان‌ها رواج یافته‌اند."
+
+#: course/glossary.csv
+msgid "An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
+msgstr "[code]2 * PI[/code] رادیان برابر با ۳۶۰ درجه و [code]PI[/code] رادیان برابر با ۱۸۰ درجه است."
+
+#: course/glossary.csv
+msgid "In computer programming, a type is the class of a value. For example, whole numbers like [code]3[/code], [code]11[/code], and [code]255462[/code] are all of type [code]int[/code] (short for integer)."
+msgstr "در برنامه‌نویسی رایانه‌ای،‌ گونه‌ها ردهٔ ارزش‌ها اند. برای نمونه،‌ شماره‌های صحیح مانند [code]3[/code]، [code]11[/code] و [code]255462[/code] همه از گونهٔ [code]int[/code] (کوتاه‌شدهٔ integer به معنای شمارهٔ صحیح) اند."
+
+#: course/glossary.csv
+msgid "The computer uses types to determine which operations are valid between two values and when they're undefined."
+msgstr "رایانه گونه‌ها را به کار می‌گیرد تا مشخص کند کدام عملیات‌ها میان دو ارزش معتبر بوده و کدام‌ها تعریف‌نشده‌اند."
+
+#: course/glossary.csv
+msgid "In computer code, an iteration is one repetition of some process or code. We typically use the term with loops, where one iteration is one run of the loop's code."
+msgstr "در کدنویسی رایانه‌ای، تکرارها بازانجامش برخی فرایند‌ها یا کداند. بیشتر واژهٔ چرخه را به کار رفته می‌شود، که هر تکرار یک بار اجرای کد چرخه است."
+
+#: course/glossary.csv
+msgid "When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
+msgstr "در پهنهٔ الگوریتم‌ها، تکرار می‌تواند معنای یک گذشت کامل الگوریتم روی دادگان را بدهد."
+
+#: course/glossary.csv
+msgid "In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers."
+msgstr "در ریاضیات، بردارها فهرستی از شماره‌ها اند. در بازی‌ها، بیشتر زمان‌ها بردارهای دوبعدی و سه‌بعدی، به ترتیب، برای فهرست‌های دو و سه‌تایی شماره‌ها به کار می‌روند."
+
+#: course/glossary.csv
+msgid "We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves."
+msgstr "ما این شماره‌ها را برای نمایاندن یک سو و بزرگی یا شدت در فضا به کار می‌بریم. برای نمونه، می‌توانید بُرداری را برای نمایاندن تندی و سویی که ترابَر یا شخصیتی به آن می‌رود به کار ببرید."
+
+#: course/glossary.csv
+msgid "Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
+msgstr "بردارها بخاطر انتزاعی بودنشان می‌توانند تا اندازه‌ای دلهره‌آور به نظر برسند، ولی همانگونه که خواهید دید، کد را بسیار ساده خواهند ساخت."
+
+#: course/glossary.csv
+#, fuzzy
+msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument."
+msgstr "آرگومان‌ها ارزشی‌اند که هنگام فراخواندن تابعی آنها را می‌دهید. برای نمونه،‌ در فراخوان [code]rotate(0.5)[/code]، ارزش [code]0.5[/code] درون کمانک‌ها یک آرگومان است."
+
+#: course/glossary.csv
+#, fuzzy
+msgid "A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional."
+msgstr "تابع‌ها می‌توانند هیچ آرگومان، یک آرگومان یا چندین آرگومان را دریافت کنند. آرگومان‌ها می‌توانند دلبخواهی یا اجباری باشند."
+
+#: course/glossary.csv
+#, fuzzy
+msgid "When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]"
+msgstr "زمانی که تابعی چندین آرگومان دریافت می‌کند، ارزش‌ها را با کاما (ویرگول انگلیسی) جدا می‌کنیم، مانند این فراخوان تابع: [code]jump(50, 100)[/code]"
+
+#: course/glossary.csv
+#, fuzzy
+msgid "When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i]."
+msgstr "هنگام [i]فراخواندن[/i] تابعی، ارزشی که درون کمانک‌ها داده می‌شود را [i]آرگومان[/i] می‌خوانیم."
+
+#: course/glossary.csv
+msgid "But when you [i]write[/i] a function definition, we call them [i]parameters[/i] instead. Here's an example:"
+msgstr ""
+
+#: course/glossary.csv
+msgid "[code]func move_to_position(x, y):[/code]"
+msgstr ""
+
+#: course/glossary.csv
+#, fuzzy
+msgid "In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
+msgstr "ولی هنگام نوشتن تعریف تابع‌ها،‌ [i]پارامترها[/i] را به کار می‌بریم. در نمونهٔ زیر، نام‌های [code]x[/code] و [code]y[/code] [i]پارامتر[/i]اند."
+
+#: course/glossary.csv
+msgid "An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value."
+msgstr "آرایه‌ها فهرستی از ارزش‌ها هستند. در جی.دی.اسکریپت، آرایه‌ها می‌توانند [i]هر[/i] گونه ارزش را درون خود داشته باشند."
+
+#: course/glossary.csv
+msgid "To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]"
+msgstr "برای ساختن آرایه‌ها، ارزش‌های جداشده با کاما (ویرگول انگلیسی) را درون دو قلاب می‌نویسیم: [code]var three_numbers = [1, 2, 3][/code]"
+
+#: course/glossary.csv
+msgid "In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere."
+msgstr "در بازی‌ها، آرایه‌ها برای انبار کردن فهرست شخصیت‌های درون گروه، فهرست آیتم‌های درون اینوِنتوری، فهرست جادوهایی که بازیکن به دست آورده و... بسیار به کار می‌روند. آنها همه جا هستند."
+
+#: course/glossary.csv
+msgid "Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
+msgstr "آرایه‌ها گونهٔ ارزشی بنیادی در برنامه‌نویسی رایانه‌ای هستند. آرایه‌ها را در هر زبان برنامه‌نویسی‌ای خواهید یافت."
+
+#: course/glossary.csv
+msgid "Assigning a value to a variable means that you store a value inside the variable. You do this with the equal sign ([code]=[/code])."
+msgstr "واگذاری یک ارزش به یک متغیر یعنی ارزشی را درون آن متغیر انبار می‌کنید. این کار را با نشانهٔ برابر ([code]=[/code]) می‌کنیم."
+
+#: course/glossary.csv
+msgid "A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value."
+msgstr "دیکشنری‌ها ساختار داده‌ای هستند که ارزش‌ها را با کلیدها جفت می‌کنند. هنگامی که به دیکشنری‌ای کلیدی بدهید، ارزش جفتیده با آن کلید را می‌یابد و می‌دهد."
+
+#: course/glossary.csv
+msgid "In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game."
+msgstr "در جی.دی.اسکریپت، کلیدها می‌توانند چیزهای بسیاری باشند. ما بیشتر زمان‌ها رشته‌های نوشتاری یا شماره‌ها را به کار می‌بریم، ولی به آن محدود نیستید.[code]Vector2[/code]ها هم می‌توانند کلید معتبری باشند، که هنگام نهادن یاخته‌های توری در یک یگان یا آیتم در بازی‌های توری‌بنیاد پرکاربرد هستند."
+
+#: course/glossary.csv
+msgid "You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database."
+msgstr "دیکشنری‌ها را برای پیوند دادن تکه‌های داده درون بازی‌هایتان بسیار به کار خواهید برد. برای نمونه، می‌توانیم آنها را برای پیوند دادن نام شمشیری به آمارهایش در یک دادگان به کار ببریم."
+
+#: course/glossary.csv
+msgid "Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
+msgstr "مانند آرایه‌ها، گونهٔ داده‌ای بنیادی‌اند که آنها را در زبان‌های برنامه‌نویسی بسیاری خواهید دید و به کار خواهید برد."
+
+#: course/glossary.csv
+msgid "A for loop instructs the computer to repeat a set of instructions once for each value in an array."
+msgstr "چرخه‌های for یا «چرخه‌های برایِ» به رایانه می‌گویند که دسته‌ای از فرمان‌ها را یک بار برای هر ارزش درون یک آرایه تکرار کند."
+
+#: course/glossary.csv
+msgid "In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body."
+msgstr "در هر تکرار چرخه، کامپایلر یک ارزش را از آرایه استخراج کرده و به شما در بدن چرخه به آن دسترسی می‌دهد."
+
+#: course/glossary.csv
+msgid "For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met."
+msgstr "چرخه‌های برایِ بارهای محدودی کد را اجرا می‌کنند: یک بار برای هر ارزش درون آرایه. با چرخه‌های while یا هنگامی‌که، که کد را تا زمانی که شرطی برقرار باشد اجرا می‌کنند، متفاوت‌اند."
+
+#: course/glossary.csv
+msgid "We recommend favoring for loops when you can. They're safer and easier to use than while loops."
+msgstr "تا جایی که برای‌تان شدنی‌ست ما چرخه‌های برایِ را پیشنهاد می‌کنیم. به‌کارگیری آنها از چرخه‌های هنگامی‌که آسان‌تر و امن‌تر است."
+
+#: course/glossary.csv
+msgid "A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains."
+msgstr "تابع‌ها گروهی از فرمان‌های کدی هستند که به آن نامی می‌دهید. هنگامی که تابعی را تعریف می‌کنید، می‌توانید هر زمانی که می‌خواهید برای اجرا کردن همهٔ فرمان‌هایی که در خود دارد آن را فراخوانید."
+
+#: course/glossary.csv
+msgid "You can modify a function's behavior with parameters. Parameters are variable names that you write in the function definition. You can then use them in the function's body to make your code adapt to different cases."
+msgstr "می‌توانید رفتار تابع‌ها را با پارامترها دگرگون کنید. پارامترها نام متغیرهایی‌اند که آنها را در تعریف تابع‌ها می‌نویسید. می‌توانید آنها را درون بدن تابع به کار ببرید تا کدتان بسته به موقعیت‌های گوناگون سازوار شود."
+
+#: course/glossary.csv
+msgid "Also, functions can optionally return a value to the code calling it."
+msgstr "همچنین، تابع‌ها می‌توانند ارزشی را به کدی که آن را فراخوانده است بهینه‌وار برگردانند."
+
+#: course/glossary.csv
+msgid "An increment is the amount by which a value changes in your code."
+msgstr "فزایش‌ها مقداری‌اند که بر پایهٔ آنها ارزشی درون کدتان دگرگون می‌شود."
+
+#: course/glossary.csv
+msgid "In computer programming, instructions are a single operation the computer recognizes and can execute."
+msgstr "در برنامه‌نویسی رایانه‌ای، دستورالعمل‌ها یک عملیات هستند که رایانه آنها را تشخیص داده و می‌تواند اجرا کند."
+
+#: course/glossary.csv
+msgid "For example, a function call, an addition, or assigning a value to a variable."
+msgstr "برای نمونه، فراخوانی تابع، جمع یا واگذاری ارزشی در متغیر گونه‌ای دستورالعمل است."
+
+#: course/glossary.csv
+msgid "Variables are a tool to give a name to values you want to store in your code and change over time."
+msgstr "متغیرها ابزاری هستند که می‌گذارند به ارزش‌ها و مقدارهایی که می‌خواهید در کُدتان ذخیره کرده و در طول زمان تغییر دهید نام بدهید."
+
+#: course/glossary.csv
+msgid "For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up."
+msgstr "برای نمونه، جان شخصیت: هنگامی که شخصیت ضربه می‌خورد می‌خواهید که به ارزش کمتری تبدیل شود. هنگام درمان شدن، می‌خواهید که جان به ارزش پیشین خود برگردد."
+
+#: course/glossary.csv
+msgid "You can create a variable named [code]health[/code] to represent the health."
+msgstr "می‌توانید متغیری با نام [code]health[/code] بسازید تا جان شخصیت را نمایش دهد."
+
+#: course/glossary.csv
+msgid "Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you."
+msgstr "سپس، هربار که کلیدواژهٔ [code]health[/code] را در کدتان بنویسید، رایانه ارزش مربوط در حافظهٔ خود را برایتان خواهد آورد."
+
+#: course/glossary.csv
+msgid "Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
+msgstr "متغیرها کمی مانند برچسب کالاها در سوپرمارکت‌ها کار می‌کنند. نام‌هایی هستند که به آنها ارزشی پیوست می‌دهید. هر زمانی که بخواهید می‌توانید برچسب را کنده و به کالای دیگری بچسبانید، یا در این زمینه، ارزش و مقداری نو به آن دهید."
+
+#: course/glossary.csv
+msgid "A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running."
+msgstr "چرخهٔ while یا چرخهٔ هنگامی‌که به رایانه دستور می‌دهد تا کد را بر پایهٔ یک شرط، ادامه‌وار اجرا کند. هنگامی که شرط درست (true) باشد چرخه به اجرای خود ادامه خواهد داد."
+
+#: course/glossary.csv
+msgid "When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong."
+msgstr "هنگام کدنویسی چرخه‌های هنگامی‌که باید مواظب باشید: اگر شرط را به‌نادرستی دریافت کنید بی‌محدودیت اجرا شده و باعث یخ‌زدگی بازی‌تان خواهند شد."
+
+#: course/glossary.csv
+msgid "That's why we recommend using the safer for loop whenever you can."
+msgstr "از این روی، پیشنهاد می‌کنیم هر زمان که می‌توانید از چرخهٔ امن‌تر for یا همان «چرخهٔ برایِ» بهره ببرید."
+
+#: course/glossary.csv
+msgid "However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
+msgstr "با این همه، هنوز موردهای ضروری و بایسته‌ای هستند که چرخه‌های هنگامی‌که را به کار می‌بریم. مانند پردازش پرونده‌ها، پردازش کد رایانه یا الگوریتم‌های توانمند."
+
+#: course/glossary.csv
+msgid "We talk about a loop or a function's body to refer to the lines of code that are part of the loop or function."
+msgstr "چنانچه دربارهٔ بدنهٔ چرخه یا تابعی بگوییم، منظور خط‌های کدی‌ست که بخشی از چرخه یا تابع هستند."
+
+#: course/glossary.csv
+msgid "Returning a value is the process of sending a value to the place where you call a function."
+msgstr "برگرداندن ارزش فرایندی‌ست که در آن ارزش به جایی که در آن تابعی را فرامی‌خوانید فرستاده می‌شود."
+
+#: course/glossary.csv
+msgid "It happens when a function uses the [code]return[/code] keyword followed by a value, for example: [code]return -1[/code]."
+msgstr "هنگامی رخ می‌دهد که تابعی کلیدواژهٔ [code]return[/code] را به کار ببرد و در ادامه‌اش یک ارزش یا مقدار بگذارد. برای نمونه: [code]return -1[/code]."
+
+#: course/glossary.csv
+msgid "A collection of valuable and reusable code bundled together by other programmers to save you time. All programmers use code libraries."
+msgstr "مجموعه‌ای از کدهای ارزشمند و چندبارمصرف که در کنار هم به دست دیگر برنامه‌نویسان جمع شده تا در زمان شما صرفه‌جویی شود. همهٔ برنامه‌نویسان از کتابخانه‌ها بهره می‌برند."
+
+#: course/glossary.csv
+msgid "In computer graphics, a sprite is an image you display on the screen. We generally use this word to talk about moving images, like a character, a monster, or an item falling on the ground."
+msgstr "در گرافیک رایانه‌ای، اسپرایت تصویری‌ست که روی صفحه نمایش داده می‌شود. ما بیشتر از این واژه برای حرف زدن دربارهٔ تصویرهای در حال جنبش بهره می‌بریم. مانند شخصیت‌ها، هیولاه یا آیتمی که دارد روی زمین می‌افتد."
+
+#: course/documentation.csv
+msgid "shows the current scene"
+msgstr "پرده‌ی کنونی را نمایش می‌دهد"
+
+#: course/documentation.csv
+msgid "hides the current scene"
+msgstr "پرده‌ی کنونی را می‌پنهاند"
+
+#: course/documentation.csv
+msgid "Applies a rotation to the node, in radians, starting from its current rotation."
+msgstr "چرخشی به گره، به رادیان، که از چرخش کنونی‌ آن می‌آغازد به‌کار می‌بندد."
+
+#: course/documentation.csv
+msgid "Moves the turtle in the direction it's facing by some pixels."
+msgstr "لاک‌پشت را در سویی که رو به آن است به اندازه‌ی چند پیکسل جابه‌جا می‌کند."
+
+#: course/documentation.csv
+msgid "Rotates the turtle to the right by some degrees."
+msgstr "لاک‌پشت را چند درجه به راست می‌چرخاند."
+
+#: course/documentation.csv
+msgid "Rotates the turtle to the left by some degrees."
+msgstr "لاک‌پشت را چند درجه به چپ می‌چرخاند."
+
+#: course/documentation.csv
+msgid "Offsets the turtle's position by the given x and y amounts of pixels."
+msgstr "نهشت لاک‌پشت را به اندازه‌ی x و y داده شده به پیکسل از مبدا دور می‌کند."
+
+#: course/documentation.csv
+msgid "Makes the turtle draw a rectangle starting at its current position."
+msgstr "لاک‌پشت را به کشیدن یک مستطیل که از نهشت کنونی آن می‌آغازد، وادار می‌کند."
+
+#: course/documentation.csv
+msgid "The position of the entity on the horizontal axis."
+msgstr "نهشت پدیده روی محور افقی."
+
+#: course/documentation.csv
+msgid "The position of the entity on the vertical axis."
+msgstr "نهشت پدیده روی محور عمودی."
+
+#: course/documentation.csv
+#, fuzzy
+msgid " Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false, normalizes the movement."
+msgstr "یک جنبش انتقالی بومی روی محور X گره بر پایه‌ی [code]delta[/code] (دلتای) [code]Node._process[/code] به‌کار می‌بندد. اگر [code]scaled[/code] نادرست (False) باشد، جنبش را بهنجار می‌کند."
+
+#: course/documentation.csv
+msgid "Stores how many cells make up the width ([code]board_size.x[/code]) and height ([code]board_size.y[/code]) of the board."
+msgstr "شمار یاخته‌هایی که پهنا ([code]board_size.x[/code]) و بلندای ([code]board_size.y[/code]) تخته را می‌سازد را انبار می‌کند."
+
+#: course/documentation.csv
+msgid "any"
+msgstr ""
+
+#: course/documentation.csv
+msgid "String"
+msgstr ""
+
+#: course/documentation.csv
+msgid "int"
+msgstr ""
+
+msgid "Learn to Code From Zero with Godot"
+msgstr ""

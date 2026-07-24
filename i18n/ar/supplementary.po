@@ -1,0 +1,843 @@
+# Arabic translations for Learn GDScript From.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the Learn GDScript From
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Learn GDScript From Zero\n"
+"Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
+"POT-Creation-Date: 2026-01-21 11:55+0100\n"
+"PO-Revision-Date: 2026-06-09 01:01+0000\n"
+"Last-Translator: عبدالحي شقاف <bdalhyshqaf6@gmail.com>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/learn-gdscript-from-zero/error-explanations/ar/>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
+"Generated-By: Babel 2.10.3\n"
+"X-Generator: Weblate 2026.6\n"
+
+#: script_checking/error_database.csv
+msgid "error_explanation"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "error_suggestion"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword."
+msgstr "يظهر هذا الخطأ عندما يكون الاسم الموجود بين [code]for[/code] و[code]in[/code] اسم متغير غير صالح، أو عندما تكون الكلمة المفتاحية [code]in[/code] مفقودة."
+
+#: script_checking/error_database.csv
+msgid "In a [code]for[/code] loop, the [code]in[/code] keyword only accepts a valid temporary variable name to assign values in each loop iteration. The loop creates a new variable with the desired name and assigns each element of the array to it."
+msgstr "في حلقة [code]for[/code]، يُقبل فقط اسم متغير مؤقت صالح بكلمة [code]in[/code] لتعيين القيم في كل تكرار للحلقة. تُنشئ الحلقة متغيرًا جديدًا بالاسم المطلوب وتُعيّن له كل عنصر من عناصر المصفوفة."
+
+#: script_checking/error_database.csv
+msgid "To fix this error, you need to ensure that the name between the [code]for[/code] and [code]in[/code] keywords is a valid variable name with no punctuation or spaces."
+msgstr "لإصلاح هذا الخطأ، تحتاج إلى التأكد من أن الاسم بين كلمتي [code]for[/code] و[code]in[/code] هو اسم متغير صالح بدون علامات ترقيم أو مسافات."
+
+#: script_checking/error_database.csv
+msgid "For example, this code is invalid: [code]for cell_position.x in cell_positions_array:[/code] because [code]cell_position.x[/code] isn't a valid variable name."
+msgstr "على سبيل المثال، هذا الكود غير صالح: [code]for cell_position.x in cell_positions_array:[/code] لأن [code]cell_position.x[/code] ليس اسم متغير صالح."
+
+#: script_checking/error_database.csv
+msgid "To access the [code]x[/code] sub-component of the variable, you need to do that inside of the loop's body:"
+msgstr "للوصول إلى المكوّن الفرعي [code]x[/code] من المتغير، تحتاج إلى القيام بذلك داخل جسم الحلقة:"
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "[code]for cell_position in cell_positions_array:"
+msgstr ""
+"[code]لـ cell_position في cell_positions_array:\n"
+"    cell_position.x += 1.0[/code]"
+
+#: script_checking/error_database.csv
+msgid "    cell_position.x += 1.0[/code]"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You get this error when you try to assign a value to something that is not a variable."
+msgstr "تحصل على هذا الخطأ عندما تحاول تعيين قيمة لشيء ليس متغيرًا."
+
+#: script_checking/error_database.csv
+msgid "You can only assign values to variables. You cannot assign values to function calls or calculations."
+msgstr "يمكنك فقط تعيين القيم للمتغيرات. لا يمكنك تعيين القيم لاستدعاءات الدوال أو العمليات الحسابية."
+
+#: script_checking/error_database.csv
+msgid "For example, you cannot write [code]randi() = 5[/code] because [code]randi()[/code] is a function call, not a variable."
+msgstr "على سبيل المثال، لا يمكنك كتابة [code]randi() = 5[/code] لأن [code]randi()[/code] هو استدعاء دالة، وليس متغيرًا."
+
+#: script_checking/error_database.csv
+msgid "Check what you wrote on the left side of the equal sign (=). Make sure it is a variable name."
+msgstr "تحقق مما كتبته على الجانب الأيسر من علامة المساواة (=). تأكد من أنه اسم متغير."
+
+#: script_checking/error_database.csv
+msgid "If you see parentheses () on the left side, you might be trying to assign to a function call. Remove the parentheses and the function call."
+msgstr "إذا رأيت أقواساً () على الجانب الأيسر، فقد تكون تحاول التعيين إلى استدعاء دالة. قم بإزالة الأقواس واستدعاء الدالة."
+
+#: script_checking/error_database.csv
+msgid "If you are trying to check if two values are equal in a condition, use two equal signs (==) instead of one (=)."
+msgstr "إذا كنت تحاول التحقق مما إذا كانت قيمتان متساويتين في شرط ما، فاستخدم علامتي يساوي (==) بدلاً من علامة واحدة (=)."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you try to change the value of a constant."
+msgstr "تحصل على هذا الخطأ عندما تحاول تغيير قيمة ثابت."
+
+#: script_checking/error_database.csv
+msgid "A constant is a name that holds a value that cannot change. It's like a variable, but once you set its value, you cannot replace it."
+msgstr "الثابت هو اسم يحمل قيمة لا يمكن تغييرها. إنه مثل المتغير، ولكن بمجرد تحديد قيمته، لا يمكنك استبدالها."
+
+#: script_checking/error_database.csv
+msgid "For example, if you write [code]const MAX_SPEED = 100[/code], you cannot later write [code]MAX_SPEED = 200[/code] or [code]MAX_SPEED += 50[/code]."
+msgstr "على سبيل المثال، إذا كتبت [code]const MAX_SPEED = 100[/code]، لا يمكنك لاحقًا كتابة [code]MAX_SPEED = 200[/code] أو [code]MAX_SPEED += 50[/code]."
+
+#: script_checking/error_database.csv
+msgid "Many constants are built into Godot and GDScript, and you cannot change them either. For instance, you cannot write [code]Vector2 = 5[/code] or [code]PI = 3[/code]. Constant names usually use capital letters."
+msgstr "العديد من الثوابت مدمجة في Godot وGDScript، ولا يمكنك تغييرها أيضًا. على سبيل المثال، لا يمكنك كتابة [code]Vector2 = 5[/code] أو [code]PI = 3[/code]. عادةً ما تستخدم أسماء الثوابت الحروف الكبيرة."
+
+#: script_checking/error_database.csv
+msgid "Look at what you are trying to change. If it is a constant (defined with the [code]const[/code] keyword or built into Godot), you have two options:"
+msgstr "انظر إلى ما تحاول تغييره. إذا كان ثابتًا (معرّفًا باستخدام الكلمة المفتاحية [code]const[/code] أو مدمجًا في Godot)، لديك خياران:"
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "1. If the value should never change, or it comes from Godot, remove the line that tries to change it."
+msgstr ""
+"1. إذا كان يجب ألا تتغير القيمة أبدًا، أو إذا كانت تأتي من Godot، قم بإزالة السطر الذي يحاول تغييرها.\n"
+"2. إذا كانت القيمة بحاجة إلى التغيير، استخدم [code]var[/code] بدل [code]const[/code] عند إنشائها لأول مرة."
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
+msgstr ""
+"1. إذا كان يجب ألا تتغير القيمة أبدًا، أو إذا كانت تأتي من Godot، قم بإزالة السطر الذي يحاول تغييرها.\n"
+"2. إذا كانت القيمة بحاجة إلى التغيير، استخدم [code]var[/code] بدل [code]const[/code] عند إنشائها لأول مرة."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you mix spaces and tabs in your indentation. This happens when you have a space before a tab, or a tab before a space at the start of a line."
+msgstr "تحصل على هذا الخطأ عندما تخلط بين الفراغات وعلامات الجدولة في المسافة البادئة. يحدث هذا عندما يكون لديك فراغ قبل علامة الجدولة، أو علامة جدولة قبل فراغ في بداية السطر."
+
+#: script_checking/error_database.csv
+msgid "In GDScript, you must use only tabs (not spaces) to indent your code. When you press the Tab key on your keyboard, it creates a tab character."
+msgstr "في GDScript، يجب عليك استخدام علامات الجدولة فقط (وليس المسافات) لعمل المسافة البادئة في كودك. عند الضغط على مفتاح الجدولة على لوحة المفاتيح، يتم إنشاء حرف جدولة."
+
+#: script_checking/error_database.csv
+msgid "If you accidentally type a space before a tab, or a tab before a space, the computer gets confused about your code's indentation."
+msgstr "إذا قمت بكتابة مسافة قبل الجدولة عن طريق الخطأ، أو جدولة قبل المسافة، فإن الكمبيوتر سيصعب عليه فهم التعداد البادئ للكود الخاص بك."
+
+#: script_checking/error_database.csv
+msgid "To fix this error, go to the line mentioned in the error message. Delete any space characters at the very beginning of the line, and remove any spaces that appear after your tab characters."
+msgstr "لإصلاح هذا الخطأ، انتقل إلى السطر المذكور في رسالة الخطأ. احذف أي مسافات في بداية السطر، وأزل أي مسافات تظهر بعد علامات الجدولة الخاصة بك."
+
+#: script_checking/error_database.csv
+msgid "Tab characters look like an arrow pointing at a vertical line in your code: ⇥. Spaces look like centered dots: ·. Look closely to spot the difference."
+msgstr "تبدو حروف الجدولة كالسهم الذي يشير إلى خط عمودي في الكود الخاص بك: ⇥. تبدو الفراغات كنقاط في الوسط: ·. انظر عن كثب لتلاحظ الفرق."
+
+#: script_checking/error_database.csv
+msgid "Then, make sure the line starts with only tab characters for indentation, with no spaces mixed in."
+msgstr "ثم، تأكد من أن السطر يبدأ بحروف الجدولة فقط للترقيم البادئ، دون خلط أي مسافات."
+
+#: script_checking/error_database.csv
+msgid "A cyclic reference is when a class references itself, directly or indirectly."
+msgstr "المرجع الدوري هو عندما تشير الفئة إلى نفسها، بشكل مباشر أو غير مباشر."
+
+#: script_checking/error_database.csv
+msgid "It has two possible causes:"
+msgstr "له سببان محتملان:"
+
+#: script_checking/error_database.csv
+msgid "1. You used the class name in the class itself."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
+msgstr ""
+"1. لقد استخدمت اسم الفئة داخل الفئة نفسها.\n"
+"2. يشير كودك إلى فئة أخرى تشير إلى هذه الفئة، مما يسبب دورة إشارات لا نهاية لها."
+
+#: script_checking/error_database.csv
+msgid "Either way, due to how GDScript works in Godot 3, unfortunately,you cannot do this. Godot 4 should solve this problem, but you need to work around it in the meantime."
+msgstr "على أي حال، بسبب طريقة عمل GDScript في Godot 3، للأسف، لا يمكنك القيام بذلك. من المفترض أن يحل Godot 4 هذه المشكلة، ولكن عليك إيجاد حل بديل في الوقت الحالي."
+
+#: script_checking/error_database.csv
+msgid "Erase the type hint in the error line, and the problem should disappear."
+msgstr "امسح تلميح النوع في سطر الخطأ، ومن المفترض أن تختفي المشكلة."
+
+#: script_checking/error_database.csv
+msgid "At GDQuest, when we face this error, we remove the type hints on lines causing cyclic references. It solves the problem in the vast majority of cases."
+msgstr "في GDQuest، عندما نواجه هذا الخطأ، نقوم بإزالة تلميحات النوع على الأسطر التي تسبب المراجع الدورية. هذا يحل المشكلة في الغالبية العظمى من الحالات."
+
+#: script_checking/error_database.csv
+msgid "The indentation of your code (the number of tab characters at the start of the line) is incorrect."
+msgstr "المسافة البادئة في كودك (عدد أحرف الجدولة في بداية السطر) غير صحيحة."
+
+#: script_checking/error_database.csv
+msgid "You are missing one or more tabs, or you inserted too many."
+msgstr "أنت تفتقد تاب واحد أو أكثر، أو قمت بإدراج الكثير منها."
+
+#: script_checking/error_database.csv
+msgid "The computer uses those leading tab characters on code lines to know which lines of code are part of a code block, like a function."
+msgstr "يستخدم الكمبيوتر تلك الرموز التبويبية البادئة في أسطر الكود لمعرفة أي الأسطر من الكود هي جزء من كتلة الكود، مثل الدالة."
+
+#: script_checking/error_database.csv
+msgid "If the line of code with the error is right after a line ending with a colon, like a function definition, you need one extra indent level compared to the previous line."
+msgstr "إذا كان سطر الشيفرة الذي يحتوي على الخطأ يليه مباشرة سطر ينتهي بنقطتين رأسيتين، مثل تعريف دالة، تحتاج إلى مستوى إضافي من التراجع مقارنة بالسطر السابق."
+
+#: script_checking/error_database.csv
+msgid "In other words, your line should have one more leading tab character than the function definition."
+msgstr "بعبارة أخرى، يجب أن يكون لسطرِك حرف تبويب رئيسي واحد أكثر من تعريف الدالة."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you wrote something that is syntactically invalid, or you are missing something to complete this line or previous lines of code."
+msgstr "تحصل على هذا الخطأ عندما تكتب شيئًا غير صحيح من الناحية التركيبية، أو عندما تفقد شيئًا لإكمال هذا السطر أو الأسطر السابقة من الكود."
+
+#: script_checking/error_database.csv
+msgid "You need to be extremely precise when you write code for the computer. This kind of error is easy to get as all it takes is one wrong character."
+msgstr "تحتاج إلى أن تكون دقيقًا للغاية عند كتابة التعليمات البرمجية للكمبيوتر. هذا النوع من الأخطاء سهل الوقوع لأنه كل ما يتطلبه هو حرف واحد خاطئ."
+
+#: script_checking/error_database.csv
+msgid "Note that this error can appear [b]after[/b] the line causing it due to how the computer reads and analyzes your code."
+msgstr "لاحظ أن هذا الخطأ يمكن أن يظهر [b]بعد[/b] السطر الذي تسبّب فيه بسبب طريقة قراءة الكمبيوتر وتحليله لرمزك."
+
+#: script_checking/error_database.csv
+msgid "The way to solve this kind of error is highly contextual. The error message should tell you which character or element it's missing."
+msgstr "الطريقة لحل هذا النوع من الأخطاء تعتمد بشكل كبير على السياق. يجب أن تخبرك رسالة الخطأ أي حرف أو عنصر مفقود."
+
+#: script_checking/error_database.csv
+msgid "If the error says \"expected,\" then you're likely missing something in one of the [b]previous[/b] code lines. It could be a punctuation mark, a parenthesis, or something else."
+msgstr "إذا كان الخطأ يقول \"متوقع\"، فمن المرجح أنك تفتقد شيئًا في أحد أسطر الشيفرة [b]السابقة[/b]. قد يكون علامة ترقيم، أو قوس، أو شيئًا آخر."
+
+#: script_checking/error_database.csv
+msgid "If it says \"unterminated,\" you are missing some character at the end of an expression, like a closing bracket. In this case, it most likely comes from the line with the error."
+msgstr "إذا كانت تقول \"غير منتهٍ\"، فهذا يعني أنك تفتقد بعض الأحرف في نهاية التعبير، مثل قوس الإغلاق. في هذه الحالة، على الأرجح يأتي الخطأ من السطر الذي يحتوي على الخطأ."
+
+#: script_checking/error_database.csv
+msgid "You get this error when you use a special character that GDScript doesn't recognize."
+msgstr "تحصل على هذا الخطأ عندما تستخدم حرفًا خاصًا لا يتعرف عليه GDScript."
+
+#: script_checking/error_database.csv
+msgid "This includes accented letters (like é, à, ñ), special symbols, or characters from non-Latin alphabets in your code instructions (not in strings)."
+msgstr "يشمل هذا الحروف المشددة (مثل é، à، ñ)، الرموز الخاصة، أو الأحرف من الأبجديات غير اللاتينية في تعليمات الكود الخاصة بك (ليس في السلاسل)."
+
+#: script_checking/error_database.csv
+msgid "[b]Note:[/b] Godot 4 supports special and non-Latin characters in code (Unicode characters), but this app is built with Godot 3, which does not."
+msgstr "[b]ملاحظة:[/b] يدعم Godot 4 الأحرف الخاصة وغير اللاتينية في الكود (أحرف يونيكود)، لكن هذا التطبيق مبني باستخدام Godot 3، الذي لا يدعم ذلك."
+
+#: script_checking/error_database.csv
+msgid "To fix this error, remove any accented letters or special characters from your variable names, function names, and other code elements."
+msgstr "لإصلاح هذا الخطأ، قم بإزالة أي حروف مشددة أو أحرف خاصة من أسماء المتغيرات وأسماء الدوال وعناصر الكود الأخرى."
+
+#: script_checking/error_database.csv
+msgid "You can use accented characters inside text strings (between quotes), but not in the code itself."
+msgstr "يمكنك استخدام الأحرف المنقطة داخل سلاسل النصوص (بين الأقواس)، ولكن ليس في الكود نفسه."
+
+#: script_checking/error_database.csv
+msgid "You can replace accented letters with their non-accented equivalents. For example, change [code]café[/code] to [code]cafe[/code]."
+msgstr "يمكنك استبدال الحروف المنقوطة بحروفها غير المنقوطة. على سبيل المثال، غيّر [code]café[/code] إلى [code]cafe[/code]."
+
+#: script_checking/error_database.csv
+msgid "This error tells you that you are missing a parenthesis (or sometimes a comma or a path)."
+msgstr "تخبرك هذه الرسالة أن هناك قوسًا مفقودًا (أو أحيانًا فاصلة أو مسار)."
+
+#: script_checking/error_database.csv
+msgid "Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code]."
+msgstr "ثلاث كلمات مفتاحية في GDScript تعمل مثل استدعاءات الدوال وتتطلب أقواسًا: [code]yield()[/code]، [code]preload()[/code]، و [code]assert()[/code]."
+
+#: script_checking/error_database.csv
+msgid "To address the error, you want to add the missing opening parenthesis, the closing parenthesis, or the comma."
+msgstr "لتصحيح الخطأ، تحتاج إلى إضافة القوس الافتتاحي المفقود، القوس الإغلاق، أو الفاصلة."
+
+#: script_checking/error_database.csv
+msgid "This error happens in several cases:"
+msgstr "يحدث هذا الخطأ في عدة حالات:"
+
+#: script_checking/error_database.csv
+msgid "1. You wrote an identifier (variable or function name) in the wrong place."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
+msgstr ""
+"1. لقد كتبت معرفًا (اسم متغير أو دالة) في المكان الخطأ.\n"
+"2. لقد كتبت كلمة مفتاحية مثل [code]var[/code]، [code]func[/code]، [code]for[/code]، أو [code]signal[/code]، ولم تتبعها باسم.\n"
+"3. لقد كتبت تعريف دالة ولكنك نسيت الأقواس قبل النقطتين."
+
+#: script_checking/error_database.csv
+msgid "3. You wrote a function definition but forgot the parentheses before the colon."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses."
+msgstr "إذا أخبرك الخطأ أنه كان يتوقع شيئًا، فمن المحتمل أنك نسيت كتابة اسم بعد كلمة مفتاحية مثل [code]var[/code]، [code]func[/code]، [code]for[/code]، أو [code]signal[/code]، مما يجعل الشيفرة غير صالحة. أو أنك نسيت الأقواس في تعريف دالة. يمكنك معالجة الخطأ بإضافة الاسم أو الأقواس المفقودة."
+
+#: script_checking/error_database.csv
+msgid "If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc."
+msgstr "إذا قال الخطأ أن لديك شيئًا غير متوقع، فمن المرجح أنك تفتقد كلمة رئيسية مثل [code]var[/code]، [code]func[/code]، [code]for[/code]، إلخ."
+
+#: script_checking/error_database.csv
+msgid "Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
+msgstr "احتمال آخر هو أنك بحاجة إلى كتابة نقطتين في نهاية تعريف الدالة، أو حلقة [code]for[/code]، أو سطر يبدأ بـ [code]if[/code]، [code]elif[/code]، أو [code]else[/code]."
+
+#: script_checking/error_database.csv
+msgid "This error tells you that you are missing a type somewhere. A type can be [code]int[/code], [code]float[/code], [code]String[/code], [code]Array[/code], [code]Vector2[/code], and many identifiers representing a data structure."
+msgstr "تخبرك هذه الرسالة أن هناك نوعًا مفقودًا في مكان ما. يمكن أن يكون النوع [code]int[/code]، [code]float[/code]، [code]String[/code]، [code]Array[/code]، [code]Vector2[/code]، والعديد من المعرفات التي تمثل بنية بيانات."
+
+#: script_checking/error_database.csv
+msgid "Most of the time, this error occurs when you wrote a colon after a variable name but did not follow it with a type name."
+msgstr "في معظم الوقت، يحدث هذا الخطأ عندما تكتب نقطتين بعد اسم المتغير ولكنك لم تتبعها باسم نوع."
+
+#: script_checking/error_database.csv
+msgid "It also occurs when you write an arrow ([code]->[/code]) after the parentheses of a function definition but do not follow it with a type name."
+msgstr "يحدث هذا أيضًا عندما تكتب سهمًا ([code]->[/code]) بعد قوسي تعريف الدالة ولكنك لا تتبعه باسم نوع."
+
+#: script_checking/error_database.csv
+msgid "To solve this, you need to write the name of the type after the colon, arrow (in the case of function return types), inside parentheses (for export types), or after the [code]as[/code] keyword."
+msgstr "لحل هذا، عليك كتابة اسم النوع بعد النقطتين، السهم (في حالة أنواع إرجاع الدالة)، داخل الأقواس (لأنواع التصدير)، أو بعد الكلمة الأساسية [code]as[/code]."
+
+#: script_checking/error_database.csv
+msgid "The variable, function name, or class name you are trying to use does not exist."
+msgstr "المتغير أو اسم الدالة أو اسم الصنف الذي تحاول استخدامه غير موجود."
+
+#: script_checking/error_database.csv
+msgid "You most often get this error when you make typos. Maybe you swapped two letters, forgot a letter... sometimes, it's hard to spot."
+msgstr "تحصل على هذا الخطأ غالبًا عندما ترتكب أخطاء مطبعية. ربما قمت بتبديل حرفين، أو نسيت حرفًا... أحيانًا، يكون من الصعب اكتشافه."
+
+#: script_checking/error_database.csv
+msgid "The other cause for this error is that you didn't define the variable, function, or class you're trying to access."
+msgstr "السبب الآخر لهذا الخطأ هو أنك لم تقم بتعريف المتغير أو الدالة أو الفئة التي تحاول الوصول إليها."
+
+#: script_checking/error_database.csv
+msgid "To solve this error, triple-check that there is no typo in the line."
+msgstr "لحل هذا الخطأ، تحقق ثلاث مرات للتأكد من عدم وجود أي خطأ إملائي في السطر."
+
+#: script_checking/error_database.csv
+msgid "If you can, try to go to the variable or function definition, double-click the name, copy it, and paste it where you see the error."
+msgstr "إذا استطعت، حاول الذهاب إلى تعريف المتغير أو الدالة، انقر مرتين على الاسم، انسخه، والصقه حيث ترى الخطأ."
+
+#: script_checking/error_database.csv
+msgid "If you don't see any typo, then you need to ensure that you defined the variable, function, or class you are referring to."
+msgstr "إذا لم تر أي خطأ إملائي، فعليك التأكد من أنك قد عرّفت المتغير أو الدالة أو الصنف الذي تشير إليه."
+
+#: script_checking/error_database.csv
+msgid "You can only use keywords like [code]break[/code] or [code]continue[/code] in a loop. Outside a loop, they are invalid."
+msgstr "يمكنك استخدام كلمات رئيسية مثل [code]break[/code] أو [code]continue[/code] فقط داخل حلقة. خارج الحلقة، فهي غير صالحة."
+
+#: script_checking/error_database.csv
+msgid "The [code]continue[/code] keyword means \"jump to the next iteration of the loop.\" And the [code]break[/code] keyword means \"end the loop right now and jump to the first line of code after the loop block."
+msgstr "كلمة المفتاح [code]continue[/code] تعني \"الانتقال إلى التكرار التالي من الحلقة.\" وكلمة المفتاح [code]break[/code] تعني \"إنهاء الحلقة الآن والانتقال إلى أول سطر من التعليمات البرمجية بعد كتلة الحلقة.\""
+
+#: script_checking/error_database.csv
+msgid "If you wrote one of these keywords outside a loop, you need to remove it."
+msgstr "إذا كتبت أحد هذه الكلمات المفتاحية خارج حلقة، تحتاج إلى إزالته."
+
+#: script_checking/error_database.csv
+msgid "If you are trying to use it inside a loop, your indentation is most likely at fault. You may need to insert one or more leading tab characters to the keyword."
+msgstr "إذا كنت تحاول استخدامه داخل حلقة، فمن المرجح أن يكون سبب ذلك هو المسافة البادئة. قد تحتاج إلى إدراج واحد أو أكثر من أحرف الجدولة قبل الكلمة المفتاحية."
+
+#: script_checking/error_database.csv
+msgid "When the computer talks about a constant expression, it expects a fixed value, a fixed calculation, or the name of an existing constant."
+msgstr "عندما يتحدث الكمبيوتر عن تعبير ثابت، فإنه يتوقع قيمة ثابتة، أو حسابًا ثابتًا، أو اسم ثابت موجود."
+
+#: script_checking/error_database.csv
+msgid "In other words, it wants something that can never change. This is why the computer will reject function calls and variables where it needs a constant expression."
+msgstr "بعبارة أخرى، إنه يريد شيئًا لا يمكن أن يتغير أبدًا. لهذا السبب سيرفض الكمبيوتر استدعاءات الدوال والمتغيرات عندما يحتاج إلى تعبير ثابت."
+
+#: script_checking/error_database.csv
+msgid "You need to replace function calls or variables with a constant value like a whole number, decimal number, string, vector, a predefined array, etc."
+msgstr "تحتاج إلى استبدال استدعاءات الدوال أو المتغيرات بقيمة ثابتة مثل عدد صحيح كامل، عدد عشري، سلسلة نصية، متجه، مصفوفة محددة مسبقًا، إلخ."
+
+#: script_checking/error_database.csv
+msgid "You can also use arithmetic operators like multiplications (*), additions (+), and so on."
+msgstr "يمكنك أيضًا استخدام العوامل الحسابية مثل الضرب (*)، الجمع (+)، وما إلى ذلك."
+
+#: script_checking/error_database.csv
+msgid "When defining a new class, you need to follow a specific pattern. You must write the name in plain text, starting with a letter."
+msgstr "عند تعريف فئة جديدة، تحتاج إلى اتباع نمط محدد. يجب عليك كتابة الاسم بنص عادي، بدءًا بحرف."
+
+#: script_checking/error_database.csv
+msgid "We typically write class names in PascalCase: with a capital letter at the start of every word that composes the class name."
+msgstr "نحن عادةً نكتب أسماء الفئات بصيغة PascalCase: بحرف كبير في بداية كل كلمة تتكون منها اسم الفئة."
+
+#: script_checking/error_database.csv
+msgid "To fix this error, replace whatever you put after the 'extends' or 'class_name' keyword by a name without spaces and starting with a capital letter."
+msgstr "لإصلاح هذا الخطأ، استبدل أي شيء وضعته بعد الكلمة المفتاحية 'extends' أو 'class_name' باسم بدون فراغات ويبدأ بحرف كبير."
+
+#: script_checking/error_database.csv
+msgid "You can optionally use numbers in the name, but not in the first position."
+msgstr "يمكنك اختيارياً استخدام الأرقام في الاسم، لكن ليس في الموضع الأول."
+
+#: script_checking/error_database.csv
+msgid "You are trying to define a function or variable that already exists; You can't do that."
+msgstr "أنت تحاول تعريف دالة أو متغير موجود بالفعل؛ لا يمكنك فعل ذلك."
+
+#: script_checking/error_database.csv
+msgid "Perhaps the function or variable already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
+msgstr "ربما تكون الدالة أو المتغير موجودًا بالفعل في ملف الكود الحالي، ولكن قد يكون أيضًا في الفئة الأساسية التي يمتد إليها هذا الكود GDScript."
+
+#: script_checking/error_database.csv
+msgid "In the app, your code extends some built-in Godot code that's not visible to you."
+msgstr "في التطبيق، يقوم الكود الخاص بك بتمديد بعض كود Godot المدمج الذي لا يمكنك رؤيته."
+
+#: script_checking/error_database.csv
+msgid "When that happens, you need to either rename your function or variable to one that will not collide with an existing one or remove this line of code."
+msgstr "عندما يحدث ذلك، تحتاج إما إلى إعادة تسمية دالتك أو متغيرك إلى اسم لن يتصادم مع أحد الموجودين بالفعل أو إزالة هذا السطر من الشيفرة."
+
+#: script_checking/error_database.csv
+msgid "You are trying to define a signal that already exists; You can't do that."
+msgstr "أنت تحاول تعريف إشارة موجودة بالفعل؛ لا يمكنك فعل ذلك."
+
+#: script_checking/error_database.csv
+msgid "Perhaps the signal already exists in the current code file, but it may also be in a parent class that this GDScript code extends."
+msgstr "ربما الإشارة موجودة بالفعل في ملف الكود الحالي، لكنها قد تكون أيضًا في فئة أصلية يمتد إليها هذا الكود GDScript."
+
+#: script_checking/error_database.csv
+msgid "When that happens, you need to either rename your signal to one that will not collide with an existing one or remove this line of code."
+msgstr "عندما يحدث ذلك، تحتاج إما إلى إعادة تسمية الإشارة الخاصة بك إلى واحدة لن تتصادم مع إشارة موجودة أو إزالة هذا السطر من الكود."
+
+#: script_checking/error_database.csv
+msgid "The function you're trying to define exists in a parent class, so your definition overrides the parent class's function."
+msgstr "الدالة التي تحاول تعريفها موجودة في فئة أصلية، لذلك تعريفك يتجاوز دالة الفئة الأصلية."
+
+#: script_checking/error_database.csv
+msgid "When you override a parent class's function, the new function must match the parent. The new function should have the same number and type of parameters as the parent class."
+msgstr "عندما تقوم بإعادة تعريف دالة من صف رئيسي، يجب أن تتطابق الدالة الجديدة مع الدالة الأصلية. يجب أن تحتوي الدالة الجديدة على نفس عدد ونوع المعاملات كما في الصف الرئيسي."
+
+#: script_checking/error_database.csv
+msgid "For example, if the parent has two arguments, you need your new function also to have two arguments. If you use type hints in your function definitions, the argument types must match the parent class."
+msgstr "على سبيل المثال، إذا كان لدى الأبوسيلي (الصف الأب) وسيطان، تحتاج دالتك الجديدة أيضًا أن تحتوي على وسيطين. إذا استخدمت تلميحات النوع في تعريفات دالتك، فيجب أن تتطابق أنواع الوسائط مع الصف الأب."
+
+#: script_checking/error_database.csv
+msgid "You need to check the parent class's function and its definition in the code reference. Then, you need to edit your function definition to have the same number and type of parameters as the parent class."
+msgstr "تحتاج إلى التحقق من دالة الفئة الأب وتعريفها في مرجع الكود. ثم، تحتاج إلى تعديل تعريف دالتك ليكون له نفس عدد ونوع المعلمات كالفئة الأب."
+
+#: script_checking/error_database.csv
+msgid "This whole class of errors has to do with calling functions with either the wrong number of arguments or the wrong kind of argument. You will need to use the error message to see what is going wrong."
+msgstr "كل هذه الفئة من الأخطاء تتعلق باستدعاء الدوال إما بعدد خاطئ من الوسائط أو بنوع خاطئ من الوسائط. ستحتاج إلى استخدام رسالة الخطأ لمعرفة ما يحدث بشكل خاطئ."
+
+#: script_checking/error_database.csv
+msgid "You need to either remove, add, or change the values you're trying to pass to the function to solve this issue. To know exactly how many arguments you need, you need to check the code reference. It will show you the function definition and the mandatory arguments."
+msgstr "تحتاج إما إلى إزالة أو إضافة أو تغيير القيم التي تحاول تمريرها إلى الدالة لحل هذه المشكلة. لمعرفة عدد الوسائط التي تحتاجها بالضبط، تحتاج إلى التحقق من مرجع الكود. سيعرض لك تعريف الدالة والوسائط الإلزامية."
+
+#: script_checking/error_database.csv
+msgid "All the values in your code have a specific type. That type can be a whole number (int), a decimal number (float), text (String), and so on. There are tons of possible types, and you can even define your own!"
+msgstr "جميع القيم في الكود الخاص بك لها نوع محدد. يمكن أن يكون هذا النوع رقمًا صحيحًا (int)، رقمًا عشريًا (float)، نصًا (String)، وهكذا. هناك الكثير من الأنواع الممكنة، ويمكنك حتى تعريف نوعك الخاص!"
+
+#: script_checking/error_database.csv
+msgid "When you make any operation, the computer compares the types you are using."
+msgstr "عندما تقوم بأي عملية، يقارن الكمبيوتر أنواع البيانات التي تستخدمها."
+
+#: script_checking/error_database.csv
+msgid "Some types are compatible, and some are not. For example, you cannot directly add a whole number to a text string. You first need to convert the number into text."
+msgstr "بعض الأنواع متوافقة، وبعضها غير متوافق. على سبيل المثال، لا يمكنك إضافة عدد صحيح مباشرة إلى سلسلة نصية. تحتاج أولاً إلى تحويل العدد إلى نص."
+
+#: script_checking/error_database.csv
+msgid "You'll need to read the error message to see what is not matching because there are many possible cases."
+msgstr "ستحتاج إلى قراءة رسالة الخطأ لمعرفة ما هو غير متطابق لأنه هناك العديد من الحالات الممكنة."
+
+#: script_checking/error_database.csv
+msgid "If the error mentions the assigned value type not matching the variable, the problem is on the right side of the equal sign (=)."
+msgstr "إذا ذكر الخطأ أن نوع القيمة المعينة لا يتطابق مع المتغير، فالمشكلة تكون على الجانب الأيمن من علامة المساواة (=)."
+
+#: script_checking/error_database.csv
+msgid "If the error talks about the return type not matching the function, then it is the value after the return keyword that is problematic."
+msgstr "إذا كان الخطأ يتحدث عن عدم تطابق نوع الإرجاع مع الدالة، فإن المشكلة تكون في القيمة الموجودة بعد كلمة return."
+
+#: script_checking/error_database.csv
+msgid "If the computer talks about an invalid operand, then the issue is that the operation does not exist for the type you're trying to use. For example, while you can add two 2D vectors, you can't add a whole number or text to a 2D vector."
+msgstr "إذا تحدث الكمبيوتر عن معامل غير صالح، فالمشكلة هي أن العملية غير موجودة للنوع الذي تحاول استخدامه. على سبيل المثال، بينما يمكنك جمع متجهين ثنائيي الأبعاد، لا يمكنك جمع عدد كامل أو نص مع متجه ثنائي الأبعاد."
+
+#: script_checking/error_database.csv
+msgid "GDScript supports type inference. The computer will automatically recognize the type of value you are working with. In some cases, though, it can't figure it out."
+msgstr "يدعم GDScript استنتاج النوع. سيقوم الكمبيوتر تلقائيًا بالتعرف على نوع القيمة التي تعمل معها. في بعض الحالات، مع ذلك، لا يمكنه معرفة ذلك."
+
+#: script_checking/error_database.csv
+msgid "When that happens, you need to specify the type yourself or remove type inference altogether for this variable."
+msgstr "عندما يحدث ذلك، تحتاج إلى تحديد النوع بنفسك أو إزالة استدلال النوع تمامًا لهذه المتغير."
+
+#: script_checking/error_database.csv
+msgid "The simplest way to solve this error is to remove types for this variable or this function's arguments. Otherwise, you can manually specify the value type after the colon."
+msgstr "أسهل طريقة لحل هذا الخطأ هي إزالة الأنواع لهذه المتغيرات أو معاملات هذه الدالة. وإلا، يمكنك تحديد نوع القيمة يدويًا بعد النقطتين."
+
+#: script_checking/error_database.csv
+msgid "We recommend specifying the type whenever possible to reap the typing system's benefits."
+msgstr "نوصي بتحديد النوع كلما أمكن للاستفادة من فوائد نظام الكتابة."
+
+#: script_checking/error_database.csv
+msgid "There is an issue with the return value of your function. There are two main cases here:"
+msgstr "هناك مشكلة في قيمة الإرجاع لدالتك. هناك حالتان رئيسيتان هنا:"
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
+msgstr ""
+"1. دالتك هي دالة void، لذا يجب ألا تعيد قيمة. ويشمل ذلك الدالات التي تستخدم الصياغة '-> void' وبنيات الفئة ('_init()').\n"
+"2. لقد حددت نوع قيمة الإرجاع لدالتك، ولكنك لا تعيد قيمة في جميع الفرعيات الممكنة (if، elif، وelse) أو في النهاية."
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
+msgstr ""
+"1. دالتك هي دالة void، لذا يجب ألا تعيد قيمة. ويشمل ذلك الدالات التي تستخدم الصياغة '-> void' وبنيات الفئة ('_init()').\n"
+"2. لقد حددت نوع قيمة الإرجاع لدالتك، ولكنك لا تعيد قيمة في جميع الفرعيات الممكنة (if، elif، وelse) أو في النهاية."
+
+#: script_checking/error_database.csv
+msgid "When your function is 'void', you should never return a value. You can use the 'return' keyword to end the function early, but you should never write anything after that."
+msgstr "عندما تكون دالتك 'void'، لا يجب عليك أبدًا إرجاع قيمة. يمكنك استخدام الكلمة المفتاحية 'return' لإنهاء الدالة مبكرًا، ولكن يجب ألا تكتب أي شيء بعد ذلك أبدًا."
+
+#: script_checking/error_database.csv
+msgid "When you use a return type, you must always return something at the end of the function or in every branch (if, elif, and else block) of the function."
+msgstr "عند استخدام نوع الإرجاع، يجب عليك دائمًا إرجاع شيء ما في نهاية الدالة أو في كل فرع (كتلة if، elif، وelse) من الدالة."
+
+#: script_checking/error_database.csv
+msgid "Godot was unable to load your script, yet the language checker found nothing wrong."
+msgstr "لم يتمكن Godot من تحميل البرنامج النصي الخاص بك، ومع ذلك لم يجد فاحص اللغة أي خطأ."
+
+#: script_checking/error_database.csv
+msgid "Please click on the \"report\" button at the top and please let us know."
+msgstr "يرجى النقر على زر \"تقرير\" في الأعلى ومن فضلك أعلمنا."
+
+#: script_checking/error_database.csv
+msgid "You called a function inside itself. This will loop forever."
+msgstr "لقد استدعيت دالة داخل نفسها. هذا سيؤدي إلى تكرار لا نهائي."
+
+#: script_checking/error_database.csv
+msgid "There are valid reasons for using recursive functions, but none of them are part of this course, so this cannot be a valid solution."
+msgstr "هناك أسباب وجيهة لاستخدام الدوال العودية، لكن لا شيء منها جزء من هذه الدورة، لذا لا يمكن أن يكون هذا حلاً صالحًا."
+
+#: script_checking/error_database.csv
+msgid "You wrote a while loop with a condition that is always true (like [code]while true:[/code] or [code]while(true):[/code]) without a [code]break[/code] statement inside it. This creates an infinite loop that will freeze your game."
+msgstr "لقد كتبت حلقة while بشرط يكون دائماً صحيحاً (مثل [code]while true:[/code] أو [code]while(true):[/code]) بدون وجود عبارة [code]break[/code] بداخلها. هذا يخلق حلقة لا نهائية ستجمد لعبتك."
+
+#: script_checking/error_database.csv
+msgid "To fix this, you need to either add a [code]break[/code] statement inside the loop so it can exit when a certain condition is met, or change the while loop condition to something that will become false. For example: [code]while position.x < 100: position.x -= 10[/code]."
+msgstr "لإصلاح هذا، تحتاج إما إلى إضافة عبارة [code]break[/code] داخل الحلقة بحيث يمكنها الخروج عند تحقق شرط معين، أو تغيير شرط حلقة while إلى شيء سيصبح خطأً. على سبيل المثال: [code]while position.x < 100: position.x -= 10[/code]."
+
+#: script_checking/error_database.csv
+msgid "The computer reached the end of the line of code, but the line had a syntax error."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
+msgstr ""
+"وصل الكمبيوتر إلى نهاية سطر الكود، لكن السطر كان يحتوي على خطأ في الصياغة.\n"
+"الحالة الأكثر شيوعًا هي عندما تنسى إغلاق سلسلة نصية: لديك علامات اقتباس مفتوحة، لكنك تنسى إضافة علامة اقتباس مطابقة للإغلاق."
+
+#: script_checking/error_database.csv
+msgid "Double-check that you are not missing a quote character or that the quote character you used to start the string is the same as the one you used to close the string."
+msgstr "تحقق مرتين من أنك لا تفقد حرف اقتباس أو أن حرف الاقتباس الذي استخدمته لبدء السلسلة هو نفسه الذي استخدمته لإغلاق السلسلة."
+
+#: script_checking/error_database.csv
+msgid "The sub-variable you are trying to access does not exist."
+msgstr "المتغير الفرعي الذي تحاول الوصول إليه غير موجود."
+
+#: script_checking/error_database.csv
+msgid "You probably have a typo in the name of the sub-variable that you are trying to access."
+msgstr "من المحتمل أن يكون لديك خطأ مطبعي في اسم المتغير الفرعي الذي تحاول الوصول إليه."
+
+#: script_checking/error_database.csv
+msgid "Ensure that you don't have a capital letter where you should have a lowercase letter and vice versa."
+msgstr "تأكد من أنك لا تستخدم حرفًا كبيرًا حيث يجب أن يكون حرفًا صغيرًا والعكس صحيح."
+
+#: course/glossary.csv course/documentation.csv
+#, fuzzy
+msgid "explanation"
+msgstr "تكرار"
+
+#: course/glossary.csv
+msgid "Member functions are functions attached to a specific value type, like arrays, strings, or dictionaries. We also call them methods."
+msgstr "الدوال العضوية هي دوال مرتبطة بنوع قيمة محدد، مثل المصفوفات أو السلاسل أو القواميس. ونحن أيضاً نسميها طرقاً."
+
+#: course/glossary.csv
+msgid "For example, arrays have member functions like [code]array.append()[/code]."
+msgstr "على سبيل المثال، المصفوفات لديها دوال أعضاء مثل [code]array.append()[/code]."
+
+#: course/glossary.csv
+msgid "You can only call the function on an array, using the access operator ([code].[/code]) to access it, as shown above."
+msgstr "يمكنك استدعاء الدالة فقط على مصفوفة، باستخدام عامل الوصول ([code].[/code]) للوصول إليها، كما هو موضح أعلاه."
+
+#: course/glossary.csv
+msgid "Member variables are variables attached to a specific value type, like a vector's [code]x[/code] and [code]y[/code] sub-variables. We also call them [i]properties[/i] or [i]fields[/i] of the vector."
+msgstr "المتغيرات العضوية هي متغيرات مرتبطة بنوع قيمة محدد، مثل المتغيرين الفرعيين [code]x[/code] و [code]y[/code] للمتجه. نحن أيضًا نطلق عليها [i]خصائص[/i] أو [i]حقول[/i] المتجه."
+
+#: course/glossary.csv
+msgid "To access a member variable, you must first write the value's name followed by the access operator ([code].[/code]). For example, [code]position.x[/code]."
+msgstr "للوصول إلى متغير عضو، يجب أولاً كتابة اسم القيمة متبوعًا بمشغّل الوصول ([code].[/code]). على سبيل المثال، [code]position.x[/code]."
+
+#: course/glossary.csv
+msgid "A parameter is a variable you create as part of a function definition."
+msgstr "المُعامل هو متغير تقوم بإنشائه كجزء من تعريف الدالة."
+
+#: course/glossary.csv
+msgid "It allows you to reuse the function more by having values that vary in the function's body."
+msgstr "يسمح لك بإعادة استخدام الدالة أكثر من خلال وجود قيم تتغير داخل جسم الدالة."
+
+#: course/glossary.csv
+msgid "A radian is a unit of measurement of angles based on the circle's circumference."
+msgstr "الراديان هو وحدة قياس الزوايا مبنية على محيط الدائرة."
+
+#: course/glossary.csv
+msgid "We tend to use degrees more in our daily lives, but in computer programming, and especially in games, radians are common."
+msgstr "نميل إلى استخدام الدرجات أكثر في حياتنا اليومية، لكن في برمجة الكمبيوتر، وخصوصًا في الألعاب، الزوايا بالراديان هي الأكثر شيوعًا."
+
+#: course/glossary.csv
+msgid "An angle of [code]2 * PI[/code] radians corresponds to 360 degrees. And an angle of [code]PI[/code] radians corresponds to 180 degrees."
+msgstr "زاوية بمقدار [code]2 * PI[/code] راديان تعادل 360 درجة. وزاوية بمقدار [code]PI[/code] راديان تعادل 180 درجة."
+
+#: course/glossary.csv
+msgid "In computer programming, a type is the class of a value. For example, whole numbers like [code]3[/code], [code]11[/code], and [code]255462[/code] are all of type [code]int[/code] (short for integer)."
+msgstr "في برمجة الكمبيوتر، النوع هو فئة القيمة. على سبيل المثال، الأعداد الصحيحة مثل [code]3[/code]، [code]11[/code]، و [code]255462[/code] كلها من نوع [code]int[/code] (اختصار لكلمة integer)."
+
+#: course/glossary.csv
+msgid "The computer uses types to determine which operations are valid between two values and when they're undefined."
+msgstr "في برمجة الكمبيوتر، النوع هو فئة القيمة. على سبيل المثال، الأعداد الصحيحة مثل 3 و 11 و 255462 كلها من نوع int (اختصار لكلمة integer)."
+
+#: course/glossary.csv
+msgid "In computer code, an iteration is one repetition of some process or code. We typically use the term with loops, where one iteration is one run of the loop's code."
+msgstr "في كود الكمبيوتر، التكرار هو إعادة واحدة لبعض العملية أو الكود. نستخدم المصطلح عادة مع الحلقات، حيث يمثل التكرار الواحد تشغيلًا واحدًا لكود الحلقة."
+
+#: course/glossary.csv
+msgid "When talking of algorithms, an iteration can mean a full pass of the algorithm on a data set."
+msgstr "عند الحديث عن الخوارزميات، يمكن أن تعني التكرار مرورًا كاملاً للخوارزمية على مجموعة بيانات."
+
+#: course/glossary.csv
+msgid "In math, a vector is a list of numbers. In games, we often use 2D and 3D vectors: respectively, lists of two and three numbers."
+msgstr "في الرياضيات، المتجه هو قائمة من الأعداد. في الألعاب، نستخدم غالبًا المتجهات الثنائية والثلاثية الأبعاد: على التوالي، قوائم من رقمين وثلاثة أرقام."
+
+#: course/glossary.csv
+msgid "We use that to represent a direction and magnitude or intensity in space. For example, you can use a vector to represent the direction and speed at which a character or a vehicle moves."
+msgstr "نحن نستخدم ذلك لتمثيل الاتجاه والمقدار أو الشدة في الفضاء. على سبيل المثال، يمكنك استخدام متجه لتمثيل الاتجاه والسرعة التي يتحرك بها شخصية أو مركبة."
+
+#: course/glossary.csv
+msgid "Vectors can seem daunting at first because they are pretty abstract, but as you will see, they'll simplify code tremendously."
+msgstr "قد تبدو المتجهات شديدة الصعوبة في البداية لأنها مجردة إلى حد ما، ولكن كما سترى، ستُبسّط الكود بشكل كبير."
+
+#: course/glossary.csv
+msgid "An argument is a value you pass to a function when you call it. For example, in the function call [code]rotate(0.5)[/code], the value [code]0.5[/code] inside the parentheses is an argument."
+msgstr "الحجة هي قيمة تمررها إلى دالة عند استدعائها. على سبيل المثال، في استدعاء الدالة [code]rotate(0.5)[/code]، القيمة [code]0.5[/code] داخل الأقواس هي حجة."
+
+#: course/glossary.csv
+msgid "A function can take no arguments, one argument, or multiple arguments. Arguments can be required or optional."
+msgstr "يمكن للدالة ألا تأخذ أي معاملات، أو أن تأخذ معاملة واحدة، أو عدة معاملات. يمكن أن تكون المعاملات مطلوبة أو اختيارية."
+
+#: course/glossary.csv
+msgid "When a function requires multiple arguments, you separate them with commas. Here's an example: [code]jump(50, 100)[/code]"
+msgstr "عندما تتطلب الدالة عدة وسائط، تقوم بفصلها باستخدام الفواصل. إليك مثال: [code]jump(50, 100)[/code]"
+
+#: course/glossary.csv
+msgid "When you [i]call[/i] a function, we call the values in parentheses [i]arguments[/i]."
+msgstr "عندما تقوم بـ [i]استدعاء[/i] دالة، نسمي القيم بين الأقواس [i]وسائط[/i]."
+
+#: course/glossary.csv
+msgid "But when you [i]write[/i] a function definition, we call them [i]parameters[/i] instead. Here's an example:"
+msgstr "ولكن عندما تقوم [i]بكتابة[/i] تعريف دالة، نسميها [i]معاملات[/i] بدلاً من ذلك. إليك مثالاً:"
+
+#: course/glossary.csv
+msgid "[code]func move_to_position(x, y):[/code]"
+msgstr "[code]وظيفة الانتقال_إلى_الموضع(x, y):[/code]"
+
+#: course/glossary.csv
+msgid "In this function definition, [code]x[/code] and [code]y[/code] are [i]parameters[/i]."
+msgstr "في تعريف هذه الدالة، [code]x[/code] و [code]y[/code] هما [i]معاملان[/i]."
+
+#: course/glossary.csv
+msgid "An array is a list of values. In GDScript, arrays can contain [i]any[/i] types of value."
+msgstr "المصفوفة هي قائمة من القيم. في GDScript، يمكن أن تحتوي المصفوفات على أي نوع من القيم."
+
+#: course/glossary.csv
+msgid "To create an array, you write comma-separated values in square brackets: [code]var three_numbers = [1, 2, 3][/code]"
+msgstr "لإنشاء مصفوفة، تكتب القيم مفصولة بفواصل داخل أقواس مربعة: [code]var three_numbers = [1, 2, 3][/code]"
+
+#: course/glossary.csv
+msgid "In games, we use arrays all the time to store lists of characters in a party, lists of items in inventory, lists of spells the player unlocked, and so on. They're everywhere."
+msgstr "في الألعاب، نستخدم المصفوفات طوال الوقت لتخزين قوائم الشخصيات في الفريق، قوائم العناصر في المخزون، قوائم التعويذات التي فتحها اللاعب، وهكذا. إنها موجودة في كل مكان."
+
+#: course/glossary.csv
+msgid "Arrays are a fundamental value type in computer programming. You'll find arrays in pretty much any programming language."
+msgstr "المصفوفات هي نوع بيانات أساسي في برمجة الحاسوب. ستجد المصفوفات في تقريبًا أي لغة برمجة."
+
+#: course/glossary.csv
+msgid "Assigning a value to a variable means that you store a value inside the variable. You do this with the equal sign ([code]=[/code])."
+msgstr "إسناد قيمة لمتغير يعني أنك تخزن قيمة داخل المتغير. تقوم بذلك باستخدام علامة المساواة ([code]=[/code])."
+
+#: course/glossary.csv
+msgid "A dictionary is a data structure that maps values with key-value pairs. When you give the dictionary a key, it finds and gives you back the corresponding value."
+msgstr "القاموس هو هيكل بيانات يربط القيم بأزواج مفتاح-قيمة. عندما تعطي القاموس مفتاحًا، فإنه يجد لك ويعيد القيمة المقابلة."
+
+#: course/glossary.csv
+msgid "In GDScript, keys can be many things. We often use text strings or numbers, but you're not limited to that. A [code]Vector2[/code] can also be a valid key, which is handy to map a grid cell to a unit or an item in a grid-based game."
+msgstr "في GDScript، يمكن أن تكون المفاتيح أشياء كثيرة. غالبًا ما نستخدم النصوص أو الأرقام، لكنك لست محدودًا بذلك. يمكن أيضًا أن يكون [code]Vector2[/code] مفتاحًا صالحًا، وهذا مفيد لتوصيل خلية شبكة بوحدة أو عنصر في لعبة تعتمد على الشبكة."
+
+#: course/glossary.csv
+msgid "You will often use dictionaries to associate bits of data in your games. For example, we could use them to associate an equipment's name with its weapon stats in a database."
+msgstr "ستستخدم القواميس كثيراً لربط أجزاء البيانات في ألعابك. على سبيل المثال، يمكننا استخدامها لربط اسم المعدات مع إحصائيات سلاحها في قاعدة البيانات."
+
+#: course/glossary.csv
+msgid "Like arrays, they are a fundamental data type that you will see in many programming languages and use a lot."
+msgstr "مثل المصفوفات، هي نوع بيانات أساسي سترى الكثير منه في العديد من لغات البرمجة وتستخدمه كثيرًا."
+
+#: course/glossary.csv
+msgid "A for loop instructs the computer to repeat a set of instructions once for each value in an array."
+msgstr "حلقة for توجه الكمبيوتر لتكرار مجموعة من التعليمات مرة واحدة لكل قيمة في المصفوفة."
+
+#: course/glossary.csv
+msgid "In each loop iteration, the compiler extracts one value from the array and gives you access to it in the loop's body."
+msgstr ".في كل تكرار للحلقة، يستخرج المُجمّع قيمة واحدة من المصفوفة ويتيح لك الوصول إليها داخل جسم الحلقة."
+
+#: course/glossary.csv
+msgid "For loops run code a limited amount of times: one per value in the array. It is different from while loops that keep repeating code until a condition is met."
+msgstr "تقوم حلقات الـ for بتشغيل الكود عددًا محدودًا من المرات: مرة واحدة لكل قيمة في المصفوفة. وهو يختلف عن حلقات while التي تستمر في تكرار الكود حتى يتم استيفاء شرط معين."
+
+#: course/glossary.csv
+msgid "We recommend favoring for loops when you can. They're safer and easier to use than while loops."
+msgstr "نوصي بتفضيل حلقات for عندما تستطيع. فهي أكثر أمانًا وأسهل في الاستخدام من حلقات while."
+
+#: course/glossary.csv
+msgid "A function is a group of code instructions you give a name. When you define a function, you can call it any time to run all the instructions it contains."
+msgstr "الدالة هي مجموعة من تعليمات الكود التي تعطيها اسمًا. عند تعريف دالة، يمكنك استدعاؤها في أي وقت لتشغيل جميع التعليمات التي تحتوي عليها. ..."
+
+#: course/glossary.csv
+msgid "You can modify a function's behavior with parameters. Parameters are variable names that you write in the function definition. You can then use them in the function's body to make your code adapt to different cases."
+msgstr "يمكنك تعديل سلوك الدالة باستخدام المعلمات. المعلمات هي أسماء متغيرات تقوم بكتابتها في تعريف الدالة. يمكنك بعد ذلك استخدامها في جسم الدالة لجعل كودك يتكيف مع الحالات المختلفة."
+
+#: course/glossary.csv
+msgid "Also, functions can optionally return a value to the code calling it."
+msgstr "أيضًا، يمكن للدوال اختيارياً أن تعيد قيمة إلى الكود الذي يستدعيها."
+
+#: course/glossary.csv
+msgid "An increment is the amount by which a value changes in your code."
+msgstr "الزيادة هي الكمية التي يتغير بها قيمة في كودك."
+
+#: course/glossary.csv
+msgid "In computer programming, instructions are a single operation the computer recognizes and can execute."
+msgstr "في برمجة الكمبيوتر، التعليمات هي عملية واحدة يتعرف عليها الكمبيوتر ويمكنه تنفيذها."
+
+#: course/glossary.csv
+msgid "For example, a function call, an addition, or assigning a value to a variable."
+msgstr "على سبيل المثال، استدعاء دالة، أو جمع، أو تعيين قيمة لمتغير."
+
+#: course/glossary.csv
+msgid "Variables are a tool to give a name to values you want to store in your code and change over time."
+msgstr "المتغيرات هي أداة لإعطاء اسم للقيم التي تريد تخزينها في شيفرتك وتغييرها مع مرور الوقت."
+
+#: course/glossary.csv
+msgid "For example, a character's health: when the character takes a hit, you want it to go down. When healing, you want the health to go back up."
+msgstr "على سبيل المثال، صحة شخصية: عندما تتلقى الشخصية ضربة، تريد أن تنخفض. عند الشفاء، تريد أن تعود الصحة للارتفاع مرة أخرى."
+
+#: course/glossary.csv
+msgid "You can create a variable named [code]health[/code] to represent the health."
+msgstr "يمكنك إنشاء متغير باسم [code]health[/code] لتمثيل الصحة."
+
+#: course/glossary.csv
+msgid "Then, every time you write the keyword [code]health[/code] in your code, the computer will fetch the corresponding value in its memory for you."
+msgstr "ثم، في كل مرة تكتب فيها الكلمة المفتاحية [code]health[/code] في الكود الخاص بك، سيقوم الكمبيوتر بجلب القيمة المقابلة من ذاكرته لك."
+
+#: course/glossary.csv
+msgid "Variables work a bit like product labels in a supermarket. They are names that you attach to some value. Any time, you can take the label and stick it onto a new product or, in that case, a new value."
+msgstr "تعمل المتغيرات بطريقة مشابهة لتسميات المنتجات في السوبرماركت. إنها أسماء تقوم بإرفاقها بقيمة معينة. في أي وقت، يمكنك أخذ التسمية ولصقها على منتج جديد أو، في هذه الحالة، على قيمة جديدة."
+
+#: course/glossary.csv
+msgid "A while loop instructs the computer to keep running code based on a condition. While the condition is true, the loop keeps running."
+msgstr "حلقة الـ while توجّه الكمبيوتر لمواصلة تنفيذ الكود بناءً على شرط معين. طالما الشرط صحيح، الحلقة تستمر في التشغيل."
+
+#: course/glossary.csv
+msgid "When coding while loops, you must be careful: they will keep running infinitely and freeze your game if you get the condition wrong."
+msgstr "عند كتابة حلقات while، لازم تكون حذر: إذا غلطت في الشرط، الحلقة هتستمر للأبد وهتجمد لعبتك."
+
+#: course/glossary.csv
+msgid "That's why we recommend using the safer for loop whenever you can."
+msgstr "لهذا السبب نوصي باستخدام حلقة for الأكثر أمانًا كلما استطعت."
+
+#: course/glossary.csv
+msgid "However, there are still essential cases in which we use while loops, like processing files, processing computer code, or for powerful algorithms."
+msgstr "ومع ذلك، لا تزال هناك حالات أساسية نستخدم فيها حلقات while، مثل معالجة الملفات، ومعالجة تعليمات الكمبيوتر، أو للخوارزميات القوية."
+
+#: course/glossary.csv
+msgid "We talk about a loop or a function's body to refer to the lines of code that are part of the loop or function."
+msgstr "نتحدث عن حلقة أو جسم دالة للإشارة إلى أسطر الكود التي هي جزء من الحلقة أو الدالة."
+
+#: course/glossary.csv
+msgid "Returning a value is the process of sending a value to the place where you call a function."
+msgstr "إرجاع قيمة هو عملية إرسال قيمة إلى المكان الذي تستدعي فيه الدالة."
+
+#: course/glossary.csv
+msgid "It happens when a function uses the [code]return[/code] keyword followed by a value, for example: [code]return -1[/code]."
+msgstr "يحدث ذلك عندما تستخدم الدالة الكلمة المفتاحية [code]return[/code] متبوعة بقيمة، على سبيل المثال: [code]return -1[/code]."
+
+#: course/glossary.csv
+msgid "A collection of valuable and reusable code bundled together by other programmers to save you time. All programmers use code libraries."
+msgstr "مجموعة من الأكواد القيمة والقابلة لإعادة الاستخدام مجمعة معًا بواسطة مبرمجين آخرين لتوفير وقتك. جميع المبرمجين يستخدمون مكتبات الأكواد."
+
+#: course/glossary.csv
+msgid "In computer graphics, a sprite is an image you display on the screen. We generally use this word to talk about moving images, like a character, a monster, or an item falling on the ground."
+msgstr "في الرسومات الحاسوبية، الرسم المتحرك هو صورة تعرضها على الشاشة. عادةً نستخدم هذه الكلمة للحديث عن الصور المتحركة، مثل شخصية، أو وحش، أو غرض يسقط على الأرض."
+
+#: course/documentation.csv
+msgid "shows the current scene"
+msgstr "يعرض المشهد الحالي"
+
+#: course/documentation.csv
+msgid "hides the current scene"
+msgstr "يخفي المشهد الحالي"
+
+#: course/documentation.csv
+msgid "Applies a rotation to the node, in radians, starting from its current rotation."
+msgstr "يطبق دوراناً على العقدة، بالراديان، بدءاً من دورانها الحالي."
+
+#: course/documentation.csv
+msgid "Moves the turtle in the direction it's facing by some pixels."
+msgstr "تحرك السلحفاة في الاتجاه الذي تواجهه بعدد معين من البيكسلات."
+
+#: course/documentation.csv
+msgid "Rotates the turtle to the right by some degrees."
+msgstr "يُدوّر السلحفاة إلى اليمين بمقدار بعض الدرجات."
+
+#: course/documentation.csv
+msgid "Rotates the turtle to the left by some degrees."
+msgstr "يُدوّر السلحفاة إلى اليسار بمقدار بعض الدرجات."
+
+#: course/documentation.csv
+msgid "Offsets the turtle's position by the given x and y amounts of pixels."
+msgstr "يزاح موقع السلحفاة بمقدار وحدات البكسل المحددة في الاتجاهين x و y."
+
+#: course/documentation.csv
+msgid "Makes the turtle draw a rectangle starting at its current position."
+msgstr "يجعل السلحفاة ترسم مستطيلاً بدءًا من موقعها الحالي."
+
+#: course/documentation.csv
+msgid "The position of the entity on the horizontal axis."
+msgstr "موضع الكيان على المحور الأفقي."
+
+#: course/documentation.csv
+msgid "The position of the entity on the vertical axis."
+msgstr "موضع الكيان على المحور العمودي."
+
+#: course/documentation.csv
+#, fuzzy
+msgid " Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false, normalizes the movement."
+msgstr "يطبق ترجمة محلية على محور X للعقدة بناءً على [code]Node._process[/code] و[code]delta[/code]. إذا كان [code]scaled[/code] خاطئًا، يقوم بتطبيع الحركة."
+
+#: course/documentation.csv
+msgid "Stores how many cells make up the width ([code]board_size.x[/code]) and height ([code]board_size.y[/code]) of the board."
+msgstr "يخزن عدد الخلايا التي تشكل عرض ([code]board_size.x[/code]) وارتفاع ([code]board_size.y[/code]) اللوحة."
+
+#: course/documentation.csv
+msgid "any"
+msgstr ""
+
+#: course/documentation.csv
+msgid "String"
+msgstr ""
+
+#: course/documentation.csv
+msgid "int"
+msgstr ""
+
+msgid "Learn to Code From Zero with Godot"
+msgstr ""
