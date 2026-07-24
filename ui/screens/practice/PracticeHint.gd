@@ -5,7 +5,7 @@ extends Revealer
 @export var text: String:
 	set = set_bbcode_text
 
-@export var rich_text_label: RichTextLabel
+@export var _rich_text_label: RichTextLabel
 
 
 func _ready() -> void:
@@ -29,6 +29,12 @@ func _update_rtl_text() -> void:
 		return
 
 	if Engine.is_editor_hint():
-		rich_text_label.text = text
+		_rich_text_label.text = text
 	else:
-		rich_text_label.text = TextUtils.paragraph(text)
+		_rich_text_label.text = TextUtils.paragraph(text)
+
+
+# Sets the text alignment of the internal RichTextLabel, used to support
+# right-to-left languages.
+func set_text_alignment(alignment: HorizontalAlignment) -> void:
+	_rich_text_label.horizontal_alignment = alignment

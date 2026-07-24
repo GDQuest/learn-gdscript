@@ -249,9 +249,8 @@ func _update_labels() -> void:
 			continue
 
 		practice_hint.title = "Hint %s" % [str(index + 1).pad_zeros(1)]
-		practice_hint.rich_text_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
+		practice_hint.set_text_alignment(HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT)
 		practice_hint.text = hints[index]
-		practice_hint.rich_text_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 		index += 1
 
 	_info_panel.display_tests(_tester.get_test_names())
