@@ -290,13 +290,12 @@ static func _get_text_content(node: BBCodeParser.ParseNode, recurse: bool) -> St
 		elif child is BBCodeParser.ParseNode and recurse:
 			var child_node: BBCodeParser.ParseNode = child
 			if child_node.tag == BBCodeParserData.Tag.GLOSSARY:
+				# The glossary tag's own content is the exact text to display
+				# (in whatever form or language the author/translator wrote),
+				# while its "term" attribute is only a lookup ID for the popup.
 				var term: String = child_node.attributes.get("term", "")
-				var entry: Glossary.Entry = TextUtils.get_glossary().get_match(term)
-				if entry != null:
-					var is_plural := not entry.raw_plural.is_empty() and term == entry.raw_plural
-					text += "[url=%s]%s[/url]" % [term, entry.plural_form if is_plural else entry.term]
-				else:
-					text += term
+				var display_text := _get_text_content(child_node, recurse)
+				text += "[url=%s]%s[/url]" % [term, display_text]
 			else:
 				text += _get_text_content(child_node, recurse)
 	return text

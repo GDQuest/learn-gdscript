@@ -53,7 +53,7 @@ var TAG_DEFINITIONS := {
 	Tag.SCRIPT_SLICE: TagDefinition.new("script_slice", false, true, [Tag.PRACTICE], ["path"], ["name"], []),
 	Tag.DOCS: TagDefinition.new("docs", true, false, [Tag.PRACTICE], [], [], []),
 	Tag.SEPARATOR: TagDefinition.new("separator", false, true, [Tag.LESSON], [], [], []),
-	Tag.GLOSSARY: TagDefinition.new("glossary", false, true, [Tag.PARAGRAPH, Tag.GOAL, Tag.DESCRIPTION, Tag.HINT, Tag.EXPLANATION, Tag.OPTION, Tag.NOTE], ["term"], [], []),
+	Tag.GLOSSARY: TagDefinition.new("glossary", true, false, [Tag.PARAGRAPH, Tag.GOAL, Tag.DESCRIPTION, Tag.HINT, Tag.EXPLANATION, Tag.OPTION, Tag.NOTE], ["term"], [], []),
 	Tag.PARAGRAPH: TagDefinition.new("paragraph", true, false, [Tag.LESSON], [], [], []),
 	Tag.TR: TagDefinition.new("tr", false, true, [Tag.LESSON, Tag.QUIZ_CHOICE, Tag.QUIZ_INPUT, Tag.NOTE], [], [])
 }

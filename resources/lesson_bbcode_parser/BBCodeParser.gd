@@ -230,6 +230,8 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 					inline_node.bbcode_path = file_path
 					inline_node.parent = current_paragraph
 					current_paragraph.children.append(inline_node)
+					if _parser_data.is_container_tag(token_tag):
+						stack.push_back(inline_node)
 					continue
 				else:
 					accumulated_text = ""
@@ -281,8 +283,14 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 					current.children.append(accumulated_text)
 			accumulated_text = ""
 
-			# Closing any block tag may close the implicit paragraph.
-			current_paragraph = null
+			# Closing a block-level tag may close the implicit paragraph. Inline
+			# container tags ([glossary term="term_id"]display label[/glossary])
+			# don't as there's content between the opening and closing tags all
+			# on one paragraph.
+			var current_tag_definition := _parser_data.get_tag_definition(current.tag)
+			var current_is_inline := current_tag_definition != null and _parser_data.Tag.PARAGRAPH in current_tag_definition.valid_parents
+			if not current_is_inline:
+				current_paragraph = null
 
 			var token_tag: int = token.tag
 			var current_name := _parser_data.get_tag_name(current.tag) if current.tag != _parser_data.Tag.UNKNOWN else "_root"
