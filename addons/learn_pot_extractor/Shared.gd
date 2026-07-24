@@ -2,7 +2,7 @@
 extends RefCounted
 
 
-static var GLOSSARY_RE := RegEx.create_from_string(r"\[url=(?!http)[^\]]+\]([^\[]+)\[\/url\]")
+static var GLOSSARY_RE := RegEx.create_from_string(r"\[url=(?!http)([^\]]+)\]([^\[]+)\[\/url\]")
 static var POT_PATTERN := RegEx.create_from_string(
 	r'(?<comment>(?:#[^\n]+\n)+)?' +
 	r'(?<ctxt>msgctxt "(?:\\.|[^"\\])*"\n)?' +
@@ -26,14 +26,14 @@ static func get_unsure_tr_blocks(po_file: String, skip_header := true, out_heade
 
 static func build_tr_blocks(po_file: String, skip_header := true, out_header: Array = [], target_regex := POT_PATTERN, prefix_offset := 0) -> Array[Dictionary]:
 	var po_text := FileAccess.open(po_file, FileAccess.READ).get_as_text()
-	
+
 	var start_index := (po_text.find("\n\n")+2)
 	var header := po_text.substr(0, start_index)
 	start_index = start_index if skip_header else 0
 	if out_header.size() < 1:
 		out_header.resize(1)
 	out_header[0] = header
-	
+
 	var tr_blocks: Array[Dictionary] = []
 	tr_blocks.append_array(target_regex.search_all(po_text, start_index).map(func(block_match: RegExMatch) -> Dictionary:
 		return {
@@ -60,7 +60,7 @@ static func build_tr_blocks(po_file: String, skip_header := true, out_header: Ar
 
 static func write_from_tr_blocks(po_file: String, header: String, blocks: Array[Dictionary]) -> void:
 	var lines := [header]
-	
+
 	for block in blocks:
 		var append_fuzzy := false
 		for comment in block.comments.comments:
@@ -71,17 +71,17 @@ static func write_from_tr_blocks(po_file: String, header: String, blocks: Array[
 		for source in block.comments.sources:
 			if source.lesson:
 				lines.append("#: %s%s" % [source.lesson, ":%s" % [source.line_number] if not source.lesson.get_extension() in ["csv", "tscn"] else ""])
-		
+
 		if append_fuzzy:
 			lines.append("#, fuzzy")
-		
+
 		if block.ctxt:
 			lines.append('msgctxt "%s"' % [block.ctxt])
-		
+
 		lines.append_array(_get_text_for_block(block, "id"))
 		lines.append_array(_get_text_for_block(block, "str"))
 		lines.append("")
-		
+
 	var file := FileAccess.open(po_file, FileAccess.WRITE)
 	file.store_string("\n".join(lines))
 
@@ -104,7 +104,7 @@ static func get_header(po_file: String) -> String:
 
 static func _parse_course_comment(target: RegExMatch) -> Dictionary:
 	var result := {"sources": [], "comments": []}
-	
+
 	var comments := target.get_string("comment").split("\n", false)
 	for comment in comments:
 		if comment.begins_with("#: "):
@@ -117,7 +117,7 @@ static func _parse_course_comment(target: RegExMatch) -> Dictionary:
 			(result.sources as Array).push_back({"lesson": path, "line_number": line_number})
 		else:
 			(result.comments as Array).push_back(comment.substr(2 if comment.begins_with("# ") else 3))
-	
+
 	return result
 
 
@@ -125,7 +125,7 @@ static func _parse_course_string(target: RegExMatch, is_id: bool, prefix_offset 
 	var id := target.get_string("id" if is_id else "str")
 
 	var result := ""
-	
+
 	if id.begins_with('msg%s ""\n' % ["id" if is_id else "str"]):
 		var lines := id.split("\n").slice(1)
 		for line in lines:
@@ -135,16 +135,21 @@ static func _parse_course_string(target: RegExMatch, is_id: bool, prefix_offset 
 				result += line.substr(1, line.length()-(2 + prefix_offset)) + "\n"
 	else:
 		result = id.substr(7 + (0 if is_id else 1) + prefix_offset, id.length()-(9 + (0 if is_id else 1) + prefix_offset))
-	
+
 	return result.strip_edges()
 
 
-static func fix_glossary_entries(raw_string: String, out_did_find: Array) -> String:
+# Converts the "rendered" `[url=term]display text[/url]` (produced by
+# BBCodeUtils for glossary entries) back into `[glossary term="term"]display
+# text[/glossary]`, which we need to apply translations.
+static func bbcode_rebuild_glossary_tags_from_url_tag(raw_string: String, out_did_find: Array) -> String:
 	var finds := GLOSSARY_RE.search_all(raw_string)
 	out_did_find.resize(1)
 	out_did_find[0] = not finds.is_empty()
-	
+
 	for i in range(finds.size()-1, -1, -1):
 		var find: RegExMatch = finds[i]
-		raw_string = raw_string.substr(0, find.get_start()) + '[glossary term="%s"]' % [find.get_string(1)] + raw_string.substr(find.get_end())
+		var term := find.get_string(1)
+		var display_text := find.get_string(2)
+		raw_string = raw_string.substr(0, find.get_start()) + '[glossary term="%s"]%s[/glossary]' % [term, display_text] + raw_string.substr(find.get_end())
 	return raw_string
