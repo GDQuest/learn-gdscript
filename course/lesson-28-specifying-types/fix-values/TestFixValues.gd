@@ -113,4 +113,3 @@ func test_decimal_number_has_correct_value() -> String:
 	if not "decimal_number" in success_list:
 		return tr("The value of 'decimal_number' does not match its type hint (float). Change the value after '=' to a decimal number with a decimal point, for example: 3.14")
 	return ""
-

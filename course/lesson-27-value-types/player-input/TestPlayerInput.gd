@@ -26,11 +26,11 @@ func test_item_count_matches_player_input() -> String:
 	if not count is int:
 		return tr("Item count is not of type int. We can't compare it to the player_input value.")
 
-	var input = node.get("player_input")
-	if not input is float:
+	var input := node.get("player_input") as float
+	if input == null:
 		return tr("Player input is not of its original type anymore. Did you change its value?")
 
-	var input_number = int(input)
+	var input_number := int(input)
 	if count != input_number:
 		return tr(
 			(
@@ -39,4 +39,3 @@ func test_item_count_matches_player_input() -> String:
 			)
 		)
 	return ""
-

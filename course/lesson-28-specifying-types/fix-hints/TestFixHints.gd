@@ -21,7 +21,7 @@ func _init() -> void:
 func _prepare():
 	success_list.clear()
 
-	var lines = _slice.current_text.split("\n")
+	var lines := _slice.current_text.split("\n")
 	for line in lines:
 		var result := regex.search(line)
 		if not result:
@@ -67,4 +67,3 @@ func test_decimal_number_has_correct_hint() -> String:
 	if not "decimal_number" in success_list:
 		return "Error"
 	return ""
-
