@@ -172,3 +172,4 @@ func _on_translation_changed() -> void:
 		layout_direction = Control.LAYOUT_DIRECTION_RTL
 	else:
 		layout_direction = Control.LAYOUT_DIRECTION_INHERITED
+	_update_welcome_button()
