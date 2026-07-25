@@ -108,6 +108,7 @@ func _ready() -> void:
 	_practice_leave_unfinished_popup.denied.connect(_deny_unload)
 
 	Events.practice_run_completed.connect(_test_student_code)
+	TranslationManager.translation_changed.connect(_on_translation_changed)
 
 	_update_slidable_panels()
 	_layout_container.resized.connect(_update_slidable_panels)
@@ -126,7 +127,6 @@ func _ready() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
 		_update_slidable_panels()
-		_update_labels()
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -147,12 +147,6 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 	_lesson_number = lesson_number
 	_practice_index = BBCodeUtils.get_practice_index(lesson, practice)
 
-	var title := BBCodeUtils.get_practice_title(practice)
-	_info_panel.title_label.text = "L%d.P%d %s" % [lesson_number, _practice_index + 1, title.capitalize()]
-	var goal := BBCodeUtils.get_practice_goal(practice)
-	_info_panel.goal_rich_text_label.text = TextUtils.bbcode_add_code_color(
-		TextUtils.paragraph(goal),
-	)
 	var starting_code := BBCodeUtils.get_practice_starting_code(practice)
 	_code_editor.text = starting_code
 	var starting_position := BBCodeUtils.get_practice_cursor(practice)
@@ -160,13 +154,10 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 
 	var hints := BBCodeUtils.get_practice_hints(practice)
 	_hints_container.visible = not hints.is_empty()
-	var index := 0
-	for hint in hints:
+	for _i in hints.size():
 		var practice_hint: PracticeHint = PracticeHintScene.instantiate()
-		practice_hint.title = tr("Hint %s") % [str(index + 1).pad_zeros(1)]
-		practice_hint.text = hint
 		_hints_container.add_child(practice_hint)
-		index += 1
+	_update_practice_metadata()
 
 	var base_directory := practice.bbcode_path.get_base_dir()
 
@@ -229,15 +220,38 @@ func turn_on_test_mode() -> void:
 func _update_labels() -> void:
 	if not _practice:
 		return
-	
+
+	_update_practice_metadata()
+	_info_panel.display_tests(_tester.get_test_names())
+
+
+func _on_translation_changed() -> void:
+	# Note: Nathan: defensive checks are for things like automated tests and
+	# debugging. Though I think we need to refactor this at some point so any
+	# testing or instrumentation all consistently has correctly set up state.
+	if not _practice:
+		return
+
+	if not NavigationManager.current_url.is_empty():
+		var lesson := NavigationManager.get_navigation_resource(_practice.bbcode_path)
+		if lesson:
+			_practice = BBCodeUtils.get_lesson_practice(lesson, _practice_index)
+
+	_update_labels()
+
+
+func _update_practice_metadata() -> void:
+	if not _practice:
+		return
+
 	var rtl := TranslationManager.current_translation_is_rtl()
 
 	var title := BBCodeUtils.get_practice_title(_practice)
-	_info_panel.title_label.text = "L%d.P%d %s" % [_lesson_number, _practice_index + 1, title.capitalize()]
+	_info_panel.title_label.text = "L%d.P%d %s" % [_lesson_number, _practice_index + 1, tr(title).capitalize()]
 	_info_panel.title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 	var goal := BBCodeUtils.get_practice_goal(_practice)
 	_info_panel.goal_rich_text_label.text = TextUtils.bbcode_add_code_color(
-		TextUtils.paragraph(goal),
+		TextUtils.paragraph(TextUtils.tr_paragraph(goal)),
 	)
 	_info_panel.goal_rich_text_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 
@@ -248,12 +262,10 @@ func _update_labels() -> void:
 		if not practice_hint:
 			continue
 
-		practice_hint.title = "Hint %s" % [str(index + 1).pad_zeros(1)]
+		practice_hint.title = tr("Hint %s") % [str(index + 1).pad_zeros(1)]
 		practice_hint.set_text_alignment(HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT)
-		practice_hint.text = hints[index]
+		practice_hint.text = TextUtils.tr_paragraph(hints[index])
 		index += 1
-
-	_info_panel.display_tests(_tester.get_test_names())
 
 
 func get_screen_resource() -> BBCodeParser.ParseNode:
@@ -308,7 +320,7 @@ func _validate_and_run_student_code() -> void:
 		MessageBus.print_script_error(error, script_file_name)
 		_code_editor.unlock_editor()
 		return
-	
+
 	var verifier_script := script_text
 	var script_is_desynced_by_one_line := false
 
@@ -352,7 +364,7 @@ func _validate_and_run_student_code() -> void:
 		MessageBus.print_script_error(error, script_file_name)
 		_code_editor.unlock_editor()
 		return
-	
+
 	verifier.test()
 	var errors := verifier.errors
 

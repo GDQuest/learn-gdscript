@@ -12,6 +12,19 @@ var _last_target: BBCodeParser.ParseNode
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
 		await get_tree().process_frame
+		if not NavigationManager.current_url.is_empty():
+			var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
+			if target and target.tag == BBCodeParserData.Tag.PRACTICE:
+				var lesson := NavigationManager.get_navigation_resource(target.bbcode_path)
+				if lesson:
+					var practice_id := BBCodeUtils.get_practice_id(_last_target)
+					for index in BBCodeUtils.get_lesson_practice_count(lesson):
+						var practice := BBCodeUtils.get_lesson_practice(lesson, index)
+						if BBCodeUtils.get_practice_id(practice) == practice_id:
+							_last_target = practice
+							break
+			elif target:
+				_last_target = target
 		_rebuild_breadcrumbs()
 
 
