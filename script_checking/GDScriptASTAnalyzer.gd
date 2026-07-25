@@ -1,7 +1,6 @@
 class_name GDScriptASTAnalyzer
 extends GDScriptLocalAnalyzer
 
-
 var root: GDClassNode
 
 
@@ -29,7 +28,11 @@ func get_function_parameter_name(function: GDFunctionNode, index: int) -> String
 	return function.get_parameters()[index].get_identifier().name
 
 
-func get_statement_assignment(function_node: GDFunctionNode, assignee: StringName, starting_from_index := 0) -> GDAssignmentNode:
+func get_statement_assignment(
+	function_node: GDFunctionNode,
+	assignee: StringName,
+	starting_from_index := 0,
+) -> GDAssignmentNode:
 	var statements := function_node.get_body().get_statements()
 	for i: int in range(starting_from_index, statements.size()):
 		var assign_statement: GDAssignmentNode = statements[i] as GDAssignmentNode
@@ -40,7 +43,11 @@ func get_statement_assignment(function_node: GDFunctionNode, assignee: StringNam
 	return null
 
 
-func get_statement_call_named(function_node: GDFunctionNode, name: StringName, starting_from_index := 0) -> GDCallNode:
+func get_statement_call_named(
+	function_node: GDFunctionNode,
+	name: StringName,
+	starting_from_index := 0,
+) -> GDCallNode:
 	var statements := function_node.get_body().get_statements()
 	for i: int in range(starting_from_index, statements.size()):
 		var call_statement: GDCallNode = statements[i] as GDCallNode
@@ -49,7 +56,11 @@ func get_statement_call_named(function_node: GDFunctionNode, name: StringName, s
 	return null
 
 
-func get_local_var_named(function_node: GDFunctionNode, name: StringName, starting_from_index := 0) -> GDVariableNode:
+func get_local_var_named(
+	function_node: GDFunctionNode,
+	name: StringName,
+	starting_from_index := 0,
+) -> GDVariableNode:
 	var statements := function_node.get_body().get_statements()
 	for i: int in range(starting_from_index, statements.size()):
 		var var_statement := statements[i] as GDVariableNode
@@ -82,52 +93,81 @@ func has_infinite_while_loop() -> bool:
 			continue
 		functions.push_back(member.get_as_function_node())
 	for function in functions:
-		if _check_body_for_infinite_while(function.get_body()):
+		if _check_body_for_infinite_while(function.get_body(), function):
 			return true
 	return false
 
 
-func _check_body_for_infinite_while(suite: GDSuiteNode) -> bool:
+func _check_body_for_infinite_while(suite: GDSuiteNode, function: GDFunctionNode) -> bool:
 	var statements := suite.get_statements()
 	for statement in statements:
 		match statement.get_type():
 			GDNode.FOR:
 				var for_statement := statement as GDForNode
-				if _check_body_for_infinite_while(for_statement.get_loop()):
+				if _check_body_for_infinite_while(for_statement.get_loop(), function):
 					return true
 			GDNode.FUNCTION:
 				var function_statement := statement as GDFunctionNode
-				if _check_body_for_infinite_while(function_statement.get_body()):
+				if _check_body_for_infinite_while(function_statement.get_body(), function_statement):
 					return true
 			GDNode.IF:
 				var if_statement := statement as GDIfNode
 				var false_block := if_statement.get_false_block()
 				if (
-					_check_body_for_infinite_while(if_statement.get_true_block()) or
-					(false_block and _check_body_for_infinite_while(false_block))
+					_check_body_for_infinite_while(if_statement.get_true_block(), function)
+					or (false_block and _check_body_for_infinite_while(false_block, function))
 				):
 					return true
 			GDNode.MATCH:
 				var match_statement := statement as GDMatchNode
 				for branch in match_statement.get_branches():
-					if _check_body_for_infinite_while(branch.get_block()):
+					if _check_body_for_infinite_while(branch.get_block(), function):
 						return true
 			GDNode.WHILE:
 				var while_statement := statement as GDWhileNode
 				if _is_while_loop_infinite(while_statement):
 					return true
-				if _check_body_for_infinite_while(while_statement.get_loop()):
+				# Check loops whose condition is a known container, for example:
+				# while crates: crates = crates.pop_back()
+				var condition := while_statement.get_condition() as GDIdentifierNode
+				if condition:
+					var is_container := false
+					if root.has_member(condition.name):
+						var member := root.get_member(condition.name)
+						if member.get_type() == GDMember.VARIABLE:
+							var variable := member.get_as_signal_variable_node()
+							is_container = (
+								variable.get_initializer() is GDArrayNode
+								or variable.get_initializer() is GDDictionaryNode
+							)
+					if not is_container:
+						is_container = _suite_declares_container(
+							function.get_body(),
+							condition.name,
+						)
+					if (
+						is_container
+						and _is_container_refilled(while_statement.get_loop(), condition.name)
+					):
+						return true
+				if _check_body_for_infinite_while(while_statement.get_loop(), function):
 					return true
 			GDNode.LAMBDA:
 				var lambda_statement := statement as GDLambdaNode
-				if _check_body_for_infinite_while(lambda_statement.get_function().get_body()):
+				if _check_body_for_infinite_while(
+					lambda_statement.get_function().get_body(),
+					lambda_statement.get_function(),
+				):
 					return true
 			GDNode.VARIABLE:
 				var variable_statement := statement as GDVariableNode
 				var initializer := variable_statement.get_initializer()
 				if initializer.get_type() == GDNode.LAMBDA:
 					var lambda_assignment := initializer as GDLambdaNode
-					if _check_body_for_infinite_while(lambda_assignment.get_function().get_body()):
+					if _check_body_for_infinite_while(
+						lambda_assignment.get_function().get_body(),
+						lambda_assignment.get_function(),
+					):
 						return true
 	return false
 
@@ -135,19 +175,18 @@ func _check_body_for_infinite_while(suite: GDSuiteNode) -> bool:
 func _is_while_loop_infinite(loop: GDWhileNode) -> bool:
 	if _has_break_statement(loop.get_loop()):
 		return false
-	
+
 	var condition := loop.get_condition()
 	var literal_condition := condition as GDLiteralNode
 	# true, 1, -1.2
 	if literal_condition:
 		var value: Variant = literal_condition.get_reduced_value()
 		if (
-			(value is bool and value == true) or
-			(value is int and value != 0) or
-			(value is float and value != 0.0)
+			(value is bool and value == true) or (value is int and value != 0)
+			or (value is float and value != 0.0)
 		):
 			return true
-	
+
 	# 'not false', 'not 0', !false
 	var unary_condition := condition as GDUnaryOpNode
 	if unary_condition and unary_condition.get_operation() == GDUnaryOpNode.OP_LOGIC_NOT:
@@ -156,26 +195,72 @@ func _is_while_loop_infinite(loop: GDWhileNode) -> bool:
 		if literal_condition:
 			var value: Variant = literal_condition.get_reduced_value()
 			if (
-				(value is bool and value == false) or
-				(value is int and value == 0) or
-				(value is float and value == 0.0)
+				(value is bool and value == false) or (value is int and value == 0)
+				or (value is float and value == 0.0)
 			):
 				return true
-	
+
 	# math that amounts to non zero
 	var binary_op_condition := condition as GDBinaryOpNode
 	if binary_op_condition:
-		if binary_op_condition.get_left_operand() is GDLiteralNode and binary_op_condition.get_right_operand() is GDLiteralNode:
+		if (
+			binary_op_condition.get_left_operand() is GDLiteralNode
+			and binary_op_condition.get_right_operand() is GDLiteralNode
+		):
 			var value: Variant = binary_op_condition.get_reduced_value()
 			if (
-				(value is bool and value == true) or
-				(value is int and value != 0) or
-				(value is float and value != 0.0)
+				(value is bool and value == true) or (value is int and value != 0)
+				or (value is float and value != 0.0)
 			):
 				return true
-	
+
 	# TODO: ultimately we aren't catching function calls that will always return true
-	
+	return false
+
+
+## Returns true if the suite (sequence of statements like a function body or
+## about any code block) declares a container variable with the given name.
+func _suite_declares_container(suite: GDSuiteNode, name: StringName) -> bool:
+	# Only inspect variables initialized as arrays or dictionaries.
+	for statement in suite.get_statements():
+		if statement.get_type() == GDNode.VARIABLE:
+			var variable := statement as GDVariableNode
+			if (
+				variable.get_identifier().name == name
+				and (
+					variable.get_initializer() is GDArrayNode
+					or variable.get_initializer() is GDDictionaryNode
+				)
+			):
+				return true
+	return false
+
+
+func _is_container_refilled(body: GDSuiteNode, container_name: StringName) -> bool:
+	# Catch assigning the return value of Array.pop_back() and appending values
+	# to a container. e.g. crates = crates.pop_back() / crates.append(crate)
+	for statement in body.get_statements():
+		if statement.get_type() == GDNode.ASSIGNMENT:
+			var assignment := statement as GDAssignmentNode
+			var assignee := assignment.get_assignee() as GDIdentifierNode
+			var assigned_call := assignment.get_assigned_value() as GDCallNode
+			if assignee and assignee.name == container_name and assigned_call:
+				var callee := assigned_call.get_callee() as GDSubscriptNode
+				var base := callee.get_base() as GDIdentifierNode if callee else null
+				if (
+					base and base.name == container_name
+					and assigned_call.get_function_name() in [&"pop_back", &"pop_front"]
+				):
+					return true
+		if statement.get_type() == GDNode.CALL:
+			var call := statement as GDCallNode
+			var callee := call.get_callee() as GDSubscriptNode
+			var base := callee.get_base() as GDIdentifierNode if callee else null
+			if (
+				base and base.name == container_name
+				and call.get_function_name() in [&"append", &"push_back", &"push_front"]
+			):
+				return true
 	return false
 
 
@@ -187,8 +272,8 @@ func _has_break_statement(body: GDSuiteNode) -> bool:
 			GDNode.IF:
 				var if_statement := statement as GDIfNode
 				if (
-					_has_break_statement(if_statement.get_true_block()) or
-					_has_break_statement(if_statement.get_false_block())
+					_has_break_statement(if_statement.get_true_block())
+					or _has_break_statement(if_statement.get_false_block())
 				):
 					return true
 			GDNode.MATCH:

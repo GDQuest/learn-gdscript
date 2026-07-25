@@ -37,7 +37,7 @@ class IntegrationTestResult:
 		stable_id = result_stable_id
 
 
-@export var time_scale := 4.0
+@export var time_scale := 8.0
 @export var lesson_load_timeout := 2.0
 @export var practice_execution_timeout := 10.0
 
