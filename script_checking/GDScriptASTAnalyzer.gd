@@ -70,7 +70,7 @@ func find_any_recursive_function() -> String:
 		for statement in statements:
 			if statement.get_type() == GDNode.CALL:
 				var call_node := statement as GDCallNode
-				if call_node.get_function_name() == function_name:
+				if not call_node.is_super() and call_node.get_function_name() == function_name:
 					return function_name
 	return ""
 
