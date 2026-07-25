@@ -20,4 +20,3 @@ func test_displayed_energy_matches_energy_value() -> String:
 	if node.energy_label.text != expected:
 		return tr("The value of the energy variable does not match the displayed text. Did you call the str() function?")
 	return ""
-

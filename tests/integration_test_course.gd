@@ -1,231 +1,208 @@
 # Integration test that runs through all lessons and practices in the course.
 # Tests that lessons load correctly, practices load correctly, solution code
 # does solve every practice.
-#
-# This test does not currently run through the application navigation through
-# the user interface. It currently loads the lessons and practices independently
-# and just checks that individually the screens and all the content load and
-# display without error and that we're able to apply the solution to a practice,
-# run it, and complete the practice.
-#
-# A future improvement would be making it run entirely through the application
-# UI, but this already safeguards things.
-#
-# To run, run the scene file that uses this script from the editor.
 extends Node
 
 const COURSE_ID := "learn-gdscript"
+const TEST_PROFILE_NAME := "IntegrationTest"
 const UILessonScene := preload("res://ui/UILesson.tscn")
 const UIPracticeScene := preload("res://ui/UIPractice.tscn")
 
 @export var time_scale := 4.0
 @export var lesson_load_timeout := 2.0
-@export var practice_setup_timeout := 2.0
 @export var practice_execution_timeout := 10.0
 
-var _course_index: CourseIndex = null
-
-var _fail_messages := []
-var _timeout_messages := []
-
-var _tests_run_count := 0
-var _tests_passed_count := 0
+var _course_index: CourseIndex
+var _lesson_filter := 0
+var _practice_filter := 0
+var _test_results: Array[Dictionary] = []
 
 
 func _ready() -> void:
 	Engine.time_scale = time_scale
+	UserProfiles.get_profile(TEST_PROFILE_NAME)
+	TranslationManager.set_language(TranslationManager.DEFAULT_LOCALE)
+	TranslationServer.set_locale(TranslationManager.DEFAULT_LOCALE)
+
+	# Check command line arguments for filters to run a specific lesson or practice
+	var arguments := OS.get_cmdline_user_args()
+	for argument in arguments:
+		if argument.begins_with("--lesson="):
+			_lesson_filter = _parse_location_number(argument.trim_prefix("--lesson="), "L")
+		elif argument.begins_with("--practice="):
+			var practice_location := argument.trim_prefix("--practice=").replace(".", "")
+			var lesson_number := _parse_location_number(practice_location, "L")
+			var practice_regex := RegEx.new()
+			practice_regex.compile("^L[0-9]+P([0-9]+)")
+			var practice_match := practice_regex.search(practice_location.to_upper())
+			var practice_number := int(practice_match.get_string(1)) if practice_match else 0
+			if lesson_number > 0 and practice_number > 0:
+				_lesson_filter = lesson_number
+				_practice_filter = practice_number
+
 	print("RUNNING INTEGRATION TEST")
 	print("Time scale: %sx" % time_scale)
-	print("Course id: %s\n" % COURSE_ID)
+	print("Profile: %s" % TEST_PROFILE_NAME)
+	print("Locale: %s" % TranslationManager.DEFAULT_LOCALE)
+	print("Filters: lesson=%s practice=%s\n" % [_lesson_filter, _practice_filter])
 
-	_course_index = CourseIndexPaths.get_course_index_instance("learn-gdscript")
+	_course_index = CourseIndexPaths.get_course_index_instance(COURSE_ID)
 	if _course_index == null:
-		push_error("Failed to load _course_index from: %s" % COURSE_ID)
-		get_tree().quit(1)
+		_record_result("course", COURSE_ID, false, "setup", "Failed to load course index")
+		_print_summary()
 		return
 
 	_run_integration_test()
 
 
+func _parse_location_number(value: String, prefix: String) -> int:
+	var regex := RegEx.new()
+	regex.compile("^" + prefix + "([0-9]+)")
+	var match := regex.search(value.to_upper())
+	return int(match.get_string(1)) if match else 0
+
+
 func _run_integration_test() -> void:
-	var total_lessons: int = _course_index.get_lessons_count()
-	var total_practices := 0
-	for i in total_lessons:
-		var lesson := NavigationManager.get_navigation_resource(_course_index.get_lesson_path(i)) as BBCodeParser.ParseNode
-		total_practices += BBCodeUtils.get_lesson_practice_count(lesson)
+	var total_lessons := _course_index.get_lessons_count()
+	var first_lesson := _lesson_filter if _lesson_filter > 0 else 1
+	var last_lesson := _lesson_filter if _lesson_filter > 0 else total_lessons
 
-	print("Course: %s" % _course_index.get_title())
-	print("Total lessons: %d" % total_lessons)
-	print("Total practices: %d\n" % total_practices)
-
-	for lesson_index in range(total_lessons):
-		var lesson: BBCodeParser.ParseNode = NavigationManager.get_navigation_resource(_course_index.get_lesson_path(lesson_index))
-		var title := BBCodeUtils.get_lesson_title(lesson)
-		print("[Lesson %d/%d] Testing: %s" % [lesson_index + 1, total_lessons, title])
-
-		# Functions yield which in Godot 3 returns function state objects
-		var is_lesson_test_passed: bool = await _test_lesson(lesson)
-		if not is_lesson_test_passed:
-			_fail_messages.append("Lesson %d: %s - Failed to load/display" % [lesson_index + 1, title])
-			print("  FAIL - Lesson failed\n")
+	for lesson_number in range(first_lesson, last_lesson + 1):
+		if lesson_number > total_lessons:
+			_record_result(
+				"lesson",
+				"L%d" % lesson_number,
+				false,
+				"selection",
+				"Lesson does not exist",
+			)
 			continue
 
+		var lesson := NavigationManager.get_navigation_resource(
+			_course_index.get_lesson_path_from_number(lesson_number)
+		) as BBCodeParser.ParseNode
+		var lesson_title := BBCodeUtils.get_lesson_title(lesson)
+		print("[Lesson %d/%d] Testing: %s" % [lesson_number, total_lessons, lesson_title])
+
+		var lesson_result := await _test_lesson(lesson)
+		_record_result(
+			"lesson",
+			"L%d" % lesson_number,
+			lesson_result.passed,
+			lesson_result.phase,
+			lesson_result.message,
+		)
+		if not lesson_result.passed:
+			print("  FAIL - %s\n" % lesson_result.message)
+			continue
 		print("  OK - Lesson loaded successfully")
 
-		var practice_index := 0
 		var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
-		for i in practice_count:
-			practice_index += 1
-			_tests_run_count += 1
+		var first_practice := _practice_filter if _practice_filter > 0 else 1
+		var last_practice := _practice_filter if _practice_filter > 0 else practice_count
+		for practice_number in range(first_practice, last_practice + 1):
+			if practice_number > practice_count:
+				_record_result(
+					"practice",
+					"L%d.P%d" % [lesson_number, practice_number],
+					false,
+					"selection",
+					"Practice does not exist",
+				)
+				continue
 
-			var practice := BBCodeUtils.get_lesson_practice(lesson, i)
+			var practice := BBCodeUtils.get_lesson_practice(lesson, practice_number - 1)
 			var practice_title := BBCodeUtils.get_practice_title(practice)
-
-			print("  [Practice %d/%d] Testing: %s" % [practice_index, practice_count, practice_title])
-
-			var is_practice_test_passed: bool = await _test_practice(practice, lesson)
-			if not is_practice_test_passed:
-				_fail_messages.append("Practice: %s (Lesson %d)" % [practice_title, lesson_index + 1])
-				print("    FAIL - Practice failed")
-			else:
-				_tests_passed_count += 1
-				print("    OK - Practice completed successfully")
-
-		print("")
+			print(
+				"  [Practice %d/%d] Testing: %s" % [practice_number, practice_count, practice_title]
+			)
+			var practice_result := await _test_practice(practice, lesson)
+			_record_result(
+				"practice",
+				"L%d.P%d" % [lesson_number, practice_number],
+				practice_result.passed,
+				practice_result.phase,
+				practice_result.message,
+			)
+			print(
+				"    %s - %s"
+				% ["OK" if practice_result.passed else "FAIL", practice_result.message]
+			)
 
 	_print_summary()
 
 
-func _test_lesson(lesson: BBCodeParser.ParseNode) -> bool:
+func _test_lesson(lesson: BBCodeParser.ParseNode) -> Dictionary:
 	var ui_lesson: UILesson = UILessonScene.instantiate()
 	add_child(ui_lesson)
-
 	ui_lesson.enable_integration_test_mode()
-
-	await ui_lesson.setup(lesson, _course_index, _course_index.get_lesson_number(lesson.bbcode_path))
-
-	var displayed := false
-	var timed_out := false
-	var timer := Timer.new()
-	timer.one_shot = true
-	timer.wait_time = lesson_load_timeout
-	add_child(timer)
-
-	var state := { "displayed": false, "timer": timer }
-	ui_lesson.lesson_displayed.connect(_on_lesson_displayed_signal.bind(state))
-	timer.timeout.connect(_on_lesson_timeout_signal.bind(state))
-	timer.start()
-
-	var wait_start_time := Time.get_ticks_msec()
-	while not displayed and not timed_out:
-		if Time.get_ticks_msec() - wait_start_time > lesson_load_timeout * 1000.0:
-			timed_out = true
-			break
-		if state.displayed or ui_lesson._practices_visibility_container.visible:
-			displayed = true
-			break
-		await get_tree().process_frame
-
-	timer.queue_free()
-
-	if timed_out:
-		var lesson_title := BBCodeUtils.get_lesson_title(lesson)
-		_timeout_messages.append("Lesson timeout (%.1fs): %s" % [lesson_load_timeout, lesson_title])
-		ui_lesson.queue_free()
-		return false
-
-	if not ui_lesson._lesson or ui_lesson._lesson != lesson:
-		ui_lesson.queue_free()
-		return false
-
-	if not ui_lesson._practices_visibility_container.visible:
-		ui_lesson.queue_free()
-		return false
-
+	var state := { "displayed": false }
+	ui_lesson.lesson_displayed.connect(
+		func() -> void:
+			state.displayed = true,
+	)
+	await ui_lesson.setup(
+		lesson,
+		_course_index,
+		_course_index.get_lesson_number(lesson.bbcode_path),
+	)
+	var wait_result := await _wait_for_state(state, "displayed", lesson_load_timeout)
+	var result := { "passed": false, "phase": "display", "message": wait_result }
+	if wait_result == "":
+		result.passed = (
+			ui_lesson._lesson == lesson and ui_lesson._practices_visibility_container.visible
+		)
+		result.message = "lesson displayed" if result.passed else "lesson content did not become visible"
 	ui_lesson.queue_free()
-	return true
+	return result
 
 
-func _on_lesson_displayed_signal(state: Dictionary) -> void:
-	state.displayed = true
-	if state.timer:
-		state.timer.stop()
-
-
-func _on_lesson_timeout_signal(state: Dictionary) -> void:
-	pass
-
-
-func _test_practice(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode) -> bool:
+func _test_practice(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode) -> Dictionary:
 	var ui_practice: UIPractice = UIPracticeScene.instantiate()
 	add_child(ui_practice)
-
 	ui_practice.turn_on_test_mode()
-
-	await ui_practice.setup(practice, lesson, _course_index, _course_index.get_lesson_number(lesson.bbcode_path))
-
-	var frames_waited := 0
-	while frames_waited < 5:
-		await get_tree().process_frame
-		frames_waited += 1
-
-	if not ui_practice._practice or ui_practice._practice != practice:
+	await ui_practice.setup(
+		practice,
+		lesson,
+		_course_index,
+		_course_index.get_lesson_number(lesson.bbcode_path),
+	)
+	if ui_practice._practice != practice:
 		ui_practice.queue_free()
-		return false
+		return { "passed": false, "phase": "setup", "message": "practice content did not load" }
 
+	var state := { "completed": false }
+	ui_practice.test_student_code_completed.connect(
+		func() -> void:
+			state.completed = true,
+	)
 	ui_practice._on_use_solution_pressed()
-
-	await get_tree().process_frame
-
 	ui_practice._validate_and_run_student_code()
-
-	var execution_complete := false
-	var timed_out := false
-
-	var execution_timer := Timer.new()
-	execution_timer.one_shot = true
-	execution_timer.wait_time = practice_execution_timeout
-	add_child(execution_timer)
-
-	var state := { "complete": false, "timer": execution_timer }
-	ui_practice.test_student_code_completed.connect(_on_practice_execution_complete_signal.bind(state))
-	execution_timer.timeout.connect(_on_practice_execution_timeout_signal.bind(state))
-	execution_timer.start()
-
-	var wait_start_time := Time.get_ticks_msec()
-	while not execution_complete and not timed_out:
-		if Time.get_ticks_msec() - wait_start_time > practice_execution_timeout * 1000.0:
-			timed_out = true
-			break
-		if state.complete or execution_timer.is_stopped():
-			execution_complete = true
-			break
-		await get_tree().process_frame
-
-	execution_timer.queue_free()
-
-	if timed_out:
-		var practice_title := BBCodeUtils.get_practice_title(practice)
-		_timeout_messages.append("Practice execution timeout (%.1fs): %s" % [practice_execution_timeout, practice_title])
-		ui_practice.queue_free()
-		return false
-
-	if not ui_practice._practice_completed:
-		ui_practice.queue_free()
-		return false
-
+	var wait_result := await _wait_for_state(state, "completed", practice_execution_timeout)
+	var result := {
+		"passed": wait_result == "" and ui_practice._practice_completed,
+		"phase": "execution",
+		"message": wait_result,
+	}
+	if wait_result == "":
+		result.message = "practice completed" if result.passed else "reference solution failed validation"
 	ui_practice.queue_free()
-	return true
+	return result
 
 
-func _on_practice_execution_complete_signal(state: Dictionary) -> void:
-	state.complete = true
-	if state.timer:
-		state.timer.stop()
+func _wait_for_state(state: Dictionary, key: String, timeout: float) -> String:
+	var deadline := Time.get_ticks_msec() + ceili(timeout * 1000.0)
+	while not state.get(key, false):
+		if Time.get_ticks_msec() >= deadline:
+			return "timeout after %.1fs" % timeout
+		await get_tree().process_frame
+	return ""
 
 
-func _on_practice_execution_timeout_signal(state: Dictionary) -> void:
-	pass
+func _record_result(kind: String, target: String, passed: bool, phase: String, message: String) -> void:
+	_test_results.append(
+		{ "kind": kind, "target": target, "passed": passed, "phase": phase, "message": message }
+	)
 
 
 func _print_summary() -> void:
@@ -236,31 +213,20 @@ func _print_summary() -> void:
 	print("Test Summary")
 	print(separator)
 
-	var total_lessons: int = _course_index.get_lessons_count()
-	var total_practices := 0
-	for i in total_lessons:
-		var lesson := NavigationManager.get_navigation_resource(_course_index.get_lesson_path(i)) as BBCodeParser.ParseNode
-		total_practices += BBCodeUtils.get_lesson_practice_count(lesson)
+	var passed := 0
+	var failures: Array[Dictionary] = []
+	for result in _test_results:
+		if result.passed:
+			passed += 1
+		else:
+			failures.append(result)
 
-	print("Total lessons tested: %d" % total_lessons)
-	print("Total practices tested: %d" % total_practices)
-	print("Tests passed: %d / %d" % [_tests_passed_count, _tests_run_count])
-	print("Failures: %d" % _fail_messages.size())
-	print("Timeouts: %d" % _timeout_messages.size())
-
-	if _fail_messages.size() > 0:
-		print("\nFailures")
-		for failure in _fail_messages:
-			print("  FAIL - %s" % failure)
-
-	if _timeout_messages.size() > 0:
-		print("\nTimeouts (Potential Bugs)")
-		for timeout in _timeout_messages:
-			print("  ⏱ %s" % timeout)
-
-	if _fail_messages.size() == 0 and _timeout_messages.size() == 0:
-		print("\nOK - All tests passed!")
-		get_tree().quit(0)
-	else:
-		print("\nFAIL - Tests failed")
-		get_tree().quit(1)
+	print("Tests passed: %d / %d" % [passed, _test_results.size()])
+	print("Failures: %d" % failures.size())
+	for failure in failures:
+		print(
+			"  FAIL - %s %s [%s]: %s"
+			% [failure.kind, failure.target, failure.phase, failure.message]
+		)
+	var error_code := 0 if failures.is_empty() else 1
+	get_tree().quit(error_code)

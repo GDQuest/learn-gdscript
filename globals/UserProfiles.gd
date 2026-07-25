@@ -5,8 +5,15 @@ class_name UserProfiles extends RefCounted
 
 const ROOT_DIR := "user://user_settings_4"
 
-static var _current_profile_name: String = "Player"
+static var _current_profile_name: String = _get_initial_profile_name()
 static var _current_profile: Profile = null
+
+
+static func _get_initial_profile_name() -> String:
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--test-profile="):
+			return argument.trim_prefix("--test-profile=")
+	return "Player"
 
 
 ## Returns a list of profiles available in the file system. Profiles

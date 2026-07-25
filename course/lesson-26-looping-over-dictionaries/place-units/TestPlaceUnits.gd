@@ -38,4 +38,3 @@ func test_code_uses_a_for_loop():
 	).matches(run_function):
 		return tr("Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!")
 	return ""
-
