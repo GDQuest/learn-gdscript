@@ -8,6 +8,35 @@ const TEST_PROFILE_NAME := "IntegrationTest"
 const UILessonScene := preload("res://ui/UILesson.tscn")
 const UIPracticeScene := preload("res://ui/UIPractice.tscn")
 
+
+class IntegrationTestResult:
+	var kind: String
+	var target: String
+	var stable_id: String
+	var canonical_path_to_content: String
+	var passed: bool
+	var phase: String
+	var message: String
+
+
+	func _init(
+		result_kind: String,
+		result_target: String,
+		result_passed: bool,
+		result_phase: String,
+		result_message: String,
+		result_canonical_path: String,
+		result_stable_id: String,
+	) -> void:
+		kind = result_kind
+		target = result_target
+		passed = result_passed
+		phase = result_phase
+		message = result_message
+		canonical_path_to_content = result_canonical_path
+		stable_id = result_stable_id
+
+
 @export var time_scale := 4.0
 @export var lesson_load_timeout := 2.0
 @export var practice_execution_timeout := 10.0
@@ -15,7 +44,11 @@ const UIPracticeScene := preload("res://ui/UIPractice.tscn")
 var _course_index: CourseIndex
 var _lesson_filter := 0
 var _practice_filter := 0
-var _test_results: Array[Dictionary] = []
+var _test_results: Array[IntegrationTestResult] = []
+var _discovered_lesson_count := 0
+var _discovered_practice_count := 0
+var _attempted_lesson_count := 0
+var _attempted_practice_count := 0
 
 
 func _ready() -> void:
@@ -48,10 +81,24 @@ func _ready() -> void:
 
 	_course_index = CourseIndexPaths.get_course_index_instance(COURSE_ID)
 	if _course_index == null:
-		_record_result("course", COURSE_ID, false, "setup", "Failed to load course index")
+		_record_result(
+			"course",
+			COURSE_ID,
+			false,
+			"setup",
+			"Failed to load course index",
+			"",
+			COURSE_ID,
+		)
 		_print_summary()
 		return
 
+	_discovered_lesson_count = _course_index.get_lessons_count()
+	for lesson_index in _discovered_lesson_count:
+		var lesson := NavigationManager.get_navigation_resource(
+			_course_index.get_lesson_path(lesson_index)
+		) as BBCodeParser.ParseNode
+		_discovered_practice_count += BBCodeUtils.get_lesson_practice_count(lesson)
 	_run_integration_test()
 
 
@@ -75,12 +122,15 @@ func _run_integration_test() -> void:
 				false,
 				"selection",
 				"Lesson does not exist",
+				"",
+				"",
 			)
 			continue
 
 		var lesson := NavigationManager.get_navigation_resource(
 			_course_index.get_lesson_path_from_number(lesson_number)
 		) as BBCodeParser.ParseNode
+		_attempted_lesson_count += 1
 		var lesson_title := BBCodeUtils.get_lesson_title(lesson)
 		print("[Lesson %d/%d] Testing: %s" % [lesson_number, total_lessons, lesson_title])
 
@@ -91,6 +141,8 @@ func _run_integration_test() -> void:
 			lesson_result.passed,
 			lesson_result.phase,
 			lesson_result.message,
+			lesson.bbcode_path,
+			_course_index.get_lesson_slug_from_path(lesson.bbcode_path),
 		)
 		if not lesson_result.passed:
 			print("  FAIL - %s\n" % lesson_result.message)
@@ -108,21 +160,27 @@ func _run_integration_test() -> void:
 					false,
 					"selection",
 					"Practice does not exist",
+					"",
+					"",
 				)
 				continue
 
 			var practice := BBCodeUtils.get_lesson_practice(lesson, practice_number - 1)
+			_attempted_practice_count += 1
 			var practice_title := BBCodeUtils.get_practice_title(practice)
 			print(
 				"  [Practice %d/%d] Testing: %s" % [practice_number, practice_count, practice_title]
 			)
 			var practice_result := await _test_practice(practice, lesson)
+			var practice_id := BBCodeUtils.get_practice_id(practice)
 			_record_result(
 				"practice",
 				"L%d.P%d" % [lesson_number, practice_number],
 				practice_result.passed,
 				practice_result.phase,
 				practice_result.message,
+				practice.bbcode_path,
+				practice_id,
 			)
 			print(
 				"    %s - %s"
@@ -186,6 +244,14 @@ func _test_practice(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.Parse
 	}
 	if wait_result == "":
 		result.message = "practice completed" if result.passed else "reference solution failed validation"
+	if not result.passed and ui_practice.last_test_result:
+		var diagnostics := []
+		for check_name: String in ui_practice.last_test_result.errors:
+			diagnostics.append(
+				"%s: %s" % [check_name, ui_practice.last_test_result.errors[check_name]]
+			)
+		if not diagnostics.is_empty():
+			result.message += " (" + "; ".join(diagnostics) + ")"
 	ui_practice.queue_free()
 	return result
 
@@ -199,9 +265,17 @@ func _wait_for_state(state: Dictionary, key: String, timeout: float) -> String:
 	return ""
 
 
-func _record_result(kind: String, target: String, passed: bool, phase: String, message: String) -> void:
+func _record_result(
+	kind: String,
+	target: String,
+	passed: bool,
+	phase: String,
+	message: String,
+	canonical_path_to_content: String,
+	stable_id: String,
+) -> void:
 	_test_results.append(
-		{ "kind": kind, "target": target, "passed": passed, "phase": phase, "message": message }
+		IntegrationTestResult.new(kind, target, passed, phase, message, canonical_path_to_content, stable_id)
 	)
 
 
@@ -214,7 +288,7 @@ func _print_summary() -> void:
 	print(separator)
 
 	var passed := 0
-	var failures: Array[Dictionary] = []
+	var failures: Array[IntegrationTestResult] = []
 	for result in _test_results:
 		if result.passed:
 			passed += 1
@@ -222,11 +296,25 @@ func _print_summary() -> void:
 			failures.append(result)
 
 	print("Tests passed: %d / %d" % [passed, _test_results.size()])
+	print(
+		"Lessons attempted: %d / %d discovered"
+		% [_attempted_lesson_count, _discovered_lesson_count]
+	)
+	print(
+		"Practices attempted: %d / %d discovered"
+		% [_attempted_practice_count, _discovered_practice_count]
+	)
 	print("Failures: %d" % failures.size())
 	for failure in failures:
 		print(
-			"  FAIL - %s %s [%s]: %s"
-			% [failure.kind, failure.target, failure.phase, failure.message]
+			"  FAIL - %s %s (%s) [%s]: %s"
+			% [
+				failure.kind,
+				failure.target,
+				failure.stable_id if failure.stable_id else failure.canonical_path_to_content,
+				failure.phase,
+				failure.message,
+			]
 		)
 	var error_code := 0 if failures.is_empty() else 1
 	get_tree().quit(error_code)

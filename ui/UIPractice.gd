@@ -51,6 +51,10 @@ var _practice_index := 0
 var _script_slice: ScriptSlice:
 	set = _set_script_slice
 var _tester: PracticeTester
+## For integration tests: Saves the result of the last ran practice validator so
+## integration tests can capture and report the exact failed checks after the UI
+## has finished updating.
+var last_test_result: PracticeTester.TestResult
 # If `true`, the text changed but was not saved.
 var _code_editor_is_dirty := false
 
@@ -66,10 +70,7 @@ var _is_solution_panel_open := false
 var _current_scene: Node
 # Used to automate resetting transform and visibility to default in case the
 # student calls hide(), changes transform, etc. in their practice code.
-var _current_scene_reset_values := {
-	&"visible": null,
-	&"transform": null,
-}
+var _current_scene_reset_values := { &"visible": null, &"transform": null }
 
 var _scene_tween: Tween
 
@@ -131,13 +132,21 @@ func _notification(what: int) -> void:
 
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
-	if mb and mb.button_index == MOUSE_BUTTON_LEFT and mb.pressed and get_viewport().gui_get_focus_owner():
+	if (
+		mb and mb.button_index == MOUSE_BUTTON_LEFT
+		and mb.pressed and get_viewport().gui_get_focus_owner()
+	):
 		# Makes clicks on the empty area to remove focus from various controls, specifically
 		# the code editor.
 		get_viewport().gui_get_focus_owner().release_focus()
 
 
-func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_number: int) -> void:
+func setup(
+	practice: BBCodeParser.ParseNode,
+	lesson: BBCodeParser.ParseNode,
+	course_index: CourseIndex,
+	lesson_number: int,
+) -> void:
 	if not is_inside_tree():
 		await self.ready
 
@@ -200,7 +209,13 @@ func setup(practice: BBCodeParser.ParseNode, lesson: BBCodeParser.ParseNode, cou
 		var practice_id := BBCodeUtils.get_practice_id(practice)
 		for i in practice_count:
 			var practice_data := BBCodeUtils.get_lesson_practice(lesson, i)
-			_practice_list.add_item(practice_data, lesson, course_index, lesson_number, BBCodeUtils.get_practice_id(practice_data) == practice_id)
+			_practice_list.add_item(
+				practice_data,
+				lesson,
+				course_index,
+				lesson_number,
+				BBCodeUtils.get_practice_id(practice_data) == practice_id,
+			)
 
 		var user_profile := UserProfiles.get_profile()
 		var completed_before = user_profile.is_lesson_practice_completed(
@@ -247,7 +262,11 @@ func _update_practice_metadata() -> void:
 	var rtl := TranslationManager.current_translation_is_rtl()
 
 	var title := BBCodeUtils.get_practice_title(_practice)
-	_info_panel.title_label.text = "L%d.P%d %s" % [_lesson_number, _practice_index + 1, tr(title).capitalize()]
+	_info_panel.title_label.text = "L%d.P%d %s" % [
+		_lesson_number,
+		_practice_index + 1,
+		tr(title).capitalize(),
+	]
 	_info_panel.title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 	var goal := BBCodeUtils.get_practice_goal(_practice)
 	_info_panel.goal_rich_text_label.text = TextUtils.bbcode_add_code_color(
@@ -263,7 +282,9 @@ func _update_practice_metadata() -> void:
 			continue
 
 		practice_hint.title = tr("Hint %s") % [str(index + 1).pad_zeros(1)]
-		practice_hint.set_text_alignment(HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT)
+		practice_hint.set_text_alignment(
+			HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
+		)
 		practice_hint.text = TextUtils.tr_paragraph(hints[index])
 		index += 1
 
@@ -328,7 +349,10 @@ func _validate_and_run_student_code() -> void:
 		# GDScriptAnalyzer needs a path or class_name. As we're feeding code directly into the parser,
 		# we can't really have a path, so we need a class_name to fool it
 		var initial_insertion_character := _find_first_non_annotation_entry_point(verifier_script)
-		verifier_script = verifier_script.insert(initial_insertion_character, "class_name TEMP_UserScript\n")
+		verifier_script = verifier_script.insert(
+			initial_insertion_character,
+			"class_name TEMP_UserScript\n",
+		)
 		script_is_desynced_by_one_line = true
 
 	var verifier := OfflineScriptVerifier.new(verifier_script)
@@ -420,7 +444,8 @@ func _validate_and_run_student_code() -> void:
 				modified_code.append(line)
 				modified_code.append(tabs + "\t" + guard_counter_varname + " += 1")
 				modified_code.append(
-					tabs + "\t" + "if " + guard_counter_varname + " > %s:" % MAX_WHILE_LOOP_ITERATIONS,
+					tabs + "\t" + "if " + guard_counter_varname
+					+ " > %s:" % MAX_WHILE_LOOP_ITERATIONS,
 				)
 				modified_code.append(tabs + "\t\t" + "break")
 			else:
@@ -444,7 +469,8 @@ func _validate_and_run_student_code() -> void:
 	if script_is_valid != OK:
 		var error := ScriptError.new()
 		error.message = tr(
-			"Oh no! The script has an error (code %s), but the Script Verifier did not catch it" % script_is_valid,
+			"Oh no! The script has an error (code %s), but the Script Verifier did not catch it"
+			% script_is_valid,
 		)
 		error.severity = 1
 		error.code = GDQuestCodes.ErrorCode.INVALID_NO_CATCH
@@ -477,6 +503,7 @@ func _test_student_code() -> void:
 	_info_panel.set_tests_pending()
 
 	var result := _tester.run_tests()
+	last_test_result = result
 	_info_panel.set_tests_status(result, script_file_name)
 	await _info_panel.tests_updated
 
@@ -500,7 +527,6 @@ func _test_student_code() -> void:
 
 func _reset_practice() -> void:
 	# Code is already reset by the slice editor.
-
 	_info_panel.reset_tests_status()
 	_code_editor.slice_editor.errors = []
 	_output_console.clear_messages()
@@ -520,11 +546,17 @@ func _update_slidable_panels() -> void:
 
 	# Update info panel.
 	_info_panel.custom_minimum_size = Vector2(_output_anchors.size.x, 0)
-	_info_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE)
+	_info_panel.set_anchors_and_offsets_preset(
+		Control.PRESET_FULL_RECT,
+		Control.PRESET_MODE_MINSIZE,
+	)
 
 	# Update solution panel.
 	_solution_panel.custom_minimum_size = Vector2(_output_anchors.size.x, 0)
-	_solution_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE)
+	_solution_panel.set_anchors_and_offsets_preset(
+		Control.PRESET_FULL_RECT,
+		Control.PRESET_MODE_MINSIZE,
+	)
 	if not _is_solution_panel_open:
 		_solution_panel.offset_left = _output_anchors.size.x
 
@@ -542,9 +574,18 @@ func _disable_distraction_free_mode() -> void:
 		_scene_tween.kill()
 
 	_scene_tween = create_tween().set_parallel()
-	_scene_tween.tween_property(_info_panel_anchors, "size_flags_stretch_ratio", 1.0, SLIDE_TRANSITION_DURATION).from(_info_panel_anchors.size_flags_stretch_ratio).set_trans(Tween.TRANS_SINE)
-	_scene_tween.tween_property(_code_editor, "size_flags_stretch_ratio", 1.0, SLIDE_TRANSITION_DURATION).from(_code_editor.size_flags_stretch_ratio).set_trans(Tween.TRANS_SINE)
-	_scene_tween.tween_property(_info_panel_anchors, "modulate:a", 1.0, SLIDE_TRANSITION_DURATION).from(_info_panel_anchors.modulate.a).set_ease(Tween.EASE_IN)
+	_scene_tween \
+			.tween_property(_info_panel_anchors, "size_flags_stretch_ratio", 1.0, SLIDE_TRANSITION_DURATION) \
+			.from(_info_panel_anchors.size_flags_stretch_ratio) \
+			.set_trans(Tween.TRANS_SINE)
+	_scene_tween \
+			.tween_property(_code_editor, "size_flags_stretch_ratio", 1.0, SLIDE_TRANSITION_DURATION) \
+			.from(_code_editor.size_flags_stretch_ratio) \
+			.set_trans(Tween.TRANS_SINE)
+	_scene_tween \
+			.tween_property(_info_panel_anchors, "modulate:a", 1.0, SLIDE_TRANSITION_DURATION) \
+			.from(_info_panel_anchors.modulate.a) \
+			.set_ease(Tween.EASE_IN)
 
 	_code_editor.set_distraction_free_state(not _is_info_panel_open)
 
@@ -557,9 +598,19 @@ func _enable_distraction_free_mode() -> void:
 		_scene_tween.kill()
 	_scene_tween = create_tween().set_parallel()
 
-	_scene_tween.tween_property(_info_panel_anchors, "size_flags_stretch_ratio", 0.0, SLIDE_TRANSITION_DURATION).from(_info_panel_anchors.size_flags_stretch_ratio).set_trans(Tween.TRANS_SINE)
-	_scene_tween.tween_property(_code_editor, "size_flags_stretch_ratio", 2.0, SLIDE_TRANSITION_DURATION).from(_code_editor.size_flags_stretch_ratio).set_trans(Tween.TRANS_SINE)
-	_scene_tween.tween_property(_info_panel_anchors, "modulate:a", 0.0, SLIDE_TRANSITION_DURATION - 0.25).from(_info_panel_anchors.modulate.a).set_ease(Tween.EASE_IN).set_delay(0.15)
+	_scene_tween \
+			.tween_property(_info_panel_anchors, "size_flags_stretch_ratio", 0.0, SLIDE_TRANSITION_DURATION) \
+			.from(_info_panel_anchors.size_flags_stretch_ratio) \
+			.set_trans(Tween.TRANS_SINE)
+	_scene_tween \
+			.tween_property(_code_editor, "size_flags_stretch_ratio", 2.0, SLIDE_TRANSITION_DURATION) \
+			.from(_code_editor.size_flags_stretch_ratio) \
+			.set_trans(Tween.TRANS_SINE)
+	_scene_tween \
+			.tween_property(_info_panel_anchors, "modulate:a", 0.0, SLIDE_TRANSITION_DURATION - 0.25) \
+			.from(_info_panel_anchors.modulate.a) \
+			.set_ease(Tween.EASE_IN) \
+			.set_delay(0.15)
 
 	_code_editor.set_distraction_free_state(not _is_info_panel_open)
 
@@ -579,8 +630,14 @@ func _show_solution_panel() -> void:
 		_scene_tween.kill()
 	_scene_tween = create_tween().set_parallel()
 
-	_scene_tween.tween_property(_solution_panel, "offset_left", 0.0, SLIDE_TRANSITION_DURATION).from(_solution_panel.offset_left).set_trans(Tween.TRANS_SINE)
-	_scene_tween.tween_property(_solution_panel, "modulate:a", 1.0, SLIDE_TRANSITION_DURATION).from(_solution_panel.modulate.a).set_ease(Tween.EASE_IN)
+	_scene_tween \
+			.tween_property(_solution_panel, "offset_left", 0.0, SLIDE_TRANSITION_DURATION) \
+			.from(_solution_panel.offset_left) \
+			.set_trans(Tween.TRANS_SINE)
+	_scene_tween \
+			.tween_property(_solution_panel, "modulate:a", 1.0, SLIDE_TRANSITION_DURATION) \
+			.from(_solution_panel.modulate.a) \
+			.set_ease(Tween.EASE_IN)
 
 
 func _hide_solution_panel() -> void:
@@ -591,8 +648,15 @@ func _hide_solution_panel() -> void:
 		_scene_tween.kill()
 	_scene_tween = create_tween().set_parallel()
 
-	_scene_tween.tween_property(_solution_panel, "offset_left", _output_anchors.size.x, SLIDE_TRANSITION_DURATION).from(_solution_panel.offset_left).set_trans(Tween.TRANS_SINE)
-	_scene_tween.tween_property(_solution_panel, "modulate:a", 0.0, SLIDE_TRANSITION_DURATION - 0.25).from(_solution_panel.modulate.a).set_ease(Tween.EASE_IN).set_delay(0.15)
+	_scene_tween \
+			.tween_property(_solution_panel, "offset_left", _output_anchors.size.x, SLIDE_TRANSITION_DURATION) \
+			.from(_solution_panel.offset_left) \
+			.set_trans(Tween.TRANS_SINE)
+	_scene_tween \
+			.tween_property(_solution_panel, "modulate:a", 0.0, SLIDE_TRANSITION_DURATION - 0.25) \
+			.from(_solution_panel.modulate.a) \
+			.set_ease(Tween.EASE_IN) \
+			.set_delay(0.15)
 
 
 func _on_use_solution_pressed() -> void:
@@ -609,8 +673,7 @@ func _on_use_solution_pressed() -> void:
 
 func _update_game_paused() -> void:
 	_game_view.paused = (
-		_code_editor.is_pause_button_pressed()
-		|| _code_editor.is_solution_button_pressed()
+		_code_editor.is_pause_button_pressed() || _code_editor.is_solution_button_pressed()
 	)
 
 
@@ -727,7 +790,7 @@ static func _get_properties(node: Node) -> Array[Dictionary]:
 			return (
 				prop.usage & (PropertyUsageFlags.PROPERTY_USAGE_STORAGE) != 0
 				and prop.usage & (PropertyUsageFlags.PROPERTY_USAGE_SCRIPT_VARIABLE) != 0
-			)
+			),
 	)
 	for property in properties:
 		property.value = node.get(property.name as StringName)
@@ -737,6 +800,7 @@ static func _get_properties(node: Node) -> Array[Dictionary]:
 static func _restore_properties(node: Node, properties: Array[Dictionary]) -> void:
 	for property in properties:
 		node.set(property.name as StringName, property.value)
+
 
 ###############################################################################
 #
