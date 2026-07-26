@@ -5,40 +5,31 @@
 class_name SmoothScrollContainer
 extends ScrollContainer
 
-# Amount of pixels to offset the scroll target when scrolling with the mouse
-# wheel or the touchpad.
+## Amount of pixels to offset the scroll target for one step with the mouse
+## wheel, by default.
 const MOUSE_SCROLL_STEP := 80.0
-# When the velocity's squared length gets below this value, we set it to zero.
-const ARRIVE_THRESHOLD := 1.0
-const ARRIVE_DISTANCE_BASE := 200.0
-
-# Base scroll speed in pixels per second.
-const SPEED_BASE := 3000.0
-# If the target scroll is farther than this distance, we increase the scrolling
-# speed proportionally.
-const ACCELERATE_DISTANCE_THRESHOLD := 240.0
-# Used to multiply the scroll speed as the target scroll gets farther away than
-# ACCELERATE_DISTANCE_THRESHOLD.
-const SPEED_DISTANCE_DIVISOR := 200.0
-const TIME_MSEC_BETWEEN_SCROLL_EVENTS := 15
-
-# Scroll speed in pixels per second.
-var scroll_speed := SPEED_BASE
-var arrive_distance := ARRIVE_DISTANCE_BASE
+const SCROLL_SPEED_MOUSE_WHEEL := 3000.0
+const SCROLL_SPEED_PAGE_UP_DOWN := 5000.0
+const SCROLL_SMOOTHING_RATE := 12.0
+const JUMP_SCROLL_DURATION := 0.4
+const ARRIVE_DISTANCE := 0.5
+const MAX_WHEEL_INPUT_BUFFER := 600.0
 
 # Current velocity of the content node.
-var _velocity := Vector2(0, 0)
+var _scroll_velocity := Vector2.ZERO
 # Current scroll coordinated. We use this to track and force the scrollbars to
 # specific scrolling as directly updating the scroll properties conflicts with
 # the ScrollContainer's native behavior.
-var _current_scroll := Vector2.ZERO
-var _target_position := Vector2.ZERO:
-	set = _set_target_position
-var _max_position_y := 0.0
-
-# Used to throttle touchpad scroll events.
-var _last_accepted_scroll_event_time := 0
-var _is_in_browser := OS.get_name() == "Web"
+var _current_scroll_position := Vector2.ZERO
+var _target_scroll_position := Vector2.ZERO:
+	set = _set_target_scroll_position
+var _maximum_scroll_position_y := 0.0
+# Accumulates an amount of pixels to offset the scroll target based on user
+# input. Consumed every frame in _process() when _process() is active.
+var _pending_scroll_difference := 0.0
+var _maximum_scroll_speed := SCROLL_SPEED_MOUSE_WHEEL
+var _scroll_smoothing_rate := SCROLL_SMOOTHING_RATE
+var _wheel_scroll_budget := MOUSE_SCROLL_STEP
 
 # Control node to move when scrolling.
 @onready var _content: Control = get_child(get_child_count() - 1) as Control
@@ -48,96 +39,126 @@ var _is_in_browser := OS.get_name() == "Web"
 func _ready() -> void:
 	set_process(false)
 
-	_update_max_position_y()
-	_content.resized.connect(_update_max_position_y)
 
-	get_v_scroll_bar().scrolling.connect(_on_VScrollBar_scrolling)
+
+	var _update_max_scroll_position := func() -> void:
+		_maximum_scroll_position_y = maxf(_content.size.y - size.y, 0.0)
+	_update_max_scroll_position.call()
+	_content.resized.connect(_update_max_scroll_position)
+
+	# The user is grabbing the scrollbar, so we need to stop processing.
+	get_v_scroll_bar().scrolling.connect(
+		func _on_VScrollBar_scrolling() -> void:
+			if is_processing():
+				set_process(false)
+			_pending_scroll_difference = 0.0
+			_scroll_velocity = Vector2.ZERO
+			_current_scroll_position.y = scroll_vertical
+			_target_scroll_position.y = scroll_vertical,
+	)
 
 	var user_profile := UserProfiles.get_profile()
 	_scroll_sensitivity = user_profile.scroll_sensitivity
-	user_profile.scroll_sensitivity_changed.connect(_on_UserProfile_scroll_sensitivity_changed)
+	_maximum_scroll_speed = SCROLL_SPEED_MOUSE_WHEEL * _scroll_sensitivity
+	_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
+	user_profile.scroll_sensitivity_changed.connect(
+		func (new_value: float) -> void:
+			_scroll_sensitivity = new_value,
+	)
 
 
 func _process(delta: float) -> void:
-	var distance_to_target := _current_scroll.distance_to(_target_position)
-	if distance_to_target <= ARRIVE_THRESHOLD * scroll_speed / SPEED_BASE:
+	_wheel_scroll_budget = minf(
+		_wheel_scroll_budget + SCROLL_SPEED_MOUSE_WHEEL * _scroll_sensitivity * delta,
+		MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity,
+	)
+
+	if not is_zero_approx(_pending_scroll_difference):
+		_set_target_scroll_position(_target_scroll_position + Vector2.DOWN * _pending_scroll_difference)
+		_pending_scroll_difference = 0.0
+
+	var distance_to_target := absf(_current_scroll_position.y - _target_scroll_position.y)
+	if distance_to_target <= ARRIVE_DISTANCE:
+		_current_scroll_position = _target_scroll_position
+		_scroll_velocity = Vector2.ZERO
+		_maximum_scroll_speed = SCROLL_SPEED_MOUSE_WHEEL * _scroll_sensitivity
+		_scroll_smoothing_rate = SCROLL_SMOOTHING_RATE
+		_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
+		scroll_vertical = roundi(_current_scroll_position.y)
 		set_process(false)
 		return
 
-	var speed_multiplier := maxf((distance_to_target - ACCELERATE_DISTANCE_THRESHOLD) / SPEED_DISTANCE_DIVISOR, 1.0)
-	scroll_speed = SPEED_BASE * speed_multiplier
-	arrive_distance = ARRIVE_DISTANCE_BASE * speed_multiplier
+	# Controls how quickly the current position follows the target position.
+	var smoothing_weight := 1.0 - exp(-_scroll_smoothing_rate * delta)
+	var desired_scroll_y := lerpf(_current_scroll_position.y, _target_scroll_position.y, smoothing_weight)
 
-	var direction := _current_scroll.direction_to(_target_position)
-	var desired_velocity := direction * scroll_speed
-	if distance_to_target < arrive_distance:
-		desired_velocity = desired_velocity.lerp(Vector2.ZERO, 1.0 - distance_to_target / arrive_distance)
-
-	var steering := desired_velocity - _velocity
-	_velocity += steering / 2.0
-	# Prevents scrolling from overshooting when the framerate goes down.
-	if _velocity.length() * delta > distance_to_target:
-		_velocity = _velocity.normalized() * distance_to_target / delta
-
-	_current_scroll += _velocity * delta
-	scroll_vertical = int(_current_scroll.y)
+	_scroll_velocity.y = clampf(
+		(desired_scroll_y - _current_scroll_position.y) / delta,
+		-_maximum_scroll_speed,
+		_maximum_scroll_speed,
+	)
+	_current_scroll_position.y += _scroll_velocity.y * delta
+	scroll_vertical = roundi(_current_scroll_position.y)
 
 
 func _gui_input(event: InputEvent) -> void:
-	# Used to throttle scroll events that are too fast, which happens with some
-	# touchpads.
-	var can_mouse_scroll := true
-	if _is_in_browser:
-		can_mouse_scroll = Time.get_ticks_msec() > _last_accepted_scroll_event_time + TIME_MSEC_BETWEEN_SCROLL_EVENTS
-
 	if event.is_action_pressed("scroll_up_one_page"):
-		scroll_page_up()
+		_pending_scroll_difference = 0.0
+		_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
+		_maximum_scroll_speed = SCROLL_SPEED_PAGE_UP_DOWN
+		_scroll_smoothing_rate = SCROLL_SMOOTHING_RATE
+		_set_target_scroll_position(_target_scroll_position + Vector2.UP * size.y)
 		accept_event()
 	elif event.is_action_pressed("scroll_down_one_page"):
-		scroll_page_down()
+		_pending_scroll_difference = 0.0
+		_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
+		_maximum_scroll_speed = SCROLL_SPEED_PAGE_UP_DOWN
+		_scroll_smoothing_rate = SCROLL_SMOOTHING_RATE
+		_set_target_scroll_position(_target_scroll_position + Vector2.DOWN * size.y)
 		accept_event()
 	elif event.is_action_pressed("scroll_to_top"):
-		scroll_to_top()
+		_pending_scroll_difference = 0.0
+		_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
+		_set_target_scroll_position(Vector2.ZERO)
+		var jump_distance := absf(_current_scroll_position.y - _target_scroll_position.y)
+		_scroll_smoothing_rate = log(maxf(jump_distance / ARRIVE_DISTANCE, 1.0)) / JUMP_SCROLL_DURATION
+		_maximum_scroll_speed = jump_distance * _scroll_smoothing_rate
 		accept_event()
 	elif event.is_action_pressed("scroll_to_bottom"):
-		scroll_to_bottom()
+		_pending_scroll_difference = 0.0
+		_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
+		_set_target_scroll_position(Vector2.DOWN * _maximum_scroll_position_y)
+		var jump_distance := absf(_current_scroll_position.y - _target_scroll_position.y)
+		_scroll_smoothing_rate = log(maxf(jump_distance / ARRIVE_DISTANCE, 1.0)) / JUMP_SCROLL_DURATION
+		_maximum_scroll_speed = jump_distance * _scroll_smoothing_rate
 		accept_event()
-	elif can_mouse_scroll:
+	else:
 		var mouse_button_event := event as InputEventMouseButton
 		if mouse_button_event and mouse_button_event.is_action("scroll_up") and mouse_button_event.pressed:
-			scroll_up(mouse_button_event.factor)
+			_accumulate_pending_scroll_in_direction(-1.0, mouse_button_event.factor)
 			accept_event()
 		elif mouse_button_event and mouse_button_event.is_action("scroll_down") and mouse_button_event.pressed:
-			scroll_down(mouse_button_event.factor)
+			_accumulate_pending_scroll_in_direction(1.0, mouse_button_event.factor)
 			accept_event()
 
 
-func scroll_up(factor: float) -> void:
-	var delta := factor * MOUSE_SCROLL_STEP * _scroll_sensitivity
-	_set_target_position(_target_position + delta * Vector2.UP)
-	_last_accepted_scroll_event_time = Time.get_ticks_msec()
-
-
-func scroll_down(factor: float) -> void:
-	var delta := factor * MOUSE_SCROLL_STEP * _scroll_sensitivity
-	_set_target_position(_target_position + delta * Vector2.DOWN)
-	_last_accepted_scroll_event_time = Time.get_ticks_msec()
-
-
-func scroll_page_up() -> void:
-	_set_target_position(_target_position + Vector2.UP * size.y)
-
-
-func scroll_page_down() -> void:
-	_set_target_position(_target_position + Vector2.DOWN * size.y)
-
-
-func scroll_to_top() -> void:
-	_set_target_position(Vector2.ZERO)
-
-
-func scroll_to_bottom() -> void:
-	_set_target_position(Vector2.DOWN * _max_position_y)
+## call this function when you want to add one scroll step like the result of
+## scrolling up or down by one increment using a touchpad or a mouse wheel. It
+## updates the container's state and adds the scroll direction and factor to the
+## pending scroll amount that will get consumed in the next frame.
+##
+## scroll_direction should be -1.0 for scroll up and 1.0 for scroll down.
+## factor should be the scroll factor from the input event (it is especially
+## important for the feel of scrolling with touchpads).
+func _accumulate_pending_scroll_in_direction(scroll_direction: float, factor: float) -> void:
+	_maximum_scroll_speed = SCROLL_SPEED_MOUSE_WHEEL * _scroll_sensitivity
+	_scroll_smoothing_rate = SCROLL_SMOOTHING_RATE
+	var scroll_factor := factor if factor > 0.0 else 1.0
+	var requested_scroll_delta := scroll_factor * MOUSE_SCROLL_STEP * _scroll_sensitivity
+	var accepted_scroll_delta := minf(requested_scroll_delta, _wheel_scroll_budget)
+	_wheel_scroll_budget -= accepted_scroll_delta
+	_pending_scroll_difference += scroll_direction * accepted_scroll_delta
+	set_process(true)
 
 
 # Override default implementation to keep local properties in sync.
@@ -146,26 +167,16 @@ func set_v_scroll_override(value: int) -> void:
 
 	if is_processing():
 		set_process(false)
-	_current_scroll.y = scroll_vertical
-	_target_position.y = scroll_vertical
+	_pending_scroll_difference = 0.0
+	_scroll_velocity = Vector2.ZERO
+	_maximum_scroll_speed = SCROLL_SPEED_MOUSE_WHEEL * _scroll_sensitivity
+	_scroll_smoothing_rate = SCROLL_SMOOTHING_RATE
+	_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
+	_current_scroll_position.y = scroll_vertical
+	_target_scroll_position.y = scroll_vertical
 
 
-func _set_target_position(new_position: Vector2) -> void:
-	_target_position = new_position
-	_target_position.y = clamp(_target_position.y, 0.0, _max_position_y)
+func _set_target_scroll_position(new_position: Vector2) -> void:
+	_target_scroll_position = new_position
+	_target_scroll_position.y = clamp(_target_scroll_position.y, 0.0, _maximum_scroll_position_y)
 	set_process(true)
-
-
-func _update_max_position_y() -> void:
-	_max_position_y = _content.size.y - size.y
-
-
-func _on_VScrollBar_scrolling() -> void:
-	if is_processing():
-		set_process(false)
-	_current_scroll.y = scroll_vertical
-	_target_position.y = scroll_vertical
-
-
-func _on_UserProfile_scroll_sensitivity_changed(new_value: float) -> void:
-	_scroll_sensitivity = new_value
