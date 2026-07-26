@@ -14,6 +14,22 @@ Also, you can download the app for Windows, macOS, and Linux on Itch.io: https:/
 
 The desktop version can offer better performance and crisper text than the web version.
 
+### Installing on NixOS
+
+If you use NixOS, you can run the app directly without installing it:
+
+```sh
+nix run github:GDQuest/learn-gdscript
+```
+
+Or install it persistently:
+
+```sh
+nix profile install github:GDQuest/learn-gdscript
+```
+
+Only x86_64 Linux is supported via the flake, matching the available release binaries.
+
 ## Feedback, requests, and discussions
 
 We value feedback and bug reports. We will also consider feature requests, especially if they fit our vision and we feel they benefit programming beginners.
