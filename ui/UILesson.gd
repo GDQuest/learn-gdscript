@@ -73,7 +73,27 @@ func _ready() -> void:
 			child.show()
 		_practices_container.show()
 
-	_scroll_container.grab_focus()
+	_focus_scroll_container.call_deferred()
+
+
+func _input(event: InputEvent) -> void:
+	if (
+		not _is_current_screen
+		or not (
+			event.is_action_pressed("scroll_up_one_page")
+			or event.is_action_pressed("scroll_down_one_page")
+			or event.is_action_pressed("scroll_to_top")
+			or event.is_action_pressed("scroll_to_bottom")
+		)
+	):
+		return
+
+	var focus_owner := get_viewport().gui_get_focus_owner()
+	if focus_owner is LineEdit or focus_owner is TextEdit or focus_owner is CodeEdit:
+		return
+
+	if _scroll_container.handle_keyboard_scroll(event):
+		get_viewport().set_input_as_handled()
 
 
 func _notification(what: int) -> void:
@@ -96,6 +116,12 @@ func setup(lesson: BBCodeParser.ParseNode, course_index: CourseIndex, lesson_num
 		await get_tree().process_frame
 		lesson_displayed.emit()
 		return
+
+
+func set_is_current_screen(value: bool) -> void:
+	super.set_is_current_screen(value)
+	if value:
+		_focus_scroll_container.call_deferred()
 
 
 ## Builds and adds the lesson's visual content and UI elements (paragraphs,
@@ -383,3 +409,8 @@ func _make_visual(
 
 func _on_practice_first_visible() -> void:
 	Events.lesson_read.emit(_lesson)
+
+
+func _focus_scroll_container() -> void:
+	if _is_current_screen and is_visible_in_tree():
+		_scroll_container.grab_focus()

@@ -30,6 +30,7 @@ var _pending_scroll_difference := 0.0
 var _maximum_scroll_speed := SCROLL_SPEED_MOUSE_WHEEL
 var _scroll_smoothing_rate := SCROLL_SMOOTHING_RATE
 var _wheel_scroll_budget := MOUSE_SCROLL_STEP
+var _last_wheel_scroll_direction := 0.0
 
 # Control node to move when scrolling.
 @onready var _content: Control = get_child(get_child_count() - 1) as Control
@@ -102,35 +103,7 @@ func _process(delta: float) -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
-	if event.is_action_pressed("scroll_up_one_page"):
-		_pending_scroll_difference = 0.0
-		_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
-		_maximum_scroll_speed = SCROLL_SPEED_PAGE_UP_DOWN
-		_scroll_smoothing_rate = SCROLL_SMOOTHING_RATE
-		_set_target_scroll_position(_target_scroll_position + Vector2.UP * size.y)
-		accept_event()
-	elif event.is_action_pressed("scroll_down_one_page"):
-		_pending_scroll_difference = 0.0
-		_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
-		_maximum_scroll_speed = SCROLL_SPEED_PAGE_UP_DOWN
-		_scroll_smoothing_rate = SCROLL_SMOOTHING_RATE
-		_set_target_scroll_position(_target_scroll_position + Vector2.DOWN * size.y)
-		accept_event()
-	elif event.is_action_pressed("scroll_to_top"):
-		_pending_scroll_difference = 0.0
-		_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
-		_set_target_scroll_position(Vector2.ZERO)
-		var jump_distance := absf(_current_scroll_position.y - _target_scroll_position.y)
-		_scroll_smoothing_rate = log(maxf(jump_distance / ARRIVE_DISTANCE, 1.0)) / JUMP_SCROLL_DURATION
-		_maximum_scroll_speed = jump_distance * _scroll_smoothing_rate
-		accept_event()
-	elif event.is_action_pressed("scroll_to_bottom"):
-		_pending_scroll_difference = 0.0
-		_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
-		_set_target_scroll_position(Vector2.DOWN * _maximum_scroll_position_y)
-		var jump_distance := absf(_current_scroll_position.y - _target_scroll_position.y)
-		_scroll_smoothing_rate = log(maxf(jump_distance / ARRIVE_DISTANCE, 1.0)) / JUMP_SCROLL_DURATION
-		_maximum_scroll_speed = jump_distance * _scroll_smoothing_rate
+	if handle_keyboard_scroll(event):
 		accept_event()
 	else:
 		var mouse_button_event := event as InputEventMouseButton
@@ -140,6 +113,45 @@ func _gui_input(event: InputEvent) -> void:
 		elif mouse_button_event and mouse_button_event.is_action("scroll_down") and mouse_button_event.pressed:
 			_accumulate_pending_scroll_in_direction(1.0, mouse_button_event.factor)
 			accept_event()
+
+
+## Handles keyboard actions that move the whole scrollable page.
+##
+## Returns true when the event was a page-scroll action. The lesson screen calls
+## this directly to allow pressing scroll shortcuts regardless of current UI
+## focus.
+func handle_keyboard_scroll(event: InputEvent) -> bool:
+	if event.is_action_pressed("scroll_up_one_page"):
+		_pending_scroll_difference = 0.0
+		_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
+		_maximum_scroll_speed = SCROLL_SPEED_PAGE_UP_DOWN
+		_scroll_smoothing_rate = SCROLL_SMOOTHING_RATE
+		_set_target_scroll_position(_target_scroll_position + Vector2.UP * size.y)
+		return true
+	elif event.is_action_pressed("scroll_down_one_page"):
+		_pending_scroll_difference = 0.0
+		_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
+		_maximum_scroll_speed = SCROLL_SPEED_PAGE_UP_DOWN
+		_scroll_smoothing_rate = SCROLL_SMOOTHING_RATE
+		_set_target_scroll_position(_target_scroll_position + Vector2.DOWN * size.y)
+		return true
+	elif event.is_action_pressed("scroll_to_top"):
+		_pending_scroll_difference = 0.0
+		_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
+		_set_target_scroll_position(Vector2.ZERO)
+		var jump_distance := absf(_current_scroll_position.y - _target_scroll_position.y)
+		_scroll_smoothing_rate = log(maxf(jump_distance / ARRIVE_DISTANCE, 1.0)) / JUMP_SCROLL_DURATION
+		_maximum_scroll_speed = jump_distance * _scroll_smoothing_rate
+		return true
+	elif event.is_action_pressed("scroll_to_bottom"):
+		_pending_scroll_difference = 0.0
+		_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
+		_set_target_scroll_position(Vector2.DOWN * _maximum_scroll_position_y)
+		var jump_distance := absf(_current_scroll_position.y - _target_scroll_position.y)
+		_scroll_smoothing_rate = log(maxf(jump_distance / ARRIVE_DISTANCE, 1.0)) / JUMP_SCROLL_DURATION
+		_maximum_scroll_speed = jump_distance * _scroll_smoothing_rate
+		return true
+	return false
 
 
 ## call this function when you want to add one scroll step like the result of
