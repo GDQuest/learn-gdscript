@@ -43,7 +43,7 @@ That's very convenient when you need to quickly access elements from the end of 
 [option]inventory[-2][/option]
 [explanation]When using negative indices, [code]-1[/code] means the [i]last[/i] element in the array. Index [code]-2[/code] will be the second-to-last, thus [code]-3[/code] will be the third-to-last.
 
-It can be little confusing as it seems to work differently from positive indices. However, it's because there's no difference between index [code]0[/code] and [code]-0[/code]: they both point to the first item in the array.[/explanation]
+It can be a little confusing as it seems to work differently from positive indices. However, it's because there's no difference between index [code]0[/code] and [code]-0[/code]: they both point to the first item in the array.[/explanation]
 [/quiz_choice]
 
 [title]You can't access non-existent indices[/title]
@@ -81,7 +81,7 @@ For example, if the first item in the array is what you need, you would call [co
 var inventory = []
 
 func pick_items():
-	
+
 [/starting_code]
 [cursor line="0" column="0"]
 [validator path="find-crystals/TestFindCrystals.gd"]
@@ -105,7 +105,7 @@ This time, though, you need to access them with [i]negative indices[/i].
 var tracks = []
 
 func fix_tracks():
-	
+
 [/starting_code]
 [cursor line="0" column="0"]
 [validator path="align-tracks/TestAlignTracks.gd"]
