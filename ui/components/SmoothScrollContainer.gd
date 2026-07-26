@@ -163,13 +163,39 @@ func handle_keyboard_scroll(event: InputEvent) -> bool:
 ## factor should be the scroll factor from the input event (it is especially
 ## important for the feel of scrolling with touchpads).
 func _accumulate_pending_scroll_in_direction(scroll_direction: float, factor: float) -> void:
+	# When changing direction compared to current scroll movement, reset to
+	# avoid locking the scroll. Start from the visible position rather than the
+	# previous target, which may already be clamped against the scroll limit of
+	# this container.
+	if not is_equal_approx(scroll_direction, _last_wheel_scroll_direction):
+		_pending_scroll_difference = 0.0
+		_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
+		_set_target_scroll_position(Vector2(_target_scroll_position.x, _current_scroll_position.y))
+		_last_wheel_scroll_direction = scroll_direction
+
 	_maximum_scroll_speed = SCROLL_SPEED_MOUSE_WHEEL * _scroll_sensitivity
 	_scroll_smoothing_rate = SCROLL_SMOOTHING_RATE
 	var scroll_factor := factor if factor > 0.0 else 1.0
 	var requested_scroll_delta := scroll_factor * MOUSE_SCROLL_STEP * _scroll_sensitivity
-	var accepted_scroll_delta := minf(requested_scroll_delta, _wheel_scroll_budget)
-	_wheel_scroll_budget -= accepted_scroll_delta
-	_pending_scroll_difference += scroll_direction * accepted_scroll_delta
+	var real_target_y_position := clampf(
+		_target_scroll_position.y + _pending_scroll_difference,
+		0.0,
+		_maximum_scroll_position_y,
+	)
+	var distance_to_scroll_limit := (
+		_maximum_scroll_position_y - real_target_y_position
+		if scroll_direction > 0.0
+		else real_target_y_position
+	)
+	var final_scroll_difference := minf(
+		requested_scroll_delta,
+		minf(_wheel_scroll_budget, maxf(distance_to_scroll_limit, 0.0)),
+	)
+	if is_zero_approx(final_scroll_difference):
+		return
+
+	_wheel_scroll_budget -= final_scroll_difference
+	_pending_scroll_difference += scroll_direction * final_scroll_difference
 	set_process(true)
 
 
