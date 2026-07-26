@@ -58,5 +58,11 @@ func test_draw_three_squares_of_200_pixels() -> String:
 		index += 1
 		if index == 4:
 			break
-	return ""
 
+	for first_index in range(3):
+		var first_rect: Rect2 = polygons[first_index].get_positioned_rect()
+		for second_index in range(first_index + 1, 3):
+			var second_rect: Rect2 = polygons[second_index].get_positioned_rect()
+			if first_rect.intersects(second_rect):
+				return tr("The squares should not overlap. Did you move the turtle between drawing each square?")
+	return ""
