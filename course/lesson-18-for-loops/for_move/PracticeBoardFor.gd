@@ -32,7 +32,8 @@ func move_to_bottom():
 
 
 func reset() -> void:
-	_robot.cell = Vector2(0, 1)
+	cell = Vector2(2, 0)
+	_robot.cell = cell
 	_update_label()
 
 
