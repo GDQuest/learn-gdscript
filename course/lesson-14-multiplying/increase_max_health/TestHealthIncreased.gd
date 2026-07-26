@@ -33,15 +33,17 @@ func test_addition_is_used_to_increase_level() -> String:
 func test_multiplication_is_used_to_increase_max_health() -> String:
 	var level_up_function := _analyzer.get_function_named("level_up")
 	
-	if not GDExpr.suite(
-		GDExpr.any_of(
+	if not GDExpr.any_of(
+		GDExpr.suite(
 			# max_health *= 1.1
-			GDExpr.suite(GDExpr.assignment(GDExpr.identifier("max_health"), GDExpr.literal(1.1), GDAssignmentNode.Operation.OP_MULTIPLICATION)),
+			GDExpr.assignment(GDExpr.identifier("max_health"), GDExpr.literal(1.1), GDAssignmentNode.Operation.OP_MULTIPLICATION),
+		),
+		GDExpr.suite(
 			# max_health = max_health * 1.1
-			GDExpr.suite(GDExpr.assignment(GDExpr.identifier("max_health"), GDExpr.multiply(GDExpr.identifier("max_health"), GDExpr.literal(1.1))))
+			GDExpr.assignment(GDExpr.identifier("max_health"), GDExpr.multiply(GDExpr.identifier("max_health"), GDExpr.literal(1.1)))
 		)
 	).matches(level_up_function):
-		tr("It looks like max_health isn't increasing exponentially. Did you multiply it by a value greater than 1?")
+		return tr("It looks like max_health isn't increasing exponentially. Did you multiply it by a value greater than 1?")
 	return ""
 
 
