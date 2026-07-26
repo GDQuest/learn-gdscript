@@ -21,19 +21,6 @@ const SIZE_CHANGE_TIME := 0.5
 var completed_before := false:
 	set = set_completed_before
 
-@export var _outline: PanelContainer
-@export var _question: RichTextLabel
-@export var _explanation: RichTextLabel
-@export var _content: RichTextLabel
-@export var _completed_before_icon: TextureRect
-@export var _choice_container: MarginContainer
-@export var _result_container: MarginContainer
-@export var _submit_button: Button
-@export var _skip_button: Button
-@export var _result_label: Label
-@export var _correct_answer_label: Label
-@export var _help_message: Label
-
 var _quiz: BBCodeParser.ParseNode
 var _quiz_data: BBCodeUtils.QuizData
 var _shake_pos: float = 0
@@ -45,6 +32,19 @@ var _animating_hint := false
 
 var _error_scene_tween: Tween
 var _size_scene_tween: Tween
+
+@onready var _outline: PanelContainer = %Outline
+@onready var _question: RichTextLabel = %Question
+@onready var _explanation: RichTextLabel = %Explanation
+@onready var _content: RichTextLabel = %Content
+@onready var _completed_before_icon: TextureRect = %CompletedBeforeIcon
+@onready var _choice_container: MarginContainer = %ChoiceContainer
+@onready var _result_container: MarginContainer = %ResultContainer
+@onready var _submit_button: Button = %SubmitButton
+@onready var _skip_button: Button = %SkipButton
+@onready var _result_label: Label = %Label
+@onready var _correct_answer_label: Label = %CorrectAnswer
+@onready var _help_message: Label = %HelpMessage
 
 
 func _ready() -> void:
@@ -60,7 +60,7 @@ func _ready() -> void:
 
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_TRANSLATION_CHANGED:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
 		_update_labels()
 
 

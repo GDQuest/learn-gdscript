@@ -6,22 +6,13 @@
 [ext_resource type="StyleBox" uid="uid://cguhet6fdpmse" path="res://ui/theme/styles/outliner_details_background.tres" id="6"]
 [ext_resource type="Texture2D" uid="uid://duytsuncyxp7n" path="res://ui/assets/icons/checkmark_none.svg" id="9"]
 
-[node name="CourseLessonDetails" type="PanelContainer" unique_id=968761694 node_paths=PackedStringArray("_title_label", "_reading_stats_icon", "_quiz_stats_block", "_quiz_stats_value", "_practice_stats_value", "_goto_lesson_button", "_translation_stats_block", "_translation_stats_value", "_contributions_link")]
+[node name="CourseLessonDetails" type="PanelContainer" unique_id=968761694]
 custom_minimum_size = Vector2(420, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_styles/panel = ExtResource("6")
 script = ExtResource("5")
-_title_label = NodePath("MarginContainer/Layout/TitleLabel")
-_reading_stats_icon = NodePath("MarginContainer/Layout/ReadingStats/ValueIcon")
-_quiz_stats_block = NodePath("MarginContainer/Layout/QuizStats")
-_quiz_stats_value = NodePath("MarginContainer/Layout/QuizStats/ValueLabel")
-_practice_stats_value = NodePath("MarginContainer/Layout/PracticeStats/ValueLabel")
-_goto_lesson_button = NodePath("MarginContainer/Layout/Buttons/GoToButton")
-_translation_stats_block = NodePath("MarginContainer/Layout/TranslationStats")
-_translation_stats_value = NodePath("MarginContainer/Layout/TranslationStats/TranslationStatsLabel/ValueLabel")
-_contributions_link = NodePath("MarginContainer/Layout/TranslationStats/ContributionsLink")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=578601062]
 layout_mode = 2
@@ -30,6 +21,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/Layout" unique_id=1204099430]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(313, 0)
 layout_mode = 2
 theme_type_variation = &"LabelTitle"
@@ -49,6 +41,7 @@ size_flags_horizontal = 3
 text = "Lesson read"
 
 [node name="ValueIcon" type="TextureRect" parent="MarginContainer/Layout/ReadingStats" unique_id=1093836447]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -57,6 +50,7 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="QuizStats" type="HBoxContainer" parent="MarginContainer/Layout" unique_id=1858192972]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/Layout/QuizStats" unique_id=1420963781]
@@ -64,7 +58,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Quizzes completed"
 
-[node name="ValueLabel" type="Label" parent="MarginContainer/Layout/QuizStats" unique_id=1976243494]
+[node name="QuizValueLabel" type="Label" parent="MarginContainer/Layout/QuizStats" unique_id=1976243494]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -80,7 +75,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Practices completed"
 
-[node name="ValueLabel" type="Label" parent="MarginContainer/Layout/PracticeStats" unique_id=444174483]
+[node name="PracticeValueLabel" type="Label" parent="MarginContainer/Layout/PracticeStats" unique_id=444174483]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -89,6 +85,7 @@ text = "0 / 0"
 horizontal_alignment = 2
 
 [node name="TranslationStats" type="VBoxContainer" parent="MarginContainer/Layout" unique_id=56257249]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="TranslationStatsLabel" type="HBoxContainer" parent="MarginContainer/Layout/TranslationStats" unique_id=306373396]
@@ -99,7 +96,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Amount of Translated Text"
 
-[node name="ValueLabel" type="Label" parent="MarginContainer/Layout/TranslationStats/TranslationStatsLabel" unique_id=728872830]
+[node name="TranslationValueLabel" type="Label" parent="MarginContainer/Layout/TranslationStats/TranslationStatsLabel" unique_id=728872830]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -108,6 +106,7 @@ text = "0%"
 horizontal_alignment = 2
 
 [node name="ContributionsLink" type="RichTextLabel" parent="MarginContainer/Layout/TranslationStats" unique_id=955950389]
+unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
 text = "	[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]How to contribute translations[/url][/b]"
@@ -124,6 +123,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="GoToButton" parent="MarginContainer/Layout/Buttons" unique_id=213679061 instance=ExtResource("2")]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(348, 80)
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.960784, 0.980392, 0.980392, 1)

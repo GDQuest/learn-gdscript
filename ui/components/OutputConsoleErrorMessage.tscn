@@ -3,20 +3,13 @@
 [ext_resource type="Script" uid="uid://vmi2orvhk0yw" path="res://ui/components/OutputConsoleErrorMessage.gd" id="2"]
 [ext_resource type="StyleBox" uid="uid://d0pcjb7n8kfxq" path="res://ui/theme/styles/panel_error_log.tres" id="4"]
 
-[node name="OutputConsoleErrorMessage" type="PanelContainer" unique_id=1485937269 node_paths=PackedStringArray("_severity_label", "_message_label", "_location_row", "_file_name_label", "_location_label", "_external_label", "_message_explain_button")]
+[node name="OutputConsoleErrorMessage" type="PanelContainer" unique_id=1485937269]
 self_modulate = Color(1, 1, 1, 0.25)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_styles/panel = ExtResource("4")
 script = ExtResource("2")
-_severity_label = NodePath("Layout/Content/MessageRow/MessageSeverity")
-_message_label = NodePath("Layout/Content/MessageRow/MessageValue")
-_location_row = NodePath("Layout/Content/LocationRow")
-_file_name_label = NodePath("Layout/Content/LocationRow/FileName")
-_location_label = NodePath("Layout/Content/LocationRow/CodeLocation")
-_external_label = NodePath("Layout/Content/ExternalError")
-_message_explain_button = NodePath("Layout/ExplainButton")
 
 [node name="Layout" type="HBoxContainer" parent="." unique_id=1377887588]
 layout_mode = 2
@@ -31,12 +24,14 @@ layout_mode = 2
 theme_override_constants/separation = 8
 
 [node name="MessageSeverity" type="Label" parent="Layout/Content/MessageRow" unique_id=864690275]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
 text = "INFO"
 
 [node name="MessageValue" type="Label" parent="Layout/Content/MessageRow" unique_id=389845082]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -45,6 +40,7 @@ theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
 autowrap_mode = 3
 
 [node name="LocationRow" type="HBoxContainer" parent="Layout/Content" unique_id=129616357]
+unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Click to highlight the relevant part of your code"
 mouse_default_cursor_shape = 2
@@ -56,6 +52,7 @@ theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
 text = "in"
 
 [node name="FileName" type="Label" parent="Layout/Content/LocationRow" unique_id=1568715347]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Label2" type="Label" parent="Layout/Content/LocationRow" unique_id=1624416861]
@@ -64,11 +61,13 @@ theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
 text = "at"
 
 [node name="CodeLocation" type="Label" parent="Layout/Content/LocationRow" unique_id=363249386]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "line 0, column -1"
 
 [node name="ExternalError" type="Label" parent="Layout/Content" unique_id=677992898]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 6
@@ -80,6 +79,7 @@ text = "Sometimes errors are reported outside of your code. Why does that happen
 autowrap_mode = 2
 
 [node name="ExplainButton" type="Button" parent="Layout" unique_id=986973243]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 0

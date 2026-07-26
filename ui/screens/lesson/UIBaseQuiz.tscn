@@ -9,26 +9,15 @@
 [ext_resource type="StyleBox" uid="uid://drhljwrco26nw" path="res://ui/theme/styles/button_outline_pressed.tres" id="9"]
 [ext_resource type="StyleBox" uid="uid://dqjefokkap50q" path="res://ui/theme/styles/button_outline_focus.tres" id="10"]
 
-[node name="UIBaseQuiz" type="PanelContainer" unique_id=555159795 node_paths=PackedStringArray("_outline", "_question", "_explanation", "_content", "_completed_before_icon", "_choice_container", "_result_container", "_submit_button", "_skip_button", "_result_label", "_correct_answer_label", "_help_message")]
+[node name="UIBaseQuiz" type="PanelContainer" unique_id=555159795]
 custom_minimum_size = Vector2(400, 0)
 offset_right = 400.0
 offset_bottom = 202.0
 theme_override_styles/panel = ExtResource("3")
 script = ExtResource("6")
-_outline = NodePath("Outline")
-_question = NodePath("ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader/Question")
-_explanation = NodePath("ClipContentBoundary/ResultContainer/ResultView/Explanation")
-_content = NodePath("ClipContentBoundary/ChoiceContainer/ChoiceView/Content")
-_completed_before_icon = NodePath("ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader/CompletedBeforeIcon")
-_choice_container = NodePath("ClipContentBoundary/ChoiceContainer")
-_result_container = NodePath("ClipContentBoundary/ResultContainer")
-_submit_button = NodePath("ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer/SubmitButton")
-_skip_button = NodePath("ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer/SkipButton")
-_result_label = NodePath("ClipContentBoundary/ResultContainer/ResultView/Label")
-_correct_answer_label = NodePath("ClipContentBoundary/ResultContainer/ResultView/CorrectAnswer")
-_help_message = NodePath("ClipContentBoundary/ChoiceContainer/ChoiceView/HelpMessage")
 
 [node name="Outline" type="PanelContainer" parent="." unique_id=1216537051]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
@@ -37,6 +26,7 @@ clip_contents = true
 layout_mode = 2
 
 [node name="ChoiceContainer" type="MarginContainer" parent="ClipContentBoundary" unique_id=1474703389]
+unique_name_in_owner = true
 clip_contents = true
 layout_mode = 0
 offset_right = 400.0
@@ -49,6 +39,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Question" type="RichTextLabel" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader" unique_id=2123687072]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -61,6 +52,7 @@ script = ExtResource("3_0px14")
 metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="CompletedBeforeIcon" type="TextureRect" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader" unique_id=1174371104]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.235294)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -71,6 +63,7 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="Content" type="RichTextLabel" parent="ClipContentBoundary/ChoiceContainer/ChoiceView" unique_id=1883120620]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -87,6 +80,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="SkipButton" type="Button" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer" unique_id=1660805853]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 tooltip_text = "You need to try to answer once before you can skip a quiz."
@@ -99,6 +93,7 @@ disabled = true
 text = "Skip"
 
 [node name="SubmitButton" type="Button" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/HBoxContainer" unique_id=684218590]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -109,6 +104,7 @@ theme_override_styles/focus = ExtResource("10")
 text = "Submit"
 
 [node name="HelpMessage" type="Label" parent="ClipContentBoundary/ChoiceContainer/ChoiceView" unique_id=262574087]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
@@ -116,6 +112,7 @@ theme_override_colors/font_color = Color(0.14902, 0.776471, 0.968627, 1)
 autowrap_mode = 3
 
 [node name="ResultContainer" type="MarginContainer" parent="ClipContentBoundary" unique_id=79260002]
+unique_name_in_owner = true
 visible = false
 modulate = Color(1, 1, 1, 0)
 clip_contents = true
@@ -127,6 +124,7 @@ offset_bottom = 111.0
 layout_mode = 2
 
 [node name="Label" type="Label" parent="ClipContentBoundary/ResultContainer/ResultView" unique_id=1147822428]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme_type_variation = &"LabelSmallTitle"
@@ -135,6 +133,7 @@ text = "You're right!"
 autowrap_mode = 3
 
 [node name="CorrectAnswer" type="Label" parent="ClipContentBoundary/ResultContainer/ResultView" unique_id=1113016439]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
@@ -144,6 +143,7 @@ text = "Answers here"
 autowrap_mode = 3
 
 [node name="Explanation" type="RichTextLabel" parent="ClipContentBoundary/ResultContainer/ResultView" unique_id=601495328]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true

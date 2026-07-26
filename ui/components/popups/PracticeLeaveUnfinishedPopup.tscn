@@ -9,20 +9,16 @@
 [ext_resource type="StyleBox" uid="uid://dkeg6cbxbpnqe" path="res://ui/theme/styles/button_outline_large_hover.tres" id="8"]
 [ext_resource type="StyleBox" uid="uid://pn25sx7oc0ja" path="res://ui/theme/styles/button_outline_large_strict.tres" id="9"]
 
-[node name="PracticeLeaveUnfinishedPopup" type="ColorRect" unique_id=2078082801 node_paths=PackedStringArray("_root_container", "_title_label", "_message_content", "_confirm_button", "_cancel_button")]
+[node name="PracticeLeaveUnfinishedPopup" type="ColorRect" unique_id=2078082801]
 top_level = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.0352941, 0.0392157, 0.129412, 0.627451)
 script = ExtResource("1")
-_root_container = NodePath("PanelContainer")
-_title_label = NodePath("PanelContainer/Column/Margin/Column/Title")
-_message_content = NodePath("PanelContainer/Column/Margin/Column/Message")
-_confirm_button = NodePath("PanelContainer/Column/Margin/Column/Buttons/ConfirmButton")
-_cancel_button = NodePath("PanelContainer/Column/Margin/Column/Buttons/CancelButton")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1492168215]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 120)
 layout_mode = 0
 anchor_left = 0.5
@@ -57,6 +53,7 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column" unique_id=681406051]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"LabelTitle"
 horizontal_alignment = 1
@@ -67,6 +64,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="Message" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=1310973528]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -83,6 +81,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="ConfirmButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons" unique_id=1858266981]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 68)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -96,6 +95,7 @@ theme_override_styles/focus = ExtResource("6")
 text = "Confirm"
 
 [node name="CancelButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons" unique_id=1707543649]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 68)
 layout_mode = 2
 size_flags_horizontal = 4

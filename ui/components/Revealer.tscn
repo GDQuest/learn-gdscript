@@ -18,7 +18,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="2"]
 
-[node name="Revealer" type="Container" unique_id=1296495712 node_paths=PackedStringArray("_toggle_bar", "_toggle_button", "_toggle_label", "_toggle_icon_anchor", "_toggle_icon")]
+[node name="Revealer" type="Container" unique_id=1296495712]
 clip_contents = true
 offset_right = 136.0
 offset_bottom = 46.0
@@ -27,13 +27,9 @@ script = ExtResource("2")
 title_font = ExtResource("3")
 title_panel = ExtResource("5")
 content_panel = ExtResource("4")
-_toggle_bar = NodePath("ToggleBar")
-_toggle_button = NodePath("ToggleBar/ToggleCapturer")
-_toggle_label = NodePath("ToggleBar/BarLayout/Label")
-_toggle_icon_anchor = NodePath("ToggleBar/BarLayout/ToggleIcon")
-_toggle_icon = NodePath("ToggleBar/BarLayout/ToggleIcon/Texture2D")
 
 [node name="ToggleBar" type="PanelContainer" parent="." unique_id=1231853961]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.65)
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
@@ -41,6 +37,7 @@ size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("1")
 
 [node name="ToggleCapturer" type="Button" parent="ToggleBar" unique_id=236168025]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -58,6 +55,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="ToggleBar/BarLayout" unique_id=1830495365]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelSmallTitle"
@@ -67,12 +65,14 @@ text = "Expand"
 vertical_alignment = 1
 
 [node name="ToggleIcon" type="Control" parent="ToggleBar/BarLayout" unique_id=31201200]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(22, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 
 [node name="Texture2D" type="TextureRect" parent="ToggleBar/BarLayout/ToggleIcon" unique_id=270968484]
+unique_name_in_owner = true
 layout_mode = 0
 anchor_left = 1.0
 anchor_right = 1.0

@@ -7,8 +7,8 @@ const TWEEN_DURATION := 0.2
 
 @export var font_resource: Resource
 @export var font_size: int
-@export var _mouse_blocker: Control
-@export var _label: Label
+@onready var _mouse_blocker: Control = %MouseBlocker
+@onready var _label: Label = %Label
 
 var highlight_rect := Rect2():
 	set = set_highlight_rect

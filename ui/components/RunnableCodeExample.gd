@@ -14,13 +14,13 @@ const ERROR_NO_RUN_FUNCTION := "Scene %s doesn't have a run() function. The Run 
 const ERROR_MULTIPLE_RUN_FUNCTION := "Scene %s has both run() and run_coroutine() functions. It must only have one. The Run button won't work."
 const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/styles/hslider_grabber_highlight.tres")
 
-@export var _gdscript_text_edit: CodeEdit
-@export var _run_button: Button
-@export var _step_button: Button
-@export var _reset_button: Button
-@export var _frame_container: Control
-@export var _sliders: VBoxContainer
-@export var _buttons_container: HBoxContainer
+@onready var _gdscript_text_edit: CodeEdit = %GDScriptCode
+@onready var _run_button: Button = %RunButton
+@onready var _step_button: Button = %StepButton
+@onready var _reset_button: Button = %ResetButton
+@onready var _frame_container: Control = %FramePanel
+@onready var _sliders: VBoxContainer = %Sliders
+@onready var _buttons_container: HBoxContainer = %ButtonsContainer
 
 @export var scene: PackedScene:
 	set = set_scene

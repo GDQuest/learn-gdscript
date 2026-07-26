@@ -1,6 +1,6 @@
 extends Control
 
-@export var _rich_text_label: RichTextLabel
+@onready var _rich_text_label: RichTextLabel = %RichTextLabel
 
 
 func _ready():

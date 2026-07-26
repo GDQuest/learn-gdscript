@@ -2,8 +2,8 @@
 class_name GameView
 extends Control
 
-@export var _viewport_container: SubViewportContainer
-@export var _pause_rect: ColorRect
+@onready var _viewport_container: SubViewportContainer = %SubViewportContainer
+@onready var _pause_rect: ColorRect = %PauseRect
 
 var paused := false:
 	set = set_paused

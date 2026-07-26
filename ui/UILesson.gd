@@ -20,14 +20,6 @@ const HEADER_FONT := "res://ui/theme/fonts/font_lesson_heading.tres"
 const COLOR_NOTE := Color(0.14902, 0.776471, 0.968627)
 
 @export var test_lesson: String
-@export var _scroll_container: ScrollContainer
-@export var _title: Label
-@export var _content_blocks: VBoxContainer
-@export var _content_container: VBoxContainer
-@export var _practices_visibility_container: VBoxContainer
-@export var _practices_container: VBoxContainer
-@export var _debounce_timer: Timer
-@export var _glossary_popup: GlossaryPopup
 
 signal lesson_displayed
 
@@ -53,6 +45,14 @@ var _build_commands := {
 
 var _base_text_font_size: int = preload("res://ui/theme/fonts/font_text.tres").base_font.msdf_size
 
+@onready var _scroll_container: ScrollContainer = %ScrollContainer
+@onready var _title: Label = %Title
+@onready var _content_blocks: VBoxContainer = %ContentBlocks
+@onready var _content_container: VBoxContainer = %Content
+@onready var _practices_visibility_container: VBoxContainer = %PracticesContainer
+@onready var _practices_container: VBoxContainer = %Practices
+@onready var _debounce_timer: Timer = %DebounceTimer
+@onready var _glossary_popup: GlossaryPopup = %GlossaryPopup
 @onready var _start_content_width := _content_container.size.x
 
 
@@ -150,9 +150,10 @@ func _build_and_display_content(lesson: BBCodeParser.ParseNode, lesson_number: i
 		var practice := BBCodeUtils.get_lesson_practice(lesson, i)
 		var practice_id := BBCodeUtils.get_practice_id(practice)
 		var button: UIPracticeButton = PracticeButtonScene.instantiate()
+		_practices_container.add_child(button)
 		button.setup(practice, i, lesson_number)
 		if i == 0:
-			button.visibility_notifier.screen_entered.connect(_on_practice_first_visible)
+			button.screen_entered.connect(_on_practice_first_visible)
 		if _course_index:
 			button.completed_before = user_profile.is_lesson_practice_completed(
 				_course_index.get_course_id(),
@@ -162,7 +163,6 @@ func _build_and_display_content(lesson: BBCodeParser.ParseNode, lesson_number: i
 			if not highlighted_next and not button.completed_before:
 				highlighted_next = true
 				button.is_highlighted = true
-		_practices_container.add_child(button)
 	_practices_visibility_container.hide()
 
 	_quizz_count = BBCodeUtils.get_lesson_quiz_count(lesson)

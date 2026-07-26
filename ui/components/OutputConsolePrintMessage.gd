@@ -3,7 +3,7 @@ extends PanelContainer
 var values := []:
 	set = set_values
 
-@export var _label: Label
+@onready var _label: Label = %Label
 
 
 func _ready() -> void:

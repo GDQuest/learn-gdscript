@@ -2,7 +2,7 @@ extends Panel
 
 const TEXTURE_PROCESSING := preload("res://ui/assets/robot_tutor_running_code.svg")
 
-@export var _texture_rect: TextureRect
+@onready var _texture_rect: TextureRect = %TextureRect
 
 
 func _ready() -> void:

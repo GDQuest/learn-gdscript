@@ -4,12 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://bpyulvocwwwiw" path="res://ui/assets/robot_tutor_running_code.svg" id="4"]
 [ext_resource type="Script" uid="uid://ci0h8jnoh0s5s" path="res://ui/components/LockedOverlay.gd" id="5"]
 
-[node name="LockedOverlay" type="Panel" unique_id=1460602262 node_paths=PackedStringArray("_texture_rect")]
+[node name="LockedOverlay" type="Panel" unique_id=1460602262]
 offset_right = 1920.0
 offset_bottom = 867.0
 theme_override_styles/panel = ExtResource("1")
 script = ExtResource("5")
-_texture_rect = NodePath("Layout/TextureRect")
 
 [node name="Layout" type="VBoxContainer" parent="." unique_id=735753240]
 layout_mode = 0
@@ -19,6 +18,7 @@ theme_override_constants/separation = 32
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Layout" unique_id=1145033910]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 4

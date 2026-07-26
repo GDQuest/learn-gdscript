@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://et4q3ev8neq6" path="res://ui/assets/fonts/Inter-Medium.ttf" id="3_dhs8o"]
 [ext_resource type="FontVariation" uid="uid://cipfqcm3yp0sc" path="res://ui/theme/fonts/font_text_bold.tres" id="4_ro7x8"]
 
-[node name="GDQuestCreditsLabel" type="Control" unique_id=1102432848 node_paths=PackedStringArray("_rich_text_label")]
+[node name="GDQuestCreditsLabel" type="Control" unique_id=1102432848]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -18,9 +18,9 @@ grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 script = ExtResource("2")
-_rich_text_label = NodePath("s")
 
-[node name="s" type="RichTextLabel" parent="." unique_id=118887380]
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=118887380]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(410, 20)
 layout_mode = 0
 anchor_left = 1.0

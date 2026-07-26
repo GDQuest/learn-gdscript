@@ -421,7 +421,7 @@ _data = {
 &"appear": SubResource("3")
 }
 
-[node name="WelcomeScreen" type="Control" unique_id=1937235772 node_paths=PackedStringArray("_settings_button", "_outliner_button", "_start_button", "_quit_button", "_title_link_label", "_anim_player", "_robot", "_gdquest_boy")]
+[node name="WelcomeScreen" type="Control" unique_id=1937235772]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -430,14 +430,6 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(811, 264)
 script = ExtResource("8")
-_settings_button = NodePath("GDQuestBoy/Margin/Buttons/SettingsButton")
-_outliner_button = NodePath("GDQuestBoy/Margin/Buttons/OutlinerButton")
-_start_button = NodePath("GDQuestBoy/Margin/Buttons/StartButton")
-_quit_button = NodePath("GDQuestBoy/Margin/Buttons/QuitButton")
-_title_link_label = NodePath("TitleBackground/Title/TitleLinkLabel")
-_anim_player = NodePath("AnimationPlayer")
-_robot = NodePath("Robot")
-_gdquest_boy = NodePath("GDQuestBoy")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=174110992]
 layout_mode = 0
@@ -572,6 +564,7 @@ size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="Robot" type="Node2D" parent="." unique_id=1840976212 node_paths=PackedStringArray("_anim_player")]
+unique_name_in_owner = true
 visible = false
 z_index = 1
 position = Vector2(1120, 711)
@@ -606,6 +599,7 @@ offset = Vector2(24.1958, 2.15936)
 libraries/ = SubResource("AnimationLibrary_byl2v")
 
 [node name="GDQuestBoy" type="PanelContainer" parent="." unique_id=331741243]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 anchor_left = 0.5
@@ -633,6 +627,7 @@ theme_override_constants/separation = 8
 alignment = 1
 
 [node name="StartButton" type="Button" parent="GDQuestBoy/Margin/Buttons" unique_id=847211664]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -647,6 +642,7 @@ text = "START"
 expand_icon = true
 
 [node name="OutlinerButton" type="Button" parent="GDQuestBoy/Margin/Buttons" unique_id=921376831]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -660,6 +656,7 @@ disabled = true
 text = "SELECT LESSON"
 
 [node name="SettingsButton" type="Button" parent="GDQuestBoy/Margin/Buttons" unique_id=461617742]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -673,6 +670,7 @@ disabled = true
 text = "OPTIONS"
 
 [node name="LanguageButton" type="OptionButton" parent="GDQuestBoy/Margin/Buttons" unique_id=1909110984]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
@@ -687,6 +685,7 @@ theme_override_styles/focus = ExtResource("9")
 script = SubResource("1")
 
 [node name="QuitButton" type="Button" parent="GDQuestBoy/Margin/Buttons" unique_id=719360184]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -809,6 +808,7 @@ position = Vector2(882.5, 243)
 texture = ExtResource("20")
 
 [node name="TitleLinkLabel" type="RichTextLabel" parent="TitleBackground/Title" unique_id=1074744435]
+unique_name_in_owner = true
 layout_mode = 1
 offset_left = 25.0
 offset_top = 233.0
@@ -832,4 +832,5 @@ offset_right = -16.0
 offset_bottom = 63.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=612120216]
+unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_clqc5")

@@ -5,15 +5,15 @@ const VALUE_CHECK_PASSED := preload("res://ui/assets/icons/checkmark_valid.svg")
 const VALUE_COLOR_NONE := Color(0.290196, 0.294118, 0.388235)
 const VALUE_COLOR_PASSED := Color(0.239216, 1, 0.431373)
 
-@export var _title_label: Label
-@export var _reading_stats_icon: TextureRect
-@export var _quiz_stats_block: Control
-@export var _quiz_stats_value: Label
-@export var _practice_stats_value: Label
-@export var _goto_lesson_button: Button
-@export var _translation_stats_block: Control
-@export var _translation_stats_value: Label
-@export var _contributions_link: RichTextLabel
+@onready var _title_label: Label = %TitleLabel
+@onready var _reading_stats_icon: TextureRect = %ValueIcon
+@onready var _quiz_stats_block: Control = %QuizStats
+@onready var _quiz_stats_value: Label = %QuizValueLabel
+@onready var _practice_stats_value: Label = %PracticeValueLabel
+@onready var _goto_lesson_button: Button = %GoToButton
+@onready var _translation_stats_block: Control = %TranslationStats
+@onready var _translation_stats_value: Label = %TranslationValueLabel
+@onready var _contributions_link: RichTextLabel = %ContributionsLink
 
 var course_index: CourseIndex:
 	set = set_course_index

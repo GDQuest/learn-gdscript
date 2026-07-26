@@ -9,7 +9,7 @@ const PROGRESS_DURATION := 0.75
 
 enum State { IDLE, LOADING, FADING_IN, FADING_OUT }
 
-@export var _progress_bar: ProgressBar
+@onready var _progress_bar: ProgressBar = %ProgressBar
 
 var progress_value := 0.0:
 	set = set_progress_value

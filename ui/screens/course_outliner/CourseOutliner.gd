@@ -3,11 +3,11 @@ extends PanelContainer
 const CourseLessonList := preload("res://ui/screens/course_outliner/CourseLessonList.gd")
 const LessonDetails := preload("./CourseLessonDetails.gd")
 
-@export var _title_label: Label
-@export var _lesson_list: CourseLessonList
-@export var _lesson_details: LessonDetails
-@export var _reset_button: Button
-@export var _reset_confirm_popup: ConfirmPopup
+@onready var _title_label: Label = %TitleLabel
+@onready var _lesson_list: CourseLessonList = %LessonList
+@onready var _lesson_details: LessonDetails = %LessonDetails
+@onready var _reset_button: Button = %ResetButton
+@onready var _reset_confirm_popup: ConfirmPopup = %ConfirmResetPopup
 
 var course_index: CourseIndex:
 	set = set_course

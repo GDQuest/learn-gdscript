@@ -11,32 +11,27 @@
 [ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="10_y8wym"]
 [ext_resource type="Texture2D" uid="uid://b086kmokcu8qu" path="res://ui/assets/examples_background.svg" id="11"]
 
-[node name="RunnableCodeExample" type="HBoxContainer" unique_id=1350260712 node_paths=PackedStringArray("_gdscript_text_edit", "_run_button", "_step_button", "_reset_button", "_frame_container", "_sliders", "_buttons_container")]
+[node name="RunnableCodeExample" type="HBoxContainer" unique_id=1350260712]
 offset_right = 1030.0
 offset_bottom = 278.0
 size_flags_horizontal = 3
 script = ExtResource("2")
-_gdscript_text_edit = NodePath("GDScriptCode")
-_run_button = NodePath("Frame/HBoxContainer/RunButton")
-_step_button = NodePath("Frame/HBoxContainer/StepButton")
-_reset_button = NodePath("Frame/HBoxContainer/ResetButton")
-_frame_container = NodePath("Frame/PanelContainer")
-_sliders = NodePath("Frame/Sliders")
-_buttons_container = NodePath("Frame/HBoxContainer")
 
 [node name="Frame" type="Control" parent="." unique_id=1694077977]
+unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(240, 220)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="Frame" unique_id=209141511]
+[node name="FramePanel" type="PanelContainer" parent="Frame" unique_id=209141511]
+unique_name_in_owner = true
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_styles/panel = ExtResource("5")
 
-[node name="TextureRect" type="TextureRect" parent="Frame/PanelContainer" unique_id=1998497125]
+[node name="TextureRect" type="TextureRect" parent="Frame/FramePanel" unique_id=1998497125]
 show_behind_parent = true
 layout_mode = 2
 texture = ExtResource("11")
@@ -44,13 +39,15 @@ expand_mode = 1
 stretch_mode = 1
 
 [node name="Sliders" type="VBoxContainer" parent="Frame" unique_id=133529752]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 50.0
 offset_bottom = 50.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Frame" unique_id=1323725507]
+[node name="ButtonsContainer" type="HBoxContainer" parent="Frame" unique_id=1323725507]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 40)
 layout_mode = 0
 anchor_left = 1.0
@@ -68,7 +65,8 @@ mouse_filter = 0
 theme_override_constants/separation = 8
 alignment = 2
 
-[node name="ResetButton" type="Button" parent="Frame/HBoxContainer" unique_id=1494799076]
+[node name="ResetButton" type="Button" parent="Frame/ButtonsContainer" unique_id=1494799076]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -80,7 +78,8 @@ theme_override_styles/hover = ExtResource("7")
 theme_override_styles/focus = ExtResource("10")
 text = "Reset"
 
-[node name="RunButton" type="Button" parent="Frame/HBoxContainer" unique_id=1248061364]
+[node name="RunButton" type="Button" parent="Frame/ButtonsContainer" unique_id=1248061364]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -91,7 +90,8 @@ theme_override_styles/hover = ExtResource("7")
 theme_override_styles/focus = ExtResource("10")
 text = "run()"
 
-[node name="StepButton" type="Button" parent="Frame/HBoxContainer" unique_id=864588792]
+[node name="StepButton" type="Button" parent="Frame/ButtonsContainer" unique_id=864588792]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -103,6 +103,7 @@ theme_override_styles/focus = ExtResource("10")
 text = "step"
 
 [node name="GDScriptCode" type="CodeEdit" parent="." unique_id=175998401]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(400, 260)
 layout_mode = 2

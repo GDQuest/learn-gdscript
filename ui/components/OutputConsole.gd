@@ -13,11 +13,11 @@ const OutputConsolePrintMessageScene := preload("./OutputConsolePrintMessage.tsc
 
 var _slice_properties: ScriptSlice = null
 
-@export var _scroll_container: ScrollContainer
-@export var _message_list: Control
-@export var _error_popup: Control
-@export var _error_overlay_popup: ErrorOverlayPopup
-@export var _external_error_popup: Control
+@onready var _scroll_container: ScrollContainer = %ScrollContainer
+@onready var _message_list: Control = %MessageList
+@onready var _error_popup: Control = %ErrorPopup
+@onready var _error_overlay_popup: ErrorOverlayPopup = %ErrorOverlayPopup
+@onready var _external_error_popup: Control = %ExternalErrorPopup
 
 
 func _ready() -> void:

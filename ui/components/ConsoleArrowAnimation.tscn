@@ -3,13 +3,13 @@
 [ext_resource type="Script" uid="uid://dh08bgnia0xu1" path="res://ui/components/ConsoleArrowAnimation.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dyb1ekfp11ff3" path="res://ui/assets/icons/chevron.png" id="2"]
 
-[node name="ConsoleArrowAnimation" type="Node2D" unique_id=118073595 node_paths=PackedStringArray("_arrow")]
+[node name="ConsoleArrowAnimation" type="Node2D" unique_id=118073595]
 script = ExtResource("1")
 initial_point = Vector2(400, 200)
 end_point = Vector2(200, 200)
-_arrow = NodePath("Arrow")
 
 [node name="Arrow" type="Sprite2D" parent="." unique_id=767241645]
+unique_name_in_owner = true
 visible = false
 modulate = Color(1, 0.960784, 0.25098, 1)
 position = Vector2(2, 2)

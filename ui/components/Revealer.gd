@@ -32,11 +32,11 @@ signal expanded
 @export var content_separation: int = 2:
 	set = set_content_separation
 
-@export var _toggle_bar: PanelContainer
-@export var _toggle_button: Button
-@export var _toggle_label: Label
-@export var _toggle_icon_anchor: Control
-@export var _toggle_icon: TextureRect
+@onready var _toggle_bar: PanelContainer = %ToggleBar
+@onready var _toggle_button: Button = %ToggleCapturer
+@onready var _toggle_label: Label = %Label
+@onready var _toggle_icon_anchor: Control = %ToggleIcon
+@onready var _toggle_icon: TextureRect = %Texture2D
 
 var _content_children := []
 var _percent_revealed := 0.0

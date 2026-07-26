@@ -26,22 +26,6 @@ static var REGEX_TOP_ANNOTATION := RegEx.create_from_string(r"\s*@")
 
 @export var lesson_test_practice: String
 @export_range(0, 1, 1, "or_greater") var test_practice: int
-@export var _layout_container: Control
-@export var _game_container: Container
-@export var _game_view: GameView
-@export var _output_console: OutputConsole
-@export var _output_anchors: Control
-@export var _solution_panel: Control
-@export var _use_solution_button: Button
-@export var _info_panel_anchors: Control
-@export var _info_panel: PracticeInfoPanel
-@export var _hints_container: Revealer
-@export var _practice_list: PracticeListPopup
-@export var _practice_done_popup: PracticeDonePopup
-@export var _practice_leave_unfinished_popup: PracticeLeaveUnfinishedPopup
-@export var _code_editor: CodeEditor
-@export var _solution_editor: SliceEditor
-
 var _practice: BBCodeParser.ParseNode
 var _practice_completed := false
 var _practice_solution_used := false
@@ -73,6 +57,22 @@ var _current_scene: Node
 var _current_scene_reset_values := { &"visible": null, &"transform": null }
 
 var _scene_tween: Tween
+
+@onready var _layout_container: HBoxContainer = %LayoutContainer
+@onready var _game_container: Container = %GameContainer
+@onready var _game_view: GameView = %GameView
+@onready var _output_console: OutputConsole = %Console
+@onready var _output_anchors: Control = %OutputAnchors
+@onready var _solution_panel: Control = %SolutionContainer
+@onready var _use_solution_button: Button = %UseSolutionButton
+@onready var _info_panel_anchors: Control = %InfoPanelAnchors
+@onready var _info_panel: PracticeInfoPanel = %PracticeInfoPanel
+@onready var _hints_container: Revealer = _info_panel.hints_container
+@onready var _practice_list: PracticeListPopup = %PracticeListPopup
+@onready var _practice_done_popup: PracticeDonePopup = %PracticeDonePopup
+@onready var _practice_leave_unfinished_popup: PracticeLeaveUnfinishedPopup = %PracticeLeaveUnfinishedPopup
+@onready var _code_editor: CodeEditor = %CodeEditor
+@onready var _solution_editor: SliceEditor = %SolutionEditor
 
 
 func _init():

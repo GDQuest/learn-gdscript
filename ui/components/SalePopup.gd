@@ -17,10 +17,10 @@ const REGEX_PATTERN_DATETIME := "(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})
 var _end_datetime := { year = 2022, month = 12, day = 1, hour = 0, minute = 0 }
 var _datetime_regex := RegEx.new()
 
-@export var title_label: Label
-@export var time_left_label: Label
-@export var go_button: Button
-@export var close_button: Button
+@onready var title_label: Label = %Title
+@onready var time_left_label: Label = %TimeLeftLabel
+@onready var go_button: Button = %GoButton
+@onready var close_button: Button = %CloseButton
 
 
 func _ready() -> void:

@@ -12,18 +12,6 @@ const SalePopup := preload("./components/SalePopup.gd")
 const SCREEN_TRANSITION_DURATION := 0.75
 const OUTLINER_TRANSITION_DURATION := 0.5
 
-@export var _home_button: Button
-@export var _outliner_button: Button
-@export var _back_button: Button
-@export var _breadcrumbs: BreadCrumbs
-@export var _settings_button: Button
-@export var _report_button: Button
-@export var _screen_container: Container
-@export var _course_outliner: CourseOutliner
-@export var _lesson_done_popup: LessonDonePopup
-@export var _sale_button: Button
-@export var _sale_popup: SalePopup
-
 var course_index: CourseIndex
 
 # If `true`, play transition animations.
@@ -36,6 +24,18 @@ var _screens_stack := []
 var _lesson_index := 0
 var _lesson_count: int = 0
 var _scene_tween: Tween
+
+@onready var _home_button: Button = %HomeButton
+@onready var _outliner_button: Button = %OutlinerButton
+@onready var _back_button: Button = %BackButton
+@onready var _breadcrumbs: BreadCrumbs = %BreadCrumbs
+@onready var _settings_button: Button = %SettingsButton
+@onready var _report_button: Button = %ReportButton
+@onready var _screen_container: Container = %ScreenContainer
+@onready var _course_outliner: CourseOutliner = %CourseOutliner
+@onready var _lesson_done_popup: LessonDonePopup = %LessonDonePopup
+@onready var _sale_button: Button = %SaleButton
+@onready var _sale_popup: SalePopup = %SalePopup
 
 
 func _ready() -> void:
@@ -106,6 +106,10 @@ func _navigate_back() -> void:
 	if _scene_tween and _scene_tween.is_running():
 		return
 
+	# A screen can be freed while another transition or a language change is
+	# rebuilding the current page. Do not keep invalid instances in history.
+	_screens_stack = _screens_stack.filter(func(screen: Node) -> bool: return is_instance_valid(screen))
+
 	# Nothing to go back to, open the outliner.
 	if _screens_stack.size() < 2:
 		_navigate_to_outliner()
@@ -122,7 +126,8 @@ func _navigate_back() -> void:
 
 	_transition_to(next_screen, current_screen, false)
 	await self.transition_completed
-	current_screen.queue_free()
+	if is_instance_valid(current_screen):
+		current_screen.queue_free()
 
 
 # Opens the course outliner and flushes the screen stack.
@@ -359,9 +364,6 @@ func _clear_history_stack() -> void:
 	for child_node in _screen_container.get_children():
 		_screen_container.remove_child(child_node)
 		child_node.queue_free()
-	# Screens may be unloaded, so queue them for deletion from the stack as well.
-	for screen: Node in _screens_stack:
-		screen.queue_free()
 	_screens_stack.clear()
 
 	_breadcrumbs.update_breadcrumbs(course_index, null)

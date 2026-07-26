@@ -9,21 +9,21 @@ const FRAMERATE_MAP := {
 	Framerates.NO_LIMIT: 0,
 }
 
-@export var _panel: PanelContainer
-@export var _color_rect: ColorRect
-@export var _translation_info_button: Button
-@export var _translation_info_popup: CanvasLayer
-@export var _language_value: OptionButton
-@export var _incomplete_tr_access: CheckBox
-@export var _font_size_value: HSlider
-@export var _font_size_sample: Label
-@export var _scroll_sensitivity_slider: HSlider
-@export var _framerate_settings_section: Control
-@export var _framerate_option: OptionButton
-@export var _lower_contrast: CheckBox
-@export var _dyslexia_font: CheckBox
-@export var _apply_button: Button
-@export var _cancel_button: Button
+@onready var _panel: PanelContainer = %PanelContainer
+@onready var _color_rect: ColorRect = %ColorRect
+@onready var _translation_info_button: Button = %TranslationInfoButton
+@onready var _translation_info_popup: CanvasLayer = %TranslationInfoPopup
+@onready var _language_value: OptionButton = %LanguageValue
+@onready var _incomplete_tr_access: CheckBox = %IncompleteTRAccessValue
+@onready var _font_size_value: HSlider = %FontSizeValue
+@onready var _font_size_sample: Label = %SampleText
+@onready var _scroll_sensitivity_slider: HSlider = %ScrollSensitivityValue
+@onready var _framerate_settings_section: Control = %FramerateSetting
+@onready var _framerate_option: OptionButton = %FramerateValue
+@onready var _lower_contrast: CheckBox = %LowerContrastCheckBox
+@onready var _dyslexia_font: CheckBox = %DyslexiaFontCheckBox
+@onready var _apply_button: Button = %ApplyButton
+@onready var _cancel_button: Button = %CancelButton
 
 var _sample_default_font: FontVariation
 

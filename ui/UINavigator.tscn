@@ -17,23 +17,12 @@
 
 [sub_resource type="StyleBoxEmpty" id="1"]
 
-[node name="UINavigator" type="PanelContainer" unique_id=1195579484 node_paths=PackedStringArray("_home_button", "_outliner_button", "_back_button", "_breadcrumbs", "_settings_button", "_report_button", "_screen_container", "_course_outliner", "_lesson_done_popup", "_sale_button", "_sale_popup")]
+[node name="UINavigator" type="PanelContainer" unique_id=1195579484]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource("4")
-_home_button = NodePath("Layout/Header/MarginContainer/HeaderContent/HomeButton")
-_outliner_button = NodePath("Layout/Header/MarginContainer/HeaderContent/OutlinerButton")
-_back_button = NodePath("Layout/Header/MarginContainer/HeaderContent/BackButton")
-_breadcrumbs = NodePath("Layout/Header/MarginContainer/HeaderContent/BreadCrumbs")
-_settings_button = NodePath("Layout/Header/MarginContainer/HeaderContent/SettingsButton")
-_report_button = NodePath("Layout/Header/MarginContainer/HeaderContent/ReportButton")
-_screen_container = NodePath("Layout/Content/ScreenContainer")
-_course_outliner = NodePath("Layout/Content/CourseOutliner")
-_lesson_done_popup = NodePath("LessonDonePopup")
-_sale_button = NodePath("Layout/Header/MarginContainer/HeaderContent/SaleButton")
-_sale_popup = NodePath("SalePopup")
 
 [node name="Layout" type="VBoxContainer" parent="." unique_id=589902555]
 layout_mode = 2
@@ -59,6 +48,7 @@ theme_override_constants/margin_bottom = 0
 layout_mode = 2
 
 [node name="HomeButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=432730034]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 tooltip_text = "Go back to the main menu"
@@ -67,6 +57,7 @@ icon = ExtResource("10")
 flat = true
 
 [node name="OutlinerButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=852144902]
+unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Open the course index"
 mouse_default_cursor_shape = 2
@@ -74,6 +65,7 @@ icon = ExtResource("9")
 flat = true
 
 [node name="BackButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=375237761]
+unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Go back in your navigation history"
 mouse_default_cursor_shape = 2
@@ -81,6 +73,7 @@ icon = ExtResource("8")
 flat = true
 
 [node name="BreadCrumbs" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=2073787700 instance=ExtResource("2")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Spacer" type="Control" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=1941836464]
@@ -88,6 +81,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="SaleButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=2134541165]
+unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Go back in your navigation history"
 mouse_default_cursor_shape = 2
@@ -99,6 +93,7 @@ text = "CHRISTMAS SALE - 50% OFF"
 flat = true
 
 [node name="ReportButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=404748892]
+unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Report an issue"
 mouse_default_cursor_shape = 2
@@ -106,6 +101,7 @@ icon = ExtResource("6")
 flat = true
 
 [node name="SettingsButton" type="Button" parent="Layout/Header/MarginContainer/HeaderContent" unique_id=1978516027]
+unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Configure the app"
 mouse_default_cursor_shape = 2
@@ -125,6 +121,7 @@ size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="ScreenContainer" type="PanelContainer" parent="Layout/Content" unique_id=291767987]
+unique_name_in_owner = true
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -137,14 +134,17 @@ size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="CourseOutliner" parent="Layout/Content" unique_id=32806929 instance=ExtResource("7")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
 [node name="LessonDonePopup" parent="." unique_id=27419743 instance=ExtResource("12")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
 [node name="SalePopup" parent="." unique_id=1162155395 instance=ExtResource("14")]
+unique_name_in_owner = true
 layout_mode = 2
 title = "CHRISTMAS SALE"
 only_until_string = "the end of the year"

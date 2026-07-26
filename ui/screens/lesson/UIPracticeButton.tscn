@@ -10,19 +10,12 @@
 [ext_resource type="StyleBox" uid="uid://dxgho6gnstasf" path="res://ui/theme/styles/pill.tres" id="11"]
 [ext_resource type="StyleBox" uid="uid://b45mlqutqarjn" path="res://ui/theme/styles/button_outline_large_normal.tres" id="12"]
 
-[node name="UIPracticeButton" type="PanelContainer" unique_id=789411901 node_paths=PackedStringArray("visibility_notifier", "_title_label", "_next_pill_label", "_description_label", "_completed_before_icon", "_navigate_button", "_no_navigation_label")]
+[node name="UIPracticeButton" type="PanelContainer" unique_id=789411901]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 110.0
 theme_override_styles/panel = ExtResource("3")
 script = ExtResource("5")
-visibility_notifier = NodePath("Margin/Row/NavigateButton/VisibleOnScreenEnabler2D")
-_title_label = NodePath("Margin/Row/Column/Row/Title")
-_next_pill_label = NodePath("Margin/Row/Column/Row/NextPill")
-_description_label = NodePath("Margin/Row/Column/Description")
-_completed_before_icon = NodePath("Margin/Row/Column/Row/CompletedBeforeIcon")
-_navigate_button = NodePath("Margin/Row/NavigateButton")
-_no_navigation_label = NodePath("Margin/Row/NoNavigationLabel")
 
 [node name="Margin" type="MarginContainer" parent="." unique_id=449692410]
 layout_mode = 2
@@ -41,11 +34,13 @@ layout_mode = 2
 theme_override_constants/separation = 8
 
 [node name="Title" type="Label" parent="Margin/Row/Column/Row" unique_id=1874089432]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"LabelSmallTitle"
 text = "Practice title"
 
 [node name="CompletedBeforeIcon" type="TextureRect" parent="Margin/Row/Column/Row" unique_id=69542882]
+unique_name_in_owner = true
 visible = false
 modulate = Color(0.239216, 1, 0.431373, 1)
 custom_minimum_size = Vector2(24, 24)
@@ -57,6 +52,7 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="NextPill" type="Label" parent="Margin/Row/Column/Row" unique_id=1152479974]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_type_variation = &"LabelSmallButton"
@@ -64,6 +60,7 @@ theme_override_styles/normal = ExtResource("11")
 text = "next"
 
 [node name="Description" type="RichTextLabel" parent="Margin/Row/Column" unique_id=1441316266]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
@@ -72,6 +69,7 @@ script = ExtResource("5_jcm7q")
 metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="NavigateButton" type="Button" parent="Margin/Row" unique_id=1579305854]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 60)
 layout_mode = 2
 size_flags_vertical = 4
@@ -84,10 +82,12 @@ theme_override_styles/focus = ExtResource("7")
 text = "Practice"
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Margin/Row/NavigateButton" unique_id=402497671]
+unique_name_in_owner = true
 rect = Rect2(0, 0, 180, 60)
 enable_node_path = NodePath("../../../..")
 
 [node name="NoNavigationLabel" type="Label" parent="Margin/Row" unique_id=700834557]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_type_variation = &"LabelSmallButton"

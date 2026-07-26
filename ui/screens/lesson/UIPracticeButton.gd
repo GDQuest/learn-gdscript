@@ -2,6 +2,8 @@
 class_name UIPracticeButton
 extends Node
 
+signal screen_entered
+
 var completed_before := false:
 	set = set_completed_before
 var is_highlighted := false:
@@ -13,21 +15,22 @@ var _practice: BBCodeParser.ParseNode
 var _practice_index := 0
 var _lesson_number := 0
 
-@export var visibility_notifier: VisibleOnScreenNotifier2D
-@export var _title_label: Label
-@export var _next_pill_label: Label
-@export var _description_label: RichTextLabel
-@export var _completed_before_icon: TextureRect
-@export var _navigate_button: Button
-@export var _no_navigation_label: Label
+@onready var _visibility_notifier: VisibleOnScreenEnabler2D = %VisibleOnScreenEnabler2D
+@onready var _title_label: Label = %Title
+@onready var _next_pill_label: Label = %NextPill
+@onready var _description_label: RichTextLabel = %Description
+@onready var _completed_before_icon: TextureRect = %CompletedBeforeIcon
+@onready var _navigate_button: Button = %NavigateButton
+@onready var _no_navigation_label: Label = %NoNavigationLabel
 
 
 func _ready() -> void:
 	_completed_before_icon.visible = completed_before
+	_visibility_notifier.screen_entered.connect(screen_entered.emit)
 
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_TRANSLATION_CHANGED:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
 		_update_labels()
 
 

@@ -5,14 +5,14 @@ const TRANSITION_DURATION := 0.15
 # Margin for info panel so hiding it isn't triggered by a 1px mouse move
 const MOUSE_MARGIN := 25.0 * Vector2.ONE
 
-@export var _panel: Control
+@onready var _panel: Control = %Panel
 # Makes the mouse interaction area larger than the panel.
-@export var _interaction_area: Control
-@export var _title: Label
-@export var _content: RichTextLabel
+@onready var _interaction_area: Control = %InteractionArea
+@onready var _title: Label = %Title
+@onready var _content: RichTextLabel = %Content
 # The timer prevents the panel from disappearing instantly when the mouse goes
 # out of the area too quickly.
-@export var _timer: Timer
+@onready var _timer: Timer = %Timer
 
 var scene_tween: Tween
 

@@ -19,13 +19,13 @@ var origin_line := -1:
 var origin_char := -1:
 	set = set_origin_char
 
-@export var _severity_label: Label
-@export var _message_label: Label
-@export var _location_row: Control
-@export var _file_name_label: Label
-@export var _location_label: Label
-@export var _external_label: Label
-@export var _message_explain_button: Button
+@onready var _severity_label: Label = %MessageSeverity
+@onready var _message_label: Label = %MessageValue
+@onready var _location_row: Control = %LocationRow
+@onready var _file_name_label: Label = %FileName
+@onready var _location_label: Label = %CodeLocation
+@onready var _external_label: Label = %ExternalError
+@onready var _message_explain_button: Button = %ExplainButton
 
 
 func _ready() -> void:

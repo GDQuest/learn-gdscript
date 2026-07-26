@@ -6,17 +6,12 @@
 [ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/styles/panel_normal.tres" id="6"]
 [ext_resource type="Script" uid="uid://dmptnpr0crwmq" path="res://ui/components/SmoothScrollContainer.gd" id="7"]
 
-[node name="OutputConsole" type="PanelContainer" unique_id=1277880461 node_paths=PackedStringArray("_scroll_container", "_message_list", "_error_popup", "_error_overlay_popup", "_external_error_popup")]
+[node name="OutputConsole" type="PanelContainer" unique_id=1277880461]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_vertical = 3
 script = ExtResource("2")
-_scroll_container = NodePath("MarginContainer/VBoxContainer/ScrollContainer")
-_message_list = NodePath("MarginContainer/VBoxContainer/ScrollContainer/MessageList")
-_error_popup = NodePath("ErrorPopup")
-_error_overlay_popup = NodePath("ErrorPopup/ErrorOverlayPopup")
-_external_error_popup = NodePath("ExternalErrorPopup")
 
 [node name="Panel" type="Panel" parent="." unique_id=554613429]
 layout_mode = 2
@@ -40,22 +35,26 @@ theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
 text = "Output"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=1426649461]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("7")
 
 [node name="MessageList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=62162487]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ErrorPopup" type="ColorRect" parent="." unique_id=1079407188]
+unique_name_in_owner = true
 visible = false
 top_level = true
 layout_mode = 2
 color = Color(0.0352941, 0.0392157, 0.129412, 0.313726)
 
 [node name="ErrorOverlayPopup" parent="ErrorPopup" unique_id=2013705554 instance=ExtResource("5")]
+unique_name_in_owner = true
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -70,6 +69,7 @@ grow_vertical = 2
 exclusive = true
 
 [node name="ExternalErrorPopup" parent="." unique_id=1075294941 instance=ExtResource("4")]
+unique_name_in_owner = true
 visible = false
 top_level = true
 layout_mode = 2

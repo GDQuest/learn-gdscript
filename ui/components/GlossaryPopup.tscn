@@ -4,16 +4,12 @@
 [ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="3_rj0to"]
 [ext_resource type="StyleBox" uid="uid://dgiyebkd2yyrw" path="res://ui/theme/styles/panel_darker_with_shadow.tres" id="4"]
 
-[node name="GlossaryPopup" type="CanvasLayer" unique_id=969137557 node_paths=PackedStringArray("_panel", "_interaction_area", "_title", "_content", "_timer")]
+[node name="GlossaryPopup" type="CanvasLayer" unique_id=969137557]
 layer = 2
 script = ExtResource("1")
-_panel = NodePath("Panel")
-_interaction_area = NodePath("InteractionArea")
-_title = NodePath("Panel/MarginContainer/Column/Title")
-_content = NodePath("Panel/MarginContainer/Column/Content")
-_timer = NodePath("Timer")
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=1177708211]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(580, 120)
 offset_right = 580.0
@@ -30,6 +26,7 @@ mouse_filter = 2
 theme_override_constants/separation = 8
 
 [node name="Title" type="Label" parent="Panel/MarginContainer/Column" unique_id=1740499122]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"LabelBoldText"
 theme_override_colors/font_color = Color(0.360784, 0.678431, 0.988235, 1)
@@ -41,6 +38,7 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="Content" type="RichTextLabel" parent="Panel/MarginContainer/Column" unique_id=1260183715]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 bbcode_enabled = true
@@ -50,10 +48,12 @@ script = ExtResource("3_rj0to")
 metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="Timer" type="Timer" parent="." unique_id=855661795]
+unique_name_in_owner = true
 wait_time = 0.5
 one_shot = true
 
 [node name="InteractionArea" type="Control" parent="." unique_id=2062394503]
+unique_name_in_owner = true
 visible = false
 layout_mode = 3
 anchors_preset = 0

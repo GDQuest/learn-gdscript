@@ -10,21 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://ckvual55dmiwg" path="res://ui/assets/icons/practice_list.png" id="11"]
 [ext_resource type="StyleBox" uid="uid://onyjepq6j3f1" path="res://ui/theme/styles/practice_info_separator.tres" id="12"]
 
-[node name="PracticeInfoPanel" type="PanelContainer" unique_id=909383675 node_paths=PackedStringArray("title_label", "_status_icon", "goal_rich_text_label", "hints_container", "_checks", "docs_container", "_docs_item_list", "_list_button")]
+[node name="PracticeInfoPanel" type="PanelContainer" unique_id=909383675]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2")
-title_label = NodePath("LessonRequirements/Margin/Column/TitleBox/Title")
-_status_icon = NodePath("LessonRequirements/Margin/Column/TitleBox/StatusIcon")
-goal_rich_text_label = NodePath("LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Goals/Goal/MarginContainer/TextBox")
-hints_container = NodePath("LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Hints")
-_checks = NodePath("LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Checks")
-docs_container = NodePath("LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Documentation")
-_docs_item_list = NodePath("LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Documentation/DocumentationItems")
-_list_button = NodePath("LessonRequirements/Footer/ListButton")
 
 [node name="Panel" type="Panel" parent="." unique_id=2129871632]
 layout_mode = 2
@@ -48,6 +40,7 @@ size_flags_vertical = 3
 layout_mode = 2
 
 [node name="Title" type="Label" parent="LessonRequirements/Margin/Column/TitleBox" unique_id=455443392]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 size_flags_horizontal = 3

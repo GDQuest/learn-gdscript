@@ -2,15 +2,14 @@ extends Control
 
 signal course_requested(force_outliner)
 
-@export var _settings_button: Button
-@export var _outliner_button: Button
-@export var _start_button: Button
-@export var _quit_button: Button
-@export var _title_link_label: RichTextLabel
-@export var _anim_player: AnimationPlayer
-@export var _robot: Node2D
-@export var _gdquest_boy: Control
-
+@onready var _settings_button: Button = %SettingsButton
+@onready var _outliner_button: Button = %OutlinerButton
+@onready var _start_button: Button = %StartButton
+@onready var _quit_button: Button = %QuitButton
+@onready var _title_link_label: RichTextLabel = %TitleLinkLabel
+@onready var _anim_player: AnimationPlayer = %AnimationPlayer
+@onready var _robot: Node2D = %Robot
+@onready var _gdquest_boy: Control = %GDQuestBoy
 @onready var _buttons_to_disable := [_settings_button, _outliner_button, _start_button, _quit_button]
 
 

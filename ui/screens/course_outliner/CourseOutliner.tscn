@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dcf1t6y5lr4oe" path="res://ui/screens/course_outliner/CourseLessonDetails.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://duub37a4814w" path="res://ui/components/popups/ConfirmPopup.tscn" id="7"]
 
-[node name="CourseOutliner" type="PanelContainer" unique_id=695105099 node_paths=PackedStringArray("_title_label", "_lesson_list", "_lesson_details", "_reset_button", "_reset_confirm_popup")]
+[node name="CourseOutliner" type="PanelContainer" unique_id=695105099]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,11 +13,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("1")
-_title_label = NodePath("MarginContainer/Layout/TitleBox/TitleLabel")
-_lesson_list = NodePath("MarginContainer/Layout/HBoxContainer/LeftColumn/LessonList")
-_lesson_details = NodePath("MarginContainer/Layout/HBoxContainer/LessonDetails")
-_reset_button = NodePath("MarginContainer/Layout/HBoxContainer/LeftColumn/PanelContainer/Buttons/ResetButton")
-_reset_confirm_popup = NodePath("ConfirmResetPopup")
 
 [node name="ClearColor" type="ColorRect" parent="." unique_id=1439216820]
 layout_mode = 2
@@ -40,6 +35,7 @@ theme_type_variation = &"LabelSlimTitle"
 text = "Course Index - "
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/Layout/TitleBox" unique_id=1650628784]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"LabelTitle"
 text = "Course Title Goes Here"
@@ -53,6 +49,7 @@ alignment = 1
 layout_mode = 2
 
 [node name="LessonList" parent="MarginContainer/Layout/HBoxContainer/LeftColumn" unique_id=1141099537 instance=ExtResource("4")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -63,14 +60,17 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ResetButton" type="Button" parent="MarginContainer/Layout/HBoxContainer/LeftColumn/PanelContainer/Buttons" unique_id=1800407149]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Reset Progress"
 
 [node name="LessonDetails" parent="MarginContainer/Layout/HBoxContainer" unique_id=1508243306 instance=ExtResource("6")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ConfirmResetPopup" parent="." unique_id=311974735 instance=ExtResource("7")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 title = "Confirm Resetting Progress"

@@ -4,12 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://de8hhb3bmbsjf" path="res://ui/assets/icons/loading_splash.png" id="2"]
 [ext_resource type="Script" uid="uid://gi5dafepotsa" path="res://ui/LoadingScreen.gd" id="6"]
 
-[node name="LoadingScreen" type="PanelContainer" unique_id=672185924 node_paths=PackedStringArray("_progress_bar")]
+[node name="LoadingScreen" type="PanelContainer" unique_id=672185924]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource("6")
-_progress_bar = NodePath("MarginContainer/Control/ProgressBar")
 
 [node name="ClearColor" type="ColorRect" parent="." unique_id=1985428826]
 layout_mode = 2
@@ -33,6 +32,7 @@ stretch_mode = 4
 layout_mode = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="MarginContainer/Control" unique_id=609357000]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_left = 0.25

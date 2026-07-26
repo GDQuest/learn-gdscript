@@ -5,15 +5,15 @@ extends MarginContainer
 
 @export var exclusive := false:
 	set = set_exclusive
-@export var _error_label: Label
-@export var _content_block: Control
-@export var _error_explanation_block: Revealer
-@export var _error_explanation_value: RichTextLabel
-@export var _error_suggestion_block: Revealer
-@export var _error_suggestion_value: RichTextLabel
-@export var _no_content_label: RichTextLabel
-@export var _exclusive_buttons: Control
-@export var _close_button: Button
+@onready var _error_label: Label = %ErrorLabel
+@onready var _content_block: Control = %Content
+@onready var _error_explanation_block: Revealer = %ErrorExplanation
+@onready var _error_explanation_value: RichTextLabel = $MarginContainer/Column/Content/ErrorExplanation/Value
+@onready var _error_suggestion_block: Revealer = %ErrorSuggestion
+@onready var _error_suggestion_value: RichTextLabel = $MarginContainer/Column/Content/ErrorSuggestion/Value
+@onready var _no_content_label: RichTextLabel = %NoContent
+@onready var _exclusive_buttons: Control = %Buttons
+@onready var _close_button: Button = %CloseButton
 
 var error_code: int = -1:
 	set = set_error_code
@@ -37,7 +37,7 @@ func _ready() -> void:
 
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_TRANSLATION_CHANGED:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
 		_update_explanation()
 
 

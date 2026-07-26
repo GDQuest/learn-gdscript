@@ -38,7 +38,7 @@ corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxEmpty" id="4"]
 
-[node name="SalePopup" type="ColorRect" unique_id=1857610448 node_paths=PackedStringArray("title_label", "time_left_label", "go_button", "close_button")]
+[node name="SalePopup" type="ColorRect" unique_id=1857610448]
 visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -88,6 +88,7 @@ custom_minimum_size = Vector2(400, 8)
 layout_mode = 2
 
 [node name="Title" type="Label" parent="PanelContainer/Layout/Margin/Column" unique_id=103779209]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"LabelWellDone"
 horizontal_alignment = 1
@@ -105,6 +106,7 @@ script = ExtResource("3_wck5i")
 metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
 [node name="TimeLeftLabel" type="Label" parent="PanelContainer/Layout/Margin/Column" unique_id=1879615245]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"LabelBigTitle"
 text = "Only until "
@@ -114,6 +116,7 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="GoButton" type="Button" parent="PanelContainer/Layout/Margin/Column" unique_id=2001284878]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 80)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -136,6 +139,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="CloseButton" type="Button" parent="PanelContainer/Control" unique_id=1406003469]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 0
 anchor_left = 1.0

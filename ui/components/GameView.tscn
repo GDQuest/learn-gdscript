@@ -5,23 +5,23 @@
 
 [sub_resource type="StyleBoxEmpty" id="1"]
 
-[node name="GameView" type="PanelContainer" unique_id=911031022 node_paths=PackedStringArray("_viewport_container", "_pause_rect")]
+[node name="GameView" type="PanelContainer" unique_id=911031022]
 offset_left = 12.0
 offset_top = 12.0
 offset_right = 585.0
 offset_bottom = 606.0
 theme_override_styles/panel = SubResource("1")
 script = ExtResource("3")
-_viewport_container = NodePath("SubViewportContainer")
-_pause_rect = NodePath("PauseRect")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=324934379]
+unique_name_in_owner = true
 process_mode = 1
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 stretch = true
 
 [node name="PauseRect" type="ColorRect" parent="." unique_id=11987188]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 color = Color(0.0352941, 0.0392157, 0.129412, 0.309804)

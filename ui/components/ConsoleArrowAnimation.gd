@@ -7,7 +7,7 @@ const TWEEN_DURATION := 0.2
 
 @export var initial_point := Vector2.ZERO
 @export var end_point := Vector2.ZERO
-@export var _arrow: Sprite2D
+@onready var _arrow: Sprite2D = %Arrow
 
 @onready var highlight_rects: Array = []:
 	set = set_highlight_rects

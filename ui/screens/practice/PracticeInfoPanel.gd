@@ -15,19 +15,20 @@ const TestDisplayScene = preload("PracticeTestDisplay.tscn")
 
 @export var title := "Title":
 	set = set_title
-@export var title_label: Label
-@export var _status_icon: TextureRect
-@export var goal_rich_text_label: RichTextLabel
-@export var hints_container: Revealer
-@export var _checks: Revealer
-@export var docs_container: Revealer
-@export var _docs_item_list: Control
-@export var _list_button: Button
 
 var skip_animations := false
 
 var _current_status: int = Status.NONE
 var _documentation_results: QueryResult
+
+@onready var title_label: Label = $LessonRequirements/Margin/Column/TitleBox/Title
+@onready var _status_icon: TextureRect = $LessonRequirements/Margin/Column/TitleBox/StatusIcon
+@onready var goal_rich_text_label: RichTextLabel = $LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Goals/Goal/MarginContainer/TextBox
+@onready var hints_container: Revealer = $LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Hints
+@onready var _checks: Revealer = $LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Checks
+@onready var docs_container: Revealer = $LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Documentation
+@onready var _docs_item_list: Control = $LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Documentation/DocumentationItems
+@onready var _list_button: Button = $LessonRequirements/Footer/ListButton
 
 
 func _ready() -> void:
@@ -35,7 +36,7 @@ func _ready() -> void:
 
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_TRANSLATION_CHANGED:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
 		_update_documentation()
 
 

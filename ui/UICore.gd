@@ -6,18 +6,19 @@ const ReportFormPopup := preload("./components/popups/ReportFormPopup.gd")
 const SettingsPopup := preload("./components/popups/SettingsPopup.gd")
 
 @export var default_course_id := "learn-gdscript"
-@export var _pages: Control
-@export var _loading_screen: LoadingScreen
-@export var _welcome_screen: WelcomeScreen
-@export var _course_screen: Control
-@export var _settings_popup: SettingsPopup
-@export var _report_form_popup: ReportFormPopup
 
 var _unloading_target: Control
 var _loading_target: Control
 var _course_navigator: UINavigator
 
 var _user_profile := UserProfiles.get_profile()
+
+@onready var _pages: Control = %Pages
+@onready var _loading_screen: LoadingScreen = %LoadingScreen
+@onready var _welcome_screen: WelcomeScreen = %WelcomeScreen
+@onready var _course_screen: Control = %CourseScreen
+@onready var _settings_popup: SettingsPopup = %SettingsPopup
+@onready var _report_form_popup: ReportFormPopup = %ReportFormPopup
 
 
 func _init() -> void:

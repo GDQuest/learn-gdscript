@@ -7,15 +7,15 @@ const OPTION_SELECTED_FONT := preload("res://ui/theme/fonts/font_text_bold.tres"
 
 var _button_text := ""
 
-@export var label_container: MarginContainer
-@export var _label: Label
-@export var _button: CheckBox
+@onready var label_container: MarginContainer = $MarginContainer
+@onready var _label: Label = %Label
+@onready var _button: CheckBox = $CheckBox
 
 @onready var _group: ButtonGroup = preload("QuizAnswerButtonGroup.tres")
 
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_TRANSLATION_CHANGED:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
 		_label.text = tr(_button_text)
 
 

@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://076jcmgwamwb" path="res://ui/screens/lesson/UIBaseQuiz.tscn" id="1"]
 [ext_resource type="Script" uid="uid://bh0llkg6ael4e" path="res://ui/screens/lesson/quizzes/UIQuizChoice.gd" id="2"]
 
-[node name="UIQuizChoice" unique_id=225676255 node_paths=PackedStringArray("_choices") instance=ExtResource("1")]
+[node name="UIQuizChoice" unique_id=225676255 instance=ExtResource("1")]
 script = ExtResource("2")
-_choices = NodePath("ClipContentBoundary/ChoiceContainer/ChoiceView/Answers")
 
 [node name="Question" parent="ClipContentBoundary/ChoiceContainer/ChoiceView/QuizHeader" parent_id_path=PackedInt32Array(1071973747) index="0" unique_id=595174536]
+unique_name_in_owner = true
 text = "[b]Question[/b]"

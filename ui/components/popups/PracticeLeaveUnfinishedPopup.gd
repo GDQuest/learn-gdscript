@@ -4,11 +4,11 @@ extends ColorRect
 signal confirmed
 signal denied
 
-@export var _root_container: Container
-@export var _title_label: Label
-@export var _message_content: RichTextLabel
-@export var _confirm_button: Button
-@export var _cancel_button: Button
+@onready var _root_container: Container = %PanelContainer
+@onready var _title_label: Label = %Title
+@onready var _message_content: RichTextLabel = %Message
+@onready var _confirm_button: Button = %ConfirmButton
+@onready var _cancel_button: Button = %CancelButton
 
 @export var title := "":
 	set = set_title

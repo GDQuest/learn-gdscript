@@ -10,14 +10,13 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="CodeExampleVariableUnderline" type="Node2D" unique_id=35311342 node_paths=PackedStringArray("_mouse_blocker", "_label")]
+[node name="CodeExampleVariableUnderline" type="Node2D" unique_id=35311342]
 script = ExtResource("1")
 font_resource = ExtResource("3")
 font_size = 20
-_mouse_blocker = NodePath("MouseBlocker")
-_label = NodePath("MouseBlocker/Label")
 
 [node name="MouseBlocker" type="Control" parent="." unique_id=1683010723]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -33,6 +32,7 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0.776471)
 
 [node name="Label" type="Label" parent="MouseBlocker" unique_id=1338160996]
+unique_name_in_owner = true
 visible = false
 layout_mode = 0
 offset_left = 15.0
