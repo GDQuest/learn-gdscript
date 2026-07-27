@@ -42,6 +42,7 @@ class IntegrationTestResult:
 @export var practice_execution_timeout := 10.0
 
 var _course_index: CourseIndex
+var _original_time_scale := 1.0
 var _lesson_filter := 0
 var _practice_filter := 0
 var _test_results: Array[IntegrationTestResult] = []
@@ -52,8 +53,11 @@ var _attempted_practice_count := 0
 
 
 func _ready() -> void:
+	_original_time_scale = Engine.time_scale
 	Engine.time_scale = time_scale
-	UserProfiles.get_profile(TEST_PROFILE_NAME)
+	var test_profile := UserProfiles.get_profile(TEST_PROFILE_NAME)
+	test_profile.language = TranslationManager.DEFAULT_LOCALE
+	test_profile.save()
 	TranslationManager.set_language(TranslationManager.DEFAULT_LOCALE)
 	TranslationServer.set_locale(TranslationManager.DEFAULT_LOCALE)
 
@@ -90,6 +94,7 @@ func _ready() -> void:
 			"",
 			COURSE_ID,
 		)
+		Engine.time_scale = _original_time_scale
 		_print_summary()
 		return
 
@@ -187,6 +192,7 @@ func _run_integration_test() -> void:
 				% ["OK" if practice_result.passed else "FAIL", practice_result.message]
 			)
 
+	Engine.time_scale = _original_time_scale
 	_print_summary()
 
 
