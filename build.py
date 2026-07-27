@@ -7,6 +7,7 @@ pushing builds to itch.io, and running a local development server for web builds
 """
 
 import argparse
+import hashlib
 import os
 import shutil
 import subprocess
@@ -86,6 +87,10 @@ class BuildInfo:
 
         self.godot_version = os.environ.get("GODOT_VERSION", "")
         self.templates_repo = os.environ.get("TEMPLATES_REPO", "")
+        self.godot_editor_sha256 = os.environ.get("GODOT_EDITOR_SHA256", "")
+        self.godot_templates_sha256 = os.environ.get("GODOT_TEMPLATES_SHA256", "")
+        self.butler_version = os.environ.get("BUTLER_VERSION", "")
+        self.butler_sha256 = os.environ.get("BUTLER_SHA256", "")
         self.butler_api_key = os.environ.get("BUTLER_API_KEY", "")
         self.itchio_username = os.environ.get("ITCHIO_USERNAME", "")
         self.itchio_game = os.environ.get("ITCHIO_GAME", "")
@@ -123,6 +128,45 @@ def run_command(command, check=True, capture_output=False):
     return result.stdout.strip() if capture_output else None
 
 
+def download_or_retrieve_from_cache(url, filename, expected_sha256):
+    """Downloads a build dependency once if needed, stores it in a cache
+    direction, and returns its local archive path. If the file is already cached
+    and the SHA256 checksum matches, it returns the cached path instead."""
+
+    def calculate_file_sha256(file_path):
+        file_hash = hashlib.sha256()
+        with file_path.open("rb") as file:
+            for chunk in iter(lambda: file.read(1024 * 1024), b""):
+                file_hash.update(chunk)
+        return file_hash.hexdigest()
+
+    if not expected_sha256:
+        print(f"Error: SHA-256 checksum is missing for {filename}")
+        sys.exit(1)
+    cache_directory = Path(
+        os.environ.get("BUILD_DOWNLOAD_CACHE", ".cache/build-downloads")
+    )
+    cache_directory.mkdir(parents=True, exist_ok=True)
+    archive_path = cache_directory / filename
+    if archive_path.exists():
+        if calculate_file_sha256(archive_path) == expected_sha256:
+            print(f"Using cached {filename}")
+            return archive_path
+        print(f"Cached {filename} failed checksum validation; downloading it again")
+        archive_path.unlink()
+
+    print(f"Downloading {filename}")
+    temporary_path = archive_path.with_suffix(archive_path.suffix + ".tmp")
+    urllib.request.urlretrieve(url, temporary_path)
+    actual_sha256 = calculate_file_sha256(temporary_path)
+    if actual_sha256 != expected_sha256:
+        temporary_path.unlink()
+        print(f"Error: SHA-256 checksum mismatch for {filename}")
+        sys.exit(1)
+    temporary_path.replace(archive_path)
+    return archive_path
+
+
 def download_butler(target_dir=None):
     """
     Download Butler CLI tool for itch.io uploads.
@@ -130,28 +174,29 @@ def download_butler(target_dir=None):
     Args:
         target_dir: Directory to install Butler to. If None, installs to current directory.
     """
-    print("Downloading Butler...")
+    print("Preparing Butler...")
     butler_dir = Path(target_dir) if target_dir else Path("")
     butler_dir.mkdir(parents=True, exist_ok=True)
-    zip_path = butler_dir / "butler.zip"
-
-    BUTLER_DOWNLOAD_URL = (
-        "https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default"
+    if not build_info.butler_version:
+        print("Error: BUTLER_VERSION environment variable is not set")
+        sys.exit(1)
+    version = build_info.butler_version
+    url = f"https://broth.itch.zone/butler/linux-amd64/{version}/archive/default"
+    archive_path = download_or_retrieve_from_cache(
+        url, f"butler-{version}-linux-amd64.zip", build_info.butler_sha256
     )
-    urllib.request.urlretrieve(BUTLER_DOWNLOAD_URL, zip_path)
-    with zipfile.ZipFile(zip_path, "r") as archive:
+    with zipfile.ZipFile(archive_path, "r") as archive:
         archive.extractall(butler_dir)
     butler_path = (butler_dir / "butler").resolve()
     os.chmod(butler_path, 0o755)
-    zip_path.unlink()
     run_command(f'"{butler_path}" -V')
-    print("✓ Downloaded Butler\n")
+    print("✓ Butler ready\n")
 
     return butler_dir
 
 
-def download_godot_and_templates():
-    """Download Godot headless build and export templates from GitHub."""
+def download_godot():
+    """Download the custom Godot headless build from GitHub."""
     if not build_info.godot_version:
         print("Error: GODOT_VERSION environment variable is not set")
         sys.exit(1)
@@ -162,25 +207,15 @@ def download_godot_and_templates():
     version = build_info.godot_version
     repo = build_info.templates_repo
 
-    print("Downloading Godot headless build...")
+    print("Preparing Godot headless build...")
     headless_url = f"https://github.com/{repo}/releases/download/learn-{version}/godot-learn.{version}.editor.zip"
-    headless_zip = f"godot-learn.{version}.editor.zip"
-
-    urllib.request.urlretrieve(headless_url, headless_zip)
-    with zipfile.ZipFile(headless_zip, "r") as archive:
+    archive_path = download_or_retrieve_from_cache(
+        headless_url,
+        f"godot-learn.{version}.editor.zip",
+        build_info.godot_editor_sha256,
+    )
+    with zipfile.ZipFile(archive_path, "r") as archive:
         archive.extractall(".")
-    os.remove(headless_zip)
-    print("✓ Downloaded Godot headless\n")
-
-    print("Downloading export templates...")
-    templates_url = f"https://github.com/{repo}/releases/download/learn-{version}/godot-learn.{version}.templates.zip"
-    templates_zip = f"godot-learn.{version}.templates.zip"
-
-    urllib.request.urlretrieve(templates_url, templates_zip)
-    Path("templates").mkdir(parents=True, exist_ok=True)
-    with zipfile.ZipFile(templates_zip, "r") as archive:
-        archive.extractall("templates")
-    os.remove(templates_zip)
 
     source_file = "godot.linuxbsd.editor.x86_64"
 
@@ -191,11 +226,31 @@ def download_godot_and_templates():
     shutil.move(source_file, GODOT_BINARY_NAME)
     os.chmod(GODOT_BINARY_NAME, 0o755)
 
-    if not os.path.exists(GODOT_BINARY_NAME):
-        print(f"Error: Failed to rename Godot to {GODOT_BINARY_NAME}")
-    os.chmod(GODOT_BINARY_NAME, 0o755)
+    print("✓ Godot headless ready\n")
 
-    print("✓ Downloaded export templates\n")
+
+def download_export_templates():
+    """Download the custom Godot export templates from GitHub."""
+    version = build_info.godot_version
+    repo = build_info.templates_repo
+
+    print("Preparing export templates...")
+    templates_url = f"https://github.com/{repo}/releases/download/learn-{version}/godot-learn.{version}.templates.zip"
+    archive_path = download_or_retrieve_from_cache(
+        templates_url,
+        f"godot-learn.{version}.templates.zip",
+        build_info.godot_templates_sha256,
+    )
+    Path("templates").mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(archive_path, "r") as archive:
+        archive.extractall("templates")
+    print("✓ Export templates ready\n")
+
+
+def download_godot_and_templates():
+    """Download the custom Godot build and the export templates from GitHub."""
+    download_godot()
+    download_export_templates()
 
 
 def prepare_course_scripts():
@@ -214,8 +269,8 @@ def prepare_course_scripts():
 
 def prepare_ci():
     """
-    Set up the CI environment: download Godot headless build and export templates,
-    install required software, download Butler, and prepare course scripts.
+    Set up the CI environment: download Godot headless build, export templates,
+    Butler, and prepare course scripts.
     """
     print("Preparing CI environment...\n")
 
@@ -228,17 +283,16 @@ def prepare_ci():
 
     print("✓ Prepared Godot headless binary\n")
 
-    print("Installing required software...")
-    run_command("apt-get install -y --no-install-recommends sed rsync")
-
-    if os.environ.get("ACT") == "true":
-        print("Running in ACT, installing Node.js...")
-        run_command("wget -qO- https://deb.nodesource.com/setup_24.x | bash -")
-        run_command("DEBIAN_FRONTEND=noninteractive TZ=UTC apt-get install -y nodejs")
-    print("✓ Installed software\n")
-
     prepare_course_scripts()
     print("\n✓ CI environment ready")
+
+
+def prepare_test():
+    """Set up only the custom Godot binary and generated scripts required by tests."""
+    print("Preparing test environment...\n")
+    download_godot()
+    prepare_course_scripts()
+    print("\n✓ Test environment ready")
 
 
 def prepare_local():
@@ -447,6 +501,13 @@ def prepare_clean():
         shutil.rmtree(templates_dir)
         print("  Removed templates/")
 
+    download_cache_directory = Path(
+        os.environ.get("BUILD_DOWNLOAD_CACHE", ".cache/build-downloads")
+    )
+    if download_cache_directory.exists():
+        shutil.rmtree(download_cache_directory)
+        print(f"  Removed {download_cache_directory}/")
+
     # Remove .lgd files created by prepare_course_scripts
     lgd_count = 0
     for lgd_file in Path("course").rglob("*.lgd"):
@@ -522,7 +583,7 @@ Examples:
     )
 
     prepare_cmd = subparsers.add_parser("prepare", help="Prepare build environment")
-    prepare_cmd.add_argument("target", choices=["ci", "local", "clean"])
+    prepare_cmd.add_argument("target", choices=["ci", "test", "local", "clean"])
 
     clean_cmd = subparsers.add_parser("clean", help="Remove build files")
     clean_cmd.add_argument("target", choices=["all", "web"])
@@ -570,6 +631,8 @@ Examples:
     elif args.command == "prepare":
         if args.target == "ci":
             prepare_ci()
+        elif args.target == "test":
+            prepare_test()
         elif args.target == "clean":
             prepare_clean()
         else:

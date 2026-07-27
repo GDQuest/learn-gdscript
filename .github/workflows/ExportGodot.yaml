@@ -1,20 +1,21 @@
-# this actions workflow builds large dscript for desktop plus web. It also has
-# some steps to deploy to itch.io through their upload program butler. We have a
-# copy of the app on itch.
+# Export desktop and web builds, publish them to itch.io, and deploy the web build.
 name: "Export Godot"
 
 on:
-  workflow_call:
   workflow_dispatch:
   push:
     branches:
       - release
       - staging
 
+permissions:
+  contents: read
+
+concurrency:
+  group: export-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
-  BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-  ITCHIO_USERNAME: ${{ secrets.ITCHIO_USERNAME }}
-  ITCHIO_GAME: ${{ secrets.ITCHIO_GAME }}
   BUILD_GIT_COMMIT: ${{ github.sha }}
   BUILD_GIT_BRANCH: ${{ github.ref_name }}
 
@@ -24,26 +25,29 @@ jobs:
   setup:
     name: Setup environment
     runs-on: ubuntu-latest
-    container: registry.gitlab.com/greenfox/godot-build-automation:latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7.0.1
         with:
           lfs: false
 
-      - name: Install Python 3
-        run: apt-get update && apt-get install -y --no-install-recommends python3
+      - name: Restore build downloads
+        uses: actions/cache@v6.1.0
+        with:
+          path: .cache/build-downloads
+          key: export-build-downloads-${{ runner.os }}-${{ hashFiles('.env') }}
 
       - name: Prepare CI environment
         run: python3 build.py prepare ci
 
       - name: Upload prepared source
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: prepared-source
           path: |
             .
             !.git
+            !.cache
           retention-days: 1
           include-hidden-files: true
 
@@ -54,38 +58,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [linux, windows, osx, web]
-        include:
-          - platform: linux
-            artifact_name: linux
-            release_tag: linux
-          - platform: windows
-            artifact_name: windows
-            release_tag: windows
-          - platform: osx
-            artifact_name: macos-build
-            release_tag: osx
-          - platform: web
-            artifact_name: web
-            release_tag: web
+        platform: ${{ fromJSON(github.ref_name == 'release' && '["linux", "windows", "osx", "web"]' || '["web"]') }}
 
     steps:
-      - name: Checkout for GitHub Pages deploy
-        if: matrix.platform == 'web'
-        uses: actions/checkout@v4
-        with:
-          lfs: false
-
       - name: Download prepared source
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: prepared-source
 
-      - name: Make Godot and butler executable and set up environment
+      - name: Set up export tools
         run: |
           chmod +x godot_server.x86_64
           chmod +x butler
-          echo "$PWD" >> $GITHUB_PATH
           echo "GODOT_TEMPLATES_DIR=$PWD/templates" >> $GITHUB_ENV
 
       - name: Export for ${{ matrix.platform }}
@@ -93,41 +77,67 @@ jobs:
 
       - name: Push to itch.io
         if: github.ref_name == 'release' || github.ref_name == 'staging'
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+          ITCHIO_USERNAME: ${{ secrets.ITCHIO_USERNAME }}
+          ITCHIO_GAME: ${{ secrets.ITCHIO_GAME }}
         run: python3 build.py push ${{ matrix.platform }}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
-          name: ${{ matrix.artifact_name }}
+          name: build-${{ matrix.platform }}
           path: build/${{ matrix.platform }}
-          retention-days: ${{ matrix.platform == 'osx' && 30 || 90 }}
+          retention-days: 1
 
-      - name: Upload desktop builds to GitHub Releases
-        if: matrix.release_tag != ''
-        uses: svenstaro/upload-release-action@v2
+  publish:
+    name: Publish builds
+    if: github.ref_name == 'release' || github.ref_name == 'staging'
+    needs: export
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download builds
+        uses: actions/download-artifact@v8.0.1
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/${{ matrix.platform }}/*
-          tag: ${{ matrix.release_tag }}
-          file_glob: true
-          overwrite: true
+          pattern: build-*
+          path: ${{ runner.temp }}/builds
 
-      - name: Deploy release web build to GitHub Pages
-        if: (matrix.platform == 'web') && (github.ref_name == 'release')
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
-          folder: build/web
-          target-folder: ''
-          clean: false
+      - name: Upload GitHub release assets
+        if: github.ref_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        # Updates a single latest release for each platform.
+        run: |
+          for platform in linux windows osx web; do
+            gh release view "$platform" > /dev/null 2>&1 || \
+              gh release create "$platform" --target "$GITHUB_SHA" --title "$platform" --notes ""
+            gh release upload "$platform" "$RUNNER_TEMP/builds/build-$platform"/* --clobber
+          done
 
-      - name: Deploy staging/other web build to GitHub Pages
-        if: (matrix.platform == 'web') && (github.ref_name != 'release')
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
-          folder: build/web/${{ github.ref_name }}
-          target-folder: ${{ github.ref_name }}
-          clean: false
+          ref: gh-pages
+          lfs: false
+          path: site
+
+      - name: Publish to gh-pages
+        working-directory: site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ "$GITHUB_REF_NAME" = release ]; then
+            source_directory="$RUNNER_TEMP/builds/build-web"
+            target_directory="$GITHUB_WORKSPACE/site"
+          else
+            source_directory="$RUNNER_TEMP/builds/build-web/$GITHUB_REF_NAME"
+            target_directory="$GITHUB_WORKSPACE/site/$GITHUB_REF_NAME"
+          fi
+          mkdir -p "$target_directory"
+          cp -a "$source_directory/." "$target_directory/"
+          git add --all
+          git diff --cached --quiet || git commit -m "Deploy $GITHUB_REF_NAME web build"
+          git push origin HEAD:gh-pages

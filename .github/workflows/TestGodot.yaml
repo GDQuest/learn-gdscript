@@ -1,0 +1,41 @@
+name: "Test Godot"
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - staging
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: test-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Integration tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          lfs: false
+
+      - name: Restore build downloads
+        uses: actions/cache@v6.1.0
+        with:
+          path: .cache/build-downloads
+          key: test-build-downloads-${{ runner.os }}-${{ hashFiles('.env') }}
+
+      - name: Prepare test environment
+        run: python3 build.py prepare test
+
+      - name: Test full course
+        run: >-
+          ./godot_server.x86_64 --headless --path .
+          res://tests/integration_test_course.tscn --
+          --test-profile=IntegrationTest
