@@ -7,7 +7,6 @@ signal return_to_welcome_screen_requested
 const CourseOutliner := preload("./screens/course_outliner/CourseOutliner.gd")
 const BreadCrumbs := preload("./components/BreadCrumbs.gd")
 const LessonDonePopup := preload("./components/popups/LessonDonePopup.gd")
-const SalePopup := preload("./components/SalePopup.gd")
 
 const SCREEN_TRANSITION_DURATION := 0.75
 const OUTLINER_TRANSITION_DURATION := 0.5
@@ -34,8 +33,6 @@ var _scene_tween: Tween
 @onready var _screen_container: Container = %ScreenContainer
 @onready var _course_outliner: CourseOutliner = %CourseOutliner
 @onready var _lesson_done_popup: LessonDonePopup = %LessonDonePopup
-@onready var _sale_button: Button = %SaleButton
-@onready var _sale_popup: SalePopup = %SalePopup
 
 
 func _ready() -> void:
@@ -58,11 +55,6 @@ func _ready() -> void:
 
 	_settings_button.pressed.connect(Events.settings_requested.emit)
 	_report_button.pressed.connect(Events.report_form_requested.emit)
-
-	if not UserProfiles.get_profile().is_sponsored_profile or _sale_popup.is_sale_over():
-		_sale_button.hide()
-	else:
-		_sale_button.pressed.connect(_sale_popup.show)
 
 	if NavigationManager.current_url == "":
 		if load_into_outliner:
@@ -97,6 +89,29 @@ func set_start_from_lesson(lesson_id: String) -> void:
 			break
 
 		matched_index += 1
+
+
+## Returns identifying information for the currently visible lesson or practice.
+func get_current_screen_issue_report_context() -> ReportContext:
+	var context := ReportContext.new()
+	if _screens_stack.is_empty():
+		return context
+	var screen := _screens_stack.back() as UINavigatablePage
+	if not is_instance_valid(screen):
+		return context
+	var resource := screen.get_screen_resource()
+	if resource and resource.tag == BBCodeParserData.Tag.PRACTICE:
+		var lesson := NavigationManager.get_navigation_resource(resource.bbcode_path) as BBCodeParser.ParseNode
+		var lesson_number := course_index.get_lesson_number(lesson.bbcode_path)
+		context.lesson_title = "L%d. %s" % [lesson_number, BBCodeUtils.get_lesson_title(lesson)]
+		context.file_path = resource.bbcode_path
+	elif resource:
+		var lesson_number := course_index.get_lesson_number(resource.bbcode_path)
+		context.lesson_title = "L%d. %s" % [lesson_number, BBCodeUtils.get_lesson_title(resource)]
+		context.file_path = resource.bbcode_path
+	if screen is UIPractice:
+		context.user_code = screen.get_user_code()
+	return context
 
 
 # Pops the last screen from the stack.

@@ -38,6 +38,8 @@ const URL_GODOT_DOCS_REF := "ref=godot-docs"
 	set = set_framerate_limit
 ## Flag that allows only partially translated lessons to still be accessed
 @export var access_incomplete_translations := false
+## Whether the beta indicator is folded.
+@export var is_beta_indicator_folded := false
 
 var _save_queued := false
 

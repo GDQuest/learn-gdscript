@@ -253,12 +253,12 @@ func _is_container_refilled(body: GDSuiteNode, container_name: StringName) -> bo
 				):
 					return true
 		if statement.get_type() == GDNode.CALL:
-			var call := statement as GDCallNode
-			var callee := call.get_callee() as GDSubscriptNode
+			var gd_call := statement as GDCallNode
+			var callee := gd_call.get_callee() as GDSubscriptNode
 			var base := callee.get_base() as GDIdentifierNode if callee else null
 			if (
 				base and base.name == container_name
-				and call.get_function_name() in [&"append", &"push_back", &"push_front"]
+				and gd_call.get_function_name() in [&"append", &"push_back", &"push_front"]
 			):
 				return true
 	return false

@@ -10,6 +10,10 @@ const SettingsPopup := preload("./components/popups/SettingsPopup.gd")
 var _unloading_target: Control
 var _loading_target: Control
 var _course_navigator: UINavigator
+var _show_beta_indicator: bool = ProjectSettings.get_setting(
+	"application/config/show_beta_banner",
+	false,
+)
 
 var _user_profile := UserProfiles.get_profile()
 
@@ -19,6 +23,7 @@ var _user_profile := UserProfiles.get_profile()
 @onready var _course_screen: Control = %CourseScreen
 @onready var _settings_popup: SettingsPopup = %SettingsPopup
 @onready var _report_form_popup: ReportFormPopup = %ReportFormPopup
+@onready var _beta_indicator: UIBetaIndicator = %BetaIndicator
 
 
 func _init() -> void:
@@ -34,20 +39,37 @@ func _init() -> void:
 func _ready() -> void:
 	_settings_popup.hide()
 	_report_form_popup.hide()
+	if _show_beta_indicator:
+		_beta_indicator.set_is_folded(_user_profile.is_beta_indicator_folded, false)
+		_beta_indicator.fold_state_changed.connect(
+			func _on_beta_indicator_fold_state_changed (is_folded: bool) -> void:
+				_user_profile.is_beta_indicator_folded = is_folded
+				_user_profile.save(),
+		)
+	else:
+		_beta_indicator.hide()
 	_update_welcome_button()
 
 	_loading_screen.faded_in.connect(_on_loading_faded_in)
 	_loading_screen.loading_finished.connect(_on_loading_finished)
 	_welcome_screen.course_requested.connect(_on_course_requested)
 
-	Events.report_form_requested.connect(_report_form_popup.show)
+	var _show_report_form := func() -> void:
+		var context := ReportContext.new()
+		if _course_navigator and is_instance_valid(_course_navigator):
+			context = _course_navigator.get_current_screen_issue_report_context()
+		_report_form_popup.setup(context)
+		_report_form_popup.show()
+
+	Events.report_form_requested.connect(_show_report_form)
+	_beta_indicator.report_requested.connect(_show_report_form)
 	Events.settings_requested.connect(_settings_popup.show)
 	Events.course_completed.connect(_show_end_screen)
 
 	NavigationManager.welcome_screen_navigation_requested.connect(_go_to_welcome_screen)
 	# Needed to navigate back from the end screen to the outliner.
 	NavigationManager.outliner_navigation_requested.connect(_course_screen.show)
-	
+
 	TranslationManager.translation_changed.connect(_on_translation_changed)
 
 	await get_tree().process_frame
@@ -109,7 +131,9 @@ func _on_course_requested(force_outliner: bool = false) -> void:
 	_course_navigator.course_index = CourseIndexPaths.get_course_index_instance(default_course_id)
 
 	var user_profile = UserProfiles.get_profile()
-	var lesson_id := user_profile.get_last_started_lesson(_course_navigator.course_index.get_course_id())
+	var lesson_id := user_profile.get_last_started_lesson(
+		_course_navigator.course_index.get_course_id()
+	)
 	if not lesson_id.is_empty():
 		_course_navigator.set_start_from_lesson(lesson_id)
 

@@ -197,7 +197,7 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 	# Cleared when a block-level tag is encountered.
 	var current_paragraph: ParseNode = null
 
-	for token in tokens:
+	for token: Token in tokens:
 		var current: ParseNode = stack.back()
 
 		if token.type == TokenTypes.TAG_OPEN:
@@ -295,7 +295,7 @@ func _parse_tokens(tokens: Array, file_path: String) -> ParseNode:
 			var token_tag: int = token.tag
 			var current_name := _parser_data.get_tag_name(current.tag) if current.tag != _parser_data.Tag.UNKNOWN else "_root"
 			var closing_name := _parser_data.get_tag_name(token_tag)
-
+			
 			if current.tag == _parser_data.Tag.UNKNOWN:
 				_result.add_error(
 					"Unexpected closing tag [/%s] with no matching opening tag" % closing_name,

@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://c2ir4706lg55h"]
+
+[ext_resource type="Script" uid="uid://4fg3tu8a2g2s" path="res://ui/components/BetaIndicator.gd" id="1"]
+[ext_resource type="FontVariation" uid="uid://yrmgtopbyj86" path="res://ui/theme/fonts/font_text.tres" id="2"]
+[ext_resource type="FontVariation" uid="uid://cipfqcm3yp0sc" path="res://ui/theme/fonts/font_text_bold.tres" id="3"]
+[ext_resource type="Texture2D" uid="uid://er0m4j76f6rh" path="res://ui/assets/icons/chevron_beta_release.svg" id="4_1h8uh"]
+
+[node name="BetaIndicator" type="Control" unique_id=2035879280]
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1594.6
+offset_bottom = 768.6
+mouse_filter = 2
+script = ExtResource("1")
+scale_open = 0.7
+
+[node name="Background" type="Polygon2D" parent="." unique_id=1734846278]
+unique_name_in_owner = true
+scale = Vector2(0.7, 0.7)
+color = Color(0.99215686, 0.8352941, 0, 1)
+polygon = PackedVector2Array(0, 0, 300, 0, 0, 300)
+
+[node name="Text" type="Control" parent="." unique_id=1512726018]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -2.9999924
+offset_top = 72.000015
+offset_right = 107.355675
+offset_bottom = 166.92339
+rotation = -0.7853982
+mouse_filter = 2
+
+[node name="AppIn" type="Label" parent="Text" unique_id=1786911848]
+layout_mode = 0
+offset_left = 18.25483
+offset_top = -12.597992
+offset_right = 84.25483
+offset_bottom = 21.402008
+theme_override_colors/font_color = Color(0.41568628, 0.09803922, 0, 1)
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 22
+text = "App in"
+
+[node name="Beta" type="Label" parent="Text" unique_id=317362505]
+layout_mode = 0
+offset_left = 19.669058
+offset_top = 14.402008
+offset_right = 80.66906
+offset_bottom = 48.402008
+theme_override_colors/font_color = Color(0.41568628, 0.09803922, 0, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 22
+text = "BETA!"
+
+[node name="ReportLink" type="Label" parent="Text" unique_id=1624474005]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48100004
+anchor_top = -0.509
+anchor_right = 0.48100004
+anchor_bottom = -0.509
+offset_left = -70.05165
+offset_top = 89.32817
+offset_right = 62.948353
+offset_bottom = 123.32817
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.41568628, 0.09803922, 0, 1)
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 22
+text = "found a bug?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Underline" type="ColorRect" parent="Text/ReportLink" unique_id=1321895618]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -66.435036
+offset_top = -4.1213303
+offset_right = 45.610786
+offset_bottom = -2.1213303
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0.41568628, 0.09803922, 0, 1)
+
+[node name="Underline2" type="ColorRect" parent="Text/ReportLink" unique_id=411776848]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 56.84149
+offset_top = -4.1213303
+offset_right = 70.020905
+offset_bottom = -2.1213303
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0.41568628, 0.09803922, 0, 1)
+
+[node name="Chevron" type="TextureRect" parent="." unique_id=162477042]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 13.0
+offset_right = 25.0
+offset_bottom = 28.0
+pivot_offset_ratio = Vector2(0.4, 0.4)
+texture = ExtResource("4_1h8uh")
+expand_mode = 1
+
+[node name="ChevronButton" type="Button" parent="Chevron" unique_id=1861292372]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 21.0
+offset_bottom = 21.0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+flat = true

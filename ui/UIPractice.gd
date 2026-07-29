@@ -293,6 +293,11 @@ func get_screen_resource() -> BBCodeParser.ParseNode:
 	return _practice
 
 
+## Returns the code currently entered by the student in the practice editor.
+func get_user_code() -> String:
+	return _code_editor.get_text()
+
+
 func _set_script_slice(new_slice: ScriptSlice) -> void:
 	if new_slice == _script_slice:
 		return
@@ -360,7 +365,7 @@ func _validate_and_run_student_code() -> void:
 	# Do local sanity checks for the script.
 	var analyzer: GDScriptLocalAnalyzer = null
 	if ClassDB.class_exists(OfflineScriptVerifier.PARSE_WRAPPER_CLASS):
-		analyzer = GDScriptASTAnalyzer.new(verifier.get_class_ast())
+		analyzer = GDScriptASTAnalyzer.new(verifier.get_class_ast() as GDClassNode)
 	else:
 		analyzer = MiniGDScriptTokenizer.new(verifier_script)
 

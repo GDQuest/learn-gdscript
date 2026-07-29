@@ -164,8 +164,8 @@ func tr_paragraph(text: String) -> String:
 		return tr(normalized)
 
 	var translated_paragraphs := PackedStringArray()
-	for paragraph in paragraphs:
-		var trimmed: String = paragraph.strip_edges()
+	for current_paragraph in paragraphs:
+		var trimmed: String = current_paragraph.strip_edges()
 		if trimmed.is_empty():
 			translated_paragraphs.append("")
 		else:
@@ -186,8 +186,8 @@ func paragraph(text: String) -> String:
 		return normalized
 
 	var parsed_paragraphs := PackedStringArray()
-	for paragraph in paragraphs:
-		var trimmed: String = paragraph.strip_edges()
+	for current_paragraph in paragraphs:
+		var trimmed: String = current_paragraph.strip_edges()
 		if trimmed.is_empty():
 			parsed_paragraphs.append("")
 		else:

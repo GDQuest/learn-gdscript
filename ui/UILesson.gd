@@ -45,7 +45,7 @@ var _build_commands := {
 
 var _base_text_font_size: int = preload("res://ui/theme/fonts/font_text.tres").base_font.msdf_size
 
-@onready var _scroll_container: ScrollContainer = %ScrollContainer
+@onready var _scroll_container: SmoothScrollContainer = %ScrollContainer
 @onready var _title: Label = %Title
 @onready var _content_blocks: VBoxContainer = %ContentBlocks
 @onready var _content_container: VBoxContainer = %Content

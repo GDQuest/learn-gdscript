@@ -57,7 +57,7 @@ func _rebuild_breadcrumbs() -> void:
 		var title := BBCodeUtils.get_lesson_title(lesson)
 		var node_text: String = tr(title)
 		if lesson_index >= 0:
-			node_text = "%s. %s" % [lesson_index + 1, tr(title)]
+			node_text = "L%d. %s" % [lesson_index + 1, tr(title)]
 
 		_create_navigation_node(node_text, null, "", true)
 		return
@@ -82,7 +82,7 @@ func _rebuild_breadcrumbs() -> void:
 
 		if lesson and lesson_index >= 0:
 			var title := BBCodeUtils.get_lesson_title(lesson)
-			var lesson_text := "%d. %s" % [lesson_index + 1, tr(title)]
+			var lesson_text := "L%d. %s" % [lesson_index + 1, tr(title)]
 			_create_navigation_node(lesson_text, _last_course_index, lesson.bbcode_path)
 
 			var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
@@ -94,7 +94,9 @@ func _rebuild_breadcrumbs() -> void:
 					practice_index = l
 					break
 			var practice_title := BBCodeUtils.get_practice_title(practice)
-			var node_text: String = "%d. %s" % [practice_index + 1, tr(practice_title)]
+			var node_text: String = tr(practice_title)
+			if practice_index >= 0:
+				node_text = "P%d. %s" % [practice_index + 1, tr(practice_title)]
 			_create_navigation_node(node_text, null, "", true)
 		return
 
@@ -108,7 +110,7 @@ func _clear_navigation_nodes() -> void:
 func _create_navigation_node(text: String, course_index: CourseIndex, path: String = "", current: bool = false) -> void:
 	if get_child_count() > 0:
 		var separator := Label.new()
-		separator.text = "•"
+		separator.text = " > "
 		separator.add_theme_font_override("font", NODE_FONT)
 		separator.add_theme_font_size_override("font_size", NODE_FONT_SIZE)
 		separator.add_theme_color_override("font_color", NODE_COLOR)

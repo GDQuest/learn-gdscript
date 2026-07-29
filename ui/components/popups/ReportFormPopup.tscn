@@ -4,8 +4,42 @@
 [ext_resource type="StyleBox" uid="uid://bsrxxsifsyu4k" path="res://ui/theme/styles/focus_accent.tres" id="3"]
 [ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="3_0eu3i"]
 [ext_resource type="StyleBox" uid="uid://b45mlqutqarjn" path="res://ui/theme/styles/button_outline_large_normal.tres" id="4"]
+[ext_resource type="StyleBox" uid="uid://c674wleca8b17" path="res://ui/theme/styles/panel_darker_popup_report_form.tres" id="4_ylxow"]
 [ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/styles/panel_normal.tres" id="5"]
 [ext_resource type="StyleBox" uid="uid://dhdt5bfr2nel5" path="res://ui/theme/styles/button_outline_large_accent.tres" id="6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ylxow"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.03529412, 0.039215688, 0.1254902, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owx7u"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.03529412, 0.039215688, 0.1254902, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hs3uv"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.03529412, 0.039215688, 0.1254902, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="ReportFormPopup" type="CanvasLayer" unique_id=1915005343]
 layer = 10
@@ -18,16 +52,16 @@ anchor_bottom = 1.0
 color = Color(0.0352941, 0.0392157, 0.129412, 0.627451)
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=518844934]
-custom_minimum_size = Vector2(860, 740)
+custom_minimum_size = Vector2(760, 620)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -430.0
-offset_top = -370.0
-offset_right = 430.0
-offset_bottom = 370.0
+offset_left = -380.0
+offset_top = -310.0
+offset_right = 380.0
+offset_bottom = 310.0
 
 [node name="Panel" type="Panel" parent="PanelContainer" unique_id=970483355]
 layout_mode = 2
@@ -62,36 +96,47 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Summary" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=304810394]
+[node name="Help" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=1210995632]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+script = ExtResource("3_0eu3i")
+metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
+
+[node name="CategoryOption" type="OptionButton" parent="PanelContainer/Column/Margin/Column" unique_id=1665913502]
+layout_mode = 2
+theme_type_variation = &"OptionButtonReportForm"
+theme_override_styles/normal = SubResource("StyleBoxFlat_ylxow")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_owx7u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hs3uv")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ylxow")
+selected = 0
+item_count = 4
+popup/item_0/text = "Something does not work"
+popup/item_0/id = 0
+popup/item_1/text = "Something is unclear or incorrect"
+popup/item_1/id = 1
+popup/item_2/text = "Suggest an improvement"
+popup/item_2/id = 2
+popup/item_3/text = "Translation issue"
+popup/item_3/id = 3
+
+[node name="Description" type="TextEdit" parent="PanelContainer/Column/Margin/Column" unique_id=840224207]
+custom_minimum_size = Vector2(0, 170)
 layout_mode = 2
 size_flags_vertical = 3
+tooltip_text = "Write a short description. The hint changes when you choose a different issue type."
+theme_override_styles/normal = ExtResource("4_ylxow")
+placeholder_text = "Describe what went wrong, what you were doing, and what you expected to happen."
+wrap_mode = 1
+
+[node name="TranslationGuidance" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=1020151134]
+visible = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
 bbcode_enabled = true
-text = "Use the link below to report a bug or an error in a lesson: [b][url=https://github.com/GDQuest/learn-gdscript/issues]Report an issue on GitHub[/url][/b]
-
-[font=res://ui/theme/fonts/font_title.tres]Missing translations[/font]
-
-If some text in the app is not translated into your language, it is most likely because the translation for your language is incomplete. Our translations are maintained by volunteers and not every language is fully covered yet.
-
-If you want to help translate the app, you can find instructions on how to contribute here: [b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]Contribute to translations[/url][/b]
-
-[font=res://ui/theme/fonts/font_title.tres]What is GitHub[/font]
-
-GitHub is a website where developers share and work on open-source projects. Open-source means the code is public and anyone can read it, report problems, or help improve it.
-
-This app is open-source, and we currently use GitHub to track bugs and improvements.
-
-[font=res://ui/theme/fonts/font_title.tres]How to report an issue[/font]
-
-1. Click the first link at the top of this page to go to the [i]GitHub Issues[/i] page.
-2. Use the search bar to verify that your issue has not been reported already.
-3. Click the [i]New Issue[/i] button.
-4. Fill out the form to describe what went wrong.
-
-You will need a free GitHub account to do this.
-
-Please include as much detail as you can, such as what device you are using and what you were doing when the problem happened. A screenshot also helps a lot.
-
-[center]Thank you for helping make this app better.[/center]"
+fit_content = true
 script = ExtResource("3_0eu3i")
 metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
@@ -99,10 +144,11 @@ metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
 
-[node name="ConfirmButton" type="Button" parent="PanelContainer/Column/Margin/Column" unique_id=538575662]
+[node name="SendButton" type="Button" parent="PanelContainer/Column/Margin/Column" unique_id=1224604322]
 custom_minimum_size = Vector2(200, 68)
 layout_mode = 2
 size_flags_horizontal = 4
+tooltip_text = "Open your email app with this issue report ready to send."
 mouse_default_cursor_shape = 2
 theme_override_colors/font_pressed_color = Color(0.239216, 1, 0.431373, 1)
 theme_override_colors/font_hover_color = Color(0.239216, 1, 0.431373, 1)
@@ -110,4 +156,12 @@ theme_override_styles/normal = ExtResource("4")
 theme_override_styles/pressed = ExtResource("6")
 theme_override_styles/hover = ExtResource("6")
 theme_override_styles/focus = ExtResource("3")
-text = "OK"
+text = "Open email"
+
+[node name="CloseButton" type="Button" parent="PanelContainer/Column/Margin/Column" unique_id=157534170]
+custom_minimum_size = Vector2(200, 54)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Close the report form without sending anything."
+mouse_default_cursor_shape = 2
+text = "Cancel"
