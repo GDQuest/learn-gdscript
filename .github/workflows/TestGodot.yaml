@@ -11,6 +11,10 @@ on:
 permissions:
   contents: read
 
+env:
+  BUILD_GIT_COMMIT: ${{ github.sha }}
+  BUILD_GIT_BRANCH: ${{ github.ref_name }}
+
 concurrency:
   group: test-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

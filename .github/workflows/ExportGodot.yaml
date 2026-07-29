@@ -55,6 +55,8 @@ jobs:
     name: Export ${{ matrix.platform }}
     needs: setup
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       matrix:
@@ -83,12 +85,63 @@ jobs:
           ITCHIO_GAME: ${{ secrets.ITCHIO_GAME }}
         run: python3 build.py push ${{ matrix.platform }}
 
-      - name: Upload artifact
+      - name: Upload release artifact
+        if: github.ref_name == 'release'
         uses: actions/upload-artifact@v7.0.1
         with:
           name: build-${{ matrix.platform }}
           path: build/${{ matrix.platform }}
           retention-days: 1
+
+      - name: Upload staging artifact
+        if: github.ref_name == 'staging'
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: build-${{ matrix.platform }}
+          path: build/${{ matrix.platform }}/${{ github.ref_name }}
+          retention-days: 1
+
+  deploy-pages:
+    name: Deploy web build to GitHub Pages
+    if: github.ref_name == 'release' || github.ref_name == 'staging'
+    needs: export
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    environment:
+      name: github-pages
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          lfs: false
+
+      - name: Download web artifact
+        uses: actions/download-artifact@v8.0.1
+        with:
+          name: build-web
+          path: build/web
+
+      - name: Deploy release web build
+        if: github.ref_name == 'release'
+        # 4.8.0 pinned commit
+        uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: build/web
+          target-folder: ''
+          clean: false
+
+      - name: Deploy staging web build
+        if: github.ref_name == 'staging'
+        uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: build/web
+          target-folder: staging
+          clean: false
 
   publish:
     name: Publish builds
@@ -116,28 +169,3 @@ jobs:
               gh release create "$platform" --target "$GITHUB_SHA" --title "$platform" --notes ""
             gh release upload "$platform" "$RUNNER_TEMP/builds/build-$platform"/* --clobber
           done
-
-      - name: Checkout
-        uses: actions/checkout@v7.0.1
-        with:
-          ref: gh-pages
-          lfs: false
-          path: site
-
-      - name: Publish to gh-pages
-        working-directory: site
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if [ "$GITHUB_REF_NAME" = release ]; then
-            source_directory="$RUNNER_TEMP/builds/build-web"
-            target_directory="$GITHUB_WORKSPACE/site"
-          else
-            source_directory="$RUNNER_TEMP/builds/build-web/$GITHUB_REF_NAME"
-            target_directory="$GITHUB_WORKSPACE/site/$GITHUB_REF_NAME"
-          fi
-          mkdir -p "$target_directory"
-          cp -a "$source_directory/." "$target_directory/"
-          git add --all
-          git diff --cached --quiet || git commit -m "Deploy $GITHUB_REF_NAME web build"
-          git push origin HEAD:gh-pages

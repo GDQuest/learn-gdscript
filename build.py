@@ -288,10 +288,12 @@ def prepare_ci():
 
 
 def prepare_test():
-    """Set up only the custom Godot binary and generated scripts required by tests."""
+    """Set up the custom Godot binary and generated scripts required by tests.
+    Import the project in Godot."""
     print("Preparing test environment...\n")
     download_godot()
     prepare_course_scripts()
+    run_command(f"./{GODOT_BINARY_NAME} --headless --editor --quit")
     print("\n✓ Test environment ready")
 
 
