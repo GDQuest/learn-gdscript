@@ -1,11 +1,17 @@
 ---
 name: Content issue
-about: There's a typo or something unclear in some of the app's text.
+about: Something in a lesson is unclear, incorrect, or missing.
 title: ''
 labels: content
 assignees: ''
 
 ---
 
-**Issue description:**
-A clear and concise description of what the issue is.
+**Where is the problem?**
+Tell us the lesson or practice name and, if possible, the step or screen.
+
+**What is unclear or incorrect?**
+Paste the exact text or attach a screenshot.
+
+**What would make it clearer?**
+Optional: suggest a correction in your own words if you'd like.

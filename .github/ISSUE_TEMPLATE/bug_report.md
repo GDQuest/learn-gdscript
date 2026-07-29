@@ -1,31 +1,23 @@
 ---
 name: Bug report
-about: A feature isn't working as intended.
+about: Something in the app is not working as expected.
 title: ''
 labels: bug
 assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**What happened?**
+Tell us what went wrong in your own words.
 
-**To Reproduce**
-Steps to reproduce the bug:
-1. Go to '...'
-2. Click on '...'
-3. Scroll down to '...'
-4. See error
+**Where were you in the app?**
+For example, the lesson or practice name or number (like "L2.P2" for lesson 2, practice 2) and what you were trying to do.
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**What did you expect to happen?**
+Tell us what you thought would happen.
 
-**Screenshots**
-If applicable, drag and drop screenshots here to help explain your problem.
+**Your code**
+If this happened while doing a practice, paste the code you wrote here.
 
-**Information about your device (please complete the following information):**
- - Operating System: [e.g. iOS, Windows]
- - Browser: [e.g. Chrome, Safari]
-
-**Additional context**
-Add any other context about the problem here.
+**Optional: screenshot or other details**
+Screenshots can help, but you do not need to provide them.
