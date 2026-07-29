@@ -1,3 +1,4 @@
+## Translation parser plugin that extracts auto-translated scene properties beyond Godot's defaults.
 extends EditorTranslationParserPlugin
 
 var lookup_properties: Dictionary = {}
@@ -23,6 +24,7 @@ func _init() -> void:
 	exception_list.set("Control",  [ "tooltip_text" ])
 
 
+## Loads one scene file and finds and returns translatable properties from it.
 func _parse_file(path: String) -> Array[PackedStringArray]:
 	# Parse specific scene Node's properties (see in constructor) that are auto-translated by the engine when set. E.g Label's text property.
 	# These properties are translated with the tr() function in the C++ code when being set or updated.
@@ -46,7 +48,7 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 			if state.get_node_property_name(i, j) == &"editor_description":
 				editor_description = state.get_node_property_value(i, j)
 				break
-		
+
 		var node_type := state.get_node_type(i)
 		var parent_path := String(state.get_node_path(i, true))
 
@@ -102,34 +104,34 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 			if property == &"tooltip_text":
 				tooltip_text = String(state.get_node_property_value(i, j))
 				continue
-			
+
 			if property == &"tooltip_auto_translate_mode":
 				var mode: int = state.get_node_property_value(i, j)
 				match mode:
 					Node.AUTO_TRANSLATE_MODE_ALWAYS:
 						tooltip_auto_translating = true
-					
+
 					Node.AUTO_TRANSLATE_MODE_DISABLED:
 						tooltip_auto_translating = false
-					
+
 				continue
-		
+
 		if not tooltip_text.is_empty() and tooltip_auto_translating:
 			r_translations.push_back([ tooltip_text, "", "", editor_description ])
-		
+
 
 		# Parse the names of children of `TabContainer`s, as they are used for tab titles.
 		if not tabcontainer_paths.is_empty():
 			if not parent_path.begins_with(tabcontainer_paths[tabcontainer_paths.size() - 1]):
 				# Switch to the previous `TabContainer` this was nested in, if that was the case.
 				tabcontainer_paths.remove_at(tabcontainer_paths.size() - 1)
-			
+
 			if (
 				auto_translating and not tabcontainer_paths.is_empty() and ClassDB.is_parent_class(node_type, &"Control") and
 					parent_path == tabcontainer_paths[tabcontainer_paths.size() - 1]
 				):
 				r_translations.push_back([ state.get_node_name(i), "", "", editor_description ])
-			
+
 		if not auto_translating:
 			continue
 
@@ -153,7 +155,7 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 				continue
 
 			var property_value = state.get_node_property_value(i, j)
-			
+
 			# C++ parses built-in scripts this way, which we can't really do because we can't access the other parser plugins
 			# leaving this here in case there's another solution
 			#if property_name == &"script" and typeof(property_value) == TYPE_OBJECT and property_value:
@@ -190,11 +192,11 @@ func match_property(p_property_name: String, p_node_type: String) -> bool:
 			for exception_property in exception_properties:
 				if p_property_name.match(exception_property):
 					return false
-				
+
 	for lookup_property in lookup_properties:
 		if p_property_name.match(lookup_property):
 			return true
-		
+
 	return false
 
 

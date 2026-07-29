@@ -1,11 +1,15 @@
 @tool
 extends EditorTranslationParserPlugin
+## Translation parser plugin that extracts localizable strings and translator
+## context from lessons.
 
 static var PURE_NUMBERS_RE := RegEx.create_from_string("[^a-zA-Z]+")
 const SHARED := preload("Shared.gd")
 
 
 
+## Parses lesson BBCode into Godot's translation entry format keeping metadata
+## about the source lines.
 func _parse_file(path: String) -> Array[PackedStringArray]:
 	var parser := LessonBBCodeParser.new()
 

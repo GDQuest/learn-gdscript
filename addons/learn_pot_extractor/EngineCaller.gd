@@ -1,6 +1,7 @@
 @tool
-## Extracts C++-only functions via their signals or bound call("") methods in exposed dialogs or controls
 extends RefCounted
+## Extracts C++-only functions via their signals or bound call("") methods in exposed dialogs or controls
+## Bridges translation tooling to Godot editor internals that are not exposed as public APIs.
 
 
 static var _template_generate: Callable
@@ -18,6 +19,7 @@ static func template_generate(path: String) -> void:
 	_template_generate.call(path)
 
 
+## Locates and caches the editor's Localization panel used for template generation.
 static func get_localization_editor() -> Node:
 	if _localization_editor:
 		return _localization_editor

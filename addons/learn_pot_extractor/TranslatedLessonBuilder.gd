@@ -1,16 +1,27 @@
 @tool
 extends RefCounted
+## Renders translated lesson BBCode from parsed BBCode lessons in English and PO
+## catalogs.
 
 const SHARED := preload("Shared.gd")
 
 
-static func build_translated_lesson(lesson_bbcode_path: String, lang: String, tr_blocks: Array[Dictionary], translation_report: Dictionary) -> String:
+## Parses and returns a parsed lesson root node from the given BBCode file path.
+static func parse_lesson(lesson_bbcode_path: String) -> BBCodeParser.ParseNode:
 	var parser := LessonBBCodeParser.new()
 	var result := parser.parse_file(lesson_bbcode_path)
+	if not result.is_success():
+		push_error("Failed to parse lesson '%s':\n%s" % [lesson_bbcode_path, result.get_all_messages()])
+		return null
+	if result.root.children.is_empty():
+		push_error("Failed to parse lesson '%s': no lesson root found." % [lesson_bbcode_path])
+		return null
+	return result.root.children[0]
 
-	var root: BBCodeParser.ParseNode = result.root
-	var lesson: BBCodeParser.ParseNode = root.children[0]
 
+
+## Builds one translated lesson. translation_report is passed around and updated by this function.
+static func build_translated_lesson(lesson: BBCodeParser.ParseNode, tr_blocks: Dictionary, translation_report: Dictionary) -> String:
 	var lesson_builder: Array[String] = []
 	_build_lesson_tag(lesson_builder, lesson, tr_blocks, translation_report)
 	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
@@ -40,11 +51,11 @@ static func build_translated_lesson(lesson_bbcode_path: String, lang: String, tr
 	return "\n".join(lesson_builder)
 
 
-static func _build_lesson_tag(str_builder: Array[String], lesson: BBCodeParser.ParseNode, tr_blocks: Array[Dictionary], translation_report: Dictionary) -> void:
+static func _build_lesson_tag(str_builder: Array[String], lesson: BBCodeParser.ParseNode, tr_blocks: Dictionary, translation_report: Dictionary) -> void:
 	str_builder.append_array(['[lesson title="%s"]' % [_tr(BBCodeUtils.get_lesson_title(lesson), tr_blocks, translation_report).replace('"', r'\"')], ""])
 
 
-static func _build_title_tag(str_builder: Array[String], lesson: BBCodeParser.ParseNode, title: BBCodeParser.ParseNode, tr_blocks: Array[Dictionary], translation_report: Dictionary) -> void:
+static func _build_title_tag(str_builder: Array[String], lesson: BBCodeParser.ParseNode, title: BBCodeParser.ParseNode, tr_blocks: Dictionary, translation_report: Dictionary) -> void:
 	str_builder.append_array(["[title]%s[/title]" % [_tr(BBCodeUtils.get_lesson_title_for_index(lesson, lesson.children.find(title)), tr_blocks, translation_report)], ""])
 
 
@@ -52,7 +63,7 @@ static func _build_visual_tag(str_builder: Array[String], visual: BBCodeParser.P
 	str_builder.append_array(['[visual path="%s"]' % [BBCodeUtils.get_visual_path(visual)], ""])
 
 
-static func _build_note_tag(str_builder: Array[String], note: BBCodeParser.ParseNode, tr_blocks: Array[Dictionary], translation_report: Dictionary) -> void:
+static func _build_note_tag(str_builder: Array[String], note: BBCodeParser.ParseNode, tr_blocks: Dictionary, translation_report: Dictionary) -> void:
 	str_builder.append('[note title="%s"]' % [_tr(BBCodeUtils.get_note_title(note), tr_blocks, translation_report).replace('"', r'\"')])
 
 	var note_lines := _get_lines(BBCodeUtils.get_note_contents(note))
@@ -65,7 +76,7 @@ static func _build_note_tag(str_builder: Array[String], note: BBCodeParser.Parse
 	str_builder.append_array(["[/note]", ""])
 
 
-static func _build_quiz_choice_tag(str_builder: Array[String], quiz: BBCodeParser.ParseNode, tr_blocks: Array[Dictionary], translation_report: Dictionary) -> void:
+static func _build_quiz_choice_tag(str_builder: Array[String], quiz: BBCodeParser.ParseNode, tr_blocks: Dictionary, translation_report: Dictionary) -> void:
 	var quiz_data := BBCodeUtils.get_quiz_data(quiz)
 	str_builder.append('[quiz_choice question="%s" multiple="%s" shuffle="%s" en_id="%s"]' % [
 		_tr(quiz_data.question, tr_blocks, translation_report).replace('"', r'\"'),
@@ -99,7 +110,7 @@ static func _build_quiz_choice_tag(str_builder: Array[String], quiz: BBCodeParse
 	str_builder.append_array(["[/quiz_choice]", ""])
 
 
-static func _build_text(str_builder: Array[String], text_node: BBCodeParser.ParseNode, tr_blocks: Array[Dictionary], translation_report: Dictionary) -> void:
+static func _build_text(str_builder: Array[String], text_node: BBCodeParser.ParseNode, tr_blocks: Dictionary, translation_report: Dictionary) -> void:
 	var text := BBCodeUtils.get_paragraph_text(text_node)
 	var lines := _get_lines(text)
 	for i in lines.size():
@@ -110,7 +121,7 @@ static func _build_text(str_builder: Array[String], text_node: BBCodeParser.Pars
 	str_builder.append("")
 
 
-static func _build_practice_tag(str_builder: Array[String], practice: BBCodeParser.ParseNode, tr_blocks: Array[Dictionary], translation_report: Dictionary) -> void:
+static func _build_practice_tag(str_builder: Array[String], practice: BBCodeParser.ParseNode, tr_blocks: Dictionary, translation_report: Dictionary) -> void:
 	str_builder.append('[practice id="%s" title="%s"]' % [BBCodeUtils.get_practice_id(practice), _tr(BBCodeUtils.get_practice_title(practice), tr_blocks, translation_report).replace('"', r'\"')])
 
 	var description_lines := _get_lines(BBCodeUtils.get_practice_description(practice))
@@ -159,17 +170,16 @@ static func _build_practice_tag(str_builder: Array[String], practice: BBCodePars
 	str_builder.append("[/practice]")
 
 
-static func _tr(original: String, tr_blocks: Array[Dictionary], translation_report: Dictionary) -> String:
+static func _tr(original: String, tr_blocks: Dictionary, translation_report: Dictionary) -> String:
+	## Looks up an escaped source message in the locale index and records its translation status.
 	if not original:
 		return original
 	var original_id: String = original.replace('"', r'\"').replace("\n", r"\n")
-	var idx := tr_blocks.find_custom(func(block: Dictionary) -> bool:
-		return block.id == original_id
-	)
+	var block: Dictionary = tr_blocks.get(original_id, {})
 	translation_report.total += 1
-	if idx > -1 and tr_blocks[idx].str:
+	if not block.is_empty() and block.str:
 		translation_report.count += 1
-		return tr_blocks[idx].str.replace(r"\n", "\n").replace(r'\"', '"')
+		return block.str.replace(r"\n", "\n").replace(r'\"', '"')
 	return original
 
 

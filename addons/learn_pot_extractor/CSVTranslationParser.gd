@@ -1,5 +1,7 @@
 @tool
 extends EditorTranslationParserPlugin
+## Translation parser plugin that extracts translatable fields from the
+## project's CSV data files.
 
 const ERROR_DATABASE := "res://script_checking/error_database.csv"
 const GLOSSARY := "res://course/glossary.csv"
@@ -13,28 +15,30 @@ static var _extraction_data := {
 }
 
 
+## Converts configured translation columns into translation entries line
+## by line.
 func _parse_file(path: String) -> Array[PackedStringArray]:
 	if not path in _extraction_data:
 		push_warning("No data for CSV '%s' in CSV Extractor" % path)
 		return []
-	
+
 	var extraction_data: ExtractionData = _extraction_data[path]
-	
+
 	var csv_file := FileAccess.open(path, FileAccess.READ)
 	var blocks := []
 	while not csv_file.eof_reached():
 		blocks.append_array(csv_file.get_csv_line())
-	
+
 	var ret: Array[PackedStringArray] = []
 	for l in range(0, blocks.size(), extraction_data._total_columns):
 		for data: ExtractionTranslationData in extraction_data._translations:
 			if l + data._column < blocks.size():
 				var text_block: String = blocks[l + data._column]
-				
+
 				var lines := text_block.split("\n", false)
 				for line in lines:
 					ret.append(PackedStringArray([line]))
-		
+
 	return ret
 
 
@@ -58,7 +62,7 @@ class ExtractionData:
 class ExtractionTranslationData:
 	var _column: int
 	var _suffix: String
-	
+
 	func _init(column: int, suffix: String) -> void:
 		_column = column
 		_suffix = suffix

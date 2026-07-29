@@ -1,5 +1,7 @@
 @tool
 extends RefCounted
+## Shared utilities for parsing PO files, for making lookups, and for our
+## glossary tags.
 
 
 static var GLOSSARY_RE := RegEx.create_from_string(r"\[url=(?!http)([^\]]+)\]([^\[]+)\[\/url\]")
@@ -20,10 +22,12 @@ static var SPACE_NEWLINE_RE := RegEx.create_from_string(r'\s+\\n')
 static var WHITESPACE_RE := RegEx.create_from_string(r'\s+')
 
 
+## Parses obsolete PO entries used to recover translations during slipstreaming.
 static func get_unsure_tr_blocks(po_file: String, skip_header := true, out_header: Array = []) -> Array[Dictionary]:
 	return build_tr_blocks(po_file, skip_header, out_header, UNSURE_POT_PATTERN, 3)
 
 
+## Parses a PO file and merges repeated message IDs while retaining all source references.
 static func build_tr_blocks(po_file: String, skip_header := true, out_header: Array = [], target_regex := POT_PATTERN, prefix_offset := 0) -> Array[Dictionary]:
 	var po_text := FileAccess.open(po_file, FileAccess.READ).get_as_text()
 
@@ -35,29 +39,34 @@ static func build_tr_blocks(po_file: String, skip_header := true, out_header: Ar
 	out_header[0] = header
 
 	var tr_blocks: Array[Dictionary] = []
-	tr_blocks.append_array(target_regex.search_all(po_text, start_index).map(func(block_match: RegExMatch) -> Dictionary:
-		return {
+	var block_indices_by_id := {}
+	for block_match: RegExMatch in target_regex.search_all(po_text, start_index):
+		var block := {
 			"comments": _parse_course_comment(block_match),
 			"ctxt": block_match.get_string("ctxt").substr(9 + prefix_offset, block_match.get_string("ctxt").length()-(11 + prefix_offset)),
 			"id": _parse_course_string(block_match, true, prefix_offset),
 			"str": _parse_course_string(block_match, false, prefix_offset)
 		}
-	))
-	var duplicate_blocks := []
-	for block in tr_blocks:
-		if block in duplicate_blocks:
+		if block_indices_by_id.has(block.id):
+			var existing_index: int = block_indices_by_id[block.id]
+			var existing_block: Dictionary = tr_blocks[existing_index]
+			existing_block.comments.sources.append_array(block.comments.sources)
+			tr_blocks[existing_index] = existing_block
 			continue
-		for other_block in tr_blocks:
-			if other_block == block:
-				continue
-			if block.id == other_block.id:
-				block.comments.sources.append_array(other_block.comments.sources)
-				duplicate_blocks.push_back(other_block)
-	for duplicate in duplicate_blocks:
-		tr_blocks.erase(duplicate)
+		block_indices_by_id[block.id] = tr_blocks.size()
+		tr_blocks.append(block)
 	return tr_blocks
 
 
+## Indexes parsed PO blocks by message ID for constant-time lesson translation lookup.
+static func build_tr_lookup(tr_blocks: Array[Dictionary]) -> Dictionary:
+	var lookup := {}
+	for block in tr_blocks:
+		lookup[block.id] = block
+	return lookup
+
+
+## Serializes parsed PO blocks after slipstream post-processing preserves legacy formatting.
 static func write_from_tr_blocks(po_file: String, header: String, blocks: Array[Dictionary]) -> void:
 	var lines := [header]
 
@@ -143,6 +152,7 @@ static func _parse_course_string(target: RegExMatch, is_id: bool, prefix_offset 
 # BBCodeUtils for glossary entries) back into `[glossary term="term"]display
 # text[/glossary]`, which we need to apply translations.
 static func bbcode_rebuild_glossary_tags_from_url_tag(raw_string: String, out_did_find: Array) -> String:
+	## Restores glossary tags before lookup because lesson parsing renders them as URL tags.
 	var finds := GLOSSARY_RE.search_all(raw_string)
 	out_did_find.resize(1)
 	out_did_find[0] = not finds.is_empty()
