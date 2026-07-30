@@ -12,10 +12,6 @@ static var POT_PATTERN := RegEx.create_from_string(
 	r'(?<str>msgstr (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))'
 )
 
-static var UNSURE_POT_PATTERN := RegEx.create_from_string(
-	r'(?<id>#~ msgid (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))' +
-	r'(?<str>#~ msgstr (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))'
-)
 static var GLOSSARY_TERM_RE := RegEx.create_from_string(r'\[glossary term=\\"([^\\]+)\\"\]')
 static var GLOSSARY_TAG_RE := RegEx.create_from_string(r'\[glossary\s+term=(?:"([^"]+)"|([^\s\]]+))\]')
 static var TAG_RE := RegEx.create_from_string(r'\[[^\[]+\]([^\[]+)\[[^\[]+\]')
@@ -23,30 +19,20 @@ static var SPACE_NEWLINE_RE := RegEx.create_from_string(r'\s+\\n')
 static var WHITESPACE_RE := RegEx.create_from_string(r'\s+')
 
 
-## Parses obsolete PO entries used to recover translations during slipstreaming.
-static func get_unsure_tr_blocks(po_file: String, skip_header := true, out_header: Array = []) -> Array[Dictionary]:
-	return build_tr_blocks(po_file, skip_header, out_header, UNSURE_POT_PATTERN, 3)
-
-
 ## Parses a PO file and merges repeated message IDs while retaining all source references.
-static func build_tr_blocks(po_file: String, skip_header := true, out_header: Array = [], target_regex := POT_PATTERN, prefix_offset := 0) -> Array[Dictionary]:
+static func build_tr_blocks(po_file: String) -> Array[Dictionary]:
 	var po_text := FileAccess.open(po_file, FileAccess.READ).get_as_text()
 
 	var start_index := (po_text.find("\n\n")+2)
-	var header := po_text.substr(0, start_index)
-	start_index = start_index if skip_header else 0
-	if out_header.size() < 1:
-		out_header.resize(1)
-	out_header[0] = header
 
 	var tr_blocks: Array[Dictionary] = []
 	var block_indices_by_id := {}
-	for block_match: RegExMatch in target_regex.search_all(po_text, start_index):
+	for block_match: RegExMatch in POT_PATTERN.search_all(po_text, start_index):
 		var block := {
 			"comments": _parse_course_comment(block_match),
-			"ctxt": block_match.get_string("ctxt").substr(9 + prefix_offset, block_match.get_string("ctxt").length()-(11 + prefix_offset)),
-			"id": _parse_course_string(block_match, true, prefix_offset),
-			"str": _parse_course_string(block_match, false, prefix_offset)
+			"ctxt": block_match.get_string("ctxt").substr(9, block_match.get_string("ctxt").length() - 11),
+			"id": _parse_course_string(block_match, true),
+			"str": _parse_course_string(block_match, false)
 		}
 		if block_indices_by_id.has(block.id):
 			var existing_index: int = block_indices_by_id[block.id]
@@ -76,51 +62,6 @@ static func is_translatable_course_message(message: String) -> bool:
 	return true
 
 
-## Serializes parsed PO blocks after slipstream post-processing preserves legacy formatting.
-static func write_from_tr_blocks(po_file: String, header: String, blocks: Array[Dictionary]) -> void:
-	var lines := [header]
-
-	for block in blocks:
-		var append_fuzzy := false
-		for comment in block.comments.comments:
-			if comment == "fuzzy":
-				append_fuzzy = true
-			else:
-				lines.append("#. %s" % [comment])
-		for source in block.comments.sources:
-			if source.lesson:
-				lines.append("#: %s%s" % [source.lesson, ":%s" % [source.line_number] if not source.lesson.get_extension() in ["csv", "tscn"] else ""])
-
-		if append_fuzzy:
-			lines.append("#, fuzzy")
-
-		if block.ctxt:
-			lines.append('msgctxt "%s"' % [block.ctxt])
-
-		lines.append_array(_get_text_for_block(block, "id"))
-		lines.append_array(_get_text_for_block(block, "str"))
-		lines.append("")
-
-	var file := FileAccess.open(po_file, FileAccess.WRITE)
-	file.store_string("\n".join(lines))
-
-
-static func _get_text_for_block(block: Dictionary, suffix: String) -> PackedStringArray:
-	if "\\n" in block[suffix]:
-		var lines := ['msg%s ""' % suffix]
-		var outbound_lines: PackedStringArray = block[suffix].split("\\n")
-		for i in outbound_lines.size():
-			lines.append('"%s%s"' % [outbound_lines[i], "\\n" if i < outbound_lines.size()-1 else ""])
-		return lines
-	return ['msg%s "%s"' % [suffix, block[suffix]]]
-
-
-static func get_header(po_file: String) -> String:
-	var po_text := FileAccess.open(po_file, FileAccess.READ).get_as_text()
-	var start_index := po_text.find("\n\n")
-	return po_text.substr(0, start_index)
-
-
 static func _parse_course_comment(target: RegExMatch) -> Dictionary:
 	var result := {"sources": [], "comments": []}
 
@@ -140,7 +81,7 @@ static func _parse_course_comment(target: RegExMatch) -> Dictionary:
 	return result
 
 
-static func _parse_course_string(target: RegExMatch, is_id: bool, prefix_offset := 0) -> String:
+static func _parse_course_string(target: RegExMatch, is_id: bool) -> String:
 	var id := target.get_string("id" if is_id else "str")
 
 	var result := ""
@@ -149,11 +90,11 @@ static func _parse_course_string(target: RegExMatch, is_id: bool, prefix_offset 
 		var lines := id.split("\n").slice(1)
 		for line in lines:
 			if not line.ends_with('\n"'):
-				result += line.substr(1, line.length()-(2 + prefix_offset))
+				result += line.substr(1, line.length() - 2)
 			else:
-				result += line.substr(1, line.length()-(2 + prefix_offset)) + "\n"
+				result += line.substr(1, line.length() - 2) + "\n"
 	else:
-		result = id.substr(7 + (0 if is_id else 1) + prefix_offset, id.length()-(9 + (0 if is_id else 1) + prefix_offset))
+		result = id.substr(7 + (0 if is_id else 1), id.length() - (9 + (0 if is_id else 1)))
 
 	return result.replace(r"\t", "\t").strip_edges()
 

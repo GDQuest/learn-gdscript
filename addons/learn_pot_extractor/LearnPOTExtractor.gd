@@ -27,9 +27,7 @@ var _csv_parser := CSV_TRANSLATION_PARSER.new()
 var _tscn_parser := TSCN_TRANSLATION_PARSER.new()
 var _export_plugin := EXPORT_STEP.new()
 var _current_pots: PackedStringArray
-var _slipstream_running := false
 var _building_translated_running := false
-var _target_path := ""
 var _gdscript_tr_re := RegEx.create_from_string(r"[\s\(]tr\(")
 
 # Hash set of filepaths we do not want to even try parsing when building POT files
@@ -67,33 +65,11 @@ func _exit_tree() -> void:
 func _generate_all_pot_files() -> void:
 	var started_at := Time.get_ticks_msec()
 	print("POT generation: generating course, application, and supplementary templates.")
-	_target_path = ProjectSettings.globalize_path("res://i18n")
 
 	await _generate_course_pot()
 	await _generate_application_pot()
 	await _generate_supplemantary_pots()
 	print("POT generation: completed in %.2f seconds." % [_get_elapsed_seconds(started_at)])
-
-
-# ⚠ Only use if you know what you're doing ⚠
-func _slipstream_and_clean() -> void:
-	await _slipstream_existing_translations()
-	await _wipe_old_translations()
-
-
-func _wipe_old_translations() -> void:
-	var global_base_dir := _target_path
-
-	for lang in DirAccess.get_directories_at(global_base_dir):
-		if lang == "images":
-			continue
-		for file in DirAccess.get_files_at("%s/%s" % [global_base_dir, lang]):
-			if file.get_extension() != "po":
-				continue
-
-			if not file.get_basename() in ["n_application", "course", "supplementary"]:
-				DirAccess.remove_absolute("%s/%s/%s" % [global_base_dir, lang, file])
-		DirAccess.rename_absolute("%s/%s/n_application.po" % [global_base_dir, lang], "%s/%s/application.po" % [global_base_dir, lang])
 
 
 ## Rebuilds every translated lesson from the English source BBCode and each
@@ -169,84 +145,6 @@ func _build_translated_lessons() -> void:
 		print("%s:" % [lang])
 		print("- %d out of %d strings translated (%.1f%%)" % [locale_report.count, locale_report.total, strings_percent * 100.0])
 		print("- %d out of %d lessons are fully translated (%.1f%%)" % [locale_report.completed_lessons, locale_report.total_lessons, lessons_percent * 100.0])
-
-
-func _slipstream_existing_translations() -> void:
-	var global_base_dir := _target_path
-
-	var global_course := ProjectSettings.globalize_path(COURSE_POT_PATH)
-	var global_app := ProjectSettings.globalize_path(APPLICATION_POT_PATH)
-	var global_supp := ProjectSettings.globalize_path(SUPPLEMENTARY_POT_PATH)
-
-	for lang in DirAccess.get_directories_at(global_base_dir):
-		if lang == "images":
-			continue
-
-		print("Processing %s..." % [lang])
-		await get_tree().process_frame
-		await get_tree().process_frame
-
-		var global_lang_course := "%s/%s/course.po" % [global_base_dir, lang]
-		var global_lang_app := "%s/%s/n_application.po" % [global_base_dir, lang]
-		var global_lang_supp := "%s/%s/supplementary.po" % [global_base_dir, lang]
-
-		var template := global_course
-		var target := global_lang_course
-
-		var sources := Array(DirAccess.get_files_at("%s/%s" % [global_base_dir, lang])).filter(func(file: String) -> bool:
-			return file.get_extension() == "po" and file.begins_with("lesson-")
-		).map(func(file: String) -> String:
-			return "%s/%s/%s" % [global_base_dir, lang, file]
-		)
-
-		var temp_combined_course := "%s/%s/combined_course.po" % [global_base_dir, lang]
-		OS.execute("msgcat", ["--no-wrap", "--use-first"] + sources + ["-o", temp_combined_course])
-		OS.execute("msgmerge", ["--no-wrap", temp_combined_course, template, "-o", target])
-
-		var global_og_lang_app := "%s/%s/application.po" % [global_base_dir, lang]
-		OS.execute("msgmerge", ["--no-wrap", "-o", global_lang_app, global_og_lang_app, global_app])
-
-
-		# post process to match old format, since godot handles linebroken paragraphs whole
-		var header := []
-		var tr_blocks := SHARED.build_tr_blocks(global_lang_app, true, header)
-		var unsure_tr_blocks := SHARED.get_unsure_tr_blocks(global_lang_app)
-
-		for i in range(unsure_tr_blocks.size()-1, -1, -1):
-			var unsure_block: Dictionary = unsure_tr_blocks[i]
-			for block in tr_blocks:
-				if unsure_block.id in block.id and "\\n" in block.id:
-					block.comments.comments.erase("fuzzy")
-					block.str = "%s\\n\\n%s" % [unsure_block.str, block.str]
-
-		SHARED.write_from_tr_blocks(global_lang_app, "\n".join(header), tr_blocks)
-
-		var global_og_lang_error := "%s/%s/error_database.po" % [global_base_dir, lang]
-		var global_og_lang_glossary := "%s/%s/glossary_database.po" % [global_base_dir, lang]
-		var global_og_lang_doc := "%s/%s/classref_database.po" % [global_base_dir, lang]
-
-		sources = [global_og_lang_error, global_og_lang_glossary, global_og_lang_doc]
-		template = global_supp
-		target = global_lang_supp
-
-		var temp_combined_doc := "%s/%s/combined_docs.po" % [global_base_dir, lang]
-		OS.execute("msgcat", ["--no-wrap", "--use-first"] + sources + ["-o", temp_combined_doc])
-		OS.execute("msgmerge", ["--no-wrap", temp_combined_doc, template, "-o", target])
-
-	print("Done")
-
-
-func _wrap_and_quoted_string(s: String) -> String:
-	if not "\\n" in s:
-		return '"%s"' % [s]
-
-	var lines := s.split("\\n")
-	var string_builder := ['""']
-	for i in lines.size():
-		var line := lines[i]
-		string_builder.append('"%s%s"' % [line, "\\n" if i < lines.size()-1 else ""])
-
-	return "\n".join(string_builder)
 
 
 func _generate_supplemantary_pots() -> void:
