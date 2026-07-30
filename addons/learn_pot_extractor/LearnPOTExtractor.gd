@@ -107,6 +107,7 @@ func _build_translated_lessons() -> void:
 	var generated_files := 0
 	var failures := 0
 	var locales := _get_translation_locales()
+	var locale_reports := {}
 	if locales.is_empty():
 		print("Translation build: aborted; no valid locales with a course.po catalog were found.")
 		_building_translated_running = false
@@ -116,16 +117,13 @@ func _build_translated_lessons() -> void:
 	var tr_blocks_set := {}
 	for locale_index in locales.size():
 		var lang := locales[locale_index]
-		print("Translation build: catalog %d/%d (%s)." % [locale_index + 1, locales.size(), lang])
 		var tr_blocks := SHARED.build_tr_blocks("res://i18n/%s/course.po" % [lang])
 		tr_blocks_set[lang] = SHARED.build_tr_lookup(tr_blocks)
+		locale_reports[lang] = {"count": 0, "total": 0, "completed_lessons": 0, "total_lessons": 0}
 		await get_tree().process_frame
 
 	var lesson_files := _get_lesson_files()
-	print("Translation build: rebuilding %d lessons for %d locales." % [lesson_files.size(), locales.size()])
-	for lesson_index in lesson_files.size():
-		var file := lesson_files[lesson_index]
-		print("Translation build: lesson %d/%d (%s)." % [lesson_index + 1, lesson_files.size(), file.get_base_dir().get_basename()])
+	for file in lesson_files:
 		await get_tree().process_frame
 		var lesson := LESSON_BUILDER.parse_lesson(file)
 		if not lesson:
@@ -137,7 +135,12 @@ func _build_translated_lessons() -> void:
 			var lesson_report := {"count": 0, "total": 0}
 			translation_reports[lang] = lesson_report
 			var lesson_text := LESSON_BUILDER.build_translated_lesson(lesson, tr_blocks_set[lang], lesson_report)
-			lesson_report["percent"] = float(lesson_report.count) / float(lesson_report.total)
+			lesson_report["percent"] = float(lesson_report.count) / float(lesson_report.total) if lesson_report.total > 0 else 1.0
+			locale_reports[lang].count += lesson_report.count
+			locale_reports[lang].total += lesson_report.total
+			locale_reports[lang].total_lessons += 1
+			if lesson_report.count >= lesson_report.total:
+				locale_reports[lang].completed_lessons += 1
 
 			var new_path := "%s.%s.bbcode" % [file.get_basename(), lang]
 			var output_file := FileAccess.open(new_path, FileAccess.WRITE)
@@ -158,6 +161,14 @@ func _build_translated_lessons() -> void:
 
 	_building_translated_running = false
 	print("Translation build: completed in %.2f seconds. Lessons: %d, locales: %d, generated files: %d, failures: %d." % [_get_elapsed_seconds(started_at), lesson_files.size(), locales.size(), generated_files, failures])
+	print("Completed translated lesson build")
+	for lang in locales:
+		var locale_report: Dictionary = locale_reports[lang]
+		var strings_percent := float(locale_report.count) / float(locale_report.total) if locale_report.total > 0 else 1.0
+		var lessons_percent := float(locale_report.completed_lessons) / float(locale_report.total_lessons) if locale_report.total_lessons > 0 else 1.0
+		print("%s:" % [lang])
+		print("- %d out of %d strings translated (%.1f%%)" % [locale_report.count, locale_report.total, strings_percent * 100.0])
+		print("- %d out of %d lessons are fully translated (%.1f%%)" % [locale_report.completed_lessons, locale_report.total_lessons, lessons_percent * 100.0])
 
 
 func _slipstream_existing_translations() -> void:

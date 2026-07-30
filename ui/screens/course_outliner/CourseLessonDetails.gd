@@ -54,8 +54,6 @@ func set_has_started(value: bool) -> void:
 func _update_visuals() -> void:
 	if TranslationManager.current_language == "en":
 		_translation_stats_block.hide()
-	else:
-		_translation_stats_block.show()
 	
 	if not is_inside_tree():
 		return
@@ -71,6 +69,7 @@ func _update_visuals() -> void:
 		var translation_percentage: float = TranslationManager.lesson_tr_data[lesson.bbcode_path][TranslationManager.current_language]["percent"]
 		var current_profile := UserProfiles.get_profile()
 		
+		_translation_stats_block.visible = translation_percentage < 1.0
 		_translation_stats_value.text = "%d%%" % [floori(translation_percentage * 100)]
 		_contributions_link.visible = translation_percentage < 1.0
 		if not _contributions_link.meta_clicked.is_connected(_on_meta_clicked):

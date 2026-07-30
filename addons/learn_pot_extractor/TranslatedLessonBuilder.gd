@@ -172,12 +172,12 @@ static func _build_practice_tag(str_builder: Array[String], practice: BBCodePars
 
 static func _tr(original: String, tr_blocks: Dictionary, translation_report: Dictionary) -> String:
 	## Looks up an escaped source message in the locale index and records its translation status.
-	if not original:
+	if not original or not SHARED.is_translatable_course_message(original):
 		return original
-	var original_id: String = original.replace('"', r'\"').replace("\n", r"\n")
+	var original_id: String = original.strip_edges().replace('"', r'\"').replace("\n", r"\n")
 	var block: Dictionary = tr_blocks.get(original_id, {})
 	translation_report.total += 1
-	if not block.is_empty() and block.str:
+	if not block.is_empty() and block.str and not block.comments.comments.has("fuzzy"):
 		translation_report.count += 1
 		return SHARED.normalize_glossary_tags(block.str.replace(r"\n", "\n").replace(r'\"', '"'))
 	return original

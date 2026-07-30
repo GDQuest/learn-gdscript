@@ -67,6 +67,15 @@ static func build_tr_lookup(tr_blocks: Array[Dictionary]) -> Dictionary:
 	return lookup
 
 
+## Returns true if the message is a valid course message that can be translated. We skip pure numbers and code blocks.
+static func is_translatable_course_message(message: String) -> bool:
+	if message.is_valid_int() or message.is_valid_float():
+		return false
+	if message.begins_with("[code]") and message.find("[/code]", 6) == message.length() - 7:
+		return false
+	return true
+
+
 ## Serializes parsed PO blocks after slipstream post-processing preserves legacy formatting.
 static func write_from_tr_blocks(po_file: String, header: String, blocks: Array[Dictionary]) -> void:
 	var lines := [header]
@@ -146,7 +155,7 @@ static func _parse_course_string(target: RegExMatch, is_id: bool, prefix_offset 
 	else:
 		result = id.substr(7 + (0 if is_id else 1) + prefix_offset, id.length()-(9 + (0 if is_id else 1) + prefix_offset))
 
-	return result.strip_edges()
+	return result.replace(r"\t", "\t").strip_edges()
 
 
 # Converts the "rendered" `[url=term]display text[/url]` (produced by
