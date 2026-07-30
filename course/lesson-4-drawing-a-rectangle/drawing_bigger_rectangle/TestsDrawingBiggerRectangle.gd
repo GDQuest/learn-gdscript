@@ -28,4 +28,3 @@ func test_draw_rectangle_of_220_by_260() -> String:
 		return tr("The drawn shape is not a rectangle with a width of 220 and a length of 260.")
 
 	return ""
-

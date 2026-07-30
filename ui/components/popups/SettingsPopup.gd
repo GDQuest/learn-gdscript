@@ -1,6 +1,10 @@
 extends Node
 
-enum Framerates { SIXTY_FPS, THIRTY_FPS, NO_LIMIT }
+enum Framerates {
+	SIXTY_FPS,
+	THIRTY_FPS,
+	NO_LIMIT,
+}
 
 # Maps framerate options selected in the UI to actual framerate values.
 const FRAMERATE_MAP := {
@@ -14,7 +18,7 @@ const FRAMERATE_MAP := {
 @onready var _translation_info_button: Button = %TranslationInfoButton
 @onready var _translation_info_popup: CanvasLayer = %TranslationInfoPopup
 @onready var _language_value: OptionButton = %LanguageValue
-@onready var _incomplete_tr_access: CheckBox = %IncompleteTRAccessValue
+@onready var _translation_status: Label = %TranslationStatus
 @onready var _font_size_value: HSlider = %FontSizeValue
 @onready var _font_size_sample: Label = %SampleText
 @onready var _scroll_sensitivity_slider: HSlider = %ScrollSensitivityValue
@@ -30,7 +34,9 @@ var _sample_default_font: FontVariation
 
 func _init() -> void:
 	# Store the initial state as is, so that we can preview it without being affected.
-	_sample_default_font = ResourceLoader.load("res://ui/theme/fonts/font_text.tres", "", ResourceLoader.CACHE_MODE_IGNORE).duplicate()
+	_sample_default_font = ResourceLoader \
+			.load("res://ui/theme/fonts/font_text.tres", "", ResourceLoader.CACHE_MODE_IGNORE) \
+			.duplicate()
 
 
 func _ready() -> void:
@@ -68,6 +74,7 @@ func _init_languages() -> void:
 		var language_name: String = language_data.name
 		_language_value.add_item(language_name)
 		_language_value.set_item_metadata(item_index, language_data.code)
+	_language_value.item_selected.connect(_on_language_selected)
 
 
 func _init_values() -> void:
@@ -78,6 +85,7 @@ func _init_values() -> void:
 		if language_code == current_profile.language:
 			_language_value.select(i)
 			break
+	_update_translation_status()
 
 	_font_size_value.value = clamp(
 		current_profile.font_size_scale,
@@ -89,8 +97,6 @@ func _init_values() -> void:
 
 	_lower_contrast.button_pressed = current_profile.lower_contrast
 	_dyslexia_font.button_pressed = current_profile.dyslexia_font
-	
-	_incomplete_tr_access.button_pressed = current_profile.access_incomplete_translations
 
 
 func _on_apply_settings() -> void:
@@ -98,7 +104,10 @@ func _on_apply_settings() -> void:
 
 	var size_scale := int(_font_size_value.value)
 	var dyslexia_font := _dyslexia_font.button_pressed
-	if size_scale != current_profile.font_size_scale or dyslexia_font != current_profile.dyslexia_font:
+	if (
+		size_scale != current_profile.font_size_scale
+		or dyslexia_font != current_profile.dyslexia_font
+	):
 		ThemeManager.apply_font_settings(size_scale, dyslexia_font)
 		current_profile.font_size_scale = size_scale
 		current_profile.dyslexia_font = dyslexia_font
@@ -119,8 +128,29 @@ func _on_apply_settings() -> void:
 	if current_profile.dyslexia_font:
 		current_font.base_font = load("res://ui/assets/fonts/OpenDyslexic-Regular.otf")
 	_font_size_sample.add_theme_font_override("font", current_font)
-	
-	current_profile.set_access_incomplete_translations(_incomplete_tr_access.button_pressed)
+
+
+func _on_language_selected(_index: int) -> void:
+	_update_translation_status()
+
+
+func _update_translation_status() -> void:
+	var language_code := str(_language_value.get_item_metadata(_language_value.selected))
+	if language_code.is_empty() or language_code == TranslationManager.DEFAULT_LOCALE:
+		_translation_status.hide()
+		return
+
+	var summary := TranslationManager.get_translation_summary(language_code)
+	_translation_status.text = tr(
+		"{percentage}% of text translated. {completed}/{total} lessons fully translated."
+	).format(
+		{
+			"percentage": floori(summary.completeness * 100.0),
+			"completed": summary.fully_translated_lessons,
+			"total": summary.total_lessons,
+		}
+	)
+	_translation_status.show()
 
 
 func _on_font_size_changed(value: int) -> void:

@@ -9,6 +9,8 @@ var lesson_index := -1:
 	set = set_lesson_index
 var lesson_title := "":
 	set = set_lesson_title
+var translation_status := "":
+	set = set_translation_status
 var completion := 0:
 	set = set_completion
 var is_selected := false:
@@ -16,9 +18,10 @@ var is_selected := false:
 
 var _mouse_hovering := false
 
-@onready var _prefix_label := $MarginContainer/Layout/PrefixLabel as Label
-@onready var _title_label := $MarginContainer/Layout/TitleLabel as Label
-@onready var _progress_bar := $MarginContainer/Layout/ProgressBar as ProgressBar
+@onready var _prefix_label := %PrefixLabel as Label
+@onready var _title_label := %TitleLabel as Label
+@onready var _translation_status_label := %TranslationStatusLabel as Label
+@onready var _progress_bar := %ProgressBar as ProgressBar
 
 
 func _ready() -> void:
@@ -55,6 +58,11 @@ func set_lesson_title(value: String) -> void:
 	_update_visuals()
 
 
+func set_translation_status(value: String) -> void:
+	translation_status = value
+	_update_visuals()
+
+
 func set_completion(value: int) -> void:
 	completion = value
 	_update_visuals()
@@ -71,8 +79,10 @@ func _update_visuals() -> void:
 
 	_prefix_label.text = "L%d." % [lesson_index + 1]
 	_title_label.text = lesson_title
+	_translation_status_label.text = translation_status
+	_translation_status_label.visible = not translation_status.is_empty()
 	_progress_bar.value = completion
-	tooltip_text = lesson_title
+	tooltip_text = lesson_title if translation_status.is_empty() else "%s\n%s" % [lesson_title, translation_status]
 
 	if completion == 0:
 		_title_label.modulate.a = 0.65

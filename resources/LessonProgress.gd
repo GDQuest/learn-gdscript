@@ -3,7 +3,7 @@ class_name LessonProgress
 extends Resource
 
 ## Lesson resource identifier.
-@export var lesson_id: String = ""
+@export var lesson_id := ""
 ## Flag that indicates that the user got to the bottom of the lesson and clicked on any practice.
 @export var completed_reading: bool = false
 ## Identifiers of completed quiz resources.

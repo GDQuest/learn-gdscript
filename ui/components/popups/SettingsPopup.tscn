@@ -85,14 +85,18 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 32
 
-[node name="LanguageSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=461239063]
+[node name="LanguageSetting" type="VBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=461239063]
 layout_mode = 2
 
 [node name="LabelRow" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting" unique_id=561239064]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow" unique_id=478374928]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow" unique_id=270389053]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow/HBoxContainer" unique_id=478374928]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Pick one of the community-contributed translations.
@@ -100,7 +104,7 @@ Some translations are not complete yet."
 mouse_filter = 1
 text = "Language"
 
-[node name="TranslationInfoButton" type="Button" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow" unique_id=561239065]
+[node name="TranslationInfoButton" type="Button" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow/HBoxContainer" unique_id=561239065]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -110,37 +114,19 @@ mouse_default_cursor_shape = 2
 icon = ExtResource("11")
 flat = true
 
-[node name="LanguageValue" type="OptionButton" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting" unique_id=2054986385]
+[node name="LanguageValue" type="OptionButton" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow" unique_id=2054986385]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Pick one of the community-contributed translations.
 Some translations are not complete yet."
 
-[node name="IncompleteTRAccessSettings" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=533251402]
-layout_mode = 2
-
-[node name="LabelRow" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/IncompleteTRAccessSettings" unique_id=659497095]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/IncompleteTRAccessSettings/LabelRow" unique_id=192092239]
-layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "Some lessons are only partly translated and inaccessible by default.
-Turn this on to show them anyway.
-Note that some or all of the lesson text will still be in English."
-mouse_filter = 1
-text = "Allow incomplete translations"
-
-[node name="IncompleteTRAccessValue" type="CheckBox" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/IncompleteTRAccessSettings" unique_id=1989774944]
+[node name="TranslationStatus" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting" unique_id=2054986386]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 10)
 layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "Some lessons are only partly translated and inaccessible by default.
-Turn this on to show them anyway.
-Note that some or all of the lesson text will still be in English."
-text = "Enabled"
+text = "0% of text translated. 0/0 lessons fully translated."
+autowrap_mode = 2
 
 [node name="FontSizeSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=1561891103]
 layout_mode = 2

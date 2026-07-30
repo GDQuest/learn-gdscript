@@ -52,7 +52,7 @@ var _loaded_translations := []
 func _ready() -> void:
 	var current_profile := UserProfiles.get_profile()
 	set_language(current_profile.language)
-	
+
 	_update_language_completeness()
 
 
@@ -63,18 +63,18 @@ func _update_language_completeness() -> void:
 			var meta_text := FileAccess.open(meta_file, FileAccess.READ).get_as_text()
 			var lesson_data: Dictionary = JSON.parse_string(meta_text)
 			lesson_tr_data["res://course/%s/lesson.bbcode" % [lesson]] = lesson_data
-	
+
 	var total := 0
 	for lesson in lesson_tr_data:
 		@warning_ignore("unsafe_method_access")
 		total += lesson_tr_data[lesson].values()[0]["total"]
-	
+
 	var counts := {}
 	for lesson in lesson_tr_data:
 		for lang in lesson_tr_data[lesson]:
 			var current: int = counts.get_or_add(lang, 0)
 			counts[lang] = current + lesson_tr_data[lesson][lang]["count"]
-	
+
 	for lang in counts:
 		overall_tr_progress[lang] = counts[lang] / total
 
@@ -84,10 +84,10 @@ func get_available_languages() -> Array:
 
 	for locale_code: String in overall_tr_progress:
 		var completeness: float = overall_tr_progress[locale_code]
-		
+
 		if completeness < COMPLETENESS_THRESHOLD:
 			continue
-		
+
 		var language_name: String = LOCALE_TO_LABEL.get(locale_code, "")
 		if language_name == "":
 			language_name = TranslationServer.get_locale_name(locale_code)
@@ -107,6 +107,29 @@ func get_translation_completeness(lesson_path: String) -> float:
 		return 0.0
 	var lang_data: Dictionary = (lesson_tr_data[lesson_path] as Dictionary).get(current_language, {})
 	return lang_data.get("count", 0.0) / lang_data.get("total", 1.0)
+
+
+## Returns a dictionary containing 3 keys: completeness,
+## fully_translated_lessons, and total_lessons. They're counts of the
+## translation progress for the given language.
+func get_translation_summary(language_code := "") -> Dictionary:
+	if language_code.is_empty():
+		language_code = current_language
+	var completeness: float = overall_tr_progress.get(language_code, 1.0 if language_code == DEFAULT_LOCALE else 0.0)
+	var fully_translated_lessons := 0
+	var total_lessons := lesson_tr_data.size()
+
+	for lesson_path in lesson_tr_data:
+		var lesson_data: Dictionary = lesson_tr_data[lesson_path]
+		var translation_data: Dictionary = lesson_data.get(language_code, {})
+		if translation_data.get("percent", 0.0) >= 1.0:
+			fully_translated_lessons += 1
+
+	return {
+		"completeness": completeness,
+		"fully_translated_lessons": fully_translated_lessons,
+		"total_lessons": total_lessons,
+	}
 
 
 func current_translation_is_rtl() -> bool:

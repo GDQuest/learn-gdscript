@@ -28,7 +28,14 @@ var has_started: bool = false:
 func _ready() -> void:
 	_update_visuals()
 
-	_goto_lesson_button.pressed.connect(_on_goto_lesson_pressed)
+	_goto_lesson_button.pressed.connect(
+		func _on_goto_lesson_pressed () -> void:
+			if not lesson:
+				return
+			NavigationManager.navigate_to(
+				"%s" % [course_index.get_lesson_slug_from_path(lesson.bbcode_path)]
+			),
+	)
 
 
 func set_lesson(value: BBCodeParser.ParseNode) -> void:
@@ -54,7 +61,7 @@ func set_has_started(value: bool) -> void:
 func _update_visuals() -> void:
 	if TranslationManager.current_language == "en":
 		_translation_stats_block.hide()
-	
+
 	if not is_inside_tree():
 		return
 	if not lesson:
@@ -66,18 +73,18 @@ func _update_visuals() -> void:
 		_goto_lesson_button.disabled = false
 		_goto_lesson_button.grab_focus()
 	else:
-		var translation_percentage: float = TranslationManager.lesson_tr_data[lesson.bbcode_path][TranslationManager.current_language]["percent"]
-		var current_profile := UserProfiles.get_profile()
-		
+		var translation_percentage: float = TranslationManager.lesson_tr_data[lesson.bbcode_path][
+			TranslationManager.current_language
+		]["percent"]
 		_translation_stats_block.visible = translation_percentage < 1.0
 		_translation_stats_value.text = "%d%%" % [floori(translation_percentage * 100)]
 		_contributions_link.visible = translation_percentage < 1.0
 		if not _contributions_link.meta_clicked.is_connected(_on_meta_clicked):
 			_contributions_link.meta_clicked.connect(_on_meta_clicked)
-		_goto_lesson_button.disabled = translation_percentage < 1.0 and not current_profile.access_incomplete_translations
-		if translation_percentage >= 1.0 or current_profile.access_incomplete_translations:
-			_goto_lesson_button.grab_focus()
-	
+		_goto_lesson_button.disabled = false
+		_goto_lesson_button.text = tr("Open Anyway") if translation_percentage < 1.0 else tr("Start Lesson")
+		_goto_lesson_button.grab_focus()
+
 	var has_done_reading := false
 	_reading_stats_icon.texture = VALUE_CHECK_NONE
 	_reading_stats_icon.modulate = VALUE_COLOR_NONE
@@ -104,9 +111,9 @@ func _update_visuals() -> void:
 
 	if has_done_reading:
 		_goto_lesson_button.text = tr("Open Lesson")
-	elif has_started:
+	elif has_started and _goto_lesson_button.text != tr("Open Anyway"):
 		_goto_lesson_button.text = tr("Continue Lesson")
-	else:
+	elif _goto_lesson_button.text != tr("Open Anyway"):
 		_goto_lesson_button.text = tr("Start Lesson")
 
 
@@ -115,10 +122,3 @@ func _on_meta_clicked(data) -> void:
 		var string_data: String = data
 		if string_data.begins_with("https://"):
 			OS.shell_open(string_data)
-
-
-func _on_goto_lesson_pressed() -> void:
-	if not lesson:
-		return
-
-	NavigationManager.navigate_to("%s" % [course_index.get_lesson_slug_from_path(lesson.bbcode_path)])

@@ -43,7 +43,7 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 
 	for i in state.get_node_count():
 		# our modification allows to add TRANSLATORS: comments from scene parser here
-		var editor_description: String = ""
+		var editor_description := ""
 		for j in state.get_node_property_count(i):
 			if state.get_node_property_name(i, j) == &"editor_description":
 				editor_description = state.get_node_property_value(i, j)
@@ -97,7 +97,7 @@ func _parse_file(path: String) -> Array[PackedStringArray]:
 				atr_owners.push_back([state.get_node_path(i), true])
 
 		# Handle the `tooltip_auto_translate_mode` property separately.
-		var tooltip_text: String = ""
+		var tooltip_text := ""
 		var tooltip_auto_translating := auto_translating
 		for j in state.get_node_property_count(i):
 			var property := state.get_node_property_name(i, j)

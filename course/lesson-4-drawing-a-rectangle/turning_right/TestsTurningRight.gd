@@ -28,4 +28,3 @@ func test_draw_corner_of_200_by_200() -> String:
 		return tr("The drawn shape is not a corner connected by two lines of length 200.")
 
 	return ""
-

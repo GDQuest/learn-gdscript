@@ -12,7 +12,7 @@ const URL_GODOT_DOCS_REF := "ref=godot-docs"
 # General profile details
 
 ## Name of the profile.
-@export var player_name: String = ""
+@export var player_name := ""
 ## Course progression data.
 @export var study_progression: Array[CourseProgress] = []
 ## Map of last started lessons per course.
@@ -23,7 +23,7 @@ const URL_GODOT_DOCS_REF := "ref=godot-docs"
 # User settings
 
 ## Application language.
-@export var language: String = "en"
+@export var language := "en"
 ## Relative size adjustment for all fonts, in integer steps.
 @export var font_size_scale: int = 0
 ## Flag that enables the lower contrast mode.
@@ -36,8 +36,6 @@ const URL_GODOT_DOCS_REF := "ref=godot-docs"
 ## Target framerate for the application, to reduce update intensity on lower end devices.
 @export_range(0, 240, 10, "or_greater") var framerate_limit: int = 60:
 	set = set_framerate_limit
-## Flag that allows only partially translated lessons to still be accessed
-@export var access_incomplete_translations := false
 ## Whether the beta indicator is folded.
 @export var is_beta_indicator_folded := false
 
@@ -198,10 +196,6 @@ func reset_course_progress(course_id: String) -> void:
 func set_scroll_sensitivity(amount: float) -> void:
 	scroll_sensitivity = maxf(amount, 0.1)
 	scroll_sensitivity_changed.emit(scroll_sensitivity)
-
-
-func set_access_incomplete_translations(allow_access: bool) -> void:
-	access_incomplete_translations = allow_access
 
 
 func set_framerate_limit(limit: int) -> void:

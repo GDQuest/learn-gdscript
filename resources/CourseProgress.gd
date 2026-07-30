@@ -3,7 +3,7 @@ class_name CourseProgress
 extends Resource
 
 ## Course resource identifier.
-@export var course_id: String = ""
+@export var course_id := ""
 ## Lesson progression data.
 @export var lessons: Array[LessonProgress] = []
 

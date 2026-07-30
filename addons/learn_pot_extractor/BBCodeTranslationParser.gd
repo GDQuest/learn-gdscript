@@ -144,11 +144,11 @@ func _get_lines(text_block: String) -> PackedStringArray:
 	return ret
 
 
-func _build_comment(node: BBCodeParser.ParseNode, base_comment: String = "") -> String:
+func _build_comment(node: BBCodeParser.ParseNode, base_comment := "") -> String:
 	return _build_text_comment(node.attributes.get("tr", ""), base_comment)
 
 
-func _build_text_comment(context_comment: String, base_comment: String = "") -> String:
+func _build_text_comment(context_comment: String, base_comment := "") -> String:
 	var comments := []
 	if base_comment:
 		comments.append(base_comment)

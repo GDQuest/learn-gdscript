@@ -12,7 +12,7 @@ const EXPORT_REGEX_PATTERN := "^\\s*#\\s*(/)?EXPORT(?:\\s+(\\w+))?\\s*$"
 # script_source: The full GDScript source code
 # slice_name: Name of the slice to extract (empty string = first EXPORT found)
 # Dictionary with: {lines_before, lines_after, lines_editable, leading_spaces, start, end}
-static func parse_slice(script_source: String, slice_name: String = "") -> Dictionary:
+static func parse_slice(script_source: String, slice_name := "") -> Dictionary:
 	var lines: Array[String] = Array(Array(script_source.split("\n")), TYPE_STRING, "", null)
 	var export_regex := RegEx.new()
 	export_regex.compile(EXPORT_REGEX_PATTERN)
@@ -132,7 +132,7 @@ static func find_all_slice_names(script_source: String) -> Array:
 # script_path: Path to the .gd file
 # slice_name: Name of the EXPORT slice to extract (empty = first one found)
 # returns ScriptSlice resource with parsed data
-static func load_from_script(script_path: String, slice_name: String = "") -> ScriptSlice:
+static func load_from_script(script_path: String, slice_name := "") -> ScriptSlice:
 	if script_path.is_relative_path():
 		script_path = "res://" + script_path
 	elif not script_path.begins_with("res://"):

@@ -37,7 +37,7 @@ func update_breadcrumbs(course_index: CourseIndex, target: BBCodeParser.ParseNod
 
 func _rebuild_breadcrumbs() -> void:
 	_clear_navigation_nodes()
-	
+
 	if not _last_course_index or not _last_target:
 		return
 
@@ -65,7 +65,7 @@ func _rebuild_breadcrumbs() -> void:
 	elif _last_target is BBCodeParser.ParseNode and _last_target.tag == BBCodeParserData.Tag.PRACTICE:
 		var practice := _last_target as BBCodeParser.ParseNode
 		# TODO: Should probably avoid relying on content ID for getting paths.
-		
+
 		var practice_id := BBCodeUtils.get_practice_id(practice)
 
 		var lesson: BBCodeParser.ParseNode = practice.parent
@@ -107,7 +107,7 @@ func _clear_navigation_nodes() -> void:
 		child_node.queue_free()
 
 
-func _create_navigation_node(text: String, course_index: CourseIndex, path: String = "", current: bool = false) -> void:
+func _create_navigation_node(text: String, course_index: CourseIndex, path := "", current: bool = false) -> void:
 	if get_child_count() > 0:
 		var separator := Label.new()
 		separator.text = " > "

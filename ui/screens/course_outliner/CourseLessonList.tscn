@@ -12,7 +12,9 @@ theme_override_styles/panel = ExtResource("1")
 script = ExtResource("3")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=856694061]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 3
 horizontal_scroll_mode = 0
 script = ExtResource("4")
 
@@ -24,4 +26,20 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="Items" type="VBoxContainer" parent="ScrollContainer/MarginContainer" unique_id=691799468]
+unique_name_in_owner = true
 layout_mode = 2
+
+[node name="TranslationStatusMarginContainer" type="MarginContainer" parent="ScrollContainer/MarginContainer/Items" unique_id=1991652400]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="TranslationStatus" type="Label" parent="ScrollContainer/MarginContainer/Items/TranslationStatusMarginContainer" unique_id=691799469]
+unique_name_in_owner = true
+layout_mode = 2
+text = "This course is 80% translated. Incomplete lessons will contain English text."
+autowrap_mode = 2

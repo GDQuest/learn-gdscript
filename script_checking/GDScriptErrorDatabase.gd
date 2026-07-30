@@ -11,9 +11,9 @@ const CSV_EXPLANATION_FIELD := "error_explanation"
 const CSV_SUGGESTION_FIELD := "error_suggestion"
 
 class ErrorRecord:
-	var code: String = ""
-	var explanation: String = ""
-	var suggestion: String = ""
+	var code := ""
+	var explanation := ""
+	var suggestion := ""
 
 static var _errors: Dictionary[int, ErrorRecord] = {}
 
