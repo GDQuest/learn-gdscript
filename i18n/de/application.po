@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the Learn GDScript From
 # project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
@@ -14,23 +14,11 @@ msgstr ""
 "Language-Team: German <https://hosted.weblate.org/projects/learn-gdscript-from-zero/application/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.10.3\n"
 "X-Generator: Poedit 3.9\n"
-
-#: course/common/inventory/DictItem.tscn
-#: course/lesson-23-append-to-arrays/visuals/Crate.tscn
-#: course/lesson-24-access-array-indices/visuals/inventory/Item.tscn
-#: course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.tscn
-msgid "0"
-msgstr "0%"
-
-#: course/lesson-21-strings/visuals/RobotWithNumberName.tscn
-#, fuzzy
-msgid "70801"
-msgstr "70801"
 
 #: course/common/CustomHealthBar.tscn
 #, fuzzy
@@ -47,6 +35,13 @@ msgstr "Inventar"
 #, fuzzy
 msgid "healing heart"
 msgstr "heilendes Herz"
+
+#: course/common/inventory/DictItem.tscn
+#: course/lesson-23-append-to-arrays/visuals/Crate.tscn
+#: course/lesson-24-access-array-indices/visuals/inventory/Item.tscn
+#: course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.tscn
+msgid "0"
+msgstr "0%"
 
 #: course/lesson-11-time-delta/visuals/DemoRotatingSpriteFrame.tscn
 #: course/lesson-11-time-delta/visuals/DemoRotatingTime.tscn
@@ -296,6 +291,11 @@ msgstr "Dies ist ein Hinweis."
 msgid "Hover over the Robot to learn more"
 msgstr "Fahre mit der Maus über den Roboter, um mehr zu erfahren"
 
+#: course/lesson-21-strings/visuals/RobotWithNumberName.tscn
+#, fuzzy
+msgid "70801"
+msgstr "70801"
+
 #: course/lesson-21-strings/visuals/RobotWithRegularName.tscn
 #, fuzzy
 msgid "Robot"
@@ -303,7 +303,7 @@ msgstr "Roboter"
 
 #: course/lesson-22-functions-return-values/visuals/ExampleRoundingHealth.tscn
 #, fuzzy
-msgid "Health:"
+msgid "Health: "
 msgstr "Gesundheit:"
 
 #: course/lesson-23-append-to-arrays/clearing-meals/ClearingMeals.tscn
@@ -481,7 +481,7 @@ msgstr "Zurück zum Hauptmenü"
 msgid "Open the course index"
 msgstr "Kursübersicht öffnen"
 
-#: ui/UINavigator.tscn ui/UINavigator.gd:372
+#: ui/UINavigator.tscn ui/UINavigator.gd:374
 msgid "Go back in your navigation history"
 msgstr "Zurück zu deinem Navigationsverlauf"
 
@@ -554,7 +554,6 @@ msgid "Reset your code to the starting point."
 msgstr "Setze deinen Code auf den Ausgangspunkt zurück."
 
 #: ui/components/CodeEditor.tscn ui/components/RunnableCodeExample.tscn
-#. Reset statt Zurücksetzen, da letzteres in der UI oft unschön über den Button hinausragt
 msgid "Reset"
 msgstr "Reset"
 
@@ -590,6 +589,12 @@ msgstr "Weiter"
 #: ui/components/OutputConsolePrintMessage.tscn
 msgid "Value"
 msgstr "Wert"
+
+#: ui/components/FullScreenButton.tscn
+msgid ""
+"Toggle the app full-screen.\n"
+"Shortcut: F11"
+msgstr ""
 
 #: ui/components/GDQuestCreditsLabel.tscn
 msgid "Learn GDScript From Zero is an open source project by [color=#FFD500][url=https://www.gdquest.com/]GDQUEST.COM[/url][/color]"
@@ -643,6 +648,12 @@ msgstr "Manchmal werden Fehler außerhalb deines Codes gemeldet. Warum passiert 
 msgid "Explain"
 msgstr "Erklären"
 
+#: ui/components/QuitButton.tscn
+msgid ""
+"Quit the app.\n"
+"Shortcut: Alt+F4"
+msgstr ""
+
 #: ui/components/Revealer.tscn
 msgid "Expand"
 msgstr "Erweitern"
@@ -666,7 +677,8 @@ msgid ""
 msgstr "Erhalte [b]50 %[/b] Rabatt auf alle unsere Godot-Kurse mit dem Gutscheincode [b]DISCOUNT50[/b]"
 
 #: ui/components/SalePopup.tscn
-msgid "Only until"
+#, fuzzy
+msgid "Only until "
 msgstr "Nur bis"
 
 #: ui/components/SalePopup.tscn
@@ -815,6 +827,12 @@ msgid "Configure the App"
 msgstr "Konfigurieren der App"
 
 #: ui/components/popups/SettingsPopup.tscn
+msgid ""
+"Pick one of the community-contributed translations.\n"
+"Some translations are not complete yet."
+msgstr ""
+
+#: ui/components/popups/SettingsPopup.tscn
 msgid "Language"
 msgstr "Sprache"
 
@@ -824,45 +842,55 @@ msgid "About community translations"
 msgstr "Über Community-Übersetzungen"
 
 #: ui/components/popups/SettingsPopup.tscn
-#, fuzzy
-msgid "Change the course's language to one of the community-contributed ones."
-msgstr "Ändere die Sprache des Kurses auf eine der von der Community beigesteuerten Sprachen."
+msgid ""
+"Some lessons are only partly translated and inaccessible by default.\n"
+"Turn this on to show them anyway.\n"
+"Note that some or all of the lesson text will still be in English."
+msgstr ""
 
 #: ui/components/popups/SettingsPopup.tscn
 #, fuzzy
-msgid "Allow Incomplete Translations"
+msgid "Allow incomplete translations"
 msgstr "Unvollständige Übersetzungen zulassen"
+
+#: ui/components/popups/SettingsPopup.tscn
+#, fuzzy
+msgid "Enabled"
+msgstr "Aktiviert"
+
+#: ui/components/popups/SettingsPopup.tscn
+msgid "Make all text in the app bigger or smaller."
+msgstr ""
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Text Size"
 msgstr "Schriftgröße"
 
 #: ui/components/popups/SettingsPopup.tscn
-#, fuzzy
-msgid "Increase or lower the size of all text in the app."
-msgstr "Vergrößere oder verkleinere die Schriftgröße des gesamten Textes in der App."
-
-#: ui/components/popups/SettingsPopup.tscn
 msgid "Sample text"
 msgstr "Mustertext"
 
 #: ui/components/popups/SettingsPopup.tscn
-msgid "Scroll sensitivity"
+#, fuzzy
+msgid "Change how fast the page scrolls when you use the mouse wheel or touchpad."
+msgstr "Erhöhe oder verringere die Bildlaufgeschwindigkeit mit dem Mausrad oder dem Touchpad."
+
+#: ui/components/popups/SettingsPopup.tscn
+#, fuzzy
+msgid "Scroll speed"
 msgstr "Scroll-Empfindlichkeit"
 
 #: ui/components/popups/SettingsPopup.tscn
 #, fuzzy
-msgid "Increase or lower the scrolling speed with the mouse wheel or the touchpad."
-msgstr "Erhöhe oder verringere die Bildlaufgeschwindigkeit mit dem Mausrad oder dem Touchpad."
-
-#: ui/components/popups/SettingsPopup.tscn
-msgid "Framerate cap"
-msgstr "Framerate-Obergrenze"
+msgid ""
+"Limit how many frames per second the app draws.\n"
+"Lower values use less resources, which helps when running in the browser, but the app may feel less smooth."
+msgstr "Begrenze die Bildrate der App. Niedrigere Werte sorgen dafür, dass die App weniger Ressourcen verbraucht, insbesondere bei der Ausführung im Browser, können jedoch zu einer geringeren Laufruhe führen."
 
 #: ui/components/popups/SettingsPopup.tscn
 #, fuzzy
-msgid "Limit the app's framerate. Lower values make the app use less resources, especially when running in the browser, but may feel less fluid."
-msgstr "Begrenze die Bildrate der App. Niedrigere Werte sorgen dafür, dass die App weniger Ressourcen verbraucht, insbesondere bei der Ausführung im Browser, können jedoch zu einer geringeren Laufruhe führen."
+msgid "Max framerate"
+msgstr "Framerate-Obergrenze"
 
 #: ui/components/popups/SettingsPopup.tscn
 #, fuzzy
@@ -880,27 +908,25 @@ msgid "No Limit"
 msgstr "Keine Begrenzung"
 
 #: ui/components/popups/SettingsPopup.tscn
+msgid ""
+"Reduce the contrast between the text and the background.\n"
+"This makes the app easier on your eyes."
+msgstr ""
+
+#: ui/components/popups/SettingsPopup.tscn
 msgid "Lower contrast"
 msgstr "Weniger Kontrast"
 
 #: ui/components/popups/SettingsPopup.tscn
 #, fuzzy
-msgid "Lower the text's brightness."
-msgstr "Verringere die Helligkeit des Textes."
-
-#: ui/components/popups/SettingsPopup.tscn
-#, fuzzy
-msgid "Enabled"
-msgstr "Aktiviert"
+msgid ""
+"Switch to a font designed to be easier to read for people with dyslexia.\n"
+"This does not work with languages like Chinese and Japanese."
+msgstr "Ändere den Textstil, um den Text bei Legasthenie besser lesbar zu machen. Diese Option ist mit Sprachen wie Chinesisch und Japanisch nicht kompatibel."
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Dyslexia Font"
 msgstr "Legasthenie-Font"
-
-#: ui/components/popups/SettingsPopup.tscn
-#, fuzzy
-msgid "Change the text style to make the text easier to read if you have dyslexia. This option is incompatible with languages like Chinese and Japanese."
-msgstr "Ändere den Textstil, um den Text bei Legasthenie besser lesbar zu machen. Diese Option ist mit Sprachen wie Chinesisch und Japanisch nicht kompatibel."
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Apply"
@@ -957,7 +983,7 @@ msgid "\t[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]
 msgstr "[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]So kannst du Übersetzungen beitragen[/url][/b]"
 
 #: ui/screens/course_outliner/CourseLessonDetails.tscn
-#: ui/screens/course_outliner/CourseLessonDetails.gd:110
+#: ui/screens/course_outliner/CourseLessonDetails.gd:111
 msgid "Start Lesson"
 msgstr "Lektion starten"
 
@@ -971,7 +997,8 @@ msgid "Lesson Title"
 msgstr "Lektion Titel"
 
 #: ui/screens/course_outliner/CourseOutliner.tscn
-msgid "Course Index -"
+#, fuzzy
+msgid "Course Index - "
 msgstr "Kurs-Index -"
 
 #: ui/screens/course_outliner/CourseOutliner.tscn
@@ -1122,7 +1149,6 @@ msgid "Skip"
 msgstr "Überspringen"
 
 #: ui/screens/lesson/UIBaseQuiz.tscn
-#. "Abschicken" ist im Web geläufiger als "Senden"
 msgid "Submit"
 msgstr "Abschicken"
 
@@ -1207,7 +1233,7 @@ msgid "Test text"
 msgstr "Testtext"
 
 #: ui/screens/welcome_screen/WelcomeScreen.tscn
-#: ui/screens/welcome_screen/WelcomeScreen.gd:55
+#: ui/screens/welcome_screen/WelcomeScreen.gd:54
 msgid "START"
 msgstr "START"
 
@@ -1243,7 +1269,7 @@ msgid "Character Is Moving In A Circle Clockwise"
 msgstr "Die Figur bewegt sich im Uhrzeigersinn im Kreis"
 
 #: course/lesson-10-the-game-loop/rotating-and-moving/TestsRotatingAndMoving.gd:21
-#: course/lesson-10-the-game-loop/rotating-sprite/TestsRotating.gd:26
+#: course/lesson-10-the-game-loop/rotating-sprite/TestsRotating.gd:17
 #: course/lesson-11-time-delta/rotating-and-moving-delta/TestsRotatingMovingDelta.gd:33
 #: course/lesson-12-using-variables/fixing_error/TestFixingError.gd:46
 #, fuzzy
@@ -1257,7 +1283,8 @@ msgid "Did you use move_local_x() to make the sprite move locally?"
 msgstr "Hast du move_local_x() verwendet, um das Sprite lokal zu bewegen?"
 
 #: course/lesson-10-the-game-loop/rotating-and-moving/TestsRotatingAndMoving.gd:26
-#: course/lesson-10-the-game-loop/rotating-sprite/TestsRotating.gd:28
+#: course/lesson-10-the-game-loop/rotating-sprite/TestsRotating.gd:30
+#: course/lesson-10-the-game-loop/rotating-sprite/TestsRotating.gd:33
 #, fuzzy
 msgid "The robot is turning in the wrong direction!"
 msgstr "Der Roboter dreht sich in die falsche Richtung!"
@@ -1267,7 +1294,7 @@ msgstr "Der Roboter dreht sich in die falsche Richtung!"
 msgid "The character didn't move as expected."
 msgstr "Die Figur hat sich nicht wie erwartet bewegt."
 
-#: course/lesson-10-the-game-loop/rotating-sprite/TestsRotating.gd:15
+#: course/lesson-10-the-game-loop/rotating-sprite/TestsRotating.gd:10
 #, fuzzy
 msgid "Character Is Rotating Clockwise"
 msgstr "Die Figur dreht sich im Uhrzeigersinn"
@@ -1577,17 +1604,17 @@ msgstr "„Max Health“ ist der richtige Wert"
 msgid "It looks like level isn't increasing every level. Did you add 1 to it?"
 msgstr "Es sieht so aus, als würde sich das Level nicht mit jedem Level erhöhen. Hast du 1 dazu addiert?"
 
-#: course/lesson-14-multiplying/increase_max_health/TestHealthIncreased.gd:44
+#: course/lesson-14-multiplying/increase_max_health/TestHealthIncreased.gd:46
 #, fuzzy
 msgid "It looks like max_health isn't increasing exponentially. Did you multiply it by a value greater than 1?"
 msgstr "Es sieht so aus, als würde „max_health“ nicht exponentiell ansteigen. Hast du den Wert mit einer Zahl größer als 1 multipliziert?"
 
-#: course/lesson-14-multiplying/increase_max_health/TestHealthIncreased.gd:52
+#: course/lesson-14-multiplying/increase_max_health/TestHealthIncreased.gd:54
 #, fuzzy
 msgid "Level variable's value is %s; It should be 3 after levelling up twice."
 msgstr "Der Wert der Level-Variablen lautet %s; nach zweimaligem Levelaufstieg sollte er 3 betragen."
 
-#: course/lesson-14-multiplying/increase_max_health/TestHealthIncreased.gd:59
+#: course/lesson-14-multiplying/increase_max_health/TestHealthIncreased.gd:61
 #, fuzzy
 msgid "Max health variable's value is %s; It should be 121 after levelling up twice."
 msgstr "Der Wert der Variablen „Max Health“ beträgt %s; nach zweimaligem Levelaufstieg sollte er 121 betragen."
@@ -1638,12 +1665,12 @@ msgstr "Verwende einen Vektor, um den Maßstab zu erhöhen"
 msgid "Correct Scale After 2 Levels"
 msgstr "Korrekter Maßstab nach 2 Stufen"
 
-#: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:35
+#: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:38
 #, fuzzy
 msgid "It looks like the scale isn't increasing by some vector. Did you add a vector to scale?"
 msgstr "Es sieht so aus, als würde die Skalierung nicht um einen bestimmten Vektor erhöht. Hast du einen Vektor zur Skalierung hinzugefügt?"
 
-#: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:45
+#: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:48
 #, fuzzy
 msgid "scale's value is %s; It should be (1.4, 1.4) after levelling up 2 times."
 msgstr "Der Wert von „scale“ ist %s; nach zweimaligem Levelaufstieg sollte er (1.4, 1.4) betragen."
@@ -2355,6 +2382,10 @@ msgstr "Shape3D-Nummer %s hat zu viele Ecken! Hast du die Funktion [code]draw_sq
 msgid "Shape3D number %s is not a square of length 200 pixels. Did you change the draw_square() function?"
 msgstr "Die Shape3D-Nummer %s ist kein Quadrat mit einer Seitenlänge von 200 Pixeln. Hast du die Funktion [code]draw_square()[/code] geändert?"
 
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:67
+msgid "The squares should not overlap. Did you move the turtle between drawing each square?"
+msgstr ""
+
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:16
 #, fuzzy
 msgid "Draw Corners Of Varying Lengths"
@@ -2580,49 +2611,49 @@ msgstr "Der Roboter hat nicht so viel Schaden genommen wie erwartet. Er hat %s L
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "Es sieht nicht so aus, als würdest du amount von health abziehen."
 
-#: ui/UILesson.gd:221
+#: ui/UILesson.gd:301
 msgid "Learn More"
 msgstr "Mehr erfahren"
 
-#: ui/UILesson.gd:267
+#: ui/UILesson.gd:366
 msgid ""
 "\n"
 "[hr]\n"
 msgstr ""
 
-#: ui/UINavigator.gd:375
+#: ui/UINavigator.gd:377
 msgid "(no previous history)"
 msgstr "(kein Verlauf)"
 
-#: ui/UIPractice.gd:166
+#: ui/UIPractice.gd:284
 msgid "Hint %s"
 msgstr "Hinweis %s"
 
-#: ui/UIPractice.gd:285
+#: ui/UIPractice.gd:317
 msgid "Validating Your Code..."
 msgstr "Code wird validiert..."
 
-#: ui/UIPractice.gd:337
+#: ui/UIPractice.gd:372
 msgid "The function `%s` calls itself, this creates an infinite loop"
 msgstr "Die Funktion `%s`ruft sich selbst auf, dadurch entsteht eine Endlosschleife"
 
-#: ui/UIPractice.gd:348
+#: ui/UIPractice.gd:383
 msgid "You have a while loop that runs forever (while true) without a break statement. This will freeze the app."
 msgstr "In deinem Code ist eine while-Schleife, die endlos weiterläuft (while true). Dadurch bleibt das Programm hängen."
 
-#: ui/UIPractice.gd:390
+#: ui/UIPractice.gd:425
 msgid "Running Your Code..."
 msgstr "Code wird ausgeführt..."
 
-#: ui/UIPractice.gd:420
+#: ui/UIPractice.gd:456
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "In deinem Code, teilst du durch null. Du kannst in deinem Code nicht durch null teilen. Bitte stelle sicher das du kein \"/0\" oder \"%0\" in deinem Code stehen hast."
 
-#: ui/UIPractice.gd:465
+#: ui/UIPractice.gd:502
 msgid "Running Tests..."
 msgstr "Tests werden ausgeführt..."
 
-#: ui/components/BreadCrumbs.gd:98
+#: ui/components/BreadCrumbs.gd:111
 msgid "•"
 msgstr ""
 
@@ -2630,11 +2661,11 @@ msgstr ""
 msgid "100%"
 msgstr ""
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:106
+#: ui/screens/course_outliner/CourseLessonDetails.gd:107
 msgid "Open Lesson"
 msgstr "Lektion öffnen"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:108
+#: ui/screens/course_outliner/CourseLessonDetails.gd:109
 msgid "Continue Lesson"
 msgstr "Lektion fortsetzen"
 
@@ -2650,28 +2681,40 @@ msgstr "Du musst eine ganze Zahl für diese Antwort eingeben. Beispiel: 42"
 msgid "You need to type a decimal for this answer. Use a \".\" to separate the decimal part. Example: 3.14"
 msgstr "Du musst für diese Antwort eine Dezimalstelle eingeben. Verwende ein \".\", um den Dezimalteil zu trennen. Beispiel: 3.14"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:145
+#: ui/screens/practice/PracticeInfoPanel.gd:146
 msgid "Method descriptions"
 msgstr "Methodenbeschreibungen"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:161
+#: ui/screens/practice/PracticeInfoPanel.gd:162
 msgid "Property descriptions"
 msgstr "Objektbeschreibungen"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:189
+#: ui/screens/practice/PracticeInfoPanel.gd:190
 #, fuzzy
 msgid "You've completed this practice before."
 msgstr "Du hast diese Übung bereits abgeschlossen."
 
-#: ui/screens/practice/PracticeInfoPanel.gd:193
+#: ui/screens/practice/PracticeInfoPanel.gd:194
 msgid ""
 "You've used the provided solution.\n"
 "This practice will not count towards your course progress."
 msgstr ""
 
-#: ui/screens/welcome_screen/WelcomeScreen.gd:53
+#: ui/screens/welcome_screen/WelcomeScreen.gd:52
 msgid "CONTINUE"
 msgstr "FORTSETZEN"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Change the course's language to one of the community-contributed ones."
+#~ msgstr "Ändere die Sprache des Kurses auf eine der von der Community beigesteuerten Sprachen."
+
+#, fuzzy
+#~ msgid "Increase or lower the size of all text in the app."
+#~ msgstr "Vergrößere oder verkleinere die Schriftgröße des gesamten Textes in der App."
+
+#, fuzzy
+#~ msgid "Lower the text's brightness."
+#~ msgstr "Verringere die Helligkeit des Textes."
