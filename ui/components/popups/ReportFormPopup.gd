@@ -1,15 +1,15 @@
 extends CanvasLayer
 
-@onready var _color_rect := $ColorRect as ColorRect
-@onready var _panel := $PanelContainer as PanelContainer
+@onready var _color_rect := %ColorRect as ColorRect
+@onready var _panel := %PanelContainer as PanelContainer
 
-@onready var _close_button := $PanelContainer/Column/Margin/Column/CloseButton as Button
-@onready var _send_button := $PanelContainer/Column/Margin/Column/SendButton as Button
-@onready var _category_option := $PanelContainer/Column/Margin/Column/CategoryOption as OptionButton
-@onready var _description := $PanelContainer/Column/Margin/Column/Description as TextEdit
-@onready var _help_label := $PanelContainer/Column/Margin/Column/Help as RichTextLabel
-@onready var _translation_guidance := $PanelContainer/Column/Margin/Column/TranslationGuidance as RichTextLabel
-@onready var _title_label: Label = $PanelContainer/Column/Margin/Column/Title
+@onready var _close_button := %CloseButton as Button
+@onready var _send_button := %SendButton as Button
+@onready var _category_option := %CategoryOption as OptionButton
+@onready var _description := %Description as TextEdit
+@onready var _help_label := %Help as RichTextLabel
+@onready var _translation_guidance := %TranslationGuidance as RichTextLabel
+@onready var _title_label: Label = %Title
 
 @onready var _title := _title_label.text
 
