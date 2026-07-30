@@ -464,6 +464,50 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     GDQUEST.log = log;
   }
 
+  fullscreen: {
+    /*
+     * Create a button with a label.
+     */
+    const makeFullscreenButton = (className, onClick = () => { }) => {
+      const button = document.createElement("button");
+      button.classList.add(className);
+      button.addEventListener("click", onClick);
+
+      const label = document.createElement("span");
+      label.textContent = "toggle Fullscreen";
+      button.appendChild(label);
+      return button;
+    }
+
+    /**
+     * Create a button with the proper classes; change class when
+     * fullscreen event happens
+     */
+    const fullscreenOnButton = makeFullscreenButton("button-fullscreen-on", () => document.documentElement.requestFullscreen());
+    const fullscreenOffButton = makeFullscreenButton("button-fullscreen-off", () => {
+      document.exitFullscreen().catch((err) => err.name !== "TypeError" && console.error(err));
+    });
+
+    /**
+     * Only add the button if Godot has loaded
+     */
+    GDQUEST.events.onGodotLoaded.once(() => {
+      canvasContainer.appendChild(fullscreenOnButton);
+      canvasContainer.appendChild(fullscreenOffButton);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.code === "F11") {
+        event.preventDefault();
+        if (getComputedStyle(fullscreenOnButton).display !== "none") {
+          fullscreenOnButton.click();
+        } else if (getComputedStyle(fullscreenOffButton).display !== "none") {
+          fullscreenOffButton.click();
+        }
+      }
+    });
+  }
+
   return GDQUEST;
   // @ts-ignore
 })(window.GDQUEST || {});
