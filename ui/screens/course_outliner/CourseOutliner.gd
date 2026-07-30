@@ -63,6 +63,9 @@ func _update_outliner_index() -> void:
 	var _reselect_index := -1
 	for i in course_index.get_lessons_count():
 		var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(i)) as BBCodeParser.ParseNode
+		if lesson_data == null:
+			push_error("CourseOutliner: Skipping lesson %d because it could not be loaded." % (i + 1))
+			continue
 		var lesson_progress := (
 			user_profile.get_or_create_lesson(course_index.get_course_id(), lesson_data.bbcode_path) as LessonProgress
 		)

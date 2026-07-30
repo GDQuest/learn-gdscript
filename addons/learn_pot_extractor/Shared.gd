@@ -17,6 +17,7 @@ static var UNSURE_POT_PATTERN := RegEx.create_from_string(
 	r'(?<str>#~ msgstr (?:""\n(?:"(?:\\.|[^"\\])*"\n)+|"(?:\\.|[^"\\])*"\n))'
 )
 static var GLOSSARY_TERM_RE := RegEx.create_from_string(r'\[glossary term=\\"([^\\]+)\\"\]')
+static var GLOSSARY_TAG_RE := RegEx.create_from_string(r'\[glossary\s+term=(?:"([^"]+)"|([^\s\]]+))\]')
 static var TAG_RE := RegEx.create_from_string(r'\[[^\[]+\]([^\[]+)\[[^\[]+\]')
 static var SPACE_NEWLINE_RE := RegEx.create_from_string(r'\s+\\n')
 static var WHITESPACE_RE := RegEx.create_from_string(r'\s+')
@@ -162,4 +163,14 @@ static func bbcode_rebuild_glossary_tags_from_url_tag(raw_string: String, out_di
 		var term := find.get_string(1)
 		var display_text := find.get_string(2)
 		raw_string = raw_string.substr(0, find.get_start()) + '[glossary term="%s"]%s[/glossary]' % [term, display_text] + raw_string.substr(find.get_end())
+	return raw_string
+
+
+## Ensures translated glossary tags always have a quoted attribute.
+static func normalize_glossary_tags(raw_string: String) -> String:
+	var finds := GLOSSARY_TAG_RE.search_all(raw_string)
+	for i in range(finds.size() - 1, -1, -1):
+		var find: RegExMatch = finds[i]
+		var term := find.get_string(1) if not find.get_string(1).is_empty() else find.get_string(2)
+		raw_string = raw_string.substr(0, find.get_start()) + '[glossary term="%s"]' % term + raw_string.substr(find.get_end())
 	return raw_string

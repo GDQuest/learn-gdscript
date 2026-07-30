@@ -260,6 +260,10 @@ func _get_navigation_resource(normalized_url: NormalizedUrl, course_index: Cours
 		var practice := BBCodeUtils.get_lesson_practice(lesson_data, practice_index)
 		if BBCodeUtils.get_practice_id(practice) == normalized_url.practice_path:
 			return practice
+	push_error(
+		"NavigationManager.gd:_get_navigation_resource(): Practice '%s' was not found in lesson '%s'."
+		% [normalized_url.practice_path, lesson_path]
+	)
 	return null
 
 
@@ -285,6 +289,7 @@ func _get_lesson_path(normalized_url: NormalizedUrl, course_index: CourseIndex) 
 
 func _load_lesson(lesson_path: String) -> BBCodeParser.ParseNode:
 	if lesson_path.is_empty() or not FileAccess.file_exists(lesson_path):
+		push_error("NavigationManager.gd:_load_lesson(): Lesson file does not exist: %s" % lesson_path)
 		return null
 
 	var effective_bbcode := lesson_path
@@ -302,9 +307,9 @@ func _load_lesson(lesson_path: String) -> BBCodeParser.ParseNode:
 
 	var parser := LessonBBCodeParser.new()
 	var result := parser.parse_file(effective_bbcode)
-	if result.errors:
+	if not result.is_success():
 		push_error(
-			"NavigationManager.gd:_load_lesson(): Parse errors when loading lesson from bbcode file %s:"
+			"NavigationManager.gd:_load_lesson(): Failed to parse lesson file %s. Fix the reported BBCode errors before loading this lesson:"
 			% effective_bbcode
 		)
 		for error: BBCodeParser.ParseError in result.errors:
@@ -318,6 +323,13 @@ func _load_lesson(lesson_path: String) -> BBCodeParser.ParseNode:
 		)
 		for warning: BBCodeParser.ParseError in result.warnings:
 			print("  ", warning.format())
+
+	if result.root == null or result.root.children.is_empty() or not result.root.children[0] is BBCodeParser.ParseNode:
+		push_error(
+			"NavigationManager.gd:_load_lesson(): Parsed lesson file %s has no [lesson] root."
+			% effective_bbcode
+		)
+		return null
 
 	var lesson_data: BBCodeParser.ParseNode = result.root.children[0]
 	_lesson_cache[effective_bbcode] = lesson_data

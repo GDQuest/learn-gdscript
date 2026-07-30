@@ -34,8 +34,9 @@ func _init() -> void:
 
 	_regex_tag_open = RegEx.new()
 	# Detects opening tags like [tag_name a="value" b] with optional attributes.
-	# This also handles escaped quotes in attribute values.
-	_regex_tag_open.compile("\\[([a-z_]+)((?:\\s+[a-z_]+(?:=\"(?:[^\\\\\"]|\\\\.)*\")?)*)\\]")
+	# Bare values are accepted for legacy translated glossary tags; generated
+	# lessons still use the quoted form.
+	_regex_tag_open.compile("\\[([a-z_]+)((?:\\s+[a-z_]+(?:=(?:\"(?:[^\\\\\"]|\\\\.)*\"|[^\\s\\]]+))?)*)\\]")
 
 	_regex_tag_close = RegEx.new()
 	# Detects closing tags like [/tag_name].
@@ -44,7 +45,7 @@ func _init() -> void:
 	_regex_attribute = RegEx.new()
 	# Detects attributes like name="value" or single flags like name.
 	# This also handles escaped quotes in attribute values.
-	_regex_attribute.compile("([a-z_]+)(?:=\"((?:[^\\\\\"]|\\\\.)*)\")?")
+	_regex_attribute.compile("([a-z_]+)(?:=\"((?:[^\\\\\"]|\\\\.)*)\"|=([^\\s\\]]+))?")
 
 
 func parse(source: String, result: ParseResult, file_path: String) -> ParseNode:
@@ -168,6 +169,8 @@ func _parse_attributes(attributes_string: String) -> Dictionary:
 	for match_result in matches:
 		var attribute_name: String = match_result.get_string(1)
 		var attribute_value: String = match_result.get_string(2)
+		if attribute_value.is_empty():
+			attribute_value = match_result.get_string(3)
 		# This makes it so an attribute flag like [tag flag] is treated as a boolean set to true
 		if attribute_value == "":
 			attributes[attribute_name] = true

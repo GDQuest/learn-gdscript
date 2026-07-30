@@ -171,9 +171,15 @@ func _navigate_to() -> void:
 		return
 
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
+	if target == null:
+		printerr("UINavigator: Could not navigate to '%s' because its lesson failed to load." % NavigationManager.current_url)
+		return
 	var screen: UINavigatablePage
 	if target is BBCodeParser.ParseNode and target.tag == BBCodeParserData.Tag.PRACTICE:
 		var lesson := NavigationManager.get_navigation_resource(target.bbcode_path) as BBCodeParser.ParseNode
+		if lesson == null:
+			printerr("UINavigator: Could not load the lesson containing practice '%s'." % target.bbcode_path)
+			return
 		# Lesson numbers start as 1, we subtract to get the corresponding array index.
 		var lesson_number := course_index.get_lesson_number(lesson.bbcode_path)
 		_lesson_index = lesson_number - 1
@@ -189,7 +195,7 @@ func _navigate_to() -> void:
 		screen = ui_lesson_instance
 		ui_lesson_instance.setup(target, course_index, lesson_number)
 	else:
-		printerr("Trying to navigate to unsupported resource type: %s" % target.get_class())
+		printerr("UINavigator: Trying to navigate to unsupported resource: %s" % target)
 		return
 
 	_outliner_button.show()

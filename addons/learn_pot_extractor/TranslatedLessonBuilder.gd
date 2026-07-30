@@ -179,7 +179,7 @@ static func _tr(original: String, tr_blocks: Dictionary, translation_report: Dic
 	translation_report.total += 1
 	if not block.is_empty() and block.str:
 		translation_report.count += 1
-		return block.str.replace(r"\n", "\n").replace(r'\"', '"')
+		return SHARED.normalize_glossary_tags(block.str.replace(r"\n", "\n").replace(r'\"', '"'))
 	return original
 
 
