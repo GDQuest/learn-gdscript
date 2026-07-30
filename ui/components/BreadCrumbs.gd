@@ -68,7 +68,9 @@ func _rebuild_breadcrumbs() -> void:
 
 		var practice_id := BBCodeUtils.get_practice_id(practice)
 
-		var lesson: BBCodeParser.ParseNode = practice.parent
+		var lesson := NavigationManager.get_navigation_resource(
+			practice.bbcode_path
+		) as BBCodeParser.ParseNode
 		var lesson_index := -1
 
 		var i := 0
