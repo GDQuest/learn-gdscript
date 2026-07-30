@@ -270,7 +270,7 @@ def prepare_course_scripts():
 def prepare_ci():
     """
     Set up the CI environment: download Godot headless build, export templates,
-    Butler, and prepare course scripts.
+    Butler, import the project, and prepare course scripts.
     """
     print("Preparing CI environment...\n")
 
@@ -284,6 +284,7 @@ def prepare_ci():
     print("✓ Prepared Godot headless binary\n")
 
     prepare_course_scripts()
+    run_command(f"./{GODOT_BINARY_NAME} --headless --editor --quit")
     print("\n✓ CI environment ready")
 
 
