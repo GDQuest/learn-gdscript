@@ -492,7 +492,9 @@ func _push_javascript_state(url: String) -> void:
 	if not _js_available:
 		return
 	@warning_ignore("unsafe_method_access")
-	_js_history.pushState(url, "", url)
+	# Keep app navigation in the hash so static hosts do not look for a page at
+	# the lesson slug path.
+	_js_history.pushState(url, "", "#%s" % url)
 
 
 ## The parsed parts of one navigation input. It is not itself a browser URL.
