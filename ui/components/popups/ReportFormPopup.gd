@@ -21,7 +21,7 @@ func _ready():
 	_close_button.pressed.connect(hide)
 	_send_button.pressed.connect(_send_report)
 	_category_option.item_selected.connect(
-		func _on_category_selected (category_index: int) -> void:
+		func _on_category_selected(category_index: int) -> void:
 			_update_description_guidance(category_index)
 			_update_translation_guidance(category_index),
 	)
@@ -29,7 +29,7 @@ func _ready():
 	_translation_guidance.meta_clicked.connect(_on_meta_clicked)
 	_update_translations()
 	visibility_changed.connect(
-		func _on_visibility_changed () -> void:
+		func _on_visibility_changed() -> void:
 			if visible:
 				_color_rect.show()
 				_panel.show()
@@ -49,9 +49,14 @@ func setup(context: ReportContext) -> void:
 
 	const DISCORD_URL := "https://discord.gg/bNj469SYQj"
 	_help_label.text = (
-		tr("Select the kind of issue and describe it in the box below, then click \"Open email\" to open your email app.")
-		+ tr(" You can optionally add a screenshot in your email app.") + "\n\n"
-		+ tr("For questions and help with learning, [url=%s]join the community on Discord[/url]." % DISCORD_URL)
+		tr(
+			"Select the kind of issue and describe it in the box below, then click \"Send report\" to open the contact page on our website with the report prefilled."
+		)
+		+ "\n\n"
+		+ tr(
+			"For questions and help with learning, [url=%s]join the community on Discord[/url]."
+			% DISCORD_URL
+		)
 	)
 
 
@@ -103,7 +108,8 @@ func _send_report() -> void:
 		body += "\nCode from the current practice\n```gdscript\n%s\n```\n" % _context.user_code
 	const SUPPORT_EMAIL := "support@gdquest.com"
 	OS.shell_open(
-		"mailto:%s?subject=%s&body=%s" % [SUPPORT_EMAIL, subject.uri_encode(), body.uri_encode()]
+		"https://school.gdquest.com/about-us/contact?subject=%s&message=%s"
+		% [subject.uri_encode(), body.uri_encode()]
 	)
 	hide()
 
