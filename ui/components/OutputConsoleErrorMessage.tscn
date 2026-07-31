@@ -66,17 +66,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "line 0, column -1"
 
-[node name="ExternalError" type="Label" parent="Layout/Content" unique_id=677992898]
+[node name="ExternalError" type="RichTextLabel" parent="Layout/Content" unique_id=677992898]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 6
 tooltip_text = "Click to learn about external errors"
 mouse_filter = 1
-mouse_default_cursor_shape = 16
-theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
-text = "Sometimes errors are reported outside of your code. Why does that happen?"
+theme_override_colors/default_color = Color(0.572549, 0.560784, 0.721569, 1)
+theme_override_colors/font_link_color = Color(0.572549, 0.560784, 0.721569, 1)
+bbcode_enabled = true
+text = "Sometimes errors are reported outside of your code. [url=external]Why does that happen?[/url]"
 autowrap_mode = 2
+fit_content = true
 
 [node name="ExplainButton" type="Button" parent="Layout" unique_id=986973243]
 unique_name_in_owner = true

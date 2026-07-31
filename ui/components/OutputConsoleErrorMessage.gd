@@ -24,7 +24,7 @@ var origin_char := -1:
 @onready var _location_row: Control = %LocationRow
 @onready var _file_name_label: Label = %FileName
 @onready var _location_label: Label = %CodeLocation
-@onready var _external_label: Label = %ExternalError
+@onready var _external_label: RichTextLabel = %ExternalError
 @onready var _message_explain_button: Button = %ExplainButton
 
 
@@ -33,7 +33,10 @@ func _ready() -> void:
 
 	_message_explain_button.pressed.connect(_on_explain_pressed)
 	_location_row.gui_input.connect(_location_row_gui_input)
-	_external_label.gui_input.connect(_external_label_gui_input)
+	_external_label.meta_clicked.connect(
+		func _on_external_error_meta_clicked(_meta: Variant) -> void:
+			external_explain_requested.emit(),
+	)
 
 	var _scene_tween := create_tween()
 	_scene_tween.tween_property(self, "self_modulate:a", 0.25, 1.5).from(1.0)
@@ -68,8 +71,14 @@ func _update_visuals() -> void:
 			_severity_label.add_theme_color_override("font_color", Color(1, 0.960784, 0.25098))
 		_:
 			_severity_label.text = "INFO"
-			_message_label.add_theme_color_override("font_color", Color(0.572549, 0.560784, 0.721569))
-			_severity_label.add_theme_color_override("font_color", Color(0.572549, 0.560784, 0.721569))
+			_message_label.add_theme_color_override(
+				"font_color",
+				Color(0.572549, 0.560784, 0.721569),
+			)
+			_severity_label.add_theme_color_override(
+				"font_color",
+				Color(0.572549, 0.560784, 0.721569),
+			)
 
 			_external_label.hide()
 			_message_explain_button.hide()
@@ -83,12 +92,6 @@ func _location_row_gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
 	if mb and mb.button_index == MOUSE_BUTTON_LEFT and not mb.pressed:
 		show_code_requested.emit(origin_file, origin_line, origin_char)
-
-
-func _external_label_gui_input(event: InputEvent) -> void:
-	var mb := event as InputEventMouseButton
-	if mb and mb.button_index == MOUSE_BUTTON_LEFT and not mb.pressed:
-		external_explain_requested.emit()
 
 
 func set_message_severity(value: int) -> void:
