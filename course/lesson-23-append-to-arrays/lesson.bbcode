@@ -79,14 +79,19 @@ In the following practices, you will use the [code]append()[/code], [code]pop_fr
 [practice id="completing-orders" title="Completing orders"]
 [description]Orders are piling up in the kitchen, and we need to clear them fast using the array's [code]pop_front()[/code] function.[/description]
 [goal]
-The [code]waiting_orders[/code] array will be filled over time.
+The [code]waiting_orders[/code] array starts with four orders waiting to be prepared.
 
 Your job is to move orders from the waiting list to the [code]completed_orders[/code] list using the array's [code]append()[/code] and [code]pop_front()[/code] functions.
 
 Remember that the array's [code]pop_front()[/code] function returns the popped value, which allows you to store it in a variable and then pass it to another function.
 [/goal]
 [starting_code]
-var waiting_orders = []
+var waiting_orders = [
+	"cheese sandwich",
+	"burger",
+	"toast",
+	"tomato soup",
+]
 var completed_orders = []
 
 func complete_current_order():
