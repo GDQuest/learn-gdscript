@@ -2506,7 +2506,8 @@ msgstr "また、短い行 [code]health += amount[/code] は、長い形式の [
 
 #. TRANSLATORS: Quiz question
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:36
-msgid "Which of these would increase the health of the robot?"
+#, fuzzy
+msgid "Assuming amount is a positive number, which of these would increase the health of the robot?"
 msgstr "これらのうち、ロボットの体力を向上させるのはどれですか?"
 
 #. TRANSLATORS: Quiz explanation
@@ -4575,7 +4576,8 @@ msgid "In both examples, we print the value of the temporary variable we created
 msgstr "どちらの例でも、作成した一時変数の値を出力します: 最初の例では [code]number[/code]、2 番目の例では [code]element[/code]。"
 
 #: course/lesson-18-for-loops/lesson.bbcode:56
-msgid "As Godot moves through the loop, it assigns each value of the array to that variable. First, it sets the variable to [code]0[/code], then to [code]1[/code], and finally, to [code]2[/code]."
+#, fuzzy
+msgid "As Godot moves through the loop, it assigns each value of the array to that variable. First, it sets the variable to [code]3[/code], then to [code]5[/code], and finally, to [code]7[/code]."
 msgstr "Godotがループ内を移動すると、配列の各値がその変数に割り当てられます。最初に変数を [code]0[/code] に設定し、次に [code]1[/code] に設定し、最後に [code]2[/code] に設定します。"
 
 #: course/lesson-18-for-loops/lesson.bbcode:57
@@ -4605,8 +4607,8 @@ msgid "With the [code]for[/code] loop, we check the board's width first. Then we
 msgstr "[code]for[/code]ループでは、まずボードの幅を確認します。その後、その回数だけロボットを移動させます。これは、ロボットがボードの端に到達したかどうかを何度も確認するよりも簡単です。"
 
 #: course/lesson-18-for-loops/lesson.bbcode:74
-msgid "The function still works the same way. You can run it below."
-msgstr "関数は引き続き同じように機能します。以下で実行できます。"
+msgid "The function still works the same way, assuming the robot starts at [code]cell.x = 0[/code] each time (the left edge of the board). The [code]while[/code] loop would work no matter where the robot starts. You can run it below."
+msgstr ""
 
 #: course/lesson-18-for-loops/lesson.bbcode:77
 msgid "In the practices, we'll use [code]for[/code] loops in different ways to get you used to using them."
@@ -5642,7 +5644,8 @@ msgstr "注文の完了"
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-23-append-to-arrays/lesson.bbcode:79
-msgid "The [code]waiting_orders[/code] array will be filled over time."
+#, fuzzy
+msgid "The [code]waiting_orders[/code] array starts with four orders waiting to be prepared."
 msgstr "[code]waiting_orders[/code] 配列は時間の経過とともにいっぱいになります。"
 
 #. TRANSLATORS: Practice goal
@@ -5673,53 +5676,53 @@ msgid "You then need to append the popped value to the completed_orders array. T
 msgstr "その後、ポップした値を `completed_orders` 配列に追加する必要があります。配列に値を追加するには、[code]array.append()[/code] を呼び出します。"
 
 #. TRANSLATORS: Practice title
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Clearing up the crates"
 msgstr "木箱を片付ける"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from the [code]crates[/code] array."
 msgstr "プラットフォームには木箱が山積みになっています。 [code]crates[/code] 配列からそれらをポップして、邪魔にならない場所に移動します。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "You need to remove them from top to bottom using the array's [code]pop_back()[/code] function."
 msgstr "配列の [code]pop_back()[/code] 関数を使用して、上から下にそれらを削除する必要があります。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Your code should remove all the crates in the array using a while loop."
 msgstr "コードでは、while ループを使用して配列内のすべてのクレートを削除する必要があります。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "[b]Careful![/b] If you write the while loop incorrectly, you can freeze the program."
 msgstr "[b]注意してください！[/b] while ループを誤って記述すると、プログラムがフリーズする可能性があります。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "You can check if the [code]crates[/code] array still has values by writing [code]while crates:[/code]. This works because an empty array counts as [code]false[/code], and an array with items counts as [code]true[/code]."
 msgstr "[code]crates[/code]配列にまだ値があるかどうかは、[code]while crates:[/code]と書くことで確認できます。これは、空の配列は[code]false[/code]として扱われ、要素がある配列は[code]true[/code]として扱われるためです。"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from their array."
 msgstr "プラットフォームには木箱が山積みになっています。 配列からそれらをポップして、邪魔にならない場所に移動します。"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Think about how [code]while[/code] loops work."
 msgstr "[code]while[/code]ループがどのように動作するか考えてみましょう。"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 #, fuzzy
 msgid "Every time you [code]pop[/code] an item, the array's [code]size[/code] gets smaller."
 msgstr "アイテムを[code]pop[/code]するたびに、配列の[code]size[/code]は減ります。"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 #, fuzzy
 msgid "You can write [code]while crates:[/code] to run code in a loop while there are values in the [code]crates[/code] array."
 msgstr "[code]while crates:[/code]と記述することで、[code]crates[/code]配列に値がある限り、コードをループで実行できます。"
@@ -6767,3 +6770,6 @@ msgstr "型[code]String[/code]は、引用符で囲まれた値であるテキ�
 #, fuzzy
 msgid "Learn to Code From Zero with Godot"
 msgstr "Godotでゼロからプログラミングを学ぶ"
+
+#~ msgid "The function still works the same way. You can run it below."
+#~ msgstr "関数は引き続き同じように機能します。以下で実行できます。"

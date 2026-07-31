@@ -138,7 +138,6 @@ msgstr "Springen"
 
 #: course/lesson-14-multiplying/visuals/Graph.tscn
 #: course/lesson-16-2d-vectors/visuals/VectorVisual.tscn
-#: ui/components/SalePopup.tscn
 msgid "X"
 msgstr "X"
 
@@ -376,11 +375,11 @@ msgstr "Anzahl auswählen"
 #: course/lesson-27-value-types/player-input/PlayerInput.tscn
 #: ui/components/popups/ConfirmPopup.tscn
 #: ui/components/popups/PracticeLeaveUnfinishedPopup.tscn
+#: ui/components/popups/ReportFormPopup.tscn
 msgid "Cancel"
 msgstr "Abbrechen"
 
 #: course/lesson-27-value-types/player-input/PlayerInput.tscn
-#: ui/components/popups/ReportFormPopup.tscn
 #: ui/components/popups/TranslationInfoPopup.tscn
 msgid "OK"
 msgstr "OK"
@@ -481,13 +480,9 @@ msgstr "Zurück zum Hauptmenü"
 msgid "Open the course index"
 msgstr "Kursübersicht öffnen"
 
-#: ui/UINavigator.tscn ui/UINavigator.gd:374
+#: ui/UINavigator.tscn ui/UINavigator.gd:395
 msgid "Go back in your navigation history"
 msgstr "Zurück zu deinem Navigationsverlauf"
-
-#: ui/UINavigator.tscn
-msgid "CHRISTMAS SALE - 50% OFF"
-msgstr "WEIHNACHTSAKTION - 50% RABATT"
 
 #: ui/UINavigator.tscn ui/components/popups/ReportFormPopup.tscn
 msgid "Report an issue"
@@ -496,10 +491,6 @@ msgstr "Erstelle eine Problemmeldung"
 #: ui/UINavigator.tscn
 msgid "Configure the app"
 msgstr "App konfigurieren"
-
-#: ui/UINavigator.tscn
-msgid "CHRISTMAS SALE"
-msgstr "WEIHNACHTSAKTION"
 
 #: ui/UIPractice.tscn
 msgid "Suggested Solution"
@@ -520,6 +511,18 @@ msgstr "Lösung verwenden"
 #: ui/UIPractice.tscn
 msgid "Leave unfinished practice?"
 msgstr "Unvollendete Übung verlassen?"
+
+#: ui/components/BetaIndicator.tscn
+msgid "App in"
+msgstr ""
+
+#: ui/components/BetaIndicator.tscn
+msgid "BETA!"
+msgstr ""
+
+#: ui/components/BetaIndicator.tscn
+msgid "found a bug?"
+msgstr ""
 
 #: ui/components/BigGreenButton.tscn
 msgid "Button"
@@ -641,7 +644,8 @@ msgid "Click to learn about external errors"
 msgstr "Klick hier, um mehr über externe Fehler zu erfahren"
 
 #: ui/components/OutputConsoleErrorMessage.tscn
-msgid "Sometimes errors are reported outside of your code. Why does that happen?"
+#, fuzzy
+msgid "Sometimes errors are reported outside of your code. [url=external]Why does that happen?[/url]"
 msgstr "Manchmal werden Fehler außerhalb deines Codes gemeldet. Warum passiert das?"
 
 #: ui/components/OutputConsoleErrorMessage.tscn
@@ -669,21 +673,6 @@ msgstr "Schritt"
 #: ui/components/RunnableCodeExampleDebugger.tscn
 msgid "Debugger"
 msgstr "Debugger"
-
-#: ui/components/SalePopup.tscn
-msgid ""
-"Get [b]50%[/b] off on all our Godot courses with the \n"
-"coupon code [b]DISCOUNT50[/b]"
-msgstr "Erhalte [b]50 %[/b] Rabatt auf alle unsere Godot-Kurse mit dem Gutscheincode [b]DISCOUNT50[/b]"
-
-#: ui/components/SalePopup.tscn
-#, fuzzy
-msgid "Only until "
-msgstr "Nur bis"
-
-#: ui/components/SalePopup.tscn
-msgid "CHECK OUT OUR COURSES"
-msgstr "SIEH DIR UNSERE KURSE AN"
 
 #: ui/components/ScrollableTextBox.tscn
 msgid "Placeholder text"
@@ -791,36 +780,41 @@ msgid "Close"
 msgstr "Schließen"
 
 #: ui/components/popups/ReportFormPopup.tscn
-msgid ""
-"Use the link below to report a bug or an error in a lesson: [b][url=https://github.com/GDQuest/learn-gdscript/issues]Report an issue on GitHub[/url][/b]\n"
-"\n"
-"[font=res://ui/theme/fonts/font_title.tres]Missing translations[/font]\n"
-"\n"
-"If some text in the app is not translated into your language, it is most likely because the translation for your language is incomplete. Our translations are maintained by volunteers and not every language is fully covered yet.\n"
-"\n"
-"If you want to help translate the app, you can find instructions on how to contribute here: [b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]Contribute to translations[/url][/b]\n"
-"\n"
-"[font=res://ui/theme/fonts/font_title.tres]What is GitHub[/font]\n"
-"\n"
-"GitHub is a website where developers share and work on open-source projects. Open-source means the code is public and anyone can read it, report problems, or help improve it.\n"
-"\n"
-"This app is open-source, and we currently use GitHub to track bugs and improvements.\n"
-"\n"
-"[font=res://ui/theme/fonts/font_title.tres]How to report an issue[/font]\n"
-"\n"
-"1. Click the first link at the top of this page to go to the [i]GitHub Issues[/i] page.\n"
-"2. Use the search bar to verify that your issue has not been reported already.\n"
-"3. Click the [i]New Issue[/i] button.\n"
-"4. Fill out the form to describe what went wrong.\n"
-"\n"
-"You will need a free GitHub account to do this.\n"
-"\n"
-"Please include as much detail as you can, such as what device you are using and what you were doing when the problem happened. A screenshot also helps a lot.\n"
-"\n"
-"[center]Thank you for helping make this app better.[/center]"
+msgid "Something does not work"
 msgstr ""
-"[font=res://ui/theme/fonts/font_title.tres] So meldest du ein Problem[/font]\n"
-"\n"
+
+#: ui/components/popups/ReportFormPopup.tscn
+msgid "Something is unclear or incorrect"
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.tscn
+msgid "Suggest an improvement"
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.tscn
+#, fuzzy
+msgid "Translation issue"
+msgstr "Community-Übersetzungen"
+
+#: ui/components/popups/ReportFormPopup.tscn
+msgid "Write a short description."
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.tscn
+msgid "Describe what went wrong, what you were doing, and what you expected to happen."
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.tscn
+msgid "Open the contact page on our website with this report prefilled."
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.tscn
+msgid "Send report"
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.tscn
+msgid "Close the report form without sending anything."
+msgstr ""
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Configure the App"
@@ -842,21 +836,8 @@ msgid "About community translations"
 msgstr "Über Community-Übersetzungen"
 
 #: ui/components/popups/SettingsPopup.tscn
-msgid ""
-"Some lessons are only partly translated and inaccessible by default.\n"
-"Turn this on to show them anyway.\n"
-"Note that some or all of the lesson text will still be in English."
+msgid "0% of text translated. 0/0 lessons fully translated."
 msgstr ""
-
-#: ui/components/popups/SettingsPopup.tscn
-#, fuzzy
-msgid "Allow incomplete translations"
-msgstr "Unvollständige Übersetzungen zulassen"
-
-#: ui/components/popups/SettingsPopup.tscn
-#, fuzzy
-msgid "Enabled"
-msgstr "Aktiviert"
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Make all text in the app bigger or smaller."
@@ -916,6 +897,11 @@ msgstr ""
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Lower contrast"
 msgstr "Weniger Kontrast"
+
+#: ui/components/popups/SettingsPopup.tscn
+#, fuzzy
+msgid "Enabled"
+msgstr "Aktiviert"
 
 #: ui/components/popups/SettingsPopup.tscn
 #, fuzzy
@@ -983,7 +969,8 @@ msgid "\t[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]
 msgstr "[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]So kannst du Übersetzungen beitragen[/url][/b]"
 
 #: ui/screens/course_outliner/CourseLessonDetails.tscn
-#: ui/screens/course_outliner/CourseLessonDetails.gd:111
+#: ui/screens/course_outliner/CourseLessonDetails.gd:85
+#: ui/screens/course_outliner/CourseLessonDetails.gd:117
 msgid "Start Lesson"
 msgstr "Lektion starten"
 
@@ -995,6 +982,14 @@ msgstr "Zeile 12."
 #: ui/screens/course_outliner/CourseLessonItem.tscn
 msgid "Lesson Title"
 msgstr "Lektion Titel"
+
+#: ui/screens/course_outliner/CourseLessonItem.tscn
+msgid "A/文 100%"
+msgstr ""
+
+#: ui/screens/course_outliner/CourseLessonList.tscn
+msgid "This course is 80% translated. Incomplete lessons will contain English text."
+msgstr ""
 
 #: ui/screens/course_outliner/CourseOutliner.tscn
 #, fuzzy
@@ -1022,7 +1017,7 @@ msgid "YOU MADE IT!"
 msgstr "DU HAST ES GESCHAFFT!"
 
 #: ui/screens/end_screen/EndScreen.tscn
-msgid "Not only did you learn the foundations of coding, you’re a big step closer to making your own games."
+msgid "Not only did you learn the foundations of coding, you're a big step closer to making your own games."
 msgstr "Du hast nicht nur die Grundlagen des Programmierens gelernt, sondern bist auch einen großen Schritt näher an der Entwicklung deiner eigenen Spiele."
 
 #: ui/screens/end_screen/EndScreen.tscn
@@ -1042,11 +1037,11 @@ msgid "Following video tutorials"
 msgstr "Videoanleitungen anschauen"
 
 #: ui/screens/end_screen/EndScreen.tscn
-msgid "They’re a great way to pick up specific game mechanics but they’re not as effective when you’re trying to learn new skills from the ground up."
+msgid "They're a great way to pick up specific game mechanics but they're not as effective when you're trying to learn new skills from the ground up."
 msgstr "Die sind sehr hilfreich, wenn du unterschiedliche Gamemechaniken kennenlernen willst aber nicht so effektiv wenn du etwas neues von Grund auf lernen möchtest."
 
 #: ui/screens/end_screen/EndScreen.tscn
-msgid "• There’s no clear learning path."
+msgid "• There's no clear learning path."
 msgstr "• Es gibt nicht die einzig richtige Lernmethode."
 
 #: ui/screens/end_screen/EndScreen.tscn
@@ -1067,9 +1062,9 @@ msgstr "Dabei musst du dir bewusst sein, dass die meisten Online Kurse Premiumve
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid ""
-"At GDQuest, we’re educators at heart. We believe in applied study and we believe it doesn’t have to be boring. When teaching is done correctly, most people highly enjoy the sensation of leveling up!\n"
+"At GDQuest, we're educators at heart. We believe in applied study and we believe it doesn't have to be boring. When teaching is done correctly, most people highly enjoy the sensation of leveling up!\n"
 "\n"
-"That’s the reason we made this app. It is in fact part of our beginner course [b][color=#ebc3ff][url=https://school.gdquest.com/products/bundle_learn_gamedev_godot_4]Learn Gamedev From Zero with Godot[/url][/color][/b]."
+"That's the reason we made this app. It is in fact part of our beginner course [b][color=#ebc3ff][url=https://school.gdquest.com/products/bundle_learn_gamedev_godot_4]Learn Gamedev From Zero with Godot[/url][/color][/b]."
 msgstr ""
 "Bei GDQuest sind wir im Herzen Pädagogen. Wir glauben an anwendungsorientiertes Lernen – und daran, dass es nicht trocken und langweilig sein muss. Guter Unterricht begeistert durch die Erfahrung, stets dazuzulernen und besser zu werden!\n"
 "\n"
@@ -1979,40 +1974,48 @@ msgstr "Bei der Umrechnung der Zelle %s in Weltkoordinaten haben wir %s erhalten
 msgid "Hover over a cell to see its pixel position"
 msgstr "Fahre mit der Maus über eine Zelle, um ihre Pixelposition anzuzeigen"
 
-#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:11
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:13
 #, fuzzy
 msgid "Used Pop Front"
 msgstr "„Pop Front“ verwendet"
 
-#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:12
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:14
 #, fuzzy
 msgid "Used Append"
 msgstr "„Append“ verwendet"
 
-#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:13
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:15
 #, fuzzy
 msgid "Completed Orders Contain All Elements"
 msgstr "Abgeschlossene Aufträge enthalten alle Elemente"
 
-#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:18
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:16
+msgid "Starting Data Unchanged"
+msgstr ""
+
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:21
 #, fuzzy
 msgid "We found no call to the pop_front() function. Did you forget to call it?"
 msgstr "Wir haben keinen Aufruf der [code]pop_front()[/code]-Funktion gefunden. Hast du vergessen, sie aufzurufen?"
 
-#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:24
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:27
 #, fuzzy
 msgid "We found no call to the append() function. Did you forget to call it?"
 msgstr "Wir haben keinen Aufruf der [code]append()[/code]-Funktion gefunden. Hast du vergessen, sie aufzurufen?"
 
-#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:32
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:35
 #, fuzzy
-msgid "the completed_orders array is empty. Are you sure you appended the elements?"
+msgid "The completed_orders array is empty. Are you sure you appended the elements?"
 msgstr "Das Array „completed_orders“ ist leer. Bist du sicher, dass du die Elemente angehängt hast?"
 
-#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:40
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:39
 #, fuzzy
-msgid "we were expecting %s, but got %s instead"
+msgid "We expected %s, but got %s instead"
 msgstr "Wir haben %s erwartet, aber stattdessen %s erhalten"
+
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:48
+msgid "It looks like you removed %s from waiting_orders."
+msgstr ""
 
 #: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:10
 #, fuzzy
@@ -2621,7 +2624,7 @@ msgid ""
 "[hr]\n"
 msgstr ""
 
-#: ui/UINavigator.gd:377
+#: ui/UINavigator.gd:398
 msgid "(no previous history)"
 msgstr "(kein Verlauf)"
 
@@ -2629,45 +2632,72 @@ msgstr "(kein Verlauf)"
 msgid "Hint %s"
 msgstr "Hinweis %s"
 
-#: ui/UIPractice.gd:317
+#: ui/UIPractice.gd:322
 msgid "Validating Your Code..."
 msgstr "Code wird validiert..."
 
-#: ui/UIPractice.gd:372
+#: ui/UIPractice.gd:377
 msgid "The function `%s` calls itself, this creates an infinite loop"
 msgstr "Die Funktion `%s`ruft sich selbst auf, dadurch entsteht eine Endlosschleife"
 
-#: ui/UIPractice.gd:383
-msgid "You have a while loop that runs forever (while true) without a break statement. This will freeze the app."
+#: ui/UIPractice.gd:388
+#, fuzzy
+msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr "In deinem Code ist eine while-Schleife, die endlos weiterläuft (while true). Dadurch bleibt das Programm hängen."
 
-#: ui/UIPractice.gd:425
+#: ui/UIPractice.gd:430
 msgid "Running Your Code..."
 msgstr "Code wird ausgeführt..."
 
-#: ui/UIPractice.gd:456
+#: ui/UIPractice.gd:461
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "In deinem Code, teilst du durch null. Du kannst in deinem Code nicht durch null teilen. Bitte stelle sicher das du kein \"/0\" oder \"%0\" in deinem Code stehen hast."
 
-#: ui/UIPractice.gd:502
+#: ui/UIPractice.gd:507
 msgid "Running Tests..."
 msgstr "Tests werden ausgeführt..."
 
-#: ui/components/BreadCrumbs.gd:111
-msgid "•"
+#: ui/components/BreadCrumbs.gd:115
+msgid " > "
 msgstr ""
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:67
+#: ui/components/popups/ReportFormPopup.gd:52
+msgid "Select the kind of issue and describe it in the box below, then click \"Send report\" to open the contact page on our website with the report prefilled."
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.gd:56
+msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.gd:131
+msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
+msgstr ""
+
+#: ui/components/popups/SettingsPopup.gd:144
+msgid "{percentage}% of text translated. {completed}/{total} lessons fully translated."
+msgstr ""
+
+#: ui/screens/course_outliner/CourseLessonDetails.gd:72
 msgid "100%"
 msgstr ""
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:107
+#: ui/screens/course_outliner/CourseLessonDetails.gd:85
+#: ui/screens/course_outliner/CourseLessonDetails.gd:114
+#: ui/screens/course_outliner/CourseLessonDetails.gd:116
+msgid "Open Anyway"
+msgstr ""
+
+#: ui/screens/course_outliner/CourseLessonDetails.gd:113
 msgid "Open Lesson"
 msgstr "Lektion öffnen"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:109
+#: ui/screens/course_outliner/CourseLessonDetails.gd:115
 msgid "Continue Lesson"
 msgstr "Lektion fortsetzen"
+
+#: ui/screens/course_outliner/CourseLessonList.gd:33
+msgid "This course is {percentage}% translated. Incomplete lessons will contain English text."
+msgstr ""
 
 #: ui/screens/lesson/quizzes/UIQuizChoice.gd:28
 msgid "(select all that apply)"
@@ -2681,20 +2711,20 @@ msgstr "Du musst eine ganze Zahl für diese Antwort eingeben. Beispiel: 42"
 msgid "You need to type a decimal for this answer. Use a \".\" to separate the decimal part. Example: 3.14"
 msgstr "Du musst für diese Antwort eine Dezimalstelle eingeben. Verwende ein \".\", um den Dezimalteil zu trennen. Beispiel: 3.14"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:146
+#: ui/screens/practice/PracticeInfoPanel.gd:145
 msgid "Method descriptions"
 msgstr "Methodenbeschreibungen"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:162
+#: ui/screens/practice/PracticeInfoPanel.gd:161
 msgid "Property descriptions"
 msgstr "Objektbeschreibungen"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:190
+#: ui/screens/practice/PracticeInfoPanel.gd:189
 #, fuzzy
 msgid "You've completed this practice before."
 msgstr "Du hast diese Übung bereits abgeschlossen."
 
-#: ui/screens/practice/PracticeInfoPanel.gd:194
+#: ui/screens/practice/PracticeInfoPanel.gd:193
 msgid ""
 "You've used the provided solution.\n"
 "This practice will not count towards your course progress."
@@ -2706,6 +2736,59 @@ msgstr "FORTSETZEN"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid "CHRISTMAS SALE - 50% OFF"
+#~ msgstr "WEIHNACHTSAKTION - 50% RABATT"
+
+#~ msgid "CHRISTMAS SALE"
+#~ msgstr "WEIHNACHTSAKTION"
+
+#~ msgid ""
+#~ "Get [b]50%[/b] off on all our Godot courses with the \n"
+#~ "coupon code [b]DISCOUNT50[/b]"
+#~ msgstr "Erhalte [b]50 %[/b] Rabatt auf alle unsere Godot-Kurse mit dem Gutscheincode [b]DISCOUNT50[/b]"
+
+#, fuzzy
+#~ msgid "Only until "
+#~ msgstr "Nur bis"
+
+#~ msgid "CHECK OUT OUR COURSES"
+#~ msgstr "SIEH DIR UNSERE KURSE AN"
+
+#~ msgid ""
+#~ "Use the link below to report a bug or an error in a lesson: [b][url=https://github.com/GDQuest/learn-gdscript/issues]Report an issue on GitHub[/url][/b]\n"
+#~ "\n"
+#~ "[font=res://ui/theme/fonts/font_title.tres]Missing translations[/font]\n"
+#~ "\n"
+#~ "If some text in the app is not translated into your language, it is most likely because the translation for your language is incomplete. Our translations are maintained by volunteers and not every language is fully covered yet.\n"
+#~ "\n"
+#~ "If you want to help translate the app, you can find instructions on how to contribute here: [b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]Contribute to translations[/url][/b]\n"
+#~ "\n"
+#~ "[font=res://ui/theme/fonts/font_title.tres]What is GitHub[/font]\n"
+#~ "\n"
+#~ "GitHub is a website where developers share and work on open-source projects. Open-source means the code is public and anyone can read it, report problems, or help improve it.\n"
+#~ "\n"
+#~ "This app is open-source, and we currently use GitHub to track bugs and improvements.\n"
+#~ "\n"
+#~ "[font=res://ui/theme/fonts/font_title.tres]How to report an issue[/font]\n"
+#~ "\n"
+#~ "1. Click the first link at the top of this page to go to the [i]GitHub Issues[/i] page.\n"
+#~ "2. Use the search bar to verify that your issue has not been reported already.\n"
+#~ "3. Click the [i]New Issue[/i] button.\n"
+#~ "4. Fill out the form to describe what went wrong.\n"
+#~ "\n"
+#~ "You will need a free GitHub account to do this.\n"
+#~ "\n"
+#~ "Please include as much detail as you can, such as what device you are using and what you were doing when the problem happened. A screenshot also helps a lot.\n"
+#~ "\n"
+#~ "[center]Thank you for helping make this app better.[/center]"
+#~ msgstr ""
+#~ "[font=res://ui/theme/fonts/font_title.tres] So meldest du ein Problem[/font]\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "Allow incomplete translations"
+#~ msgstr "Unvollständige Übersetzungen zulassen"
 
 #, fuzzy
 #~ msgid "Change the course's language to one of the community-contributed ones."

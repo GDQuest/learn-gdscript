@@ -2526,7 +2526,8 @@ msgstr "மேலும், மீண்டும் ஒரு முறை, க
 
 #. TRANSLATORS: Quiz question
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:36
-msgid "Which of these would increase the health of the robot?"
+#, fuzzy
+msgid "Assuming amount is a positive number, which of these would increase the health of the robot?"
 msgstr "இவற்றில் எது ரோபோவின் ஆரோக்கியத்தை அதிகரிக்கும்?"
 
 #. TRANSLATORS: Quiz explanation
@@ -4619,7 +4620,8 @@ msgid "In both examples, we print the value of the temporary variable we created
 msgstr "இரண்டு எடுத்துக்காட்டுகளிலும், நாங்கள் உருவாக்கிய தற்காலிக மாறியின் மதிப்பை அச்சிடுகிறோம்: [குறியீடு] எண் [/குறியீடு] முதல் எடுத்துக்காட்டில் மற்றும் [குறியீடு] உறுப்பு [/குறியீடு] இரண்டாவதாக."
 
 #: course/lesson-18-for-loops/lesson.bbcode:56
-msgid "As Godot moves through the loop, it assigns each value of the array to that variable. First, it sets the variable to [code]0[/code], then to [code]1[/code], and finally, to [code]2[/code]."
+#, fuzzy
+msgid "As Godot moves through the loop, it assigns each value of the array to that variable. First, it sets the variable to [code]3[/code], then to [code]5[/code], and finally, to [code]7[/code]."
 msgstr "கோடோட் வளையத்தின் வழியாக நகரும்போது, அது வரிசையின் ஒவ்வொரு மதிப்பையும் அந்த மாறிக்கு ஒதுக்குகிறது. முதலில், இது மாறியை [குறியீடு] 0 [/குறியீடு] ஆகவும், பின்னர் [குறியீடு] 1 [/குறியீடு] ஆகவும், இறுதியாக, [குறியீடு] 2 [/குறியீடு] ஆகவும் அமைக்கிறது."
 
 #: course/lesson-18-for-loops/lesson.bbcode:57
@@ -4648,9 +4650,8 @@ msgid "With the [code]for[/code] loop, we check the board's width first. Then we
 msgstr ""
 
 #: course/lesson-18-for-loops/lesson.bbcode:74
-#, fuzzy
-msgid "The function still works the same way. You can run it below."
-msgstr "செயல்பாடு இன்னும் ஒரே மாதிரியாக செயல்படுகிறது. நீங்கள் அதை கீழே இயக்கலாம்."
+msgid "The function still works the same way, assuming the robot starts at [code]cell.x = 0[/code] each time (the left edge of the board). The [code]while[/code] loop would work no matter where the robot starts. You can run it below."
+msgstr ""
 
 #: course/lesson-18-for-loops/lesson.bbcode:77
 msgid "In the practices, we'll use [code]for[/code] loops in different ways to get you used to using them."
@@ -5682,7 +5683,8 @@ msgstr "ஆர்டர்களை நிறைவு செய்தல்"
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-23-append-to-arrays/lesson.bbcode:79
-msgid "The [code]waiting_orders[/code] array will be filled over time."
+#, fuzzy
+msgid "The [code]waiting_orders[/code] array starts with four orders waiting to be prepared."
 msgstr "[குறியீடு] காத்திருப்பு_ ஆர்டர்ச் [/குறியீடு] வரிசை காலப்போக்கில் நிரப்பப்படும்."
 
 #. TRANSLATORS: Practice goal
@@ -5711,53 +5713,53 @@ msgid "You then need to append the popped value to the completed_orders array. T
 msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Clearing up the crates"
 msgstr "கிரேட்சுகளை அழித்தல்"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from the [code]crates[/code] array."
 msgstr "கிரேட்சுகள் மேடையில் குவிந்து கொண்டிருக்கின்றன. [குறியீடு] கிரேட்சுகள் [/குறியீடு] வரிசையிலிருந்து அவற்றைத் தூண்டுவதன் மூலம் அவற்றை வெளியே நகர்த்தவும்."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "You need to remove them from top to bottom using the array's [code]pop_back()[/code] function."
 msgstr "வரிசையின் [குறியீடு] பாப்_பேக் () [/குறியீடு] செயல்பாட்டைப் பயன்படுத்தி அவற்றை மேலிருந்து கீழாக அகற்ற வேண்டும்."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Your code should remove all the crates in the array using a while loop."
 msgstr "உங்கள் குறியீடு சிறிது நேரம் வளையத்தைப் பயன்படுத்தி வரிசையில் உள்ள அனைத்து கிரேட்டுகளையும் அகற்ற வேண்டும்."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "[b]Careful![/b] If you write the while loop incorrectly, you can freeze the program."
 msgstr "[b]கவனமாக இருங்கள்![/b] நீங்கள் லூப்பை தவறாக எழுதினால், நிரலை முடக்கலாம்."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "You can check if the [code]crates[/code] array still has values by writing [code]while crates:[/code]. This works because an empty array counts as [code]false[/code], and an array with items counts as [code]true[/code]."
 msgstr "[code]crates[/code] வரிசை இன்னும் மதிப்புகளைக் கொண்டிருக்கிறதா என்பதை, [code]என்று எழுதுவதன் மூலம் நீங்கள் சரிபார்க்கலாம்:[/code]. வெற்று வரிசை [குறியீடு]தவறு[/குறியீடு] எனவும், உருப்படிகளைக் கொண்ட அணிவரிசை [குறியீடு]சரி[/குறியீடு] எனவும் கணக்கிடப்படுவதால் இது செயல்படுகிறது."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from their array."
 msgstr "கிரேட்சுகள் மேடையில் குவிந்து கொண்டிருக்கின்றன. அவற்றின் வரிசையிலிருந்து அவர்களை வெளியேற்றுவதன் மூலம் அவர்களை வழியிலிருந்து நகர்த்தவும்."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 #, fuzzy
 msgid "Think about how [code]while[/code] loops work."
 msgstr "[/குறியீடு] சுழல்கள் போது [குறியீட்டிற்கு] பிற நல்ல பயன்பாடுகள் உள்ளன:"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Every time you [code]pop[/code] an item, the array's [code]size[/code] gets smaller."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "You can write [code]while crates:[/code] to run code in a loop while there are values in the [code]crates[/code] array."
 msgstr ""
 
@@ -6790,6 +6792,10 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#, fuzzy
+#~ msgid "The function still works the same way. You can run it below."
+#~ msgstr "செயல்பாடு இன்னும் ஒரே மாதிரியாக செயல்படுகிறது. நீங்கள் அதை கீழே இயக்கலாம்."
 
 #~ msgid "0"
 #~ msgstr "0"

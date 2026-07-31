@@ -124,7 +124,6 @@ msgstr ""
 
 #: course/lesson-14-multiplying/visuals/Graph.tscn
 #: course/lesson-16-2d-vectors/visuals/VectorVisual.tscn
-#: ui/components/SalePopup.tscn
 msgid "X"
 msgstr "X"
 
@@ -334,11 +333,11 @@ msgstr ""
 #: course/lesson-27-value-types/player-input/PlayerInput.tscn
 #: ui/components/popups/ConfirmPopup.tscn
 #: ui/components/popups/PracticeLeaveUnfinishedPopup.tscn
+#: ui/components/popups/ReportFormPopup.tscn
 msgid "Cancel"
 msgstr "취소"
 
 #: course/lesson-27-value-types/player-input/PlayerInput.tscn
-#: ui/components/popups/ReportFormPopup.tscn
 #: ui/components/popups/TranslationInfoPopup.tscn
 msgid "OK"
 msgstr "네"
@@ -424,13 +423,9 @@ msgstr ""
 msgid "Open the course index"
 msgstr ""
 
-#: ui/UINavigator.tscn ui/UINavigator.gd:374
+#: ui/UINavigator.tscn ui/UINavigator.gd:395
 msgid "Go back in your navigation history"
 msgstr "내비게이션 기록으로 돌아가기"
-
-#: ui/UINavigator.tscn
-msgid "CHRISTMAS SALE - 50% OFF"
-msgstr "크리스마스 세일 - 50% 할인"
 
 #: ui/UINavigator.tscn ui/components/popups/ReportFormPopup.tscn
 msgid "Report an issue"
@@ -440,10 +435,6 @@ msgstr "문제 신고"
 #, fuzzy
 msgid "Configure the app"
 msgstr "앱 설정"
-
-#: ui/UINavigator.tscn
-msgid "CHRISTMAS SALE"
-msgstr "크리스마스 세일"
 
 #: ui/UIPractice.tscn
 msgid "Suggested Solution"
@@ -464,6 +455,18 @@ msgstr "해결법 사용하기"
 #: ui/UIPractice.tscn
 msgid "Leave unfinished practice?"
 msgstr "실습을 완료하지 않고 나갈까요?"
+
+#: ui/components/BetaIndicator.tscn
+msgid "App in"
+msgstr ""
+
+#: ui/components/BetaIndicator.tscn
+msgid "BETA!"
+msgstr ""
+
+#: ui/components/BetaIndicator.tscn
+msgid "found a bug?"
+msgstr ""
 
 #: ui/components/BigGreenButton.tscn
 msgid "Button"
@@ -576,7 +579,8 @@ msgid "Click to learn about external errors"
 msgstr ""
 
 #: ui/components/OutputConsoleErrorMessage.tscn
-msgid "Sometimes errors are reported outside of your code. Why does that happen?"
+#, fuzzy
+msgid "Sometimes errors are reported outside of your code. [url=external]Why does that happen?[/url]"
 msgstr "때때로 여러분의 코드 외부에서 오류가 보고되기도 합니다. 왜 그런 일이 발생할까요?"
 
 #: ui/components/OutputConsoleErrorMessage.tscn
@@ -604,24 +608,6 @@ msgstr "단계"
 #: ui/components/RunnableCodeExampleDebugger.tscn
 msgid "Debugger"
 msgstr "디버거"
-
-#: ui/components/SalePopup.tscn
-#, fuzzy
-msgid ""
-"Get [b]50%[/b] off on all our Godot courses with the \n"
-"coupon code [b]DISCOUNT50[/b]"
-msgstr ""
-"[center]쿠폰 코드 [b]DISCOUNT50[/b]을 사용하여 \n"
-"모든 고도(Godot) 강좌를 [b]50% 할인[/b]된 가격에 만나보세요[/center]"
-
-#: ui/components/SalePopup.tscn
-#, fuzzy
-msgid "Only until "
-msgstr "오직"
-
-#: ui/components/SalePopup.tscn
-msgid "CHECK OUT OUR COURSES"
-msgstr "저희 강의를 확인해 보세요"
 
 #: ui/components/ScrollableTextBox.tscn
 msgid "Placeholder text"
@@ -735,36 +721,41 @@ msgid "Close"
 msgstr "닫기"
 
 #: ui/components/popups/ReportFormPopup.tscn
-msgid ""
-"Use the link below to report a bug or an error in a lesson: [b][url=https://github.com/GDQuest/learn-gdscript/issues]Report an issue on GitHub[/url][/b]\n"
-"\n"
-"[font=res://ui/theme/fonts/font_title.tres]Missing translations[/font]\n"
-"\n"
-"If some text in the app is not translated into your language, it is most likely because the translation for your language is incomplete. Our translations are maintained by volunteers and not every language is fully covered yet.\n"
-"\n"
-"If you want to help translate the app, you can find instructions on how to contribute here: [b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]Contribute to translations[/url][/b]\n"
-"\n"
-"[font=res://ui/theme/fonts/font_title.tres]What is GitHub[/font]\n"
-"\n"
-"GitHub is a website where developers share and work on open-source projects. Open-source means the code is public and anyone can read it, report problems, or help improve it.\n"
-"\n"
-"This app is open-source, and we currently use GitHub to track bugs and improvements.\n"
-"\n"
-"[font=res://ui/theme/fonts/font_title.tres]How to report an issue[/font]\n"
-"\n"
-"1. Click the first link at the top of this page to go to the [i]GitHub Issues[/i] page.\n"
-"2. Use the search bar to verify that your issue has not been reported already.\n"
-"3. Click the [i]New Issue[/i] button.\n"
-"4. Fill out the form to describe what went wrong.\n"
-"\n"
-"You will need a free GitHub account to do this.\n"
-"\n"
-"Please include as much detail as you can, such as what device you are using and what you were doing when the problem happened. A screenshot also helps a lot.\n"
-"\n"
-"[center]Thank you for helping make this app better.[/center]"
+msgid "Something does not work"
 msgstr ""
-"[font=res://ui/theme/fonts/font_title.tres]문제 신고 방법[/font]\n"
-"\n"
+
+#: ui/components/popups/ReportFormPopup.tscn
+msgid "Something is unclear or incorrect"
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.tscn
+msgid "Suggest an improvement"
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.tscn
+#, fuzzy
+msgid "Translation issue"
+msgstr "축하합니다!"
+
+#: ui/components/popups/ReportFormPopup.tscn
+msgid "Write a short description."
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.tscn
+msgid "Describe what went wrong, what you were doing, and what you expected to happen."
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.tscn
+msgid "Open the contact page on our website with this report prefilled."
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.tscn
+msgid "Send report"
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.tscn
+msgid "Close the report form without sending anything."
+msgstr ""
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Configure the App"
@@ -785,18 +776,7 @@ msgid "About community translations"
 msgstr ""
 
 #: ui/components/popups/SettingsPopup.tscn
-msgid ""
-"Some lessons are only partly translated and inaccessible by default.\n"
-"Turn this on to show them anyway.\n"
-"Note that some or all of the lesson text will still be in English."
-msgstr ""
-
-#: ui/components/popups/SettingsPopup.tscn
-msgid "Allow incomplete translations"
-msgstr ""
-
-#: ui/components/popups/SettingsPopup.tscn
-msgid "Enabled"
+msgid "0% of text translated. 0/0 lessons fully translated."
 msgstr ""
 
 #: ui/components/popups/SettingsPopup.tscn
@@ -852,6 +832,10 @@ msgstr ""
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Lower contrast"
 msgstr "저대비"
+
+#: ui/components/popups/SettingsPopup.tscn
+msgid "Enabled"
+msgstr ""
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid ""
@@ -917,7 +901,8 @@ msgid "\t[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]
 msgstr "[center][b][url=https://github.com/GDQuest/learn-gdscript/issues]GitHub.com > GDQuest > learn-gdscript > Issues[/url][/b][/center]"
 
 #: ui/screens/course_outliner/CourseLessonDetails.tscn
-#: ui/screens/course_outliner/CourseLessonDetails.gd:111
+#: ui/screens/course_outliner/CourseLessonDetails.gd:85
+#: ui/screens/course_outliner/CourseLessonDetails.gd:117
 msgid "Start Lesson"
 msgstr "수업 시작"
 
@@ -928,6 +913,14 @@ msgstr ""
 #: ui/screens/course_outliner/CourseLessonItem.tscn
 msgid "Lesson Title"
 msgstr "수업 제목"
+
+#: ui/screens/course_outliner/CourseLessonItem.tscn
+msgid "A/文 100%"
+msgstr ""
+
+#: ui/screens/course_outliner/CourseLessonList.tscn
+msgid "This course is 80% translated. Incomplete lessons will contain English text."
+msgstr ""
 
 #: ui/screens/course_outliner/CourseOutliner.tscn
 #, fuzzy
@@ -955,7 +948,7 @@ msgid "YOU MADE IT!"
 msgstr "해냈어요!"
 
 #: ui/screens/end_screen/EndScreen.tscn
-msgid "Not only did you learn the foundations of coding, you’re a big step closer to making your own games."
+msgid "Not only did you learn the foundations of coding, you're a big step closer to making your own games."
 msgstr "코딩의 기초를 배웠을 뿐만 아니라, 자신만의 게임을 만드는 데 한 걸음 더 가까워졌습니다."
 
 #: ui/screens/end_screen/EndScreen.tscn
@@ -975,11 +968,11 @@ msgid "Following video tutorials"
 msgstr "영상 강의를 따라하세요"
 
 #: ui/screens/end_screen/EndScreen.tscn
-msgid "They’re a great way to pick up specific game mechanics but they’re not as effective when you’re trying to learn new skills from the ground up."
+msgid "They're a great way to pick up specific game mechanics but they're not as effective when you're trying to learn new skills from the ground up."
 msgstr "그것들은 특정 게임 메커니즘을 익히는 데는 아주 좋은 방법이지만, 새로운 기술을 기초부터 배우려 할 때는 그만큼 효과적이지 않습니다."
 
 #: ui/screens/end_screen/EndScreen.tscn
-msgid "• There’s no clear learning path."
+msgid "• There's no clear learning path."
 msgstr "• 명확한 학습 경로가 없습니다."
 
 #: ui/screens/end_screen/EndScreen.tscn
@@ -1000,9 +993,9 @@ msgstr "온라인에서 이용 가능한 대부분의 강의는 사실 유료 �
 
 #: ui/screens/end_screen/EndScreen.tscn
 msgid ""
-"At GDQuest, we’re educators at heart. We believe in applied study and we believe it doesn’t have to be boring. When teaching is done correctly, most people highly enjoy the sensation of leveling up!\n"
+"At GDQuest, we're educators at heart. We believe in applied study and we believe it doesn't have to be boring. When teaching is done correctly, most people highly enjoy the sensation of leveling up!\n"
 "\n"
-"That’s the reason we made this app. It is in fact part of our beginner course [b][color=#ebc3ff][url=https://school.gdquest.com/products/bundle_learn_gamedev_godot_4]Learn Gamedev From Zero with Godot[/url][/color][/b]."
+"That's the reason we made this app. It is in fact part of our beginner course [b][color=#ebc3ff][url=https://school.gdquest.com/products/bundle_learn_gamedev_godot_4]Learn Gamedev From Zero with Godot[/url][/color][/b]."
 msgstr ""
 "GDQuest의 구성원들은 본질적으로 교육자입니다. 우리는 실용적인 학습의 가치를 믿으며, 배움이 결코 지루할 필요가 없다고 생각합니다. 교육이 올바르게 이루어질 때, 대부분의 사람들은 자신의 실력이 향상되는 '레벨 업'의 기분을 만끽하게 됩니다!\n"
 "\n"
@@ -1782,32 +1775,40 @@ msgstr ""
 msgid "Hover over a cell to see its pixel position"
 msgstr ""
 
-#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:11
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:13
 msgid "Used Pop Front"
 msgstr ""
 
-#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:12
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:14
 msgid "Used Append"
 msgstr ""
 
-#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:13
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:15
 msgid "Completed Orders Contain All Elements"
 msgstr ""
 
-#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:18
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:16
+msgid "Starting Data Unchanged"
+msgstr ""
+
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:21
 msgid "We found no call to the pop_front() function. Did you forget to call it?"
 msgstr ""
 
-#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:24
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:27
 msgid "We found no call to the append() function. Did you forget to call it?"
 msgstr ""
 
-#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:32
-msgid "the completed_orders array is empty. Are you sure you appended the elements?"
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:35
+msgid "The completed_orders array is empty. Are you sure you appended the elements?"
 msgstr ""
 
-#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:40
-msgid "we were expecting %s, but got %s instead"
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:39
+msgid "We expected %s, but got %s instead"
+msgstr ""
+
+#: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:48
+msgid "It looks like you removed %s from waiting_orders."
 msgstr ""
 
 #: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:10
@@ -2303,7 +2304,7 @@ msgid ""
 "[hr]\n"
 msgstr ""
 
-#: ui/UINavigator.gd:377
+#: ui/UINavigator.gd:398
 msgid "(no previous history)"
 msgstr "(이전 기록 없음)"
 
@@ -2311,45 +2312,72 @@ msgstr "(이전 기록 없음)"
 msgid "Hint %s"
 msgstr "힌트 %s"
 
-#: ui/UIPractice.gd:317
+#: ui/UIPractice.gd:322
 msgid "Validating Your Code..."
 msgstr "코드 확인 중..."
 
-#: ui/UIPractice.gd:372
+#: ui/UIPractice.gd:377
 msgid "The function `%s` calls itself, this creates an infinite loop"
 msgstr "함수 `%s`가 자기 자신을 호출하여 무한 루프를 생성합니다"
 
-#: ui/UIPractice.gd:383
-msgid "You have a while loop that runs forever (while true) without a break statement. This will freeze the app."
+#: ui/UIPractice.gd:388
+#, fuzzy
+msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr "중단문(break statement) 없이 영원히 실행되는 while 루프(while true)가 있습니다. 이로 인해 앱이 멈추게 됩니다."
 
-#: ui/UIPractice.gd:425
+#: ui/UIPractice.gd:430
 msgid "Running Your Code..."
 msgstr "코드 실행 중..."
 
-#: ui/UIPractice.gd:456
+#: ui/UIPractice.gd:461
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "코드에 0으로 나누는 오류가 있습니다. 코드에서는 0으로 나눌 수 없습니다. 코드 내에 \"/ 0\" 또는 \"% 0\"이 포함되어 있지 않은지 확인해 주시기 바랍니다."
 
-#: ui/UIPractice.gd:502
+#: ui/UIPractice.gd:507
 msgid "Running Tests..."
 msgstr "테스트 실행 중..."
 
-#: ui/components/BreadCrumbs.gd:111
-msgid "•"
+#: ui/components/BreadCrumbs.gd:115
+msgid " > "
 msgstr ""
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:67
+#: ui/components/popups/ReportFormPopup.gd:52
+msgid "Select the kind of issue and describe it in the box below, then click \"Send report\" to open the contact page on our website with the report prefilled."
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.gd:56
+msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
+msgstr ""
+
+#: ui/components/popups/ReportFormPopup.gd:131
+msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
+msgstr ""
+
+#: ui/components/popups/SettingsPopup.gd:144
+msgid "{percentage}% of text translated. {completed}/{total} lessons fully translated."
+msgstr ""
+
+#: ui/screens/course_outliner/CourseLessonDetails.gd:72
 msgid "100%"
 msgstr ""
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:107
+#: ui/screens/course_outliner/CourseLessonDetails.gd:85
+#: ui/screens/course_outliner/CourseLessonDetails.gd:114
+#: ui/screens/course_outliner/CourseLessonDetails.gd:116
+msgid "Open Anyway"
+msgstr ""
+
+#: ui/screens/course_outliner/CourseLessonDetails.gd:113
 msgid "Open Lesson"
 msgstr "수업 열기"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:109
+#: ui/screens/course_outliner/CourseLessonDetails.gd:115
 msgid "Continue Lesson"
 msgstr "계속 수업 하기"
+
+#: ui/screens/course_outliner/CourseLessonList.gd:33
+msgid "This course is {percentage}% translated. Incomplete lessons will contain English text."
+msgstr ""
 
 #: ui/screens/lesson/quizzes/UIQuizChoice.gd:28
 msgid "(select all that apply)"
@@ -2363,20 +2391,20 @@ msgstr "이 답변에는 정수를 입력해야 합니다. 예: 42"
 msgid "You need to type a decimal for this answer. Use a \".\" to separate the decimal part. Example: 3.14"
 msgstr "이 답은 소수점을 포함하여 입력해야 합니다. \".\"를 사용하여 소수 부분을 구분합니다. 예: 3.14"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:146
+#: ui/screens/practice/PracticeInfoPanel.gd:145
 msgid "Method descriptions"
 msgstr "메소드 설명"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:162
+#: ui/screens/practice/PracticeInfoPanel.gd:161
 msgid "Property descriptions"
 msgstr "프로퍼티 설명"
 
-#: ui/screens/practice/PracticeInfoPanel.gd:190
+#: ui/screens/practice/PracticeInfoPanel.gd:189
 #, fuzzy
 msgid "You've completed this practice before."
 msgstr "연습을 완료했습니다."
 
-#: ui/screens/practice/PracticeInfoPanel.gd:194
+#: ui/screens/practice/PracticeInfoPanel.gd:193
 msgid ""
 "You've used the provided solution.\n"
 "This practice will not count towards your course progress."
@@ -2388,6 +2416,58 @@ msgstr "이어하기"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid "CHRISTMAS SALE - 50% OFF"
+#~ msgstr "크리스마스 세일 - 50% 할인"
+
+#~ msgid "CHRISTMAS SALE"
+#~ msgstr "크리스마스 세일"
+
+#, fuzzy
+#~ msgid ""
+#~ "Get [b]50%[/b] off on all our Godot courses with the \n"
+#~ "coupon code [b]DISCOUNT50[/b]"
+#~ msgstr ""
+#~ "[center]쿠폰 코드 [b]DISCOUNT50[/b]을 사용하여 \n"
+#~ "모든 고도(Godot) 강좌를 [b]50% 할인[/b]된 가격에 만나보세요[/center]"
+
+#, fuzzy
+#~ msgid "Only until "
+#~ msgstr "오직"
+
+#~ msgid "CHECK OUT OUR COURSES"
+#~ msgstr "저희 강의를 확인해 보세요"
+
+#~ msgid ""
+#~ "Use the link below to report a bug or an error in a lesson: [b][url=https://github.com/GDQuest/learn-gdscript/issues]Report an issue on GitHub[/url][/b]\n"
+#~ "\n"
+#~ "[font=res://ui/theme/fonts/font_title.tres]Missing translations[/font]\n"
+#~ "\n"
+#~ "If some text in the app is not translated into your language, it is most likely because the translation for your language is incomplete. Our translations are maintained by volunteers and not every language is fully covered yet.\n"
+#~ "\n"
+#~ "If you want to help translate the app, you can find instructions on how to contribute here: [b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]Contribute to translations[/url][/b]\n"
+#~ "\n"
+#~ "[font=res://ui/theme/fonts/font_title.tres]What is GitHub[/font]\n"
+#~ "\n"
+#~ "GitHub is a website where developers share and work on open-source projects. Open-source means the code is public and anyone can read it, report problems, or help improve it.\n"
+#~ "\n"
+#~ "This app is open-source, and we currently use GitHub to track bugs and improvements.\n"
+#~ "\n"
+#~ "[font=res://ui/theme/fonts/font_title.tres]How to report an issue[/font]\n"
+#~ "\n"
+#~ "1. Click the first link at the top of this page to go to the [i]GitHub Issues[/i] page.\n"
+#~ "2. Use the search bar to verify that your issue has not been reported already.\n"
+#~ "3. Click the [i]New Issue[/i] button.\n"
+#~ "4. Fill out the form to describe what went wrong.\n"
+#~ "\n"
+#~ "You will need a free GitHub account to do this.\n"
+#~ "\n"
+#~ "Please include as much detail as you can, such as what device you are using and what you were doing when the problem happened. A screenshot also helps a lot.\n"
+#~ "\n"
+#~ "[center]Thank you for helping make this app better.[/center]"
+#~ msgstr ""
+#~ "[font=res://ui/theme/fonts/font_title.tres]문제 신고 방법[/font]\n"
+#~ "\n"
 
 #, fuzzy
 #~ msgid "To order"

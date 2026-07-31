@@ -53,10 +53,8 @@ func setup(context: ReportContext) -> void:
 			"Select the kind of issue and describe it in the box below, then click \"Send report\" to open the contact page on our website with the report prefilled."
 		)
 		+ "\n\n"
-		+ tr(
-			"For questions and help with learning, [url=%s]join the community on Discord[/url]."
-			% DISCORD_URL
-		)
+		+ tr("For questions and help with learning, [url=%s]join the community on Discord[/url].")
+		% DISCORD_URL
 	)
 
 

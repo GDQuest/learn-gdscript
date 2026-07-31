@@ -2536,7 +2536,8 @@ msgstr "此外，簡寫的 [code]health += amount[/code] 等同於較長的寫�
 
 #. TRANSLATORS: Quiz question
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:36
-msgid "Which of these would increase the health of the robot?"
+#, fuzzy
+msgid "Assuming amount is a positive number, which of these would increase the health of the robot?"
 msgstr "哪一個選項會增加機器人的生命值？"
 
 #. TRANSLATORS: Quiz explanation
@@ -4630,7 +4631,8 @@ msgid "In both examples, we print the value of the temporary variable we created
 msgstr "在兩個範例中，我們列印了創建的暫時變數的值：第一個範例是 [code]number[/code]，第二個範例是 [code]element[/code]。"
 
 #: course/lesson-18-for-loops/lesson.bbcode:56
-msgid "As Godot moves through the loop, it assigns each value of the array to that variable. First, it sets the variable to [code]0[/code], then to [code]1[/code], and finally, to [code]2[/code]."
+#, fuzzy
+msgid "As Godot moves through the loop, it assigns each value of the array to that variable. First, it sets the variable to [code]3[/code], then to [code]5[/code], and finally, to [code]7[/code]."
 msgstr "當 Godot 執行迴圈時，它將陣列中的每個值指定給該變數。首先，它將變數設為 [code]0[/code]，接著是 [code]1[/code]，最後是 [code]2[/code]。"
 
 #: course/lesson-18-for-loops/lesson.bbcode:57
@@ -4659,9 +4661,8 @@ msgid "With the [code]for[/code] loop, we check the board's width first. Then we
 msgstr ""
 
 #: course/lesson-18-for-loops/lesson.bbcode:74
-#, fuzzy
-msgid "The function still works the same way. You can run it below."
-msgstr "這個函式的運作方式仍然相同。你可以在下面執行它。"
+msgid "The function still works the same way, assuming the robot starts at [code]cell.x = 0[/code] each time (the left edge of the board). The [code]while[/code] loop would work no matter where the robot starts. You can run it below."
+msgstr ""
 
 #: course/lesson-18-for-loops/lesson.bbcode:77
 msgid "In the practices, we'll use [code]for[/code] loops in different ways to get you used to using them."
@@ -5714,7 +5715,8 @@ msgstr "完成訂單"
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-23-append-to-arrays/lesson.bbcode:79
-msgid "The [code]waiting_orders[/code] array will be filled over time."
+#, fuzzy
+msgid "The [code]waiting_orders[/code] array starts with four orders waiting to be prepared."
 msgstr "[code]waiting_orders[/code] 陣列將會隨著時間填滿。"
 
 #. TRANSLATORS: Practice goal
@@ -5743,55 +5745,55 @@ msgid "You then need to append the popped value to the completed_orders array. T
 msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Clearing up the crates"
 msgstr "清理箱子"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from the [code]crates[/code] array."
 msgstr "箱子堆積在平台上。請透過從 [code]crates[/code] 陣列中移除它們來清理空間。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "You need to remove them from top to bottom using the array's [code]pop_back()[/code] function."
 msgstr "你需要從上到下使用陣列的 [code]pop_back()[/code] 函式移除它們。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Your code should remove all the crates in the array using a while loop."
 msgstr "你的程式碼應該使用 [code]while[/code] 迴圈來移除陣列中的所有箱子。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 #, fuzzy
 msgid "[b]Careful![/b] If you write the while loop incorrectly, you can freeze the program."
 msgstr "[b]小心！[/b]如果不小心錯誤地執行 [code]while[/code] 迴圈，可能會意外造成程式鎖死。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 #, fuzzy
 msgid "You can check if the [code]crates[/code] array still has values by writing [code]while crates:[/code]. This works because an empty array counts as [code]false[/code], and an array with items counts as [code]true[/code]."
 msgstr "你可以透過寫 [code]while crates:[/code] 來檢查 [code]crates[/code] 陣列是否還有資料"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from their array."
 msgstr "箱子正在平台上堆積。請透過從陣列中移除它們來清理空間。"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 #, fuzzy
 msgid "Think about how [code]while[/code] loops work."
 msgstr "[code]while[/code] 迴圈還有其他良好的應用場景："
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Every time you [code]pop[/code] an item, the array's [code]size[/code] gets smaller."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "You can write [code]while crates:[/code] to run code in a loop while there are values in the [code]crates[/code] array."
 msgstr ""
 
@@ -6845,3 +6847,7 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#, fuzzy
+#~ msgid "The function still works the same way. You can run it below."
+#~ msgstr "這個函式的運作方式仍然相同。你可以在下面執行它。"

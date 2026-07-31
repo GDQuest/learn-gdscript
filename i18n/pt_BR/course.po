@@ -2514,7 +2514,8 @@ msgstr "Além disso, mais uma vez, a forma abreviada [code]health += amount[/cod
 
 #. TRANSLATORS: Quiz question
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:36
-msgid "Which of these would increase the health of the robot?"
+#, fuzzy
+msgid "Assuming amount is a positive number, which of these would increase the health of the robot?"
 msgstr "Qual dessas opções aumentaria a vida do robô?"
 
 #. TRANSLATORS: Quiz explanation
@@ -4582,7 +4583,8 @@ msgid "In both examples, we print the value of the temporary variable we created
 msgstr "Em ambos os exemplos, nós imprimimos o valor da variável temporária que criamos: [code]number[/code] no primeiro exemplo e [code]element[/code] no segundo."
 
 #: course/lesson-18-for-loops/lesson.bbcode:56
-msgid "As Godot moves through the loop, it assigns each value of the array to that variable. First, it sets the variable to [code]0[/code], then to [code]1[/code], and finally, to [code]2[/code]."
+#, fuzzy
+msgid "As Godot moves through the loop, it assigns each value of the array to that variable. First, it sets the variable to [code]3[/code], then to [code]5[/code], and finally, to [code]7[/code]."
 msgstr "Conforme a Godot percorre o loop, ela atribui cada valor da array para esta variável. Primeiro, ela atribui a variável para [code]0[/code], depois para [code]1[/code], e, por fim, para [code]2[/code]."
 
 #: course/lesson-18-for-loops/lesson.bbcode:57
@@ -4611,8 +4613,8 @@ msgid "With the [code]for[/code] loop, we check the board's width first. Then we
 msgstr "Com o loop [code]for[/code], nós checamos a largura do tabuleiro primeiro. Depois movemos nosso robô quantas vezes necessário. Isto é mais simples do que checar se o robô já chegou no fim do tabuleiro de novo e de novo."
 
 #: course/lesson-18-for-loops/lesson.bbcode:74
-msgid "The function still works the same way. You can run it below."
-msgstr "A função ainda funciona da mesma forma. Você pode executar ela abaixo."
+msgid "The function still works the same way, assuming the robot starts at [code]cell.x = 0[/code] each time (the left edge of the board). The [code]while[/code] loop would work no matter where the robot starts. You can run it below."
+msgstr ""
 
 #: course/lesson-18-for-loops/lesson.bbcode:77
 msgid "In the practices, we'll use [code]for[/code] loops in different ways to get you used to using them."
@@ -5647,7 +5649,8 @@ msgstr "Concluindo pedidos"
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-23-append-to-arrays/lesson.bbcode:79
-msgid "The [code]waiting_orders[/code] array will be filled over time."
+#, fuzzy
+msgid "The [code]waiting_orders[/code] array starts with four orders waiting to be prepared."
 msgstr "O array [code]waiting_orders[/code] vai ficar cheio com o tempo."
 
 #. TRANSLATORS: Practice goal
@@ -5678,53 +5681,53 @@ msgid "You then need to append the popped value to the completed_orders array. T
 msgstr "Em seguida, você precisa adicionar o valor retirado ao array `completed_orders`. Para adicionar um valor a um array, você pode chamar [code]array.append()[/code]."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Clearing up the crates"
 msgstr "Limpando as caixas"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from the [code]crates[/code] array."
 msgstr "As caixas estão se acumulando na plataforma. Tire-as do caminho removendo elas do array [code]crates[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "You need to remove them from top to bottom using the array's [code]pop_back()[/code] function."
 msgstr "Você precisa removê-las de cima para baixo usando a função [code]pop_back()[/code] do array."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Your code should remove all the crates in the array using a while loop."
 msgstr "Seu código deve remover todas as caixas do array usando um loop while."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "[b]Careful![/b] If you write the while loop incorrectly, you can freeze the program."
 msgstr "[b]Cuidado![/b] se você executar um loop while de forma descuidada, poderá travar o aplicativo."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "You can check if the [code]crates[/code] array still has values by writing [code]while crates:[/code]. This works because an empty array counts as [code]false[/code], and an array with items counts as [code]true[/code]."
 msgstr "Você pode verificar se o array [code]crates[/code] ainda tem valores escrevendo [code]while crates:[/code]. Isso funciona porque um array vazio conta como [code]false[/code], e um array com itens conta como [code]true[/code]."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from their array."
 msgstr "As caixas estão se acumulando na plataforma. Mova elas para fora do caminho, tirando-as do array."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 msgid "Think about how [code]while[/code] loops work."
 msgstr "Pense em como os laços [code]while[/code] funcionam."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 #, fuzzy
 msgid "Every time you [code]pop[/code] an item, the array's [code]size[/code] gets smaller."
 msgstr "Sempre que você [code]pop[/code] um item, o [code]size[/code] da matriz fica menor."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:103
+#: course/lesson-23-append-to-arrays/lesson.bbcode:108
 #, fuzzy
 msgid "You can write [code]while crates:[/code] to run code in a loop while there are values in the [code]crates[/code] array."
 msgstr "Você pode escrever [code]while crates:[/code] para executar o código em um loop enquanto houver valores na matriz [code]crates[/code]."
@@ -6769,3 +6772,6 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid "The function still works the same way. You can run it below."
+#~ msgstr "A função ainda funciona da mesma forma. Você pode executar ela abaixo."
