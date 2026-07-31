@@ -139,6 +139,8 @@ func _on_course_requested(force_outliner: bool = false) -> void:
 
 	_course_navigator.load_into_outliner = force_outliner
 	_course_screen.add_child(_course_navigator)
+	if _show_beta_indicator:
+		_course_navigator.set_margin_left(60)
 
 	_loading_screen.progress_value = 1.0
 

@@ -33,6 +33,7 @@ var _scene_tween: Tween
 @onready var _screen_container: Container = %ScreenContainer
 @onready var _course_outliner: CourseOutliner = %CourseOutliner
 @onready var _lesson_done_popup: LessonDonePopup = %LessonDonePopup
+@onready var _margin_container: MarginContainer = %MarginContainer
 
 
 func _ready() -> void:
@@ -112,6 +113,10 @@ func get_current_screen_issue_report_context() -> ReportContext:
 	if screen is UIPractice:
 		context.user_code = screen.get_user_code()
 	return context
+
+
+func set_margin_left(value: int) -> void:
+	_margin_container.add_theme_constant_override("margin_left", value)
 
 
 # Pops the last screen from the stack.
