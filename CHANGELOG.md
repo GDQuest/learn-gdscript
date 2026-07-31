@@ -69,6 +69,13 @@ This new version of the app is a rewrite of Learn GDScript in Godot 4 that refin
 - L10, L11: Fix robot not being moved by move_local_x (#1229)
 - Fixed the typo of 'length' with 'size' as the correct argument, closes #1224 (#1226)
 - Use debug templates in export_presets & defer run to prevent crashes of verification function (#1222)
+- Fix matching brace close not working correctly on macOS desktop (#712)
+- Fix practice scene not loading on Chrome browser on macOS (#583)
+- L7.P2: Fix turtle position not resetting after running code (#866)
+- L20.P1: Fix practice validation logic (#1212)
+- Fix crash in L23 when running certain code caused the program to close (#826)
+- L18.P1: Fix crash when rotating the board causes the app to crash (#910)
+- L22.P1: Prevent infinite loop from freezing the browser when constantly refilling the array (#960)
 
 ### Docs
 
