@@ -42,6 +42,7 @@ This new version of the app is a rewrite of Learn GDScript in Godot 4 that refin
 - L14.P2: Made the last hint more specific, added another hint for more progressive disclosure
 - L16.P1: Rewrite and improve the practice description and hints
 - L17: clarify that the for loop and while loop work the same way only when cell.x starts at 0
+- L17: make the unrolled array use different values to not risk confusing the values with indices
 - L20.P2: Improve presentation, show the combo variable definition in starter code
 - L22.P1: clarify the exercise, show starting data
 - L24.P1: Correct first hint which pointed to incorrect syntax for this specific practice

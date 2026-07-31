@@ -16,7 +16,7 @@ func run_coroutine(coroutine_controller: CoroutineController):
 	emit_signal(\"line_highlight_requested\", 0)
 	await coroutine_controller.step_requested
 
-	array = [0, 1, 2]
+	array = [3, 5, 7]
 	emit_signal(\"line_highlight_requested\", 1)
 	await coroutine_controller.step_requested
 
@@ -62,7 +62,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 gdscript_code = "func run():
-	var array = [0, 1, 2]
+	var array = [3, 5, 7]
 	var element
 
 	element = array[0]
