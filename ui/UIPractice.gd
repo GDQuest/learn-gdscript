@@ -386,7 +386,7 @@ func _validate_and_run_student_code() -> void:
 	if analyzer.has_infinite_while_loop():
 		var error := ScriptError.new()
 		error.message = tr(
-			"You have a while loop that runs forever (while true) without a break statement. This will freeze the app.",
+			"You have a loop that runs forever without a break statement. This would freeze the app.",
 		)
 		error.severity = 1
 		error.code = GDQuestCodes.ErrorCode.INFINITE_WHILE_LOOP

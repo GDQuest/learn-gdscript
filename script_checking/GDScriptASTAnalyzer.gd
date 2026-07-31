@@ -104,6 +104,12 @@ func _check_body_for_infinite_while(suite: GDSuiteNode, function: GDFunctionNode
 		match statement.get_type():
 			GDNode.FOR:
 				var for_statement := statement as GDForNode
+				var iterated_container := for_statement.get_list() as GDIdentifierNode
+				if (
+					iterated_container
+					and _is_container_refilled(for_statement.get_loop(), iterated_container.name)
+				):
+					return true
 				if _check_body_for_infinite_while(for_statement.get_loop(), function):
 					return true
 			GDNode.FUNCTION:

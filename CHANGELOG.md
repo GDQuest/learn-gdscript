@@ -12,6 +12,7 @@ This new version of the app is a rewrite of Learn GDScript in Godot 4 that refin
 - Add right-to-left text direction support for languages like Arabic (note: Arabic community translation completion rate is very low at this time so we've not included it in the language options yet)
 - Redesigned the issue report popup to make it more user-friendly and not require a GitHub account
 - Added translation support to parts of the app that were missing it, like practice check labels and hints
+- Improved protection for infinite loops. The app will now prevent various cases of `while` and `for` loops from freezing the app when they append to the collection they iterate over (#960)
 
 ### Improvements and changes
 
@@ -21,7 +22,6 @@ This new version of the app is a rewrite of Learn GDScript in Godot 4 that refin
 - UI: Give GDQuest credits label more space and align right so it doesn't wrap in other languages
 - Allow reliably running scroll shortcuts on the lesson screen
 - Improve smooth scrolling, make it framerate-independent
-- Detect and prevent running more code patterns if there's an infinite while loop, notably cases of refilling an array infinitely
 - L18: Range() list examples rendering in lesson 18 (#1240)
 - Renamed settings in the settings menu and gave each a tooltip for more clarity
 - Rework error code messages to match Godot 4 output and rewrote error parsing system to match Godot 4's error messages
