@@ -2,6 +2,91 @@
 
 This document lists changes between releases.
 
+## (Unreleased) Learn GDScript From Zero 2.0.0
+
+This new version of the app is a rewrite of Learn GDScript in Godot 4 that refines the overall user experience. The bulk of the work for this release happened behind the scenes and will be largely transparent to users, but it was necessary as it enables certain bug fixes we couldn't have made otherwise and it'll make it easier to improve the app moving forward.
+
+### Added
+
+- Show translation progress on lesson cards in the course outline
+- Add right-to-left text direction support for languages like Arabic (note: Arabic community translation completion rate is very low at this time so we've not included it in the language options yet)
+- Redesigned the issue report popup to make it more user-friendly and not require a GitHub account
+- Added translation support to parts of the app that were missing it, like practice check labels and hints
+
+### Improvements and changes
+
+- Change lesson and practice display in breadcrumbs, lesson selection screen, practice titles, and practice selection buttons to be consistent and match the rest of [GDSchool](https://school.gdquest.com/courses/learn_2d_gamedev_godot_4/learn_gdscript/learn_gdscript_app)
+- Improve the user experience around languages other than English by indicating overall translation completion rate and completion status for each lesson
+- Improve placement of practice screen buttons, notably in languages other than English. They will now better wrap to avoid pushing content in the left or right panes
+- UI: Give GDQuest credits label more space and align right so it doesn't wrap in other languages
+- Allow reliably running scroll shortcuts on the lesson screen
+- Improve smooth scrolling, make it framerate-independent
+- Detect and prevent running more code patterns if there's an infinite while loop, notably cases of refilling an array infinitely
+- L18: Range() list examples rendering in lesson 18 (#1240)
+- Renamed settings in the settings menu and gave each a tooltip for more clarity
+- Rework error code messages to match Godot 4 output and rewrote error parsing system to match Godot 4's error messages
+- Add information about community translations and language overall completion rate to language settings
+- Edit the report form, add direct link to translations repository
+- Change lesson and practice display numbers to be consistent with GDSchool and GDPractice across the app, e.g. L4.P2
+- Course outline: Align labels baseline in the lesson list on the left, disable horizontal scrollbar
+- Replace "unwrap" with correct term "unroll" in lesson content
+- Output console: Wrap explanation message when errors are inaccessible to script verifier
+- Centralize GDQuest Boy label on practice completion; fixes #1277
+- Corrected text referencing a function named "moved" instead of "move_local_xy", and updated function parameters to match
+- Translations: Remove locales for languages that are too incomplete. They'll be re-added when the translation progress is higher.
+- Remove the old mention of Tesla, focus on games, add mentions of Buckshot Roulette and Slay the Spire 2 as more recent Godot games
+- L6.P1 to L6.P4: Add checks to detect when nothing was drawn, giving more precise feedback when the student left the code empty
+- L11.P1 and L11.P2: Improve feedback messages, make practice tests a bit more lenient
+- L13.P1, P2, and P3: Improve practice descriptions, make execution explicit, add explicit health property definition
+- L14.P2: Made the last hint more specific, added another hint for more progressive disclosure
+- L16.P1: Rewrite and improve the practice description and hints
+- L20.P2: Improve presentation, show the combo variable definition in starter code
+- L24.P1: Correct first hint which pointed to incorrect syntax for this specific practice
+- L27.P2: Improve practice tests and feedback messages, check for integer values to prevent silent type coercion
+
+### Fixed
+
+- Fix underlined words sometimes being more than needed or failing in translated languages. Changed the glossary system to use hand-placed tags with a dedicated, translatable label
+- Fix code starting with an underscore not being colored correctly in lesson text
+- Fix board labels display having decimal vector numbers that were too large for the GDQuest boy
+- Fix main menu continue button not getting updated when language changes
+- Fix glossary popup not resizing because it's hidden
+- Fix grammar in sentence "It tells you can't"
+- Fix main menu never appearing if we skipped welcome screen
+- Fix non-autocompleted typo in base quiz script
+- Fix offset on arrow animation debugger
+- Fix parameter named length instead of size
+- Fix some animations using incorrect number types
+- L5.P2: Fix overlapping squares passing the practice
+- L10.P1: Fix negative rotations passing the practice successfully
+- L14.P1: Require multiplication to complete the practice
+- L15.P2: Fix robot not updating in viewport with student code (#1242)
+- L17.P1: Correctly reset the robot to its starting cell when pressing the reset button
+- L10, L11: Fix robot not being moved by move_local_x (#1229)
+- Fixed the typo of 'length' with 'size' as the correct argument, closes #1224 (#1226)
+- Use debug templates in export_presets & defer run to prevent crashes of verification function (#1222)
+
+### Docs
+
+- Add coding and testing guidelines for the project
+- For developers and contributors:
+  - Document where to get the custom build of Godot Learn GDScript runs on
+  - Add stub documentation giving a brief overview of GDScript AST analysis
+
+### Technical (developer-focused)
+
+- Removed former resource-based lesson data system
+  - Introduced our own BBCode parser and BBCode for authoring lesson content
+  - Removed former lesson editor and associated tools
+  - Implemented new CLI navigation tools based on GDSchool-type labels (L5.P2 etc.)
+- Refactored practice handling, removed need to go manually rebuild practices to update them
+- Rewrote the CI and implemented new integration test and translation/parsing test
+- Built a new translation pipeline to avoid breaking translations when tweaking the English version of the app and facilitate translations
+- Added support for GDScript AST analysis in practices
+- Cleaned up and reorganized some project files
+- Refactored practices not to use reflection for translation support
+- Reimplemented app in Godot 4.6, adjusted many uses of APIs like Tween, OS.time to use Time equivalents, etc.
+
 ## Learn GDScript From Zero 1.8.0
 
 *Released on January 18, 2026*
