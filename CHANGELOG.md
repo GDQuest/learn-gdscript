@@ -61,6 +61,7 @@ This new version of the app is a rewrite of Learn GDScript in Godot 4 that refin
 - Fix offset on arrow animation debugger
 - Fix parameter named length instead of size
 - Fix some animations using incorrect number types
+- Fix some lesson buttons appearing in front of the loading screen when pressing continue from the main menu
 - L5.P2: Fix overlapping squares passing the practice
 - L10.P1: Fix negative rotations passing the practice successfully
 - L14.P1: Require multiplication to complete the practice

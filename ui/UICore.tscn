@@ -69,9 +69,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="LoadingScreen" parent="Pages" unique_id=1757272502 instance=ExtResource("3")]
+[node name="LoadingCanvasLayer" type="CanvasLayer" parent="." unique_id=2051870195]
+layer = 100
+
+[node name="LoadingScreen" parent="LoadingCanvasLayer" unique_id=1757272502 instance=ExtResource("3")]
 unique_name_in_owner = true
-z_index = 1
 layout_mode = 1
 grow_horizontal = 2
 grow_vertical = 2
