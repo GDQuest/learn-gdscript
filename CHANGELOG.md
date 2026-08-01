@@ -63,6 +63,8 @@ This new version of the app is a rewrite of Learn GDScript in Godot 4 that refin
 - Fix some animations using incorrect number types
 - Fix some lesson buttons appearing in front of the loading screen when pressing continue from the main menu
 - Fix double fade animations when continuing after completing a practice or when completing the last practice of a lesson
+- Fix browser forward causing the application to navigate back
+- Fix browser history losing sync with the app when pressing forward in the browser quickly multiple times in a row (For example, going back twice from a practice to the course outliner and then pressing forward twice quickly would stop the app at the lesson and desynchronize the browser history with the app)
 - Fix visual jitter and double walk when walking over existing brackets when typing a matching character
 - L5.P2: Fix overlapping squares passing the practice
 - L10.P1: Fix negative rotations passing the practice successfully

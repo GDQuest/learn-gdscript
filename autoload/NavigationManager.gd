@@ -152,9 +152,10 @@ func _navigate_back() -> void:
 	back_navigation_requested.emit()
 
 
-func _navigate_to_outliner() -> void:
+func _navigate_to_outliner(update_browser_history := true) -> void:
 	history.resize(0)
-	_js_to_outliner()
+	if update_browser_history:
+		_js_to_outliner()
 
 	outliner_navigation_requested.emit()
 
@@ -451,7 +452,26 @@ func _on_js_popstate(_args: Array) -> void:
 	# we have set this to `false` either in _js_to_outliner or _js_back, we can set it back to true now
 	if _temporary_disable_back_listener:
 		return
-	_navigate_back()
+
+	@warning_ignore("unsafe_property_access")
+	var url: String = _js_window.location.hash.trim_prefix("#").trim_prefix("/")
+	if url.is_empty():
+		# The browser already moved to the entry before the app history. Do not
+		# call history.go() again from here.
+		_navigate_to_outliner(false)
+		return
+
+	if history.size() >= 2 and url == history[history.size() - 2]:
+		# Browser Back already changed the active history entry. Keep the app
+		# history in sync without requesting another browser navigation.
+		history.remove_at(history.size() - 1)
+		back_navigation_requested.emit()
+		return
+
+	# A browser Forward event points to the next app location. Add it to the
+	# screen history and let the UI load that location as a new screen.
+	history.push_back(url)
+	navigation_requested.emit()
 
 
 # Call this from GDScript to synchronize the browser. Safe to call in all environments, will no-op

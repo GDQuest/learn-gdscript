@@ -1,7 +1,6 @@
 class_name UINavigator
 extends PanelContainer
 
-signal transition_completed
 signal return_to_welcome_screen_requested
 
 const CourseOutliner := preload("./screens/course_outliner/CourseOutliner.gd")
@@ -23,6 +22,9 @@ var _screens_stack := []
 var _lesson_index := 0
 var _lesson_count: int = 0
 var _scene_tween: Tween
+
+var _has_pending_navigation := false
+var _pending_navigation_url := ""
 
 @onready var _home_button: Button = %HomeButton
 @onready var _outliner_button: Button = %OutlinerButton
@@ -122,8 +124,10 @@ func set_margin_left(value: int) -> void:
 # Pops the last screen from the stack.
 func _navigate_back() -> void:
 	# Allowing to go back during a transition can cause the screen to get
-	# deleted, so we prevent this.
+	# deleted. Keep the latest destination and process it after the transition.
 	if _scene_tween and _scene_tween.is_running():
+		_has_pending_navigation = true
+		_pending_navigation_url = NavigationManager.current_url
 		return
 
 	# A screen can be freed while another transition or a language change is
@@ -144,14 +148,19 @@ func _navigate_back() -> void:
 
 	next_screen.set_is_current_screen(true)
 
-	_transition_to(next_screen, current_screen, false)
-	await self.transition_completed
+	await _transition_to(next_screen, current_screen, false)
 	if is_instance_valid(current_screen):
 		current_screen.queue_free()
+	_process_pending_navigation()
 
 
 # Opens the course outliner and flushes the screen stack.
 func _navigate_to_outliner() -> void:
+	if _scene_tween and _scene_tween.is_running():
+		_has_pending_navigation = true
+		_pending_navigation_url = ""
+		return
+
 	show()
 	_course_outliner.modulate.a = 0.0
 	_course_outliner.show()
@@ -168,11 +177,16 @@ func _navigate_to_outliner() -> void:
 	await _scene_tween.finished
 
 	_screen_container.hide()
+	_process_pending_navigation()
 
 
 # Navigates forward to the next screen and adds it to the stack.
 func _navigate_to() -> void:
+	# We're in the middle of a scene transition, so we queue the navigation to
+	# happen after it finishes.
 	if _scene_tween and _scene_tween.is_running():
+		_has_pending_navigation = true
+		_pending_navigation_url = NavigationManager.current_url
 		return
 
 	var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
@@ -218,8 +232,7 @@ func _navigate_to() -> void:
 	if has_previous_screen:
 		var previous_screen: UINavigatablePage = _screens_stack[-2]
 		previous_screen.set_is_current_screen(false)
-		_transition_to(screen, previous_screen)
-		await self.transition_completed
+		await _transition_to(screen, previous_screen)
 
 	# Connect to RichTextLabel meta links to navigate to different scenes.
 	for node: RichTextLabel in get_tree().get_nodes_in_group("rich_text_label"):
@@ -238,6 +251,44 @@ func _navigate_to() -> void:
 		Events.practice_started.emit(target)
 	elif target.tag == BBCodeParserData.Tag.LESSON:
 		Events.lesson_started.emit(target)
+
+	_process_pending_navigation()
+
+
+## Processes any navigation requests that were queued while a screen transition
+## animation was in progress. Precisely, we jump straight to the last stored
+## destination in case the user was clicking quickly through the back and
+## forward buttons in the browser.
+func _process_pending_navigation() -> void:
+	if not _has_pending_navigation:
+		return
+
+	var pending_url := _pending_navigation_url
+	_has_pending_navigation = false
+	_pending_navigation_url = ""
+
+	if pending_url.is_empty():
+		if _screens_stack.is_empty() and _course_outliner.visible:
+			return
+		_navigate_to_outliner()
+		return
+
+	var target := NavigationManager.get_navigation_resource(pending_url)
+	if target == null:
+		return
+
+	_screens_stack = _screens_stack.filter(func(screen: Node) -> bool: return is_instance_valid(screen))
+	if not _screens_stack.is_empty():
+		var current_screen := _screens_stack.back() as UINavigatablePage
+		if current_screen.get_screen_resource() == target:
+			return
+		if _screens_stack.size() >= 2:
+			var previous_screen := _screens_stack[-2] as UINavigatablePage
+			if previous_screen.get_screen_resource() == target:
+				_navigate_back()
+				return
+
+	_navigate_to()
 
 
 func _on_practice_next_requested(practice: BBCodeParser.ParseNode) -> void:
@@ -346,7 +397,6 @@ func _transition_to(screen: Control, from_screen: Control = null, direction_in :
 		screen.show()
 
 		await get_tree().process_frame
-		transition_completed.emit()
 		return
 
 	if screen.get_parent() == null:
@@ -369,8 +419,6 @@ func _transition_to(screen: Control, from_screen: Control = null, direction_in :
 	if from_screen:
 		from_screen.hide()
 		_screen_container.remove_child(from_screen)
-
-	transition_completed.emit()
 
 
 func _animate_screen(screen: Control, to_position: float) -> void:
