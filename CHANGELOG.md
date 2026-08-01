@@ -63,6 +63,7 @@ This new version of the app is a rewrite of Learn GDScript in Godot 4 that refin
 - Fix some animations using incorrect number types
 - Fix some lesson buttons appearing in front of the loading screen when pressing continue from the main menu
 - Fix double fade animations when continuing after completing a practice or when completing the last practice of a lesson
+- Fix visual jitter and double walk when walking over existing brackets when typing a matching character
 - L5.P2: Fix overlapping squares passing the practice
 - L10.P1: Fix negative rotations passing the practice successfully
 - L14.P1: Require multiplication to complete the practice

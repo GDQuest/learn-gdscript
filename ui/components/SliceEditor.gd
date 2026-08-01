@@ -200,13 +200,11 @@ func _on_text_changed() -> void:
 		select(line, column, line, column + 1)
 		var character := get_selected_text()
 		deselect()
+		# We walk over existing brackets when typing a matching character.
 		if character == _last_typed_character:
-			# We simulate pressing backspace to remove the last typed character.
-			var event := InputEventKey.new()
-			event.keycode = KEY_BACKSPACE
-			event.pressed = true
-			Input.parse_input_event(event)
-			set_caret_column(get_caret_column() + 1)
+			_last_typed_character = ""
+			undo()
+			set_caret_column(column)
 
 
 func _on_scrollbar_value_changed(value: float, direction: int) -> void:
