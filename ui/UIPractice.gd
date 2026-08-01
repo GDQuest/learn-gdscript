@@ -31,6 +31,7 @@ var _practice_completed := false
 var _practice_solution_used := false
 var _lesson_number := 0
 var _practice_index := 0
+var _is_last_practice := false
 
 var _script_slice: ScriptSlice:
 	set = _set_script_slice
@@ -155,6 +156,8 @@ func setup(
 	_practice_solution_used = false
 	_lesson_number = lesson_number
 	_practice_index = BBCodeUtils.get_practice_index(lesson, practice)
+	_is_last_practice = _practice_index >= BBCodeUtils.get_lesson_practice_count(lesson) - 1
+	_practice_done_popup.do_fade_background_on_exit = not _is_last_practice
 
 	var starting_code := BBCodeUtils.get_practice_starting_code(practice)
 	_code_editor.text = starting_code

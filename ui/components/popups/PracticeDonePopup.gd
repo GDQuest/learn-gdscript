@@ -6,6 +6,7 @@ const BACKGROUND_FADE_DURATION := 0.3
 const CLASH_IN_DURATION := 0.2
 
 var _raw_summary := ""
+var do_fade_background_on_exit := true
 
 @onready var _layout_container := $Layout as Container
 @onready var _game_anchors := $Layout/GameAnchors as Control
@@ -96,10 +97,13 @@ func fade_out() -> void:
 	_animate_margin(_game_container, "offset_left", game_offscreen_offset, CLASH_IN_DURATION)
 	_animate_margin(_game_container, "offset_right", game_offscreen_offset, CLASH_IN_DURATION)
 
-	# Then fade out the background.
-	_scene_tween.chain().tween_property(self, "self_modulate:a", 1.0, BACKGROUND_FADE_DURATION).from(0.0)
+	# Fade out the background unless another completion popup is replacing this one.
+	if do_fade_background_on_exit:
+		_scene_tween.chain().tween_property(self, "self_modulate:a", 0.0, BACKGROUND_FADE_DURATION).from(1.0)
 
-	_scene_tween.tween_callback(_on_fade_out_completed).set_delay(CLASH_IN_DURATION + BACKGROUND_FADE_DURATION)
+	_scene_tween.tween_callback(_on_fade_out_completed).set_delay(
+		CLASH_IN_DURATION + (BACKGROUND_FADE_DURATION if do_fade_background_on_exit else 0.0)
+	)
 
 
 func _animate_margin(control: Control, margin_name: String, to_value: float, duration: float, delay: float = 0.0) -> void:
