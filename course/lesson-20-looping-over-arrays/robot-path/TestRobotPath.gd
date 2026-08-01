@@ -14,7 +14,9 @@ func _prepare() -> void:
 
 
 func _define(checks: Array[Check]) -> void:
-	checks.append(Check.new(tr("Robot Moves Along Blue Path"), tr(""), test_robot_moves_along_blue_path))
+	checks.append(
+		Check.new(tr("Robot Moves Along Blue Path"), tr(""), test_robot_moves_along_blue_path)
+	)
 	checks.append(Check.new(tr("Code Uses Move To"), tr(""), test_code_uses_move_to))
 
 
@@ -28,19 +30,30 @@ func test_robot_moves_along_blue_path() -> String:
 	for i in path_source.size():
 		var expected_point: Vector2 = path_source[i]
 		if path_robot.size() <= i:
-			return tr("The robot moved fewer times than it should have. Did you use a loop and move once for each point in the robot_path array?")
+			return tr(
+				"The robot moved fewer times than it should have. Did you use a loop and move once for each point in the robot_path array?"
+			)
 		var found_point: Vector2 = path_robot[i]
 		if found_point != expected_point:
-			return tr("The cell at index %s didn't match the blue path. We got %s but expected %s." % [i, found_point, expected_point])
+			return tr(
+				"The cell at index %s didn't match the blue path. We got %s but expected %s."
+				% [i, found_point, expected_point]
+			)
 
 	for point in path_robot:
 		if point != Vector2.ZERO and not point in path_source:
-			return tr("The robot's movement path doesn't match the robot_path array. They should be the same.")
+			return tr(
+				"The robot's movement path doesn't match the robot_path array. They should be the same."
+			)
 	return ""
 
 
 func test_code_uses_move_to() -> String:
-	if not "robot.move_to(" in _slice.current_text:
-		return tr("We found no call to the robot's move_to() function. Did you forget to call it?")
+	var run_function := _analyzer.get_function_named("run")
+	if not run_function or not GDExpr.suite(GDExpr.for_loop(
+			null,
+			GDExpr.identifier("robot_path"),
+			GDExpr.suite(GDExpr.function_call("move_to", GDExpr.any_identifier())),
+		)).matches(run_function):
+		return tr("Did you use a for loop to call robot.move_to() with each cell in robot_path?")
 	return ""
-

@@ -2,45 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="2"]
 [ext_resource type="Script" uid="uid://broitwf3msyp8" path="res://course/lesson-20-looping-over-arrays/robot-path/RobotPath.gd" id="3"]
-
-[sub_resource type="GDScript" id="1"]
-script/source = "extends Node2D
-
-signal goal_reached
-
-var move_queue := []
-var points := []
-
-var tween: Tween
-
-
-func move_to(cell: Vector2):
-	move_queue.append(cell)
-	points.append(cell)
-	if not tween or not tween.is_running():
-		_play_move_animation()
-
-
-func _play_move_animation():
-	var target_cell = move_queue.pop_front()
-	if not target_cell:
-		emit_signal(\"goal_reached\")
-		return
-
-	while target_cell:
-		tween = create_tween()
-		tween.tween_property(self, \"position\", get_parent().cell_to_position(target_cell), 0.2).from(position)
-		await tween.finished
-		await get_tree().create_timer(0.2).timeout
-		target_cell = move_queue.pop_front()
-	emit_signal(\"goal_reached\")
-"
+[ext_resource type="Script" path="res://course/lesson-20-looping-over-arrays/robot-path/RobotPathRobot.gd" id="4"]
 
 [node name="RobotPath" type="Node2D" unique_id=110219823]
 script = ExtResource("3")
 
 [node name="Robot" parent="." unique_id=2067145344 instance=ExtResource("2")]
 scale = Vector2(0.8, 0.8)
-script = SubResource("1")
+script = ExtResource("4")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=901650798]

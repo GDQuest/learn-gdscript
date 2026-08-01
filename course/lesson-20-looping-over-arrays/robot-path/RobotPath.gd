@@ -1,7 +1,14 @@
 extends Node2D
 
-const EXPECTED_PATH = [Vector2(1, 0), Vector2(1, 1), Vector2(1, 2), Vector2(2, 2), Vector2(3, 2), Vector2(4, 2), Vector2(5, 2)]
-
+const EXPECTED_PATH = [
+	Vector2(1, 0),
+	Vector2(1, 1),
+	Vector2(1, 2),
+	Vector2(2, 2),
+	Vector2(3, 2),
+	Vector2(4, 2),
+	Vector2(5, 2),
+]
 const LINE_WIDTH := 4
 const COLOR_PATH := Color(0.14902, 0.776471, 0.968627)
 
@@ -10,7 +17,7 @@ const COLOR_PATH := Color(0.14902, 0.776471, 0.968627)
 
 var board_size_px := cell_size * board_size
 
-@onready var robot := $Robot
+@onready var robot: RobotPathRobot = $Robot
 
 
 func _ready() -> void:
@@ -27,6 +34,7 @@ var robot_path = [
 	Vector2(4, 2),
 	Vector2(5, 2),
 ]
+
 
 func run():
 	for cell in robot_path:
@@ -52,7 +60,7 @@ func _draw() -> void:
 				Rect2(Vector2(x, y) * cell_size - board_size_px / 2.0, Vector2.ONE * cell_size),
 				Color.WHITE,
 				false,
-				LINE_WIDTH
+				LINE_WIDTH,
 			)
 
 	var points := PackedVector2Array([cell_to_position(Vector2.ZERO)])

@@ -23,7 +23,7 @@ The code works regardless of the array or where you store it. Often, you will st
 [quiz_choice question="What will this code print?" multiple="false" shuffle="true"]
 [code]var numbers = [0, 1, 2]
 for number in numbers:
-    print(number)
+	print(number)
 [/code]
 [option correct]0, 1, and 2[/option]
 [option]1, 2, and 3[/option]
@@ -53,7 +53,7 @@ It's the same principle with unit selection.
 
 [visual path="visuals/ExampleSelectUnits.tscn"]
 
-For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it. 
+For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it.
 
 In that case, we use an array, a loop, and a condition together.
 
@@ -72,7 +72,7 @@ We'll revisit those two features again in the following lessons.
 
 [separator]
 
-The beauty of loops is that they work regardless of the size of your arrays. 
+The beauty of loops is that they work regardless of the size of your arrays.
 
 The code just works whether you have one or ten thousand units to select. It is all accomplished with only a couple lines of code.
 
@@ -90,10 +90,18 @@ To move the robot, call [i]its[/i] [code]move_to()[/code] function, like so: [co
 The [code]move_to()[/code] function only exists on the robot, which is why you need to access it this way.
 [/goal]
 [starting_code]
-var robot_path = [Vector2(1, 0), Vector2(1, 1), Vector2(1, 2), Vector2(2, 2), Vector2(3, 2), Vector2(4, 2), Vector2(5, 2)]
+var robot_path = [
+	Vector2(1, 0),
+	Vector2(1, 1),
+	Vector2(1, 2),
+	Vector2(2, 2),
+	Vector2(3, 2),
+	Vector2(4, 2),
+	Vector2(5, 2),
+]
 
 func run():
-	
+
 [/starting_code]
 [cursor line="0" column="0"]
 [validator path="robot-path/TestRobotPath.gd"]
@@ -120,7 +128,7 @@ The rectangles shouldn't overlap or cross each other. To avoid that, you'll need
 var rectangle_sizes = [Vector2(200, 120), Vector2(140, 80), Vector2(80, 140), Vector2(200, 140)]
 
 func run():
-	
+
 [/starting_code]
 [cursor line="0" column="0"]
 [validator path="drawing-in-loops/TestsDrawingInLoops.gd"]

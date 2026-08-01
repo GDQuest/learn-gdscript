@@ -80,6 +80,7 @@ This new version of the app is a rewrite of Learn GDScript in Godot 4 that refin
 - L20.P1: Fix practice validation logic (#1212)
 - Fix crash in L23 when running certain code caused the program to close (#826)
 - L18.P1: Fix crash when rotating the board causes the app to crash (#910)
+- L19.P1: Fix code allowing running without move_to() argument and spaces in function call preventing code from getting validated (#916, #734)
 - L22.P1: Prevent infinite loop from freezing the browser when constantly refilling the array (#960)
 
 ### Docs
