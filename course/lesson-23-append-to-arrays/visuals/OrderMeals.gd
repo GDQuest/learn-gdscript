@@ -1,5 +1,6 @@
 extends Node2D
 
+const MEAL_SCENE := preload("res://course/lesson-23-append-to-arrays/clearing-meals/Meal.tscn")
 const WAIT_QUEUE := [
 	{name = "cheese sandwich", time = 1.0},
 	{name = "burger", time = 1.5},
@@ -35,8 +36,9 @@ func add_order():
 		return
 
 	var order = _wait_queue.pop_back()
-	var meal := Meal.new(order.name, order.time)
-	meal.meal_ready.connect(_on_meal_ready)
+	var meal := MEAL_SCENE.instantiate()
+	meal.call("setup", order.name, order.time)
+	meal.connect("meal_ready", _on_meal_ready)
 	waiting_orders.append(order.name)
 	_waiting_orders_box.add_child(meal)
 
@@ -44,7 +46,8 @@ func add_order():
 func _on_meal_ready():
 	complete_current_order()
 	var order_name := "%s"%[completed_orders.back()]
-	var meal := Meal.new(order_name)
+	var meal := MEAL_SCENE.instantiate()
+	meal.call("setup", order_name)
 	_completed_orders_box.add_child(meal)
 	if waiting_orders.is_empty():
 		_complete_run()
@@ -71,49 +74,3 @@ func reset():
 
 func _complete_run() -> void:
 	pass
-
-
-class Meal extends VBoxContainer:
-
-	const TEXTURE_UNCHECKED := preload("res://ui/assets/icons/checkbox_empty.png")
-	const TEXTURE_CHECKED := preload("res://ui/assets/icons/checkbox_checked.png")
-	signal meal_ready
-
-	var progress := ProgressBar.new()
-	var scene_tween: Tween
-	var texture := TextureRect.new()
-	var time := 0.0
-	var _meal_is_ready := false
-
-	func _init(init_text: String, init_time: float = 0) -> void:
-		var label := Label.new()
-		var container := HBoxContainer.new()
-		progress.show_percentage = false
-		container.add_child(texture)
-		container.add_child(label)
-		add_child(container)
-		add_child(progress)
-		time = init_time
-		label.text = init_text
-
-	func _ready() -> void:
-		modulate.a = 0.0
-		scene_tween = create_tween().set_parallel()
-		scene_tween.tween_property(self, "modulate:a", 1.0, 1).from(0).set_ease(Tween.EASE_OUT)
-		if time > 0:
-			texture.texture = TEXTURE_UNCHECKED
-			scene_tween.finished.connect(_on_tween_completed)
-			scene_tween.tween_property(progress, "value", 100.0, time).from(0.0)
-		else:
-			texture.texture = TEXTURE_CHECKED
-			progress.value = 100
-
-	func _on_tween_completed():
-		if _meal_is_ready:
-			queue_free()
-			return
-		_meal_is_ready = true
-		texture.texture = TEXTURE_CHECKED
-		meal_ready.emit()
-		scene_tween = create_tween()
-		scene_tween.tween_property(self, "modulate:a", 0.0, 1).from(modulate.a).set_ease(Tween.EASE_IN)

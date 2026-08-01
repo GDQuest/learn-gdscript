@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://wuualv2hq0d0"]
+
+[ext_resource type="Script" uid="uid://b77jbrlt6u5ym" path="res://course/lesson-23-append-to-arrays/clearing-meals/Meal.gd" id="1_meal"]
+[ext_resource type="Texture2D" uid="uid://cqdddd2njewww" path="res://ui/assets/icons/checkbox_empty.png" id="2_jqyuq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jqyuq"]
+bg_color = Color(0.290196, 0.294118, 0.388235, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bh2r6"]
+bg_color = Color(0.572549, 0.560784, 0.721569, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="Meal" type="VBoxContainer" unique_id=1180542058]
+custom_minimum_size = Vector2(200, 34)
+theme_override_constants/separation = 2
+script = ExtResource("1_meal")
+
+[node name="Header" type="HBoxContainer" parent="." unique_id=897057339]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TextureRect" type="TextureRect" parent="Header" unique_id=1408794425]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_jqyuq")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Header" unique_id=513612994]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "cheese sandwich"
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=126697003]
+custom_minimum_size = Vector2(200, 6)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_jqyuq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bh2r6")
+show_percentage = false

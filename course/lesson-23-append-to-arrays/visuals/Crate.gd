@@ -8,22 +8,21 @@ const SHIELD := preload("res://course/common/inventory/shield.png")
 const HEALTH := preload("res://course/common/inventory/healing_heart.png")
 const GEMS := preload("res://course/common/inventory/gems.png")
 
-const textures = [
-	SWORD,
-	SHIELD,
-	HEALTH,
-	GEMS
-]
+const TEXTURES: Array[Texture2D] = [SWORD, SHIELD, HEALTH, GEMS]
 
-
-@export var texture: Texture2D: get = get_texture, set = set_texture
+@export var texture: Texture2D:
+	get = get_texture, set = set_texture
 @export var hide_after_animation := false
 
-@onready var anim_player := $AnimationPlayer as AnimationPlayer
-@onready var texture_rect := $TextureRect as TextureRect
+@onready var sprite := $Sprite2D as Sprite2D
 @onready var label := $Label as Label
 
-var _animation_backwards := false
+const USE_DURATION := 0.7
+const LIFT_DURATION := 0.1
+const LIFT_OFFSET := Vector2(0, -15)
+
+var _animation_tween: Tween
+var _sprite_position := Vector2.ZERO
 
 
 func _ready() -> void:
@@ -31,62 +30,83 @@ func _ready() -> void:
 	if texture == null:
 		randomize()
 		set_random_texture()
-	anim_player.animation_finished.connect(_on_animation_finished)
+	_sprite_position = sprite.position
 
 
 func set_random_texture():
-	if get_index() > 0 and get_index() < textures.size():
+	if get_index() > 0 and get_index() < TEXTURES.size():
 		# ensure textures appear at least once each in the first loop
 		var previous_crate = get_parent().get_child(get_index() - 1)
 		if previous_crate and previous_crate.texture:
-			var previous_texture_index := textures.find(previous_crate.texture)
+			var previous_texture_index := TEXTURES.find(previous_crate.texture)
 			if previous_texture_index > -1:
-				var next_index := (previous_texture_index + 1) % textures.size()
-				set_texture(textures[next_index])
+				var next_index := (previous_texture_index + 1) % TEXTURES.size()
+				set_texture(TEXTURES[next_index])
 				return
 	randomize_texture()
 
+
 func randomize_texture():
-	set_texture(textures[randi() % textures.size()])
+	set_texture(TEXTURES[randi() % TEXTURES.size()])
+
 
 func use() -> void:
-	anim_player.play("use")
+	_stop_animation()
+	show()
+	var tween := create_tween()
+	tween.tween_property(sprite, "position", _sprite_position + LIFT_OFFSET, LIFT_DURATION)
+	tween.tween_property(sprite, "position", _sprite_position, USE_DURATION - LIFT_DURATION)
+	tween.parallel().tween_property(self, "modulate:a", 0.0, USE_DURATION - LIFT_DURATION)
+	tween.finished.connect(_on_use_finished)
+	_animation_tween = tween
 
 
 func reset(speed := 2.0) -> void:
+	_stop_animation()
 	show()
 	if speed == 0:
-		anim_player.play("RESET")
+		sprite.position = _sprite_position
+		modulate.a = 1.0
 		return
-	_animation_backwards = true
-	anim_player.play("use", -1, -1 * speed, true)
-
-
-func _on_animation_finished(animation_name: String) -> void:
-	if animation_name != "use":
-		return
-	if _animation_backwards:
-		_animation_backwards = false
-		restored.emit()
-		return
-	if hide_after_animation:
-		hide()
-	used.emit()
+	sprite.position = _sprite_position + LIFT_OFFSET
+	modulate.a = 0.0
+	var tween := create_tween()
+	var duration := USE_DURATION / speed
+	tween.tween_property(sprite, "position", _sprite_position, LIFT_DURATION / speed)
+	tween.tween_property(sprite, "position", _sprite_position, duration - LIFT_DURATION / speed)
+	tween.parallel().tween_property(self, "modulate:a", 1.0, duration - LIFT_DURATION / speed)
+	tween.finished.connect(restored.emit)
+	_animation_tween = tween
 
 
 func set_texture(new_texture: Texture2D) -> void:
 	texture = new_texture
 	if not is_inside_tree():
 		await self.ready
-	texture_rect.texture = new_texture
+	sprite.texture = new_texture
+
 
 func get_texture() -> Texture2D:
 	return texture
+
 
 func get_texture_name():
 	var path := texture.resource_path
 	var filename := path.get_file().get_basename().split("_")
 	return " ".join(PackedStringArray(filename))
 
+
 func set_label_index(index: int) -> void:
 	label.text = str(index)
+
+
+func _stop_animation() -> void:
+	if _animation_tween:
+		_animation_tween.kill()
+	_animation_tween = null
+
+
+func _on_use_finished() -> void:
+	if hide_after_animation:
+		hide()
+	used.emit()
