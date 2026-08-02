@@ -12,12 +12,13 @@ func run():
 
 [node name="Example" type="PanelContainer" unique_id=497888367]
 offset_right = 771.0
-offset_bottom = 414.0
+offset_bottom = 514.0
 size_flags_horizontal = 3
 
 [node name="RunnableCodeExample" parent="." unique_id=142305354 instance=ExtResource("1")]
-custom_minimum_size = Vector2(600, 400)
+custom_minimum_size = Vector2(600, 500)
 layout_mode = 2
+center_control_in_frame = true
 gdscript_code = "func run():
 	var last_item_index = inventory.size() - 1
 	use_item(inventory[last_item_index])"

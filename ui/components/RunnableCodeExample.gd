@@ -22,12 +22,25 @@ const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/styles/h
 @onready var _sliders: VBoxContainer = %Sliders
 @onready var _buttons_container: HBoxContainer = %ButtonsContainer
 
+## The scene to display and run in the example frame.
 @export var scene: PackedScene:
 	set = set_scene
-@export var center_in_frame := true:
-	set = set_center_in_frame
+## Centers Node2D scenes in the example frame. Only applies to Node2D scenes.
+@export var center_node2d_in_frame := true:
+	set = set_center_node2d_in_frame
+## Centers Control scenes in the example frame. Only applies to Control nodes.
+##
+## Note: This was added later in the app development cycle and it's a dedicated
+## property to avoid causing regressions in the layout of existing examples. We
+## should however clean all of this up and notably the runnable example layout
+## behavior across the app in the future. Now that we have our own markup for
+## the lessons, we could probably make runnable examples work with a composable
+## markup instead of using instances of this scene.
+@export var center_control_in_frame := false
+## The text shown on the run button. An empty value keeps the default label.
 @export var run_button_label := "":
 	set = set_run_button_label
+## The GDScript code displayed in the example.
 @export_multiline var gdscript_code := "":
 	set = set_code
 
@@ -209,8 +222,8 @@ func set_scene(new_scene: PackedScene) -> void:
 		_set_scene_instance(scene.instantiate() as CanvasItem)
 
 
-func set_center_in_frame(value: bool) -> void:
-	center_in_frame = value
+func set_center_node2d_in_frame(value: bool) -> void:
+	center_node2d_in_frame = value
 	_center_scene_instance()
 
 
@@ -276,10 +289,14 @@ func _set_instance_value(value: float, property_name: String, value_label: Label
 
 
 func _center_scene_instance() -> void:
-	if not center_in_frame or not _scene_instance:
+	if not center_node2d_in_frame or not _scene_instance:
 		return
 	if _scene_instance is Node2D:
 		(_scene_instance as Node2D).position = _frame_container.size / 2
+	elif center_control_in_frame and _scene_instance is Control:
+		var control := _scene_instance as Control
+		control.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		control.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 
 
 func _set_scene_instance(new_scene_instance: CanvasItem) -> void:

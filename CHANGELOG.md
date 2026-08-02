@@ -86,6 +86,7 @@ This new version of the app is a rewrite of Learn GDScript in Godot 4 that refin
 - L22.P1: Prevent infinite loop from freezing the browser when constantly refilling the array (#960)
 - L22.P2: Fix crates display sometimes overflowing the gdquest boy or being too clumped up (#802)
 - L22.P2: Add support for getting the correct display output if using pop_front() (#957)
+- L23: Fix examples getting cropped when making the text size minimal (#816)
 
 ### Docs
 
