@@ -261,6 +261,16 @@ func _open_glossary_popup(meta: String) -> void:
 	_glossary_popup.appear.call_deferred()
 
 
+## Creates a RichTextLabel instance to use for the lesson content.
+func _create_lesson_rich_text_label() -> RichTextLabel:
+	var instance: RichTextLabel = RichTextLabelRTL.new()
+	instance.fit_content = true
+	instance.scroll_active = false
+	instance.bbcode_enabled = true
+	instance.selection_enabled = true
+	return instance
+
+
 func _make_paragraph(
 	node: BBCodeParser.ParseNode,
 	_target_course_index: CourseIndex,
@@ -269,11 +279,7 @@ func _make_paragraph(
 ) -> CanvasItem:
 	var instance: RichTextLabel = _previous_paragraph
 	if not _previous_paragraph:
-		instance = RichTextLabelRTL.new()
-		instance.fit_content = true
-		instance.scroll_active = false
-		instance.bbcode_enabled = true
-		instance.selection_enabled = true
+		instance = _create_lesson_rich_text_label()
 		instance.meta_clicked.connect(_open_glossary_popup)
 		_previous_paragraph = instance
 
@@ -306,6 +312,9 @@ func _make_note(
 	return revealer
 
 
+## Inserts a title, either accumulating text in the paragraph being built if
+## possible or otherwise creating a dedicated RichTextLabel node for the title
+## (e.g. if the title is right after a quiz or other visual).
 func _make_title(
 	node: BBCodeParser.ParseNode,
 	_target_course_index: CourseIndex,
@@ -314,9 +323,12 @@ func _make_title(
 ) -> CanvasItem:
 	var instance: RichTextLabel = _previous_paragraph
 	if _previous_paragraph == null:
-		instance = RichTextLabel.new()
+		instance = _create_lesson_rich_text_label()
+		_previous_paragraph = instance
 	var text_content := BBCodeUtils.get_paragraph_text(node)
-	instance.text += "\n\n[font size=28 name='%s']%s[/font]\n\n" % [
+	if not instance.text.is_empty():
+		instance.text += "\n\n"
+	instance.text += "[font size=28 name=\"%s\"]%s[/font]\n\n" % [
 		HEADER_FONT,
 		TextUtils.paragraph(text_content),
 	]
