@@ -36,6 +36,7 @@ This new version of the app is a rewrite of Learn GDScript in Godot 4 that refin
 - Translations: Remove locales for languages that are too incomplete. They'll be re-added when the translation progress is higher.
 - Remove the old mention of Tesla, focus on games, add mentions of Buckshot Roulette and Slay the Spire 2 as more recent Godot games
 - Render at the real screen resolution in the browser (#1183)
+- You can now use Command-C and Command-V to copy and paste within the application on macOS (#711)
 - L6.P1 to L6.P4: Add checks to detect when nothing was drawn, giving more precise feedback when the student left the code empty
 - L9: clarify the question in quiz asking about the result of subtracting amount
 - L11.P1 and L11.P2: Improve feedback messages, make practice tests a bit more lenient
