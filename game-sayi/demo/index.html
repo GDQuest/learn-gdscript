@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sayı Bulmaca</title>
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      background:#ffffff;
+      font-family: 'Inter', system-ui, sans-serif;
+      padding: 1.5rem;
+    }
+
+    header {
+      text-align: center;
+    }
+    header h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: lab(0% 0 0);
+      opacity: .8;
+    }
+
+    og-sayi {
+      --og-font: 'Inter', system-ui, sans-serif;
+      --og-bg: hwb(185 5% 7%);
+      --og-surface: hwb(185 5% 7%);
+      
+      --og-text: hwb(0 0% 100%);
+      --og-radius: 16px;
+
+      width: 100%;
+      max-width: 420px;
+      
+    }
+  
+  </style>
+</head>
+<body>
+ <header> <h1>-Sayı Bulmaca-</h1> </header>
+
+  
+    <og-sayi id="game" mode="levels"  levelCount="10"></og-sayi>
+    <div id="event-log" aria-live="polite" aria-label="Oyun olay günlüğü"></div>
+
+  <script type="module">
+    import '../src/index.ts';
+
+    const game = document.getElementById('game');
+    const loj = document.getElementById('event-log'); 
+
+
+    game.addEventListener('og-ready', (e) => console.log('Ready:', e.detail));
+    game.addEventListener('og-level-start', (e) => console.log('Level Start:', e.detail));
+    game.addEventListener('og-level-complete', (e) => console.log('Level Complete:', e.detail));
+    game.addEventListener('og-state-change', (e) => console.log('State Change:', e.detail));
+  </script>
+</body>
+</html>
