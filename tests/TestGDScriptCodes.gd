@@ -121,4 +121,14 @@ func _run():
 		),
 	)
 
+	var too_few_arguments_error := ScriptError.new()
+	too_few_arguments_error.from_JSON(
+		{
+			"message": "Too few arguments for \"draw_rectangle()\" call. Expected at least 2 arguments but received 1.",
+			"code": -1,
+		}
+	)
+	if too_few_arguments_error.code != GDScriptCodes.ErrorCode.INVALID_ARGUMENTS:
+		printerr("Too few arguments error was not remapped to INVALID_ARGUMENTS.")
+
 	print()
