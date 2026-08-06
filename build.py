@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import os
 import shutil
+import socket
 import subprocess
 import sys
 import urllib.request
@@ -449,6 +450,99 @@ Press Ctrl+C to stop
     run_command(f'python3 -m http.server 8000 --directory "{web_dir}"')
 
 
+LOCAL_CERTIFICATE_DIRECTORY = Path(".dev_local")
+LOCAL_CERTIFICATE_PATH = LOCAL_CERTIFICATE_DIRECTORY / "certificate_local.pem"
+LOCAL_KEY_PATH = LOCAL_CERTIFICATE_DIRECTORY / "key_local.pem"
+
+
+def get_local_ip():
+    """Return the local address normally used to reach this computer."""
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as connection:
+        try:
+            connection.connect(("8.8.8.8", 80))
+            return connection.getsockname()[0]
+        except OSError:
+            return "127.0.0.1"
+
+
+def create_certificate(host=None, force=False):
+    """Create a short-lived self-signed certificate for local HTTPS testing."""
+    host = host or get_local_ip()
+    if host == "127.0.0.1":
+        print("Warning: could not detect a LAN address; using 127.0.0.1")
+
+    if LOCAL_CERTIFICATE_PATH.exists() and LOCAL_KEY_PATH.exists() and not force:
+        print(
+            f"Certificate already exists at {LOCAL_CERTIFICATE_PATH}. "
+            "Use --force to replace it."
+        )
+        return
+
+    if not shutil.which("openssl"):
+        print("Error: openssl is required to create the local certificate")
+        sys.exit(1)
+
+    LOCAL_CERTIFICATE_DIRECTORY.mkdir(parents=True, exist_ok=True)
+    command = [
+        "openssl",
+        "req",
+        "-x509",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-days",
+        "7",
+        "-keyout",
+        str(LOCAL_KEY_PATH),
+        "-out",
+        str(LOCAL_CERTIFICATE_PATH),
+        "-subj",
+        f"/CN={host}",
+        "-addext",
+        f"subjectAltName=IP:{host}",
+    ]
+
+    import shlex
+
+    print(f"  > {' '.join(shlex.quote(part) for part in command)}")
+    subprocess.run(command, check=True)
+    print(f"Created certificate for {host} at {LOCAL_CERTIFICATE_PATH}")
+
+
+def serve_https(host=None, port=8443):
+    """Serve the web export over HTTPS for testing on local devices."""
+    web_dir = build_info.get_output_directory("web")
+    if not Path(web_dir).exists():
+        print(
+            f"Error: Web build not found at {web_dir}\nRun 'python build.py export web' first"
+        )
+        sys.exit(1)
+
+    if not LOCAL_CERTIFICATE_PATH.exists() or not LOCAL_KEY_PATH.exists():
+        create_certificate(host)
+
+    import ssl
+    from functools import partial
+    from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+
+    class Handler(SimpleHTTPRequestHandler):
+        def end_headers(self):
+            self.send_header("Cross-Origin-Opener-Policy", "same-origin")
+            self.send_header("Cross-Origin-Embedder-Policy", "require-corp")
+            super().end_headers()
+
+    handler = partial(Handler, directory=web_dir)
+    server = ThreadingHTTPServer(("0.0.0.0", port), handler)
+    context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+    context.load_cert_chain(str(LOCAL_CERTIFICATE_PATH), str(LOCAL_KEY_PATH))
+    server.socket = context.wrap_socket(server.socket, server_side=True)
+
+    display_host = host or get_local_ip()
+    print(f"Serving HTTPS on https://{display_host}:{port}")
+    print("Press Ctrl+C to stop")
+    server.serve_forever()
+
+
 def web_watch():
     """Watch for file changes and rebuild automatically. Requires inotifywait."""
     if not shutil.which("inotifywait"):
@@ -592,7 +686,17 @@ Examples:
     clean_cmd.add_argument("target", choices=["all", "web"])
 
     web_cmd = subparsers.add_parser("web", help="Web development commands")
-    web_cmd.add_argument("action", choices=["server", "watch", "debug"])
+    web_cmd.add_argument(
+        "action",
+        choices=["server", "create_certificate", "serve_https", "watch", "debug"],
+    )
+    web_cmd.add_argument("--host", help="LAN IP to include in the local certificate")
+    web_cmd.add_argument("--port", type=int, default=8443)
+    web_cmd.add_argument(
+        "--force-certificate",
+        action="store_true",
+        help="Replace an existing certificate",
+    )
 
     args = parser.parse_args()
 
@@ -651,7 +755,14 @@ Examples:
         else:
             clean_web_build()
     elif args.command == "web":
-        {"server": web_server, "watch": web_watch, "debug": web_debug}[args.action]()
+        if args.action == "create_certificate":
+            create_certificate(args.host, args.force_certificate)
+        elif args.action == "serve_https":
+            serve_https(args.host, args.port)
+        else:
+            {"server": web_server, "watch": web_watch, "debug": web_debug}[
+                args.action
+            ]()
 
 
 if __name__ == "__main__":
