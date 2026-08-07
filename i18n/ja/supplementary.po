@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
 "POT-Creation-Date: 2026-01-21 11:55+0100\n"
-"PO-Revision-Date: 2026-03-20 09:09+0000\n"
-"Last-Translator: c3974 <148695293+c3974@users.noreply.github.com>\n"
-"Language-Team: Japanese <https://hosted.weblate.org/projects/learn-gdscript-from-zero/error-explanations/ja/>\n"
+"PO-Revision-Date: 2026-08-02 19:39+0000\n"
+"Last-Translator: マムス <mamusu.silhouette@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/learn-gdscript-from-zero/supplementary/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.10.3\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.8.dev0\n"
 
 #: script_checking/error_database.csv
 #, fuzzy
@@ -244,7 +244,7 @@ msgstr "このエラーは、括弧 (場合によってはカンマやパス) �
 
 #: script_checking/error_database.csv
 msgid "Three keywords in GDScript work like function calls and require parentheses: [code]yield()[/code], [code]preload()[/code], and [code]assert()[/code]."
-msgstr "GDScript の 3 つのキーワードは関数呼び出しのように機能し、括弧が必要です: [code]yield()[/code]、[code]preload()[/code]、および [code]assert()[/code]。"
+msgstr "GDScript では、関数呼び出しのように動作し、かっこが必要なキーワードが3つあります。[code]yield()[/code]、[code]preload()[/code]、[code]assert()[/code] です。"
 
 #: script_checking/error_database.csv
 msgid "To address the error, you want to add the missing opening parenthesis, the closing parenthesis, or the comma."
@@ -261,7 +261,7 @@ msgstr "1. 識別子（変数名または関数名）を間違った場所に記
 
 #: script_checking/error_database.csv
 msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
-msgstr "2. [code]var[/code]、[code]func[/code]、[code]for[/code]、[code]signal[/code] などのキーワードを書いた後に、名前を続けていません。"
+msgstr "2. [code]var[/code]、[code]func[/code]、[code]for[/code]、[code]signal[/code] などのキーワードを書いたあとに、名前を指定していません。"
 
 #: script_checking/error_database.csv
 #, fuzzy
@@ -270,11 +270,11 @@ msgstr "3. 関数を定義しましたが、コロンの前の括弧を忘れて
 
 #: script_checking/error_database.csv
 msgid "If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses."
-msgstr "もしエラーが何かを期待していたと言うのであれば、[code]var[/code]、[code]func[/code]、[code]for[/code]、[code]signal[/code]のようなキーワードの後に名前を書き忘れていて、コードが無効になっている可能性があります。あるいは、関数の定義で括弧を忘れてしまった。不足している名前や括弧を追加することで、エラーに対処できます。"
+msgstr "エラーメッセージに「○○が必要です」のような内容が表示された場合は、[code]var[/code]、[code]func[/code]、[code]for[/code]、または [code]signal[/code] などのキーワードの後に名前を書くのを忘れている可能性があります。そのため、コードが正しくありません。また、関数を定義するときに、かっこを書くのを忘れている場合もあります。不足している名前やかっこを追加することで、このエラーを解決できます。"
 
 #: script_checking/error_database.csv
 msgid "If the error says you have something unexpected, you are likely missing a keyword like [code]var[/code], [code]func[/code], [code]for[/code], etc."
-msgstr "エラーに「予期しないものがある」と書かれている場合は、[code]var[/code]、[code]func[/code]、[code]for[/code]などのキーワードが欠けている可能性が高い。"
+msgstr "エラーメッセージに「予期しない○○です」のような内容が表示された場合は、[code]var[/code]、[code]func[/code]、[code]for[/code] などのキーワードが不足している可能性があります。"
 
 #: script_checking/error_database.csv
 msgid "Another possibility is that you need to write a colon at the end of a function definition, [code]for[/code] loop, or a line starting with [code]if[/code], [code]elif[/code], or [code]else[/code]."
@@ -811,7 +811,7 @@ msgstr "縦軸のエンティティの位置。"
 
 #: course/documentation.csv
 msgid " Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false, normalizes the movement."
-msgstr "ノードの X 座標を [code]Node._process[/code] の [code]delta[/code] にもとづいて局所変換します。もし [code]scaled[/code] が false なら、移動量を正規化します。"
+msgstr " [code]Node._process[/code] の [code]delta[/code] を基準として、ノードのローカル X 軸方向へ移動します。[code]scaled[/code] が [code]false[/code] の場合は、移動量を正規化します。"
 
 #: course/documentation.csv
 msgid "Stores how many cells make up the width ([code]board_size.x[/code]) and height ([code]board_size.y[/code]) of the board."

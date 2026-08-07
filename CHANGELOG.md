@@ -2,7 +2,7 @@
 
 This document lists changes between releases.
 
-## (Unreleased) Learn GDScript From Zero 2.0.0
+## Learn GDScript From Zero 2.0.0 (2026-08-07)
 
 This new version of the app is a rewrite of Learn GDScript in Godot 4 that refines the overall user experience. The bulk of the work for this release happened behind the scenes and will be largely transparent to users, but it was necessary as it enables certain bug fixes we couldn't have made otherwise and it'll make it easier to improve the app moving forward.
 
@@ -49,6 +49,7 @@ This new version of the app is a rewrite of Learn GDScript in Godot 4 that refin
 - L22.P1: clarify the exercise, show starting data
 - L24.P1: Correct first hint which pointed to incorrect syntax for this specific practice
 - L27.P2: Improve practice tests and feedback messages, check for integer values to prevent silent type coercion
+- Re-completed french translation. All other languages remain partially translated.
 
 ### Fixed
 
