@@ -122,9 +122,6 @@ jobs:
           name: build-web
           path: build/web
 
-      - name: Disable Jekyll processing
-        run: touch build/web/.nojekyll
-        
       - name: Deploy release web build
         if: github.ref_name == 'release'
         # 4.8.0 pinned commit
