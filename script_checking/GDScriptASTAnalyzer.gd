@@ -79,11 +79,46 @@ func find_any_recursive_function() -> String:
 		var function_name := function.get_identifier().get_name()
 		var statements := function.get_body().get_statements()
 		for statement in statements:
-			if statement.get_type() == GDNode.CALL:
-				var call_node := statement as GDCallNode
-				if not call_node.is_super() and call_node.get_function_name() == function_name:
-					return function_name
+			if _does_expression_contain_recursive_call(statement, function_name):
+				return function_name
 	return ""
+
+
+## Recursively checks if an expression contains a recursive call to the given function.
+func _does_expression_contain_recursive_call(expression: GDNode, function_name: StringName) -> bool:
+	if expression == null:
+		return false
+
+	match expression.get_type():
+		GDNode.CALL:
+			var call_node := expression as GDCallNode
+			if not call_node.is_super() and call_node.get_function_name() == function_name:
+				return true
+			for argument in call_node.get_arguments():
+				if _does_expression_contain_recursive_call(argument, function_name):
+					return true
+		GDNode.ASSIGNMENT:
+			return _does_expression_contain_recursive_call(
+				(expression as GDAssignmentNode).get_assigned_value(),
+				function_name,
+			)
+		GDNode.VARIABLE:
+			return _does_expression_contain_recursive_call(
+				(expression as GDVariableNode).get_initializer(),
+				function_name,
+			)
+		GDNode.BINARY_OPERATOR:
+			var binary_operator := expression as GDBinaryOpNode
+			return (
+				_does_expression_contain_recursive_call(binary_operator.get_left_operand(), function_name)
+				or _does_expression_contain_recursive_call(binary_operator.get_right_operand(), function_name)
+			)
+		GDNode.UNARY_OPERATOR:
+			return _does_expression_contain_recursive_call(
+				(expression as GDUnaryOpNode).get_operand(),
+				function_name,
+			)
+	return false
 
 
 func has_infinite_while_loop() -> bool:

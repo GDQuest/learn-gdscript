@@ -366,18 +366,14 @@ func _validate_and_run_student_code() -> void:
 	var verifier := OfflineScriptVerifier.new(verifier_script)
 
 	# Do local sanity checks for the script.
-	var analyzer: GDScriptLocalAnalyzer = null
-	if ClassDB.class_exists(OfflineScriptVerifier.PARSE_WRAPPER_CLASS):
-		analyzer = GDScriptASTAnalyzer.new(verifier.get_class_ast() as GDClassNode)
-	else:
-		analyzer = MiniGDScriptTokenizer.new(verifier_script)
+	var analyzer := GDScriptASTAnalyzer.new(verifier.get_class_ast() as GDClassNode)
 
 	# Check for recursive functions
 	var recursive_function := analyzer.find_any_recursive_function()
 	if recursive_function != "":
 		var error := ScriptError.new()
 		error.message = (
-			tr("The function `%s` calls itself, this creates an infinite loop")
+			tr("The function '%s' calls itself, this creates an infinite loop")
 			% [recursive_function]
 		)
 		error.severity = 1

@@ -2,6 +2,13 @@
 
 This document lists changes between releases.
 
+## In development: Learn GDScript From Zero 2.0.1
+
+
+## Improvements and changes
+
+- Improved recursive call detection to help prevent infinite loops in GDScript. It will now catch many more cases of recursive calls that could cause the app to freeze.
+
 ## Learn GDScript From Zero 2.0.0 (2026-08-07)
 
 This new version of the app is a rewrite of Learn GDScript in Godot 4 that refines the overall user experience. The bulk of the work for this release happened behind the scenes and will be largely transparent to users, but it was necessary as it enables certain bug fixes we couldn't have made otherwise and it'll make it easier to improve the app moving forward.
