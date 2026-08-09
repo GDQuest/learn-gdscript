@@ -8,7 +8,8 @@ This document lists changes between releases.
 ## Improvements and changes
 
 - Improved recursive call detection to help prevent infinite loops in GDScript. It will now catch many more cases of recursive calls that could cause the app to freeze.
-- L22.P1: add explicit mention of how the function will be called
+- L14.P1, L15.P1, L21.P1, L22.P1: add explicit mention of how or many times the function will be called
+- L15.P1: Edit misleading check (#883)
 
 
 ## Learn GDScript From Zero 2.0.0 (2026-08-07)

@@ -9,7 +9,7 @@ func _prepare() -> void:
 
 func _define(checks: Array[Check]) -> void:
 	checks.append(Check.new(tr("Use A Vector To Increase Scale"), tr(""), test_use_a_vector_to_increase_scale))
-	checks.append(Check.new(tr("Correct Scale After 2 Levels"), tr(""), test_correct_scale_after_2_levels))
+	checks.append(Check.new(tr("The Scale Is Correct After Gaining Multiple Levels"), tr(""), test_correct_scale_after_2_levels))
 
 
 func test_use_a_vector_to_increase_scale() -> String:
