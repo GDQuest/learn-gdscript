@@ -155,8 +155,13 @@ func setup(
 	_practice_completed = false
 	_practice_solution_used = false
 	_lesson_number = lesson_number
-	_practice_index = BBCodeUtils.get_practice_index(lesson, practice)
-	_is_last_practice = _practice_index >= BBCodeUtils.get_lesson_practice_count(lesson) - 1
+	var lesson_info := course_index.get_lesson_info(lesson.bbcode_path)
+	var practice_info := course_index.get_practice_info(
+		lesson.bbcode_path,
+		BBCodeUtils.get_practice_id(practice),
+	)
+	_practice_index = practice_info.index
+	_is_last_practice = _practice_index >= lesson_info.practices.size() - 1
 	_practice_done_popup.do_fade_background_on_exit = not _is_last_practice
 
 	var starting_code := BBCodeUtils.get_practice_starting_code(practice)
@@ -208,9 +213,8 @@ func setup(
 	# In case we directly test a practice from the editor, we don't have access to the lesson.
 	if lesson and course_index:
 		_practice_list.clear_items()
-		var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
 		var practice_id := BBCodeUtils.get_practice_id(practice)
-		for i in practice_count:
+		for i in lesson_info.practices.size():
 			var practice_data := BBCodeUtils.get_lesson_practice(lesson, i)
 			_practice_list.add_item(
 				practice_data,

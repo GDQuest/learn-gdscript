@@ -14,16 +14,7 @@ func _notification(what: int) -> void:
 		await get_tree().process_frame
 		if not NavigationManager.current_url.is_empty():
 			var target := NavigationManager.get_navigation_resource(NavigationManager.current_url)
-			if target and target.tag == BBCodeParserData.Tag.PRACTICE:
-				var lesson := NavigationManager.get_navigation_resource(target.bbcode_path)
-				if lesson:
-					var practice_id := BBCodeUtils.get_practice_id(_last_target)
-					for index in BBCodeUtils.get_lesson_practice_count(lesson):
-						var practice := BBCodeUtils.get_lesson_practice(lesson, index)
-						if BBCodeUtils.get_practice_id(practice) == practice_id:
-							_last_target = practice
-							break
-			elif target:
+			if target:
 				_last_target = target
 		_rebuild_breadcrumbs()
 
@@ -43,63 +34,23 @@ func _rebuild_breadcrumbs() -> void:
 
 	if _last_target is BBCodeParser.ParseNode and _last_target.tag == BBCodeParserData.Tag.LESSON:
 		var lesson := _last_target as BBCodeParser.ParseNode
-		var lesson_index := -1
-
-		var i := 0
-		for l in _last_course_index.get_lessons_count():
-			var lesson_data := NavigationManager.get_navigation_resource(_last_course_index.get_lesson_path(l)) as BBCodeParser.ParseNode
-			if lesson_data == lesson:
-				lesson_index = i
-				break
-
-			i += 1
-
-		var title := BBCodeUtils.get_lesson_title(lesson)
-		var node_text: String = tr(title)
-		if lesson_index >= 0:
-			node_text = "L%d. %s" % [lesson_index + 1, tr(title)]
+		var lesson_info := _last_course_index.get_lesson_info(lesson.bbcode_path)
+		var node_text := "L%d. %s" % [lesson_info.number, tr(lesson_info.title)]
 
 		_create_navigation_node(node_text, null, "", true)
 		return
 
 	elif _last_target is BBCodeParser.ParseNode and _last_target.tag == BBCodeParserData.Tag.PRACTICE:
 		var practice := _last_target as BBCodeParser.ParseNode
-		# TODO: Should probably avoid relying on content ID for getting paths.
-
 		var practice_id := BBCodeUtils.get_practice_id(practice)
+		var lesson_info := _last_course_index.get_lesson_info(practice.bbcode_path)
+		var practice_info := _last_course_index.get_practice_info(practice.bbcode_path, practice_id)
 
-		var lesson := NavigationManager.get_navigation_resource(
-			practice.bbcode_path
-		) as BBCodeParser.ParseNode
-		var lesson_index := -1
+		var lesson_text := "L%d. %s" % [lesson_info.number, tr(lesson_info.title)]
+		_create_navigation_node(lesson_text, _last_course_index, lesson_info.path)
 
-		var i := 0
-		for l in _last_course_index.get_lessons_count():
-			var lesson_data := NavigationManager.get_navigation_resource(_last_course_index.get_lesson_path(l)) as BBCodeParser.ParseNode
-			if lesson_data.bbcode_path == lesson.bbcode_path:
-				lesson_index = i
-				break
-
-			i += 1
-
-		if lesson and lesson_index >= 0:
-			var title := BBCodeUtils.get_lesson_title(lesson)
-			var lesson_text := "L%d. %s" % [lesson_index + 1, tr(title)]
-			_create_navigation_node(lesson_text, _last_course_index, lesson.bbcode_path)
-
-			var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
-			var practice_index := -1
-			for l in practice_count:
-				var other_practice := BBCodeUtils.get_lesson_practice(lesson, l)
-				var other_practice_id := BBCodeUtils.get_practice_id(other_practice)
-				if other_practice_id == practice_id:
-					practice_index = l
-					break
-			var practice_title := BBCodeUtils.get_practice_title(practice)
-			var node_text: String = tr(practice_title)
-			if practice_index >= 0:
-				node_text = "P%d. %s" % [practice_index + 1, tr(practice_title)]
-			_create_navigation_node(node_text, null, "", true)
+		var node_text := "P%d. %s" % [practice_info.index + 1, tr(practice_info.title)]
+		_create_navigation_node(node_text, null, "", true)
 		return
 
 

@@ -67,7 +67,8 @@ func _update_visuals() -> void:
 	if not lesson:
 		return
 
-	_title_label.text = BBCodeUtils.get_lesson_title(lesson)
+	var lesson_info := course_index.get_lesson_info(lesson.bbcode_path)
+	_title_label.text = lesson_info.title
 	if TranslationManager.current_language == "en":
 		_translation_stats_value.text = "100%"
 		_goto_lesson_button.disabled = false
@@ -93,7 +94,7 @@ func _update_visuals() -> void:
 		_reading_stats_icon.modulate = VALUE_COLOR_PASSED
 		has_done_reading = true
 
-	var total_practices := BBCodeUtils.get_lesson_practice_count(lesson)
+	var total_practices := lesson_info.practices.size()
 	var completed_practices := 0
 	if lesson_progress:
 		completed_practices = lesson_progress.get_completed_practices_count(lesson)

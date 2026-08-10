@@ -6,10 +6,6 @@
 ## - The URL slug of a lesson or practice like "your-first-function"
 ## - The full Godot path to a resource like "res://course/lesson-5-your-first-function/lesson.bbcode"
 ##
-## Lessons are BBCode files parsed into data structures. This script resolves
-## the input strings to a lesson or practice parsed node and emits a signal for
-## the UI to display it.
-##
 ## On desktop, you can use command line arguments like --go-to=...
 ## In a web browser, the URL hash might look like "#L5.P1" or be lesson and
 ## practice slugs like "your-first-function/a-function-to-draw-squares".
@@ -49,7 +45,6 @@ var _regex_url_normalization := RegExpGroup.compile(
 	r"^(?<prefix>user:\/\/|res:\/\/|\.*?\/+)(?<course>[^\/]+)\/(?<lesson>[^\/]+)\/?(?<lesson_file>[^\.]+\.[^\/]+)?\/?(?<practice>.*)?",
 )
 var _regex_slug_normalization := RegExpGroup.compile(r"^(?<lesson>[^\/]+)\/?(?<practice>.*)?")
-var _lesson_cache := { }
 
 
 func _init() -> void:
@@ -68,11 +63,6 @@ func _init() -> void:
 		var initial_url: String = arguments.get("go-to", "")
 		if initial_url != "":
 			navigate_to.call_deferred(initial_url)
-
-
-func _ready() -> void:
-	TranslationManager.translation_changed.connect(_on_translation_changed)
-
 
 # Checks if any resource with active user data is about to be closed.
 #
@@ -245,22 +235,23 @@ func _parse_navigation_request(location_raw: String) -> NormalizedUrl:
 	return normalized_url
 
 
-func _get_navigation_resource(normalized_url: NormalizedUrl, course_index: CourseIndex) -> BBCodeParser.ParseNode:
+func _get_navigation_resource(
+	normalized_url: NormalizedUrl,
+	course_index: CourseIndex,
+) -> BBCodeParser.ParseNode:
 	var lesson_path := _get_lesson_path(normalized_url, course_index)
 	if lesson_path.is_empty():
 		return null
-
-	var lesson_data := _load_lesson(lesson_path)
-	if lesson_data == null:
-		return null
-
+	var lesson_data := course_index.get_lesson(lesson_path)
 	if normalized_url.practice_path.is_empty():
 		return lesson_data
 
-	for practice_index in BBCodeUtils.get_lesson_practice_count(lesson_data):
-		var practice := BBCodeUtils.get_lesson_practice(lesson_data, practice_index)
-		if BBCodeUtils.get_practice_id(practice) == normalized_url.practice_path:
-			return practice
+	var practice_info := course_index.get_practice_info(
+		lesson_path,
+		normalized_url.practice_path,
+	)
+	if practice_info:
+		return BBCodeUtils.get_lesson_practice(lesson_data, practice_info.index)
 	push_error(
 		"NavigationManager.gd:_get_navigation_resource(): Practice '%s' was not found in lesson '%s'."
 		% [normalized_url.practice_path, lesson_path]
@@ -288,55 +279,6 @@ func _get_lesson_path(normalized_url: NormalizedUrl, course_index: CourseIndex) 
 	return course_index.get_lesson_path_from_slug(lesson_slug)
 
 
-func _load_lesson(lesson_path: String) -> BBCodeParser.ParseNode:
-	if lesson_path.is_empty() or not FileAccess.file_exists(lesson_path):
-		push_error("NavigationManager.gd:_load_lesson(): Lesson file does not exist: %s" % lesson_path)
-		return null
-
-	var effective_bbcode := lesson_path
-	if TranslationManager.current_language != "en":
-		effective_bbcode = "%s.%s.%s" % [
-			lesson_path.get_basename(),
-			TranslationManager.current_language,
-			lesson_path.get_extension(),
-		]
-		if not FileAccess.file_exists(effective_bbcode):
-			effective_bbcode = lesson_path
-
-	if _lesson_cache.has(effective_bbcode):
-		return _lesson_cache[effective_bbcode]
-
-	var parser := LessonBBCodeParser.new()
-	var result := parser.parse_file(effective_bbcode)
-	if not result.is_success():
-		push_error(
-			"NavigationManager.gd:_load_lesson(): Failed to parse lesson file %s. Fix the reported BBCode errors before loading this lesson:"
-			% effective_bbcode
-		)
-		for error: BBCodeParser.ParseError in result.errors:
-			push_error("  " + error.format())
-		return null
-
-	if result.warnings:
-		print(
-			"NavigationManager.gd:_load_lesson(): Parse warnings when loading lesson from bbcode file %s:"
-			% effective_bbcode
-		)
-		for warning: BBCodeParser.ParseError in result.warnings:
-			print("  ", warning.format())
-
-	if result.root == null or result.root.children.is_empty() or not result.root.children[0] is BBCodeParser.ParseNode:
-		push_error(
-			"NavigationManager.gd:_load_lesson(): Parsed lesson file %s has no [lesson] root."
-			% effective_bbcode
-		)
-		return null
-
-	var lesson_data: BBCodeParser.ParseNode = result.root.children[0]
-	_lesson_cache[effective_bbcode] = lesson_data
-	return lesson_data
-
-
 ## Converts a short label like L5.P1 or L3 or L12P4 into the canonical
 ## path to load the lesson or practice ($lesson_slug[/$practice_slug])
 func _resolve_compact_course_location(location: String) -> String:
@@ -359,11 +301,8 @@ func _resolve_compact_course_location(location: String) -> String:
 		return lesson_slug
 
 	var practice_number := practice_number_text.to_int()
-	var lesson := _load_lesson(lesson_path)
-	if lesson == null:
-		push_error("Could not load lesson label 'L%d'." % lesson_number)
-		return ""
-	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
+	var lesson_info := course_index.get_lesson_info(lesson_path)
+	var practice_count := lesson_info.practices.size()
 	if practice_number < 1 or practice_number > practice_count:
 		push_error(
 			"Practice label 'L%d.P%d' is outside the lesson range."
@@ -371,8 +310,7 @@ func _resolve_compact_course_location(location: String) -> String:
 		)
 		return ""
 
-	var practice := BBCodeUtils.get_lesson_practice(lesson, practice_number - 1)
-	return "%s/%s" % [lesson_slug, BBCodeUtils.get_practice_id(practice)]
+	return "%s/%s" % [lesson_slug, lesson_info.practices[practice_number - 1].id]
 
 
 # Handle back requests
@@ -408,9 +346,6 @@ func get_current_url() -> String:
 	return get_history(1)
 
 
-func _on_translation_changed() -> void:
-	_lesson_cache.clear()
-
 ###############################################################################
 #
 # JAVASCRIPT INTERFACE
@@ -438,7 +373,8 @@ func _on_init_setup_js() -> void:
 	_js_window.addEventListener("popstate", _js_popstate_listener_ref)
 
 	@warning_ignore("unsafe_method_access")
-	@warning_ignore("unsafe_property_access") var url: String = (
+	@warning_ignore("unsafe_property_access")
+	var url: String = (
 		_js_window.location.hash.trim_prefix("#").trim_prefix("/")
 		if _js_window.location.hash
 		else ""
@@ -454,7 +390,9 @@ func _on_js_popstate(_args: Array) -> void:
 		return
 
 	@warning_ignore("unsafe_property_access")
-	var url: String = _js_window.location.hash.trim_prefix("#").trim_prefix("/")
+	var url: String = (
+		_js_window.location.hash.trim_prefix("#").trim_prefix("/")
+	)
 	if url.is_empty():
 		# The browser already moved to the entry before the app history. Do not
 		# call history.go() again from here.

@@ -74,6 +74,7 @@ func _update_outliner_index() -> void:
 				"CourseOutliner: Skipping lesson %d because it could not be loaded." % (i + 1)
 			)
 			continue
+		var lesson_info := course_index.get_lesson_info(lesson_data.bbcode_path)
 		var lesson_progress := (
 			user_profile.get_or_create_lesson(course_index.get_course_id(), lesson_data.bbcode_path)
 			as LessonProgress
@@ -83,7 +84,7 @@ func _update_outliner_index() -> void:
 		_lesson_list.add_item(
 			lesson_data,
 			lesson_index,
-			BBCodeUtils.get_lesson_title(lesson_data),
+			lesson_info.title,
 			completion,
 		)
 

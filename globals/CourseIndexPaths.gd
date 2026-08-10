@@ -34,5 +34,6 @@ static func get_course_index_instance(course_id: String = DEFAULT_COURSE_INDEX) 
 		return null
 	
 	index = index_script.new()
-	_course_index_cache[course_id] = index
+	index.initialize()
+	_course_index_cache[effective_id] = index
 	return index

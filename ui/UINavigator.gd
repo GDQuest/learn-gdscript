@@ -105,16 +105,20 @@ func get_current_screen_issue_report_context() -> ReportContext:
 	var resource := screen.get_screen_resource()
 	if resource and resource.tag == BBCodeParserData.Tag.PRACTICE:
 		var lesson := NavigationManager.get_navigation_resource(resource.bbcode_path) as BBCodeParser.ParseNode
-		var lesson_number := course_index.get_lesson_number(lesson.bbcode_path)
-		context.lesson_id = "L%d" % lesson_number
-		context.lesson_title = BBCodeUtils.get_lesson_title(lesson)
-		context.practice_id = "P%d" % (BBCodeUtils.get_practice_index(lesson, resource) + 1)
-		context.practice_title = BBCodeUtils.get_practice_title(resource)
+		var lesson_info := course_index.get_lesson_info(lesson.bbcode_path)
+		var practice_info := course_index.get_practice_info(
+			lesson.bbcode_path,
+			BBCodeUtils.get_practice_id(resource),
+		)
+		context.lesson_id = "L%d" % lesson_info.number
+		context.lesson_title = lesson_info.title
+		context.practice_id = "P%d" % (practice_info.index + 1)
+		context.practice_title = practice_info.title
 		context.file_path = resource.bbcode_path
 	elif resource:
-		var lesson_number := course_index.get_lesson_number(resource.bbcode_path)
-		context.lesson_id = "L%d" % lesson_number
-		context.lesson_title = BBCodeUtils.get_lesson_title(resource)
+		var lesson_info := course_index.get_lesson_info(resource.bbcode_path)
+		context.lesson_id = "L%d" % lesson_info.number
+		context.lesson_title = lesson_info.title
 		context.file_path = resource.bbcode_path
 	if screen is UIPractice:
 		context.user_code = screen.get_user_code()
@@ -297,22 +301,15 @@ func _process_pending_navigation() -> void:
 
 func _on_practice_next_requested(practice: BBCodeParser.ParseNode) -> void:
 	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as BBCodeParser.ParseNode
-	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson_data)
-	var practice_id := BBCodeUtils.get_practice_id(practice)
-
-	var index := -1
-	for i in practice_count:
-		var other_practice := BBCodeUtils.get_lesson_practice(lesson_data, i)
-		var other_practice_id := BBCodeUtils.get_practice_id(other_practice)
-		if other_practice_id == practice_id:
-			index = i
-			break
-	# This practice is not in the current lesson, return early.
-	if index < 0:
-		return
-
+	var lesson_info := course_index.get_lesson_info(lesson_data.bbcode_path)
+	var practice_info := course_index.get_practice_info(
+		lesson_data.bbcode_path,
+		BBCodeUtils.get_practice_id(practice),
+	)
+	var practice_count := lesson_info.practices.size()
+	var index := practice_info.index
 	# This is the last practice in the set, try to move to the next lesson.
-	if index >= practice_count - 1:
+	if index == practice_count - 1:
 		# Checking that it's the last practice is not enough.
 		# Check if all practices are completed before moving to the next lesson.
 		var user_profile = UserProfiles.get_profile()
@@ -325,41 +322,28 @@ func _on_practice_next_requested(practice: BBCodeParser.ParseNode) -> void:
 		_lesson_done_popup.popup_centered()
 	else:
 		# Otherwise, go to the next practice in the set.
-		var next_practice := BBCodeUtils.get_lesson_practice(lesson_data, index + 1)
-		var next_practice_id := BBCodeUtils.get_practice_id(next_practice)
 		NavigationManager.navigate_to_practice(
 			course_index.get_lesson_slug(_lesson_index),
-			next_practice_id,
+			lesson_info.practices[index + 1].id,
 		)
 
 
 func _on_practice_previous_requested(practice: BBCodeParser.ParseNode) -> void:
 	var lesson_data := NavigationManager.get_navigation_resource(course_index.get_lesson_path(_lesson_index)) as BBCodeParser.ParseNode
-	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson_data)
-	var practice_id := BBCodeUtils.get_practice_id(practice)
-
-	var index := -1
-	for i in practice_count:
-		var other_practice := BBCodeUtils.get_lesson_practice(lesson_data, i)
-		var other_practice_id := BBCodeUtils.get_practice_id(other_practice)
-		if other_practice_id == practice_id:
-			index = i
-			break
-	# This practice is not in the current lesson, return early.
-	if index < 0:
-		return
-
+	var lesson_info := course_index.get_lesson_info(lesson_data.bbcode_path)
+	var practice_info := course_index.get_practice_info(
+		lesson_data.bbcode_path,
+		BBCodeUtils.get_practice_id(practice),
+	)
+	var index := practice_info.index
 	# This is the first practice in the set, there is no valid path, should be blocked by UI.
 	if index == 0:
 		return
-	else:
-		var previous_practice := BBCodeUtils.get_lesson_practice(lesson_data, index - 1)
-		var previous_practice_id := BBCodeUtils.get_practice_id(previous_practice)
-		# Otherwise, go to the previous practice in the set.
-		NavigationManager.navigate_to_practice(
-			course_index.get_lesson_slug(_lesson_index),
-			previous_practice_id,
-		)
+	# Otherwise, go to the previous practice in the set.
+	NavigationManager.navigate_to_practice(
+		course_index.get_lesson_slug(_lesson_index),
+		lesson_info.practices[index - 1].id,
+	)
 
 
 func _on_practice_requested(practice: BBCodeParser.ParseNode) -> void:

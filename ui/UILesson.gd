@@ -145,10 +145,11 @@ func _build_and_display_content(lesson: BBCodeParser.ParseNode, lesson_number: i
 				new_instance.hide()
 
 	var highlighted_next := false
-	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
+	var lesson_info := _course_index.get_lesson_info(lesson.bbcode_path)
+	var practice_count := lesson_info.practices.size()
 	for i in practice_count:
 		var practice := BBCodeUtils.get_lesson_practice(lesson, i)
-		var practice_id := BBCodeUtils.get_practice_id(practice)
+		var practice_id := lesson_info.practices[i].id
 		var button: UIPracticeButton = PracticeButtonScene.instantiate()
 		_practices_container.add_child(button)
 		button.setup(practice, i, lesson_number)
