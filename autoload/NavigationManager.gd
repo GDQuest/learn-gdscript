@@ -390,9 +390,8 @@ func _on_js_popstate(_args: Array) -> void:
 		return
 
 	@warning_ignore("unsafe_property_access")
-	var url: String = (
-		_js_window.location.hash.trim_prefix("#").trim_prefix("/")
-	)
+	var url: String = _js_window.location.hash.trim_prefix("#").trim_prefix("/")
+
 	if url.is_empty():
 		# The browser already moved to the entry before the app history. Do not
 		# call history.go() again from here.
