@@ -11,6 +11,9 @@ This document lists changes between releases.
 - L14.P1, L15.P1, L21.P1, L22.P1: add explicit mention of how or many times the function will be called
 - L15.P1: Edit misleading check (#883)
 
+## Bug fixes
+
+- On GDSchool, fix the fullscreen button not working when the page was already fullscreen
 
 ## Learn GDScript From Zero 2.0.0 (2026-08-07)
 
