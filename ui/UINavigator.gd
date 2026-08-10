@@ -106,11 +106,15 @@ func get_current_screen_issue_report_context() -> ReportContext:
 	if resource and resource.tag == BBCodeParserData.Tag.PRACTICE:
 		var lesson := NavigationManager.get_navigation_resource(resource.bbcode_path) as BBCodeParser.ParseNode
 		var lesson_number := course_index.get_lesson_number(lesson.bbcode_path)
-		context.lesson_title = "L%d. %s" % [lesson_number, BBCodeUtils.get_lesson_title(lesson)]
+		context.lesson_id = "L%d" % lesson_number
+		context.lesson_title = BBCodeUtils.get_lesson_title(lesson)
+		context.practice_id = "P%d" % (BBCodeUtils.get_practice_index(lesson, resource) + 1)
+		context.practice_title = BBCodeUtils.get_practice_title(resource)
 		context.file_path = resource.bbcode_path
 	elif resource:
 		var lesson_number := course_index.get_lesson_number(resource.bbcode_path)
-		context.lesson_title = "L%d. %s" % [lesson_number, BBCodeUtils.get_lesson_title(resource)]
+		context.lesson_id = "L%d" % lesson_number
+		context.lesson_title = BBCodeUtils.get_lesson_title(resource)
 		context.file_path = resource.bbcode_path
 	if screen is UIPractice:
 		context.user_code = screen.get_user_code()
