@@ -14,6 +14,7 @@ This document lists changes between releases.
 ## Bug fixes
 
 - On GDSchool, fix the fullscreen button not working when the page was already fullscreen
+- Fix Spanish lessons stopping at 22
 
 ## Learn GDScript From Zero 2.0.0 (2026-08-07)
 

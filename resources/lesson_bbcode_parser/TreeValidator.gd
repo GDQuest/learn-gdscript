@@ -82,7 +82,7 @@ func _validate_glossary_terms(node: BBCodeParser.ParseNode) -> void:
 	if node.tag == _parser_data.Tag.GLOSSARY:
 		var term: String = node.attributes.get("term", "")
 		if not _glossary.has(term):
-			_result.add_error("Unknown glossary term '%s'" % term, node.line_number)
+			_result.add_warning("Unknown glossary term '%s'" % term, node.line_number)
 
 	for child in node.children:
 		if child is BBCodeParser.ParseNode:

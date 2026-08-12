@@ -19,20 +19,25 @@ func _ready() -> void:
 
 	var tr_blocks_set := { }
 	var failures := { }
+	var warnings := { }
 	var lessons_count := course_index.get_lessons_count()
 
 	for locale: String in locales:
 		var catalog_path := "res://i18n/%s/course.po" % locale
 		tr_blocks_set[locale] = SHARED.build_tr_lookup(SHARED.build_tr_blocks(catalog_path))
 		failures[locale] = { }
+		warnings[locale] = { }
 
 	for lesson_index in lessons_count:
 		var lesson_path := course_index.get_lesson_path(lesson_index)
 		var source_result := parser.parse_file(lesson_path)
 		if not source_result.is_success():
 			failures["en"] = failures.get("en", { })
-			failures["en"][lesson_path] = _format_errors(source_result)
+			failures["en"][lesson_path] = _format_messages(source_result.errors)
 			continue
+		if not source_result.warnings.is_empty():
+			warnings["en"] = warnings.get("en", { })
+			warnings["en"][lesson_path] = _format_messages(source_result.warnings)
 
 		var lesson: BBCodeParser.ParseNode = source_result.root.children[0]
 		for locale: String in locales:
@@ -44,9 +49,11 @@ func _ready() -> void:
 			var translated_path := "%s.%s.bbcode" % [lesson_path.get_basename(), locale]
 			var translated_result := parser.parse_text(translated_text, translated_path)
 			if not translated_result.is_success():
-				failures[locale][lesson_path] = _format_errors(translated_result)
+				failures[locale][lesson_path] = _format_errors(translated_result.errors)
+			if not translated_result.warnings.is_empty():
+				warnings[locale][lesson_path] = _format_messages(translated_result.warnings)
 
-	_print_report(failures, locales, lessons_count)
+	_print_report(failures, warnings, locales, lessons_count)
 
 	var has_failures := false
 	for locale: String in failures:
@@ -57,32 +64,56 @@ func _ready() -> void:
 	get_tree().quit(1 if has_failures else 0)
 
 
-func _format_errors(result: BBCodeParser.ParseResult) -> PackedStringArray:
-	var errors := PackedStringArray()
-	for error: BBCodeParser.ParseError in result.errors:
-		errors.append(error.format())
-	return errors
+func _format_messages(messages: Array) -> PackedStringArray:
+	var formatted_messages := PackedStringArray()
+	for message: BBCodeParser.ParseError in messages:
+		formatted_messages.append(message.format())
+	return formatted_messages
 
 
-func _print_report(failures: Dictionary, locales: PackedStringArray, lessons_count: int) -> void:
+func _print_report(
+	failures: Dictionary,
+	warnings: Dictionary,
+	locales: PackedStringArray,
+	lessons_count: int,
+) -> void:
 	var failure_count := 0
 	for locale: String in failures:
 		failure_count += failures[locale].size()
+	var warning_count := 0
+	for locale: String in warnings:
+		for lesson_path in warnings[locale]:
+			warning_count += warnings[locale][lesson_path].size()
 
-	if failure_count == 0:
+	if failure_count == 0 and warning_count == 0:
 		print(
 			"No errors found! Validated %d translated lessons across %d locales."
 			% [lessons_count, locales.size()]
 		)
 		return
 
-	print("Translated lesson parse failures: %d" % failure_count)
-	for locale: String in failures:
-		var locale_failures: Dictionary = failures[locale]
-		if locale_failures.is_empty():
+	print(
+		"Validated %d translated lessons across %d locales: %d error(s), %d warning(s)."
+		% [lessons_count, locales.size(), failure_count, warning_count]
+	)
+	_print_diagnostics("Translated lesson parse failures", failures)
+	_print_diagnostics("Translated lesson parse warnings", warnings)
+
+
+func _print_diagnostics(title: String, diagnostics: Dictionary) -> void:
+	var diagnostic_count := 0
+	for locale: String in diagnostics:
+		diagnostic_count += diagnostics[locale].size()
+	if diagnostic_count == 0:
+		return
+
+	print("%s: %d" % [title, diagnostic_count])
+	for locale: String in diagnostics:
+		var locale_diagnostics: Dictionary = diagnostics[locale]
+		if locale_diagnostics.is_empty():
 			continue
-		print("\n%s (%d)" % [locale, locale_failures.size()])
-		for lesson_path in locale_failures:
+		print("\n%s (%d)" % [locale, locale_diagnostics.size()])
+		for lesson_path in locale_diagnostics:
 			print("  %s" % lesson_path)
-			for error: String in locale_failures[lesson_path]:
-				print("    %s" % error)
+			for message: String in locale_diagnostics[lesson_path]:
+				print("    %s" % message)
