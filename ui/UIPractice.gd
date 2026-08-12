@@ -6,11 +6,10 @@ signal test_student_code_completed
 
 const RUN_AUTOTIMER_DURATION := 5.0
 const SLIDE_TRANSITION_DURATION := 0.5
-# Maximum allowed iterations in while loops to prevent infinite loops.
-#
-# Keep this number low to avoid freezing the app if the student calls print() in
-# the loop.
-const MAX_WHILE_LOOP_ITERATIONS := 100
+## Maximum allowed iterations in loops to prevent infinite loops. Keep this
+## number low to avoid big slowdowns if the student calls print() e.g. in a
+## nested loop.
+const MAX_LOOP_ITERATIONS := 100
 
 const PracticeHintScene := preload("screens/practice/PracticeHint.tscn")
 const PracticeListPopup := preload("components/popups/PracticeListPopup.gd")
@@ -385,8 +384,8 @@ func _validate_and_run_student_code() -> void:
 		MessageBus.print_script_error(error, script_file_name)
 		_code_editor.unlock_editor()
 		return
-	# Check for infinite while loops
-	if analyzer.has_infinite_while_loop():
+	var ast_analysis_result := analyzer.analyze_ast()
+	if ast_analysis_result.has_infinite_loop:
 		var error := ScriptError.new()
 		error.message = tr(
 			"You have a loop that runs forever without a break statement. This would freeze the app.",
@@ -435,31 +434,12 @@ func _validate_and_run_student_code() -> void:
 
 	script_text = MessageBus.replace_print_calls_in_script(script_file_name, script_text)
 
-	# Guard against infinite while loops
-	if "while " in script_text:
-		var modified_code := PackedStringArray()
-		var guard_counter = 0
-		for line in script_text.split("\n"):
-			if "while " in line and not line.strip_edges(true, false).begins_with("#"):
-				var indent := 0
-				while line[indent] == "\t":
-					indent += 1
-
-				var tabs := "\t".repeat(indent)
-				var guard_counter_varname := "__guard_counter" + str(guard_counter)
-				guard_counter += 1
-				modified_code.append(tabs + "var " + guard_counter_varname + " := 0")
-				modified_code.append(line)
-				modified_code.append(tabs + "\t" + guard_counter_varname + " += 1")
-				modified_code.append(
-					tabs + "\t" + "if " + guard_counter_varname
-					+ " > %s:" % MAX_WHILE_LOOP_ITERATIONS,
-				)
-				modified_code.append(tabs + "\t\t" + "break")
-			else:
-				modified_code.append(line)
-		script_text = "\n".join(modified_code)
-	elif REGEX_DIVSION_BY_ZERO.search(script_text):
+	var lines_loop_start := ast_analysis_result.lines_loop_start
+	if script_is_desynced_by_one_line:
+		for index in lines_loop_start.size():
+			lines_loop_start[index] -= 1
+	script_text = _add_counters_to_loops(script_text, lines_loop_start)
+	if REGEX_DIVSION_BY_ZERO.search(script_text):
 		var error := ScriptError.new()
 		error.message = tr(
 			'There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no "/ 0" or "% 0" in your code.',
@@ -497,6 +477,32 @@ func _validate_and_run_student_code() -> void:
 	# nodes potentially. This could now be removed.
 	var nodes_paths := [NodePath("")]
 	_update_nodes(script, nodes_paths)
+
+
+## Updates the source code by adding counters that force the loop to break in
+## case we reach the maximum allowed iteration count.
+static func _add_counters_to_loops(script_text: String, lines_loop_start: Array[int]) -> String:
+	var modified_code := PackedStringArray()
+	var current_loop_index := 0
+	var lines := script_text.split("\n")
+	for current_line_index in lines.size():
+		var line: String = lines[current_line_index]
+		if not lines_loop_start.has(current_line_index + 1):
+			modified_code.append(line)
+			continue
+
+		var indent := line.length() - line.lstrip("\t").length()
+		var tabs := "\t".repeat(indent)
+		var guard_counter_varname := "__gdquest_loop_guard_" + str(current_loop_index)
+		current_loop_index += 1
+		modified_code.append(tabs + "var " + guard_counter_varname + " := 0")
+		modified_code.append(line)
+		modified_code.append(tabs + "\t" + guard_counter_varname + " += 1")
+		modified_code.append(
+			tabs + "\tif " + guard_counter_varname + " >= %s:" % MAX_LOOP_ITERATIONS,
+		)
+		modified_code.append(tabs + "\t\tbreak")
+	return "\n".join(modified_code)
 
 
 func _test_student_code() -> void:
@@ -583,11 +589,21 @@ func _disable_distraction_free_mode() -> void:
 
 	_scene_tween = create_tween().set_parallel()
 	_scene_tween \
-			.tween_property(_info_panel_anchors, "size_flags_stretch_ratio", 1.0, SLIDE_TRANSITION_DURATION) \
+			.tween_property(
+		_info_panel_anchors,
+		"size_flags_stretch_ratio",
+		1.0,
+		SLIDE_TRANSITION_DURATION,
+	) \
 			.from(_info_panel_anchors.size_flags_stretch_ratio) \
 			.set_trans(Tween.TRANS_SINE)
 	_scene_tween \
-			.tween_property(_code_editor, "size_flags_stretch_ratio", 1.0, SLIDE_TRANSITION_DURATION) \
+			.tween_property(
+		_code_editor,
+		"size_flags_stretch_ratio",
+		1.0,
+		SLIDE_TRANSITION_DURATION,
+	) \
 			.from(_code_editor.size_flags_stretch_ratio) \
 			.set_trans(Tween.TRANS_SINE)
 	_scene_tween \
@@ -607,15 +623,30 @@ func _enable_distraction_free_mode() -> void:
 	_scene_tween = create_tween().set_parallel()
 
 	_scene_tween \
-			.tween_property(_info_panel_anchors, "size_flags_stretch_ratio", 0.0, SLIDE_TRANSITION_DURATION) \
+			.tween_property(
+		_info_panel_anchors,
+		"size_flags_stretch_ratio",
+		0.0,
+		SLIDE_TRANSITION_DURATION,
+	) \
 			.from(_info_panel_anchors.size_flags_stretch_ratio) \
 			.set_trans(Tween.TRANS_SINE)
 	_scene_tween \
-			.tween_property(_code_editor, "size_flags_stretch_ratio", 2.0, SLIDE_TRANSITION_DURATION) \
+			.tween_property(
+		_code_editor,
+		"size_flags_stretch_ratio",
+		2.0,
+		SLIDE_TRANSITION_DURATION,
+	) \
 			.from(_code_editor.size_flags_stretch_ratio) \
 			.set_trans(Tween.TRANS_SINE)
 	_scene_tween \
-			.tween_property(_info_panel_anchors, "modulate:a", 0.0, SLIDE_TRANSITION_DURATION - 0.25) \
+			.tween_property(
+		_info_panel_anchors,
+		"modulate:a",
+		0.0,
+		SLIDE_TRANSITION_DURATION - 0.25,
+	) \
 			.from(_info_panel_anchors.modulate.a) \
 			.set_ease(Tween.EASE_IN) \
 			.set_delay(0.15)
@@ -657,7 +688,12 @@ func _hide_solution_panel() -> void:
 	_scene_tween = create_tween().set_parallel()
 
 	_scene_tween \
-			.tween_property(_solution_panel, "offset_left", _output_anchors.size.x, SLIDE_TRANSITION_DURATION) \
+			.tween_property(
+		_solution_panel,
+		"offset_left",
+		_output_anchors.size.x,
+		SLIDE_TRANSITION_DURATION,
+	) \
 			.from(_solution_panel.offset_left) \
 			.set_trans(Tween.TRANS_SINE)
 	_scene_tween \
