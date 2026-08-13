@@ -33,7 +33,11 @@ Are there any differences? Whether it's one letter, an underscore ('_'), or a ca
 "UNSAFE_CALL_ARGUMENT",,
 "DEPRECATED_KEYWORD",,
 "STANDALONE_TERNARY",,
-"INVALID_OPERATOR_USAGE",,
+"INVALID_OPERATOR_USAGE","This error message tells you that the values you used with an operator are not compatible with each other. For example, you can add two [code]Vector2[/code] values together, but you cannot add a [code]Vector2[/code] and an [code]int[/code] (a whole number) like [code]Vector2(1, 1) + 3[/code].
+
+Operators are like recipes: each one only works with specific ingredients (kinds of values). The [code]+[/code] operator knows how to combine two numbers, or two vectors, but it cannot mix a vector and a number. For numeric values, the rules usually follow the ones you've learned in math classes: you can multiply, divide, or add numbers together. You can multiply or divide a [code]Vector2[/code] by a number. And so on.","First, identify the two values the error message points to. Are they compatible? If you're adding or subtracting, they should be the same type: two numbers or two vectors.
+
+When working with variables, think about the value they hold. [code]position[/code], for example, holds a [code]Vector2[/code], so you can add another [code]Vector2[/code] to it directly: [code]position = position + Vector2(1, 1)[/code]. Or you can change one component, like [code]position.x = position.x + 1[/code]."
 "MISPLACED_STATIC_CALL",,
 "IN_EXPECTED_AFTER_IDENTIFIER","You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword.
 
