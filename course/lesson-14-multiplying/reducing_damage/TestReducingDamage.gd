@@ -39,11 +39,19 @@ func test_multiplication_is_used_to_reduce_damage_amount() -> String:
 
 	if not GDExpr.suite(
 		GDExpr.if_block(
-			# condition: level > 2
-			GDExpr.bin_op(
-				GDExpr.identifier("level"),
-				GDExpr.literal(2),
-				GDBinaryOpNode.OpType.OP_COMP_GREATER
+			GDExpr.any_of(
+				# condition: level > 2
+				GDExpr.bin_op(
+					GDExpr.identifier("level"),
+					GDExpr.literal(2),
+					GDBinaryOpNode.OpType.OP_COMP_GREATER
+				),
+				# condition: level >= 3
+				GDExpr.bin_op(
+					GDExpr.identifier("level"),
+					GDExpr.literal(3),
+					GDBinaryOpNode.OpType.OP_COMP_GREATER_EQUAL
+				)
 			),
 			# truth block
 			GDExpr.suite(
@@ -81,4 +89,3 @@ func test_damage_amount_is_correct_value() -> String:
 		else:
 			return tr("The character appears to be taking 0 damage when its level is less than 3. Did you subtract the amount to health when the level is less than 3?")
 	return ""
-
