@@ -11,6 +11,16 @@ func _prepare() -> void:
 	path = game_board.turtle_path
 
 
+func _prevalidate(invalid_errors: Array[String]) -> bool:
+	_prepare()
+	
+	if not path.all(func(point) -> bool: return point is Vector2):
+		invalid_errors.append(tr("Path contains values that are not Vector2"))
+		return false
+	
+	return true
+
+
 func _define(checks: Array[Check]) -> void:
 	checks.append(Check.new(tr("Path Is Contiguous"), tr(""), test_path_is_contiguous))
 	checks.append(Check.new(tr("Turtle Reaches The Robot"), tr(""), test_turtle_reaches_the_robot))
@@ -44,4 +54,3 @@ func test_path_does_not_hit_obstacles() -> String:
 		if obstacle in path:
 			return tr("The turtle hit a rock at coordinates %s. You need to change its path.") % obstacle
 	return ""
-

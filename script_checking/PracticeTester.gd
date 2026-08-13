@@ -21,6 +21,7 @@ var _code_lines := []
 var _checker: GDScriptErrorChecker
 var _analyzer: GDScriptASTAnalyzer
 var _checks: Array[Check]
+var _invalid_messages: Array[String] = []
 
 
 # We're not using _init() because it doesn't work unless you define it and call the parent's constructor in child classes. It would add boilerplate to every PracticeTester script.
@@ -38,6 +39,19 @@ func _define(checks: Array[Check]) -> void
 
 func get_test_names() -> Array:
 	return _checks.map(func (check: Check) -> Dictionary: return {"description": check._description, "tooltip": check._tooltip})
+
+
+func prevalidate(node: Node) -> bool:
+	_prepare()
+	var node_script: Script = node.get_script()
+	var script_path := ""
+	if node_script and node_script is GDScript:
+		script_path = (node_script as GDScript).resource_path.get_file()
+	if not _prevalidate(_invalid_messages):
+		for message in _invalid_messages:
+			MessageBus.print_error(message, script_path)
+		return false
+	return true
 
 
 func _update_analyzer() -> void:
@@ -94,6 +108,13 @@ func _prepare() -> void:
 # Called after running tests.
 func _clean_up() -> void:
 	pass
+
+
+# Virtual method.
+# Called right before _run. Sets a flag if the script is invalid
+@warning_ignore("unused_parameter")
+func _prevalidate(invalid_errors: Array[String]) -> bool:
+	return true
 
 
 # Returns true if a line in the input `code` matches one of the `target_lines`.

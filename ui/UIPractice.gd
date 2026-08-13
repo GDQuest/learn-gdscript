@@ -532,6 +532,10 @@ func _test_student_code() -> void:
 		_practice_done_popup.fade_in(_game_container)
 
 	# Clean-up.
+	_cleanup_post_test()
+
+
+func _cleanup_post_test() -> void:
 	_code_editor.unlock_editor()
 	if _practice_completed:
 		_code_editor.set_continue_allowed(true)
@@ -803,7 +807,7 @@ func _update_nodes(script: GDScript, node_paths: Array) -> void:
 # If a script is valid, sets it in the node and optionally calls _run()
 # @param node         Node                  any valid node
 # @param script       GDScript              A GDScript instance
-static func try_validate_and_replace_script(node: Node, script: GDScript) -> void:
+func try_validate_and_replace_script(node: Node, script: GDScript) -> void:
 	if not script.can_instantiate():
 		var error_code := script.reload()
 		if not script.can_instantiate():
@@ -822,10 +826,19 @@ static func try_validate_and_replace_script(node: Node, script: GDScript) -> voi
 	_restore_properties(node, properties)
 
 	parent.call_deferred("add_child", node)
+	
+	_run_if_valid.call_deferred(node)
 
-	if node.has_method("_run"):
-		# warning-ignore:unsafe_method_access
-		node.call_deferred("_run")
+
+func _run_if_valid(target_node: Node) -> void:
+	if target_node.has_method("_run"):
+		if _tester.prevalidate(target_node):
+				@warning_ignore("unsafe_method_access")
+				target_node._run()
+		else:
+			_run_tests_requested = false
+			Events.practice_completed.emit(_practice)
+			_cleanup_post_test()
 
 
 static func _get_properties(node: Node) -> Array[Dictionary]:
