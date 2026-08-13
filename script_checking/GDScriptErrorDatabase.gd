@@ -75,12 +75,12 @@ static func _load_errors(file_path: String) -> void:
 
 		var error_code := line[identifier_index]
 		var error_value := -1
-		if GDScriptCodes.WarningCode.has(error_code):
-			error_value = GDScriptCodes.WarningCode[error_code]
-		elif GDScriptCodes.ErrorCode.has(error_code):
+		if GDScriptCodes.ErrorCode.has(error_code):
 			error_value = GDScriptCodes.ErrorCode[error_code]
 		elif GDQuestCodes.ErrorCode.has(error_code):
 			error_value = GDQuestCodes.ErrorCode[error_code]
+		elif GDScriptCodes.WarningCode.has(error_code):
+			error_value = GDScriptCodes.WarningCode[error_code]
 
 		# Unknown error name, report it and continue.
 		if error_value == -1:
