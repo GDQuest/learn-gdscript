@@ -91,7 +91,10 @@ func _send_report() -> void:
 	if OS.has_feature("linux"):
 		platform = "Linux"
 	_context.platform = _context.platform if not _context.platform.is_empty() else platform
-	_context.commit_hash = AppVersion.git_commit.substr(0, 7)
+	
+	var app_version := ProjectSettings.get_global_class_list().filter(func(cls: Dictionary) -> bool: return cls.class == &"AppVersion")
+	if app_version and app_version.front():
+		_context.commit_hash = app_version.front().git_commit.substr(0, 7)
 
 	const INDEX_TRANSLATION_ISSUE_TYPE := 3
 	if _category_option.selected == INDEX_TRANSLATION_ISSUE_TYPE:
