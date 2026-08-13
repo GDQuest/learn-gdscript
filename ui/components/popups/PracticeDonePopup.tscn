@@ -6,8 +6,8 @@
 [ext_resource type="StyleBox" uid="uid://bkqtmumr5t28" path="res://ui/theme/styles/button_outline_large_pressed.tres" id="6"]
 [ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/styles/panel_normal.tres" id="7"]
 [ext_resource type="StyleBox" uid="uid://b45mlqutqarjn" path="res://ui/theme/styles/button_outline_large_normal.tres" id="8"]
-[ext_resource type="Texture2D" uid="uid://4vhntrekux0x" path="res://ui/assets/gdquestboy_logo.svg" id="9_c7wsq"]
 [ext_resource type="StyleBox" uid="uid://bsrxxsifsyu4k" path="res://ui/theme/styles/focus_accent.tres" id="10"]
+[ext_resource type="PackedScene" uid="uid://clgi7v3ulsotm" path="res://ui/components/GDQuestLogo.tscn" id="10_63afv"]
 [ext_resource type="StyleBox" uid="uid://dvsoekg7egexu" path="res://ui/theme/styles/gdquestboy_frame.tres" id="11"]
 [ext_resource type="StyleBox" uid="uid://dhdt5bfr2nel5" path="res://ui/theme/styles/button_outline_large_accent.tres" id="13"]
 
@@ -156,11 +156,8 @@ theme_override_constants/margin_bottom = 60
 [node name="TextureRect" type="TextureRect" parent="Layout/GameAnchors/GameContainer/MarginContainer" unique_id=308777983]
 layout_mode = 2
 
-[node name="Label" type="TextureRect" parent="Layout/GameAnchors/GameContainer" unique_id=943128069]
-custom_minimum_size = Vector2(210, 48)
+[node name="GDQuestLogo" parent="Layout/GameAnchors/GameContainer" unique_id=578597453 instance=ExtResource("10_63afv")]
+modulate = Color(0.572549, 0.560784, 0.721569, 1)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 8
-texture = ExtResource("9_c7wsq")
-expand_mode = 1
-stretch_mode = 4
+stretch_mode = 5
