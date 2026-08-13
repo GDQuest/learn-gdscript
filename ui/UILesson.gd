@@ -265,6 +265,7 @@ func _open_glossary_popup(meta: String) -> void:
 ## Creates a RichTextLabel instance to use for the lesson content.
 func _create_lesson_rich_text_label() -> RichTextLabel:
 	var instance: RichTextLabel = RichTextLabelRTL.new()
+	instance.meta_clicked.connect(_open_glossary_popup)
 	instance.fit_content = true
 	instance.scroll_active = false
 	instance.bbcode_enabled = true
@@ -281,7 +282,6 @@ func _make_paragraph(
 	var instance: RichTextLabel = _previous_paragraph
 	if not _previous_paragraph:
 		instance = _create_lesson_rich_text_label()
-		instance.meta_clicked.connect(_open_glossary_popup)
 		_previous_paragraph = instance
 
 	var text_content := BBCodeUtils.get_paragraph_text(node)
