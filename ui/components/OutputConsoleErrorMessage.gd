@@ -22,7 +22,6 @@ var origin_char := -1:
 @onready var _severity_label: Label = %MessageSeverity
 @onready var _message_label: Label = %MessageValue
 @onready var _location_row: Control = %LocationRow
-@onready var _file_name_label: Label = %FileName
 @onready var _location_label: Label = %CodeLocation
 @onready var _external_label: RichTextLabel = %ExternalError
 @onready var _message_explain_button: Button = %ExplainButton
@@ -52,8 +51,7 @@ func _update_visuals() -> void:
 		_external_label.show()
 	else:
 		_external_label.hide()
-		_file_name_label.text = origin_file
-		_location_label.text = "line %d, column %d" % [origin_line + 1, origin_char]
+		_location_label.text = "line %d" % [origin_line + 1]
 		_location_row.show()
 
 	match message_severity:
