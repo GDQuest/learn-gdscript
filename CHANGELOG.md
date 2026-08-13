@@ -9,13 +9,17 @@ This document lists changes between releases.
 
 - Improved recursive call detection to help prevent infinite loops in GDScript. It will now catch many more cases of recursive calls that could cause the app to freeze.
 - Added infinite loop detection to for loops.
-- L14.P1, L15.P1, L21.P1, L22.P1: add explicit mention of how or many times the function will be called
+- Added explanation for error message "Function x not found in base y."
+- L14.P1, L15.P1, L21.P1, L22.P1: add explicit mention of how or many times the function will be called.
 - L15.P1: Edit misleading check (#883)
 
 ## Bug fixes
 
-- On GDSchool, fix the fullscreen button not working when the page was already fullscreen
-- Fix Spanish lessons stopping at 22
+- On GDSchool, fix the fullscreen button not working when the page was already fullscreen.
+- Fix Spanish lessons stopping at 22.
+- L3: Fixed two glossary terms not showing anything on click.
+- L18.P1: Fixed invalid code in array passing the practice.
+- L14.P2: Fixed level >= 3 failing passing the practice despite being valid code.
 
 ## Learn GDScript From Zero 2.0.0 (2026-08-07)
 

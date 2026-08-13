@@ -21,7 +21,14 @@
 "FUNCTION_USED_AS_PROPERTY",,
 "INTEGER_DIVISION",,
 "UNSAFE_PROPERTY_ACCESS",,
-"UNSAFE_METHOD_ACCESS",,
+"UNSAFE_METHOD_ACCESS","This error message tells you that Godot did not find the function you are trying to call. This either means that:
+
+1. The function does not exist.
+2. There is a typo in the name of the function you are trying to call.
+
+While we humans can read words even when they are spelled incorrectly, the computer only understands exact matches. For a computer, [i]3[/i] and [i]three[/i] or [i]foward[/i] (missing an [i]r[/i]) and [i]forward[/i] are not the same thing.","Look at the function name in the error message. Carefully compare it with the function names listed in the practice goals or the functions already in your code.
+
+Are there any differences? Whether it's one letter, an underscore ('_'), or a capital letter? If you spot any differences, change the function name in your code."
 "UNSAFE_CAST",,
 "UNSAFE_CALL_ARGUMENT",,
 "DEPRECATED_KEYWORD",,
