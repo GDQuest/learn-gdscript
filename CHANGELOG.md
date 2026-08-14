@@ -2,7 +2,7 @@
 
 This document lists changes between releases.
 
-## In development: Learn GDScript From Zero 2.0.1
+## In development: Learn GDScript From Zero 2.1.0
 
 
 ## Improvements and changes
@@ -11,6 +11,8 @@ This document lists changes between releases.
 - Added infinite loop detection to for loops.
 - Added explanation for error message "Function x not found in base y."
 - Added explanation for error message "Invalid operands 'x' and 'y' for assignment operator."
+- Added Tamil and Khmer fonts for Tamil and Central Khmer translations, so the app now supports both languages.
+- Simplified error display in practice screen.
 - L14.P1, L15.P1, L21.P1, L22.P1: add explicit mention of how or many times the function will be called.
 - L15.P1: Edit misleading check (#883)
 
@@ -18,9 +20,11 @@ This document lists changes between releases.
 
 - On GDSchool, fix the fullscreen button not working when the page was already fullscreen.
 - Fix Spanish lessons stopping at 22.
+- Fixed walking over brace undoing text written inside freshly inserted code.
 - L3: Fixed two glossary terms not showing anything on click.
-- L18.P1: Fixed invalid code in array passing the practice.
+- L6.P3: Fixed loops with incorrect output allowing passing the practice.
 - L14.P2: Fixed level >= 3 failing passing the practice despite being valid code.
+- L18.P1: Fixed invalid code in array passing the practice.
 
 ## Learn GDScript From Zero 2.0.0 (2026-08-07)
 
