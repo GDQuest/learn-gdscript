@@ -49,7 +49,7 @@ func _ready() -> void:
 			var translated_path := "%s.%s.bbcode" % [lesson_path.get_basename(), locale]
 			var translated_result := parser.parse_text(translated_text, translated_path)
 			if not translated_result.is_success():
-				failures[locale][lesson_path] = _format_errors(translated_result.errors)
+				failures[locale][lesson_path] = _format_messages(translated_result.errors)
 			if not translated_result.warnings.is_empty():
 				warnings[locale][lesson_path] = _format_messages(translated_result.warnings)
 
