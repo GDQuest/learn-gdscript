@@ -1,4 +1,4 @@
-extends PracticeTester
+extends DrawingTurtlePracticeTester
 
 var expected_rects := [
 	[Vector2(0, 0), Vector2(260, 0), Vector2(260, 180), Vector2(0, 180), Vector2(0, 0)],
@@ -10,12 +10,8 @@ var swapped_rects := [
 ]
 
 
-# We sort vertices for accurate comparison
-func _init() -> void:
-	for rect in expected_rects:
-		rect.sort()
-	for rect in swapped_rects:
-		rect.sort()
+func _get_turtle() -> DrawingTurtle:
+	return _scene_root_viewport.get_child(0)
 
 
 func _define(checks: Array[Check]) -> void:
@@ -23,27 +19,22 @@ func _define(checks: Array[Check]) -> void:
 
 
 func test_draw_rectangles_of_varying_sizes() -> String:
-	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
-	var polygons := turtle.get_polygons()
-	if polygons.is_empty():
-		return tr("The turtle did not draw anything. Make sure your function calls move_forward() with the length and height parameters.")
-	for index in polygons.size():
-		var p = polygons[index]
-		var points = Array(p.get_points())
-		# We make all points absolute in case the user turns counter-clockwise when
-		# making the shape.
-		for i in points.size():
-			points[i] = points[i].abs()
-		points.sort()
-		var points_count = points.size()
-		if points_count > 5:
-			return tr("The drawn shape has too many points. Did you call move_forward() more than 4 times?")
-		elif points_count < 5:
+	if shape_count_is(0):
+		return tr("The turtle did not draw anything. Make sure your function calls move_forward(length) to move the turtle.")
+	if shape_count_fewer_than(2):
+		return tr("The turtle drew fewer than 2 shapes. Make sure your function is repeatable.")
+	if shape_count_greater_than(2):
+		return tr("The turtle drew more than 2 shapes. Make sure your function only draws one shape.")
+	
+	var shape_count := get_shape_count()
+	for index in shape_count:
+		if shape_has_fewer_than(index, 5):
 			return tr("The drawn shape has too few points. Did you call move_forward() less than 4 times?")
-
-		if points == swapped_rects[index]:
+		if shape_has_greater_than(index, 5):
+			return tr("The drawn shape has too many points. Did you call move_forward() more than 4 times?")
+		
+		if shape_is(index, swapped_rects[index]):
 			return tr("The length and height are inverted. Did you swap the length and height function arguments?")
-		elif points != expected_rects[index]:
+		if not shape_is(index, expected_rects[index]):
 			return tr("The drawn shapes don't have the expected length and height. Did you forget to use the length and height parameter?")
 	return ""
-

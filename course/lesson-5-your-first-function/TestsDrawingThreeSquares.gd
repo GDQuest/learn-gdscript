@@ -1,12 +1,12 @@
-extends PracticeTester
+extends DrawingTurtlePracticeTester
 
 var target_polygon := [
 	Vector2(0, 0), Vector2(200, 0), Vector2(200, 200), Vector2(0, 200), Vector2(0, 0)
 ]
 
 
-func _init() -> void:
-	target_polygon.sort()
+func _get_turtle() -> DrawingTurtle:
+	return _scene_root_viewport.get_child(0)
 
 
 func _define(checks: Array[Check]) -> void:
@@ -14,55 +14,42 @@ func _define(checks: Array[Check]) -> void:
 
 
 func test_draw_three_squares_of_200_pixels() -> String:
-	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
-	var polygons := turtle.get_polygons()
-	if polygons.is_empty():
+	if shape_count_is(0):
 		return tr("Nothing drawn. Did you not call draw_square()?")
 
-	var count := polygons.size()
-	if count == 1:
+	if shape_count_is(1):
 		return tr("You only drew one square. You need to draw three.")
-	elif count < 3:
+	elif shape_count_fewer_than(3):
 		return tr("You need to draw three squares.")
-	elif count == 4:
-		if not polygons.back().is_empty():
+	elif shape_count_is(4):
+		if not shape_is(3, []):
 			return tr("You drew more than three squares. You need to draw only three!")
-	elif count > 4:
+	elif shape_count_greater_than(4):
 		return tr("You drew more than three squares. You need to draw only three!")
 
-	var index := 1
-	for p in polygons:
-		var points = Array(p.get_points())
-		
-		if points.size() < target_polygon.size():
+	var shape_count := get_shape_count()
+	for index in shape_count:
+		if shape_has_fewer_than(index, target_polygon.size()):
 			return(
 				tr("Shape3D number %s has too few corners! Did you change the draw_square() function?")
 				% index
 			)
-		elif points.size() > target_polygon.size():
+		if shape_has_greater_than(index, target_polygon.size()):
 			return(
 				tr("Shape3D number %s has too many corners! Did you change the draw_square() function?")
 				% index
 			)
-		
-		# We make all points absolute in case the user turns counter-clockwise when
-		# making the shape.
-		for i in points.size():
-			points[i] = points[i].abs()
-		points.sort()
-		if points != target_polygon:
+		if not shape_is(index, target_polygon):
 			return (
 				tr("Shape3D number %s is not a square of length 200 pixels. Did you change the draw_square() function?")
 				% index
 			)
-		index += 1
-		if index == 4:
-			break
 
+	var turtle := _get_turtle()
 	for first_index in range(3):
-		var first_rect: Rect2 = polygons[first_index].get_positioned_rect()
+		var first_rect: Rect2 = turtle.get_polygons()[first_index].get_positioned_rect()
 		for second_index in range(first_index + 1, 3):
-			var second_rect: Rect2 = polygons[second_index].get_positioned_rect()
+			var second_rect: Rect2 = turtle.get_polygons()[second_index].get_positioned_rect()
 			if first_rect.intersects(second_rect):
 				return tr("The squares should not overlap. Did you move the turtle between drawing each square?")
 	return ""

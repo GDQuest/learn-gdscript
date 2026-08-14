@@ -1,5 +1,5 @@
 # Test that the user draws 3 squares of 100x100 at 200 pixel intervals on the X axis starting at position (100, 100)
-extends PracticeTester
+extends DrawingTurtlePracticeTester
 
 var expected_rect := [
 	Vector2(0, 0),
@@ -18,8 +18,12 @@ func _init() -> void:
 	expected_rect.sort()
 
 
+func _get_turtle() -> DrawingTurtle:
+	return _scene_root_viewport.get_child(0)
+
+
 func _prepare() -> void:
-	var turtle: DrawingTurtle = _scene_root_viewport.get_child(0)
+	var turtle: DrawingTurtle = _get_turtle()
 	_polygons = turtle.get_polygons()
 	for p in _polygons:
 		var square_points := Array(p.points)
@@ -40,9 +44,8 @@ func _define(checks: Array[Check]) -> void:
 
 
 func test_draw_three_squares() -> String:
-	var count := _polygons.size()
-	if count < 3:
-		return tr("You drew %s squares but you need to draw 3.") % count
+	if not shape_count_is(3):
+		return tr("You drew %s squares but you need to draw 3.") % get_shape_count()
 	return ""
 
 
@@ -77,4 +80,3 @@ func test_shapes_are_100_pixels_apart() -> String:
 	if not is_equal_approx(first_to_second, 200.0) or not is_equal_approx(second_to_third, 200.0):
 		return tr("Shapes are not separated by 100 pixels on the X axis.")
 	return ""
-

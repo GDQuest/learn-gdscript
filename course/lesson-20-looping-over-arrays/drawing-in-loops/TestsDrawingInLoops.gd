@@ -1,4 +1,4 @@
-extends PracticeTester
+extends DrawingTurtlePracticeTester
 
 var expected_rects := [
 	[Vector2(0, 0), Vector2(200, 0), Vector2(200, 120), Vector2(0, 120), Vector2(0, 0)],
@@ -15,6 +15,10 @@ var count := -1
 func _init() -> void:
 	for rect in expected_rects:
 		rect.sort()
+
+
+func _get_turtle() -> DrawingTurtle:
+	return _scene_root_viewport.get_child(0)
 
 
 func _prepare() -> void:
@@ -39,11 +43,11 @@ func _define(checks: Array[Check]) -> void:
 
 
 func test_rectangles_have_the_correct_size() -> String:
-	if count != expected_rects.size():
-		return tr("We expected 4 polygons, but you drew %s instead.") % count
+	if not shape_count_is(expected_rects.size()):
+		return tr("We expected 4 polygons, but you drew %s instead.") % get_shape_count()
 
-	for index in count:
-		if expected_rects[index] != points[index]:
+	for index in get_shape_count():
+		if not shape_is(index, expected_rects[index]):
 			return tr("At least one of the rectangles does not have the expected size.")
 	return ""
 
@@ -58,4 +62,3 @@ func test_rectangles_do_not_overlap() -> String:
 			return tr("At least two drawn shape intersect. Did you pass arguments big enough to the jump() function?")
 		last_polygon = polygons[index]
 	return ""
-
