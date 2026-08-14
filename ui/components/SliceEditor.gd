@@ -171,41 +171,6 @@ func _on_text_changed() -> void:
 		set_caret_line(_current_line)
 		set_caret_column(column + 1)
 
-	# Automatically close brackets.
-	if _last_typed_character in BRACKET_PAIRS:
-		var closing_bracket: String = BRACKET_PAIRS[_last_typed_character]
-
-		if _last_selected_text:
-			undo()
-			set_caret_line(_last_selection_start.x)
-			set_caret_column(_last_selection_start.y)
-
-			insert_text_at_caret(_last_typed_character)
-
-			set_caret_line(_last_selection_end.x)
-			set_caret_column(_last_selection_end.y + 1)
-
-		insert_text_at_caret(closing_bracket)
-
-		if not _last_selected_text:
-			set_caret_column(get_caret_column() - 1)
-
-		_last_selected_text = ""
-		_last_typed_character = ""
-
-	# Pass over a closing bracket if writing a matching character
-	elif _last_typed_character in BRACKET_PAIRS.values():
-		var line := get_caret_line()
-		var column := get_caret_column()
-		select(line, column, line, column + 1)
-		var character := get_selected_text()
-		deselect()
-		# We walk over existing brackets when typing a matching character.
-		if character == _last_typed_character:
-			_last_typed_character = ""
-			undo()
-			set_caret_column(column)
-
 
 func _on_scrollbar_value_changed(value: float, direction: int) -> void:
 	var vec2 := Vector2(0, value) if direction == SCROLL_DIR.VERTICAL else Vector2(value, 0)

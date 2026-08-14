@@ -66,7 +66,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("6")
-slice_editor = NodePath("Column/PanelContainer/SliceEditor")
 
 [node name="Column" type="VBoxContainer" parent="." unique_id=179585534]
 custom_minimum_size = Vector2(300, 0)
@@ -90,6 +89,8 @@ syntax_highlighter = ExtResource("4_5pr65")
 draw_tabs = true
 draw_spaces = true
 gutters_draw_line_numbers = true
+auto_brace_completion_enabled = true
+auto_brace_completion_highlight_matching = true
 script = ExtResource("1")
 
 [node name="DFMButton" type="Button" parent="Column/PanelContainer" unique_id=1988484876]
