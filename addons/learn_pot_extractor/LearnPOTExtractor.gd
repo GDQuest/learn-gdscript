@@ -84,6 +84,8 @@ func _build_translated_lessons() -> void:
 	var failures := 0
 	var locales := _get_translation_locales()
 	var locale_reports := {}
+	var translated_lesson_outputs := {}
+	var translation_reports_by_file := {}
 	if locales.is_empty():
 		print("Translation build: aborted; no valid locales with a course.po catalog were found.")
 		_building_translated_running = false
@@ -96,6 +98,7 @@ func _build_translated_lessons() -> void:
 		var tr_blocks := SHARED.build_tr_blocks("res://i18n/%s/course.po" % [lang])
 		tr_blocks_set[lang] = SHARED.build_tr_lookup(tr_blocks)
 		locale_reports[lang] = {"count": 0, "total": 0, "completed_lessons": 0, "total_lessons": 0}
+		translated_lesson_outputs[lang] = []
 		await get_tree().process_frame
 
 	var lesson_files := _get_lesson_files()
@@ -118,22 +121,40 @@ func _build_translated_lessons() -> void:
 			if lesson_report.count >= lesson_report.total:
 				locale_reports[lang].completed_lessons += 1
 
-			var new_path := "%s.%s.bbcode" % [file.get_basename(), lang]
-			var output_file := FileAccess.open(new_path, FileAccess.WRITE)
+			translated_lesson_outputs[lang].append({
+				"path": "%s.%s.bbcode" % [file.get_basename(), lang],
+				"text": lesson_text,
+			})
+		translation_reports_by_file[file] = translation_reports
+
+	for lang in locales:
+		var locale_report: Dictionary = locale_reports[lang]
+		var completeness := float(locale_report.count) / float(locale_report.total) if locale_report.total > 0 else 1.0
+		if not SHARED.is_translation_completion_rate_beyond_include_threshold(completeness):
+			for file in lesson_files:
+				var stale_path := "%s.%s.bbcode" % [file.get_basename(), lang]
+				if FileAccess.file_exists(stale_path):
+					DirAccess.remove_absolute(ProjectSettings.globalize_path(stale_path))
+			continue
+		for output in translated_lesson_outputs[lang]:
+			var output_file := FileAccess.open(output.path, FileAccess.WRITE)
 			if not output_file:
 				failures += 1
-				printerr("Translation build: failed to write '%s' (error %d)." % [new_path, FileAccess.get_open_error()])
+				printerr("Translation build: failed to write '%s' (error %d)." % [output.path, FileAccess.get_open_error()])
 				continue
-			output_file.store_string(lesson_text)
+			output_file.store_string(output.text)
 			generated_files += 1
 
+	for file in lesson_files:
+		if not translation_reports_by_file.has(file):
+			continue
 		var meta_path := file.get_basename() + ".meta"
 		var meta_file := FileAccess.open(meta_path, FileAccess.WRITE)
 		if not meta_file:
 			failures += 1
 			printerr("Translation build: failed to write '%s' (error %d)." % [meta_path, FileAccess.get_open_error()])
 			continue
-		meta_file.store_string(JSON.stringify(translation_reports, "\t"))
+		meta_file.store_string(JSON.stringify(translation_reports_by_file[file], "\t"))
 
 	_building_translated_running = false
 	print("Translation build: completed in %.2f seconds. Lessons: %d, locales: %d, generated files: %d, failures: %d." % [_get_elapsed_seconds(started_at), lesson_files.size(), locales.size(), generated_files, failures])

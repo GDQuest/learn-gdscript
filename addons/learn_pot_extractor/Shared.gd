@@ -18,6 +18,23 @@ static var TAG_RE := RegEx.create_from_string(r'\[[^\[]+\]([^\[]+)\[[^\[]+\]')
 static var SPACE_NEWLINE_RE := RegEx.create_from_string(r'\s+\\n')
 static var WHITESPACE_RE := RegEx.create_from_string(r'\s+')
 
+## Completion percentage above which a translation is considered complete enough
+## to include in the next release of the application. We use that as a threshold
+## for building and listing the languages in the settings.
+##
+## This assumes that generally, when people contribute to translations, they
+## translate the lessons linearly, and that this threshold guarantees enough
+## completed lessons to make it worth learners' time.
+##
+## In the future, this could be replaced with actually verifying that lessons
+## are completed because we do count that and display that information in the
+## UI.
+const TRANSLATION_COMPLETENESS_THRESHOLD := 0.8
+
+
+static func is_translation_completion_rate_beyond_include_threshold(completeness: float) -> bool:
+	return completeness >= TRANSLATION_COMPLETENESS_THRESHOLD
+
 
 ## Parses a PO file and merges repeated message IDs while retaining all source references.
 static func build_tr_blocks(po_file: String) -> Array[Dictionary]:

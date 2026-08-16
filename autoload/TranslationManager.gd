@@ -4,6 +4,7 @@ signal translation_changed()
 
 const I18N_ROOT := "res://i18n"
 const PO_EXTENSION := "po"
+const SHARED := preload("res://addons/learn_pot_extractor/Shared.gd")
 # OS.get_locale() is available, if we want to guess the language based on the OS setting.
 const DEFAULT_LOCALE := "en"
 
@@ -39,7 +40,7 @@ const RTL_LOCALES := [
 	"yi"
 ]
 
-const COMPLETENESS_THRESHOLD := 0.8
+const COMPLETENESS_THRESHOLD := SHARED.TRANSLATION_COMPLETENESS_THRESHOLD
 
 var overall_tr_progress := { "en": 1.0 }
 var lesson_tr_data := {}
