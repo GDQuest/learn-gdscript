@@ -129,6 +129,121 @@ def run_command(command, check=True, capture_output=False):
     return result.stdout.strip() if capture_output else None
 
 
+def build_and_publish_release_to_gdschool(website_repository):
+    """Build and publish the release branch to the course website repository."""
+    website_repository = Path(website_repository).expanduser().resolve()
+    if not website_repository.is_dir():
+        print(f"Error: website repository does not exist: {website_repository}")
+        sys.exit(1)
+
+    try:
+        # NB: -C in git makes it work as if the following path is the current
+        # working directory/it sets the working directory to that path
+        website_root_result = subprocess.run(
+            [
+                "git",
+                "-C",
+                str(website_repository),
+                "rev-parse",
+                "--show-toplevel",
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        website_repository = Path(website_root_result.stdout.strip())
+    except subprocess.CalledProcessError:
+        print(
+            f"Error: not a Git repository: {website_repository}. You need to pass the path to the website repository."
+        )
+        sys.exit(1)
+
+    current_branch = subprocess.run(
+        ["git", "branch", "--show-current"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    if current_branch != "main":
+        print(
+            "Error: release must start from the main branch, "
+            f"currently on {current_branch!r}"
+        )
+        sys.exit(1)
+
+    source_changes = subprocess.run(["git", "diff", "--quiet"], check=False)
+    staged_source_changes = subprocess.run(
+        ["git", "diff", "--cached", "--quiet"], check=False
+    )
+    if source_changes.returncode != 0 or staged_source_changes.returncode != 0:
+        print("Error: source repository has tracked changes.")
+        sys.exit(1)
+
+    website_target_status = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(website_repository),
+            "status",
+            "--porcelain",
+            "--",
+            "static/learn_gdscript",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    if website_target_status.stdout:
+        print("Error: website build directory is not clean:")
+        print(website_target_status.stdout.strip())
+        sys.exit(1)
+
+    # Keep the working copy on main; the release build uses explicit metadata.
+    subprocess.run(["git", "branch", "-f", "release", "main"], check=True)
+    build_info.git_branch = "release"
+    build_info.base_url = os.environ.get(
+        "url", "https://www.gdquest.com/learn_gdscript/"
+    )
+    clean_web_build()
+    prepare_course_scripts()
+    export_platform("web")
+
+    release_target = website_repository / "static" / "learn_gdscript"
+    if release_target.exists():
+        shutil.rmtree(release_target)
+    release_target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(build_info.get_output_directory("web"), release_target)
+    print(f"Copied web build to {release_target}")
+
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(website_repository),
+            "add",
+            "--",
+            "static/learn_gdscript",
+        ],
+        check=True,
+    )
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(website_repository),
+            "commit",
+            "--only",
+            "-m",
+            "Update Learn GDScript web build",
+            "--",
+            "static/learn_gdscript",
+        ],
+        check=True,
+    )
+    subprocess.run(["git", "push", "origin", "main:release"], check=True)
+    print("\n✓ Release built, published, and website build committed")
+
+
 def download_or_retrieve_from_cache(url, filename, expected_sha256):
     """Downloads a build dependency once if needed, stores it in a cache
     direction, and returns its local archive path. If the file is already cached
@@ -664,6 +779,7 @@ Examples:
     python build.py export linux       Export for Linux
     python build.py export web         Export for web
     python build.py export all         Export all platforms
+    python build.py release ~/Repositories/dev_env/website
         """,
     )
 
@@ -696,6 +812,14 @@ Examples:
         "--force-certificate",
         action="store_true",
         help="Replace an existing certificate",
+    )
+
+    release_cmd = subparsers.add_parser(
+        "release", help="Build the release locally, publish the release branch, and update the GDQuest website repository"
+    )
+    release_cmd.add_argument(
+        "website_repository",
+        help="Path to the website Git repository",
     )
 
     args = parser.parse_args()
@@ -763,6 +887,8 @@ Examples:
             {"server": web_server, "watch": web_watch, "debug": web_debug}[
                 args.action
             ]()
+    elif args.command == "release":
+        build_and_publish_release_to_gdschool(args.website_repository)
 
 
 if __name__ == "__main__":
