@@ -304,6 +304,10 @@ msgstr "保留中の注文"
 msgid "Completed"
 msgstr "クイズをクリア"
 
+#: course/lesson-23-append-to-arrays/clearing-meals/Meal.tscn
+msgid "cheese sandwich"
+msgstr ""
+
 #: course/lesson-24-access-array-indices/visuals/SyntaxAccessIndex.tscn
 msgid "array_name"
 msgstr "array_name"
@@ -458,7 +462,7 @@ msgstr "メインメニューに戻る"
 msgid "Open the course index"
 msgstr "コースの目次を開く"
 
-#: ui/UINavigator.tscn ui/UINavigator.gd:395
+#: ui/UINavigator.tscn ui/UINavigator.gd:436
 msgid "Go back in your navigation history"
 msgstr "ページを戻ります"
 
@@ -606,10 +610,6 @@ msgstr "情報"
 #, fuzzy
 msgid "Click to highlight the relevant part of your code"
 msgstr "クリックしてコードの該当部分をハイライト表示"
-
-#: ui/components/OutputConsoleErrorMessage.tscn
-msgid "in"
-msgstr "in"
 
 #: ui/components/OutputConsoleErrorMessage.tscn
 msgid "at"
@@ -969,8 +969,8 @@ msgid "\t[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]
 msgstr "\t[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]翻訳の貢献方法[/url][/b]"
 
 #: ui/screens/course_outliner/CourseLessonDetails.tscn
-#: ui/screens/course_outliner/CourseLessonDetails.gd:85
-#: ui/screens/course_outliner/CourseLessonDetails.gd:117
+#: ui/screens/course_outliner/CourseLessonDetails.gd:86
+#: ui/screens/course_outliner/CourseLessonDetails.gd:118
 msgid "Start Lesson"
 msgstr "レッスン開始"
 
@@ -1630,22 +1630,22 @@ msgstr "ダメージ量は正しい値です。"
 msgid "It looks like the take_damage function is missing; did you remove it?"
 msgstr "take_damage関数が欠落しているようです。削除しましたか？"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:70
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:78
 #, fuzzy
 msgid "It looks like amount isn't reduced by a percentage. Did you multiply it by a value less than 1?"
 msgstr "amount がパーセンテージ分減っていないようです。1 未満の値で乗算していませんか？"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:76
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:84
 #, fuzzy
 msgid "The character did not take half damage despite being level 3. Did you multiply the amount by 0.5 to reduce it?"
 msgstr "キャラクターはレベル3ですが、ダメージが半分になっていません。ダメージ量を0.5倍して軽減しましたか？"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:80
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:88
 #, fuzzy
 msgid "The character appears not to be taking full damage when their level is below 3. Did you use a condition to limit damage reduction to when the level is greater or equal to 3?"
 msgstr "キャラクターのレベルが3未満の場合、ダメージを完全に受けていないようです。レベルが3以上の場合にのみダメージ軽減を適用する条件を設定しましたか？"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:82
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:90
 #, fuzzy
 msgid "The character appears to be taking 0 damage when its level is less than 3. Did you subtract the amount to health when the level is less than 3?"
 msgstr "キャラクターのレベルが3未満のとき、ダメージが0になっているようです。レベルが3未満のときに、HPからその分を差し引きましたか？"
@@ -1656,9 +1656,8 @@ msgid "Use A Vector To Increase Scale"
 msgstr "ベクトルを使用してスケールを増加させてください"
 
 #: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:12
-#, fuzzy
-msgid "Correct Scale After 2 Levels"
-msgstr "レベルアップ2回後の正しいスケール"
+msgid "The Scale Is Correct After Gaining Multiple Levels"
+msgstr ""
 
 #: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:38
 #, fuzzy
@@ -1723,14 +1722,14 @@ msgid "Your code has no while loop. You need to use a while loop to complete thi
 msgstr "コードに while ループがありません。他の解決策があったとしても、この演習を完了するには while ループを使用する必要があります！"
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:12
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:36
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:40
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:12
 #, fuzzy
 msgid "Use For Loop"
 msgstr "Forループを使用する"
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:23
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:44
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:48
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:23
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:40
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:39
@@ -1738,79 +1737,83 @@ msgstr "Forループを使用する"
 msgid "Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!"
 msgstr "コードにforループがありません。他の解決策があったとしても、この演習を完了するにはforループを使用する必要があります！"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:37
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:36
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:41
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:40
 #, fuzzy
 msgid "Draw Three Squares"
 msgstr "3つの四角形を描きます。"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:38
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:37
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:42
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:41
 #, fuzzy
 msgid "Squares Are All 100 By 100"
 msgstr "正方形はすべて100×100です。"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:39
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:39
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:43
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:43
 #, fuzzy
 msgid "Shapes Are 100 Pixels Apart"
 msgstr "図形同士の間隔は100ピクセルです。"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:51
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:45
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:54
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:48
 #, fuzzy
 msgid "You drew %s squares but you need to draw 3."
 msgstr "%s個の正方形を描きましたが、3個描く必要があります。"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:67
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:53
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:70
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:56
 #, fuzzy
 msgid "Shape3D number %s is not a square of size 100 by 100."
 msgstr "Shape3D番号%sは100×100の正方形ではありません。"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:74
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:71
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:77
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:74
 #, fuzzy
 msgid "There are fewer than 3 shapes, we can't test if shapes are 100 pixels apart."
 msgstr "図形が3つ未満のため、図形同士が100ピクセル離れているかどうかをテストできません。"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:81
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:78
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:85
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:81
 #, fuzzy
 msgid "Shapes are not separated by 100 pixels on the X axis."
 msgstr "図形がX軸上で100ピクセル間隔で配置されていません。"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:15
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:18
+msgid "Path contains values that are not Vector2"
+msgstr ""
+
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:25
 #, fuzzy
 msgid "Path Is Contiguous"
 msgstr "パスは連続しています。"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:16
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:26
 #, fuzzy
 msgid "Turtle Reaches The Robot"
 msgstr "タートルがロボットに到達しました"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:17
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:27
 #, fuzzy
 msgid "Path Does Not Hit Obstacles"
 msgstr "経路が障害物にぶつからない"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:22
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:32
 #, fuzzy
 msgid "No points found in variable turtle_path. Did you write Vector2 coordinates in the variable's array?"
 msgstr "変数`turtle_path`にVector2座標が見つかりません。変数の配列にVector2座標を書き込みましたか？"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:27
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:37
 #, fuzzy
 msgid "We found at least two points that are not next to one another. Did you forget some coordinates, or did you try to move the turtle diagonally?"
 msgstr "互いに隣接していない点が少なくとも2つ見つかりました。座標の記述を忘れたのでしょうか、それともタートルを斜めに動かそうとしたのでしょうか？"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:36
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:46
 #, fuzzy
 msgid "The last point should be at the robot's coordinates, %s, but it is %s instead."
 msgstr "最後の地点はロボットの座標%sであるべきですが、代わりに%sになっています。"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:45
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:55
 #, fuzzy
 msgid "The turtle hit a rock at coordinates %s. You need to change its path."
 msgstr "タートルが座標 %s の場所で岩にぶつかりました。経路を変更する必要があります。"
@@ -1845,65 +1848,64 @@ msgstr "エラーを取り除く"
 msgid "There's still a comment in your code. You need to remove the comment sign (#)."
 msgstr "コードにまだコメントが残っています。コメント記号（#）を削除する必要があります。"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:37
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:41
 #, fuzzy
 msgid "Rectangles Have The Correct Size"
 msgstr "長方形のサイズが正しい"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:38
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:42
 #, fuzzy
 msgid "Rectangles Do Not Overlap"
 msgstr "長方形が重なっていません"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:43
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:47
 #, fuzzy
 msgid "We expected 4 polygons, but you drew %s instead."
 msgstr "4つのポリゴンを描画する予定でしたが、代わりに%sを描画しました。"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:47
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:51
 #, fuzzy
 msgid "At least one of the rectangles does not have the expected size."
 msgstr "少なくとも1つの長方形が、想定されたサイズになっていません。"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:58
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:62
 #, fuzzy
 msgid "At least two drawn shape intersect. Did you pass arguments big enough to the jump() function?"
 msgstr "描画された図形のうち、少なくとも2つが重なっています。jump()関数に十分な大きさの引数を渡しましたか？"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:17
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:18
 #, fuzzy
 msgid "Robot Moves Along Blue Path"
 msgstr "ロボットが青い経路に沿って移動します"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:18
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:20
 #, fuzzy
 msgid "Code Uses Move To"
 msgstr "コードでは「Move To」を使用しています。"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:23
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:25
 #, fuzzy
 msgid "The robot's path changed. Did you change the robot_path array?"
 msgstr "ロボットの経路が変わりました。robot_path配列を変更しましたか？"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:26
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:28
 #, fuzzy
 msgid "The robot didn't move at all. Did you call robot.move_to()?"
 msgstr "ロボットがまったく動きませんでした。robot.move_to() を呼び出しましたか？"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:31
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:33
 #, fuzzy
 msgid "The robot moved fewer times than it should have. Did you use a loop and move once for each point in the robot_path array?"
 msgstr "ロボットの移動回数が想定より少なかったようです。ループを使用し、robot_path配列の各ポイントごとに1回ずつ移動させましたか？"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:38
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:45
 #, fuzzy
 msgid "The robot's movement path doesn't match the robot_path array. They should be the same."
 msgstr "ロボットの移動経路が robot_path 配列と一致していません。これらは同じである必要があります。"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:44
-#, fuzzy
-msgid "We found no call to the robot's move_to() function. Did you forget to call it?"
-msgstr "ロボットのmove_to()関数の呼び出しが見つかりませんでした。呼び出すのを忘れていませんか？"
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:58
+msgid "Did you use a for loop to call robot.move_to() with each cell in robot_path?"
+msgstr ""
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:13
 #, fuzzy
@@ -2024,32 +2026,32 @@ msgstr "%s を期待していましたが、代わりに %s が返されまし�
 msgid "It looks like you removed %s from waiting_orders."
 msgstr "[code]waiting_orders[/code] から %s を削除したようです。"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:10
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:11
 #, fuzzy
 msgid "Used Pop Back"
 msgstr "「pop_back」を使用しました。"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:11
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:12
 #, fuzzy
 msgid "Used While Loop"
 msgstr "Whileループを使用しました"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:12
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:13
 #, fuzzy
 msgid "Crates Array Is Empty"
 msgstr "木箱の配列が空です"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:17
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:30
 #, fuzzy
 msgid "We found no call to the pop_back() function. Did you forget to call it?"
 msgstr "pop_back()関数の呼び出しが見つかりませんでした。呼び出しを忘れていませんか？"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:22
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:36
 #, fuzzy
 msgid "You didn't use the while keyword"
 msgstr "whileキーワードを使用していません"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:29
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:44
 #, fuzzy
 msgid "The crate array is not empty"
 msgstr "crate配列は空ではありません。"
@@ -2306,14 +2308,14 @@ msgstr "キャラクターはまだ表示されていません！show()関数を
 msgid "Draw Rectangle Of 220 By 260"
 msgstr "220×260の長方形を描画してください"
 
-#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:18
-#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:18
-#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:18
+#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:16
+#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:16
+#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:16
 #, fuzzy
 msgid "Nothing drawn. Did you call move_forward()?"
 msgstr "何も描画されていません。move_forward() を呼び出しましたか？"
 
-#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:28
+#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:19
 #, fuzzy
 msgid "The drawn shape is not a rectangle with a width of 220 and a length of 260."
 msgstr "描画された図形は、幅220、長さ260の長方形ではありません。"
@@ -2323,7 +2325,7 @@ msgstr "描画された図形は、幅220、長さ260の長方形ではありま
 msgid "Draw Rectangle Of 200 By 120"
 msgstr "200×120の長方形を描画する"
 
-#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:28
+#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:19
 #, fuzzy
 msgid "The drawn shape is not a rectangle with a width of 200 and a length of 120."
 msgstr "描画された図形は、幅200、長さ120の長方形ではありません。"
@@ -2333,7 +2335,7 @@ msgstr "描画された図形は、幅200、長さ120の長方形ではありま
 msgid "Draw Corner Of 200 By 200"
 msgstr "200×200の角を描画"
 
-#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:28
+#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:19
 #, fuzzy
 msgid "The drawn shape is not a corner connected by two lines of length 200."
 msgstr "描画された図形は、長さ200の2本の線で結ばれた角ではありません。"
@@ -2358,162 +2360,177 @@ msgstr "描画された図形は、一辺が200ピクセルの正方形ではあ
 msgid "Draw Three Squares Of 200 Pixels"
 msgstr "200ピクセルの正方形を3つ描画してください"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:20
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:18
 #, fuzzy
 msgid "Nothing drawn. Did you not call draw_square()?"
 msgstr "何も描画されていません。draw_square() を呼び出していますか？"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:24
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:21
 #, fuzzy
 msgid "You only drew one square. You need to draw three."
 msgstr "正方形を1つしか描いていません。3つ描く必要があります。"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:26
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:23
 #, fuzzy
 msgid "You need to draw three squares."
 msgstr "3つの正方形を描画する必要があります。"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:29
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:31
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:26
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:28
 #, fuzzy
 msgid "You drew more than three squares. You need to draw only three!"
 msgstr "3つ以上の正方形を描いてしまいました。描くのは3つだけにしてください！"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:39
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:34
 #, fuzzy
 msgid "Shape3D number %s has too few corners! Did you change the draw_square() function?"
 msgstr "Shape3D番号%sの角の数が少なすぎます！draw_square()関数を変更しましたか？"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:44
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:39
 #, fuzzy
 msgid "Shape3D number %s has too many corners! Did you change the draw_square() function?"
 msgstr "Shape3D番号 %s の角の数が多すぎます！draw_square() 関数を変更しましたか？"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:55
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:44
 #, fuzzy
 msgid "Shape3D number %s is not a square of length 200 pixels. Did you change the draw_square() function?"
 msgstr "Shape3Dの番号%sは、一辺が200ピクセルの正方形ではありません。draw_square()関数を変更しましたか？"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:67
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:54
 msgid "The squares should not overlap. Did you move the turtle between drawing each square?"
 msgstr "正方形同士が重ならないようにしてください。各正方形を描くたびに、タートルを移動させましたか？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:16
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:14
 #, fuzzy
 msgid "Draw Corners Of Varying Lengths"
 msgstr "長さの異なる角を描画する"
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:23
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:22
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:28
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:43
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:54
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:19
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:19
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:41
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:56
 #, fuzzy
 msgid "The turtle did not draw anything. Make sure your function calls move_forward(length) to move the turtle."
 msgstr "タートルは何も描画しませんでした。タートルを動かすために、関数内で move_forward(length) を呼び出していることを確認してください。"
 
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:25
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:43
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:58
+msgid "The turtle drew fewer than 2 shapes. Make sure your function is repeatable."
+msgstr ""
+
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:27
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:25
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:45
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:60
+#, fuzzy
+msgid "The turtle drew more than 2 shapes. Make sure your function only draws one shape."
+msgstr "タートルは何も描画しませんでした。タートルを動かすために、関数内で move_forward(length) を呼び出していることを確認してください。"
+
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:28
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:28
+#, fuzzy
+msgid "The drawn shape has too few points. Did you call move_forward() less than 2 times?"
+msgstr "描画された図形の頂点数が少なすぎます。move_forward() を 2 回未満呼び出しましたか？"
+
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:30
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:29
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:30
 #, fuzzy
 msgid "The drawn shape has too many points. Did you call move_forward() more than 2 times?"
 msgstr "描画された図形の頂点数が多すぎます。move_forward() を 2 回以上呼び出しましたか？"
 
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:32
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:31
-#, fuzzy
-msgid "The drawn shape has too few points. Did you call move_forward() less than 2 times?"
-msgstr "描画された図形の頂点数が少なすぎます。move_forward() を 2 回未満呼び出しましたか？"
-
-#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:34
 #, fuzzy
 msgid "The drawn shape doesn't have the expected size. Did you use the length parameter?"
 msgstr "描画された図形のサイズが想定通りではありません。lengthパラメータを使用しましたか？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:15
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:14
 #, fuzzy
 msgid "Draw Corners Of Varying Sizes And Angles"
 msgstr "大きさや角度の異なる角を描画します。"
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:34
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:32
 #, fuzzy
 msgid "The drawn corner doesn't match the expected corner. Are you not using the angle parameter in your code?"
 msgstr "描画された角が想定された角と一致していません。コード内で角度パラメータを使用していないのでしょうか？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:22
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:18
 #, fuzzy
 msgid "Draw Rectangles Of Varying Sizes"
 msgstr "さまざまな大きさの長方形を描画する"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:29
-#, fuzzy
-msgid "The turtle did not draw anything. Make sure your function calls move_forward() with the length and height parameters."
-msgstr "タートルは何も描画しませんでした。関数内で、長さと高さのパラメータを指定して move_forward() を呼び出していることを確認してください。"
-
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:40
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:61
-#, fuzzy
-msgid "The drawn shape has too many points. Did you call move_forward() more than 4 times?"
-msgstr "描画された図形の頂点数が多すぎます。move_forward() を 4 回以上呼び出しましたか？"
-
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:42
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:65
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:32
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:68
 #, fuzzy
 msgid "The drawn shape has too few points. Did you call move_forward() less than 4 times?"
 msgstr "描画された図形の頂点数が少なすぎます。move_forward() を 4 回未満呼び出しましたか？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:45
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:34
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:64
+#, fuzzy
+msgid "The drawn shape has too many points. Did you call move_forward() more than 4 times?"
+msgstr "描画された図形の頂点数が多すぎます。move_forward() を 4 回以上呼び出しましたか？"
+
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:37
 #, fuzzy
 msgid "The length and height are inverted. Did you swap the length and height function arguments?"
 msgstr "長さと高さが入れ替わっています。長さと高さの関数の引数を入れ替えてしまいましたか？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:47
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:34
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:39
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:31
 #, fuzzy
 msgid "The drawn shapes don't have the expected length and height. Did you forget to use the length and height parameter?"
 msgstr "描画された図形の長さと高さが期待した通りではありません。長さと高さのパラメータを指定し忘れたのでしょうか？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:14
 #, fuzzy
 msgid "Turtle Ends Facing Towards The Right"
 msgstr "タートルは右を向いた状態で終了します。"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:22
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:15
 #, fuzzy
 msgid "Turtle Starts Each Square Facing Towards The Right"
 msgstr "タートルは各正方形を右向きで描き始めます"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:16
 #, fuzzy
 msgid "Draw Squares Of Varying Sizes"
 msgstr "さまざまな大きさの正方形を描画する"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:37
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:35
 #, fuzzy
 msgid "The turtle should turn four times to draw a square so that it always starts drawing the squares in the same direction. Did you call turn_right() four times?"
 msgstr "タートルは常に同じ方向から正方形を描き始めるように、4回回転して正方形を描く必要があります。turn_right()を4回呼び出しましたか？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:45
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:48
 #, fuzzy
 msgid "The turtle should be facing towards the right to draw squares in the same direction every time. Did you call turn_right(90) four times in your function?"
 msgstr "毎回同じ方向に四角形を描くには、タートルが右を向いている必要があります。関数内で turn_right(90) を4回呼び出しましたか？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:69
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:72
 #, fuzzy
 msgid "The shape is not a square or not turned in the expected direction. Did you use 90 degree angles when calling turn_right()?"
 msgstr "図形が正方形ではありません。または、想定された方向に回転していません。turn_right() を呼び出す際に、90度の角度を使用しましたか？"
 
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:12
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:11
 #, fuzzy
 msgid "Rectangle Starts At 120 By 100"
 msgstr "長方形は120×100の位置から始まります。"
 
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:13
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:12
 #, fuzzy
 msgid "Rectangle Size Is 200 By 120"
 msgstr "長方形のサイズは200×120です。"
 
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:20
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:30
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:17
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:29
 #, fuzzy
 msgid "We didn't find any drawn rectangles. Did you forget to call draw_rectangle()?"
 msgstr "描画された長方形が見つかりませんでした。draw_rectangle()を呼び出すのを忘れていませんか？"
@@ -2523,17 +2540,17 @@ msgstr "描画された長方形が見つかりませんでした。draw_rectang
 msgid "The rectangle doesn't start at position (120, 100). Did you not set the position right?"
 msgstr "長方形が座標(120, 100)から始まっていません。座標の設定が間違っていませんか？"
 
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:38
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:42
 #, fuzzy
 msgid "First Shape Is At 100 By 100"
 msgstr "最初の図形は座標(100, 100)にあります。"
 
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:61
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:64
 #, fuzzy
 msgid "No shape drawn. Did you forget to call draw_rectangle()?"
 msgstr "図形が描画されません。draw_rectangle()を呼び出すのを忘れていませんか？"
 
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:64
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:67
 #, fuzzy
 msgid "The first square should be drawn at (100, 100). Instead, you drew it at %s."
 msgstr "最初の正方形は(100, 100)の位置に描画されるべきですが、実際には%sの位置に描画されてしまいました。"
@@ -2623,11 +2640,17 @@ msgstr "ロボットは予想ほど大きなダメージを受けませんでし
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "HPからamountを差し引いているようには見えません。"
 
-#: ui/UILesson.gd:301
+#: ui/UILesson.gd:308
 msgid "Learn More"
 msgstr "もっと学ぶ"
 
-#: ui/UILesson.gd:366
+#: ui/UILesson.gd:331
+msgid ""
+"\n"
+"\n"
+msgstr ""
+
+#: ui/UILesson.gd:379
 #, fuzzy
 msgid ""
 "\n"
@@ -2636,40 +2659,41 @@ msgstr ""
 "\n"
 "[hr]\n"
 
-#: ui/UINavigator.gd:398
+#: ui/UINavigator.gd:439
 msgid "(no previous history)"
 msgstr "(戻るページがありません)"
 
-#: ui/UIPractice.gd:284
+#: ui/UIPractice.gd:290
 msgid "Hint %s"
 msgstr "ヒント: %s"
 
-#: ui/UIPractice.gd:322
+#: ui/UIPractice.gd:328
 msgid "Validating Your Code..."
 msgstr "コードを検証しています..."
 
-#: ui/UIPractice.gd:377
-msgid "The function `%s` calls itself, this creates an infinite loop"
+#: ui/UIPractice.gd:379
+#, fuzzy
+msgid "The function '%s' calls itself, this creates an infinite loop"
 msgstr "関数 `%s` がそれ自体を呼び出します。これにより無限ループが作成されます"
 
-#: ui/UIPractice.gd:388
+#: ui/UIPractice.gd:390
 #, fuzzy
 msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr "break文のない永久に実行される while ループ（while true）があります。これはアプリをフリーズさせます。"
 
-#: ui/UIPractice.gd:430
+#: ui/UIPractice.gd:432
 msgid "Running Your Code..."
 msgstr "コードを実行しています..."
 
-#: ui/UIPractice.gd:461
+#: ui/UIPractice.gd:444
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "コード内にゼロ除算があります。 コード内ではゼロで除算することはできません。 コードに\"/ 0\"または\"% 0\"が含まれていないことを確認してください。"
 
-#: ui/UIPractice.gd:507
+#: ui/UIPractice.gd:516
 msgid "Running Tests..."
 msgstr "テストを実行中..."
 
-#: ui/components/BreadCrumbs.gd:115
+#: ui/components/BreadCrumbs.gd:66
 msgid " > "
 msgstr " > "
 
@@ -2678,10 +2702,11 @@ msgid "Select the kind of issue and describe it in the box below, then click \"S
 msgstr "問題の種類を選択し、下のボックスに内容を入力してください。その後、「レポートを送信」をクリックすると、入力した内容があらかじめ記入された状態で、ウェブサイトのお問い合わせページが開きます。"
 
 #: ui/components/popups/ReportFormPopup.gd:56
-msgid "For questions and help with learning, [url=https://discord.gg/bNj469SYQj]join the community on Discord[/url]."
+#, fuzzy
+msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr "学習に関する質問やサポートが必要な場合は、[url=https://discord.gg/bNj469SYQj]Discord のコミュニティに参加してください[/url]。"
 
-#: ui/components/popups/ReportFormPopup.gd:131
+#: ui/components/popups/ReportFormPopup.gd:132
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr "翻訳は非公式であり、コミュニティによって管理されています。協力したい場合は、[url=https://github.com/GDQuest/learn-gdscript-translations/#readme]アプリの翻訳に協力する方法を確認してください[/url]。"
 
@@ -2689,22 +2714,22 @@ msgstr "翻訳は非公式であり、コミュニティによって管理され
 msgid "{percentage}% of text translated. {completed}/{total} lessons fully translated."
 msgstr "テキストの {percentage}% が翻訳されています。{completed}/{total} 個のレッスンが完全に翻訳されています。"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:72
+#: ui/screens/course_outliner/CourseLessonDetails.gd:73
 #, fuzzy
 msgid "100%"
 msgstr "100%"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:85
-#: ui/screens/course_outliner/CourseLessonDetails.gd:114
-#: ui/screens/course_outliner/CourseLessonDetails.gd:116
+#: ui/screens/course_outliner/CourseLessonDetails.gd:86
+#: ui/screens/course_outliner/CourseLessonDetails.gd:115
+#: ui/screens/course_outliner/CourseLessonDetails.gd:117
 msgid "Open Anyway"
 msgstr "それでも開く"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:113
+#: ui/screens/course_outliner/CourseLessonDetails.gd:114
 msgid "Open Lesson"
 msgstr "レッスンを開始する"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:115
+#: ui/screens/course_outliner/CourseLessonDetails.gd:116
 msgid "Continue Lesson"
 msgstr "次のレッスンに進む"
 
@@ -2751,6 +2776,21 @@ msgstr "続ける"
 #, fuzzy
 msgid "Learn to Code From Zero with Godot"
 msgstr "Godotでゼロからプログラミングを学ぶ"
+
+#~ msgid "in"
+#~ msgstr "in"
+
+#, fuzzy
+#~ msgid "Correct Scale After 2 Levels"
+#~ msgstr "レベルアップ2回後の正しいスケール"
+
+#, fuzzy
+#~ msgid "We found no call to the robot's move_to() function. Did you forget to call it?"
+#~ msgstr "ロボットのmove_to()関数の呼び出しが見つかりませんでした。呼び出すのを忘れていませんか？"
+
+#, fuzzy
+#~ msgid "The turtle did not draw anything. Make sure your function calls move_forward() with the length and height parameters."
+#~ msgstr "タートルは何も描画しませんでした。関数内で、長さと高さのパラメータを指定して move_forward() を呼び出していることを確認してください。"
 
 #~ msgid "CHRISTMAS SALE - 50% OFF"
 #~ msgstr "クリスマス セール - 50% オフ"
