@@ -415,8 +415,10 @@ func _validate_and_run_student_code() -> void:
 		_code_editor.slice_editor.errors = errors
 
 		for index in errors.size():
+			#if error.code == GDScriptCodes.ErrorCode.UNSAFE_METHOD_ACCESS and error
 			var error: ScriptError = errors[index]
 			MessageBus.print_script_error(error, script_file_name)
+			_report_possible_typoes(verifier.get_class_ast() as GDClassNode, error)
 
 		var is_missing_parser_error: bool = (
 			errors.size() == 1
@@ -477,6 +479,93 @@ func _validate_and_run_student_code() -> void:
 	# nodes potentially. This could now be removed.
 	var nodes_paths := [NodePath("")]
 	_update_nodes(script, nodes_paths)
+
+
+func _report_possible_typoes(root: GDClassNode, error: ScriptError) -> void:
+	var target_identifier := ""
+	var target_base := ""
+	var is_function := false
+	
+	if error.message.begins_with("Function \"") and " not found in base " in error.message:
+		#"Function \"%FUNCTION_NAME%()\" not found in base %BASE_NAME%.%NAME%",
+		target_identifier = error.message.substr(10, error.message.find("\"", 10)-12)
+		var remainder_string := error.message.substr(error.message.find(" not found in base ")+19)
+		target_base = remainder_string.substr(0, remainder_string.length()-1)
+		is_function = true
+	
+	elif error.message.begins_with("Static function \"") and " not found in base " in error.message:
+		#"Function \"%FUNCTION_NAME%()\" not found in base %BASE_NAME%.%NAME%",
+		target_identifier = error.message.substr(17, error.message.find("\"", 17)-19)
+		var remainder_string := error.message.substr(error.message.find(" not found in base ")+19)
+		target_base = remainder_string.substr(0, remainder_string.length()-1)
+		is_function = true
+		
+	elif error.message.begins_with("Cannot find member \"") and " in base " in error.message:
+		#"Cannot find member \"%NAME%\" in base \"%BASE%\".%TYPE%",
+		target_identifier = error.message.substr(20, error.message.find("\"", 20)-20)
+		var remainder_string := error.message.substr(error.message.find(" in base \"")+10)
+		target_base = remainder_string.substr(0, remainder_string.length()-2)
+	elif error.message.begins_with("Identifier \"") and error.message.ends_with(" not declared in the current scope."):
+		target_identifier = error.message.substr(12, error.message.find("\"", 12)-12)
+		target_base = "self"
+	else:
+		return
+	
+	var best_match := _find_similar(target_identifier, is_function, root, target_base)
+	if best_match != "":
+		MessageBus.print_warning(tr("You typed \"%s\"; did you mean \"%s\"?") % [target_identifier, best_match], "")
+
+
+## Compares the provided identifier to members in the root symbols, and whatever ClassDB can dredge up
+## from the base class, plus the @GlobalScope and @GDscript builtins.
+## If similar enough (>=65% confidence) it provides the best match it found. If too low it returns an empty string.
+func _find_similar(identifier: String, is_function: bool, root: GDClassNode, base: String) -> String:
+	var target_members := root.get_members().filter(func(member: GDMember) -> bool:
+		if is_function:
+			return member.get_type() == GDMember.Type.FUNCTION
+		return member.get_type() != GDMember.Type.FUNCTION
+	)
+	
+	var members := []
+	if base == "self":
+		@warning_ignore("incompatible_ternary")
+		target_members.map(func(member: GDMember) -> String: return member.get_as_function_node().get_identifier().name if is_function else member.get_name())
+	
+	members.append_array(BuiltIns.BUILTIN_METHODS if is_function else BuiltIns.BUILTINT_PROPS)
+	
+	if base == "self":
+		var extend_array := root.get_extends()
+		if extend_array:
+			@warning_ignore("unsafe_method_access")
+			base = extend_array.front().get_name()
+	
+	if base != "self":
+		if ClassDB.class_exists(base):
+			var base_member_list := ClassDB.class_get_method_list(base) if is_function else ClassDB.class_get_property_list(base)
+			var base_members := base_member_list.map(func(member_data: Dictionary) -> String: return member_data.name)
+			members.append_array(base_members)
+		else:
+			var globals := ProjectSettings.get_global_class_list()
+			var target_base_idx := globals.find_custom(func(cls: Dictionary) -> bool: return cls.class == base)
+			if target_base_idx >= -1:
+				var parent_class: Dictionary = globals[target_base_idx]
+				var parent_script := load(parent_class.path) as Script
+				if parent_script:
+					var base_member_list := (
+						parent_script.get_script_method_list() + parent_script.get_method_list() if is_function
+						else parent_script.get_script_property_list() + parent_script.get_property_list()
+					)
+					var base_members := base_member_list.map(func(member_data: Dictionary) -> String: return member_data.name)
+					members.append_array(base_members)
+	
+	var best_similarity := 0.0
+	var best_match := ""
+	for member: String in members:
+		var similarity := member.similarity(identifier)
+		if similarity > best_similarity:
+			best_match = member
+			best_similarity = similarity
+	return best_match if best_similarity >= 0.65 else ""
 
 
 ## Updates the source code by adding counters that force the loop to break in
