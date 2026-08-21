@@ -486,29 +486,22 @@ func _report_possible_typoes(root: GDClassNode, error: ScriptError) -> void:
 	var target_base := ""
 	var is_function := false
 	
-	if error.message.begins_with("Function \"") and " not found in base " in error.message:
-		#"Function \"%FUNCTION_NAME%()\" not found in base %BASE_NAME%.%NAME%",
-		target_identifier = error.message.substr(10, error.message.find("\"", 10)-12)
-		var remainder_string := error.message.substr(error.message.find(" not found in base ")+19)
-		target_base = remainder_string.substr(0, remainder_string.length()-1)
-		is_function = true
+	for typo_set: GDScriptCodes.TypoErrorData in GDScriptCodes.TYPO_DATABASE:
+		if not error.message.begins_with(typo_set.message_start):
+			continue
+		var identifier_start_idx := typo_set.message_start.length()
+		var identifier_end_idx := error.message.find(typo_set.identifier_end, identifier_start_idx)
+		target_identifier = error.message.substr(identifier_start_idx, identifier_end_idx-identifier_start_idx)
+		if not typo_set.has_base:
+			target_base = "self"
+		else:
+			var base_start_idx := error.message.find(typo_set.base_start) + typo_set.base_start.length()
+			var base_end_idx := error.message.find(typo_set.base_end, base_start_idx)
+			target_base = error.message.substr(base_start_idx, base_end_idx - base_start_idx)
+		is_function = typo_set.is_function
+		break
 	
-	elif error.message.begins_with("Static function \"") and " not found in base " in error.message:
-		#"Function \"%FUNCTION_NAME%()\" not found in base %BASE_NAME%.%NAME%",
-		target_identifier = error.message.substr(17, error.message.find("\"", 17)-19)
-		var remainder_string := error.message.substr(error.message.find(" not found in base ")+19)
-		target_base = remainder_string.substr(0, remainder_string.length()-1)
-		is_function = true
-		
-	elif error.message.begins_with("Cannot find member \"") and " in base " in error.message:
-		#"Cannot find member \"%NAME%\" in base \"%BASE%\".%TYPE%",
-		target_identifier = error.message.substr(20, error.message.find("\"", 20)-20)
-		var remainder_string := error.message.substr(error.message.find(" in base \"")+10)
-		target_base = remainder_string.substr(0, remainder_string.length()-2)
-	elif error.message.begins_with("Identifier \"") and error.message.ends_with(" not declared in the current scope."):
-		target_identifier = error.message.substr(12, error.message.find("\"", 12)-12)
-		target_base = "self"
-	else:
+	if target_identifier == "":
 		return
 	
 	var best_match := _find_similar(target_identifier, is_function, root, target_base)

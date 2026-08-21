@@ -92,6 +92,32 @@ enum WarningCode {
 	STANDALONE_TERNARY, # Return value of ternary expression is discarded.
 }
 
+class TypoErrorData:
+	var is_function: bool
+	var message_start: String
+	var identifier_end: String
+	var has_base: bool
+	var base_start: String
+	var base_end: String
+	
+	func _init(p_is_function: bool, p_message_start: String, p_identifier_end: String, p_has_base: bool, p_base_start := "", p_base_end := "") -> void:
+		is_function = p_is_function
+		message_start = p_message_start
+		identifier_end = p_identifier_end
+		has_base = p_has_base
+		base_start = p_base_start
+		base_end = p_base_end
+
+# Data about errors that may or may not be stemming from typoes
+# e.g. Function "x()" not found in base self
+# Plus some error-searching data
+static var TYPO_DATABASE: Array[TypoErrorData] = [
+	TypoErrorData.new(true, "Function \"", "()\"", true, " not found in base ", "."),
+	TypoErrorData.new(true, "Static function \"", "()\"", true, " not found in base \"", "\""),
+	TypoErrorData.new(false, "Cannot find member \"", "\"", true, " in base \"", "\""),
+	TypoErrorData.new(false, "Identifier \"", "\"", false)
+]
+
 # The database of error messages from GDScript parser and compiler.
 #
 # Each item is a record mapping patterns to an error code that we introduce above.
