@@ -1,3 +1,4 @@
+@tool
 # This here is a database of GDScript parser and compiler error messages and warnings.
 # We use it to create a mapping between identifiable messages and some abstract codes which we
 # can refer to internally.
@@ -117,6 +118,42 @@ static var TYPO_DATABASE: Array[TypoErrorData] = [
 	TypoErrorData.new(false, "Cannot find member \"", "\"", true, " in base \"", "\""),
 	TypoErrorData.new(false, "Identifier \"", "\"", false)
 ]
+
+
+class TypoResult:
+	var identifier: String
+	var base: String
+	var is_function: bool
+	
+	func _init(p_identifier := "", p_base := "", p_is_function := false) -> void:
+		identifier = p_identifier
+		base = p_base
+		is_function = p_is_function
+
+
+static func parse_typo_error_message(error: String) -> TypoResult:
+	var typo_result := TypoResult.new()
+	
+	for typo_set: TypoErrorData in TYPO_DATABASE:
+		if not error.begins_with(typo_set.message_start):
+			continue
+		var identifier_start_idx := typo_set.message_start.length()
+		var identifier_end_idx := error.find(typo_set.identifier_end, identifier_start_idx)
+		typo_result.identifier = error.substr(identifier_start_idx, identifier_end_idx-identifier_start_idx)
+		if not typo_set.has_base:
+			typo_result.base = "self"
+		else:
+			var base_start_idx := error.find(typo_set.base_start) + typo_set.base_start.length()
+			var base_end_idx := error.find(typo_set.base_end, base_start_idx)
+			typo_result.base = error.substr(base_start_idx, base_end_idx - base_start_idx)
+		typo_result.is_function = typo_set.is_function
+		break
+	
+	if not typo_result.identifier:
+		return null
+	
+	return typo_result
+
 
 # The database of error messages from GDScript parser and compiler.
 #

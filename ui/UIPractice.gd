@@ -482,31 +482,13 @@ func _validate_and_run_student_code() -> void:
 
 
 func _report_possible_typoes(root: GDClassNode, error: ScriptError) -> void:
-	var target_identifier := ""
-	var target_base := ""
-	var is_function := false
-	
-	for typo_set: GDScriptCodes.TypoErrorData in GDScriptCodes.TYPO_DATABASE:
-		if not error.message.begins_with(typo_set.message_start):
-			continue
-		var identifier_start_idx := typo_set.message_start.length()
-		var identifier_end_idx := error.message.find(typo_set.identifier_end, identifier_start_idx)
-		target_identifier = error.message.substr(identifier_start_idx, identifier_end_idx-identifier_start_idx)
-		if not typo_set.has_base:
-			target_base = "self"
-		else:
-			var base_start_idx := error.message.find(typo_set.base_start) + typo_set.base_start.length()
-			var base_end_idx := error.message.find(typo_set.base_end, base_start_idx)
-			target_base = error.message.substr(base_start_idx, base_end_idx - base_start_idx)
-		is_function = typo_set.is_function
-		break
-	
-	if target_identifier == "":
+	var error_data := GDScriptCodes.parse_typo_error_message(error.message)
+	if not error_data:
 		return
 	
-	var best_match := _find_similar(target_identifier, is_function, root, target_base)
+	var best_match := _find_similar(error_data.identifier, error_data.is_function, root, error_data.base)
 	if best_match != "":
-		MessageBus.print_warning(tr("You typed \"%s\"; did you mean \"%s\"?") % [target_identifier, best_match], "")
+		MessageBus.print_warning(tr("You typed \"%s\"; did you mean \"%s\"?") % [error_data.identifier, best_match], "")
 
 
 ## Compares the provided identifier to members in the root symbols, and whatever ClassDB can dredge up

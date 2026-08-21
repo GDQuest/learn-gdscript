@@ -132,3 +132,24 @@ func _run():
 		printerr("Too few arguments error was not remapped to INVALID_ARGUMENTS.")
 
 	print()
+	print("Checking typo detection...")
+	var typoable_errors := [
+		{"error_string": "Function \"print()\" not found in base TurtleDrawer.", "expected_result": GDScriptCodes.TypoResult.new("print", "TurtleDrawer", true)},
+		{"error_string": "Function \"move_forward()\" not found in base self.", "expected_result": GDScriptCodes.TypoResult.new("move_forward", "self", true)},
+		{"error_string": "Static function \"extract_data()\" not found in base \"Factory\".", "expected_result": GDScriptCodes.TypoResult.new("extract_data", "Factory", true)},
+		{"error_string": "Cannot find member \"original\" in base \"Node3D\".", "expected_result": GDScriptCodes.TypoResult.new("original", "Node3D", false)},
+		{"error_string": "Identifier \"pursue\" not declared in the current scope.", "expected_result": GDScriptCodes.TypoResult.new("pursue", "self", false)},
+	]
+	var successful_typo_parses := 0
+	
+	for error in typoable_errors:
+		var result := GDScriptCodes.parse_typo_error_message(error.error_string)
+		if (
+			result.identifier == error.expected_result.identifier and
+			result.base == error.expected_result.base and
+			result.is_function == error.expected_result.is_function
+		):
+			successful_typo_parses += 1
+		else:
+			printerr("\"%s\" failed to parse. Got (%s, %s, %s)" % [error.error_string, result.identifier, result.base, result.is_function])
+	print("- %s / %s typo parses" % [successful_typo_parses, typoable_errors.size()])
