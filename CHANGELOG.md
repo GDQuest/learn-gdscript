@@ -4,6 +4,10 @@ This document lists changes between releases.
 
 ## Unreleased
 
+## Improvements and changes
+
+- Add error explanations for standalone functions and standalone expressions.
+
 ## Bug fixes
 
 - L23.P1: make reset button reset the used inventory items

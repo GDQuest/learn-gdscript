@@ -6,7 +6,16 @@
 "UNUSED_CLASS_VARIABLE",,
 "UNUSED_ARGUMENT",,
 "UNREACHABLE_CODE",,
-"STANDALONE_EXPRESSION",,
+"STANDALONE_EXPRESSION","You get this error when:
+
+[ul]
+You write a function inside another function.
+You write a piece of code that calculates a value, but that value is not used or assigned to a variable.
+[/ul]
+
+The error means that you have a piece of code that's not having any effect because it is not used or placed in the correct context.","If you wrote a function inside of another function, extract the inner function, place it later in your code, and remove the indentation.
+
+If you wrote some conditions or a piece of code that is meant to produce a value, make sure to store the result in a variable or use it in an [code]if[/code] statement or something that will use the value."
 "VOID_ASSIGNMENT",,
 "NARROWING_CONVERSION",,
 "FUNCTION_MAY_YIELD",,
