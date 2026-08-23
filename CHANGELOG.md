@@ -6,6 +6,7 @@ This document lists changes between releases.
 
 ## Bug fixes
 
+- L23.P1: make reset button reset the used inventory items
 - L25.P1 and L25.P2: Updated practice tests to allow more valid solutions to pass.
 
 ## Learn GDScript From Zero 2.1.0 (2026-08-16)

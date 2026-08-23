@@ -74,6 +74,14 @@ func _use_item(item: Node) -> void:
 	used_items_names.append(item_name)
 
 
+func reset() -> void:
+	used_items = []
+	used_items_names = PackedStringArray()
+	current_item = null
+	for item in inventory:
+		item.reset(0)
+
+
 func _run():
 	pick_items()
 	_on_item_used()
