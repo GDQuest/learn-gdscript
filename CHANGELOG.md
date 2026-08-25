@@ -12,6 +12,7 @@ This document lists changes between releases.
 
 - L23.P1: make reset button reset the used inventory items
 - L25.P1 and L25.P2: Updated practice tests to allow more valid solutions to pass.
+- L26.P1: Fix an edge case where the label would be left with stale state across multiple runs
 
 ## Learn GDScript From Zero 2.1.0 (2026-08-16)
 

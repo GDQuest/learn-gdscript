@@ -7,6 +7,8 @@ extends Node
 
 
 func _run():
+	energy_label.text = ""
+	shadow.text = ""
 	run()
 	await get_tree().create_timer(0.5).timeout
 	Events.practice_run_completed.emit()
