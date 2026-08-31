@@ -2,11 +2,12 @@
 
 This document lists changes between releases.
 
-## Unreleased
+## Learn GDScript From Zero 2.2.0 (2026-08-31)
 
 ## Improvements and changes
 
-- Add error explanations for standalone functions and standalone expressions.
+- Added error explanations for standalone functions and standalone expressions.
+- Added a detection and suggestion for typos in learner code. Now, if you miss a letter or get a name a bit wrong in a practice, the app will warn you and suggest the most likely correct name.
 
 ## Bug fixes
 
