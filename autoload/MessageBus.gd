@@ -10,7 +10,13 @@
 # `assert(condition)` will not work.
 extends Node
 
-enum MESSAGE_TYPE { PRINT, PRINTS, ERROR, WARNING, ASSERT }
+enum MESSAGE_TYPE {
+	PRINT,
+	PRINTS,
+	ERROR,
+	WARNING,
+	ASSERT,
+}
 
 signal print_requested(type, thing_to_print, file_name, line_nb, character, message_code)
 
@@ -83,7 +89,12 @@ func print_script_error(error: ScriptError, script_file_name := "") -> void:
 	)
 
 
-func print_log(thing_to_print: Array, file_name: String, line_nb: int = 0, character: int = 0) -> void:
+func print_log(
+	thing_to_print: Array,
+	file_name: String,
+	line_nb: int = 0,
+	character: int = 0,
+) -> void:
 	var line := " ".join(PackedStringArray(thing_to_print))
 	print_request(MESSAGE_TYPE.PRINT, line, file_name, line_nb, character)
 	if print_to_output:
@@ -91,35 +102,49 @@ func print_log(thing_to_print: Array, file_name: String, line_nb: int = 0, chara
 
 
 func print_error(
-		thing_to_print: Variant,
-		file_name: String,
-		line_nb: int = 0,
-		character: int = 0,
-		error_code: int = -1,
+	thing_to_print: Variant,
+	file_name: String,
+	line_nb: int = 0,
+	character: int = 0,
+	error_code: int = -1,
 ) -> void:
-	print_request(MESSAGE_TYPE.ERROR, str(thing_to_print), file_name, line_nb, character, error_code)
+	print_request(
+		MESSAGE_TYPE.ERROR,
+		str(thing_to_print),
+		file_name,
+		line_nb,
+		character,
+		error_code,
+	)
 	if print_to_output:
 		push_error(thing_to_print)
 
 
 func print_warning(
-		thing_to_print: Variant,
-		file_name: String,
-		line_nb: int = 0,
-		character: int = 0,
-		warning_code: int = -1,
+	thing_to_print: Variant,
+	file_name: String,
+	line_nb: int = 0,
+	character: int = 0,
+	warning_code: int = -1,
 ) -> void:
-	print_request(MESSAGE_TYPE.WARNING, str(thing_to_print), file_name, line_nb, character, warning_code)
+	print_request(
+		MESSAGE_TYPE.WARNING,
+		str(thing_to_print),
+		file_name,
+		line_nb,
+		character,
+		warning_code,
+	)
 	if print_to_output:
 		push_warning(thing_to_print)
 
 
 func print_assert(
-		assertion: bool,
-		provided_message := "",
-		file_name := "",
-		line_nb: int = 0,
-		character: int = 0,
+	assertion: bool,
+	provided_message := "",
+	file_name := "",
+	line_nb: int = 0,
+	character: int = 0,
 ) -> void:
 	var message := ""
 	if not assertion:
@@ -134,11 +159,11 @@ func print_assert(
 # This is a proxy for emitting the signal, to work around Godot's lack of signal
 # typing.
 func print_request(
-		message_type: int,
-		message: String,
-		file_name: String,
-		line_nb: int,
-		character: int,
-		message_code: int = -1,
+	message_type: int,
+	message: String,
+	file_name: String,
+	line_nb: int,
+	character: int,
+	message_code: int = -1,
 ) -> void:
 	print_requested.emit(message_type, message, file_name, line_nb, character, message_code)

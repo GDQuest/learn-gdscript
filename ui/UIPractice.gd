@@ -415,10 +415,26 @@ func _validate_and_run_student_code() -> void:
 		_code_editor.slice_editor.errors = errors
 
 		for index in errors.size():
-			#if error.code == GDScriptCodes.ErrorCode.UNSAFE_METHOD_ACCESS and error
+			var gdscript_ast_root := verifier.get_class_ast() as GDClassNode
 			var error: ScriptError = errors[index]
+
 			MessageBus.print_script_error(error, script_file_name)
-			_report_possible_typoes(verifier.get_class_ast() as GDClassNode, error)
+
+			var typo_result := GDScriptCodes.parse_typo_error_message(error.message)
+			if typo_result != null:
+				var best_match := _search_for_similar_identifier(
+					typo_result.identifier,
+					typo_result.is_function,
+					gdscript_ast_root,
+					typo_result.base,
+				)
+				if best_match != "":
+					MessageBus.print_warning(
+						tr("You typed \"%s\"; did you mean \"%s\"?")
+						% [typo_result.identifier, best_match],
+						"",
+					)
+
 
 		var is_missing_parser_error: bool = (
 			errors.size() == 1
@@ -481,58 +497,70 @@ func _validate_and_run_student_code() -> void:
 	_update_nodes(script, nodes_paths)
 
 
-func _report_possible_typoes(root: GDClassNode, error: ScriptError) -> void:
-	var error_data := GDScriptCodes.parse_typo_error_message(error.message)
-	if not error_data:
-		return
-	
-	var best_match := _find_similar(error_data.identifier, error_data.is_function, root, error_data.base)
-	if best_match != "":
-		MessageBus.print_warning(tr("You typed \"%s\"; did you mean \"%s\"?") % [error_data.identifier, best_match], "")
-
-
 ## Compares the provided identifier to members in the root symbols, and whatever ClassDB can dredge up
 ## from the base class, plus the @GlobalScope and @GDscript builtins.
-## If similar enough (>=65% confidence) it provides the best match it found. If too low it returns an empty string.
-func _find_similar(identifier: String, is_function: bool, root: GDClassNode, base: String) -> String:
-	var target_members := root.get_members().filter(func(member: GDMember) -> bool:
-		if is_function:
-			return member.get_type() == GDMember.Type.FUNCTION
-		return member.get_type() != GDMember.Type.FUNCTION
+## If similar enough (>=80% confidence) it provides the best match it found. If too low it returns an empty string.
+func _search_for_similar_identifier(
+	identifier: String,
+	is_function: bool,
+	root: GDClassNode,
+	base: String,
+) -> String:
+	var target_members := root.get_members().filter(
+		func(member: GDMember) -> bool:
+			if is_function:
+				return member.get_type() == GDMember.Type.FUNCTION
+			return member.get_type() != GDMember.Type.FUNCTION,
 	)
-	
+
 	var members := []
 	if base == "self":
 		@warning_ignore("incompatible_ternary")
-		target_members.map(func(member: GDMember) -> String: return member.get_as_function_node().get_identifier().name if is_function else member.get_name())
-	
+		target_members.map(
+			func(member: GDMember) -> String:
+				return member.get_as_function_node().get_identifier().name if is_function else member.get_name(),
+		)
+
 	members.append_array(BuiltIns.BUILTIN_METHODS if is_function else BuiltIns.BUILTINT_PROPS)
-	
+
 	if base == "self":
 		var extend_array := root.get_extends()
 		if extend_array:
 			@warning_ignore("unsafe_method_access")
 			base = extend_array.front().get_name()
-	
+
 	if base != "self":
 		if ClassDB.class_exists(base):
-			var base_member_list := ClassDB.class_get_method_list(base) if is_function else ClassDB.class_get_property_list(base)
-			var base_members := base_member_list.map(func(member_data: Dictionary) -> String: return member_data.name)
+			var base_member_list := ClassDB.class_get_method_list(base) if is_function else ClassDB.class_get_property_list(
+				base
+			)
+			var base_members := base_member_list.map(
+				func(member_data: Dictionary) -> String:
+					return member_data.name,
+			)
 			members.append_array(base_members)
 		else:
 			var globals := ProjectSettings.get_global_class_list()
-			var target_base_idx := globals.find_custom(func(cls: Dictionary) -> bool: return cls.class == base)
+			var target_base_idx := globals.find_custom(
+				func(cls: Dictionary) -> bool:
+					return cls.class == base,
+			)
 			if target_base_idx >= -1:
 				var parent_class: Dictionary = globals[target_base_idx]
 				var parent_script := load(parent_class.path) as Script
 				if parent_script:
 					var base_member_list := (
-						parent_script.get_script_method_list() + parent_script.get_method_list() if is_function
-						else parent_script.get_script_property_list() + parent_script.get_property_list()
+						parent_script.get_script_method_list() + parent_script.get_method_list()
+						if is_function
+						else parent_script.get_script_property_list()
+						+ parent_script.get_property_list()
 					)
-					var base_members := base_member_list.map(func(member_data: Dictionary) -> String: return member_data.name)
+					var base_members := base_member_list.map(
+						func(member_data: Dictionary) -> String:
+							return member_data.name,
+					)
 					members.append_array(base_members)
-	
+
 	var best_similarity := 0.0
 	var best_match := ""
 	for member: String in members:
@@ -540,7 +568,7 @@ func _find_similar(identifier: String, is_function: bool, root: GDClassNode, bas
 		if similarity > best_similarity:
 			best_match = member
 			best_similarity = similarity
-	return best_match if best_similarity >= 0.65 else ""
+	return best_match if best_similarity >= 0.8 else ""
 
 
 ## Updates the source code by adding counters that force the loop to break in
@@ -890,15 +918,15 @@ func try_validate_and_replace_script(node: Node, script: GDScript) -> void:
 	_restore_properties(node, properties)
 
 	parent.call_deferred("add_child", node)
-	
+
 	_run_if_valid.call_deferred(node)
 
 
 func _run_if_valid(target_node: Node) -> void:
 	if target_node.has_method("_run"):
 		if _tester.prevalidate(target_node):
-				@warning_ignore("unsafe_method_access")
-				target_node._run()
+			@warning_ignore("unsafe_method_access")
+			target_node._run()
 		else:
 			_run_tests_requested = false
 			Events.practice_completed.emit(_practice)
