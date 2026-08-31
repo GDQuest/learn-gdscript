@@ -494,26 +494,41 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
      * Create a button with the proper classes; change class when
      * fullscreen event happens
      */
-    const fullscreenOnButton = makeFullscreenButton("button-fullscreen-on", () => document.documentElement.requestFullscreen());
-    const fullscreenOffButton = makeFullscreenButton("button-fullscreen-off", () => {
+    const buttonFullscreenTurnOn = makeFullscreenButton(
+      "button-fullscreen-on",
+      () => {
+        document.documentElement
+          .requestFullscreen()
+          .catch((err) => console.error(err));
+      }
+    );
+    const buttonFullscreenTurnOff = makeFullscreenButton("button-fullscreen-off", () => {
       document.exitFullscreen().catch((err) => err.name !== "TypeError" && console.error(err));
     });
+
+    const updateFullscreenButtonVisibility = () => {
+      const isFullscreen = document.fullscreenElement !== null;
+      buttonFullscreenTurnOn.style.display = isFullscreen ? "none" : "block";
+      buttonFullscreenTurnOff.style.display = isFullscreen ? "block" : "none";
+    };
+    document.addEventListener("fullscreenchange", updateFullscreenButtonVisibility);
+    updateFullscreenButtonVisibility();
 
     /**
      * Only add the button if Godot has loaded
      */
     GDQUEST.events.onGodotLoaded.once(() => {
-      canvasContainer.appendChild(fullscreenOnButton);
-      canvasContainer.appendChild(fullscreenOffButton);
+      canvasContainer.appendChild(buttonFullscreenTurnOn);
+      canvasContainer.appendChild(buttonFullscreenTurnOff);
     });
 
     document.addEventListener("keydown", (event) => {
       if (event.code === "F11") {
         event.preventDefault();
-        if (getComputedStyle(fullscreenOnButton).display !== "none") {
-          fullscreenOnButton.click();
-        } else if (getComputedStyle(fullscreenOffButton).display !== "none") {
-          fullscreenOffButton.click();
+        if (getComputedStyle(buttonFullscreenTurnOn).display !== "none") {
+          buttonFullscreenTurnOn.click();
+        } else if (getComputedStyle(buttonFullscreenTurnOff).display !== "none") {
+          buttonFullscreenTurnOff.click();
         }
       }
     });
