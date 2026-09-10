@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dd2vjgj5yweq5"]
 
 [ext_resource type="Script" uid="uid://bc5p6fxowg02n" path="res://course/common/CustomHealthBar.gd" id="2"]
+[ext_resource type="Script" uid="uid://dcpcup5nppub7" path="res://ui/components/UnscaledLabel.gd" id="2_lai5i"]
 
 [node name="CustomHealthBar" type="ColorRect" unique_id=240038208 node_paths=PackedStringArray("_empty_health_bar", "_health_bar", "_label")]
 custom_minimum_size = Vector2(200, 20)
@@ -12,7 +13,7 @@ color = Color(0.0352941, 0.0392157, 0.12549, 1)
 script = ExtResource("2")
 _empty_health_bar = NodePath("HealthBarEmpty")
 _health_bar = NodePath("HealthBarCurrent")
-_label = NodePath("Label")
+_label = NodePath("")
 
 [node name="HealthBarEmpty" type="ColorRect" parent="." unique_id=2001191928]
 custom_minimum_size = Vector2(180, 10)
@@ -32,11 +33,13 @@ offset_right = 195.0
 offset_bottom = 15.0
 color = Color(0.239216, 1, 0.431373, 1)
 
-[node name="Label" type="Label" parent="." unique_id=640955477]
+[node name="Label" type="Label" parent="." unique_id=1903058831]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 0
 offset_top = -24.0
 offset_right = 200.0
-offset_bottom = 4.0
+offset_bottom = 7.0
 text = "health = 100"
 horizontal_alignment = 1
+script = ExtResource("2_lai5i")
+metadata/_custom_type_script = "uid://dcpcup5nppub7"

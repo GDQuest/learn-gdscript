@@ -26,4 +26,3 @@ func test_only_units_are_selected() -> String:
 		if not cell in game_board.units:
 			return tr("Trying to select a cell that doesn't contain a unit: %s.") % cell
 	return ""
-

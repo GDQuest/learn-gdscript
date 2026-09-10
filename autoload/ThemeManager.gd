@@ -24,6 +24,10 @@ func get_default_font_size() -> int:
 	return _font_sizes[&"Label"][&"font_size"]
 
 
+func get_default_font() -> Font:
+	return _theme.default_font
+
+
 func _cache_font_defaults() -> void:
 	_font_defaults.clear()
 

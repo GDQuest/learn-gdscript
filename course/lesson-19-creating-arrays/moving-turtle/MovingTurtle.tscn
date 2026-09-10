@@ -2,27 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://b4n28mvmpccia" path="res://course/common/turtle/turtle.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://dbc7usnmjjtbd" path="res://course/lesson-19-creating-arrays/visuals/rocks_gems.png" id="2"]
+[ext_resource type="FontVariation" path="res://ui/theme/fonts/font_text.tres" id="2_fhj04"]
 [ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://dqcfecquh3gvg" path="res://course/lesson-19-creating-arrays/visuals/rocks_shield.png" id="4"]
 [ext_resource type="Script" uid="uid://sob588xil5yc" path="res://course/lesson-19-creating-arrays/moving-turtle/MovingTurtle.gd" id="5"]
-[ext_resource type="FontFile" uid="uid://dhwfr6dl8eld3" path="res://ui/assets/fonts/SourceCodePro-Regular.otf" id="6"]
-
-[sub_resource type="FontFile" id="1"]
-fallbacks = Array[Font]([ExtResource("6")])
-cache/0/variation_coordinates = {}
-cache/0/face_index = 0
-cache/0/embolden = 0.0
-cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
-cache/0/spacing_top = 0
-cache/0/spacing_bottom = 0
-cache/0/spacing_space = 0
-cache/0/spacing_glyph = 0
-cache/0/baseline_offset = 0.0
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
 
 [sub_resource type="GDScript" id="2"]
 script/source = "extends Sprite2D
@@ -41,7 +24,7 @@ func move(path: Array):
 [node name="MovingTurtle" type="Node2D" unique_id=100452924]
 script = ExtResource("5")
 draw_cell_coordinates = true
-label_font = SubResource("1")
+label_font = ExtResource("2_fhj04")
 
 [node name="Turtle" type="Sprite2D" parent="." unique_id=695639315]
 position = Vector2(20, 283)
