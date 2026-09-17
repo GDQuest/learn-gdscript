@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bcbqotimrcctr"]
 
 [ext_resource type="Script" uid="uid://b0dg5xvakrm1o" path="res://course/lesson-23-append-to-arrays/clearing-meals/ClearingMeals.gd" id="1"]
+[ext_resource type="Script" uid="uid://dcpcup5nppub7" path="res://ui/components/UnscaledLabel.gd" id="2_nfs45"]
 
 [node name="ClearingMeals" type="Node2D" unique_id=754593737]
 script = ExtResource("1")
@@ -17,11 +18,13 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="Label" type="Label" parent="Row/Pending" unique_id=1803618105]
+[node name="Label" type="Label" parent="Row/Pending" unique_id=181326183]
 layout_mode = 2
 text = "Pending orders"
 horizontal_alignment = 1
 uppercase = true
+script = ExtResource("2_nfs45")
+metadata/_custom_type_script = "uid://dcpcup5nppub7"
 
 [node name="HSeparator" type="HSeparator" parent="Row/Pending" unique_id=1051364072]
 layout_mode = 2
@@ -34,11 +37,13 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="Label" type="Label" parent="Row/Done" unique_id=1423584893]
+[node name="Label" type="Label" parent="Row/Done" unique_id=1936224445]
 layout_mode = 2
 text = "Completed"
 horizontal_alignment = 1
 uppercase = true
+script = ExtResource("2_nfs45")
+metadata/_custom_type_script = "uid://dcpcup5nppub7"
 
 [node name="HSeparator" type="HSeparator" parent="Row/Done" unique_id=861748755]
 layout_mode = 2

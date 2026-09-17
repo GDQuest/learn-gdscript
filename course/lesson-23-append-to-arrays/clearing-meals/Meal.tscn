@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b77jbrlt6u5ym" path="res://course/lesson-23-append-to-arrays/clearing-meals/Meal.gd" id="1_meal"]
 [ext_resource type="Texture2D" uid="uid://cqdddd2njewww" path="res://ui/assets/icons/checkbox_empty.png" id="2_jqyuq"]
+[ext_resource type="Script" uid="uid://dcpcup5nppub7" path="res://ui/components/UnscaledLabel.gd" id="3_bh2r6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jqyuq"]
 bg_color = Color(0.290196, 0.294118, 0.388235, 1)
@@ -33,11 +34,13 @@ size_flags_vertical = 4
 texture = ExtResource("2_jqyuq")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Header" unique_id=513612994]
+[node name="Label" type="Label" parent="Header" unique_id=2063310706]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "cheese sandwich"
 vertical_alignment = 1
+script = ExtResource("3_bh2r6")
+metadata/_custom_type_script = "uid://dcpcup5nppub7"
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=126697003]
 custom_minimum_size = Vector2(200, 6)

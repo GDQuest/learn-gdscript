@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://53p3lhsufh82" path="res://course/common/inventory/healing_heart.png" id="2"]
 [ext_resource type="Script" uid="uid://byafhjougrfbm" path="res://course/common/inventory/DictItem.gd" id="3"]
+[ext_resource type="Script" uid="uid://dcpcup5nppub7" path="res://ui/components/UnscaledLabel.gd" id="3_7fcm0"]
 
 [sub_resource type="StyleBoxFlat" id="1"]
 draw_center = false
@@ -49,14 +50,20 @@ texture = ExtResource("2")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Name" type="Label" parent="Margin/Item" unique_id=1209791980]
+[node name="Name" type="Label" parent="Margin/Item" unique_id=584610475]
 layout_mode = 2
 theme_type_variation = &"LabelSmallTitle"
+theme_override_font_sizes/font_size = 18
 text = "healing heart"
+script = ExtResource("3_7fcm0")
+metadata/_custom_type_script = "uid://dcpcup5nppub7"
 
-[node name="Amount" type="Label" parent="Margin/Item" unique_id=36278985]
+[node name="Amount" type="Label" parent="Margin/Item" unique_id=772493065]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelSmallTitle"
+theme_override_font_sizes/font_size = 18
 text = "0"
 horizontal_alignment = 2
+script = ExtResource("3_7fcm0")
+metadata/_custom_type_script = "uid://dcpcup5nppub7"

@@ -348,7 +348,9 @@ func _reset_monitored_variable_highlights():
 		return
 
 	# After changing font size, must wait a frame to create monitored variables
-	await get_tree().process_frame
+	var scene_tree: SceneTree = get_tree()
+	if scene_tree:
+		await scene_tree.process_frame
 
 	for monitored_variable: Node in _monitored_variable_highlights:
 		monitored_variable.queue_free()

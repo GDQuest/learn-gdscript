@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bap15sd5ve05s"]
 
+[ext_resource type="Script" uid="uid://dcpcup5nppub7" path="res://ui/components/UnscaledLabel.gd" id="2_ma6lu"]
 [ext_resource type="Script" uid="uid://n5cmi0tlair1" path="res://course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://53p3lhsufh82" path="res://course/common/inventory/healing_heart.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://dc8srtagvqfdv" path="res://course/common/inventory/gems.png" id="5"]
@@ -57,11 +58,15 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Title" type="Label" parent="Margin/Column" unique_id=1232250260]
+[node name="Title" type="Label" parent="Margin/Column" unique_id=199853366]
 layout_mode = 2
 theme_type_variation = &"LabelBigTitle"
+theme_override_font_sizes/font_size = 20
 text = "Inventory"
 horizontal_alignment = 1
+script = ExtResource("2_ma6lu")
+forced_size = 28
+metadata/_custom_type_script = "uid://dcpcup5nppub7"
 
 [node name="HSeparator" type="HSeparator" parent="Margin/Column" unique_id=116337136]
 layout_mode = 2
@@ -100,19 +105,25 @@ texture = ExtResource("4")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Name" type="Label" parent="Margin/Column/Grid/HealingHeart/Margin/Item" unique_id=1543081321]
+[node name="Name" type="Label" parent="Margin/Column/Grid/HealingHeart/Margin/Item" unique_id=1861172986]
 layout_mode = 2
 theme_type_variation = &"LabelSmallTitle"
+theme_override_font_sizes/font_size = 20
 text = "Healing Heart"
+script = ExtResource("2_ma6lu")
+metadata/_custom_type_script = "uid://dcpcup5nppub7"
 
 [node name="Spacer" type="Control" parent="Margin/Column/Grid/HealingHeart/Margin/Item" unique_id=1419503025]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Amount" type="Label" parent="Margin/Column/Grid/HealingHeart/Margin/Item" unique_id=2068282124]
+[node name="Amount" type="Label" parent="Margin/Column/Grid/HealingHeart/Margin/Item" unique_id=1301344000]
 layout_mode = 2
 theme_type_variation = &"LabelSmallTitle"
+theme_override_font_sizes/font_size = 20
 text = "0"
+script = ExtResource("2_ma6lu")
+metadata/_custom_type_script = "uid://dcpcup5nppub7"
 
 [node name="Gems" type="Button" parent="Margin/Column/Grid" unique_id=2083197741]
 custom_minimum_size = Vector2(100, 100)
@@ -143,19 +154,25 @@ texture = ExtResource("5")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Name" type="Label" parent="Margin/Column/Grid/Gems/Margin/Item" unique_id=1030635156]
+[node name="Name" type="Label" parent="Margin/Column/Grid/Gems/Margin/Item" unique_id=68310668]
 layout_mode = 2
 theme_type_variation = &"LabelSmallTitle"
+theme_override_font_sizes/font_size = 20
 text = "Gems"
+script = ExtResource("2_ma6lu")
+metadata/_custom_type_script = "uid://dcpcup5nppub7"
 
 [node name="Spacer" type="Control" parent="Margin/Column/Grid/Gems/Margin/Item" unique_id=1067680459]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Amount" type="Label" parent="Margin/Column/Grid/Gems/Margin/Item" unique_id=2131484373]
+[node name="Amount" type="Label" parent="Margin/Column/Grid/Gems/Margin/Item" unique_id=2101583970]
 layout_mode = 2
 theme_type_variation = &"LabelSmallTitle"
+theme_override_font_sizes/font_size = 20
 text = "0"
+script = ExtResource("2_ma6lu")
+metadata/_custom_type_script = "uid://dcpcup5nppub7"
 
 [node name="Sword" type="Button" parent="Margin/Column/Grid" unique_id=1706721305]
 custom_minimum_size = Vector2(100, 100)
@@ -186,16 +203,22 @@ texture = ExtResource("6")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Name" type="Label" parent="Margin/Column/Grid/Sword/Margin/Item" unique_id=1936840030]
+[node name="Name" type="Label" parent="Margin/Column/Grid/Sword/Margin/Item" unique_id=1434447143]
 layout_mode = 2
 theme_type_variation = &"LabelSmallTitle"
+theme_override_font_sizes/font_size = 20
 text = "Sword"
+script = ExtResource("2_ma6lu")
+metadata/_custom_type_script = "uid://dcpcup5nppub7"
 
 [node name="Spacer" type="Control" parent="Margin/Column/Grid/Sword/Margin/Item" unique_id=142059894]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Amount" type="Label" parent="Margin/Column/Grid/Sword/Margin/Item" unique_id=1962732897]
+[node name="Amount" type="Label" parent="Margin/Column/Grid/Sword/Margin/Item" unique_id=1004330745]
 layout_mode = 2
 theme_type_variation = &"LabelSmallTitle"
+theme_override_font_sizes/font_size = 20
 text = "0"
+script = ExtResource("2_ma6lu")
+metadata/_custom_type_script = "uid://dcpcup5nppub7"
