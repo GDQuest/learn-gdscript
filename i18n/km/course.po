@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
 "POT-Creation-Date: 2026-01-21 11:55+0100\n"
-"PO-Revision-Date: 2026-08-15 22:13+0000\n"
+"PO-Revision-Date: 2026-09-06 17:51+0000\n"
 "Last-Translator: SeyhaLite <sok123230@gmail.com>\n"
 "Language-Team: Khmer (Central) <https://hosted.weblate.org/projects/learn-gdscript-from-zero/course/km/>\n"
 "Language: km\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.9.dev0\n"
+"X-Generator: Weblate 2026.9.1.dev0\n"
 "Generated-By: Babel 2.17.0\n"
 
 #. TRANSLATORS: Lesson header
@@ -3910,6 +3910,12 @@ msgstr ""
 "- បង្កើន [code]level[/code] មួយកម្រិត។\n"
 "- បង្កើន [code]max_health[/code] ចំនួន 10%។"
 
+#. TRANSLATORS: Practice goal
+#: course/lesson-14-multiplying/lesson.bbcode:86
+#: course/lesson-16-2d-vectors/lesson.bbcode:73
+msgid "I will call the [code]level_up()[/code] function twice. It will run two times in total."
+msgstr "ដើម្បីពិនិត្យកូដរបស់អ្នក ខ្ញុំនឹងហៅ អនុគមន៍(function) [code]heal()[/code] ពីរដង ដូចនេះ។"
+
 #. TRANSLATORS: Practice description
 #: course/lesson-14-multiplying/lesson.bbcode:86
 msgid "We want our robot to increase in strength as it levels up. Let's increase its health exponentially!"
@@ -3921,52 +3927,52 @@ msgid "To increase a number by 10%, multiply it by [code]1.1[/code]"
 msgstr "ដើម្បីបង្កើនចំនួនមួយ 10% គុណវានឹង [code]1.1[/code]"
 
 #. TRANSLATORS: Practice title
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Reducing damage at higher levels"
 msgstr "ការកាត់បន្ថយការខូចខាតនៅកម្រិតខ្ពស់"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "When our robot's [code]level[/code] is [code]3[/code] or more, we want it to take a lot less damage."
 msgstr "នៅពេលដែល [code]level[/code] របស់ robot គឺ [code]3[/code] ឬលើសពីនេះ យើងចង់ឱ្យវាទទួលរងការខូចខាតតិចជាងមុនឆ្ងាយណាស់។"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Add to the [code]take_damage()[/code] function so the following happens:"
 msgstr "បន្ថែមទៅក្នុង function [code]take_damage()[/code] ដើម្បីឱ្យរឿង ខាងក្រោមនេះកើតឡើង៖"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "- [code]if[/code] the robot's [code]level[/code] is greater than [code]2[/code], reduce the damage [code]amount[/code] by 50%"
 msgstr "- [code]if[/code] កម្រិតរបស់ robot ធំជាង [code]2[/code] សូមកាត់បន្ថយចំនួន [code]amount[/code] នៃការខូចខាត 50%"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "The robot is level 3. An enemy is going to attack for 10 damage. This damage should reduce to 5."
 msgstr "Robot ស្ថិតនៅកម្រិតទី 3។ សត្រូវនឹងវាយប្រហារដោយការខូចខាត 10។ ការខូចខាតនេះគួរតែកាត់បន្ថយមកត្រឹម 5។"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "At higher levels, we want our robot to be super tough and take even less damage!"
 msgstr "នៅកម្រិតខ្ពស់ យើងចង់ឱ្យ robot របស់យើងរឹងមាំខ្លាំង និងទទួលរងការខូចខាតកាន់តែតិច!"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "You need to use an [code]if[/code] statement at the top of the function to check if the robot's [code]level[/code] is greater than [code]2[/code]"
 msgstr "អ្នកត្រូវប្រើសេចក្តីថ្លែងការណ៍ [code]if[/code] នៅផ្នែកខាងលើនៃអនុគមន៍ ដើម្បីពិនិត្យថា [code]level[/code] របស់រ៉ូបូធំជាង [code]2[/code]"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "To reduce the [code]amount[/code], multiply it by a value less than [code]1[/code]"
 msgstr "ដើម្បីបន្ថយ [code]amount[/code] សូមគុណវានឹងតម្លៃដែលតូចជាង [code]1[/code]"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Reassign [code]amount[/code] on its own line inside the [code]if[/code] block, before the line [code]health -= amount[/code]"
 msgstr "កំណត់តម្លៃ [code]amount[/code] ឡើងវិញនៅបន្ទាត់ផ្ទាល់ខ្លួនរបស់វា នៅខាងក្នុង block [code]if[/code] មុនបន្ទាត់ [code]health -= amount[/code]"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Use [code]amount *= 0.5[/code] inside the [code]if[/code] block to reduce the damage by 50%"
 msgstr "ប្រើ [code]amount *= 0.5[/code] នៅខាងក្នុង block [code]if[/code] ដើម្បីបន្ថយការខូចខាត 50%"
 
@@ -4148,52 +4154,52 @@ msgid "You can't use instructions like [code]scale.x += 0.2[/code] for this prac
 msgstr "អ្នកមិនអាចប្រើការណែនាំដូច [code]scale.x += 0.2[/code] សម្រាប់ការអនុវត្តនេះទេ។ ផ្ទុយទៅវិញ អ្នកគួរប្រើ [code]Vector2[/code]"
 
 #. TRANSLATORS: Practice title
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Resetting size and position using vectors"
 msgstr "ការកំណត់ទំហំ និងទីតាំងឡើងវិញដោយប្រើវ៉ិចទ័រ (vectors)"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "The robot's level has increased a lot, and so has its size!"
 msgstr "Level របស់ robot បានកើនឡើងច្រើន ហើយទំហំរបស់វាក៏បានកើនឡើងដែរ!"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Let's fix this by resetting the robot's [code]scale[/code] and [code]position[/code] values."
 msgstr "ចូរយើង ជួសជុលវាដោយកំណត់តម្លៃ [code]scale[/code] និង [code]position[/code] របស់ robot ឡើងវិញ។"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Create a function named [code]reset_robot()[/code] that sets the [code]scale[/code] and [code]position[/code] of the robot."
 msgstr "បង្កើត func មួយឈ្មោះថា [code]reset_robot()[/code] ដែលកំណត់ [code]scale[/code] និង [code]position[/code] របស់ robot។"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "The [code]x[/code] and [code]y[/code] sub-variables of the robot's [code]scale[/code] need to be [code]1.0[/code]."
 msgstr "អថេររង [code]x[/code] និង [code]y[/code] របស់ [code]scale[/code] robot ត្រូវតែជា [code]1.0[/code]។"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "The robot's [code]position[/code] needs to be [code]Vector2(0, 0)[/code]."
 msgstr "[code]position(ទីតាំង)[/code] របស់ robot ត្រូវតែជា [code]Vector2(0, 0)[/code]។"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "As in the previous practice, make sure to use vectors when dealing with scale and position."
 msgstr "ដូចក្នុងការអនុវត្តមុន សូមប្រាកដថាប្រើវ៉ិចទ័រ (vectors) នៅពេលដោះស្រាយជាមួយ scale និង position។"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Perhaps increasing the scale every level was a bad idea! Let's restore the robot to the correct size."
 msgstr "ប្រហែលជាការបង្កើន scale រាល់ Level គឺជាគំនិតមិនល្អ! ចូរយើងស្តារ robot ទៅកាន់ទំហំត្រឹមត្រូវ។"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "To define the function, we use the [code]func[/code] keyword"
 msgstr "ដើម្បីកំណត់និយមន័យអនុគមន៍ យើងប្រើពាក្យគន្លឹះ [code]func[/code]"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "The first line is [code]func reset_robot():[/code]"
 msgstr "បន្ទាត់ទីមួយគឺ [code]func reset_robot():[/code]"
 
@@ -4963,8 +4969,8 @@ msgid "It's the same principle with unit selection."
 msgstr "គោលការណ៍ដូចគ្នា នេះក៏អាចអនុវត្តបានចំពោះការជ្រើសរើស unit (តួអង្គ/អង្គភាព) ក្នុងហ្គេមផងដែរ។ ឧទាហរណ៍ ក្នុងហ្គេម strategy អ្នកអាចជ្រើសរើស unit ច្រើនក្នុងពេលតែមួយ ដោយប្រើ loop ដើម្បីពិនិត្យ unit នីមួយៗ។"
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:60
-msgid "For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it. "
-msgstr "ចំពោះកូអរដោនេនីមួយៗក្នុង array ឈ្មោះ [code]selected_units[/code] យើងពិនិត្យមើលថាតើមាន unit នៅក្នុង cell នោះឬទេ។ បើមាន យើងជ្រើសរើសវា។ "
+msgid "For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it."
+msgstr "ចំពោះកូអរដោនេនីមួយៗក្នុង array(បញ្ជី) ឈ្មោះ [code]selected_units[/code] យើងពិនិត្យមើលថាតើមាន unit នៅក្នុង cell នោះឬទេ។ បើមាន យើងជ្រើសរើសវា។"
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:61
 msgid "In that case, we use an array, a loop, and a condition together."
@@ -4995,8 +5001,8 @@ msgid "We'll revisit those two features again in the following lessons."
 msgstr "យើងនឹងត្រលប់មករៀន ពីរ បី​ មុខងារ នេះម្តងទៀតក្នុងមេរៀនបន្តបន្ទាប់។ បច្ចុប្បន្ន អ្នកគ្រាន់តែដឹងថាវាមាន និងរបៀបប្រើប្រាស់មូលដ្ឋានប៉ុណ្ណោះ។ កុំបារម្ភ អ្នកនឹងយល់កាន់តែច្បាស់នៅពេលអ្នកអនុវត្ត។"
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:83
-msgid "The beauty of loops is that they work regardless of the size of your arrays. "
-msgstr "ភាពអស្ចារ្យនៃ loop គឺថា វាដំណើរការបានដោយមិនអាស្រ័យលើទំហំ array របស់អ្នកឡើយ។ "
+msgid "The beauty of loops is that they work regardless of the size of your arrays."
+msgstr "ភាពអស្ចារ្យនៃ loops គឺថា វាដំណើរការបានដោយមិនអាស្រ័យលើទំហំ array ឡើយ។"
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:84
 msgid "The code just works whether you have one or ten thousand units to select. It is all accomplished with only a couple lines of code."
@@ -5046,52 +5052,52 @@ msgid "You need to pass the cell position to the robot's [code]move_to()[/code] 
 msgstr "អ្នកត្រូវផ្តល់ទីតាំងក្រឡាទៅឱ្យអនុគមន៍ [code]move_to()[/code] របស់រ៉ូបូ នៅក្នុងរង្វិល loop។"
 
 #. TRANSLATORS: Practice title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "Back to the drawing board"
 msgstr "ត្រលប់ទៅ ក្តារគូរវិញ"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "We want to draw many rectangles, something surprisingly common in games."
 msgstr "យើង ចង់គូរចតុកោណកែង (rectangles) ជាច្រើន។ ការគូររាងច្រើនគឺជាអ្វី ដែលគេឃើញញឹកញាប់ក្នុងការបង្កើតហ្គេម! ឧទាហរណ៍ អ្នកអាចត្រូវគូរជញ្ជាំង ផ្ទះ ឬរបាំងជាច្រើនក្នុងហ្គេមរបស់អ្នក។"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "However, writing this code by hand can get tedious. Instead, you could store the size of your shapes in arrays and use a loop to draw them all in batches."
 msgstr "ប៉ុន្តែ ការសរសេរកូដគូររាងមួយៗដោយដៃអាចធ្វើឱ្យនឿយហត់ និងចំណាយពេលច្រើន (បើអ្នកត្រូវគូររាប់រយរាង!)។ ជំនួសមកវិញ អ្នកអាចរក្សាទុកទំហំរាងរបស់អ្នក (width និង height) ក្នុង array ហើយប្រើ loop ដើម្បីគូររាងទាំងអស់នោះម្តងៗ។ វិធីនេះធ្វើឱ្យកូដរបស់អ្នកខ្លី ងាយអាន និងងាយកែប្រែ។"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "That's what you'll do in this practice."
 msgstr "នោះគឺជាអ្វីដែលអ្នកនឹងធ្វើក្នុងការអនុវត្ត (practice) នេះ! សូមត្រៀមខ្លួនប្រើ array និង loop រួមគ្នា។"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "Use a [code]for[/code] loop to draw every rectangle in the [code]rectangle_sizes[/code] array with the [code]draw_rectangle()[/code] function."
 msgstr "ប្រើ [code]for[/code] loop ដើម្បីគូរចតុកោណកែង (rectangle) នីមួយៗដែលមានក្នុង array [code]rectangle_sizes[/code] ដោយប្រើ func [code]draw_rectangle()[/code]។ array នេះផ្ទុកទំហំរាងនីមួយៗ ហើយ loop នឹងយកទំហំម្តងមួយៗមកគូរ។"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "The rectangles shouldn't overlap or cross each other. To avoid that, you'll need to call the [code]jump()[/code] function."
 msgstr "ចតុកោណកែងដែលអ្នកគូរមិនគួរត្រួតគ្នា (overlap) ឬកាត់គ្នាទេ។ ដើម្បីជៀសវាងរឿងនេះ អ្នកត្រូវហៅ func [code]jump()[/code] បន្ទាប់ពីគូររាងមួយៗរួច។ func [code]jump()[/code] នឹងផ្លាស់ទី អណ្ដើក ទៅទីតាំងថ្មី ដើម្បីកុំឱ្យ រូបបន្ទាប់ត្រួតលើ រូបមុន។ ចូរចងចាំ៖ គូរ → jump → គូរ → jump → ... រហូតដល់ចប់។"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "The drawing turtle makes its comeback. Fear not! Armed with loops, you'll make it draw faster than ever before."
 msgstr "អណ្ដើក គូររូប (drawing turtle) ត្រលប់មកវិញហើយ! កុំភ័យ ព្រោះឥឡូវនេះអ្នកមាន loop ជាអាវុធធ្វើឱ្យការគូរកាន់តែលឿន និងងាយស្រួលជាងមុនច្រើន។ មុននេះ អ្នកអាចនឹងត្រូវសរសេរកូដគូរម្តងមួយៗ ប៉ុន្តែឥឡូវ អ្នកគ្រាន់តែប្រើ loop តែមួយ វានឹងគូររាងទាំងអស់ឱ្យអ្នកស្វ័យប្រវត្តិ។"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "Each value in the [code]rectangle_sizes[/code] array is a [code]Vector2[/code]. You'll need to access its [code]x[/code] and [code]y[/code] sub-components to draw rectangles."
 msgstr "តម្លៃនីមួយៗក្នុង array [code]rectangle_sizes[/code] គឺជា [code]Vector2[/code]។ អ្នកនឹងត្រូវចូលប្រើសមាសធាតុរង [code]x[/code] និង [code]y[/code] របស់វា ដើម្បីគូរចតុកោណកែង។"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "In the loop, you first need to call [code]draw_rectangle()[/code], and then [code]jump()[/code]. Otherwise, at least two rectangles will overlap."
 msgstr "នៅក្នុងរង្វិល ដំបូងអ្នកត្រូវហៅ [code]draw_rectangle()[/code] បន្ទាប់មក [code]jump()[/code]។ បើមិនដូច្នេះទេ ចតុកោណកែងយ៉ាងហោចណាស់ពីរនឹងត្រួតលើគ្នា។"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "The arguments when calling [code]jump()[/code] can just be large enough to space out the rectangles. For example, [code]jump(300, 0)[/code]"
 msgstr "អាគុយម៉ង់ពេលហៅ [code]jump()[/code] អាចគ្រាន់តែធំល្មមដើម្បីបំបែកចតុកោណកែងចេញពីគ្នា។ ឧទាហរណ៍ [code]jump(300, 0)[/code]"
 
@@ -5444,6 +5450,11 @@ msgstr "func នេះយកកូអរដោនេក្រឡា [code]Vector
 msgid "To convert, multiply the cell coordinate by the [code]cell_size[/code]."
 msgstr "ដើម្បីប្លែង សូមគុណកូអរដោនេក្រឡាជាមួយ [code]cell_size[/code]។"
 
+#. TRANSLATORS: Practice goal
+#: course/lesson-22-functions-return-values/lesson.bbcode:96
+msgid "I will call the [code]convert_to_world_coordinates()[/code] function three times in total with three different cell coordinates to test your code."
+msgstr "ខ្ញុំនឹងហៅអនុគមន៍ [code]convert_to_world_coordinates()[/code] សរុបចំនួន បីដង ជាមួយនឹង កូអរដោនេក្រឡា ចំនួនបី ផ្សេងគ្នា ដើម្បីសាកល្បងកូដរបស់អ្នក។"
+
 #. TRANSLATORS: Practice description
 #: course/lesson-22-functions-return-values/lesson.bbcode:96
 msgid "We need a function to convert grid coordinates to pixel positions. Complete the function to make the turtle move to the correct cells!"
@@ -5602,6 +5613,11 @@ msgstr "កិច្ចការរបស់អ្នកគឺ យកការ�
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-23-append-to-arrays/lesson.bbcode:79
+msgid "I will call the [code]complete_current_order()[/code] function once for each order. It means the function will run four times in total, once per order."
+msgstr "ខ្ញុំនឹងហៅអនុគមន៍ [code]complete_current_order()[/code] ម្តងសម្រាប់ ការបញ្ជាទិញនីមួយៗ។ នេះមានន័យថាអនុគមន៍នឹងដំណើរការសរុបចំនួនបួនដង គឺម្តងសម្រាប់ការបញ្ជាទិញនីមួយៗ។"
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-23-append-to-arrays/lesson.bbcode:79
 msgid "Remember that the array's [code]pop_front()[/code] function returns the popped value, which allows you to store it in a variable and then pass it to another function."
 msgstr "សូមចងចាំថា func [code]pop_front()[/code] នៃ array នឹងប្រគល់តម្លៃដែលត្រូវបានដកចេញមកវិញ ដែលអនុញ្ញាតឱ្យអ្នករក្សាទុកវាក្នុង variable រួចបញ្ជូនវាទៅ func ផ្សេងទៀត។"
 
@@ -5621,52 +5637,52 @@ msgid "You then need to append the popped value to the completed_orders array. T
 msgstr "បន្ទាប់មកអ្នកត្រូវបន្ថែមតម្លៃដែលបានដកយកទៅក្នុង array completed_orders។ ដើម្បីបន្ថែមតម្លៃទៅក្នុង array អ្នកអាចហៅ [code]array.append()[/code]។"
 
 #. TRANSLATORS: Practice title
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Clearing up the crates"
 msgstr "សម្អាតប្រអប់"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from the [code]crates[/code] array."
 msgstr "ប្រអប់កំពុងកើនឡើងច្រើននៅលើវេទិកា។ យកវាចេញពីទីនោះដោយ pop (ដកចេញ) វាពី array [code]crates[/code]។"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "You need to remove them from top to bottom using the array's [code]pop_back()[/code] function."
 msgstr "អ្នកត្រូវដកវា ចេញពីខាងលើ មកខាងក្រោម ដោយប្រើ func [code]pop_back()[/code] របស់ array។"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Your code should remove all the crates in the array using a while loop."
 msgstr "កូដរបស់អ្នក ត្រូវដកប្រអប់ទាំងអស់ចេញពី array ដោយប្រើ while loop (រង្វិលជុំ)។"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "[b]Careful![/b] If you write the while loop incorrectly, you can freeze the program."
 msgstr "[b]ប្រយ័ត្ន![/b] បើអ្នកសរសេរ while loop (រង្វិលជុំ ខុស វាអាចធ្វើឱ្យកម្មវិធីជាប់គាំង(ដើរ រង្វិលជុំ រហូតគ្មានទីបញ្ចប់ដល់គាំងកម្មវិធី)។"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "You can check if the [code]crates[/code] array still has values by writing [code]while crates:[/code]. This works because an empty array counts as [code]false[/code], and an array with items counts as [code]true[/code]."
 msgstr "អ្នកអាចពិនិត្យមើលថាតើ array [code]crates[/code] នៅមានតម្លៃដែរឬទេ ដោយសរសេរ [code]while crates:[/code]។ វាដំណើរការដោយសារ array ទទេ (មិនមានអី) ត្រូវបានចាត់ទុកជា [code]false[/code] ហើយ array ដែលមានតម្លៃត្រូវបានចាត់ទុកជា [code]true[/code]។"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from their array."
 msgstr "ប្រអប់កំពុងកើនឡើង ច្រើននៅលើវេទិកា។ យកវាចេញពី​ ទីនោះដោយ pop (ដកចេញ) វាពី array របស់វា។"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Think about how [code]while[/code] loops work."
 msgstr "គិតពីរបៀបដែល [code]while[/code] loops ដំណើរការ។"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Every time you [code]pop[/code] an item, the array's [code]size[/code] gets smaller."
 msgstr "រាល់ពេលអ្នក [code]pop[/code] ធាតុមួយ [code]size[/code] របស់ array នឹងតូចជាងមុន។"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "You can write [code]while crates:[/code] to run code in a loop while there are values in the [code]crates[/code] array."
 msgstr "អ្នកអាចសរសេរ [code]while crates:[/code] ដើម្បីដំណើរការកូដក្នុងរង្វិល ខណៈដែលនៅមានតម្លៃក្នុង array [code]crates[/code]។"
 

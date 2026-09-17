@@ -3969,6 +3969,13 @@ msgstr ""
 "- seviyesini, [code]level[/code], bir artırır.\n"
 "- en yüksek sağlık seviyesini, [code]max_health[/code], %10 artırır."
 
+#. TRANSLATORS: Practice goal
+#: course/lesson-14-multiplying/lesson.bbcode:86
+#: course/lesson-16-2d-vectors/lesson.bbcode:73
+#, fuzzy
+msgid "I will call the [code]level_up()[/code] function twice. It will run two times in total."
+msgstr "Aşağıdaki döngü hücre değişkenini, [code]cell[/code], üç kez değiştirecektir."
+
 #. TRANSLATORS: Practice description
 #: course/lesson-14-multiplying/lesson.bbcode:86
 msgid "We want our robot to increase in strength as it levels up. Let's increase its health exponentially!"
@@ -3980,53 +3987,53 @@ msgid "To increase a number by 10%, multiply it by [code]1.1[/code]"
 msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Reducing damage at higher levels"
 msgstr "Daha yüksek seviyelerde hasarı azaltmak"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "When our robot's [code]level[/code] is [code]3[/code] or more, we want it to take a lot less damage."
 msgstr "Robotumuzun seviyesi, [code]level[/code], [code] 3[/code] veya daha fazla olduğunda, çok daha az hasar alsın istiyoruz."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Add to the [code]take_damage()[/code] function so the following happens:"
 msgstr "[code]take_damage()[/code] fonksiyonuna, aşağıdakileri gerçekleştirmek için ekleme yapın:"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "- [code]if[/code] the robot's [code]level[/code] is greater than [code]2[/code], reduce the damage [code]amount[/code] by 50%"
 msgstr "- eğer, [code]if[/code], robotun seviyesi, [code]level[/code], [code]2[/code]'den büyükse, hasar miktarını, [code]amount[/code], %50 oranında azaltın"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "The robot is level 3. An enemy is going to attack for 10 damage. This damage should reduce to 5."
 msgstr "Robot seviyesi 3. Bir düşman, 10 hasar vermek için saldırmak üzere. Bu hasarın miktarı 5'e düşmeli."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "At higher levels, we want our robot to be super tough and take even less damage!"
 msgstr "Daha yüksek seviyelerde, robotumuzun çok sağlam olmasını ve daha da az hasar almasını istiyoruz!"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "You need to use an [code]if[/code] statement at the top of the function to check if the robot's [code]level[/code] is greater than [code]2[/code]"
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 #, fuzzy
 msgid "To reduce the [code]amount[/code], multiply it by a value less than [code]1[/code]"
 msgstr "Ardından, [code]hasar *= 2[/code] satırı, bunu [code]2[/code] ile çarparak [code]30[/code] verir."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Reassign [code]amount[/code] on its own line inside the [code]if[/code] block, before the line [code]health -= amount[/code]"
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Use [code]amount *= 0.5[/code] inside the [code]if[/code] block to reduce the damage by 50%"
 msgstr ""
 
@@ -4210,52 +4217,52 @@ msgid "You can't use instructions like [code]scale.x += 0.2[/code] for this prac
 msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Resetting size and position using vectors"
 msgstr "Vektörler kullanarak boyut ve konumu sıfırlamak"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "The robot's level has increased a lot, and so has its size!"
 msgstr "Robotun seviyesi çok arttı ve boyutu da çok büyüdü!"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Let's fix this by resetting the robot's [code]scale[/code] and [code]position[/code] values."
 msgstr "Robotun ölçek, [code]scale[/code], ve konum, [code]position[/code], değerlerini sıfırlayarak bunu düzeltelim."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Create a function named [code]reset_robot()[/code] that sets the [code]scale[/code] and [code]position[/code] of the robot."
 msgstr "Robotun [code]scale[/code] ve [code]position[/code] değerlerini ayarlayan [code]reset_robot()[/code] isminde bir fonksiyon oluşturun."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "The [code]x[/code] and [code]y[/code] sub-variables of the robot's [code]scale[/code] need to be [code]1.0[/code]."
 msgstr "Robotun [code]scale[/code] değişkeninin [code] x[/code] ve [code]y[/code] alt-değişkenlerinin [code]1.0[/code] olması gerekir."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "The robot's [code]position[/code] needs to be [code]Vector2(0, 0)[/code]."
 msgstr "Robotun [code]position[/code] değerinin, [code] Vector2(0, 0)[/code] olması gerekir."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "As in the previous practice, make sure to use vectors when dealing with scale and position."
 msgstr "Önceki uygulamada olduğu gibi, ölçek ve konum ile uğraşırken vektörleri kullandığınızdan emin olun."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Perhaps increasing the scale every level was a bad idea! Let's restore the robot to the correct size."
 msgstr "Belki de ölçeği her seviye atlamada artırmak kötü bir fikirdi! Robotu doğru boyutuna geri getirelim."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "To define the function, we use the [code]func[/code] keyword"
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 #, fuzzy
 msgid "The first line is [code]func reset_robot():[/code]"
 msgstr "Robotun başlangıç hücresi, cell, değeri [code]Vector2(2, 0)[/code]."
@@ -5037,7 +5044,7 @@ msgstr "Birimlerin seçiminde de aynı ilke geçerli."
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:60
 #, fuzzy
-msgid "For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it. "
+msgid "For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it."
 msgstr "[code]selected_units[/code] (seçili_birimler) adlı dizideki her konum için, o hücrede bir birimin olup olmadığını kontrol ederiz. Eğer varsa, onu seçeriz."
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:61
@@ -5070,7 +5077,7 @@ msgstr "Bu iki özelliği, ilerleyen derslerde tekrar gözden geçireceğiz."
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:83
 #, fuzzy
-msgid "The beauty of loops is that they work regardless of the size of your arrays. "
+msgid "The beauty of loops is that they work regardless of the size of your arrays."
 msgstr "Döngülerin güzelliği, dizilerinizin boyutundan bağımsız olarak çalışmasıdır."
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:84
@@ -5122,52 +5129,52 @@ msgid "You need to pass the cell position to the robot's [code]move_to()[/code] 
 msgstr "Dizinin [code]pop_back()[/code] fonksiyonunu kullanarak bunları yukarıdan aşağıya doğru kaldırmanız gerekir."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "Back to the drawing board"
 msgstr "Çizim tahtasına geri dönüş"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "We want to draw many rectangles, something surprisingly common in games."
 msgstr "Oyunlarda, şaşırtıcı derecede yaygın olan, çok sayıda dikdörtgen çizmek istiyoruz."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "However, writing this code by hand can get tedious. Instead, you could store the size of your shapes in arrays and use a loop to draw them all in batches."
 msgstr "Ancak bu kodu elle yazmak sıkıntılı olabilir. Bunun yerine, şekillerinin boyutlarını dizilerde saklayabilir, ve hepsini toplu olarak çizmek için bir döngü kullanabilirsiniz."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "That's what you'll do in this practice."
 msgstr "Bu uygulamada yapacağınız şey tam da bu."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "Use a [code]for[/code] loop to draw every rectangle in the [code]rectangle_sizes[/code] array with the [code]draw_rectangle()[/code] function."
 msgstr "[code]draw_rectangle()[/code] fonksiyonu ile [code]rectangle_sizes[/code] dizisindeki her bir dikdörtgeni çizmek için bir [code]for[/code] döngüsü kullanın."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "The rectangles shouldn't overlap or cross each other. To avoid that, you'll need to call the [code]jump()[/code] function."
 msgstr "Dikdörtgenler üst üste gelmemeli veya birbirini kesmemelidir. Bunu önlemek için [code]jump()[/code] fonksiyonunu da çağırmanız gerek. (Ayrıca, Vector2'nin x ve y değerlerini tuttuğunu hatırlayın)."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "The drawing turtle makes its comeback. Fear not! Armed with loops, you'll make it draw faster than ever before."
 msgstr "Çizim kaplumbağası aramıza dönüyor. Ama korkmayın! Döngülerle donanmış olarak, her zamankinden daha hızlı çizmesini sağlayacaksınız."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "Each value in the [code]rectangle_sizes[/code] array is a [code]Vector2[/code]. You'll need to access its [code]x[/code] and [code]y[/code] sub-components to draw rectangles."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "In the loop, you first need to call [code]draw_rectangle()[/code], and then [code]jump()[/code]. Otherwise, at least two rectangles will overlap."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "The arguments when calling [code]jump()[/code] can just be large enough to space out the rectangles. For example, [code]jump(300, 0)[/code]"
 msgstr ""
 
@@ -5532,6 +5539,11 @@ msgstr "Fonksiyon, girdi değişkeni olarak bir [code]Vector2[/code] hücre konu
 msgid "To convert, multiply the cell coordinate by the [code]cell_size[/code]."
 msgstr ""
 
+#. TRANSLATORS: Practice goal
+#: course/lesson-22-functions-return-values/lesson.bbcode:96
+msgid "I will call the [code]convert_to_world_coordinates()[/code] function three times in total with three different cell coordinates to test your code."
+msgstr ""
+
 #. TRANSLATORS: Practice description
 #: course/lesson-22-functions-return-values/lesson.bbcode:96
 #, fuzzy
@@ -5704,6 +5716,11 @@ msgstr "Göreviniz, dizinin [code]append()[/code] (ekle_arkaya) ve [code]pop_fro
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-23-append-to-arrays/lesson.bbcode:79
+msgid "I will call the [code]complete_current_order()[/code] function once for each order. It means the function will run four times in total, once per order."
+msgstr ""
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-23-append-to-arrays/lesson.bbcode:79
 msgid "Remember that the array's [code]pop_front()[/code] function returns the popped value, which allows you to store it in a variable and then pass it to another function."
 msgstr "Dizinin [code]pop_front()[/code] fonksiyonunun çıkarılan değeri geri döndürdüğünü unutmayın, bu da onu bir değişkende saklamanıza ve daha sonra başka bir fonksiyona aktarmanıza olanak tanır."
 
@@ -5723,54 +5740,54 @@ msgid "You then need to append the popped value to the completed_orders array. T
 msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Clearing up the crates"
 msgstr "Sandıkları düzenlemek"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from the [code]crates[/code] array."
 msgstr "Sandıklar birikmeye başladı. Onları [code]crates[/code] (sandıklar) dizisinden kaldırıp yolu temizleyin."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "You need to remove them from top to bottom using the array's [code]pop_back()[/code] function."
 msgstr "Dizinin [code]pop_back()[/code] fonksiyonunu kullanarak bunları yukarıdan aşağıya doğru kaldırmanız gerekir."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Your code should remove all the crates in the array using a while loop."
 msgstr "Kodunuz, bir while döngüsü kullanarak dizideki tüm kasaları kaldırmalıdır."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 #, fuzzy
 msgid "[b]Careful![/b] If you write the while loop incorrectly, you can freeze the program."
 msgstr "[b]Dikkatli olun![/b] while döngüsünü dikkatsizce çalıştırırsanız yazılımı kilitleyebilirsiniz."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "You can check if the [code]crates[/code] array still has values by writing [code]while crates:[/code]. This works because an empty array counts as [code]false[/code], and an array with items counts as [code]true[/code]."
 msgstr "[code]while crates:[/code] yazarak [code]crates[/code] dizisinin hala değerler içerip içermediğini (yani boş olmadığını) kontrol edebilirsiniz. Bu, boş bir dizi [code]false[/code] olarak, ve öğeler içeren bir dizi ise [code]true[/code] olarak sayıldığı için işe yarar."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from their array."
 msgstr "Sandıklar birikmeye başladı. Onları dizildikleri yerden kaldırıp yoldan çekin."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 #, fuzzy
 msgid "Think about how [code]while[/code] loops work."
 msgstr "[code]while[/code] döngülerinin başka iyi kullanımları da var:"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Every time you [code]pop[/code] an item, the array's [code]size[/code] gets smaller."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "You can write [code]while crates:[/code] to run code in a loop while there are values in the [code]crates[/code] array."
 msgstr ""
 

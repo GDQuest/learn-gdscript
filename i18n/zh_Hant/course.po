@@ -3985,6 +3985,13 @@ msgstr ""
 "- 將 [code]level[/code] 增加 1。\n"
 "- 將 [code]max_health[/code] 增加 10%。"
 
+#. TRANSLATORS: Practice goal
+#: course/lesson-14-multiplying/lesson.bbcode:86
+#: course/lesson-16-2d-vectors/lesson.bbcode:73
+#, fuzzy
+msgid "I will call the [code]level_up()[/code] function twice. It will run two times in total."
+msgstr "以下的迴圈將改變 [code]cell[/code] 三次。"
+
 #. TRANSLATORS: Practice description
 #: course/lesson-14-multiplying/lesson.bbcode:86
 msgid "We want our robot to increase in strength as it levels up. Let's increase its health exponentially!"
@@ -3996,53 +4003,53 @@ msgid "To increase a number by 10%, multiply it by [code]1.1[/code]"
 msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Reducing damage at higher levels"
 msgstr "等級高時會減少傷害量"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "When our robot's [code]level[/code] is [code]3[/code] or more, we want it to take a lot less damage."
 msgstr "當我們的機器人 [code]等級[/code] 為 [code]3[/code] 或更高時，我們希望它受到的傷害大幅減少。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Add to the [code]take_damage()[/code] function so the following happens:"
 msgstr "修改 [code]take_damage()[/code] 函式，使其符合以下條件："
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "- [code]if[/code] the robot's [code]level[/code] is greater than [code]2[/code], reduce the damage [code]amount[/code] by 50%"
 msgstr "- [code]if[/code] 機器人的 [code]level[/code] 大於 [code]2[/code]，則將傷害 [code]amount[/code] 減少 50%"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "The robot is level 3. An enemy is going to attack for 10 damage. This damage should reduce to 5."
 msgstr "機器人目前的等級為 3。敵人即將造成 10 點傷害，最終傷害應該減少到 5 點。"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "At higher levels, we want our robot to be super tough and take even less damage!"
 msgstr "在更高等級時，我們希望機器人變得更加耐打，受到的傷害進一步減少！"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "You need to use an [code]if[/code] statement at the top of the function to check if the robot's [code]level[/code] is greater than [code]2[/code]"
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 #, fuzzy
 msgid "To reduce the [code]amount[/code], multiply it by a value less than [code]1[/code]"
 msgstr "然後 [code]damage *= 2[/code] 是將 damage 乘以 [code]2[/code]，得到 [code]30[/code]。"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Reassign [code]amount[/code] on its own line inside the [code]if[/code] block, before the line [code]health -= amount[/code]"
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Use [code]amount *= 0.5[/code] inside the [code]if[/code] block to reduce the damage by 50%"
 msgstr ""
 
@@ -4226,52 +4233,52 @@ msgid "You can't use instructions like [code]scale.x += 0.2[/code] for this prac
 msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Resetting size and position using vectors"
 msgstr "使用向量重設大小與位置"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "The robot's level has increased a lot, and so has its size!"
 msgstr "機器人的等級大幅提升，體型也跟著變大了！"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Let's fix this by resetting the robot's [code]scale[/code] and [code]position[/code] values."
 msgstr "讓我們透過重設機器人的 [code]scale[/code] 和 [code]position[/code] 來修正這個問題。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Create a function named [code]reset_robot()[/code] that sets the [code]scale[/code] and [code]position[/code] of the robot."
 msgstr "請建立一個名為 [code]reset_robot()[/code] 的函式，用於設定機器人的 [code]scale[/code] 和 [code]position[/code] 。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "The [code]x[/code] and [code]y[/code] sub-variables of the robot's [code]scale[/code] need to be [code]1.0[/code]."
 msgstr "機器人 [code]scale[/code] 的 [code]x[/code] 和 [code]y[/code] 子變數應設為 [code]1.0[/code]。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "The robot's [code]position[/code] needs to be [code]Vector2(0, 0)[/code]."
 msgstr "機器人 [code]position[/code] 應設為 [code]Vector2(0, 0)[/code]。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "As in the previous practice, make sure to use vectors when dealing with scale and position."
 msgstr "與前一個練習一樣，請確保在處理縮放與位置時使用向量。"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Perhaps increasing the scale every level was a bad idea! Let's restore the robot to the correct size."
 msgstr "也許每次升級都增加縮放比例並不是個好主意！讓我們把機器人恢復到正確的大小。"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "To define the function, we use the [code]func[/code] keyword"
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 #, fuzzy
 msgid "The first line is [code]func reset_robot():[/code]"
 msgstr "機器人初始的位置是 [code]Vector2(2, 0)[/code]。"
@@ -5058,7 +5065,7 @@ msgstr "這與選取單位的原理相同。"
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:60
 #, fuzzy
-msgid "For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it. "
+msgid "For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it."
 msgstr "對於名為 [code]selected_units[/code] 的陣列中每個座標，我們會檢查該格是否有單位存在。如果有，我們就選取它。"
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:61
@@ -5091,7 +5098,7 @@ msgstr "我們會在接下來的課程中再次探討這兩個功能。"
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:83
 #, fuzzy
-msgid "The beauty of loops is that they work regardless of the size of your arrays. "
+msgid "The beauty of loops is that they work regardless of the size of your arrays."
 msgstr "迴圈的美妙之處在於，它們無論面對多大的陣列都能正常運作。"
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:84
@@ -5143,52 +5150,52 @@ msgid "You need to pass the cell position to the robot's [code]move_to()[/code] 
 msgstr "你需要從上到下使用陣列的 [code]pop_back()[/code] 函式移除它們。"
 
 #. TRANSLATORS: Practice title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "Back to the drawing board"
 msgstr "回到畫板"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "We want to draw many rectangles, something surprisingly common in games."
 msgstr "要畫出許多矩形，這在遊戲中是相當常見的需求。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "However, writing this code by hand can get tedious. Instead, you could store the size of your shapes in arrays and use a loop to draw them all in batches."
 msgstr "不過手動寫這段程式碼會變得相當繁瑣。相反地，你可以將圖形的大小存儲在陣列中，並使用迴圈來批次繪製它們。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "That's what you'll do in this practice."
 msgstr "這正是你在這次練習中要做的事。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "Use a [code]for[/code] loop to draw every rectangle in the [code]rectangle_sizes[/code] array with the [code]draw_rectangle()[/code] function."
 msgstr "使用 [code]for[/code] 迴圈來繪製 [code]rectangle_sizes[/code] 陣列中的每一個矩形，並利用 [code]draw_rectangle()[/code] 函式來進行繪製。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "The rectangles shouldn't overlap or cross each other. To avoid that, you'll need to call the [code]jump()[/code] function."
 msgstr "矩形不應該互相重疊或交叉。為了避免這個問題，你需要呼叫 [code]jump()[/code] 函式。"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "The drawing turtle makes its comeback. Fear not! Armed with loops, you'll make it draw faster than ever before."
 msgstr "會畫畫的海龜再次回歸。別擔心！有了迴圈的幫助，你將讓它畫得比以往更快。"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "Each value in the [code]rectangle_sizes[/code] array is a [code]Vector2[/code]. You'll need to access its [code]x[/code] and [code]y[/code] sub-components to draw rectangles."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "In the loop, you first need to call [code]draw_rectangle()[/code], and then [code]jump()[/code]. Otherwise, at least two rectangles will overlap."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "The arguments when calling [code]jump()[/code] can just be large enough to space out the rectangles. For example, [code]jump(300, 0)[/code]"
 msgstr ""
 
@@ -5553,6 +5560,11 @@ msgstr "這函式接收一個 [code]Vector2[/code] 格子座標作為引數。�
 msgid "To convert, multiply the cell coordinate by the [code]cell_size[/code]."
 msgstr ""
 
+#. TRANSLATORS: Practice goal
+#: course/lesson-22-functions-return-values/lesson.bbcode:96
+msgid "I will call the [code]convert_to_world_coordinates()[/code] function three times in total with three different cell coordinates to test your code."
+msgstr ""
+
 #. TRANSLATORS: Practice description
 #: course/lesson-22-functions-return-values/lesson.bbcode:96
 #, fuzzy
@@ -5726,6 +5738,11 @@ msgstr "你的工作是使用陣列的 [code]append()[/code] 和 [code]pop_front
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-23-append-to-arrays/lesson.bbcode:79
+msgid "I will call the [code]complete_current_order()[/code] function once for each order. It means the function will run four times in total, once per order."
+msgstr ""
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-23-append-to-arrays/lesson.bbcode:79
 msgid "Remember that the array's [code]pop_front()[/code] function returns the popped value, which allows you to store it in a variable and then pass it to another function."
 msgstr "記得 [code]pop_front()[/code] 函式會回傳被移除的值，這樣你就可以將它儲存到變數中，然後再傳遞給另一個函式。"
 
@@ -5745,55 +5762,55 @@ msgid "You then need to append the popped value to the completed_orders array. T
 msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Clearing up the crates"
 msgstr "清理箱子"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from the [code]crates[/code] array."
 msgstr "箱子堆積在平台上。請透過從 [code]crates[/code] 陣列中移除它們來清理空間。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "You need to remove them from top to bottom using the array's [code]pop_back()[/code] function."
 msgstr "你需要從上到下使用陣列的 [code]pop_back()[/code] 函式移除它們。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Your code should remove all the crates in the array using a while loop."
 msgstr "你的程式碼應該使用 [code]while[/code] 迴圈來移除陣列中的所有箱子。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 #, fuzzy
 msgid "[b]Careful![/b] If you write the while loop incorrectly, you can freeze the program."
 msgstr "[b]小心！[/b]如果不小心錯誤地執行 [code]while[/code] 迴圈，可能會意外造成程式鎖死。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 #, fuzzy
 msgid "You can check if the [code]crates[/code] array still has values by writing [code]while crates:[/code]. This works because an empty array counts as [code]false[/code], and an array with items counts as [code]true[/code]."
 msgstr "你可以透過寫 [code]while crates:[/code] 來檢查 [code]crates[/code] 陣列是否還有資料"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from their array."
 msgstr "箱子正在平台上堆積。請透過從陣列中移除它們來清理空間。"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 #, fuzzy
 msgid "Think about how [code]while[/code] loops work."
 msgstr "[code]while[/code] 迴圈還有其他良好的應用場景："
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Every time you [code]pop[/code] an item, the array's [code]size[/code] gets smaller."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "You can write [code]while crates:[/code] to run code in a loop while there are values in the [code]crates[/code] array."
 msgstr ""
 

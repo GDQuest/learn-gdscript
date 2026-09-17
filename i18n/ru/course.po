@@ -3960,6 +3960,13 @@ msgstr ""
 "- Увеличивала [code]level[/code] на единицу.\n"
 "- Увеличивала [code]max_health[/code] на 10%."
 
+#. TRANSLATORS: Practice goal
+#: course/lesson-14-multiplying/lesson.bbcode:86
+#: course/lesson-16-2d-vectors/lesson.bbcode:73
+#, fuzzy
+msgid "I will call the [code]level_up()[/code] function twice. It will run two times in total."
+msgstr "Чтобы проверить твой код, я вызову функцию [code]heal()[/code] дважды, вот так:"
+
 #. TRANSLATORS: Practice description
 #: course/lesson-14-multiplying/lesson.bbcode:86
 msgid "We want our robot to increase in strength as it levels up. Let's increase its health exponentially!"
@@ -3971,53 +3978,53 @@ msgid "To increase a number by 10%, multiply it by [code]1.1[/code]"
 msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Reducing damage at higher levels"
 msgstr "Уменьшение принимаемого урона на высоких уровнях"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "When our robot's [code]level[/code] is [code]3[/code] or more, we want it to take a lot less damage."
 msgstr "Мы хотим, чтобы наш робот получал гораздо меньше урона, когда его [code]level[/code] равен [code]3[/code] или больше."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Add to the [code]take_damage()[/code] function so the following happens:"
 msgstr "Доработайте функцию [code]take_damage()[/code], чтобы при её вызове случалось это:"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "- [code]if[/code] the robot's [code]level[/code] is greater than [code]2[/code], reduce the damage [code]amount[/code] by 50%"
 msgstr "- [code]if[/code] [code]level[/code] робота больше [code]2[/code], уменьшите урон [code]amount[/code] на 50%"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "The robot is level 3. An enemy is going to attack for 10 damage. This damage should reduce to 5."
 msgstr "У Робота 3 уровень. Враг собирается нанести 10 урона своей атакой. Этот урон должен уменьшиться до 5."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "At higher levels, we want our robot to be super tough and take even less damage!"
 msgstr "Мы хотим, чтобы на высоких уровнях наш робот становился сверхпрочным и получал ещё меньше повреждений!"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "You need to use an [code]if[/code] statement at the top of the function to check if the robot's [code]level[/code] is greater than [code]2[/code]"
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 #, fuzzy
 msgid "To reduce the [code]amount[/code], multiply it by a value less than [code]1[/code]"
 msgstr "Чтобы уменьшить [code]amount[/code], умножьте его на значение меньше [code]1[/code]"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Reassign [code]amount[/code] on its own line inside the [code]if[/code] block, before the line [code]health -= amount[/code]"
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-14-multiplying/lesson.bbcode:110
+#: course/lesson-14-multiplying/lesson.bbcode:112
 msgid "Use [code]amount *= 0.5[/code] inside the [code]if[/code] block to reduce the damage by 50%"
 msgstr ""
 
@@ -4202,53 +4209,53 @@ msgid "You can't use instructions like [code]scale.x += 0.2[/code] for this prac
 msgstr "В этом упражнении нельзя использовать такие инструкции, как [code]scale.x += 0.2[/code]. Вместо этого следует использовать [code]Vector2[/code]"
 
 #. TRANSLATORS: Practice title
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Resetting size and position using vectors"
 msgstr "Сбросьте размер и позицию при помощи векторов"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "The robot's level has increased a lot, and so has its size!"
 msgstr "Уровень робота очень сильно увеличился, как и его размер!"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Let's fix this by resetting the robot's [code]scale[/code] and [code]position[/code] values."
 msgstr "Давайте исправим это сбросом значений [code]scale[/code] и [code]position[/code] робота."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Create a function named [code]reset_robot()[/code] that sets the [code]scale[/code] and [code]position[/code] of the robot."
 msgstr "Создайте функцию [code]reset_robot()[/code], сбрасывающую [code]scale[/code] и [code]position[/code] робота."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "The [code]x[/code] and [code]y[/code] sub-variables of the robot's [code]scale[/code] need to be [code]1.0[/code]."
 msgstr "Вложенные значения [code]x[/code] и [code]y[/code] переменной [code]scale[/code] робота должны быть установлены в [code]1.0[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "The robot's [code]position[/code] needs to be [code]Vector2(0, 0)[/code]."
 msgstr "[code]position[/code] робота должна быть установлена в [code]Vector2(0, 0)[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "As in the previous practice, make sure to use vectors when dealing with scale and position."
 msgstr "Как и в предыдущем упражнении, убедитесь что вы используете векторы при изменении размера и позиции."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 msgid "Perhaps increasing the scale every level was a bad idea! Let's restore the robot to the correct size."
 msgstr "Кажется, увеличение размера при каждом повышении уровня было плохой идеей! Давайте вернём роботу правильный размер."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 #, fuzzy
 msgid "To define the function, we use the [code]func[/code] keyword"
 msgstr "Для определения функции мы используем ключевое слово [code]func[/code]"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-16-2d-vectors/lesson.bbcode:90
+#: course/lesson-16-2d-vectors/lesson.bbcode:92
 #, fuzzy
 msgid "The first line is [code]func reset_robot():[/code]"
 msgstr "Первая строка: [code]func reset_robot():[/code]"
@@ -5041,7 +5048,7 @@ msgstr "Тот же принцип использовался при выбор�
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:60
 #, fuzzy
-msgid "For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it. "
+msgid "For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it."
 msgstr "Для каждой координаты в массиве с именем [code]selected_units[/code] мы проверяем, есть ли юнит в этой ячейке. Если да, то выбираем его."
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:61
@@ -5074,7 +5081,7 @@ msgstr "Мы ещё встретимся с этими особенностям�
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:83
 #, fuzzy
-msgid "The beauty of loops is that they work regardless of the size of your arrays. "
+msgid "The beauty of loops is that they work regardless of the size of your arrays."
 msgstr "Циклы прекрасны тем, что они работают независимо от размера ваших массивов."
 
 #: course/lesson-20-looping-over-arrays/lesson.bbcode:84
@@ -5127,54 +5134,54 @@ msgid "You need to pass the cell position to the robot's [code]move_to()[/code] 
 msgstr "Вам нужно передать позицию клетки в функцию [code]move_to()[/code] робота внутри цикла."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "Back to the drawing board"
 msgstr "Возвращаемся к доске для рисования"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "We want to draw many rectangles, something surprisingly common in games."
 msgstr "Мы хотим нарисовать много прямоугольников, что на удивление часто встречается в играх."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "However, writing this code by hand can get tedious. Instead, you could store the size of your shapes in arrays and use a loop to draw them all in batches."
 msgstr "Однако, писать код вручную было бы утомительно. Вместо этого вы можете записать размер всех фигур в массив и использовать цикл для рисования всех их разом."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "That's what you'll do in this practice."
 msgstr "Это именно то, что вы будете делать в этом упражнении."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "Use a [code]for[/code] loop to draw every rectangle in the [code]rectangle_sizes[/code] array with the [code]draw_rectangle()[/code] function."
 msgstr "Используйте цикл [code]for[/code] для рисования каждого прямоугольника из массива [code]rectangle_sizes[/code] при помощи функции [code]draw_rectangle()[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "The rectangles shouldn't overlap or cross each other. To avoid that, you'll need to call the [code]jump()[/code] function."
 msgstr "Прямоугольники не должны перекрывать или пересекать друг друга. Чтобы избежать этого, вам нужно использовать функцию [code]jump()[/code]."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 msgid "The drawing turtle makes its comeback. Fear not! Armed with loops, you'll make it draw faster than ever before."
 msgstr "Рисующая черепаха возвращается. Не бойтесь! Вооружённые циклами, вы сделаете процесс рисования быстрым, как никогда."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 #, fuzzy
 msgid "Each value in the [code]rectangle_sizes[/code] array is a [code]Vector2[/code]. You'll need to access its [code]x[/code] and [code]y[/code] sub-components to draw rectangles."
 msgstr "Каждое значение в массиве [code]rectangle_sizes[/code] представляет собой [code]Vector2[/code]. Вам понадобится получить доступ к его подкомпонентам [code]x[/code] и [code]y[/code], чтобы нарисовать прямоугольники."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 #, fuzzy
 msgid "In the loop, you first need to call [code]draw_rectangle()[/code], and then [code]jump()[/code]. Otherwise, at least two rectangles will overlap."
 msgstr "В цикле сначала нужно вызвать [code]draw_rectangle()[/code], а затем [code]jump()[/code]. В противном случае как минимум два прямоугольника будут пересекаться."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:106
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
 #, fuzzy
 msgid "The arguments when calling [code]jump()[/code] can just be large enough to space out the rectangles. For example, [code]jump(300, 0)[/code]"
 msgstr "Аргументы при вызове [code]jump()[/code] могут быть достаточно большими, чтобы распределить прямоугольники по пространству. Например, [code]jump(300, 0)[/code]"
@@ -5534,6 +5541,11 @@ msgstr "Функция принимает координату ячейки в �
 msgid "To convert, multiply the cell coordinate by the [code]cell_size[/code]."
 msgstr "Чтобы конвертировать, умножьте координату ячейки на [code]cell_size[/code]."
 
+#. TRANSLATORS: Practice goal
+#: course/lesson-22-functions-return-values/lesson.bbcode:96
+msgid "I will call the [code]convert_to_world_coordinates()[/code] function three times in total with three different cell coordinates to test your code."
+msgstr ""
+
 #. TRANSLATORS: Practice description
 #: course/lesson-22-functions-return-values/lesson.bbcode:96
 msgid "We need a function to convert grid coordinates to pixel positions. Complete the function to make the turtle move to the correct cells!"
@@ -5695,6 +5707,11 @@ msgstr "Ваша задача — перемещать заказы из спи�
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-23-append-to-arrays/lesson.bbcode:79
+msgid "I will call the [code]complete_current_order()[/code] function once for each order. It means the function will run four times in total, once per order."
+msgstr ""
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-23-append-to-arrays/lesson.bbcode:79
 msgid "Remember that the array's [code]pop_front()[/code] function returns the popped value, which allows you to store it in a variable and then pass it to another function."
 msgstr "Помните, что функция [code]pop_front()[/code] возвращает удалённое из массива значение, что позволяет вам сохранить его в переменную и передать в другую функцию."
 
@@ -5716,54 +5733,54 @@ msgid "You then need to append the popped value to the completed_orders array. T
 msgstr "Затем вам нужно добавить извлечённое значение в массив [code]completed_orders[/code]. Чтобы добавить значение в массив, можно вызвать [code]array.append()[/code]."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Clearing up the crates"
 msgstr "Очистка ящиков"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from the [code]crates[/code] array."
 msgstr "На платформе скопились ящики. Уберите ящики с дороги, удалив их из массива [code]crates[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "You need to remove them from top to bottom using the array's [code]pop_back()[/code] function."
 msgstr "Убирать ящики нужно сверху вниз, при помощи функции [code]pop_back()[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Your code should remove all the crates in the array using a while loop."
 msgstr "Для удаления ящиков обязательно используйте цикл while."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "[b]Careful![/b] If you write the while loop incorrectly, you can freeze the program."
 msgstr "[b]Осторожно![/b] Если вы напишете цикл while неправильно, у вас может зависнуть программа."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "You can check if the [code]crates[/code] array still has values by writing [code]while crates:[/code]. This works because an empty array counts as [code]false[/code], and an array with items counts as [code]true[/code]."
 msgstr "Вы можете проверить, есть ли ещё значения в массиве [code]crates[/code], написав [code]while crates:[/code]. Это работает, потому что пустой массив считается за [code]false[/code], а массив с элементами — за [code]true[/code]."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 msgid "Crates are piling up on the platform. Move them out of the way by popping them from their array."
 msgstr "На платформе скапливаются ящики. Уберите их с дороги, удалив из массива."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 #, fuzzy
 msgid "Think about how [code]while[/code] loops work."
 msgstr "Подумайте, как работают циклы [code]while[/code]."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 #, fuzzy
 msgid "Every time you [code]pop[/code] an item, the array's [code]size[/code] gets smaller."
 msgstr "Каждый раз, когда вы удаляете элемент с помощью [code]pop[/code], размер массива [code]size[/code] уменьшается."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-23-append-to-arrays/lesson.bbcode:108
+#: course/lesson-23-append-to-arrays/lesson.bbcode:110
 #, fuzzy
 msgid "You can write [code]while crates:[/code] to run code in a loop while there are values in the [code]crates[/code] array."
 msgstr "Вы можете написать [code]while crates:[/code], чтобы запускать код в цикле, пока в массиве [code]crates[/code] есть значения."

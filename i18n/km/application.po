@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
 "POT-Creation-Date: 2026-01-21 11:55+0100\n"
-"PO-Revision-Date: 2026-08-04 14:01+0000\n"
+"PO-Revision-Date: 2026-08-18 10:51+0000\n"
 "Last-Translator: SeyhaLite <sok123230@gmail.com>\n"
 "Language-Team: Khmer (Central) <https://hosted.weblate.org/projects/learn-gdscript-from-zero/application/km/>\n"
 "Language: km\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.8.1.dev0\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: course/common/CustomHealthBar.tscn
@@ -116,8 +116,8 @@ msgid ""
 "func heal(amount):\n"
 "\thealth += amount"
 msgstr ""
-"func heal(amount):\n"
-"\thealth += amount"
+"func ព្យាបាល(ចំនួន):\n"
+"\tឈាម​ += ចំនួន"
 
 #: course/lesson-13-conditions/visuals/ExampleJump.tscn
 msgid "Jump"
@@ -304,6 +304,10 @@ msgstr "កំពងរង់ចាំ ការកម្មង់"
 msgid "Completed"
 msgstr "បានសម្រេច"
 
+#: course/lesson-23-append-to-arrays/clearing-meals/Meal.tscn
+msgid "cheese sandwich"
+msgstr "សាំងវិច​ ឆីស"
+
 #: course/lesson-24-access-array-indices/visuals/SyntaxAccessIndex.tscn
 msgid "array_name"
 msgstr "array_name"
@@ -443,7 +447,7 @@ msgstr "ត្រឡប់ទៅមីនុយដើមវិញ"
 msgid "Open the course index"
 msgstr "បើកមាតិកាមេរៀន"
 
-#: ui/UINavigator.tscn ui/UINavigator.gd:395
+#: ui/UINavigator.tscn ui/UINavigator.gd:436
 msgid "Go back in your navigation history"
 msgstr "ត្រឡប់ក្រោយចូល ក្នុងប្រវត្តិនៃការរុករក"
 
@@ -584,10 +588,6 @@ msgstr "ពណ៍មាន"
 #: ui/components/OutputConsoleErrorMessage.tscn
 msgid "Click to highlight the relevant part of your code"
 msgstr "ចុចដើម្បីសម្គាល់ផ្នែកពាក់ព័ន្ធនៅក្នុងកូដរបស់អ្នក"
-
-#: ui/components/OutputConsoleErrorMessage.tscn
-msgid "in"
-msgstr "ក្នុង"
 
 #: ui/components/OutputConsoleErrorMessage.tscn
 msgid "at"
@@ -935,8 +935,8 @@ msgid "\t[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]
 msgstr "\t[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]របៀបចូលរួមចំណែកក្នុងការបកប្រែ[/url][/b]"
 
 #: ui/screens/course_outliner/CourseLessonDetails.tscn
-#: ui/screens/course_outliner/CourseLessonDetails.gd:85
-#: ui/screens/course_outliner/CourseLessonDetails.gd:117
+#: ui/screens/course_outliner/CourseLessonDetails.gd:86
+#: ui/screens/course_outliner/CourseLessonDetails.gd:118
 msgid "Start Lesson"
 msgstr "ចាប់ផ្តើមមេរៀន"
 
@@ -1530,19 +1530,19 @@ msgstr "amount មានតម្លៃត្រឹមត្រូវ"
 msgid "It looks like the take_damage function is missing; did you remove it?"
 msgstr "ហាក់ដូចជា function take_damage បាត់; តើអ្នកបានលុបវាឬទេ?"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:70
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:78
 msgid "It looks like amount isn't reduced by a percentage. Did you multiply it by a value less than 1?"
 msgstr "ហាក់ដូចជា amount មិនត្រូវបានកាត់បន្ថយជាភាគរយ។ តើអ្នកបានគុណវានឹងតម្លៃតិចជាង 1 ឬទេ?"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:76
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:84
 msgid "The character did not take half damage despite being level 3. Did you multiply the amount by 0.5 to reduce it?"
 msgstr "តួអង្គមិនទទួលការខូចខាតពាក់កណ្តាល ទោះបីជា level 3។ តើអ្នកបានគុណ amount នឹង 0.5 ដើម្បីកាត់បន្ថយវាឬទេ?"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:80
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:88
 msgid "The character appears not to be taking full damage when their level is below 3. Did you use a condition to limit damage reduction to when the level is greater or equal to 3?"
 msgstr "ហាក់ដូចជាតួអង្គមិនទទួលការខូចខាតពេញលេញនៅពេល level របស់វាតិចជាង 3។ តើអ្នកបានប្រើ condition ដើម្បីកំណត់ការកាត់បន្ថយការខូចខាតតែពេល level ធំជាង ឬស្មើ 3 ឬទេ?"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:82
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:90
 msgid "The character appears to be taking 0 damage when its level is less than 3. Did you subtract the amount to health when the level is less than 3?"
 msgstr "ហាក់ដូចជាតួអង្គទទួលការខូចខាត 0 នៅពេល level របស់វាតិចជាង 3។ តើអ្នកបានដក amount ចេញពី health នៅពេល level តិចជាង 3 ឬទេ?"
 
@@ -1551,8 +1551,8 @@ msgid "Use A Vector To Increase Scale"
 msgstr "ប្រើ vector ដើម្បីបង្កើន scale"
 
 #: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:12
-msgid "Correct Scale After 2 Levels"
-msgstr "scale ត្រឹមត្រូវបន្ទាប់ពី 2 កម្រិត"
+msgid "The Scale Is Correct After Gaining Multiple Levels"
+msgstr "ទំហំមាត្រដ្ឋានត្រឹមត្រូវ បន្ទាប់ពីឡើងបានច្រើន Level"
 
 #: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:38
 msgid "It looks like the scale isn't increasing by some vector. Did you add a vector to scale?"
@@ -1605,79 +1605,83 @@ msgid "Your code has no while loop. You need to use a while loop to complete thi
 msgstr "កូដរបស់អ្នកគ្មាន while loop។ អ្នកត្រូវប្រើ while loop ដើម្បីបញ្ចប់ការអនុវត្តនេះ ទោះបីជាមានដំណោះស្រាយផ្សេងទៀតក៏ដោយ!"
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:12
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:36
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:40
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:12
 msgid "Use For Loop"
 msgstr "ប្រើ for loop"
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:23
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:44
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:48
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:23
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:40
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:39
 msgid "Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!"
 msgstr "កូដរបស់អ្នកគ្មាន for loop។ អ្នកត្រូវប្រើ for loop ដើម្បីបញ្ចប់ការអនុវត្តនេះ ទោះបីជាមានដំណោះស្រាយផ្សេងទៀតក៏ដោយ!"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:37
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:36
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:41
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:40
 msgid "Draw Three Squares"
 msgstr "គូរការ៉េ 3"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:38
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:37
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:42
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:41
 msgid "Squares Are All 100 By 100"
 msgstr "ការ៉េទាំងអស់មានទំហំ 100 x 100"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:39
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:39
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:43
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:43
 msgid "Shapes Are 100 Pixels Apart"
 msgstr "រូបរាងមានចម្ងាយ 100 ភិចសែលពីគ្នា"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:51
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:45
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:54
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:48
 msgid "You drew %s squares but you need to draw 3."
 msgstr "អ្នកបានគូរការ៉េ %s ប៉ុន្តែអ្នកត្រូវគូរ 3។"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:67
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:53
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:70
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:56
 msgid "Shape3D number %s is not a square of size 100 by 100."
 msgstr "Shape3D លេខ %s មិនមែនជាការ៉េទំហំ 100 x 100 ទេ។"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:74
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:71
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:77
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:74
 msgid "There are fewer than 3 shapes, we can't test if shapes are 100 pixels apart."
 msgstr "មានរូបរាងតិចជាង 3 យើងមិនអាចពិនិត្យថាតើរូបរាងមានចម្ងាយ 100 ភិចសែលពីគ្នាឬទេ។"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:81
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:78
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:85
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:81
 msgid "Shapes are not separated by 100 pixels on the X axis."
 msgstr "រូបរាងមិនត្រូវបានបំបែកគ្នាដោយ 100 ភិចសែលនៅលើអ័ក្ស X ទេ។"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:15
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:18
+msgid "Path contains values that are not Vector2"
+msgstr "ផ្លូវ (Path) មានតម្លៃដែលមិនមែនជា Vector2"
+
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:25
 msgid "Path Is Contiguous"
 msgstr "ផ្លូវមានភាពជាប់គ្នា"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:16
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:26
 msgid "Turtle Reaches The Robot"
 msgstr "អណ្តើកទៅដល់រ៉ូបូត"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:17
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:27
 msgid "Path Does Not Hit Obstacles"
 msgstr "ផ្លូវមិនបុកឧបសគ្គ"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:22
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:32
 msgid "No points found in variable turtle_path. Did you write Vector2 coordinates in the variable's array?"
 msgstr "រកមិនឃើញចំណុចក្នុង variable turtle_path។ តើអ្នកបានសរសេរកូអរដោនេ Vector2 នៅក្នុង array របស់ variable នេះឬទេ?"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:27
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:37
 msgid "We found at least two points that are not next to one another. Did you forget some coordinates, or did you try to move the turtle diagonally?"
 msgstr "យើងរកឃើញយ៉ាងហោចណាស់ពីរចំណុចដែលមិននៅជិតគ្នា។ តើអ្នកភ្លេចកូអរដោនេខ្លះ ឬព្យាយាមផ្លាស់ទីអណ្តើកតាមអង្កត់ទ្រូងឬទេ?"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:36
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:46
 msgid "The last point should be at the robot's coordinates, %s, but it is %s instead."
 msgstr "ចំណុចចុងក្រោយគួរនៅកូអរដោនេរបស់រ៉ូបូត %s ប៉ុន្តែវាជា %s វិញ។"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:45
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:55
 msgid "The turtle hit a rock at coordinates %s. You need to change its path."
 msgstr "អណ្តើកបុកថ្មនៅកូអរដោនេ %s។ អ្នកត្រូវផ្លាស់ប្តូរផ្លូវរបស់វា។"
 
@@ -1705,53 +1709,53 @@ msgstr "លុបកំហុស"
 msgid "There's still a comment in your code. You need to remove the comment sign (#)."
 msgstr "នៅមាន comment នៅក្នុងកូដរបស់អ្នក។ អ្នកត្រូវលុបសញ្ញា comment (#)។"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:37
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:41
 msgid "Rectangles Have The Correct Size"
 msgstr "ចតុកោណមានទំហំត្រឹមត្រូវ"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:38
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:42
 msgid "Rectangles Do Not Overlap"
 msgstr "ចតុកោណមិនត្រួតគ្នា"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:43
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:47
 msgid "We expected 4 polygons, but you drew %s instead."
 msgstr "យើងរំពឹងថាមានពហុកោណ 4 ប៉ុន្តែអ្នកបានគូរ %s វិញ។"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:47
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:51
 msgid "At least one of the rectangles does not have the expected size."
 msgstr "យ៉ាងហោចណាស់ចតុកោណមួយមិនមានទំហំដែលរំពឹងទុក។"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:58
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:62
 msgid "At least two drawn shape intersect. Did you pass arguments big enough to the jump() function?"
 msgstr "យ៉ាងហោចណាស់រូបរាងដែលគូរពីរត្រួតគ្នា។ តើអ្នកបានបញ្ជូនអាគុយម៉ង់ធំគ្រប់គ្រាន់ទៅ function jump() ឬទេ?"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:17
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:18
 msgid "Robot Moves Along Blue Path"
 msgstr "រ៉ូបូតផ្លាស់ទីតាមផ្លូវពណ៌ខៀវ"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:18
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:20
 msgid "Code Uses Move To"
 msgstr "កូដប្រើ move_to()"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:23
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:25
 msgid "The robot's path changed. Did you change the robot_path array?"
 msgstr "ផ្លូវរបស់រ៉ូបូតបានផ្លាស់ប្តូរ។ តើអ្នកបានផ្លាស់ប្តូរ array robot_path ឬទេ?"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:26
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:28
 msgid "The robot didn't move at all. Did you call robot.move_to()?"
 msgstr "រ៉ូបូតមិនបានផ្លាស់ទីសោះ។ តើអ្នកបានហៅ robot.move_to() ឬទេ?"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:31
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:33
 msgid "The robot moved fewer times than it should have. Did you use a loop and move once for each point in the robot_path array?"
 msgstr "រ៉ូបូតផ្លាស់ទីតិចដងជាងគួរ។ តើអ្នកបានប្រើ loop ហើយផ្លាស់ទីម្តងសម្រាប់ចំណុចនីមួយៗក្នុង array robot_path ឬទេ?"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:38
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:45
 msgid "The robot's movement path doesn't match the robot_path array. They should be the same."
 msgstr "ផ្លូវផ្លាស់ទីរបស់រ៉ូបូតមិនត្រូវនឹង array robot_path។ វាគួរតែដូចគ្នា។"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:44
-msgid "We found no call to the robot's move_to() function. Did you forget to call it?"
-msgstr "យើងរកមិនឃើញការហៅ function move_to() របស់រ៉ូបូត។ តើអ្នកភ្លេចហៅវាឬទេ?"
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:58
+msgid "Did you use a for loop to call robot.move_to() with each cell in robot_path?"
+msgstr "តើអ្នកបានប្រើ រង្វិលជុំ(loop) for ដើម្បីហៅ robot.move_to() ជាមួយក្រឡានីមួយៗនៅក្នុង robot_path ហើយឬនៅ?"
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:13
 msgid "Robot Combo Is Correct"
@@ -1850,27 +1854,27 @@ msgstr "យើងរំពឹងថា %s ប៉ុន្តែទទួលប�
 msgid "It looks like you removed %s from waiting_orders."
 msgstr "ហាក់ដូចជាអ្នកបានលុប %s ចេញពី waiting_orders។"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:10
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:11
 msgid "Used Pop Back"
 msgstr "បានប្រើ Pop Back"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:11
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:12
 msgid "Used While Loop"
 msgstr "បានប្រើ while loop"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:12
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:13
 msgid "Crates Array Is Empty"
 msgstr "array crates ទទេ"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:17
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:30
 msgid "We found no call to the pop_back() function. Did you forget to call it?"
 msgstr "យើងរកមិនឃើញការហៅ function pop_back()។ តើអ្នកភ្លេចហៅវាឬទេ?"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:22
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:36
 msgid "You didn't use the while keyword"
 msgstr "អ្នកមិនបានប្រើពាក្យគន្លឹះ while"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:29
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:44
 msgid "The crate array is not empty"
 msgstr "array crate មិនទទេ"
 
@@ -2076,13 +2080,13 @@ msgstr "តួអង្គនៅតែមើលមិនឃើញ! តើអ្�
 msgid "Draw Rectangle Of 220 By 260"
 msgstr "គូរចតុកោណទំហំ 220 x 260"
 
-#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:18
-#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:18
-#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:18
+#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:16
+#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:16
+#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:16
 msgid "Nothing drawn. Did you call move_forward()?"
 msgstr "មិនបានគូរអ្វីទេ។ តើអ្នកបានហៅ move_forward() ឬទេ?"
 
-#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:28
+#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:19
 msgid "The drawn shape is not a rectangle with a width of 220 and a length of 260."
 msgstr "រូបរាងដែលគូរមិនមែនជាចតុកោណមានទទឹង 220 និងប្រវែង 260 ទេ។"
 
@@ -2090,7 +2094,7 @@ msgstr "រូបរាងដែលគូរមិនមែនជាចតុក
 msgid "Draw Rectangle Of 200 By 120"
 msgstr "គូរចតុកោណទំហំ 200 x 120"
 
-#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:28
+#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:19
 msgid "The drawn shape is not a rectangle with a width of 200 and a length of 120."
 msgstr "រូបរាងដែលគូរមិនមែនជាចតុកោណមានទទឹង 200 និងប្រវែង 120 ទេ។"
 
@@ -2098,7 +2102,7 @@ msgstr "រូបរាងដែលគូរមិនមែនជាចតុក
 msgid "Draw Corner Of 200 By 200"
 msgstr "គូរជ្រុងទំហំ 200 x 200"
 
-#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:28
+#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:19
 msgid "The drawn shape is not a corner connected by two lines of length 200."
 msgstr "រូបរាងដែលគូរមិនមែនជាជ្រុងដែលភ្ជាប់ដោយបន្ទាត់ពីរប្រវែង 200 ទេ។"
 
@@ -2118,134 +2122,149 @@ msgstr "រូបរាងដែលគូរមិនមែនជាការ៉
 msgid "Draw Three Squares Of 200 Pixels"
 msgstr "គូរការ៉េ 3 ទំហំ 200 ភិចសែល"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:20
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:18
 msgid "Nothing drawn. Did you not call draw_square()?"
 msgstr "មិនបានគូរអ្វីទេ។ តើអ្នកមិនបានហៅ draw_square() ឬទេ?"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:24
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:21
 msgid "You only drew one square. You need to draw three."
 msgstr "អ្នកគូរបានតែការ៉េមួយប៉ុណ្ណោះ។ អ្នកត្រូវគូរបី។"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:26
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:23
 msgid "You need to draw three squares."
 msgstr "អ្នកត្រូវគូរការ៉េបី។"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:29
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:31
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:26
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:28
 msgid "You drew more than three squares. You need to draw only three!"
 msgstr "អ្នកបានគូរការ៉េលើសពីបី។ អ្នកត្រូវគូរតែបីប៉ុណ្ណោះ!"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:39
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:34
 msgid "Shape3D number %s has too few corners! Did you change the draw_square() function?"
 msgstr "Shape3D លេខ %s មានជ្រុងតិចពេក! តើអ្នកបានផ្លាស់ប្តូរ function draw_square() ឬទេ?"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:44
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:39
 msgid "Shape3D number %s has too many corners! Did you change the draw_square() function?"
 msgstr "Shape3D លេខ %s មានជ្រុងច្រើនពេក! តើអ្នកបានផ្លាស់ប្តូរ function draw_square() ឬទេ?"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:55
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:44
 msgid "Shape3D number %s is not a square of length 200 pixels. Did you change the draw_square() function?"
 msgstr "Shape3D លេខ %s មិនមែនជាការ៉េប្រវែង 200 ភិចសែលទេ។ តើអ្នកបានផ្លាស់ប្តូរ function draw_square() ឬទេ?"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:67
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:54
 msgid "The squares should not overlap. Did you move the turtle between drawing each square?"
 msgstr "ការ៉េមិនគួរត្រួតគ្នា។ តើអ្នកបានផ្លាស់ទីអណ្តើករវាងការគូរការ៉េនីមួយៗឬទេ?"
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:16
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:14
 msgid "Draw Corners Of Varying Lengths"
 msgstr "គូរជ្រុងដែលមានប្រវែងខុសៗគ្នា"
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:23
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:22
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:28
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:43
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:54
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:19
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:19
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:41
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:56
 msgid "The turtle did not draw anything. Make sure your function calls move_forward(length) to move the turtle."
 msgstr "អណ្តើកមិនបានគូរអ្វីទេ។ ត្រូវប្រាកដថា function របស់អ្នកហៅ move_forward(length) ដើម្បីផ្លាស់ទីអណ្តើក។"
 
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:25
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:43
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:58
+msgid "The turtle drew fewer than 2 shapes. Make sure your function is repeatable."
+msgstr "អណ្តើក បានគូសរូបរាងតិចជាង ២។ សូមប្រាកដថា អនុគមន៍ (Function) របស់អ្នក អាចហៅប្រើឡើងវិញបាន។"
+
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:27
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:25
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:45
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:60
+msgid "The turtle drew more than 2 shapes. Make sure your function only draws one shape."
+msgstr "អណ្តើកបានគូរ រូបរាងច្រើនជាង 2។ សូមប្រាកដថា អនុគមន៍ របស់អ្នកគូរតែ រូបរាងមួយប៉ុណ្ណោះ។"
+
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:28
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:28
+msgid "The drawn shape has too few points. Did you call move_forward() less than 2 times?"
+msgstr "រូបរាងដែលគូរមានចំណុចតិចពេក។ តើអ្នកបានហៅ move_forward() តិចជាង 2 ដងឬទេ?"
+
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:30
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:29
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:30
 msgid "The drawn shape has too many points. Did you call move_forward() more than 2 times?"
 msgstr "រូបរាងដែលគូរមានចំណុចច្រើនពេក។ តើអ្នកបានហៅ move_forward() លើសពី 2 ដងឬទេ?"
 
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:32
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:31
-msgid "The drawn shape has too few points. Did you call move_forward() less than 2 times?"
-msgstr "រូបរាងដែលគូរមានចំណុចតិចពេក។ តើអ្នកបានហៅ move_forward() តិចជាង 2 ដងឬទេ?"
-
-#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:34
 msgid "The drawn shape doesn't have the expected size. Did you use the length parameter?"
 msgstr "រូបរាងដែលគូរមិនមានទំហំដែលរំពឹង។ តើអ្នកបានប្រើ parameter length ឬទេ?"
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:15
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:14
 msgid "Draw Corners Of Varying Sizes And Angles"
 msgstr "គូរជ្រុងដែលមានទំហំ និងមុំខុសៗគ្នា"
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:34
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:32
 msgid "The drawn corner doesn't match the expected corner. Are you not using the angle parameter in your code?"
 msgstr "ជ្រុងដែលគូរមិនត្រូវនឹងជ្រុងដែលរំពឹង។ តើអ្នកមិនប្រើ parameter angle ក្នុងកូដឬទេ?"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:22
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:18
 msgid "Draw Rectangles Of Varying Sizes"
 msgstr "គូរចតុកោណដែលមានទំហំខុសៗគ្នា"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:29
-msgid "The turtle did not draw anything. Make sure your function calls move_forward() with the length and height parameters."
-msgstr "អណ្តើកមិនបានគូរអ្វីទេ។ ត្រូវប្រាកដថា function របស់អ្នកហៅ move_forward() ជាមួយ parameter length និង height។"
-
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:40
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:61
-msgid "The drawn shape has too many points. Did you call move_forward() more than 4 times?"
-msgstr "រូបរាងដែលគូរមានចំណុចច្រើនពេក។ តើអ្នកបានហៅ move_forward() លើសពី 4 ដងឬទេ?"
-
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:42
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:65
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:32
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:68
 msgid "The drawn shape has too few points. Did you call move_forward() less than 4 times?"
 msgstr "រូបរាងដែលគូរមានចំណុចតិចពេក។ តើអ្នកបានហៅ move_forward() តិចជាង 4 ដងឬទេ?"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:45
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:34
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:64
+msgid "The drawn shape has too many points. Did you call move_forward() more than 4 times?"
+msgstr "រូបរាងដែលគូរមានចំណុចច្រើនពេក។ តើអ្នកបានហៅ move_forward() លើសពី 4 ដងឬទេ?"
+
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:37
 msgid "The length and height are inverted. Did you swap the length and height function arguments?"
 msgstr "length និង height ត្រូវបានបញ្ច្រាស។ តើអ្នកបានប្តូរអាគុយម៉ង់ length និង height ឬទេ?"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:47
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:34
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:39
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:31
 msgid "The drawn shapes don't have the expected length and height. Did you forget to use the length and height parameter?"
 msgstr "រូបរាងដែលគូរមិនមាន length និង height ដែលរំពឹង។ តើអ្នកភ្លេចប្រើ parameter length និង height ឬទេ?"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:14
 msgid "Turtle Ends Facing Towards The Right"
 msgstr "អណ្តើកបញ្ចប់ដោយបែមទៅខាងស្តាំ"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:22
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:15
 msgid "Turtle Starts Each Square Facing Towards The Right"
 msgstr "អណ្តើកចាប់ផ្តើមការ៉េនីមួយៗដោយបែមទៅខាងស្តាំ"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:16
 msgid "Draw Squares Of Varying Sizes"
 msgstr "គូរការ៉េដែលមានទំហំខុសៗគ្នា"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:37
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:35
 msgid "The turtle should turn four times to draw a square so that it always starts drawing the squares in the same direction. Did you call turn_right() four times?"
 msgstr "អណ្តើកគួរបង្វិលបួនដងដើម្បីគូរការ៉េ ដើម្បីឱ្យវាចាប់ផ្តើមគូរការ៉េក្នុងទិសដៅដដែលជានិច្ច។ តើអ្នកបានហៅ turn_right() បួនដងឬទេ?"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:45
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:48
 msgid "The turtle should be facing towards the right to draw squares in the same direction every time. Did you call turn_right(90) four times in your function?"
 msgstr "អណ្តើកគួរបែមទៅខាងស្តាំ ដើម្បីគូរការ៉េក្នុងទិសដៅដដែលរាល់ដង។ តើអ្នកបានហៅ turn_right(90) បួនដងក្នុង function ឬទេ?"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:69
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:72
 msgid "The shape is not a square or not turned in the expected direction. Did you use 90 degree angles when calling turn_right()?"
 msgstr "រូបរាងមិនមែនជាការ៉េ ឬមិនបង្វិលទៅទិសដែលរំពឹង។ តើអ្នកបានប្រើមុំ 90 ដឺក្រេពេលហៅ turn_right() ឬទេ?"
 
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:12
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:11
 msgid "Rectangle Starts At 120 By 100"
 msgstr "ចតុកោណចាប់ផ្តើមនៅ 120 x 100"
 
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:13
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:12
 msgid "Rectangle Size Is 200 By 120"
 msgstr "ទំហំចតុកោណ 200 x 120"
 
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:20
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:30
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:17
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:29
 msgid "We didn't find any drawn rectangles. Did you forget to call draw_rectangle()?"
 msgstr "យើងរកមិនឃើញចតុកោណដែលបានគូរ។ តើអ្នកភ្លេចហៅ draw_rectangle() ឬទេ?"
 
@@ -2253,15 +2272,15 @@ msgstr "យើងរកមិនឃើញចតុកោណដែលបានគ
 msgid "The rectangle doesn't start at position (120, 100). Did you not set the position right?"
 msgstr "ចតុកោណមិនចាប់ផ្តើមនៅទីតាំង (120, 100)។ តើអ្នកមិនបានកំណត់ទីតាំងឱ្យត្រឹមត្រូវឬទេ?"
 
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:38
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:42
 msgid "First Shape Is At 100 By 100"
 msgstr "រូបរាងទីមួយនៅ 100 x 100"
 
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:61
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:64
 msgid "No shape drawn. Did you forget to call draw_rectangle()?"
 msgstr "មិនបានគូររូបរាង។ តើអ្នកភ្លេចហៅ draw_rectangle() ឬទេ?"
 
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:64
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:67
 msgid "The first square should be drawn at (100, 100). Instead, you drew it at %s."
 msgstr "ការ៉េទីមួយគួរគូរនៅ (100, 100)។ ប៉ុន្តែអ្នកបានគូរវានៅ %s។"
 
@@ -2333,11 +2352,19 @@ msgstr "រ៉ូបូតមិនទទួលការខូចខាតច្
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "ហាក់ដូចជាអ្នកមិនបានដក amount ចេញពី health។"
 
-#: ui/UILesson.gd:301
+#: ui/UILesson.gd:308
 msgid "Learn More"
 msgstr "ស្វែងយល់បន្ថែម"
 
-#: ui/UILesson.gd:366
+#: ui/UILesson.gd:331
+msgid ""
+"\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+
+#: ui/UILesson.gd:379
 msgid ""
 "\n"
 "[hr]\n"
@@ -2345,39 +2372,39 @@ msgstr ""
 "\n"
 "[hr]\n"
 
-#: ui/UINavigator.gd:398
+#: ui/UINavigator.gd:439
 msgid "(no previous history)"
 msgstr "(គ្មានប្រវត្តិចូលរួម)"
 
-#: ui/UIPractice.gd:284
+#: ui/UIPractice.gd:290
 msgid "Hint %s"
 msgstr "គន្លឺះ %s"
 
-#: ui/UIPractice.gd:322
+#: ui/UIPractice.gd:328
 msgid "Validating Your Code..."
 msgstr "កំពុងផ្ទៀងផ្ទាត់ Code របស់អ្នក..."
 
-#: ui/UIPractice.gd:377
-msgid "The function `%s` calls itself, this creates an infinite loop"
-msgstr "function `%s` ហៅខ្លួន វាផ្ទាល់ នេះបង្កើតឱ្យមាន loop មិនចេះចប់"
+#: ui/UIPractice.gd:379
+msgid "The function '%s' calls itself, this creates an infinite loop"
+msgstr "អនុគមន៍ `%s` ហៅខ្លួន វាផ្ទាល់ នេះបង្កើតឱ្យមាន loop មិនចេះចប់ (អានន្ត)"
 
-#: ui/UIPractice.gd:388
+#: ui/UIPractice.gd:390
 msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr "Loop របស់អ្នករត់រហូត គ្មានអីបញ្ឈប់ ដែលអាចធ្វើឱ្យកម្មវិធីគាំង។"
 
-#: ui/UIPractice.gd:430
+#: ui/UIPractice.gd:432
 msgid "Running Your Code..."
 msgstr "កំពុងដំណើរការ Code របស់អ្នក..."
 
-#: ui/UIPractice.gd:461
+#: ui/UIPractice.gd:444
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "កូដរបស់អ្នកមាន កន្លែង ចែកនឹងសូន្យ។ ការចែក ចំនួនណាមួយ នឹងសូន្យ គឺមិនអាចធ្វើទៅបានទេ ក្នុងការសរសេរកូដ។ សូមពិនិត្យមើលសញ្ញា​ និង \"/ 0\" ឬ \"% 0\" ចេញពីកូដរបស់អ្នក។"
 
-#: ui/UIPractice.gd:507
+#: ui/UIPractice.gd:516
 msgid "Running Tests..."
 msgstr "កំពុងដំណើរការតេស្ត..."
 
-#: ui/components/BreadCrumbs.gd:115
+#: ui/components/BreadCrumbs.gd:66
 msgid " > "
 msgstr " > "
 
@@ -2386,10 +2413,10 @@ msgid "Select the kind of issue and describe it in the box below, then click \"S
 msgstr "ជ្រើសរើសប្រភេទបញ្ហា ហើយពិពណ៌នាវានៅក្នុងប្រអប់ខាងក្រោម បន្ទាប់មកចុច \"ផ្ញើរបាយការណ៍\" ដើម្បីបើកទំព័រទំនាក់ទំនងនៅលើគេហទំព័ររបស់យើង ដោយមានរបាយការណ៍បំពេញរួចជាស្រេច។"
 
 #: ui/components/popups/ReportFormPopup.gd:56
-msgid "For questions and help with learning, [url=https://discord.gg/bNj469SYQj]join the community on Discord[/url]."
-msgstr "សម្រាប់សំណួរ និងជំនួយក្នុងការរៀន [url=https://discord.gg/bNj469SYQj]ចូលរួមសហគមន៍នៅ Discord[/url]។"
+msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
+msgstr "សម្រាប់សំណួរ និងជំនួយក្នុងការរៀន [url=%s] ចូលរួមសហគមន៍នៅ Discord[/url]។"
 
-#: ui/components/popups/ReportFormPopup.gd:131
+#: ui/components/popups/ReportFormPopup.gd:132
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr "ការបកប្រែមិនមែនជាផ្លូវការទេ ហើយត្រូវបានថែទាំដោយសហគមន៍។ ប្រសិនបើអ្នកចង់ជួយ [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]ស្វែងយល់ពីរបៀបជួយបកប្រែ app[/url]។"
 
@@ -2397,21 +2424,21 @@ msgstr "ការបកប្រែមិនមែនជាផ្លូវកា
 msgid "{percentage}% of text translated. {completed}/{total} lessons fully translated."
 msgstr "{percentage}% នៃអត្ថបទត្រូវបានបកប្រែ។ {completed}/{total} មេរៀនត្រូវបានបកប្រែពេញលេញ។"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:72
+#: ui/screens/course_outliner/CourseLessonDetails.gd:73
 msgid "100%"
 msgstr "100%"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:85
-#: ui/screens/course_outliner/CourseLessonDetails.gd:114
-#: ui/screens/course_outliner/CourseLessonDetails.gd:116
+#: ui/screens/course_outliner/CourseLessonDetails.gd:86
+#: ui/screens/course_outliner/CourseLessonDetails.gd:115
+#: ui/screens/course_outliner/CourseLessonDetails.gd:117
 msgid "Open Anyway"
 msgstr "បើកទាំងអស់"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:113
+#: ui/screens/course_outliner/CourseLessonDetails.gd:114
 msgid "Open Lesson"
 msgstr "បើកមេរៀន"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:115
+#: ui/screens/course_outliner/CourseLessonDetails.gd:116
 msgid "Continue Lesson"
 msgstr "បន្តមេរៀន"
 
@@ -2457,6 +2484,18 @@ msgstr "បន្ត"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr "រៀនកូដពីចំណុចសូន្យ ជាមួយ Godot"
+
+#~ msgid "in"
+#~ msgstr "ក្នុង"
+
+#~ msgid "Correct Scale After 2 Levels"
+#~ msgstr "scale ត្រឹមត្រូវបន្ទាប់ពី 2 កម្រិត"
+
+#~ msgid "We found no call to the robot's move_to() function. Did you forget to call it?"
+#~ msgstr "យើងរកមិនឃើញការហៅ function move_to() របស់រ៉ូបូត។ តើអ្នកភ្លេចហៅវាឬទេ?"
+
+#~ msgid "The turtle did not draw anything. Make sure your function calls move_forward() with the length and height parameters."
+#~ msgstr "អណ្តើកមិនបានគូរអ្វីទេ។ ត្រូវប្រាកដថា function របស់អ្នកហៅ move_forward() ជាមួយ parameter length និង height។"
 
 #~ msgid "CHRISTMAS SALE - 50% OFF"
 #~ msgstr "ការបញ្ចុះតម្លៃបុណ្យណូអែល - បញ្ចុះតម្លៃ 50%"

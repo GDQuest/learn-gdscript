@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
 "POT-Creation-Date: 2026-01-21 11:55+0100\n"
-"PO-Revision-Date: 2026-08-12 06:51+0000\n"
-"Last-Translator: Hank Wang <penghao-wang@hotmail.com>\n"
+"PO-Revision-Date: 2026-09-17 05:51+0000\n"
+"Last-Translator: QWERTYUIOP733 <sgsy_0813152546728@qq.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/projects/learn-gdscript-from-zero/application/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.9.dev0\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "Generated-By: Babel 2.10.3\n"
 
 #: course/common/CustomHealthBar.tscn
@@ -79,7 +79,7 @@ msgstr "[code]set_angular_speed()[/code]函数无法使用[code]angular_speed[/c
 
 #: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
 msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
-msgstr ""
+msgstr "请务必在 [code] set_angular_speed ()[/code] 函数里定义 [code] angular_speed [/code] 变量，要么就把它定义在函数外面，这样整个脚本都能用到它。"
 
 #: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
 msgid ""
@@ -348,6 +348,10 @@ msgstr "待处理订单"
 msgid "Completed"
 msgstr "已完成"
 
+#: course/lesson-23-append-to-arrays/clearing-meals/Meal.tscn
+msgid "cheese sandwich"
+msgstr "奶酪三明治"
+
 #: course/lesson-24-access-array-indices/visuals/SyntaxAccessIndex.tscn
 #, fuzzy
 msgid "array_name"
@@ -514,7 +518,7 @@ msgstr "返回主菜单"
 msgid "Open the course index"
 msgstr "打开课程目录"
 
-#: ui/UINavigator.tscn ui/UINavigator.gd:395
+#: ui/UINavigator.tscn ui/UINavigator.gd:436
 msgid "Go back in your navigation history"
 msgstr "导航历史回退"
 
@@ -554,15 +558,15 @@ msgstr "要离开未完成的练习吗？"
 
 #: ui/components/BetaIndicator.tscn
 msgid "App in"
-msgstr ""
+msgstr "应用"
 
 #: ui/components/BetaIndicator.tscn
 msgid "BETA!"
-msgstr ""
+msgstr "测试版！"
 
 #: ui/components/BetaIndicator.tscn
 msgid "found a bug?"
-msgstr ""
+msgstr "发现 了一个bug ？"
 
 #: ui/components/BigGreenButton.tscn
 msgid "Button"
@@ -638,6 +642,8 @@ msgid ""
 "Toggle the app full-screen.\n"
 "Shortcut: F11"
 msgstr ""
+"切换应用全屏显示。\n"
+"快捷键：F11"
 
 #: ui/components/GDQuestCreditsLabel.tscn
 msgid "Learn GDScript From Zero is an open source project by [color=#FFD500][url=https://www.gdquest.com/]GDQUEST.COM[/url][/color]"
@@ -664,10 +670,6 @@ msgstr "信息"
 #, fuzzy
 msgid "Click to highlight the relevant part of your code"
 msgstr "点击以突出显示代码中的相关部分"
-
-#: ui/components/OutputConsoleErrorMessage.tscn
-msgid "in"
-msgstr "在"
 
 #: ui/components/OutputConsoleErrorMessage.tscn
 msgid "at"
@@ -840,9 +842,8 @@ msgid "Suggest an improvement"
 msgstr "提出改进建议"
 
 #: ui/components/popups/ReportFormPopup.tscn
-#, fuzzy
 msgid "Translation issue"
-msgstr "社区翻译"
+msgstr "翻译问题"
 
 #: ui/components/popups/ReportFormPopup.tscn
 msgid "Write a short description."
@@ -1027,8 +1028,8 @@ msgid "\t[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]
 msgstr "[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]如何参与翻译贡献[/url][/b]"
 
 #: ui/screens/course_outliner/CourseLessonDetails.tscn
-#: ui/screens/course_outliner/CourseLessonDetails.gd:85
-#: ui/screens/course_outliner/CourseLessonDetails.gd:117
+#: ui/screens/course_outliner/CourseLessonDetails.gd:86
+#: ui/screens/course_outliner/CourseLessonDetails.gd:118
 msgid "Start Lesson"
 msgstr "开始课程"
 
@@ -1043,7 +1044,7 @@ msgstr "课程标题"
 
 #: ui/screens/course_outliner/CourseLessonItem.tscn
 msgid "A/文 100%"
-msgstr ""
+msgstr "A/文 100%"
 
 #: ui/screens/course_outliner/CourseLessonList.tscn
 msgid "This course is 80% translated. Incomplete lessons will contain English text."
@@ -1704,22 +1705,22 @@ msgstr "伤害值正确"
 msgid "It looks like the take_damage function is missing; did you remove it?"
 msgstr "看起来缺少了 take_damage 函数；是你删除了它吗？"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:70
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:78
 #, fuzzy
 msgid "It looks like amount isn't reduced by a percentage. Did you multiply it by a value less than 1?"
 msgstr "看起来 amount 并没有按百分比减少。你是否将其乘以了一个小于 1 的数值？"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:76
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:84
 #, fuzzy
 msgid "The character did not take half damage despite being level 3. Did you multiply the amount by 0.5 to reduce it?"
 msgstr "尽管角色已达到3级，但并未受到一半的伤害。你是否将伤害值乘以0.5以减少伤害？"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:80
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:88
 #, fuzzy
 msgid "The character appears not to be taking full damage when their level is below 3. Did you use a condition to limit damage reduction to when the level is greater or equal to 3?"
 msgstr "当角色等级低于 3 时，似乎没有受到全额伤害。你是否使用了一个条件，将伤害减免限制在等级大于或等于 3 时？"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:82
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:90
 #, fuzzy
 msgid "The character appears to be taking 0 damage when its level is less than 3. Did you subtract the amount to health when the level is less than 3?"
 msgstr "当角色等级低于 3 时，似乎受到 0 点伤害。当等级低于 3 时，你是否从生命值中减去了相应数值？"
@@ -1730,9 +1731,8 @@ msgid "Use A Vector To Increase Scale"
 msgstr "使用向量来放大比例"
 
 #: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:12
-#, fuzzy
-msgid "Correct Scale After 2 Levels"
-msgstr "经过 2 个关卡后的正确缩放比例"
+msgid "The Scale Is Correct After Gaining Multiple Levels"
+msgstr "升级多次后缩放比例正确"
 
 #: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:38
 #, fuzzy
@@ -1797,14 +1797,14 @@ msgid "Your code has no while loop. You need to use a while loop to complete thi
 msgstr "你的代码中没有 while 循环。即使有其他解法，你也需要使用 while 循环来完成这个练习！"
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:12
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:36
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:40
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:12
 #, fuzzy
 msgid "Use For Loop"
 msgstr "使用 For 循环"
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:23
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:44
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:48
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:23
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:40
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:39
@@ -1812,79 +1812,83 @@ msgstr "使用 For 循环"
 msgid "Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!"
 msgstr "你的代码中没有 for 循环。即使有其他解法，你也需要使用 for 循环来完成这个练习！"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:37
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:36
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:41
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:40
 #, fuzzy
 msgid "Draw Three Squares"
 msgstr "画三个正方形"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:38
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:37
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:42
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:41
 #, fuzzy
 msgid "Squares Are All 100 By 100"
 msgstr "所有正方形均为 100×100"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:39
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:39
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:43
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:43
 #, fuzzy
 msgid "Shapes Are 100 Pixels Apart"
 msgstr "图形间距为 100 像素"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:51
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:45
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:54
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:48
 #, fuzzy
 msgid "You drew %s squares but you need to draw 3."
 msgstr "你画了 %s 个正方形，但需要画 3 个。"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:67
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:53
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:70
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:56
 #, fuzzy
 msgid "Shape3D number %s is not a square of size 100 by 100."
 msgstr "Shape3D 对象 %s 不是 100×100 的正方形。"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:74
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:71
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:77
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:74
 #, fuzzy
 msgid "There are fewer than 3 shapes, we can't test if shapes are 100 pixels apart."
 msgstr "图形数量少于 3 个，我们无法测试图形之间是否相距 100 像素。"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:81
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:78
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:85
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:81
 #, fuzzy
 msgid "Shapes are not separated by 100 pixels on the X axis."
 msgstr "图形在 X 轴上的间距未达到 100 像素。"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:15
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:18
+msgid "Path contains values that are not Vector2"
+msgstr "路径包含非 Vector2 类型的值"
+
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:25
 #, fuzzy
 msgid "Path Is Contiguous"
 msgstr "路径是连续的"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:16
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:26
 #, fuzzy
 msgid "Turtle Reaches The Robot"
 msgstr "乌龟到达机器人处"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:17
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:27
 #, fuzzy
 msgid "Path Does Not Hit Obstacles"
 msgstr "路径未碰到障碍物"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:22
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:32
 #, fuzzy
 msgid "No points found in variable turtle_path. Did you write Vector2 coordinates in the variable's array?"
 msgstr "在变量 turtle_path 中未找到任何点。您是否在该变量的数组中写入了 Vector2 坐标？"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:27
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:37
 #, fuzzy
 msgid "We found at least two points that are not next to one another. Did you forget some coordinates, or did you try to move the turtle diagonally?"
 msgstr "我们发现至少有两个点彼此不相邻。你是漏写了某些坐标，还是试图让乌龟对角线移动？"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:36
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:46
 #, fuzzy
 msgid "The last point should be at the robot's coordinates, %s, but it is %s instead."
 msgstr "最后一点应位于机器人的坐标 %s 处，但实际位置却是 %s。"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:45
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:55
 #, fuzzy
 msgid "The turtle hit a rock at coordinates %s. You need to change its path."
 msgstr "海龟在坐标 %s 处撞上了石头。你需要修改它的路径。"
@@ -1919,65 +1923,64 @@ msgstr "消除错误"
 msgid "There's still a comment in your code. You need to remove the comment sign (#)."
 msgstr "你的代码中还有一个注释。你需要删除注释符号（#）。"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:37
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:41
 #, fuzzy
 msgid "Rectangles Have The Correct Size"
 msgstr "矩形大小正确"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:38
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:42
 #, fuzzy
 msgid "Rectangles Do Not Overlap"
 msgstr "矩形不重叠"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:43
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:47
 #, fuzzy
 msgid "We expected 4 polygons, but you drew %s instead."
 msgstr "我们预期有 4 个多边形，但你绘制了 %s。"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:47
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:51
 #, fuzzy
 msgid "At least one of the rectangles does not have the expected size."
 msgstr "至少有一个矩形的大小与预期不符。"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:58
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:62
 #, fuzzy
 msgid "At least two drawn shape intersect. Did you pass arguments big enough to the jump() function?"
 msgstr "至少有两个绘制的图形发生相交。你是否向 jump() 函数传入了足够大的参数？"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:17
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:18
 #, fuzzy
 msgid "Robot Moves Along Blue Path"
 msgstr "机器人沿着蓝色路径移动"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:18
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:20
 #, fuzzy
 msgid "Code Uses Move To"
 msgstr "代码使用“移动到”"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:23
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:25
 #, fuzzy
 msgid "The robot's path changed. Did you change the robot_path array?"
 msgstr "机器人的路径发生了变化。您是否修改了 robot_path 数组？"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:26
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:28
 #, fuzzy
 msgid "The robot didn't move at all. Did you call robot.move_to()?"
 msgstr "机器人完全没有移动。你是否调用了 robot.move_to()？"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:31
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:33
 #, fuzzy
 msgid "The robot moved fewer times than it should have. Did you use a loop and move once for each point in the robot_path array?"
 msgstr "机器人的移动次数少于应有的次数。你是否使用了循环，并对 robot_path 数组中的每个点都移动了一次？"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:38
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:45
 #, fuzzy
 msgid "The robot's movement path doesn't match the robot_path array. They should be the same."
 msgstr "机器人的移动路径与 robot_path 数组不匹配。它们应该是一致的。"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:44
-#, fuzzy
-msgid "We found no call to the robot's move_to() function. Did you forget to call it?"
-msgstr "我们没有发现对机器人 move_to() 函数的调用。你是不是忘了调用它？"
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:58
+msgid "Did you use a for loop to call robot.move_to() with each cell in robot_path?"
+msgstr "你是否使用了 for 循环，用 robot_path 中的每个单元格调用 robot.move_to ()？"
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:13
 #, fuzzy
@@ -2098,32 +2101,32 @@ msgstr "我们预期的是 %s，但实际得到的是 %s"
 msgid "It looks like you removed %s from waiting_orders."
 msgstr "看起来你从 waiting_orders 中删除了 %s。"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:10
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:11
 #, fuzzy
 msgid "Used Pop Back"
 msgstr "使用了 pop_back"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:11
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:12
 #, fuzzy
 msgid "Used While Loop"
 msgstr "使用了 While 循环"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:12
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:13
 #, fuzzy
 msgid "Crates Array Is Empty"
 msgstr "箱子数组为空"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:17
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:30
 #, fuzzy
 msgid "We found no call to the pop_back() function. Did you forget to call it?"
 msgstr "我们未发现对 pop_back() 函数的调用。您是否忘记调用它了？"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:22
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:36
 #, fuzzy
 msgid "You didn't use the while keyword"
 msgstr "你没有使用 while 关键字"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:29
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:44
 #, fuzzy
 msgid "The crate array is not empty"
 msgstr "crate 数组不为空"
@@ -2380,14 +2383,14 @@ msgstr "角色仍然不可见！你调用 show() 函数了吗？"
 msgid "Draw Rectangle Of 220 By 260"
 msgstr "绘制一个 220 × 260 的矩形"
 
-#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:18
-#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:18
-#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:18
+#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:16
+#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:16
+#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:16
 #, fuzzy
 msgid "Nothing drawn. Did you call move_forward()?"
 msgstr "未绘制任何内容。您是否调用了 move_forward() 函数？"
 
-#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:28
+#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:19
 #, fuzzy
 msgid "The drawn shape is not a rectangle with a width of 220 and a length of 260."
 msgstr "绘制的图形不是宽度为 220、长度为 260 的矩形。"
@@ -2397,7 +2400,7 @@ msgstr "绘制的图形不是宽度为 220、长度为 260 的矩形。"
 msgid "Draw Rectangle Of 200 By 120"
 msgstr "绘制一个 200 × 120 的矩形"
 
-#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:28
+#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:19
 #, fuzzy
 msgid "The drawn shape is not a rectangle with a width of 200 and a length of 120."
 msgstr "绘制的形状不是宽度为 200、长度为 120 的矩形。"
@@ -2407,7 +2410,7 @@ msgstr "绘制的形状不是宽度为 200、长度为 120 的矩形。"
 msgid "Draw Corner Of 200 By 200"
 msgstr "绘制 200 × 200 的角"
 
-#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:28
+#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:19
 #, fuzzy
 msgid "The drawn shape is not a corner connected by two lines of length 200."
 msgstr "绘制的图形并非由两条长度为 200 的线段连接而成的角。"
@@ -2432,162 +2435,177 @@ msgstr "绘制的图形不是边长为 200 像素的正方形。"
 msgid "Draw Three Squares Of 200 Pixels"
 msgstr "绘制三个边长为 200 像素的正方形"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:20
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:18
 #, fuzzy
 msgid "Nothing drawn. Did you not call draw_square()?"
 msgstr "未绘制任何内容。您是否未调用 draw_square()？"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:24
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:21
 #, fuzzy
 msgid "You only drew one square. You need to draw three."
 msgstr "你只画了一个正方形。你需要画三个。"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:26
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:23
 #, fuzzy
 msgid "You need to draw three squares."
 msgstr "你需要画三个正方形。"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:29
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:31
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:26
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:28
 #, fuzzy
 msgid "You drew more than three squares. You need to draw only three!"
 msgstr "你画了三个以上的正方形。你只需要画三个！"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:39
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:34
 #, fuzzy
 msgid "Shape3D number %s has too few corners! Did you change the draw_square() function?"
 msgstr "Shape3D 编号 %s 的顶点太少！您是否修改了 draw_square() 函数？"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:44
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:39
 #, fuzzy
 msgid "Shape3D number %s has too many corners! Did you change the draw_square() function?"
 msgstr "Shape3D 编号 %s 的顶点过多！您是否修改了 draw_square() 函数？"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:55
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:44
 #, fuzzy
 msgid "Shape3D number %s is not a square of length 200 pixels. Did you change the draw_square() function?"
 msgstr "Shape3D 编号 %s 不是边长为 200 像素的正方形。你是否修改了 draw_square() 函数？"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:67
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:54
 msgid "The squares should not overlap. Did you move the turtle between drawing each square?"
-msgstr ""
+msgstr "这些正方形不应重叠。你在绘制每个正方形之间移动海龟了吗？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:16
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:14
 #, fuzzy
 msgid "Draw Corners Of Varying Lengths"
 msgstr "绘制长度各异的角点"
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:23
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:22
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:28
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:43
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:54
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:19
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:19
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:41
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:56
 #, fuzzy
 msgid "The turtle did not draw anything. Make sure your function calls move_forward(length) to move the turtle."
 msgstr "海龟没有绘制任何内容。请确保您的函数调用了 move_forward(length) 来移动海龟。"
 
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:25
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:43
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:58
+msgid "The turtle drew fewer than 2 shapes. Make sure your function is repeatable."
+msgstr "海龟绘制了少于 2 个图形。请确保你的函数可以重复调用。"
+
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:27
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:25
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:45
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:60
+#, fuzzy
+msgid "The turtle drew more than 2 shapes. Make sure your function only draws one shape."
+msgstr "海龟没有绘制任何内容。请确保您的函数调用了 move_forward(length) 来移动海龟。"
+
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:28
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:28
+#, fuzzy
+msgid "The drawn shape has too few points. Did you call move_forward() less than 2 times?"
+msgstr "绘制的图形点数太少。你是否调用 move_forward() 的次数少于 2 次？"
+
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:30
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:29
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:30
 #, fuzzy
 msgid "The drawn shape has too many points. Did you call move_forward() more than 2 times?"
 msgstr "绘制的图形顶点过多。您是否调用了超过 2 次 move_forward() 函数？"
 
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:32
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:31
-#, fuzzy
-msgid "The drawn shape has too few points. Did you call move_forward() less than 2 times?"
-msgstr "绘制的图形点数太少。你是否调用 move_forward() 的次数少于 2 次？"
-
-#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:34
 #, fuzzy
 msgid "The drawn shape doesn't have the expected size. Did you use the length parameter?"
 msgstr "绘制的图形大小与预期不符。你是否使用了 length 参数？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:15
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:14
 #, fuzzy
 msgid "Draw Corners Of Varying Sizes And Angles"
 msgstr "绘制大小和角度各异的拐角"
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:34
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:32
 #, fuzzy
 msgid "The drawn corner doesn't match the expected corner. Are you not using the angle parameter in your code?"
 msgstr "绘制的角与预期角不符。你的代码中是否未使用 angle 参数？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:22
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:18
 #, fuzzy
 msgid "Draw Rectangles Of Varying Sizes"
 msgstr "绘制不同大小的矩形"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:29
-#, fuzzy
-msgid "The turtle did not draw anything. Make sure your function calls move_forward() with the length and height parameters."
-msgstr "海龟没有画出任何内容。请确保你的函数在调用 move_forward() 时传入了 length 和 height 参数。"
-
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:40
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:61
-#, fuzzy
-msgid "The drawn shape has too many points. Did you call move_forward() more than 4 times?"
-msgstr "绘制的图形点数过多。你是否调用了超过 4 次 move_forward() 函数？"
-
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:42
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:65
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:32
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:68
 #, fuzzy
 msgid "The drawn shape has too few points. Did you call move_forward() less than 4 times?"
 msgstr "绘制的图形顶点太少。你是否调用了少于 4 次 move_forward()？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:45
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:34
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:64
+#, fuzzy
+msgid "The drawn shape has too many points. Did you call move_forward() more than 4 times?"
+msgstr "绘制的图形点数过多。你是否调用了超过 4 次 move_forward() 函数？"
+
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:37
 #, fuzzy
 msgid "The length and height are inverted. Did you swap the length and height function arguments?"
 msgstr "长度和高度被搞反了。你是否将长度和高度函数的参数调换了？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:47
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:34
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:39
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:31
 #, fuzzy
 msgid "The drawn shapes don't have the expected length and height. Did you forget to use the length and height parameter?"
 msgstr "绘制的图形长度和高度与预期不符。你是否忘记使用长度和高度参数了？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:14
 #, fuzzy
 msgid "Turtle Ends Facing Towards The Right"
 msgstr "乌龟最终朝右侧停下"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:22
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:15
 #, fuzzy
 msgid "Turtle Starts Each Square Facing Towards The Right"
 msgstr "海龟在每个方格中开始时都面向右侧"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:16
 #, fuzzy
 msgid "Draw Squares Of Varying Sizes"
 msgstr "绘制不同大小的正方形"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:37
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:35
 #, fuzzy
 msgid "The turtle should turn four times to draw a square so that it always starts drawing the squares in the same direction. Did you call turn_right() four times?"
 msgstr "海龟应转四次才能画出一个正方形，这样它画正方形时始终朝同一方向。你是否调用了四次 turn_right()？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:45
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:48
 #, fuzzy
 msgid "The turtle should be facing towards the right to draw squares in the same direction every time. Did you call turn_right(90) four times in your function?"
 msgstr "为了每次都能朝同一方向画出正方形，乌龟应该面向右侧。你在函数中是否调用了四次 turn_right(90)？"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:69
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:72
 #, fuzzy
 msgid "The shape is not a square or not turned in the expected direction. Did you use 90 degree angles when calling turn_right()?"
 msgstr "该图形不是正方形，或者旋转方向与预期不符。调用 turn_right() 时，你是否使用了 90 度的角度？"
 
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:12
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:11
 #, fuzzy
 msgid "Rectangle Starts At 120 By 100"
 msgstr "矩形起始坐标为 120, 100"
 
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:13
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:12
 #, fuzzy
 msgid "Rectangle Size Is 200 By 120"
 msgstr "矩形尺寸为 200 × 120"
 
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:20
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:30
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:17
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:29
 #, fuzzy
 msgid "We didn't find any drawn rectangles. Did you forget to call draw_rectangle()?"
 msgstr "我们没有找到任何绘制的矩形。你是不是忘了调用 draw_rectangle() 函数？"
@@ -2597,17 +2615,17 @@ msgstr "我们没有找到任何绘制的矩形。你是不是忘了调用 draw_
 msgid "The rectangle doesn't start at position (120, 100). Did you not set the position right?"
 msgstr "矩形并未从位置 (120, 100) 开始绘制。你是否没有正确设置该位置？"
 
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:38
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:42
 #, fuzzy
 msgid "First Shape Is At 100 By 100"
 msgstr "第一个图形位于 (100, 100) 处"
 
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:61
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:64
 #, fuzzy
 msgid "No shape drawn. Did you forget to call draw_rectangle()?"
 msgstr "未绘制任何图形。你是否忘记调用 draw_rectangle() 了？"
 
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:64
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:67
 #, fuzzy
 msgid "The first square should be drawn at (100, 100). Instead, you drew it at %s."
 msgstr "第一个正方形应该画在 (100, 100) 处。但你却将其画在了 %s 处。"
@@ -2697,90 +2715,102 @@ msgstr "机器人的受损程度未达预期。它的生命值为 %s，但在受
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "看起来你并没有从生命值中减去 amount。"
 
-#: ui/UILesson.gd:301
+#: ui/UILesson.gd:308
 msgid "Learn More"
 msgstr "了解更多"
 
-#: ui/UILesson.gd:366
+#: ui/UILesson.gd:331
+msgid ""
+"\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+
+#: ui/UILesson.gd:379
 msgid ""
 "\n"
 "[hr]\n"
 msgstr ""
+"\n"
+"[hr]\n"
 
-#: ui/UINavigator.gd:398
+#: ui/UINavigator.gd:439
 msgid "(no previous history)"
 msgstr "（没有更早的历史）"
 
-#: ui/UIPractice.gd:284
+#: ui/UIPractice.gd:290
 msgid "Hint %s"
 msgstr "提示 %s"
 
-#: ui/UIPractice.gd:322
+#: ui/UIPractice.gd:328
 msgid "Validating Your Code..."
 msgstr "正在校验你的代码..."
 
-#: ui/UIPractice.gd:377
-msgid "The function `%s` calls itself, this creates an infinite loop"
+#: ui/UIPractice.gd:379
+#, fuzzy
+msgid "The function '%s' calls itself, this creates an infinite loop"
 msgstr "函数 `%s` 调用自身，这造成了一个无限循环"
 
-#: ui/UIPractice.gd:388
+#: ui/UIPractice.gd:390
 #, fuzzy
 msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr "你的 while 循环会无限运行（while true），且没有 break 语句。这将导致应用程序卡死。"
 
-#: ui/UIPractice.gd:430
+#: ui/UIPractice.gd:432
 msgid "Running Your Code..."
 msgstr "正在运行你的代码..."
 
-#: ui/UIPractice.gd:461
+#: ui/UIPractice.gd:444
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "你的代码中存在除以0的情况。你不能在代码中除以0。请确保你的代码中没有“/ 0”或“% 0”。"
 
-#: ui/UIPractice.gd:507
+#: ui/UIPractice.gd:516
 msgid "Running Tests..."
 msgstr "正在运行测试..."
 
-#: ui/components/BreadCrumbs.gd:115
+#: ui/components/BreadCrumbs.gd:66
 msgid " > "
-msgstr ""
+msgstr " > "
 
 #: ui/components/popups/ReportFormPopup.gd:52
 msgid "Select the kind of issue and describe it in the box below, then click \"Send report\" to open the contact page on our website with the report prefilled."
 msgstr "请选择问题类型并在下面的框中描述问题，然后点击“发送报告”以打开我们网站上的联系页面，报告内容已预先填写。"
 
 #: ui/components/popups/ReportFormPopup.gd:56
-msgid "For questions and help with learning, [url=https://discord.gg/bNj469SYQj]join the community on Discord[/url]."
+#, fuzzy
+msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr "如有任何疑问或需要学习方面的帮助，请[url=https://discord.gg/bNj469SYQj]加入 Discord 社区[/url]。"
 
-#: ui/components/popups/ReportFormPopup.gd:131
+#: ui/components/popups/ReportFormPopup.gd:132
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr "翻译均为非官方版本，由社区维护。如果您想提供帮助，请[url=https://github.com/GDQuest/learn-gdscript-translations/#readme]了解如何帮助翻译应用程序[/url]。"
 
 #: ui/components/popups/SettingsPopup.gd:144
 msgid "{percentage}% of text translated. {completed}/{total} lessons fully translated."
-msgstr ""
+msgstr "已翻译了 {percentage}% 的文本。{completed}/{total} 课已完整翻译。"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:72
+#: ui/screens/course_outliner/CourseLessonDetails.gd:73
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:85
-#: ui/screens/course_outliner/CourseLessonDetails.gd:114
-#: ui/screens/course_outliner/CourseLessonDetails.gd:116
+#: ui/screens/course_outliner/CourseLessonDetails.gd:86
+#: ui/screens/course_outliner/CourseLessonDetails.gd:115
+#: ui/screens/course_outliner/CourseLessonDetails.gd:117
 msgid "Open Anyway"
-msgstr ""
+msgstr "仍然打开"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:113
+#: ui/screens/course_outliner/CourseLessonDetails.gd:114
 msgid "Open Lesson"
 msgstr "打开课程"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:115
+#: ui/screens/course_outliner/CourseLessonDetails.gd:116
 msgid "Continue Lesson"
 msgstr "继续课程"
 
 #: ui/screens/course_outliner/CourseLessonList.gd:33
 msgid "This course is {percentage}% translated. Incomplete lessons will contain English text."
-msgstr ""
+msgstr "本课程已翻译 {percentage}%。未完整翻译的课程将包含英文文本。"
 
 #: ui/screens/lesson/quizzes/UIQuizChoice.gd:28
 msgid "(select all that apply)"
@@ -2811,7 +2841,7 @@ msgstr "你之前已完成过此练习。"
 msgid ""
 "You've used the provided solution.\n"
 "This practice will not count towards your course progress."
-msgstr ""
+msgstr "你使用了提供的解决方案。该练习将不计入你的课程进度。"
 
 #: ui/screens/welcome_screen/WelcomeScreen.gd:52
 msgid "CONTINUE"
@@ -2819,6 +2849,21 @@ msgstr "继续"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr "从零开始学习的godot"
+
+#~ msgid "in"
+#~ msgstr "在"
+
+#, fuzzy
+#~ msgid "Correct Scale After 2 Levels"
+#~ msgstr "经过 2 个关卡后的正确缩放比例"
+
+#, fuzzy
+#~ msgid "We found no call to the robot's move_to() function. Did you forget to call it?"
+#~ msgstr "我们没有发现对机器人 move_to() 函数的调用。你是不是忘了调用它？"
+
+#, fuzzy
+#~ msgid "The turtle did not draw anything. Make sure your function calls move_forward() with the length and height parameters."
+#~ msgstr "海龟没有画出任何内容。请确保你的函数在调用 move_forward() 时传入了 length 和 height 参数。"
 
 #~ msgid "CHRISTMAS SALE - 50% OFF"
 #~ msgstr "圣诞特惠 - 五折"

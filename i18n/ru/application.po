@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
 "POT-Creation-Date: 2026-01-21 11:55+0100\n"
-"PO-Revision-Date: 2026-06-04 12:03+0000\n"
-"Last-Translator: Hosted Weblate user 153466 <gyfugood51@gmail.com>\n"
+"PO-Revision-Date: 2026-08-18 10:51+0000\n"
+"Last-Translator: Мария Целоватова <blackmarauder17@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/learn-gdscript-from-zero/application/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Generated-By: Babel 2.10.3\n"
-"X-Generator: Weblate 2026.6\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 
 #: course/common/CustomHealthBar.tscn
 #, fuzzy
@@ -118,8 +118,9 @@ msgid "value"
 msgstr "Значение"
 
 #: course/lesson-13-conditions/visuals/ExampleHeal.tscn
+#, fuzzy
 msgid "heal(50)"
-msgstr ""
+msgstr "здоровье(50)"
 
 #: course/lesson-13-conditions/visuals/ExampleHeal.tscn
 #: course/lesson-9-adding-and-subtracting/visuals/ExampleHeal.tscn
@@ -312,6 +313,10 @@ msgstr "Отложенные заказы"
 msgid "Completed"
 msgstr "Выполнено"
 
+#: course/lesson-23-append-to-arrays/clearing-meals/Meal.tscn
+msgid "cheese sandwich"
+msgstr ""
+
 #: course/lesson-24-access-array-indices/visuals/SyntaxAccessIndex.tscn
 #, fuzzy
 msgid "array_name"
@@ -473,7 +478,7 @@ msgstr "Вернуться в главное меню"
 msgid "Open the course index"
 msgstr "Открыть оглавление курса"
 
-#: ui/UINavigator.tscn ui/UINavigator.gd:395
+#: ui/UINavigator.tscn ui/UINavigator.gd:436
 msgid "Go back in your navigation history"
 msgstr "Вернуться к предыдущему разделу"
 
@@ -626,10 +631,6 @@ msgstr "ИНФОРМАЦИЯ"
 #, fuzzy
 msgid "Click to highlight the relevant part of your code"
 msgstr "Нажмите, чтобы выделить соответствующую часть вашего кода"
-
-#: ui/components/OutputConsoleErrorMessage.tscn
-msgid "in"
-msgstr "в"
 
 #: ui/components/OutputConsoleErrorMessage.tscn
 msgid "at"
@@ -976,8 +977,8 @@ msgid "\t[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]
 msgstr "[b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]Как помочь с переводом[/url][/b]"
 
 #: ui/screens/course_outliner/CourseLessonDetails.tscn
-#: ui/screens/course_outliner/CourseLessonDetails.gd:85
-#: ui/screens/course_outliner/CourseLessonDetails.gd:117
+#: ui/screens/course_outliner/CourseLessonDetails.gd:86
+#: ui/screens/course_outliner/CourseLessonDetails.gd:118
 msgid "Start Lesson"
 msgstr "Начать урок"
 
@@ -1652,22 +1653,22 @@ msgstr "Величина урона верна"
 msgid "It looks like the take_damage function is missing; did you remove it?"
 msgstr "Похоже, отсутствует функция `take_damage`; вы её удалили?"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:70
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:78
 #, fuzzy
 msgid "It looks like amount isn't reduced by a percentage. Did you multiply it by a value less than 1?"
 msgstr "Похоже, величина amount не уменьшается на определенный процент. Вы умножили её на значение, меньшее 1?"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:76
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:84
 #, fuzzy
 msgid "The character did not take half damage despite being level 3. Did you multiply the amount by 0.5 to reduce it?"
 msgstr "Персонаж не получил половину урона, несмотря на то что находится на 3-м уровне. Вы умножили значение на 0,5, чтобы уменьшить его?"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:80
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:88
 #, fuzzy
 msgid "The character appears not to be taking full damage when their level is below 3. Did you use a condition to limit damage reduction to when the level is greater or equal to 3?"
 msgstr "Похоже, персонаж не получает полного урона, когда его уровень ниже 3. Вы использовали условие, ограничивающее уменьшение урона случаями, когда уровень не меньше 3?"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:82
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:90
 #, fuzzy
 msgid "The character appears to be taking 0 damage when its level is less than 3. Did you subtract the amount to health when the level is less than 3?"
 msgstr "Похоже, персонаж получает 0 урона, когда его уровень ниже 3. Вы вычитали это значение из здоровья, когда уровень ниже 3?"
@@ -1678,9 +1679,8 @@ msgid "Use A Vector To Increase Scale"
 msgstr "Используйте вектор для увеличения масштаба"
 
 #: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:12
-#, fuzzy
-msgid "Correct Scale After 2 Levels"
-msgstr "Исправьте масштаб после 2 уровней"
+msgid "The Scale Is Correct After Gaining Multiple Levels"
+msgstr ""
 
 #: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:38
 #, fuzzy
@@ -1745,14 +1745,14 @@ msgid "Your code has no while loop. You need to use a while loop to complete thi
 msgstr "В вашем коде отсутствует цикл while. Для выполнения этого упражнения необходимо использовать цикл while, даже если существуют другие решения!"
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:12
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:36
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:40
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:12
 #, fuzzy
 msgid "Use For Loop"
 msgstr "Используйте цикл «For»"
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:23
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:44
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:48
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:23
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:40
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:39
@@ -1760,79 +1760,83 @@ msgstr "Используйте цикл «For»"
 msgid "Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!"
 msgstr "В вашем коде отсутствует цикл «for». Для выполнения этого упражнения необходимо использовать цикл «for», даже если существуют другие решения!"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:37
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:36
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:41
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:40
 #, fuzzy
 msgid "Draw Three Squares"
 msgstr "Нарисуйте три квадрата"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:38
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:37
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:42
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:41
 #, fuzzy
 msgid "Squares Are All 100 By 100"
 msgstr "Все квадраты имеют размер 100 на 100"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:39
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:39
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:43
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:43
 #, fuzzy
 msgid "Shapes Are 100 Pixels Apart"
 msgstr "Фигуры расположены на расстоянии 100 пикселей друг от друга"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:51
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:45
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:54
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:48
 #, fuzzy
 msgid "You drew %s squares but you need to draw 3."
 msgstr "Вы нарисовали %s квадратов, но нужно нарисовать 3."
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:67
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:53
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:70
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:56
 #, fuzzy
 msgid "Shape3D number %s is not a square of size 100 by 100."
 msgstr "Фигура Shape3D с номером %s не является квадратом размером 100 на 100."
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:74
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:71
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:77
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:74
 #, fuzzy
 msgid "There are fewer than 3 shapes, we can't test if shapes are 100 pixels apart."
 msgstr "Фигур меньше 3, поэтому мы не можем проверить, находятся ли они на расстоянии 100 пикселей друг от друга."
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:81
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:78
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:85
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:81
 #, fuzzy
 msgid "Shapes are not separated by 100 pixels on the X axis."
 msgstr "Фигуры не разделены расстоянием в 100 пикселей по оси X."
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:15
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:18
+msgid "Path contains values that are not Vector2"
+msgstr ""
+
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:25
 #, fuzzy
 msgid "Path Is Contiguous"
 msgstr "Траектория является непрерывной"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:16
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:26
 #, fuzzy
 msgid "Turtle Reaches The Robot"
 msgstr "Черепаха добирается до робота"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:17
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:27
 #, fuzzy
 msgid "Path Does Not Hit Obstacles"
 msgstr "Траектория не сталкивается с препятствиями"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:22
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:32
 #, fuzzy
 msgid "No points found in variable turtle_path. Did you write Vector2 coordinates in the variable's array?"
 msgstr "В переменной `turtle_path` не найдено ни одной точки. Вы записали координаты `Vector2` в массив этой переменной?"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:27
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:37
 #, fuzzy
 msgid "We found at least two points that are not next to one another. Did you forget some coordinates, or did you try to move the turtle diagonally?"
 msgstr "Мы обнаружили как минимум две точки, которые не находятся рядом друг с другом. Вы забыли указать какие-то координаты или пытались переместить черепашку по диагонали?"
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:36
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:46
 #, fuzzy
 msgid "The last point should be at the robot's coordinates, %s, but it is %s instead."
 msgstr "Последняя точка должна находиться в координатах робота, %s, но вместо этого она находится в точке %s."
 
-#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:45
+#: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:55
 #, fuzzy
 msgid "The turtle hit a rock at coordinates %s. You need to change its path."
 msgstr "Черепаха наткнулась на камень в координатах %s. Вам нужно изменить её траекторию."
@@ -1867,65 +1871,64 @@ msgstr "Устраните ошибки"
 msgid "There's still a comment in your code. You need to remove the comment sign (#)."
 msgstr "В вашем коде остался комментарий. Необходимо удалить знак комментария (#)."
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:37
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:41
 #, fuzzy
 msgid "Rectangles Have The Correct Size"
 msgstr "Прямоугольники имеют правильный размер"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:38
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:42
 #, fuzzy
 msgid "Rectangles Do Not Overlap"
 msgstr "Прямоугольники не пересекаются"
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:43
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:47
 #, fuzzy
 msgid "We expected 4 polygons, but you drew %s instead."
 msgstr "Мы ожидали 4 многоугольника, но вы нарисовали %s."
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:47
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:51
 #, fuzzy
 msgid "At least one of the rectangles does not have the expected size."
 msgstr "По крайней мере один из прямоугольников не имеет ожидаемого размера."
 
-#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:58
+#: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:62
 #, fuzzy
 msgid "At least two drawn shape intersect. Did you pass arguments big enough to the jump() function?"
 msgstr "По крайней мере две нарисованные фигуры пересекаются. Вы передали в функцию `jump()` аргументы достаточного размера?"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:17
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:18
 #, fuzzy
 msgid "Robot Moves Along Blue Path"
 msgstr "Робот движется по синей траектории"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:18
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:20
 #, fuzzy
 msgid "Code Uses Move To"
 msgstr "В коде используется move_to()"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:23
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:25
 #, fuzzy
 msgid "The robot's path changed. Did you change the robot_path array?"
 msgstr "Траектория робота изменилась. Вы изменили массив robot_path?"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:26
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:28
 #, fuzzy
 msgid "The robot didn't move at all. Did you call robot.move_to()?"
 msgstr "Робот вообще не двинулся с места. Вы вызвали функцию robot.move_to()?"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:31
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:33
 #, fuzzy
 msgid "The robot moved fewer times than it should have. Did you use a loop and move once for each point in the robot_path array?"
 msgstr "Робот совершил меньше шагов, чем должен был. Использовали ли вы цикл и выполняли ли движение один раз для каждой точки в массиве robot_path?"
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:38
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:45
 #, fuzzy
 msgid "The robot's movement path doesn't match the robot_path array. They should be the same."
 msgstr "Траектория движения робота не совпадает с массивом robot_path. Они должны быть одинаковыми."
 
-#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:44
-#, fuzzy
-msgid "We found no call to the robot's move_to() function. Did you forget to call it?"
-msgstr "Мы не обнаружили вызова функции move_to() робота. Вы не забыли её вызвать?"
+#: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:58
+msgid "Did you use a for loop to call robot.move_to() with each cell in robot_path?"
+msgstr ""
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:13
 #, fuzzy
@@ -2046,32 +2049,32 @@ msgstr "мы ожидали %s, но вместо этого получили %s
 msgid "It looks like you removed %s from waiting_orders."
 msgstr ""
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:10
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:11
 #, fuzzy
 msgid "Used Pop Back"
 msgstr "Использован Pop Back"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:11
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:12
 #, fuzzy
 msgid "Used While Loop"
 msgstr "Использован цикл while"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:12
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:13
 #, fuzzy
 msgid "Crates Array Is Empty"
 msgstr "Массив ящиков пуст"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:17
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:30
 #, fuzzy
 msgid "We found no call to the pop_back() function. Did you forget to call it?"
 msgstr "Мы не обнаружили вызова функции pop_back(). Вы не забыли её вызвать?"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:22
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:36
 #, fuzzy
 msgid "You didn't use the while keyword"
 msgstr "Вы не использовали ключевое слово while"
 
-#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:29
+#: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:44
 #, fuzzy
 msgid "The crate array is not empty"
 msgstr "Массив crate не пуст"
@@ -2328,14 +2331,14 @@ msgstr "Персонаж по-прежнему невидим! Вы вызвал
 msgid "Draw Rectangle Of 220 By 260"
 msgstr "Нарисуйте прямоугольник размером 220 на 260"
 
-#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:18
-#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:18
-#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:18
+#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:16
+#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:16
+#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:16
 #, fuzzy
 msgid "Nothing drawn. Did you call move_forward()?"
 msgstr "Ничего не нарисовано. Вы вызвали функцию move_forward()?"
 
-#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:28
+#: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:19
 #, fuzzy
 msgid "The drawn shape is not a rectangle with a width of 220 and a length of 260."
 msgstr "Нарисованная фигура не является прямоугольником шириной 220 и длиной 260."
@@ -2345,7 +2348,7 @@ msgstr "Нарисованная фигура не является прямоу
 msgid "Draw Rectangle Of 200 By 120"
 msgstr "Нарисуйте прямоугольник размером 200 на 120"
 
-#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:28
+#: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:19
 #, fuzzy
 msgid "The drawn shape is not a rectangle with a width of 200 and a length of 120."
 msgstr "Нарисованная фигура не является прямоугольником шириной 200 и длиной 120."
@@ -2355,7 +2358,7 @@ msgstr "Нарисованная фигура не является прямоу
 msgid "Draw Corner Of 200 By 200"
 msgstr "Нарисуйте угол размером 200 на 200"
 
-#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:28
+#: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:19
 #, fuzzy
 msgid "The drawn shape is not a corner connected by two lines of length 200."
 msgstr "Нарисованная фигура не представляет собой угол, соединенный двумя отрезками длиной 200."
@@ -2380,162 +2383,177 @@ msgstr "Нарисованная фигура не является квадра
 msgid "Draw Three Squares Of 200 Pixels"
 msgstr "Нарисуйте три квадрата размером 200 пикселей"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:20
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:18
 #, fuzzy
 msgid "Nothing drawn. Did you not call draw_square()?"
 msgstr "Ничего не нарисовано. Вы не вызвали функцию draw_square()?"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:24
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:21
 #, fuzzy
 msgid "You only drew one square. You need to draw three."
 msgstr "Вы нарисовали только один квадрат. Нужно нарисовать три."
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:26
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:23
 #, fuzzy
 msgid "You need to draw three squares."
 msgstr "Вам нужно нарисовать три квадрата."
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:29
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:31
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:26
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:28
 #, fuzzy
 msgid "You drew more than three squares. You need to draw only three!"
 msgstr "Вы нарисовали больше трёх квадратов. Нужно нарисовать только три!"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:39
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:34
 #, fuzzy
 msgid "Shape3D number %s has too few corners! Did you change the draw_square() function?"
 msgstr "У фигуры Shape3D с номером %s слишком мало углов! Вы изменили функцию draw_square()?"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:44
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:39
 #, fuzzy
 msgid "Shape3D number %s has too many corners! Did you change the draw_square() function?"
 msgstr "Фигура Shape3D с номером %s имеет слишком много углов! Вы изменили функцию draw_square()?"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:55
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:44
 #, fuzzy
 msgid "Shape3D number %s is not a square of length 200 pixels. Did you change the draw_square() function?"
 msgstr "Фигура3D номер %s не является квадратом со стороной 200 пикселей. Вы изменили функцию draw_square()?"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:67
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:54
 msgid "The squares should not overlap. Did you move the turtle between drawing each square?"
 msgstr ""
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:16
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:14
 #, fuzzy
 msgid "Draw Corners Of Varying Lengths"
 msgstr "Нарисуйте углы разной длины"
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:23
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:22
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:28
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:43
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:54
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:19
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:19
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:41
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:56
 #, fuzzy
 msgid "The turtle did not draw anything. Make sure your function calls move_forward(length) to move the turtle."
 msgstr "Черепаха ничего не нарисовала. Убедитесь, что ваша функция вызывает move_forward(length) для перемещения черепахи."
 
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:25
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:43
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:58
+msgid "The turtle drew fewer than 2 shapes. Make sure your function is repeatable."
+msgstr ""
+
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:27
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:25
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:45
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:60
+#, fuzzy
+msgid "The turtle drew more than 2 shapes. Make sure your function only draws one shape."
+msgstr "Черепаха ничего не нарисовала. Убедитесь, что ваша функция вызывает move_forward(length) для перемещения черепахи."
+
+#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:28
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:28
+#, fuzzy
+msgid "The drawn shape has too few points. Did you call move_forward() less than 2 times?"
+msgstr "Нарисованная фигура имеет слишком мало точек. Вы вызвали функцию move_forward() менее 2 раз?"
+
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:30
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:29
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:30
 #, fuzzy
 msgid "The drawn shape has too many points. Did you call move_forward() more than 2 times?"
 msgstr "Нарисованная фигура имеет слишком много точек. Вы вызвали функцию move_forward() более 2 раз?"
 
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:32
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:31
-#, fuzzy
-msgid "The drawn shape has too few points. Did you call move_forward() less than 2 times?"
-msgstr "Нарисованная фигура имеет слишком мало точек. Вы вызвали функцию move_forward() менее 2 раз?"
-
-#: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:34
 #, fuzzy
 msgid "The drawn shape doesn't have the expected size. Did you use the length parameter?"
 msgstr "Нарисованная фигура не имеет ожидаемого размера. Вы использовали параметр «length»?"
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:15
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:14
 #, fuzzy
 msgid "Draw Corners Of Varying Sizes And Angles"
 msgstr "Нарисуйте углы разного размера и под разными углами"
 
-#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:34
+#: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:32
 #, fuzzy
 msgid "The drawn corner doesn't match the expected corner. Are you not using the angle parameter in your code?"
 msgstr "Нарисованный угол не совпадает с ожидаемым. Вы не используете параметр угла в своём коде?"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:22
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:18
 #, fuzzy
 msgid "Draw Rectangles Of Varying Sizes"
 msgstr "Нарисуйте прямоугольники разных размеров"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:29
-#, fuzzy
-msgid "The turtle did not draw anything. Make sure your function calls move_forward() with the length and height parameters."
-msgstr "Черепаха ничего не нарисовала. Убедитесь, что ваша функция вызывает move_forward() с параметрами длины и высоты."
-
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:40
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:61
-#, fuzzy
-msgid "The drawn shape has too many points. Did you call move_forward() more than 4 times?"
-msgstr "Нарисованная фигура имеет слишком много точек. Вы вызывали функцию move_forward() более 4 раз?"
-
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:42
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:65
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:32
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:68
 #, fuzzy
 msgid "The drawn shape has too few points. Did you call move_forward() less than 4 times?"
 msgstr "Нарисованная фигура имеет слишком мало точек. Вы вызвали функцию move_forward() менее 4 раз?"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:45
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:34
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:64
+#, fuzzy
+msgid "The drawn shape has too many points. Did you call move_forward() more than 4 times?"
+msgstr "Нарисованная фигура имеет слишком много точек. Вы вызывали функцию move_forward() более 4 раз?"
+
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:37
 #, fuzzy
 msgid "The length and height are inverted. Did you swap the length and height function arguments?"
 msgstr "Длина и высота перепутаны. Вы поменяли местами аргументы длины и высоты?"
 
-#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:47
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:34
+#: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:39
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:31
 #, fuzzy
 msgid "The drawn shapes don't have the expected length and height. Did you forget to use the length and height parameter?"
 msgstr "Нарисованные фигуры не имеют ожидаемой длины и высоты. Вы забыли использовать параметры длины и высоты?"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:21
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:14
 #, fuzzy
 msgid "Turtle Ends Facing Towards The Right"
 msgstr "Черепаха заканчивает движение, обратившись вправо"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:22
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:15
 #, fuzzy
 msgid "Turtle Starts Each Square Facing Towards The Right"
 msgstr "Черепаха начинает каждый квадрат, обратившись вправо"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:23
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:16
 #, fuzzy
 msgid "Draw Squares Of Varying Sizes"
 msgstr "Нарисуйте квадраты разного размера"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:37
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:35
 #, fuzzy
 msgid "The turtle should turn four times to draw a square so that it always starts drawing the squares in the same direction. Did you call turn_right() four times?"
 msgstr "Черепаха должна повернуть четыре раза, чтобы нарисовать квадрат, при этом всегда начиная рисовать квадраты в одном и том же направлении. Вы вызвали функцию turn_right() четыре раза?"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:45
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:48
 #, fuzzy
 msgid "The turtle should be facing towards the right to draw squares in the same direction every time. Did you call turn_right(90) four times in your function?"
 msgstr "Черепаха должна быть повернута вправо, чтобы каждый раз рисовать квадраты в одном и том же направлении. Вы четыре раза вызвали turn_right(90) в своей функции?"
 
-#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:69
+#: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:72
 #, fuzzy
 msgid "The shape is not a square or not turned in the expected direction. Did you use 90 degree angles when calling turn_right()?"
 msgstr "Фигура не является квадратом или повернута не в ожидаемом направлении. Вы использовали углы 90 градусов при вызове turn_right()?"
 
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:12
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:11
 #, fuzzy
 msgid "Rectangle Starts At 120 By 100"
 msgstr "Прямоугольник начинается с координат 120 × 100"
 
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:13
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:12
 #, fuzzy
 msgid "Rectangle Size Is 200 By 120"
 msgstr "Размер прямоугольника — 200 на 120"
 
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:20
-#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:30
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:17
+#: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:29
 #, fuzzy
 msgid "We didn't find any drawn rectangles. Did you forget to call draw_rectangle()?"
 msgstr "Мы не обнаружили ни одного нарисованного прямоугольника. Вы забыли вызвать функцию draw_rectangle()?"
@@ -2545,17 +2563,17 @@ msgstr "Мы не обнаружили ни одного нарисованно�
 msgid "The rectangle doesn't start at position (120, 100). Did you not set the position right?"
 msgstr "Прямоугольник не начинается в точке (120, 100). Может быть, вы неправильно задали координаты?"
 
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:38
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:42
 #, fuzzy
 msgid "First Shape Is At 100 By 100"
 msgstr "Первая фигура находится в точке с координатами 100 × 100"
 
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:61
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:64
 #, fuzzy
 msgid "No shape drawn. Did you forget to call draw_rectangle()?"
 msgstr "Фигура не нарисована. Вы забыли вызвать draw_rectangle()?"
 
-#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:64
+#: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:67
 #, fuzzy
 msgid "The first square should be drawn at (100, 100). Instead, you drew it at %s."
 msgstr "Первый квадрат должен быть нарисован в точке (100, 100). Вместо этого вы нарисовали его в точке %s."
@@ -2645,11 +2663,17 @@ msgstr "Робот получил не столько урона, сколько
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "Похоже, вы не вычитаете amount из здоровья."
 
-#: ui/UILesson.gd:301
+#: ui/UILesson.gd:308
 msgid "Learn More"
 msgstr "Узнать больше"
 
-#: ui/UILesson.gd:366
+#: ui/UILesson.gd:331
+msgid ""
+"\n"
+"\n"
+msgstr ""
+
+#: ui/UILesson.gd:379
 #, fuzzy
 msgid ""
 "\n"
@@ -2658,40 +2682,41 @@ msgstr ""
 "\n"
 "[hr]\n"
 
-#: ui/UINavigator.gd:398
+#: ui/UINavigator.gd:439
 msgid "(no previous history)"
 msgstr "(предыдущий раздел не найден)"
 
-#: ui/UIPractice.gd:284
+#: ui/UIPractice.gd:290
 msgid "Hint %s"
 msgstr "Подсказка %s"
 
-#: ui/UIPractice.gd:322
+#: ui/UIPractice.gd:328
 msgid "Validating Your Code..."
 msgstr "Проверяем ваш код..."
 
-#: ui/UIPractice.gd:377
-msgid "The function `%s` calls itself, this creates an infinite loop"
+#: ui/UIPractice.gd:379
+#, fuzzy
+msgid "The function '%s' calls itself, this creates an infinite loop"
 msgstr "Функция `%s` вызывает сама себя, впадая в бесконечный цикл"
 
-#: ui/UIPractice.gd:388
+#: ui/UIPractice.gd:390
 #, fuzzy
 msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr "У вас есть цикл while, который выполняется бесконечно (while true) без оператора break. Это приведёт к зависанию приложения."
 
-#: ui/UIPractice.gd:430
+#: ui/UIPractice.gd:432
 msgid "Running Your Code..."
 msgstr "Выполняем ваш код..."
 
-#: ui/UIPractice.gd:461
+#: ui/UIPractice.gd:444
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "В вашем коде есть деление на ноль. Вы не можете делить на ноль в коде. Убедитесь, что в вашем коде нет «/ 0» или «% 0»."
 
-#: ui/UIPractice.gd:507
+#: ui/UIPractice.gd:516
 msgid "Running Tests..."
 msgstr "Проводим тесты..."
 
-#: ui/components/BreadCrumbs.gd:115
+#: ui/components/BreadCrumbs.gd:66
 msgid " > "
 msgstr ""
 
@@ -2700,10 +2725,10 @@ msgid "Select the kind of issue and describe it in the box below, then click \"S
 msgstr ""
 
 #: ui/components/popups/ReportFormPopup.gd:56
-msgid "For questions and help with learning, [url=https://discord.gg/bNj469SYQj]join the community on Discord[/url]."
+msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr ""
 
-#: ui/components/popups/ReportFormPopup.gd:131
+#: ui/components/popups/ReportFormPopup.gd:132
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr ""
 
@@ -2711,22 +2736,22 @@ msgstr ""
 msgid "{percentage}% of text translated. {completed}/{total} lessons fully translated."
 msgstr ""
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:72
+#: ui/screens/course_outliner/CourseLessonDetails.gd:73
 #, fuzzy
 msgid "100%"
 msgstr "100%"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:85
-#: ui/screens/course_outliner/CourseLessonDetails.gd:114
-#: ui/screens/course_outliner/CourseLessonDetails.gd:116
+#: ui/screens/course_outliner/CourseLessonDetails.gd:86
+#: ui/screens/course_outliner/CourseLessonDetails.gd:115
+#: ui/screens/course_outliner/CourseLessonDetails.gd:117
 msgid "Open Anyway"
 msgstr ""
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:113
+#: ui/screens/course_outliner/CourseLessonDetails.gd:114
 msgid "Open Lesson"
 msgstr "Открыть урок"
 
-#: ui/screens/course_outliner/CourseLessonDetails.gd:115
+#: ui/screens/course_outliner/CourseLessonDetails.gd:116
 msgid "Continue Lesson"
 msgstr "Продолжить урок"
 
@@ -2775,6 +2800,21 @@ msgstr "ПРОДОЛЖИТЬ"
 #, fuzzy
 msgid "Learn to Code From Zero with Godot"
 msgstr "Научитесь программировать с нуля с Godot"
+
+#~ msgid "in"
+#~ msgstr "в"
+
+#, fuzzy
+#~ msgid "Correct Scale After 2 Levels"
+#~ msgstr "Исправьте масштаб после 2 уровней"
+
+#, fuzzy
+#~ msgid "We found no call to the robot's move_to() function. Did you forget to call it?"
+#~ msgstr "Мы не обнаружили вызова функции move_to() робота. Вы не забыли её вызвать?"
+
+#, fuzzy
+#~ msgid "The turtle did not draw anything. Make sure your function calls move_forward() with the length and height parameters."
+#~ msgstr "Черепаха ничего не нарисовала. Убедитесь, что ваша функция вызывает move_forward() с параметрами длины и высоты."
 
 #~ msgid "CHRISTMAS SALE - 50% OFF"
 #~ msgstr "РОЖДЕСТВЕНСКАЯ РАСПРОДАЖА – СКИДКА 50%"

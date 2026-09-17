@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the Learn GDScript From
 # project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Language-Team: Korean <https://hosted.weblate.org/projects/learn-gdscript-from-zero/error-explanations/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.10.3\n"
@@ -25,6 +25,46 @@ msgstr ""
 
 #: script_checking/error_database.csv
 msgid "error_suggestion"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "This error message tells you that Godot did not find the function you are trying to call. This either means that:"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "1. The function does not exist."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "2. There is a typo in the name of the function you are trying to call."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "While we humans can read words even when they are spelled incorrectly, the computer only understands exact matches. For a computer, [i]3[/i] and [i]three[/i] or [i]foward[/i] (missing an [i]r[/i]) and [i]forward[/i] are not the same thing."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Look at the function name in the error message. Carefully compare it with the function names listed in the practice goals or the functions already in your code."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Are there any differences? Whether it's one letter, an underscore ('_'), or a capital letter? If you spot any differences, change the function name in your code."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "This error message tells you that the values you used with an operator are not compatible with each other. For example, you can add two [code]Vector2[/code] values together, but you cannot add a [code]Vector2[/code] and an [code]int[/code] (a whole number) like [code]Vector2(1, 1) + 3[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Operators are like recipes: each one only works with specific ingredients (kinds of values). The [code]+[/code] operator knows how to combine two numbers, or two vectors, but it cannot mix a vector and a number. For numeric values, the rules usually follow the ones you've learned in math classes: you can multiply, divide, or add numbers together. You can multiply or divide a [code]Vector2[/code] by a number. And so on."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "First, identify the two values the error message points to. Are they compatible? If you're adding or subtracting, they should be the same type: two numbers or two vectors."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "When working with variables, think about the value they hold. [code]position[/code], for example, holds a [code]Vector2[/code], so you can add another [code]Vector2[/code] to it directly: [code]position = position + Vector2(1, 1)[/code]. Or you can change one component, like [code]position.x = position.x + 1[/code]."
 msgstr ""
 
 #: script_checking/error_database.csv
