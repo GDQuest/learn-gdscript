@@ -2,14 +2,20 @@
 
 This document lists changes between releases.
 
+## Unreleased
+
+### Bug fixes
+
+- Fix send report button not working (#1390)
+
 ## Learn GDScript From Zero 2.2.0 (2026-08-31)
 
-## Improvements and changes
+### Improvements and changes
 
 - Added error explanations for standalone functions and standalone expressions.
 - Added a detection and suggestion for typos in learner code. Now, if you miss a letter or get a name a bit wrong in a practice, the app will warn you and suggest the most likely correct name.
 
-## Bug fixes
+### Bug fixes
 
 - L23.P1: make reset button reset the used inventory items
 - L25.P1 and L25.P2: Updated practice tests to allow more valid solutions to pass.
@@ -17,7 +23,7 @@ This document lists changes between releases.
 
 ## Learn GDScript From Zero 2.1.0 (2026-08-16)
 
-## Improvements and changes
+### Improvements and changes
 
 - Improved recursive call detection to help prevent infinite loops in GDScript. It will now catch many more cases of recursive calls that could cause the app to freeze.
 - Added infinite loop detection to for loops.
@@ -28,7 +34,8 @@ This document lists changes between releases.
 - L14.P1, L15.P1, L21.P1, L22.P1: add explicit mention of how or many times the function will be called.
 - L15.P1: Edit misleading check (#883)
 
-## Bug fixes
+### Bug fixes
+
 
 - On GDSchool, fix the fullscreen button not working when the page was already fullscreen.
 - Fix Spanish lessons stopping at 22.
