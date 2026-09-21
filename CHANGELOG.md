@@ -7,6 +7,8 @@ This document lists changes between releases.
 ### Bug fixes
 
 - Fix send report button not working (#1390)
+- Fix health bar not updating correctly in L9 (#1391)
+- Fix visibility of labels in certain practices (they would scale with the text size setting) (#1386)
 
 ## Learn GDScript From Zero 2.2.0 (2026-08-31)
 

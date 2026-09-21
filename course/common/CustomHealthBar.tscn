@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bc5p6fxowg02n" path="res://course/common/CustomHealthBar.gd" id="2"]
 [ext_resource type="Script" uid="uid://dcpcup5nppub7" path="res://ui/components/UnscaledLabel.gd" id="2_lai5i"]
 
-[node name="CustomHealthBar" type="ColorRect" unique_id=240038208 node_paths=PackedStringArray("_empty_health_bar", "_health_bar", "_label")]
+[node name="CustomHealthBar" type="ColorRect" unique_id=240038208]
 custom_minimum_size = Vector2(200, 20)
 offset_left = -99.0
 offset_top = -103.0
@@ -11,11 +11,9 @@ offset_right = 101.0
 offset_bottom = -83.0
 color = Color(0.0352941, 0.0392157, 0.12549, 1)
 script = ExtResource("2")
-_empty_health_bar = NodePath("HealthBarEmpty")
-_health_bar = NodePath("HealthBarCurrent")
-_label = NodePath("")
 
 [node name="HealthBarEmpty" type="ColorRect" parent="." unique_id=2001191928]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 10)
 layout_mode = 0
 offset_left = 5.0
@@ -25,6 +23,7 @@ offset_bottom = 15.0
 color = Color(0.572549, 0.560784, 0.721569, 1)
 
 [node name="HealthBarCurrent" type="ColorRect" parent="." unique_id=1397116225]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 0
 offset_left = 5.0
@@ -34,11 +33,13 @@ offset_bottom = 15.0
 color = Color(0.239216, 1, 0.431373, 1)
 
 [node name="Label" type="Label" parent="." unique_id=1903058831]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 0
 offset_top = -24.0
 offset_right = 200.0
 offset_bottom = 7.0
+theme_override_font_sizes/font_size = 20
 text = "health = 100"
 horizontal_alignment = 1
 script = ExtResource("2_lai5i")
