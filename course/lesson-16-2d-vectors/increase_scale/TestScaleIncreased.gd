@@ -14,22 +14,19 @@ func _define(checks: Array[Check]) -> void:
 
 func test_use_a_vector_to_increase_scale() -> String:
 	var level_up_function := _analyzer.get_function_named("level_up")
-	# FIXME: Patching with a regex check for release as AST check doesn't work
-	if matches_code_line_regex([r"^\s*scale\s*\+=\s*Vector2\s*\(\s*0\.2\s*,\s*0\.2\s*\)"]):
-		return ""
 
 	if not GDExpr.suite(
 		GDExpr.any_of(
 			GDExpr.assignment(
 				GDExpr.identifier("scale"),
-				GDExpr.literal(Vector2(0.2, 0.2), true),
+				GDExpr.function_call("Vector2", 0.2, 0.2),
 				GDAssignmentNode.OP_ADDITION
 			),
 			GDExpr.assignment(
 				GDExpr.identifier("scale"),
 				GDExpr.bin_op(
 					GDExpr.identifier("scale"),
-					GDExpr.literal(Vector2(0.2, 0.2), true),
+					GDExpr.function_call("Vector2", 0.2, 0.2),
 					GDBinaryOpNode.OP_ADDITION
 				)
 			)
