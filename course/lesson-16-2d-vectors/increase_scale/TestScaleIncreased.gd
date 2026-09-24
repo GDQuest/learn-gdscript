@@ -19,14 +19,14 @@ func test_use_a_vector_to_increase_scale() -> String:
 		GDExpr.any_of(
 			GDExpr.assignment(
 				GDExpr.identifier("scale"),
-				GDExpr.function_call("Vector2", 0.2, 0.2),
+				GDExpr.function_call("Vector2", GDExpr.literal(0.2), GDExpr.literal(0.2)),
 				GDAssignmentNode.OP_ADDITION
 			),
 			GDExpr.assignment(
 				GDExpr.identifier("scale"),
 				GDExpr.bin_op(
 					GDExpr.identifier("scale"),
-					GDExpr.function_call("Vector2", 0.2, 0.2),
+					GDExpr.function_call("Vector2", GDExpr.literal(0.2), GDExpr.literal(0.2)),
 					GDBinaryOpNode.OP_ADDITION
 				)
 			)
