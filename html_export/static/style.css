@@ -278,3 +278,42 @@ body {
 }
 
 /*-- /FULLSCREEN ELEMENTS --*/
+
+/*-- MOBILE EDITOR BAR --*/
+
+.mobile-editor-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: none;
+  justify-content: flex-start;
+  padding: 6px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.mobile-editor-bar.visible {
+  display: flex;
+}
+
+.mobile-editor-bar button {
+  min-width: 64px;
+  min-height: 40px;
+  border: 1px solid #555;
+  border-radius: 6px;
+  padding: 6px 14px;
+  background: #303049;
+  color: #fff;
+  font: inherit;
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+.mobile-editor-bar button:active {
+  background: #454565;
+}
+
+/*-- /MOBILE EDITOR BAR --*/
+
