@@ -27,16 +27,16 @@ var _initial_text := ""
 # Once done, we use this var to restore the buttons' previous disabled state.
 var _buttons_previous_disabled_state := { }
 
-@export var slice_editor: SliceEditor
-@export var _run_button: Button
-@export var _pause_button: Button
-@export var _restore_button: Button
-@export var _solution_button: Button
-@export var _console_button: Button
-@export var _continue_button: Button
-@export var _distraction_free_mode_button: Button
-@export var _locked_overlay: Control
-@export var _locked_overlay_label: Label
+@onready var slice_editor: SliceEditor = %SliceEditor
+@onready var _run_button: Button = %RunButton
+@onready var _pause_button: Button = %PauseButton
+@onready var _restore_button: Button = %RestoreButton
+@onready var _solution_button: Button = %SolutionButton
+@onready var _console_button: Button = %ConsoleButton
+@onready var _continue_button: Button = %ContinueButton
+@onready var _distraction_free_mode_button: Button = %DFMButton
+@onready var _locked_overlay: Control = %LockedOverlay
+@onready var _locked_overlay_label: Label = $Column/PanelContainer/LockedOverlay/Layout/Label
 
 # Buttons to toggle disabled when running the code, until the server responds.
 @onready var _buttons_to_disable := [

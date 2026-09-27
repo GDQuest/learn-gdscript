@@ -24,17 +24,6 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     };
   };
 
-  const aspectRatio =
-    (maxW = 0, maxH = 0) =>
-      (currentWidth = window.innerWidth, currentHeight = window.innerHeight) => {
-        const ratioW = currentWidth / maxW;
-        const ratioH = currentHeight / maxH;
-        const ratio = Math.min(ratioW, ratioH);
-        const width = maxW * ratio;
-        const height = maxH * ratio;
-        return { width, height, ratio };
-      };
-
   /**
    * Returns a proxied console that can be turned off and on by appending
    * `?debug` to the URL. Specific modules can be turned on and off by using
@@ -127,14 +116,36 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     onResize: makeSignal(),
   };
 
+  // We show the app inside a centered 16:9 frame. Do not let Godot resize the
+  // canvas to the whole browser window. On a wide window, that would add black
+  // bars inside this frame and make the image look stretched.
   resize: {
     const onResize = () => {
-      const { width, height, ratio } = aspectRatioCanvas();
-      canvasContainer.style.setProperty(`width`, `${width}px`);
-      canvasContainer.style.setProperty(`height`, `${height}px`);
-      document.documentElement.style.setProperty("--scale", `${ratio}`);
+      // First we calculate the largest possible 16:9 frame that fits within the
+      // browser window.
+      //
+      // Size of the Godot viewport used to design the app (dimensions internal
+      // to Godot).
+      const godotAppInternalDimensions = { width: 1920, height: 1080 };
+      const frameScale = Math.min(
+        window.innerWidth / godotAppInternalDimensions.width,
+        window.innerHeight / godotAppInternalDimensions.height
+      );
+      const frameDimensions = {
+        width: godotAppInternalDimensions.width * frameScale,
+        height: godotAppInternalDimensions.height * frameScale,
+      };
+
+      // The frame size uses CSS pixels and controls how large the app appears.
+      // The canvas size controls the resolution of the drawing buffer and the
+      // number of pixels used to render the app before the browser displays it.
+      canvasContainer.style.setProperty(`width`, `${frameDimensions.width}px`);
+      canvasContainer.style.setProperty(`height`, `${frameDimensions.height}px`);
+      const devicePixelRatio = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.round(frameDimensions.width * devicePixelRatio));
+      canvas.height = Math.max(1, Math.round(frameDimensions.height * devicePixelRatio));
+      document.documentElement.style.setProperty("--scale", `${frameScale}`);
     };
-    const aspectRatioCanvas = aspectRatio(1920, 1080);
     window.addEventListener("resize", throttle(GDQUEST.events.onResize.emit));
     GDQUEST.events.onResize.connect(onResize);
     onResize();
@@ -567,26 +578,41 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
      * Create a button with the proper classes; change class when
      * fullscreen event happens
      */
-    const fullscreenOnButton = makeFullscreenButton("button-fullscreen-on", () => document.documentElement.requestFullscreen());
-    const fullscreenOffButton = makeFullscreenButton("button-fullscreen-off", () => {
+    const buttonFullscreenTurnOn = makeFullscreenButton(
+      "button-fullscreen-on",
+      () => {
+        document.documentElement
+          .requestFullscreen()
+          .catch((err) => console.error(err));
+      }
+    );
+    const buttonFullscreenTurnOff = makeFullscreenButton("button-fullscreen-off", () => {
       document.exitFullscreen().catch((err) => err.name !== "TypeError" && console.error(err));
     });
+
+    const updateFullscreenButtonVisibility = () => {
+      const isFullscreen = document.fullscreenElement !== null;
+      buttonFullscreenTurnOn.style.display = isFullscreen ? "none" : "block";
+      buttonFullscreenTurnOff.style.display = isFullscreen ? "block" : "none";
+    };
+    document.addEventListener("fullscreenchange", updateFullscreenButtonVisibility);
+    updateFullscreenButtonVisibility();
 
     /**
      * Only add the button if Godot has loaded
      */
     GDQUEST.events.onGodotLoaded.once(() => {
-      canvasContainer.appendChild(fullscreenOnButton);
-      canvasContainer.appendChild(fullscreenOffButton);
+      canvasContainer.appendChild(buttonFullscreenTurnOn);
+      canvasContainer.appendChild(buttonFullscreenTurnOff);
     });
 
     document.addEventListener("keydown", (event) => {
       if (event.code === "F11") {
         event.preventDefault();
-        if (getComputedStyle(fullscreenOnButton).display !== "none") {
-          fullscreenOnButton.click();
-        } else if (getComputedStyle(fullscreenOffButton).display !== "none") {
-          fullscreenOffButton.click();
+        if (getComputedStyle(buttonFullscreenTurnOn).display !== "none") {
+          buttonFullscreenTurnOn.click();
+        } else if (getComputedStyle(buttonFullscreenTurnOff).display !== "none") {
+          buttonFullscreenTurnOff.click();
         }
       }
     });
