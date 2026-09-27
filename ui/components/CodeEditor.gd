@@ -77,14 +77,11 @@ func _ready() -> void:
 
 	slice_editor.grab_focus()
 
-	# --- MOBILE KEYBOARD PATCH START ---
-	# Connect Godot 4 JavaScript Interface to catch browser input events
 	if not Engine.is_editor_hint() and OS.has_feature("web"):
 		var key_callback = JavaScriptBridge.create_callback(_on_mobile_key_received)
 		var window = JavaScriptBridge.get_interface("window")
 		if window:
 			window.godotMobileCallback = key_callback
-	# --- MOBILE KEYBOARD PATCH END ---
 
 	if not Engine.is_editor_hint():
 		for button: BaseButton in _buttons_with_shortcuts:
@@ -102,28 +99,26 @@ func _gui_input(event: InputEvent) -> void:
 		accept_event()
 
 
-# --- MOBILE KEYBOARD CALLBACK FUNCTION START ---
 func _on_mobile_key_received(args: Array) -> void:
-	if not slice_editor:
+	if not slice_editor or args.is_empty():
 		return
-		
-	var typed_char = args[0] # The string passed from JavaScript
-	
+
+	var typed_char: String = args[0]
+
 	if typed_char == "Enter":
 		slice_editor.insert_text_at_caret("\n")
+	elif typed_char == "Tab":
+		slice_editor.insert_text_at_caret("\t")
 	elif typed_char == "Backspace":
-		# Safely trigger a backspace operation on Godot 4's editor node
-		var column = slice_editor.get_caret_column()
-		var line = slice_editor.get_caret_line()
+		var column := slice_editor.get_caret_column()
+		var line := slice_editor.get_caret_line()
 		if column > 0:
 			slice_editor.select(line, column - 1, line, column)
 			slice_editor.delete_selection()
 	else:
 		slice_editor.insert_text_at_caret(typed_char)
-		
-	# Alert the app container that text has changed to update validation
+
 	_on_text_changed()
-# --- MOBILE KEYBOARD CALLBACK FUNCTION END ---
 
 
 func update_cursor_position(line: int, column: int) -> void:
