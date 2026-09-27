@@ -314,6 +314,90 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     }
   }
 
+  mobileKeyboard: {
+    const isMobile = () =>
+      window.matchMedia("(pointer: coarse)").matches ||
+      /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    const getKeyboardOffset = () => {
+      if (!window.visualViewport) {
+        return 0;
+      }
+
+      return Math.max(
+        0,
+        window.innerHeight -
+          window.visualViewport.height -
+          window.visualViewport.offsetTop
+      );
+    };
+
+    const sendKey = (key) => {
+      if (window.godotMobileCallback) {
+        window.godotMobileCallback(key);
+      }
+    };
+
+    const onKeyDown = (event) => {
+      if (!isMobile() || !window.godotMobileCallback) {
+        return;
+      }
+
+      if (getKeyboardOffset() <= 100) {
+        return;
+      }
+
+      if (event.key) {
+        sendKey(event.key);
+
+        if (
+          ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(
+            event.key
+          )
+        ) {
+          event.preventDefault();
+        }
+      }
+    };
+
+    const tabBar = document.createElement("div");
+    tabBar.className = "mobile-editor-bar";
+
+    const tabButton = document.createElement("button");
+    tabButton.type = "button";
+    tabButton.textContent = "Tab";
+    tabButton.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+    });
+    tabButton.addEventListener("click", () => sendKey("Tab"));
+
+    tabBar.appendChild(tabButton);
+    document.body.appendChild(tabBar);
+
+    const updateTabBar = () => {
+      const keyboardOffset = getKeyboardOffset();
+      const keyboardOpen =
+        isMobile() && !!window.godotMobileCallback && keyboardOffset > 100;
+
+      tabBar.classList.toggle("visible", keyboardOpen);
+
+      if (keyboardOpen) {
+        tabBar.style.bottom = `${keyboardOffset}px`;
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown, true);
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", updateTabBar);
+      window.visualViewport.addEventListener("scroll", updateTabBar);
+    }
+
+    window.addEventListener("resize", updateTabBar);
+    GDQUEST.events.onGodotLoaded.connect(updateTabBar);
+    updateTabBar();
+  }
+
   logging: {
     const debug = makeLogger("app");
     const KEY = "log";
