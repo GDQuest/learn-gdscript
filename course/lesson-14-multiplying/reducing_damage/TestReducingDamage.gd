@@ -70,6 +70,36 @@ func test_multiplication_is_used_to_reduce_damage_amount() -> String:
 							GDExpr.identifier(parameter_name),
 							GDExpr.literal(0.5)
 						)
+					),
+					# amount -= amount * 0.5
+					GDExpr.assignment(
+						GDExpr.identifier(parameter_name),
+						GDExpr.multiply(
+							GDExpr.identifier(parameter_name),
+							GDExpr.literal(0.5)
+						),
+						GDAssignmentNode.Operation.OP_SUBTRACTION
+					),
+					# health -= amount * 0.5
+					GDExpr.assignment(
+						GDExpr.identifier("health"),
+						GDExpr.multiply(
+							GDExpr.identifier(parameter_name),
+							GDExpr.literal(0.5)
+						),
+						GDAssignmentNode.Operation.OP_SUBTRACTION
+					),
+					# health = health - amount * 0.5
+					GDExpr.assignment(
+						GDExpr.identifier("health"),
+						GDExpr.bin_op(
+							GDExpr.identifier("health"),
+							GDExpr.multiply(
+								GDExpr.identifier(parameter_name),
+								GDExpr.literal(0.5)
+							),
+							GDBinaryOpNode.OP_SUBTRACTION
+						)
 					)
 				)
 			)
