@@ -5,12 +5,10 @@
 extends AnimationTree
 
 @onready var _state_machine: AnimationNodeStateMachinePlayback = self["parameters/playback"]
-@onready var _animation_player: AnimationPlayer = get_node(anim_player) as AnimationPlayer
 
 
 func _ready() -> void:
 	active = true
-	_animation_player.animation_finished.connect(animation_finished.emit)
 
 
 func travel(animation_name: String) -> void:
