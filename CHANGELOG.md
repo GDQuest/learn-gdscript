@@ -12,6 +12,7 @@ This document lists changes between releases.
 - L20.P2: Fix animation playback not respecting the user-given array (#1399)
 - Fix not being able to run a practice after restoring code (#1397)
 - Fix lesson completed pop up having buttons sometimes go out of the screen after completing the last practice when running the app in another language (#1396)
+- L14.P2: Fix practice tests rejecting correct solutions that didn't reassign amount (#1388)
 
 
 ## Learn GDScript From Zero 2.2.0 (2026-08-31)
