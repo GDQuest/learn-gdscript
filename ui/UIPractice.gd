@@ -645,6 +645,7 @@ func _reset_practice() -> void:
 		_current_scene.call("reset")
 		for property: StringName in _current_scene_reset_values:
 			_current_scene.set(property, _current_scene_reset_values[property])
+		_code_editor.set_restore_allowed(true)
 
 
 func _update_slidable_panels() -> void:

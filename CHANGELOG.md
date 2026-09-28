@@ -9,6 +9,9 @@ This document lists changes between releases.
 - Fix send report button not working (#1390)
 - Fix health bar not updating correctly in L9 (#1391)
 - Fix visibility of labels in certain practices (they would scale with the text size setting) (#1386)
+- L20.P2: Fix animation playback not respecting the user-given array (#1399)
+- Fix not being able to run a practice after restoring code (#1397)
+
 
 ## Learn GDScript From Zero 2.2.0 (2026-08-31)
 
