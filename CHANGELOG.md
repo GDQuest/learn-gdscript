@@ -11,6 +11,7 @@ This document lists changes between releases.
 - Fix visibility of labels in certain practices (they would scale with the text size setting) (#1386)
 - L20.P2: Fix animation playback not respecting the user-given array (#1399)
 - Fix not being able to run a practice after restoring code (#1397)
+- Fix lesson completed pop up having buttons sometimes go out of the screen after completing the last practice when running the app in another language (#1396)
 
 
 ## Learn GDScript From Zero 2.2.0 (2026-08-31)

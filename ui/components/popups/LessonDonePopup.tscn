@@ -56,11 +56,11 @@ point_count = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-pivot_offset = Vector2(2826, 416)
 color = Color(0.0352941, 0.0392157, 0.129412, 0.627451)
 script = ExtResource("2")
 
 [node name="Particles" type="CPUParticles2D" parent="." unique_id=254267817]
+unique_name_in_owner = true
 material = SubResource("23")
 position = Vector2(960, 540)
 texture = SubResource("21")
@@ -75,6 +75,7 @@ scale_amount_max = 5.5
 scale_amount_curve = SubResource("Curve_qcsph")
 
 [node name="ThickParticles" type="CPUParticles2D" parent="." unique_id=1095404079]
+unique_name_in_owner = true
 material = SubResource("26")
 position = Vector2(960, 540)
 amount = 4
@@ -89,50 +90,46 @@ scale_amount_min = 4.0
 scale_amount_max = 10.0
 scale_amount_curve = SubResource("25")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1110205396]
-custom_minimum_size = Vector2(640, 0)
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -320.0
-offset_top = -220.5
-offset_right = 320.0
-offset_bottom = 220.5
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1110205396]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="PanelContainer" unique_id=1269769920]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1110205397]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 0)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("7")
 
-[node name="Layout" type="VBoxContainer" parent="PanelContainer" unique_id=128990908]
+[node name="Layout" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=128990908]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Layout" unique_id=229491197]
+[node name="ProgressBar" type="ProgressBar" parent="CenterContainer/PanelContainer/Layout" unique_id=229491197]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 value = 100.0
 show_percentage = false
 
-[node name="Margin" type="MarginContainer" parent="PanelContainer/Layout" unique_id=432187378]
-layout_mode = 2
-
-[node name="Column" type="VBoxContainer" parent="PanelContainer/Layout/Margin" unique_id=1670260574]
+[node name="Column" type="VBoxContainer" parent="CenterContainer/PanelContainer/Layout" unique_id=1670260574]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Spacer" type="Control" parent="PanelContainer/Layout/Margin/Column" unique_id=44857392]
+[node name="Spacer" type="Control" parent="CenterContainer/PanelContainer/Layout/Column" unique_id=44857392]
 custom_minimum_size = Vector2(400, 8)
 layout_mode = 2
 
-[node name="Title" type="Label" parent="PanelContainer/Layout/Margin/Column" unique_id=1703664629]
+[node name="Title" type="Label" parent="CenterContainer/PanelContainer/Layout/Column" unique_id=1703664629]
 layout_mode = 2
 theme_type_variation = &"LabelWellDone"
 text = "Lesson complete!"
 horizontal_alignment = 1
 
-[node name="IncompleteSummary" type="Label" parent="PanelContainer/Layout/Margin/Column" unique_id=1299452102]
+[node name="IncompleteSummary" type="Label" parent="CenterContainer/PanelContainer/Layout/Column" unique_id=1299452102]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 theme_type_variation = &"LabelWellDoneNormal"
@@ -140,7 +137,8 @@ text = "But there are still some practices
 that you've skipped."
 horizontal_alignment = 1
 
-[node name="Summary" type="RichTextLabel" parent="PanelContainer/Layout/Margin/Column" unique_id=928140916]
+[node name="Summary" type="RichTextLabel" parent="CenterContainer/PanelContainer/Layout/Column" unique_id=928140916]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 theme_type_variation = &"RTSWellDone"
@@ -152,15 +150,17 @@ horizontal_alignment = 1
 script = ExtResource("3_5aago")
 metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
-[node name="Spacer2" type="Control" parent="PanelContainer/Layout/Margin/Column" unique_id=1200367796]
+[node name="Spacer2" type="Control" parent="CenterContainer/PanelContainer/Layout/Column" unique_id=1200367796]
 custom_minimum_size = Vector2(400, 8)
 layout_mode = 2
 
-[node name="Buttons" type="HBoxContainer" parent="PanelContainer/Layout/Margin/Column" unique_id=1077774959]
+[node name="Buttons" type="HBoxContainer" parent="CenterContainer/PanelContainer/Layout/Column" unique_id=1077774959]
+unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
-[node name="StayButton" type="Button" parent="PanelContainer/Layout/Margin/Column/Buttons" unique_id=1308811815]
+[node name="StayButton" type="Button" parent="CenterContainer/PanelContainer/Layout/Column/Buttons" unique_id=1308811815]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 68)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -170,7 +170,8 @@ theme_override_styles/pressed = ExtResource("6")
 theme_override_styles/hover = ExtResource("5")
 text = "Stay"
 
-[node name="MoveOnButton" type="Button" parent="PanelContainer/Layout/Margin/Column/Buttons" unique_id=887296185]
+[node name="MoveOnButton" type="Button" parent="CenterContainer/PanelContainer/Layout/Column/Buttons" unique_id=887296185]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 68)
 layout_mode = 2
 size_flags_horizontal = 4

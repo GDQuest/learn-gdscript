@@ -19,6 +19,7 @@ color = Color(0.0352941, 0.0392157, 0.129412, 0.627451)
 script = ExtResource("2")
 
 [node name="Layout" type="HBoxContainer" parent="." unique_id=1135519649]
+unique_name_in_owner = true
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -32,55 +33,53 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="WellDoneAnchors" type="Control" parent="Layout" unique_id=2002274768]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(600, 405)
 layout_mode = 2
 size_flags_vertical = 4
 
 [node name="PanelContainer" type="PanelContainer" parent="Layout/WellDoneAnchors" unique_id=274013096]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(600, 405)
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Panel" type="Panel" parent="Layout/WellDoneAnchors/PanelContainer" unique_id=1570611424]
-layout_mode = 2
 theme_override_styles/panel = ExtResource("7")
 
-[node name="Layout" type="VBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer" unique_id=942238380]
+[node name="MessageLayout" type="VBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer" unique_id=942238380]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="ProgressBar" type="ProgressBar" parent="Layout/WellDoneAnchors/PanelContainer/Layout" unique_id=1515836152]
+[node name="ProgressBar" type="ProgressBar" parent="Layout/WellDoneAnchors/PanelContainer/MessageLayout" unique_id=1515836152]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 value = 100.0
 show_percentage = false
 
-[node name="Margin" type="MarginContainer" parent="Layout/WellDoneAnchors/PanelContainer/Layout" unique_id=1163014124]
-layout_mode = 2
-
-[node name="Column" type="VBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin" unique_id=846920340]
+[node name="Column" type="VBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer/MessageLayout" unique_id=846920340]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Spacer" type="Control" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=117628068]
+[node name="Spacer" type="Control" parent="Layout/WellDoneAnchors/PanelContainer/MessageLayout/Column" unique_id=117628068]
 custom_minimum_size = Vector2(400, 8)
 layout_mode = 2
 
-[node name="Title" type="Label" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=619585571]
+[node name="Title" type="Label" parent="Layout/WellDoneAnchors/PanelContainer/MessageLayout/Column" unique_id=619585571]
 layout_mode = 2
 theme_type_variation = &"LabelWellDone"
 text = "Well done!"
 horizontal_alignment = 1
 
-[node name="Summary" type="Label" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=2006724527]
+[node name="Summary" type="Label" parent="Layout/WellDoneAnchors/PanelContainer/MessageLayout/Column" unique_id=2006724527]
 layout_mode = 2
 size_flags_vertical = 0
 theme_type_variation = &"LabelWellDoneNormal"
 text = "You completed the practice."
 horizontal_alignment = 1
 
-[node name="Summary2" type="RichTextLabel" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=1522973318]
+[node name="Summary2" type="RichTextLabel" parent="Layout/WellDoneAnchors/PanelContainer/MessageLayout/Column" unique_id=1522973318]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 theme_type_variation = &"RTSWellDone"
@@ -92,15 +91,17 @@ horizontal_alignment = 1
 script = ExtResource("3_63afv")
 metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
-[node name="Spacer2" type="Control" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=1518012346]
+[node name="Spacer2" type="Control" parent="Layout/WellDoneAnchors/PanelContainer/MessageLayout/Column" unique_id=1518012346]
 custom_minimum_size = Vector2(400, 8)
 layout_mode = 2
 
-[node name="Buttons" type="HBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column" unique_id=1753084202]
+[node name="Buttons" type="HBoxContainer" parent="Layout/WellDoneAnchors/PanelContainer/MessageLayout/Column" unique_id=1753084202]
+unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
-[node name="StayButton" type="Button" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column/Buttons" unique_id=485410225]
+[node name="StayButton" type="Button" parent="Layout/WellDoneAnchors/PanelContainer/MessageLayout/Column/Buttons" unique_id=485410225]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 68)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -116,7 +117,8 @@ theme_override_styles/pressed = ExtResource("6")
 theme_override_styles/hover = ExtResource("5")
 text = "Stay"
 
-[node name="MoveOnButton" type="Button" parent="Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column/Buttons" unique_id=2063354505]
+[node name="MoveOnButton" type="Button" parent="Layout/WellDoneAnchors/PanelContainer/MessageLayout/Column/Buttons" unique_id=2063354505]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 68)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -136,11 +138,13 @@ theme_override_styles/focus = ExtResource("10")
 text = "Continue"
 
 [node name="GameAnchors" type="Control" parent="Layout" unique_id=770576928]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="GameContainer" type="PanelContainer" parent="Layout/GameAnchors" unique_id=180677567]
+unique_name_in_owner = true
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -154,6 +158,7 @@ theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 60
 
 [node name="TextureRect" type="TextureRect" parent="Layout/GameAnchors/GameContainer/MarginContainer" unique_id=308777983]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="GDQuestLogo" parent="Layout/GameAnchors/GameContainer" unique_id=578597453 instance=ExtResource("10_63afv")]

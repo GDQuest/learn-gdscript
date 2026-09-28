@@ -8,25 +8,17 @@ const CLASH_IN_DURATION := 0.2
 var _raw_summary := ""
 var do_fade_background_on_exit := true
 
-@onready var _layout_container := $Layout as Container
-@onready var _game_anchors := $Layout/GameAnchors as Control
-@onready var _game_container := $Layout/GameAnchors/GameContainer as Control
-@onready var _game_texture := (
-	$Layout/GameAnchors/GameContainer/MarginContainer/TextureRect as TextureRect
-)
-@onready var _message_anchors := $Layout/WellDoneAnchors as Control
-@onready var _message_container := $Layout/WellDoneAnchors/PanelContainer as PanelContainer
+@onready var _layout_container := %Layout as Container
+@onready var _game_anchors := %GameAnchors as Control
+@onready var _game_container := %GameContainer as Control
+@onready var _game_texture := %TextureRect as TextureRect
+@onready var _message_anchors := %WellDoneAnchors as Control
+@onready var _message_container := %PanelContainer as PanelContainer
 
-@onready var _move_on_button := (
-	$Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column/Buttons/MoveOnButton as Button
-)
-@onready var _stay_button := (
-	$Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column/Buttons/StayButton as Button
-)
+@onready var _move_on_button := %MoveOnButton as Button
+@onready var _stay_button := %StayButton as Button
 
-@onready var _summary2_label := (
-	$Layout/WellDoneAnchors/PanelContainer/Layout/Margin/Column/Summary2 as RichTextLabel
-)
+@onready var _summary2_label := %Summary2 as RichTextLabel
 
 var _scene_tween: Tween
 
