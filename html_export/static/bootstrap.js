@@ -319,46 +319,86 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       window.matchMedia("(pointer: coarse)").matches ||
       /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-    const getKeyboardOffset = () => {
-      if (!window.visualViewport) {
-        return 0;
-      }
-
-      return Math.max(
-        0,
-        window.innerHeight -
-          window.visualViewport.height -
-          window.visualViewport.offsetTop
-      );
-    };
-
     const sendKey = (key) => {
       if (window.godotMobileCallback) {
         window.godotMobileCallback(key);
       }
     };
 
-    const onKeyDown = (event) => {
+    const input = document.createElement("textarea");
+    input.className = "mobile-editor-input";
+    input.setAttribute("autocomplete", "off");
+    input.setAttribute("autocorrect", "off");
+    input.setAttribute("autocapitalize", "off");
+    input.setAttribute("spellcheck", "false");
+    input.setAttribute("inputmode", "text");
+    input.setAttribute("enterkeyhint", "enter");
+    input.setAttribute("aria-hidden", "true");
+    input.tabIndex = -1;
+    document.body.appendChild(input);
+
+    let isComposing = false;
+
+    const clearInput = () => {
+      input.value = "";
+      input.setSelectionRange(0, 0);
+    };
+
+    const sendInputValue = () => {
+      if (input.value) {
+        sendKey(input.value);
+      }
+      clearInput();
+    };
+
+    input.addEventListener("compositionstart", () => {
+      isComposing = true;
+    });
+
+    input.addEventListener("compositionend", () => {
+      isComposing = false;
+      sendInputValue();
+    });
+
+    input.addEventListener("beforeinput", (event) => {
+      if (event.inputType === "insertLineBreak") {
+        event.preventDefault();
+        sendKey("Enter");
+        clearInput();
+      } else if (event.inputType === "deleteContentBackward") {
+        event.preventDefault();
+        sendKey("Backspace");
+        clearInput();
+      }
+    });
+
+    input.addEventListener("input", () => {
+      if (!isComposing) {
+        sendInputValue();
+      }
+    });
+
+    input.addEventListener("keydown", (event) => {
+      if (
+        ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Tab"].includes(
+          event.key
+        )
+      ) {
+        event.preventDefault();
+        sendKey(event.key);
+      }
+    });
+
+    const focusInput = () => {
       if (!isMobile() || !window.godotMobileCallback) {
         return;
       }
 
-      if (getKeyboardOffset() <= 100) {
-        return;
-      }
-
-      if (event.key) {
-        sendKey(event.key);
-
-        if (
-          ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(
-            event.key
-          )
-        ) {
-          event.preventDefault();
-        }
-      }
+      input.focus({ preventScroll: true });
+      updateTabBar();
     };
+
+    window.focusMobileInput = focusInput;
 
     const tabBar = document.createElement("div");
     tabBar.className = "mobile-editor-bar";
@@ -369,24 +409,41 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     tabButton.addEventListener("pointerdown", (event) => {
       event.preventDefault();
     });
-    tabButton.addEventListener("click", () => sendKey("Tab"));
+    tabButton.addEventListener("click", () => {
+      focusInput();
+      sendKey("Tab");
+    });
 
     tabBar.appendChild(tabButton);
     document.body.appendChild(tabBar);
 
-    const updateTabBar = () => {
-      const keyboardOffset = getKeyboardOffset();
-      const keyboardOpen =
-        isMobile() && !!window.godotMobileCallback && keyboardOffset > 100;
-
-      tabBar.classList.toggle("visible", keyboardOpen);
-
-      if (keyboardOpen) {
-        tabBar.style.bottom = `${keyboardOffset}px`;
+    const keyboardIsOpen = () => {
+      if (!isMobile() || document.activeElement !== input) {
+        return false;
       }
+
+      if (!window.visualViewport) {
+        return true;
+      }
+
+      return window.screen.height - window.visualViewport.height > 150;
     };
 
-    window.addEventListener("keydown", onKeyDown, true);
+    const updateTabBar = () => {
+      const keyboardOpen = keyboardIsOpen();
+      tabBar.classList.toggle("visible", keyboardOpen);
+
+      if (keyboardOpen && window.visualViewport) {
+        const viewport = window.visualViewport;
+        const bottomOffset = Math.max(
+          0,
+          window.innerHeight - viewport.height - viewport.offsetTop
+        );
+        tabBar.style.bottom = `${bottomOffset}px`;
+        tabBar.style.left = `${viewport.offsetLeft}px`;
+        tabBar.style.width = `${viewport.width}px`;
+      }
+    };
 
     if (window.visualViewport) {
       window.visualViewport.addEventListener("resize", updateTabBar);
@@ -394,7 +451,6 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     }
 
     window.addEventListener("resize", updateTabBar);
-    GDQUEST.events.onGodotLoaded.connect(updateTabBar);
     updateTabBar();
   }
 
