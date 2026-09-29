@@ -2572,13 +2572,15 @@ msgstr "In ons spel heeft het hoofdpersonage een bepaalde hoeveelheid [code]heal
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
-msgid "Add to the [code]take_damage()[/code] function so it subtracts the [code]amount[/code] to the predefined [code]health[/code] variable."
+#, fuzzy
+msgid "Add an instruction to the [code]take_damage()[/code] function so it subtracts [code]amount[/code] from the [code]health[/code] variable."
 msgstr "Vul de functie [code]take_damage()[/code] aan zodat deze de [code]amount[/code] aftrekt van de vooraf gedefinieerde variabele [code]health[/code]."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
-msgid "The robot starts with 100 health and will take 50 damage."
-msgstr "De robot begint met 100 gezondheid en zal 50 schade oplopen."
+#, fuzzy
+msgid "I will call the [code]take_damage()[/code] function like this when you run the practice: [code]take_damage(50)[/code]"
+msgstr "Vul de functie [code]take_damage()[/code] aan zodat deze de [code]amount[/code] aftrekt van de vooraf gedefinieerde variabele [code]health[/code]."
 
 #. TRANSLATORS: Practice description
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
@@ -4668,73 +4670,96 @@ msgstr "Wederom heeft de robot besloten om bovenaan het bord te gaan staan."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "This time, use a [code]for[/code] loop in the [code]move_to_bottom()[/code] function to have it move to the bottom of the board."
+#, fuzzy
+msgid "[b]Your task is to complete the [code]move_to_bottom()[/code] function to move the robot down to the bottom row.[/b]"
 msgstr "Gebruik deze keer een [code]for[/code]-lus in de [code]move_to_bottom()[/code] functie om hem naar de onderkant van het bord te laten bewegen."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code]."
-msgstr "De grootte van het bord wordt bepaald door de [code]Vector2[/code] variabele genaamd [code]board_size[/code]."
+#, fuzzy
+msgid "We store the robot's position on the board in a variable named [code]cell[/code]."
+msgstr "Merk op dat we de robot verplaatsen tot zijn positie één minder is dan de breedte van het bord omdat we tegels tellen vanaf [code]0[/code]."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
-msgstr "De startpositie van de robot is [code]Vector2(2, 0)[/code]."
+#, fuzzy
+msgid "The board size is stored in a variable named [code]board_size[/code], which holds a [code]Vector2[/code] value."
+msgstr "Definieer een variabele genaamd [code]gezondheid[/code] met een beginwaarde van [code]100[/code]."
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "To move the robot, change [code]cell[/code] one step at a time. If you add [code]Vector2(0, 1)[/code] to [code]cell[/code], the robot will move down one row."
+msgstr ""
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+#, fuzzy
+msgid "Use a [code]for[/code] loop and the `[code]board_size[/code]` variable to make the function work for any board size."
+msgstr "Zorg ervoor dat je een [code]while[/code]-lus gebruikt zodat de functie werkt voor elke bordgrootte."
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "To check your code, I will call the [code]move_to_bottom()[/code] function. After calling it, [code]cell.y[/code] should be equal to [code]board_size.y - 1[/code]. This is the bottom row of the board."
+msgstr ""
 
 #. TRANSLATORS: Practice description
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "Use a for loop to have our robot move from the top of the board to the bottom."
+#, fuzzy
+msgid "Use a for loop to move the robot from the top of the board to the bottom."
 msgstr "Gebruik een for-lus om onze robot van de bovenkant van het bord naar de onderkant te laten bewegen."
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-#, fuzzy
-msgid "You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards"
-msgstr "Om bijvoorbeeld de deelvariabele [code]x[/code] van de variabele [code]position[/code] te gebruiken, schrijf je [code]position.x[/code]."
+msgid "The robot starts on row [code]0[/code] and has to get to the last row. Because rows are counted from [code]0[/code], the last row is [code]board_size.y - 1[/code]."
+msgstr ""
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-#, fuzzy
-msgid "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]"
-msgstr "Godot heeft de helperfunctie [code]range()[/code]. Het aanroepen van [code]range(n)[/code] levert een lijst op van getallen van [code]0[/code] tot [code]n - 1[/code]."
+msgid "[code]cell[/code] is a [code]Vector2[/code]. To move the robot down one row, add [code]Vector2(0, 1)[/code] to [code]cell[/code] (or add 1 to [code]cell.y[/code])."
+msgstr ""
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "Use [code]for number in range(board_size.y - 1):[/code] to loop enough times."
+msgid "The robot starts on row [code]0[/code], so it needs to move [code]board_size.y - 1[/code] steps to reach the last row. Call [code]range(board_size.y - 1)[/code] to create an array with that many numbers to loop over."
+msgstr ""
+
+#. TRANSLATORS: Practice hint
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "Use [code]for number in range(board_size.y - 1):[/code] and add [code]Vector2(0, 1)[/code] to [code]cell[/code] inside the loop. The loop variable [code]number[/code] is only a counter here, so we don't need to use it."
 msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Improving code with a for loop"
 msgstr "Code verbeteren door middel van een for-lus"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Use a [code]for[/code] loop to remove the duplicate code in the [code]run()[/code] function."
 msgstr "Gebruik een [code]for[/code]-lus om de dubbele code in de [code]run()[/code] functie te verwijderen."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "In this practice, we revisit the turtle and drawing rectangles."
 msgstr "In deze oefening bekijken we opnieuw de schildpad en het tekenen van rechthoeken."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "With our new knowledge of [code]for[/code] loops, we can condense this code to take up less space and make it easier to modify."
 msgstr "Met onze nieuwe kennis van [code]for[/code]-lussen, kunnen we deze code inkorten zodat hij minder ruimte in beslag neemt en gemakkelijker aan te passen is."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "The turtle should draw three squares in a horizontal line. The squares should be 100 pixels apart."
 msgstr "De schildpad moet drie vierkanten in een horizontale lijn tekenen. De vierkanten moeten 100 pixels uit elkaar liggen."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "In the past we had to copy and paste code to draw multiple rectangles. Let's revisit previous code and improve it with a for loop."
 msgstr "Voorheen moesten we code kopiëren en plakken om meerdere rechthoeken te tekenen. Laten we de vorige code opnieuw bekijken en verbeteren met een for-lus."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Use the line [code]for number in range(3):[/code]"
 msgstr ""
 
@@ -6108,12 +6133,14 @@ msgstr "In feite gebruiken dictionaries een [i]hashalgoritme[/i]. Hashalgoritmen
 
 #. TRANSLATORS: Note content
 #: course/lesson-25-creating-dictionaries/lesson.bbcode:47
-msgid "In this case, hashing consists of converting a given key into a unique whole number. The dictionary then uses that number as an array's index!"
+#, fuzzy
+msgid "In this case, hashing consists of converting a given key into a whole number. The dictionary then uses that number as an array's index!"
 msgstr "In dit geval bestaat het hashen uit het omzetten van een gegeven sleutel in een uniek geheel getal. De dictionary gebruikt dat getal dan als index voor een array!"
 
 #. TRANSLATORS: Note content
 #: course/lesson-25-creating-dictionaries/lesson.bbcode:48
-msgid "That's how a dictionary works: when you give it a key, it converts it into a unique index and uses that index to retrieve the corresponding value in the computer's memory."
+#, fuzzy
+msgid "That's how a dictionary works: when you give it a key, it converts it into a index and uses that index to retrieve the corresponding value in the computer's memory."
 msgstr "Dat is hoe een dictionary werkt: als je het een sleutel geeft, zet het die om in een unieke index en gebruikt die index om de overeenkomstige waarde in het geheugen van de computer op te halen."
 
 #. TRANSLATORS: Note content
@@ -6842,6 +6869,23 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid "The robot starts with 100 health and will take 50 damage."
+#~ msgstr "De robot begint met 100 gezondheid en zal 50 schade oplopen."
+
+#~ msgid "The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code]."
+#~ msgstr "De grootte van het bord wordt bepaald door de [code]Vector2[/code] variabele genaamd [code]board_size[/code]."
+
+#~ msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
+#~ msgstr "De startpositie van de robot is [code]Vector2(2, 0)[/code]."
+
+#, fuzzy
+#~ msgid "You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards"
+#~ msgstr "Om bijvoorbeeld de deelvariabele [code]x[/code] van de variabele [code]position[/code] te gebruiken, schrijf je [code]position.x[/code]."
+
+#, fuzzy
+#~ msgid "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]"
+#~ msgstr "Godot heeft de helperfunctie [code]range()[/code]. Het aanroepen van [code]range(n)[/code] levert een lijst op van getallen van [code]0[/code] tot [code]n - 1[/code]."
 
 #, fuzzy
 #~ msgid "The function still works the same way. You can run it below."

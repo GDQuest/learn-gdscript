@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
 "POT-Creation-Date: 2026-01-21 11:55+0100\n"
-"PO-Revision-Date: 2026-06-20 05:01+0000\n"
-"Last-Translator: \"Pierluigi U.\" <2muchpi@users.noreply.hosted.weblate.org>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/learn-gdscript-from-zero/lesson-1-what-code-is-like/it/>\n"
+"PO-Revision-Date: 2026-09-26 09:51+0000\n"
+"Last-Translator: Riccardo Santangelo <s.burns@live.it>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/learn-gdscript-from-zero/course/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Generated-By: Babel 2.10.3\n"
-"X-Generator: Weblate 2026.7.dev0\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 
 #. TRANSLATORS: Lesson header
 #: course/lesson-1-what-code-is-like/lesson.bbcode:1
@@ -2531,9 +2531,8 @@ msgstr "Inoltre, ancora una volta, la linea corta [code]health += amount[/code] 
 
 #. TRANSLATORS: Quiz question
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:36
-#, fuzzy
 msgid "Assuming amount is a positive number, which of these would increase the health of the robot?"
-msgstr "Quale di queste aumenterebbe la salute del robot?"
+msgstr "Supponendo che “amount” sia un numero positivo, quale delle seguenti opzioni aumenterebbe la salute del robot?"
 
 #. TRANSLATORS: Quiz explanation
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:36
@@ -2586,13 +2585,15 @@ msgstr "Nel nostro gioco, il protagonista ha una quantità specifica di [code]he
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
-msgid "Add to the [code]take_damage()[/code] function so it subtracts the [code]amount[/code] to the predefined [code]health[/code] variable."
+#, fuzzy
+msgid "Add an instruction to the [code]take_damage()[/code] function so it subtracts [code]amount[/code] from the [code]health[/code] variable."
 msgstr "Aggiungi codice alla funzione [code]take_damage()[/code] cosicché sottragga [code]amount[/code] dalla variabile predefinita [code]health[/code]."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
-msgid "The robot starts with 100 health and will take 50 damage."
-msgstr "Il robot inizia con 100 di vita e prende 50 di danno."
+#, fuzzy
+msgid "I will call the [code]take_damage()[/code] function like this when you run the practice: [code]take_damage(50)[/code]"
+msgstr "Aggiungi codice alla funzione [code]take_damage()[/code] cosicché sottragga [code]amount[/code] dalla variabile predefinita [code]health[/code]."
 
 #. TRANSLATORS: Practice description
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
@@ -4667,73 +4668,96 @@ msgstr "Un'altra volta, il robot ha deciso di stare in cima alla tavola."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "This time, use a [code]for[/code] loop in the [code]move_to_bottom()[/code] function to have it move to the bottom of the board."
+#, fuzzy
+msgid "[b]Your task is to complete the [code]move_to_bottom()[/code] function to move the robot down to the bottom row.[/b]"
 msgstr "Questa volta, usa un ciclo [code]for[/code] nella funzione [code]move_to_bottom()[/code] per far sì che il robot arrivi alla fine della tavola."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code]."
-msgstr "La grandezza della tavola è determinata dalla variabile [code]Vector2[/code] chiamata [code]board_size[/code]."
+#, fuzzy
+msgid "We store the robot's position on the board in a variable named [code]cell[/code]."
+msgstr "Si noti che il robot si sposta fino a quando la sua posizione è inferiore alla larghezza del tabellone, perché si contano le tessere a partire da [code]0[/code]."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
-msgstr "La cella iniziale del robot è [code]Vector2(2, 0)[/code]."
+#, fuzzy
+msgid "The board size is stored in a variable named [code]board_size[/code], which holds a [code]Vector2[/code] value."
+msgstr "Definisci una variabile chiamata [code]health[/code] con un valore iniziale di [code]100[/code]."
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "To move the robot, change [code]cell[/code] one step at a time. If you add [code]Vector2(0, 1)[/code] to [code]cell[/code], the robot will move down one row."
+msgstr ""
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+#, fuzzy
+msgid "Use a [code]for[/code] loop and the `[code]board_size[/code]` variable to make the function work for any board size."
+msgstr "Utilizza il ciclo [code]while[/code] cosicché la funzione funzioni per ogni grandezza di tavola."
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "To check your code, I will call the [code]move_to_bottom()[/code] function. After calling it, [code]cell.y[/code] should be equal to [code]board_size.y - 1[/code]. This is the bottom row of the board."
+msgstr ""
 
 #. TRANSLATORS: Practice description
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "Use a for loop to have our robot move from the top of the board to the bottom."
+#, fuzzy
+msgid "Use a for loop to move the robot from the top of the board to the bottom."
 msgstr "Usa un ciclo for per far muovere il robot dalla cima alla fine della tavola."
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-#, fuzzy
-msgid "You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards"
-msgstr "Per esempio, per accedere alla sotto-variabile [code]x[/code] della variabile [code]position[/code], scriverai [code]position.x[/code]."
+msgid "The robot starts on row [code]0[/code] and has to get to the last row. Because rows are counted from [code]0[/code], the last row is [code]board_size.y - 1[/code]."
+msgstr ""
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-#, fuzzy
-msgid "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]"
-msgstr "Godot dispone della funzione di aiuto [code]range()[/code]. Chiamando [code]range(n)[/code] si crea un elenco di numeri da [code]0[/code] a [code]n - 1[/code]."
+msgid "[code]cell[/code] is a [code]Vector2[/code]. To move the robot down one row, add [code]Vector2(0, 1)[/code] to [code]cell[/code] (or add 1 to [code]cell.y[/code])."
+msgstr ""
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "Use [code]for number in range(board_size.y - 1):[/code] to loop enough times."
+msgid "The robot starts on row [code]0[/code], so it needs to move [code]board_size.y - 1[/code] steps to reach the last row. Call [code]range(board_size.y - 1)[/code] to create an array with that many numbers to loop over."
+msgstr ""
+
+#. TRANSLATORS: Practice hint
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "Use [code]for number in range(board_size.y - 1):[/code] and add [code]Vector2(0, 1)[/code] to [code]cell[/code] inside the loop. The loop variable [code]number[/code] is only a counter here, so we don't need to use it."
 msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Improving code with a for loop"
 msgstr "Migliorare il codice con un ciclo for"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Use a [code]for[/code] loop to remove the duplicate code in the [code]run()[/code] function."
 msgstr "Usa un ciclo [code]for[/code] per rimuovere il codice duplicato nella funzione [code]run()[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "In this practice, we revisit the turtle and drawing rectangles."
 msgstr "In questa pratica, rivisitiamo la tartaruga e l'illustrazione di rettangoli."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "With our new knowledge of [code]for[/code] loops, we can condense this code to take up less space and make it easier to modify."
 msgstr "Con la nostra nuova conoscenza sui cicli [code]for[/code], possiamo condensare questo codice per far sì che occupi meno spazio e che sia più facile da modificare."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "The turtle should draw three squares in a horizontal line. The squares should be 100 pixels apart."
 msgstr "La tartaruga dovrebbe disegnare tre quadrati in una linea orizzontale. I quadrati dovrebbero essere a 100 pixel di distanza l'uno dall'altro."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "In the past we had to copy and paste code to draw multiple rectangles. Let's revisit previous code and improve it with a for loop."
 msgstr "In passato dovevamo copiare e incollare codice per disegnare più rettangoli. Rivisitiamo il precedente codice per migliorarlo con un ciclo for."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Use the line [code]for number in range(3):[/code]"
 msgstr ""
 
@@ -6085,12 +6109,14 @@ msgstr "In particolare, i dizionari usano un [i]algoritmo di hashing[/i]. Gli al
 
 #. TRANSLATORS: Note content
 #: course/lesson-25-creating-dictionaries/lesson.bbcode:47
-msgid "In this case, hashing consists of converting a given key into a unique whole number. The dictionary then uses that number as an array's index!"
+#, fuzzy
+msgid "In this case, hashing consists of converting a given key into a whole number. The dictionary then uses that number as an array's index!"
 msgstr "In questo caso, hash consiste nel convertire una chiave in un numero intero unico. Il dizionario poi usa quel numero come indice dell'array!"
 
 #. TRANSLATORS: Note content
 #: course/lesson-25-creating-dictionaries/lesson.bbcode:48
-msgid "That's how a dictionary works: when you give it a key, it converts it into a unique index and uses that index to retrieve the corresponding value in the computer's memory."
+#, fuzzy
+msgid "That's how a dictionary works: when you give it a key, it converts it into a index and uses that index to retrieve the corresponding value in the computer's memory."
 msgstr "Così funzionano i dizionari: quando gli dai una chiave, la converte in un indice unico e lo usa come indice per recuperare il valore corrispondente nella memoria del computer."
 
 #. TRANSLATORS: Note content
@@ -6799,6 +6825,23 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid "The robot starts with 100 health and will take 50 damage."
+#~ msgstr "Il robot inizia con 100 di vita e prende 50 di danno."
+
+#~ msgid "The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code]."
+#~ msgstr "La grandezza della tavola è determinata dalla variabile [code]Vector2[/code] chiamata [code]board_size[/code]."
+
+#~ msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
+#~ msgstr "La cella iniziale del robot è [code]Vector2(2, 0)[/code]."
+
+#, fuzzy
+#~ msgid "You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards"
+#~ msgstr "Per esempio, per accedere alla sotto-variabile [code]x[/code] della variabile [code]position[/code], scriverai [code]position.x[/code]."
+
+#, fuzzy
+#~ msgid "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]"
+#~ msgstr "Godot dispone della funzione di aiuto [code]range()[/code]. Chiamando [code]range(n)[/code] si crea un elenco di numeri da [code]0[/code] a [code]n - 1[/code]."
 
 #~ msgid "The function still works the same way. You can run it below."
 #~ msgstr "La funzione funziona sempre allo stesso modo. Puoi eseguirlo qui sotto."

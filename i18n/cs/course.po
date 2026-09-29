@@ -2599,13 +2599,15 @@ msgstr "V naší hře má hlavní postava určité množství [code]health[/code
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
-msgid "Add to the [code]take_damage()[/code] function so it subtracts the [code]amount[/code] to the predefined [code]health[/code] variable."
+#, fuzzy
+msgid "Add an instruction to the [code]take_damage()[/code] function so it subtracts [code]amount[/code] from the [code]health[/code] variable."
 msgstr "Přidejte něco do funkce [code]take_damage()[/code] k tomu, aby odečítala [code]amount[/code] z předdefinované proměnné [code]health[/code]."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
-msgid "The robot starts with 100 health and will take 50 damage."
-msgstr "Robot začíná se zdravím 100 a utrpí poškození 50."
+#, fuzzy
+msgid "I will call the [code]take_damage()[/code] function like this when you run the practice: [code]take_damage(50)[/code]"
+msgstr "Přidejte něco do funkce [code]take_damage()[/code] k tomu, aby odečítala [code]amount[/code] z předdefinované proměnné [code]health[/code]."
 
 #. TRANSLATORS: Practice description
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
@@ -4700,74 +4702,95 @@ msgstr "Robot se opět rozhodl postavit na vrchol šachovnice."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "This time, use a [code]for[/code] loop in the [code]move_to_bottom()[/code] function to have it move to the bottom of the board."
+#, fuzzy
+msgid "[b]Your task is to complete the [code]move_to_bottom()[/code] function to move the robot down to the bottom row.[/b]"
 msgstr "Tentokrát použijte smyčku [code]for[/code] ve funkci [code]move_to_bottom()[/code], aby se přesunul na spodní část desky."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-#, fuzzy
-msgid "The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code]."
-msgstr "Velikost desky je určena funkcí [code]Vector2[/code] [code]board_size[/code]."
+msgid "We store the robot's position on the board in a variable named [code]cell[/code]."
+msgstr ""
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
-msgstr "Počáteční buňka robota je [code]Vector2(2, 0)[/code]."
+#, fuzzy
+msgid "The board size is stored in a variable named [code]board_size[/code], which holds a [code]Vector2[/code] value."
+msgstr "Definujte proměnnou s názvem [code]health[/code] s počáteční hodnotou [code]100[/code]."
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "To move the robot, change [code]cell[/code] one step at a time. If you add [code]Vector2(0, 1)[/code] to [code]cell[/code], the robot will move down one row."
+msgstr ""
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+#, fuzzy
+msgid "Use a [code]for[/code] loop and the `[code]board_size[/code]` variable to make the function work for any board size."
+msgstr "Nezapomeňte použít smyčku [code]while[/code], aby funkce fungovala pro libovolnou velikost desky."
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "To check your code, I will call the [code]move_to_bottom()[/code] function. After calling it, [code]cell.y[/code] should be equal to [code]board_size.y - 1[/code]. This is the bottom row of the board."
+msgstr ""
 
 #. TRANSLATORS: Practice description
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "Use a for loop to have our robot move from the top of the board to the bottom."
+#, fuzzy
+msgid "Use a for loop to move the robot from the top of the board to the bottom."
 msgstr "Použijte smyčku for, aby se náš robot pohyboval z horní části desky do dolní."
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-#, fuzzy
-msgid "You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards"
-msgstr "Například pro přístup k [code]x[/code] podproměnné proměnné [code]position[/code] napíšete [code]position.x[/code]."
+msgid "The robot starts on row [code]0[/code] and has to get to the last row. Because rows are counted from [code]0[/code], the last row is [code]board_size.y - 1[/code]."
+msgstr ""
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-#, fuzzy
-msgid "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]"
-msgstr "Godot má pomocnou funkci [code]range()[/code]. Voláním [code]range(n)[/code] se vytvoří seznam čísel od [code]0[/code] do [code]n - 1[/code]."
+msgid "[code]cell[/code] is a [code]Vector2[/code]. To move the robot down one row, add [code]Vector2(0, 1)[/code] to [code]cell[/code] (or add 1 to [code]cell.y[/code])."
+msgstr ""
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "Use [code]for number in range(board_size.y - 1):[/code] to loop enough times."
+msgid "The robot starts on row [code]0[/code], so it needs to move [code]board_size.y - 1[/code] steps to reach the last row. Call [code]range(board_size.y - 1)[/code] to create an array with that many numbers to loop over."
+msgstr ""
+
+#. TRANSLATORS: Practice hint
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "Use [code]for number in range(board_size.y - 1):[/code] and add [code]Vector2(0, 1)[/code] to [code]cell[/code] inside the loop. The loop variable [code]number[/code] is only a counter here, so we don't need to use it."
 msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Improving code with a for loop"
 msgstr "Vylepšení kódu pomocí smyčky for"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Use a [code]for[/code] loop to remove the duplicate code in the [code]run()[/code] function."
 msgstr "Pomocí smyčky [code]for[/code] odstraňte duplicitní kód ve funkci [code]run()[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "In this practice, we revisit the turtle and drawing rectangles."
 msgstr "V tomto cvičení se vrátíme k želvě a kreslení obdélníků."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "With our new knowledge of [code]for[/code] loops, we can condense this code to take up less space and make it easier to modify."
 msgstr "Díky novým znalostem o cyklech [code]for[/code] můžeme tento kód zestručnit, aby zabíral méně místa a dal se snadněji upravovat."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "The turtle should draw three squares in a horizontal line. The squares should be 100 pixels apart."
 msgstr "Želva by měla nakreslit tři čtverce ve vodorovné linii. Čtverce by měly být od sebe vzdáleny 100 pixelů."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "In the past we had to copy and paste code to draw multiple rectangles. Let's revisit previous code and improve it with a for loop."
 msgstr "Dříve jsme museli kopírovat a vkládat kód, abychom nakreslili více obdélníků. Vraťme se k předchozímu kódu a vylepšeme ho pomocí smyčky for."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Use the line [code]for number in range(3):[/code]"
 msgstr ""
 
@@ -6143,12 +6166,14 @@ msgstr "Přesněji řečeno, slovníky používají [i]hashovací algoritmus[/i]
 
 #. TRANSLATORS: Note content
 #: course/lesson-25-creating-dictionaries/lesson.bbcode:47
-msgid "In this case, hashing consists of converting a given key into a unique whole number. The dictionary then uses that number as an array's index!"
+#, fuzzy
+msgid "In this case, hashing consists of converting a given key into a whole number. The dictionary then uses that number as an array's index!"
 msgstr "V tomto případě hashování spočívá v převodu daného klíče na jedinečné celé číslo. Slovník pak toto číslo použije jako index pole!"
 
 #. TRANSLATORS: Note content
 #: course/lesson-25-creating-dictionaries/lesson.bbcode:48
-msgid "That's how a dictionary works: when you give it a key, it converts it into a unique index and uses that index to retrieve the corresponding value in the computer's memory."
+#, fuzzy
+msgid "That's how a dictionary works: when you give it a key, it converts it into a index and uses that index to retrieve the corresponding value in the computer's memory."
 msgstr "Slovník funguje takto: když mu dáte klíč, převede jej na jedinečný index a použije tento index k načtení odpovídající hodnoty v paměti počítače."
 
 #. TRANSLATORS: Note content
@@ -6878,6 +6903,24 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid "The robot starts with 100 health and will take 50 damage."
+#~ msgstr "Robot začíná se zdravím 100 a utrpí poškození 50."
+
+#, fuzzy
+#~ msgid "The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code]."
+#~ msgstr "Velikost desky je určena funkcí [code]Vector2[/code] [code]board_size[/code]."
+
+#~ msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
+#~ msgstr "Počáteční buňka robota je [code]Vector2(2, 0)[/code]."
+
+#, fuzzy
+#~ msgid "You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards"
+#~ msgstr "Například pro přístup k [code]x[/code] podproměnné proměnné [code]position[/code] napíšete [code]position.x[/code]."
+
+#, fuzzy
+#~ msgid "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]"
+#~ msgstr "Godot má pomocnou funkci [code]range()[/code]. Voláním [code]range(n)[/code] se vytvoří seznam čísel od [code]0[/code] do [code]n - 1[/code]."
 
 #, fuzzy
 #~ msgid "The function still works the same way. You can run it below."

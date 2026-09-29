@@ -2581,13 +2581,15 @@ msgstr "எங்கள் விளையாட்டில், முக்க
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
-msgid "Add to the [code]take_damage()[/code] function so it subtracts the [code]amount[/code] to the predefined [code]health[/code] variable."
+#, fuzzy
+msgid "Add an instruction to the [code]take_damage()[/code] function so it subtracts [code]amount[/code] from the [code]health[/code] variable."
 msgstr "[குறியீடு] டேக்_டேச் () [/குறியீடு] செயல்பாட்டில் சேர்க்கவும், இது [குறியீடு] அளவு [/குறியீடு] ஐ முன் வரையறுக்கப்பட்ட [குறியீடு] உடல்நலம் [/குறியீடு] மாறிக்கு கழிக்கிறது."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
-msgid "The robot starts with 100 health and will take 50 damage."
-msgstr "ரோபோ 100 ஆரோக்கியத்துடன் தொடங்குகிறது மற்றும் 50 சேதங்களை எடுக்கும்."
+#, fuzzy
+msgid "I will call the [code]take_damage()[/code] function like this when you run the practice: [code]take_damage(50)[/code]"
+msgstr "[குறியீடு] டேக்_டேச் () [/குறியீடு] செயல்பாட்டில் சேர்க்கவும், இது [குறியீடு] அளவு [/குறியீடு] ஐ முன் வரையறுக்கப்பட்ட [குறியீடு] உடல்நலம் [/குறியீடு] மாறிக்கு கழிக்கிறது."
 
 #. TRANSLATORS: Practice description
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
@@ -4676,74 +4678,96 @@ msgstr "மீண்டும், ரோபோ போர்டின் உச�
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "This time, use a [code]for[/code] loop in the [code]move_to_bottom()[/code] function to have it move to the bottom of the board."
-msgstr "இந்த நேரத்தில், [/குறியீடு] வளையத்திற்கு [குறியீடு] நகர்வு_டோ_பொட்டோம் () [/குறியீடு] செயல்பாட்டில் ஒரு [குறியீடு] வளையத்தைப் பயன்படுத்தவும்."
+#, fuzzy
+msgid "[b]Your task is to complete the [code]move_to_bottom()[/code] function to move the robot down to the bottom row.[/b]"
+msgstr "[குறியீடு] MOVE_TO_BOTTOM () [/குறியீடு] செயல்பாட்டை முடிக்கவும், எனவே ரோபோ பலகையின் அடிப்பகுதிக்கு நகர்கிறது."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
 #, fuzzy
-msgid "The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code]."
-msgstr "போர்டு அளவு [குறியீடு] திசையன் 2 [/குறியீடு] [குறியீடு] போர்டு_சைச் [/குறியீடு] ஆல் தீர்மானிக்கப்படுகிறது."
+msgid "We store the robot's position on the board in a variable named [code]cell[/code]."
+msgstr "ரோபோவை அதன் நிலை வாரியத்தின் அகலத்தை விட குறைவாக இருக்கும் வரை நாங்கள் நகர்த்துகிறோம், ஏனெனில் நாங்கள் [குறியீடு] 0 [/குறியீடு] இலிருந்து ஓடுகளை எண்ணுகிறோம்."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
-msgstr "ரோபோவின் தொடக்க செல் [குறியீடு] வெக்டர் 2 (2, 0) [/குறியீடு] ஆகும்."
+#, fuzzy
+msgid "The board size is stored in a variable named [code]board_size[/code], which holds a [code]Vector2[/code] value."
+msgstr "[குறியீடு] 100 [/குறியீடு] இன் தொடக்க மதிப்புடன் [குறியீடு] உடல்நலம் [/குறியீடு] என்ற மாறியை வரையறுக்கவும்."
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "To move the robot, change [code]cell[/code] one step at a time. If you add [code]Vector2(0, 1)[/code] to [code]cell[/code], the robot will move down one row."
+msgstr ""
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+#, fuzzy
+msgid "Use a [code]for[/code] loop and the `[code]board_size[/code]` variable to make the function work for any board size."
+msgstr "[/குறியீடு] சுழற்சியில் [குறியீட்டை] பயன்படுத்துவதை உறுதிசெய்க, எனவே செயல்பாடு எந்த போர்டு அளவிற்கும் வேலை செய்கிறது."
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "To check your code, I will call the [code]move_to_bottom()[/code] function. After calling it, [code]cell.y[/code] should be equal to [code]board_size.y - 1[/code]. This is the bottom row of the board."
+msgstr ""
 
 #. TRANSLATORS: Practice description
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "Use a for loop to have our robot move from the top of the board to the bottom."
+#, fuzzy
+msgid "Use a for loop to move the robot from the top of the board to the bottom."
 msgstr "எங்கள் ரோபோ பலகையின் மேலிருந்து கீழே செல்ல எங்கள் ரோபோவை பயன்படுத்த A க்கு பயன்படுத்தவும்."
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-#, fuzzy
-msgid "You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards"
-msgstr "எடுத்துக்காட்டாக, [குறியீடு] ஃச் [/code] [குறியீடு] நிலை [/குறியீடு] மாறியின் துணை-மாறுபாட்டை அணுக, நீங்கள் [குறியீடு] position.x [/code] ஐ எழுதுவீர்கள்."
+msgid "The robot starts on row [code]0[/code] and has to get to the last row. Because rows are counted from [code]0[/code], the last row is [code]board_size.y - 1[/code]."
+msgstr ""
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-#, fuzzy
-msgid "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]"
-msgstr "கோடோட் உதவி செயல்பாடு [குறியீடு] வரம்பு () [/குறியீடு] ஐக் கொண்டுள்ளது. [குறியீடு] வரம்பு (n) [/குறியீடு] ஐ அழைப்பது [குறியீடு] 0 [/குறியீடு] இலிருந்து [குறியீடு] N - 1 [/குறியீடு] வரை எண்களின் பட்டியலை உருவாக்குகிறது."
+msgid "[code]cell[/code] is a [code]Vector2[/code]. To move the robot down one row, add [code]Vector2(0, 1)[/code] to [code]cell[/code] (or add 1 to [code]cell.y[/code])."
+msgstr ""
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "Use [code]for number in range(board_size.y - 1):[/code] to loop enough times."
+msgid "The robot starts on row [code]0[/code], so it needs to move [code]board_size.y - 1[/code] steps to reach the last row. Call [code]range(board_size.y - 1)[/code] to create an array with that many numbers to loop over."
+msgstr ""
+
+#. TRANSLATORS: Practice hint
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "Use [code]for number in range(board_size.y - 1):[/code] and add [code]Vector2(0, 1)[/code] to [code]cell[/code] inside the loop. The loop variable [code]number[/code] is only a counter here, so we don't need to use it."
 msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Improving code with a for loop"
 msgstr "ஒரு வளையத்துடன் குறியீட்டை மேம்படுத்துதல்"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Use a [code]for[/code] loop to remove the duplicate code in the [code]run()[/code] function."
 msgstr "[குறியீடு] ரன் () [/குறியீடு] செயல்பாட்டில் நகல் குறியீட்டை அகற்ற [/குறியீடு] வளையத்திற்கு [குறியீடு] பயன்படுத்தவும்."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "In this practice, we revisit the turtle and drawing rectangles."
 msgstr "இந்த நடைமுறையில், நாங்கள் ஆமை மற்றும் செவ்வகங்களை வரைவோம்."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "With our new knowledge of [code]for[/code] loops, we can condense this code to take up less space and make it easier to modify."
 msgstr "[/குறியீடு] சுழல்களுக்கான [குறியீடு] பற்றிய எங்கள் புதிய அறிவைக் கொண்டு, குறைந்த இடத்தை எடுத்துக்கொள்வதற்கும் மாற்றியமைப்பதை எளிதாக்குவதற்கும் இந்த குறியீட்டை நாங்கள் ஒடுக்கலாம்."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "The turtle should draw three squares in a horizontal line. The squares should be 100 pixels apart."
 msgstr "ஆமை ஒரு கிடைமட்ட கோட்டில் மூன்று சதுரங்களை வரைய வேண்டும். சதுரங்கள் 100 படப்புள்ளிகள் இடைவெளியில் இருக்க வேண்டும்."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "In the past we had to copy and paste code to draw multiple rectangles. Let's revisit previous code and improve it with a for loop."
 msgstr "கடந்த காலத்தில் பல செவ்வகங்களை வரைய குறியீட்டை நகலெடுத்து ஒட்ட வேண்டியிருந்தது. முந்தைய குறியீட்டை மறுபரிசீலனை செய்து அதை ஒரு லூப் மூலம் மேம்படுத்துவோம்."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Use the line [code]for number in range(3):[/code]"
 msgstr ""
 
@@ -6095,12 +6119,14 @@ msgstr "துல்லியமாக, அகராதிகள் ஒரு [i
 
 #. TRANSLATORS: Note content
 #: course/lesson-25-creating-dictionaries/lesson.bbcode:47
-msgid "In this case, hashing consists of converting a given key into a unique whole number. The dictionary then uses that number as an array's index!"
+#, fuzzy
+msgid "In this case, hashing consists of converting a given key into a whole number. The dictionary then uses that number as an array's index!"
 msgstr "இந்த விசயத்தில், ஆசிங் கொடுக்கப்பட்ட விசையை ஒரு தனித்துவமான முழு எண்ணாக மாற்றுவதைக் கொண்டுள்ளது. அகராதி பின்னர் அந்த எண்ணை ஒரு வரிசையின் குறியீடாகப் பயன்படுத்துகிறது!"
 
 #. TRANSLATORS: Note content
 #: course/lesson-25-creating-dictionaries/lesson.bbcode:48
-msgid "That's how a dictionary works: when you give it a key, it converts it into a unique index and uses that index to retrieve the corresponding value in the computer's memory."
+#, fuzzy
+msgid "That's how a dictionary works: when you give it a key, it converts it into a index and uses that index to retrieve the corresponding value in the computer's memory."
 msgstr "ஒரு அகராதி எவ்வாறு செயல்படுகிறது: நீங்கள் அதை ஒரு விசையை கொடுக்கும்போது, அதை ஒரு தனித்துவமான குறியீடாக மாற்றி, கணினியின் நினைவகத்தில் தொடர்புடைய மதிப்பை மீட்டெடுக்க அந்த குறியீட்டைப் பயன்படுத்துகிறது."
 
 #. TRANSLATORS: Note content
@@ -6810,6 +6836,27 @@ msgstr ""
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
 
+#~ msgid "The robot starts with 100 health and will take 50 damage."
+#~ msgstr "ரோபோ 100 ஆரோக்கியத்துடன் தொடங்குகிறது மற்றும் 50 சேதங்களை எடுக்கும்."
+
+#~ msgid "This time, use a [code]for[/code] loop in the [code]move_to_bottom()[/code] function to have it move to the bottom of the board."
+#~ msgstr "இந்த நேரத்தில், [/குறியீடு] வளையத்திற்கு [குறியீடு] நகர்வு_டோ_பொட்டோம் () [/குறியீடு] செயல்பாட்டில் ஒரு [குறியீடு] வளையத்தைப் பயன்படுத்தவும்."
+
+#, fuzzy
+#~ msgid "The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code]."
+#~ msgstr "போர்டு அளவு [குறியீடு] திசையன் 2 [/குறியீடு] [குறியீடு] போர்டு_சைச் [/குறியீடு] ஆல் தீர்மானிக்கப்படுகிறது."
+
+#~ msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
+#~ msgstr "ரோபோவின் தொடக்க செல் [குறியீடு] வெக்டர் 2 (2, 0) [/குறியீடு] ஆகும்."
+
+#, fuzzy
+#~ msgid "You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards"
+#~ msgstr "எடுத்துக்காட்டாக, [குறியீடு] ஃச் [/code] [குறியீடு] நிலை [/குறியீடு] மாறியின் துணை-மாறுபாட்டை அணுக, நீங்கள் [குறியீடு] position.x [/code] ஐ எழுதுவீர்கள்."
+
+#, fuzzy
+#~ msgid "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]"
+#~ msgstr "கோடோட் உதவி செயல்பாடு [குறியீடு] வரம்பு () [/குறியீடு] ஐக் கொண்டுள்ளது. [குறியீடு] வரம்பு (n) [/குறியீடு] ஐ அழைப்பது [குறியீடு] 0 [/குறியீடு] இலிருந்து [குறியீடு] N - 1 [/குறியீடு] வரை எண்களின் பட்டியலை உருவாக்குகிறது."
+
 #, fuzzy
 #~ msgid "The function still works the same way. You can run it below."
 #~ msgstr "செயல்பாடு இன்னும் ஒரே மாதிரியாக செயல்படுகிறது. நீங்கள் அதை கீழே இயக்கலாம்."
@@ -6919,9 +6966,6 @@ msgstr ""
 
 #~ msgid "Our robot has decided to stand at the top of the board."
 #~ msgstr "எங்கள் ரோபோ போர்டின் உச்சியில் நிற்க முடிவு செய்துள்ளது."
-
-#~ msgid "Complete the [code]move_to_bottom()[/code] function so the robot moves to the bottom of the board."
-#~ msgstr "[குறியீடு] MOVE_TO_BOTTOM () [/குறியீடு] செயல்பாட்டை முடிக்கவும், எனவே ரோபோ பலகையின் அடிப்பகுதிக்கு நகர்கிறது."
 
 #~ msgid ""
 #~ "[code]var numbers = [0, 1, 2]\n"

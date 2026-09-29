@@ -29,6 +29,97 @@ msgid "error_suggestion"
 msgstr "错误建议"
 
 #: script_checking/error_database.csv
+msgid "You get this error when:"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "[ul]"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You write a function inside another function."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You write a piece of code that calculates a value, but that value is not used or assigned to a variable."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "[/ul]"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The error means that you have a piece of code that's not having any effect because it is not used or placed in the correct context."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you wrote a function inside of another function, extract the inner function, place it later in your code, and remove the indentation."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you wrote some conditions or a piece of code that is meant to produce a value, make sure to store the result in a variable or use it in an [code]if[/code] statement or something that will use the value."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You get this error when you put parentheses [code]()[/code] after a variable, as if you were calling a function."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The parentheses tell Godot to call that name as a function. The problem is that the variable holds a value like a number, a string, part of a vector, etc., and not a function, so you cannot call it as a function."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, [code]position.x[/code] is a [code]float[/code]. Writing [code]position.x()[/code] makes Godot try to call a function named [code]x[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Look at the name right before the parentheses in the error message, and remove those parentheses."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you want to [b]store or change[/b] a value, use the [b]=[/b] symbol. For example, [code]health = 10[/code] or [code]position.x = 100.0[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you meant to [b]use[/b] the value, write it without the parentheses. For example, [code]var new_health = health + 20[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "This error message tells you that Godot couldn't find the member variable you're trying to access. There are two common reasons for this:"
+msgstr "这条错误消息告诉你，Godot 没有找到你试图调用的函数。这要么意味着："
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "1. There is a typo in the name of the member variable."
+msgstr "你尝试访问的子变量名可能有错别字。"
+
+#: script_checking/error_database.csv
+msgid "2. The value before the dot (.) is not the type of value you expect, so it does not have that member variable."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, let's say you have a variable representing a number of characters: [code]var character = 5[/code] and you try to access the [code]y[/code] member variable on it: [code]character.y[/code]. Because [code]character[/code] is a whole number, it has no [code]y[/code] member variable. The error message tells you the type it found ([code]int[/code] in this case)."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "You also get this error when you try to access a member variable on a [code]null[/code] value (an empty variable)."
+msgstr "当您尝试将值赋给一个不是变量的对象时，就会出现此错误。"
+
+#: script_checking/error_database.csv
+msgid "Look at the value before the dot in the line with the error."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Make sure that the names before and after the dot have no typos. Any difference like a capital letter, one letter missing or being added, or letters being swapped can cause this error."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If the value is the wrong type, check where it comes from. Is it a [code]Vector2[/code] or [code]int[/code]? A [code]Vector2[/code] has [code]x[/code] and [code]y[/code] member variables, but an [code]int[/code] does not."
+msgstr ""
+
+#: script_checking/error_database.csv
 msgid "This error message tells you that Godot did not find the function you are trying to call. This either means that:"
 msgstr "这条错误消息告诉你，Godot 没有找到你试图调用的函数。这要么意味着："
 

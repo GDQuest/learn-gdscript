@@ -2539,15 +2539,15 @@ msgstr "Dañar el robot"
 msgid "In our game, the main character has a certain amount of [code]health[/code]. When it gets hit, the health should go down by a varying [code]amount[/code] of damage."
 msgstr "En nuestro juego, el personaje principal tiene una determinada cantidad de [code]health[/code]. Cuando es golpeado, la salud debe bajar en una [code]amount[/code] de daño variable."
 
-#. TRANSLATORS: Practice goal
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
-msgid "Add to the [code]take_damage()[/code] function so it subtracts the [code]amount[/code] to the predefined [code]health[/code] variable."
-msgstr "Añade código a la función [code]take_damage()[/code] para que reste la [code]amount[/code] a la variable predefinida [code]health[/code]."
+#. TRANSLATORS: Practice goal
+msgid "Add an instruction to the [code]take_damage()[/code] function so it subtracts [code]amount[/code] from the [code]health[/code] variable."
+msgstr "Añade una instrucción a la función [code]take_damage()[/code] para que reste [code]amount[/code] de la variable [code]health[/code]."
 
-#. TRANSLATORS: Practice goal
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
-msgid "The robot starts with 100 health and will take 50 damage."
-msgstr "El robot comienza con 100 de salud y recibirá 50 de daño."
+#. TRANSLATORS: Practice goal
+msgid "I will call the [code]take_damage()[/code] function like this when you run the practice: [code]take_damage(50)[/code]"
+msgstr "Así llamaré a la función [code]take_damage()[/code] cuando ejecutes la práctica: [code]take_damage(50)[/code]"
 
 #. TRANSLATORS: Practice description
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
@@ -3910,12 +3910,11 @@ msgstr ""
 "- Aumentar el [code]level[/code] en uno.\n"
 "- Aumentar la [code]max_health[/code] en un 10%."
 
-#. TRANSLATORS: Practice goal
 #: course/lesson-14-multiplying/lesson.bbcode:86
 #: course/lesson-16-2d-vectors/lesson.bbcode:73
-#, fuzzy
+#. TRANSLATORS: Practice goal
 msgid "I will call the [code]level_up()[/code] function twice. It will run two times in total."
-msgstr "Para comprobar tu código, llamaré a la función [code]heal()[/code] dos veces, así:"
+msgstr "Llamaré a la función [code]level_up()[/code] dos veces. Se ejecutará dos veces en total."
 
 #. TRANSLATORS: Practice description
 #: course/lesson-14-multiplying/lesson.bbcode:86
@@ -4598,73 +4597,93 @@ msgstr "Utilizar un bucle for para moverse al final del tablero"
 msgid "Once again, the robot has decided to stand at the top of the board."
 msgstr "Una vez más, el robot ha decidido situarse en la parte superior del tablero."
 
-#. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "This time, use a [code]for[/code] loop in the [code]move_to_bottom()[/code] function to have it move to the bottom of the board."
-msgstr "Esta vez, utiliza un bucle [code]for[/code] en la función [code]move_to_bottom()[/code] para que se desplace a la parte inferior del tablero."
-
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code]."
-msgstr "El tamaño del tablero está determinado por la variable [code]Vector2[/code] llamada [code]board_size[/code]."
+msgid "[b]Your task is to complete the [code]move_to_bottom()[/code] function to move the robot down to the bottom row.[/b]"
+msgstr "[b]Tu tarea es completar la función [code]move_to_bottom()[/code] para mover el robot hacia abajo hasta la fila inferior.[/b]"
 
+#: course/lesson-18-for-loops/lesson.bbcode:77
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
-msgstr "La celda inicial del robot es [code]Vector2(2, 0)[/code]."
+msgid "We store the robot's position on the board in a variable named [code]cell[/code]."
+msgstr "Almacenamos la posición del robot en el tablero en una variable llamada [code]cell[/code]."
 
+#: course/lesson-18-for-loops/lesson.bbcode:77
+#. TRANSLATORS: Practice goal
+msgid "The board size is stored in a variable named [code]board_size[/code], which holds a [code]Vector2[/code] value."
+msgstr "El tamaño del tablero se almacena en una variable llamada [code]board_size[/code] que contiene un valor [code]Vector2[/code]."
+
+#: course/lesson-18-for-loops/lesson.bbcode:77
+#. TRANSLATORS: Practice goal
+msgid "To move the robot, change [code]cell[/code] one step at a time. If you add [code]Vector2(0, 1)[/code] to [code]cell[/code], the robot will move down one row."
+msgstr "Para mover el robot, cambia [code]cell[/code] paso a paso. Si añades [code]Vector2(0, 1)[/code] a [code]cell[/code], el robot se desplazará una fila hacia abajo."
+
+#: course/lesson-18-for-loops/lesson.bbcode:77
+#. TRANSLATORS: Practice goal
+msgid "Use a [code]for[/code] loop and the `[code]board_size[/code]` variable to make the function work for any board size."
+msgstr "Utiliza un bucle [code]for[/code] y la variable [code]board_size[/code] para que la función funcione para cualquier tamaño de tablero."
+
+#: course/lesson-18-for-loops/lesson.bbcode:77
+#. TRANSLATORS: Practice goal
+msgid "To check your code, I will call the [code]move_to_bottom()[/code] function. After calling it, [code]cell.y[/code] should be equal to [code]board_size.y - 1[/code]. This is the bottom row of the board."
+msgstr "Para comprobar tu código, llamaré a la función [code]move_to_bottom()[/code]. Tras llamarla, [code]cell.y[/code] debería ser igual a [code]board_size.y - 1[/code]. Esta es la fila inferior del tablero."
+
+#: course/lesson-18-for-loops/lesson.bbcode:77
 #. TRANSLATORS: Practice description
+msgid "Use a for loop to move the robot from the top of the board to the bottom."
+msgstr "Utiliza un bucle for para mover el robot desde la parte superior del tablero hasta la inferior."
+
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "Use a for loop to have our robot move from the top of the board to the bottom."
-msgstr "Utiliza un bucle for para que nuestro robot se mueva de la parte superior del tablero a la inferior."
+#. TRANSLATORS: Practice hint
+msgid "The robot starts on row [code]0[/code] and has to get to the last row. Because rows are counted from [code]0[/code], the last row is [code]board_size.y - 1[/code]."
+msgstr "El robot empieza en la fila [code]0[/code] y tiene que llegar a la última fila. Como las filas se cuentan a partir de [code]0[/code], la última fila es [code]board_size.y - 1[/code]."
+
+#: course/lesson-18-for-loops/lesson.bbcode:77
+#. TRANSLATORS: Practice hint
+msgid "[code]cell[/code] is a [code]Vector2[/code]. To move the robot down one row, add [code]Vector2(0, 1)[/code] to [code]cell[/code] (or add 1 to [code]cell.y[/code])."
+msgstr "[code]cell[/code] es un [code]Vector2[/code]. Para mover el robot una fila hacia abajo, suma [code]Vector2(0, 1)[/code] a [code]cell[/code] (o suma 1 a [code]cell.y[/code])."
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards"
-msgstr "Tendrás que modificar la subvariable [code]y[/code] de [code]cell[/code] para mover el robot hacia abajo"
+msgid "The robot starts on row [code]0[/code], so it needs to move [code]board_size.y - 1[/code] steps to reach the last row. Call [code]range(board_size.y - 1)[/code] to create an array with that many numbers to loop over."
+msgstr "El robot empieza en la fila [code]0[/code], por lo que tiene que recorrer [code]board_size.y - 1[/code] pasos para llegar a la última fila. Llama a [code]range(board_size.y - 1)[/code] para crear una matriz con ese número de elementos sobre los que iterar."
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]"
-msgstr "Llama a [code]range(n)[/code] para obtener una lista de números del [code]0[/code] al [code]n - 1[/code]."
-
-#. TRANSLATORS: Practice hint
-#: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "Use [code]for number in range(board_size.y - 1):[/code] to loop enough times."
-msgstr "Utiliza [code]for number in range(board_size.y - 1):[/code] para repetir el bucle las veces que sea necesario."
+msgid "Use [code]for number in range(board_size.y - 1):[/code] and add [code]Vector2(0, 1)[/code] to [code]cell[/code] inside the loop. The loop variable [code]number[/code] is only a counter here, so we don't need to use it."
+msgstr "Utiliza [code]for number in range(board_size.y - 1):[/code] y añade [code]Vector2(0, 1)[/code] a [code]cell[/code] dentro del bucle. La variable del bucle [code]number[/code] es aquí solo un contador, por lo que no necesitas utilizarla."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Improving code with a for loop"
 msgstr "Mejorar el código con un bucle for"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Use a [code]for[/code] loop to remove the duplicate code in the [code]run()[/code] function."
 msgstr "Utiliza un bucle [code]for[/code] para eliminar el código duplicado en la función [code]run()[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "In this practice, we revisit the turtle and drawing rectangles."
 msgstr "En esta práctica, volvemos a hablar de la tortuga y de dibujar rectángulos."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "With our new knowledge of [code]for[/code] loops, we can condense this code to take up less space and make it easier to modify."
 msgstr "Con nuestros nuevos conocimientos sobre los bucles [code]for[/code], podemos condensar este código para que ocupe menos espacio y sea más fácil de modificar."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "The turtle should draw three squares in a horizontal line. The squares should be 100 pixels apart."
 msgstr "La tortuga debe dibujar tres cuadrados en una línea horizontal. Los cuadrados deben estar separados por 100 pixeles."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "In the past we had to copy and paste code to draw multiple rectangles. Let's revisit previous code and improve it with a for loop."
 msgstr "Antes teníamos que copiar y pegar el código para dibujar varios rectángulos. Revisemos el código anterior y mejorémoslo con un bucle for."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Use the line [code]for number in range(3):[/code]"
 msgstr "Utiliza la línea [code]for number in range(3):[/code]"
 
@@ -5457,7 +5476,7 @@ msgstr "Para convertir, multiplica la coordenada de la celda por [code]cell_size
 #. TRANSLATORS: Practice goal
 #: course/lesson-22-functions-return-values/lesson.bbcode:96
 msgid "I will call the [code]convert_to_world_coordinates()[/code] function three times in total with three different cell coordinates to test your code."
-msgstr ""
+msgstr "Llamaré a la función [code]convert_to_world_coordinates()[/code] tres veces en total con tres coordenadas de celda diferentes para probar tu código."
 
 #. TRANSLATORS: Practice description
 #: course/lesson-22-functions-return-values/lesson.bbcode:96
@@ -5618,7 +5637,7 @@ msgstr "Tu trabajo consiste en mover los pedidos de la lista de espera a la list
 #. TRANSLATORS: Practice goal
 #: course/lesson-23-append-to-arrays/lesson.bbcode:79
 msgid "I will call the [code]complete_current_order()[/code] function once for each order. It means the function will run four times in total, once per order."
-msgstr ""
+msgstr "Llamaré a la función [code]complete_current_order()[/code] una vez por cada pedido. Esto significa que la función se ejecutará cuatro veces en total, una por cada pedido."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-23-append-to-arrays/lesson.bbcode:79
@@ -6001,14 +6020,14 @@ msgstr "Los diccionarios también se llaman mapeos o [i]matrices asociativas[/i]
 msgid "Precisely, dictionaries use a [i]hashing algorithm[/i]. Hashing algorithms convert one value into another."
 msgstr "Precisamente, los diccionarios utilizan un [i]algoritmo hash[/i]. Los algoritmos hash convierten un valor en otro."
 
-#. TRANSLATORS: Note content
 #: course/lesson-25-creating-dictionaries/lesson.bbcode:47
-msgid "In this case, hashing consists of converting a given key into a unique whole number. The dictionary then uses that number as an array's index!"
-msgstr "En este caso, el [i]hashing[/i] consiste en convertir una clave dada en un número entero único. ¡El diccionario luego utiliza ese número como índice de una matriz!"
-
 #. TRANSLATORS: Note content
+msgid "In this case, hashing consists of converting a given key into a whole number. The dictionary then uses that number as an array's index!"
+msgstr "En este caso, el hashing consiste en convertir una clave dada en un número entero. El diccionario luego utiliza ese número como índice de una matriz."
+
 #: course/lesson-25-creating-dictionaries/lesson.bbcode:48
-msgid "That's how a dictionary works: when you give it a key, it converts it into a unique index and uses that index to retrieve the corresponding value in the computer's memory."
+#. TRANSLATORS: Note content
+msgid "That's how a dictionary works: when you give it a key, it converts it into a index and uses that index to retrieve the corresponding value in the computer's memory."
 msgstr "Así es como funciona un diccionario: cuando le das una clave, la convierte en un índice único y utiliza ese índice para recuperar el valor correspondiente en la memoria de la computadora."
 
 #. TRANSLATORS: Note content
@@ -6715,3 +6734,21 @@ msgstr "El tipo [code]String[/code] significa que debes escribir una cadena de t
 
 msgid "Learn to Code From Zero with Godot"
 msgstr "Aprende a programar desde cero con Godot"
+
+#~ msgid "The robot starts with 100 health and will take 50 damage."
+#~ msgstr "El robot comienza con 100 de salud y recibirá 50 de daño."
+
+#~ msgid "The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code]."
+#~ msgstr "El tamaño del tablero está determinado por la variable [code]Vector2[/code] llamada [code]board_size[/code]."
+
+#~ msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
+#~ msgstr "La celda inicial del robot es [code]Vector2(2, 0)[/code]."
+
+#~ msgid "You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards"
+#~ msgstr "Tendrás que modificar la subvariable [code]y[/code] de [code]cell[/code] para mover el robot hacia abajo"
+
+#~ msgid "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]"
+#~ msgstr "Llama a [code]range(n)[/code] para obtener una lista de números del [code]0[/code] al [code]n - 1[/code]."
+
+#~ msgid "Use [code]for number in range(board_size.y - 1):[/code] to loop enough times."
+#~ msgstr "Utiliza [code]for number in range(board_size.y - 1):[/code] para repetir el bucle las veces que sea necesario."

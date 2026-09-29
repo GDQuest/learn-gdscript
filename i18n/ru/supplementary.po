@@ -9,65 +9,155 @@ msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
 "POT-Creation-Date: 2026-01-21 11:55+0100\n"
-"PO-Revision-Date: 2026-06-04 12:03+0000\n"
-"Last-Translator: Hosted Weblate user 153466 <gyfugood51@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/learn-gdscript-from-zero/error-explanations/ru/>\n"
+"PO-Revision-Date: 2026-09-25 07:51+0000\n"
+"Last-Translator: Teijo <kpyk99@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/learn-gdscript-from-zero/supplementary/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Generated-By: Babel 2.10.3\n"
-"X-Generator: Weblate 2026.6\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 
 #: script_checking/error_database.csv
 msgid "error_explanation"
-msgstr ""
+msgstr "error_explanation"
 
 #: script_checking/error_database.csv
 msgid "error_suggestion"
+msgstr "error_suggestion"
+
+#: script_checking/error_database.csv
+msgid "You get this error when:"
 msgstr ""
 
 #: script_checking/error_database.csv
-msgid "This error message tells you that Godot did not find the function you are trying to call. This either means that:"
+msgid "[ul]"
 msgstr ""
 
 #: script_checking/error_database.csv
-msgid "1. The function does not exist."
+msgid "You write a function inside another function."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You write a piece of code that calculates a value, but that value is not used or assigned to a variable."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "[/ul]"
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The error means that you have a piece of code that's not having any effect because it is not used or placed in the correct context."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you wrote a function inside of another function, extract the inner function, place it later in your code, and remove the indentation."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you wrote some conditions or a piece of code that is meant to produce a value, make sure to store the result in a variable or use it in an [code]if[/code] statement or something that will use the value."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "You get this error when you put parentheses [code]()[/code] after a variable, as if you were calling a function."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "The parentheses tell Godot to call that name as a function. The problem is that the variable holds a value like a number, a string, part of a vector, etc., and not a function, so you cannot call it as a function."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, [code]position.x[/code] is a [code]float[/code]. Writing [code]position.x()[/code] makes Godot try to call a function named [code]x[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Look at the name right before the parentheses in the error message, and remove those parentheses."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you want to [b]store or change[/b] a value, use the [b]=[/b] symbol. For example, [code]health = 10[/code] or [code]position.x = 100.0[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you meant to [b]use[/b] the value, write it without the parentheses. For example, [code]var new_health = health + 20[/code]."
 msgstr ""
 
 #: script_checking/error_database.csv
 #, fuzzy
+msgid "This error message tells you that Godot couldn't find the member variable you're trying to access. There are two common reasons for this:"
+msgstr "Это сообщение об ошибке сообщает вам, что Godot не нашел функцию, которую вы пытаетесь вызвать. Либо это означает, что:"
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "1. There is a typo in the name of the member variable."
+msgstr "2. В названии функции, которую вы пытаетесь вызвать, допущена опечатка."
+
+#: script_checking/error_database.csv
+msgid "2. The value before the dot (.) is not the type of value you expect, so it does not have that member variable."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, let's say you have a variable representing a number of characters: [code]var character = 5[/code] and you try to access the [code]y[/code] member variable on it: [code]character.y[/code]. Because [code]character[/code] is a whole number, it has no [code]y[/code] member variable. The error message tells you the type it found ([code]int[/code] in this case)."
+msgstr ""
+
+#: script_checking/error_database.csv
+#, fuzzy
+msgid "You also get this error when you try to access a member variable on a [code]null[/code] value (an empty variable)."
+msgstr "Вы получаете эту ошибку, когда пытаетесь присвоить значение тому, что не является переменной."
+
+#: script_checking/error_database.csv
+msgid "Look at the value before the dot in the line with the error."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "Make sure that the names before and after the dot have no typos. Any difference like a capital letter, one letter missing or being added, or letters being swapped can cause this error."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If the value is the wrong type, check where it comes from. Is it a [code]Vector2[/code] or [code]int[/code]? A [code]Vector2[/code] has [code]x[/code] and [code]y[/code] member variables, but an [code]int[/code] does not."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "This error message tells you that Godot did not find the function you are trying to call. This either means that:"
+msgstr "Это сообщение об ошибке сообщает вам, что Godot не нашел функцию, которую вы пытаетесь вызвать. Либо это означает, что:"
+
+#: script_checking/error_database.csv
+msgid "1. The function does not exist."
+msgstr "1. Функция не существует."
+
+#: script_checking/error_database.csv
 msgid "2. There is a typo in the name of the function you are trying to call."
-msgstr "Вероятно, у вас опечатка в названии подпеременной, к которой вы пытаетесь получить доступ."
+msgstr "2. В названии функции, которую вы пытаетесь вызвать, допущена опечатка."
 
 #: script_checking/error_database.csv
 msgid "While we humans can read words even when they are spelled incorrectly, the computer only understands exact matches. For a computer, [i]3[/i] and [i]three[/i] or [i]foward[/i] (missing an [i]r[/i]) and [i]forward[/i] are not the same thing."
-msgstr ""
+msgstr "Хотя мы, люди, можем читать слова, даже если они написаны неправильно, компьютер понимает только точные совпадения. Для компьютера [i]3[/i] и [i]three[/i] или [i]forward[/i] (отсутствует [i]r[/i]) и [i]forward[/i] — это не одно и то же."
 
 #: script_checking/error_database.csv
 msgid "Look at the function name in the error message. Carefully compare it with the function names listed in the practice goals or the functions already in your code."
-msgstr ""
+msgstr "Посмотрите имя функции в сообщении об ошибке. Внимательно сравните его с именами функций, указанными в практических целях, или с функциями, уже имеющимися в вашем коде."
 
 #: script_checking/error_database.csv
 msgid "Are there any differences? Whether it's one letter, an underscore ('_'), or a capital letter? If you spot any differences, change the function name in your code."
-msgstr ""
+msgstr "Есть ли различия? Будь то одна буква, подчеркивание («_») или заглавная буква? Если вы заметили какие-либо различия, измените имя функции в своем коде."
 
 #: script_checking/error_database.csv
 msgid "This error message tells you that the values you used with an operator are not compatible with each other. For example, you can add two [code]Vector2[/code] values together, but you cannot add a [code]Vector2[/code] and an [code]int[/code] (a whole number) like [code]Vector2(1, 1) + 3[/code]."
-msgstr ""
+msgstr "Это сообщение об ошибке сообщает вам, что значения, которые вы использовали с оператором, несовместимы друг с другом. Например, вы можете сложить два значения [code]Vector2[/code] вместе, но не можете добавить [code]Vector2[/code] и [code]int[/code] (целое число), например [code]Vector2(1, 1) + 3[/code]."
 
 #: script_checking/error_database.csv
 msgid "Operators are like recipes: each one only works with specific ingredients (kinds of values). The [code]+[/code] operator knows how to combine two numbers, or two vectors, but it cannot mix a vector and a number. For numeric values, the rules usually follow the ones you've learned in math classes: you can multiply, divide, or add numbers together. You can multiply or divide a [code]Vector2[/code] by a number. And so on."
-msgstr ""
+msgstr "Операторы подобны рецептам: каждый работает только с определенными ингредиентами (видами значений). Оператор [code]+[/code] знает, как объединить два числа или два вектора, но он не может смешивать вектор и число. Для числовых значений правила обычно соответствуют тем, которые вы изучали на уроках математики: вы можете умножать, делить или складывать числа. Вы можете умножить или разделить [code]Vector2[/code] на число. И так далее."
 
 #: script_checking/error_database.csv
 msgid "First, identify the two values the error message points to. Are they compatible? If you're adding or subtracting, they should be the same type: two numbers or two vectors."
-msgstr ""
+msgstr "Сначала определите два значения, на которые указывает сообщение об ошибке. Совместимы ли они? Если вы складываете или вычитаете, они должны быть одного типа: два числа или два вектора."
 
 #: script_checking/error_database.csv
 msgid "When working with variables, think about the value they hold. [code]position[/code], for example, holds a [code]Vector2[/code], so you can add another [code]Vector2[/code] to it directly: [code]position = position + Vector2(1, 1)[/code]. Or you can change one component, like [code]position.x = position.x + 1[/code]."
-msgstr ""
+msgstr "Работая с переменными, подумайте о значении, которое они содержат. Например, [code]position[/code] содержит [code]Vector2[/code], поэтому вы можете напрямую добавить к нему еще один [code]Vector2[/code]: [code]position =position + Vector2(1, 1)[/code]. Или вы можете изменить один компонент, например [code]position.x =position.x + 1[/code]."
 
 #: script_checking/error_database.csv
 msgid "You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword."
@@ -90,13 +180,12 @@ msgid "To access the [code]x[/code] sub-component of the variable, you need to d
 msgstr "Чтобы получить доступ к подкомпоненту [code]x[/code] переменной, вам нужно сделать это внутри тела цикла:"
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "[code]for cell_position in cell_positions_array:"
 msgstr "[code]for cell_position in cell_positions_array:"
 
 #: script_checking/error_database.csv
 msgid "    cell_position.x += 1.0[/code]"
-msgstr ""
+msgstr "    cell_position.x += 1.0[/code]"
 
 #: script_checking/error_database.csv
 msgid "You get this error when you try to assign a value to something that is not a variable."
@@ -143,12 +232,10 @@ msgid "Look at what you are trying to change. If it is a constant (defined with 
 msgstr "Посмотрите на то, что вы пытаетесь изменить. Если это константа (определенная с помощью ключевого слова [code]const[/code] или встроенная в Godot), у вас есть два варианта:"
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "1. If the value should never change, or it comes from Godot, remove the line that tries to change it."
 msgstr "1. Если значение никогда не должно меняться или оно встроено в Godot, удалите строку, которая пытается его изменить."
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "2. If the value needs to change, use [code]var[/code] instead of [code]const[/code] when you first create it."
 msgstr "2. Если значение должно изменяться, используйте [code]var[/code] вместо [code]const[/code] при его первом создании."
 
@@ -186,10 +273,9 @@ msgstr "У циклической ссылки есть две возможны�
 
 #: script_checking/error_database.csv
 msgid "1. You used the class name in the class itself."
-msgstr ""
+msgstr "1. Вы использовали имя класса в самом классе."
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
 msgstr "2. Ваш код ссылается на другой класс, который ссылается на этот класс, создавая бесконечный цикл ссылок."
 
@@ -291,16 +377,15 @@ msgstr "Эта ошибка возникает в нескольких случ�
 
 #: script_checking/error_database.csv
 msgid "1. You wrote an identifier (variable or function name) in the wrong place."
-msgstr ""
+msgstr "1. Вы написали идентификатор (имя переменной или функции) не в том месте."
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
 msgstr "2. Вы написали ключевое слово, например [code]var[/code], [code]func[/code], [code]for[/code] или [code]signal[/code], и не указали после него имя."
 
 #: script_checking/error_database.csv
 msgid "3. You wrote a function definition but forgot the parentheses before the colon."
-msgstr ""
+msgstr "3. Вы написали определение функции, но забыли скобки перед двоеточием."
 
 #: script_checking/error_database.csv
 msgid "If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses."
@@ -503,12 +588,10 @@ msgid "There is an issue with the return value of your function. There are two m
 msgstr "Возникла проблема с возвращаемым значением вашей функции. Она возникает в двух случаях:"
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "1. Your function is a void function, thus it should not return a value. This includes functions with the '-> void' syntax and class constructors ('_init()')."
 msgstr "1. Ваша функция является void-функцией, поэтому она не должна возвращать значение. Это относится к функциям с синтаксисом «-> void» и конструкторам классов («_init()»)."
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "2. You specified a return type for your function, but you are not returning a value in all possible branches (if, elif, and else blocks) or at the end."
 msgstr "2. Вы указали возвращаемый тип для вашей функции, но не возвращаете значение во всех возможных ветвях (блоки if, elif и else) или в конце функции."
 
@@ -546,10 +629,9 @@ msgstr "Чтобы исправить это, вам нужно либо доб�
 
 #: script_checking/error_database.csv
 msgid "The computer reached the end of the line of code, but the line had a syntax error."
-msgstr ""
+msgstr "Компьютер достиг конца строки кода, но в этой строке была синтаксическая ошибка."
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "The most common case is when you forget to close a string: you have opening quotes, but you forget to add a matching closing quote."
 msgstr "Самый распространенный случай — когда вы забываете закрыть строку: у вас есть открывающие кавычки, но вы забыли добавить соответствующие закрывающие кавычки."
 
@@ -570,7 +652,6 @@ msgid "Ensure that you don't have a capital letter where you should have a lower
 msgstr "Убедитесь, что у вас нет заглавной буквы там, где должна быть строчная, и наоборот."
 
 #: course/glossary.csv course/documentation.csv
-#, fuzzy
 msgid "explanation"
 msgstr "объяснение"
 
@@ -843,9 +924,8 @@ msgid "The position of the entity on the vertical axis."
 msgstr "Положение объекта на вертикальной оси."
 
 #: course/documentation.csv
-#, fuzzy
 msgid " Applies a local translation on the node's X axis based on the [code]Node._process[/code]'s [code]delta[/code]. If [code]scaled[/code] is false, normalizes the movement."
-msgstr "Перемещает узел по оси X с учётом значения [code]delta[/code] в [code]Node._process[/code]. Если [code]scaled[/code] имеет значение false, нормализует движение."
+msgstr " Перемещает узел по оси X с учётом значения [code]delta[/code] в [code]Node._process[/code]. Если [code]scaled[/code] имеет значение false, нормализует движение."
 
 #: course/documentation.csv
 msgid "Stores how many cells make up the width ([code]board_size.x[/code]) and height ([code]board_size.y[/code]) of the board."
@@ -853,15 +933,15 @@ msgstr "Хранит размер доски в ячейках по ширине
 
 #: course/documentation.csv
 msgid "any"
-msgstr ""
+msgstr "любой"
 
 #: course/documentation.csv
 msgid "String"
-msgstr ""
+msgstr "Строка"
 
 #: course/documentation.csv
 msgid "int"
-msgstr ""
+msgstr "int"
 
 msgid "Learn to Code From Zero with Godot"
-msgstr ""
+msgstr "Учитесь программировать с нуля с помощью Godot"

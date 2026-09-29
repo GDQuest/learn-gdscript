@@ -2549,13 +2549,15 @@ msgstr "私たちのゲームでは、主人公は一定量の[code]health[/code
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
-msgid "Add to the [code]take_damage()[/code] function so it subtracts the [code]amount[/code] to the predefined [code]health[/code] variable."
+#, fuzzy
+msgid "Add an instruction to the [code]take_damage()[/code] function so it subtracts [code]amount[/code] from the [code]health[/code] variable."
 msgstr "[code]take_damage()[/code] 関数に追加して、定義済みの [code]health[/code] 変数に [code]amount[/code] を減算します。"
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
-msgid "The robot starts with 100 health and will take 50 damage."
-msgstr "ロボットの体力は100から始まり、50ダメージを受けます。"
+#, fuzzy
+msgid "I will call the [code]take_damage()[/code] function like this when you run the practice: [code]take_damage(50)[/code]"
+msgstr "[code]take_damage()[/code] 関数に追加して、定義済みの [code]health[/code] 変数に [code]amount[/code] を減算します。"
 
 #. TRANSLATORS: Practice description
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
@@ -3502,7 +3504,7 @@ msgstr "前の例では、もし[code]if[/code]行の下に何もないと、God
 #. TRANSLATORS: Quiz question
 #: course/lesson-13-conditions/lesson.bbcode:79
 msgid "Which of these statements are true?"
-msgstr "これらの記述のうち、正しいものはどれですか?"
+msgstr "これらの記述のうち、trueになるものはどれですか?"
 
 #. TRANSLATORS: Quiz explanation
 #: course/lesson-13-conditions/lesson.bbcode:79
@@ -4607,71 +4609,96 @@ msgstr "ここでも、ロボットはボードの一番上に立つことにし
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "This time, use a [code]for[/code] loop in the [code]move_to_bottom()[/code] function to have it move to the bottom of the board."
+#, fuzzy
+msgid "[b]Your task is to complete the [code]move_to_bottom()[/code] function to move the robot down to the bottom row.[/b]"
 msgstr "今回は[code]move_to_bottom()[/code]関数で[code]for[/code]ループを使って、ボードの一番下まで移動させます。"
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code]."
-msgstr "ボードサイズは [code]Vector2[/code] [code]board_size[/code] で決まります。"
+#, fuzzy
+msgid "We store the robot's position on the board in a variable named [code]cell[/code]."
+msgstr "[code]0[/code] からタイルを数えているので、ロボットを動かすのはその位置がボードの幅より 1 つ小さくなるまで、ということに注意してください。"
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
-msgstr "ロボットの開始セルは [code]Vector2(2, 0)[/code] です。"
+#, fuzzy
+msgid "The board size is stored in a variable named [code]board_size[/code], which holds a [code]Vector2[/code] value."
+msgstr "ボードのサイズは、[code]Vector2[/code]の値を持つ[code]board_size[/code]という変数に格納されています。"
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "To move the robot, change [code]cell[/code] one step at a time. If you add [code]Vector2(0, 1)[/code] to [code]cell[/code], the robot will move down one row."
+msgstr ""
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+#, fuzzy
+msgid "Use a [code]for[/code] loop and the `[code]board_size[/code]` variable to make the function work for any board size."
+msgstr "関数が任意のボードサイズで動作するように、[code]while[/code]ループを必ず使用してください。"
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "To check your code, I will call the [code]move_to_bottom()[/code] function. After calling it, [code]cell.y[/code] should be equal to [code]board_size.y - 1[/code]. This is the bottom row of the board."
+msgstr ""
 
 #. TRANSLATORS: Practice description
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "Use a for loop to have our robot move from the top of the board to the bottom."
+#, fuzzy
+msgid "Use a for loop to move the robot from the top of the board to the bottom."
 msgstr "for ループを使用して、ロボットをボードの上から下に移動します。"
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards"
-msgstr "ロボットを下に動かすには、[code]cell[/code] の [code]y[/code] サブ変数を変更する必要があります"
+msgid "The robot starts on row [code]0[/code] and has to get to the last row. Because rows are counted from [code]0[/code], the last row is [code]board_size.y - 1[/code]."
+msgstr ""
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]"
-msgstr "[code]range(n)[/code] を呼び出すと、[code]0[/code] から [code]n - 1[/code] までの数値のリストを取得できます"
+msgid "[code]cell[/code] is a [code]Vector2[/code]. To move the robot down one row, add [code]Vector2(0, 1)[/code] to [code]cell[/code] (or add 1 to [code]cell.y[/code])."
+msgstr ""
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "Use [code]for number in range(board_size.y - 1):[/code] to loop enough times."
-msgstr "[code]for number in range(board_size.y - 1):[/code] を使って、必要な回数だけループを実行してください。"
+msgid "The robot starts on row [code]0[/code], so it needs to move [code]board_size.y - 1[/code] steps to reach the last row. Call [code]range(board_size.y - 1)[/code] to create an array with that many numbers to loop over."
+msgstr ""
+
+#. TRANSLATORS: Practice hint
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "Use [code]for number in range(board_size.y - 1):[/code] and add [code]Vector2(0, 1)[/code] to [code]cell[/code] inside the loop. The loop variable [code]number[/code] is only a counter here, so we don't need to use it."
+msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Improving code with a for loop"
 msgstr "for ループによるコードの改善"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Use a [code]for[/code] loop to remove the duplicate code in the [code]run()[/code] function."
 msgstr "[code]for[/code] ループを使用して、[code]run()[/code] 関数内の重複コードを削除します。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "In this practice, we revisit the turtle and drawing rectangles."
 msgstr "この演習では、亀をまた使って、長方形を描きます。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "With our new knowledge of [code]for[/code] loops, we can condense this code to take up less space and make it easier to modify."
 msgstr "[code]for[/code] ループの新しい知識を使うと、このコードを凝縮して占有スペースを減らし、変更しやすくできます。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "The turtle should draw three squares in a horizontal line. The squares should be 100 pixels apart."
 msgstr "亀は水平線で3つの正方形を描く必要があります。正方形は 100 ピクセル離れている必要があります。"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "In the past we had to copy and paste code to draw multiple rectangles. Let's revisit previous code and improve it with a for loop."
 msgstr "以前は、複数の長方形を描画するためにコードをコピーして貼り付ける必要がありました。前のコードを見直して、for ループで改善しましょう。"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Use the line [code]for number in range(3):[/code]"
 msgstr "この行を使いましょう。[code]for number in range(3):[/code]"
 
@@ -6026,12 +6053,14 @@ msgstr "正確には、辞書は [i]ハッシュアルゴリズム[/i]を使用�
 
 #. TRANSLATORS: Note content
 #: course/lesson-25-creating-dictionaries/lesson.bbcode:47
-msgid "In this case, hashing consists of converting a given key into a unique whole number. The dictionary then uses that number as an array's index!"
+#, fuzzy
+msgid "In this case, hashing consists of converting a given key into a whole number. The dictionary then uses that number as an array's index!"
 msgstr "この場合、ハッシュは、特定のキーを一意の整数に変換することで構成されます。辞書は、その数値を配列のインデックスとして使用するのです！"
 
 #. TRANSLATORS: Note content
 #: course/lesson-25-creating-dictionaries/lesson.bbcode:48
-msgid "That's how a dictionary works: when you give it a key, it converts it into a unique index and uses that index to retrieve the corresponding value in the computer's memory."
+#, fuzzy
+msgid "That's how a dictionary works: when you give it a key, it converts it into a index and uses that index to retrieve the corresponding value in the computer's memory."
 msgstr "辞書は、キーを与えると、それを一意のインデックスに変換し、そのインデックスを使用してコンピューターのメモリ内の対応する値を取得します。"
 
 #. TRANSLATORS: Note content
@@ -6750,6 +6779,24 @@ msgstr "型[code]String[/code]は、引用符で囲まれた値であるテキ�
 #, fuzzy
 msgid "Learn to Code From Zero with Godot"
 msgstr "Godotでゼロからプログラミングを学ぶ"
+
+#~ msgid "The robot starts with 100 health and will take 50 damage."
+#~ msgstr "ロボットの体力は100から始まり、50ダメージを受けます。"
+
+#~ msgid "The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code]."
+#~ msgstr "ボードサイズは [code]Vector2[/code] [code]board_size[/code] で決まります。"
+
+#~ msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
+#~ msgstr "ロボットの開始セルは [code]Vector2(2, 0)[/code] です。"
+
+#~ msgid "You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards"
+#~ msgstr "ロボットを下に動かすには、[code]cell[/code] の [code]y[/code] サブ変数を変更する必要があります"
+
+#~ msgid "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]"
+#~ msgstr "[code]range(n)[/code] を呼び出すと、[code]0[/code] から [code]n - 1[/code] までの数値のリストを取得できます"
+
+#~ msgid "Use [code]for number in range(board_size.y - 1):[/code] to loop enough times."
+#~ msgstr "[code]for number in range(board_size.y - 1):[/code] を使って、必要な回数だけループを実行してください。"
 
 #~ msgid "The function still works the same way. You can run it below."
 #~ msgstr "関数は引き続き同じように機能します。以下で実行できます。"

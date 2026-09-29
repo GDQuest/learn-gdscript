@@ -1490,19 +1490,19 @@ msgstr ""
 msgid "It looks like the take_damage function is missing; did you remove it?"
 msgstr ""
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:78
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:108
 msgid "It looks like amount isn't reduced by a percentage. Did you multiply it by a value less than 1?"
 msgstr ""
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:84
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:114
 msgid "The character did not take half damage despite being level 3. Did you multiply the amount by 0.5 to reduce it?"
 msgstr ""
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:88
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:118
 msgid "The character appears not to be taking full damage when their level is below 3. Did you use a condition to limit damage reduction to when the level is greater or equal to 3?"
 msgstr ""
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:90
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:120
 msgid "The character appears to be taking 0 damage when its level is less than 3. Did you subtract the amount to health when the level is less than 3?"
 msgstr ""
 
@@ -1514,11 +1514,11 @@ msgstr ""
 msgid "The Scale Is Correct After Gaining Multiple Levels"
 msgstr ""
 
-#: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:38
+#: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:35
 msgid "It looks like the scale isn't increasing by some vector. Did you add a vector to scale?"
 msgstr ""
 
-#: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:48
+#: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:45
 msgid "scale's value is %s; It should be (1.4, 1.4) after levelling up 2 times."
 msgstr ""
 
@@ -1546,36 +1546,45 @@ msgstr ""
 msgid "position's value is %s; It should be (0.0, 0.0) after resetting."
 msgstr ""
 
-#: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:11
-#: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:11
-msgid "Robot Gets To Bottom Of Board"
+#: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:13
+#: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:13
+msgid "Robot Moves To Bottom Row"
 msgstr ""
 
-#: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:12
-msgid "Use While Loop"
-msgstr ""
-
-#: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:17
-#: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:17
-msgid "The robot isn't at the bottom of the game board. Did you increase its cell.y coordinate?"
+#: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:15
+msgid "Use a While Loop to Move"
 msgstr ""
 
 #: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:23
-msgid "Your code has no while loop. You need to use a while loop to complete this practice, even if there are other solutions!"
+msgid "The robot stopped above the bottom row. The cell.y member variable should be equal to board_size.y - 1 (the last row in the board)."
 msgstr ""
 
-#: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:12
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:40
-#: course/lesson-21-strings/string_array/TestsStringArray.gd:12
-msgid "Use For Loop"
+#: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:26
+msgid "The robot moved below the bottom row. The cell.y member variable should be equal to board_size.y - 1 (the last row in the board)."
+msgstr ""
+
+#: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:40
+msgid "Your while loop needs to contain the code that moves the robot."
+msgstr ""
+
+#: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:15
+msgid "Use a For Loop to Move"
 msgstr ""
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:23
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:48
-#: course/lesson-21-strings/string_array/TestsStringArray.gd:23
-#: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:40
-#: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:39
-msgid "Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!"
+msgid "The robot stopped above the bottom row. Its cell.y should be equal to board_size.y - 1."
+msgstr ""
+
+#: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:26
+msgid "The robot moved below the bottom row. Its cell.y should be equal to board_size.y - 1."
+msgstr ""
+
+#: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:40
+msgid "Your for loop needs to contain the code that moves the robot."
+msgstr ""
+
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:40
+msgid "Use a For Loop to Draw Rectangles"
 msgstr ""
 
 #: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:41
@@ -1583,32 +1592,36 @@ msgstr ""
 msgid "Draw Three Squares"
 msgstr ""
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:42
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:43
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:41
 msgid "Squares Are All 100 By 100"
 msgstr ""
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:43
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:46
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:43
 msgid "Shapes Are 100 Pixels Apart"
 msgstr ""
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:54
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:62
+msgid "Your for loop needs to contain the code to draw the rectangles."
+msgstr ""
+
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:67
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:48
 msgid "You drew %s squares but you need to draw 3."
 msgstr ""
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:70
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:81
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:56
 msgid "Shape3D number %s is not a square of size 100 by 100."
 msgstr ""
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:77
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:88
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:74
 msgid "There are fewer than 3 shapes, we can't test if shapes are 100 pixels apart."
 msgstr ""
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:85
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:96
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:81
 msgid "Shapes are not separated by 100 pixels on the X axis."
 msgstr ""
@@ -1717,12 +1730,20 @@ msgstr ""
 msgid "Did you use a for loop to call robot.move_to() with each cell in robot_path?"
 msgstr ""
 
+#: course/lesson-21-strings/string_array/TestsStringArray.gd:12
+msgid "Use For Loop"
+msgstr ""
+
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:13
 msgid "Robot Combo Is Correct"
 msgstr ""
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:20
 msgid "The run function is missing; did you remove it?"
+msgstr ""
+
+#: course/lesson-21-strings/string_array/TestsStringArray.gd:23
+msgid "Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!"
 msgstr ""
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:34
@@ -1908,16 +1929,32 @@ msgstr ""
 msgid "Code Uses A For Loop"
 msgstr ""
 
-#: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:26
+#: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:19
+msgid "The number of items displayed does not match the number of items in the inventory. Did you display each item exactly once?"
+msgstr ""
+
+#: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:29
 msgid "The displayed items do not match the inventory variable's content. Did you call the display_item() function for each item in the inventory?"
+msgstr ""
+
+#: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:44
+msgid "Your code does not use a for loop to call display_item(). Please make sure you display each item inside the loop."
 msgstr ""
 
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:11
 msgid "All Units Are Displayed"
 msgstr ""
 
-#: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:26
+#: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:19
+msgid "The number of units displayed does not match the number of units in the units dictionary. Did you place each unit exactly once?"
+msgstr ""
+
+#: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:29
 msgid "The displayed units do not match the units variable's content. Did you call the place_unit() function for each unit in the units dictionary?"
+msgstr ""
+
+#: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:43
+msgid "Your code does not use a for loop to call place_unit(). Please make sure you place each unit inside the loop."
 msgstr ""
 
 #: course/lesson-27-value-types/display-energy/TestDisplayingEnergy.gd:11
@@ -2078,40 +2115,52 @@ msgstr ""
 msgid "The drawn shape is not a square of length 200 pixels."
 msgstr ""
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:13
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:19
 msgid "Draw Three Squares Of 200 Pixels"
 msgstr ""
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:18
-msgid "Nothing drawn. Did you not call draw_square()?"
-msgstr ""
-
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:21
-msgid "You only drew one square. You need to draw three."
-msgstr ""
-
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:23
-msgid "You need to draw three squares."
-msgstr ""
-
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:26
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:28
-msgid "You drew more than three squares. You need to draw only three!"
+msgid "Reuse The draw_square() Function"
 msgstr ""
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:34
-msgid "Shape3D number %s has too few corners! Did you change the draw_square() function?"
+msgid "You need to use the predefined draw_square() function inside draw_three_squares() in this exercise. This avoids duplicating the turtle instructions by hand."
 msgstr ""
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:39
+msgid "You need to define a function named draw_three_squares()."
+msgstr ""
+
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:57
+msgid "Nothing drawn. Did you not call draw_square()?"
+msgstr ""
+
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:60
+msgid "You only drew one square. You need to draw three."
+msgstr ""
+
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:62
+msgid "You need to draw three squares."
+msgstr ""
+
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:65
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:67
+msgid "You drew more than three squares. You need to draw only three!"
+msgstr ""
+
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:73
+msgid "Shape3D number %s has too few corners! Did you change the draw_square() function?"
+msgstr ""
+
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:80
 msgid "Shape3D number %s has too many corners! Did you change the draw_square() function?"
 msgstr ""
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:44
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:87
 msgid "Shape3D number %s is not a square of length 200 pixels. Did you change the draw_square() function?"
 msgstr ""
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:54
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:99
 msgid "The squares should not overlap. Did you move the turtle between drawing each square?"
 msgstr ""
 
@@ -2349,15 +2398,19 @@ msgstr "Funkcja '%s' wywołuje samą siebie, co tworzy nieskończoną pentlę"
 msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr ""
 
-#: ui/UIPractice.gd:432
+#: ui/UIPractice.gd:433
+msgid "You typed \"%s\"; did you mean \"%s\"?"
+msgstr ""
+
+#: ui/UIPractice.gd:450
 msgid "Running Your Code..."
 msgstr "Uruchamianie kodu…"
 
-#: ui/UIPractice.gd:444
+#: ui/UIPractice.gd:462
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "W twoim kodzie jest dzielenie przez zero. Nie możesz dzielić przez zero w kodzie. Spraw aby w twoim kodzie nie było \" / 0\" lub \"% 0\"."
 
-#: ui/UIPractice.gd:516
+#: ui/UIPractice.gd:608
 msgid "Running Tests..."
 msgstr "Testowanie rozwiązania…"
 
@@ -2373,7 +2426,7 @@ msgstr ""
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr ""
 
-#: ui/components/popups/ReportFormPopup.gd:132
+#: ui/components/popups/ReportFormPopup.gd:129
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr ""
 

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
 "POT-Creation-Date: 2026-01-21 11:55+0100\n"
-"PO-Revision-Date: 2026-09-14 19:51+0000\n"
+"PO-Revision-Date: 2026-09-25 07:50+0000\n"
 "Last-Translator: QWERTYUIOP733 <sgsy_0813152546728@qq.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/projects/learn-gdscript-from-zero/course/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -2569,13 +2569,15 @@ msgstr "在我们的游戏中，主角有一定量的[code]health[/code]。当�
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
-msgid "Add to the [code]take_damage()[/code] function so it subtracts the [code]amount[/code] to the predefined [code]health[/code] variable."
+#, fuzzy
+msgid "Add an instruction to the [code]take_damage()[/code] function so it subtracts [code]amount[/code] from the [code]health[/code] variable."
 msgstr "补全 [code]take_damage()[/code] 函数，让它能把 定义好的[code]health[/code]变量减去[code]amount[/code]点。"
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
-msgid "The robot starts with 100 health and will take 50 damage."
-msgstr "机器人有 100 点起始生命值，会受到 50 点伤害。"
+#, fuzzy
+msgid "I will call the [code]take_damage()[/code] function like this when you run the practice: [code]take_damage(50)[/code]"
+msgstr "补全 [code]take_damage()[/code] 函数，让它能把 定义好的[code]health[/code]变量减去[code]amount[/code]点。"
 
 #. TRANSLATORS: Practice description
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
@@ -3623,7 +3625,6 @@ msgstr "以下是四种比较符号及其含义："
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-13-conditions/lesson.bbcode:107
-#, fuzzy
 msgid ""
 "[ul]\n"
 "[code]>[/code]  Greater than\n"
@@ -3631,7 +3632,13 @@ msgid ""
 "[code]==[/code] Equal to\n"
 "[code]!=[/code] Not equal to\n"
 "[/ul]"
-msgstr "[ul] [code]>[/code] 大于 [code]<[/code] 小于 [code]==[/code] 等于 [code]!=[/code] 不等于 [/ul]"
+msgstr ""
+"[ul] \n"
+"[code]>[/code] 大于\n"
+"[code]<[/code] 小于 \n"
+"[code]==[/code] 等于\n"
+"[code]!=[/code] 不等于\n"
+"[/ul]"
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-13-conditions/lesson.bbcode:107
@@ -4668,74 +4675,96 @@ msgstr "和上次一样，机器人站在棋盘的顶部。"
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "This time, use a [code]for[/code] loop in the [code]move_to_bottom()[/code] function to have it move to the bottom of the board."
-msgstr "这一次，在 [code]move_to_bottom()[/code] 函数中使用 [code]for[/code] 循环让它移动到棋盘的底部。"
+#, fuzzy
+msgid "[b]Your task is to complete the [code]move_to_bottom()[/code] function to move the robot down to the bottom row.[/b]"
+msgstr "写好 [code]move_to_bottom()[/code] 函数，使机器人移动到棋盘底部。"
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code]."
-msgstr "棋盘大小由变量 [code]Vector2[/code] [code]board_size[/code] （棋盘大小）决定。"
+#, fuzzy
+msgid "We store the robot's position on the board in a variable named [code]cell[/code]."
+msgstr "注意，我们移动到终点的位置比格子数小一，这是因为我们是从 [code]0[/code] 开始计数的。"
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
-msgstr "机器人的起始单元是 [code]Vector2(2, 0)[/code]。"
+#, fuzzy
+msgid "The board size is stored in a variable named [code]board_size[/code], which holds a [code]Vector2[/code] value."
+msgstr "棋盘大小存储在一个名为 [code]board_size[/code] 的变量中，该变量包含一个 [code]Vector2[/code] 值。"
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "To move the robot, change [code]cell[/code] one step at a time. If you add [code]Vector2(0, 1)[/code] to [code]cell[/code], the robot will move down one row."
+msgstr ""
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+#, fuzzy
+msgid "Use a [code]for[/code] loop and the `[code]board_size[/code]` variable to make the function work for any board size."
+msgstr "确保用到了 [code]while[/code] 循环，以便该函数适用于任何尺寸的棋盘。"
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "To check your code, I will call the [code]move_to_bottom()[/code] function. After calling it, [code]cell.y[/code] should be equal to [code]board_size.y - 1[/code]. This is the bottom row of the board."
+msgstr ""
 
 #. TRANSLATORS: Practice description
 #: course/lesson-18-for-loops/lesson.bbcode:77
-msgid "Use a for loop to have our robot move from the top of the board to the bottom."
+#, fuzzy
+msgid "Use a for loop to move the robot from the top of the board to the bottom."
 msgstr "使用 for 循环让机器人从棋盘的顶部移动到底部。"
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-#, fuzzy
-msgid "You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards"
-msgstr "你需要修改 [code]cell[/code] 的 [code]y[/code] 子变量，让机器人向下移动"
+msgid "The robot starts on row [code]0[/code] and has to get to the last row. Because rows are counted from [code]0[/code], the last row is [code]board_size.y - 1[/code]."
+msgstr ""
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-#, fuzzy
-msgid "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]"
-msgstr "调用 [code]range(n)[/code] 会创建一个从 [code]0[/code] 到 [code]n - 1[/code] 的数字列表。"
+msgid "[code]cell[/code] is a [code]Vector2[/code]. To move the robot down one row, add [code]Vector2(0, 1)[/code] to [code]cell[/code] (or add 1 to [code]cell.y[/code])."
+msgstr ""
 
 #. TRANSLATORS: Practice hint
 #: course/lesson-18-for-loops/lesson.bbcode:77
-#, fuzzy
-msgid "Use [code]for number in range(board_size.y - 1):[/code] to loop enough times."
-msgstr "使用[code]for number in range(board_size.y - 1):[/code]进行足够次数的循环。"
+msgid "The robot starts on row [code]0[/code], so it needs to move [code]board_size.y - 1[/code] steps to reach the last row. Call [code]range(board_size.y - 1)[/code] to create an array with that many numbers to loop over."
+msgstr ""
+
+#. TRANSLATORS: Practice hint
+#: course/lesson-18-for-loops/lesson.bbcode:77
+msgid "Use [code]for number in range(board_size.y - 1):[/code] and add [code]Vector2(0, 1)[/code] to [code]cell[/code] inside the loop. The loop variable [code]number[/code] is only a counter here, so we don't need to use it."
+msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Improving code with a for loop"
 msgstr "使用 for 循环改进代码"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "Use a [code]for[/code] loop to remove the duplicate code in the [code]run()[/code] function."
 msgstr "使用 [code]for[/code] 循环简化 [code]run()[/code] 函数中的重复代码。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "In this practice, we revisit the turtle and drawing rectangles."
 msgstr "在这个练习中，我们又重新请到了小海龟来绘制矩形。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "With our new knowledge of [code]for[/code] loops, we can condense this code to take up less space and make it easier to modify."
 msgstr "借助新知识 [code]for[/code] 循环，我们可以压缩此代码，占用更少的空间并更易于修改。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "The turtle should draw three squares in a horizontal line. The squares should be 100 pixels apart."
 msgstr "小海龟应该在水平方向上画三个正方形。 正方形应相距 100 像素。"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 msgid "In the past we had to copy and paste code to draw multiple rectangles. Let's revisit previous code and improve it with a for loop."
 msgstr "在过去，要绘制多个矩形必须复制和粘贴代码。 让我们重新审视以前的代码并使用 for 循环对其进行改进。"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-18-for-loops/lesson.bbcode:101
+#: course/lesson-18-for-loops/lesson.bbcode:111
 #, fuzzy
 msgid "Use the line [code]for number in range(3):[/code]"
 msgstr "使用以下代码行：[code]for number in range(3):[/code]"
@@ -6100,12 +6129,14 @@ msgstr "准确地说，字典使用[i]哈希算法[/i]（hashing algorithm）。
 
 #. TRANSLATORS: Note content
 #: course/lesson-25-creating-dictionaries/lesson.bbcode:47
-msgid "In this case, hashing consists of converting a given key into a unique whole number. The dictionary then uses that number as an array's index!"
+#, fuzzy
+msgid "In this case, hashing consists of converting a given key into a whole number. The dictionary then uses that number as an array's index!"
 msgstr "对字典来说，哈希算法将给定的key转换为一个唯一的整数。 字典就能用这个数字作为数组的索引了！"
 
 #. TRANSLATORS: Note content
 #: course/lesson-25-creating-dictionaries/lesson.bbcode:48
-msgid "That's how a dictionary works: when you give it a key, it converts it into a unique index and uses that index to retrieve the corresponding value in the computer's memory."
+#, fuzzy
+msgid "That's how a dictionary works: when you give it a key, it converts it into a index and uses that index to retrieve the corresponding value in the computer's memory."
 msgstr "这就是字典的工作原理：当你给它一个key时，它会将它转换为一个唯一的索引，并使用该索引来检索计算机内存中的相应值（也就是数组）。"
 
 #. TRANSLATORS: Note content
@@ -6815,6 +6846,30 @@ msgstr "[code]String[/code] 类型表示你需要写一个文本字符串，也�
 msgid "Learn to Code From Zero with Godot"
 msgstr "从零开始学习的godot"
 
+#~ msgid "The robot starts with 100 health and will take 50 damage."
+#~ msgstr "机器人有 100 点起始生命值，会受到 50 点伤害。"
+
+#~ msgid "This time, use a [code]for[/code] loop in the [code]move_to_bottom()[/code] function to have it move to the bottom of the board."
+#~ msgstr "这一次，在 [code]move_to_bottom()[/code] 函数中使用 [code]for[/code] 循环让它移动到棋盘的底部。"
+
+#~ msgid "The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code]."
+#~ msgstr "棋盘大小由变量 [code]Vector2[/code] [code]board_size[/code] （棋盘大小）决定。"
+
+#~ msgid "The robot's starting cell is [code]Vector2(2, 0)[/code]."
+#~ msgstr "机器人的起始单元是 [code]Vector2(2, 0)[/code]。"
+
+#, fuzzy
+#~ msgid "You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards"
+#~ msgstr "你需要修改 [code]cell[/code] 的 [code]y[/code] 子变量，让机器人向下移动"
+
+#, fuzzy
+#~ msgid "Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code]"
+#~ msgstr "调用 [code]range(n)[/code] 会创建一个从 [code]0[/code] 到 [code]n - 1[/code] 的数字列表。"
+
+#, fuzzy
+#~ msgid "Use [code]for number in range(board_size.y - 1):[/code] to loop enough times."
+#~ msgstr "使用[code]for number in range(board_size.y - 1):[/code]进行足够次数的循环。"
+
 #~ msgid "The function still works the same way. You can run it below."
 #~ msgstr "这个函数仍然以相同的方式运行。 你可以在下面执行它。"
 
@@ -6923,9 +6978,6 @@ msgstr "从零开始学习的godot"
 
 #~ msgid "Our robot has decided to stand at the top of the board."
 #~ msgstr "我们的机器人决定站在棋盘的顶端。"
-
-#~ msgid "Complete the [code]move_to_bottom()[/code] function so the robot moves to the bottom of the board."
-#~ msgstr "写好 [code]move_to_bottom()[/code] 函数，使机器人移动到棋盘底部。"
 
 #~ msgid ""
 #~ "[code]var numbers = [0, 1, 2]\n"

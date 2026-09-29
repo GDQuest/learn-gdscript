@@ -1630,22 +1630,22 @@ msgstr "ダメージ量は正しい値です。"
 msgid "It looks like the take_damage function is missing; did you remove it?"
 msgstr "take_damage関数が欠落しているようです。削除しましたか？"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:78
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:108
 #, fuzzy
 msgid "It looks like amount isn't reduced by a percentage. Did you multiply it by a value less than 1?"
 msgstr "amount がパーセンテージ分減っていないようです。1 未満の値で乗算していませんか？"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:84
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:114
 #, fuzzy
 msgid "The character did not take half damage despite being level 3. Did you multiply the amount by 0.5 to reduce it?"
 msgstr "キャラクターはレベル3ですが、ダメージが半分になっていません。ダメージ量を0.5倍して軽減しましたか？"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:88
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:118
 #, fuzzy
 msgid "The character appears not to be taking full damage when their level is below 3. Did you use a condition to limit damage reduction to when the level is greater or equal to 3?"
 msgstr "キャラクターのレベルが3未満の場合、ダメージを完全に受けていないようです。レベルが3以上の場合にのみダメージ軽減を適用する条件を設定しましたか？"
 
-#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:90
+#: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:120
 #, fuzzy
 msgid "The character appears to be taking 0 damage when its level is less than 3. Did you subtract the amount to health when the level is less than 3?"
 msgstr "キャラクターのレベルが3未満のとき、ダメージが0になっているようです。レベルが3未満のときに、HPからその分を差し引きましたか？"
@@ -1659,12 +1659,12 @@ msgstr "ベクトルを使用してスケールを増加させてください"
 msgid "The Scale Is Correct After Gaining Multiple Levels"
 msgstr ""
 
-#: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:38
+#: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:35
 #, fuzzy
 msgid "It looks like the scale isn't increasing by some vector. Did you add a vector to scale?"
 msgstr "スケールが特定のベクトル分だけ増加していないようです。スケールにベクトルを追加しましたか？"
 
-#: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:48
+#: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:45
 #, fuzzy
 msgid "scale's value is %s; It should be (1.4, 1.4) after levelling up 2 times."
 msgstr "scaleの値は%sです。レベルアップを2回行った後は(1.4, 1.4)になるはずです。"
@@ -1699,43 +1699,49 @@ msgstr "scaleの値は%sです。リセット後は(1.0, 1.0)になるはずで�
 msgid "position's value is %s; It should be (0.0, 0.0) after resetting."
 msgstr "positionの値は%sです。リセット後は(0.0, 0.0)になるはずです。"
 
-#: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:11
-#: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:11
+#: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:13
+#: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:13
 #, fuzzy
-msgid "Robot Gets To Bottom Of Board"
+msgid "Robot Moves To Bottom Row"
 msgstr "ロボットがボードの底部に到達しました"
 
-#: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:12
+#: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:15
 #, fuzzy
-msgid "Use While Loop"
+msgid "Use a While Loop to Move"
 msgstr "Whileループを使用する"
 
-#: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:17
-#: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:17
-#, fuzzy
-msgid "The robot isn't at the bottom of the game board. Did you increase its cell.y coordinate?"
-msgstr "ロボットがゲームボードの最下部ではありません。cell.y座標を増やしましたか？"
-
 #: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:23
-#, fuzzy
-msgid "Your code has no while loop. You need to use a while loop to complete this practice, even if there are other solutions!"
-msgstr "コードに while ループがありません。他の解決策があったとしても、この演習を完了するには while ループを使用する必要があります！"
+msgid "The robot stopped above the bottom row. The cell.y member variable should be equal to board_size.y - 1 (the last row in the board)."
+msgstr ""
 
-#: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:12
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:40
-#: course/lesson-21-strings/string_array/TestsStringArray.gd:12
+#: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:26
+msgid "The robot moved below the bottom row. The cell.y member variable should be equal to board_size.y - 1 (the last row in the board)."
+msgstr ""
+
+#: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:40
+msgid "Your while loop needs to contain the code that moves the robot."
+msgstr ""
+
+#: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:15
 #, fuzzy
-msgid "Use For Loop"
+msgid "Use a For Loop to Move"
 msgstr "Forループを使用する"
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:23
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:48
-#: course/lesson-21-strings/string_array/TestsStringArray.gd:23
-#: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:40
-#: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:39
-#, fuzzy
-msgid "Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!"
-msgstr "コードにforループがありません。他の解決策があったとしても、この演習を完了するにはforループを使用する必要があります！"
+msgid "The robot stopped above the bottom row. Its cell.y should be equal to board_size.y - 1."
+msgstr ""
+
+#: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:26
+msgid "The robot moved below the bottom row. Its cell.y should be equal to board_size.y - 1."
+msgstr ""
+
+#: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:40
+msgid "Your for loop needs to contain the code that moves the robot."
+msgstr ""
+
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:40
+msgid "Use a For Loop to Draw Rectangles"
+msgstr ""
 
 #: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:41
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:40
@@ -1743,37 +1749,41 @@ msgstr "コードにforループがありません。他の解決策があった
 msgid "Draw Three Squares"
 msgstr "3つの四角形を描きます。"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:42
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:43
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:41
 #, fuzzy
 msgid "Squares Are All 100 By 100"
 msgstr "正方形はすべて100×100です。"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:43
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:46
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:43
 #, fuzzy
 msgid "Shapes Are 100 Pixels Apart"
 msgstr "図形同士の間隔は100ピクセルです。"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:54
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:62
+msgid "Your for loop needs to contain the code to draw the rectangles."
+msgstr ""
+
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:67
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:48
 #, fuzzy
 msgid "You drew %s squares but you need to draw 3."
 msgstr "%s個の正方形を描きましたが、3個描く必要があります。"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:70
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:81
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:56
 #, fuzzy
 msgid "Shape3D number %s is not a square of size 100 by 100."
 msgstr "Shape3D番号%sは100×100の正方形ではありません。"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:77
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:88
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:74
 #, fuzzy
 msgid "There are fewer than 3 shapes, we can't test if shapes are 100 pixels apart."
 msgstr "図形が3つ未満のため、図形同士が100ピクセル離れているかどうかをテストできません。"
 
-#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:85
+#: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:96
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:81
 #, fuzzy
 msgid "Shapes are not separated by 100 pixels on the X axis."
@@ -1907,6 +1917,11 @@ msgstr "ロボットの移動経路が robot_path 配列と一致していませ
 msgid "Did you use a for loop to call robot.move_to() with each cell in robot_path?"
 msgstr ""
 
+#: course/lesson-21-strings/string_array/TestsStringArray.gd:12
+#, fuzzy
+msgid "Use For Loop"
+msgstr "Forループを使用する"
+
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:13
 #, fuzzy
 msgid "Robot Combo Is Correct"
@@ -1916,6 +1931,11 @@ msgstr "ロボットのコンボは正しい"
 #, fuzzy
 msgid "The run function is missing; did you remove it?"
 msgstr "run関数がありません。削除しましたか？"
+
+#: course/lesson-21-strings/string_array/TestsStringArray.gd:23
+#, fuzzy
+msgid "Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!"
+msgstr "コードにforループがありません。他の解決策があったとしても、この演習を完了するにはforループを使用する必要があります！"
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:34
 #, fuzzy
@@ -2143,20 +2163,36 @@ msgstr "すべてのアイテムが表示されています"
 msgid "Code Uses A For Loop"
 msgstr "コードではforループが使用されています"
 
-#: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:26
+#: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:19
+msgid "The number of items displayed does not match the number of items in the inventory. Did you display each item exactly once?"
+msgstr ""
+
+#: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:29
 #, fuzzy
 msgid "The displayed items do not match the inventory variable's content. Did you call the display_item() function for each item in the inventory?"
 msgstr "表示されているアイテムが、インベントリ変数の内容と一致していません。インベントリ内の各アイテムについて、display_item() 関数を呼び出しましたか？"
+
+#: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:44
+msgid "Your code does not use a for loop to call display_item(). Please make sure you display each item inside the loop."
+msgstr ""
 
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:11
 #, fuzzy
 msgid "All Units Are Displayed"
 msgstr "すべてのユニットが表示されています"
 
-#: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:26
+#: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:19
+msgid "The number of units displayed does not match the number of units in the units dictionary. Did you place each unit exactly once?"
+msgstr ""
+
+#: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:29
 #, fuzzy
 msgid "The displayed units do not match the units variable's content. Did you call the place_unit() function for each unit in the units dictionary?"
 msgstr "表示されているユニットがunits変数の内容と一致していません。units辞書内の各ユニットに対してplace_unit()関数を呼び出しましたか？"
+
+#: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:43
+msgid "Your code does not use a for loop to call place_unit(). Please make sure you place each unit inside the loop."
+msgstr ""
 
 #: course/lesson-27-value-types/display-energy/TestDisplayingEnergy.gd:11
 #, fuzzy
@@ -2355,48 +2391,61 @@ msgstr "何も描画されていません。move_forward() を呼び出してい
 msgid "The drawn shape is not a square of length 200 pixels."
 msgstr "描画された図形は、一辺が200ピクセルの正方形ではありません。"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:13
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:19
 #, fuzzy
 msgid "Draw Three Squares Of 200 Pixels"
 msgstr "200ピクセルの正方形を3つ描画してください"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:18
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:26
+msgid "Reuse The draw_square() Function"
+msgstr ""
+
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:34
+msgid "You need to use the predefined draw_square() function inside draw_three_squares() in this exercise. This avoids duplicating the turtle instructions by hand."
+msgstr ""
+
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:39
+#, fuzzy
+msgid "You need to define a function named draw_three_squares()."
+msgstr "3つの正方形を描画する必要があります。"
+
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:57
 #, fuzzy
 msgid "Nothing drawn. Did you not call draw_square()?"
 msgstr "何も描画されていません。draw_square() を呼び出していますか？"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:21
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:60
 #, fuzzy
 msgid "You only drew one square. You need to draw three."
 msgstr "正方形を1つしか描いていません。3つ描く必要があります。"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:23
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:62
 #, fuzzy
 msgid "You need to draw three squares."
 msgstr "3つの正方形を描画する必要があります。"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:26
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:28
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:65
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:67
 #, fuzzy
 msgid "You drew more than three squares. You need to draw only three!"
 msgstr "3つ以上の正方形を描いてしまいました。描くのは3つだけにしてください！"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:34
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:73
 #, fuzzy
 msgid "Shape3D number %s has too few corners! Did you change the draw_square() function?"
 msgstr "Shape3D番号%sの角の数が少なすぎます！draw_square()関数を変更しましたか？"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:39
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:80
 #, fuzzy
 msgid "Shape3D number %s has too many corners! Did you change the draw_square() function?"
 msgstr "Shape3D番号 %s の角の数が多すぎます！draw_square() 関数を変更しましたか？"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:44
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:87
 #, fuzzy
 msgid "Shape3D number %s is not a square of length 200 pixels. Did you change the draw_square() function?"
 msgstr "Shape3Dの番号%sは、一辺が200ピクセルの正方形ではありません。draw_square()関数を変更しましたか？"
 
-#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:54
+#: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:99
 msgid "The squares should not overlap. Did you move the turtle between drawing each square?"
 msgstr "正方形同士が重ならないようにしてください。各正方形を描くたびに、タートルを移動させましたか？"
 
@@ -2681,15 +2730,19 @@ msgstr "関数 `%s` がそれ自体を呼び出します。これにより無限
 msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr "break文のない永久に実行される while ループ（while true）があります。これはアプリをフリーズさせます。"
 
-#: ui/UIPractice.gd:432
+#: ui/UIPractice.gd:433
+msgid "You typed \"%s\"; did you mean \"%s\"?"
+msgstr ""
+
+#: ui/UIPractice.gd:450
 msgid "Running Your Code..."
 msgstr "コードを実行しています..."
 
-#: ui/UIPractice.gd:444
+#: ui/UIPractice.gd:462
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "コード内にゼロ除算があります。 コード内ではゼロで除算することはできません。 コードに\"/ 0\"または\"% 0\"が含まれていないことを確認してください。"
 
-#: ui/UIPractice.gd:516
+#: ui/UIPractice.gd:608
 msgid "Running Tests..."
 msgstr "テストを実行中..."
 
@@ -2706,7 +2759,7 @@ msgstr "問題の種類を選択し、下のボックスに内容を入力して
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr "学習に関する質問やサポートが必要な場合は、[url=https://discord.gg/bNj469SYQj]Discord のコミュニティに参加してください[/url]。"
 
-#: ui/components/popups/ReportFormPopup.gd:132
+#: ui/components/popups/ReportFormPopup.gd:129
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr "翻訳は非公式であり、コミュニティによって管理されています。協力したい場合は、[url=https://github.com/GDQuest/learn-gdscript-translations/#readme]アプリの翻訳に協力する方法を確認してください[/url]。"
 
@@ -2776,6 +2829,14 @@ msgstr "続ける"
 #, fuzzy
 msgid "Learn to Code From Zero with Godot"
 msgstr "Godotでゼロからプログラミングを学ぶ"
+
+#, fuzzy
+#~ msgid "The robot isn't at the bottom of the game board. Did you increase its cell.y coordinate?"
+#~ msgstr "ロボットがゲームボードの最下部ではありません。cell.y座標を増やしましたか？"
+
+#, fuzzy
+#~ msgid "Your code has no while loop. You need to use a while loop to complete this practice, even if there are other solutions!"
+#~ msgstr "コードに while ループがありません。他の解決策があったとしても、この演習を完了するには while ループを使用する必要があります！"
 
 #~ msgid "in"
 #~ msgstr "in"
