@@ -15,6 +15,7 @@ This document lists changes between releases.
 - L16.P1, L17.P1, L17.P2: Prevent passing with an empty loop (#1019)
 - L17.P1: Clarify moving to the end of the board, improve practice feedback (#985)
 - L18: Change some presented array values to distinguish them from accessed indices (#892)
+- L23: Correct hashing algorithm explanation (#925)
 
 ### Bug fixes
 
