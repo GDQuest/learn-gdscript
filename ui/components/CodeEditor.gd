@@ -22,6 +22,7 @@ const EDITOR_COLLAPSE_ICON := preload("res://ui/assets/icons/collapse.png")
 	get = get_text, set = set_text # (String, MULTILINE)
 
 var _initial_text := ""
+var _mobile_key_callback
 
 # When pressing the run button, we disable buttons until the checks complete.
 # Once done, we use this var to restore the buttons' previous disabled state.
@@ -78,10 +79,10 @@ func _ready() -> void:
 	slice_editor.grab_focus()
 
 	if not Engine.is_editor_hint() and OS.has_feature("web"):
-		var key_callback = JavaScriptBridge.create_callback(_on_mobile_key_received)
+		_mobile_key_callback = JavaScriptBridge.create_callback(_on_mobile_key_received)
 		var window = JavaScriptBridge.get_interface("window")
 		if window:
-			window.godotMobileCallback = key_callback
+			window.godotMobileCallback = _mobile_key_callback
 
 	if not Engine.is_editor_hint():
 		for button: BaseButton in _buttons_with_shortcuts:
