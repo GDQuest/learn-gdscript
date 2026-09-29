@@ -421,15 +421,6 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
         event.preventDefault();
         sendKey("Backspace");
         clearInput();
-      } else if (
-        event.inputType === "insertText" ||
-        event.inputType === "insertFromPaste"
-      ) {
-        if (event.data) {
-          event.preventDefault();
-          sendKey(event.data);
-          clearInput();
-        }
       }
     });
 
