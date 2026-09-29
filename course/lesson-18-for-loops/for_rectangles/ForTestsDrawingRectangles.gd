@@ -37,16 +37,29 @@ func _clean_up() -> void:
 
 
 func _define(checks: Array[Check]) -> void:
-	checks.append(Check.new(tr("Use For Loop"), tr(""), test_use_for_loop))
+	checks.append(Check.new(tr("Use a For Loop to Draw Rectangles"), tr(""), test_use_for_loop))
 	checks.append(Check.new(tr("Draw Three Squares"), tr(""), test_draw_three_squares))
-	checks.append(Check.new(tr("Squares Are All 100 By 100"), tr(""), test_squares_are_all_100_by_100))
-	checks.append(Check.new(tr("Shapes Are 100 Pixels Apart"), tr(""), test_shapes_are_100_pixels_apart))
+	checks.append(
+		Check.new(tr("Squares Are All 100 By 100"), tr(""), test_squares_are_all_100_by_100)
+	)
+	checks.append(
+		Check.new(tr("Shapes Are 100 Pixels Apart"), tr(""), test_shapes_are_100_pixels_apart)
+	)
 
 
 func test_use_for_loop() -> String:
-	if not "for" in _slice.current_text:
-		return tr("Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!")
-	return ""
+	var run_function := _analyzer.get_function_named("run")
+	if run_function:
+		for statement in run_function.get_body().get_statements():
+			if statement.get_type() != GDNode.FOR:
+				continue
+			for loop_statement in (statement as GDForNode).get_loop().get_statements():
+				if (
+					loop_statement.get_type() == GDNode.CALL
+					and (loop_statement as GDCallNode).get_function_name() == "draw_rectangle"
+				):
+					return ""
+	return tr("Your for loop needs to contain the code to draw the rectangles.")
 
 
 func test_draw_three_squares() -> String:
@@ -59,9 +72,7 @@ func test_squares_are_all_100_by_100() -> String:
 	var index := 1
 	for p in _points:
 		var jumped_after_drawing_rects = (
-			index == 4
-			and _points.size() == 4
-			and _points.back().size() == 1
+			index == 4 and _points.size() == 4 and _points.back().size() == 1
 		)
 		if jumped_after_drawing_rects:
 			break
@@ -75,7 +86,7 @@ func test_squares_are_all_100_by_100() -> String:
 func test_shapes_are_100_pixels_apart() -> String:
 	if shape_count_fewer_than(3):
 		return tr("There are fewer than 3 shapes, we can't test if shapes are 100 pixels apart.")
-	
+
 	var first_square = _polygons[0]
 	var second_square = _polygons[1]
 	var third_square = _polygons[2]
