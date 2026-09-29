@@ -4,6 +4,10 @@ This document lists changes between releases.
 
 ## Unreleased
 
+### Added
+
+- Add error explanation for value being called as a function or not being a function (#1392, #1393)
+
 ### Bug fixes
 
 - Fix send report button not working (#1390)

@@ -25,7 +25,15 @@ If you wrote some conditions or a piece of code that is meant to produce a value
 "INCOMPATIBLE_TERNARY",,
 "UNUSED_SIGNAL",,
 "RETURN_VALUE_DISCARDED",,
-"PROPERTY_USED_AS_FUNCTION",,
+"PROPERTY_USED_AS_FUNCTION","You get this error when you put parentheses [code]()[/code] after a variable, as if you were calling a function.
+
+The parentheses tell Godot to call that name as a function. The problem is that the variable holds a value like a number, a string, part of a vector, etc., and not a function, so you cannot call it as a function.
+
+For example, [code]position.x[/code] is a [code]float[/code]. Writing [code]position.x()[/code] makes Godot try to call a function named [code]x[/code].","Look at the name right before the parentheses in the error message, and remove those parentheses.
+
+If you want to [b]store or change[/b] a value, use the [b]=[/b] symbol. For example, [code]health = 10[/code] or [code]position.x = 100.0[/code].
+
+If you meant to [b]use[/b] the value, write it without the parentheses. For example, [code]var new_health = health + 20[/code]."
 "CONSTANT_USED_AS_FUNCTION",,
 "FUNCTION_USED_AS_PROPERTY",,
 "INTEGER_DIVISION",,
