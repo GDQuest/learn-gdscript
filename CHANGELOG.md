@@ -14,6 +14,7 @@ This document lists changes between releases.
 - L17.P1: clarify the practice goal and hints, add variables for context on the practice state, and improve the test feedback (#1395)
 - L16.P1, L17.P1, L17.P2: Prevent passing with an empty loop (#1019)
 - L17.P1: Clarify moving to the end of the board, improve practice feedback (#985)
+- L18: Change some presented array values to distinguish them from accessed indices (#892)
 
 ### Bug fixes
 
