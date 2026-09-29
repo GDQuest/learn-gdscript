@@ -95,10 +95,17 @@ func _ready() -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
-	if OS.has_feature("web") and event is InputEventScreenTouch and event.pressed:
-		var window = JavaScriptBridge.get_interface("window")
-		if window and window.focusMobileInput:
-			window.focusMobileInput()
+	if OS.has_feature("web"):
+		var should_focus_mobile_input := false
+		if event is InputEventScreenTouch and event.pressed:
+			should_focus_mobile_input = true
+		elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			should_focus_mobile_input = true
+
+		if should_focus_mobile_input:
+			var window = JavaScriptBridge.get_interface("window")
+			if window and window.focusMobileInput:
+				window.focusMobileInput()
 
 	if event.is_action_pressed("run_code") and not _run_button.disabled:
 		_on_run_button_pressed()
