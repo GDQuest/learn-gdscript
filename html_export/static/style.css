@@ -272,7 +272,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 10;
+  z-index: 10000;
   display: none;
   justify-content: flex-start;
   padding: 6px;
@@ -306,12 +306,12 @@ body {
 
 .mobile-editor-input {
   position: fixed;
-  left: -1000px;
-  top: 0;
+  left: 1px;
+  top: 1px;
   width: 1px;
   height: 1px;
   padding: 0;
   border: 0;
-  opacity: 0;
+  opacity: 0.01;
   pointer-events: none;
 }
