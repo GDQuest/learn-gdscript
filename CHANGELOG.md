@@ -7,6 +7,7 @@ This document lists changes between releases.
 ### Added
 
 - Add error explanation for value being called as a function or not being a function (#1392, #1393)
+- Add error explanation for unsafe property access.
 
 ### Bug fixes
 

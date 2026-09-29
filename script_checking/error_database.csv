@@ -37,7 +37,18 @@ If you meant to [b]use[/b] the value, write it without the parentheses. For exam
 "CONSTANT_USED_AS_FUNCTION",,
 "FUNCTION_USED_AS_PROPERTY",,
 "INTEGER_DIVISION",,
-"UNSAFE_PROPERTY_ACCESS",,
+"UNSAFE_PROPERTY_ACCESS","This error message tells you that Godot couldn't find the member variable you're trying to access. There are two common reasons for this:
+
+1. There is a typo in the name of the member variable.
+2. The value before the dot (.) is not the type of value you expect, so it does not have that member variable.
+
+For example, let's say you have a variable representing a number of characters: [code]var character = 5[/code] and you try to access the [code]y[/code] member variable on it: [code]character.y[/code]. Because [code]character[/code] is a whole number, it has no [code]y[/code] member variable. The error message tells you the type it found ([code]int[/code] in this case).
+
+You also get this error when you try to access a member variable on a [code]null[/code] value (an empty variable).","Look at the value before the dot in the line with the error.
+
+Make sure that the names before and after the dot have no typos. Any difference like a capital letter, one letter missing or being added, or letters being swapped can cause this error.
+
+If the value is the wrong type, check where it comes from. Is it a [code]Vector2[/code] or [code]int[/code]? A [code]Vector2[/code] has [code]x[/code] and [code]y[/code] member variables, but an [code]int[/code] does not."
 "UNSAFE_METHOD_ACCESS","This error message tells you that Godot did not find the function you are trying to call. This either means that:
 
 1. The function does not exist.
