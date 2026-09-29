@@ -1,10 +1,7 @@
 extends Node2D
 
-@export var board_size := Vector2(5, 5)
 @export var cell_size := 64
 @export var line_width := 4
-
-var cell := Vector2(2, 0)
 
 @onready var _label := $Label
 @onready var _robot := $Robot
@@ -25,6 +22,9 @@ func _run() -> void:
 
 
 # EXPORT move_to_end
+var board_size = Vector2(5, 5)
+var cell = Vector2(2, 0)
+
 func move_to_bottom():
 	for number in range(board_size.y - 1):
 		cell += Vector2(0, 1)

@@ -9,6 +9,10 @@ This document lists changes between releases.
 - Add error explanation for value being called as a function or not being a function (#1392, #1393)
 - Add error explanation for unsafe property access.
 
+### Improvements and changes
+
+- L17.P1: clarify the practice goal and hints, add variables for context on the practice state, and improve the test feedback (#1395)
+
 ### Bug fixes
 
 - Fix send report button not working (#1390)

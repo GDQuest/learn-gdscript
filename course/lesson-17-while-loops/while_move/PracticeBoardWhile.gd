@@ -34,7 +34,8 @@ func move_to_bottom():
 
 
 func reset() -> void:
-	_robot.cell = START_CELL
+	cell = START_CELL
+	_robot.cell = cell
 	_update_label()
 
 

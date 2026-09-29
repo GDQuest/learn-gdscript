@@ -75,26 +75,36 @@ The function still works the same way, assuming the robot starts at [code]cell.x
 In the practices, we'll use [code]for[/code] loops in different ways to get you used to using them.
 
 [practice id="using-a-for-loop-to-move-to-the-end-of-the-board" title="Using a for loop to move to the end of the board"]
-[description]Use a for loop to have our robot move from the top of the board to the bottom.[/description]
+[description]Use a for loop to move the robot from the top of the board to the bottom.[/description]
 [goal]
 Once again, the robot has decided to stand at the top of the board.
 
-This time, use a [code]for[/code] loop in the [code]move_to_bottom()[/code] function to have it move to the bottom of the board.
+[b]Your task is to complete the [code]move_to_bottom()[/code] function to move the robot down to the bottom row.[/b]
 
-The board size is determined by the [code]Vector2[/code] variable named [code]board_size[/code].
+We store the robot's position on the board in a variable named [code]cell[/code].
 
-The robot's starting cell is [code]Vector2(2, 0)[/code].
+The board size is stored in a variable named [code]board_size[/code], which holds a [code]Vector2[/code] value.
+
+To move the robot, change [code]cell[/code] one step at a time. If you add [code]Vector2(0, 1)[/code] to [code]cell[/code], the robot will move down one row.
+
+Use a [code]for[/code] loop and the `[code]board_size[/code]` variable to make the function work for any board size.
+
+To check your code, I will call the [code]move_to_bottom()[/code] function. After calling it, [code]cell.y[/code] should be equal to [code]board_size.y - 1[/code]. This is the bottom row of the board.
 [/goal]
 [starting_code]
+var board_size = Vector2(5, 5)
+var cell = Vector2(2, 0)
+
 func move_to_bottom():
 	
 [/starting_code]
 [cursor line="0" column="0"]
 [validator path="for_move/TestPracticeBoardFor.gd"]
 [script_slice path="for_move/PracticeBoardFor.gd" name="move_to_end"]
-[hint]You'll have to alter the [code]y[/code] sub-variable of [code]cell[/code] to move the robot downwards[/hint]
-[hint]Call [code]range(n)[/code] to get a list of numbers from [code]0[/code] to [code]n - 1[/code][/hint]
-[hint]Use [code]for number in range(board_size.y - 1):[/code] to loop enough times.[/hint]
+[hint]The robot starts on row [code]0[/code] and has to get to the last row. Because rows are counted from [code]0[/code], the last row is [code]board_size.y - 1[/code].[/hint]
+[hint][code]cell[/code] is a [code]Vector2[/code]. To move the robot down one row, add [code]Vector2(0, 1)[/code] to [code]cell[/code] (or add 1 to [code]cell.y[/code]).[/hint]
+[hint]The robot starts on row [code]0[/code], so it needs to move [code]board_size.y - 1[/code] steps to reach the last row. Call [code]range(board_size.y - 1)[/code] to create an array with that many numbers to loop over.[/hint]
+[hint]Use [code]for number in range(board_size.y - 1):[/code] and add [code]Vector2(0, 1)[/code] to [code]cell[/code] inside the loop. The loop variable [code]number[/code] is only a counter here, so we don't need to use it.[/hint]
 [docs]board_size,cell,range[/docs]
 [/practice]
 
