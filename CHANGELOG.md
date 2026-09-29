@@ -11,6 +11,7 @@ This document lists changes between releases.
 
 ### Improvements and changes
 
+- L5.P2: Add check that the learner reuses the draw_square() function (#869)
 - L9.P1: Clarify the practice goals (#815)
 - L17.P1: clarify the practice goal and hints, add variables for context on the practice state, and improve the test feedback (#1395)
 - L16.P1, L17.P1, L17.P2: Prevent passing with an empty loop (#1019)
