@@ -321,23 +321,6 @@ func _notification(what: int) -> void:
 		navigate_back()
 
 
-func _open_rich_text_node_meta(metadata: String) -> void:
-	if (
-		metadata.begins_with("https://")
-		or metadata.begins_with("http://") or metadata.begins_with("//")
-	):
-		OS.shell_open(metadata)
-		return
-
-
-func connect_rich_text_node(rich_text_node: RichTextLabel) -> void:
-	if not rich_text_node.bbcode_enabled:
-		return
-	if rich_text_node.meta_clicked.is_connected(_open_rich_text_node_meta):
-		return
-	rich_text_node.meta_clicked.connect(_open_rich_text_node_meta)
-
-
 func set_current_url(_new_url: String) -> void:
 	pass
 

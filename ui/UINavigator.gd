@@ -242,11 +242,6 @@ func _navigate_to() -> void:
 		previous_screen.set_is_current_screen(false)
 		await _transition_to(screen, previous_screen)
 
-	# Connect to RichTextLabel meta links to navigate to different scenes.
-	for node: RichTextLabel in get_tree().get_nodes_in_group("rich_text_label"):
-		assert(node is RichTextLabel)
-		NavigationManager.connect_rich_text_node(node)
-
 	if _course_outliner.visible:
 		if _scene_tween:
 			_scene_tween.kill()

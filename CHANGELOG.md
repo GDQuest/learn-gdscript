@@ -11,6 +11,7 @@ This document lists changes between releases.
 
 ### Improvements and changes
 
+- L1: Remove the "Is this for Godot 4?" note
 - L5.P2: Add check that the learner reuses the draw_square() function (#869)
 - L9.P1: Clarify the practice goals (#815)
 - L17.P1: clarify the practice goal and hints, add variables for context on the practice state, and improve the test feedback (#1395)
@@ -29,6 +30,7 @@ This document lists changes between releases.
 - Fix lesson completed pop up having buttons sometimes go out of the screen after completing the last practice when running the app in another language (#1396)
 - L14.P2: Fix practice tests rejecting correct solutions that didn't reassign amount (#1388)
 - Fix some code examples having a small vertical scroll bar.
+- L1: Fix links to games not opening in the browser
 
 
 ## Learn GDScript From Zero 2.2.0 (2026-08-31)

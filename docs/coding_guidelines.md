@@ -4,12 +4,13 @@ These guidelines help us keep the application understandable, fast enough, and s
 
 ## Writing Code
 
-- Prefer straightforward and inlined procedural code. A reader should be able to follow the main execution order from top to bottom.
+- Prefer straightforward and inlined procedural code. A reader should be able to follow the main execution order from top to bottom in a script as much as possible.
+- Avoid defensive checks so we get clear error messages when doing invalid operations.
 - Use clear, complete names. Long names like `clear_and_rebuild_menu()` are fine when they make the purpose clear. Do not use abbreviations.
-- Keep code in one place when it is used once. Extract a function only when the code is actually duplicated, or if it's a large complex chunk that really benefits from being separated for comprehension.
+- Keep code in one place when it is used once. Extract a function only when the code is actually duplicated, or if it's a large complex chunk that really benefits from being separated for comprehension. Avoid small single-use functions.
 - Do not hide important state changes in unrelated objects or global state.
-- Prefer exchanging stable IDs like enums at system boundaries. Avoid keeping long-lived references to data that can become stale after navigation, reloading, or a language change.
-- Add comments to explain decisions, ownership, or any workarounds we've implemented.
+- Prefer exchanging stable IDs like enums at system boundaries. Avoid keeping long-lived references to data that can become stale after navigation, reloading, or a language change (language in the sense of i18n).
+- Use comments to explain decisions, ownership, to document any workarounds we've implemented. You may also use comments to describe a long or complex piece of code.
 
 ## Scenes and nodes
 

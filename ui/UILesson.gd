@@ -51,7 +51,6 @@ var _base_text_font_size: int = preload("res://ui/theme/fonts/font_text.tres").b
 @onready var _content_container: VBoxContainer = %Content
 @onready var _practices_visibility_container: VBoxContainer = %PracticesContainer
 @onready var _practices_container: VBoxContainer = %Practices
-@onready var _debounce_timer: Timer = %DebounceTimer
 @onready var _glossary_popup: GlossaryPopup = %GlossaryPopup
 @onready var _start_content_width := _content_container.size.x
 
@@ -61,7 +60,6 @@ func _ready() -> void:
 
 	Events.font_size_scale_changed.connect(_update_content_container_width)
 	_update_content_container_width(UserProfiles.get_profile().font_size_scale)
-	_scroll_container.get_v_scroll_bar().value_changed.connect(_on_content_scrolled)
 	TranslationManager.translation_changed.connect(_on_translation_changed)
 
 	if test_lesson and get_parent() == get_tree().root:
@@ -134,12 +132,9 @@ func _build_and_display_content(lesson: BBCodeParser.ParseNode, lesson_number: i
 	for child_node: BBCodeParser.ParseNode in lesson.children:
 		var node_type := child_node.tag
 		if _build_commands.has(node_type):
-			var new_instance: CanvasItem = (_build_commands[node_type] as Callable).call(
-				child_node,
-				_course_index,
-				lesson,
-				user_profile,
-			)
+			var new_instance: CanvasItem = (
+				_build_commands[node_type] as Callable
+			).call(child_node, _course_index, lesson, user_profile)
 			if new_instance and new_instance.get_parent() != _content_blocks:
 				_content_blocks.add_child(new_instance)
 				new_instance.hide()
@@ -242,10 +237,6 @@ func _reveal_up_to_next_quiz() -> void:
 		_practices_visibility_container.show()
 
 
-func _on_content_scrolled(_value: float) -> void:
-	_debounce_timer.start()
-
-
 func _update_content_container_width(new_font_scale: int) -> void:
 	var font_size_multiplier := (
 		float(_base_text_font_size + new_font_scale * 2) / _base_text_font_size
@@ -253,19 +244,21 @@ func _update_content_container_width(new_font_scale: int) -> void:
 	_content_container.custom_minimum_size.x = _start_content_width * font_size_multiplier
 
 
-func _open_glossary_popup(meta: String) -> void:
-	var entry: Glossary.Entry = TextUtils.get_glossary().get_match(meta)
-	if entry == null:
-		return
-	_glossary_popup.setup(entry.term, entry.explanation)
-	_glossary_popup.align_with_mouse.call_deferred(get_global_mouse_position())
-	_glossary_popup.appear.call_deferred()
+func _on_rich_text_meta_clicked(meta: String) -> void:
+	if (meta.begins_with("https://") or meta.begins_with("http://") or meta.begins_with("//")):
+		OS.shell_open(meta)
+	else:
+		var entry: Glossary.Entry = TextUtils.get_glossary().get_match(meta)
+		if entry != null:
+			_glossary_popup.setup(entry.term, entry.explanation)
+			_glossary_popup.align_with_mouse.call_deferred(get_global_mouse_position())
+			_glossary_popup.appear.call_deferred()
 
 
 ## Creates a RichTextLabel instance to use for the lesson content.
 func _create_lesson_rich_text_label() -> RichTextLabel:
 	var instance: RichTextLabel = RichTextLabelRTL.new()
-	instance.meta_clicked.connect(_open_glossary_popup)
+	instance.meta_clicked.connect(_on_rich_text_meta_clicked)
 	instance.fit_content = true
 	instance.scroll_active = false
 	instance.bbcode_enabled = true
