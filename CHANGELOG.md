@@ -28,6 +28,7 @@ This document lists changes between releases.
 - Fix not being able to run a practice after restoring code (#1397)
 - Fix lesson completed pop up having buttons sometimes go out of the screen after completing the last practice when running the app in another language (#1396)
 - L14.P2: Fix practice tests rejecting correct solutions that didn't reassign amount (#1388)
+- Fix some code examples having a small vertical scroll bar.
 
 
 ## Learn GDScript From Zero 2.2.0 (2026-08-31)

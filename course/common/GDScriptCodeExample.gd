@@ -16,6 +16,8 @@ func _ready() -> void:
 	wrap_mode = TextEdit.LINE_WRAPPING_NONE
 	CodeEditorEnhancer.enhance(self)
 	CodeEditorEnhancer.prevent_editable(self)
+	
+	scroll_fit_content_height = true
 
 	if not Engine.is_editor_hint():
 		Events.font_size_scale_changed.connect(_update_size)
