@@ -76,13 +76,16 @@ func _ready() -> void:
 	await get_tree().process_frame
 	_initial_text = text
 
-	slice_editor.grab_focus()
-
 	if not Engine.is_editor_hint() and OS.has_feature("web"):
 		_mobile_key_callback = JavaScriptBridge.create_callback(_on_mobile_key_received)
 		var window = JavaScriptBridge.get_interface("window")
 		if window:
 			window.godotMobileCallback = _mobile_key_callback
+			slice_editor.focus_entered.connect(_on_slice_editor_focus_entered)
+			if not window.isMobileDevice:
+				slice_editor.grab_focus()
+	else:
+		slice_editor.grab_focus()
 
 	if not Engine.is_editor_hint():
 		for button: BaseButton in _buttons_with_shortcuts:
@@ -95,15 +98,16 @@ func _ready() -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
-	if OS.has_feature("web"):
-		if event is InputEventScreenTouch and event.pressed:
-			var window = JavaScriptBridge.get_interface("window")
-			if window and window.focusMobileInput:
-				window.focusMobileInput()
-
 	if event.is_action_pressed("run_code") and not _run_button.disabled:
 		_on_run_button_pressed()
 		accept_event()
+
+
+func _on_slice_editor_focus_entered() -> void:
+	if OS.has_feature("web"):
+		var window = JavaScriptBridge.get_interface("window")
+		if window and window.focusMobileInput:
+			window.focusMobileInput()
 
 
 func _on_mobile_key_received(args: Array) -> void:
