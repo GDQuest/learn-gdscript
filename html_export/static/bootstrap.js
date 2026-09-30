@@ -319,6 +319,8 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       window.matchMedia("(pointer: coarse)").matches ||
       /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
+    window.isMobileDevice = isMobile();
+
     const sendKey = (key) => {
       if (!window.godotMobileCallback) {
         return;
