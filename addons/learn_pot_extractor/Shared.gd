@@ -13,7 +13,9 @@ static var POT_PATTERN := RegEx.create_from_string(
 )
 
 static var GLOSSARY_TERM_RE := RegEx.create_from_string(r'\[glossary term=\\"([^\\]+)\\"\]')
-static var GLOSSARY_TAG_RE := RegEx.create_from_string(r'\[glossary\s+term=(?:"([^"]+)"|([^\s\]]+))\]')
+static var GLOSSARY_TAG_RE := RegEx.create_from_string(
+	"\\[glossary\\s+term=(?:\"([^\"]+)\"|'([^']+)'|([^\\s\\]]+))\\]"
+)
 static var TAG_RE := RegEx.create_from_string(r'\[[^\[]+\]([^\[]+)\[[^\[]+\]')
 static var SPACE_NEWLINE_RE := RegEx.create_from_string(r'\s+\\n')
 static var WHITESPACE_RE := RegEx.create_from_string(r'\s+')
@@ -138,6 +140,19 @@ static func normalize_glossary_tags(raw_string: String) -> String:
 	var finds := GLOSSARY_TAG_RE.search_all(raw_string)
 	for i in range(finds.size() - 1, -1, -1):
 		var find: RegExMatch = finds[i]
-		var term := find.get_string(1) if not find.get_string(1).is_empty() else find.get_string(2)
+		var term := find.get_string(1)
+		if term.is_empty():
+			term = find.get_string(2)
+		if term.is_empty():
+			term = find.get_string(3)
+		# FIXME: normalize the apostrophes around terms. Across all the
+		# languages, we sometimes have typos in the glossary tags that make them
+		# invalid.
+		#
+		# So, we temporarily patch them in the current version of the app, but
+		# we should find a better way to structure the translation files to
+		# avoid that (without invalidating existing translations).
+		if term.begins_with("'") and term.ends_with("'") and term.length() > 1:
+			term = term.substr(1, term.length() - 2)
 		raw_string = raw_string.substr(0, find.get_start()) + '[glossary term="%s"]' % term + raw_string.substr(find.get_end())
 	return raw_string
