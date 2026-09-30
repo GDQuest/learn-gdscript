@@ -446,18 +446,6 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
 
     window.focusMobileInput = focusInput;
 
-    // Mobile browsers may only open the virtual keyboard when focus happens
-    // directly inside a trusted touch interaction. The Godot input event can
-    // arrive after that browser activation window, so focus the hidden input
-    // from the canvas pointer event as well.
-    if (canvas) {
-      canvas.addEventListener("pointerup", (event) => {
-        if (isMobile() && event.pointerType !== "mouse") {
-          focusInput();
-        }
-      }, true);
-    }
-
     if (window.visualViewport) {
       window.visualViewport.addEventListener("resize", updateTabBar);
       window.visualViewport.addEventListener("scroll", updateTabBar);
