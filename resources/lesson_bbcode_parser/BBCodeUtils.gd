@@ -143,7 +143,11 @@ static func get_practice_documentation(practice: BBCodeParser.ParseNode) -> Pack
 	var docs := PackedStringArray()
 	for child: BBCodeParser.ParseNode in practice.children:
 		if child.tag == BBCodeParserData.Tag.DOCS:
-			docs.push_back(_get_text_content(child, true))
+			var split_strings = _get_text_content(child, true).split(",")
+			for documentation_entry: String in split_strings:
+				var entry := documentation_entry.strip_edges()
+				if not entry.is_empty():
+					docs.push_back(entry)
 	return docs
 
 
@@ -232,7 +236,7 @@ static func get_quiz_data(quiz: BBCodeParser.ParseNode) -> QuizData:
 	data.multiple = quiz.attributes.get("multiple", "false") == "true"
 	data.content = clean_text_content(_get_text_content(quiz, false))
 	data.content_tr = get_comments(quiz)
-	
+
 
 	if quiz.tag == BBCodeParserData.Tag.QUIZ_INPUT:
 		var quiz_attributes_answer: String = quiz.attributes.get("answer", "")
@@ -274,11 +278,11 @@ static func clean_text_content(text: String) -> String:
 
 static func get_comments(node: BBCodeParser.ParseNode) -> String:
 	var comments := []
-	
+
 	for child in node.children:
 		if child is BBCodeParser.ParseNode and child.tag == BBCodeParserData.Tag.TR:
 			comments.append((child as BBCodeParser.ParseNode).attributes.get("note", ""))
-	
+
 	return "\n".join(comments)
 
 

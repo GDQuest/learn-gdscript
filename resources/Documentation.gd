@@ -16,14 +16,15 @@ var _references := { methods = { }, properties = { } }
 # Returns the raw reference objects for the requested names.
 func get_references(names: PackedStringArray) -> QueryResult:
 	# Load CSV docstrings if necessary.
-	var methods: Dictionary = _references.methods
-	var properties: Dictionary = _references.properties
-	if methods.is_empty() and properties.is_empty():
+	if _references.methods.is_empty() and _references.properties.is_empty():
 		assert(
 			documentation_file != "",
 			"documentation file for `%s` not specified" % [resource_path],
 		)
 		_references = _parse_documentation_file(documentation_file)
+
+	var methods: Dictionary = _references.methods
+	var properties: Dictionary = _references.properties
 
 	var result := QueryResult.new()
 	for name in names:
