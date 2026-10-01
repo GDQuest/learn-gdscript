@@ -12,6 +12,10 @@ This document lists changes between releases.
 
 - Make scroll bar color less contrasted
 
+### Bug fixes
+
+- Fix little dot sometimes drawing on code listings with an animated debug arrow
+
 ## Learn GDScript From Zero 2.3.0 (2026-09-30)
 
 ### Added

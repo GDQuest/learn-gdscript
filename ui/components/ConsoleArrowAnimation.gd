@@ -26,7 +26,7 @@ func _draw() -> void:
 	for rect: Rect2 in highlight_rects:
 		draw_rect(rect, LINE_COLOR, false, LINE_WIDTH, true)
 
-	if _line_slice_limit > 0:
+	if _line_slice_limit > 1:
 		draw_polyline(_baked_line_points.slice(0, _line_slice_limit), LINE_COLOR, LINE_WIDTH, true)
 
 
