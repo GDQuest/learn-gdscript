@@ -11,7 +11,7 @@
 [ext_resource type="CodeHighlighter" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="10_y8wym"]
 [ext_resource type="Texture2D" uid="uid://b086kmokcu8qu" path="res://ui/assets/examples_background.svg" id="11"]
 
-[node name="RunnableCodeExample" type="HBoxContainer" unique_id=1350260712]
+[node name="RunnableCodeExample" type="VBoxContainer" unique_id=1350260712]
 offset_right = 1030.0
 offset_bottom = 278.0
 size_flags_horizontal = 3
@@ -23,6 +23,7 @@ clip_contents = true
 custom_minimum_size = Vector2(240, 220)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="FramePanel" type="PanelContainer" parent="Frame" unique_id=209141511]
 unique_name_in_owner = true
@@ -105,7 +106,6 @@ text = "step"
 [node name="GDScriptCode" type="CodeEdit" parent="." unique_id=175998401]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(400, 260)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/read_only = ExtResource("3")
@@ -113,6 +113,7 @@ context_menu_enabled = false
 shortcut_keys_enabled = false
 scroll_smooth = true
 scroll_fit_content_height = true
+scroll_fit_content_width = false
 caret_blink = true
 syntax_highlighter = ExtResource("10_y8wym")
 draw_tabs = true

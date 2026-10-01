@@ -2,7 +2,7 @@
 # Displays a scene with a GDScript code example. If the scene's root has a
 # `run()` function, pressing the run button will call the function.
 class_name RunnableCodeExample
-extends HBoxContainer
+extends VBoxContainer
 
 signal scene_instance_set
 signal code_updated
@@ -47,26 +47,22 @@ const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/styles/h
 var _scene_instance: CanvasItem:
 	set = _set_scene_instance
 
-var _base_text_font_size := preload("res://ui/theme/fonts/font_text.tres").base_font.msdf_size
 var _current_coroutine: CoroutineController = null
 
 @onready var _debugger: RunnableCodeExampleDebugger
 @onready var _console_arrow_animation: ConsoleArrowAnimation
 @onready var _monitored_variable_highlights := []
 
-@onready var _start_code_example_height := _gdscript_text_edit.size.y
-
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		Events.font_size_scale_changed.connect(_on_Events_font_size_scale_changed)
 
-		_update_gdscript_text_edit_width(UserProfiles.get_profile().font_size_scale)
-
 	_run_button.pressed.connect(run)
 	_step_button.pressed.connect(step)
 	_reset_button.pressed.connect(reset)
 	_frame_container.resized.connect(_center_scene_instance)
+	_gdscript_text_edit.item_rect_changed.connect(_on_ScrollBar_scrolled)
 
 	CodeEditorEnhancer.enhance(_gdscript_text_edit)
 	CodeEditorEnhancer.prevent_editable(_gdscript_text_edit)
@@ -79,7 +75,7 @@ func _ready() -> void:
 	# RunnableCodeExample, we use this as the scene instance.
 	#
 	# This simplifies the process of creating code examples.
-	if not Engine.is_editor_hint() and not scene and get_child_count() > 1:
+	if not Engine.is_editor_hint() and not scene and get_child_count() > 2:
 		var last_child := get_child(get_child_count() - 1)
 		assert(last_child != _gdscript_text_edit and last_child != _frame_container)
 		remove_child(last_child)
@@ -203,6 +199,7 @@ func set_code(new_gdscript_code: String) -> void:
 	if not _gdscript_text_edit:
 		await self.ready
 	_gdscript_text_edit.text = new_gdscript_code
+	_gdscript_text_edit.visible = not new_gdscript_code.is_empty()
 
 
 func set_scene(new_scene: PackedScene) -> void:
@@ -371,7 +368,7 @@ func _reset_monitored_variable_highlights():
 	# Create widgets that underline a variable and display a variable's value
 	# when hovering with the mouse.
 	var monitored_variables := _debugger.monitored_variables
-	var offset := Vector2i(_gdscript_text_edit.position.x as int, 0)
+	var offset := Vector2i(_gdscript_text_edit.position)
 
 	for variable_name: StringName in monitored_variables:
 		var last_line := 0
@@ -451,8 +448,8 @@ func _on_arrow_animation(chars1: Array, chars2: Array, immediate := false) -> vo
 
 	var current_line := _gdscript_text_edit.get_caret_line()
 
-	var offset := Vector2i.ZERO
-	offset.x = floori(_gdscript_text_edit.position.x - 2)
+	var offset := Vector2i(_gdscript_text_edit.position.floor())
+	offset.x -= 2
 
 	var rect1 := Rect2i(_gdscript_text_edit.get_rect_at_line_column(current_line, (chars1[0] as int)+1))
 	var rect2 := Rect2i(_gdscript_text_edit.get_rect_at_line_column(current_line, (chars2[0] as int)+1))
@@ -482,21 +479,12 @@ func _on_arrow_animation(chars1: Array, chars2: Array, immediate := false) -> vo
 	_console_arrow_animation.draw_curve(immediate)
 
 
-func _update_gdscript_text_edit_width(new_font_scale: int) -> void:
-	var font_size_multiplier := (
-		float(_base_text_font_size + new_font_scale * 2)
-		/ _base_text_font_size
-	)
-	_gdscript_text_edit.custom_minimum_size.y = _start_code_example_height * font_size_multiplier
-
-
 func _clear_animated_arrows() -> void:
 	if _console_arrow_animation:
 		_console_arrow_animation.highlight_rects = []
 		_console_arrow_animation.reset_curve()
 
 
-func _on_Events_font_size_scale_changed(new_font_scale: int) -> void:
+func _on_Events_font_size_scale_changed(_new_font_scale: int) -> void:
 	_clear_animated_arrows()
 	_reset_monitored_variable_highlights()
-	_update_gdscript_text_edit_width(new_font_scale)
