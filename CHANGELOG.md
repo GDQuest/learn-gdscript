@@ -2,6 +2,12 @@
 
 This document lists changes between releases.
 
+## Unreleased
+
+### Added
+
+- Added error explanation for "void assignment", e.g. when we're trying to use the return value of a function call that doesn't return a value.
+
 ## Learn GDScript From Zero 2.3.0 (2026-09-30)
 
 ### Added

@@ -16,7 +16,15 @@ You write a piece of code that calculates a value, but that value is not used or
 The error means that you have a piece of code that's not having any effect because it is not used or placed in the correct context.","If you wrote a function inside of another function, extract the inner function, place it later in your code, and remove the indentation.
 
 If you wrote some conditions or a piece of code that is meant to produce a value, make sure to store the result in a variable or use it in an [code]if[/code] statement or something that will use the value."
-"VOID_ASSIGNMENT",,
+"VOID_ASSIGNMENT","You get this error when you use the result of a function that doesn't return a value.
+
+Some functions only do an action, like [code]rotate()[/code] or [code]move_local_x()[/code]. These functions return no result, so there is no value to use in a calculation or to store in a variable.
+
+For example, if you write [code]rotate(2) * delta[/code], you are asking Godot to multiply the result of [code]rotate(2)[/code] by [code]delta[/code]. But [code]rotate()[/code] doesn't return any result; it only rotates a sprite. So there is nothing to multiply by delta and you get this error.","To solve this problem, you need to use a function that returns a value in your code or make the calculation somewhere else without using the result of a function call.
+
+For example, instead of writing [code]rotate(2) * delta[/code], you would write [code]rotate(2 * delta)[/code].
+
+If you're not sure if a function returns a value, check the code reference."
 "NARROWING_CONVERSION",,
 "FUNCTION_MAY_YIELD",,
 "VARIABLE_CONFLICTS_FUNCTION",,
