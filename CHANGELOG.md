@@ -8,6 +8,10 @@ This document lists changes between releases.
 
 - Added error explanation for "void assignment", e.g. when we're trying to use the return value of a function call that doesn't return a value.
 
+### Improvements and changes
+
+- Make scroll bar color less contrasted
+
 ## Learn GDScript From Zero 2.3.0 (2026-09-30)
 
 ### Added
