@@ -1,17 +1,32 @@
 [gd_scene format=3 uid="uid://qt6g4yiimopm"]
 
-[ext_resource type="Script" uid="uid://b4npto03hit85" path="res://ui/components/DebuggerConsoleMonitoredVariable.gd" id="2"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/panel_error_log.tres" id="3"]
+[ext_resource type="Script" uid="uid://p2xc3lkx5ruh" path="res://ui/components/DebuggerConsoleMonitoredVariable.gd" id="2"]
+[ext_resource type="FontVariation" path="res://ui/theme/fonts/font_code.tres" id="3"]
+[ext_resource type="FontVariation" path="res://ui/theme/fonts/font_text.tres" id="4"]
 
-[node name="DebuggerConsoleMonitoredVariable" type="PanelContainer" unique_id=2006603270]
+[node name="DebuggerConsoleMonitoredVariable" type="HBoxContainer" unique_id=2006603270]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_styles/panel = ExtResource("3")
+theme_override_constants/separation = 16
 script = ExtResource("2")
 
-[node name="Label" type="Label" parent="." unique_id=713413045]
+[node name="Name" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
+custom_minimum_size = Vector2(100, 0)
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 18
+text = "Variable"
+
+[node name="Value" type="Label" parent="." unique_id=713413045]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 20
 text = "Value"
+autowrap_mode = 3

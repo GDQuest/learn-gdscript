@@ -1,0 +1,41 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://ui/components/RunnableExampleOutput.gd" id="1"]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableExampleOutputPrintMessage.tscn" id="2"]
+[ext_resource type="FontVariation" path="res://ui/theme/fonts/font_text_bold.tres" id="3"]
+[ext_resource type="FontVariation" path="res://ui/theme/fonts/font_text.tres" id="4"]
+[ext_resource type="Script" path="res://ui/components/SmoothScrollContainer.gd" id="5"]
+
+[node name="RunnableExampleOutput" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+script = ExtResource("1")
+print_message_scene = ExtResource("2")
+
+[node name="Heading" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.717647, 0.701961, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 18
+text = "Output"
+
+[node name="EmptyOutput" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 18
+text = "Nothing printed yet"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+horizontal_scroll_mode = 0
+script = ExtResource("5")
+
+[node name="MessageList" type="VBoxContainer" parent="ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

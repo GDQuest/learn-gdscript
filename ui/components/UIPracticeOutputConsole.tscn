@@ -1,17 +1,19 @@
 [gd_scene format=3 uid="uid://csvdvacbgm85x"]
 
-[ext_resource type="Script" uid="uid://cbc5bjsaovefy" path="res://ui/components/OutputConsole.gd" id="2"]
-[ext_resource type="PackedScene" path="res://ui/components/popups/ExternalErrorPopup.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://ui/components/popups/ErrorOverlayPopup.tscn" id="5"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/panel_normal.tres" id="6"]
+[ext_resource type="Script" path="res://ui/components/UIPracticeOutputConsole.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://cdrh84x70t6mh" path="res://ui/components/OutputConsolePrintMessage.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://crxjfqc0u6cof" path="res://ui/components/popups/ExternalErrorPopup.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://dnix44no1xkey" path="res://ui/components/popups/ErrorOverlayPopup.tscn" id="5"]
+[ext_resource type="StyleBox" uid="uid://lvuws1hlca6y" path="res://ui/theme/styles/panel_normal.tres" id="6"]
 [ext_resource type="Script" uid="uid://dmptnpr0crwmq" path="res://ui/components/SmoothScrollContainer.gd" id="7"]
 
-[node name="OutputConsole" type="PanelContainer" unique_id=1277880461]
+[node name="UIPracticeOutputConsole" type="PanelContainer" unique_id=1277880461]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_vertical = 3
 script = ExtResource("2")
+print_message_scene = ExtResource("3")
 
 [node name="Panel" type="Panel" parent="." unique_id=554613429]
 layout_mode = 2
