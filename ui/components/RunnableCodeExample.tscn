@@ -1,23 +1,44 @@
 [gd_scene format=3 uid="uid://cloqb8kbudf4b"]
 
-[ext_resource type="Script" uid="uid://cpp48of71pbfr" path="res://ui/components/RunnableCodeExample.gd" id="2"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/textedit_stylebox.tres" id="3"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/runnable_example_panel_outline.tres" id="5"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_outline_normal.tres" id="6"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_outline_hover.tres" id="7"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_outline_pressed.tres" id="8"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_outline_normal_muted.tres" id="9"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_outline_focus.tres" id="10"]
-[ext_resource type="CodeHighlighter" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="10_y8wym"]
+[ext_resource type="Script" uid="uid://d3c1n7exwgktd" path="res://ui/components/RunnableCodeExample.gd" id="2"]
+[ext_resource type="StyleBox" uid="uid://dy4ecyn2lrwnr" path="res://ui/theme/styles/runnable_example_panel_outline.tres" id="5"]
+[ext_resource type="StyleBox" uid="uid://db7lq6jykr8mv" path="res://ui/theme/styles/button_outline_normal.tres" id="6"]
+[ext_resource type="StyleBox" uid="uid://c7bk0wc64qlj" path="res://ui/theme/styles/button_outline_hover.tres" id="7"]
+[ext_resource type="StyleBox" uid="uid://drhljwrco26nw" path="res://ui/theme/styles/button_outline_pressed.tres" id="8"]
+[ext_resource type="StyleBox" uid="uid://d3mj05isb1in5" path="res://ui/theme/styles/button_outline_normal_muted.tres" id="9"]
+[ext_resource type="StyleBox" uid="uid://dqjefokkap50q" path="res://ui/theme/styles/button_outline_focus.tres" id="10"]
+[ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="10_y8wym"]
 [ext_resource type="Texture2D" uid="uid://b086kmokcu8qu" path="res://ui/assets/examples_background.svg" id="11"]
 
-[node name="RunnableCodeExample" type="VBoxContainer" unique_id=1350260712]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frame"]
+bg_color = Color(0.0784314, 0.0823529, 0.164706, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_code"]
+content_margin_left = 28.0
+content_margin_top = 16.0
+content_margin_right = 28.0
+content_margin_bottom = 32.0
+bg_color = Color(0.0352941, 0.0392157, 0.12549, 1)
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_focus"]
+
+[node name="RunnableCodeExample" type="PanelContainer" unique_id=1350260712]
 offset_right = 1030.0
 offset_bottom = 278.0
 size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("5")
 script = ExtResource("2")
 
-[node name="Frame" type="Control" parent="." unique_id=1694077977]
+[node name="Content" type="VBoxContainer" parent="." unique_id=934997768]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Frame" type="Control" parent="Content" unique_id=1694077977]
 unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(240, 220)
@@ -25,21 +46,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="FramePanel" type="PanelContainer" parent="Frame" unique_id=209141511]
+[node name="FramePanel" type="PanelContainer" parent="Content/Frame" unique_id=209141511]
 unique_name_in_owner = true
+clip_children = 2
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_styles/panel = ExtResource("5")
+theme_override_styles/panel = SubResource("StyleBoxFlat_frame")
 
-[node name="TextureRect" type="TextureRect" parent="Frame/FramePanel" unique_id=1998497125]
-show_behind_parent = true
+[node name="TextureRect" type="TextureRect" parent="Content/Frame/FramePanel" unique_id=1998497125]
 layout_mode = 2
 texture = ExtResource("11")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="Sliders" type="VBoxContainer" parent="Frame" unique_id=133529752]
+[node name="Sliders" type="VBoxContainer" parent="Content/Frame" unique_id=133529752]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 10.0
@@ -47,7 +68,7 @@ offset_top = 10.0
 offset_right = 50.0
 offset_bottom = 50.0
 
-[node name="ButtonsContainer" type="HBoxContainer" parent="Frame" unique_id=1323725507]
+[node name="ButtonsContainer" type="HBoxContainer" parent="Content/Frame" unique_id=1323725507]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 40)
 layout_mode = 0
@@ -66,7 +87,7 @@ mouse_filter = 0
 theme_override_constants/separation = 8
 alignment = 2
 
-[node name="ResetButton" type="Button" parent="Frame/ButtonsContainer" unique_id=1494799076]
+[node name="ResetButton" type="Button" parent="Content/Frame/ButtonsContainer" unique_id=1494799076]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
@@ -79,7 +100,7 @@ theme_override_styles/hover = ExtResource("7")
 theme_override_styles/focus = ExtResource("10")
 text = "Reset"
 
-[node name="RunButton" type="Button" parent="Frame/ButtonsContainer" unique_id=1248061364]
+[node name="RunButton" type="Button" parent="Content/Frame/ButtonsContainer" unique_id=1248061364]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
@@ -91,7 +112,7 @@ theme_override_styles/hover = ExtResource("7")
 theme_override_styles/focus = ExtResource("10")
 text = "run()"
 
-[node name="StepButton" type="Button" parent="Frame/ButtonsContainer" unique_id=864588792]
+[node name="StepButton" type="Button" parent="Content/Frame/ButtonsContainer" unique_id=864588792]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
@@ -103,17 +124,44 @@ theme_override_styles/hover = ExtResource("7")
 theme_override_styles/focus = ExtResource("10")
 text = "step"
 
-[node name="GDScriptCode" type="CodeEdit" parent="." unique_id=175998401]
+[node name="Results" type="PanelContainer" parent="Content" unique_id=54752701]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/read_only = ExtResource("3")
+theme_override_styles/panel = SubResource("StyleBoxFlat_frame")
+
+[node name="MarginContainer" type="MarginContainer" parent="Content/Results" unique_id=1658356691]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ResultsLayout" type="VBoxContainer" parent="Content/Results/MarginContainer" unique_id=259501926]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ResultsBody" type="VBoxContainer" parent="Content/Results/MarginContainer/ResultsLayout" unique_id=401122970]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="GDScriptCode" type="CodeEdit" parent="Content" unique_id=175998401]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_code")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_code")
 context_menu_enabled = false
+emoji_menu_enabled = false
 shortcut_keys_enabled = false
+drag_and_drop_selection_enabled = false
+middle_mouse_paste_enabled = false
+virtual_keyboard_enabled = false
 scroll_smooth = true
 scroll_fit_content_height = true
-scroll_fit_content_width = false
 caret_blink = true
 syntax_highlighter = ExtResource("10_y8wym")
 draw_tabs = true

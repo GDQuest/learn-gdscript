@@ -1,140 +1,47 @@
-# This console displays messages. It adds new lines automatically
+## This is the base class for the different output consoles that print messages
+## to the user, both in the practice and in the lessons.
+##
+## This script itself does not do much. See the classes that extend it.
 class_name OutputConsole
-extends PanelContainer
+extends Control
 
-signal reference_clicked(file_name, line_nb, character)
-signal line_highlight_requested(line_number)
-signal animate_arrow_requested(chars1, chars2)
+signal messages_changed
 
-const OutputConsoleErrorMessage := preload("./OutputConsoleErrorMessage.gd")
-const OutputConsoleErrorMessageScene := preload("./OutputConsoleErrorMessage.tscn")
-const OutputConsolePrintMessage := preload("./OutputConsolePrintMessage.gd")
-const OutputConsolePrintMessageScene := preload("./OutputConsolePrintMessage.tscn")
-
-var _slice_properties: ScriptSlice = null
+@export var print_message_scene: PackedScene
 
 @onready var _scroll_container: ScrollContainer = %ScrollContainer
-@onready var _message_list: Control = %MessageList
-@onready var _error_popup: Control = %ErrorPopup
-@onready var _error_overlay_popup: ErrorOverlayPopup = %ErrorOverlayPopup
-@onready var _external_error_popup: Control = %ExternalErrorPopup
+@onready var _message_list: VBoxContainer = %MessageList
 
 
-func _ready() -> void:
-	_external_error_popup.set_as_top_level(true)
-	_error_popup.set_as_top_level(true)
-	_error_overlay_popup.hidden.connect(_error_popup.hide)
-	resized.connect(_on_resized)
-
-	MessageBus.print_requested.connect(print_bus_message)
-
-
-func setup(slice: ScriptSlice) -> void:
-	_slice_properties = slice
-
-
-# Adds a message related to a specific line in a specific file
-func print_bus_message(
-		type: int,
-		text: String,
-		file_name: String,
-		line: int,
-		character: int,
-		code: int,
-) -> void:
-	if not is_inside_tree():
-		return
-
-	if type in [
-		MessageBus.MESSAGE_TYPE.ASSERT,
-		MessageBus.MESSAGE_TYPE.ERROR,
-		MessageBus.MESSAGE_TYPE.WARNING,
-	]:
-		print_error(type, text, file_name, line, character, code)
-		return
-
-	print_output([text])
-
-
-# Removes all children
 func clear_messages() -> void:
 	if not is_inside_tree():
 		return
 
-	for message_node in _message_list.get_children():
-		if message_node is OutputConsoleErrorMessage:
-			var console_message_node := message_node as OutputConsoleErrorMessage
-			console_message_node.external_explain_requested.disconnect(_on_external_requested)
-			console_message_node.show_code_requested.disconnect(_on_code_requested)
-			console_message_node.explain_error_requested.disconnect(_on_explain_requested)
-
-		_message_list.remove_child(message_node)
-		message_node.queue_free()
+	for message in _message_list.get_children():
+		_message_list.remove_child(message)
+		message.queue_free()
+	messages_changed.emit()
 
 
-# Prints plain text output. Use this when you want to display the output of a
-# print statement.
 func print_output(values: Array) -> void:
 	if not is_inside_tree():
 		return
 
-	var message_node: OutputConsolePrintMessage = OutputConsolePrintMessageScene.instantiate()
-	message_node.values = values
-	_message_list.add_child(message_node)
+	var message := print_message_scene.instantiate() as Control
+	message.get_node("Label").text = " ".join(PackedStringArray(values))
+	_add_message(message)
 
+
+func _add_message(message: Control) -> void:
+	_message_list.add_child(message)
+	messages_changed.emit()
+	# TODO: Verify if we need to keep this.
 	await get_tree().process_frame
-	_scroll_container.ensure_control_visible(message_node)
+	if is_instance_valid(message) and message.get_parent() == _message_list:
+		_scroll_container.ensure_control_visible(message)
 
 
-func print_error(type: int, text: String, file_name: String, line: int, character: int, code: int) -> void:
-	if not is_inside_tree():
-		return
-
-	# We need to adjust the reported range to show the lines as the student sees them
-	# in the slice editor.
-	var show_lines_from := _slice_properties.get_start_offset()
-	var show_lines_to := _slice_properties.get_end_offset()
-	var character_offset := _slice_properties.leading_spaces
-
-	var message_node := OutputConsoleErrorMessageScene.instantiate() as OutputConsoleErrorMessage
-	message_node.message_severity = type
-	message_node.message_text = text
-	message_node.message_code = code
-
-	if line >= show_lines_from and line <= show_lines_to:
-		message_node.origin_file = file_name
-		message_node.origin_line = line - show_lines_from
-		message_node.origin_char = character - character_offset
-	else:
-		message_node.external_error = true
-
-	_message_list.add_child(message_node)
-	message_node.external_explain_requested.connect(_on_external_requested)
-	message_node.show_code_requested.connect(_on_code_requested)
-	message_node.explain_error_requested.connect(_on_explain_requested)
-
-	await get_tree().process_frame
-	_scroll_container.ensure_control_visible(message_node)
-
-
-func _on_external_requested() -> void:
-	_external_error_popup.show()
-
-
-func _on_code_requested(file_name: String, line: int, character: int) -> void:
-	reference_clicked.emit(file_name, line, character)
-
-
-func _on_explain_requested(error_code: int, error_message: String) -> void:
-	_error_overlay_popup.error_code = error_code
-	_error_overlay_popup.error_message = error_message
-	_error_overlay_popup.show()
-	_error_popup.show()
-
-
-func _on_resized() -> void:
-	_error_popup.set_offsets_preset(Control.PRESET_FULL_RECT)
-
-
-func reset():
+# TODO: unnecessary indirection? Check and if so, remove this in favor of
+# calling clear messages directly.
+func reset() -> void:
 	clear_messages()
