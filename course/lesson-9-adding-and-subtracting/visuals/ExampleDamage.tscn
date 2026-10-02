@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://rws2gldpotla"]
+[gd_scene format=3 uid="uid://dd5l23k1e0bhl"]
 
 [ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://dnivj2puspmd7" path="res://course/common/Robot.tscn" id="3"]
@@ -41,10 +41,10 @@ layout_mode = 2
 gdscript_code = "func take_damage(amount):
 	health -= amount"
 
-[node name="RunButton" parent="RunnableCodeExample/Frame/ButtonsContainer" parent_id_path=PackedInt32Array(367294789, 1323725507) index="1" unique_id=1248061364]
+[node name="RunButton" parent="RunnableCodeExample/Content/Frame/ButtonsContainer" parent_id_path=PackedInt32Array(367294789, 1323725507) index="1" unique_id=1248061364]
 text = "take_damage(25)"
 
-[node name="GDScriptCode" parent="RunnableCodeExample" index="1" unique_id=175998401]
+[node name="GDScriptCode" parent="RunnableCodeExample/Content" parent_id_path=PackedInt32Array(367294789, 934997768) index="2" unique_id=175998401]
 visible = true
 text = "func take_damage(amount):
 	health -= amount"
