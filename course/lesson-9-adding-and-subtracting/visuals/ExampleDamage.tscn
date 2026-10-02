@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://tahih8ses8et"]
+[gd_scene format=3 uid="uid://rws2gldpotla"]
 
-[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://dd2vjgj5yweq5" path="res://course/common/CustomHealthBar.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dnivj2puspmd7" path="res://course/common/Robot.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://bnsvs0r8sytlj" path="res://course/common/CustomHealthBar.tscn" id="4"]
 
 [sub_resource type="GDScript" id="2"]
 script/source = "extends Node2D
@@ -41,7 +41,7 @@ layout_mode = 2
 gdscript_code = "func take_damage(amount):
 	health -= amount"
 
-[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" parent_id_path=PackedInt32Array(367294789, 1323725507) index="1" unique_id=1248061364]
+[node name="RunButton" parent="RunnableCodeExample/Frame/ButtonsContainer" parent_id_path=PackedInt32Array(367294789, 1323725507) index="1" unique_id=1248061364]
 text = "take_damage(25)"
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1" unique_id=175998401]

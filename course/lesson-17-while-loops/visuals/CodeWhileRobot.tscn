@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://crdixprbhq3na"]
+[gd_scene format=3 uid="uid://r0a7lr2imkbl"]
 
-[ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_skrus"]
-[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_xynta"]
-[ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="2_x150g"]
+[ext_resource type="Script" uid="uid://ch5qpoqookmfv" path="res://course/common/GDScriptCodeExample.gd" id="1_skrus"]
+[ext_resource type="FontVariation" path="res://ui/theme/fonts/font_code.tres" id="1_xynta"]
+[ext_resource type="CodeHighlighter" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="2_x150g"]
 
 [node name="CodeWhileRobot" type="CodeEdit" unique_id=1099946201]
 custom_minimum_size = Vector2(300, 190)
@@ -13,11 +13,12 @@ offset_bottom = 190.0
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("1_xynta")
 text = "func move_to_end():
-	while cell.x < board_size.x - 1: 
+	while cell.x < board_size.x - 1:
 		cell.x += 1"
 context_menu_enabled = false
 shortcut_keys_enabled = false
 scroll_smooth = true
+scroll_fit_content_height = true
 caret_blink = true
 syntax_highlighter = ExtResource("2_x150g")
 draw_tabs = true

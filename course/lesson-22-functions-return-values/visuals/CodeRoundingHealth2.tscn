@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://cix1khhxujcqb"]
+[gd_scene format=3 uid="uid://f0oyqh5o78pv"]
 
-[ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_nk5xs"]
-[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_tjtsb"]
-[ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="2_xjgt2"]
+[ext_resource type="Script" uid="uid://ch5qpoqookmfv" path="res://course/common/GDScriptCodeExample.gd" id="1_nk5xs"]
+[ext_resource type="FontVariation" path="res://ui/theme/fonts/font_code.tres" id="1_tjtsb"]
+[ext_resource type="CodeHighlighter" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="2_xjgt2"]
 
 [node name="GDScriptCodeExample" type="CodeEdit" unique_id=1065164886]
 custom_minimum_size = Vector2(300, 80)
@@ -16,6 +16,7 @@ text = "set_text(round(health))"
 context_menu_enabled = false
 shortcut_keys_enabled = false
 scroll_smooth = true
+scroll_fit_content_height = true
 caret_blink = true
 syntax_highlighter = ExtResource("2_xjgt2")
 draw_tabs = true

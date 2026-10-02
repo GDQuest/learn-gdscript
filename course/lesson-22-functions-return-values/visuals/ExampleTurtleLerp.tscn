@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://ddwg7lphnek6k"]
+[gd_scene format=3 uid="uid://7xo0aatnx4a0"]
 
-[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://b4n28mvmpccia" path="res://course/common/turtle/turtle.png" id="2"]
 
 [sub_resource type="GDScript" id="1"]
@@ -31,7 +31,7 @@ func _process(delta):
 	var clipped_mouse_position = clip(get_local_mouse_position())
 
 	turtle.position = lerp(turtle.position, clipped_mouse_position, 2.0 * delta)
-	
+
 
 func clip(target_position: Vector2) -> Vector2:
 	if limits.has_point(target_position):

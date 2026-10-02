@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://c6fpir3458bak"]
+[gd_scene format=3 uid="uid://dmymus580ka44"]
 
-[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dnivj2puspmd7" path="res://course/common/Robot.tscn" id="2"]
 
 [sub_resource type="GDScript" id="2"]
 script/source = "extends \"res://course/lesson-17-while-loops/visuals/Board.gd\"
@@ -10,14 +10,14 @@ var _board_width := 1
 func _update_label() -> void:
 	if not _label:
 		await self.ready
-	
+
 	_label.text = \"cell = Vector2%s\" % [_robot.cell]
 
 
 func run() -> void:
 	reset()
 	_board_width = grid_size.x
-	
+
 	for i in range(_board_width - 1):
 		await get_tree().create_timer(0.5).timeout
 		_robot.cell += Vector2(1, 0)

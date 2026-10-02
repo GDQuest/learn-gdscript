@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://cvfqnk2i4rycf"]
+[gd_scene format=3 uid="uid://dri2bf53mugcw"]
 
 [ext_resource type="Texture2D" uid="uid://b4n28mvmpccia" path="res://course/common/turtle/turtle.png" id="1"]
-[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dnivj2puspmd7" path="res://course/common/Robot.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://dqcfecquh3gvg" path="res://course/lesson-19-creating-arrays/visuals/rocks_shield.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://dbc7usnmjjtbd" path="res://course/lesson-19-creating-arrays/visuals/rocks_gems.png" id="5"]
 
@@ -11,7 +11,7 @@ script/source = "extends \"GameBoard.gd\"
 
 func _ready() -> void:
 	super._ready()
-	
+
 	set_units({
 		$Turtle: Vector2(0, 0),
 		$Robot: Vector2(5, 2),

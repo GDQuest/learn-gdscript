@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://ch6vn8tsye2e5"]
+[gd_scene format=3 uid="uid://dxcnkjxe46pgy"]
 
-[ext_resource type="PackedScene" uid="uid://dnix44no1xkey" path="res://ui/components/popups/ErrorOverlayPopup.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://ui/components/popups/ErrorOverlayPopup.tscn" id="1"]
 
 [node name="ErrorOverlayPopup" unique_id=1803970789 instance=ExtResource("1")]
 custom_minimum_size = Vector2(540, 0)
@@ -9,13 +9,13 @@ script = null
 [node name="ErrorLabel" parent="MarginContainer/Column" parent_id_path=PackedInt32Array(2038824587) index="0" unique_id=1311160456]
 text = "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
 
-[node name="Value" parent="MarginContainer/Column/Content/ErrorExplanation" parent_id_path=PackedInt32Array(577124066) index="1" unique_id=564563128]
+[node name="Value" parent="MarginContainer/Column/Content/ErrorExplanation" parent_id_path=PackedInt32Array(577124066) index="1" unique_id=409994892]
 text = "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
 
-[node name="Value" parent="MarginContainer/Column/Content/ErrorSuggestion" parent_id_path=PackedInt32Array(430840361) index="1" unique_id=417247627]
+[node name="Value" parent="MarginContainer/Column/Content/ErrorSuggestion" parent_id_path=PackedInt32Array(430840361) index="1" unique_id=944217577]
 text = "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
 
-[node name="NoContent" parent="MarginContainer/Column" parent_id_path=PackedInt32Array(2038824587) index="3" unique_id=1738366945]
+[node name="NoContent" parent="MarginContainer/Column" parent_id_path=PackedInt32Array(2038824587) index="3" unique_id=799313833]
 text = "Sorry, we don't have this particular error message covered yet!
 
 Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.

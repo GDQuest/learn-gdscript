@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://dn6yrnqetrc1h"]
+[gd_scene format=3 uid="uid://be3ngw585seuo"]
 
-[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dnivj2puspmd7" path="res://course/common/Robot.tscn" id="2"]
 
 [sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
@@ -29,7 +29,7 @@ gdscript_code = "func level_up():
 	scale += Vector2(0.2, 0.2)
 	# ..."
 
-[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" parent_id_path=PackedInt32Array(907369061, 1323725507) index="1" unique_id=1248061364]
+[node name="RunButton" parent="RunnableCodeExample/Frame/ButtonsContainer" parent_id_path=PackedInt32Array(907369061, 1323725507) index="1" unique_id=1248061364]
 text = "level_up()"
 
 [node name="GDScriptCode" parent="RunnableCodeExample" index="1" unique_id=175998401]

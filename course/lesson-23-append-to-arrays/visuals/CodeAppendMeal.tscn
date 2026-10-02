@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://dei8yag0kk6ag"]
+[gd_scene format=3 uid="uid://57h5meo7eua1"]
 
-[ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_lab83"]
-[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_ml5bg"]
-[ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="2_fioqo"]
+[ext_resource type="Script" uid="uid://ch5qpoqookmfv" path="res://course/common/GDScriptCodeExample.gd" id="1_lab83"]
+[ext_resource type="FontVariation" path="res://ui/theme/fonts/font_code.tres" id="1_ml5bg"]
+[ext_resource type="CodeHighlighter" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="2_fioqo"]
 
 [node name="GDScriptCodeExample" type="CodeEdit" unique_id=908607381]
 custom_minimum_size = Vector2(300, 180)
@@ -19,6 +19,7 @@ func add_order(meal_name):
 context_menu_enabled = false
 shortcut_keys_enabled = false
 scroll_smooth = true
+scroll_fit_content_height = true
 caret_blink = true
 syntax_highlighter = ExtResource("2_fioqo")
 draw_tabs = true

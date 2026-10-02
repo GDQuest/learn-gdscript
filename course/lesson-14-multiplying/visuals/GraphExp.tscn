@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://bcegnuxoqseb6"]
+[gd_scene format=3 uid="uid://npktnl2j3nlm"]
 
-[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://bqx10jgyyomiq" path="res://course/lesson-14-multiplying/visuals/Graph.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://ct75r36mr211y" path="res://course/lesson-14-multiplying/visuals/Graph.tscn" id="2"]
 
 [sub_resource type="Curve2D" id="Curve2D_47lxn"]
 resource_local_to_scene = true
@@ -18,10 +18,10 @@ offset_bottom = 14.0
 [node name="RunnableCodeExample" parent="." unique_id=18372269 instance=ExtResource("1")]
 layout_mode = 2
 
-[node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" parent_id_path=PackedInt32Array(18372269, 1323725507) index="0" unique_id=1494799076]
+[node name="ResetButton" parent="RunnableCodeExample/Frame/ButtonsContainer" parent_id_path=PackedInt32Array(18372269, 1323725507) index="0" unique_id=1494799076]
 visible = false
 
-[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" parent_id_path=PackedInt32Array(18372269, 1323725507) index="1" unique_id=1248061364]
+[node name="RunButton" parent="RunnableCodeExample/Frame/ButtonsContainer" parent_id_path=PackedInt32Array(18372269, 1323725507) index="1" unique_id=1248061364]
 text = "Show Me"
 
 [node name="Graph" parent="RunnableCodeExample" unique_id=1234894201 instance=ExtResource("2")]

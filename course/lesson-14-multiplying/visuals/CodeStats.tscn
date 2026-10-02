@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://c8e16r1i14425"]
+[gd_scene format=3 uid="uid://bvda7f1llkd6a"]
 
-[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_d1dq1"]
-[ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="2"]
-[ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="2_6pacj"]
+[ext_resource type="FontVariation" path="res://ui/theme/fonts/font_code.tres" id="1_d1dq1"]
+[ext_resource type="Script" uid="uid://ch5qpoqookmfv" path="res://course/common/GDScriptCodeExample.gd" id="2"]
+[ext_resource type="CodeHighlighter" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="2_6pacj"]
 
 [node name="CodeStats" type="CodeEdit" unique_id=973735642]
 custom_minimum_size = Vector2(600, 180)
@@ -20,6 +20,7 @@ var defense = 2"
 context_menu_enabled = false
 shortcut_keys_enabled = false
 scroll_smooth = true
+scroll_fit_content_height = true
 caret_blink = true
 syntax_highlighter = ExtResource("2_6pacj")
 draw_tabs = true

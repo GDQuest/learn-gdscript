@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://drdca2jq7agx0"]
+[gd_scene format=3 uid="uid://mb8dh21ef3v6"]
 
-[ext_resource type="FontVariation" uid="uid://ba63gk2x2yx4v" path="res://ui/theme/fonts/font_code.tres" id="1_1fjcb"]
-[ext_resource type="Script" uid="uid://d10jfcumq16kj" path="res://course/common/GDScriptCodeExample.gd" id="1_gwu14"]
-[ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="2_oc3r2"]
+[ext_resource type="FontVariation" path="res://ui/theme/fonts/font_code.tres" id="1_1fjcb"]
+[ext_resource type="Script" uid="uid://ch5qpoqookmfv" path="res://course/common/GDScriptCodeExample.gd" id="1_gwu14"]
+[ext_resource type="CodeHighlighter" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="2_oc3r2"]
 
 [node name="CodeExample" type="CodeEdit" unique_id=375247639]
 custom_minimum_size = Vector2(300, 180)
@@ -19,6 +19,7 @@ text = "func run():
 context_menu_enabled = false
 shortcut_keys_enabled = false
 scroll_smooth = true
+scroll_fit_content_height = true
 caret_blink = true
 syntax_highlighter = ExtResource("2_oc3r2")
 draw_tabs = true

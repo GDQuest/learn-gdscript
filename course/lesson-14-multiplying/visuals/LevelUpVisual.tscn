@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://bc8jh113qfqd8"]
+[gd_scene format=3 uid="uid://btlx7xajivlyy"]
 
-[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://bwphfaq3x4gtd" path="res://course/common/Robot.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dnivj2puspmd7" path="res://course/common/Robot.tscn" id="2"]
 
 [sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
@@ -21,10 +21,10 @@ offset_bottom = 14.0
 [node name="RunnableCodeExample" parent="." unique_id=2047557930 instance=ExtResource("1")]
 layout_mode = 2
 
-[node name="ResetButton" parent="RunnableCodeExample/Frame/HBoxContainer" parent_id_path=PackedInt32Array(2047557930, 1323725507) index="0" unique_id=1494799076]
+[node name="ResetButton" parent="RunnableCodeExample/Frame/ButtonsContainer" parent_id_path=PackedInt32Array(2047557930, 1323725507) index="0" unique_id=1494799076]
 visible = false
 
-[node name="RunButton" parent="RunnableCodeExample/Frame/HBoxContainer" parent_id_path=PackedInt32Array(2047557930, 1323725507) index="1" unique_id=1248061364]
+[node name="RunButton" parent="RunnableCodeExample/Frame/ButtonsContainer" parent_id_path=PackedInt32Array(2047557930, 1323725507) index="1" unique_id=1248061364]
 text = "Level Up!"
 
 [node name="RobotLevel" parent="RunnableCodeExample" unique_id=373006991 instance=ExtResource("2")]
