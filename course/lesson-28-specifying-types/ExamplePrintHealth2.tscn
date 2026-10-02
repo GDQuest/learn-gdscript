@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://c3bwc2g013cxt"]
+[gd_scene format=3 uid="uid://qf0wxj3kbyf"]
 
-[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://ui/components/RunnableExampleOutput.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://b1on88gerd51a" path="res://ui/components/RunnableCodeExampleDebugger.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExampleDebugger.tscn" id="3"]
 
 [sub_resource type="GDScript" id="1"]
 script/source = "extends RunnableExampleOutput
@@ -56,4 +56,4 @@ script = SubResource("1")
 
 [node name="RunnableCodeExampleDebugger" parent="." unique_id=1651393930 instance=ExtResource("3")]
 layout_mode = 2
-monitored_variables = ["health"]
+monitored_variables = Array[String](["health"])

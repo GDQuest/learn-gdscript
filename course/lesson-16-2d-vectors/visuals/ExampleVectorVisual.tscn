@@ -1,7 +1,8 @@
-[gd_scene format=3 uid="uid://crqp83ye71ipp"]
+[gd_scene format=3 uid="uid://bmwtut2j81ebi"]
 
 [ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://course/lesson-16-2d-vectors/visuals/VectorVisual.tscn" id="2"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/runnable_example_variables_panel.tres" id="3_kcli1"]
 
 [node name="PanelContainer" type="PanelContainer" unique_id=88571010]
 custom_minimum_size = Vector2(800, 400)
@@ -15,7 +16,7 @@ layout_mode = 2
 mouse_filter = 2
 scene = ExtResource("2")
 
-[node name="Frame" parent="RunnableCodeExample/Content" index="0" unique_id=1694077977]
+[node name="Frame" parent="RunnableCodeExample/Content" parent_id_path=PackedInt32Array(291087061, 934997768) index="0" unique_id=1694077977]
 mouse_filter = 2
 
 [node name="FramePanel" parent="RunnableCodeExample/Content/Frame" index="0" unique_id=209141511]
@@ -35,5 +36,8 @@ visible = false
 
 [node name="StepButton" parent="RunnableCodeExample/Content/Frame/ButtonsContainer" index="2" unique_id=864588792]
 visible = false
+
+[node name="Results" parent="RunnableCodeExample/Content" parent_id_path=PackedInt32Array(291087061, 934997768) index="1" unique_id=54752701]
+theme_override_styles/panel = ExtResource("3_kcli1")
 
 [editable path="RunnableCodeExample"]

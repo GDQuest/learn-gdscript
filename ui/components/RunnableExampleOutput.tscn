@@ -1,25 +1,25 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://caergpnn0bt0b"]
 
-[ext_resource type="Script" path="res://ui/components/RunnableExampleOutput.gd" id="1"]
+[ext_resource type="Script" uid="uid://cbunv1mnuiv43" path="res://ui/components/RunnableExampleOutput.gd" id="1"]
 [ext_resource type="PackedScene" path="res://ui/components/RunnableExampleOutputPrintMessage.tscn" id="2"]
 [ext_resource type="FontVariation" path="res://ui/theme/fonts/font_text_bold.tres" id="3"]
 [ext_resource type="FontVariation" path="res://ui/theme/fonts/font_text.tres" id="4"]
-[ext_resource type="Script" path="res://ui/components/SmoothScrollContainer.gd" id="5"]
+[ext_resource type="Script" uid="uid://dmptnpr0crwmq" path="res://ui/components/SmoothScrollContainer.gd" id="5"]
 
-[node name="RunnableExampleOutput" type="VBoxContainer"]
+[node name="RunnableExampleOutput" type="VBoxContainer" unique_id=283904819]
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 script = ExtResource("1")
 print_message_scene = ExtResource("2")
 
-[node name="Heading" type="Label" parent="."]
+[node name="Heading" type="Label" parent="." unique_id=222465686]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.717647, 0.701961, 0.847059, 1)
 theme_override_fonts/font = ExtResource("3")
 theme_override_font_sizes/font_size = 18
 text = "Output"
 
-[node name="EmptyOutput" type="Label" parent="."]
+[node name="EmptyOutput" type="Label" parent="." unique_id=1623323735]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
@@ -27,14 +27,14 @@ theme_override_fonts/font = ExtResource("4")
 theme_override_font_sizes/font_size = 18
 text = "Nothing printed yet"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1035322262]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 horizontal_scroll_mode = 0
 script = ExtResource("5")
 
-[node name="MessageList" type="VBoxContainer" parent="ScrollContainer"]
+[node name="MessageList" type="VBoxContainer" parent="ScrollContainer" unique_id=200165217]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
