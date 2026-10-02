@@ -61,7 +61,7 @@ var _scene_tween: Tween
 @onready var _layout_container: HBoxContainer = %LayoutContainer
 @onready var _game_container: Container = %GameContainer
 @onready var _game_view: GameView = %GameView
-@onready var _output_console: OutputConsole = %Console
+@onready var _output_console: UIPracticeOutputConsole = %Console
 @onready var _output_anchors: Control = %OutputAnchors
 @onready var _solution_panel: Control = %SolutionContainer
 @onready var _use_solution_button: Button = %UseSolutionButton

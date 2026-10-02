@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://buv1ux1lrn5ls"]
 
-[ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://ui/components/OutputConsole.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExampleDebugger.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://dv75jelni1tfm" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableExampleOutput.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://b1on88gerd51a" path="res://ui/components/RunnableCodeExampleDebugger.tscn" id="3"]
 
 [sub_resource type="GDScript" id="1"]
-script/source = "extends OutputConsole
+script/source = "extends RunnableExampleOutput
 
 
 @onready var my_name = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
