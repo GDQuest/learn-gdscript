@@ -17,6 +17,7 @@ This document lists changes between releases.
 - Fix little dot sometimes drawing on code listings with an animated debug arrow
 - L19.P2: Fix documentation not displaying
 - Fix unfinished practice pop up and confirmation pop up shooting out of the view (#1417)
+- L11.P1: Make the solution check more lenient. Fix return keyword preventing the code is time dependent check from passing (#1418)
 
 ## Learn GDScript From Zero 2.3.0 (2026-09-30)
 
