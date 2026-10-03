@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://crg1e4eimsv4p"]
+[gd_scene format=3 uid="uid://csb2agp80pa04"]
 
 [ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://ui/components/OutputConsole.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableExampleOutput.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExampleDebugger.tscn" id="3"]
 
 [sub_resource type="GDScript" id="1"]
-script/source = "extends OutputConsole
+script/source = "extends RunnableExampleOutput
 
 
 @onready var speed = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
@@ -47,9 +47,8 @@ gdscript_code = "func run():
 
 [node name="OutputConsole" parent="RunnableCodeExample" unique_id=571951309 instance=ExtResource("2")]
 layout_mode = 2
-size_flags_horizontal = 3
 script = SubResource("1")
 
 [node name="RunnableCodeExampleDebugger" parent="." unique_id=2129553718 instance=ExtResource("3")]
 layout_mode = 2
-monitored_variables = ["speed"]
+monitored_variables = Array[String](["speed"])

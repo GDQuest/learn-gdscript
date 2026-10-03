@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://caqlyi74ocb6d"]
+[gd_scene format=3 uid="uid://5pypx416i57n"]
 
-[ext_resource type="PackedScene" path="res://ui/components/OutputConsole.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableExampleOutput.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExampleDebugger.tscn" id="3"]
 
 [sub_resource type="GDScript" id="1"]
-script/source = "extends OutputConsole
+script/source = "extends RunnableExampleOutput
 
 @onready var character = RunnableCodeExampleDebugger.UNINITIALIZED_VARIABLE_VALUE
 
@@ -45,9 +45,8 @@ gdscript_code = "func run():
 
 [node name="OutputConsole" parent="RunnableCodeExample" unique_id=1161240495 instance=ExtResource("1")]
 layout_mode = 2
-size_flags_horizontal = 3
 script = SubResource("1")
 
 [node name="RunnableCodeExampleDebugger" parent="." unique_id=232934324 instance=ExtResource("3")]
 layout_mode = 2
-monitored_variables = ["character"]
+monitored_variables = Array[String](["character"])

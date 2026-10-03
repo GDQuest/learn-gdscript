@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://c5ojlubxfaffq"]
+[gd_scene format=3 uid="uid://c6u6fde8lmir2"]
 
-[ext_resource type="PackedScene" path="res://ui/components/OutputConsole.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableExampleOutput.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="2"]
 
 [sub_resource type="GDScript" id="1"]
-script/source = "extends OutputConsole
+script/source = "extends RunnableExampleOutput
 
 
 func run():
@@ -26,5 +26,4 @@ gdscript_code = "func run():
 
 [node name="OutputConsole" parent="RunnableCodeExample" unique_id=1339162155 instance=ExtResource("1")]
 layout_mode = 2
-size_flags_horizontal = 3
 script = SubResource("1")

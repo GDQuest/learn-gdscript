@@ -1,35 +1,25 @@
-[gd_scene format=3 uid="uid://b3a8d63ucpxwl"]
+[gd_scene format=3 uid="uid://d4ffrpt5q6dig"]
 
-[ext_resource type="StyleBox" path="res://ui/theme/styles/panel_normal.tres" id="2"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/runnable_example_panel_outline.tres" id="4"]
 [ext_resource type="Script" uid="uid://dxpopecv0bw82" path="res://ui/components/RunnableCodeExampleDebugger.gd" id="5"]
+[ext_resource type="FontVariation" path="res://ui/theme/fonts/font_text_bold.tres" id="6"]
 
-[node name="RunnableCodeExampleDebugger" type="PanelContainer" unique_id=392901046 node_paths=PackedStringArray("variables_container")]
+[node name="RunnableCodeExampleDebugger" type="VBoxContainer" unique_id=392901046]
 offset_right = 781.0
 offset_bottom = 117.0
 size_flags_horizontal = 3
+theme_override_constants/separation = 8
 script = ExtResource("5")
-variables_container = NodePath("MarginContainer/VariablesContainer")
 
-[node name="Panel" type="Panel" parent="." unique_id=1367350711]
+[node name="Label" type="Label" parent="." unique_id=1827394277]
 layout_mode = 2
-theme_override_styles/panel = ExtResource("2")
+theme_override_colors/font_color = Color(0.717647, 0.701961, 0.847059, 1)
+theme_override_fonts/font = ExtResource("6")
+theme_override_font_sizes/font_size = 18
+text = "Variables"
 
-[node name="Outline" type="Panel" parent="." unique_id=1252201656]
-layout_mode = 2
-theme_override_styles/panel = ExtResource("4")
-
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1434405081]
-layout_mode = 2
-
-[node name="VariablesContainer" type="VBoxContainer" parent="MarginContainer" unique_id=643220917]
+[node name="VariablesContainer" type="VBoxContainer" parent="." unique_id=643220917]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-theme_override_constants/separation = 5
-
-[node name="Label" type="Label" parent="MarginContainer/VariablesContainer" unique_id=1827394277]
-layout_mode = 2
-theme_type_variation = &"LabelSmallTitle"
-theme_override_colors/font_color = Color(0.572549, 0.560784, 0.721569, 1)
-text = "Debugger"
+theme_override_constants/separation = 8
