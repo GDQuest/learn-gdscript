@@ -1,10 +1,11 @@
 extends CanvasLayer
 
-@onready var _color_rect := $ColorRect as ColorRect
-@onready var _panel := $PanelContainer as PanelContainer
-@onready var _confirm_button := $PanelContainer/Column/Margin/Column/ConfirmButton as Button
-@onready var _summary_label := $PanelContainer/Column/Margin/Column/Summary as RichTextLabel
-@onready var _title_label: Label = $PanelContainer/Column/Margin/Column/Title
+@onready var _color_rect: ColorRect = %ColorRect
+@onready var _center_container: CenterContainer = %CenterContainer
+@onready var _panel: PanelContainer = %PanelContainer
+@onready var _confirm_button: Button = %ConfirmButton
+@onready var _summary_label: RichTextLabel = %Summary
+@onready var _title_label: Label = %Title
 
 @onready var _title := _title_label.text
 @onready var _summary := _summary_label.text
@@ -21,11 +22,11 @@ func _ready() -> void:
 func _on_visibility_changed() -> void:
 	if visible:
 		_color_rect.show()
-		_panel.show()
+		_center_container.show()
 	else:
 		_confirm_button.grab_focus()
 		_color_rect.hide()
-		_panel.hide()
+		_center_container.hide()
 
 
 func _on_meta_clicked(data) -> void:

@@ -11,6 +11,7 @@ This document lists changes between releases.
 ### Improvements and changes
 
 - Make scroll bar color less contrasted
+- Center all pop-up windows more consistently regardless of the selected language
 
 ### Bug fixes
 

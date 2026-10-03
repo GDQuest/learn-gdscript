@@ -15,6 +15,7 @@ const FRAMERATE_MAP := {
 
 @onready var _panel: PanelContainer = %PanelContainer
 @onready var _color_rect: ColorRect = %ColorRect
+@onready var _center_container: CenterContainer = %CenterContainer
 @onready var _translation_info_button: Button = %TranslationInfoButton
 @onready var _translation_info_popup: CanvasLayer = %TranslationInfoPopup
 @onready var _language_value: OptionButton = %LanguageValue
@@ -52,17 +53,21 @@ func _ready() -> void:
 
 	_apply_button.pressed.connect(_on_apply_settings)
 	_cancel_button.pressed.connect(hide)
-	_panel.visibility_changed.connect(_on_visibility_changed)
+	_center_container.visibility_changed.connect(
+		func _on_visibility_changed() -> void:
+			if _center_container.visible:
+				_font_size_value.grab_focus(),
+	)
 
 
 func show() -> void:
-	_panel.show()
 	_color_rect.show()
+	_center_container.show()
 
 
 func hide() -> void:
-	_panel.hide()
 	_color_rect.hide()
+	_center_container.hide()
 
 
 func _init_languages() -> void:
@@ -74,7 +79,10 @@ func _init_languages() -> void:
 		var language_name: String = language_data.name
 		_language_value.add_item(language_name)
 		_language_value.set_item_metadata(item_index, language_data.code)
-	_language_value.item_selected.connect(_on_language_selected)
+	_language_value.item_selected.connect(
+		func _on_language_selected(_index: int) -> void:
+			_update_translation_status(),
+	)
 
 
 func _init_values() -> void:
@@ -130,10 +138,6 @@ func _on_apply_settings() -> void:
 	_font_size_sample.add_theme_font_override("font", current_font)
 
 
-func _on_language_selected(_index: int) -> void:
-	_update_translation_status()
-
-
 func _update_translation_status() -> void:
 	var language_code := str(_language_value.get_item_metadata(_language_value.selected))
 	if language_code.is_empty() or language_code == TranslationManager.DEFAULT_LOCALE:
@@ -161,8 +165,3 @@ func _on_font_size_changed(value: int) -> void:
 		font_override.base_font = load("res://ui/assets/fonts/OpenDyslexic-Regular.otf")
 	_font_size_sample.add_theme_font_override("font", font_override)
 	_font_size_sample.add_theme_font_size_override("font_size", font_size + value * 2)
-
-
-func _on_visibility_changed() -> void:
-	if _panel.visible:
-		_font_size_value.grab_focus()

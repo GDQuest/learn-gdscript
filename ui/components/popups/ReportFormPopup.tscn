@@ -52,54 +52,54 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.0352941, 0.0392157, 0.129412, 0.627451)
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1038015826]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1038015826]
+unique_name_in_owner = true
+visible = false
+mouse_filter = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=19679680]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(760, 620)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -380.0
-offset_top = -310.0
-offset_right = 380.0
-offset_bottom = 310.0
-
-[node name="Panel" type="Panel" parent="PanelContainer" unique_id=19679680]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("5")
 
-[node name="Column" type="VBoxContainer" parent="PanelContainer" unique_id=1160059086]
+[node name="Column" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=1160059086]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Column" unique_id=1417585157]
+[node name="ProgressBar" type="ProgressBar" parent="CenterContainer/PanelContainer/Column" unique_id=1417585157]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 value = 100.0
 show_percentage = false
 
-[node name="Margin" type="MarginContainer" parent="PanelContainer/Column" unique_id=1658439978]
+[node name="Margin" type="MarginContainer" parent="CenterContainer/PanelContainer/Column" unique_id=1658439978]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Column" type="VBoxContainer" parent="PanelContainer/Column/Margin" unique_id=1048965231]
+[node name="Column" type="VBoxContainer" parent="CenterContainer/PanelContainer/Column/Margin" unique_id=1048965231]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column" unique_id=921754573]
+[node name="Title" type="Label" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=921754573]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"LabelTitle"
 text = "Report an issue"
 horizontal_alignment = 1
 
-[node name="Separator" type="HSeparator" parent="PanelContainer/Column/Margin/Column" unique_id=635862448]
+[node name="Separator" type="HSeparator" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=635862448]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Help" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=1548773843]
+[node name="Help" type="RichTextLabel" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=1548773843]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
@@ -108,7 +108,7 @@ fit_content = true
 script = ExtResource("3_0eu3i")
 metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
-[node name="CategoryOption" type="OptionButton" parent="PanelContainer/Column/Margin/Column" unique_id=235425517]
+[node name="CategoryOption" type="OptionButton" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=235425517]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"OptionButtonReportForm"
@@ -127,7 +127,7 @@ popup/item_2/id = 2
 popup/item_3/text = "Translation issue"
 popup/item_3/id = 3
 
-[node name="Description" type="TextEdit" parent="PanelContainer/Column/Margin/Column" unique_id=1220213830]
+[node name="Description" type="TextEdit" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=1220213830]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 170)
 layout_mode = 2
@@ -137,7 +137,7 @@ theme_override_styles/normal = ExtResource("4_ylxow")
 placeholder_text = "Describe what went wrong, what you were doing, and what you expected to happen."
 wrap_mode = 1
 
-[node name="TranslationGuidance" type="RichTextLabel" parent="PanelContainer/Column/Margin/Column" unique_id=256419405]
+[node name="TranslationGuidance" type="RichTextLabel" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=256419405]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(0, 50)
@@ -147,11 +147,11 @@ fit_content = true
 script = ExtResource("3_0eu3i")
 metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
 
-[node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column" unique_id=949785186]
+[node name="Spacer" type="Control" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=949785186]
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
 
-[node name="SendButton" type="Button" parent="PanelContainer/Column/Margin/Column" unique_id=983365590]
+[node name="SendButton" type="Button" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=983365590]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 68)
 layout_mode = 2
@@ -166,7 +166,7 @@ theme_override_styles/hover = ExtResource("6")
 theme_override_styles/focus = ExtResource("3")
 text = "Send report"
 
-[node name="CloseButton" type="Button" parent="PanelContainer/Column/Margin/Column" unique_id=1077630451]
+[node name="CloseButton" type="Button" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=1077630451]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 54)
 layout_mode = 2

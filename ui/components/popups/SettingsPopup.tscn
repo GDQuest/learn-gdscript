@@ -29,74 +29,74 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.0352941, 0.0392157, 0.129412, 0.627451)
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1769060238]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1769060238]
+unique_name_in_owner = true
+visible = false
+mouse_filter = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1052317713]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(720, 540)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -360.0
-offset_top = -345.5
-offset_right = 360.0
-offset_bottom = 345.5
-
-[node name="Panel" type="Panel" parent="PanelContainer" unique_id=1052317713]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("5")
 
-[node name="Column" type="VBoxContainer" parent="PanelContainer" unique_id=338959222]
+[node name="Column" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=338959222]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Column" unique_id=958420921]
+[node name="ProgressBar" type="ProgressBar" parent="CenterContainer/PanelContainer/Column" unique_id=958420921]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 value = 100.0
 show_percentage = false
 
-[node name="Margin" type="MarginContainer" parent="PanelContainer/Column" unique_id=737564488]
+[node name="Margin" type="MarginContainer" parent="CenterContainer/PanelContainer/Column" unique_id=737564488]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Column" type="VBoxContainer" parent="PanelContainer/Column/Margin" unique_id=999547959]
+[node name="Column" type="VBoxContainer" parent="CenterContainer/PanelContainer/Column/Margin" unique_id=999547959]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Title" type="Label" parent="PanelContainer/Column/Margin/Column" unique_id=1396300607]
+[node name="Title" type="Label" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=1396300607]
 layout_mode = 2
 theme_type_variation = &"LabelTitle"
 text = "Configure the App"
 horizontal_alignment = 1
 
-[node name="Separator" type="HSeparator" parent="PanelContainer/Column/Margin/Column" unique_id=1298529597]
+[node name="Separator" type="HSeparator" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=1298529597]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/Column/Margin/Column" unique_id=989922109]
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=989922109]
 custom_minimum_size = Vector2(680, 460)
 layout_mode = 2
 
-[node name="Settings" type="VBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer" unique_id=961246134]
+[node name="Settings" type="VBoxContainer" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer" unique_id=961246134]
 custom_minimum_size = Vector2(650, 460)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 32
 
-[node name="LanguageSetting" type="VBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=461239063]
+[node name="LanguageSetting" type="VBoxContainer" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=461239063]
 layout_mode = 2
 
-[node name="LabelRow" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting" unique_id=561239064]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow" unique_id=270389053]
+[node name="LabelRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting" unique_id=561239064]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow/HBoxContainer" unique_id=478374928]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow" unique_id=270389053]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow/HBoxContainer" unique_id=478374928]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Pick one of the community-contributed translations.
@@ -104,7 +104,7 @@ Some translations are not complete yet."
 mouse_filter = 1
 text = "Language"
 
-[node name="TranslationInfoButton" type="Button" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow/HBoxContainer" unique_id=561239065]
+[node name="TranslationInfoButton" type="Button" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow/HBoxContainer" unique_id=561239065]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -114,24 +114,24 @@ mouse_default_cursor_shape = 2
 icon = ExtResource("11")
 flat = true
 
-[node name="LanguageValue" type="OptionButton" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow" unique_id=2054986385]
+[node name="LanguageValue" type="OptionButton" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting/LabelRow" unique_id=2054986385]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Pick one of the community-contributed translations.
 Some translations are not complete yet."
 
-[node name="TranslationStatus" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting" unique_id=2054986386]
+[node name="TranslationStatus" type="Label" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LanguageSetting" unique_id=2054986386]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 10)
 layout_mode = 2
 text = "0% of text translated. 0/0 lessons fully translated."
 autowrap_mode = 2
 
-[node name="FontSizeSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=1561891103]
+[node name="FontSizeSetting" type="HBoxContainer" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=1561891103]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting" unique_id=103478442]
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting" unique_id=103478442]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -139,12 +139,12 @@ tooltip_text = "Make all text in the app bigger or smaller."
 mouse_filter = 1
 text = "Text Size"
 
-[node name="ValueContainer" type="VBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting" unique_id=2080703283]
+[node name="ValueContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting" unique_id=2080703283]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 12
 
-[node name="FontSizeValue" type="HSlider" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer" unique_id=1194469808]
+[node name="FontSizeValue" type="HSlider" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer" unique_id=1194469808]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -157,7 +157,7 @@ rounded = true
 tick_count = 3
 ticks_on_borders = true
 
-[node name="SampleText" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer" unique_id=1424915237]
+[node name="SampleText" type="Label" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSizeSetting/ValueContainer" unique_id=1424915237]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -165,10 +165,10 @@ size_flags_horizontal = 3
 text = "Sample text"
 horizontal_alignment = 1
 
-[node name="ScrollSensitivitySetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=1430833562]
+[node name="ScrollSensitivitySetting" type="HBoxContainer" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=1430833562]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/ScrollSensitivitySetting" unique_id=140885755]
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/ScrollSensitivitySetting" unique_id=140885755]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -176,7 +176,7 @@ tooltip_text = "Change how fast the page scrolls when you use the mouse wheel or
 mouse_filter = 1
 text = "Scroll speed"
 
-[node name="ScrollSensitivityValue" type="HSlider" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/ScrollSensitivitySetting" unique_id=403237300]
+[node name="ScrollSensitivityValue" type="HSlider" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/ScrollSensitivitySetting" unique_id=403237300]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -189,11 +189,11 @@ value = 1.0
 tick_count = 2
 ticks_on_borders = true
 
-[node name="FramerateSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=332646761]
+[node name="FramerateSetting" type="HBoxContainer" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=332646761]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting" unique_id=347132921]
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting" unique_id=347132921]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -202,7 +202,7 @@ Lower values use less resources, which helps when running in the browser, but th
 mouse_filter = 1
 text = "Max framerate"
 
-[node name="FramerateValue" type="OptionButton" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting" unique_id=365720388]
+[node name="FramerateValue" type="OptionButton" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FramerateSetting" unique_id=365720388]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -217,10 +217,10 @@ popup/item_1/id = 0
 popup/item_2/text = "No Limit"
 popup/item_2/id = 0
 
-[node name="LowerContrasSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=708106770]
+[node name="LowerContrasSetting" type="HBoxContainer" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=708106770]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LowerContrasSetting" unique_id=392220164]
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LowerContrasSetting" unique_id=392220164]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Reduce the contrast between the text and the background.
@@ -228,7 +228,7 @@ This makes the app easier on your eyes."
 mouse_filter = 1
 text = "Lower contrast"
 
-[node name="LowerContrastCheckBox" type="CheckBox" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LowerContrasSetting" unique_id=1466834113]
+[node name="LowerContrastCheckBox" type="CheckBox" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/LowerContrasSetting" unique_id=1466834113]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -236,10 +236,10 @@ tooltip_text = "Reduce the contrast between the text and the background.
 This makes the app easier on your eyes."
 text = "Enabled"
 
-[node name="FontSetting" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=1429478422]
+[node name="FontSetting" type="HBoxContainer" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings" unique_id=1429478422]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSetting" unique_id=1858131240]
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSetting" unique_id=1858131240]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Switch to a font designed to be easier to read for people with dyslexia.
@@ -247,7 +247,7 @@ This does not work with languages like Chinese and Japanese."
 mouse_filter = 1
 text = "Dyslexia Font"
 
-[node name="DyslexiaFontCheckBox" type="CheckBox" parent="PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSetting" unique_id=196531454]
+[node name="DyslexiaFontCheckBox" type="CheckBox" parent="CenterContainer/PanelContainer/Column/Margin/Column/ScrollContainer/Settings/FontSetting" unique_id=196531454]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -255,15 +255,15 @@ tooltip_text = "Switch to a font designed to be easier to read for people with d
 This does not work with languages like Chinese and Japanese."
 text = "Enabled"
 
-[node name="Spacer" type="Control" parent="PanelContainer/Column/Margin/Column" unique_id=472162055]
+[node name="Spacer" type="Control" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=472162055]
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
 
-[node name="Buttons" type="HBoxContainer" parent="PanelContainer/Column/Margin/Column" unique_id=989525314]
+[node name="Buttons" type="HBoxContainer" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=989525314]
 layout_mode = 2
 alignment = 1
 
-[node name="CancelButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons" unique_id=404171231]
+[node name="CancelButton" type="Button" parent="CenterContainer/PanelContainer/Column/Margin/Column/Buttons" unique_id=404171231]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 68)
 layout_mode = 2
@@ -275,7 +275,7 @@ theme_override_styles/hover = ExtResource("8")
 shortcut = SubResource("4")
 text = "Close"
 
-[node name="ApplyButton" type="Button" parent="PanelContainer/Column/Margin/Column/Buttons" unique_id=1074584283]
+[node name="ApplyButton" type="Button" parent="CenterContainer/PanelContainer/Column/Margin/Column/Buttons" unique_id=1074584283]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 68)
 layout_mode = 2

@@ -19,6 +19,9 @@ script = ExtResource("1")
 min_size = Vector2(0, 0)
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=619614391]
+unique_name_in_owner = true
+visible = false
+mouse_filter = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,6 +40,7 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="ProgressBar" type="ProgressBar" parent="CenterContainer/PanelContainer/Column" unique_id=2049633585]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 value = 100.0
@@ -51,6 +55,7 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="Title" type="Label" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=708395120]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"LabelTitle"
 horizontal_alignment = 1
@@ -61,6 +66,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="Message" type="RichTextLabel" parent="CenterContainer/PanelContainer/Column/Margin/Column" unique_id=1185727900]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -77,6 +83,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="ConfirmButton" type="Button" parent="CenterContainer/PanelContainer/Column/Margin/Column/Buttons" unique_id=900963321]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 68)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -90,6 +97,7 @@ theme_override_styles/focus = ExtResource("8")
 text = "Confirm"
 
 [node name="CancelButton" type="Button" parent="CenterContainer/PanelContainer/Column/Margin/Column/Buttons" unique_id=845867234]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 68)
 layout_mode = 2
 size_flags_horizontal = 4

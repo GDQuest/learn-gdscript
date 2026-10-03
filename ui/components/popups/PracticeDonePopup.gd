@@ -8,17 +8,17 @@ const CLASH_IN_DURATION := 0.2
 var _raw_summary := ""
 var do_fade_background_on_exit := true
 
-@onready var _layout_container := %Layout as Container
-@onready var _game_anchors := %GameAnchors as Control
-@onready var _game_container := %GameContainer as Control
-@onready var _game_texture := %TextureRect as TextureRect
-@onready var _message_anchors := %WellDoneAnchors as Control
-@onready var _message_container := %PanelContainer as PanelContainer
+@onready var _layout_container: Container = %Layout
+@onready var _game_anchors: Control = %GameAnchors
+@onready var _game_container: Control = %GameContainer
+@onready var _game_texture: TextureRect = %TextureRect
+@onready var _message_anchors: Control = %WellDoneAnchors
+@onready var _message_container: PanelContainer = %PanelContainer
 
-@onready var _move_on_button := %MoveOnButton as Button
-@onready var _stay_button := %StayButton as Button
+@onready var _move_on_button: Button = %MoveOnButton
+@onready var _stay_button: Button = %StayButton
 
-@onready var _summary2_label := %Summary2 as RichTextLabel
+@onready var _summary2_label: RichTextLabel = %Summary2
 
 var _scene_tween: Tween
 
@@ -57,19 +57,48 @@ func fade_in(game_container: Control) -> void:
 	_game_container.offset_left = offscreen_offset
 	_game_container.offset_right = offscreen_offset
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_layout_container.set_anchors_and_offsets_preset(Control.PRESET_CENTER, Control.PRESET_MODE_KEEP_SIZE)
+	_layout_container.set_anchors_and_offsets_preset(
+		Control.PRESET_CENTER,
+		Control.PRESET_MODE_KEEP_SIZE,
+	)
 	# Set the texture for the output replication.
-	_game_texture.texture = (game_container.find_child("GameView") as GameView).get_viewport_override().get_texture()
+	_game_texture.texture = (game_container.find_child("GameView") as GameView) \
+			.get_viewport_override() \
+			.get_texture()
 
 	# Fade in the background.
 	_scene_tween = create_tween().set_parallel()
 	_scene_tween.tween_property(self, "self_modulate:a", 1.0, BACKGROUND_FADE_DURATION).from(0.0)
 
 	# Then move the message and the game together to clash at the center.
-	_animate_margin(_message_container, "offset_left", 0.0, CLASH_IN_DURATION, BACKGROUND_FADE_DURATION)
-	_animate_margin(_message_container, "offset_right", 0.0, CLASH_IN_DURATION, BACKGROUND_FADE_DURATION)
-	_animate_margin(_game_container, "offset_left", 0.0, CLASH_IN_DURATION, BACKGROUND_FADE_DURATION)
-	_animate_margin(_game_container, "offset_right", 0.0, CLASH_IN_DURATION, BACKGROUND_FADE_DURATION)
+	_animate_margin(
+		_message_container,
+		"offset_left",
+		0.0,
+		CLASH_IN_DURATION,
+		BACKGROUND_FADE_DURATION,
+	)
+	_animate_margin(
+		_message_container,
+		"offset_right",
+		0.0,
+		CLASH_IN_DURATION,
+		BACKGROUND_FADE_DURATION,
+	)
+	_animate_margin(
+		_game_container,
+		"offset_left",
+		0.0,
+		CLASH_IN_DURATION,
+		BACKGROUND_FADE_DURATION,
+	)
+	_animate_margin(
+		_game_container,
+		"offset_right",
+		0.0,
+		CLASH_IN_DURATION,
+		BACKGROUND_FADE_DURATION,
+	)
 
 	_move_on_button.grab_focus()
 
@@ -91,15 +120,28 @@ func fade_out() -> void:
 
 	# Fade out the background unless another completion popup is replacing this one.
 	if do_fade_background_on_exit:
-		_scene_tween.chain().tween_property(self, "self_modulate:a", 0.0, BACKGROUND_FADE_DURATION).from(1.0)
+		_scene_tween \
+				.chain() \
+				.tween_property(self, "self_modulate:a", 0.0, BACKGROUND_FADE_DURATION) \
+				.from(1.0)
 
 	_scene_tween.tween_callback(_on_fade_out_completed).set_delay(
 		CLASH_IN_DURATION + (BACKGROUND_FADE_DURATION if do_fade_background_on_exit else 0.0)
 	)
 
 
-func _animate_margin(control: Control, margin_name: String, to_value: float, duration: float, delay: float = 0.0) -> void:
-	_scene_tween.tween_property(control, margin_name, to_value, duration).from(control.get(margin_name)).set_ease(Tween.EASE_OUT).set_delay(delay)
+func _animate_margin(
+	control: Control,
+	margin_name: String,
+	to_value: float,
+	duration: float,
+	delay: float = 0.0,
+) -> void:
+	_scene_tween \
+			.tween_property(control, margin_name, to_value, duration) \
+			.from(control.get(margin_name)) \
+			.set_ease(Tween.EASE_OUT) \
+			.set_delay(delay)
 
 
 func _on_fade_out_completed() -> void:

@@ -20,18 +20,23 @@ const NORMAL_FOCUS_STYLEBOX := preload("res://ui/theme/styles/focus_accent.tres"
 @export var strict := false:
 	set = set_strict
 
-@onready var _root_container := $PanelContainer as Container
-@onready var _top_bar := $PanelContainer/Column/ProgressBar as ProgressBar
-@onready var _title_label := $PanelContainer/Column/Margin/Column/Title as Label
-@onready var _message_content := $PanelContainer/Column/Margin/Column/Message as RichTextLabel
+@onready var _root_container: Container = %PanelContainer
+@onready var _center_container: CenterContainer = %CenterContainer
+@onready var _top_bar: ProgressBar = %ProgressBar
+@onready var _title_label: Label = %Title
+@onready var _message_content: RichTextLabel = %Message
 
-@onready var _confirm_button := $PanelContainer/Column/Margin/Column/Buttons/ConfirmButton as Button
-@onready var _cancel_button := $PanelContainer/Column/Margin/Column/Buttons/CancelButton as Button
+@onready var _confirm_button: Button = %ConfirmButton
+@onready var _cancel_button: Button = %CancelButton
 
 
 func _ready():
 	set_as_top_level(true)
 	_root_container.custom_minimum_size = min_size
+	visibility_changed.connect(
+		func _on_visibility_changed() -> void:
+			_center_container.visible = visible,
+	)
 
 	_title_label.text = tr(title)
 	_message_content.text = tr(text_content)

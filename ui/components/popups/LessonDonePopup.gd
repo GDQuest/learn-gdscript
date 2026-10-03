@@ -4,15 +4,16 @@ signal accepted
 
 var _raw_summary := ""
 
-@onready var _panel_container := %PanelContainer as Control
-@onready var _incomplete_summary := %IncompleteSummary as Label
-@onready var _move_on_button := %MoveOnButton as Button
-@onready var _stay_button := %StayButton as Button
+@onready var _panel_container: Control = %PanelContainer
+@onready var _center_container: CenterContainer = %CenterContainer
+@onready var _incomplete_summary: Label = %IncompleteSummary
+@onready var _move_on_button: Button = %MoveOnButton
+@onready var _stay_button: Button = %StayButton
 
-@onready var _summary_label := %Summary as RichTextLabel
+@onready var _summary_label: RichTextLabel = %Summary
 
-@onready var _particles := %Particles as CPUParticles2D
-@onready var _thick_particles := %ThickParticles as CPUParticles2D
+@onready var _particles: CPUParticles2D = %Particles
+@onready var _thick_particles: CPUParticles2D = %ThickParticles
 
 
 func _ready() -> void:
@@ -25,6 +26,10 @@ func _ready() -> void:
 
 	_move_on_button.pressed.connect(_on_button_pressed)
 	_stay_button.pressed.connect(hide)
+	visibility_changed.connect(
+		func _on_visibility_changed() -> void:
+			_center_container.visible = visible,
+	)
 
 
 func _notification(what: int) -> void:
@@ -44,6 +49,7 @@ func popup_centered() -> void:
 	const FADE_IN_START_SCALE := 0.5
 	_panel_container.scale = Vector2(FADE_IN_START_SCALE, FADE_IN_START_SCALE)
 	show()
+	_center_container.show()
 	_panel_container.pivot_offset = _panel_container.size / 2
 
 	const FADE_IN_DURATION := 0.25
