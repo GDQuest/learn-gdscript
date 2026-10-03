@@ -20,8 +20,6 @@ signal denied
 
 func _ready():
 	_root_container.custom_minimum_size = min_size
-	_root_container.reset_size()
-	_root_container.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
 
 	_title_label.text = tr(title)
 	_message_content.text = tr(text_content)
@@ -61,12 +59,8 @@ func set_min_size(value: Vector2) -> void:
 	min_size = value
 	if is_inside_tree():
 		_root_container.custom_minimum_size = min_size
-		_root_container.size = _root_container.custom_minimum_size
-		_root_container.set_anchors_and_offsets_preset(Control.PRESET_CENTER, Control.PRESET_MODE_KEEP_SIZE)
 
 
 func popup() -> void:
 	show()
-	_root_container.size = _root_container.custom_minimum_size
-	_root_container.set_anchors_and_offsets_preset(Control.PRESET_CENTER, Control.PRESET_MODE_KEEP_SIZE)
 	_cancel_button.grab_focus()
