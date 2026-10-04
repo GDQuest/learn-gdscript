@@ -322,13 +322,17 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     window.isMobileDevice = isMobile();
 
     const sendKey = (key) => {
+      setDebugStatus(`SEND ${JSON.stringify(key)}`);
+
       if (!window.godotMobileCallback) {
+        setDebugStatus("SEND but callback missing");
         return;
       }
 
       try {
         window.godotMobileCallback(key);
       } catch (error) {
+        setDebugStatus(`CALLBACK ERROR ${error.message || error}`);
         console.error("Failed to forward mobile keyboard input:", error);
       }
     };
@@ -346,6 +350,18 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
 
     const tabBar = document.createElement("div");
     tabBar.className = "mobile-editor-bar";
+
+    const debugStatus = document.createElement("span");
+    debugStatus.textContent = "Input: idle";
+    debugStatus.style.cssText =
+      "padding:8px;font:12px monospace;color:#fff;white-space:nowrap;";
+
+    const setDebugStatus = (message) => {
+      debugStatus.textContent = `Input: ${message}`;
+      console.log("[mobileKeyboard]", message);
+    };
+
+    tabBar.appendChild(debugStatus);
 
     const tabButton = document.createElement("button");
     tabButton.type = "button";
@@ -404,6 +420,10 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     };
 
     input.addEventListener("beforeinput", (event) => {
+      setDebugStatus(
+        `BEFOREINPUT ${event.inputType} data=${JSON.stringify(event.data)} value=${JSON.stringify(input.value)}`
+      );
+
       if (event.inputType === "insertLineBreak") {
         event.preventDefault();
         sendKey("Enter");
@@ -420,10 +440,24 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     });
 
     input.addEventListener("input", () => {
+      setDebugStatus(`INPUT value=${JSON.stringify(input.value)}`);
       sendInputValue();
     });
 
+    input.addEventListener("compositionstart", () => {
+      setDebugStatus("COMPOSITION START");
+    });
+
+    input.addEventListener("compositionupdate", (event) => {
+      setDebugStatus(`COMPOSITION UPDATE data=${JSON.stringify(event.data)}`);
+    });
+
+    input.addEventListener("compositionend", (event) => {
+      setDebugStatus(`COMPOSITION END data=${JSON.stringify(event.data)}`);
+    });
+
     input.addEventListener("keydown", (event) => {
+      setDebugStatus(`KEYDOWN ${JSON.stringify(event.key)}`);
       if (
         ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Tab"].includes(
           event.key
@@ -434,10 +468,18 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       }
     });
 
-    input.addEventListener("focus", updateTabBar);
-    input.addEventListener("blur", updateTabBar);
+    input.addEventListener("focus", () => {
+      setDebugStatus("FOCUS");
+      updateTabBar();
+    });
+
+    input.addEventListener("blur", () => {
+      setDebugStatus("BLUR");
+      updateTabBar();
+    });
 
     window.focusMobileInput = focusInput;
+    window.setMobileKeyboardDebug = setDebugStatus;
 
     if (window.visualViewport) {
       window.visualViewport.addEventListener("resize", updateTabBar);
