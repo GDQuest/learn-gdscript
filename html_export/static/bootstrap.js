@@ -361,8 +361,6 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
     tabBar.appendChild(tabButton);
     document.body.appendChild(tabBar);
 
-    let isComposing = false;
-
     const clearInput = () => {
       input.value = "";
       input.setSelectionRange(0, 0);
@@ -405,15 +403,6 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
       updateTabBar();
     };
 
-    input.addEventListener("compositionstart", () => {
-      isComposing = true;
-    });
-
-    input.addEventListener("compositionend", () => {
-      isComposing = false;
-      sendInputValue();
-    });
-
     input.addEventListener("beforeinput", (event) => {
       if (event.inputType === "insertLineBreak") {
         event.preventDefault();
@@ -423,13 +412,15 @@ window.GDQUEST = ((/** @type {GDQuestLib} */ GDQUEST) => {
         event.preventDefault();
         sendKey("Backspace");
         clearInput();
+      } else if (event.inputType === "insertText" && event.data) {
+        event.preventDefault();
+        sendKey(event.data);
+        clearInput();
       }
     });
 
     input.addEventListener("input", () => {
-      if (!isComposing) {
-        sendInputValue();
-      }
+      sendInputValue();
     });
 
     input.addEventListener("keydown", (event) => {
