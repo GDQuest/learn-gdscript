@@ -76,14 +76,24 @@ func _ready() -> void:
 	await get_tree().process_frame
 	_initial_text = text
 
+	var window = JavaScriptBridge.get_interface("window")
+	if window and window.setMobileKeyboardDebug:
+		window.setMobileKeyboardDebug(
+			"GODOT READY; web=" + str(OS.has_feature("web")) +
+			"; editor=" + str(Engine.is_editor_hint())
+		)
+
 	if not Engine.is_editor_hint() and OS.has_feature("web"):
 		_mobile_key_callback = JavaScriptBridge.create_callback(_on_mobile_key_received)
-		var window = JavaScriptBridge.get_interface("window")
 		if window:
 			window.godotMobileCallback = _mobile_key_callback
+			if window.setMobileKeyboardDebug:
+				window.setMobileKeyboardDebug("GODOT CALLBACK ASSIGNED")
 			if not window.isMobileDevice:
 				slice_editor.grab_focus()
 	else:
+		if window and window.setMobileKeyboardDebug:
+			window.setMobileKeyboardDebug("GODOT WEB BRANCH SKIPPED")
 		slice_editor.grab_focus()
 
 	if not Engine.is_editor_hint():
