@@ -113,6 +113,10 @@ func _on_mobile_key_received(args: Array) -> void:
 
 	var typed_char: String = args[0]
 
+	var window = JavaScriptBridge.get_interface("window")
+	if window and window.setMobileKeyboardDebug:
+		window.setMobileKeyboardDebug("GODOT " + typed_char)
+
 	if typed_char == "Enter":
 		slice_editor.insert_text_at_caret("\n")
 	elif typed_char == "Tab":
