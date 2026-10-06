@@ -1,7 +1,7 @@
 extends MarginContainer
 
-@onready var explanation := $MarginContainer/Column/Content/ErrorExplanation/Value as RichTextLabel
-@onready var suggestion := $MarginContainer/Column/Content/ErrorSuggestion/Value as RichTextLabel
+@onready var explanation: RichTextLabelRTL = %ErrorExplanationValue
+@onready var suggestion: RichTextLabelRTL = %ErrorSuggestionValue
 
 
 func _ready() -> void:

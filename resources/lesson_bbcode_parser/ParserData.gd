@@ -37,7 +37,7 @@ enum Tag {
 var TAG_DEFINITIONS := {
 	Tag.LESSON: TagDefinition.new("lesson", true, false, [], ["title"], ["tr"], []),
 	Tag.TITLE: TagDefinition.new("title", true, false, [Tag.LESSON], [], ["tr"], []),
-	Tag.VISUAL: TagDefinition.new("visual", false, true, [Tag.LESSON], ["path"], [], []),
+	Tag.VISUAL: TagDefinition.new("visual", false, true, [Tag.LESSON, Tag.NOTE], ["path"], [], []),
 	Tag.NOTE: TagDefinition.new("note", true, false, [Tag.LESSON], [], ["title", "tr"], []),
 	Tag.QUIZ_CHOICE: TagDefinition.new("quiz_choice", true, false, [Tag.LESSON], ["question"], ["multiple", "shuffle", "en_id", "tr"], [Tag.OPTION, Tag.EXPLANATION]),
 	Tag.QUIZ_INPUT: TagDefinition.new("quiz_input", true, false, [Tag.LESSON], ["question", "answer"], ["tr"], [Tag.EXPLANATION]),

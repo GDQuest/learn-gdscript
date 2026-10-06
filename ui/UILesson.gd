@@ -301,7 +301,14 @@ func _make_note(
 	revealer.title = tr("Learn More") if title.is_empty() else title
 
 	_previous_paragraph = null
-	revealer.add_child(_make_paragraph(node, _course_index, _lesson, _user_profile))
+	for child: BBCodeParser.ParseNode in node.children:
+		match child.tag:
+			BBCodeParserData.Tag.PARAGRAPH:
+				revealer.add_child(_make_paragraph(child, _course_index, _lesson, _user_profile))
+			BBCodeParserData.Tag.VISUAL:
+				var visual_instance := _make_visual(child, _course_index, _lesson, _user_profile)
+				if visual_instance:
+					revealer.add_child(visual_instance)
 	_previous_paragraph = null
 	return revealer
 
