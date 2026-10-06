@@ -51,6 +51,14 @@ The loop works like this: for each coordinate in the array, it moves the turtle 
 
 It's the same principle with unit selection.
 
+[note title="How do you know to name the variable cell?"]
+The variable [code]cell[/code] defined right after the [code]for[/code] keyword is the name of the loop's [b]cursor[/b] variable. In each loop iteration, Godot assigns a value from the path to this variable.
+
+The variable name [code]cell[/code] is arbitrary; you could call it [code]coordinate[/code] or [code]point[/code] if you wanted. This code does the same thing as the code above, but with a different variable name:
+
+[visual path="visuals/CodeNoteForLoopCursorName.tscn"]
+[/note]
+
 [visual path="visuals/ExampleSelectUnits.tscn"]
 
 For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it.

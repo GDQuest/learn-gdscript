@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cn0spuiiub1un"]
+
+[ext_resource type="FontVariation" uid="uid://cns8rkgk2urac" path="res://ui/theme/fonts/font_code.tres" id="1_31hdw"]
+[ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="2_iaffp"]
+[ext_resource type="Script" uid="uid://ch5qpoqookmfv" path="res://course/common/GDScriptCodeExample.gd" id="3_boomw"]
+
+[node name="GDScriptCodeExample" type="CodeEdit" unique_id=1863177601]
+custom_minimum_size = Vector2(300, 150)
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -1620.0
+offset_bottom = 150.0
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_31hdw")
+text = "func move(path):
+	for current_coordinate in path:
+		turtle.move_to(current_coordinate)"
+context_menu_enabled = false
+shortcut_keys_enabled = false
+scroll_smooth = true
+scroll_fit_content_height = true
+caret_blink = true
+syntax_highlighter = ExtResource("2_iaffp")
+draw_tabs = true
+draw_spaces = true
+gutters_draw_line_numbers = true
+script = ExtResource("3_boomw")

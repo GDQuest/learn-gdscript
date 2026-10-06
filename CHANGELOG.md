@@ -7,6 +7,7 @@ This document lists changes between releases.
 ### Added
 
 - Added error explanation for "void assignment", e.g. when we're trying to use the return value of a function call that doesn't return a value.
+- L19: Add reminder in a note that for loop cursor variable names are arbitrary
 
 ### Improvements and changes
 
