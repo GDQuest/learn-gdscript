@@ -2,7 +2,6 @@ extends ColorRect
 
 const PracticeButtonScene := preload("res://ui/screens/lesson/UIPracticeButton.tscn")
 
-@onready var _center_container: CenterContainer = %CenterContainer
 @onready var _practice_items: Control = %Items
 @onready var _cancel_button: Button = %CancelButton
 

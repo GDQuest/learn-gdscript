@@ -13,7 +13,6 @@ const FRAMERATE_MAP := {
 	Framerates.NO_LIMIT: 0,
 }
 
-@onready var _panel: PanelContainer = %PanelContainer
 @onready var _color_rect: ColorRect = %ColorRect
 @onready var _center_container: CenterContainer = %CenterContainer
 @onready var _translation_info_button: Button = %TranslationInfoButton

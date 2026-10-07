@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://b3mhn551rchk6"]
 
 [ext_resource type="Script" uid="uid://250i3m14c23m" path="res://ui/components/popups/ConfirmPopup.gd" id="1"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_outline_large_pressed.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://w1loq40elk8g" path="res://ui/theme/styles/button_outline_large_pressed.tres" id="3"]
 [ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="3_8rvbl"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_outline_large_normal.tres" id="4"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/panel_normal.tres" id="5"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_outline_large_hover.tres" id="6"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/focus_accent.tres" id="8"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_outline_large_accent.tres" id="9"]
+[ext_resource type="StyleBox" uid="uid://dri0ogo4uvlny" path="res://ui/theme/styles/button_outline_large_normal.tres" id="4"]
+[ext_resource type="StyleBox" uid="uid://od5s4havcmtp" path="res://ui/theme/styles/panel_normal.tres" id="5"]
+[ext_resource type="StyleBox" uid="uid://v2mcngt7l2yr" path="res://ui/theme/styles/button_outline_large_hover.tres" id="6"]
+[ext_resource type="StyleBox" uid="uid://duqd5tuca3dhs" path="res://ui/theme/styles/focus_accent.tres" id="8"]
+[ext_resource type="StyleBox" uid="uid://bwri3a05jsp3r" path="res://ui/theme/styles/button_outline_large_accent.tres" id="9"]
 
 [node name="ConfirmPopup" type="ColorRect" unique_id=756091133]
 top_level = true
@@ -20,18 +20,16 @@ min_size = Vector2(0, 0)
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=619614391]
 unique_name_in_owner = true
-visible = false
-mouse_filter = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=820301940]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("5")
 

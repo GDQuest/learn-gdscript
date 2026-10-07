@@ -5,7 +5,6 @@ signal confirmed
 signal denied
 
 @onready var _root_container: Container = %PanelContainer
-@onready var _center_container: CenterContainer = %CenterContainer
 @onready var _title_label: Label = %Title
 @onready var _message_content: RichTextLabel = %Message
 @onready var _confirm_button: Button = %ConfirmButton
@@ -33,10 +32,6 @@ func _ready():
 
 	if not Engine.is_editor_hint():
 		set_as_top_level(true)
-		# visibility_changed.connect(
-		# 	func _on_visibility_changed() -> void:
-		# 		_center_container.visible = visible,
-		# )
 		hide.call_deferred()
 
 

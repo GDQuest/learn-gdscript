@@ -79,6 +79,7 @@ func set_strict(value: bool) -> void:
 
 func popup() -> void:
 	show()
+	_center_container.show()
 	_cancel_button.grab_focus()
 
 
