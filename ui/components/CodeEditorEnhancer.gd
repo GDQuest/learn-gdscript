@@ -230,6 +230,13 @@ static func enhance_highlighter(highlighter: CodeHighlighter) -> void:
 	highlighter.add_color_region('"', '"', COLOR_QUOTES)
 	highlighter.add_color_region("#", "", COLOR_COMMENTS, true)
 
+	# ClassDB only contains Object-derived classes. Variant's built-in value
+	# types, such as String and Vector2, need to be registered separately.
+	for type_id in range(TYPE_MAX):
+		var builtin_type := type_string(type_id)
+		if not builtin_type.is_empty():
+			highlighter.add_keyword_color(builtin_type, COLOR_CLASS)
+
 	for classname in ClassDB.get_class_list():
 		highlighter.add_keyword_color(classname, COLOR_CLASS)
 		for member: Dictionary in ClassDB.class_get_property_list(classname):
