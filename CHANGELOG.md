@@ -13,6 +13,7 @@ This document lists changes between releases.
 
 - Make scroll bar color less contrasted
 - Center all pop-up windows more consistently regardless of the selected language
+- L23.P2: rename checks to avoid confusion
 
 ### Bug fixes
 

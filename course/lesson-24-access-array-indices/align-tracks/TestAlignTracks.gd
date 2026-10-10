@@ -25,8 +25,8 @@ func _compare(track_index: int) -> String:
 
 func _define(checks: Array[Check]) -> void:
 	checks.append(Check.new(tr("First Track Is Well Positioned"), tr(""), test_first_track_is_well_positioned))
-	checks.append(Check.new(tr("Second Track Is Well Positioned"), tr(""), test_second_track_is_well_positioned))
-	checks.append(Check.new(tr("Third Track Is Well Positioned"), tr(""), test_third_track_is_well_positioned))
+	checks.append(Check.new(tr("Third Track Is Well Positioned"), tr(""), test_second_track_is_well_positioned))
+	checks.append(Check.new(tr("Fourth Track Is Well Positioned"), tr(""), test_third_track_is_well_positioned))
 	checks.append(Check.new(tr("All Other Tracks Are Aligned To Grid"), tr(""), test_all_other_tracks_are_aligned_to_grid))
 
 
@@ -51,4 +51,3 @@ func test_all_other_tracks_are_aligned_to_grid() -> String:
 		if (x + y) > 0:
 			return "Track %s is not correctly aligned to the grid!"%[i]
 	return ""
-
