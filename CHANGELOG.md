@@ -21,6 +21,8 @@ This document lists changes between releases.
 - L19.P2: Fix documentation not displaying
 - Fix unfinished practice pop up and confirmation pop up shooting out of the view (#1417)
 - L11.P1: Make the solution check more lenient. Fix return keyword preventing the code is time dependent check from passing (#1418)
+- L23: Fix code of inventory runnable example getting duplicated when changing the language
+- L25.P2: Fix literal closing code tag showing in practice hint
 
 ## Learn GDScript From Zero 2.3.0 (2026-09-30)
 

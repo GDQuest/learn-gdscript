@@ -49,7 +49,9 @@ func _init() -> void:
 	_REGEXES["number"] = RegEx.create_from_string(r"(?<number>-?\d+(\.\d+)?)")
 	_REGEXES["string"] = RegEx.create_from_string("(?<string>[\"'].+[\"'])")
 	_REGEXES["symbol"] = RegEx.create_from_string("(?<symbol>[a-zA-Z_][a-zA-Z0-9_]+|[a-zA-Z])")
-	_REGEXES["format"] = RegEx.create_from_string("[\"\\-']?\\d+(\\.\\d+)?[\"']?|[\"'].+[\"']|[a-zA-Z0-9_]+")
+	_REGEXES["format"] = RegEx.create_from_string(
+		"[\"\\-']?\\d+(\\.\\d+)?[\"']?|[\"'].+[\"']|[a-zA-Z0-9_]+"
+	)
 
 	_REGEX_REPLACE_MAP = {
 		"func": "[color=#%s]$func[/color]" % CodeEditorEnhancer.COLOR_KEYWORD.to_html(false),
@@ -72,10 +74,18 @@ func _notification(what: int) -> void:
 		get_glossary().reload()
 
 
-func bbcode_add_code_color(text := "") -> String:
-	if _REGEXES.is_empty():
-		return text
+## Prepares lesson text to display in a RichTextLabel with bbcode enabled:
+##
+## - Splits paragraphs on \n\n
+## - Escapes literal square brackets in code as [lb]/[rb].
+## - Adds syntax highlighting inside [code] spans.
+##
+## Use it on all markup to display on RichTextLabels in the UI.
+func preprocess_bbcode_for_rich_text_label(text := "") -> String:
+	return bbcode_add_code_color(paragraph(text))
 
+
+func bbcode_add_code_color(text := "") -> String:
 	var code_regex: RegEx = _REGEXES["code"]
 	var regex_matches: Array = code_regex.search_all(text)
 	var index_delta := 0
@@ -95,16 +105,15 @@ func bbcode_add_code_color(text := "") -> String:
 		for match_to_format: RegExMatch in to_format:
 			var match_start: int = match_to_format.get_start()
 			if last_match_end == -1 and match_start > 0:
-				colored_string += match_string.substr(0, match_start)
+				colored_string += _bbcode_escape_square_brackets(
+					match_string.substr(0, match_start)
+				)
 			if last_match_end != -1:
-				colored_string += match_string.substr(last_match_end, match_start - last_match_end)
+				colored_string += _bbcode_escape_square_brackets(
+					match_string.substr(last_match_end, match_start - last_match_end)
+				)
 			var part: String = match_to_format.get_string()
-			for regex_type in [
-				"string",
-				"func",
-				"symbol",
-				"number",
-			]:
+			for regex_type in ["string", "func", "symbol", "number"]:
 				var typed_regex: RegEx = _REGEXES[regex_type]
 				var replaced: String = typed_regex.sub(
 					part,
@@ -116,9 +125,9 @@ func bbcode_add_code_color(text := "") -> String:
 					last_match_end = match_to_format.get_end()
 					break
 
-		colored_string += match_string.substr(last_match_end)
+		colored_string += _bbcode_escape_square_brackets(match_string.substr(last_match_end))
 		if colored_string == "":
-			colored_string = match_string
+			colored_string = _bbcode_escape_square_brackets(match_string)
 		colored_string = "[code]" + colored_string + "[/code]"
 		text = text.erase(index_offset, initial_length)
 		text = text.insert(index_offset, colored_string)
@@ -134,7 +143,9 @@ func convert_input_action_to_tooltip(action: String) -> String:
 	for index in count:
 		if index > 0:
 			output += ","
-		output += " " + OS.get_keycode_string((events[index] as InputEventKey).get_keycode_with_modifiers())
+		output += " " + OS.get_keycode_string(
+			(events[index] as InputEventKey).get_keycode_with_modifiers()
+		)
 	return output
 
 
@@ -148,10 +159,12 @@ func convert_type_index_to_text(type: int) -> String:
 
 # Translates multi-paragraph text by splitting on double newlines.
 #
-# We split strings on paragraph breaks in the build system to make translations more fine-grained and easier to update.
+# We split strings on paragraph breaks in the build system to make translations
+# more fine-grained and easier to update.
 #
-# each paragraph individually, then we join the result. This allows PO files to store
-# translations at the paragraph level rather than as large multi-paragraph blocks.
+# we split each paragraph individually, then we join the result. This allows PO
+# files to store translations at the paragraph level rather than as large
+# multi-paragraph blocks.
 func tr_paragraph(text: String) -> String:
 	if text.is_empty():
 		return text
@@ -196,6 +209,19 @@ func paragraph(text: String) -> String:
 	return "\n\n".join(parsed_paragraphs)
 
 
+## Replaces raw square brackets with the literal bracket tags [lb] and [rb].
+func _bbcode_escape_square_brackets(text: String) -> String:
+	# Scanning and manipulating the string would be slower in GDScript, so we
+	# use these search and replace instead (; - ;).
+	return (
+		text
+		.replace("[", "\u0001")
+		.replace("]", "\u0002")
+		.replace("\u0001", "[lb]")
+		.replace("\u0002", "[rb]")
+	)
+
+
 # Call this function to ensure that changes to the formatter don't change color highlighting.
 func _test_formatting() -> void:
 	var color_number := CodeEditorEnhancer.COLOR_NUMBERS.to_html(false)
@@ -204,12 +230,16 @@ func _test_formatting() -> void:
 	# Pairs of strings that would be inside of [code] bbcode tags and their formatted output.
 	# We omit the [code] tags in the dictionary for readability, they get added in the tests.
 	var test_pairs := {
-		"[0, 1, 2]": "[[color=#eb9433]0[/color], [color=#eb9433]1[/color], [color=#eb9433]2[/color]]",
+		"[0, 1, 2]": "[lb][color=#eb9433]0[/color], [color=#eb9433]1[/color], [color=#eb9433]2[/color][rb]",
 		"-10": "[color=#" + color_number + "]-10[/color]",
 		"\"Some string.\"": "[color=#" + color_string + "]\"Some string.\"[/color]",
 		"add_order()": "[color=#" + color_symbol + "]add_order[/color]()",
-		"Vector2(2, 0)": "[color=#" + color_symbol + "]Vector2[/color]([color=#" + color_number + "]2[/color], [color=#" + color_number + "]0[/color])",
-		"use_item(item)": "[color=#" + color_symbol + "]use_item[/color]([color=#" + color_symbol + "]item[/color])",
+		"Vector2(2, 0)": "[color=#" + color_symbol + "]Vector2[/color]([color=#" + color_number
+		+ "]2[/color], [color=#" + color_number + "]0[/color])",
+		"use_item(item)": "[color=#" + color_symbol + "]use_item[/color]([color=#"
+		+ color_symbol + "]item[/color])",
+		"units[cell]": "[color=#" + color_symbol + "]units[/color][lb][color=#"
+		+ color_symbol + "]cell[/color][rb]",
 		"=": "=",
 		">": ">",
 	}
@@ -217,4 +247,7 @@ func _test_formatting() -> void:
 	for input_text: String in test_pairs:
 		var expected_output: String = "[code]" + test_pairs[input_text] + "[/code]"
 		var output := bbcode_add_code_color("[code]" + input_text + "[/code]")
-		assert(output == expected_output, "Expected output '%s' but got '%s' instead." % [expected_output, output])
+		assert(
+			output == expected_output,
+			"Expected output '%s' but got '%s' instead." % [expected_output, output],
+		)

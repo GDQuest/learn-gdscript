@@ -31,7 +31,7 @@ func _update_rtl_text() -> void:
 	if Engine.is_editor_hint():
 		_rich_text_label.text = text
 	else:
-		_rich_text_label.text = TextUtils.paragraph(text)
+		_rich_text_label.text = TextUtils.preprocess_bbcode_for_rich_text_label(text)
 
 
 # Sets the text alignment of the internal RichTextLabel, used to support

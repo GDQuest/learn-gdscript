@@ -278,7 +278,7 @@ func _make_paragraph(
 		_previous_paragraph = instance
 
 	var text_content := BBCodeUtils.get_paragraph_text(node)
-	instance.text += TextUtils.bbcode_add_code_color(TextUtils.paragraph(text_content))
+	instance.text += TextUtils.preprocess_bbcode_for_rich_text_label(text_content)
 
 	return instance
 
@@ -331,7 +331,7 @@ func _make_title(
 		instance.text += "\n\n"
 	instance.text += "[font size=28 name=\"%s\"]%s[/font]\n\n" % [
 		HEADER_FONT,
-		TextUtils.paragraph(text_content),
+		TextUtils.preprocess_bbcode_for_rich_text_label(text_content),
 	]
 	return instance
 

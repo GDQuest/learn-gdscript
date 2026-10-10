@@ -275,8 +275,8 @@ func _update_practice_metadata() -> void:
 	]
 	_info_panel.title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 	var goal := BBCodeUtils.get_practice_goal(_practice)
-	_info_panel.goal_rich_text_label.text = TextUtils.bbcode_add_code_color(
-		TextUtils.paragraph(TextUtils.tr_paragraph(goal)),
+	_info_panel.goal_rich_text_label.text = TextUtils.preprocess_bbcode_for_rich_text_label(
+		TextUtils.tr_paragraph(goal),
 	)
 	_info_panel.goal_rich_text_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
 
