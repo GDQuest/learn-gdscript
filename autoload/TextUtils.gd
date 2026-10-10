@@ -80,7 +80,9 @@ func _notification(what: int) -> void:
 ## - Escapes literal square brackets in code as [lb]/[rb].
 ## - Adds syntax highlighting inside [code] spans.
 ##
-## Use it on all markup to display on RichTextLabels in the UI.
+## Use it on all markup to display on RichTextLabels in the UI, after
+## translation (We can't apply transformations like syntax highlighting before
+## translation because it wouldn't match the input text).
 func preprocess_bbcode_for_rich_text_label(text := "") -> String:
 	return bbcode_add_code_color(paragraph(text))
 
