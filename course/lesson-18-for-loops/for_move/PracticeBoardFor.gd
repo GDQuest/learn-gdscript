@@ -1,10 +1,12 @@
 extends Node2D
 
+const Robot = preload("uid://j80e0wbbulcy")
+
 @export var cell_size := 64
 @export var line_width := 4
 
-@onready var _label := $Label
-@onready var _robot := $Robot
+@onready var _label: Label = $Label
+@onready var _robot: Robot = $Robot
 
 
 func _ready() -> void:
