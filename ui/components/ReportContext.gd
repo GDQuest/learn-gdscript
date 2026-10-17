@@ -9,6 +9,9 @@ var file_path := ""
 var user_code := ""
 var commit_hash := ""
 var selected_language := ""
+## When running in the browser, the URL of the web page the user is following
+## the course from.
+var course_url := ""
 
 ## Location identifier like "L1" or "L2". Used in report emails.
 var lesson_id := ""
@@ -31,8 +34,10 @@ func build_email_context() -> String:
 	context_text += _append_context_line("Location", location)
 	context_text += _append_context_line("File", file_path)
 	context_text += _append_context_line("Platform", platform)
+	if course_url != "":
+		context_text += _append_context_line("URL", course_url)
 	context_text += _append_context_line("Commit", commit_hash)
-	context_text += _append_context_line("Selected language", selected_language)
+	context_text += _append_context_line("Language", selected_language)
 	return context_text
 
 

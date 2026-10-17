@@ -96,14 +96,17 @@ func _send_report() -> void:
 	_context.platform = _context.platform if not _context.platform.is_empty() else platform
 	_context.commit_hash = AppVersionMetadata.git_commit.substr(0, 7)
 
-	const INDEX_TRANSLATION_ISSUE_TYPE := 3
-	if _category_option.selected == INDEX_TRANSLATION_ISSUE_TYPE:
+	if TranslationManager.current_language != "":
 		var language_code := TranslationManager.current_language
 		var language_name: String = TranslationManager.LOCALE_TO_LABEL.get(
 			language_code,
 			TranslationServer.get_locale_name(language_code),
 		)
 		_context.selected_language = "%s (%s)" % [language_name, language_code]
+
+	if OS.has_feature("web"):
+		var window := JavaScriptBridge.get_interface("window")
+		_context.course_url = window.location.href as String
 	body += _context.build_email_context()
 	if not _context.user_code.is_empty():
 		body += "\nCode from the current practice\n```gdscript\n%s\n```\n" % _context.user_code
