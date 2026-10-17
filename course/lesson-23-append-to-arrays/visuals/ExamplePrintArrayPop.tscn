@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://ew1tuboa5vy5"]
+[gd_scene format=3 uid="uid://csuw5cqt35wyn"]
 
 [ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://ui/components/OutputConsole.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://ui/components/RunnableExampleOutput.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExampleDebugger.tscn" id="3"]
 
 [sub_resource type="GDScript" id="1"]
-script/source = "extends OutputConsole
+script/source = "extends RunnableExampleOutput
 
 @onready var crates = [\"sword\", \"shield\", \"gems\"]
 
@@ -47,4 +47,4 @@ script = SubResource("1")
 
 [node name="RunnableCodeExampleDebugger" parent="." unique_id=2099807362 instance=ExtResource("3")]
 layout_mode = 2
-monitored_variables = ["crates"]
+monitored_variables = Array[String](["crates"])

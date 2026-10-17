@@ -1,18 +1,23 @@
 @tool
-# Displays a scene with a GDScript code example. If the scene's root has a
-# `run()` function, pressing the run button will call the function.
 class_name RunnableCodeExample
-extends HBoxContainer
+extends Control
+## Displays a scene with a GDScript code example. If the scene's root has a
+## `run()` function, pressing the run button will call the function.
 
 signal scene_instance_set
 signal code_updated
 
 const ConsoleArrowAnimationScene := preload("res://ui/components/ConsoleArrowAnimation.tscn")
-const CodeExampleVariableUnderlineScene := preload("res://ui/components/CodeExampleVariableUnderline.tscn")
+const CodeExampleVariableUnderlineScene := preload(
+	"res://ui/components/CodeExampleVariableUnderline.tscn"
+)
 
 const ERROR_NO_RUN_FUNCTION := "Scene %s doesn't have a run() function. The Run button won't work."
 const ERROR_MULTIPLE_RUN_FUNCTION := "Scene %s has both run() and run_coroutine() functions. It must only have one. The Run button won't work."
-const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/styles/hslider_grabber_highlight.tres")
+const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload(
+	"res://ui/theme/styles/hslider_grabber_highlight.tres"
+)
+const VARIABLES_PANEL := preload("res://ui/theme/styles/runnable_example_variables_panel.tres")
 
 @onready var _gdscript_text_edit: CodeEdit = %GDScriptCode
 @onready var _run_button: Button = %RunButton
@@ -21,6 +26,18 @@ const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/styles/h
 @onready var _frame_container: Control = %FramePanel
 @onready var _sliders: VBoxContainer = %Sliders
 @onready var _buttons_container: HBoxContainer = %ButtonsContainer
+@onready var _content: VBoxContainer = %Content
+@onready var _frame: Control = %Frame
+@onready var _results: PanelContainer = %Results
+@onready var _results_layout: VBoxContainer = %ResultsLayout
+@onready var _results_body: VBoxContainer = %ResultsBody
+@onready var _output_panel: StyleBox = _results.get_theme_stylebox("panel")
+@onready var _demo_button_offsets: Array[float] = [
+	_buttons_container.offset_left,
+	_buttons_container.offset_top,
+	_buttons_container.offset_right,
+	_buttons_container.offset_bottom,
+]
 
 ## The scene to display and run in the example frame.
 @export var scene: PackedScene:
@@ -47,46 +64,61 @@ const HSLIDER_GRABBER_HIGHLIGHT: StyleBoxFlat = preload("res://ui/theme/styles/h
 var _scene_instance: CanvasItem:
 	set = _set_scene_instance
 
-var _base_text_font_size := preload("res://ui/theme/fonts/font_text.tres").base_font.msdf_size
 var _current_coroutine: CoroutineController = null
 
 @onready var _debugger: RunnableCodeExampleDebugger
 @onready var _console_arrow_animation: ConsoleArrowAnimation
 @onready var _monitored_variable_highlights := []
 
-@onready var _start_code_example_height := _gdscript_text_edit.size.y
-
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		Events.font_size_scale_changed.connect(_on_Events_font_size_scale_changed)
 
-		_update_gdscript_text_edit_width(UserProfiles.get_profile().font_size_scale)
-
 	_run_button.pressed.connect(run)
 	_step_button.pressed.connect(step)
 	_reset_button.pressed.connect(reset)
 	_frame_container.resized.connect(_center_scene_instance)
+	_gdscript_text_edit.item_rect_changed.connect(_on_ScrollBar_scrolled)
 
 	CodeEditorEnhancer.enhance(_gdscript_text_edit)
 	CodeEditorEnhancer.prevent_editable(_gdscript_text_edit)
-	if not (_gdscript_text_edit.syntax_highlighter as CodeHighlighter).has_color_region("[="):
-		(_gdscript_text_edit.syntax_highlighter as CodeHighlighter).add_color_region("[=", "]", CodeEditorEnhancer.COLOR_COMMENTS)
 
 	_gdscript_text_edit.visible = not gdscript_code.is_empty()
+
+	# Adding the optional debugger
+	# TODO: Refactor the runnable code example to Have a setting for the
+	# debugger and not need this kind of manipulation. favor grouping settings
+	# and using a single approach consistently in the inspector instead. If I
+	# recall correctly, we did stuff like that because we wanted control over
+	# the properties of instantiated components.
+	var candidates := get_parent().find_children("", "RunnableCodeExampleDebugger")
+	if not candidates.is_empty():
+		_debugger = candidates[0]
+		_debugger.setup(self)
 
 	# If there's no scene but there's an instance as a child of
 	# RunnableCodeExample, we use this as the scene instance.
 	#
 	# This simplifies the process of creating code examples.
-	if not Engine.is_editor_hint() and not scene and get_child_count() > 1:
-		var last_child := get_child(get_child_count() - 1)
-		assert(last_child != _gdscript_text_edit and last_child != _frame_container)
-		remove_child(last_child)
-		_set_scene_instance(last_child as CanvasItem)
+	# TODO: Get rid of this option if possible? The reason we do this is
+	# probably that we want to customize the properties of some scene instances
+	# to reuse them across multiple runnable examples. If so, we should use an
+	# exported node reference consistently + configuration warnings.
+	if not Engine.is_editor_hint() and not scene:
+		for child in get_children():
+			if child != _content and child != _debugger and child is CanvasItem:
+				remove_child(child)
+				_set_scene_instance(child as CanvasItem)
+				break
 
-	# Godot doesn't allow changing Control nodes z-index in the inspector,
-	# so a workaround with the VisualServer is needed
+	# TODO: This is not true anymore I think. Remove the workaround if possible.
+	# Also, setting the Z index to 10 is probably what caused some issues in the
+	# past that I patched, but that needed adding canvas layers for rendering
+	# overlays.
+	#
+	# Original comment: Godot doesn't allow changing Control nodes z-index in
+	# the inspector, so a workaround with the VisualServer is needed
 	var canvas_item := _buttons_container.get_canvas_item()
 	RenderingServer.canvas_item_set_z_index(canvas_item, 10)
 
@@ -146,6 +178,8 @@ func run() -> void:
 			_current_coroutine.step_requested.emit()
 
 	_gdscript_text_edit.highlight_current_line = false
+	if _debugger != null:
+		_debugger.set_stepping_active(false)
 	code_updated.emit()
 	_clear_animated_arrows()
 
@@ -181,6 +215,8 @@ func step() -> void:
 		_current_coroutine.step_requested.emit()
 		if not _current_coroutine:
 			_gdscript_text_edit.highlight_current_line = false
+	if _debugger != null:
+		_debugger.set_stepping_active(_current_coroutine != null)
 	code_updated.emit()
 
 
@@ -195,6 +231,8 @@ func reset() -> void:
 	if _scene_instance.has_method("reset"):
 		_scene_instance.call("reset")
 	_center_scene_instance()
+	if _debugger != null:
+		_debugger.set_stepping_active(false)
 	code_updated.emit()
 
 
@@ -203,6 +241,7 @@ func set_code(new_gdscript_code: String) -> void:
 	if not _gdscript_text_edit:
 		await self.ready
 	_gdscript_text_edit.text = new_gdscript_code
+	_gdscript_text_edit.visible = not new_gdscript_code.is_empty()
 
 
 func set_scene(new_scene: PackedScene) -> void:
@@ -237,11 +276,11 @@ func set_run_button_label(new_text: String) -> void:
 
 
 func create_slider_for(
-		property_name: StringName,
-		min_value := 0.0,
-		max_value := 100.0,
-		slider_step := 1.0,
-		color := Color.BLACK,
+	property_name: StringName,
+	min_value := 0.0,
+	max_value := 100.0,
+	slider_step := 1.0,
+	color := Color.BLACK,
 ) -> HSlider:
 	if not _scene_instance:
 		await self.scene_instance_set
@@ -307,13 +346,14 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 
 	_scene_instance = new_scene_instance
 	scene_instance_set.emit()
-	_scene_instance.show_behind_parent = true
+	_scene_instance.show_behind_parent = false
 	_frame_container.add_child(_scene_instance)
 	_center_scene_instance()
 
 	# Skip a frame to allow all nodes to be ready.
 	# Avoids overwriting text via yield(node, "ready").
 	await get_tree().process_frame
+	_update_layout()
 
 	if not Engine.is_editor_hint() and _scene_instance.has_method("get_code"):
 		@warning_ignore("unsafe_method_access")
@@ -331,16 +371,51 @@ func _set_scene_instance(new_scene_instance: CanvasItem) -> void:
 	if not _run_button.visible:
 		printerr(ERROR_NO_RUN_FUNCTION % [_scene_instance.scene_file_path])
 
-	# Setting up our fake debugger when it's there to allow executing the code line-by-line
-	_debugger = null
-	for node in get_parent().get_children():
-		if node is RunnableCodeExampleDebugger:
-			_debugger = node
-			_debugger.setup(self, _scene_instance)
-			if _scene_instance.has_signal("code_updated"):
-				_scene_instance.connect("code_updated", code_updated.emit)
+	# Setting up our fake debugger when it's there to allow executing the code
+	# line-by-line
+	if _debugger != null:
+		_debugger.bind_scene_to_debug(_scene_instance)
+		if _scene_instance.has_signal("code_updated"):
+			_scene_instance.connect("code_updated", code_updated.emit)
 
 	_reset_monitored_variable_highlights()
+
+
+func _update_layout() -> void:
+	var scene_instance_has_output := _scene_instance is RunnableExampleOutput
+	_frame.visible = not scene_instance_has_output
+	_results.visible = scene_instance_has_output or _debugger != null
+	_results.add_theme_stylebox_override(
+		"panel",
+		_output_panel if scene_instance_has_output else VARIABLES_PANEL,
+	)
+
+	# TODO: A bit hacky perhaps, notably on the layout part, I'm doing this with
+	# backward compat for visualizing the new layout and verifying the UX works,
+	# but if we can I'd like to figure out a more centralized way to lay things
+	# down + centralize styling ops for all runnable example components and see
+	# if we can't get rid of the reparenting (I don't think we can fully if we
+	# want to keep the option of reusing arbitrary scenes and customizing their
+	# props).
+	#
+	# Maybe the output part, instead of being sometimes slotted as a scene
+	# instance, could just be a property of the node. But gotta verify why
+	# things were the way they were.
+	if scene_instance_has_output:
+		var console: RunnableExampleOutput = _scene_instance
+		console.reparent(_results_body, false)
+		_buttons_container.reparent(_results_layout, false)
+	elif _buttons_container.get_parent() != _frame:
+		_buttons_container.reparent(_frame, false)
+		_buttons_container.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
+		_buttons_container.offset_left = _demo_button_offsets[0]
+		_buttons_container.offset_top = _demo_button_offsets[1]
+		_buttons_container.offset_right = _demo_button_offsets[2]
+		_buttons_container.offset_bottom = _demo_button_offsets[3]
+
+	if _debugger != null:
+		_debugger.reparent(_results_body, false)
+		_results_body.move_child(_debugger, 0)
 
 
 func _reset_monitored_variable_highlights():
@@ -371,7 +446,7 @@ func _reset_monitored_variable_highlights():
 	# Create widgets that underline a variable and display a variable's value
 	# when hovering with the mouse.
 	var monitored_variables := _debugger.monitored_variables
-	var offset := Vector2i(_gdscript_text_edit.position.x as int, 0)
+	var offset := Vector2i(_gdscript_text_edit.global_position - global_position)
 
 	for variable_name: StringName in monitored_variables:
 		var last_line := 0
@@ -385,10 +460,7 @@ func _reset_monitored_variable_highlights():
 
 			if result != Vector2i(-1, -1):
 				is_result_in_line_before = result.y < last_line
-				is_result_in_column_before = (
-					result.x < last_column
-					and result.y <= last_line
-				)
+				is_result_in_column_before = (result.x < last_column and result.y <= last_line)
 
 			if result == Vector2i(-1, -1):
 				last_line = -1
@@ -451,11 +523,15 @@ func _on_arrow_animation(chars1: Array, chars2: Array, immediate := false) -> vo
 
 	var current_line := _gdscript_text_edit.get_caret_line()
 
-	var offset := Vector2i.ZERO
-	offset.x = floori(_gdscript_text_edit.position.x - 2)
+	var offset := Vector2i((_gdscript_text_edit.global_position - global_position).floor())
+	offset.x -= 2
 
-	var rect1 := Rect2i(_gdscript_text_edit.get_rect_at_line_column(current_line, (chars1[0] as int)+1))
-	var rect2 := Rect2i(_gdscript_text_edit.get_rect_at_line_column(current_line, (chars2[0] as int)+1))
+	var rect1 := Rect2i(
+		_gdscript_text_edit.get_rect_at_line_column(current_line, (chars1[0] as int) + 1)
+	)
+	var rect2 := Rect2i(
+		_gdscript_text_edit.get_rect_at_line_column(current_line, (chars2[0] as int) + 1)
+	)
 
 	if rect1.position == Vector2i(-1, -1) and rect2.position == Vector2i(-1, -1):
 		# fully off screen, don't draw anything
@@ -477,17 +553,12 @@ func _on_arrow_animation(chars1: Array, chars2: Array, immediate := false) -> vo
 	var rects := [rect1, rect2]
 
 	_console_arrow_animation.highlight_rects = rects
-	_console_arrow_animation.initial_point = rect1.position + Vector2i(floori(rect1.size.x / 2.0), -5)
+	_console_arrow_animation.initial_point = rect1.position + Vector2i(
+		floori(rect1.size.x / 2.0),
+		-5,
+	)
 	_console_arrow_animation.end_point = rect2.position + Vector2i(floori(rect2.size.x / 2.0), -5)
 	_console_arrow_animation.draw_curve(immediate)
-
-
-func _update_gdscript_text_edit_width(new_font_scale: int) -> void:
-	var font_size_multiplier := (
-		float(_base_text_font_size + new_font_scale * 2)
-		/ _base_text_font_size
-	)
-	_gdscript_text_edit.custom_minimum_size.y = _start_code_example_height * font_size_multiplier
 
 
 func _clear_animated_arrows() -> void:
@@ -496,7 +567,6 @@ func _clear_animated_arrows() -> void:
 		_console_arrow_animation.reset_curve()
 
 
-func _on_Events_font_size_scale_changed(new_font_scale: int) -> void:
+func _on_Events_font_size_scale_changed(_new_font_scale: int) -> void:
 	_clear_animated_arrows()
 	_reset_monitored_variable_highlights()
-	_update_gdscript_text_edit_width(new_font_scale)

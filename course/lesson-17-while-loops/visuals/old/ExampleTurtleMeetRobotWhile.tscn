@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cdhk813rfvelv"]
+[gd_scene format=3 uid="uid://cbvh4hh5e0ct2"]
 
 [ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://dnivj2puspmd7" path="res://course/common/Robot.tscn" id="2"]
@@ -58,10 +58,10 @@ gdscript_code = "func draw_wall():
 		jump(110, 0)
 		number += 1"
 
-[node name="RunButton" parent="RunnableCodeExample/Frame/ButtonsContainer" parent_id_path=PackedInt32Array(2104900853, 1323725507) index="1" unique_id=1248061364]
+[node name="RunButton" parent="RunnableCodeExample/Content/Frame/ButtonsContainer" parent_id_path=PackedInt32Array(2104900853, 1323725507) index="1" unique_id=1248061364]
 text = "draw_wall()"
 
-[node name="GDScriptCode" parent="RunnableCodeExample" index="1" unique_id=175998401]
+[node name="GDScriptCode" parent="RunnableCodeExample/Content" parent_id_path=PackedInt32Array(2104900853, 934997768) index="2" unique_id=175998401]
 visible = true
 text = "func draw_wall():
 	var number = 0
