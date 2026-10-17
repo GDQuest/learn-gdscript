@@ -23,6 +23,7 @@ This document lists changes between releases.
 - L11.P1: Make the solution check more lenient. Fix return keyword preventing the code is time dependent check from passing (#1418)
 - L23: Fix code of inventory runnable example getting duplicated when changing the language
 - L25.P2: Fix literal closing code tag showing in practice hint
+- L12: Fixed regression where an error message would show placeholder text (#1445)
 
 ## Learn GDScript From Zero 2.3.0 (2026-09-30)
 
