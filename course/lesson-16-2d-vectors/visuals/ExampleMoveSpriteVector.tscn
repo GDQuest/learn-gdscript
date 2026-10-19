@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://duemfqc0e5ok3"]
+[gd_scene format=3 uid="uid://b4dbr10jl4dut"]
 
 [ext_resource type="PackedScene" path="res://ui/components/RunnableCodeExample.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://dnivj2puspmd7" path="res://course/common/Robot.tscn" id="2"]
@@ -35,10 +35,10 @@ layout_mode = 2
 gdscript_code = "func move():
 	position += Vector2(20, 20)"
 
-[node name="RunButton" parent="RunnableCodeExample/Frame/ButtonsContainer" parent_id_path=PackedInt32Array(1915915466, 1323725507) index="1" unique_id=1248061364]
+[node name="RunButton" parent="RunnableCodeExample/Content/Frame/ButtonsContainer" parent_id_path=PackedInt32Array(1915915466, 1323725507) index="1" unique_id=1248061364]
 text = "move()"
 
-[node name="GDScriptCode" parent="RunnableCodeExample" index="1" unique_id=175998401]
+[node name="GDScriptCode" parent="RunnableCodeExample/Content" parent_id_path=PackedInt32Array(1915915466, 934997768) index="2" unique_id=175998401]
 visible = true
 text = "func move():
 	position += Vector2(20, 20)"
