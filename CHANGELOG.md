@@ -14,6 +14,7 @@ This document lists changes between releases.
 - Make scroll bar color less contrasted
 - Center all pop-up windows more consistently regardless of the selected language
 - L23.P2: rename checks to avoid confusion
+- L23.P1: Make the inventory values visible in the code and match the inventory displayed on the right
 
 ### Bug fixes
 

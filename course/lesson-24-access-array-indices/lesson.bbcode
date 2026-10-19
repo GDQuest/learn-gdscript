@@ -71,14 +71,20 @@ In our game, the player has an inventory that works as an array under the hood.
 
 The player knows they have a sword and a shield somewhere in their inventory, but they don't remember exactly where.
 
+Your task is to find the sword and the shield in the array using their index, then call [code]use_item()[/code] on each of them so the player can equip those items.
+
 You can see the inventory drawn on the right, along with the index of each item in the inventory.
 
-Your task is to find one sword and one shield in the array using their index, then call [code]use_item()[/code] on each of them so the player can equip those items.
+The [code]inventory[/code] array in the code contains the same items in the same order as on the right.
 
 For example, if the first item in the array is what you need, you would call [code]use_item(inventory[0])[/code].
 [/goal]
 [starting_code]
-var inventory = []
+var inventory = [
+	"heart", "gems", "heart", "gems",
+	"gems", "heart", "sword", "heart",
+	"shield", "gems", "heart", "gems"
+]
 
 func pick_items():
 

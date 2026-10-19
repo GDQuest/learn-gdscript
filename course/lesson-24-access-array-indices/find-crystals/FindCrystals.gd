@@ -6,27 +6,25 @@ var used_items_names := PackedStringArray()
 
 @onready var grid_container := $GridContainer as GridContainer
 
+const SWORD := preload("res://course/common/inventory/sword.png")
+const SHIELD := preload("res://course/common/inventory/shield.png")
+const HEART := preload("res://course/common/inventory/healing_heart.png")
+const GEMS := preload("res://course/common/inventory/gems.png")
+
+# IMPORTANT: Make sure the practice starter code matches this. We can't show
+# texture values to students so we show them matching strings
+const ITEM_TEXTURES: Array[Texture2D] = [
+	HEART, GEMS, HEART, GEMS,
+	GEMS, HEART, SWORD, HEART,
+	SHIELD, GEMS, HEART, GEMS,
+]
+
 
 func _ready() -> void:
 	inventory = grid_container.get_children()
-	# Sadly, we can't randomize because we can't provide
-	# a dynamic solution. TODO: allow generating a solution
-	# var first_item_index := randi() % inventory.size()
-	# var second_item_index := first_item_index
-	# while second_item_index - first_item_index < 2:
-	#	second_item_index = randi() % inventory.size()
-	# The user can pick any tuple [ fire, lightning ], but
-	# we need to ensure there are at least 2 we know for sure
-	# make sure those indices are the same in `pick_items`
-	# at the bottom
-	var first_item_index := 6
-	var second_item_index := 8
 	for i in inventory.size():
 		var child = inventory[i]
-		if i == first_item_index:
-			child.texture = child.SWORD
-		elif i == second_item_index:
-			child.texture = child.SHIELD
+		child.texture = ITEM_TEXTURES[i]
 		if not child.mouse_entered.is_connected(set_current_item):
 			child.mouse_entered.connect(set_current_item.bind(child))
 		if not child.mouse_exited.is_connected(set_current_item):
@@ -88,7 +86,11 @@ func _run():
 
 
 # EXPORT pick
-var inventory = []
+var inventory = [
+	"heart", "gems", "heart", "gems",
+	"gems", "heart", "sword", "heart",
+	"shield", "gems", "heart", "gems"
+]
 
 func pick_items():
 	use_item(inventory[6])
