@@ -15,6 +15,7 @@ This document lists changes between releases.
 - Center all pop-up windows more consistently regardless of the selected language
 - L23.P2: rename checks to avoid confusion
 - L23.P1: Make the inventory values visible in the code and match the inventory displayed on the right
+- L6.P3: Add a note to remind which functions the turtle knows and how to use them
 
 ### Bug fixes
 
