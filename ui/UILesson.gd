@@ -80,6 +80,10 @@ func _input(event: InputEvent) -> void:
 		or not (
 			event.is_action_pressed("scroll_up_one_page")
 			or event.is_action_pressed("scroll_down_one_page")
+			or (
+				event.is_action_pressed("scroll_up", true)
+				or event.is_action_pressed("scroll_down", true)
+			)
 			or event.is_action_pressed("scroll_to_top")
 			or event.is_action_pressed("scroll_to_bottom")
 		)

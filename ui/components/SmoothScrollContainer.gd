@@ -121,7 +121,15 @@ func _gui_input(event: InputEvent) -> void:
 ## this directly to allow pressing scroll shortcuts regardless of current UI
 ## focus.
 func handle_keyboard_scroll(event: InputEvent) -> bool:
-	if event.is_action_pressed("scroll_up_one_page"):
+	# Scroll up and down with arrow keys
+	if event is InputEventKey and event.is_action_pressed("scroll_up", true):
+		_accumulate_pending_scroll_in_direction(-1.0, 1.0)
+		return true
+	elif event is InputEventKey and event.is_action_pressed("scroll_down", true):
+		_accumulate_pending_scroll_in_direction(1.0, 1.0)
+		return true
+	# Scroll up and down with page up/down keys
+	elif event.is_action_pressed("scroll_up_one_page"):
 		_pending_scroll_difference = 0.0
 		_wheel_scroll_budget = MAX_WHEEL_INPUT_BUFFER * _scroll_sensitivity
 		_maximum_scroll_speed = SCROLL_SPEED_PAGE_UP_DOWN

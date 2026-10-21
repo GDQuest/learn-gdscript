@@ -16,6 +16,7 @@ This document lists changes between releases.
 - L23.P2: rename checks to avoid confusion
 - L23.P1: Make the inventory values visible in the code and match the inventory displayed on the right
 - L6.P3: Add a note to remind which functions the turtle knows and how to use them
+- Add back support for scrolling up and down with arrow keys (#1438)
 
 ### Bug fixes
 
