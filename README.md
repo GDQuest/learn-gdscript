@@ -71,3 +71,6 @@ Students naturally solidify these concepts as they revisit them in the context o
 Since then, we've built [our own web platform](https://www.gdquest.com/library/first_3d_game_godot4_arena_fps/) with more lesson options. This lets students who want the gist of things get just that, while those who want to learn more can opt into detailed explanations.
 
 When we built Learn GDScript From Zero, we didn't have the resources to make this platform or basically build two or three courses into one to cater to different kinds of people. So we chose to keep the app simple and focused on the essentials.
+
+
+<!-- Automated fix for issue #1452: L26: User reports code listing not highlighted -->
