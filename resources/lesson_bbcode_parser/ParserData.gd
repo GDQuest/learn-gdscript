@@ -32,7 +32,12 @@ enum Tag {
 	GLOSSARY,
 	PARAGRAPH,
 	TR,
+	CODE_LISTING,
 }
+
+# Tags whose raw text content should be kept verbatim by the parser,
+# blank lines and all, instead of being treated as paragraph text.
+const RAW_TEXT_TAGS := [Tag.STARTING_CODE, Tag.CODE_LISTING]
 
 var TAG_DEFINITIONS := {
 	Tag.LESSON: TagDefinition.new("lesson", true, false, [], ["title"], ["tr"], []),
@@ -55,7 +60,8 @@ var TAG_DEFINITIONS := {
 	Tag.SEPARATOR: TagDefinition.new("separator", false, true, [Tag.LESSON], [], [], []),
 	Tag.GLOSSARY: TagDefinition.new("glossary", true, false, [Tag.PARAGRAPH, Tag.GOAL, Tag.DESCRIPTION, Tag.HINT, Tag.EXPLANATION, Tag.OPTION, Tag.NOTE], ["term"], [], []),
 	Tag.PARAGRAPH: TagDefinition.new("paragraph", true, false, [Tag.LESSON], [], [], []),
-	Tag.TR: TagDefinition.new("tr", false, true, [Tag.LESSON, Tag.QUIZ_CHOICE, Tag.QUIZ_INPUT, Tag.NOTE], [], [])
+	Tag.TR: TagDefinition.new("tr", false, true, [Tag.LESSON, Tag.QUIZ_CHOICE, Tag.QUIZ_INPUT, Tag.NOTE], [], []),
+	Tag.CODE_LISTING: TagDefinition.new("code_listing", true, false, [Tag.LESSON, Tag.NOTE, Tag.EXPLANATION, Tag.QUIZ_CHOICE, Tag.QUIZ_INPUT, Tag.HINT, Tag.DESCRIPTION, Tag.GOAL], [], [], []),
 }
 
 const CONTENT_PRODUCING_TAGS := [
@@ -67,6 +73,7 @@ const CONTENT_PRODUCING_TAGS := [
 	Tag.PRACTICE,
 	Tag.SEPARATOR,
 	Tag.PARAGRAPH,
+	Tag.CODE_LISTING,
 ]
 
 var _tag_name_to_id := { }

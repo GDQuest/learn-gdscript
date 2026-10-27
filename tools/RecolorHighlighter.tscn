@@ -8,6 +8,7 @@ func _ready() -> void:
 	var highlighter: CodeHighlighter = load(CodeEditorEnhancer.GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH)
 	CodeEditorEnhancer.enhance_highlighter(highlighter)
 	ResourceSaver.save(highlighter, CodeEditorEnhancer.GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH)
+	get_tree().quit()
 "
 
 [node name="RecolorHighlighter" type="Node" unique_id=1605165953]

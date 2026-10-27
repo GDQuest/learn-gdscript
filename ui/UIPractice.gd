@@ -168,7 +168,7 @@ func setup(
 	var starting_position := BBCodeUtils.get_practice_cursor(practice)
 	_code_editor.update_cursor_position(starting_position.x, starting_position.y)
 
-	var hints := BBCodeUtils.get_practice_hints(practice)
+	var hints := BBCodeUtils.get_practice_hint_blocks(practice)
 	_hints_container.visible = not hints.is_empty()
 	for _i in hints.size():
 		var practice_hint: PracticeHint = PracticeHintScene.instantiate()
@@ -274,24 +274,17 @@ func _update_practice_metadata() -> void:
 		tr(title).capitalize(),
 	]
 	_info_panel.title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
-	var goal := BBCodeUtils.get_practice_goal(_practice)
-	_info_panel.goal_rich_text_label.text = TextUtils.preprocess_bbcode_for_rich_text_label(
-		TextUtils.tr_paragraph(goal),
-	)
-	_info_panel.goal_rich_text_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
+	_info_panel.goal_content_blocks.set_blocks(BBCodeUtils.get_child_content_blocks(_practice, BBCodeParserData.Tag.GOAL))
 
 	var index := 0
-	var hints := BBCodeUtils.get_practice_hints(_practice)
+	var hints := BBCodeUtils.get_practice_hint_blocks(_practice)
 	for child_node in _hints_container.get_children():
 		var practice_hint := child_node as PracticeHint
 		if not practice_hint:
 			continue
 
 		practice_hint.title = tr("Hint %s") % [str(index + 1).pad_zeros(1)]
-		practice_hint.set_text_alignment(
-			HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
-		)
-		practice_hint.text = TextUtils.tr_paragraph(hints[index])
+		practice_hint.set_blocks(hints[index])
 		index += 1
 
 

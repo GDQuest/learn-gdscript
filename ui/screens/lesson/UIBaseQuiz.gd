@@ -35,8 +35,8 @@ var _size_scene_tween: Tween
 
 @onready var _outline: PanelContainer = %Outline
 @onready var _question: RichTextLabel = %Question
-@onready var _explanation: RichTextLabel = %Explanation
-@onready var _content: RichTextLabel = %Content
+@onready var _explanation: ContentBlocks = %Explanation
+@onready var _content: ContentBlocks = %Content
 @onready var _completed_before_icon: TextureRect = %CompletedBeforeIcon
 @onready var _choice_container: MarginContainer = %ChoiceContainer
 @onready var _result_container: MarginContainer = %ResultContainer
@@ -71,18 +71,12 @@ func setup(quiz: BBCodeParser.ParseNode) -> void:
 	if not is_inside_tree():
 		await self.ready
 
-	var question: String = _quiz_data.question
-	_question.text = "[b]" + question + "[/b]"
+	_update_labels()
 
-	var content: String = _quiz_data.content
-	_content.visible = not content.is_empty()
-	_content.text = TextUtils.preprocess_bbcode_for_rich_text_label(content)
-
-	var explanation: String = _quiz_data.explanation
-	_explanation.visible = not explanation.is_empty()
-	_explanation.text = TextUtils.preprocess_bbcode_for_rich_text_label(explanation)
-	
-	_update_margins.call_deferred()
+	# Direct children only: skip quiz structural children ([option],
+	# [explanation]...), collecting only text and code listings.
+	_content.set_blocks(BBCodeUtils.get_content_blocks(_quiz, true))
+	_explanation.set_blocks(BBCodeUtils.get_child_content_blocks(_quiz, BBCodeParserData.Tag.EXPLANATION))
 
 
 func set_completed_before(value: bool) -> void:
@@ -96,19 +90,9 @@ func _update_labels() -> void:
 	if not _quiz:
 		return
 
-	var rtl := TranslationManager.current_translation_is_rtl()
-	
-	var question := _quiz_data.question
-	_question.text = "[b]" + question + "[/b]"
-	_question.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
+	_question.text = "[b]" + _quiz_data.question + "[/b]"
+	_question.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if TranslationManager.current_translation_is_rtl() else HORIZONTAL_ALIGNMENT_LEFT
 
-	var content_bbcode := _quiz_data.content
-	_content.text = TextUtils.preprocess_bbcode_for_rich_text_label(content_bbcode)
-	_content.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
-	var explanation_bbcode := _quiz_data.explanation
-	_explanation.text = TextUtils.preprocess_bbcode_for_rich_text_label(explanation_bbcode)
-	_explanation.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT
-	
 	_update_margins.call_deferred()
 
 

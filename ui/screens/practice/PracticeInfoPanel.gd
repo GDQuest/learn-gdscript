@@ -21,14 +21,14 @@ var skip_animations := false
 var _current_status: int = Status.NONE
 var _documentation_results: QueryResult
 
-@onready var title_label: Label = $LessonRequirements/Margin/Column/TitleBox/Title
-@onready var _status_icon: TextureRect = $LessonRequirements/Margin/Column/TitleBox/StatusIcon
-@onready var goal_rich_text_label: RichTextLabel = $LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Goals/Goal/MarginContainer/TextBox
-@onready var hints_container: Revealer = $LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Hints
-@onready var _checks: Revealer = $LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Checks
-@onready var docs_container: Revealer = $LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Documentation
-@onready var _docs_item_list: Control = $LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Documentation/DocumentationItems
-@onready var _list_button: Button = $LessonRequirements/Footer/ListButton
+@onready var title_label: Label = %Title
+@onready var _status_icon: TextureRect = %StatusIcon
+@onready var goal_content_blocks: ContentBlocks = %Goal/MarginContainer/ContentBlocks
+@onready var hints_container: Revealer = %Hints
+@onready var _checks: Revealer = %Checks
+@onready var docs_container: Revealer = %Documentation
+@onready var _docs_item_list: Control = %Documentation/DocumentationItems
+@onready var _list_button: Button = %ListButton
 
 
 func _ready() -> void:

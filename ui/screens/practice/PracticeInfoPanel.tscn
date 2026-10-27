@@ -49,6 +49,7 @@ text = "Summary - Lesson Name"
 autowrap_mode = 3
 
 [node name="StatusIcon" type="TextureRect" parent="LessonRequirements/Margin/Column/TitleBox" unique_id=1951238211]
+unique_name_in_owner = true
 modulate = Color(0.572549, 0.560784, 0.721569, 1)
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -81,19 +82,23 @@ title = "Goals"
 is_expanded = true
 
 [node name="Goal" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column/Goals" unique_id=747354677 instance=ExtResource("4")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Hints" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column" unique_id=1804291886 instance=ExtResource("5")]
+unique_name_in_owner = true
 layout_mode = 2
 title = "Hints"
 content_panel = ExtResource("7")
 
 [node name="Checks" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column" unique_id=1043153164 instance=ExtResource("5")]
+unique_name_in_owner = true
 layout_mode = 2
 title = "Checks"
 is_expanded = true
 
 [node name="Documentation" parent="LessonRequirements/Margin/Column/Scroll/MarginContainer/Column" unique_id=2050755733 instance=ExtResource("5")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -116,6 +121,7 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="ListButton" type="Button" parent="LessonRequirements/Footer" unique_id=2094844593]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Open the list of practices for this lesson."

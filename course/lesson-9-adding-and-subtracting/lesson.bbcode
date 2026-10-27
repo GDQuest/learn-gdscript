@@ -39,10 +39,12 @@ Also, once more, the short line [code]health += amount[/code] is equivalent to t
 [option correct]health = health + amount[/option]
 [option]health = health - amount[/option]
 [explanation]Both of these lines increase the [code]health[/code] of the robot by [code]amount[/code].
-[code]
+
+[code_listing]
 health += amount
 health = health + amount
-[/code][/explanation]
+[/code_listing]
+[/explanation]
 [/quiz_choice]
 
 In the following practices, you'll code the [code]take_damage()[/code] and [code]heal()[/code] functions so the robot's health can decrease and increase.
@@ -60,7 +62,7 @@ I will call the [code]take_damage()[/code] function like this when you run the p
 var health = 100
 
 func take_damage(amount):
-	
+
 [/starting_code]
 [cursor line="0" column="0"]
 [validator path="taking-damage/TestDamagingRobot.gd"]

@@ -24,6 +24,7 @@ This document lists changes between releases.
 - Fix little dot sometimes drawing on code listings with an animated debug arrow
 - Fix type hints like `String` and `Vector2` not being highlighted in practice code (#1434)
 - Fix properties like `item_count` or `gravity` being highlighted as if they were built-in types in code listings (#1449, #1429)
+- Fix code blocks in quizzes having no syntax highlighting (#1422)
 - L19.P2: Fix documentation not displaying
 - Fix unfinished practice pop up and confirmation pop up shooting out of the view (#1417)
 - L11.P1: Make the solution check more lenient. Fix return keyword preventing the code is time dependent check from passing (#1418)

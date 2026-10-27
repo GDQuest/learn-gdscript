@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://cm4wka5quo6oj"]
+[gd_scene load_steps=3 format=3 uid="uid://cm4wka5quo6oj"]
 
 [ext_resource type="StyleBox" uid="uid://dfam4fyp87hjk" path="res://ui/theme/styles/panel_darker.tres" id="2"]
-[ext_resource type="Script" uid="uid://bqtsv6kpc77fd" path="res://ui/components/RichTextLabelRTL.gd" id="2_mciqh"]
+[ext_resource type="Script" path="res://ui/components/ContentBlocks.gd" id="2_cblocks"]
 
 [node name="ScrollableTextBox" type="PanelContainer" unique_id=1071962992]
 custom_minimum_size = Vector2(200, 200)
@@ -12,16 +12,10 @@ theme_override_styles/panel = ExtResource("2")
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1199412519]
 layout_mode = 2
 
-[node name="TextBox" type="RichTextLabel" parent="MarginContainer" unique_id=279096573]
+[node name="ContentBlocks" type="VBoxContainer" parent="MarginContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-focus_mode = 2
-bbcode_enabled = true
-text = "Placeholder text"
-fit_content = true
-meta_underlined = false
-selection_enabled = true
-script = ExtResource("2_mciqh")
-metadata/_custom_type_script = "uid://bqtsv6kpc77fd"
+script = ExtResource("2_cblocks")
+metadata/_custom_type_script = "uid://sc1nhvisvh0i"

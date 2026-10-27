@@ -293,6 +293,8 @@ static func _get_text_content(node: BBCodeParser.ParseNode, recurse: bool) -> St
 			text += child
 		elif child is BBCodeParser.ParseNode and recurse:
 			var child_node: BBCodeParser.ParseNode = child
+			if child_node.tag == BBCodeParserData.Tag.CODE_LISTING:
+				continue
 			if child_node.tag == BBCodeParserData.Tag.GLOSSARY:
 				# The glossary tag's own content is the exact text to display
 				# (in whatever form or language the author/translator wrote),
@@ -307,3 +309,76 @@ static func _get_text_content(node: BBCodeParser.ParseNode, recurse: bool) -> St
 
 static func _to_snake_case(input_string: String, separator := "_") -> String:
 	return snake_case_regex.sub(input_string, " ", true).strip_edges().replace(" ", separator).to_lower()
+
+
+## Returns the raw code of a [code_listing] node, to display in a CodeEdit.
+static func get_code_listing_text(node: BBCodeParser.ParseNode) -> String:
+	var text := ""
+	for child in node.children:
+		if child is String:
+			text += child
+	return clean_text_content(text)
+
+
+## Finds the first child node with the given tag and returns its content
+## blocks. Returns an empty array when there is no such child.
+static func get_child_content_blocks(node: BBCodeParser.ParseNode, tag: int) -> Array:
+	for child: Variant in node.children:
+		if child is BBCodeParser.ParseNode and child.tag == tag:
+			return get_content_blocks(child)
+	return []
+
+
+## Returns the content blocks of every [hint] child of a practice node, as an
+## array of block arrays (one per hint, in order).
+static func get_practice_hint_blocks(practice: BBCodeParser.ParseNode) -> Array:
+	var hints := []
+	for child: Variant in practice.children:
+		if child is BBCodeParser.ParseNode and child.tag == BBCodeParserData.Tag.HINT:
+			hints.append(get_content_blocks(child))
+	return hints
+
+
+## Splits the children of a content container node into an ordered list of
+## blocks: String text chunks separated by blank lines, and CODE_LISTING
+## ParseNodes for code listings. Text chunks are translatable; code listings
+## are opaque nodes that get rendered as code editors, never translated.
+##
+## By default, text nested in child nodes (e.g. inline [glossary] tags) is
+## collected. Pass direct_children_only for containers with structural
+## children that must be skipped, like quizzes ([option], [explanation]...).
+static func get_content_blocks(node: BBCodeParser.ParseNode, direct_children_only := false) -> Array:
+	var blocks := []
+	var text := ""
+
+	for child in node.children:
+		if child is String:
+			text += child
+		elif child is BBCodeParser.ParseNode:
+			var child_node: BBCodeParser.ParseNode = child
+			if child_node.tag == BBCodeParserData.Tag.CODE_LISTING:
+				blocks.append_array(_split_text_chunks(text))
+				text = ""
+				blocks.append(child_node)
+			elif not direct_children_only:
+				text += _get_text_content(child_node, true)
+
+	blocks.append_array(_split_text_chunks(text))
+
+	return blocks
+
+
+## Splits a text block into chunks separated by blank lines.
+static func _split_text_chunks(text: String) -> Array:
+	var chunks := []
+	var current := PackedStringArray()
+	for line: String in clean_text_content(text).split("\n"):
+		if line.strip_edges() == "":
+			if not current.is_empty():
+				chunks.append("\n".join(current))
+				current = PackedStringArray()
+		else:
+			current.append(line)
+	if not current.is_empty():
+		chunks.append("\n".join(current))
+	return chunks

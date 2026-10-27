@@ -41,6 +41,7 @@ var _build_commands := {
 	BBCodeParserData.Tag.QUIZ_INPUT: _make_quiz,
 	BBCodeParserData.Tag.SEPARATOR: _make_separator,
 	BBCodeParserData.Tag.VISUAL: _make_visual,
+	BBCodeParserData.Tag.CODE_LISTING: _make_code_listing,
 }
 
 var _base_text_font_size: int = preload("res://ui/theme/fonts/font_text.tres").base_font.msdf_size
@@ -313,8 +314,23 @@ func _make_note(
 				var visual_instance := _make_visual(child, _course_index, _lesson, _user_profile)
 				if visual_instance:
 					revealer.add_child(visual_instance)
+			BBCodeParserData.Tag.CODE_LISTING:
+				revealer.add_child(_make_code_listing(child, _course_index, _lesson, _user_profile))
 	_previous_paragraph = null
 	return revealer
+
+
+## Creates a read-only code editor displaying a [code_listing] node's code.
+## Resets the previous paragraph so text after the listing does not merge into
+## the label built before it (preserving content order).
+func _make_code_listing(
+	node: BBCodeParser.ParseNode,
+	_target_course_index: CourseIndex,
+	_target_lesson: BBCodeParser.ParseNode,
+	_user_profile: Profile,
+) -> CanvasItem:
+	_previous_paragraph = null
+	return ContentBlocks.make_code_listing(node)
 
 
 ## Inserts a title, either accumulating text in the paragraph being built if

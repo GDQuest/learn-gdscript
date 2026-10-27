@@ -45,13 +45,13 @@ To get the exponential growth, we multiply the [code]max_health[/code] by an amo
 To multiply values together, we use [code]*[/code].
 
 [quiz_choice question="What is the value of damage?" multiple="false" shuffle="true"]
-[code]
+[code_listing]
 var level = 5
 var power = 3
 
 func calculate_damage():
 	var damage = power * level
-[/code]
+[/code_listing]
 [option correct]15[/option]
 [option]9[/option]
 [option]10[/option]
@@ -61,14 +61,14 @@ func calculate_damage():
 We can use [code]*=[/code] in the same way as [code]-=[/code] and [code]+=[/code].
 
 [quiz_choice question="What is the value of damage now?" multiple="false" shuffle="true"]
-[code]
+[code_listing]
 var level = 5
 var power = 3
 
 func calculate_damage():
 	var damage = power * level
 	damage *= 2
-[/code]
+[/code_listing]
 [option correct]30[/option]
 [option]13[/option]
 [option]25[/option]
@@ -100,7 +100,7 @@ var level = 1
 var max_health = 100
 
 func level_up():
-	
+
 [/starting_code]
 [cursor line="0" column="0"]
 [validator path="increase_max_health/TestHealthIncreased.gd"]

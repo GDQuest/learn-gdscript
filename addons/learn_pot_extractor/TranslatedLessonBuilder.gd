@@ -11,7 +11,9 @@ static func parse_lesson(lesson_bbcode_path: String) -> BBCodeParser.ParseNode:
 	var parser := LessonBBCodeParser.new()
 	var result := parser.parse_file(lesson_bbcode_path)
 	if not result.is_success():
-		push_error("Failed to parse lesson '%s':\n%s" % [lesson_bbcode_path, result.get_all_messages()])
+		push_error(
+			"Failed to parse lesson '%s':\n%s" % [lesson_bbcode_path, result.get_all_messages()]
+		)
 		return null
 	if result.root.children.is_empty():
 		push_error("Failed to parse lesson '%s': no lesson root found." % [lesson_bbcode_path])
@@ -19,30 +21,67 @@ static func parse_lesson(lesson_bbcode_path: String) -> BBCodeParser.ParseNode:
 	return result.root.children[0]
 
 
-
 ## Builds one translated lesson. translation_report is passed around and updated by this function.
-static func build_translated_lesson(lesson: BBCodeParser.ParseNode, tr_blocks: Dictionary, translation_report: Dictionary) -> String:
+static func build_translated_lesson(
+	lesson: BBCodeParser.ParseNode,
+	tr_blocks: Dictionary,
+	translation_report: Dictionary,
+) -> String:
 	var lesson_builder: Array[String] = []
-	_build_lesson_tag(lesson_builder, lesson, tr_blocks, translation_report)
+	var translated_title := _tr(BBCodeUtils.get_lesson_title(lesson), tr_blocks, translation_report)
+	lesson_builder.append_array(
+		['[lesson title="%s"]' % [translated_title.replace('"', r'\"')], ""]
+	)
 	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
 	var practice_idx := 0
 	for child: BBCodeParser.ParseNode in lesson.children:
 		match child.tag:
 			BBCodeParserData.Tag.TITLE:
-				_build_title_tag(lesson_builder, lesson, child, tr_blocks, translation_report)
+				var title_text := _tr(
+					BBCodeUtils.get_lesson_title_for_index(lesson, lesson.children.find(child)),
+					tr_blocks,
+					translation_report,
+				)
+				lesson_builder.append_array(["[title]%s[/title]" % [title_text], ""])
 			BBCodeParserData.Tag.VISUAL:
-				_build_visual_tag(lesson_builder, child)
+				lesson_builder.append_array(
+					['[visual path="%s"]' % [BBCodeUtils.get_visual_path(child)], ""]
+				)
 			BBCodeParserData.Tag.NOTE:
-				_build_note_tag(lesson_builder, child, tr_blocks, translation_report)
+				var translated_title := _tr(
+					BBCodeUtils.get_note_title(child),
+					tr_blocks,
+					translation_report,
+				)
+				lesson_builder.append('[note title="%s"]' % [translated_title.replace('"', r'\"')])
+				var note_blocks := BBCodeUtils.get_content_blocks(child)
+				for i in note_blocks.size():
+					_append_content_block(
+						lesson_builder,
+						note_blocks[i],
+						tr_blocks,
+						translation_report,
+					)
+					if i < note_blocks.size() - 1:
+						lesson_builder.append("")
+				lesson_builder.append_array(["[/note]", ""])
 			BBCodeParserData.Tag.QUIZ_CHOICE:
 				_build_quiz_choice_tag(lesson_builder, child, tr_blocks, translation_report)
 			BBCodeParserData.Tag.QUIZ_INPUT:
 				pass
 			BBCodeParserData.Tag.PARAGRAPH:
-				_build_text(lesson_builder, child, tr_blocks, translation_report)
+				var blocks := BBCodeUtils.get_content_blocks(child)
+				for i in blocks.size():
+					_append_content_block(lesson_builder, blocks[i], tr_blocks, translation_report)
+					if i < blocks.size() - 1:
+						lesson_builder.append("")
+				lesson_builder.append("")
+			BBCodeParserData.Tag.CODE_LISTING:
+				_append_code_listing_lines(lesson_builder, child)
+				lesson_builder.append("")
 			BBCodeParserData.Tag.PRACTICE:
 				_build_practice_tag(lesson_builder, child, tr_blocks, translation_report)
-				if practice_idx < practice_count-1:
+				if practice_idx < practice_count - 1:
 					lesson_builder.append("")
 				practice_idx += 1
 
@@ -51,100 +90,139 @@ static func build_translated_lesson(lesson: BBCodeParser.ParseNode, tr_blocks: D
 	return "\n".join(lesson_builder)
 
 
-static func _build_lesson_tag(str_builder: Array[String], lesson: BBCodeParser.ParseNode, tr_blocks: Dictionary, translation_report: Dictionary) -> void:
-	str_builder.append_array(['[lesson title="%s"]' % [_tr(BBCodeUtils.get_lesson_title(lesson), tr_blocks, translation_report).replace('"', r'\"')], ""])
+## Appends a [code_listing] block without a trailing blank line. Use this inside
+## other container tags like [explanation].
+static func _append_code_listing_lines(
+	str_builder: Array[String],
+	node: BBCodeParser.ParseNode,
+) -> void:
+	str_builder.append("[code_listing]")
+	for line: String in BBCodeUtils.get_code_listing_text(node).split("\n"):
+		str_builder.append(line)
+	str_builder.append("[/code_listing]")
 
 
-static func _build_title_tag(str_builder: Array[String], lesson: BBCodeParser.ParseNode, title: BBCodeParser.ParseNode, tr_blocks: Dictionary, translation_report: Dictionary) -> void:
-	str_builder.append_array(["[title]%s[/title]" % [_tr(BBCodeUtils.get_lesson_title_for_index(lesson, lesson.children.find(title)), tr_blocks, translation_report)], ""])
-
-
-static func _build_visual_tag(str_builder: Array[String], visual: BBCodeParser.ParseNode) -> void:
-	str_builder.append_array(['[visual path="%s"]' % [BBCodeUtils.get_visual_path(visual)], ""])
-
-
-static func _build_note_tag(str_builder: Array[String], note: BBCodeParser.ParseNode, tr_blocks: Dictionary, translation_report: Dictionary) -> void:
-	str_builder.append('[note title="%s"]' % [_tr(BBCodeUtils.get_note_title(note), tr_blocks, translation_report).replace('"', r'\"')])
-
-	var note_lines := _get_lines(BBCodeUtils.get_note_contents(note))
-	for i in note_lines.size():
-		var line: String = note_lines[i]
-		str_builder.append(_tr(SHARED.bbcode_rebuild_glossary_tags_from_url_tag(line, []), tr_blocks, translation_report))
-		if i < note_lines.size()-1:
-			str_builder.append("")
-
-	str_builder.append_array(["[/note]", ""])
-
-
-static func _build_quiz_choice_tag(str_builder: Array[String], quiz: BBCodeParser.ParseNode, tr_blocks: Dictionary, translation_report: Dictionary) -> void:
+static func _build_quiz_choice_tag(
+	str_builder: Array[String],
+	quiz: BBCodeParser.ParseNode,
+	tr_blocks: Dictionary,
+	translation_report: Dictionary,
+) -> void:
 	var quiz_data := BBCodeUtils.get_quiz_data(quiz)
-	str_builder.append('[quiz_choice question="%s" multiple="%s" shuffle="%s" en_id="%s"]' % [
-		_tr(quiz_data.question, tr_blocks, translation_report).replace('"', r'\"'),
-		quiz_data.multiple,
-		quiz_data.shuffle,
-		BBCodeUtils.get_quiz_id(quiz)
-	])
+	str_builder.append(
+		'[quiz_choice question="%s" multiple="%s" shuffle="%s" en_id="%s"]'
+		% [
+			_tr(quiz_data.question, tr_blocks, translation_report).replace('"', r'\"'),
+			quiz_data.multiple,
+			quiz_data.shuffle,
+			BBCodeUtils.get_quiz_id(quiz),
+		]
+	)
 
-	var quiz_content_lines := _get_lines(quiz_data.content)
-	for i in quiz_content_lines.size():
-		var line := quiz_content_lines[i]
-		str_builder.append(_tr(SHARED.bbcode_rebuild_glossary_tags_from_url_tag(line, []), tr_blocks, translation_report))
-		if i < quiz_content_lines.size()-1:
+	var content_blocks := BBCodeUtils.get_content_blocks(quiz, true)
+	for i in content_blocks.size():
+		_append_content_block(str_builder, content_blocks[i], tr_blocks, translation_report)
+		if i < content_blocks.size() - 1:
 			str_builder.append("")
 
 	for answer: String in quiz_data.answers:
-		str_builder.append("[option%s]%s[/option]" % [" correct" if quiz_data.valid_answers.has(answer) else "", _tr(answer, tr_blocks, translation_report)])
+		str_builder.append(
+			"[option%s]%s[/option]"
+			% [
+				" correct" if quiz_data.valid_answers.has(answer) else "",
+				_tr(answer, tr_blocks, translation_report),
+			]
+		)
 
-	var explanation_lines := _get_lines(quiz_data.explanation)
-	if explanation_lines.size() == 1:
-		str_builder.append("[explanation]%s[/explanation]" % [_tr(SHARED.bbcode_rebuild_glossary_tags_from_url_tag(explanation_lines[0], []), tr_blocks, translation_report)])
-	else:
-		str_builder.append("[explanation]")
-		for i in explanation_lines.size():
-			var line := explanation_lines[i]
-			str_builder.append(_tr(SHARED.bbcode_rebuild_glossary_tags_from_url_tag(line, []), tr_blocks, translation_report))
-			if i < explanation_lines.size()-1:
-				str_builder.append("")
-		str_builder.append("[/explanation]")
+	_build_tagged_content_block(
+		"explanation",
+		BBCodeUtils.get_child_content_blocks(quiz, BBCodeParserData.Tag.EXPLANATION),
+		true,
+		str_builder,
+		tr_blocks,
+		translation_report,
+	)
 
 	str_builder.append_array(["[/quiz_choice]", ""])
 
 
-static func _build_text(str_builder: Array[String], text_node: BBCodeParser.ParseNode, tr_blocks: Dictionary, translation_report: Dictionary) -> void:
-	var text := BBCodeUtils.get_paragraph_text(text_node)
-	var lines := _get_lines(text)
-	for i in lines.size():
-		var line := lines[i]
-		str_builder.append(_tr(SHARED.bbcode_rebuild_glossary_tags_from_url_tag(line, []), tr_blocks, translation_report))
-		if i < lines.size()-1:
-			str_builder.append("")
-	str_builder.append("")
-
-
-static func _build_practice_tag(str_builder: Array[String], practice: BBCodeParser.ParseNode, tr_blocks: Dictionary, translation_report: Dictionary) -> void:
-	str_builder.append('[practice id="%s" title="%s"]' % [BBCodeUtils.get_practice_id(practice), _tr(BBCodeUtils.get_practice_title(practice), tr_blocks, translation_report).replace('"', r'\"')])
-
-	var description_lines := _get_lines(BBCodeUtils.get_practice_description(practice))
-	if description_lines.size() == 1:
-		str_builder.append("[description]%s[/description]" % [_tr(SHARED.bbcode_rebuild_glossary_tags_from_url_tag(description_lines[0], []), tr_blocks, translation_report)])
+static func _append_content_block(
+	str_builder: Array[String],
+	block: Variant,
+	tr_blocks: Dictionary,
+	translation_report: Dictionary,
+) -> void:
+	if block is BBCodeParser.ParseNode:
+		_append_code_listing_lines(str_builder, block)
 	else:
-		str_builder.append("[description]")
-		for i in description_lines.size():
-			var line := description_lines[i]
-			str_builder.append(_tr(SHARED.bbcode_rebuild_glossary_tags_from_url_tag(line, []), tr_blocks, translation_report))
-		str_builder.append("[/description]")
+		str_builder.append(
+			_tr(
+				SHARED.bbcode_rebuild_glossary_tags_from_url_tag(block, []),
+				tr_blocks,
+				translation_report,
+			)
+		)
 
-	var goal_lines := _get_lines(BBCodeUtils.get_practice_goal(practice))
-	if goal_lines.size() == 1:
-		str_builder.append("[goal]%s[/goal]" % [_tr(SHARED.bbcode_rebuild_glossary_tags_from_url_tag(goal_lines[0], []), tr_blocks, translation_report)])
+
+## Builds a specific bbcode tag that wraps children (e.g. [description], [goal],
+## [hint]...) from content blocks.
+static func _build_tagged_content_block(
+	tag_name: String,
+	blocks: Array,
+	separate_chunks: bool,
+	str_builder: Array[String],
+	tr_blocks: Dictionary,
+	translation_report: Dictionary,
+) -> void:
+	if blocks.size() == 1 and blocks[0] is String:
+		var text: String = blocks[0]
+		var translated_text := _tr(
+			SHARED.bbcode_rebuild_glossary_tags_from_url_tag(text, []),
+			tr_blocks,
+			translation_report,
+		)
+		str_builder.append("[%s]%s[/%s]" % [tag_name, translated_text, tag_name])
 	else:
-		str_builder.append("[goal]")
-		for i in goal_lines.size():
-			var line := goal_lines[i]
-			str_builder.append(_tr(SHARED.bbcode_rebuild_glossary_tags_from_url_tag(line, []), tr_blocks, translation_report))
-			if i < goal_lines.size()-1:
+		str_builder.append("[%s]" % [tag_name])
+		for i in blocks.size():
+			_append_content_block(str_builder, blocks[i], tr_blocks, translation_report)
+			if separate_chunks and i < blocks.size() - 1:
 				str_builder.append("")
-		str_builder.append("[/goal]")
+		str_builder.append("[/%s]" % [tag_name])
+
+
+static func _build_practice_tag(
+	str_builder: Array[String],
+	practice: BBCodeParser.ParseNode,
+	tr_blocks: Dictionary,
+	translation_report: Dictionary,
+) -> void:
+	var translated_title := _tr(
+		BBCodeUtils.get_practice_title(practice),
+		tr_blocks,
+		translation_report,
+	)
+	str_builder.append(
+		'[practice id="%s" title="%s"]'
+		% [BBCodeUtils.get_practice_id(practice), translated_title.replace('"', r'\"')]
+	)
+
+	_build_tagged_content_block(
+		"description",
+		BBCodeUtils.get_child_content_blocks(practice, BBCodeParserData.Tag.DESCRIPTION),
+		false,
+		str_builder,
+		tr_blocks,
+		translation_report,
+	)
+	_build_tagged_content_block(
+		"goal",
+		BBCodeUtils.get_child_content_blocks(practice, BBCodeParserData.Tag.GOAL),
+		true,
+		str_builder,
+		tr_blocks,
+		translation_report,
+	)
 
 	var code_lines := BBCodeUtils.get_practice_starting_code(practice).split("\n")
 	str_builder.append("[starting_code]")
@@ -163,9 +241,16 @@ static func _build_practice_tag(str_builder: Array[String], practice: BBCodePars
 	var slice_name := BBCodeUtils.get_practice_script_slice_name(practice)
 	str_builder.append('[script_slice path="%s" name="%s"]' % [slice_path, slice_name])
 
-	var hints := BBCodeUtils.get_practice_hints(practice)
-	for hint in hints:
-		str_builder.append("[hint]%s[/hint]" % [_tr(hint, tr_blocks, translation_report)])
+	var hint_blocks := BBCodeUtils.get_practice_hint_blocks(practice)
+	for blocks: Array in hint_blocks:
+		_build_tagged_content_block(
+			"hint",
+			blocks,
+			true,
+			str_builder,
+			tr_blocks,
+			translation_report,
+		)
 
 	str_builder.append("[/practice]")
 
@@ -175,39 +260,9 @@ static func _tr(original: String, tr_blocks: Dictionary, translation_report: Dic
 	if not original or not SHARED.is_translatable_course_message(original):
 		return original
 	var original_id: String = original.strip_edges().replace('"', r'\"').replace("\n", r"\n")
-	var block: Dictionary = tr_blocks.get(original_id, {})
+	var block: Dictionary = tr_blocks.get(original_id, { })
 	translation_report.total += 1
 	if not block.is_empty() and block.str and not block.comments.comments.has("fuzzy"):
 		translation_report.count += 1
 		return SHARED.normalize_glossary_tags(block.str.replace(r"\n", "\n").replace(r'\"', '"'))
 	return original
-
-
-static func _get_lines(text_block: String) -> PackedStringArray:
-	var raw_lines := text_block.split("\n", true)
-	var ret := PackedStringArray()
-	var current_line := ""
-	var i := 0
-	var all_blanks := true
-
-	# chunk lines separated by blank lines
-	var result := []
-	var current := []
-
-	for line: String in raw_lines:
-		if line == "":
-			result.append(current)
-			current = []
-		else:
-			all_blanks = false
-			current.append(line)
-	result.append(current)
-
-	ret.clear()
-	for chunk in result:
-		ret.append("\n".join(chunk))
-
-	if all_blanks:
-		return []
-
-	return ret

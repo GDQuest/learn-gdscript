@@ -2,39 +2,13 @@
 class_name PracticeHint
 extends Revealer
 
-@export var text: String:
-	set = set_bbcode_text
+## Displays the hint as ordered content blocks: text chunks become
+## RichTextLabels, code listings become read-only code editors.
 
-@onready var _rich_text_label: RichTextLabel = $RichTextLabel
-
-
-func _ready() -> void:
-	super()
-
-	_update_rtl_text()
+@onready var _content_blocks: ContentBlocks = $ContentBlocks
 
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_TRANSLATION_CHANGED:
-		_update_rtl_text()
-
-
-func set_bbcode_text(new_text: String) -> void:
-	text = new_text
-	_update_rtl_text()
-
-
-func _update_rtl_text() -> void:
-	if not is_node_ready():
-		return
-
-	if Engine.is_editor_hint():
-		_rich_text_label.text = text
-	else:
-		_rich_text_label.text = TextUtils.preprocess_bbcode_for_rich_text_label(text)
-
-
-# Sets the text alignment of the internal RichTextLabel, used to support
-# right-to-left languages.
-func set_text_alignment(alignment: HorizontalAlignment) -> void:
-	_rich_text_label.horizontal_alignment = alignment
+## Displays the hint as ordered content blocks: text chunks become
+## RichTextLabels, code listings become read-only code editors.
+func set_blocks(blocks: Array) -> void:
+	_content_blocks.set_blocks(blocks)
