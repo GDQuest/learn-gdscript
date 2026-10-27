@@ -31,10 +31,27 @@ const TYPE_MAP := {
 	TYPE_PACKED_COLOR_ARRAY: "PackedColorArray",
 }
 
-# Caches regexes to highlight code in text.
-var _REGEXES := { }
-# Intended to be used as a constant
-var _REGEX_REPLACE_MAP := { }
+# Caches regexes and color tags used to highlight code inside [code] spans.
+var _regex_code: RegEx = null
+# Tokens: numbers, quoted strings, function calls (an identifier followed by
+# an opening parenthesis), plain identifiers, and parentheses.
+var _regex_format: RegEx = null
+
+# Opening bbcode color tags, using the same colors as the code editor.
+var _tag_string := ""
+var _tag_number := ""
+var _tag_function := ""
+var _tag_parenthesis := ""
+var _tag_keyword := ""
+var _tag_base_type := ""
+var _tag_global_function := ""
+var _tag_class := ""
+var _tag_control_flow_keyword := ""
+
+# Cache of global function names from CodeEditorEnhancer.GLOBAL_FUNCTIONS, for
+# lookups during code highlighting. The list is fairly long so I'm using this as
+# a "set"
+var _cache_gdscript_global_functions := { }
 
 var _glossary: Glossary = null
 
@@ -44,21 +61,24 @@ func _ready() -> void:
 
 
 func _init() -> void:
-	_REGEXES["code"] = RegEx.create_from_string(r"\[code\](.+?)\[\/code\]")
-	_REGEXES["func"] = RegEx.create_from_string(r"(?<func>\bfunc\b)")
-	_REGEXES["number"] = RegEx.create_from_string(r"(?<number>-?\d+(\.\d+)?)")
-	_REGEXES["string"] = RegEx.create_from_string("(?<string>[\"'].+[\"'])")
-	_REGEXES["symbol"] = RegEx.create_from_string("(?<symbol>[a-zA-Z_][a-zA-Z0-9_]+|[a-zA-Z])")
-	_REGEXES["format"] = RegEx.create_from_string(
-		"[\"\\-']?\\d+(\\.\\d+)?[\"']?|[\"'].+[\"']|[a-zA-Z0-9_]+"
+	_regex_code = RegEx.create_from_string(r"\[code\](.+?)\[\/code\]")
+	_regex_format = RegEx.create_from_string(
+		"-?\\d+(\\.\\d+)?|[\"'].+[\"']|[a-zA-Z_]\\w*\\s*\\(|[a-zA-Z0-9_]+|[()]"
 	)
 
-	_REGEX_REPLACE_MAP = {
-		"func": "[color=#%s]$func[/color]" % CodeEditorEnhancer.COLOR_KEYWORD.to_html(false),
-		"number": "[color=#%s]$number[/color]" % CodeEditorEnhancer.COLOR_NUMBERS.to_html(false),
-		"symbol": "[color=#%s]$symbol[/color]" % CodeEditorEnhancer.COLOR_MEMBER.to_html(false),
-		"string": "[color=#%s]$string[/color]" % CodeEditorEnhancer.COLOR_QUOTES.to_html(false),
-	}
+	_tag_string = "[color=#%s]" % CodeEditorEnhancer.COLOR_STRING.to_html(false)
+	_tag_number = "[color=#%s]" % CodeEditorEnhancer.COLOR_NUMBER.to_html(false)
+	_tag_function = "[color=#%s]" % CodeEditorEnhancer.COLOR_FUNCTIONS.to_html(false)
+	_tag_parenthesis = "[color=#%s]" % CodeEditorEnhancer.COLOR_MEMBER.to_html(false)
+	_tag_keyword = "[color=#%s]" % CodeEditorEnhancer.COLOR_KEYWORD.to_html(false)
+	_tag_base_type = "[color=#%s]" % CodeEditorEnhancer.COLOR_BASE_TYPE.to_html(false)
+	_tag_global_function = "[color=#%s]" % CodeEditorEnhancer.COLOR_GLOBAL_FUNCTION.to_html(false)
+	_tag_class = "[color=#%s]" % CodeEditorEnhancer.COLOR_CLASS.to_html(false)
+	_tag_control_flow_keyword = "[color=#%s]" % CodeEditorEnhancer \
+			.COLOR_KEYWORD_CONTROL_FLOW \
+			.to_html(false)
+	for function_name in CodeEditorEnhancer.GLOBAL_FUNCTIONS:
+		_cache_gdscript_global_functions[function_name] = true
 
 
 ## Use this function to get the Glossary singleton. It gives access to glossary
@@ -88,54 +108,83 @@ func preprocess_bbcode_for_rich_text_label(text := "") -> String:
 
 
 func bbcode_add_code_color(text := "") -> String:
-	var code_regex: RegEx = _REGEXES["code"]
-	var regex_matches: Array = code_regex.search_all(text)
-	var index_delta := 0
+	var regex_matches: Array = _regex_code.search_all(text)
+	if regex_matches.is_empty():
+		return text
 
+	# Matches are found from left to right, so we can rebuild the text in a
+	# single pass, copying the parts between [code] spans unchanged.
+	var output := ""
+	var last_match_end := 0
 	for regex_match: RegExMatch in regex_matches:
-		var index_offset := regex_match.get_start() + index_delta
-		var initial_length: int = regex_match.strings[0].length()
-		var match_string: String = regex_match.strings[1]
+		output += text.substr(last_match_end, regex_match.get_start() - last_match_end)
+		output += "[code]" + _highlight_code(regex_match.strings[1]) + "[/code]"
+		last_match_end = regex_match.get_end()
+	output += text.substr(last_match_end)
+	return output
 
-		var colored_string := ""
-		# The algorithm consists of finding all regex matches of a-zA-Z0-9_ and \d.\d
-		# Then formatting these regex matches, and adding the parts in-between
-		# matches to the formatted string.
-		var format_regex: RegEx = _REGEXES["format"]
-		var to_format: Array = format_regex.search_all(match_string)
-		var last_match_end := -1
-		for match_to_format: RegExMatch in to_format:
-			var match_start: int = match_to_format.get_start()
-			if last_match_end == -1 and match_start > 0:
-				colored_string += _bbcode_escape_square_brackets(
-					match_string.substr(0, match_start)
-				)
-			if last_match_end != -1:
-				colored_string += _bbcode_escape_square_brackets(
-					match_string.substr(last_match_end, match_start - last_match_end)
-				)
-			var part: String = match_to_format.get_string()
-			for regex_type in ["string", "func", "symbol", "number"]:
-				var typed_regex: RegEx = _REGEXES[regex_type]
-				var replaced: String = typed_regex.sub(
-					part,
-					_REGEX_REPLACE_MAP[regex_type] as String,
-					false,
-				)
-				if part != replaced:
-					colored_string += replaced
-					last_match_end = match_to_format.get_end()
-					break
 
-		colored_string += _bbcode_escape_square_brackets(match_string.substr(last_match_end))
-		if colored_string == "":
-			colored_string = _bbcode_escape_square_brackets(match_string)
-		colored_string = "[code]" + colored_string + "[/code]"
-		text = text.erase(index_offset, initial_length)
-		text = text.insert(index_offset, colored_string)
-		index_delta += (colored_string.length() - initial_length)
-
-	return text
+# Colors numbers, strings, and function calls in a [code] span's contents.
+# The algorithm tokenizes the code with _regex_format, colors each token based
+# on its first character, and leaves the text in between uncolored.
+#
+# Note this only does a subset of the syntax highlighting in the code
+# editor, just enough for lesson text to look good.
+func _highlight_code(code: String) -> String:
+	var output := ""
+	var last_match_end := 0
+	for regex_match: RegExMatch in _regex_format.search_all(code):
+		var part := regex_match.get_string()
+		var formatted := ""
+		var first_character := part[0]
+		# For strings, parentheses, and numbers, we can determine the token type
+		# based on the first character.
+		if first_character == "\"" or first_character == "'":
+			formatted = _tag_string + part + "[/color]"
+		elif first_character == "(" or first_character == ")":
+			formatted = _tag_parenthesis + part + "[/color]"
+		elif first_character == "-" or (first_character >= "0" and first_character <= "9"):
+			formatted = _tag_number + part + "[/color]"
+		# We found a function call and highlight it like a member call in Godot. It
+		# highlights any pattern that's like name(...). Global functions like
+		# print() use the editor's purple global function color instead.
+		elif part.ends_with("("):
+			var name_part := part.substr(0, part.length() - 1)
+			var function_name := name_part.rstrip(" \t")
+			var whitespace := name_part.substr(function_name.length())
+			var function_tag := _tag_function
+			if function_name in _cache_gdscript_global_functions:
+				function_tag = _tag_global_function
+			# This is for base type constructors like calling int().
+			elif function_name in CodeEditorEnhancer.BASE_TYPES:
+				function_tag = _tag_base_type
+			# This is for class constructors like calling Vector2().
+			elif function_name in CodeEditorEnhancer.EXTRA_CLASS_NAMES:
+				function_tag = _tag_class
+			elif function_name in CodeEditorEnhancer.KEYWORDS:
+				# Keywords followed by a parenthesis, like "if (...)", are
+				# matched as function calls by the tokenizer.
+				function_tag = _tag_keyword
+			elif function_name in CodeEditorEnhancer.CONTROL_FLOW_KEYWORDS:
+				function_tag = _tag_control_flow_keyword
+			formatted = function_tag + function_name + "[/color]" + whitespace + _tag_parenthesis + "([/color]"
+		elif part in CodeEditorEnhancer.KEYWORDS:
+			formatted = _tag_keyword + part + "[/color]"
+		elif part in CodeEditorEnhancer.CONTROL_FLOW_KEYWORDS:
+			formatted = _tag_control_flow_keyword + part + "[/color]"
+		elif part in CodeEditorEnhancer.BASE_TYPES:
+			formatted = _tag_base_type + part + "[/color]"
+		elif part in CodeEditorEnhancer.EXTRA_CLASS_NAMES:
+			formatted = _tag_class + part + "[/color]"
+		if formatted.is_empty():
+			continue
+		output += _bbcode_escape_square_brackets(
+			code.substr(last_match_end, regex_match.get_start() - last_match_end)
+		)
+		output += formatted
+		last_match_end = regex_match.get_end()
+	output += _bbcode_escape_square_brackets(code.substr(last_match_end))
+	return output
 
 
 func convert_input_action_to_tooltip(action: String) -> String:
@@ -171,20 +220,14 @@ func tr_paragraph(text: String) -> String:
 	if text.is_empty():
 		return text
 
-	# Normalize line endings first (Windows CRLF to LF) to avoid edge cases on
-	# Windows in particular.
-	var normalized := text.replace("\r\n", "\n")
-	var paragraphs := normalized.split("\n\n")
+	var normalized_line_endings := text.replace("\r\n", "\n")
+	var paragraphs := _paragraphs_split_and_normalize(normalized_line_endings)
 	if paragraphs.size() <= 1:
-		return tr(normalized)
+		return tr(normalized_line_endings)
 
 	var translated_paragraphs := PackedStringArray()
-	for current_paragraph in paragraphs:
-		var trimmed: String = current_paragraph.strip_edges()
-		if trimmed.is_empty():
-			translated_paragraphs.append("")
-		else:
-			translated_paragraphs.append(tr(trimmed))
+	for paragraph_text in paragraphs:
+		translated_paragraphs.append(tr(paragraph_text))
 
 	return "\n\n".join(translated_paragraphs)
 
@@ -193,22 +236,21 @@ func paragraph(text: String) -> String:
 	if text.is_empty():
 		return text
 
-	# Normalize line endings first (Windows CRLF to LF) to avoid edge cases on
-	# Windows in particular.
 	var normalized := text.replace("\r\n", "\n")
-	var paragraphs := normalized.split("\n\n")
+	var paragraphs := _paragraphs_split_and_normalize(normalized)
 	if paragraphs.size() <= 1:
 		return normalized
 
-	var parsed_paragraphs := PackedStringArray()
-	for current_paragraph in paragraphs:
-		var trimmed: String = current_paragraph.strip_edges()
-		if trimmed.is_empty():
-			parsed_paragraphs.append("")
-		else:
-			parsed_paragraphs.append(trimmed)
+	return "\n\n".join(paragraphs)
 
-	return "\n\n".join(parsed_paragraphs)
+
+# This function splits strings into paragraphs and strips each line. This
+# normalizes paragraphs and we can then translate each one individually.
+func _paragraphs_split_and_normalize(text: String) -> PackedStringArray:
+	var paragraphs := text.split("\n\n")
+	for index in paragraphs.size():
+		paragraphs[index] = paragraphs[index].strip_edges()
+	return paragraphs
 
 
 ## Replaces raw square brackets with the literal bracket tags [lb] and [rb].
@@ -225,23 +267,57 @@ func _bbcode_escape_square_brackets(text: String) -> String:
 
 
 # Call this function to ensure that changes to the formatter don't change color highlighting.
+# TODO: move this to a test runner and to the program's test suite.
 func _test_formatting() -> void:
-	var color_number := CodeEditorEnhancer.COLOR_NUMBERS.to_html(false)
-	var color_symbol := CodeEditorEnhancer.COLOR_MEMBER.to_html(false)
-	var color_string := CodeEditorEnhancer.COLOR_QUOTES.to_html(false)
+	var color_number := CodeEditorEnhancer.COLOR_NUMBER.to_html(false)
+	var color_string := CodeEditorEnhancer.COLOR_STRING.to_html(false)
+	var color_function := CodeEditorEnhancer.COLOR_FUNCTIONS.to_html(false)
+	var color_parenthesis := CodeEditorEnhancer.COLOR_MEMBER.to_html(false)
+	var color_keyword := CodeEditorEnhancer.COLOR_KEYWORD.to_html(false)
+	var tag_test_function := "[color=#" + color_function + "]"
+	var tag_test_parenthesis := "[color=#" + color_parenthesis + "]"
+	var tag_test_number := "[color=#" + color_number + "]"
+	var tag_test_global_function := "[color=#" + CodeEditorEnhancer.COLOR_GLOBAL_FUNCTION.to_html(
+		false
+	) + "]"
+	var tag_test_base_type := "[color=#" + CodeEditorEnhancer.COLOR_BASE_TYPE.to_html(false) + "]"
+	var tag_test_class := "[color=#" + CodeEditorEnhancer.COLOR_CLASS.to_html(false) + "]"
+	var tag_test_control_flow_keyword := "[color=#" + CodeEditorEnhancer \
+			.COLOR_KEYWORD_CONTROL_FLOW \
+			.to_html(false) + "]"
 	# Pairs of strings that would be inside of [code] bbcode tags and their formatted output.
 	# We omit the [code] tags in the dictionary for readability, they get added in the tests.
 	var test_pairs := {
-		"[0, 1, 2]": "[lb][color=#eb9433]0[/color], [color=#eb9433]1[/color], [color=#eb9433]2[/color][rb]",
-		"-10": "[color=#" + color_number + "]-10[/color]",
+		"[0, 1, 2]": "[lb]" + tag_test_number + "0[/color], " + tag_test_number
+		+ "1[/color], " + tag_test_number + "2[/color][rb]",
+		"-10": tag_test_number + "-10[/color]",
 		"\"Some string.\"": "[color=#" + color_string + "]\"Some string.\"[/color]",
-		"add_order()": "[color=#" + color_symbol + "]add_order[/color]()",
-		"Vector2(2, 0)": "[color=#" + color_symbol + "]Vector2[/color]([color=#" + color_number
-		+ "]2[/color], [color=#" + color_number + "]0[/color])",
-		"use_item(item)": "[color=#" + color_symbol + "]use_item[/color]([color=#"
-		+ color_symbol + "]item[/color])",
-		"units[cell]": "[color=#" + color_symbol + "]units[/color][lb][color=#"
-		+ color_symbol + "]cell[/color][rb]",
+		"add_order()": tag_test_function + "add_order[/color]" + tag_test_parenthesis
+		+ "([/color]" + tag_test_parenthesis + ")[/color]",
+		"Vector2(2, 0)": tag_test_class + "Vector2[/color]" + tag_test_parenthesis
+		+ "([/color]" + tag_test_number + "2[/color], " + tag_test_number
+		+ "0[/color]" + tag_test_parenthesis + ")[/color]",
+		"Vector2": tag_test_class + "Vector2[/color]",
+		"int(5)": tag_test_base_type + "int[/color]" + tag_test_parenthesis + "([/color]"
+		+ tag_test_number + "5[/color]" + tag_test_parenthesis + ")[/color]",
+		"if x > 0": tag_test_control_flow_keyword + "if[/color] x > "
+		+ tag_test_number + "0[/color]",
+		"use_item(item)": tag_test_function + "use_item[/color]" + tag_test_parenthesis
+		+ "([/color]item" + tag_test_parenthesis + ")[/color]",
+		"lerp(a, clamp(x, 0, 1))": tag_test_global_function + "lerp[/color]" + tag_test_parenthesis
+		+ "([/color]a, " + tag_test_global_function + "clamp[/color]" + tag_test_parenthesis
+		+ "([/color]x, " + tag_test_number + "0[/color], " + tag_test_number + "1[/color]"
+		+ tag_test_parenthesis + ")[/color]" + tag_test_parenthesis + ")[/color]",
+		"print(\"(\")": tag_test_global_function + "print[/color]" + tag_test_parenthesis
+		+ "([/color][color=#" + color_string + "]\"(\"[/color]" + tag_test_parenthesis + ")[/color]",
+		"var score: int = 5": "[color=#" + color_keyword + "]var[/color] score: "
+		+ tag_test_base_type + "int[/color] = " + tag_test_number + "5[/color]",
+		"if (x > 0):": tag_test_control_flow_keyword + "if[/color] " + tag_test_parenthesis
+		+ "([/color]x > " + tag_test_number + "0[/color]" + tag_test_parenthesis + ")[/color]:",
+		"func _ready():": "[color=#" + color_keyword + "]func[/color] "
+		+ tag_test_function + "_ready[/color]" + tag_test_parenthesis
+		+ "([/color]" + tag_test_parenthesis + ")[/color]:",
+		"units[cell]": "units[lb]cell[rb]",
 		"=": "=",
 		">": ">",
 	}

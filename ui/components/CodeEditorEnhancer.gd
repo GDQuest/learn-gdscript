@@ -8,16 +8,36 @@ extends Node
 
 const GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH := "res://ui/theme/gdscript_syntax_highlighter.tres"
 
-const COLOR_CLASS := Color(0.666667, 0, 0.729412)
-const COLOR_MEMBER := Color(0.32, 0.82, 0.97)
-const COLOR_KEYWORD := Color(1, 0.094118, 0.321569)
-const COLOR_QUOTES := Color(1, 0.960784, 0.25098)
-const COLOR_COMMENTS := Color(0.290196, 0.294118, 0.388235)
-const COLOR_NUMBERS := Color(0.922, 0.580, 0.200)
-const COLOR_SYMBOLS := Color(0.407, 0.587, 1.0)
-const COLOR_FUNCTIONS := Color(0.34, 0.69, 1.0)
-const KEYWORDS := [
+# These colors come from the default Godot theme in version 4.7.
+# In Godot: text_color: variables and other plain identifiers.
+const COLOR_TEXT := Color(1.0, 1.0, 1.0, 0.75)
+# In Godot: engine_type_color: Classes like Node, Sprite2D.
+const COLOR_CLASS := Color(0.56, 1.0, 0.86)
+# In Godot: base_type_color: bool, int, float, void, Variant.
+const COLOR_BASE_TYPE := Color(0.26, 1.0, 0.76)
+# In Godot: member_variable_color: property access after a dot.
+const COLOR_MEMBER := Color(0.736, 0.88, 1.0)
+# In Godot: keyword_color: keywords like func, var...
+const COLOR_KEYWORD := Color(1.0, 0.44, 0.52)
+# In Godot: control_flow_keyword_color: pink used for control flow keywords like
+# if, else.
+const COLOR_KEYWORD_CONTROL_FLOW := Color(1.0, 0.55, 0.8)
+# In Godot: gdscript/global_function_color: for global functions like print, lerp...
+const COLOR_GLOBAL_FUNCTION := Color(0.64, 0.64, 0.96)
+# In Godot: function_color: general function calls.
+const COLOR_FUNCTIONS := Color(0.34, 0.7, 1.0)
+# In Godot: string_color: strings
+const COLOR_STRING := Color(1.0, 0.93, 0.63)
+# In Godot: comment_color: comments
+const COLOR_COMMENTS := Color(1.0, 1.0, 1.0, 0.5)
+# In Godot: number_color: numbers
+const COLOR_NUMBER := Color(0.63, 1.0, 0.88)
+# In Godot: symbol_color: color used for dots, parentheses, attribute accesses
+const COLOR_SYMBOLS := Color(0.67, 0.79, 1.0)
+# In Godot: gdscript/annotation_color: @export, @onready...
+const COLOR_ANNOTATIONS := Color(1.0, 0.7, 0.45)
 
+const KEYWORDS := [
 	# Basic keywords.
 	"var",
 	"const",
@@ -30,41 +50,60 @@ const KEYWORDS := [
 	"self",
 	"super",
 
-	# Control flow keywords.
-	"if",
-	"elif",
-	"else",
+	# Boolean operators.
 	"not",
 	"and",
 	"or",
 	"in",
-	"for",
-	"do",
-	"while",
-	"match",
-	"switch",
-	"case",
-	"break",
-	"continue",
-	"pass",
-	"return",
 	"is",
 
 	# Godot-specific keywords.
-	"setget",
 	"breakpoint",
+	"await",
 
-	# Primitive data types.
-	"bool",
-	"int",
-	"float",
+	# Bools and null.
 	"null",
 	"true",
 	"false",
-	"void",
+]
 
-	# Global GDScript namespace.
-	"await",
+# This copies the official editor that now uses a pink color for control flow
+# keywords in version 4.X.
+# Ref: GDScriptLanguage::is_control_flow_keyword().
+const CONTROL_FLOW_KEYWORDS := [
+	"break",
+	"continue",
+	"elif",
+	"else",
+	"for",
+	"if",
+	"match",
+	"pass",
+	"return",
+	"when",
+	"while",
+]
+
+const BASE_TYPES := [
+	"bool",
+	"int",
+	"float",
+	"void",
+	"Variant",
+]
+
+# Covers extra classes like Vector2 that are not derived from Object but that
+# also get highlighted in green.
+#
+# I've only included the class names we use in the course right now;
+# extend it if the course mentions new ones (or consider getting through reflection later)
+const EXTRA_CLASS_NAMES := [
+	"Array",
+	"String",
+	"Vector2",
+]
+
+const GLOBAL_FUNCTIONS := [
 	"Color8",
 	"ColorN",
 	"abs",
@@ -78,36 +117,42 @@ const KEYWORDS := [
 	"ceil",
 	"char",
 	"clamp",
+	"clampf",
+	"clampi",
 	"convert",
 	"cos",
 	"cosh",
 	"db_to_linear",
-	"decials",
-	"move_toward",
 	"deg_to_rad",
-	"dict_to_inst",
 	"ease",
-	"expo",
+	"error_string",
+	"exp",
 	"floor",
+	"floorf",
+	"floori",
 	"fmod",
 	"fposmod",
-	"funcref",
 	"hash",
-	"inst_to_dict",
 	"instance_from_id",
 	"inverse_lerp",
+	"is_equal_approx",
 	"is_inf",
+	"is_instance_valid",
 	"is_nan",
-	"len",
+	"is_zero_approx",
 	"lerp",
+	"lerpf",
 	"linear_to_db",
 	"load",
 	"log",
 	"max",
+	"maxf",
+	"maxi",
 	"min",
+	"minf",
+	"mini",
+	"move_toward",
 	"nearest_po2",
-	"parse_json",
-	"polar2cartesian",
 	"pow",
 	"preload",
 	"print",
@@ -116,39 +161,48 @@ const KEYWORDS := [
 	"printraw",
 	"prints",
 	"printt",
+	"push_error",
+	"push_warning",
 	"rad_to_deg",
-	"randf_range",
-	"rand_seed",
 	"randf",
+	"randf_range",
 	"randi",
+	"randi_range",
 	"randomize",
 	"range",
 	"remap",
 	"round",
+	"roundf",
+	"roundi",
 	"seed",
 	"sign",
+	"signf",
+	"signi",
 	"sin",
 	"sinh",
+	"smoothstep",
 	"sqrt",
-	"snapped",
+	"step_decimals",
 	"str",
 	"str_to_var",
+	"snapped",
+	"snappedf",
 	"tan",
 	"tanh",
-	"JSON.new().stringify",
 	"type_exists",
+	"type_string",
 	"typeof",
-	"validate_json",
 	"var_to_bytes",
 	"var_to_str",
 	"weakref",
 	"wrapf",
 	"wrapi",
+
+	# Built-in constants.
 	"PI",
 	"TAU",
 	"INF",
 	"NAN",
-	"Variant",
 ]
 
 const ANNOTATIONS := [
@@ -197,7 +251,10 @@ static func enhance(text_edit: CodeEdit) -> void:
 	if not text_edit.syntax_highlighter or text_edit.syntax_highlighter.resource_path != GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH:
 		text_edit.syntax_highlighter = load(GDSCRIPT_SYNTAX_HIGHLIGHTER_PATH)
 	if not Engine.is_editor_hint():
-		text_edit.syntax_highlighter = text_edit.syntax_highlighter.duplicate()
+		# Note that we can't share the same highlighter resource across multiple
+		# CodeEdits, it breaks highlighting otherwise. It's a resource that must
+		# be unique to each code listing.
+		text_edit.syntax_highlighter = text_edit.syntax_highlighter.duplicate(true)
 	text_edit.gutters_draw_line_numbers = true
 	text_edit.draw_tabs = true
 	text_edit.draw_spaces = true
@@ -215,8 +272,11 @@ static func prevent_editable(text_edit: CodeEdit) -> void:
 	text_edit.gui_input.connect(_input_event_bypass.bind(text_edit))
 
 
+# This function is only used in the editor, we bake as much as possible in a
+# .tres file to avoid running these costly operations when instantiating every
+# code listing.
 static func enhance_highlighter(highlighter: CodeHighlighter) -> void:
-	highlighter.number_color = COLOR_NUMBERS
+	highlighter.number_color = COLOR_NUMBER
 	highlighter.member_variable_color = COLOR_MEMBER
 	highlighter.function_color = COLOR_FUNCTIONS
 	highlighter.symbol_color = COLOR_SYMBOLS
@@ -226,18 +286,26 @@ static func enhance_highlighter(highlighter: CodeHighlighter) -> void:
 	highlighter.clear_member_keyword_colors()
 	highlighter.clear_highlighting_cache()
 
-	highlighter.add_color_region("'", "'", COLOR_QUOTES)
-	highlighter.add_color_region('"', '"', COLOR_QUOTES)
+	highlighter.add_color_region("'", "'", COLOR_STRING)
+	highlighter.add_color_region('"', '"', COLOR_STRING)
 	highlighter.add_color_region("#", "", COLOR_COMMENTS, true)
 
-	for classname in ClassDB.get_class_list():
+	for classname: String in ClassDB.get_class_list():
 		highlighter.add_keyword_color(classname, COLOR_CLASS)
-		for member: Dictionary in ClassDB.class_get_property_list(classname):
-			var member_name: String = member.name
-			highlighter.add_member_keyword_color(member_name, COLOR_MEMBER)
+	for classname: String in EXTRA_CLASS_NAMES:
+		highlighter.add_keyword_color(classname, COLOR_CLASS)
+
+	for base_type: String in BASE_TYPES:
+		highlighter.add_keyword_color(base_type, COLOR_BASE_TYPE)
 
 	for keyword: String in KEYWORDS:
 		highlighter.add_keyword_color(keyword, COLOR_KEYWORD)
 
+	for keyword: String in CONTROL_FLOW_KEYWORDS:
+		highlighter.add_keyword_color(keyword, COLOR_KEYWORD_CONTROL_FLOW)
+
+	for global_function: String in GLOBAL_FUNCTIONS:
+		highlighter.add_keyword_color(global_function, COLOR_GLOBAL_FUNCTION)
+
 	for annotation: String in ANNOTATIONS:
-		highlighter.add_keyword_color("@%s" % annotation, COLOR_NUMBERS)
+		highlighter.add_keyword_color("@%s" % annotation, COLOR_ANNOTATIONS)
