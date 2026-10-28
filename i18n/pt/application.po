@@ -60,31 +60,6 @@ msgstr ""
 msgid "Constant distance"
 msgstr "Distância constante"
 
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
-msgstr "O identificador \"velocidade_angular\" não está declarado no âmbito atual (na linha 6)."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
-msgstr ""
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
-msgstr ""
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-#, fuzzy
-msgid ""
-"Sorry, we don't have this particular error message covered yet!\n"
-"\n"
-"Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
-"\n"
-"[center]Thank you![/center]"
-msgstr ""
-"Desculpe, não cobrimos ainda essa mensagem de erro em particular!\n"
-"\n"
-"Por favor, use o botão [b]Report[/b] no canto superior direito para nos dizer como conseguiu esse erro e vamos tentar aumentar nossa base de conhecimento para a próxima versão da aplicação."
-
 #: course/lesson-12-using-variables/visuals/VariableDefinition.tscn
 #: course/lesson-28-specifying-types/SyntaxTypeHints.tscn
 msgid "var"
@@ -608,10 +583,6 @@ msgstr "passo"
 msgid "Debugger"
 msgstr "Depurador"
 
-#: ui/components/ScrollableTextBox.tscn
-msgid "Placeholder text"
-msgstr "Texto de dica"
-
 #: ui/components/popups/ConfirmPopup.tscn
 #: ui/components/popups/PracticeLeaveUnfinishedPopup.tscn
 msgid "Confirm"
@@ -1063,10 +1034,6 @@ msgid ""
 msgstr ""
 
 #: ui/screens/lesson/UIBaseQuiz.tscn
-msgid "Explanation"
-msgstr "Explicações"
-
-#: ui/screens/lesson/UIBaseQuiz.tscn
 msgid "You need to try to answer once before you can skip a quiz."
 msgstr ""
 
@@ -1360,6 +1327,18 @@ msgstr ""
 
 #: course/lesson-12-using-variables/fixing_error/TestFixingError.gd:78
 msgid "The set_angular_speed() function doesn't seem to use the angular_speed variable."
+msgstr ""
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:10
+msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
+msgstr "O identificador \"velocidade_angular\" não está declarado no âmbito atual (na linha 6)."
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:11
+msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
+msgstr ""
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:12
+msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
 msgstr ""
 
 #: course/lesson-13-conditions/limiting_health/TestLimitingHealth.gd:13
@@ -2359,17 +2338,17 @@ msgstr ""
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr ""
 
-#: ui/UILesson.gd:301
+#: ui/UILesson.gd:306
 msgid "Learn More"
 msgstr "Aprenda Mais"
 
-#: ui/UILesson.gd:331
+#: ui/UILesson.gd:351
 msgid ""
 "\n"
 "\n"
 msgstr ""
 
-#: ui/UILesson.gd:379
+#: ui/UILesson.gd:399
 msgid ""
 "\n"
 "[hr]\n"
@@ -2379,37 +2358,37 @@ msgstr ""
 msgid "(no previous history)"
 msgstr "(sem histórico anterior)"
 
-#: ui/UIPractice.gd:290
+#: ui/UIPractice.gd:286
 msgid "Hint %s"
 msgstr "Dica %s"
 
-#: ui/UIPractice.gd:328
+#: ui/UIPractice.gd:321
 msgid "Validating Your Code..."
 msgstr "Validando seu código..."
 
-#: ui/UIPractice.gd:379
+#: ui/UIPractice.gd:372
 #, fuzzy
 msgid "The function '%s' calls itself, this creates an infinite loop"
 msgstr "A função `%s` chama a si própria, isto cria um loop infinito"
 
-#: ui/UIPractice.gd:390
+#: ui/UIPractice.gd:383
 #, fuzzy
 msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr "Você tem um loop while que executa para sempre (while true) sem nenhuma linha que possa interromper o ciclo. Por isso que vai congelar a app."
 
-#: ui/UIPractice.gd:433
+#: ui/UIPractice.gd:426
 msgid "You typed \"%s\"; did you mean \"%s\"?"
 msgstr ""
 
-#: ui/UIPractice.gd:450
+#: ui/UIPractice.gd:443
 msgid "Running Your Code..."
 msgstr "A executar o seu código..."
 
-#: ui/UIPractice.gd:462
+#: ui/UIPractice.gd:455
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "Há uma divisão por zero no seu código. Não pode dividir por zero no código. Certifique-se que não há \"/ 0\" ou \"% 0\" no seu código."
 
-#: ui/UIPractice.gd:608
+#: ui/UIPractice.gd:601
 msgid "Running Tests..."
 msgstr "A executar testes..."
 
@@ -2425,7 +2404,7 @@ msgstr ""
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr ""
 
-#: ui/components/popups/ReportFormPopup.gd:132
+#: ui/components/popups/ReportFormPopup.gd:135
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr ""
 
@@ -2492,6 +2471,24 @@ msgstr "CONTINUAR"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, we don't have this particular error message covered yet!\n"
+#~ "\n"
+#~ "Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
+#~ "\n"
+#~ "[center]Thank you![/center]"
+#~ msgstr ""
+#~ "Desculpe, não cobrimos ainda essa mensagem de erro em particular!\n"
+#~ "\n"
+#~ "Por favor, use o botão [b]Report[/b] no canto superior direito para nos dizer como conseguiu esse erro e vamos tentar aumentar nossa base de conhecimento para a próxima versão da aplicação."
+
+#~ msgid "Placeholder text"
+#~ msgstr "Texto de dica"
+
+#~ msgid "Explanation"
+#~ msgstr "Explicações"
 
 #~ msgid "in"
 #~ msgstr "em"

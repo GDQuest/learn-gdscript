@@ -60,32 +60,6 @@ msgstr "С дельтой"
 msgid "Constant distance"
 msgstr "Постоянное расстояние"
 
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
-msgstr "Идентификатор \"angular_speed\" не объявлен в текущей области (строка 6)."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
-msgstr "Функция [code]set_angular_speed()[/code] не может использовать переменную [code]angular_speed[/code], так как эта переменная не объявлена на уровне всего скрипта. Её также нет в функции [code]set_angular_speed()[/code]."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
-msgstr "Убедитесь, что вы определили переменную [code]angular_speed[/code] в функции [code]set_angular_speed()[/code], или определили ее вне функций, чтобы она была доступна для всего сценария."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid ""
-"Sorry, we don't have this particular error message covered yet!\n"
-"\n"
-"Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
-"\n"
-"[center]Thank you![/center]"
-msgstr ""
-"Извините, мы ещё не написали пояснение к этой ошибке!\n"
-"\n"
-"Пожалуйста, используйте кнопку [b]Сообщить о проблеме[/b] в правом верхнем углу, чтобы рассказать нам больше о том, как вы её получили, и мы постараемся улучшить нашу базу знаний к следующей версии приложения.\n"
-"\n"
-"[center]Спасибо![/center]"
-
 #: course/lesson-12-using-variables/visuals/VariableDefinition.tscn
 #: course/lesson-28-specifying-types/SyntaxTypeHints.tscn
 msgid "var"
@@ -647,10 +621,6 @@ msgstr "шаг"
 msgid "Debugger"
 msgstr "Отладчик"
 
-#: ui/components/ScrollableTextBox.tscn
-msgid "Placeholder text"
-msgstr "Текст-заполнитель"
-
 #: ui/components/popups/ConfirmPopup.tscn
 #: ui/components/popups/PracticeLeaveUnfinishedPopup.tscn
 msgid "Confirm"
@@ -1121,10 +1091,6 @@ msgstr ""
 "Можете попробовать ещё раз, чтобы освежить память!"
 
 #: ui/screens/lesson/UIBaseQuiz.tscn
-msgid "Explanation"
-msgstr "Объяснение"
-
-#: ui/screens/lesson/UIBaseQuiz.tscn
 #, fuzzy
 msgid "You need to try to answer once before you can skip a quiz."
 msgstr "Прежде чем пропустить тест, вам необходимо попытаться ответить хотя бы один раз."
@@ -1466,6 +1432,18 @@ msgstr "Отсутствует функция «set_angular_speed(new_angular_sp
 #, fuzzy
 msgid "The set_angular_speed() function doesn't seem to use the angular_speed variable."
 msgstr "Похоже, что функция `set_angular_speed()` не использует переменную `angular_speed`."
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:10
+msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
+msgstr "Идентификатор \"angular_speed\" не объявлен в текущей области (строка 6)."
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:11
+msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
+msgstr "Функция [code]set_angular_speed()[/code] не может использовать переменную [code]angular_speed[/code], так как эта переменная не объявлена на уровне всего скрипта. Её также нет в функции [code]set_angular_speed()[/code]."
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:12
+msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
+msgstr "Убедитесь, что вы определили переменную [code]angular_speed[/code] в функции [code]set_angular_speed()[/code], или определили ее вне функций, чтобы она была доступна для всего сценария."
 
 #: course/lesson-13-conditions/limiting_health/TestLimitingHealth.gd:13
 #, fuzzy
@@ -2681,18 +2659,18 @@ msgstr "Робот получил не столько урона, сколько
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "Похоже, вы не вычитаете amount из здоровья."
 
-#: ui/UILesson.gd:301
+#: ui/UILesson.gd:306
 msgid "Learn More"
 msgstr "Узнать больше"
 
-#: ui/UILesson.gd:331
+#: ui/UILesson.gd:351
 #, fuzzy
 msgid ""
 "\n"
 "\n"
 msgstr " "
 
-#: ui/UILesson.gd:379
+#: ui/UILesson.gd:399
 #, fuzzy
 msgid ""
 "\n"
@@ -2705,36 +2683,36 @@ msgstr ""
 msgid "(no previous history)"
 msgstr "(предыдущий раздел не найден)"
 
-#: ui/UIPractice.gd:290
+#: ui/UIPractice.gd:286
 msgid "Hint %s"
 msgstr "Подсказка %s"
 
-#: ui/UIPractice.gd:328
+#: ui/UIPractice.gd:321
 msgid "Validating Your Code..."
 msgstr "Проверяем ваш код..."
 
-#: ui/UIPractice.gd:379
+#: ui/UIPractice.gd:372
 msgid "The function '%s' calls itself, this creates an infinite loop"
 msgstr "Функция `%s` вызывает сама себя, что создаёт бесконечный цикл"
 
-#: ui/UIPractice.gd:390
+#: ui/UIPractice.gd:383
 #, fuzzy
 msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr "У вас есть цикл while, который выполняется бесконечно (while true) без оператора break. Это приведёт к зависанию приложения."
 
-#: ui/UIPractice.gd:433
+#: ui/UIPractice.gd:426
 msgid "You typed \"%s\"; did you mean \"%s\"?"
 msgstr ""
 
-#: ui/UIPractice.gd:450
+#: ui/UIPractice.gd:443
 msgid "Running Your Code..."
 msgstr "Выполняем ваш код..."
 
-#: ui/UIPractice.gd:462
+#: ui/UIPractice.gd:455
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "В вашем коде есть деление на ноль. Вы не можете делить на ноль в коде. Убедитесь, что в вашем коде нет «/ 0» или «% 0»."
 
-#: ui/UIPractice.gd:608
+#: ui/UIPractice.gd:601
 msgid "Running Tests..."
 msgstr "Проводим тесты..."
 
@@ -2750,7 +2728,7 @@ msgstr "Выберите тип проблемы и опишите ее в по�
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr "Если у вас есть вопросы и вы хотите помочь с обучением, [url=%s]присоединяйтесь к сообществу в Discord[/url]."
 
-#: ui/components/popups/ReportFormPopup.gd:132
+#: ui/components/popups/ReportFormPopup.gd:135
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr "Переводы являются неофициальными и поддерживаются сообществом. Если вы хотите помочь, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]узнайте, как помочь с переводом приложения[/url]."
 
@@ -2821,6 +2799,25 @@ msgstr "ПРОДОЛЖИТЬ"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr "Учитесь программировать с нуля с помощью Godot"
+
+#~ msgid ""
+#~ "Sorry, we don't have this particular error message covered yet!\n"
+#~ "\n"
+#~ "Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
+#~ "\n"
+#~ "[center]Thank you![/center]"
+#~ msgstr ""
+#~ "Извините, мы ещё не написали пояснение к этой ошибке!\n"
+#~ "\n"
+#~ "Пожалуйста, используйте кнопку [b]Сообщить о проблеме[/b] в правом верхнем углу, чтобы рассказать нам больше о том, как вы её получили, и мы постараемся улучшить нашу базу знаний к следующей версии приложения.\n"
+#~ "\n"
+#~ "[center]Спасибо![/center]"
+
+#~ msgid "Placeholder text"
+#~ msgstr "Текст-заполнитель"
+
+#~ msgid "Explanation"
+#~ msgstr "Объяснение"
 
 #, fuzzy
 #~ msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."

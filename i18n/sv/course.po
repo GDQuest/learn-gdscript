@@ -1802,6 +1802,11 @@ msgstr "Din funktion måste förflytta sig [code]lenght[/code] framåt, svänga 
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-6-multiple-function-parameters/lesson.bbcode:193
+msgid "Remember that the turtle only knows a few functions: [code]move_forward()[/code] to draw a straight line and [code]turn_right()[/code] to the right. Call these functions with the correct arguments to draw the square."
+msgstr ""
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:193
 msgid "[b]Important:[/b] When the turtle finishes drawing, it should face right. So you need to turn right a total of four times."
 msgstr "[b]Viktigt:[/b] När sköldpaddan är klar med ritningen ska den vara vänd åt höger. Du måste alltså svänga höger totalt fyra gånger."
 
@@ -1831,22 +1836,22 @@ msgid "Make sure to [code]turn_right(90)[/code] after moving forward to create e
 msgstr "Se till att [code]turn_right(90)[/code] efter att du har kört framåt för att skapa varje hörn"
 
 #. TRANSLATORS: Practice title
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "Drawing rectangles of any size"
 msgstr "Rita rektanglar av alla storlekar"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "Let's create a function to draw rectangles with any length and height."
 msgstr "Låt oss skapa en funktion för att rita rektanglar med valfri längd och höjd."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "I will call your function twice with different sizes:"
 msgstr "Jag kommer att anropa din funktion två gånger med olika storlekar:"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid ""
 "[code]draw_rectangle(260, 180)[/code]\n"
 "[code]draw_rectangle(160, 210)[/code]"
@@ -1855,42 +1860,42 @@ msgstr ""
 "[code]draw_rectangle(160, 210)[/code]"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "Your function needs two parameters: [code]length[/code] and [code]height[/code]. When the app calls your function, the first number replaces [code]length[/code], and the second number replaces [code]height[/code]."
 msgstr "Din funktion behöver två parametrar: [code]length[/code] och [code]height[/code]. När appen anropar din funktion ersätter det första talet [code]length[/code] och det andra talet ersätter [code]height[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "Use [code]length[/code] when you move horizontally and [code]height[/code] when you move vertically."
 msgstr "Använd [code]length[/code] när du rör dig horisontellt och [code]height[/code] när du rör dig vertikalt."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "This is the pattern you need to follow: move forward by [code]length[/code], turn right, move forward by [code]height[/code], turn right, then repeat this sequence once more."
 msgstr "Så här ska du gå tillväga: gå framåt [code]length[/code], sväng höger, gå framåt [code]height[/code], sväng höger och upprepa sedan denna sekvens en gång till."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "[b]Important:[/b] When the turtle finishes drawing, it should face right. Make sure you turn right four times in total."
 msgstr "[b]Viktigt:[/b] När sköldpaddan är klar med ritningen ska den vara vänd åt höger. Se till att du svänger höger totalt fyra gånger."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "With one parameter, you can make squares of any size. With two, you can draw any rectangle! You'll do so in this practice."
 msgstr "Med en parameter kan du göra rutor av vilken storlek som helst. Med två kan du rita vilken rektangel som helst! Du kommer att göra det i den här övningen."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "You need to specify the two parameters in the function definition"
 msgstr "Du måste ange de två parametrarna i funktionsdefinitionen"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "Use [code]func draw_rectangle(length, height):[/code]"
 msgstr "Använd [code]func draw_rectangle(length, height):[/code]"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "When calling move_forward, you need to alternate between using the length and the height arguments when calling move_forward."
 msgstr "När du anropar move_forward måste du växla mellan att använda argumenten length och height."
 
@@ -2482,12 +2487,8 @@ msgstr "Om vi antar att ”amount” är ett positivt tal, vilket eller vilka av
 
 #. TRANSLATORS: Quiz explanation
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:36
-msgid ""
-"Both of these lines increase the [code]health[/code] of the robot by [code]amount[/code].\n"
-"[code]\n"
-"health += amount\n"
-"health = health + amount\n"
-"[/code]"
+#, fuzzy
+msgid "Both of these lines increase the [code]health[/code] of the robot by [code]amount[/code]."
 msgstr ""
 "Båda dessa rader ökar robotens [code]hälsa[/code] med [code]belopp[/code].\n"
 "[code]\n"
@@ -2515,77 +2516,77 @@ msgstr "health = health + amount"
 msgid "health = health - amount"
 msgstr "health = health - amount"
 
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:52
 msgid "In the following practices, you'll code the [code]take_damage()[/code] and [code]heal()[/code] functions so the robot's health can decrease and increase."
 msgstr "I de följande övningarna ska du skriva koden för funktionerna [code]take_damage()[/code] och [code]heal()[/code] så att robotens hälsa kan minska och öka."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:52
 msgid "Damaging the Robot"
 msgstr "Skada roboten"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:52
 msgid "In our game, the main character has a certain amount of [code]health[/code]. When it gets hit, the health should go down by a varying [code]amount[/code] of damage."
 msgstr "I vårt spel har huvudpersonen en viss mängd [code]health[/code]. När hen träffas ska hälsan minska med en varierande [code]amount[/code] skada."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:52
 msgid "Add an instruction to the [code]take_damage()[/code] function so it subtracts [code]amount[/code] from the [code]health[/code] variable."
 msgstr "Lägg till en instruktion i funktionen [code]take_damage()[/code] så att den subtraherar [code]amount[/code] från variabeln [code]health[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:52
 msgid "I will call the [code]take_damage()[/code] function like this when you run the practice: [code]take_damage(50)[/code]"
 msgstr "Jag kommer att anropa funktionen [code]take_damage()[/code] på följande sätt när du kör övningen: [code]take_damage(50)[/code]"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:52
 msgid "Learn how to deal damage to entities like our robot."
 msgstr "Lär dig hur man ger skada åt objekt som vår robot."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:52
 msgid "Add an instruction to subtract [code]amount[/code] from [code]health[/code]."
 msgstr "Lägg till en instruktion om att subtrahera [code]amount[/code] från [code]health[/code]."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 msgid "Healing the Robot"
 msgstr "Att hela roboten"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 msgid "It's time to heal the robot up to full health!"
 msgstr "Nu är det dags att återställa roboten till full hälsa!"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 msgid "Write a function called [code]heal()[/code] that takes [code]amount[/code] as a parameter."
 msgstr "Skriv en funktion som heter [code]heal()[/code] och som tar [code]amount[/code] som parameter."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 msgid "The function should add [code]amount[/code] to [code]health[/code]."
 msgstr "Funktionen ska lägga till värdet [code]amount[/code] till [code]health[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 msgid "The robot starts with 50 health and will heal 50 to get it up to 100."
 msgstr "Roboten börjar med 50 hälsopoäng och kommer att återhämta 50 för att nå upp till 100."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 msgid "Our robot needs healing after that practice! Create a function to heal it back to full health."
 msgstr "Vår robot behöver återhämta sig efter den där träningen! Skapa en funktion som återställer dess hälsa till fullt."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 msgid "Define the [code]heal()[/code] function using [code]func[/code]"
 msgstr "Definiera funktionen [code]hela()[/code] med hjälp av [code]func[/code]"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 msgid "The first line is [code]func heal(amount):[/code]"
 msgstr "Den första raden är [code]func heal(amount):[/code]"
 
@@ -3808,29 +3809,6 @@ msgstr "För att multiplicera värden använder vi [code]*[/code]."
 msgid "What is the value of damage?"
 msgstr "Vad har variabeln damage för värde?"
 
-#. TRANSLATORS: Quiz content
-#: course/lesson-14-multiplying/lesson.bbcode:47
-#: course/lesson-14-multiplying/lesson.bbcode:63
-msgid ""
-"[code]\n"
-"var level = 5\n"
-"var power = 3"
-msgstr ""
-"[code]\n"
-"var level = 5\n"
-"var power = 3"
-
-#. TRANSLATORS: Quiz content
-#: course/lesson-14-multiplying/lesson.bbcode:47
-msgid ""
-"func calculate_damage():\n"
-"\tvar damage = power * level\n"
-"[/code]"
-msgstr ""
-"func calculate_damage():\n"
-"\tvar damage = power * level\n"
-"[/code]"
-
 #. TRANSLATORS: Quiz explanation
 #: course/lesson-14-multiplying/lesson.bbcode:47
 msgid "We multiply [code]power[/code] by [code]level[/code] using [code]*[/code] to get the result of [code]15[/code]."
@@ -3844,19 +3822,6 @@ msgstr "Vi kan använda [code]*=[/code] på samma sätt som [code]-=[/code] och 
 #: course/lesson-14-multiplying/lesson.bbcode:63
 msgid "What is the value of damage now?"
 msgstr "Vilket värde har variabeln damage nu?"
-
-#. TRANSLATORS: Quiz content
-#: course/lesson-14-multiplying/lesson.bbcode:63
-msgid ""
-"func calculate_damage():\n"
-"\tvar damage = power * level\n"
-"\tdamage *= 2\n"
-"[/code]"
-msgstr ""
-"func calculate_damage():\n"
-"\tvar damage = power * level\n"
-"\tdamage *= 2\n"
-"[/code]"
 
 #. TRANSLATORS: Quiz explanation
 #: course/lesson-14-multiplying/lesson.bbcode:63
@@ -4958,55 +4923,55 @@ msgid "0, 0, and 0"
 msgstr "0, 0 och 0"
 
 #. TRANSLATORS: Heading
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:38
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:39
 msgid "Making the turtle walk, with a loop"
 msgstr "Få sköldpaddan att gå med hjälp av en slinga"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:42
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:43
 msgid "In the previous lesson, you made a turtle walk along a path by writing [code]Vector2[/code] coordinates in an array."
 msgstr "I förra lektionen fick du en sköldpadda att gå längs en bana genom att skriva [code]Vector2[/code]-koordinater i en array."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:48
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:49
 msgid "It's a [code]for[/code] loop that makes the turtle walk along the path."
 msgstr "Det är en [code]for[/code]-slinga som får sköldpaddan att gå längs banan."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:49
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:50
 msgid "The loop works like this: for each coordinate in the array, it moves the turtle once to that cell."
 msgstr "Slingan fungerar så här: för varje koordinat i arrayen flyttar den sköldpaddan en gång till den cellen."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:54
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:55
 msgid "It's the same principle with unit selection."
 msgstr "Samma princip gäller när man väljer enheter."
 
 #. TRANSLATORS: Note title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:54
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:55
 #, fuzzy
 msgid "How do you know to name the variable cell?"
 msgstr "Hur kommer du åt undervariabler?"
 
 #. TRANSLATORS: Note content
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:55
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:56
 msgid "The variable [code]cell[/code] defined right after the [code]for[/code] keyword is the name of the loop's [b]cursor[/b] variable. In each loop iteration, Godot assigns a value from the path to this variable."
 msgstr ""
 
 #. TRANSLATORS: Note content
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:56
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:57
 msgid "The variable name [code]cell[/code] is arbitrary; you could call it [code]coordinate[/code] or [code]point[/code] if you wanted. This code does the same thing as the code above, but with a different variable name:"
 msgstr ""
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:68
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:69
 msgid "For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it."
 msgstr "För varje koordinat i en array med namnet [code]selected_units[/code] kontrollerar vi om det finns en enhet i den cellen. Om så är fallet markerar vi den."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:69
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:70
 msgid "In that case, we use an array, a loop, and a condition together."
 msgstr "I det fallet använder vi en array, en slinga och ett villkor tillsammans."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:81
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:82
 msgid "The code above uses several features you haven't learned yet:"
 msgstr "Koden ovan använder flera funktioner som du ännu inte har lärt dig:"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:82
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
 msgid ""
 "- In a condition, the [code]in[/code] keyword allows you to check if a value exists [i]in[/i] an array.\n"
 "- The array's [code]append()[/code] function appends a new value at the end of the array."
@@ -5014,116 +4979,116 @@ msgstr ""
 "- I ett villkor kan du med nyckelordet [code]in[/code] kontrollera om ett värde finns [i]i[/i] en array.\n"
 "- Arrayens funktion [code]append()[/code] lägger till ett nytt värde i slutet av arrayen."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:84
 msgid "Notice the use of a period after the [code]selected_units[/code] variable, to call the [code]append()[/code] function. It's because this function exists only on arrays."
 msgstr "Lägg märke till att det finns en punkt efter variabeln [code]selected_units[/code] för att anropa funktionen [code]append()[/code]. Det beror på att den här funktionen endast finns för arrayer."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:84
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:85
 msgid "When functions exist only on a specific value type, you write a dot after the value to call the function on it."
 msgstr "När funktioner endast finns för en viss värdetyp skriver man en punkt efter värdet för att anropa funktionen på det."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:85
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:86
 msgid "We'll revisit those two features again in the following lessons."
 msgstr "Vi kommer att återkomma till dessa två funktioner i de kommande lektionerna."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "The beauty of loops is that they work regardless of the size of your arrays."
 msgstr "Det fina med loopar är att de fungerar oavsett hur stora dina arrayer är."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:93
 msgid "The code just works whether you have one or ten thousand units to select. It is all accomplished with only a couple lines of code."
 msgstr "Koden fungerar helt enkelt, oavsett om du har en eller tiotusen enheter att välja mellan. Allt sköts med bara ett par rader kod."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:93
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:94
 msgid "That's the power of computer programming."
 msgstr "Det är det som är kraften i datorprogrammering."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:94
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:95
 msgid "In the following practices, you will use arrays combined with [code]for[/code] loops to achieve similar results."
 msgstr "I följande övningar kommer du att använda arrayer i kombination med [code]for[/code]-slingor för att uppnå liknande resultat."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "Move the robot along the path"
 msgstr "För roboten längs banan"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "Our AI pathfinding algorithm provided a path for the robot to move to the right edge of the grid. Your task is to use a [code]for[/code] loop to make the robot move."
 msgstr "Vår AI-algoritm för vägval beräknade en väg så att roboten kunde ta sig till rutnätets högra kant. Din uppgift är att använda en [code]for[/code]-slinga för att få roboten att röra sig."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "To move the robot, call [i]its[/i] [code]move_to()[/code] function, like so: [code]robot.move_to()[/code]."
 msgstr "För att flytta roboten anropar du [i]robotens[/i] [code]move_to()[/code]-funktion på följande sätt: [code]robot.move_to()[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "The [code]move_to()[/code] function only exists on the robot, which is why you need to access it this way."
 msgstr "Funktionen [code]move_to()[/code] finns endast hos roboten, vilket är anledningen till att du måste använda den på det här sättet."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "Our AI pathfinding algorithm is giving us a path to move the robot. Now, you need to make the turtle move along the path."
 msgstr "Vår AI-algoritm för vägval ger oss en väg som roboten ska följa. Nu måste du få sköldpaddan att röra sig längs den vägen."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "You should start with a for loop that iterates over every cell in [code]robot_path[/code]."
 msgstr "Du bör börja med en for-slinga som går igenom varje cell i [code]robot_path[/code]."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "You need to pass the cell position to the robot's [code]move_to()[/code] function in the loop."
 msgstr "Du måste skicka cellens position till robotens [code]move_to()[/code]-funktion i slingan."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "Back to the drawing board"
 msgstr "Tillbaka till ritbordet"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "We want to draw many rectangles, something surprisingly common in games."
 msgstr "Vi vill rita många rektanglar, något som är förvånansvärt vanligt i spel."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "However, writing this code by hand can get tedious. Instead, you could store the size of your shapes in arrays and use a loop to draw them all in batches."
 msgstr "Det kan dock bli ganska tråkigt att skriva den här koden för hand. Istället kan du lagra storleken på dina figurer i arrayer och använda en slinga för att rita dem alla i omgångar."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "That's what you'll do in this practice."
 msgstr "Det är vad du ska göra i den här övningen."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "Use a [code]for[/code] loop to draw every rectangle in the [code]rectangle_sizes[/code] array with the [code]draw_rectangle()[/code] function."
 msgstr "Använd en [code]for[/code]-slinga för att rita varje rektangel i arrayen [code]rectangle_sizes[/code] med funktionen [code]draw_rectangle()[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "The rectangles shouldn't overlap or cross each other. To avoid that, you'll need to call the [code]jump()[/code] function."
 msgstr "Rektanglarna får inte överlappa varandra eller korsa varandra. För att undvika detta måste du anropa funktionen [code]jump()[/code]."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "The drawing turtle makes its comeback. Fear not! Armed with loops, you'll make it draw faster than ever before."
 msgstr "Ritsköldpaddan är tillbaka. Oroa dig inte! Med hjälp av loopar kommer du att få den att rita snabbare än någonsin tidigare."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "Each value in the [code]rectangle_sizes[/code] array is a [code]Vector2[/code]. You'll need to access its [code]x[/code] and [code]y[/code] sub-components to draw rectangles."
 msgstr "Varje värde i arrayen [code]rectangle_sizes[/code] är en [code]Vector2[/code]. Du måste använda dess delkomponenter [code]x[/code] och [code]y[/code] för att rita rektanglar."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "In the loop, you first need to call [code]draw_rectangle()[/code], and then [code]jump()[/code]. Otherwise, at least two rectangles will overlap."
 msgstr "I slingan måste du först anropa [code]draw_rectangle()[/code] och sedan [code]jump()[/code]. Annars kommer minst två rektanglar att överlappa varandra."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "The arguments when calling [code]jump()[/code] can just be large enough to space out the rectangles. For example, [code]jump(300, 0)[/code]"
 msgstr "Argumenten vid anropet av [code]jump()[/code] kan vara så stora att de räcker för att skapa avstånd mellan rektanglarna. Till exempel [code]jump(300, 0)[/code]"
 
@@ -5854,13 +5819,19 @@ msgstr "Spelaren vet att hen har ett svärd och ett sköld någonstans i sin inv
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-24-access-array-indices/lesson.bbcode:67
+#, fuzzy
+msgid "Your task is to find the sword and the shield in the array using their index, then call [code]use_item()[/code] on each of them so the player can equip those items."
+msgstr "Din uppgift är att hitta ett svärd och en sköld i arrayen med hjälp av deras index och sedan anropa [code]use_item()[/code] för var och en av dem så att spelaren kan utrusta sig med dessa föremål."
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-24-access-array-indices/lesson.bbcode:67
 msgid "You can see the inventory drawn on the right, along with the index of each item in the inventory."
 msgstr "Till vänster ser du inventoryn, tillsammans med indexet för varje objekt i inventoryn."
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-24-access-array-indices/lesson.bbcode:67
-msgid "Your task is to find one sword and one shield in the array using their index, then call [code]use_item()[/code] on each of them so the player can equip those items."
-msgstr "Din uppgift är att hitta ett svärd och en sköld i arrayen med hjälp av deras index och sedan anropa [code]use_item()[/code] för var och en av dem så att spelaren kan utrusta sig med dessa föremål."
+msgid "The [code]inventory[/code] array in the code contains the same items in the same order as on the right."
+msgstr ""
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-24-access-array-indices/lesson.bbcode:67
@@ -5883,42 +5854,42 @@ msgid "Use [code]square brackets[/code] to access specific array indices"
 msgstr "Använd [code]hakparenteser[/code] för att komma åt specifika index i en array"
 
 #. TRANSLATORS: Practice title
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "Realigning the train tracks"
 msgstr "Justering av järnvägsspåren"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "We have train tracks broken down into little chunks in our game. We use them to make modular tracks and draw circuits of all shapes and sizes."
 msgstr "I vårt spel är järnvägsspåren uppdelade i små bitar. Vi använder dem för att bygga modulära spår och rita banor i alla möjliga former och storlekar."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "However, several chunks are misaligned. You need to find them in the [code]tracks[/code] array and pass them to the [code]align()[/code] function."
 msgstr "Flera block är dock feljusterade. Du måste hitta dem i arrayen [code]tracks[/code] och skicka dem till funktionen [code]align()[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "To do so, you need to access the array by index."
 msgstr "För att göra det måste du hämta elementet i arrayen med hjälp av indexet."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "This time, though, you need to access them with [i]negative indices[/i]."
 msgstr "Den här gången behöver du hämta dem med [i]negativa index[/i]."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "Some chunks of our train tracks are misaligned, and the train can't pass. Find the faulty pieces and realign them."
 msgstr "Vissa delar av våra järnvägsspår ligger snett, och tåget kan inte passera. Hitta de felaktiga delarna och justera dem så att de ligger rakt."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "The syntax to access an item by index in an array uses square brackets with a number in between right after the array name. For example, write [code]tracks[-1][/code] to access the [i]last[/i] element in the array."
 msgstr "Syntaxen för att komma åt ett element i en array via indexet består av hakparenteser med en siffra mellan dem, direkt efter arrayens namn. Skriv till exempel [code]tracks[-1][/code] för att komma åt det [i]sista[/i] elementet i arrayen."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "To align the second chunk, call [code]align(tracks[-3])[/code]. You need to call the same function another two times with the other chunks."
 msgstr "För att justera den andra biten, anropa [code]align(tracks[-3])[/code]. Du måste anropa samma funktion ytterligare två gånger för de övriga bitarna."
 
@@ -6735,6 +6706,35 @@ msgstr "Typen [code]String[/code] innebär att du måste skriva en textsträng, 
 
 msgid "Learn to Code From Zero with Godot"
 msgstr "Lär dig att programmera från grunden med Godot"
+
+#~ msgid ""
+#~ "[code]\n"
+#~ "var level = 5\n"
+#~ "var power = 3"
+#~ msgstr ""
+#~ "[code]\n"
+#~ "var level = 5\n"
+#~ "var power = 3"
+
+#~ msgid ""
+#~ "func calculate_damage():\n"
+#~ "\tvar damage = power * level\n"
+#~ "[/code]"
+#~ msgstr ""
+#~ "func calculate_damage():\n"
+#~ "\tvar damage = power * level\n"
+#~ "[/code]"
+
+#~ msgid ""
+#~ "func calculate_damage():\n"
+#~ "\tvar damage = power * level\n"
+#~ "\tdamage *= 2\n"
+#~ "[/code]"
+#~ msgstr ""
+#~ "func calculate_damage():\n"
+#~ "\tvar damage = power * level\n"
+#~ "\tdamage *= 2\n"
+#~ "[/code]"
 
 #~ msgid "Is this for Godot 4?"
 #~ msgstr "Är det här till Godot 4?"

@@ -60,32 +60,6 @@ msgstr "З дельтою"
 msgid "Constant distance"
 msgstr "Постійна відстань"
 
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
-msgstr "Ідентифікатор \"angular_speed\" не оголошений в поточному обсязі (на лінії 6)."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
-msgstr "Функція [code]set_angular_speed()[/code] не може використовувати змінну [code]angular_speed[/code], оскільки вона не є загальноскриптовою. Крім того, її немає у функції [code]set_angular_speed()[/code]."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
-msgstr "Переконайтеся, що ви визначили змінну [code]angular_speed[/code] у функції [code]set_angular_speed()[/code], або визначте її поза функціями, щоб вона діяла в усьому скрипті."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid ""
-"Sorry, we don't have this particular error message covered yet!\n"
-"\n"
-"Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
-"\n"
-"[center]Thank you![/center]"
-msgstr ""
-"Вибачте, ми ще не написали пояснення щодо цієї помилки!\n"
-"\n"
-"Скористайтеся кнопкою [b]Повідомити про проблему[/b] в правому верхньому куті, щоб розповісти нам більше про те, як ви на неї натрапили, і до наступної версії програми ми постараємося покращити нашу базу знань.\n"
-"\n"
-"[center]Дякую![/center]"
-
 #: course/lesson-12-using-variables/visuals/VariableDefinition.tscn
 #: course/lesson-28-specifying-types/SyntaxTypeHints.tscn
 msgid "var"
@@ -633,10 +607,6 @@ msgstr "крок"
 msgid "Debugger"
 msgstr "Зневаджувач"
 
-#: ui/components/ScrollableTextBox.tscn
-msgid "Placeholder text"
-msgstr "Текст-заповнювач"
-
 #: ui/components/popups/ConfirmPopup.tscn
 #: ui/components/popups/PracticeLeaveUnfinishedPopup.tscn
 msgid "Confirm"
@@ -1099,10 +1069,6 @@ msgstr ""
 "Сміливо спробуйте ще раз, щоб освіжити пам’ять!"
 
 #: ui/screens/lesson/UIBaseQuiz.tscn
-msgid "Explanation"
-msgstr "Пояснення"
-
-#: ui/screens/lesson/UIBaseQuiz.tscn
 msgid "You need to try to answer once before you can skip a quiz."
 msgstr "Перш ніж пропустити тест, вам потрібно спробувати відповісти хоча б один раз."
 
@@ -1396,6 +1362,18 @@ msgstr "Функція 'set_angular_speed(new_angular_speed)' відсутня; 
 #: course/lesson-12-using-variables/fixing_error/TestFixingError.gd:78
 msgid "The set_angular_speed() function doesn't seem to use the angular_speed variable."
 msgstr "Схоже, що функція set_angular_speed() не використовує змінну angular_speed."
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:10
+msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
+msgstr "Ідентифікатор \"angular_speed\" не оголошений в поточному обсязі (на лінії 6)."
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:11
+msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
+msgstr "Функція [code]set_angular_speed()[/code] не може використовувати змінну [code]angular_speed[/code], оскільки вона не є загальноскриптовою. Крім того, її немає у функції [code]set_angular_speed()[/code]."
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:12
+msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
+msgstr "Переконайтеся, що ви визначили змінну [code]angular_speed[/code] у функції [code]set_angular_speed()[/code], або визначте її поза функціями, щоб вона діяла в усьому скрипті."
 
 #: course/lesson-13-conditions/limiting_health/TestLimitingHealth.gd:13
 msgid "Health Does Not Go Above 80"
@@ -2398,17 +2376,17 @@ msgstr ""
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr ""
 
-#: ui/UILesson.gd:301
+#: ui/UILesson.gd:306
 msgid "Learn More"
 msgstr "Дізнатись більше"
 
-#: ui/UILesson.gd:331
+#: ui/UILesson.gd:351
 msgid ""
 "\n"
 "\n"
 msgstr ""
 
-#: ui/UILesson.gd:379
+#: ui/UILesson.gd:399
 msgid ""
 "\n"
 "[hr]\n"
@@ -2418,35 +2396,35 @@ msgstr ""
 msgid "(no previous history)"
 msgstr "(попереднього вікна не знайдено)"
 
-#: ui/UIPractice.gd:290
+#: ui/UIPractice.gd:286
 msgid "Hint %s"
 msgstr "Підказка %s"
 
-#: ui/UIPractice.gd:328
+#: ui/UIPractice.gd:321
 msgid "Validating Your Code..."
 msgstr "Перевіряємо ваш код..."
 
-#: ui/UIPractice.gd:379
+#: ui/UIPractice.gd:372
 msgid "The function '%s' calls itself, this creates an infinite loop"
 msgstr "Функція '%s' викликає сама себе, виникає нескінченний цикл"
 
-#: ui/UIPractice.gd:390
+#: ui/UIPractice.gd:383
 msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr "У вас є цикл while, який виконується нескінченно без оператора break. Це призведе до зависання програми."
 
-#: ui/UIPractice.gd:433
+#: ui/UIPractice.gd:426
 msgid "You typed \"%s\"; did you mean \"%s\"?"
 msgstr ""
 
-#: ui/UIPractice.gd:450
+#: ui/UIPractice.gd:443
 msgid "Running Your Code..."
 msgstr "Виконуємо ваш код..."
 
-#: ui/UIPractice.gd:462
+#: ui/UIPractice.gd:455
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "У вашому коді є ділення на нуль. Не можна ділити на нуль у коді. Переконайтеся, що в коді немає «/ 0» або «% 0»."
 
-#: ui/UIPractice.gd:608
+#: ui/UIPractice.gd:601
 msgid "Running Tests..."
 msgstr "Проводимо тести..."
 
@@ -2462,7 +2440,7 @@ msgstr ""
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr ""
 
-#: ui/components/popups/ReportFormPopup.gd:132
+#: ui/components/popups/ReportFormPopup.gd:135
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr ""
 
@@ -2528,6 +2506,25 @@ msgstr "ПРОДОВЖИТИ"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid ""
+#~ "Sorry, we don't have this particular error message covered yet!\n"
+#~ "\n"
+#~ "Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
+#~ "\n"
+#~ "[center]Thank you![/center]"
+#~ msgstr ""
+#~ "Вибачте, ми ще не написали пояснення щодо цієї помилки!\n"
+#~ "\n"
+#~ "Скористайтеся кнопкою [b]Повідомити про проблему[/b] в правому верхньому куті, щоб розповісти нам більше про те, як ви на неї натрапили, і до наступної версії програми ми постараємося покращити нашу базу знань.\n"
+#~ "\n"
+#~ "[center]Дякую![/center]"
+
+#~ msgid "Placeholder text"
+#~ msgstr "Текст-заповнювач"
+
+#~ msgid "Explanation"
+#~ msgstr "Пояснення"
 
 #~ msgid "in"
 #~ msgstr "в"

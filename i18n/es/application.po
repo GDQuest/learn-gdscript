@@ -14,11 +14,22 @@ msgstr ""
 "Language-Team: Spanish <https://hosted.weblate.org/projects/learn-gdscript-from-zero/application/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Generated-By: Babel 2.10.3\n"
 "X-Generator: Weblate 2026.9.dev0\n"
+
+#: course/common/inventory/DictItem.tscn
+#: course/lesson-23-append-to-arrays/visuals/Crate.tscn
+#: course/lesson-24-access-array-indices/visuals/inventory/Item.tscn
+#: course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.tscn
+msgid "0"
+msgstr "0%"
+
+#: course/lesson-21-strings/visuals/RobotWithNumberName.tscn
+msgid "70801"
+msgstr "70801"
 
 #: course/common/CustomHealthBar.tscn
 msgid "health = 100"
@@ -32,13 +43,6 @@ msgstr "Inventario"
 #: course/common/inventory/DictItem.tscn
 msgid "healing heart"
 msgstr "corazón sanador"
-
-#: course/common/inventory/DictItem.tscn
-#: course/lesson-23-append-to-arrays/visuals/Crate.tscn
-#: course/lesson-24-access-array-indices/visuals/inventory/Item.tscn
-#: course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.tscn
-msgid "0"
-msgstr "0%"
 
 #: course/lesson-11-time-delta/visuals/DemoRotatingSpriteFrame.tscn
 #: course/lesson-11-time-delta/visuals/DemoRotatingTime.tscn
@@ -59,32 +63,6 @@ msgstr "Con delta"
 #: course/lesson-11-time-delta/visuals/RobotRace.tscn
 msgid "Constant distance"
 msgstr "Distancia constante"
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
-msgstr "El identificador angular_speed no está declarado en el ámbito actual (en la línea 6)."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
-msgstr "La función [code]set_angular_speed()[/code] no puede utilizar la variable [code]angular_speed[/code] porque no es global para todo el script. Tampoco se encuentra en la función [code]set_angular_speed()[/code]."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
-msgstr "Asegúrate de definir la variable [code]angular_speed[/code] en la función [code]set_angular_speed()[/code], o defínela fuera de las funciones para que sea válida en todo el script."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid ""
-"Sorry, we don't have this particular error message covered yet!\n"
-"\n"
-"Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
-"\n"
-"[center]Thank you![/center]"
-msgstr ""
-"¡Lo sentimos, todavía no tenemos una explicación para este mensaje de error en particular!\n"
-"\n"
-"Por favor, usa el botón [b]Reportar[/b] en la esquina superior derecha para contarnos más sobre cómo lo obtuviste, e intentaremos mejorar nuestra base de conocimiento para la próxima versión de la aplicación.\n"
-"\n"
-"[center]¡Gracias![/center]"
 
 #: course/lesson-12-using-variables/visuals/VariableDefinition.tscn
 #: course/lesson-28-specifying-types/SyntaxTypeHints.tscn
@@ -116,6 +94,9 @@ msgid ""
 "func heal(amount):\n"
 "\thealth += amount"
 msgstr ""
+"func heal(amount):\n"
+"\thealth += amount"
+
 
 #: course/lesson-13-conditions/visuals/ExampleJump.tscn
 msgid "Jump"
@@ -152,6 +133,10 @@ msgid ""
 "\tscale.y += 0.2\n"
 "\t# ..."
 msgstr ""
+"func level_up():\n"
+"\tscale.x += 0.2\n"
+"\tscale.y += 0.2\n"
+"\t# ..."
 
 #: course/lesson-16-2d-vectors/visuals/ExampleIncreaseCharacterScaleVector.tscn
 msgid ""
@@ -159,6 +144,9 @@ msgid ""
 "\tscale += Vector2(0.2, 0.2)\n"
 "\t# ..."
 msgstr ""
+"func level_up():\n"
+"\tscale += Vector2(0.2, 0.2)\n"
+"\t# ..."
 
 #: course/lesson-16-2d-vectors/visuals/ExampleMoveSpriteVector.tscn
 msgid "move()"
@@ -169,6 +157,8 @@ msgid ""
 "func move():\n"
 "\tposition += Vector2(20, 20)"
 msgstr ""
+"func move():\n"
+"\tposition += Vector2(20, 20)"
 
 #: course/lesson-16-2d-vectors/visuals/VectorVisual.tscn
 msgid "Vector2(100, 100)"
@@ -201,6 +191,13 @@ msgid ""
 "\tjump(110, 0)\n"
 "\tdraw_square()"
 msgstr ""
+"func draw_wall():\n"
+"\tdraw_square()\n"
+"\tjump(110, 0)\n"
+"\tdraw_square()\n"
+"\tjump(110, 0)\n"
+"\tdraw_square()"
+
 
 #: course/lesson-17-while-loops/visuals/old/ExampleTurtleMeetRobotWhile.tscn
 msgid ""
@@ -211,6 +208,13 @@ msgid ""
 "\t\tjump(110, 0)\n"
 "\t\tnumber += 1"
 msgstr ""
+"func draw_wall():\n"
+"\tvar number = 0\n"
+"\twhile number < 3:\n"
+"\t\tdraw_square()\n"
+"\t\tjump(110, 0)\n"
+"\t\tnumber += 1"
+
 
 #: course/lesson-19-creating-arrays/visuals/ArrayDefinitionSyntax.tscn
 #: course/lesson-24-access-array-indices/visuals/SyntaxAccessIndex.tscn
@@ -259,10 +263,6 @@ msgstr "Esto es una sugerencia."
 msgid "Hover over the Robot to learn more"
 msgstr "Pasa el cursor por encima del robot para obtener más información"
 
-#: course/lesson-21-strings/visuals/RobotWithNumberName.tscn
-msgid "70801"
-msgstr "70801"
-
 #: course/lesson-21-strings/visuals/RobotWithRegularName.tscn
 msgid "Robot"
 msgstr "Robot"
@@ -283,7 +283,7 @@ msgstr "Completado"
 
 #: course/lesson-23-append-to-arrays/clearing-meals/Meal.tscn
 msgid "cheese sandwich"
-msgstr ""
+msgstr "sándwich de queso"
 
 #: course/lesson-24-access-array-indices/visuals/SyntaxAccessIndex.tscn
 msgid "array_name"
@@ -609,10 +609,6 @@ msgstr "paso"
 #: ui/components/RunnableCodeExampleDebugger.tscn
 msgid "Debugger"
 msgstr "Depurador"
-
-#: ui/components/ScrollableTextBox.tscn
-msgid "Placeholder text"
-msgstr "Texto de relleno"
 
 #: ui/components/popups/ConfirmPopup.tscn
 #: ui/components/popups/PracticeLeaveUnfinishedPopup.tscn
@@ -1048,7 +1044,6 @@ msgid "This is an Open-Source project!"
 msgstr "¡Este es un proyecto de código abierto!"
 
 #: ui/screens/end_screen/SponsorlessEndScreen.tscn
-#, fuzzy
 msgid ""
 "Like Godot, this app and course is free and open-source.\n"
 "\n"
@@ -1069,10 +1064,6 @@ msgid ""
 msgstr ""
 "Ya has respondido correctamente a este cuestionario antes.\n"
 "¡Siéntete libre de intentarlo de nuevo para refrescar tu memoria!"
-
-#: ui/screens/lesson/UIBaseQuiz.tscn
-msgid "Explanation"
-msgstr "Explicación"
 
 #: ui/screens/lesson/UIBaseQuiz.tscn
 msgid "You need to try to answer once before you can skip a quiz."
@@ -1369,6 +1360,18 @@ msgstr "Falta la función «set_angular_speed(new_angular_speed)»; ¿la has eli
 msgid "The set_angular_speed() function doesn't seem to use the angular_speed variable."
 msgstr "La función set_angular_speed() no parece utilizar la variable angular_speed."
 
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:10
+msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
+msgstr "El identificador angular_speed no está declarado en el ámbito actual (en la línea 6)."
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:11
+msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
+msgstr "La función [code]set_angular_speed()[/code] no puede utilizar la variable [code]angular_speed[/code] porque no es global para todo el script. Tampoco se encuentra en la función [code]set_angular_speed()[/code]."
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:12
+msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
+msgstr "Asegúrate de definir la variable [code]angular_speed[/code] en la función [code]set_angular_speed()[/code], o defínela fuera de las funciones para que sea válida en todo el script."
+
 #: course/lesson-13-conditions/limiting_health/TestLimitingHealth.gd:13
 msgid "Health Does Not Go Above 80"
 msgstr "La salud no supera los 80"
@@ -1397,22 +1400,18 @@ msgid ""
 msgstr "Al curar al personaje dos veces por 40 puntos, la salud debería subir a 60, y luego a 80. En su lugar, obtuvimos %s. ¿Estás usando el parámetro de cantidad?"
 
 #: course/lesson-13-conditions/prevent_zero_health/TestPreventZeroHealth.gd:13
-#, fuzzy
 msgid "Health Reaches Zero"
 msgstr "La salud llega a cero"
 
 #: course/lesson-13-conditions/prevent_zero_health/TestPreventZeroHealth.gd:14
-#, fuzzy
 msgid "Health Does Not Go Below Zero"
 msgstr "La salud no puede ser inferior a cero"
 
 #: course/lesson-13-conditions/prevent_zero_health/TestPreventZeroHealth.gd:20
-#, fuzzy
 msgid "The health stays above 0 when we damage the character a lot. Did you set the health to 0 when that happens?"
 msgstr "La salud se mantiene por encima de 0 cuando le infliges mucho daño al personaje. ¿Estableciste la salud en 0 cuando eso ocurre?"
 
 #: course/lesson-13-conditions/prevent_zero_health/TestPreventZeroHealth.gd:26
-#, fuzzy
 msgid "The health becomes negative if we deal 400 damage to the character. Did you set it to 0?"
 msgstr "La salud se vuelve negativa si le infligimos 400 de daño al personaje. ¿La pusiste en 0?"
 
@@ -1425,32 +1424,26 @@ msgstr ""
 "¿Estás usando el parámetro de cantidad?"
 
 #: course/lesson-13-conditions/using_conditions/TestUsingConditions.gd:5
-#, fuzzy
 msgid "Statement 1 Is True"
 msgstr "La afirmación 1 es verdadera"
 
 #: course/lesson-13-conditions/using_conditions/TestUsingConditions.gd:6
-#, fuzzy
 msgid "Statement 2 Is True"
 msgstr "La afirmación 2 es verdadera"
 
 #: course/lesson-13-conditions/using_conditions/TestUsingConditions.gd:7
-#, fuzzy
 msgid "Statement 3 Is True"
 msgstr "La afirmación 3 es verdadera"
 
 #: course/lesson-13-conditions/using_conditions/TestUsingConditions.gd:8
-#, fuzzy
 msgid "Statement 4 Is True"
 msgstr "La afirmación 4 es verdadera"
 
 #: course/lesson-13-conditions/using_conditions/TestUsingConditions.gd:23
-#, fuzzy
 msgid "The first comparison is not correct. Did you use the right comparison?"
 msgstr "La primera comparación no es correcta. ¿Usaste la comparación adecuada?"
 
 #: course/lesson-13-conditions/using_conditions/TestUsingConditions.gd:39
-#, fuzzy
 msgid "The second comparison is not correct. Did you use the right comparison?"
 msgstr "La segunda comparación no es correcta. ¿Usaste la comparación adecuada?"
 
@@ -1508,51 +1501,42 @@ msgid "It looks like the take_damage function is missing; did you remove it?"
 msgstr "Parece que falta la función «take_damage»; ¿la has eliminado?"
 
 #: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:108
-#, fuzzy
 msgid "It looks like amount isn't reduced by a percentage. Did you multiply it by a value less than 1?"
 msgstr "Parece que «amount» no se reduce en un porcentaje. ¿Lo has multiplicado por un valor menor que 1?"
 
 #: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:114
-#, fuzzy
 msgid "The character did not take half damage despite being level 3. Did you multiply the amount by 0.5 to reduce it?"
 msgstr "El personaje no ha recibido la mitad de daño a pesar de estar en el nivel 3. ¿Has multiplicado la cantidad por 0,5 para reducirla?"
 
 #: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:118
-#, fuzzy
 msgid "The character appears not to be taking full damage when their level is below 3. Did you use a condition to limit damage reduction to when the level is greater or equal to 3?"
 msgstr "El personaje parece no recibir todo el daño cuando su nivel es inferior a 3. ¿Has utilizado una condición para limitar la reducción de daño a cuando el nivel es mayor o igual a 3?"
 
 #: course/lesson-14-multiplying/reducing_damage/TestReducingDamage.gd:120
-#, fuzzy
 msgid "The character appears to be taking 0 damage when its level is less than 3. Did you subtract the amount to health when the level is less than 3?"
 msgstr "El personaje parece recibir 0 puntos de daño cuando su nivel es inferior a 3. ¿Has restado la cantidad de salud cuando el nivel es inferior a 3?"
 
 #: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:11
-#, fuzzy
 msgid "Use A Vector To Increase Scale"
 msgstr "Utiliza un vector para aumentar la escala"
 
 #: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:12
 msgid "The Scale Is Correct After Gaining Multiple Levels"
-msgstr ""
+msgstr "La escala es correcta tras subir varios niveles."
 
 #: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:35
-#, fuzzy
 msgid "It looks like the scale isn't increasing by some vector. Did you add a vector to scale?"
 msgstr "Parece que la escala no aumenta en un vector determinado. ¿Agregaste un vector a «scale»?"
 
 #: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:45
-#, fuzzy
 msgid "scale's value is %s; It should be (1.4, 1.4) after levelling up 2 times."
 msgstr "El valor de «scale» es %s; debería ser (1.4, 1.4) tras subir dos niveles."
 
 #: course/lesson-16-2d-vectors/resetting_robot/TestRobotReset.gd:11
-#, fuzzy
 msgid "Use Vector 2 To Reset Robot"
 msgstr "Utiliza Vector2 para reiniciar el robot"
 
 #: course/lesson-16-2d-vectors/resetting_robot/TestRobotReset.gd:12
-#, fuzzy
 msgid "Robot Scale Is Reset"
 msgstr "Se restablece la escala del robot"
 
@@ -1569,53 +1553,49 @@ msgid "scale's value is %s; It should be (1.0, 1.0) after resetting."
 msgstr "El valor de «scale» es %s; debería ser (1.0, 1.0) tras el reinicio."
 
 #: course/lesson-16-2d-vectors/resetting_robot/TestRobotReset.gd:86
-#, fuzzy
 msgid "position's value is %s; It should be (0.0, 0.0) after resetting."
 msgstr "El valor de «position» es %s; debería ser (0.0, 0.0) tras el reinicio."
 
 #: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:13
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:13
-#, fuzzy
 msgid "Robot Moves To Bottom Row"
 msgstr "El robot llega al fondo del tablero"
 
 #: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:15
-#, fuzzy
 msgid "Use a While Loop to Move"
 msgstr "Utiliza un bucle «While»"
 
 #: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:23
 msgid "The robot stopped above the bottom row. The cell.y member variable should be equal to board_size.y - 1 (the last row in the board)."
-msgstr ""
+msgstr "El robot se detuvo sobre la fila inferior. La variable miembro `cell.y` debería ser igual a `board_size.y - 1` (la última fila del tablero)."
 
 #: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:26
 msgid "The robot moved below the bottom row. The cell.y member variable should be equal to board_size.y - 1 (the last row in the board)."
-msgstr ""
+msgstr "El robot se ha desplazado por debajo de la fila inferior. La variable miembro `cell.y` debería ser igual a `board_size.y - 1` (la última fila del tablero)."
 
 #: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:40
 msgid "Your while loop needs to contain the code that moves the robot."
-msgstr ""
+msgstr "Tu bucle «while» debe contener el código que mueve al robot."
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:15
-#, fuzzy
 msgid "Use a For Loop to Move"
-msgstr "Utiliza un bucle «For»"
+msgstr "Usa un bucle «For» para moverte"
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:23
 msgid "The robot stopped above the bottom row. Its cell.y should be equal to board_size.y - 1."
-msgstr ""
+msgstr "El robot se ha detenido sobre la fila inferior. Su valor cell.y debería ser igual a board_size.y - 1."
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:26
 msgid "The robot moved below the bottom row. Its cell.y should be equal to board_size.y - 1."
-msgstr ""
+msgstr "El robot se ha desplazado por debajo de la fila inferior. Su valor cell.y debería ser igual a board_size.y - 1."
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:40
 msgid "Your for loop needs to contain the code that moves the robot."
-msgstr ""
+msgstr "Tu bucle «for» debe contener el código que mueve al robot."
 
 #: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:40
 msgid "Use a For Loop to Draw Rectangles"
-msgstr ""
+msgstr "Utiliza un bucle «for» para dibujar rectángulos"
 
 #: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:41
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:40
@@ -1634,7 +1614,7 @@ msgstr "Las figuras están separadas por 100 píxeles."
 
 #: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:62
 msgid "Your for loop needs to contain the code to draw the rectangles."
-msgstr ""
+msgstr "Tu bucle «for» debe contener el código para dibujar los rectángulos."
 
 #: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:67
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:48
@@ -1643,7 +1623,6 @@ msgstr "Has dibujado %s cuadrados, pero tienes que dibujar 3."
 
 #: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:81
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:56
-#, fuzzy
 msgid "Shape3D number %s is not a square of size 100 by 100."
 msgstr "La forma 3D número %s no es un cuadrado de 100 por 100."
 
@@ -1659,7 +1638,7 @@ msgstr "Las formas no están separadas por 100 píxeles en el eje X."
 
 #: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:18
 msgid "Path contains values that are not Vector2"
-msgstr ""
+msgstr "Path contiene valores que no son de tipo Vector2"
 
 #: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:25
 msgid "Path Is Contiguous"
@@ -1678,121 +1657,98 @@ msgid "No points found in variable turtle_path. Did you write Vector2 coordinate
 msgstr "No se han encontrado puntos en la variable «turtle_path». ¿Has escrito coordenadas Vector2 en la matriz de la variable?"
 
 #: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:37
-#, fuzzy
 msgid "We found at least two points that are not next to one another. Did you forget some coordinates, or did you try to move the turtle diagonally?"
 msgstr "Hemos encontrado al menos dos puntos que no están uno al lado del otro. ¿Te has olvidado de algunas coordenadas o has intentado mover la tortuga en diagonal?"
 
 #: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:46
-#, fuzzy
 msgid "The last point should be at the robot's coordinates, %s, but it is %s instead."
 msgstr "El último punto debería estar en las coordenadas del robot, %s, pero en realidad está en %s."
 
 #: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:55
-#, fuzzy
 msgid "The turtle hit a rock at coordinates %s. You need to change its path."
 msgstr "La tortuga se ha chocado contra una roca en las coordenadas %s. Tienes que cambiar su trayectoria."
 
 #: course/lesson-19-creating-arrays/selecting-units/TestSelectingUnits.gd:13
-#, fuzzy
 msgid "All Units Are Selected"
 msgstr "Todas las unidades están seleccionadas"
 
 #: course/lesson-19-creating-arrays/selecting-units/TestSelectingUnits.gd:14
-#, fuzzy
 msgid "Only Units Are Selected"
 msgstr "Solo están seleccionadas las unidades"
 
 #: course/lesson-19-creating-arrays/selecting-units/TestSelectingUnits.gd:20
-#, fuzzy
 msgid "Unit in cell %s not selected."
 msgstr "No se ha seleccionado la unidad en la celda %s."
 
 #: course/lesson-19-creating-arrays/selecting-units/TestSelectingUnits.gd:27
-#, fuzzy
 msgid "Trying to select a cell that doesn't contain a unit: %s."
 msgstr "Se está intentando seleccionar una celda que no contiene ninguna unidad: %s."
 
 #: course/lesson-2-your-first-error/first-error/TestsFixError.gd:4
-#, fuzzy
 msgid "Remove Errors"
 msgstr "Elimina los errores"
 
 #: course/lesson-2-your-first-error/first-error/TestsFixError.gd:10
-#, fuzzy
 msgid "There's still a comment in your code. You need to remove the comment sign (#)."
 msgstr "Todavía hay un comentario en tu código. Tienes que eliminar el signo de comentario (#)."
 
 #: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:41
-#, fuzzy
 msgid "Rectangles Have The Correct Size"
 msgstr "Los rectángulos tienen el tamaño correcto"
 
 #: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:42
-#, fuzzy
 msgid "Rectangles Do Not Overlap"
 msgstr "Los rectángulos no se solapan"
 
 #: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:47
-#, fuzzy
 msgid "We expected 4 polygons, but you drew %s instead."
 msgstr "Esperábamos 4 polígonos, pero en su lugar has dibujado %s."
 
 #: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:51
-#, fuzzy
 msgid "At least one of the rectangles does not have the expected size."
 msgstr "Al menos uno de los rectángulos no tiene el tamaño esperado."
 
 #: course/lesson-20-looping-over-arrays/drawing-in-loops/TestsDrawingInLoops.gd:62
-#, fuzzy
 msgid "At least two drawn shape intersect. Did you pass arguments big enough to the jump() function?"
 msgstr "Al menos dos formas dibujadas se solapan. ¿Has pasado argumentos lo suficientemente grandes a la función «jump()»?"
 
 #: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:18
-#, fuzzy
 msgid "Robot Moves Along Blue Path"
 msgstr "El robot se desplaza por la trayectoria azul."
 
 #: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:20
-#, fuzzy
 msgid "Code Uses Move To"
 msgstr "El código utiliza «Move To»"
 
 #: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:25
-#, fuzzy
 msgid "The robot's path changed. Did you change the robot_path array?"
 msgstr "La ruta del robot ha cambiado. ¿Has modificado la matriz robot_path?"
 
 #: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:28
-#, fuzzy
 msgid "The robot didn't move at all. Did you call robot.move_to()?"
 msgstr "El robot no se ha movido en absoluto. ¿Has llamado a robot.move_to()?"
 
 #: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:33
-#, fuzzy
 msgid "The robot moved fewer times than it should have. Did you use a loop and move once for each point in the robot_path array?"
 msgstr "El robot se movió menos veces de las que debería. ¿Usaste un bucle y moviste el robot una vez por cada punto de la matriz robot_path?"
 
 #: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:45
-#, fuzzy
 msgid "The robot's movement path doesn't match the robot_path array. They should be the same."
 msgstr "La trayectoria de movimiento del robot no coincide con la matriz robot_path. Deberían ser iguales."
 
 #: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:58
 msgid "Did you use a for loop to call robot.move_to() with each cell in robot_path?"
-msgstr ""
+msgstr "¿Has utilizado un bucle «for» para llamar a «robot.move_to()» con cada celda de «robot_path»?"
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:12
-#, fuzzy
 msgid "Use For Loop"
-msgstr "Utiliza un bucle «For»"
+msgstr "Usa un bucle «for»"
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:13
-#, fuzzy
 msgid "Robot Combo Is Correct"
 msgstr "La combinación del robot es correcta"
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:20
-#, fuzzy
 msgid "The run function is missing; did you remove it?"
 msgstr "Falta la función «run»; ¿la has eliminado?"
 
@@ -1801,522 +1757,426 @@ msgid "Your code has no for loop. You need to use a for loop to complete this pr
 msgstr "Tu código no tiene ningún bucle «for». Tienes que utilizar un bucle «for» para completar este ejercicio, ¡incluso aunque haya otras soluciones!"
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:34
-#, fuzzy
 msgid "Your code does not play any animations. Did you remember to call play_animation() in your for loop?"
 msgstr "Tu código no reproduce ninguna animación. ¿Te has acordado de llamar a play_animation() en tu bucle «for»?"
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:48
-#, fuzzy
 msgid "It seems you're passing the entire array of combos instead of a single animation name at a time."
 msgstr "Parece que estás pasando toda la matriz de combinaciones en lugar de un solo nombre de animación cada vez."
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:63
-#, fuzzy
 msgid "Your code does not use the iterator. Did you remember to call play_animation(%s) in your for loop?"
 msgstr "Tu código no utiliza el iterador. ¿Te has acordado de llamar a play_animation(%s) en tu bucle «for»?"
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:85
-#, fuzzy
 msgid "The combo isn't correct. Did you use the right actions in the right order?"
 msgstr "La combinación no es correcta. ¿Has utilizado las acciones correctas en el orden adecuado?"
 
 #: course/lesson-21-strings/string_error/TestsStringError.gd:17
-#, fuzzy
 msgid "Robot Name Is A String"
 msgstr "El nombre del robot es una cadena"
 
 #: course/lesson-21-strings/string_error/TestsStringError.gd:22
-#, fuzzy
 msgid "The robot_name variable doesn't exist."
 msgstr "La variable «robot_name» no existe."
 
 #: course/lesson-21-strings/string_error/TestsStringError.gd:26
-#, fuzzy
 msgid "The robot_name variable is set to 0. Did you change its value?"
 msgstr "La variable robot_name está establecida en 0. ¿Cambiaste su valor?"
 
 #: course/lesson-21-strings/string_error/TestsStringError.gd:28
-#, fuzzy
 msgid "The robot_name isn't a string. Did you add quotes around the value?"
 msgstr "«robot_name» no es una cadena de caracteres. ¿Agregaste comillas alrededor del valor?"
 
 #: course/lesson-22-functions-return-values/convert-grid-coordinates/TestConvertGridCoordinates.gd:16
-#, fuzzy
 msgid "Function Maps Cell To World Coordinates"
 msgstr "La función asigna coordenadas de celda a coordenadas del mundo"
 
 #: course/lesson-22-functions-return-values/convert-grid-coordinates/TestConvertGridCoordinates.gd:21
-#, fuzzy
 msgid "Function convert_to_world_coordinates() does not exist. Did you make a typo or not define it?"
 msgstr "La función convert_to_world_coordinates() no existe. ¿Cometiste un error tipográfico o no la definiste?"
 
 #: course/lesson-22-functions-return-values/convert-grid-coordinates/TestConvertGridCoordinates.gd:24
-#, fuzzy
 msgid "We didn't find any \"return\" keyword in your code. Did you forget to return the value from the convert_to_world_coordinates() function?"
 msgstr "No hemos encontrado ninguna palabra clave «return» en tu código. ¿Te has olvidado de devolver el valor de la función convert_to_world_coordinates()?"
 
 #: course/lesson-22-functions-return-values/convert-grid-coordinates/TestConvertGridCoordinates.gd:30
-#, fuzzy
 msgid "When converting cell %s to world coordinates, we got %s, but we expected %s."
 msgstr "Al convertir la celda %s a coordenadas del mundo, obtuvimos %s, pero esperábamos %s."
 
 #: course/lesson-22-functions-return-values/visuals/grid_demo/GridDemo.gd:35
 #: course/lesson-22-functions-return-values/visuals/grid_demo/GridDemo.gd:65
-#, fuzzy
 msgid "Hover over a cell to see its pixel position"
 msgstr "Pasa el cursor por encima de una celda para ver su posición en píxeles."
 
 #: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:13
-#, fuzzy
 msgid "Used Pop Front"
 msgstr "Se ha utilizado «Pop Front»"
 
 #: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:14
-#, fuzzy
 msgid "Used Append"
 msgstr "Se ha utilizado «Append»"
 
 #: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:15
-#, fuzzy
 msgid "Completed Orders Contain All Elements"
 msgstr "Los pedidos completados contienen todos los elementos"
 
 #: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:16
-#, fuzzy
 msgid "Starting Data Unchanged"
 msgstr "Datos iniciales sin cambios"
 
 #: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:21
-#, fuzzy
 msgid "We found no call to the pop_front() function. Did you forget to call it?"
 msgstr "No hemos encontrado ninguna llamada a la función pop_front(). ¿Te has olvidado de llamarla?"
 
 #: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:27
-#, fuzzy
 msgid "We found no call to the append() function. Did you forget to call it?"
 msgstr "No hemos encontrado ninguna llamada a la función append(). ¿Te has olvidado de llamarla?"
 
 #: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:35
-#, fuzzy
 msgid "The completed_orders array is empty. Are you sure you appended the elements?"
 msgstr "La matriz «completed_orders» está vacía. ¿Estás seguro de que has añadido los elementos?"
 
 #: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:39
-#, fuzzy
 msgid "We expected %s, but got %s instead"
 msgstr "Esperábamos %s, pero en su lugar obtuvimos %s"
 
 #: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:48
-#, fuzzy
 msgid "It looks like you removed %s from waiting_orders."
 msgstr "Parece que has eliminado %s de waiting_orders."
 
 #: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:11
-#, fuzzy
 msgid "Used Pop Back"
 msgstr "Se ha utilizado pop_back"
 
 #: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:12
-#, fuzzy
 msgid "Used While Loop"
 msgstr "Se ha utilizado un bucle while"
 
 #: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:13
-#, fuzzy
 msgid "Crates Array Is Empty"
 msgstr "La matriz de cajas está vacía"
 
 #: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:30
-#, fuzzy
 msgid "We found no call to the pop_back() function. Did you forget to call it?"
 msgstr "No hemos encontrado ninguna llamada a la función pop_back(). ¿Te has olvidado de llamarla?"
 
 #: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:36
-#, fuzzy
 msgid "You didn't use the while keyword"
 msgstr "No has utilizado la palabra clave «while»."
 
 #: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:44
-#, fuzzy
 msgid "The crate array is not empty"
 msgstr "La matriz «crate» no está vacía"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:27
-#, fuzzy
 msgid "First Track Is Well Positioned"
 msgstr "La primera pista está bien colocada"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:28
-#, fuzzy
 msgid "Third Track Is Well Positioned"
 msgstr "La tercera pista está bien colocada"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:29
 #, fuzzy
 msgid "Fourth Track Is Well Positioned"
-msgstr "La primera pista está bien colocada"
+msgstr "La cuarta pista está bien colocada"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:30
-#, fuzzy
 msgid "All Other Tracks Are Aligned To Grid"
 msgstr "Todas las demás pistas están alineadas a la cuadrícula"
 
 #: course/lesson-24-access-array-indices/find-crystals/TestFindCrystals.gd:15
-#, fuzzy
 msgid "Correct Items Have Been Picked"
 msgstr "Se han seleccionado los elementos correctos"
 
 #: course/lesson-24-access-array-indices/find-crystals/TestFindCrystals.gd:16
-#, fuzzy
 msgid "Picked Correct Item Amount"
 msgstr "Se ha seleccionado la cantidad correcta de elementos"
 
 #: course/lesson-25-creating-dictionaries/adding-items/TestAddingItems.gd:16
-#, fuzzy
 msgid "Add Item Function Works As Intended"
 msgstr "La función «add_item» funciona según lo previsto"
 
 #: course/lesson-25-creating-dictionaries/adding-items/TestAddingItems.gd:17
-#, fuzzy
 msgid "Add Item Function Uses Addition"
 msgstr "La función «add_item» utiliza la adición"
 
 #: course/lesson-25-creating-dictionaries/adding-items/TestAddingItems.gd:30
-#, fuzzy
 msgid "The amount of items isn't correct. Does each key have the correct value?"
 msgstr "La cantidad de elementos no es correcta. ¿Cada clave tiene el valor correcto?"
 
 #: course/lesson-25-creating-dictionaries/creating-inventory/TestInventory.gd:17
-#, fuzzy
 msgid "Inventory Has Correct Keys"
 msgstr "El inventario contiene las claves correctas"
 
 #: course/lesson-25-creating-dictionaries/creating-inventory/TestInventory.gd:18
-#, fuzzy
 msgid "Inventory Has Correct Values"
 msgstr "El inventario tiene los valores correctos"
 
 #: course/lesson-25-creating-dictionaries/creating-inventory/TestInventory.gd:26
-#, fuzzy
 msgid "The amount of items is not as expected. The inventory should have %s items but your inventory has %s."
 msgstr "La cantidad de artículos no es la esperada. El inventario debería tener %s artículos, pero el tuyo tiene %s."
 
 #: course/lesson-25-creating-dictionaries/creating-inventory/TestInventory.gd:29
-#, fuzzy
 msgid "Are you missing any items?"
 msgstr "¿Te falta algún artículo?"
 
 #: course/lesson-25-creating-dictionaries/creating-inventory/TestInventory.gd:36
 #: course/lesson-25-creating-dictionaries/creating-inventory/TestInventory.gd:54
-#, fuzzy
 msgid "The inventory doesn't contain all the required items. Make sure you have '%s' as keys in your inventory dictionary."
 msgstr "El inventario no contiene todos los artículos necesarios. Asegúrate de que «%s» esté como clave en el diccionario de tu inventario."
 
 #: course/lesson-25-creating-dictionaries/creating-inventory/TestInventory.gd:59
-#, fuzzy
 msgid "The values for one or more items aren't correct. You need %s healing hearts, %s gems, and %s sword."
 msgstr "Los valores de uno o más objetos no son correctos. Necesitas %s corazones de curación, %s gemas y %s espada."
 
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:11
-#, fuzzy
 msgid "All Items Are Displayed"
 msgstr "Se muestran todos los artículos"
 
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:12
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:12
-#, fuzzy
 msgid "Code Uses A For Loop"
 msgstr "El código utiliza un bucle «for»"
 
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:19
 msgid "The number of items displayed does not match the number of items in the inventory. Did you display each item exactly once?"
-msgstr ""
+msgstr "El número de objetos mostrados no coincide con el número de objetos del inventario. ¿Has mostrado cada objeto exactamente una vez?"
 
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:29
-#, fuzzy
 msgid "The displayed items do not match the inventory variable's content. Did you call the display_item() function for each item in the inventory?"
 msgstr "Los elementos mostrados no coinciden con el contenido de la variable inventory. ¿Llamaste a la función display_item() para cada elemento del inventario?"
 
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:44
 msgid "Your code does not use a for loop to call display_item(). Please make sure you display each item inside the loop."
-msgstr ""
+msgstr "Tu código no utiliza un bucle «for» para llamar a `display_item()`. Asegúrate de mostrar cada objeto dentro del bucle."
 
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:11
-#, fuzzy
 msgid "All Units Are Displayed"
 msgstr "Se muestran todas las unidades"
 
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:19
 msgid "The number of units displayed does not match the number of units in the units dictionary. Did you place each unit exactly once?"
-msgstr ""
+msgstr "El número de unidades mostradas no coincide con el número de unidades del diccionario de unidades. ¿Colocaste cada unidad exactamente una vez?"
 
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:29
-#, fuzzy
 msgid "The displayed units do not match the units variable's content. Did you call the place_unit() function for each unit in the units dictionary?"
 msgstr "Las unidades mostradas no coinciden con el contenido de la variable «units». ¿Has llamado a la función place_unit() para cada unidad del diccionario «units»?"
 
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:43
 msgid "Your code does not use a for loop to call place_unit(). Please make sure you place each unit inside the loop."
-msgstr ""
+msgstr "Tu código no utiliza un bucle «for» para llamar a «place_unit()». Asegúrate de colocar cada unidad dentro del bucle."
 
 #: course/lesson-27-value-types/display-energy/TestDisplayingEnergy.gd:11
-#, fuzzy
 msgid "Displayed Energy Matches Energy Value"
 msgstr "La energía mostrada coincide con el valor de energía"
 
 #: course/lesson-27-value-types/display-energy/TestDisplayingEnergy.gd:17
-#, fuzzy
 msgid "The energy variable is not an int anymore. Did you change the energy value?"
 msgstr "La variable «energy» ya no es un entero. ¿Has cambiado el valor de «energy»?"
 
 #: course/lesson-27-value-types/display-energy/TestDisplayingEnergy.gd:21
-#, fuzzy
 msgid "The value of the energy variable does not match the displayed text. Did you call the str() function?"
 msgstr "El valor de la variable «energy» no coincide con el texto mostrado. ¿Has llamado a la función str()?"
 
 #: course/lesson-27-value-types/player-input/TestPlayerInput.gd:13
-#, fuzzy
 msgid "Item Count Is Int"
 msgstr "El recuento de ítems es un entero"
 
 #: course/lesson-27-value-types/player-input/TestPlayerInput.gd:14
-#, fuzzy
 msgid "Item Count Matches Player Input"
-msgstr "El recuento de artículos coincide con la entrada del jugador"
+msgstr "El recuento de ítems coincide con la entrada del jugador"
 
 #: course/lesson-27-value-types/player-input/TestPlayerInput.gd:19
-#, fuzzy
 msgid "Item count is not of type int. Did you use the int() function to convert the player_input value?"
 msgstr "El recuento de artículos no es de tipo int. ¿Usaste la función int() para convertir el valor de player_input?"
 
 #: course/lesson-27-value-types/player-input/TestPlayerInput.gd:27
-#, fuzzy
 msgid "Item count is not of type int. We can't compare it to the player_input value."
 msgstr "El recuento de artículos no es de tipo int. No podemos compararlo con el valor de player_input."
 
 #: course/lesson-27-value-types/player-input/TestPlayerInput.gd:31
-#, fuzzy
 msgid "Player input is not of its original type anymore. Did you change its value?"
 msgstr "La entrada del jugador ya no es de su tipo original. ¿Has cambiado su valor?"
 
 #: course/lesson-28-specifying-types/fix-hints/TestFixHints.gd:42
-#, fuzzy
 msgid "Vector Has Correct Hint"
 msgstr "El vector tiene la pista correcta"
 
 #: course/lesson-28-specifying-types/fix-hints/TestFixHints.gd:43
-#, fuzzy
 msgid "Text Has Correct Hint"
 msgstr "El texto tiene la pista correcta"
 
 #: course/lesson-28-specifying-types/fix-hints/TestFixHints.gd:44
-#, fuzzy
 msgid "Whole Number Has Correct Hint"
 msgstr "El número entero tiene la pista correcta"
 
 #: course/lesson-28-specifying-types/fix-hints/TestFixHints.gd:45
-#, fuzzy
 msgid "Decimal Number Has Correct Hint"
 msgstr "El número decimal tiene la pista correcta"
 
 #: course/lesson-28-specifying-types/fix-values/TestFixValues.gd:80
-#, fuzzy
 msgid "Whole Number Has Correct Value"
 msgstr "El número entero tiene el valor correcto"
 
 #: course/lesson-28-specifying-types/fix-values/TestFixValues.gd:81
-#, fuzzy
 msgid "Text Has Correct Value"
 msgstr "El texto tiene el valor correcto"
 
 #: course/lesson-28-specifying-types/fix-values/TestFixValues.gd:82
-#, fuzzy
 msgid "Vector Has Correct Value"
 msgstr "El vector tiene el valor correcto"
 
 #: course/lesson-28-specifying-types/fix-values/TestFixValues.gd:83
-#, fuzzy
 msgid "Decimal Number Has Correct Value"
 msgstr "El número decimal tiene el valor correcto"
 
 #: course/lesson-28-specifying-types/fix-values/TestFixValues.gd:88
-#, fuzzy
 msgid "It looks like you changed the type hint of 'whole_number'. The type should stay 'int'. Only change the value after the '=' sign."
 msgstr "Parece que has cambiado la indicación de tipo de «whole_number». El tipo debe seguir siendo «int». Solo cambia el valor que aparece después del signo «=»."
 
 #: course/lesson-28-specifying-types/fix-values/TestFixValues.gd:90
-#, fuzzy
 msgid "The value of 'whole_number' does not match its type hint (int). Change the value after '=' to a whole number with no decimal point, for example: 4"
 msgstr "El valor de «whole_number» no coincide con su indicación de tipo (int). Cambia el valor después de «=» por un número entero sin decimales, por ejemplo: 4"
 
 #: course/lesson-28-specifying-types/fix-values/TestFixValues.gd:96
-#, fuzzy
 msgid "It looks like you changed the type hint of 'text'. The type should stay 'String'. Only change the value after the '=' sign."
 msgstr "Parece que has cambiado la indicación de tipo de «text». El tipo debe seguir siendo «String». Solo cambia el valor que aparece después del signo «=»."
 
 #: course/lesson-28-specifying-types/fix-values/TestFixValues.gd:98
-#, fuzzy
 msgid "The value of 'text' does not match its type hint (String). Change the value after '=' to a text string surrounded by quotes, for example: \"Hello, world!\""
 msgstr "El valor de «text» no coincide con su tipo de dato (String). Cambia el valor que aparece después de «=» por una cadena de texto entre comillas, por ejemplo: «¡Hola, mundo!»"
 
 #: course/lesson-28-specifying-types/fix-values/TestFixValues.gd:104
-#, fuzzy
 msgid "It looks like you changed the type hint of 'vector'. The type should stay 'Vector2'. Only change the value after the '=' sign."
 msgstr "Parece que has cambiado la indicación de tipo de «vector». El tipo debe seguir siendo «Vector2». Solo cambia el valor que aparece después del signo «=»."
 
 #: course/lesson-28-specifying-types/fix-values/TestFixValues.gd:106
-#, fuzzy
 msgid "The value of 'vector' does not match its type hint (Vector2). Change the value after '=' to a Vector2, for example: Vector2(1, 1)"
 msgstr "El valor de «vector» no coincide con su indicación de tipo (Vector2). Cambia el valor que aparece después de «=» por un Vector2, por ejemplo: Vector2(1, 1)"
 
 #: course/lesson-28-specifying-types/fix-values/TestFixValues.gd:112
-#, fuzzy
 msgid "It looks like you changed the type hint of 'decimal_number'. The type should stay 'float'. Only change the value after the '=' sign."
 msgstr "Parece que has cambiado la indicación de tipo de «decimal_number». El tipo debe seguir siendo «float». Solo cambia el valor que aparece después del signo «=»."
 
 #: course/lesson-28-specifying-types/fix-values/TestFixValues.gd:114
-#, fuzzy
 msgid "The value of 'decimal_number' does not match its type hint (float). Change the value after '=' to a decimal number with a decimal point, for example: 3.14"
 msgstr "El valor de «decimal_number» no coincide con su indicación de tipo (float). Cambia el valor después de «=» por un número decimal con punto decimal, por ejemplo: 3.14"
 
 #: course/lesson-3-standing-on-shoulders-of-giants/make-upright/TestsMakeRobotUpright.gd:6
-#, fuzzy
 msgid "Character Is Upright"
 msgstr "El personaje está en posición vertical"
 
 #: course/lesson-3-standing-on-shoulders-of-giants/make-upright/TestsMakeRobotUpright.gd:12
-#, fuzzy
 msgid "The robot is turned counter-clockwise! Did you turn it less than 0.5 radians?"
 msgstr "¡El robot está girado en sentido antihorario! ¿Lo giraste menos de 0,5 radianes?"
 
 #: course/lesson-3-standing-on-shoulders-of-giants/make-upright/TestsMakeRobotUpright.gd:14
-#, fuzzy
 msgid "The robot is turned too far clockwise! Did you turn it more than 0.5 radians?"
 msgstr "¡El robot está girado demasiado en sentido horario! ¿Lo has girado más de 0,5 radianes?"
 
 #: course/lesson-3-standing-on-shoulders-of-giants/make-visible/TestsMakeCharacterVisible.gd:5
-#, fuzzy
 msgid "Character Is Visible"
 msgstr "El personaje es visible"
 
 #: course/lesson-3-standing-on-shoulders-of-giants/make-visible/TestsMakeCharacterVisible.gd:11
-#, fuzzy
 msgid "The character is still invisible! Did you call the show() function?"
 msgstr "¡El personaje sigue sin verse! ¿Has llamado a la función show()?"
 
 #: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:11
-#, fuzzy
 msgid "Draw Rectangle Of 220 By 260"
 msgstr "Dibuja un rectángulo de 220 por 260"
 
 #: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:16
 #: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:16
 #: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:16
-#, fuzzy
 msgid "Nothing drawn. Did you call move_forward()?"
 msgstr "No se ha dibujado nada. ¿Has llamado a move_forward()?"
 
 #: course/lesson-4-drawing-a-rectangle/drawing_bigger_rectangle/TestsDrawingBiggerRectangle.gd:19
-#, fuzzy
 msgid "The drawn shape is not a rectangle with a width of 220 and a length of 260."
 msgstr "La figura dibujada no es un rectángulo con un ancho de 220 y un largo de 260."
 
 #: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:11
-#, fuzzy
 msgid "Draw Rectangle Of 200 By 120"
 msgstr "Dibuja un rectángulo de 200 por 120"
 
 #: course/lesson-4-drawing-a-rectangle/drawing_rectangle/TestsDrawingRectangle.gd:19
-#, fuzzy
 msgid "The drawn shape is not a rectangle with a width of 200 and a length of 120."
 msgstr "La figura dibujada no es un rectángulo de 200 de ancho por 120 de alto."
 
 #: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:11
-#, fuzzy
 msgid "Draw Corner Of 200 By 200"
 msgstr "Dibuja la esquina de 200 por 200"
 
 #: course/lesson-4-drawing-a-rectangle/turning_right/TestsTurningRight.gd:19
-#, fuzzy
 msgid "The drawn shape is not a corner connected by two lines of length 200."
 msgstr "La figura dibujada no es una esquina unida por dos líneas de 200 de longitud."
 
 #: course/lesson-5-your-first-function/TestsDrawingSquare.gd:11
-#, fuzzy
 msgid "Draw Square Of 200 Pixels"
 msgstr "Dibuja un cuadrado de 200 píxeles"
 
 #: course/lesson-5-your-first-function/TestsDrawingSquare.gd:18
-#, fuzzy
 msgid "Nothing drawn. Did you not call move_forward()?"
 msgstr "No se ha dibujado nada. ¿No has llamado a move_forward()?"
 
 #: course/lesson-5-your-first-function/TestsDrawingSquare.gd:28
-#, fuzzy
 msgid "The drawn shape is not a square of length 200 pixels."
 msgstr "La forma dibujada no es un cuadrado de 200 píxeles de lado."
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:19
-#, fuzzy
 msgid "Draw Three Squares Of 200 Pixels"
 msgstr "Dibuja tres cuadrados de 200 píxeles"
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:26
 msgid "Reuse The draw_square() Function"
-msgstr ""
+msgstr "Reutiliza la función draw_square()"
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:34
 msgid "You need to use the predefined draw_square() function inside draw_three_squares() in this exercise. This avoids duplicating the turtle instructions by hand."
-msgstr ""
+msgstr "En este ejercicio debes utilizar la función predefinida draw_square() dentro de draw_three_squares(). Así se evita tener que duplicar manualmente las instrucciones de la tortuga."
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:39
 #, fuzzy
 msgid "You need to define a function named draw_three_squares()."
-msgstr "Tienes que dibujar tres cuadrados."
+msgstr "Necesitas definir una función llamada draw_three_squares()."
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:57
-#, fuzzy
 msgid "Nothing drawn. Did you not call draw_square()?"
 msgstr "No se ha dibujado nada. ¿No has llamado a draw_square()?"
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:60
-#, fuzzy
 msgid "You only drew one square. You need to draw three."
 msgstr "Solo has dibujado un cuadrado. Tienes que dibujar tres."
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:62
-#, fuzzy
 msgid "You need to draw three squares."
 msgstr "Tienes que dibujar tres cuadrados."
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:65
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:67
-#, fuzzy
 msgid "You drew more than three squares. You need to draw only three!"
 msgstr "Has dibujado más de tres cuadrados. ¡Solo tienes que dibujar tres!"
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:73
-#, fuzzy
 msgid "Shape3D number %s has too few corners! Did you change the draw_square() function?"
 msgstr "¡La forma 3D número %s tiene muy pocas esquinas! ¿Has modificado la función draw_square()?"
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:80
-#, fuzzy
 msgid "Shape3D number %s has too many corners! Did you change the draw_square() function?"
 msgstr "¡La forma 3D número %s tiene demasiadas esquinas! ¿Has modificado la función draw_square()?"
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:87
-#, fuzzy
 msgid "Shape3D number %s is not a square of length 200 pixels. Did you change the draw_square() function?"
 msgstr "El Shape3D número %s no es un cuadrado de 200 píxeles de lado. ¿Modificaste la función draw_square()?"
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:99
-#, fuzzy
 msgid "The squares should not overlap. Did you move the turtle between drawing each square?"
-msgstr "Los cuadrados no deben solaparse. ¿Has movido la tortuga entre el dibujo de cada cuadrado?"
+msgstr "Los cuadrados no deben superponerse. ¿Moviste la tortuga entre el dibujo de cada cuadrado?"
 
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:14
-#, fuzzy
 msgid "Draw Corners Of Varying Lengths"
 msgstr "Dibuja esquinas de longitudes variables"
 
@@ -2326,7 +2186,6 @@ msgstr "Dibuja esquinas de longitudes variables"
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:21
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:41
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:56
-#, fuzzy
 msgid "The turtle did not draw anything. Make sure your function calls move_forward(length) to move the turtle."
 msgstr "La tortuga no ha dibujado nada. Asegúrate de que tu función llama a move_forward(length) para mover la tortuga."
 
@@ -2337,7 +2196,7 @@ msgstr "La tortuga no ha dibujado nada. Asegúrate de que tu función llama a mo
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:43
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:58
 msgid "The turtle drew fewer than 2 shapes. Make sure your function is repeatable."
-msgstr ""
+msgstr "La tortuga ha dibujado menos de dos figuras. Asegúrate de que tu función sea repetible."
 
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:23
 #: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:23
@@ -2345,227 +2204,188 @@ msgstr ""
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:25
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:45
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:60
-#, fuzzy
 msgid "The turtle drew more than 2 shapes. Make sure your function only draws one shape."
-msgstr "La tortuga no ha dibujado nada. Asegúrate de que tu función llama a move_forward(length) para mover la tortuga."
+msgstr "La tortuga dibujó más de 2 figuras. Asegúrate de que tu función solo dibuje una figura."
 
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:28
 #: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:28
-#, fuzzy
 msgid "The drawn shape has too few points. Did you call move_forward() less than 2 times?"
 msgstr "La figura dibujada tiene muy pocos puntos. ¿Llamaste a move_forward() menos de dos veces?"
 
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:30
 #: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:30
-#, fuzzy
 msgid "The drawn shape has too many points. Did you call move_forward() more than 2 times?"
 msgstr "La figura dibujada tiene demasiados puntos. ¿Has llamado a move_forward() más de dos veces?"
 
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:32
-#, fuzzy
 msgid "The drawn shape doesn't have the expected size. Did you use the length parameter?"
-msgstr "La figura dibujada no tiene el tamaño esperado. ¿Has utilizado el parámetro «longitud»?"
+msgstr "La figura dibujada no tiene el tamaño esperado. ¿Usaste el parámetro «longitud»?"
 
 #: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:14
-#, fuzzy
 msgid "Draw Corners Of Varying Sizes And Angles"
 msgstr "Dibuja esquinas de distintos tamaños y ángulos"
 
 #: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:32
-#, fuzzy
 msgid "The drawn corner doesn't match the expected corner. Are you not using the angle parameter in your code?"
 msgstr "La esquina dibujada no coincide con la esquina esperada. ¿No estás utilizando el parámetro de ángulo en tu código?"
 
 #: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:18
-#, fuzzy
 msgid "Draw Rectangles Of Varying Sizes"
 msgstr "Dibuja rectángulos de distintos tamaños"
 
 #: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:32
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:68
-#, fuzzy
 msgid "The drawn shape has too few points. Did you call move_forward() less than 4 times?"
 msgstr "La figura dibujada tiene muy pocos puntos. ¿Has llamado a move_forward() menos de 4 veces?"
 
 #: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:34
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:64
-#, fuzzy
 msgid "The drawn shape has too many points. Did you call move_forward() more than 4 times?"
-msgstr "La figura dibujada tiene demasiados vértices. ¿Has llamado a move_forward() más de 4 veces?"
+msgstr "La figura dibujada tiene demasiados puntos. ¿Llamaste a move_forward() más de 4 veces?"
 
 #: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:37
-#, fuzzy
 msgid "The length and height are inverted. Did you swap the length and height function arguments?"
 msgstr "La longitud y la altura están invertidas. ¿Intercambiaste los argumentos de longitud y altura de la función?"
 
 #: course/lesson-6-multiple-function-parameters/drawing_rectangles/TestsDrawingRectangles.gd:39
 #: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:31
-#, fuzzy
 msgid "The drawn shapes don't have the expected length and height. Did you forget to use the length and height parameter?"
 msgstr "Las figuras dibujadas no tienen la longitud y la altura esperadas. ¿Te has olvidado de utilizar los parámetros de longitud y altura?"
 
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:14
-#, fuzzy
 msgid "Turtle Ends Facing Towards The Right"
 msgstr "La tortuga termina mirando hacia la derecha"
 
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:15
-#, fuzzy
 msgid "Turtle Starts Each Square Facing Towards The Right"
 msgstr "La tortuga comienza cada cuadrado mirando hacia la derecha"
 
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:16
-#, fuzzy
 msgid "Draw Squares Of Varying Sizes"
 msgstr "Dibuja cuadrados de distintos tamaños"
 
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:35
-#, fuzzy
 msgid "The turtle should turn four times to draw a square so that it always starts drawing the squares in the same direction. Did you call turn_right() four times?"
 msgstr "La tortuga debería girar cuatro veces para dibujar un cuadrado, de modo que siempre empiece a dibujar los cuadrados en la misma dirección. ¿Has llamado a turn_right() cuatro veces?"
 
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:48
-#, fuzzy
 msgid "The turtle should be facing towards the right to draw squares in the same direction every time. Did you call turn_right(90) four times in your function?"
 msgstr "La tortuga debería estar orientada hacia la derecha para dibujar cuadrados siempre en la misma dirección. ¿Has llamado a turn_right(90) cuatro veces en tu función?"
 
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:72
-#, fuzzy
 msgid "The shape is not a square or not turned in the expected direction. Did you use 90 degree angles when calling turn_right()?"
 msgstr "La forma no es un cuadrado o no está girada en la dirección esperada. ¿Has utilizado ángulos de 90 grados al llamar a turn_right()?"
 
 #: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:11
-#, fuzzy
 msgid "Rectangle Starts At 120 By 100"
 msgstr "El rectángulo comienza en 120 por 100"
 
 #: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:12
-#, fuzzy
 msgid "Rectangle Size Is 200 By 120"
 msgstr "El tamaño del rectángulo es de 200 por 120"
 
 #: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:17
 #: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:29
-#, fuzzy
 msgid "We didn't find any drawn rectangles. Did you forget to call draw_rectangle()?"
 msgstr "No encontramos ningún rectángulo dibujado. ¿Te olvidaste de llamar a draw_rectangle()?"
 
 #: course/lesson-7-member-variables/draw_rectangle_at_position/TestsDrawingRectangles.gd:23
-#, fuzzy
 msgid "The rectangle doesn't start at position (120, 100). Did you not set the position right?"
 msgstr "El rectángulo no empieza en la posición (120, 100). ¿No has establecido bien la posición?"
 
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:42
-#, fuzzy
 msgid "First Shape Is At 100 By 100"
 msgstr "La primera figura está en la posición 100 por 100"
 
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:64
-#, fuzzy
 msgid "No shape drawn. Did you forget to call draw_rectangle()?"
 msgstr "No se ha dibujado ninguna figura. ¿Te has olvidado de llamar a draw_rectangle()?"
 
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:67
-#, fuzzy
 msgid "The first square should be drawn at (100, 100). Instead, you drew it at %s."
 msgstr "El primer cuadrado debería dibujarse en (100, 100). En cambio, lo has dibujado en %s."
 
 #: course/lesson-8-defining-variables/define-health-variable/TestHasHealthVar.gd:15
-#, fuzzy
 msgid "Has Health Variable"
 msgstr "Tiene una variable de salud"
 
 #: course/lesson-8-defining-variables/define-health-variable/TestHasHealthVar.gd:16
-#, fuzzy
 msgid "Health Has Value Of 100"
 msgstr "La salud tiene un valor de 100"
 
 #: course/lesson-8-defining-variables/define-health-variable/TestHasHealthVar.gd:21
-#, fuzzy
 msgid "The health variable doesn't exist. Did you define it with the var keyword?"
 msgstr "La variable «health» no existe. ¿La has definido con la palabra clave «var»?"
 
 #: course/lesson-8-defining-variables/define-health-variable/TestHasHealthVar.gd:27
-#, fuzzy
 msgid "Health variable doesn't exist, can't test if it has a value of 100."
 msgstr "La variable «health» no existe, no se puede comprobar si tiene un valor de 100."
 
 #: course/lesson-8-defining-variables/define-health-variable/TestHasHealthVar.gd:31
-#, fuzzy
 msgid "Health's value is a text string. It should be a number. You need to remove quotes around the value."
 msgstr "El valor de «Health» es una cadena de texto. Debería ser un número. Tienes que eliminar las comillas que rodean el valor."
 
 #: course/lesson-8-defining-variables/define-health-variable/TestHasHealthVar.gd:33
-#, fuzzy
 msgid "Health's value should be a whole number. Instead it's a %s."
 msgstr "El valor de «Health» debería ser un número entero. En cambio, es un %s."
 
 #: course/lesson-8-defining-variables/define-health-variable/TestHasHealthVar.gd:36
-#, fuzzy
 msgid "Health variable's value is %s; It should be 100."
 msgstr "El valor de la variable «Health» es %s; debería ser 100."
 
 #: course/lesson-9-adding-and-subtracting/healing/TestHealingRobot.gd:11
-#, fuzzy
 msgid "Robot Heals The Right Amount"
 msgstr "El robot cura la cantidad adecuada"
 
 #: course/lesson-9-adding-and-subtracting/healing/TestHealingRobot.gd:12
-#, fuzzy
 msgid "Heal Function Uses Addition"
 msgstr "La función «Heal» utiliza la suma"
 
 #: course/lesson-9-adding-and-subtracting/healing/TestHealingRobot.gd:17
-#, fuzzy
 msgid "The robot's health decreased instead of increasing. Did you add the amount to health?"
 msgstr "La salud del robot disminuyó en lugar de aumentar. ¿Sumaste la cantidad a la salud?"
 
 #: course/lesson-9-adding-and-subtracting/healing/TestHealingRobot.gd:20
-#, fuzzy
 msgid "The robot didn't heal as expected. It has %s, but it should have 100 health."
 msgstr "El robot no se ha recuperado como se esperaba. Tiene %s, pero debería tener 100 de salud."
 
 #: course/lesson-9-adding-and-subtracting/healing/TestHealingRobot.gd:29
-#, fuzzy
 msgid "It doesn't look like you're adding anything to health."
 msgstr "No parece que estés sumando nada a la salud."
 
 #: course/lesson-9-adding-and-subtracting/taking-damage/TestDamagingRobot.gd:13
-#, fuzzy
 msgid "Robot Takes The Right Amount Of Damage"
 msgstr "El robot recibe la cantidad correcta de daño"
 
 #: course/lesson-9-adding-and-subtracting/taking-damage/TestDamagingRobot.gd:14
-#, fuzzy
 msgid "Subtract Amount From Health"
 msgstr "Resta una cantidad de la salud"
 
 #: course/lesson-9-adding-and-subtracting/taking-damage/TestDamagingRobot.gd:19
-#, fuzzy
 msgid "The health goes above 100 when we damage the robot. Did you subract amount from health?"
 msgstr "La salud supera los 100 puntos cuando dañamos al robot. ¿Restaste la cantidad de la salud?"
 
 #: course/lesson-9-adding-and-subtracting/taking-damage/TestDamagingRobot.gd:22
-#, fuzzy
 msgid "The robot didn't take as much damage as expected. It has %s health, but it should have 50 health after taking damage."
 msgstr "El robot no ha sufrido tanto daño como se esperaba. Tiene %s de salud, pero debería tener 50 de salud tras haber recibido daño."
 
 #: course/lesson-9-adding-and-subtracting/taking-damage/TestDamagingRobot.gd:51
-#, fuzzy
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "No parece que estés restando amount de la salud."
 
-#: ui/UILesson.gd:301
+#: ui/UILesson.gd:306
 msgid "Learn More"
 msgstr "Aprende más"
 
-#: ui/UILesson.gd:331
+#: ui/UILesson.gd:351
 msgid ""
 "\n"
 "\n"
 msgstr ""
+"\n"
+"\n"
 
-#: ui/UILesson.gd:379
+#: ui/UILesson.gd:399
 msgid ""
 "\n"
 "[hr]\n"
@@ -2577,36 +2397,35 @@ msgstr ""
 msgid "(no previous history)"
 msgstr "(sin historial previo)"
 
-#: ui/UIPractice.gd:290
+#: ui/UIPractice.gd:286
 msgid "Hint %s"
 msgstr "Pista %s"
 
-#: ui/UIPractice.gd:328
+#: ui/UIPractice.gd:321
 msgid "Validating Your Code..."
 msgstr "Validando tu código..."
 
-#: ui/UIPractice.gd:379
-#, fuzzy
+#: ui/UIPractice.gd:372
 msgid "The function '%s' calls itself, this creates an infinite loop"
 msgstr "La función `%s` se llama a sí misma, esto crea un bucle infinito"
 
-#: ui/UIPractice.gd:390
+#: ui/UIPractice.gd:383
 msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr "Tienes un bucle que se ejecuta para siempre sin una instrucción break. Esto congelaría la aplicación."
 
-#: ui/UIPractice.gd:433
+#: ui/UIPractice.gd:426
 msgid "You typed \"%s\"; did you mean \"%s\"?"
-msgstr ""
+msgstr "Has escrito «%s»; ¿querías decir «%s»?"
 
-#: ui/UIPractice.gd:450
+#: ui/UIPractice.gd:443
 msgid "Running Your Code..."
 msgstr "Ejecutando tu código..."
 
-#: ui/UIPractice.gd:462
+#: ui/UIPractice.gd:455
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "Hay una división por cero en tu código. No se puede dividir por cero en código. Por favor, asegúrete de que no tiene \"/ 0\" o \"% 0\" en su código."
 
-#: ui/UIPractice.gd:608
+#: ui/UIPractice.gd:601
 msgid "Running Tests..."
 msgstr "Ejecutando pruebas..."
 
@@ -2622,7 +2441,7 @@ msgstr "Selecciona el tipo de problema y descríbelo en el cuadro de abajo; lueg
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr "Para preguntas y ayuda con el aprendizaje, [url=%s]únete a la comunidad en Discord[/url]."
 
-#: ui/components/popups/ReportFormPopup.gd:132
+#: ui/components/popups/ReportFormPopup.gd:135
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr "Las traducciones no son oficiales y las mantiene la comunidad. Si quieres ayudar, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]aprende cómo ayudar a traducir la aplicación[/url]."
 
@@ -2680,7 +2499,7 @@ msgstr "Ya has completado esta práctica antes."
 msgid ""
 "You've used the provided solution.\n"
 "This practice will not count towards your course progress."
-msgstr ""
+msgstr "Has utilizado la solución proporcionada. Esta práctica no contará para el progreso del curso."
 
 #: ui/screens/welcome_screen/WelcomeScreen.gd:52
 msgid "CONTINUE"
@@ -2688,6 +2507,25 @@ msgstr "CONTINUAR"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr "Aprende a programar desde cero con Godot"
+
+#~ msgid ""
+#~ "Sorry, we don't have this particular error message covered yet!\n"
+#~ "\n"
+#~ "Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
+#~ "\n"
+#~ "[center]Thank you![/center]"
+#~ msgstr ""
+#~ "¡Lo sentimos, todavía no tenemos una explicación para este mensaje de error en particular!\n"
+#~ "\n"
+#~ "Por favor, usa el botón [b]Reportar[/b] en la esquina superior derecha para contarnos más sobre cómo lo obtuviste, e intentaremos mejorar nuestra base de conocimiento para la próxima versión de la aplicación.\n"
+#~ "\n"
+#~ "[center]¡Gracias![/center]"
+
+#~ msgid "Placeholder text"
+#~ msgstr "Texto de relleno"
+
+#~ msgid "Explanation"
+#~ msgstr "Explicación"
 
 #~ msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."
 #~ msgstr "«Delta» debe ir dentro de los paréntesis de `rotate()`, no fuera. Tienes que multiplicar el valor de la velocidad por «delta» dentro de la llamada, así: `rotate(2 * delta)`."

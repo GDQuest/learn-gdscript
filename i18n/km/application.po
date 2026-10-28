@@ -60,32 +60,6 @@ msgstr "ជាមួយ​ delta"
 msgid "Constant distance"
 msgstr "ចម្ងាយថេរ"
 
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
-msgstr "អថេរ \"angular_speed\" មិនត្រូវបានប្រកាសក្នុង scope បច្ចុប្បន្នទេ (នៅបន្ទាត់ទី 6)។"
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
-msgstr "function [code]set_angular_speed()[/code] មិនអាច ប្រើអថេរ [code]angular_speed[/code] បានទេ ព្រោះវាមិនមែនជា អថេរកម្រិត script ទេ។ វាក៏ មិនស្ថិត ក្នុង function [code]set_angular_speed()[/code] ដែរ។"
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
-msgstr "ត្រូវប្រាកដថា អ្នកកំណត់អថេរ [code]angular_speed[/code] ក្នុង function [code]set_angular_speed()[/code] ឬ កំណត់វា នៅខាងក្រៅ function ដើម្បីឱ្យវាមានវិសាលភាពទូទាំង script។"
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid ""
-"Sorry, we don't have this particular error message covered yet!\n"
-"\n"
-"Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
-"\n"
-"[center]Thank you![/center]"
-msgstr ""
-"សូមទោស យើងមិនទាន់មានការពន្យល់អំពីសារកំហុសជាក់លាក់នេះនៅឡើយទេ!\n"
-"\n"
-"សូមប្រើប៊ូតុង [b]Report[/b] នៅជ្រុងខាងលើស្តាំ ដើម្បីប្រាប់យើងបន្ថែមអំពីរបៀបដែលអ្នកជួបកំហុសនេះ ហើយយើងនឹងព្យាយាមកែលម្អមូលដ្ឋានចំណេះដឹងរបស់យើងសម្រាប់កំណែកម្មវិធីបន្ទាប់។\n"
-"\n"
-"[center]សូមអរគុណ![/center]"
-
 #: course/lesson-12-using-variables/visuals/VariableDefinition.tscn
 #: course/lesson-28-specifying-types/SyntaxTypeHints.tscn
 msgid "var"
@@ -633,10 +607,6 @@ msgstr "ជំហាន"
 msgid "Debugger"
 msgstr "ឧបករណ៍ត្រួតពិនិត្យកំហុស"
 
-#: ui/components/ScrollableTextBox.tscn
-msgid "Placeholder text"
-msgstr "អត្ថបទបង្ហាញ"
-
 #: ui/components/popups/ConfirmPopup.tscn
 #: ui/components/popups/PracticeLeaveUnfinishedPopup.tscn
 msgid "Confirm"
@@ -1100,10 +1070,6 @@ msgstr ""
 "សូមសាកល្បងម្តងទៀតដើម្បីរំលឹកការចងចាំរបស់អ្នក!"
 
 #: ui/screens/lesson/UIBaseQuiz.tscn
-msgid "Explanation"
-msgstr "ការពន្យល់"
-
-#: ui/screens/lesson/UIBaseQuiz.tscn
 msgid "You need to try to answer once before you can skip a quiz."
 msgstr "អ្នកត្រូវតែសាកល្បងឆ្លើយម្តងសិន មុនពេលអ្នកអាចរំលងសំណួរបាន។"
 
@@ -1397,6 +1363,18 @@ msgstr "function 'set_angular_speed(new_angular_speed)' បាត់; តើអ�
 #: course/lesson-12-using-variables/fixing_error/TestFixingError.gd:78
 msgid "The set_angular_speed() function doesn't seem to use the angular_speed variable."
 msgstr "function set_angular_speed() ហាក់ដូចជាមិនប្រើ variable angular_speed។"
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:10
+msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
+msgstr "អថេរ \"angular_speed\" មិនត្រូវបានប្រកាសក្នុង scope បច្ចុប្បន្នទេ (នៅបន្ទាត់ទី 6)។"
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:11
+msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
+msgstr "function [code]set_angular_speed()[/code] មិនអាច ប្រើអថេរ [code]angular_speed[/code] បានទេ ព្រោះវាមិនមែនជា អថេរកម្រិត script ទេ។ វាក៏ មិនស្ថិត ក្នុង function [code]set_angular_speed()[/code] ដែរ។"
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:12
+msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
+msgstr "ត្រូវប្រាកដថា អ្នកកំណត់អថេរ [code]angular_speed[/code] ក្នុង function [code]set_angular_speed()[/code] ឬ កំណត់វា នៅខាងក្រៅ function ដើម្បីឱ្យវាមានវិសាលភាពទូទាំង script។"
 
 #: course/lesson-13-conditions/limiting_health/TestLimitingHealth.gd:13
 msgid "Health Does Not Go Above 80"
@@ -2404,11 +2382,11 @@ msgstr "រ៉ូបូតមិនទទួលការខូចខាតច្
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "ហាក់ដូចជាអ្នកមិនបានដក amount ចេញពី health។"
 
-#: ui/UILesson.gd:301
+#: ui/UILesson.gd:306
 msgid "Learn More"
 msgstr "ស្វែងយល់បន្ថែម"
 
-#: ui/UILesson.gd:331
+#: ui/UILesson.gd:351
 msgid ""
 "\n"
 "\n"
@@ -2416,7 +2394,7 @@ msgstr ""
 "\n"
 "\n"
 
-#: ui/UILesson.gd:379
+#: ui/UILesson.gd:399
 msgid ""
 "\n"
 "[hr]\n"
@@ -2428,35 +2406,35 @@ msgstr ""
 msgid "(no previous history)"
 msgstr "(គ្មានប្រវត្តិចូលរួម)"
 
-#: ui/UIPractice.gd:290
+#: ui/UIPractice.gd:286
 msgid "Hint %s"
 msgstr "គន្លឺះ %s"
 
-#: ui/UIPractice.gd:328
+#: ui/UIPractice.gd:321
 msgid "Validating Your Code..."
 msgstr "កំពុងផ្ទៀងផ្ទាត់ Code របស់អ្នក..."
 
-#: ui/UIPractice.gd:379
+#: ui/UIPractice.gd:372
 msgid "The function '%s' calls itself, this creates an infinite loop"
 msgstr "អនុគមន៍ `%s` ហៅខ្លួន វាផ្ទាល់ នេះបង្កើតឱ្យមាន loop មិនចេះចប់ (អានន្ត)"
 
-#: ui/UIPractice.gd:390
+#: ui/UIPractice.gd:383
 msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr "Loop របស់អ្នករត់រហូត គ្មានអីបញ្ឈប់ ដែលអាចធ្វើឱ្យកម្មវិធីគាំង។"
 
-#: ui/UIPractice.gd:433
+#: ui/UIPractice.gd:426
 msgid "You typed \"%s\"; did you mean \"%s\"?"
 msgstr ""
 
-#: ui/UIPractice.gd:450
+#: ui/UIPractice.gd:443
 msgid "Running Your Code..."
 msgstr "កំពុងដំណើរការ Code របស់អ្នក..."
 
-#: ui/UIPractice.gd:462
+#: ui/UIPractice.gd:455
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "កូដរបស់អ្នកមាន កន្លែង ចែកនឹងសូន្យ។ ការចែក ចំនួនណាមួយ នឹងសូន្យ គឺមិនអាចធ្វើទៅបានទេ ក្នុងការសរសេរកូដ។ សូមពិនិត្យមើលសញ្ញា​ និង \"/ 0\" ឬ \"% 0\" ចេញពីកូដរបស់អ្នក។"
 
-#: ui/UIPractice.gd:608
+#: ui/UIPractice.gd:601
 msgid "Running Tests..."
 msgstr "កំពុងដំណើរការតេស្ត..."
 
@@ -2472,7 +2450,7 @@ msgstr "ជ្រើសរើសប្រភេទបញ្ហា ហើយព�
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr "សម្រាប់សំណួរ និងជំនួយក្នុងការរៀន [url=%s] ចូលរួមសហគមន៍នៅ Discord[/url]។"
 
-#: ui/components/popups/ReportFormPopup.gd:132
+#: ui/components/popups/ReportFormPopup.gd:135
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr "ការបកប្រែមិនមែនជាផ្លូវការទេ ហើយត្រូវបានថែទាំដោយសហគមន៍។ ប្រសិនបើអ្នកចង់ជួយ [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]ស្វែងយល់ពីរបៀបជួយបកប្រែ app[/url]។"
 
@@ -2540,6 +2518,25 @@ msgstr "បន្ត"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr "រៀនកូដពីចំណុចសូន្យ ជាមួយ Godot"
+
+#~ msgid ""
+#~ "Sorry, we don't have this particular error message covered yet!\n"
+#~ "\n"
+#~ "Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
+#~ "\n"
+#~ "[center]Thank you![/center]"
+#~ msgstr ""
+#~ "សូមទោស យើងមិនទាន់មានការពន្យល់អំពីសារកំហុសជាក់លាក់នេះនៅឡើយទេ!\n"
+#~ "\n"
+#~ "សូមប្រើប៊ូតុង [b]Report[/b] នៅជ្រុងខាងលើស្តាំ ដើម្បីប្រាប់យើងបន្ថែមអំពីរបៀបដែលអ្នកជួបកំហុសនេះ ហើយយើងនឹងព្យាយាមកែលម្អមូលដ្ឋានចំណេះដឹងរបស់យើងសម្រាប់កំណែកម្មវិធីបន្ទាប់។\n"
+#~ "\n"
+#~ "[center]សូមអរគុណ![/center]"
+
+#~ msgid "Placeholder text"
+#~ msgstr "អត្ថបទបង្ហាញ"
+
+#~ msgid "Explanation"
+#~ msgstr "ការពន្យល់"
 
 #~ msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."
 #~ msgstr "delta ត្រូវស្ថិតនៅក្នុងវង់ក្រចករបស់ rotate() មិនមែនខាងក្រៅទេ។ អ្នកត្រូវគុណតម្លៃល្បឿននឹង delta នៅក្នុងការហៅ ដូចនេះ៖ rotate(2 * delta)។"

@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the Learn GDScript From
 # project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Language-Team: Japanese <https://hosted.weblate.org/projects/learn-gdscript-from-zero/supplementary/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.10.3\n"
@@ -31,36 +31,44 @@ msgid "error_suggestion"
 msgstr "エラーの提案"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "You get this error when:"
-msgstr ""
+msgstr "以下の場合にこのエラーが発生します："
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "[ul]"
-msgstr ""
+msgstr "[ul]"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "You write a function inside another function."
-msgstr ""
+msgstr "関数の中に別の関数を記述しています。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "You write a piece of code that calculates a value, but that value is not used or assigned to a variable."
-msgstr ""
+msgstr "値を計算するコードを記述しても、その値が使用されたり変数に代入されたりしていない場合です。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "[/ul]"
-msgstr ""
+msgstr "[/ul]"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "The error means that you have a piece of code that's not having any effect because it is not used or placed in the correct context."
-msgstr ""
+msgstr "このエラーは、コードが使用されていないか、正しい文脈に配置されていないために、何の効果も生じていないことを意味します。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "If you wrote a function inside of another function, extract the inner function, place it later in your code, and remove the indentation."
-msgstr ""
+msgstr "ある関数の中に別の関数を記述した場合は、内側の関数を抽出してコードの後ろに配置し、インデントを削除してください。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "If you wrote some conditions or a piece of code that is meant to produce a value, make sure to store the result in a variable or use it in an [code]if[/code] statement or something that will use the value."
-msgstr ""
+msgstr "条件式や値を生成するコードを記述した場合は、その結果を変数に格納するか、[code]if[/code]ステートメントなど、その値を使用する処理で確実に利用するようにしてください。"
 
 #: script_checking/error_database.csv
 #, fuzzy
@@ -68,52 +76,64 @@ msgid "You get this error when you use the result of a function that doesn't ret
 msgstr "GDScriptが認識しない特殊文字を使用すると、このエラーが発生します。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "Some functions only do an action, like [code]rotate()[/code] or [code]move_local_x()[/code]. These functions return no result, so there is no value to use in a calculation or to store in a variable."
-msgstr ""
+msgstr "[code]rotate()[/code]や[code]move_local_x()[/code]のように、単にアクションを実行するだけの関数もあります。これらの関数は結果を返さないため、計算に使用したり変数に格納したりする値はありません。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "For example, if you write [code]rotate(2) * delta[/code], you are asking Godot to multiply the result of [code]rotate(2)[/code] by [code]delta[/code]. But [code]rotate()[/code] doesn't return any result; it only rotates a sprite. So there is nothing to multiply by delta and you get this error."
-msgstr ""
+msgstr "たとえば、[code]rotate(2) * delta[/code]と記述した場合、Godotに対して[code]rotate(2)[/code]の結果に[code]delta[/code]を乗算するよう指示しています。しかし、[code]rotate()[/code]は結果を返さず、スプライトを回転させるだけです。そのため、deltaに乗算する対象がなく、このエラーが発生します。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "To solve this problem, you need to use a function that returns a value in your code or make the calculation somewhere else without using the result of a function call."
-msgstr ""
+msgstr "この問題を解決するには、コード内で値を返す関数を使用するか、関数呼び出しの結果を使用せずに別の場所で計算を行う必要があります。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "For example, instead of writing [code]rotate(2) * delta[/code], you would write [code]rotate(2 * delta)[/code]."
-msgstr ""
+msgstr "たとえば、[code]rotate(2) * delta[/code]と記述する代わりに、[code]rotate(2 * delta)[/code]と記述します。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "If you're not sure if a function returns a value, check the code reference."
-msgstr ""
+msgstr "関数が値を返すかどうか不明な場合は、コードリファレンスを確認してください。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "You get this error when you put parentheses [code]()[/code] after a variable, as if you were calling a function."
-msgstr ""
+msgstr "変数の後に括弧[code]()[/code]を付け、あたかも関数を呼び出しているかのように記述した場合、このエラーが発生します。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "The parentheses tell Godot to call that name as a function. The problem is that the variable holds a value like a number, a string, part of a vector, etc., and not a function, so you cannot call it as a function."
-msgstr ""
+msgstr "括弧はGodotにその名前を関数として呼び出すよう指示します。しかし、その変数は関数ではなく数値・文字列・ベクトルの一部などの値を保持しているため、関数として呼び出すことはできません。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "For example, [code]position.x[/code] is a [code]float[/code]. Writing [code]position.x()[/code] makes Godot try to call a function named [code]x[/code]."
-msgstr ""
+msgstr "たとえば、[code]position.x[/code]は[code]float[/code]です。[code]position.x()[/code]と記述すると、Godotは[code]x[/code]という名前の関数を呼び出そうとします。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "Look at the name right before the parentheses in the error message, and remove those parentheses."
-msgstr ""
+msgstr "エラーメッセージの括弧の直前にある名前を確認し、その括弧を削除してください。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "If you want to [b]store or change[/b] a value, use the [b]=[/b] symbol. For example, [code]health = 10[/code] or [code]position.x = 100.0[/code]."
-msgstr ""
+msgstr "値を[b]保存したり変更[/b]したりしたい場合は、[b]=[/b]記号を使用してください。例えば、[code]health = 10[/code]や[code]position.x = 100.0[/code]などです。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "If you meant to [b]use[/b] the value, write it without the parentheses. For example, [code]var new_health = health + 20[/code]."
-msgstr ""
+msgstr "その値を[b]使用[/b]するつもりだった場合は、括弧なしで記述してください。例えば、[code]var new_health = health + 20[/code]のようにします。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "This error message tells you that Godot couldn't find the member variable you're trying to access. There are two common reasons for this:"
-msgstr ""
+msgstr "このエラーメッセージは、Godotがアクセスしようとしているメンバー変数を見つけられなかったことを示しています。これには主に2つの原因があります："
 
 #: script_checking/error_database.csv
 #, fuzzy
@@ -121,12 +141,14 @@ msgid "1. There is a typo in the name of the member variable."
 msgstr "おそらく、アクセスしようとしているサブ変数の名前にタイプミスがあると思われます。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. The value before the dot (.) is not the type of value you expect, so it does not have that member variable."
-msgstr ""
+msgstr "2. ドット (.) の前の値が期待される型の値ではないため、そのメンバ変数が存在しません。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "For example, let's say you have a variable representing a number of characters: [code]var character = 5[/code] and you try to access the [code]y[/code] member variable on it: [code]character.y[/code]. Because [code]character[/code] is a whole number, it has no [code]y[/code] member variable. The error message tells you the type it found ([code]int[/code] in this case)."
-msgstr ""
+msgstr "たとえば、文字数を表す変数[code]var character = 5[/code]があり、その変数に対して[code]y[/code]というメンバ変数にアクセスしようとした場合、[code]character.y[/code]となります。[code]character[/code]は整数であるため、[code]y[/code]というメンバ変数は存在しません。エラーメッセージには、検出された型（この場合は[code]int[/code]）が表示されます。"
 
 #: script_checking/error_database.csv
 #, fuzzy
@@ -134,24 +156,29 @@ msgid "You also get this error when you try to access a member variable on a [co
 msgstr "変数ではないものに値を代入しようとするとこのエラーが発生します。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "Look at the value before the dot in the line with the error."
-msgstr ""
+msgstr "エラーが発生している行のドットの前の値を確認してください。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "Make sure that the names before and after the dot have no typos. Any difference like a capital letter, one letter missing or being added, or letters being swapped can cause this error."
-msgstr ""
+msgstr "ドットの前後の名前に入力ミスがないか確認してください。大文字小文字の違い、文字の欠落や追加、文字の入れ替えなど、わずかな違いでもこのエラーが発生する可能性があります。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "If the value is the wrong type, check where it comes from. Is it a [code]Vector2[/code] or [code]int[/code]? A [code]Vector2[/code] has [code]x[/code] and [code]y[/code] member variables, but an [code]int[/code] does not."
-msgstr ""
+msgstr "値の型が間違っている場合は、その値の出所を確認してください。[code]Vector2[/code]や[code]int[/code]でしょうか？ [code]Vector2[/code]には[code]x[/code]や[code]y[/code]といったメンバ変数がありますが、[code]int[/code]にはありません。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "This error message tells you that Godot did not find the function you are trying to call. This either means that:"
-msgstr ""
+msgstr "このエラーメッセージは、Godotが呼び出そうとしている関数を見つけられなかったことを示しています。これは、以下のいずれかの原因によるものです："
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "1. The function does not exist."
-msgstr ""
+msgstr "1. 関数が存在しません。"
 
 #: script_checking/error_database.csv
 #, fuzzy
@@ -159,32 +186,39 @@ msgid "2. There is a typo in the name of the function you are trying to call."
 msgstr "おそらく、アクセスしようとしているサブ変数の名前にタイプミスがあると思われます。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "While we humans can read words even when they are spelled incorrectly, the computer only understands exact matches. For a computer, [i]3[/i] and [i]three[/i] or [i]foward[/i] (missing an [i]r[/i]) and [i]forward[/i] are not the same thing."
-msgstr ""
+msgstr "人間はスペルが間違っていても単語を読み取れますが、コンピュータは完全に一致するものしか理解できません。コンピュータにとって、[i]3[/i]と<img id=\"3\"/>、[i]three[/i]、あるいは[i]foward[/i]（[i]rが欠落[/i]）や[i]forward[/i]は、すべて異なるものとして扱われます。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "Look at the function name in the error message. Carefully compare it with the function names listed in the practice goals or the functions already in your code."
-msgstr ""
+msgstr "エラーメッセージに表示されている関数名を確認してください。練習目標に挙げられている関数名や、コード内にすでに存在する関数名と注意深く照らし合わせてみてください。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "Are there any differences? Whether it's one letter, an underscore ('_'), or a capital letter? If you spot any differences, change the function name in your code."
-msgstr ""
+msgstr "何か違いはありますか？ 1文字の違い、アンダースコア（'_'）、大文字小文字の違いなどはありませんか？ 違いが見つかった場合は、コード内の関数名を変更してください。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "This error message tells you that the values you used with an operator are not compatible with each other. For example, you can add two [code]Vector2[/code] values together, but you cannot add a [code]Vector2[/code] and an [code]int[/code] (a whole number) like [code]Vector2(1, 1) + 3[/code]."
-msgstr ""
+msgstr "このエラーメッセージは、演算子とともに使用した値同士が互いに互換性がないことを示しています。たとえば、2つの[code]Vector2[/code]の値を足し合わせることはできますが、[code]Vector2[/code]と[code]int[/code]（整数）を[code]Vector2(1, 1) + 3[/code]のように足し合わせることはできません。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "Operators are like recipes: each one only works with specific ingredients (kinds of values). The [code]+[/code] operator knows how to combine two numbers, or two vectors, but it cannot mix a vector and a number. For numeric values, the rules usually follow the ones you've learned in math classes: you can multiply, divide, or add numbers together. You can multiply or divide a [code]Vector2[/code] by a number. And so on."
-msgstr ""
+msgstr "演算子はレシピのようなものです。それぞれが特定の「材料」（値の種類）でのみ機能します。[code]+[/code]演算子は、2つの数値や2つのベクトルを組み合わせることはできますが、ベクトルと数値を混ぜ合わせることはできません。 数値については、通常、数学の授業で学んだルールに従います。つまり、数値同士を掛けたり、割ったり、足し合わせたりすることができます。[code]Vector2[/code] を数値で掛けたり割ったりすることも可能です。といった具合です。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "First, identify the two values the error message points to. Are they compatible? If you're adding or subtracting, they should be the same type: two numbers or two vectors."
-msgstr ""
+msgstr "まず、エラーメッセージで指摘されている二つの値を特定してください。それらは互換性がありますか？加算や減算を行う場合、同じ型（二つの数値または二つのベクトル）である必要があります。"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "When working with variables, think about the value they hold. [code]position[/code], for example, holds a [code]Vector2[/code], so you can add another [code]Vector2[/code] to it directly: [code]position = position + Vector2(1, 1)[/code]. Or you can change one component, like [code]position.x = position.x + 1[/code]."
-msgstr ""
+msgstr "変数を扱う際は、その変数が保持している値について考えてください。たとえば、[code]position[/code]は[code]Vector2[/code]を保持しているため、そこに別の[code]Vector2[/code]を直接追加して[code]position = position + Vector2(1, 1)[/code]とすることができます。あるいは、[code]position.x = position.x + 1[/code]のように、1つの要素を変更することも可能です。"
 
 #: script_checking/error_database.csv
 msgid "You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword."

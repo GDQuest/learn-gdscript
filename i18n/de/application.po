@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the Learn GDScript From
 # project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
@@ -14,11 +14,23 @@ msgstr ""
 "Language-Team: German <https://hosted.weblate.org/projects/learn-gdscript-from-zero/application/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.10.3\n"
 "X-Generator: Poedit 3.9\n"
+
+#: course/common/inventory/DictItem.tscn
+#: course/lesson-23-append-to-arrays/visuals/Crate.tscn
+#: course/lesson-24-access-array-indices/visuals/inventory/Item.tscn
+#: course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.tscn
+msgid "0"
+msgstr "0%"
+
+#: course/lesson-21-strings/visuals/RobotWithNumberName.tscn
+#, fuzzy
+msgid "70801"
+msgstr "70801"
 
 #: course/common/CustomHealthBar.tscn
 #, fuzzy
@@ -35,13 +47,6 @@ msgstr "Inventar"
 #, fuzzy
 msgid "healing heart"
 msgstr "heilendes Herz"
-
-#: course/common/inventory/DictItem.tscn
-#: course/lesson-23-append-to-arrays/visuals/Crate.tscn
-#: course/lesson-24-access-array-indices/visuals/inventory/Item.tscn
-#: course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.tscn
-msgid "0"
-msgstr "0%"
 
 #: course/lesson-11-time-delta/visuals/DemoRotatingSpriteFrame.tscn
 #: course/lesson-11-time-delta/visuals/DemoRotatingTime.tscn
@@ -66,35 +71,6 @@ msgstr "Mit Delta"
 #, fuzzy
 msgid "Constant distance"
 msgstr "Konstanter Abstand"
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-#, fuzzy
-msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
-msgstr "Die Kennung „angular_speed“ ist im aktuellen Geltungsbereich nicht deklariert (in Zeile 6)."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-#, fuzzy
-msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
-msgstr "Die Funktion „[code]set_angular_speed()[/code]“ kann die Variable „[code]angular_speed[/code]“ nicht verwenden, da sie nicht skriptweit verfügbar ist. Sie ist auch nicht in der Funktion „[code]set_angular_speed()[/code]“ enthalten."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-#, fuzzy
-msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
-msgstr "Stelle sicher, dass du die Variable „[code]angular_speed[/code]“ in der Funktion „[code]set_angular_speed()[/code]“ definierst oder außerhalb von Funktionen definierst, damit sie skriptweit gültig ist."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid ""
-"Sorry, we don't have this particular error message covered yet!\n"
-"\n"
-"Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
-"\n"
-"[center]Thank you![/center]"
-msgstr ""
-"Leider haben wir diese spezielle Fehlermeldung noch nicht abgedeckt!\n"
-"\n"
-"[center] Vielen Dank! [/center]\n"
-"\n"
-"Bitte verwende die Schaltfläche [b]Bericht[/b] in der oberen rechten Ecke, um uns mehr darüber zu erzählen, wie es dazu kam, und wir werden versuchen, unsere Wissensdatenbank für die nächste Version der Anwendung zu verbessern."
 
 #: course/lesson-12-using-variables/visuals/VariableDefinition.tscn
 #: course/lesson-28-specifying-types/SyntaxTypeHints.tscn
@@ -126,10 +102,11 @@ msgstr "heal(50)"
 
 #: course/lesson-13-conditions/visuals/ExampleHeal.tscn
 #: course/lesson-9-adding-and-subtracting/visuals/ExampleHeal.tscn
+#, fuzzy
 msgid ""
 "func heal(amount):\n"
 "\thealth += amount"
-msgstr ""
+msgstr "func heal(amount): health += amount"
 
 #: course/lesson-13-conditions/visuals/ExampleJump.tscn
 #, fuzzy
@@ -164,19 +141,21 @@ msgid "level_up()"
 msgstr "level_up()"
 
 #: course/lesson-16-2d-vectors/visuals/ExampleIncreaseCharacterScale.tscn
+#, fuzzy
 msgid ""
 "func level_up():\n"
 "\tscale.x += 0.2\n"
 "\tscale.y += 0.2\n"
 "\t# ..."
-msgstr ""
+msgstr "func level_up(): scale.x += 0,2 scale.y += 0,2 # ..."
 
 #: course/lesson-16-2d-vectors/visuals/ExampleIncreaseCharacterScaleVector.tscn
+#, fuzzy
 msgid ""
 "func level_up():\n"
 "\tscale += Vector2(0.2, 0.2)\n"
 "\t# ..."
-msgstr ""
+msgstr "func level_up(): scale += Vector2(0.2, 0.2) # ..."
 
 #: course/lesson-16-2d-vectors/visuals/ExampleMoveSpriteVector.tscn
 #, fuzzy
@@ -184,10 +163,11 @@ msgid "move()"
 msgstr "move()"
 
 #: course/lesson-16-2d-vectors/visuals/ExampleMoveSpriteVector.tscn
+#, fuzzy
 msgid ""
 "func move():\n"
 "\tposition += Vector2(20, 20)"
-msgstr ""
+msgstr "func move(): position += Vector2(20, 20)"
 
 #: course/lesson-16-2d-vectors/visuals/VectorVisual.tscn
 #, fuzzy
@@ -216,6 +196,7 @@ msgid "draw_wall()"
 msgstr "draw_wall()"
 
 #: course/lesson-17-while-loops/visuals/old/ExampleTurtleMeetRobot.tscn
+#, fuzzy
 msgid ""
 "func draw_wall():\n"
 "\tdraw_square()\n"
@@ -223,9 +204,10 @@ msgid ""
 "\tdraw_square()\n"
 "\tjump(110, 0)\n"
 "\tdraw_square()"
-msgstr ""
+msgstr "func draw_wall(): draw_square() jump(110, 0) draw_square() jump(110, 0) draw_square()"
 
 #: course/lesson-17-while-loops/visuals/old/ExampleTurtleMeetRobotWhile.tscn
+#, fuzzy
 msgid ""
 "func draw_wall():\n"
 "\tvar number = 0\n"
@@ -233,7 +215,7 @@ msgid ""
 "\t\tdraw_square()\n"
 "\t\tjump(110, 0)\n"
 "\t\tnumber += 1"
-msgstr ""
+msgstr "func draw_wall(): var number = 0 while number < 3: draw_square() jump(110, 0) number += 1"
 
 #: course/lesson-19-creating-arrays/visuals/ArrayDefinitionSyntax.tscn
 #: course/lesson-24-access-array-indices/visuals/SyntaxAccessIndex.tscn
@@ -290,11 +272,6 @@ msgstr "Dies ist ein Hinweis."
 msgid "Hover over the Robot to learn more"
 msgstr "Fahre mit der Maus über den Roboter, um mehr zu erfahren"
 
-#: course/lesson-21-strings/visuals/RobotWithNumberName.tscn
-#, fuzzy
-msgid "70801"
-msgstr "70801"
-
 #: course/lesson-21-strings/visuals/RobotWithRegularName.tscn
 #, fuzzy
 msgid "Robot"
@@ -318,8 +295,9 @@ msgid "Completed"
 msgstr "Erledigt"
 
 #: course/lesson-23-append-to-arrays/clearing-meals/Meal.tscn
+#, fuzzy
 msgid "cheese sandwich"
-msgstr ""
+msgstr "Käse-Sandwich"
 
 #: course/lesson-24-access-array-indices/visuals/SyntaxAccessIndex.tscn
 #, fuzzy
@@ -455,10 +433,11 @@ msgid "take_damage(25)"
 msgstr "take_damage(25)"
 
 #: course/lesson-9-adding-and-subtracting/visuals/ExampleDamage.tscn
+#, fuzzy
 msgid ""
 "func take_damage(amount):\n"
 "\thealth -= amount"
-msgstr ""
+msgstr "func take_damage(amount): health -= amount"
 
 #: course/lesson-9-adding-and-subtracting/visuals/ExampleHeal.tscn
 #, fuzzy
@@ -501,12 +480,13 @@ msgid "Suggested Solution"
 msgstr "Lösungsvorschlag"
 
 #: ui/UIPractice.tscn
+#, fuzzy
 msgid ""
 "Use the suggested solution.\n"
 "\n"
 "Warning: Using the suggested solution will leave this practice unfinished.\n"
 "You can come back and try to solve it yourself later."
-msgstr ""
+msgstr "Verwende die vorgeschlagene Lösung. Warnung: Wenn du die vorgeschlagene Lösung verwendest, bleibt diese Übung unvollendet. Du kannst später zurückkommen und versuchen, sie selbst zu lösen."
 
 #: ui/UIPractice.tscn
 msgid "Use Solution"
@@ -517,16 +497,19 @@ msgid "Leave unfinished practice?"
 msgstr "Unvollendete Übung verlassen?"
 
 #: ui/components/BetaIndicator.tscn
+#, fuzzy
 msgid "App in"
-msgstr ""
+msgstr "App in"
 
 #: ui/components/BetaIndicator.tscn
+#, fuzzy
 msgid "BETA!"
-msgstr ""
+msgstr "BETA!"
 
 #: ui/components/BetaIndicator.tscn
+#, fuzzy
 msgid "found a bug?"
-msgstr ""
+msgstr "Einen Fehler gefunden?"
 
 #: ui/components/BigGreenButton.tscn
 msgid "Button"
@@ -598,10 +581,11 @@ msgid "Value"
 msgstr "Wert"
 
 #: ui/components/FullScreenButton.tscn
+#, fuzzy
 msgid ""
 "Toggle the app full-screen.\n"
 "Shortcut: F11"
-msgstr ""
+msgstr "App in den Vollbildmodus umschalten. Tastenkürzel: F11"
 
 #: ui/components/GDQuestCreditsLabel.tscn
 msgid "Learn GDScript From Zero is an open source project by [color=#FFD500][url=https://www.gdquest.com/]GDQUEST.COM[/url][/color]"
@@ -653,10 +637,11 @@ msgid "Explain"
 msgstr "Erklären"
 
 #: ui/components/QuitButton.tscn
+#, fuzzy
 msgid ""
 "Quit the app.\n"
 "Shortcut: Alt+F4"
-msgstr ""
+msgstr "Beende die App. Tastenkombination: Alt+F4"
 
 #: ui/components/Revealer.tscn
 msgid "Expand"
@@ -673,10 +658,6 @@ msgstr "Schritt"
 #: ui/components/RunnableCodeExampleDebugger.tscn
 msgid "Debugger"
 msgstr "Debugger"
-
-#: ui/components/ScrollableTextBox.tscn
-msgid "Placeholder text"
-msgstr "Platzhalter-Text"
 
 #: ui/components/popups/ConfirmPopup.tscn
 #: ui/components/popups/PracticeLeaveUnfinishedPopup.tscn
@@ -780,16 +761,19 @@ msgid "Close"
 msgstr "Schließen"
 
 #: ui/components/popups/ReportFormPopup.tscn
+#, fuzzy
 msgid "Something does not work"
-msgstr ""
+msgstr "Etwas funktioniert nicht"
 
 #: ui/components/popups/ReportFormPopup.tscn
+#, fuzzy
 msgid "Something is unclear or incorrect"
-msgstr ""
+msgstr "Etwas ist unklar oder falsch"
 
 #: ui/components/popups/ReportFormPopup.tscn
+#, fuzzy
 msgid "Suggest an improvement"
-msgstr ""
+msgstr "Vorschlag zur Verbesserung"
 
 #: ui/components/popups/ReportFormPopup.tscn
 #, fuzzy
@@ -797,34 +781,40 @@ msgid "Translation issue"
 msgstr "Community-Übersetzungen"
 
 #: ui/components/popups/ReportFormPopup.tscn
+#, fuzzy
 msgid "Write a short description."
-msgstr ""
+msgstr "Schreibe eine kurze Beschreibung."
 
 #: ui/components/popups/ReportFormPopup.tscn
+#, fuzzy
 msgid "Describe what went wrong, what you were doing, and what you expected to happen."
-msgstr ""
+msgstr "Beschreibe, was schiefgelaufen ist, was du getan hast und was du erwartet hast."
 
 #: ui/components/popups/ReportFormPopup.tscn
+#, fuzzy
 msgid "Open the contact page on our website with this report prefilled."
-msgstr ""
+msgstr "Öffne die Kontaktseite auf unserer Website, auf der dieser Bericht bereits vorausgefüllt ist."
 
 #: ui/components/popups/ReportFormPopup.tscn
+#, fuzzy
 msgid "Send report"
-msgstr ""
+msgstr "Bericht senden"
 
 #: ui/components/popups/ReportFormPopup.tscn
+#, fuzzy
 msgid "Close the report form without sending anything."
-msgstr ""
+msgstr "Schließe das Berichtsformular, ohne etwas zu senden."
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Configure the App"
 msgstr "Konfigurieren der App"
 
 #: ui/components/popups/SettingsPopup.tscn
+#, fuzzy
 msgid ""
 "Pick one of the community-contributed translations.\n"
 "Some translations are not complete yet."
-msgstr ""
+msgstr "Wähle eine der von der Community beigesteuerten Übersetzungen aus. Einige Übersetzungen sind noch nicht vollständig."
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Language"
@@ -836,12 +826,14 @@ msgid "About community translations"
 msgstr "Über Community-Übersetzungen"
 
 #: ui/components/popups/SettingsPopup.tscn
+#, fuzzy
 msgid "0% of text translated. 0/0 lessons fully translated."
-msgstr ""
+msgstr "0 % des Textes übersetzt. 0/0 Lektionen vollständig übersetzt."
 
 #: ui/components/popups/SettingsPopup.tscn
+#, fuzzy
 msgid "Make all text in the app bigger or smaller."
-msgstr ""
+msgstr "Vergrößere oder verkleinere den gesamten Text in der App."
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Text Size"
@@ -889,10 +881,11 @@ msgid "No Limit"
 msgstr "Keine Begrenzung"
 
 #: ui/components/popups/SettingsPopup.tscn
+#, fuzzy
 msgid ""
 "Reduce the contrast between the text and the background.\n"
 "This makes the app easier on your eyes."
-msgstr ""
+msgstr "Verringere den Kontrast zwischen dem Text und dem Hintergrund. Dadurch ist die App augenschonender."
 
 #: ui/components/popups/SettingsPopup.tscn
 msgid "Lower contrast"
@@ -924,6 +917,7 @@ msgid "Community Translations"
 msgstr "Community-Übersetzungen"
 
 #: ui/components/popups/TranslationInfoPopup.tscn
+#, fuzzy
 msgid ""
 "The languages available in this app are translated by community volunteers. They are not officially supported, and some translations may be incomplete or missing entirely.\n"
 "\n"
@@ -933,6 +927,13 @@ msgid ""
 "\n"
 "Thank you to everyone who has contributed translations so far."
 msgstr ""
+"\n"
+"\n"
+"Die in dieser App verfügbaren Sprachen werden von Freiwilligen aus der Community übersetzt. Sie werden nicht offiziell unterstützt, und einige Übersetzungen sind möglicherweise unvollständig oder fehlen ganz.\n"
+"\n"
+"Wenn du bei der Verwendung einer anderen Sprache Text siehst, der noch auf Englisch ist, ist dies zu erwarten. Es bedeutet, dass ein Teil der App noch nicht übersetzt wurde. Wenn du dazu beitragen möchtest, die Übersetzungen zu vervollständigen, bist du herzlich willkommen, einen Beitrag zu leisten. Eine Anleitung dazu findest du hier: [b][url=https://github.com/GDQuest/learn-gdscript-translations/#readme]How to contribute translations[/url][/b]\n"
+"\n"
+"Vielen Dank an alle, die bisher Übersetzungen beigesteuert haben."
 
 #: ui/screens/course_outliner/CourseLessonDetails.tscn
 msgid "Lesson Title Goes Here"
@@ -984,12 +985,14 @@ msgid "Lesson Title"
 msgstr "Lektion Titel"
 
 #: ui/screens/course_outliner/CourseLessonItem.tscn
+#, fuzzy
 msgid "A/文 100%"
-msgstr ""
+msgstr "A/Text 100 %"
 
 #: ui/screens/course_outliner/CourseLessonList.tscn
+#, fuzzy
 msgid "This course is 80% translated. Incomplete lessons will contain English text."
-msgstr ""
+msgstr "Dieser Kurs ist zu 80 % übersetzt. Unvollständige Lektionen enthalten englischen Text."
 
 #: ui/screens/course_outliner/CourseOutliner.tscn
 #, fuzzy
@@ -1126,14 +1129,11 @@ msgid "Question"
 msgstr "[b]Frage[/b]"
 
 #: ui/screens/lesson/UIBaseQuiz.tscn
+#, fuzzy
 msgid ""
 "You've already answered this quiz correctly before.\n"
 "Feel free to try it again to refresh your memory!"
-msgstr ""
-
-#: ui/screens/lesson/UIBaseQuiz.tscn
-msgid "Explanation"
-msgstr "Erklärung"
+msgstr "Du hast dieses Quiz bereits zuvor richtig beantwortet. Du kannst es gerne noch einmal versuchen, um dein Gedächtnis aufzufrischen!"
 
 #: ui/screens/lesson/UIBaseQuiz.tscn
 #, fuzzy
@@ -1161,10 +1161,11 @@ msgid "Practice title"
 msgstr "Übungstitel"
 
 #: ui/screens/lesson/UIPracticeButton.tscn
+#, fuzzy
 msgid ""
 "You've already completed this practice before.\n"
 "You can give it another go if you want to test your skills!"
-msgstr ""
+msgstr "Du hast diese Übung bereits zuvor absolviert. Du kannst es noch einmal versuchen, wenn du deine Fähigkeiten testen möchtest!"
 
 #: ui/screens/lesson/UIPracticeButton.tscn
 msgid "next"
@@ -1473,6 +1474,21 @@ msgstr "Die Funktion „set_angular_speed(new_angular_speed)“ fehlt; hast du s
 msgid "The set_angular_speed() function doesn't seem to use the angular_speed variable."
 msgstr "Die Funktion [code]set_angular_speed()[/code] scheint die Variable [code]angular_speed[/code] nicht zu verwenden."
 
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:10
+#, fuzzy
+msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
+msgstr "Die Kennung „angular_speed“ ist im aktuellen Geltungsbereich nicht deklariert (in Zeile 6)."
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:11
+#, fuzzy
+msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
+msgstr "Die Funktion „[code]set_angular_speed()[/code]“ kann die Variable „[code]angular_speed[/code]“ nicht verwenden, da sie nicht skriptweit verfügbar ist. Sie ist auch nicht in der Funktion „[code]set_angular_speed()[/code]“ enthalten."
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:12
+#, fuzzy
+msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
+msgstr "Stelle sicher, dass du die Variable „[code]angular_speed[/code]“ in der Funktion „[code]set_angular_speed()[/code]“ definierst oder außerhalb von Funktionen definierst, damit sie skriptweit gültig ist."
+
 #: course/lesson-13-conditions/limiting_health/TestLimitingHealth.gd:13
 #, fuzzy
 msgid "Health Does Not Go Above 80"
@@ -1500,10 +1516,11 @@ msgid "The health limit is too low when we heal the character. Did you set the c
 msgstr "Die Lebenspunkte-Obergrenze ist zu niedrig, wenn wir die Spielfigur heilen. Hast du die richtige Obergrenze festgelegt?"
 
 #: course/lesson-13-conditions/limiting_health/TestLimitingHealth.gd:35
+#, fuzzy
 msgid ""
 "When healing the character twice by 40 points, the health should go up to 60, then 80. Instead, we got %s.\n"
 "Are you using the amount parameter?"
-msgstr ""
+msgstr "Wenn man die Lebenspunkte des Charakters zweimal um 40 Punkte heilt, sollten die Lebenspunkte auf 60 und dann auf 80 steigen. Stattdessen haben wir %s erhalten. Verwendest du den Parameter „amount“?"
 
 #: course/lesson-13-conditions/prevent_zero_health/TestPreventZeroHealth.gd:13
 #, fuzzy
@@ -1526,10 +1543,11 @@ msgid "The health becomes negative if we deal 400 damage to the character. Did y
 msgstr "Die Gesundheit wird negativ, wenn wir dem Charakter 400 Schaden zufügen. Hast du den Wert auf 0 gesetzt?"
 
 #: course/lesson-13-conditions/prevent_zero_health/TestPreventZeroHealth.gd:32
+#, fuzzy
 msgid ""
 "When damaging the character three times by 10 points, the health should go down to 10, then 0. Instead, we got %s.\n"
 "Are you using the amount parameter?"
-msgstr ""
+msgstr "Wenn man dem Charakter dreimal 10 Punkte Schaden zufügt, sollte die Gesundheit auf 10 und dann auf 0 sinken. Stattdessen haben wir %s erhalten. Verwendest du den Parameter „amount“?"
 
 #: course/lesson-13-conditions/using_conditions/TestUsingConditions.gd:5
 #, fuzzy
@@ -1653,8 +1671,9 @@ msgid "Use A Vector To Increase Scale"
 msgstr "Verwende einen Vektor, um den Maßstab zu erhöhen"
 
 #: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:12
+#, fuzzy
 msgid "The Scale Is Correct After Gaining Multiple Levels"
-msgstr ""
+msgstr "Der Skalierungsfaktor ist nach dem Durchlaufen mehrerer Ebenen korrekt"
 
 #: course/lesson-16-2d-vectors/increase_scale/TestScaleIncreased.gd:35
 #, fuzzy
@@ -1667,8 +1686,9 @@ msgid "scale's value is %s; It should be (1.4, 1.4) after levelling up 2 times."
 msgstr "Der Wert von „scale“ ist %s; nach zweimaligem Levelaufstieg sollte er (1.4, 1.4) betragen."
 
 #: course/lesson-16-2d-vectors/resetting_robot/TestRobotReset.gd:11
+#, fuzzy
 msgid "Use Vector 2 To Reset Robot"
-msgstr ""
+msgstr "Verwende [code]Vector2[/code], um den Roboter zurückzusetzen"
 
 #: course/lesson-16-2d-vectors/resetting_robot/TestRobotReset.gd:12
 #, fuzzy
@@ -1681,8 +1701,9 @@ msgid "Robot Position Is Reset"
 msgstr "Die Position des Roboters wird zurückgesetzt"
 
 #: course/lesson-16-2d-vectors/resetting_robot/TestRobotReset.gd:72
+#, fuzzy
 msgid "It looks like scale or position isn't reset using a Vector2 (directly or via a Vector2 variable)."
-msgstr ""
+msgstr "Es sieht so aus, als würden „scale“ oder „position“ nicht mithilfe eines „[code]Vector2[/code]“ (direkt oder über eine „[code]Vector2[/code]“-Variable) zurückgesetzt."
 
 #: course/lesson-16-2d-vectors/resetting_robot/TestRobotReset.gd:79
 #, fuzzy
@@ -1701,40 +1722,49 @@ msgid "Robot Moves To Bottom Row"
 msgstr "Der Roboter erreicht den unteren Rand des Spielfelds"
 
 #: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:15
+#, fuzzy
 msgid "Use a While Loop to Move"
-msgstr ""
+msgstr "Verwende eine [code]while[/code]-Schleife zum Bewegen"
 
 #: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:23
+#, fuzzy
 msgid "The robot stopped above the bottom row. The cell.y member variable should be equal to board_size.y - 1 (the last row in the board)."
-msgstr ""
+msgstr "Der Roboter hat über der untersten Reihe angehalten. Die Member-Variable `cell.y` sollte gleich `board_size.y - 1` sein (die letzte Reihe auf dem Spielfeld)."
 
 #: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:26
+#, fuzzy
 msgid "The robot moved below the bottom row. The cell.y member variable should be equal to board_size.y - 1 (the last row in the board)."
-msgstr ""
+msgstr "Der Roboter ist unter die unterste Reihe gefahren. Die Member-Variable `cell.y` sollte gleich `board_size.y - 1` sein (die letzte Reihe auf dem Spielfeld)."
 
 #: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:40
+#, fuzzy
 msgid "Your while loop needs to contain the code that moves the robot."
-msgstr ""
+msgstr "Deine „[code]while[/code]“-Schleife muss den Code enthalten, der den Roboter bewegt."
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:15
+#, fuzzy
 msgid "Use a For Loop to Move"
-msgstr ""
+msgstr "Verwende eine [code]for[/code]-Schleife zum Bewegen"
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:23
+#, fuzzy
 msgid "The robot stopped above the bottom row. Its cell.y should be equal to board_size.y - 1."
-msgstr ""
+msgstr "Der Roboter hat über der untersten Zeile angehalten. Sein Wert „cell.y“ sollte gleich „board_size.y - 1“ sein."
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:26
+#, fuzzy
 msgid "The robot moved below the bottom row. Its cell.y should be equal to board_size.y - 1."
-msgstr ""
+msgstr "Der Roboter ist unter die unterste Zeile gerutscht. Sein Wert für `cell.y` sollte gleich `board_size.y - 1` sein."
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:40
+#, fuzzy
 msgid "Your for loop needs to contain the code that moves the robot."
-msgstr ""
+msgstr "Deine [code]for[/code]-Schleife muss den Code enthalten, der den Roboter bewegt."
 
 #: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:40
+#, fuzzy
 msgid "Use a For Loop to Draw Rectangles"
-msgstr ""
+msgstr "Verwende eine [code]for[/code]-Schleife, um Rechtecke zu zeichnen"
 
 #: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:41
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:40
@@ -1755,8 +1785,9 @@ msgid "Shapes Are 100 Pixels Apart"
 msgstr "Die Formen sind 100 Pixel voneinander entfernt"
 
 #: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:62
+#, fuzzy
 msgid "Your for loop needs to contain the code to draw the rectangles."
-msgstr ""
+msgstr "Deine [code]for[/code]-Schleife muss den Code zum Zeichnen der Rechtecke enthalten."
 
 #: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:67
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:48
@@ -1783,8 +1814,9 @@ msgid "Shapes are not separated by 100 pixels on the X axis."
 msgstr "Die Formen sind auf der X-Achse nicht um 100 Pixel voneinander getrennt."
 
 #: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:18
+#, fuzzy
 msgid "Path contains values that are not Vector2"
-msgstr ""
+msgstr "„Path“ enthält Werte, die keine „[code]Vector2[/code]“-Werte sind"
 
 #: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:25
 #, fuzzy
@@ -1802,8 +1834,9 @@ msgid "Path Does Not Hit Obstacles"
 msgstr "Der Pfad trifft nicht auf Hindernisse"
 
 #: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:32
+#, fuzzy
 msgid "No points found in variable turtle_path. Did you write Vector2 coordinates in the variable's array?"
-msgstr ""
+msgstr "In der Variablen `turtle_path` wurden keine Punkte gefunden. Hast du `Vector2`-Koordinaten in das Array der Variablen geschrieben?"
 
 #: course/lesson-19-creating-arrays/moving-turtle/TestMovingTurtle.gd:37
 #, fuzzy
@@ -1906,12 +1939,14 @@ msgid "The robot's movement path doesn't match the robot_path array. They should
 msgstr "Die Bewegungsbahn des Roboters stimmt nicht mit dem [code]robot_path[/code]-Array überein. Sie sollten identisch sein."
 
 #: course/lesson-20-looping-over-arrays/robot-path/TestRobotPath.gd:58
+#, fuzzy
 msgid "Did you use a for loop to call robot.move_to() with each cell in robot_path?"
-msgstr ""
+msgstr "Hast du eine [code]for[/code]-Schleife verwendet, um robot.move_to() für jede Zelle in robot_path aufzurufen?"
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:12
+#, fuzzy
 msgid "Use For Loop"
-msgstr ""
+msgstr "Verwende eine [code]for[/code]-Schleife"
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:13
 #, fuzzy
@@ -1924,8 +1959,9 @@ msgid "The run function is missing; did you remove it?"
 msgstr "Die Funktion „run“ fehlt; hast du sie entfernt?"
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:23
+#, fuzzy
 msgid "Your code has no for loop. You need to use a for loop to complete this practice, even if there are other solutions!"
-msgstr ""
+msgstr "Dein Code enthält keine [code]for[/code]-Schleife. Du musst eine [code]for[/code]-Schleife verwenden, um diese Übung abzuschließen, auch wenn es andere Lösungen gibt!"
 
 #: course/lesson-21-strings/string_array/TestsStringArray.gd:34
 #, fuzzy
@@ -2009,8 +2045,9 @@ msgid "Completed Orders Contain All Elements"
 msgstr "Abgeschlossene Aufträge enthalten alle Elemente"
 
 #: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:16
+#, fuzzy
 msgid "Starting Data Unchanged"
-msgstr ""
+msgstr "Ausgangsdaten unverändert"
 
 #: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:21
 #, fuzzy
@@ -2033,8 +2070,9 @@ msgid "We expected %s, but got %s instead"
 msgstr "Wir haben %s erwartet, aber stattdessen %s erhalten"
 
 #: course/lesson-23-append-to-arrays/clearing-meals/TestClearingMeals.gd:48
+#, fuzzy
 msgid "It looks like you removed %s from waiting_orders."
-msgstr ""
+msgstr "Es sieht so aus, als hättest du %s aus waiting_orders entfernt."
 
 #: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:11
 #, fuzzy
@@ -2042,8 +2080,9 @@ msgid "Used Pop Back"
 msgstr "Verwendet: „Pop Back“"
 
 #: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:12
+#, fuzzy
 msgid "Used While Loop"
-msgstr ""
+msgstr "Verwendung der [code]while[/code]-Schleife"
 
 #: course/lesson-23-append-to-arrays/popping-crates/TestPoppingCrates.gd:13
 #, fuzzy
@@ -2148,12 +2187,14 @@ msgstr "Alle Gegenstände werden angezeigt"
 
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:12
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:12
+#, fuzzy
 msgid "Code Uses A For Loop"
-msgstr ""
+msgstr "Der Code verwendet eine [code]for[/code]-Schleife"
 
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:19
+#, fuzzy
 msgid "The number of items displayed does not match the number of items in the inventory. Did you display each item exactly once?"
-msgstr ""
+msgstr "Die Anzahl der angezeigten Gegenstände stimmt nicht mit der Anzahl der Gegenstände im Inventar überein. Hast du jeden Gegenstand genau einmal angezeigt?"
 
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:29
 #, fuzzy
@@ -2161,8 +2202,9 @@ msgid "The displayed items do not match the inventory variable's content. Did yo
 msgstr "Die angezeigten Gegenstände stimmen nicht mit dem Inhalt der Inventarvariablen überein. Hast du die Funktion [code]display_item()[/code] für jeden Gegenstand im Inventar aufgerufen?"
 
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:44
+#, fuzzy
 msgid "Your code does not use a for loop to call display_item(). Please make sure you display each item inside the loop."
-msgstr ""
+msgstr "Dein Code verwendet keine [code]for[/code]-Schleife, um [code]display_item()[/code] aufzurufen. Bitte stelle sicher, dass du jedes Element innerhalb der Schleife anzeigst."
 
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:11
 #, fuzzy
@@ -2170,8 +2212,9 @@ msgid "All Units Are Displayed"
 msgstr "Alle Einheiten werden angezeigt"
 
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:19
+#, fuzzy
 msgid "The number of units displayed does not match the number of units in the units dictionary. Did you place each unit exactly once?"
-msgstr ""
+msgstr "Die Anzahl der angezeigten Einheiten stimmt nicht mit der Anzahl der Einheiten im Einheiten-Wörterbuch überein. Hast du jede Einheit genau einmal platziert?"
 
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:29
 #, fuzzy
@@ -2179,8 +2222,9 @@ msgid "The displayed units do not match the units variable's content. Did you ca
 msgstr "Die angezeigten Einheiten stimmen nicht mit dem Inhalt der [code]units[/code]-Variable überein. Hast du die Funktion [code]place_unit()[/code] für jede Einheit im [code]units[/code]-Wörterbuch aufgerufen?"
 
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:43
+#, fuzzy
 msgid "Your code does not use a for loop to call place_unit(). Please make sure you place each unit inside the loop."
-msgstr ""
+msgstr "Dein Code verwendet keine [code]for[/code]-Schleife, um [code]place_unit()[/code] aufzurufen. Bitte stelle sicher, dass du jede Einheit innerhalb der Schleife platzierst."
 
 #: course/lesson-27-value-types/display-energy/TestDisplayingEnergy.gd:11
 #, fuzzy
@@ -2385,12 +2429,14 @@ msgid "Draw Three Squares Of 200 Pixels"
 msgstr "Zeichne drei Quadrate mit einer Seitenlänge von 200 Pixeln"
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:26
+#, fuzzy
 msgid "Reuse The draw_square() Function"
-msgstr ""
+msgstr "Wiederverwendung der Funktion draw_square()"
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:34
+#, fuzzy
 msgid "You need to use the predefined draw_square() function inside draw_three_squares() in this exercise. This avoids duplicating the turtle instructions by hand."
-msgstr ""
+msgstr "In dieser Übung musst du die vordefinierte Funktion `draw_square()` innerhalb von `draw_three_squares()` verwenden. Dadurch vermeidest du es, die Turtle-Befehle manuell zu wiederholen."
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:39
 #, fuzzy
@@ -2434,8 +2480,9 @@ msgid "Shape3D number %s is not a square of length 200 pixels. Did you change th
 msgstr "Die Shape3D-Nummer %s ist kein Quadrat mit einer Seitenlänge von 200 Pixeln. Hast du die Funktion [code]draw_square()[/code] geändert?"
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:99
+#, fuzzy
 msgid "The squares should not overlap. Did you move the turtle between drawing each square?"
-msgstr ""
+msgstr "Die Quadrate dürfen sich nicht überlappen. Hast du die Schildkröte zwischen dem Zeichnen der einzelnen Quadrate verschoben?"
 
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:14
 #, fuzzy
@@ -2458,8 +2505,9 @@ msgstr "Die Schildkröte hat nichts gezeichnet. Stelle sicher, dass deine Funkti
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:23
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:43
 #: course/lesson-6-multiple-function-parameters/drawing_squares/TestsDrawingSquares.gd:58
+#, fuzzy
 msgid "The turtle drew fewer than 2 shapes. Make sure your function is repeatable."
-msgstr ""
+msgstr "Die Schildkröte hat weniger als 2 Formen gezeichnet. Stelle sicher, dass deine Funktion wiederholbar ist."
 
 #: course/lesson-6-multiple-function-parameters/drawing_corners/TestsDrawingCorners.gd:23
 #: course/lesson-6-multiple-function-parameters/drawing_corners_advanced/TestsDrawingCornersAdvanced.gd:23
@@ -2677,89 +2725,103 @@ msgstr "Der Roboter hat nicht so viel Schaden genommen wie erwartet. Er hat %s L
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "Es sieht nicht so aus, als würdest du amount von health abziehen."
 
-#: ui/UILesson.gd:301
+#: ui/UILesson.gd:306
 msgid "Learn More"
 msgstr "Mehr erfahren"
 
-#: ui/UILesson.gd:331
+#: ui/UILesson.gd:351
+#, fuzzy
 msgid ""
 "\n"
 "\n"
 msgstr ""
+"\n"
+"\n"
 
-#: ui/UILesson.gd:379
+#: ui/UILesson.gd:399
+#, fuzzy
 msgid ""
 "\n"
 "[hr]\n"
 msgstr ""
+"\n"
+"[hr]\n"
 
 #: ui/UINavigator.gd:434
 msgid "(no previous history)"
 msgstr "(kein Verlauf)"
 
-#: ui/UIPractice.gd:290
+#: ui/UIPractice.gd:286
 msgid "Hint %s"
 msgstr "Hinweis %s"
 
-#: ui/UIPractice.gd:328
+#: ui/UIPractice.gd:321
 msgid "Validating Your Code..."
 msgstr "Code wird validiert..."
 
-#: ui/UIPractice.gd:379
+#: ui/UIPractice.gd:372
 #, fuzzy
 msgid "The function '%s' calls itself, this creates an infinite loop"
 msgstr "Die Funktion `%s`ruft sich selbst auf, dadurch entsteht eine Endlosschleife"
 
-#: ui/UIPractice.gd:390
+#: ui/UIPractice.gd:383
 #, fuzzy
 msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr "In deinem Code ist eine while-Schleife, die endlos weiterläuft (while true). Dadurch bleibt das Programm hängen."
 
-#: ui/UIPractice.gd:433
+#: ui/UIPractice.gd:426
+#, fuzzy
 msgid "You typed \"%s\"; did you mean \"%s\"?"
-msgstr ""
+msgstr "Du hast „%s“ eingegeben; meintest du vielleicht „%s“?"
 
-#: ui/UIPractice.gd:450
+#: ui/UIPractice.gd:443
 msgid "Running Your Code..."
 msgstr "Code wird ausgeführt..."
 
-#: ui/UIPractice.gd:462
+#: ui/UIPractice.gd:455
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "In deinem Code, teilst du durch null. Du kannst in deinem Code nicht durch null teilen. Bitte stelle sicher das du kein \"/0\" oder \"%0\" in deinem Code stehen hast."
 
-#: ui/UIPractice.gd:608
+#: ui/UIPractice.gd:601
 msgid "Running Tests..."
 msgstr "Tests werden ausgeführt..."
 
 #: ui/components/BreadCrumbs.gd:66
+#, fuzzy
 msgid " > "
-msgstr ""
+msgstr " > "
 
 #: ui/components/popups/ReportFormPopup.gd:55
+#, fuzzy
 msgid "Select the kind of issue and describe it in the box below, then click \"Send report\" to open the contact page on our website with the report prefilled."
-msgstr ""
+msgstr "Wähle die Art des Problems aus und beschreibe es im Feld unten. Klicke anschließend auf „Bericht senden“, um die Kontaktseite auf unserer Website zu öffnen, auf der der Bericht bereits vorausgefüllt ist."
 
 #: ui/components/popups/ReportFormPopup.gd:59
+#, fuzzy
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
-msgstr ""
+msgstr "Bei Fragen und für Hilfe beim Lernen: [url=%s]join the community on Discord[/url]."
 
-#: ui/components/popups/ReportFormPopup.gd:132
+#: ui/components/popups/ReportFormPopup.gd:135
+#, fuzzy
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
-msgstr ""
+msgstr "Übersetzungen sind inoffiziell und werden von der Community gepflegt. Wenn du helfen möchtest, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 
 #: ui/components/popups/SettingsPopup.gd:147
+#, fuzzy
 msgid "{percentage}% of text translated. {completed}/{total} lessons fully translated."
-msgstr ""
+msgstr "{percentage} % des Textes übersetzt. {completed}/{total} Lektionen vollständig übersetzt."
 
 #: ui/screens/course_outliner/CourseLessonDetails.gd:73
+#, fuzzy
 msgid "100%"
-msgstr ""
+msgstr "100 %"
 
 #: ui/screens/course_outliner/CourseLessonDetails.gd:86
 #: ui/screens/course_outliner/CourseLessonDetails.gd:115
 #: ui/screens/course_outliner/CourseLessonDetails.gd:117
+#, fuzzy
 msgid "Open Anyway"
-msgstr ""
+msgstr "Trotzdem öffnen"
 
 #: ui/screens/course_outliner/CourseLessonDetails.gd:114
 msgid "Open Lesson"
@@ -2770,8 +2832,9 @@ msgid "Continue Lesson"
 msgstr "Lektion fortsetzen"
 
 #: ui/screens/course_outliner/CourseLessonList.gd:33
+#, fuzzy
 msgid "This course is {percentage}% translated. Incomplete lessons will contain English text."
-msgstr ""
+msgstr "Dieser Kurs ist zu {percentage} % übersetzt. Unvollständige Lektionen enthalten englischen Text."
 
 #: ui/screens/lesson/quizzes/UIQuizChoice.gd:28
 msgid "(select all that apply)"
@@ -2799,17 +2862,38 @@ msgid "You've completed this practice before."
 msgstr "Du hast diese Übung bereits abgeschlossen."
 
 #: ui/screens/practice/PracticeInfoPanel.gd:193
+#, fuzzy
 msgid ""
 "You've used the provided solution.\n"
 "This practice will not count towards your course progress."
-msgstr ""
+msgstr "Du hast die bereitgestellte Lösung verwendet. Diese Übung wird nicht für deinen Kursfortschritt gewertet."
 
 #: ui/screens/welcome_screen/WelcomeScreen.gd:52
 msgid "CONTINUE"
 msgstr "FORTSETZEN"
 
+#, fuzzy
 msgid "Learn to Code From Zero with Godot"
-msgstr ""
+msgstr "Programmieren lernen von Grund auf mit Godot"
+
+#~ msgid ""
+#~ "Sorry, we don't have this particular error message covered yet!\n"
+#~ "\n"
+#~ "Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
+#~ "\n"
+#~ "[center]Thank you![/center]"
+#~ msgstr ""
+#~ "Leider haben wir diese spezielle Fehlermeldung noch nicht abgedeckt!\n"
+#~ "\n"
+#~ "[center] Vielen Dank! [/center]\n"
+#~ "\n"
+#~ "Bitte verwende die Schaltfläche [b]Bericht[/b] in der oberen rechten Ecke, um uns mehr darüber zu erzählen, wie es dazu kam, und wir werden versuchen, unsere Wissensdatenbank für die nächste Version der Anwendung zu verbessern."
+
+#~ msgid "Placeholder text"
+#~ msgstr "Platzhalter-Text"
+
+#~ msgid "Explanation"
+#~ msgstr "Erklärung"
 
 #, fuzzy
 #~ msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."

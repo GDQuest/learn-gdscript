@@ -14,11 +14,22 @@ msgstr ""
 "Language-Team: French <https://hosted.weblate.org/projects/learn-gdscript-from-zero/application/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "Generated-By: Babel 2.10.3\n"
 "X-Generator: Weblate 2026.10.dev0\n"
+
+#: course/common/inventory/DictItem.tscn
+#: course/lesson-23-append-to-arrays/visuals/Crate.tscn
+#: course/lesson-24-access-array-indices/visuals/inventory/Item.tscn
+#: course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.tscn
+msgid "0"
+msgstr "0"
+
+#: course/lesson-21-strings/visuals/RobotWithNumberName.tscn
+msgid "70801"
+msgstr "70801"
 
 #: course/common/CustomHealthBar.tscn
 msgid "health = 100"
@@ -32,13 +43,6 @@ msgstr "Inventaire"
 #: course/common/inventory/DictItem.tscn
 msgid "healing heart"
 msgstr "coeur de soin"
-
-#: course/common/inventory/DictItem.tscn
-#: course/lesson-23-append-to-arrays/visuals/Crate.tscn
-#: course/lesson-24-access-array-indices/visuals/inventory/Item.tscn
-#: course/lesson-26-looping-over-dictionaries/display-inventory/DisplayInventory.tscn
-msgid "0"
-msgstr "0"
 
 #: course/lesson-11-time-delta/visuals/DemoRotatingSpriteFrame.tscn
 #: course/lesson-11-time-delta/visuals/DemoRotatingTime.tscn
@@ -59,32 +63,6 @@ msgstr "Avec delta"
 #: course/lesson-11-time-delta/visuals/RobotRace.tscn
 msgid "Constant distance"
 msgstr "Distance constante"
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
-msgstr "L'identifiant « angular_speed » n'est pas déclaré dans la portée actuelle (à la ligne 6)."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
-msgstr "La fonction [code]set_angular_speed()[/code] ne peut pas utiliser la variable [code]angular_speed[/code] car elle n'est pas définie à l'échelle du script. Elle ne se trouve pas non plus dans la fonction [code]set_angular_speed()[/code]."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
-msgstr "Assurez-vous de définir la variable [code]angular_speed[/code] dans la fonction [code]set_angular_speed()[/code], ou définissez-la en dehors des fonctions pour qu'elle soit accessible dans tout le script."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid ""
-"Sorry, we don't have this particular error message covered yet!\n"
-"\n"
-"Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
-"\n"
-"[center]Thank you![/center]"
-msgstr ""
-"Désolé, nous n'avons pas encore couvert ce message d'erreur en particulier !\n"
-"\n"
-"Veuillez utiliser le bouton [b]Signaler[/b] dans le coin supérieur droit pour nous en dire plus sur la façon dont vous l'avez rencontré, et nous essaierons d'améliorer notre base de connaissances pour la prochaine version de l'application.\n"
-"\n"
-"[center]Merci ![/center]"
 
 #: course/lesson-12-using-variables/visuals/VariableDefinition.tscn
 #: course/lesson-28-specifying-types/SyntaxTypeHints.tscn
@@ -281,10 +259,6 @@ msgstr "Ceci est un indice."
 #: course/lesson-21-strings/visuals/RobotToolTip.tscn
 msgid "Hover over the Robot to learn more"
 msgstr "Survolez le robot pour en savoir plus"
-
-#: course/lesson-21-strings/visuals/RobotWithNumberName.tscn
-msgid "70801"
-msgstr "70801"
 
 #: course/lesson-21-strings/visuals/RobotWithRegularName.tscn
 msgid "Robot"
@@ -632,10 +606,6 @@ msgstr "étape"
 #: ui/components/RunnableCodeExampleDebugger.tscn
 msgid "Debugger"
 msgstr "Débogueur"
-
-#: ui/components/ScrollableTextBox.tscn
-msgid "Placeholder text"
-msgstr "Texte en placeholder"
 
 #: ui/components/popups/ConfirmPopup.tscn
 #: ui/components/popups/PracticeLeaveUnfinishedPopup.tscn
@@ -1075,7 +1045,6 @@ msgid "This is an Open-Source project!"
 msgstr "Il s'agit d'un projet Open-Source !"
 
 #: ui/screens/end_screen/SponsorlessEndScreen.tscn
-#, fuzzy
 msgid ""
 "Like Godot, this app and course is free and open-source.\n"
 "\n"
@@ -1096,10 +1065,6 @@ msgid ""
 msgstr ""
 "Vous avez déjà répondu correctement à ce quiz.\n"
 "N'hésitez pas à le refaire pour vous rafraîchir la mémoire !"
-
-#: ui/screens/lesson/UIBaseQuiz.tscn
-msgid "Explanation"
-msgstr "Explication"
 
 #: ui/screens/lesson/UIBaseQuiz.tscn
 msgid "You need to try to answer once before you can skip a quiz."
@@ -1396,6 +1361,18 @@ msgstr "La fonction 'set_angular_speed(new_angular_speed)' manque ; l'avez-vous 
 msgid "The set_angular_speed() function doesn't seem to use the angular_speed variable."
 msgstr "La fonction set_angular_speed() ne semble pas utiliser la variable angular_speed."
 
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:10
+msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
+msgstr "L'identifiant « angular_speed » n'est pas déclaré dans la portée actuelle (à la ligne 6)."
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:11
+msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
+msgstr "La fonction [code]set_angular_speed()[/code] ne peut pas utiliser la variable [code]angular_speed[/code] car elle n'est pas définie à l'échelle du script. Elle ne se trouve pas non plus dans la fonction [code]set_angular_speed()[/code]."
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:12
+msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
+msgstr "Assurez-vous de définir la variable [code]angular_speed[/code] dans la fonction [code]set_angular_speed()[/code], ou définissez-la en dehors des fonctions pour qu'elle soit accessible dans tout le script."
+
 #: course/lesson-13-conditions/limiting_health/TestLimitingHealth.gd:13
 msgid "Health Does Not Go Above 80"
 msgstr "La variable health ne dépasse pas 80"
@@ -1593,15 +1570,15 @@ msgstr "Utilisez une boucle « while »"
 
 #: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:23
 msgid "The robot stopped above the bottom row. The cell.y member variable should be equal to board_size.y - 1 (the last row in the board)."
-msgstr ""
+msgstr "Le robot s'est arrêté au-dessus de la ligne du bas. La variable membre cell.y doit être égale à board_size.y - 1 (la dernière ligne du plateau)."
 
 #: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:26
 msgid "The robot moved below the bottom row. The cell.y member variable should be equal to board_size.y - 1 (the last row in the board)."
-msgstr ""
+msgstr "Le robot s'est déplacé sous la ligne du bas. La variable membre cell.y doit être égale à board_size.y - 1 (la dernière ligne du plateau)."
 
 #: course/lesson-17-while-loops/while_move/TestPracticeBoardWhile.gd:40
 msgid "Your while loop needs to contain the code that moves the robot."
-msgstr ""
+msgstr "Votre boucle « while » doit contenir le code qui fait bouger le robot."
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:15
 msgid "Use a For Loop to Move"
@@ -1609,19 +1586,19 @@ msgstr "Utilisez une boucle « for »."
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:23
 msgid "The robot stopped above the bottom row. Its cell.y should be equal to board_size.y - 1."
-msgstr ""
+msgstr "Le robot s'est arrêté au-dessus de la ligne du bas. Sa valeur cell.y devrait être égale à board_size.y - 1."
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:26
 msgid "The robot moved below the bottom row. Its cell.y should be equal to board_size.y - 1."
-msgstr ""
+msgstr "Le robot s'est déplacé sous la ligne du bas. Sa valeur cell.y devrait être égale à board_size.y - 1."
 
 #: course/lesson-18-for-loops/for_move/TestPracticeBoardFor.gd:40
 msgid "Your for loop needs to contain the code that moves the robot."
-msgstr ""
+msgstr "Votre boucle <code>for</code> doit contenir le code qui déplace le robot."
 
 #: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:40
 msgid "Use a For Loop to Draw Rectangles"
-msgstr ""
+msgstr "Utiliser une boucle « for » pour dessiner des rectangles"
 
 #: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:41
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:40
@@ -1640,7 +1617,7 @@ msgstr "Les formes sont espacées de 100 pixels"
 
 #: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:62
 msgid "Your for loop needs to contain the code to draw the rectangles."
-msgstr ""
+msgstr "Votre boucle « for » doit contenir le code permettant de dessiner les rectangles."
 
 #: course/lesson-18-for-loops/for_rectangles/ForTestsDrawingRectangles.gd:67
 #: course/lesson-7-member-variables/draw_rectangles_at_positions/TestsDrawingRectangles.gd:48
@@ -1904,9 +1881,8 @@ msgid "Third Track Is Well Positioned"
 msgstr "La troisième piste est bien positionnée."
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:29
-#, fuzzy
 msgid "Fourth Track Is Well Positioned"
-msgstr "La première piste est bien positionnée."
+msgstr "La quatrième piste est bien positionnée."
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:30
 msgid "All Other Tracks Are Aligned To Grid"
@@ -1968,7 +1944,7 @@ msgstr "Le code utilise une boucle « for »."
 
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:19
 msgid "The number of items displayed does not match the number of items in the inventory. Did you display each item exactly once?"
-msgstr ""
+msgstr "Le nombre d'objets affichés ne correspond pas au nombre d'objets présents dans l'inventaire. Avez-vous affiché chaque objet exactement une fois ?"
 
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:29
 msgid "The displayed items do not match the inventory variable's content. Did you call the display_item() function for each item in the inventory?"
@@ -1976,7 +1952,7 @@ msgstr "Les objets affichés ne correspondent pas au contenu de la variable « i
 
 #: course/lesson-26-looping-over-dictionaries/display-inventory/TestDisplayInventory.gd:44
 msgid "Your code does not use a for loop to call display_item(). Please make sure you display each item inside the loop."
-msgstr ""
+msgstr "Votre code n'utilise pas de boucle « for » pour appeler display_item(). Veuillez vous assurer d'afficher chaque élément à l'intérieur de la boucle."
 
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:11
 msgid "All Units Are Displayed"
@@ -1984,7 +1960,7 @@ msgstr "Toutes les unités sont affichées"
 
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:19
 msgid "The number of units displayed does not match the number of units in the units dictionary. Did you place each unit exactly once?"
-msgstr ""
+msgstr "Le nombre d'unités affiché ne correspond pas au nombre d'unités dans le dictionnaire des unités. Avez-vous placé chaque unité exactement une fois ?"
 
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:29
 msgid "The displayed units do not match the units variable's content. Did you call the place_unit() function for each unit in the units dictionary?"
@@ -1992,7 +1968,7 @@ msgstr "Les unités affichées ne correspondent pas au contenu de la variable «
 
 #: course/lesson-26-looping-over-dictionaries/place-units/TestPlaceUnits.gd:43
 msgid "Your code does not use a for loop to call place_unit(). Please make sure you place each unit inside the loop."
-msgstr ""
+msgstr "Votre code n'utilise pas de boucle « for » pour appeler place_unit(). Veuillez vous assurer de placer chaque unité à l'intérieur de la boucle."
 
 #: course/lesson-27-value-types/display-energy/TestDisplayingEnergy.gd:11
 msgid "Displayed Energy Matches Energy Value"
@@ -2158,14 +2134,13 @@ msgstr "Dessinez trois carrés de 200 pixels"
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:26
 msgid "Reuse The draw_square() Function"
-msgstr ""
+msgstr "Réutiliser la fonction draw_square()"
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:34
 msgid "You need to use the predefined draw_square() function inside draw_three_squares() in this exercise. This avoids duplicating the turtle instructions by hand."
-msgstr ""
+msgstr "Dans cet exercice, vous devez utiliser la fonction prédéfinie draw_square() à l'intérieur de draw_three_squares(). Cela évite de devoir réécrire manuellement les instructions de la tortue."
 
 #: course/lesson-5-your-first-function/TestsDrawingThreeSquares.gd:39
-#, fuzzy
 msgid "You need to define a function named draw_three_squares()."
 msgstr "Vous devez définir une fonction nommée draw_three_squares()."
 
@@ -2399,11 +2374,11 @@ msgstr "Le robot n'a pas subi autant de dégâts que prévu. Il dispose de %s po
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "Il ne semble pas que vous soustrayiez la valeur « amount » de la variable « health »."
 
-#: ui/UILesson.gd:301
+#: ui/UILesson.gd:306
 msgid "Learn More"
 msgstr "En savoir plus"
 
-#: ui/UILesson.gd:331
+#: ui/UILesson.gd:351
 msgid ""
 "\n"
 "\n"
@@ -2411,7 +2386,7 @@ msgstr ""
 "\n"
 "\n"
 
-#: ui/UILesson.gd:379
+#: ui/UILesson.gd:399
 msgid ""
 "\n"
 "[hr]\n"
@@ -2423,35 +2398,35 @@ msgstr ""
 msgid "(no previous history)"
 msgstr "(aucun historique)"
 
-#: ui/UIPractice.gd:290
+#: ui/UIPractice.gd:286
 msgid "Hint %s"
 msgstr "Indice %s"
 
-#: ui/UIPractice.gd:328
+#: ui/UIPractice.gd:321
 msgid "Validating Your Code..."
 msgstr "Validation de votre code…"
 
-#: ui/UIPractice.gd:379
+#: ui/UIPractice.gd:372
 msgid "The function '%s' calls itself, this creates an infinite loop"
 msgstr "La fonction '%s' s'appelle elle-même, cela crée une boucle infinie"
 
-#: ui/UIPractice.gd:390
+#: ui/UIPractice.gd:383
 msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr "Vous avez une boucle qui s'exécute indéfiniment sans instruction break. Cela bloquerait l'application."
 
-#: ui/UIPractice.gd:433
+#: ui/UIPractice.gd:426
 msgid "You typed \"%s\"; did you mean \"%s\"?"
-msgstr ""
+msgstr "Vous avez tapé « %s » ; vouliez-vous dire « %s » ?"
 
-#: ui/UIPractice.gd:450
+#: ui/UIPractice.gd:443
 msgid "Running Your Code..."
 msgstr "Exécution de votre code…"
 
-#: ui/UIPractice.gd:462
+#: ui/UIPractice.gd:455
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "Il y a une division par zéro dans votre code. Il n'est pas possible de diviser par zéro dans un code. Assurez-vous qu'il n'y a pas de \"/ 0\" ou de \"% 0\" dans votre code."
 
-#: ui/UIPractice.gd:608
+#: ui/UIPractice.gd:601
 msgid "Running Tests..."
 msgstr "Exécution des tests…"
 
@@ -2467,7 +2442,7 @@ msgstr "Sélectionnez le type de problème et décrivez-le dans le champ ci-dess
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr "Pour toute question ou aide à l'apprentissage, [url=%s]rejoignez la communauté sur Discord[/url]."
 
-#: ui/components/popups/ReportFormPopup.gd:132
+#: ui/components/popups/ReportFormPopup.gd:135
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr "Les traductions ne sont pas officielles et sont gérées par la communauté. Si vous souhaitez apporter votre aide, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]découvrez comment contribuer à la traduction de l'application[/url]."
 
@@ -2535,6 +2510,25 @@ msgstr "CONTINUER"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr "Apprenez à programmer à partir de zéro avec Godot"
+
+#~ msgid ""
+#~ "Sorry, we don't have this particular error message covered yet!\n"
+#~ "\n"
+#~ "Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
+#~ "\n"
+#~ "[center]Thank you![/center]"
+#~ msgstr ""
+#~ "Désolé, nous n'avons pas encore couvert ce message d'erreur en particulier !\n"
+#~ "\n"
+#~ "Veuillez utiliser le bouton [b]Signaler[/b] dans le coin supérieur droit pour nous en dire plus sur la façon dont vous l'avez rencontré, et nous essaierons d'améliorer notre base de connaissances pour la prochaine version de l'application.\n"
+#~ "\n"
+#~ "[center]Merci ![/center]"
+
+#~ msgid "Placeholder text"
+#~ msgstr "Texte en placeholder"
+
+#~ msgid "Explanation"
+#~ msgstr "Explication"
 
 #~ msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."
 #~ msgstr "La valeur delta doit figurer à l'intérieur des parenthèses de la fonction rotate(), et non à l'extérieur. Vous devez multiplier la valeur de la vitesse par delta à l'intérieur de l'appel, comme ceci : rotate(2 * delta)."

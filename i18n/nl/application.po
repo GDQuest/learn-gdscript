@@ -60,32 +60,6 @@ msgstr "Met delta"
 msgid "Constant distance"
 msgstr "Constante afstand"
 
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
-msgstr "De identificatie \"angular_speed\" is niet binnen de huidige scope gedeclareerd (op regel 6)."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
-msgstr "De functie [code]set_angular_speed()[/code] kan niet de variabele [code]angular_speed[/code] gebruiken omdat het niet script breed beschikbaar is. Het is ook niet beschikbaar binnen de functie [code]set_angular_speed()[/code]."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
-msgstr "Zorg ervoor dat je het definieert, buiten de functies, zodat het functioneert."
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid ""
-"Sorry, we don't have this particular error message covered yet!\n"
-"\n"
-"Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
-"\n"
-"[center]Thank you![/center]"
-msgstr ""
-"Sorry, we hebben deze specifieke foutmelding nog niet gedekt!\n"
-"\n"
-"Gebruik alsjeblieft de knop [b]Meld[/b] in de rechterbovenhoek om ons meer te vertellen over hoe je de foutmelding hebt gekregen en we zullen proberen onze kennisbank te verbeteren voor de volgende versie van de app.\n"
-"\n"
-"[center]Bedankt![/center]"
-
 #: course/lesson-12-using-variables/visuals/VariableDefinition.tscn
 #: course/lesson-28-specifying-types/SyntaxTypeHints.tscn
 msgid "var"
@@ -612,10 +586,6 @@ msgstr "stap"
 msgid "Debugger"
 msgstr "Debugger"
 
-#: ui/components/ScrollableTextBox.tscn
-msgid "Placeholder text"
-msgstr "Tijdelijke text"
-
 #: ui/components/popups/ConfirmPopup.tscn
 #: ui/components/popups/PracticeLeaveUnfinishedPopup.tscn
 msgid "Confirm"
@@ -1079,10 +1049,6 @@ msgstr ""
 "Probeer hem gerust nog eens om je geheugen op te frissen!"
 
 #: ui/screens/lesson/UIBaseQuiz.tscn
-msgid "Explanation"
-msgstr "Uitleg"
-
-#: ui/screens/lesson/UIBaseQuiz.tscn
 msgid "You need to try to answer once before you can skip a quiz."
 msgstr "Je moet de vraag eerst één keer proberen te beantwoorden voordat je een quiz kunt overslaan."
 
@@ -1376,6 +1342,18 @@ msgstr ""
 #: course/lesson-12-using-variables/fixing_error/TestFixingError.gd:78
 msgid "The set_angular_speed() function doesn't seem to use the angular_speed variable."
 msgstr ""
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:10
+msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
+msgstr "De identificatie \"angular_speed\" is niet binnen de huidige scope gedeclareerd (op regel 6)."
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:11
+msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
+msgstr "De functie [code]set_angular_speed()[/code] kan niet de variabele [code]angular_speed[/code] gebruiken omdat het niet script breed beschikbaar is. Het is ook niet beschikbaar binnen de functie [code]set_angular_speed()[/code]."
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:12
+msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
+msgstr "Zorg ervoor dat je het definieert, buiten de functies, zodat het functioneert."
 
 #: course/lesson-13-conditions/limiting_health/TestLimitingHealth.gd:13
 msgid "Health Does Not Go Above 80"
@@ -2378,17 +2356,17 @@ msgstr ""
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr ""
 
-#: ui/UILesson.gd:301
+#: ui/UILesson.gd:306
 msgid "Learn More"
 msgstr "Meer informatie"
 
-#: ui/UILesson.gd:331
+#: ui/UILesson.gd:351
 msgid ""
 "\n"
 "\n"
 msgstr ""
 
-#: ui/UILesson.gd:379
+#: ui/UILesson.gd:399
 msgid ""
 "\n"
 "[hr]\n"
@@ -2398,36 +2376,36 @@ msgstr ""
 msgid "(no previous history)"
 msgstr "(geen eerdere geschiedenis)"
 
-#: ui/UIPractice.gd:290
+#: ui/UIPractice.gd:286
 msgid "Hint %s"
 msgstr "Hint %s"
 
-#: ui/UIPractice.gd:328
+#: ui/UIPractice.gd:321
 msgid "Validating Your Code..."
 msgstr "Aan het valideren..."
 
-#: ui/UIPractice.gd:379
+#: ui/UIPractice.gd:372
 #, fuzzy
 msgid "The function '%s' calls itself, this creates an infinite loop"
 msgstr "De functie `%s` roept zichzelf aan, dit veroorzaakt een oneindige lus"
 
-#: ui/UIPractice.gd:390
+#: ui/UIPractice.gd:383
 msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr ""
 
-#: ui/UIPractice.gd:433
+#: ui/UIPractice.gd:426
 msgid "You typed \"%s\"; did you mean \"%s\"?"
 msgstr ""
 
-#: ui/UIPractice.gd:450
+#: ui/UIPractice.gd:443
 msgid "Running Your Code..."
 msgstr "Aan het uitvoeren..."
 
-#: ui/UIPractice.gd:462
+#: ui/UIPractice.gd:455
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "Er is een deling door nul in je code. Je mag niet delen door nul in code. Zorg ervoor dat er geen \"/ 0\" of \"% 0\" in je code staat."
 
-#: ui/UIPractice.gd:608
+#: ui/UIPractice.gd:601
 msgid "Running Tests..."
 msgstr "Aan het testen..."
 
@@ -2443,7 +2421,7 @@ msgstr ""
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr ""
 
-#: ui/components/popups/ReportFormPopup.gd:132
+#: ui/components/popups/ReportFormPopup.gd:135
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr ""
 
@@ -2510,6 +2488,25 @@ msgstr "GA VERDER"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid ""
+#~ "Sorry, we don't have this particular error message covered yet!\n"
+#~ "\n"
+#~ "Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
+#~ "\n"
+#~ "[center]Thank you![/center]"
+#~ msgstr ""
+#~ "Sorry, we hebben deze specifieke foutmelding nog niet gedekt!\n"
+#~ "\n"
+#~ "Gebruik alsjeblieft de knop [b]Meld[/b] in de rechterbovenhoek om ons meer te vertellen over hoe je de foutmelding hebt gekregen en we zullen proberen onze kennisbank te verbeteren voor de volgende versie van de app.\n"
+#~ "\n"
+#~ "[center]Bedankt![/center]"
+
+#~ msgid "Placeholder text"
+#~ msgstr "Tijdelijke text"
+
+#~ msgid "Explanation"
+#~ msgstr "Uitleg"
 
 #~ msgid "Second Track Is Well Positioned"
 #~ msgstr "Tweede baan is goed gepositioneerd"

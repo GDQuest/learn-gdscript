@@ -14,7 +14,7 @@ msgstr ""
 "Language-Team: Spanish <https://hosted.weblate.org/projects/learn-gdscript-from-zero/supplementary/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Generated-By: Babel 2.10.3\n"
@@ -22,167 +22,167 @@ msgstr ""
 
 #: script_checking/error_database.csv
 msgid "error_explanation"
-msgstr ""
+msgstr "error_explanation"
 
 #: script_checking/error_database.csv
 msgid "error_suggestion"
-msgstr ""
+msgstr "error_suggestion"
 
 #: script_checking/error_database.csv
 msgid "You get this error when:"
-msgstr ""
+msgstr "Este error se produce cuando:"
 
 #: script_checking/error_database.csv
 msgid "[ul]"
-msgstr ""
+msgstr "[ul]"
 
 #: script_checking/error_database.csv
 msgid "You write a function inside another function."
-msgstr ""
+msgstr "Has escrito una función dentro de otra función."
 
 #: script_checking/error_database.csv
 msgid "You write a piece of code that calculates a value, but that value is not used or assigned to a variable."
-msgstr ""
+msgstr "Escribes un fragmento de código que calcula un valor, pero ese valor no se utiliza ni se asigna a una variable."
 
 #: script_checking/error_database.csv
 msgid "[/ul]"
-msgstr ""
+msgstr "[/ul]"
 
 #: script_checking/error_database.csv
 msgid "The error means that you have a piece of code that's not having any effect because it is not used or placed in the correct context."
-msgstr ""
+msgstr "El error significa que tienes un fragmento de código que no tiene ningún efecto porque no se utiliza o no está situado en el contexto correcto."
 
 #: script_checking/error_database.csv
 msgid "If you wrote a function inside of another function, extract the inner function, place it later in your code, and remove the indentation."
-msgstr ""
+msgstr "Si has escrito una función dentro de otra, extrae la función interna, colócala más adelante en el código y elimina la sangría."
 
 #: script_checking/error_database.csv
 msgid "If you wrote some conditions or a piece of code that is meant to produce a value, make sure to store the result in a variable or use it in an [code]if[/code] statement or something that will use the value."
-msgstr ""
+msgstr "Si has escrito algunas condiciones o un fragmento de código destinado a generar un valor, asegúrate de almacenar el resultado en una variable o de utilizarlo en una instrucción [code]if[/code] o en algo que utilice dicho valor."
 
 #: script_checking/error_database.csv
 #, fuzzy
 msgid "You get this error when you use the result of a function that doesn't return a value."
-msgstr "Obtienes este error cuando usas un carácter especial que GDScript no reconoce."
+msgstr "Obtienes este error cuando usas el resultado de una función que no devuelve ningún valor."
 
 #: script_checking/error_database.csv
 msgid "Some functions only do an action, like [code]rotate()[/code] or [code]move_local_x()[/code]. These functions return no result, so there is no value to use in a calculation or to store in a variable."
-msgstr ""
+msgstr "Algunas funciones solo realizan una acción, como [code]rotate()[/code] o [code]move_local_x()[/code]. Estas funciones no devuelven ningún resultado, por lo que no hay ningún valor que puedas utilizar en un cálculo o almacenar en una variable."
 
 #: script_checking/error_database.csv
 msgid "For example, if you write [code]rotate(2) * delta[/code], you are asking Godot to multiply the result of [code]rotate(2)[/code] by [code]delta[/code]. But [code]rotate()[/code] doesn't return any result; it only rotates a sprite. So there is nothing to multiply by delta and you get this error."
-msgstr ""
+msgstr "Por ejemplo, si escribes [code]rotate(2) * delta[/code], le estás pidiendo a Godot que multiplique el resultado de [code]rotate(2)[/code] por [code]delta[/code]. Pero [code]rotate()[/code] no devuelve ningún resultado; solo gira un sprite. Por lo tanto, no hay nada que multiplicar por delta y aparece este error."
 
 #: script_checking/error_database.csv
 msgid "To solve this problem, you need to use a function that returns a value in your code or make the calculation somewhere else without using the result of a function call."
-msgstr ""
+msgstr "Para resolver este problema, debes usar una función que devuelva un valor en tu código o realizar el cálculo en otro lugar sin utilizar el resultado de una llamada a función."
 
 #: script_checking/error_database.csv
 msgid "For example, instead of writing [code]rotate(2) * delta[/code], you would write [code]rotate(2 * delta)[/code]."
-msgstr ""
+msgstr "Por ejemplo, en lugar de escribir [code]rotate(2) * delta[/code], deberías escribir [code]rotate(2 * delta)[/code]."
 
 #: script_checking/error_database.csv
 msgid "If you're not sure if a function returns a value, check the code reference."
-msgstr ""
+msgstr "Si no estás seguro de si una función devuelve un valor, consulta la referencia del código."
 
 #: script_checking/error_database.csv
 msgid "You get this error when you put parentheses [code]()[/code] after a variable, as if you were calling a function."
-msgstr ""
+msgstr "Este error aparece cuando pones paréntesis [code]()[/code] después de una variable, como si estuvieras llamando a una función."
 
 #: script_checking/error_database.csv
 msgid "The parentheses tell Godot to call that name as a function. The problem is that the variable holds a value like a number, a string, part of a vector, etc., and not a function, so you cannot call it as a function."
-msgstr ""
+msgstr "Los paréntesis le indican a Godot que llame a ese nombre como una función. El problema es que la variable contiene un valor, como un número, una cadena, parte de un vector, etc., y no una función, por lo que no puedes llamarla como tal."
 
 #: script_checking/error_database.csv
 msgid "For example, [code]position.x[/code] is a [code]float[/code]. Writing [code]position.x()[/code] makes Godot try to call a function named [code]x[/code]."
-msgstr ""
+msgstr "Por ejemplo, [code]position.x[/code] es un [code]float[/code]. Al escribir [code]position.x()[/code], Godot intenta llamar a una función llamada [code]x[/code]."
 
 #: script_checking/error_database.csv
 msgid "Look at the name right before the parentheses in the error message, and remove those parentheses."
-msgstr ""
+msgstr "Fíjate en el nombre que aparece justo antes de los paréntesis en el mensaje de error y elimina esos paréntesis."
 
 #: script_checking/error_database.csv
 msgid "If you want to [b]store or change[/b] a value, use the [b]=[/b] symbol. For example, [code]health = 10[/code] or [code]position.x = 100.0[/code]."
-msgstr ""
+msgstr "Si quieres [b]almacenar o modificar[/b] un valor, utiliza el símbolo [b]=[/b]. Por ejemplo, [code]health = 10[/code] o [code]position.x = 100.0[/code]."
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "If you meant to [b]use[/b] the value, write it without the parentheses. For example, [code]var new_health = health + 20[/code]."
-msgstr ""
+msgstr "Si querías [b]usar[/b] el valor, escríbelo sin los paréntesis. Por ejemplo, [code]var new_health = health + 20[/code]."
 
 #: script_checking/error_database.csv
 msgid "This error message tells you that Godot couldn't find the member variable you're trying to access. There are two common reasons for this:"
-msgstr ""
+msgstr "Este mensaje de error te indica que Godot no ha podido encontrar la variable miembro a la que intentas acceder. Hay dos razones habituales para ello:"
 
 #: script_checking/error_database.csv
 #, fuzzy
 msgid "1. There is a typo in the name of the member variable."
-msgstr "Es probable que haya un error tipográfico en el nombre de la subvariable a la que intentas acceder."
+msgstr "1. Hay un error tipográfico en el nombre de la variable miembro."
 
 #: script_checking/error_database.csv
 msgid "2. The value before the dot (.) is not the type of value you expect, so it does not have that member variable."
-msgstr ""
+msgstr "2. El valor que precede al punto (.) no es del tipo que esperas, por lo que no tiene esa variable miembro."
 
 #: script_checking/error_database.csv
 msgid "For example, let's say you have a variable representing a number of characters: [code]var character = 5[/code] and you try to access the [code]y[/code] member variable on it: [code]character.y[/code]. Because [code]character[/code] is a whole number, it has no [code]y[/code] member variable. The error message tells you the type it found ([code]int[/code] in this case)."
-msgstr ""
+msgstr "Por ejemplo, supongamos que tienes una variable que representa un número de caracteres: [code]var character = 5[/code] y intentas acceder a la variable miembro [code]y[/code] de la misma: [code]character.y[/code]. Como [code]character[/code] es un número entero, no tiene ninguna variable miembro [code]y[/code]. El mensaje de error te indica el tipo que ha encontrado ([code]int[/code] en este caso)."
 
 #: script_checking/error_database.csv
 #, fuzzy
 msgid "You also get this error when you try to access a member variable on a [code]null[/code] value (an empty variable)."
-msgstr "Obtienes este error cuando intentas asignar un valor a algo que no es una variable."
+msgstr "También obtienes este error cuando intentas acceder a una variable miembro de un valor [code]null[/code] (una variable vacía)."
 
 #: script_checking/error_database.csv
 msgid "Look at the value before the dot in the line with the error."
-msgstr ""
+msgstr "Fíjate en el valor que aparece antes del punto en la línea donde se produce el error."
 
 #: script_checking/error_database.csv
 msgid "Make sure that the names before and after the dot have no typos. Any difference like a capital letter, one letter missing or being added, or letters being swapped can cause this error."
-msgstr ""
+msgstr "Asegúrate de que los nombres que aparecen antes y después del punto no contengan errores ortográficos. Cualquier diferencia, como una letra mayúscula, una letra que falte o se haya añadido, o letras intercambiadas, puede provocar este error."
 
 #: script_checking/error_database.csv
 msgid "If the value is the wrong type, check where it comes from. Is it a [code]Vector2[/code] or [code]int[/code]? A [code]Vector2[/code] has [code]x[/code] and [code]y[/code] member variables, but an [code]int[/code] does not."
-msgstr ""
+msgstr "Si el valor es de un tipo incorrecto, comprueba de dónde procede. ¿Es un [code]Vector2[/code] o un [code]int[/code]? Un [code]Vector2[/code] tiene las variables miembro [code]x[/code] y [code]y[/code], pero un [code]int[/code] no las tiene."
 
 #: script_checking/error_database.csv
 msgid "This error message tells you that Godot did not find the function you are trying to call. This either means that:"
-msgstr ""
+msgstr "Este mensaje de error te indica que Godot no ha encontrado la función que estás intentando llamar. Esto significa que:"
 
 #: script_checking/error_database.csv
 msgid "1. The function does not exist."
-msgstr ""
+msgstr "1. La función no existe."
 
 #: script_checking/error_database.csv
-#, fuzzy
 msgid "2. There is a typo in the name of the function you are trying to call."
-msgstr "Es probable que haya un error tipográfico en el nombre de la subvariable a la que intentas acceder."
+msgstr "2. Hay un error de escritura en el nombre de la función que intentas llamar."
 
 #: script_checking/error_database.csv
 msgid "While we humans can read words even when they are spelled incorrectly, the computer only understands exact matches. For a computer, [i]3[/i] and [i]three[/i] or [i]foward[/i] (missing an [i]r[/i]) and [i]forward[/i] are not the same thing."
-msgstr ""
+msgstr "Aunque los seres humanos podemos leer palabras aunque estén mal escritas, la computadora solo entiende coincidencias exactas. Para una computadora, [i]3[/i] y [i]three[/i], o [i]foward[/i] (a la que le falta una [i]r[/i]) y [i]forward[/i], no son lo mismo."
 
 #: script_checking/error_database.csv
 msgid "Look at the function name in the error message. Carefully compare it with the function names listed in the practice goals or the functions already in your code."
-msgstr ""
+msgstr "Fíjate en el nombre de la función que aparece en el mensaje de error. Compáralo detenidamente con los nombres de las funciones que figuran en los objetivos de práctica o con las funciones que ya hay en tu código."
 
 #: script_checking/error_database.csv
 msgid "Are there any differences? Whether it's one letter, an underscore ('_'), or a capital letter? If you spot any differences, change the function name in your code."
-msgstr ""
+msgstr "¿Hay alguna diferencia? ¿Se trata de una letra, un guion bajo («_») o una mayúscula? Si detectas alguna diferencia, cambia el nombre de la función en tu código."
 
 #: script_checking/error_database.csv
 msgid "This error message tells you that the values you used with an operator are not compatible with each other. For example, you can add two [code]Vector2[/code] values together, but you cannot add a [code]Vector2[/code] and an [code]int[/code] (a whole number) like [code]Vector2(1, 1) + 3[/code]."
-msgstr ""
+msgstr "Este mensaje de error te indica que los valores que has utilizado con un operador no son compatibles entre sí. Por ejemplo, puedes sumar dos valores [code]Vector2[/code], pero no puedes sumar un [code]Vector2[/code] y un [code]int[/code] (un número entero) como [code]Vector2(1, 1) + 3[/code]."
 
 #: script_checking/error_database.csv
 msgid "Operators are like recipes: each one only works with specific ingredients (kinds of values). The [code]+[/code] operator knows how to combine two numbers, or two vectors, but it cannot mix a vector and a number. For numeric values, the rules usually follow the ones you've learned in math classes: you can multiply, divide, or add numbers together. You can multiply or divide a [code]Vector2[/code] by a number. And so on."
-msgstr ""
+msgstr "Los operadores son como recetas: cada uno solo funciona con ingredientes específicos (tipos de valores). El operador [code]+[/code] sabe cómo combinar dos números o dos vectores, pero no puede mezclar un vector y un número. En el caso de los valores numéricos, las reglas suelen seguir las que has aprendido en clase de matemáticas: puedes multiplicar, dividir o sumar números. Puedes multiplicar o dividir un [code]Vector2[/code] por un número. Y así sucesivamente."
 
 #: script_checking/error_database.csv
 msgid "First, identify the two values the error message points to. Are they compatible? If you're adding or subtracting, they should be the same type: two numbers or two vectors."
-msgstr ""
+msgstr "En primer lugar, identifica los dos valores a los que se refiere el mensaje de error. ¿Son compatibles? Si estás sumando o restando, deben ser del mismo tipo: dos números o dos vectores."
 
 #: script_checking/error_database.csv
 msgid "When working with variables, think about the value they hold. [code]position[/code], for example, holds a [code]Vector2[/code], so you can add another [code]Vector2[/code] to it directly: [code]position = position + Vector2(1, 1)[/code]. Or you can change one component, like [code]position.x = position.x + 1[/code]."
-msgstr ""
+msgstr "Cuando trabajes con variables, piensa en el valor que contienen. [code]position[/code], por ejemplo, contiene un [code]Vector2[/code], por lo que puedes añadirle otro [code]Vector2[/code] directamente: [code]position = position + Vector2(1, 1)[/code]. O puedes cambiar un componente, como [code]position.x = position.x + 1[/code]."
 
 #: script_checking/error_database.csv
 msgid "You get this error when the name between the [code]for[/code] and [code]in[/code] is not a valid variable name, or you are missing the [code]in[/code] keyword."
@@ -210,7 +210,7 @@ msgstr "[code]for cell_position in cell_positions_array:"
 
 #: script_checking/error_database.csv
 msgid "    cell_position.x += 1.0[/code]"
-msgstr ""
+msgstr "    cell_position.x += 1.0[/code]"
 
 #: script_checking/error_database.csv
 msgid "You get this error when you try to assign a value to something that is not a variable."
@@ -298,7 +298,7 @@ msgstr "Tiene dos posibles causas:"
 
 #: script_checking/error_database.csv
 msgid "1. You used the class name in the class itself."
-msgstr ""
+msgstr "1. Has utilizado el nombre de la clase dentro de la propia clase."
 
 #: script_checking/error_database.csv
 msgid "2. Your code refers to another class that refers to this class, causing an endless reference cycle."
@@ -402,7 +402,7 @@ msgstr "Este error se produce en varios casos:"
 
 #: script_checking/error_database.csv
 msgid "1. You wrote an identifier (variable or function name) in the wrong place."
-msgstr ""
+msgstr "1. Has escrito un identificador (nombre de variable o de función) en un lugar incorrecto."
 
 #: script_checking/error_database.csv
 msgid "2. You wrote a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], and you did not follow it by a name."
@@ -410,7 +410,7 @@ msgstr "2. Escribiste una palabra clave como [code]var[/code], [code]func[/code]
 
 #: script_checking/error_database.csv
 msgid "3. You wrote a function definition but forgot the parentheses before the colon."
-msgstr ""
+msgstr "3. Has escrito la definición de una función, pero te has olvidado de los paréntesis antes de los dos puntos."
 
 #: script_checking/error_database.csv
 msgid "If the error tells you it expected something, you likely forgot to write a name after a keyword like [code]var[/code], [code]func[/code], [code]for[/code], or [code]signal[/code], making your code invalid. Or you forgot parentheses in a function definition. You can address the error by adding the missing name or parentheses."

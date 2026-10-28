@@ -66,34 +66,6 @@ msgstr "带delta"
 msgid "Constant distance"
 msgstr "恒定距离"
 
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-#, fuzzy
-msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
-msgstr "标识符“angular_speed”在当前作用域中未被声明（第 6 行）。"
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-#, fuzzy
-msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
-msgstr "[code]set_angular_speed()[/code]函数无法使用[code]angular_speed[/code]变量，因为该变量并非全局变量。此外，该变量在[code]set_angular_speed()[/code]函数中也不存在。"
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
-msgstr "请务必在 [code] set_angular_speed ()[/code] 函数里定义 [code] angular_speed [/code] 变量，要么就把它定义在函数外面，这样整个脚本都能用到它。"
-
-#: course/lesson-12-using-variables/visuals/ErrorAccess.tscn
-msgid ""
-"Sorry, we don't have this particular error message covered yet!\n"
-"\n"
-"Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
-"\n"
-"[center]Thank you![/center]"
-msgstr ""
-"抱歉，我们还没有处理这条错误消息！\n"
-"\n"
-"请使用右上角的[b]报告[/b]按钮，告诉我们你是如何得到这个错误的，我们会尝试在下个版本的应用程序中改善知识库。\n"
-"\n"
-"[center]谢谢！[/center]"
-
 #: course/lesson-12-using-variables/visuals/VariableDefinition.tscn
 #: course/lesson-28-specifying-types/SyntaxTypeHints.tscn
 #, fuzzy
@@ -716,10 +688,6 @@ msgstr "步骤"
 msgid "Debugger"
 msgstr "调试"
 
-#: ui/components/ScrollableTextBox.tscn
-msgid "Placeholder text"
-msgstr "占位文本"
-
 #: ui/components/popups/ConfirmPopup.tscn
 #: ui/components/popups/PracticeLeaveUnfinishedPopup.tscn
 msgid "Confirm"
@@ -1195,10 +1163,6 @@ msgstr ""
 "欢迎再次尝试以温故知新！"
 
 #: ui/screens/lesson/UIBaseQuiz.tscn
-msgid "Explanation"
-msgstr "说明"
-
-#: ui/screens/lesson/UIBaseQuiz.tscn
 #, fuzzy
 msgid "You need to try to answer once before you can skip a quiz."
 msgstr "您需要先尝试回答一次，才能跳过该测验。"
@@ -1539,6 +1503,20 @@ msgstr "缺少 'set_angular_speed(new_angular_speed)' 函数；是你删除了�
 #, fuzzy
 msgid "The set_angular_speed() function doesn't seem to use the angular_speed variable."
 msgstr "set_angular_speed() 函数似乎没有使用 angular_speed 变量。"
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:10
+#, fuzzy
+msgid "The identifier \"angular_speed\" isn't declared in the current scope (at line 6)."
+msgstr "标识符“angular_speed”在当前作用域中未被声明（第 6 行）。"
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:11
+#, fuzzy
+msgid "The [code]set_angular_speed()[/code] function can't use the [code]angular_speed[/code] variable because it isn't script-wide. It also isn't in the [code]set_angular_speed()[/code] function."
+msgstr "[code]set_angular_speed()[/code]函数无法使用[code]angular_speed[/code]变量，因为该变量并非全局变量。此外，该变量在[code]set_angular_speed()[/code]函数中也不存在。"
+
+#: course/lesson-12-using-variables/visuals/ErrorAccess.gd:12
+msgid "Make sure you define the [code]angular_speed[/code] variable in the [code]set_angular_speed()[/code] function, or define it outside of functions so it's script-wide."
+msgstr "请务必在 [code] set_angular_speed ()[/code] 函数里定义 [code] angular_speed [/code] 变量，要么就把它定义在函数外面，这样整个脚本都能用到它。"
 
 #: course/lesson-13-conditions/limiting_health/TestLimitingHealth.gd:13
 #, fuzzy
@@ -2759,11 +2737,11 @@ msgstr "机器人的受损程度未达预期。它的生命值为 %s，但在受
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "看起来你并没有从生命值中减去 amount。"
 
-#: ui/UILesson.gd:301
+#: ui/UILesson.gd:306
 msgid "Learn More"
 msgstr "了解更多"
 
-#: ui/UILesson.gd:331
+#: ui/UILesson.gd:351
 msgid ""
 "\n"
 "\n"
@@ -2771,7 +2749,7 @@ msgstr ""
 "\n"
 "\n"
 
-#: ui/UILesson.gd:379
+#: ui/UILesson.gd:399
 msgid ""
 "\n"
 "[hr]\n"
@@ -2783,37 +2761,37 @@ msgstr ""
 msgid "(no previous history)"
 msgstr "（没有更早的历史）"
 
-#: ui/UIPractice.gd:290
+#: ui/UIPractice.gd:286
 msgid "Hint %s"
 msgstr "提示 %s"
 
-#: ui/UIPractice.gd:328
+#: ui/UIPractice.gd:321
 msgid "Validating Your Code..."
 msgstr "正在校验你的代码..."
 
-#: ui/UIPractice.gd:379
+#: ui/UIPractice.gd:372
 #, fuzzy
 msgid "The function '%s' calls itself, this creates an infinite loop"
 msgstr "函数 `%s` 调用自身，这造成了一个无限循环"
 
-#: ui/UIPractice.gd:390
+#: ui/UIPractice.gd:383
 #, fuzzy
 msgid "You have a loop that runs forever without a break statement. This would freeze the app."
 msgstr "你的 while 循环会无限运行（while true），且没有 break 语句。这将导致应用程序卡死。"
 
-#: ui/UIPractice.gd:433
+#: ui/UIPractice.gd:426
 msgid "You typed \"%s\"; did you mean \"%s\"?"
 msgstr ""
 
-#: ui/UIPractice.gd:450
+#: ui/UIPractice.gd:443
 msgid "Running Your Code..."
 msgstr "正在运行你的代码..."
 
-#: ui/UIPractice.gd:462
+#: ui/UIPractice.gd:455
 msgid "There is a division by zero in your code. You cannot divide by zero in code. Please ensure you have no \"/ 0\" or \"% 0\" in your code."
 msgstr "你的代码中存在除以0的情况。你不能在代码中除以0。请确保你的代码中没有“/ 0”或“% 0”。"
 
-#: ui/UIPractice.gd:608
+#: ui/UIPractice.gd:601
 msgid "Running Tests..."
 msgstr "正在运行测试..."
 
@@ -2830,7 +2808,7 @@ msgstr "请选择问题类型并在下面的框中描述问题，然后点击“
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr "如有任何疑问或需要学习方面的帮助，请[url=https://discord.gg/bNj469SYQj]加入 Discord 社区[/url]。"
 
-#: ui/components/popups/ReportFormPopup.gd:132
+#: ui/components/popups/ReportFormPopup.gd:135
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr "翻译均为非官方版本，由社区维护。如果您想提供帮助，请[url=https://github.com/GDQuest/learn-gdscript-translations/#readme]了解如何帮助翻译应用程序[/url]。"
 
@@ -2899,6 +2877,25 @@ msgstr "继续"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr "从零开始学习的godot"
+
+#~ msgid ""
+#~ "Sorry, we don't have this particular error message covered yet!\n"
+#~ "\n"
+#~ "Please, use the [b]Report[/b] button in the top-right corner to tell us more about how you've got it, and we will try to improve our knowledge base for the next version of the application.\n"
+#~ "\n"
+#~ "[center]Thank you![/center]"
+#~ msgstr ""
+#~ "抱歉，我们还没有处理这条错误消息！\n"
+#~ "\n"
+#~ "请使用右上角的[b]报告[/b]按钮，告诉我们你是如何得到这个错误的，我们会尝试在下个版本的应用程序中改善知识库。\n"
+#~ "\n"
+#~ "[center]谢谢！[/center]"
+
+#~ msgid "Placeholder text"
+#~ msgstr "占位文本"
+
+#~ msgid "Explanation"
+#~ msgstr "说明"
 
 #, fuzzy
 #~ msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."

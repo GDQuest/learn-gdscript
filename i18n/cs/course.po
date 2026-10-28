@@ -1844,6 +1844,11 @@ msgstr ""
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-6-multiple-function-parameters/lesson.bbcode:193
+msgid "Remember that the turtle only knows a few functions: [code]move_forward()[/code] to draw a straight line and [code]turn_right()[/code] to the right. Call these functions with the correct arguments to draw the square."
+msgstr ""
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:193
 msgid "[b]Important:[/b] When the turtle finishes drawing, it should face right. So you need to turn right a total of four times."
 msgstr ""
 
@@ -1877,60 +1882,60 @@ msgid "Make sure to [code]turn_right(90)[/code] after moving forward to create e
 msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "Drawing rectangles of any size"
 msgstr "Kreslení obdélníků libovolné velikosti"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 #, fuzzy
 msgid "Let's create a function to draw rectangles with any length and height."
 msgstr "S pomocí dvou parametrů nakódujte funkci, která vykreslí rohy s libovolným úhlem."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "I will call your function twice with different sizes:"
 msgstr ""
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid ""
 "[code]draw_rectangle(260, 180)[/code]\n"
 "[code]draw_rectangle(160, 210)[/code]"
 msgstr ""
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "Your function needs two parameters: [code]length[/code] and [code]height[/code]. When the app calls your function, the first number replaces [code]length[/code], and the second number replaces [code]height[/code]."
 msgstr ""
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "Use [code]length[/code] when you move horizontally and [code]height[/code] when you move vertically."
 msgstr ""
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "This is the pattern you need to follow: move forward by [code]length[/code], turn right, move forward by [code]height[/code], turn right, then repeat this sequence once more."
 msgstr ""
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "[b]Important:[/b] When the turtle finishes drawing, it should face right. Make sure you turn right four times in total."
 msgstr ""
 
 #. TRANSLATORS: Practice description
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "With one parameter, you can make squares of any size. With two, you can draw any rectangle! You'll do so in this practice."
 msgstr "Pomocí jednoho parametru můžete vytvořit čtverce libovolné velikosti. Se dvěma můžete nakreslit libovolný obdélník! Zkusíte si to v tomto cvičení."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "You need to specify the two parameters in the function definition"
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 #, fuzzy
 msgid "Use [code]func draw_rectangle(length, height):[/code]"
 msgstr ""
@@ -1939,7 +1944,7 @@ msgstr ""
 "[/code]"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-6-multiple-function-parameters/lesson.bbcode:220
+#: course/lesson-6-multiple-function-parameters/lesson.bbcode:222
 msgid "When calling move_forward, you need to alternate between using the length and the height arguments when calling move_forward."
 msgstr ""
 
@@ -2540,12 +2545,8 @@ msgstr "Která z těchto možností by zvýšila zdraví robota?"
 
 #. TRANSLATORS: Quiz explanation
 #: course/lesson-9-adding-and-subtracting/lesson.bbcode:36
-msgid ""
-"Both of these lines increase the [code]health[/code] of the robot by [code]amount[/code].\n"
-"[code]\n"
-"health += amount\n"
-"health = health + amount\n"
-"[/code]"
+#, fuzzy
+msgid "Both of these lines increase the [code]health[/code] of the robot by [code]amount[/code]."
 msgstr ""
 "Oba tyto řádky zvýší [code] health[/code] robota o [code] amount[/code].\n"
 "[code]\n"
@@ -2573,81 +2574,81 @@ msgstr "health = health + amount"
 msgid "health = health - amount"
 msgstr "health = health - amount"
 
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:52
 msgid "In the following practices, you'll code the [code]take_damage()[/code] and [code]heal()[/code] functions so the robot's health can decrease and increase."
 msgstr "V následujících postupech nakódujete funkce [code]take_damage()[/code] a [code]heal()[/code] ke snížení a zvýšení zdraví robota."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:52
 msgid "Damaging the Robot"
 msgstr "Poškozování robota"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:52
 msgid "In our game, the main character has a certain amount of [code]health[/code]. When it gets hit, the health should go down by a varying [code]amount[/code] of damage."
 msgstr "V naší hře má hlavní postava určité množství [code]health[/code] (zdraví). Když dostane zásah, mělo by se zdraví snížit o různé [code]amount[/code] (množství) poškození."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:52
 #, fuzzy
 msgid "Add an instruction to the [code]take_damage()[/code] function so it subtracts [code]amount[/code] from the [code]health[/code] variable."
 msgstr "Přidejte něco do funkce [code]take_damage()[/code] k tomu, aby odečítala [code]amount[/code] z předdefinované proměnné [code]health[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:52
 #, fuzzy
 msgid "I will call the [code]take_damage()[/code] function like this when you run the practice: [code]take_damage(50)[/code]"
 msgstr "Přidejte něco do funkce [code]take_damage()[/code] k tomu, aby odečítala [code]amount[/code] z předdefinované proměnné [code]health[/code]."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:52
 msgid "Learn how to deal damage to entities like our robot."
 msgstr "Naučte se způsobovat poškození entitám, jako je náš robot."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:50
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:52
 #, fuzzy
 msgid "Add an instruction to subtract [code]amount[/code] from [code]health[/code]."
 msgstr "Na řádku 2 odečteme [code]amount[/code](určité množství) od [code]health[/code]."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 msgid "Healing the Robot"
 msgstr "Léčení robota"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 msgid "It's time to heal the robot up to full health!"
 msgstr "Je čas vyléčit robota až do plného zdraví!"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 msgid "Write a function called [code]heal()[/code] that takes [code]amount[/code] as a parameter."
 msgstr "Napište funkci s názvem [code]heal()[/code], která jako parametr převezme [code]amount[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 msgid "The function should add [code]amount[/code] to [code]health[/code]."
 msgstr "Funkce by měla přidat [code]amount[/code] do [code]health[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 msgid "The robot starts with 50 health and will heal 50 to get it up to 100."
 msgstr "Robot začíná s 50 zdravím a vyléčí 50, aby se dostal až na 100."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 msgid "Our robot needs healing after that practice! Create a function to heal it back to full health."
 msgstr "Náš robot potřebuje po tomto tréninku uzdravit! Vytvořte funkci, která ho uzdraví."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 #, fuzzy
 msgid "Define the [code]heal()[/code] function using [code]func[/code]"
 msgstr "Použili jsme funkci [code]range()[/code] v kombinaci s cykly [code]for[/code]."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-9-adding-and-subtracting/lesson.bbcode:72
+#: course/lesson-9-adding-and-subtracting/lesson.bbcode:74
 msgid "The first line is [code]func heal(amount):[/code]"
 msgstr ""
 
@@ -3895,29 +3896,6 @@ msgstr "Pro vynásobení hodnot dohromady použijeme [code]*[/code]."
 msgid "What is the value of damage?"
 msgstr "Jaká je hodnota škody?"
 
-#. TRANSLATORS: Quiz content
-#: course/lesson-14-multiplying/lesson.bbcode:47
-#: course/lesson-14-multiplying/lesson.bbcode:63
-msgid ""
-"[code]\n"
-"var level = 5\n"
-"var power = 3"
-msgstr ""
-"[code]\n"
-"var level = 5\n"
-"var power = 3"
-
-#. TRANSLATORS: Quiz content
-#: course/lesson-14-multiplying/lesson.bbcode:47
-msgid ""
-"func calculate_damage():\n"
-"\tvar damage = power * level\n"
-"[/code]"
-msgstr ""
-"func calculate_damage():\n"
-"\tvar damage = power * level\n"
-"[/code]"
-
 #. TRANSLATORS: Quiz explanation
 #: course/lesson-14-multiplying/lesson.bbcode:47
 msgid "We multiply [code]power[/code] by [code]level[/code] using [code]*[/code] to get the result of [code]15[/code]."
@@ -3931,19 +3909,6 @@ msgstr "Stejně jako [code]*=[/code] můžeme použít [code]-=[/code] a [code]+
 #: course/lesson-14-multiplying/lesson.bbcode:63
 msgid "What is the value of damage now?"
 msgstr "Jaká je nyní hodnota škody?"
-
-#. TRANSLATORS: Quiz content
-#: course/lesson-14-multiplying/lesson.bbcode:63
-msgid ""
-"func calculate_damage():\n"
-"\tvar damage = power * level\n"
-"\tdamage *= 2\n"
-"[/code]"
-msgstr ""
-"func calculate_damage():\n"
-"\tvar damage = power * level\n"
-"\tdamage *= 2\n"
-"[/code]"
 
 #. TRANSLATORS: Quiz explanation
 #: course/lesson-14-multiplying/lesson.bbcode:63
@@ -5069,56 +5034,56 @@ msgid "0, 0, and 0"
 msgstr "0, 0 a 0"
 
 #. TRANSLATORS: Heading
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:38
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:39
 msgid "Making the turtle walk, with a loop"
 msgstr "Chůze želvy se smyčkou"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:42
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:43
 msgid "In the previous lesson, you made a turtle walk along a path by writing [code]Vector2[/code] coordinates in an array."
 msgstr "V předchozí lekci jste vytvořili želvu, která se prochází po cestě tak, že jste do pole zapsali souřadnice [code]Vector2[/code]."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:48
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:49
 msgid "It's a [code]for[/code] loop that makes the turtle walk along the path."
 msgstr "Je to smyčka [code]for[/code], která způsobuje, že želva chodí po cestě."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:49
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:50
 msgid "The loop works like this: for each coordinate in the array, it moves the turtle once to that cell."
 msgstr "Smyčka funguje takto: pro každou souřadnici v poli přesune želvu jednou do této buňky."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:54
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:55
 msgid "It's the same principle with unit selection."
 msgstr "Stejný princip platí i pro výběr jednotek."
 
 #. TRANSLATORS: Note title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:54
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:55
 #, fuzzy
 msgid "How do you know to name the variable cell?"
 msgstr "Jak přistupujete k dílčím proměnným?"
 
 #. TRANSLATORS: Note content
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:55
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:56
 msgid "The variable [code]cell[/code] defined right after the [code]for[/code] keyword is the name of the loop's [b]cursor[/b] variable. In each loop iteration, Godot assigns a value from the path to this variable."
 msgstr ""
 
 #. TRANSLATORS: Note content
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:56
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:57
 msgid "The variable name [code]cell[/code] is arbitrary; you could call it [code]coordinate[/code] or [code]point[/code] if you wanted. This code does the same thing as the code above, but with a different variable name:"
 msgstr ""
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:68
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:69
 #, fuzzy
 msgid "For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it."
 msgstr "Pro každou souřadnici v poli s názvem [code]selected_units[/code] zkontrolujeme, zda se v dané buňce nachází jednotka. Pokud ano, vybereme ji."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:69
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:70
 msgid "In that case, we use an array, a loop, and a condition together."
 msgstr "V takovém případě použijeme společně pole, cyklus a podmínku."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:81
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:82
 msgid "The code above uses several features you haven't learned yet:"
 msgstr "Výše uvedený kód používá několik funkcí, které jste se ještě nenaučili:"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:82
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
 msgid ""
 "- In a condition, the [code]in[/code] keyword allows you to check if a value exists [i]in[/i] an array.\n"
 "- The array's [code]append()[/code] function appends a new value at the end of the array."
@@ -5126,118 +5091,118 @@ msgstr ""
 "- V podmínce vám klíčové slovo [code]in[/code] umožňuje zkontrolovat, zda existuje hodnota [i]v[/i] v poli.\n"
 "- Funkce pole [code]append()[/code] připojí novou hodnotu na konec pole."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:84
 msgid "Notice the use of a period after the [code]selected_units[/code] variable, to call the [code]append()[/code] function. It's because this function exists only on arrays."
 msgstr "Všimněte si použití tečky za proměnnou [code]selected_units[/code] pro volání funkce [code]append()[/code]. Je to proto že tuto funkci lze volat pouze z pole."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:84
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:85
 msgid "When functions exist only on a specific value type, you write a dot after the value to call the function on it."
 msgstr "Pokud funkce existují pouze na určitém typu hodnoty, napíšete za identifikátorem hodnoty(proměnná, funkce) tečku, aby se funkce na ní zavolala."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:85
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:86
 msgid "We'll revisit those two features again in the following lessons."
 msgstr "K těmto dvěma funkcím se znovu vrátíme v následujících lekcích."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 #, fuzzy
 msgid "The beauty of loops is that they work regardless of the size of your arrays."
 msgstr "Krása smyček spočívá v tom, že fungují bez ohledu na velikost pole."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:93
 msgid "The code just works whether you have one or ten thousand units to select. It is all accomplished with only a couple lines of code."
 msgstr "Kód prostě funguje, ať už máte na výběr jednu nebo deset tisíc jednotek. Toho všeho je dosaženo pomocí pouhých několika řádků kódu."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:93
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:94
 msgid "That's the power of computer programming."
 msgstr "V tom je síla počítačového programování."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:94
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:95
 msgid "In the following practices, you will use arrays combined with [code]for[/code] loops to achieve similar results."
 msgstr "V následujících postupech budete k dosažení podobných výsledků používat pole v kombinaci s cykly [code]for[/code]."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "Move the robot along the path"
 msgstr "Pohyb robota po cestě"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "Our AI pathfinding algorithm provided a path for the robot to move to the right edge of the grid. Your task is to use a [code]for[/code] loop to make the robot move."
 msgstr "Náš algoritmus pro hledání cesty s umělou inteligencí určil robotovi cestu k pravému okraji mřížky. Vaším úkolem je pomocí smyčky [code]for[/code] přimět robota k pohybu."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "To move the robot, call [i]its[/i] [code]move_to()[/code] function, like so: [code]robot.move_to()[/code]."
 msgstr "Chcete-li robota přesunout, zavolejte [i]jeho[/i] funkci [code]move_to()[/code], a to takto: [code]robot.move_to()[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "The [code]move_to()[/code] function only exists on the robot, which is why you need to access it this way."
 msgstr "Funkce [code]move_to()[/code] existuje pouze na robotovi, a proto k ní musíte přistupovat tímto způsobem."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "Our AI pathfinding algorithm is giving us a path to move the robot. Now, you need to make the turtle move along the path."
 msgstr "Náš algoritmus pro hledání cesty s umělou inteligencí nám určuje cestu, po které se má robot pohybovat. Nyní je třeba, aby se po této cestě pohybovala želva."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "You should start with a for loop that iterates over every cell in [code]robot_path[/code]."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 #, fuzzy
 msgid "You need to pass the cell position to the robot's [code]move_to()[/code] function in the loop."
 msgstr "Musíte je odstranit shora dolů pomocí funkce [code]pop_back()[/code]."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "Back to the drawing board"
 msgstr "Zpět k rýsovacímu prknu"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "We want to draw many rectangles, something surprisingly common in games."
 msgstr "Chceme nakreslit mnoho obdélníků, což je ve hrách překvapivě běžné."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "However, writing this code by hand can get tedious. Instead, you could store the size of your shapes in arrays and use a loop to draw them all in batches."
 msgstr "Psaní tohoto kódu ručně však může být zdlouhavé. Místo toho můžete ukládat velikosti tvarů do polí a pomocí smyčky je všechny nakreslit v dávkách."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "That's what you'll do in this practice."
 msgstr "Zkusíme si to v tomto cvičení."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "Use a [code]for[/code] loop to draw every rectangle in the [code]rectangle_sizes[/code] array with the [code]draw_rectangle()[/code] function."
 msgstr "Pomocí smyčky [code]for[/code] nakreslete každý obdélník v poli [code]rectangle_sizes[/code] pomocí funkce [code]draw_rectangle()[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "The rectangles shouldn't overlap or cross each other. To avoid that, you'll need to call the [code]jump()[/code] function."
 msgstr "Obdélníky by se neměly překrývat ani křížit. Abyste tomu zabránili, musíte volat funkci [code]jump()[/code]."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "The drawing turtle makes its comeback. Fear not! Armed with loops, you'll make it draw faster than ever before."
 msgstr "Kreslící želva se vrací na scénu. Neboj se! Vyzbrojeni smyčkami, budete kreslit rychleji než kdy předtím."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "Each value in the [code]rectangle_sizes[/code] array is a [code]Vector2[/code]. You'll need to access its [code]x[/code] and [code]y[/code] sub-components to draw rectangles."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "In the loop, you first need to call [code]draw_rectangle()[/code], and then [code]jump()[/code]. Otherwise, at least two rectangles will overlap."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:123
 msgid "The arguments when calling [code]jump()[/code] can just be large enough to space out the rectangles. For example, [code]jump(300, 0)[/code]"
 msgstr ""
 
@@ -6000,12 +5965,17 @@ msgstr ""
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-24-access-array-indices/lesson.bbcode:67
+msgid "Your task is to find the sword and the shield in the array using their index, then call [code]use_item()[/code] on each of them so the player can equip those items."
+msgstr ""
+
+#. TRANSLATORS: Practice goal
+#: course/lesson-24-access-array-indices/lesson.bbcode:67
 msgid "You can see the inventory drawn on the right, along with the index of each item in the inventory."
 msgstr ""
 
 #. TRANSLATORS: Practice goal
 #: course/lesson-24-access-array-indices/lesson.bbcode:67
-msgid "Your task is to find one sword and one shield in the array using their index, then call [code]use_item()[/code] on each of them so the player can equip those items."
+msgid "The [code]inventory[/code] array in the code contains the same items in the same order as on the right."
 msgstr ""
 
 #. TRANSLATORS: Practice goal
@@ -6030,42 +6000,42 @@ msgid "Use [code]square brackets[/code] to access specific array indices"
 msgstr ""
 
 #. TRANSLATORS: Practice title
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "Realigning the train tracks"
 msgstr "Přerovnání vlakových kolejí"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "We have train tracks broken down into little chunks in our game. We use them to make modular tracks and draw circuits of all shapes and sizes."
 msgstr "V naší hře máme vlakové tratě rozdělené na malé kousky. Z nich vytváříme modulové tratě a kreslíme okruhy všech tvarů a velikostí."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "However, several chunks are misaligned. You need to find them in the [code]tracks[/code] array and pass them to the [code]align()[/code] function."
 msgstr "Několik dílků je však špatně zarovnaných. Je třeba je najít v poli [code]tracks[/code] a předat je funkci [code]align()[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "To do so, you need to access the array by index."
 msgstr "K tomu je třeba přistupovat k poli podle indexu."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "This time, though, you need to access them with [i]negative indices[/i]."
 msgstr "Tentokrát k nim však musíte přistupovat pomocí [i]záporných indexů[/i]."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "Some chunks of our train tracks are misaligned, and the train can't pass. Find the faulty pieces and realign them."
 msgstr "Některé kusy našich vlakových kolejí jsou špatně zarovnané a vlak nemůže projet. Najděte vadné kusy a znovu je zarovnejte."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "The syntax to access an item by index in an array uses square brackets with a number in between right after the array name. For example, write [code]tracks[-1][/code] to access the [i]last[/i] element in the array."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-24-access-array-indices/lesson.bbcode:93
+#: course/lesson-24-access-array-indices/lesson.bbcode:99
 msgid "To align the second chunk, call [code]align(tracks[-3])[/code]. You need to call the same function another two times with the other chunks."
 msgstr ""
 
@@ -6909,6 +6879,35 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid ""
+#~ "[code]\n"
+#~ "var level = 5\n"
+#~ "var power = 3"
+#~ msgstr ""
+#~ "[code]\n"
+#~ "var level = 5\n"
+#~ "var power = 3"
+
+#~ msgid ""
+#~ "func calculate_damage():\n"
+#~ "\tvar damage = power * level\n"
+#~ "[/code]"
+#~ msgstr ""
+#~ "func calculate_damage():\n"
+#~ "\tvar damage = power * level\n"
+#~ "[/code]"
+
+#~ msgid ""
+#~ "func calculate_damage():\n"
+#~ "\tvar damage = power * level\n"
+#~ "\tdamage *= 2\n"
+#~ "[/code]"
+#~ msgstr ""
+#~ "func calculate_damage():\n"
+#~ "\tvar damage = power * level\n"
+#~ "\tdamage *= 2\n"
+#~ "[/code]"
 
 #~ msgid "Is this for Godot 4?"
 #~ msgstr "Je tento kurz pro Godot 4?"
