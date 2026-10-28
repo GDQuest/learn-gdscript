@@ -24,7 +24,10 @@ const ErrorOverlayPopupScene := preload("./popups/ErrorOverlayPopup.tscn")
 
 signal scroll_changed(vector2)
 
-enum SCROLL_DIR { HORIZONTAL, VERTICAL }
+enum SCROLL_DIR {
+	HORIZONTAL,
+	VERTICAL,
+}
 
 const BRACKET_PAIRS := { "(": ")", "[": "]", "{": "}" }
 
@@ -64,7 +67,9 @@ func _ready() -> void:
 			found += 1
 		elif child is HScrollBar:
 			var hscrollbar: HScrollBar = child
-			hscrollbar.value_changed.connect(_on_scrollbar_value_changed.bind(SCROLL_DIR.HORIZONTAL))
+			hscrollbar.value_changed.connect(
+				_on_scrollbar_value_changed.bind(SCROLL_DIR.HORIZONTAL)
+			)
 			scroll_offsets.y = hscrollbar.get_minimum_size().y
 
 			found += 1
@@ -85,7 +90,6 @@ func _ready() -> void:
 	add_child(errors_overlay_message)
 	errors_overlay_message.set_as_top_level(true)
 	errors_overlay_message.hide()
-
 
 	text_changed.connect(_on_text_changed)
 	draw.connect(_update_overlays)
@@ -156,14 +160,30 @@ func _on_text_changed() -> void:
 	errors_overlay.clean()
 	errors_overlay_message.hide()
 
-	# Insert extra indents when entering new code block
-	var previous_line := _current_line
+	# Insert extra indents when entering a new code block
+	var index_previous_line := _current_line
 	_current_line = get_caret_line()
-	if _current_line > previous_line and not text.ends_with("\t") and text.rstrip("\t").ends_with(":\n"):
-		var column := get_caret_column()
-		text += "\t"
-		set_caret_line(_current_line)
-		set_caret_column(column + 1)
+	if _current_line > index_previous_line:
+		var text_previous_line := get_line(_current_line - 1)
+		var text_previous_line_stripped := text_previous_line.rstrip(" \t")
+
+		if text_previous_line_stripped.ends_with(":"):
+			var previous_indent_count := 0
+			var previous_line_length := text_previous_line.length()
+			while (
+				previous_indent_count < previous_line_length
+				and text_previous_line[previous_indent_count] == "\t"
+			):
+				previous_indent_count += 1
+
+			var expected_indent_length := previous_indent_count + 1
+			var text_current_line := get_line(_current_line)
+			var current_indent_length := text_current_line.length() - text_current_line \
+					.lstrip("\t") \
+					.length()
+			if text_current_line.begins_with(" ") or current_indent_length < expected_indent_length:
+				var missing_tabs := maxi(expected_indent_length - current_indent_length, 0)
+				insert_text_at_caret("\t".repeat(missing_tabs))
 
 
 func _on_scrollbar_value_changed(value: float, direction: int) -> void:
