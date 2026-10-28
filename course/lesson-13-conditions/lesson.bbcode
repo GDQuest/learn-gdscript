@@ -100,8 +100,6 @@ You can write an [code]else[/code] block after an [code]if[/code] block, like so
 
 The [code]else[/code] block will run whenever the condition above it isn't met.
 
-[separator]
-
 In the following practices, we'll use conditions and improve the way our character's health changes so it has limits.
 
 [practice id="using-comparisons" title="Using Comparisons"]
@@ -155,8 +153,10 @@ I've defined a [code]health[/code] variable for you with a starting value of [co
 
 To check your code, I will call the [code]heal()[/code] function twice, like this:
 
-[code]heal(40)[/code]
-[code]heal(40)[/code]
+[code_listing]
+heal(40)
+heal(40)
+[/code_listing]
 
 After those two calls, [code]health[/code] should be equal to [code]80[/code].
 [/goal]
@@ -187,9 +187,11 @@ Complete the [code]take_damage()[/code] function so it does two things:
 
 To check your code, I will call your [code]take_damage()[/code] function three times, like this:
 
-[code]take_damage(10)[/code]
-[code]take_damage(10)[/code]
-[code]take_damage(10)[/code]
+[code_listing]
+take_damage(10)
+take_damage(10)
+take_damage(10)
+[/code_listing]
 
 After those three calls, [code]health[/code] should equal [code]0[/code], and not [code]-10[/code] or another value.
 [/goal]

@@ -2,6 +2,13 @@
 
 This document lists changes between releases.
 
+## Unreleased
+
+### Improvements and changes
+
+- Remove uses of separation lines, add a couple of subtitles to better structure lessons (#1431)
+- Turn a couple of remaining instances of inline code that wasn't being highlighted into proper code listings.
+
 ## Learn GDScript From Zero 2.4.0 (2026-10-28)
 
 ### Added

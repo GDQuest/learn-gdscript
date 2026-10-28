@@ -18,12 +18,14 @@ Note the [code]-=[/code] syntax which achieves this. It's a shorthand we often u
 
 You can also use a longer form. Both of these lines have the same effect. They both subtract the value of [code]amount[/code] from the [code]health[/code] variable:
 
-[code]health -= amount[/code]
-[code]health = health - amount[/code]
+[code_listing]
+health -= amount
+health = health - amount
+[/code_listing]
 
 You may notice that the health of the robot can go below [code]0[/code]. We'll see how to manage this in a future lesson using [i]conditions[/i].
 
-[separator]
+[title]Healing the robot[/title]
 
 The robot's health could increase instead if the player picks up an item that heals them, or if they use a healing item.
 
