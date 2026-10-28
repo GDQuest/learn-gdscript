@@ -31,14 +31,14 @@ func _update_children() -> void:
 		# Wait for ready when called from outside the tree, e.g. from setup().
 		await ready
 	for child: Node in get_children():
-		remove_child(child)
+		remove_child.call_deferred(child)
 		child.queue_free()
 	var rtl := _get_text_alignment()
 	for block: Variant in _blocks:
 		if block is BBCodeParser.ParseNode:
-			add_child(make_code_listing(block))
+			add_child.call_deferred(make_code_listing(block))
 		else:
-			add_child(_make_text_label(block, rtl))
+			add_child.call_deferred(_make_text_label(block, rtl))
 
 
 func _make_text_label(text: String, rtl: bool) -> RichTextLabel:

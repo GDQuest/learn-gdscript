@@ -28,9 +28,9 @@ static func build_translated_lesson(
 	translation_report: Dictionary,
 ) -> String:
 	var lesson_builder: Array[String] = []
-	var translated_title := _tr(BBCodeUtils.get_lesson_title(lesson), tr_blocks, translation_report)
+	var translated_lesson_title := _tr(BBCodeUtils.get_lesson_title(lesson), tr_blocks, translation_report)
 	lesson_builder.append_array(
-		['[lesson title="%s"]' % [translated_title.replace('"', r'\"')], ""]
+		['[lesson title="%s"]' % [translated_lesson_title.replace('"', r'\"')], ""]
 	)
 	var practice_count := BBCodeUtils.get_lesson_practice_count(lesson)
 	var practice_idx := 0
