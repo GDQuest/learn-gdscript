@@ -9,6 +9,10 @@ This document lists changes between releases.
 - Remove uses of separation lines, add a couple of subtitles to better structure lessons (#1431)
 - Turn a couple of remaining instances of inline code that wasn't being highlighted into proper code listings.
 
+### Bug fixes
+
+- Fix getting 2 copies of text in practice screen when changing the language setting while on the practice screen
+
 ## Learn GDScript From Zero 2.4.0 (2026-10-28)
 
 ### Added

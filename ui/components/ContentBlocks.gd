@@ -1,10 +1,14 @@
 @tool
 class_name ContentBlocks
 extends VBoxContainer
-## Displays sequences of content blocks returned by BBCodeUtils.get_content_blocks():
-## Updates its children when the locale changes.
+## Displays sequences of content blocks returned by BBCodeUtils.get_content_blocks().
+## Content is only updated through set_blocks(), called by parent screens in
+## response to TranslationManager.translation_changed. The node does not react
+## to NOTIFICATION_TRANSLATION_CHANGED: _blocks holds already-translated text,
+## so rebuilding from it on locale change would re-render the old language.
 
 var _blocks: Array = []
+var _is_rebuild_queued := false
 
 
 ## Creates a read-only code editor displaying a [lb]code_listing[rb] BBCode node's code.
@@ -15,11 +19,6 @@ static func make_code_listing(node: BBCodeParser.ParseNode) -> CodeEdit:
 	return listing
 
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
-		_update_children()
-
-
 func set_blocks(blocks: Array) -> void:
 	_blocks = blocks
 	visible = not blocks.is_empty()
@@ -27,18 +26,28 @@ func set_blocks(blocks: Array) -> void:
 
 
 func _update_children() -> void:
+	if _is_rebuild_queued:
+		return
+
+	_is_rebuild_queued = true
 	if not is_node_ready():
-		# Wait for ready when called from outside the tree, e.g. from setup().
 		await ready
+	_rebuild_children.call_deferred()
+
+
+func _rebuild_children() -> void:
+	_is_rebuild_queued = false
+
 	for child: Node in get_children():
-		remove_child.call_deferred(child)
+		remove_child(child)
 		child.queue_free()
-	var rtl := _get_text_alignment()
+
+	var is_rtl := _get_text_alignment()
 	for block: Variant in _blocks:
 		if block is BBCodeParser.ParseNode:
-			add_child.call_deferred(make_code_listing(block))
+			add_child(make_code_listing(block))
 		else:
-			add_child.call_deferred(_make_text_label(block, rtl))
+			add_child(_make_text_label(block, is_rtl))
 
 
 func _make_text_label(text: String, rtl: bool) -> RichTextLabel:
