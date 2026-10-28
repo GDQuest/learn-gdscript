@@ -32,21 +32,34 @@ const TYPE_MAP := {
 }
 
 # Caches regexes and color tags used to highlight code inside [code] spans.
-var _regex_code: RegEx = null
+var _regex_code := RegEx.create_from_string(r"\[code\](.+?)\[\/code\]")
 # Tokens: numbers, quoted strings, function calls (an identifier followed by
 # an opening parenthesis), plain identifiers, and parentheses.
-var _regex_format: RegEx = null
+var _regex_format := RegEx.create_from_string(
+	"-?\\d+(\\.\\d+)?|[\"'].+[\"']|[a-zA-Z_]\\w*\\s*\\(|[a-zA-Z0-9_]+|[()]"
+)
 
-# Opening bbcode color tags, using the same colors as the code editor.
-var _tag_string := ""
-var _tag_number := ""
-var _tag_function := ""
-var _tag_parenthesis := ""
-var _tag_keyword := ""
-var _tag_base_type := ""
-var _tag_global_function := ""
-var _tag_class := ""
-var _tag_control_flow_keyword := ""
+# "Cache" for BBCode tags that we insert when highlighting code inside [code]
+# spans. This avoids excessive processing when highlighting inline code.
+var _tag_string := "[color=#%s]" % CodeEditorEnhancer.COLOR_STRING.to_html(false)
+var _tag_number := "[color=#%s]" % CodeEditorEnhancer.COLOR_NUMBER.to_html(false)
+var _tag_function := "[color=#%s]" % CodeEditorEnhancer.COLOR_FUNCTIONS.to_html(false)
+var _tag_parenthesis := "[color=#%s]" % CodeEditorEnhancer.COLOR_MEMBER.to_html(false)
+var _tag_keyword := "[color=#%s]" % CodeEditorEnhancer.COLOR_KEYWORD.to_html(false)
+var _tag_base_type := "[color=#%s]" % CodeEditorEnhancer.COLOR_BASE_TYPE.to_html(false)
+var _tag_global_function := "[color=#%s]" % CodeEditorEnhancer.COLOR_GLOBAL_FUNCTION.to_html(false)
+var _tag_class := "[color=#%s]" % CodeEditorEnhancer.COLOR_CLASS.to_html(false)
+var _tag_control_flow_keyword := "[color=#%s]" % CodeEditorEnhancer \
+		.COLOR_KEYWORD_CONTROL_FLOW \
+		.to_html(false)
+# The following opens several tags to wrap inline code spans. It changes the
+# background and base color + opens the inner [code] tag.
+const COLOR_CODE_BACKGROUND := Color(0.149118, 0.144118, 0.223137)
+var _tags_inline_code_open := (
+	"[bgcolor=#%s]" % COLOR_CODE_BACKGROUND.to_html(true)
+	+ "[color=#%s]" % CodeEditorEnhancer.COLOR_TEXT.to_html(false) + "[code]"
+)
+var _tags_inline_code_close := "[/code][/color][/bgcolor]"
 
 # Cache of global function names from CodeEditorEnhancer.GLOBAL_FUNCTIONS, for
 # lookups during code highlighting. The list is fairly long so I'm using this as
@@ -58,27 +71,6 @@ var _glossary: Glossary = null
 
 func _ready() -> void:
 	get_glossary()
-
-
-func _init() -> void:
-	_regex_code = RegEx.create_from_string(r"\[code\](.+?)\[\/code\]")
-	_regex_format = RegEx.create_from_string(
-		"-?\\d+(\\.\\d+)?|[\"'].+[\"']|[a-zA-Z_]\\w*\\s*\\(|[a-zA-Z0-9_]+|[()]"
-	)
-
-	_tag_string = "[color=#%s]" % CodeEditorEnhancer.COLOR_STRING.to_html(false)
-	_tag_number = "[color=#%s]" % CodeEditorEnhancer.COLOR_NUMBER.to_html(false)
-	_tag_function = "[color=#%s]" % CodeEditorEnhancer.COLOR_FUNCTIONS.to_html(false)
-	_tag_parenthesis = "[color=#%s]" % CodeEditorEnhancer.COLOR_MEMBER.to_html(false)
-	_tag_keyword = "[color=#%s]" % CodeEditorEnhancer.COLOR_KEYWORD.to_html(false)
-	_tag_base_type = "[color=#%s]" % CodeEditorEnhancer.COLOR_BASE_TYPE.to_html(false)
-	_tag_global_function = "[color=#%s]" % CodeEditorEnhancer.COLOR_GLOBAL_FUNCTION.to_html(false)
-	_tag_class = "[color=#%s]" % CodeEditorEnhancer.COLOR_CLASS.to_html(false)
-	_tag_control_flow_keyword = "[color=#%s]" % CodeEditorEnhancer \
-			.COLOR_KEYWORD_CONTROL_FLOW \
-			.to_html(false)
-	for function_name in CodeEditorEnhancer.GLOBAL_FUNCTIONS:
-		_cache_gdscript_global_functions[function_name] = true
 
 
 ## Use this function to get the Glossary singleton. It gives access to glossary
@@ -118,7 +110,7 @@ func bbcode_add_code_color(text := "") -> String:
 	var last_match_end := 0
 	for regex_match: RegExMatch in regex_matches:
 		output += text.substr(last_match_end, regex_match.get_start() - last_match_end)
-		output += "[code]" + _highlight_code(regex_match.strings[1]) + "[/code]"
+		output += _tags_inline_code_open + _highlight_code(regex_match.strings[1]) + _tags_inline_code_close
 		last_match_end = regex_match.get_end()
 	output += text.substr(last_match_end)
 	return output
