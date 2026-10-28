@@ -91,12 +91,6 @@ func _ready() -> void:
 	draw.connect(_update_overlays)
 
 
-func _shortcut_input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if get_viewport().gui_get_focus_owner() == self:
-			get_viewport().set_input_as_handled()
-
-
 func _gui_input(event: InputEvent) -> void:
 	# Shortcut uses Enter by default which adds a new line in TextEdit without any means to stop it.
 	# So we remove it.
