@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
 "POT-Creation-Date: 2026-01-21 11:55+0100\n"
-"PO-Revision-Date: 2026-10-08 16:01+0000\n"
-"Last-Translator: Matias Särs <m7s@tutanota.com>\n"
+"PO-Revision-Date: 2026-10-22 06:51+0000\n"
+"Last-Translator: Matias Särs <m7s@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/learn-gdscript-from-zero/application/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Generated-By: Babel 2.10.3\n"
-"X-Generator: Weblate 2026.10.1.dev0\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 
 #: course/common/CustomHealthBar.tscn
 msgid "health = 100"
@@ -447,7 +447,7 @@ msgstr "Gå tillbaka till huvudmenyn"
 msgid "Open the course index"
 msgstr "Öppna kursförteckningen"
 
-#: ui/UINavigator.tscn ui/UINavigator.gd:436
+#: ui/UINavigator.tscn ui/UINavigator.gd:431
 msgid "Go back in your navigation history"
 msgstr "Gå tillbaka i din navigationshistorik"
 
@@ -1077,8 +1077,9 @@ msgid "This is an Open-Source project!"
 msgstr "Detta är ett projekt med öppen källkod!"
 
 #: ui/screens/end_screen/SponsorlessEndScreen.tscn
+#, fuzzy
 msgid ""
-"Like Godot, this app and course is free and open-source. \n"
+"Like Godot, this app and course is free and open-source.\n"
 "\n"
 "You can find the app's source code and contribute translations here: Learn GDScript From Zero (Github repository)."
 msgstr ""
@@ -1274,7 +1275,8 @@ msgid "Both rotate() and move_local_x() need to multiply their value by delta, l
 msgstr "Både rotate() och move_local_x() måste multiplicera sina värden med delta, på följande sätt: rotate(2 * delta) och move_local_x(100 * delta)."
 
 #: course/lesson-11-time-delta/rotating-and-moving-delta/TestsRotatingMovingDelta.gd:55
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:45
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:24
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:41
 msgid "The _process function is missing; did you remove it?"
 msgstr "Funktionen _process saknas; har du tagit bort den?"
 
@@ -1290,43 +1292,39 @@ msgstr "Det där fungerar i GDScript, men här kan vi inte kontrollera värdena 
 msgid "Please write the values directly inside the function calls, like this: rotate(2 * delta) and move_local_x(100 * delta)."
 msgstr "Skriv värdena direkt inuti funktionsanropen, så här: rotate(2 * delta) och move_local_x(100 * delta)."
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:23
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:7
 msgid "Rotating Character Is Time Dependent"
 msgstr "Den roterande figuren är tidsberoende"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:24
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:14
 msgid "Rotation Speed Is 2 Radians Per Second"
 msgstr "Rotationshastigheten är 2 radianer per sekund"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:31
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:33
 msgid "You need to use delta in the rotate() call. Delta is what makes the rotation time-dependent. Try rotate(2 * delta)."
 msgstr "Du måste använda delta i anropet till rotate(). Delta är det som gör rotationen tidsberoende. Prova med rotate(2 * delta)."
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:38
-msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."
-msgstr "Delta måste stå inom parenteserna i rotate(), inte utanför. Du måste multiplicera hastighetsvärdet med delta inuti anropet, så här: rotate(2 * delta)."
-
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:53
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:44
 msgid "It looks like you stored the value in a variable before using it."
 msgstr "Det verkar som om du har lagrat värdet i en variabel innan du använde det."
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:54
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:45
 msgid "That's valid, but we can't check the value automatically."
 msgstr "Det där stämmer, men vi kan inte kontrollera värdet automatiskt."
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:55
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:46
 msgid "Please write it directly in the function call: rotate(2 * delta)."
 msgstr "Skriv det direkt i funktionsanropet: rotate(2 * delta)."
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:63
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:49
 msgid "It looks like delta is not being multiplied."
 msgstr "Det verkar som du inte multiplicerar med delta."
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:64
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:50
 msgid "You need to use the * sign to multiply the speed by delta inside the parentheses, like this: rotate(2 * delta)."
 msgstr "Du måste använda *-tecknet för att multiplicera hastigheten med delta inom parenteserna, så här: rotate(2 * delta)."
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:77
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:60
 msgid "The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * delta)."
 msgstr "Rotationshastigheten stämmer inte. Roboten ska rotera 2 radianer per sekund. Se till att anropet ser ut så här: rotate(2 * delta)."
 
@@ -1904,12 +1902,13 @@ msgid "First Track Is Well Positioned"
 msgstr "Första spåret är välpositionerat"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:28
-msgid "Second Track Is Well Positioned"
-msgstr "Andra spåret är välplacerat"
-
-#: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:29
 msgid "Third Track Is Well Positioned"
 msgstr "Tredje spåret är välplacerat"
+
+#: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:29
+#, fuzzy
+msgid "Fourth Track Is Well Positioned"
+msgstr "Första spåret är välpositionerat"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:30
 msgid "All Other Tracks Are Aligned To Grid"
@@ -2103,7 +2102,7 @@ msgstr "Roboten har vridits moturs! Har du vridit den mindre än 0.5 radianer?"
 
 #: course/lesson-3-standing-on-shoulders-of-giants/make-upright/TestsMakeRobotUpright.gd:14
 msgid "The robot is turned too far clockwise! Did you turn it more than 0.5 radians?"
-msgstr "Roboten är vriden för långt medurs! Har du vridit den mer än 0,5 radianer?"
+msgstr "Roboten är vriden för långt medurs! Har du vridit den mer än 0.5 radianer?"
 
 #: course/lesson-3-standing-on-shoulders-of-giants/make-visible/TestsMakeCharacterVisible.gd:5
 msgid "Character Is Visible"
@@ -2401,7 +2400,7 @@ msgstr "Roboten fick inte så mycket skada som förväntat. Den har %s health, m
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "Det verkar inte som om du subtraherar amount från health."
 
-#: ui/UILesson.gd:308
+#: ui/UILesson.gd:301
 msgid "Learn More"
 msgstr "Läs mer"
 
@@ -2421,7 +2420,7 @@ msgstr ""
 "\n"
 "[hr]\n"
 
-#: ui/UINavigator.gd:439
+#: ui/UINavigator.gd:434
 msgid "(no previous history)"
 msgstr "(ingen tidigare historik)"
 
@@ -2461,19 +2460,19 @@ msgstr "Kör tester..."
 msgid " > "
 msgstr " > "
 
-#: ui/components/popups/ReportFormPopup.gd:52
+#: ui/components/popups/ReportFormPopup.gd:55
 msgid "Select the kind of issue and describe it in the box below, then click \"Send report\" to open the contact page on our website with the report prefilled."
 msgstr "Välj typ av problem och beskriv det i rutan nedan. Klicka sedan på ”Skicka rapport” för att öppna kontaktsidan på vår webbplats där rapporten redan är ifylld."
 
-#: ui/components/popups/ReportFormPopup.gd:56
+#: ui/components/popups/ReportFormPopup.gd:59
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr "Om du har frågor eller behöver hjälp med att lära dig mer, [url=%s]gå med i gemenskapen på Discord[/url]."
 
-#: ui/components/popups/ReportFormPopup.gd:129
+#: ui/components/popups/ReportFormPopup.gd:132
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr "Översättningarna är inofficiella och underhålls av användargemenskapen. Om du vill hjälpa till kan du [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]läsa mer om hur du kan hjälpa till att översätta appen[/url]."
 
-#: ui/components/popups/SettingsPopup.gd:144
+#: ui/components/popups/SettingsPopup.gd:147
 msgid "{percentage}% of text translated. {completed}/{total} lessons fully translated."
 msgstr "{percentage} % av texten är översatt. {completed}/{total} lektioner är helt översatta."
 
@@ -2537,6 +2536,12 @@ msgstr "FORTSÄTT"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr "Lär dig att programmera från grunden med Godot"
+
+#~ msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."
+#~ msgstr "Delta måste stå inom parenteserna i rotate(), inte utanför. Du måste multiplicera hastighetsvärdet med delta inuti anropet, så här: rotate(2 * delta)."
+
+#~ msgid "Second Track Is Well Positioned"
+#~ msgstr "Andra spåret är välplacerat"
 
 #~ msgid "in"
 #~ msgstr "i"

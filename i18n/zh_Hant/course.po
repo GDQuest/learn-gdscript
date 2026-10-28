@@ -280,59 +280,49 @@ msgstr "我們將課程分成簡短的單元和練習。如果每個部分內容
 msgid "If at any time you're left with burning questions, you're more than welcome to join [url=https://discord.gg/87NNb3Z]our Discord community[/url]."
 msgstr "如果你有任何問題，隨時歡迎加入我們的[url=https://discord.gg/87NNb3Z]Discord 社群[/url]。"
 
-#. TRANSLATORS: Note title
-#: course/lesson-1-what-code-is-like/lesson.bbcode:128
-msgid "Is this for Godot 4?"
-msgstr "這個教學適用於 Godot 4 嗎？"
-
-#. TRANSLATORS: Note content
-#: course/lesson-1-what-code-is-like/lesson.bbcode:129
-msgid "What you'll learn in this free course is fully compatible with Godot 4. While we initially designed this series for Godot 3, the foundations of GDScript are still the same in Godot 4."
-msgstr "在這個免費課程中，你學到的內容完全相容於 Godot 4。雖然這些課程最初是以 Godot 3 為基礎設計的，但 GDScript 的基礎功能同樣適用於 Godot 4。"
-
 #. TRANSLATORS: Heading
-#: course/lesson-1-what-code-is-like/lesson.bbcode:132
+#: course/lesson-1-what-code-is-like/lesson.bbcode:128
 msgid "Programming is a skill"
 msgstr "程式是種技能"
 
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "Programming is a skill, so to get good at it, you must practice. It is why we built this app."
 msgstr "程式是種技能，所以要變得擅長，你一定要練習。因此我們做了這個程式。"
 
-#: course/lesson-1-what-code-is-like/lesson.bbcode:143
+#: course/lesson-1-what-code-is-like/lesson.bbcode:139
 msgid "Each lesson is followed by an interactive practice to use what you learned."
 msgstr "每個課程都會有個互動式練習來使用你剛學到的東西。"
 
-#: course/lesson-1-what-code-is-like/lesson.bbcode:144
+#: course/lesson-1-what-code-is-like/lesson.bbcode:140
 msgid "Speaking of which, it's time to look at the practice screen!"
 msgstr "提到這個，是時候看看練習畫面了！"
 
-#: course/lesson-1-what-code-is-like/lesson.bbcode:145
+#: course/lesson-1-what-code-is-like/lesson.bbcode:141
 msgid "To continue, click the [i]Practice[/i] button below. It will give you a short run through how practices work."
 msgstr "點擊[b]練習[/b]按鈕以繼續。它將帶你快速了解練習的運作方式。"
 
 #. TRANSLATORS: Practice title
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "Try Your First Code"
 msgstr "試試你的第一個程式碼"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "We prepared a code sample for you. For this practice, you don't need to change anything."
 msgstr "我們準備了範例程式碼給你。在此練習中，你不需要改動任何東西。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "To test the code, click the [i]Run[/i] button below the code editor."
 msgstr "點擊編輯器下的[b]執行[/b]按鈕以測試程式碼。"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "Run your first bit of code and see the result."
 msgstr "執行你的第一個程式碼並檢視結果。"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "Click the [i]Run[/i] button."
 msgstr ""
 
@@ -5087,20 +5077,36 @@ msgstr "迴圈的運作方式如下：對於陣列中的每個座標，它會將
 msgid "It's the same principle with unit selection."
 msgstr "這與選取單位的原理相同。"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:60
+#. TRANSLATORS: Note title
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:54
+#, fuzzy
+msgid "How do you know to name the variable cell?"
+msgstr "怎麼存取子變數？"
+
+#. TRANSLATORS: Note content
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:55
+msgid "The variable [code]cell[/code] defined right after the [code]for[/code] keyword is the name of the loop's [b]cursor[/b] variable. In each loop iteration, Godot assigns a value from the path to this variable."
+msgstr ""
+
+#. TRANSLATORS: Note content
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:56
+msgid "The variable name [code]cell[/code] is arbitrary; you could call it [code]coordinate[/code] or [code]point[/code] if you wanted. This code does the same thing as the code above, but with a different variable name:"
+msgstr ""
+
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:68
 #, fuzzy
 msgid "For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it."
 msgstr "對於名為 [code]selected_units[/code] 的陣列中每個座標，我們會檢查該格是否有單位存在。如果有，我們就選取它。"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:61
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:69
 msgid "In that case, we use an array, a loop, and a condition together."
 msgstr "在這個例子下，我們將陣列、迴圈和條件結合使用。"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:73
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:81
 msgid "The code above uses several features you haven't learned yet:"
 msgstr "上面的程式碼使用了幾個你尚未學習的功能："
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:74
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:82
 msgid ""
 "- In a condition, the [code]in[/code] keyword allows you to check if a value exists [i]in[/i] an array.\n"
 "- The array's [code]append()[/code] function appends a new value at the end of the array."
@@ -5108,118 +5114,118 @@ msgstr ""
 "- 在條件判斷中，[code]in[/code] 關鍵字可用來檢查某個值是否存在於陣列中。\n"
 "- 陣列的 [code]append()[/code] 函式可以將新值加入陣列的末尾。"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:75
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
 msgid "Notice the use of a period after the [code]selected_units[/code] variable, to call the [code]append()[/code] function. It's because this function exists only on arrays."
 msgstr "請注意在 [code]selected_units[/code] 變數後面使用了句點（.），以呼叫 [code]append()[/code] 函式。這是因為該函式僅適用於陣列。"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:76
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:84
 msgid "When functions exist only on a specific value type, you write a dot after the value to call the function on it."
 msgstr "當函式只適用於特定類型的值時，需要在該值後加上句點來呼叫該函式。"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:77
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:85
 msgid "We'll revisit those two features again in the following lessons."
 msgstr "我們會在接下來的課程中再次探討這兩個功能。"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 #, fuzzy
 msgid "The beauty of loops is that they work regardless of the size of your arrays."
 msgstr "迴圈的美妙之處在於，它們無論面對多大的陣列都能正常運作。"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:84
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "The code just works whether you have one or ten thousand units to select. It is all accomplished with only a couple lines of code."
 msgstr "不管是選取一個單位還是一萬個單位，程式碼都能運行，並且只需要幾行程式碼就能完成這項工作。"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:85
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:93
 msgid "That's the power of computer programming."
 msgstr "這就是電腦程式設計的強大之處。"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:86
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:94
 msgid "In the following practices, you will use arrays combined with [code]for[/code] loops to achieve similar results."
 msgstr "在接下來的練習中，你將結合陣列與 [code]for[/code] 迴圈來達成類似的結果。"
 
 #. TRANSLATORS: Practice title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "Move the robot along the path"
 msgstr "讓機器人沿著路徑移動"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "Our AI pathfinding algorithm provided a path for the robot to move to the right edge of the grid. Your task is to use a [code]for[/code] loop to make the robot move."
 msgstr "我們的 AI 路徑尋找演算法已經提供了一條路徑，讓機器人能夠移動到網格的右邊緣。你的任務是使用 [code]for[/code] 迴圈來讓機器人移動。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "To move the robot, call [i]its[/i] [code]move_to()[/code] function, like so: [code]robot.move_to()[/code]."
 msgstr "要讓機器人移動，請呼叫[b]它的[/b][code]move_to()[/code] 函式，像是這樣：[code]robot.move_to()[/code]。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "The [code]move_to()[/code] function only exists on the robot, which is why you need to access it this way."
 msgstr "[code]move_to()[/code] 函式僅存在於機器人上，這就是為什麼你需要這樣存取它。"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "Our AI pathfinding algorithm is giving us a path to move the robot. Now, you need to make the turtle move along the path."
 msgstr "我們的 AI 路徑尋找演算法已經提供了一條路徑來移動機器人。現在你需要讓烏龜沿著這條路徑移動。"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "You should start with a for loop that iterates over every cell in [code]robot_path[/code]."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 #, fuzzy
 msgid "You need to pass the cell position to the robot's [code]move_to()[/code] function in the loop."
 msgstr "你需要從上到下使用陣列的 [code]pop_back()[/code] 函式移除它們。"
 
 #. TRANSLATORS: Practice title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "Back to the drawing board"
 msgstr "回到畫板"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "We want to draw many rectangles, something surprisingly common in games."
 msgstr "要畫出許多矩形，這在遊戲中是相當常見的需求。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "However, writing this code by hand can get tedious. Instead, you could store the size of your shapes in arrays and use a loop to draw them all in batches."
 msgstr "不過手動寫這段程式碼會變得相當繁瑣。相反地，你可以將圖形的大小存儲在陣列中，並使用迴圈來批次繪製它們。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "That's what you'll do in this practice."
 msgstr "這正是你在這次練習中要做的事。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "Use a [code]for[/code] loop to draw every rectangle in the [code]rectangle_sizes[/code] array with the [code]draw_rectangle()[/code] function."
 msgstr "使用 [code]for[/code] 迴圈來繪製 [code]rectangle_sizes[/code] 陣列中的每一個矩形，並利用 [code]draw_rectangle()[/code] 函式來進行繪製。"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "The rectangles shouldn't overlap or cross each other. To avoid that, you'll need to call the [code]jump()[/code] function."
 msgstr "矩形不應該互相重疊或交叉。為了避免這個問題，你需要呼叫 [code]jump()[/code] 函式。"
 
 #. TRANSLATORS: Practice description
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "The drawing turtle makes its comeback. Fear not! Armed with loops, you'll make it draw faster than ever before."
 msgstr "會畫畫的海龜再次回歸。別擔心！有了迴圈的幫助，你將讓它畫得比以往更快。"
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "Each value in the [code]rectangle_sizes[/code] array is a [code]Vector2[/code]. You'll need to access its [code]x[/code] and [code]y[/code] sub-components to draw rectangles."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "In the loop, you first need to call [code]draw_rectangle()[/code], and then [code]jump()[/code]. Otherwise, at least two rectangles will overlap."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "The arguments when calling [code]jump()[/code] can just be large enough to space out the rectangles. For example, [code]jump(300, 0)[/code]"
 msgstr ""
 
@@ -6890,6 +6896,12 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid "Is this for Godot 4?"
+#~ msgstr "這個教學適用於 Godot 4 嗎？"
+
+#~ msgid "What you'll learn in this free course is fully compatible with Godot 4. While we initially designed this series for Godot 3, the foundations of GDScript are still the same in Godot 4."
+#~ msgstr "在這個免費課程中，你學到的內容完全相容於 Godot 4。雖然這些課程最初是以 Godot 3 為基礎設計的，但 GDScript 的基礎功能同樣適用於 Godot 4。"
 
 #~ msgid "The robot starts with 100 health and will take 50 damage."
 #~ msgstr "機器人起始生命值 100，並將受到 50 點傷害。"

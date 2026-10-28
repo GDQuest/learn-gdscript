@@ -281,59 +281,49 @@ msgstr "Kursu kısa derslere ve alıştırmalara böldük. Her bir kısma çok f
 msgid "If at any time you're left with burning questions, you're more than welcome to join [url=https://discord.gg/87NNb3Z]our Discord community[/url]."
 msgstr "Eğer herhangi bir noktada cevabını öğrenmek zorunda hissettiğiniz sorularınız olursa, [url=https://discord.gg/87NNb3Z]Discord topluluğumuza (İngilizce)[/url] çekinmeden katılabilirsiniz."
 
-#. TRANSLATORS: Note title
-#: course/lesson-1-what-code-is-like/lesson.bbcode:128
-msgid "Is this for Godot 4?"
-msgstr "Bu Godot 4 için de geçerli mi?"
-
-#. TRANSLATORS: Note content
-#: course/lesson-1-what-code-is-like/lesson.bbcode:129
-msgid "What you'll learn in this free course is fully compatible with Godot 4. While we initially designed this series for Godot 3, the foundations of GDScript are still the same in Godot 4."
-msgstr "Bu ücretsiz kursta öğrenecekleriniz Godot 4 ile tamamen uyumludur. Bu seriyi başlangıçta Godot 3 için tasarlamış olsak ta, GDScript'in temelleri Godot 4'te de hala aynıdır."
-
 #. TRANSLATORS: Heading
-#: course/lesson-1-what-code-is-like/lesson.bbcode:132
+#: course/lesson-1-what-code-is-like/lesson.bbcode:128
 msgid "Programming is a skill"
 msgstr "Programlama bir beceridir"
 
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "Programming is a skill, so to get good at it, you must practice. It is why we built this app."
 msgstr "Programlama bir beceridir, bu yüzden, iyi olmak için alıştırma yapmalısın. Bu uygulamayı bu nedenle inşa ettik."
 
-#: course/lesson-1-what-code-is-like/lesson.bbcode:143
+#: course/lesson-1-what-code-is-like/lesson.bbcode:139
 msgid "Each lesson is followed by an interactive practice to use what you learned."
 msgstr "Her bir dersi, öğrendiklerinizi kullanmanız için etkileşimli bir alıştırma takip ediyor."
 
-#: course/lesson-1-what-code-is-like/lesson.bbcode:144
+#: course/lesson-1-what-code-is-like/lesson.bbcode:140
 msgid "Speaking of which, it's time to look at the practice screen!"
 msgstr "Lafı açılmışken, artık alıştırma ekranına bir göz atma vakti geldi!"
 
-#: course/lesson-1-what-code-is-like/lesson.bbcode:145
+#: course/lesson-1-what-code-is-like/lesson.bbcode:141
 msgid "To continue, click the [i]Practice[/i] button below. It will give you a short run through how practices work."
 msgstr "Devam etmek için, aşağıdaki [i]Alıştırma[/i] düğmesine tıklayın. Size, alıştırmaların nasıl işlediğine dair kısa bir özet sunacak."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "Try Your First Code"
 msgstr "İlk Kodunuzu Deneyin"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "We prepared a code sample for you. For this practice, you don't need to change anything."
 msgstr "Sizin için bir kod örneği hazırladık. Bu alıştırma için, herhangi bir şeyi değiştirmeniz gerekmiyor."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "To test the code, click the [i]Run[/i] button below the code editor."
 msgstr "Kodu denemek için, kod düzenleyicinin altındaki [i]Çalıştır[/i] düğmesine tıklayın."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "Run your first bit of code and see the result."
 msgstr "İlk kod parçanızı çalıştırın ve sonucu görün."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "Click the [i]Run[/i] button."
 msgstr ""
 
@@ -5067,20 +5057,36 @@ msgstr "Döngü şu şekilde çalışır: dizideki her konum için, kaplumbağay
 msgid "It's the same principle with unit selection."
 msgstr "Birimlerin seçiminde de aynı ilke geçerli."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:60
+#. TRANSLATORS: Note title
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:54
+#, fuzzy
+msgid "How do you know to name the variable cell?"
+msgstr "Alt değişkenlere nasıl erişirsiniz?"
+
+#. TRANSLATORS: Note content
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:55
+msgid "The variable [code]cell[/code] defined right after the [code]for[/code] keyword is the name of the loop's [b]cursor[/b] variable. In each loop iteration, Godot assigns a value from the path to this variable."
+msgstr ""
+
+#. TRANSLATORS: Note content
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:56
+msgid "The variable name [code]cell[/code] is arbitrary; you could call it [code]coordinate[/code] or [code]point[/code] if you wanted. This code does the same thing as the code above, but with a different variable name:"
+msgstr ""
+
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:68
 #, fuzzy
 msgid "For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it."
 msgstr "[code]selected_units[/code] (seçili_birimler) adlı dizideki her konum için, o hücrede bir birimin olup olmadığını kontrol ederiz. Eğer varsa, onu seçeriz."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:61
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:69
 msgid "In that case, we use an array, a loop, and a condition together."
 msgstr "Bu durumda, bir dizi, bir döngü ve bir koşulu birlikte kullanırız."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:73
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:81
 msgid "The code above uses several features you haven't learned yet:"
 msgstr "Yukarıdaki kod, henüz öğrenmediğiniz birkaç özelliği kullanıyor:"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:74
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:82
 msgid ""
 "- In a condition, the [code]in[/code] keyword allows you to check if a value exists [i]in[/i] an array.\n"
 "- The array's [code]append()[/code] function appends a new value at the end of the array."
@@ -5088,118 +5094,118 @@ msgstr ""
 "- Bir koşul yazımında, [code]in[/code] anahtar kelimesi, bir değerin, bir dizinin [i]içinde[/i] var olup olmadığını kontrol etmenizi sağlar.\n"
 "- Dizinin [code]append()[/code] üye fonksiyonu, dizinin sonuna yeni bir değer ekler."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:75
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
 msgid "Notice the use of a period after the [code]selected_units[/code] variable, to call the [code]append()[/code] function. It's because this function exists only on arrays."
 msgstr "[code]append()[/code] fonksiyonunu çağırmak için, [code]selected_units[/code] değişkeninden sonra bir nokta kullanıldığına dikkat edin. Bunun nedeni, bu fonksiyonun yalnızca dizilerde bulunmasıdır."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:76
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:84
 msgid "When functions exist only on a specific value type, you write a dot after the value to call the function on it."
 msgstr "Fonksiyonlar, eğer yalnızca belirli bir değer tipinde mevcut ise, fonksiyonu bu değer üzerinden çağırmak için, değerden sonra bir nokta yazarsınız."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:77
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:85
 msgid "We'll revisit those two features again in the following lessons."
 msgstr "Bu iki özelliği, ilerleyen derslerde tekrar gözden geçireceğiz."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 #, fuzzy
 msgid "The beauty of loops is that they work regardless of the size of your arrays."
 msgstr "Döngülerin güzelliği, dizilerinizin boyutundan bağımsız olarak çalışmasıdır."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:84
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "The code just works whether you have one or ten thousand units to select. It is all accomplished with only a couple lines of code."
 msgstr "Kod, seçilecek bir veya on bin biriminiz olsa da çalışır. Tüm bunlar sadece birkaç satır kod ile gerçekleştirilir."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:85
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:93
 msgid "That's the power of computer programming."
 msgstr "Bu bilgisayar programcılığının gücüdür."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:86
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:94
 msgid "In the following practices, you will use arrays combined with [code]for[/code] loops to achieve similar results."
 msgstr "Sıradaki alıştırmalarda, benzer sonuçlar elde etmek için, [code]for[/code] döngüleriyle birlikte dizileri kullanacaksınız."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "Move the robot along the path"
 msgstr "Robotu , verilen yol boyunca hareket ettirin"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "Our AI pathfinding algorithm provided a path for the robot to move to the right edge of the grid. Your task is to use a [code]for[/code] loop to make the robot move."
 msgstr "Yapay zeka yol bulma algoritmamız, robotun ızgaranın sağ kenarına gitmesi için bir yol verdi. Sizin göreviniz, robotu hareket ettirmek için bir [code]for[/code] döngüsü kullanmak."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "To move the robot, call [i]its[/i] [code]move_to()[/code] function, like so: [code]robot.move_to()[/code]."
 msgstr "Robotu hareket ettirmek için, onun [i]kendi[/i] [code]move_to()[/code] fonksiyonunu şu şekilde çağırın: [code]robot.move_to()[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "The [code]move_to()[/code] function only exists on the robot, which is why you need to access it this way."
 msgstr "[code]move_to()[/code] fonksiyonu sadece robot üzerinde mevcuttur, bu yüzden bu şekilde erişmeniz gerekiyor."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "Our AI pathfinding algorithm is giving us a path to move the robot. Now, you need to make the turtle move along the path."
 msgstr "Yapay zeka yol bulma algoritmamız bize robotu hareket ettirmek için bir yol verdi. Şimdi, kaplumbağayı, bu yol boyunca hareket ettirmeniz gerekiyor."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "You should start with a for loop that iterates over every cell in [code]robot_path[/code]."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 #, fuzzy
 msgid "You need to pass the cell position to the robot's [code]move_to()[/code] function in the loop."
 msgstr "Dizinin [code]pop_back()[/code] fonksiyonunu kullanarak bunları yukarıdan aşağıya doğru kaldırmanız gerekir."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "Back to the drawing board"
 msgstr "Çizim tahtasına geri dönüş"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "We want to draw many rectangles, something surprisingly common in games."
 msgstr "Oyunlarda, şaşırtıcı derecede yaygın olan, çok sayıda dikdörtgen çizmek istiyoruz."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "However, writing this code by hand can get tedious. Instead, you could store the size of your shapes in arrays and use a loop to draw them all in batches."
 msgstr "Ancak bu kodu elle yazmak sıkıntılı olabilir. Bunun yerine, şekillerinin boyutlarını dizilerde saklayabilir, ve hepsini toplu olarak çizmek için bir döngü kullanabilirsiniz."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "That's what you'll do in this practice."
 msgstr "Bu uygulamada yapacağınız şey tam da bu."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "Use a [code]for[/code] loop to draw every rectangle in the [code]rectangle_sizes[/code] array with the [code]draw_rectangle()[/code] function."
 msgstr "[code]draw_rectangle()[/code] fonksiyonu ile [code]rectangle_sizes[/code] dizisindeki her bir dikdörtgeni çizmek için bir [code]for[/code] döngüsü kullanın."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "The rectangles shouldn't overlap or cross each other. To avoid that, you'll need to call the [code]jump()[/code] function."
 msgstr "Dikdörtgenler üst üste gelmemeli veya birbirini kesmemelidir. Bunu önlemek için [code]jump()[/code] fonksiyonunu da çağırmanız gerek. (Ayrıca, Vector2'nin x ve y değerlerini tuttuğunu hatırlayın)."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "The drawing turtle makes its comeback. Fear not! Armed with loops, you'll make it draw faster than ever before."
 msgstr "Çizim kaplumbağası aramıza dönüyor. Ama korkmayın! Döngülerle donanmış olarak, her zamankinden daha hızlı çizmesini sağlayacaksınız."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "Each value in the [code]rectangle_sizes[/code] array is a [code]Vector2[/code]. You'll need to access its [code]x[/code] and [code]y[/code] sub-components to draw rectangles."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "In the loop, you first need to call [code]draw_rectangle()[/code], and then [code]jump()[/code]. Otherwise, at least two rectangles will overlap."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "The arguments when calling [code]jump()[/code] can just be large enough to space out the rectangles. For example, [code]jump(300, 0)[/code]"
 msgstr ""
 
@@ -6867,6 +6873,12 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid "Is this for Godot 4?"
+#~ msgstr "Bu Godot 4 için de geçerli mi?"
+
+#~ msgid "What you'll learn in this free course is fully compatible with Godot 4. While we initially designed this series for Godot 3, the foundations of GDScript are still the same in Godot 4."
+#~ msgstr "Bu ücretsiz kursta öğrenecekleriniz Godot 4 ile tamamen uyumludur. Bu seriyi başlangıçta Godot 3 için tasarlamış olsak ta, GDScript'in temelleri Godot 4'te de hala aynıdır."
 
 #~ msgid "The robot starts with 100 health and will take 50 damage."
 #~ msgstr "Robot 100 sağlıkla başlayacak, ve 50 hasar alacak."

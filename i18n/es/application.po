@@ -424,7 +424,7 @@ msgstr "Volver al menú principal"
 msgid "Open the course index"
 msgstr "Abrir el índice del curso"
 
-#: ui/UINavigator.tscn ui/UINavigator.gd:436
+#: ui/UINavigator.tscn ui/UINavigator.gd:431
 msgid "Go back in your navigation history"
 msgstr "Vuelve al historial de navegación"
 
@@ -1048,8 +1048,9 @@ msgid "This is an Open-Source project!"
 msgstr "¡Este es un proyecto de código abierto!"
 
 #: ui/screens/end_screen/SponsorlessEndScreen.tscn
+#, fuzzy
 msgid ""
-"Like Godot, this app and course is free and open-source. \n"
+"Like Godot, this app and course is free and open-source.\n"
 "\n"
 "You can find the app's source code and contribute translations here: Learn GDScript From Zero (Github repository)."
 msgstr ""
@@ -1245,7 +1246,8 @@ msgid "Both rotate() and move_local_x() need to multiply their value by delta, l
 msgstr "Tanto rotate() como move_local_x() deben multiplicar su valor por delta, así: rotate(2 * delta) y move_local_x(100 * delta)."
 
 #: course/lesson-11-time-delta/rotating-and-moving-delta/TestsRotatingMovingDelta.gd:55
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:45
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:24
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:41
 msgid "The _process function is missing; did you remove it?"
 msgstr "Falta la función _process; ¿la has eliminado?"
 
@@ -1261,43 +1263,39 @@ msgstr "Eso funciona en GDScript, pero aquí no podemos comprobar los valores au
 msgid "Please write the values directly inside the function calls, like this: rotate(2 * delta) and move_local_x(100 * delta)."
 msgstr "Escribe los valores directamente dentro de las llamadas a las funciones, así: rotate(2 * delta) y move_local_x(100 * delta)."
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:23
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:7
 msgid "Rotating Character Is Time Dependent"
 msgstr "La rotación del personaje  depende del tiempo"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:24
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:14
 msgid "Rotation Speed Is 2 Radians Per Second"
 msgstr "La velocidad de rotación es de 2 radianes por segundo"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:31
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:33
 msgid "You need to use delta in the rotate() call. Delta is what makes the rotation time-dependent. Try rotate(2 * delta)."
 msgstr "Tienes que utilizar «delta» en la llamada a rotate(). «Delta» es lo que hace que la rotación dependa del tiempo. Prueba con rotate(2 * delta)."
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:38
-msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."
-msgstr "«Delta» debe ir dentro de los paréntesis de `rotate()`, no fuera. Tienes que multiplicar el valor de la velocidad por «delta» dentro de la llamada, así: `rotate(2 * delta)`."
-
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:53
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:44
 msgid "It looks like you stored the value in a variable before using it."
 msgstr "Parece que has almacenado el valor en una variable antes de utilizarlo."
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:54
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:45
 msgid "That's valid, but we can't check the value automatically."
 msgstr "Eso es válido, pero no podemos comprobar el valor automáticamente."
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:55
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:46
 msgid "Please write it directly in the function call: rotate(2 * delta)."
 msgstr "Por favor, escríbela directamente en la llamada a la función: rotate(2 * delta)."
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:63
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:49
 msgid "It looks like delta is not being multiplied."
 msgstr "Parece que no se está multiplicando «delta»."
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:64
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:50
 msgid "You need to use the * sign to multiply the speed by delta inside the parentheses, like this: rotate(2 * delta)."
 msgstr "Tienes que usar el signo * para multiplicar la velocidad por delta dentro de los paréntesis, así: rotate(2 * delta)."
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:77
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:60
 msgid "The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * delta)."
 msgstr "La velocidad de rotación no es correcta. El robot debería girar 2 radianes por segundo. Asegúrate de que la llamada tenga esta forma: rotate(2 * delta)."
 
@@ -1950,13 +1948,13 @@ msgstr "La primera pista está bien colocada"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:28
 #, fuzzy
-msgid "Second Track Is Well Positioned"
-msgstr "La segunda pista está bien colocada"
+msgid "Third Track Is Well Positioned"
+msgstr "La tercera pista está bien colocada"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:29
 #, fuzzy
-msgid "Third Track Is Well Positioned"
-msgstr "La tercera pista está bien colocada"
+msgid "Fourth Track Is Well Positioned"
+msgstr "La primera pista está bien colocada"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:30
 #, fuzzy
@@ -2557,7 +2555,7 @@ msgstr "El robot no ha sufrido tanto daño como se esperaba. Tiene %s de salud, 
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "No parece que estés restando amount de la salud."
 
-#: ui/UILesson.gd:308
+#: ui/UILesson.gd:301
 msgid "Learn More"
 msgstr "Aprende más"
 
@@ -2575,7 +2573,7 @@ msgstr ""
 "\n"
 "[hr]\n"
 
-#: ui/UINavigator.gd:439
+#: ui/UINavigator.gd:434
 msgid "(no previous history)"
 msgstr "(sin historial previo)"
 
@@ -2616,19 +2614,19 @@ msgstr "Ejecutando pruebas..."
 msgid " > "
 msgstr " > "
 
-#: ui/components/popups/ReportFormPopup.gd:52
+#: ui/components/popups/ReportFormPopup.gd:55
 msgid "Select the kind of issue and describe it in the box below, then click \"Send report\" to open the contact page on our website with the report prefilled."
 msgstr "Selecciona el tipo de problema y descríbelo en el cuadro de abajo; luego, haz clic en «Enviar informe» para abrir la página de contacto de nuestra web con el informe ya rellenado."
 
-#: ui/components/popups/ReportFormPopup.gd:56
+#: ui/components/popups/ReportFormPopup.gd:59
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr "Para preguntas y ayuda con el aprendizaje, [url=%s]únete a la comunidad en Discord[/url]."
 
-#: ui/components/popups/ReportFormPopup.gd:129
+#: ui/components/popups/ReportFormPopup.gd:132
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr "Las traducciones no son oficiales y las mantiene la comunidad. Si quieres ayudar, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]aprende cómo ayudar a traducir la aplicación[/url]."
 
-#: ui/components/popups/SettingsPopup.gd:144
+#: ui/components/popups/SettingsPopup.gd:147
 msgid "{percentage}% of text translated. {completed}/{total} lessons fully translated."
 msgstr "{percentage} % del texto traducido. {completed}/{total} lecciones traducidas por completo."
 
@@ -2690,6 +2688,13 @@ msgstr "CONTINUAR"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr "Aprende a programar desde cero con Godot"
+
+#~ msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."
+#~ msgstr "«Delta» debe ir dentro de los paréntesis de `rotate()`, no fuera. Tienes que multiplicar el valor de la velocidad por «delta» dentro de la llamada, así: `rotate(2 * delta)`."
+
+#, fuzzy
+#~ msgid "Second Track Is Well Positioned"
+#~ msgstr "La segunda pista está bien colocada"
 
 #~ msgid "The robot isn't at the bottom of the game board. Did you increase its cell.y coordinate?"
 #~ msgstr "El robot no está en la parte inferior del tablero de juego. ¿Has aumentado su coordenada «cell.y»?"

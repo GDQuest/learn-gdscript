@@ -447,7 +447,7 @@ msgstr "ត្រឡប់ទៅមីនុយដើមវិញ"
 msgid "Open the course index"
 msgstr "បើកមាតិកាមេរៀន"
 
-#: ui/UINavigator.tscn ui/UINavigator.gd:436
+#: ui/UINavigator.tscn ui/UINavigator.gd:431
 msgid "Go back in your navigation history"
 msgstr "ត្រឡប់ក្រោយចូល ក្នុងប្រវត្តិនៃការរុករក"
 
@@ -1077,8 +1077,9 @@ msgid "This is an Open-Source project!"
 msgstr "នេះគឺជាគម្រោង Open-Source!"
 
 #: ui/screens/end_screen/SponsorlessEndScreen.tscn
+#, fuzzy
 msgid ""
-"Like Godot, this app and course is free and open-source. \n"
+"Like Godot, this app and course is free and open-source.\n"
 "\n"
 "You can find the app's source code and contribute translations here: Learn GDScript From Zero (Github repository)."
 msgstr ""
@@ -1274,7 +1275,8 @@ msgid "Both rotate() and move_local_x() need to multiply their value by delta, l
 msgstr "rotate() និង move_local_x() ទាំងពីរត្រូវគុណតម្លៃរបស់វានឹង delta ដូចនេះ៖ rotate(2 * delta) និង move_local_x(100 * delta)។"
 
 #: course/lesson-11-time-delta/rotating-and-moving-delta/TestsRotatingMovingDelta.gd:55
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:45
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:24
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:41
 msgid "The _process function is missing; did you remove it?"
 msgstr "function _process បាត់; តើអ្នកបានលុបវាឬទេ?"
 
@@ -1290,43 +1292,39 @@ msgstr "វាត្រឹមត្រូវក្នុង GDScript ប៉ុ�
 msgid "Please write the values directly inside the function calls, like this: rotate(2 * delta) and move_local_x(100 * delta)."
 msgstr "សូមសរសេរតម្លៃដោយផ្ទាល់នៅក្នុងការហៅ function ដូចនេះ៖ rotate(2 * delta) និង move_local_x(100 * delta)។"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:23
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:7
 msgid "Rotating Character Is Time Dependent"
 msgstr "ការបង្វិលតួអង្គអាស្រ័យលើពេលវេលា"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:24
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:14
 msgid "Rotation Speed Is 2 Radians Per Second"
 msgstr "ល្បឿនបង្វិលគឺ 2 រ៉ាដ្យង់ក្នុងមួយវិនាទី"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:31
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:33
 msgid "You need to use delta in the rotate() call. Delta is what makes the rotation time-dependent. Try rotate(2 * delta)."
 msgstr "អ្នកត្រូវប្រើ delta នៅក្នុងការហៅ rotate()។ delta ធ្វើឱ្យការបង្វិលអាស្រ័យលើពេលវេលា។ សាកល្បង rotate(2 * delta)។"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:38
-msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."
-msgstr "delta ត្រូវស្ថិតនៅក្នុងវង់ក្រចករបស់ rotate() មិនមែនខាងក្រៅទេ។ អ្នកត្រូវគុណតម្លៃល្បឿននឹង delta នៅក្នុងការហៅ ដូចនេះ៖ rotate(2 * delta)។"
-
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:53
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:44
 msgid "It looks like you stored the value in a variable before using it."
 msgstr "ហាក់ដូចជាអ្នកបានរក្សាទុកតម្លៃក្នុង variable មុនពេលប្រើវា។"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:54
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:45
 msgid "That's valid, but we can't check the value automatically."
 msgstr "វាត្រឹមត្រូវ ប៉ុន្តែយើងមិនអាចពិនិត្យតម្លៃដោយស្វ័យប្រវត្តិបានទេ។"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:55
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:46
 msgid "Please write it directly in the function call: rotate(2 * delta)."
 msgstr "សូមសរសេរវាដោយផ្ទាល់ក្នុងការហៅ function៖ rotate(2 * delta)។"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:63
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:49
 msgid "It looks like delta is not being multiplied."
 msgstr "ហាក់ដូចជា delta មិនត្រូវបានគុណ។"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:64
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:50
 msgid "You need to use the * sign to multiply the speed by delta inside the parentheses, like this: rotate(2 * delta)."
 msgstr "អ្នកត្រូវប្រើសញ្ញា * ដើម្បីគុណល្បឿននឹង delta នៅក្នុងវង់ក្រចក ដូចនេះ៖ rotate(2 * delta)។"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:77
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:60
 msgid "The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * delta)."
 msgstr "ល្បឿនបង្វិលមិនត្រឹមត្រូវ។ រ៉ូបូតគួរបង្វិល 2 រ៉ាដ្យង់ក្នុងមួយវិនាទី។ ត្រូវប្រាកដថាការហៅមានទម្រង់នេះ៖ rotate(2 * delta)។"
 
@@ -1907,12 +1905,13 @@ msgid "First Track Is Well Positioned"
 msgstr "ផ្លូវទីមួយស្ថិតនៅទីតាំងត្រឹមត្រូវ"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:28
-msgid "Second Track Is Well Positioned"
-msgstr "ផ្លូវទីពីរស្ថិតនៅទីតាំងត្រឹមត្រូវ"
-
-#: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:29
 msgid "Third Track Is Well Positioned"
 msgstr "ផ្លូវទីបីស្ថិតនៅទីតាំងត្រឹមត្រូវ"
+
+#: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:29
+#, fuzzy
+msgid "Fourth Track Is Well Positioned"
+msgstr "ផ្លូវទីមួយស្ថិតនៅទីតាំងត្រឹមត្រូវ"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:30
 msgid "All Other Tracks Are Aligned To Grid"
@@ -2405,7 +2404,7 @@ msgstr "រ៉ូបូតមិនទទួលការខូចខាតច្
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "ហាក់ដូចជាអ្នកមិនបានដក amount ចេញពី health។"
 
-#: ui/UILesson.gd:308
+#: ui/UILesson.gd:301
 msgid "Learn More"
 msgstr "ស្វែងយល់បន្ថែម"
 
@@ -2425,7 +2424,7 @@ msgstr ""
 "\n"
 "[hr]\n"
 
-#: ui/UINavigator.gd:439
+#: ui/UINavigator.gd:434
 msgid "(no previous history)"
 msgstr "(គ្មានប្រវត្តិចូលរួម)"
 
@@ -2465,19 +2464,19 @@ msgstr "កំពុងដំណើរការតេស្ត..."
 msgid " > "
 msgstr " > "
 
-#: ui/components/popups/ReportFormPopup.gd:52
+#: ui/components/popups/ReportFormPopup.gd:55
 msgid "Select the kind of issue and describe it in the box below, then click \"Send report\" to open the contact page on our website with the report prefilled."
 msgstr "ជ្រើសរើសប្រភេទបញ្ហា ហើយពិពណ៌នាវានៅក្នុងប្រអប់ខាងក្រោម បន្ទាប់មកចុច \"ផ្ញើរបាយការណ៍\" ដើម្បីបើកទំព័រទំនាក់ទំនងនៅលើគេហទំព័ររបស់យើង ដោយមានរបាយការណ៍បំពេញរួចជាស្រេច។"
 
-#: ui/components/popups/ReportFormPopup.gd:56
+#: ui/components/popups/ReportFormPopup.gd:59
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr "សម្រាប់សំណួរ និងជំនួយក្នុងការរៀន [url=%s] ចូលរួមសហគមន៍នៅ Discord[/url]។"
 
-#: ui/components/popups/ReportFormPopup.gd:129
+#: ui/components/popups/ReportFormPopup.gd:132
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr "ការបកប្រែមិនមែនជាផ្លូវការទេ ហើយត្រូវបានថែទាំដោយសហគមន៍។ ប្រសិនបើអ្នកចង់ជួយ [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]ស្វែងយល់ពីរបៀបជួយបកប្រែ app[/url]។"
 
-#: ui/components/popups/SettingsPopup.gd:144
+#: ui/components/popups/SettingsPopup.gd:147
 msgid "{percentage}% of text translated. {completed}/{total} lessons fully translated."
 msgstr "{percentage}% នៃអត្ថបទត្រូវបានបកប្រែ។ {completed}/{total} មេរៀនត្រូវបានបកប្រែពេញលេញ។"
 
@@ -2541,6 +2540,12 @@ msgstr "បន្ត"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr "រៀនកូដពីចំណុចសូន្យ ជាមួយ Godot"
+
+#~ msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."
+#~ msgstr "delta ត្រូវស្ថិតនៅក្នុងវង់ក្រចករបស់ rotate() មិនមែនខាងក្រៅទេ។ អ្នកត្រូវគុណតម្លៃល្បឿននឹង delta នៅក្នុងការហៅ ដូចនេះ៖ rotate(2 * delta)។"
+
+#~ msgid "Second Track Is Well Positioned"
+#~ msgstr "ផ្លូវទីពីរស្ថិតនៅទីតាំងត្រឹមត្រូវ"
 
 #~ msgid "The robot isn't at the bottom of the game board. Did you increase its cell.y coordinate?"
 #~ msgstr "រ៉ូបូតមិនស្ថិតនៅបាតនៃក្តារហ្គេមទេ។ តើអ្នកបានបង្កើនកូអរដោនេ cell.y របស់វាឬទេ?"

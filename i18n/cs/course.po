@@ -280,59 +280,49 @@ msgstr "Proto jsme kurz rozdělili do krátkých lekcí a cvičení. Kdybychom d
 msgid "If at any time you're left with burning questions, you're more than welcome to join [url=https://discord.gg/87NNb3Z]our Discord community[/url]."
 msgstr "Pokud Vás budou trápit další otázky, jste vítáni připojit se k [url=https://discord.gg/87NNb3Z]naší komunitě na Discordu[/url]."
 
-#. TRANSLATORS: Note title
-#: course/lesson-1-what-code-is-like/lesson.bbcode:128
-msgid "Is this for Godot 4?"
-msgstr "Je tento kurz pro Godot 4?"
-
-#. TRANSLATORS: Note content
-#: course/lesson-1-what-code-is-like/lesson.bbcode:129
-msgid "What you'll learn in this free course is fully compatible with Godot 4. While we initially designed this series for Godot 3, the foundations of GDScript are still the same in Godot 4."
-msgstr "To, co se naučíte v tomto bezplatném kurzu, je plně kompatibilní s Godotem 4. Ačkoli jsme tuto sérii původně navrhli pro Godot 3, základy GDScriptu jsou stejné i v Godotu 4."
-
 #. TRANSLATORS: Heading
-#: course/lesson-1-what-code-is-like/lesson.bbcode:132
+#: course/lesson-1-what-code-is-like/lesson.bbcode:128
 msgid "Programming is a skill"
 msgstr "Programování je dovednost"
 
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "Programming is a skill, so to get good at it, you must practice. It is why we built this app."
 msgstr "Programování je dovednost, a abyste se v něm zdokonalili, musíte trénovat. Proto jsme vytvořili tuto aplikaci."
 
-#: course/lesson-1-what-code-is-like/lesson.bbcode:143
+#: course/lesson-1-what-code-is-like/lesson.bbcode:139
 msgid "Each lesson is followed by an interactive practice to use what you learned."
 msgstr "Po každé lekci následuje interaktivní cvičení, kde můžete použít to, co jste se naučili."
 
-#: course/lesson-1-what-code-is-like/lesson.bbcode:144
+#: course/lesson-1-what-code-is-like/lesson.bbcode:140
 msgid "Speaking of which, it's time to look at the practice screen!"
 msgstr "Když už jsme u toho, je čas podívat se na obrazovku s cvičeními!"
 
-#: course/lesson-1-what-code-is-like/lesson.bbcode:145
+#: course/lesson-1-what-code-is-like/lesson.bbcode:141
 msgid "To continue, click the [i]Practice[/i] button below. It will give you a short run through how practices work."
 msgstr "Chcete-li pokračovat, klikněte na tlačítko [i]Practice[/i] níže. V něm se krátce seznámíte s tím, jak praktiky fungují."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "Try Your First Code"
 msgstr "Vyzkoušejte svůj první kód"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "We prepared a code sample for you. For this practice, you don't need to change anything."
 msgstr "Připravili jsme pro vás ukázku kódu. Pro tento postup nemusíte nic měnit."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "To test the code, click the [i]Run[/i] button below the code editor."
 msgstr "Chcete-li kód vyzkoušet, klikněte na tlačítko [i]Run/Spustit[/i] pod editorem kódu."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "Run your first bit of code and see the result."
 msgstr "Spusťte první část kódu a podívejte se na výsledek."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-1-what-code-is-like/lesson.bbcode:142
+#: course/lesson-1-what-code-is-like/lesson.bbcode:138
 msgid "Click the [i]Run[/i] button."
 msgstr ""
 
@@ -5099,20 +5089,36 @@ msgstr "Smyčka funguje takto: pro každou souřadnici v poli přesune želvu je
 msgid "It's the same principle with unit selection."
 msgstr "Stejný princip platí i pro výběr jednotek."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:60
+#. TRANSLATORS: Note title
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:54
+#, fuzzy
+msgid "How do you know to name the variable cell?"
+msgstr "Jak přistupujete k dílčím proměnným?"
+
+#. TRANSLATORS: Note content
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:55
+msgid "The variable [code]cell[/code] defined right after the [code]for[/code] keyword is the name of the loop's [b]cursor[/b] variable. In each loop iteration, Godot assigns a value from the path to this variable."
+msgstr ""
+
+#. TRANSLATORS: Note content
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:56
+msgid "The variable name [code]cell[/code] is arbitrary; you could call it [code]coordinate[/code] or [code]point[/code] if you wanted. This code does the same thing as the code above, but with a different variable name:"
+msgstr ""
+
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:68
 #, fuzzy
 msgid "For each coordinate in an array named [code]selected_units[/code], we check if there is a unit in that cell. If so, we select it."
 msgstr "Pro každou souřadnici v poli s názvem [code]selected_units[/code] zkontrolujeme, zda se v dané buňce nachází jednotka. Pokud ano, vybereme ji."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:61
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:69
 msgid "In that case, we use an array, a loop, and a condition together."
 msgstr "V takovém případě použijeme společně pole, cyklus a podmínku."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:73
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:81
 msgid "The code above uses several features you haven't learned yet:"
 msgstr "Výše uvedený kód používá několik funkcí, které jste se ještě nenaučili:"
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:74
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:82
 msgid ""
 "- In a condition, the [code]in[/code] keyword allows you to check if a value exists [i]in[/i] an array.\n"
 "- The array's [code]append()[/code] function appends a new value at the end of the array."
@@ -5120,118 +5126,118 @@ msgstr ""
 "- V podmínce vám klíčové slovo [code]in[/code] umožňuje zkontrolovat, zda existuje hodnota [i]v[/i] v poli.\n"
 "- Funkce pole [code]append()[/code] připojí novou hodnotu na konec pole."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:75
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
 msgid "Notice the use of a period after the [code]selected_units[/code] variable, to call the [code]append()[/code] function. It's because this function exists only on arrays."
 msgstr "Všimněte si použití tečky za proměnnou [code]selected_units[/code] pro volání funkce [code]append()[/code]. Je to proto že tuto funkci lze volat pouze z pole."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:76
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:84
 msgid "When functions exist only on a specific value type, you write a dot after the value to call the function on it."
 msgstr "Pokud funkce existují pouze na určitém typu hodnoty, napíšete za identifikátorem hodnoty(proměnná, funkce) tečku, aby se funkce na ní zavolala."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:77
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:85
 msgid "We'll revisit those two features again in the following lessons."
 msgstr "K těmto dvěma funkcím se znovu vrátíme v následujících lekcích."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 #, fuzzy
 msgid "The beauty of loops is that they work regardless of the size of your arrays."
 msgstr "Krása smyček spočívá v tom, že fungují bez ohledu na velikost pole."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:84
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:92
 msgid "The code just works whether you have one or ten thousand units to select. It is all accomplished with only a couple lines of code."
 msgstr "Kód prostě funguje, ať už máte na výběr jednu nebo deset tisíc jednotek. Toho všeho je dosaženo pomocí pouhých několika řádků kódu."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:85
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:93
 msgid "That's the power of computer programming."
 msgstr "V tom je síla počítačového programování."
 
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:86
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:94
 msgid "In the following practices, you will use arrays combined with [code]for[/code] loops to achieve similar results."
 msgstr "V následujících postupech budete k dosažení podobných výsledků používat pole v kombinaci s cykly [code]for[/code]."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "Move the robot along the path"
 msgstr "Pohyb robota po cestě"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "Our AI pathfinding algorithm provided a path for the robot to move to the right edge of the grid. Your task is to use a [code]for[/code] loop to make the robot move."
 msgstr "Náš algoritmus pro hledání cesty s umělou inteligencí určil robotovi cestu k pravému okraji mřížky. Vaším úkolem je pomocí smyčky [code]for[/code] přimět robota k pohybu."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "To move the robot, call [i]its[/i] [code]move_to()[/code] function, like so: [code]robot.move_to()[/code]."
 msgstr "Chcete-li robota přesunout, zavolejte [i]jeho[/i] funkci [code]move_to()[/code], a to takto: [code]robot.move_to()[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "The [code]move_to()[/code] function only exists on the robot, which is why you need to access it this way."
 msgstr "Funkce [code]move_to()[/code] existuje pouze na robotovi, a proto k ní musíte přistupovat tímto způsobem."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "Our AI pathfinding algorithm is giving us a path to move the robot. Now, you need to make the turtle move along the path."
 msgstr "Náš algoritmus pro hledání cesty s umělou inteligencí nám určuje cestu, po které se má robot pohybovat. Nyní je třeba, aby se po této cestě pohybovala želva."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 msgid "You should start with a for loop that iterates over every cell in [code]robot_path[/code]."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:83
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:91
 #, fuzzy
 msgid "You need to pass the cell position to the robot's [code]move_to()[/code] function in the loop."
 msgstr "Musíte je odstranit shora dolů pomocí funkce [code]pop_back()[/code]."
 
 #. TRANSLATORS: Practice title
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "Back to the drawing board"
 msgstr "Zpět k rýsovacímu prknu"
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "We want to draw many rectangles, something surprisingly common in games."
 msgstr "Chceme nakreslit mnoho obdélníků, což je ve hrách překvapivě běžné."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "However, writing this code by hand can get tedious. Instead, you could store the size of your shapes in arrays and use a loop to draw them all in batches."
 msgstr "Psaní tohoto kódu ručně však může být zdlouhavé. Místo toho můžete ukládat velikosti tvarů do polí a pomocí smyčky je všechny nakreslit v dávkách."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "That's what you'll do in this practice."
 msgstr "Zkusíme si to v tomto cvičení."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "Use a [code]for[/code] loop to draw every rectangle in the [code]rectangle_sizes[/code] array with the [code]draw_rectangle()[/code] function."
 msgstr "Pomocí smyčky [code]for[/code] nakreslete každý obdélník v poli [code]rectangle_sizes[/code] pomocí funkce [code]draw_rectangle()[/code]."
 
 #. TRANSLATORS: Practice goal
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "The rectangles shouldn't overlap or cross each other. To avoid that, you'll need to call the [code]jump()[/code] function."
 msgstr "Obdélníky by se neměly překrývat ani křížit. Abyste tomu zabránili, musíte volat funkci [code]jump()[/code]."
 
 #. TRANSLATORS: Practice description
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "The drawing turtle makes its comeback. Fear not! Armed with loops, you'll make it draw faster than ever before."
 msgstr "Kreslící želva se vrací na scénu. Neboj se! Vyzbrojeni smyčkami, budete kreslit rychleji než kdy předtím."
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "Each value in the [code]rectangle_sizes[/code] array is a [code]Vector2[/code]. You'll need to access its [code]x[/code] and [code]y[/code] sub-components to draw rectangles."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "In the loop, you first need to call [code]draw_rectangle()[/code], and then [code]jump()[/code]. Otherwise, at least two rectangles will overlap."
 msgstr ""
 
 #. TRANSLATORS: Practice hint
-#: course/lesson-20-looping-over-arrays/lesson.bbcode:114
+#: course/lesson-20-looping-over-arrays/lesson.bbcode:122
 msgid "The arguments when calling [code]jump()[/code] can just be large enough to space out the rectangles. For example, [code]jump(300, 0)[/code]"
 msgstr ""
 
@@ -6903,6 +6909,12 @@ msgstr ""
 
 msgid "Learn to Code From Zero with Godot"
 msgstr ""
+
+#~ msgid "Is this for Godot 4?"
+#~ msgstr "Je tento kurz pro Godot 4?"
+
+#~ msgid "What you'll learn in this free course is fully compatible with Godot 4. While we initially designed this series for Godot 3, the foundations of GDScript are still the same in Godot 4."
+#~ msgstr "To, co se naučíte v tomto bezplatném kurzu, je plně kompatibilní s Godotem 4. Ačkoli jsme tuto sérii původně navrhli pro Godot 3, základy GDScriptu jsou stejné i v Godotu 4."
 
 #~ msgid "The robot starts with 100 health and will take 50 damage."
 #~ msgstr "Robot začíná se zdravím 100 a utrpí poškození 50."

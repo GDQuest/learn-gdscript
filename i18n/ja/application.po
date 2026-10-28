@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
 "POT-Creation-Date: 2026-01-21 11:55+0100\n"
-"PO-Revision-Date: 2026-08-16 05:14+0000\n"
-"Last-Translator: taiyaki32lp64 <matsudotaiyaki@gmail.com>\n"
+"PO-Revision-Date: 2026-10-17 10:34+0000\n"
+"Last-Translator: c3974 <148695293+c3974@users.noreply.github.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/learn-gdscript-from-zero/application/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.10.3\n"
-"X-Generator: Weblate 2026.9.dev0\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 
 #: course/common/CustomHealthBar.tscn
 msgid "health = 100"
@@ -50,7 +50,7 @@ msgstr "回転: 0"
 #: course/lesson-11-time-delta/visuals/DemoRotatingTime.tscn
 #: course/lesson-11-time-delta/visuals/ExampleRotatingSpriteFrame.tscn
 msgid "frame speed: 0"
-msgstr "frame speed: 0"
+msgstr "フレーム速度: 0"
 
 #: course/lesson-11-time-delta/visuals/RobotRace.tscn
 msgid "With delta"
@@ -462,7 +462,7 @@ msgstr "メインメニューに戻る"
 msgid "Open the course index"
 msgstr "コースの目次を開く"
 
-#: ui/UINavigator.tscn ui/UINavigator.gd:436
+#: ui/UINavigator.tscn ui/UINavigator.gd:431
 msgid "Go back in your navigation history"
 msgstr "ページを戻ります"
 
@@ -1112,8 +1112,9 @@ msgid "This is an Open-Source project!"
 msgstr "これはオープンソース プロジェクトです！"
 
 #: ui/screens/end_screen/SponsorlessEndScreen.tscn
+#, fuzzy
 msgid ""
-"Like Godot, this app and course is free and open-source. \n"
+"Like Godot, this app and course is free and open-source.\n"
 "\n"
 "You can find the app's source code and contribute translations here: Learn GDScript From Zero (Github repository)."
 msgstr ""
@@ -1325,7 +1326,8 @@ msgid "Both rotate() and move_local_x() need to multiply their value by delta, l
 msgstr "rotate() と move_local_x() の両方で、その値に delta を掛ける必要があります。例えば、rotate(2 * delta) や move_local_x(100 * delta) のようにです。"
 
 #: course/lesson-11-time-delta/rotating-and-moving-delta/TestsRotatingMovingDelta.gd:55
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:45
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:24
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:41
 #, fuzzy
 msgid "The _process function is missing; did you remove it?"
 msgstr "_process関数がありません。削除しましたか？"
@@ -1345,52 +1347,47 @@ msgstr "GDScriptでは動作しますが、ここでは値を自動的に確認�
 msgid "Please write the values directly inside the function calls, like this: rotate(2 * delta) and move_local_x(100 * delta)."
 msgstr "関数呼び出しの中に直接値を記述してください。例：rotate(2 * delta) や move_local_x(100 * delta) のように。"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:23
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:7
 #, fuzzy
 msgid "Rotating Character Is Time Dependent"
 msgstr "回転するキャラクターは時間に依存しています"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:24
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:14
 #, fuzzy
 msgid "Rotation Speed Is 2 Radians Per Second"
 msgstr "回転速度は1秒あたり2ラジアンです"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:31
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:33
 #, fuzzy
 msgid "You need to use delta in the rotate() call. Delta is what makes the rotation time-dependent. Try rotate(2 * delta)."
 msgstr "rotate() の呼び出しで delta を使用する必要があります。delta によって、回転が時間に依存するようになります。rotate(2 * delta) を試してみてください。"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:38
-#, fuzzy
-msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."
-msgstr "delta は rotate() の括弧の内側に記述する必要があります。括弧の外側ではありません。呼び出しの中で、速度の値に delta を乗算する必要があります。例えば、rotate(2 * delta) のように記述してください。"
-
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:53
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:44
 #, fuzzy
 msgid "It looks like you stored the value in a variable before using it."
 msgstr "値を使用する前に変数に格納してしまったようです。"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:54
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:45
 #, fuzzy
 msgid "That's valid, but we can't check the value automatically."
 msgstr "これは有効ですが、値を自動的に確認することはできません。"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:55
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:46
 #, fuzzy
 msgid "Please write it directly in the function call: rotate(2 * delta)."
 msgstr "関数呼び出し内に直接記述してください：rotate(2 * delta)。"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:63
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:49
 #, fuzzy
 msgid "It looks like delta is not being multiplied."
 msgstr "delta に乗算が行われていないようです。"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:64
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:50
 #, fuzzy
 msgid "You need to use the * sign to multiply the speed by delta inside the parentheses, like this: rotate(2 * delta)."
 msgstr "括弧内で速度に delta を掛けるには、* 記号を使用する必要があります。例えば、rotate(2 * delta) のように記述してください。"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:77
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:60
 #, fuzzy
 msgid "The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * delta)."
 msgstr "回転速度が正しくありません。ロボットは1秒あたり2ラジアン回転するはずです。呼び出しがrotate(2 * delta)のようになっていることを確認してください。"
@@ -2083,13 +2080,13 @@ msgstr "最初のトラックは適切な位置に配置されています。"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:28
 #, fuzzy
-msgid "Second Track Is Well Positioned"
-msgstr "2番目のトラックは適切な位置に配置されています。"
+msgid "Third Track Is Well Positioned"
+msgstr "3番目のトラックは適切な位置に配置されています"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:29
 #, fuzzy
-msgid "Third Track Is Well Positioned"
-msgstr "3番目のトラックは適切な位置に配置されています"
+msgid "Fourth Track Is Well Positioned"
+msgstr "最初のトラックは適切な位置に配置されています。"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:30
 #, fuzzy
@@ -2689,7 +2686,7 @@ msgstr "ロボットは予想ほど大きなダメージを受けませんでし
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "HPからamountを差し引いているようには見えません。"
 
-#: ui/UILesson.gd:308
+#: ui/UILesson.gd:301
 msgid "Learn More"
 msgstr "もっと学ぶ"
 
@@ -2708,7 +2705,7 @@ msgstr ""
 "\n"
 "[hr]\n"
 
-#: ui/UINavigator.gd:439
+#: ui/UINavigator.gd:434
 msgid "(no previous history)"
 msgstr "(戻るページがありません)"
 
@@ -2750,20 +2747,20 @@ msgstr "テストを実行中..."
 msgid " > "
 msgstr " > "
 
-#: ui/components/popups/ReportFormPopup.gd:52
+#: ui/components/popups/ReportFormPopup.gd:55
 msgid "Select the kind of issue and describe it in the box below, then click \"Send report\" to open the contact page on our website with the report prefilled."
 msgstr "問題の種類を選択し、下のボックスに内容を入力してください。その後、「レポートを送信」をクリックすると、入力した内容があらかじめ記入された状態で、ウェブサイトのお問い合わせページが開きます。"
 
-#: ui/components/popups/ReportFormPopup.gd:56
+#: ui/components/popups/ReportFormPopup.gd:59
 #, fuzzy
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr "学習に関する質問やサポートが必要な場合は、[url=https://discord.gg/bNj469SYQj]Discord のコミュニティに参加してください[/url]。"
 
-#: ui/components/popups/ReportFormPopup.gd:129
+#: ui/components/popups/ReportFormPopup.gd:132
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr "翻訳は非公式であり、コミュニティによって管理されています。協力したい場合は、[url=https://github.com/GDQuest/learn-gdscript-translations/#readme]アプリの翻訳に協力する方法を確認してください[/url]。"
 
-#: ui/components/popups/SettingsPopup.gd:144
+#: ui/components/popups/SettingsPopup.gd:147
 msgid "{percentage}% of text translated. {completed}/{total} lessons fully translated."
 msgstr "テキストの {percentage}% が翻訳されています。{completed}/{total} 個のレッスンが完全に翻訳されています。"
 
@@ -2829,6 +2826,14 @@ msgstr "続ける"
 #, fuzzy
 msgid "Learn to Code From Zero with Godot"
 msgstr "Godotでゼロからプログラミングを学ぶ"
+
+#, fuzzy
+#~ msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."
+#~ msgstr "delta は rotate() の括弧の内側に記述する必要があります。括弧の外側ではありません。呼び出しの中で、速度の値に delta を乗算する必要があります。例えば、rotate(2 * delta) のように記述してください。"
+
+#, fuzzy
+#~ msgid "Second Track Is Well Positioned"
+#~ msgstr "2番目のトラックは適切な位置に配置されています。"
 
 #, fuzzy
 #~ msgid "The robot isn't at the bottom of the game board. Did you increase its cell.y coordinate?"

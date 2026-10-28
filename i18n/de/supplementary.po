@@ -61,6 +61,31 @@ msgid "If you wrote some conditions or a piece of code that is meant to produce 
 msgstr ""
 
 #: script_checking/error_database.csv
+#, fuzzy
+msgid "You get this error when you use the result of a function that doesn't return a value."
+msgstr "Du erhältst diesen Fehler, wenn du Sonderzeichen verwendest, die GDScript nicht erkennt."
+
+#: script_checking/error_database.csv
+msgid "Some functions only do an action, like [code]rotate()[/code] or [code]move_local_x()[/code]. These functions return no result, so there is no value to use in a calculation or to store in a variable."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, if you write [code]rotate(2) * delta[/code], you are asking Godot to multiply the result of [code]rotate(2)[/code] by [code]delta[/code]. But [code]rotate()[/code] doesn't return any result; it only rotates a sprite. So there is nothing to multiply by delta and you get this error."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "To solve this problem, you need to use a function that returns a value in your code or make the calculation somewhere else without using the result of a function call."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "For example, instead of writing [code]rotate(2) * delta[/code], you would write [code]rotate(2 * delta)[/code]."
+msgstr ""
+
+#: script_checking/error_database.csv
+msgid "If you're not sure if a function returns a value, check the code reference."
+msgstr ""
+
+#: script_checking/error_database.csv
 msgid "You get this error when you put parentheses [code]()[/code] after a variable, as if you were calling a function."
 msgstr ""
 

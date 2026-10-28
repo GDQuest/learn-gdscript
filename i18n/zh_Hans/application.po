@@ -516,7 +516,7 @@ msgstr "返回主菜单"
 msgid "Open the course index"
 msgstr "打开课程目录"
 
-#: ui/UINavigator.tscn ui/UINavigator.gd:436
+#: ui/UINavigator.tscn ui/UINavigator.gd:431
 msgid "Go back in your navigation history"
 msgstr "导航历史回退"
 
@@ -1170,8 +1170,9 @@ msgid "This is an Open-Source project!"
 msgstr "这是一个开源项目！"
 
 #: ui/screens/end_screen/SponsorlessEndScreen.tscn
+#, fuzzy
 msgid ""
-"Like Godot, this app and course is free and open-source. \n"
+"Like Godot, this app and course is free and open-source.\n"
 "\n"
 "You can find the app's source code and contribute translations here: Learn GDScript From Zero (Github repository)."
 msgstr ""
@@ -1387,7 +1388,8 @@ msgid "Both rotate() and move_local_x() need to multiply their value by delta, l
 msgstr "rotate() 和 move_local_x() 都需要将它们的值乘以 delta，如下所示：rotate(2 * delta) 和 move_local_x(100 * delta)。"
 
 #: course/lesson-11-time-delta/rotating-and-moving-delta/TestsRotatingMovingDelta.gd:55
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:45
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:24
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:41
 #, fuzzy
 msgid "The _process function is missing; did you remove it?"
 msgstr "缺少 _process 函数；是你删除了它吗？"
@@ -1407,52 +1409,47 @@ msgstr "这在 GDScript 中是可行的，但我们无法在此处自动检查�
 msgid "Please write the values directly inside the function calls, like this: rotate(2 * delta) and move_local_x(100 * delta)."
 msgstr "请将数值直接写在函数调用中，例如：rotate(2 * delta) 和 move_local_x(100 * delta)。"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:23
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:7
 #, fuzzy
 msgid "Rotating Character Is Time Dependent"
 msgstr "角色旋转取决于时间"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:24
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:14
 #, fuzzy
 msgid "Rotation Speed Is 2 Radians Per Second"
 msgstr "旋转速度为每秒 2 弧度"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:31
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:33
 #, fuzzy
 msgid "You need to use delta in the rotate() call. Delta is what makes the rotation time-dependent. Try rotate(2 * delta)."
 msgstr "你需要在 rotate() 调用中使用 delta。delta 决定了旋转是否随时间变化。请尝试 rotate(2 * delta)。"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:38
-#, fuzzy
-msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."
-msgstr "delta 需要放在 rotate() 的括号内，而不是括号外。你需要在调用中将速度值乘以 delta，如下所示：rotate(2 * delta)。"
-
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:53
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:44
 #, fuzzy
 msgid "It looks like you stored the value in a variable before using it."
 msgstr "看起来您在使用该值之前将其存储到了变量中。"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:54
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:45
 #, fuzzy
 msgid "That's valid, but we can't check the value automatically."
 msgstr "这是有效的，但我们无法自动检查该值。"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:55
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:46
 #, fuzzy
 msgid "Please write it directly in the function call: rotate(2 * delta)."
 msgstr "请直接在函数调用中写明：rotate(2 * delta)。"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:63
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:49
 #, fuzzy
 msgid "It looks like delta is not being multiplied."
 msgstr "看起来 delta 没有被乘以。"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:64
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:50
 #, fuzzy
 msgid "You need to use the * sign to multiply the speed by delta inside the parentheses, like this: rotate(2 * delta)."
 msgstr "你需要在括号内使用 * 符号将速度与 delta 相乘，如下所示：rotate(2 * delta)。"
 
-#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:77
+#: course/lesson-11-time-delta/rotating-using-delta/TestsRotatingDelta.gd:60
 #, fuzzy
 msgid "The rotation speed is not right. The robot should rotate 2 radians per second. Make sure the call looks like this: rotate(2 * delta)."
 msgstr "旋转速度不正确。机器人应以每秒 2 弧度的速度旋转。请确保调用形式如下：rotate(2 * delta)。"
@@ -2156,13 +2153,13 @@ msgstr "第一条轨道位置正确"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:28
 #, fuzzy
-msgid "Second Track Is Well Positioned"
-msgstr "第二条轨道位置恰当"
+msgid "Third Track Is Well Positioned"
+msgstr "第三条轨道位置恰当"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:29
 #, fuzzy
-msgid "Third Track Is Well Positioned"
-msgstr "第三条轨道位置恰当"
+msgid "Fourth Track Is Well Positioned"
+msgstr "第一条轨道位置正确"
 
 #: course/lesson-24-access-array-indices/align-tracks/TestAlignTracks.gd:30
 #, fuzzy
@@ -2762,7 +2759,7 @@ msgstr "机器人的受损程度未达预期。它的生命值为 %s，但在受
 msgid "It doesn't look like you're subtracting amount from health."
 msgstr "看起来你并没有从生命值中减去 amount。"
 
-#: ui/UILesson.gd:308
+#: ui/UILesson.gd:301
 msgid "Learn More"
 msgstr "了解更多"
 
@@ -2782,7 +2779,7 @@ msgstr ""
 "\n"
 "[hr]\n"
 
-#: ui/UINavigator.gd:439
+#: ui/UINavigator.gd:434
 msgid "(no previous history)"
 msgstr "（没有更早的历史）"
 
@@ -2824,20 +2821,20 @@ msgstr "正在运行测试..."
 msgid " > "
 msgstr " > "
 
-#: ui/components/popups/ReportFormPopup.gd:52
+#: ui/components/popups/ReportFormPopup.gd:55
 msgid "Select the kind of issue and describe it in the box below, then click \"Send report\" to open the contact page on our website with the report prefilled."
 msgstr "请选择问题类型并在下面的框中描述问题，然后点击“发送报告”以打开我们网站上的联系页面，报告内容已预先填写。"
 
-#: ui/components/popups/ReportFormPopup.gd:56
+#: ui/components/popups/ReportFormPopup.gd:59
 #, fuzzy
 msgid "For questions and help with learning, [url=%s]join the community on Discord[/url]."
 msgstr "如有任何疑问或需要学习方面的帮助，请[url=https://discord.gg/bNj469SYQj]加入 Discord 社区[/url]。"
 
-#: ui/components/popups/ReportFormPopup.gd:129
+#: ui/components/popups/ReportFormPopup.gd:132
 msgid "Translations are unofficial and maintained by the community. If you'd like to help, [url=https://github.com/GDQuest/learn-gdscript-translations/#readme]learn how to help translate the app[/url]."
 msgstr "翻译均为非官方版本，由社区维护。如果您想提供帮助，请[url=https://github.com/GDQuest/learn-gdscript-translations/#readme]了解如何帮助翻译应用程序[/url]。"
 
-#: ui/components/popups/SettingsPopup.gd:144
+#: ui/components/popups/SettingsPopup.gd:147
 msgid "{percentage}% of text translated. {completed}/{total} lessons fully translated."
 msgstr "已翻译了 {percentage}% 的文本。{completed}/{total} 课已完整翻译。"
 
@@ -2902,6 +2899,14 @@ msgstr "继续"
 
 msgid "Learn to Code From Zero with Godot"
 msgstr "从零开始学习的godot"
+
+#, fuzzy
+#~ msgid "Delta needs to be inside the parentheses of rotate(), not outside. You need to multiply the speed value by delta inside the call, like this: rotate(2 * delta)."
+#~ msgstr "delta 需要放在 rotate() 的括号内，而不是括号外。你需要在调用中将速度值乘以 delta，如下所示：rotate(2 * delta)。"
+
+#, fuzzy
+#~ msgid "Second Track Is Well Positioned"
+#~ msgstr "第二条轨道位置恰当"
 
 #, fuzzy
 #~ msgid "The robot isn't at the bottom of the game board. Did you increase its cell.y coordinate?"
