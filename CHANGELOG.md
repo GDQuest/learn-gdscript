@@ -2,7 +2,7 @@
 
 This document lists changes between releases.
 
-## Unreleased
+## Learn GDScript From Zero 2.5.0 (2026-10-29)
 
 ### Improvements and changes
 
