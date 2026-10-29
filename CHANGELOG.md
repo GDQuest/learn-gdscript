@@ -8,6 +8,7 @@ This document lists changes between releases.
 
 - Remove uses of separation lines, add a couple of subtitles to better structure lessons (#1431)
 - Turn a couple of remaining instances of inline code that wasn't being highlighted into proper code listings.
+- L14.P2: reworked exercise tests to support more valid solutions and also offer better feedback on what might be missing
 
 ### Bug fixes
 

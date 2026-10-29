@@ -1,121 +1,86 @@
 extends PracticeTester
 
-const TEST_DAMAGE = 10
+const TEST_DAMAGE_SMALL = 10
+const TEST_DAMAGE_LARGE = 30
 
 var first_node: Node2D
 
-var damage_taken_at_level_2 = -1
-var damage_taken_at_level_3 = -1
+
+# Saves how much damage the character takes at a given level.
+class DamageTaken:
+	var amount_small := 0.0
+	var amount_large := 0.0
+
+
+var level_to_damage_taken: Dictionary[int, DamageTaken] = {
+	2: DamageTaken.new(),
+	3: DamageTaken.new(),
+	4: DamageTaken.new(),
+}
 
 
 func _prepare():
 	first_node = _scene_root_viewport.get_child(0)
-	
-	first_node.level = 2
-	var health_before_1 = first_node.health
-	first_node.take_damage(TEST_DAMAGE)
-	var health_after_1 = first_node.health
-	damage_taken_at_level_2 = health_before_1 - health_after_1
 
-	first_node.level = 3
-	var health_before_2 = first_node.health
-	first_node.take_damage(TEST_DAMAGE)
-	var health_after_2 = first_node.health
-	damage_taken_at_level_3 = health_before_2 - health_after_2
+	for level in [2, 3, 4]:
+		var level_record: DamageTaken = level_to_damage_taken[level]
+		first_node.level = level
+
+		first_node.health = 100
+		var health_before = first_node.health
+		first_node.take_damage(TEST_DAMAGE_SMALL)
+		level_record.amount_small = health_before - first_node.health
+
+		first_node.health = 100
+		health_before = first_node.health
+		first_node.take_damage(TEST_DAMAGE_LARGE)
+		level_record.amount_large = health_before - first_node.health
 
 
 func _define(checks: Array[Check]) -> void:
-	checks.append(Check.new(tr("Multiplication Is Used To Reduce Damage Amount"), tr(""), test_multiplication_is_used_to_reduce_damage_amount))
-	checks.append(Check.new(tr("Damage Amount Is Correct Value"), tr(""), test_damage_amount_is_correct_value))
-
-
-func test_multiplication_is_used_to_reduce_damage_amount() -> String:
-	var take_damage_function := _analyzer.get_function_named("take_damage")
-	
-	if not take_damage_function:
-		return tr("It looks like the take_damage function is missing; did you remove it?")
-
-	var parameter_name := _analyzer.get_function_parameter_name(take_damage_function, 0)
-
-	if not GDExpr.suite(
-		GDExpr.if_block(
-			GDExpr.any_of(
-				# condition: level > 2
-				GDExpr.bin_op(
-					GDExpr.identifier("level"),
-					GDExpr.literal(2),
-					GDBinaryOpNode.OpType.OP_COMP_GREATER
-				),
-				# condition: level >= 3
-				GDExpr.bin_op(
-					GDExpr.identifier("level"),
-					GDExpr.literal(3),
-					GDBinaryOpNode.OpType.OP_COMP_GREATER_EQUAL
-				)
-			),
-			# truth block
-			GDExpr.suite(
-				# at least one of
-				GDExpr.any_of(
-					# amount *= 0.5
-					GDExpr.assignment(
-						GDExpr.identifier(parameter_name),
-						GDExpr.literal(0.5),
-						GDAssignmentNode.Operation.OP_MULTIPLICATION
-					),
-					# amount = amount * 0.5
-					GDExpr.assignment(
-						GDExpr.identifier(parameter_name),
-						GDExpr.multiply(
-							GDExpr.identifier(parameter_name),
-							GDExpr.literal(0.5)
-						)
-					),
-					# amount -= amount * 0.5
-					GDExpr.assignment(
-						GDExpr.identifier(parameter_name),
-						GDExpr.multiply(
-							GDExpr.identifier(parameter_name),
-							GDExpr.literal(0.5)
-						),
-						GDAssignmentNode.Operation.OP_SUBTRACTION
-					),
-					# health -= amount * 0.5
-					GDExpr.assignment(
-						GDExpr.identifier("health"),
-						GDExpr.multiply(
-							GDExpr.identifier(parameter_name),
-							GDExpr.literal(0.5)
-						),
-						GDAssignmentNode.Operation.OP_SUBTRACTION
-					),
-					# health = health - amount * 0.5
-					GDExpr.assignment(
-						GDExpr.identifier("health"),
-						GDExpr.bin_op(
-							GDExpr.identifier("health"),
-							GDExpr.multiply(
-								GDExpr.identifier(parameter_name),
-								GDExpr.literal(0.5)
-							),
-							GDBinaryOpNode.OP_SUBTRACTION
-						)
-					)
-				)
-			)
-		)
-	).matches(take_damage_function):
-		return tr("It looks like amount isn't reduced by a percentage. Did you multiply it by a value less than 1?")
-	return ""
+	checks.append(
+		Check.new(tr("Damage Amount Is Correct Value"), tr(""), test_damage_amount_is_correct_value)
+	)
 
 
 func test_damage_amount_is_correct_value() -> String:
-	if damage_taken_at_level_3 != TEST_DAMAGE / 2:
-		return tr("The character did not take half damage despite being level 3. Did you multiply the amount by 0.5 to reduce it?")
-	
-	if damage_taken_at_level_2 != TEST_DAMAGE:
-		if damage_taken_at_level_2 > 0:
-			return tr("The character appears not to be taking full damage when their level is below 3. Did you use a condition to limit damage reduction to when the level is greater or equal to 3?")
+	var total_damage_taken := 0.0
+	for current_level: int in level_to_damage_taken.keys():
+		var level_record: DamageTaken = level_to_damage_taken[current_level]
+		total_damage_taken += level_record.amount_small + level_record.amount_large
+
+	if total_damage_taken == 0:
+		return tr(
+			"The character's health never changes when taking damage. Did you forget to subtract the damage amount from the health variable?"
+		)
+
+	var took_half_damage_above_level_2 := true
+	for current_level: int in level_to_damage_taken.keys():
+		if current_level < 3:
+			continue
+
+		var level_record: DamageTaken = level_to_damage_taken[current_level]
+		if (
+			level_record.amount_small != TEST_DAMAGE_SMALL / 2.0
+			or level_record.amount_large != TEST_DAMAGE_LARGE / 2.0
+		):
+			took_half_damage_above_level_2 = false
+	if not took_half_damage_above_level_2:
+		return tr(
+			"The character did not take half damage despite being above level 2. Did you multiply the amount by 0.5 to reduce it?"
+		)
+
+	var damage_taken_at_level_2: DamageTaken = level_to_damage_taken[2]
+	if (
+		damage_taken_at_level_2.amount_small != TEST_DAMAGE_SMALL
+		or damage_taken_at_level_2.amount_large != TEST_DAMAGE_LARGE
+	):
+		if damage_taken_at_level_2.amount_small + damage_taken_at_level_2.amount_large > 0:
+			return tr(
+				"The character is not taking full damage when their level is less than 3. Did you use a condition to reduce damage only when the level is greater or equal to 3?"
+			)
 		else:
-			return tr("The character appears to be taking 0 damage when its level is less than 3. Did you subtract the amount to health when the level is less than 3?")
+			return tr(
+				"The character is taking 0 damage when its level is less than 3. Did you subtract the amount to health when the level is less than 3?"
+			)
 	return ""
