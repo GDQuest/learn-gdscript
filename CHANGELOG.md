@@ -14,6 +14,7 @@ This document lists changes between releases.
 
 - Fix getting 2 copies of text in practice screen when changing the language setting while on the practice screen
 - Add the correct indentation to new code blocks when entering them (#1451)
+- Fix Opt+number not working in practice code editor on macOS (#1428)
 
 ## Learn GDScript From Zero 2.4.0 (2026-10-28)
 
