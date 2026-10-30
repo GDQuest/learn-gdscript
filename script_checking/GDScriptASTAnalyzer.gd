@@ -22,10 +22,10 @@ func get_function_named(name: StringName) -> GDFunctionNode:
 	return null
 
 
-func get_var_named(name: StringName) -> GDVariableNode:
+func get_member_variable_named(name: StringName) -> GDVariableNode:
 	if root.has_member(name):
 		var member := root.get_member(name)
-		if member.get_type() == GDNode.VARIABLE:
+		if member.get_type() == GDMember.VARIABLE:
 			return member.get_as_signal_variable_node()
 	return null
 
