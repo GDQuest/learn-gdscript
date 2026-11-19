@@ -11,8 +11,18 @@ const CODE_FONT := "res://ui/theme/fonts/font_code.tres"
 func _ready() -> void:
 	if get_theme_font("font").resource_path != CODE_FONT:
 		add_theme_font_override("font", load(CODE_FONT) as FontVariation)
+
 	context_menu_enabled = false
 	shortcut_keys_enabled = false
+	deselect_on_focus_loss_enabled = false
+	drag_and_drop_selection_enabled = false
+	middle_mouse_paste_enabled = false
+	empty_selection_clipboard_enabled = false
+	
+	wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
+	autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	indent_wrapped_lines = true
+
 	wrap_mode = TextEdit.LINE_WRAPPING_NONE
 	CodeEditorEnhancer.enhance(self)
 	CodeEditorEnhancer.prevent_editable(self)

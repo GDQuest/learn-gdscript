@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://cloqb8kbudf4b"]
 
 [ext_resource type="Script" uid="uid://cpp48of71pbfr" path="res://ui/components/RunnableCodeExample.gd" id="2"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/textedit_stylebox.tres" id="3"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/runnable_example_panel_outline.tres" id="5"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_outline_normal.tres" id="6"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_outline_hover.tres" id="7"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_outline_pressed.tres" id="8"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_outline_normal_muted.tres" id="9"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_outline_focus.tres" id="10"]
-[ext_resource type="CodeHighlighter" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="10_y8wym"]
+[ext_resource type="StyleBox" uid="uid://cyefdwpe5qoa6" path="res://ui/theme/styles/textedit_stylebox.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://duoufsoqvve3v" path="res://ui/theme/styles/runnable_example_panel_outline.tres" id="5"]
+[ext_resource type="StyleBox" uid="uid://becdyrsmsj4ah" path="res://ui/theme/styles/button_outline_normal.tres" id="6"]
+[ext_resource type="StyleBox" uid="uid://yiw2a7073two" path="res://ui/theme/styles/button_outline_hover.tres" id="7"]
+[ext_resource type="StyleBox" uid="uid://bb0b50aqcjkel" path="res://ui/theme/styles/button_outline_pressed.tres" id="8"]
+[ext_resource type="StyleBox" uid="uid://mvcwuvwej0w" path="res://ui/theme/styles/button_outline_normal_muted.tres" id="9"]
+[ext_resource type="StyleBox" uid="uid://b8nntao7uvo5w" path="res://ui/theme/styles/button_outline_focus.tres" id="10"]
+[ext_resource type="CodeHighlighter" uid="uid://bwq3n4u078x4s" path="res://ui/theme/gdscript_syntax_highlighter.tres" id="10_y8wym"]
 [ext_resource type="Texture2D" uid="uid://b086kmokcu8qu" path="res://ui/assets/examples_background.svg" id="11"]
 
 [node name="RunnableCodeExample" type="HBoxContainer" unique_id=1350260712]
@@ -111,6 +111,9 @@ size_flags_horizontal = 3
 theme_override_styles/read_only = ExtResource("3")
 context_menu_enabled = false
 shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+middle_mouse_paste_enabled = false
 scroll_smooth = true
 scroll_fit_content_height = true
 caret_blink = true
