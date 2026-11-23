@@ -4,6 +4,10 @@ This document lists changes between releases.
 
 ## Learn GDScript From Zero 2.6.0 (Unreleased)
 
+### Improvements and changes
+
+- Use VSync on desktop
+
 ### Bug fixes
 
 - Fix dragging and dropping selection in code examples moving the code
