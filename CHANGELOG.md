@@ -2,7 +2,7 @@
 
 This document lists changes between releases.
 
-## Learn GDScript From Zero 2.6.0 (Unreleased)
+## Learn GDScript From Zero 2.5.1 (2026-11-24)
 
 ### Improvements and changes
 
@@ -11,6 +11,7 @@ This document lists changes between releases.
 ### Bug fixes
 
 - Fix dragging and dropping selection in code examples moving the code
+- Fix regression in translation detection causing some translated lines to remain in English
 
 ## Learn GDScript From Zero 2.5.0 (2026-10-29)
 
