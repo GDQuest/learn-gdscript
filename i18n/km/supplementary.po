@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Learn GDScript From Zero\n"
 "Report-Msgid-Bugs-To: https://github.com/GDQuest/learn-gdscript\n"
 "POT-Creation-Date: 2026-01-21 11:55+0100\n"
-"PO-Revision-Date: 2026-09-12 13:51+0000\n"
-"Last-Translator: SeyhaLite <sok123230@gmail.com>\n"
+"PO-Revision-Date: 2026-11-09 03:51+0000\n"
+"Last-Translator: SeyhaLite <seyhalite@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Khmer (Central) <https://hosted.weblate.org/projects/learn-gdscript-from-zero/supplementary/km/>\n"
 "Language: km\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.10.dev0\n"
+"X-Generator: Weblate 2026.11.2.dev0\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: script_checking/error_database.csv
@@ -30,119 +30,136 @@ msgstr "error_suggestion"
 
 #: script_checking/error_database.csv
 msgid "You get this error when:"
-msgstr ""
+msgstr "អ្នកនឹងជួបកំហុស error នេះនៅពេល៖"
 
 #: script_checking/error_database.csv
 msgid "[ul]"
-msgstr ""
+msgstr "[ul]"
 
 #: script_checking/error_database.csv
 msgid "You write a function inside another function."
-msgstr ""
+msgstr "អ្នកសរសេរ អនុគមន៍មួយ នៅខាងក្នុង អនុគមន៍ មួយទៀត។"
 
 #: script_checking/error_database.csv
 msgid "You write a piece of code that calculates a value, but that value is not used or assigned to a variable."
-msgstr ""
+msgstr "អ្នកសរសេរកូដដែលគណនាបាន តម្លៃមួយ ប៉ុន្តែអ្នកមិនបានប្រើតម្លៃនោះ ឬរក្សាទុកវាក្នុងអថេរ (variable) ទេ។"
 
 #: script_checking/error_database.csv
 msgid "[/ul]"
-msgstr ""
+msgstr "[/ul]"
 
 #: script_checking/error_database.csv
 msgid "The error means that you have a piece of code that's not having any effect because it is not used or placed in the correct context."
-msgstr ""
+msgstr "កំហុស error នេះមានន័យថា កូដមួយផ្នែករបស់អ្នកមិនបានធ្វើអ្វីទេ ព្រោះអ្នកមិនបានប្រើវា ឬដាក់វានៅទីតាំងត្រឹមត្រូវ។"
 
 #: script_checking/error_database.csv
 msgid "If you wrote a function inside of another function, extract the inner function, place it later in your code, and remove the indentation."
-msgstr ""
+msgstr "បើអ្នកសរសេរអនុគមន៍មួយនៅក្នុងអនុគមន៍មួយទៀត សូមយកអនុគមន៍ខាងក្នុងចេញពីទីនោះ ហើយដាក់វានៅខាងក្រោមអនុគមន៍ខាងក្រៅក្នុងកូដរបស់អ្នក។ បន្ទាប់មក បន្ថយការចូលបន្ទាត់ (indentation) របស់វាមួយកម្រិត។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "If you wrote some conditions or a piece of code that is meant to produce a value, make sure to store the result in a variable or use it in an [code]if[/code] statement or something that will use the value."
-msgstr ""
+msgstr "បើអ្នកសរសេរលក្ខខណ្ឌ ឬកូដមួយផ្នែកដែលមានគោលបំណងបង្កើតតម្លៃ សូមប្រាកដថា អ្នករក្សាទុកលទ្ធផលក្នុងអថេរ (variable) ឬប្រើវាក្នុងសេចក្ដីបញ្ជា [code]if[/code] ឬកូដផ្សេងទៀតដែលយកតម្លៃនោះទៅប្រើ។"
 
 #: script_checking/error_database.csv
 #, fuzzy
 msgid "You get this error when you use the result of a function that doesn't return a value."
-msgstr "អ្នកជួប error នេះពេលប្រើអក្សរ ឬសញ្ញាពិសេសដែល GDScript មិនស្គាល់។"
+msgstr "អ្នកនឹងជួបកំហុសនេះ នៅពេលអ្នកយកលទ្ធផលពីអនុគមន៍មួយដែលមិនបញ្ជូនតម្លៃត្រឡប់មកវិញ។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "Some functions only do an action, like [code]rotate()[/code] or [code]move_local_x()[/code]. These functions return no result, so there is no value to use in a calculation or to store in a variable."
-msgstr ""
+msgstr "អនុគមន៍ខ្លះធ្វើសកម្មភាពតែមួយប៉ុណ្ណោះ ដូចជា [code]rotate()[/code] ឬ [code]move_local_x()[/code]។ អនុគមន៍ទាំងនេះមិនបញ្ជូនលទ្ធផលត្រឡប់មកវិញទេ ដូច្នេះគ្មានតម្លៃសម្រាប់យកទៅគណនា ឬរក្សាទុកក្នុងអថេរទេ។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "For example, if you write [code]rotate(2) * delta[/code], you are asking Godot to multiply the result of [code]rotate(2)[/code] by [code]delta[/code]. But [code]rotate()[/code] doesn't return any result; it only rotates a sprite. So there is nothing to multiply by delta and you get this error."
-msgstr ""
+msgstr "ឧទាហរណ៍ បើអ្នកសរសេរ [code]rotate(2) * delta[/code] នោះអ្នកកំពុងប្រាប់ Godot ឱ្យយកលទ្ធផលពី [code]rotate(2)[/code] មកគុណនឹង [code]delta[/code]។ ប៉ុន្តែ [code]rotate()[/code] មិនបញ្ជូនលទ្ធផលត្រឡប់មកវិញទេ វាគ្រាន់តែបង្វិលរូបភាព sprite ប៉ុណ្ណោះ។ ដូច្នេះ គ្មានតម្លៃសម្រាប់យកទៅគុណនឹង delta ទេ ហើយអ្នកក៏ជួបកំហុសនេះ។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "To solve this problem, you need to use a function that returns a value in your code or make the calculation somewhere else without using the result of a function call."
-msgstr ""
+msgstr "ដើម្បីដោះស្រាយបញ្ហានេះ អ្នកត្រូវប្រើអនុគមន៍ដែលបញ្ជូនតម្លៃត្រឡប់មកវិញក្នុងកូដរបស់អ្នក ឬធ្វើការគណនានៅកន្លែងផ្សេង ដោយមិនយកលទ្ធផលពីការហៅអនុគមន៍មកប្រើ។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "For example, instead of writing [code]rotate(2) * delta[/code], you would write [code]rotate(2 * delta)[/code]."
-msgstr ""
+msgstr "ឧទាហរណ៍ ជំនួសឱ្យការសរសេរ [code]rotate(2) * delta[/code] អ្នកគួរសរសេរ [code]rotate(2 * delta)[/code] វិញ។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "If you're not sure if a function returns a value, check the code reference."
-msgstr ""
+msgstr "បើអ្នកមិនប្រាកដថា អនុគមន៍មួយបញ្ជូនតម្លៃត្រឡប់មកវិញឬអត់ សូមមើលឯកសារយោងកូដ (code reference)។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "You get this error when you put parentheses [code]()[/code] after a variable, as if you were calling a function."
-msgstr ""
+msgstr "អ្នកនឹងជួបកំហុសនេះ នៅពេលអ្នកដាក់វង់ក្រចក [code]()[/code] នៅពីក្រោយអថេរ ដូចជាអ្នកកំពុងហៅអនុគមន៍មួយ។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "The parentheses tell Godot to call that name as a function. The problem is that the variable holds a value like a number, a string, part of a vector, etc., and not a function, so you cannot call it as a function."
-msgstr ""
+msgstr "វង់ក្រចកប្រាប់ Godot ឱ្យហៅឈ្មោះនោះជាអនុគមន៍។ ប៉ុន្តែ អថេរនោះផ្ទុកតម្លៃដូចជា ចំនួនលេខ អក្សរ (string) ឬផ្នែកមួយនៃវ៉ិចទ័រ (vector) ជាដើម។ វាមិនមែនជាអនុគមន៍ទេ ដូច្នេះអ្នកមិនអាចហៅវាជាអនុគមន៍បានទេ។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "For example, [code]position.x[/code] is a [code]float[/code]. Writing [code]position.x()[/code] makes Godot try to call a function named [code]x[/code]."
-msgstr ""
+msgstr "ឧទាហរណ៍ [code]position.x[/code] ជាតម្លៃ [code]float[/code]។ បើអ្នកសរសេរ [code]position.x()[/code] នោះ Godot នឹងព្យាយាមហៅអនុគមន៍ដែលមានឈ្មោះ [code]x[/code]។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "Look at the name right before the parentheses in the error message, and remove those parentheses."
-msgstr ""
+msgstr "មើលឈ្មោះដែលនៅខាងមុខវង់ក្រចកក្នុងសារកំហុស ហើយលុបវង់ក្រចកទាំងនោះចេញ។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "If you want to [b]store or change[/b] a value, use the [b]=[/b] symbol. For example, [code]health = 10[/code] or [code]position.x = 100.0[/code]."
-msgstr ""
+msgstr "បើអ្នកចង់ [b]រក្សាទុក ឬប្តូរ[/b] តម្លៃមួយ សូមប្រើសញ្ញា [b]=[/b]។ ឧទាហរណ៍ [code]health = 10[/code] ឬ [code]position.x = 100.0[/code]។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "If you meant to [b]use[/b] the value, write it without the parentheses. For example, [code]var new_health = health + 20[/code]."
-msgstr ""
+msgstr "បើអ្នកចង់ [b]ប្រើ[/b] តម្លៃនោះ សូមសរសេរវាដោយមិនដាក់វង់ក្រចក។ ឧទាហរណ៍ [code]var new_health = health + 20[/code]។"
 
 #: script_checking/error_database.csv
 #, fuzzy
 msgid "This error message tells you that Godot couldn't find the member variable you're trying to access. There are two common reasons for this:"
-msgstr "សារកំហុស error នេះប្រាប់ថា Godot រកមិនឃើញ អនុគមន៍ (function) ដែលអ្នកកំពុងព្យាយាមហៅទេ។ វាអាចមានន័យថា ៖"
+msgstr "សារកំហុសនេះប្រាប់អ្នកថា Godot រកមិនឃើញអថេរសមាជិក (member variable) ដែលអ្នកកំពុងព្យាយាមចូលប្រើទេ។ ជាទូទៅ មានមូលហេតុពីរយ៉ាង៖"
 
 #: script_checking/error_database.csv
 #, fuzzy
 msgid "1. There is a typo in the name of the member variable."
-msgstr "2. មានការវាយអក្សរខុស (typo) ក្នុងឈ្មោះ អនុគមន៍ (function) ដែលអ្នកកំពុងព្យាយាមហៅ។"
+msgstr "1. អ្នកវាយឈ្មោះអថេរសមាជិក (member variable) ខុស។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "2. The value before the dot (.) is not the type of value you expect, so it does not have that member variable."
-msgstr ""
+msgstr "2. តម្លៃដែលនៅមុនសញ្ញាចុច (.) មិនមែនជាប្រភេទតម្លៃដែលអ្នករំពឹងទុកទេ ដូច្នេះវាមិនមានអថេរសមាជិកនោះទេ។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "For example, let's say you have a variable representing a number of characters: [code]var character = 5[/code] and you try to access the [code]y[/code] member variable on it: [code]character.y[/code]. Because [code]character[/code] is a whole number, it has no [code]y[/code] member variable. The error message tells you the type it found ([code]int[/code] in this case)."
-msgstr ""
+msgstr "ឧទាហរណ៍ ឧបមាថា អ្នកមានអថេរមួយតំណាងឱ្យចំនួនតួអង្គ៖ [code]var character = 5[/code] ហើយអ្នកព្យាយាមចូលប្រើអថេរសមាជិក [code]y[/code] របស់វា៖ [code]character.y[/code]។ ដោយសារ [code]character[/code] ជាចំនួនគត់ វាមិនមានអថេរសមាជិក [code]y[/code] ទេ។ សារកំហុសនឹងប្រាប់អ្នកពីប្រភេទតម្លៃដែលវាបានរកឃើញ (ក្នុងឧទាហរណ៍នេះគឺ [code]int[/code])។"
 
 #: script_checking/error_database.csv
 #, fuzzy
 msgid "You also get this error when you try to access a member variable on a [code]null[/code] value (an empty variable)."
-msgstr "អ្នកទទួលបាន error នេះនៅពេល អ្នកព្យាយាមផ្តល់តម្លៃទៅ អ្វីដែលមិនមែនជា variable។"
+msgstr "អ្នកក៏នឹងជួបកំហុសនេះដែរ នៅពេលអ្នកព្យាយាមចូលប្រើអថេរសមាជិករបស់តម្លៃ [code]null[/code] (អថេរដែលគ្មានតម្លៃ)។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "Look at the value before the dot in the line with the error."
-msgstr ""
+msgstr "មើលតម្លៃដែលនៅមុនសញ្ញាចុច ក្នុងបន្ទាត់ដែលមានកំហុស។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "Make sure that the names before and after the dot have no typos. Any difference like a capital letter, one letter missing or being added, or letters being swapped can cause this error."
-msgstr ""
+msgstr "សូមពិនិត្យថា ឈ្មោះនៅមុន និងក្រោយសញ្ញាចុចមិនមានការវាយខុស។ ភាពខុសគ្នាដូចជា អក្សរធំ អក្សរមួយតួបាត់ ឬបន្ថែម ឬការដាក់អក្សរប្តូរទីតាំងគ្នា អាចបណ្ដាលឱ្យមានកំហុសនេះ។"
 
 #: script_checking/error_database.csv
+#, fuzzy
 msgid "If the value is the wrong type, check where it comes from. Is it a [code]Vector2[/code] or [code]int[/code]? A [code]Vector2[/code] has [code]x[/code] and [code]y[/code] member variables, but an [code]int[/code] does not."
-msgstr ""
+msgstr "បើតម្លៃនោះមានប្រភេទមិនត្រឹមត្រូវ សូមពិនិត្យមើលថាវាមកពីណា។ តើវាជា [code]Vector2[/code] ឬ [code]int[/code]? [code]Vector2[/code] មានអថេរសមាជិក [code]x[/code] និង [code]y[/code] ប៉ុន្តែ [code]int[/code] មិនមានទេ។"
 
 #: script_checking/error_database.csv
 msgid "This error message tells you that Godot did not find the function you are trying to call. This either means that:"
